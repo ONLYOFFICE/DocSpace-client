@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -50,6 +50,7 @@ const ClearScrollbar = ({
   hasError?: boolean;
   heightTextAreaProp?: string;
   ref?: React.Ref<HTMLDivElement>;
+  // @ts-expect-error error from custom scrollbar
 } & ScrollbarProps) => <Scrollbar {...props} />;
 
 const StyledScrollbar = styled(ClearScrollbar)`

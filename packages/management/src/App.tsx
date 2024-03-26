@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -105,7 +105,7 @@ const App = observer(() => {
       <NavMenu hideProfileMenu customHeader={<SimpleHeader />} />
       <Main isDesktop={false}>
         <div className="main-container">
-          <MainLayout>
+          <MainLayout isPortalRestoring={settingsStore?.isPortalRestoring}>
             <Outlet />
           </MainLayout>
         </div>

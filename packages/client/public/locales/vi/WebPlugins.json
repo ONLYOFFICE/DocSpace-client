@@ -2,7 +2,6 @@
   "DeletePlugin": "Xóa plugin",
   "DeletePluginDescription": "Plugin này sẽ không còn khả dụng cho người dùng DocSpace. Bạn có chắc muốn tiếp tục?",
   "DeletePluginTitle": "Bạn muốn xóa plugin?",
-  "Description": "Bạn có thể thêm các plugin để mở rộng chức năng của DocSpace với các tính năng bổ sung. Nhấp vào Tải plugin lên và chọn tập tin plugin trong kho lưu trữ ZIP.",
   "ExpandFunctionality": "Mở rộng chức năng bằng Plugin SDK",
   "GoToRepo": "Chuyển đến kho lưu trữ",
   "Metadata": "Siêu dữ liệu",
@@ -12,7 +11,5 @@
   "PluginSamples": "Mẫu plugin",
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Sử dụng Plugin SDK, bạn có thể mở rộng chức năng DocSpace, kết nối các dịch vụ của bên thứ ba hay nâng cao trải nghiệm người dùng hiện có. Tại đây bạn có thể tìm thấy các mẫu plugin với mã nguồn có sẵn trên GitHub.",
-  "PluginSDKInstruction": "Nhấp vào nút để xem hướng dẫn chi tiết về cách tạo plugin của riêng bạn.",
-  "PluginsHelp": "Plugin cho phép bạn mở rộng chức năng của DocSpace",
-  "UploadPlugin": "Tải Plugin lên"
+  "PluginSDKInstruction": "Nhấp vào nút để xem hướng dẫn chi tiết về cách tạo plugin của riêng bạn."
 }

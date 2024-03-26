@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -427,11 +427,11 @@ const FilterBlock = ({
   const isEqualFilter = () => {
     let isEqual = true;
 
-    if (
-      filterValues.length === 0 ||
-      selectedFilterValue.length > filterValues.length
-    )
-      return !isEqual;
+    // if (
+    //   filterValues.length === 0 ||
+    //   selectedFilterValue.length > filterValues.length
+    // )
+    //   return !isEqual;
 
     if (
       (selectedFilterValue.length === 0 && filterValues.length > 0) ||
@@ -477,7 +477,7 @@ const FilterBlock = ({
     return !isEqual;
   };
 
-  const showFooter = isEqualFilter();
+  const showFooter = isLoading ? false : isEqualFilter();
 
   const filterBlockComponent = (
     <>
@@ -497,6 +497,7 @@ const FilterBlock = ({
                 withoutBackButton: false,
               }}
               currentUserId={userId}
+              withoutNotActivatedUsers
             />
           ) : showSelector.type === FilterSelectorTypes.groups ? (
             <GroupsSelector

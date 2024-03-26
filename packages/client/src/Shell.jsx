@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -400,7 +400,10 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   useEffect(() => {
     if (!FirebaseHelper.isEnabled || !isLoaded) return;
     toastify.onChange((payload) => {
-      if (payload.status === "added" && payload.type === ToastType.error) {
+      if (
+        payload.status === "added" &&
+        (payload.type === ToastType.error || payload.type === ToastType.warning)
+      ) {
         sendToastReport(
           userId,
           version,

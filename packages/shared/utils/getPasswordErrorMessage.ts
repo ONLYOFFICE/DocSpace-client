@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,10 +36,13 @@ type TSettings = {
 
 export const getPasswordErrorMessage = (t: TFunction, settings: TSettings) => {
   return `${t("Common:PasswordMinimumLength")} 
-    ${settings ? settings?.minLength : 8
-    } ${settings?.digits ? t("Common:PasswordLimitDigits") : ""} ${settings?.upperCase ? t("Common:PasswordLimitUpperCase") : ""
-    } ${settings?.specSymbols
-      ? `${t("Common:PasswordLimitSpecialSymbols")} (!@#$%^&*)`
-      : ""
+    ${
+      settings ? settings?.minLength : 8
+    } ${settings?.digits ? t("Common:PasswordLimitDigits") : ""} ${
+      settings?.upperCase ? t("Common:PasswordLimitUpperCase") : ""
+    } ${
+      settings?.specSymbols
+        ? `${t("Common:PasswordLimitSpecialSymbols")} (!@#$%^&*)`
+        : ""
     }`;
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -146,6 +146,16 @@ const SubMenu = (props: {
 
     if (subMenuRef.current) {
       subMenuRef.current.style.top = "0px";
+
+      const submenuRects = subMenuRef.current.getBoundingClientRect();
+
+      if (submenuRects.bottom > viewport.height) {
+        const submenuMargin = 16;
+        const topOffset = submenuRects.bottom - viewport.height + submenuMargin;
+
+        subMenuRef.current.style.top = `${-1 * topOffset}px`;
+      }
+
       if (isRtl) {
         if (subListWidth < parseInt(`${containerOffset.left}`, 10)) {
           subMenuRef.current.style.left = `${-1 * subListWidth}px`;

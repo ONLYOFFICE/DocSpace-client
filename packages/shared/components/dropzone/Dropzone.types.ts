@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,46 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { tablet } from "@docspace/shared/utils";
+export interface DropzoneProps {
+  isLoading: boolean;
+  isDisabled?: boolean;
 
-const StyledPreparationPortal = styled.div`
-  width: 100%;
-  @media ${tablet} {
-    margin-top: ${(props) => (props.isDialog ? "0px" : "48px")};
-  }
+  linkMainText: string;
+  linkSecondaryText: string;
+  exstsText: string;
 
-  #header {
-    font-size: ${(props) => props.theme.getCorrectFontSize("23px")};
-  }
-  #text {
-    color: #a3a9ae;
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
-    line-height: 20px;
-    max-width: 480px;
-  }
+  accept: string[];
+  maxFiles?: number;
 
-  .preparation-portal_body-wrapper {
-    margin-bottom: 24px;
-    width: 100%;
-    max-width: ${(props) => (props.errorMessage ? "560px" : "480px")};
-    box-sizing: border-box;
-    align-items: center;
-    .preparation-portal_error {
-      text-align: center;
-      color: ${(props) => props.theme.preparationPortalProgress.errorTextColor};
-    }
+  onDrop?: <T extends File>(acceptedFiles: T[]) => void;
 
-    .preparation-portal_text {
-      text-align: center;
-      color: ${(props) =>
-        props.theme.preparationPortalProgress.descriptionTextColor};
-    }
-  }
-
-  .restoring-portal {
-    height: 100%;
-  }
-`;
-
-export { StyledPreparationPortal };
+  children?: React.ReactNode;
+}

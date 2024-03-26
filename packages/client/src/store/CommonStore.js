@@ -162,7 +162,7 @@ class CommonStore {
   };
 
   getWhiteLabelLogoText = async () => {
-    const res = await api.settings.getLogoText();
+    const res = await api.settings.getLogoText(isManagement());
     this.setLogoText(res);
     this.defaultLogoTextWhiteLabel = res;
     return res;
@@ -178,7 +178,7 @@ class CommonStore {
   };
 
   getIsDefaultWhiteLabel = async () => {
-    const res = await api.settings.getIsDefaultWhiteLabel();
+    const res = await api.settings.getIsDefaultWhiteLabel(isManagement());
     const enableRestoreButton = res.map((item) => item.default).includes(false);
     this.enableRestoreButton = enableRestoreButton;
   };

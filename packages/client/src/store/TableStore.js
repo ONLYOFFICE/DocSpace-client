@@ -396,6 +396,23 @@ class TableStore {
 
     if (isFrame) return `${TABLE_SDK_COLUMNS}=${userId}`;
 
+    console.log(
+      "Table log tableStorageName",
+      isRooms
+        ? `${TABLE_ROOMS_COLUMNS}=${userId}`
+        : isAccountsPeople
+          ? `${TABLE_ACCOUNTS_PEOPLE_COLUMNS}=${userId}`
+          : isAccountsGroups
+            ? `${TABLE_ACCOUNTS_GROUPS_COLUMNS}=${userId}`
+            : isAccountsInsideGroup
+              ? `${TABLE_ACCOUNTS_INSIDE_GROUP_COLUMNS}=${userId}`
+              : isTrashFolder
+                ? `${TABLE_TRASH_COLUMNS}=${userId}`
+                : isRecentTab
+                  ? `${TABLE_RECENT_COLUMNS}=${userId}`
+                  : `${TABLE_COLUMNS}=${userId}`,
+    );
+
     return isRooms
       ? `${TABLE_ROOMS_COLUMNS}=${userId}`
       : isAccountsPeople
@@ -419,6 +436,17 @@ class TableStore {
     const isFrame = this.settingsStore.isFrame;
 
     if (isFrame) return `${COLUMNS_SDK_SIZE}=${userId}`;
+
+    console.log(
+      "Table log columnStorageName",
+      isRooms
+        ? `${COLUMNS_ROOMS_SIZE}=${userId}`
+        : isTrashFolder
+          ? `${COLUMNS_TRASH_SIZE}=${userId}`
+          : isRecentTab
+            ? `${COLUMNS_RECENT_SIZE}=${userId}`
+            : `${COLUMNS_SIZE}=${userId}`,
+    );
 
     return isRooms
       ? `${COLUMNS_ROOMS_SIZE}=${userId}`

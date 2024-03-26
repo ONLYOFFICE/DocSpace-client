@@ -513,55 +513,53 @@ const CreateUserForm = (props) => {
         </GreetingContainer>
 
         <FormWrapper>
-          <RegisterContainer>
+          <RegisterContainer registrationForm={registrationForm}>
             <form className="auth-form-container">
               <div className="auth-form-fields">
-                {!registrationForm && (
-                  <>
-                    <FieldContainer
-                      className="form-field"
-                      isVertical={true}
-                      labelVisible={false}
+                <div className="email-container">
+                  <FieldContainer
+                    className="form-field"
+                    isVertical={true}
+                    labelVisible={false}
+                    hasError={isEmailErrorShow && !emailValid}
+                    errorMessage={
+                      emailErrorText
+                        ? t(`Common:${emailErrorText}`)
+                        : t("Common:RequiredField")
+                    }
+                  >
+                    <EmailInput
+                      id="login"
+                      name="login"
+                      type="email"
                       hasError={isEmailErrorShow && !emailValid}
-                      errorMessage={
-                        emailErrorText
-                          ? t(`Common:${emailErrorText}`)
-                          : t("Common:RequiredField")
-                      }
-                    >
-                      <EmailInput
-                        id="login"
-                        name="login"
-                        type="email"
-                        hasError={isEmailErrorShow && !emailValid}
-                        value={email}
-                        placeholder={t("Common:Email")}
-                        size="large"
-                        scale={true}
-                        isAutoFocussed={true}
-                        tabIndex={1}
-                        isDisabled={isLoading || !!emailFromLink}
-                        autoComplete="username"
-                        onChange={onChangeEmail}
-                        onBlur={onBlurEmail}
-                        onValidateInput={onValidateEmail}
-                        forwardedRef={inputRef}
-                        onKeyDown={onKeyPress}
-                      />
-                    </FieldContainer>
-                    <Button
-                      className="login-button"
-                      primary
-                      size="medium"
+                      value={email}
+                      placeholder={t("Common:Email")}
+                      size="large"
                       scale={true}
-                      label={t("Common:ContinueButton")}
+                      isAutoFocussed={true}
                       tabIndex={1}
-                      isDisabled={isLoading}
-                      isLoading={isLoading}
-                      onClick={onContinue}
+                      isDisabled={isLoading || !!emailFromLink}
+                      autoComplete="username"
+                      onChange={onChangeEmail}
+                      onBlur={onBlurEmail}
+                      onValidateInput={onValidateEmail}
+                      forwardedRef={inputRef}
+                      onKeyDown={onKeyPress}
                     />
-                  </>
-                )}
+                  </FieldContainer>
+                  <Button
+                    className="login-button"
+                    primary
+                    size="medium"
+                    scale={true}
+                    label={t("Common:ContinueButton")}
+                    tabIndex={1}
+                    isDisabled={isLoading}
+                    isLoading={isLoading}
+                    onClick={onContinue}
+                  />
+                </div>
 
                 {registrationForm && (
                   <div>

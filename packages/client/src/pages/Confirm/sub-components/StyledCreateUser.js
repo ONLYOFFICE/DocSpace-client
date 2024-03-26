@@ -114,6 +114,9 @@ export const RegisterContainer = styled.div`
         margin-bottom: 24px;
     }
 
+    .email-container{
+      ${(props) => props.registrationForm && "display:none"};
+    }
     @media ${tablet} {
       width: 100%;
     }

@@ -240,7 +240,7 @@ const IpSecurity = (props) => {
         options={[
           {
             id: "ip-security-disabled",
-            label: t("Disabled"),
+            label: t("Common:Disabled"),
             value: "disabled",
           },
           {

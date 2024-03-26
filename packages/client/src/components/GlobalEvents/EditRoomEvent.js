@@ -78,8 +78,6 @@ const EditRoomEvent = ({
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
-  console.log({ ...item });
-
   const [fetchedTags, setFetchedTags] = useState([]);
   const [fetchedImage, setFetchedImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -170,7 +168,13 @@ const EditRoomEvent = ({
       const actions = [];
       if (isOwnerChanged) {
         actions.push(changeRoomOwner(t, roomParams?.roomOwner?.id));
-        console.log(roomParams.roomOwner);
+        room.createdBy = {
+          ...room.createdBy,
+          id: roomParams.roomOwner.id,
+          avatarSmall: roomParams.roomOwner.avatar,
+          hasAvatar: roomParams.roomOwner.hasAvatar,
+          displayName: roomParams.roomOwner.label,
+        };
       }
       if (tags.length) {
         actions.push(addTagsToRoom(room.id, tags));
@@ -185,19 +189,10 @@ const EditRoomEvent = ({
         room = await removeLogoFromRoom(room.id);
       }
 
-      console.log(item, room);
-
       if (roomParams.icon.uploadedFile) {
         updateRoom(item, {
           ...room,
           logo: { big: item.logo.small },
-          createdBy: {
-            ...room.createdBy,
-            id: roomParams.roomOwner.id,
-            avatarSmall: roomParams.roomOwner.avatar,
-            hasAvatar: roomParams.roomOwner.hasAvatar,
-            displayName: roomParams.roomOwner.label,
-          },
         });
 
         addActiveItems(null, [room.id]);
@@ -234,14 +229,6 @@ const EditRoomEvent = ({
         !withPaging &&
           updateRoom(item, {
             ...room,
-
-            createdBy: {
-              ...room.createdBy,
-              id: roomParams.roomOwner.id,
-              avatarSmall: roomParams.roomOwner.avatar,
-              hasAvatar: roomParams.roomOwner.hasAvatar,
-              displayName: roomParams.roomOwner.label,
-            },
           });
         // updateInfoPanelSelection();
       }

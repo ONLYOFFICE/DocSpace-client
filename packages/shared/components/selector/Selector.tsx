@@ -257,12 +257,14 @@ const Selector = ({
           newSelectedItems.length !== items.length;
 
     if (query) {
-      const cloneItems = items.map((x) => ({ ...x }));
+      const cloneItems = items
+        .map((x) => ({ ...x }))
+        .filter((x) => !x.isDisabled);
 
       setRenderedItems((i) => {
         const cloneRenderedItems = i.map((x) => ({
           ...x,
-          isSelected: true,
+          isSelected: !x.isDisabled,
         }));
 
         return cloneRenderedItems;

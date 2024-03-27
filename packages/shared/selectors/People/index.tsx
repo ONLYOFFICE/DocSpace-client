@@ -37,6 +37,7 @@ import {
   TSelectorCancelButton,
   TSelectorCheckbox,
   TSelectorHeader,
+  TSelectorInfo,
   TSelectorItem,
   TSelectorSearch,
 } from "../../components/selector/Selector.types";
@@ -121,7 +122,6 @@ const PeopleSelector = ({
   currentUserId,
   withOutCurrentAuthorizedUser,
 
-  withAbilityCreateRoomUsers,
   filterUserId,
 
   withFooterCheckbox,
@@ -135,6 +135,9 @@ const PeopleSelector = ({
   disableDisabledUsers,
   disableInvitedUsers,
   isMultiSelect,
+
+  withInfo,
+  infoText,
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -209,13 +212,7 @@ const PeopleSelector = ({
 
       const data = response.items
         .filter((item) => {
-          const excludeUser =
-            withAbilityCreateRoomUsers &&
-            !item.isAdmin &&
-            !item.isOwner &&
-            !item.isRoomAdmin;
-
-          if ((excludeItems && excludeItems.includes(item.id)) || excludeUser) {
+          if (excludeItems && excludeItems.includes(item.id)) {
             totalDifferent += 1;
             return false;
           }
@@ -265,7 +262,6 @@ const PeopleSelector = ({
       removeCurrentUserFromList,
       searchValue,
       t,
-      withAbilityCreateRoomUsers,
       withOutCurrentAuthorizedUser,
     ],
   );
@@ -320,6 +316,13 @@ const PeopleSelector = ({
     isSearchLoading:
       isFirstLoad.current && !searchValue && !afterSearch.current,
   };
+
+  const infoProps: TSelectorInfo = withInfo
+    ? {
+        withInfo,
+        infoText,
+      }
+    : {};
 
   const checkboxSelectorProps: TSelectorCheckbox = withFooterCheckbox
     ? {
@@ -397,6 +400,7 @@ const PeopleSelector = ({
       searchLoader={<SearchLoader />}
       rowLoader={<RowLoader isUser isContainer={isFirstLoad.current} />}
       onSelect={onSelect}
+      {...infoProps}
     />
   );
 };

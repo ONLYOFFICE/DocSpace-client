@@ -256,9 +256,10 @@ const Selector = ({
     const query =
       activeTabId && selectedTabItems[activeTabId]
         ? selectedTabItems[activeTabId].length === 0 ||
-          selectedTabItems[activeTabId].length !== items.length
+          selectedTabItems[activeTabId].length !==
+            items.filter((i) => !i.isDisabled).length
         : newSelectedItems.length === 0 ||
-          newSelectedItems.length !== items.length;
+          newSelectedItems.length !== items.filter((i) => !i.isDisabled).length;
 
     if (query) {
       const cloneItems = items
@@ -416,18 +417,22 @@ const Selector = ({
       }
     : ({} as TSelectorBreadCrumbs);
 
+  const tempRenderedItemsLength = renderedItems.filter(
+    (x) => !x.isDisabled,
+  ).length;
+
   const isAllIndeterminate =
     activeTabId && selectedTabItems[activeTabId]
-      ? selectedTabItems[activeTabId].length !== renderedItems.length &&
+      ? selectedTabItems[activeTabId].length !== tempRenderedItemsLength &&
         selectedTabItems[activeTabId].length !== 0
-      : newSelectedItems.length !== renderedItems.length &&
+      : newSelectedItems.length !== tempRenderedItemsLength &&
         newSelectedItems.length !== 0;
   const isAllChecked =
     activeTabId && selectedTabItems[activeTabId]
-      ? selectedTabItems[activeTabId].length === renderedItems.length &&
-        renderedItems.length !== 0
-      : newSelectedItems.length === renderedItems.length &&
-        renderedItems.length !== 0;
+      ? selectedTabItems[activeTabId].length === tempRenderedItemsLength &&
+        tempRenderedItemsLength !== 0
+      : newSelectedItems.length === tempRenderedItemsLength &&
+        tempRenderedItemsLength !== 0;
 
   const onSelectAllProps: TSelectorSelectAll = withSelectAll
     ? {

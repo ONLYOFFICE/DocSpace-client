@@ -44,6 +44,7 @@
   "RoleUserDescription": "Utilizatorii pot accesa doar sălile în care sunt invitaţi de către administratori. Nu au permisiunea de a crea săli, dosare sau fişiere.",
   "RoleViewer": "Vizualizator",
   "RoleViewerDescription": "Vizualizare fişier",
+  "SearchByHeadOfGroup": "Căutare după Șef de grupă",
   "SearchByOwner": "Căutare după proprietar",
   "Spreadsheets": "Foi de calcul",
   "SubNewForm": "Necompletat",

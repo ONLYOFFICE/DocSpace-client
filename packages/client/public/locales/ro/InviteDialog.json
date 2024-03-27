@@ -3,6 +3,7 @@
   "AddManuallyDescriptionAccounts": "Invitaţi utilizatori noi la DocSpace personal prin email",
   "AddManuallyDescriptionRoom": "Adăugaţi utilizatorii existenți ai DocSpace în sala folosind numele sau invitaţi utilizatorii personal prin e-mail",
   "EmailErrorMessage": "Adresa de email nu este valabilă Puteţi modifica adresa de email făcând clic dreapta pe aceasta.",
+  "GroupMaxAvailableRoleWarning": "Rol maxim disponibil pentru grupuri  - “{{role}}”. Puteți adăuga permisiunile de acces după crearea unui grup în sala.",
   "InvitationLanguage": "Invitația în limba",
   "InviteAccountSearchPlaceholder": "Invitaţi persoane după email",
   "Invited": "Invitat",
@@ -12,5 +13,6 @@
   "InviteViaLinkDescriptionRoom": "Creaţi un link universal de auto-autentificare în sala",
   "LinkCopySuccess": "Link-ul a fost copiat",
   "ResetChange": "Resetarea modificării",
-  "SendInvitation": "Trimitere invitaţie"
+  "SendInvitation": "Trimitere invitaţie",
+  "UsersAlreadyAdded": "Anumite utilizatori sunt deja adăugate."
 }

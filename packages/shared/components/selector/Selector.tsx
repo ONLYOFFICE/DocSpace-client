@@ -45,6 +45,7 @@ import {
   TSelectorFooterInput,
   TSelectorFooterCheckbox,
   TWithTabs,
+  TSelectorInfo,
 } from "./Selector.types";
 
 const Selector = ({
@@ -128,6 +129,9 @@ const Selector = ({
   withTabs,
   tabsData,
   activeTabId,
+
+  withInfo,
+  infoText,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
   const [isSearch, setIsSearch] = React.useState<boolean>(false);
@@ -499,6 +503,13 @@ const Selector = ({
     ? { withTabs, tabsData, activeTabId }
     : {};
 
+  const infoProps: TSelectorInfo = withInfo
+    ? {
+        withInfo,
+        infoText,
+      }
+    : {};
+
   React.useEffect(() => {
     if (!isMultiSelect) return;
     let hasConflict = false;
@@ -570,6 +581,8 @@ const Selector = ({
         {...searchProps}
         // tabs
         {...tabsProps}
+        // info
+        {...infoProps}
       />
 
       {(footerVisible || alwaysShowFooter) && (

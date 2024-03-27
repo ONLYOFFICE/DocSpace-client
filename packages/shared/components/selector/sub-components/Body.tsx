@@ -40,6 +40,7 @@ import { BreadCrumbs } from "./BreadCrumbs";
 import { StyledBody, StyledTabs } from "../Selector.styled";
 import { BodyProps } from "../Selector.types";
 import { Item } from "./Item";
+import { Info } from "./Info";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
@@ -97,6 +98,9 @@ const Body = ({
   withTabs,
   tabsData,
   activeTabId,
+
+  withInfo,
+  infoText,
 }: BodyProps) => {
   const [bodyHeight, setBodyHeight] = React.useState(0);
 
@@ -163,6 +167,13 @@ const Body = ({
 
   if (withSearch || isSearch || itemsCount > 0) listHeight -= SEARCH_HEIGHT;
   if (withTabs) listHeight -= TABS_HEIGHT;
+  if (withInfo) {
+    const infoEl = document.getElementById("selector-info-text");
+    if (infoEl) {
+      const height = infoEl.getClientRects()[0].height;
+      listHeight -= height;
+    }
+  }
 
   if (withBreadCrumbs) listHeight -= BREAD_CRUMBS_HEIGHT;
 
@@ -220,6 +231,10 @@ const Body = ({
           setIsSearch={setIsSearch}
         />
       ) : null}
+
+      {withInfo && !isLoading && (
+        <Info withInfo={withInfo} infoText={infoText} />
+      )}
 
       {isLoading ? (
         <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>

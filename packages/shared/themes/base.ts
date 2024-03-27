@@ -2364,6 +2364,11 @@ export const getBaseTheme = () => {
         arrowRightColor: "#657077",
       },
 
+      info: {
+        backgroundColor: "#f8f9f9",
+        color: "#555f65",
+      },
+
       bodyDescriptionText: "#A3A9AE",
 
       item: {

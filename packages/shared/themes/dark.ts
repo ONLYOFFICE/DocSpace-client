@@ -2342,6 +2342,11 @@ const Dark: TTheme = {
       arrowRightColor: "#ADADAD",
     },
 
+    info: {
+      backgroundColor: "#282828",
+      color: "#ADADAD",
+    },
+
     bodyDescriptionText: "#858585",
 
     item: {

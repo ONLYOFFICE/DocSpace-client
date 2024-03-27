@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Informații",
   "AboutCompanyTitle": "Despre aplicația",
   "AccessDenied": "Acces refuzat ",
@@ -96,6 +96,7 @@
   "DenyAccess": "Acces refuzat",
   "Description": "Descrierea",
   "DeveloperTools": "Instrumente pentru dezvoltatori",
+  "Disabled": "Dezactivat",
   "Disconnect": "Deconectare",
   "DocSpaceAdmin": "Administratorul DocSpace",
   "DocSpaceOwner": "Proprietarul DocSpace",
@@ -169,6 +170,7 @@
   "Info": "Informații",
   "InfoPanel": "Panou informații",
   "Invite": "Invitaţie",
+  "Invited": "Invitat",
   "InviteUsers": "Invitaţi utilizatori",
   "IpAddress": "Adresa IP",
   "Kilobyte": "KO",

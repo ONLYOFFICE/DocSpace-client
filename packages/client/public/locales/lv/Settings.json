@@ -1,4 +1,4 @@
-{
+﻿{
   "AccentColor": "Akcents",
   "AccessRightsAccessToProduct": "{{product}} piekļuves tiesību modulis ir piešķirts",
   "AccessRightsAllUsers": "Visi {{users}}",
@@ -76,7 +76,6 @@
   "DeleteTheme": "Izdzēst tēmu",
   "DeleteThemeForever": "Vai izdzēst dizainu uz visiem laikiem?",
   "DeleteThemeNotice": "Tēma tiks neatgriezeniski izdzēsta. Šo darbību nevarēs atsaukt.",
-  "Disabled": "Atspējots",
   "DNSSettings": "DNS iestatījumi",
   "DNSSettingsDescription": "DNS iestatījumi ir veids, kā iestatīt alternatīvu vietrādi URL jūsu telpai.",
   "DNSSettingsMobile": "Nosūtiet savu pieprasījumu mūsu atbalsta komandai, un mūsu speciālisti palīdzēs jums ar iestatījumiem.",

@@ -213,7 +213,18 @@ const StyledItem = styled.div<{
   ${(props) =>
     props.isDisabled
       ? css`
-          opacity: 0.5;
+          .item-logo,
+          .user-avatar {
+            opacity: 0.5;
+          }
+
+          .label {
+            color: #a3a9ae;
+          }
+
+          .disabled-text {
+            text-align: end;
+          }
         `
       : css`
           ${props.isSelected && !props.isMultiSelect && selectedCss}
@@ -403,6 +414,22 @@ const StyledTabs = styled(Submenu)`
   }
 `;
 
+const StyledInfo = styled.div`
+  width: calc(100% - 32px);
+
+  padding: 12px 16px;
+  margin: 0 16px 12px;
+
+  border-radius: 6px;
+  box-sizing: border-box;
+
+  background-color: ${(props) => props.theme.selector.info.backgroundColor};
+
+  .text {
+    color: ${(props) => props.theme.selector.info.color};
+  }
+`;
+
 StyledSelector.defaultProps = { theme: Base };
 StyledHeader.defaultProps = { theme: Base };
 StyledBody.defaultProps = { theme: Base };
@@ -411,6 +438,7 @@ StyledItem.defaultProps = { theme: Base };
 StyledEmptyScreen.defaultProps = { theme: Base };
 StyledArrowRightSvg.defaultProps = { theme: Base };
 StyledComboBox.defaultProps = { theme: Base };
+StyledInfo.defaultProps = { theme: Base };
 
 export {
   StyledSelector,
@@ -428,4 +456,5 @@ export {
   StyledButtonContainer,
   StyledComboBox,
   StyledTabs,
+  StyledInfo,
 };

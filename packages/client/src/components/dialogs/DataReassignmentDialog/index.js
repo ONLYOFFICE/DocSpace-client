@@ -37,6 +37,7 @@ import { useNavigate } from "react-router-dom";
 import Body from "./sub-components/Body";
 import Footer from "./sub-components/Footer";
 import api from "@docspace/shared/api";
+import { EmployeeType } from "@docspace/shared/enums";
 const { Filter } = api;
 
 const StyledModalDialog = styled(ModalDialog)`
@@ -196,6 +197,9 @@ const DataReassignmentDialog = ({
       });
   };
 
+  const filter = new Filter();
+  filter.role = [EmployeeType.Admin, EmployeeType.User];
+
   if (selectorVisible) {
     return (
       <StyledModalDialog
@@ -226,8 +230,9 @@ const DataReassignmentDialog = ({
               headerLabel: "",
             }}
             onBackClick={onTogglePeopleSelector}
-            withAbilityCreateRoomUsers
-            withHeader={true}
+            filter={filter}
+            withHeader
+            disableDisabledUsers
           />
         </ModalDialog.Container>
       </StyledModalDialog>

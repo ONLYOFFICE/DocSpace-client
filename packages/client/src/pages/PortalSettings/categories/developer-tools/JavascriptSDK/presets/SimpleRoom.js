@@ -59,8 +59,8 @@ import { RoomsType } from "@docspace/shared/enums";
 import TitleUrl from "PUBLIC_DIR/images/sdk-presets_title.react.svg?url";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
 
-import TitleDarkUrl from "PUBLIC_DIR/images/sdk-presets_title_dark.react.svg?url";
-import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.react.svg?url";
+import TitleDarkUrl from "PUBLIC_DIR/images/sdk-presets_title_dark.png?url";
+import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 
 const showPreviewThreshold = 720;
 

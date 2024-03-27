@@ -1,4 +1,4 @@
-{
+﻿{
   "AccentColor": "Naglas",
   "AccessRightsAccessToProduct": "Dostop do {{product}} modula je omogočen za",
   "AccessRightsAllUsers": "Vsi {{users}}",
@@ -76,7 +76,6 @@
   "DeleteTheme": "Izbriši temo",
   "DeleteThemeForever": "Trajen izbris teme?",
   "DeleteThemeNotice": "Tema bo trajno izbrisana. Tega dejanja ne boste mogli razveljaviti.",
-  "Disabled": "Onemogočeno",
   "DNSSettings": "DNS nastavitve",
   "DNSSettingsDescription": "Nastavitve DNS so način za nastavitev alternativnega URL za vaš prostor.",
   "DNSSettingsMobile": "Pošlji zahtevo naši skupini za podporo in strokovnjaki bodo pomagali pri nastavitvah.",

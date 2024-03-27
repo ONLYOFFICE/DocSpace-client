@@ -24,41 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ShareAccessRights } from "@docspace/shared/enums";
-import AddUsersPanel from "../../../../panels/AddUsersPanel";
-import { getAccessOptions } from "../../../../panels/InvitePanel/utils";
-import { useTranslation } from "react-i18next";
+import React from "react";
 
-interface AddUsersProps {
-  isVisible: boolean;
-  onClose: () => void;
-  onParentPanelClose: () => void;
-}
+import { Text } from "../../text";
 
-const AddUsers = ({
-  isVisible,
-  onClose,
-  onParentPanelClose,
-}: AddUsersProps) => {
-  const { t } = useTranslation(["InviteDialog"]);
-  const accessOptions = getAccessOptions(t);
+import { TSelectorInfo } from "../Selector.types";
+import { StyledInfo } from "../Selector.styled";
 
+export const Info = ({ infoText }: TSelectorInfo) => {
   return (
-    <AddUsersPanel
-      visible={isVisible}
-      onClose={onClose}
-      onParentPanelClose={onParentPanelClose}
-      //   tempDataItems={inviteItems}
-      //   setDataItems={addItems}
-      accessOptions={accessOptions}
-      isMultiSelect
-      isEncrypted={true}
-      defaultAccess={ShareAccessRights.FullAccess}
-      //   withoutBackground={isMobileView}
-      //   withBlur={!isMobileView}
-      //   roomId={roomId}
-    />
+    <StyledInfo id="selector-info-text">
+      <Text fontSize="12px" fontWeight={400} lineHeight="16px" className="text">
+        {infoText}
+      </Text>
+    </StyledInfo>
   );
 };
-
-export default AddUsers;

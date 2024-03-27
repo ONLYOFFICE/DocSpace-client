@@ -45,6 +45,7 @@ import {
   TSelectorFooterInput,
   TSelectorFooterCheckbox,
   TWithTabs,
+  TSelectorInfo,
 } from "./Selector.types";
 
 const Selector = ({
@@ -128,6 +129,9 @@ const Selector = ({
   withTabs,
   tabsData,
   activeTabId,
+
+  withInfo,
+  infoText,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
   const [isSearch, setIsSearch] = React.useState<boolean>(false);
@@ -150,10 +154,14 @@ const Selector = ({
 
   const [requestRunning, setRequestRunning] = React.useState<boolean>(false);
 
-  const onSubmitAction = async () => {
+  const onSubmitAction = async (
+    item?: TSelectorItem | React.MouseEvent,
+    fromCallback?: boolean,
+  ) => {
     setRequestRunning(true);
+
     await onSubmit(
-      newSelectedItems,
+      fromCallback && item && "label" in item ? [item] : newSelectedItems,
       selectedAccess,
       newFooterInputValue,
       isFooterCheckboxChecked,
@@ -168,7 +176,7 @@ const Selector = ({
         ...item,
       },
       isDoubleClick,
-      onSubmitAction,
+      () => onSubmitAction(item, true),
     );
 
     if (isMultiSelect) {
@@ -232,7 +240,7 @@ const Selector = ({
         return [...newValue];
       });
 
-      if (item.isSelected) {
+      if (item.isSelected && !isDoubleClick) {
         setNewSelectedItems([]);
       } else {
         setNewSelectedItems([item]);
@@ -253,12 +261,14 @@ const Selector = ({
           newSelectedItems.length !== items.length;
 
     if (query) {
-      const cloneItems = items.map((x) => ({ ...x }));
+      const cloneItems = items
+        .map((x) => ({ ...x }))
+        .filter((x) => !x.isDisabled);
 
       setRenderedItems((i) => {
         const cloneRenderedItems = i.map((x) => ({
           ...x,
-          isSelected: true,
+          isSelected: !x.isDisabled,
         }));
 
         return cloneRenderedItems;
@@ -493,6 +503,13 @@ const Selector = ({
     ? { withTabs, tabsData, activeTabId }
     : {};
 
+  const infoProps: TSelectorInfo = withInfo
+    ? {
+        withInfo,
+        infoText,
+      }
+    : {};
+
   React.useEffect(() => {
     if (!isMultiSelect) return;
     let hasConflict = false;
@@ -564,6 +581,8 @@ const Selector = ({
         {...searchProps}
         // tabs
         {...tabsProps}
+        // info
+        {...infoProps}
       />
 
       {(footerVisible || alwaysShowFooter) && (

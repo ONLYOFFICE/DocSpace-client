@@ -1,4 +1,4 @@
-{
+﻿{
   "AccentColor": "Акцент",
   "AccessRightsAccessToProduct": "Достъпът до {{product}} модула е даден на",
   "AccessRightsAllUsers": "Всички {{users}}",
@@ -76,7 +76,6 @@
   "DeleteTheme": "Изтриване на тема",
   "DeleteThemeForever": "Изтриване на темата завинаги?",
   "DeleteThemeNotice": "Темата ще бъде перманентно изтрита. Няма да можете да отмените това действие.",
-  "Disabled": "Деактивиран",
   "DNSSettings": "DNS настройки",
   "DNSSettingsDescription": "DNS настройките са начин да зададете алтернативен URL за вашето пространство.",
   "DNSSettingsMobile": "Изпратете заявката си до нашия екип за обслужване на клиенти и специалистите ни ще Ви помогнат с настройките.",

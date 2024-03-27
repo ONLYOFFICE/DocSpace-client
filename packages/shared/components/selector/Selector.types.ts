@@ -193,8 +193,8 @@ export type TSelectorSubmitButton = {
   submitButtonId?: string;
 };
 
-type TSelectorFooterSubmitButton = TSelectorSubmitButton & {
-  onSubmit: () => void;
+type TSelectorFooterSubmitButton = Omit<TSelectorSubmitButton, "onSubmit"> & {
+  onSubmit: (item?: TSelectorItem | React.MouseEvent) => Promise<void>;
 };
 
 // cancel button
@@ -274,7 +274,12 @@ export type TSelectorFooterCheckbox = TSelectorCheckbox & {
   setIsFooterCheckboxChecked: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+export type TSelectorInfo =
+  | { withInfo: true; infoText: string }
+  | { withInfo?: undefined; infoText?: undefined };
+
 export type SelectorProps = TSelectorHeader &
+  TSelectorInfo &
   TWithTabs &
   TSelectorSelectAll &
   TSelectorEmptyScreen &
@@ -320,6 +325,7 @@ export type SelectorProps = TSelectorHeader &
   };
 
 export type BodyProps = TSelectorBreadCrumbs &
+  TSelectorInfo &
   TWithTabs &
   TSelectorBodySearch &
   TSelectorSelectAll &
@@ -491,7 +497,9 @@ export type TSelectorItem = TSelectorItemLogo &
     displayName?: string;
 
     isSelected?: boolean;
+
     isDisabled?: boolean;
+    disabledText?: string;
   };
 
 export type Data = {

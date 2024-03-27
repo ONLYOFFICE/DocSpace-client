@@ -117,12 +117,7 @@ const ChangeRoomOwner = (props) => {
 
   const asideComponent = (
     <StyledChangeRoomOwner showBackButton={showBackButton}>
-      <Backdrop
-        onClick={onClose}
-        visible={visible}
-        zIndex={320}
-        isAside={true}
-      />
+      <Backdrop onClick={onClose} visible={visible} zIndex={320} isAside />
       <Aside
         currentDeviceType={currentDeviceType}
         className="header_aside-panel"
@@ -154,6 +149,9 @@ const ChangeRoomOwner = (props) => {
           withOutCurrentAuthorizedUser
           filterUserId={roomOwnerId}
           currentUserId={userId}
+          disableDisabledUsers
+          withInfo
+          infoText={t("CreateEditRoomDialog:PeopleSelectorInfo")}
         />
       </Aside>
     </StyledChangeRoomOwner>
@@ -205,4 +203,6 @@ export default inject(
       updateInfoPanelSelection,
     };
   },
-)(observer(withTranslation(["Files"])(ChangeRoomOwner)));
+)(
+  observer(withTranslation(["Files", "CreateEditRoomDialog"])(ChangeRoomOwner)),
+);

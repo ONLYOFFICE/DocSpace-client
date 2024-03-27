@@ -120,6 +120,7 @@ type RoomIconDefault = {
   radius?: string;
   showDefault: boolean;
   imgClassName?: string;
+  className?: string;
 };
 
 type RoomIconColor = {
@@ -153,6 +154,7 @@ const RoomIcon = ({
   imgSrc,
   badgeUrl,
   onBadgeClick,
+  className,
 }: RoomIconProps) => {
   const [correctImage, setCorrectImage] = React.useState(true);
 
@@ -187,6 +189,7 @@ const RoomIcon = ({
       radius={radius}
       isArchive={isArchive}
       wrongImage={!correctImage}
+      className={className}
       data-testid="room-icon"
     >
       {showDefault || !correctImage ? (

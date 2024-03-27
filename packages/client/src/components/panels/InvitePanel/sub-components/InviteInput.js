@@ -27,7 +27,7 @@
 import debounce from "lodash.debounce";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useMemo, useState, useCallback, useEffect, useRef } from "react";
 
 import { Avatar } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
@@ -284,12 +284,14 @@ const InviteInput = ({
           </SearchItemText>
           <SearchItemText>{email}</SearchItemText>
         </div>
-        {shared && <SearchItemText info>{t("Invited")}</SearchItemText>}
+        {shared && <SearchItemText info>{t("Common:Invited")}</SearchItemText>}
       </DropDownItem>
     );
   };
 
   const addEmail = () => {
+    if (!inputValue.trim()) return;
+
     const items = toUserItems(inputValue);
 
     const newItems =
@@ -407,6 +409,11 @@ const InviteInput = ({
     key: item.key,
     isBeta: isBetaLanguage(item.key),
   }));
+
+  const invitedUsers = useMemo(
+    () => inviteItems.map((item) => item.id),
+    [inviteItems],
+  );
 
   return (
     <>
@@ -540,6 +547,8 @@ const InviteInput = ({
             roomId={roomId}
             withGroups={!isPublicRoomType}
             withAccessRights
+            invitedUsers={invitedUsers}
+            disableDisabledUsers
           />
         )}
       </StyledInviteInputContainer>
@@ -568,4 +577,10 @@ export default inject(({ settingsStore, dialogsStore, userStore }) => {
     defaultAccess: invitePanelOptions.defaultAccess,
     isOwner,
   };
-})(withCultureNames(withTranslation(["InviteDialog"])(observer(InviteInput))));
+})(
+  withCultureNames(
+    withTranslation(["InviteDialog", "Common", "Translations"])(
+      observer(InviteInput),
+    ),
+  ),
+);

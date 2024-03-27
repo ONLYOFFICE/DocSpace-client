@@ -48,7 +48,7 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
   border: 0;
   box-sizing: border-box;
 
-  $ .error_description_link {
+  .error_description_link {
     color: #2da7db;
     font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     font-weight: 600;

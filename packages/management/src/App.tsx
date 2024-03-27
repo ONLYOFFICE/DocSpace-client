@@ -36,7 +36,6 @@ import AppLoader from "@docspace/shared/components/app-loader";
 import Error403 from "@docspace/shared/components/errors/Error403";
 
 import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
-import { setFavicon } from "@docspace/shared/utils/favicon";
 
 import "@docspace/shared/styles/custom.scss";
 
@@ -74,11 +73,6 @@ const App = observer(() => {
 
     initData();
   }, []);
-
-  useEffect(() => {
-    if (!whiteLabelLogoUrls) return;
-    setFavicon(whiteLabelLogoUrls);
-  }, [whiteLabelLogoUrls]);
 
   useEffect(() => {
     if (userTheme) setTheme(userTheme);

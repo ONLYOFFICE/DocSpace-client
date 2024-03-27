@@ -153,12 +153,11 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["8-0"]);
       }
 
-      if (location.pathname.includes("payments")) {
+      if (
+        location.pathname.includes("payments") ||
+        location.pathname.includes("bonus")
+      ) {
         setSelectedKeys(["9-0"]);
-      }
-
-      if (location.pathname.includes("bonus")) {
-        setSelectedKeys(["10-0"]);
       }
     }
   }, [

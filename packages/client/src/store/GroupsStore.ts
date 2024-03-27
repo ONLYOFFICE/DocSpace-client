@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { makeAutoObservable, runInAction } from "mobx";
 import * as groupsApi from "@docspace/shared/api/groups";
 import { Events } from "@docspace/shared/enums";
@@ -12,6 +38,7 @@ import config from "PACKAGE_FILE";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import AccountsFilter from "@docspace/shared/api/people/filter";
 import api from "@docspace/shared/api";
+import { TGroup } from "@docspace/shared/api/groups/types";
 
 class GroupsStore {
   authStore;
@@ -34,11 +61,15 @@ class GroupsStore {
 
   groupsIsIsLoading = false;
 
-  currentGroup = null;
+  insideGroupIsLoading = false;
+
+  currentGroup: TGroup | null = null;
 
   insideGroupFilter = InsideGroupFilter.getDefault();
 
   insideGroupBackUrl: string | null = null;
+
+  insideGroupTempTitle: string | null = null;
 
   constructor(
     authStore: any,
@@ -97,6 +128,10 @@ class GroupsStore {
     return this.groups.length < this.groupsFilterTotal;
   }
 
+  get insideGroupFilterTotal() {
+    return this.insideGroupFilter.total;
+  }
+
   get groupsIsFiltered() {
     if (this.groupsFilter.search !== "") return true;
     if (this.groupsFilter.userId !== null) return true;
@@ -148,12 +183,16 @@ class GroupsStore {
     );
   };
 
-  setCurrentGroup = (currentGroup = null) => {
+  setCurrentGroup = (currentGroup: TGroup | null = null) => {
     this.currentGroup = currentGroup;
   };
 
   setInsideGroupBackUrl = (url: string) => {
     this.insideGroupBackUrl = url;
+  };
+
+  setInsideGroupTempTitle = (title: string | null) => {
+    this.insideGroupTempTitle = title;
   };
 
   getGroups = async (
@@ -173,6 +212,16 @@ class GroupsStore {
       filterData.sortBy = splitFilter[0];
       filterData.pageCount = +splitFilter[1];
       filterData.sortOrder = splitFilter[2];
+    }
+
+    if (!this.authStore.settingsStore.withPaging) {
+      const isCustomCountPage =
+        filter && filter.pageCount !== 100 && filter.pageCount !== 25;
+
+      if (!isCustomCountPage) {
+        filterData.page = 0;
+        filterData.pageCount = 100;
+      }
     }
 
     const res = await groupsApi.getGroups(filterData);
@@ -248,6 +297,7 @@ class GroupsStore {
     filterData.total = filteredMembersRes.total;
 
     group && this.setCurrentGroup(group);
+
     this.peopleStore.usersStore.setUsers(filteredMembersRes.items);
 
     if (updateFilter) {
@@ -255,6 +305,32 @@ class GroupsStore {
     }
 
     return Promise.resolve(filteredMembersRes.items);
+  };
+
+  get hasMoreInsideGroupUsers() {
+    return (
+      this.peopleStore.usersStore.users.length < this.insideGroupFilter.total
+    );
+  }
+
+  fetchMoreInsideGroupUsers = async () => {
+    if (!this.hasMoreInsideGroupUsers || this.insideGroupIsLoading) return;
+    this.insideGroupIsLoading = true;
+
+    const newFilter = this.insideGroupFilter.clone();
+    newFilter.page += 1;
+    this.setInsideGroupFilterParams(newFilter);
+
+    const res = await api.people.getUserList(newFilter);
+
+    runInAction(() => {
+      this.peopleStore.usersStore.setUsers([
+        ...this.peopleStore.usersStore.users,
+        ...res.items,
+      ]);
+      this.insideGroupFilter = newFilter;
+      this.insideGroupIsLoading = false;
+    });
   };
 
   setSelection = (selection) => (this.selection = selection);
@@ -320,7 +396,12 @@ class GroupsStore {
     this.setSelection(newSelections);
   };
 
-  getGroupContextOptions = (t, item, forInfoPanel = false) => {
+  getGroupContextOptions = (
+    t,
+    item,
+    forInfoPanel = false,
+    forInsideGroup = false,
+  ) => {
     return [
       {
         id: "edit-group",
@@ -343,7 +424,12 @@ class GroupsStore {
         title: t("Common:Info"),
         icon: InfoReactSvgUrl,
         onClick: () => {
-          this.selection = [item];
+          if (!forInsideGroup) {
+            this.selection = [item];
+          } else {
+            this.peopleStore.selectionStore.setSelection([]);
+            this.peopleStore.selectionStore.setBufferSelection(null);
+          }
           this.infoPanelStore.setIsVisible(true);
         },
       },
@@ -380,7 +466,68 @@ class GroupsStore {
   clearInsideGroup = () => {
     this.currentGroup = null;
     this.insideGroupBackUrl = null;
+    this.insideGroupTempTitle = null;
     this.peopleStore.usersStore.setUsers([]);
+  };
+
+  openGroupAction = (
+    groupId: string,
+    withBackURL: boolean,
+    tempTitle: string,
+  ) => {
+    this.setCurrentGroup(null);
+    this.setInsideGroupTempTitle(tempTitle);
+
+    if (withBackURL) {
+      const url = `${window.location.pathname}${window.location.search}`;
+      this.setInsideGroupBackUrl(url);
+    }
+
+    window.DocSpace.navigate(`/accounts/groups/${groupId}`);
+  };
+
+  updateGroup = async (
+    groupId: string,
+    groupName: string,
+    groupManagerId: string,
+    membersToAdd: string[],
+    membersToRemove: string[],
+  ) => {
+    const {
+      infoPanelSelection,
+      setInfoPanelSelection,
+      setInfoPanelSelectedGroup,
+      getIsInsideGroup,
+    } = this.peopleStore.infoPanelStore;
+
+    try {
+      const res = await groupsApi.updateGroup(
+        groupId,
+        groupName,
+        groupManagerId,
+        membersToAdd,
+        membersToRemove,
+      );
+
+      if (this.groups && this.groups.length > 0) {
+        this.groups = this.groups.map((g) => (g.id === groupId ? res : g));
+      }
+
+      if (getIsInsideGroup() && this.currentGroup?.id === groupId) {
+        this.setCurrentGroup(res);
+        const members = await api.people.getUserList(
+          this.insideGroupFilter.clone(),
+        );
+        this.peopleStore.usersStore.setUsers(members.items);
+      }
+
+      if (infoPanelSelection?.id === res.id) {
+        setInfoPanelSelection({ ...infoPanelSelection, ...res });
+        setInfoPanelSelectedGroup(res);
+      }
+    } catch (err: any) {
+      toastr.error(err.message);
+    }
   };
 }
 

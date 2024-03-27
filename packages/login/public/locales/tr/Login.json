@@ -20,7 +20,5 @@
   "RegisterTitle": "Kayıt talebi",
   "RegistrationEmailWatermark": "E-posta",
   "RememberHelper": "Varsayılan oturum ömrü 20 dakikadır. 1 yıla ayarlamak için bu seçeneği işaretleyin. Kendi sürenizi ayarlamak için Ayarlar'a gidin.",
-  "ResendCode": "Kodu yeniden gönder",
-  "SignInWithCode": "Gizli kodla oturum aç",
-  "SignInWithPassword": "Şifre ile giriş yap"
+  "ResendCode": "Kodu yeniden gönder"
 }

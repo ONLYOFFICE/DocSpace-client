@@ -1,4 +1,4 @@
-{
+﻿{
   "AccentColor": "لهجة",
   "AccessRightsAccessToProduct": "تم منح حق الوصول إلى الوحدة النمطية {{product}} إلى",
   "AccessRightsAllUsers": " جميع {{users}} ",
@@ -76,7 +76,6 @@
   "DeleteTheme": "حذف الموضوع",
   "DeleteThemeForever": "هل تريد حذف المظهر نهائيًا؟",
   "DeleteThemeNotice": "سيتم حذف الموضوع بشكل دائم. لن تتمكن من التراجع عن هذا الإجراء.",
-  "Disabled": "تعطيل",
   "DNSSettings": "إعدادات نظام أسماء النطاقات",
   "DNSSettingsDescription": "إعدادات نظام أسماء النطاقات هي طريقة لتعيين عنوان موقع ويب بديل لإستضافتك.",
   "DNSSettingsMobile": "أرسل طلبك إلى فريق الدعم لدينا ، وسيساعدك المتخصصون لدينا في الإعدادات.",

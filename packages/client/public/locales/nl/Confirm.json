@@ -14,7 +14,6 @@
   "EnterCodePlaceholder": "Voer code in",
   "EnterPhone": "Mobiel telefoonnummer invoeren",
   "GetCode": "Code ontvangen",
-  "InviteTitle": "U bent uitgenodigd om lid te worden van dit ruimte!",
   "LoginRegistryButton": "Lid worden van",
   "PassworResetTitle": "Nu kunt u een nieuw wachtwoord aanmaken.",
   "PhoneSubtitle": "De twee-factor authenticatie is ingeschakeld om extra beveiliging te bieden. Voer uw mobiele telefoonnummer in om door te gaan met werken in de DocSpace. Het mobiele telefoonnummer moet ingevoerd worden in een internationaal formaat, met landcode.",
@@ -28,10 +27,5 @@
   "SetAppTitle": "Configureer uw authenticatietoepassing",
   "SuccessDeactivate": "Uw account is succesvol gedeactiveerd. Over 10 seconden wordt u doorgestuurd naar de <1>site</1>.",
   "SuccessReactivate": "Uw account is succesvol opnieuw geactiveerd. Over 10 seconden wordt u doorgestuurd naar de <1>ruimte</1>.",
-  "SuccessRemoved": "Uw account is succesvol verwijderd. Over 10 seconden wordt u doorgestuurd naar de <1>site</1>.",
-  "WelcomeRegister": "Registreren om te beginnen",
-  "WelcomeRegisterViaSocial": "Om te beginnen registreert u zich of logt u in via sociale netwerken",
-  "WelcomeRegisterViaSSO": "Om te beginnen registreet u zich of logt u in via SSO",
-  "WelcomeToDocspace": "Welkom bij onze DocSpace!",
-  "WelcomeToRoom": "Welkom bij de <1>{{ roomName }}</1> kamer!"
+  "SuccessRemoved": "Uw account is succesvol verwijderd. Over 10 seconden wordt u doorgestuurd naar de <1>site</1>."
 }

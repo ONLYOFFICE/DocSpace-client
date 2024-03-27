@@ -20,7 +20,5 @@
   "RegisterTitle": "Žádost o registraci",
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "Výchozí doba trvání relace je 20 minut. Zaškrtnutím této možnosti ji nastavíte na 1 rok. Chcete-li nastavit vlastní hodnotu, přejděte do Nastavení.",
-  "ResendCode": "Opětovné zaslání kódu",
-  "SignInWithCode": "Přihlášení pomocí tajného kódu",
-  "SignInWithPassword": "Přihlášení pomocí hesla"
+  "ResendCode": "Opětovné zaslání kódu"
 }

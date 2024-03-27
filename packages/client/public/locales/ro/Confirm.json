@@ -14,7 +14,6 @@
   "EnterCodePlaceholder": "Introduceți codul",
   "EnterPhone": "Introduceți număr de telefon mobil",
   "GetCode": "Obține codul",
-  "InviteTitle": "Sunteți invitați să vă alăturați acestui spațiul!",
   "LoginRegistryButton": "Înregistrați-vă",
   "PassworResetTitle": "Acum puteți crea o parolă nouă",
   "PhoneSubtitle": "Autentificarea cu doi factori este activată ca o măsură suplimentară de securitate. Introduceți numărul dvs de telefon pentru a continua lucrul în cadrul spațiului DocSpace. Numărul de telefon mobil trebuie introdus în format internațional cu prefixul de țară.",
@@ -28,10 +27,5 @@
   "SetAppTitle": "Configurarea aplicației de autentificare dvs.",
   "SuccessDeactivate": "Contul dvs a fost dezactivat cu succes. Veţi fi redirecţionat în 10 secunde către <1>site-ul</1>.",
   "SuccessReactivate": "Contul dvs a fost reactivat cu succes. Veți fi redirecționat către <1>portal</1> după 10 secunde.",
-  "SuccessRemoved": "Contul dvs a fost eliminat cu succes. Veţi fi redirecţionat în 10 secunde către <1>site-ul</1>.",
-  "WelcomeRegister": "Înregistrați-vă pentru a începe",
-  "WelcomeRegisterViaSocial": "Pentru a începe lucrul, vă înregistrați sau vă conectați prin intermediul rețelelor de socializare",
-  "WelcomeRegisterViaSSO": "Pentru a începe lucrul, vă înregistrați sau vă autentificați utilizând conectarea unică",
-  "WelcomeToDocspace": "Bun venit în spațiul nostru DocSpace!",
-  "WelcomeToRoom": "Bun venit în sala <1>{{ roomName }}</1>!"
+  "SuccessRemoved": "Contul dvs a fost eliminat cu succes. Veţi fi redirecţionat în 10 secunde către <1>site-ul</1>."
 }

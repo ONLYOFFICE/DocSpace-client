@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import debounce from "lodash.debounce";
@@ -8,7 +34,7 @@ import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { TabsContainer } from "@docspace/shared/components/tabs-container";
-import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
+import RoomsSelectorInput from "SRC_DIR/components/RoomsSelectorInput";
 import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
@@ -21,17 +47,20 @@ import GetCodeDialog from "../sub-components/GetCodeDialog";
 import { Button } from "@docspace/shared/components/button";
 
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
+import CodeBlock from "../sub-components/CodeBlock";
 
 import { TooltipContent } from "../sub-components/TooltipContent";
 import { useNavigate } from "react-router-dom";
 import { Link } from "@docspace/shared/components/link";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
+import { RoomsType } from "@docspace/shared/enums";
+
 import TitleUrl from "PUBLIC_DIR/images/sdk-presets_title.react.svg?url";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
 
-import TitleDarkUrl from "PUBLIC_DIR/images/sdk-presets_title_dark.react.svg?url";
-import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.react.svg?url";
+import TitleDarkUrl from "PUBLIC_DIR/images/sdk-presets_title_dark.png?url";
+import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 
 const showPreviewThreshold = 720;
 
@@ -131,7 +160,9 @@ const SimpleRoom = (props) => {
 
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
-    scroll.scrollTop = 0;
+    if (scroll) {
+      scroll.scrollTop = 0;
+    }
     loadFrame();
     return () => destroyFrame();
   });
@@ -156,45 +187,46 @@ const SimpleRoom = (props) => {
     setHeight(e.target.value);
   };
 
-  const onChangeFolderId = async (id, publicInPath) => {
-    let newConfig = { id, requestToken: null, rootPath: "/rooms/shared/" };
+  const onChangeFolderId = async (rooms) => {
+    const publicRoom = rooms[0];
 
-    if (!!publicInPath) {
-      const links = await fetchExternalLinks(publicInPath.id);
+    let newConfig = {
+      id: publicRoom.id,
+      requestToken: null,
+      rootPath: "/rooms/shared/",
+    };
 
-      if (links.length > 1) {
-        const linksOptions = links.map((link) => {
-          const { id, title, requestToken } = link.sharedTo;
-          const linkSettings = [];
+    const links = await fetchExternalLinks(publicRoom.id);
 
-          if ("password" in link.sharedTo) {
-            linkSettings.push("password");
-          }
-          if ("expirationDate" in link.sharedTo) {
-            linkSettings.push("expirationDate");
-          }
-          if (link.sharedTo.denyDownload) {
-            linkSettings.push("denyDownload");
-          }
+    if (links.length > 1) {
+      const linksOptions = links.map((link) => {
+        const { id, title, requestToken } = link.sharedTo;
+        const linkSettings = [];
 
-          return {
-            key: id,
-            label: title,
-            requestToken: requestToken,
-            settings: linkSettings,
-          };
-        });
+        if ("password" in link.sharedTo) {
+          linkSettings.push("password");
+        }
+        if ("expirationDate" in link.sharedTo) {
+          linkSettings.push("expirationDate");
+        }
+        if (link.sharedTo.denyDownload) {
+          linkSettings.push("denyDownload");
+        }
 
-        setSelectedLink(linksOptions[0]);
-        setSharedLinks(linksOptions);
-      }
+        return {
+          key: id,
+          label: title,
+          requestToken: requestToken,
+          settings: linkSettings,
+        };
+      });
 
-      newConfig.requestToken = links[0].sharedTo?.requestToken;
-      newConfig.rootPath = "/rooms/share";
-    } else {
-      setSelectedLink(null);
-      setSharedLinks(null);
+      setSelectedLink(linksOptions[0]);
+      setSharedLinks(linksOptions);
     }
+
+    newConfig.requestToken = links[0].sharedTo?.requestToken;
+    newConfig.rootPath = "/rooms/share";
 
     setConfig((config) => {
       return { ...config, ...newConfig, init: true };
@@ -311,6 +343,11 @@ const SimpleRoom = (props) => {
       content: preview,
     },
     {
+      key: "js",
+      title: "JavaScript",
+      content: <CodeBlock config={config} />,
+    },
+    {
       key: "code",
       title: t("Code"),
       content: code,
@@ -348,10 +385,13 @@ const SimpleRoom = (props) => {
                 />
               </LabelGroup>
               <FilesSelectorInputWrapper>
-                <FilesSelectorInput
-                  onSelectFolder={onChangeFolderId}
-                  isSelect
-                  isRoomsOnly
+                <RoomsSelectorInput
+                  roomType={RoomsType.PublicRoom}
+                  withSearch
+                  withCancelButton
+                  onSubmit={onChangeFolderId}
+                  withHeader
+                  headerProps={{ headerLabel: t("Common:SelectAction") }}
                 />
               </FilesSelectorInputWrapper>
             </ControlsGroup>

@@ -20,7 +20,5 @@
   "RegisterTitle": "Yêu cầu đăng ký",
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "Thời lượng của phiên mặc định là 20 phút. Hãy chọn tùy chọn này để đặt thành 1 năm. Để đặt giá trị của riêng bạn, hãy đi đến Cài đặt.",
-  "ResendCode": "Gửi lại mã",
-  "SignInWithCode": "Đăng nhập bằng mã bí mật",
-  "SignInWithPassword": "Đăng nhập bằng mật khẩu"
+  "ResendCode": "Gửi lại mã"
 }

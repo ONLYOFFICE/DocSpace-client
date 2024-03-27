@@ -14,7 +14,6 @@
   "EnterCodePlaceholder": "코드를 입력해주세요",
   "EnterPhone": "휴대 전화 번호를 입력",
   "GetCode": "코드 받기",
-  "InviteTitle": "이 스페이스에 초대 받으셨습니다!",
   "LoginRegistryButton": "참여",
   "PassworResetTitle": "이제 새 비밀번호를 설정하실 수 있습니다.",
   "PhoneSubtitle": "추가 보안을 제공하기 위해 이중 인증이 활성화됩니다. DocSpace에서 계속 작업하려면 휴대폰 번호를 입력해주세요. 휴대폰 번호는 국가 코드와 함께 국제 형식으로 입력해야 합니다.",
@@ -28,10 +27,5 @@
   "SetAppTitle": "인증 애플리케이션 구성",
   "SuccessDeactivate": "계정이 성공적으로 비활성화되었습니다. 10초 후에 <1>사이트</1>로 리디렉션됩니다.",
   "SuccessReactivate": "계정이 성공적으로 재활성화되었습니다. 10초 후에 <1>DocSpace</1>로 리디렉션됩니다.",
-  "SuccessRemoved": "고객님의 계정이 성공적으로 제거되었습니다. 10초 후에 <1>사이트</1>로 리디렉션됩니다.",
-  "WelcomeRegister": "시작하기 전에 먼저 등록하세요",
-  "WelcomeRegisterViaSocial": "시작하기 전에 먼저 등록하거나 소셜 네트워크를 통해 로그인하세요",
-  "WelcomeRegisterViaSSO": "시작하기 전에 먼저 등록하거나 SSO를 통해 로그인하세요",
-  "WelcomeToDocspace": "DocSpace에 오신 것을 환영합니다!",
-  "WelcomeToRoom": "<1>{{ roomName }}</1> 방에 오신 것을 환영합니다!"
+  "SuccessRemoved": "고객님의 계정이 성공적으로 제거되었습니다. 10초 후에 <1>사이트</1>로 리디렉션됩니다."
 }

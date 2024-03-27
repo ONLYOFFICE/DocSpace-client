@@ -1,8 +1,35 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { makeAutoObservable } from "mobx";
 import { TableVersions } from "SRC_DIR/helpers/constants";
 
 const TABLE_COLUMNS = `filesTableColumns_ver-${TableVersions.Files}`;
 const TABLE_ACCOUNTS_PEOPLE_COLUMNS = `peopleTableColumns_ver-${TableVersions.People}`;
+const TABLE_ACCOUNTS_GROUPS_COLUMNS = `groupsTableColumns_ver-${TableVersions.Groups}`;
 const TABLE_ACCOUNTS_INSIDE_GROUP_COLUMNS = `insideGroupTableColumns_ver-${TableVersions.InsideGroup}`;
 const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
 const TABLE_TRASH_COLUMNS = `trashTableColumns_ver-${TableVersions.Trash}`;
@@ -55,6 +82,8 @@ class TableStore {
   groupAccountsColumnIsEnabled = true;
   emailAccountsColumnIsEnabled = true;
   storageAccountsColumnIsEnabled = true;
+
+  managerAccountsGroupsColumnIsEnabled = true;
 
   typeAccountsInsideGroupColumnIsEnabled = true;
   groupAccountsInsideGroupColumnIsEnabled = true;
@@ -137,6 +166,9 @@ class TableStore {
   setAccountsColumnStorage = (enable) =>
     (this.storageAccountsColumnIsEnabled = enable);
 
+  setAccountsGroupsColumnManager = (enable) =>
+    (this.managerAccountsGroupsColumnIsEnabled = enable);
+
   setAccountsInsideGroupColumnType = (enable) =>
     (this.typeAccountsInsideGroupColumnIsEnabled = enable);
   setAccountsInsideGroupColumnEmail = (enable) =>
@@ -155,6 +187,7 @@ class TableStore {
         isTrashFolder,
         isAccountsPeople,
         isAccountsGroups,
+        isAccountsInsideGroup,
       } = this.treeFoldersStore;
       const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -176,6 +209,13 @@ class TableStore {
       }
 
       if (isAccountsGroups) {
+        this.setAccountsGroupsColumnManager(
+          splitColumns.includes("Head of Group"),
+        );
+        return;
+      }
+
+      if (isAccountsInsideGroup) {
         this.setAccountsInsideGroupColumnType(splitColumns.includes("Type"));
         this.setAccountsInsideGroupColumnEmail(splitColumns.includes("Mail"));
         this.setAccountsInsideGroupColumnGroup(
@@ -212,6 +252,7 @@ class TableStore {
       isTrashFolder,
       isAccountsPeople,
       isAccountsGroups,
+      isAccountsInsideGroup,
     } = this.treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -262,7 +303,7 @@ class TableStore {
           ? this.setRoomColumnType(!this.roomColumnTypeIsEnabled)
           : isAccountsPeople
             ? this.setAccountsColumnType(!this.typeAccountsColumnIsEnabled)
-            : isAccountsGroups
+            : isAccountsInsideGroup
               ? this.setAccountsInsideGroupColumnType(
                   !this.typeAccountsInsideGroupColumnIsEnabled,
                 )
@@ -307,6 +348,12 @@ class TableStore {
           : this.setRoomColumnQuota(!this.roomQuotaColumnIsEnable);
         return;
 
+      case "Head of Group":
+        this.setAccountsGroupsColumnManager(
+          !this.managerAccountsGroupsColumnIsEnabled,
+        );
+        return;
+
       default:
         return;
     }
@@ -341,6 +388,7 @@ class TableStore {
       isAccountsPeople,
       isAccountsGroups,
       isRecentTab,
+      isAccountsInsideGroup,
     } = this.treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
@@ -348,17 +396,36 @@ class TableStore {
 
     if (isFrame) return `${TABLE_SDK_COLUMNS}=${userId}`;
 
+    console.log(
+      "Table log tableStorageName",
+      isRooms
+        ? `${TABLE_ROOMS_COLUMNS}=${userId}`
+        : isAccountsPeople
+          ? `${TABLE_ACCOUNTS_PEOPLE_COLUMNS}=${userId}`
+          : isAccountsGroups
+            ? `${TABLE_ACCOUNTS_GROUPS_COLUMNS}=${userId}`
+            : isAccountsInsideGroup
+              ? `${TABLE_ACCOUNTS_INSIDE_GROUP_COLUMNS}=${userId}`
+              : isTrashFolder
+                ? `${TABLE_TRASH_COLUMNS}=${userId}`
+                : isRecentTab
+                  ? `${TABLE_RECENT_COLUMNS}=${userId}`
+                  : `${TABLE_COLUMNS}=${userId}`,
+    );
+
     return isRooms
       ? `${TABLE_ROOMS_COLUMNS}=${userId}`
       : isAccountsPeople
         ? `${TABLE_ACCOUNTS_PEOPLE_COLUMNS}=${userId}`
         : isAccountsGroups
-          ? `${TABLE_ACCOUNTS_INSIDE_GROUP_COLUMNS}=${userId}`
-          : isTrashFolder
-            ? `${TABLE_TRASH_COLUMNS}=${userId}`
-            : isRecentTab
-              ? `${TABLE_RECENT_COLUMNS}=${userId}`
-              : `${TABLE_COLUMNS}=${userId}`;
+          ? `${TABLE_ACCOUNTS_GROUPS_COLUMNS}=${userId}`
+          : isAccountsInsideGroup
+            ? `${TABLE_ACCOUNTS_INSIDE_GROUP_COLUMNS}=${userId}`
+            : isTrashFolder
+              ? `${TABLE_TRASH_COLUMNS}=${userId}`
+              : isRecentTab
+                ? `${TABLE_RECENT_COLUMNS}=${userId}`
+                : `${TABLE_COLUMNS}=${userId}`;
   }
 
   get columnStorageName() {
@@ -369,6 +436,17 @@ class TableStore {
     const isFrame = this.settingsStore.isFrame;
 
     if (isFrame) return `${COLUMNS_SDK_SIZE}=${userId}`;
+
+    console.log(
+      "Table log columnStorageName",
+      isRooms
+        ? `${COLUMNS_ROOMS_SIZE}=${userId}`
+        : isTrashFolder
+          ? `${COLUMNS_TRASH_SIZE}=${userId}`
+          : isRecentTab
+            ? `${COLUMNS_RECENT_SIZE}=${userId}`
+            : `${COLUMNS_SIZE}=${userId}`,
+    );
 
     return isRooms
       ? `${COLUMNS_ROOMS_SIZE}=${userId}`

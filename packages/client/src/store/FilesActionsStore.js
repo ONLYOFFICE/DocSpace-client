@@ -1,4 +1,30 @@
-﻿import FavoritesReactSvgUrl from "PUBLIC_DIR/images/favorites.react.svg?url";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import FavoritesReactSvgUrl from "PUBLIC_DIR/images/favorites.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
@@ -12,6 +38,7 @@ import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?u
 import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
 import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
 import DefaultQuotaReactSvgUrl from "PUBLIC_DIR/images/default.quota.react.svg?url";
+import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import {
   checkFileConflicts,
   deleteFile,
@@ -50,7 +77,7 @@ import { muteRoomNotification } from "@docspace/shared/api/settings";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import AccountsFilter from "@docspace/shared/api/people/filter";
-import { RoomSearchArea } from "@docspace/shared/enums";
+import { RoomSearchArea, UrlActionType } from "@docspace/shared/enums";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
 import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -59,6 +86,7 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 class FilesActionStore {
   settingsStore;
@@ -554,6 +582,7 @@ class FilesActionStore {
       this.uploadDataStore;
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =
       secondaryProgressDataStore;
+    const { openUrl } = this.settingsStore;
 
     const { addActiveItems } = this.filesStore;
     const { label } = translations;
@@ -605,7 +634,7 @@ class FilesActionStore {
           this.setIsBulkDownload(false);
 
           if (item.url) {
-            window.location.href = item.url;
+            openUrl(item.url, UrlActionType.Download, true);
           } else {
             setSecondaryProgressBarData({
               visible: true,
@@ -627,12 +656,13 @@ class FilesActionStore {
         operationId,
       });
       setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
-      return toastr.error(err.message ? err.message : err);
+      return toastr.error(err);
     }
   };
 
   downloadAction = (label, item, folderId) => {
     const { bufferSelection } = this.filesStore;
+    const { openUrl } = this.settingsStore;
 
     const selection = item
       ? [item]
@@ -649,7 +679,7 @@ class FilesActionStore {
     const items = [];
 
     if (selection.length === 1 && selection[0].fileExst && !folderId) {
-      window.open(selection[0].viewUrl, "_self");
+      openUrl(selection[0].viewUrl, UrlActionType.Download);
       return Promise.resolve();
     }
 
@@ -1292,6 +1322,10 @@ class FilesActionStore {
       if (tag.roomType) {
         if (!!newFilter.type && +newFilter.type === tag.roomType) return;
         newFilter.type = tag.roomType;
+      } else if (tag.providerType) {
+        if (!!newFilter.provider && +newFilter.provider === tag.providerType)
+          return;
+        newFilter.provider = tag.providerType;
       } else {
         tags.push(tag.label);
         newFilter.tags = [...tags];
@@ -1301,7 +1335,6 @@ class FilesActionStore {
     } else {
       newFilter.withoutTags = true;
     }
-
     setIsLoading(true);
     window.DocSpace.navigate(
       `${window.DocSpace.location.pathname}?${newFilter.toUrlParams(this.userStore?.user?.id)}`,
@@ -1376,6 +1409,17 @@ class FilesActionStore {
     window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`, { state });
   };
 
+  nameWithoutExtension = (title) => {
+    const indexPoint = title.lastIndexOf(".");
+    const splitTitle = title.split(".");
+    const splitTitleLength = splitTitle.length;
+
+    const titleWithoutExtension =
+      splitTitleLength <= 2 ? splitTitle[0] : title.slice(0, indexPoint);
+
+    return titleWithoutExtension;
+  };
+
   checkAndOpenLocationAction = async (item) => {
     const { categoryType } = this.filesStore;
     const { myRoomsId, myFolderId, archiveRoomsId, recycleBinFolderId } =
@@ -1387,7 +1431,7 @@ class FilesActionStore {
       setIsSectionFilterLoading(param);
     };
 
-    const { ExtraLocationTitle, ExtraLocation, fileExst } = item;
+    const { ExtraLocationTitle, ExtraLocation, fileExst, folderId } = item;
 
     const isRoot =
       ExtraLocation === myRoomsId ||
@@ -1409,8 +1453,10 @@ class FilesActionStore {
 
     const newFilter = FilesFilter.getDefault();
 
-    newFilter.search = item.title;
-    newFilter.folder = ExtraLocation;
+    const title = this.nameWithoutExtension(item.title);
+
+    newFilter.search = title;
+    newFilter.folder = ExtraLocation || folderId;
 
     setIsLoading(
       window.DocSpace.location.search !== `?${newFilter.toUrlParams()}` ||
@@ -2024,6 +2070,13 @@ class FilesActionStore {
             },
             iconUrl: DeleteReactSvgUrl,
           };
+      case "remove-from-recent":
+        return {
+          id: "menu-remove-from-recent",
+          label: t("RemoveFromList"),
+          onClick: () => this.onClickRemoveFromRecent(selection),
+          iconUrl: RemoveOutlineSvgUrl,
+        };
     }
   };
 
@@ -2089,13 +2142,14 @@ class FilesActionStore {
     const downloadAs = this.getOption("downloadAs", t);
     const copy = this.getOption("copy", t);
     const showInfo = this.getOption("showInfo", t);
+    const removeFromRecent = this.getOption("remove-from-recent", t);
 
     itemsCollection
-
       .set("download", download)
       .set("downloadAs", downloadAs)
       .set("copy", copy)
-      .set("showInfo", showInfo);
+      .set("showInfo", showInfo)
+      .set("removeFromRecent", removeFromRecent);
 
     return this.convertToArray(itemsCollection);
   };
@@ -2194,12 +2248,12 @@ class FilesActionStore {
   getHeaderMenu = (t) => {
     const {
       isFavoritesFolder,
-      isRecentFolder,
       isRecycleBinFolder,
       isPrivacyFolder,
       isShareFolder,
       isRoomsFolder,
       isArchiveFolder,
+      isRecentTab,
     } = this.treeFoldersStore;
 
     let itemsCollection = new Map();
@@ -2214,7 +2268,7 @@ class FilesActionStore {
 
     if (isShareFolder) return this.getShareFolderOptions(itemsCollection, t);
 
-    if (isRecentFolder) return this.getRecentFolderOptions(itemsCollection, t);
+    if (isRecentTab) return this.getRecentFolderOptions(itemsCollection, t);
 
     if (isArchiveFolder)
       return this.getArchiveRoomsFolderOptions(itemsCollection, t);
@@ -2226,7 +2280,7 @@ class FilesActionStore {
 
   onMarkAsRead = (item) => this.markAsRead([], [`${item.id}`], item);
 
-  openFileAction = (item, t) => {
+  openFileAction = (item, t, e) => {
     const { openDocEditor, isPrivacyFolder, setSelection } = this.filesStore;
     const { currentDeviceType } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
@@ -2271,8 +2325,6 @@ class FilesActionStore {
     if (isFolder) {
       const { isRoom, rootFolderType, title, roomType: itemRoomType } = item;
 
-      setIsLoading(true);
-
       const path = getCategoryUrl(
         getCategoryTypeByFolderType(rootFolderType, id),
         id,
@@ -2280,6 +2332,12 @@ class FilesActionStore {
 
       const filter = FilesFilter.getDefault();
       filter.folder = id;
+
+      const url = `${path}?${filter.toUrlParams()}`;
+
+      if (openingNewTab(url, e)) return;
+
+      setIsLoading(true);
 
       const state = {
         title,
@@ -2292,7 +2350,7 @@ class FilesActionStore {
 
       setSelection([]);
 
-      window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, { state });
+      window.DocSpace.navigate(url, { state });
     } else {
       if (canConvert) {
         setConvertItem({ ...item, isOpen: true });
@@ -2304,30 +2362,12 @@ class FilesActionStore {
         this.onMarkAsRead(item);
 
       if (canWebEdit || canViewedDocs) {
-        let tab =
-          !this.settingsStore.isDesktopClient &&
-          window.DocSpaceConfig?.editor?.openOnNewPage &&
-          !isFolder
-            ? window.open(
-                combineUrl(
-                  window.DocSpaceConfig?.proxy?.url,
-                  config.homepage,
-                  `/doceditor?fileId=${id}`,
-                ),
-                "_blank",
-              )
-            : null;
-
-        const isPreview = item.isForm
-          ? !item.security.FillForms
-          : !item.security.Edit;
-
         const shareWebUrl = new URL(webUrl);
         const shareKey = isRecentTab
           ? getObjectByLocation(shareWebUrl)?.share
           : "";
 
-        return openDocEditor(id, providerKey, tab, null, isPreview, shareKey);
+        return openDocEditor(id, false, shareKey);
       }
 
       if (isMediaOrImage) {
@@ -2665,6 +2705,13 @@ class FilesActionStore {
       .finally(() => {
         setSelected("none");
       });
+  };
+
+  onClickRemoveFromRecent = (selection) => {
+    const { setSelected } = this.filesStore;
+    const ids = selection.map((item) => item.id);
+    this.removeFilesFromRecent(ids);
+    setSelected("none");
   };
 
   removeFilesFromRecent = async (fileIds) => {

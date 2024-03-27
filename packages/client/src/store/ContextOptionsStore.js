@@ -1,4 +1,30 @@
-﻿import HistoryReactSvgUrl from "PUBLIC_DIR/images/history.react.svg?url";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import HistoryReactSvgUrl from "PUBLIC_DIR/images/history.react.svg?url";
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/move.react.svg?url";
 import CheckBoxReactSvgUrl from "PUBLIC_DIR/images/check-box.react.svg?url";
@@ -54,7 +80,7 @@ import { Events } from "@docspace/shared/enums";
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/shared/utils/common";
 import api from "@docspace/shared/api";
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, UrlActionType } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { getFileLink } from "@docspace/shared/api/files";
 
@@ -153,6 +179,7 @@ class ContextOptionsStore {
       customer_title: "NOTITLE",
       provider_key: provider.providerName,
       link: provider.oauthHref,
+      provider_id: item.providerId,
     };
 
     if (provider.isOauth) {
@@ -231,7 +258,7 @@ class ContextOptionsStore {
   };
 
   onOpenLocation = (item) => {
-    this.filesActionsStore.openLocationAction(item);
+    this.filesActionsStore.checkAndOpenLocationAction(item);
   };
 
   onOwnerChange = () => {
@@ -342,6 +369,11 @@ class ContextOptionsStore {
       return toastr.success(t("Translations:LinkCopySuccess"));
     }
 
+    if (item.rootFolderType === FolderType.SHARE) {
+      copy(item.webUrl);
+      return toastr.success(t("Translations:LinkCopySuccess"));
+    }
+
     if (href) {
       copy(href);
 
@@ -400,33 +432,9 @@ class ContextOptionsStore {
   };
 
   gotoDocEditor = (preview = false, item) => {
-    const { isDesktopClient } = this.settingsStore;
+    const { id } = item;
 
-    const { id, providerKey, fileExst } = item;
-
-    const urlFormation = preview
-      ? combineUrl(
-          window.DocSpaceConfig?.proxy?.url,
-          config.homepage,
-          `/doceditor?fileId=${encodeURIComponent(id)}&action=view`,
-        )
-      : null;
-
-    let tab =
-      !isDesktopClient &&
-      window.DocSpaceConfig?.editor?.openOnNewPage &&
-      fileExst
-        ? window.open(
-            combineUrl(
-              window.DocSpaceConfig?.proxy?.url,
-              config.homepage,
-              `/doceditor`,
-            ),
-            "_blank",
-          )
-        : null;
-
-    this.filesStore.openDocEditor(id, providerKey, tab, urlFormation, preview);
+    this.filesStore.openDocEditor(id, preview);
   };
 
   isPwa = () => {
@@ -439,6 +447,9 @@ class ContextOptionsStore {
   onClickDownload = (item, t) => {
     const { fileExst, contentLength, viewUrl } = item;
     const isFile = !!fileExst && contentLength;
+
+    const { openUrl } = this.settingsStore;
+    const { downloadAction } = this.filesActionsStore;
 
     if (isIOS && this.isPwa()) {
       const xhr = new XMLHttpRequest();
@@ -458,10 +469,10 @@ class ContextOptionsStore {
     }
 
     isFile
-      ? window.open(viewUrl, "_self")
-      : this.filesActionsStore
-          .downloadAction(t("Translations:ArchivingData"), item)
-          .catch((err) => toastr.error(err));
+      ? openUrl(viewUrl, UrlActionType.Download)
+      : downloadAction(t("Translations:ArchivingData"), item).catch((err) =>
+          toastr.error(err),
+        );
   };
 
   onClickDownloadAs = () => {
@@ -1786,6 +1797,14 @@ class ContextOptionsStore {
         key: "separator1",
         isSeparator: true,
         disabled: !deleteItems || isRootThirdPartyFolder,
+      },
+      {
+        key: "remove-from-recent",
+        label: t("RemoveFromList"),
+        icon: RemoveOutlineSvgUrl,
+        onClick: () =>
+          this.filesActionsStore.onClickRemoveFromRecent(selection),
+        disabled: !this.treeFoldersStore.isRecentTab,
       },
       {
         key: "delete",

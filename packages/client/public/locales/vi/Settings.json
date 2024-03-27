@@ -1,4 +1,4 @@
-{
+﻿{
   "AccentColor": "Nhấn mạnh",
   "AccessRightsAccessToProduct": "Quyền truy cập vào mô-đun {{product}} được cấp cho",
   "AccessRightsAllUsers": "Tất cả {{users}}",
@@ -76,7 +76,6 @@
   "DeleteTheme": "Xóa theme",
   "DeleteThemeForever": "Xóa theme vĩnh viễn?",
   "DeleteThemeNotice": "Theme sẽ bị xóa vĩnh viễn. Bạn sẽ không thể hoàn tác thao tác này.",
-  "Disabled": "Đã vô hiệu hóa",
   "DNSSettings": "Thiết lập DNS",
   "DNSSettingsDescription": "Thiết lập DNS là một cách để thiết lập một URL thay thế cho không gian của bạn.",
   "DNSSettingsMobile": "Gửi yêu cầu của bạn đến nhóm hỗ trợ của chúng tôi và các chuyên gia của chúng tôi sẽ giúp bạn cài đặt.",

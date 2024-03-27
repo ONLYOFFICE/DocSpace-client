@@ -14,7 +14,6 @@
   "EnterCodePlaceholder": "コードの入力",
   "EnterPhone": "携帯電話番号を入力し",
   "GetCode": "コードの取得",
-  "InviteTitle": "このスペースに招待されました！",
   "LoginRegistryButton": "参加",
   "PassworResetTitle": "これで新しいパスワードが作成できます。",
   "PhoneSubtitle": "二要素認証が有効になっているため、セキュリティが強化されています。DocSpaceで作業を続けるには、携帯電話番号を入力してください。携帯電話番号は、国番号を含む国際フォーマットを使用して入力する必要があります。",
@@ -28,10 +27,5 @@
   "SetAppTitle": "認証アプリケーションの設定",
   "SuccessDeactivate": "お客様のアカウントは正常に無効化されました。10秒後に<1>サイト</1>にリダイレクトされます。",
   "SuccessReactivate": "あなたのアカウントは正常に再有効化されました。10秒後に<1>ポータル</1>にリダイレクトされます。",
-  "SuccessRemoved": "お客様のアカウントは正常に削除されました。10秒後に<1>site</1>にリダイレクトされます。",
-  "WelcomeRegister": "開始するには、ご登録ください",
-  "WelcomeRegisterViaSocial": "開始するには、ご登録またはSNSでログインしてください",
-  "WelcomeRegisterViaSSO": "開始するには、ご登録またはSSOでログインしてください",
-  "WelcomeToDocspace": "DocSpaceへようこそ！",
-  "WelcomeToRoom": "<1>{{ roomName }}</1>ルームへようこそ！"
+  "SuccessRemoved": "お客様のアカウントは正常に削除されました。10秒後に<1>site</1>にリダイレクトされます。"
 }

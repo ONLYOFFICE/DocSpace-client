@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
 import api from "@docspace/shared/api";
@@ -19,7 +45,6 @@ import { updateTempContent, isPublicRoom } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
 import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
-import { openDocEditor as openEditor } from "@docspace/client/src/helpers/filesUtils";
 import { getDaysRemaining } from "@docspace/shared/utils/common";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
@@ -204,8 +229,10 @@ class FilesStore {
         if (
           !socketSubscribers.has(pathParts) &&
           !socketSubscribers.has(`DIR-${data.id}`)
-        )
+        ) {
+          console.log("[WS] s:modify-folder: SKIP UNSUBSCRIBED", { data });
           return;
+        }
       }
 
       console.log("[WS] s:modify-folder", opt);
@@ -443,24 +470,25 @@ class FilesStore {
         });
       }, 300);
     } else if (opt?.type === "folder" && opt?.id) {
-      const foundIndex = this.folders.findIndex((x) => x.id === opt?.id);
+      const foundIndex = this.folders.findIndex((x) => x.id == opt?.id);
 
       if (foundIndex > -1) return;
 
       const folder = JSON.parse(opt?.data);
 
-      if (this.selectedFolderStore.id !== folder.parentId) {
+      if (this.selectedFolderStore.id != folder.parentId) {
         const movedToIndex = this.getFolderIndex(folder.parentId);
         if (movedToIndex > -1) this.folders[movedToIndex].foldersCount++;
       }
 
       if (
-        this.selectedFolderStore.id !== folder.parentId ||
+        this.selectedFolderStore.id != folder.parentId ||
         (folder.roomType &&
           folder.createdBy.id === this.userStore.user.id &&
           this.roomCreated)
-      )
+      ) {
         return (this.roomCreated = false);
+      }
 
       const folderInfo = await api.files.getFolderInfo(folder.id);
 
@@ -926,13 +954,21 @@ class FilesStore {
     if (folders.length === 0 && this.folders.length === 0) return;
 
     if (this.folders?.length > 0) {
-      socketHelper.emit({
-        command: "unsubscribe",
-        data: {
-          roomParts: this.folders.map((f) => `DIR-${f.id}`),
-          individual: true,
-        },
-      });
+      const ids = this.folders
+        .map((f) => {
+          if (this.selectedFolderStore.id === f.id) return "";
+          return `DIR-${f.id}`;
+        })
+        .filter((id) => id);
+
+      if (ids.length)
+        socketHelper.emit({
+          command: "unsubscribe",
+          data: {
+            roomParts: ids,
+            individual: true,
+          },
+        });
     }
 
     this.folders = folders;
@@ -1580,7 +1616,9 @@ class FilesStore {
         if (err?.response?.status === 402)
           this.currentTariffStatusStore.setPortalTariff();
 
-        if (requestCounter > 0) return;
+        const isThirdPartyError = isNaN(+folderId);
+
+        if (requestCounter > 0 && !isThirdPartyError) return;
 
         requestCounter++;
         const isUserError = [
@@ -1590,10 +1628,8 @@ class FilesStore {
           UnauthorizedHttpCode,
         ].includes(err?.response?.status);
 
-        if (isUserError) {
-          runInAction(() => {
-            this.isErrorRoomNotAvailable = true;
-          });
+        if (isUserError && !isThirdPartyError) {
+          this.setIsErrorRoomNotAvailable(true);
         } else {
           if (axios.isCancel(err)) {
             console.log("Request canceled", err.message);
@@ -1691,12 +1727,14 @@ class FilesStore {
                 tags,
                 withoutTags,
                 quotaFilter,
+                provider,
               } = filter;
 
               const isFiltered =
                 subjectId ||
                 filterValue ||
                 type ||
+                provider ||
                 withRoomsSubfolders ||
                 searchInContentRooms ||
                 tags ||
@@ -2468,15 +2506,6 @@ class FilesStore {
     }
   };
 
-  addFileToRecentlyViewed = (fileId) => {
-    if (
-      this.treeFoldersStore.isPrivacyFolder ||
-      this.publicRoomStore.isPublicRoom
-    )
-      return Promise.resolve();
-    return api.files.addFileToRecentlyViewed(fileId);
-  };
-
   createFile = (folderId, title, templateId, formId) => {
     return api.files
       .createFile(folderId, title, templateId, formId)
@@ -2659,7 +2688,7 @@ class FilesStore {
 
       this.folders.unshift(item);
 
-      console.log("[WS] subscribe to folder changes", item.id, item.title);
+      //console.log("[WS] subscribe to folder changes", item.id, item.title);
 
       socketHelper.emit({
         command: "subscribe",
@@ -2672,7 +2701,7 @@ class FilesStore {
       const foundIndex = this.files.findIndex((x) => x.id === item?.id);
       if (foundIndex > -1) return;
 
-      console.log("[WS] subscribe to file changes", item.id, item.title);
+      //console.log("[WS] subscribe to file changes", item.id, item.title);
 
       socketHelper.emit({
         command: "subscribe",
@@ -3015,29 +3044,12 @@ class FilesStore {
     }
   };
 
-  get filesList() {
-    const { getIcon } = this.filesSettingsStore;
-    //return [...this.folders, ...this.files];
-
+  getFilesListItems = (items) => {
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
+    const { getIcon } = this.filesSettingsStore;
 
-    const newFolders = [...this.folders];
-
-    newFolders.sort((a, b) => {
-      const firstValue = a.roomType ? 1 : 0;
-      const secondValue = b.roomType ? 1 : 0;
-
-      return secondValue - firstValue;
-    });
-
-    const items = [...newFolders, ...this.files];
-
-    if (items.length > 0 && this.isEmptyPage) {
-      this.setIsEmptyPage(false);
-    }
-
-    const newItem = items.map((item) => {
+    return items.map((item) => {
       const {
         availableExternalRights,
         access,
@@ -3093,6 +3105,7 @@ class FilesStore {
         quotaLimit,
         usedSpace,
         isCustomQuota,
+        providerId,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3263,10 +3276,29 @@ class FilesStore {
         quotaLimit,
         usedSpace,
         isCustomQuota,
+        providerId,
       };
     });
+  };
+  get filesList() {
+    //return [...this.folders, ...this.files];
 
-    return newItem;
+    const newFolders = [...this.folders];
+
+    newFolders.sort((a, b) => {
+      const firstValue = a.roomType ? 1 : 0;
+      const secondValue = b.roomType ? 1 : 0;
+
+      return secondValue - firstValue;
+    });
+
+    const items = [...newFolders, ...this.files];
+
+    if (items.length > 0 && this.isEmptyPage) {
+      this.setIsEmptyPage(false);
+    }
+
+    return this.getFilesListItems(items);
   }
 
   get cbMenuItems() {
@@ -3710,14 +3742,7 @@ class FilesStore {
     return folderInfo;
   };
 
-  openDocEditor = (
-    id,
-    providerKey = null,
-    tab = null,
-    url = null,
-    preview = false,
-    shareKey = null,
-  ) => {
+  openDocEditor = (id, preview = false, shareKey = null) => {
     const foundIndex = this.files.findIndex((x) => x.id === id);
     const file = foundIndex !== -1 ? this.files[foundIndex] : undefined;
     if (
@@ -3732,10 +3757,24 @@ class FilesStore {
       this.updateFileStatus(foundIndex, newStatus);
     }
 
-    const isPrivacy = this.treeFoldersStore.isPrivacyFolder;
     const share = shareKey ? shareKey : this.publicRoomStore.publicRoomKey;
 
-    return openEditor(id, providerKey, tab, url, isPrivacy, preview, share);
+    const searchParams = new URLSearchParams();
+
+    searchParams.append("fileId", id);
+    if (share) searchParams.append("share", share);
+    if (preview) searchParams.append("action", "view");
+
+    const url = combineUrl(
+      window.DocSpaceConfig?.proxy?.url,
+      config.homepage,
+      `/doceditor?${searchParams.toString()}`,
+    );
+
+    window.open(
+      url,
+      window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
+    );
   };
 
   createThumbnails = async (files = null) => {
@@ -4106,6 +4145,7 @@ class FilesStore {
       tags,
       withoutTags,
       quotaFilter,
+      provider,
     } = this.roomsFilter;
 
     const {
@@ -4121,6 +4161,7 @@ class FilesStore {
       isRoomsFolder || isArchiveFolder
         ? filterValue ||
           type ||
+          provider ||
           withRoomsSubfolders ||
           searchInContentRooms ||
           subjectId ||

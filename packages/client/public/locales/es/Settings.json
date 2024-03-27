@@ -1,4 +1,4 @@
-{
+﻿{
   "AccentColor": "Acento",
   "AccessRightsAccessToProduct": "El acceso al módulo {{product}} se otorga a",
   "AccessRightsAllUsers": "Todos {{users}}",
@@ -76,7 +76,6 @@
   "DeleteTheme": "Eliminar tema",
   "DeleteThemeForever": "¿Eliminar el tema para siempre?",
   "DeleteThemeNotice": "El tema se eliminará definitivamente. No podrá deshacer esta acción.",
-  "Disabled": "Deshabilitado",
   "DNSSettings": "Configuración DNS",
   "DNSSettingsDescription": "La configuración DNS permite establecer una URL alternativa para su espacio.",
   "DNSSettingsMobile": "Envíe su solicitud a nuestro equipo de soporte y nuestros especialistas le ayudarán con la configuración.",

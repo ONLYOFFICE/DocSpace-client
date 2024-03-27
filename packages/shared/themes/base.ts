@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 
 import { globalColors } from "./globalColors";
@@ -233,20 +259,20 @@ export const getBaseTheme = () => {
 
       dropDown: {
         position: "fixed",
-        right: "32px",
-        bottom: "32px",
+        right: "48px",
+        bottom: "48px",
 
         width: "400px",
 
         zIndex: "202",
 
         mobile: {
-          right: "24px",
-          bottom: "24px",
+          right: "32px",
+          bottom: "40px",
 
           marginLeft: "24px",
 
-          width: "calc(100vw - 48px)",
+          width: "calc(100vw - 64px)",
         },
         separatorBackground: white,
 
@@ -313,22 +339,28 @@ export const getBaseTheme = () => {
       outline: "none",
       width: "100%",
 
+      border: "1px solid #D0D5DA",
       background: white,
-      disableBackgroundColor: "#F8F9F9",
-      connectBackground: "#3B72A7",
-      hoverBackground: white,
-      hoverConnectBackground: "#265A8F",
-      activeBackground: "grayMaxLight",
-      hoverBorder: "#1877f2",
 
-      boxShadow:
-        "0px 1px 1px rgba(0, 0, 0, 0.24),0px 0px 1px rgba(0, 0, 0, 0.12)",
-      hoverBoxShadow: "none",
+      borderConnect: "none",
+      connectBackground: "#3B72A7",
+
+      disableBackgroundColor: "#F8F9F9",
+
+      hoverBackground: white,
+      hoverBorder: "1px solid #5299E0",
+      hoverConnectBackground: "#316DAA",
+      hoverConnectBorder: "none",
+
+      activeBorder: "1px solid #D0D5DA",
+      activeBackground: "#ECEEF1",
+      activeConnectBorder: "none",
+      activeConnectBackground: "#265A8F",
 
       color: "rgba(0, 0, 0, 0.54)",
       disableColor: "#333333",
       disabledSvgColor: "none",
-      border: "none",
+
       text: {
         width: "100%",
         height: "18px",
@@ -353,10 +385,6 @@ export const getBaseTheme = () => {
         minHeight: "18px",
         fill: white,
       },
-    },
-
-    socialButtonsGroup: {
-      border: "1px solid #D0D5DA",
     },
 
     groupButton: {
@@ -613,6 +641,8 @@ export const getBaseTheme = () => {
       bgColor: "rgba(6, 22, 38, 0.16)",
       hoverBgColor: "rgba(6, 22, 38, 0.32)",
       pressBgColor: "rgba(6, 22, 38, 0.5)",
+      paddingInlineEnd: "17px !important",
+      paddingInlineEndMobile: "8px !important",
     },
 
     modalDialog: {
@@ -2557,6 +2587,13 @@ export const getBaseTheme = () => {
       button: {
         colorLink: "#657077",
         colorText: "#555F65",
+      },
+    },
+
+    emptyView: {
+      items: {
+        hoverColor: grayLight,
+        pressColor: lightGrayishStrongBlue,
       },
     },
 

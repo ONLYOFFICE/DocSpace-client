@@ -87,7 +87,6 @@ const Root = ({
 
   useRootInit({
     documentType: config?.documentType,
-    fileType: config?.file.fileType,
   });
   const { i18n } = useI18N({ settings, user });
 

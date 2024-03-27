@@ -588,12 +588,6 @@ const useEditorEvents = ({
   };
 
   React.useEffect(() => {
-    const tempEvents: IConfigEvents = {};
-
-    setEvents(tempEvents);
-  }, [successAuth, user?.isVisitor, config?.documentType, fileInfo]);
-
-  React.useEffect(() => {
     if (
       IS_DESKTOP_EDITOR ||
       (typeof window !== "undefined" &&
@@ -643,4 +637,3 @@ const useEditorEvents = ({
 };
 
 export default useEditorEvents;
-

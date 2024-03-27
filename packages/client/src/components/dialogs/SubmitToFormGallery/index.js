@@ -153,7 +153,7 @@ const SubmitToFormGallery = ({
             approval in our
             <Link
               color={currentColorScheme.main?.accent}
-              href="https://www.onlyoffice.com/blog/2022/07/when-design-matters-how-to-create-beautiful-forms-with-oforms"
+              href={t("FormGallery:GuideLink")}
               type={"page"}
               target={"_blank"}
               isBold

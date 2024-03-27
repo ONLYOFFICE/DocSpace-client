@@ -79,10 +79,10 @@ const toListItem = (
   const isInvited = disableInvitedUsers?.includes(userId);
   const isDisabled = disableDisabledUsers && status === EmployeeStatus.Disabled;
 
-  const disabledText = isDisabled
-    ? t("Common:Disabled")
-    : isInvited
-      ? t("Common:Invited")
+  const disabledText = isInvited
+    ? t("Common:Invited")
+    : isDisabled
+      ? t("Common:Disabled")
       : "";
 
   const i = {

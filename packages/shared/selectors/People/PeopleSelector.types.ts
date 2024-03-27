@@ -61,4 +61,7 @@ export type PeopleSelectorProps = TSelectorHeader &
     excludeItems?: string[];
     disableInvitedUsers?: string[];
     disableDisabledUsers?: boolean;
+
+    emptyScreenHeader?: string;
+    emptyScreenDescription?: string;
   };

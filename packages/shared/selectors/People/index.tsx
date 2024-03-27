@@ -138,6 +138,9 @@ const PeopleSelector = ({
 
   withInfo,
   infoText,
+
+  emptyScreenHeader,
+  emptyScreenDescription,
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -386,8 +389,10 @@ const PeopleSelector = ({
       disableSubmitButton={disableSubmitButton || !selectedItem}
       submitButtonId={submitButtonId}
       emptyScreenImage={emptyScreenImage}
-      emptyScreenHeader={t("Common:EmptyHeader")}
-      emptyScreenDescription={t("Common:EmptyDescription")}
+      emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyHeader")}
+      emptyScreenDescription={
+        emptyScreenDescription ?? t("Common:EmptyDescription")
+      }
       searchEmptyScreenImage={emptyScreenImage}
       searchEmptyScreenHeader={t("Common:NotFoundUsers")}
       searchEmptyScreenDescription={t("Common:NotFoundUsersDescription")}

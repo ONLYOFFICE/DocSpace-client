@@ -51,7 +51,6 @@ const PureConnectDialogContainer = (props) => {
     saveThirdParty,
     openConnectWindow,
     setConnectDialogVisible,
-    personal,
     folderFormValidation,
     isConnectionViaBackupModule,
     roomCreation,
@@ -419,7 +418,7 @@ export default inject(
       openConnectWindow,
       fetchThirdPartyProviders,
     } = filesSettingsStore.thirdPartyStore;
-    const { personal, folderFormValidation } = settingsStore;
+    const { folderFormValidation } = settingsStore;
 
     const { id, folders } = selectedFolderStore;
     const {
@@ -456,7 +455,6 @@ export default inject(
       fetchThirdPartyProviders,
       setConnectDialogVisible,
       setSelectedThirdPartyAccount,
-      personal,
       isConnectDialogReconnect,
       saveAfterReconnectOAuth,
       setSaveAfterReconnectOAuth,

@@ -33,7 +33,6 @@ import styled from "styled-components";
 import { ReactSVG } from "react-svg";
 
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import logoPersonalAboutUrl from "PUBLIC_DIR/images/logo_personal_about.svg?url";
 import { getLogoFromPath } from "@docspace/shared/utils";
 
 const StyledAboutBody = styled.div`
@@ -104,7 +103,6 @@ const StyledAboutBody = styled.div`
 
 const AboutContent = (props) => {
   const {
-    personal,
     buildVersionInfo,
     theme,
     companyInfoSettingsData,
@@ -144,20 +142,12 @@ const AboutContent = (props) => {
     companyInfoSettingsData && (
       <StyledAboutBody>
         <div className="avatar">
-          {personal ? (
-            <ReactSVG
-              src={logoPersonalAboutUrl}
-              className="logo-theme no-select"
-            />
-          ) : (
-            <img
-              src={logo}
-              alt="Logo"
-              className="logo-docspace-theme no-select"
-            />
-          )}
+          <img
+            src={logo}
+            alt="Logo"
+            className="logo-docspace-theme no-select"
+          />
         </div>
-
         <div className="row">
           <Text className="row-el" fontSize="13px">
             {t("DocumentManagement")}:

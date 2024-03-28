@@ -70,6 +70,7 @@ import FilesSelector from "../FilesSelector";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import LeaveRoomDialog from "../dialogs/LeaveRoomDialog";
 import ChangeRoomOwnerPanel from "../panels/ChangeRoomOwnerPanel";
+import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
 
 const Panels = (props) => {
   const {
@@ -122,6 +123,7 @@ const Panels = (props) => {
     changeRoomOwnerIsVisible,
     deletePluginDialogVisible,
     shareFolderDialogVisible,
+    createdPDFFormDialogVisible,
   } = props;
 
   const { t } = useTranslation(["Translations", "Common"]);
@@ -256,6 +258,9 @@ const Panels = (props) => {
       <ChangeRoomOwnerPanel key="change-room-owner" />
     ),
     shareFolderDialogVisible && <ShareFolderDialog key="share-folder-dialog" />,
+    createdPDFFormDialogVisible && (
+      <CreatedPDFFormDialog key="created-pdf-form-dialog" />
+    ),
   ];
 };
 
@@ -313,6 +318,7 @@ export default inject(
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
       shareFolderDialogVisible,
+      createdPDFFormDialogVisible,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -378,6 +384,7 @@ export default inject(
       changeRoomOwnerIsVisible,
       deletePluginDialogVisible,
       shareFolderDialogVisible,
+      createdPDFFormDialogVisible,
     };
   },
 )(observer(Panels));

@@ -1,5 +1,5 @@
 {
   "PDFFormDialogTitle": "Ready-made PDF form",
   "PDFFormInviteDescription": "Congratulations! The form is now ready to be filled out, but there are no participants in the room at the moment. Please invite them to start collecting completed copies from other users.",
-  "PDFFormSuccessfullyCreatedDescription": "Your {{fileName}} form has been successfully created. You can collect completed copies from other users."
+  "PDFFormSuccessfullyCreatedDescription": "Your <strong>{{fileName}}</strong> form has been successfully created. You can collect completed copies from other users."
 }

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { observer, inject } from "mobx-react";
 
 import HeaderIcon from "PUBLIC_DIR/images/ready.pdf.form.modal.svg";
@@ -39,51 +39,103 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Wrapper } from "./CreatedPDFFormDialog.styled";
 import type { CreatedPDFFormDialogProps } from "./CreatedPDFFormDialog.types";
 
-export const CreatedPDFFormDialog = inject<TStore>(({ dialogsStore }) => {
-  const { createdPDFFormDialogData: data } = dialogsStore;
+export const CreatedPDFFormDialog = inject<TStore>(
+  ({ dialogsStore, contextOptionsStore, selectedFolderStore }) => {
+    const { createdPDFFormDialogData: data, setCreatedPDFFormDialogVisible } =
+      dialogsStore;
 
-  return { data };
-})(
-  observer(({ data }: CreatedPDFFormDialogProps) => {
-    const { t } = useTranslation(["PDFFormDialog", "Common"]);
+    const { onClickInviteUsers, onClickLinkFillForm } = contextOptionsStore;
+    const { id, roomType, security } = selectedFolderStore;
 
-    const description = t("PDFFormInviteDescription");
+    return {
+      id,
+      data,
+      roomType,
+      security,
+      onClickInviteUsers,
+      onClickLinkFillForm,
+      setCreatedPDFFormDialogVisible,
+    };
+  },
+)(
+  observer(
+    ({
+      data,
+      roomType,
+      security,
+      id: selectedFolderId,
+      onClickInviteUsers,
+      onClickLinkFillForm,
+      setCreatedPDFFormDialogVisible,
+    }: CreatedPDFFormDialogProps) => {
+      const isFill = false;
 
-    return (
-      <ModalDialog
-        visible
-        displayType={ModalDialogType.modal}
-        autoMaxHeight
-        // onClose={onClose}
-      >
-        <ModalDialog.Header>{t("PDFFormDialogTitle")}</ModalDialog.Header>
+      const { t } = useTranslation(["PDFFormDialog", "Common"]);
 
-        <ModalDialog.Body>
-          <Wrapper>
-            <HeaderIcon />
-            <span>{description}</span>
-          </Wrapper>
-        </ModalDialog.Body>
-        <ModalDialog.Footer>
-          <Button
-            // tabIndex={5}
-            label={t("Common:SaveButton")}
-            size={ButtonSize.normal}
-            primary
-            scale
-            // onClick={onEditRoom}
-            // isLoading={isLoading}
-          />
-          <Button
-            // tabIndex={5}
-            label={t("Common:CancelButton")}
-            size={ButtonSize.normal}
-            scale
-            // onClick={onClose}
-            // isDisabled={isLoading}
-          />
-        </ModalDialog.Footer>
-      </ModalDialog>
-    );
-  }),
+      const onClose = () => {
+        setCreatedPDFFormDialogVisible?.(false);
+      };
+
+      const onSubmit = () => {
+        if (isFill) {
+          onClickLinkFillForm?.(data);
+        } else if (Boolean(roomType) && security?.EditAccess) {
+          onClickInviteUsers?.(selectedFolderId, roomType);
+        }
+
+        onClose();
+      };
+
+      const description = isFill ? (
+        <Trans
+          t={t}
+          i18nKey="PDFFormSuccessfullyCreatedDescription" // optional -> fallbacks to defaults if not provided
+          values={{ fileName: "New form.pdf" }}
+          components={{ strong: <strong /> }}
+        />
+      ) : (
+        t("PDFFormInviteDescription")
+      );
+      const primaryButtonLabel = isFill ? t("Common:Fill") : t("Common:Invite");
+      const cancelButtonLabel = isFill
+        ? t("Common:CancelButton")
+        : t("Common:Later");
+
+      return (
+        <ModalDialog
+          visible
+          autoMaxHeight
+          onClose={onClose}
+          displayType={ModalDialogType.modal}
+        >
+          <ModalDialog.Header>{t("PDFFormDialogTitle")}</ModalDialog.Header>
+          <ModalDialog.Body>
+            <Wrapper>
+              <HeaderIcon />
+              <span>{description}</span>
+            </Wrapper>
+          </ModalDialog.Body>
+          <ModalDialog.Footer>
+            <Button
+              scale
+              primary
+              tabIndex={0}
+              size={ButtonSize.normal}
+              label={primaryButtonLabel}
+              onClick={onSubmit}
+              // isLoading={isLoading}
+            />
+            <Button
+              scale
+              tabIndex={0}
+              onClick={onClose}
+              size={ButtonSize.normal}
+              label={cancelButtonLabel}
+              // isDisabled={isLoading}
+            />
+          </ModalDialog.Footer>
+        </ModalDialog>
+      );
+    },
+  ),
 );

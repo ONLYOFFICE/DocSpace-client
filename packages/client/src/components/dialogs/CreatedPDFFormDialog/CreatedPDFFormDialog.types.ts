@@ -24,6 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface CreatedPDFFormDialogProps {
+export interface CreatedPDFFormDialogProps
+  extends Partial<
+      Pick<TStore["selectedFolderStore"], "id" | "roomType" | "security">
+    >,
+    Partial<Pick<TStore["dialogsStore"], "setCreatedPDFFormDialogVisible">>,
+    Partial<
+      Pick<
+        TStore["contextOptionsStore"],
+        "onClickInviteUsers" | "onClickLinkFillForm"
+      >
+    > {
   data?: null;
 }

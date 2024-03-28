@@ -149,7 +149,7 @@ const SelectFileStep = ({
       setIsFileError(false);
       setIsSaveDisabled(true);
 
-      if (res.parseResult.files.length > 0) {
+      if (res.parseResult.files?.length > 0) {
         setFileName(res.parseResult.files.join(", "));
       }
 

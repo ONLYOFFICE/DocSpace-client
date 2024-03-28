@@ -56,6 +56,7 @@ import useShareDialog from "@/hooks/useShareDialog";
 import useFilesSettings from "@/hooks/useFilesSettings";
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
 import { IS_VIEW } from "@/utils/constants";
+import StyledComponentsRegistry from "@/utils/registry";
 
 import pkgFile from "../../package.json";
 
@@ -86,7 +87,6 @@ const Root = ({
 
   useRootInit({
     documentType: config?.documentType,
-    fileType: config?.file.fileType,
   });
   const { i18n } = useI18N({ settings, user });
 
@@ -165,11 +165,13 @@ const Root = ({
               setIsShowDeepLink={setIsShowDeepLink}
             />
           ) : error && error.message === "restore-backup" ? (
-            <ErrorContainer
-              headerText={t?.("Common:Error")}
-              customizedBodyText={getErrorMessage()}
-              isEditor
-            />
+            <StyledComponentsRegistry>
+              <ErrorContainer
+                headerText={t?.("Common:Error")}
+                customizedBodyText={getErrorMessage()}
+                isEditor
+              />
+            </StyledComponentsRegistry>
           ) : error && error.message !== "unauthorized" ? (
             <Error520SSR
               i18nProp={i18n}

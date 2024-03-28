@@ -506,3 +506,8 @@ export const enum WhiteLabelLogoType {
   AboutPage = 7,
   Notification = 8,
 }
+
+export const enum EditorConfigErrorType {
+  System = "System.Exception",
+  LinkScope = "ASC.Files.Core.Exceptions.LinkScopeException",
+}

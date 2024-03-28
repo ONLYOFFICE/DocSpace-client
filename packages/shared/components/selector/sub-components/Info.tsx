@@ -24,44 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import PeopleFilter from "../../api/people/filter";
-import {
-  TSelectorCancelButton,
-  TSelectorCheckbox,
-  TSelectorHeader,
-  TSelectorInfo,
-  TSelectorSubmitButton,
-} from "../../components/selector/Selector.types";
+import React from "react";
 
-export interface UserTooltipProps {
-  avatarUrl: string;
-  label: string;
-  email: string;
-  position: string;
-}
+import { Text } from "../../text";
 
-export type PeopleSelectorProps = TSelectorHeader &
-  TSelectorInfo &
-  TSelectorCancelButton &
-  TSelectorCheckbox &
-  TSelectorSubmitButton & {
-    id?: string;
-    className?: string;
-    style?: React.CSSProperties;
+import { TSelectorInfo } from "../Selector.types";
+import { StyledInfo } from "../Selector.styled";
 
-    filter?: PeopleFilter | Function;
-
-    isMultiSelect?: boolean;
-
-    currentUserId: string;
-    withOutCurrentAuthorizedUser?: boolean;
-
-    filterUserId?: string;
-
-    excludeItems?: string[];
-    disableInvitedUsers?: string[];
-    disableDisabledUsers?: boolean;
-
-    emptyScreenHeader?: string;
-    emptyScreenDescription?: string;
-  };
+export const Info = ({ infoText }: TSelectorInfo) => {
+  return (
+    <StyledInfo id="selector-info-text">
+      <Text fontSize="12px" fontWeight={400} lineHeight="16px" className="text">
+        {infoText}
+      </Text>
+    </StyledInfo>
+  );
+};

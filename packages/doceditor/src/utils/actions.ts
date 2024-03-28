@@ -29,7 +29,7 @@
 import { headers } from "next/headers";
 
 import { getLtrLanguageForEditor } from "@docspace/shared/utils/common";
-import { TenantStatus } from "@docspace/shared/enums";
+import { TenantStatus, EditorConfigErrorType } from "@docspace/shared/enums";
 import type { TDocServiceLocation } from "@docspace/shared/api/files/types";
 
 import type { IInitialConfig, TCatchError, TError, TResponse } from "@/types";
@@ -414,7 +414,12 @@ export async function getData(
     console.log("initDocEditor failed", config.error);
 
     const response: TResponse = {
-      error: user || share ? config.error : { message: "unauthorized" },
+      error:
+        user || share
+          ? config.error.type === EditorConfigErrorType.LinkScope
+            ? { message: "unauthorized" }
+            : config.error
+          : { message: "unauthorized" },
       user: user?.response,
       settings: settings?.response,
       fileId,
@@ -446,3 +451,4 @@ export async function getData(
     return { error };
   }
 }
+

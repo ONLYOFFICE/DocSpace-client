@@ -26,7 +26,6 @@
 
 import React from "react";
 
-import { FileType } from "@docspace/shared/enums";
 import { getCookie } from "@docspace/shared/utils";
 import { isRetina } from "@docspace/shared/utils/common";
 import { setCookie } from "@docspace/shared/utils/cookie";
@@ -38,10 +37,9 @@ import PDFIcoUrl from "PUBLIC_DIR/images/pdf.ico?url";
 
 interface UseRootInitProps {
   documentType?: string;
-  fileType?: FileType;
 }
 
-const useRootInit = ({ documentType, fileType }: UseRootInitProps) => {
+const useRootInit = ({ documentType }: UseRootInitProps) => {
   React.useEffect(() => {
     let icon: string = "";
 
@@ -68,7 +66,7 @@ const useRootInit = ({ documentType, fileType }: UseRootInitProps) => {
 
       el.href = icon;
     }
-  }, [documentType, fileType]);
+  }, [documentType]);
 
   React.useEffect(() => {
     if (isRetina() && getCookie("is_retina") == null) {
@@ -78,4 +76,3 @@ const useRootInit = ({ documentType, fileType }: UseRootInitProps) => {
 };
 
 export default useRootInit;
-

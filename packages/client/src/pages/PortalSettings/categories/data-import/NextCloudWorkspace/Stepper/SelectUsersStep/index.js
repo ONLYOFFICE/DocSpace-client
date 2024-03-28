@@ -98,7 +98,7 @@ const SelectUsersStep = (props) => {
             cancelButtonLabel={t("Common:Back")}
             showReminder
             displaySettings
-            saveButtonDisabled={areCheckedUsersEmpty}
+            // saveButtonDisabled={areCheckedUsersEmpty}
           />
 
           {/* <UsersInfoBlock
@@ -142,7 +142,7 @@ const SelectUsersStep = (props) => {
           cancelButtonLabel={t("Common:Back")}
           showReminder
           displaySettings
-          saveButtonDisabled={areCheckedUsersEmpty}
+          // saveButtonDisabled={areCheckedUsersEmpty}
         />
       )}
     </Wrapper>

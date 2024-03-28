@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import "../styles/globals.scss";
+import Script from "next/script";
 
 // import StyledComponentsRegistry from "@/utils/registry";
 
@@ -38,7 +39,49 @@ export default async function RootLayout({
       <head>
         <link id="favicon" rel="shortcut icon" type="image/x-icon" />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Script
+          id="browser-detector"
+          src="/static/scripts/browserDetector.js"
+        />
+        <Script id="docspace-config">
+          {`
+          console.log("It's DocEditor INIT");
+          fetch("/static/scripts/config.json")
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+              }
+              return response.json();
+            })
+            .then((config) => {
+              window.DocSpaceConfig = {
+                ...config,
+              };
+    
+              if (
+                window.navigator.userAgent.includes("ZoomWebKit") ||
+                window.navigator.userAgent.includes("ZoomApps")
+              ) {
+                window.DocSpaceConfig.editor = {
+                  openOnNewPage: false,
+                  requestClose: true,
+                };
+              }
+    
+              //console.log({ DocSpaceConfig: window.DocSpaceConfig });
+            })
+            .catch((e) => {
+              console.error(e);
+              window.DocSpaceConfig = {
+                errorOnLoad: e,
+              };
+            });
+          `}
+        </Script>
+      </body>
     </html>
   );
 }
+

@@ -28,7 +28,6 @@
 
 import { headers } from "next/headers";
 
-import { getLtrLanguageForEditor } from "@docspace/shared/utils/common";
 import { TenantStatus, EditorConfigErrorType } from "@docspace/shared/enums";
 import type { TDocServiceLocation } from "@docspace/shared/api/files/types";
 
@@ -382,13 +381,6 @@ export async function getData(
         }
       }
 
-      // needed to reset rtl language in Editor
-      response.config.editorConfig.lang = getLtrLanguageForEditor(
-        response.user?.cultureName,
-        response.settings.culture,
-        true,
-      );
-
       if (response.settings.tenantStatus === TenantStatus.PortalRestore) {
         response.error = { message: "restore-backup" };
       }
@@ -451,4 +443,3 @@ export async function getData(
     return { error };
   }
 }
-

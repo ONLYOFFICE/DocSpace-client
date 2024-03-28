@@ -106,8 +106,8 @@ export const RegisterContainer = styled.div`
     line-height: 0px;
     margin: 0px;
   }
-
-  .auth-form-container {
+ 
+  .auth-form-fields {
     width: 100%;
 
     .password-field{

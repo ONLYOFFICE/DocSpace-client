@@ -1016,7 +1016,8 @@ class SettingsStore {
 
   get isFrame() {
     const isFrame = this.frameConfig?.name === window.name;
-    window.DocSpaceConfig.isFrame = isFrame;
+
+    if (window.DocSpaceConfig) window.DocSpaceConfig.isFrame = isFrame;
 
     console.log("Table log isFrame", isFrame);
     return isFrame;

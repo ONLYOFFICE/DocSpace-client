@@ -116,6 +116,9 @@ const template: Template = (
       })
       .catch((e) => {
         console.error(e);
+        window.DocSpaceConfig = {
+          errorOnLoad: e,
+        };
       });
     </script>
 `;

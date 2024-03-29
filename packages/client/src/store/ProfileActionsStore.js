@@ -256,7 +256,6 @@ class ProfileActionsStore {
     //   settingsModule && combineUrl(PROXY_HOMEPAGE_URL, settingsModule.link);
 
     const {
-      //isPersonal,
       //currentProductId,
       debugInfo,
     } = this.settingsStore;

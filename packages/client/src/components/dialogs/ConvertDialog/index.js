@@ -30,7 +30,9 @@ import ModalDialogContainer from "../ModalDialogContainer";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
+import { Box } from "@docspace/shared/components/box";
 import { Checkbox } from "@docspace/shared/components/checkbox";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -56,6 +58,23 @@ const ConvertDialogComponent = (props) => {
     setIsConvertSingleFile,
   } = props;
 
+  const options = [
+    {
+      label: t("Document"),
+      value: "Document",
+    },
+    {
+      label: t("Spreadsheet"),
+      value: "Spreadsheet",
+    },
+    {
+      label: t("Presentation"),
+      value: "Presentation",
+    },
+  ];
+
+  const isXML = convertItem?.fileExst?.includes(".xml");
+
   let rootFolderTitle = "";
   const convertSingleFile = !!convertItem;
   const sortedFolder = isRecentFolder || isFavoritesFolder || isShareFolder;
@@ -67,11 +86,23 @@ const ConvertDialogComponent = (props) => {
   }
 
   const [hideMessage, setHideMessage] = useState(false);
+  const [selectedOptionType, setSelectedOptionType] = useState(
+    options[0].value,
+  );
+
+  const onChangeRadioButton = (e) => {
+    setSelectedOptionType(e.target.value);
+    setIsConvertSingleFile(false);
+  };
 
   const onChangeFormat = () =>
     setStoreOriginal(!storeOriginalFiles, "storeOriginalFiles");
   const onChangeMessageVisible = () => setHideMessage(!hideMessage);
-  const onClose = () => setConvertDialogVisible(false);
+
+  const onClose = () => {
+    setConvertDialogVisible(false);
+    setIsConvertSingleFile(false);
+  };
 
   const onConvert = () => {
     onClose();
@@ -82,6 +113,7 @@ const ConvertDialogComponent = (props) => {
         fileId: convertItem.id,
         toFolderId: folderId,
         action: "convert",
+        format: selectedOptionType, // need backend
       };
       item.fileInfo = convertItem;
       convertFile(item, t, convertItem.isOpen);
@@ -97,16 +129,36 @@ const ConvertDialogComponent = (props) => {
       visible={visible}
       onClose={onClose}
       withFooterCheckboxes
+      autoMaxHeight
     >
       <ModalDialog.Header>
         {convertSingleFile
           ? t("DocumentConversionTitle")
           : t("FileUploadTitle")}
       </ModalDialog.Header>
-      <ModalDialog.Body>
+      <ModalDialog.Body style={{ paddingBottom: "0px" }}>
         <Text>
-          {convertSingleFile ? t("OpenFileMessage") : t("ConversionMessage")}
+          {convertSingleFile
+            ? isXML
+              ? t("ConversionXmlMessage")
+              : t("OpenFileMessage")
+            : t("ConversionMessage")}
         </Text>
+
+        {isXML && (
+          <Box paddingProp="16px 0 0">
+            <Text>{t("SelectFileType")}</Text>
+            <RadioButtonGroup
+              orientation="vertical"
+              options={options}
+              name="convert-file-type"
+              selected={selectedOptionType}
+              onClick={onChangeRadioButton}
+              spacing="12px"
+              style={{ marginTop: "12px" }}
+            />
+          </Box>
+        )}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <div className="convert_dialog_footer">
@@ -165,7 +217,7 @@ const ConvertDialogComponent = (props) => {
   );
 };
 
-const ConvertDialog = withTranslation(["ConvertDialog", "Common"])(
+const ConvertDialog = withTranslation(["ConvertDialog", "Common", "Files"])(
   ConvertDialogComponent,
 );
 

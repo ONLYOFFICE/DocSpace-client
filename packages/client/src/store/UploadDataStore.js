@@ -1019,6 +1019,10 @@ class UploadDataStore {
     if (!currentFile) return resolve();
     const { needConvert } = currentFile;
 
+    const isXML = currentFile.fileInfo?.fileExst?.includes(".xml");
+
+    if (isXML) return resolve();
+
     if (needConvert) {
       runInAction(() => (currentFile.action = "convert"));
 

@@ -292,6 +292,8 @@ class SelectedFolderStore {
   ) => {
     const socketHelper = this.settingsStore?.socketHelper;
 
+    this.toDefault();
+
     if (
       this.id !== null &&
       socketHelper &&

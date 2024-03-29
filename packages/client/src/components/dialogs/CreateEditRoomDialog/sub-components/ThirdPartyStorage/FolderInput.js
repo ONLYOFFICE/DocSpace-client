@@ -46,6 +46,10 @@ const StyledFolderInput = styled.div`
   cursor: pointer;
   user-select: none;
 
+  .folder-path-wrapper {
+    display: contents;
+  }
+
   &,
   .icon-wrapper {
     border: 1px solid
@@ -140,6 +144,7 @@ const FolderInput = ({
   thirdpartyAccount,
   onChangeStorageFolderId,
   isDisabled,
+  createNewFolderIsChecked,
 }) => {
   const [treeNode, setTreeNode] = useState(null);
   const [path, setPath] = useState("");
@@ -159,7 +164,6 @@ const FolderInput = ({
 
     let path = treeNode.path;
     path = path.slice(1);
-    path = [...path, treeNode];
 
     let result = "";
     path.map(
@@ -178,14 +182,24 @@ const FolderInput = ({
   console.log(thirdpartyAccount);
 
   if (!thirdpartyAccount.id) return null;
+
+  let title = `${t("RootLabel")}/${path}`;
+  if (createNewFolderIsChecked) {
+    title += `${path ? "/" : ""}${roomTitle || t("Files:NewRoom")}`;
+  }
+
   return (
     <>
       <StyledFolderInput noRoomTitle={!roomTitle} onClick={onOpen}>
-        <span className="root_label">{t("RootLabel")}/</span>
-        <span className="path">{path}</span>
-        <span className="room_title">
-          {(path ? "/" : "") + (roomTitle || t("Files:NewRoom"))}
-        </span>
+        <div className="folder-path-wrapper" title={title}>
+          <span className="root_label">{t("RootLabel")}/</span>
+          <span className="path">{path}</span>
+          {createNewFolderIsChecked && (
+            <span className="room_title">
+              {(path ? "/" : "") + (roomTitle || t("Files:NewRoom"))}
+            </span>
+          )}
+        </div>
         <div className="icon-wrapper">
           <IconButton size={16} iconName={FolderReactSvgUrl} isClickable />
         </div>

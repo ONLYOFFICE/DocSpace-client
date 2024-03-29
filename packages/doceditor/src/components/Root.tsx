@@ -96,7 +96,7 @@ const Root = ({
     editorUrl: documentserverUrl,
     t,
   });
-  const { theme, currentColorTheme } = useTheme({ user });
+  const { theme, currentColorTheme } = useTheme({ user, i18n });
   const { currentDeviceType } = useDeviceType();
   const { logoUrls } = useWhiteLabel();
   const { isShowDeepLink, setIsShowDeepLink } = useDeepLink({

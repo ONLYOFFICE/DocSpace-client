@@ -69,7 +69,7 @@ const CreateFileError = ({
   const { i18n } = useI18N({ settings, user });
   const { currentDeviceType } = useDeviceType();
   const { logoUrls } = useWhiteLabel();
-  const { theme } = useTheme({ user });
+  const { theme } = useTheme({ user, i18n });
 
   const t = i18n.t ? i18n.t.bind(i18n) : null;
   const message = error.message ?? error ?? "";

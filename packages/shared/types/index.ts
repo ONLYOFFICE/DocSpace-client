@@ -99,7 +99,7 @@ declare global {
     DocSpace: {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
     };
-    DocSpaceConfig: {
+    DocSpaceConfig?: {
       pdfViewerUrl: string;
       wrongPortalNameUrl?: string;
       api: {
@@ -146,6 +146,7 @@ declare global {
       toDataURL: () => string;
     };
     dataLayer?: Record<string, unknown>[];
+    errorOnLoad?: Error;
   }
 
   export type ContextMenuModel =

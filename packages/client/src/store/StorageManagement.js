@@ -44,7 +44,7 @@ const FILTER_COUNT = 6;
 
 class StorageManagement {
   isInit = false;
-  portalInfo = null;
+  portalInfo = {};
   activeUsersCount = null;
   filesUsedSpace = {};
   quotaSettings = {};

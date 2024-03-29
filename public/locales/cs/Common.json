@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "O nás",
   "AboutCompanyTitle": "O tomto programu",
   "AccessDenied": "Přístup odepřen",
@@ -96,6 +96,7 @@
   "DenyAccess": "Zamítnout přístup",
   "Description": "Popis",
   "DeveloperTools": "Nástroje pro vývojáře",
+  "Disabled": "Deaktivováno",
   "Disconnect": "Odpojit",
   "DocSpaceAdmin": "Správce prostoru DocSpace",
   "DocSpaceOwner": "Majitel DocSpace",
@@ -169,6 +170,7 @@
   "Info": "Info",
   "InfoPanel": "Informační panel",
   "Invite": "Pozvat",
+  "Invited": "Pozvánka na",
   "InviteUsers": "Odkaz pozvánky",
   "IpAddress": "IP adresa",
   "Kilobyte": "KB",

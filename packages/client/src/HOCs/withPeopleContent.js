@@ -49,6 +49,7 @@ export default function withContent(WrappedContent) {
     const { mobilePhone, email, role, displayName, avatar } = item;
 
     const onContentRowSelect = (checked, user) => {
+      setBufferSelection(null);
       checked ? selectUser(user) : deselectUser(user);
     };
 

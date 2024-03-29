@@ -334,9 +334,7 @@ const StyledComboButton = styled.div<{
     color: ${(props) =>
       props.isDisabled
         ? props.theme.comboBox.label.disabledColor
-        : props.isSelected
-          ? props.theme.comboBox.label.selectedColor
-          : props.theme.comboBox.label.color};
+        : props.theme.comboBox.label.selectedColor};
 
     max-width: ${(props) =>
       props.scaled ? "100%" : props.theme.comboBox.label.maxWidth};

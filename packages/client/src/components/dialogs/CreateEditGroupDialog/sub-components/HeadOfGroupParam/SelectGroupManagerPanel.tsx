@@ -47,7 +47,7 @@ const SelectGroupManagerPanel = ({
   const accessOptions = getAccessOptions(t);
 
   const onSelectGroupManager = (newGroupManager: object[]) => {
-    setGroupManager(...newGroupManager);
+    setGroupManager(newGroupManager[0]);
   };
 
   return (
@@ -63,6 +63,8 @@ const SelectGroupManagerPanel = ({
           defaultAccess={ShareAccessRights.FullAccess}
           withoutBackground
           withBlur={false}
+          isMultiSelect={false}
+          disableDisabledUsers
         />
       }
     />

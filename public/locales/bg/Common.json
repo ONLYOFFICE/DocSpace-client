@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Относно",
   "AboutCompanyTitle": "За тази програма",
   "AccessDenied": "Достъпът отказан",
@@ -96,6 +96,7 @@
   "DenyAccess": "Откажи достъп",
   "Description": "Описание",
   "DeveloperTools": "Инструменти за разработчици",
+  "Disabled": "Деактивиран",
   "Disconnect": "Прекъсни връзката",
   "DocSpaceAdmin": "Администратор на DocSpace",
   "DocSpaceOwner": "DocSpace собственик",
@@ -169,6 +170,7 @@
   "Info": "Информация",
   "InfoPanel": "Информационен панел",
   "Invite": "Каня",
+  "Invited": "Поканени",
   "InviteUsers": "Поканете потребители",
   "IpAddress": "IP адрес",
   "Kilobyte": "KB",

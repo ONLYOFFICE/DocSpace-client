@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "O aplikácii",
   "AboutCompanyTitle": "O programe",
   "AccessDenied": "Prístup bol zamietnutý",
@@ -96,6 +96,7 @@
   "DenyAccess": "Zamietnuť prístup",
   "Description": "Popis",
   "DeveloperTools": "Nástroje pre vývojárov",
+  "Disabled": "Vypnuté",
   "Disconnect": "Odpojiť",
   "DocSpaceAdmin": "Administrátor DocSpace",
   "DocSpaceOwner": "Vlastník DocSpace",
@@ -169,6 +170,7 @@
   "Info": "Informácie",
   "InfoPanel": "Informačný panel",
   "Invite": "Pozvať",
+  "Invited": "Pozvaný",
   "InviteUsers": "Pozvať používateľov",
   "IpAddress": "IP adresa",
   "Kilobyte": "KB",

@@ -55,17 +55,18 @@ const GroupsRow = ({
   const onRowClick = (e) => {
     if (e.target?.tagName === "SPAN" || e.target?.tagName === "A") return;
 
-    setBufferSelection(item);
-
     if (selection.length === 1 && selection[0].id === item.id) {
+      setBufferSelection(null);
       setSelection([]);
       return;
     }
 
+    setBufferSelection(item);
     setSelection([item]);
   };
 
   const onSelect = (e) => {
+    setBufferSelection(null);
     if (!isChecked) setSelection([...selection, item]);
     else setSelection(selection.filter((g) => g.id !== item.id));
   };

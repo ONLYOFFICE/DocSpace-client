@@ -61,6 +61,8 @@ class GroupsStore {
 
   groupsIsIsLoading = false;
 
+  insideGroupIsLoading = false;
+
   currentGroup: TGroup | null = null;
 
   insideGroupFilter = InsideGroupFilter.getDefault();
@@ -295,6 +297,7 @@ class GroupsStore {
     filterData.total = filteredMembersRes.total;
 
     group && this.setCurrentGroup(group);
+
     this.peopleStore.usersStore.setUsers(filteredMembersRes.items);
 
     if (updateFilter) {
@@ -311,8 +314,8 @@ class GroupsStore {
   }
 
   fetchMoreInsideGroupUsers = async () => {
-    if (!this.hasMoreInsideGroupUsers || this.groupsIsIsLoading) return;
-    this.groupsIsIsLoading = true;
+    if (!this.hasMoreInsideGroupUsers || this.insideGroupIsLoading) return;
+    this.insideGroupIsLoading = true;
 
     const newFilter = this.insideGroupFilter.clone();
     newFilter.page += 1;
@@ -326,7 +329,7 @@ class GroupsStore {
         ...res.items,
       ]);
       this.insideGroupFilter = newFilter;
-      this.groupsIsIsLoading = false;
+      this.insideGroupIsLoading = false;
     });
   };
 

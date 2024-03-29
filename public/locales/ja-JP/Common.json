@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "について",
   "AboutCompanyTitle": "本プログラムについて",
   "AccessDenied": "アクセス拒否",
@@ -96,6 +96,7 @@
   "DenyAccess": "アクセスの拒否",
   "Description": "説明",
   "DeveloperTools": "開発者ツール",
+  "Disabled": "無効",
   "Disconnect": "接続解除",
   "DocSpaceAdmin": "DocSpaceの管理者",
   "DocSpaceOwner": "DocSpaceの所有者",
@@ -169,6 +170,7 @@
   "Info": "情報",
   "InfoPanel": "インフォメーションパネル",
   "Invite": "招待する",
+  "Invited": "招待済み",
   "InviteUsers": "ユーザーを招待する",
   "IpAddress": "IPアドレス",
   "Kilobyte": "KB",

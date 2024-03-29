@@ -227,7 +227,7 @@ export default function withFileActions(WrappedFileItem) {
         // setRoomType(item.roomType);
       }
 
-      openFileAction(item, t);
+      openFileAction(item, t, e);
     };
 
     onSelectTag = (tag) => {

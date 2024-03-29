@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2010-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,41 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ShareAccessRights } from "@docspace/shared/enums";
-import AddUsersPanel from "../../../../panels/AddUsersPanel";
-import { getAccessOptions } from "../../../../panels/InvitePanel/utils";
-import { useTranslation } from "react-i18next";
+import { combineUrl } from "./combineUrl";
 
-interface AddUsersProps {
-  isVisible: boolean;
-  onClose: () => void;
-  onParentPanelClose: () => void;
-}
+export const openingNewTab = (url: string, e: React.MouseEvent) => {
+  if (e?.ctrlKey || e?.metaKey || e?.button === 1) {
+    const path = combineUrl(window.DocSpaceConfig?.proxy?.url, url);
 
-const AddUsers = ({
-  isVisible,
-  onClose,
-  onParentPanelClose,
-}: AddUsersProps) => {
-  const { t } = useTranslation(["InviteDialog"]);
-  const accessOptions = getAccessOptions(t);
+    window.open(path, "_blank");
 
-  return (
-    <AddUsersPanel
-      visible={isVisible}
-      onClose={onClose}
-      onParentPanelClose={onParentPanelClose}
-      //   tempDataItems={inviteItems}
-      //   setDataItems={addItems}
-      accessOptions={accessOptions}
-      isMultiSelect
-      isEncrypted={true}
-      defaultAccess={ShareAccessRights.FullAccess}
-      //   withoutBackground={isMobileView}
-      //   withBlur={!isMobileView}
-      //   roomId={roomId}
-    />
-  );
+    return true;
+  }
+
+  return false;
 };
-
-export default AddUsers;

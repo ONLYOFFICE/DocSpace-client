@@ -303,17 +303,24 @@ export function deleteAppearanceTheme(id) {
   });
 }
 
-export function getLogoText() {
+export function getLogoText(isManagement: boolean = false) {
+  const url = "/settings/whitelabel/logotext";
+
   return request({
     method: "get",
-    url: `/settings/whitelabel/logotext`,
+    url: isManagement ? `${url}?isDefault=true` : url,
   });
 }
 
-export async function getLogoUrls(headers = null) {
+export async function getLogoUrls(
+  headers = null,
+  isManagement: boolean = false,
+) {
+  const url = "/settings/whitelabel/logos";
+
   const options: AxiosRequestConfig = {
     method: "get",
-    url: `/settings/whitelabel/logos`,
+    url: isManagement ? `${url}?isDefault=true` : url,
   };
 
   if (headers) options.headers = headers;
@@ -325,7 +332,7 @@ export async function getLogoUrls(headers = null) {
   return res;
 }
 
-export function setWhiteLabelSettings(data, isManagement) {
+export function setWhiteLabelSettings(data, isManagement: boolean = false) {
   const url = "/settings/whitelabel/save";
 
   const options = {
@@ -337,14 +344,16 @@ export function setWhiteLabelSettings(data, isManagement) {
   return request(options);
 }
 
-export function getIsDefaultWhiteLabel() {
+export function getIsDefaultWhiteLabel(isManagement: boolean = false) {
+  const url = "/settings/whitelabel/logos/isdefault";
+
   return request({
     method: "get",
-    url: `/settings/whitelabel/logos/isdefault`,
+    url: isManagement ? `${url}?isDefault=true` : url,
   });
 }
 
-export function restoreWhiteLabelSettings(isManagement) {
+export function restoreWhiteLabelSettings(isManagement: boolean = false) {
   const url = "/settings/whitelabel/restore";
 
   return request({

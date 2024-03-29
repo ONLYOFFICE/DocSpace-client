@@ -627,6 +627,16 @@ const Dark: TTheme = {
 
     colorDisabledFileIcons: "#5c5c5c",
 
+    backdrop: {
+      backgroundRGBA: {
+        r: 27,
+        g: 27,
+        b: 27,
+        a: 0.4,
+      },
+      blur: 18,
+    },
+
     content: {
       backgroundColor: black,
       modalBorderRadius: "6px",

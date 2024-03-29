@@ -30,15 +30,15 @@ import { Base, Dark, TColorScheme, TTheme } from "@docspace/shared/themes";
 import { getSystemTheme } from "@docspace/shared/utils";
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getAppearanceTheme } from "@docspace/shared/api/settings";
-import { TUser } from "@docspace/shared/api/people/types";
+import { TGetColorTheme } from "@docspace/shared/api/settings/types";
 
 const SYSTEM_THEME = getSystemTheme();
 
 export interface UseThemeProps {
-  user?: TUser;
+  colorTheme?: TGetColorTheme;
 }
 
-const useTheme = ({ user }: UseThemeProps) => {
+const useTheme = ({ colorTheme }: UseThemeProps) => {
   const [currentColorTheme, setCurrentColorTheme] =
     React.useState<TColorScheme>({} as TColorScheme);
 
@@ -52,23 +52,18 @@ const useTheme = ({ user }: UseThemeProps) => {
   const getCurrentColorTheme = React.useCallback(async () => {
     if (isRequestRunning.current) return;
     isRequestRunning.current = true;
-    const colorThemes = await getAppearanceTheme();
+    const colorThemes = colorTheme ? colorTheme : await getAppearanceTheme();
 
-    const colorTheme = colorThemes.themes.find(
+    const currColorTheme = colorThemes.themes.find(
       (t) => t.id === colorThemes.selected,
     );
 
     isRequestRunning.current = false;
-    if (colorTheme) setCurrentColorTheme(colorTheme);
-  }, []);
+    if (currColorTheme) setCurrentColorTheme(currColorTheme);
+  }, [colorTheme]);
 
   const getUserTheme = React.useCallback(() => {
-    if (!user?.theme) return;
-    let theme = user.theme;
-
-    if (user.theme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
-
-    if (theme === ThemeKeys.BaseStr) {
+    if (SYSTEM_THEME === ThemeKeys.BaseStr) {
       setTheme({
         ...Base,
         currentColorScheme: currentColorTheme,
@@ -83,7 +78,7 @@ const useTheme = ({ user }: UseThemeProps) => {
       currentColorScheme: currentColorTheme,
       interfaceDirection: "ltr",
     });
-  }, [currentColorTheme, user?.theme]);
+  }, [currentColorTheme]);
 
   React.useEffect(() => {
     getCurrentColorTheme();

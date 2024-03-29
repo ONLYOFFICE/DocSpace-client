@@ -26,11 +26,12 @@
 
 "use server";
 
-import { headers } from "next/headers";
+import { headers, cookies } from "next/headers";
 
 import {
   TCapabilities,
   TGetColorTheme,
+  TGetSsoSettings,
   TSettings,
   TThirdPartyProvider,
   TVersionBuild,
@@ -132,6 +133,14 @@ export const getData = async () => {
     TWhiteLabel[],
     TThirdPartyProvider[] | undefined,
     TCapabilities | undefined,
-    any,
+    TGetSsoSettings | undefined,
   ];
+};
+
+export const updateCookie = (name: string, value: string, options: object) => {
+  "use server";
+
+  const cookieStore = cookies();
+
+  cookieStore.set(name, value, options);
 };

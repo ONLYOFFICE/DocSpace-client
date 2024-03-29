@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -25,36 +26,61 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { i18n } from "i18next";
-import { TSettings } from "@docspace/shared/api/settings/types";
+import { Trans, useTranslation } from "react-i18next";
 
-import { getI18NInstance } from "@/utils/i18n";
+import { Text } from "@docspace/shared/components/text";
 
-interface UseI18NProps {
-  settings?: TSettings;
-}
+import { GreetingContainersProps } from "@/types";
+import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";
 
-const useI18N = ({ settings }: UseI18NProps) => {
-  const [i18n, setI18N] = React.useState<i18n>(
-    getI18NInstance(settings?.culture ?? "en") ?? ({} as i18n),
+const GreetingContainer = ({
+  roomName,
+  firstName,
+  lastName,
+  greetingSettings,
+  logoUrl,
+  type,
+}: GreetingContainersProps) => {
+  const { t } = useTranslation();
+
+  return (
+    <>
+      <img src={logoUrl} className="logo-wrapper" alt="greeting-logo" />
+      {type !== "invitation" && (
+        <Text
+          fontSize="23px"
+          fontWeight={700}
+          textAlign="center"
+          className="greeting-title"
+        >
+          {greetingSettings}
+        </Text>
+      )}
+
+      {type === "invitation" && (
+        <div className="greeting-container">
+          <Text fontSize="16px">
+            <Trans
+              t={t}
+              i18nKey={roomName ? "InvitationToRoom" : "InvitationToPortal"}
+              ns="Common"
+              defaults={roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT}
+              values={{
+                firstName,
+                lastName,
+                ...(roomName
+                  ? { roomName }
+                  : { spaceAddress: window.location.host }),
+              }}
+              components={{
+                1: <Text fontWeight={600} as="strong" fontSize="16px" />,
+              }}
+            />
+          </Text>
+        </div>
+      )}
+    </>
   );
-
-  const isInit = React.useRef(false);
-
-  React.useEffect(() => {
-    if (!settings?.timezone) return;
-    window.timezone = settings.timezone;
-  }, [settings?.timezone]);
-
-  React.useEffect(() => {
-    isInit.current = true;
-
-    const instance = getI18NInstance(settings?.culture ?? "en");
-
-    if (instance) setI18N(instance);
-  }, [settings?.culture]);
-
-  return { i18n };
 };
 
-export default useI18N;
+export default GreetingContainer;

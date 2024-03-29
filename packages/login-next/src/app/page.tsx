@@ -24,18 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { redirect } from "next/navigation";
+"use server";
 
-import { checkIsAuthenticated, getData } from "@/utils/actions";
+import Login from "@/components/Login";
 
-async function Page({}) {
-  const isAuth = await checkIsAuthenticated();
-
-  if (isAuth) redirect("/");
-
-  getData();
-
-  return <p>MAIN</p>;
+async function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string };
+}) {
+  return <Login searchParams={searchParams} />;
 }
 
 export default Page;

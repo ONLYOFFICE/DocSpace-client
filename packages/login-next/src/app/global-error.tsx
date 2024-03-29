@@ -30,7 +30,6 @@ import { useCallback, useState, useLayoutEffect, useMemo } from "react";
 
 import { ThemeProvider } from "@docspace/shared/components/theme-provider";
 import { Error520SSR } from "@docspace/shared/components/errors/Error520";
-import { getUser } from "@docspace/shared/api/people";
 import { getSettings } from "@docspace/shared/api/settings";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type {
@@ -47,15 +46,14 @@ import FirebaseHelper from "@docspace/shared/utils/firebase";
 import pkg from "../../package.json";
 
 export default function GlobalError({ error }: { error: Error }) {
-  const [user, setUser] = useState<TUser>();
   const [settings, setSettings] = useState<TSettings>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setError] = useState<boolean>(false);
 
-  const { i18n } = useI18N({ settings, user });
+  const { i18n } = useI18N({ settings });
   const { currentDeviceType } = useDeviceType();
   const { logoUrls } = useWhiteLabel();
-  const { theme } = useTheme({ user });
+  const { theme } = useTheme({});
   const firebaseHelper = useMemo(() => {
     return new FirebaseHelper(settings?.firebase ?? ({} as TFirebaseSettings));
   }, [settings?.firebase]);
@@ -63,13 +61,9 @@ export default function GlobalError({ error }: { error: Error }) {
   const getData = useCallback(async () => {
     try {
       setIsLoading(true);
-      const [userData, settingsData] = await Promise.all([
-        getUser(),
-        getSettings(),
-      ]);
+      const settingsData = await getSettings();
 
       setSettings(settingsData);
-      setUser(userData);
     } catch (error) {
       setError(true);
       console.error(error);
@@ -93,7 +87,7 @@ export default function GlobalError({ error }: { error: Error }) {
               i18nProp={i18n}
               errorLog={error}
               version={pkg.version}
-              user={user ?? ({} as TUser)}
+              user={{} as TUser}
               whiteLabelLogoUrls={logoUrls}
               firebaseHelper={firebaseHelper}
               currentDeviceType={currentDeviceType}

@@ -325,7 +325,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   }, [userId]);
 
   useEffect(() => {
-    if (!userId || !window.DocSpaceConfig.imageThumbnails) return;
+    if (!userId || !window.DocSpaceConfig?.imageThumbnails) return;
     initIndexedDb();
 
     return () => {

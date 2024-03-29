@@ -113,8 +113,14 @@ const ConvertDialogComponent = (props) => {
         fileId: convertItem.id,
         toFolderId: folderId,
         action: "convert",
-        format: selectedOptionType, // need backend
       };
+
+      if (isXML) {
+        item.format = selectedOptionType;
+      } else {
+        item.format = null;
+      }
+
       item.fileInfo = convertItem;
       convertFile(item, t, convertItem.isOpen);
     } else {

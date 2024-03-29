@@ -78,7 +78,6 @@ declare global {
     greetingSettings: string;
     ownerId: string;
     passwordHash: PasswordHashType;
-    personal: boolean;
     tenantAlias: string;
     tenantStatus: number;
     thirdpartyEnable: boolean;

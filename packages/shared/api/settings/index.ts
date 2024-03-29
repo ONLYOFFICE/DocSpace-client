@@ -45,6 +45,7 @@ import {
   TCapabilities,
   TThirdPartyProvider,
   TPaymentSettings,
+  TGetSsoSettings,
 } from "./types";
 
 export async function getSettings(withPassword = false, headers = null) {
@@ -792,13 +793,15 @@ export function toggleTipsSubscription() {
   return request(options);
 }
 
-export function getCurrentSsoSettings() {
-  const options = {
+export async function getCurrentSsoSettings() {
+  const options: AxiosRequestConfig = {
     method: "get",
     url: "/settings/ssov2",
   };
 
-  return request(options);
+  const res = (await request(options)) as TGetSsoSettings;
+
+  return res;
 }
 
 export function submitSsoForm(data) {

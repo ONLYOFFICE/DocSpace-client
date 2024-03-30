@@ -212,7 +212,7 @@ const FolderInput = ({
           isThirdParty
           onSelectTreeNode={setTreeNode}
           passedFoldersTree={[thirdpartyAccount]}
-          currentFolderId={thirdpartyAccount.id}
+          currentFolderId={treeNode ? treeNode.id : thirdpartyAccount.id}
         />
       )}
     </>

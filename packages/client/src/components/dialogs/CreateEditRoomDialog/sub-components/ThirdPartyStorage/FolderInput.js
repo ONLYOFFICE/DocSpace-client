@@ -183,16 +183,20 @@ const FolderInput = ({
 
   if (!thirdpartyAccount.id) return null;
 
-  let title = `${t("RootFolderLabel")}/${path}`;
+  let title = createNewFolderIsChecked || path ? "/" : t("RootFolderLabel");
+  title += path;
   if (createNewFolderIsChecked) {
-    title += `${path ? "/" : ""}${roomTitle || t("Files:NewRoom")}`;
+    title += path ? "/" : "";
+    title += roomTitle || t("Files:NewRoom");
   }
 
   return (
     <>
       <StyledFolderInput noRoomTitle={!roomTitle} onClick={onOpen}>
         <div className="folder-path-wrapper" title={title}>
-          <span className="root_label">{t("RootFolderLabel")}/</span>
+          <span className="root_label">
+            {createNewFolderIsChecked || path ? "/" : t("RootFolderLabel")}
+          </span>
           <span className="path">{path}</span>
           {createNewFolderIsChecked && (
             <span className="room_title">

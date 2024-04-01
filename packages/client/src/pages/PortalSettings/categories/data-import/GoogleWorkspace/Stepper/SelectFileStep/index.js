@@ -150,9 +150,16 @@ const SelectFileStep = ({
         setFileName(null);
         clearInterval(uploadInterval.current);
       } else if (res.isCompleted || res.progress === 100) {
-        setUsers(res.parseResult);
-        setShowReminder(true);
-        onNextStep && onNextStep();
+        if (
+          res.parseResult.users.length +
+            res.parseResult.existUsers.length +
+            res.parseResult.withoutEmailUsers.length >
+          0
+        ) {
+          setUsers(res.parseResult);
+          setShowReminder(true);
+          onNextStep && onNextStep();
+        }
         clearInterval(uploadInterval.current);
       }
     } catch (error) {
@@ -216,8 +223,18 @@ const SelectFileStep = ({
             setIsFileLoading(false);
             setIsVisible(false);
             setProgress(100);
-            setUsers(res.parseResult);
-            setShowReminder(true);
+
+            if (
+              res.parseResult.users.length +
+                res.parseResult.existUsers.length +
+                res.parseResult.withoutEmailUsers.length >
+              0
+            ) {
+              setUsers(res.parseResult);
+              setShowReminder(true);
+            } else {
+              cancelMigration();
+            }
           }
         } catch (error) {
           toastr.error(error || t("Common:SomethingWentWrong"));

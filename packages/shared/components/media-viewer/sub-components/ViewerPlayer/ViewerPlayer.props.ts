@@ -40,6 +40,7 @@ interface ViewerPlayerProps {
   panelVisible: boolean;
   isPreviewFile: boolean;
   isOpenContextMenu: boolean;
+  isThirdParty?: boolean;
   mobileDetails: JSX.Element;
   thumbnailSrc?: string;
   devices: DevicesType;

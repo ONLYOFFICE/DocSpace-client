@@ -40,9 +40,9 @@ import { Wrapper } from "./CreatedPDFFormDialog.styled";
 import type { CreatedPDFFormDialogProps } from "./CreatedPDFFormDialog.types";
 
 export const CreatedPDFFormDialog = inject<TStore>(
-  ({ dialogsStore, contextOptionsStore, selectedFolderStore }) => {
+  ({ filesStore, contextOptionsStore, selectedFolderStore }) => {
     const { createdPDFFormDialogData: data, setCreatedPDFFormDialogVisible } =
-      dialogsStore;
+      filesStore;
 
     const { onClickInviteUsers, onClickLinkFillForm } = contextOptionsStore;
     const { id, roomType, security } = selectedFolderStore;
@@ -68,8 +68,6 @@ export const CreatedPDFFormDialog = inject<TStore>(
       onClickLinkFillForm,
       setCreatedPDFFormDialogVisible,
     }: CreatedPDFFormDialogProps) => {
-      const isFill = false;
-
       const { t } = useTranslation(["PDFFormDialog", "Common"]);
 
       const onClose = () => {
@@ -77,8 +75,10 @@ export const CreatedPDFFormDialog = inject<TStore>(
       };
 
       const onSubmit = () => {
-        if (isFill) {
-          onClickLinkFillForm?.(data);
+        if (!data) return onClose();
+
+        if (data.isFill) {
+          onClickLinkFillForm?.(data.file);
         } else if (Boolean(roomType) && security?.EditAccess) {
           onClickInviteUsers?.(selectedFolderId, roomType);
         }
@@ -86,18 +86,20 @@ export const CreatedPDFFormDialog = inject<TStore>(
         onClose();
       };
 
-      const description = isFill ? (
+      const description = data?.isFill ? (
         <Trans
           t={t}
-          i18nKey="PDFFormSuccessfullyCreatedDescription" // optional -> fallbacks to defaults if not provided
-          values={{ fileName: "New form.pdf" }}
+          i18nKey="PDFFormSuccessfullyCreatedDescription"
+          values={{ fileName: data?.file.title }}
           components={{ strong: <strong /> }}
         />
       ) : (
         t("PDFFormInviteDescription")
       );
-      const primaryButtonLabel = isFill ? t("Common:Fill") : t("Common:Invite");
-      const cancelButtonLabel = isFill
+      const primaryButtonLabel = data?.isFill
+        ? t("Common:Fill")
+        : t("Common:Invite");
+      const cancelButtonLabel = data?.isFill
         ? t("Common:CancelButton")
         : t("Common:Later");
 

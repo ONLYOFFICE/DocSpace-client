@@ -273,6 +273,7 @@ export default inject(
     backup,
     createEditRoomStore,
     pluginStore,
+    filesStore,
   }) => {
     const {
       ownerPanelVisible,
@@ -318,8 +319,9 @@ export default inject(
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
       shareFolderDialogVisible,
-      createdPDFFormDialogVisible,
     } = dialogsStore;
+
+    const { createdPDFFormDialogVisible } = filesStore;
 
     const { preparationPortalDialogVisible } = backup;
 

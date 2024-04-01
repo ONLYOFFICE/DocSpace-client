@@ -46,7 +46,10 @@ import { toastr } from "@docspace/shared/components/toast";
 import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
 import { getDaysRemaining } from "@docspace/shared/utils/common";
-import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import {
+  MEDIA_VIEW_URL,
+  PDF_FORM_DIALOG_KEY,
+} from "@docspace/shared/constants";
 
 import {
   getCategoryType,
@@ -179,6 +182,9 @@ class FilesStore {
 
   hotkeysClipboard = [];
 
+  createdPDFFormDialogVisible = false;
+  createdPDFFormDialogData = null;
+
   constructor(
     authStore,
     selectedFolderStore,
@@ -247,6 +253,9 @@ class FilesStore {
             break;
           case "delete":
             this.wsModifyFolderDelete(opt);
+            break;
+          case "create-form":
+            this.wsCreatedPDFForm(opt);
             break;
         }
 
@@ -637,6 +646,31 @@ class FilesStore {
         }
       });
     }
+  };
+
+  wsCreatedPDFForm = (option) => {
+    if (!option.data) return;
+
+    const file = JSON.parse(option.data);
+
+    const key = `${PDF_FORM_DIALOG_KEY}-${this.userStore.user.id}`;
+
+    const isFirst = localStorage.getItem(key);
+
+    if (this.selectedFolderStore.id === file.folderId) {
+      if (!isFirst) {
+        localStorage.setItem(key, "true");
+        return this.setCreatedPDFFormDialogVisible(true, {
+          isFill: true,
+          file,
+        });
+      }
+    }
+  };
+
+  setCreatedPDFFormDialogVisible = (visible, data = null) => {
+    this.createdPDFFormDialogVisible = visible;
+    this.createdPDFFormDialogData = data;
   };
 
   setIsErrorRoomNotAvailable = (state) => {

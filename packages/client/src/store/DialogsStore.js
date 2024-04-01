@@ -117,9 +117,6 @@ class DialogsStore {
 
   selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;
 
-  createdPDFFormDialogVisible = false;
-  createdPDFFormDialogData = null;
-
   constructor(
     authStore,
     treeFoldersStore,
@@ -518,11 +515,6 @@ class DialogsStore {
 
   setCancelUploadDialogVisible = (visible) => {
     this.cancelUploadDialogVisible = visible;
-  };
-
-  setCreatedPDFFormDialogVisible = (visible, data = null) => {
-    this.createdPDFFormDialogVisible = visible;
-    this.createdPDFFormDialogData = data;
   };
 }
 

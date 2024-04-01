@@ -109,6 +109,10 @@ const Navigation = ({
     setFirstClick(true);
   }, [isRootFolder, navigationItems?.length]);
 
+  const onCloseDropBox = () => {
+    if (isOpen) setIsOpen(false);
+  };
+
   const onMissClick = React.useCallback(
     (e: MouseEvent) => {
       e.preventDefault();
@@ -236,6 +240,7 @@ const Navigation = ({
                 burgerLogo={burgerLogo}
                 currentDeviceType={currentDeviceType}
                 navigationTitleContainerNode={navigationTitleContainerNode}
+                onCloseDropBox={onCloseDropBox}
               />
             </>
           )}

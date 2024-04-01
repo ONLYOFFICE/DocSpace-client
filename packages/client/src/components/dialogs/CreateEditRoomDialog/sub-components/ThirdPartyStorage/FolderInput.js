@@ -183,7 +183,7 @@ const FolderInput = ({
 
   if (!thirdpartyAccount.id) return null;
 
-  let title = `${t("RootLabel")}/${path}`;
+  let title = `${t("RootFolderLabel")}/${path}`;
   if (createNewFolderIsChecked) {
     title += `${path ? "/" : ""}${roomTitle || t("Files:NewRoom")}`;
   }
@@ -192,7 +192,7 @@ const FolderInput = ({
     <>
       <StyledFolderInput noRoomTitle={!roomTitle} onClick={onOpen}>
         <div className="folder-path-wrapper" title={title}>
-          <span className="root_label">{t("RootLabel")}/</span>
+          <span className="root_label">{t("RootFolderLabel")}/</span>
           <span className="path">{path}</span>
           {createNewFolderIsChecked && (
             <span className="room_title">
@@ -200,7 +200,7 @@ const FolderInput = ({
             </span>
           )}
         </div>
-        <div className="icon-wrapper">
+        <div title={t("Common:SelectFolder")} className="icon-wrapper">
           <IconButton size={16} iconName={FolderReactSvgUrl} isClickable />
         </div>
       </StyledFolderInput>
@@ -212,6 +212,7 @@ const FolderInput = ({
           isThirdParty
           onSelectTreeNode={setTreeNode}
           passedFoldersTree={[thirdpartyAccount]}
+          acceptButtonLabel={t("Common:SelectAction")}
           currentFolderId={treeNode ? treeNode.id : thirdpartyAccount.id}
         />
       )}

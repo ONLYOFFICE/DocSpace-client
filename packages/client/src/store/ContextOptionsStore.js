@@ -356,6 +356,8 @@ class ContextOptionsStore {
     const { shared, navigationPath, canCopyPublicLink } =
       this.selectedFolderStore;
 
+    const isArchive = item.rootFolderType === FolderType.Archive;
+
     const { href } = item;
     const sharedItem = navigationPath.find((r) => r.shared);
 
@@ -363,7 +365,7 @@ class ContextOptionsStore {
       (sharedItem && sharedItem.canCopyPublicLink) ||
       (shared && canCopyPublicLink);
 
-    if (isShared && !item.isFolder) {
+    if (isShared && !item.isFolder && !isArchive) {
       const fileLinkData = await getFileLink(item.id);
       copy(fileLinkData.sharedTo.shareLink);
       return toastr.success(t("Translations:LinkCopySuccess"));
@@ -1279,7 +1281,7 @@ class ContextOptionsStore {
         label: t("Common:ReconnectStorage"),
         icon: ReconnectSvgUrl,
         onClick: () => this.onClickReconnectStorage(item, t),
-        disabled: false,
+        disabled: !item.security?.Reconnect,
       },
       {
         id: "option_edit-room",
@@ -1554,15 +1556,28 @@ class ContextOptionsStore {
     const pluginItems = this.onLoadPlugins(item);
 
     if (pluginItems.length > 0) {
-      options.splice(1, 0, {
-        id: "option_plugin-actions",
-        key: "plugin_actions",
-        label: t("Common:Actions"),
-        icon: PluginActionsSvgUrl,
-        disabled: false,
+      if (isDesktop()) {
+        options.splice(1, 0, {
+          id: "option_plugin-actions",
+          key: "plugin_actions",
+          label: t("Common:Actions"),
+          icon: PluginActionsSvgUrl,
+          disabled: false,
 
-        onLoad: () => this.onLoadPlugins(item),
-      });
+          onLoad: () => this.onLoadPlugins(item),
+        });
+      } else {
+        pluginItems.forEach((plugin) => {
+          options.splice(1, 0, {
+            id: `option_${plugin.key}`,
+            key: plugin.key,
+            label: plugin.label,
+            icon: plugin.icon,
+            disabled: false,
+            onClick: plugin.onClick,
+          });
+        });
+      }
     }
 
     const { isCollaborator } = this.userStore?.user || {

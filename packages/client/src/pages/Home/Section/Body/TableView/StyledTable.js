@@ -277,7 +277,8 @@ const StyledTableRow = styled(TableRow)`
   }
 
   .item-file-name {
-    padding: 14px 8px 14px 0px;
+    padding-block: 14px;
+    padding-inline: 0 8px;
   }
 
   ${(props) =>

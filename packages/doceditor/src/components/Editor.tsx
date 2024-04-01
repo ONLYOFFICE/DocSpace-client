@@ -201,7 +201,8 @@ const Editor = ({
   if (successAuth) {
     if (
       fileInfo?.rootFolderType !== FolderType.USER &&
-      fileInfo?.rootFolderType !== FolderType.SHARE
+      fileInfo?.rootFolderType !== FolderType.SHARE &&
+      fileInfo?.rootFolderType !== FolderType.Recent
     ) {
       //TODO: remove condition for share in my
       newConfig.events.onRequestUsers = onSDKRequestUsers;

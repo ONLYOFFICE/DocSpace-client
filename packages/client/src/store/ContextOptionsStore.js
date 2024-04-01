@@ -356,6 +356,8 @@ class ContextOptionsStore {
     const { shared, navigationPath, canCopyPublicLink } =
       this.selectedFolderStore;
 
+    const isArchive = item.rootFolderType === FolderType.Archive;
+
     const { href } = item;
     const sharedItem = navigationPath.find((r) => r.shared);
 
@@ -363,7 +365,7 @@ class ContextOptionsStore {
       (sharedItem && sharedItem.canCopyPublicLink) ||
       (shared && canCopyPublicLink);
 
-    if (isShared && !item.isFolder) {
+    if (isShared && !item.isFolder && !isArchive) {
       const fileLinkData = await getFileLink(item.id);
       copy(fileLinkData.sharedTo.shareLink);
       return toastr.success(t("Translations:LinkCopySuccess"));
@@ -1279,7 +1281,7 @@ class ContextOptionsStore {
         label: t("Common:ReconnectStorage"),
         icon: ReconnectSvgUrl,
         onClick: () => this.onClickReconnectStorage(item, t),
-        disabled: false,
+        disabled: !item.security?.Reconnect,
       },
       {
         id: "option_edit-room",

@@ -80,9 +80,9 @@ const StyledFolderInput = styled.div`
       theme.interfaceDirection === "rtl"
         ? `padding-right: 8px;`
         : `padding-left: 8px;`}
-    background-color: ${(props) =>
+    /* background-color: ${(props) =>
       props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
-        .background};
+        .background}; */
     color: ${(props) =>
       props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
         .rootLabelColor};

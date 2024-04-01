@@ -799,7 +799,7 @@ const SectionHeaderContent = (props) => {
         label: t("Common:ReconnectStorage"),
         icon: ReconnectSvgUrl,
         onClick: () => onClickReconnectStorage(selectedFolder, t),
-        disabled: !selectedFolder.providerKey || !isRoom,
+        disabled: !security?.Reconnect,
       },
       {
         id: "header_option_edit-room",

@@ -1279,7 +1279,7 @@ class ContextOptionsStore {
         label: t("Common:ReconnectStorage"),
         icon: ReconnectSvgUrl,
         onClick: () => this.onClickReconnectStorage(item, t),
-        disabled: false,
+        disabled: !item.security?.Reconnect,
       },
       {
         id: "option_edit-room",

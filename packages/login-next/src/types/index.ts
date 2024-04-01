@@ -30,6 +30,7 @@ import {
   TCapabilities,
   TGetColorTheme,
   TGetSsoSettings,
+  TPasswordHash,
   TSettings,
   TThirdPartyProvider,
   TVersionBuild,
@@ -56,7 +57,7 @@ export type GreetingContainersProps = {
   firstName?: string;
   lastName?: string;
   greetingSettings?: string;
-  logoUrl: string;
+  logoUrl?: string;
   type: string;
 };
 
@@ -88,4 +89,23 @@ export type RegisterModalDialogProps = {
   trustedDomains?: string[];
   errorText?: string;
   isShowError?: boolean;
+};
+
+export type LoginFormProps = {
+  isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
+  hashSettings: TPasswordHash;
+  isDesktop: boolean;
+  match: { [key: string]: string };
+  openRecoverDialog: () => void;
+  enableAdmMess: boolean;
+  recaptchaPublicKey?: string;
+  emailFromInvitation?: string;
+  cookieSettingsEnabled: boolean;
+};
+
+export type ForgotPasswordModalDialogProps = {
+  isVisible: boolean;
+  userEmail?: string;
+  onDialogClose: () => void;
 };

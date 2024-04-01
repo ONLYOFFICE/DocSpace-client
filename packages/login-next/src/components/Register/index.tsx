@@ -88,7 +88,7 @@ const Register = (props: RegisterProps) => {
     setIsShowError(true);
   };
 
-  const onSendRegisterRequest = async () => {
+  const onSendRegisterRequest = React.useCallback(async () => {
     if (!email.trim() || emailErr) {
       setEmailErr(true);
       setIsShowError(true);
@@ -105,14 +105,17 @@ const Register = (props: RegisterProps) => {
         onRegisterModalClose();
       }
     }
-  };
+  }, []);
 
-  const onKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "Enter") {
-      onSendRegisterRequest();
-      e.preventDefault();
-    }
-  };
+  const onKeyDown = React.useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        onSendRegisterRequest();
+        e.preventDefault();
+      }
+    },
+    [onSendRegisterRequest],
+  );
 
   return enabledJoin && !isAuthenticated ? (
     <>

@@ -27,6 +27,7 @@
 "use client";
 
 import { useContext, useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
 import { TenantStatus } from "@docspace/shared/enums";
@@ -37,17 +38,23 @@ import {
   getLogoFromPath,
   getOAuthToken,
 } from "@docspace/shared/utils/common";
-import { checkIsSSR } from "@docspace/shared/utils/device";
+
 import RecoverAccessModalDialog from "@docspace/shared/components/recover-access-modal-dialog/RecoverAccessModalDialog";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+import { Link, LinkType } from "@docspace/shared/components/link";
+import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
+import { Text } from "@docspace/shared/components/text";
+
+import SSOIcon from "PUBLIC_DIR/images/sso.react.svg?url";
 
 import { DataContext } from "@/providers/DataProvider";
 import { LoginProps } from "@/types";
 import useRecoverDialog from "@/hooks/useRecoverDialog";
 
 import GreetingContainer from "../GreetingContainer";
+import Register from "../Register";
 
 import { LoginContent, LoginFormWrapper } from "./Login.styled";
 
@@ -63,7 +70,7 @@ const Login = ({ searchParams }: LoginProps) => {
   });
 
   const theme = useTheme();
-
+  const { t } = useTranslation(["Login"]);
   const { settings, capabilities, thirdPartyProvider, whiteLabel } =
     useContext(DataContext);
   const {
@@ -96,7 +103,7 @@ const Login = ({ searchParams }: LoginProps) => {
   };
 
   const onSocialButtonClick = useCallback(
-    async (e: React.MouseEvent<HTMLButtonElement | HTMLElement>) => {
+    async (e: React.MouseEvent<Element, MouseEvent>) => {
       const target = e.target as HTMLElement;
       let targetElement = target;
 
@@ -144,14 +151,21 @@ const Login = ({ searchParams }: LoginProps) => {
   );
 
   const bgPattern = getBgPattern(theme.currentColorScheme?.id);
-  const isRegisterContainerVisible = !checkIsSSR() && settings.enabledJoin;
 
   const logo = whiteLabel && Object.values(whiteLabel)[1];
   const logoUrl = !logo
     ? undefined
     : !theme?.isBase
-      ? getLogoFromPath(logo.path.dark)
-      : getLogoFromPath(logo.path.light);
+      ? (getLogoFromPath(logo.path.dark) as string)
+      : (getLogoFromPath(logo.path.light) as string);
+
+  const ssoProps = ssoExists()
+    ? {
+        ssoUrl: capabilities?.ssoUrl,
+        ssoLabel: capabilities?.ssoLabel,
+        ssoSVG: SSOIcon as string,
+      }
+    : {};
 
   return (
     <LoginFormWrapper id="login-page" bgPattern={bgPattern}>
@@ -160,7 +174,7 @@ const Login = ({ searchParams }: LoginProps) => {
         <LoginContent>
           <ColorTheme
             themeId={ThemeId.LinkForgotPassword}
-            isRegisterContainerVisible={isRegisterContainerVisible}
+            isRegisterContainerVisible={settings.enabledJoin}
           >
             <GreetingContainer
               roomName={invitationLinkData.roomName}
@@ -170,16 +184,44 @@ const Login = ({ searchParams }: LoginProps) => {
               greetingSettings={settings.greetingSettings}
               type={invitationLinkData.type}
             />
-            <FormWrapper id="login-form">asd</FormWrapper>
+            <FormWrapper id="login-form">
+              {(oauthDataExists() || ssoExists()) && (
+                <>
+                  <div className="line">
+                    <Text className="or-label">
+                      {t("Common:orContinueWith")}
+                    </Text>
+                  </div>
+                  <SocialButtonsGroup
+                    providers={thirdPartyProvider}
+                    onClick={onSocialButtonClick}
+                    t={t}
+                    isDisabled={isLoading}
+                    {...ssoProps}
+                  />
+                </>
+              )}
+              {settings.enableAdmMess && (
+                <Link
+                  fontWeight={600}
+                  fontSize="13px"
+                  type={LinkType.action}
+                  isHovered
+                  className="login-link recover-link"
+                  onClick={openRecoverDialog}
+                >
+                  {t("RecoverAccess")}
+                </Link>
+              )}
+            </FormWrapper>
           </ColorTheme>
         </LoginContent>
-        {isRegisterContainerVisible && (
+        {settings.enabledJoin && (
           <Register
             id="login_register"
-            enabledJoin={enabledJoin}
-            currentColorScheme={currentColorScheme}
-            trustedDomains={portalSettings?.trustedDomains}
-            trustedDomainsType={portalSettings?.trustedDomainsType}
+            enabledJoin
+            trustedDomains={settings.trustedDomains}
+            trustedDomainsType={settings.trustedDomainsType}
           />
         )}
       </Scrollbar>

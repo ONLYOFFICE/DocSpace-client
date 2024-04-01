@@ -24,9 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const DEFAULT_EMAIL_TEXT =
-  "User <1>{{email}}</1> is already registered in this DocSpace, enter your password or go back to continue with another email.";
-export const DEFAULT_ROOM_TEXT =
-  "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
-export const DEFAULT_PORTAL_TEXT =
-  "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
+import styled, { css } from "styled-components";
+
+export const StyledCaptcha = styled.div<{ isCaptchaError: boolean }>`
+  margin: 24px 0;
+
+  width: fit-content;
+  .captcha-wrapper {
+    ${(props) =>
+      props.isCaptchaError &&
+      css`
+        border: ${props.theme.login.captcha.border};
+        padding: 4px 4px 4px 2px;
+      `};
+
+    margin-bottom: 2px;
+  }
+
+  ${(props) =>
+    props.isCaptchaError &&
+    css`
+      p {
+        color: ${props.theme.login.captcha.color};
+      }
+    `}
+`;

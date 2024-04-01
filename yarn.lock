@@ -3191,6 +3191,7 @@ __metadata:
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
+    "@types/react-google-recaptcha": "npm:^2.1.9"
     babel-plugin-styled-components: "npm:^2.1.4"
     eslint: "npm:^8"
     eslint-config-next: "npm:14.0.4"
@@ -3199,6 +3200,7 @@ __metadata:
     prettier: "npm:^3.2.4"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
+    react-google-recaptcha: "npm:^3.1.0"
     react-i18next: "npm:^13.2.1"
     sass: "npm:^1.59.3"
     shx: "npm:^0.3.4"
@@ -9154,6 +9156,15 @@ __metadata:
   dependencies:
     "@types/react": "npm:*"
   checksum: 310da22244c1bb65a7f213f8727bda821dd211cfb2dd62d1f9b28dd50ef1c196d59e908494bd5f25c13a3844343f3a6135f39fb830aca6f79646fa56c1b56c08
+  languageName: node
+  linkType: hard
+
+"@types/react-google-recaptcha@npm:^2.1.9":
+  version: 2.1.9
+  resolution: "@types/react-google-recaptcha@npm:2.1.9"
+  dependencies:
+    "@types/react": "npm:*"
+  checksum: 5a90bb50fe0a49f2e2ceb7950859cfdbe019aa0a75261451fb50ad83dcd4aa360a1941ab6c9b3c627f2b7a0dab2c6c09d6297469d3d4d02ebaf36b3fc34429b6
   languageName: node
   linkType: hard
 

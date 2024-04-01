@@ -73,6 +73,8 @@ const ImportCompleteStep = ({
   });
   const navigate = useNavigate();
 
+  const [isSaving, setIsSaving] = useState(false);
+
   const onDownloadLog = async () => {
     try {
       await getMigrationLog()
@@ -101,7 +103,11 @@ const ImportCompleteStep = ({
     }
     clearCheckedAccounts();
     clearMigration();
-    setTimeout(() => navigate(-1), 1000);
+    setIsSaving(true);
+    setTimeout(() => {
+      setIsSaving(false);
+      navigate(-1);
+    }, 1000);
   };
 
   useEffect(() => {
@@ -158,6 +164,7 @@ const ImportCompleteStep = ({
         cancelButtonLabel={t("Settings:DownloadLog")}
         displaySettings
         showReminder
+        isSaving={isSaving}
       />
     </>
   );

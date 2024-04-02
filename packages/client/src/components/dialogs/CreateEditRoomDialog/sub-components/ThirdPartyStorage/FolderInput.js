@@ -80,9 +80,9 @@ const StyledFolderInput = styled.div`
       theme.interfaceDirection === "rtl"
         ? `padding-right: 8px;`
         : `padding-left: 8px;`}
-    background-color: ${(props) =>
+    /* background-color: ${(props) =>
       props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
-        .background};
+        .background}; */
     color: ${(props) =>
       props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
         .rootLabelColor};
@@ -183,16 +183,20 @@ const FolderInput = ({
 
   if (!thirdpartyAccount.id) return null;
 
-  let title = `${t("RootLabel")}/${path}`;
+  let title = createNewFolderIsChecked || path ? "/" : t("RootFolderLabel");
+  title += path;
   if (createNewFolderIsChecked) {
-    title += `${path ? "/" : ""}${roomTitle || t("Files:NewRoom")}`;
+    title += path ? "/" : "";
+    title += roomTitle || t("Files:NewRoom");
   }
 
   return (
     <>
       <StyledFolderInput noRoomTitle={!roomTitle} onClick={onOpen}>
         <div className="folder-path-wrapper" title={title}>
-          <span className="root_label">{t("RootLabel")}/</span>
+          <span className="root_label">
+            {createNewFolderIsChecked || path ? "/" : t("RootFolderLabel")}
+          </span>
           <span className="path">{path}</span>
           {createNewFolderIsChecked && (
             <span className="room_title">
@@ -200,7 +204,7 @@ const FolderInput = ({
             </span>
           )}
         </div>
-        <div className="icon-wrapper">
+        <div title={t("Common:SelectFolder")} className="icon-wrapper">
           <IconButton size={16} iconName={FolderReactSvgUrl} isClickable />
         </div>
       </StyledFolderInput>
@@ -212,6 +216,7 @@ const FolderInput = ({
           isThirdParty
           onSelectTreeNode={setTreeNode}
           passedFoldersTree={[thirdpartyAccount]}
+          acceptButtonLabel={t("Common:SelectAction")}
           currentFolderId={treeNode ? treeNode.id : thirdpartyAccount.id}
         />
       )}

@@ -136,8 +136,8 @@ class SelectionStore {
     this.bufferSelection = bufferSelection;
     //console.log("setBufferSelection", { bufferSelection });
 
+    if (!addToSelection) return;
     if (bufferSelection) {
-      if (!addToSelection) return;
       this.setSelection([bufferSelection]);
       this.incrementUsersRights(bufferSelection);
 
@@ -145,6 +145,18 @@ class SelectionStore {
     }
 
     this.clearSelection();
+  };
+
+  selectRow = (item) => {
+    const isSingleSelected =
+      this.selection.find((s) => s.id === item.id) &&
+      this.selection.length === 1;
+
+    this.setBufferSelection(null);
+
+    if (!isSingleSelected) {
+      this.selectUser(item);
+    }
   };
 
   selectUser = (user) => {

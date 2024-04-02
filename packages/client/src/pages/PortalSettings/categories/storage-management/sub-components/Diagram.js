@@ -42,18 +42,25 @@ const calculateSize = (size, common) => {
   return (size * 100) / common;
 };
 
-const getTags = (obj, tenantCustomQuota, usedPortalSpace, t) => {
+const getTags = (
+  t,
+  standalone,
+  catalogs,
+  tenantCustomQuota,
+  maxTotalSizeByQuota,
+  usedPortalSpace,
+) => {
   const array = [];
   const colors = ["#13B7EC", "#22C386", "#FF9933", "#FFD30F"];
 
   let i = 0;
-  const commonSize =
-    tenantCustomQuota < usedPortalSpace && tenantCustomQuota !== -1
-      ? usedPortalSpace
-      : tenantCustomQuota;
+  let commonSize = standalone ? tenantCustomQuota : maxTotalSizeByQuota;
 
-  for (let key in obj) {
-    const item = obj[key];
+  if (standalone && tenantCustomQuota < usedPortalSpace)
+    commonSize = usedPortalSpace;
+
+  for (let key in catalogs) {
+    const item = catalogs[key];
     const { usedSpace, title } = item;
 
     const percentageSize = calculateSize(usedSpace, commonSize);
@@ -73,15 +80,24 @@ const getTags = (obj, tenantCustomQuota, usedPortalSpace, t) => {
 };
 const Diagram = (props) => {
   const {
-    tenantCustomQuota,
     maxWidth = 660,
     filesUsedSpace,
-    usedSpace,
+    usedPortalSpace,
+    maxTotalSizeByQuota,
+    standalone,
+    tenantCustomQuota,
   } = props;
 
   const { t } = useTranslation("Common");
 
-  const elementsTags = getTags(filesUsedSpace, tenantCustomQuota, usedSpace, t);
+  const elementsTags = getTags(
+    t,
+    standalone,
+    filesUsedSpace,
+    tenantCustomQuota,
+    maxTotalSizeByQuota,
+    usedPortalSpace,
+  );
 
   return (
     <StyledDiagramComponent maxWidth={maxWidth}>
@@ -109,11 +125,13 @@ const Diagram = (props) => {
 
 export default inject(({ storageManagement, currentQuotaStore }) => {
   const { filesUsedSpace } = storageManagement;
-  const { tenantCustomQuota, usedTotalStorageSizeCount } = currentQuotaStore;
+  const { tenantCustomQuota, usedTotalStorageSizeCount, maxTotalSizeByQuota } =
+    currentQuotaStore;
 
   return {
     tenantCustomQuota,
     filesUsedSpace,
-    usedSpace: usedTotalStorageSizeCount,
+    usedPortalSpace: usedTotalStorageSizeCount,
+    maxTotalSizeByQuota,
   };
 })(observer(Diagram));

@@ -400,14 +400,14 @@ export const settingsTree = [
         children: [
           {
             id: "portal-settings_catalog-storageManagement_quota-per-room",
-            key: "6-1-0",
+            key: "6-0-1",
             icon: "",
             link: "quota-per-room",
             tKey: "QuotaPerRoom",
           },
           {
             id: "portal-settings_catalog-storageManagement_quota-per-user",
-            key: "6-1-1",
+            key: "6-0-2",
             icon: "",
             link: "quota-per-user",
             tKey: "QuotaPerUser",

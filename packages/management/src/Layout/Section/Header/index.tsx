@@ -24,25 +24,58 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
+
 import React from "react";
-import { useLocation } from "react-router-dom";
+import styled, { css } from "styled-components";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
+import { IconButton } from "@docspace/shared/components/icon-button";
 import Headline from "@docspace/shared/components/headline/Headline";
 
 import { getItemByLink } from "SRC_DIR/utils";
+
+const StyledHeader = styled.div`
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  .arrow-button {
+    svg {
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+    }
+  }
+`;
 
 const SectionHeaderContent = () => {
   const { t } = useTranslation(["Settings", "Common"]);
 
   const location = useLocation();
+  const navigate = useNavigate();
   const path = location.pathname;
   const item = getItemByLink(path);
 
+  const onBackToParent = () => {
+    navigate(-1);
+  };
+
   return (
-    <Headline type="content" truncate={true}>
-      <div className="header">{t(item?.tKey)}</div>
-    </Headline>
+    <StyledHeader>
+      {!item?.isHeader && (
+        <IconButton
+          iconName={ArrowPathReactSvgUrl}
+          size={17}
+          isFill={true}
+          onClick={onBackToParent}
+          className="arrow-button"
+        />
+      )}
+      <Headline type="content" truncate={true}>
+        <div className="header">{t(item?.tKey)}</div>
+      </Headline>
+    </StyledHeader>
   );
 };
 

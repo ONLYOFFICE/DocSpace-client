@@ -47,7 +47,7 @@ const StyledBody = styled.div`
   }
   .payment-benefits {
     margin-bottom: 14px;
-    align-items: flex-start;
+    align-items: center;
     display: grid;
     grid-template-columns: 24px 1fr;
     grid-gap: 10px;

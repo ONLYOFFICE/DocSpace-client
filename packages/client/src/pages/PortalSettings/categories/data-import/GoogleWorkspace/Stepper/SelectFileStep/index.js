@@ -111,6 +111,7 @@ const SelectFileStep = ({
   const [showErrorText, setShowErrorText] = useState(false);
   const [isFileError, setIsFileError] = useState(false);
   const [fileName, setFileName] = useState(null);
+  const [isBackupEmpty, setIsBackupEmpty] = useState(false);
   const [searchParams] = useSearchParams();
   const isAbort = useRef(false);
   const uploadInterval = useRef(null);
@@ -233,6 +234,7 @@ const SelectFileStep = ({
               setUsers(res.parseResult);
               setShowReminder(true);
             } else {
+              setIsBackupEmpty(true);
               cancelMigration();
             }
           }
@@ -353,6 +355,19 @@ const SelectFileStep = ({
               >
                 {t("Settings:CheckUnsupportedFiles")}
               </Link>
+            </Box>
+          )}
+
+          {isBackupEmpty && (
+            <Box>
+              <ProgressBar
+                percent={100}
+                className="complete-progress-bar"
+                label={t("Common:LoadingIsComplete")}
+              />
+              <Text className="error-text">
+                {t("Settings:NoUsersInBackup")}
+              </Text>
             </Box>
           )}
 

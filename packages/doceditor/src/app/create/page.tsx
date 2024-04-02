@@ -26,8 +26,9 @@
 
 import { redirect } from "next/navigation";
 
-import { createFile, fileCopyAs, getBaseUrl } from "@/utils/actions";
+import { createFile, fileCopyAs } from "@/utils/actions";
 import CreateFileError from "@/components/CreateFileError";
+import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 
 type TSearchParams = {
   parentId: string;
@@ -106,4 +107,3 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
 }
 
 export default Page;
-

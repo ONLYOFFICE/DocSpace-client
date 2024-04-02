@@ -24,59 +24,47 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
+import { headers } from "next/headers";
 
-import React from "react";
-import styled, { css } from "styled-components";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+const API_PREFIX = "api/2.0";
 
-import { IconButton } from "@docspace/shared/components/icon-button";
-import Headline from "@docspace/shared/components/headline/Headline";
+export const getBaseUrl = () => {
+  const hdrs = headers();
 
-import { getItemByLink } from "SRC_DIR/utils";
+  const host = hdrs.get("x-forwarded-host");
+  const proto = hdrs.get("x-forwarded-proto");
 
-const StyledHeader = styled.div`
-  display: flex;
-  gap: 12px;
-  align-items: center;
+  const baseURL = `${proto}://${host}`;
 
-  .arrow-button {
-    svg {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
-    }
-  }
-`;
-
-const SectionHeaderContent = () => {
-  const { t } = useTranslation(["Settings", "Common"]);
-
-  const location = useLocation();
-  const navigate = useNavigate();
-  const path = location.pathname;
-  const item = getItemByLink(path);
-
-  const onBackToParent = () => {
-    navigate(-1);
-  };
-
-  return (
-    <StyledHeader>
-      {!item?.isHeader && (
-        <IconButton
-          iconName={ArrowPathReactSvgUrl}
-          size={17}
-          isFill={true}
-          onClick={onBackToParent}
-          className="arrow-button"
-        />
-      )}
-      <Headline type="content" truncate={true}>
-        <div className="header">{t(item?.tKey)}</div>
-      </Headline>
-    </StyledHeader>
-  );
+  return baseURL;
 };
 
-export default SectionHeaderContent;
+export const getAPIUrl = () => {
+  const baseUrl = getBaseUrl();
+  const baseAPIUrl = `${baseUrl}/${API_PREFIX}`;
+
+  return baseAPIUrl;
+};
+
+export const createRequest = (
+  paths: string[],
+  newHeaders: [string, string][],
+  method: string,
+  body?: string,
+) => {
+  const hdrs = new Headers(headers());
+
+  const apiURL = getAPIUrl();
+
+  newHeaders.forEach((hdr) => {
+    if (hdr[0]) hdrs.set(hdr[0], hdr[1]);
+  });
+
+  const urls = paths.map((path) => `${apiURL}${path}`);
+
+  const requests = urls.map(
+    (url) => new Request(url, { headers: hdrs, method, body }),
+  );
+
+  return requests;
+};

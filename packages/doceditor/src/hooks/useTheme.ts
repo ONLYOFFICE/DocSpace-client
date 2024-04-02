@@ -40,7 +40,7 @@ export interface UseThemeProps {
   i18n?: i18n;
 }
 
-const useTheme = ({ user, i18n = {} }: UseThemeProps) => {
+const useTheme = ({ user, i18n }: UseThemeProps) => {
   const [currentColorTheme, setCurrentColorTheme] =
     React.useState<TColorScheme>({} as TColorScheme);
 
@@ -67,7 +67,7 @@ const useTheme = ({ user, i18n = {} }: UseThemeProps) => {
   const getUserTheme = React.useCallback(() => {
     if (!user?.theme) return;
     let theme = user.theme;
-    const interfaceDirection = i18n.dir ? i18n.dir() : "ltr";
+    const interfaceDirection = i18n?.dir ? i18n.dir() : "ltr";
 
     if (user.theme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
 
@@ -86,7 +86,7 @@ const useTheme = ({ user, i18n = {} }: UseThemeProps) => {
       currentColorScheme: currentColorTheme,
       interfaceDirection,
     });
-  }, [currentColorTheme, user?.theme, i18n.dir]);
+  }, [user?.theme, i18n, currentColorTheme]);
 
   React.useEffect(() => {
     getCurrentColorTheme();

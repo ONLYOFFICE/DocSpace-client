@@ -170,7 +170,8 @@ export interface IInitialConfig {
 
 export type TError = {
   message: "unauthorized" | "restore-backup" | string;
-  status?: number | string;
+  status?: "not-found" | "access-denied" | number | string;
+  type?: string;
 };
 
 export type TResponse =
@@ -200,14 +201,15 @@ export type TResponse =
     };
 
 export type EditorProps = {
-  config: IInitialConfig;
-  successAuth: boolean;
-  user: TUser;
-  view: boolean;
+  config?: IInitialConfig;
+  successAuth?: boolean;
+  user?: TUser;
+  view?: boolean;
   doc?: string;
   documentserverUrl: string;
-  fileInfo: TFile;
-  isSharingAccess: boolean;
+  fileInfo?: TFile;
+  isSharingAccess?: boolean;
+  errorMessage?: string;
   t: TTranslation | null;
   onSDKRequestSharingSettings: () => void;
   onSDKRequestSaveAs: (event: object) => void;
@@ -316,19 +318,20 @@ export interface UseSocketHelperProps {
 }
 
 export interface UseEventsProps {
-  user: TUser;
-  successAuth: boolean;
-  fileInfo: TFile;
-  config: IInitialConfig;
+  user?: TUser;
+  successAuth?: boolean;
+  fileInfo?: TFile;
+  config?: IInitialConfig;
   doc?: string;
+  errorMessage?: string;
   t?: Nullable<TTranslation>;
 }
 
 export interface UseInitProps {
-  config: IInitialConfig;
-  successAuth: boolean;
-  fileInfo: TFile;
-  user: TUser;
+  config?: IInitialConfig;
+  successAuth?: boolean;
+  fileInfo?: TFile;
+  user?: TUser;
   t: Nullable<TTranslation>;
 
   setDocTitle: (value: string) => void;

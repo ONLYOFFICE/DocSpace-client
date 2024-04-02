@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { commonIconsStyles } from "../../../utils";
+import { commonIconsStyles, desktop } from "../../../utils";
 import { TColorScheme } from "../../../themes";
 
 import { StyledIcon } from "../sub-components/StyledIcon";
@@ -43,10 +43,12 @@ const StyledIconTheme = styled(StyledIcon)<
     }
   }
 
-  &:hover {
-    svg {
-      path {
-        fill: ${(props) => props.$currentColorScheme?.main?.accent};
+  @media ${desktop} {
+    &:hover {
+      svg {
+        path {
+          fill: ${(props) => props.$currentColorScheme?.main?.accent};
+        }
       }
     }
   }

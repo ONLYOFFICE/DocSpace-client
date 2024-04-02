@@ -510,4 +510,6 @@ export const enum WhiteLabelLogoType {
 export const enum EditorConfigErrorType {
   System = "System.Exception",
   LinkScope = "ASC.Files.Core.Exceptions.LinkScopeException",
+  NotFoundScope = "System.IO.FileNotFoundException",
+  AccessDeniedScope = "System.Security.SecurityException",
 }

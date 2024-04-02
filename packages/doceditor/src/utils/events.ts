@@ -72,7 +72,7 @@ export const onSDKRequestHistoryClose = () => {
   document.location.reload();
 };
 
-export const onSDKRequestEditRights = async (fileInfo: TFile) => {
+export const onSDKRequestEditRights = async (fileInfo?: TFile) => {
   console.log("ONLYOFFICE Document Editor requests editing rights");
   const url = window.location.href;
 
@@ -106,4 +106,3 @@ export const onSDKRequestRename = async (
   const title = (event as TRenameEvent).data;
   await updateFile(id, title);
 };
-

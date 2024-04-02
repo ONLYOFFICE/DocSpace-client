@@ -24,43 +24,47 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { DevicesType } from "../../MediaViewer.types";
+import { headers } from "next/headers";
 
-interface ViewerPlayerProps {
-  src?: string;
-  isAudio: boolean;
-  isVideo: boolean;
-  isError: boolean;
-  audioIcon: string;
-  errorTitle: string;
-  canDownload: boolean;
-  isLastImage: boolean;
-  isFistImage: boolean;
-  isFullScreen: boolean;
-  panelVisible: boolean;
-  isPreviewFile: boolean;
-  isOpenContextMenu: boolean;
-  isThirdParty?: boolean;
-  mobileDetails: JSX.Element;
-  thumbnailSrc?: string;
-  devices: DevicesType;
-  onMask?: VoidFunction;
-  onPrev?: VoidFunction;
-  onNext?: VoidFunction;
-  onDownloadClick?: VoidFunction;
-  contextModel: () => ContextMenuModel[];
-  removeToolbarVisibleTimer: VoidFunction;
-  removePanelVisibleTimeout: VoidFunction;
-  restartToolbarVisibleTimer: VoidFunction;
-  setIsError: React.Dispatch<React.SetStateAction<boolean>>;
-  setPanelVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
+const API_PREFIX = "api/2.0";
 
-  generateContextMenu: (
-    isOpen: boolean,
-    right?: string,
-    bottom?: string,
-  ) => JSX.Element;
-}
+export const getBaseUrl = () => {
+  const hdrs = headers();
 
-export default ViewerPlayerProps;
+  const host = hdrs.get("x-forwarded-host");
+  const proto = hdrs.get("x-forwarded-proto");
+
+  const baseURL = `${proto}://${host}`;
+
+  return baseURL;
+};
+
+export const getAPIUrl = () => {
+  const baseUrl = getBaseUrl();
+  const baseAPIUrl = `${baseUrl}/${API_PREFIX}`;
+
+  return baseAPIUrl;
+};
+
+export const createRequest = (
+  paths: string[],
+  newHeaders: [string, string][],
+  method: string,
+  body?: string,
+) => {
+  const hdrs = new Headers(headers());
+
+  const apiURL = getAPIUrl();
+
+  newHeaders.forEach((hdr) => {
+    if (hdr[0]) hdrs.set(hdr[0], hdr[1]);
+  });
+
+  const urls = paths.map((path) => `${apiURL}${path}`);
+
+  const requests = urls.map(
+    (url) => new Request(url, { headers: hdrs, method, body }),
+  );
+
+  return requests;
+};

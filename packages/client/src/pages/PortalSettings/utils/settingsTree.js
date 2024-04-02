@@ -392,7 +392,7 @@ export const settingsTree = [
     children: [
       {
         id: "portal-settings_catalog-storageManagement",
-        key: "6-0",
+        key: "6-1",
         icon: "",
         link: "disk-space",
         tKey: "StorageManagement",

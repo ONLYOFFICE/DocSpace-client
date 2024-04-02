@@ -88,8 +88,9 @@ const Root = ({
   const isSkipError =
     error?.status === "not-found" ||
     error?.status === "access-denied" ||
-    error?.type === EditorConfigErrorType.AccessDeniedScope ||
-    error?.type === EditorConfigErrorType.NotFoundScope;
+    error?.status === "not-supported";
+
+  console.log(isSkipError, error);
 
   useRootInit({
     documentType: config?.documentType,

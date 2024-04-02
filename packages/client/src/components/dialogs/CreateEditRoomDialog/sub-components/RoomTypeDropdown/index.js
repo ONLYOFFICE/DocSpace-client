@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { isMobile } from "@docspace/shared/utils";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import RoomType from "../RoomType";
 import DropdownDesktop from "./DropdownDesktop";
@@ -49,6 +49,7 @@ const RoomTypeDropdown = ({
   setRoomType,
   setIsScrollLocked,
   isDisabled,
+  forсeHideDropdown,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -68,6 +69,14 @@ const RoomTypeDropdown = ({
     setRoomType(roomType);
     toggleDropdown();
   };
+
+  useEffect(() => {
+    if (forсeHideDropdown) {
+      setIsScrollLocked(false);
+      setIsOpen(false);
+    }
+  }, [forсeHideDropdown]);
+
   return (
     <StyledRoomTypeDropdown isOpen={isOpen}>
       <RoomType
@@ -85,6 +94,7 @@ const RoomTypeDropdown = ({
           open={isOpen}
           onClose={toggleDropdown}
           chooseRoomType={chooseRoomType}
+          forсeHideDropdown={forсeHideDropdown}
         />
       ) : (
         <DropdownDesktop t={t} open={isOpen} chooseRoomType={chooseRoomType} />

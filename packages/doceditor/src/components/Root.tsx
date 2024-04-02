@@ -90,8 +90,6 @@ const Root = ({
     error?.status === "access-denied" ||
     error?.status === "not-supported";
 
-  console.log(isSkipError, error);
-
   useRootInit({
     documentType: config?.documentType,
   });

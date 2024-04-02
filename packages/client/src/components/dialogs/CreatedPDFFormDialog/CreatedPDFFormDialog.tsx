@@ -40,21 +40,16 @@ import { Wrapper } from "./CreatedPDFFormDialog.styled";
 import type { CreatedPDFFormDialogProps } from "./CreatedPDFFormDialog.types";
 
 export const CreatedPDFFormDialog = inject<TStore>(
-  ({ filesStore, contextOptionsStore, selectedFolderStore }) => {
-    const { createdPDFFormDialogData: data, setCreatedPDFFormDialogVisible } =
-      filesStore;
-
+  ({ contextOptionsStore, selectedFolderStore }) => {
     const { onClickInviteUsers, onClickLinkFillForm } = contextOptionsStore;
     const { id, roomType, security } = selectedFolderStore;
 
     return {
       id,
-      data,
       roomType,
       security,
       onClickInviteUsers,
       onClickLinkFillForm,
-      setCreatedPDFFormDialogVisible,
     };
   },
 )(
@@ -66,17 +61,12 @@ export const CreatedPDFFormDialog = inject<TStore>(
       id: selectedFolderId,
       onClickInviteUsers,
       onClickLinkFillForm,
-      setCreatedPDFFormDialogVisible,
+      onClose,
+      visible,
     }: CreatedPDFFormDialogProps) => {
       const { t } = useTranslation(["PDFFormDialog", "Common"]);
 
-      const onClose = () => {
-        setCreatedPDFFormDialogVisible?.(false);
-      };
-
       const onSubmit = () => {
-        if (!data) return onClose();
-
         if (data.isFill) {
           onClickLinkFillForm?.(data.file);
         } else if (Boolean(roomType) && security?.EditAccess) {
@@ -86,7 +76,7 @@ export const CreatedPDFFormDialog = inject<TStore>(
         onClose();
       };
 
-      const description = data?.isFill ? (
+      const description = data.isFill ? (
         <Trans
           t={t}
           i18nKey="PDFFormSuccessfullyCreatedDescription"
@@ -96,17 +86,17 @@ export const CreatedPDFFormDialog = inject<TStore>(
       ) : (
         t("PDFFormInviteDescription")
       );
-      const primaryButtonLabel = data?.isFill
+      const primaryButtonLabel = data.isFill
         ? t("Common:Fill")
         : t("Common:Invite");
-      const cancelButtonLabel = data?.isFill
+      const cancelButtonLabel = data.isFill
         ? t("Common:CancelButton")
         : t("Common:Later");
 
       return (
         <ModalDialog
-          visible
           autoMaxHeight
+          visible={visible}
           onClose={onClose}
           displayType={ModalDialogType.modal}
         >

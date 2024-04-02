@@ -35,6 +35,7 @@ import {
   RoomsType,
   RoomsProviderType,
   ShareAccessRights,
+  Events,
 } from "@docspace/shared/enums";
 
 import { RoomsTypes } from "@docspace/shared/utils";
@@ -181,9 +182,6 @@ class FilesStore {
   });
 
   hotkeysClipboard = [];
-
-  createdPDFFormDialogVisible = false;
-  createdPDFFormDialogData = null;
 
   constructor(
     authStore,
@@ -653,19 +651,23 @@ class FilesStore {
 
     const file = JSON.parse(option.data);
 
-    const key = `${PDF_FORM_DIALOG_KEY}-${this.userStore.user.id}`;
+    if (this.selectedFolderStore.id !== file.folderId) return;
 
-    const isFirst = localStorage.getItem(key);
+    const localKey = `${PDF_FORM_DIALOG_KEY}-${this.userStore.user.id}`;
 
-    if (this.selectedFolderStore.id === file.folderId) {
-      if (!isFirst) {
-        localStorage.setItem(key, "true");
-        return this.setCreatedPDFFormDialogVisible(true, {
-          isFill: true,
-          file,
-        });
-      }
-    }
+    const isFirst = JSON.parse(localStorage.getItem(localKey) ?? "true");
+
+    const event = new CustomEvent(Events.CREATE_PDF_FORM_FILE, {
+      detail: {
+        file,
+        isFill: true,
+        isFirst,
+      },
+    });
+
+    if (isFirst) localStorage.setItem(localKey, "false");
+
+    window?.dispatchEvent(event);
   };
 
   setCreatedPDFFormDialogVisible = (visible, data = null) => {

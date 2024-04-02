@@ -24,10 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useCallback, useEffect } from "react";
 
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+
+import { toastr } from "@docspace/shared/components/toast";
+import { Events, FilesSelectorFilterTypes } from "@docspace/shared/enums";
+
 import {
   UploadPanel,
   VersionHistoryPanel,
@@ -67,7 +71,7 @@ import ArchiveDialog from "../dialogs/ArchiveDialog";
 import RestoreRoomDialog from "../dialogs/RestoreRoomDialog";
 import PreparationPortalDialog from "../dialogs/PreparationPortalDialog";
 import FilesSelector from "../FilesSelector";
-import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
+
 import LeaveRoomDialog from "../dialogs/LeaveRoomDialog";
 import ChangeRoomOwnerPanel from "../panels/ChangeRoomOwnerPanel";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
@@ -123,10 +127,15 @@ const Panels = (props) => {
     changeRoomOwnerIsVisible,
     deletePluginDialogVisible,
     shareFolderDialogVisible,
-    createdPDFFormDialogVisible,
   } = props;
 
-  const { t } = useTranslation(["Translations", "Common"]);
+  const [createPDFFormFile, setCreatePDFFormFile] = useState({
+    visible: false,
+    data: null,
+    onClose: null,
+  });
+
+  const { t } = useTranslation(["Translations", "Common", "PDFFormDialog"]);
 
   const onClose = () => {
     setSelectFileDialogVisible(false);
@@ -145,6 +154,45 @@ const Panels = (props) => {
 
     return text[selectFileFormRoomFilterParam];
   }, [selectFileFormRoomFilterParam, t]);
+
+  const handleCreatePDFFormFile = useCallback(
+    /**
+     * @param {CustomEvent} event
+     */
+    (event) => {
+      const { file, isFill, isFirst } = event.detail;
+
+      if (!isFirst) {
+        return toastr.success(t("PDFFormIsReadyToast"));
+      }
+
+      setCreatePDFFormFile({
+        visible: true,
+        data: {
+          file,
+          isFill,
+        },
+        onClose: () => {
+          setCreatePDFFormFile({ visible: false, onClose: null, data: null });
+        },
+      });
+    },
+    [],
+  );
+
+  useEffect(() => {
+    window.addEventListener(
+      Events.CREATE_PDF_FORM_FILE,
+      handleCreatePDFFormFile,
+    );
+
+    return () => {
+      window.removeEventListener(
+        Events.CREATE_PDF_FORM_FILE,
+        handleCreatePDFFormFile,
+      );
+    };
+  }, [handleCreatePDFFormFile]);
 
   return [
     settingsPluginDialogVisible && (
@@ -258,8 +306,11 @@ const Panels = (props) => {
       <ChangeRoomOwnerPanel key="change-room-owner" />
     ),
     shareFolderDialogVisible && <ShareFolderDialog key="share-folder-dialog" />,
-    createdPDFFormDialogVisible && (
-      <CreatedPDFFormDialog key="created-pdf-form-dialog" />
+    createPDFFormFile.visible && (
+      <CreatedPDFFormDialog
+        key="created-pdf-form-dialog"
+        {...createPDFFormFile}
+      />
     ),
   ];
 };
@@ -320,8 +371,6 @@ export default inject(
       changeRoomOwnerIsVisible,
       shareFolderDialogVisible,
     } = dialogsStore;
-
-    const { createdPDFFormDialogVisible } = filesStore;
 
     const { preparationPortalDialogVisible } = backup;
 
@@ -386,7 +435,6 @@ export default inject(
       changeRoomOwnerIsVisible,
       deletePluginDialogVisible,
       shareFolderDialogVisible,
-      createdPDFFormDialogVisible,
     };
   },
 )(observer(Panels));

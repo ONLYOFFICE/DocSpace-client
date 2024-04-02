@@ -25,21 +25,21 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TFile } from "@docspace/shared/api/files/types";
-import type { Nullable } from "@docspace/shared/types";
 
 export interface CreatedPDFFormDialogProps
   extends Partial<
       Pick<TStore["selectedFolderStore"], "id" | "roomType" | "security">
     >,
-    Partial<Pick<TStore["filesStore"], "setCreatedPDFFormDialogVisible">>,
     Partial<
       Pick<
         TStore["contextOptionsStore"],
         "onClickInviteUsers" | "onClickLinkFillForm"
       >
     > {
-  data?: Nullable<{
+  data: {
     file: TFile;
     isFill: boolean;
-  }>;
+  };
+  onClose: VoidFunction;
+  visible: boolean;
 }

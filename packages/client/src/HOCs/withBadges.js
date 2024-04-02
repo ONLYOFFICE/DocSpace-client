@@ -116,8 +116,6 @@ export default function withBadges(WrappedComponent) {
     };
 
     onCopyPrimaryLink = async () => {
-      if (isMobileOnly) return;
-
       const { t, item, getPrimaryLink } = this.props;
       const primaryLink = await getPrimaryLink(item.id);
       if (primaryLink) {

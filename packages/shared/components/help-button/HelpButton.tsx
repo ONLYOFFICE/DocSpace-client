@@ -51,6 +51,7 @@ const HelpButton = (props: HelpButtonProps) => {
     afterHide,
     tooltipMaxWidth,
     tooltipContent,
+    openOnClick = true,
   } = props;
   const currentId = id || uniqueId();
 
@@ -74,7 +75,7 @@ const HelpButton = (props: HelpButtonProps) => {
       {getContent ? (
         <Tooltip
           clickable
-          openOnClick
+          openOnClick={openOnClick}
           place={place || "top"}
           offset={offset}
           afterShow={afterShow}
@@ -86,7 +87,7 @@ const HelpButton = (props: HelpButtonProps) => {
       ) : (
         <Tooltip
           clickable
-          openOnClick
+          openOnClick={openOnClick}
           place={place}
           offset={offset}
           afterShow={afterShow}

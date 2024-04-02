@@ -147,7 +147,7 @@
   "LanguageAndTimeZoneSettingsNavDescription": "Configurações de Idioma e Fuso Horário é uma forma de alterar o idioma de todo o portal para todos os usuários do portal e de configurar o fuso horário para que todos os eventos do portal sejam mostrados com a data e hora corretas.",
   "LastUpdate": "Última atualização: {{data}}",
   "LicenseLimitCounter": "Limite de licença Administradores/Usuários avançados:",
-  "LicenseLimitDescription": "O contador de limite de licenças é composto por: contas já existentes no DocSapce e novos usuários que você deseja importar. Se você importar usuários que já possuem conta no DocSpace, eles não serão contabilizados novamente no contador. Sua licença DocSpace permite que você tenha no máximo 100 usuários.",
+  "LicenseLimitDescription": "O contador de limite de licenças é composto por: contas já existentes no DocSpace e novos usuários que você deseja importar. Se você importar usuários que já possuem conta no DocSpace, eles não serão contabilizados novamente no contador. Sua licença DocSpace permite que você tenha no máximo 100 usuários.",
   "Lifetime": "Vida útil (min)",
   "LimitThemesTooltip": "Você só pode criar 3 temas personalizados. Para criar um novo, você deve excluir um dos temas anteriores.",
   "LocalFile": "Arquivo local",

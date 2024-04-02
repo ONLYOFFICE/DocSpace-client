@@ -44,6 +44,7 @@
   "RoleUserDescription": "Uživatelé mají přístup pouze do místností, do kterých je pozvali správci. Nemohou vytvářet vlastní místnosti, složky ani soubory.",
   "RoleViewer": "Prohlížeč",
   "RoleViewerDescription": "Prohlížení souborů",
+  "SearchByHeadOfGroup": "Vyhledávání podle vedoucího skupiny",
   "SearchByOwner": "Vyhledávání podle vlastníků",
   "Spreadsheets": "Tabulky",
   "SubNewForm": "Prázdný",

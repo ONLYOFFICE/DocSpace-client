@@ -34,7 +34,7 @@ import { ReactSVG } from "react-svg";
 
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import logoPersonalAboutUrl from "PUBLIC_DIR/images/logo_personal_about.svg?url";
-import { getLogoFromPath } from "@docspace/shared/utils";
+import { getLogoUrl } from "@docspace/shared/utils";
 
 const StyledAboutBody = styled.div`
   width: 100%;
@@ -134,11 +134,7 @@ const AboutContent = (props) => {
     ? previewData.address
     : companyInfoSettingsData?.address;
 
-  const logo = getLogoFromPath(
-    !theme.isBase
-      ? whiteLabelLogoUrls[6]?.path.dark
-      : whiteLabelLogoUrls[6]?.path.light,
-  );
+  const logo = getLogoUrl(7, !theme.isBase);
 
   return (
     companyInfoSettingsData && (

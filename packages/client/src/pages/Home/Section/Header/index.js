@@ -92,7 +92,7 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
-import { getLogoFromPath } from "@docspace/shared/utils";
+import { getLogoUrl } from "@docspace/shared/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
 
 const StyledContainer = styled.div`
@@ -1164,12 +1164,8 @@ const SectionHeaderContent = (props) => {
       categoryType === CategoryType.Archive) &&
     !isCurrentRoom;
 
-  const logo = !theme.isBase
-    ? getLogoFromPath(whiteLabelLogoUrls[0]?.path?.dark)
-    : getLogoFromPath(whiteLabelLogoUrls[0]?.path?.light);
-  const burgerLogo = !theme.isBase
-    ? getLogoFromPath(whiteLabelLogoUrls[5]?.path?.dark)
-    : getLogoFromPath(whiteLabelLogoUrls[5]?.path?.light);
+  const logo = getLogoUrl(1, !theme.isBase);
+  const burgerLogo = getLogoUrl(6, !theme.isBase);
 
   const navigationButtonLabel = showNavigationButton
     ? t("Files:ShareRoom")

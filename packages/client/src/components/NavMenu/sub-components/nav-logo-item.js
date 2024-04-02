@@ -30,7 +30,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { NoUserSelect } from "@docspace/shared/utils";
-import { getLogoFromPath } from "@docspace/shared/utils";
+import { getLogoUrl } from "@docspace/shared/utils";
 const LogoItem = styled.div`
   display: flex;
   min-width: 48px;
@@ -54,7 +54,7 @@ const NavLogoItem = (props) => {
   return (
     <LogoItem opened={props.opened}>
       <Link className="nav-logo-wrapper" to="/" onClick={props.onClick}>
-        <img className="nav-logo-icon" src={getLogoFromPath(props.logoUrl)} />
+        <img className="nav-logo-icon" src={getLogoUrl(1)} />
       </Link>
     </LogoItem>
   );

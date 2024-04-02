@@ -38,7 +38,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { NoUserSelect } from "@docspace/shared/utils";
 import HeaderCatalogBurger from "./header-catalog-burger";
 import { Base } from "@docspace/shared/themes";
-import { getLogoFromPath } from "@docspace/shared/utils";
+import { getLogoUrl } from "@docspace/shared/utils";
 
 const Header = styled.header`
   display: flex;
@@ -231,9 +231,7 @@ const HeaderComponent = ({
     return () => window.removeEventListener("resize", onResize);
   });
 
-  const logo = getLogoFromPath(
-    !theme.isBase ? logoUrl?.path?.dark : logoUrl?.path?.light,
-  );
+  const logo = getLogoUrl(1, !theme.isBase);
 
   return (
     <>

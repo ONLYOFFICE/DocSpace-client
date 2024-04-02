@@ -50,7 +50,7 @@ import { Dark, Base } from "@docspace/shared/themes";
 import { useMounted } from "../helpers/useMounted";
 import { getBgPattern, frameCallCommand } from "@docspace/shared/utils/common";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
-import { getLogoFromPath, getSystemTheme } from "@docspace/shared/utils";
+import { getLogoUrl, getSystemTheme } from "@docspace/shared/utils";
 import { TenantStatus } from "@docspace/shared/enums";
 import GreetingContainer from "./sub-components/GreetingContainer";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
@@ -229,11 +229,7 @@ const Login: React.FC<ILoginProps> = ({
   const bgPattern = getBgPattern(currentColorScheme?.id);
 
   const logo = logoUrls && Object.values(logoUrls)[1];
-  const logoUrl = !logo
-    ? undefined
-    : !theme?.isBase
-      ? getLogoFromPath(logo.path.dark)
-      : getLogoFromPath(logo.path.light);
+  const logoUrl = !logo ? undefined : getLogoUrl(2, !theme?.isBase);
 
   if (!mounted) return <></>;
   if (isRestoringPortal) return <></>;

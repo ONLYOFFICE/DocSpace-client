@@ -36,7 +36,7 @@ import { LoginFormWrapper } from "./StyledLogin";
 import BarLogo from "PUBLIC_DIR/images/danger.alert.react.svg";
 import { Dark, Base } from "@docspace/shared/themes";
 import { getBgPattern, frameCallCommand } from "@docspace/shared/utils/common";
-import { getLogoFromPath } from "@docspace/shared/utils";
+import { getLogoUrl } from "@docspace/shared/utils";
 import { useMounted } from "../helpers/useMounted";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import LoginContainer from "@docspace/shared/components/color-theme/sub-components/LoginContainer";
@@ -106,11 +106,7 @@ const Form: React.FC<ILoginProps> = ({ theme, setTheme, logoUrls }) => {
   };
 
   const logo = logoUrls && Object.values(logoUrls)[1];
-  const logoUrl = !logo
-    ? undefined
-    : !theme?.isBase
-      ? getLogoFromPath(logo.path.dark)
-      : getLogoFromPath(logo.path.light);
+  const logoUrl = !logo ? undefined : getLogoUrl(2, !theme?.isBase);
 
   return (
     <LoginContainer id="code-page" theme={theme}>

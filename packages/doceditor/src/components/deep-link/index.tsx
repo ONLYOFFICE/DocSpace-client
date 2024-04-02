@@ -34,7 +34,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { getBgPattern } from "@docspace/shared/utils/common";
-import { getLogoFromPath } from "@docspace/shared/utils";
+import { getLogoUrl } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
 
 import { getDeepLink } from "./DeepLink.helper";
@@ -56,7 +56,6 @@ const DeepLink = ({
   userEmail,
   setIsShowDeepLink,
   theme,
-  logoUrls,
   currentDeviceType,
   deepLinkConfig,
 }: DeepLinkProps) => {
@@ -97,10 +96,7 @@ const DeepLink = ({
   };
 
   const renderLogo = () => {
-    const logoPath = theme.isBase
-      ? logoUrls[0]?.path?.light
-      : logoUrls[0]?.path?.dark;
-    const logo = getLogoFromPath(logoPath);
+    const logo = getLogoUrl(1, !theme.isBase);
 
     if (currentDeviceType === DeviceType.mobile) {
       return (
@@ -168,4 +164,3 @@ const DeepLink = ({
 };
 
 export default DeepLink;
-

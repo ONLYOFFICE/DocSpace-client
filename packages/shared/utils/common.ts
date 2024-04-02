@@ -57,6 +57,7 @@ import {
   ShareAccessRights,
   ThemeKeys,
   ErrorKeys,
+  WhiteLabelLogoType,
 } from "../enums";
 import { LANGUAGE, PUBLIC_MEDIA_VIEW_URL, RTL_LANGUAGES } from "../constants";
 
@@ -1043,3 +1044,11 @@ export const insertDataLayer = (id: string) => {
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ user_id: id });
 };
+
+export function getLogoUrl(
+  logoType: WhiteLabelLogoType,
+  dark: boolean = false,
+  def: boolean = false,
+) {
+  return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}`;
+}

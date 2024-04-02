@@ -109,7 +109,7 @@ const Layout = (props) => {
     if (isMobile || isTabletView || !isFrame) {
       window.addEventListener("orientationchange", onOrientationChange);
 
-      if (isMobileOnly) {
+      if (isMobile) {
         window?.visualViewport?.addEventListener("resize", onOrientationChange);
         window?.visualViewport?.addEventListener("scroll", onScroll);
         window.addEventListener("scroll", onScroll);
@@ -144,7 +144,7 @@ const Layout = (props) => {
   };
 
   const onScroll = (e) => {
-    if (window.innerHeight < window.innerWidth) return;
+    // if (window.innerHeight < window.innerWidth) return;
 
     e.preventDefault();
     e.stopPropagation();

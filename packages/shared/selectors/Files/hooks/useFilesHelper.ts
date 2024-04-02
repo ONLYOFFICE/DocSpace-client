@@ -30,6 +30,7 @@ import { getFolder, getFolderInfo } from "../../../api/files";
 import FilesFilter from "../../../api/files/filter";
 import {
   ApplyFilterOption,
+  FilesSelectorExtendedFilterTypes,
   FilesSelectorFilterTypes,
   FilterType,
   FolderType,
@@ -73,6 +74,7 @@ const useFilesHelper = ({
   getFilesArchiveError,
   isInit,
   setIsInit,
+  availableForEditing = true,
 }: UseFilesHelpersProps) => {
   const requestRunning = React.useRef(false);
   const initRef = React.useRef(isInit);
@@ -111,36 +113,70 @@ const useFilesHelper = ({
       filter.withSubfolders = false;
       if (filterParam) {
         filter.applyFilterOption = ApplyFilterOption.Files;
-        switch (filterParam) {
-          case FilesSelectorFilterTypes.DOCX:
-            filter.extension = FilesSelectorFilterTypes.DOCX;
-            break;
+        if (availableForEditing) {
+          switch (filterParam) {
+            case FilesSelectorFilterTypes.DOCX:
+              filter.extension = FilesSelectorFilterTypes.DOCX;
+              break;
 
-          case FilesSelectorFilterTypes.IMG:
-            filter.filterType = FilterType.ImagesOnly;
-            break;
+            case FilesSelectorFilterTypes.IMG:
+              filter.filterType = FilterType.ImagesOnly;
+              break;
 
-          case FilesSelectorFilterTypes.BackupOnly:
-            filter.extension = "gz,tar";
-            break;
+            case FilesSelectorFilterTypes.BackupOnly:
+              filter.extension = "gz,tar";
+              break;
 
-          case FilesSelectorFilterTypes.DOCXF:
-            filter.filterType = FilterType.OFormTemplateOnly;
-            break;
+            case FilesSelectorFilterTypes.DOCXF:
+              filter.filterType = FilterType.OFormTemplateOnly;
+              break;
 
-          case FilesSelectorFilterTypes.XLSX:
-            filter.filterType = FilterType.SpreadsheetsOnly;
-            break;
+            case FilesSelectorFilterTypes.XLSX:
+              filter.filterType = FilterType.SpreadsheetsOnly;
+              break;
 
-          case FilesSelectorFilterTypes.PDF:
-            filter.extension = FilesSelectorFilterTypes.PDF;
-            break;
+            case FilesSelectorFilterTypes.PDF:
+              filter.extension = FilesSelectorFilterTypes.PDF;
+              break;
 
-          case FilesSelectorFilterTypes.ALL:
-            filter.filterType = FilterType.FilesOnly;
-            break;
+            case FilesSelectorFilterTypes.ALL:
+              filter.filterType = FilterType.FilesOnly;
+              break;
 
-          default:
+            default:
+          }
+        } else {
+          switch (filterParam) {
+            case FilesSelectorExtendedFilterTypes.Documents:
+              filter.filterType = FilterType.DocumentsOnly;
+              break;
+
+            case FilesSelectorExtendedFilterTypes.Presentations:
+              filter.filterType = FilterType.PresentationsOnly;
+              break;
+
+            case FilesSelectorExtendedFilterTypes.Spreadsheets:
+              filter.filterType = FilterType.SpreadsheetsOnly;
+              break;
+
+            case FilesSelectorExtendedFilterTypes.Images:
+              filter.filterType = FilterType.ImagesOnly;
+              break;
+
+            case FilesSelectorExtendedFilterTypes.Media:
+              filter.filterType = FilterType.MediaOnly;
+              break;
+
+            case FilesSelectorExtendedFilterTypes.Archives:
+              filter.filterType = FilterType.ArchiveOnly;
+              break;
+
+            case FilesSelectorFilterTypes.ALL:
+              filter.filterType = FilterType.FilesOnly;
+              break;
+
+            default:
+          }
         }
       }
 
@@ -329,6 +365,7 @@ const useFilesHelper = ({
       setTotal,
       setItems,
       rootThirdPartyId,
+      availableForEditing,
     ],
   );
 

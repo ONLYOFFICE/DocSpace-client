@@ -140,4 +140,5 @@ export type FilesSelectorProps = {
   settings: unknown;
 
   roomsFolderId?: number;
+  availableForEditing?: boolean;
 };

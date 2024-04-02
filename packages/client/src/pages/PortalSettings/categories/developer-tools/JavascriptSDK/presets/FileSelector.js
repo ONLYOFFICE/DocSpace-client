@@ -46,6 +46,7 @@ import { isTablet, isMobile } from "@docspace/shared/utils/device";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Button } from "@docspace/shared/components/button";
+import { FilesSelectorExtendedFilterTypes } from "@docspace/shared/enums";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
 import CodeBlock from "../sub-components/CodeBlock";
@@ -109,7 +110,7 @@ const FileSelector = (props) => {
     { value: "custom-types", label: t("SelectTypes") },
   ];
 
-  const [fileOptions, setFileOptions] = useState([
+  const editingAvailableOptions = [
     {
       key: FilesSelectorFilterTypes.DOCX,
       label: FilesSelectorFilterTypes.DOCX,
@@ -127,7 +128,38 @@ const FileSelector = (props) => {
       key: FilesSelectorFilterTypes.XLSX,
       label: FilesSelectorFilterTypes.XLSX,
     },
-  ]);
+  ];
+
+  const extendedOptions = [
+    {
+      key: FilesSelectorExtendedFilterTypes.Documents,
+      label: t(`Common:${FilesSelectorExtendedFilterTypes.Documents}`),
+    },
+    {
+      key: FilesSelectorExtendedFilterTypes.Presentations,
+      label: t(
+        `Translations:${FilesSelectorExtendedFilterTypes.Presentations}`,
+      ),
+    },
+    {
+      key: FilesSelectorExtendedFilterTypes.Spreadsheets,
+      label: t(`Translations:${FilesSelectorExtendedFilterTypes.Spreadsheets}`),
+    },
+    {
+      key: FilesSelectorExtendedFilterTypes.Images,
+      label: t(`Files:${FilesSelectorExtendedFilterTypes.Images}`),
+    },
+    {
+      key: FilesSelectorExtendedFilterTypes.Media,
+      label: t(`Files:${FilesSelectorExtendedFilterTypes.Media}`),
+    },
+    {
+      key: FilesSelectorExtendedFilterTypes.Archives,
+      label: t(`Files:${FilesSelectorExtendedFilterTypes.Archives}`),
+    },
+  ];
+
+  const [fileOptions, setFileOptions] = useState(extendedOptions);
 
   const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
   const [heightDimension, setHeightDimension] = useState(dataDimensions[0]);
@@ -171,6 +203,7 @@ const FileSelector = (props) => {
     filterParam: FilesSelectorFilterTypes.ALL,
     isButtonMode: selectedElementType === "button",
     buttonWithLogo: true,
+    availableForEditing: false,
     events: {
       onSelectCallback: (items) => {
         toastr.success(items[0].label);
@@ -350,6 +383,24 @@ const FileSelector = (props) => {
 
   const toggleWithSearch = () => {
     setConfig((config) => ({ ...config, withSearch: !config.withSearch }));
+  };
+
+  const toggleAvailableEditing = () => {
+    setFileOptions(
+      config.availableForEditing ? extendedOptions : editingAvailableOptions,
+    );
+    setSelectedType(
+      config.availableForEditing
+        ? extendedOptions[0]
+        : editingAvailableOptions[0],
+    );
+    setConfig((config) => ({
+      ...config,
+      filterParam: config.availableForEditing
+        ? extendedOptions[0].key
+        : editingAvailableOptions[0].key,
+      availableForEditing: !config.availableForEditing,
+    }));
   };
 
   // const toggleBreadCrumbs = () => {
@@ -704,6 +755,21 @@ const FileSelector = (props) => {
                   //   label: t("Common:SelectAction"),
                   // }}
                 />
+
+                <LabelGroup>
+                  <Checkbox
+                    className="checkbox"
+                    label={t("ShowEditedFiles")}
+                    onChange={toggleAvailableEditing}
+                    isChecked={config.availableForEditing}
+                  />
+                  <HelpButton
+                    place="right"
+                    offsetRight={4}
+                    size={12}
+                    tooltipContent={<Text></Text>}
+                  />
+                </LabelGroup>
 
                 {/* <SelectedItemsContainer>
                   {selectedFileTypes.map((type) => (

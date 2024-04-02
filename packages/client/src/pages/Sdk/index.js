@@ -281,6 +281,7 @@ const Sdk = ({
           descriptionText={
             formatsDescription[frameConfig?.filterParam || "DOCX"]
           }
+          availableForEditing={frameConfig?.availableForEditing}
         />
       );
       break;

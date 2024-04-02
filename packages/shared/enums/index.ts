@@ -512,3 +512,16 @@ export const enum WhiteLabelLogoType {
   AboutPage = 7,
   Notification = 8,
 }
+
+/**
+ * Enum for files selector filter extended.
+ * @readonly
+ */
+export const enum FilesSelectorExtendedFilterTypes {
+  Documents = "Documents",
+  Presentations = "Presentations",
+  Spreadsheets = "Spreadsheets",
+  Images = "Images",
+  Media = "Media",
+  Archives = "Archives",
+}

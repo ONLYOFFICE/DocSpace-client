@@ -105,6 +105,7 @@ const FilesSelector = ({
   withSearch: withSearchProp,
   withBreadCrumbs: withBreadCrumbsProp,
   filesSettings,
+  availableForEditing = true,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -218,6 +219,7 @@ const FilesSelector = ({
     getFilesArchiveError,
     isInit,
     setIsInit,
+    availableForEditing,
   });
 
   const onSelectAction = React.useCallback(

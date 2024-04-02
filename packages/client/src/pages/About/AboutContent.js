@@ -27,14 +27,13 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
-import { NoUserSelect, tablet } from "@docspace/shared/utils";
+import { NoUserSelect, tablet, getLogoUrl } from "@docspace/shared/utils";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { ReactSVG } from "react-svg";
 
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import logoPersonalAboutUrl from "PUBLIC_DIR/images/logo_personal_about.svg?url";
-import { getLogoUrl } from "@docspace/shared/utils";
 
 const StyledAboutBody = styled.div`
   width: 100%;

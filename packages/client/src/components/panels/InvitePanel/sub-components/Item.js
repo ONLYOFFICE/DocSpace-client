@@ -216,6 +216,7 @@ const Item = ({
             displayType="auto"
             offsetRight={0}
             tooltipContent={t("EmailErrorMessage")}
+            openOnClick={false}
             size={16}
             color="#F21C0E"
           />

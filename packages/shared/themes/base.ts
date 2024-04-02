@@ -657,6 +657,16 @@ export const getBaseTheme = () => {
 
       colorDisabledFileIcons: "#f3f4f4",
 
+      backdrop: {
+        backgroundRGBA: {
+          r: 6,
+          g: 22,
+          b: 38,
+          a: 0.2,
+        },
+        blur: 18,
+      },
+
       content: {
         backgroundColor: white,
         modalPadding: "0 12px 12px",

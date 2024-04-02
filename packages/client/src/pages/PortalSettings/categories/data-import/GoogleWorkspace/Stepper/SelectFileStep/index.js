@@ -208,7 +208,7 @@ const SelectFileStep = ({
             setIsVisible(true);
           }
 
-          if (res.error) {
+          if (res.error || res.parseResult.failedArchives.length > 0) {
             setShowErrorText(true);
           } else {
             setShowErrorText(false);

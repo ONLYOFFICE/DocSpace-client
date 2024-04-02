@@ -48,6 +48,27 @@ export const settingsTree = [
     isHeader: true,
   },
   {
+    id: "management-settings_catalog-white-label",
+    key: "1-0",
+    icon: "",
+    link: "white-label",
+    tKey: "WhiteLabel",
+  },
+  {
+    id: "management-settings_catalog-company-info-settings",
+    key: "1-1",
+    icon: "",
+    link: "company-info-settings",
+    tKey: "CompanyInfoSettings",
+  },
+  {
+    id: "management-settings_catalog-additional-resources",
+    key: "1-2",
+    icon: "",
+    link: "additional-resources",
+    tKey: "AdditionalResources",
+  },
+  {
     id: "management-settings_catalog-backup",
     key: "2",
     icon: DataManagementIconUrl,

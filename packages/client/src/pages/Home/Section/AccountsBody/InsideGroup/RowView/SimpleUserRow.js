@@ -136,7 +136,7 @@ const SimpleUserRow = (props) => {
   const isChecked = checkedProps.checked;
 
   const onRowClick = React.useCallback(() => {
-    onContentRowClick && onContentRowClick(!isChecked, item);
+    onContentRowClick && onContentRowClick(!isChecked, item, false, false);
   }, [isChecked, item, onContentRowClick]);
 
   const onRowContextClick = React.useCallback(() => {

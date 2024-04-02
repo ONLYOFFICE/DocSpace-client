@@ -41,8 +41,10 @@ export const getHeaderLabel = (
   isSelect?: boolean,
   filterParam?: string,
   isRestore?: boolean,
+  isThirdParty?: boolean,
 ) => {
   if (isRestore) return t("Common:RestoreTo");
+  if (isThirdParty) return t("Common:SelectFolder");
   if (isMove) return t("Common:MoveTo");
   if (isCopy && !isEditorDialog) return t("Common:Copy");
   if (isRestoreAll) return t("Common:Restore");

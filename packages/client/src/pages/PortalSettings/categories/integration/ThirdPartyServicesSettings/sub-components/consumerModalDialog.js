@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { createRef } from "react";
 import PropTypes from "prop-types";
 import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -58,15 +58,20 @@ class ConsumerModalDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    const required = createRef();
+    required.current = [];
+    this.requiredRef = required.current;
   }
 
   mapTokenNameToState = () => {
     const { selectedConsumer } = this.props;
-    selectedConsumer.props.map((prop) =>
+    selectedConsumer.props.map((prop) => {
+      this.requiredRef.push(prop.name);
+
       this.setState({
         [`${prop.name}`]: prop.value,
-      }),
-    );
+      });
+    });
   };
 
   onChangeHandler = (e) => {
@@ -214,17 +219,53 @@ class ConsumerModalDialog extends React.Component {
     </StyledBox>
   );
 
+  inputsRender = (item, index) => {
+    const { onChangeHandler, state, props } = this;
+    const { selectedConsumer, isLoading } = props;
+
+    return (
+      <React.Fragment key={item.name}>
+        <Box
+          displayProp="flex"
+          flexDirection="column"
+          marginProp={
+            selectedConsumer.props.length == index + 1 ? "0" : "0 0 16px 0"
+          }
+        >
+          <Box marginProp="0 0 4px 0">
+            <Text isBold>{item.title}:</Text>
+          </Box>
+          <Box>
+            <TextInput
+              scale
+              id={item.name}
+              name={item.name}
+              placeholder={item.title}
+              isAutoFocussed={index === 0}
+              tabIndex={1}
+              value={Object.values(state)[index]}
+              isDisabled={isLoading}
+              onChange={onChangeHandler}
+              maxLength={maxLength[item.name] ?? defaultMaxLength}
+            />
+          </Box>
+        </Box>
+      </React.Fragment>
+    );
+  };
   render() {
     const { selectedConsumer, onModalClose, dialogVisible, isLoading, t } =
       this.props;
     const {
       state,
-      onChangeHandler,
       updateConsumerValues,
       consumerInstruction,
       helpCenterDescription,
       supportTeamDescription,
+      requiredRef,
     } = this;
+
+    const isDisabled = requiredRef.some((name) => state[name].trim() === "");
 
     return (
       <ModalDialogContainer
@@ -237,35 +278,9 @@ class ConsumerModalDialog extends React.Component {
         <ModalDialog.Body>
           <Box paddingProp="0 0 16px">{consumerInstruction}</Box>
           <React.Fragment>
-            {selectedConsumer.props.map((prop, i) => (
-              <React.Fragment key={prop.name}>
-                <Box
-                  displayProp="flex"
-                  flexDirection="column"
-                  marginProp={
-                    selectedConsumer.props.length == i + 1 ? "0" : "0 0 16px 0"
-                  }
-                >
-                  <Box marginProp="0 0 4px 0">
-                    <Text isBold>{prop.title}:</Text>
-                  </Box>
-                  <Box>
-                    <TextInput
-                      scale
-                      id={prop.name}
-                      name={prop.name}
-                      placeholder={prop.title}
-                      isAutoFocussed={i === 0}
-                      tabIndex={1}
-                      value={Object.values(state)[i]}
-                      isDisabled={isLoading}
-                      onChange={onChangeHandler}
-                      maxLength={maxLength[prop.name] ?? defaultMaxLength}
-                    />
-                  </Box>
-                </Box>
-              </React.Fragment>
-            ))}
+            {selectedConsumer.props.map((prop, i) =>
+              this.inputsRender(prop, i),
+            )}
           </React.Fragment>
           <Text as="div">{supportTeamDescription}</Text>
           <Text as="div">{helpCenterDescription}</Text>
@@ -277,7 +292,7 @@ class ConsumerModalDialog extends React.Component {
             id="enable-button"
             label={isLoading ? t("Common:Sending") : t("Common:Enable")}
             isLoading={isLoading}
-            isDisabled={isLoading}
+            isDisabled={isLoading || isDisabled}
             scale
             onClick={updateConsumerValues}
           />

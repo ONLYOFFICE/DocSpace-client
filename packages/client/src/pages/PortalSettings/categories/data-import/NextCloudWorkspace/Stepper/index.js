@@ -72,6 +72,7 @@ export const getStepsData = (t, currentStep, setCurrentStep) => {
         <SelectUsersStep
           t={t}
           incrementStep={incrementStep}
+          setCurrentStep={setCurrentStep}
           decrementStep={decrementStep}
         />
       ),
@@ -129,6 +130,7 @@ export const getStepsData = (t, currentStep, setCurrentStep) => {
           t={t}
           incrementStep={incrementStep}
           decrementStep={decrementStep}
+          setCurrentStep={setCurrentStep}
         />
       ),
     },

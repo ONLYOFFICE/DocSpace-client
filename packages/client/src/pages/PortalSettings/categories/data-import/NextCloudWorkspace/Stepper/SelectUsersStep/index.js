@@ -51,6 +51,8 @@ const SelectUsersStep = (props) => {
     setSearchValue,
     cancelMigration,
     areCheckedUsersEmpty,
+    setCurrentStep,
+    setResultUsers,
   } = props;
 
   const [dataPortion, setDataPortion] = useState(withEmailUsers.slice(0, 25));
@@ -82,6 +84,15 @@ const SelectUsersStep = (props) => {
     setTimeout(decrementStep, 100);
   };
 
+  const nextStep = () => {
+    if (users.withoutEmail.length > 0) {
+      incrementStep();
+    } else {
+      setResultUsers();
+      setCurrentStep((prevStepCounter) => prevStepCounter + 2);
+    }
+  };
+
   return (
     <Wrapper>
       {withEmailUsers.length > 0 && (
@@ -92,13 +103,15 @@ const SelectUsersStep = (props) => {
         <>
           <SaveCancelButtons
             className="save-cancel-buttons"
-            onSaveClick={incrementStep}
+            onSaveClick={nextStep}
             onCancelClick={goBack}
             saveButtonLabel={t("Settings:NextStep")}
             cancelButtonLabel={t("Common:Back")}
             showReminder
             displaySettings
-            // saveButtonDisabled={areCheckedUsersEmpty}
+            saveButtonDisabled={
+              users.withoutEmail.length === 0 && areCheckedUsersEmpty
+            }
           />
 
           {/* <UsersInfoBlock
@@ -136,13 +149,15 @@ const SelectUsersStep = (props) => {
       {filteredAccounts.length > 0 && (
         <SaveCancelButtons
           className="save-cancel-buttons"
-          onSaveClick={incrementStep}
+          onSaveClick={nextStep}
           onCancelClick={goBack}
           saveButtonLabel={t("Settings:NextStep")}
           cancelButtonLabel={t("Common:Back")}
           showReminder
           displaySettings
-          // saveButtonDisabled={areCheckedUsersEmpty}
+          saveButtonDisabled={
+            users.withoutEmail.length === 0 && areCheckedUsersEmpty
+          }
         />
       )}
     </Wrapper>
@@ -157,6 +172,7 @@ export default inject(({ importAccountsStore }) => {
     setSearchValue,
     cancelMigration,
     areCheckedUsersEmpty,
+    setResultUsers,
   } = importAccountsStore;
 
   return {
@@ -166,5 +182,6 @@ export default inject(({ importAccountsStore }) => {
     setSearchValue,
     cancelMigration,
     areCheckedUsersEmpty,
+    setResultUsers,
   };
 })(observer(SelectUsersStep));

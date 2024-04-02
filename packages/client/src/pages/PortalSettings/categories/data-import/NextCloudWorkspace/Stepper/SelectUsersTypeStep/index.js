@@ -43,6 +43,7 @@ const SelectUsersTypeStep = (props) => {
     users,
     searchValue,
     setSearchValue,
+    setCurrentStep,
   } = props;
 
   const [boundaries, setBoundaries] = useState([0, 25]);
@@ -69,6 +70,12 @@ const SelectUsersTypeStep = (props) => {
       data.email.toLowerCase().startsWith(searchValue.toLowerCase()),
   );
 
+  const goBack = () => {
+    users.withoutEmail.length > 0
+      ? decrementStep()
+      : setCurrentStep((prevStepCounter) => prevStepCounter - 2);
+  };
+
   useEffect(() => {
     setDataPortion(users.result.slice(...boundaries));
   }, [users]);
@@ -78,7 +85,7 @@ const SelectUsersTypeStep = (props) => {
       <SaveCancelButtons
         className="save-cancel-buttons upper-buttons"
         onSaveClick={incrementStep}
-        onCancelClick={decrementStep}
+        onCancelClick={goBack}
         showReminder={true}
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
@@ -111,7 +118,7 @@ const SelectUsersTypeStep = (props) => {
         <SaveCancelButtons
           className="save-cancel-buttons"
           onSaveClick={incrementStep}
-          onCancelClick={decrementStep}
+          onCancelClick={goBack}
           showReminder={true}
           saveButtonLabel={t("Settings:NextStep")}
           cancelButtonLabel={t("Common:Back")}

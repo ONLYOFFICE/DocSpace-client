@@ -315,6 +315,8 @@ const InvitePanel = ({
         addInfoPanelMembers(t, result.members);
       }
 
+      console.log(result);
+
       onClose();
       toastr.success(t("Common:UsersInvited"));
 

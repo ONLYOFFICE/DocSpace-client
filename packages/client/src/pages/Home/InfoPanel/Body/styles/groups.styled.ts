@@ -66,7 +66,8 @@ export const GroupsContent = styled.div<{}>`
       .email {
         max-width: 180px;
         color: #a3a9ae;
-        font-size: ${({ theme }) => theme.getCorrectFontSize("10px")};
+        font-size: ${({ theme }) => theme.getCorrectFontSize("12px")};
+        line-height: 16px;
         font-style: normal;
         font-weight: 400;
         overflow: hidden;

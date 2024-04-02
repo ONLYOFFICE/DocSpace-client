@@ -393,7 +393,13 @@ const AddUsersPanel = ({
     isGroup?: boolean,
   ) => {
     return (
-      <div style={{ width: "100%" }}>
+      <div
+        style={{
+          width: "100%",
+          overflow: "hidden",
+          marginInlineEnd: "16px",
+        }}
+      >
         <Text
           className="label"
           fontWeight={600}

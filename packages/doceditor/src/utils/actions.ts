@@ -29,54 +29,15 @@
 import { headers } from "next/headers";
 
 import { TenantStatus, EditorConfigErrorType } from "@docspace/shared/enums";
+import {
+  createRequest,
+  getBaseUrl,
+} from "@docspace/shared/utils/next-ssr-helper";
 import type { TDocServiceLocation } from "@docspace/shared/api/files/types";
 
 import type { IInitialConfig, TCatchError, TError, TResponse } from "@/types";
 
 import { isTemplateFile } from ".";
-
-const API_PREFIX = "api/2.0";
-
-export const getBaseUrl = () => {
-  const hdrs = headers();
-
-  const host = hdrs.get("x-forwarded-host");
-  const proto = hdrs.get("x-forwarded-proto");
-
-  const baseURL = `${proto}://${host}`;
-
-  return baseURL;
-};
-
-export const getAPIUrl = () => {
-  const baseUrl = getBaseUrl();
-  const baseAPIUrl = `${baseUrl}/${API_PREFIX}`;
-
-  return baseAPIUrl;
-};
-
-export const createRequest = (
-  paths: string[],
-  newHeaders: [string, string][],
-  method: string,
-  body?: string,
-) => {
-  const hdrs = new Headers(headers());
-
-  const apiURL = getAPIUrl();
-
-  newHeaders.forEach((hdr) => {
-    if (hdr[0]) hdrs.set(hdr[0], hdr[1]);
-  });
-
-  const urls = paths.map((path) => `${apiURL}${path}`);
-
-  const requests = urls.map(
-    (url) => new Request(url, { headers: hdrs, method, body }),
-  );
-
-  return requests;
-};
 
 export async function getErrorData() {
   const hdrs = headers();
@@ -138,7 +99,7 @@ const processFillFormDraft = async (
 
   if (!response.ok) return;
 
-  const { response: formUrl, ...rest } = await response.json();
+  const { response: formUrl } = await response.json();
 
   const basePath = getBaseUrl();
   const url = new URL(basePath + formUrl);
@@ -405,22 +366,33 @@ export async function getData(
 
     console.log("initDocEditor failed", config.error);
 
+    const status =
+      config.error.type === EditorConfigErrorType.NotFoundScope
+        ? "not-found"
+        : config.error.type === EditorConfigErrorType.AccessDeniedScope
+          ? "access-denied"
+          : undefined;
+
+    const message = status ? config.error.message : undefined;
+
     const response: TResponse = {
       error:
         user || share
           ? config.error.type === EditorConfigErrorType.LinkScope
-            ? { message: "unauthorized" }
+            ? { message: message ?? "unauthorized", status }
             : config.error
-          : { message: "unauthorized" },
+          : { message: message ?? "unauthorized", status },
       user: user?.response,
       settings: settings?.response,
       fileId,
+      editorUrl: editorUrl.response,
     };
 
     return response;
   } catch (e) {
     const err = e as TCatchError;
     console.error("initDocEditor failed", err);
+
     let message = "";
     if (typeof err === "string") message = err;
     else

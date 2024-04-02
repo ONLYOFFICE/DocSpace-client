@@ -57,16 +57,16 @@ const useInit = ({
       config.document.title,
       config.document.fileType,
       documentReady,
-      successAuth,
+      successAuth ?? false,
       setDocTitle,
     );
   }, [config, documentReady, fileInfo, setDocTitle, successAuth]);
 
   React.useEffect(() => {
-    if (config && IS_DESKTOP_EDITOR) {
+    if (config && IS_DESKTOP_EDITOR && user && fileInfo?.id) {
       initDesktop(config, user, fileInfo.id, t);
     }
-  }, [config, fileInfo.id, t, user]);
+  }, [config, fileInfo?.id, t, user]);
 
   React.useEffect(() => {
     try {
@@ -91,4 +91,3 @@ const useInit = ({
 };
 
 export default useInit;
-

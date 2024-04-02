@@ -63,7 +63,9 @@ const getTags = (
     const item = catalogs[key];
     const { usedSpace, title } = item;
 
-    const percentageSize = calculateSize(usedSpace, commonSize);
+    let percentageSize = calculateSize(usedSpace, commonSize);
+    if (percentageSize < 0.05 && percentageSize !== 0) percentageSize = 0.5;
+
     const size = getConvertedSize(t, usedSpace);
 
     array.push({

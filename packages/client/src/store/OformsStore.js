@@ -27,7 +27,10 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
 import OformsFilter from "@docspace/shared/api/oforms/filter";
-import { submitToGallery } from "@docspace/shared/api/oforms";
+import {
+  getGuideLinkByLocale,
+  submitToGallery,
+} from "@docspace/shared/api/oforms";
 
 import {
   getOformLocales,
@@ -293,6 +296,13 @@ class OformsStore {
       this.oformsFilter.locale,
     );
     return categories;
+  };
+
+  fetchGuideLink = async (locale = this.defaultOformLocale) => {
+    const { uploadDomain, uploadDashboard } = this.settingsStore.formGallery;
+    const url = combineUrl(uploadDomain, uploadDashboard, `/blog-links`);
+    const guideLink = await getGuideLinkByLocale(url, locale);
+    return guideLink;
   };
 
   filterOformsByCategory = (categorizeBy, categoryId) => {

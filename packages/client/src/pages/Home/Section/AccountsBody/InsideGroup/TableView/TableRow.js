@@ -471,7 +471,7 @@ const InsideGroupTableRow = (props) => {
 
     //console.log("onRowClick");
 
-    onContentRowClick && onContentRowClick(!isChecked, item);
+    onContentRowClick && onContentRowClick(!isChecked, item, false, false);
   };
   const isPaidUser = !standalone && !isVisitor;
   return (

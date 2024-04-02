@@ -252,9 +252,6 @@ class FilesStore {
           case "delete":
             this.wsModifyFolderDelete(opt);
             break;
-          case "create-form":
-            this.wsCreatedPDFForm(opt);
-            break;
         }
 
       if (
@@ -358,6 +355,17 @@ class FilesStore {
         foundIndex,
         this.files[foundIndex].fileStatus | FileStatus.IsEditing,
       );
+    });
+
+    socketHelper.on("s:modify-room", (option) => {
+      switch (option.cmd) {
+        case "create-form":
+          this.wsCreatedPDFForm(option);
+          break;
+
+        default:
+          break;
+      }
     });
 
     socketHelper.on("s:stop-edit-file", (id) => {
@@ -660,7 +668,7 @@ class FilesStore {
     const event = new CustomEvent(Events.CREATE_PDF_FORM_FILE, {
       detail: {
         file,
-        isFill: true,
+        isFill: !option.isOneMember,
         isFirst,
       },
     });
@@ -668,11 +676,6 @@ class FilesStore {
     if (isFirst) localStorage.setItem(localKey, "false");
 
     window?.dispatchEvent(event);
-  };
-
-  setCreatedPDFFormDialogVisible = (visible, data = null) => {
-    this.createdPDFFormDialogVisible = visible;
-    this.createdPDFFormDialogData = data;
   };
 
   setIsErrorRoomNotAvailable = (state) => {

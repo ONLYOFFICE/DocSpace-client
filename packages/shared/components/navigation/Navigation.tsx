@@ -115,7 +115,6 @@ const Navigation = ({
 
   const onMissClick = React.useCallback(
     (e: MouseEvent) => {
-      e.preventDefault();
       const path = e.composedPath && e.composedPath();
 
       if (!firstClick) {

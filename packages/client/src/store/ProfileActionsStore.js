@@ -339,7 +339,7 @@ class ProfileActionsStore {
         icon: LiveChatReactSvgUrl,
         label: t("Common:LiveChat"),
         onClick: () => this.onLiveChatClick(t),
-        // checked: this.isShowLiveChat,
+        checked: this.isShowLiveChat,
         withToggle: true,
       };
     }

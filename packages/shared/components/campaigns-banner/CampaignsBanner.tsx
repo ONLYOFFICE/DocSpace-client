@@ -111,6 +111,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
             fontSize={action?.fontSize}
             fontWeight={action?.fontWeight}
             onClick={() => onAction(action?.type, Link)}
+            isHovered
           >
             {ButtonLabel}
           </LinkComponent>

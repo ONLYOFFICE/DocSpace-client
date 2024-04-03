@@ -43,6 +43,7 @@ const BannerWrapper = styled.div<{
     content: "";
     background-image: url(${(props) => props.background});
     background-size: 100%;
+    background-repeat: no-repeat;
     position: absolute;
     left: 0;
     top: 0;
@@ -54,6 +55,10 @@ const BannerWrapper = styled.div<{
       css`
         transform: scaleX(-1);
       `}
+
+    @media ${mobile} {
+      background-position: 0% 100%;
+    }
   }
 
   .close-icon {
@@ -72,12 +77,6 @@ const BannerWrapper = styled.div<{
     path {
       fill: "#A3A9AE";
     }
-  }
-
-  @media ${mobile} {
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
   }
 `;
 

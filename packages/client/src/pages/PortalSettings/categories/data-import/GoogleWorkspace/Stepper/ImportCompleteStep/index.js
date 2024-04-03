@@ -70,6 +70,7 @@ const ImportCompleteStep = ({
   const [importResult, setImportResult] = useState({
     succeedUsers: 0,
     failedUsers: 0,
+    errors: [],
   });
   const navigate = useNavigate();
 
@@ -116,6 +117,7 @@ const ImportCompleteStep = ({
         setImportResult({
           succeedUsers: res.parseResult.successedUsers,
           failedUsers: res.parseResult.failedUsers,
+          errors: res.parseResult.errors,
         }),
       );
     } catch (error) {
@@ -138,6 +140,10 @@ const ImportCompleteStep = ({
             errors: importResult.failedUsers,
           })}
         </ErrorText>
+      )}
+
+      {importResult.errors.length > 0 && (
+        <ErrorText>{t("Settings:ErrorOccuredDownloadLog")}</ErrorText>
       )}
 
       <Wrapper>

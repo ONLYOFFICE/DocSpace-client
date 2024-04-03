@@ -32,7 +32,6 @@ import { useTheme } from "styled-components";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import OutsdideIcon from "PUBLIC_DIR/images/arrow.outside.react.svg";
-import CheckEditIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 
 import {
   classNames,
@@ -294,7 +293,6 @@ const SubMenu = (props: {
         {icon}
         {label}
         {subMenuIcon}
-        {item.checked && <CheckEditIcon className={subMenuIconClassName} />}
         {item.isOutsideLink && (
           <OutsdideIcon className={subMenuIconClassName} />
         )}

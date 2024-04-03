@@ -155,7 +155,7 @@ const StyledSelectAll = styled.div`
 
   .checkbox {
     svg {
-      margin-right: 0px;
+      margin-inline-end: 0px;
     }
   }
 `;
@@ -206,7 +206,7 @@ const StyledItem = styled.div<{
 
   .checkbox {
     svg {
-      margin-right: 0px;
+      margin-inline-end: 0px;
     }
   }
 

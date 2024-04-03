@@ -36,7 +36,6 @@ import AccountsPaging from "../../../sub-components/AccountsPaging";
 
 // import UsersInfoBlock from "../../../sub-components/UsersInfoBlock";
 import { Wrapper } from "../StyledStepper";
-import { NoEmailUsersBlock } from "../../../sub-components/NoEmailUsersBlock";
 
 // const LICENSE_LIMIT = 100;
 
@@ -45,14 +44,10 @@ const SelectUsersStep = (props) => {
     t,
     incrementStep,
     decrementStep,
-    users,
     withEmailUsers,
     searchValue,
     setSearchValue,
     cancelMigration,
-    areCheckedUsersEmpty,
-    setCurrentStep,
-    setResultUsers,
   } = props;
 
   const [dataPortion, setDataPortion] = useState(withEmailUsers.slice(0, 25));
@@ -84,34 +79,18 @@ const SelectUsersStep = (props) => {
     setTimeout(decrementStep, 100);
   };
 
-  const nextStep = () => {
-    if (users.withoutEmail.length > 0) {
-      incrementStep();
-    } else {
-      setResultUsers();
-      setCurrentStep((prevStepCounter) => prevStepCounter + 2);
-    }
-  };
-
   return (
     <Wrapper>
-      {withEmailUsers.length > 0 && (
-        <NoEmailUsersBlock users={users.withoutEmail.length} t={t} />
-      )}
-
       {withEmailUsers.length > 0 ? (
         <>
           <SaveCancelButtons
             className="save-cancel-buttons"
-            onSaveClick={nextStep}
+            onSaveClick={incrementStep}
             onCancelClick={goBack}
             saveButtonLabel={t("Settings:NextStep")}
             cancelButtonLabel={t("Common:Back")}
             showReminder
             displaySettings
-            saveButtonDisabled={
-              users.withoutEmail.length === 0 && areCheckedUsersEmpty
-            }
           />
 
           {/* <UsersInfoBlock
@@ -149,15 +128,12 @@ const SelectUsersStep = (props) => {
       {filteredAccounts.length > 0 && (
         <SaveCancelButtons
           className="save-cancel-buttons"
-          onSaveClick={nextStep}
+          onSaveClick={incrementStep}
           onCancelClick={goBack}
           saveButtonLabel={t("Settings:NextStep")}
           cancelButtonLabel={t("Common:Back")}
           showReminder
           displaySettings
-          saveButtonDisabled={
-            users.withoutEmail.length === 0 && areCheckedUsersEmpty
-          }
         />
       )}
     </Wrapper>
@@ -171,8 +147,6 @@ export default inject(({ importAccountsStore }) => {
     searchValue,
     setSearchValue,
     cancelMigration,
-    areCheckedUsersEmpty,
-    setResultUsers,
   } = importAccountsStore;
 
   return {
@@ -181,7 +155,5 @@ export default inject(({ importAccountsStore }) => {
     searchValue,
     setSearchValue,
     cancelMigration,
-    areCheckedUsersEmpty,
-    setResultUsers,
   };
 })(observer(SelectUsersStep));

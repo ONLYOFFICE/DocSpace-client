@@ -58,6 +58,8 @@ const EditRoomDialog = ({
   );
 
   const compareRoomParams = (prevParams, currentParams) => {
+    console.log({ prevParams, currentParams });
+
     return (
       prevParams.title === currentParams.title &&
       prevParams.roomOwner.id === currentParams.roomOwner.id &&
@@ -72,7 +74,8 @@ const EditRoomDialog = ({
           .join("|")
           .toLowerCase() &&
       ((prevParams.icon.uploadedFile === "" &&
-        currentParams.icon.uploadedFile === null) ||
+        (currentParams.icon.uploadedFile === null ||
+          currentParams.icon.uploadedFile === undefined)) ||
         prevParams.icon.uploadedFile === currentParams.icon.uploadedFile) &&
       prevParams.quota === currentParams.quota
     );

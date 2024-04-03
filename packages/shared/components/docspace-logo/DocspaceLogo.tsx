@@ -36,7 +36,7 @@ import type { DocspaceLogoProps } from "./DocspaceLogo.types";
 const DocspaceLogo = ({ className }: DocspaceLogoProps) => {
   const theme = useTheme();
 
-  const logo = getLogoUrl(WhiteLabelLogoType.LoginPage, theme.isBase);
+  const logo = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
 
   return (
     <StyledWrapper>

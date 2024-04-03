@@ -43,6 +43,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
+import { isDesktop } from "@docspace/shared/utils";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
 import PlusReactSvgUrl from "PUBLIC_DIR/images/actions.button.plus.react.svg?url";
 
@@ -174,7 +175,7 @@ const Members = ({
 
               {additionalLinks.length >= LINKS_LIMIT_COUNT && (
                 <Tooltip
-                  float
+                  float={isDesktop()}
                   id="emailTooltip"
                   getContent={({ content }) => (
                     <Text fontSize="12px">{content}</Text>

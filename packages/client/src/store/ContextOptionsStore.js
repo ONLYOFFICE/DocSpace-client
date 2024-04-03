@@ -1556,17 +1556,7 @@ class ContextOptionsStore {
     const pluginItems = this.onLoadPlugins(item);
 
     if (pluginItems.length > 0) {
-      if (isDesktop()) {
-        options.splice(1, 0, {
-          id: "option_plugin-actions",
-          key: "plugin_actions",
-          label: t("Common:Actions"),
-          icon: PluginActionsSvgUrl,
-          disabled: false,
-
-          onLoad: () => this.onLoadPlugins(item),
-        });
-      } else {
+      if (!isDesktop() || pluginItems.length === 1) {
         pluginItems.forEach((plugin) => {
           options.splice(1, 0, {
             id: `option_${plugin.key}`,
@@ -1576,6 +1566,16 @@ class ContextOptionsStore {
             disabled: false,
             onClick: plugin.onClick,
           });
+        });
+      } else {
+        options.splice(1, 0, {
+          id: "option_plugin-actions",
+          key: "plugin_actions",
+          label: t("Common:Actions"),
+          icon: PluginActionsSvgUrl,
+          disabled: false,
+
+          onLoad: () => this.onLoadPlugins(item),
         });
       }
     }

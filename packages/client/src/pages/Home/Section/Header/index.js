@@ -182,6 +182,17 @@ const StyledContainer = styled.div`
         display: none;
       }
     }
+
+    .title-icon {
+      svg {
+        path {
+          fill: ${(props) => props.theme.backgroundColor};
+        }
+        rect {
+          stroke: ${(props) => props.theme.backgroundColor};
+        }
+      }
+    }
   }
 `;
 

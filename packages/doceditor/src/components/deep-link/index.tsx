@@ -35,7 +35,7 @@ import { Link, LinkType } from "@docspace/shared/components/link";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { getBgPattern } from "@docspace/shared/utils/common";
 import { getLogoUrl } from "@docspace/shared/utils";
-import { DeviceType } from "@docspace/shared/enums";
+import { DeviceType, WhiteLabelLogoType } from "@docspace/shared/enums";
 
 import { getDeepLink } from "./DeepLink.helper";
 
@@ -96,7 +96,7 @@ const DeepLink = ({
   };
 
   const renderLogo = () => {
-    const logo = getLogoUrl(1, !theme.isBase);
+    const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
 
     if (currentDeviceType === DeviceType.mobile) {
       return (

@@ -28,6 +28,7 @@ import React from "react";
 import { useTheme } from "styled-components";
 
 import { classNames, getLogoUrl } from "@docspace/shared/utils";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
 
 import { StyledWrapper } from "./DocspaceLogo.styled";
 import type { DocspaceLogoProps } from "./DocspaceLogo.types";
@@ -35,7 +36,7 @@ import type { DocspaceLogoProps } from "./DocspaceLogo.types";
 const DocspaceLogo = ({ className }: DocspaceLogoProps) => {
   const theme = useTheme();
 
-  const logo = getLogoUrl(2, theme.isBase);
+  const logo = getLogoUrl(WhiteLabelLogoType.LoginPage, theme.isBase);
 
   return (
     <StyledWrapper>

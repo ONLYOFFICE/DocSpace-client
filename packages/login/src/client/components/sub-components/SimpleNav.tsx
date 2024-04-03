@@ -27,8 +27,8 @@
 import React from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-import { mobile } from "@docspace/shared/utils";
-import { getLogoUrl } from "@docspace/shared/utils";
+import { mobile, getLogoUrl } from "@docspace/shared/utils";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
 
 const StyledNav = styled.div`
   display: none;
@@ -51,10 +51,8 @@ interface ISimpleNav extends IInitialState {
   theme: IUserTheme;
 }
 
-const SimpleNav = ({ theme, logoUrls }: ISimpleNav) => {
-  const logo = logoUrls && Object.values(logoUrls)[0];
-
-  const logoUrl = !logo ? undefined : getLogoUrl(1, !theme?.isBase);
+const SimpleNav = ({ theme }: ISimpleNav) => {
+  const logoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme?.isBase);
 
   return (
     <StyledNav id="login-header" theme={theme}>

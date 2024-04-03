@@ -33,12 +33,17 @@ import { Link as LinkWithoutRedirect } from "react-router-dom";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { isDesktop, tablet, mobile } from "@docspace/shared/utils";
+import {
+  isDesktop,
+  tablet,
+  mobile,
+  NoUserSelect,
+  getLogoUrl,
+} from "@docspace/shared/utils";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { NoUserSelect } from "@docspace/shared/utils";
 import HeaderCatalogBurger from "./header-catalog-burger";
 import { Base } from "@docspace/shared/themes";
-import { getLogoUrl } from "@docspace/shared/utils";
 
 const Header = styled.header`
   display: flex;
@@ -231,7 +236,7 @@ const HeaderComponent = ({
     return () => window.removeEventListener("resize", onResize);
   });
 
-  const logo = getLogoUrl(1, !theme.isBase);
+  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
 
   return (
     <>

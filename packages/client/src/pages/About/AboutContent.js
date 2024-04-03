@@ -28,6 +28,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
 import { NoUserSelect, tablet, getLogoUrl } from "@docspace/shared/utils";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { ReactSVG } from "react-svg";
@@ -133,7 +134,7 @@ const AboutContent = (props) => {
     ? previewData.address
     : companyInfoSettingsData?.address;
 
-  const logo = getLogoUrl(7, !theme.isBase);
+  const logo = getLogoUrl(WhiteLabelLogoType.AboutPage, !theme.isBase);
 
   return (
     companyInfoSettingsData && (

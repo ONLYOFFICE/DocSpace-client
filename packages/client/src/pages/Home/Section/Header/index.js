@@ -74,7 +74,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { resendInvitesAgain } from "@docspace/shared/api/people";
 
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { tablet, mobile, Consumer } from "@docspace/shared/utils";
+import { tablet, mobile, Consumer, getLogoUrl } from "@docspace/shared/utils";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { TableGroupMenu } from "@docspace/shared/components/table";
@@ -85,6 +85,7 @@ import {
   DeviceType,
   FolderType,
   ShareAccessRights,
+  WhiteLabelLogoType,
 } from "@docspace/shared/enums";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -92,7 +93,6 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
-import { getLogoUrl } from "@docspace/shared/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
 
 const StyledContainer = styled.div`
@@ -1175,8 +1175,8 @@ const SectionHeaderContent = (props) => {
       categoryType === CategoryType.Archive) &&
     !isCurrentRoom;
 
-  const logo = getLogoUrl(1, !theme.isBase);
-  const burgerLogo = getLogoUrl(6, !theme.isBase);
+  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
+  const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !theme.isBase);
 
   const navigationButtonLabel = showNavigationButton
     ? t("Files:ShareRoom")

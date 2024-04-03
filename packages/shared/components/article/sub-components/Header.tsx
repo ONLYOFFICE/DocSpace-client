@@ -29,7 +29,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useTheme } from "styled-components";
 
 import { getLogoUrl } from "../../../utils";
-import { DeviceType } from "../../../enums";
+import { DeviceType, WhiteLabelLogoType } from "../../../enums";
 import { ArticleHeaderLoader } from "../../../skeletons/article";
 
 import {
@@ -45,7 +45,6 @@ const ArticleHeader = ({
   onClick,
   onLogoClickAction,
   isBurgerLoading,
-  whiteLabelLogoUrls,
 
   withCustomArticleHeader,
   currentDeviceType,
@@ -59,8 +58,8 @@ const ArticleHeader = ({
     navigate("/");
   };
 
-  const burgerLogo = getLogoUrl(6, !theme.isBase);
-  const logo = getLogoUrl(1, !theme.isBase);
+  const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !theme.isBase);
+  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
 
   if (currentDeviceType === DeviceType.mobile) return null;
 

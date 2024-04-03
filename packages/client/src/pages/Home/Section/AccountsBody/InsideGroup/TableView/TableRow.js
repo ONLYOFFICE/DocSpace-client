@@ -462,6 +462,7 @@ const InsideGroupTableRow = (props) => {
       e.target.closest(".checkbox") ||
       e.target.closest(".table-container_row-checkbox") ||
       e.target.closest(".type-combobox") ||
+      e.target.closest(".groups-combobox") ||
       e.target.closest(".paid-badge") ||
       e.target.closest(".pending-badge") ||
       e.target.closest(".disabled-badge") ||
@@ -534,10 +535,7 @@ const InsideGroupTableRow = (props) => {
         )}
 
         {groupAccountsInsideGroupColumnIsEnabled ? (
-          <TableCell
-            className={"table-cell_groups"}
-            onClick={(e) => e.stopPropagation()}
-          >
+          <TableCell className={"table-cell_groups"}>
             {renderGroupsCell()}
           </TableCell>
         ) : (

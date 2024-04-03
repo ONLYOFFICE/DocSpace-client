@@ -50,6 +50,7 @@ const DeleteThirdPartyDialog = (props) => {
     setDeleteThirdPartyDialogVisible,
     isConnectionViaBackupModule,
     updateInfo,
+    setConnectedThirdPartyAccount,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -60,10 +61,13 @@ const DeleteThirdPartyDialog = (props) => {
   const onClose = () => setDeleteThirdPartyDialogVisible(false);
 
   const onDeleteThirdParty = () => {
+    setIsLoading(true);
+
     if (isConnectionViaBackupModule) {
       deleteThirdParty(+removeItem.provider_id)
         .catch((err) => toastr.error(err))
         .finally(() => {
+          setConnectedThirdPartyAccount(null);
           updateInfo && updateInfo();
           setIsLoading(false);
           onClose();
@@ -76,7 +80,6 @@ const DeleteThirdPartyDialog = (props) => {
       (x) => x.provider_id !== removeItem.id,
     );
 
-    setIsLoading(true);
     deleteThirdParty(+removeItem.id)
       .then(() => {
         setThirdPartyProviders(newProviders);
@@ -145,7 +148,10 @@ export default inject(
     const { providers, setThirdPartyProviders, deleteThirdParty } =
       filesSettingsStore.thirdPartyStore;
     const { setIsLoading } = filesStore;
-    const { selectedThirdPartyAccount: backupConnectionItem } = backup;
+    const {
+      selectedThirdPartyAccount: backupConnectionItem,
+      setConnectedThirdPartyAccount,
+    } = backup;
     const {
       deleteThirdPartyDialogVisible: visible,
       setDeleteThirdPartyDialogVisible,
@@ -168,6 +174,7 @@ export default inject(
       setThirdPartyProviders,
       deleteThirdParty,
       setDeleteThirdPartyDialogVisible,
+      setConnectedThirdPartyAccount,
     };
   },
 )(

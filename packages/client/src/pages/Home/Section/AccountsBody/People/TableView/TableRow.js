@@ -127,6 +127,7 @@ const StyledPeopleRow = styled(TableRow)`
     opacity: ${(props) => (props.hideColumns ? 0 : 1)};
 
     & > div {
+      width: auto;
       max-width: fit-content;
     }
   }
@@ -382,7 +383,7 @@ const PeopleTableRow = (props) => {
           plusBadgeValue={groups.length - 1}
           onSelect={onOpenGroup}
           options={groupItems}
-          scaled
+          scaled={false}
           directionY="both"
           size="content"
           modernView
@@ -421,7 +422,7 @@ const PeopleTableRow = (props) => {
         }
         options={typesOptions}
         onSelect={onTypeChange}
-        scaled
+        scaled={false}
         directionY="both"
         size="content"
         displaySelectedOption

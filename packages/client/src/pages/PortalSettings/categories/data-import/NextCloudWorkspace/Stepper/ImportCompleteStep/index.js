@@ -42,6 +42,11 @@ const ErrorText = styled(Text)`
   color: ${(props) => props.theme.client.settings.migration.errorTextColor};
   margin-bottom: 16px;
 `;
+const InfoText = styled(Text)`
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: ${(props) => props.theme.client.settings.migration.subtitleColor};
+`;
 
 const ImportCompleteStep = ({
   t,
@@ -111,12 +116,12 @@ const ImportCompleteStep = ({
 
   return (
     <Wrapper>
-      <Text fontSize="12px">
+      <InfoText>
         {t("Settings:ImportedUsers", {
           selectedUsers: importResult.succeedUsers,
           importedUsers: importResult.succeedUsers + importResult.failedUsers,
         })}
-      </Text>
+      </InfoText>
 
       {importResult.failedUsers > 0 && (
         <ErrorText>

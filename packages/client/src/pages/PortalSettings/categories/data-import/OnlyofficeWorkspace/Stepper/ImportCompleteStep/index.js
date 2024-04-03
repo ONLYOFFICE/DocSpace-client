@@ -36,7 +36,7 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { toastr } from "@docspace/shared/components/toast";
 
 const Wrapper = styled.div`
-  margin: 0 0 16px;
+  margin: 16px 0 16px;
   display: flex;
   align-items: center;
 
@@ -47,7 +47,7 @@ const Wrapper = styled.div`
 
 const InfoText = styled(Text)`
   margin-top: -8px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   font-size: 12px;
   color: ${(props) => props.theme.client.settings.migration.subtitleColor};
 `;
@@ -55,7 +55,7 @@ const InfoText = styled(Text)`
 const ErrorText = styled(Text)`
   font-size: 12px;
   color: ${(props) => props.theme.client.settings.migration.errorTextColor};
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 `;
 
 const ImportCompleteStep = ({

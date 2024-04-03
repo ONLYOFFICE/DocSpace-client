@@ -44,6 +44,7 @@
   "RoleUserDescription": "İstifadəçilər yalnız adminlər tərəfindən dəvət olunduqları otaqlara daxil ola bilərlər. Onlar öz otaqlarını, qovluqlarını və ya fayllarını yarada bilməzlər.",
   "RoleViewer": "İzləyici",
   "RoleViewerDescription": "Fayla baxış",
+  "SearchByHeadOfGroup": "Qrup rəhbəri tərəfindən axtarış",
   "SearchByOwner": "Sahiblərə görə axtarış",
   "Spreadsheets": "Cədvəllər",
   "SubNewForm": "Blankı",

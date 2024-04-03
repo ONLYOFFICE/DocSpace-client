@@ -44,6 +44,7 @@
   "RoleUserDescription": "Käyttäjät pääsevät huoneisiin vain, jos järjestelmänvalvojat ovat kutsuneet heidät. He eivät voi luoda omia huoneita, kansioita tai tiedostoja.",
   "RoleViewer": "Katselija",
   "RoleViewerDescription": "Tiedoston katseleminen",
+  "SearchByHeadOfGroup": "Hae ryhmän päällikön mukaan",
   "SearchByOwner": "Haku Omistajien mukaan",
   "Spreadsheets": "Laskentataulukot",
   "SubNewForm": "Tyhjä",

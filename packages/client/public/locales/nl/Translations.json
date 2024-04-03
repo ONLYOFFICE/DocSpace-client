@@ -44,6 +44,7 @@
   "RoleUserDescription": "Gebruikers hebben alleen toegang tot de ruimtes waarvoor zij door beheerders zijn uitgenodigd. Zij kunnen geen eigen kamers, mappen of bestanden aanmaken.",
   "RoleViewer": "Kijker",
   "RoleViewerDescription": "Bestand bekijken",
+  "SearchByHeadOfGroup": "Zoeken op Groepshoofd",
   "SearchByOwner": "Zoeken op Eigenaren",
   "Spreadsheets": "Spreadsheets",
   "SubNewForm": "Blanco",

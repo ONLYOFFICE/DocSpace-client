@@ -44,6 +44,7 @@
   "RoleUserDescription": "Użytkownicy mają dostęp tylko do pokoi, do których zostali zaproszeni przez administratorów. Nie mogą tworzyć własnych pokoi, folderów ani plików.",
   "RoleViewer": "Przeglądający",
   "RoleViewerDescription": "Odczyt plików",
+  "SearchByHeadOfGroup": "Szukaj według lidera grupy",
   "SearchByOwner": "Szukaj wg Właścicieli",
   "Spreadsheets": "Arkusze kalkulacyjne",
   "SubNewForm": "Pusty",

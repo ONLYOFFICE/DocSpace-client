@@ -44,6 +44,7 @@
   "RoleUserDescription": "Lietotāji var piekļūt tikai tām telpām, uz kurām viņus ir uzaicinājuši administratori. Viņi nevar izveidot savas telpas, mapes vai failus.",
   "RoleViewer": "Skatītājs",
   "RoleViewerDescription": "Failu skatīšana",
+  "SearchByHeadOfGroup": "Meklēt pēc grupas vadītāja",
   "SearchByOwner": "Meklēt pēc īpašniekiem",
   "Spreadsheets": "Izklājlapas",
   "SubNewForm": "Tukša",

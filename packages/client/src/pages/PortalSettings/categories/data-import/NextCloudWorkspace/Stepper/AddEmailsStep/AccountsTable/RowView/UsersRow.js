@@ -43,7 +43,7 @@ const UsersRow = (props) => {
   const emailTextRef = useRef();
 
   const [isPrevEmailValid, setIsPrevEmailValid] = useState(
-    data.email.length > 0,
+    data.email?.length > 0,
   );
 
   const handleAccountToggle = (e) => {
@@ -68,7 +68,7 @@ const UsersRow = (props) => {
         id={data.key}
         sectionWidth={sectionWidth}
         displayName={data.displayName}
-        email={data.email}
+        email={data.email || ""}
         emailInputRef={emailInputRef}
         emailTextRef={emailTextRef}
         isChecked={isChecked}

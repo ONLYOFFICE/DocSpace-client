@@ -1019,7 +1019,6 @@ class SettingsStore {
 
     if (window.DocSpaceConfig) window.DocSpaceConfig.isFrame = isFrame;
 
-    console.log("Table log isFrame", isFrame);
     return isFrame;
   }
 

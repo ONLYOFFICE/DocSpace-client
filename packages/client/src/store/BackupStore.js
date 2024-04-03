@@ -35,8 +35,12 @@ import { toastr } from "@docspace/shared/components/toast";
 import { AutoBackupPeriod } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
-import { uploadBackup } from "@docspace/shared/api/files";
-
+import {
+  getSettingsThirdParty,
+  getThirdPartyCapabilities,
+  uploadBackup,
+} from "@docspace/shared/api/files";
+import i18n from "../i18n";
 const { EveryDayType, EveryWeekType } = AutoBackupPeriod;
 
 class BackupStore {
@@ -95,6 +99,9 @@ class BackupStore {
   storageRegions = [];
   selectedThirdPartyAccount = null;
   connectedThirdPartyAccount = null;
+  accounts = [];
+  capabilities = [];
+  connectedAccount = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -188,13 +195,100 @@ class BackupStore {
     return false;
   }
 
+  setThirdPartyAccountsInfo = async () => {
+    const [connectedAccount, capabilities] = await Promise.all([
+      getSettingsThirdParty(),
+      getThirdPartyCapabilities(),
+    ]);
+
+    this.setCapabilities(capabilities);
+    this.setConnectedThirdPartyAccount(connectedAccount);
+
+    const providerNames = [
+      ["GoogleDrive", i18n.t("Translations:TypeTitleGoogle")],
+      ["Box", i18n.t("Translations:TypeTitleBoxNet")],
+      ["DropboxV2", i18n.t("Translations:TypeTitleDropBox")],
+      ["SharePoint", i18n.t("Translations:TypeTitleSharePoint")],
+      ["OneDrive", i18n.t("Translations:TypeTitleSkyDrive")],
+      ["WebDav", "Nextcloud"],
+      ["WebDav", "ownCloud"],
+      ["kDrive", i18n.t("Translations:TypeTitlekDrive")],
+      ["Yandex", i18n.t("Translations:TypeTitleYandex")],
+      ["WebDav", i18n.t("Translations:TypeTitleWebDav")],
+    ];
+
+    let accounts = [],
+      selectedAccount = {};
+    let index = 0;
+    providerNames.map((item) => {
+      const { account, isConnected } = this.getThirdPartyAccount(
+        item[0],
+        item[1],
+        index,
+      );
+
+      if (!account) return;
+
+      accounts.push(account);
+
+      if (isConnected) {
+        selectedAccount = { ...accounts[index] };
+      }
+      index++;
+    });
+
+    this.setThirdPartyAccounts(accounts);
+
+    console.log(selectedAccount, accounts);
+
+    this.setSelectedThirdPartyAccount(
+      Object.keys(selectedAccount).length !== 0
+        ? selectedAccount
+        : { ...accounts[0] },
+    );
+  };
+
+  getThirdPartyAccount = (providerKey, serviceTitle, index) => {
+    const accountIndex =
+      this.capabilities &&
+      this.capabilities.findIndex((x) => x[0] === providerKey);
+
+    if (accountIndex === -1) return { account: null, isConnected: false };
+
+    const isConnected =
+      this.connectedThirdPartyAccount?.providerKey === "WebDav"
+        ? serviceTitle === this.connectedThirdPartyAccount?.title
+        : this.capabilities[accountIndex][0] ===
+          this.connectedThirdPartyAccount?.providerKey;
+
+    const account = {
+      key: index.toString(),
+      label: serviceTitle,
+      title: serviceTitle,
+      provider_key: this.capabilities[accountIndex][0],
+      ...(this.capabilities[accountIndex][1] && {
+        provider_link: this.capabilities[accountIndex][1],
+      }),
+      connected: isConnected,
+      ...(isConnected && {
+        provider_id: this.connectedThirdPartyAccount?.providerId,
+        id: this.connectedThirdPartyAccount.id,
+      }),
+    };
+
+    return { account, isConnected };
+  };
+
+  setCapabilities = (capabilities) => {
+    this.capabilities = capabilities;
+  };
+  setThirdPartyAccounts = (accounts) => {
+    this.accounts = accounts;
+  };
+
   setSelectedThirdPartyAccount = (elem) => {
     this.selectedThirdPartyAccount = elem;
   };
-
-  get selectedThirdPartyAccount() {
-    return this.selectedThirdPartyAccount;
-  }
 
   toDefault = () => {
     this.selectedMonthlySchedule = this.defaultMonthlySchedule;

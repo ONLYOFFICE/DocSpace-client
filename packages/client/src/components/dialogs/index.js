@@ -68,6 +68,7 @@ import DeletePluginDialog from "./DeletePluginDialog";
 import ShareFolderDialog from "./ShareFolderDialog";
 import EditGroupMembersDialog from "./EditGroupMembersDialog";
 import ChangeStorageQuotaDialog from "./ChangeStorageQuotaDialog";
+import DeleteGroupDialog from "./DeleteGroupDialog";
 
 export {
   EmptyTrashDialog,
@@ -114,4 +115,5 @@ export {
   EditGroupMembersDialog,
   ChangeQuotaDialog,
   ChangeStorageQuotaDialog,
+  DeleteGroupDialog,
 };

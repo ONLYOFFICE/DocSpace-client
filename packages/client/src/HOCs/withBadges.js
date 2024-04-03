@@ -31,7 +31,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import Badges from "../components/Badges";
 import config from "PACKAGE_FILE";
-import copy from "copy-to-clipboard";
+import { copyShareLink } from "@docspace/shared/utils/copy";
 import { toastr } from "@docspace/shared/components/toast";
 import { isMobileOnly } from "react-device-detect";
 
@@ -119,7 +119,7 @@ export default function withBadges(WrappedComponent) {
       const { t, item, getPrimaryLink } = this.props;
       const primaryLink = await getPrimaryLink(item.id);
       if (primaryLink) {
-        copy(primaryLink.sharedTo.shareLink);
+        copyShareLink(primaryLink.sharedTo.shareLink);
         toastr.success(t("Common:LinkSuccessfullyCopied"));
       }
     };

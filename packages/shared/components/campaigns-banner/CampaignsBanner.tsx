@@ -73,6 +73,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
             color={title?.color || "#333"}
             fontSize={title?.fontSize}
             fontWeight={title?.fontWeight}
+            lineHeight="12px"
           >
             {Header}
           </TextComponent>

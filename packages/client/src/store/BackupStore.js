@@ -195,40 +195,6 @@ class BackupStore {
     return false;
   }
 
-  onSetThirdPartySettings = () => {
-    const providersName = [
-      ["GoogleDrive", i18n.t("Translations:TypeTitleGoogle")],
-      ["Box", i18n.t("Translations:TypeTitleBoxNet")],
-      ["DropboxV2", i18n.t("Translations:TypeTitleDropBox")],
-      ["SharePoint", i18n.t("Translations:TypeTitleSharePoint")],
-      ["OneDrive", i18n.t("Translations:TypeTitleSkyDrive")],
-      ["WebDav", "Nextcloud"],
-      ["WebDav", "ownCloud"],
-      ["kDrive", i18n.t("Translations:TypeTitlekDrive")],
-      ["Yandex", i18n.t("Translations:TypeTitleYandex")],
-      ["WebDav", i18n.t("Translations:TypeTitleWebDav")],
-    ];
-
-    let selectedAccount = {},
-      accounts = [];
-
-    providersName.map((item, index) => {
-      const item2 = this.getThirdPartyAccount(
-        item[0],
-        item[1],
-        index,
-        this.capabilities,
-      );
-      console.log("item", item2);
-      debugger;
-      accounts.push(account);
-
-      if (isConnected) {
-        selectedAccount = { ...accounts[index] };
-      }
-    });
-  };
-
   setThirdPartyAccountsInfo = async () => {
     const [connectedAccount, capabilities] = await Promise.all([
       getSettingsThirdParty(),

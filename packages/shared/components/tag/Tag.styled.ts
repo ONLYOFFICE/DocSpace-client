@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { ReactSVG } from "react-svg";
 
 import { Text } from "../text";
 
@@ -108,43 +107,10 @@ const StyledTag = styled.div<{
 
 StyledTag.defaultProps = { theme: Base };
 
-const StyledDropdownIcon = styled(ReactSVG)`
-  display: flex;
-  align-items: center;
-
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      transform: scaleX(-1);
-    `}
-
-  pointer-events: none;
-
-  svg {
-    path:first-child {
-      stroke: ${(props) => props.theme.tag.color};
-    }
-    path:last-child {
-      fill: ${(props) => props.theme.tag.color};
-    }
-  }
-`;
-
 const StyledDropdownText = styled(Text)`
   line-height: 30px;
-
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: 8px !important;
-        `
-      : css`
-          margin-left: 8px !important;
-        `}
-
   display: block;
-
   pointer-events: none;
 `;
 
-export { StyledTag, StyledDropdownText, StyledDropdownIcon };
+export { StyledTag, StyledDropdownText };

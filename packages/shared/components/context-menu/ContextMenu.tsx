@@ -451,6 +451,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
                           imgClassName="drop-down-item_icon"
                           imgSrc={header.icon}
                           badgeUrl={badgeUrl}
+                          color={header.color || ""}
                         />
                       ) : (
                         <RoomIcon

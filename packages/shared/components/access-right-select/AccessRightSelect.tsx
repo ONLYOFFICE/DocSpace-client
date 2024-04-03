@@ -86,6 +86,7 @@ export const AccessRightSelectPure = ({
                     backgroundColor={item.color}
                     fontSize="9px"
                     isPaidBadge
+                    noHover
                   />
                 )}
               </StyledItemTitle>

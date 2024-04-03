@@ -477,10 +477,7 @@ const tabletProps = css<{ viewAs?: TViewAs }>`
     width: 100%;
     position: sticky;
     top: 0;
-    background: ${(props) =>
-      props.viewAs === "profile" || props.viewAs === "settings"
-        ? props.theme.section.header.backgroundColor
-        : props.theme.section.header.background};
+    background: ${(props) => props.theme.section.header.backgroundColor};
 
     ${(props) =>
       props.theme.interfaceDirection === "rtl"

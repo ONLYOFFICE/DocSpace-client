@@ -48,7 +48,7 @@ import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?
 import PlusReactSvgUrl from "PUBLIC_DIR/images/actions.button.plus.react.svg?url";
 
 import { Avatar } from "@docspace/shared/components/avatar";
-import copy from "copy-to-clipboard";
+import { copyShareLink } from "@docspace/shared/utils/copy";
 import LinkRow from "./sub-components/LinkRow";
 
 const Members = ({
@@ -141,7 +141,7 @@ const Members = ({
     } else {
       getPrimaryLink(infoPanelSelection.id).then((link) => {
         setExternalLink(link);
-        copy(link.sharedTo.shareLink);
+        copyShareLink(link.sharedTo.shareLink);
         toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
       });
     }

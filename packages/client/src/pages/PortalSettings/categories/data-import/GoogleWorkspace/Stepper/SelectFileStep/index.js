@@ -111,6 +111,7 @@ const SelectFileStep = ({
   const [showErrorText, setShowErrorText] = useState(false);
   const [isFileError, setIsFileError] = useState(false);
   const [fileName, setFileName] = useState(null);
+  const [isBackupEmpty, setIsBackupEmpty] = useState(false);
   const [searchParams] = useSearchParams();
   const isAbort = useRef(false);
   const uploadInterval = useRef(null);
@@ -140,7 +141,7 @@ const SelectFileStep = ({
       setIsFileError(false);
       setShowReminder(true);
 
-      if (res.parseResult.files.length > 0) {
+      if (res.parseResult.files?.length > 0) {
         setFileName(res.parseResult.files.join(", "));
       }
 
@@ -150,9 +151,16 @@ const SelectFileStep = ({
         setFileName(null);
         clearInterval(uploadInterval.current);
       } else if (res.isCompleted || res.progress === 100) {
-        setUsers(res.parseResult);
-        setShowReminder(true);
-        onNextStep && onNextStep();
+        if (
+          res.parseResult.users.length +
+            res.parseResult.existUsers.length +
+            res.parseResult.withoutEmailUsers.length >
+          0
+        ) {
+          setUsers(res.parseResult);
+          setShowReminder(true);
+          onNextStep && onNextStep();
+        }
         clearInterval(uploadInterval.current);
       }
     } catch (error) {
@@ -216,8 +224,19 @@ const SelectFileStep = ({
             setIsFileLoading(false);
             setIsVisible(false);
             setProgress(100);
-            setUsers(res.parseResult);
-            setShowReminder(true);
+
+            if (
+              res.parseResult.users.length +
+                res.parseResult.existUsers.length +
+                res.parseResult.withoutEmailUsers.length >
+              0
+            ) {
+              setUsers(res.parseResult);
+              setShowReminder(true);
+            } else {
+              setIsBackupEmpty(true);
+              cancelMigration();
+            }
           }
         } catch (error) {
           toastr.error(error || t("Common:SomethingWentWrong"));
@@ -336,6 +355,19 @@ const SelectFileStep = ({
               >
                 {t("Settings:CheckUnsupportedFiles")}
               </Link>
+            </Box>
+          )}
+
+          {isBackupEmpty && (
+            <Box>
+              <ProgressBar
+                percent={100}
+                className="complete-progress-bar"
+                label={t("Common:LoadingIsComplete")}
+              />
+              <Text className="error-text">
+                {t("Settings:NoUsersInBackup")}
+              </Text>
             </Box>
           )}
 

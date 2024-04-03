@@ -42,6 +42,11 @@ const ErrorText = styled(Text)`
   color: ${(props) => props.theme.client.settings.migration.errorTextColor};
   margin-bottom: 16px;
 `;
+const InfoText = styled(Text)`
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: ${(props) => props.theme.client.settings.migration.subtitleColor};
+`;
 
 const ImportCompleteStep = ({
   t,
@@ -55,8 +60,11 @@ const ImportCompleteStep = ({
   const [importResult, setImportResult] = useState({
     succeedUsers: 0,
     failedUsers: 0,
+    errors: [],
   });
   const navigate = useNavigate();
+
+  const [isSaving, setIsSaving] = useState(false);
 
   const onDownloadLog = async () => {
     try {
@@ -85,7 +93,11 @@ const ImportCompleteStep = ({
     }
     clearCheckedAccounts();
     clearMigration();
-    setTimeout(() => navigate(-1), 1000);
+    setIsSaving(true);
+    setTimeout(() => {
+      setIsSaving(false);
+      navigate(-1);
+    }, 1000);
   };
 
   useEffect(() => {
@@ -94,6 +106,7 @@ const ImportCompleteStep = ({
         setImportResult({
           succeedUsers: res.parseResult.successedUsers,
           failedUsers: res.parseResult.failedUsers,
+          errors: res.parseResult.errors,
         }),
       );
     } catch (error) {
@@ -103,17 +116,21 @@ const ImportCompleteStep = ({
 
   return (
     <Wrapper>
-      <Text fontSize="12px">
+      <InfoText>
         {t("Settings:ImportedUsers", {
           selectedUsers: importResult.succeedUsers,
           importedUsers: importResult.succeedUsers + importResult.failedUsers,
         })}
-      </Text>
+      </InfoText>
 
       {importResult.failedUsers > 0 && (
         <ErrorText>
           {t("Settings:ErrorsWereFound", { errors: importResult.failedUsers })}
         </ErrorText>
+      )}
+      
+      {importResult.errors.length > 0 && (
+        <ErrorText>{t("Settings:ErrorOccuredDownloadLog")}</ErrorText>
       )}
 
       <div className="sendLetterBlockWrapper">
@@ -140,6 +157,7 @@ const ImportCompleteStep = ({
         cancelButtonLabel={t("Settings:DownloadLog")}
         displaySettings
         showReminder
+        isSaving={isSaving}
       />
     </Wrapper>
   );

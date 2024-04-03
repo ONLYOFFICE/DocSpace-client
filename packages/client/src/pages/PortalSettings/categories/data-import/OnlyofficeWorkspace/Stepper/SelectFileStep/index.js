@@ -139,7 +139,7 @@ const SelectFileStep = ({
       setIsFileError(false);
       setShowReminder(true);
 
-      if (res.parseResult.files.length > 0) {
+      if (res.parseResult.files?.length > 0) {
         setFileName(res.parseResult.files.join(", "));
       }
 

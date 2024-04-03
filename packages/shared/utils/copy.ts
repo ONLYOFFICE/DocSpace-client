@@ -24,34 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import copy from "copy-to-clipboard";
 
-const StyledBody = styled.div`
-  .quota-container {
-    display: flex;
-    grid-gap: 4px;
-    margin-bottom: ${(props) => (props.isCheckbox ? "8px" : "16px")};
-    ${(props) => props.isLabel && " margin-top: 8px"};
-  }
-  .quota_limit {
-    ${(props) => props.maxInputWidth && `max-width: ${props.maxInputWidth}`};
-    max-height: 32px;
-  }
+const wait = (ms: number) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
 
-  .quota_checkbox {
-    svg {
-      margin-right: 8px;
-    }
-  }
-
-  .quota_value {
-    max-width: fit-content;
-    padding: 0;
-  }
-
-  .quota_description {
-    color: ${(props) => props.theme.text.disableColor};
-  }
-`;
-
-export default StyledBody;
+export const copyShareLink = async (link: string) => {
+  await wait(100);
+  copy(link);
+};

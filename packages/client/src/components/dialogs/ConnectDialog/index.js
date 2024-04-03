@@ -60,7 +60,7 @@ const PureConnectDialogContainer = (props) => {
     setIsConnectDialogReconnect,
     saveAfterReconnectOAuth,
     setSaveAfterReconnectOAuth,
-    setSelectedThirdPartyAccount,
+    setThirdPartyAccountsInfo,
   } = props;
   const { title, link, token, provider_id, provider_key, key } = item;
 
@@ -169,9 +169,8 @@ const PureConnectDialogContainer = (props) => {
         provider_key,
         provider_id,
       )
-        .then(() => {
-          onClose();
-          setSelectedThirdPartyAccount(null);
+        .then(async () => {
+          await setThirdPartyAccountsInfo();
         })
         .catch((err) => {
           toastr.error(err);
@@ -424,7 +423,7 @@ export default inject(
     const { id, folders } = selectedFolderStore;
     const {
       selectedThirdPartyAccount: backupConnectionItem,
-      setSelectedThirdPartyAccount,
+      setThirdPartyAccountsInfo,
     } = backup;
     const {
       connectDialogVisible: visible,
@@ -455,12 +454,12 @@ export default inject(
       openConnectWindow,
       fetchThirdPartyProviders,
       setConnectDialogVisible,
-      setSelectedThirdPartyAccount,
       personal,
       isConnectDialogReconnect,
       saveAfterReconnectOAuth,
       setSaveAfterReconnectOAuth,
       setIsConnectDialogReconnect,
+      setThirdPartyAccountsInfo,
     };
   },
 )(observer(ConnectDialog));

@@ -92,6 +92,7 @@ const StyledStorageLocation = styled.div`
         align-items: center;
         justify-content: center;
         width: 6.35px;
+        margin-top: -4px;
         svg {
           transform: ${(props) =>
             props.isOpen ? "rotate(180deg)" : "rotate(0)"};

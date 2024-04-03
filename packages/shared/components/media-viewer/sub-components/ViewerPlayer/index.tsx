@@ -89,7 +89,6 @@ export const ViewerPlayer = ({
   isFullScreen,
   panelVisible,
   thumbnailSrc,
-  isThirdParty,
   mobileDetails,
   isPreviewFile,
   isOpenContextMenu,
@@ -624,8 +623,7 @@ export const ViewerPlayer = ({
     };
   }, [onKeyDown]);
 
-  const posterUrl =
-    thumbnailSrc && !isThirdParty ? `${thumbnailSrc}&size=1280x720` : undefined;
+  const posterUrl = thumbnailSrc ? `${thumbnailSrc}&size=1280x720` : undefined;
 
   return (
     <>

@@ -30,6 +30,7 @@ import { withTranslation } from "react-i18next";
 
 import { TableHeader } from "@docspace/shared/components/table";
 import { Events } from "@docspace/shared/enums";
+import { SortByFieldName } from "SRC_DIR/helpers/constants";
 
 const TABLE_VERSION = "6";
 const TABLE_COLUMNS = `insideGroupTableColumns_ver-${TABLE_VERSION}`;
@@ -86,6 +87,19 @@ class InsideGroupTableHeader extends React.Component {
         onClick: this.onFilter,
       },
     ];
+
+    props.showStorageInfo &&
+      defaultColumns.push({
+        key: "Storage",
+        title: props.isDefaultUsersQuotaSet
+          ? t("Common:StorageAndQuota")
+          : t("Common:Storage"),
+        enable: props.storageAccountsColumnIsEnabled,
+        sortBy: SortByFieldName.UsedSpace,
+        resizable: true,
+        onChange: this.onColumnChange,
+        onClick: this.onFilter,
+      });
 
     const columns = props.getColumns(defaultColumns);
 
@@ -188,6 +202,7 @@ export default inject(
     settingsStore,
     userStore,
     tableStore,
+    currentQuotaStore,
   }) => {
     const { groupsStore } = peopleStore;
 
@@ -203,7 +218,10 @@ export default inject(
       typeAccountsInsideGroupColumnIsEnabled,
       groupAccountsInsideGroupColumnIsEnabled,
       emailAccountsInsideGroupColumnIsEnabled,
+      storageAccountsColumnIsEnabled,
     } = tableStore;
+
+    const { showStorageInfo, isDefaultUsersQuotaSet } = currentQuotaStore;
 
     return {
       filter,
@@ -219,6 +237,9 @@ export default inject(
       typeAccountsInsideGroupColumnIsEnabled,
       groupAccountsInsideGroupColumnIsEnabled,
       emailAccountsInsideGroupColumnIsEnabled,
+      storageAccountsColumnIsEnabled,
+      showStorageInfo,
+      isDefaultUsersQuotaSet,
     };
   },
 )(

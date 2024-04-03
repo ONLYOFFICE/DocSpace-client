@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
+import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 import { TableRow } from "@docspace/shared/components/table";
@@ -37,6 +38,8 @@ import withContent from "SRC_DIR/HOCs/withPeopleContent";
 import Badges from "../../Badges";
 import { Base } from "@docspace/shared/themes";
 import { useNavigate } from "react-router-dom";
+
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 
 const StyledWrapper = styled.div`
   display: contents;
@@ -221,6 +224,8 @@ const InsideGroupTableRow = (props) => {
     typeAccountsInsideGroupColumnIsEnabled,
     groupAccountsInsideGroupColumnIsEnabled,
     emailAccountsInsideGroupColumnIsEnabled,
+    showStorageInfo,
+    storageAccountsColumnIsEnabled,
   } = props;
 
   const {
@@ -601,11 +606,32 @@ const InsideGroupTableRow = (props) => {
         ) : (
           <div />
         )}
+
+        {showStorageInfo &&
+          (storageAccountsColumnIsEnabled ? (
+            <TableCell className={"table-cell_Storage/Quota"}>
+              <SpaceQuota hideColumns={hideColumns} item={item} type="user" />
+            </TableCell>
+          ) : (
+            <div />
+          ))}
       </StyledPeopleRow>
     </StyledWrapper>
   );
 };
 
-export default withTranslation(["People", "Common", "Settings"])(
-  withContent(InsideGroupTableRow),
+export default inject(({ currentQuotaStore, tableStore }) => {
+  const { showStorageInfo } = currentQuotaStore;
+  const { storageAccountsColumnIsEnabled } = tableStore;
+
+  return {
+    showStorageInfo,
+    storageAccountsColumnIsEnabled,
+  };
+})(
+  withContent(
+    withTranslation(["People", "Common", "Settings"])(
+      observer(InsideGroupTableRow),
+    ),
+  ),
 );

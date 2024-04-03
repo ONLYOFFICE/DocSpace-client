@@ -371,7 +371,9 @@ export async function getData(
         ? "not-found"
         : config.error.type === EditorConfigErrorType.AccessDeniedScope
           ? "access-denied"
-          : undefined;
+          : configRes.status === 415
+            ? "not-supported"
+            : undefined;
 
     const message = status ? config.error.message : undefined;
 
@@ -380,7 +382,7 @@ export async function getData(
         user || share
           ? config.error.type === EditorConfigErrorType.LinkScope
             ? { message: message ?? "unauthorized", status }
-            : config.error
+            : { ...config.error, status }
           : { message: message ?? "unauthorized", status },
       user: user?.response,
       settings: settings?.response,
@@ -390,6 +392,7 @@ export async function getData(
 
     return response;
   } catch (e) {
+    console.log(e);
     const err = e as TCatchError;
     console.error("initDocEditor failed", err);
 

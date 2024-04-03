@@ -45,7 +45,7 @@ const StyledButton = styled(Button)`
 
   background-color: ${(props) => props.theme.button.backgroundColor.base};
 
-  .combo-button_selected-icon {
+  .combo-button_selected-icon > div {
     display: flex;
     align-items: center;
   }

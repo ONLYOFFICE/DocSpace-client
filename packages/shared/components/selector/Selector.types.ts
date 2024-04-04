@@ -223,29 +223,32 @@ export type TAccessRight = {
   access: string | number;
 };
 
-export type TSelectorAccessRights =
-  | {
-      withAccessRights: true;
-      accessRights: TAccessRight[];
-      selectedAccessRight: TAccessRight | null;
-      onAccessRightsChange: (access: TAccessRight) => void;
-      accessRightsMode?: SelectorAccessRightsMode;
-    }
-  | {
-      withAccessRights?: undefined;
-      accessRights?: undefined;
-      selectedAccessRight?: undefined;
-      onAccessRightsChange?: undefined;
-      accessRightsMode?: undefined;
-    };
-
-export interface AccessSelectorProps {
-  onAccessRightsChange: (access: TAccessRight) => void;
+type TWithAccessRightsProps = {
+  withAccessRights: true;
   accessRights: TAccessRight[];
-  selectedOption: TAccessRight | null;
-  footerRef: React.RefObject<HTMLDivElement>;
+  selectedAccessRight: TAccessRight | null;
+  onAccessRightsChange: (access: TAccessRight) => void;
   accessRightsMode?: SelectorAccessRightsMode;
-}
+};
+
+type TWithoutAccessRightsProps = {
+  withAccessRights?: undefined;
+  accessRights?: undefined;
+  selectedAccessRight?: undefined;
+  onAccessRightsChange?: undefined;
+  accessRightsMode?: undefined;
+};
+
+export type TSelectorAccessRights =
+  | TWithAccessRightsProps
+  | TWithoutAccessRightsProps;
+
+export type AccessSelectorProps = Omit<
+  TWithAccessRightsProps,
+  "withAccessRights"
+> & {
+  footerRef: React.RefObject<HTMLDivElement>;
+};
 
 // footer input
 

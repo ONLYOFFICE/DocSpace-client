@@ -151,7 +151,7 @@ const Footer = React.memo(
           {withAccessRights && (
             <AccessSelector
               accessRights={accessRights}
-              selectedOption={selectedAccessRight}
+              selectedAccessRight={selectedAccessRight}
               onAccessRightsChange={onAccessRightsChange}
               footerRef={ref}
               accessRightsMode={accessRightsMode}

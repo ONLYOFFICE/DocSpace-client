@@ -46,7 +46,7 @@ type PropsFromCombobox = Pick<
   | "withBlur"
 >;
 
-export interface AccessRightSelectProps extends PropsFromCombobox {
+export type AccessRightSelectProps = PropsFromCombobox & {
   /** List of access options */
   accessOptions: ComboboxProps["options"];
-}
+};

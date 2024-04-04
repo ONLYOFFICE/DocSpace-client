@@ -12,7 +12,7 @@ const AccessSelector = (props: AccessSelectorProps) => {
   const {
     onAccessRightsChange,
     accessRights,
-    selectedOption,
+    selectedAccessRight,
     footerRef,
     accessRightsMode = SelectorAccessRightsMode.Compact,
   } = props;
@@ -38,7 +38,7 @@ const AccessSelector = (props: AccessSelectorProps) => {
       size={ComboBoxSize.content}
       scaled={false}
       manualWidth="fit-content"
-      selectedOption={selectedOption as TOption}
+      selectedOption={selectedAccessRight as TOption}
       showDisabledItems
       directionX="right"
       directionY="top"
@@ -47,7 +47,7 @@ const AccessSelector = (props: AccessSelectorProps) => {
   ) : (
     <StyledAccessSelector
       className=""
-      selectedOption={selectedOption as TOption}
+      selectedOption={selectedAccessRight as TOption}
       onSelect={onSelect}
       accessOptions={accessRights as TOption[]}
       size={ComboBoxSize.content}

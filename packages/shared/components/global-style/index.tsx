@@ -32,7 +32,7 @@ const GlobalStyle = createGlobalStyle<{ theme: TTheme }>`
     margin: 0;
   
     background-color: ${(props) => props.theme.backgroundColor};
-    
+       
     color: ${(props) => props.theme.color};
     
     font-family: ${(props) => props.theme.fontFamily};
@@ -42,7 +42,6 @@ const GlobalStyle = createGlobalStyle<{ theme: TTheme }>`
   }
 
   body {
-  
     direction: ${(props) => props.theme.interfaceDirection};
   }
 `;

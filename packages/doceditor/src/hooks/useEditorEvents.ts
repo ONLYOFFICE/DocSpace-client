@@ -127,7 +127,7 @@ const useEditorEvents = ({
         winEditor?.close();
         docEditor?.showMessage?.(
           (e as { message?: string })?.message ??
-            t?.("ErrorConnectionLost") ??
+            t("ErrorConnectionLost") ??
             "",
         );
       }
@@ -232,17 +232,17 @@ const useEditorEvents = ({
               ? "xlsx"
               : "docxf";
 
-      let fileName = t?.("Common:NewDocument");
+      let fileName = t("Common:NewDocument");
 
       switch (fileExt) {
         case "xlsx":
-          fileName = t?.("Common:NewSpreadsheet");
+          fileName = t("Common:NewSpreadsheet");
           break;
         case "pptx":
-          fileName = t?.("Common:NewPresentation");
+          fileName = t("Common:NewPresentation");
           break;
         case "docxf":
-          fileName = t?.("Common:NewMasterForm");
+          fileName = t("Common:NewMasterForm");
           break;
         default:
           break;
@@ -464,8 +464,7 @@ const useEditorEvents = ({
         });
       } catch (e) {
         docEditor?.showMessage?.(
-          ((e as { message?: string })?.message ||
-            t?.("ErrorConnectionLost")) ??
+          ((e as { message?: string })?.message || t("ErrorConnectionLost")) ??
             "",
         );
       }

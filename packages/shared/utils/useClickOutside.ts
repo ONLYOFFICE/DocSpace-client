@@ -25,6 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 /* eslint-disable react-hooks/exhaustive-deps */
+
+"use client";
+
 import { useEffect } from "react";
 
 export const useClickOutside = (

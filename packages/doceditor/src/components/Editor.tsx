@@ -28,6 +28,7 @@
 
 import React from "react";
 import { isMobile } from "react-device-detect";
+import { useTranslation } from "react-i18next";
 
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
 import IConfig from "@onlyoffice/document-editor-react/dist/esm/types/model/config";
@@ -53,13 +54,13 @@ const Editor = ({
   config,
   successAuth,
   user,
-  view,
+
   doc,
   documentserverUrl,
   fileInfo,
   isSharingAccess,
   errorMessage,
-  t,
+
   onSDKRequestSharingSettings,
   onSDKRequestSaveAs,
   onSDKRequestInsertImage,
@@ -67,6 +68,8 @@ const Editor = ({
   onSDKRequestSelectDocument,
   onSDKRequestReferenceSource,
 }: EditorProps) => {
+  const { t } = useTranslation(["Common", "Editor", "DeepLink"]);
+
   const {
     onDocumentReady,
     onSDKRequestOpen,

@@ -332,12 +332,16 @@ export async function getData(
 }
 
 export async function getUser(share?: string) {
+  const hdrs = headers();
+  const cookie = hdrs.get("cookie");
+
   const [getUser] = createRequest(
     [`/people/@self`],
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
   );
 
+  if (!cookie?.includes("asc_auth_key")) return undefined;
   const userRes = await fetch(getUser);
 
   if (userRes.status === 401) return undefined;

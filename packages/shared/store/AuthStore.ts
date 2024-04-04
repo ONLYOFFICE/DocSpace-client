@@ -171,7 +171,7 @@ class AuthStore {
       !isPortalDeactivated
     ) {
       requests.push(
-        this.userStore?.init(i18n).then(() => {
+        this.userStore?.init(i18n, this.settingsStore.culture).then(() => {
           if (!isPortalRestore) {
             this.getTenantExtra();
           }

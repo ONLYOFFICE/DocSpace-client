@@ -124,19 +124,19 @@ const RoleWrapper = styled.div<{
       props.theme.avatar.roleWrapperContainer.height.max) ||
     (props.size === AvatarSize.medium &&
       props.theme.avatar.roleWrapperContainer.height.medium) ||
-    "16px"};
+    "12px"};
   width: ${(props) =>
     (props.size === AvatarSize.max &&
       props.theme.avatar.roleWrapperContainer.width.max) ||
     (props.size === AvatarSize.medium &&
       props.theme.avatar.roleWrapperContainer.width.medium) ||
-    "16px"};
+    "12px"};
   min-width: ${(props) =>
     (props.size === AvatarSize.max &&
       props.theme.avatar.roleWrapperContainer.width.max) ||
     (props.size === AvatarSize.medium &&
       props.theme.avatar.roleWrapperContainer.width.medium) ||
-    "16px"};
+    "12px"};
 `;
 RoleWrapper.defaultProps = { theme: Base };
 

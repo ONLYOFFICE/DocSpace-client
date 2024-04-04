@@ -68,7 +68,7 @@ const toListItem = (
   t: TTranslation,
   invitedUsers?: string[],
   disableDisabledUsers?: boolean,
-  isRoom: boolean,
+  isRoom?: boolean,
 ) => {
   if ("displayName" in item) {
     const {
@@ -95,10 +95,10 @@ const toListItem = (
     const isDisabled =
       disableDisabledUsers && status === EmployeeStatus.Disabled;
 
-    const disabledText = isDisabled
-      ? t("Common:Disabled")
-      : isInvited
-        ? t("Common:Invited")
+    const disabledText = isInvited
+      ? t("Common:Invited")
+      : isDisabled
+        ? t("Common:Disabled")
         : "";
 
     return {
@@ -124,6 +124,8 @@ const toListItem = (
     name: groupName,
   } = item;
 
+  const isInvited = invitedUsers?.includes(id);
+  const disabledText = isInvited ? t("Common:Invited") : "";
   const userAvatar = "";
 
   return {
@@ -132,6 +134,8 @@ const toListItem = (
     avatar: userAvatar,
     isGroup,
     label: groupName,
+    disabledText,
+    isDisabled: isInvited,
   } as TSelectorItem;
 };
 
@@ -389,7 +393,13 @@ const AddUsersPanel = ({
     isGroup?: boolean,
   ) => {
     return (
-      <div style={{ width: "100%" }}>
+      <div
+        style={{
+          width: "100%",
+          overflow: "hidden",
+          marginInlineEnd: "16px",
+        }}
+      >
         <Text
           className="label"
           fontWeight={600}

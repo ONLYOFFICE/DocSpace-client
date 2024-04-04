@@ -40,6 +40,7 @@ const ContextButton = ({
   isTrashFolder,
   isMobile,
   id,
+  onCloseDropBox,
   ...rest
 }: IContextButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -62,6 +63,7 @@ const ContextButton = ({
 
   const onHide = () => {
     setIsOpen(false);
+    onCloseDropBox?.();
   };
 
   const model = getData();

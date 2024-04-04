@@ -66,6 +66,7 @@ const DropBox = React.forwardRef<HTMLDivElement, IDropBoxProps>(
 
       currentDeviceType,
       navigationTitleContainerNode,
+      onCloseDropBox,
     },
     ref,
   ) => {
@@ -144,6 +145,7 @@ const DropBox = React.forwardRef<HTMLDivElement, IDropBoxProps>(
             toggleInfoPanel={toggleInfoPanel}
             toggleDropBox={toggleDropBox}
             isInfoPanelVisible={isInfoPanelVisible}
+            onCloseDropBox={onCloseDropBox}
             showTitle
           />
         </StyledContainer>

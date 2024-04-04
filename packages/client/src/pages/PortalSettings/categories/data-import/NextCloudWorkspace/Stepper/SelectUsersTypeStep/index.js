@@ -85,15 +85,17 @@ const SelectUsersTypeStep = (props) => {
         displaySettings
       />
 
-      <SearchInput
-        id="search-checkedUsers-type-input"
-        className="importUsersSearch"
-        placeholder={t("Common:Search")}
-        value={searchValue}
-        onChange={onChangeInput}
-        refreshTimeout={100}
-        onClearSearch={onClearSearchInput}
-      />
+      {!checkedUsers.result.length > 0 && (
+        <SearchInput
+          id="search-checkedUsers-type-input"
+          className="importUsersSearch"
+          placeholder={t("Common:Search")}
+          value={searchValue}
+          onChange={onChangeInput}
+          refreshTimeout={100}
+          onClearSearch={onClearSearchInput}
+        />
+      )}
 
       <AccountsTable t={t} accountsData={filteredAccounts} />
 

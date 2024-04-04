@@ -45,6 +45,7 @@ import {
   TSelectorFooterInput,
   TSelectorFooterCheckbox,
   TWithTabs,
+  TSelectorInfo,
 } from "./Selector.types";
 
 const Selector = ({
@@ -128,6 +129,9 @@ const Selector = ({
   withTabs,
   tabsData,
   activeTabId,
+
+  withInfo,
+  infoText,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
   const [isSearch, setIsSearch] = React.useState<boolean>(false);
@@ -151,13 +155,13 @@ const Selector = ({
   const [requestRunning, setRequestRunning] = React.useState<boolean>(false);
 
   const onSubmitAction = async (
-    item?: TSelectorItem,
+    item?: TSelectorItem | React.MouseEvent,
     fromCallback?: boolean,
   ) => {
     setRequestRunning(true);
 
     await onSubmit(
-      fromCallback && item ? [item] : newSelectedItems,
+      fromCallback && item && "label" in item ? [item] : newSelectedItems,
       selectedAccess,
       newFooterInputValue,
       isFooterCheckboxChecked,
@@ -252,9 +256,10 @@ const Selector = ({
     const query =
       activeTabId && selectedTabItems[activeTabId]
         ? selectedTabItems[activeTabId].length === 0 ||
-          selectedTabItems[activeTabId].length !== items.length
+          selectedTabItems[activeTabId].length !==
+            items.filter((i) => !i.isDisabled).length
         : newSelectedItems.length === 0 ||
-          newSelectedItems.length !== items.length;
+          newSelectedItems.length !== items.filter((i) => !i.isDisabled).length;
 
     if (query) {
       const cloneItems = items
@@ -412,18 +417,22 @@ const Selector = ({
       }
     : ({} as TSelectorBreadCrumbs);
 
+  const tempRenderedItemsLength = renderedItems.filter(
+    (x) => !x.isDisabled,
+  ).length;
+
   const isAllIndeterminate =
     activeTabId && selectedTabItems[activeTabId]
-      ? selectedTabItems[activeTabId].length !== renderedItems.length &&
+      ? selectedTabItems[activeTabId].length !== tempRenderedItemsLength &&
         selectedTabItems[activeTabId].length !== 0
-      : newSelectedItems.length !== renderedItems.length &&
+      : newSelectedItems.length !== tempRenderedItemsLength &&
         newSelectedItems.length !== 0;
   const isAllChecked =
     activeTabId && selectedTabItems[activeTabId]
-      ? selectedTabItems[activeTabId].length === renderedItems.length &&
-        renderedItems.length !== 0
-      : newSelectedItems.length === renderedItems.length &&
-        renderedItems.length !== 0;
+      ? selectedTabItems[activeTabId].length === tempRenderedItemsLength &&
+        tempRenderedItemsLength !== 0
+      : newSelectedItems.length === tempRenderedItemsLength &&
+        tempRenderedItemsLength !== 0;
 
   const onSelectAllProps: TSelectorSelectAll = withSelectAll
     ? {
@@ -499,6 +508,13 @@ const Selector = ({
     ? { withTabs, tabsData, activeTabId }
     : {};
 
+  const infoProps: TSelectorInfo = withInfo
+    ? {
+        withInfo,
+        infoText,
+      }
+    : {};
+
   React.useEffect(() => {
     if (!isMultiSelect) return;
     let hasConflict = false;
@@ -570,6 +586,8 @@ const Selector = ({
         {...searchProps}
         // tabs
         {...tabsProps}
+        // info
+        {...infoProps}
       />
 
       {(footerVisible || alwaysShowFooter) && (

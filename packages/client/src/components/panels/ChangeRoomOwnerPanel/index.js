@@ -150,6 +150,10 @@ const ChangeRoomOwner = (props) => {
           filterUserId={roomOwnerId}
           currentUserId={userId}
           disableDisabledUsers
+          withInfo
+          infoText={t("CreateEditRoomDialog:PeopleSelectorInfo")}
+          emptyScreenHeader={t("Common:NotFoundUsers")}
+          emptyScreenDescription={t("CreateEditRoomDialog:PeopleSelectorInfo")}
         />
       </Aside>
     </StyledChangeRoomOwner>
@@ -201,4 +205,10 @@ export default inject(
       updateInfoPanelSelection,
     };
   },
-)(observer(withTranslation(["Files"])(ChangeRoomOwner)));
+)(
+  observer(
+    withTranslation(["Files", "CreateEditRoomDialog", "Common"])(
+      ChangeRoomOwner,
+    ),
+  ),
+);

@@ -80,7 +80,12 @@ const Error520 = ({
   zendeskAPI.addChanges("webWidget", "show");
 
   if (!firebaseHelper.isEnabledDB)
-    return <ErrorContainer headerText={t("SomethingWentWrong")} />;
+    return (
+      <ErrorContainer
+        headerText={t("SomethingWentWrong")}
+        customizedBodyText={errorLog?.message}
+      />
+    );
 
   return (
     <Error520Wrapper>
@@ -89,6 +94,7 @@ const Error520 = ({
         className="container"
         isPrimaryButton={false}
         headerText={t("SomethingWentWrong")}
+        customizedBodyText={errorLog?.message}
       />
       <Link
         isHovered

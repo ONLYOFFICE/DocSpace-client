@@ -25,12 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { redirect } from "next/navigation";
-
-import { createFile, fileCopyAs, getBaseUrl } from "@/utils/actions";
-
+import { createFile, fileCopyAs } from "@/utils/actions";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-
 import CreateFileError from "@/components/CreateFileError";
+import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 
 type TSearchParams = {
   parentId: string;

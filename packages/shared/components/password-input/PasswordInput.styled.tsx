@@ -107,11 +107,11 @@ const StyledInput = styled(SimpleInput)<{
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            padding-left: 8px;
+            padding-left: 0px;
             left: 16px;
           `
         : css`
-            padding-right: 8px;
+            padding-right: 2px;
             right: -16px;
           `}
   }

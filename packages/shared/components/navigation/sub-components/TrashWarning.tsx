@@ -29,7 +29,9 @@ import { StyledTrashWarning } from "../Navigation.styled";
 
 const TrashWarning = ({ title }: { title?: string }) => {
   return (
-    <StyledTrashWarning className="trash-warning">{title}</StyledTrashWarning>
+    <StyledTrashWarning className="trash-warning" title={title}>
+      <div className="warning-text">{title}</div>
+    </StyledTrashWarning>
   );
 };
 

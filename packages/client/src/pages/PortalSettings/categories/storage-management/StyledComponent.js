@@ -145,8 +145,9 @@ const StyledDiagramComponent = styled.div`
 
 const StyledFolderTagSection = styled.div`
   height: 12px;
-  border-right: ${(props) =>
-    `1px solid ${props.theme.client.settings.payment.backgroundColor}`};
+  ${(props) =>
+    props.width !== 0 &&
+    `border-right: 1px solid ${props.theme.client.settings.payment.backgroundColor}`};
   background: ${(props) => props.color};
   width: ${(props) => props.width + "%"};
 

@@ -56,6 +56,7 @@ import useShareDialog from "@/hooks/useShareDialog";
 import useFilesSettings from "@/hooks/useFilesSettings";
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
 import { IS_VIEW } from "@/utils/constants";
+import StyledComponentsRegistry from "@/utils/registry";
 
 import pkgFile from "../../package.json";
 
@@ -64,6 +65,7 @@ import Editor from "./Editor";
 import SelectFileDialog from "./SelectFileDialog";
 import SelectFolderDialog from "./SelectFolderDialog";
 import SharingDialog from "./ShareDialog";
+import { EditorConfigErrorType } from "@docspace/shared/enums";
 
 const Root = ({
   settings,
@@ -83,10 +85,13 @@ const Root = ({
     settings?.firebase ?? ({} as TFirebaseSettings),
   );
   const instanceId = config?.document?.referenceData.instanceId;
+  const isSkipError =
+    error?.status === "not-found" ||
+    error?.status === "access-denied" ||
+    error?.status === "not-supported";
 
   useRootInit({
     documentType: config?.documentType,
-    fileType: config?.file.fileType,
   });
   const { i18n } = useI18N({ settings, user });
 
@@ -96,7 +101,7 @@ const Root = ({
     editorUrl: documentserverUrl,
     t,
   });
-  const { theme, currentColorTheme } = useTheme({ user });
+  const { theme, currentColorTheme } = useTheme({ user, i18n });
   const { currentDeviceType } = useDeviceType();
   const { logoUrls } = useWhiteLabel();
   const { isShowDeepLink, setIsShowDeepLink } = useDeepLink({
@@ -152,7 +157,7 @@ const Root = ({
           i18n={i18n}
           onError={onError}
         >
-          {!fileId ? (
+          {!fileId || false ? (
             <AppLoader />
           ) : isShowDeepLink ? (
             <DeepLink
@@ -164,13 +169,15 @@ const Root = ({
               deepLinkConfig={settings?.deepLink}
               setIsShowDeepLink={setIsShowDeepLink}
             />
-          ) : error && error.message === "restore-backup" ? (
-            <ErrorContainer
-              headerText={t?.("Common:Error")}
-              customizedBodyText={getErrorMessage()}
-              isEditor
-            />
-          ) : error && error.message !== "unauthorized" ? (
+          ) : error && error.message === "restore-backup" && !isSkipError ? (
+            <StyledComponentsRegistry>
+              <ErrorContainer
+                headerText={t?.("Common:Error")}
+                customizedBodyText={getErrorMessage()}
+                isEditor
+              />
+            </StyledComponentsRegistry>
+          ) : error && error.message !== "unauthorized" && !isSkipError ? (
             <Error520SSR
               i18nProp={i18n}
               errorLog={error as Error}
@@ -182,7 +189,7 @@ const Root = ({
             />
           ) : isShowDeepLink ? null : (
             <div style={{ width: "100%", height: "100%" }}>
-              {config && documentserverUrl && fileInfo && (
+              {documentserverUrl && (
                 <Editor
                   config={config}
                   user={user}
@@ -193,6 +200,7 @@ const Root = ({
                   t={t}
                   documentserverUrl={documentserverUrl}
                   fileInfo={fileInfo}
+                  errorMessage={error?.message}
                   onSDKRequestSharingSettings={onSDKRequestSharingSettings}
                   onSDKRequestSaveAs={onSDKRequestSaveAs}
                   onSDKRequestInsertImage={onSDKRequestInsertImage}

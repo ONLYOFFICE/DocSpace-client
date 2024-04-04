@@ -81,16 +81,17 @@ const SelectUsersTypeStep = ({
         cancelButtonLabel={t("Common:Back")}
         displaySettings
       />
-
-      <SearchInput
-        id="search-users-type-input"
-        placeholder={t("Common:Search")}
-        style={{ marginTop: "20px" }}
-        value={searchValue}
-        onChange={onChangeInput}
-        refreshTimeout={100}
-        onClearSearch={onClearSearchInput}
-      />
+      {!checkedUsers.result.length > 0 && (
+        <SearchInput
+          id="search-users-type-input"
+          placeholder={t("Common:Search")}
+          style={{ marginTop: "20px" }}
+          value={searchValue}
+          onChange={onChangeInput}
+          refreshTimeout={100}
+          onClearSearch={onClearSearchInput}
+        />
+      )}
 
       <AccountsTable t={t} accountsData={filteredAccounts} />
 

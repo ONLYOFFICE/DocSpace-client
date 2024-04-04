@@ -40,6 +40,7 @@ export default function withContent(WrappedContent) {
       selectUser,
       deselectUser,
       setBufferSelection,
+      selectRow,
 
       theme,
       getModel,
@@ -49,14 +50,24 @@ export default function withContent(WrappedContent) {
     const { mobilePhone, email, role, displayName, avatar } = item;
 
     const onContentRowSelect = (checked, user) => {
-      setBufferSelection(null);
+      setBufferSelection(null, false);
       checked ? selectUser(user) : deselectUser(user);
     };
 
-    const onContentRowClick = (checked, user, addToSelection = true) => {
-      checked
-        ? setBufferSelection(user, addToSelection)
-        : setBufferSelection(null);
+    const onContentRowClick = (
+      checked,
+      user,
+      addToSelection = true,
+      isContextClick = true,
+    ) => {
+      if (isContextClick) {
+        checked
+          ? setBufferSelection(user, addToSelection)
+          : setBufferSelection(null);
+        return;
+      }
+
+      selectRow(user);
     };
 
     const checkedProps = { checked };
@@ -117,6 +128,7 @@ export default function withContent(WrappedContent) {
       setBufferSelection,
       selectUser,
       deselectUser,
+      selectRow,
     } = selectionStore;
 
     return {
@@ -131,6 +143,7 @@ export default function withContent(WrappedContent) {
       selectUser,
       deselectUser,
       getModel,
+      selectRow,
     };
   })(observer(WithContent));
 }

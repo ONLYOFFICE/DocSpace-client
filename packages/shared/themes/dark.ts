@@ -629,6 +629,16 @@ const Dark: TTheme = {
 
     colorDisabledFileIcons: "#5c5c5c",
 
+    backdrop: {
+      backgroundRGBA: {
+        r: 27,
+        g: 27,
+        b: 27,
+        a: 0.4,
+      },
+      blur: 18,
+    },
+
     content: {
       backgroundColor: black,
       modalBorderRadius: "6px",
@@ -1082,7 +1092,7 @@ const Dark: TTheme = {
 
     roleWrapperContainer: {
       right: {
-        min: "-5px",
+        min: "-2px",
         small: "-2px",
         base: "-2px",
         medium: "-4px",
@@ -1091,7 +1101,7 @@ const Dark: TTheme = {
       },
 
       bottom: {
-        min: "-5px",
+        min: "-2px",
         small: "3px",
         base: "4px",
         medium: "6px",
@@ -1100,11 +1110,13 @@ const Dark: TTheme = {
       },
 
       width: {
+        min: "12px",
         medium: "16px",
         max: "24px",
       },
 
       height: {
+        min: "12px",
         medium: "16px",
         max: "24px",
       },
@@ -2062,7 +2074,7 @@ const Dark: TTheme = {
 
     links: {
       iconColor: "#858585",
-      iconErrorColor: "rgba(242, 28, 14, 0.5)", // "#F21C0E",
+      iconErrorColor: "#E06451",
       primaryColor: "#ADADAD",
     },
 
@@ -2342,6 +2354,11 @@ const Dark: TTheme = {
     breadCrumbs: {
       prevItemColor: "#ADADAD",
       arrowRightColor: "#ADADAD",
+    },
+
+    info: {
+      backgroundColor: "#282828",
+      color: "#ADADAD",
     },
 
     bodyDescriptionText: "#858585",

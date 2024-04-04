@@ -275,6 +275,7 @@ const FilesSelectorWrapper = ({
     filterParam,
     isRestore,
     isFormRoom,
+    isThirdParty,
   );
 
   const defaultAcceptButtonLabel = getAcceptButtonLabel(

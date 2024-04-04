@@ -26,7 +26,6 @@
 
 import { TColorScheme } from "../../themes";
 import { DeviceType } from "../../enums";
-import { TWhiteLabel } from "../../utils/whiteLabelHelper";
 import { TUser } from "../../api/people/types";
 import { TTranslation } from "../../types";
 

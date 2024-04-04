@@ -24,64 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import "../styles/globals.scss";
-import Script from "next/script";
+import Scripts from "@/components/Scripts";
+import StyledComponentsRegistry from "@/utils/registry";
 
-// import StyledComponentsRegistry from "@/utils/registry";
+import "../styles/globals.scss";
+import Providers from "@/providers";
+import { getSettings, getUser } from "@/utils/actions";
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [user, settings] = await Promise.all([getUser(), getSettings()]);
+
   return (
     <html lang="en">
       <head>
         <link id="favicon" rel="shortcut icon" type="image/x-icon" />
       </head>
       <body>
-        {children}
-        <Script
-          id="browser-detector"
-          src="/static/scripts/browserDetector.js"
-        />
-        <Script id="docspace-config">
-          {`
-          console.log("It's DocEditor INIT");
-          fetch("/static/scripts/config.json")
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("HTTP error " + response.status);
-              }
-              return response.json();
-            })
-            .then((config) => {
-              window.DocSpaceConfig = {
-                ...config,
-              };
-    
-              if (
-                window.navigator.userAgent.includes("ZoomWebKit") ||
-                window.navigator.userAgent.includes("ZoomApps")
-              ) {
-                window.DocSpaceConfig.editor = {
-                  openOnNewPage: false,
-                  requestClose: true,
-                };
-              }
-    
-              //console.log({ DocSpaceConfig: window.DocSpaceConfig });
-            })
-            .catch((e) => {
-              console.error(e);
-              window.DocSpaceConfig = {
-                errorOnLoad: e,
-              };
-            });
-          `}
-        </Script>
+        <StyledComponentsRegistry>
+          <Providers contextData={{ user, settings }}>{children}</Providers>
+        </StyledComponentsRegistry>
+
+        <Scripts />
       </body>
     </html>
   );
 }
-

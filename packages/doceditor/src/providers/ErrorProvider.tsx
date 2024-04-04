@@ -24,48 +24,45 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import CreateFileError from "@/components/CreateFileError";
-import { getErrorData } from "@/utils/actions";
+"use client";
 
-type TSearchParams = {
-  error?: string;
-  fileInfo?: string;
-  createFile?: string;
-  fromFile?: string;
-  fromTemplate?: string;
+import React from "react";
+
+import ErrorBoundary from "@docspace/shared/components/error-boundary/ErrorBoundary";
+import { TUser } from "@docspace/shared/api/people/types";
+import {
+  TSettings,
+  TFirebaseSettings,
+} from "@docspace/shared/api/settings/types";
+import FirebaseHelper from "@docspace/shared/utils/firebase";
+
+import pkgFile from "../../package.json";
+import useDeviceType from "@/hooks/useDeviceType";
+import useWhiteLabel from "@/hooks/useWhiteLabel";
+
+type TErrorProvider = {
+  user: TUser | undefined;
+  settings: TSettings | undefined;
+  children: React.ReactNode;
 };
 
-async function Page({ searchParams }: { searchParams: TSearchParams }) {
-  const error = searchParams.error ? JSON.parse(searchParams.error) : "";
-  const fileInfo = searchParams.fileInfo
-    ? JSON.parse(searchParams.fileInfo)
-    : "";
-  const fromTemplate = searchParams.fromTemplate
-    ? JSON.parse(searchParams.fromTemplate)
-    : "";
-  const fromFile = searchParams.fromFile
-    ? JSON.parse(searchParams.fromFile)
-    : "";
+const ErrorProvider = ({ children, user, settings }: TErrorProvider) => {
+  const firebaseHelper = new FirebaseHelper(
+    settings?.firebase ?? ({} as TFirebaseSettings),
+  );
+  const { currentDeviceType } = useDeviceType();
+  const { logoUrls } = useWhiteLabel();
+  return (
+    <ErrorBoundary
+      user={user ?? ({} as TUser)}
+      version={pkgFile.version}
+      firebaseHelper={firebaseHelper}
+      currentDeviceType={currentDeviceType}
+      whiteLabelLogoUrls={logoUrls}
+    >
+      {children}
+    </ErrorBoundary>
+  );
+};
 
-  console.log("searchParams here", searchParams);
-
-  if (searchParams.createFile) {
-    const { settings, user } = await getErrorData();
-
-    return (
-      <CreateFileError
-        error={error}
-        fileInfo={fileInfo}
-        fromFile={!!fromFile}
-        fromTemplate={!!fromTemplate}
-        settings={settings}
-        user={user}
-      />
-    );
-  }
-
-  return <div></div>;
-}
-
-export default Page;
-
+export default ErrorProvider;

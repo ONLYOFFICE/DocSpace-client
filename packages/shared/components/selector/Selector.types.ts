@@ -30,6 +30,7 @@ import { AvatarRole } from "../avatar";
 import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
 import { TRoomSecurity } from "../../api/rooms/types";
 import { TSubmenuItem } from "../submenu";
+import { SelectorAccessRightsMode } from "./Selector.enums";
 
 // header
 
@@ -228,13 +229,23 @@ export type TSelectorAccessRights =
       accessRights: TAccessRight[];
       selectedAccessRight: TAccessRight | null;
       onAccessRightsChange: (access: TAccessRight) => void;
+      accessRightsMode?: SelectorAccessRightsMode;
     }
   | {
       withAccessRights?: undefined;
       accessRights?: undefined;
       selectedAccessRight?: undefined;
       onAccessRightsChange?: undefined;
+      accessRightsMode?: undefined;
     };
+
+export interface AccessSelectorProps {
+  onAccessRightsChange: (access: TAccessRight) => void;
+  accessRights: TAccessRight[];
+  selectedOption: TAccessRight | null;
+  footerRef: React.RefObject<HTMLDivElement>;
+  accessRightsMode?: SelectorAccessRightsMode;
+}
 
 // footer input
 

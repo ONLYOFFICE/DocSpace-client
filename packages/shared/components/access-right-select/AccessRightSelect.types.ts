@@ -24,27 +24,29 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TDirectionX } from "../../types";
-import { ComboBoxSize, TOption } from "../combobox";
+import { ComboboxProps } from "../combobox";
 
-export interface AccessRightSelectProps {
-  /** Accepts class */
-  className: string;
-  /** Indicates that component`s options are scaled by ComboButton */
-  scaledOptions: boolean;
-  /** Sets the component's width from the default settings */
-  size: ComboBoxSize;
-  /** Dropdown manual width */
-  manualWidth: string;
-  /** Indicates that component is scaled by parent */
-  scaled: boolean;
-  /** Will be triggered when the AccessRightSelect is a selected option */
-  onSelect: (option: TOption) => void;
-  /** List of advanced options */
-  advancedOptions: React.ReactNode[];
+type PropsFromCombobox = Pick<
+  ComboboxProps,
+  | "className"
+  | "selectedOption"
+  | "advancedOptions"
+  | "scaled"
+  | "scaledOptions"
+  | "size"
+  | "manualWidth"
+  | "onSelect"
+  | "directionX"
+  | "directionY"
+  | "fixedDirection"
+  | "isAside"
+  | "manualY"
+  | "withoutBackground"
+  | "withBackground"
+  | "withBlur"
+>;
+
+export interface AccessRightSelectProps extends PropsFromCombobox {
   /** List of access options */
-  accessOptions: TOption[];
-  /** The option that is selected by default */
-  selectedOption: TOption;
-  directionX?: TDirectionX;
+  accessOptions: ComboboxProps["options"];
 }

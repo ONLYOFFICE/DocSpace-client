@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { isTablet, isIOS } from "react-device-detect";
 
 import { InputSize, TextInput } from "../text-input";
 import { IconButton } from "../icon-button";
@@ -35,7 +36,6 @@ import {
   StyledIconBlock,
 } from "./InputBlock.styled";
 import { InputBlockProps } from "./InputBlock.types";
-import { isTablet, isIOS } from "react-device-detect";
 
 const InputBlock = ({
   onIconClick,

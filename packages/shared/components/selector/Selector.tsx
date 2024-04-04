@@ -46,7 +46,6 @@ import {
   TSelectorFooterCheckbox,
   TWithTabs,
   TSelectorInfo,
-  TBreadCrumb,
 } from "./Selector.types";
 
 const Selector = ({

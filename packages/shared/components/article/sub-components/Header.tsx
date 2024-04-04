@@ -78,7 +78,12 @@ const ArticleHeader = ({
     <>
       {currentDeviceType === DeviceType.tablet && (
         <StyledIconBox showText={showText}>
-          <img src={burgerLogo} alt="burger-logo" onClick={onLogoClick} />
+          <img
+            src={burgerLogo}
+            className="burger-logo"
+            alt="burger-logo"
+            onClick={onLogoClick}
+          />
         </StyledIconBox>
       )}
       <StyledHeading showText={showText}>

@@ -44,9 +44,16 @@ const useTheme = ({ user, i18n }: UseThemeProps) => {
   const [currentColorTheme, setCurrentColorTheme] =
     React.useState<TColorScheme>({} as TColorScheme);
 
-  const [theme, setTheme] = React.useState<TTheme>({
-    ...Base,
-    currentColorScheme: currentColorTheme,
+  const [theme, setTheme] = React.useState<TTheme>(() => {
+    if (user?.theme === ThemeKeys.DarkStr)
+      return {
+        ...Dark,
+        currentColorScheme: currentColorTheme,
+      };
+    return {
+      ...Base,
+      currentColorScheme: currentColorTheme,
+    };
   });
 
   const isRequestRunning = React.useRef(false);

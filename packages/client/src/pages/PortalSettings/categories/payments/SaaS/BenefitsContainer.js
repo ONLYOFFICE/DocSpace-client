@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { inject, observer } from "mobx-react";
 
@@ -54,12 +54,23 @@ const StyledBody = styled.div`
     p {
       margin-bottom: 0;
     }
-    svg {
-      path {
-        fill: ${(props) =>
-          props.theme.client.settings.payment.benefitsContainer
-            .iconsColor} !important;
-      }
+    .icons-container {
+      width: 24px;
+      height: 24px;
+
+      ${(props) =>
+        !props.theme.isBase &&
+        css`
+          svg {
+            path {
+              fill: #adadad !important;
+            }
+            mask + path {
+              fill: none !important;
+              stroke: #adadad !important;
+            }
+          }
+        `}
     }
   }
 `;
@@ -79,7 +90,10 @@ const BenefitsContainer = ({ t, features, theme }) => {
         if (!item.title || !item.image) return;
         return (
           <div className="payment-benefits" key={index}>
-            <div dangerouslySetInnerHTML={{ __html: item.image }} />
+            <div
+              dangerouslySetInnerHTML={{ __html: item.image }}
+              className="icons-container"
+            />
             <Text noSelect>{item.title}</Text>
           </div>
         );

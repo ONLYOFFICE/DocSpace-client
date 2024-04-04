@@ -36,11 +36,8 @@ export interface DeepLinkProps {
   logoUrls: TWhiteLabel[];
   userEmail?: string;
 
-  theme: TTheme;
-
   currentDeviceType: DeviceType;
   deepLinkConfig?: TDeepLinkConfig;
 
   setIsShowDeepLink: (value: boolean) => void;
 }
-

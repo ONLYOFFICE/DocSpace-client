@@ -24,23 +24,45 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
 import React from "react";
-import { i18n } from "i18next";
-import { I18nextProvider } from "react-i18next";
 
-import { FilesSelectorProps } from "./FilesSelector.types";
-import FilesSelector from ".";
+import ErrorBoundary from "@docspace/shared/components/error-boundary/ErrorBoundary";
+import { TUser } from "@docspace/shared/api/people/types";
+import {
+  TSettings,
+  TFirebaseSettings,
+} from "@docspace/shared/api/settings/types";
+import FirebaseHelper from "@docspace/shared/utils/firebase";
 
-const FilesSelectorWrapper = ({
-  i18nProp,
+import pkgFile from "../../package.json";
+import useDeviceType from "@/hooks/useDeviceType";
+import useWhiteLabel from "@/hooks/useWhiteLabel";
 
-  ...rest
-}: FilesSelectorProps & { i18nProp: i18n }) => {
+type TErrorProvider = {
+  user: TUser | undefined;
+  settings: TSettings | undefined;
+  children: React.ReactNode;
+};
+
+const ErrorProvider = ({ children, user, settings }: TErrorProvider) => {
+  const firebaseHelper = new FirebaseHelper(
+    settings?.firebase ?? ({} as TFirebaseSettings),
+  );
+  const { currentDeviceType } = useDeviceType();
+  const { logoUrls } = useWhiteLabel();
   return (
-    <I18nextProvider i18n={i18nProp}>
-      <FilesSelector {...rest} />
-    </I18nextProvider>
+    <ErrorBoundary
+      user={user ?? ({} as TUser)}
+      version={pkgFile.version}
+      firebaseHelper={firebaseHelper}
+      currentDeviceType={currentDeviceType}
+      whiteLabelLogoUrls={logoUrls}
+    >
+      {children}
+    </ErrorBoundary>
   );
 };
 
-export default FilesSelectorWrapper;
+export default ErrorProvider;

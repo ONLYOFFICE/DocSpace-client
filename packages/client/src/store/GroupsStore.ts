@@ -55,9 +55,13 @@ class GroupsStore {
 
   bufferSelection = null;
 
+  groupName = "";
+
   selected = "none";
 
   groupsFilter = GroupsFilter.getDefault();
+
+  isLoading = false;
 
   groupsIsIsLoading = false;
 
@@ -118,6 +122,14 @@ class GroupsStore {
     const filter = GroupsFilter.getDefault();
 
     window.DocSpace.navigate(`accounts/groups/filter?${filter.toUrlParams()}`);
+  };
+
+  setGroupName = (name: string) => {
+    this.groupName = name;
+  };
+
+  setIsLoading = (isLoading: boolean) => {
+    this.isLoading = isLoading;
   };
 
   get groupsFilterTotal() {
@@ -396,6 +408,56 @@ class GroupsStore {
     this.setSelection(newSelections);
   };
 
+  onDeleteClick = (name: string) => {
+    this.setGroupName(name);
+    this.peopleStore.dialogStore.setDeleteGroupDialogVisible(true);
+  };
+
+  onDeleteGroup = async (t, groupId) => {
+    this.setIsLoading(true);
+
+    if (!groupId) {
+      this.setIsLoading(false);
+      return;
+    }
+
+    try {
+      await groupsApi.deleteGroup(groupId);
+      toastr.success(t("PeopleTranslations:SuccessDeleteGroup"));
+      this.setSelection([]);
+      this.getGroups(this.groupsFilter, true);
+      this.infoPanelStore.setInfoPanelSelection(null);
+      this.setIsLoading(false);
+      this.peopleStore.dialogStore.setDeleteGroupDialogVisible(false);
+    } catch (err) {
+      toastr.error(err.message);
+      console.error(err);
+      this.setIsLoading(false);
+      this.peopleStore.dialogStore.setDeleteGroupDialogVisible(false);
+    }
+  };
+
+  onDeleteAllGroups = (t) => {
+    this.setIsLoading(true);
+
+    try {
+      Promise.all(
+        this.selection.map(async (group) => groupsApi.deleteGroup(group.id)),
+      ).then(() => {
+        toastr.success(t("PeopleTranslations:SuccessDeleteGroups"));
+        this.setSelection([]);
+        this.getGroups(this.groupsFilter, true);
+        this.setIsLoading(false);
+        this.peopleStore.dialogStore.setDeleteGroupDialogVisible(false);
+      });
+    } catch (err) {
+      toastr.error(err.message);
+      console.error(err);
+      this.setIsLoading(false);
+      this.peopleStore.dialogStore.setDeleteGroupDialogVisible(false);
+    }
+  };
+
   getGroupContextOptions = (
     t,
     item,
@@ -444,21 +506,24 @@ class GroupsStore {
         label: t("Common:Delete"),
         title: t("Common:Delete"),
         icon: TrashReactSvgUrl,
-        onClick: async () => {
-          const groupId = item.id;
-          groupsApi
-            .deleteGroup(groupId)!
-            .then(() => {
-              toastr.success(t("PeopleTranslations:SuccessDeleteGroup"));
-              this.setSelection([]);
-              this.getGroups(this.groupsFilter, true);
-              this.infoPanelStore.setInfoPanelSelection(null);
-            })
-            .catch((err) => {
-              toastr.error(err.message);
-              console.error(err);
-            });
-        },
+        onClick: () => this.onDeleteClick(item.name),
+
+        //
+        // onClick: async () => {
+        //   const groupId = item.id;
+        //   groupsApi
+        //     .deleteGroup(groupId)!
+        //     .then(() => {
+        //       toastr.success(t("PeopleTranslations:SuccessDeleteGroup"));
+        //       this.setSelection([]);
+        //       this.getGroups(this.groupsFilter, true);
+        //       this.infoPanelStore.setInfoPanelSelection(null);
+        //     })
+        //     .catch((err) => {
+        //       toastr.error(err.message);
+        //       console.error(err);
+        //     });
+        // },
       },
     ];
   };

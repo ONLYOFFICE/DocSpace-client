@@ -1012,7 +1012,7 @@ export const getBaseTheme = () => {
       maxWidth: "340px",
       color: white,
       textColor: black,
-      backgroundColor: "#f8f7bf",
+      backgroundColor: "#F8F9F9",
 
       before: {
         border: "none",
@@ -1122,16 +1122,16 @@ export const getBaseTheme = () => {
 
       roleWrapperContainer: {
         right: {
-          min: "-5px",
+          min: "-2px",
           small: "-2px",
           base: "-2px",
           medium: "-4px",
           big: "3px",
-          max: "0px",
+          max: "10px",
         },
 
         bottom: {
-          min: "-5px",
+          min: "-2px",
           small: "3px",
           base: "4px",
           medium: "6px",
@@ -1140,13 +1140,15 @@ export const getBaseTheme = () => {
         },
 
         width: {
+          min: "12px",
           medium: "16px",
-          max: "24px",
+          max: "22px",
         },
 
         height: {
+          min: "12px",
           medium: "16px",
-          max: "24px",
+          max: "22px",
         },
       },
 
@@ -2098,7 +2100,7 @@ export const getBaseTheme = () => {
 
       links: {
         iconColor: "#3B72A7",
-        iconErrorColor: "rgba(242, 28, 14, 0.5)", // "#F21C0E",
+        iconErrorColor: "#F24724",
         primaryColor: "#555F65",
       },
 

@@ -171,6 +171,7 @@ const UsersRowContent = ({
             onValidateInput={onValidateEmail}
             hasError={hasError}
             onBlur={checkEmailValidity}
+            isAutoFocussed
           />
 
           <DecisionButton icon={<CheckSvg />} onClick={handleSaveClick} />

@@ -42,7 +42,6 @@ export interface ArticleHeaderProps {
   onClick?: () => void;
   onLogoClickAction?: () => void;
   isBurgerLoading: boolean;
-  whiteLabelLogoUrls: TWhiteLabel[];
   withCustomArticleHeader: boolean;
   currentDeviceType: DeviceType;
 }
@@ -123,7 +122,6 @@ export interface ArticleProps {
 
   onArticleHeaderClick?: () => void;
   isBurgerLoading: boolean;
-  whiteLabelLogoUrls: TWhiteLabel[];
 
   languageBaseName: string;
   zendeskEmail: string;

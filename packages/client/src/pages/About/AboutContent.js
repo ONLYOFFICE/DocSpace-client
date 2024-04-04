@@ -109,7 +109,6 @@ const AboutContent = (props) => {
     theme,
     companyInfoSettingsData,
     previewData,
-    whiteLabelLogoUrls,
   } = props;
   const { t } = useTranslation("About");
   const license = "AGPL-3.0";
@@ -285,11 +284,10 @@ const AboutContent = (props) => {
 };
 
 export default inject(({ settingsStore }) => {
-  const { theme, companyInfoSettingsData, whiteLabelLogoUrls } = settingsStore;
+  const { theme, companyInfoSettingsData } = settingsStore;
 
   return {
     theme,
     companyInfoSettingsData,
-    whiteLabelLogoUrls,
   };
 })(observer(AboutContent));

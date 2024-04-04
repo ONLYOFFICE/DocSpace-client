@@ -90,7 +90,6 @@ const Article = ({
 
   onArticleHeaderClick,
   isBurgerLoading,
-  whiteLabelLogoUrls,
 
   isNonProfit,
   isEnterprise,
@@ -270,7 +269,6 @@ const Article = ({
           withCustomArticleHeader={withCustomArticleHeader}
           onClick={onArticleHeaderClick}
           isBurgerLoading={isBurgerLoading}
-          whiteLabelLogoUrls={whiteLabelLogoUrls}
         >
           {articleHeaderContent ? articleHeaderContent.props.children : null}
         </SubArticleHeader>

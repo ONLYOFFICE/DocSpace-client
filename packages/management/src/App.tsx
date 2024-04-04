@@ -57,8 +57,7 @@ const App = observer(() => {
   const { authStore, userStore, settingsStore } = useStore();
 
   const { init } = authStore;
-  const { setTheme, limitedAccessSpace, timezone, whiteLabelLogoUrls } =
-    settingsStore;
+  const { setTheme, limitedAccessSpace, timezone } = settingsStore;
 
   window.timezone = timezone;
 

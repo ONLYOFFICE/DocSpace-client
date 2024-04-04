@@ -295,7 +295,6 @@ const SectionHeaderContent = (props) => {
     categoryType,
     isPublicRoom,
     theme,
-    whiteLabelLogoUrls,
     downloadAction,
     isPublicRoomType,
     isCustomRoomType,
@@ -1388,14 +1387,8 @@ export default inject(
       insideGroupTempTitle,
     } = peopleStore.groupsStore;
 
-    const {
-      enablePlugins,
-      theme,
-      whiteLabelLogoUrls,
-      frameConfig,
-      isFrame,
-      currentDeviceType,
-    } = settingsStore;
+    const { enablePlugins, theme, frameConfig, isFrame, currentDeviceType } =
+      settingsStore;
     const { isGracePeriod } = currentTariffStatusStore;
 
     const isRoom = !!roomType;
@@ -1584,7 +1577,6 @@ export default inject(
       emptyTrashInProgress,
       categoryType,
       theme,
-      whiteLabelLogoUrls,
       isFrame,
       showTitle: frameConfig?.showTitle,
       hideInfoPanel: isFrame && !frameConfig?.infoPanelVisible,

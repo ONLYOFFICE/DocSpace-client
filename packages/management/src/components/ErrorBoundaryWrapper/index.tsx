@@ -39,7 +39,6 @@ const ErrorBoundaryWrapper = (props: Partial<ErrorBoundaryProps>) => {
     onError,
     user,
     version,
-    whiteLabelLogoUrls,
   } = props;
 
   return (
@@ -50,19 +49,14 @@ const ErrorBoundaryWrapper = (props: Partial<ErrorBoundaryProps>) => {
       firebaseHelper={firebaseHelper!}
       currentDeviceType={currentDeviceType!}
       currentColorScheme={currentColorScheme}
-      whiteLabelLogoUrls={whiteLabelLogoUrls!}
       onError={onError}
     />
   );
 };
 
 export default inject<any>(({ authStore, settingsStore, userStore }) => {
-  const {
-    whiteLabelLogoUrls,
-    firebaseHelper,
-    currentDeviceType,
-    currentColorScheme,
-  } = settingsStore;
+  const { firebaseHelper, currentDeviceType, currentColorScheme } =
+    settingsStore;
   const { user } = userStore;
   const version = authStore.version;
 
@@ -71,7 +65,6 @@ export default inject<any>(({ authStore, settingsStore, userStore }) => {
     version,
     firebaseHelper,
     currentDeviceType,
-    whiteLabelLogoUrls,
     currentColorScheme,
   };
 })(observer(ErrorBoundaryWrapper));

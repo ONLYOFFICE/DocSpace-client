@@ -156,8 +156,10 @@ class CommonStore {
   };
 
   getWhiteLabelLogoUrls = async () => {
-    const { whiteLabelLogoUrls } = this.settingsStore;
-    const logos = JSON.parse(JSON.stringify(whiteLabelLogoUrls));
+    const { getWhiteLabelLogoUrls } = this.settingsStore;
+
+    const logos = await getWhiteLabelLogoUrls();
+
     this.setLogoUrlsWhiteLabel(Object.values(logos));
   };
 

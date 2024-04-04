@@ -55,8 +55,6 @@ const DeepLink = ({
   fileInfo,
   userEmail,
   setIsShowDeepLink,
-  logoUrls,
-  theme,
   currentDeviceType,
   deepLinkConfig,
 }: DeepLinkProps) => {
@@ -166,3 +164,4 @@ const DeepLink = ({
 };
 
 export default DeepLink;
+

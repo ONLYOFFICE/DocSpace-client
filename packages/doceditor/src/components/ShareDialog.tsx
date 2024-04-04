@@ -26,15 +26,14 @@
 
 import React from "react";
 import styled from "styled-components";
-import { i18n } from "i18next";
 import { useTranslation } from "react-i18next";
 
-import Share from "@docspace/shared/components/share/Share.wrapper";
+import Share from "@docspace/shared/components/share";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Aside } from "@docspace/shared/components/aside";
 import { Text } from "@docspace/shared/components/text";
 import { NoUserSelect } from "@docspace/shared/utils/commonStyles";
-import { Base, TTheme } from "@docspace/shared/themes";
+import { Base } from "@docspace/shared/themes";
 import { TFile } from "@docspace/shared/api/files/types";
 
 const StyledWrapper = styled.div`
@@ -66,16 +65,12 @@ type SharingDialogProps = {
   fileInfo: TFile;
   onCancel: () => void;
   isVisible: boolean;
-  theme: TTheme;
-  i18n: i18n;
 };
 
 const SharingDialog = ({
   fileInfo,
   onCancel,
   isVisible,
-  theme,
-  i18n,
 }: SharingDialogProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -85,17 +80,17 @@ const SharingDialog = ({
         onClick={onCancel}
         visible={isVisible}
         zIndex={310}
-        isAside={true}
+        isAside
         withoutBackground={false}
         withoutBlur={false}
       />
       <Aside visible={isVisible} onClose={onCancel} withoutBodyScroll>
-        <StyledWrapper theme={theme}>
+        <StyledWrapper>
           <div className="share-file_header">
             <Text className="share-file_heading">{t("Common:Share")}</Text>
           </div>
           <div className="share-file_body">
-            <Share infoPanelSelection={fileInfo} i18nProp={i18n} />
+            <Share infoPanelSelection={fileInfo} />
           </div>
         </StyledWrapper>
       </Aside>
@@ -104,4 +99,3 @@ const SharingDialog = ({
 };
 
 export default SharingDialog;
-

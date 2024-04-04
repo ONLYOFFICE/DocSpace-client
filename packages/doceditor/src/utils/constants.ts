@@ -37,3 +37,4 @@ export const IS_VIEW =
     ? window.location.search.indexOf("action=view") !== -1
     : false;
 
+export const REPLACED_URL_PATH = "/web-apps/apps/api/documents/api.js";

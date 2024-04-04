@@ -70,14 +70,6 @@ const Footer = styled.div`
   }
 `;
 
-const Separator = styled.hr`
-  border-top: 1px solid;
-  border-color: ${(props) => (props.theme.isBase ? "#eceef1" : "#474747")};
-  margin-bottom: 14px;
-`;
-
-Separator.defaultProps = { theme: Base };
-
 const constructUrl = (baseUrl, filters) => {
   const url = new URL(baseUrl, "http://127.0.0.1:8092/");
   url.searchParams.append(
@@ -182,9 +174,7 @@ const FilterDialog = (props) => {
             filters={filters}
             setFilters={setFilters}
           />
-          <Separator />
           <StatusPicker filters={filters} setFilters={setFilters} />
-          <Separator />
         </DialogBodyWrapper>
       </ModalDialog.Body>
       {!areFiltersChanged && (

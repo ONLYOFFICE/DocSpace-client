@@ -24,20 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TFile } from "@docspace/shared/api/files/types";
-import { DeviceType } from "@docspace/shared/enums";
-import { TTheme } from "@docspace/shared/themes";
-import { TWhiteLabel } from "@docspace/shared/utils/whiteLabelHelper";
-
-import { TDeepLinkConfig } from "./DeepLink.helper";
-
-export interface DeepLinkProps {
-  fileInfo?: TFile;
-  logoUrls: TWhiteLabel[];
-  userEmail?: string;
-
-  currentDeviceType: DeviceType;
-  deepLinkConfig?: TDeepLinkConfig;
-
-  setIsShowDeepLink: (value: boolean) => void;
+export default function CreateLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <>{children}</>;
 }

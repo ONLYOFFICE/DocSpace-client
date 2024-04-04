@@ -100,6 +100,9 @@ const StyledLinkRow = styled.div`
   .avatar_role-wrapper {
     ${({ isExpired, theme }) => css`
       svg {
+        border: ${(props) => `1px solid ${props.theme.backgroundColor}`};
+        border-radius: 50%;
+
         path {
           fill: ${isExpired
             ? theme.infoPanel.links.iconErrorColor

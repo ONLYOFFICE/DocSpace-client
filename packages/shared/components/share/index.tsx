@@ -26,7 +26,6 @@
 
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import copy from "copy-to-clipboard";
 import moment from "moment";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
@@ -40,6 +39,7 @@ import {
   getPrimaryLink,
 } from "../../api/files";
 import { TAvailableExternalRights, TFileLink } from "../../api/files/types";
+import { copyShareLink } from "../../utils/copy";
 import { TOption } from "../combobox";
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
@@ -114,7 +114,7 @@ const Share = (props: ShareProps) => {
         : await getPrimaryLink(infoPanelSelection.id);
 
       setFileLinks([link]);
-      copy(link.sharedTo.shareLink);
+      copyShareLink(link.sharedTo.shareLink);
       toastr.success(t("Common:GeneralAccessLinkCopied"));
     } catch (error) {
       const message = (error as { message: string }).message
@@ -204,7 +204,7 @@ const Share = (props: ShareProps) => {
           );
       updateLink(link, res);
 
-      copy(link.sharedTo.shareLink);
+      copyShareLink(link.sharedTo.shareLink);
       toastr.success(t("Common:LinkSuccessfullyCopied"));
     } catch (e) {
       toastr.error(e as TData);
@@ -247,7 +247,7 @@ const Share = (props: ShareProps) => {
         if (item.access === ShareAccessRights.DenyAccess) {
           toastr.success(t("Common:LinkAccessDenied"));
         } else {
-          copy(link.sharedTo.shareLink);
+          copyShareLink(link.sharedTo.shareLink);
           toastr.success(t("Common:LinkSuccessfullyCopied"));
         }
       }
@@ -285,7 +285,7 @@ const Share = (props: ShareProps) => {
 
       updateLink(link, res);
 
-      copy(link.sharedTo.shareLink);
+      copyShareLink(link.sharedTo.shareLink);
       toastr.success(t("Common:LinkSuccessfullyCopied"));
     } catch (e) {
       toastr.error(e as TData);

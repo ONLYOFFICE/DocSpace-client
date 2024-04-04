@@ -27,7 +27,7 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { isMobile } from "@docspace/shared/utils/device";
+import { isMobile } from "react-device-detect";
 import { useNavigate } from "react-router-dom";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import styled from "styled-components";
@@ -125,8 +125,13 @@ const NextcloudWorkspace = (props) => {
     return clearCheckedAccounts;
   }, []);
 
-  if (isMobile())
-    return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
+  if (isMobile)
+    return (
+      <BreakpointWarning
+        isMobileUnavailableOnly
+        sectionName={t("Settings:DataImport")}
+      />
+    );
 
   if (!tReady || !shouldRender) return <SelectFileLoader />;
 

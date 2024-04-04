@@ -61,12 +61,12 @@ const Root = ({
   user,
   error,
   isSharingAccess,
-  editorUrl,
+
   doc,
   fileId,
   hash,
 }: TResponse) => {
-  const documentserverUrl = editorUrl?.docServiceUrl;
+  const documentserverUrl = config?.editorUrl ?? error?.editorUrl;
   const fileInfo = config?.file;
 
   const instanceId = config?.document?.referenceData.instanceId;

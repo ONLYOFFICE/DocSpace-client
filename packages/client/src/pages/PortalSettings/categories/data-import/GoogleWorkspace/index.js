@@ -28,7 +28,9 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { getStepTitle, getGoogleStepDescription } from "../../../utils";
-import { tablet, isMobile } from "@docspace/shared/utils/device";
+import { tablet } from "@docspace/shared/utils/device";
+
+import { isMobile } from "react-device-detect";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -211,8 +213,13 @@ const GoogleWorkspace = ({
     return clearCheckedAccounts;
   }, []);
 
-  if (isMobile())
-    return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
+  if (isMobile)
+    return (
+      <BreakpointWarning
+        isMobileUnavailableOnly
+        sectionName={t("Settings:DataImport")}
+      />
+    );
 
   if (!shouldRender) return <SelectFileLoader />;
 

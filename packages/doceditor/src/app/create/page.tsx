@@ -24,11 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { redirect } from "next/navigation";
+import { permanentRedirect, redirect } from "next/navigation";
+
+import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 
 import { createFile, fileCopyAs } from "@/utils/actions";
 import CreateFileError from "@/components/CreateFileError";
-import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 
 type TSearchParams = {
   parentId: string;
@@ -91,9 +92,8 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
   if (file?.id) fileId = file.id;
 
   if (fileId || !fileError) {
-    const redirectURL = `${baseURL}/doceditor/?fileId=${fileId}`;
-
-    return redirect(redirectURL);
+    const redirectURL = `${baseURL}/doceditor?fileId=${fileId}`;
+    return permanentRedirect(redirectURL);
   }
 
   return (
@@ -101,7 +101,6 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
       error={fileError}
       fileInfo={fileInfo}
       fromFile={!!fromFile}
-      fromTemplate={!!fromTemplate}
     />
   );
 }

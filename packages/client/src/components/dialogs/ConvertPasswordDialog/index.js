@@ -37,6 +37,8 @@ import SimulatePassword from "../../SimulatePassword";
 import StyledComponent from "./StyledConvertPasswordDialog";
 import config from "PACKAGE_FILE";
 
+let _isMounted = false;
+
 const ConvertPasswordDialogComponent = (props) => {
   const {
     t,

@@ -130,7 +130,6 @@ const Root = ({
   useUpdateSearchParamId(fileId, hash);
 
   React.useEffect(() => {
-    console.log(isSkipError, error);
     if (
       error &&
       error.message !== "restore-backup" &&

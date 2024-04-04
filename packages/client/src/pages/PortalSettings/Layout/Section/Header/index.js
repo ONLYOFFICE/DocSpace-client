@@ -37,7 +37,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { TableGroupMenu } from "@docspace/shared/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import LoaderSectionHeader from "../loaderSectionHeader";
-import { mobile, tablet, desktop } from "@docspace/shared/utils";
+import { mobile, tablet, desktop, isMobile } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Badge } from "@docspace/shared/components/badge";
 import {
@@ -74,6 +74,8 @@ const HeaderContainer = styled.div`
       white-space: nowrap;
       overflow: hidden;
       color: ${(props) => props.theme.client.settings.headerTitleColor};
+      display: flex;
+      align-items: center;
     }
   }
   .action-wrapper {
@@ -331,6 +333,13 @@ const SectionHeaderContent = (props) => {
     },
   ];
 
+  const pathname = location.pathname;
+
+  const isServicePage =
+    pathname.includes("google") ||
+    pathname.includes("nextcloud") ||
+    pathname.includes("onlyoffice");
+
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>
       {isHeaderVisible ? (
@@ -359,7 +368,18 @@ const SectionHeaderContent = (props) => {
           )}
           <Headline type="content" truncate={true}>
             <div className="settings-section_header">
-              <div className="header"> {t(header)}</div>
+              <div className="header">
+                {isMobile() && isServicePage && (
+                  <IconButton
+                    iconName={ArrowPathReactSvgUrl}
+                    size="17"
+                    isFill={true}
+                    onClick={onBackToParent}
+                    className="arrow-button"
+                  />
+                )}
+                {t(header)}
+              </div>
               {isNeedPaidIcon ? (
                 <Badge
                   backgroundColor="#EDC409"

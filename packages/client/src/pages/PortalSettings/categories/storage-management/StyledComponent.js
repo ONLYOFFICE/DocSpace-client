@@ -220,6 +220,7 @@ const StyledMainInfo = styled.div`
   display: flex;
   flex-wrap: wrap;
   background: ${(props) => props.theme.client.settings.payment.backgroundColor};
+  border-radius: 6px;
 
   column-gap: 24px;
   row-gap: 12px;

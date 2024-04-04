@@ -43,9 +43,10 @@ export const getHeaderLabel = (
   isRestore?: boolean,
   isFormRoom?: boolean,
   isThirdParty?: boolean,
+  isSelectFolder?: boolean,
 ) => {
   if (isRestore) return t("Common:RestoreTo");
-  if (isThirdParty) return t("Common:SelectFolder");
+  if (isSelectFolder) return t("Common:SelectFolder");
   if (isMove) return t("Common:MoveTo");
   if (isCopy && !isEditorDialog) return t("Common:Copy");
   if (isRestoreAll) return t("Common:Restore");
@@ -74,12 +75,13 @@ export const getAcceptButtonLabel = (
   filterParam?: string,
   isRestore?: boolean,
   isFormRoom?: boolean,
+  isSelectFolder?: boolean,
 ) => {
   if (isRestore) return t("Common:RestoreHere");
   if (isMove) return t("Common:MoveHere");
   if (isCopy && !isEditorDialog) return t("Common:CopyHere");
   if (isRestoreAll) return t("Common:RestoreHere");
-  if (isSelect || isFormRoom) return t("Common:SelectAction");
+  if (isSelect || isFormRoom || isSelectFolder) return t("Common:SelectAction");
 
   if (filterParam === FilesSelectorFilterTypes.DOCX) return t("Common:Create");
   // if (filterParam === FilesSelectorFilterTypes.DOCXF) return t("Common:SubmitToGallery");

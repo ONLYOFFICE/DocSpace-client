@@ -116,6 +116,9 @@ const CreateRoomDialog = ({
     setRoomParams((prev) => ({
       ...prev,
       type: newRoomType,
+      storageLocation: {
+        isThirdparty: false,
+      },
     }));
   };
 

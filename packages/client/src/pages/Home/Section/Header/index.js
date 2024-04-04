@@ -86,13 +86,14 @@ import {
   FolderType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
+import { getLogoFromPath } from "@docspace/shared/utils";
+import { copyShareLink } from "@docspace/shared/utils/copy";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
-import { getLogoFromPath } from "@docspace/shared/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
 
 const StyledContainer = styled.div`
@@ -180,6 +181,17 @@ const StyledContainer = styled.div`
 
       @media ${mobile} {
         display: none;
+      }
+    }
+
+    .title-icon {
+      svg {
+        path {
+          fill: ${(props) => props.theme.backgroundColor};
+        }
+        rect {
+          stroke: ${(props) => props.theme.backgroundColor};
+        }
       }
     }
   }
@@ -816,12 +828,12 @@ const SectionHeaderContent = (props) => {
         icon: CopyToReactSvgUrl,
         onClick: async () => {
           if (primaryLink) {
-            copy(primaryLink.sharedTo.shareLink);
+            copyShareLink(primaryLink.sharedTo.shareLink);
             toastr.success(t("Translations:LinkCopySuccess"));
           } else {
             const link = await getPrimaryLink(currentFolderId);
             if (link) {
-              copy(link.sharedTo.shareLink);
+              copyShareLink(link.sharedTo.shareLink);
               toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
               setExternalLink(link);
             }

@@ -381,6 +381,14 @@ class PeopleStore {
       return options;
     }
   };
+
+  onDeleteClick = () => {
+    const { setDeleteGroupDialogVisible } = this.dialogStore;
+    const { selection, setGroupName } = this.groupsStore;
+    setGroupName(selection[0].name);
+    setDeleteGroupDialogVisible(true);
+  };
+
   getHeaderMenu = (t, isGroupsPage = false) => {
     const {
       hasUsersToMakeEmployees,
@@ -394,8 +402,6 @@ class PeopleStore {
       selection,
     } = this.selectionStore;
 
-    const { selection: groupsSelection, groupsFilter } = this.groupsStore;
-
     const { setSendInviteDialogVisible } = this.dialogStore;
     const { toggleDeleteProfileEverDialog } = this.contextOptionsStore;
 
@@ -407,20 +413,7 @@ class PeopleStore {
           id: "menu-delete",
           key: "delete",
           label: t("Common:Delete"),
-          onClick: () => {
-            Promise.all(
-              groupsSelection.map(async (group) => deleteGroup(group.id)),
-            )
-              .then(() => {
-                toastr.success(t("PeopleTranslations:SuccessDeleteGroups"));
-                this.groupsStore.setSelection([]);
-                this.groupsStore.getGroups(groupsFilter, true);
-              })
-              .catch((err) => {
-                toastr.error(err.message);
-                console.error(err);
-              });
-          },
+          onClick: () => this.onDeleteClick(),
           iconUrl: DeleteReactSvgUrl,
         },
       ];

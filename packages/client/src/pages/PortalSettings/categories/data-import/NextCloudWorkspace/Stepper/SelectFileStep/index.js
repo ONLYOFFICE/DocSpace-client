@@ -114,7 +114,7 @@ const SelectFileStep = ({
   setIsFileLoading,
   cancelMigration,
 }) => {
-  const [isSaveDisabled, setIsSaveDisabled] = useState(false);
+  const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const [progress, setProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -147,15 +147,16 @@ const SelectFileStep = ({
       }
 
       setIsFileError(false);
-      setIsSaveDisabled(true);
+      setIsSaveDisabled(false);
 
-      if (res.parseResult.files.length > 0) {
+      if (res.parseResult.files?.length > 0) {
         setFileName(res.parseResult.files.join(", "));
       }
 
       if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
         toastr.error(res.error);
         setIsFileError(true);
+        setIsSaveDisabled(false);
         clearInterval(uploadInterval.current);
       } else if (res.isCompleted || res.progress === 100) {
         setUsers(res.parseResult);

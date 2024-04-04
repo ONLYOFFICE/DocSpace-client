@@ -204,7 +204,7 @@ export const TableDataCell = styled.td`
   }
 
   :last-child {
-    text-align: center;
+    text-align: end;
   }
   .remove-icon {
     svg {

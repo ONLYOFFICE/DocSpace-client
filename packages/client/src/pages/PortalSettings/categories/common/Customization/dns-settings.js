@@ -157,7 +157,7 @@ const DNSSettings = (props) => {
     isError && setIsError(false);
     setErrorText("");
 
-    const { value } = e.target;
+    const value = e.target.value.trim();
 
     const isValidDomain = parseDomain(value || "", setErrorText, t);
 
@@ -202,7 +202,7 @@ const DNSSettings = (props) => {
           <TextInput
             {...textInputProps}
             isDisabled={isLoading || !enable}
-            value={dnsName?.trim()}
+            value={dnsName}
             onChange={onChangeTextInput}
             hasError={isError}
           />

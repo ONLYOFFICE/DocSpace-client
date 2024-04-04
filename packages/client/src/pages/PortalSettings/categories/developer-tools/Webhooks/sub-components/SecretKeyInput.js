@@ -44,6 +44,7 @@ const SecretKeyWrapper = styled.div`
   .link {
     display: inline-block;
     margin-top: 6px;
+    color: ${(props) => props.theme.tooltip.textColor};
   }
 
   .dotted {
@@ -159,7 +160,6 @@ const SecretKeyInput = (props) => {
             isHovered={true}
             onClick={hideReset}
             className="link"
-            color="#333333"
           >
             {t("ResetKey")}
           </Link>

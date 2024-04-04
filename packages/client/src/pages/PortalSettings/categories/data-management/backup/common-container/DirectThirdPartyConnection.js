@@ -70,6 +70,8 @@ const DirectThirdPartyConnection = (props) => {
     isMobileScale,
     accounts,
     setThirdPartyAccountsInfo,
+    isSelect,
+    isSelectFolder,
   } = props;
 
   const [state, setState] = useReducer(
@@ -261,6 +263,8 @@ const DirectThirdPartyConnection = (props) => {
               isError={isError}
               isDisabled={isDisabledSelector}
               isThirdParty
+              isSelectFolder={isSelectFolder}
+              isSelect={isSelect}
             />
           )}
         </>

@@ -39,6 +39,7 @@ const FilesSelectorInput = (props) => {
     id,
     isThirdParty,
     isRoomsOnly,
+    isSelectFolder,
     setNewPath,
     newPath,
     onSelectFolder: setSelectedFolder,
@@ -126,6 +127,7 @@ const FilesSelectorInput = (props) => {
         rootThirdPartyId={rootThirdPartyId}
         isThirdParty={isThirdParty}
         isRoomsOnly={isRoomsOnly}
+        isSelectFolder={isSelectFolder}
         id={id}
         onClose={onClose}
         isPanelVisible={isPanelVisible}

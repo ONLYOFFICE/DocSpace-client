@@ -50,6 +50,7 @@ const ThirdPartyResources = (props) => {
         withoutInitPath
         buttonSize={buttonSize}
         isMobileScale
+        isSelect
       />
     </div>
   );

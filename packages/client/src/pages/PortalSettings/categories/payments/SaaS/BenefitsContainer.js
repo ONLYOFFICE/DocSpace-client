@@ -54,12 +54,9 @@ const StyledBody = styled.div`
     p {
       margin-bottom: 0;
     }
-    svg {
-      path {
-        fill: ${(props) =>
-          props.theme.client.settings.payment.benefitsContainer
-            .iconsColor} !important;
-      }
+    .icons-container {
+      width: 24px;
+      height: 24px;
     }
   }
 `;
@@ -79,7 +76,10 @@ const BenefitsContainer = ({ t, features, theme }) => {
         if (!item.title || !item.image) return;
         return (
           <div className="payment-benefits" key={index}>
-            <div dangerouslySetInnerHTML={{ __html: item.image }} />
+            <div
+              dangerouslySetInnerHTML={{ __html: item.image }}
+              className="icons-container"
+            />
             <Text noSelect>{item.title}</Text>
           </div>
         );

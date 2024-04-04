@@ -47,23 +47,16 @@ async function Page({
 }: {
   searchParams?: { [key: string]: string };
 }) {
-  const {
-    fileId,
-    fileid,
-    fileVersion: version,
-    doc,
-    action,
-    share,
-    editorType,
-  } = searchParams || {
-    fileId: undefined,
-    fileid: undefined,
-    fileVersion: undefined,
-    doc: undefined,
-    action: undefined,
-    share: undefined,
-    editorType: undefined,
-  };
+  const { fileId, fileid, version, doc, action, share, editorType } =
+    searchParams || {
+      fileId: undefined,
+      fileid: undefined,
+      version: undefined,
+      doc: undefined,
+      action: undefined,
+      share: undefined,
+      editorType: undefined,
+    };
 
   const data = await getData(
     fileId ?? fileid ?? "",

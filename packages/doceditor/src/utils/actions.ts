@@ -81,7 +81,7 @@ const processFillFormDraft = async (
 
   const editorVersion = editorSearchParams.get("version");
 
-  if (queryVersion) editorSearchParams.set("version", queryVersion);
+  // if (queryVersion) editorSearchParams.set("version", queryVersion);
 
   const actions: [
     Promise<IInitialConfig | TError>,
@@ -229,7 +229,7 @@ export async function getData(
     if (view) searchParams.append("view", view ? "true" : "false");
     if (version) {
       searchParams.append("version", version);
-      editorSearchParams.append("version", version);
+      // editorSearchParams.append("version", version);
     }
     if (doc) searchParams.append("doc", doc);
     if (share) searchParams.append("share", share);

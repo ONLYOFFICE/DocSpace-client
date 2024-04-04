@@ -188,14 +188,6 @@ const GoogleWorkspace = ({
           );
         }
 
-        if (res.parseResult.operation === "migration" && !res.isCompleted) {
-          setCurrentStep(5);
-        }
-
-        if (res.parseResult.operation === "migration" && res.isCompleted) {
-          setCurrentStep(6);
-        }
-
         if (
           res.parseResult.operation === "parse" &&
           res.isCompleted &&
@@ -204,6 +196,15 @@ const GoogleWorkspace = ({
           setUsers(res.parseResult);
           setCurrentStep(2);
         }
+
+        if (res.parseResult.operation === "migration" && !res.isCompleted) {
+          setCurrentStep(5);
+        }
+
+        if (res.parseResult.operation === "migration" && res.isCompleted) {
+          setCurrentStep(6);
+        }
+
         setShouldRender(true);
       });
     } catch (error) {

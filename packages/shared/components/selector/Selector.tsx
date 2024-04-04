@@ -97,6 +97,7 @@ const Selector = ({
   accessRights,
   selectedAccessRight,
   onAccessRightsChange,
+  accessRightsMode,
 
   withFooterInput,
   footerInputHeader,
@@ -480,6 +481,7 @@ const Selector = ({
         accessRights,
         selectedAccessRight: selectedAccess,
         onAccessRightsChange: onChangeAccessRightsAction,
+        accessRightsMode,
       }
     : ({} as TSelectorAccessRights);
 

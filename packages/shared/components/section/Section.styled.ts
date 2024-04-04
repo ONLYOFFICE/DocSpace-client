@@ -748,13 +748,17 @@ StyledSectionPaging.defaultProps = { theme: Base };
 
 const StyledSectionSubmenu = styled.div`
   width: calc(100% - 20px);
+  z-index: 1;
 
   @media ${tablet} {
-    width: calc(100% - 16px);
+    width: 100%;
+    position: sticky;
+    top: 61px;
   }
 
   @media ${mobile} {
-    width: 100%;
+    position: sticky;
+    top: 53px;
   }
 `;
 

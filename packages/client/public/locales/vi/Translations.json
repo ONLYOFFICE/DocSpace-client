@@ -44,6 +44,7 @@
   "RoleUserDescription": "Người dùng chỉ có thể truy cập vào các phòng mà họ được quản trị viên mời. Họ không thể tạo phòng, thư mục hoặc tập tin riêng.",
   "RoleViewer": "Người xem",
   "RoleViewerDescription": "Xem tập tin",
+  "SearchByHeadOfGroup": "Tìm kiếm theo Trưởng nhóm",
   "SearchByOwner": "Tìm kiếm theo Chủ sở hữu",
   "Spreadsheets": "Bảng tính",
   "SubNewForm": "Trống",

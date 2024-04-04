@@ -44,6 +44,7 @@
   "RoleUserDescription": "Kullanıcılar, yalnızca yöneticiler tarafından davet edildikleri odalara erişebilir. Kendi odalarını, klasörlerini veya dosyalarını oluşturamazlar.",
   "RoleViewer": "Görüntüleyici",
   "RoleViewerDescription": "Dosya görüntüleme",
+  "SearchByHeadOfGroup": "Grup Başkanına göre ara",
   "SearchByOwner": "Sahiplere Göre Ara",
   "Spreadsheets": "Elektronik tablolar",
   "SubNewForm": "Boş",

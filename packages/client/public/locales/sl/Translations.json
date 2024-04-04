@@ -44,6 +44,7 @@
   "RoleUserDescription": "Uporabniki lahko dostopajo samo do sob, v katere jih povabijo skrbniki. Ne morejo ustvariti lastnih sob, map ali datotek.",
   "RoleViewer": "Opazovalec",
   "RoleViewerDescription": "Ogled datoteke",
+  "SearchByHeadOfGroup": "Iskanje po vodji skupine",
   "SearchByOwner": "Iskanje po lastnikih",
   "Spreadsheets": "Tabele",
   "SubNewForm": "Od začetka",

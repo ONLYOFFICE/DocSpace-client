@@ -44,6 +44,7 @@
   "RoleUserDescription": "Používatelia majú prístup iba do miestností, do ktorých ich pozvali administrátori. Nemôžu si vytvárať vlastné miestnosti, priečinky ani súbory.",
   "RoleViewer": "Prehliadač",
   "RoleViewerDescription": "Prezeranie súboru",
+  "SearchByHeadOfGroup": "Vyhľadávanie podľa Vedúceho skupiny",
   "SearchByOwner": "Vyhľadávanie podľa vlastníkov",
   "Spreadsheets": "Tabuľky",
   "SubNewForm": "Prázdny",

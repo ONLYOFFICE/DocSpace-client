@@ -59,6 +59,7 @@ class RoomsModule extends React.PureComponent {
             isError={isError}
             isDisabled={isLoadingData}
             isRoomBackup
+            isSelectFolder
           />
         </div>
         <ScheduleComponent isLoadingData={isLoadingData} {...rest} />

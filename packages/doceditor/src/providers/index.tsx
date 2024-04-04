@@ -24,48 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import CreateFileError from "@/components/CreateFileError";
-import { getErrorData } from "@/utils/actions";
+import { TUser } from "@docspace/shared/api/people/types";
+import { TSettings } from "@docspace/shared/api/settings/types";
+import { Toast } from "@docspace/shared/components/toast/Toast";
 
-type TSearchParams = {
-  error?: string;
-  fileInfo?: string;
-  createFile?: string;
-  fromFile?: string;
-  fromTemplate?: string;
+import ThemeProvider from "./ThemeProvider";
+import TranslationProvider from "./TranslationProvider";
+import ErrorProvider from "./ErrorProvider";
+
+export type TContextData = {
+  user: TUser | undefined;
+  settings: TSettings | undefined;
 };
 
-async function Page({ searchParams }: { searchParams: TSearchParams }) {
-  const error = searchParams.error ? JSON.parse(searchParams.error) : "";
-  const fileInfo = searchParams.fileInfo
-    ? JSON.parse(searchParams.fileInfo)
-    : "";
-  const fromTemplate = searchParams.fromTemplate
-    ? JSON.parse(searchParams.fromTemplate)
-    : "";
-  const fromFile = searchParams.fromFile
-    ? JSON.parse(searchParams.fromFile)
-    : "";
+export type TProviders = {
+  children: React.ReactNode;
+  contextData: TContextData;
+};
 
-  console.log("searchParams here", searchParams);
+const Providers = ({ children, contextData }: TProviders) => {
+  return (
+    <TranslationProvider {...contextData}>
+      <ThemeProvider {...contextData}>
+        <ErrorProvider {...contextData}>
+          {children}
+          <Toast isSSR />
+        </ErrorProvider>
+      </ThemeProvider>
+    </TranslationProvider>
+  );
+};
 
-  if (searchParams.createFile) {
-    const { settings, user } = await getErrorData();
-
-    return (
-      <CreateFileError
-        error={error}
-        fileInfo={fileInfo}
-        fromFile={!!fromFile}
-        fromTemplate={!!fromTemplate}
-        settings={settings}
-        user={user}
-      />
-    );
-  }
-
-  return <div></div>;
-}
-
-export default Page;
-
+export default Providers;

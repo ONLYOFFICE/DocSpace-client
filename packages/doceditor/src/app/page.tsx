@@ -25,10 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
+
+import AppLoader from "@docspace/shared/components/app-loader";
 
 import { getData } from "@/utils/actions";
 
-import Root from "@/components/Root";
+const Root = dynamic(() => import("@/components/Root"), {
+  ssr: false,
+  loading: () => <AppLoader />,
+});
 
 export const metadata: Metadata = {
   title: "Onlyoffice DocEditor page",
@@ -60,7 +66,7 @@ async function Page({
   };
 
   const data = await getData(
-    fileId ?? fileid,
+    fileId ?? fileid ?? "",
     version,
     doc,
     action === "view",
@@ -72,4 +78,3 @@ async function Page({
 }
 
 export default Page;
-

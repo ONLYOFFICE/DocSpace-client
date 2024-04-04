@@ -24,20 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TFile } from "@docspace/shared/api/files/types";
-import { DeviceType } from "@docspace/shared/enums";
-import { TTheme } from "@docspace/shared/themes";
-import { TWhiteLabel } from "@docspace/shared/utils/whiteLabelHelper";
+"use client";
 
-import { TDeepLinkConfig } from "./DeepLink.helper";
+import React from "react";
 
-export interface DeepLinkProps {
-  fileInfo?: TFile;
-  logoUrls: TWhiteLabel[];
-  userEmail?: string;
+import { ThemeProvider as ComponentThemeProvider } from "@docspace/shared/components/theme-provider";
+import { TUser } from "@docspace/shared/api/people/types";
+import { TSettings } from "@docspace/shared/api/settings/types";
 
-  currentDeviceType: DeviceType;
-  deepLinkConfig?: TDeepLinkConfig;
+import useTheme from "@/hooks/useTheme";
+import useI18N from "@/hooks/useI18N";
 
-  setIsShowDeepLink: (value: boolean) => void;
-}
+type TThemeProvider = {
+  children: React.ReactNode;
+  settings: TSettings | undefined;
+  user: TUser | undefined;
+};
+
+const ThemeProvider = ({ children, user, settings }: TThemeProvider) => {
+  const { i18n } = useI18N({ settings, user });
+
+  const { theme, currentColorTheme } = useTheme({ user, i18n });
+
+  return (
+    <ComponentThemeProvider
+      theme={theme}
+      currentColorScheme={currentColorTheme}
+    >
+      {children}
+    </ComponentThemeProvider>
+  );
+};
+
+export default ThemeProvider;

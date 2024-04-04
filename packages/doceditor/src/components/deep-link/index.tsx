@@ -27,6 +27,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -38,7 +39,6 @@ import { getLogoFromPath } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
 
 import { getDeepLink } from "./DeepLink.helper";
-
 import {
   StyledSimpleNav,
   StyledDeepLink,
@@ -55,12 +55,13 @@ const DeepLink = ({
   fileInfo,
   userEmail,
   setIsShowDeepLink,
-  theme,
+
   logoUrls,
   currentDeviceType,
   deepLinkConfig,
 }: DeepLinkProps) => {
   const { t } = useTranslation(["DeepLink", "Common"]);
+  const theme = useTheme();
 
   const [isRemember, setIsRemember] = useState(false);
   const onChangeCheckbox = () => {
@@ -104,13 +105,13 @@ const DeepLink = ({
 
     if (currentDeviceType === DeviceType.mobile) {
       return (
-        <StyledSimpleNav theme={theme}>
+        <StyledSimpleNav>
           <img src={logo} alt="" />
         </StyledSimpleNav>
       );
     } else {
       return (
-        <LogoWrapper theme={theme}>
+        <LogoWrapper>
           <img src={logo} alt="docspace-logo" />
         </LogoWrapper>
       );
@@ -128,7 +129,7 @@ const DeepLink = ({
         <StyledDeepLink>
           <StyledBodyWrapper>
             <Text className="title">{t("DeepLink:OpeningDocument")}</Text>
-            <StyledFileTile theme={theme}>
+            <StyledFileTile>
               <img src={getFileIcon()} alt="docspace-logo" />
               <Text fontSize="14px" fontWeight="600" truncate>
                 {getFileTitle()}
@@ -168,4 +169,3 @@ const DeepLink = ({
 };
 
 export default DeepLink;
-

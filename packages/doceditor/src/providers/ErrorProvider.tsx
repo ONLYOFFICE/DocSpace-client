@@ -24,20 +24,45 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TFile } from "@docspace/shared/api/files/types";
-import { DeviceType } from "@docspace/shared/enums";
-import { TTheme } from "@docspace/shared/themes";
-import { TWhiteLabel } from "@docspace/shared/utils/whiteLabelHelper";
+"use client";
 
-import { TDeepLinkConfig } from "./DeepLink.helper";
+import React from "react";
 
-export interface DeepLinkProps {
-  fileInfo?: TFile;
-  logoUrls: TWhiteLabel[];
-  userEmail?: string;
+import ErrorBoundary from "@docspace/shared/components/error-boundary/ErrorBoundary";
+import { TUser } from "@docspace/shared/api/people/types";
+import {
+  TSettings,
+  TFirebaseSettings,
+} from "@docspace/shared/api/settings/types";
+import FirebaseHelper from "@docspace/shared/utils/firebase";
 
-  currentDeviceType: DeviceType;
-  deepLinkConfig?: TDeepLinkConfig;
+import pkgFile from "../../package.json";
+import useDeviceType from "@/hooks/useDeviceType";
+import useWhiteLabel from "@/hooks/useWhiteLabel";
 
-  setIsShowDeepLink: (value: boolean) => void;
-}
+type TErrorProvider = {
+  user: TUser | undefined;
+  settings: TSettings | undefined;
+  children: React.ReactNode;
+};
+
+const ErrorProvider = ({ children, user, settings }: TErrorProvider) => {
+  const firebaseHelper = new FirebaseHelper(
+    settings?.firebase ?? ({} as TFirebaseSettings),
+  );
+  const { currentDeviceType } = useDeviceType();
+  const { logoUrls } = useWhiteLabel();
+  return (
+    <ErrorBoundary
+      user={user ?? ({} as TUser)}
+      version={pkgFile.version}
+      firebaseHelper={firebaseHelper}
+      currentDeviceType={currentDeviceType}
+      whiteLabelLogoUrls={logoUrls}
+    >
+      {children}
+    </ErrorBoundary>
+  );
+};
+
+export default ErrorProvider;

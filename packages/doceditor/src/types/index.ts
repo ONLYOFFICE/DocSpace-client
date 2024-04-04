@@ -42,8 +42,7 @@ import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelecto
 import SocketIOHelper from "@docspace/shared/utils/socket";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
-import { Nullable, TTranslation } from "@docspace/shared/types";
-import { i18n } from "i18next";
+import { TTranslation } from "@docspace/shared/types";
 
 export type TGoBack = {
   requestClose: boolean;
@@ -178,8 +177,8 @@ export type TResponse =
   | {
       config: IInitialConfig;
       editorUrl: TDocServiceLocation;
-      user: TUser;
-      settings: TSettings;
+      user?: TUser;
+      settings?: TSettings;
       successAuth: boolean;
       isSharingAccess: boolean;
       error?: TError;
@@ -190,7 +189,7 @@ export type TResponse =
   | {
       error: TError;
       config?: undefined;
-      editorUrl?: undefined;
+      editorUrl?: TDocServiceLocation;
       user?: undefined;
       settings?: undefined;
       successAuth?: undefined;
@@ -204,13 +203,12 @@ export type EditorProps = {
   config?: IInitialConfig;
   successAuth?: boolean;
   user?: TUser;
-  view?: boolean;
   doc?: string;
   documentserverUrl: string;
   fileInfo?: TFile;
   isSharingAccess?: boolean;
   errorMessage?: string;
-  t: TTranslation | null;
+
   onSDKRequestSharingSettings: () => void;
   onSDKRequestSaveAs: (event: object) => void;
   onSDKRequestInsertImage: (event: object) => void;
@@ -273,7 +271,6 @@ export interface SelectFolderDialogProps {
   ) => Promise<void>;
   fileInfo: TFile;
   filesSettings: TFilesSettings;
-  i18n: i18n;
   fileSaveAsExtension?: string;
 }
 
@@ -310,7 +307,6 @@ export interface SelectFileDialogProps {
   ) => Promise<void>;
   fileInfo: TFile;
   filesSettings: TFilesSettings;
-  i18n: i18n;
 }
 
 export interface UseSocketHelperProps {
@@ -324,7 +320,7 @@ export interface UseEventsProps {
   config?: IInitialConfig;
   doc?: string;
   errorMessage?: string;
-  t?: Nullable<TTranslation>;
+  t: TTranslation;
 }
 
 export interface UseInitProps {
@@ -332,7 +328,7 @@ export interface UseInitProps {
   successAuth?: boolean;
   fileInfo?: TFile;
   user?: TUser;
-  t: Nullable<TTranslation>;
+  t: TTranslation;
 
   setDocTitle: (value: string) => void;
   documentReady: boolean;

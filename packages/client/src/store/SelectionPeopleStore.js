@@ -255,6 +255,11 @@ class SelectionStore {
     const list = this.peopleStore.usersStore.peopleList;
     this.setSelection(this.getUsersBySelected(list, selected));
 
+    if (selected !== "none" && selected !== "close") {
+      this.resetUsersRight();
+      list.forEach((u) => this.incrementUsersRights(u));
+    }
+
     return selected;
   };
 

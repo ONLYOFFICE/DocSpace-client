@@ -361,6 +361,7 @@ export type TDocEditor = {
   setHistoryData?: (obj: THistoryData) => void;
   setActionLink: (link: string) => void;
   setUsers?: ({ c, users }: { c: string; users: TSharedUsers[] }) => void;
+  startFilling?: VoidFunction;
 };
 
 export type TCatchError =

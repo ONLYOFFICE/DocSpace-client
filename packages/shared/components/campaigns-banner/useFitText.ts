@@ -43,7 +43,8 @@ const useFitText = (
       !!ref.current && ref.current.scrollHeight > ref.current.offsetHeight;
 
     if (isOverflow) {
-      setFontSize((prevFontSize) => prevFontSize - 1);
+      const newFontSize = fontSize - 1;
+      setFontSize(newFontSize);
     }
   }, [currentFontSize, fontSize, ref?.current?.scrollHeight]);
 

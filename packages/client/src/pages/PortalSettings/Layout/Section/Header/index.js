@@ -181,6 +181,7 @@ const SectionHeaderContent = (props) => {
     isRestoreAndAutoBackupAvailable,
     tReady,
     setIsLoadedSectionHeader,
+    isSSOAvailable,
   } = props;
 
   const navigate = useNavigate();
@@ -205,6 +206,9 @@ const SectionHeaderContent = (props) => {
         return isBrandingAndCustomizationAvailable;
       case "AdditionalResources":
         return isBrandingAndCustomizationAvailable;
+      case "SingleSignOn:ServiceProviderSettings":
+      case "SingleSignOn:SpMetadata":
+        return isSSOAvailable;
       default:
         return true;
     }
@@ -418,6 +422,7 @@ export default inject(({ currentQuotaStore, setup, common }) => {
   const {
     isBrandingAndCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
+    isSSOAvailable,
   } = currentQuotaStore;
   const { addUsers, removeAdmins } = setup.headerAction;
   const { toggleSelector } = setup;
@@ -451,6 +456,7 @@ export default inject(({ currentQuotaStore, setup, common }) => {
     setIsLoadedSectionHeader,
     isBrandingAndCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
+    isSSOAvailable,
   };
 })(
   withLoading(

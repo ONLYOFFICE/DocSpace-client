@@ -46,7 +46,7 @@ import {
 } from "../../../utils";
 
 import { ArticleItem } from "@docspace/shared/components/article-item";
-import LoaderArticleBody from "./loaderArticleBody";
+import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -314,7 +314,7 @@ const ArticleBodyContent = (props) => {
   const items = catalogItems();
 
   return !isLoadedArticleBody || isProfileLoading ? (
-    <LoaderArticleBody />
+    <ArticleFolderLoader />
   ) : (
     <>{items}</>
   );

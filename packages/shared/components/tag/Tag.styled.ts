@@ -90,6 +90,7 @@ const StyledTag = styled.div<{
   }
 
   .third-party-tag {
+    padding: 2px 0px;
     width: 16px;
     height: 16px;
   }

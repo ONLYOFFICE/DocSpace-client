@@ -41,6 +41,8 @@ export default function withContent(WrappedContent) {
       deselectUser,
       setBufferSelection,
       selectRow,
+      singleContextMenuAction,
+      multipleContextMenuAction,
 
       theme,
       getModel,
@@ -50,23 +52,17 @@ export default function withContent(WrappedContent) {
     const { mobilePhone, email, role, displayName, avatar } = item;
 
     const onContentRowSelect = (checked, user) => {
-      setBufferSelection(null, false);
+      setBufferSelection(null);
       checked ? selectUser(user) : deselectUser(user);
     };
 
-    const onContentRowClick = (
-      checked,
-      user,
-      addToSelection = true,
-      isContextClick = true,
-    ) => {
-      if (isContextClick) {
-        checked
-          ? setBufferSelection(null)
-          : setBufferSelection(user, addToSelection);
-        return;
-      }
+    const onContextClick = (item, isSingleMenu) => {
+      isSingleMenu
+        ? singleContextMenuAction(item)
+        : multipleContextMenuAction(item);
+    };
 
+    const onContentRowClick = (user) => {
       selectRow(user);
     };
 
@@ -102,6 +98,7 @@ export default function withContent(WrappedContent) {
       <WrappedContent
         onContentRowSelect={onContentRowSelect}
         onContentRowClick={onContentRowClick}
+        onUserContextClick={onContextClick}
         onPhoneClick={onPhoneClick}
         onEmailClick={onEmailClick}
         groups={[]}
@@ -129,6 +126,8 @@ export default function withContent(WrappedContent) {
       selectUser,
       deselectUser,
       selectRow,
+      singleContextMenuAction,
+      multipleContextMenuAction,
     } = selectionStore;
 
     return {
@@ -144,6 +143,8 @@ export default function withContent(WrappedContent) {
       deselectUser,
       getModel,
       selectRow,
+      singleContextMenuAction,
+      multipleContextMenuAction,
     };
   })(observer(WithContent));
 }

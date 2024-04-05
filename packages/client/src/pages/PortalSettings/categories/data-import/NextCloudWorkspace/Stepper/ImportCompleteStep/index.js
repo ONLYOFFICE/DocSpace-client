@@ -128,8 +128,8 @@ const ImportCompleteStep = ({
           {t("Settings:ErrorsWereFound", { errors: importResult.failedUsers })}
         </ErrorText>
       )}
-      
-      {importResult.errors.length > 0 && (
+
+      {importResult.errors?.length > 0 && (
         <ErrorText>{t("Settings:ErrorOccuredDownloadLog")}</ErrorText>
       )}
 

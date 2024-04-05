@@ -412,28 +412,27 @@ const InvitePanel = ({
           ) : (
             bodyInvitePanel
           )}
-          {hasInvitedUsers && (
-            <StyledButtons>
-              <Button
-                className="send-invitation"
-                scale={true}
-                size={"normal"}
-                isDisabled={hasErrors}
-                primary
-                onClick={onClickSend}
-                label={t("SendInvitation")}
-                isLoading={isLoading}
-              />
-              <Button
-                className="cancel-button"
-                scale={true}
-                size={"normal"}
-                onClick={onClose}
-                label={t("Common:CancelButton")}
-                isDisabled={isLoading}
-              />
-            </StyledButtons>
-          )}
+
+          <StyledButtons>
+            <Button
+              className="send-invitation"
+              scale={true}
+              size={"normal"}
+              isDisabled={hasErrors || !hasInvitedUsers}
+              primary
+              onClick={onClickSend}
+              label={t("SendInvitation")}
+              isLoading={isLoading}
+            />
+            <Button
+              className="cancel-button"
+              scale={true}
+              size={"normal"}
+              onClick={onClose}
+              label={t("Common:CancelButton")}
+              isDisabled={isLoading}
+            />
+          </StyledButtons>
         </>
       )}
     </>

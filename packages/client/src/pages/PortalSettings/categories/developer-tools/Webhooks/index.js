@@ -41,7 +41,6 @@ import { isMobile } from "@docspace/shared/utils";
 import { useTranslation } from "react-i18next";
 
 import { DeleteWebhookDialog } from "./sub-components/DeleteWebhookDialog";
-import { NoBoxShadowToast } from "./styled-components";
 import { toastr } from "@docspace/shared/components/toast";
 
 const MainWrapper = styled.div`
@@ -171,7 +170,6 @@ const Webhooks = (props) => {
           header={t("DeleteWebhookForeverQuestion")}
           handleSubmit={handleWebhookDelete}
         />
-        <NoBoxShadowToast />
       </MainWrapper>
     </Suspense>
   );

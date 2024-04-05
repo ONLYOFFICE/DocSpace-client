@@ -171,12 +171,13 @@ export type TError = {
   message: "unauthorized" | "restore-backup" | string;
   status?: "not-found" | "access-denied" | number | string;
   type?: string;
+  editorUrl?: string;
 };
 
 export type TResponse =
   | {
       config: IInitialConfig;
-      editorUrl: TDocServiceLocation;
+
       user?: TUser;
       settings?: TSettings;
       successAuth: boolean;
@@ -189,7 +190,7 @@ export type TResponse =
   | {
       error: TError;
       config?: undefined;
-      editorUrl?: TDocServiceLocation;
+
       user?: undefined;
       settings?: undefined;
       successAuth?: undefined;

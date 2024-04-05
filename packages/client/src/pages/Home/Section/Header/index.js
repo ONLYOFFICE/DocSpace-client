@@ -146,11 +146,6 @@ const StyledContainer = styled.div`
     min-height: 33px;
     align-items: center;
 
-    ${(props) =>
-      props.hideContextMenuInsideArchiveRoom &&
-      `.option-button {
-      display: none;}`}
-
     @media ${tablet} {
       height: 61px;
     }
@@ -238,7 +233,6 @@ const SectionHeaderContent = (props) => {
     isGroupMenuBlocked,
 
     onClickBack,
-    hideContextMenuInsideArchiveRoom,
     activeFiles,
     activeFolders,
     selectedFolder,
@@ -312,6 +306,8 @@ const SectionHeaderContent = (props) => {
     onClickCreateRoom,
     onCreateAndCopySharedLink,
     showNavigationButton,
+    deleteRooms,
+    setSelection,
   } = props;
 
   const navigate = useNavigate();
@@ -685,6 +681,11 @@ const SectionHeaderContent = (props) => {
     toastr.success(t("Translations:LinkCopySuccess"));
   };
 
+  const onDeleteRoomInArchive = () => {
+    setSelection([selectedFolder]);
+    deleteRooms(t);
+  };
+
   const getContextOptionsFolder = () => {
     const {
       t,
@@ -708,6 +709,8 @@ const SectionHeaderContent = (props) => {
       isPublicRoomType,
       isPublicRoom,
     } = props;
+
+    const isArchive = selectedFolder.rootFolderType === FolderType.Archive;
 
     if (isPublicRoom) {
       return [
@@ -778,7 +781,9 @@ const SectionHeaderContent = (props) => {
         disabled:
           isRecycleBinFolder ||
           isPersonalRoom ||
-          ((isPublicRoomType || isCustomRoomType) && haveLinksRight),
+          ((isPublicRoomType || isCustomRoomType) &&
+            haveLinksRight &&
+            !isArchive),
         icon: InvitationLinkReactSvgUrl,
       },
       {
@@ -839,7 +844,10 @@ const SectionHeaderContent = (props) => {
             }
           }
         },
-        disabled: (!isPublicRoomType && !isCustomRoomType) || !haveLinksRight,
+        disabled:
+          (!isPublicRoomType && !isCustomRoomType) ||
+          !haveLinksRight ||
+          isArchive,
       },
       {
         id: "header_option_invite-users-to-room",
@@ -870,7 +878,7 @@ const SectionHeaderContent = (props) => {
         label: t("MoveToArchive"),
         icon: RoomArchiveSvgUrl,
         onClick: onClickArchiveAction,
-        disabled: !isRoom || !security?.Move,
+        disabled: !isRoom || !security?.Move || isArchive,
         "data-action": "archive",
         action: "archive",
       },
@@ -891,7 +899,7 @@ const SectionHeaderContent = (props) => {
         label: t("LeaveTheRoom"),
         icon: LeaveRoomSvgUrl,
         onClick: onLeaveRoom,
-        disabled: isArchiveFolder || !inRoom || isPublicRoom,
+        disabled: isArchive || !inRoom || isPublicRoom,
       },
       {
         id: "header_option_download",
@@ -900,6 +908,14 @@ const SectionHeaderContent = (props) => {
         onClick: onDownloadAction,
         disabled: !security?.Download,
         icon: DownloadReactSvgUrl,
+      },
+      {
+        id: "header_option_unarchive-room",
+        key: "unarchive-room",
+        label: t("Common:Restore"),
+        onClick: onClickArchiveAction,
+        disabled: !isArchive || !isRoom,
+        icon: MoveReactSvgUrl,
       },
       {
         id: "header_option_move-to",
@@ -914,7 +930,9 @@ const SectionHeaderContent = (props) => {
         key: "copy",
         label: t("Common:Copy"),
         onClick: onCopyAction,
-        disabled: isDisabled || !security?.CopyTo,
+        disabled:
+          isDisabled || (isArchive ? !security?.Copy : !security?.CopyTo),
+
         icon: CopyReactSvgUrl,
       },
       {
@@ -935,8 +953,8 @@ const SectionHeaderContent = (props) => {
         id: "header_option_delete",
         key: "delete",
         label: t("Common:Delete"),
-        onClick: onDeleteAction,
-        disabled: isDisabled || !security?.Delete,
+        onClick: isArchive ? onDeleteRoomInArchive : onDeleteAction,
+        disabled: isArchive ? !isRoom : isDisabled || !security?.Delete,
         icon: CatalogTrashReactSvgUrl,
       },
     ];
@@ -1190,10 +1208,7 @@ const SectionHeaderContent = (props) => {
   return (
     <Consumer key="header">
       {(context) => (
-        <StyledContainer
-          isRecycleBinFolder={isRecycleBinFolder}
-          hideContextMenuInsideArchiveRoom={hideContextMenuInsideArchiveRoom}
-        >
+        <StyledContainer isRecycleBinFolder={isRecycleBinFolder}>
           {tableGroupMenuVisible ? (
             <TableGroupMenu {...tableGroupMenuProps} withComboBox />
           ) : (
@@ -1314,6 +1329,7 @@ export default inject(
       clearFiles,
       categoryType,
       getPrimaryLink,
+      setSelection,
     } = filesStore;
 
     const {
@@ -1364,6 +1380,7 @@ export default inject(
       emptyTrashInProgress,
       moveToPublicRoom,
       onClickCreateRoom,
+      deleteRooms,
     } = filesActionsStore;
 
     const { oformsFilter } = oformsStore;
@@ -1420,10 +1437,6 @@ export default inject(
     const canDeleteAll = isArchiveFolder && roomsForDelete.length > 0;
 
     const isEmptyArchive = !canRestoreAll && !canDeleteAll;
-
-    const hideContextMenuInsideArchiveRoom = isArchiveFolderRoot
-      ? !isArchiveFolder
-      : false;
 
     const {
       selectionStore,
@@ -1523,7 +1536,6 @@ export default inject(
       isEmptyArchive,
       isPrivacyFolder,
       isArchiveFolder,
-      hideContextMenuInsideArchiveRoom,
 
       setIsLoading,
 
@@ -1600,6 +1612,8 @@ export default inject(
       onCreateAndCopySharedLink,
       showNavigationButton,
       haveLinksRight,
+      deleteRooms,
+      setSelection,
     };
   },
 )(

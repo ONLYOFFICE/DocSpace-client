@@ -212,6 +212,11 @@ class SelectionStore {
     return this.setSelection([]);
   };
 
+  resetSelections = () => {
+    this.setBufferSelection(null);
+    this.clearSelection();
+  };
+
   selectByStatus = (status) => {
     this.bufferSelection = null;
     const list = this.peopleStore.usersStore.peopleList.filter(
@@ -254,6 +259,11 @@ class SelectionStore {
     this.selected = selected;
     const list = this.peopleStore.usersStore.peopleList;
     this.setSelection(this.getUsersBySelected(list, selected));
+
+    if (selected !== "none" && selected !== "close") {
+      this.resetUsersRight();
+      list.forEach((u) => this.incrementUsersRights(u));
+    }
 
     return selected;
   };

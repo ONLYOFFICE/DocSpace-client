@@ -35,7 +35,6 @@ import {
   StyledIconBlock,
 } from "./InputBlock.styled";
 import { InputBlockProps } from "./InputBlock.types";
-import { isTablet, isIOS } from "react-device-detect";
 
 const InputBlock = ({
   onIconClick,
@@ -60,7 +59,7 @@ const InputBlock = ({
   tabIndex = -1,
   maxLength = 255,
   onBlur,
-  onFocus: onFocusAction,
+  onFocus,
   isAutoFocussed,
   autoComplete = "off",
   onKeyDown,
@@ -113,19 +112,6 @@ const InputBlock = ({
     return iconButtonSize;
   };
 
-  const onFocus = (focusEvent: React.FocusEvent<HTMLInputElement>) => {
-    const scrollEvent = (e: Event) => {
-      e.preventDefault();
-      e.stopPropagation();
-      window.scrollTo(0, 0);
-
-      window.onscroll = () => {};
-    };
-    window.onscroll = scrollEvent;
-
-    if (onFocusAction) return onFocusAction(focusEvent);
-  };
-
   const iconButtonSize = getIconSize();
 
   return (
@@ -160,7 +146,7 @@ const InputBlock = ({
         tabIndex={tabIndex}
         maxLength={maxLength}
         onBlur={onBlur}
-        onFocus={isTablet && isIOS ? onFocus : onFocusAction}
+        onFocus={onFocus}
         isReadOnly={isReadOnly}
         isAutoFocussed={isAutoFocussed}
         autoComplete={autoComplete}

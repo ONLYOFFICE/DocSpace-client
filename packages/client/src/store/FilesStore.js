@@ -3559,10 +3559,16 @@ class FilesStore {
 
       if (!isDefaultRoomsQuotaSet) return false;
 
+      if (!!item.providerKey) return false;
+
       return item.security?.EditRoom && item.isCustomQuota;
     };
 
-    return this.selection.every((x) => canResetCustomQuota(x));
+    if (this.hasOneSelection && this.isThirdPartySelection) return false;
+
+    const rooms = this.selection.filter((x) => canResetCustomQuota(x));
+
+    return rooms.length > 0;
   }
 
   get hasRoomsToDisableQuota() {
@@ -3574,7 +3580,11 @@ class FilesStore {
       return item.security?.EditRoom;
     };
 
-    return this.selection.every((x) => canDisableQuota(x));
+    if (this.hasOneSelection && this.isThirdPartySelection) return false;
+
+    const rooms = this.selection.filter((x) => canDisableQuota(x));
+
+    return rooms.length > 0;
   }
 
   get hasRoomsToChangeQuota() {
@@ -3586,7 +3596,15 @@ class FilesStore {
       return item.security?.EditRoom;
     };
 
-    return this.selection.every((x) => canChangeQuota(x));
+    if (this.hasOneSelection && this.isThirdPartySelection) return false;
+
+    const rooms = this.selection.filter((x) => canChangeQuota(x));
+
+    return rooms.length > 0;
+  }
+
+  get hasOneSelection() {
+    return this.selection.length === 1;
   }
 
   get hasSelection() {

@@ -30,26 +30,19 @@ import StyledComponentsRegistry from "@/utils/registry";
 import "../styles/globals.scss";
 import Providers from "@/providers";
 import { getSettings, getUser } from "@/utils/actions";
+import { headers } from "next/headers";
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [user, settings] = await Promise.all([getUser(), getSettings()]);
-
   return (
     <html lang="en">
       <head>
         <link id="favicon" rel="shortcut icon" type="image/x-icon" />
       </head>
-      <body>
-        <StyledComponentsRegistry>
-          <Providers contextData={{ user, settings }}>{children}</Providers>
-        </StyledComponentsRegistry>
-
-        <Scripts />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

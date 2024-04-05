@@ -97,17 +97,31 @@ const StyledLinkRow = styled.div`
     `}
   }
 
+  .clock-icon {
+    svg {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+
+    width: 12px;
+    height: 12px;
+    border: ${(props) => `1px solid ${props.theme.backgroundColor}`};
+    border-radius: 50%;
+  }
+
   .avatar_role-wrapper {
     ${({ isExpired, theme }) => css`
       svg {
-        border: ${(props) => `1px solid ${props.theme.backgroundColor}`};
-        border-radius: 50%;
-
         path {
           fill: ${isExpired
             ? theme.infoPanel.links.iconErrorColor
             : theme.infoPanel.links.iconColor};
         }
+      }
+
+      circle {
+        fill: ${(props) => props.theme.backgroundColor};
       }
     `}
   }

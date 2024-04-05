@@ -747,13 +747,18 @@ const StyledSectionPaging = styled.div`
 StyledSectionPaging.defaultProps = { theme: Base };
 
 const StyledSectionSubmenu = styled.div`
+  background: ${(props) => props.theme.section.header.backgroundColor};
   width: calc(100% - 20px);
   z-index: 1;
 
   @media ${tablet} {
-    width: 100%;
+    width: calc(100% + 32px);
     position: sticky;
     top: 61px;
+    margin: 0 -16px;
+    & > div {
+      padding: 0 16px;
+    }
   }
 
   @media ${mobile} {

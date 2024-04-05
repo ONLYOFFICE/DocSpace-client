@@ -56,7 +56,7 @@ const GroupsItemTitle = ({
     <StyledAccountsItemTitle ref={itemTitleRef}>
       <Avatar
         className="avatar"
-        size={AvatarSize.max}
+        size={AvatarSize.big}
         userName={infoPanelSelection.name}
         isGroup={true}
       />

@@ -44,6 +44,7 @@
   "RoleUserDescription": "用户仅可访问管理员已邀请其加入的房间。其不能创建房间、文件夹或文件。",
   "RoleViewer": "可查看",
   "RoleViewerDescription": "文件查看",
+  "SearchByHeadOfGroup": "按群组负责人进行搜索",
   "SearchByOwner": "按所有者搜索",
   "Spreadsheets": "电子表格",
   "SubNewForm": "空白",

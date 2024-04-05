@@ -44,6 +44,7 @@
   "RoleUserDescription": "يمكن للمستخدمين الوصول فقط إلى الغرف التي يتم دعوتهم لها من قِبل المسؤولين. لا يمكنهم إنشاء غرف أو مجلدات أو ملفات خاصة بهم.",
   "RoleViewer": "عارض",
   "RoleViewerDescription": "عرض الملفات",
+  "SearchByHeadOfGroup": "البحث حسب رئيس المجموعة",
   "SearchByOwner": "البحث حسب المالك",
   "Spreadsheets": "جداول البيانات",
   "SubNewForm": "فارغ",

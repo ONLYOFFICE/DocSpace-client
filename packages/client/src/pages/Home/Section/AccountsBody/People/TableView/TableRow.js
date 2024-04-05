@@ -212,14 +212,13 @@ const PeopleTableRow = (props) => {
     onContentRowSelect,
     onContentRowClick,
     onEmailClick,
+    onUserContextClick,
 
     isOwner,
     theme,
     changeUserType,
 
-    setBufferSelection,
     isActive,
-    isSeveralSelection,
     canChangeUserType,
     hideColumns,
     value,
@@ -456,14 +455,15 @@ const PeopleTableRow = (props) => {
   const typeCell = renderTypeCell();
 
   const onChange = (e) => {
-    //console.log("onChange");
     onContentRowSelect && onContentRowSelect(e.target.checked, item);
   };
 
-  const onRowContextClick = React.useCallback(() => {
-    //console.log("userContextClick");
-    onContentRowClick && onContentRowClick(!isChecked, item, false);
-  }, [isChecked, item, onContentRowClick]);
+  const onRowContextClick = React.useCallback(
+    (rightMouseButtonClick) => {
+      onUserContextClick?.(item, !rightMouseButtonClick);
+    },
+    [item, onUserContextClick],
+  );
 
   const onRowClick = (e) => {
     if (
@@ -479,9 +479,7 @@ const PeopleTableRow = (props) => {
       return;
     }
 
-    //console.log("onRowClick");
-
-    onContentRowClick && onContentRowClick(!isChecked, item, false, false);
+    onContentRowClick && onContentRowClick(item);
   };
   const isPaidUser = !standalone && !isVisitor;
   return (

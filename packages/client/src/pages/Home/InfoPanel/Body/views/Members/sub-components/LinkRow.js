@@ -220,7 +220,13 @@ const LinkRow = (props) => {
       <Avatar
         size="min"
         source={LinkReactSvgUrl}
-        roleIcon={expiryDate ? <ClockReactSvg /> : null}
+        roleIcon={
+          expiryDate ? (
+            <div className="clock-icon">
+              <ClockReactSvg />
+            </div>
+          ) : null
+        }
         withTooltip={expiryDate}
         tooltipContent={tooltipContent}
       />

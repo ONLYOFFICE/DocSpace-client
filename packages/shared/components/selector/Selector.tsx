@@ -46,6 +46,7 @@ import {
   TSelectorFooterCheckbox,
   TWithTabs,
   TSelectorInfo,
+  TBreadCrumb,
 } from "./Selector.types";
 
 const Selector = ({
@@ -96,6 +97,7 @@ const Selector = ({
   accessRights,
   selectedAccessRight,
   onAccessRightsChange,
+  accessRightsMode,
 
   withFooterInput,
   footerInputHeader,
@@ -150,7 +152,11 @@ const Selector = ({
   const [isFooterCheckboxChecked, setIsFooterCheckboxChecked] =
     React.useState<boolean>(isChecked || false);
   const [selectedAccess, setSelectedAccess] =
-    React.useState<TAccessRight | null>(null);
+    React.useState<TAccessRight | null>(() => {
+      if (selectedAccessRight) return { ...selectedAccessRight };
+
+      return null;
+    });
 
   const [requestRunning, setRequestRunning] = React.useState<boolean>(false);
 
@@ -475,6 +481,7 @@ const Selector = ({
         accessRights,
         selectedAccessRight: selectedAccess,
         onAccessRightsChange: onChangeAccessRightsAction,
+        accessRightsMode,
       }
     : ({} as TSelectorAccessRights);
 
@@ -596,7 +603,11 @@ const Selector = ({
           selectedItemsCount={newSelectedItems.length}
           onSubmit={onSubmitAction}
           submitButtonLabel={submitButtonLabel}
-          disableSubmitButton={disableSubmitButton}
+          disableSubmitButton={
+            alwaysShowFooter
+              ? newSelectedItems.length === 0 || disableSubmitButton
+              : disableSubmitButton
+          }
           submitButtonId={submitButtonId}
           requestRunning={requestRunning}
           // cancel button

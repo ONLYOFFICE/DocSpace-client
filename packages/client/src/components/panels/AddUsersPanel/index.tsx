@@ -26,7 +26,7 @@
 
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
@@ -35,7 +35,11 @@ import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons
 
 import { Aside } from "@docspace/shared/components/aside";
 import { Backdrop } from "@docspace/shared/components/backdrop";
-import { Selector, TSelectorItem } from "@docspace/shared/components/selector";
+import {
+  Selector,
+  SelectorAccessRightsMode,
+  TSelectorItem,
+} from "@docspace/shared/components/selector";
 import {
   TAccessRight,
   TSelectorAccessRights,
@@ -445,6 +449,7 @@ const AddUsersPanel = ({
           accessRights: accessOptions,
           selectedAccessRight: selectedAccess,
           onAccessRightsChange: () => {},
+          accessRightsMode: SelectorAccessRightsMode.Detailed,
         }
       : {};
 
@@ -495,6 +500,7 @@ const AddUsersPanel = ({
       >
         <Selector
           withHeader
+          alwaysShowFooter
           headerProps={{
             // Todo: Update groups empty screen texts when they are ready
             headerLabel: t("Common:ListAccounts"),

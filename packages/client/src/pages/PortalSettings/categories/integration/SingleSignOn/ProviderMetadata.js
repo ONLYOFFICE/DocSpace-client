@@ -58,7 +58,7 @@ const ProviderMetadata = (props) => {
   const { t } = useTranslation("SingleSignOn");
   const navigate = useNavigate();
   const location = useLocation();
-  const { downloadMetadata, currentDeviceType } = props;
+  const { downloadMetadata, currentDeviceType, isSSOAvailable } = props;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
@@ -115,18 +115,21 @@ const ProviderMetadata = (props) => {
           size={isMobileView ? "normal" : "small"}
           tabIndex={25}
           onClick={downloadMetadata}
+          isDisabled={!isSSOAvailable}
         />
       </div>
     </StyledWrapper>
   );
 };
 
-export default inject(({ ssoStore, settingsStore }) => {
+export default inject(({ ssoStore, settingsStore, currentQuotaStore }) => {
   const { downloadMetadata } = ssoStore;
   const { currentDeviceType } = settingsStore;
+  const { isSSOAvailable } = currentQuotaStore;
 
   return {
     downloadMetadata,
     currentDeviceType,
+    isSSOAvailable,
   };
 })(observer(ProviderMetadata));

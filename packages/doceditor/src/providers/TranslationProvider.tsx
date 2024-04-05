@@ -24,20 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TFile } from "@docspace/shared/api/files/types";
-import { DeviceType } from "@docspace/shared/enums";
-import { TTheme } from "@docspace/shared/themes";
-import { TWhiteLabel } from "@docspace/shared/utils/whiteLabelHelper";
+"use client";
 
-import { TDeepLinkConfig } from "./DeepLink.helper";
+import React from "react";
+import { I18nextProvider } from "react-i18next";
 
-export interface DeepLinkProps {
-  fileInfo?: TFile;
-  logoUrls: TWhiteLabel[];
-  userEmail?: string;
+import { TUser } from "@docspace/shared/api/people/types";
+import { TSettings } from "@docspace/shared/api/settings/types";
 
-  currentDeviceType: DeviceType;
-  deepLinkConfig?: TDeepLinkConfig;
+import useI18N from "@/hooks/useI18N";
 
-  setIsShowDeepLink: (value: boolean) => void;
-}
+type TTranslationProvider = {
+  children: React.ReactNode;
+  settings: TSettings | undefined;
+  user: TUser | undefined;
+};
+
+const TranslationProvider = ({
+  children,
+  settings,
+  user,
+}: TTranslationProvider) => {
+  const { i18n } = useI18N({ settings, user });
+
+  return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
+};
+
+export default TranslationProvider;

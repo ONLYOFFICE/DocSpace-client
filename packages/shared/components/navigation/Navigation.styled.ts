@@ -169,6 +169,7 @@ const StyledContainer = styled.div<{
 
     .room-title {
       cursor: pointer;
+      min-height: 33px;
     }
   }
 
@@ -206,7 +207,12 @@ const StyledContainer = styled.div<{
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    min-height: 33px;
     gap: 8px;
+
+    @media ${mobile} {
+      min-height: auto;
+    }
 
     ${(props) =>
       props.showNavigationButton &&

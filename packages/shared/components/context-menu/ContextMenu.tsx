@@ -207,7 +207,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
         return;
       }
 
-      if (isMobileUtils() && height > 210) {
+      if (isMobileUtils() && (height > 210 || ignoreChangeView)) {
         setChangeView(true);
         setArticleWidth(0);
 

@@ -220,8 +220,7 @@ class PeopleStore {
   };
   disableUserQuota = async (users, t) => {
     const { setCustomUserQuota, getPeopleListItem } = this.usersStore;
-    const { infoPanelStore } = this.authStore;
-    const { setInfoPanelSelection } = infoPanelStore;
+    const { setInfoPanelSelection } = this.infoPanelStore;
 
     const userIDs = users.map((user) => {
       return user?.id ? user.id : user;
@@ -245,8 +244,7 @@ class PeopleStore {
   };
   resetUserQuota = async (users, t) => {
     const { resetUserQuota, getPeopleListItem } = this.usersStore;
-    const { infoPanelStore } = this.authStore;
-    const { setInfoPanelSelection } = infoPanelStore;
+    const { setInfoPanelSelection } = this.infoPanelStore;
     const userIDs = users.map((user) => {
       return user?.id ? user.id : user;
     });

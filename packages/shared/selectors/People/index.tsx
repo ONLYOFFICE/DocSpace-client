@@ -376,6 +376,7 @@ const PeopleSelector = ({
   return (
     <Selector
       id={id}
+      alwaysShowFooter
       className={className}
       style={style}
       renderCustomItem={renderCustomItem}

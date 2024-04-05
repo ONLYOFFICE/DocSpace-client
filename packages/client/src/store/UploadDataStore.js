@@ -1770,13 +1770,13 @@ class UploadDataStore {
     const { clearSecondaryProgressData, setSecondaryProgressBarData } =
       this.secondaryProgressDataStore;
 
-    const label = this.secondaryProgressDataStore.label;
-    let progress = data.progress;
-
     if (!data) {
       setTimeout(() => clearSecondaryProgressData(pbData.operationId), TIMEOUT);
       return;
     }
+
+    const label = this.secondaryProgressDataStore.label;
+    let progress = data.progress;
 
     let operationItem = data;
     let finished = data.finished;

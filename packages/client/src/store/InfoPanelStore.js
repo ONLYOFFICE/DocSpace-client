@@ -156,7 +156,7 @@ class InfoPanelStore {
 
   setView = (view) => {
     this.roomsView = view;
-    this.fileView = view === infoMembers ? infoHistory : view;
+    this.fileView = view === infoMembers ? infoDetails : view;
     this.isScrollLocked = false;
     if (view !== infoMembers) this.setInfoPanelMembers(null);
 

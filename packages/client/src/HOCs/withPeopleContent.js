@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -41,6 +41,10 @@ export default function withContent(WrappedContent) {
       deselectUser,
       setBufferSelection,
       selectRow,
+      singleContextMenuAction,
+      multipleContextMenuAction,
+      resetSelections,
+      openGroupAction,
 
       theme,
       getModel,
@@ -50,25 +54,42 @@ export default function withContent(WrappedContent) {
     const { mobilePhone, email, role, displayName, avatar } = item;
 
     const onContentRowSelect = (checked, user) => {
-      setBufferSelection(null, false);
+      setBufferSelection(null);
       checked ? selectUser(user) : deselectUser(user);
     };
 
-    const onContentRowClick = (
-      checked,
-      user,
-      addToSelection = true,
-      isContextClick = true,
-    ) => {
-      if (isContextClick) {
-        checked
-          ? setBufferSelection(user, addToSelection)
-          : setBufferSelection(null);
+    const onContextClick = (item, isSingleMenu) => {
+      isSingleMenu
+        ? singleContextMenuAction(item)
+        : multipleContextMenuAction(item);
+    };
+
+    const onContentRowClick = (e, user) => {
+      if (
+        e.target?.tagName === "A" ||
+        e.target.closest(".checkbox") ||
+        e.target.closest(".table-container_row-checkbox") ||
+        e.target.closest(".type-combobox") ||
+        e.target.closest(".groups-combobox") ||
+        e.target.closest(".paid-badge") ||
+        e.target.closest(".pending-badge") ||
+        e.target.closest(".disabled-badge") ||
+        e.target.closest(".dropdown-container") ||
+        e.detail === 0
+      ) {
         return;
       }
 
       selectRow(user);
     };
+
+    const onOpenGroup = useCallback(
+      (groupId, withBackURL, tempTitle) => {
+        resetSelections();
+        openGroupAction(groupId, withBackURL, tempTitle);
+      },
+      [resetSelections, openGroupAction],
+    );
 
     const checkedProps = { checked };
 
@@ -102,6 +123,7 @@ export default function withContent(WrappedContent) {
       <WrappedContent
         onContentRowSelect={onContentRowSelect}
         onContentRowClick={onContentRowClick}
+        onUserContextClick={onContextClick}
         onPhoneClick={onPhoneClick}
         onEmailClick={onEmailClick}
         groups={[]}
@@ -109,6 +131,7 @@ export default function withContent(WrappedContent) {
         element={element}
         contextOptionsProps={contextOptionsProps}
         value={value}
+        onOpenGroup={onOpenGroup}
         {...props}
       />
     );
@@ -119,6 +142,7 @@ export default function withContent(WrappedContent) {
 
     const { getTargetUser } = peopleStore.targetUserStore;
     const { selectionStore, contextOptionsStore } = peopleStore;
+    const { openGroupAction } = peopleStore.groupsStore;
 
     const { getModel } = contextOptionsStore;
 
@@ -129,6 +153,9 @@ export default function withContent(WrappedContent) {
       selectUser,
       deselectUser,
       selectRow,
+      singleContextMenuAction,
+      multipleContextMenuAction,
+      resetSelections,
     } = selectionStore;
 
     return {
@@ -144,6 +171,10 @@ export default function withContent(WrappedContent) {
       deselectUser,
       getModel,
       selectRow,
+      singleContextMenuAction,
+      multipleContextMenuAction,
+      resetSelections,
+      openGroupAction,
     };
   })(observer(WithContent));
 }

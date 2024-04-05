@@ -79,7 +79,7 @@ const AccountsItemTitle = ({
       <Avatar
         className="avatar"
         role={infoPanelSelection.role ? infoPanelSelection.role : "user"}
-        size={AvatarSize.max}
+        size={AvatarSize.big}
         source={userAvatar}
       />
       <div className="info-panel__info-text">

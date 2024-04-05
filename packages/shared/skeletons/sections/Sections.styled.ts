@@ -79,7 +79,7 @@ const StyledSubmenu = styled.div`
   height: 32px;
   display: flex;
   gap: 20px;
-  padding-bottom: 20px;
+  margin-bottom: 20px;
 `;
 
 export {

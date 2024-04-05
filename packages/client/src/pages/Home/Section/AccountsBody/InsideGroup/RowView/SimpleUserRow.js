@@ -122,22 +122,25 @@ const SimpleUserRow = (props) => {
     checkedProps,
     onContentRowSelect,
     onContentRowClick,
+    onUserContextClick,
     element,
-    //setBufferSelection,
     isActive,
-    //isSeveralSelection,
     value,
   } = props;
 
   const isChecked = checkedProps.checked;
 
-  const onRowClick = React.useCallback(() => {
-    onContentRowClick && onContentRowClick(!isChecked, item, false, false);
-  }, [isChecked, item, onContentRowClick]);
+  const onRowClick = React.useCallback(
+    (e) => onContentRowClick?.(e, item),
+    [item, onContentRowClick],
+  );
 
-  const onRowContextClick = React.useCallback(() => {
-    onContentRowClick && onContentRowClick(!isChecked, item, false);
-  }, [isChecked, item, onContentRowClick]);
+  const onRowContextClick = React.useCallback(
+    (rightMouseButtonClick) => {
+      onUserContextClick?.(item, !rightMouseButtonClick);
+    },
+    [item, onUserContextClick],
+  );
 
   return (
     <StyledWrapper

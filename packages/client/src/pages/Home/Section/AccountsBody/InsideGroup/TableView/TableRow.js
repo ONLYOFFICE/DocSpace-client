@@ -206,20 +206,19 @@ const InsideGroupTableRow = (props) => {
     checkedProps,
     onContentRowSelect,
     onContentRowClick,
+    onUserContextClick,
     onEmailClick,
 
     isOwner,
     theme,
     changeUserType,
 
-    setBufferSelection,
     isActive,
-    isSeveralSelection,
     canChangeUserType,
     hideColumns,
     value,
     standalone,
-    openGroupAction,
+    onOpenGroup,
 
     typeAccountsInsideGroupColumnIsEnabled,
     groupAccountsInsideGroupColumnIsEnabled,
@@ -312,9 +311,9 @@ const InsideGroupTableRow = (props) => {
     [item, changeUserType],
   );
 
-  const onOpenGroup = React.useCallback(
-    ({ action, title }) => openGroupAction(action, false, title),
-    [openGroupAction],
+  const onOpenGroupClick = React.useCallback(
+    ({ action, title }) => onOpenGroup(action, false, title),
+    [onOpenGroup],
   );
 
   // const getRoomsOptions = React.useCallback(() => {
@@ -377,7 +376,7 @@ const InsideGroupTableRow = (props) => {
             label: groups[0].name + " ",
           }}
           plusBadgeValue={groups.length - 1}
-          onSelect={onOpenGroup}
+          onSelect={onOpenGroupClick}
           options={groupItems}
           scaled={false}
           directionY="both"
@@ -453,33 +452,18 @@ const InsideGroupTableRow = (props) => {
   const typeCell = renderTypeCell();
 
   const onChange = (e) => {
-    //console.log("onChange");
     onContentRowSelect && onContentRowSelect(e.target.checked, item);
   };
 
-  const onRowContextClick = React.useCallback(() => {
-    //console.log("userContextClick");
-    onContentRowClick && onContentRowClick(!isChecked, item, false);
-  }, [isChecked, item, onContentRowClick]);
+  const onRowContextClick = React.useCallback(
+    (rightMouseButtonClick) => {
+      onUserContextClick?.(item, !rightMouseButtonClick);
+    },
+    [item, onUserContextClick],
+  );
 
-  const onRowClick = (e) => {
-    if (
-      e.target.closest(".checkbox") ||
-      e.target.closest(".table-container_row-checkbox") ||
-      e.target.closest(".type-combobox") ||
-      e.target.closest(".groups-combobox") ||
-      e.target.closest(".paid-badge") ||
-      e.target.closest(".pending-badge") ||
-      e.target.closest(".disabled-badge") ||
-      e.detail === 0
-    ) {
-      return;
-    }
+  const onRowClick = (e) => onContentRowClick?.(e, item);
 
-    //console.log("onRowClick");
-
-    onContentRowClick && onContentRowClick(!isChecked, item, false, false);
-  };
   const isPaidUser = !standalone && !isVisitor;
   return (
     <StyledWrapper

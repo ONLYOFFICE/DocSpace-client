@@ -62,8 +62,9 @@ class CommonStore {
   greetingSettingsIsDefault = true;
   enableRestoreButton = false;
 
-  constructor(settingsStore) {
+  constructor(settingsStore, pluginStore) {
     this.settingsStore = settingsStore;
+    this.pluginStore = pluginStore;
     makeAutoObservable(this);
   }
 
@@ -183,6 +184,8 @@ class CommonStore {
     const favicon = document.getElementById("favicon");
     const logo = document.getElementsByClassName("logo-icon_svg")?.[0];
     const logoBurger = document.getElementsByClassName("burger-logo")?.[0];
+
+    this.pluginStore.setNeedPageReload(true);
 
     runInAction(() => {
       favicon && (favicon.href = logos?.[2]?.path?.["light"]); // we have single favicon for both themes

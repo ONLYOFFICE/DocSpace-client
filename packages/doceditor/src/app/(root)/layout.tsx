@@ -24,15 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import Scripts from "@/components/Scripts";
+import StyledComponentsRegistry from "@/utils/registry";
 
-// This function can be marked `async` if using `await` inside
-export function middleware(request: NextRequest) {
-  return NextResponse.redirect(new URL("/doceditor", request.url));
+import "@/styles/globals.scss";
+import Providers from "@/providers";
+import { getSettings, getUser } from "@/utils/actions";
+import { headers } from "next/headers";
+
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const headersList = headers();
+  const referer = headersList.get("referer");
+
+  if (referer?.includes("health")) return children;
+
+  const [user, settings] = await Promise.all([getUser(), getSettings()]);
+
+  return (
+    <html lang="en">
+      <head>
+        <link id="favicon" rel="shortcut icon" type="image/x-icon" />
+      </head>
+      <body>
+        <StyledComponentsRegistry>
+          <Providers contextData={{ user, settings }}>{children}</Providers>
+        </StyledComponentsRegistry>
+
+        <Scripts />
+      </body>
+    </html>
+  );
 }
-
-// See "Matching Paths" below to learn more
-export const config = {
-  matcher: "/",
-};

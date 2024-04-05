@@ -103,7 +103,7 @@ const setupStore = new SettingsSetupStore(
 );
 const confirmStore = new ConfirmStore();
 const backupStore = new BackupStore();
-const commonStore = new CommonStore(settingsStore, pluginStore);
+const commonStore = new CommonStore(settingsStore);
 
 const ssoStore = new SsoFormStore();
 

@@ -154,8 +154,9 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
           }}
         `};
 
-  .iconWrapper {
+  .iconWrapper > div {
     display: flex;
+    align-items: center;
     pointer-events: none;
   }
 
@@ -191,7 +192,7 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
   }
 
   svg {
-    margin: ${(props) => props.theme.socialButton.svg.margin};
+    // margin: ${(props) => props.theme.socialButton.svg.margin};
     width: ${(props) => props.theme.socialButton.svg.width};
     height: ${(props) => props.theme.socialButton.svg.height};
     min-width: ${(props) => props.theme.socialButton.svg.minWidth};
@@ -208,6 +209,7 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
     justify-content: center;
     align-items: center;
     max-width: 100%;
+    gap: 16px;
   }
 `;
 

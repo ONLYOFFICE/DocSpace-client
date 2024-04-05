@@ -62,8 +62,8 @@ export default function withContent(WrappedContent) {
     ) => {
       if (isContextClick) {
         checked
-          ? setBufferSelection(user, addToSelection)
-          : setBufferSelection(null);
+          ? setBufferSelection(null)
+          : setBufferSelection(user, addToSelection);
         return;
       }
 

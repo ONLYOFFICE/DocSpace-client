@@ -260,6 +260,7 @@ const SectionHeaderContent = (props) => {
     setRestoreRoomDialogVisible,
     setArchiveDialogVisible,
     onCopyLink,
+    setShareFolderDialogVisible,
 
     setSelected,
     cbMenuItems,
@@ -610,6 +611,10 @@ const SectionHeaderContent = (props) => {
     return setSharingPanelVisible(true);
   };
 
+  const onClickShare = () => {
+    setShareFolderDialogVisible(true);
+  };
+
   const onDeleteAction = () => {
     setIsFolderActions(true);
 
@@ -757,9 +762,9 @@ const SectionHeaderContent = (props) => {
       {
         id: "header_option_sharing-settings",
         key: "sharing-settings",
-        label: t("SharingPanel:SharingSettingsTitle"),
-        onClick: onOpenSharingPanel,
-        disabled: true,
+        label: t("Files:Share"),
+        onClick: onClickShare,
+        disabled: !isPersonalRoom,
         icon: ShareReactSvgUrl,
       },
       {
@@ -1343,6 +1348,7 @@ export default inject(
       setInvitePanelOptions,
       setInviteUsersWarningDialogVisible,
       setLeaveRoomDialogVisible,
+      setShareFolderDialogVisible,
     } = dialogsStore;
 
     const {
@@ -1600,6 +1606,7 @@ export default inject(
       onCreateAndCopySharedLink,
       showNavigationButton,
       haveLinksRight,
+      setShareFolderDialogVisible,
     };
   },
 )(

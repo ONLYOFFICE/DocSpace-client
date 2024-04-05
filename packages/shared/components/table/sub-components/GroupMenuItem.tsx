@@ -202,7 +202,7 @@ const GroupMenuItem = ({
           forwardedRef={buttonRef}
           zIndex={250}
         >
-          {options.map((option) => (
+          {options?.map((option) => (
             <DropDownItem {...option} key={option.key} setOpen={setOpen} />
           ))}
         </DropDown>

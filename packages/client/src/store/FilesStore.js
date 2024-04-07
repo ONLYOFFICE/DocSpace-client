@@ -35,6 +35,7 @@ import {
   RoomsType,
   RoomsProviderType,
   ShareAccessRights,
+  Events,
 } from "@docspace/shared/enums";
 
 import { RoomsTypes } from "@docspace/shared/utils";
@@ -46,7 +47,10 @@ import { toastr } from "@docspace/shared/components/toast";
 import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
 import { getDaysRemaining } from "@docspace/shared/utils/common";
-import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import {
+  MEDIA_VIEW_URL,
+  PDF_FORM_DIALOG_KEY,
+} from "@docspace/shared/constants";
 
 import {
   getCategoryType,
@@ -353,6 +357,17 @@ class FilesStore {
       );
     });
 
+    socketHelper.on("s:modify-room", (option) => {
+      switch (option.cmd) {
+        case "create-form":
+          this.wsCreatedPDFForm(option);
+          break;
+
+        default:
+          break;
+      }
+    });
+
     socketHelper.on("s:stop-edit-file", (id) => {
       const { socketSubscribers } = socketHelper;
       const pathParts = `FILE-${id}`;
@@ -637,6 +652,30 @@ class FilesStore {
         }
       });
     }
+  };
+
+  wsCreatedPDFForm = (option) => {
+    if (!option.data) return;
+
+    const file = JSON.parse(option.data);
+
+    if (this.selectedFolderStore.id !== file.folderId) return;
+
+    const localKey = `${PDF_FORM_DIALOG_KEY}-${this.userStore.user.id}`;
+
+    const isFirst = JSON.parse(localStorage.getItem(localKey) ?? "true");
+
+    const event = new CustomEvent(Events.CREATE_PDF_FORM_FILE, {
+      detail: {
+        file,
+        isFill: !option.isOneMember,
+        isFirst,
+      },
+    });
+
+    if (isFirst) localStorage.setItem(localKey, "false");
+
+    window?.dispatchEvent(event);
   };
 
   setIsErrorRoomNotAvailable = (state) => {

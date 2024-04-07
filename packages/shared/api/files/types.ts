@@ -109,7 +109,9 @@ export type TFile = {
   viewUrl: string;
   webUrl: string;
   availableExternalRights?: TAvailableExternalRights;
+  providerId?: number;
   providerKey?: string;
+  providerItem?: boolean;
 };
 
 export type TOpenEditRequest = {

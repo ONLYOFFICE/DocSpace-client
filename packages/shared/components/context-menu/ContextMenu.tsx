@@ -207,7 +207,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
         return;
       }
 
-      if (isMobileUtils() && height > 210) {
+      if (isMobileUtils() && (height > 210 || ignoreChangeView)) {
         setChangeView(true);
         setArticleWidth(0);
 
@@ -451,6 +451,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
                           imgClassName="drop-down-item_icon"
                           imgSrc={header.icon}
                           badgeUrl={badgeUrl}
+                          color={header.color || ""}
                         />
                       ) : (
                         <RoomIcon

@@ -24,48 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import CreateFileError from "@/components/CreateFileError";
-import { getErrorData } from "@/utils/actions";
+import copy from "copy-to-clipboard";
 
-type TSearchParams = {
-  error?: string;
-  fileInfo?: string;
-  createFile?: string;
-  fromFile?: string;
-  fromTemplate?: string;
+const wait = (ms: number) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+
+export const copyShareLink = async (link: string) => {
+  await wait(100);
+  copy(link);
 };
-
-async function Page({ searchParams }: { searchParams: TSearchParams }) {
-  const error = searchParams.error ? JSON.parse(searchParams.error) : "";
-  const fileInfo = searchParams.fileInfo
-    ? JSON.parse(searchParams.fileInfo)
-    : "";
-  const fromTemplate = searchParams.fromTemplate
-    ? JSON.parse(searchParams.fromTemplate)
-    : "";
-  const fromFile = searchParams.fromFile
-    ? JSON.parse(searchParams.fromFile)
-    : "";
-
-  console.log("searchParams here", searchParams);
-
-  if (searchParams.createFile) {
-    const { settings, user } = await getErrorData();
-
-    return (
-      <CreateFileError
-        error={error}
-        fileInfo={fileInfo}
-        fromFile={!!fromFile}
-        fromTemplate={!!fromTemplate}
-        settings={settings}
-        user={user}
-      />
-    );
-  }
-
-  return <div></div>;
-}
-
-export default Page;
-

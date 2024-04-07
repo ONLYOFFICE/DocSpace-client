@@ -292,17 +292,21 @@ class SelectedFolderStore {
     };
   };
 
-  resetSomeState: (selectedFolder: TSetSelectedFolder) => void = (
+  setDefaultValuesIfUndefined: (selectedFolder: TSetSelectedFolder) => void = (
     selectedFolder,
   ) => {
     if (!("type" in selectedFolder)) this.type = null;
-    if (!("parentRoomType" in selectedFolder)) this.parentRoomType = null;
+    if (!("providerId" in selectedFolder)) this.providerId = null;
+    if (!("providerItem" in selectedFolder)) this.providerItem = null;
+    if (!("providerKey" in selectedFolder)) this.providerKey = null;
   };
 
   setSelectedFolder: (selectedFolder: TSetSelectedFolder | null) => void = (
     selectedFolder,
   ) => {
     const socketHelper = this.settingsStore?.socketHelper;
+
+    this.toDefault();
 
     if (
       this.id !== null &&
@@ -335,7 +339,7 @@ class SelectedFolderStore {
 
       setDocumentTitle(selectedFolder.title);
 
-      this.resetSomeState(selectedFolder);
+      this.setDefaultValuesIfUndefined(selectedFolder);
 
       Object.entries(selectedFolder).forEach(([key, item]) => {
         if (key in this) {

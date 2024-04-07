@@ -109,7 +109,6 @@ const StyledAccountsItemTitle = styled.div`
   }
 
   .context-button {
-    padding-top: 24px;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`

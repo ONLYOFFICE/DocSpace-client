@@ -38,13 +38,21 @@ const BreakpointWarning = ({
   tReady,
   theme,
   isSmallWindow,
+  isMobileUnavailableOnly,
 }) => {
   const textHeader = isSmallWindow
     ? t("BreakpointSmallText")
-    : t("BreakpointWarningText");
+    : isMobileUnavailableOnly
+      ? t("BreakpointMobileWarningText")
+      : t("BreakpointWarningText");
 
   const textPrompt = isSmallWindow ? (
     t("BreakpointSmallTextPrompt")
+  ) : isMobileUnavailableOnly ? (
+    <Trans t={t} i18nKey="BreakpointMobileWarningTextPrompt" ns="Settings">
+      "Please use the desktop site to access the {{ sectionName }}
+      settings."
+    </Trans>
   ) : (
     <Trans t={t} i18nKey="BreakpointWarningTextPrompt" ns="Settings">
       "Please use the desktop site to access the {{ sectionName }}

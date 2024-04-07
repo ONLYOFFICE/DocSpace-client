@@ -24,16 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import AppLoader from "@docspace/shared/components/app-loader";
 
-// This function can be marked `async` if using `await` inside
-export function middleware(request: NextRequest) {
-  return NextResponse.redirect(new URL("/doceditor", request.url));
+export default function Loading() {
+  // You can add any UI inside Loading, including a Skeleton.
+  return <AppLoader />;
 }
-
-// See "Matching Paths" below to learn more
-export const config = {
-  matcher: "/",
-};
-

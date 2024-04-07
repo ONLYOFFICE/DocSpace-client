@@ -78,7 +78,6 @@ declare global {
     greetingSettings: string;
     ownerId: string;
     passwordHash: PasswordHashType;
-    personal: boolean;
     tenantAlias: string;
     tenantStatus: number;
     thirdpartyEnable: boolean;
@@ -155,7 +154,6 @@ declare global {
   }
   var IS_DEVELOPMENT: boolean;
   var PORT: number;
-  var IS_PERSONAL: boolean;
   var IS_ROOMS_MODE: boolean;
   var BROWSER_DETECTOR_URL: string;
   var CONFIG_URL: string;
@@ -195,22 +193,5 @@ declare global {
   interface IUserTheme {
     [key: string]: string;
     isBase: boolean;
-  }
-
-  type TLogoPath = {
-    light: string;
-    dark?: string;
-  };
-
-  type TLogoSize = {
-    width: number;
-    height: number;
-    isEmpty: boolean;
-  };
-
-  interface ILogoUrl {
-    name: string;
-    path: TLogoPath;
-    size: TLogoSize;
   }
 }

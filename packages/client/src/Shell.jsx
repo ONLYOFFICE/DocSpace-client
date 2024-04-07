@@ -33,7 +33,6 @@ import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
 import { toast as toastify } from "react-toastify";
 
-import { setFavicon } from "@docspace/shared/utils/favicon";
 import { Portal } from "@docspace/shared/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Toast, toastr } from "@docspace/shared/components/toast";
@@ -67,7 +66,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     isDesktop,
     language,
     FirebaseHelper,
-    // personal,
     setCheckedMaintenance,
     socketHelper,
     setPreparationPortalDialogVisible,
@@ -78,7 +76,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     setSnackbarExist,
     userTheme,
     //user,
-    whiteLabelLogoUrls,
     userId,
     currentDeviceType,
     timezone,
@@ -129,11 +126,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
     moment.locale(language);
   }, []);
-
-  useEffect(() => {
-    if (!whiteLabelLogoUrls) return;
-    setFavicon(whiteLabelLogoUrls);
-  }, [whiteLabelLogoUrls]);
 
   useEffect(() => {
     socketHelper.emit({
@@ -331,7 +323,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   }, [userId]);
 
   useEffect(() => {
-    if (!userId || !window.DocSpaceConfig.imageThumbnails) return;
+    if (!userId || !window.DocSpaceConfig?.imageThumbnails) return;
     initIndexedDb();
 
     return () => {
@@ -459,7 +451,6 @@ const ShellWrapper = inject(
     const { init, isLoaded, setProductVersion, language, version } = authStore;
 
     const {
-      personal,
       roomsMode,
       isDesktopClient,
       firebaseHelper,
@@ -469,7 +460,6 @@ const ShellWrapper = inject(
       setSnackbarExist,
       socketHelper,
       setTheme,
-      whiteLabelLogoUrls,
       currentDeviceType,
       isFrame,
       frameConfig,
@@ -510,7 +500,6 @@ const ShellWrapper = inject(
 
       isDesktop: isDesktopClient,
       FirebaseHelper: firebaseHelper,
-      personal,
       setCheckedMaintenance,
       setMaintenanceExist,
       socketHelper,
@@ -521,7 +510,6 @@ const ShellWrapper = inject(
       setSnackbarExist,
       userTheme: isFrame ? frameConfig?.theme : userTheme,
       userId: userStore?.user?.id,
-      whiteLabelLogoUrls,
       currentDeviceType,
       showArticleLoader: clientLoadingStore.showArticleLoader,
       setPortalTariff,

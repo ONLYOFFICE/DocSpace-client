@@ -59,17 +59,17 @@ class UserStore {
     return user;
   };
 
-  init = async (i18n?: TI18n) => {
+  init = async (i18n?: TI18n, portalCultureName?: string) => {
     if (this.isLoaded) return;
 
     this.setIsLoading(true);
 
     try {
       const user = await this.loadCurrentUser();
+      const correctCulture = user.cultureName || portalCultureName;
 
-      if (i18n && user.cultureName !== i18n.language) {
-        // console.log({ i18n, user });
-        if (user.cultureName) i18n.changeLanguage(user.cultureName);
+      if (i18n && correctCulture && correctCulture !== i18n.language) {
+        i18n.changeLanguage(correctCulture);
       }
     } catch (e) {
       console.error(e);

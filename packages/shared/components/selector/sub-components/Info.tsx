@@ -25,22 +25,18 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { i18n } from "i18next";
-import { I18nextProvider } from "react-i18next";
 
-import { FilesSelectorProps } from "./FilesSelector.types";
-import FilesSelector from ".";
+import { Text } from "../../text";
 
-const FilesSelectorWrapper = ({
-  i18nProp,
+import { TSelectorInfo } from "../Selector.types";
+import { StyledInfo } from "../Selector.styled";
 
-  ...rest
-}: FilesSelectorProps & { i18nProp: i18n }) => {
+export const Info = ({ infoText }: TSelectorInfo) => {
   return (
-    <I18nextProvider i18n={i18nProp}>
-      <FilesSelector {...rest} />
-    </I18nextProvider>
+    <StyledInfo id="selector-info-text">
+      <Text fontSize="12px" fontWeight={400} lineHeight="16px" className="text">
+        {infoText}
+      </Text>
+    </StyledInfo>
   );
 };
-
-export default FilesSelectorWrapper;

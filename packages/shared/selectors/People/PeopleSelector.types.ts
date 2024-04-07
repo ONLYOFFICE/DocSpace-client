@@ -29,6 +29,7 @@ import {
   TSelectorCancelButton,
   TSelectorCheckbox,
   TSelectorHeader,
+  TSelectorInfo,
   TSelectorSubmitButton,
 } from "../../components/selector/Selector.types";
 
@@ -40,6 +41,7 @@ export interface UserTooltipProps {
 }
 
 export type PeopleSelectorProps = TSelectorHeader &
+  TSelectorInfo &
   TSelectorCancelButton &
   TSelectorCheckbox &
   TSelectorSubmitButton & {
@@ -53,11 +55,13 @@ export type PeopleSelectorProps = TSelectorHeader &
 
     currentUserId: string;
     withOutCurrentAuthorizedUser?: boolean;
-    withAbilityCreateRoomUsers?: boolean;
 
     filterUserId?: string;
 
     excludeItems?: string[];
     disableInvitedUsers?: string[];
     disableDisabledUsers?: boolean;
+
+    emptyScreenHeader?: string;
+    emptyScreenDescription?: string;
   };

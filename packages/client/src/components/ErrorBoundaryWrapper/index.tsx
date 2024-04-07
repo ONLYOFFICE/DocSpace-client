@@ -34,12 +34,8 @@ const ErrorBoundaryWrapper = (props: ErrorBoundaryProps) => {
 };
 
 export default inject<TStore>(({ authStore, settingsStore, userStore }) => {
-  const {
-    whiteLabelLogoUrls,
-    firebaseHelper,
-    currentDeviceType,
-    currentColorScheme,
-  } = settingsStore;
+  const { firebaseHelper, currentDeviceType, currentColorScheme } =
+    settingsStore;
 
   const { user } = userStore;
   const version = authStore.version;
@@ -49,7 +45,6 @@ export default inject<TStore>(({ authStore, settingsStore, userStore }) => {
     version,
     firebaseHelper,
     currentDeviceType,
-    whiteLabelLogoUrls,
     currentColorScheme,
   };
 })(observer(ErrorBoundaryWrapper));

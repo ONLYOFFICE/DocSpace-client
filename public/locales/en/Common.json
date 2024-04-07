@@ -344,6 +344,7 @@
   "Search": "Search",
   "SearchEmptyRoomsDescription": "No rooms match this filter. Try a different one or clear filter to view all rooms.",
   "SelectAction": "Select",
+  "SelectFolder": "Select folder",
   "SelectAll": "Select all",
   "SelectBackupOnlyFormat": "Select backup only file",
   "SelectDOCXFFormat": "Select .DOCXF file",

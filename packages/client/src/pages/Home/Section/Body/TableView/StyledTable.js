@@ -179,7 +179,7 @@ const StyledTableRow = styled(TableRow)`
 
   .table-container_element-wrapper,
   .table-container_row-loader {
-    min-width: ${(props) => (props.isRoom ? "40px" : "36px")};
+    min-width: 40px;
     border-bottom: unset;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
@@ -194,7 +194,7 @@ const StyledTableRow = styled(TableRow)`
   }
 
   .table-container_element-container {
-    width: 32px;
+    width: 36px;
     height: 32px;
 
     display: flex;
@@ -207,10 +207,10 @@ const StyledTableRow = styled(TableRow)`
       ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
-              margin-right: 4px;
+              margin-right: 8px;
             `
           : css`
-              margin-left: 4px;
+              margin-left: 8px;
             `}
     }
   }
@@ -277,7 +277,8 @@ const StyledTableRow = styled(TableRow)`
   }
 
   .item-file-name {
-    padding: 14px 8px 14px 0px;
+    padding-block: 14px;
+    padding-inline: 0 8px;
   }
 
   ${(props) =>

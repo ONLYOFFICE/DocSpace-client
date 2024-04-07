@@ -45,6 +45,7 @@ const useRootHelper = ({
   setHasNextPage,
   isUserOnly,
   setIsInit,
+  setIsFirstLoad,
 }: UseRootHelperProps) => {
   const [isRoot, setIsRoot] = React.useState<boolean>(false);
   const requestRunning = React.useRef(false);
@@ -96,9 +97,11 @@ const useRootHelper = ({
     setHasNextPage(false);
     setIsNextPageLoading(false);
     setIsInit(false);
+    setIsFirstLoad(false);
     requestRunning.current = false;
   }, [
     isUserOnly,
+    setIsFirstLoad,
     setBreadCrumbs,
     setHasNextPage,
     setIsBreadCrumbsLoading,

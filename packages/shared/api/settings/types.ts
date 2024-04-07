@@ -87,7 +87,6 @@ export type TSettings = {
   ownerId: string;
   nameSchemaId: string;
   enableAdmMess: boolean;
-  personal: boolean;
   docSpace: boolean;
   standalone: boolean;
   baseDomain: string;

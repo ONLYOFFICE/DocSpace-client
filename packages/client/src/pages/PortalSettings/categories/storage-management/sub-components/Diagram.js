@@ -42,21 +42,30 @@ const calculateSize = (size, common) => {
   return (size * 100) / common;
 };
 
-const getTags = (obj, tenantCustomQuota, usedPortalSpace, t) => {
+const getTags = (
+  t,
+  standalone,
+  catalogs,
+  tenantCustomQuota,
+  maxTotalSizeByQuota,
+  usedPortalSpace,
+) => {
   const array = [];
   const colors = ["#13B7EC", "#22C386", "#FF9933", "#FFD30F"];
 
   let i = 0;
-  const commonSize =
-    tenantCustomQuota < usedPortalSpace && tenantCustomQuota !== -1
-      ? usedPortalSpace
-      : tenantCustomQuota;
+  let commonSize = standalone ? tenantCustomQuota : maxTotalSizeByQuota;
 
-  for (let key in obj) {
-    const item = obj[key];
+  if (standalone && tenantCustomQuota < usedPortalSpace)
+    commonSize = usedPortalSpace;
+
+  for (let key in catalogs) {
+    const item = catalogs[key];
     const { usedSpace, title } = item;
 
-    const percentageSize = calculateSize(usedSpace, commonSize);
+    let percentageSize = calculateSize(usedSpace, commonSize);
+    if (percentageSize < 0.05 && percentageSize !== 0) percentageSize = 0.5;
+
     const size = getConvertedSize(t, usedSpace);
 
     array.push({
@@ -73,26 +82,38 @@ const getTags = (obj, tenantCustomQuota, usedPortalSpace, t) => {
 };
 const Diagram = (props) => {
   const {
-    tenantCustomQuota,
     maxWidth = 660,
     filesUsedSpace,
-    usedSpace,
+    usedPortalSpace,
+    maxTotalSizeByQuota,
+    standalone,
+    tenantCustomQuota,
   } = props;
 
   const { t } = useTranslation("Common");
 
-  const elementsTags = getTags(filesUsedSpace, tenantCustomQuota, usedSpace, t);
+  const elementsTags = getTags(
+    t,
+    standalone,
+    filesUsedSpace,
+    tenantCustomQuota,
+    maxTotalSizeByQuota,
+    usedPortalSpace,
+  );
+
+  const hidingSlider = standalone && tenantCustomQuota === -1;
 
   return (
     <StyledDiagramComponent maxWidth={maxWidth}>
       <div className="diagram_slider">
-        {elementsTags.map((tag, index) => (
-          <StyledFolderTagSection
-            width={tag.percentageSize}
-            key={index}
-            color={tag.color}
-          />
-        ))}
+        {!hidingSlider &&
+          elementsTags.map((tag, index) => (
+            <StyledFolderTagSection
+              width={tag.percentageSize}
+              key={index}
+              color={tag.color}
+            />
+          ))}
       </div>
       <div className="diagram_description">
         {elementsTags.map((tag, index) => (
@@ -107,13 +128,22 @@ const Diagram = (props) => {
   );
 };
 
-export default inject(({ storageManagement, currentQuotaStore }) => {
-  const { filesUsedSpace } = storageManagement;
-  const { tenantCustomQuota, usedTotalStorageSizeCount } = currentQuotaStore;
+export default inject(
+  ({ storageManagement, currentQuotaStore, settingsStore }) => {
+    const { filesUsedSpace } = storageManagement;
+    const {
+      tenantCustomQuota,
+      usedTotalStorageSizeCount,
+      maxTotalSizeByQuota,
+    } = currentQuotaStore;
+    const { standalone } = settingsStore;
 
-  return {
-    tenantCustomQuota,
-    filesUsedSpace,
-    usedSpace: usedTotalStorageSizeCount,
-  };
-})(observer(Diagram));
+    return {
+      tenantCustomQuota,
+      filesUsedSpace,
+      usedPortalSpace: usedTotalStorageSizeCount,
+      maxTotalSizeByQuota,
+      standalone,
+    };
+  },
+)(observer(Diagram));

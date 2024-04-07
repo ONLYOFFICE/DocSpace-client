@@ -27,7 +27,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import FilesSelectorWrapper from "@docspace/shared/selectors/Files/FilesSelector.wrapper";
+import FilesSelectorWrapper from "@docspace/shared/selectors/Files";
 
 import { DeviceType, FilesSelectorFilterTypes } from "@docspace/shared/enums";
 
@@ -42,7 +42,6 @@ const SelectFileDialog = ({
   onSubmit,
   fileInfo,
   filesSettings,
-  i18n,
 }: SelectFileDialogProps) => {
   const { t } = useTranslation();
 
@@ -79,7 +78,6 @@ const SelectFileDialog = ({
   return (
     <FilesSelectorWrapper
       filesSettings={filesSettings}
-      i18nProp={i18n}
       withoutBackButton
       withSearch
       withBreadCrumbs
@@ -117,4 +115,3 @@ const SelectFileDialog = ({
 };
 
 export default SelectFileDialog;
-

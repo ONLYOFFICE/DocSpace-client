@@ -49,6 +49,7 @@ export interface IContextButtonProps {
   isMobile: boolean;
   id: string;
   title?: string;
+  onCloseDropBox?: () => void;
 }
 
 export interface IPlusButtonProps {
@@ -59,6 +60,7 @@ export interface IPlusButtonProps {
   title?: string;
   onPlusClick?: () => void;
   isFrame?: boolean;
+  onCloseDropBox?: () => void;
 }
 
 export interface IToggleInfoPanelButtonProps {
@@ -92,6 +94,7 @@ export interface IControlButtonProps {
   tariffBar?: React.ReactElement;
   title?: string;
   isEmptyPage?: boolean;
+  onCloseDropBox?: () => void;
 }
 
 export interface ITextProps {
@@ -156,6 +159,7 @@ export interface IDropBoxProps {
   burgerLogo: string;
   currentDeviceType: DeviceType;
   navigationTitleContainerNode: React.ReactNode;
+  onCloseDropBox: () => void;
 }
 
 export interface INavigationProps {

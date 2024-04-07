@@ -217,7 +217,6 @@ const SectionHeaderContent = (props) => {
     showHeaderLoader,
     isDesktop,
     isTabletView,
-    personal,
     navigationPath,
     getHeaderMenu,
     isRecycleBinFolder,
@@ -1383,7 +1382,6 @@ const SectionHeaderContent = (props) => {
                 title={currentTitle}
                 isDesktop={isDesktop}
                 isTabletView={isTabletView}
-                personal={personal}
                 tReady={tReady}
                 menuItems={menuItems}
                 navigationItems={
@@ -1666,7 +1664,6 @@ export default inject(
       isThirdPartySelection,
       isTabletView: settingsStore.isTabletView,
       confirmDelete: filesSettingsStore.confirmDelete,
-      personal: settingsStore.personal,
       cbMenuItems,
       setSelectedNode: treeFoldersStore.setSelectedNode,
       getFolderInfo,

@@ -51,7 +51,6 @@ const Gallery = ({
   gallerySelected,
   getIcon,
   culture,
-  personal,
   currentColorScheme,
 }) => {
   const thumbnailBlank = getIcon(96, ".docxf");
@@ -107,11 +106,7 @@ const Gallery = ({
         <div className="property">
           <Text className="property-title">{t("InfoPanel:DateModified")}</Text>
           <Text className="property-content">
-            {parseAndFormatDate(
-              gallerySelected.attributes.updatedAt,
-              personal,
-              culture,
-            )}
+            {parseAndFormatDate(gallerySelected.attributes.updatedAt, culture)}
           </Text>
         </div>
         <div className="property">
@@ -132,13 +127,12 @@ const Gallery = ({
 };
 
 export default inject(({ settingsStore, filesSettingsStore, oformsStore }) => {
-  const { personal, culture, currentColorScheme } = settingsStore;
+  const { culture, currentColorScheme } = settingsStore;
   const { gallerySelected } = oformsStore;
   const { getIcon } = filesSettingsStore;
   return {
     getIcon,
     gallerySelected,
-    personal,
     culture,
     currentColorScheme,
   };

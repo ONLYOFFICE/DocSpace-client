@@ -35,24 +35,17 @@ import AboutHeader from "./AboutHeader";
 import AboutContent from "./AboutContent";
 import SectionWrapper from "SRC_DIR/components/Section";
 
-const Body = ({ t, personal, buildVersionInfo, theme }) => {
+const Body = ({ t, buildVersionInfo, theme }) => {
   useEffect(() => {
     setDocumentTitle(t("Common:About"));
   }, [t]);
 
-  return (
-    <AboutContent
-      theme={theme}
-      personal={personal}
-      buildVersionInfo={buildVersionInfo}
-    />
-  );
+  return <AboutContent theme={theme} buildVersionInfo={buildVersionInfo} />;
 };
 
 const BodyWrapper = inject(({ settingsStore }) => {
-  const { personal, buildVersionInfo, theme } = settingsStore;
+  const { buildVersionInfo, theme } = settingsStore;
   return {
-    personal,
     buildVersionInfo,
     theme,
   };

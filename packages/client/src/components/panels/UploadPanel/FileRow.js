@@ -316,7 +316,6 @@ class FileRow extends Component {
       isMedia,
       ext,
       name,
-      isPersonal,
       isMediaActive,
       downloadInCurrentTab,
     } = this.props;
@@ -385,7 +384,6 @@ class FileRow extends Component {
             {item.fileId && !item.error ? (
               <ActionsUploadedFile
                 item={item}
-                isPersonal={isPersonal}
                 onCancelCurrentUpload={this.onCancelCurrentUpload}
               />
             ) : item.error || (!item.fileId && uploaded) ? (
@@ -462,7 +460,7 @@ export default inject(
 
     name = splitted.join(".");
 
-    const { personal, theme } = settingsStore;
+    const { theme } = settingsStore;
     const { canViewedDocs, getIconSrc, isArchive } = filesSettingsStore;
     const {
       uploaded,
@@ -492,7 +490,6 @@ export default inject(
       !canViewedDocs(ext);
 
     return {
-      isPersonal: personal,
       theme,
       uploaded,
       isMedia: !!isMedia,

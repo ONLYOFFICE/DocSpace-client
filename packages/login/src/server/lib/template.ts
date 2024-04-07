@@ -26,7 +26,6 @@
 
 import { getScripts } from "./helpers";
 import pkg from "../../../package.json";
-import { getLogoFromPath } from "@docspace/shared/utils";
 
 import fontsCssUrl from "PUBLIC_DIR/css/fonts.css?url";
 
@@ -55,10 +54,6 @@ const template: Template = (
   const documentTitle = t
     ? `${t("Common:Authorization")} - ${organizationName}`
     : title;
-
-  const favicon = getLogoFromPath(
-    initLoginState?.logoUrls && initLoginState?.logoUrls[2]?.path?.light
-  );
 
   let clientScripts =
     assets && assets.hasOwnProperty("client.js")
@@ -138,17 +133,13 @@ const template: Template = (
         <meta name="google" content="notranslate" />
         <link  rel="stylesheet preload" href=${fontsCssUrl}  as="style" type="text/css" crossorigin/>
 
-        <link id="favicon" rel="shortcut icon" href=${favicon} />
+        <link rel="icon" href="/logo.ashx?logotype=3" />
         <link rel="manifest" href="/manifest.json" />
         <!-- Tell the browser it's a PWA -->
         <!-- <meta name="mobile-web-app-capable" content="yes" /> -->
         <!-- Tell iOS it's a PWA -->
         <!-- <meta name="apple-mobile-web-app-capable" content="yes" /> -->
         <!-- <link rel="apple-touch-icon" href="/appIcon-180.png" /> -->
-
-        <link rel="apple-touch-icon" href=${favicon} />
-        <link rel="android-touch-icon" href=${favicon} />
-
 
         ${styleTags}   
       </head>

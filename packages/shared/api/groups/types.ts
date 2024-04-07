@@ -34,4 +34,5 @@ export type TGroup = {
   parent: string;
   isGroup?: boolean;
   membersCount: number;
+  shared?: boolean;
 };

@@ -27,14 +27,14 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
-import { NoUserSelect, tablet } from "@docspace/shared/utils";
+import { NoUserSelect, tablet, getLogoUrl } from "@docspace/shared/utils";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { ReactSVG } from "react-svg";
 
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import logoPersonalAboutUrl from "PUBLIC_DIR/images/logo_personal_about.svg?url";
-import { getLogoFromPath } from "@docspace/shared/utils";
 
 const StyledAboutBody = styled.div`
   width: 100%;
@@ -109,7 +109,6 @@ const AboutContent = (props) => {
     theme,
     companyInfoSettingsData,
     previewData,
-    whiteLabelLogoUrls,
   } = props;
   const { t } = useTranslation("About");
   const license = "AGPL-3.0";
@@ -134,11 +133,7 @@ const AboutContent = (props) => {
     ? previewData.address
     : companyInfoSettingsData?.address;
 
-  const logo = getLogoFromPath(
-    !theme.isBase
-      ? whiteLabelLogoUrls[6]?.path.dark
-      : whiteLabelLogoUrls[6]?.path.light,
-  );
+  const logo = getLogoUrl(WhiteLabelLogoType.AboutPage, !theme.isBase);
 
   return (
     companyInfoSettingsData && (
@@ -289,11 +284,10 @@ const AboutContent = (props) => {
 };
 
 export default inject(({ settingsStore }) => {
-  const { theme, companyInfoSettingsData, whiteLabelLogoUrls } = settingsStore;
+  const { theme, companyInfoSettingsData } = settingsStore;
 
   return {
     theme,
     companyInfoSettingsData,
-    whiteLabelLogoUrls,
   };
 })(observer(AboutContent));

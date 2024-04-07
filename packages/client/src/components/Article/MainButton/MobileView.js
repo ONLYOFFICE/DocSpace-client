@@ -51,6 +51,7 @@ const StyledMainButtonMobile = styled(MainButtonMobile)`
 
   @media ${mobile} {
     position: absolute;
+    bottom: 16px;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`

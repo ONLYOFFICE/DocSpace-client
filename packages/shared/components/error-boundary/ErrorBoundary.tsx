@@ -64,7 +64,6 @@ class ErrorBoundary extends React.Component<
       version,
       firebaseHelper,
       currentDeviceType,
-      whiteLabelLogoUrls,
       currentColorScheme,
     } = this.props;
 
@@ -78,7 +77,6 @@ class ErrorBoundary extends React.Component<
           version={version}
           firebaseHelper={firebaseHelper}
           currentDeviceType={currentDeviceType}
-          whiteLabelLogoUrls={whiteLabelLogoUrls}
           currentColorScheme={currentColorScheme}
         />
       );

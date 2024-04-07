@@ -212,19 +212,18 @@ const PeopleTableRow = (props) => {
     onContentRowSelect,
     onContentRowClick,
     onEmailClick,
+    onUserContextClick,
 
     isOwner,
     theme,
     changeUserType,
 
-    setBufferSelection,
     isActive,
-    isSeveralSelection,
     canChangeUserType,
     hideColumns,
     value,
     standalone,
-    openGroupAction,
+    onOpenGroup,
     showStorageInfo,
     typeAccountsColumnIsEnabled,
     emailAccountsColumnIsEnabled,
@@ -316,9 +315,9 @@ const PeopleTableRow = (props) => {
     [item, changeUserType],
   );
 
-  const onOpenGroup = React.useCallback(
-    ({ action, title }) => openGroupAction(action, true, title),
-    [openGroupAction],
+  const onOpenGroupClick = React.useCallback(
+    ({ action, title }) => onOpenGroup(action, true, title),
+    [onOpenGroup],
   );
 
   // const getRoomsOptions = React.useCallback(() => {
@@ -381,7 +380,7 @@ const PeopleTableRow = (props) => {
             label: groups[0].name + " ",
           }}
           plusBadgeValue={groups.length - 1}
-          onSelect={onOpenGroup}
+          onSelect={onOpenGroupClick}
           options={groupItems}
           scaled={false}
           directionY="both"
@@ -401,7 +400,7 @@ const PeopleTableRow = (props) => {
           fontSize="13px"
           fontWeight={600}
           color={sideInfoColor}
-          onClick={() => onOpenGroup({ action: groups[0].id })}
+          onClick={() => onOpenGroupClick({ action: groups[0].id })}
           isTextOverflow
         >
           {groups[0].name}
@@ -456,33 +455,18 @@ const PeopleTableRow = (props) => {
   const typeCell = renderTypeCell();
 
   const onChange = (e) => {
-    //console.log("onChange");
     onContentRowSelect && onContentRowSelect(e.target.checked, item);
   };
 
-  const onRowContextClick = React.useCallback(() => {
-    //console.log("userContextClick");
-    onContentRowClick && onContentRowClick(!isChecked, item, false);
-  }, [isChecked, item, onContentRowClick]);
+  const onRowContextClick = React.useCallback(
+    (rightMouseButtonClick) => {
+      onUserContextClick?.(item, !rightMouseButtonClick);
+    },
+    [item, onUserContextClick],
+  );
 
-  const onRowClick = (e) => {
-    if (
-      e.target.closest(".checkbox") ||
-      e.target.closest(".table-container_row-checkbox") ||
-      e.target.closest(".type-combobox") ||
-      e.target.closest(".groups-combobox") ||
-      e.target.closest(".paid-badge") ||
-      e.target.closest(".pending-badge") ||
-      e.target.closest(".disabled-badge") ||
-      e.detail === 0
-    ) {
-      return;
-    }
+  const onRowClick = (e) => onContentRowClick?.(e, item);
 
-    //console.log("onRowClick");
-
-    onContentRowClick && onContentRowClick(!isChecked, item, false, false);
-  };
   const isPaidUser = !standalone && !isVisitor;
   return (
     <StyledWrapper
@@ -623,14 +607,11 @@ const PeopleTableRow = (props) => {
   );
 };
 
-export default inject(({ currentQuotaStore, peopleStore }) => {
+export default inject(({ currentQuotaStore }) => {
   const { showStorageInfo } = currentQuotaStore;
-
-  const { openGroupAction } = peopleStore.groupsStore;
 
   return {
     showStorageInfo,
-    openGroupAction,
   };
 })(
   withContent(

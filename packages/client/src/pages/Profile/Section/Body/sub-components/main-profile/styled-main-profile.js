@@ -109,7 +109,6 @@ export const StyledInfo = styled.div`
     .profile-block {
       display: flex;
       flex-direction: column;
-      overflow: hidden;
 
       .profile-block-field {
         display: flex;
@@ -148,16 +147,24 @@ export const StyledInfo = styled.div`
         margin-top: 11px;
         gap: 8px;
 
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-right: -8px;
+              `
+            : css`
+                margin-left: -8px;
+              `}
+
         .language-combo-box .combo-button {
           padding-inline-end: 0px;
-
           ${(props) =>
             props.theme.interfaceDirection === "rtl"
               ? css`
-                  padding-right: 0px;
+                  padding-right: 8px;
                 `
               : css`
-                  padding-left: 0px;
+                  padding-left: 8px;
                 `}
         }
 

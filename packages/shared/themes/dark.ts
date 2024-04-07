@@ -1641,7 +1641,7 @@ const Dark: TTheme = {
       flex: "0 0 6px",
       marginTopWithBorder: "5px",
       marginTop: "12px",
-      marginRight: "8px",
+      marginRight: "5px",
       marginLeft: "auto",
     },
 
@@ -1683,7 +1683,7 @@ const Dark: TTheme = {
     },
 
     label: {
-      marginRightWithBorder: "8px",
+      marginRightWithBorder: "13px",
       marginRight: "4px",
 
       disabledColor: "#858585",

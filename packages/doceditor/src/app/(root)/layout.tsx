@@ -24,34 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import Scripts from "@/components/Scripts";
+import StyledComponentsRegistry from "@/utils/registry";
 
-import { getLogoUrls } from "@docspace/shared/api/settings";
-import { TWhiteLabel } from "@docspace/shared/utils/whiteLabelHelper";
+import "@/styles/globals.scss";
+import Providers from "@/providers";
+import { getSettings, getUser } from "@/utils/actions";
+import { headers } from "next/headers";
 
-const useWhiteLabel = () => {
-  const [logoUrls, setLogoUrls] = React.useState<TWhiteLabel[]>([]);
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const headersList = headers();
+  const referer = headersList.get("referer");
 
-  const requestRunning = React.useRef(false);
-  const alreadyFetched = React.useRef(false);
+  if (referer?.includes("health")) return children;
 
-  const fetchWhiteLabel = React.useCallback(async () => {
-    if (alreadyFetched.current) return;
+  const [user, settings] = await Promise.all([getUser(), getSettings()]);
 
-    requestRunning.current = true;
-    const urls = await getLogoUrls();
-    requestRunning.current = false;
+  return (
+    <html lang="en">
+      <head>
+        <link id="favicon" rel="shortcut icon" type="image/x-icon" />
+      </head>
+      <body>
+        <StyledComponentsRegistry>
+          <Providers contextData={{ user, settings }}>{children}</Providers>
+        </StyledComponentsRegistry>
 
-    setLogoUrls(urls);
-    alreadyFetched.current = true;
-  }, []);
-
-  React.useEffect(() => {
-    fetchWhiteLabel();
-  }, [fetchWhiteLabel]);
-
-  return { logoUrls };
-};
-
-export default useWhiteLabel;
-
+        <Scripts />
+      </body>
+    </html>
+  );
+}

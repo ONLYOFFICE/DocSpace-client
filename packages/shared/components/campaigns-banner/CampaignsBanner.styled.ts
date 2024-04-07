@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { Base } from "../../themes";
-import { desktop, mobile } from "../../utils/device";
+import { desktop } from "../../utils/device";
 
 const BannerWrapper = styled.div<{
   background?: string;

@@ -33,7 +33,6 @@ import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
 import { toast as toastify } from "react-toastify";
 
-import { setFavicon } from "@docspace/shared/utils/favicon";
 import { Portal } from "@docspace/shared/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Toast, toastr } from "@docspace/shared/components/toast";
@@ -78,7 +77,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     setSnackbarExist,
     userTheme,
     //user,
-    whiteLabelLogoUrls,
     userId,
     currentDeviceType,
     timezone,
@@ -129,11 +127,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
     moment.locale(language);
   }, []);
-
-  useEffect(() => {
-    if (!whiteLabelLogoUrls) return;
-    setFavicon(whiteLabelLogoUrls);
-  }, [whiteLabelLogoUrls]);
 
   useEffect(() => {
     socketHelper.emit({
@@ -469,7 +462,6 @@ const ShellWrapper = inject(
       setSnackbarExist,
       socketHelper,
       setTheme,
-      whiteLabelLogoUrls,
       currentDeviceType,
       isFrame,
       frameConfig,
@@ -521,7 +513,6 @@ const ShellWrapper = inject(
       setSnackbarExist,
       userTheme: isFrame ? frameConfig?.theme : userTheme,
       userId: userStore?.user?.id,
-      whiteLabelLogoUrls,
       currentDeviceType,
       showArticleLoader: clientLoadingStore.showArticleLoader,
       setPortalTariff,

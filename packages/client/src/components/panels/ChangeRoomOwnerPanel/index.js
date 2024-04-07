@@ -56,6 +56,8 @@ const StyledChangeRoomOwner = styled.div`
       }
 
       .selector_footer-checkbox {
+        background-color: ${(props) =>
+          props.theme.filesPanels.aside.backgroundColor};
         padding: 17px 0 1px 0;
       }
     `}

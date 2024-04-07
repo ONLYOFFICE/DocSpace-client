@@ -54,7 +54,6 @@ export default function GlobalError({ error }: { error: Error }) {
 
   const { i18n } = useI18N({ settings, user });
   const { currentDeviceType } = useDeviceType();
-  const { logoUrls } = useWhiteLabel();
   const { theme } = useTheme({ user, i18n });
   const firebaseHelper = useMemo(() => {
     return new FirebaseHelper(settings?.firebase ?? ({} as TFirebaseSettings));
@@ -87,14 +86,13 @@ export default function GlobalError({ error }: { error: Error }) {
   return (
     <html>
       <body>
-        {!isLoading && logoUrls && (
+        {!isLoading && (
           <ThemeProvider theme={theme}>
             <Error520SSR
               i18nProp={i18n}
               errorLog={error}
               version={pkg.version}
               user={user ?? ({} as TUser)}
-              whiteLabelLogoUrls={logoUrls}
               firebaseHelper={firebaseHelper}
               currentDeviceType={currentDeviceType}
             />
@@ -104,3 +102,4 @@ export default function GlobalError({ error }: { error: Error }) {
     </html>
   );
 }
+

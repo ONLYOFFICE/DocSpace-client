@@ -632,11 +632,7 @@ class SettingsStore {
     this.setIsLoading(true);
     const requests = [];
 
-    requests.push(
-      this.getPortalSettings(),
-      this.getAppearanceTheme(),
-      this.getWhiteLabelLogoUrls(),
-    );
+    requests.push(this.getPortalSettings(), this.getAppearanceTheme());
 
     await Promise.all(requests);
 
@@ -732,6 +728,8 @@ class SettingsStore {
 
     this.setLogoUrls(Object.values(res));
     this.setLogoUrl(Object.values(res));
+
+    return res;
   };
 
   getDomainName = async () => {

@@ -40,7 +40,6 @@ const ArticleWrapper = ({
   displayName,
   languageBaseName,
   isBurgerLoading,
-  whiteLabelLogoUrls,
   zendeskKey,
   isMobileArticle,
   showProgress,
@@ -70,7 +69,6 @@ const ArticleWrapper = ({
       zendeskEmail={email}
       languageBaseName={languageBaseName}
       isBurgerLoading={isBurgerLoading}
-      whiteLabelLogoUrls={whiteLabelLogoUrls}
       zendeskKey={zendeskKey}
       isMobileArticle={isMobileArticle}
       showText={showText}
@@ -150,7 +148,6 @@ export default inject(
       setArticleOpen,
       mainBarVisible,
       isBurgerLoading,
-      whiteLabelLogoUrls,
       currentDeviceType,
     } = settingsStore;
 
@@ -159,7 +156,6 @@ export default inject(
       displayName,
       languageBaseName,
       isBurgerLoading,
-      whiteLabelLogoUrls,
       zendeskKey,
       isMobileArticle,
       showProgress,

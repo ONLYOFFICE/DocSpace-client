@@ -74,7 +74,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { resendInvitesAgain } from "@docspace/shared/api/people";
 
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { tablet, mobile, Consumer } from "@docspace/shared/utils";
+import { tablet, mobile, Consumer, getLogoUrl } from "@docspace/shared/utils";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { TableGroupMenu } from "@docspace/shared/components/table";
@@ -85,6 +85,7 @@ import {
   DeviceType,
   FolderType,
   ShareAccessRights,
+  WhiteLabelLogoType,
 } from "@docspace/shared/enums";
 import { getLogoFromPath } from "@docspace/shared/utils";
 import { copyShareLink } from "@docspace/shared/utils/copy";
@@ -289,7 +290,6 @@ const SectionHeaderContent = (props) => {
     categoryType,
     isPublicRoom,
     theme,
-    whiteLabelLogoUrls,
     downloadAction,
     isPublicRoomType,
     isCustomRoomType,
@@ -1199,12 +1199,8 @@ const SectionHeaderContent = (props) => {
       categoryType === CategoryType.Archive) &&
     !isCurrentRoom;
 
-  const logo = !theme.isBase
-    ? getLogoFromPath(whiteLabelLogoUrls[0]?.path?.dark)
-    : getLogoFromPath(whiteLabelLogoUrls[0]?.path?.light);
-  const burgerLogo = !theme.isBase
-    ? getLogoFromPath(whiteLabelLogoUrls[5]?.path?.dark)
-    : getLogoFromPath(whiteLabelLogoUrls[5]?.path?.light);
+  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
+  const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !theme.isBase);
 
   const navigationButtonLabel = showNavigationButton
     ? t("Files:ShareRoom")
@@ -1414,14 +1410,8 @@ export default inject(
       insideGroupTempTitle,
     } = peopleStore.groupsStore;
 
-    const {
-      enablePlugins,
-      theme,
-      whiteLabelLogoUrls,
-      frameConfig,
-      isFrame,
-      currentDeviceType,
-    } = settingsStore;
+    const { enablePlugins, theme, frameConfig, isFrame, currentDeviceType } =
+      settingsStore;
     const { isGracePeriod } = currentTariffStatusStore;
 
     const isRoom = !!roomType;
@@ -1605,7 +1595,6 @@ export default inject(
       emptyTrashInProgress,
       categoryType,
       theme,
-      whiteLabelLogoUrls,
       isFrame,
       showTitle: frameConfig?.showTitle,
       hideInfoPanel: isFrame && !frameConfig?.infoPanelVisible,

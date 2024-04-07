@@ -28,8 +28,8 @@ import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useTheme } from "styled-components";
 
-import { getLogoFromPath } from "../../../utils";
-import { DeviceType } from "../../../enums";
+import { getLogoUrl } from "../../../utils";
+import { DeviceType, WhiteLabelLogoType } from "../../../enums";
 import { ArticleHeaderLoader } from "../../../skeletons/article";
 
 import {
@@ -45,7 +45,6 @@ const ArticleHeader = ({
   onClick,
   onLogoClickAction,
   isBurgerLoading,
-  whiteLabelLogoUrls,
 
   withCustomArticleHeader,
   currentDeviceType,
@@ -59,12 +58,8 @@ const ArticleHeader = ({
     navigate("/");
   };
 
-  const burgerLogo = !theme.isBase
-    ? getLogoFromPath(whiteLabelLogoUrls[5]?.path?.dark)
-    : getLogoFromPath(whiteLabelLogoUrls[5]?.path?.light);
-  const logo = !theme.isBase
-    ? getLogoFromPath(whiteLabelLogoUrls[0]?.path?.dark)
-    : getLogoFromPath(whiteLabelLogoUrls[0]?.path?.light);
+  const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !theme.isBase);
+  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
 
   if (currentDeviceType === DeviceType.mobile) return null;
 
@@ -83,7 +78,12 @@ const ArticleHeader = ({
     <>
       {currentDeviceType === DeviceType.tablet && (
         <StyledIconBox showText={showText}>
-          <img src={burgerLogo} alt="burger-logo" onClick={onLogoClick} />
+          <img
+            src={burgerLogo}
+            className="burger-logo"
+            alt="burger-logo"
+            onClick={onLogoClick}
+          />
         </StyledIconBox>
       )}
       <StyledHeading showText={showText}>

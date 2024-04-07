@@ -28,7 +28,6 @@ import React from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import { NoBoxShadowToast } from "../../styled-components";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { useNavigate } from "react-router-dom";
@@ -139,7 +138,6 @@ const DetailsNavigationHeader = (props) => {
           onClick={handleRetryEvent}
         />
       </HeaderContainer>
-      <NoBoxShadowToast />
     </>
   );
 };

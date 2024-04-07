@@ -42,6 +42,8 @@ const Selectors = styled.div`
   position: relative;
   margin-top: 8px;
   margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: ${(props) => `1px solid ${props.theme.infoPanel.borderColor}`};
   height: 32px;
   display: flex;
   align-items: center;

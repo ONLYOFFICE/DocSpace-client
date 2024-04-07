@@ -645,10 +645,14 @@ const ArticleMainButtonContent = (props) => {
                 action: EmployeeType.Guest,
                 key: "user",
               },
-              {
-                isSeparator: true,
-                key: "invite-users-separator",
-              },
+              ...(!isMobileArticle
+                ? [
+                    {
+                      isSeparator: true,
+                      key: "invite-users-separator",
+                    },
+                  ]
+                : []),
               {
                 id: "invite_again",
                 className: "main-button_drop-down",
@@ -739,6 +743,7 @@ const ArticleMainButtonContent = (props) => {
     onUploadFileClick,
     onUploadFolderClick,
     createActionsForFormRoom,
+    isMobileArticle,
   ]);
 
   const mainButtonText = t("Common:Actions");

@@ -187,6 +187,7 @@ const UsersTableRow = ({
               onKeyDown={handleKeyDown}
               hasError={hasError}
               onBlur={checkEmailValidity}
+              isAutoFocussed
             />
 
             <DecisionButton icon={<CheckSvg />} onClick={handleSaveClick} />

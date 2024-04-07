@@ -43,11 +43,12 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
+import { isDesktop } from "@docspace/shared/utils";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
 import PlusReactSvgUrl from "PUBLIC_DIR/images/actions.button.plus.react.svg?url";
 
 import { Avatar } from "@docspace/shared/components/avatar";
-import copy from "copy-to-clipboard";
+import { copyShareLink } from "@docspace/shared/utils/copy";
 import LinkRow from "./sub-components/LinkRow";
 
 const Members = ({
@@ -140,7 +141,7 @@ const Members = ({
     } else {
       getPrimaryLink(infoPanelSelection.id).then((link) => {
         setExternalLink(link);
-        copy(link.sharedTo.shareLink);
+        copyShareLink(link.sharedTo.shareLink);
         toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
       });
     }
@@ -174,7 +175,7 @@ const Members = ({
 
               {additionalLinks.length >= LINKS_LIMIT_COUNT && (
                 <Tooltip
-                  float
+                  float={isDesktop()}
                   id="emailTooltip"
                   getContent={({ content }) => (
                     <Text fontSize="12px">{content}</Text>

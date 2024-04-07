@@ -128,6 +128,7 @@ class ThirdPartyModule extends React.Component {
           withoutInitPath={!selectedFolder}
           isError={isError}
           buttonSize={buttonSize}
+          isSelectFolder
         />
 
         {connectedThirdPartyAccount?.id && isTheSameThirdPartyAccount && (

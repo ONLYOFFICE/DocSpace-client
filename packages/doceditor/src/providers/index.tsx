@@ -24,23 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { i18n } from "i18next";
-import { I18nextProvider } from "react-i18next";
+import { TUser } from "@docspace/shared/api/people/types";
+import { TSettings } from "@docspace/shared/api/settings/types";
+import { Toast } from "@docspace/shared/components/toast/Toast";
 
-import { ShareProps } from "./Share.types";
-import Share from ".";
+import ThemeProvider from "./ThemeProvider";
+import TranslationProvider from "./TranslationProvider";
+import ErrorProvider from "./ErrorProvider";
 
-const FilesSelectorWrapper = ({
-  i18nProp,
+export type TContextData = {
+  user: TUser | undefined;
+  settings: TSettings | undefined;
+};
 
-  ...rest
-}: ShareProps & { i18nProp: i18n }) => {
+export type TProviders = {
+  children: React.ReactNode;
+  contextData: TContextData;
+};
+
+const Providers = ({ children, contextData }: TProviders) => {
   return (
-    <I18nextProvider i18n={i18nProp}>
-      <Share {...rest} />
-    </I18nextProvider>
+    <TranslationProvider {...contextData}>
+      <ThemeProvider {...contextData}>
+        <ErrorProvider {...contextData}>
+          {children}
+          <Toast isSSR />
+        </ErrorProvider>
+      </ThemeProvider>
+    </TranslationProvider>
   );
 };
 
-export default FilesSelectorWrapper;
+export default Providers;

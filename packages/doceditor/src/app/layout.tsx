@@ -24,9 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import "../styles/globals.scss";
+import Scripts from "@/components/Scripts";
+import StyledComponentsRegistry from "@/utils/registry";
 
-// import StyledComponentsRegistry from "@/utils/registry";
+import "../styles/globals.scss";
+import Providers from "@/providers";
+import { getSettings, getUser } from "@/utils/actions";
+import { headers } from "next/headers";
 
 export default async function RootLayout({
   children,

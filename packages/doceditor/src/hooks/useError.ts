@@ -28,14 +28,14 @@ import React from "react";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { frameCallCommand } from "@docspace/shared/utils/common";
-import { Nullable, TTranslation } from "@docspace/shared/types";
+import { TTranslation } from "@docspace/shared/types";
 
 import { TError } from "@/types";
 
 interface UseErrorProps {
   error?: TError;
   editorUrl?: string;
-  t?: Nullable<TTranslation>;
+  t: TTranslation;
 }
 
 const useError = ({ error, editorUrl, t }: UseErrorProps) => {
@@ -69,23 +69,15 @@ const useError = ({ error, editorUrl, t }: UseErrorProps) => {
     }
   }, [editorUrl, error]);
 
-  const onError = React.useCallback(() => {
-    // window.open(
-    //   combineUrl(window.DocSpaceConfig?.proxy?.url, "/login"),
-    //   "_self",
-    // );
-  }, []);
-
   const getErrorMessage = React.useCallback(() => {
     if (typeof error !== "string") return error?.message;
 
-    if (error === "restore-backup") return t?.("Common:PreparationPortalTitle");
+    if (error === "restore-backup") return t("Common:PreparationPortalTitle");
 
     return error;
   }, [error, t]);
 
-  return { onError, getErrorMessage };
+  return { getErrorMessage };
 };
 
 export default useError;
-

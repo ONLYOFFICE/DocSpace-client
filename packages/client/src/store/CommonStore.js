@@ -156,9 +156,13 @@ class CommonStore {
   };
 
   getWhiteLabelLogoUrls = async () => {
-    const { whiteLabelLogoUrls } = this.settingsStore;
-    const logos = JSON.parse(JSON.stringify(whiteLabelLogoUrls));
+    const { getWhiteLabelLogoUrls } = this.settingsStore;
+
+    const logos = await getWhiteLabelLogoUrls();
+
     this.setLogoUrlsWhiteLabel(Object.values(logos));
+
+    return logos;
   };
 
   getWhiteLabelLogoText = async () => {
@@ -168,13 +172,33 @@ class CommonStore {
     return res;
   };
 
-  saveWhiteLabelSettings = async (data) => {
-    const { getWhiteLabelLogoUrls } = this.settingsStore;
+  applyNewLogos = (logos) => {
+    const theme =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
 
+    const favicon = document.getElementById("favicon");
+    const logo = document.getElementsByClassName("logo-icon_svg")?.[0];
+    const logoBurger = document.getElementsByClassName("burger-logo")?.[0];
+
+    runInAction(() => {
+      favicon && (favicon.href = logos?.[2]?.path?.["light"]); // we have single favicon for both themes
+      logo && (logo.src = logos?.[0]?.path?.[theme]);
+      logoBurger && (logoBurger.src = logos?.[5]?.path?.[theme]);
+    });
+  };
+
+  saveWhiteLabelSettings = async (data) => {
     await this.setWhiteLabelSettings(data);
-    await getWhiteLabelLogoUrls();
-    this.getWhiteLabelLogoUrls();
+
+    const logos = await this.getWhiteLabelLogoUrls();
     this.getIsDefaultWhiteLabel();
+    this.getWhiteLabelLogoText();
+
+    this.applyNewLogos(logos);
   };
 
   getIsDefaultWhiteLabel = async () => {
@@ -184,12 +208,13 @@ class CommonStore {
   };
 
   restoreWhiteLabelSettings = async () => {
-    const { getWhiteLabelLogoUrls } = this.settingsStore;
-
     await api.settings.restoreWhiteLabelSettings(isManagement());
-    await getWhiteLabelLogoUrls();
-    this.getWhiteLabelLogoUrls();
+
+    const logos = await this.getWhiteLabelLogoUrls();
     this.getIsDefaultWhiteLabel();
+    this.getWhiteLabelLogoText();
+
+    this.applyNewLogos(logos);
   };
 
   getGreetingSettingsIsDefault = async () => {

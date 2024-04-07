@@ -47,6 +47,7 @@
     showTitle: true,
     showMenu: false,
     showFilter: false,
+    showSignOut: true,
     destroyText: "",
     viewAs: "row", //TODO: ["row", "table", "tile"]
     viewTableColumns: "Name,Type,Tags",

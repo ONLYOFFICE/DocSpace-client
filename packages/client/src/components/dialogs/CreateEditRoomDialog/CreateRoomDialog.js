@@ -85,7 +85,7 @@ const CreateRoomDialog = ({
 
   const startRoomParams = {
     type: undefined,
-    title: title,
+    title: title ?? "",
     tags: [],
     isPrivate: false,
     storageLocation: {
@@ -116,6 +116,9 @@ const CreateRoomDialog = ({
     setRoomParams((prev) => ({
       ...prev,
       type: newRoomType,
+      storageLocation: {
+        isThirdparty: false,
+      },
     }));
   };
 

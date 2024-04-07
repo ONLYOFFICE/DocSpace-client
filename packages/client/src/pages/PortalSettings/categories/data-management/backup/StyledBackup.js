@@ -426,13 +426,13 @@ const StyledRestoreBackup = styled.div`
   }
 
   .restore-backup_button-container {
-    padding-block: 30px;
     position: sticky;
     bottom: 0;
-    margin-top: 32px;
+    margin-top: 24px;
     background-color: ${({ theme }) => theme.backgroundColor};
 
     @media ${mobile} {
+      padding-block: 30px;
       position: fixed;
       padding-inline: 16px;
       inset-inline: 0;

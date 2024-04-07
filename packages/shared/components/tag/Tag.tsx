@@ -28,18 +28,13 @@ import React from "react";
 import { ReactSVG } from "react-svg";
 
 import CrossIconReactSvgUrl from "PUBLIC_DIR/images/cross.react.svg?url";
-import TagIconReactSvgUrl from "PUBLIC_DIR/images/tag.react.svg?url";
 
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 import { IconButton } from "../icon-button";
 import { Text } from "../text";
 
-import {
-  StyledTag,
-  StyledDropdownIcon,
-  StyledDropdownText,
-} from "./Tag.styled";
+import { StyledTag, StyledDropdownText } from "./Tag.styled";
 import { TagProps } from "./Tag.types";
 
 export const TagPure = ({
@@ -154,10 +149,6 @@ export const TagPure = ({
             onClick={onClickAction}
             data-tag={t}
           >
-            <StyledDropdownIcon
-              className="tag__dropdown-item-icon"
-              src={TagIconReactSvgUrl}
-            />
             <StyledDropdownText
               className="tag__dropdown-item-text"
               fontWeight={600}

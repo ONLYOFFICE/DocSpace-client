@@ -304,6 +304,7 @@ export const Viewer = (props: ViewerProps) => {
               removeToolbarVisibleTimer={removeToolbarVisibleTimer}
               removePanelVisibleTimeout={removePanelVisibleTimeout}
               restartToolbarVisibleTimer={restartToolbarVisibleTimer}
+              isThirdParty={targetFile?.providerItem}
             />
           }
         />

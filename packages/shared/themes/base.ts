@@ -657,6 +657,16 @@ export const getBaseTheme = () => {
 
       colorDisabledFileIcons: "#f3f4f4",
 
+      backdrop: {
+        backgroundRGBA: {
+          r: 6,
+          g: 22,
+          b: 38,
+          a: 0.2,
+        },
+        blur: 18,
+      },
+
       content: {
         backgroundColor: white,
         modalPadding: "0 12px 12px",
@@ -1002,7 +1012,7 @@ export const getBaseTheme = () => {
       maxWidth: "340px",
       color: white,
       textColor: black,
-      backgroundColor: "#f8f7bf",
+      backgroundColor: "#F8F9F9",
 
       before: {
         border: "none",
@@ -1112,16 +1122,16 @@ export const getBaseTheme = () => {
 
       roleWrapperContainer: {
         right: {
-          min: "-5px",
+          min: "-2px",
           small: "-2px",
           base: "-2px",
           medium: "-4px",
           big: "3px",
-          max: "0px",
+          max: "10px",
         },
 
         bottom: {
-          min: "-5px",
+          min: "-2px",
           small: "3px",
           base: "4px",
           medium: "6px",
@@ -1130,13 +1140,15 @@ export const getBaseTheme = () => {
         },
 
         width: {
+          min: "12px",
           medium: "16px",
-          max: "24px",
+          max: "22px",
         },
 
         height: {
+          min: "12px",
           medium: "16px",
-          max: "24px",
+          max: "22px",
         },
       },
 
@@ -1658,7 +1670,7 @@ export const getBaseTheme = () => {
         flex: "0 0 6px",
         marginTopWithBorder: "5px",
         marginTop: "12px",
-        marginRight: "8px",
+        marginRight: "5px",
         marginLeft: "auto",
       },
 
@@ -1698,7 +1710,7 @@ export const getBaseTheme = () => {
       },
 
       label: {
-        marginRightWithBorder: "8px",
+        marginRightWithBorder: "13px",
         marginRight: "4px",
 
         disabledColor: grayMid,
@@ -2088,7 +2100,7 @@ export const getBaseTheme = () => {
 
       links: {
         iconColor: "#3B72A7",
-        iconErrorColor: "rgba(242, 28, 14, 0.5)", // "#F21C0E",
+        iconErrorColor: "#F24724",
         primaryColor: "#555F65",
       },
 
@@ -2362,6 +2374,11 @@ export const getBaseTheme = () => {
       breadCrumbs: {
         prevItemColor: "#657077",
         arrowRightColor: "#657077",
+      },
+
+      info: {
+        backgroundColor: "#f8f9f9",
+        color: "#555f65",
       },
 
       bodyDescriptionText: "#A3A9AE",

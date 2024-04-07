@@ -27,7 +27,7 @@
 import { Link } from "@docspace/shared/components/link";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
@@ -49,8 +49,11 @@ const SubmitToFormGallery = ({
   currentColorScheme,
   canSubmitToFormGallery,
   submitToFormGallery,
+  fetchGuideLink,
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [guideLink, setGuideLink] = useState(null);
 
   const abortControllerRef = useRef(new AbortController());
 
@@ -118,6 +121,13 @@ const SubmitToFormGallery = ({
     onClose();
   };
 
+  useEffect(() => {
+    (async () => {
+      const fetchedGuideLink = await fetchGuideLink();
+      setGuideLink(fetchedGuideLink);
+    })();
+  }, []);
+
   if (!canSubmitToFormGallery()) return null;
 
   if (isSelectingForm)
@@ -153,7 +163,7 @@ const SubmitToFormGallery = ({
             approval in our
             <Link
               color={currentColorScheme.main?.accent}
-              href="https://www.onlyoffice.com/blog/2022/07/when-design-matters-how-to-create-beautiful-forms-with-oforms"
+              href={guideLink || "#"}
               type={"page"}
               target={"_blank"}
               isBold
@@ -233,5 +243,6 @@ export default inject(
     currentColorScheme: settingsStore.currentColorScheme,
     canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
     submitToFormGallery: oformsStore.submitToFormGallery,
+    fetchGuideLink: oformsStore.fetchGuideLink,
   }),
 )(withTranslation("Common", "FormGallery")(observer(SubmitToFormGallery)));

@@ -24,34 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
 import React from "react";
 
-import { getLogoUrls } from "@docspace/shared/api/settings";
-import { TWhiteLabel } from "@docspace/shared/utils/whiteLabelHelper";
+import { ThemeProvider as ComponentThemeProvider } from "@docspace/shared/components/theme-provider";
+import { TUser } from "@docspace/shared/api/people/types";
+import { TSettings } from "@docspace/shared/api/settings/types";
 
-const useWhiteLabel = () => {
-  const [logoUrls, setLogoUrls] = React.useState<TWhiteLabel[]>([]);
+import useTheme from "@/hooks/useTheme";
+import useI18N from "@/hooks/useI18N";
 
-  const requestRunning = React.useRef(false);
-  const alreadyFetched = React.useRef(false);
-
-  const fetchWhiteLabel = React.useCallback(async () => {
-    if (alreadyFetched.current) return;
-
-    requestRunning.current = true;
-    const urls = await getLogoUrls();
-    requestRunning.current = false;
-
-    setLogoUrls(urls);
-    alreadyFetched.current = true;
-  }, []);
-
-  React.useEffect(() => {
-    fetchWhiteLabel();
-  }, [fetchWhiteLabel]);
-
-  return { logoUrls };
+type TThemeProvider = {
+  children: React.ReactNode;
+  settings: TSettings | undefined;
+  user: TUser | undefined;
 };
 
-export default useWhiteLabel;
+const ThemeProvider = ({ children, user, settings }: TThemeProvider) => {
+  const { i18n } = useI18N({ settings, user });
 
+  const { theme, currentColorTheme } = useTheme({ user, i18n });
+
+  return (
+    <ComponentThemeProvider
+      theme={theme}
+      currentColorScheme={currentColorTheme}
+    >
+      {children}
+    </ComponentThemeProvider>
+  );
+};
+
+export default ThemeProvider;

@@ -117,13 +117,8 @@ const QuickButtons = (props) => {
     !isArchiveFolder &&
     !isTile;
 
-  const onShare = () => {
-    if (isMobile()) return;
-    onClickShare();
-  };
-
   return (
-    <div className="badges additional-badges  badges__quickButtons">
+    <div className="badges additional-badges badges__quickButtons">
       {isAvailableLockFile && (
         <ColorTheme
           themeId={ThemeId.IconButton}
@@ -171,7 +166,7 @@ const QuickButtons = (props) => {
           iconName={LinkReactSvgUrl}
           className="badge copy-link icons-group"
           size={sizeQuickButton}
-          onClick={onShare}
+          onClick={onClickShare}
           color={colorShare}
           isDisabled={isDisabled}
           hoverColor={theme.filesQuickButtons.sharedColor}

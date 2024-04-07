@@ -248,12 +248,12 @@ const WhiteLabel = (props) => {
 
   const isEqualLogo = isEqual(logoUrlsWhiteLabel, defaultWhiteLabelLogoUrls);
   const isEqualText = defaultLogoTextWhiteLabel === logoTextWhiteLabel;
-  const showReminder = !isEqualLogo || !isEqualText;
+  const saveButtonDisabled = isEqualLogo && isEqualText;
 
   return !isLoadedData ? (
     <LoaderWhiteLabel />
   ) : (
-    <WhiteLabelWrapper showReminder={showReminder}>
+    <WhiteLabelWrapper showReminder={!saveButtonDisabled}>
       <Text className="subtitle">{t("BrandingSubtitle")}</Text>
 
       <div className="header-container">
@@ -523,9 +523,9 @@ const WhiteLabel = (props) => {
         displaySettings={true}
         hasScroll={true}
         hideBorder={true}
-        showReminder={showReminder}
+        showReminder={!saveButtonDisabled}
         reminderText={t("YouHaveUnsavedChanges")}
-        saveButtonDisabled={isEqualLogo && isEqualText}
+        saveButtonDisabled={saveButtonDisabled}
         disableRestoreToDefault={!enableRestoreButton}
         isSaving={isSaving}
         additionalClassSaveButton="white-label-save"

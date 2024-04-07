@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
-import { getLogoFromPath } from "@docspace/shared/utils";
 import {
   getDomainName,
   setDomainName,
@@ -66,13 +65,6 @@ class SpacesStore {
       this.settingsStore.tenantAlias &&
       this.settingsStore.tenantAlias !== "localhost"
     );
-  }
-
-  get faviconLogo() {
-    const logos = this.settingsStore.whiteLabelLogoUrls;
-    if (!logos) return;
-
-    return getLogoFromPath(logos[2]?.path?.light);
   }
 
   setPortalName = async (portalName: string) => {

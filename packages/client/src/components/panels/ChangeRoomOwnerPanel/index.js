@@ -56,6 +56,8 @@ const StyledChangeRoomOwner = styled.div`
       }
 
       .selector_footer-checkbox {
+        background-color: ${(props) =>
+          props.theme.filesPanels.aside.backgroundColor};
         padding: 17px 0 1px 0;
       }
     `}
@@ -150,6 +152,10 @@ const ChangeRoomOwner = (props) => {
           filterUserId={roomOwnerId}
           currentUserId={userId}
           disableDisabledUsers
+          withInfo
+          infoText={t("CreateEditRoomDialog:PeopleSelectorInfo")}
+          emptyScreenHeader={t("Common:NotFoundUsers")}
+          emptyScreenDescription={t("CreateEditRoomDialog:PeopleSelectorInfo")}
         />
       </Aside>
     </StyledChangeRoomOwner>
@@ -201,4 +207,10 @@ export default inject(
       updateInfoPanelSelection,
     };
   },
-)(observer(withTranslation(["Files"])(ChangeRoomOwner)));
+)(
+  observer(
+    withTranslation(["Files", "CreateEditRoomDialog", "Common"])(
+      ChangeRoomOwner,
+    ),
+  ),
+);

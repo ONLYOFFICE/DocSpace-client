@@ -31,12 +31,14 @@ const StyledBody = styled.div`
   overflow: hidden;
   width: 100%;
   max-width: max-content;
+  margin-left: 0px !important;
 
   display: flex;
   flex-wrap: nowrap;
+  height: 28px;
+  align-items: center;
 
   p {
-    padding-top: 8px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;

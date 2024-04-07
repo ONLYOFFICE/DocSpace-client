@@ -38,6 +38,12 @@ const StyledBody = styled.div`
     max-height: 32px;
   }
 
+  .quota_checkbox {
+    svg {
+      margin-right: 8px;
+    }
+  }
+
   .quota_value {
     max-width: fit-content;
     padding: 0;

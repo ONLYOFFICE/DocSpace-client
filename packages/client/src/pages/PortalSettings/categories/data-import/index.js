@@ -86,10 +86,9 @@ const DataImport = ({
 
     if (
       migrationStatus &&
-      migrationStatus.parseResult.users.length +
-        migrationStatus.parseResult.existUsers.length +
-        migrationStatus.parseResult.withoutEmailUsers.length >
-        0
+      migrationStatus.parseResult?.failedArchives &&
+      migrationStatus.parseResult.failedArchives.length === 0 &&
+      !migrationStatus.error
     ) {
       const workspacesEnum = {
         GoogleWorkspace: "google",

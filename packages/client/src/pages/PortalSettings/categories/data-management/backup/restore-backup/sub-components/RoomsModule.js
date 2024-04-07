@@ -48,6 +48,7 @@ const RoomsModule = (props) => {
       onSelectFile={onSelectFile}
       filterParam={FilesSelectorFilterTypes.BackupOnly}
       descriptionText={t("SelectFileInGZFormat")}
+      isSelect
     />
   );
 };

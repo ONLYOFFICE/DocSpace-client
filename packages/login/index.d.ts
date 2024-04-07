@@ -194,21 +194,4 @@ declare global {
     [key: string]: string;
     isBase: boolean;
   }
-
-  type TLogoPath = {
-    light: string;
-    dark?: string;
-  };
-
-  type TLogoSize = {
-    width: number;
-    height: number;
-    isEmpty: boolean;
-  };
-
-  interface ILogoUrl {
-    name: string;
-    path: TLogoPath;
-    size: TLogoSize;
-  }
 }

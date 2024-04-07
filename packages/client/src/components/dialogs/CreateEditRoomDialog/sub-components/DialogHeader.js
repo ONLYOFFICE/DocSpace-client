@@ -42,7 +42,7 @@ const DialogHeader = ({ t, isEdit, isChooseRoomType, onArrowClick }) => {
       ) : (
         <div className="header-with-button">
           <IconButton
-            size="15px"
+            size={17}
             iconName={ArrowPathReactSvgUrl}
             className="sharing_panel-arrow"
             onClick={onArrowClick}

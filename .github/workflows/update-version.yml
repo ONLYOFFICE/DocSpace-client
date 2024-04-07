@@ -1,0 +1,30 @@
+name: Update packages versions
+
+on:
+  create:
+
+jobs:
+  change-version:
+    name: "Update packages versions"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Filter changes and update versions
+        id: update-versions
+        if: (startsWith(github.ref, 'refs/heads/release/') ||
+             startsWith(github.ref, 'refs/heads/hotfix/'))
+        run: |
+          VERSION=$(echo "${GITHUB_REF#refs/heads/}" | sed 's/[^0-9.]*//g')
+          sed -i "s/\"version\": \"[0-9.]*\"/\"version\": \"$VERSION\"/g" packages/*/package.json
+          git diff --exit-code --quiet || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push changes
+        if: steps.update-versions.outputs.changed == 'true'
+        run: |
+          git config --global user.name "ONLYOFFICE"
+          git config --global user.email "${{secrets.MAIL}}"
+          git add .
+          git commit -m "Update version in packages.json"
+          git push

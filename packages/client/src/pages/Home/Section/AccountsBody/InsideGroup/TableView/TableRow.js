@@ -218,7 +218,7 @@ const InsideGroupTableRow = (props) => {
     hideColumns,
     value,
     standalone,
-    openGroupAction,
+    onOpenGroup,
 
     typeAccountsInsideGroupColumnIsEnabled,
     groupAccountsInsideGroupColumnIsEnabled,
@@ -311,9 +311,9 @@ const InsideGroupTableRow = (props) => {
     [item, changeUserType],
   );
 
-  const onOpenGroup = React.useCallback(
-    ({ action, title }) => openGroupAction(action, false, title),
-    [openGroupAction],
+  const onOpenGroupClick = React.useCallback(
+    ({ action, title }) => onOpenGroup(action, false, title),
+    [onOpenGroup],
   );
 
   // const getRoomsOptions = React.useCallback(() => {
@@ -376,7 +376,7 @@ const InsideGroupTableRow = (props) => {
             label: groups[0].name + " ",
           }}
           plusBadgeValue={groups.length - 1}
-          onSelect={onOpenGroup}
+          onSelect={onOpenGroupClick}
           options={groupItems}
           scaled={false}
           directionY="both"
@@ -462,24 +462,8 @@ const InsideGroupTableRow = (props) => {
     [item, onUserContextClick],
   );
 
-  const onRowClick = (e) => {
-    if (
-      e.target.closest(".checkbox") ||
-      e.target.closest(".table-container_row-checkbox") ||
-      e.target.closest(".type-combobox") ||
-      e.target.closest(".groups-combobox") ||
-      e.target.closest(".paid-badge") ||
-      e.target.closest(".pending-badge") ||
-      e.target.closest(".disabled-badge") ||
-      e.detail === 0
-    ) {
-      return;
-    }
+  const onRowClick = (e) => onContentRowClick?.(e, item);
 
-    //console.log("onRowClick");
-
-    onContentRowClick && onContentRowClick(item);
-  };
   const isPaidUser = !standalone && !isVisitor;
   return (
     <StyledWrapper

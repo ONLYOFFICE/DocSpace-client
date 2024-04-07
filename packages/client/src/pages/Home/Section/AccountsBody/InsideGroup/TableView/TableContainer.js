@@ -152,7 +152,6 @@ const Table = ({
   fetchMoreInsideGroupUsers,
   insideGroupFilterTotal,
   hasMoreInsideGroupUsers,
-  openGroupAction,
 }) => {
   const ref = useRef(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -213,7 +212,6 @@ const Table = ({
               emailAccountsInsideGroupColumnIsEnabled
             }
             infoPanelVisible={infoPanelVisible}
-            openGroupAction={openGroupAction}
           />
         ))}
       </TableBody>
@@ -252,7 +250,6 @@ export default inject(
 
     const {
       insideGroupIsLoading,
-      openGroupAction,
       insideGroupFilterTotal,
       hasMoreInsideGroupUsers,
       fetchMoreInsideGroupUsers,
@@ -280,7 +277,6 @@ export default inject(
       fetchMoreInsideGroupUsers,
       insideGroupFilterTotal,
       hasMoreInsideGroupUsers,
-      openGroupAction,
     };
   },
 )(observer(Table));

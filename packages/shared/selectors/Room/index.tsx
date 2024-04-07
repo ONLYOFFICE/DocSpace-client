@@ -224,6 +224,7 @@ const RoomSelector = ({
       loadNextPage={onLoadNextPage}
       isLoading={isFirstLoad.current}
       disableSubmitButton={!selectedItem}
+      alwaysShowFooter
       rowLoader={
         <RowLoader
           isMultiSelect={isMultiSelect}

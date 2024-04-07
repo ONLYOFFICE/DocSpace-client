@@ -73,6 +73,7 @@ const useFilesHelper = ({
   getFilesArchiveError,
   isInit,
   setIsInit,
+  setIsFirstLoad,
 }: UseFilesHelpersProps) => {
   const requestRunning = React.useRef(false);
   const initRef = React.useRef(isInit);
@@ -267,6 +268,7 @@ const useFilesHelper = ({
         setIsRoot(false);
         setIsInit(false);
         setIsNextPageLoading(false);
+        setIsFirstLoad(false);
       };
 
       try {
@@ -299,6 +301,7 @@ const useFilesHelper = ({
           onSetBaseFolderPath([]);
           toastr.error(e as TData);
         }
+        setIsFirstLoad(false);
       }
     },
     [
@@ -313,6 +316,7 @@ const useFilesHelper = ({
       setSelectedTreeNode,
       setIsRoot,
       setIsInit,
+      setIsFirstLoad,
       isRoomsOnly,
       getRoomList,
       onSetBaseFolderPath,

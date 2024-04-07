@@ -160,7 +160,7 @@ const FilesSelector = ({
     setIsFirstLoad,
     showBreadCrumbsLoader,
     showLoader,
-  } = useLoadersHelper({ items, isInit });
+  } = useLoadersHelper();
 
   const { isRoot, setIsRoot, getRootData } = useRootHelper({
     setIsBreadCrumbsLoading,
@@ -172,6 +172,7 @@ const FilesSelector = ({
     setIsNextPageLoading,
     isUserOnly,
     setIsInit,
+    setIsFirstLoad,
   });
 
   const { getRoomList } = useRoomsHelper({
@@ -188,6 +189,7 @@ const FilesSelector = ({
     onSetBaseFolderPath,
     isInit,
     setIsInit,
+    setIsFirstLoad,
   });
 
   const { getFileList } = useFilesHelper({
@@ -212,7 +214,7 @@ const FilesSelector = ({
     rootThirdPartyId,
     getRoomList,
     getIcon,
-
+    setIsFirstLoad,
     setIsSelectedParentFolder,
     roomsFolderId,
     getFilesArchiveError,
@@ -445,13 +447,6 @@ const FilesSelector = ({
   const headerProps: TSelectorHeader = withHeader
     ? { withHeader, headerProps: { headerLabel } }
     : {};
-
-  // const withSearch = withSearchProp
-  //   ? prevWithSearch.current && isFirstLoad
-  //     ? prevWithSearch.current
-  //     : !!searchValue ||
-  //       (!isRoot && items?.length ? items.length > 0 : !isRoot && isFirstLoad)
-  //   : false;
 
   const withSearch = withSearchProp
     ? isRoot

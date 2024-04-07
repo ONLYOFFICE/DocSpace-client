@@ -96,6 +96,7 @@ const toListItem = (
     const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
 
     const isInvited = invitedUsers?.includes(id) || (isRoom && shared);
+
     const isDisabled =
       disableDisabledUsers && status === EmployeeStatus.Disabled;
 
@@ -126,9 +127,10 @@ const toListItem = (
 
     isGroup,
     name: groupName,
+    shared,
   } = item;
 
-  const isInvited = invitedUsers?.includes(id);
+  const isInvited = invitedUsers?.includes(id) || (isRoom && shared);
   const disabledText = isInvited ? t("Common:Invited") : "";
   const userAvatar = "";
 

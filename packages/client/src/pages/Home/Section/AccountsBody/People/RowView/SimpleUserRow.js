@@ -130,9 +130,10 @@ const SimpleUserRow = (props) => {
 
   const isChecked = checkedProps.checked;
 
-  const onRowClick = React.useCallback(() => {
-    onContentRowClick && onContentRowClick(item);
-  }, [item, onContentRowClick]);
+  const onRowClick = React.useCallback(
+    (e) => onContentRowClick?.(e, item),
+    [item, onContentRowClick],
+  );
 
   const onRowContextClick = React.useCallback(
     (rightMouseButtonClick) => {

@@ -363,7 +363,8 @@ const compare = (
   if (
     prevProps.opened === nextProps.opened &&
     prevProps.displayType === nextProps.displayType &&
-    prevProps.isDisabled === nextProps.isDisabled
+    prevProps.isDisabled === nextProps.isDisabled &&
+    prevProps.getData === nextProps.getData
   ) {
     return true;
   }

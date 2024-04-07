@@ -62,7 +62,15 @@ export type TBreadCrumb = {
   label: string;
   isRoom?: boolean;
   minWidth?: string;
-  onClick?: (e: React.MouseEvent, open: boolean, item: TBreadCrumb) => void;
+  onClick?: ({
+    e,
+    open,
+    item,
+  }: {
+    e: React.MouseEvent;
+    open: boolean;
+    item: TBreadCrumb;
+  }) => void;
   roomType?: RoomsType;
 };
 

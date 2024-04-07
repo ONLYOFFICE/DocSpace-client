@@ -278,8 +278,6 @@ class DetailsHelper {
   getAuthorDecoration = (byField = "createdBy") => {
     const onClick = () => this.openUser(this.item[byField], this.navigate);
 
-    console.log("getAuthorDecoration");
-
     const displayName = this.item[byField]?.displayName;
     const name = displayName ? decode(displayName) : "";
 

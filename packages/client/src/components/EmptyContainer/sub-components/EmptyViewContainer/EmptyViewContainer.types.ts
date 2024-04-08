@@ -16,4 +16,5 @@ export type OptionActions = {
   inviteUser: VoidFunction;
   createFormFromFile: VoidFunction;
   onCreateDocumentForm: VoidFunction;
+  uploadPDFForm: VoidFunction;
 };

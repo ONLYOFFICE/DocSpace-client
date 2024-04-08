@@ -23,7 +23,7 @@ const EmptyViewContainer = observer(
     onClickInviteUsers,
     setSelectFileFormRoomDialogVisible,
   }: EmptyViewContainerProps) => {
-    const { t } = useTranslation();
+    const { t } = useTranslation(["EmptyView"]);
     const theme = useTheme();
 
     const inviteUser = useCallback(() => {
@@ -32,6 +32,10 @@ const EmptyViewContainer = observer(
 
     const createFormFromFile = useCallback(() => {
       setSelectFileFormRoomDialogVisible?.(true, FilesSelectorFilterTypes.DOCX);
+    }, [setSelectFileFormRoomDialogVisible]);
+
+    const uploadPDFForm = useCallback(() => {
+      setSelectFileFormRoomDialogVisible?.(true, FilesSelectorFilterTypes.PDF);
     }, [setSelectFileFormRoomDialogVisible]);
 
     const onCreateDocumentForm = useCallback(() => {
@@ -50,8 +54,8 @@ const EmptyViewContainer = observer(
     }, []);
 
     const emptyViewOptions = useMemo(() => {
-      const description = t(getDescription(type));
-      const title = t(getTitle(type));
+      const description = getDescription(type, t);
+      const title = getTitle(type, t);
       const icon = getIcon(type, theme.isBase);
 
       return { description, title, icon };
@@ -63,8 +67,17 @@ const EmptyViewContainer = observer(
           inviteUser,
           createFormFromFile,
           onCreateDocumentForm,
+          uploadPDFForm,
         }),
-      [type, t, inviteUser, createFormFromFile, onCreateDocumentForm, security],
+      [
+        type,
+        t,
+        inviteUser,
+        createFormFromFile,
+        uploadPDFForm,
+        onCreateDocumentForm,
+        security,
+      ],
     );
 
     const { description, title, icon } = emptyViewOptions;

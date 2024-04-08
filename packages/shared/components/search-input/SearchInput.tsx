@@ -53,6 +53,7 @@ const SearchInput = ({
   name,
   isDisabled = false,
   placeholder,
+  onFocus,
   children,
 }: SearchInputProps) => {
   const timerId = React.useRef<null | ReturnType<typeof setTimeout>>(null);
@@ -162,6 +163,7 @@ const SearchInput = ({
         value={inputValue}
         placeholder={placeholder}
         onChange={onInputChange}
+        onFocus={onFocus}
       >
         {children}
       </InputBlock>

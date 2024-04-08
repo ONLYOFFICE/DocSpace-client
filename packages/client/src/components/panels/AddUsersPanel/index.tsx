@@ -30,7 +30,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
-import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
 import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
 
 import { Aside } from "@docspace/shared/components/aside";
@@ -44,7 +43,6 @@ import {
   TAccessRight,
   TSelectorAccessRights,
   TSelectorCancelButton,
-  TSelectorSelectAll,
   TWithTabs,
 } from "@docspace/shared/components/selector/Selector.types";
 import { toastr } from "@docspace/shared/components/toast";
@@ -435,15 +433,6 @@ const AddUsersPanel = ({
     );
   };
 
-  const withSelectAllProps: TSelectorSelectAll = isMultiSelect
-    ? {
-        withSelectAll: isMultiSelect,
-        selectAllLabel: t("Common:AllAccounts"),
-        selectAllIcon: CatalogAccountsReactSvgUrl,
-        onSelectAll: () => {},
-      }
-    : {};
-
   const withAccessRightsProps: TSelectorAccessRights =
     withAccessRights && isMultiSelect
       ? {
@@ -520,7 +509,6 @@ const AddUsersPanel = ({
           submitButtonLabel={t("Common:AddButton")}
           onSubmit={onUsersSelect}
           disableSubmitButton={false}
-          {...withSelectAllProps}
           {...withAccessRightsProps}
           {...withCancelButtonProps}
           emptyScreenImage={emptyScreenImage}

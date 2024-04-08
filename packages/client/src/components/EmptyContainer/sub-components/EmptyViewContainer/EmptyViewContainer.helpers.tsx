@@ -1,8 +1,8 @@
 import React from "react";
 import { RoomsType } from "@docspace/shared/enums";
 
-import WelComeDarkIcon from "PUBLIC_DIR/images/emptyview/welcome.dark.svg";
-import WelComeLightIcon from "PUBLIC_DIR/images/emptyview/welcome.light.svg";
+import WelComeDarkIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.dark.svg";
+import WelComeLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.light.svg";
 
 import CreateNewFormIcon from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
 import CreateFromFormIcon from "PUBLIC_DIR/images/emptyview/create.from.document.form.svg";

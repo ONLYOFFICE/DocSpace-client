@@ -20,15 +20,14 @@ jobs:
         id: update-versions
         run: |
           VERSION=$(echo "${GITHUB_REF#refs/heads/}" | sed 's/[^0-9.]*//g')
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
           sed -i "s/\(\"version\":\).*/\1 \"$VERSION\",/g" packages/*/package.json
           git diff --exit-code --quiet || echo "changed=true" >> $GITHUB_OUTPUT
 
-      - name: Commit and push changes
+      - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
-          author_name: 'ONLYOFFICE'
-          author_email: '${{secrets.MAIL}}'
-          message: 'Update version in package.json'
-          add: '.'
-          cwd: '.'
+          author_name: github-actions[bot]
+          author_email: github-actions[bot]@users.noreply.github.com
+          message: Update version in packages.json for v${{ env.VERSION }}
 

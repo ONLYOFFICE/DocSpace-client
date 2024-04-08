@@ -32,6 +32,7 @@ import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
 
 import { ShareAccessRights } from "../../enums";
+import { LINKS_LIMIT_COUNT } from "../../constants";
 import {
   addExternalLink,
   editExternalLink,
@@ -39,10 +40,12 @@ import {
   getPrimaryLink,
 } from "../../api/files";
 import { TAvailableExternalRights, TFileLink } from "../../api/files/types";
+import { isDesktop } from "../../utils";
 import { copyShareLink } from "../../utils/copy";
 import { TOption } from "../combobox";
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
+import { Tooltip } from "../tooltip";
 import { toastr } from "../toast";
 import { TData } from "../toast/Toast.type";
 import PublicRoomBar from "../public-room-bar";
@@ -292,6 +295,14 @@ const Share = (props: ShareProps) => {
     }
   };
 
+  const getTextTooltip = () => {
+    return (
+      <Text fontSize="12px" noSelect>
+        {t("Files:MaximumNumberOfExternalLinksCreated")}
+      </Text>
+    );
+  };
+
   if (hideSharePanel) return null;
 
   return (
@@ -310,12 +321,23 @@ const Share = (props: ShareProps) => {
               {t("Common:SharedLinks")}
             </Text>
             {fileLinks.length > 0 && (
-              <IconButton
-                className="link-to-viewing-icon"
-                iconName={LinksToViewingIconUrl}
-                onClick={addAdditionalLinks}
-                size={16}
-              />
+              <div data-tooltip-id="file-links-tooltip" data-tip="tooltip">
+                <IconButton
+                  className="link-to-viewing-icon"
+                  iconName={LinksToViewingIconUrl}
+                  onClick={addAdditionalLinks}
+                  size={16}
+                  isDisabled={fileLinks.length >= LINKS_LIMIT_COUNT}
+                />
+                {fileLinks.length >= LINKS_LIMIT_COUNT && (
+                  <Tooltip
+                    float={isDesktop()}
+                    id="file-links-tooltip"
+                    getContent={getTextTooltip}
+                    place="bottom"
+                  />
+                )}
+              </div>
             )}
           </div>
           <LinkRow

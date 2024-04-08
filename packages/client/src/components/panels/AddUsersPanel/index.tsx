@@ -205,6 +205,43 @@ const AddUsersPanel = ({
   const [isInit, setIsInit] = useState(true);
   const [isLoading, setIsLoading] = useLoadingWithTimeout<boolean>(0, true);
   const [activeTabId, setActiveTabId] = useState<string>(PEOPLE_TAB_ID);
+  const [selectedItems, setSelectedItems] = useState<TSelectorItem[]>([]);
+
+  const [itemsList, setItemsList] = useState<TSelectorItem[]>([]);
+  const [searchValue, setSearchValue] = useState("");
+  const [hasNextPage, setHasNextPage] = useState(true);
+  const [isNextPageLoading, setIsNextPageLoading] = useState(false);
+  const [total, setTotal] = useState(0);
+  const totalRef = useRef(0);
+
+  const onSelect = (
+    item: TSelectorItem,
+    isDoubleClick: boolean,
+    doubleClickCallback: () => void,
+  ) => {
+    setSelectedItems((items) => {
+      const includeFile = items.find((el) => el.id === item.id);
+
+      if (includeFile)
+        return isMultiSelect
+          ? items.filter((el) => el.id !== includeFile.id)
+          : [];
+
+      return isMultiSelect ? [...items, item] : [item];
+    });
+    if (isDoubleClick && !isMultiSelect) {
+      doubleClickCallback();
+    }
+  };
+
+  const onSelectAll = () => {
+    if (selectedItems.length === itemsList.length) {
+      return setSelectedItems([]);
+    }
+
+    setSelectedItems(itemsList);
+  };
+
   const accessRight =
     defaultAccess ||
     (isEncrypted ? ShareAccessRights.FullAccess : ShareAccessRights.ReadOnly);
@@ -272,13 +309,6 @@ const AddUsersPanel = ({
   const selectedAccess = accessOptions.filter(
     (access) => access.access === accessRight,
   )[0];
-
-  const [itemsList, setItemsList] = useState<TSelectorItem[]>([]);
-  const [searchValue, setSearchValue] = useState("");
-  const [hasNextPage, setHasNextPage] = useState(true);
-  const [isNextPageLoading, setIsNextPageLoading] = useState(false);
-  const [total, setTotal] = useState(0);
-  const totalRef = useRef(0);
 
   const changeActiveTab = useCallback((tab: number | string) => {
     setActiveTabId(`${tab}`);
@@ -440,7 +470,7 @@ const AddUsersPanel = ({
         withSelectAll: isMultiSelect,
         selectAllLabel: t("Common:AllAccounts"),
         selectAllIcon: CatalogAccountsReactSvgUrl,
-        onSelectAll: () => {},
+        onSelectAll,
       }
     : {};
 
@@ -509,6 +539,7 @@ const AddUsersPanel = ({
             withoutBackButton: false,
             onBackClick,
           }}
+          onSelect={onSelect}
           renderCustomItem={renderCustomItem}
           withSearch
           searchPlaceholder={t("Common:Search")}
@@ -519,7 +550,7 @@ const AddUsersPanel = ({
           isMultiSelect={isMultiSelect}
           submitButtonLabel={t("Common:AddButton")}
           onSubmit={onUsersSelect}
-          disableSubmitButton={false}
+          disableSubmitButton={selectedItems.length === 0}
           {...withSelectAllProps}
           {...withAccessRightsProps}
           {...withCancelButtonProps}

@@ -73,12 +73,27 @@ const StyledLinkRow = styled.div`
   gap: 12px;
   height: 100%;
   background: ${(props) => props.theme.backgroundColor};
+  cursor: pointer;
+
+  .icon-button_svg {
+    cursor: pointer;
+  }
+
+  .create-link-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    padding: 10px;
+    background: ${(props) => props.theme.avatar.icon.background};
+  }
 
   .external-row-link {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
+    color: ${({ theme }) => theme.infoPanel.members.createLink};
   }
 
   .external-row-icons {

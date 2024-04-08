@@ -67,16 +67,11 @@ const LinkRow = ({
   };
 
   return !links?.length ? (
-    <StyledLinkRow>
+    <StyledLinkRow onClick={onAddClick}>
       <StyledSquare>
         <IconButton size={12} iconName={PlusIcon} isDisabled />
       </StyledSquare>
-      <Link
-        type={LinkType.action}
-        isHovered
-        fontWeight={600}
-        onClick={onAddClick}
-      >
+      <Link className="create-and-copy_link" noHover fontWeight={600}>
         {t("Common:CreateAndCopy")}
       </Link>
     </StyledLinkRow>

@@ -474,6 +474,7 @@ const StyledArrowIcon = styled.div<{
   isLoading?: boolean;
   displayArrow?: boolean;
   isOpen?: boolean;
+  isDisabled?: boolean;
 }>`
   display: flex;
   align-self: center;
@@ -482,7 +483,10 @@ const StyledArrowIcon = styled.div<{
 
   .combo-buttons_expander-icon {
     path {
-      fill: ${(props) => props.theme.comboBox.label.selectedColor};
+      fill: ${(props) =>
+        props.isDisabled
+          ? props.theme.comboBox.label.disabledColor
+          : props.theme.comboBox.label.selectedColor};
     }
   }
 

@@ -154,6 +154,7 @@ const ComboButton = (props: ComboButtonProps) => {
         isOpen={isOpen}
         className="combo-buttons_arrow-icon"
         isLoading={isLoading}
+        isDisabled={isDisabled}
       >
         {displayArrow &&
           (comboIcon ? (

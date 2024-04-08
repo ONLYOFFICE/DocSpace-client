@@ -311,6 +311,7 @@ const SectionHeaderContent = (props) => {
     setSelectFileFormRoomDialogVisible,
     deleteRooms,
     setSelection,
+    startUpload,
   } = props;
 
   const navigate = useNavigate();
@@ -359,6 +360,15 @@ const SectionHeaderContent = (props) => {
   const createFormFromFile = () => {
     setSelectFileDialogVisible(true);
   };
+
+  const onFileChange = React.useCallback(
+    (e) => {
+      startUpload(e.target.files, null, t);
+    },
+    [startUpload, t],
+  );
+
+  const onInputClick = React.useCallback((e) => (e.target.value = null), []);
 
   const onShowGallery = () => {
     const initOformFilter = (
@@ -1430,6 +1440,29 @@ const SectionHeaderContent = (props) => {
               />
             </div>
           )}
+          {isFrame && (
+            <>
+              <input
+                id="customFileInput"
+                className="custom-file-input"
+                multiple
+                type="file"
+                style={{ display: "none" }}
+                onChange={onFileChange}
+                onClick={onInputClick}
+              />
+              <input
+                id="customFolderInput"
+                className="custom-file-input"
+                webkitdirectory=""
+                mozdirectory=""
+                type="file"
+                style={{ display: "none" }}
+                onChange={onFileChange}
+                onClick={onInputClick}
+              />
+            </>
+          )}
         </StyledContainer>
       )}
     </Consumer>
@@ -1454,7 +1487,9 @@ export default inject(
     userStore,
     currentTariffStatusStore,
     settingsStore,
+    uploadDataStore,
   }) => {
+    const { startUpload } = uploadDataStore;
     const isOwner = userStore.user?.isOwner;
     const isAdmin = userStore.user?.isAdmin;
     const isCollaborator = userStore.user?.isCollaborator;
@@ -1771,6 +1806,7 @@ export default inject(
       deleteRooms,
       setSelection,
       setShareFolderDialogVisible,
+      startUpload,
     };
   },
 )(

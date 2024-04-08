@@ -173,7 +173,7 @@ const CSP = ({
 
     if (error) setError(null);
 
-    setCSPSettings({ domains, setDefaultIfEmpty: true });
+    setCSPSettings({ domains });
   };
 
   const addDomain = async () => {

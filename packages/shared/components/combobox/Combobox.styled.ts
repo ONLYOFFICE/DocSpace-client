@@ -243,7 +243,6 @@ const StyledComboButton = styled.div<{
 
   ${(props) =>
     !props.noBorder &&
-    !props.type &&
     `
     border:  ${props.theme.comboBox.button.border};
     border-radius: ${props.theme.comboBox.button.borderRadius};

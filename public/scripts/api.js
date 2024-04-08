@@ -37,7 +37,7 @@
     mode: "manager", //TODO: ["manager", "editor", "viewer","room-selector", "file-selector", "system"]
     id: null,
     locale: null,
-    theme: "Base",
+    theme: "System",
     editorType: "desktop", //TODO: ["desktop", "embedded"]
     editorGoBack: true,
     selectorType: "exceptPrivacyTrashArchiveFolders", //TODO: ["roomsOnly", "userFolderOnly", "exceptPrivacyTrashArchiveFolders", "exceptSortedByTagsFolders"]
@@ -85,13 +85,8 @@
       "mode",
     ],
     events: {
-      onSelectCallback: (items) => {
-        alert(items[0].label);
-        window.close();
-      },
-      onCloseCallback: () => {
-        window.close();
-      },
+      onSelectCallback: null,
+      onCloseCallback: null,
       onAppReady: null,
       onAppError: (e) => console.log("onAppError", e),
       onEditorCloseCallback: null,

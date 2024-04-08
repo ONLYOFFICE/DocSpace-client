@@ -46,7 +46,7 @@ const MainButton = (props: MainButtonProps) => {
     hide: (e: React.MouseEvent) => void;
   }>(null);
 
-  const [isOpen, setIsOpen] = useState(opened);
+  const [isOpen, setIsOpen] = useState(opened || false);
 
   const stopAction = (e: React.MouseEvent) => e.preventDefault();
 
@@ -95,7 +95,7 @@ const MainButton = (props: MainButtonProps) => {
               model={model}
               containerRef={ref}
               ref={menuRef}
-              onHide={onHide}
+              //  onHide={onHide}
             />
           </>
         )}

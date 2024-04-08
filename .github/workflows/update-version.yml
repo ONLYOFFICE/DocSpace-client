@@ -2,6 +2,9 @@ name: Update packages versions
 
 on:
   create:
+    branches:
+      - "release/**"
+      - "release/**"
 
 jobs:
   change-version:
@@ -13,8 +16,6 @@ jobs:
 
       - name: Filter changes and update versions
         id: update-versions
-        if: (startsWith(github.ref, 'refs/heads/release/') ||
-             startsWith(github.ref, 'refs/heads/hotfix/'))
         run: |
           VERSION=$(echo "${GITHUB_REF#refs/heads/}" | sed 's/[^0-9.]*//g')
           sed -i "s/\"version\": \"[0-9.]*\"/\"version\": \"$VERSION\"/g" packages/*/package.json

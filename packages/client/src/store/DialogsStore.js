@@ -380,8 +380,6 @@ class DialogsStore {
     this.createMasterForm(fileInfo, {
       extension: COPY_AS[this.selectFileFormRoomFilterParam],
       withoutDialog: true,
-      preview:
-        this.selectFileFormRoomFilterParam === FilesSelectorFilterTypes.PDF,
     });
   };
 

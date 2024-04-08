@@ -35,7 +35,7 @@ import { RowSkeleton } from "../../../skeletons/share";
 import { TFileLink } from "../../../api/files/types";
 import { copyShareLink } from "../../../utils/copy";
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
-import { Link, LinkType } from "../../link";
+import { Link } from "../../link";
 import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
 import { IconButton } from "../../icon-button";
 import { toastr } from "../../toast";

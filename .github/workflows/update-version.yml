@@ -13,19 +13,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: '${{ github.token }}'
 
       - name: Filter changes and update versions
         id: update-versions
         run: |
           VERSION=$(echo "${GITHUB_REF#refs/heads/}" | sed 's/[^0-9.]*//g')
-          sed -i "s/\"version\": \"[0-9.]*\"/\"version\": \"$VERSION\"/g" packages/*/package.json
+          sed -i "s/\(\"version\":\).*/\1 \"$VERSION\",/g" packages/*/package.json
           git diff --exit-code --quiet || echo "changed=true" >> $GITHUB_OUTPUT
 
       - name: Commit and push changes
-        if: steps.update-versions.outputs.changed == 'true'
-        run: |
-          git config --global user.name "ONLYOFFICE"
-          git config --global user.email "${{secrets.MAIL}}"
-          git add .
-          git commit -m "Update version in packages.json"
-          git push
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: 'ONLYOFFICE'
+          author_email: '${{secrets.MAIL}}'
+          message: 'Update version in package.json'
+          add: '.'
+          cwd: '.'
+

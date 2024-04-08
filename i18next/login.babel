@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<babeledit_project be_version="4.1.0" version="1.3">
+<babeledit_project be_version="5.2.0" version="1.3">
 	<!--
 
     BabelEdit project file
@@ -26,7 +26,6 @@
 								<name>ErrorConfirmURLError</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -150,7 +149,6 @@
 								<name>ErrorExpiredActivationLink</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -274,7 +272,6 @@
 								<name>ErrorInvalidActivationLink</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -398,7 +395,6 @@
 								<name>ErrorNotAllowedOption</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -522,7 +518,6 @@
 								<name>ErrorUserNotFound</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -646,7 +641,6 @@
 								<name>InvalidUsernameOrPassword</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -770,7 +764,6 @@
 								<name>LoginWithAccountNotFound</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -894,7 +887,6 @@
 								<name>LoginWithBruteForce</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1018,7 +1010,6 @@
 								<name>LoginWithBruteForceCaptcha</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1142,7 +1133,6 @@
 								<name>RecaptchaInvalid</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1266,7 +1256,6 @@
 								<name>SsoAttributesNotFound</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1390,7 +1379,6 @@
 								<name>SsoAuthFailed</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1514,7 +1502,6 @@
 								<name>SsoError</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1638,7 +1625,6 @@
 								<name>SsoSettingsCantCreateUser</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1762,7 +1748,6 @@
 								<name>SsoSettingsDisabled</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1886,7 +1871,6 @@
 								<name>SsoSettingsEmptyToken</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2010,7 +1994,6 @@
 								<name>SsoSettingsNotValidToken</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2134,7 +2117,6 @@
 								<name>SsoSettingsUserTerminated</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2263,7 +2245,6 @@
 								<name>CodeSubtitle</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2387,7 +2368,6 @@
 								<name>CodeTitle</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2511,7 +2491,6 @@
 								<name>CookieSettingsTitle</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2635,7 +2614,6 @@
 								<name>ErrorInvalidText</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2759,7 +2737,6 @@
 								<name>ExpiredCode</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2883,7 +2860,6 @@
 								<name>ForgotPassword</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -3007,7 +2983,6 @@
 								<name>InvalidCode</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -3131,7 +3106,6 @@
 								<name>MessageAuthorize</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -3255,7 +3229,6 @@
 								<name>MessageEmailConfirmed</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -3379,7 +3352,6 @@
 								<name>MessageSendPasswordRecoveryInstructionsOnEmail</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -3503,7 +3475,6 @@
 								<name>NotFoundCode</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -3627,7 +3598,6 @@
 								<name>PasswordRecoveryTitle</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -3751,7 +3721,6 @@
 								<name>RecoverAccess</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -3875,7 +3844,6 @@
 								<name>RecoverContactEmailPlaceholder</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -3999,7 +3967,6 @@
 								<name>RecoverTextBody</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -4123,7 +4090,6 @@
 								<name>Register</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -4247,7 +4213,6 @@
 								<name>RegisterTextBodyAfterDomainsList</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -4371,7 +4336,6 @@
 								<name>RegisterTextBodyBeforeDomainsList</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -4495,7 +4459,6 @@
 								<name>RegisterTitle</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -4619,7 +4582,6 @@
 								<name>RegistrationEmailWatermark</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -4743,7 +4705,6 @@
 								<name>RememberHelper</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -4867,7 +4828,6 @@
 								<name>ResendCode</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -4991,7 +4951,6 @@
 								<name>UserIsAlreadyRegistered</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -5346,6 +5305,7 @@
 				<code_for_machine_translation/>
 			</custom_language>
 		</custom_languages>
+		<id_extractor_ignores/>
 	</editor_configuration>
 	<primary_language>en-US</primary_language>
 	<configuration>

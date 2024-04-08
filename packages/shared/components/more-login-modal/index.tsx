@@ -60,6 +60,7 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.aside}
+      withBodyScroll
     >
       <ModalDialog.Header>{t("Common:ContinueWith")}</ModalDialog.Header>
       <ModalDialog.Body>

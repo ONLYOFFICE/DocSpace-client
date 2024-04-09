@@ -744,6 +744,17 @@
     }
 
     /**
+     * Initializes the manager mode.
+     * @param {Object} config - The configuration object.
+     * @returns {Promise} A promise that resolves when the frame is initialized.
+     */
+    initManager(config = {}) {
+      config.mode = "manager";
+
+      return this.initFrame(config);
+    }
+
+    /**
      * Sets the loaded state of the target frame and removes the loader element.
      */
     setIsLoaded() {
@@ -759,6 +770,62 @@
 
         if (loader) loader.remove();
       }
+    }
+
+    /**
+     * Initializes the editor.
+     * @param {Object} config - The configuration object for the editor.
+     * @returns {Object} - The initialized frame object.
+     */
+    initEditor(config = {}) {
+      config.mode = "editor";
+
+      return this.initFrame(config);
+    }
+
+    /**
+     * Initializes the viewer mode.
+     * @param {Object} config - The configuration object.
+     * @returns {Promise} A promise that resolves when the viewer is initialized.
+     */
+    initViewer(config = {}) {
+      config.mode = "viewer";
+
+      return this.initFrame(config);
+    }
+
+    /**
+     * Initializes the room selector.
+     *
+     * @param {Object} config - The configuration object.
+     * @returns {Object} - The initialized frame.
+     */
+    initRoomSelector(config = {}) {
+      config.mode = "room-selector";
+
+      return this.initFrame(config);
+    }
+
+    /**
+     * Initializes the file selector mode.
+     * @param {Object} config - The configuration object.
+     * @returns {Object} - The initialized frame.
+     */
+    initFileSelector(config = {}) {
+      config.mode = "file-selector";
+
+      return this.initFrame(config);
+    }
+
+    /**
+     * Initializes the system with the given configuration.
+     * @param {Object} config - The configuration object.
+     * @returns {Promise} A promise that resolves when the system is initialized.
+     */
+    initSystem(config = {}) {
+      config.mode = "system";
+
+      return this.initFrame(config);
     }
 
     /**
@@ -1066,9 +1133,11 @@
      * @returns {DocSpace} The initialized DocSpace instance.
      */
     initEditor = (config = {}) => {
-      config.mode = "editor";
+      const instance = new DocSpace(config);
 
-      return this.initFrame(config);
+      instance.initEditor(config);
+
+      return instance;
     };
 
     /**
@@ -1077,9 +1146,11 @@
      * @returns {DocSpace} - The initialized DocSpace instance.
      */
     initViewer = (config = {}) => {
-      config.mode = "viewer";
+      const instance = new DocSpace(config);
 
-      return this.initFrame(config);
+      instance.initViewer(config);
+
+      return instance;
     };
 
     /**
@@ -1089,9 +1160,11 @@
      * @returns {DocSpace} The instance of the DocSpace class.
      */
     initRoomSelector = (config = {}) => {
-      config.mode = "room-selector";
+      const instance = new DocSpace(config);
 
-      return this.initFrame(config);
+      instance.initRoomSelector(config);
+
+      return instance;
     };
 
     /**
@@ -1101,9 +1174,11 @@
      * @returns {DocSpace} The initialized DocSpace instance.
      */
     initFileSelector = (config = {}) => {
-      config.mode = "file-selector";
+      const instance = new DocSpace(config);
 
-      return this.initFrame(config);
+      instance.initFileSelector(config);
+
+      return instance;
     };
 
     /**
@@ -1112,9 +1187,11 @@
      * @returns {DocSpace} The initialized DocSpace instance.
      */
     initManager = (config = {}) => {
-      config.mode = "manager";
+      const instance = new DocSpace(config);
 
-      return this.initFrame(config);
+      instance.initManager(config);
+
+      return instance;
     };
 
     /**
@@ -1124,9 +1201,11 @@
      * @returns {DocSpace} - The initialized DocSpace instance.
      */
     initSystem = (config = {}) => {
-      config.mode = "system";
+      const instance = new DocSpace(config);
 
-      return this.initFrame(config);
+      instance.initSystem(config);
+
+      return instance;
     };
   }
 

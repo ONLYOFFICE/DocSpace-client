@@ -362,15 +362,12 @@ class DialogsStore {
   };
 
   createMasterForm = async (fileInfo) => {
-    let newTitle = fileInfo.title;
-    newTitle = newTitle.substring(0, newTitle.lastIndexOf("."));
-
     const event = new Event(Events.CREATE);
 
     const payload = {
       extension: "docxf",
       id: -1,
-      title: `${newTitle}.docxf`,
+      title: fileInfo.title,
       templateId: fileInfo.id,
     };
 

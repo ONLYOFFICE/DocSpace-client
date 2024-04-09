@@ -62,8 +62,6 @@ const RoomsItemHeader = ({
 
   if (!selection) return null;
 
-  console.log(selection);
-
   const icon = selection.icon;
   const isLoadedRoomIcon = !!selection.logo?.medium;
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;

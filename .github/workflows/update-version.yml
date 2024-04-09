@@ -26,5 +26,5 @@ jobs:
         with:
           author_name: github-actions[bot]
           author_email: github-actions[bot]@users.noreply.github.com
-          message: Update version in packages.json for v${{ env.VERSION }}
+          message: Update version in packages.json to v${{ env.VERSION }}
 

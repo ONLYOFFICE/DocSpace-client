@@ -243,9 +243,9 @@ const useFilesHelper = ({
             },
           );
 
-          breadCrumbs.forEach((item, idx) => {
-            if (item.roomType) breadCrumbs[idx].isRoom = true;
-          });
+          // breadCrumbs.forEach((item, idx) => {
+          //   if (item.roomType) breadCrumbs[idx].isRoom = true;
+          // });
 
           if (!isThirdParty && !isRoomsOnly)
             breadCrumbs.unshift({ ...DEFAULT_BREAD_CRUMB });

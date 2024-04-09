@@ -245,6 +245,7 @@ const FilesSelector = ({
         ]);
         setSelectedItemId(item.id);
         setSearchValue("");
+        setSelectedFileInfo(null);
 
         if (item.parentId === 0 && item.rootFolderType === FolderType.Rooms) {
           setSelectedItemType("rooms");

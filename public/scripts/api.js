@@ -1027,7 +1027,7 @@
    * @class
    */
   class DocSpaceSDK {
-    frames = [];
+    frames = {};
 
     /**
      * Initializes a new instance of the DocSpace class and initializes the frame.
@@ -1134,7 +1134,7 @@
 
   const config = getConfigFromParams();
 
-  window.DocSpace.SDK = new DocSpaceSDK();
+  window.DocSpace.SDK = window.DocSpace.SDK || new DocSpaceSDK();
 
   if (config.init) {
     config?.isButtonMode

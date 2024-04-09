@@ -676,10 +676,6 @@
         this.#isConnected = true;
       }
 
-      window.DocSpace.SDK.frames = window.DocSpace.SDK.frames || [];
-
-      window.DocSpace.SDK.frames[this.config.frameId] = this;
-
       return button;
     }
 
@@ -738,10 +734,6 @@
 
         this.#isConnected = true;
       }
-
-      window.DocSpace.SDK.frames = window.DocSpace.SDK.frames || [];
-
-      window.DocSpace.SDK.frames[this.config.frameId] = this;
 
       return iframe;
     }
@@ -1042,6 +1034,8 @@
 
       instance.initFrame(config);
 
+      frames[config.frameId] = instance;
+
       return instance;
     };
 
@@ -1055,6 +1049,8 @@
 
       instance.initButton(config);
 
+      frames[config.frameId] = instance;
+
       return instance;
     };
 
@@ -1067,11 +1063,7 @@
     initEditor = (config = {}) => {
       config.mode = "editor";
 
-      const instance = new DocSpace(config);
-
-      instance.initFrame(config);
-
-      return instance;
+      return this.initFrame(config);
     };
 
     /**
@@ -1082,11 +1074,7 @@
     initViewer = (config = {}) => {
       config.mode = "viewer";
 
-      const instance = new DocSpace(config);
-
-      instance.initFrame(config);
-
-      return instance;
+      return this.initFrame(config);
     };
 
     /**
@@ -1098,11 +1086,7 @@
     initRoomSelector = (config = {}) => {
       config.mode = "room-selector";
 
-      const instance = new DocSpace(config);
-
-      instance.initFrame(config);
-
-      return instance;
+      return this.initFrame(config);
     };
 
     /**
@@ -1114,11 +1098,7 @@
     initFileSelector = (config = {}) => {
       config.mode = "file-selector";
 
-      const instance = new DocSpace(config);
-
-      instance.initFrame(config);
-
-      return instance;
+      return this.initFrame(config);
     };
 
     /**
@@ -1129,11 +1109,7 @@
     initManager = (config = {}) => {
       config.mode = "manager";
 
-      const instance = new DocSpace(config);
-
-      instance.initFrame(config);
-
-      return instance;
+      return this.initFrame(config);
     };
 
     /**
@@ -1145,11 +1121,7 @@
     initSystem = (config = {}) => {
       config.mode = "system";
 
-      const instance = new DocSpace(config);
-
-      instance.initFrame(config);
-
-      return instance;
+      return this.initFrame(config);
     };
   }
 
@@ -1157,9 +1129,7 @@
 
   const config = getConfigFromParams();
 
-  window.DocSpace.SDK = new DocSpaceSDK(); //new DocSpace(config); //TODO: remove
-
-  //window.DocSpace.InstanceClass = DocSpace;
+  window.DocSpace.SDK = new DocSpaceSDK();
 
   if (config.init) {
     config?.isButtonMode

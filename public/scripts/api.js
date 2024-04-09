@@ -307,8 +307,8 @@
       const logoSrc = `${config.src}/static/images/light_small_logo.react.svg`;
 
       button.innerHTML = `${config?.buttonWithLogo ? `<img width="16px" heigth="16px" src="${logoSrc}" />` : ""}${config?.buttonText || "Select to DocSpace"}`;
-
-      const scriptUrl = `${window.location.origin}/static/scripts/api.js`;
+      const url = new URL(window.location.href);
+      const scriptUrl = `${url.protocol}//${url.hostname}/static/scripts/api.js`;
 
       const configStringify = JSON.stringify(config, function (key, val) {
         return typeof val === "function" ? "" + val : val;
@@ -321,7 +321,6 @@
           <html>
               <head>
                   <meta charset="UTF-8">
-                  <script src="${scriptUrl}"></script>
                   <title>DocSpace</title>
 
                   <style>
@@ -354,7 +353,13 @@
                       onAuthSuccess: eval(${config.events.onAuthSuccess + ""}),
                       onSignOut: eval(${config.events.onSignOut + ""}),
                     }}
-                    window.DocSpace.SDK.initFrame(config)
+                    
+                    const script = document.createElement("script");
+                    
+                    script.setAttribute("src", "${scriptUrl}");
+                    script.onload = () => window.DocSpace.SDK.initFrame(config);
+                    
+                    document.body.appendChild(script);
                   </script>
               </body>
           </html>`;

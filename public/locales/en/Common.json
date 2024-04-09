@@ -228,6 +228,7 @@
   "MakeForm": "Save as PDF form",
   "ManageStorageQuota": "Manage storage quota",
   "ManyEmails": "Too many email addresses parsed",
+  "MaximumNumberOfExternalLinksCreated": "Maximum number of external links created",
   "MaxLengthExceeded": "The maximum length of a user name or another local part is 64 characters.",
   "MediaError": "Media URL could not be loaded",
   "Megabyte": "MB",

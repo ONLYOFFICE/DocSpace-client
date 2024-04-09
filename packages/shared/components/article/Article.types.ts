@@ -26,7 +26,6 @@
 
 import { TColorScheme } from "../../themes";
 import { DeviceType } from "../../enums";
-import { TWhiteLabel } from "../../utils/whiteLabelHelper";
 import { TUser } from "../../api/people/types";
 import { TTranslation } from "../../types";
 
@@ -42,7 +41,6 @@ export interface ArticleHeaderProps {
   onClick?: () => void;
   onLogoClickAction?: () => void;
   isBurgerLoading: boolean;
-  whiteLabelLogoUrls: TWhiteLabel[];
   withCustomArticleHeader: boolean;
   currentDeviceType: DeviceType;
 }
@@ -123,7 +121,6 @@ export interface ArticleProps {
 
   onArticleHeaderClick?: () => void;
   isBurgerLoading: boolean;
-  whiteLabelLogoUrls: TWhiteLabel[];
 
   languageBaseName: string;
   zendeskEmail: string;

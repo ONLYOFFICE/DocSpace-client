@@ -84,7 +84,7 @@ const SharingDialog = ({
         withoutBackground={false}
         withoutBlur={false}
       />
-      <Aside visible={isVisible} onClose={onCancel} withoutBodyScroll>
+      <Aside visible={isVisible} onClose={onCancel}>
         <StyledWrapper>
           <div className="share-file_header">
             <Text className="share-file_heading">{t("Common:Share")}</Text>

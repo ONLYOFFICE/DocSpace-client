@@ -73,6 +73,7 @@ const useFilesHelper = ({
   getFilesArchiveError,
   isInit,
   setIsInit,
+  setIsFirstLoad,
 }: UseFilesHelpersProps) => {
   const requestRunning = React.useRef(false);
   const initRef = React.useRef(isInit);
@@ -246,9 +247,9 @@ const useFilesHelper = ({
             },
           );
 
-          breadCrumbs.forEach((item, idx) => {
-            if (item.roomType) breadCrumbs[idx].isRoom = true;
-          });
+          // breadCrumbs.forEach((item, idx) => {
+          //   if (item.roomType) breadCrumbs[idx].isRoom = true;
+          // });
 
           if (!isThirdParty && !isRoomsOnly)
             breadCrumbs.unshift({ ...DEFAULT_BREAD_CRUMB });
@@ -271,6 +272,7 @@ const useFilesHelper = ({
         setIsRoot(false);
         setIsInit(false);
         setIsNextPageLoading(false);
+        setIsFirstLoad(false);
       };
 
       try {
@@ -303,6 +305,7 @@ const useFilesHelper = ({
           onSetBaseFolderPath([]);
           toastr.error(e as TData);
         }
+        setIsFirstLoad(false);
       }
     },
     [
@@ -317,6 +320,7 @@ const useFilesHelper = ({
       setSelectedTreeNode,
       setIsRoot,
       setIsInit,
+      setIsFirstLoad,
       isRoomsOnly,
       getRoomList,
       onSetBaseFolderPath,

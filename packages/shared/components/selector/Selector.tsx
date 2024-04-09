@@ -46,7 +46,6 @@ import {
   TSelectorFooterCheckbox,
   TWithTabs,
   TSelectorInfo,
-  TBreadCrumb,
 } from "./Selector.types";
 
 const Selector = ({
@@ -97,6 +96,7 @@ const Selector = ({
   accessRights,
   selectedAccessRight,
   onAccessRightsChange,
+  accessRightsMode,
 
   withFooterInput,
   footerInputHeader,
@@ -480,6 +480,7 @@ const Selector = ({
         accessRights,
         selectedAccessRight: selectedAccess,
         onAccessRightsChange: onChangeAccessRightsAction,
+        accessRightsMode,
       }
     : ({} as TSelectorAccessRights);
 

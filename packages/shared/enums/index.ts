@@ -337,6 +337,7 @@ export const enum Events {
   CHANGE_USER_TYPE = "change_user_type",
   CHANGE_QUOTA = "change_quota",
   CREATE_PLUGIN_FILE = "create_plugin_file",
+  CREATE_PDF_FORM_FILE = "create_pdf_form_file",
 }
 
 /**

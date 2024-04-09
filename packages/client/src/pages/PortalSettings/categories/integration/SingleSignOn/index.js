@@ -72,7 +72,7 @@ const SingleSignOn = (props) => {
     >
       <ToggleSSO isSSOAvailable={isSSOAvailable} />
       {isMobileView ? (
-        <MobileView />
+        <MobileView isSSOAvailable={isSSOAvailable} />
       ) : (
         <>
           <HideButton

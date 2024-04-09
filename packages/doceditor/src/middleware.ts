@@ -29,11 +29,10 @@ import type { NextRequest } from "next/server";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
-  return NextResponse.redirect(new URL("/doceditor", request.url));
+  return NextResponse.json({ status: "healthy" }, { status: 200 });
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: "/",
+  matcher: "/health",
 };
-

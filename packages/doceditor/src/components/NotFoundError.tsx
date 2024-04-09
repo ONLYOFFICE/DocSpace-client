@@ -27,8 +27,17 @@
 "use client";
 
 import React from "react";
+import dynamic from "next/dynamic";
 
-import Error404 from "@docspace/shared/components/errors/Error404";
+import AppLoader from "@docspace/shared/components/app-loader";
+
+const Error404 = dynamic(
+  () => import("@docspace/shared/components/errors/Error404"),
+  {
+    ssr: false,
+    loading: () => <AppLoader />,
+  },
+);
 
 const NotFoundError = ({}) => {
   return <Error404 />;

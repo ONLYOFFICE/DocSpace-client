@@ -88,7 +88,6 @@ const Root = ({
   });
 
   const { currentDeviceType } = useDeviceType();
-  const { logoUrls } = useWhiteLabel();
   const { isShowDeepLink, setIsShowDeepLink } = useDeepLink({
     settings,
     fileInfo,
@@ -145,7 +144,6 @@ const Root = ({
   ) : isShowDeepLink ? (
     <DeepLink
       fileInfo={fileInfo}
-      logoUrls={logoUrls}
       userEmail={user?.email}
       currentDeviceType={currentDeviceType}
       deepLinkConfig={settings?.deepLink}

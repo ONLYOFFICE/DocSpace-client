@@ -1439,7 +1439,7 @@ export const getBaseTheme = () => {
       zIndex: "400",
       background: white,
       borderRadius: "6px",
-      boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.13)",
+      boxShadow: "0px 8px 16px 0px #040F1B14",
       border: "none",
     },
 
@@ -1670,7 +1670,7 @@ export const getBaseTheme = () => {
         flex: "0 0 6px",
         marginTopWithBorder: "5px",
         marginTop: "12px",
-        marginRight: "8px",
+        marginRight: "5px",
         marginLeft: "auto",
       },
 
@@ -1710,7 +1710,7 @@ export const getBaseTheme = () => {
       },
 
       label: {
-        marginRightWithBorder: "8px",
+        marginRightWithBorder: "13px",
         marginRight: "4px",
 
         disabledColor: grayMid,
@@ -2023,7 +2023,7 @@ export const getBaseTheme = () => {
       expanderColor: black,
       background: white,
       rootFolderTitleColor: "#A3A9AE",
-      boxShadow: " 0px 12px 40px 0px #040F1B1F",
+      boxShadow: "0px 8px 16px 0px #040F1B14",
 
       icon: {
         fill: "#316DAA",
@@ -2786,7 +2786,7 @@ export const getBaseTheme = () => {
       background: white,
       borderRadius: "6px",
       mobileBorderRadius: "6px 6px 0 0",
-      boxShadow: "0px 12px 40px rgba(4, 15, 27, 0.12)",
+      boxShadow: "0px 8px 16px 0px #040F1B14",
       padding: "6px 0px",
       border: "none",
       devices: {

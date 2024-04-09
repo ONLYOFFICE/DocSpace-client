@@ -51,14 +51,12 @@ const ErrorProvider = ({ children, user, settings }: TErrorProvider) => {
     settings?.firebase ?? ({} as TFirebaseSettings),
   );
   const { currentDeviceType } = useDeviceType();
-  const { logoUrls } = useWhiteLabel();
   return (
     <ErrorBoundary
       user={user ?? ({} as TUser)}
       version={pkgFile.version}
       firebaseHelper={firebaseHelper}
       currentDeviceType={currentDeviceType}
-      whiteLabelLogoUrls={logoUrls}
     >
       {children}
     </ErrorBoundary>
@@ -66,3 +64,4 @@ const ErrorProvider = ({ children, user, settings }: TErrorProvider) => {
 };
 
 export default ErrorProvider;
+

@@ -29,16 +29,8 @@ import { inject, observer } from "mobx-react";
 import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
 import type { DocspaceLogoProps } from "@docspace/shared/components/docspace-logo/DocspaceLogo.types";
 
-const DocspaceLogoWrapper = ({
-  whiteLabelLogoUrls,
-  className,
-}: Partial<DocspaceLogoProps>) => {
-  return (
-    <DocspaceLogo
-      whiteLabelLogoUrls={whiteLabelLogoUrls!}
-      className={className}
-    />
-  );
+const DocspaceLogoWrapper = ({ className }: Partial<DocspaceLogoProps>) => {
+  return <DocspaceLogo className={className} />;
 };
 
 export default inject<TStore>(({ settingsStore }) => {

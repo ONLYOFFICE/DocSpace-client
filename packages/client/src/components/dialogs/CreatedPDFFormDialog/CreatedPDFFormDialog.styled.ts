@@ -24,34 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import styled from "styled-components";
 
-import { getLogoUrls } from "@docspace/shared/api/settings";
-import { TWhiteLabel } from "@docspace/shared/utils/whiteLabelHelper";
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 
-const useWhiteLabel = () => {
-  const [logoUrls, setLogoUrls] = React.useState<TWhiteLabel[]>([]);
-
-  const requestRunning = React.useRef(false);
-  const alreadyFetched = React.useRef(false);
-
-  const fetchWhiteLabel = React.useCallback(async () => {
-    if (alreadyFetched.current) return;
-
-    requestRunning.current = true;
-    const urls = await getLogoUrls();
-    requestRunning.current = false;
-
-    setLogoUrls(urls);
-    alreadyFetched.current = true;
-  }, []);
-
-  React.useEffect(() => {
-    fetchWhiteLabel();
-  }, [fetchWhiteLabel]);
-
-  return { logoUrls };
-};
-
-export default useWhiteLabel;
-
+  > svg {
+    align-self: center;
+  }
+`;

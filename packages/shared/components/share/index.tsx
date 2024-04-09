@@ -298,7 +298,7 @@ const Share = (props: ShareProps) => {
   const getTextTooltip = () => {
     return (
       <Text fontSize="12px" noSelect>
-        {t("Files:MaximumNumberOfExternalLinksCreated")}
+        {t("Common:MaximumNumberOfExternalLinksCreated")}
       </Text>
     );
   };

@@ -336,7 +336,7 @@ const FileSelector = (props) => {
         filterParam:
           e.target.value === FilesSelectorFilterTypes.ALL
             ? FilesSelectorFilterTypes.ALL
-            : selectedType,
+            : selectedType.key,
       };
     });
   };

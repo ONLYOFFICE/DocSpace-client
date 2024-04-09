@@ -681,6 +681,10 @@
         this.#isConnected = true;
       }
 
+      window.DocSpace.SDK.frames = window.DocSpace.SDK.frames || [];
+
+      window.DocSpace.SDK.frames[this.config.frameId] = this;
+
       return button;
     }
 
@@ -739,6 +743,10 @@
 
         this.#isConnected = true;
       }
+
+      window.DocSpace.SDK.frames = window.DocSpace.SDK.frames || [];
+
+      window.DocSpace.SDK.frames[this.config.frameId] = this;
 
       return iframe;
     }
@@ -1106,8 +1114,6 @@
 
       instance.initFrame(config);
 
-      this.frames[config.frameId] = instance;
-
       return instance;
     };
 
@@ -1120,8 +1126,6 @@
       const instance = new DocSpace(config);
 
       instance.initButton(config);
-
-      this.frames[config.frameId] = instance;
 
       return instance;
     };

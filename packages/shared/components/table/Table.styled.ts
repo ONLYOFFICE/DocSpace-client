@@ -169,18 +169,24 @@ const StyledTableGroupMenu = styled.div<{ checkboxMargin?: string }>`
   .table-container_group-menu-checkbox {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
-        ? `
-        margin-right: 28px;
-        ${props.checkboxMargin && `margin-right: ${props.checkboxMargin};`}`
-        : `
-        margin-left: 28px;
-        ${props.checkboxMargin && `margin-left: ${props.checkboxMargin};`}`}
+        ? css`
+            margin-right: 28px;
+            ${props.checkboxMargin && `margin-right: ${props.checkboxMargin};`}
+          `
+        : css`
+            margin-left: 28px;
+            ${props.checkboxMargin && `margin-left: ${props.checkboxMargin};`}
+          `}
 
     @media ${tablet} {
       ${({ theme }) =>
         theme.interfaceDirection === "rtl"
-          ? `margin-right: 24px;`
-          : `margin-left: 24px;`}
+          ? css`
+              margin-right: 24px;
+            `
+          : css`
+              margin-left: 24px;
+            `}
     }
   }
 

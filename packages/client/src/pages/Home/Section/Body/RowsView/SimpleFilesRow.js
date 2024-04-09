@@ -152,10 +152,10 @@ const StyledSimpleFilesRow = styled(Row)`
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            margin-left: 7px;
+            margin-left: 12px;
           `
         : css`
-            margin-right: 7px;
+            margin-right: 12px;
           `}
   }
 

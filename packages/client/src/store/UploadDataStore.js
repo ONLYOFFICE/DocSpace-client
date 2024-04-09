@@ -938,7 +938,12 @@ class UploadDataStore {
     } = chunkUploadObj;
 
     if (!res.data.data && res.data.message) {
-      return reject(res.data.message);
+      return reject({
+        message: res.data.message,
+        chunkIndex: index,
+        chunkSize: fileSize,
+        isFinalize,
+      });
     }
 
     const { uploaded, id: fileId, file: fileInfo } = res.data.data;
@@ -1451,8 +1456,16 @@ class UploadDataStore {
 
         this.files[indexOfFile].error = errorMessage;
 
+        const index = error?.chunkIndex ?? 0;
+
+        const uploadedSize = error?.isFinalize
+          ? 0
+          : fileSize <= chunkUploadSize
+            ? fileSize
+            : fileSize - index * chunkUploadSize;
+
         const newPercent = this.isParallel
-          ? this.getFilesPercent(fileSize)
+          ? this.getFilesPercent(uploadedSize)
           : this.getNewPercent(fileSize, indexOfFile);
 
         this.primaryProgressDataStore.setPrimaryProgressBarData({

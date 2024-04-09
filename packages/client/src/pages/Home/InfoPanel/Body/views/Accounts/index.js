@@ -272,7 +272,7 @@ const Accounts = (props) => {
           {infoPanelSelection?.groups?.length && (
             <>
               <Text
-                className={"info_field info_field_groups"}
+                className={`info_field info_field_groups`}
                 noSelect
                 title={t("Common:Group")}
               >

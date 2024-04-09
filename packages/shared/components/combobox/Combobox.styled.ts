@@ -302,7 +302,7 @@ const StyledComboButton = styled.div<{
       border-color: ${props.theme.comboBox.button.hoverDisabledBorderColor};
     `}
 
-    ${(props) => props.modernView && hoverModernViewButton}
+    ${(props) => props.modernView && !props.isDisabled && hoverModernViewButton}
 
       
       ${({ fillIcon }) =>

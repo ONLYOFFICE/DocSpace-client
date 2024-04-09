@@ -63,7 +63,7 @@
   "LimitByTime": "Ierobežojums pēc laika perioda",
   "LinkSettings": "Šī saite ir aizsargāta ar {{parameter}}. Lai konfigurētu saiti,",
   "LinkSettings2": "{{parameter1}} un {{parameter2}} ir iestatīts šai saitei. Lai to konfigurētu,",
-  "LinkSettings3": "{{parameter1}}, {{parameter2}} un {{parameter2}} ir iestatīts šai saitei. Lai to konfigurētu,",
+  "LinkSettings3": "{{parameter1}}, {{parameter2}} un {{parameter3}} ir iestatīts šai saitei. Lai to konfigurētu,",
   "Logo": "Logotips",
   "MainElementParameter": "Galvenā elementa parametrs",
   "ManagerSearchBlockDescription": "Varat atspējot meklēšanas, filtrēšanas un kārtošanas opcijas.",

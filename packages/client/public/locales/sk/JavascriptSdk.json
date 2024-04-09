@@ -63,7 +63,7 @@
   "LimitByTime": "Obmedziť podľa časového rozpätia",
   "LinkSettings": "Tento odkaz je chránený pomocou {{parameter}}. Pre konfiguráciu odkazu,",
   "LinkSettings2": "Pre tento odkaz sú nastavené {{parameter1}} a {{parameter2}}. Pre konfiguráciu",
-  "LinkSettings3": "Pre tento odkaz sú nastavené {{parameter1}}, {{parameter2}} a {{parameter2}}. Pre konfiguráciu",
+  "LinkSettings3": "Pre tento odkaz sú nastavené {{parameter1}}, {{parameter2}} a {{parameter3}}. Pre konfiguráciu",
   "Logo": "Logo",
   "MainElementParameter": "Parameter hlavného prvku",
   "ManagerSearchBlockDescription": "Môžete deaktivovať možnosti vyhľadávania, filtrovania a triedenia.",

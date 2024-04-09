@@ -63,7 +63,7 @@
   "LimitByTime": "Ограничи по времеви период",
   "LinkSettings": "Този линк е защитен с {{parameter}}. За да конфигурирате линка,",
   "LinkSettings2": "За този линк са зададени {{parameter1}} и {{parameter2}}. За да го конфигурирате,",
-  "LinkSettings3": "За този линк са зададени {{parameter1}}, {{parameter2}} и {{parameter2}}. За да го конфигурирате,",
+  "LinkSettings3": "За този линк са зададени {{parameter1}}, {{parameter2}} и {{parameter3}}. За да го конфигурирате,",
   "Logo": "Лого",
   "MainElementParameter": "Основен параметър на елемента",
   "ManagerSearchBlockDescription": "Можете да деактивирате опциите за търсене, филтриране и сортиране.",

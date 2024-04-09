@@ -63,7 +63,7 @@
   "LimitByTime": "Ограничение по времени",
   "LinkSettings": "Эта ссылка защищена при помощи {{parameter}}. Чтобы настроить ссылку,",
   "LinkSettings2": "Для этой ссылки заданы {{parameter1}} и {{parameter2}}. Чтобы настроить,",
-  "LinkSettings3": "Для этой ссылки заданы {{parameter1}}, {{parameter2}} и {{parameter2}}. Чтобы настроить,",
+  "LinkSettings3": "Для этой ссылки заданы {{parameter1}}, {{parameter2}} и {{parameter3}}. Чтобы настроить,",
   "Logo": "Лого",
   "MainElementParameter": "Параметр основного элемента",
   "ManagerSearchBlockDescription": "Вы можете отключить функции поиска, фильтрации и сортировки.",

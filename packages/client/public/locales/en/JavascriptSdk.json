@@ -63,7 +63,7 @@
   "LimitByTime": "Limit by time period",
   "LinkSettings": "This link is protected with a {{parameter}}. To configure the link,",
   "LinkSettings2": "A {{parameter1}} and {{parameter2}} is set for this link. To configure it,",
-  "LinkSettings3": "A {{parameter1}}, {{parameter2}}, and {{parameter2}} is set for this link. To configure it,",
+  "LinkSettings3": "A {{parameter1}}, {{parameter2}}, and {{parameter3}} is set for this link. To configure it,",
   "Logo": "Logo",
   "MainElementParameter": "Main element parameter",
   "ManagerSearchBlockDescription": "You can disable the search, filter and sort options.",

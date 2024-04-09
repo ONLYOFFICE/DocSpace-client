@@ -63,7 +63,7 @@
   "LimitByTime": "기간별 제한",
   "LinkSettings": "이 링크는 {{parameter}}로 보호되어 있습니다. 링크를 구성하려면,",
   "LinkSettings2": "이 링크에는 {{parameter1}} 및 {{parameter2}}가 설정되어 있습니다. 구성하려면,",
-  "LinkSettings3": "이 링크에는 {{parameter1}}, {{parameter2}}, {{parameter2}}가 설정되어 있습니다. 구성하려면,",
+  "LinkSettings3": "이 링크에는 {{parameter1}}, {{parameter2}}, {{parameter3}}가 설정되어 있습니다. 구성하려면,",
   "Logo": "로고",
   "MainElementParameter": "주요 요소 매개변수",
   "ManagerSearchBlockDescription": "검색, 필터, 정렬 옵션을 비활성화할 수 있습니다.",

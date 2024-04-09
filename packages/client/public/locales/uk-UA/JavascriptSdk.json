@@ -63,7 +63,7 @@
   "LimitByTime": "Обмеження за періодом часу",
   "LinkSettings": "Це посилання захищено {{parameter}}. Щоб налаштувати посилання,",
   "LinkSettings2": "Для цього посилання встановлено {{parameter1}} і {{parameter2}}. Щоб налаштувати посилання,",
-  "LinkSettings3": "Для цього посилання встановлено {{parameter1}}, {{parameter2}} і {{parameter2}}. Щоб налаштувати посилання,",
+  "LinkSettings3": "Для цього посилання встановлено {{parameter1}}, {{parameter2}} і {{parameter3}}. Щоб налаштувати посилання,",
   "Logo": "Логотип",
   "MainElementParameter": "Параметр основного елемента",
   "ManagerSearchBlockDescription": "Ви можете вимкнути параметри пошуку, фільтрації та сортування.",

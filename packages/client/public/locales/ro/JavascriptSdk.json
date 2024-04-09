@@ -63,7 +63,7 @@
   "LimitByTime": "Setare limită de timp",
   "LinkSettings": "Acest link este protejat prin {{parameter}}. Pentru a configura link-ul,",
   "LinkSettings2": "Parametrii {{parameter1}} și {{parameter2}} sunt setate pentru acest link. Pentru a configura,",
-  "LinkSettings3": "Parametrii {{parameter1}}, {{parameter2}} și {{parameter2}} sunt setate pentru acest link. Pentru a configura,",
+  "LinkSettings3": "Parametrii {{parameter1}}, {{parameter2}} și {{parameter3}} sunt setate pentru acest link. Pentru a configura,",
   "Logo": "Siglă",
   "MainElementParameter": "Parametru element principal",
   "ManagerSearchBlockDescription": "Puteţi dezactiva opţiunile de căutare, filtrare și sortare.",

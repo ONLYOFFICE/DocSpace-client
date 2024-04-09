@@ -63,7 +63,7 @@
   "LimitByTime": "Giới hạn theo khoảng thời gian",
   "LinkSettings": "Liên kết này được bảo vệ bằng một {{parameter}}. Để định cấu hình liên kết,",
   "LinkSettings2": "Một {{parameter1}} và {{parameter2}} được đặt cho liên kết này. Để định cấu hình,",
-  "LinkSettings3": "Một {{parameter1}}, {{parameter2}}, và {{parameter2}} được đặt cho liên kết này. Để định cấu hình,",
+  "LinkSettings3": "Một {{parameter1}}, {{parameter2}}, và {{parameter3}} được đặt cho liên kết này. Để định cấu hình,",
   "Logo": "Logo",
   "MainElementParameter": "Tham số phần tử chính",
   "ManagerSearchBlockDescription": "Bạn có thể tắt các tùy chọn tìm kiếm, lọc và sắp xếp.",

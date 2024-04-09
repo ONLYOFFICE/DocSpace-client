@@ -63,7 +63,7 @@
   "LimitByTime": "Omejitev na časovno obdobje",
   "LinkSettings": "Ta povezava je zaščitena s parametrom {{parameter}}. Če želite konfigurirati povezavo,",
   "LinkSettings2": "Za to povezavo sta nastavljena {{parameter1}} in {{parameter2}}. Za konfiguriranje",
-  "LinkSettings3": "Za to povezavo so nastavljeni {{parameter1}}, {{parameter2}} in {{parameter2}}. Če jih želite konfigurirati,",
+  "LinkSettings3": "Za to povezavo so nastavljeni {{parameter1}}, {{parameter2}} in {{parameter3}}. Če jih želite konfigurirati,",
   "Logo": "Logo",
   "MainElementParameter": "Glavni parameter elementa",
   "ManagerSearchBlockDescription": "Možnosti iskanja, filtriranja in razvrščanja lahko onemogočite.",

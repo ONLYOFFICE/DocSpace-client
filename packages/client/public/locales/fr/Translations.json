@@ -44,6 +44,7 @@
   "RoleUserDescription": "Les utilisateurs ne peuvent accéder qu’aux salles auxquelles ils sont invités par les administrateurs. Ils ne peuvent pas créer leurs propres salles, dossiers ou fichiers.",
   "RoleViewer": "Lecteur",
   "RoleViewerDescription": "Visualisation de fichiers",
+  "SearchByHeadOfGroup": "Rechercher par Responsable du groupe",
   "SearchByOwner": "Rechercher par propriétaire",
   "Spreadsheets": "Feuilles de calcul",
   "SubNewForm": "Blanc",

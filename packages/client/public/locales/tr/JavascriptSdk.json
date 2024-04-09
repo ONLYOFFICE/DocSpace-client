@@ -63,7 +63,7 @@
   "LimitByTime": "Zaman dilimine göre sınırlama",
   "LinkSettings": "Bu bağlantı bir {{parameter}} ile korunmaktadır. Bağlantıyı yapılandırmak için,",
   "LinkSettings2": "Bu bağlantı için bir {{parameter1}} ve {{parameter2}} ayarlanmıştır. Yapılandırmak için,",
-  "LinkSettings3": "Bu bağlantı için bir {{parameter1}}, {{parameter2}} ve {{parameter2}} ayarlanmıştır. Yapılandırmak için,",
+  "LinkSettings3": "Bu bağlantı için bir {{parameter1}}, {{parameter2}} ve {{parameter3}} ayarlanmıştır. Yapılandırmak için,",
   "Logo": "Logo",
   "MainElementParameter": "Ana eleman parametresi",
   "ManagerSearchBlockDescription": "Arama, filtreleme ve sıralama seçeneklerini devre dışı bırakabilirsiniz.",

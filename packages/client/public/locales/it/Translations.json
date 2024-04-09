@@ -44,6 +44,7 @@
   "RoleUserDescription": "Gli utenti possono accedere solo alle stanze virtuali a cui sono stati invitati dagli amministratori. Non possono creare stanze, cartelle o file propri.",
   "RoleViewer": "Spettatore",
   "RoleViewerDescription": "Visualizzazione file",
+  "SearchByHeadOfGroup": "Ricerca per capogruppo",
   "SearchByOwner": "Ricerca per Proprietario",
   "Spreadsheets": "Fogli di calcolo",
   "SubNewForm": "En blanco",

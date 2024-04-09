@@ -63,7 +63,7 @@
   "LimitByTime": "受时间段限制",
   "LinkSettings": "此链接受 {{parameter}} 保护。如要配置链接，",
   "LinkSettings2": "为此链接设置了 {{parameter1}} 和 {{parameter2}}。如要配置，",
-  "LinkSettings3": "为此链接设置了 {{parameter1}}、{{parameter2}} 和 {{parameter2}}。如要配置，",
+  "LinkSettings3": "为此链接设置了 {{parameter1}}、{{parameter2}} 和 {{parameter3}}。如要配置，",
   "Logo": "Logo",
   "MainElementParameter": "主要元素参数",
   "ManagerSearchBlockDescription": "您可以关闭搜索、筛选和排序选项。",

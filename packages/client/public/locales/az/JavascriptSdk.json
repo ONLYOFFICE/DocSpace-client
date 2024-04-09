@@ -63,7 +63,7 @@
   "LimitByTime": "Vaxt dövrü ilə məhdudlaşdırın",
   "LinkSettings": "Bu link {{parameter}} ilə qorunur. Bağlantını konfiqurasiya etmək üçün,",
   "LinkSettings2": "Bu {{parameter1}} və {{parameter2}} təyin edilib. Onu konfiqurasiya etmək üçün,",
-  "LinkSettings3": "{{parameter1}}, {{parameter2}} və {{parameter2}} təyin edilib. Onu konfiqurasiya etmək üçün,",
+  "LinkSettings3": "{{parameter1}}, {{parameter2}} və {{parameter3}} təyin edilib. Onu konfiqurasiya etmək üçün,",
   "Logo": "Logo",
   "MainElementParameter": "Əsas element parametri",
   "ManagerSearchBlockDescription": "Axtarış, filtr və çeşidləmə seçimlərini söndürə bilərsiniz.",

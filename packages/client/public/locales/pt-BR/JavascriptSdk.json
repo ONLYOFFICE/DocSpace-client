@@ -63,7 +63,7 @@
   "LimitByTime": "Limite por período de tempo",
   "LinkSettings": "Este link é protegido com um {{parâmetro}}. Para configurar o link,",
   "LinkSettings2": "Um {{parameter1}} e {{parameter2}} são definidos para este link. Para configurá-lo,",
-  "LinkSettings3": "Um {{parameter1}}, {{parameter2}} e {{parameter2}} são definidos para este link. Para configurá-lo,",
+  "LinkSettings3": "Um {{parameter1}}, {{parameter2}} e {{parameter3}} são definidos para este link. Para configurá-lo,",
   "Logo": "Logotipo",
   "MainElementParameter": "Parâmetro do elemento principal",
   "ManagerSearchBlockDescription": "Você pode desativar as opções de pesquisa, filtro e classificação.",

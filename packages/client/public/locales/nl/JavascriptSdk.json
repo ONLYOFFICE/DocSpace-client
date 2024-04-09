@@ -63,7 +63,7 @@
   "LimitByTime": "Beperken op tijdsperiode",
   "LinkSettings": "Deze link is beveiligd met een {{parameter}}. Om de link te configureren,",
   "LinkSettings2": "Een {{parameter1}} en {{parameter2}} is ingesteld voor deze link. Om dit te configureren,",
-  "LinkSettings3": "Een {{parameter1}}, {{parameter2}}, en {{parameter2}} zijn ingesteld voor deze link. Om dit te configureren,",
+  "LinkSettings3": "Een {{parameter1}}, {{parameter2}}, en {{parameter3}} zijn ingesteld voor deze link. Om dit te configureren,",
   "Logo": "Logo",
   "MainElementParameter": "Hoofdelement parameter",
   "ManagerSearchBlockDescription": "U kunt de zoek-, filter- en sorteeropties uitschakelen.",

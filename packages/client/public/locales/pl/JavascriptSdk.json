@@ -63,7 +63,7 @@
   "LimitByTime": "Ograniczenie czasowe",
   "LinkSettings": "Ten link jest chroniony przez parametr {{parameter}}. Aby skonfigurować link,",
   "LinkSettings2": "Dla danego linku ustawiono parametry {{parameter1}} i {{parameter2}}. Aby go skonfigurować,",
-  "LinkSettings3": "Dla danego linku ustawiono parametry {{parameter1}}, {{parameter2}} i {{parameter2}}. Aby go skonfigurować,",
+  "LinkSettings3": "Dla danego linku ustawiono parametry {{parameter1}}, {{parameter2}} i {{parameter3}}. Aby go skonfigurować,",
   "Logo": "Logo",
   "MainElementParameter": "Parametr elementu głównego",
   "ManagerSearchBlockDescription": "Możesz wyłączyć opcje wyszukiwania, filtrowania i sortowania.",

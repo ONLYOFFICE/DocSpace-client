@@ -63,7 +63,7 @@
   "LimitByTime": "الحد حسب الفترة الزمنية",
   "LinkSettings": "هذا الرابط محمي بواسطة {{parameter}}. لتكوين الارتباط،",
   "LinkSettings2": "تم تعيين {{parameter1}} و {{parameter2}} لهذا الارتباط. لتكوينه،",
-  "LinkSettings3": "تم تعيين {{parameter1}} و {{parameter2}} و {{parameter2}} لهذا الارتباط. لتكوينه،",
+  "LinkSettings3": "تم تعيين {{parameter1}} و {{parameter2}} و {{parameter3}} لهذا الارتباط. لتكوينه،",
   "Logo": "شعار",
   "MainElementParameter": "إعدادات  العنصر الرئيسي",
   "ManagerSearchBlockDescription": "يمكنك تعطيل خيارات البحث والتصفية والفرز.",

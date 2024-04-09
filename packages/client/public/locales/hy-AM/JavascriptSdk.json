@@ -63,7 +63,7 @@
   "LimitByTime": "Սահմանափակում ըստ ժամանակաշրջանի",
   "LinkSettings": "Այս հղումը պաշտպանված է {{parameter}}-ով: Հղումը կարգավորելու համար՝",
   "LinkSettings2": "Այս հղման համար սահմանված են {{parameter1}} և {{parameter2}} նշանները: Այն կարգավորելու համար,",
-  "LinkSettings3": "Այս հղման համար սահմանված են {{parameter1}}, {{parameter2}} և {{parameter2}} նշանները: Այն կարգավորելու համար,",
+  "LinkSettings3": "Այս հղման համար սահմանված են {{parameter1}}, {{parameter2}} և {{parameter3}} նշանները: Այն կարգավորելու համար,",
   "Logo": "Լոգո",
   "MainElementParameter": "Հիմնական տարրի պարամետրը",
   "ManagerSearchBlockDescription": "Դուք կարող եք անջատել որոնման, զտման և տեսակավորման ընտրանքները:",

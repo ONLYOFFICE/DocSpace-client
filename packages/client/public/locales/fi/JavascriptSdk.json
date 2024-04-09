@@ -63,7 +63,7 @@
   "LimitByTime": "Raja ajanjaksolla",
   "LinkSettings": "Tämä linkki on suojattu {{parameter}}lla. Määrittääksesi linkin,",
   "LinkSettings2": "{{parameter1}} ja {{parameter2}} asetetaan tälle linkille. Määrittääksesi sen,",
-  "LinkSettings3": "{{parameter1}}, {{parameter2}} ja {{parameter2}} asetetaan tälle linkille. Määrittääksesi sen,",
+  "LinkSettings3": "{{parameter1}}, {{parameter2}} ja {{parameter3}} asetetaan tälle linkille. Määrittääksesi sen,",
   "Logo": "Logo",
   "MainElementParameter": "Pääelementtiparametrit",
   "ManagerSearchBlockDescription": "Voit poistaa haun, suodattimen ja järjestelyn pois käytöstä.",

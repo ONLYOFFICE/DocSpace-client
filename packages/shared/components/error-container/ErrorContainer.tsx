@@ -53,7 +53,7 @@ const ErrorContainer = (props: ErrorContainerProps) => {
       isEditor={isEditor}
       data-testid="ErrorContainer"
     >
-      <DocspaceLogo />
+      <DocspaceLogo isResizing />
       <div id="container">
         <svg
           id="background"

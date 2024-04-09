@@ -2022,6 +2022,7 @@ const Dark: TTheme = {
     recoveryColor: "#4C4C4C",
     linkColor: "#606060",
     productColor: "#eeeeee",
+    height: "48px",
   },
 
   menuContainer: {

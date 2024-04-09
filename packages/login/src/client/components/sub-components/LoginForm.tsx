@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useRef, useEffect } from "react";
+
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -41,7 +42,7 @@ import { login } from "@docspace/shared/utils/loginUtils";
 import { toastr } from "@docspace/shared/components/toast";
 import { thirdPartyLogin } from "@docspace/shared/api/user";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
-import { isMobileOnly } from "react-device-detect";
+import { isMobileOnly, isMobile, isIOS } from "react-device-detect";
 import ReCAPTCHA from "react-google-recaptcha";
 import { StyledCaptcha } from "../StyledLogin";
 import EmailContainer from "./EmailContainer";
@@ -153,7 +154,9 @@ const LoginForm: React.FC<ILoginFormProps> = ({
     confirmedEmail && ready && toastr.success(text);
     authError && ready && toastr.error(t("Common:ProviderLoginError"));
 
-    focusInput();
+    if (!isMobile || !isIOS) {
+      focusInput();
+    }
 
     window.authCallback = authCallback;
   }, [message, confirmedEmail]);

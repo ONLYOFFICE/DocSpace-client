@@ -117,6 +117,7 @@ const GroupMember = ({ t, user, infoPanelSelection }: GroupMemberProps) => {
           <HelpButton
             place="left"
             offsetRight={0}
+            openOnClick={false}
             tooltipContent={
               <Text fontSize="12px" fontWeight={600}>
                 {t("PeopleTranslations:IndividualRights")}

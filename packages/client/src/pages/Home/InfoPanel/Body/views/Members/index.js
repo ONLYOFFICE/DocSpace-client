@@ -161,7 +161,7 @@ const Members = ({
             <div
               data-tooltip-id="emailTooltip"
               data-tooltip-content={t(
-                "Files:MaximumNumberOfExternalLinksCreated",
+                "Common:MaximumNumberOfExternalLinksCreated",
               )}
             >
               <IconButton

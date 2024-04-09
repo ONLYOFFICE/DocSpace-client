@@ -834,11 +834,73 @@
     }
   }
 
-  const config = getConfigFromParams();
+  class DocSpaceSDK {
+    frames = [];
+
+    initFrame = (config) => {
+      const instance = new DocSpace(config);
+
+      instance.initFrame(config);
+
+      return instance;
+    };
+
+    initButton = (config) => {
+      const instance = new DocSpace(config);
+
+      instance.initButton(config);
+
+      return instance;
+    };
+
+    initEditor = (config = {}) => {
+      const instance = new DocSpace(config);
+
+      instance.initEditor(config);
+
+      return instance;
+    };
+
+    initViewer = (config = {}) => {
+      const instance = new DocSpace(config);
+
+      instance.initViewer(config);
+
+      return instance;
+    };
+
+    initRoomSelector = (config = {}) => {
+      const instance = new DocSpace(config);
+
+      instance.initRoomSelector(config);
+
+      return instance;
+    };
+
+    initFileSelector = (config = {}) => {
+      const instance = new DocSpace(config);
+
+      instance.initFileSelector(config);
+
+      return instance;
+    };
+
+    initSystem = (config = {}) => {
+      const instance = new DocSpace(config);
+
+      instance.initSystem(config);
+
+      return instance;
+    };
+  }
 
   window.DocSpace = window.DocSpace || {};
 
-  window.DocSpace.SDK = new DocSpace(config);
+  const config = getConfigFromParams();
+
+  window.DocSpace.SDK = new DocSpaceSDK(); //new DocSpace(config); //TODO: remove
+
+  //window.DocSpace.InstanceClass = DocSpace;
 
   if (config.init) {
     config?.isButtonMode

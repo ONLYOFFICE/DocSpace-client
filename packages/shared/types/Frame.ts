@@ -107,4 +107,5 @@ export type TFrameConfig = {
   filter: TFrameFilter;
   keysForReload: string[];
   events: TFrameEvents;
+  showSignOut: boolean;
 };

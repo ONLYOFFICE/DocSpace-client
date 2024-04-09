@@ -83,7 +83,7 @@ export const LanguageFilterSelectedItem = styled(DropDownItem)`
     margin: 0;
     width: 16px;
     height: 16px;
-    & > div {
+    div {
       display: flex;
       align-items: center;
       justify-content: center;

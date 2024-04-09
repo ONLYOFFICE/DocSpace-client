@@ -24,23 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { i18n } from "i18next";
-import { I18nextProvider } from "react-i18next";
+import styled from "styled-components";
 
-import { FilesSelectorProps } from "./FilesSelector.types";
-import FilesSelector from ".";
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 
-const FilesSelectorWrapper = ({
-  i18nProp,
-
-  ...rest
-}: FilesSelectorProps & { i18nProp: i18n }) => {
-  return (
-    <I18nextProvider i18n={i18nProp}>
-      <FilesSelector {...rest} />
-    </I18nextProvider>
-  );
-};
-
-export default FilesSelectorWrapper;
+  > svg {
+    align-self: center;
+  }
+`;

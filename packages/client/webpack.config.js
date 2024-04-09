@@ -326,11 +326,8 @@ module.exports = (env, argv) => {
 
   const remotes = {
     client: "client@/remoteEntry.js",
+    login: "login@/login/remoteEntry.js",
   };
-
-  if (!env.personal) {
-    remotes.login = "login@/login/remoteEntry.js";
-  }
 
   config.plugins.push(
     new ModuleFederationPlugin({
@@ -411,7 +408,6 @@ module.exports = (env, argv) => {
   const defines = {
     VERSION: JSON.stringify(version),
     BUILD_AT,
-    IS_PERSONAL: env.personal || false,
   };
 
   config.plugins.push(new DefinePlugin(defines));

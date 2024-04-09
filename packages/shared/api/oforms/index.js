@@ -52,6 +52,11 @@ export const getCategoriesOfCategoryType = async (url, locale = "en") => {
   return res?.data?.data;
 };
 
+export const getGuideLinkByLocale = async (url, locale = "en") => {
+  const res = await axios.get(`${url}?locale=${locale}`);
+  return res?.data?.data?.[0].attributes?.link;
+};
+
 export function submitToGallery(url, file, formName, language, signal) {
   const formData = new FormData();
   formData.append("file", file);

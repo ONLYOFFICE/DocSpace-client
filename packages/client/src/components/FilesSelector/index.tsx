@@ -62,6 +62,7 @@ const FilesSelectorWrapper = ({
   isRoomsOnly = false,
   isUserOnly = false,
   isEditorDialog = false,
+  isSelectFolder = false,
   rootThirdPartyId,
   filterParam,
 
@@ -276,6 +277,8 @@ const FilesSelectorWrapper = ({
     filterParam,
     isRestore,
     isFormRoom,
+    isThirdParty,
+    isSelectFolder,
   );
 
   const defaultAcceptButtonLabel = getAcceptButtonLabel(
@@ -288,6 +291,7 @@ const FilesSelectorWrapper = ({
     filterParam,
     isRestore,
     isFormRoom,
+    isSelectFolder,
   );
 
   const getIsDisabledAction = (

@@ -45,6 +45,7 @@ import {
   TSelectorFooterInput,
   TSelectorFooterCheckbox,
   TWithTabs,
+  TSelectorInfo,
 } from "./Selector.types";
 
 const Selector = ({
@@ -95,6 +96,7 @@ const Selector = ({
   accessRights,
   selectedAccessRight,
   onAccessRightsChange,
+  accessRightsMode,
 
   withFooterInput,
   footerInputHeader,
@@ -128,6 +130,9 @@ const Selector = ({
   withTabs,
   tabsData,
   activeTabId,
+
+  withInfo,
+  infoText,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
   const [isSearch, setIsSearch] = React.useState<boolean>(false);
@@ -146,18 +151,22 @@ const Selector = ({
   const [isFooterCheckboxChecked, setIsFooterCheckboxChecked] =
     React.useState<boolean>(isChecked || false);
   const [selectedAccess, setSelectedAccess] =
-    React.useState<TAccessRight | null>(null);
+    React.useState<TAccessRight | null>(() => {
+      if (selectedAccessRight) return { ...selectedAccessRight };
+
+      return null;
+    });
 
   const [requestRunning, setRequestRunning] = React.useState<boolean>(false);
 
   const onSubmitAction = async (
-    item?: TSelectorItem,
+    item?: TSelectorItem | React.MouseEvent,
     fromCallback?: boolean,
   ) => {
     setRequestRunning(true);
 
     await onSubmit(
-      fromCallback && item ? [item] : newSelectedItems,
+      fromCallback && item && "label" in item ? [item] : newSelectedItems,
       selectedAccess,
       newFooterInputValue,
       isFooterCheckboxChecked,
@@ -252,9 +261,10 @@ const Selector = ({
     const query =
       activeTabId && selectedTabItems[activeTabId]
         ? selectedTabItems[activeTabId].length === 0 ||
-          selectedTabItems[activeTabId].length !== items.length
+          selectedTabItems[activeTabId].length !==
+            items.filter((i) => !i.isDisabled).length
         : newSelectedItems.length === 0 ||
-          newSelectedItems.length !== items.length;
+          newSelectedItems.length !== items.filter((i) => !i.isDisabled).length;
 
     if (query) {
       const cloneItems = items
@@ -412,18 +422,22 @@ const Selector = ({
       }
     : ({} as TSelectorBreadCrumbs);
 
+  const tempRenderedItemsLength = renderedItems.filter(
+    (x) => !x.isDisabled,
+  ).length;
+
   const isAllIndeterminate =
     activeTabId && selectedTabItems[activeTabId]
-      ? selectedTabItems[activeTabId].length !== renderedItems.length &&
+      ? selectedTabItems[activeTabId].length !== tempRenderedItemsLength &&
         selectedTabItems[activeTabId].length !== 0
-      : newSelectedItems.length !== renderedItems.length &&
+      : newSelectedItems.length !== tempRenderedItemsLength &&
         newSelectedItems.length !== 0;
   const isAllChecked =
     activeTabId && selectedTabItems[activeTabId]
-      ? selectedTabItems[activeTabId].length === renderedItems.length &&
-        renderedItems.length !== 0
-      : newSelectedItems.length === renderedItems.length &&
-        renderedItems.length !== 0;
+      ? selectedTabItems[activeTabId].length === tempRenderedItemsLength &&
+        tempRenderedItemsLength !== 0
+      : newSelectedItems.length === tempRenderedItemsLength &&
+        tempRenderedItemsLength !== 0;
 
   const onSelectAllProps: TSelectorSelectAll = withSelectAll
     ? {
@@ -466,6 +480,7 @@ const Selector = ({
         accessRights,
         selectedAccessRight: selectedAccess,
         onAccessRightsChange: onChangeAccessRightsAction,
+        accessRightsMode,
       }
     : ({} as TSelectorAccessRights);
 
@@ -497,6 +512,13 @@ const Selector = ({
 
   const tabsProps: TWithTabs = withTabs
     ? { withTabs, tabsData, activeTabId }
+    : {};
+
+  const infoProps: TSelectorInfo = withInfo
+    ? {
+        withInfo,
+        infoText,
+      }
     : {};
 
   React.useEffect(() => {
@@ -570,6 +592,8 @@ const Selector = ({
         {...searchProps}
         // tabs
         {...tabsProps}
+        // info
+        {...infoProps}
       />
 
       {(footerVisible || alwaysShowFooter) && (
@@ -578,7 +602,11 @@ const Selector = ({
           selectedItemsCount={newSelectedItems.length}
           onSubmit={onSubmitAction}
           submitButtonLabel={submitButtonLabel}
-          disableSubmitButton={disableSubmitButton}
+          disableSubmitButton={
+            alwaysShowFooter
+              ? newSelectedItems.length === 0 || disableSubmitButton
+              : disableSubmitButton
+          }
           submitButtonId={submitButtonId}
           requestRunning={requestRunning}
           // cancel button

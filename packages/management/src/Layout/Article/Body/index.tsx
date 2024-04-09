@@ -83,7 +83,7 @@ const ArticleBodyContent = () => {
   const catalogItems = () => {
     const items: Array<React.ReactNode> = [];
 
-    let resultTree = [...settingsTree];
+    let resultTree = settingsTree.filter((item) => item?.isHeader);
 
     resultTree.map((item) => {
       items.push(

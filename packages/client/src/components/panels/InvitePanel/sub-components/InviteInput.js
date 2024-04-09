@@ -90,6 +90,7 @@ const InviteInput = ({
   cultureNames,
   i18n,
   setCultureKey,
+  standalone,
 }) => {
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
@@ -290,6 +291,8 @@ const InviteInput = ({
   };
 
   const addEmail = () => {
+    if (!inputValue.trim()) return;
+
     const items = toUserItems(inputValue);
 
     const newItems =
@@ -360,7 +363,14 @@ const InviteInput = ({
     </DropDownItem>
   );
 
-  const accessOptions = getAccessOptions(t, roomType);
+  const accessOptions = getAccessOptions(
+    t,
+    roomType,
+    false,
+    true,
+    isOwner,
+    standalone,
+  );
 
   const onSelectAccess = (item) => {
     setSelectedAccess(item.access);
@@ -564,8 +574,10 @@ export default inject(({ settingsStore, dialogsStore, userStore }) => {
     culture,
   } = dialogsStore;
 
+  const { culture: language, standalone } = settingsStore;
+
   return {
-    language: settingsStore.culture,
+    language,
     setInviteLanguage,
     setInviteItems,
     inviteItems,
@@ -574,6 +586,7 @@ export default inject(({ settingsStore, dialogsStore, userStore }) => {
     hideSelector: invitePanelOptions.hideSelector,
     defaultAccess: invitePanelOptions.defaultAccess,
     isOwner,
+    standalone,
   };
 })(
   withCultureNames(

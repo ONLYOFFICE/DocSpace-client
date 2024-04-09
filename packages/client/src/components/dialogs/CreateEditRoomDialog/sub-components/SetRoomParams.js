@@ -101,6 +101,10 @@ const SetRoomParams = ({
     useState(true);
   const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
 
+  const [forceHideRoomTypeDropdown, setForceHideRoomTypeDropdown] =
+    useState(false);
+
+  const isFormRoom = roomParams.type === RoomsType.FormRoom;
   const isPublicRoom = roomParams.type === RoomsType.PublicRoom;
 
   const onChangeName = (e) => {
@@ -152,6 +156,7 @@ const SetRoomParams = ({
           setRoomType={setRoomType}
           setIsScrollLocked={setIsScrollLocked}
           isDisabled={isDisabled}
+          forсeHideDropdown={forceHideRoomTypeDropdown}
         />
       )}
       {isEdit && (
@@ -173,6 +178,8 @@ const SetRoomParams = ({
         isDisabled={isDisabled}
         isValidTitle={isValidTitle}
         isWrongTitle={isWrongTitle}
+        onFocus={() => setForceHideRoomTypeDropdown(true)}
+        onBlur={() => setForceHideRoomTypeDropdown(false)}
         errorMessage={
           isWrongTitle
             ? t("Files:ContainsSpecCharacter")
@@ -181,11 +188,14 @@ const SetRoomParams = ({
         onKeyUp={onKeyUp}
         isAutoFocussed={true}
       />
+
       <TagInput
         t={t}
         tagHandler={tagHandler}
         setIsScrollLocked={setIsScrollLocked}
         isDisabled={isDisabled}
+        onFocus={() => setForceHideRoomTypeDropdown(true)}
+        onBlur={() => setForceHideRoomTypeDropdown(false)}
       />
 
       {/* //TODO: Uncomment when private rooms are done

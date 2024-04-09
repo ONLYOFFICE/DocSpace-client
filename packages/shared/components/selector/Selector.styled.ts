@@ -33,6 +33,23 @@ import { Base } from "../../themes";
 import { ComboBox } from "../combobox";
 import { Text } from "../text";
 import { Submenu } from "../submenu";
+import { AccessRightSelect } from "../access-right-select";
+
+const accessComboboxStyles = css`
+  margin-bottom: 2px;
+  max-height: 50px;
+
+  .combo-button {
+    min-height: 40px;
+    padding-inline-start: ${({ theme }) => theme.comboBox.button.paddingLeft};
+  }
+
+  .combo-button-label,
+  .combo-button-label:hover {
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    text-decoration: none;
+  }
+`;
 
 const StyledSelector = styled.div`
   width: 100%;
@@ -155,7 +172,7 @@ const StyledSelectAll = styled.div`
 
   .checkbox {
     svg {
-      margin-right: 0px;
+      margin-inline-end: 0px;
     }
   }
 `;
@@ -206,7 +223,7 @@ const StyledItem = styled.div<{
 
   .checkbox {
     svg {
-      margin-right: 0px;
+      margin-inline-end: 0px;
     }
   }
 
@@ -391,18 +408,11 @@ const StyledButtonContainer = styled.div`
 `;
 
 const StyledComboBox = styled(ComboBox)`
-  margin-bottom: 2px;
-  max-height: 50px;
+  ${accessComboboxStyles}
+`;
 
-  .combo-button {
-    min-height: 40px;
-  }
-
-  .combo-button-label,
-  .combo-button-label:hover {
-    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
-    text-decoration: none;
-  }
+const StyledAccessSelector = styled(AccessRightSelect)`
+  ${accessComboboxStyles}
 `;
 
 const StyledTabs = styled(Submenu)`
@@ -414,6 +424,22 @@ const StyledTabs = styled(Submenu)`
   }
 `;
 
+const StyledInfo = styled.div`
+  width: calc(100% - 32px);
+
+  padding: 12px 16px;
+  margin: 0 16px 12px;
+
+  border-radius: 6px;
+  box-sizing: border-box;
+
+  background-color: ${(props) => props.theme.selector.info.backgroundColor};
+
+  .text {
+    color: ${(props) => props.theme.selector.info.color};
+  }
+`;
+
 StyledSelector.defaultProps = { theme: Base };
 StyledHeader.defaultProps = { theme: Base };
 StyledBody.defaultProps = { theme: Base };
@@ -422,6 +448,7 @@ StyledItem.defaultProps = { theme: Base };
 StyledEmptyScreen.defaultProps = { theme: Base };
 StyledArrowRightSvg.defaultProps = { theme: Base };
 StyledComboBox.defaultProps = { theme: Base };
+StyledInfo.defaultProps = { theme: Base };
 
 export {
   StyledSelector,
@@ -439,4 +466,6 @@ export {
   StyledButtonContainer,
   StyledComboBox,
   StyledTabs,
+  StyledInfo,
+  StyledAccessSelector,
 };

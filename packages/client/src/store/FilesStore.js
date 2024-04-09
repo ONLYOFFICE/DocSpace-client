@@ -35,6 +35,7 @@ import {
   RoomsType,
   RoomsProviderType,
   ShareAccessRights,
+  Events,
 } from "@docspace/shared/enums";
 
 import { RoomsTypes } from "@docspace/shared/utils";
@@ -46,7 +47,10 @@ import { toastr } from "@docspace/shared/components/toast";
 import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
 import { getDaysRemaining } from "@docspace/shared/utils/common";
-import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import {
+  MEDIA_VIEW_URL,
+  PDF_FORM_DIALOG_KEY,
+} from "@docspace/shared/constants";
 
 import {
   getCategoryType,
@@ -353,6 +357,17 @@ class FilesStore {
       );
     });
 
+    socketHelper.on("s:modify-room", (option) => {
+      switch (option.cmd) {
+        case "create-form":
+          this.wsCreatedPDFForm(option);
+          break;
+
+        default:
+          break;
+      }
+    });
+
     socketHelper.on("s:stop-edit-file", (id) => {
       const { socketSubscribers } = socketHelper;
       const pathParts = `FILE-${id}`;
@@ -637,6 +652,30 @@ class FilesStore {
         }
       });
     }
+  };
+
+  wsCreatedPDFForm = (option) => {
+    if (!option.data) return;
+
+    const file = JSON.parse(option.data);
+
+    if (this.selectedFolderStore.id !== file.folderId) return;
+
+    const localKey = `${PDF_FORM_DIALOG_KEY}-${this.userStore.user.id}`;
+
+    const isFirst = JSON.parse(localStorage.getItem(localKey) ?? "true");
+
+    const event = new CustomEvent(Events.CREATE_PDF_FORM_FILE, {
+      detail: {
+        file,
+        isFill: !option.isOneMember,
+        isFirst,
+      },
+    });
+
+    if (isFirst) localStorage.setItem(localKey, "false");
+
+    window?.dispatchEvent(event);
   };
 
   setIsErrorRoomNotAvailable = (state) => {
@@ -1996,7 +2035,7 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
       }
 
-      if (!isPdf || !window.DocSpaceConfig.pdfViewer || isRecycleBinFolder) {
+      if (!isPdf || !window.DocSpaceConfig?.pdfViewer || isRecycleBinFolder) {
         fileOptions = this.removeOptions(fileOptions, ["pdf-view"]);
       }
 
@@ -3559,10 +3598,16 @@ class FilesStore {
 
       if (!isDefaultRoomsQuotaSet) return false;
 
+      if (!!item.providerKey) return false;
+
       return item.security?.EditRoom && item.isCustomQuota;
     };
 
-    return this.selection.every((x) => canResetCustomQuota(x));
+    if (this.hasOneSelection && this.isThirdPartySelection) return false;
+
+    const rooms = this.selection.filter((x) => canResetCustomQuota(x));
+
+    return rooms.length > 0;
   }
 
   get hasRoomsToDisableQuota() {
@@ -3574,7 +3619,11 @@ class FilesStore {
       return item.security?.EditRoom;
     };
 
-    return this.selection.every((x) => canDisableQuota(x));
+    if (this.hasOneSelection && this.isThirdPartySelection) return false;
+
+    const rooms = this.selection.filter((x) => canDisableQuota(x));
+
+    return rooms.length > 0;
   }
 
   get hasRoomsToChangeQuota() {
@@ -3586,7 +3635,15 @@ class FilesStore {
       return item.security?.EditRoom;
     };
 
-    return this.selection.every((x) => canChangeQuota(x));
+    if (this.hasOneSelection && this.isThirdPartySelection) return false;
+
+    const rooms = this.selection.filter((x) => canChangeQuota(x));
+
+    return rooms.length > 0;
+  }
+
+  get hasOneSelection() {
+    return this.selection.length === 1;
   }
 
   get hasSelection() {

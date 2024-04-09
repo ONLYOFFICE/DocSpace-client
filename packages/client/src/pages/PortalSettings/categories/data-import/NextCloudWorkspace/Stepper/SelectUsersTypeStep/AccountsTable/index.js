@@ -31,12 +31,30 @@ import { Consumer } from "@docspace/shared/utils/context";
 import TableView from "./TableView";
 import RowView from "./RowView";
 
-const AccountsTable = (props) => {
-  const { t, viewAs, accountsData, changeGroupType, UserTypes } = props;
+const checkedAccountType = "result";
 
-  const setTypeDocspaceAdmin = () => changeGroupType(UserTypes.DocSpaceAdmin);
-  const setTypeRoomAdmin = () => changeGroupType(UserTypes.RoomAdmin);
-  const setTypeUser = () => changeGroupType(UserTypes.User);
+const AccountsTable = (props) => {
+  const {
+    t,
+    viewAs,
+    accountsData,
+    changeGroupType,
+    UserTypes,
+    toggleAllAccounts,
+  } = props;
+
+  const setTypeDocspaceAdmin = () => {
+    changeGroupType(UserTypes.DocSpaceAdmin);
+    toggleAllAccounts(false, [], checkedAccountType);
+  };
+  const setTypeRoomAdmin = () => {
+    changeGroupType(UserTypes.RoomAdmin);
+    toggleAllAccounts(false, [], checkedAccountType);
+  };
+  const setTypeUser = () => {
+    changeGroupType(UserTypes.User);
+    toggleAllAccounts(false, [], checkedAccountType);
+  };
 
   const typeOptions = [
     {
@@ -80,12 +98,13 @@ const AccountsTable = (props) => {
 };
 export default inject(({ setup, importAccountsStore }) => {
   const { viewAs } = setup;
-  const { changeGroupType, UserTypes } = importAccountsStore;
+  const { changeGroupType, UserTypes, toggleAllAccounts } = importAccountsStore;
 
   return {
     viewAs,
     changeGroupType,
     UserTypes,
+    toggleAllAccounts,
   };
 })(
   withTranslation(["ChangeUserTypeDialog", "People"])(observer(AccountsTable)),

@@ -34,6 +34,7 @@ export type FilesSelectorProps = {
   isPanelVisible: boolean;
   // withoutImmediatelyClose: boolean;
   isThirdParty: boolean;
+  isSelectFolder: boolean;
   rootThirdPartyId?: string;
   isRoomsOnly: boolean;
   isUserOnly: boolean;

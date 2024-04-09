@@ -26,32 +26,17 @@
 
 import React from "react";
 
-import { getLogoUrls } from "@docspace/shared/api/settings";
-import { TWhiteLabel } from "@docspace/shared/utils/whiteLabelHelper";
+import { Text } from "../../text";
 
-const useWhiteLabel = () => {
-  const [logoUrls, setLogoUrls] = React.useState<TWhiteLabel[]>([]);
+import { TSelectorInfo } from "../Selector.types";
+import { StyledInfo } from "../Selector.styled";
 
-  const requestRunning = React.useRef(false);
-  const alreadyFetched = React.useRef(false);
-
-  const fetchWhiteLabel = React.useCallback(async () => {
-    if (alreadyFetched.current) return;
-
-    requestRunning.current = true;
-    const urls = await getLogoUrls();
-    requestRunning.current = false;
-
-    setLogoUrls(urls);
-    alreadyFetched.current = true;
-  }, []);
-
-  React.useEffect(() => {
-    fetchWhiteLabel();
-  }, [fetchWhiteLabel]);
-
-  return { logoUrls };
+export const Info = ({ infoText }: TSelectorInfo) => {
+  return (
+    <StyledInfo id="selector-info-text">
+      <Text fontSize="12px" fontWeight={400} lineHeight="16px" className="text">
+        {infoText}
+      </Text>
+    </StyledInfo>
+  );
 };
-
-export default useWhiteLabel;
-

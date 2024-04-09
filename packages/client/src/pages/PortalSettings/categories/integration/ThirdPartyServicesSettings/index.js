@@ -195,11 +195,12 @@ class ThirdPartyServices extends React.Component {
 
     const filteredConsumers = consumers.filter(
       (consumer) =>
-        consumer.title !== "Bitly" &&
-        consumer.title !== "WordPress" &&
-        consumer.title !== "DocuSign" &&
+        consumer.name !== "bitly" &&
+        consumer.name !== "wordpress" &&
+        consumer.name !== "docusign" &&
         consumer.name !== "clickatell" && //TODO: hide while 2fa by sms is not working
-        consumer.name !== "twilio",
+        consumer.name !== "twilio" &&
+        consumer.name !== "selectel",
     );
 
     const freeConsumers = filteredConsumers.filter(

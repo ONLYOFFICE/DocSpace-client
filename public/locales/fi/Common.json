@@ -194,6 +194,7 @@
   "MainHeaderSelectAll": "Valitse kaikki",
   "MakeForm": "Tallenna nimellä PDF",
   "ManyEmails": "Liian monta jäsenneltyä sähköpostia",
+  "MaximumNumberOfExternalLinksCreated": "Enimmäismäärä ulkoisia linkkejä luotu",
   "MaxLengthExceeded": "Käyttäjänimen tai muun paikallisen osan enimmäispituus on 64 merkkiä.",
   "MediaError": "Media URL ei voitu ladata",
   "Megabyte": "MB",

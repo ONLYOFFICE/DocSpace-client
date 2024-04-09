@@ -41,6 +41,7 @@ import { updateRoomMemberRole } from "@docspace/shared/api/rooms";
 import { toastr } from "@docspace/shared/components/toast";
 import { useState } from "react";
 import { HelpButton } from "@docspace/shared/components/help-button";
+import { getUserRoleOptions } from "@docspace/shared/utils/room-members/getUserRoleOptions";
 
 interface GroupMemberProps {
   t: any;
@@ -56,21 +57,21 @@ const GroupMember = ({ t, user, infoPanelSelection }: GroupMemberProps) => {
     infoPanelSelection.roomType,
     false,
   );
-  const selectedUserRoleCBOption = getUserRoleOptionsByUserAccess(
-    t,
-    user.userAccess || user.groupAccess,
-  );
+
+  let selectedUserRoleCBOption;
+  if (user.isOwner)
+    selectedUserRoleCBOption = getUserRoleOptions(t).docSpaceAdmin;
+  else if (user.isRoomAdmin)
+    selectedUserRoleCBOption = getUserRoleOptions(t).roomAdmin;
+  else
+    selectedUserRoleCBOption = getUserRoleOptionsByUserAccess(
+      t,
+      user.userAccess || user.groupAccess,
+    );
+
   const availableUserRoleCBOptions = filterUserRoleOptions(
     fullRoomRoleOptions,
     user,
-  );
-
-  console.log(
-    "GroupMember",
-    user,
-    selectedUserRoleCBOption,
-    availableUserRoleCBOptions,
-    fullRoomRoleOptions,
   );
 
   const onChangeRole = async (userRoleOption) => {
@@ -84,6 +85,8 @@ const GroupMember = ({ t, user, infoPanelSelection }: GroupMemberProps) => {
       .catch((err) => toastr.error(err))
       .finally(() => setIsLoading(false));
   };
+
+  console.log(user);
 
   return (
     <Styled.GroupMember isExpect={user.isExpect} key={user.id}>

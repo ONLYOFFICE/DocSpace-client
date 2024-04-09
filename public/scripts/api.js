@@ -1039,7 +1039,7 @@
 
       instance.initFrame(config);
 
-      frames[config.frameId] = instance;
+      this.frames[config.frameId] = instance;
 
       return instance;
     };
@@ -1054,7 +1054,7 @@
 
       instance.initButton(config);
 
-      frames[config.frameId] = instance;
+      this.frames[config.frameId] = instance;
 
       return instance;
     };

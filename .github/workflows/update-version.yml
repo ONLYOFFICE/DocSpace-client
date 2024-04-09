@@ -16,12 +16,10 @@ jobs:
           token: '${{ github.token }}'
 
       - name: Filter changes and update versions
-        id: update-versions
         run: |
           VERSION=$(echo "${GITHUB_REF#refs/heads/}" | sed 's/[^0-9.]*//g')
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           sed -i "s/\(\"version\":\).*/\1 \"$VERSION\",/g" packages/*/package.json
-          git diff --exit-code --quiet || echo "changed=true" >> $GITHUB_OUTPUT
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v9

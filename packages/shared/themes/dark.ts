@@ -2084,6 +2084,7 @@ const Dark: TTheme = {
       roleSelectorColor: "#a3a9ae",
       disabledRoleSelectorColor: "#a3a9ae",
       roleSelectorArrowColor: "#a3a9ae",
+      createLink: "#858585",
     },
 
     history: {

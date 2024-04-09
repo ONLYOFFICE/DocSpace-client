@@ -498,12 +498,16 @@ const StyledInviteLanguage = styled.div`
       padding-left: 6px;
       padding-right: 6px;
     }
-    .combo-button-label {
+
+    .combo-buttons_arrow-icon {
+      margin-left: 0px;
+    }
+
+    .combo-button_closed:not(:hover) .combo-button-label {
       color: ${(props) =>
         props.theme.createEditRoomDialog.commonParam.descriptionColor};
     }
-    .combo-buttons_arrow-icon {
-      margin-left: 0px;
+    .combo-button_closed:not(:hover) .combo-buttons_arrow-icon {
       svg {
         path {
           fill: ${(props) =>

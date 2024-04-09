@@ -45,7 +45,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { isDesktop } from "@docspace/shared/utils";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
-import PlusReactSvgUrl from "PUBLIC_DIR/images/actions.button.plus.react.svg?url";
+import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 
 import { Avatar } from "@docspace/shared/components/avatar";
 import { copyShareLink } from "@docspace/shared/utils/copy";
@@ -216,10 +216,12 @@ const Members = ({
           className="additional-link"
           onClick={onAddNewLink}
         >
-          <Avatar size="min" source={PlusReactSvgUrl} />
+          <div className="create-link-icon">
+            <IconButton size={12} iconName={PlusIcon} isDisabled />
+          </div>
 
           <Link
-            isHovered
+            noHover
             type="action"
             fontSize="14px"
             fontWeight={600}

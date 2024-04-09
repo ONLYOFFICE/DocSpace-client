@@ -417,20 +417,7 @@ const SectionHeaderContent = (props) => {
       icon: FormReactSvgUrl,
       label: t("Common:CreatePDFForm"),
       key: "new-form",
-      items: [
-        createTemplateForm,
-        createTemplateSelectFormFile,
-        {
-          id: "personal_template_from-oform",
-          className: "main-button_drop-down_sub",
-          icon: FormReactSvgUrl,
-          label: t("Common:FromReadyTemplate"),
-          onClick: () =>
-            onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.DOCXF),
-          disabled: isPrivacyFolder,
-          key: "form-oform",
-        },
-      ],
+      items: [createTemplateForm, createTemplateSelectFormFile],
     };
 
     const uploadReadyPDFFrom = {

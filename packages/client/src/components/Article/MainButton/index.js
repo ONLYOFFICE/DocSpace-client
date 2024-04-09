@@ -344,22 +344,7 @@ const ArticleMainButtonContent = (props) => {
         icon: FormReactSvgUrl,
         label: t("Common:CreatePDFForm"),
         key: "new-form",
-        items: [
-          createTemplateBlankDocxf,
-          showSelectorFormRoomDocx,
-          {
-            id: "actions_template_from-oform",
-            className: "main-button_drop-down_sub",
-            icon: FormReactSvgUrl,
-            label: t("Common:FromReadyTemplate"),
-            onClick: () => {
-              onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.DOCXF);
-            },
-
-            disabled: isPrivacy,
-            key: "form-oform",
-          },
-        ],
+        items: [createTemplateBlankDocxf, showSelectorFormRoomDocx],
       };
 
       const uploadReadyPDFFrom = {

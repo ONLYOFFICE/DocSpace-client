@@ -763,7 +763,7 @@ class UploadDataStore {
         fileId: null,
         toFolderId,
         action: "upload",
-        error: file.size ? null : t("EmptyFile"),
+        error: file.size ? null : t("Files:EmptyFile"),
         fileInfo: null,
         cancel: false,
         needConvert,

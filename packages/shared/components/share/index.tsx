@@ -327,9 +327,9 @@ const Share = (props: ShareProps) => {
                   iconName={LinksToViewingIconUrl}
                   onClick={addAdditionalLinks}
                   size={16}
-                  isDisabled={fileLinks.length >= LINKS_LIMIT_COUNT}
+                  isDisabled={fileLinks.length > LINKS_LIMIT_COUNT}
                 />
-                {fileLinks.length >= LINKS_LIMIT_COUNT && (
+                {fileLinks.length > LINKS_LIMIT_COUNT && (
                   <Tooltip
                     float={isDesktop()}
                     id="file-links-tooltip"

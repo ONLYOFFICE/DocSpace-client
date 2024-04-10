@@ -26,6 +26,7 @@
 
 import React from "react";
 import styled, { css } from "styled-components";
+import { isMobile } from "react-device-detect";
 
 import { Row } from "@docspace/shared/components/row";
 import { Base } from "@docspace/shared/themes";
@@ -75,9 +76,12 @@ const StyledWrapper = styled.div`
     ${(props) =>
       (props.checked || props.isActive) && marginStylesUserRowContainer};
 
-    :hover {
-      ${marginStylesUserRowContainer}
-    }
+    ${!isMobile &&
+    css`
+      :hover {
+        ${marginStylesUserRowContainer}
+      }
+    `}
   }
 `;
 
@@ -100,10 +104,12 @@ const StyledSimpleUserRow = styled(Row)`
   box-sizing: border-box;
   margin-top: -1px;
 
-  :hover {
-    cursor: pointer;
-    ${checkedStyle}
-  }
+  ${!isMobile &&
+  css`
+    :hover {
+      ${checkedStyle}
+    }
+  `}
 
   position: unset;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -121,7 +127,6 @@ const SimpleUserRow = (props) => {
     contextOptionsProps,
     checkedProps,
     onContentRowSelect,
-    onContentRowClick,
     onUserContextClick,
     element,
     isActive,
@@ -129,11 +134,6 @@ const SimpleUserRow = (props) => {
   } = props;
 
   const isChecked = checkedProps.checked;
-
-  const onRowClick = React.useCallback(
-    (e) => onContentRowClick?.(e, item),
-    [item, onContentRowClick],
-  );
 
   const onRowContextClick = React.useCallback(
     (rightMouseButtonClick) => {
@@ -163,7 +163,6 @@ const SimpleUserRow = (props) => {
           sectionWidth={sectionWidth}
           mode={"modern"}
           className={"user-row"}
-          onRowClick={onRowClick}
           onContextClick={onRowContextClick}
           withoutBorder={true}
         >

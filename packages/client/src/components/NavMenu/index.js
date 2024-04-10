@@ -165,7 +165,7 @@ const NavMenu = (props) => {
     return <></>;
 
   const isPreparationPortal = location.pathname === "/preparation-portal";
-  console.log("NavMenu");
+
   return (
     <LayoutContextConsumer>
       {(value) => (

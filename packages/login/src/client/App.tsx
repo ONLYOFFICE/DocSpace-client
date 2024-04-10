@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Provider as MobxProvider } from "mobx-react";
 import { Toast } from "@docspace/shared/components/toast";
 import { WRONG_PORTAL_NAME_URL } from "@docspace/shared/constants";
@@ -61,7 +61,7 @@ const App: React.FC<ILoginProps> = (props) => {
 
   return (
     <MobxProvider {...loginStore}>
-      {<SimpleNav {...props} />}
+      <SimpleNav {...props} />
       <Toast isSSR />
       <Routes>
         <Route path="/login/error" element={<InvalidRoute {...props} />} />

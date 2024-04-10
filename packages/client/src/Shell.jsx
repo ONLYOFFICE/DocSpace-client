@@ -85,7 +85,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     setFormCreationInfo,
     setConvertPasswordDialogVisible,
     version,
-    isAuthenticated,
     isPortalDeactivate,
     isPortalRestoring,
     isNotPaidPeriod,
@@ -423,8 +422,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     );
   const location = useLocation();
 
-
-
   const withoutNavMenu =
     isEditor ||
     isPortalDeactivate ||
@@ -435,7 +432,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   return (
     <Layout>
       {toast}
-      {/* <ReactSmartBanner t={t} ready={ready} /> */}    
+      {/* <ReactSmartBanner t={t} ready={ready} /> */}
       {withoutNavMenu ? <></> : <NavMenu />}
       {currentDeviceType === DeviceType.mobile && <MainBar />}
       <IndicatorLoader />
@@ -464,14 +461,7 @@ const ShellWrapper = inject(
   }) => {
     const { i18n } = useTranslation();
 
-    const {
-      init,
-      isLoaded,
-      setProductVersion,
-      language,
-      version,
-      isAuthenticated,
-    } = authStore;
+    const { init, isLoaded, setProductVersion, language, version } = authStore;
 
     const {
       personal,
@@ -544,7 +534,6 @@ const ShellWrapper = inject(
       setFormCreationInfo,
       setConvertPasswordDialogVisible,
       version,
-      isAuthenticated,
       isPortalDeactivate,
       isPortalRestoring,
       isNotPaidPeriod,

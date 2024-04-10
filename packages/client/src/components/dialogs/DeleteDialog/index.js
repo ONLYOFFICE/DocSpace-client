@@ -216,7 +216,7 @@ const DeleteDialogComponent = (props) => {
           <>
             <>{t("DeleteFolder")} </>
             <>{t("DeleteSharedNote")} </>
-            <>{t("FolderPermanentlyDeleted")} </>
+            {!isThirdParty && <>{t("FolderPermanentlyDeleted")} </>}
             <>{t("Common:WantToContinue")}</>
           </>
         ) : (

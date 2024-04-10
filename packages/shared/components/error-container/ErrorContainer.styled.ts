@@ -90,11 +90,11 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
     body {
       padding: 24px 24px 0 24px;
     }
-
-   
   }
 
   @media ${mobile} {
+    padding-top: 32px;
+
     body {
       padding: 18px 18px 0 18px;
     }

@@ -241,22 +241,22 @@ class TreeFoldersStore {
     return this.recycleBinFolder ? this.recycleBinFolder.id : null;
   }
 
-  get isAccountsPeople() {
+  getIsAccountsPeople = () => {
     return window.location.pathname.includes("accounts/people");
-  }
+  };
 
-  get isAccountsInsideGroup() {
+  getIsAccountsInsideGroup = () => {
     const insideGroupPattern = /accounts\/groups\/.*\/filter/;
 
     return insideGroupPattern.test(window.location.pathname);
-  }
+  };
 
-  get isAccountsGroups() {
+  getIsAccountsGroups = () => {
     return (
       window.location.pathname.includes("accounts/groups") &&
-      !this.isAccountsInsideGroup
+      !this.getIsAccountsInsideGroup()
     );
-  }
+  };
 
   get isPersonalRoom() {
     return (

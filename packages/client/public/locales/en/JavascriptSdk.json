@@ -54,7 +54,7 @@
   "GoToRoom": "go to the room",
   "Header": "Header",
   "HeaderDescription": "You can disable header in the mobile version to limit access to the DocSpace sections (just like disabling the left menu in the desktop version).",
-  "InitializeSDK": "Select one of the suggested modes or use Custom to configure all the parameters manually.",
+  "InitializeSDK": "Select one of the suggested modes, or use Custom to configure all the parameters manually.",
   "InLeftPanel": "in the left panel",
   "InterfaceElements": "Interface elements",
   "ItemsCount": "Items count on one page",

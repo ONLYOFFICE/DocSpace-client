@@ -44,6 +44,7 @@
   "RoleUserDescription": "Benutzer können nur auf die Räume zugreifen, zu denen sie von den Administratoren eingeladen wurden. Sie können keine eigenen Räume, Ordner oder Dateien erstellen.",
   "RoleViewer": "Betrachter",
   "RoleViewerDescription": "Datei anzeigen",
+  "SearchByHeadOfGroup": "Suchen nach Gruppenleiter",
   "SearchByOwner": "Suche nach Besitzern",
   "Spreadsheets": "Tabellenkalkulationen",
   "SubNewForm": "Leer",

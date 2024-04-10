@@ -44,6 +44,7 @@
   "RoleUserDescription": "ユーザーは、管理者から招待されたルームにのみアクセスすることができます。ユーザーは、自分の部屋、フォルダ、ファイルを作成することはできません。",
   "RoleViewer": "閲覧用",
   "RoleViewerDescription": "ファイル閲覧",
+  "SearchByHeadOfGroup": "グループ代表で検索",
   "SearchByOwner": "所有者で検索する",
   "Spreadsheets": "スプレッドシート",
   "SubNewForm": "空白",

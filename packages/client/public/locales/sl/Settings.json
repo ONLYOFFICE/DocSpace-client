@@ -99,7 +99,7 @@
   "Disabled": "Onemogočeno",
   "DiskSpaceUsed": "Porabljen prostor na disku",
   "DNSSettings": "DNS nastavitve",
-  "DNSSettingsDescription": "Nastavitve DNS so način za nastavitev alternativnega URL za vaš prostor.",
+  "DNSSettingsDescription": "Nastavite alternativni naslov URL za svoj prostor. Pošljite zahtevo naši skupini za podporo, da dobite pomoč pri nastavitvah.",
   "DNSSettingsHint": "Vnesite ime domene na ta način:",
   "DNSSettingsMobile": "Pošlji zahtevo naši skupini za podporo in strokovnjaki bodo pomagali pri nastavitvah.",
   "DNSSettingsNavDescription": "Nastavitve DNS so način za nastavitev alternativnega URL-ja za vaš portal.",

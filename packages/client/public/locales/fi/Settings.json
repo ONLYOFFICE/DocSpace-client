@@ -99,7 +99,7 @@
   "Disabled": "Poistettu käytöstä",
   "DiskSpaceUsed": "Käytetty levytila",
   "DNSSettings": "DNS-asetukset",
-  "DNSSettingsDescription": "DNS-asetukset on tapa asettaa vaihtoehtoinen URL tilallesi.",
+  "DNSSettingsDescription": "Aseta tilallesi vaihtoehtoinen URL-osoite. Lähetä pyyntösi tukitiimillemme saadaksesi apua asetuksiin.",
   "DNSSettingsHint": "Syötä tämänkaltainen verkkotunnus:",
   "DNSSettingsMobile": "Lähetä pyyntösi tukitiimillemme ja asiantuntijamme auttavat sinua asetusten kanssa.",
   "DNSSettingsNavDescription": "DNS-asetukset on tapa asettaa portaalillesi vaihtoehto URL.",

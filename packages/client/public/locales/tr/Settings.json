@@ -99,7 +99,7 @@
   "Disabled": "Devre dışı bırakıldı",
   "DiskSpaceUsed": "Kullanılan disk alanı",
   "DNSSettings": "DNS Ayarlar",
-  "DNSSettingsDescription": "DNS Ayarları, alanınız için alternatif bir URL belirlemenin bir yoludur.",
+  "DNSSettingsDescription": "Alanınız için alternatif bir URL adresi belirleyin. Ayarlarla ilgili yardım almak için isteğinizi destek ekibimize gönderin.",
   "DNSSettingsHint": "Alan(domain) adını bu şekilde girin:",
   "DNSSettingsMobile": "İsteğinizi destek ekibimize gönderin, uzmanlarımız ayarlar konusunda size yardımcı olacaktır.",
   "DNSSettingsNavDescription": "DNS Ayarları, portalınız için alternatif bir URL ayarlamanın bir yoludur.",

@@ -33,7 +33,8 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
   background: ${(props) => props.theme.errorContainer.background};
   cursor: default;
   width: ${(props) => (props.isEditor ? "100%" : "auto")};
-  height: ${(props) => (props.isEditor ? "100%" : "100vh")};
+  height: "100%";
+
   ${(props) =>
     props.isEditor &&
     css`

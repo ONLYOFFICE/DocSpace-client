@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Over",
   "AboutCompanyTitle": "Over dit programma",
   "AccessDenied": "Toegang geweigerd",
@@ -109,6 +109,7 @@
   "DeveloperTools": "Developer Tools",
   "DisableQuota": "Quota uitschakelen",
   "DisableStorageQuota": "Opslagquota uitschakelen",
+  "Disabled": "Uitgeschakeld",
   "Disconnect": "Loskoppelen",
   "DocSpaceAdmin": "DocSpace beheerder",
   "DocSpaceOwner": "DocSpace eigenaar",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> nodigt u uit om lid te worden van DocSpace <1>{spaceAddress}}</1> om veilig samen te werken aan documenten.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> nodigt u uit om lid te worden van de kamer <1>{roomName}}</1> om veilig samen te werken aan documenten.",
   "Invite": "Uitnodigen",
+  "Invited": "Uitgenodigd",
   "InviteUsers": "Gebruikers uitnodigen",
   "IpAddress": "IP-adres",
   "Kilobyte": "KB",
@@ -226,6 +228,7 @@
   "MakeForm": "Opslaan als oform",
   "ManageStorageQuota": "Opslagquota beheren",
   "ManyEmails": "Te veel e-mails verwerkt",
+  "MaximumNumberOfExternalLinksCreated": "Maximum aantal gemaakte externe links",
   "MaxLengthExceeded": "De maximale lengte van een gebruikersnaam of ander lokaal deel is 64 tekens.",
   "MediaError": "Media URL kon niet worden geladen",
   "Megabyte": "MB",

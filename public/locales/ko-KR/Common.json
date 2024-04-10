@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "소개",
   "AboutCompanyTitle": "프로그램 소개",
   "AccessDenied": "액세스가 거부되었습니다",
@@ -109,6 +109,7 @@
   "DeveloperTools": "개발자 도구",
   "DisableQuota": "할당량 비활성화",
   "DisableStorageQuota": "스토리지 할당량 비활성화",
+  "Disabled": "비활성화",
   "Disconnect": "연결 해제",
   "DocSpaceAdmin": "DocSpace 관리자",
   "DocSpaceOwner": "DocSpace 소유자",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1>님이 안전한 문서 공동작업을 위해 귀하를 DocSpace <1>{{spaceAddress}}</1>에 초대했습니다.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1>님이 안전한 문서 공동작업을 위해 귀하를 <1>{{roomName}}</1> 방에 초대했습니다.",
   "Invite": "초대",
+  "Invited": "초대 완료",
   "InviteUsers": "초대 링크",
   "IpAddress": "IP 주소",
   "Kilobyte": "KB",
@@ -226,6 +228,7 @@
   "MakeForm": "다른 이름으로 저장 oform",
   "ManageStorageQuota": "스토리지 할당량 관리",
   "ManyEmails": "너무 많은 이메일이 파싱되었습니다",
+  "MaximumNumberOfExternalLinksCreated": "생성된 외부 링크의 최대 갯수",
   "MaxLengthExceeded": "사용자명 또는 기타 로컬 파트 최대 길이는 64글자입니다.",
   "MediaError": "미디어 URL을 로드할 수 없습니다",
   "Megabyte": "MB",

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -132,6 +132,7 @@ const notify = (
       closeButton: withCross && <CloseButton />,
       autoClose: timeout === 0 ? false : timeout < 750 ? 5000 : timeout || 5000,
       position: centerPosition ? "top-center" : undefined,
+      containerId: "toast-container",
     },
   );
 };

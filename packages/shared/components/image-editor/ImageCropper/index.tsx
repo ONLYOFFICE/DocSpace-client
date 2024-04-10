@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -143,38 +143,40 @@ const ImageCropper = ({
         </div>
       </div>
 
-      {uploadedFile?.name && !disableImageRescaling && (
-        <div className="icon_cropper-zoom-container">
-          <IconButton
-            className="icon_cropper-zoom-container-button"
-            size={16}
-            onClick={handleZoomOutClick}
-            iconName={ZoomMinusReactSvgUrl}
-            isFill
-            isClickable={false}
-            isDisabled={isDisabled}
-          />
+      {typeof uploadedFile !== "string" &&
+        uploadedFile?.name &&
+        !disableImageRescaling && (
+          <div className="icon_cropper-zoom-container">
+            <IconButton
+              className="icon_cropper-zoom-container-button"
+              size={16}
+              onClick={handleZoomOutClick}
+              iconName={ZoomMinusReactSvgUrl}
+              isFill
+              isClickable={false}
+              isDisabled={isDisabled}
+            />
 
-          <Slider
-            className="icon_cropper-zoom-container-slider"
-            max={5}
-            min={1}
-            onChange={handleSliderChange}
-            step={0.01}
-            value={image.zoom}
-            isDisabled={isDisabled}
-          />
-          <IconButton
-            className="icon_cropper-zoom-container-button"
-            size={16}
-            onClick={handleZoomInClick}
-            iconName={ZoomPlusReactSvgUrl}
-            isFill
-            isClickable={false}
-            isDisabled={isDisabled}
-          />
-        </div>
-      )}
+            <Slider
+              className="icon_cropper-zoom-container-slider"
+              max={5}
+              min={1}
+              onChange={handleSliderChange}
+              step={0.01}
+              value={image.zoom}
+              isDisabled={isDisabled}
+            />
+            <IconButton
+              className="icon_cropper-zoom-container-button"
+              size={16}
+              onClick={handleZoomInClick}
+              iconName={ZoomPlusReactSvgUrl}
+              isFill
+              isClickable={false}
+              isDisabled={isDisabled}
+            />
+          </div>
+        )}
     </StyledImageCropper>
   );
 };

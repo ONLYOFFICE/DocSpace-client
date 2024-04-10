@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -99,7 +99,7 @@ declare global {
     DocSpace: {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
     };
-    DocSpaceConfig: {
+    DocSpaceConfig?: {
       pdfViewerUrl: string;
       wrongPortalNameUrl?: string;
       api: {
@@ -146,6 +146,7 @@ declare global {
       toDataURL: () => string;
     };
     dataLayer?: Record<string, unknown>[];
+    errorOnLoad?: Error;
   }
 
   export type ContextMenuModel =

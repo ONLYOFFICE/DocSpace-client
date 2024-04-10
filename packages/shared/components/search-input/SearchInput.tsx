@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -53,6 +53,7 @@ const SearchInput = ({
   name,
   isDisabled = false,
   placeholder,
+  onFocus,
   children,
 }: SearchInputProps) => {
   const timerId = React.useRef<null | ReturnType<typeof setTimeout>>(null);
@@ -162,6 +163,7 @@ const SearchInput = ({
         value={inputValue}
         placeholder={placeholder}
         onChange={onInputChange}
+        onFocus={onFocus}
       >
         {children}
       </InputBlock>

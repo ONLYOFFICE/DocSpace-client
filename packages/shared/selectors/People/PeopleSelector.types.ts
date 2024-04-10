@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,6 +29,7 @@ import {
   TSelectorCancelButton,
   TSelectorCheckbox,
   TSelectorHeader,
+  TSelectorInfo,
   TSelectorSubmitButton,
 } from "../../components/selector/Selector.types";
 
@@ -40,6 +41,7 @@ export interface UserTooltipProps {
 }
 
 export type PeopleSelectorProps = TSelectorHeader &
+  TSelectorInfo &
   TSelectorCancelButton &
   TSelectorCheckbox &
   TSelectorSubmitButton & {
@@ -48,9 +50,18 @@ export type PeopleSelectorProps = TSelectorHeader &
     style?: React.CSSProperties;
 
     filter?: PeopleFilter | Function;
-    excludeItems?: string[];
+
+    isMultiSelect?: boolean;
+
     currentUserId: string;
     withOutCurrentAuthorizedUser?: boolean;
-    withAbilityCreateRoomUsers?: boolean;
+
     filterUserId?: string;
+
+    excludeItems?: string[];
+    disableInvitedUsers?: string[];
+    disableDisabledUsers?: boolean;
+
+    emptyScreenHeader?: string;
+    emptyScreenDescription?: string;
   };

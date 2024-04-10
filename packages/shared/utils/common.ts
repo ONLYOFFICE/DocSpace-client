@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,7 +40,7 @@ import DocseditorSvgUrl from "PUBLIC_DIR/images/logo/docseditor.svg?url";
 import LightSmallSvgUrl from "PUBLIC_DIR/images/logo/lightsmall.svg?url";
 import DocsEditoRembedSvgUrl from "PUBLIC_DIR/images/logo/docseditorembed.svg?url";
 import DarkLightSmallSvgUrl from "PUBLIC_DIR/images/logo/dark_lightsmall.svg?url";
-import FaviconIco from "PUBLIC_DIR/favicon.ico";
+import FaviconIco from "PUBLIC_DIR/images/logo/favicon.ico";
 
 import BackgroundPatternReactSvgUrl from "PUBLIC_DIR/images/background.pattern.react.svg?url";
 import BackgroundPatternOrangeReactSvgUrl from "PUBLIC_DIR/images/background.pattern.orange.react.svg?url";
@@ -57,6 +57,7 @@ import {
   ShareAccessRights,
   ThemeKeys,
   ErrorKeys,
+  WhiteLabelLogoType,
 } from "../enums";
 import { LANGUAGE, PUBLIC_MEDIA_VIEW_URL, RTL_LANGUAGES } from "../constants";
 
@@ -895,22 +896,21 @@ export const toUrlParams = (
 export function getObjectByLocation(location: Location) {
   if (!location.search || !location.search.length) return null;
 
-  const searchUrl = location.search.substring(1);
-  const decodedString = decodeURIComponent(searchUrl)
-    .replace(/\["/g, '["')
-    .replace(/"\]/g, '"]')
-    .replace(/"/g, '\\"')
-    .replace(/&/g, '","')
-    .replace(/=/g, '":"')
-    .replace(/\\/g, "\\\\")
-    .replace(/\[\\\\"/g, '["')
-    .replace(/\\\\"\]/g, '"]')
-    .replace(/"\[/g, "[")
-    .replace(/\]"/g, "]")
-    .replace(/\\\\",\\\\"/g, '","')
-    .replace(/\\\\\\\\"/g, '\\"');
-
   try {
+    const searchUrl = location.search.substring(1);
+    const decodedString = decodeURIComponent(searchUrl)
+      .replace(/\["/g, '["')
+      .replace(/"\]/g, '"]')
+      .replace(/"/g, '\\"')
+      .replace(/&/g, '","')
+      .replace(/=/g, '":"')
+      .replace(/\\/g, "\\\\")
+      .replace(/\[\\\\"/g, '["')
+      .replace(/\\\\"\]/g, '"]')
+      .replace(/"\[/g, "[")
+      .replace(/\]"/g, "]")
+      .replace(/\\\\",\\\\"/g, '","')
+      .replace(/\\\\\\\\"/g, '\\"');
     const object = JSON.parse(`{"${decodedString}"}`);
     return object;
   } catch (e) {
@@ -1044,3 +1044,11 @@ export const insertDataLayer = (id: string) => {
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ user_id: id });
 };
+
+export function getLogoUrl(
+  logoType: WhiteLabelLogoType,
+  dark: boolean = false,
+  def: boolean = false,
+) {
+  return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}`;
+}

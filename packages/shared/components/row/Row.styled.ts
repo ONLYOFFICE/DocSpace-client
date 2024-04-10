@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -94,8 +94,22 @@ const StyledRow = styled.div<{
           props.theme.interfaceDirection,
         )};
         ${props.theme.interfaceDirection === "rtl"
-          ? `margin-right: -4px;`
-          : `margin-left: -4px;`}
+          ? css`
+              margin-right: -4px;
+            `
+          : css`
+              margin-left: -4px;
+            `}
+
+        @media ${tablet} {
+          ${props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-right: -6px;
+              `
+            : css`
+                margin-left: -6px;
+              `}
+        }
       }
 
       .styled-element {

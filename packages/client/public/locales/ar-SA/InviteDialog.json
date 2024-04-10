@@ -1,4 +1,4 @@
-{
+﻿{
   "AddManually": "أضف يدوياً",
   "AddManuallyDescriptionAccounts": "قم بدعوة المستخدمين الجدد إلى DocSpace شخصيًا عبر البريد الإلكتروني",
   "AddManuallyDescriptionRoom": "أضف مستخدمي DocSpace الحاليين إلى الغرفة باستخدام الأسماء أو قم بدعوة مستخدمين جدد شخصيًا عبر البريد الإلكتروني",
@@ -6,7 +6,6 @@
   "GroupMaxAvailableRoleWarning": "تتمتع المجموعات بأقصى دور متاح - \"{{role}}\". يمكنك إصدار زيادة في الحقوق بعد إضافة مجموعة إلى الغرفة.",
   "InvitationLanguage": "لغة الدعوة",
   "InviteAccountSearchPlaceholder": "ادعُ الناس بالبريد الإلكتروني",
-  "Invited": "مدعو",
   "InviteRoomSearchPlaceholder": "ادعُ الناس بالاسم أو بالبريد الإلكتروني",
   "InviteViaLink": "دعوة عبر الرابط",
   "InviteViaLinkDescriptionAccounts": "قم بإنشاء ارتباط عالمي للمصادقة الذاتية في DocSpace",

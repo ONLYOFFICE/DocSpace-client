@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Informații",
   "AboutCompanyTitle": "Despre aplicația",
   "AccessDenied": "Acces refuzat ",
@@ -109,6 +109,7 @@
   "DeveloperTools": "Instrumente pentru dezvoltatori",
   "DisableQuota": "Dezactivare cotă",
   "DisableStorageQuota": "Dezactivare cotă spațiu de stocare",
+  "Disabled": "Dezactivat",
   "Disconnect": "Deconectare",
   "DocSpaceAdmin": "Administratorul DocSpace",
   "DocSpaceOwner": "Proprietarul DocSpace",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> vă invită să asociați la DocSpace <1>{{spaceAddress}}</1> pentru colaborarea securizată asupra documentelor.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> vă invită să participați la sala <1>{{spaceAddress}}</1> pentru colaborarea securizată asupra documentelor.",
   "Invite": "Invitaţie",
+  "Invited": "Invitat",
   "InviteUsers": "Invitaţi utilizatori",
   "IpAddress": "Adresa IP",
   "Kilobyte": "KO",
@@ -226,6 +228,7 @@
   "MakeForm": "Salvare ca formular PDF",
   "ManageStorageQuota": "Gestionare spațiu de stocare",
   "ManyEmails": "Prea multe e-mailuri de analizat",
+  "MaximumNumberOfExternalLinksCreated": "Numărul maxim permis de link-uri externe a fost depășit",
   "MaxLengthExceeded": "Lungimea maximă a numelui de utilizator sau a unei alte părți locale este de 64 caractere.",
   "MediaError": "URL media nu s-a putut încărca",
   "Megabyte": "MO",

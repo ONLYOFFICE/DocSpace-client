@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Informationen",
   "AboutCompanyTitle": "Über diese Software",
   "AccessDenied": "Zugriff verweigert",
@@ -109,6 +109,7 @@
   "DeveloperTools": "Entwicklungstools",
   "DisableQuota": "Quote deaktivieren",
   "DisableStorageQuota": "Speicherquote deaktivieren",
+  "Disabled": "Deaktiviert",
   "Disconnect": "Trennen Sie die Verbindung",
   "DocSpaceAdmin": "DocSpace-Verwaltung",
   "DocSpaceOwner": "DocSpace-Besitzer",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> lädt Sie ein, dem DocSpace <1>{{spaceAddress}}</1> für die sichere Zusammenarbeit an Dokumenten beizutreten.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> lädt Sie ein, dem Raum <1>{{roomName}}</1> für die sichere Zusammenarbeit an Dokumenten beizutreten.",
   "Invite": "Einladen",
+  "Invited": "Eingeladen",
   "InviteUsers": "Benutzer einladen",
   "IpAddress": "IP-Adresse",
   "Kilobyte": "KB",
@@ -226,6 +228,7 @@
   "MakeForm": "Als PDF-Formular speichern",
   "ManageStorageQuota": "Speicherquote verwalten",
   "ManyEmails": "Mehrere E-Mails im Feld",
+  "MaximumNumberOfExternalLinksCreated": "Maximale Anzahl der erstellten externen Links",
   "MaxLengthExceeded": "Die maximale Länge für den Benutzernamen oder anderen lokalen Teil beträgt 64 Symbole.",
   "MediaError": "Media-URL konnte nicht geladen werden",
   "Megabyte": "MB",

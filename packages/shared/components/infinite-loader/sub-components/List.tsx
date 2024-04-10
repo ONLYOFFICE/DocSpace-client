@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { InfiniteLoader, WindowScroller } from "react-virtualized";
 
 import { TableSkeleton } from "../../../skeletons/table";
@@ -49,6 +49,10 @@ const ListComponent = ({
   infoPanelVisible,
 }: ListComponentProps) => {
   const loaderRef = useRef<InfiniteLoader | null>(null);
+
+  useEffect(() => {
+    loaderRef?.current?.forceUpdate();
+  });
 
   const getLoader = (style: React.CSSProperties, key: string) => {
     switch (viewAs) {
@@ -108,13 +112,13 @@ const ListComponent = ({
     style: React.CSSProperties;
     key: string;
   }) => {
+    if (!columnInfoPanelStorageName || !columnStorageName) {
+      throw new Error("columnStorageName is required for a table view");
+    }
+
     const storageSize = infoPanelVisible
-      ? columnInfoPanelStorageName
-        ? localStorage.getItem(columnInfoPanelStorageName) || undefined
-        : undefined
-      : columnStorageName
-        ? localStorage.getItem(columnStorageName) || undefined
-        : undefined;
+      ? localStorage.getItem(columnInfoPanelStorageName)
+      : localStorage.getItem(columnStorageName);
 
     const isLoaded = isItemLoaded({ index });
     if (!isLoaded) return getLoader(style, key);
@@ -125,7 +129,7 @@ const ListComponent = ({
         style={{
           ...style,
           display: "grid",
-          gridTemplateColumns: storageSize,
+          gridTemplateColumns: storageSize!,
         }}
         key={key}
       >

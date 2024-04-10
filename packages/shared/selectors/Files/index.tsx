@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -160,7 +160,7 @@ const FilesSelector = ({
     setIsFirstLoad,
     showBreadCrumbsLoader,
     showLoader,
-  } = useLoadersHelper({ items, isInit });
+  } = useLoadersHelper();
 
   const { isRoot, setIsRoot, getRootData } = useRootHelper({
     setIsBreadCrumbsLoading,
@@ -172,6 +172,7 @@ const FilesSelector = ({
     setIsNextPageLoading,
     isUserOnly,
     setIsInit,
+    setIsFirstLoad,
   });
 
   const { getRoomList } = useRoomsHelper({
@@ -188,6 +189,7 @@ const FilesSelector = ({
     onSetBaseFolderPath,
     isInit,
     setIsInit,
+    setIsFirstLoad,
   });
 
   const { getFileList } = useFilesHelper({
@@ -212,7 +214,7 @@ const FilesSelector = ({
     rootThirdPartyId,
     getRoomList,
     getIcon,
-
+    setIsFirstLoad,
     setIsSelectedParentFolder,
     roomsFolderId,
     getFilesArchiveError,
@@ -243,6 +245,7 @@ const FilesSelector = ({
         ]);
         setSelectedItemId(item.id);
         setSearchValue("");
+        setSelectedFileInfo(null);
 
         if (item.parentId === 0 && item.rootFolderType === FolderType.Rooms) {
           setSelectedItemType("rooms");
@@ -278,6 +281,7 @@ const FilesSelector = ({
 
   React.useEffect(() => {
     setIsFirstLoad(true);
+
     const needRoomList = isRoomsOnly && !currentFolderId;
 
     if (needRoomList) {
@@ -295,7 +299,7 @@ const FilesSelector = ({
     if (
       needRoomList ||
       (!isThirdParty &&
-        parentId === roomsFolderId &&
+        currentFolderId === roomsFolderId &&
         rootFolderType === FolderType.Rooms)
     ) {
       setSelectedItemType("rooms");
@@ -444,13 +448,6 @@ const FilesSelector = ({
   const headerProps: TSelectorHeader = withHeader
     ? { withHeader, headerProps: { headerLabel } }
     : {};
-
-  // const withSearch = withSearchProp
-  //   ? prevWithSearch.current && isFirstLoad
-  //     ? prevWithSearch.current
-  //     : !!searchValue ||
-  //       (!isRoot && items?.length ? items.length > 0 : !isRoot && isFirstLoad)
-  //   : false;
 
   const withSearch = withSearchProp
     ? isRoot

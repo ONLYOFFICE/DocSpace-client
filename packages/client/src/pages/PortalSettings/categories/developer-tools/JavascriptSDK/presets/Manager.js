@@ -1,25 +1,25 @@
-// (c) Copyright Ascensio System SIA 2010-2024
-// 
+// (c) Copyright Ascensio System SIA 2009-2024
+//
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
 // of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
 // Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
 // to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
 // any third-party rights.
-// 
+//
 // This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
 // of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
 // the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-// 
+//
 // You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-// 
+//
 // The  interactive user interfaces in modified source and object code versions of the Program must
 // display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-// 
+//
 // Pursuant to Section 7(b) of the License you must retain the original Product logo when
 // distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
 // trademark law for use of our trademarks.
-// 
+//
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
@@ -46,6 +46,7 @@ import { isTablet, isMobile } from "@docspace/shared/utils/device";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
+import CodeBlock from "../sub-components/CodeBlock";
 import { Button } from "@docspace/shared/components/button";
 import { TooltipContent } from "../sub-components/TooltipContent";
 import { useNavigate } from "react-router-dom";
@@ -58,12 +59,12 @@ import ColumnsUrl from "PUBLIC_DIR/images/sdk-presets_columns.react.svg?url";
 import ActionButtonUrl from "PUBLIC_DIR/images/sdk-presets_action-button.react.svg?url";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
 import HeaderUrl from "PUBLIC_DIR/images/sdk-presets_header.react.svg?url";
-import LeftMenuDarkUrl from "PUBLIC_DIR/images/sdk-presets_left-menu_dark.react.svg?url";
-import TitleDarkUrl from "PUBLIC_DIR/images/sdk-presets_title_dark.react.svg?url";
-import ColumnsDarkUrl from "PUBLIC_DIR/images/sdk-presets_columns_dark.react.svg?url";
-import ActionButtonDarkUrl from "PUBLIC_DIR/images/sdk-presets_action-button_dark.react.svg?url";
-import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.react.svg?url";
-import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.react.svg?url";
+import LeftMenuDarkUrl from "PUBLIC_DIR/images/sdk-presets_left-menu_dark.png?url";
+import TitleDarkUrl from "PUBLIC_DIR/images/sdk-presets_title_dark.png?url";
+import ColumnsDarkUrl from "PUBLIC_DIR/images/sdk-presets_columns_dark.png?url";
+import ActionButtonDarkUrl from "PUBLIC_DIR/images/sdk-presets_action-button_dark.png?url";
+import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
+import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 
 const showPreviewThreshold = 720;
 
@@ -751,6 +752,11 @@ const Manager = (props) => {
       content: preview,
     },
     {
+      key: "js",
+      title: "JavaScript",
+      content: <CodeBlock config={config} />,
+    },
+    {
       key: "code",
       title: t("Code"),
       content: code,
@@ -845,7 +851,7 @@ const Manager = (props) => {
                     <TooltipContent
                       title={t("Menu")}
                       description={t("MenuDescription")}
-                      img={LeftMenuUrl}
+                      img={theme.isBase ? LeftMenuUrl : LeftMenuDarkUrl}
                     />
                   }
                 />
@@ -866,7 +872,7 @@ const Manager = (props) => {
                     <TooltipContent
                       title={t("Common:Title")}
                       description={t("ManagerTitleDescription")}
-                      img={TitleUrl}
+                      img={theme.isBase ? TitleUrl : TitleDarkUrl}
                     />
                   }
                 />
@@ -886,7 +892,7 @@ const Manager = (props) => {
                     <TooltipContent
                       title={t("SettingUpColumns")}
                       description={t("SettingUpColumnsDescription")}
-                      img={ColumnsUrl}
+                      img={theme.isBase ? ColumnsUrl : ColumnsDarkUrl}
                     />
                   }
                 />
@@ -906,7 +912,7 @@ const Manager = (props) => {
                     <TooltipContent
                       title={t("ActionButton")}
                       description={t("ActionButtonDescription")}
-                      img={ActionButtonUrl}
+                      img={theme.isBase ? ActionButtonUrl : ActionButtonDarkUrl}
                     />
                   }
                 />
@@ -926,7 +932,7 @@ const Manager = (props) => {
                     <TooltipContent
                       title={t("SearchBlock")}
                       description={t("ManagerSearchBlockDescription")}
-                      img={SearchUrl}
+                      img={theme.isBase ? SearchUrl : SearchDarkUrl}
                     />
                   }
                 />
@@ -947,7 +953,7 @@ const Manager = (props) => {
                     <TooltipContent
                       title={t("Header")}
                       description={t("HeaderDescription")}
-                      img={HeaderUrl}
+                      img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
                     />
                   }
                 />

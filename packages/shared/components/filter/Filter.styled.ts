@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -152,7 +152,7 @@ const StyledButton = styled.div<{ isOpen: boolean }>`
 
 StyledButton.defaultProps = { theme: Base };
 
-const StyledFilterBlock = styled.div<{ showFooter?: boolean }>`
+const StyledFilterBlock = styled.div`
   position: fixed;
   top: 0;
 
@@ -198,7 +198,7 @@ const StyledFilterBlock = styled.div<{ showFooter?: boolean }>`
   }
 
   .filter-body {
-    height: ${(props) => (props.showFooter ? "calc(100% - 125px)" : "100%")};
+    height: calc(100% - 125px);
 
     .combo-item {
       padding: 0;

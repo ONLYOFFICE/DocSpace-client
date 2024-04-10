@@ -1,4 +1,4 @@
-{
+﻿{
   "AddManually": "Přidat ručně",
   "AddManuallyDescriptionAccounts": "Pozvěte osobně nové uživatele do DocSpace prostřednictvím e-mailu",
   "AddManuallyDescriptionRoom": "Přidat stávající uživatele DocSpace do místnosti pomocí jmen nebo osobní pozvání nových uživatelů prostřednictvím e-mailu",
@@ -6,7 +6,6 @@
   "GroupMaxAvailableRoleWarning": "Skupiny mají maximální dostupnou roli - “{{role}}”. Po přidání skupiny do místnosti můžete vydat zvýšení práv.",
   "InvitationLanguage": "Jazyk pozvánky",
   "InviteAccountSearchPlaceholder": "Pozvat lidi e-mailem",
-  "Invited": "Pozvánka na",
   "InviteRoomSearchPlaceholder": "Pozvat lidi podle jména nebo e-mailu",
   "InviteViaLink": "Pozvání prostřednictvím odkazu",
   "InviteViaLinkDescriptionAccounts": "Vytvoření univerzálního odkazu pro samoautorizaci v DocSpace",

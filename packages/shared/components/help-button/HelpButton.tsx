@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -51,6 +51,7 @@ const HelpButton = (props: HelpButtonProps) => {
     afterHide,
     tooltipMaxWidth,
     tooltipContent,
+    openOnClick = true,
   } = props;
   const currentId = id || uniqueId();
 
@@ -74,7 +75,7 @@ const HelpButton = (props: HelpButtonProps) => {
       {getContent ? (
         <Tooltip
           clickable
-          openOnClick
+          openOnClick={openOnClick}
           place={place || "top"}
           offset={offset}
           afterShow={afterShow}
@@ -86,7 +87,7 @@ const HelpButton = (props: HelpButtonProps) => {
       ) : (
         <Tooltip
           clickable
-          openOnClick
+          openOnClick={openOnClick}
           place={place}
           offset={offset}
           afterShow={afterShow}

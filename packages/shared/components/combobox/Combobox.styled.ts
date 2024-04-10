@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -243,7 +243,6 @@ const StyledComboButton = styled.div<{
 
   ${(props) =>
     !props.noBorder &&
-    !props.type &&
     `
     border:  ${props.theme.comboBox.button.border};
     border-radius: ${props.theme.comboBox.button.borderRadius};
@@ -303,7 +302,7 @@ const StyledComboButton = styled.div<{
       border-color: ${props.theme.comboBox.button.hoverDisabledBorderColor};
     `}
 
-    ${(props) => props.modernView && hoverModernViewButton}
+    ${(props) => props.modernView && !props.isDisabled && hoverModernViewButton}
 
       
       ${({ fillIcon }) =>
@@ -334,9 +333,7 @@ const StyledComboButton = styled.div<{
     color: ${(props) =>
       props.isDisabled
         ? props.theme.comboBox.label.disabledColor
-        : props.isSelected
-          ? props.theme.comboBox.label.selectedColor
-          : props.theme.comboBox.label.color};
+        : props.theme.comboBox.label.selectedColor};
 
     max-width: ${(props) =>
       props.scaled ? "100%" : props.theme.comboBox.label.maxWidth};
@@ -477,6 +474,7 @@ const StyledArrowIcon = styled.div<{
   isLoading?: boolean;
   displayArrow?: boolean;
   isOpen?: boolean;
+  isDisabled?: boolean;
 }>`
   display: flex;
   align-self: center;
@@ -485,7 +483,10 @@ const StyledArrowIcon = styled.div<{
 
   .combo-buttons_expander-icon {
     path {
-      fill: ${(props) => props.theme.comboBox.label.selectedColor};
+      fill: ${(props) =>
+        props.isDisabled
+          ? props.theme.comboBox.label.disabledColor
+          : props.theme.comboBox.label.selectedColor};
     }
   }
 

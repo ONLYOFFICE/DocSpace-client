@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -48,12 +48,10 @@ export interface UseRootHelperProps {
   setIsInit: (value: boolean) => void;
   treeFolders?: TFolder[];
   isUserOnly?: boolean;
+  setIsFirstLoad: (value: boolean) => void;
 }
 
-export interface UseLoadersHelperProps {
-  items: TSelectorItem[];
-  isInit: boolean;
-}
+export interface UseLoadersHelperProps {}
 
 export type UseSocketHelperProps = {
   socketHelper: SocketIOHelper;
@@ -82,6 +80,7 @@ export type UseRoomsHelperProps = {
   ) => void;
   isInit: boolean;
   setIsInit: (value: boolean) => void;
+  setIsFirstLoad: (value: boolean) => void;
 };
 
 export type UseFilesHelpersProps = {
@@ -118,6 +117,7 @@ export type UseFilesHelpersProps = {
   getIcon: (fileExst: string) => string;
   getFilesArchiveError: (name: string) => string;
   isInit: boolean;
+  setIsFirstLoad: (value: boolean) => void;
 };
 
 export type TSelectedFileInfo = {

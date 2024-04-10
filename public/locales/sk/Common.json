@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "O aplikácii",
   "AboutCompanyTitle": "O programe",
   "AccessDenied": "Prístup bol zamietnutý",
@@ -109,6 +109,7 @@
   "DeveloperTools": "Nástroje pre vývojárov",
   "DisableQuota": "Vypnúť kvótu",
   "DisableStorageQuota": "Vypnúť kvótu úložiska",
+  "Disabled": "Vypnuté",
   "Disconnect": "Odpojiť",
   "DocSpaceAdmin": "Administrátor DocSpace",
   "DocSpaceOwner": "Vlastník DocSpace",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> vás pozýva, aby ste sa pripojili k priestoru DocSpace <1>{{{spaceAddress}}</1> na bezpečnú spoluprácu na dokumentoch.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> vás pozýva, aby ste sa pripojili k miestnosti <1>{{roomName}}</1> na bezpečnú spoluprácu na dokumentoch.",
   "Invite": "Pozvať",
+  "Invited": "Pozvaný",
   "InviteUsers": "Pozvať používateľov",
   "IpAddress": "IP adresa",
   "Kilobyte": "KB",
@@ -226,6 +228,7 @@
   "MakeForm": "Uložiť ako oform",
   "ManageStorageQuota": "Správa kvóty úložiska",
   "ManyEmails": "Analyzovalo sa príliš veľa e -mailov",
+  "MaximumNumberOfExternalLinksCreated": "Maximálny počet vytvorených externých odkazov",
   "MaxLengthExceeded": "Maximálna dĺžka používateľského mena alebo inej miestnej časti je 64 znakov.",
   "MediaError": "Média URL sa nepodarilo načítať",
   "Megabyte": "MB",

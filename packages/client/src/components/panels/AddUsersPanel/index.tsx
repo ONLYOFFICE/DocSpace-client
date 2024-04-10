@@ -1,46 +1,48 @@
-// (c) Copyright Ascensio System SIA 2010-2024
-// 
+// (c) Copyright Ascensio System SIA 2009-2024
+//
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
 // of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
 // Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
 // to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
 // any third-party rights.
-// 
+//
 // This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
 // of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
 // the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-// 
+//
 // You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-// 
+//
 // The  interactive user interfaces in modified source and object code versions of the Program must
 // display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-// 
+//
 // Pursuant to Section 7(b) of the License you must retain the original Product logo when
 // distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
 // trademark law for use of our trademarks.
-// 
+//
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
-import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
 import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
 
 import { Aside } from "@docspace/shared/components/aside";
 import { Backdrop } from "@docspace/shared/components/backdrop";
-import { Selector, TSelectorItem } from "@docspace/shared/components/selector";
+import {
+  Selector,
+  SelectorAccessRightsMode,
+  TSelectorItem,
+} from "@docspace/shared/components/selector";
 import {
   TAccessRight,
   TSelectorAccessRights,
   TSelectorCancelButton,
-  TSelectorSelectAll,
   TWithTabs,
 } from "@docspace/shared/components/selector/Selector.types";
 import { toastr } from "@docspace/shared/components/toast";
@@ -49,16 +51,27 @@ import useLoadingWithTimeout from "@docspace/shared/hooks/useLoadingWithTimeout"
 import { getUserRole } from "@docspace/shared/utils/common";
 import Filter from "@docspace/shared/api/people/filter";
 import { getMembersList, getUserList } from "@docspace/shared/api/people";
-import { AccountsSearchArea, ShareAccessRights } from "@docspace/shared/enums";
+import {
+  AccountsSearchArea,
+  EmployeeStatus,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 import { RowLoader, SearchLoader } from "@docspace/shared/skeletons/selector";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TGroup } from "@docspace/shared/api/groups/types";
 import { MIN_LOADER_TIMER } from "@docspace/shared/selectors/Files/FilesSelector.constants";
+import { TTranslation } from "@docspace/shared/types";
 
 const PEOPLE_TAB_ID = "0";
 const GROUP_TAB_ID = "1";
 
-const toListItem = (item: TUser | TGroup) => {
+const toListItem = (
+  item: TUser | TGroup,
+  t: TTranslation,
+  invitedUsers?: string[],
+  disableDisabledUsers?: boolean,
+  isRoom?: boolean,
+) => {
   if ("displayName" in item) {
     const {
       id,
@@ -72,11 +85,24 @@ const toListItem = (item: TUser | TGroup) => {
       isVisitor,
       isCollaborator,
       isRoomAdmin,
+      status,
+      shared,
     } = item;
 
     const role = getUserRole(item);
 
     const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
+
+    const isInvited = invitedUsers?.includes(id) || (isRoom && shared);
+
+    const isDisabled =
+      disableDisabledUsers && status === EmployeeStatus.Disabled;
+
+    const disabledText = isInvited
+      ? t("Common:Invited")
+      : isDisabled
+        ? t("Common:Disabled")
+        : "";
 
     return {
       id,
@@ -89,6 +115,8 @@ const toListItem = (item: TUser | TGroup) => {
       isVisitor,
       isCollaborator,
       isRoomAdmin,
+      isDisabled: isInvited || isDisabled,
+      disabledText,
     } as TSelectorItem;
   }
 
@@ -97,8 +125,11 @@ const toListItem = (item: TUser | TGroup) => {
 
     isGroup,
     name: groupName,
+    shared,
   } = item;
 
+  const isInvited = invitedUsers?.includes(id) || (isRoom && shared);
+  const disabledText = isInvited ? t("Common:Invited") : "";
   const userAvatar = "";
 
   return {
@@ -107,6 +138,8 @@ const toListItem = (item: TUser | TGroup) => {
     avatar: userAvatar,
     isGroup,
     label: groupName,
+    disabledText,
+    isDisabled: isInvited,
   } as TSelectorItem;
 };
 
@@ -127,7 +160,10 @@ type AddUsersPanelProps = {
   withoutBackground: boolean;
   withBlur: boolean;
 
-  roomId: string | number;
+  invitedUsers?: string[];
+  disableDisabledUsers?: boolean;
+
+  roomId?: string | number;
   withGroups?: boolean;
 };
 
@@ -150,6 +186,9 @@ const AddUsersPanel = ({
   roomId,
 
   withGroups,
+
+  invitedUsers,
+  disableDisabledUsers,
 }: AddUsersPanelProps) => {
   const theme = useTheme();
   const { t } = useTranslation([
@@ -164,15 +203,40 @@ const AddUsersPanel = ({
   const [isInit, setIsInit] = useState(true);
   const [isLoading, setIsLoading] = useLoadingWithTimeout<boolean>(0, true);
   const [activeTabId, setActiveTabId] = useState<string>(PEOPLE_TAB_ID);
+  const [selectedItems, setSelectedItems] = useState<TSelectorItem[]>([]);
+
+  const [itemsList, setItemsList] = useState<TSelectorItem[]>([]);
+  const [searchValue, setSearchValue] = useState("");
+  const [hasNextPage, setHasNextPage] = useState(true);
+  const [isNextPageLoading, setIsNextPageLoading] = useState(false);
+  const [total, setTotal] = useState(0);
+  const totalRef = useRef(0);
+
+  const onSelect = (
+    item: TSelectorItem,
+    isDoubleClick: boolean,
+    doubleClickCallback: () => void,
+  ) => {
+    setSelectedItems((items) => {
+      const includeFile = items.find((el) => el.id === item.id);
+
+      if (includeFile)
+        return isMultiSelect
+          ? items.filter((el) => el.id !== includeFile.id)
+          : [];
+
+      return isMultiSelect ? [...items, item] : [item];
+    });
+    if (isDoubleClick && !isMultiSelect) {
+      doubleClickCallback();
+    }
+  };
+
   const accessRight =
     defaultAccess ||
     (isEncrypted ? ShareAccessRights.FullAccess : ShareAccessRights.ReadOnly);
 
   const onBackClick = () => onClose();
-  const getFilterWithOutDisabledUser = useCallback(
-    () => Filter.getFilterWithOutDisabledUser(),
-    [],
-  );
 
   const onKeyPress = (e: KeyboardEvent) => {
     if (e.key === "Esc" || e.key === "Escape") onClose();
@@ -236,13 +300,6 @@ const AddUsersPanel = ({
     (access) => access.access === accessRight,
   )[0];
 
-  const [itemsList, setItemsList] = useState<TSelectorItem[]>([]);
-  const [searchValue, setSearchValue] = useState("");
-  const [hasNextPage, setHasNextPage] = useState(true);
-  const [isNextPageLoading, setIsNextPageLoading] = useState(false);
-  const [total, setTotal] = useState(0);
-  const totalRef = useRef(0);
-
   const changeActiveTab = useCallback((tab: number | string) => {
     setActiveTabId(`${tab}`);
     isFirstLoad.current = true;
@@ -289,12 +346,13 @@ const AddUsersPanel = ({
 
       setIsNextPageLoading(true);
 
-      const currentFilter = getFilterWithOutDisabledUser();
+      const currentFilter = Filter.getDefault();
 
       currentFilter.page = startIndex / pageCount;
       currentFilter.pageCount = pageCount;
-      // @ts-expect-error think its ok
-      currentFilter.excludeShared = true;
+
+      // show all users, but disabled invited
+      // currentFilter.excludeShared = true;
       currentFilter.search = searchValue || "";
 
       const response = !roomId
@@ -303,7 +361,9 @@ const AddUsersPanel = ({
 
       const totalDifferent = startIndex ? response.total - totalRef.current : 0;
 
-      let items = response.items.map((item) => toListItem(item));
+      const items = response.items.map((item) =>
+        toListItem(item, t, invitedUsers, disableDisabledUsers, !!roomId),
+      );
       const newTotal = response.total - totalDifferent;
 
       if (isFirstLoad.current) {
@@ -338,10 +398,12 @@ const AddUsersPanel = ({
     },
     [
       activeTabId,
-      getFilterWithOutDisabledUser,
+      disableDisabledUsers,
+      invitedUsers,
       roomId,
       searchValue,
       setIsLoading,
+      t,
       withGroups,
     ],
   );
@@ -357,7 +419,13 @@ const AddUsersPanel = ({
     isGroup?: boolean,
   ) => {
     return (
-      <div style={{ width: "100%" }}>
+      <div
+        style={{
+          width: "100%",
+          overflow: "hidden",
+          marginInlineEnd: "16px",
+        }}
+      >
         <Text
           className="label"
           fontWeight={600}
@@ -387,15 +455,6 @@ const AddUsersPanel = ({
     );
   };
 
-  const withSelectAllProps: TSelectorSelectAll = isMultiSelect
-    ? {
-        withSelectAll: isMultiSelect,
-        selectAllLabel: t("Common:AllAccounts"),
-        selectAllIcon: CatalogAccountsReactSvgUrl,
-        onSelectAll: () => {},
-      }
-    : {};
-
   const withAccessRightsProps: TSelectorAccessRights =
     withAccessRights && isMultiSelect
       ? {
@@ -403,6 +462,7 @@ const AddUsersPanel = ({
           accessRights: accessOptions,
           selectedAccessRight: selectedAccess,
           onAccessRightsChange: () => {},
+          accessRightsMode: SelectorAccessRightsMode.Detailed,
         }
       : {};
 
@@ -453,12 +513,14 @@ const AddUsersPanel = ({
       >
         <Selector
           withHeader
+          alwaysShowFooter
           headerProps={{
             // Todo: Update groups empty screen texts when they are ready
             headerLabel: t("Common:ListAccounts"),
             withoutBackButton: false,
             onBackClick,
           }}
+          onSelect={onSelect}
           renderCustomItem={renderCustomItem}
           withSearch
           searchPlaceholder={t("Common:Search")}
@@ -469,8 +531,7 @@ const AddUsersPanel = ({
           isMultiSelect={isMultiSelect}
           submitButtonLabel={t("Common:AddButton")}
           onSubmit={onUsersSelect}
-          disableSubmitButton={false}
-          {...withSelectAllProps}
+          disableSubmitButton={selectedItems.length === 0}
           {...withAccessRightsProps}
           {...withCancelButtonProps}
           emptyScreenImage={emptyScreenImage}

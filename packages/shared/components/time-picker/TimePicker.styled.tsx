@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -57,13 +57,10 @@ const TimeInput = styled.div<{ hasError?: boolean; isFocused?: boolean }>`
   }
 
   input {
+    max-width: 22px;
     padding: 0;
     padding-left: 2.5px;
     margin-right: -2.5px;
-  }
-
-  input:last-of-type {
-    text-align: end;
   }
 
   input[type="search"]::-webkit-search-decoration,

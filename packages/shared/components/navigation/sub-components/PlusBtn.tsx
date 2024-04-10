@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -39,6 +39,7 @@ const PlusButton = ({
   onPlusClick,
   isFrame,
   id,
+  onCloseDropBox,
   ...rest
 }: IPlusButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -62,6 +63,7 @@ const PlusButton = ({
 
   const onHide = () => {
     setIsOpen(false);
+    onCloseDropBox?.();
   };
 
   const model = getData();

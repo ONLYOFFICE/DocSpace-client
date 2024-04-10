@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,6 @@
 
 import { TColorScheme } from "../../themes";
 import { DeviceType } from "../../enums";
-import { TWhiteLabel } from "../../utils/whiteLabelHelper";
 import { TUser } from "../../api/people/types";
 import { TTranslation } from "../../types";
 
@@ -42,7 +41,6 @@ export interface ArticleHeaderProps {
   onClick?: () => void;
   onLogoClickAction?: () => void;
   isBurgerLoading: boolean;
-  whiteLabelLogoUrls: TWhiteLabel[];
   withCustomArticleHeader: boolean;
   currentDeviceType: DeviceType;
 }
@@ -53,7 +51,7 @@ export interface ArticleProfileProps {
   user?: TUser;
   showText: boolean;
   getActions?: (t: TTranslation) => ContextMenuModel[];
-  onProfileClick?: () => void;
+  onProfileClick?: (obj: { originalEvent: React.MouseEvent }) => void;
   currentDeviceType: DeviceType;
 }
 
@@ -67,6 +65,7 @@ export interface ArticleZendeskProps {
   zendeskKey: string;
   showProgress: boolean;
   isShowLiveChat: boolean;
+  isInfoPanelVisible?: boolean;
 }
 
 export interface ArticleAppsProps {
@@ -111,6 +110,8 @@ export interface ArticleProps {
   isLiveChatAvailable: boolean;
   isShowLiveChat: boolean;
 
+  isInfoPanelVisible?: boolean;
+
   onLogoClickAction?: () => void;
 
   currentDeviceType: DeviceType;
@@ -120,7 +121,6 @@ export interface ArticleProps {
 
   onArticleHeaderClick?: () => void;
   isBurgerLoading: boolean;
-  whiteLabelLogoUrls: TWhiteLabel[];
 
   languageBaseName: string;
   zendeskEmail: string;

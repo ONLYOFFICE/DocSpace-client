@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Tietoja",
   "AboutCompanyTitle": "Tietoja tästä ohjelmasta",
   "AccessDenied": "Pääsy evätty",
@@ -109,6 +109,7 @@
   "DeveloperTools": "Kehittäjän työkalut",
   "DisableQuota": "Poista kiintiö käytöstä",
   "DisableStorageQuota": "Poista muistikiintiö käytöstä",
+  "Disabled": "Poistettu käytöstä",
   "Disconnect": "Katkaise",
   "DocSpaceAdmin": "DocSpace- järjestelmänvalvoja",
   "DocSpaceOwner": "DocSpace omistaja",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> kutsuu sinut liittymään DocSpaceen <1>{{spaceAddress}}</1> turvallista asiakirjayhteistyötä varten.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> kutsuu sinut liittymään huoneeseen  <1>{{roomName}}</1> turvallista asiakirjayhteistyötä varten.",
   "Invite": "Kutsu",
+  "Invited": "Kutsuttu",
   "InviteUsers": "Kutsu käyttäjiä",
   "IpAddress": "IP-osoite",
   "Kilobyte": "KB",
@@ -226,6 +228,7 @@
   "MakeForm": "Tallenna nimellä PDF",
   "ManageStorageQuota": "Hallitse muistikiintiötä",
   "ManyEmails": "Liian monta jäsenneltyä sähköpostia",
+  "MaximumNumberOfExternalLinksCreated": "Enimmäismäärä ulkoisia linkkejä luotu",
   "MaxLengthExceeded": "Käyttäjänimen tai muun paikallisen osan enimmäispituus on 64 merkkiä.",
   "MediaError": "Media URL ei voitu ladata",
   "Megabyte": "MB",

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -126,37 +126,82 @@ const Track = ({
         <path
           d="M 0,-100 A 100,100 0 0,1 86.6,-50"
           stroke={`url(#spinner-color-${id}-1)`}
-        />
+        >
+          <animateTransform
+            from="0 0 0"
+            to="360 0 0"
+            attributeName="transform"
+            type="rotate"
+            repeatCount="indefinite"
+            dur="1300ms"
+          />
+        </path>
         <path
           d="M 86.6,-50 A 100,100 0 0,1 86.6,50"
           stroke={`url(#spinner-color-${id}-2)`}
-        />
+        >
+          <animateTransform
+            from="0 0 0"
+            to="360 0 0"
+            attributeName="transform"
+            type="rotate"
+            repeatCount="indefinite"
+            dur="1300ms"
+          />
+        </path>
         <path
           d="M 86.6,50 A 100,100 0 0,1 0,100"
           stroke={`url(#spinner-color-${id}-3)`}
-        />
+        >
+          <animateTransform
+            from="0 0 0"
+            to="360 0 0"
+            attributeName="transform"
+            type="rotate"
+            repeatCount="indefinite"
+            dur="1300ms"
+          />
+        </path>
         <path
           d="M 0,100 A 100,100 0 0,1 -86.6,50"
           stroke={`url(#spinner-color-${id}-4)`}
-        />
+        >
+          <animateTransform
+            from="0 0 0"
+            to="360 0 0"
+            attributeName="transform"
+            type="rotate"
+            repeatCount="indefinite"
+            dur="1300ms"
+          />
+        </path>
         <path
           d="M -86.6,50 A 100,100 0 0,1 -86.6,-50"
           stroke={`url(#spinner-color-${id}-5)`}
-        />
+        >
+          <animateTransform
+            from="0 0 0"
+            to="360 0 0"
+            attributeName="transform"
+            type="rotate"
+            repeatCount="indefinite"
+            dur="1300ms"
+          />
+        </path>
         <path
           d="M -86.6,-50 A 100,100 0 0,1 0,-100"
           stroke={`url(#spinner-color-${id}-6)`}
-        />
+        >
+          <animateTransform
+            from="0 0 0"
+            to="360 0 0"
+            attributeName="transform"
+            type="rotate"
+            repeatCount="indefinite"
+            dur="1300ms"
+          />
+        </path>
       </g>
-
-      <animateTransform
-        from="0 0 0"
-        to="360 0 0"
-        attributeName="transform"
-        type="rotate"
-        repeatCount="indefinite"
-        dur="1300ms"
-      />
     </StyledTrack>
   );
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -103,7 +103,11 @@ const SetRoomParams = ({
     useState(true);
   const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
 
+  const [forceHideRoomTypeDropdown, setForceHideRoomTypeDropdown] =
+    useState(false);
+
   const isFormRoom = roomParams.type === RoomsType.FormRoom;
+  const isPublicRoom = roomParams.type === RoomsType.PublicRoom;
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
@@ -154,6 +158,7 @@ const SetRoomParams = ({
           setRoomType={setRoomType}
           setIsScrollLocked={setIsScrollLocked}
           isDisabled={isDisabled}
+          forсeHideDropdown={forceHideRoomTypeDropdown}
         />
       )}
       {isEdit && (
@@ -175,6 +180,8 @@ const SetRoomParams = ({
         isDisabled={isDisabled}
         isValidTitle={isValidTitle}
         isWrongTitle={isWrongTitle}
+        onFocus={() => setForceHideRoomTypeDropdown(true)}
+        onBlur={() => setForceHideRoomTypeDropdown(false)}
         errorMessage={
           isWrongTitle
             ? t("Files:ContainsSpecCharacter")
@@ -183,11 +190,14 @@ const SetRoomParams = ({
         onKeyUp={onKeyUp}
         isAutoFocussed={true}
       />
+
       <TagInput
         t={t}
         tagHandler={tagHandler}
         setIsScrollLocked={setIsScrollLocked}
         isDisabled={isDisabled}
+        onFocus={() => setForceHideRoomTypeDropdown(true)}
+        onBlur={() => setForceHideRoomTypeDropdown(false)}
       />
 
       {/* //TODO: Uncomment when private rooms are done
@@ -216,10 +226,9 @@ const SetRoomParams = ({
         />
       )}
 
-      {!isEdit && enableThirdParty && (
+      {!isEdit && enableThirdParty && isPublicRoom && (
         <ThirdPartyStorage
           t={t}
-          roomType={roomParams.type}
           roomTitle={roomParams.title}
           storageLocation={roomParams.storageLocation}
           onChangeStorageLocation={onChangeStorageLocation}

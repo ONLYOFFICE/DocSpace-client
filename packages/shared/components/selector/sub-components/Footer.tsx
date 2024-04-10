@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,21 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useRef } from "react";
 
 import { Button, ButtonSize } from "../../button";
 import { TextInput, InputSize, InputType } from "../../text-input";
 import { Checkbox } from "../../checkbox";
-import { ComboBoxSize, TOption } from "../../combobox";
 
 import {
   StyledFooter,
-  StyledComboBox,
   StyledButtonContainer,
   StyledNewNameContainer,
   StyledNewNameHeader,
 } from "../Selector.styled";
-import { TAccessRight, FooterProps } from "../Selector.types";
+import { FooterProps } from "../Selector.types";
+import AccessSelector from "./AccessSelector";
 
 const Footer = React.memo(
   ({
@@ -54,6 +53,7 @@ const Footer = React.memo(
     disableSubmitButton,
     onCancel,
     onAccessRightsChange,
+    accessRightsMode,
 
     withFooterInput,
     withFooterCheckbox,
@@ -69,6 +69,8 @@ const Footer = React.memo(
 
     requestRunning,
   }: FooterProps) => {
+    const ref = useRef<HTMLDivElement>(null);
+
     const label =
       selectedItemsCount && isMultiSelect
         ? `${submitButtonLabel} (${selectedItemsCount})`
@@ -87,6 +89,7 @@ const Footer = React.memo(
 
     return (
       <StyledFooter
+        ref={ref}
         withFooterInput={withFooterInput}
         withFooterCheckbox={withFooterCheckbox}
         className="selector_footer"
@@ -146,19 +149,12 @@ const Footer = React.memo(
           />
 
           {withAccessRights && (
-            <StyledComboBox
-              onSelect={(opt?: TOption) =>
-                onAccessRightsChange?.({ ...opt } as TAccessRight)
-              }
-              options={accessRights as TOption[]}
-              size={ComboBoxSize.content}
-              scaled={false}
-              manualWidth="fit-content"
-              selectedOption={selectedAccessRight as TOption}
-              showDisabledItems
-              directionX="right"
-              directionY="top"
-              forceCloseClickOutside
+            <AccessSelector
+              accessRights={accessRights}
+              selectedAccessRight={selectedAccessRight}
+              onAccessRightsChange={onAccessRightsChange}
+              footerRef={ref}
+              accessRightsMode={accessRightsMode}
             />
           )}
 

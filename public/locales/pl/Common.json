@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "O",
   "AboutCompanyTitle": "O tym programie",
   "AccessDenied": "Odmowa dostępu",
@@ -109,6 +109,7 @@
   "DeveloperTools": "Narzędzia programistyczne",
   "DisableQuota": "Wyłącz limit",
   "DisableStorageQuota": "Wyłącz limit pamięci",
+  "Disabled": "Wyłączono",
   "Disconnect": "Rozłącz",
   "DocSpaceAdmin": "Administrator DocSpace",
   "DocSpaceOwner": "Właściciel DocSpace",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> zaprasza Cię do DocSpace <1>{{spaceAddress}}</1> w celu bezpiecznej współpracy nad dokumentami.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> zaprasza Cię do pokoju <1>{{roomName}}</1> w celu bezpiecznej współpracy nad dokumentami.",
   "Invite": "Zaprosić",
+  "Invited": "Zaproszono",
   "InviteUsers": "Zaproś użytkowników",
   "IpAddress": "Adres IP",
   "Kilobyte": "KB",
@@ -226,6 +228,7 @@
   "MakeForm": "Zapisz jako oform",
   "ManageStorageQuota": "Zarządzaj limitem pamięci",
   "ManyEmails": "Podano za dużo adresów e-mail",
+  "MaximumNumberOfExternalLinksCreated": "Utworzono maksymalną liczbę linków zewnętrznych",
   "MaxLengthExceeded": "Maksymalna długość identyfikatora użytkownika wynosi 64 znaki.",
   "MediaError": "Nie udało się załadować adresu URL mediów",
   "Megabyte": "MB",

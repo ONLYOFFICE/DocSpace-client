@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -66,6 +66,7 @@ const DropBox = React.forwardRef<HTMLDivElement, IDropBoxProps>(
 
       currentDeviceType,
       navigationTitleContainerNode,
+      onCloseDropBox,
     },
     ref,
   ) => {
@@ -144,6 +145,7 @@ const DropBox = React.forwardRef<HTMLDivElement, IDropBoxProps>(
             toggleInfoPanel={toggleInfoPanel}
             toggleDropBox={toggleDropBox}
             isInfoPanelVisible={isInfoPanelVisible}
+            onCloseDropBox={onCloseDropBox}
             showTitle
           />
         </StyledContainer>

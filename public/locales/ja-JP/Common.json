@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "について",
   "AboutCompanyTitle": "本プログラムについて",
   "AccessDenied": "アクセス拒否",
@@ -109,6 +109,7 @@
   "DeveloperTools": "開発者ツール",
   "DisableQuota": "容量制限を無効にする",
   "DisableStorageQuota": "ストレージの容量制限を無効にする",
+  "Disabled": "無効",
   "Disconnect": "接続解除",
   "DocSpaceAdmin": "DocSpaceの管理者",
   "DocSpaceOwner": "DocSpaceの所有者",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1> {{lastName}}{{firstName}}</1>さんは、安全なドキュメント共同作業をするように、あなたをDocSpace <1>{spaceAddress}}</1>に招待しています。",
   "InvitationToRoom": "<1> {{lastName}}{{firstName}}</1>さんは、安全なドキュメント共同作業をするように、あなたをルーム <1>{roomName}}</1>に招待しています。",
   "Invite": "招待する",
+  "Invited": "招待済み",
   "InviteUsers": "ユーザーを招待する",
   "IpAddress": "IPアドレス",
   "Kilobyte": "KB",
@@ -226,6 +228,7 @@
   "MakeForm": "PDFフォームとして保存",
   "ManageStorageQuota": "容量制限を管理する",
   "ManyEmails": "解析されたメール数が多すぎる",
+  "MaximumNumberOfExternalLinksCreated": "作成される外部リンクの最大数",
   "MaxLengthExceeded": "ユーザー名などのローカルパートの最大長は64文字です。",
   "MediaError": "メディアURLを読み込むことができませんでした",
   "Megabyte": "MB",

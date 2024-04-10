@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -53,6 +53,7 @@ const DataManagementWrapper = (props) => {
     t,
 
     isNotPaidPeriod,
+    currentDeviceType,
   } = props;
 
   const navigate = useNavigate();
@@ -143,6 +144,13 @@ const DataManagementWrapper = (props) => {
       data={data}
       startSelect={currentTab}
       onSelect={(e) => onSelect(e)}
+      topProps={
+        currentDeviceType === DeviceType.desktop
+          ? 0
+          : currentDeviceType === DeviceType.mobile
+            ? "53px"
+            : "61px"
+      }
     />
   );
 };
@@ -172,6 +180,7 @@ export default inject(
       buttonSize,
       isNotPaidPeriod,
       currentColorScheme,
+      currentDeviceType,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -73,6 +73,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
             color={title?.color || "#333"}
             fontSize={title?.fontSize}
             fontWeight={title?.fontWeight}
+            lineHeight="12px"
           >
             {Header}
           </TextComponent>
@@ -111,6 +112,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
             fontSize={action?.fontSize}
             fontWeight={action?.fontWeight}
             onClick={() => onAction(action?.type, Link)}
+            isHovered
           >
             {ButtonLabel}
           </LinkComponent>

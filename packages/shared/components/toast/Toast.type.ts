@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,6 +43,8 @@ export interface ToastProps {
   withCross?: boolean;
   /** Time (in milliseconds) for showing your toast. Setting in 0 let you to show toast constantly until clicking on it */
   timeout?: number;
+
+  isSSR?: boolean;
 }
 
 export type TData = {

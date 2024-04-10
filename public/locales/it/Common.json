@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Informazioni su",
   "AboutCompanyTitle": "Informazioni sul programma",
   "AccessDenied": " Accesso negato",
@@ -109,6 +109,7 @@
   "DeveloperTools": "Strumenti di sviluppo",
   "DisableQuota": "Disabilita quota",
   "DisableStorageQuota": "Disabilita quota di archiviazione",
+  "Disabled": "Disattivata",
   "Disconnect": "Scollega",
   "DocSpaceAdmin": "Amministratore di DocSpace",
   "DocSpaceOwner": "Proprietario di DocSpace",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> ti invita a unirti a DocSpace <1>{{spaceAddress}}</1> per una collaborazione sicura sui documenti.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> ti invita a unirti alla stanza <1>{{roomName}}</1> per una collaborazione sicura sui documenti.",
   "Invite": "Invita",
+  "Invited": "Invitato",
   "InviteUsers": "Invita gli utenti",
   "IpAddress": "Indirizzo IP",
   "Kilobyte": "KB",
@@ -226,6 +228,7 @@
   "MakeForm": "Salva come modulo PDF",
   "ManageStorageQuota": "Gestisci la quota di archiviazione",
   "ManyEmails": "Ci sono troppe email da analizzare",
+  "MaximumNumberOfExternalLinksCreated": "Numero massimo di link esterni creati",
   "MaxLengthExceeded": "La lunghezza massima di un nome utente o di un'altra parte locale è di 64 caratteri.",
   "MediaError": "Impossibile caricare l'URL del contenuto multimediale",
   "Megabyte": "MB",

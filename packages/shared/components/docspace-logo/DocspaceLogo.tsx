@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,29 +25,26 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { ReactSVG } from "react-svg";
 import { useTheme } from "styled-components";
 
-import { classNames, getLogoFromPath } from "@docspace/shared/utils";
+import { classNames, getLogoUrl } from "@docspace/shared/utils";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
 
 import { StyledWrapper } from "./DocspaceLogo.styled";
 import type { DocspaceLogoProps } from "./DocspaceLogo.types";
 
-const DocspaceLogo = ({ className, whiteLabelLogoUrls }: DocspaceLogoProps) => {
+const DocspaceLogo = ({ className }: DocspaceLogoProps) => {
   const theme = useTheme();
 
-  const logo = getLogoFromPath(
-    theme.isBase
-      ? whiteLabelLogoUrls[1]?.path?.light
-      : whiteLabelLogoUrls[1]?.path?.dark,
-  );
+  const logo = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
 
   return (
     <StyledWrapper>
       {logo && (
-        <ReactSVG
+        <img
           src={logo}
           className={classNames("logo-wrapper", className)}
+          alt=""
         />
       )}
     </StyledWrapper>

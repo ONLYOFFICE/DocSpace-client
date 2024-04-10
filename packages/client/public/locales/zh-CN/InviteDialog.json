@@ -1,4 +1,4 @@
-{
+﻿{
   "AddManually": "手动添加",
   "AddManuallyDescriptionAccounts": "通过邮件亲自邀请新用户加入协作空间",
   "AddManuallyDescriptionRoom": "通过姓名向房间中添加现有协作空间用户，或通过邮件亲自邀请新用户",
@@ -6,7 +6,6 @@
   "GroupMaxAvailableRoleWarning": "群组有最大的可用角色“{{role}}”。您向房间中添加群组后，可以添加权限。",
   "InvitationLanguage": "邀请语言",
   "InviteAccountSearchPlaceholder": "通过邮件进行邀请",
-  "Invited": "已邀请",
   "InviteRoomSearchPlaceholder": "根据姓名或邮件邀请用户",
   "InviteViaLink": "通过链接进行邀请",
   "InviteViaLinkDescriptionAccounts": "在协作空间中创建自我授权通用链接",

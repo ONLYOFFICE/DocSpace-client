@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Մասին",
   "AboutCompanyTitle": "Ծրագրի մասին",
   "AccessDenied": "Մուտքն արգելված է",
@@ -109,6 +109,7 @@
   "DeveloperTools": "Մշակողի գործիքներ",
   "DisableQuota": "Անջատել քվոտան",
   "DisableStorageQuota": "Անջատել պահեստի սահմանաչափը",
+  "Disabled": "Անջատված է",
   "Disconnect": "Ապակապակցել",
   "DocSpaceAdmin": "DocSpace-ի ադմինիստրատոր",
   "DocSpaceOwner": "DocSpace-ի տնօրինող",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1>-ը հրավիրում է ձեզ միանալ ԴոկՍպեյսի <1>{{spaceAddress}}</1> փաստաթղթի անվտանգ համագործակցության համար:",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1>-ը հրավիրում է ձեզ միանալ սենյակին <1>{{roomName}}</1>՝ փաստաթղթերի անվտանգ համագործակցության համար:",
   "Invite": "Հրավիրել",
+  "Invited": "Հրավիրված",
   "InviteUsers": "Հրավիրեք օգտվողներին",
   "IpAddress": "IP հասցե",
   "Kilobyte": "ԿԲ",
@@ -226,6 +228,7 @@
   "MakeForm": "Պահպանել որպես PDF-ի ձև",
   "ManageStorageQuota": "Կառավարեք պահեստի քվոտան",
   "ManyEmails": "Չափից շատ էլփոստի հասցեներ վերլուծված են",
+  "MaximumNumberOfExternalLinksCreated": "Ստեղծված արտաքին հղումների առավելագույն քանակը",
   "MaxLengthExceeded": "Օգտվողի անվան կամ մեկ այլ տեղական մասի առավելագույն երկարությունը 64 նիշ է:",
   "MediaError": "Մեդիա URL-ը չհաջողվեց բեռնել",
   "Megabyte": "ՄԲ",

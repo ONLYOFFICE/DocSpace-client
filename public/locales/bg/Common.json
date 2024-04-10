@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Относно",
   "AboutCompanyTitle": "За тази програма",
   "AccessDenied": "Достъпът отказан",
@@ -109,6 +109,7 @@
   "DeveloperTools": "Инструменти за разработчици",
   "DisableQuota": "Деактивирай квота",
   "DisableStorageQuota": "Деактивирай квота за съхранение",
+  "Disabled": "Деактивиран",
   "Disconnect": "Прекъсни връзката",
   "DocSpaceAdmin": "Администратор на DocSpace",
   "DocSpaceOwner": "DocSpace собственик",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> ви кани да се присъедините към DocSpace <1>{{spaceAddress}}</1> за защитена съвместна работа с документи.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> ви кани да се присъедините към стаята <1>{{roomName}}</1> за защитена съвместна работа по документи.",
   "Invite": "Каня",
+  "Invited": "Поканени",
   "InviteUsers": "Поканете потребители",
   "IpAddress": "IP адрес",
   "Kilobyte": "KB",
@@ -226,6 +228,7 @@
   "MakeForm": "Запази като PDF формуляр",
   "ManageStorageQuota": "Управление на квотата за съхранение",
   "ManyEmails": "Анализирани са твърде много имейли",
+  "MaximumNumberOfExternalLinksCreated": "Максимален брой създадени външни линкове",
   "MaxLengthExceeded": "Максималната дължина на потребителско име или друга местна част е 64 символа.",
   "MediaError": "Имаше проблем при зареждането на URL адреса на мултимедията",
   "Megabyte": "MB",

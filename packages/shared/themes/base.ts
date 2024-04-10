@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -331,7 +331,7 @@ export const getBaseTheme = () => {
       fontWeight: "500",
       textDecoration: "none",
       padding: "0",
-      borderRadius: "2px",
+      borderRadius: "3px",
       height: "40px",
       heightSmall: "32px",
       textAlign: "left",
@@ -339,22 +339,28 @@ export const getBaseTheme = () => {
       outline: "none",
       width: "100%",
 
+      border: "1px solid #D0D5DA",
       background: white,
-      disableBackgroundColor: "#F8F9F9",
-      connectBackground: "#3B72A7",
-      hoverBackground: white,
-      hoverConnectBackground: "#265A8F",
-      activeBackground: "grayMaxLight",
-      hoverBorder: "#1877f2",
 
-      boxShadow:
-        "0px 1px 1px rgba(0, 0, 0, 0.24),0px 0px 1px rgba(0, 0, 0, 0.12)",
-      hoverBoxShadow: "none",
+      borderConnect: "none",
+      connectBackground: "#3B72A7",
+
+      disableBackgroundColor: "#F8F9F9",
+
+      hoverBackground: white,
+      hoverBorder: "1px solid #5299E0",
+      hoverConnectBackground: "#316DAA",
+      hoverConnectBorder: "none",
+
+      activeBorder: "1px solid #D0D5DA",
+      activeBackground: "#ECEEF1",
+      activeConnectBorder: "none",
+      activeConnectBackground: "#265A8F",
 
       color: "rgba(0, 0, 0, 0.54)",
       disableColor: "#333333",
       disabledSvgColor: "none",
-      border: "none",
+
       text: {
         width: "100%",
         height: "18px",
@@ -373,16 +379,12 @@ export const getBaseTheme = () => {
 
       svg: {
         margin: "11px 8px",
-        width: "18px",
-        height: "18px",
-        minWidth: "18px",
-        minHeight: "18px",
+        width: "20px",
+        height: "20px",
+        minWidth: "20px",
+        minHeight: "20px",
         fill: white,
       },
-    },
-
-    socialButtonsGroup: {
-      border: "1px solid #D0D5DA",
     },
 
     groupButton: {
@@ -654,6 +656,16 @@ export const getBaseTheme = () => {
       minHeight: "100%",
 
       colorDisabledFileIcons: "#f3f4f4",
+
+      backdrop: {
+        backgroundRGBA: {
+          r: 6,
+          g: 22,
+          b: 38,
+          a: 0.2,
+        },
+        blur: 10,
+      },
 
       content: {
         backgroundColor: white,
@@ -1000,7 +1012,7 @@ export const getBaseTheme = () => {
       maxWidth: "340px",
       color: white,
       textColor: black,
-      backgroundColor: "#f8f7bf",
+      backgroundColor: "#F8F9F9",
 
       before: {
         border: "none",
@@ -1110,16 +1122,16 @@ export const getBaseTheme = () => {
 
       roleWrapperContainer: {
         right: {
-          min: "-5px",
+          min: "-2px",
           small: "-2px",
           base: "-2px",
           medium: "-4px",
           big: "3px",
-          max: "0px",
+          max: "10px",
         },
 
         bottom: {
-          min: "-5px",
+          min: "-2px",
           small: "3px",
           base: "4px",
           medium: "6px",
@@ -1128,13 +1140,15 @@ export const getBaseTheme = () => {
         },
 
         width: {
+          min: "12px",
           medium: "16px",
-          max: "24px",
+          max: "22px",
         },
 
         height: {
+          min: "12px",
           medium: "16px",
-          max: "24px",
+          max: "22px",
         },
       },
 
@@ -1425,7 +1439,7 @@ export const getBaseTheme = () => {
       zIndex: "400",
       background: white,
       borderRadius: "6px",
-      boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.13)",
+      boxShadow: "0px 8px 16px 0px #040F1B14",
       border: "none",
     },
 
@@ -1656,7 +1670,7 @@ export const getBaseTheme = () => {
         flex: "0 0 6px",
         marginTopWithBorder: "5px",
         marginTop: "12px",
-        marginRight: "8px",
+        marginRight: "5px",
         marginLeft: "auto",
       },
 
@@ -1696,7 +1710,7 @@ export const getBaseTheme = () => {
       },
 
       label: {
-        marginRightWithBorder: "8px",
+        marginRightWithBorder: "13px",
         marginRight: "4px",
 
         disabledColor: grayMid,
@@ -2009,7 +2023,7 @@ export const getBaseTheme = () => {
       expanderColor: black,
       background: white,
       rootFolderTitleColor: "#A3A9AE",
-      boxShadow: " 0px 12px 40px 0px #040F1B1F",
+      boxShadow: "0px 8px 16px 0px #040F1B14",
 
       icon: {
         fill: "#316DAA",
@@ -2086,7 +2100,7 @@ export const getBaseTheme = () => {
 
       links: {
         iconColor: "#3B72A7",
-        iconErrorColor: "rgba(242, 28, 14, 0.5)", // "#F21C0E",
+        iconErrorColor: "#F24724",
         primaryColor: "#555F65",
       },
 
@@ -2099,6 +2113,7 @@ export const getBaseTheme = () => {
         roleSelectorColor: "#a3a9ae",
         disabledRoleSelectorColor: "#a3a9ae",
         roleSelectorArrowColor: "#a3a9ae",
+        createLink: "#a3a9ae",
       },
 
       history: {
@@ -2360,6 +2375,11 @@ export const getBaseTheme = () => {
       breadCrumbs: {
         prevItemColor: "#657077",
         arrowRightColor: "#657077",
+      },
+
+      info: {
+        backgroundColor: "#f8f9f9",
+        color: "#555f65",
       },
 
       bodyDescriptionText: "#A3A9AE",
@@ -2760,7 +2780,7 @@ export const getBaseTheme = () => {
       background: white,
       borderRadius: "6px",
       mobileBorderRadius: "6px 6px 0 0",
-      boxShadow: "0px 12px 40px rgba(4, 15, 27, 0.12)",
+      boxShadow: "0px 8px 16px 0px #040F1B14",
       padding: "6px 0px",
       border: "none",
       devices: {

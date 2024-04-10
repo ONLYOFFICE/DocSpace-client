@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -54,6 +54,8 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
   const [hasNextPage, setHasNextPage] = useState(false);
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);
   const [itemsList, setItemsList] = useState<TSelectorItem[]>([]);
+  const [selectedItem, setSelectedItem] = useState<TSelectorItem | null>(null);
+
   const isFirstLoad = useRef(true);
   const afterSearch = useRef(false);
   const totalRef = useRef(0);
@@ -67,6 +69,12 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
     isDoubleClick: boolean,
     doubleClickCallback: () => void,
   ) => {
+    setSelectedItem((el) => {
+      if (el?.id === item.id) return null;
+
+      return item;
+    });
+
     if (isDoubleClick) {
       doubleClickCallback();
     }
@@ -145,13 +153,14 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
         ...headerProps,
         headerLabel: headerProps?.headerLabel || t("Common:Groups"),
       }}
+      alwaysShowFooter
       withSearch
       searchPlaceholder={t("Common:Search")}
       onSearch={onSearch}
       searchValue={searchValue}
       onClearSearch={onClearSearch}
       isSearchLoading={false}
-      disableSubmitButton={false}
+      disableSubmitButton={!selectedItem}
       isMultiSelect={false}
       items={itemsList}
       submitButtonLabel={t("Common:SelectAction")}

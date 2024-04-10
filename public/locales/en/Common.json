@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "About",
   "AboutCompanyTitle": "About this program",
   "AccessDenied": "Access denied",
@@ -107,6 +107,7 @@
   "DenyAccess": "Deny access",
   "Description": "Description",
   "DeveloperTools": "Developer Tools",
+  "Disabled": "Disabled",
   "DisableQuota": "Disable quota",
   "DisableStorageQuota": "Disable storage quota",
   "Disconnect": "Disconnect",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> invites you to join the DocSpace <1>{{spaceAddress}}</1> for secure document collaboration.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> invites you to join the room <1>{{roomName}}</1> for secure document collaboration.",
   "Invite": "Invite",
+  "Invited": "Invited",
   "InviteUsers": "Invite users",
   "IpAddress": "IP address",
   "Kilobyte": "KB",
@@ -226,6 +228,7 @@
   "MakeForm": "Save as PDF form",
   "ManageStorageQuota": "Manage storage quota",
   "ManyEmails": "Too many email addresses parsed",
+  "MaximumNumberOfExternalLinksCreated": "Maximum number of external links created",
   "MaxLengthExceeded": "The maximum length of a user name or another local part is 64 characters.",
   "MediaError": "Media URL could not be loaded",
   "Megabyte": "MB",
@@ -336,6 +339,7 @@
   "Search": "Search",
   "SearchEmptyRoomsDescription": "No rooms match this filter. Try a different one or clear filter to view all rooms.",
   "SelectAction": "Select",
+  "SelectFolder": "Select folder",
   "SelectAll": "Select all",
   "SelectBackupOnlyFormat": "Select backup only file",
   "SelectDOCXFFormat": "Select .DOCXF file",

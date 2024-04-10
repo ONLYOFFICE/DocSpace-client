@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -69,10 +69,14 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
     badgeTitle,
   } = props;
 
-  const onClickAction = () => {
-    onClick?.(id);
+  const onClickAction = (e: React.MouseEvent) => {
+    onClick?.(e, id);
   };
+  const onMouseDown = (e: React.MouseEvent) => {
+    if (e.button !== 1) return;
 
+    onClickAction(e);
+  };
   const onClickBadgeAction = (e: React.MouseEvent) => {
     e.stopPropagation();
     onClickBadge?.(id);
@@ -112,6 +116,7 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
           isDragActive={isDragActive}
           onClick={onClickAction}
           onMouseUp={onMouseUpAction}
+          onMouseDown={onMouseDown}
         />
         <StyledArticleItemImg isActive={isActive}>
           <ReactSVG className="icon" src={icon} />

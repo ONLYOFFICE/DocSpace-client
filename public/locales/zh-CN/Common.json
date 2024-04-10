@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "关于",
   "AboutCompanyTitle": "关于本计划",
   "AccessDenied": "拒绝访问",
@@ -109,6 +109,7 @@
   "DeveloperTools": "开发人员工具",
   "DisableQuota": "停用配额",
   "DisableStorageQuota": "停用存储配额",
+  "Disabled": "已禁用",
   "Disconnect": "断开连接",
   "DocSpaceAdmin": "协作空间管理员",
   "DocSpaceOwner": "协作空间所有者",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> 邀请您加入协作空间 <1>{{spaceAddress}}</1> 安全地共同编辑处理文档。",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> 邀请您加入房间 <1>{{roomName}}</1> 安全地共同编辑处理文档。",
   "Invite": "邀请",
+  "Invited": "已邀请",
   "InviteUsers": "邀请用户",
   "IpAddress": "IP 地址",
   "Kilobyte": "KB",
@@ -226,6 +228,7 @@
   "MakeForm": "另存为 PDF 表单",
   "ManageStorageQuota": "管理存储配额",
   "ManyEmails": "解析的邮件过多",
+  "MaximumNumberOfExternalLinksCreated": "创建外部链接的最大数量",
   "MaxLengthExceeded": "用户名或其他本地部分最长为64个字符。",
   "MediaError": "无法加载媒体 URL",
   "Megabyte": "MB",

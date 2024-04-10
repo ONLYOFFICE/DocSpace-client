@@ -96,7 +96,6 @@
   "DeleteTheme": "Poista teema",
   "DeleteThemeForever": "Poista teema lopullisesti?",
   "DeleteThemeNotice": "Teema poistetaan lopullisesti. Et voi kumota tätä toimintoa.",
-  "Disabled": "Poistettu käytöstä",
   "DiskSpaceUsed": "Käytetty levytila",
   "DNSSettings": "DNS-asetukset",
   "DNSSettingsDescription": "Aseta tilallesi vaihtoehtoinen URL-osoite. Lähetä pyyntösi tukitiimillemme saadaksesi apua asetuksiin.",

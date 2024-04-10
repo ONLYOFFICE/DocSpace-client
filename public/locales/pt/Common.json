@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Sobre",
   "AboutCompanyTitle": "Sobre este programa",
   "AccessDenied": "Acesso negado",
@@ -109,6 +109,7 @@
   "DeveloperTools": "Ferramentas de Desenvolvedor",
   "DisableQuota": "Desativar cota",
   "DisableStorageQuota": "Desabilitar cota de armazenamento",
+  "Disabled": "Desativado",
   "Disconnect": "Desligar",
   "DocSpaceAdmin": "Administrador do DocSpace",
   "DocSpaceOwner": "Proprietário do DocSpace ",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> convida você para participar do DocSpace <1>{{spaceAddress}}</1> para colaboração segura de documentos.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> convida você para participar da sala <1>{{roomName}}</1> para colaboração segura de documentos.",
   "Invite": "Convidar",
+  "Invited": "Convidados",
   "InviteUsers": "Convidar utilizadores",
   "IpAddress": "Endereço de IP",
   "Kilobyte": "KB",
@@ -226,6 +228,7 @@
   "MakeForm": "Salvar como PDF",
   "ManageStorageQuota": "Gerenciar cota de armazenamento",
   "ManyEmails": "Demasiados e-mails analisados",
+  "MaximumNumberOfExternalLinksCreated": "Número máximo de links externos criados",
   "MaxLengthExceeded": "O comprimento máximo de um nome de utilizador ou outra parte local é de 64 caracteres.",
   "MediaError": "O URL da multimédia não pôde ser carregado",
   "Megabyte": "MB",

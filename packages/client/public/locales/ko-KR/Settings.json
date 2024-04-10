@@ -96,7 +96,6 @@
   "DeleteTheme": "테마 삭제",
   "DeleteThemeForever": "테마를 영구히 삭제하시겠습니까?",
   "DeleteThemeNotice": "테마가 영구적으로 삭제됩니다. 그리고 이 작업은 취소할 수 없습니다.",
-  "Disabled": "비활성화",
   "DiskSpaceUsed": "사용된 디스크 공간",
   "DNSSettings": "DNS 설정",
   "DNSSettingsDescription": "공간에 대한 대체 URL 주소를 설정하세요. 설정에 대한 도움을 받으려면 지원 팀에 요청을 보내십시오.",

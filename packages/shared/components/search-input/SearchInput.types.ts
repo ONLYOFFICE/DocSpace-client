@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -62,4 +62,6 @@ export interface SearchInputProps {
   children?: React.ReactNode;
   /** Accepts css style */
   style?: React.CSSProperties;
+  /** The callback function that is called when the field is focused  */
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }

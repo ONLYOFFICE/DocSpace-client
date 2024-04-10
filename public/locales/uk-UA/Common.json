@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Інформація",
   "AboutCompanyTitle": "Про цю програму",
   "AccessDenied": "Доступ заборонено",
@@ -109,6 +109,7 @@
   "DeveloperTools": "Інструменти розробника",
   "DisableQuota": "Вимкнути квоту",
   "DisableStorageQuota": "Вимкнути квоту сховища",
+  "Disabled": "Вимкнено",
   "Disconnect": "Відключити",
   "DocSpaceAdmin": "Адміністратор DocSpace",
   "DocSpaceOwner": "Власник DocSpace",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> запрошує вас приєднатися до простору DocSpace <1>{{spaceAddress}}</1> для безпечної спільної роботи над документами.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> запрошує вас приєднатися до кімнати <1>{{roomName}}</1> для безпечної спільної роботи над документами.",
   "Invite": "Запросити",
+  "Invited": "Запрошено",
   "InviteUsers": "Запросити користувачів",
   "IpAddress": "IP-адреса",
   "Kilobyte": "KБ",
@@ -226,6 +228,7 @@
   "MakeForm": "Зберегти як PDF-форму",
   "ManageStorageQuota": "Керувати квотою сховища",
   "ManyEmails": "Проаналізовано занадто багато адрес електронної пошти",
+  "MaximumNumberOfExternalLinksCreated": "Максимальна кількість створених зовнішніх посилань",
   "MaxLengthExceeded": "Максимальна довжина імені користувача або іншої локальної частини — 64 символи.",
   "MediaError": "Не вдалося завантажити URL-адресу медіа",
   "Megabyte": "MБ",

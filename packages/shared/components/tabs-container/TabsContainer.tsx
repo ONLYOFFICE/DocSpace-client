@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -172,6 +172,7 @@ const TabsContainer = ({
       <StyledScrollbar
         autoHide={state.onScrollHide}
         className="scrollbar"
+        // @ts-expect-error error from custom scrollbar
         ref={scrollRef}
       >
         <NavItem className="className_items">

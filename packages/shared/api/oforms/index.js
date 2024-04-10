@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -50,6 +50,11 @@ export const getCategoryTypes = async (url, locale = "en") => {
 export const getCategoriesOfCategoryType = async (url, locale = "en") => {
   const res = await axios.get(`${url}?populate=*&locale=${locale}`);
   return res?.data?.data;
+};
+
+export const getGuideLinkByLocale = async (url, locale = "en") => {
+  const res = await axios.get(`${url}?locale=${locale}`);
+  return res?.data?.data?.[0].attributes?.link;
 };
 
 export function submitToGallery(url, file, formName, language, signal) {

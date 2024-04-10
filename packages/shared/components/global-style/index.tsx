@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,7 +32,7 @@ const GlobalStyle = createGlobalStyle<{ theme: TTheme }>`
     margin: 0;
   
     background-color: ${(props) => props.theme.backgroundColor};
-    
+       
     color: ${(props) => props.theme.color};
     
     font-family: ${(props) => props.theme.fontFamily};
@@ -42,7 +42,6 @@ const GlobalStyle = createGlobalStyle<{ theme: TTheme }>`
   }
 
   body {
-  
     direction: ${(props) => props.theme.interfaceDirection};
   }
 `;

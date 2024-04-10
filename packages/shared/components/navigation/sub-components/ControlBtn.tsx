@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -62,6 +62,7 @@ const ControlButtons = ({
   tariffBar,
   title,
   isEmptyPage,
+  onCloseDropBox,
 }: IControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
@@ -91,6 +92,7 @@ const ControlButtons = ({
               onPlusClick={onPlusClick}
               isFrame={isFrame}
               title={titles?.actions}
+              onCloseDropBox={onCloseDropBox}
             />
           )}
 
@@ -116,6 +118,7 @@ const ControlButtons = ({
             title={titles?.actions}
             isTrashFolder={isTrashFolder}
             isMobile={isMobile || false}
+            onCloseDropBox={onCloseDropBox}
           />
 
           {!isDesktop && (
@@ -138,6 +141,7 @@ const ControlButtons = ({
               onPlusClick={onPlusClick}
               isFrame={isFrame}
               title={titles?.actions}
+              onCloseDropBox={onCloseDropBox}
             />
           )}
           {!isDesktop && (
@@ -169,6 +173,7 @@ const ControlButtons = ({
               title={titles?.contextMenu}
               isTrashFolder={isTrashFolder}
               isMobile={isMobile || false}
+              onCloseDropBox={onCloseDropBox}
             />
           )}
         </>

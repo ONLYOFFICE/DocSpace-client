@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -114,7 +114,8 @@ const FileInputPure = ({
 
   const { iconSize, buttonSize } = getSize();
 
-  const onClickProp = fromStorage ? { onClick: rest.onClick } : {};
+  const onClickProp =
+    fromStorage && !isDisabled ? { onClick: rest.onClick } : {};
 
   return (
     <Dropzone onDrop={onDrop} noClick={isDisabled || isLoading} accept={accept}>

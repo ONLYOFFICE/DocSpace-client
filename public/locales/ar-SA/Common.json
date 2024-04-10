@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "من نحن",
   "AboutCompanyTitle": "نبذة تعريفية عن البرنامج",
   "AccessDenied": "المحاولة مرفوضة",
@@ -109,6 +109,7 @@
   "DeveloperTools": "ادوات المطورين",
   "DisableQuota": "تعطيل الحصة",
   "DisableStorageQuota": "تعطيل حصة التخزين",
+  "Disabled": "تعطيل",
   "Disconnect": "قطع الاتصال",
   "DocSpaceAdmin": "مسئول DocSpace",
   "DocSpaceOwner": "مالك DocSpace",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1>  يدعوك للانضمام الى DocSpace <1>{{spaceAddress}}</1> للتعاون الآمن في المستندات.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1>  يدعوك للانضمام للغرفة <1>{{roomName}}</1> للتعاون الآمن في المستندات.",
   "Invite": "دعوة",
+  "Invited": "مدعو",
   "InviteUsers": "دعوة مستخدمين",
   "IpAddress": "عنوان بروتوكول الانترنت",
   "Kilobyte": "كيلو بايت",
@@ -226,6 +228,7 @@
   "MakeForm": "حفظ بصيغة اوفورم",
   "ManageStorageQuota": "إدارة حصة التخزين",
   "ManyEmails": "تم تحليل العديد من عناوين البريد الالكتروني",
+  "MaximumNumberOfExternalLinksCreated": "تم إنشاء الحد الأقصى من الروابط الخارجية",
   "MaxLengthExceeded": "الحد الأقصى لطول اسم المستخدم أو جزء محلي آخر هو 64 حرفاً.",
   "MediaError": "تعذر تحميل رابط الوسائط",
   "Megabyte": "ميجابايت",

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,7 +32,6 @@ import { getProviderLabel } from "@docspace/shared/utils/common";
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
 
 import { SocialButton } from "../social-button";
-import { IconButton } from "../icon-button";
 import StyledSocialButtonsGroup from "./SocialButtonsGroup.styled";
 import type {
   SocialButtonProps,
@@ -105,15 +104,11 @@ export const SocialButtonsGroup = memo(
           <div className="social-buttons-group">
             {elements}
             {length > 2 && (
-              <div className="show-more-button" onClick={moreAuthOpen}>
-                <IconButton
-                  size={20}
-                  onClick={moreAuthOpen}
-                  iconName={VerticalDotsReactSvgUrl}
-                  isFill
-                  isClickable={false}
-                />
-              </div>
+              <SocialButton
+                iconName={VerticalDotsReactSvgUrl}
+                onClick={moreAuthOpen}
+                className="show-more-button"
+              />
             )}
 
             <MoreLoginModal

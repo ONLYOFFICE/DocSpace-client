@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -54,7 +54,6 @@ const SelectionArea = ({
   const scrollElement = React.useRef<null | Element>(null);
   const scrollSpeed = React.useRef({ x: 0, y: 0 });
   const selectableNodes = React.useRef(new Set<Element>());
-  const removeListener = React.useRef<() => void>();
 
   const theme = useTheme();
 
@@ -304,27 +303,6 @@ const SelectionArea = ({
     [frame],
   );
 
-  const onTapStop = React.useCallback(() => {
-    removeListener.current?.();
-
-    scrollSpeed.current.x = 0;
-    scrollSpeed.current.y = 0;
-
-    selectableNodes.current = new Set();
-
-    frame()?.cancel();
-
-    if (areaRef.current) {
-      const { style } = areaRef.current;
-
-      style.display = "none";
-      style.left = "0px";
-      style.top = "0px";
-      style.width = "0px";
-      style.height = "0px";
-    }
-  }, [frame]);
-
   const onScroll = React.useCallback<EventListener>(
     (e: Event) => {
       const { scrollTop, scrollLeft } = e.target as HTMLElement;
@@ -371,6 +349,37 @@ const SelectionArea = ({
     [onTapMove],
   );
 
+  const removeListeners = React.useCallback(() => {
+    document.removeEventListener("mousemove", onMoveAction);
+    document.removeEventListener("mousemove", onTapMove);
+
+    if (scrollElement.current)
+      scrollElement.current.removeEventListener("scroll", onScroll);
+  }, [onMoveAction, onScroll, onTapMove]);
+
+  const onTapStop = React.useCallback(() => {
+    removeListeners();
+    document.removeEventListener("mouseup", onTapStop);
+    window.removeEventListener("blur", onTapStop);
+
+    scrollSpeed.current.x = 0;
+    scrollSpeed.current.y = 0;
+
+    selectableNodes.current = new Set();
+
+    frame()?.cancel();
+
+    if (areaRef.current) {
+      const { style } = areaRef.current;
+
+      style.display = "none";
+      style.left = "0px";
+      style.top = "0px";
+      style.width = "0px";
+      style.height = "0px";
+    }
+  }, [frame, removeListeners]);
+
   const addListeners = React.useCallback(() => {
     document.addEventListener("mousemove", onMoveAction, {
       passive: false,
@@ -382,17 +391,6 @@ const SelectionArea = ({
     if (scrollElement.current)
       scrollElement.current.addEventListener("scroll", onScroll);
   }, [onMoveAction, onScroll, onTapStop]);
-
-  const removeListeners = React.useCallback(() => {
-    document.removeEventListener("mousemove", onMoveAction);
-    document.removeEventListener("mousemove", onTapMove);
-
-    document.removeEventListener("mouseup", onTapStop);
-    window.removeEventListener("blur", onTapStop);
-
-    if (scrollElement.current)
-      scrollElement.current.removeEventListener("scroll", onScroll);
-  }, [onMoveAction, onScroll, onTapMove, onTapStop]);
 
   const onTapStart = React.useCallback(
     (e: MouseEvent) => {
@@ -492,10 +490,6 @@ const SelectionArea = ({
       document.removeEventListener("mousedown", onTapStart);
     };
   }, [onTapStart]);
-
-  React.useEffect(() => {
-    removeListener.current = removeListeners;
-  }, [removeListeners]);
 
   React.useEffect(() => {
     arrayOfTypes.current = [];

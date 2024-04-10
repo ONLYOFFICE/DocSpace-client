@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -54,12 +54,14 @@ import {
   getShowText,
   isPublicRoom,
   insertTagManager,
+  isManagement,
 } from "../utils/common";
 import { setCookie, getCookie } from "../utils/cookie";
 import { combineUrl } from "../utils/combineUrl";
 import FirebaseHelper from "../utils/firebase";
 import SocketIOHelper from "../utils/socket";
 import { TWhiteLabel } from "../utils/whiteLabelHelper";
+
 import { ThemeKeys, TenantStatus, DeviceType, UrlActionType } from "../enums";
 import {
   LANGUAGE,
@@ -469,6 +471,10 @@ class SettingsStore {
     return `${this.helpLink}/userguides/docspace-managing-users.aspx`;
   }
 
+  get installationGuidesUrl() {
+    return `${this.helpLink}/installation/docspace-enterprise-index.aspx`;
+  }
+
   get sdkLink() {
     return `${this.apiDocsLink}/docspace/jssdk/`;
   }
@@ -618,15 +624,15 @@ class SettingsStore {
     return this.tenantStatus === TenantStatus.PortalDeactivate;
   }
 
+  get isPortalRestoring() {
+    return this.tenantStatus === TenantStatus.PortalRestore;
+  }
+
   init = async () => {
     this.setIsLoading(true);
     const requests = [];
 
-    requests.push(
-      this.getPortalSettings(),
-      this.getAppearanceTheme(),
-      this.getWhiteLabelLogoUrls(),
-    );
+    requests.push(this.getPortalSettings(), this.getAppearanceTheme());
 
     await Promise.all(requests);
 
@@ -718,10 +724,12 @@ class SettingsStore {
   };
 
   getWhiteLabelLogoUrls = async () => {
-    const res = await api.settings.getLogoUrls();
+    const res = await api.settings.getLogoUrls(null, isManagement());
 
     this.setLogoUrls(Object.values(res));
     this.setLogoUrl(Object.values(res));
+
+    return res;
   };
 
   getDomainName = async () => {
@@ -1006,7 +1014,9 @@ class SettingsStore {
 
   get isFrame() {
     const isFrame = this.frameConfig?.name === window.name;
-    window.DocSpaceConfig.isFrame = isFrame;
+
+    if (window.DocSpaceConfig) window.DocSpaceConfig.isFrame = isFrame;
+
     return isFrame;
   }
 
@@ -1063,6 +1073,8 @@ class SettingsStore {
       return domains;
     } catch (e) {
       toastr.error(e as TData);
+
+      throw e;
     }
   };
 

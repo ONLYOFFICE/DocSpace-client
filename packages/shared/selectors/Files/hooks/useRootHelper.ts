@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -45,6 +45,7 @@ const useRootHelper = ({
   setHasNextPage,
   isUserOnly,
   setIsInit,
+  setIsFirstLoad,
 }: UseRootHelperProps) => {
   const [isRoot, setIsRoot] = React.useState<boolean>(false);
   const requestRunning = React.useRef(false);
@@ -96,9 +97,11 @@ const useRootHelper = ({
     setHasNextPage(false);
     setIsNextPageLoading(false);
     setIsInit(false);
+    setIsFirstLoad(false);
     requestRunning.current = false;
   }, [
     isUserOnly,
+    setIsFirstLoad,
     setBreadCrumbs,
     setHasNextPage,
     setIsBreadCrumbsLoading,

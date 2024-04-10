@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Haqqında",
   "AboutCompanyTitle": "Proqram haqqında",
   "AccessDenied": "Giriş qadağandır",
@@ -109,6 +109,7 @@
   "DeveloperTools": "Tərtibatçı Alətləri",
   "DisableQuota": "Kvotanı deaktiv edin",
   "DisableStorageQuota": "Yaddaş kvotasını deaktiv edin",
+  "Disabled": "Deaktiv edildi",
   "Disconnect": "Bağlantını kəs",
   "DocSpaceAdmin": "DocSpace admini",
   "DocSpaceOwner": "DocSpace sahibi",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> təhlükəsiz sənəd əməkdaşlığı üçün sizi DocSpace <1>{{spaceAddress}</1>-ə qoşulmağa dəvət edir.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> təhlükəsiz sənəd əməkdaşlığı üçün sizi <1>{{roomName}}</1> otağına qoşulmağa dəvət edir.",
   "Invite": "Dəvət edin",
+  "Invited": "Dəvət edildi",
   "InviteUsers": "İstifadəçiləri dəvət edin",
   "IpAddress": "IP ünvanı",
   "Kilobyte": "KB",
@@ -226,6 +228,7 @@
   "MakeForm": "Formanı yarat",
   "ManageStorageQuota": "Yaddaş kvotasını idarə edin",
   "ManyEmails": "Xanada xeyli elektron poçt qeyd olunub",
+  "MaximumNumberOfExternalLinksCreated": "Yaradılan xarici keçidlərin maksimum sayı",
   "MaxLengthExceeded": "Elektron poçtun maksimal uzunluğu 64 simvoldur.",
   "MediaError": "Media URL-ni yükləmək mümkün olmadı",
   "Megabyte": "MB",

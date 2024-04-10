@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -450,6 +450,7 @@ const StyledHideArticleMenuButton = styled.div<{
   height: 44px;
   z-index: 209;
   bottom: ${(props) => (props.hideProfileBlock ? "16px" : "89px")};
+  background: ${(props) => props.theme.catalog.background};
 
   ${(props) =>
     props.theme.interfaceDirection === "rtl"

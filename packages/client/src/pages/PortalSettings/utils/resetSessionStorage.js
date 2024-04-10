@@ -1,25 +1,25 @@
-// (c) Copyright Ascensio System SIA 2010-2024
-// 
+// (c) Copyright Ascensio System SIA 2009-2024
+//
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
 // of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
 // Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
 // to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
 // any third-party rights.
-// 
+//
 // This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
 // of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
 // the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-// 
+//
 // You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-// 
+//
 // The  interactive user interfaces in modified source and object code versions of the Program must
 // display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-// 
+//
 // Pursuant to Section 7(b) of the License you must retain the original Product logo when
 // distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
 // trademark law for use of our trademarks.
-// 
+//
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
@@ -34,7 +34,7 @@ export const resetSessionStorage = () => {
   const greetingTitleFromSessionStorage =
     getFromSessionStorage("greetingTitle");
   const greetingTitleDefaultFromSessionStorage = getFromSessionStorage(
-    "greetingTitleDefault"
+    "greetingTitleDefault",
   );
   const languageFromSessionStorage = getFromSessionStorage("language");
   const languageDefaultFromSessionStorage =
@@ -49,53 +49,53 @@ export const resetSessionStorage = () => {
   const defaultColorAccent = getFromSessionStorage("defaultColorAccent");
 
   const currentPasswordSettings = getFromSessionStorage(
-    "currentPasswordSettings"
+    "currentPasswordSettings",
   );
   const defaultPasswordSettings = getFromSessionStorage(
-    "defaultPasswordSettings"
+    "defaultPasswordSettings",
   );
   const currentTfaSettings = getFromSessionStorage("currentTfaSettings");
   const defaultTfaSettings = getFromSessionStorage("defaultTfaSettings");
   const currentTrustedMailSettings = getFromSessionStorage(
-    "currentTrustedMailSettings"
+    "currentTrustedMailSettings",
   );
   const defaultTrustedMailSettings = getFromSessionStorage(
-    "defaultTrustedMailSettings"
+    "defaultTrustedMailSettings",
   );
   const currentIPSettings = getFromSessionStorage("currentIPSettings");
   const defaultIPSettings = getFromSessionStorage("defaultIPSettings");
   const currentBruteForceProtection = getFromSessionStorage(
-    "currentBruteForceProtection"
+    "currentBruteForceProtection",
   );
   const defaultBruteForceProtection = getFromSessionStorage(
-    "defaultBruteForceProtection"
+    "defaultBruteForceProtection",
   );
   const currentAdminMessageSettings = getFromSessionStorage(
-    "currentAdminMessageSettings"
+    "currentAdminMessageSettings",
   );
   const defaultAdminMessageSettings = getFromSessionStorage(
-    "defaultAdminMessageSettings"
+    "defaultAdminMessageSettings",
   );
   const currentSessionLifetimeSettings = getFromSessionStorage(
-    "currentSessionLifetimeSettings"
+    "currentSessionLifetimeSettings",
   );
   const defaultSessionLifetimeSettings = getFromSessionStorage(
-    "defaultSessionLifetimeSettings"
+    "defaultSessionLifetimeSettings",
   );
   const storagePeriodSettings = getFromSessionStorage("storagePeriod");
   const defaultStoragePeriodSettings = getFromSessionStorage(
-    "defaultStoragePeriod"
+    "defaultStoragePeriod",
   );
 
   const companyNameFromSessionStorage = getFromSessionStorage("companyName");
   const companySettingsFromSessionStorage =
     getFromSessionStorage("companySettings");
   const defaultCompanySettingsFromSessionStorage = getFromSessionStorage(
-    "defaultCompanySettings"
+    "defaultCompanySettings",
   );
   const additionalSettings = getFromSessionStorage("additionalSettings");
   const defaultAdditionalSettings = getFromSessionStorage(
-    "defaultAdditionalSettings"
+    "defaultAdditionalSettings",
   );
 
   if (portalNameFromSessionStorage !== portalNameDefaultFromSessionStorage) {
@@ -122,7 +122,7 @@ export const resetSessionStorage = () => {
   if (currentTrustedMailSettings !== defaultTrustedMailSettings) {
     saveToSessionStorage(
       "currentTrustedMailSettings",
-      defaultTrustedMailSettings
+      defaultTrustedMailSettings,
     );
   }
   if (currentIPSettings !== defaultIPSettings) {
@@ -131,19 +131,19 @@ export const resetSessionStorage = () => {
   if (currentBruteForceProtection !== defaultBruteForceProtection) {
     saveToSessionStorage(
       "currentBruteForceProtection",
-      defaultBruteForceProtection
+      defaultBruteForceProtection,
     );
   }
   if (currentAdminMessageSettings !== defaultAdminMessageSettings) {
     saveToSessionStorage(
       "currentAdminMessageSettings",
-      defaultAdminMessageSettings
+      defaultAdminMessageSettings,
     );
   }
   if (currentSessionLifetimeSettings !== defaultSessionLifetimeSettings) {
     saveToSessionStorage(
       "currentSessionLifetimeSettings",
-      defaultSessionLifetimeSettings
+      defaultSessionLifetimeSettings,
     );
   }
   if (storagePeriodSettings !== defaultStoragePeriodSettings) {
@@ -158,7 +158,7 @@ export const resetSessionStorage = () => {
   ) {
     saveToSessionStorage(
       "companySettings",
-      defaultCompanySettingsFromSessionStorage
+      defaultCompanySettingsFromSessionStorage,
     );
   }
   if (additionalSettings !== defaultAdditionalSettings) {

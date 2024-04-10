@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -427,11 +427,11 @@ const FilterBlock = ({
   const isEqualFilter = () => {
     let isEqual = true;
 
-    if (
-      filterValues.length === 0 ||
-      selectedFilterValue.length > filterValues.length
-    )
-      return !isEqual;
+    // if (
+    //   filterValues.length === 0 ||
+    //   selectedFilterValue.length > filterValues.length
+    // )
+    //   return !isEqual;
 
     if (
       (selectedFilterValue.length === 0 && filterValues.length > 0) ||
@@ -477,7 +477,7 @@ const FilterBlock = ({
     return !isEqual;
   };
 
-  const showFooter = isEqualFilter();
+  const showFooter = isLoading ? false : isEqualFilter();
 
   const filterBlockComponent = (
     <>
@@ -528,7 +528,7 @@ const FilterBlock = ({
           </StyledControlContainer>
         </StyledFilterBlock>
       ) : (
-        <StyledFilterBlock showFooter={showFooter}>
+        <StyledFilterBlock>
           <StyledFilterBlockHeader>
             <Heading size={HeadingSize.medium} level={HeadingLevel.h1}>
               {filterHeader}
@@ -574,25 +574,26 @@ const FilterBlock = ({
               </Scrollbar>
             )}
           </div>
-          {showFooter && (
-            <StyledFilterBlockFooter>
-              <Button
-                id="filter_apply-button"
-                size={ButtonSize.normal}
-                primary
-                label={t("Common:ApplyButton")}
-                scale
-                onClick={onFilterAction}
-              />
-              <Button
-                id="filter_cancel-button"
-                size={ButtonSize.normal}
-                label={t("Common:CancelButton")}
-                scale
-                onClick={hideFilterBlock}
-              />
-            </StyledFilterBlockFooter>
-          )}
+
+          <StyledFilterBlockFooter>
+            <Button
+              id="filter_apply-button"
+              size={ButtonSize.normal}
+              primary
+              label={t("Common:ApplyButton")}
+              scale
+              onClick={onFilterAction}
+              isDisabled={!showFooter}
+            />
+            <Button
+              id="filter_cancel-button"
+              size={ButtonSize.normal}
+              label={t("Common:CancelButton")}
+              scale
+              onClick={hideFilterBlock}
+              isDisabled={isLoading}
+            />
+          </StyledFilterBlockFooter>
 
           <StyledControlContainer id="filter_close" onClick={hideFilterBlock}>
             <StyledCrossIcon />

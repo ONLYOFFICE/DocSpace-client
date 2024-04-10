@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -109,9 +109,12 @@ const Navigation = ({
     setFirstClick(true);
   }, [isRootFolder, navigationItems?.length]);
 
+  const onCloseDropBox = () => {
+    if (isOpen) setIsOpen(false);
+  };
+
   const onMissClick = React.useCallback(
     (e: MouseEvent) => {
-      e.preventDefault();
       const path = e.composedPath && e.composedPath();
 
       if (!firstClick) {
@@ -168,6 +171,7 @@ const Navigation = ({
     <div className="title-block">
       {titleIcon && <ReactSVG className="title-icon" src={titleIcon} />}
       <Text
+        className="title-block-text"
         title={title}
         isOpen={isOpen}
         isRootFolder={isRootFolder}
@@ -235,6 +239,7 @@ const Navigation = ({
                 burgerLogo={burgerLogo}
                 currentDeviceType={currentDeviceType}
                 navigationTitleContainerNode={navigationTitleContainerNode}
+                onCloseDropBox={onCloseDropBox}
               />
             </>
           )}

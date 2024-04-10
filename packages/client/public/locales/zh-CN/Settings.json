@@ -96,7 +96,6 @@
   "DeleteTheme": "删除主题",
   "DeleteThemeForever": "永久性删除主题？",
   "DeleteThemeNotice": "主题将被永久删除。您将无法撤销此操作。",
-  "Disabled": "已禁用",
   "DiskSpaceUsed": "已用的磁盘空间",
   "DNSSettings": "DNS 设置",
   "DNSSettingsHint": "输入域名，如下所示：",

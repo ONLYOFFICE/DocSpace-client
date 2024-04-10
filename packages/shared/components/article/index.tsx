@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -90,7 +90,6 @@ const Article = ({
 
   onArticleHeaderClick,
   isBurgerLoading,
-  whiteLabelLogoUrls,
 
   isNonProfit,
   isEnterprise,
@@ -270,7 +269,6 @@ const Article = ({
           withCustomArticleHeader={withCustomArticleHeader}
           onClick={onArticleHeaderClick}
           isBurgerLoading={isBurgerLoading}
-          whiteLabelLogoUrls={whiteLabelLogoUrls}
         >
           {articleHeaderContent ? articleHeaderContent.props.children : null}
         </SubArticleHeader>

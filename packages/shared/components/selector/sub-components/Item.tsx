@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -89,6 +89,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       color,
       email,
       isGroup,
+      disabledText,
     } = item;
 
     const showPlanetIcon =
@@ -103,7 +104,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     const typeLabel = getUserTypeLabel(role, t);
 
     const onChangeAction = () => {
-      onSelect?.(item);
+      onSelect?.(item, false);
     };
 
     const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -144,10 +145,12 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             title={label}
             showDefault
             badgeUrl={badgeUrl ?? ""}
+            className="item-logo"
           />
         ) : icon ? (
           <RoomIcon
             title={label}
+            className="item-logo"
             imgClassName="room-logo"
             imgSrc={icon}
             showDefault={false}
@@ -158,7 +161,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           renderCustomItem(label, typeLabel, email, isGroup)
         ) : (
           <Text
-            className="label"
+            className="label label-disabled"
             fontWeight={600}
             fontSize="14px"
             noSelect
@@ -169,12 +172,25 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           </Text>
         )}
 
-        {isMultiSelect && (
-          <Checkbox
-            className="checkbox"
-            isChecked={isSelected}
-            onChange={onChangeAction}
-          />
+        {isDisabled && disabledText ? (
+          <Text
+            className="label disabled-text"
+            fontWeight={600}
+            fontSize="13px"
+            lineHeight="20px"
+            noSelect
+          >
+            {disabledText}
+          </Text>
+        ) : (
+          isMultiSelect && (
+            <Checkbox
+              className="checkbox"
+              isChecked={isSelected}
+              isDisabled={isDisabled}
+              onChange={onChangeAction}
+            />
+          )
         )}
       </StyledItem>
     );

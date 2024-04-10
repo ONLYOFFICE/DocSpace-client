@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,8 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { ErrorInfo } from "react";
-
-import { I18nextProvider } from "react-i18next";
 
 import Error520 from "../errors/Error520";
 
@@ -66,33 +64,11 @@ class ErrorBoundary extends React.Component<
       version,
       firebaseHelper,
       currentDeviceType,
-      whiteLabelLogoUrls,
       currentColorScheme,
-      isNextJS,
-      theme,
-      i18n,
     } = this.props;
 
     if (error) {
       // You can render any custom fallback UI
-
-      if (isNextJS && !i18n?.language) return null;
-
-      if (isNextJS && theme && i18n) {
-        return (
-          <I18nextProvider i18n={i18n}>
-            <Error520
-              user={user}
-              errorLog={error}
-              version={version}
-              firebaseHelper={firebaseHelper}
-              currentDeviceType={currentDeviceType}
-              whiteLabelLogoUrls={whiteLabelLogoUrls}
-              currentColorScheme={theme.currentColorScheme}
-            />
-          </I18nextProvider>
-        );
-      }
 
       return (
         <Error520
@@ -101,7 +77,6 @@ class ErrorBoundary extends React.Component<
           version={version}
           firebaseHelper={firebaseHelper}
           currentDeviceType={currentDeviceType}
-          whiteLabelLogoUrls={whiteLabelLogoUrls}
           currentColorScheme={currentColorScheme}
         />
       );

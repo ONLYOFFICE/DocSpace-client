@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Giới thiệu",
   "AboutCompanyTitle": "Giới thiệu về chương trình này",
   "AccessDenied": "Truy cập bị từ chối",
@@ -109,6 +109,7 @@
   "DeveloperTools": "Công cụ nhà phát triển",
   "DisableQuota": "Vô hiệu hóa hạn mức",
   "DisableStorageQuota": "Vô hiệu hóa hạn mức lưu trữ",
+  "Disabled": "Đã vô hiệu hóa",
   "Disconnect": "Ngắt kết nối",
   "DocSpaceAdmin": "Quản trị viên DocSpace",
   "DocSpaceOwner": "Chủ sở hữu DocSpace",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> mời bạn tham gia DocSpace <1>{{spaceAddress}} </1> để cùng làm việc trên tài liệu một cách an toàn.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> mời bạn tham gia phòng <1>{{roomName}} </1> để cùng làm việc trên tài liệu một cách an toàn.",
   "Invite": "Mời",
+  "Invited": "Đã mời",
   "InviteUsers": "Mời người dùng",
   "IpAddress": "Địa chỉ IP",
   "Kilobyte": "KB",
@@ -226,6 +228,7 @@
   "MakeForm": "Lưu dưới dạng oform",
   "ManageStorageQuota": "Quản lý hạn mức lưu trữ",
   "ManyEmails": "Quá nhiều email được phân tích",
+  "MaximumNumberOfExternalLinksCreated": "Số lượng liên kết bên ngoài tối đa đã được tạo",
   "MaxLengthExceeded": "Độ dài tối đa của tên người dùng hoặc phần cục bộ khác là 64 ký tự.",
   "MediaError": "Không thể tải URL phương tiện",
   "Megabyte": "MB",

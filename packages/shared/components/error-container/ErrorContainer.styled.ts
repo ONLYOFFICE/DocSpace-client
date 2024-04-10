@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -48,7 +48,7 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
   border: 0;
   box-sizing: border-box;
 
-  $ .error_description_link {
+  .error_description_link {
     color: #2da7db;
     font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     font-weight: 600;

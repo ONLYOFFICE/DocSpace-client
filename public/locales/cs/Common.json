@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "O nás",
   "AboutCompanyTitle": "O tomto programu",
   "AccessDenied": "Přístup odepřen",
@@ -109,6 +109,7 @@
   "DeveloperTools": "Nástroje pro vývojáře",
   "DisableQuota": "Zakázat kvóty",
   "DisableStorageQuota": "Zakázat kvóty úložiště",
+  "Disabled": "Deaktivováno",
   "Disconnect": "Odpojit",
   "DocSpaceAdmin": "Správce prostoru DocSpace",
   "DocSpaceOwner": "Majitel DocSpace",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> vás zve do DocSpace <1>{{{spaceAddress}}</1> pro bezpečnou spolupráci na dokumentech.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> vás zve do místnosti <1>{{roomName}}</1>  pro bezpečnou spolupráci na dokumentech.",
   "Invite": "Pozvat",
+  "Invited": "Pozvánka na",
   "InviteUsers": "Odkaz pozvánky",
   "IpAddress": "IP adresa",
   "Kilobyte": "KB",
@@ -226,6 +228,7 @@
   "MakeForm": "Uložit jako PDF formulář",
   "ManageStorageQuota": "Správa kvóty úložiště",
   "ManyEmails": "Příliš mnoho e-mailů analyzovaných",
+  "MaximumNumberOfExternalLinksCreated": "Maximální počet vytvořených externích odkazů",
   "MaxLengthExceeded": "Maximální délka uživatelského jména nebo jiné místní části je 64 znaků.",
   "MediaError": "Adresa URL média nemohla být načtena",
   "Megabyte": "MB",

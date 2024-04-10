@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,7 +34,7 @@ import MobileStartReactSvgUrl from "PUBLIC_DIR/images/mobile.star.react.svg?url"
 
 import { MainButtonMobile } from "./MainButtonMobile";
 
-import MobileMainButtonDocs from "./MainButtonMobile.docs.mdx";
+// import MobileMainButtonDocs from "./MainButtonMobile.docs.mdx";
 
 const meta = {
   title: "Components/MainButtonMobile",
@@ -42,7 +42,7 @@ const meta = {
   tags: ["autodocs"],
   parameters: {
     docs: {
-      page: MobileMainButtonDocs,
+      // page: MobileMainButtonDocs,
     },
   },
 } satisfies Meta<typeof MainButtonMobile>;

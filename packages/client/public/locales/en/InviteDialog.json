@@ -1,4 +1,4 @@
-{
+﻿{
   "AddManually": "Add manually",
   "AddManuallyDescriptionAccounts": "Invite new users to DocSpace personally via email",
   "AddManuallyDescriptionRoom": "Add existing DocSpace users to the room using the names or invite new users personally via email",
@@ -6,7 +6,6 @@
   "GroupMaxAvailableRoleWarning": "Groups have the maximum available role - “{{role}}”. You can issue an increase in rights after adding a group to the room.",
   "InvitationLanguage": "Invitation language",
   "InviteAccountSearchPlaceholder": "Invite people by email",
-  "Invited": "Invited",
   "InviteRoomSearchPlaceholder": "Invite people by name or email",
   "InviteViaLink": "Invite via link",
   "InviteViaLinkDescriptionAccounts": "Create a universal link for self-authorization in DocSpace",

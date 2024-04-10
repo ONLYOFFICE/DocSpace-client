@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Hakkında",
   "AboutCompanyTitle": "Bu program hakkında",
   "AccessDenied": "Erişim engellendi",
@@ -109,6 +109,7 @@
   "DeveloperTools": "Geliştirici Araçları",
   "DisableQuota": "Kotayı devre dışı bırak",
   "DisableStorageQuota": "Depolama kotasını devre dışı bırak",
+  "Disabled": "Devre dışı bırakıldı",
   "Disconnect": "Bağlantıyı kes",
   "DocSpaceAdmin": "DocSpace yöneticisi",
   "DocSpaceOwner": "DocSpace sahibi",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> sizi güvenli belge iş birliği için DocSpace <1>{{spaceAddress}}</1> alanına katılmaya davet ediyor.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> sizi güvenli belge iş birliği için <1>{{roomName}}</1> odasına katılmaya davet ediyor.",
   "Invite": "Davet et",
+  "Invited": "Davet edildi",
   "InviteUsers": "Kullanıcıları davet et",
   "IpAddress": "IP adresi",
   "Kilobyte": "KB",
@@ -226,6 +228,7 @@
   "MakeForm": "oform olarak Kaydet",
   "ManageStorageQuota": "Depolama kotasını yönetme",
   "ManyEmails": "Çok fazla e-posta ayrıştırıldı",
+  "MaximumNumberOfExternalLinksCreated": "Maksimum sayıda harici bağlantı oluşturuldu",
   "MaxLengthExceeded": "Bir kullanıcı adının veya başka bir yerel bölümün maksimum uzunluğu 64 karakterdir.",
   "MediaError": "Medya URL'si yüklenemedi",
   "Megabyte": "MB",

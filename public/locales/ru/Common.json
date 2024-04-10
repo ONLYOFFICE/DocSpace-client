@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "О программе",
   "AboutCompanyTitle": "О программе",
   "AccessDenied": "Доступ запрещен",
@@ -109,6 +109,7 @@
   "DeveloperTools": "Инструменты разработчика",
   "DisableQuota": "Отключить квоту",
   "DisableStorageQuota": "Отключить квоту хранилища",
+  "Disabled": "Отключено",
   "Disconnect": "Отключить",
   "DocSpaceAdmin": "Администратор DocSpace",
   "DocSpaceOwner": "Владелец DocSpace",
@@ -164,7 +165,7 @@
   "ExpiredLink": "Просроченная ссылка",
   "FeedbackAndSupport": "Обратная связь и поддержка",
   "FillFormButton": "Заполнить форму",
-  "Finish": "Заканчивать",
+  "Finish": "Завершить",
   "FirstName": "Имя",
   "Free": "Бесплатно",
   "FreeProFeatures": "Бесплатный доступ к профессиональным функциональным возможностям",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> приглашает вас присоединиться к DocSpace <1>{{spaceAddress}}</1> для безопасной совместной работы над документами.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> приглашает вас присоединиться к комнате <1>{{roomName}}</1> для безопасной совместной работы над документами.",
   "Invite": "Пригласить",
+  "Invited": "Приглашен",
   "InviteUsers": "Пригласить пользователей",
   "IpAddress": "IP-адрес",
   "Kilobyte": "Кб",
@@ -226,6 +228,7 @@
   "MakeForm": "Сохранить как PDF-форму",
   "ManageStorageQuota": "Управление квотой хранилища",
   "ManyEmails": "Поле содержит больше одного email",
+  "MaximumNumberOfExternalLinksCreated": "Максимальное количество созданных внешних ссылок",
   "MaxLengthExceeded": "Максимальная длина имени почтового ящика - 64 символа.",
   "MediaError": "URL-адрес мультимедиа не может быть загружен",
   "Megabyte": "Мб",

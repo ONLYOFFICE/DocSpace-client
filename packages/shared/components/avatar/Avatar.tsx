@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -157,11 +157,18 @@ const AvatarPure = ({
     <Text fontSize="12px">{content}</Text>
   );
 
+  const onMouseDown = (e: React.MouseEvent) => {
+    if (e.button !== 1) return;
+
+    if (onClick) onClick(e);
+  };
+
   return (
     <StyledAvatar
       size={size}
       data-testid="avatar"
       className={className}
+      onMouseDown={onMouseDown}
       onClick={onClick}
     >
       <AvatarWrapper
@@ -198,6 +205,7 @@ const AvatarPure = ({
                 id={uniqueTooltipId}
                 getContent={getTooltipContent}
                 place={tooltipPlace}
+                opacity={1}
               />
             )}
           </>

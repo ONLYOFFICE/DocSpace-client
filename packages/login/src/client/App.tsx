@@ -43,8 +43,6 @@ interface ILoginProps extends IInitialState {
 }
 
 const App: React.FC<ILoginProps> = (props) => {
-  const location = useLocation();
-
   const loginStore = initLoginStore(props?.currentColorScheme || {});
 
   React.useEffect(() => {
@@ -61,11 +59,9 @@ const App: React.FC<ILoginProps> = (props) => {
     }
   }, []);
 
-  const errorPage = location.pathname == "/login/error";
-
   return (
     <MobxProvider {...loginStore}>
-      {!errorPage && <SimpleNav {...props} />}
+      {<SimpleNav {...props} />}
       <Toast isSSR />
       <Routes>
         <Route path="/login/error" element={<InvalidRoute {...props} />} />

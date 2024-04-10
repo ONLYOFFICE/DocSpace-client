@@ -46,6 +46,7 @@ export function thirdPartyLogin(SerializedProfile) {
   return request({
     method: "post",
     url: "authentication",
+    skipLogout: true,
     data: { SerializedProfile },
   });
 }

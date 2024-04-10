@@ -31,6 +31,7 @@ import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import { mobile } from "@docspace/shared/utils";
+import { isMobileOnly } from "react-device-detect";
 
 import { MainButtonMobile } from "@docspace/shared/components/main-button-mobile";
 
@@ -41,10 +42,14 @@ const StyledMainButtonMobile = styled(MainButtonMobile)`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          left: 24px;
+          left: ${isMobileOnly
+            ? "calc(16px + env(safe-area-inset-left))"
+            : "24px"};
         `
       : css`
-          right: 24px;
+          right: ${isMobileOnly
+            ? "calc(16px + env(safe-area-inset-right))"
+            : "24px"};
         `}
 
   bottom: 24px;

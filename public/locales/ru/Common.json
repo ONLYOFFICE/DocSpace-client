@@ -203,6 +203,7 @@
   "MainHeaderSelectAll": "Выделить всё",
   "MakeForm": "Сохранить как PDF-форму",
   "ManyEmails": "Поле содержит больше одного email",
+  "MaximumNumberOfExternalLinksCreated": "Максимальное количество созданных внешних ссылок",
   "MaxLengthExceeded": "Максимальная длина имени почтового ящика - 64 символа.",
   "MediaError": "URL-адрес мультимедиа не может быть загружен",
   "Megabyte": "Мб",

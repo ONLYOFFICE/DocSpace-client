@@ -101,6 +101,11 @@ const StyledLinkRow = styled.div`
     height: 32px;
     width: 32px;
   }
+
+  .create-and-copy_link {
+    width: 100%;
+    color: ${({ theme }) => theme.infoPanel.members.createLink};
+  }
 `;
 
 const StyledSquare = styled.div`
@@ -110,6 +115,10 @@ const StyledSquare = styled.div`
   border-radius: 3px;
   padding: 10px;
   background: ${(props) => props.theme.avatar.icon.background};
+  cursor: pointer;
+  .icon-button_svg {
+    cursor: pointer;
+  }
 `;
 
 export { StyledLinks, StyledLinkRow, StyledSquare };

@@ -62,4 +62,6 @@ export interface SearchInputProps {
   children?: React.ReactNode;
   /** Accepts css style */
   style?: React.CSSProperties;
+  /** The callback function that is called when the field is focused  */
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }

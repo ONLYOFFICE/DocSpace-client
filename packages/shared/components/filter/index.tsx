@@ -28,6 +28,8 @@ import React from "react";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
+import { isTablet, isIOS } from "react-device-detect";
+
 import { DeviceType, FilterGroups } from "../../enums";
 
 import { TViewSelectorOption, ViewSelector } from "../view-selector";
@@ -175,6 +177,19 @@ const FilterInput = React.memo(
       [selectedItems, removeSelectedItem],
     );
 
+    const onInputFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+      if (isTablet && isIOS) {
+        const scrollEvent = () => {
+          e.preventDefault();
+          e.stopPropagation();
+          window.scrollTo(0, 0);
+          window.onscroll = () => {};
+        };
+
+        window.onscroll = scrollEvent;
+      }
+    };
+
     React.useEffect(() => {
       return () => {
         mountRef.current = false;
@@ -191,6 +206,7 @@ const FilterInput = React.memo(
             onClearSearch={onClearSearch}
             id="filter_search-input"
             size={InputSize.base}
+            onFocus={onInputFocus}
           />
           <FilterButton
             id="filter-button"

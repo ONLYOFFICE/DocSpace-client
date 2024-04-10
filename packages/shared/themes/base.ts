@@ -331,7 +331,7 @@ export const getBaseTheme = () => {
       fontWeight: "500",
       textDecoration: "none",
       padding: "0",
-      borderRadius: "2px",
+      borderRadius: "3px",
       height: "40px",
       heightSmall: "32px",
       textAlign: "left",
@@ -379,10 +379,10 @@ export const getBaseTheme = () => {
 
       svg: {
         margin: "11px 8px",
-        width: "18px",
-        height: "18px",
-        minWidth: "18px",
-        minHeight: "18px",
+        width: "20px",
+        height: "20px",
+        minWidth: "20px",
+        minHeight: "20px",
         fill: white,
       },
     },
@@ -664,7 +664,7 @@ export const getBaseTheme = () => {
           b: 38,
           a: 0.2,
         },
-        blur: 18,
+        blur: 10,
       },
 
       content: {
@@ -1439,7 +1439,7 @@ export const getBaseTheme = () => {
       zIndex: "400",
       background: white,
       borderRadius: "6px",
-      boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.13)",
+      boxShadow: "0px 8px 16px 0px #040F1B14",
       border: "none",
     },
 
@@ -2023,7 +2023,7 @@ export const getBaseTheme = () => {
       expanderColor: black,
       background: white,
       rootFolderTitleColor: "#A3A9AE",
-      boxShadow: " 0px 12px 40px 0px #040F1B1F",
+      boxShadow: "0px 8px 16px 0px #040F1B14",
 
       icon: {
         fill: "#316DAA",
@@ -2114,6 +2114,7 @@ export const getBaseTheme = () => {
         roleSelectorColor: "#a3a9ae",
         disabledRoleSelectorColor: "#a3a9ae",
         roleSelectorArrowColor: "#a3a9ae",
+        createLink: "#a3a9ae",
       },
 
       history: {
@@ -2780,7 +2781,7 @@ export const getBaseTheme = () => {
       background: white,
       borderRadius: "6px",
       mobileBorderRadius: "6px 6px 0 0",
-      boxShadow: "0px 12px 40px rgba(4, 15, 27, 0.12)",
+      boxShadow: "0px 8px 16px 0px #040F1B14",
       padding: "6px 0px",
       border: "none",
       devices: {

@@ -28,6 +28,6 @@ export interface DocspaceLogoProps {
   className?: string;
   size?: string;
   isResizing?: boolean;
-  currentDeviceType: string;
-  setWindowWidth: (res: number) => void;
+  currentDeviceType?: string;
+  setWindowWidth?: (res: number) => void;
 }

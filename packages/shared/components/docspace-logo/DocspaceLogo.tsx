@@ -43,7 +43,7 @@ const DocspaceLogo = ({
   const theme = useTheme();
 
   const onResize = () => {
-    setWindowWidth(window.innerWidth);
+    if (setWindowWidth) setWindowWidth(window.innerWidth);
   };
 
   React.useEffect(() => {

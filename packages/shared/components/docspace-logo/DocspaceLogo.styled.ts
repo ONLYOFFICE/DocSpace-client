@@ -39,15 +39,17 @@ export const StyledWrapper = styled.div<{
       props.currentDeviceType === "mobile" &&
       props.isResizing &&
       css`
+        display: flex;
         background-color: ${props.theme.header.backgroundColor};
         height: ${props.theme.header.height};
-        position: absolute;
+        position: fixed;
         top: 0;
         width: 100%;
         align-content: center;
         text-align: center;
         img {
           height: 24px;
+          margin: auto;
         }
       `}
   }

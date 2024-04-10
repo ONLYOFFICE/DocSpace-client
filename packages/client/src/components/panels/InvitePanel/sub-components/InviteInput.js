@@ -63,6 +63,7 @@ import {
   StyledDescription,
   StyledInviteLanguage,
   ResetLink,
+  StyledCrossIcon,
 } from "../StyledInvitePanel";
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
@@ -185,6 +186,10 @@ const InviteInput = ({
 
   const onChange = (e) => {
     const value = e.target.value;
+    onChangeInput(value);
+  };
+
+  const onChangeInput = (value) => {
     const clearValue = value.trim();
 
     setInputValue(value);
@@ -494,7 +499,7 @@ const InviteInput = ({
       )}
 
       <StyledInviteInputContainer ref={inputsRef}>
-        <StyledInviteInput ref={searchRef}>
+        <StyledInviteInput ref={searchRef} isShowCross={!!inputValue}>
           <TextInput
             className="invite-input"
             scale
@@ -508,7 +513,12 @@ const InviteInput = ({
             isAutoFocussed={true}
             onKeyDown={onKeyDown}
             type="search"
+            withBorder={false}
           />
+
+          <div className="append" onClick={() => onChangeInput("")}>
+            <StyledCrossIcon />
+          </div>
         </StyledInviteInput>
         {isAddEmailPanelBlocked ? (
           <></>

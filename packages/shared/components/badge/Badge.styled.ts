@@ -32,6 +32,7 @@ import { Text } from "../text";
 import { BadgeProps } from "./Badge.types";
 
 const hoveredCss = css<{ backgroundColor?: string }>`
+  cursor: pointer;
   border-color: ${(props) =>
     props.backgroundColor
       ? props.backgroundColor
@@ -67,7 +68,7 @@ const StyledBadge = styled.div<BadgeProps>`
   height: ${(props) => props.height};
 
   line-height: ${(props) => props.lineHeight};
-  cursor: pointer;
+
   overflow: ${(props) => props.theme.badge.overflow};
   flex-shrink: 0;
 

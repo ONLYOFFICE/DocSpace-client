@@ -39,45 +39,27 @@ import React from "react";
 const GroupsRow = ({
   t,
   item,
-  itemIndex,
   selection,
-  setSelection,
   bufferSelection,
-  setBufferSelection,
   getGroupContextOptions,
   sectionWidth,
   theme,
   openGroupAction,
+  changeGroupSelection,
+  changeGroupContextSelection,
 }) => {
   const isChecked = selection.some((el) => el.id === item.id);
   const isActive = bufferSelection?.id === item?.id;
 
-  const onRowClick = (e) => {
-    if (e.target?.tagName === "SPAN" || e.target?.tagName === "A") return;
-
-    if (selection.length === 1 && selection[0].id === item.id) {
-      setBufferSelection(null);
-      setSelection([]);
-      return;
-    }
-
-    setBufferSelection(item);
-    setSelection([item]);
+  const onSelect = () => {
+    changeGroupSelection(item, isChecked);
   };
 
-  const onSelect = (e) => {
-    setBufferSelection(null);
-    if (!isChecked) setSelection([...selection, item]);
-    else setSelection(selection.filter((g) => g.id !== item.id));
-  };
-
-  const onRowContextClick = () => {
-    setBufferSelection(item);
+  const onRowContextClick = (rightMouseButtonClick) => {
+    changeGroupContextSelection(item, !rightMouseButtonClick);
   };
 
   const onOpenGroup = () => {
-    setSelection([]);
-    setBufferSelection(null);
     openGroupAction(item.id, true, item.name);
   };
 
@@ -109,7 +91,6 @@ const GroupsRow = ({
         <Styled.GroupsRow
           key={item.id}
           data={item}
-          onRowClick={onRowClick}
           onContextClick={onRowContextClick}
           onSelect={onSelect}
           onDoubleClick={onOpenGroup}
@@ -178,11 +159,12 @@ const GroupsRow = ({
 
 export default inject(({ peopleStore, settingsStore }) => ({
   selection: peopleStore.groupsStore.selection,
-  setSelection: peopleStore.groupsStore.setSelection,
   bufferSelection: peopleStore.groupsStore.bufferSelection,
-  setBufferSelection: peopleStore.groupsStore.setBufferSelection,
   getGroupContextOptions: peopleStore.groupsStore.getGroupContextOptions,
   openGroupAction: peopleStore.groupsStore.openGroupAction,
+  changeGroupSelection: peopleStore.groupsStore.changeGroupSelection,
+  changeGroupContextSelection:
+    peopleStore.groupsStore.changeGroupContextSelection,
   theme: settingsStore.theme,
 }))(
   withTranslation(

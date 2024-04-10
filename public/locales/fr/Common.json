@@ -194,6 +194,7 @@
   "MainHeaderSelectAll": "Sélectionner tout",
   "MakeForm": "Enregistrer comme formulaire PDF",
   "ManyEmails": "Trop d'e-mails à analyser",
+  "MaximumNumberOfExternalLinksCreated": "Nombre maximum de liens externes créés",
   "MaxLengthExceeded": "La longueur maximale d'un nom d'utilisateur ou d'une autre partie locale est de 64 caractères.",
   "MediaError": "L’URL des médias n’a pas pu être chargée",
   "Megabyte": "Mo",

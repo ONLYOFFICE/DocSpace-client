@@ -634,7 +634,7 @@ const Dark: TTheme = {
         b: 27,
         a: 0.4,
       },
-      blur: 18,
+      blur: 10,
     },
 
     content: {

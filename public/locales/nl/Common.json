@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Over",
   "AboutCompanyTitle": "Over dit programma",
   "AccessDenied": "Toegang geweigerd",
@@ -107,9 +107,9 @@
   "DenyAccess": "Toegang weigeren",
   "Description": "Beschrijving",
   "DeveloperTools": "Developer Tools",
+  "Disabled": "Uitgeschakeld",
   "DisableQuota": "Quota uitschakelen",
   "DisableStorageQuota": "Opslagquota uitschakelen",
-  "Disabled": "Uitgeschakeld",
   "Disconnect": "Loskoppelen",
   "DocSpaceAdmin": "DocSpace beheerder",
   "DocSpaceOwner": "DocSpace eigenaar",
@@ -195,8 +195,8 @@
   "IncorrectPassword": "Onjuist wachtwoord",
   "Info": "Info",
   "InfoPanel": "Infopaneel",
-  "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> nodigt u uit om lid te worden van DocSpace <1>{spaceAddress}}</1> om veilig samen te werken aan documenten.",
-  "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> nodigt u uit om lid te worden van de kamer <1>{roomName}}</1> om veilig samen te werken aan documenten.",
+  "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> nodigt u uit om lid te worden van DocSpace <1>{{spaceAddress}}</1> om veilig samen te werken aan documenten.",
+  "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> nodigt u uit om lid te worden van de kamer <1>{{roomName}}</1> om veilig samen te werken aan documenten.",
   "Invite": "Uitnodigen",
   "Invited": "Uitgenodigd",
   "InviteUsers": "Gebruikers uitnodigen",

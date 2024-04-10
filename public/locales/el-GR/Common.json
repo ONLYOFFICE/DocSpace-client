@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Σχετικά",
   "AboutCompanyTitle": "Σχετικά με αυτό το πρόγραμμα",
   "AccessDenied": "Απαγόρευση πρόσβασης",
@@ -107,9 +107,9 @@
   "DenyAccess": "Άρνηση πρόσβασης",
   "Description": "Περιγραφή",
   "DeveloperTools": "Εργαλεία προγραμματιστή",
+  "Disabled": "Απενεργοποιημένο",
   "DisableQuota": "Απενεργοποίηση ποσόστωσης",
   "DisableStorageQuota": "Απενεργοποίηση ποσόστωσης αποθ. χώρου",
-  "Disabled": "Απενεργοποιημένο",
   "Disconnect": "Αποσύνδεση",
   "DocSpaceAdmin": "Διαχειριστής DocSpace",
   "DocSpaceOwner": "Ιδιοκτήτης DocSpace",

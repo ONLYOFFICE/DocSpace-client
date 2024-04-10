@@ -61,7 +61,7 @@
   "ItemsCountDescription": "Você pode especificar o número de arquivos/pastas exibidos em uma página, bem como especificar qual página começar a exibir",
   "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "Limite por período de tempo",
-  "LinkSettings": "Este link é protegido com um {{parâmetro}}. Para configurar o link,",
+  "LinkSettings": "Este link é protegido com um {{parameter}}. Para configurar o link,",
   "LinkSettings2": "Um {{parameter1}} e {{parameter2}} são definidos para este link. Para configurá-lo,",
   "LinkSettings3": "Um {{parameter1}}, {{parameter2}} e {{parameter3}} são definidos para este link. Para configurá-lo,",
   "Logo": "Logotipo",

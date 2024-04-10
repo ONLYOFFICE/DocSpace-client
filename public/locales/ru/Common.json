@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "О программе",
   "AboutCompanyTitle": "О программе",
   "AccessDenied": "Доступ запрещен",
@@ -107,9 +107,9 @@
   "DenyAccess": "Доступ запрещён",
   "Description": "Описание",
   "DeveloperTools": "Инструменты разработчика",
+  "Disabled": "Отключено",
   "DisableQuota": "Отключить квоту",
   "DisableStorageQuota": "Отключить квоту хранилища",
-  "Disabled": "Отключено",
   "Disconnect": "Отключить",
   "DocSpaceAdmin": "Администратор DocSpace",
   "DocSpaceOwner": "Владелец DocSpace",

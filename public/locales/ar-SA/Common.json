@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "من نحن",
   "AboutCompanyTitle": "نبذة تعريفية عن البرنامج",
   "AccessDenied": "المحاولة مرفوضة",
@@ -107,9 +107,9 @@
   "DenyAccess": "يمنع الدخول",
   "Description": "الوصف",
   "DeveloperTools": "ادوات المطورين",
+  "Disabled": "تعطيل",
   "DisableQuota": "تعطيل الحصة",
   "DisableStorageQuota": "تعطيل حصة التخزين",
-  "Disabled": "تعطيل",
   "Disconnect": "قطع الاتصال",
   "DocSpaceAdmin": "مسئول DocSpace",
   "DocSpaceOwner": "مالك DocSpace",

@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Par",
   "AboutCompanyTitle": "Par šo programmu",
   "AccessDenied": "Pieeja ir liegta",
@@ -107,9 +107,9 @@
   "DenyAccess": "Liegt piekļuvi",
   "Description": "Apraksts",
   "DeveloperTools": "Izstrādātāja rīki",
+  "Disabled": "Atspējots",
   "DisableQuota": "Atspējot kvotu",
   "DisableStorageQuota": "Atspējot krātuves kvotu",
-  "Disabled": "Atspējots",
   "Disconnect": "Atvienot",
   "DocSpaceAdmin": "DocSpace administrators",
   "DocSpaceOwner": "DocSpace īpašnieks",

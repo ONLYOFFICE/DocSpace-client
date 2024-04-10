@@ -286,7 +286,7 @@
   "UploadToServer": "Carica sul server",
   "UseAsLogoButton": "Usa come logo",
   "UseDigits": "Utilizza cifre",
-  "UsedStorage": "Utilizzato: {{dimensione}}",
+  "UsedStorage": "Utilizzato: {{size}}",
   "UseHttp": "Usa Http",
   "UserAgreement": "Confermo e voglio procedere",
   "UserLimitExceeded": "Limite utente superato. Per procedere al passaggio successivo, modificare il numero di utenti o aumentare il limite di utenti di DocSpace.",

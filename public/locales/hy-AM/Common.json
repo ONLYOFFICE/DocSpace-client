@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Մասին",
   "AboutCompanyTitle": "Ծրագրի մասին",
   "AccessDenied": "Մուտքն արգելված է",
@@ -107,9 +107,9 @@
   "DenyAccess": "Մերժել մատչումը",
   "Description": "Նկարագրություն",
   "DeveloperTools": "Մշակողի գործիքներ",
+  "Disabled": "Անջատված է",
   "DisableQuota": "Անջատել քվոտան",
   "DisableStorageQuota": "Անջատել պահեստի սահմանաչափը",
-  "Disabled": "Անջատված է",
   "Disconnect": "Ապակապակցել",
   "DocSpaceAdmin": "DocSpace-ի ադմինիստրատոր",
   "DocSpaceOwner": "DocSpace-ի տնօրինող",

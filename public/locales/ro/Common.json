@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Informații",
   "AboutCompanyTitle": "Despre aplicația",
   "AccessDenied": "Acces refuzat ",
@@ -107,9 +107,9 @@
   "DenyAccess": "Acces refuzat",
   "Description": "Descrierea",
   "DeveloperTools": "Instrumente pentru dezvoltatori",
+  "Disabled": "Dezactivat",
   "DisableQuota": "Dezactivare cotă",
   "DisableStorageQuota": "Dezactivare cotă spațiu de stocare",
-  "Disabled": "Dezactivat",
   "Disconnect": "Deconectare",
   "DocSpaceAdmin": "Administratorul DocSpace",
   "DocSpaceOwner": "Proprietarul DocSpace",
@@ -196,7 +196,7 @@
   "Info": "Informații",
   "InfoPanel": "Panou informații",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> vă invită să asociați la DocSpace <1>{{spaceAddress}}</1> pentru colaborarea securizată asupra documentelor.",
-  "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> vă invită să participați la sala <1>{{spaceAddress}}</1> pentru colaborarea securizată asupra documentelor.",
+  "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> vă invită să participați la sala <1>{{roomName}}</1> pentru colaborarea securizată asupra documentelor.",
   "Invite": "Invitaţie",
   "Invited": "Invitat",
   "InviteUsers": "Invitaţi utilizatori",

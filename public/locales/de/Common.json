@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Informationen",
   "AboutCompanyTitle": "Über diese Software",
   "AccessDenied": "Zugriff verweigert",
@@ -107,9 +107,9 @@
   "DenyAccess": "Zugriff verweigern",
   "Description": "Beschreibung",
   "DeveloperTools": "Entwicklungstools",
+  "Disabled": "Deaktiviert",
   "DisableQuota": "Quote deaktivieren",
   "DisableStorageQuota": "Speicherquote deaktivieren",
-  "Disabled": "Deaktiviert",
   "Disconnect": "Trennen Sie die Verbindung",
   "DocSpaceAdmin": "DocSpace-Verwaltung",
   "DocSpaceOwner": "DocSpace-Besitzer",

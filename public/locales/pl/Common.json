@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "O",
   "AboutCompanyTitle": "O tym programie",
   "AccessDenied": "Odmowa dostępu",
@@ -107,9 +107,9 @@
   "DenyAccess": "Odmów dostępu",
   "Description": "Opis",
   "DeveloperTools": "Narzędzia programistyczne",
+  "Disabled": "Wyłączono",
   "DisableQuota": "Wyłącz limit",
   "DisableStorageQuota": "Wyłącz limit pamięci",
-  "Disabled": "Wyłączono",
   "Disconnect": "Rozłącz",
   "DocSpaceAdmin": "Administrator DocSpace",
   "DocSpaceOwner": "Właściciel DocSpace",
@@ -210,7 +210,7 @@
   "LinkAccessDenied": "Odmówiono dostępu do linku",
   "LinkExpireAfter": "Link wygaśnie po <1>{{date}}</1>",
   "LinkExpired": "Link wygasł",
-  "LinkIsValid": "Link jest ważny do {{date}}.",
+  "LinkIsValid": "Link jest ważny do <1>{{date}}</1>",
   "LinkSuccessfullyCopied": "Link został pomyślnie skopiowany do schowka",
   "ListAccounts": "Lista kont",
   "LiveChat": "Czat na żywo",

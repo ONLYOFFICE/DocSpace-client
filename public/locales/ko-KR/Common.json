@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "소개",
   "AboutCompanyTitle": "프로그램 소개",
   "AccessDenied": "액세스가 거부되었습니다",
@@ -107,9 +107,9 @@
   "DenyAccess": "액세스 거부",
   "Description": "설명",
   "DeveloperTools": "개발자 도구",
+  "Disabled": "비활성화",
   "DisableQuota": "할당량 비활성화",
   "DisableStorageQuota": "스토리지 할당량 비활성화",
-  "Disabled": "비활성화",
   "Disconnect": "연결 해제",
   "DocSpaceAdmin": "DocSpace 관리자",
   "DocSpaceOwner": "DocSpace 소유자",

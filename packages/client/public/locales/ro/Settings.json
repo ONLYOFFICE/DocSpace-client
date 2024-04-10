@@ -270,7 +270,7 @@
   "TimeZone": "Fus orar",
   "Top5rooms": "Top 5 săli după utilizarea spațiului de stocare:",
   "Top5Users": "Top 5 săli după utilizarea spațiului de stocare:",
-  "TotalStorage": "Top 5 săli după utilizarea spațiului de stocare:",
+  "TotalStorage": "Spaţiu de stocare în total: {{size}}",
   "TrustedMail": "Setările domeniului de e-mail de încredere",
   "TrustedMailMobileDescription": "Setările domeniului de e-mail de încredere este modul de a indica severe de e-mail pe care le utilizați pentru autoînregistrarea utilizatorilor.",
   "TrustedMailSettingDescription": "Configurați setările domeniului de e-mail de încredere pentru a indica severe de e-mail pe care le utilizați pentru autoînregistrarea utilizatorilor.",

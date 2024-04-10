@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Giới thiệu",
   "AboutCompanyTitle": "Giới thiệu về chương trình này",
   "AccessDenied": "Truy cập bị từ chối",
@@ -107,9 +107,9 @@
   "DenyAccess": "Từ chối quyền truy cập",
   "Description": "Mô tả",
   "DeveloperTools": "Công cụ nhà phát triển",
+  "Disabled": "Đã vô hiệu hóa",
   "DisableQuota": "Vô hiệu hóa hạn mức",
   "DisableStorageQuota": "Vô hiệu hóa hạn mức lưu trữ",
-  "Disabled": "Đã vô hiệu hóa",
   "Disconnect": "Ngắt kết nối",
   "DocSpaceAdmin": "Quản trị viên DocSpace",
   "DocSpaceOwner": "Chủ sở hữu DocSpace",

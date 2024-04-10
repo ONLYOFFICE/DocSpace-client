@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Acerca de",
   "AboutCompanyTitle": "Acerca del programa",
   "AccessDenied": "Acceso denegado ",
@@ -107,9 +107,9 @@
   "DenyAccess": "Denegar acceso",
   "Description": "Descripción",
   "DeveloperTools": "Herramientas de desarrollo",
+  "Disabled": "Deshabilitado",
   "DisableQuota": "Desactivar cuota",
   "DisableStorageQuota": "Desactivar cuota de almacenamiento",
-  "Disabled": "Deshabilitado",
   "Disconnect": "Desconectar",
   "DocSpaceAdmin": "Administrador de DocSpace",
   "DocSpaceOwner": "Propietario de DocSpace",

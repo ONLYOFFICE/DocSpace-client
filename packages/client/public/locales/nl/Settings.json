@@ -211,7 +211,7 @@
   "RoomsModule": "Backup kamer",
   "RoomsModuleDescription": "U kunt een nieuwe kamer aanmaken speciaal voor de back-up, een van de bestaande kamers kiezen, of de kopie opslaan in hun {{roomName}} kamer.",
   "SaveToApply": "Klik op de knop <strong>Opslaan</strong> onderaan om toe te passen.",
-  "SelectedUsersCounter": "Geselecteerd: {{selectedUsers}}/{totalUsers}} gebruikers",
+  "SelectedUsersCounter": "Geselecteerd: {{selectedUsers}}/{{totalUsers}} gebruikers",
   "SelectFileDescriptionGoogle": "Selecteer de Google Workspace back-up bestanden om het importeren van gegevens te starten. U kunt meerdere bestanden selecteren. Zodra het uploaden en analyseren van de gegevens voltooid is, wordt de volgende stap automatisch gestart.",
   "SelectFileDescriptionNextcloud": "Selecteer het Nextcloud back-up bestand om het importeren van gegevens te starten. Er kan slechts één bestand worden geselecteerd. Zodra het uploaden en analyseren van de gegevens voltooid is, wordt de volgende stap automatisch gestart.",
   "SelectFileDescriptionWorkspace": "Selecteer het ONLYOFFICE back-up bestand om het importeren van gegevens te starten. Zodra het uploaden en analyseren van de gegevens voltooid is, wordt de volgende stap automatisch gestart.",

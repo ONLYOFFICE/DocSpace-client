@@ -1,5 +1,5 @@
 {
-  "AccountWillBeCreated": "Er wordt een DocSpace account aangemaakt voor <1>{email}}</1>. Voltooi uw registratie:",
+  "AccountWillBeCreated": "Er wordt een DocSpace account aangemaakt voor <1>{{email}}</1>. Voltooi uw registratie:",
   "ChangePasswordSuccess": "Wachtwoord is succesvol gewijzigd",
   "ConfirmOwnerPortalSuccessMessage": "DocSpace eigenaar is met succes gewijzigd. Over 10 seconden wordt u doorgestuurd.",
   "ConfirmOwnerPortalTitle": "Bevestig dat u de eigenaar van het DocSpace wilt wijzigen naar {{newOwner}}.",

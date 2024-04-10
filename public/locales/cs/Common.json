@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "O nás",
   "AboutCompanyTitle": "O tomto programu",
   "AccessDenied": "Přístup odepřen",
@@ -107,9 +107,9 @@
   "DenyAccess": "Zamítnout přístup",
   "Description": "Popis",
   "DeveloperTools": "Nástroje pro vývojáře",
+  "Disabled": "Deaktivováno",
   "DisableQuota": "Zakázat kvóty",
   "DisableStorageQuota": "Zakázat kvóty úložiště",
-  "Disabled": "Deaktivováno",
   "Disconnect": "Odpojit",
   "DocSpaceAdmin": "Správce prostoru DocSpace",
   "DocSpaceOwner": "Majitel DocSpace",

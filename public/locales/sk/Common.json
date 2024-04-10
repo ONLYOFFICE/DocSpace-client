@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "O aplikácii",
   "AboutCompanyTitle": "O programe",
   "AccessDenied": "Prístup bol zamietnutý",
@@ -107,9 +107,9 @@
   "DenyAccess": "Zamietnuť prístup",
   "Description": "Popis",
   "DeveloperTools": "Nástroje pre vývojárov",
+  "Disabled": "Vypnuté",
   "DisableQuota": "Vypnúť kvótu",
   "DisableStorageQuota": "Vypnúť kvótu úložiska",
-  "Disabled": "Vypnuté",
   "Disconnect": "Odpojiť",
   "DocSpaceAdmin": "Administrátor DocSpace",
   "DocSpaceOwner": "Vlastník DocSpace",

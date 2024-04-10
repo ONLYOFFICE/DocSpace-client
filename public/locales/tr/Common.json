@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Hakkında",
   "AboutCompanyTitle": "Bu program hakkında",
   "AccessDenied": "Erişim engellendi",
@@ -107,9 +107,9 @@
   "DenyAccess": "Erişimi reddet",
   "Description": "Tanım",
   "DeveloperTools": "Geliştirici Araçları",
+  "Disabled": "Devre dışı bırakıldı",
   "DisableQuota": "Kotayı devre dışı bırak",
   "DisableStorageQuota": "Depolama kotasını devre dışı bırak",
-  "Disabled": "Devre dışı bırakıldı",
   "Disconnect": "Bağlantıyı kes",
   "DocSpaceAdmin": "DocSpace yöneticisi",
   "DocSpaceOwner": "DocSpace sahibi",

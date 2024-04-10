@@ -24,34 +24,49 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import Script from "next/script";
 
-import { getLogoUrls } from "@docspace/shared/api/settings";
-import { TWhiteLabel } from "@docspace/shared/utils/whiteLabelHelper";
-
-const useWhiteLabel = () => {
-  const [logoUrls, setLogoUrls] = React.useState<TWhiteLabel[]>([]);
-
-  const requestRunning = React.useRef(false);
-  const alreadyFetched = React.useRef(false);
-
-  const fetchWhiteLabel = React.useCallback(async () => {
-    if (alreadyFetched.current) return;
-
-    requestRunning.current = true;
-    const urls = await getLogoUrls();
-    requestRunning.current = false;
-
-    setLogoUrls(urls);
-    alreadyFetched.current = true;
-  }, []);
-
-  React.useEffect(() => {
-    fetchWhiteLabel();
-  }, [fetchWhiteLabel]);
-
-  return { logoUrls };
+const Scripts = () => {
+  return (
+    <>
+      <Script id="browser-detector" src="/static/scripts/browserDetector.js" />
+      <Script id="docspace-config">
+        {`
+          console.log("It's DocEditor INIT");
+          fetch("/static/scripts/config.json")
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+              }
+              return response.json();
+            })
+            .then((config) => {
+              window.DocSpaceConfig = {
+                ...config,
+              };
+    
+              if (
+                window.navigator.userAgent.includes("ZoomWebKit") ||
+                window.navigator.userAgent.includes("ZoomApps")
+              ) {
+                window.DocSpaceConfig.editor = {
+                  openOnNewPage: false,
+                  requestClose: true,
+                };
+              }
+    
+              //console.log({ DocSpaceConfig: window.DocSpaceConfig });
+            })
+            .catch((e) => {
+              console.error(e);
+              window.DocSpaceConfig = {
+                errorOnLoad: e,
+              };
+            });
+          `}
+      </Script>
+    </>
+  );
 };
 
-export default useWhiteLabel;
-
+export default Scripts;

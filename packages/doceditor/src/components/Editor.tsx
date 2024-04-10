@@ -28,6 +28,7 @@
 
 import React from "react";
 import { isMobile } from "react-device-detect";
+import { useTranslation } from "react-i18next";
 
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
 import IConfig from "@onlyoffice/document-editor-react/dist/esm/types/model/config";
@@ -53,12 +54,13 @@ const Editor = ({
   config,
   successAuth,
   user,
-  view,
+
   doc,
   documentserverUrl,
   fileInfo,
   isSharingAccess,
-  t,
+  errorMessage,
+
   onSDKRequestSharingSettings,
   onSDKRequestSaveAs,
   onSDKRequestInsertImage,
@@ -66,6 +68,8 @@ const Editor = ({
   onSDKRequestSelectDocument,
   onSDKRequestReferenceSource,
 }: EditorProps) => {
+  const { t } = useTranslation(["Common", "Editor", "DeepLink"]);
+
   const {
     onDocumentReady,
     onSDKRequestOpen,
@@ -91,6 +95,7 @@ const Editor = ({
     fileInfo,
     config,
     doc,
+    errorMessage,
     t,
   });
 
@@ -104,23 +109,25 @@ const Editor = ({
     t,
   });
 
-  const newConfig: IConfig = {
-    document: config.document,
-    documentType: config.documentType,
-    token: config.token,
-    type: config.type,
-  };
+  const newConfig: IConfig = config
+    ? {
+        document: config.document,
+        documentType: config.documentType,
+        token: config.token,
+        type: config.type,
+      }
+    : {};
 
-  newConfig.editorConfig = { ...config.editorConfig };
+  if (config) newConfig.editorConfig = { ...config.editorConfig };
 
   const search = typeof window !== "undefined" ? window.location.search : "";
   const editorType = new URLSearchParams(search).get("editorType");
 
   //if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
 
-  if (editorType) config.type = editorType;
+  if (editorType) newConfig.type = editorType;
 
-  if (isMobile) config.type = "mobile";
+  if (isMobile) newConfig.type = "mobile";
 
   let goBack: TGoBack = {} as TGoBack;
 
@@ -229,7 +236,7 @@ const Editor = ({
     newConfig.events.onRequestSharingSettings = onSDKRequestSharingSettings;
   }
 
-  if (!fileInfo.providerKey) {
+  if (!fileInfo?.providerKey) {
     newConfig.events.onRequestReferenceData = onSDKRequestReferenceData;
 
     if (!IS_ZOOM) {
@@ -237,16 +244,16 @@ const Editor = ({
     }
   }
 
-  if (fileInfo.security.Rename) {
+  if (fileInfo?.security.Rename) {
     newConfig.events.onRequestRename = (obj: object) =>
       onSDKRequestRename(obj, fileInfo.id);
   }
 
-  if (fileInfo.security.ReadHistory) {
+  if (fileInfo?.security.ReadHistory) {
     newConfig.events.onRequestHistory = onSDKRequestHistory;
   }
 
-  if (fileInfo.security.EditHistory) {
+  if (fileInfo?.security.EditHistory) {
     newConfig.events.onRequestRestore = onSDKRequestRestore;
   }
 
@@ -261,7 +268,15 @@ const Editor = ({
     <DocumentEditor
       id={"docspace_editor"}
       documentServerUrl={documentserverUrl}
-      config={newConfig}
+      config={
+        errorMessage
+          ? {
+              events: {
+                onAppReady: onSDKAppReady,
+              },
+            }
+          : newConfig
+      }
       height="100%"
       width="100%"
       events_onDocumentReady={onDocumentReady}
@@ -270,4 +285,3 @@ const Editor = ({
 };
 
 export default Editor;
-

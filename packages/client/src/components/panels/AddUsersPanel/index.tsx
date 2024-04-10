@@ -26,21 +26,23 @@
 
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
-import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
 import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
 
 import { Aside } from "@docspace/shared/components/aside";
 import { Backdrop } from "@docspace/shared/components/backdrop";
-import { Selector, TSelectorItem } from "@docspace/shared/components/selector";
+import {
+  Selector,
+  SelectorAccessRightsMode,
+  TSelectorItem,
+} from "@docspace/shared/components/selector";
 import {
   TAccessRight,
   TSelectorAccessRights,
   TSelectorCancelButton,
-  TSelectorSelectAll,
   TWithTabs,
 } from "@docspace/shared/components/selector/Selector.types";
 import { toastr } from "@docspace/shared/components/toast";
@@ -92,6 +94,7 @@ const toListItem = (
     const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
 
     const isInvited = invitedUsers?.includes(id) || (isRoom && shared);
+
     const isDisabled =
       disableDisabledUsers && status === EmployeeStatus.Disabled;
 
@@ -122,9 +125,10 @@ const toListItem = (
 
     isGroup,
     name: groupName,
+    shared,
   } = item;
 
-  const isInvited = invitedUsers?.includes(id);
+  const isInvited = invitedUsers?.includes(id) || (isRoom && shared);
   const disabledText = isInvited ? t("Common:Invited") : "";
   const userAvatar = "";
 
@@ -199,6 +203,35 @@ const AddUsersPanel = ({
   const [isInit, setIsInit] = useState(true);
   const [isLoading, setIsLoading] = useLoadingWithTimeout<boolean>(0, true);
   const [activeTabId, setActiveTabId] = useState<string>(PEOPLE_TAB_ID);
+  const [selectedItems, setSelectedItems] = useState<TSelectorItem[]>([]);
+
+  const [itemsList, setItemsList] = useState<TSelectorItem[]>([]);
+  const [searchValue, setSearchValue] = useState("");
+  const [hasNextPage, setHasNextPage] = useState(true);
+  const [isNextPageLoading, setIsNextPageLoading] = useState(false);
+  const [total, setTotal] = useState(0);
+  const totalRef = useRef(0);
+
+  const onSelect = (
+    item: TSelectorItem,
+    isDoubleClick: boolean,
+    doubleClickCallback: () => void,
+  ) => {
+    setSelectedItems((items) => {
+      const includeFile = items.find((el) => el.id === item.id);
+
+      if (includeFile)
+        return isMultiSelect
+          ? items.filter((el) => el.id !== includeFile.id)
+          : [];
+
+      return isMultiSelect ? [...items, item] : [item];
+    });
+    if (isDoubleClick && !isMultiSelect) {
+      doubleClickCallback();
+    }
+  };
+
   const accessRight =
     defaultAccess ||
     (isEncrypted ? ShareAccessRights.FullAccess : ShareAccessRights.ReadOnly);
@@ -266,13 +299,6 @@ const AddUsersPanel = ({
   const selectedAccess = accessOptions.filter(
     (access) => access.access === accessRight,
   )[0];
-
-  const [itemsList, setItemsList] = useState<TSelectorItem[]>([]);
-  const [searchValue, setSearchValue] = useState("");
-  const [hasNextPage, setHasNextPage] = useState(true);
-  const [isNextPageLoading, setIsNextPageLoading] = useState(false);
-  const [total, setTotal] = useState(0);
-  const totalRef = useRef(0);
 
   const changeActiveTab = useCallback((tab: number | string) => {
     setActiveTabId(`${tab}`);
@@ -393,7 +419,13 @@ const AddUsersPanel = ({
     isGroup?: boolean,
   ) => {
     return (
-      <div style={{ width: "100%" }}>
+      <div
+        style={{
+          width: "100%",
+          overflow: "hidden",
+          marginInlineEnd: "16px",
+        }}
+      >
         <Text
           className="label"
           fontWeight={600}
@@ -423,15 +455,6 @@ const AddUsersPanel = ({
     );
   };
 
-  const withSelectAllProps: TSelectorSelectAll = isMultiSelect
-    ? {
-        withSelectAll: isMultiSelect,
-        selectAllLabel: t("Common:AllAccounts"),
-        selectAllIcon: CatalogAccountsReactSvgUrl,
-        onSelectAll: () => {},
-      }
-    : {};
-
   const withAccessRightsProps: TSelectorAccessRights =
     withAccessRights && isMultiSelect
       ? {
@@ -439,6 +462,7 @@ const AddUsersPanel = ({
           accessRights: accessOptions,
           selectedAccessRight: selectedAccess,
           onAccessRightsChange: () => {},
+          accessRightsMode: SelectorAccessRightsMode.Detailed,
         }
       : {};
 
@@ -489,12 +513,14 @@ const AddUsersPanel = ({
       >
         <Selector
           withHeader
+          alwaysShowFooter
           headerProps={{
             // Todo: Update groups empty screen texts when they are ready
             headerLabel: t("Common:ListAccounts"),
             withoutBackButton: false,
             onBackClick,
           }}
+          onSelect={onSelect}
           renderCustomItem={renderCustomItem}
           withSearch
           searchPlaceholder={t("Common:Search")}
@@ -505,8 +531,7 @@ const AddUsersPanel = ({
           isMultiSelect={isMultiSelect}
           submitButtonLabel={t("Common:AddButton")}
           onSubmit={onUsersSelect}
-          disableSubmitButton={false}
-          {...withSelectAllProps}
+          disableSubmitButton={selectedItems.length === 0}
           {...withAccessRightsProps}
           {...withCancelButtonProps}
           emptyScreenImage={emptyScreenImage}

@@ -109,7 +109,6 @@ const StyledAccountsItemTitle = styled.div`
   }
 
   .context-button {
-    padding-top: 24px;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
@@ -186,10 +185,12 @@ const StyledAccountContent = styled.div`
     }
 
     .info_field_groups {
+      margin-top: 8px;
       height: 100%;
     }
 
     .info_groups {
+      margin-top: 4px;
       display: flex;
       flex-direction: column;
       align-items: start;

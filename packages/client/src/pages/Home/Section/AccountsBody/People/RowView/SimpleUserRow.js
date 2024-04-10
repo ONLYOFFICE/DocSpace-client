@@ -76,9 +76,12 @@ const StyledWrapper = styled.div`
     ${(props) =>
       (props.checked || props.isActive) && marginStylesUserRowContainer};
 
-    :hover {
-      ${marginStylesUserRowContainer}
-    }
+    ${!isMobile &&
+    css`
+      :hover {
+        ${marginStylesUserRowContainer}
+      }
+    `}
   }
 `;
 
@@ -104,7 +107,6 @@ const StyledSimpleUserRow = styled(Row)`
   ${!isMobile &&
   css`
     :hover {
-      cursor: pointer;
       ${checkedStyle}
     }
   `}
@@ -125,23 +127,20 @@ const SimpleUserRow = (props) => {
     contextOptionsProps,
     checkedProps,
     onContentRowSelect,
-    onContentRowClick,
+    onUserContextClick,
     element,
-    //setBufferSelection,
     isActive,
-    //isSeveralSelection,
     value,
   } = props;
 
   const isChecked = checkedProps.checked;
 
-  const onRowClick = React.useCallback(() => {
-    onContentRowClick && onContentRowClick(!isChecked, item, false, false);
-  }, [isChecked, item, onContentRowClick]);
-
-  const onRowContextClick = React.useCallback(() => {
-    onContentRowClick && onContentRowClick(!isChecked, item, false);
-  }, [isChecked, item, onContentRowClick]);
+  const onRowContextClick = React.useCallback(
+    (rightMouseButtonClick) => {
+      onUserContextClick?.(item, !rightMouseButtonClick);
+    },
+    [item, onUserContextClick],
+  );
 
   return (
     <StyledWrapper
@@ -164,7 +163,6 @@ const SimpleUserRow = (props) => {
           sectionWidth={sectionWidth}
           mode={"modern"}
           className={"user-row"}
-          onRowClick={onRowClick}
           onContextClick={onRowContextClick}
         >
           <UserContent {...props} />

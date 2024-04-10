@@ -76,6 +76,7 @@ import { ShareAccessRights, RoomsType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isDesktop } from "@docspace/shared/utils";
 import { Events } from "@docspace/shared/enums";
+import { copyShareLink } from "@docspace/shared/utils/copy";
 
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/shared/utils/common";
@@ -367,7 +368,7 @@ class ContextOptionsStore {
 
     if (isShared && !item.isFolder && !isArchive) {
       const fileLinkData = await getFileLink(item.id);
-      copy(fileLinkData.sharedTo.shareLink);
+      copyShareLink(fileLinkData.sharedTo.shareLink);
       return toastr.success(t("Translations:LinkCopySuccess"));
     }
 
@@ -407,7 +408,7 @@ class ContextOptionsStore {
     const primaryLink = await this.filesStore.getPrimaryLink(item.id);
 
     if (primaryLink) {
-      copy(primaryLink.sharedTo.shareLink);
+      copyShareLink(primaryLink.sharedTo.shareLink);
       item.shared
         ? toastr.success(t("Common:LinkSuccessfullyCopied"))
         : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
@@ -1010,7 +1011,7 @@ class ContextOptionsStore {
       item.providerKey && item.id === item.rootFolderId;
 
     const isShareable = this.treeFoldersStore.isPersonalRoom
-      ? item.canShare || item.isFolder
+      ? item.canShare || (!this.userStore.user?.isCollaborator && item.isFolder)
       : false;
 
     const isMedia =
@@ -1311,7 +1312,7 @@ class ContextOptionsStore {
 
           const primaryLink = await getPrimaryFileLink(item.id);
           if (primaryLink) {
-            copy(primaryLink.sharedTo.shareLink);
+            copyShareLink(primaryLink.sharedTo.shareLink);
             item.shared
               ? toastr.success(t("Files:LinkSuccessfullyCopied"))
               : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
@@ -1556,17 +1557,7 @@ class ContextOptionsStore {
     const pluginItems = this.onLoadPlugins(item);
 
     if (pluginItems.length > 0) {
-      if (isDesktop()) {
-        options.splice(1, 0, {
-          id: "option_plugin-actions",
-          key: "plugin_actions",
-          label: t("Common:Actions"),
-          icon: PluginActionsSvgUrl,
-          disabled: false,
-
-          onLoad: () => this.onLoadPlugins(item),
-        });
-      } else {
+      if (!isDesktop() || pluginItems.length === 1) {
         pluginItems.forEach((plugin) => {
           options.splice(1, 0, {
             id: `option_${plugin.key}`,
@@ -1576,6 +1567,16 @@ class ContextOptionsStore {
             disabled: false,
             onClick: plugin.onClick,
           });
+        });
+      } else {
+        options.splice(1, 0, {
+          id: "option_plugin-actions",
+          key: "plugin_actions",
+          label: t("Common:Actions"),
+          icon: PluginActionsSvgUrl,
+          disabled: false,
+
+          onLoad: () => this.onLoadPlugins(item),
         });
       }
     }

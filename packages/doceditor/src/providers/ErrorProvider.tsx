@@ -24,9 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-async function Page({}) {
-  return <p>Healthy</p>;
-}
+"use client";
 
-export default Page;
+import React from "react";
+
+import ErrorBoundary from "@docspace/shared/components/error-boundary/ErrorBoundary";
+import { TUser } from "@docspace/shared/api/people/types";
+import {
+  TSettings,
+  TFirebaseSettings,
+} from "@docspace/shared/api/settings/types";
+import FirebaseHelper from "@docspace/shared/utils/firebase";
+
+import pkgFile from "../../package.json";
+import useDeviceType from "@/hooks/useDeviceType";
+import useWhiteLabel from "@/hooks/useWhiteLabel";
+
+type TErrorProvider = {
+  user: TUser | undefined;
+  settings: TSettings | undefined;
+  children: React.ReactNode;
+};
+
+const ErrorProvider = ({ children, user, settings }: TErrorProvider) => {
+  const firebaseHelper = new FirebaseHelper(
+    settings?.firebase ?? ({} as TFirebaseSettings),
+  );
+  const { currentDeviceType } = useDeviceType();
+  return (
+    <ErrorBoundary
+      user={user ?? ({} as TUser)}
+      version={pkgFile.version}
+      firebaseHelper={firebaseHelper}
+      currentDeviceType={currentDeviceType}
+    >
+      {children}
+    </ErrorBoundary>
+  );
+};
+
+export default ErrorProvider;
 

@@ -14,5 +14,9 @@
   "MoveToTrashTitle": "Move to Trash?",
   "UnsubscribeButton": "Unsubscribe",
   "UnsubscribeNote": "Are you sure you want to unsubscribe from the selected items from the list?",
-  "UnsubscribeTitle": "Unsubscribe confirmation"
+  "UnsubscribeTitle": "Unsubscribe confirmation",
+  "DeleteGroupTitle": "Delete group",
+  "DeleteAllGroupsTitle": "Delete groups",
+  "DeleteGroupDescription": "Group {{groupName}} will be deleted. Users in the group will not be removed from DocSpace. Are you sure you want to continue?",
+  "DeleteAllGroupDescription": "The selected groups will be deleted. Users in the groups will not be removed from DocSpace. Are you sure you want to continue?"
 }

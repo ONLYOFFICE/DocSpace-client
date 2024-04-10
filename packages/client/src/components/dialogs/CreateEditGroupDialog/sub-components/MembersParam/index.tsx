@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
@@ -32,13 +32,16 @@ import * as Styled from "./index.styled";
 import SelectGroupMembersPanel from "./SelectGroupMembersPanel";
 import GroupMemberRow from "../GroupMemberRow";
 
-interface MembersParamProps {
-  groupManager: object | null;
-  groupMembers: object[] | null;
-  setGroupMembers: (groupMembers: object[]) => void;
-  onShowSelectMembersPanel: () => void;
+interface GroupMember {
+  id: string;
 }
 
+interface MembersParamProps {
+  groupManager: GroupMember | null;
+  groupMembers: GroupMember[] | null;
+  setGroupMembers: (groupMembers: GroupMember[]) => void;
+  onShowSelectMembersPanel: () => void;
+}
 const MembersParam = ({
   groupManager,
   groupMembers,
@@ -47,10 +50,13 @@ const MembersParam = ({
 }: MembersParamProps) => {
   const { t } = useTranslation(["Common", "PeopleTranslation"]);
 
-  const onRemoveUserById = (id: string) => {
-    const newGroupMembers = groupMembers?.filter((gm) => gm.id !== id);
-    setGroupMembers(newGroupMembers || []);
-  };
+  const onRemoveUserById = useCallback(
+    (id: string) => {
+      const newGroupMembers = groupMembers?.filter((gm) => gm.id !== id);
+      setGroupMembers(newGroupMembers || []);
+    },
+    [groupMembers, setGroupMembers],
+  );
 
   return (
     <div>
@@ -61,16 +67,16 @@ const MembersParam = ({
         <div className="label">{t("PeopleTranslations:AddMembers")}</div>
       </Styled.AddMembersButton>
 
-      {groupMembers.map(
-        (member) =>
-          member.id !== groupManager?.id && (
+      {groupMembers &&
+        groupMembers
+          .filter((member) => member.id !== groupManager?.id)
+          .map((member) => (
             <GroupMemberRow
               key={member.id}
               groupMember={member}
               onClickRemove={() => onRemoveUserById(member.id)}
             />
-          ),
-      )}
+          ))}
     </div>
   );
 };

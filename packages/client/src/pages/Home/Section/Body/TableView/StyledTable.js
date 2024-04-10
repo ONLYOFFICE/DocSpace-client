@@ -179,7 +179,7 @@ const StyledTableRow = styled(TableRow)`
 
   .table-container_element-wrapper,
   .table-container_row-loader {
-    min-width: ${(props) => (props.isRoom ? "40px" : "36px")};
+    min-width: 40px;
     border-bottom: unset;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
@@ -207,16 +207,16 @@ const StyledTableRow = styled(TableRow)`
       ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
-              margin-right: 4px;
+              margin-right: 8px;
             `
           : css`
-              margin-left: 4px;
+              margin-left: 8px;
             `}
     }
   }
 
   .table-container_row-checkbox {
-    width: 16px;
+    width: 12px;
   }
 
   .table-container_file-name-cell {

@@ -26,6 +26,7 @@
 
 import React, { useEffect, useCallback, useState } from "react";
 import { inject, observer } from "mobx-react";
+import { isMobile, isIOS } from "react-device-detect";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
@@ -67,6 +68,7 @@ const Dialog = ({
 
   useEffect(() => {
     let input = document?.getElementById("create-text-input");
+    if (isMobile && isIOS) return;
     if (input && value === startValue && !isChanged) input.select();
   }, [visible, value]);
 

@@ -51,13 +51,17 @@ class GroupsStore {
 
   groups: any[] | undefined;
 
-  selection = [];
+  selection: TGroup[] = [];
 
   bufferSelection = null;
+
+  groupName = "";
 
   selected = "none";
 
   groupsFilter = GroupsFilter.getDefault();
+
+  isLoading = false;
 
   groupsIsIsLoading = false;
 
@@ -118,6 +122,14 @@ class GroupsStore {
     const filter = GroupsFilter.getDefault();
 
     window.DocSpace.navigate(`accounts/groups/filter?${filter.toUrlParams()}`);
+  };
+
+  setGroupName = (name: string) => {
+    this.groupName = name;
+  };
+
+  setIsLoading = (isLoading: boolean) => {
+    this.isLoading = isLoading;
   };
 
   get groupsFilterTotal() {
@@ -333,7 +345,7 @@ class GroupsStore {
     });
   };
 
-  setSelection = (selection) => (this.selection = selection);
+  setSelection = (selection: TGroup[]) => (this.selection = selection);
 
   setBufferSelection = (bufferSelection: any) =>
     (this.bufferSelection = bufferSelection);
@@ -396,6 +408,56 @@ class GroupsStore {
     this.setSelection(newSelections);
   };
 
+  onDeleteClick = (name: string) => {
+    this.setGroupName(name);
+    this.peopleStore.dialogStore.setDeleteGroupDialogVisible(true);
+  };
+
+  onDeleteGroup = async (t, groupId) => {
+    this.setIsLoading(true);
+
+    if (!groupId) {
+      this.setIsLoading(false);
+      return;
+    }
+
+    try {
+      await groupsApi.deleteGroup(groupId);
+      toastr.success(t("PeopleTranslations:SuccessDeleteGroup"));
+      this.setSelection([]);
+      this.getGroups(this.groupsFilter, true);
+      this.infoPanelStore.setInfoPanelSelection(null);
+      this.setIsLoading(false);
+      this.peopleStore.dialogStore.setDeleteGroupDialogVisible(false);
+    } catch (err) {
+      toastr.error(err.message);
+      console.error(err);
+      this.setIsLoading(false);
+      this.peopleStore.dialogStore.setDeleteGroupDialogVisible(false);
+    }
+  };
+
+  onDeleteAllGroups = (t) => {
+    this.setIsLoading(true);
+
+    try {
+      Promise.all(
+        this.selection.map(async (group) => groupsApi.deleteGroup(group.id)),
+      ).then(() => {
+        toastr.success(t("PeopleTranslations:SuccessDeleteGroups"));
+        this.setSelection([]);
+        this.getGroups(this.groupsFilter, true);
+        this.setIsLoading(false);
+        this.peopleStore.dialogStore.setDeleteGroupDialogVisible(false);
+      });
+    } catch (err) {
+      toastr.error(err.message);
+      console.error(err);
+      this.setIsLoading(false);
+      this.peopleStore.dialogStore.setDeleteGroupDialogVisible(false);
+    }
+  };
+
   getGroupContextOptions = (
     t,
     item,
@@ -425,7 +487,9 @@ class GroupsStore {
         icon: InfoReactSvgUrl,
         onClick: () => {
           if (!forInsideGroup) {
-            this.selection = [item];
+            if (this.selection.length < 1) {
+              this.setBufferSelection(item);
+            }
           } else {
             this.peopleStore.selectionStore.setSelection([]);
             this.peopleStore.selectionStore.setBufferSelection(null);
@@ -444,21 +508,24 @@ class GroupsStore {
         label: t("Common:Delete"),
         title: t("Common:Delete"),
         icon: TrashReactSvgUrl,
-        onClick: async () => {
-          const groupId = item.id;
-          groupsApi
-            .deleteGroup(groupId)!
-            .then(() => {
-              toastr.success(t("PeopleTranslations:SuccessDeleteGroup"));
-              this.setSelection([]);
-              this.getGroups(this.groupsFilter, true);
-              this.infoPanelStore.setInfoPanelSelection(null);
-            })
-            .catch((err) => {
-              toastr.error(err.message);
-              console.error(err);
-            });
-        },
+        onClick: () => this.onDeleteClick(item.name),
+
+        //
+        // onClick: async () => {
+        //   const groupId = item.id;
+        //   groupsApi
+        //     .deleteGroup(groupId)!
+        //     .then(() => {
+        //       toastr.success(t("PeopleTranslations:SuccessDeleteGroup"));
+        //       this.setSelection([]);
+        //       this.getGroups(this.groupsFilter, true);
+        //       this.infoPanelStore.setInfoPanelSelection(null);
+        //     })
+        //     .catch((err) => {
+        //       toastr.error(err.message);
+        //       console.error(err);
+        //     });
+        // },
       },
     ];
   };
@@ -475,6 +542,8 @@ class GroupsStore {
     withBackURL: boolean,
     tempTitle: string,
   ) => {
+    this.setSelection([]);
+    this.setBufferSelection(null);
     this.setCurrentGroup(null);
     this.setInsideGroupTempTitle(tempTitle);
 
@@ -527,6 +596,70 @@ class GroupsStore {
       }
     } catch (err: any) {
       toastr.error(err.message);
+    }
+  };
+
+  selectGroup = (group: TGroup) => {
+    this.setSelection([...this.selection, group]);
+  };
+
+  deselectGroup = (group: TGroup) => {
+    const newSelection = this.selection.filter((s) => s.id !== group.id);
+
+    this.setSelection(newSelection);
+  };
+
+  changeGroupSelection = (group: TGroup, isSelected: boolean) => {
+    if (this.bufferSelection) {
+      this.setBufferSelection(null);
+    }
+
+    if (isSelected) {
+      this.deselectGroup(group);
+    } else {
+      this.selectGroup(group);
+    }
+  };
+
+  selectRow = (group: TGroup) => {
+    const isGroupSelected = !!this.selection.find((s) => s.id === group.id);
+    const isSingleSelected = isGroupSelected && this.selection.length === 1;
+
+    if (this.bufferSelection) {
+      this.setBufferSelection(null);
+    }
+
+    if (isSingleSelected) {
+      this.deselectGroup(group);
+    } else {
+      this.setSelection([]);
+      this.selectGroup(group);
+    }
+  };
+
+  singleContextMenuAction = (group: TGroup) => {
+    if (this.selection.length) {
+      this.setSelection([]);
+    }
+
+    this.setBufferSelection(group);
+  };
+
+  multipleContextMenuAction = (group: TGroup) => {
+    const isGroupSelected = !!this.selection.find((s) => s.id === group.id);
+    const isSingleSelected = isGroupSelected && this.selection.length === 1;
+
+    if (!isGroupSelected || isSingleSelected) {
+      this.setSelection([]);
+      this.setBufferSelection(group);
+    }
+  };
+
+  changeGroupContextSelection = (group: TGroup, isSingleMenu: boolean) => {
+    if (isSingleMenu) {
+      this.singleContextMenuAction(group);
+    } else {
+      this.multipleContextMenuAction(group);
     }
   };
 }

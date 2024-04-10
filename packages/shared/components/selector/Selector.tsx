@@ -96,6 +96,7 @@ const Selector = ({
   accessRights,
   selectedAccessRight,
   onAccessRightsChange,
+  accessRightsMode,
 
   withFooterInput,
   footerInputHeader,
@@ -150,7 +151,11 @@ const Selector = ({
   const [isFooterCheckboxChecked, setIsFooterCheckboxChecked] =
     React.useState<boolean>(isChecked || false);
   const [selectedAccess, setSelectedAccess] =
-    React.useState<TAccessRight | null>(null);
+    React.useState<TAccessRight | null>(() => {
+      if (selectedAccessRight) return { ...selectedAccessRight };
+
+      return null;
+    });
 
   const [requestRunning, setRequestRunning] = React.useState<boolean>(false);
 
@@ -475,6 +480,7 @@ const Selector = ({
         accessRights,
         selectedAccessRight: selectedAccess,
         onAccessRightsChange: onChangeAccessRightsAction,
+        accessRightsMode,
       }
     : ({} as TSelectorAccessRights);
 

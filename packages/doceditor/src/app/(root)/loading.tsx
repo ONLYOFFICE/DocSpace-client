@@ -24,11 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Toast } from "@docspace/shared/components/toast";
-import styled from "styled-components";
+import AppLoader from "@docspace/shared/components/app-loader";
 
-export const NoBoxShadowToast = styled(Toast)`
-  .Toastify__toast {
-    box-shadow: none;
-  }
-`;
+export default function Loading() {
+  // You can add any UI inside Loading, including a Skeleton.
+  return <AppLoader />;
+}

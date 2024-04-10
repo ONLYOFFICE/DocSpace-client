@@ -137,6 +137,13 @@ const DeleteDialogComponent = (props) => {
   };
 
   const onClose = () => {
+    if (
+      selection.length === 1 &&
+      selection[0].isArchive &&
+      selection[0].isRootFolder === false
+    ) {
+      setSelected("none");
+    }
     setBufferSelection(null);
     setRemoveMediaItem(null);
     setIsRoomDelete(false);
@@ -209,7 +216,7 @@ const DeleteDialogComponent = (props) => {
           <>
             <>{t("DeleteFolder")} </>
             <>{t("DeleteSharedNote")} </>
-            <>{t("FolderPermanentlyDeleted")} </>
+            {!isThirdParty && <>{t("FolderPermanentlyDeleted")} </>}
             <>{t("Common:WantToContinue")}</>
           </>
         ) : (

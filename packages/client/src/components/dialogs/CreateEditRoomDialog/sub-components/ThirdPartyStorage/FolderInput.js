@@ -214,9 +214,9 @@ const FolderInput = ({
           isPanelVisible={isDialogOpen}
           onClose={onClose}
           isThirdParty
+          isSelectFolder
           onSelectTreeNode={setTreeNode}
           passedFoldersTree={[thirdpartyAccount]}
-          acceptButtonLabel={t("Common:SelectAction")}
           currentFolderId={treeNode ? treeNode.id : thirdpartyAccount.id}
         />
       )}

@@ -35,7 +35,7 @@ import SectionWrapper from "SRC_DIR/components/Section";
 import SelectionArea from "../Home/SelectionArea/FilesSelectionArea";
 import MediaViewer from "../Home/MediaViewer";
 
-import { usePublic } from "../Home/Hooks";
+import { usePublic, useSDK } from "../Home/Hooks";
 
 const PublicRoomPage = (props) => {
   const {
@@ -49,6 +49,10 @@ const PublicRoomPage = (props) => {
     showSecondaryButtonAlert,
     fetchPublicRoom,
     fetchPreviewMediaFile,
+
+    frameConfig,
+    setFrameConfig,
+    isLoading,
   } = props;
 
   const location = useLocation();
@@ -59,6 +63,8 @@ const PublicRoomPage = (props) => {
     fetchPublicRoom,
     fetchPreviewMediaFile,
   });
+
+  useSDK({ frameConfig, setFrameConfig, isLoading });
 
   const sectionProps = {
     showSecondaryProgressBar,
@@ -107,7 +113,7 @@ export default inject(
     filesSettingsStore,
     mediaViewerDataStore,
   }) => {
-    const { withPaging } = settingsStore;
+    const { withPaging, frameConfig, setFrameConfig } = settingsStore;
     const { isLoaded, isLoading, roomStatus, fetchPublicRoom } =
       publicRoomStore;
 
@@ -141,6 +147,9 @@ export default inject(
       isEmptyPage,
       fetchPublicRoom,
       fetchPreviewMediaFile,
+
+      frameConfig,
+      setFrameConfig,
     };
   },
 )(observer(PublicRoomPage));

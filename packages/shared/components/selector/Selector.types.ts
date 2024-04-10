@@ -30,6 +30,7 @@ import { AvatarRole } from "../avatar";
 import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
 import { TRoomSecurity } from "../../api/rooms/types";
 import { TSubmenuItem } from "../submenu";
+import { SelectorAccessRightsMode } from "./Selector.enums";
 
 // header
 
@@ -61,7 +62,15 @@ export type TBreadCrumb = {
   label: string;
   isRoom?: boolean;
   minWidth?: string;
-  onClick?: (e: React.MouseEvent, open: boolean, item: TBreadCrumb) => void;
+  onClick?: ({
+    e,
+    open,
+    item,
+  }: {
+    e: React.MouseEvent;
+    open: boolean;
+    item: TBreadCrumb;
+  }) => void;
   roomType?: RoomsType;
 };
 
@@ -222,19 +231,32 @@ export type TAccessRight = {
   access: string | number;
 };
 
+type TWithAccessRightsProps = {
+  withAccessRights: true;
+  accessRights: TAccessRight[];
+  selectedAccessRight: TAccessRight | null;
+  onAccessRightsChange: (access: TAccessRight) => void;
+  accessRightsMode?: SelectorAccessRightsMode;
+};
+
+type TWithoutAccessRightsProps = {
+  withAccessRights?: undefined;
+  accessRights?: undefined;
+  selectedAccessRight?: undefined;
+  onAccessRightsChange?: undefined;
+  accessRightsMode?: undefined;
+};
+
 export type TSelectorAccessRights =
-  | {
-      withAccessRights: true;
-      accessRights: TAccessRight[];
-      selectedAccessRight: TAccessRight | null;
-      onAccessRightsChange: (access: TAccessRight) => void;
-    }
-  | {
-      withAccessRights?: undefined;
-      accessRights?: undefined;
-      selectedAccessRight?: undefined;
-      onAccessRightsChange?: undefined;
-    };
+  | TWithAccessRightsProps
+  | TWithoutAccessRightsProps;
+
+export type AccessSelectorProps = Omit<
+  TWithAccessRightsProps,
+  "withAccessRights"
+> & {
+  footerRef: React.RefObject<HTMLDivElement>;
+};
 
 // footer input
 

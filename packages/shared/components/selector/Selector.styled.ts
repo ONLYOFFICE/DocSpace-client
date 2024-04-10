@@ -33,6 +33,23 @@ import { Base } from "../../themes";
 import { ComboBox } from "../combobox";
 import { Text } from "../text";
 import { Submenu } from "../submenu";
+import { AccessRightSelect } from "../access-right-select";
+
+const accessComboboxStyles = css`
+  margin-bottom: 2px;
+  max-height: 50px;
+
+  .combo-button {
+    min-height: 40px;
+    padding-inline-start: ${({ theme }) => theme.comboBox.button.paddingLeft};
+  }
+
+  .combo-button-label,
+  .combo-button-label:hover {
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    text-decoration: none;
+  }
+`;
 
 const StyledSelector = styled.div`
   width: 100%;
@@ -155,7 +172,7 @@ const StyledSelectAll = styled.div`
 
   .checkbox {
     svg {
-      margin-right: 0px;
+      margin-inline-end: 0px;
     }
   }
 `;
@@ -206,7 +223,7 @@ const StyledItem = styled.div<{
 
   .checkbox {
     svg {
-      margin-right: 0px;
+      margin-inline-end: 0px;
     }
   }
 
@@ -391,18 +408,11 @@ const StyledButtonContainer = styled.div`
 `;
 
 const StyledComboBox = styled(ComboBox)`
-  margin-bottom: 2px;
-  max-height: 50px;
+  ${accessComboboxStyles}
+`;
 
-  .combo-button {
-    min-height: 40px;
-  }
-
-  .combo-button-label,
-  .combo-button-label:hover {
-    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
-    text-decoration: none;
-  }
+const StyledAccessSelector = styled(AccessRightSelect)`
+  ${accessComboboxStyles}
 `;
 
 const StyledTabs = styled(Submenu)`
@@ -457,4 +467,5 @@ export {
   StyledComboBox,
   StyledTabs,
   StyledInfo,
+  StyledAccessSelector,
 };

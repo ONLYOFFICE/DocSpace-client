@@ -174,12 +174,13 @@ const LinkRow = (props) => {
       //   onClick: onEmbeddingClick,
       // },
 
-      !disabled && {
-        key: "copy-link-settings-key",
-        label: t("Files:CopySharedLink"),
-        icon: CopyToReactSvgUrl,
-        onClick: onCopyExternalLink,
-      },
+      !disabled &&
+        !isExpired && {
+          key: "copy-link-settings-key",
+          label: t("Files:CopySharedLink"),
+          icon: CopyToReactSvgUrl,
+          onClick: onCopyExternalLink,
+        },
 
       // disabled
       //   ? {
@@ -219,7 +220,13 @@ const LinkRow = (props) => {
       <Avatar
         size="min"
         source={LinkReactSvgUrl}
-        roleIcon={expiryDate ? <ClockReactSvg /> : null}
+        roleIcon={
+          expiryDate ? (
+            <div className="clock-icon">
+              <ClockReactSvg />
+            </div>
+          ) : null
+        }
         withTooltip={expiryDate}
         tooltipContent={tooltipContent}
       />
@@ -245,7 +252,7 @@ const LinkRow = (props) => {
       {disabled && <Text color={textColor}>{t("Settings:Disabled")}</Text>}
 
       <div className="external-row-icons">
-        {!disabled && !isArchiveFolder && (
+        {!disabled && !isExpired && !isArchiveFolder && (
           <>
             {isLocked && (
               <IconButton

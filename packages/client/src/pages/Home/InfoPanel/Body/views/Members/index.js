@@ -43,11 +43,12 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
+import { isDesktop } from "@docspace/shared/utils";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
-import PlusReactSvgUrl from "PUBLIC_DIR/images/actions.button.plus.react.svg?url";
+import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 
 import { Avatar } from "@docspace/shared/components/avatar";
-import copy from "copy-to-clipboard";
+import { copyShareLink } from "@docspace/shared/utils/copy";
 import LinkRow from "./sub-components/LinkRow";
 
 const Members = ({
@@ -140,7 +141,7 @@ const Members = ({
     } else {
       getPrimaryLink(infoPanelSelection.id).then((link) => {
         setExternalLink(link);
-        copy(link.sharedTo.shareLink);
+        copyShareLink(link.sharedTo.shareLink);
         toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
       });
     }
@@ -160,7 +161,7 @@ const Members = ({
             <div
               data-tooltip-id="emailTooltip"
               data-tooltip-content={t(
-                "Files:MaximumNumberOfExternalLinksCreated",
+                "Common:MaximumNumberOfExternalLinksCreated",
               )}
             >
               <IconButton
@@ -174,7 +175,7 @@ const Members = ({
 
               {additionalLinks.length >= LINKS_LIMIT_COUNT && (
                 <Tooltip
-                  float
+                  float={isDesktop()}
                   id="emailTooltip"
                   getContent={({ content }) => (
                     <Text fontSize="12px">{content}</Text>
@@ -215,10 +216,12 @@ const Members = ({
           className="additional-link"
           onClick={onAddNewLink}
         >
-          <Avatar size="min" source={PlusReactSvgUrl} />
+          <div className="create-link-icon">
+            <IconButton size={12} iconName={PlusIcon} isDisabled />
+          </div>
 
           <Link
-            isHovered
+            noHover
             type="action"
             fontSize="14px"
             fontWeight={600}

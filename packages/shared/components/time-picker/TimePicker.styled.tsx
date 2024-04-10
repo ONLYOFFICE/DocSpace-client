@@ -57,13 +57,10 @@ const TimeInput = styled.div<{ hasError?: boolean; isFocused?: boolean }>`
   }
 
   input {
+    max-width: 22px;
     padding: 0;
     padding-left: 2.5px;
     margin-right: -2.5px;
-  }
-
-  input:last-of-type {
-    text-align: end;
   }
 
   input[type="search"]::-webkit-search-decoration,

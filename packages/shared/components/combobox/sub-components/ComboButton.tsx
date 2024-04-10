@@ -74,6 +74,8 @@ const ComboButton = (props: ComboButtonProps) => {
   // const isSelected = selectedOption?.key !== 0;
   const displayArrow = withOptions || withAdvancedOptions;
 
+  const comboButtonClassName = `combo-button combo-button_${isOpen ? "open" : "closed"}`;
+
   return (
     <ComboButtonTheme
       isOpen={isOpen}
@@ -86,7 +88,7 @@ const ComboButton = (props: ComboButtonProps) => {
       size={size}
       //  isSelected={isSelected}
       modernView={modernView}
-      className="combo-button"
+      className={comboButtonClassName}
       tabIndex={tabIndex}
       displayArrow={displayArrow}
       isLoading={isLoading}
@@ -152,6 +154,7 @@ const ComboButton = (props: ComboButtonProps) => {
         isOpen={isOpen}
         className="combo-buttons_arrow-icon"
         isLoading={isLoading}
+        isDisabled={isDisabled}
       >
         {displayArrow &&
           (comboIcon ? (

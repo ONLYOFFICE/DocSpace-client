@@ -161,7 +161,11 @@ const PeopleSelector = ({
     isDoubleClick: boolean,
     doubleClickCallback: () => void,
   ) => {
-    setSelectedItem(item);
+    setSelectedItem((el) => {
+      if (el?.id === item.id) return null;
+
+      return item;
+    });
     if (isDoubleClick) {
       doubleClickCallback();
     }
@@ -376,6 +380,7 @@ const PeopleSelector = ({
   return (
     <Selector
       id={id}
+      alwaysShowFooter
       className={className}
       style={style}
       renderCustomItem={renderCustomItem}

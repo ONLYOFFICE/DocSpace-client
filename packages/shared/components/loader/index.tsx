@@ -73,7 +73,7 @@ const Loader = ({ ...props }: LoaderProps) => {
   );
 };
 
-Loader.defaultProps = {
+Loader.default = {
   type: LoaderTypes.base,
   size: "40px",
   label: "Loading content, please wait.",

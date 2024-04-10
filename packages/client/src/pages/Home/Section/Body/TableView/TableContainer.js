@@ -225,8 +225,6 @@ const Table = ({
     isTrashFolder,
   ]);
 
-  console.log("Table log TableContainer columnStorageName", columnStorageName);
-
   return (
     <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
       <TableHeader

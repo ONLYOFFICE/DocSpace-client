@@ -47,18 +47,21 @@ const StyledRowContainer = styled(RowContainer)`
 
   .table-group-menu {
     height: 61px;
-    position: absolute;
+    position: sticky;
     z-index: 201;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            right: -16px;
+            margin-right: -16px;
           `
         : css`
-            left: -16px;
+            margin-left: -16px;
           `}
     width: 100%;
-    margin-top: -35.5px;
+
+    margin-top: 20px;
+    top: 61px;
+    margin-bottom: -29.5px;
 
     .table-container_group-menu {
       padding: 0px 16px;

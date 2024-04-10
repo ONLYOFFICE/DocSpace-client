@@ -95,9 +95,12 @@ export const GroupsRowWrapper = styled.div`
     ${(props) =>
       (props.isChecked || props.isActive) && marginStylesGroupRowContainer};
 
-    :hover {
-      ${marginStylesGroupRowContainer}
-    }
+    ${!isMobile &&
+    css`
+      :hover {
+        ${marginStylesGroupRowContainer}
+      }
+    `}
   }
 `;
 
@@ -114,10 +117,13 @@ const checkedStyle = css`
 
 export const GroupsRow = styled(Row)`
   ${({ checked, isActive }) => (checked || isActive) && checkedStyle};
-  &:hover {
-    cursor: pointer;
-    ${checkedStyle}
-  }
+
+  ${!isMobile &&
+  css`
+    &:hover {
+      ${checkedStyle}
+    }
+  `}
 
   .row_content {
     height: 58px;

@@ -47,29 +47,27 @@ const GroupsTableItem = ({
   theme,
   hideColumns,
   selection,
-  setSelection,
   bufferSelection,
-  setBufferSelection,
   getGroupContextOptions,
   openGroupAction,
   managerAccountsGroupsColumnIsEnabled,
+
+  changeGroupSelection,
+  changeGroupContextSelection,
+  selectRow,
 }) => {
   const isChecked = selection.includes(item);
   const isActive = bufferSelection?.id === item.id;
 
-  const onChange = (e) => {
-    setBufferSelection(null);
-    if (!isChecked) setSelection([...selection, item]);
-    else setSelection(selection.filter((g) => g.id !== item.id));
+  const onChange = () => {
+    changeGroupSelection(item, isChecked);
   };
 
-  const onRowContextClick = () => {
-    setBufferSelection(item);
+  const onRowContextClick = (rightMouseButtonClick) => {
+    changeGroupContextSelection(item, !rightMouseButtonClick);
   };
 
   const onOpenGroup = () => {
-    setSelection([]);
-    setBufferSelection(null);
     openGroupAction(item.id, true, item.name);
   };
 
@@ -83,14 +81,7 @@ const GroupsTableItem = ({
     )
       return;
 
-    if (selection.length === 1 && selection[0].id === item.id) {
-      setBufferSelection(null);
-      setSelection([]);
-      return;
-    }
-
-    setBufferSelection(item);
-    setSelection([item]);
+    selectRow(item);
   };
 
   let value = `folder_${item.id}_false_index_${itemIndex}`;
@@ -172,11 +163,13 @@ const GroupsTableItem = ({
 
 export default inject(({ peopleStore }) => ({
   selection: peopleStore.groupsStore.selection,
-  setSelection: peopleStore.groupsStore.setSelection,
   bufferSelection: peopleStore.groupsStore.bufferSelection,
-  setBufferSelection: peopleStore.groupsStore.setBufferSelection,
   getGroupContextOptions: peopleStore.groupsStore.getGroupContextOptions,
   openGroupAction: peopleStore.groupsStore.openGroupAction,
+  changeGroupSelection: peopleStore.groupsStore.changeGroupSelection,
+  changeGroupContextSelection:
+    peopleStore.groupsStore.changeGroupContextSelection,
+  selectRow: peopleStore.groupsStore.selectRow,
 }))(
   withTranslation(
     "People",

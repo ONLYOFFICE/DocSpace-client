@@ -194,7 +194,7 @@ const StyledTableRow = styled(TableRow)`
   }
 
   .table-container_element-container {
-    width: 36px;
+    width: 32px;
     height: 32px;
 
     display: flex;
@@ -216,7 +216,7 @@ const StyledTableRow = styled(TableRow)`
   }
 
   .table-container_row-checkbox {
-    width: 16px;
+    width: 12px;
   }
 
   .table-container_file-name-cell {

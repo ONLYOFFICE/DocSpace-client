@@ -412,7 +412,8 @@ const SubMenu = (props: {
         return (
           <Scrollbar style={{ height: listHeight }}>
             {model.map((item: ContextMenuModel, index: number) => {
-              if (item.disabled) return null;
+              if (item?.disabled) return null;
+
               return renderItem(item, index);
             })}
           </Scrollbar>

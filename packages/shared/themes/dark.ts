@@ -304,7 +304,7 @@ const Dark: TTheme = {
     fontWeight: "500",
     textDecoration: "none",
     padding: "0",
-    borderRadius: "2px",
+    borderRadius: "3px",
     height: "40px",
     heightSmall: "32px",
     textAlign: "left",
@@ -353,10 +353,10 @@ const Dark: TTheme = {
 
     svg: {
       margin: "11px 8px",
-      width: "18px",
-      height: "18px",
-      minWidth: "18px",
-      minHeight: "18px",
+      width: "20px",
+      height: "20px",
+      minWidth: "20px",
+      minHeight: "20px",
       fill: darkBlack,
     },
   },

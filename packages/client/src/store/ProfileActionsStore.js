@@ -142,7 +142,7 @@ class ProfileActionsStore {
 
     const profileUrl = `${prefix}${PROFILE_SELF_URL}`;
 
-    if (openingNewTab(profileUrl, obj.originalEvent)) return;
+    if (openingNewTab(profileUrl, obj?.originalEvent)) return;
 
     this.profileClicked = true;
 

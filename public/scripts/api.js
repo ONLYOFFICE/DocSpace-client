@@ -25,13 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 (function () {
+  const FRAME_NAME = "frameDocSpace";
+
   const defaultConfig = {
     src: new URL(document.currentScript.src).origin,
     rootPath: "/rooms/shared/",
     requestToken: null,
     width: "100%",
     height: "100%",
-    name: "frameDocSpace",
+    name: FRAME_NAME,
     type: "desktop", // TODO: ["desktop", "mobile"]
     frameId: "ds-frame",
     mode: "manager", //TODO: ["manager", "editor", "viewer","room-selector", "file-selector", "system"]
@@ -496,7 +498,7 @@
       iframe.src = config.src + path;
       iframe.style.width = config.width;
       iframe.style.height = config.height;
-      iframe.name = config.name;
+      iframe.name = `${FRAME_NAME}__#${config.frameId}`;
       iframe.id = config.frameId;
 
       iframe.frameBorder = 0;
@@ -576,6 +578,10 @@
           data = JSON.parse(e.data);
         } catch (err) {
           data = {};
+        }
+
+        if (this.config.frameId !== data.frameId) {
+          return;
         }
 
         switch (data.type) {
@@ -1103,6 +1109,7 @@
    */
   class DocSpaceSDK {
     frames = {};
+    instances = [];
 
     /**
      * Initializes a new instance of the DocSpace class and initializes the frame.
@@ -1110,9 +1117,20 @@
      * @returns {DocSpace} The initialized DocSpace instance.
      */
     initFrame = (config) => {
+      const existInstance = this.instances.find(
+        (i) => i.config.frameId === config.frameId
+      );
+
+      if (existInstance) {
+        existInstance.initFrame(config);
+        return existInstance;
+      }
+
       const instance = new DocSpace(config);
 
       instance.initFrame(config);
+
+      this.instances.push(instance);
 
       return instance;
     };
@@ -1123,9 +1141,20 @@
      * @returns {DocSpace} - An instance of the DocSpace class.
      */
     initButton = (config) => {
+      const existInstance = this.instances.find(
+        (i) => i.config.frameId === config.frameId
+      );
+
+      if (existInstance) {
+        existInstance.initButton(config);
+        return existInstance;
+      }
+
       const instance = new DocSpace(config);
 
       instance.initButton(config);
+
+      this.instances.push(instance);
 
       return instance;
     };
@@ -1137,9 +1166,20 @@
      * @returns {DocSpace} The initialized DocSpace instance.
      */
     initEditor = (config = {}) => {
+      const existInstance = this.instances.find(
+        (i) => i.config.frameId === config.frameId
+      );
+
+      if (existInstance) {
+        existInstance.initEditor(config);
+        return existInstance;
+      }
+
       const instance = new DocSpace(config);
 
       instance.initEditor(config);
+
+      this.instances.push(instance);
 
       return instance;
     };
@@ -1150,9 +1190,20 @@
      * @returns {DocSpace} - The initialized DocSpace instance.
      */
     initViewer = (config = {}) => {
+      const existInstance = this.instances.find(
+        (i) => i.config.frameId === config.frameId
+      );
+
+      if (existInstance) {
+        existInstance.initViewer(config);
+        return existInstance;
+      }
+
       const instance = new DocSpace(config);
 
       instance.initViewer(config);
+
+      this.instances.push(instance);
 
       return instance;
     };
@@ -1164,9 +1215,20 @@
      * @returns {DocSpace} The instance of the DocSpace class.
      */
     initRoomSelector = (config = {}) => {
+      const existInstance = this.instances.find(
+        (i) => i.config.frameId === config.frameId
+      );
+
+      if (existInstance) {
+        existInstance.initRoomSelector(config);
+        return existInstance;
+      }
+
       const instance = new DocSpace(config);
 
       instance.initRoomSelector(config);
+
+      this.instances.push(instance);
 
       return instance;
     };
@@ -1178,9 +1240,20 @@
      * @returns {DocSpace} The initialized DocSpace instance.
      */
     initFileSelector = (config = {}) => {
+      const existInstance = this.instances.find(
+        (i) => i.config.frameId === config.frameId
+      );
+
+      if (existInstance) {
+        existInstance.initFileSelector(config);
+        return existInstance;
+      }
+
       const instance = new DocSpace(config);
 
       instance.initFileSelector(config);
+
+      this.instances.push(instance);
 
       return instance;
     };
@@ -1191,9 +1264,20 @@
      * @returns {DocSpace} The initialized DocSpace instance.
      */
     initManager = (config = {}) => {
+      const existInstance = this.instances.find(
+        (i) => i.config.frameId === config.frameId
+      );
+
+      if (existInstance) {
+        existInstance.initManager(config);
+        return existInstance;
+      }
+
       const instance = new DocSpace(config);
 
       instance.initManager(config);
+
+      this.instances.push(instance);
 
       return instance;
     };
@@ -1205,9 +1289,20 @@
      * @returns {DocSpace} - The initialized DocSpace instance.
      */
     initSystem = (config = {}) => {
+      const existInstance = this.instances.find(
+        (i) => i.config.frameId === config.frameId
+      );
+
+      if (existInstance) {
+        existInstance.initSystem(config);
+        return existInstance;
+      }
+
       const instance = new DocSpace(config);
 
       instance.initSystem(config);
+
+      this.instances.push(instance);
 
       return instance;
     };

@@ -738,14 +738,14 @@ const Manager = (props) => {
       <CategorySubHeader className="copy-window-code">
         {`HTML ${t("CodeTitle")}`}
       </CategorySubHeader>
-      <Text lineHeight="20px" color={"#A3A9AE"}>
+      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
         {t("HtmlCodeDescription")}
       </Text>
       <Textarea value={codeBlock} heightTextArea={153} />
       <CategorySubHeader className="copy-window-code">
         {`JavaScript ${t("CodeTitle")}`}
       </CategorySubHeader>
-      <Text lineHeight="20px" color={"#A3A9AE"}>
+      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
         {t("JavaScriptCodeDescription")}
       </Text>
       <CodeBlock config={config} />

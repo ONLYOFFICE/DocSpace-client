@@ -240,11 +240,21 @@ const Viewer = (props) => {
   );
 
   const code = (
-    <CodeWrapper>
+    <CodeWrapper height="fit-content">
       <CategorySubHeader className="copy-window-code">
-        {t("CopyWindowCode")}
+        {`HTML ${t("CodeTitle")}`}
       </CategorySubHeader>
+      <Text lineHeight="20px" color={"#A3A9AE"}>
+        {t("HtmlCodeDescription")}
+      </Text>
       <Textarea value={codeBlock} heightTextArea={153} />
+      <CategorySubHeader className="copy-window-code">
+        {`JavaScript ${t("CodeTitle")}`}
+      </CategorySubHeader>
+      <Text lineHeight="20px" color={"#A3A9AE"}>
+        {t("JavaScriptCodeDescription")}
+      </Text>
+      <CodeBlock config={config} />
     </CodeWrapper>
   );
 
@@ -253,11 +263,6 @@ const Viewer = (props) => {
       key: "preview",
       title: t("Common:Preview"),
       content: preview,
-    },
-    {
-      key: "js",
-      title: "JavaScript",
-      content: <CodeBlock config={config} />,
     },
     {
       key: "code",

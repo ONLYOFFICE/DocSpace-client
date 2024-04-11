@@ -70,6 +70,7 @@ const Modal = ({
   isCloseable,
   embedded,
   withForm,
+  blur,
 }: ModalSubComponentsProps) => {
   const contentRef = React.useRef<null | HTMLDivElement>(null);
 
@@ -106,6 +107,7 @@ const Modal = ({
       id={id}
       className={visible ? "modal-active" : ""}
       modalSwipeOffset={modalSwipeOffset}
+      blur={blur}
     >
       <ModalBackdrop
         className={visible ? "modal-backdrop-active backdrop-active" : ""}

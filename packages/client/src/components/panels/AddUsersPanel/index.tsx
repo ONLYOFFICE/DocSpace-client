@@ -283,6 +283,7 @@ const AddUsersPanel = ({
         newItem.isAdmin = user.isAdmin;
         newItem.isVisitor = user.isVisitor;
         newItem.isCollaborator = user.isCollaborator;
+        newItem.isRoomAdmin = user.isRoomAdmin;
         newItem.email = user.email;
       }
 

@@ -39,6 +39,7 @@ import {
 import { getRooms } from "@docspace/shared/api/rooms";
 import { getUserList } from "@docspace/shared/api/people";
 import { SortByFieldName } from "SRC_DIR/helpers/constants";
+import { RoomsProviderType } from "@docspace/shared/enums";
 
 const FILTER_COUNT = 6;
 
@@ -85,6 +86,8 @@ class StorageManagement {
     this.roomFilterData.pageCount = FILTER_COUNT;
     this.roomFilterData.sortBy = SortByFieldName.UsedSpace;
     this.roomFilterData.sortOrder = "descending";
+    this.roomFilterData.provider = RoomsProviderType.Storage;
+
     const requests = [
       getPortal(),
       getPortalUsersCount(),

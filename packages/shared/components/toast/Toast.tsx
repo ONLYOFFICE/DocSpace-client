@@ -92,6 +92,7 @@ const Toast = (props: ToastProps) => {
 
   const element = (
     <StyledToastContainer
+      containerId="toast-container"
       className={className}
       draggable
       position="top-right"

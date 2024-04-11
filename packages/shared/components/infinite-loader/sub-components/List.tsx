@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { InfiniteLoader, WindowScroller } from "react-virtualized";
 
 import { TableSkeleton } from "../../../skeletons/table";
@@ -49,6 +49,10 @@ const ListComponent = ({
   infoPanelVisible,
 }: ListComponentProps) => {
   const loaderRef = useRef<InfiniteLoader | null>(null);
+
+  useEffect(() => {
+    loaderRef?.current?.forceUpdate();
+  });
 
   const getLoader = (style: React.CSSProperties, key: string) => {
     switch (viewAs) {

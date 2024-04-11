@@ -142,7 +142,7 @@ class ProfileActionsStore {
 
     const profileUrl = `${prefix}${PROFILE_SELF_URL}`;
 
-    if (openingNewTab(profileUrl, obj.originalEvent)) return;
+    if (openingNewTab(profileUrl, obj?.originalEvent)) return;
 
     this.profileClicked = true;
 
@@ -256,7 +256,6 @@ class ProfileActionsStore {
     //   settingsModule && combineUrl(PROXY_HOMEPAGE_URL, settingsModule.link);
 
     const {
-      //isPersonal,
       //currentProductId,
       debugInfo,
     } = this.settingsStore;
@@ -328,7 +327,12 @@ class ProfileActionsStore {
 
     let liveChat = null;
 
-    if (!isMobile && this.authStore.isLiveChatAvailable) {
+    if (
+      !isMobile &&
+      this.authStore.isLiveChatAvailable &&
+      !window.navigator.userAgent.includes("ZoomWebKit") &&
+      !window.navigator.userAgent.includes("ZoomApps")
+    ) {
       liveChat = {
         key: "user-menu-live-chat",
         icon: LiveChatReactSvgUrl,
@@ -356,6 +360,9 @@ class ProfileActionsStore {
       this.settingsStore.additionalResourcesData?.videoGuidesEnabled;
     const helpCenterEnabled =
       this.settingsStore.additionalResourcesData?.helpCenterEnabled;
+    const showFrameSignOut =
+      !this.settingsStore.isFrame ||
+      this.settingsStore.frameConfig?.showSignOut;
 
     const actions = [
       {
@@ -413,7 +420,8 @@ class ProfileActionsStore {
 
     if (
       !window.navigator.userAgent.includes("ZoomWebKit") &&
-      !window.navigator.userAgent.includes("ZoomApps")
+      !window.navigator.userAgent.includes("ZoomApps") &&
+      showFrameSignOut
     ) {
       actions.push({
         key: "user-menu-logout",

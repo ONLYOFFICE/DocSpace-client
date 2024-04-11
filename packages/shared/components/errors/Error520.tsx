@@ -46,7 +46,6 @@ const Error520 = ({
   firebaseHelper,
   currentDeviceType,
   currentColorScheme,
-  whiteLabelLogoUrls,
 }: Error520Props) => {
   const { t } = useTranslation(["Common"]);
 
@@ -80,15 +79,21 @@ const Error520 = ({
   zendeskAPI.addChanges("webWidget", "show");
 
   if (!firebaseHelper.isEnabledDB)
-    return <ErrorContainer headerText={t("SomethingWentWrong")} />;
+    return (
+      <ErrorContainer
+        headerText={t("SomethingWentWrong")}
+        customizedBodyText={errorLog?.message}
+      />
+    );
 
   return (
     <Error520Wrapper>
-      <DocspaceLogo className="logo" whiteLabelLogoUrls={whiteLabelLogoUrls} />
+      <DocspaceLogo className="logo" />
       <ErrorContainer
         className="container"
         isPrimaryButton={false}
         headerText={t("SomethingWentWrong")}
+        customizedBodyText={errorLog?.message}
       />
       <Link
         isHovered

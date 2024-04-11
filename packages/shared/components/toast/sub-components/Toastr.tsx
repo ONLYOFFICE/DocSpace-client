@@ -134,6 +134,7 @@ const notify = (
       closeButton: withCross && <CloseButton />,
       autoClose: timeout === 0 ? false : timeout < 750 ? 5000 : timeout || 5000,
       position: centerPosition ? "top-center" : undefined,
+      containerId: "toast-container",
     },
   );
 };

@@ -36,7 +36,8 @@ import { LoginFormWrapper } from "./StyledLogin";
 import BarLogo from "PUBLIC_DIR/images/danger.alert.react.svg";
 import { Dark, Base } from "@docspace/shared/themes";
 import { getBgPattern, frameCallCommand } from "@docspace/shared/utils/common";
-import { getLogoFromPath } from "@docspace/shared/utils";
+import { getLogoUrl } from "@docspace/shared/utils";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { useMounted } from "../helpers/useMounted";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import LoginContainer from "@docspace/shared/components/color-theme/sub-components/LoginContainer";
@@ -66,7 +67,7 @@ const Bar: React.FC<IBarProp> = (props) => {
   );
 };
 
-const Form: React.FC<ILoginProps> = ({ theme, setTheme, logoUrls }) => {
+const Form: React.FC<ILoginProps> = ({ theme, setTheme }) => {
   const { t } = useTranslation("Login");
   const [invalidCode, setInvalidCode] = useState(false);
   const [expiredCode, setExpiredCode] = useState(false);
@@ -105,12 +106,7 @@ const Form: React.FC<ILoginProps> = ({ theme, setTheme, logoUrls }) => {
     setInvalidCode(false);
   };
 
-  const logo = logoUrls && Object.values(logoUrls)[1];
-  const logoUrl = !logo
-    ? undefined
-    : !theme?.isBase
-      ? getLogoFromPath(logo.path.dark)
-      : getLogoFromPath(logo.path.light);
+  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme?.isBase);
 
   return (
     <LoginContainer id="code-page" theme={theme}>

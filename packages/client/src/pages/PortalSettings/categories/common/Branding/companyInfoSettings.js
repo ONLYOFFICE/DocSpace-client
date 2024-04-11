@@ -90,7 +90,6 @@ const CompanyInfoSettings = (props) => {
     setIsLoadedCompanyInfoSettingsData,
     isLoadedCompanyInfoSettingsData,
     buildVersionInfo,
-    personal,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -362,7 +361,6 @@ const CompanyInfoSettings = (props) => {
         visible={showModal}
         onClose={onCloseModal}
         buildVersionInfo={buildVersionInfo}
-        personal={personal}
         previewData={companySettings}
       />
 
@@ -506,7 +504,6 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
 
     companyInfoSettingsData,
     buildVersionInfo,
-    personal,
   } = settingsStore;
 
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
@@ -520,7 +517,6 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     setIsLoadedCompanyInfoSettingsData,
     isLoadedCompanyInfoSettingsData,
     buildVersionInfo,
-    personal,
     isSettingPaid: isBrandingAndCustomizationAvailable,
   };
 })(

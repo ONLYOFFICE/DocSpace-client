@@ -29,16 +29,14 @@ import React from "react";
 import ShareButton from "./ShareButton";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import LoadingButton from "./LoadingButton";
-const ActionsUploadedFile = ({ item, isPersonal, onCancelCurrentUpload }) => {
+const ActionsUploadedFile = ({ item, onCancelCurrentUpload }) => {
   const onCancelClick = !item.inConversion
     ? { onClick: onCancelCurrentUpload }
     : {};
 
   return (
     <>
-      {item.action === "upload" && !isPersonal && (
-        <ShareButton uniqueId={item.uniqueId} />
-      )}
+      {item.action === "upload" && <ShareButton uniqueId={item.uniqueId} />}
       {item.action === "convert" && (
         <div
           className="upload_panel-icon"

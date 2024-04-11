@@ -137,6 +137,13 @@ const DeleteDialogComponent = (props) => {
   };
 
   const onClose = () => {
+    if (
+      selection.length === 1 &&
+      selection[0].isArchive &&
+      selection[0].isRootFolder === false
+    ) {
+      setSelected("none");
+    }
     setBufferSelection(null);
     setRemoveMediaItem(null);
     setIsRoomDelete(false);
@@ -151,6 +158,7 @@ const DeleteDialogComponent = (props) => {
   const moveToTrashNoteText = () => {
     const isFolder = selection[0]?.isFolder || !!selection[0]?.parentId;
     const isSingle = selection.length === 1;
+    const isThirdParty = selection[0]?.providerKey;
 
     if (isRoomDelete) {
       return isSingle
@@ -208,17 +216,22 @@ const DeleteDialogComponent = (props) => {
           <>
             <>{t("DeleteFolder")} </>
             <>{t("DeleteSharedNote")} </>
-            <>{t("FolderPermanentlyDeleted")} </>
+            {!isThirdParty && <>{t("FolderPermanentlyDeleted")} </>}
             <>{t("Common:WantToContinue")}</>
           </>
         ) : (
-          t("MoveToTrashFile")
+          <>
+            <>{t("DeleteFile")} </>
+            <>{t("DeleteSharedNote")} </>
+            {!isThirdParty && <>{t("FilePermanentlyDeleted")} </>}
+            <>{t("Common:WantToContinue")}</>
+          </>
         )
       ) : (
         <>
           <>{t("DeleteItems")} </>
           <>{t("DeleteItemsSharedNote")} </>
-          <>{t("ItemsPermanentlyDeleted")} </>
+          {!isThirdParty && <>{t("ItemsPermanentlyDeleted")} </>}
           <>{t("Common:WantToContinue")}</>
         </>
       );

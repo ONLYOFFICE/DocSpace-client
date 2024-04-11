@@ -26,15 +26,15 @@
 
 import React from "react";
 import styled from "styled-components";
-import { i18n } from "i18next";
 import { useTranslation } from "react-i18next";
 
-import Share from "@docspace/shared/components/share/Share.wrapper";
-import { Backdrop } from "@docspace/shared/components/backdrop";
-import { Aside } from "@docspace/shared/components/aside";
-import { Text } from "@docspace/shared/components/text";
+import Share from "@docspace/shared/components/share";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
 import { NoUserSelect } from "@docspace/shared/utils/commonStyles";
-import { Base, TTheme } from "@docspace/shared/themes";
+import { Base } from "@docspace/shared/themes";
 import { TFile } from "@docspace/shared/api/files/types";
 
 const StyledWrapper = styled.div`
@@ -43,21 +43,6 @@ const StyledWrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-
-  .share-file_header {
-    padding: 12px 16px;
-    border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
-
-    .share-file_heading {
-      font-size: 21px;
-      font-weight: 700;
-      line-height: 28px;
-    }
-  }
-
-  .share-file_body {
-    padding: 16px;
-  }
 `;
 
 StyledWrapper.defaultProps = { theme: Base };
@@ -66,42 +51,32 @@ type SharingDialogProps = {
   fileInfo: TFile;
   onCancel: () => void;
   isVisible: boolean;
-  theme: TTheme;
-  i18n: i18n;
 };
 
 const SharingDialog = ({
   fileInfo,
   onCancel,
   isVisible,
-  theme,
-  i18n,
 }: SharingDialogProps) => {
   const { t } = useTranslation(["Common"]);
 
   return (
-    <>
-      <Backdrop
-        onClick={onCancel}
-        visible={isVisible}
-        zIndex={310}
-        isAside={true}
-        withoutBackground={false}
-        withoutBlur={false}
-      />
-      <Aside visible={isVisible} onClose={onCancel} withoutBodyScroll>
-        <StyledWrapper theme={theme}>
-          <div className="share-file_header">
-            <Text className="share-file_heading">{t("Common:Share")}</Text>
-          </div>
+    <ModalDialog
+      visible={isVisible}
+      onClose={onCancel}
+      displayType={ModalDialogType.aside}
+      withBodyScroll
+    >
+      <ModalDialog.Header>{t("Common:Share")}</ModalDialog.Header>
+      <ModalDialog.Body>
+        <StyledWrapper>
           <div className="share-file_body">
-            <Share infoPanelSelection={fileInfo} i18nProp={i18n} />
+            <Share infoPanelSelection={fileInfo} />
           </div>
         </StyledWrapper>
-      </Aside>
-    </>
+      </ModalDialog.Body>
+    </ModalDialog>
   );
 };
 
 export default SharingDialog;
-

@@ -63,6 +63,7 @@ import {
   StyledDescription,
   StyledInviteLanguage,
   ResetLink,
+  StyledCrossIcon,
 } from "../StyledInvitePanel";
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
@@ -90,6 +91,7 @@ const InviteInput = ({
   cultureNames,
   i18n,
   setCultureKey,
+  standalone,
 }) => {
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
@@ -184,6 +186,10 @@ const InviteInput = ({
 
   const onChange = (e) => {
     const value = e.target.value;
+    onChangeInput(value);
+  };
+
+  const onChangeInput = (value) => {
     const clearValue = value.trim();
 
     setInputValue(value);
@@ -290,6 +296,8 @@ const InviteInput = ({
   };
 
   const addEmail = () => {
+    if (!inputValue.trim()) return;
+
     const items = toUserItems(inputValue);
 
     const newItems =
@@ -360,7 +368,14 @@ const InviteInput = ({
     </DropDownItem>
   );
 
-  const accessOptions = getAccessOptions(t, roomType);
+  const accessOptions = getAccessOptions(
+    t,
+    roomType,
+    false,
+    true,
+    isOwner,
+    standalone,
+  );
 
   const onSelectAccess = (item) => {
     setSelectedAccess(item.access);
@@ -484,7 +499,7 @@ const InviteInput = ({
       )}
 
       <StyledInviteInputContainer ref={inputsRef}>
-        <StyledInviteInput ref={searchRef}>
+        <StyledInviteInput ref={searchRef} isShowCross={!!inputValue}>
           <TextInput
             className="invite-input"
             scale
@@ -498,7 +513,12 @@ const InviteInput = ({
             isAutoFocussed={true}
             onKeyDown={onKeyDown}
             type="search"
+            withBorder={false}
           />
+
+          <div className="append" onClick={() => onChangeInput("")}>
+            <StyledCrossIcon />
+          </div>
         </StyledInviteInput>
         {isAddEmailPanelBlocked ? (
           <></>
@@ -564,8 +584,10 @@ export default inject(({ settingsStore, dialogsStore, userStore }) => {
     culture,
   } = dialogsStore;
 
+  const { culture: language, standalone } = settingsStore;
+
   return {
-    language: settingsStore.culture,
+    language,
     setInviteLanguage,
     setInviteItems,
     inviteItems,
@@ -574,6 +596,7 @@ export default inject(({ settingsStore, dialogsStore, userStore }) => {
     hideSelector: invitePanelOptions.hideSelector,
     defaultAccess: invitePanelOptions.defaultAccess,
     isOwner,
+    standalone,
   };
 })(
   withCultureNames(

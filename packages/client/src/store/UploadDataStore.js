@@ -763,7 +763,7 @@ class UploadDataStore {
         fileId: null,
         toFolderId,
         action: "upload",
-        error: file.size ? null : t("EmptyFile"),
+        error: file.size ? null : t("Files:EmptyFile"),
         fileInfo: null,
         cancel: false,
         needConvert,
@@ -938,7 +938,12 @@ class UploadDataStore {
     } = chunkUploadObj;
 
     if (!res.data.data && res.data.message) {
-      return reject(res.data.message);
+      return reject({
+        message: res.data.message,
+        chunkIndex: index,
+        chunkSize: fileSize,
+        isFinalize,
+      });
     }
 
     const { uploaded, id: fileId, file: fileInfo } = res.data.data;
@@ -1451,8 +1456,16 @@ class UploadDataStore {
 
         this.files[indexOfFile].error = errorMessage;
 
+        const index = error?.chunkIndex ?? 0;
+
+        const uploadedSize = error?.isFinalize
+          ? 0
+          : fileSize <= chunkUploadSize
+            ? fileSize
+            : fileSize - index * chunkUploadSize;
+
         const newPercent = this.isParallel
-          ? this.getFilesPercent(fileSize)
+          ? this.getFilesPercent(uploadedSize)
           : this.getNewPercent(fileSize, indexOfFile);
 
         this.primaryProgressDataStore.setPrimaryProgressBarData({
@@ -1770,13 +1783,13 @@ class UploadDataStore {
     const { clearSecondaryProgressData, setSecondaryProgressBarData } =
       this.secondaryProgressDataStore;
 
-    const label = this.secondaryProgressDataStore.label;
-    let progress = data.progress;
-
     if (!data) {
       setTimeout(() => clearSecondaryProgressData(pbData.operationId), TIMEOUT);
       return;
     }
+
+    const label = this.secondaryProgressDataStore.label;
+    let progress = data.progress;
 
     let operationItem = data;
     let finished = data.finished;

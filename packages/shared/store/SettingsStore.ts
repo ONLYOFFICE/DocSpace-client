@@ -183,8 +183,6 @@ class SettingsStore {
 
   encryptionKeys: { [key: string]: string | boolean } = {};
 
-  personal = false;
-
   docSpace = true;
 
   roomsMode = false;
@@ -536,7 +534,7 @@ class SettingsStore {
       newSettings = window.__ASC_INITIAL_EDITOR_STATE__.portalSettings;
     else newSettings = await api.settings.getSettings(true);
 
-    if (window.AscDesktopEditor !== undefined || this.personal) {
+    if (window.AscDesktopEditor !== undefined) {
       const dp = combineUrl(window.DocSpaceConfig?.proxy?.url, MEDIA_VIEW_URL);
       this.setDefaultPage(dp);
     }
@@ -632,11 +630,7 @@ class SettingsStore {
     this.setIsLoading(true);
     const requests = [];
 
-    requests.push(
-      this.getPortalSettings(),
-      this.getAppearanceTheme(),
-      this.getWhiteLabelLogoUrls(),
-    );
+    requests.push(this.getPortalSettings(), this.getAppearanceTheme());
 
     await Promise.all(requests);
 
@@ -732,6 +726,8 @@ class SettingsStore {
 
     this.setLogoUrls(Object.values(res));
     this.setLogoUrl(Object.values(res));
+
+    return res;
   };
 
   getDomainName = async () => {
@@ -1016,9 +1012,9 @@ class SettingsStore {
 
   get isFrame() {
     const isFrame = this.frameConfig?.name === window.name;
-    window.DocSpaceConfig.isFrame = isFrame;
 
-    console.log("Table log isFrame", isFrame);
+    if (window.DocSpaceConfig) window.DocSpaceConfig.isFrame = isFrame;
+
     return isFrame;
   }
 

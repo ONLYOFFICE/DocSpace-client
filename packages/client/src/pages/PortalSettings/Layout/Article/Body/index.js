@@ -46,7 +46,7 @@ import {
 } from "../../../utils";
 
 import { ArticleItem } from "@docspace/shared/components/article-item";
-import LoaderArticleBody from "./loaderArticleBody";
+import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -153,12 +153,11 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["8-0"]);
       }
 
-      if (location.pathname.includes("payments")) {
+      if (
+        location.pathname.includes("payments") ||
+        location.pathname.includes("bonus")
+      ) {
         setSelectedKeys(["9-0"]);
-      }
-
-      if (location.pathname.includes("bonus")) {
-        setSelectedKeys(["10-0"]);
       }
     }
   }, [
@@ -315,7 +314,7 @@ const ArticleBodyContent = (props) => {
   const items = catalogItems();
 
   return !isLoadedArticleBody || isProfileLoading ? (
-    <LoaderArticleBody />
+    <ArticleFolderLoader />
   ) : (
     <>{items}</>
   );

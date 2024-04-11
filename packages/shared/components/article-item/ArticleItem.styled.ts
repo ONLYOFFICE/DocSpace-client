@@ -259,7 +259,7 @@ const StyledArticleItemImg = styled.div<{ isActive?: boolean }>`
 
   height: ${(props) => props.theme.catalogItem.img.svg.height};
 
-  .icon {
+  .icon > div {
     display: flex;
     align-items: center;
     justify-content: center;

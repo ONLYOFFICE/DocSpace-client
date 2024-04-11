@@ -156,7 +156,7 @@ class InfoPanelStore {
 
   setView = (view) => {
     this.roomsView = view;
-    this.fileView = view === infoMembers ? infoHistory : view;
+    this.fileView = view === infoMembers ? infoDetails : view;
     this.isScrollLocked = false;
     if (view !== infoMembers) this.setInfoPanelMembers(null);
 
@@ -385,7 +385,7 @@ class InfoPanelStore {
     const path = [
       window.DocSpaceConfig?.proxy?.url,
       config.homepage,
-      "/accounts",
+      "/accounts/people",
     ];
 
     const newFilter = Filter.getDefault();
@@ -396,6 +396,8 @@ class InfoPanelStore {
 
     this.selectedFolderStore.setSelectedFolder(null);
     this.treeFoldersStore.setSelectedNode(["accounts"]);
+    this.filesStore.resetSelections();
+
     navigate(combineUrl(...path), { state: { user } });
   };
 

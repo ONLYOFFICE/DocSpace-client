@@ -72,6 +72,7 @@ import {
   getEditorTheme,
   getLogoFromPath,
   isBetaLanguage,
+  getLogoUrl,
 } from "./common";
 
 export {
@@ -121,6 +122,7 @@ export {
   handleAnyClick,
   DomHelpers,
   ObjectUtils,
+  getLogoUrl,
 };
 
 export const getModalType = () => {

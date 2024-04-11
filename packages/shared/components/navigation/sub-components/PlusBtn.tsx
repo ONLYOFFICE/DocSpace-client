@@ -39,6 +39,7 @@ const PlusButton = ({
   onPlusClick,
   isFrame,
   id,
+  onCloseDropBox,
   ...rest
 }: IPlusButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -62,6 +63,7 @@ const PlusButton = ({
 
   const onHide = () => {
     setIsOpen(false);
+    onCloseDropBox?.();
   };
 
   const model = getData();

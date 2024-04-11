@@ -25,4 +25,3 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export { Hint } from "./Hint";
-export { NoBoxShadowToast } from "./NoBoxShadowToast";

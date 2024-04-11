@@ -130,7 +130,7 @@ type RoomIconColor = {
 };
 
 type RoomIconImage = {
-  color?: undefined;
+  color?: string | undefined;
   imgSrc: string;
   imgClassName?: string;
 };

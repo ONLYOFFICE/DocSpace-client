@@ -31,15 +31,14 @@ import DocspaceLogo from "../docspace-logo/DocspaceLogo";
 import ErrorContainer from "../error-container/ErrorContainer";
 
 import { ErrorUnavailableWrapper } from "./Errors.styled";
-import type { ErrorUnavailableProps } from "./Errors.types";
 
-const ErrorUnavailable = ({ whiteLabelLogoUrls }: ErrorUnavailableProps) => {
+const ErrorUnavailable = () => {
   const { t, ready } = useTranslation("Common");
 
   return (
     ready && (
       <ErrorUnavailableWrapper>
-        <DocspaceLogo whiteLabelLogoUrls={whiteLabelLogoUrls} />
+        <DocspaceLogo />
         <ErrorContainer headerText={t("ErrorDeactivatedText")} />
       </ErrorUnavailableWrapper>
     )

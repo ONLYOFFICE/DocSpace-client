@@ -185,8 +185,6 @@ export const messageActions = (
         break;
 
       case PluginActions.saveSettings:
-        if (!message.settings) return;
-
         updatePlugin(pluginName, null, message.settings);
     }
   });

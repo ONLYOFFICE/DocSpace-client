@@ -84,6 +84,7 @@ const VersionRow = (props) => {
     enablePlugins,
     currentDeviceType,
     openUrl,
+    setIsVerHistoryPanel,
   } = props;
 
   const navigate = useNavigate();
@@ -158,11 +159,13 @@ const VersionRow = (props) => {
         const correctDevice = currPluginItem.devices
           ? currPluginItem.devices.includes(currentDeviceType)
           : true;
-        if (correctDevice)
+        if (correctDevice) {
+          setIsVerHistoryPanel(false);
           return currPluginItem.onClick({
             ...info,
             viewUrl: `${info.viewUrl}&version=${info.version}`,
           });
+        }
       }
     }
 
@@ -373,6 +376,7 @@ export default inject(
       isEditing,
       isEditingVersion,
       fileSecurity,
+      setIsVerHistoryPanel,
     } = versionHistoryStore;
 
     const isEdit = isEditingVersion || isEditing;
@@ -393,6 +397,7 @@ export default inject(
       openUser,
       setIsVisible,
       openUrl,
+      setIsVerHistoryPanel,
     };
   },
 )(

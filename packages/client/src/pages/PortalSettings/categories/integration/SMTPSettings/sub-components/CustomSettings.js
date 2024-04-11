@@ -114,7 +114,7 @@ const CustomSettings = (props) => {
 
       <div className="smtp-settings_title smtp-settings_login">
         <Text {...commonTextProps}>{t("HostLogin")}</Text>
-        <Text as="span" color="#F21C0E">
+        <Text as="span" {...requirementColor}>
           *
         </Text>
       </div>
@@ -130,7 +130,7 @@ const CustomSettings = (props) => {
 
       <div className="smtp-settings_title">
         <Text {...commonTextProps}>{t("HostPassword")}</Text>
-        <Text as="span" color="#F21C0E">
+        <Text as="span" {...requirementColor}>
           *
         </Text>
       </div>

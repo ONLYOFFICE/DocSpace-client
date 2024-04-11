@@ -46,8 +46,6 @@ const TableBody = (props: TableBodyProps) => {
     infoPanelVisible = false,
   } = props;
 
-  console.log("Table log TableBody columnStorageName", columnStorageName);
-
   return useReactWindow ? (
     <StyledTableBody
       useReactWindow={useReactWindow}

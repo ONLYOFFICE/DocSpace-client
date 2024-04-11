@@ -387,7 +387,7 @@ export function getProviderLabel(provider: string, t: (key: string) => string) {
     case "microsoft":
       return t("Common:ProviderMicrosoft");
     case "sso":
-      return t("Common:ProviderSso");
+      return t("Common:SSO");
     case "zoom":
       return t("Common:ProviderZoom");
     case "sso-full":

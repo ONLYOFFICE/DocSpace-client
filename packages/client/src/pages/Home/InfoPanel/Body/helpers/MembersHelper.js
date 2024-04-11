@@ -63,7 +63,7 @@ class MembersHelper {
       },
       editor: {
         key: "editor",
-        label: this.t("Translations:RoleEditor"),
+        label: this.t("Common:Editor"),
         access: ShareAccessRights.Editing,
         type: "user",
       },

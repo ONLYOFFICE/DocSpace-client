@@ -473,7 +473,7 @@ export const settingsTree = [
             key: "7-1-4",
             icon: "",
             link: "editor",
-            tKey: "JavascriptSdk:Editor",
+            tKey: "Common:Editor",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_viewer",

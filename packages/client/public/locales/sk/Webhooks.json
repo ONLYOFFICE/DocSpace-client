@@ -45,6 +45,7 @@
   "UnselectAll": "Zrušiť výber všetko",
   "URL": "URL",
   "ViewRawPayload": "Zobraziť nespracovaný dátový obsah",
+  "WebhookCreated": "Webhook vytvorený",
   "WebhookCreationHint": "Tento webhook bude priradený všetkým udalostiam v aplikácii DocSpace",
   "WebhookDetails": "Podrobnosti o webhooku",
   "WebhookEditedSuccessfully": "Konfigurácia webhooku úspešne upravená",

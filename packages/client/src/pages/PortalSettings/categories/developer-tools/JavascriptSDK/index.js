@@ -155,7 +155,7 @@ const PortalIntegration = (props) => {
       handleOnClick: navigateToPublicRoom,
     },
     {
-      title: t("Editor"),
+      title: t("Common:Editor"),
       description: t("EditorDescription"),
       image: theme.isBase ? EditorImg : EditorImgDark,
       handleOnClick: navigateToEditor,

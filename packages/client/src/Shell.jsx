@@ -85,11 +85,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     setFormCreationInfo,
     setConvertPasswordDialogVisible,
     version,
-    isPortalDeactivate,
-    isPortalRestoring,
-    isNotPaidPeriod,
-    user,
-    clientError,
+    pagesWithoutNavMenu,
   } = rest;
 
   const theme = useTheme();
@@ -425,10 +421,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
   const withoutNavMenu =
     isEditor ||
-    clientError ||
-    isPortalDeactivate ||
-    isPortalRestoring ||
-    (isNotPaidPeriod && !user?.isOwner && !user?.isAdmin) ||
+    pagesWithoutNavMenu ||
     location.pathname === "/access-restricted";
 
   return (
@@ -510,6 +503,12 @@ const ShellWrapper = inject(
     } = dialogsStore;
     const { user } = userStore;
 
+    const pagesWithoutNavMenu =
+      clientError ||
+      isPortalDeactivate ||
+      isPortalRestoring ||
+      (isNotPaidPeriod && !user?.isOwner && !user?.isAdmin);
+
     return {
       loadBaseInfo: async () => {
         await init(false, i18n);
@@ -543,11 +542,7 @@ const ShellWrapper = inject(
       setFormCreationInfo,
       setConvertPasswordDialogVisible,
       version,
-      isPortalDeactivate,
-      isPortalRestoring,
-      isNotPaidPeriod,
-      user,
-      clientError,
+      pagesWithoutNavMenu,
     };
   },
 )(observer(Shell));

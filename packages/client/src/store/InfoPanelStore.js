@@ -385,7 +385,7 @@ class InfoPanelStore {
     const path = [
       window.DocSpaceConfig?.proxy?.url,
       config.homepage,
-      "/accounts",
+      "/accounts/people",
     ];
 
     const newFilter = Filter.getDefault();
@@ -396,6 +396,8 @@ class InfoPanelStore {
 
     this.selectedFolderStore.setSelectedFolder(null);
     this.treeFoldersStore.setSelectedNode(["accounts"]);
+    this.filesStore.resetSelections();
+
     navigate(combineUrl(...path), { state: { user } });
   };
 

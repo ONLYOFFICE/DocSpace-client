@@ -114,6 +114,10 @@ const DatePicker = (props: DatePickerProps) => {
   }, []);
 
   useEffect(() => {
+    if (!outerDate) {
+      setDate(null);
+    }
+
     if (
       outerDate &&
       moment(outerDate).format("YYYY-MM-D HH:mm") !==

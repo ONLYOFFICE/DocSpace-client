@@ -102,5 +102,8 @@
   "SubtitleDescription": "Subtitle with additional comments or descriptions for the current directory.",
   "TabPlugins": "Tab Plugins",
   "Viewer": "Viewer",
-  "ViewerDescription": "Embed a viewer to allow users to open a file for viewing from the corresponding room."
+  "ViewerDescription": "Embed a viewer to allow users to open a file for viewing from the corresponding room.",
+  "CodeTitle": "code",
+  "HtmlCodeDescription": "Embedding DocSpace or its part using the <script> tag. Copy the HTML code below and insert it into your HTML file.",
+  "JavaScriptCodeDescription": "Embedding DocSpace or its part using JavaScript. Copy the JavaScript code below."
 }

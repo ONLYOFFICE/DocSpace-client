@@ -310,8 +310,8 @@
       const logoSrc = `${config.src}/static/images/light_small_logo.react.svg`;
 
       button.innerHTML = `${config?.buttonWithLogo ? `<img width="16px" heigth="16px" src="${logoSrc}" />` : ""}${config?.buttonText || "Select to DocSpace"}`;
-      const url = new URL(window.location.href);
-      const scriptUrl = `${url.protocol}//${url.hostname}/static/scripts/api.js`;
+      const url = new URL(document.currentScript.src);
+      const scriptUrl = `${url.origin}${url.pathname}`;
 
       const configStringify = JSON.stringify(config, function (key, val) {
         return typeof val === "function" ? "" + val : val;

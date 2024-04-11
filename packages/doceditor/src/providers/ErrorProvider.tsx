@@ -38,7 +38,6 @@ import FirebaseHelper from "@docspace/shared/utils/firebase";
 
 import pkgFile from "../../package.json";
 import useDeviceType from "@/hooks/useDeviceType";
-import useWhiteLabel from "@/hooks/useWhiteLabel";
 
 type TErrorProvider = {
   user: TUser | undefined;
@@ -64,4 +63,3 @@ const ErrorProvider = ({ children, user, settings }: TErrorProvider) => {
 };
 
 export default ErrorProvider;
-

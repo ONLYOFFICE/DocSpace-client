@@ -52,6 +52,8 @@
   "Branding": "Branding",
   "BrandingSectionDescription": "Specify your company information, add links to external resources and email addresses displayed within the DocSpace interface.",
   "BrandingSubtitle": "Use this option to provide on-brand experience to users.",
+  "BreakpointMobileWarningText": "This section is unavailable in mobile version",
+  "BreakpointMobileWarningTextPrompt": "Please use the desktop or tablet to access the <1>{{sectionName}}</1>.",
   "BreakpointSmallText": "Your window is too small to display all page contents",
   "BreakpointSmallTextPrompt": "Please resize the window or enable full-screen mode",
   "BreakpointWarningText": "This section is only available in the desktop version",

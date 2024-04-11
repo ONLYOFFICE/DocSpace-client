@@ -51,7 +51,7 @@
   "WebhookHistory": "تأريخ ويب هوك",
   "WebhookName": "اسم ويب هوك",
   "WebhookRedilivered": "ويب هوك المعاد تسليمها",
-  "WebhookRemoved": "ويب هوك الذي تم ازالته",
+  "WebhookRemoved": "Webhook تمت إزالة",
   "Webhooks": "ويب هوك",
   "WebhooksGuide": "دليل ويب هوك",
   "WebhooksInfo": "استخدم ويب هوك لتنفيذ إجراءات مخصصة على جانب أي تطبيق أو موقع ويب تستخدمه بناءً على أحداث مختلفة في ONLYOFFICE DocSpace\nهنا، يمكنك إنشاء وإدارة جميع ويب هوك الخاصة بك وتكوينها وتصفح سجل كل ويب هوك لتعديل أدائها."

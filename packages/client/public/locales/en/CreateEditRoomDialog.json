@@ -15,7 +15,7 @@
   "MakeRoomPrivateDescription": "All files in this room will be encrypted.",
   "MakeRoomPrivateLimitationsWarningDescription": "With this feature, you can invite only existing DocSpace users. After creating a room, you will not be able to change the list of users.",
   "MakeRoomPrivateTitle": "Make the Room Private",
-  "PeopleSelectorInfo": "Only a room admin or a docspace admin can become the owner of the room",
+  "PeopleSelectorInfo": "Only a room admin or a DocSpace admin can become the owner of the room",
   "PublicRoomBarDescription": "This room is available to anyone with the link. External users will have View Only permission for all the files.",
   "PublicRoomDescription": "Invite users via external links to view documents without registration. You can also embed this room into any web interface.",
   "PublicRoomSystemFoldersDescription": "System folders store copies of forms at different stages of completion. Forms that are being filled are stored in the In progress folder, and completed forms are stored in the Complete folder.",

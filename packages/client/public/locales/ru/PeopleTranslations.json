@@ -21,7 +21,10 @@
   "SendInviteAgain": "Отправить приглашение ещё раз",
   "StandardLogin": "Стандартный вход",
   "SuccessChangeUserStatus": "Статус пользователя успешно изменен",
+  "SuccessDeleteGroup": "Группа успешно удалена",
+  "SuccessDeleteGroups": "Группы успешно удалены",
   "SuccessDeletePersonalData": "Персональные данные успешно удалены",
   "SuccessSentInvitation": "Приглашение было успешно отправлено",
-  "SuccessSentMultipleInvitatios": "Приглашения были успешно отправлены"
+  "SuccessSentMultipleInvitatios": "Приглашения были успешно отправлены",
+  "WithoutGroup": "Без группы"
 }

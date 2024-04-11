@@ -45,6 +45,7 @@
   "UnselectAll": "Tümünün seçimini kaldır",
   "URL": "URL",
   "ViewRawPayload": "Ham yükü görüntüle",
+  "WebhookCreated": "Webhook oluşturuldu",
   "WebhookCreationHint": "Bu webhook DocSpace'deki tüm etkinliklere atanacak",
   "WebhookDetails": "Webhook ayrıntıları",
   "WebhookEditedSuccessfully": "Webhook yapılandırması başarıyla düzenlendi",

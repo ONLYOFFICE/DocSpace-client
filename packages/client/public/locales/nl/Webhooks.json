@@ -45,6 +45,7 @@
   "UnselectAll": "Alles deselecteren",
   "URL": "URL",
   "ViewRawPayload": "Ruwe payload bekijken",
+  "WebhookCreated": "Webhook gemaakt",
   "WebhookCreationHint": "Deze webhook wordt toegewezen aan alle gebeurtenissen in DocSpace",
   "WebhookDetails": "Webhook details",
   "WebhookEditedSuccessfully": "Webhook configuratie succesvol bewerkt",

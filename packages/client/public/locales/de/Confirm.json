@@ -1,4 +1,5 @@
 {
+  "AccountWillBeCreated": "Für <1>{{email}}</1> wird ein DocSpace-Konto erstellt. Bitte vervollständigen Sie Ihre Registrierung:",
   "ChangePasswordSuccess": "Passwort wurde erfolgreich geändert",
   "ConfirmOwnerPortalSuccessMessage": "Der DocSpace-Besitzer wurde erfolgreich geändert. In 10 Sekunden werden umgeleitet werden.",
   "ConfirmOwnerPortalTitle": "Bitte bestätigen Sie, dass {{newOwner}} DocSpace-Besitzer werden soll.",
@@ -25,6 +26,7 @@
   "SetAppDescription": "Zwei-Faktor-Authentifizierung ist aktiv. Konfigurieren Sie Ihre Authentifizierungsanwendung für weitere Arbeit auf DocSpace. Sie können Google Authenticator für <1>Android</1> und <4>iOS</4> oder Authenticator für <8>Windows Phone</8> benutzen.",
   "SetAppInstallDescription": "Verbinden Sie die App, indem Sie den QR-Code einscannen oder den Geheimschlüssel <1>{{ secretKey }}</1> manuell eingeben. Geben Sie dann den sechsstelligen Code aus Ihrer App im unten stehenden Feld ein.",
   "SetAppTitle": "Konfigurieren Sie Ihre Authentifizierungsanwendung",
+  "SignUp": "Anmelden",
   "SuccessDeactivate": "Ihr Konto wurde erfolgreich deaktiviert. In 10 Sekunden werden Sie auf die <1>Seite</1> weitergeleitet.",
   "SuccessReactivate": "Ihr Konto wurde erfolgreich wieder aktiviert. In 10 Sekunden werden Sie zum <1>Portal</1> weitergeleitet.",
   "SuccessRemoved": "Ihr Konto wurde erfolgreich entfernt. In 10 Sekunden werden Sie auf die <1>Seite</1> weitergeleitet."

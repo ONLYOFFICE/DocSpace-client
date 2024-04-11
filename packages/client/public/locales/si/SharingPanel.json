@@ -1,5 +1,4 @@
 {
-  "EncryptedFileSharing": "<strong>{{title}}</strong> ගොනුව සාර්ථකව බෙදා ගැනිණි",
   "ExternalLink": "බාහිර සබැඳිය",
   "FormFilling": "ආකෘතිපත්‍ර පිරවීම",
   "ShareEmailBody": "ඔබට {{itemName}} ලේඛනයට ප්‍රවේශය ලබා දී ඇත. දැන් ලේඛනය ඇරීමට පහත සබැඳිය ඔබන්න: {{shareLink}}.",

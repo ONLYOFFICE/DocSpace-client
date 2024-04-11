@@ -36,6 +36,7 @@ import { observer, inject } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { createGroup } from "@docspace/shared/api/groups";
+import { StyledModal } from "./CreateEditGroupDialog.styled";
 import { GroupParams } from "./types";
 import GroupNameParam from "./sub-components/GroupNameParam";
 import HeadOfGroup from "./sub-components/HeadOfGroupParam";
@@ -106,7 +107,7 @@ const CreateGroupDialog = ({
 
   return (
     <>
-      <ModalDialog
+      <StyledModal
         displayType={ModalDialogType.aside}
         withBodyScroll
         visible={visible}
@@ -164,7 +165,7 @@ const CreateGroupDialog = ({
             onClick={onClose}
           />
         </ModalDialog.Footer>
-      </ModalDialog>
+      </StyledModal>
 
       {selectGroupMangerPanelIsVisible && (
         <SelectGroupManagerPanel

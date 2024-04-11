@@ -33,8 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 
 import { parseAddresses } from "@docspace/shared/utils";
 import { getAccessOptions } from "../utils";
-import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
-import { capitalize } from "lodash";
+import { getUserTypeLabel } from "@docspace/shared/utils/common";
 
 import {
   StyledEditInput,
@@ -111,7 +110,6 @@ const Item = ({
     return "user";
   };
 
-  const role = getUserRole(item);
   const type = getUserType(item);
 
   const typeLabel = item?.isEmailInvite
@@ -270,7 +268,7 @@ const Item = ({
     <>
       <Avatar
         size="min"
-        role={role}
+        role={type}
         source={source}
         isGroup={isGroup}
         userName={groupName}

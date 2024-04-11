@@ -691,7 +691,7 @@ public class LocalesTest
     public void WrongTranslationTagsTest()
     {
         var message = $"Next keys have wrong or empty translation's html tags:\r\n\r\n";
-        var regString = "<([^>]*)>(\\s*(.+?)\\s*)</([^>/]*)>";
+        var regString = "<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>";
 
         var regTags = new Regex(regString, RegexOptions.Compiled | RegexOptions.Multiline);
 
@@ -708,7 +708,7 @@ public class LocalesTest
                         t.Key,
                         t.Value,
                         Tags = regTags.Matches(t.Value)
-                                    .Select(m => m.Groups[1]?.Value?.Trim())
+                                    .Select(m => m.Value.Trim().Replace(" ", ""))
                                     .ToList()
                     })
                     .ToList()

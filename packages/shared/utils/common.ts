@@ -71,7 +71,6 @@ import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie } from "./cookie";
 import { checkIsSSR } from "./device";
-import { AvatarRole } from "../components/avatar/Avatar.enums";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -124,8 +123,8 @@ export const isPublicRoom = () => {
 };
 
 export const getUserTypeLabel = (
-  role: AvatarRole | undefined,
-  t: (key: string) => string,
+  role: "owner" | "admin" | "user" | "collaborator" | "manager" | undefined,
+  t: TTranslation,
 ) => {
   switch (role) {
     case "owner":
@@ -388,7 +387,7 @@ export function getProviderLabel(provider: string, t: (key: string) => string) {
     case "microsoft":
       return t("Common:ProviderMicrosoft");
     case "sso":
-      return t("Common:ProviderSso");
+      return t("Common:SSO");
     case "zoom":
       return t("Common:ProviderZoom");
     case "sso-full":

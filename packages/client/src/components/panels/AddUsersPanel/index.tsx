@@ -283,6 +283,7 @@ const AddUsersPanel = ({
         newItem.isAdmin = user.isAdmin;
         newItem.isVisitor = user.isVisitor;
         newItem.isCollaborator = user.isCollaborator;
+        newItem.isRoomAdmin = user.isRoomAdmin;
         newItem.email = user.email;
       }
 
@@ -539,7 +540,7 @@ const AddUsersPanel = ({
             // Todo: Update groups empty screen texts when they are ready
             activeTabId === PEOPLE_TAB_ID
               ? t("Common:EmptyHeader")
-              : t("Common:GroupsNotFoundHeader")
+              : t("Common:NotFoundGroups")
           }
           emptyScreenDescription={
             activeTabId === PEOPLE_TAB_ID
@@ -550,7 +551,7 @@ const AddUsersPanel = ({
           searchEmptyScreenHeader={
             activeTabId === PEOPLE_TAB_ID
               ? t("Common:NotFoundUsers")
-              : t("Common:GroupsNotFoundHeader")
+              : t("Common:NotFoundGroups")
           }
           searchEmptyScreenDescription={
             activeTabId === PEOPLE_TAB_ID

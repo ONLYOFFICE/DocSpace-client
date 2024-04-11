@@ -915,6 +915,11 @@ class FilesStore {
     this.selected = "close";
   };
 
+  resetSelections = () => {
+    this.setSelection([]);
+    this.setBufferSelection(null);
+  };
+
   setFiles = (files) => {
     const { socketHelper } = this.settingsStore;
 
@@ -3665,11 +3670,11 @@ class FilesStore {
     );
 
     if ((webEdit && !webNeedConvert) || !externalAccess)
-      AccessOptions.push("FullAccess");
+      AccessOptions.push("FullAccess"); // t("FullAccess") - "Skip useless issue in UselessTranslationKeysTest"
 
     if (webComment) AccessOptions.push("Comment");
     if (webReview) AccessOptions.push("Review");
-    if (formFillingDocs && !externalAccess) AccessOptions.push("FormFilling");
+    if (formFillingDocs && !externalAccess) AccessOptions.push("FormFilling"); // t("FormFilling") - "Skip useless issue in UselessTranslationKeysTest"
     if (webFilter) AccessOptions.push("FilterEditing");
 
     return AccessOptions;

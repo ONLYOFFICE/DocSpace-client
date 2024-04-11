@@ -69,22 +69,6 @@ const InfoPanel = ({
     return () => document.removeEventListener("mousedown", onMouseDown);
   }, [currentDeviceType, isVisible, setIsVisible, viewAs]);
 
-  const onResize = useCallback((e: Event) => {
-    const target = e.target as VisualViewport;
-    if (infoPanelRef?.current)
-      infoPanelRef.current.style.height = `${target.height}px`;
-  }, []);
-
-  useEffect(() => {
-    if (isMobileOnly && isIOS) {
-      window.visualViewport?.addEventListener("resize", onResize);
-    }
-
-    return () => {
-      window.visualViewport?.removeEventListener("resize", onResize);
-    };
-  }, [onResize]);
-
   const infoPanelComponent = (
     <StyledInfoPanelWrapper
       className="info-panel"

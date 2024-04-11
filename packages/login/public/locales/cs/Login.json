@@ -20,5 +20,6 @@
   "RegisterTitle": "Žádost o registraci",
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "Výchozí doba trvání relace je 20 minut. Zaškrtnutím této možnosti ji nastavíte na 1 rok. Chcete-li nastavit vlastní hodnotu, přejděte do Nastavení.",
-  "ResendCode": "Opětovné zaslání kódu"
+  "ResendCode": "Opětovné zaslání kódu",
+  "UserIsAlreadyRegistered": "Uživatel <1>{{email}}</1> je již v tomto DocSpace zaregistrován, zadejte své heslo nebo se vraťte zpět a pokračujte jiným e-mailem."
 }

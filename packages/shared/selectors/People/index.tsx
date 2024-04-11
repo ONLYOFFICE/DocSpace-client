@@ -69,6 +69,7 @@ const toListItem = (
     isAdmin,
     isVisitor,
     isCollaborator,
+    isRoomAdmin,
     status,
   } = item;
 
@@ -95,6 +96,7 @@ const toListItem = (
     isAdmin,
     isVisitor,
     isCollaborator,
+    isRoomAdmin,
     hasAvatar,
     isDisabled: isInvited || isDisabled,
     disabledText,

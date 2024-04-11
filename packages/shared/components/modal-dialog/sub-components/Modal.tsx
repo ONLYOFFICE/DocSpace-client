@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useCallback } from "react";
-import { isIOS, isTablet, isMobile } from "react-device-detect";
+import React from "react";
 
 import { classNames } from "../../../utils";
 import { DialogSkeleton, DialogAsideSkeleton } from "../../../skeletons";
@@ -46,7 +45,6 @@ import { ModalBackdrop } from "./ModalBackdrop";
 import { FormWrapper } from "./FormWrapper";
 import { ModalSubComponentsProps } from "../ModalDialog.types";
 
-let isInitScroll = false;
 const Modal = ({
   id,
   style,
@@ -72,101 +70,9 @@ const Modal = ({
   isCloseable,
   embedded,
   withForm,
+  blur,
 }: ModalSubComponentsProps) => {
-  const [windowHeight] = React.useState(window.innerHeight);
-
-  const visualPageTop = React.useRef(0);
-  const diffRef = React.useRef(0);
   const contentRef = React.useRef<null | HTMLDivElement>(null);
-
-  const scrollPosition = useCallback(() => {
-    if (currentDisplayType !== "modal") return;
-
-    if (isInitScroll) return;
-
-    const dialogHeader = document
-      .getElementById("modal-header-swipe")
-      ?.getBoundingClientRect();
-
-    const input = document
-      .getElementsByClassName("input-component")[0]
-      ?.getBoundingClientRect();
-
-    if (dialogHeader && input) {
-      if (dialogHeader.y < dialogHeader.height + input.height)
-        window.scrollTo(0, input.y);
-      else window.scrollTo(0, dialogHeader.y);
-    }
-
-    isInitScroll = true;
-  }, [currentDisplayType]);
-
-  const onResize = React.useCallback(
-    (e: Event) => {
-      if (window.innerHeight < window.innerWidth || isTablet) {
-        scrollPosition();
-
-        return;
-      }
-
-      if (!contentRef.current || !window.visualViewport) return;
-
-      const target = e.target as VisualViewport;
-
-      if (currentDisplayType === "modal") {
-        const diff = windowHeight - target.height - target.pageTop;
-
-        visualPageTop.current = target.pageTop;
-
-        contentRef.current.style.bottom = `${diff}px`;
-
-        return;
-      }
-      if (e?.type === "resize") {
-        const diff = windowHeight - target.height - target.pageTop;
-
-        visualPageTop.current = target.pageTop;
-
-        contentRef.current.style.bottom = `${diff}px`;
-
-        contentRef.current.style.height = `${
-          target.height - 64 + target.pageTop
-        }px`;
-
-        contentRef.current.style.position = "fixed";
-
-        diffRef.current = diff;
-      } else if (e?.type === "scroll") {
-        const diff = window.visualViewport.pageTop ? 0 : visualPageTop.current;
-
-        contentRef.current.style.bottom = `${diffRef.current + diff}px`;
-
-        contentRef.current.style.height = `${
-          window.visualViewport.height - 64 + diff
-        }px`;
-
-        contentRef.current.style.position = "fixed";
-      }
-    },
-    [currentDisplayType, scrollPosition, windowHeight],
-  );
-
-  React.useEffect(() => {
-    if (isIOS && isMobile && window.visualViewport) {
-      window.visualViewport.addEventListener("resize", onResize);
-      window.visualViewport.addEventListener("scroll", onResize);
-    }
-    return () => {
-      if (window.visualViewport) {
-        window.visualViewport.removeEventListener("resize", onResize);
-        window.visualViewport.removeEventListener("scroll", onResize);
-      }
-    };
-  }, [onResize]);
-
-  React.useEffect(() => {
-    if (!visible) isInitScroll = false;
-  }, [visible]);
 
   const headerComponent = React.isValidElement(header)
     ? header.props.children
@@ -201,6 +107,7 @@ const Modal = ({
       id={id}
       className={visible ? "modal-active" : ""}
       modalSwipeOffset={modalSwipeOffset}
+      blur={blur}
     >
       <ModalBackdrop
         className={visible ? "modal-backdrop-active backdrop-active" : ""}

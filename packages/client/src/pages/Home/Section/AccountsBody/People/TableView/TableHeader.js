@@ -104,7 +104,18 @@ class PeopleTableHeader extends React.Component {
       });
 
     const columns = props.getColumns(defaultColumns);
-    this.state = { columns };
+    const storageColumns = localStorage.getItem(
+      `${TABLE_COLUMNS}=${this.props.userId}`,
+    );
+    const splitColumns = storageColumns && storageColumns.split(",");
+
+    const resetColumnsSize =
+      (splitColumns && splitColumns.length !== columns.length) || !splitColumns;
+
+    const tableColumns = columns.map((c) => c.enable && c.key);
+    this.setTableColumns(tableColumns);
+
+    this.state = { columns, resetColumnsSize };
   }
 
   onColumnChange = (key, e) => {
@@ -119,7 +130,7 @@ class PeopleTableHeader extends React.Component {
     this.setState({ columns });
 
     const tableColumns = columns.map((c) => c.enable && c.key);
-    localStorage.setItem(`${TABLE_COLUMNS}=${this.props.userId}`, tableColumns);
+    this.setTableColumns(tableColumns);
 
     const event = new Event(Events.CHANGE_COLUMN);
 
@@ -157,8 +168,12 @@ class PeopleTableHeader extends React.Component {
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
+  setTableColumns = (tableColumns) => {
+    localStorage.setItem(`${TABLE_COLUMNS}=${this.props.userId}`, tableColumns);
+  };
+
   render() {
-    const { columns } = this.state;
+    const { columns, resetColumnsSize } = this.state;
     const {
       containerRef,
       filter,
@@ -186,6 +201,7 @@ class PeopleTableHeader extends React.Component {
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         sectionWidth={sectionWidth}
+        resetColumnsSize={resetColumnsSize}
         checkboxMargin="12px"
         infoPanelVisible={infoPanelVisible}
         useReactWindow={!withPaging}

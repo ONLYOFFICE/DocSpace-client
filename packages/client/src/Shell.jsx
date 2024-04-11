@@ -89,6 +89,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     isPortalRestoring,
     isNotPaidPeriod,
     user,
+    clientError,
   } = rest;
 
   const theme = useTheme();
@@ -424,6 +425,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
   const withoutNavMenu =
     isEditor ||
+    clientError ||
     isPortalDeactivate ||
     isPortalRestoring ||
     (isNotPaidPeriod && !user?.isOwner && !user?.isAdmin) ||
@@ -461,7 +463,14 @@ const ShellWrapper = inject(
   }) => {
     const { i18n } = useTranslation();
 
-    const { init, isLoaded, setProductVersion, language, version } = authStore;
+    const {
+      init,
+      isLoaded,
+      setProductVersion,
+      language,
+      version,
+      clientError,
+    } = authStore;
 
     const {
       personal,
@@ -538,6 +547,7 @@ const ShellWrapper = inject(
       isPortalRestoring,
       isNotPaidPeriod,
       user,
+      clientError,
     };
   },
 )(observer(Shell));

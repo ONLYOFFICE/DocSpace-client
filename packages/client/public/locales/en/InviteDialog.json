@@ -6,7 +6,6 @@
   "GroupMaxAvailableRoleWarning": "Groups have the maximum available role - “{{role}}”. You can issue an increase in rights after adding a group to the room.",
   "InvitationLanguage": "Invitation language",
   "InviteAccountSearchPlaceholder": "Invite people by email",
-  "Invited": "",
   "InviteRoomSearchPlaceholder": "Invite people by name or email",
   "InviteViaLink": "Invite via link",
   "InviteViaLinkDescriptionAccounts": "Create a universal link for self-authorization in DocSpace",

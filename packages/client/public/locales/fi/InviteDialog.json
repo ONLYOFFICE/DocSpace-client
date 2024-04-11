@@ -6,7 +6,6 @@
   "GroupMaxAvailableRoleWarning": "Ryhmillä on maksimi saatavilla-rooli -“{{role}}”. Voit antaa korotuksen oikeuksiin, kun olet lisännyt ryhmän huoneeseen.",
   "InvitationLanguage": "Kutsukieli",
   "InviteAccountSearchPlaceholder": "Kutsu ihmisiä sähköpostilla",
-  "Invited": "Kutsuttu",
   "InviteRoomSearchPlaceholder": "Kutsu ihmisiä nimellä tai sähköpostilla",
   "InviteViaLink": "Kutsu linkin kautta",
   "InviteViaLinkDescriptionAccounts": "Luo yleinen linkki DocSpaceen itsevaltuutusta varten",

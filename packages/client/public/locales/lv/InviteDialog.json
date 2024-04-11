@@ -6,7 +6,6 @@
   "GroupMaxAvailableRoleWarning": "Grupām ir maksimālā pieejamā loma - “{{role}}”. Jūs varat palielināt tiesības pēc grupas pievienošanas telpai.",
   "InvitationLanguage": "Uzaicinājuma valoda",
   "InviteAccountSearchPlaceholder": "Uzaicināt personas pa e-pastu",
-  "Invited": "Uzaicināts",
   "InviteRoomSearchPlaceholder": "Uzaicināt personas pēc vārda vai e-pasta adreses",
   "InviteViaLink": "Uzaicināt, izmantojot saiti",
   "InviteViaLinkDescriptionAccounts": "Izveidot universālu saiti pašautorizācijai DocSpace",

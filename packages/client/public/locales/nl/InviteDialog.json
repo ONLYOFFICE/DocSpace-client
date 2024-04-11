@@ -6,7 +6,6 @@
   "GroupMaxAvailableRoleWarning": "Groepen hebben de maximaal beschikbare rol - “{{role}}”. U kunt een toename in rechten geven nadat u een groep aan de kamer hebt toegevoegd.",
   "InvitationLanguage": "Taal van de uitnodiging",
   "InviteAccountSearchPlaceholder": "Mensen per e-mail uitnodigen",
-  "Invited": "Uitgenodigd",
   "InviteRoomSearchPlaceholder": "Mensen per e-mail uitnodigen",
   "InviteViaLink": "Uitnodigen via link",
   "InviteViaLinkDescriptionAccounts": "Maak een universele link voor zelfautorisatie in DocSpace",

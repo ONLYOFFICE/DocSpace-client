@@ -6,7 +6,6 @@
   "GroupMaxAvailableRoleWarning": "Skupine imajo maksimalno možno vlogo - “{{role}}”. Po dodajanju skupine v sobo lahko povečate pravice.",
   "InvitationLanguage": "Jezik povabila",
   "InviteAccountSearchPlaceholder": "Povabite ljudi po e-mailu",
-  "Invited": "Povabljeni",
   "InviteRoomSearchPlaceholder": "Povabite ljudi po imenu ali e-mailu",
   "InviteViaLink": "Povabite s povezavo",
   "InviteViaLinkDescriptionAccounts": "Ustvari univerzalno povezavo za samodejno avtorizacijo v DocSpace",

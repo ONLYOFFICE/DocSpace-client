@@ -6,7 +6,6 @@
   "GroupMaxAvailableRoleWarning": "그룹에서 이용 가능한 역할(“{{role}}”)은 한정되어 있습니다. 방에 그룹을 추가한 뒤 권한을 늘릴 수 있습니다.",
   "InvitationLanguage": "초대 언어",
   "InviteAccountSearchPlaceholder": "이메일로 사람들 초대",
-  "Invited": "초대 완료",
   "InviteRoomSearchPlaceholder": "이름 또는 이메일로 사람들 초대",
   "InviteViaLink": "링크를 통해 초대",
   "InviteViaLinkDescriptionAccounts": "DocSpace에서 자체 인증을 위한 범용 링크 생성",

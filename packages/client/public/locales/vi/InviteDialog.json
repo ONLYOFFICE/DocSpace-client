@@ -6,7 +6,6 @@
   "GroupMaxAvailableRoleWarning": "Các nhóm có vai trò sẵn có tối đa - “{{role}}”. Bạn có thể tăng quyền sau khi thêm một nhóm vào phòng.",
   "InvitationLanguage": "Ngôn ngữ mời",
   "InviteAccountSearchPlaceholder": "Mời người dùng qua email",
-  "Invited": "Đã mời",
   "InviteRoomSearchPlaceholder": "Mời người dùng theo tên hoặc email",
   "InviteViaLink": "Mời qua liên kết",
   "InviteViaLinkDescriptionAccounts": "Tạo một liên kết universal link để tự ủy quyền trong DocSpace",

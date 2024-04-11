@@ -6,7 +6,6 @@
   "GroupMaxAvailableRoleWarning": "Rol maxim disponibil pentru grupuri  - “{{role}}”. Puteți adăuga permisiunile de acces după crearea unui grup în sala.",
   "InvitationLanguage": "Invitația în limba",
   "InviteAccountSearchPlaceholder": "Invitaţi persoane după email",
-  "Invited": "Invitat",
   "InviteRoomSearchPlaceholder": "Invitaţi persoane după nume sau email",
   "InviteViaLink": "Invitaţi prin link",
   "InviteViaLinkDescriptionAccounts": "Creaţi un link universal de auto-autentificare în DocSpace",

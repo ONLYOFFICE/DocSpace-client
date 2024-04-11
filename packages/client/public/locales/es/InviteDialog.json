@@ -6,7 +6,6 @@
   "GroupMaxAvailableRoleWarning": "Los grupos tienen el rol máximo disponible: \"{{role}}\". Puede conceder permisos adicionales después de añadir un grupo a la sala.",
   "InvitationLanguage": "Idioma de la invitación ",
   "InviteAccountSearchPlaceholder": "Invitar por correo electrónico",
-  "Invited": "Invitado",
   "InviteRoomSearchPlaceholder": "Invitar por nombre o correo electrónico",
   "InviteViaLink": "Invitar mediante enlace",
   "InviteViaLinkDescriptionAccounts": "Cree un enlace universal para la autorización en DocSpace",

@@ -6,7 +6,6 @@
   "GroupMaxAvailableRoleWarning": "Οι ομάδες έχουν τον μέγιστο διαθέσιμο ρόλο – «{{role}}». Μπορείτε να εκδώσετε αύξηση των δικαιωμάτων μετά την προσθήκη μιας ομάδας στο δωμάτιο.",
   "InvitationLanguage": "Γλώσσα πρόσκλησης",
   "InviteAccountSearchPlaceholder": "Πρόσκληση ατόμων μέσω email",
-  "Invited": "Προσκλήθηκε",
   "InviteRoomSearchPlaceholder": "Πρόσκληση ατόμων με όνομα ή email",
   "InviteViaLink": "Πρόσκληση μέσω συνδέσμου",
   "InviteViaLinkDescriptionAccounts": "Δημιουργήστε μια καθολική σύνδεση για αυτοεξουσιοδότηση στο DocSpace",

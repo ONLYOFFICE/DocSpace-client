@@ -6,7 +6,6 @@
   "GroupMaxAvailableRoleWarning": "Группы имеют максимально доступную роль — \"{{role}}\". Вы можете увеличить количество права после добавления группы в комнату.",
   "InvitationLanguage": "Язык приглашения",
   "InviteAccountSearchPlaceholder": "Пригласить людей по электронной почте",
-  "Invited": "Приглашен",
   "InviteRoomSearchPlaceholder": "Приглашайте людей по имени или электронной почте",
   "InviteViaLink": "Пригласить по ссылке",
   "InviteViaLinkDescriptionAccounts": "Создать универсальную ссылку для самостоятельной авторизации в DocSpace",

@@ -6,7 +6,6 @@
   "GroupMaxAvailableRoleWarning": "Gruplar maksimum kullanılabilir role sahiptir - \"{{role}}\". Odaya bir grup ekledikten sonra haklarda bir artış yapabilirsiniz.",
   "InvitationLanguage": "Davet dili",
   "InviteAccountSearchPlaceholder": "İnsanları e-posta ile davet et",
-  "Invited": "Davet edildi",
   "InviteRoomSearchPlaceholder": "Kişileri ada veya e-postaya göre davet et",
   "InviteViaLink": "Bağlantı yoluyla davet et",
   "InviteViaLinkDescriptionAccounts": "DocSpace'te kendi kendine yetkilendirme için evrensel bir bağlantı oluştur",

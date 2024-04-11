@@ -6,7 +6,6 @@
   "GroupMaxAvailableRoleWarning": "Skupiny majú maximálne dostupnú rolu - \"{{role}}\". Po pridaní skupiny do miestnosti môžete povoliť rozšírenie práv.",
   "InvitationLanguage": "Jazyk pozvánky",
   "InviteAccountSearchPlaceholder": "Pozvať ľudí e-mailom",
-  "Invited": "Pozvaný",
   "InviteRoomSearchPlaceholder": "Pozvať ľudí podľa mena alebo e-mailu",
   "InviteViaLink": "Pozvať cez odkaz",
   "InviteViaLinkDescriptionAccounts": "Vytvorte univerzálny odkaz na autorizáciu v DocSpace",

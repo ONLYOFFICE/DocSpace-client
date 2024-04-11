@@ -25,13 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 (function () {
+  const FRAME_NAME = "frameDocSpace";
+
   const defaultConfig = {
     src: new URL(document.currentScript.src).origin,
     rootPath: "/rooms/shared/",
     requestToken: null,
     width: "100%",
     height: "100%",
-    name: "frameDocSpace",
+    name: FRAME_NAME,
     type: "desktop", // TODO: ["desktop", "mobile"]
     frameId: "ds-frame",
     mode: "manager", //TODO: ["manager", "editor", "viewer","room-selector", "file-selector", "system"]
@@ -54,6 +56,7 @@
     checkCSP: true,
     disableActionButton: false,
     showSettings: false,
+    waiting: false,
     withSearch: true,
     withBreadCrumbs: true,
     withSubtitle: true,
@@ -150,6 +153,10 @@
     return { ...defaultConfig, ...object };
   };
 
+  /**
+   * Represents the DocSpace class.
+   * @class
+   */
   class DocSpace {
     #isConnected = false;
     #frameOpacity = 0;
@@ -161,10 +168,28 @@
       this.config = config;
     }
 
+    /**
+     * Checks if any of the keys in the given array exist in the provided object.
+     *
+     * @param {Array} array - The array of keys to check.
+     * @param {Object} object - The object to check against.
+     * @returns {boolean} - Returns true if any of the keys exist in the object, otherwise false.
+     */
     #oneOfExistInObject = (array, object) => {
       return Object.keys(object).some((k) => array.includes(k));
     };
 
+    /**
+     * Creates a loader element with the specified configuration.
+     *
+     * @param {Object} config - The configuration object for the loader.
+     * @param {string} config.width - The width of the loader container.
+     * @param {string} config.height - The height of the loader container.
+     * @param {string} config.src - The source path for the loader image.
+     * @param {string} config.theme - The theme of the loader (e.g., "Dark", "System").
+     * @param {string} config.frameId - The ID of the loader frame.
+     * @returns {HTMLElement} The loader container element.
+     */
     #createLoader = (config) => {
       const container = document.createElement("div");
       container.style.width = config.width;
@@ -246,6 +271,25 @@
       return container;
     };
 
+    /**
+     * Creates a button view based on the provided configuration.
+     *
+     * @param {Object} config - The configuration object for the button view.
+     * @param {string} config.buttonColor - The background color of the button. Defaults to "#5299E0".
+     * @param {boolean} config.buttonWithLogo - Determines whether the button should include a logo. Defaults to false.
+     * @param {string} config.buttonText - The text to display on the button. Defaults to "Select to DocSpace".
+     * @param {string} config.src - The source URL for the logo image.
+     * @param {string} config.frameId - The ID of the container element for the button.
+     * @param {Object} config.events - The event callbacks for the button.
+     * @param {Function} config.events.onSelectCallback - The callback function to be executed when an item is selected.
+     * @param {Function} config.events.onCloseCallback - The callback function to be executed when the button view is closed.
+     * @param {Function} config.events.onAppReady - The callback function to be executed when the DocSpace app is ready.
+     * @param {Function} config.events.onAppError - The callback function to be executed when an error occurs in the DocSpace app.
+     * @param {Function} config.events.onEditorCloseCallback - The callback function to be executed when the editor is closed.
+     * @param {Function} config.events.onAuthSuccess - The callback function to be executed when authentication is successful.
+     * @param {Function} config.events.onSignOut - The callback function to be executed when the user signs out.
+     * @returns {HTMLButtonElement} The created button element.
+     */
     #createButtonView = (config) => {
       const button = document.createElement("button");
       button.style.backgroundColor = config?.buttonColor || "#5299E0";
@@ -335,6 +379,31 @@
       return button;
     };
 
+    /**
+     * Creates an iframe element based on the provided configuration.
+     *
+     * @param {Object} config - The configuration object for creating the iframe.
+     * @param {string} config.mode - The mode of the iframe.
+     * @param {Object} config.filter - The filter object for the iframe.
+     * @param {string} config.id - The ID of the iframe.
+     * @param {string} config.requestToken - The request token for the iframe.
+     * @param {boolean} config.withSubfolders - Indicates whether to include subfolders in the iframe.
+     * @param {string} config.rootPath - The root path for the iframe.
+     * @param {string} config.editorGoBack - The go back option for the editor iframe.
+     * @param {Object} config.editorCustomization - The customization object for the editor iframe.
+     * @param {string} config.theme - The theme for the editor iframe.
+     * @param {Function} config.events.onEditorCloseCallback - The callback function for the editor close event.
+     * @param {string} config.editorType - The type of the editor iframe.
+     * @param {string} config.action - The action for the viewer iframe.
+     * @param {string} config.src - The source URL for the iframe.
+     * @param {string} config.width - The width of the iframe.
+     * @param {string} config.height - The height of the iframe.
+     * @param {string} config.name - The name of the iframe.
+     * @param {string} config.frameId - The ID of the iframe.
+     * @param {string} config.type - The type of the iframe.
+     * @param {boolean} config.checkCSP - Indicates whether to check the Content Security Policy.
+     * @returns {HTMLIFrameElement} The created iframe element.
+     */
     #createIframe = (config) => {
       const iframe = document.createElement("iframe");
 
@@ -430,7 +499,7 @@
       iframe.src = config.src + path;
       iframe.style.width = config.width;
       iframe.style.height = config.height;
-      iframe.name = config.name;
+      iframe.name = `${FRAME_NAME}__#${config.frameId}`;
       iframe.id = config.frameId;
 
       iframe.frameBorder = 0;
@@ -474,6 +543,10 @@
       return iframe;
     };
 
+    /**
+     * Sends a message to the specified frame.
+     * @param {any} message - The message to be sent.
+     */
     #sendMessage = (message) => {
       let mes = {
         frameId: this.config.frameId,
@@ -493,6 +566,11 @@
       }
     };
 
+    /**
+     * Handles incoming messages from the server.
+     *
+     * @param {MessageEvent} e - The message event object.
+     */
     #onMessage = (e) => {
       if (typeof e.data == "string") {
         let data = {};
@@ -501,6 +579,10 @@
           data = JSON.parse(e.data);
         } catch (err) {
           data = {};
+        }
+
+        if (this.config.frameId !== data.frameId) {
+          return;
         }
 
         switch (data.type) {
@@ -537,6 +619,15 @@
         }
       }
     };
+
+    /**
+     * Executes a method on the message bus.
+     *
+     * @param {string} methodName - The name of the method to execute.
+     * @param {any} params - The parameters to pass to the method.
+     * @param {Function} callback - The callback function to be called after the method execution.
+     * @returns {void}
+     */
     #executeMethod = (methodName, params, callback) => {
       if (!this.#isConnected) {
         this.config.events.onAppError(
@@ -561,6 +652,12 @@
       this.#sendMessage(message);
     };
 
+    /**
+     * Initializes the button with the provided configuration.
+     *
+     * @param {Object} config - The configuration object for the button.
+     * @returns {HTMLElement} - The initialized button element.
+     */
     initButton(config) {
       const configFull = { ...defaultConfig, ...config };
       this.config = {
@@ -598,6 +695,12 @@
       return button;
     }
 
+    /**
+     * Initializes the frame with the provided configuration.
+     *
+     * @param {Object} config - The configuration object for the frame.
+     * @returns {HTMLIFrameElement} - The created iframe element.
+     */
     initFrame(config) {
       const configFull = { ...defaultConfig, ...config };
       Object.entries(configFull).map(([key, value]) => {
@@ -632,7 +735,10 @@
         renderContainer.style.width = "100%";
         renderContainer.style.height = "100%";
 
-        renderContainer.appendChild(iframe);
+        if (!this.config.waiting || this.config.mode === "system") {
+          renderContainer.appendChild(iframe);
+        }
+
         renderContainer.appendChild(frameLoader);
 
         const isSelfReplace = target.parentNode.isEqualNode(
@@ -648,19 +754,27 @@
         this.#isConnected = true;
       }
 
-      window.DocSpace.SDK.frames = window.DocSpace.SDK.frames || [];
+      window.DocSpace.SDK.frames = window.DocSpace.SDK.frames || {};
 
       window.DocSpace.SDK.frames[this.config.frameId] = this;
 
       return iframe;
     }
 
+    /**
+     * Initializes the manager mode.
+     * @param {Object} config - The configuration object.
+     * @returns {Promise} A promise that resolves when the frame is initialized.
+     */
     initManager(config = {}) {
       config.mode = "manager";
 
       return this.initFrame(config);
     }
 
+    /**
+     * Sets the loaded state of the target frame and removes the loader element.
+     */
     setIsLoaded() {
       const targetFrame = document.getElementById(this.config.frameId);
       const loader = document.getElementById(this.config.frameId + "-loader");
@@ -676,36 +790,65 @@
       }
     }
 
+    /**
+     * Initializes the editor.
+     * @param {Object} config - The configuration object for the editor.
+     * @returns {Object} - The initialized frame object.
+     */
     initEditor(config = {}) {
       config.mode = "editor";
 
       return this.initFrame(config);
     }
 
+    /**
+     * Initializes the viewer mode.
+     * @param {Object} config - The configuration object.
+     * @returns {Promise} A promise that resolves when the viewer is initialized.
+     */
     initViewer(config = {}) {
       config.mode = "viewer";
 
       return this.initFrame(config);
     }
 
+    /**
+     * Initializes the room selector.
+     *
+     * @param {Object} config - The configuration object.
+     * @returns {Object} - The initialized frame.
+     */
     initRoomSelector(config = {}) {
       config.mode = "room-selector";
 
       return this.initFrame(config);
     }
 
+    /**
+     * Initializes the file selector mode.
+     * @param {Object} config - The configuration object.
+     * @returns {Object} - The initialized frame.
+     */
     initFileSelector(config = {}) {
       config.mode = "file-selector";
 
       return this.initFrame(config);
     }
 
+    /**
+     * Initializes the system with the given configuration.
+     * @param {Object} config - The configuration object.
+     * @returns {Promise} A promise that resolves when the system is initialized.
+     */
     initSystem(config = {}) {
       config.mode = "system";
 
       return this.initFrame(config);
     }
 
+    /**
+     * Destroys the frame and cleans up associated resources.
+     */
     destroyFrame() {
       const target = document.createElement("div");
 
@@ -727,6 +870,14 @@
       this.config = {};
     }
 
+    /**
+     * Retrieves a method promise.
+     *
+     * @param {string} methodName - The name of the method.
+     * @param {Object|null} params - The parameters for the method (optional).
+     * @param {boolean} withReload - Indicates whether to reload the configuration (optional).
+     * @returns {Promise} A promise that resolves with the method data.
+     */
     #getMethodPromise = (methodName, params = null, withReload = false) => {
       return new Promise((resolve) => {
         if (withReload) {
@@ -738,42 +889,87 @@
       });
     };
 
+    /**
+     * Retrieves folder information.
+     * @returns {Promise} A promise that resolves with the folder information.
+     */
     getFolderInfo() {
       return this.#getMethodPromise("getFolderInfo");
     }
 
+    /**
+     * Retrieves the current selection.
+     * @returns {Promise} A promise that resolves with the current selection.
+     */
     getSelection() {
       return this.#getMethodPromise("getSelection");
     }
 
+    /**
+     * Retrieves the files from the server.
+     * @returns {Promise} A promise that resolves with the files.
+     */
     getFiles() {
       return this.#getMethodPromise("getFiles");
     }
 
+    /**
+     * Retrieves the folders from the server.
+     * @returns {Promise} A promise that resolves with the folders data.
+     */
     getFolders() {
       return this.#getMethodPromise("getFolders");
     }
 
+    /**
+     * Retrieves a list of items.
+     * @returns {Promise} A promise that resolves with the list of items.
+     */
     getList() {
       return this.#getMethodPromise("getList");
     }
 
+    /**
+     * Retrieves rooms based on the provided filter.
+     *
+     * @param {Object} filter - The filter object to apply when retrieving rooms.
+     * @returns {Promise} A promise that resolves with the retrieved rooms.
+     */
     getRooms(filter) {
       return this.#getMethodPromise("getRooms", filter);
     }
 
+    /**
+     * Retrieves user information.
+     * @returns {Promise} A promise that resolves with the user information.
+     */
     getUserInfo() {
       return this.#getMethodPromise("getUserInfo");
     }
 
+    /**
+     * Retrieves the configuration object.
+     * @returns {Object} The configuration object.
+     */
     getConfig() {
       return this.config;
     }
 
+    /**
+     * Retrieves the hash settings.
+     * @returns {Promise} A promise that resolves with the hash settings.
+     */
     getHashSettings() {
       return this.#getMethodPromise("getHashSettings");
     }
 
+    /**
+     * Sets the configuration for the API.
+     *
+     * @param {Object} newConfig - The new configuration object.
+     * @param {boolean} [reload=false] - Indicates whether to reload the API after setting the configuration.
+     * @returns {Promise} A promise that resolves when the configuration is set.
+     */
     setConfig(newConfig = {}, reload = false) {
       if (this.#oneOfExistInObject(this.config.keysForReload, newConfig))
         reload = true;
@@ -783,10 +979,26 @@
       return this.#getMethodPromise("setConfig", this.config, reload);
     }
 
+    /**
+     * Opens a modal with the specified type and options.
+     *
+     * @param {string} type - The type of the modal.
+     * @param {object} options - The options for the modal.
+     * @returns {Promise} A promise that resolves when the modal is opened.
+     */
     openModal(type, options) {
       return this.#getMethodPromise("openModal", { type, options });
     }
 
+    /**
+     * Creates a file with the specified parameters.
+     *
+     * @param {string} folderId - The ID of the folder where the file will be created.
+     * @param {string} title - The title of the file.
+     * @param {string} templateId - The ID of the template to be used for the file.
+     * @param {string} formId - The ID of the form associated with the file.
+     * @returns {Promise} A promise that resolves with the created file.
+     */
     createFile(folderId, title, templateId, formId) {
       return this.#getMethodPromise("createFile", {
         folderId,
@@ -796,6 +1008,13 @@
       });
     }
 
+    /**
+     * Creates a new folder with the given parent folder ID and title.
+     *
+     * @param {string} parentFolderId - The ID of the parent folder.
+     * @param {string} title - The title of the new folder.
+     * @returns {Promise} A promise that resolves with the result of the createFolder operation.
+     */
     createFolder(parentFolderId, title) {
       return this.#getMethodPromise("createFolder", {
         parentFolderId,
@@ -803,6 +1022,12 @@
       });
     }
 
+    /**
+     * Creates a new room with the specified title and room type.
+     * @param {string} title - The title of the room.
+     * @param {string} roomType - The type of the room.
+     * @returns {Promise} A promise that resolves with the created room.
+     */
     createRoom(title, roomType) {
       return this.#getMethodPromise("createRoom", {
         title,
@@ -810,40 +1035,288 @@
       });
     }
 
+    /**
+     * Sets the view type for the list of items.
+     *
+     * @param {string} type - The type of view to set.
+     * @returns {Promise} - A promise that resolves when the view type is set.
+     */
     setListView(type) {
       return this.#getMethodPromise("setItemsView", type);
     }
 
+    /**
+     * Creates a hash for the given password using the specified hash settings.
+     *
+     * @param {string} password - The password to be hashed.
+     * @param {object} hashSettings - The settings for the hash algorithm.
+     * @returns {Promise} A promise that resolves to the generated hash.
+     */
     createHash(password, hashSettings) {
       return this.#getMethodPromise("createHash", { password, hashSettings });
     }
 
+    /**
+     * Logs in a user with the provided email and password hash.
+     * @param {string} email - The user's email address.
+     * @param {string} passwordHash - The hashed password.
+     * @returns {Promise} A promise that resolves with the login response.
+     */
     login(email, passwordHash) {
       return this.#getMethodPromise("login", { email, passwordHash });
     }
 
+    /**
+     * Logs out the user.
+     * @returns {Promise} A promise that resolves when the user is logged out.
+     */
     logout() {
       return this.#getMethodPromise("logout");
     }
 
+    /**
+     * Creates a new tag with the given name.
+     *
+     * @param {string} name - The name of the tag.
+     * @returns {Promise} A promise that resolves when the tag is created.
+     */
     createTag(name) {
       return this.#getMethodPromise("createTag", name);
     }
 
+    /**
+     * Adds tags to a room.
+     *
+     * @param {string} roomId - The ID of the room.
+     * @param {string[]} tags - An array of tags to add.
+     * @returns {Promise} A promise that resolves when the tags are added successfully.
+     */
     addTagsToRoom(roomId, tags) {
       return this.#getMethodPromise("addTagsToRoom", { roomId, tags });
     }
 
+    /**
+     * Removes tags from a room.
+     *
+     * @param {string} roomId - The ID of the room.
+     * @param {string[]} tags - An array of tags to be removed.
+     * @returns {Promise} A promise that resolves when the tags are successfully removed.
+     */
     removeTagsFromRoom(roomId, tags) {
       return this.#getMethodPromise("removeTagsFromRoom", { roomId, tags });
     }
   }
 
-  const config = getConfigFromParams();
+  /**
+   * Represents the DocSpace SDK.
+   * @class
+   */
+  class DocSpaceSDK {
+    frames = {};
+    instances = [];
+
+    /**
+     * Initializes a new instance of the DocSpace class and initializes the frame.
+     * @param {Object} config - The configuration object for initializing the DocSpace instance.
+     * @returns {DocSpace} The initialized DocSpace instance.
+     */
+    initFrame = (config) => {
+      const existInstance = this.instances.find(
+        (i) => i.config.frameId === config.frameId
+      );
+
+      if (existInstance) {
+        existInstance.initFrame(config);
+        return existInstance;
+      }
+
+      const instance = new DocSpace(config);
+
+      instance.initFrame(config);
+
+      this.instances.push(instance);
+
+      return instance;
+    };
+
+    /**
+     * Initializes a button with the provided configuration.
+     * @param {Object} config - The configuration object for the button.
+     * @returns {DocSpace} - An instance of the DocSpace class.
+     */
+    initButton = (config) => {
+      const existInstance = this.instances.find(
+        (i) => i.config.frameId === config.frameId
+      );
+
+      if (existInstance) {
+        existInstance.initButton(config);
+        return existInstance;
+      }
+
+      const instance = new DocSpace(config);
+
+      instance.initButton(config);
+
+      this.instances.push(instance);
+
+      return instance;
+    };
+
+    /**
+     * Initializes the editor.
+     *
+     * @param {Object} config - The configuration object for the editor.
+     * @returns {DocSpace} The initialized DocSpace instance.
+     */
+    initEditor = (config = {}) => {
+      const existInstance = this.instances.find(
+        (i) => i.config.frameId === config.frameId
+      );
+
+      if (existInstance) {
+        existInstance.initEditor(config);
+        return existInstance;
+      }
+
+      const instance = new DocSpace(config);
+
+      instance.initEditor(config);
+
+      this.instances.push(instance);
+
+      return instance;
+    };
+
+    /**
+     * Initializes the viewer.
+     * @param {Object} config - The configuration object for the viewer.
+     * @returns {DocSpace} - The initialized DocSpace instance.
+     */
+    initViewer = (config = {}) => {
+      const existInstance = this.instances.find(
+        (i) => i.config.frameId === config.frameId
+      );
+
+      if (existInstance) {
+        existInstance.initViewer(config);
+        return existInstance;
+      }
+
+      const instance = new DocSpace(config);
+
+      instance.initViewer(config);
+
+      this.instances.push(instance);
+
+      return instance;
+    };
+
+    /**
+     * Initializes the room selector.
+     *
+     * @param {Object} config - The configuration object.
+     * @returns {DocSpace} The instance of the DocSpace class.
+     */
+    initRoomSelector = (config = {}) => {
+      const existInstance = this.instances.find(
+        (i) => i.config.frameId === config.frameId
+      );
+
+      if (existInstance) {
+        existInstance.initRoomSelector(config);
+        return existInstance;
+      }
+
+      const instance = new DocSpace(config);
+
+      instance.initRoomSelector(config);
+
+      this.instances.push(instance);
+
+      return instance;
+    };
+
+    /**
+     * Initializes the file selector.
+     *
+     * @param {Object} config - The configuration object.
+     * @returns {DocSpace} The initialized DocSpace instance.
+     */
+    initFileSelector = (config = {}) => {
+      const existInstance = this.instances.find(
+        (i) => i.config.frameId === config.frameId
+      );
+
+      if (existInstance) {
+        existInstance.initFileSelector(config);
+        return existInstance;
+      }
+
+      const instance = new DocSpace(config);
+
+      instance.initFileSelector(config);
+
+      this.instances.push(instance);
+
+      return instance;
+    };
+
+    /**
+     * Initializes the manager for DocSpace.
+     * @param {Object} config - The configuration object for the manager.
+     * @returns {DocSpace} The initialized DocSpace instance.
+     */
+    initManager = (config = {}) => {
+      const existInstance = this.instances.find(
+        (i) => i.config.frameId === config.frameId
+      );
+
+      if (existInstance) {
+        existInstance.initManager(config);
+        return existInstance;
+      }
+
+      const instance = new DocSpace(config);
+
+      instance.initManager(config);
+
+      this.instances.push(instance);
+
+      return instance;
+    };
+
+    /**
+     * Initializes the DocSpace system.
+     *
+     * @param {Object} config - The configuration object for initializing the system.
+     * @returns {DocSpace} - The initialized DocSpace instance.
+     */
+    initSystem = (config = {}) => {
+      const existInstance = this.instances.find(
+        (i) => i.config.frameId === config.frameId
+      );
+
+      if (existInstance) {
+        existInstance.initSystem(config);
+        return existInstance;
+      }
+
+      const instance = new DocSpace(config);
+
+      instance.initSystem(config);
+
+      this.instances.push(instance);
+
+      return instance;
+    };
+  }
 
   window.DocSpace = window.DocSpace || {};
 
-  window.DocSpace.SDK = new DocSpace(config);
+  const config = getConfigFromParams();
+
+  window.DocSpace.SDK = window.DocSpace.SDK || new DocSpaceSDK();
 
   if (config.init) {
     config?.isButtonMode

@@ -195,6 +195,7 @@ public class LocalesTest
                                let clientDir = Path.Combine(BasePath, wsPath)
                                from filePath in Utils.GetFiles(clientDir, searchPatern, SearchOption.AllDirectories)
                                where !filePath.Contains(Utils.ConvertPathToOS("dist/"))
+                               where !filePath.Contains(Utils.ConvertPathToOS(".next/"))
                                && !filePath.Contains(Utils.ConvertPathToOS("storybook-static/"))
                                && !filePath.Contains(Utils.ConvertPathToOS("node_modules/"))
                                && !filePath.Contains(".test.js")
@@ -512,6 +513,10 @@ public class LocalesTest
             .SelectMany(j => j.TranslationKeys)
             .Select(k => k.Substring(k.IndexOf(":") + 1))
             .Distinct();
+
+        //var foo = JavaScriptFiles
+        // .Where(f => !f.Path.Contains("Banner.js"))
+        // .Where(t => t.TranslationKeys.Any(k => k == "foo")).FirstOrDefault();
 
         var notFoundJsKeys = allJsTranslationKeys.Except(allEnKeys);
 

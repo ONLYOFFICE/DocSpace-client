@@ -72,6 +72,7 @@ const Modal = ({
   isCloseable,
   embedded,
   withForm,
+  blur,
 }: ModalSubComponentsProps) => {
   const [windowHeight] = React.useState(window.innerHeight);
 
@@ -201,6 +202,7 @@ const Modal = ({
       id={id}
       className={visible ? "modal-active" : ""}
       modalSwipeOffset={modalSwipeOffset}
+      blur={blur}
     >
       <ModalBackdrop
         className={visible ? "modal-backdrop-active backdrop-active" : ""}

@@ -433,7 +433,7 @@ const SimpleRoom = (props) => {
                       fontSize="12px"
                       lineHeight="16px"
                     >
-                      {t("LinkSettings", {
+                      {t("LinkSetDescription", {
                         parameter:
                           settingsTranslations[selectedLink.settings[0]],
                       })}
@@ -455,7 +455,7 @@ const SimpleRoom = (props) => {
                       fontSize="12px"
                       lineHeight="16px"
                     >
-                      {t("LinkSettings2", {
+                      {t("LinkSetDescription2", {
                         parameter1:
                           settingsTranslations[selectedLink.settings[0]],
                         parameter2:
@@ -479,7 +479,7 @@ const SimpleRoom = (props) => {
                       fontSize="12px"
                       lineHeight="16px"
                     >
-                      {t("LinkSettings3", {
+                      {t("LinkSetDescription3", {
                         parameter1:
                           settingsTranslations[selectedLink.settings[0]],
                         parameter2:

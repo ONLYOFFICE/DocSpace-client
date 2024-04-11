@@ -298,7 +298,6 @@
   "ProviderLoginError": "Błąd autoryzacji",
   "ProviderMicrosoft": "Microsoft",
   "ProviderNotConnected": "Dostawca nie jest podłączony do Twojego konta",
-  "ProviderSso": "SSO",
   "ProviderSsoSetting": "Logowanie jednokrotne",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",

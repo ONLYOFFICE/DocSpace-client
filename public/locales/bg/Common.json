@@ -297,7 +297,6 @@
   "ProviderLinkedIn": "LinkedIn",
   "ProviderLoginError": "Грешка в авторизацията",
   "ProviderNotConnected": "Доставчикът не е свързан към профила Ви",
-  "ProviderSso": "SSO",
   "ProviderSsoSetting": "Единично влизане",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",

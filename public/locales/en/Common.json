@@ -298,7 +298,6 @@
   "ProviderLoginError": "Authorization error",
   "ProviderMicrosoft": "Microsoft",
   "ProviderNotConnected": "Provider is not connected to your account",
-  "ProviderSso": "SSO",
   "ProviderSsoSetting": "Single sign-on",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",

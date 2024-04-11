@@ -297,7 +297,6 @@
   "ProviderLinkedIn": "Google",
   "ProviderLoginError": "Autorizācijas kļūda",
   "ProviderNotConnected": "Pakalpojumu sniedzējs nav savienots ar jūsu kontu",
-  "ProviderSso": "SSO",
   "ProviderSsoSetting": "Vienotā pierakstīšanās",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",

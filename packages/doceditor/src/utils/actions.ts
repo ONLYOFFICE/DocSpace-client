@@ -236,7 +236,7 @@ export async function getData(
       getSettings(share),
     ]);
 
-    if ("token" in config) {
+    if ("editorConfig" in config) {
       const response: TResponse = {
         config,
         user,

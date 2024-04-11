@@ -543,6 +543,6 @@ export const getOptions = (t: TFunction): PeriodOptionType[] => [
   },
   {
     key: "Hour",
-    label: getLabel("Hour", t), // t("Hour"),
+    label: getLabel("Hour", t), // t("Hour"), - "Skip useless issue in UselessTranslationKeysTest"
   },
 ];

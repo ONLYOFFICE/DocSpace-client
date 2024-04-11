@@ -167,10 +167,10 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
       onSubmit={onSubmitAction}
       cancelButtonLabel={t("Common:CancelButton")}
       emptyScreenImage={emptyScreenImg}
-      emptyScreenHeader={t("Common:GroupsNotFoundHeader")} // Todo: Update empty screen texts when they are ready
+      emptyScreenHeader={t("Common:NotFoundGroups")}
       emptyScreenDescription={t("Common:GroupsNotFoundDescription")}
       searchEmptyScreenImage={emptyScreenImg}
-      searchEmptyScreenHeader={t("Common:GroupsNotFoundHeader")}
+      searchEmptyScreenHeader={t("Common:NotFoundGroups")}
       searchEmptyScreenDescription={t("Common:GroupsNotFoundDescription")}
       totalItems={totalRef.current}
       hasNextPage={hasNextPage}

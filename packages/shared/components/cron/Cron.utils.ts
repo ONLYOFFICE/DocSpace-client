@@ -543,6 +543,6 @@ export const getOptions = (t: TFunction): PeriodOptionType[] => [
   },
   {
     key: "Hour",
-    label: getLabel("Hour", t),
+    label: getLabel("Hour", t), // t("Hour"),
   },
 ];

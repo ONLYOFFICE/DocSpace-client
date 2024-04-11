@@ -915,6 +915,11 @@ class FilesStore {
     this.selected = "close";
   };
 
+  resetSelections = () => {
+    this.setSelection([]);
+    this.setBufferSelection(null);
+  };
+
   setFiles = (files) => {
     const { socketHelper } = this.settingsStore;
 

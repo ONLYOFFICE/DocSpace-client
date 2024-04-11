@@ -92,7 +92,13 @@ export async function fileCopyAs(
   file: TFile | undefined;
   error:
     | string
-    | { message: string; status: number; type: string; stack: string }
+    | {
+        message: string;
+        status: number;
+        type: string;
+        stack: string;
+        statusCode?: number;
+      }
     | undefined;
 }> {
   try {
@@ -122,6 +128,7 @@ export async function fileCopyAs(
               status: file.error?.statusCode,
               type: file.error?.type,
               stack: file.error?.stack,
+              statusCode: file?.statusCode,
             }
         : undefined,
     };
@@ -151,7 +158,13 @@ export async function createFile(
   file: TFile | undefined;
   error:
     | string
-    | { message: string; status: number; type: string; stack: string }
+    | {
+        message: string;
+        status: number;
+        type: string;
+        stack: string;
+        statusCode?: number;
+      }
     | undefined;
 }> {
   try {
@@ -174,6 +187,7 @@ export async function createFile(
               status: file.error?.statusCode,
               type: file.error?.type,
               stack: file.error?.stack,
+              statusCode: file?.statusCode,
             }
         : undefined,
     };

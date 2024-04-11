@@ -31,7 +31,6 @@
   "Descending": "降序",
   "DisplayColumns": "显示文件行中的列",
   "DocspaceDescription": "嵌入整个协作空间，以支持用户与所有房间、文件和设置交互。",
-  "Editor": "编辑器",
   "EditorDescription": "嵌入编辑器，以支持用户通过对应的间编辑文件。",
   "ElementCalledAfterClicking": "点击后元素会被调用",
   "ElementItself": "元素本身",

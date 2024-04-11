@@ -32,7 +32,6 @@
   "RoleCommentator": "Commentatore",
   "RoleCommentatorDescription": "Operazioni con file esistenti: visualizzazione, commenti.",
   "RoleDocSpaceAdminDescription": "Gli amministratori di DocSpace possono accedere alle impostazioni di DocSpace, gestire e archiviare stanze, invitare nuovi utenti e assegnare ruoli al di sotto del loro livello. Tutti gli amministratori hanno accesso alla sezione Personale.",
-  "RoleEditor": "Editore",
   "RoleEditorDescription": "Operazioni con file esistenti: visualizzazione, modifica, compilazione moduli, revisione, commenti.",
   "RoleFormFiller": "Compilatore di moduli",
   "RoleFormFillerDescription": "Operazioni con file esistenti: visualizzazione, compilazione moduli, revisione, commenti.",

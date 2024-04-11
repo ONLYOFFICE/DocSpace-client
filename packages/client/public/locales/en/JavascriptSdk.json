@@ -34,7 +34,6 @@
   "Descending": "Descending",
   "DisplayColumns": "Displaying columns in a file row",
   "DocspaceDescription": "Embed the whole DocSpace to allow users to interact with all rooms, files, and settings.",
-  "Editor": "Editor",
   "EditorDescription": "Embed an editor to allow users to edit a file from the corresponding room.",
   "ElementCalledAfterClicking": "The element will be called after clicking",
   "ElementItself": "The element itself",

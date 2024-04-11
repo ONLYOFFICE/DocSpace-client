@@ -32,7 +32,6 @@
   "RoleCommentator": "Reageerder",
   "RoleCommentatorDescription": "Bewerkingen met bestaande bestanden: bekijken, opmerkingen plaatsen.",
   "RoleDocSpaceAdminDescription": "DocSpace beheerders hebben toegang tot DocSpace instellingen, kunnen ruimtes beheren en archiveren, nieuwe gebruikers uitnodigen en rollen onder hun niveau toewijzen. Alle beheerders hebben toegang tot de Persoonlijke sectie.",
-  "RoleEditor": "Editor",
   "RoleEditorDescription": "Bewerkingen met bestaande bestanden: bekijken, bewerken, formulieren invullen, beoordelen, opmerkingen plaatsen.",
   "RoleFormFiller": "Formuliervuller",
   "RoleFormFillerDescription": "Bewerkingen met bestaande bestanden: bekijken, formulieren invullen, bekijken, opmerkingen plaatsen.",

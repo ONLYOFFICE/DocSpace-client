@@ -32,7 +32,6 @@
   "RoleCommentator": "Şərhçi",
   "RoleCommentatorDescription": "Mövcud fayllarla əməliyyatlar: baxış, şərh.",
   "RoleDocSpaceAdminDescription": "DocSpace adminləri DocSpace parametrlərinə daxil ola, otaqları idarə edə və arxivləşdirə, yeni istifadəçiləri dəvət edə və öz səviyyələrindən aşağı rollar təyin edə bilərlər. Bütün idarəçilərin Şəxsi bölməyə girişi var.",
-  "RoleEditor": "Redaktor",
   "RoleEditorDescription": "Mövcud fayllarla əməliyyatlar: baxmaq, redaktə etmək, formaları doldurmaq, nəzərdən keçirmək, şərh etmək.",
   "RoleFormFiller": "Forma doldurucu",
   "RoleFormFillerDescription": "Mövcud fayllarla əməliyyatlar: baxmaq, formaları doldurmaq, nəzərdən keçirmək, şərh etmək.",

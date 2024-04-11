@@ -31,7 +31,6 @@
   "Descending": "Descendente",
   "DisplayColumns": "Mostrar columnas en una fila de archivo",
   "DocspaceDescription": "Incruste todo el DocSpace para permitir a los usuarios interactuar con todas las salas, archivos y configuraciones.",
-  "Editor": "Editor",
   "EditorDescription": "Incruste un editor para permitir a los usuarios editar un archivo desde la sala correspondiente.",
   "ElementCalledAfterClicking": "El elemento será llamado después de hacer clic.",
   "ElementItself": "El elemento en sí",

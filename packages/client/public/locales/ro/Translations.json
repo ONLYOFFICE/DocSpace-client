@@ -32,7 +32,6 @@
   "RoleCommentator": "Comentator",
   "RoleCommentatorDescription": "Operaţii cu fişiere existente: vizualizare, comentare.",
   "RoleDocSpaceAdminDescription": "Administratorii DocSpace pot accesa setările DocSpace, gestiona și arhiva săli, invita noi utilizatori și atribui roluri în funcţie de nivelul lor. Toţi administratorii pot accesa secţiunea Personal.",
-  "RoleEditor": "Editor",
   "RoleEditorDescription": "Operaţii cu fişiere existente: vizualizare, editare, completare formulare, revizuire, comentare.",
   "RoleFormFiller": "Form filler",
   "RoleFormFillerDescription": "Operaţii cu fişiere existente: vizualizare, completare formulare, revizuire, comentare.",

@@ -32,7 +32,6 @@
   "RoleCommentator": "Comentarista",
   "RoleCommentatorDescription": "Operaciones con archivos existentes: visualización, comentarios.",
   "RoleDocSpaceAdminDescription": "Los administradores de DocSpace pueden acceder a la configuración de DocSpace, gestionar y archivar salas, invitar a nuevos usuarios y asignar roles a un nivel inferior al suyo. Todos los administradores tienen acceso a la sección Personal. ",
-  "RoleEditor": "Editor",
   "RoleEditorDescription": "Operaciones con archivos existentes: visualización, edición, relleno de formularios, revisión, comentarios.",
   "RoleFormFiller": "Rellenador de formularios",
   "RoleFormFillerDescription": "Operaciones con archivos existentes: visualización, relleno de formularios, revisión, comentarios.",

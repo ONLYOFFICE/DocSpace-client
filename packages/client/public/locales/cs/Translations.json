@@ -32,7 +32,6 @@
   "RoleCommentator": "Komentátor",
   "RoleCommentatorDescription": "Operace s existujícími soubory: prohlížení, komentování.",
   "RoleDocSpaceAdminDescription": "Správci DocSpace mají přístup k nastavení DocSpace, mohou spravovat a archivovat místnosti, zvát nové uživatele a přidělovat role pod svou úrovní. Všichni správci mají přístup do sekce Osobní.",
-  "RoleEditor": "Editor",
   "RoleEditorDescription": "Operace s existujícími soubory: prohlížení, editace, vyplňování formulářů, prohlížení, komentování.",
   "RoleFormFiller": "Výplň formuláře",
   "RoleFormFillerDescription": "Operace s existujícími soubory: prohlížení, vyplňování formulářů, prohlížení, komentování.",

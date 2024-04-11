@@ -32,7 +32,6 @@
   "RoleCommentator": "Komentētājs",
   "RoleCommentatorDescription": "Darbības ar esošajiem failiem: skatīšana, komentēšana.",
   "RoleDocSpaceAdminDescription": "DocSpace administratori var piekļūt DocSpace iestatījumiem, pārvaldīt un arhivēt telpas, uzaicināt jaunus lietotājus un piešķirt lomas zem viņu līmeņa. Visiem administratoriem ir piekļuve sadaļai Personisks (Personal).",
-  "RoleEditor": "Redaktors",
   "RoleEditorDescription": "Darbības ar esošajiem failiem: skatīšana, rediģēšana, veidlapu aizpildīšana, pārskatīšana, komentēšana.",
   "RoleFormFiller": "Veidlapas aizpildītājs",
   "RoleFormFillerDescription": "Darbības ar esošajiem failiem: skatīšana, veidlapu aizpildīšana, pārskatīšana, komentēšana.",

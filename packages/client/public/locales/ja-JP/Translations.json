@@ -32,7 +32,6 @@
   "RoleCommentator": "コメンテーター",
   "RoleCommentatorDescription": "既存ファイルに対する操作：閲覧、コメント。",
   "RoleDocSpaceAdminDescription": "DocSpaceの管理者は、DocSpaceの設定、ルームの管理とアーカイブ、新しいユーザーの招待、自分のレベル以下の役割の割り当てにアクセスできます。すべての管理者は、「個人」セクションにアクセスすることができます。",
-  "RoleEditor": "編集者",
   "RoleEditorDescription": "既存ファイルに対する操作：閲覧、編集、フォームへの記入、レビュー、コメント。",
   "RoleFormFiller": "フォーム記入用",
   "RoleFormFillerDescription": "既存ファイルに対する操作：閲覧、フォームへの記入、レビュー、コメント。",

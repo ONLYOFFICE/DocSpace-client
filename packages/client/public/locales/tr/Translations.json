@@ -32,7 +32,6 @@
   "RoleCommentator": "Yorumcu",
   "RoleCommentatorDescription": "Mevcut dosyalarla işlemler: görüntüleme, yorum yapma.",
   "RoleDocSpaceAdminDescription": "DocSpace yöneticileri, DocSpace ayarlarına erişebilir, odaları yönetebilir ve arşivleyebilir, yeni kullanıcılar davet edebilir ve kendi seviyelerinin altında roller atayabilir. Tüm yöneticilerin Kişisel bölümüne erişimi vardır.",
-  "RoleEditor": "Editör",
   "RoleEditorDescription": "Mevcut dosyalarla işlemler: görüntüleme, düzenleme, form doldurma, gözden geçirme, yorum yapma.",
   "RoleFormFiller": "Form doldurucu",
   "RoleFormFillerDescription": "Mevcut dosyalarla işlemler: görüntüleme, form doldurma, gözden geçirme, yorum yapma.",

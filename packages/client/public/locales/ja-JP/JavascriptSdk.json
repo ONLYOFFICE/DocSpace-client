@@ -31,7 +31,6 @@
   "Descending": "下降",
   "DisplayColumns": "ファイル行の列の表示",
   "DocspaceDescription": "DocSpace全体を埋め込み、ユーザーがすべてのルーム、ファイル、設定を操作できるようにします。",
-  "Editor": "エディタ",
   "EditorDescription": "対応するルームからファイルを編集できるようにエディタを埋め込みます。",
   "ElementCalledAfterClicking": "クリックした後に要素が呼び出されます",
   "ElementItself": "要素自体",

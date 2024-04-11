@@ -66,7 +66,7 @@ const DocSpace = (props) => {
 
   setDocumentTitle(t("JavascriptSdk"));
 
-  const scriptUrl = `${window.location.origin}/static/scripts/api.js`;
+  const scriptUrl = `${window.location.origin}/static/scripts/sdk/1.0.0/api.js`;
 
   const dataDimensions = [
     { key: "percent", label: "%", default: true },

@@ -41,7 +41,7 @@ import type {
 import useTheme from "@/hooks/useTheme";
 import useDeviceType from "@/hooks/useDeviceType";
 import useI18N from "@/hooks/useI18N";
-import useWhiteLabel from "@/hooks/useWhiteLabel";
+
 import FirebaseHelper from "@docspace/shared/utils/firebase";
 
 import pkg from "../../package.json";
@@ -102,4 +102,3 @@ export default function GlobalError({ error }: { error: Error }) {
     </html>
   );
 }
-

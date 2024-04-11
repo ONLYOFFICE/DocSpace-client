@@ -30,15 +30,12 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
-import FirebaseHelper from "@docspace/shared/utils/firebase";
-import { TFirebaseSettings } from "@docspace/shared/api/settings/types";
 import AppLoader from "@docspace/shared/components/app-loader";
 
 import { TResponse } from "@/types";
 import useError from "@/hooks/useError";
 
 import useDeviceType from "@/hooks/useDeviceType";
-import useWhiteLabel from "@/hooks/useWhiteLabel";
 import useRootInit from "@/hooks/useRootInit";
 import useDeepLink from "@/hooks/useDeepLink";
 import useSelectFileDialog from "@/hooks/useSelectFileDialog";
@@ -213,4 +210,3 @@ const Root = ({
 };
 
 export default Root;
-

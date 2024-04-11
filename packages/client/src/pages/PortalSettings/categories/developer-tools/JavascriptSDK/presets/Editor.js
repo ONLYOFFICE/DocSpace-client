@@ -69,7 +69,7 @@ import {
 } from "./StyledPresets";
 
 const Editor = (props) => {
-  const { t, setDocumentTitle, getFilePrimaryLink } = props;
+  const { t, setDocumentTitle, getFilePrimaryLink, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -237,11 +237,21 @@ const Editor = (props) => {
   );
 
   const code = (
-    <CodeWrapper>
+    <CodeWrapper height="fit-content">
       <CategorySubHeader className="copy-window-code">
-        {t("CopyWindowCode")}
+        {`HTML ${t("CodeTitle")}`}
       </CategorySubHeader>
+      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
+        {t("HtmlCodeDescription")}
+      </Text>
       <Textarea value={codeBlock} heightTextArea={153} />
+      <CategorySubHeader className="copy-window-code">
+        {`JavaScript ${t("CodeTitle")}`}
+      </CategorySubHeader>
+      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
+        {t("JavaScriptCodeDescription")}
+      </Text>
+      <CodeBlock config={config} />
     </CodeWrapper>
   );
 
@@ -250,11 +260,6 @@ const Editor = (props) => {
       key: "preview",
       title: t("Common:Preview"),
       content: preview,
-    },
-    {
-      key: "js",
-      title: "JavaScript",
-      content: <CodeBlock config={config} />,
     },
     {
       key: "code",

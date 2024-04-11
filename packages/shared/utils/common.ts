@@ -71,7 +71,6 @@ import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie } from "./cookie";
 import { checkIsSSR } from "./device";
-import { AvatarRole } from "../components/avatar/Avatar.enums";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -124,8 +123,8 @@ export const isPublicRoom = () => {
 };
 
 export const getUserTypeLabel = (
-  role: AvatarRole | undefined,
-  t: (key: string) => string,
+  role: "owner" | "admin" | "user" | "collaborator" | "manager" | undefined,
+  t: TTranslation,
 ) => {
   switch (role) {
     case "owner":

@@ -28,8 +28,8 @@ import { useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
-import EmptyScreenGroupSvgUrl from "PUBLIC_DIR/images/empty_screen_groups.svg?url";
-import EmptyScreenGroupSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_groups_dark.svg?url";
+import EmptyScreenGroupSvgUrl from "PUBLIC_DIR/images/empty_screen_groups_75-75.svg?url";
+import EmptyScreenGroupSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_groups_dark_75-75.svg?url";
 
 import api from "../../api";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";

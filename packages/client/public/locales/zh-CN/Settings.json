@@ -98,6 +98,7 @@
   "DeleteThemeNotice": "主题将被永久删除。您将无法撤销此操作。",
   "DiskSpaceUsed": "已用的磁盘空间",
   "DNSSettings": "DNS 设置",
+  "DNSSettingsDescription": "为您的协作空间设置一个备用URL 地址。 向我们的支持团队发送请求，获得关于设置方面的帮助。",
   "DNSSettingsHint": "输入域名，如下所示：",
   "DNSSettingsMobile": "您可向我们的支持团队发送请求，我们将有专员帮助您进行设置。",
   "DNSSettingsNavDescription": "可通过 DNS 设置为门户网站设置替代 URL。",

@@ -40,7 +40,6 @@ import { inject, observer } from "mobx-react";
 const StyledContainer = styled.div`
   user-select: none;
   width: 100%;
-
   height: 100dvh;
 
   #customScrollBar {
@@ -112,6 +111,7 @@ const Layout = (props) => {
     const bodyEl = document.getElementsByTagName("body")[0];
 
     htmlEl.style.height = bodyEl.style.height = "100dvh";
+
     htmlEl.style.overflow = "hidden";
   }, []);
 

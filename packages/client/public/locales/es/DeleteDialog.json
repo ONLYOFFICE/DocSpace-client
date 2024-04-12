@@ -1,6 +1,10 @@
 {
+  "DeleteAllGroupDescription": "Se eliminarán los grupos seleccionados. Los usuarios de los grupos no serán eliminados de DocSpace. ¿Está seguro de que desea continuar?",
+  "DeleteAllGroupsTitle": "Eliminar grupos",
   "DeleteFile": "Está a punto de eliminar este archivo.",
   "DeleteFolder": "Está a punto de eliminar esta carpeta. ",
+  "DeleteGroupDescription": "El grupo {{groupName}} se eliminará. Los usuarios del grupo no serán eliminados de DocSpace. ¿Está seguro de que desea continuar? ",
+  "DeleteGroupTitle": "Eliminar grupo",
   "DeleteItems": "Está a punto de eliminar estos elementos. ",
   "DeleteItemsSharedNote": "Por favor, tenga en cuenta que si los ha compartido con alguien, dejarán de estar disponibles.",
   "DeleteRoom": "Está a punto de eliminar esta sala. No podrá restaurarla.",

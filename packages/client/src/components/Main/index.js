@@ -28,7 +28,7 @@ import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
 const StyledMain = styled.main`
-  height: 100%;
+  height: ${(props) => (props.isFrame ? "100dvh" : "100%")};
   width: 100vw;
   z-index: 0;
   display: flex;

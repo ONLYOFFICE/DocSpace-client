@@ -90,7 +90,7 @@ const StyledModalDialogContainer = styled(ModalDialogContainer)`
 
 const DeleteProfileEverDialogComponent = (props) => {
   const {
-    users,
+    usersToDelete,
     t,
     onClose,
     tReady,
@@ -113,10 +113,10 @@ const DeleteProfileEverDialogComponent = (props) => {
 
   const needReassignData =
     onlyOneUser &&
-    (users[0].isRoomAdmin ||
-      users[0].isOwner ||
-      users[0].isAdmin ||
-      users[0].isCollaborator);
+    (usersToDelete[0].isRoomAdmin ||
+      usersToDelete[0].isOwner ||
+      usersToDelete[0].isAdmin ||
+      usersToDelete[0].isCollaborator);
 
   const onDeleteUser = (id) => {
     const filter = Filter.getDefault();
@@ -156,11 +156,11 @@ const DeleteProfileEverDialogComponent = (props) => {
     }
 
     if (!needReassignData) {
-      onlyOneUser ? onDeleteUser(users[0].id) : onDeleteUsers(userIds);
+      onlyOneUser ? onDeleteUser(usersToDelete[0].id) : onDeleteUsers(userIds);
       return;
     }
 
-    setDialogData(users[0]);
+    setDialogData(usersToDelete[0]);
 
     setIsDeletingUserWithReassignment(true);
     setDataReassignmentDialogVisible(true);
@@ -169,7 +169,7 @@ const DeleteProfileEverDialogComponent = (props) => {
   };
 
   const onClickReassignData = () => {
-    setDialogData(users[0]);
+    setDialogData(usersToDelete[0]);
 
     setDataReassignmentDialogVisible(true);
     setDataReassignmentDeleteProfile(true);
@@ -191,7 +191,7 @@ const DeleteProfileEverDialogComponent = (props) => {
           needReassignData={needReassignData}
           onClickReassignData={onClickReassignData}
           deleteWithoutReassign={deleteWithoutReassign}
-          users={users}
+          users={usersToDelete}
           onlyOneUser={onlyOneUser}
           t={t}
         />
@@ -243,11 +243,17 @@ export default inject(({ peopleStore }, { users }) => {
     setDialogData,
   } = dialogStore;
 
-  const { getUsersToRemoveIds: userIds, setSelected } = selectionStore;
+  const {
+    getUsersToRemoveIds: userIds,
+    setSelected,
+    selection,
+  } = selectionStore;
 
-  const onlyUsers = users.every((el) => el.role === "user");
-  const deleteWithoutReassign = users.length > 1 && !onlyUsers;
-  const onlyOneUser = users.length === 1;
+  const usersToDelete = users.length ? users : selection;
+
+  const onlyUsers = usersToDelete.every((el) => el.role === "user");
+  const deleteWithoutReassign = usersToDelete.length > 1 && !onlyUsers;
+  const onlyOneUser = usersToDelete.length === 1;
 
   return {
     setDataReassignmentDialogVisible,
@@ -263,5 +269,6 @@ export default inject(({ peopleStore }, { users }) => {
     deleteWithoutReassign,
     onlyOneUser,
     userIds,
+    usersToDelete,
   };
 })(observer(DeleteProfileEverDialog));

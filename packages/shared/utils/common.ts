@@ -584,10 +584,17 @@ export function getLoginLink(token: string, code: string) {
   );
 }
 
+const FRAME_NAME = "frameDocSpace";
+
+const getFrameId = () => {
+  return window.self.name.replace(`${FRAME_NAME}__#`, "");
+};
+
 export const frameCallbackData = (methodReturnData: unknown) => {
   window.parent.postMessage(
     JSON.stringify({
       type: "onMethodReturn",
+      frameId: getFrameId(),
       methodReturnData,
     }),
     "*",
@@ -598,6 +605,7 @@ export const frameCallEvent = (eventReturnData: unknown) => {
   window.parent.postMessage(
     JSON.stringify({
       type: "onEventReturn",
+      frameId: getFrameId(),
       eventReturnData,
     }),
     "*",
@@ -611,6 +619,7 @@ export const frameCallCommand = (
   window.parent.postMessage(
     JSON.stringify({
       type: "onCallCommand",
+      frameId: getFrameId(),
       commandName,
       commandData,
     }),

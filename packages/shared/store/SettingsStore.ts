@@ -1013,7 +1013,9 @@ class SettingsStore {
   };
 
   get isFrame() {
-    const isFrame = this.frameConfig?.name === window.name;
+    const isFrame = this.frameConfig
+      ? window.name.includes(this.frameConfig?.name)
+      : false;
 
     if (window.DocSpaceConfig) window.DocSpaceConfig.isFrame = isFrame;
 

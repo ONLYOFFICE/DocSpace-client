@@ -26,14 +26,21 @@
 
 import Script from "next/script";
 
+import runtime from "../../../runtime.json";
+
+const hashDate = runtime?.date;
+
 const Scripts = () => {
   return (
     <>
-      <Script id="browser-detector" src="/static/scripts/browserDetector.js" />
+      <Script
+        id="browser-detector"
+        src={`/static/scripts/browserDetector.js?hash=${runtime?.checksums?.["browserDetector.js"] ?? hashDate}`}
+      />
       <Script id="docspace-config">
         {`
           console.log("It's DocEditor INIT");
-          fetch("/static/scripts/config.json")
+          fetch("/static/scripts/config.json?hash=${runtime?.checksums["config.json"] ?? hashDate}")
             .then((response) => {
               if (!response.ok) {
                 throw new Error("HTTP error " + response.status);
@@ -41,6 +48,7 @@ const Scripts = () => {
               return response.json();
             })
             .then((config) => {
+              console.log(config)
               window.DocSpaceConfig = {
                 ...config,
               };

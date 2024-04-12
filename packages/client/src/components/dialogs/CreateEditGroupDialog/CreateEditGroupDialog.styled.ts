@@ -24,40 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
 import styled from "styled-components";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
-const StyledMain = styled.main`
-  height: ${(props) => (props.isFrame ? "100dvh" : "100%")};
-  width: 100vw;
-  z-index: 0;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-
-  .main-container {
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    flex-direction: row;
-    box-sizing: border-box;
-  }
+export const StyledModal = styled(ModalDialog)`
+  user-select: none;
 `;
-
-const Main = (props) => {
-  return <StyledMain className="main" {...props} />;
-};
-
-Main.displayName = "Main";
-
-export default inject(({ settingsStore, bannerStore }) => {
-  const { isBannerVisible } = bannerStore;
-
-  const { mainBarVisible, isFrame } = settingsStore;
-  return {
-    mainBarVisible,
-    isBannerVisible,
-    isFrame,
-  };
-})(observer(Main));

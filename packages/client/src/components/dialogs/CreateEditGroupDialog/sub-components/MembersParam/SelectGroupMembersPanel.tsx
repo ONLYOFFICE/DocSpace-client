@@ -38,7 +38,7 @@ interface SelectGroupMembersPanelProps {
   isVisible: boolean;
   onClose: () => void;
   onParentPanelClose: () => void;
-
+  groupManager?: TUser;
   groupMembers: TUser[];
   setGroupMembers: (groupMembers: (TUser | TSelectorItem)[]) => void;
 }
@@ -47,7 +47,7 @@ const SelectGroupMembersPanel = ({
   isVisible,
   onClose,
   onParentPanelClose,
-
+  groupManager,
   groupMembers,
   setGroupMembers,
 }: SelectGroupMembersPanelProps) => {
@@ -74,9 +74,11 @@ const SelectGroupMembersPanel = ({
   };
 
   const invitedUsers = React.useMemo(
-    () => groupMembers.map((g) => g.id),
+    () => [...groupMembers].map((g) => g?.id),
     [groupMembers],
   );
+
+  if (groupManager) invitedUsers.push(groupManager.id);
 
   return (
     <Portal

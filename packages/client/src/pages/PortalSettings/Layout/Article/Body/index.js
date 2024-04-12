@@ -141,7 +141,10 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["5-0"]);
       }
 
-      if (location.pathname.includes("management")) {
+      if (
+        location.pathname.includes("management") &&
+        !location.pathname.includes("profile")
+      ) {
         setSelectedKeys(["6-0"]);
       }
 
@@ -167,6 +170,8 @@ const ArticleBodyContent = (props) => {
     location.pathname,
     selectedKeys,
   ]);
+
+  console.log(selectedKeys);
 
   const onSelect = (value, e) => {
     if (isArrayEqual([value], selectedKeys)) {

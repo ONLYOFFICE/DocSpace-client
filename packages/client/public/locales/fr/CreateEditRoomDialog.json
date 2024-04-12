@@ -15,6 +15,7 @@
   "MakeRoomPrivateDescription": "Tous les fichiers de cette salle seront chiffrés.",
   "MakeRoomPrivateLimitationsWarningDescription": "Cette fonction vous permet d’inviter uniquement les utilisateurs existants de DocSpace. Après avoir créé une salle, vous ne pourrez pas modifier la liste des utilisateurs.",
   "MakeRoomPrivateTitle": "Rendre la salle privée",
+  "PeopleSelectorInfo": "Seul l'administrateur d'une salle ou l'administrateur de DocSpace peut devenir le propriétaire d'une salle",
   "PublicRoomBarDescription": "Cette salle est accessible à toute personne disposant du lien. Les utilisateurs externes auront l'autorisation Lecture seule pour tous les fichiers.",
   "PublicRoomDescription": "Invitez les utilisateurs via des liens externes à consulter les documents sans inscription. Vous pouvez également intégrer cette salle dans n'importe quelle interface web.",
   "PublicRoomSystemFoldersDescription": "Les dossiers système stockent des copies de formulaires à différents stades d'achèvement. Les formulaires en cours de remplissage sont stockés dans le dossier En cours, et les formulaires complétés sont stockés dans le dossier Terminés.",

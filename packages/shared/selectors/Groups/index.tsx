@@ -153,7 +153,7 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
         ...headerProps,
         headerLabel: headerProps?.headerLabel || t("Common:Groups"),
       }}
-      alwaysShowFooter={itemsList.length !== 0}
+      alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
       withSearch
       searchPlaceholder={t("Common:Search")}
       onSearch={onSearch}

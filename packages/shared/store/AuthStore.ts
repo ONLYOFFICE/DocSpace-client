@@ -81,6 +81,8 @@ class AuthStore {
 
   skipModules = false;
 
+  clientError = false;
+
   constructor(
     userStoreConst: UserStore,
     currentTariffStatusStoreConst: CurrentTariffStatusStore,
@@ -492,6 +494,10 @@ class AuthStore {
   getCapabilities = async () => {
     const capabilities = await api.settings.getCapabilities();
     if (capabilities) this.setCapabilities(capabilities);
+  };
+
+  setClientError = (clientError: boolean) => {
+    this.clientError = clientError;
   };
 }
 

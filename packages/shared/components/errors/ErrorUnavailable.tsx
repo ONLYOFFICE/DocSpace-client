@@ -27,9 +27,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import DocspaceLogo from "../docspace-logo/DocspaceLogo";
 import ErrorContainer from "../error-container/ErrorContainer";
-
 import { ErrorUnavailableWrapper } from "./Errors.styled";
 
 const ErrorUnavailable = () => {
@@ -38,7 +36,6 @@ const ErrorUnavailable = () => {
   return (
     ready && (
       <ErrorUnavailableWrapper>
-        <DocspaceLogo />
         <ErrorContainer headerText={t("ErrorDeactivatedText")} />
       </ErrorUnavailableWrapper>
     )

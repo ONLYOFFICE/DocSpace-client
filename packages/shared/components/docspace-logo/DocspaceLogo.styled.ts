@@ -24,17 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { mobile } from "@docspace/shared/utils";
 
-export const StyledWrapper = styled.div`
-  .logo-wrapper {
-    width: 386px;
-    height: 44px;
-  }
-
+export const StyledWrapper = styled.div<{
+  currentDeviceType?: string;
+  isResizing?: boolean;
+}>`
   @media ${mobile} {
-    display: none;
+    ${(props) => !props.isResizing && "display: none"};
+
+    ${(props) =>
+      props.currentDeviceType === "mobile" &&
+      props.isResizing &&
+      css`
+        display: flex;
+        background-color: ${props.theme.header.backgroundColor};
+        height: ${props.theme.header.height};
+        position: fixed;
+        top: 0;
+        width: 100%;
+        align-content: center;
+        text-align: center;
+        img {
+          height: 24px;
+          margin: auto;
+        }
+      `}
   }
 `;

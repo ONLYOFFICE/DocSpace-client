@@ -452,8 +452,8 @@ const ArticleMainButtonContent = (props) => {
       icon: FormBlankReactSvgUrl,
       label: t("Translations:SubNewForm"),
       onClick: onCreate,
-      action: "docxf",
-      key: "docxf",
+      action: "pdf",
+      key: "pdf",
     };
 
     const showSelectorDocx = {

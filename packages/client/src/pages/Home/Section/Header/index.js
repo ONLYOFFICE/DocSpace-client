@@ -355,7 +355,7 @@ const SectionHeaderContent = (props) => {
 
   const createPresentation = () => onCreate("pptx");
 
-  const createForm = () => onCreate("docxf");
+  const createForm = () => onCreate("pdf");
 
   const createFormFromFile = () => {
     setSelectFileDialogVisible(true);

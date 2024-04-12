@@ -28,8 +28,6 @@ import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
 const StyledMain = styled.main`
-  // need for support 102 Chrome
-  height: 100vh;
   height: ${(props) => (props.isFrame ? "100dvh" : "100%")};
   width: 100vw;
   z-index: 0;

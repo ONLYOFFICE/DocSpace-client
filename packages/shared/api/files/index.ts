@@ -1386,3 +1386,12 @@ export async function getFilesUsedSpace() {
 
   return res;
 }
+
+export async function startFilling(fileId: string | number): Promise<void> {
+  const options: AxiosRequestConfig = {
+    method: "put",
+    url: `files/file/${fileId}/startfilling`,
+  };
+
+  await request(options);
+}

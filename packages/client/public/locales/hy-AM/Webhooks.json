@@ -45,6 +45,7 @@
   "UnselectAll": "Ապաընտրել բոլորը",
   "URL": "URL",
   "ViewRawPayload": "Դիտեք չմշակված ծանրաբեռնվածությունը",
+  "WebhookCreated": "Webhook-ը ստեղծվել է",
   "WebhookCreationHint": "Այս webhook-ը կհատկացվի DocSpace-ի բոլոր իրադարձություններին",
   "WebhookDetails": "Webhook մանրամասները",
   "WebhookEditedSuccessfully": "Webhook-ի կոնֆիգուրացիան հաջողությամբ խմբագրվել է",

@@ -102,7 +102,7 @@ export const StyledInfo = styled.div`
 
   .rows-container {
     display: grid;
-    grid-template-columns: minmax(75px, auto) 1fr;
+    grid-template-columns: minmax(75px, auto) minmax(0, 1fr);
     gap: 24px;
     max-width: 100%;
 

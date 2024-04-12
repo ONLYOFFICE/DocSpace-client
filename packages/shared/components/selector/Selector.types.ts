@@ -424,6 +424,7 @@ type TSelectorItemType =
       isAdmin: boolean;
       isVisitor: boolean;
       isCollaborator: boolean;
+      isRoomAdmin: boolean;
       access?: ShareAccessRights | string | number;
       isFolder?: undefined;
       parentId?: undefined;
@@ -443,6 +444,7 @@ type TSelectorItemType =
       isAdmin?: undefined;
       isVisitor?: undefined;
       isCollaborator?: undefined;
+      isRoomAdmin?: undefined;
       access?: undefined;
       isFolder?: undefined;
       parentId?: string | number;
@@ -462,6 +464,7 @@ type TSelectorItemType =
       isAdmin?: undefined;
       isVisitor?: undefined;
       isCollaborator?: undefined;
+      isRoomAdmin?: undefined;
       access?: undefined;
       isFolder: boolean;
       parentId?: string | number;
@@ -481,6 +484,7 @@ type TSelectorItemType =
       isAdmin?: undefined;
       isVisitor?: undefined;
       isCollaborator?: undefined;
+      isRoomAdmin?: undefined;
       access?: undefined;
       isFolder: boolean;
       parentId?: string | number;
@@ -500,6 +504,7 @@ type TSelectorItemType =
       isAdmin?: undefined;
       isVisitor?: undefined;
       isCollaborator?: undefined;
+      isRoomAdmin?: undefined;
       access?: undefined;
       isFolder?: undefined;
       parentId?: string | number;

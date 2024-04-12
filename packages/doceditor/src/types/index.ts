@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
-  TDocServiceLocation,
   TFile,
   TFileSecurity,
   TFilesSettings,
@@ -210,12 +209,12 @@ export type EditorProps = {
   isSharingAccess?: boolean;
   errorMessage?: string;
 
-  onSDKRequestSharingSettings: () => void;
-  onSDKRequestSaveAs: (event: object) => void;
-  onSDKRequestInsertImage: (event: object) => void;
-  onSDKRequestSelectSpreadsheet: (event: object) => void;
-  onSDKRequestSelectDocument: (event: object) => void;
-  onSDKRequestReferenceSource: (event: object) => void;
+  onSDKRequestSharingSettings?: () => void;
+  onSDKRequestSaveAs?: (event: object) => void;
+  onSDKRequestInsertImage?: (event: object) => void;
+  onSDKRequestSelectSpreadsheet?: (event: object) => void;
+  onSDKRequestSelectDocument?: (event: object) => void;
+  onSDKRequestReferenceSource?: (event: object) => void;
 };
 
 export type TEventData = {

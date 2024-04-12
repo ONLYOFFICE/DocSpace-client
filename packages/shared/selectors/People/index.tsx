@@ -382,7 +382,7 @@ const PeopleSelector = ({
   return (
     <Selector
       id={id}
-      alwaysShowFooter
+      alwaysShowFooter={itemsList.length !== 0}
       className={className}
       style={style}
       renderCustomItem={renderCustomItem}

@@ -514,7 +514,7 @@ const AddUsersPanel = ({
       >
         <Selector
           withHeader
-          alwaysShowFooter
+          alwaysShowFooter={itemsList.length !== 0}
           headerProps={{
             // Todo: Update groups empty screen texts when they are ready
             headerLabel: t("Common:ListAccounts"),

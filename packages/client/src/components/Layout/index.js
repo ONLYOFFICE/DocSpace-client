@@ -40,9 +40,6 @@ import { inject, observer } from "mobx-react";
 const StyledContainer = styled.div`
   user-select: none;
   width: 100%;
-
-  // need for support 102 Chrome
-  height: 100vh;
   height: 100dvh;
 
   #customScrollBar {
@@ -113,16 +110,8 @@ const Layout = (props) => {
     const htmlEl = document.getElementsByTagName("html")[0];
     const bodyEl = document.getElementsByTagName("body")[0];
 
-    const isSupported =
-      "CSS" in window &&
-      "supports" in window.CSS &&
-      window.CSS.supports("height: 100dvh");
+    htmlEl.style.height = bodyEl.style.height = "100dvh";
 
-    console.log(isSupported);
-
-    htmlEl.style.height = bodyEl.style.height = isSupported
-      ? "100dvh"
-      : "100vh";
     htmlEl.style.overflow = "hidden";
   }, []);
 

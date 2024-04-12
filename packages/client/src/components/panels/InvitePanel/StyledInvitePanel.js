@@ -40,8 +40,7 @@ import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import CrossIconMobile from "PUBLIC_DIR/images/cross.react.svg";
 import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
-import { isMobile, desktop } from "@docspace/shared/utils";
-
+import { isMobile, desktop, commonInputStyles } from "@docspace/shared/utils";
 import Base from "@docspace/shared/themes/base";
 
 const fillAvailableWidth = css`
@@ -234,6 +233,31 @@ const StyledInviteInput = styled.div`
     > input {
       height: 30px;
     }
+  }
+
+  display: flex;
+  border: 1px solid rgb(208, 213, 218);
+  border-radius: 3px;
+
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .append {
+    display: ${(props) => (props.isShowCross ? "flex" : "none")};
+    align-items: center;
+    padding-right: 8px;
+    cursor: default;
+  }
+
+  ${commonInputStyles}
+
+  :focus-within {
+    border-color: ${(props) => props.theme.inputBlock.borderColor};
   }
 `;
 
@@ -498,12 +522,16 @@ const StyledInviteLanguage = styled.div`
       padding-left: 6px;
       padding-right: 6px;
     }
-    .combo-button-label {
+
+    .combo-buttons_arrow-icon {
+      margin-left: 0px;
+    }
+
+    .combo-button_closed:not(:hover) .combo-button-label {
       color: ${(props) =>
         props.theme.createEditRoomDialog.commonParam.descriptionColor};
     }
-    .combo-buttons_arrow-icon {
-      margin-left: 0px;
+    .combo-button_closed:not(:hover) .combo-buttons_arrow-icon {
       svg {
         path {
           fill: ${(props) =>

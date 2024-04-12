@@ -602,11 +602,7 @@ const Selector = ({
           selectedItemsCount={newSelectedItems.length}
           onSubmit={onSubmitAction}
           submitButtonLabel={submitButtonLabel}
-          disableSubmitButton={
-            alwaysShowFooter
-              ? newSelectedItems.length === 0 || disableSubmitButton
-              : disableSubmitButton
-          }
+          disableSubmitButton={disableSubmitButton}
           submitButtonId={submitButtonId}
           requestRunning={requestRunning}
           // cancel button

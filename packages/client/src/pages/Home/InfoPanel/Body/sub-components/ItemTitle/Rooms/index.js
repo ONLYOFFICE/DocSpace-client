@@ -52,7 +52,7 @@ const RoomsItemHeader = ({
   setInviteUsersWarningDialogVisible,
   isPublicRoomType,
   roomsView,
-  setSelected,
+  setSelection,
   setBufferSelection,
   isArchive,
   hasLinks,
@@ -76,7 +76,7 @@ const RoomsItemHeader = ({
   const isRoomMembersPanel = selection?.isRoom && roomsView === "info_members";
 
   const onSelectItem = () => {
-    setSelected("none");
+    setSelection([]);
     setBufferSelection(selection);
   };
 
@@ -188,7 +188,7 @@ export default inject(
         (selectedFolderStore.roomType ??
           infoPanelStore.infoPanelSelection?.roomType) === RoomsType.PublicRoom,
 
-      setSelected: filesStore.setSelected,
+      setSelection: filesStore.setSelection,
       setBufferSelection: filesStore.setBufferSelection,
       isArchive,
       hasLinks: externalLinks.length,

@@ -306,7 +306,7 @@ const Dark: TTheme = {
     fontWeight: "500",
     textDecoration: "none",
     padding: "0",
-    borderRadius: "2px",
+    borderRadius: "3px",
     height: "40px",
     heightSmall: "32px",
     textAlign: "left",
@@ -355,10 +355,10 @@ const Dark: TTheme = {
 
     svg: {
       margin: "11px 8px",
-      width: "18px",
-      height: "18px",
-      minWidth: "18px",
-      minHeight: "18px",
+      width: "20px",
+      height: "20px",
+      minWidth: "20px",
+      minHeight: "20px",
       fill: darkBlack,
     },
   },
@@ -636,7 +636,7 @@ const Dark: TTheme = {
         b: 27,
         a: 0.4,
       },
-      blur: 18,
+      blur: 10,
     },
 
     content: {
@@ -2086,6 +2086,7 @@ const Dark: TTheme = {
       roleSelectorColor: "#a3a9ae",
       disabledRoleSelectorColor: "#a3a9ae",
       roleSelectorArrowColor: "#a3a9ae",
+      createLink: "#858585",
     },
 
     history: {

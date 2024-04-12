@@ -133,7 +133,10 @@ const DeliveryDatePicker = ({
     setIsCalendarOpen(false);
   };
 
-  const showTimePicker = () => setIsTimeOpen(true);
+  const showTimePicker = () => {
+    setIsApplied(false);
+    setIsTimeOpen(true);
+  };
 
   const CalendarElement = () => (
     <StyledCalendar
@@ -187,6 +190,17 @@ const DeliveryDatePicker = ({
     ) &&
     isEqualDates(filters.deliveryTo, filters.deliveryTo.clone().endOf("day"));
 
+  const isDefaultTime = isApplied
+    ? isEqualDates(
+        filters.deliveryFrom,
+        moment().tz(window.timezone).startOf("day"),
+      ) &&
+      isEqualDates(
+        filters.deliveryTo,
+        moment().tz(window.timezone).endOf("day"),
+      )
+    : true;
+
   const isTimeValid = filters.deliveryTo > filters.deliveryFrom;
 
   useEffect(() => {
@@ -214,8 +228,8 @@ const DeliveryDatePicker = ({
           />
         )}
         {filters.deliveryDate !== null &&
-          !isApplied &&
-          (isTimeOpen ? (
+          isDefaultTime &&
+          (isTimeOpen && !isApplied ? (
             <TimePickerCell>
               <span className="timePickerItem">
                 <Text

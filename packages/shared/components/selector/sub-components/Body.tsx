@@ -201,9 +201,7 @@ const Body = ({
 
       {isSearchLoading || isBreadCrumbsLoading ? (
         searchLoader
-      ) : withSearch ||
-        (itemsCount > 0 && withSearch) ||
-        (withSearch && isSearch) ? (
+      ) : withSearch && (itemsCount > 0 || isSearch) ? (
         <Search
           placeholder={searchPlaceholder}
           value={searchValue}

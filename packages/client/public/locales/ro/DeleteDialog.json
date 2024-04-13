@@ -1,6 +1,10 @@
 {
+  "DeleteAllGroupDescription": "Grupurile selectate vor fi șterse. Utilizatorii care fac parte din grupurile nu vor fi eliminați din DocSpace. Sigur doriţi să continuați?",
+  "DeleteAllGroupsTitle": "Ștergere grup",
   "DeleteFile": "Sunteţi pe cale să ştergeţi acest fişier. ",
   "DeleteFolder": "Sunteţi pe cale să ştergeţi acest dosar. ",
+  "DeleteGroupDescription": "Grupul {{groupName}} va fi șters. Utilizatorii care fac parte din acest grup nu vor fi eliminați din DocSpace. Sigur doriţi să continuați?",
+  "DeleteGroupTitle": "Ștergere grup",
   "DeleteItems": "Sunteţi pe cale să ştergeţi aceste elemente. ",
   "DeleteItemsSharedNote": "Rețineți că, dacă le-ați partajat cu altcineva, aceste vor deveni indisponibile.",
   "DeleteRoom": "Sunteţi pe cale să ştergeţi această sală. Nu o veţi putea restaura.",

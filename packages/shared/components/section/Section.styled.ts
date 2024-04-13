@@ -488,6 +488,21 @@ const tabletProps = css<{ viewAs?: TViewAs }>`
             padding-right: 0;
           `}
     z-index: 201;
+    @media ${mobile} {
+      min-width: 100vw;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: 0;
+              padding-right: 0;
+              padding-left: 32px;
+            `
+          : css`
+              margin-left: -16px;
+              padding-right: 16px;
+              padding-left: 16px;
+            `}
+    }
   }
   .section-body_filter {
     display: block;

@@ -12,6 +12,7 @@
   "CancelButtonText": "Text der Abbrechen-Schaltfläche",
   "Chat": "Chat",
   "Code": "Code zum Einfügen",
+  "CodeTitle": "code",
   "CopyWindowCode": "Fenster-Einbettungscode kopieren",
   "CreateSampleDocSpace": "Beispiel für die DocSpace-Einbettung erstellen",
   "CreateSampleEditor": "Beispiel für die Editor-Einbettung erstellen",

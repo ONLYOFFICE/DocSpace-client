@@ -26,7 +26,7 @@
 
 import moment from "moment-timezone";
 import React, { useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -85,6 +85,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     setFormCreationInfo,
     setConvertPasswordDialogVisible,
     version,
+    pagesWithoutNavMenu,
   } = rest;
 
   const theme = useTheme();
@@ -416,12 +417,18 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     ) : (
       <Toast />
     );
+  const location = useLocation();
+
+  const withoutNavMenu =
+    isEditor ||
+    pagesWithoutNavMenu ||
+    location.pathname === "/access-restricted";
 
   return (
     <Layout>
       {toast}
       {/* <ReactSmartBanner t={t} ready={ready} /> */}
-      {isEditor ? <></> : <NavMenu />}
+      {withoutNavMenu ? <></> : <NavMenu />}
       {currentDeviceType === DeviceType.mobile && <MainBar />}
       <IndicatorLoader />
       <ScrollToTop />
@@ -449,7 +456,14 @@ const ShellWrapper = inject(
   }) => {
     const { i18n } = useTranslation();
 
-    const { init, isLoaded, setProductVersion, language, version } = authStore;
+    const {
+      init,
+      isLoaded,
+      setProductVersion,
+      language,
+      version,
+      clientError,
+    } = authStore;
 
     const {
       personal,
@@ -465,6 +479,8 @@ const ShellWrapper = inject(
       currentDeviceType,
       isFrame,
       frameConfig,
+      isPortalDeactivate,
+      isPortalRestoring,
     } = settingsStore;
 
     const isBase = settingsStore.theme.isBase;
@@ -478,13 +494,20 @@ const ShellWrapper = inject(
           : "Base"
       : userStore?.user?.theme;
 
-    const { setPortalTariff } = currentTariffStatusStore;
+    const { setPortalTariff, isNotPaidPeriod } = currentTariffStatusStore;
 
     const {
       setConvertPasswordDialogVisible,
 
       setFormCreationInfo,
     } = dialogsStore;
+    const { user } = userStore;
+
+    const pagesWithoutNavMenu =
+      clientError ||
+      isPortalDeactivate ||
+      isPortalRestoring ||
+      (isNotPaidPeriod && !user?.isOwner && !user?.isAdmin);
 
     return {
       loadBaseInfo: async () => {
@@ -519,6 +542,7 @@ const ShellWrapper = inject(
       setFormCreationInfo,
       setConvertPasswordDialogVisible,
       version,
+      pagesWithoutNavMenu,
     };
   },
 )(observer(Shell));

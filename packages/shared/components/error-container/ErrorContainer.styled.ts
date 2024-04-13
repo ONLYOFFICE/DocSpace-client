@@ -33,7 +33,8 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
   background: ${(props) => props.theme.errorContainer.background};
   cursor: default;
   width: ${(props) => (props.isEditor ? "100%" : "auto")};
-  height: ${(props) => (props.isEditor ? "100%" : "100vh")};
+  height: "100%";
+
   ${(props) =>
     props.isEditor &&
     css`
@@ -44,7 +45,7 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
-  padding-top: 36px;
+  padding-top: 100px;
   border: 0;
   box-sizing: border-box;
 
@@ -56,7 +57,7 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
 
   #container {
     position: relative;
-    margin: 12px 16px 60px 16px;
+    margin: 64px 16px 48px 16px;
   }
 
   #header {
@@ -90,13 +91,11 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
     body {
       padding: 24px 24px 0 24px;
     }
-
-    #container {
-      margin: 12px 16px 48px 16px;
-    }
   }
 
   @media ${mobile} {
+    padding-top: 80px;
+
     body {
       padding: 18px 18px 0 18px;
     }

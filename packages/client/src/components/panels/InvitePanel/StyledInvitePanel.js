@@ -229,6 +229,7 @@ const StyledInviteInput = styled.div`
 
     .input-link {
     height: 32px;
+    border: 0px;
 
     > input {
       height: 30px;
@@ -238,6 +239,20 @@ const StyledInviteInput = styled.div`
   display: flex;
   border: 1px solid rgb(208, 213, 218);
   border-radius: 3px;
+
+  .copy-link-icon {
+    padding: 0;
+
+    &:hover {
+      svg path {
+        fill: ${(props) => props.theme.inputBlock.hoverIconColor} !important;
+      }
+    }
+
+    svg path {
+      fill: ${(props) => props.theme.inputBlock.iconColor} !important;
+    }
+  }
 
   input[type="search"]::-webkit-search-decoration,
   input[type="search"]::-webkit-search-cancel-button,

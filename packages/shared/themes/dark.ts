@@ -889,8 +889,8 @@ const Dark: TTheme = {
 
     borderColor: grayMaxLight,
 
-    iconColor: "#646464",
-    hoverIconColor: "#858585",
+    iconColor: "#858585",
+    hoverIconColor: "#FFFFFF",
   },
 
   textArea: {

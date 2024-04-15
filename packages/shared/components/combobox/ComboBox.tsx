@@ -58,11 +58,14 @@ const ComboBoxPure = (props: ComboboxProps) => {
   // };
 
   const handleClickOutside = (e: Event) => {
-    const { setIsOpenItemAccess, onToggle } = props;
+    const { withBackdrop, onBackdropClick, setIsOpenItemAccess, onToggle } =
+      props;
 
     const target = e.target as HTMLElement;
 
     if (ref.current && ref.current.contains(target)) return;
+
+    if (withBackdrop && onBackdropClick) onBackdropClick();
 
     if (onToggle) return;
 
@@ -155,6 +158,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
     isNoFixedHeightOptions,
     hideMobileView,
     forceCloseClickOutside,
+    onBackdropClick,
     withoutBackground,
     opened,
     setIsOpenItemAccess,

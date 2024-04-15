@@ -233,22 +233,23 @@ export async function getData(
         fileId,
       };
 
-      if (isTemplateFile(response.config)) {
-        const result = await processFillFormDraft(
-          response.config,
-          searchParams,
-          share,
-        );
+      // TODO: temporarily disabled
+      // if (isTemplateFile(response.config) && false) {
+      //   const result = await processFillFormDraft(
+      //     response.config,
+      //     searchParams,
+      //     share,
+      //   );
 
-        if (result) {
-          const [newFileId, newConfig, hash] = result;
+      //   if (result) {
+      //     const [newFileId, newConfig, hash] = result;
 
-          response.fileId = newFileId;
-          response.config = newConfig as IInitialConfig;
+      //     response.fileId = newFileId;
+      //     response.config = newConfig as IInitialConfig;
 
-          if (hash) response.hash = hash;
-        }
-      }
+      //     if (hash) response.hash = hash;
+      //   }
+      // }
 
       if (response.settings?.tenantStatus === TenantStatus.PortalRestore) {
         response.error = { message: "restore-backup" };

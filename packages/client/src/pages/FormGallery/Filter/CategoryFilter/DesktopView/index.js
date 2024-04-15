@@ -64,7 +64,7 @@ const CategoryFilterDesktop = ({
         showDisabledItems={true}
         options={[]}
         directionX={"right"}
-        dhoutBackgroun
+        directionY={"both"}
         withBackdrop={false}
         withoutBackground
         disableIconClick={false}

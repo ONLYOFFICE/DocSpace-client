@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import { isMobile, isMobileOnly, isIOS } from "react-device-detect";
@@ -11,7 +37,6 @@ import SubArticleHeader from "./sub-components/Header";
 import SubArticleMainButton from "./sub-components/MainButton";
 import SubArticleBody from "./sub-components/Body";
 import ArticleProfile from "./sub-components/Profile";
-import ArticleAlerts from "./sub-components/Alerts";
 import ArticleLiveChat from "./sub-components/LiveChat";
 import ArticleApps from "./sub-components/Apps";
 import ArticleDevToolsBar from "./sub-components/DevToolsBar";
@@ -42,6 +67,7 @@ const Article = ({
   children,
 
   withMainButton,
+  isInfoPanelVisible,
 
   hideProfileBlock,
   hideAppsBlock,
@@ -53,6 +79,7 @@ const Article = ({
   isBannerVisible,
 
   isLiveChatAvailable,
+  isShowLiveChat,
 
   onLogoClickAction,
 
@@ -60,14 +87,10 @@ const Article = ({
   showArticleLoader,
   isAdmin,
   withCustomArticleHeader,
-  hideAlerts,
 
   onArticleHeaderClick,
   isBurgerLoading,
-  whiteLabelLogoUrls,
 
-  articleAlertsData,
-  incrementIndexOfArticleAlertsData,
   isNonProfit,
   isEnterprise,
   isFreeTariff,
@@ -75,14 +98,9 @@ const Article = ({
   isLicenseDateExpired,
   isLicenseExpiring,
   isPaymentPageAvailable,
-  isSubmitToGalleryAlertAvailable,
-  isTeamTrainingAlertAvailable,
   isTrial,
   standalone,
-  bookTrainingEmail,
-  removeAlertFromArticleAlertsData,
   currentTariffPlanTitle,
-  setSubmitToGalleryDialogVisible,
   trialDaysLeft,
   paymentDate,
 
@@ -108,8 +126,6 @@ const Article = ({
   const [correctTabletHeight, setCorrectTabletHeight] = React.useState<
     null | number
   >(null);
-  const [isVirtualKeyboardOpen, setIsVirtualKeyboardOpen] =
-    React.useState(false);
   const updateSizeRef = React.useRef<null | ReturnType<typeof setTimeout>>(
     null,
   );
@@ -209,10 +225,7 @@ const Article = ({
 
         if (target?.height) {
           const diff = window.innerHeight - target.height;
-          setIsVirtualKeyboardOpen(true);
           tableHeight -= diff;
-        } else {
-          setIsVirtualKeyboardOpen(false);
         }
       }
 
@@ -256,7 +269,6 @@ const Article = ({
           withCustomArticleHeader={withCustomArticleHeader}
           onClick={onArticleHeaderClick}
           isBurgerLoading={isBurgerLoading}
-          whiteLabelLogoUrls={whiteLabelLogoUrls}
         >
           {articleHeaderContent ? articleHeaderContent.props.children : null}
         </SubArticleHeader>
@@ -273,26 +285,6 @@ const Article = ({
           {articleBodyContent ? articleBodyContent.props.children : null}
           {!showArticleLoader && (
             <>
-              {!hideAlerts && (
-                <ArticleAlerts
-                  articleAlertsData={articleAlertsData}
-                  showText={showText}
-                  incrementIndexOfArticleAlertsData={
-                    incrementIndexOfArticleAlertsData
-                  }
-                  isSubmitToGalleryAlertAvailable={
-                    isSubmitToGalleryAlertAvailable
-                  }
-                  isTeamTrainingAlertAvailable={isTeamTrainingAlertAvailable}
-                  bookTrainingEmail={bookTrainingEmail}
-                  removeAlertFromArticleAlertsData={
-                    removeAlertFromArticleAlertsData
-                  }
-                  setSubmitToGalleryDialogVisible={
-                    setSubmitToGalleryDialogVisible
-                  }
-                />
-              )}
               {withDevTools && (
                 <ArticleDevToolsBar
                   articleOpen={articleOpen}
@@ -307,6 +299,7 @@ const Article = ({
               {!isMobile && isLiveChatAvailable && (
                 <ArticleLiveChat
                   currentColorScheme={currentColorScheme}
+                  isInfoPanelVisible={isInfoPanelVisible}
                   withMainButton={
                     (withMainButton || false) && !!articleMainButtonContent
                   }
@@ -316,6 +309,7 @@ const Article = ({
                   displayName={chatDisplayName}
                   zendeskKey={zendeskKey}
                   showProgress={showProgress}
+                  isShowLiveChat={isShowLiveChat}
                 />
               )}
             </>
@@ -327,7 +321,6 @@ const Article = ({
             toggleShowText={toggleShowText}
             currentColorScheme={currentColorScheme}
             hideProfileBlock={hideProfileBlock}
-            isVirtualKeyboardOpen={isVirtualKeyboardOpen}
           />
         )}
 
@@ -339,7 +332,6 @@ const Article = ({
             <ArticleProfile
               showText={showText}
               currentDeviceType={currentDeviceType}
-              isVirtualKeyboardOpen={isVirtualKeyboardOpen}
               user={user}
               getActions={getActions}
               onProfileClick={onProfileClick}

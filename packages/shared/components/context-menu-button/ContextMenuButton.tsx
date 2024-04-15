@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import { DebouncedFunc } from "lodash";
 import throttle from "lodash/throttle";
@@ -12,7 +38,7 @@ import { DropDown } from "../drop-down";
 import { IconButton } from "../icon-button";
 import { Backdrop } from "../backdrop";
 import { Aside } from "../aside";
-import { Heading, HeadingSize } from "../heading";
+import { Heading, HeadingLevel, HeadingSize } from "../heading";
 import { Link } from "../link";
 import { ContextMenuModel } from "../context-menu";
 
@@ -173,6 +199,10 @@ const ContextMenuButtonPure = ({
     onCloseAction();
   };
 
+  const getLabel = (item: ContextMenuModel) => {
+    return "label" in item ? item.label : "";
+  };
+
   const onDropDownItemClick = (
     item: ContextMenuModel,
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
@@ -245,7 +275,7 @@ const ContextMenuButtonPure = ({
                   {...item}
                   id={item.id}
                   key={item.key || index}
-                  label={"label" in item ? item.label : ""}
+                  label={getLabel(item)}
                   onClick={(
                     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
                   ) => onDropDownItemClick(item, e)}
@@ -258,7 +288,7 @@ const ContextMenuButtonPure = ({
           <>
             <Backdrop
               onClick={onCloseAction}
-              visible={state.isOpen}
+              visible={state.isOpen || false}
               zIndex={310}
               isAside
             />
@@ -273,6 +303,7 @@ const ContextMenuButtonPure = ({
                   <Heading
                     className="header"
                     size={HeadingSize.medium}
+                    level={HeadingLevel.h1}
                     truncate
                   >
                     {asideHeader}
@@ -296,7 +327,7 @@ const ContextMenuButtonPure = ({
                           fontWeight={600}
                           onClick={(e) => onDropDownItemClick(item, e)}
                         >
-                          {"label" in item ? item.label : ""}
+                          {getLabel(item)}
                         </Link>
                       ),
                   )}
@@ -332,11 +363,13 @@ const compare = (
   if (
     prevProps.opened === nextProps.opened &&
     prevProps.displayType === nextProps.displayType &&
-    prevProps.isDisabled === nextProps.isDisabled
+    prevProps.isDisabled === nextProps.isDisabled &&
+    prevProps.getData === nextProps.getData
   ) {
-    return false;
+    return true;
   }
-  return true;
+
+  return false;
 };
 
 export const ContextMenuButton = React.memo(ContextMenuButtonPure, compare);

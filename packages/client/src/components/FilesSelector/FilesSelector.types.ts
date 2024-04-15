@@ -1,136 +1,40 @@
-export type Security = {
-  Copy: boolean;
-  CopyTo: boolean;
-  Create: boolean;
-  Delete: boolean;
-  Duplicate: boolean;
-  EditAccess: boolean;
-  EditRoom: boolean;
-  Move: boolean;
-  MoveTo: boolean;
-  Mute: boolean;
-  Pin: boolean;
-  Read: boolean;
-  Rename: boolean;
-};
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export type Item = {
-  id: number | string;
-  parentId: number | string;
-  rootFolderType: number | string;
-  title: string;
-  label: string;
-  filesCount?: number;
-  foldersCount?: number;
-  avatar?: string;
-  icon?: string;
-  isFolder: boolean;
-  isDisabled?: boolean;
-  security: Security;
-  roomType: number;
-  fileExst?: string;
-  shared: boolean;
-};
-
-export type BreadCrumb = {
-  label: string;
-  id: number | string;
-  isRoom: boolean;
-  shared: boolean;
-};
-
-type setItems = (value: Item[] | null) => Item[];
-
-export type useLoadersHelperProps = {
-  items: Item[] | null;
-};
-
-export type setItemsCallback = (value: Item[] | null) => Item[] | null;
-export type setBreadCrumbsCallback = (
-  value: BreadCrumb[] | []
-) => BreadCrumb[] | [];
-export type setTotalCallback = (value: number) => number;
-
-export type useSocketHelperProps = {
-  socketHelper: any;
-  socketSubscribers: Set<string>;
-  setItems: (callback: setItemsCallback) => void;
-  setBreadCrumbs: (callback: setBreadCrumbsCallback) => void;
-  setTotal: (callback: setTotalCallback) => void;
-  disabledItems: string[] | number[];
-  filterParam?: string;
-  getIcon: (size: number, fileExst: string) => string;
-};
-
-export type useRootHelperProps = {
-  setBreadCrumbs: (items: BreadCrumb[]) => void;
-  setIsBreadCrumbsLoading: (value: boolean) => void;
-  setTotal: (value: number) => void;
-  setItems: (items: Item[] | setItems) => void;
-  treeFolders?: Item[];
-  setIsNextPageLoading: (value: boolean) => void;
-  setHasNextPage: (value: boolean) => void;
-  onSetBaseFolderPath?: (
-    value: number | string | undefined | BreadCrumb[]
-  ) => void;
-  isUserOnly?: boolean;
-};
-
-export type useRoomsHelperProps = {
-  setBreadCrumbs: (items: BreadCrumb[]) => void;
-  setIsBreadCrumbsLoading: (value: boolean) => void;
-  setIsNextPageLoading: (value: boolean) => void;
-  setHasNextPage: (value: boolean) => void;
-  setTotal: (value: number) => void;
-  setItems: (items: Item[] | setItems) => void;
-  isFirstLoad: boolean;
-  setIsRoot: (value: boolean) => void;
-  searchValue?: string;
-  isRoomsOnly: boolean;
-  onSetBaseFolderPath?: (
-    value: number | string | undefined | BreadCrumb[]
-  ) => void;
-};
-
-export type useFilesHelpersProps = {
-  roomsFolderId?: number;
-  setBreadCrumbs: (items: BreadCrumb[]) => void;
-  setIsBreadCrumbsLoading: (value: boolean) => void;
-  setIsSelectedParentFolder: (value: boolean) => void;
-  setIsNextPageLoading: (value: boolean) => void;
-  setHasNextPage: (value: boolean) => void;
-  setTotal: (value: number) => void;
-  setItems: (items: Item[] | setItems) => void;
-  isFirstLoad: boolean;
-  selectedItemId: string | number | undefined;
-  setIsRoot: (value: boolean) => void;
-  searchValue?: string;
-  disabledItems: string[] | number[];
-  setSelectedItemSecurity: (value: Security) => void;
-  isThirdParty: boolean;
-  onSelectTreeNode?: (treeNode: any) => void;
-  setSelectedTreeNode: (treeNode: any) => void;
-  filterParam?: string;
-  getRootData?: () => Promise<void>;
-  onSetBaseFolderPath?: (
-    value: number | string | undefined | BreadCrumb[]
-  ) => void;
-  isRoomsOnly: boolean;
-  rootThirdPartyId?: string;
-  getRoomList?: (
-    startIndex: number,
-    isInit?: boolean,
-    search?: string | null,
-    isErrorPath?: boolean
-  ) => void;
-  getIcon: (size: number, fileExst: string) => string;
-  t: any;
-};
+import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import { DeviceType } from "@docspace/shared/enums";
+import { TTheme } from "@docspace/shared/themes";
+import SocketIOHelper from "@docspace/shared/utils/socket";
 
 export type FilesSelectorProps = {
   isPanelVisible: boolean;
   // withoutImmediatelyClose: boolean;
   isThirdParty: boolean;
+  isSelectFolder: boolean;
   rootThirdPartyId?: string;
   isRoomsOnly: boolean;
   isUserOnly: boolean;
@@ -142,24 +46,30 @@ export type FilesSelectorProps = {
 
   onClose?: () => void;
 
+  id?: string | number;
+  withSearch: boolean;
+  withBreadCrumbs: boolean;
+  withSubtitle: boolean;
+
   isMove?: boolean;
   isCopy?: boolean;
   isRestore: boolean;
   isRestoreAll?: boolean;
   isSelect?: boolean;
+  isFormRoom?: boolean;
 
   filterParam?: string;
 
-  currentFolderId?: number;
+  currentFolderId: number;
   fromFolderId?: number;
-  parentId?: number;
-  rootFolderType?: number;
+  parentId: number;
+  rootFolderType: number;
 
-  treeFolders?: Item[];
+  treeFolders?: TFolder[];
 
-  theme: any;
+  theme: TTheme;
 
-  selection: any[];
+  selection: (TFolder | TFile)[];
   disabledItems: string[] | number[];
   setMoveToPanelVisible: (value: boolean) => void;
   setRestorePanelVisible: (value: boolean) => void;
@@ -168,32 +78,32 @@ export type FilesSelectorProps = {
   setMovingInProgress: (value: boolean) => void;
   setIsDataReady?: (value: boolean) => void;
   setSelected: (selected: "close" | "none", clearBuffer?: boolean) => void;
-  setConflictDialogData: (conflicts: any, operationData: any) => void;
-  itemOperationToFolder: (operationData: any) => Promise<void>;
+  setConflictDialogData: (conflicts: unknown, operationData: unknown) => void;
+  itemOperationToFolder: (operationData: unknown) => Promise<void>;
   clearActiveOperations: (
     folderIds: string[] | number[],
-    fileIds: string[] | number[]
+    fileIds: string[] | number[],
   ) => void;
   checkFileConflicts: (
     selectedItemId: string | number | undefined,
     folderIds: string[] | number[],
-    fileIds: string[] | number[]
-  ) => Promise<any>;
+    fileIds: string[] | number[],
+  ) => Promise<unknown>;
 
   onSetBaseFolderPath?: (
-    value: number | string | undefined | BreadCrumb[]
+    value: number | string | undefined | TBreadCrumb[],
   ) => void;
   onSetNewFolderPath?: (value: number | string | undefined) => void;
   onSelectFolder?: (
     value: number | string | undefined,
-    breadCrumbs: BreadCrumb[]
+    breadCrumbs: TBreadCrumb[],
   ) => void;
-  onSelectTreeNode?: (treeNode: any) => void;
+  onSelectTreeNode?: (treeNode: TFolder) => void;
   onSave?: (
-    e: any,
+    e: unknown,
     folderId: string | number,
     fileTitle: string,
-    openNewTab: boolean
+    openNewTab: boolean,
   ) => void;
   onSelectFile?: (
     fileInfo: {
@@ -203,13 +113,13 @@ export type FilesSelectorProps = {
       fileExst?: string;
       inPublic?: boolean;
     },
-    breadCrumbs: BreadCrumb[]
+    breadCrumbs: TBreadCrumb[],
   ) => void;
 
   setInfoPanelIsMobileHidden: (arg: boolean) => void;
 
-  withFooterInput?: boolean;
-  withFooterCheckbox?: boolean;
+  withFooterInput: boolean;
+  withFooterCheckbox: boolean;
   footerInputHeader?: string;
   currentFooterInputValue?: string;
   footerCheckboxLabel?: string;
@@ -219,14 +129,16 @@ export type FilesSelectorProps = {
 
   includeFolder?: boolean;
 
-  socketHelper: any;
+  socketHelper: SocketIOHelper;
   socketSubscribers: Set<string>;
-  currentDeviceType: "mobile" | "tablet" | "desktop";
+  currentDeviceType: DeviceType;
 
   embedded: boolean;
   withHeader: boolean;
   withCancelButton: boolean;
-  settings: any;
+  cancelButtonLabel: string;
+  acceptButtonLabel: string;
+  settings: unknown;
 
   roomsFolderId?: number;
 };

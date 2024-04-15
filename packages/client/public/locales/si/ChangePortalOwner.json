@@ -1,0 +1,14 @@
+{
+  "AppointAdmin": "පරිපාලකයින් පත් කරන්න",
+  "BackupPortal": "DocSpace දත්ත උපස්ථය",
+  "ChangeInstruction": "DocSpace හිමිකරු වෙනස් කිරීමට, කරුණාකර පහතින් නව හිමිකරුගේ නම තෝරන්න.",
+  "ChangeOwner": "DocSpace හිමිකරු සංශෝධනය",
+  "ChangeUser": "පරිශ්‍රීලක සංශෝධනය",
+  "DeactivateOrDeletePortal": "DocSpace අක්‍රිය කරන්න හෝ මකන්න",
+  "DoTheSame": "පරිපාලකයින් ලෙසම කරන්න",
+  "ManagePortal": "DocSpace වින්‍යාසය කළමනාකරණය",
+  "ManageUser": "පරිශ්‍රීලක ගිණුම් කළමනාකරණය",
+  "NewPortalOwner": "නව DocSpace හිමිකරු",
+  "PortalOwnerCan": "DocSpace හිමිකරුගේ වරප්‍රසාද:",
+  "SetAccessRights": "ප්‍රවේශ අයිතීන් සකසන්න"
+}

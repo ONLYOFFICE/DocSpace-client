@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import api from "@docspace/shared/api";
 import {
   setFavoritesSetting,
@@ -6,14 +32,14 @@ import {
 import { RoomsType } from "@docspace/shared/enums";
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
-import { presentInArray } from "../helpers/files-helpers";
+import { presentInArray } from "@docspace/shared/utils";
 import {
   iconSize24,
   iconSize32,
   iconSize64,
   iconSize96,
 } from "@docspace/shared/utils/image-helpers";
-
+import { HTML_EXST } from "@docspace/shared/constants";
 import { getIconPathByFolderType } from "@docspace/shared/utils/common";
 class FilesSettingsStore {
   thirdPartyStore;
@@ -66,7 +92,6 @@ class FilesSettingsStore {
   masterFormExtension = "";
   canSearchByContent = false;
 
-  html = [".htm", ".mht", ".html"];
   ebook = [".fb2", ".ibk", ".prc", ".epub"];
 
   constructor(
@@ -75,7 +100,7 @@ class FilesSettingsStore {
     publicRoomStore,
     pluginStore,
     authStore,
-    settingsStore
+    settingsStore,
   ) {
     makeAutoObservable(this);
 
@@ -204,7 +229,7 @@ class FilesSettingsStore {
     api.files.changeDocumentServiceLocation(
       docServiceUrl,
       internalUrl,
-      portalUrl
+      portalUrl,
     );
 
   setForcesave = (val) => (this.forcesave = val);
@@ -255,7 +280,7 @@ class FilesSettingsStore {
 
   isSound = (extension) => presentInArray(this.extsAudio, extension);
 
-  isHtml = (extension) => presentInArray(this.html, extension);
+  isHtml = (extension) => presentInArray(HTML_EXST, extension);
 
   isEbook = (extension) => presentInArray(this.ebook, extension);
 
@@ -276,7 +301,7 @@ class FilesSettingsStore {
     contentLength = null,
     roomType = null,
     isArchive = null,
-    folderType = null
+    folderType = null,
   ) => {
     if (fileExst || contentLength) {
       const isArchiveItem = this.isArchive(fileExst);
@@ -290,7 +315,7 @@ class FilesSettingsStore {
         isArchiveItem,
         isImageItem,
         isSoundItem,
-        isHtmlItem
+        isHtmlItem,
       );
       return icon;
     } else if (roomType) {
@@ -520,6 +545,9 @@ class FilesSettingsStore {
       case ".xlsx":
         path = "xlsx.svg";
         break;
+      case ".xlsb":
+        path = "xlsb.svg";
+        break;
       case ".xps":
         path = "xps.svg";
         break;
@@ -595,7 +623,7 @@ class FilesSettingsStore {
     archive = false,
     image = false,
     sound = false,
-    html = false
+    html = false,
   ) => {
     let path = "";
 
@@ -621,7 +649,7 @@ class FilesSettingsStore {
 
     if (presentInArray(this.extsAudio, ext, true)) path = "sound.svg";
 
-    if (presentInArray(this.html, ext, true)) path = "html.svg";
+    if (presentInArray(HTML_EXST, ext, true)) path = "html.svg";
 
     if (path) return this.getIconBySize(size, path);
 

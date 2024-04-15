@@ -1,15 +1,44 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { AxiosRequestConfig } from "axios";
 
-import { request } from "../client";
+import { AccountsSearchArea } from "@docspace/shared/enums";
 // import axios from "axios";
+import { Encoder } from "@docspace/shared/utils/encoder";
+import { checkFilterInstance } from "@docspace/shared/utils/common";
+import { request } from "../client";
+
 import Filter from "./filter";
 
-import { Encoder } from "../../utils/encoder";
-import { checkFilterInstance } from "../../utils/common";
 import { TChangeTheme, TGetUserList, TUser } from "./types";
 
 import { TReqOption } from "../../utils/axiosClient";
 import { EmployeeActivationStatus, ThemeKeys } from "../../enums";
+import { TGroup } from "../groups/types";
 
 export async function getUserList(filter = Filter.getDefault()) {
   let params = "";
@@ -20,7 +49,9 @@ export async function getUserList(filter = Filter.getDefault()) {
   if (filter) {
     checkFilterInstance(filter, Filter);
 
-    params = `/filter?${filter.toApiUrlParams()}`;
+    params = `/filter?${filter.toApiUrlParams(
+      "id,status,isAdmin,isOwner,isRoomAdmin,isVisitor,activationStatus,userName,email,mobilePhone,displayName,avatar,listAdminModules,birthday,title,location,isLDAP,isSSO,groups",
+    )}`;
   }
 
   const res = (await request({
@@ -56,11 +87,15 @@ export async function getUser(userName = null, headers = null) {
   return user;
 }
 
-export async function getUserByEmail(userEmail: string) {
-  const user = (await request({
+export async function getUserByEmail(userEmail: string, confirmKey = null) {
+  const options = {
     method: "get",
     url: `/people/email?email=${userEmail}`,
-  })) as TUser;
+  };
+
+  if (confirmKey) options.headers = { confirm: confirmKey };
+
+  const user = (await request(options)) as TUser;
 
   if (user && user.displayName) {
     user.displayName = Encoder.htmlDecode(user.displayName);
@@ -378,7 +413,11 @@ export function getUsersByQuery(query) {
   });
 }
 
-export function getMembersList(roomId, filter = Filter.getDefault()) {
+export async function getMembersList(
+  searchArea: AccountsSearchArea,
+  roomId: string | number,
+  filter = Filter.getDefault(),
+) {
   let params = "";
 
   if (filter) {
@@ -397,16 +436,61 @@ export function getMembersList(roomId, filter = Filter.getDefault()) {
     params = `excludeShared=${excludeShared}`;
   }
 
-  return request({
+  let url = "";
+
+  switch (searchArea) {
+    case AccountsSearchArea.People:
+      url = `people/room/${roomId}${params}`;
+      break;
+    case AccountsSearchArea.Groups:
+      url = `group/room/${roomId}${params}`;
+      break;
+    default:
+      url = `accounts/room/${roomId}/search${params}`;
+  }
+
+  const res = (await request({
     method: "get",
-    url: `people/room/${roomId}${params}`,
-  }).then((res) => {
-    res.items = res.items.map((user) => {
-      if (user && user.displayName) {
-        user.displayName = Encoder.htmlDecode(user.displayName);
-      }
-      return user;
-    });
-    return res;
+    url,
+  })) as { items: (TUser | TGroup)[]; total: number };
+
+  res.items = res.items.map((member) => {
+    if (member && "displayName" in member && member.displayName) {
+      member.displayName = Encoder.htmlDecode(member.displayName);
+    }
+
+    if ("membersCount" in member) {
+      member.isGroup = true;
+    }
+
+    return member;
   });
+
+  return res;
+}
+
+export function setCustomUserQuota(userIds, quota) {
+  const data = {
+    userIds,
+    quota,
+  };
+  const options = {
+    method: "put",
+    url: "/people/userquota",
+    data,
+  };
+
+  return request(options);
+}
+export function resetUserQuota(userIds) {
+  const data = {
+    userIds,
+  };
+  const options = {
+    method: "put",
+    url: "/people/resetquota",
+    data,
+  };
+
+  return request(options);
 }

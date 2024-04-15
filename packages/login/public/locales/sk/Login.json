@@ -10,7 +10,6 @@
   "MessageEmailConfirmed": "Váš email bol úspešne aktivovaný.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Zadajte e-mail, ktorý ste použili pri registrácii. Budú vám naň zaslané pokyny na obnovenie hesla.",
   "NotFoundCode": "Nemôžete nájsť kód? Skontrolujte priečinok «Spam».",
-  "Or": "Alebo",
   "PasswordRecoveryTitle": "Obnova hesla",
   "RecoverAccess": "Obnoviť prístup",
   "RecoverContactEmailPlaceholder": "Kontaktný email",
@@ -22,6 +21,5 @@
   "RegistrationEmailWatermark": "E-mail",
   "RememberHelper": "Predvolená doba trvania relácie je 20 minút. Začiarknutím tejto možnosti ju nastavíte na 1 rok. Ak chcete nastaviť vlastnú hodnotu, prejdite do časti Nastavenia.",
   "ResendCode": "Poslať kód ešte raz",
-  "SignInWithCode": "Prihláste sa pomocou tajného kódu",
-  "SignInWithPassword": "Prihlásiť sa pomocou hesla"
+  "UserIsAlreadyRegistered": "Používateľ <1>{{email}}</1> je už zaregistrovaný v tomto priestore DocSpace, zadajte svoje heslo alebo sa vráťte späť a pokračujte s iným e-mailom."
 }

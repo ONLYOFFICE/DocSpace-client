@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -46,6 +72,9 @@ const EditRoomEvent = ({
 
   updateInfoPanelSelection,
   changeRoomOwner,
+
+  defaultRoomsQuota,
+  isDefaultRoomsQuotaSet,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
@@ -77,6 +106,10 @@ const EditRoomEvent = ({
     },
     roomOwner: item.createdBy,
     indexing: item.indexing,
+
+    ...(isDefaultRoomsQuotaSet && {
+      quota: item.quotaLimit,
+    }),
   };
 
   const updateRoom = (oldRoom, newRoom) => {
@@ -95,10 +128,17 @@ const EditRoomEvent = ({
   };
 
   const onSave = async (roomParams) => {
+    const quotaLimit = roomParams?.quota || item.quotaLimit;
+
     const editRoomParams = {
       title: roomParams.title || t("Files:NewRoom"),
+      ...(isDefaultRoomsQuotaSet && {
+        quota: +quotaLimit,
+      }),
     };
 
+    const isTitleChanged = roomParams?.title !== item.title;
+    const isQuotaChanged = quotaLimit !== item.quotaLimit;
     const isOwnerChanged = roomParams?.roomOwner?.id !== item.createdBy.id;
 
     const tags = roomParams.tags.map((tag) => tag.name);
@@ -113,20 +153,38 @@ const EditRoomEvent = ({
     try {
       setIsLoading(true);
 
-      if (isOwnerChanged) {
-        await changeRoomOwner(t, roomParams?.roomOwner?.id);
-      }
-
-      room = await editRoom(item.id, editRoomParams);
+      room =
+        isTitleChanged || isQuotaChanged
+          ? await editRoom(item.id, editRoomParams)
+          : item;
 
       room.isLogoLoading = true;
 
+      const createTagActions = [];
       for (let i = 0; i < newTags.length; i++) {
-        await createTag(newTags[i]);
+        createTagActions.push(createTag(newTags[i]));
       }
+      await Promise.all(createTagActions);
 
-      tags.length && (room = await addTagsToRoom(room.id, tags));
-      removedTags.length && (room = await removeTagsFromRoom(room.id, removedTags));
+      const actions = [];
+      if (isOwnerChanged) {
+        actions.push(changeRoomOwner(t, roomParams?.roomOwner?.id));
+        room.createdBy = {
+          ...room.createdBy,
+          id: roomParams.roomOwner.id,
+          avatarSmall: roomParams.roomOwner.avatar,
+          hasAvatar: roomParams.roomOwner.hasAvatar,
+          displayName: roomParams.roomOwner.label,
+        };
+      }
+      if (tags.length) {
+        actions.push(addTagsToRoom(room.id, tags));
+        room.tags = tags;
+      }
+      if (removedTags.length)
+        actions.push(removeTagsFromRoom(room.id, removedTags));
+
+      await Promise.all(actions);
 
       if (!!item.logo.original && !roomParams.icon.uploadedFile) {
         room = await removeLogoFromRoom(room.id);
@@ -143,26 +201,36 @@ const EditRoomEvent = ({
         const response = await uploadRoomLogo(uploadLogoData);
         const url = URL.createObjectURL(roomParams.icon.uploadedFile);
         const img = new Image();
-        img.onload = async () => {
-          const { x, y, zoom } = roomParams.icon;
 
-          try {
-            room = await addLogoToRoom(room.id, {
-              tmpFile: response.data,
-              ...calculateRoomLogoParams(img, x, y, zoom),
-            });
-          } catch (e) {
-            toastr.error(e);
-          }
+        const promise = new Promise((resolve) => {
+          img.onload = async () => {
+            const { x, y, zoom } = roomParams.icon;
 
-          !withPaging && updateRoom(item, room);
-          // updateInfoPanelSelection();
-          URL.revokeObjectURL(img.src);
-          setActiveFolders([]);
-        };
-        img.src = url;
+            try {
+              room = await addLogoToRoom(room.id, {
+                tmpFile: response.data,
+                ...calculateRoomLogoParams(img, x, y, zoom),
+              });
+            } catch (e) {
+              toastr.error(e);
+            }
+
+            !withPaging && updateRoom(item, room);
+            // updateInfoPanelSelection();
+            URL.revokeObjectURL(img.src);
+            setActiveFolders([]);
+            resolve();
+          };
+
+          img.src = url;
+        });
+
+        await promise;
       } else {
-        !withPaging && updateRoom(item, room);
+        !withPaging &&
+          updateRoom(item, {
+            ...room,
+          });
         // updateInfoPanelSelection();
       }
     } catch (err) {
@@ -195,7 +263,7 @@ const EditRoomEvent = ({
         (buf) =>
           new File([buf], "fetchedFile", {
             type: `image/${imgExst}`,
-          })
+          }),
       );
     setFetchedImage(file);
   }, []);
@@ -246,6 +314,7 @@ export default inject(
     dialogsStore,
     filesSettingsStore,
     infoPanelStore,
+    currentQuotaStore,
   }) => {
     const {
       editRoom,
@@ -275,7 +344,12 @@ export default inject(
     const { setCreateRoomDialogVisible } = dialogsStore;
     const { withPaging } = settingsStore;
     const { updateInfoPanelSelection } = infoPanelStore;
+
+    const { defaultRoomsQuota, isDefaultRoomsQuotaSet } = currentQuotaStore;
+
     return {
+      defaultRoomsQuota,
+      isDefaultRoomsQuotaSet,
       addActiveItems,
       setActiveFolders,
 
@@ -310,5 +384,5 @@ export default inject(
       updateInfoPanelSelection,
       changeRoomOwner,
     };
-  }
+  },
 )(observer(EditRoomEvent));

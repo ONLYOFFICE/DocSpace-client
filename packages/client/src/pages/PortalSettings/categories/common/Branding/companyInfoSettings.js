@@ -1,21 +1,50 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React, { useState, useEffect, useCallback } from "react";
+import styled from "styled-components";
 import { Trans, withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
+import { inject, observer } from "mobx-react";
+import isEqual from "lodash/isEqual";
+
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { inject, observer } from "mobx-react";
-import isEqual from "lodash/isEqual";
-import withLoading from "SRC_DIR/HOCs/withLoading";
-import styled from "styled-components";
 import { Link } from "@docspace/shared/components/link";
+import { mobile, size } from "@docspace/shared/utils";
+import { isManagement } from "@docspace/shared/utils/common";
+
+import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderCompanyInfoSettings from "../sub-components/loaderCompanyInfoSettings";
 import AboutDialog from "../../../../About/AboutDialog";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import { mobile, size } from "@docspace/shared/utils";
-import { isManagement } from "@docspace/shared/utils/common";
+
 const StyledComponent = styled.div`
   .link {
     font-weight: 600;
@@ -61,7 +90,6 @@ const CompanyInfoSettings = (props) => {
     setIsLoadedCompanyInfoSettingsData,
     isLoadedCompanyInfoSettingsData,
     buildVersionInfo,
-    personal,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -76,7 +104,7 @@ const CompanyInfoSettings = (props) => {
 
   const [companySettings, setCompanySettings] = useState({});
   const [companySettingsError, setCompanySettingsError] = useState(
-    defaultCompanySettingsError
+    defaultCompanySettingsError,
   );
   const [showReminder, setShowReminder] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -115,9 +143,9 @@ const CompanyInfoSettings = (props) => {
   }, [companyInfoSettingsData, tReady]);
 
   const getSettings = () => {
+    //await getCompanyInfoSettings();
     const companySettings = getFromSessionStorage("companySettings");
-
-    const defaultData = {
+    const defaultCompanySettingsData = {
       address: companyInfoSettingsData?.address,
       companyName: companyInfoSettingsData?.companyName,
       email: companyInfoSettingsData?.email,
@@ -125,7 +153,7 @@ const CompanyInfoSettings = (props) => {
       site: companyInfoSettingsData?.site,
     };
 
-    saveToSessionStorage("defaultCompanySettings", defaultData);
+    saveToSessionStorage("defaultCompanySettings", defaultCompanySettingsData);
 
     if (companySettings) {
       setCompanySettings({
@@ -136,17 +164,17 @@ const CompanyInfoSettings = (props) => {
         site: companySettings?.site,
       });
     } else {
-      setCompanySettings(defaultData);
+      setCompanySettings(defaultCompanySettingsData);
     }
   };
 
   useEffect(() => {
     getSettings();
-  }, [isLoading]);
+  }, [companyInfoSettingsData]);
 
   useEffect(() => {
     const defaultCompanySettings = getFromSessionStorage(
-      "defaultCompanySettings"
+      "defaultCompanySettings",
     );
 
     const newSettings = {
@@ -182,7 +210,7 @@ const CompanyInfoSettings = (props) => {
 
   const validateEmpty = (value, type) => {
     const hasError = value.trim() === "";
-    const phoneRegex = /^[\d\(\)\-+]+$/;
+    const phoneRegex = /^[\d\(\)\-\s+]+$/;
     const hasErrorPhone = !phoneRegex.test(value);
 
     if (type === "companyName") {
@@ -318,6 +346,13 @@ const CompanyInfoSettings = (props) => {
     setShowModal(false);
   };
 
+  const isDisabled =
+    hasErrorAddress ||
+    hasErrorCompanyName ||
+    hasErrorEmail ||
+    hasErrorPhone ||
+    hasErrorSite;
+
   if (!isLoadedCompanyInfoSettingsData) return <LoaderCompanyInfoSettings />;
 
   return (
@@ -326,7 +361,6 @@ const CompanyInfoSettings = (props) => {
         visible={showModal}
         onClose={onCloseModal}
         buildVersionInfo={buildVersionInfo}
-        personal={personal}
         previewData={companySettings}
       />
 
@@ -444,6 +478,7 @@ const CompanyInfoSettings = (props) => {
           cancelButtonLabel={t("Common:Restore")}
           reminderText={t("YouHaveUnsavedChanges")}
           displaySettings={true}
+          saveButtonDisabled={isDisabled}
           hasScroll={true}
           hideBorder={true}
           showReminder={(isSettingPaid && showReminder) || isLoading}
@@ -469,7 +504,6 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
 
     companyInfoSettingsData,
     buildVersionInfo,
-    personal,
   } = settingsStore;
 
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
@@ -483,11 +517,10 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     setIsLoadedCompanyInfoSettingsData,
     isLoadedCompanyInfoSettingsData,
     buildVersionInfo,
-    personal,
     isSettingPaid: isBrandingAndCustomizationAvailable,
   };
 })(
   withLoading(
-    withTranslation(["Settings", "Common"])(observer(CompanyInfoSettings))
-  )
+    withTranslation(["Settings", "Common"])(observer(CompanyInfoSettings)),
+  ),
 );

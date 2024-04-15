@@ -45,6 +45,7 @@
   "UnselectAll": "모두 선택 해제",
   "URL": "URL",
   "ViewRawPayload": "원시 페이로드 보기",
+  "WebhookCreated": "웹훅이 생성되었습니다",
   "WebhookCreationHint": "이 웹훅은 DocSpace의 모든 이벤트에 할당됩니다",
   "WebhookDetails": "웹훅 세부 정보",
   "WebhookEditedSuccessfully": "Webhooks:WebhookEditedSuccessfully",

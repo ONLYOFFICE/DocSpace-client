@@ -10,7 +10,6 @@
   "MessageEmailConfirmed": "Sizin elektron poçt uğurla aktivləşdirilmişdi.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Xahiş edirik qeydiyyat zamanı istifadə etdiyiniz elektron poçtu qeyd edin. Şifrəni sıfırlamaq üçün təlimat həmin elektron poçta göndəriləcəkdir.",
   "NotFoundCode": "Kodu tapa bilmirsiniz? «Spam» qutunuzu yoxlayın.",
-  "Or": "VƏ YA",
   "PasswordRecoveryTitle": "Parolun bərpa edilməsi",
   "RecoverAccess": "Girişi bərpa edin",
   "RecoverContactEmailPlaceholder": "Əlaqə üçün e-poçt ünvanı",
@@ -22,6 +21,5 @@
   "RegistrationEmailWatermark": "Elektron poçt",
   "RememberHelper": "Susmaya görə sessiya müddəti 20 dəqiqədir. Müddəti 1 ilə uzatmaq üçün qutunu klikləyin. Digər müddəti təyin etmək üçün, Ayarlar bölməsinə keçin.",
   "ResendCode": "Kodu yenidən göndərin",
-  "SignInWithCode": "Gizli kodla daxil olun",
-  "SignInWithPassword": "Şifrə ilə daxil olun"
+  "UserIsAlreadyRegistered": "<1>{{email}}</1> istifadəçisi artıq bu DocSpace-də qeydiyyatdan keçib, parolunuzu daxil edin və ya başqa e-poçtla davam etmək üçün geri qayıdın."
 }

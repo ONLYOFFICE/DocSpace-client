@@ -10,7 +10,6 @@
   "MessageEmailConfirmed": "Jūsu e-pasts tika veiksmīgi aktivizēts.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Lūdzu, ievadiet reģistrācijā izmantoto e-pasta adresi. Uz to tiks nosūtīti norādījumi paroles atkopšanai.",
   "NotFoundCode": "Vai nevarat atrast kodu? Pārbaudiet mapi Surogātpasts.",
-  "Or": "VAI",
   "PasswordRecoveryTitle": "Paroles atgūšana",
   "RecoverAccess": "Atgūt piekļuvi",
   "RecoverContactEmailPlaceholder": "E-pasts saziņai",
@@ -22,6 +21,5 @@
   "RegistrationEmailWatermark": "E-pasts",
   "RememberHelper": "Noklusējuma sesijas ilgums ir 20 minūtes. Atzīmējiet šo opciju, lai iestatītu to uz vienu gadu. Lai iestatītu savu vērtību, dodieties uz Iestatījumi.",
   "ResendCode": "Atkārtoti nosūtīt kodu",
-  "SignInWithCode": "Pierakstīties, izmantojot slepeno kodu",
-  "SignInWithPassword": "Pierakstīties, izmantojot paroli"
+  "UserIsAlreadyRegistered": "Lietotājs <1>{{email}}</1> jau ir reģistrēts šajā DocSpace, ievadiet savu paroli vai dodieties atpakaļ, lai turpinātu ar citu e-pasta adresi."
 }

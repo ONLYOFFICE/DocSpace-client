@@ -1,13 +1,40 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-
+import { useNavigate } from "react-router-dom";
 import withLoader from "@docspace/client/src/HOCs/withLoader";
-import Loaders from "@docspace/common/components/Loaders";
+import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
+import { Link } from "@docspace/shared/components/link";
 
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
-
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import { StyledAccountContent } from "../../styles/accounts";
 import { getUserTypeLabel } from "@docspace/shared/utils/common";
@@ -22,7 +49,13 @@ const Accounts = (props) => {
     canChangeUserType,
     setInfoPanelSelection,
     getPeopleListItem,
+    setPeopleSelection,
+    setPeopleBufferSelection,
+
+    showStorageInfo,
   } = props;
+
+  const navigate = useNavigate();
 
   const [statusLabel, setStatusLabel] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
@@ -117,6 +150,12 @@ const Accounts = (props) => {
     [infoPanelSelection, changeUserType, t],
   );
 
+  const onGroupClick = (groupId) => {
+    navigate(`/accounts/groups/${groupId}/filter`);
+    setPeopleSelection([]);
+    setPeopleBufferSelection(null);
+  };
+
   const typeLabel = React.useCallback(() => getUserTypeLabel(role, t), [])();
 
   const renderTypeData = () => {
@@ -206,10 +245,58 @@ const Accounts = (props) => {
           >
             {statusText}
           </Text>
+          {showStorageInfo && (
+            <>
+              <Text
+                className={"info_field"}
+                noSelect
+                title={t("Common:Storage")}
+              >
+                {t("Common:Storage")}
+              </Text>
+              <SpaceQuota
+                type="user"
+                item={infoPanelSelection}
+                className="type-combobox"
+                onSuccess={onSuccess}
+                onAbort={onAbort}
+              />
+            </>
+          )}
+
           {/* <Text className={"info_field"} noSelect title={t("Common:Room")}>
             {t("Common:Room")}
           </Text>
           <div>Rooms list</div> */}
+
+          {infoPanelSelection?.groups?.length && (
+            <>
+              <Text
+                className={`info_field info_field_groups`}
+                noSelect
+                title={t("Common:Group")}
+              >
+                {t("Common:Group")}
+              </Text>
+
+              <div className={"info_groups"}>
+                {infoPanelSelection.groups.map((group) => (
+                  <Link
+                    key={group.id}
+                    className={"info_data first-row info_group"}
+                    isHovered={true}
+                    fontSize={"13px"}
+                    lineHeight={"20px"}
+                    fontWeight={600}
+                    title={group.name}
+                    onClick={() => onGroupClick(group.id)}
+                  >
+                    {group.name}
+                  </Link>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </StyledAccountContent>
     </>
@@ -217,13 +304,25 @@ const Accounts = (props) => {
 };
 
 export default inject(
-  ({ userStore, peopleStore, accessRightsStore, infoPanelStore }) => {
+  ({
+    userStore,
+    peopleStore,
+    accessRightsStore,
+    infoPanelStore,
+    currentQuotaStore,
+  }) => {
     const { isOwner, isAdmin, id: selfId } = userStore.user;
     const { changeType: changeUserType, usersStore } = peopleStore;
     const { canChangeUserType } = accessRightsStore;
 
     const { setInfoPanelSelection } = infoPanelStore;
 
+    const {
+      setSelection: setPeopleSelection,
+      setBufferSelection: setPeopleBufferSelection,
+    } = peopleStore.selectionStore;
+
+    const { showStorageInfo } = currentQuotaStore;
     return {
       isOwner,
       isAdmin,
@@ -233,6 +332,9 @@ export default inject(
       loading: usersStore.operationRunning,
       getPeopleListItem: usersStore.getPeopleListItem,
       setInfoPanelSelection,
+      setPeopleSelection,
+      setPeopleBufferSelection,
+      showStorageInfo,
     };
   },
 )(
@@ -247,9 +349,5 @@ export default inject(
     "SmartBanner",
     "DeleteProfileEverDialog",
     "Translations",
-  ])(
-    withLoader(observer(Accounts))(
-      <Loaders.InfoPanelViewLoader view="accounts" />,
-    ),
-  ),
+  ])(withLoader(observer(Accounts))(<InfoPanelViewLoader view="accounts" />)),
 );

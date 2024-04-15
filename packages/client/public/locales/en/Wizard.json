@@ -1,6 +1,5 @@
 {
   "Desc": "Please set up the DocSpace registration data.",
-  "Domain": "Domain",
   "ErrorEmail": "Invalid email address",
   "ErrorInitWizard": "The service is currently unavailable, please try again later.",
   "ErrorInitWizardButton": "Try again",

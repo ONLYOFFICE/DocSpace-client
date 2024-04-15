@@ -1,18 +1,47 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 /* eslint-disable no-console */
 /* eslint-disable prefer-promise-reject-errors */
 /* eslint-disable class-methods-use-this */
-import firebase from "firebase/app";
-import "firebase/remote-config";
-import "firebase/storage";
-import "firebase/database";
-
-import CampaignsCloudPngUrl from "PUBLIC_DIR/images/campaigns.cloud.png";
-import CampaignsDesktopPngUrl from "PUBLIC_DIR/images/campaigns.desktop.png";
-import CampaignsEducationPngUrl from "PUBLIC_DIR/images/campaigns.education.png";
-import CampaignsEnterprisePngUrl from "PUBLIC_DIR/images/campaigns.enterprise.png";
-import CampaignsIntegrationPngUrl from "PUBLIC_DIR/images/campaigns.integration.png";
+import firebase from "firebase/compat/app";
+import "firebase/compat/remote-config";
+import "firebase/compat/storage";
+import "firebase/compat/database";
 
 import { TFirebaseSettings } from "../api/settings/types";
+
+const fetchTimeoutMillis =
+  (typeof window !== "undefined" &&
+    window.DocSpaceConfig?.firebase?.fetchTimeoutMillis) ||
+  3600000;
+const minimumFetchIntervalMillis =
+  (typeof window !== "undefined" &&
+    window.DocSpaceConfig?.firebase?.minimumFetchIntervalMillis) ||
+  3600000;
 
 class FirebaseHelper {
   remoteConfig: firebase.remoteConfig.RemoteConfig | null = null;
@@ -24,6 +53,8 @@ class FirebaseHelper {
   firebaseDB: firebase.database.Database | null = null;
 
   constructor(settings: TFirebaseSettings) {
+    if (typeof window === "undefined") return;
+
     this.firebaseConfig = settings;
 
     if (!this.isEnabled) return;
@@ -41,8 +72,8 @@ class FirebaseHelper {
     this.firebaseDB = firebase.database();
 
     this.remoteConfig.settings = {
-      fetchTimeoutMillis: 3600000,
-      minimumFetchIntervalMillis: 3600000,
+      fetchTimeoutMillis,
+      minimumFetchIntervalMillis,
     };
 
     this.remoteConfig.defaultConfig = {
@@ -122,7 +153,7 @@ class FirebaseHelper {
     // const res = await this.remoteConfig?.fetchAndActivate();
     await this.remoteConfig?.fetchAndActivate();
 
-    const campaignsValue = this.remoteConfig?.getValue("campaigns");
+    const campaignsValue = this.remoteConfig?.getValue("docspace_campaigns");
     const campaignsString = campaignsValue && campaignsValue.asString();
 
     if (!campaignsValue || !campaignsString) {
@@ -140,37 +171,36 @@ class FirebaseHelper {
     return Promise.resolve(campaigns);
   }
 
-  async getCampaignsImages(banner: string) {
-    // const domain = this.config["authDomain"];
-
-    switch (banner) {
-      case "cloud":
-        return CampaignsCloudPngUrl;
-      case "desktop":
-        return CampaignsDesktopPngUrl;
-      case "education":
-        return CampaignsEducationPngUrl;
-      case "enterprise":
-        return CampaignsEnterprisePngUrl;
-      case "integration":
-        return CampaignsIntegrationPngUrl;
-      default:
-        return "";
-    }
-
-    // return `https://${domain}/images/campaigns.${banner}.png`;
-  }
-
-  async getCampaignsTranslations(banner: string, lng: string) {
+  async getCampaignsImages(campaign: string) {
     const domain = this.config?.authDomain;
-    return `https://${domain}/locales/${lng}/CampaignPersonal${banner}.json`;
+    return `https://${domain}/images/campaign.${campaign.toLowerCase()}.svg`;
   }
 
-  async sendCrashReport(report: string) {
+  async getCampaignsTranslations(campaign: string, lng: string) {
+    const domain = this.config?.authDomain;
+    return `https://${domain}/locales/${lng}/Campaign${campaign}.json`;
+  }
+
+  async getCampaignConfig(campaign: string) {
+    const domain = this.config?.authDomain;
+    return `https://${domain}/configs/Campaign${campaign}.json`;
+  }
+
+  async sendCrashReport<T>(report: T) {
     try {
       const reportListRef = this.firebaseDB?.ref("reports");
-      const neReportRef = reportListRef?.push();
-      neReportRef?.set(report);
+      const newReportRef = reportListRef?.push();
+      newReportRef?.set(report);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  }
+
+  async sendToastReport<T>(report: T) {
+    try {
+      const toastListRef = this.firebaseDB?.ref("toasts");
+      const newReportRef = toastListRef?.push();
+      newReportRef?.set(report);
     } catch (error) {
       return Promise.reject(error);
     }

@@ -26,7 +26,6 @@
 
 import React from "react";
 import { useTheme } from "styled-components";
-import { inject, observer } from "mobx-react";
 
 import { classNames, getLogoUrl } from "@docspace/shared/utils";
 import { DeviceType, WhiteLabelLogoType } from "../../enums";
@@ -77,11 +76,4 @@ const DocspaceLogo = ({
   );
 };
 
-export default inject(({ settingsStore }) => {
-  const { currentDeviceType, setWindowWidth } = settingsStore;
-
-  return {
-    currentDeviceType,
-    setWindowWidth,
-  };
-})(observer(DocspaceLogo));
+export default DocspaceLogo;

@@ -56,7 +56,7 @@ const DocumentService = ({
   const [isSaveLoading, setSaveIsLoading] = useState(false);
   const [isResetLoading, setResetIsLoading] = useState(false);
 
-  const [isDefaultSettings, setIsDefaultSettiings] = useState(false);
+  const [isDefaultSettings, setIsDefaultSettings] = useState(false);
   const [portalUrl, setPortalUrl] = useState("");
   const [portalUrlIsValid, setPortalUrlIsValid] = useState(true);
   const [docServiceUrl, setDocServiceUrl] = useState("");
@@ -72,7 +72,7 @@ const DocumentService = ({
     setIsLoading(true);
     getDocumentServiceLocation()
       .then((result) => {
-        setIsDefaultSettiings(result?.isDefault || false);
+        setIsDefaultSettings(result?.isDefault || false);
 
         setPortalUrl(result?.docServicePortalUrl);
         setInternalUrl(result?.docServiceUrlInternal);
@@ -111,7 +111,7 @@ const DocumentService = ({
       .then((result) => {
         toastr.success(t("Common:ChangesSavedSuccessfully"));
 
-        setIsDefaultSettiings(result?.isDefault || false);
+        setIsDefaultSettings(result?.isDefault || false);
 
         setPortalUrl(result?.docServicePortalUrl);
         setInternalUrl(result?.docServiceUrlInternal);
@@ -135,7 +135,7 @@ const DocumentService = ({
       .then((result) => {
         toastr.success(t("Common:ChangesSavedSuccessfully"));
 
-        setIsDefaultSettiings(result?.isDefault || false);
+        setIsDefaultSettings(result?.isDefault || false);
 
         setPortalUrl(result?.docServicePortalUrl);
         setInternalUrl(result?.docServiceUrlInternal);
@@ -162,6 +162,12 @@ const DocumentService = ({
 
   const buttonSize =
     currentDeviceType === DeviceType.desktop ? "small" : "normal";
+  const saveButtonDisabled =
+    isFormEmpty ||
+    isValuesInit ||
+    !allInputsValid ||
+    isSaveLoading ||
+    isResetLoading;
 
   return (
     <Styled.Location>
@@ -262,18 +268,14 @@ const DocumentService = ({
           onCancelClick={onReset}
           saveButtonLabel={t("Common:SaveButton")}
           cancelButtonLabel={t("Common:Restore")}
-          saveButtonDisabled={
-            isFormEmpty ||
-            isValuesInit ||
-            !allInputsValid ||
-            isSaveLoading ||
-            isResetLoading
-          }
+          reminderText={t("Settings:YouHaveUnsavedChanges")}
+          saveButtonDisabled={saveButtonDisabled}
           cancelButtonDisabled={
             isDefaultSettings || isSaveLoading || isResetLoading
           }
           displaySettings={true}
           isSaving={isSaveLoading || isResetLoading}
+          showReminder={!saveButtonDisabled}
         />
       </Styled.LocationForm>
     </Styled.Location>

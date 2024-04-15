@@ -62,7 +62,6 @@ const processFillFormDraft = async (
   const url = new URL(basePath + formUrl);
 
   const queryFileId = url.searchParams.get("fileid");
-  const queryVersion = url.searchParams.get("version");
 
   if (!queryFileId) return;
 
@@ -217,8 +216,6 @@ export async function getData(
   editorType?: string,
 ) {
   try {
-    const hdrs = headers();
-
     const searchParams = new URLSearchParams();
 
     if (view) searchParams.append("view", view ? "true" : "false");
@@ -236,7 +233,7 @@ export async function getData(
       getSettings(share),
     ]);
 
-    if ("editorConfig" in config) {
+    if ("editorConfig" in config && typeof settings !== "string") {
       const response: TResponse = {
         config,
         user,
@@ -264,14 +261,24 @@ export async function getData(
         }
       }
 
-      if (response.settings?.tenantStatus === TenantStatus.PortalRestore) {
-        response.error = { message: "restore-backup" };
-      }
-
       const successAuth = !!user;
 
       if (!successAuth && !doc && !share) {
         response.error = { message: "unauthorized" };
+      }
+
+      if (
+        typeof response.settings !== "string" &&
+        response.settings?.tenantStatus === TenantStatus.PortalRestore
+      ) {
+        response.error = { message: "restore-backup" };
+      }
+
+      if (
+        typeof response.settings !== "string" &&
+        response.settings?.tenantStatus === TenantStatus.PortalDeactivate
+      ) {
+        response.error = { message: "unavailable" };
       }
 
       const isSharingAccess = response.config.file.canShare;
@@ -294,12 +301,26 @@ export async function getData(
       fileId,
     };
 
+    if (
+      typeof settings !== "string" &&
+      settings?.tenantStatus === TenantStatus.PortalRestore
+    ) {
+      response.error = { message: "restore-backup" };
+    }
+
+    if (
+      typeof settings !== "string" &&
+      settings?.tenantStatus === TenantStatus.PortalDeactivate
+    ) {
+      response.error = { message: "unavailable" };
+    }
+
     return response;
   } catch (e) {
     const err = e as TCatchError;
     console.error("initDocEditor failed", err);
 
-    const editorUrl = (await getEditorUrl("", share)).docServiceUrl;
+    // const editorUrl = (await getEditorUrl("", share)).docServiceUrl;
 
     let message = "";
     if (typeof err === "string") message = err;
@@ -319,7 +340,7 @@ export async function getData(
     const error: TError = {
       message,
       status,
-      editorUrl,
+      editorUrl: "",
     };
     return { error };
   }
@@ -340,6 +361,8 @@ export async function getUser(share?: string) {
 
   if (userRes.status === 401) return undefined;
 
+  if (!userRes.ok) return;
+
   const user = await userRes.json();
 
   return user.response as TUser;
@@ -357,17 +380,13 @@ export async function getSettings(share?: string) {
     "GET",
   );
 
-  const resActions = [];
+  const settingsRes = await fetch(getSettings);
 
-  resActions.push(fetch(getSettings));
+  if (settingsRes.status === 403) return `access-restricted`;
 
-  const [settingsRes] = await Promise.all(resActions);
+  if (!settingsRes.ok) return;
 
-  const actions = [];
-
-  actions.push(settingsRes.json());
-
-  const [settings] = await Promise.all(actions);
+  const settings = await settingsRes.json();
 
   return settings.response as TSettings;
 }
@@ -420,12 +439,15 @@ export async function openEdit(
     return config.response as IInitialConfig;
   }
 
-  const editorUrl = (await getEditorUrl("", share)).docServiceUrl;
+  const editorUrl =
+    cookie?.includes("asc_auth_key") || share
+      ? (await getEditorUrl("", share)).docServiceUrl
+      : "";
 
   const status =
-    config.error.type === EditorConfigErrorType.NotFoundScope
+    config.error?.type === EditorConfigErrorType.NotFoundScope
       ? "not-found"
-      : config.error.type === EditorConfigErrorType.AccessDeniedScope
+      : config.error?.type === EditorConfigErrorType.AccessDeniedScope
         ? "access-denied"
         : res.status === 415
           ? "not-supported"
@@ -438,7 +460,7 @@ export async function openEdit(
       ? config.error.type === EditorConfigErrorType.LinkScope
         ? { message: message ?? "unauthorized", status, editorUrl }
         : { ...config.error, status, editorUrl }
-      : { message: message ?? "unauthorized", status, editorUrl };
+      : { message: "unauthorized", status, editorUrl };
 
   return error as TError;
 }

@@ -919,8 +919,8 @@ export const getBaseTheme = () => {
 
       borderColor: blueMain,
 
-      iconColor: grayMid,
-      hoverIconColor: grayMid,
+      iconColor: gray,
+      hoverIconColor: grayMain,
     },
 
     textArea: {

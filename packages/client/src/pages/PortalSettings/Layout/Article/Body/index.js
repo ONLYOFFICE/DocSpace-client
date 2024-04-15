@@ -171,8 +171,6 @@ const ArticleBodyContent = (props) => {
     selectedKeys,
   ]);
 
-  console.log(selectedKeys);
-
   const onSelect = (value, e) => {
     if (isArrayEqual([value], selectedKeys)) {
       return;

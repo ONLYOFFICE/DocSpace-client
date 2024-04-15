@@ -110,7 +110,7 @@
   const validateCSP = async (targetSrc) => {
     let currentSrc = window.location.origin;
 
-    //if (currentSrc.indexOf(targetSrc) !== -1) return; // skip check for the same domain
+    if (currentSrc.indexOf(targetSrc) !== -1) return; // skip check for the same domain
 
     const response = await fetch(`${targetSrc}/api/2.0/security/csp`);
     const res = await response.json();
@@ -338,8 +338,9 @@
 
                   <style>
                     #${config.frameId}-container {
-                      height: 98vh !important;
-                      width: 98vw !important;
+                      height: 100lvh !important;
+                      width: 100lvw !important;
+                      overflow: hidden;
                     }
 
                     html, body {

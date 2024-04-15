@@ -24,58 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { Button } from "@docspace/shared/components/button";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { inject, observer } from "mobx-react";
+import { Consumer } from "@docspace/shared/utils/context";
 
-import ModalDialogContainer from "../ModalDialogContainer";
+import TableView from "./TableView";
+import RowView from "./RowView";
 
-const LogoutConnectionDialog = ({
-  visible,
-  onClose,
-  onRemoveSession,
-  data,
-  loading,
-}) => {
-  const { t } = useTranslation(["Profile", "Common"]);
-
+const SessionsTable = ({ t, viewAs, sessionsData }) => {
   return (
-    <ModalDialogContainer
-      visible={visible}
-      onClose={onClose}
-      displayType="modal"
-    >
-      <ModalDialog.Header>
-        {t("Profile:LogoutActiveConnection")}
-      </ModalDialog.Header>
-      <ModalDialog.Body>
-        {t("Profile:LogoutFrom", {
-          platform: data.platform,
-          browser: data.browser,
-        })}
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          key="LogoutBtn"
-          label={t("Profile:LogoutBtn")}
-          size="normal"
-          scale
-          primary={true}
-          onClick={() => onRemoveSession(data.id)}
-          isLoading={loading}
-        />
-        <Button
-          key="CloseBtn"
-          label={t("Common:CancelButton")}
-          size="normal"
-          scale
-          onClick={onClose}
-          isDisabled={loading}
-        />
-      </ModalDialog.Footer>
-    </ModalDialogContainer>
+    <Consumer>
+      {(context) =>
+        viewAs === "table" ? (
+          <TableView
+            t={t}
+            sectionWidth={context.sectionWidth}
+            sessionsData={sessionsData}
+          />
+        ) : (
+          <RowView
+            t={t}
+            sectionWidth={context.sectionWidth}
+            sessionsData={sessionsData}
+          />
+        )
+      }
+    </Consumer>
   );
 };
 
-export default LogoutConnectionDialog;
+export default inject(({ setup }) => {
+  const { viewAs } = setup;
+
+  return {
+    viewAs,
+  };
+})(observer(SessionsTable));

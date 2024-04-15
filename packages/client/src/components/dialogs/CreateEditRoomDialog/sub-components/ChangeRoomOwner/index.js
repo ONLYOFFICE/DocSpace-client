@@ -38,45 +38,48 @@ const ChangeRoomOwner = ({
   roomOwner,
   onOwnerChange,
   currentColorScheme,
+  isTemplate,
 }) => {
   const userName = roomOwner.displayName ?? roomOwner.label;
 
   return (
-    <Styled.ChangeRoomOwner>
+    <Styled.ChangeRoomOwner isTemplate={isTemplate}>
       <Text className="change-owner-label" fontWeight={600} fontSize="13px">
-        {t("Files:RoomOwner")}
+        {isTemplate ? `${t("Files:AccessToTemplate")}:` : t("Files:RoomOwner")}
       </Text>
 
-      <div className="change-owner-display">
-        <Avatar
-          className={"change-owner-display-avatar"}
-          size="min"
-          role={""}
-          isDefaultSource={roomOwner.hasAvatar}
-          source={roomOwner.avatarSmall ?? roomOwner.avatar}
-          userName={userName}
-        />
-        <div className="change-owner-display-name">
-          <Text fontWeight={600} fontSize="13px">
-            {userName}
-          </Text>
-          {roomOwner.id === currentUserId && (
-            <Text className="me-label">({t("Common:MeLabel")})</Text>
-          )}
+      <div className="change-owner-display-wrapper">
+        <div className="change-owner-display">
+          <Avatar
+            className={"change-owner-display-avatar"}
+            size="base"
+            role={""}
+            isDefaultSource={roomOwner.hasAvatar}
+            source={roomOwner.avatarSmall ?? roomOwner.avatar}
+            userName={userName}
+          />
+          <div className="change-owner-display-name">
+            <Text fontWeight={600} fontSize="13px">
+              {userName}
+            </Text>
+            {roomOwner.id === currentUserId && (
+              <Text className="me-label">({t("Common:MeLabel")})</Text>
+            )}
+          </div>
         </div>
-      </div>
 
-      <Link
-        className="change-owner-link"
-        isHovered
-        type="action"
-        fontWeight={600}
-        fontSize="13px"
-        color={currentColorScheme.main?.accent}
-        onClick={onOwnerChange}
-      >
-        {t("Common:ChangeButton")}
-      </Link>
+        <Link
+          className="change-owner-link"
+          isHovered
+          type="action"
+          fontWeight={600}
+          fontSize="13px"
+          color={isTemplate ? null : currentColorScheme.main?.accent}
+          onClick={onOwnerChange}
+        >
+          {isTemplate ? t("Files:AccessSettings") : t("Common:ChangeButton")}
+        </Link>
+      </div>
     </Styled.ChangeRoomOwner>
   );
 };

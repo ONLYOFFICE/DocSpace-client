@@ -31,14 +31,23 @@ import { StyledParam } from "./StyledParam";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Label } from "@docspace/shared/components/label";
 import { TextInput } from "@docspace/shared/components/text-input";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Text } from "@docspace/shared/components/text";
+
 const StyledInputParam = styled(StyledParam)`
   flex-direction: column;
   gap: 4px;
   max-height: 54px;
 
-  .input-label {
-    cursor: pointer;
-    user-select: none;
+  .input-label-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .input-label {
+      cursor: pointer;
+      user-select: none;
+    }
   }
 `;
 
@@ -59,18 +68,31 @@ const InputParam = React.forwardRef(
       isAutoFocussed,
       onKeyUp,
       onKeyDown,
+      tooltipLabel,
     },
     ref,
   ) => {
     return (
       <StyledInputParam>
-        <Label
-          title={title}
-          className="input-label"
-          display="display"
-          htmlFor={id}
-          text={title}
-        />
+        <div className="input-label-wrapper">
+          <Label
+            title={title}
+            className="input-label"
+            display="display"
+            htmlFor={id}
+            text={title}
+          />
+          {tooltipLabel && (
+            <HelpButton
+              place="right"
+              tooltipContent={
+                <Text fontSize="12px" fontWeight={400}>
+                  {tooltipLabel}
+                </Text>
+              }
+            />
+          )}
+        </div>
 
         <FieldContainer
           isVertical={true}

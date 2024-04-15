@@ -54,9 +54,11 @@ const StyledTagInput = styled.div`
 
 const TagInput = ({
   t,
+  title,
   tagHandler,
   setIsScrollLocked,
   isDisabled,
+  tooltipLabel,
   onFocus,
   onBlur,
 }) => {
@@ -119,7 +121,7 @@ const TagInput = ({
       <InputParam
         ref={inputRef}
         id="shared_tags-input"
-        title={`${t("Common:Tags")}:`}
+        title={title ? `${title}:` : `${t("Common:Tags")}:`}
         placeholder={t("TagsPlaceholder")}
         value={tagInput}
         onChange={onTagInputChange}
@@ -127,6 +129,7 @@ const TagInput = ({
         onBlur={handleBlur}
         isDisabled={isDisabled}
         onKeyDown={handleKeyDown}
+        tooltipLabel={tooltipLabel}
       />
 
       <TagDropdown

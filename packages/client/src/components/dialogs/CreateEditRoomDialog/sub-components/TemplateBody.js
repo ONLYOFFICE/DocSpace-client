@@ -24,35 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Base } from "@docspace/shared/themes";
-import styled from "styled-components";
+import RoomSelector from "@docspace/shared/selectors/Room";
+import { RoomsType } from "@docspace/shared/enums";
 
-export const ChangeRoomOwner = styled.div`
-  .change-owner-display {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 8px 0;
+const TemplateBody = ({ t, setIsTemplateSelected, setRoomParams }) => {
+  const onSubmit = (item) => {
+    console.log("onSubmit", item);
+    setIsTemplateSelected(item[0]);
 
-    .change-owner-display-name {
-      display: flex;
-      align-items: center;
-      gap: 4px;
+    setRoomParams((prev) => ({
+      ...prev,
+      title: item[0]?.label,
+      type: item[0]?.roomType,
+    }));
+  };
 
-      .me-label {
-        color: ${({ theme }) => theme.text.disableColor};
-      }
-    }
-  }
+  return (
+    <RoomSelector
+      className="template-body_selector"
+      onSubmit={onSubmit}
+      roomType={RoomsType.TemplateRoom}
+      isMultiSelect={false}
+      withHeader={false}
+      withSearch
+      emptyScreenHeader={t("Common:EmptyTemplatesRoomsHeader")}
+      emptyScreenDescription={t("Common:EmptyTemplatesRoomsDescription")}
+    />
+  );
+};
 
-  .change-owner-display-wrapper {
-    display: ${(props) => (props.isTemplate ? "flex" : "block")};
-    align-items: center;
-
-    .change-owner-link {
-      margin-left: auto;
-    }
-  }
-`;
-
-ChangeRoomOwner.defaultProps = { theme: Base };
+export default TemplateBody;

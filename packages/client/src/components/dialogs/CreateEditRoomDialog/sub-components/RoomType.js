@@ -37,6 +37,8 @@ import {
   getRoomTypeDescriptionTranslation,
   getRoomTypeTitleTranslation,
 } from "./../data/index";
+import { RoomsType } from "@docspace/shared/enums";
+import { Badge } from "@docspace/shared/components/badge";
 
 const StyledRoomType = styled.div`
   cursor: pointer;
@@ -185,6 +187,8 @@ const RoomType = ({
     description: getRoomTypeDescriptionTranslation(roomType, t),
   };
 
+  const isTemplate = roomType === RoomsType.TemplateRoom;
+
   const arrowClassName =
     type === "dropdownButton"
       ? "choose_room-forward_btn dropdown-button"
@@ -203,6 +207,17 @@ const RoomType = ({
           <Text noSelect className="choose_room-title-text">
             {t(room.title)}
           </Text>
+          {isTemplate && (
+            <Badge
+              label={t("New").toUpperCase()}
+              backgroundColor="#7757D9"
+              fontSize="9px"
+              fontWeight={700}
+              borderRadius="50px"
+              noHover
+              isHovered={false}
+            />
+          )}
         </div>
         <Text noSelect className="choose_room-description">
           {t(room.description)}

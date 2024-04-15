@@ -34,6 +34,8 @@ import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
 import DialogHeader from "./sub-components/DialogHeader";
+import TemplateBody from "./sub-components/TemplateBody";
+import { RoomsType } from "@docspace/shared/enums";
 
 const StyledModalDialog = styled(ModalDialog)`
   .header-with-button {
@@ -53,6 +55,19 @@ const StyledModalDialog = styled(ModalDialog)`
     css`
       #modal-dialog {
         display: none;
+      }
+    `}
+
+  ${({ isTemplate }) =>
+    isTemplate &&
+    css`
+      .selector_body,
+      .modal-body {
+        padding: 0;
+      }
+
+      .selector_body {
+        height: 100%;
       }
     `}
 `;
@@ -106,6 +121,7 @@ const CreateRoomDialog = ({
 
   const [roomParams, setRoomParams] = useState({ ...startRoomParams });
   const [isValidTitle, setIsValidTitle] = useState(true);
+  const [isTemplateSelected, setIsTemplateSelected] = useState(false);
 
   const setRoomTags = (newTags) =>
     setRoomParams({ ...roomParams, tags: newTags });
@@ -143,6 +159,15 @@ const CreateRoomDialog = ({
 
   const goBack = () => {
     if (isLoading) return;
+    if (isTemplateSelected) {
+      setIsTemplateSelected(false);
+      setRoomParams((prev) => ({
+        ...prev,
+        title: "",
+        type: RoomsType.TemplateRoom,
+      }));
+      return;
+    }
     setRoomParams({ ...startRoomParams });
   };
 
@@ -160,29 +185,42 @@ const CreateRoomDialog = ({
     onClose();
   };
 
+  const isTemplate =
+    roomParams.type === RoomsType.TemplateRoom && !isTemplateSelected;
+
   return (
     <StyledModalDialog
       displayType="aside"
-      withBodyScroll
+      withBodyScroll={!isTemplate}
       visible={visible}
       onClose={onCloseAndDisconnectThirdparty}
       isScrollLocked={isScrollLocked}
       withFooterBorder
       isOauthWindowOpen={isOauthWindowOpen}
+      isTemplate={isTemplate}
     >
       <ModalDialog.Header>
         <DialogHeader
           isChooseRoomType={!roomParams.type}
           onArrowClick={goBack}
+          isTemplate={isTemplate}
+          isTemplateSelected={isTemplateSelected}
         />
       </ModalDialog.Header>
 
       <ModalDialog.Body>
         {!roomParams.type ? (
           <RoomTypeList t={t} setRoomType={setRoomType} />
+        ) : isTemplate ? (
+          <TemplateBody
+            t={t}
+            setIsTemplateSelected={setIsTemplateSelected}
+            setRoomParams={setRoomParams}
+          />
         ) : (
           <SetRoomParams
             t={t}
+            isTemplateSelected={isTemplateSelected}
             setIsOauthWindowOpen={setIsOauthWindowOpen}
             tagHandler={tagHandler}
             roomParams={roomParams}
@@ -200,7 +238,7 @@ const CreateRoomDialog = ({
         )}
       </ModalDialog.Body>
 
-      {!!roomParams.type && (
+      {!!roomParams.type && !isTemplate && (
         <ModalDialog.Footer>
           <Button
             id="shared_create-room-modal_submit"

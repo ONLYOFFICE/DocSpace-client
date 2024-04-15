@@ -95,6 +95,7 @@ const SetRoomParams = ({
   currentColorScheme,
   setChangeRoomOwnerIsVisible,
   folderFormValidation,
+  isTemplateSelected,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(null);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -147,7 +148,7 @@ const SetRoomParams = ({
 
   return (
     <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>
-      {isEdit ? (
+      {isEdit || isTemplateSelected ? (
         <RoomType t={t} roomType={roomParams.type} type="displayItem" />
       ) : (
         <RoomTypeDropdown

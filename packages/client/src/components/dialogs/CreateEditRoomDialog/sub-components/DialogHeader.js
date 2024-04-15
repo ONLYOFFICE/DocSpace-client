@@ -32,7 +32,20 @@ import withLoader from "@docspace/client/src/HOCs/withLoader";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import CreateEditRoomDilogHeaderLoader from "@docspace/shared/skeletons/create-edit-room/DilogHeader";
 
-const DialogHeader = ({ t, isEdit, isChooseRoomType, onArrowClick }) => {
+const DialogHeader = ({
+  t,
+  isEdit,
+  isChooseRoomType,
+  onArrowClick,
+  isTemplate,
+  isTemplateSelected,
+}) => {
+  const title = isTemplateSelected
+    ? t("Files:SaveAsTemplate")
+    : isTemplate
+      ? t("Files:FromTemplate")
+      : t("Files:CreateRoom");
+
   return (
     <>
       {isEdit ? (
@@ -47,7 +60,7 @@ const DialogHeader = ({ t, isEdit, isChooseRoomType, onArrowClick }) => {
             className="sharing_panel-arrow"
             onClick={onArrowClick}
           />
-          <div>{t("Files:CreateRoom")}</div>
+          <div>{title}</div>
         </div>
       )}
     </>

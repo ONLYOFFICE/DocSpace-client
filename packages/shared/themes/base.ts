@@ -1467,7 +1467,7 @@ export const getBaseTheme = () => {
         lineHeight: "10px",
 
         color: black,
-        disableColor: gray,
+        disableColor: black,
       },
 
       separator: {

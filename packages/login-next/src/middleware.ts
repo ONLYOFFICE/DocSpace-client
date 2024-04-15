@@ -24,9 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-async function Page({}) {
-  return <p>Healthy</p>;
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
+// This function can be marked `async` if using `await` inside
+export function middleware(request: NextRequest) {
+  return NextResponse.json({ status: "healthy" }, { status: 200 });
 }
 
-export default Page;
-
+// See "Matching Paths" below to learn more
+export const config = {
+  matcher: "/health",
+};

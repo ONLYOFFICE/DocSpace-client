@@ -60,6 +60,7 @@ export const getFileTypeName = (fileType) => {
     case FileType.Document:
     case FileType.OFormTemplate:
     case FileType.OForm:
+    case FileType.PDF:
       return i18n.t("Files:Document");
     default:
       return i18n.t("Files:Folder");

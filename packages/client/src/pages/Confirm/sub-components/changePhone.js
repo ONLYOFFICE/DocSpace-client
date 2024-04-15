@@ -34,7 +34,7 @@ import { inject, observer } from "mobx-react";
 import { StyledPage, StyledBody, StyledContent } from "./StyledConfirm";
 import withLoader from "../withLoader";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "../../../components/DocspaceLogoWrapper";
+import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
 
 const ChangePhoneForm = (props) => {
   const { t, greetingTitle } = props;

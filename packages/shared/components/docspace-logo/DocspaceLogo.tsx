@@ -24,25 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useState } from "react";
 import { useTheme } from "styled-components";
 
 import { classNames, getLogoUrl } from "@docspace/shared/utils";
-import { DeviceType, WhiteLabelLogoType } from "../../enums";
-
+import { WhiteLabelLogoType } from "../../enums";
+import { size as deviceSize } from "../../utils";
 import { StyledWrapper } from "./DocspaceLogo.styled";
 import type { DocspaceLogoProps } from "./DocspaceLogo.types";
 
-const DocspaceLogo = ({
-  className,
-  isResizing = false,
-  currentDeviceType,
-  setWindowWidth,
-}: DocspaceLogoProps) => {
+const DocspaceLogo = ({ className, isResizing = false }: DocspaceLogoProps) => {
   const theme = useTheme();
 
+  const [size, setSize] = useState(window.innerWidth);
+
   const onResize = () => {
-    if (setWindowWidth) setWindowWidth(window.innerWidth);
+    setSize(window.innerWidth);
   };
 
   React.useEffect(() => {
@@ -53,18 +50,17 @@ const DocspaceLogo = ({
     };
   }, []);
 
+  const isMobile = size <= deviceSize.mobile;
+
   const logoSize =
-    isResizing && currentDeviceType === DeviceType.mobile
+    isResizing && isMobile
       ? WhiteLabelLogoType.LightSmall
       : WhiteLabelLogoType.LoginPage;
 
   const logo = getLogoUrl(logoSize, !theme.isBase);
 
   return (
-    <StyledWrapper
-      currentDeviceType={currentDeviceType}
-      isResizing={isResizing}
-    >
+    <StyledWrapper isMobile={isMobile} isResizing={isResizing} logo={!!logo}>
       {logo && (
         <img
           src={logo}

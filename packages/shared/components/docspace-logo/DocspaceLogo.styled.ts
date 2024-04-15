@@ -29,14 +29,14 @@ import styled, { css } from "styled-components";
 import { mobile } from "@docspace/shared/utils";
 
 export const StyledWrapper = styled.div<{
-  currentDeviceType?: string;
+  isMobile?: boolean;
   isResizing?: boolean;
 }>`
   @media ${mobile} {
     ${(props) => !props.isResizing && "display: none"};
 
     ${(props) =>
-      props.currentDeviceType === "mobile" &&
+      props.isMobile &&
       props.isResizing &&
       css`
         display: flex;

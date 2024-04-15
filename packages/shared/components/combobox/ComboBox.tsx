@@ -158,7 +158,6 @@ const ComboBoxPure = (props: ComboboxProps) => {
     isNoFixedHeightOptions,
     hideMobileView,
     forceCloseClickOutside,
-    onBackdropClick,
     withoutBackground,
     opened,
     setIsOpenItemAccess,

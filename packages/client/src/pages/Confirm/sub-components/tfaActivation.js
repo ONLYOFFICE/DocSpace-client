@@ -41,7 +41,7 @@ import ErrorContainer from "@docspace/shared/components/error-container/ErrorCon
 import { mobile, tablet } from "@docspace/shared/utils";
 import { Link } from "@docspace/shared/components/link";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "../../../components/DocspaceLogoWrapper";
+import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
 import { StyledPage, StyledContent } from "./StyledConfirm";
 import {
   getTfaSecretKeyAndQR,

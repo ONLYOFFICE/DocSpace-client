@@ -45,7 +45,7 @@ const EmptyViewContainer = observer(
 
       const payload = {
         id: -1,
-        extension: "docxf",
+        extension: "pdf",
         withoutDialog: true,
       };
       event.payload = payload;

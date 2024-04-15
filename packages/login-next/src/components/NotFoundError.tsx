@@ -27,15 +27,20 @@
 "use client";
 
 import React from "react";
+import dynamic from "next/dynamic";
 
-import useI18N from "@/hooks/useI18N";
+import AppLoader from "@docspace/shared/components/app-loader";
 
-import { Error404Wrapper } from "@docspace/shared/components/errors/Error404";
+const Error404 = dynamic(
+  () => import("@docspace/shared/components/errors/Error404"),
+  {
+    ssr: false,
+    loading: () => <AppLoader />,
+  },
+);
 
 const NotFoundError = ({}) => {
-  const { i18n } = useI18N({});
-
-  return <Error404Wrapper i18nProp={i18n} />;
+  return <Error404 />;
 };
 
 export default NotFoundError;

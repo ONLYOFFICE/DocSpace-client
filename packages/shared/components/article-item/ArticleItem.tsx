@@ -67,6 +67,7 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
     isFirstHeader = false,
     folderId,
     badgeTitle,
+    $currentColorScheme,
   } = props;
 
   const onClickAction = (e: React.MouseEvent) => {
@@ -108,6 +109,7 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
         isEndOfBlock={isEndOfBlock}
         isActive={isActive}
         data-testid="article-item"
+        $currentColorScheme={$currentColorScheme}
       >
         <StyledArticleItemSibling
           id={folderId}

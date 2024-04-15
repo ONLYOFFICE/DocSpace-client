@@ -54,7 +54,8 @@ const ArticleBodyContent = () => {
 
   const { settingsStore } = useStore();
 
-  const { toggleArticleOpen, setIsBurgerLoading } = settingsStore;
+  const { toggleArticleOpen, setIsBurgerLoading, currentColorScheme } =
+    settingsStore;
 
   const [selectedKey, setSelectedKey] = useState("0");
 
@@ -97,6 +98,7 @@ const ArticleBodyContent = () => {
           isActive={item.key === selectedKey}
           onClick={(e) => onClickItem(item, e)}
           folderId={item.id}
+          $currentColorScheme={currentColorScheme}
         />
       );
     });

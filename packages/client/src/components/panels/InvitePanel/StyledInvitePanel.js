@@ -79,8 +79,7 @@ const StyledInvitePanel = styled.div`
   }
 
   .invite-panel-body {
-    height: ${(props) =>
-      props.hasInvitedUsers ? "calc(100% - 55px - 73px)" : "calc(100% - 55px)"};
+    height: calc(100% - 55px - 73px);
 
     .scroll-body {
       ${(props) =>

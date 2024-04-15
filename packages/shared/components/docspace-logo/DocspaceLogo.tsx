@@ -51,7 +51,7 @@ const DocspaceLogo = ({
     return () => {
       window.removeEventListener("resize", onResize);
     };
-  }, []);
+  }, [isResizable]);
 
   const isMobile = size <= deviceSize.mobile;
 

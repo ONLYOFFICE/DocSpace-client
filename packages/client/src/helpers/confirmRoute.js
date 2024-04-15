@@ -56,6 +56,8 @@ const ConfirmRoute = ({
   });
 
   React.useEffect(() => {
+    if (location.search.includes("culture")) return;
+
     storeIsLoaded && i18n.changeLanguage(culture);
   }, [storeIsLoaded]);
 

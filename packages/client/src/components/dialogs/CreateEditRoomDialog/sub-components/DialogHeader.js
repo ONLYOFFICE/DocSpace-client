@@ -38,13 +38,8 @@ const DialogHeader = ({
   isChooseRoomType,
   onArrowClick,
   isTemplate,
-  isTemplateSelected,
 }) => {
-  const title = isTemplateSelected
-    ? t("Files:SaveAsTemplate")
-    : isTemplate
-      ? t("Files:FromTemplate")
-      : t("Files:CreateRoom");
+  const title = isTemplate ? t("Files:FromTemplate") : t("Files:CreateRoom");
 
   return (
     <>

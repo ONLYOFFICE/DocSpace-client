@@ -168,6 +168,7 @@ export const enum RoomSearchArea {
   Any = "Any",
   Active = "Active",
   Archive = "Archive",
+  Templates = "Templates",
 }
 /**
  * Enum for file action.

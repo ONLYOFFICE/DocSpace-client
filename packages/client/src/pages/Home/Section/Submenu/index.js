@@ -26,14 +26,20 @@
 
 import AccountsSubmenu from "./AccountsSubmenu";
 import MyDocumentsSubmenu from "./MyDocumentsSubmenu";
+import RoomTemplatesSubMenu from "./RoomTemplatesSubMenu";
 import { inject, observer } from "mobx-react";
 import { useLocation } from "react-router-dom";
 
-const SectionSubmenuContent = ({ isPersonalRoom, isRecentTab }) => {
+const SectionSubmenuContent = ({
+  isPersonalRoom,
+  isRecentTab,
+  isRoomsFolder,
+}) => {
   const location = useLocation();
   const isAccounts = location.pathname.includes("/accounts");
 
   if (isPersonalRoom || isRecentTab) return <MyDocumentsSubmenu />;
+  if (isRoomsFolder) return <RoomTemplatesSubMenu />;
   if (isAccounts) return <AccountsSubmenu />;
   return null;
 };
@@ -41,4 +47,5 @@ const SectionSubmenuContent = ({ isPersonalRoom, isRecentTab }) => {
 export default inject(({ treeFoldersStore }) => ({
   isPersonalRoom: treeFoldersStore.isPersonalRoom,
   isRecentTab: treeFoldersStore.isRecentTab,
+  isRoomsFolder: treeFoldersStore.isRoomsFolder,
 }))(observer(SectionSubmenuContent));

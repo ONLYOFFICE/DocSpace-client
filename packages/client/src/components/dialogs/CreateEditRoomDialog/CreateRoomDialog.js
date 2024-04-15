@@ -204,7 +204,6 @@ const CreateRoomDialog = ({
           isChooseRoomType={!roomParams.type}
           onArrowClick={goBack}
           isTemplate={isTemplate}
-          isTemplateSelected={isTemplateSelected}
         />
       </ModalDialog.Header>
 

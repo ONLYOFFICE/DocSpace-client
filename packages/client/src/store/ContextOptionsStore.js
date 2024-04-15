@@ -1376,7 +1376,7 @@ class ContextOptionsStore {
         icon: CreateTemplateSvgUrl,
         onClick: () => this.onCreateRoomTemplate(item),
         badgeLabel: t("New").toUpperCase(),
-        disabled: false,
+        disabled: !item.security?.Create,
       },
       {
         id: "option_owner-change",

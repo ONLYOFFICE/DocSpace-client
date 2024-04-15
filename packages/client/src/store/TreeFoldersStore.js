@@ -207,6 +207,12 @@ class TreeFoldersStore {
     );
   }
 
+  get templatesFolder() {
+    return this.treeFolders.find(
+      (x) => x.rootFolderType === FolderType.Templates,
+    );
+  }
+
   get privacyFolder() {
     return this.treeFolders.find(
       (x) => x.rootFolderType === FolderType.Privacy,
@@ -333,8 +339,16 @@ class TreeFoldersStore {
     );
   }
 
+  get isRoomsFolderRoot() {
+    return FolderType.Rooms === this.selectedFolderStore.rootFolderType;
+  }
+
   get isArchiveFolderRoot() {
     return FolderType.Archive === this.selectedFolderStore.rootFolderType;
+  }
+
+  get isTemplatesFolderRoot() {
+    return FolderType.Templates === this.selectedFolderStore.rootFolderType;
   }
 
   get isPersonalFolderRoot() {

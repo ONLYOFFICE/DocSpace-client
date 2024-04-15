@@ -89,10 +89,25 @@ const useFiles = ({
 
     const url = getCategoryUrl(categoryType);
 
-    filter.searchArea =
-      categoryType === CategoryType.Shared
-        ? RoomSearchArea.Active
-        : RoomSearchArea.Archive;
+    let searchArea;
+
+    switch (categoryType) {
+      case CategoryType.Shared:
+        searchArea = RoomSearchArea.Shared;
+        break;
+      case CategoryType.Templates:
+        searchArea = RoomSearchArea.Templates;
+        break;
+      case CategoryType.Archive:
+        searchArea = RoomSearchArea.Archive;
+        break;
+
+      default:
+        searchArea = RoomSearchArea.Archive;
+        break;
+    }
+
+    filter.searchArea = searchArea;
 
     navigate(`${url}?${filter.toUrlParams()}`);
   };
@@ -172,7 +187,8 @@ const useFiles = ({
     if (
       (categoryType == CategoryType.Shared ||
         categoryType == CategoryType.SharedRoom ||
-        categoryType == CategoryType.Archive) &&
+        categoryType == CategoryType.Archive ||
+        categoryType == CategoryType.Templates) &&
       !isRoomFolder
     ) {
       filterObj = RoomsFilter.getFilter(window.location);

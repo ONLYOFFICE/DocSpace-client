@@ -129,6 +129,14 @@ const ClientRoutes = [
             ),
           },
           {
+            path: "templates",
+            element: (
+              <PrivateRoute>
+                <Navigate to="/rooms/templates" replace />
+              </PrivateRoute>
+            ),
+          },
+          {
             path: "rooms/personal",
             element: (
               <PrivateRoute restricted withManager withCollaborator>
@@ -218,6 +226,38 @@ const ClientRoutes = [
           },
           {
             path: "rooms/archived/:room/filter",
+            element: (
+              <PrivateRoute>
+                <FilesView />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/templates",
+            element: (
+              <PrivateRoute>
+                <FilesView />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/templates/filter",
+            element: (
+              <PrivateRoute>
+                <FilesView />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/templates/:room",
+            element: (
+              <PrivateRoute>
+                <FilesView />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/templates/:room/filter",
             element: (
               <PrivateRoute>
                 <FilesView />

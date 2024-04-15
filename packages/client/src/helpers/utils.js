@@ -142,6 +142,8 @@ export const getCategoryType = (location) => {
       categoryType = CategoryType.PublicRoom;
     } else if (pathname.indexOf("archive") > -1) {
       categoryType = CategoryType.Archive;
+    } else if (pathname.indexOf("templates") > -1) {
+      categoryType = CategoryType.Templates;
     }
   } else if (pathname.startsWith("/favorite")) {
     categoryType = CategoryType.Favorite;
@@ -199,6 +201,12 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
 
     case CategoryType.ArchivedRoom:
       return `/rooms/archived/${folderId}/filter`;
+
+    case CategoryType.Templates:
+      return "/rooms/templates/filter";
+
+    case CategoryType.TemplatesRoom:
+      return `/rooms/templates/${folderId}/filter`;
 
     case CategoryType.Favorite:
       return "/files/favorite/filter";

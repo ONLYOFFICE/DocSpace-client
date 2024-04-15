@@ -148,7 +148,7 @@ const SetRoomParams = ({
 
   return (
     <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>
-      {isEdit || isTemplateSelected ? (
+      {isEdit || !!isTemplateSelected ? (
         <RoomType t={t} roomType={roomParams.type} type="displayItem" />
       ) : (
         <RoomTypeDropdown
@@ -172,7 +172,11 @@ const SetRoomParams = ({
       )}
       <InputParam
         id="shared_room-name"
-        title={`${t("Common:Name")}:`}
+        title={
+          !!isTemplateSelected
+            ? `${t("Files:RoomName")}:`
+            : `${t("Common:Name")}:`
+        }
         placeholder={t("Common:EnterName")}
         value={roomParams.title}
         onChange={onChangeName}
@@ -192,6 +196,7 @@ const SetRoomParams = ({
 
       <TagInput
         t={t}
+        title={!!isTemplateSelected ? t("Files:RoomTags") : ""}
         tagHandler={tagHandler}
         setIsScrollLocked={setIsScrollLocked}
         isDisabled={isDisabled}

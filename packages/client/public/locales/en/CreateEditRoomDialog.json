@@ -13,6 +13,7 @@
   "FormFilingRoomTitle": "Form Filling Room",
   "FormRoomDescription": "Share forms with anyone and collect the complete forms in the Complete folder. Users can fill out any form multiple times, creating separate final files. In Basic form rooms, you can't add multiple user roles to the forms.",
   "FormRoomTitle": "Basic form room",
+  "FromTemplateDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incid…",
   "Icon": "Icon",
   "MakeRoomPrivateDescription": "All files in this room will be encrypted.",
   "MakeRoomPrivateLimitationsWarningDescription": "With this feature, you can invite only existing DocSpace users. After creating a room, you will not be able to change the list of users.",

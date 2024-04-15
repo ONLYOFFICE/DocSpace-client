@@ -331,7 +331,7 @@ export const getBaseTheme = () => {
       fontWeight: "500",
       textDecoration: "none",
       padding: "0",
-      borderRadius: "2px",
+      borderRadius: "3px",
       height: "40px",
       heightSmall: "32px",
       textAlign: "left",
@@ -379,10 +379,10 @@ export const getBaseTheme = () => {
 
       svg: {
         margin: "11px 8px",
-        width: "18px",
-        height: "18px",
-        minWidth: "18px",
-        minHeight: "18px",
+        width: "20px",
+        height: "20px",
+        minWidth: "20px",
+        minHeight: "20px",
         fill: white,
       },
     },
@@ -664,7 +664,7 @@ export const getBaseTheme = () => {
           b: 38,
           a: 0.2,
         },
-        blur: 18,
+        blur: 10,
       },
 
       content: {
@@ -919,8 +919,8 @@ export const getBaseTheme = () => {
 
       borderColor: blueMain,
 
-      iconColor: grayMid,
-      hoverIconColor: grayMid,
+      iconColor: gray,
+      hoverIconColor: grayMain,
     },
 
     textArea: {
@@ -2050,6 +2050,7 @@ export const getBaseTheme = () => {
       recoveryColor: "#657077",
       linkColor: "#657077",
       productColor: white,
+      height: "48px",
     },
 
     menuContainer: {
@@ -2113,6 +2114,7 @@ export const getBaseTheme = () => {
         roleSelectorColor: "#a3a9ae",
         disabledRoleSelectorColor: "#a3a9ae",
         roleSelectorArrowColor: "#a3a9ae",
+        createLink: "#a3a9ae",
       },
 
       history: {

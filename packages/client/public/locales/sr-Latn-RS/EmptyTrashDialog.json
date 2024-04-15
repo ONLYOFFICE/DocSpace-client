@@ -1,0 +1,8 @@
+{
+  "DeleteForeverButton": "Obriši zauvek",
+  "DeleteForeverNote": "Sve stavke iz Otpad će biti zauvek obrisane. Nećete moći da ih povratite.",
+  "DeleteForeverNoteArchive": "Sve stavke iz Arhivirano će biti zauvek obrisane. Nećete moći da ih povratite.",
+  "DeleteForeverTitle": "Obrisati zauvek?",
+  "SuccessEmptyArchived": "Arhiva ispražnjena",
+  "SuccessEmptyTrash": "Otpad ispražnjen"
+}

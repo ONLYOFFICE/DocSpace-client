@@ -1,0 +1,8 @@
+{
+  "BackupCodesDescription": "Koristite rezervne kodove za prijavljivanje kada nemate pristup svom telefonu.",
+  "BackupCodesSecondDescription": "Svaki kod može biti korišćen samo jednom. Možete dobiti nove kodove u bilo koje vreme. Samo su kodovi koji su generisani poslednji put važeći.",
+  "BackupCodesTitle": "Rezervni kodovi",
+  "CodesCounter": "kodovi:",
+  "PrintButton": "Štampaj",
+  "RequestNewButton": "Zatraži novi"
+}

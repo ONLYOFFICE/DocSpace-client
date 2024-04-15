@@ -81,6 +81,7 @@ const ModalDialog = ({
   isCloseable,
   embedded,
   withForm,
+  blur,
 }: ModalDialogProps) => {
   const onCloseEvent = React.useCallback(() => {
     if (embedded) return;
@@ -166,6 +167,7 @@ const ModalDialog = ({
           containerVisible={containerVisible}
           isCloseable={isCloseable && !embedded}
           embedded={embedded}
+          blur={blur}
         />
       }
     />

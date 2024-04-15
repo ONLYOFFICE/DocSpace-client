@@ -114,9 +114,19 @@
 
     currentSrc = window.location.host; // more flexible way to check
 
-    const passed =
-      res.response.header &&
-      res.response.header.toLowerCase().includes(currentSrc.toLowerCase());
+    const domains = [...res.response.domains].map((d) => {
+      try {
+        const domain = new URL(d.toLowerCase());
+        const domainFull =
+          domain.host + (domain.pathname !== "/" ? domain.pathname : "");
+
+        return domainFull;
+      } catch {
+        return d;
+      }
+    });
+
+    const passed = domains.includes(currentSrc.toLowerCase());
 
     if (!passed) throw new Error(cspErrorText);
 
@@ -266,8 +276,8 @@
       const logoSrc = `${config.src}/static/images/light_small_logo.react.svg`;
 
       button.innerHTML = `${config?.buttonWithLogo ? `<img width="16px" heigth="16px" src="${logoSrc}" />` : ""}${config?.buttonText || "Select to DocSpace"}`;
-
-      const scriptUrl = `${window.location.origin}/static/scripts/api.js`;
+      const url = new URL(window.location.href);
+      const scriptUrl = `${url.protocol}//${url.hostname}/static/scripts/api.js`;
 
       const configStringify = JSON.stringify(config, function (key, val) {
         return typeof val === "function" ? "" + val : val;
@@ -280,13 +290,13 @@
           <html>
               <head>
                   <meta charset="UTF-8">
-                  <script src="${scriptUrl}"></script>
                   <title>DocSpace</title>
 
                   <style>
                     #${config.frameId}-container {
-                      height: 98vh !important;
-                      width: 98vw !important;
+                      height: 100lvh !important;
+                      width: 100lvw !important;
+                      overflow: hidden;
                     }
 
                     html, body {
@@ -313,7 +323,13 @@
                       onAuthSuccess: eval(${config.events.onAuthSuccess + ""}),
                       onSignOut: eval(${config.events.onSignOut + ""}),
                     }}
-                    window.DocSpace.SDK.initFrame(config)
+                    
+                    const script = document.createElement("script");
+                    
+                    script.setAttribute("src", "${scriptUrl}");
+                    script.onload = () => window.DocSpace.SDK.initFrame(config);
+                    
+                    document.body.appendChild(script);
                   </script>
               </body>
           </html>`;

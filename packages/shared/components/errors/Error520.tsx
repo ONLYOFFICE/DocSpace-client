@@ -33,7 +33,6 @@ import { getCrashReport } from "@docspace/shared/utils/crashReport";
 import { Link, LinkType } from "../link";
 import ReportDialog from "../report-dialog";
 import ErrorContainer from "../error-container/ErrorContainer";
-import DocspaceLogo from "../docspace-logo/DocspaceLogo";
 import { zendeskAPI } from "../zendesk/Zendesk.utils";
 
 import { Error520Wrapper } from "./Errors.styled";
@@ -88,7 +87,6 @@ const Error520 = ({
 
   return (
     <Error520Wrapper>
-      <DocspaceLogo className="logo" />
       <ErrorContainer
         className="container"
         isPrimaryButton={false}

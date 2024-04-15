@@ -69,6 +69,7 @@ const toListItem = (
     isAdmin,
     isVisitor,
     isCollaborator,
+    isRoomAdmin,
     status,
   } = item;
 
@@ -95,6 +96,7 @@ const toListItem = (
     isAdmin,
     isVisitor,
     isCollaborator,
+    isRoomAdmin,
     hasAvatar,
     isDisabled: isInvited || isDisabled,
     disabledText,
@@ -161,7 +163,11 @@ const PeopleSelector = ({
     isDoubleClick: boolean,
     doubleClickCallback: () => void,
   ) => {
-    setSelectedItem(item);
+    setSelectedItem((el) => {
+      if (el?.id === item.id) return null;
+
+      return item;
+    });
     if (isDoubleClick) {
       doubleClickCallback();
     }
@@ -376,7 +382,7 @@ const PeopleSelector = ({
   return (
     <Selector
       id={id}
-      alwaysShowFooter
+      alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
       className={className}
       style={style}
       renderCustomItem={renderCustomItem}

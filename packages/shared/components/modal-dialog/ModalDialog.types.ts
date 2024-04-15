@@ -90,6 +90,7 @@ export interface ModalDialogProps {
   isDoubleFooterLine?: boolean;
   embedded?: boolean;
   withForm?: boolean;
+  blur?: number;
 }
 
 export interface ModalProps {
@@ -158,4 +159,5 @@ export interface ModalSubComponentsProps {
   isCloseable?: boolean;
   embedded?: boolean;
   withForm?: boolean;
+  blur?: number;
 }

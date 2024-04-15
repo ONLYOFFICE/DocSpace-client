@@ -29,14 +29,25 @@ import { inject, observer } from "mobx-react";
 import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
 import type { DocspaceLogoProps } from "@docspace/shared/components/docspace-logo/DocspaceLogo.types";
 
-const DocspaceLogoWrapper = ({ className }: Partial<DocspaceLogoProps>) => {
-  return <DocspaceLogo className={className} />;
+const DocspaceLogoWrapper = ({
+  className,
+  currentDeviceType,
+  setWindowWidth,
+}: Partial<DocspaceLogoProps>) => {
+  return (
+    <DocspaceLogo
+      className={className}
+      currentDeviceType={currentDeviceType}
+      setWindowWidth={setWindowWidth}
+    />
+  );
 };
 
 export default inject<TStore>(({ settingsStore }) => {
-  const { whiteLabelLogoUrls } = settingsStore;
+  const { currentDeviceType, setWindowWidth } = settingsStore;
 
   return {
-    whiteLabelLogoUrls,
+    currentDeviceType,
+    setWindowWidth,
   };
 })(observer(DocspaceLogoWrapper));

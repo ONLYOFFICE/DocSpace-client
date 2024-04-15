@@ -45,6 +45,7 @@
   "UnselectAll": "Odznači vse",
   "URL": "URL",
   "ViewRawPayload": "Poglejte neobdelane uporabne podatke",
+  "WebhookCreated": "Webhook ustvarjen",
   "WebhookCreationHint": "Ta webhook bo dodeljen vsem dogodkom v DocSpace",
   "WebhookDetails": "Webhook podrobnosti",
   "WebhookEditedSuccessfully": "Konfiguracija Webhook je bila uspešno urejena",

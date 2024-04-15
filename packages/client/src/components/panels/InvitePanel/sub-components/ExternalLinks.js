@@ -228,16 +228,16 @@ const ExternalLinks = ({
       </StyledDescription>
       {externalLinksVisible && (
         <StyledInviteInputContainer key={activeLink.id}>
-          <StyledInviteInput>
+          <StyledInviteInput isShowCross>
             <InputBlock
               className="input-link"
+              iconSize={16}
+              iconButtonClassName="copy-link-icon"
               scale
               value={activeLink.shareLink}
               isReadOnly
               iconName={CopyReactSvgUrl}
               onIconClick={onCopyLink}
-              hoverColor="#333333"
-              iconColor="#A3A9AE"
             />
           </StyledInviteInput>
           <AccessSelector

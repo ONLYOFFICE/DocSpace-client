@@ -30,15 +30,12 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
-import FirebaseHelper from "@docspace/shared/utils/firebase";
-import { TFirebaseSettings } from "@docspace/shared/api/settings/types";
 import AppLoader from "@docspace/shared/components/app-loader";
 
 import { TResponse } from "@/types";
 import useError from "@/hooks/useError";
 
 import useDeviceType from "@/hooks/useDeviceType";
-import useWhiteLabel from "@/hooks/useWhiteLabel";
 import useRootInit from "@/hooks/useRootInit";
 import useDeepLink from "@/hooks/useDeepLink";
 import useSelectFileDialog from "@/hooks/useSelectFileDialog";
@@ -70,9 +67,10 @@ const Root = ({
   const fileInfo = config?.file;
 
   const instanceId = config?.document?.referenceData.instanceId;
+
   const isSkipError =
     error?.status === "not-found" ||
-    error?.status === "access-denied" ||
+    (error?.status === "access-denied" && error.editorUrl) ||
     error?.status === "not-supported";
 
   const { t } = useTranslation(["Editor", "Common"]);
@@ -84,7 +82,6 @@ const Root = ({
   const { getErrorMessage } = useError({
     error,
     editorUrl: documentserverUrl,
-    t,
   });
 
   const { currentDeviceType } = useDeviceType();
@@ -133,6 +130,7 @@ const Root = ({
       error &&
       error.message !== "restore-backup" &&
       error.message !== "unauthorized" &&
+      error.message !== "unavailable" &&
       !isSkipError
     ) {
       throw new Error(error.message);
@@ -213,4 +211,3 @@ const Root = ({
 };
 
 export default Root;
-

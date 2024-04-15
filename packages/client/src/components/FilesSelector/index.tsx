@@ -310,7 +310,7 @@ const FilesSelectorWrapper = ({
     return getIsDisabled(
       isFirstLoad,
       isSelectedParentFolder,
-      fromFolderId === selectedItemId,
+      fromFolderId === Number(selectedItemId),
       selectedItemType === "rooms",
       isRoot,
       isCopy,
@@ -487,7 +487,7 @@ export default inject(
       (rootFolderType === FolderType.Archive ||
       rootFolderType === FolderType.TRASH
         ? undefined
-        : selectedId === selectionsWithoutEditing[0]?.id
+        : selectedId !== selectionsWithoutEditing[0]?.id
           ? parentId
           : selectedId);
 

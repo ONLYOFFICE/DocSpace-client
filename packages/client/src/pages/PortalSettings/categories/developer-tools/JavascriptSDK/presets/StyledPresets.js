@@ -303,5 +303,6 @@ export const CodeWrapper = styled.div`
   margin-top: 16px;
 
   width: calc(${(props) => (props.width ? props.width : "100%")} + 2px);
+  max-width: 800px;
   height: calc(${(props) => (props.height ? props.height : "400px")} + 2px);
 `;

@@ -62,11 +62,11 @@ import {
 } from "./StyledPresets";
 
 const DocSpace = (props) => {
-  const { t, setDocumentTitle } = props;
+  const { t, setDocumentTitle, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
-  const scriptUrl = `${window.location.origin}/static/scripts/api.js`;
+  const scriptUrl = `${window.location.origin}/static/scripts/sdk/1.0.0/api.js`;
 
   const dataDimensions = [
     { key: "percent", label: "%", default: true },
@@ -213,11 +213,21 @@ const DocSpace = (props) => {
   );
 
   const code = (
-    <CodeWrapper>
+    <CodeWrapper height="fit-content">
       <CategorySubHeader className="copy-window-code">
-        {t("CopyWindowCode")}
+        {`HTML ${t("CodeTitle")}`}
       </CategorySubHeader>
+      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
+        {t("HtmlCodeDescription")}
+      </Text>
       <Textarea value={codeBlock} heightTextArea={153} />
+      <CategorySubHeader className="copy-window-code">
+        {`JavaScript ${t("CodeTitle")}`}
+      </CategorySubHeader>
+      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
+        {t("JavaScriptCodeDescription")}
+      </Text>
+      <CodeBlock config={config} />
     </CodeWrapper>
   );
 
@@ -226,11 +236,6 @@ const DocSpace = (props) => {
       key: "preview",
       title: t("Common:Preview"),
       content: preview,
-    },
-    {
-      key: "js",
-      title: "JavaScript",
-      content: <CodeBlock config={config} />,
     },
     {
       key: "code",

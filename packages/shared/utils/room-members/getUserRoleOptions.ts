@@ -54,7 +54,7 @@ export const getUserRoleOptions = (t: TTranslation) => ({
   },
   editor: {
     key: "editor",
-    label: t("Translations:RoleEditor"),
+    label: t("Common:Editor"),
     access: ShareAccessRights.Editing,
     type: "user",
   },

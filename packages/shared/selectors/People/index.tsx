@@ -69,6 +69,7 @@ const toListItem = (
     isAdmin,
     isVisitor,
     isCollaborator,
+    isRoomAdmin,
     status,
   } = item;
 
@@ -95,6 +96,7 @@ const toListItem = (
     isAdmin,
     isVisitor,
     isCollaborator,
+    isRoomAdmin,
     hasAvatar,
     isDisabled: isInvited || isDisabled,
     disabledText,
@@ -380,7 +382,7 @@ const PeopleSelector = ({
   return (
     <Selector
       id={id}
-      alwaysShowFooter
+      alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
       className={className}
       style={style}
       renderCustomItem={renderCustomItem}

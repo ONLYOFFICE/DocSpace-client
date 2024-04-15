@@ -48,6 +48,7 @@ const PublicRoom = (props) => {
     getFilesSettings,
     setPublicRoomKey,
     setIsArticleLoading,
+    setClientError,
   } = props;
 
   const navigate = useNavigate();
@@ -96,6 +97,12 @@ const PublicRoom = (props) => {
   };
 
   const renderPage = () => {
+    if (
+      roomStatus === ValidationStatus.Invalid ||
+      roomStatus === ValidationStatus.Expired
+    )
+      setClientError(true);
+
     switch (roomStatus) {
       case ValidationStatus.Ok:
         return <PublicRoomPage />;
@@ -126,6 +133,7 @@ export default inject(
     publicRoomStore,
     filesSettingsStore,
     clientLoadingStore,
+    authStore,
   }) => {
     const { validatePublicRoomKey, isLoaded, isLoading, roomStatus, roomId } =
       publicRoomStore;
@@ -133,7 +141,7 @@ export default inject(
     const { getFilesSettings } = filesSettingsStore;
     const { setPublicRoomKey } = settingsStore;
     const { setIsArticleLoading } = clientLoadingStore;
-
+    const { setClientError } = authStore;
     return {
       roomId,
       isLoaded,
@@ -145,6 +153,7 @@ export default inject(
       validatePublicRoomKey,
       setPublicRoomKey,
       setIsArticleLoading,
+      setClientError,
     };
   },
 )(observer(PublicRoom));

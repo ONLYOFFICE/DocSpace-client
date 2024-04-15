@@ -1,0 +1,19 @@
+{
+  "AbortTransfer": "Prekini prenos",
+  "AllDataTransferred": "Svi podaci prenešeni",
+  "DataReassignment": "Preusmeravanje podataka",
+  "DeleteProfileIsFinished": "Obrišite profil kada se dodeljivanje završi",
+  "DescriptionDataReassignment": "Prebacićemo sobe kreirane od strane korisnika i dokumenta uskladištena u sobama korisnika.",
+  "InProgress": "U toku",
+  "Interrupted": "Prekinuto, neki podaci nisu prebačeni",
+  "MoreAboutDataTransfer": "Više o prenosu podataka",
+  "NewDataOwner": "Novi vlasnik podataka",
+  "NoteDataReassignment": "Napomena: ova radnja se ne može opozvati.",
+  "ProcessComplete": "Možete zatvoriti ovu stranicu. Kada se proces završi, odgovorni administrator će biti obavešten putem email-a.",
+  "Reassign": "Dodeli ponovo",
+  "ReassignData": "Dodeli podatke ponovo",
+  "ReassigningDataToAnother": "Proces ponovne dodele podataka korisnika <0>{{fromUser}}</0> korisniku <1>{{toUser}}</1> je započeo. Imajte na umu da može potrajati značajno vreme.",
+  "ReassigningDataToItself": "Proces ponovne dodele podataka korisnika <0>{{fromUser}}</0> korisniku <1>{{toUser}}</1> <2>{{you}}</2> je započeo. Imajte na umu da može potrajati značajno vreme.",
+  "StartTransferAgain": "Započni prenos ponovo",
+  "UserToWhomTheDataWillBeTransferred": "Korisnik kojem će podaci biti prebačeni"
+}

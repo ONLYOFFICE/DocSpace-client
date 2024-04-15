@@ -919,8 +919,8 @@ export const getBaseTheme = () => {
 
       borderColor: blueMain,
 
-      iconColor: grayMid,
-      hoverIconColor: grayMid,
+      iconColor: gray,
+      hoverIconColor: grayMain,
     },
 
     textArea: {
@@ -2050,6 +2050,7 @@ export const getBaseTheme = () => {
       recoveryColor: "#657077",
       linkColor: "#657077",
       productColor: white,
+      height: "48px",
     },
 
     menuContainer: {

@@ -148,7 +148,7 @@ const ImportCompleteStep = ({
 
       <Wrapper>
         <Checkbox
-          label={t("Settings:SendWelcomeLetter")}
+          label={t("Settings:SendInviteLetter")}
           isChecked={isChecked}
           onChange={onChangeCheckbox}
         />
@@ -157,7 +157,7 @@ const ImportCompleteStep = ({
           offsetRight={0}
           style={{ margin: "0px 5px" }}
           tooltipContent={
-            <Text fontSize="12px">{t("Settings:WelcomeLetterTooltip")}</Text>
+            <Text fontSize="12px">{t("Settings:InviteLetterTooltip")}</Text>
           }
         />
       </Wrapper>

@@ -195,6 +195,7 @@ public class LocalesTest
                                let clientDir = Path.Combine(BasePath, wsPath)
                                from filePath in Utils.GetFiles(clientDir, searchPatern, SearchOption.AllDirectories)
                                where !filePath.Contains(Utils.ConvertPathToOS("dist/"))
+                               where !filePath.Contains(Utils.ConvertPathToOS(".next/"))
                                && !filePath.Contains(Utils.ConvertPathToOS("storybook-static/"))
                                && !filePath.Contains(Utils.ConvertPathToOS("node_modules/"))
                                && !filePath.Contains(".test.js")
@@ -513,6 +514,10 @@ public class LocalesTest
             .Select(k => k.Substring(k.IndexOf(":") + 1))
             .Distinct();
 
+        //var foo = JavaScriptFiles
+        // .Where(f => !f.Path.Contains("Banner.js"))
+        // .Where(t => t.TranslationKeys.Any(k => k == "foo")).FirstOrDefault();
+
         var notFoundJsKeys = allJsTranslationKeys.Except(allEnKeys);
 
         Assert.AreEqual(0, notFoundJsKeys.Count(),
@@ -691,7 +696,7 @@ public class LocalesTest
     public void WrongTranslationTagsTest()
     {
         var message = $"Next keys have wrong or empty translation's html tags:\r\n\r\n";
-        var regString = "<([^>]*)>(\\s*(.+?)\\s*)</([^>/]*)>";
+        var regString = "<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>";
 
         var regTags = new Regex(regString, RegexOptions.Compiled | RegexOptions.Multiline);
 
@@ -708,7 +713,7 @@ public class LocalesTest
                         t.Key,
                         t.Value,
                         Tags = regTags.Matches(t.Value)
-                                    .Select(m => m.Groups[1]?.Value?.Trim())
+                                    .Select(m => m.Value.Trim().Replace(" ", ""))
                                     .ToList()
                     })
                     .ToList()

@@ -114,9 +114,19 @@
 
     currentSrc = window.location.host; // more flexible way to check
 
-    const passed =
-      res.response.header &&
-      res.response.header.toLowerCase().includes(currentSrc.toLowerCase());
+    const domains = [...res.response.domains].map((d) => {
+      try {
+        const domain = new URL(d.toLowerCase());
+        const domainFull =
+          domain.host + (domain.pathname !== "/" ? domain.pathname : "");
+
+        return domainFull;
+      } catch {
+        return d;
+      }
+    });
+
+    const passed = domains.includes(currentSrc.toLowerCase());
 
     if (!passed) throw new Error(cspErrorText);
 
@@ -284,8 +294,9 @@
 
                   <style>
                     #${config.frameId}-container {
-                      height: 98vh !important;
-                      width: 98vw !important;
+                      height: 100lvh !important;
+                      width: 100lvw !important;
+                      overflow: hidden;
                     }
 
                     html, body {

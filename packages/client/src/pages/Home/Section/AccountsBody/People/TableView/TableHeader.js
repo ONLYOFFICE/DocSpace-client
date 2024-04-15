@@ -104,7 +104,9 @@ class PeopleTableHeader extends React.Component {
       });
 
     const columns = props.getColumns(defaultColumns);
-    const storageColumns = localStorage.getItem(this.props.tableStorageName);
+    const storageColumns = localStorage.getItem(
+      `${TABLE_COLUMNS}=${this.props.userId}`,
+    );
     const splitColumns = storageColumns && storageColumns.split(",");
 
     const resetColumnsSize =

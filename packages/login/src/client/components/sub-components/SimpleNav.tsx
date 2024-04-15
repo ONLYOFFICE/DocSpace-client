@@ -29,8 +29,9 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { mobile, getLogoUrl } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
+import { useLocation } from "react-router-dom";
 
-const StyledNav = styled.div`
+const StyledNav = styled.div<{ isError: boolean }>`
   display: none;
   height: 48px;
   align-items: center;
@@ -43,7 +44,7 @@ const StyledNav = styled.div`
     }
   }
   @media ${mobile} {
-    display: flex;
+    display: ${(props) => (props.isError ? "none" : "flex")};
   }
 `;
 
@@ -53,9 +54,11 @@ interface ISimpleNav extends IInitialState {
 
 const SimpleNav = ({ theme }: ISimpleNav) => {
   const logoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme?.isBase);
+  const location = useLocation();
 
+  const isError = location.pathname === "/login/error";
   return (
-    <StyledNav id="login-header" theme={theme}>
+    <StyledNav id="login-header" theme={theme} isError={isError}>
       <img src={logoUrl} />
     </StyledNav>
   );

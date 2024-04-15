@@ -2,13 +2,17 @@
   "ClickHere": "انقر هنا",
   "ConfirmEmailDescription": "استخدم الرابط الموجود في البريد الإلكتروني للتفعيل. لم تستلم بريدًا إلكترونيًا يحتوي على رابط التفعيل؟",
   "ConfirmEmailHeader": "يرجى تنشيط بريدك الإلكتروني ({{email}}) للوصول إلى ميزات DocSpace",
+  "PersonalUserQuotaAdminsDescription": "لتحميل وإنشاء ملفات ومجلدات جديدة ، يرجى تحرير مساحة على القرص، أو إدارة الحصة النسبية لكل مستخدم في <1>إعدادات إدارة التخزين.</1>",
+  "PersonalUserQuotaDescription": "لتحميل وإنشاء ملفات ومجلدات جديدة، يرجى تحرير مساحة على القرص أو الاتصال بالمسؤول لزيادة حصة التخزين.",
   "RequestActivation": "اطلب التفعيل مرة أخرى",
   "RoomQuotaDescription": "يمكنك أرشفة الغرف غير الضرورية أو <1> {{clickHere}}</1> للعثور على خطة أسعار أكثر ملاءمة لـ DocSpace",
   "RoomQuotaHeader": "عدد الغرف على وشك أن يتجاوز: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "حدود مساحة التخزين والغرف على وشك أن يتم تجاوزها.",
   "StorageAndUserHeader": "حدود مساحة التخزين والمشرفين / المستخدمين المتميزين على وشك أن يتم تجاوزها.",
   "StorageQuotaDescription": "يمكنك إزالة الملفات غير الضرورية أو <1> {{clickHere}}</1> للعثور على خطة تسعير أكثر ملاءمة لـ DocSpace الخاص بك.",
+  "StorageQuotaExceeded": "تم تجاوز حصة التخزين",
   "StorageQuotaHeader": "حجم مساحة التخزين على وشك أن يتم تجاوزها: {{currentValue}} / {{maxValue}}",
+  "TenantCustomQuotaDescription": "يمكنك إزالة الملفات غير الضرورية أو تغيير الحصة النسبية في <1> إعدادات إدارة التخزين.</1>",
   "UserQuotaDescription": "<1>{{clickHere}}</1> للعثور على خطة تسعير أفضل لـ DocSpace الخاص بك.",
   "UserQuotaHeader": "عدد المشرفين المستخدمين المتميزين على وشك أن يتم تجاوزه: {{currentValue}} / {{maxValue}}"
 }

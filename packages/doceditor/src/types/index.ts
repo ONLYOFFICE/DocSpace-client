@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
-  TDocServiceLocation,
   TFile,
   TFileSecurity,
   TFilesSettings,
@@ -165,10 +164,11 @@ export interface IInitialConfig {
   type: string;
   Error?: string;
   errorMessage?: string;
+  message?: undefined;
 }
 
 export type TError = {
-  message: "unauthorized" | "restore-backup" | string;
+  message?: "unauthorized" | "restore-backup" | string;
   status?: "not-found" | "access-denied" | number | string;
   type?: string;
   editorUrl?: string;
@@ -210,12 +210,12 @@ export type EditorProps = {
   isSharingAccess?: boolean;
   errorMessage?: string;
 
-  onSDKRequestSharingSettings: () => void;
-  onSDKRequestSaveAs: (event: object) => void;
-  onSDKRequestInsertImage: (event: object) => void;
-  onSDKRequestSelectSpreadsheet: (event: object) => void;
-  onSDKRequestSelectDocument: (event: object) => void;
-  onSDKRequestReferenceSource: (event: object) => void;
+  onSDKRequestSharingSettings?: () => void;
+  onSDKRequestSaveAs?: (event: object) => void;
+  onSDKRequestInsertImage?: (event: object) => void;
+  onSDKRequestSelectSpreadsheet?: (event: object) => void;
+  onSDKRequestSelectDocument?: (event: object) => void;
+  onSDKRequestReferenceSource?: (event: object) => void;
 };
 
 export type TEventData = {

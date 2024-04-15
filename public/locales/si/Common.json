@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "පිළිබඳව",
   "AboutCompanyTitle": "මෙම මෘදුකාංගය ගැන",
   "AccessRights": "ප්‍රවේශ අයිති",
@@ -12,7 +12,6 @@
   "AddUsers": "පරිශ්‍රීලකයින් එක් කරන්න",
   "AdvancedFilter": "සෙවුම් විකල්ප",
   "Alert": "ඇඟවීම",
-  "AllAccounts": "සියළුම ගිණුම්",
   "ApplyButton": "යොදන්න",
   "Archive": "සංරක්‍ෂණය",
   "ArchivedRoomAction": "'{{name}}' කාමරය සංරක්‍ෂිතයි",
@@ -273,6 +272,7 @@
   "SomethingWentWrong": "යමක් වැරදී ඇත.",
   "SortBy": "අනුව පෙළගසන්න",
   "SpacesInLocalPart": "ස්ථානීය කොටසේ හිස්තැන් අඩංගු නොවිය යුතුය",
+  "SSO": "SSO",
   "Standard": "සම්මත",
   "SubscriptionExpired": "සහාය සහ යාවත්කාල සඳහා වන ඔබගේ දායකත්‍වය කල් ඉකුත් වී ඇත",
   "SubscriptionIsExpiring": "{{date}} දී ඔබගේ දායකත්‍වය ඉකුත් වේ",

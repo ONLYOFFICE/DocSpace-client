@@ -33,7 +33,7 @@ import { mobile, tablet } from "../../utils";
 import { Box } from "../box";
 import { ModalDialogType } from "./ModalDialog.enums";
 
-const StyledModal = styled.div<{ modalSwipeOffset?: number }>`
+const StyledModal = styled.div<{ modalSwipeOffset?: number; blur?: number }>`
   #create-text-input::-webkit-search-decoration,
   #create-text-input::-webkit-search-cancel-button,
   #create-text-input::-webkit-search-results-button,
@@ -48,6 +48,14 @@ const StyledModal = styled.div<{ modalSwipeOffset?: number }>`
   }
   .loader-wrapper {
     padding: 0 16px 16px;
+  }
+
+  .modal-backdrop-active {
+    ${(props) =>
+      props.blur &&
+      css`
+        backdrop-filter: blur(${props.blur}px) !important;
+      `};
   }
 `;
 

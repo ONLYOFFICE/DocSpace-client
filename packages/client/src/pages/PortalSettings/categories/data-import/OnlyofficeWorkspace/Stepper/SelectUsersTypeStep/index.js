@@ -62,8 +62,9 @@ const SelectUsersTypeStep = ({
 
   const filteredAccounts = dataPortion.filter(
     (data) =>
-      data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.email.toLowerCase().startsWith(searchValue.toLowerCase()),
+      data.firstName?.toLowerCase().startsWith(searchValue.toLowerCase()) ||
+      data.lastName?.toLowerCase().startsWith(searchValue.toLowerCase()) ||
+      data.email?.toLowerCase().startsWith(searchValue.toLowerCase()),
   );
 
   useEffect(() => {

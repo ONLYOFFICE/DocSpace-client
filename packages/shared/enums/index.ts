@@ -157,6 +157,7 @@ export const enum RoomsProviderType {
   SharePoint = 6,
   WebDav = 7,
   Yandex = 8,
+  Storage = 9,
 }
 
 /**

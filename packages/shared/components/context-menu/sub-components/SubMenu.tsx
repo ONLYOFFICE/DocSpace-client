@@ -51,6 +51,7 @@ import {
   ContextMenuType,
   SeparatorType,
 } from "../ContextMenu.types";
+import { Badge } from "../../badge";
 
 const SubMenu = (props: {
   model: ContextMenuModel[];
@@ -295,6 +296,18 @@ const SubMenu = (props: {
         {subMenuIcon}
         {item.isOutsideLink && (
           <OutsdideIcon className={subMenuIconClassName} />
+        )}
+        {item.badgeLabel && (
+          <Badge
+            label={item.badgeLabel}
+            className={subMenuIconClassName + " p-submenu-badge"}
+            backgroundColor="#7757D9"
+            fontSize="9px"
+            fontWeight={700}
+            borderRadius="50px"
+            noHover
+            isHovered={false}
+          />
         )}
       </a>
     );

@@ -57,6 +57,7 @@ export type ContextMenuType = {
   isOutsideLink?: boolean;
   withToggle?: boolean;
   checked?: boolean;
+  badgeLabel?: string;
 };
 
 export type SeparatorType = {

@@ -42,6 +42,8 @@ export const getRoomTypeTitleTranslation = (roomType = 1, t) => {
       return t("Files:PublicRoom");
     case RoomsType.FormRoom:
       return t("CreateEditRoomDialog:FormFilingRoomTitle");
+    case RoomsType.TemplateRoom:
+      return t("Files:FromTemplate");
   }
 };
 
@@ -61,6 +63,8 @@ export const getRoomTypeDescriptionTranslation = (roomType = 1, t) => {
       return t("CreateEditRoomDialog:PublicRoomDescription");
     case RoomsType.FormRoom:
       return t("CreateEditRoomDialog:FormFilingRoomDescription");
+    case RoomsType.TemplateRoom:
+      return t("CreateEditRoomDialog:FromTemplateDescription");
   }
 };
 

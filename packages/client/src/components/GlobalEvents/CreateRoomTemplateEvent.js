@@ -24,29 +24,40 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  TSelectorCancelButton,
-  TSelectorHeader,
-  TSelectorItem,
-} from "../../components/selector/Selector.types";
+import React, { useState, useEffect, useCallback } from "react";
+import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
-import { RoomsType } from "../../enums";
+import { toastr } from "@docspace/shared/components/toast";
 
-export type RoomSelectorProps = TSelectorHeader &
-  TSelectorCancelButton & {
-    id?: string;
-    className?: string;
-    style?: React.CSSProperties;
+import { CreateRoomTemplateDialog } from "../dialogs";
+let timerId = null;
+const CreateRoomTemplateEvent = (props) => {
+  const { visible, onClose, item, fetchTags } = props;
 
-    isMultiSelect: boolean;
+  const [fetchedTags, setFetchedTags] = useState([]);
 
-    onSubmit: (items: TSelectorItem[]) => void | Promise<void>;
-    roomType?: RoomsType;
-    excludeItems?: number[];
-    setIsDataReady?: (value: boolean) => void;
-    submitButtonLabel?: string;
-    withSearch?: boolean;
+  const fetchTagsAction = useCallback(async () => {
+    const tags = await fetchTags();
+    setFetchedTags(tags);
+  }, []);
 
-    emptyScreenHeader?: string;
-    emptyScreenDescription?: string;
-  };
+  useEffect(() => {
+    fetchTagsAction();
+  }, [fetchTagsAction]);
+
+  return (
+    <CreateRoomTemplateDialog
+      visible={visible}
+      item={item}
+      // onSaveClick={onSaveClick}
+      onClose={onClose}
+      fetchedTags={fetchedTags}
+    />
+  );
+};
+
+export default inject(({ tagsStore }) => {
+  const { fetchTags } = tagsStore;
+  return { fetchTags };
+})(observer(CreateRoomTemplateEvent));

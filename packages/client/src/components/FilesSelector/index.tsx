@@ -75,6 +75,7 @@ const FilesSelectorWrapper = ({
   isMove,
   isCopy,
   isRestore,
+  isTemplate,
   isRestoreAll,
   isSelect,
   isFormRoom,
@@ -277,6 +278,7 @@ const FilesSelectorWrapper = ({
     isRestore,
     isFormRoom,
     isThirdParty,
+    isTemplate,
     isSelectFolder,
   );
 

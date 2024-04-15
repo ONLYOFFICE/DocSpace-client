@@ -64,6 +64,7 @@ import PluginActionsSvgUrl from "PUBLIC_DIR/images/plugin.actions.react.svg?url"
 import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
 import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
+import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 
 import { makeAutoObservable } from "mobx";
@@ -660,6 +661,12 @@ class ContextOptionsStore {
 
   onClickEditRoom = (item) => {
     const event = new Event(Events.ROOM_EDIT);
+    event.item = item;
+    window.dispatchEvent(event);
+  };
+
+  onCreateRoomTemplate = (item) => {
+    const event = new Event(Events.CREATE_ROOM_TEMPLATE);
     event.item = item;
     window.dispatchEvent(event);
   };
@@ -1362,6 +1369,15 @@ class ContextOptionsStore {
       },
       ...pinOptions,
       ...muteOptions,
+      {
+        id: "option_save-as-template",
+        key: "save-as-template",
+        label: t("SaveAsTemplate"),
+        icon: CreateTemplateSvgUrl,
+        onClick: () => this.onCreateRoomTemplate(item),
+        badgeLabel: t("New").toUpperCase(),
+        disabled: false,
+      },
       {
         id: "option_owner-change",
         key: "owner-change",

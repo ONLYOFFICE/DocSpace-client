@@ -54,6 +54,7 @@ export type FilesSelectorProps = {
   isMove?: boolean;
   isCopy?: boolean;
   isRestore: boolean;
+  isTemplate: boolean;
   isRestoreAll?: boolean;
   isSelect?: boolean;
   isFormRoom?: boolean;

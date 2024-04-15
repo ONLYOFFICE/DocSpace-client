@@ -32,34 +32,41 @@ import { StyledPreviewTile } from "../ImageEditor.styled";
 
 const PreviewTile = ({
   title,
+  subtitle,
   previewIcon,
   tags,
   defaultTagLabel,
 }: {
   title: string;
+  subtitle: string;
   previewIcon: string;
   tags: string[];
   defaultTagLabel: string;
 }) => {
   return (
-    <StyledPreviewTile>
+    <StyledPreviewTile isShorten={!tags}>
       <div className="tile-header">
         <img className="tile-header-icon" src={previewIcon} alt={title} />
-        <div className="tile-header-title">{title}</div>
+        <div className="tile-header-wrapper-title">
+          <div className="tile-header-title">{title}</div>
+          <div className="tile-header-sub-title">{subtitle}</div>
+        </div>
       </div>
-      <div className="tile-tags">
-        {tags.length ? (
-          <Tags columnCount={2} tags={tags} onSelectTag={() => {}} />
-        ) : (
-          <Tag
-            className="type_tag"
-            tag="script"
-            label={defaultTagLabel}
-            isDefault
-            onClick={() => {}}
-          />
-        )}
-      </div>
+      {tags && (
+        <div className="tile-tags">
+          {tags.length ? (
+            <Tags columnCount={2} tags={tags} onSelectTag={() => {}} />
+          ) : (
+            <Tag
+              className="type_tag"
+              tag="script"
+              label={defaultTagLabel}
+              isDefault
+              onClick={() => {}}
+            />
+          )}
+        </div>
+      )}
     </StyledPreviewTile>
   );
 };

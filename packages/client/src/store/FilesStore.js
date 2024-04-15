@@ -2302,6 +2302,7 @@ class FilesStore {
         "unpin-room",
         "mute-room",
         "unmute-room",
+        "save-as-template",
         "separator1",
         "download",
         "archive-room",
@@ -2313,6 +2314,7 @@ class FilesStore {
       if (!canEditRoom) {
         roomOptions = this.removeOptions(roomOptions, [
           "edit-room",
+          "save-as-template",
           "reconnect-storage",
         ]);
       }

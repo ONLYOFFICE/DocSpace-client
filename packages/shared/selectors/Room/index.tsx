@@ -70,6 +70,8 @@ const RoomSelector = ({
   onCancel,
 
   roomType,
+  emptyScreenHeader,
+  emptyScreenDescription,
 }: RoomSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -217,8 +219,10 @@ const RoomSelector = ({
       onSubmit={onSubmit}
       isMultiSelect={isMultiSelect}
       emptyScreenImage={EmptyScreenCorporateSvgUrl}
-      emptyScreenHeader={t("Common:EmptyRoomsHeader")}
-      emptyScreenDescription={t("Common:EmptyRoomsDescription")}
+      emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyRoomsHeader")}
+      emptyScreenDescription={
+        emptyScreenDescription ?? t("Common:EmptyRoomsDescription")
+      }
       searchEmptyScreenImage={EmptyScreenCorporateSvgUrl}
       searchEmptyScreenHeader={t("Common:NotFoundTitle")}
       searchEmptyScreenDescription={t("Common:SearchEmptyRoomsDescription")}

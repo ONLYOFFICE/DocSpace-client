@@ -125,7 +125,10 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
   }
 `;
 
-const StyledPreviewTile = styled.div<{ isGeneratedPreview?: boolean }>`
+const StyledPreviewTile = styled.div<{
+  isGeneratedPreview?: boolean;
+  isShorten: boolean;
+}>`
   background: ${(props) =>
     props.theme.createEditRoomDialog.previewTile.background};
   width: 214px;
@@ -161,7 +164,9 @@ const StyledPreviewTile = styled.div<{ isGeneratedPreview?: boolean }>`
         border-radius: 6px;
       }
     }
-    &-title {
+    &-title,
+    &-sub-title,
+    &-wrapper-title {
       font-weight: 600;
       font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
       line-height: 22px;
@@ -188,6 +193,20 @@ const StyledPreviewTile = styled.div<{ isGeneratedPreview?: boolean }>`
       text-overflow: ellipsis;
     }
   }
+
+  ${(props) =>
+    props.isShorten &&
+    css`
+      height: 68px;
+      .tile-header {
+        border: none;
+      }
+
+      .tile-header-sub-title {
+        font-size: 13px;
+        font-weight: 400;
+      }
+    `}
 `;
 StyledPreviewTile.defaultProps = { theme: Base };
 

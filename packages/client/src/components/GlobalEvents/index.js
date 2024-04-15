@@ -40,6 +40,7 @@ import EditGroupEvent from "./GroupEvents/EditGroupEvent";
 import ChangeUserTypeEvent from "./ChangeUserTypeEvent";
 import CreatePluginFile from "./CreatePluginFileEvent";
 import ChangeQuotaEvent from "./ChangeQuotaEvent";
+import CreateRoomTemplateEvent from "./CreateRoomTemplateEvent";
 const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
   const [createDialogProps, setCreateDialogProps] = useState({
     visible: false,
@@ -92,6 +93,11 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     headerTitle: null,
   });
   const [createPluginFileDialog, setCreatePluginFileProps] = useState({
+    visible: false,
+    props: null,
+    onClose: null,
+  });
+  const [createRoomTemplateDialog, setCreateRoomTemplateDialog] = useState({
     visible: false,
     props: null,
     onClose: null,
@@ -250,6 +256,24 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
       },
     });
   }, []);
+
+  const onCreateRoomTemplate = (e) => {
+    console.log("onCreateRoomTemplate", e);
+
+    const visible = e.item ? true : false;
+
+    setCreateRoomTemplateDialog({
+      visible: visible,
+      item: e.item,
+      onClose: () => {
+        setCreateRoomTemplateDialog({
+          visible: false,
+          item: null,
+        });
+      },
+    });
+  };
+
   useEffect(() => {
     window.addEventListener(Events.CREATE, onCreate);
     window.addEventListener(Events.RENAME, onRename);
@@ -259,6 +283,7 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     window.addEventListener(Events.GROUP_CREATE, onCreateGroup);
     window.addEventListener(Events.GROUP_EDIT, onEditGroup);
     window.addEventListener(Events.CHANGE_QUOTA, onChangeQuota);
+    window.addEventListener(Events.CREATE_ROOM_TEMPLATE, onCreateRoomTemplate);
     if (enablePlugins) {
       window.addEventListener(
         Events.CREATE_PLUGIN_FILE,
@@ -286,6 +311,10 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
       window.removeEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
       window.removeEventListener(Events.GROUP_CREATE, onCreateGroup);
       window.removeEventListener(Events.GROUP_EDIT, onEditGroup);
+      window.addEventListener(
+        Events.CREATE_ROOM_TEMPLATE,
+        onCreateRoomTemplate,
+      );
 
       if (enablePlugins) {
         window.removeEventListener(
@@ -344,6 +373,12 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
       <CreatePluginFile
         key={Events.CREATE_PLUGIN_FILE}
         {...createPluginFileDialog}
+      />
+    ),
+    createRoomTemplateDialog.visible && (
+      <CreateRoomTemplateEvent
+        key={Events.CREATE_PLUGIN_FILE}
+        {...createRoomTemplateDialog}
       />
     ),
     changeQuotaDialog.visible && (

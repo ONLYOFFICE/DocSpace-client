@@ -65,6 +65,7 @@ import {
   PluginDialog,
   DeletePluginDialog,
   ShareFolderDialog,
+  CreateRoomTemplateDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -127,6 +128,7 @@ const Panels = (props) => {
     changeRoomOwnerIsVisible,
     deletePluginDialogVisible,
     shareFolderDialogVisible,
+    createRoomTemplateDialogVisible,
   } = props;
 
   const [createPDFFormFile, setCreatePDFFormFile] = useState({
@@ -312,6 +314,9 @@ const Panels = (props) => {
         {...createPDFFormFile}
       />
     ),
+    createRoomTemplateDialogVisible && (
+      <CreateRoomTemplateDialog key="create-room-template-dialog" />
+    ),
   ];
 };
 
@@ -370,6 +375,7 @@ export default inject(
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
       shareFolderDialogVisible,
+      createRoomTemplateDialogVisible,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -435,6 +441,7 @@ export default inject(
       changeRoomOwnerIsVisible,
       deletePluginDialogVisible,
       shareFolderDialogVisible,
+      createRoomTemplateDialogVisible,
     };
   },
 )(observer(Panels));

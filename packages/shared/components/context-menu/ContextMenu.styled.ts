@@ -376,6 +376,10 @@ const StyledContextMenu = styled.div<{
     }
   }
 
+  .p-submenu-badge {
+    margin: 0;
+  }
+
   .p-contextmenu-enter {
     opacity: 0;
   }

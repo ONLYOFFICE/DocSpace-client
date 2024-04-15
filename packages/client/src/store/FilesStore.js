@@ -3961,9 +3961,12 @@ class FilesStore {
     const isDesktopView = isDesktop();
     const tileGap = isDesktopView ? 16 : 14;
     const minTileWidth = 216 + tileGap;
-    const sectionPadding = isDesktopView ? 24 : 16;
-
     const body = document.getElementById("section");
+    const tileContainer = document.getElementById("tileContainer");
+
+    const sectionPadding =
+      body?.offsetWidth - tileContainer?.clientWidth - tileGap + 1;
+
     const sectionWidth = body ? body.offsetWidth - sectionPadding : 0;
 
     return Math.floor(sectionWidth / minTileWidth);

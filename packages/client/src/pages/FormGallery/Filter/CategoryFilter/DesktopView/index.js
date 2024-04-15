@@ -65,6 +65,8 @@ const CategoryFilterDesktop = ({
         options={[]}
         directionX={"right"}
         directionY={"both"}
+        scaled={true}
+        size={"content"}
         withBackdrop={false}
         withoutBackground
         disableIconClick={false}

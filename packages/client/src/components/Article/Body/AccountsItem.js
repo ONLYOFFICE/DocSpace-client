@@ -33,7 +33,13 @@ import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelpe
 
 import { ArticleItem } from "@docspace/shared/components/article-item";
 
-const PureAccountsItem = ({ showText, isActive, onClick, t }) => {
+const PureAccountsItem = ({
+  showText,
+  isActive,
+  onClick,
+  t,
+  currentColorScheme,
+}) => {
   const onClickAction = React.useCallback(
     (e, id) => {
       onClick && onClick(e, "accounts");
@@ -52,6 +58,7 @@ const PureAccountsItem = ({ showText, isActive, onClick, t }) => {
       onClick={onClickAction}
       isActive={isActive}
       folderId="document_catalog-accounts"
+      $currentColorScheme={currentColorScheme}
     />
   );
 };
@@ -59,9 +66,10 @@ const PureAccountsItem = ({ showText, isActive, onClick, t }) => {
 const AccountsItem = withTranslation(["Common"])(PureAccountsItem);
 
 export default inject(({ settingsStore }) => {
-  const { showText } = settingsStore;
+  const { showText, currentColorScheme } = settingsStore;
 
   return {
     showText,
+    currentColorScheme,
   };
 })(observer(AccountsItem));

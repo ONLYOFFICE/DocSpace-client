@@ -329,6 +329,8 @@
         .replace(lt, rlt)
         .replace(gt, rgt);
 
+      const windowHeight = 778, windowWidth = 610;
+
       button.addEventListener("click", () => {
         const winHtml = `<!DOCTYPE html>
           <html>
@@ -382,7 +384,7 @@
           new Blob([winHtml], { type: "text/html" })
         );
 
-        window.open(winUrl, "_blank", `width=610,height=778`);
+        window.open(winUrl, "_blank", `width=${windowWidth},height=${windowHeight}`);
       });
 
       button.setAttribute("id", config.frameId + "-container");

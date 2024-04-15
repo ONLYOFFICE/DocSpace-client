@@ -66,7 +66,7 @@ const CategoryFilterDesktop = ({
         directionX={"right"}
         dhoutBackgroun
         withBackdrop={false}
-        wwithoutBackground
+        withoutBackground
         disableIconClick={false}
         disableItemClick={false}
         isDefaultMode={false}

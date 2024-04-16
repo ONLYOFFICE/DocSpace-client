@@ -172,6 +172,7 @@
   "NewColorScheme": "Nuova combinazione di colori",
   "NextStep": "Passo successivo",
   "NoEmail": "NESSUNA E-MAIL",
+  "NoUsersInBackup": "Nessun utente trovato. Riprova o carica altri file di backup.",
   "NumberOfActiveEmployees": "Numero di dipendenti attivi: {{count}}",
   "NumberOfAttempts": "Numero di tentativi",
   "PasswordMinLenght": "Lunghezza della password minima",

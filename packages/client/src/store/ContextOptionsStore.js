@@ -628,6 +628,10 @@ class ContextOptionsStore {
     setDeleteDialogVisible(true);
   };
 
+  onOpenPDFEditDialog = () => {
+    this.dialogsStore.setPdfFormEditVisible(true);
+  };
+
   filterModel = (model, filter) => {
     let options = [];
     let index = 0;
@@ -1220,6 +1224,14 @@ class ContextOptionsStore {
         label: t("Common:FillFormButton"),
         icon: FormFillRectSvgUrl,
         onClick: () => this.onClickLinkFillForm(item),
+        disabled: !item.startFilling,
+      },
+      {
+        id: "option_edit-pdf",
+        key: "edit-pdf",
+        label: t("Common:EditPDFForm"),
+        icon: AccessEditReactSvgUrl,
+        onClick: this.onOpenPDFEditDialog,
         disabled: !item.startFilling,
       },
       {

@@ -51,7 +51,7 @@ export const PDFFormEditingDialog = ({ onClose }: FormEditingDialogProps) => {
           primary
           tabIndex={0}
           size={ButtonSize.normal}
-          label={t("EditButton")}
+          label={t("Common:EditButton")}
           onClick={handleSubmit}
         />
         <Button
@@ -59,7 +59,7 @@ export const PDFFormEditingDialog = ({ onClose }: FormEditingDialogProps) => {
           tabIndex={0}
           onClick={onClose}
           size={ButtonSize.normal}
-          label={t("CancelButton")}
+          label={t("Common:CancelButton")}
         />
       </ModalDialog.Footer>
     </ModalDialog>

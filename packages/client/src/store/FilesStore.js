@@ -2000,6 +2000,7 @@ class FilesStore {
         "view",
         "pdf-view",
         "make-form",
+        "edit-pdf",
         "separator0",
         "submit-to-gallery",
         "separator-SubmitToGallery",
@@ -2043,6 +2044,10 @@ class FilesStore {
 
       if (!isPdf || item.startFilling) {
         fileOptions = this.removeOptions(fileOptions, ["open-pdf"]);
+      }
+
+      if (!item.startFilling) {
+        fileOptions = this.removeOptions(fileOptions, ["edit-pdf"]);
       }
 
       if (!isPdf || !window.DocSpaceConfig?.pdfViewer || isRecycleBinFolder) {

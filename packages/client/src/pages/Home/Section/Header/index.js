@@ -771,13 +771,15 @@ const SectionHeaderContent = (props) => {
       return getGroupContextOptions(t, currentGroup, false, true);
     }
 
+    const canShare = isPersonalRoom && !isCollaborator;
+
     return [
       {
         id: "header_option_sharing-settings",
         key: "sharing-settings",
         label: t("Files:Share"),
         onClick: onClickShare,
-        disabled: !isPersonalRoom,
+        disabled: !canShare,
         icon: ShareReactSvgUrl,
       },
       {

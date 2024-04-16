@@ -1437,7 +1437,7 @@ const Dark: TTheme = {
       lineHeight: "10px",
 
       color: grayMaxLight,
-      disableColor: gray,
+      disableColor: grayMaxLight,
     },
 
     separator: {

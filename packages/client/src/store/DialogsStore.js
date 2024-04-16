@@ -111,6 +111,7 @@ class DialogsStore {
   changeRoomOwnerIsVisible = false;
   changeRoomOwnerData = null;
   editMembersGroup = null;
+  pdfFormEditVisible = false;
 
   shareFolderDialogVisible = false;
   cancelUploadDialogVisible = false;
@@ -513,6 +514,10 @@ class DialogsStore {
 
   setCancelUploadDialogVisible = (visible) => {
     this.cancelUploadDialogVisible = visible;
+  };
+
+  setPdfFormEditVisible = (visible) => {
+    this.pdfFormEditVisible = visible;
   };
 }
 

@@ -46,4 +46,6 @@ export interface BackdropProps {
   withoutBackground?: boolean;
   isModalDialog?: boolean;
   onClick?: (e: React.MouseEvent) => void;
+  /** Defines if backdrop should overlay other backdrops */
+  canOverlay: boolean;
 }

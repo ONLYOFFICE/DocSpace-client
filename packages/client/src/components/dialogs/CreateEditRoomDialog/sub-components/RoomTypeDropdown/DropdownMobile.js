@@ -61,7 +61,7 @@ const DropdownMobile = ({
 }) => {
   return (
     <>
-      <Backdrop visible={open} onClick={onClose} zIndex={450} />
+      <Backdrop visible={open} onClick={onClose} canOverlay zIndex={450} />
       {!forсeHideDropdown && (
         <StyledDropdownMobile className="dropdown-mobile" isOpen={open}>
           {RoomsTypeValues.map((roomType) => (

@@ -38,8 +38,6 @@ const StyledRoomTypeDropdown = styled.div`
 
   .backdrop-active {
     top: -64px;
-    backdrop-filter: unset;
-    background: rgba(6, 22, 38, 0.2);
   }
 `;
 

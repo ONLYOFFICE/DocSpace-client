@@ -35,6 +35,7 @@ import { classNames } from "@docspace/shared/utils";
 import RoomsRowDataComponent from "./sub-components/RoomsRowData";
 import TrashRowDataComponent from "./sub-components/TrashRowData";
 import RecentRowDataComponent from "./sub-components/RecentRowData";
+import TemplatesRowData from "./sub-components/TemplatesRowData";
 import RowDataComponent from "./sub-components/RowData";
 import { StyledTableRow, StyledDragAndDrop } from "./StyledTable";
 
@@ -64,6 +65,7 @@ const FilesTableRow = (props) => {
     showHotkeyBorder,
     id,
     isRooms,
+    isTemplates,
     isTrashFolder,
     isHighlight,
     hideColumns,
@@ -185,7 +187,14 @@ const FilesTableRow = (props) => {
         badgeUrl={badgeUrl}
         canDrag={canDrag}
       >
-        {isRooms ? (
+        {isTemplates ? (
+          <TemplatesRowData
+            t={t}
+            element={element}
+            dragStyles={dragStyles}
+            {...props}
+          />
+        ) : isRooms ? (
           <RoomsRowDataComponent
             element={element}
             dragStyles={dragStyles}

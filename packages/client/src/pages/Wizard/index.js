@@ -67,8 +67,7 @@ import {
   StyledContent,
 } from "./StyledWizard";
 import { getUserTimezone, getSelectZone } from "./timezonesHelper";
-
-import DocspaceLogo from "../../components/DocspaceLogoWrapper";
+import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import {
   DEFAULT_SELECT_TIMEZONE,

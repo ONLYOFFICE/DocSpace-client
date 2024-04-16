@@ -164,10 +164,11 @@ export interface IInitialConfig {
   type: string;
   Error?: string;
   errorMessage?: string;
+  message?: undefined;
 }
 
 export type TError = {
-  message: "unauthorized" | "restore-backup" | string;
+  message?: "unauthorized" | "restore-backup" | string;
   status?: "not-found" | "access-denied" | number | string;
   type?: string;
   editorUrl?: string;

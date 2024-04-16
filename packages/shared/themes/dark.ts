@@ -889,8 +889,8 @@ const Dark: TTheme = {
 
     borderColor: grayMaxLight,
 
-    iconColor: "#646464",
-    hoverIconColor: "#858585",
+    iconColor: "#858585",
+    hoverIconColor: "#FFFFFF",
   },
 
   textArea: {
@@ -1437,7 +1437,7 @@ const Dark: TTheme = {
       lineHeight: "10px",
 
       color: grayMaxLight,
-      disableColor: gray,
+      disableColor: grayMaxLight,
     },
 
     separator: {

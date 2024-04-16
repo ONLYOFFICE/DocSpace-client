@@ -87,6 +87,7 @@ const DataImportLoader = () => {
       <div className="content">
         <RectangleSkeleton className="item" width="340px" height="64px" />
         <RectangleSkeleton className="item" width="340px" height="64px" />
+        <RectangleSkeleton className="item" width="340px" height="64px" />
       </div>
     </StyledLoader>
   );

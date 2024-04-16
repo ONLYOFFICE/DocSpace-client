@@ -50,6 +50,8 @@ const StyledContainer = styled.div`
     font-weight: 700;
     line-height: 59.92px;
     color: ${(props) => props.theme.text.emailColor};
+
+    text-align: center;
   }
 `;
 StyledContainer.defaultProps = { theme: Base };

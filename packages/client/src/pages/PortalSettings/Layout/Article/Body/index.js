@@ -64,6 +64,7 @@ const ArticleBodyContent = (props) => {
     currentDeviceType,
     isProfileLoading,
     limitedAccessSpace,
+    currentColorScheme,
   } = props;
 
   const [selectedKeys, setSelectedKeys] = React.useState([]);
@@ -170,8 +171,6 @@ const ArticleBodyContent = (props) => {
     location.pathname,
     selectedKeys,
   ]);
-
-  console.log(selectedKeys);
 
   const onSelect = (value, e) => {
     if (isArrayEqual([value], selectedKeys)) {
@@ -309,6 +308,7 @@ const ArticleBodyContent = (props) => {
           style={{
             marginTop: `${item.key.includes(9) ? "16px" : "0"}`,
           }}
+          $currentColorScheme={currentColorScheme}
         />,
       );
     });
@@ -345,6 +345,7 @@ export default inject(
       toggleArticleOpen,
       currentDeviceType,
       limitedAccessSpace,
+      currentColorScheme,
     } = settingsStore;
 
     const isProfileLoading =
@@ -365,6 +366,7 @@ export default inject(
       currentDeviceType,
       isProfileLoading,
       limitedAccessSpace,
+      currentColorScheme,
     };
   },
 )(

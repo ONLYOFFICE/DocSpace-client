@@ -44,44 +44,6 @@ import type { IInitialConfig, TCatchError, TError, TResponse } from "@/types";
 
 import { REPLACED_URL_PATH } from "./constants";
 
-import { isTemplateFile } from ".";
-
-const processFillFormDraft = async (
-  config: IInitialConfig,
-  searchParams: URLSearchParams,
-
-  share?: string,
-): Promise<[string, IInitialConfig | TError, string | undefined] | void> => {
-  const templateFileId = config.file.id;
-
-  const formUrl = await checkFillFromDraft(templateFileId, share);
-
-  if (!formUrl) return;
-
-  const basePath = getBaseUrl();
-  const url = new URL(basePath + formUrl);
-
-  const queryFileId = url.searchParams.get("fileid");
-  const queryVersion = url.searchParams.get("version");
-
-  if (!queryFileId) return;
-
-  url.searchParams.delete("fileid");
-
-  const combinedSearchParams = new URLSearchParams({
-    ...Object.fromEntries(searchParams),
-    ...Object.fromEntries(url.searchParams),
-  });
-
-  const actions: [Promise<IInitialConfig | TError>] = [
-    openEdit(queryFileId, combinedSearchParams.toString(), share),
-  ];
-
-  const [newConfig] = await Promise.all(actions);
-
-  return [queryFileId, newConfig, url.hash ?? ""];
-};
-
 export async function fileCopyAs(
   fileId: string,
   destTitle: string,
@@ -223,6 +185,8 @@ export async function getData(
     ]);
 
     if ("editorConfig" in config) {
+      const newFileId = config.file.id.toString();
+
       const response: TResponse = {
         config,
         user,
@@ -230,26 +194,8 @@ export async function getData(
         successAuth: false,
         isSharingAccess: false,
         doc,
-        fileId,
+        fileId: newFileId !== fileId ? newFileId : fileId,
       };
-
-      // TODO: temporarily disabled
-      // if (isTemplateFile(response.config) && false) {
-      //   const result = await processFillFormDraft(
-      //     response.config,
-      //     searchParams,
-      //     share,
-      //   );
-
-      //   if (result) {
-      //     const [newFileId, newConfig, hash] = result;
-
-      //     response.fileId = newFileId;
-      //     response.config = newConfig as IInitialConfig;
-
-      //     if (hash) response.hash = hash;
-      //   }
-      // }
 
       if (response.settings?.tenantStatus === TenantStatus.PortalRestore) {
         response.error = { message: "restore-backup" };

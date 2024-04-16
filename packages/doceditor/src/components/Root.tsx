@@ -67,9 +67,10 @@ const Root = ({
   const fileInfo = config?.file;
 
   const instanceId = config?.document?.referenceData.instanceId;
+
   const isSkipError =
     error?.status === "not-found" ||
-    error?.status === "access-denied" ||
+    (error?.status === "access-denied" && error.editorUrl) ||
     error?.status === "not-supported";
 
   const { t } = useTranslation(["Editor", "Common"]);
@@ -81,7 +82,6 @@ const Root = ({
   const { getErrorMessage } = useError({
     error,
     editorUrl: documentserverUrl,
-    t,
   });
 
   const { currentDeviceType } = useDeviceType();
@@ -130,6 +130,7 @@ const Root = ({
       error &&
       error.message !== "restore-backup" &&
       error.message !== "unauthorized" &&
+      error.message !== "unavailable" &&
       !isSkipError
     ) {
       throw new Error(error.message);

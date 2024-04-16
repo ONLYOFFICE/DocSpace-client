@@ -160,7 +160,7 @@ const useEditorEvents = ({
   }, [config?.Error, errorMessage]);
 
   const onDocumentReady = React.useCallback(() => {
-    console.log("onDocumentReady", { docEditor });
+    // console.log("onDocumentReady", { docEditor });
     setDocumentReady(true);
 
     frameCallCommand("setIsLoaded");
@@ -172,7 +172,7 @@ const useEditorEvents = ({
     // }
 
     if (docEditor) {
-      console.log("call assign for asc files editor doceditor");
+      // console.log("call assign for asc files editor doceditor");
       assign(
         window as unknown as { [key: string]: {} },
         ["ASC", "Files", "Editor", "docEditor"],
@@ -599,7 +599,7 @@ const useEditorEvents = ({
   };
 
   React.useEffect(() => {
-    console.log("render docspace config", { ...window.DocSpaceConfig });
+    // console.log("render docspace config", { ...window.DocSpaceConfig });
     if (
       IS_DESKTOP_EDITOR ||
       (typeof window !== "undefined" &&

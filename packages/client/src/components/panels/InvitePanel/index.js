@@ -111,7 +111,6 @@ const InvitePanel = ({
   const invitePanelBodyRef = useRef();
   const invitePanelWrapper = useRef(null);
   const invitePanelRef = useRef(null);
-  const windowHeight = useRef(window.innerHeight);
   const loaderRef = useRef();
 
   const onChangeExternalLinksVisible = (visible) => {

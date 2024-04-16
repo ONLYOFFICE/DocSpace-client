@@ -919,8 +919,8 @@ export const getBaseTheme = () => {
 
       borderColor: blueMain,
 
-      iconColor: grayMid,
-      hoverIconColor: grayMid,
+      iconColor: gray,
+      hoverIconColor: grayMain,
     },
 
     textArea: {
@@ -1467,7 +1467,7 @@ export const getBaseTheme = () => {
         lineHeight: "10px",
 
         color: black,
-        disableColor: gray,
+        disableColor: black,
       },
 
       separator: {

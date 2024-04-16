@@ -200,7 +200,7 @@ const SelectFileStep = ({
       uploadInterval.current = setInterval(async () => {
         try {
           const res = await getMigrationStatus();
-          setProgress(res.progress);
+          setProgress(res?.progress);
 
           if (res.progress > 10) {
             setIsVisible(false);
@@ -233,6 +233,7 @@ const SelectFileStep = ({
             ) {
               setUsers(res.parseResult);
               setShowReminder(true);
+              setIsBackupEmpty(false);
             } else {
               setIsBackupEmpty(true);
               cancelMigration();

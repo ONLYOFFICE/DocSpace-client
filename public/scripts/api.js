@@ -107,7 +107,7 @@
   const validateCSP = async (targetSrc) => {
     let currentSrc = window.location.origin;
 
-    //if (currentSrc.indexOf(targetSrc) !== -1) return; // skip check for the same domain
+    if (currentSrc.indexOf(targetSrc) !== -1) return; // skip check for the same domain
 
     const response = await fetch(`${targetSrc}/api/2.0/security/csp`);
     const res = await response.json();
@@ -284,6 +284,8 @@
       })
         .replace(lt, rlt)
         .replace(gt, rgt);
+      
+      const windowHeight = 778, windowWidth = 610;
 
       button.addEventListener("click", () => {
         const winHtml = `<!DOCTYPE html>
@@ -294,8 +296,9 @@
 
                   <style>
                     #${config.frameId}-container {
-                      height: 98vh !important;
-                      width: 98vw !important;
+                      height: 100lvh !important;
+                      width: 100lvw !important;
+                      overflow: hidden;
                     }
 
                     html, body {
@@ -337,7 +340,7 @@
           new Blob([winHtml], { type: "text/html" })
         );
 
-        window.open(winUrl, "_blank", `width=610,height=778`);
+        window.open(winUrl, "_blank", `width=${windowWidth},height=${windowHeight}`);
       });
 
       button.setAttribute("id", config.frameId + "-container");

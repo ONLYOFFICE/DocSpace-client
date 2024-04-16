@@ -31,18 +31,17 @@ import "@/styles/globals.scss";
 import Providers from "@/providers";
 import { getSettings, getUser } from "@/utils/actions";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const headersList = headers();
-  const referer = headersList.get("referer");
-
-  if (referer?.includes("health")) return children;
-
   const [user, settings] = await Promise.all([getUser(), getSettings()]);
+
+  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
 
   return (
     <html lang="en">

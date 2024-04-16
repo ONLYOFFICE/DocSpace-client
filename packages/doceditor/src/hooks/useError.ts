@@ -35,16 +35,28 @@ import { TError } from "@/types";
 interface UseErrorProps {
   error?: TError;
   editorUrl?: string;
-  t: TTranslation;
 }
 
-const useError = ({ error, editorUrl, t }: UseErrorProps) => {
+const useError = ({ error, editorUrl }: UseErrorProps) => {
   React.useEffect(() => {
     if (error?.message === "unauthorized") {
       sessionStorage.setItem("referenceUrl", window.location.href);
 
       window.open(
         combineUrl(window.DocSpaceConfig?.proxy?.url, "/login"),
+        "_self",
+      );
+    }
+    if (error?.message === "unavailable") {
+      window.open(
+        combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable"),
+        "_self",
+      );
+    }
+
+    if (error?.message === "restore-backup") {
+      window.open(
+        combineUrl(window.DocSpaceConfig?.proxy?.url, "/preparation-portal"),
         "_self",
       );
     }
@@ -72,10 +84,8 @@ const useError = ({ error, editorUrl, t }: UseErrorProps) => {
   const getErrorMessage = React.useCallback(() => {
     if (typeof error !== "string") return error?.message;
 
-    if (error === "restore-backup") return t("Common:PreparationPortalTitle");
-
     return error;
-  }, [error, t]);
+  }, [error]);
 
   return { getErrorMessage };
 };

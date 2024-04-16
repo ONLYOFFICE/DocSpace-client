@@ -179,9 +179,7 @@ const StyledToastContainer = styled(ToastContainer)<{ $topOffset: number }>`
     margin: ${(props) => props.theme.toast.main.margin};
     padding: ${(props) => props.theme.toast.main.padding};
     min-height: ${(props) => props.theme.toast.main.minHeight};
-    font:
-      normal 12px "Open Sans",
-      sans-serif;
+    font: normal 12px ${(props) => props.theme.fontFamily};
     width: ${(props) => props.theme.toast.main.width};
     right: ${(props) => props.theme.toast.main.right};
 

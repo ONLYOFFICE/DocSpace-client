@@ -29,7 +29,7 @@ import styled, { css } from "styled-components";
 import { Base } from "../../themes";
 
 const StyledSearchInput = styled.div<{ isScale?: boolean }>`
-  font-family: Open Sans;
+  font-family: ${(props) => props.theme.fontFamily};
   font-style: normal;
 
   ${({ isScale }) =>

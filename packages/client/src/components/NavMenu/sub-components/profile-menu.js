@@ -106,7 +106,7 @@ const StyledCrossIcon = styled(CrossIcon)`
 StyledCrossIcon.defaultProps = { theme: Base };
 
 const commonStyle = css`
-  font-family: "Open Sans", sans-serif, Arial;
+  font-family: ${(props) => props.theme.fontFamily};
   font-style: normal;
   color: ${(props) => props.theme.menuContainer.color};
   max-width: 300px;

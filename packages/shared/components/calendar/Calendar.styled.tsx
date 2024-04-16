@@ -133,7 +133,7 @@ const DateItem = styled.button<{
   focused: boolean;
   isSecondary?: boolean;
 }>`
-  font-family: "Open Sans";
+  font-family: ${(props) => props.theme.fontFamily};
   font-weight: 600;
   font-size: ${(props) =>
     props.theme.getCorrectFontSize(props.isMobile ? "16px" : "13px")};
@@ -282,7 +282,7 @@ RoundButton.defaultProps = { theme: Base };
 
 const Title = styled.h2<{ isMobile?: boolean; disabled?: boolean }>`
   position: relative;
-  font-family: "Open Sans", sans-serif, Arial;
+  font-family: ${(props) => props.theme.fontFamily};
   font-weight: 700;
   font-size: ${(props) =>
     props.theme.getCorrectFontSize(props.isMobile ? "21px" : "18px")};
@@ -303,7 +303,7 @@ Title.defaultProps = { theme: Base };
 
 const Weekday = styled.span<{ isMobile?: boolean }>`
   pointer-events: none;
-  font-family: "Open Sans";
+  font-family: ${(props) => props.theme.fontFamily};
   font-weight: 400;
   font-size: ${(props) =>
     props.theme.getCorrectFontSize(props.isMobile ? "16px" : "13px")};

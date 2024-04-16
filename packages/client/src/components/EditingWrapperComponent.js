@@ -121,7 +121,7 @@ const EditingWrapper = styled.div`
     outline: 0 !important;
     font-weight: 600;
     margin: 0;
-    font-family: "Open Sans", sans-serif, Arial;
+    font-family: ${(props) => props.theme.fontFamily};
     text-align: ${({ theme }) =>
       theme.interfaceDirection === "rtl" ? `right` : `left`};
     color: ${(props) => props.theme.filesEditingWrapper.color};

@@ -47,10 +47,7 @@ const StyledSnackBar = styled(Box)<{
 }>`
   transition: all 500ms ease;
   transition-property: top, right, bottom, left, opacity;
-  font-family:
-    Open Sans,
-    sans-serif,
-    Arial;
+  font-family: ${(props) => props.theme.fontFamily};
   font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   min-height: 14px;
   position: relative;

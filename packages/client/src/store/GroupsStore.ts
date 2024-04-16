@@ -464,8 +464,10 @@ class GroupsStore {
     forInfoPanel = false,
     forInsideGroup = false,
   ) => {
+    const { isRoomAdmin } = this.peopleStore.userStore.user;
+
     return [
-      {
+      !isRoomAdmin && {
         id: "edit-group",
         key: "edit-group",
         className: "group-menu_drop-down",
@@ -497,11 +499,11 @@ class GroupsStore {
           this.infoPanelStore.setIsVisible(true);
         },
       },
-      {
+      !isRoomAdmin && {
         key: "separator",
         isSeparator: true,
       },
-      {
+      !isRoomAdmin && {
         id: "delete-group",
         key: "delete-group",
         className: "group-menu_drop-down",
@@ -509,23 +511,6 @@ class GroupsStore {
         title: t("Common:Delete"),
         icon: TrashReactSvgUrl,
         onClick: () => this.onDeleteClick(item.name),
-
-        //
-        // onClick: async () => {
-        //   const groupId = item.id;
-        //   groupsApi
-        //     .deleteGroup(groupId)!
-        //     .then(() => {
-        //       toastr.success(t("PeopleTranslations:SuccessDeleteGroup"));
-        //       this.setSelection([]);
-        //       this.getGroups(this.groupsFilter, true);
-        //       this.infoPanelStore.setInfoPanelSelection(null);
-        //     })
-        //     .catch((err) => {
-        //       toastr.error(err.message);
-        //       console.error(err);
-        //     });
-        // },
       },
     ];
   };

@@ -24,34 +24,58 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
 import React from "react";
+import { I18nextProvider } from "react-i18next";
 
-import { getLogoUrls } from "@docspace/shared/api/settings";
-import { TWhiteLabel } from "@docspace/shared/utils/whiteLabelHelper";
+import { ThemeProvider } from "@docspace/shared/components/theme-provider";
+import ErrorBoundary from "@docspace/shared/components/error-boundary/ErrorBoundary";
+import { TFirebaseSettings } from "@docspace/shared/api/settings/types";
+import FirebaseHelper from "@docspace/shared/utils/firebase";
+import { TUser } from "@docspace/shared/api/people/types";
 
-const useWhiteLabel = () => {
-  const [logoUrls, setLogoUrls] = React.useState<TWhiteLabel[]>([]);
+import { TDataContext } from "@/types";
+import useI18N from "@/hooks/useI18N";
+import useTheme from "@/hooks/useTheme";
+import useDeviceType from "@/hooks/useDeviceType";
 
-  const requestRunning = React.useRef(false);
-  const alreadyFetched = React.useRef(false);
+import pkgFile from "../../package.json";
 
-  const fetchWhiteLabel = React.useCallback(async () => {
-    if (alreadyFetched.current) return;
+export const Providers = ({
+  children,
+  value,
+}: {
+  children: React.ReactNode;
+  value: TDataContext;
+}) => {
+  const firebaseHelper = new FirebaseHelper(
+    value.settings?.firebase ?? ({} as TFirebaseSettings),
+  );
 
-    requestRunning.current = true;
-    const urls = await getLogoUrls();
-    requestRunning.current = false;
+  const { currentDeviceType } = useDeviceType();
 
-    setLogoUrls(urls);
-    alreadyFetched.current = true;
-  }, []);
+  const { i18n } = useI18N({
+    settings: value.settings,
+  });
 
-  React.useEffect(() => {
-    fetchWhiteLabel();
-  }, [fetchWhiteLabel]);
+  const { theme } = useTheme({
+    colorTheme: value.colorTheme,
+    settings: value.settings,
+  });
 
-  return { logoUrls };
+  return (
+    <ThemeProvider theme={theme}>
+      <I18nextProvider i18n={i18n}>
+        <ErrorBoundary
+          user={{} as TUser}
+          version={pkgFile.version}
+          firebaseHelper={firebaseHelper}
+          currentDeviceType={currentDeviceType}
+        >
+          {children}
+        </ErrorBoundary>
+      </I18nextProvider>
+    </ThemeProvider>
+  );
 };
-
-export default useWhiteLabel;
-

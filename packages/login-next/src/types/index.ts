@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { i18n } from "i18next";
-
 import {
   TCapabilities,
   TGetColorTheme,
@@ -33,23 +31,12 @@ import {
   TPasswordHash,
   TSettings,
   TThirdPartyProvider,
-  TVersionBuild,
 } from "@docspace/shared/api/settings/types";
-import { TWhiteLabel } from "@docspace/shared/utils/whiteLabelHelper";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 
 export type TDataContext = {
-  settings: TSettings;
-  versionBuild: TVersionBuild;
-  colorTheme: TGetColorTheme;
-  whiteLabel: TWhiteLabel[];
-  thirdPartyProvider: TThirdPartyProvider[] | undefined;
-  capabilities: TCapabilities | undefined;
-  ssoSettings: TGetSsoSettings | undefined;
-
-  currentLanguage: string;
-  standalone: boolean;
-  i18n?: i18n;
+  settings?: TSettings;
+  colorTheme?: TGetColorTheme;
 };
 
 export type GreetingContainersProps = {
@@ -63,6 +50,9 @@ export type GreetingContainersProps = {
 
 export type LoginProps = {
   searchParams: { [key: string]: string };
+  settings?: TSettings;
+  capabilities?: TCapabilities;
+  thirdPartyProvider: TThirdPartyProvider[];
 };
 
 export type RegisterProps = {

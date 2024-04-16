@@ -30,15 +30,20 @@ import { Base, Dark, TColorScheme, TTheme } from "@docspace/shared/themes";
 import { getSystemTheme } from "@docspace/shared/utils";
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getAppearanceTheme } from "@docspace/shared/api/settings";
-import { TGetColorTheme } from "@docspace/shared/api/settings/types";
+import { TGetColorTheme, TSettings } from "@docspace/shared/api/settings/types";
+
+import useI18N from "./useI18N";
 
 const SYSTEM_THEME = getSystemTheme();
 
 export interface UseThemeProps {
   colorTheme?: TGetColorTheme;
+  settings?: TSettings;
 }
 
-const useTheme = ({ colorTheme }: UseThemeProps) => {
+const useTheme = ({ colorTheme, settings }: UseThemeProps) => {
+  const { i18n } = useI18N({ settings });
+
   const [currentColorTheme, setCurrentColorTheme] =
     React.useState<TColorScheme>({} as TColorScheme);
 
@@ -63,11 +68,12 @@ const useTheme = ({ colorTheme }: UseThemeProps) => {
   }, [colorTheme]);
 
   const getUserTheme = React.useCallback(() => {
+    const interfaceDirection = i18n?.dir ? i18n.dir() : "ltr";
     if (SYSTEM_THEME === ThemeKeys.BaseStr) {
       setTheme({
         ...Base,
         currentColorScheme: currentColorTheme,
-        interfaceDirection: "ltr",
+        interfaceDirection,
       });
 
       return;
@@ -76,7 +82,7 @@ const useTheme = ({ colorTheme }: UseThemeProps) => {
     setTheme({
       ...Dark,
       currentColorScheme: currentColorTheme,
-      interfaceDirection: "ltr",
+      interfaceDirection,
     });
   }, [currentColorTheme]);
 

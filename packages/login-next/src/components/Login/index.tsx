@@ -30,12 +30,13 @@ import { useContext, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
-import { TenantStatus } from "@docspace/shared/enums";
+import { TenantStatus, WhiteLabelLogoType } from "@docspace/shared/enums";
 import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import {
   getBgPattern,
   getLoginLink,
   getLogoFromPath,
+  getLogoUrl,
   getOAuthToken,
 } from "@docspace/shared/utils/common";
 
@@ -49,7 +50,6 @@ import { Text } from "@docspace/shared/components/text";
 
 import SSOIcon from "PUBLIC_DIR/images/sso.react.svg?url";
 
-import { DataContext } from "@/providers/DataProvider";
 import { LoginProps } from "@/types";
 import useRecoverDialog from "@/hooks/useRecoverDialog";
 
@@ -58,7 +58,12 @@ import Register from "../Register";
 
 import { LoginContent, LoginFormWrapper } from "./Login.styled";
 
-const Login = ({ searchParams }: LoginProps) => {
+const Login = ({
+  searchParams,
+  settings,
+  capabilities,
+  thirdPartyProvider,
+}: LoginProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [invitationLinkData, setInvitationLinkData] = useState({
@@ -71,8 +76,7 @@ const Login = ({ searchParams }: LoginProps) => {
 
   const theme = useTheme();
   const { t } = useTranslation(["Login"]);
-  const { settings, capabilities, thirdPartyProvider, whiteLabel } =
-    useContext(DataContext);
+
   const {
     recoverDialogVisible,
     recoverDialogEmailPlaceholder,
@@ -80,9 +84,6 @@ const Login = ({ searchParams }: LoginProps) => {
     openRecoverDialog,
     closeRecoverDialog,
   } = useRecoverDialog({});
-
-  const isRestoringPortal =
-    settings?.tenantStatus === TenantStatus.PortalRestore;
 
   const ssoExists = () => {
     if (capabilities?.ssoUrl) return true;
@@ -152,12 +153,7 @@ const Login = ({ searchParams }: LoginProps) => {
 
   const bgPattern = getBgPattern(theme.currentColorScheme?.id);
 
-  const logo = whiteLabel && Object.values(whiteLabel)[1];
-  const logoUrl = !logo
-    ? undefined
-    : !theme?.isBase
-      ? (getLogoFromPath(logo.path.dark) as string)
-      : (getLogoFromPath(logo.path.light) as string);
+  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme?.isBase);
 
   const ssoProps = ssoExists()
     ? {
@@ -174,14 +170,14 @@ const Login = ({ searchParams }: LoginProps) => {
         <LoginContent>
           <ColorTheme
             themeId={ThemeId.LinkForgotPassword}
-            isRegisterContainerVisible={settings.enabledJoin}
+            isRegisterContainerVisible={settings?.enabledJoin}
           >
             <GreetingContainer
               roomName={invitationLinkData.roomName}
               firstName={invitationLinkData.firstName}
               lastName={invitationLinkData.lastName}
               logoUrl={logoUrl}
-              greetingSettings={settings.greetingSettings}
+              greetingSettings={settings?.greetingSettings}
               type={invitationLinkData.type}
             />
             <FormWrapper id="login-form">
@@ -201,7 +197,7 @@ const Login = ({ searchParams }: LoginProps) => {
                   />
                 </>
               )}
-              {settings.enableAdmMess && (
+              {settings?.enableAdmMess && (
                 <Link
                   fontWeight={600}
                   fontSize="13px"
@@ -216,7 +212,7 @@ const Login = ({ searchParams }: LoginProps) => {
             </FormWrapper>
           </ColorTheme>
         </LoginContent>
-        {settings.enabledJoin && (
+        {settings?.enabledJoin && (
           <Register
             id="login_register"
             enabledJoin

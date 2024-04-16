@@ -28,6 +28,8 @@
 
 import { headers, cookies } from "next/headers";
 
+import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
+
 import {
   TCapabilities,
   TGetColorTheme,
@@ -39,102 +41,130 @@ import {
 import { TenantStatus } from "@docspace/shared/enums";
 import { TWhiteLabel } from "@docspace/shared/utils/whiteLabelHelper";
 
-const API_PREFIX = "api/2.0";
-
-export const getBaseUrl = () => {
-  const hdrs = headers();
-
-  const host = hdrs.get("x-forwarded-host");
-  const proto = hdrs.get("x-forwarded-proto");
-
-  const baseURL = `${proto}://${host}`;
-
-  return baseURL;
-};
-
-export const getAPIUrl = () => {
-  const baseUrl = getBaseUrl();
-  const baseAPIUrl = `${baseUrl}/${API_PREFIX}`;
-
-  return baseAPIUrl;
-};
-
-export const createRequest = (
-  paths: string[],
-  newHeaders: [string, string][],
-  method: string,
-  body?: string,
-) => {
-  const hdrs = new Headers(headers());
-
-  const apiURL = getAPIUrl();
-
-  newHeaders.forEach((hdr) => {
-    if (hdr[0]) hdrs.set(hdr[0], hdr[1]);
-  });
-
-  const urls = paths.map((path) => `${apiURL}${path}`);
-
-  const requests = urls.map(
-    (url) => new Request(url, { headers: hdrs, method, body }),
-  );
-
-  return requests;
-};
-
 export const checkIsAuthenticated = async () => {
   const [request] = createRequest(["/authentication"], [["", ""]], "GET");
 
-  const res = (await (await fetch(request)).json()).response as boolean;
+  const res = await fetch(request);
 
-  return res;
+  if (!res.ok) return;
+
+  const isAuth = await res.json();
+
+  return isAuth.response as boolean;
 };
 
-export const getData = async () => {
-  const requests = createRequest(
-    [
-      `/settings?withPassword=false`,
-      `/settings/version/build`,
-      `/settings/colortheme`,
-      `/settings/whitelabel/logos`,
-    ],
+export async function getSettings() {
+  const [getSettings] = createRequest(
+    [`/settings?withPassword=false`],
     [["", ""]],
     "GET",
   );
 
-  const actions = requests.map((req) => fetch(req));
+  const settingsRes = await fetch(getSettings);
 
-  const [settingsRes, ...rest] = await Promise.all(actions);
+  if (settingsRes.status === 403) return `access-restricted`;
 
-  const settings = (await settingsRes.json()).response as TSettings;
+  if (!settingsRes.ok) return;
 
-  if (settings.tenantStatus !== TenantStatus.PortalRestore) {
-    const settingsRequests = createRequest(
-      [`/people/thirdparty/providers`, `/capabilities`, `/settings/ssov2`],
-      [["", ""]],
-      "GET",
-    );
+  const settings = await settingsRes.json();
 
-    const settingsActions = settingsRequests.map((req) => fetch(req));
+  return settings.response as TSettings;
+}
 
-    const response = await Promise.all(settingsActions);
-
-    response.forEach((res) => rest.push(res));
-  }
-
-  const otherRes = (await Promise.all(rest.map((r) => r.json()))).map(
-    (r) => r.response,
+export async function getVersionBuild() {
+  const [getSettings] = createRequest(
+    [`/settings/version/build`],
+    [["", ""]],
+    "GET",
   );
 
-  return [settings, ...otherRes] as [
-    TSettings,
-    TVersionBuild,
-    TGetColorTheme,
-    TWhiteLabel[],
-    TThirdPartyProvider[] | undefined,
-    TCapabilities | undefined,
-    TGetSsoSettings | undefined,
-  ];
+  const res = await fetch(getSettings);
+
+  if (!res.ok) return;
+
+  const versionBuild = await res.json();
+
+  return versionBuild.response as TVersionBuild;
+}
+
+export async function getColorTheme() {
+  const [getSettings] = createRequest(
+    [`/settings/colortheme`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getSettings);
+
+  if (!res.ok) return;
+
+  const colorTheme = await res.json();
+
+  return colorTheme.response as TGetColorTheme;
+}
+
+export async function getThirdPartyProviders() {
+  const [getThirdParty] = createRequest(
+    [`/people/thirdparty/providers`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getThirdParty);
+
+  if (!res.ok) return;
+
+  const thirdParty = await res.json();
+
+  return thirdParty.response as TThirdPartyProvider[];
+}
+
+export async function getCapabilities() {
+  const [getCapabilities] = createRequest([`/capabilities`], [["", ""]], "GET");
+
+  const res = await fetch(getCapabilities);
+
+  if (!res.ok) return;
+
+  const capabilities = await res.json();
+
+  return capabilities.response as TCapabilities;
+}
+
+export async function getSSO() {
+  const [getSSO] = createRequest([`/capabilities`], [["", ""]], "GET");
+
+  const res = await fetch(getSSO);
+
+  if (!res.ok) return;
+
+  const sso = await res.json();
+
+  return sso.response as TGetSsoSettings;
+}
+
+export const getData = async () => {
+  const [settings, ...rest] = await Promise.all([
+    getSettings(),
+    getVersionBuild(),
+    getColorTheme(),
+  ]);
+
+  if (
+    settings &&
+    settings !== "access-restricted" &&
+    settings.tenantStatus !== TenantStatus.PortalRestore
+  ) {
+    const response = await Promise.all([
+      getThirdPartyProviders(),
+      getCapabilities(),
+      getSSO(),
+    ]);
+
+    return [settings, ...rest, ...response];
+  }
+
+  return [settings, ...rest];
 };
 
 export const updateCookie = (name: string, value: string, options: object) => {

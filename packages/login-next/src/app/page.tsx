@@ -25,14 +25,64 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use server";
+import { redirect } from "next/navigation";
+
+import { TenantStatus } from "@docspace/shared/enums";
+import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 
 import Login from "@/components/Login";
+import {
+  getSettings,
+  getVersionBuild,
+  getColorTheme,
+  getThirdPartyProviders,
+  getCapabilities,
+  getSSO,
+} from "@/utils/actions";
+import {
+  TCapabilities,
+  TGetSsoSettings,
+  TThirdPartyProvider,
+} from "@docspace/shared/api/settings/types";
 
 async function Page({
   searchParams,
 }: {
   searchParams: { [key: string]: string };
 }) {
+  const [settings, versionBuild, colorTheme] = await Promise.all([
+    getSettings(),
+    getVersionBuild(),
+    getColorTheme(),
+  ]);
+
+  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+
+  let thirdParty: TThirdPartyProvider[] | undefined;
+  let capabilities: TCapabilities | undefined;
+  let ssoSettings: TGetSsoSettings | undefined;
+
+  if (settings?.tenantStatus !== TenantStatus.PortalRestore) {
+    [thirdParty, capabilities, ssoSettings] = await Promise.all([
+      getThirdPartyProviders(),
+      getCapabilities(),
+      getSSO(),
+    ]);
+  }
+
+  const ssoUrl = capabilities ? capabilities.ssoUrl : "";
+  const hideAuthPage = ssoSettings ? ssoSettings.hideAuthPage : false;
+
+  if (ssoUrl && hideAuthPage && searchParams.skipssoredirect !== "true") {
+    redirect(ssoUrl);
+  }
+
+  if (settings?.wizardToken) {
+    redirect(`${getBaseUrl()}/wizard`);
+  }
+
+  let standalone: boolean = settings?.standalone ? true : false;
+
   return <Login searchParams={searchParams} />;
 }
 

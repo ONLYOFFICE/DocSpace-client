@@ -26,9 +26,13 @@
 
 import React from "react";
 import { i18n } from "i18next";
+
+import { getCookie, getLanguage } from "@docspace/shared/utils";
+import { LANGUAGE } from "@docspace/shared/constants";
 import { TSettings } from "@docspace/shared/api/settings/types";
 
 import { getI18NInstance } from "@/utils/i18n";
+import { setCookie } from "@docspace/shared/utils/cookie";
 
 interface UseI18NProps {
   settings?: TSettings;
@@ -49,7 +53,19 @@ const useI18N = ({ settings }: UseI18NProps) => {
   React.useEffect(() => {
     isInit.current = true;
 
-    const instance = getI18NInstance(settings?.culture ?? "en");
+    let currentLanguage: string = settings?.culture ?? "en";
+
+    const cookieLang = getCookie(LANGUAGE);
+
+    if (cookieLang) {
+      currentLanguage = cookieLang;
+    } else {
+      setCookie(LANGUAGE, currentLanguage);
+    }
+
+    currentLanguage = getLanguage(currentLanguage);
+
+    const instance = getI18NInstance(currentLanguage);
 
     if (instance) setI18N(instance);
   }, [settings?.culture]);

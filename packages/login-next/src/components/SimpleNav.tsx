@@ -27,17 +27,16 @@
 
 "use client";
 
-import React, { useContext } from "react";
-import styled from "styled-components";
+import React from "react";
+import styled, { useTheme } from "styled-components";
 
 import { mobile } from "@docspace/shared/utils/device";
-import { getLogoFromPath, getSystemTheme } from "@docspace/shared/utils/common";
-import { Base, Dark } from "@docspace/shared/themes";
+import { getLogoFromPath, getLogoUrl } from "@docspace/shared/utils/common";
+import { Base } from "@docspace/shared/themes";
 import { TWhiteLabel } from "@docspace/shared/utils/whiteLabelHelper";
-import { ThemeKeys } from "@docspace/shared/enums";
-import { DataContext } from "@/providers/DataProvider";
+import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
 
-const StyledSimpleNav = styled.div`
+const StyledSimpleNav = styled.div<{ isError: boolean }>`
   display: none;
   height: 48px;
   align-items: center;
@@ -49,30 +48,25 @@ const StyledSimpleNav = styled.div`
       fill: ${(props) => props.theme.client?.home?.logoColor};
     }
   }
+
   @media ${mobile} {
-    display: flex;
+    display: ${(props) => (props.isError ? "none" : "flex")};
   }
 `;
 
 StyledSimpleNav.defaultProps = { theme: Base };
 
-interface SimpleNavProps {
-  logoUrls: TWhiteLabel[];
-}
+interface SimpleNavProps {}
 
-const SimpleNav = ({ logoUrls }: SimpleNavProps) => {
-  const { theme } = useContext(DataContext);
+const SimpleNav = ({}: SimpleNavProps) => {
+  const theme = useTheme();
 
-  const logo = logoUrls && Object.values(logoUrls)[0];
+  const logoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme?.isBase);
 
-  const logoUrl = !logo
-    ? undefined
-    : ThemeKeys.BaseStr !== theme
-      ? getLogoFromPath(logo.path.dark)
-      : getLogoFromPath(logo.path.light);
+  const isError = window.location.pathname === "/login/error";
 
   return (
-    <StyledSimpleNav id="login-header">
+    <StyledSimpleNav id="login-header" isError={isError}>
       <img src={logoUrl} alt="logo-url" />
     </StyledSimpleNav>
   );

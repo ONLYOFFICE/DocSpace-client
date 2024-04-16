@@ -28,6 +28,7 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
@@ -87,6 +88,9 @@ const ActiveSessions = ({
   sessionsIsInit,
   getSessions,
   sessions,
+  viewAs,
+  setViewAs,
+  currentDeviceType,
   setSessions,
   platformModalData,
 }) => {
@@ -95,6 +99,12 @@ const ActiveSessions = ({
   useEffect(() => {
     getSessions();
   }, []);
+
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   const onClickRemoveAllSessions = async () => {
     try {
@@ -175,7 +185,7 @@ const ActiveSessions = ({
         />
       </Box>
 
-      <SessionsTable t={t} sessionsData={sessions} />
+      <SessionsTable t={t} sessionsData={sessions} viewAs={viewAs} />
 
       {logoutDialogVisible && (
         <LogoutSessionDialog
@@ -216,7 +226,8 @@ export default inject(({ settingsStore, setup }) => {
     removeAllExecptThis,
     sessionsIsInit,
     sessions,
-    currentSession,
+    viewAs,
+    setViewAs,
     getSessions,
     setSessions,
     platformModalData,
@@ -232,7 +243,8 @@ export default inject(({ settingsStore, setup }) => {
     removeAllExecptThis,
     sessionsIsInit,
     sessions,
-    currentSession,
+    viewAs,
+    setViewAs,
     getSessions,
     setSessions,
     currentDeviceType,

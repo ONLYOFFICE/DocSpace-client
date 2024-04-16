@@ -24,38 +24,61 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { isMobile } from "@docspace/shared/utils";
 import styled from "styled-components";
 
-import { RowContainer } from "@docspace/shared/components/row-container";
-import SessionsRow from "./SessionsRow";
+import { convertTime } from "@docspace/shared/utils/convertTime";
+import { Text } from "@docspace/shared/components/text";
+import { RowContent } from "@docspace/shared/components/row-content";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
 
-const StyledRowContainer = styled(RowContainer)`
-  margin: 2px 0 20px;
+const StyledRowContent = styled(RowContent)`
+  .session-browser {
+    font-size: 14px;
+    font-weight: 600;
+    color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
+  }
 `;
 
-const RowView = (props) => {
-  const { t, sectionWidth, sessionsData } = props;
-
+const SessionsRowContent = ({
+  id,
+  platform,
+  browser,
+  date,
+  country,
+  city,
+  ip,
+  sectionWidth,
+  showTickIcon,
+}) => {
   return (
-    <StyledRowContainer
-      className="sessions-row-container"
-      useReactWindow={false}
-      hasMoreFiles={false}
-      itemHeight={58}
-      itemCount={sessionsData.length}
-      filesLength={sessionsData.length}
-      fetchMoreFiles={() => {}}
+    <StyledRowContent
+      key={id}
+      sectionWidth={sectionWidth}
+      sideColor={theme.profile.activeSessions.tableCellColor}
     >
-      {sessionsData.map((item) => (
-        <SessionsRow
-          t={t}
-          key={item.id}
-          item={item}
-          sectionWidth={sectionWidth}
+      <Text fontSize="14px" fontWeight="600">
+        {platform} <span className="session-browser">{`(${browser})`}</span>
+      </Text>
+      {isMobile() && showTickIcon && (
+        <IconButton
+          size={12}
+          iconName={TickSvgUrl}
+          isDisabled
+          color="#20D21F"
         />
-      ))}
-    </StyledRowContainer>
+      )}
+      <Text truncate>{convertTime(date)}</Text>
+      <Text truncate>
+        {country}
+        {` ${city}`}
+      </Text>
+      <Text truncate containerWidth="160px">
+        {ip}
+      </Text>
+    </StyledRowContent>
   );
 };
 
-export default RowView;
+export default SessionsRowContent;

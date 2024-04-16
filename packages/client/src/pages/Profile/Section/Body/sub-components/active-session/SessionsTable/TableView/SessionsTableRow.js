@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { ReactSVG } from "react-svg";
 import { Base } from "@docspace/shared/themes";
 import styled, { css } from "styled-components";
 
@@ -107,7 +106,15 @@ const SessionsTableRow = (props) => {
       <TableCell>
         <Text className="session-platform">{platform}</Text>
         <Text className="session-info">{`(${browser})`}</Text>
-        {showTickIcon && <ReactSVG className="tick-icon" src={TickSvgUrl} />}
+        {showTickIcon && (
+          <IconButton
+            size={12}
+            className="tick-icon"
+            color="#20D21F"
+            iconName={TickSvgUrl}
+            isDisabled
+          />
+        )}
       </TableCell>
 
       <TableCell>
@@ -126,7 +133,7 @@ const SessionsTableRow = (props) => {
 
       {showRemoveIcon && (
         <TableCell>
-          <Box>
+          <Box style={{ marginLeft: "8px" }}>
             <IconButton
               size={20}
               iconName={RemoveSessionSvgUrl}

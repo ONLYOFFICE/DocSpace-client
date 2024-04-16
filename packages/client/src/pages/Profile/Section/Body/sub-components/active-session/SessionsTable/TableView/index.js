@@ -42,6 +42,11 @@ const INFO_PANEL_COLUMNS_SIZE = `infoPanelSessionsColumnsSize_ver-${TABLE_VERSIO
 const StyledTableContainer = styled(TableContainer)`
   margin: 0 0 20px;
 
+  .table-container_header {
+    position: absolute;
+    padding: 0px 20px;
+  }
+
   .header-container-text {
     color: ${(props) => props.theme.tableContainer.header.textColor};
     font-size: ${(props) => props.theme.getCorrectFontSize("12px")};

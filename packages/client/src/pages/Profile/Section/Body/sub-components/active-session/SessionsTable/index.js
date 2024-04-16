@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
 import { Consumer } from "@docspace/shared/utils/context";
 
 import TableView from "./TableView";
@@ -52,10 +51,4 @@ const SessionsTable = ({ t, viewAs, sessionsData }) => {
   );
 };
 
-export default inject(({ setup }) => {
-  const { viewAs } = setup;
-
-  return {
-    viewAs,
-  };
-})(observer(SessionsTable));
+export default SessionsTable;

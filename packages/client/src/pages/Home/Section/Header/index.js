@@ -280,6 +280,7 @@ const SectionHeaderContent = (props) => {
     setAccountsSelected,
     setGroupsSelected,
     isOwner,
+    isRoomAdmin,
     isCollaborator,
     setInvitePanelOptions,
     isEmptyPage,
@@ -387,78 +388,81 @@ const SectionHeaderContent = (props) => {
     element?.click();
   };
 
+  const accountsUserActions = [
+    isOwner && {
+      id: "accounts-add_administrator",
+      className: "main-button_drop-down",
+      icon: PersonAdminReactSvgUrl,
+      label: t("Common:DocSpaceAdmin"),
+      onClick: onInvite,
+      "data-type": EmployeeType.Admin,
+      key: "administrator",
+    },
+    {
+      id: "accounts-add_manager",
+      className: "main-button_drop-down",
+      icon: PersonManagerReactSvgUrl,
+      label: t("Common:RoomAdmin"),
+      onClick: onInvite,
+      "data-type": EmployeeType.User,
+      key: "manager",
+    },
+    {
+      id: "accounts-add_collaborator",
+      className: "main-button_drop-down",
+      icon: PersonDefaultReactSvgUrl,
+      label: t("Common:PowerUser"),
+      onClick: onInvite,
+      "data-type": EmployeeType.Collaborator,
+      key: "collaborator",
+    },
+    {
+      id: "accounts-add_user",
+      className: "main-button_drop-down",
+      icon: PersonDefaultReactSvgUrl,
+      label: t("Common:User"),
+      onClick: onInvite,
+      "data-type": EmployeeType.Guest,
+      key: "user",
+    },
+    {
+      key: "separator",
+      isSeparator: true,
+    },
+    {
+      id: "accounts-add_invite-again",
+      className: "main-button_drop-down",
+      icon: InviteAgainReactSvgUrl,
+      label: t("People:LblInviteAgain"),
+      onClick: onInviteAgain,
+      "data-action": "invite-again",
+      key: "invite-again",
+    },
+  ];
+
+  const accountsFullActions = [
+    {
+      id: "actions_invite_user",
+      className: "main-button_drop-down",
+      icon: PersonUserReactSvgUrl,
+      label: t("Common:Invite"),
+      key: "new-user",
+      items: accountsUserActions,
+    },
+    {
+      id: "create_group",
+      className: "main-button_drop-down",
+      icon: GroupReactSvgUrl,
+      label: t("PeopleTranslations:CreateGroup"),
+      onClick: onCreateGroup,
+      action: "group",
+      key: "group",
+    },
+  ];
+
   const getContextOptionsPlus = () => {
-    if (isAccountsPage) {
-      return [
-        {
-          id: "actions_invite_user",
-          className: "main-button_drop-down",
-          icon: PersonUserReactSvgUrl,
-          label: t("Common:Invite"),
-          key: "new-user",
-          items: [
-            isOwner && {
-              id: "accounts-add_administrator",
-              className: "main-button_drop-down",
-              icon: PersonAdminReactSvgUrl,
-              label: t("Common:DocSpaceAdmin"),
-              onClick: onInvite,
-              "data-type": EmployeeType.Admin,
-              key: "administrator",
-            },
-            {
-              id: "accounts-add_manager",
-              className: "main-button_drop-down",
-              icon: PersonManagerReactSvgUrl,
-              label: t("Common:RoomAdmin"),
-              onClick: onInvite,
-              "data-type": EmployeeType.User,
-              key: "manager",
-            },
-            {
-              id: "accounts-add_collaborator",
-              className: "main-button_drop-down",
-              icon: PersonDefaultReactSvgUrl,
-              label: t("Common:PowerUser"),
-              onClick: onInvite,
-              "data-type": EmployeeType.Collaborator,
-              key: "collaborator",
-            },
-            {
-              id: "accounts-add_user",
-              className: "main-button_drop-down",
-              icon: PersonDefaultReactSvgUrl,
-              label: t("Common:User"),
-              onClick: onInvite,
-              "data-type": EmployeeType.Guest,
-              key: "user",
-            },
-            {
-              key: "separator",
-              isSeparator: true,
-            },
-            {
-              id: "accounts-add_invite-again",
-              className: "main-button_drop-down",
-              icon: InviteAgainReactSvgUrl,
-              label: t("People:LblInviteAgain"),
-              onClick: onInviteAgain,
-              "data-action": "invite-again",
-              key: "invite-again",
-            },
-          ],
-        },
-        {
-          id: "create_group",
-          className: "main-button_drop-down",
-          icon: GroupReactSvgUrl,
-          label: t("PeopleTranslations:CreateGroup"),
-          onClick: onCreateGroup,
-          action: "group",
-          key: "group",
-        },
-      ];
-    }
+    if (isAccountsPage)
+      return isRoomAdmin ? accountsUserActions : accountsFullActions;
 
     const options = isRoomsFolder
       ? [
@@ -1340,6 +1344,7 @@ export default inject(
     const { startUpload } = uploadDataStore;
     const isOwner = userStore.user?.isOwner;
     const isAdmin = userStore.user?.isAdmin;
+    const isRoomAdmin = userStore.user?.isRoomAdmin;
     const isCollaborator = userStore.user?.isCollaborator;
 
     const {
@@ -1624,6 +1629,7 @@ export default inject(
       setAccountsSelected,
       isOwner,
       isAdmin,
+      isRoomAdmin,
       isCollaborator,
       setInvitePanelOptions,
       isEmptyPage,

@@ -68,7 +68,7 @@ const LoginForm: React.FC<ILoginFormProps> = ({
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const { t, ready } = useTranslation(["Login", "Common"]);
+  const { t, ready, i18n } = useTranslation(["Login", "Common"]);
 
   const { message, confirmedEmail, authError } = match || {
     message: "",
@@ -194,7 +194,9 @@ const LoginForm: React.FC<ILoginFormProps> = ({
     isDesktop && checkPwd();
     const session = !isChecked;
 
-    login(user, hash, session, captchaToken)
+    const currentCulture = i18n.language;
+
+    login(user, hash, session, captchaToken, currentCulture)
       .then((res: string | object) => {
         const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath = sessionStorage.getItem("referenceUrl");

@@ -1,19 +1,18 @@
 import { observer, inject } from "mobx-react";
 import React, { useEffect, useMemo } from "react";
-import { withTranslation, I18nextProviderProps } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 import { getCookie, setCookie } from "@docspace/shared/utils/cookie";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
 import { mapCulturesToArray } from "@docspace/shared/utils/common";
-
-type I18n = I18nextProviderProps["i18n"];
+import i18n from "../i18n";
 
 interface ComponentWithCultureNamesProps {
   tReady: boolean;
   cultures: string[];
+  isAuthenticated: boolean;
   getPortalCultures: () => Promise<void>;
-  i18n: I18n;
 }
 
 interface WrappedComponentProps extends ComponentWithCultureNamesProps {
@@ -35,8 +34,7 @@ export default function withCultureNames<
     props: Omit<T, keyof WrappedComponentProps> &
       ComponentWithCultureNamesProps,
   ) => {
-    const { tReady, cultures, i18n, getPortalCultures, isAuthenticated } =
-      props;
+    const { tReady, cultures, getPortalCultures, isAuthenticated } = props;
 
     useEffect(() => {
       if (cultures.length > 0) return;
@@ -47,7 +45,7 @@ export default function withCultureNames<
 
     const cultureNames = useMemo(
       () => mapCulturesToArray(cultures, isAuthenticated, i18n),
-      [cultures, i18n],
+      [cultures, isAuthenticated],
     );
     const url = new URL(window.location.href);
     const culture = url.searchParams.get("culture");
@@ -56,17 +54,19 @@ export default function withCultureNames<
       (item) => item.key === currentCultureName,
     );
 
-    const onLanguageSelect = (e) => {
+    const onLanguageSelect = (e: KeyboardEvent) => {
+      i18n.changeLanguage(e.key);
+
       setCookie(LANGUAGE, e.key, {
         "max-age": COOKIE_EXPIRATION_YEAR,
       });
 
       if (culture) {
-        location.href = url.replace(`culture=${culture}`, `culture=${e.key}`);
-        return;
+        window.location.href = url.replace(
+          `culture=${culture}`,
+          `culture=${e.key}`,
+        );
       }
-
-      location.reload();
     };
 
     return cultures.length > 0 && tReady ? (

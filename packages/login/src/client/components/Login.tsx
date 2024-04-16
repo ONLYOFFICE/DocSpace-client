@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect, useMemo } from "react";
 import {} from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { LoginFormWrapper, LoginContent } from "./StyledLogin";
 import { Text } from "@docspace/shared/components/text";
@@ -13,7 +13,7 @@ import {
   mapCulturesToArray,
 } from "@docspace/shared/utils/common";
 import { Link } from "@docspace/shared/components/link";
-import { checkIsSSR, getCookie } from "@docspace/shared/utils";
+import { checkIsSSR } from "@docspace/shared/utils";
 import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
@@ -68,14 +68,10 @@ const Login: React.FC<ILoginProps> = ({
   const isRestoringPortal =
     portalSettings?.tenantStatus === TenantStatus.PortalRestore;
 
-  let [searchParams] = useSearchParams();
-
   const cultureNames = useMemo(
     () => mapCulturesToArray(cultures, false),
     [cultures]
   );
-
-  const culture = searchParams.get("culture");
 
   useEffect(() => {
     if (search) {
@@ -103,13 +99,11 @@ const Login: React.FC<ILoginProps> = ({
       window.history.replaceState({}, document.title, window.location.pathname);
     }
 
-    const cultureName = culture ?? getCookie(LANGUAGE);
-    setCurrantCultureName(cultureName);
-
     isRestoringPortal && window.location.replace("/preparation-portal");
   }, []);
 
-  const [currentCultureName, setCurrantCultureName] = useState("en-GB");
+  const { t, i18n } = useTranslation(["Login", "Common"]);
+
   const [isLoading, setIsLoading] = useState(false);
   const [recoverDialogVisible, setRecoverDialogVisible] = useState(false);
   const [invitationLinkData, setInvitationLinkData] = useState({
@@ -132,29 +126,25 @@ const Login: React.FC<ILoginProps> = ({
     cookieSettingsEnabled: false,
   };
 
+  const currentCultureName = i18n.language;
+
   const selectedCultureObj = cultureNames.find(
     (item) => item.key === currentCultureName
   );
 
-  const onLanguageSelect = (e) => {
-    setCookie(LANGUAGE, e.key, {
+  const onLanguageSelect = (e: KeyboardEvent) => {
+    const culture = e.key;
+
+    i18n.changeLanguage(culture);
+
+    setCookie(LANGUAGE, culture, {
       "max-age": COOKIE_EXPIRATION_YEAR,
     });
-
-    if (culture) {
-      window.location.href = window.location.href.replace(
-        `culture=${culture}`,
-        `culture=${e.key}`
-      );
-      return;
-    }
-
-    window.location.reload();
   };
 
   const ssoLabel = capabilities?.ssoLabel || "";
   const ssoUrl = capabilities?.ssoUrl || "";
-  const { t } = useTranslation(["Login", "Common"]);
+
   const mounted = useMounted();
 
   useIsomorphicLayoutEffect(() => {

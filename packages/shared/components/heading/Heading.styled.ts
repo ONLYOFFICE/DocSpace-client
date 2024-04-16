@@ -39,7 +39,7 @@ const styleCss = css<{
   colorProp?: string;
   isInline?: boolean;
 }>`
-  font-size: ${(props) => props.theme.getCorrectFontSize(fontSizeStyle(props))};
+  font-size: ${(props) => fontSizeStyle(props)};
   font-weight: ${(props) => props.theme.heading.fontWeight};
 
   color: ${(props) => props.colorProp || props.theme.heading.color};

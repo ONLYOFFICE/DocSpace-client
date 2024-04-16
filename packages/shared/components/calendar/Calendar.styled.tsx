@@ -135,8 +135,7 @@ const DateItem = styled.button<{
 }>`
   font-family: ${(props) => props.theme.fontFamily};
   font-weight: 600;
-  font-size: ${(props) =>
-    props.theme.getCorrectFontSize(props.isMobile ? "16px" : "13px")};
+  font-size: ${(props) => (props.isMobile ? "16px" : "13px")};
   border-radius: 50%;
 
   border: 2px solid;
@@ -284,8 +283,7 @@ const Title = styled.h2<{ isMobile?: boolean; disabled?: boolean }>`
   position: relative;
   font-family: ${(props) => props.theme.fontFamily};
   font-weight: 700;
-  font-size: ${(props) =>
-    props.theme.getCorrectFontSize(props.isMobile ? "21px" : "18px")};
+  font-size: ${(props) => (props.isMobile ? "21px" : "18px")};
   line-height: ${(props) => (props.isMobile ? "28px" : "24px")};
   color: ${(props) => props.theme.calendar.titleColor};
   border-bottom: 1px dashed transparent;
@@ -305,8 +303,7 @@ const Weekday = styled.span<{ isMobile?: boolean }>`
   pointer-events: none;
   font-family: ${(props) => props.theme.fontFamily};
   font-weight: 400;
-  font-size: ${(props) =>
-    props.theme.getCorrectFontSize(props.isMobile ? "16px" : "13px")};
+  font-size: ${(props) => (props.isMobile ? "16px" : "13px")};
   line-height: 16px;
 
   color: ${(props) => props.theme.calendar.weekdayColor};

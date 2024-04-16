@@ -37,8 +37,7 @@ const truncateCss = css`
 const commonCss = css`
   margin: ${(props) => props.theme.rowContent.margin};
   font-family: ${(props) => props.theme.fontFamily};
-  font-size: ${(props) =>
-    props.theme.getCorrectFontSize(props.theme.rowContent.fontSize)};
+  font-size: ${(props) => props.theme.rowContent.fontSize};
   font-style: ${(props) => props.theme.rowContent.fontStyle};
   font-weight: ${(props) => props.theme.rowContent.fontWeight};
 `;

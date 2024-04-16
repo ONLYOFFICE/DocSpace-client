@@ -42,8 +42,7 @@ const StyledSearchInput = styled.div<{ isScale?: boolean }>`
     max-height: 32px;
 
     & > input {
-      font-size: ${(props) =>
-        props.theme.getCorrectFontSize(props.theme.searchInput.fontSize)};
+      font-size: ${(props) => props.theme.searchInput.fontSize};
       font-weight: ${(props) => props.theme.searchInput.fontWeight};
     }
   }

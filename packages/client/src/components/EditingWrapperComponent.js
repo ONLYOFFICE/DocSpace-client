@@ -111,13 +111,11 @@ const EditingWrapper = styled.div`
   .edit-text {
     height: 32px;
     font-size: ${(props) =>
-      props.theme.getCorrectFontSize(
-        props.viewAs === "table"
-          ? "13px"
-          : props.viewAs === "tile"
-            ? "14px"
-            : "15px",
-      )};
+      props.viewAs === "table"
+        ? "13px"
+        : props.viewAs === "tile"
+          ? "14px"
+          : "15px"};
     outline: 0 !important;
     font-weight: 600;
     margin: 0;

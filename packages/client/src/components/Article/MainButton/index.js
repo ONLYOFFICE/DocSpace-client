@@ -66,7 +66,7 @@ import { isDesktop } from "@docspace/shared/utils";
 
 const StyledButton = styled(Button)`
   font-weight: 700;
-  font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+  font-size: 16px;
   padding: 0;
   opacity: ${(props) => (props.isDisabled ? 0.6 : 1)};
 

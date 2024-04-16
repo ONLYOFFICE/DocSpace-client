@@ -168,7 +168,7 @@ const StyledHeader = styled.div`
     font-family: ${(props) => props.theme.fontFamily};
     color: ${(props) => props.theme.modalDialog.textColor};
     font-weight: 700;
-    font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
+    font-size: 21px;
   }
 `;
 

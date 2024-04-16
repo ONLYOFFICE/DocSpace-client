@@ -38,7 +38,7 @@ const truncateCss = css`
 const commonCss = css`
   margin: 0;
   font-family: ${(props) => props.theme.fontFamily};
-  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+  font-size: 12px;
   font-style: normal;
   font-weight: 600;
 `;

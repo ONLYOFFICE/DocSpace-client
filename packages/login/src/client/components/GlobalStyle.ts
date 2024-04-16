@@ -36,7 +36,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     ${(props: IGlobalStyleProps) => props?.fonts}
     font-family: ${(props) => props.theme?.fontFamily};
-    font-size: ${(props) => props.theme?.getCorrectFontSize("13px")};
+    font-size: 13px;
     overscroll-behavior: none;
   }
 

@@ -1220,6 +1220,14 @@ class ContextOptionsStore {
         label: t("Common:FillFormButton"),
         icon: FormFillRectSvgUrl,
         onClick: () => this.onClickLinkFillForm(item),
+        disabled: !item.startFilling,
+      },
+      {
+        id: "option_open-pdf",
+        key: "open-pdf",
+        label: t("Open"),
+        icon: EyeReactSvgUrl,
+        onClick: () => this.gotoDocEditor(false, item),
         disabled: false,
       },
       {

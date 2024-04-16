@@ -1995,6 +1995,7 @@ class FilesStore {
         "select",
         "fill-form",
         "edit",
+        "open-pdf",
         "preview",
         "view",
         "pdf-view",
@@ -2038,6 +2039,10 @@ class FilesStore {
 
       if (!canDownload) {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
+      }
+
+      if (!isPdf || item.startFilling) {
+        fileOptions = this.removeOptions(fileOptions, ["open-pdf"]);
       }
 
       if (!isPdf || !window.DocSpaceConfig?.pdfViewer || isRecycleBinFolder) {

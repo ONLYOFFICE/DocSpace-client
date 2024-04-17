@@ -13,11 +13,15 @@ import {
   getTitle,
 } from "./EmptyViewContainer.helpers";
 
-import type { EmptyViewContainerProps } from "./EmptyViewContainer.types";
+import type {
+  EmptyViewContainerProps,
+  UploadType,
+} from "./EmptyViewContainer.types";
 
 const EmptyViewContainer = observer(
   ({
     type,
+    access,
     folderId,
     security,
     onClickInviteUsers,
@@ -25,6 +29,17 @@ const EmptyViewContainer = observer(
   }: EmptyViewContainerProps) => {
     const { t } = useTranslation(["EmptyView"]);
     const theme = useTheme();
+
+    const onUploadAction = useCallback((uploadType: UploadType) => {
+      const element =
+        uploadType === "file"
+          ? document.getElementById("customFileInput")
+          : uploadType === "pdf"
+            ? document.getElementById("customPDFInput")
+            : document.getElementById("customFolderInput");
+
+      element?.click();
+    }, []);
 
     const inviteUser = useCallback(() => {
       onClickInviteUsers?.(folderId, type);
@@ -63,20 +78,24 @@ const EmptyViewContainer = observer(
 
     const options = useMemo(
       () =>
-        getOptions(type, security!, t, {
+        getOptions(type, security!, t, access, {
           inviteUser,
           createFormFromFile,
           onCreateDocumentForm,
           uploadPDFForm,
+          onUploadAction,
         }),
       [
         type,
+        access,
+        security,
+
         t,
         inviteUser,
-        createFormFromFile,
         uploadPDFForm,
+        onUploadAction,
+        createFormFromFile,
         onCreateDocumentForm,
-        security,
       ],
     );
 
@@ -99,9 +118,14 @@ const injectedEmptyViewContainer = inject<TStore>(
 
     const { setSelectFileFormRoomDialogVisible } = dialogsStore;
 
-    const { security } = selectedFolderStore;
+    const { security, access } = selectedFolderStore;
 
-    return { onClickInviteUsers, security, setSelectFileFormRoomDialogVisible };
+    return {
+      access,
+      security,
+      onClickInviteUsers,
+      setSelectFileFormRoomDialogVisible,
+    };
   },
 )(EmptyViewContainer);
 

@@ -69,12 +69,12 @@ const EmptyViewContainer = observer(
     }, []);
 
     const emptyViewOptions = useMemo(() => {
-      const description = getDescription(type, t);
-      const title = getTitle(type, t);
+      const description = getDescription(type, t, access);
+      const title = getTitle(type, t, access);
       const icon = getIcon(type, theme.isBase);
 
       return { description, title, icon };
-    }, [type, t, theme.isBase]);
+    }, [type, t, theme.isBase, access]);
 
     const options = useMemo(
       () =>

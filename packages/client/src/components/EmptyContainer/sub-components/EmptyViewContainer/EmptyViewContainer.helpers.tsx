@@ -17,9 +17,16 @@ import type { EmptyViewItemType } from "@docspace/shared/components/empty-view";
 
 import type { OptionActions } from "./EmptyViewContainer.types";
 
-export const getDescription = (type: RoomsType, t: TTranslation): string => {
+export const getDescription = (
+  type: RoomsType,
+  t: TTranslation,
+  access: Nullable<ShareAccessRights> | undefined,
+): string => {
+  const isFormFiller = access === ShareAccessRights.FormFilling;
+
   switch (type) {
     case RoomsType.FormRoom:
+      if (isFormFiller) return t("EmptyView:FormFillerRoomEmptyDescription");
       return t("EmptyView:FormRoomEmptyDescription");
     case RoomsType.EditingRoom:
       return "";
@@ -32,9 +39,15 @@ export const getDescription = (type: RoomsType, t: TTranslation): string => {
   }
 };
 
-export const getTitle = (type: RoomsType, t: TTranslation): string => {
+export const getTitle = (
+  type: RoomsType,
+  t: TTranslation,
+  access: Nullable<ShareAccessRights> | undefined,
+): string => {
+  const isFormFiller = access === ShareAccessRights.FormFilling;
   switch (type) {
     case RoomsType.FormRoom:
+      if (isFormFiller) return t("EmptyView:FormFillerRoomEmptyTitle");
       return t("EmptyView:FormRoomEmptyTitle");
     case RoomsType.EditingRoom:
       return "";

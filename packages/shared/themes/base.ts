@@ -3330,6 +3330,10 @@ export const getBaseTheme = () => {
       titleColor: black,
       metaDataColor: gray,
     },
+
+    dateTimePicker: {
+      colorClockIcon: "#657077",
+    },
   };
 };
 

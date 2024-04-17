@@ -26,6 +26,7 @@
 
 import React from "react";
 import { TableHeader } from "@docspace/shared/components/table";
+import { RoomsType } from "@docspace/shared/enums";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { Events } from "@docspace/shared/enums";
@@ -55,6 +56,8 @@ class FilesTableHeader extends React.Component {
       isDefaultRoomsQuotaSet,
       showStorageInfo,
       isArchiveFolder,
+      indexing,
+      roomType,
     } = this.props;
 
     const defaultColumns = [];
@@ -287,6 +290,16 @@ class FilesTableHeader extends React.Component {
       ];
       defaultColumns.push(...columns);
     } else {
+      const indexBlock =
+        indexing && roomType === RoomsType.VirtualDataRoom
+          ? {
+              key: "Index",
+              title: t("idx"),
+              enable: this.props.indexColumnIsEnabled,
+              minWidth: 50,
+            }
+          : {};
+
       const authorBlock = !isPublicRoom
         ? {
             key: "Author",
@@ -300,6 +313,7 @@ class FilesTableHeader extends React.Component {
         : {};
 
       const columns = [
+        { ...indexBlock },
         {
           key: "Name",
           title: t("Common:Name"),
@@ -603,6 +617,8 @@ export default inject(
 
     const { isDefaultRoomsQuotaSet, showStorageInfo } = currentQuotaStore;
 
+    const { indexing, roomType } = selectedFolderStore;
+
     const {
       isHeaderChecked,
 
@@ -633,6 +649,7 @@ export default inject(
       roomColumnIsEnabled,
       erasureColumnIsEnabled,
       sizeColumnIsEnabled,
+      indexColumnIsEnabled,
       sizeTrashColumnIsEnabled,
       typeColumnIsEnabled,
       typeTrashColumnIsEnabled,
@@ -661,6 +678,9 @@ export default inject(
       withContent,
       sortingVisible,
 
+      indexing,
+      roomType,
+
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
 
       roomsFilter,
@@ -684,6 +704,7 @@ export default inject(
       roomColumnIsEnabled,
       erasureColumnIsEnabled,
       sizeColumnIsEnabled,
+      indexColumnIsEnabled,
       sizeTrashColumnIsEnabled,
       typeColumnIsEnabled,
       typeTrashColumnIsEnabled,

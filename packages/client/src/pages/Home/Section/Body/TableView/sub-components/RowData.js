@@ -32,6 +32,7 @@ import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
+import IndexCell from "./IndexCell";
 import { classNames } from "@docspace/shared/utils";
 import {
   StyledBadgesContainer,
@@ -45,6 +46,7 @@ const RowDataComponent = (props) => {
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
+    indexColumnIsEnabled,
     quickButtonsColumnIsEnabled,
 
     dragStyles,
@@ -62,6 +64,22 @@ const RowDataComponent = (props) => {
 
   return (
     <>
+      {indexColumnIsEnabled ? (
+        <TableCell
+          style={
+            !indexColumnIsEnabled ? { background: "none" } : dragStyles.style
+          }
+          {...selectionProp}
+        >
+          <IndexCell
+            sideColor={theme.filesSection.tableView.row.sideColor}
+            {...props}
+          />
+        </TableCell>
+      ) : (
+        <div />
+      )}
+
       <TableCell
         {...dragStyles}
         className={classNames(
@@ -197,6 +215,7 @@ export default inject(({ tableStore }) => {
     createdColumnIsEnabled,
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
+    indexColumnIsEnabled,
     typeColumnIsEnabled,
     quickButtonsColumnIsEnabled,
   } = tableStore;
@@ -206,6 +225,7 @@ export default inject(({ tableStore }) => {
     createdColumnIsEnabled,
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
+    indexColumnIsEnabled,
     typeColumnIsEnabled,
     quickButtonsColumnIsEnabled,
   };

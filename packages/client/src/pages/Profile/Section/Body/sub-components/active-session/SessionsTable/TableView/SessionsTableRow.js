@@ -112,7 +112,6 @@ const SessionsTableRow = (props) => {
             className="tick-icon"
             color="#20D21F"
             iconName={TickSvgUrl}
-            isDisabled
           />
         )}
       </TableCell>

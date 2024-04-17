@@ -57,12 +57,7 @@ const SessionsRow = (props) => {
     <>
       {showTickIcon ? (
         !isMobile() && (
-          <IconButton
-            size={16}
-            iconName={TickSvgUrl}
-            isDisabled
-            color="#20D21F"
-          />
+          <IconButton size={16} iconName={TickSvgUrl} color="#20D21F" />
         )
       ) : (
         <IconButton

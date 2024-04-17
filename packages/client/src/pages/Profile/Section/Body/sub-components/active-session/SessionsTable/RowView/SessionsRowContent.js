@@ -34,8 +34,12 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
 
 const StyledRowContent = styled(RowContent)`
+  .rowMainContainer {
+    height: 100%;
+  }
+
   .session-browser {
-    font-size: 14px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     font-weight: 600;
     color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
   }
@@ -62,12 +66,7 @@ const SessionsRowContent = ({
         {platform} <span className="session-browser">{`(${browser})`}</span>
       </Text>
       {isMobile() && showTickIcon && (
-        <IconButton
-          size={12}
-          iconName={TickSvgUrl}
-          isDisabled
-          color="#20D21F"
-        />
+        <IconButton size={12} iconName={TickSvgUrl} color="#20D21F" />
       )}
       <Text truncate>{convertTime(date)}</Text>
       <Text truncate>

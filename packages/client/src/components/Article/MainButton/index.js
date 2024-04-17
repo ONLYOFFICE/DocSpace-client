@@ -52,7 +52,6 @@ import { Button } from "@docspace/shared/components/button";
 import { withTranslation } from "react-i18next";
 import { encryptionUploadDialog } from "../../../helpers/desktop";
 import { useNavigate, useLocation } from "react-router-dom";
-
 import MobileView from "./MobileView";
 
 import { Events, EmployeeType, DeviceType } from "@docspace/shared/enums";

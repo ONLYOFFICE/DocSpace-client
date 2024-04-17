@@ -100,7 +100,7 @@
   "DeleteThemeNotice": "Motyw zostanie trwale usunięty. Nie będziesz w stanie cofnąć tego działania.",
   "DiskSpaceUsed": "Wykorzystane miejsce na dysku",
   "DNSSettings": "Ustawienia DNS",
-  "DNSSettingsDescription": "Ustaw alternatywny adres URL swojej przestrzeni. Wyślij swoją prośbę do naszego zespołu wsparcia, aby uzyskać pomoc dotyczącą ustawień.",
+  "DNSSettingsDescription": "Skonfiguruj alternatywny adres URL dla swojego obszaru. Wyślij prośbę do naszego działu wsparcia, aby uzyskać pomoc z konfiguracją.",
   "DNSSettingsHint": "Wpisz nazwę domeny w następujący sposób:",
   "DNSSettingsMobile": "Wyślij prośbę do naszego zespołu obsługi klienta, a nasi specjaliści pomogą Ci w konfiguracji.",
   "DNSSettingsNavDescription": "Ustawienia DNS to sposób, by skonfigurować alternatywny adres URL dla Twojego portalu.",

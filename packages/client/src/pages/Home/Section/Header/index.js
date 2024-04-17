@@ -1238,7 +1238,8 @@ const SectionHeaderContent = (props) => {
                 canCreate={
                   (currentCanCreate || isAccountsPage) &&
                   !isSettingsPage &&
-                  !isPublicRoom
+                  !isPublicRoom &&
+                  !isInsideGroup
                 }
                 rootRoomTitle={currentRootRoomTitle}
                 title={currentTitle}

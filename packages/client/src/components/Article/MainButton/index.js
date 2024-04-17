@@ -62,6 +62,7 @@ import styled, { css } from "styled-components";
 import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { getCorrectFourValuesStyle } from "@docspace/shared/utils";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
+import { isDesktop } from "@docspace/shared/utils";
 
 const StyledButton = styled(Button)`
   font-weight: 700;
@@ -484,7 +485,7 @@ const ArticleMainButtonContent = (props) => {
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
         label: t("UploadFolder"),
-        disabled: isPrivacy,
+        disabled: isPrivacy || !isDesktop(),
         onClick: onUploadFolderClick,
         key: "upload-folder",
       },

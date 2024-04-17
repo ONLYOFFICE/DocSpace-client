@@ -34,6 +34,7 @@ export type ButtonOption = {
   error?: boolean;
   id?: string;
   isSeparator?: boolean;
+  disabled?: boolean;
 };
 export type ProgressOption = {
   open?: boolean;

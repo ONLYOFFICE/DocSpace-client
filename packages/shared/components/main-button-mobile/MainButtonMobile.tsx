@@ -296,7 +296,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
                 <div key={option.key} className="separator-wrapper">
                   <div className="is-separator" />
                 </div>
-              ) : (
+              ) : !option.disabled ? (
                 <StyledDropDownItem
                   id={option.id}
                   className={`drop-down-item-button ${
@@ -308,6 +308,8 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
                   icon={option.icon ? option.icon : ""}
                   // action={option.action}
                 />
+              ) : (
+                <div key={option.key} />
               ),
             )}
           </StyledButtonOptions>

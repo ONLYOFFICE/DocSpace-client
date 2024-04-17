@@ -45,6 +45,8 @@ const StyledTableContainer = styled(TableContainer)`
   .table-container_header {
     position: absolute;
     padding: 0px 20px;
+    border-image-source: ${(props) =>
+      props.theme.tableContainer.header.borderImageSource} !important;
   }
 
   .header-container-text {

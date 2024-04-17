@@ -222,6 +222,7 @@ export const getIsZoom = () =>
   (window?.navigator?.userAgent?.includes("ZoomWebKit") ||
     window?.navigator?.userAgent?.includes("ZoomApps"));
 
+// need for separate window in desktop editors
 export const calculateAsideHeight = () => {
   const viewPort = window?.AscDesktopEditor?.getViewportSettings?.();
 

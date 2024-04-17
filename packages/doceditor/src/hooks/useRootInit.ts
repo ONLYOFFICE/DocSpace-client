@@ -76,6 +76,7 @@ const useRootInit = ({ documentType }: UseRootInitProps) => {
   }, []);
 
   React.useEffect(() => {
+    // need for separate window in desktop editors
     if (window.AscDesktopEditor) {
       const viewPort = window.AscDesktopEditor.getViewportSettings?.();
 

@@ -199,6 +199,10 @@ class GroupsStore {
     this.currentGroup = currentGroup;
   };
 
+  setInsideGroupLoading = (value: boolean) => {
+    this.insideGroupIsLoading = value;
+  };
+
   setInsideGroupBackUrl = (url: string) => {
     this.insideGroupBackUrl = url;
   };
@@ -277,6 +281,8 @@ class GroupsStore {
     updateFilter = false,
     withFilterLocalStorage = false,
   ) => {
+    this.setInsideGroupLoading(true);
+
     const filterData = filter ? filter.clone() : AccountsFilter.getDefault();
     filterData.group = groupId;
 
@@ -315,6 +321,8 @@ class GroupsStore {
     if (updateFilter) {
       this.setInsideGroupFilterParams(filterData);
     }
+
+    this.setInsideGroupLoading(false);
 
     return Promise.resolve(filteredMembersRes.items);
   };

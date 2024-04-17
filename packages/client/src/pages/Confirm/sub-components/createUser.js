@@ -58,7 +58,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordErrorMessage";
-import DocspaceLogo from "SRC_DIR/components/DocspaceLogoWrapper";
+import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
 import withLoader from "../withLoader";
 
 import { StyledPage } from "./StyledConfirm";

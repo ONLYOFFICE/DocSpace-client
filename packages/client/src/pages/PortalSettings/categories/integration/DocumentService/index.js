@@ -270,7 +270,7 @@ const DocumentService = ({
           cancelButtonLabel={t("Common:Restore")}
           reminderText={t("Settings:YouHaveUnsavedChanges")}
           saveButtonDisabled={saveButtonDisabled}
-          cancelButtonDisabled={
+          disableRestoreToDefault={
             isDefaultSettings || isSaveLoading || isResetLoading
           }
           displaySettings={true}

@@ -222,3 +222,22 @@ export const getIsZoom = () =>
   (window?.navigator?.userAgent?.includes("ZoomWebKit") ||
     window?.navigator?.userAgent?.includes("ZoomApps"));
 
+export const calculateAsideHeight = () => {
+  const viewPort = window?.AscDesktopEditor?.getViewportSettings?.();
+
+  if (!viewPort) return;
+
+  if (viewPort.isEditor && viewPort.isSeparateWindow) {
+    const { captionHeight } = viewPort;
+    const backdrop = document.getElementsByClassName(
+      "backdrop-active",
+    )[0] as HTMLElement;
+    const aside = document.getElementsByTagName("aside")[0];
+
+    if (aside && backdrop) {
+      backdrop.style.height =
+        aside.style.height = `calc(100dvh - ${captionHeight}px`;
+      aside.style.top = `${captionHeight}px`;
+    }
+  }
+};

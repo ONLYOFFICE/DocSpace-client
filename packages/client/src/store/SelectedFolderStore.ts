@@ -141,6 +141,8 @@ class SelectedFolderStore {
 
   parentRoomType: Nullable<FolderType> = null;
 
+  indexing = false;
+
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -185,6 +187,7 @@ class SelectedFolderStore {
       type: this.type,
       isRootFolder: this.isRootFolder,
       parentRoomType: this.parentRoomType,
+      indexing: this.indexing,
     };
   };
 
@@ -230,6 +233,7 @@ class SelectedFolderStore {
     this.type = null;
     this.inRoom = false;
     this.parentRoomType = null;
+    this.indexing = false;
   };
 
   setParentId = (parentId: number) => {

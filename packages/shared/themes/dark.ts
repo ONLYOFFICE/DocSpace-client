@@ -3306,6 +3306,10 @@ const Dark: TTheme = {
     titleColor: white,
     metaDataColor: grayDark,
   },
+
+  dateTimePicker: {
+    colorClockIcon: "#ADADAD",
+  },
 };
 
 export default Dark;

@@ -824,9 +824,9 @@ const Manager = (props) => {
           </ControlsSection>
           <ControlsSection>
             <CategorySubHeader>{t("AdvancedDisplay")}</CategorySubHeader>
-            <ControlsGroup>
+            <ColumnContainer>
               <FilterBlock t={t} config={config} setConfig={setConfig} />
-            </ControlsGroup>
+            </ColumnContainer>
             <ControlsGroup>
               <Label className="label" text={t("SearchTerm")} />
               <ColumnContainer>

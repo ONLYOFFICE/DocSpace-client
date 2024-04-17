@@ -1132,7 +1132,7 @@ const SectionHeaderContent = (props) => {
     isMobileView: currentDeviceType === DeviceType.mobile,
   };
 
-  if (isAccountsPage) {
+  if (isAccountsPage && !(isGroupsPage && isRoomAdmin)) {
     tableGroupMenuVisible =
       (!isGroupsPage ? isAccountsHeaderVisible : isGroupsHeaderVisible) &&
       tableGroupMenuVisible &&

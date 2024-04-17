@@ -26,13 +26,11 @@
 
 import { useRef } from "react";
 import { withTranslation } from "react-i18next";
-
 import { Text } from "@docspace/shared/components/text";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 import { StyledAccountsItemTitle } from "../../styles/accounts";
 import { inject, observer } from "mobx-react";
-
 import { decode } from "he";
 
 const GroupsItemTitle = ({

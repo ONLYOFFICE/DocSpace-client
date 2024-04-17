@@ -23,11 +23,11 @@ export function login(
   });
 }
 
-export function thirdPartyLogin(SerializedProfile) {
+export function thirdPartyLogin(SerializedProfile, culture) {
   return request({
     method: "post",
     url: "authentication",
-    data: { SerializedProfile },
+    data: { SerializedProfile, culture },
   });
 }
 

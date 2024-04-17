@@ -104,6 +104,7 @@ const Login: React.FC<ILoginProps> = ({
 
   const { t, i18n } = useTranslation(["Login", "Common"]);
 
+  const currentCulture = i18n.language;
   const [isLoading, setIsLoading] = useState(false);
   const [recoverDialogVisible, setRecoverDialogVisible] = useState(false);
   const [invitationLinkData, setInvitationLinkData] = useState({
@@ -126,10 +127,8 @@ const Login: React.FC<ILoginProps> = ({
     cookieSettingsEnabled: false,
   };
 
-  const currentCultureName = i18n.language;
-
   const selectedCultureObj = cultureNames.find(
-    (item) => item.key === currentCultureName
+    (item) => item.key === currentCulture
   );
 
   const onLanguageSelect = (e: KeyboardEvent) => {
@@ -302,6 +301,7 @@ const Login: React.FC<ILoginProps> = ({
                 enableAdmMess={enableAdmMess}
                 cookieSettingsEnabled={cookieSettingsEnabled}
                 emailFromInvitation={invitationLinkData.email}
+                currentCulture={currentCulture}
               />
               {(oauthDataExists() || ssoExists()) && (
                 <>

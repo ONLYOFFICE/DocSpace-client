@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -31,6 +31,7 @@ interface ILoginFormProps {
   recaptchaPublicKey: CaptchaPublicKeyType;
   isBaseTheme: boolean;
   emailFromInvitation?: string;
+  currentCulture: string;
 }
 
 const settings = {
@@ -50,6 +51,7 @@ const LoginForm: React.FC<ILoginFormProps> = ({
   recaptchaPublicKey,
   isBaseTheme,
   emailFromInvitation,
+  currentCulture,
 }) => {
   const captchaRef = useRef(null);
 
@@ -75,12 +77,11 @@ const LoginForm: React.FC<ILoginFormProps> = ({
     confirmedEmail: "",
     authError: "",
   };
-
   const authCallback = (profile: string) => {
     localStorage.removeItem("profile");
     localStorage.removeItem("code");
 
-    thirdPartyLogin(profile)
+    thirdPartyLogin(profile, currentCulture)
       .then((response) => {
         if (!(response || response.token || response.confirmUrl))
           throw new Error("Empty API response");
@@ -116,6 +117,10 @@ const LoginForm: React.FC<ILoginFormProps> = ({
   }, []);
 
   useEffect(() => {
+    window.authCallback = authCallback;
+  }, [currentCulture]);
+
+  useEffect(() => {
     message && setErrorText(message);
     confirmedEmail && setIdentifier(confirmedEmail);
 
@@ -128,8 +133,6 @@ const LoginForm: React.FC<ILoginFormProps> = ({
     authError && ready && toastr.error(t("Common:ProviderLoginError"));
 
     focusInput();
-
-    window.authCallback = authCallback;
   }, [message, confirmedEmail]);
 
   const onChangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -193,8 +196,6 @@ const LoginForm: React.FC<ILoginFormProps> = ({
 
     isDesktop && checkPwd();
     const session = !isChecked;
-
-    const currentCulture = i18n.language;
 
     login(user, hash, session, captchaToken, currentCulture)
       .then((res: string | object) => {

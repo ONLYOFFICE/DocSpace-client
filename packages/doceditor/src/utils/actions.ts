@@ -163,6 +163,7 @@ export async function getData(
   view?: boolean,
   share?: string,
   editorType?: string,
+  editForm?: string,
 ) {
   try {
     const hdrs = headers();
@@ -176,6 +177,7 @@ export async function getData(
     if (doc) searchParams.append("doc", doc);
     if (share) searchParams.append("share", share);
     if (editorType) searchParams.append("editorType", editorType);
+    if (editForm) searchParams.append("editForm", editForm);
 
     const [config, user, settings] = await Promise.all([
       openEdit(fileId, searchParams.toString(), share),

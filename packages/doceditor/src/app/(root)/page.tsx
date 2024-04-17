@@ -47,7 +47,7 @@ async function Page({
 }: {
   searchParams?: { [key: string]: string };
 }) {
-  const { fileId, fileid, version, doc, action, share, editorType } =
+  const { fileId, fileid, version, doc, action, share, editorType, editForm } =
     searchParams || {
       fileId: undefined,
       fileid: undefined,
@@ -56,6 +56,7 @@ async function Page({
       action: undefined,
       share: undefined,
       editorType: undefined,
+      editForm: undefined,
     };
 
   const data = await getData(
@@ -65,6 +66,7 @@ async function Page({
     action === "view",
     share,
     editorType,
+    editForm,
   );
 
   return <Root {...data} />;

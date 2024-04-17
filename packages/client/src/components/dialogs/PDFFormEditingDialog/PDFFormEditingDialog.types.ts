@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface FormEditingDialogProps {
-  onClose: VoidFunction;
-}
+export interface FormEditingDialogProps
+  extends Partial<
+      Pick<TStore["dialogsStore"], "setPdfFormEditVisible" | "pdfFormEditData">
+    >,
+    Partial<Pick<TStore["filesStore"], "openDocEditor">> {}

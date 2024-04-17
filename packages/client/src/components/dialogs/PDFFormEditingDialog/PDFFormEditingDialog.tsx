@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
 import {
   ModalDialog,
@@ -33,35 +34,60 @@ import {
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { FormEditingDialogProps } from "./PDFFormEditingDialog.types";
 
-export const PDFFormEditingDialog = ({ onClose }: FormEditingDialogProps) => {
-  const { t } = useTranslation(["PDFFormDialog", "Common"]);
+export const PDFFormEditingDialog = inject<TStore>(
+  ({ filesStore, dialogsStore }) => {
+    const { setPdfFormEditVisible, pdfFormEditData } = dialogsStore;
+    const { openDocEditor } = filesStore;
 
-  const handleSubmit = () => {};
+    return { setPdfFormEditVisible, openDocEditor, pdfFormEditData };
+  },
+)(
+  observer(
+    ({
+      pdfFormEditData,
+      openDocEditor,
+      setPdfFormEditVisible,
+    }: FormEditingDialogProps) => {
+      const { t } = useTranslation(["PDFFormDialog", "Common"]);
 
-  return (
-    <ModalDialog autoMaxHeight displayType={ModalDialogType.modal} visible>
-      <ModalDialog.Header>{t("PDFFormEditDialogTitle")}</ModalDialog.Header>
-      <ModalDialog.Body>
-        <span>{t("PDFFormEditDialogDescription")}</span>
-      </ModalDialog.Body>
+      const onClose = () => {
+        setPdfFormEditVisible!(false, null);
+      };
 
-      <ModalDialog.Footer>
-        <Button
-          scale
-          primary
-          tabIndex={0}
-          size={ButtonSize.normal}
-          label={t("Common:EditButton")}
-          onClick={handleSubmit}
-        />
-        <Button
-          scale
-          tabIndex={0}
-          onClick={onClose}
-          size={ButtonSize.normal}
-          label={t("Common:CancelButton")}
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
-  );
-};
+      const handleSubmit = () => {
+        if (pdfFormEditData) openDocEditor!(pdfFormEditData, false, null, true);
+
+        onClose();
+      };
+
+      return (
+        <ModalDialog autoMaxHeight displayType={ModalDialogType.modal} visible>
+          <ModalDialog.Header>
+            {t("PDFFormDialog:PDFFormEditDialogTitle")}
+          </ModalDialog.Header>
+          <ModalDialog.Body>
+            <span>{t("PDFFormDialog:PDFFormEditDialogDescription")}</span>
+          </ModalDialog.Body>
+
+          <ModalDialog.Footer>
+            <Button
+              scale
+              primary
+              tabIndex={0}
+              size={ButtonSize.normal}
+              label={t("Common:EditButton")}
+              onClick={handleSubmit}
+            />
+            <Button
+              scale
+              tabIndex={0}
+              onClick={onClose}
+              size={ButtonSize.normal}
+              label={t("Common:CancelButton")}
+            />
+          </ModalDialog.Footer>
+        </ModalDialog>
+      );
+    },
+  ),
+);

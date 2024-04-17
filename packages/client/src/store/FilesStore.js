@@ -3816,7 +3816,7 @@ class FilesStore {
     return folderInfo;
   };
 
-  openDocEditor = (id, preview = false, shareKey = null) => {
+  openDocEditor = (id, preview = false, shareKey = null, editForm = false) => {
     const foundIndex = this.files.findIndex((x) => x.id === id);
     const file = foundIndex !== -1 ? this.files[foundIndex] : undefined;
     if (
@@ -3838,6 +3838,7 @@ class FilesStore {
     searchParams.append("fileId", id);
     if (share) searchParams.append("share", share);
     if (preview) searchParams.append("action", "view");
+    if (editForm) searchParams.append("editForm", editForm);
 
     const url = combineUrl(
       window.DocSpaceConfig?.proxy?.url,

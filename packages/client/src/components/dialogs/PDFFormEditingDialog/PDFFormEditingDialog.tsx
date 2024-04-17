@@ -61,7 +61,12 @@ export const PDFFormEditingDialog = inject<TStore>(
       };
 
       return (
-        <ModalDialog autoMaxHeight displayType={ModalDialogType.modal} visible>
+        <ModalDialog
+          visible
+          autoMaxHeight
+          onClose={onClose}
+          displayType={ModalDialogType.modal}
+        >
           <ModalDialog.Header>
             {t("PDFFormDialog:PDFFormEditDialogTitle")}
           </ModalDialog.Header>

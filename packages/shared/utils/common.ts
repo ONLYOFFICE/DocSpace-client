@@ -906,22 +906,10 @@ export function getObjectByLocation(location: Location) {
 
   try {
     const searchUrl = location.search.substring(1);
-    const decodedString = decodeURIComponent(searchUrl)
-      .replace(/\["/g, '["')
-      .replace(/"\]/g, '"]')
-      .replace(/"/g, '\\"')
-      .replace(/&/g, '","')
-      .replace(/=/g, '":"')
-      .replace(/\\/g, "\\\\")
-      .replace(/\[\\\\"/g, '["')
-      .replace(/\\\\"\]/g, '"]')
-      .replace(/"\[/g, "[")
-      .replace(/\]"/g, "]")
-      .replace(/\\\\",\\\\"/g, '","')
-      .replace(/\\\\\\\\"/g, '\\"');
-    const object = JSON.parse(`{"${decodedString}"}`);
-    return object;
+    const params = Object.fromEntries(new URLSearchParams(searchUrl));
+    return params;
   } catch (e) {
+    console.error(e);
     return {};
   }
 }

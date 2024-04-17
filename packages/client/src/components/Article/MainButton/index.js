@@ -471,25 +471,36 @@ const ArticleMainButtonContent = (props) => {
           },
         ];
 
-    const uploadActions = [
-      {
-        id: "actions_upload-files",
-        className: "main-button_drop-down",
-        icon: ActionsUploadReactSvgUrl,
-        label: t("UploadFiles"),
-        onClick: onUploadFileClick,
-        key: "upload-files",
-      },
-      {
-        id: "actions_upload-folders",
-        className: "main-button_drop-down",
-        icon: ActionsUploadReactSvgUrl,
-        label: t("UploadFolder"),
-        disabled: isPrivacy || !isDesktop(),
-        onClick: onUploadFolderClick,
-        key: "upload-folder",
-      },
-    ];
+    const uploadActions = isDesktop()
+      ? [
+          {
+            id: "actions_upload-files",
+            className: "main-button_drop-down",
+            icon: ActionsUploadReactSvgUrl,
+            label: t("UploadFiles"),
+            onClick: onUploadFileClick,
+            key: "upload-files",
+          },
+          {
+            id: "actions_upload-folders",
+            className: "main-button_drop-down",
+            icon: ActionsUploadReactSvgUrl,
+            label: t("UploadFolder"),
+            disabled: isPrivacy,
+            onClick: onUploadFolderClick,
+            key: "upload-folder",
+          },
+        ]
+      : [
+          {
+            id: "actions_upload-files",
+            className: "main-button_drop-down",
+            icon: ActionsUploadReactSvgUrl,
+            label: t("UploadFiles"),
+            onClick: onUploadFileClick,
+            key: "upload-files",
+          },
+        ];
 
     if (pluginItems.length > 0) {
       // menuModel.push({

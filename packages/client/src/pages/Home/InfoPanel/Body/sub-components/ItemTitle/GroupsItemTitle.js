@@ -28,7 +28,6 @@ import { useRef } from "react";
 import { withTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
-import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 import { StyledAccountsItemTitle } from "../../styles/accounts";

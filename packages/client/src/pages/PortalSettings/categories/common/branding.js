@@ -103,7 +103,7 @@ const Branding = ({
     };
   }, []);
 
-  if (isMobileView)
+  if (isMobileView && standalone)
     return (
       <MobileView isSettingPaid={isSettingPaid} isManagement={isManagement()} />
     );

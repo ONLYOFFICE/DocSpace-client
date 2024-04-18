@@ -47,7 +47,8 @@ Options have options:
 - disabled - Make option disabled
 - onClick - On click function
 
-ComboBox perceives all property`s for positioning from DropDown!  
+ComboBox perceives all property`s for positioning from DropDown!
+
 If you need to display a custom list of options, you must use advancedOptions property. Like this:
 
 ```js

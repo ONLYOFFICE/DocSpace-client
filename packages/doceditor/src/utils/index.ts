@@ -228,7 +228,7 @@ export const calculateAsideHeight = () => {
 
   if (!viewPort) return;
 
-  if (viewPort.isEditor && viewPort.isSeparateWindow) {
+  if (viewPort.widgetType === "window") {
     const { captionHeight } = viewPort;
     const backdrop = document.getElementsByClassName(
       "backdrop-active",
@@ -238,7 +238,7 @@ export const calculateAsideHeight = () => {
     if (aside && backdrop) {
       backdrop.style.height =
         aside.style.height = `calc(100dvh - ${captionHeight}px`;
-      aside.style.top = `${captionHeight}px`;
+      backdrop.style.marginTop = aside.style.top = `${captionHeight}px`;
     }
   }
 };

@@ -914,6 +914,30 @@ export function getObjectByLocation(location: Location) {
   }
 }
 
+export function tryParse(str: string) {
+  try {
+    if (!str) return undefined;
+
+    return JSON.parse(str);
+  } catch (e) {
+    console.error(e);
+    return undefined;
+  }
+}
+
+export function tryParseArray(str: string) {
+  try {
+    const res = tryParse(str);
+
+    if (!Array.isArray(res)) return undefined;
+
+    return res;
+  } catch (e) {
+    console.error(e);
+    return undefined;
+  }
+}
+
 const RoomsValues = Object.values(RoomsType).filter(
   (item): item is number => typeof item === "number",
 );

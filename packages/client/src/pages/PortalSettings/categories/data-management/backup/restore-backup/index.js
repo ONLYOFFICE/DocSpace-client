@@ -193,7 +193,9 @@ const RestoreBackup = (props) => {
 
   const backupModules = (
     <div className="restore-backup_modules">
-      {radioButtonState === LOCAL_FILE && <LocalFileModule t={t} />}
+      {radioButtonState === LOCAL_FILE && (
+        <LocalFileModule t={t} isEnableRestore={isEnableRestore} />
+      )}
 
       {radioButtonState === BACKUP_ROOM && <RoomsModule />}
       {radioButtonState === DISK_SPACE && (
@@ -293,7 +295,8 @@ const RestoreBackup = (props) => {
 };
 
 export default inject(({ settingsStore, backup, currentQuotaStore }) => {
-  const { currentDeviceType, standalone } = settingsStore;
+  const { currentDeviceType, standalone, checkEnablePortalSettings } =
+    settingsStore;
   const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
   const {
     getProgress,
@@ -307,9 +310,13 @@ export default inject(({ settingsStore, backup, currentQuotaStore }) => {
   const buttonSize =
     currentDeviceType !== DeviceType.desktop ? "normal" : "small";
 
+  const isEnableRestore = checkEnablePortalSettings(
+    isRestoreAndAutoBackupAvailable,
+  );
+
   return {
     standalone,
-    isEnableRestore: isRestoreAndAutoBackupAvailable,
+    isEnableRestore,
     setStorageRegions,
     setThirdPartyStorage,
     buttonSize,

@@ -501,7 +501,7 @@ class AutomaticBackup extends React.PureComponent {
               >
                 {t("EnableAutomaticBackup")}
               </Text>
-              {!isEnableAuto && (
+              {!isEnableAuto && !isManagement() && (
                 <Badge
                   backgroundColor="#EDC409"
                   label={t("Common:Paid")}
@@ -614,7 +614,12 @@ export default inject(
   }) => {
     const { language } = authStore;
     const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
-    const { theme, currentColorScheme, automaticBackupUrl } = settingsStore;
+    const {
+      theme,
+      currentColorScheme,
+      automaticBackupUrl,
+      checkEnablePortalSettings,
+    } = settingsStore;
 
     const {
       downloadingProgress,
@@ -658,10 +663,14 @@ export default inject(
 
     const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
 
+    const isEnableAuto = checkEnablePortalSettings(
+      isRestoreAndAutoBackupAvailable,
+    );
+
     return {
       setConnectedThirdPartyAccount,
       defaultFolderId,
-      isEnableAuto: isRestoreAndAutoBackupAvailable,
+      isEnableAuto,
       fetchTreeFolders,
       rootFoldersTitles,
       downloadingProgress,

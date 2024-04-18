@@ -252,6 +252,7 @@ class ManualBackup extends React.Component {
       isNotPaidPeriod,
       dataBackupUrl,
       currentColorScheme,
+      pageIsDisabled,
     } = this.props;
     const {
       isInitialLoading,
@@ -312,7 +313,7 @@ class ManualBackup extends React.Component {
             name={"isCheckedTemporaryStorage"}
             key={0}
             isChecked={isCheckedTemporaryStorage}
-            isDisabled={!isMaxProgress}
+            isDisabled={!isMaxProgress || pageIsDisabled}
             {...commonRadioButtonProps}
           />
           <Text className="backup-description">
@@ -333,7 +334,7 @@ class ManualBackup extends React.Component {
                   id="download-copy"
                   label={t("DownloadCopy")}
                   onClick={this.onClickDownloadBackup}
-                  isDisabled={false}
+                  isDisabled={pageIsDisabled}
                   size={buttonSize}
                   style={{ marginLeft: "8px" }}
                 />
@@ -356,7 +357,7 @@ class ManualBackup extends React.Component {
             name={"isCheckedDocuments"}
             key={1}
             isChecked={isCheckedDocuments}
-            isDisabled={!isMaxProgress || isNotPaidPeriod}
+            isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
             {...commonRadioButtonProps}
           />
           <Text className="backup-description module-documents">
@@ -379,7 +380,7 @@ class ManualBackup extends React.Component {
             name={"isCheckedThirdParty"}
             key={2}
             isChecked={isCheckedThirdParty}
-            isDisabled={!isMaxProgress || isNotPaidPeriod}
+            isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
             {...commonRadioButtonProps}
           />
           <Text className="backup-description">
@@ -394,7 +395,7 @@ class ManualBackup extends React.Component {
             name={"isCheckedThirdPartyStorage"}
             key={3}
             isChecked={isCheckedThirdPartyStorage}
-            isDisabled={!isMaxProgress || isNotPaidPeriod}
+            isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
             {...commonRadioButtonProps}
           />
           <Text className="backup-description">
@@ -438,9 +439,11 @@ export default inject(
       setConnectedThirdPartyAccount,
     } = backup;
 
-    const { currentColorScheme, dataBackupUrl } = settingsStore;
+    const { currentColorScheme, dataBackupUrl, portals } = settingsStore;
     const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;
+
+    const pageIsDisabled = isManagement() && portals?.length === 1;
 
     return {
       isNotPaidPeriod,
@@ -464,6 +467,7 @@ export default inject(
 
       dataBackupUrl,
       currentColorScheme,
+      pageIsDisabled,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(ManualBackup)));

@@ -38,7 +38,9 @@ const StyledWrapper = styled.div`
 const MobileView = ({ isSettingPaid, showSettings }) => {
   const { t } = useTranslation(["Settings"]);
   const navigate = useNavigate();
-  const baseUrl = isManagement() ? "" : "/portal-settings/customization";
+  const baseUrl = isManagement()
+    ? "/settings"
+    : "/portal-settings/customization";
 
   const onClickLink = (e) => {
     e.preventDefault();

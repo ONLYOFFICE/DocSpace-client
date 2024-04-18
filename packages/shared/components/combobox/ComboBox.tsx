@@ -65,14 +65,14 @@ const ComboBoxPure = (props: ComboboxProps) => {
 
     if (ref.current && ref.current.contains(target)) return;
 
-    if (onToggle && !withBackdrop) return;
+    if (onToggle && !(withBackdrop && onBackdropClick)) return;
 
     setIsOpenItemAccess?.(!isOpen);
     setIsOpen((v) => {
       return !v;
     });
 
-    if (withBackdrop && onBackdropClick) onBackdropClick();
+    if (withBackdrop) onBackdropClick?.(e);
   };
 
   const comboBoxClick = (e: React.MouseEvent) => {

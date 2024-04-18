@@ -260,7 +260,7 @@ const WhiteLabel = (props) => {
         <Text fontSize="16px" fontWeight="700">
           {t("WhiteLabel")}
         </Text>
-        {!isSettingPaid && (
+        {!isSettingPaid && !isManagement() && (
           <Badge
             className="paid-badge"
             fontWeight="700"
@@ -550,9 +550,16 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     resetIsInit,
   } = common;
 
-  const { whiteLabelLogoUrls: defaultWhiteLabelLogoUrls, currentDeviceType } =
-    settingsStore;
+  const {
+    whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
+    currentDeviceType,
+    checkEnablePortalSettings,
+  } = settingsStore;
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+
+  const isSettingPaid = checkEnablePortalSettings(
+    isBrandingAndCustomizationAvailable,
+  );
 
   return {
     setLogoText,
@@ -562,7 +569,7 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     saveWhiteLabelSettings,
     restoreWhiteLabelSettings,
     defaultWhiteLabelLogoUrls,
-    isSettingPaid: isBrandingAndCustomizationAvailable,
+    isSettingPaid,
     initSettings,
     logoUrlsWhiteLabel,
     setLogoUrlsWhiteLabel,

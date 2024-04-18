@@ -321,9 +321,13 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
 
     additionalResourcesData,
     additionalResourcesIsDefault,
+    checkEnablePortalSettings,
   } = settingsStore;
 
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+  const isSettingPaid = checkEnablePortalSettings(
+    isBrandingAndCustomizationAvailable,
+  );
 
   return {
     getAdditionalResources,
@@ -332,7 +336,7 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     additionalResourcesIsDefault,
     setIsLoadedAdditionalResources,
     isLoadedAdditionalResources,
-    isSettingPaid: isBrandingAndCustomizationAvailable,
+    isSettingPaid,
   };
 })(
   withLoading(

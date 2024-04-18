@@ -102,13 +102,13 @@ const Branding = ({
       }
     };
   }, []);
+  const hideBlock = isManagement() ? false : portals?.length > 1 ? true : false;
 
   if (isMobileView)
     return (
       <MobileView isSettingPaid={isSettingPaid} isManagement={isManagement()} />
     );
 
-  const hideBlock = isManagement() ? false : portals?.length > 1 ? true : false;
   return (
     <StyledComponent isSettingPaid={isSettingPaid}>
       <Whitelabel />
@@ -133,11 +133,15 @@ const Branding = ({
 export default inject(({ settingsStore, currentQuotaStore, common }) => {
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
   const { isLoadedCompanyInfoSettingsData } = common;
-  const { standalone, currentDeviceType, portals } = settingsStore;
+  const { standalone, currentDeviceType, portals, checkEnablePortalSettings } =
+    settingsStore;
+  const isSettingPaid = checkEnablePortalSettings(
+    isBrandingAndCustomizationAvailable,
+  );
 
   return {
     isLoadedCompanyInfoSettingsData,
-    isSettingPaid: isBrandingAndCustomizationAvailable,
+    isSettingPaid,
     standalone,
     currentDeviceType,
     portals,

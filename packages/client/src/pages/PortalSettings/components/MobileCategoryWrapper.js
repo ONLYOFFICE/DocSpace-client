@@ -32,7 +32,7 @@ import { Badge } from "@docspace/shared/components/badge";
 import { Link } from "@docspace/shared/components/link";
 import { Base } from "@docspace/shared/themes";
 import commonIconsStyles from "@docspace/shared/utils/common-icons-style";
-
+import { isManagement } from "@docspace/shared/utils/common";
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 
 const StyledArrowRightIcon = styled(ArrowRightIcon)`
@@ -103,7 +103,7 @@ const MobileCategoryWrapper = (props) => {
         >
           {title}
         </Link>
-        {withPaidBadge && (
+        {withPaidBadge && !isManagement() && (
           <Badge
             backgroundColor="#EDC409"
             label={badgeLabel}

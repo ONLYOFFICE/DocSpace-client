@@ -504,9 +504,13 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
 
     companyInfoSettingsData,
     buildVersionInfo,
+    checkEnablePortalSettings,
   } = settingsStore;
 
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+  const isSettingPaid = checkEnablePortalSettings(
+    isBrandingAndCustomizationAvailable,
+  );
 
   return {
     getCompanyInfoSettings,
@@ -517,7 +521,7 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     setIsLoadedCompanyInfoSettingsData,
     isLoadedCompanyInfoSettingsData,
     buildVersionInfo,
-    isSettingPaid: isBrandingAndCustomizationAvailable,
+    isSettingPaid,
   };
 })(
   withLoading(

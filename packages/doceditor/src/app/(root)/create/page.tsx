@@ -107,7 +107,17 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
   }
 
   if (fileId || !fileError) {
-    const redirectURL = `${baseURL}/doceditor?fileId=${fileId}`;
+    //TODO: Temporarily for testing
+    const isPDF = file?.fileExst === ".pdf";
+    const searchParams = new URLSearchParams();
+
+    if (isPDF) {
+      searchParams.append("editForm", "true");
+    }
+
+    //end
+
+    const redirectURL = `${baseURL}/doceditor?fileId=${fileId}&${searchParams.toString()}`;
     return permanentRedirect(redirectURL);
   }
 
@@ -121,4 +131,3 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
 }
 
 export default Page;
-

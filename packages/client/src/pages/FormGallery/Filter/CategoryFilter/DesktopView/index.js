@@ -47,6 +47,14 @@ const CategoryFilterDesktop = ({
   const onOpenDropdown = () => setIsOpen(true);
   const onCloseDropdown = () => setIsOpen(false);
 
+  const onBackdropClick = (e) => {
+    if (
+      e?.target?.className !== "item-content" &&
+      e?.target?.className !== "dropdown-item"
+    )
+      onCloseDropdown();
+  };
+
   const [hoveredSub, setHoveredSub] = useState(null);
 
   const onViewAllTemplates = () => filterOformsByCategory("", "");
@@ -59,7 +67,7 @@ const CategoryFilterDesktop = ({
         className={"combobox"}
         opened={isOpen}
         onToggle={onOpenDropdown}
-        onBackdropClick={onCloseDropdown}
+        onBackdropClick={onBackdropClick}
         onSelect={onCloseDropdown}
         isDisabled={false}
         showDisabledItems={true}

@@ -19,7 +19,7 @@
   "LogoutAllActiveSessionsDescription": "Alle aktiven Verbindungen mit Ausnahme dieser Verbindung werden abgemeldet, da sie gerade in Gebrauch ist.",
   "LogoutBtn": "Abmelden",
   "LogoutDescription": "Hinweis. Alle aktiven Verbindungen mit Ausnahme dieser Verbindung werden abgemeldet, da sie gerade in Gebrauch ist.",
-  "LogoutFrom": "Abmelden von {{platform}} {{browser}} ?",
+  "LogoutFrom": "Abmelden von {{platform}} {{browser}}?",
   "MyProfile": "Mein Profil",
   "ProviderSuccessfullyConnected": "Anbieter erfolgreich verbunden",
   "ProviderSuccessfullyDisconnected": "Anbieter erfolgreich getrennt",

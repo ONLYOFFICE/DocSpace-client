@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 "use client";
 
 import React from "react";
@@ -19,6 +45,7 @@ import {
   TSelectorFooterInput,
   TSelectorFooterCheckbox,
   TWithTabs,
+  TSelectorInfo,
 } from "./Selector.types";
 
 const Selector = ({
@@ -69,6 +96,7 @@ const Selector = ({
   accessRights,
   selectedAccessRight,
   onAccessRightsChange,
+  accessRightsMode,
 
   withFooterInput,
   footerInputHeader,
@@ -102,6 +130,9 @@ const Selector = ({
   withTabs,
   tabsData,
   activeTabId,
+
+  withInfo,
+  infoText,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
   const [isSearch, setIsSearch] = React.useState<boolean>(false);
@@ -120,12 +151,38 @@ const Selector = ({
   const [isFooterCheckboxChecked, setIsFooterCheckboxChecked] =
     React.useState<boolean>(isChecked || false);
   const [selectedAccess, setSelectedAccess] =
-    React.useState<TAccessRight | null>(null);
+    React.useState<TAccessRight | null>(() => {
+      if (selectedAccessRight) return { ...selectedAccessRight };
 
-  const onSelectAction = (item: TSelectorItem) => {
-    onSelect?.({
-      ...item,
+      return null;
     });
+
+  const [requestRunning, setRequestRunning] = React.useState<boolean>(false);
+
+  const onSubmitAction = async (
+    item?: TSelectorItem | React.MouseEvent,
+    fromCallback?: boolean,
+  ) => {
+    setRequestRunning(true);
+
+    await onSubmit(
+      fromCallback && item && "label" in item ? [item] : newSelectedItems,
+      selectedAccess,
+      newFooterInputValue,
+      isFooterCheckboxChecked,
+    );
+
+    setRequestRunning(false);
+  };
+
+  const onSelectAction = (item: TSelectorItem, isDoubleClick: boolean) => {
+    onSelect?.(
+      {
+        ...item,
+      },
+      isDoubleClick,
+      () => onSubmitAction(item, true),
+    );
 
     if (isMultiSelect) {
       if (item.isSelected) {
@@ -188,7 +245,7 @@ const Selector = ({
         return [...newValue];
       });
 
-      if (item.isSelected) {
+      if (item.isSelected && !isDoubleClick) {
         setNewSelectedItems([]);
       } else {
         setNewSelectedItems([item]);
@@ -204,17 +261,20 @@ const Selector = ({
     const query =
       activeTabId && selectedTabItems[activeTabId]
         ? selectedTabItems[activeTabId].length === 0 ||
-          selectedTabItems[activeTabId].length !== items.length
+          selectedTabItems[activeTabId].length !==
+            items.filter((i) => !i.isDisabled).length
         : newSelectedItems.length === 0 ||
-          newSelectedItems.length !== items.length;
+          newSelectedItems.length !== items.filter((i) => !i.isDisabled).length;
 
     if (query) {
-      const cloneItems = items.map((x) => ({ ...x }));
+      const cloneItems = items
+        .map((x) => ({ ...x }))
+        .filter((x) => !x.isDisabled);
 
       setRenderedItems((i) => {
         const cloneRenderedItems = i.map((x) => ({
           ...x,
-          isSelected: true,
+          isSelected: !x.isDisabled,
         }));
 
         return cloneRenderedItems;
@@ -270,15 +330,6 @@ const Selector = ({
     onSelectAll,
     selectedTabItems,
   ]);
-
-  const onSubmitAction = () => {
-    onSubmit(
-      newSelectedItems,
-      selectedAccess,
-      newFooterInputValue,
-      isFooterCheckboxChecked,
-    );
-  };
 
   const onChangeAccessRightsAction = React.useCallback(
     (access: TAccessRight) => {
@@ -371,18 +422,22 @@ const Selector = ({
       }
     : ({} as TSelectorBreadCrumbs);
 
+  const tempRenderedItemsLength = renderedItems.filter(
+    (x) => !x.isDisabled,
+  ).length;
+
   const isAllIndeterminate =
     activeTabId && selectedTabItems[activeTabId]
-      ? selectedTabItems[activeTabId].length !== renderedItems.length &&
+      ? selectedTabItems[activeTabId].length !== tempRenderedItemsLength &&
         selectedTabItems[activeTabId].length !== 0
-      : newSelectedItems.length !== renderedItems.length &&
+      : newSelectedItems.length !== tempRenderedItemsLength &&
         newSelectedItems.length !== 0;
   const isAllChecked =
     activeTabId && selectedTabItems[activeTabId]
-      ? selectedTabItems[activeTabId].length === renderedItems.length &&
-        renderedItems.length !== 0
-      : newSelectedItems.length === renderedItems.length &&
-        renderedItems.length !== 0;
+      ? selectedTabItems[activeTabId].length === tempRenderedItemsLength &&
+        tempRenderedItemsLength !== 0
+      : newSelectedItems.length === tempRenderedItemsLength &&
+        tempRenderedItemsLength !== 0;
 
   const onSelectAllProps: TSelectorSelectAll = withSelectAll
     ? {
@@ -425,6 +480,7 @@ const Selector = ({
         accessRights,
         selectedAccessRight: selectedAccess,
         onAccessRightsChange: onChangeAccessRightsAction,
+        accessRightsMode,
       }
     : ({} as TSelectorAccessRights);
 
@@ -456,6 +512,13 @@ const Selector = ({
 
   const tabsProps: TWithTabs = withTabs
     ? { withTabs, tabsData, activeTabId }
+    : {};
+
+  const infoProps: TSelectorInfo = withInfo
+    ? {
+        withInfo,
+        infoText,
+      }
     : {};
 
   React.useEffect(() => {
@@ -529,6 +592,8 @@ const Selector = ({
         {...searchProps}
         // tabs
         {...tabsProps}
+        // info
+        {...infoProps}
       />
 
       {(footerVisible || alwaysShowFooter) && (
@@ -539,6 +604,7 @@ const Selector = ({
           submitButtonLabel={submitButtonLabel}
           disableSubmitButton={disableSubmitButton}
           submitButtonId={submitButtonId}
+          requestRunning={requestRunning}
           // cancel button
           {...cancelButtonProps}
           // access rights

@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { makeAutoObservable } from "mobx";
 import { TableVersions } from "SRC_DIR/helpers/constants";
 
@@ -159,9 +185,9 @@ class TableStore {
         isRoomsFolder,
         isArchiveFolder,
         isTrashFolder,
-        isAccountsPeople,
-        isAccountsGroups,
-        isAccountsInsideGroup,
+        getIsAccountsPeople,
+        getIsAccountsGroups,
+        getIsAccountsInsideGroup,
       } = this.treeFoldersStore;
       const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -174,7 +200,7 @@ class TableStore {
         return;
       }
 
-      if (isAccountsPeople) {
+      if (getIsAccountsPeople()) {
         this.setAccountsColumnType(splitColumns.includes("Type"));
         this.setAccountsColumnEmail(splitColumns.includes("Mail"));
         this.setAccountsColumnGroup(splitColumns.includes("Department"));
@@ -182,14 +208,14 @@ class TableStore {
         return;
       }
 
-      if (isAccountsGroups) {
+      if (getIsAccountsGroups()) {
         this.setAccountsGroupsColumnManager(
           splitColumns.includes("Head of Group"),
         );
         return;
       }
 
-      if (isAccountsInsideGroup) {
+      if (getIsAccountsInsideGroup()) {
         this.setAccountsInsideGroupColumnType(splitColumns.includes("Type"));
         this.setAccountsInsideGroupColumnEmail(splitColumns.includes("Mail"));
         this.setAccountsInsideGroupColumnGroup(
@@ -224,9 +250,9 @@ class TableStore {
       isRoomsFolder,
       isArchiveFolder,
       isTrashFolder,
-      isAccountsPeople,
-      isAccountsGroups,
-      isAccountsInsideGroup,
+      getIsAccountsPeople,
+      getIsAccountsGroups,
+      getIsAccountsInsideGroup,
     } = this.treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -250,7 +276,7 @@ class TableStore {
         return;
 
       case "Department":
-        isAccountsPeople
+        getIsAccountsPeople()
           ? this.setAccountsColumnGroup(!this.groupAccountsColumnIsEnabled)
           : this.setAccountsInsideGroupColumnGroup(
               !this.groupAccountsInsideGroupColumnIsEnabled,
@@ -275,9 +301,9 @@ class TableStore {
       case "Type":
         isRooms
           ? this.setRoomColumnType(!this.roomColumnTypeIsEnabled)
-          : isAccountsPeople
+          : getIsAccountsPeople()
             ? this.setAccountsColumnType(!this.typeAccountsColumnIsEnabled)
-            : isAccountsInsideGroup
+            : getIsAccountsInsideGroup()
               ? this.setAccountsInsideGroupColumnType(
                   !this.typeAccountsInsideGroupColumnIsEnabled,
                 )
@@ -309,7 +335,7 @@ class TableStore {
         return;
 
       case "Mail":
-        isAccountsPeople
+        getIsAccountsPeople()
           ? this.setAccountsColumnEmail(!this.emailAccountsColumnIsEnabled)
           : this.setAccountsInsideGroupColumnEmail(
               !this.emailAccountsInsideGroupColumnIsEnabled,
@@ -317,7 +343,7 @@ class TableStore {
         return;
 
       case "Storage":
-        isAccountsPeople
+        getIsAccountsPeople()
           ? this.setAccountsColumnStorage(!this.storageAccountsColumnIsEnabled)
           : this.setRoomColumnQuota(!this.roomQuotaColumnIsEnable);
         return;
@@ -359,11 +385,12 @@ class TableStore {
       isRoomsFolder,
       isArchiveFolder,
       isTrashFolder,
-      isAccountsPeople,
-      isAccountsGroups,
+      getIsAccountsPeople,
+      getIsAccountsGroups,
       isRecentTab,
-      isAccountsInsideGroup,
+      getIsAccountsInsideGroup,
     } = this.treeFoldersStore;
+
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
@@ -372,11 +399,11 @@ class TableStore {
 
     return isRooms
       ? `${TABLE_ROOMS_COLUMNS}=${userId}`
-      : isAccountsPeople
+      : getIsAccountsPeople()
         ? `${TABLE_ACCOUNTS_PEOPLE_COLUMNS}=${userId}`
-        : isAccountsGroups
+        : getIsAccountsGroups()
           ? `${TABLE_ACCOUNTS_GROUPS_COLUMNS}=${userId}`
-          : isAccountsInsideGroup
+          : getIsAccountsInsideGroup()
             ? `${TABLE_ACCOUNTS_INSIDE_GROUP_COLUMNS}=${userId}`
             : isTrashFolder
               ? `${TABLE_TRASH_COLUMNS}=${userId}`

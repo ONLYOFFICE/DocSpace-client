@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 /* eslint-disable no-console */
 /* eslint-disable no-multi-str */
 /* eslint-disable no-plusplus */
@@ -17,7 +43,7 @@ import DocseditorSvgUrl from "PUBLIC_DIR/images/logo/docseditor.svg?url";
 import LightSmallSvgUrl from "PUBLIC_DIR/images/logo/lightsmall.svg?url";
 import DocsEditoRembedSvgUrl from "PUBLIC_DIR/images/logo/docseditorembed.svg?url";
 import DarkLightSmallSvgUrl from "PUBLIC_DIR/images/logo/dark_lightsmall.svg?url";
-import FaviconIco from "PUBLIC_DIR/favicon.ico";
+import FaviconIco from "PUBLIC_DIR/images/logo/favicon.ico";
 
 import BackgroundPatternReactSvgUrl from "PUBLIC_DIR/images/background.pattern.react.svg?url";
 import BackgroundPatternOrangeReactSvgUrl from "PUBLIC_DIR/images/background.pattern.orange.react.svg?url";
@@ -34,6 +60,7 @@ import {
   ShareAccessRights,
   ThemeKeys,
   ErrorKeys,
+  WhiteLabelLogoType,
 } from "../enums";
 import { LANGUAGE, PUBLIC_MEDIA_VIEW_URL, RTL_LANGUAGES } from "../constants";
 
@@ -47,7 +74,6 @@ import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie } from "./cookie";
 import { checkIsSSR } from "./device";
-import { AvatarRole } from "../components/avatar/Avatar.enums";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -100,8 +126,8 @@ export const isPublicRoom = () => {
 };
 
 export const getUserTypeLabel = (
-  role: AvatarRole | undefined,
-  t: (key: string) => string,
+  role: "owner" | "admin" | "user" | "collaborator" | "manager" | undefined,
+  t: TTranslation,
 ) => {
   switch (role) {
     case "owner":
@@ -364,7 +390,7 @@ export function getProviderLabel(provider: string, t: (key: string) => string) {
     case "microsoft":
       return t("Common:ProviderMicrosoft");
     case "sso":
-      return t("Common:ProviderSso");
+      return t("Common:SSO");
     case "zoom":
       return t("Common:ProviderZoom");
     case "sso-full":
@@ -561,10 +587,17 @@ export function getLoginLink(token: string, code: string) {
   );
 }
 
+const FRAME_NAME = "frameDocSpace";
+
+const getFrameId = () => {
+  return window.self.name.replace(`${FRAME_NAME}__#`, "");
+};
+
 export const frameCallbackData = (methodReturnData: unknown) => {
   window.parent.postMessage(
     JSON.stringify({
       type: "onMethodReturn",
+      frameId: getFrameId(),
       methodReturnData,
     }),
     "*",
@@ -575,6 +608,7 @@ export const frameCallEvent = (eventReturnData: unknown) => {
   window.parent.postMessage(
     JSON.stringify({
       type: "onEventReturn",
+      frameId: getFrameId(),
       eventReturnData,
     }),
     "*",
@@ -588,6 +622,7 @@ export const frameCallCommand = (
   window.parent.postMessage(
     JSON.stringify({
       type: "onCallCommand",
+      frameId: getFrameId(),
       commandName,
       commandData,
     }),
@@ -872,25 +907,12 @@ export const toUrlParams = (
 export function getObjectByLocation(location: Location) {
   if (!location.search || !location.search.length) return null;
 
-  const searchUrl = location.search.substring(1);
-  const decodedString = decodeURIComponent(searchUrl)
-    .replace(/\["/g, '["')
-    .replace(/"\]/g, '"]')
-    .replace(/"/g, '\\"')
-    .replace(/&/g, '","')
-    .replace(/=/g, '":"')
-    .replace(/\\/g, "\\\\")
-    .replace(/\[\\\\"/g, '["')
-    .replace(/\\\\"\]/g, '"]')
-    .replace(/"\[/g, "[")
-    .replace(/\]"/g, "]")
-    .replace(/\\\\",\\\\"/g, '","')
-    .replace(/\\\\\\\\"/g, '\\"');
-
   try {
-    const object = JSON.parse(`{"${decodedString}"}`);
-    return object;
+  const searchUrl = location.search.substring(1);
+    const params = Object.fromEntries(new URLSearchParams(searchUrl));
+    return params;
   } catch (e) {
+    console.error(e);
     return {};
   }
 }
@@ -1047,3 +1069,11 @@ export const mapCulturesToArray = (
     };
   });
 };
+
+export function getLogoUrl(
+  logoType: WhiteLabelLogoType,
+  dark: boolean = false,
+  def: boolean = false,
+) {
+  return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}`;
+}

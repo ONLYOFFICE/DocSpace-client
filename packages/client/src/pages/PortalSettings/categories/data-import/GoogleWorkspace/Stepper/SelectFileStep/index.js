@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { useState, useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -85,6 +111,7 @@ const SelectFileStep = ({
   const [showErrorText, setShowErrorText] = useState(false);
   const [isFileError, setIsFileError] = useState(false);
   const [fileName, setFileName] = useState(null);
+  const [isBackupEmpty, setIsBackupEmpty] = useState(false);
   const [searchParams] = useSearchParams();
   const isAbort = useRef(false);
   const uploadInterval = useRef(null);
@@ -114,7 +141,7 @@ const SelectFileStep = ({
       setIsFileError(false);
       setShowReminder(true);
 
-      if (res.parseResult.files.length > 0) {
+      if (res.parseResult.files?.length > 0) {
         setFileName(res.parseResult.files.join(", "));
       }
 
@@ -124,9 +151,16 @@ const SelectFileStep = ({
         setFileName(null);
         clearInterval(uploadInterval.current);
       } else if (res.isCompleted || res.progress === 100) {
-        setUsers(res.parseResult);
-        setShowReminder(true);
-        onNextStep && onNextStep();
+        if (
+          res.parseResult.users.length +
+            res.parseResult.existUsers.length +
+            res.parseResult.withoutEmailUsers.length >
+          0
+        ) {
+          setUsers(res.parseResult);
+          setShowReminder(true);
+          onNextStep && onNextStep();
+        }
         clearInterval(uploadInterval.current);
       }
     } catch (error) {
@@ -166,7 +200,7 @@ const SelectFileStep = ({
       uploadInterval.current = setInterval(async () => {
         try {
           const res = await getMigrationStatus();
-          setProgress(res.progress);
+          setProgress(res?.progress);
 
           if (res.progress > 10) {
             setIsVisible(false);
@@ -174,7 +208,7 @@ const SelectFileStep = ({
             setIsVisible(true);
           }
 
-          if (res.error) {
+          if (res.error || res.parseResult.failedArchives.length > 0) {
             setShowErrorText(true);
           } else {
             setShowErrorText(false);
@@ -190,8 +224,20 @@ const SelectFileStep = ({
             setIsFileLoading(false);
             setIsVisible(false);
             setProgress(100);
-            setUsers(res.parseResult);
-            setShowReminder(true);
+
+            if (
+              res.parseResult.users.length +
+                res.parseResult.existUsers.length +
+                res.parseResult.withoutEmailUsers.length >
+              0
+            ) {
+              setUsers(res.parseResult);
+              setShowReminder(true);
+              setIsBackupEmpty(false);
+            } else {
+              setIsBackupEmpty(true);
+              cancelMigration();
+            }
           }
         } catch (error) {
           toastr.error(error || t("Common:SomethingWentWrong"));
@@ -310,6 +356,19 @@ const SelectFileStep = ({
               >
                 {t("Settings:CheckUnsupportedFiles")}
               </Link>
+            </Box>
+          )}
+
+          {isBackupEmpty && (
+            <Box>
+              <ProgressBar
+                percent={100}
+                className="complete-progress-bar"
+                label={t("Common:LoadingIsComplete")}
+              />
+              <Text className="error-text">
+                {t("Settings:NoUsersInBackup")}
+              </Text>
             </Box>
           )}
 

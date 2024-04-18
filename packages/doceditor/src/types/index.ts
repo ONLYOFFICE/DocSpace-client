@@ -1,5 +1,30 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import {
-  TDocServiceLocation,
   TFile,
   TFileSecurity,
   TFilesSettings,
@@ -16,8 +41,7 @@ import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelecto
 import SocketIOHelper from "@docspace/shared/utils/socket";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
-import { Nullable, TTranslation } from "@docspace/shared/types";
-import { i18n } from "i18next";
+import { TTranslation } from "@docspace/shared/types";
 
 export type TGoBack = {
   requestClose: boolean;
@@ -140,53 +164,58 @@ export interface IInitialConfig {
   type: string;
   Error?: string;
   errorMessage?: string;
+  message?: undefined;
 }
 
 export type TError = {
-  message: "unauthorized" | "restore-backup" | string;
-  status?: number | string;
+  message?: "unauthorized" | "restore-backup" | string;
+  status?: "not-found" | "access-denied" | number | string;
+  type?: string;
+  editorUrl?: string;
 };
 
 export type TResponse =
   | {
       config: IInitialConfig;
-      editorUrl: TDocServiceLocation;
-      user: TUser;
-      settings: TSettings;
+
+      user?: TUser;
+      settings?: TSettings;
       successAuth: boolean;
       isSharingAccess: boolean;
       error?: TError;
       doc?: string;
       fileId?: string;
+      hash?: string;
     }
   | {
       error: TError;
       config?: undefined;
-      editorUrl?: undefined;
+
       user?: undefined;
       settings?: undefined;
       successAuth?: undefined;
       isSharingAccess?: undefined;
       doc?: undefined;
       fileId?: string;
+      hash?: string;
     };
 
 export type EditorProps = {
-  config: IInitialConfig;
-  successAuth: boolean;
-  user: TUser;
-  view: boolean;
+  config?: IInitialConfig;
+  successAuth?: boolean;
+  user?: TUser;
   doc?: string;
   documentserverUrl: string;
-  fileInfo: TFile;
-  isSharingAccess: boolean;
-  t: TTranslation | null;
-  onSDKRequestSharingSettings: () => void;
-  onSDKRequestSaveAs: (event: object) => void;
-  onSDKRequestInsertImage: (event: object) => void;
-  onSDKRequestSelectSpreadsheet: (event: object) => void;
-  onSDKRequestSelectDocument: (event: object) => void;
-  onSDKRequestReferenceSource: (event: object) => void;
+  fileInfo?: TFile;
+  isSharingAccess?: boolean;
+  errorMessage?: string;
+
+  onSDKRequestSharingSettings?: () => void;
+  onSDKRequestSaveAs?: (event: object) => void;
+  onSDKRequestInsertImage?: (event: object) => void;
+  onSDKRequestSelectSpreadsheet?: (event: object) => void;
+  onSDKRequestSelectDocument?: (event: object) => void;
+  onSDKRequestReferenceSource?: (event: object) => void;
 };
 
 export type TEventData = {
@@ -243,7 +272,6 @@ export interface SelectFolderDialogProps {
   ) => Promise<void>;
   fileInfo: TFile;
   filesSettings: TFilesSettings;
-  i18n: i18n;
   fileSaveAsExtension?: string;
 }
 
@@ -280,7 +308,6 @@ export interface SelectFileDialogProps {
   ) => Promise<void>;
   fileInfo: TFile;
   filesSettings: TFilesSettings;
-  i18n: i18n;
 }
 
 export interface UseSocketHelperProps {
@@ -288,20 +315,21 @@ export interface UseSocketHelperProps {
 }
 
 export interface UseEventsProps {
-  user: TUser;
-  successAuth: boolean;
-  fileInfo: TFile;
-  config: IInitialConfig;
+  user?: TUser;
+  successAuth?: boolean;
+  fileInfo?: TFile;
+  config?: IInitialConfig;
   doc?: string;
-  t?: Nullable<TTranslation>;
+  errorMessage?: string;
+  t: TTranslation;
 }
 
 export interface UseInitProps {
-  config: IInitialConfig;
-  successAuth: boolean;
-  fileInfo: TFile;
-  user: TUser;
-  t: Nullable<TTranslation>;
+  config?: IInitialConfig;
+  successAuth?: boolean;
+  fileInfo?: TFile;
+  user?: TUser;
+  t: TTranslation;
 
   setDocTitle: (value: string) => void;
   documentReady: boolean;

@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React, { PropsWithChildren } from "react";
 import styled, { css } from "styled-components";
 
@@ -20,7 +46,7 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
   isConnect: props.isConnect,
 }))`
   font-family: ${(props) => props.theme.fontFamily};
-  border: none;
+
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -28,14 +54,19 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
   font-weight: ${(props) => props.theme.socialButton.fontWeight};
   text-decoration: ${(props) => props.theme.socialButton.textDecoration};
   padding: ${(props) => props.theme.socialButton.padding};
-  border-radius: ${(props) => props.theme.socialButton.borderRadius};
+
   width: ${(props) => props.theme.socialButton.width};
   height: ${(props) =>
     props.size === "base"
       ? props.theme.socialButton.height
       : props.theme.socialButton.heightSmall};
   text-align: ${(props) => props.theme.socialButton.textAlign};
-  border: ${(props) => props.theme.socialButton.border};
+  border: ${(props) =>
+    props.isConnect
+      ? props.theme.socialButton.borderConnect
+      : props.theme.socialButton.border};
+  border-radius: ${(props) => props.theme.socialButton.borderRadius};
+
   touch-callout: none;
   -o-touch-callout: none;
   -moz-touch-callout: none;
@@ -63,7 +94,6 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
             props.isConnect
               ? theme.socialButton.connectBackground
               : theme.socialButton.background};
-          box-shadow: ${(Cssprops) => Cssprops.theme.socialButton.boxShadow};
 
           ${() =>
             !props.noHover &&
@@ -71,8 +101,6 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
               :hover,
               :active {
                 cursor: pointer;
-                box-shadow: ${(cssProps) =>
-                  cssProps.theme.socialButton.boxShadow};
 
                 .social_button_text {
                   color: ${({ theme }) =>
@@ -85,17 +113,25 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
                   props.isConnect
                     ? theme.socialButton.hoverConnectBackground
                     : theme.socialButton.hoverBackground};
+
+                border: ${props.isConnect
+                  ? props.theme.socialButton.hoverConnectBorder
+                  : props.theme.socialButton.hoverBorder};
               }
 
               :active {
                 background: ${({ theme }) =>
-                  theme.socialButton.activeBackground};
-                border: none;
+                  props.isConnect
+                    ? theme.socialButton.activeConnectBackground
+                    : theme.socialButton.activeBackground};
+                border: ${props.isConnect
+                  ? props.theme.socialButton.activeConnectBorder
+                  : props.theme.socialButton.activeBorder};
               }
             `}
         `
       : css`
-          box-shadow: none;
+     
           background: ${({ theme }) =>
             theme.socialButton.disableBackgroundColor};
           color: ${({ theme }) => theme.socialButton.disableColor};
@@ -118,8 +154,9 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
           }}
         `};
 
-  .iconWrapper {
+  .iconWrapper > div {
     display: flex;
+    align-items: center;
     pointer-events: none;
   }
 
@@ -155,7 +192,7 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
   }
 
   svg {
-    margin: ${(props) => props.theme.socialButton.svg.margin};
+    // margin: ${(props) => props.theme.socialButton.svg.margin};
     width: ${(props) => props.theme.socialButton.svg.width};
     height: ${(props) => props.theme.socialButton.svg.height};
     min-width: ${(props) => props.theme.socialButton.svg.minWidth};
@@ -172,6 +209,7 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
     justify-content: center;
     align-items: center;
     max-width: 100%;
+    gap: 16px;
   }
 `;
 

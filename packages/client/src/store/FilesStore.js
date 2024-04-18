@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
 import api from "@docspace/shared/api";
@@ -19,7 +45,6 @@ import { updateTempContent, isPublicRoom } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
 import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
-import { openDocEditor as openEditor } from "@docspace/client/src/helpers/filesUtils";
 import { getDaysRemaining } from "@docspace/shared/utils/common";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
@@ -890,6 +915,11 @@ class FilesStore {
     this.selected = "close";
   };
 
+  resetSelections = () => {
+    this.setSelection([]);
+    this.setBufferSelection(null);
+  };
+
   setFiles = (files) => {
     const { socketHelper } = this.settingsStore;
 
@@ -1591,7 +1621,9 @@ class FilesStore {
         if (err?.response?.status === 402)
           this.currentTariffStatusStore.setPortalTariff();
 
-        if (requestCounter > 0) return;
+        const isThirdPartyError = isNaN(+folderId);
+
+        if (requestCounter > 0 && !isThirdPartyError) return;
 
         requestCounter++;
         const isUserError = [
@@ -1601,10 +1633,8 @@ class FilesStore {
           UnauthorizedHttpCode,
         ].includes(err?.response?.status);
 
-        if (isUserError) {
-          runInAction(() => {
-            this.isErrorRoomNotAvailable = true;
-          });
+        if (isUserError && !isThirdPartyError) {
+          this.setIsErrorRoomNotAvailable(true);
         } else {
           if (axios.isCancel(err)) {
             console.log("Request canceled", err.message);
@@ -1702,12 +1732,14 @@ class FilesStore {
                 tags,
                 withoutTags,
                 quotaFilter,
+                provider,
               } = filter;
 
               const isFiltered =
                 subjectId ||
                 filterValue ||
                 type ||
+                provider ||
                 withRoomsSubfolders ||
                 searchInContentRooms ||
                 tags ||
@@ -1969,7 +2001,7 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
       }
 
-      if (!isPdf || !window.DocSpaceConfig.pdfViewer || isRecycleBinFolder) {
+      if (!isPdf || !window.DocSpaceConfig?.pdfViewer || isRecycleBinFolder) {
         fileOptions = this.removeOptions(fileOptions, ["pdf-view"]);
       }
 
@@ -2477,15 +2509,6 @@ class FilesStore {
 
       return folderOptions;
     }
-  };
-
-  addFileToRecentlyViewed = (fileId) => {
-    if (
-      this.treeFoldersStore.isPrivacyFolder ||
-      this.publicRoomStore.isPublicRoom
-    )
-      return Promise.resolve();
-    return api.files.addFileToRecentlyViewed(fileId);
   };
 
   createFile = (folderId, title, templateId, formId) => {
@@ -3541,10 +3564,16 @@ class FilesStore {
 
       if (!isDefaultRoomsQuotaSet) return false;
 
+      if (!!item.providerKey) return false;
+
       return item.security?.EditRoom && item.isCustomQuota;
     };
 
-    return this.selection.every((x) => canResetCustomQuota(x));
+    if (this.hasOneSelection && this.isThirdPartySelection) return false;
+
+    const rooms = this.selection.filter((x) => canResetCustomQuota(x));
+
+    return rooms.length > 0;
   }
 
   get hasRoomsToDisableQuota() {
@@ -3556,7 +3585,11 @@ class FilesStore {
       return item.security?.EditRoom;
     };
 
-    return this.selection.every((x) => canDisableQuota(x));
+    if (this.hasOneSelection && this.isThirdPartySelection) return false;
+
+    const rooms = this.selection.filter((x) => canDisableQuota(x));
+
+    return rooms.length > 0;
   }
 
   get hasRoomsToChangeQuota() {
@@ -3568,7 +3601,15 @@ class FilesStore {
       return item.security?.EditRoom;
     };
 
-    return this.selection.every((x) => canChangeQuota(x));
+    if (this.hasOneSelection && this.isThirdPartySelection) return false;
+
+    const rooms = this.selection.filter((x) => canChangeQuota(x));
+
+    return rooms.length > 0;
+  }
+
+  get hasOneSelection() {
+    return this.selection.length === 1;
   }
 
   get hasSelection() {
@@ -3629,11 +3670,11 @@ class FilesStore {
     );
 
     if ((webEdit && !webNeedConvert) || !externalAccess)
-      AccessOptions.push("FullAccess");
+      AccessOptions.push("FullAccess"); // t("FullAccess") - "Skip useless issue in UselessTranslationKeysTest"
 
     if (webComment) AccessOptions.push("Comment");
     if (webReview) AccessOptions.push("Review");
-    if (formFillingDocs && !externalAccess) AccessOptions.push("FormFilling");
+    if (formFillingDocs && !externalAccess) AccessOptions.push("FormFilling"); // t("FormFilling") - "Skip useless issue in UselessTranslationKeysTest"
     if (webFilter) AccessOptions.push("FilterEditing");
 
     return AccessOptions;
@@ -3724,14 +3765,7 @@ class FilesStore {
     return folderInfo;
   };
 
-  openDocEditor = (
-    id,
-    providerKey = null,
-    tab = null,
-    url = null,
-    preview = false,
-    shareKey = null,
-  ) => {
+  openDocEditor = (id, preview = false, shareKey = null) => {
     const foundIndex = this.files.findIndex((x) => x.id === id);
     const file = foundIndex !== -1 ? this.files[foundIndex] : undefined;
     if (
@@ -3746,10 +3780,24 @@ class FilesStore {
       this.updateFileStatus(foundIndex, newStatus);
     }
 
-    const isPrivacy = this.treeFoldersStore.isPrivacyFolder;
     const share = shareKey ? shareKey : this.publicRoomStore.publicRoomKey;
 
-    return openEditor(id, providerKey, tab, url, isPrivacy, preview, share);
+    const searchParams = new URLSearchParams();
+
+    searchParams.append("fileId", id);
+    if (share) searchParams.append("share", share);
+    if (preview) searchParams.append("action", "view");
+
+    const url = combineUrl(
+      window.DocSpaceConfig?.proxy?.url,
+      config.homepage,
+      `/doceditor?${searchParams.toString()}`,
+    );
+
+    window.open(
+      url,
+      window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
+    );
   };
 
   createThumbnails = async (files = null) => {
@@ -3913,9 +3961,22 @@ class FilesStore {
     const isDesktopView = isDesktop();
     const tileGap = isDesktopView ? 16 : 14;
     const minTileWidth = 216 + tileGap;
-    const sectionPadding = isDesktopView ? 24 : 16;
-
     const body = document.getElementById("section");
+
+    const elem = document.getElementsByClassName("section-wrapper-content")[0];
+    let containerWidth = 0;
+    if (elem) {
+      const elemPadding = window
+        .getComputedStyle(elem)
+        ?.getPropertyValue("padding");
+
+      containerWidth =
+        elem?.clientWidth -
+        elemPadding.split("px")[1] -
+        elemPadding.split("px")[3];
+    }
+
+    const sectionPadding = body?.offsetWidth - containerWidth - tileGap + 1;
     const sectionWidth = body ? body.offsetWidth - sectionPadding : 0;
 
     return Math.floor(sectionWidth / minTileWidth);
@@ -4120,6 +4181,7 @@ class FilesStore {
       tags,
       withoutTags,
       quotaFilter,
+      provider,
     } = this.roomsFilter;
 
     const {
@@ -4135,6 +4197,7 @@ class FilesStore {
       isRoomsFolder || isArchiveFolder
         ? filterValue ||
           type ||
+          provider ||
           withRoomsSubfolders ||
           searchInContentRooms ||
           subjectId ||

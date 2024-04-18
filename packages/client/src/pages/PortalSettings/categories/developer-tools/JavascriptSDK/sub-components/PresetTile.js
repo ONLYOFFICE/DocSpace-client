@@ -39,7 +39,6 @@ const TileContainer = styled.div`
 
   width: 100%;
   max-width: 342px;
-  height: 334px;
 
   padding: 12px 16px;
 

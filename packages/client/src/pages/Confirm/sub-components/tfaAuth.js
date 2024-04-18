@@ -38,7 +38,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import withLoader from "../withLoader";
 import { mobile } from "@docspace/shared/utils";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "../../../components/DocspaceLogoWrapper";
+import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
 import { StyledPage, StyledContent } from "./StyledConfirm";
 import { validateTfaCode } from "@docspace/shared/api/settings";
 import { loginWithTfaCode } from "@docspace/shared/api/user";

@@ -28,9 +28,9 @@ import { permanentRedirect, redirect } from "next/navigation";
 
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 
-import { createFile, fileCopyAs } from "@/utils/actions";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { createFile, fileCopyAs, getEditorUrl } from "@/utils/actions";
 import CreateFileError from "@/components/CreateFileError";
+import Editor from "@/components/Editor";
 
 type TSearchParams = {
   parentId: string;
@@ -94,6 +94,17 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
   }
 
   if (file?.id) fileId = file.id;
+
+  if (error && typeof error !== "string" && error.statusCode === 403) {
+    const documentserverUrl = await getEditorUrl();
+
+    return (
+      <Editor
+        documentserverUrl={documentserverUrl.docServiceUrl}
+        errorMessage={error.message}
+      />
+    );
+  }
 
   if (fileId || !fileError) {
     const redirectURL = `${baseURL}/doceditor?fileId=${fileId}`;

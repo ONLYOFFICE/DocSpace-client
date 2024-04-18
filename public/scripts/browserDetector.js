@@ -29,10 +29,10 @@
     constructor() {
       this.browser = {};
       this.unsupportedBrowsers = {
-        Chrome: 102,
-        Firefox: 102,
+        Chrome: 109,
+        Firefox: 109,
         IE: 11,
-        Edge: 102,
+        Edge: 109,
         Opera: 90,
         Safari: 14,
         SafariMobile: 14,

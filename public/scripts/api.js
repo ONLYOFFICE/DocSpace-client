@@ -114,9 +114,19 @@
 
     currentSrc = window.location.host; // more flexible way to check
 
-    const passed =
-      res.response.header &&
-      res.response.header.toLowerCase().includes(currentSrc.toLowerCase());
+    const domains = [...res.response.domains].map((d) => {
+      try {
+        const domain = new URL(d.toLowerCase());
+        const domainFull =
+          domain.host + (domain.pathname !== "/" ? domain.pathname : "");
+
+        return domainFull;
+      } catch {
+        return d;
+      }
+    });
+
+    const passed = domains.includes(currentSrc.toLowerCase());
 
     if (!passed) throw new Error(cspErrorText);
 
@@ -274,6 +284,8 @@
       })
         .replace(lt, rlt)
         .replace(gt, rgt);
+      
+      const windowHeight = 778, windowWidth = 610;
 
       button.addEventListener("click", () => {
         const winHtml = `<!DOCTYPE html>
@@ -284,8 +296,9 @@
 
                   <style>
                     #${config.frameId}-container {
-                      height: 98vh !important;
-                      width: 98vw !important;
+                      height: 100lvh !important;
+                      width: 100lvw !important;
+                      overflow: hidden;
                     }
 
                     html, body {
@@ -327,7 +340,7 @@
           new Blob([winHtml], { type: "text/html" })
         );
 
-        window.open(winUrl, "_blank", `width=610,height=778`);
+        window.open(winUrl, "_blank", `width=${windowWidth},height=${windowHeight}`);
       });
 
       button.setAttribute("id", config.frameId + "-container");

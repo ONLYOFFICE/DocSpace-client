@@ -161,7 +161,7 @@ const useEditorEvents = ({
   }, [config?.Error, errorMessage]);
 
   const onDocumentReady = React.useCallback(() => {
-    // console.log("onDocumentReady", arguments, { docEditor });
+    // console.log("onDocumentReady", { docEditor });
     setDocumentReady(true);
 
     frameCallCommand("setIsLoaded");
@@ -172,12 +172,14 @@ const useEditorEvents = ({
     //   loadUsersRightsList(docEditor);
     // }
 
-    if (docEditor)
+    if (docEditor) {
+      // console.log("call assign for asc files editor doceditor");
       assign(
         window as unknown as { [key: string]: {} },
         ["ASC", "Files", "Editor", "docEditor"],
         docEditor,
       ); //Do not remove: it's for Back button on Mobile App
+    }
   }, [config?.errorMessage]);
 
   const getBackUrl = React.useCallback(() => {
@@ -610,6 +612,7 @@ const useEditorEvents = ({
   };
 
   React.useEffect(() => {
+    // console.log("render docspace config", { ...window.DocSpaceConfig });
     if (
       IS_DESKTOP_EDITOR ||
       (typeof window !== "undefined" &&

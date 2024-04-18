@@ -111,7 +111,6 @@ const InvitePanel = ({
   const invitePanelBodyRef = useRef();
   const invitePanelWrapper = useRef(null);
   const invitePanelRef = useRef(null);
-  const windowHeight = useRef(window.innerHeight);
   const loaderRef = useRef();
 
   const onChangeExternalLinksVisible = (visible) => {
@@ -230,25 +229,6 @@ const InvitePanel = ({
   useEffect(() => {
     isMobileView && window.addEventListener("mousedown", onMouseDown);
   }, [isMobileView]);
-
-  useEffect(() => {
-    window.visualViewport.addEventListener("resize", onResize);
-
-    return () => {
-      window.visualViewport.removeEventListener("resize", onResize);
-    };
-  }, []);
-
-  const onResize = useCallback((e) => {
-    const diff = windowHeight.current - e.target.height;
-
-    if (invitePanelRef.current) {
-      invitePanelRef.current.style.height = `${e.target.height - 64}px`;
-      // invitePanelRef.current.style.bottom = `${diff}px`;
-      invitePanelWrapper.current.style.height = `${e.target.height}px`;
-      invitePanelWrapper.current.style.bottom = `${diff}px`;
-    }
-  }, []);
 
   const onMouseDown = (e) => {
     if (e.target.id === "InvitePanelWrapper") onClose();

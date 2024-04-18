@@ -40,13 +40,13 @@ const minifyJson = require("@docspace/shared/utils/minifyJson");
 const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
 
 const path = require("path");
-
+const runtime = require("../runtime.json");
 const pkg = require("./package.json");
 const deps = pkg.dependencies || {};
 const homepage = pkg.homepage;
 const title = pkg.title;
 const version = pkg.version;
-
+const dateHash = runtime?.date || "";
 const config = {
   entry: "./src/index",
   target: "web",
@@ -362,6 +362,13 @@ module.exports = (env, argv) => {
         color: rgba(0, 0, 0, 0) !important;
       }
     </style>`;
+  } else {
+    htmlTemplate.browserDetectorUrl = `/static/scripts/browserDetector.js?hash=${
+      runtime.checksums["browserDetector.js"] || dateHash
+    }`;
+    htmlTemplate.configUrl = `/static/scripts/config.json?hash=${
+      runtime.checksums["config.json"] || dateHash
+    }`;
   }
 
   config.plugins.push(new HtmlWebpackPlugin(htmlTemplate));

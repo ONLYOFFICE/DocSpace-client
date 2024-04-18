@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
+import { isIOS, isMobile } from "react-device-detect";
 
 import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
 
@@ -563,6 +564,7 @@ const StyledSortButton = styled.div<{ viewAs: TViewAs; isDesc: boolean }>`
   .combo-button {
     background: ${(props) =>
       props.theme.filterInput.sort.background} !important;
+    padding-right: 4px;
 
     .icon-button_svg {
       cursor: pointer;
@@ -595,6 +597,12 @@ const StyledSortButton = styled.div<{ viewAs: TViewAs; isDesc: boolean }>`
       bottom: auto;
       min-width: 200px;
       margin-top: 3px;
+
+      ${isMobile &&
+      isIOS &&
+      css`
+        right: 48px;
+      `}
 
       .view-selector-item {
         display: flex;

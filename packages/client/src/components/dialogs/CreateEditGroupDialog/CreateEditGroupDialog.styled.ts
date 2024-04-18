@@ -24,19 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
+import styled from "styled-components";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
-import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
-import type { DocspaceLogoProps } from "@docspace/shared/components/docspace-logo/DocspaceLogo.types";
-
-const DocspaceLogoWrapper = ({ className }: Partial<DocspaceLogoProps>) => {
-  return <DocspaceLogo className={className} />;
-};
-
-export default inject<TStore>(({ settingsStore }) => {
-  const { whiteLabelLogoUrls } = settingsStore;
-
-  return {
-    whiteLabelLogoUrls,
-  };
-})(observer(DocspaceLogoWrapper));
+export const StyledModal = styled(ModalDialog)`
+  user-select: none;
+`;

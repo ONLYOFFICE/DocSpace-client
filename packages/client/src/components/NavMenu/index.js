@@ -48,7 +48,7 @@ import { Base } from "@docspace/shared/themes";
 import { DeviceType } from "@docspace/shared/enums";
 
 const StyledContainer = styled.header`
-  height: 48px;
+  height: ${(props) => props.theme.header.height};
   position: relative;
   align-items: center;
   background-color: ${(props) => props.theme.header.backgroundColor};
@@ -165,6 +165,7 @@ const NavMenu = (props) => {
     return <></>;
 
   const isPreparationPortal = location.pathname === "/preparation-portal";
+
   return (
     <LayoutContextConsumer>
       {(value) => (

@@ -26,4 +26,5 @@
 
 export interface DocspaceLogoProps {
   className?: string;
+  isResizable?: boolean;
 }

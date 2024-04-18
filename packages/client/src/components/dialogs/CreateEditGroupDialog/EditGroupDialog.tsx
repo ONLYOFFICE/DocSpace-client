@@ -33,6 +33,7 @@ import { getGroupById } from "@docspace/shared/api/groups";
 import { compareGroupParams } from "./utils";
 import { EditGroupParams } from "./types";
 
+import { StyledModal } from "./CreateEditGroupDialog.styled";
 import GroupNameParam from "./sub-components/GroupNameParam";
 import HeadOfGroup from "./sub-components/HeadOfGroupParam";
 import MembersParam from "./sub-components/MembersParam";
@@ -157,7 +158,7 @@ const EditGroupDialog = ({
 
   return (
     <>
-      <ModalDialog
+      <StyledModal
         displayType="aside"
         withBodyScroll
         visible={visible}
@@ -214,7 +215,7 @@ const EditGroupDialog = ({
             onClick={onClose}
           />
         </ModalDialog.Footer>
-      </ModalDialog>
+      </StyledModal>
 
       {selectGroupMangerPanelIsVisible && (
         <SelectGroupManagerPanel

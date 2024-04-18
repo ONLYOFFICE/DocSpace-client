@@ -12,6 +12,7 @@
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
     <link rel="icon" type="image/x-icon" href="/logo.ashx?logotype=3" />
+    <link rel="mask-icon" href="/logo.ashx?logotype=3" />
 
     <!-- Tell the browser it's a PWA -->
     <!-- <meta name="mobile-web-app-capable" content="yes" /> -->
@@ -34,10 +35,10 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
 
-    <script src="/static/scripts/browserDetector.js"></script>
+    <script src="<%= htmlWebpackPlugin.options.browserDetectorUrl %>"></script>
     <script>
       console.log("It's Management INIT");
-      fetch("/static/scripts/config.json")
+      fetch("<%= htmlWebpackPlugin.options.configUrl %>")
         .then((response) => {
           if (!response.ok) {
             throw new Error("HTTP error " + response.status);

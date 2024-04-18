@@ -71,7 +71,6 @@ import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie } from "./cookie";
 import { checkIsSSR } from "./device";
-import { AvatarRole } from "../components/avatar/Avatar.enums";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -124,8 +123,8 @@ export const isPublicRoom = () => {
 };
 
 export const getUserTypeLabel = (
-  role: AvatarRole | undefined,
-  t: (key: string) => string,
+  role: "owner" | "admin" | "user" | "collaborator" | "manager" | undefined,
+  t: TTranslation,
 ) => {
   switch (role) {
     case "owner":
@@ -388,7 +387,7 @@ export function getProviderLabel(provider: string, t: (key: string) => string) {
     case "microsoft":
       return t("Common:ProviderMicrosoft");
     case "sso":
-      return t("Common:ProviderSso");
+      return t("Common:SSO");
     case "zoom":
       return t("Common:ProviderZoom");
     case "sso-full":
@@ -585,10 +584,17 @@ export function getLoginLink(token: string, code: string) {
   );
 }
 
+const FRAME_NAME = "frameDocSpace";
+
+const getFrameId = () => {
+  return window.self.name.replace(`${FRAME_NAME}__#`, "");
+};
+
 export const frameCallbackData = (methodReturnData: unknown) => {
   window.parent.postMessage(
     JSON.stringify({
       type: "onMethodReturn",
+      frameId: getFrameId(),
       methodReturnData,
     }),
     "*",
@@ -599,6 +605,7 @@ export const frameCallEvent = (eventReturnData: unknown) => {
   window.parent.postMessage(
     JSON.stringify({
       type: "onEventReturn",
+      frameId: getFrameId(),
       eventReturnData,
     }),
     "*",
@@ -612,6 +619,7 @@ export const frameCallCommand = (
   window.parent.postMessage(
     JSON.stringify({
       type: "onCallCommand",
+      frameId: getFrameId(),
       commandName,
       commandData,
     }),

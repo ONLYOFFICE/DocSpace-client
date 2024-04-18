@@ -32,8 +32,7 @@ import { NoUserSelect, commonTextStyles } from "../../utils";
 import { StyledTextProps, TextProps } from "./Text.types";
 
 const styleCss = css<TextProps & StyledTextProps>`
-  font-size: ${(props) =>
-    props.fontSizeProp && props.theme.getCorrectFontSize(props.fontSizeProp)};
+  font-size: ${(props) => props.fontSizeProp && props.fontSizeProp};
   outline: 0 !important;
   margin: 0;
   font-weight: ${(props) =>

@@ -30,6 +30,7 @@ import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
 
 import { TTheme } from "./base";
+import { DEFAULT_FONT_FAMILY } from "../constants";
 
 const {
   black,
@@ -69,7 +70,7 @@ const Dark: TTheme = {
   isBase: false,
   color: grayMaxLight,
   backgroundColor: black,
-  fontFamily: "Open Sans, sans-serif, Arial",
+  fontFamily: DEFAULT_FONT_FAMILY,
   fontSize: "13px",
 
   text: {

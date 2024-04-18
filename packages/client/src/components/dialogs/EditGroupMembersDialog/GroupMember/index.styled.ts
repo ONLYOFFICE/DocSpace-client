@@ -49,7 +49,7 @@ export const GroupMember = styled.div<{ isExpect: boolean }>`
 
   .name {
     font-weight: 600;
-    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    font-size: 14px;
     line-height: ${({ theme }) =>
       theme.interfaceDirection === "rtl" ? `20px` : `16px`};
     white-space: nowrap;
@@ -61,7 +61,7 @@ export const GroupMember = styled.div<{ isExpect: boolean }>`
 
   .me-label {
     font-weight: 600;
-    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    font-size: 14px;
     line-height: ${({ theme }) =>
       theme.interfaceDirection === "rtl" ? `20px` : `16px`};
     color: ${(props) => props.theme.infoPanel.members.meLabelColor};
@@ -75,7 +75,7 @@ export const GroupMember = styled.div<{ isExpect: boolean }>`
 
   .role-wrapper {
     font-weight: 600;
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
     line-height: 20px;
     white-space: nowrap;
 

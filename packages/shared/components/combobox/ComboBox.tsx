@@ -65,9 +65,8 @@ const ComboBoxPure = (props: ComboboxProps) => {
 
     if (ref.current && ref.current.contains(target)) return;
 
-    if (onToggle) return;
+    if (onToggle && !withBackdrop) return;
 
-    // onToggle?.(e, !isOpen);
     setIsOpenItemAccess?.(!isOpen);
     setIsOpen((v) => {
       return !v;

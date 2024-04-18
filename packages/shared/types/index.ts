@@ -128,6 +128,12 @@ declare global {
         value: unknown,
         callback: unknown,
       ) => void;
+      getViewportSettings?: () => {
+        isEditor: boolean;
+        isSeparateWindow: boolean;
+        captionHeight: number;
+      };
+      onViewportSettingsChanged?: VoidFunction;
     };
     cloudCryptoCommand: (
       type: string,

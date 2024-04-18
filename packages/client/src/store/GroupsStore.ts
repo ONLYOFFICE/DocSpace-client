@@ -199,6 +199,10 @@ class GroupsStore {
     this.currentGroup = currentGroup;
   };
 
+  setInsideGroupLoading = (value: boolean) => {
+    this.insideGroupIsLoading = value;
+  };
+
   setInsideGroupBackUrl = (url: string) => {
     this.insideGroupBackUrl = url;
   };
@@ -277,6 +281,8 @@ class GroupsStore {
     updateFilter = false,
     withFilterLocalStorage = false,
   ) => {
+    this.setInsideGroupLoading(true);
+
     const filterData = filter ? filter.clone() : AccountsFilter.getDefault();
     filterData.group = groupId;
 
@@ -315,6 +321,8 @@ class GroupsStore {
     if (updateFilter) {
       this.setInsideGroupFilterParams(filterData);
     }
+
+    this.setInsideGroupLoading(false);
 
     return Promise.resolve(filteredMembersRes.items);
   };
@@ -464,8 +472,10 @@ class GroupsStore {
     forInfoPanel = false,
     forInsideGroup = false,
   ) => {
+    const { isRoomAdmin } = this.peopleStore.userStore.user;
+
     return [
-      {
+      !isRoomAdmin && {
         id: "edit-group",
         key: "edit-group",
         className: "group-menu_drop-down",
@@ -497,11 +507,11 @@ class GroupsStore {
           this.infoPanelStore.setIsVisible(true);
         },
       },
-      {
+      !isRoomAdmin && {
         key: "separator",
         isSeparator: true,
       },
-      {
+      !isRoomAdmin && {
         id: "delete-group",
         key: "delete-group",
         className: "group-menu_drop-down",
@@ -509,23 +519,6 @@ class GroupsStore {
         title: t("Common:Delete"),
         icon: TrashReactSvgUrl,
         onClick: () => this.onDeleteClick(item.name),
-
-        //
-        // onClick: async () => {
-        //   const groupId = item.id;
-        //   groupsApi
-        //     .deleteGroup(groupId)!
-        //     .then(() => {
-        //       toastr.success(t("PeopleTranslations:SuccessDeleteGroup"));
-        //       this.setSelection([]);
-        //       this.getGroups(this.groupsFilter, true);
-        //       this.infoPanelStore.setInfoPanelSelection(null);
-        //     })
-        //     .catch((err) => {
-        //       toastr.error(err.message);
-        //       console.error(err);
-        //     });
-        // },
       },
     ];
   };

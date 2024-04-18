@@ -346,7 +346,10 @@ module.exports = (env, argv) => {
           "./src/pages/PortalSettings/categories/common/Branding/additionalResources.js",
         "./CompanyInfoPage":
           "./src/pages/PortalSettings/categories/common/Branding/companyInfoSettings.js",
-        "./BackupPage": "./src/pages/PortalSettings/categories/data-management",
+        "./BackupPage":
+          "./src/pages/PortalSettings/categories/data-management/backup/manual-backup",
+        "./AutoBackupPage":
+          "./src/pages/PortalSettings/categories/data-management/backup/auto-backup",
         "./RestorePage":
           "./src/pages/PortalSettings/categories/data-management/backup/restore-backup",
         "./PaymentsPage": "./src/pages/PortalSettings/categories/payments",

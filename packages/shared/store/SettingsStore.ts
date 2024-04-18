@@ -1115,6 +1115,10 @@ class SettingsStore {
           : window.open(url, "_self");
     }
   };
+
+  checkEnablePortalSettings = (isPaid: boolean) => {
+    return isManagement() && this.portals?.length === 1 ? false : isPaid;
+  };
 }
 
 export { SettingsStore };

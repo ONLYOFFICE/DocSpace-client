@@ -65,7 +65,7 @@ const StyledWrapper = styled.div`
   }
 
   .system-theme-description {
-    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+    font-size: 12px;
     font-weight: 400;
     line-height: 16px;
     padding-left: 24px;

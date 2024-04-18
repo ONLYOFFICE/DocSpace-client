@@ -906,23 +906,35 @@ export function getObjectByLocation(location: Location) {
 
   try {
     const searchUrl = location.search.substring(1);
-    const decodedString = decodeURIComponent(searchUrl)
-      .replace(/\["/g, '["')
-      .replace(/"\]/g, '"]')
-      .replace(/"/g, '\\"')
-      .replace(/&/g, '","')
-      .replace(/=/g, '":"')
-      .replace(/\\/g, "\\\\")
-      .replace(/\[\\\\"/g, '["')
-      .replace(/\\\\"\]/g, '"]')
-      .replace(/"\[/g, "[")
-      .replace(/\]"/g, "]")
-      .replace(/\\\\",\\\\"/g, '","')
-      .replace(/\\\\\\\\"/g, '\\"');
-    const object = JSON.parse(`{"${decodedString}"}`);
-    return object;
+    const params = Object.fromEntries(new URLSearchParams(searchUrl));
+    return params;
   } catch (e) {
+    console.error(e);
     return {};
+  }
+}
+
+export function tryParse(str: string) {
+  try {
+    if (!str) return undefined;
+
+    return JSON.parse(str);
+  } catch (e) {
+    console.error(e);
+    return undefined;
+  }
+}
+
+export function tryParseArray(str: string) {
+  try {
+    const res = tryParse(str);
+
+    if (!Array.isArray(res)) return undefined;
+
+    return res;
+  } catch (e) {
+    console.error(e);
+    return undefined;
   }
 }
 

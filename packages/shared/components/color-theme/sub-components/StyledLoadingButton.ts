@@ -37,7 +37,7 @@ const StyledLoadingButton = styled.div`
     props.theme.filesPanels.upload.loadingButton.background};
   position: absolute;
   margin: 2px;
-  font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+  font-size: 16px;
   font-weight: bold;
   color: ${(props) => props.theme.filesPanels.upload.loadingButton.color};
 `;

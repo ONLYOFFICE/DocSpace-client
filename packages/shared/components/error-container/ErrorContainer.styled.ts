@@ -51,7 +51,7 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
 
   .error_description_link {
     color: #2da7db;
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
     font-weight: 600;
   }
 
@@ -62,7 +62,7 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
 
   #header {
     font-weight: 700;
-    font-size: ${(props) => props.theme.getCorrectFontSize("23px")};
+    font-size: 23px;
     line-height: 28px;
     margin: 8px 0 20px 0;
     text-align: center;
@@ -70,7 +70,7 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
 
   #text {
     font-weight: 600;
-    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    font-size: 14px;
     line-height: 16px;
     text-align: center;
     margin-bottom: 24px;

@@ -45,13 +45,13 @@ const StyledOwnerInfo = styled.div`
 
     .display-name {
       font-weight: 700;
-      font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+      font-size: 16px;
       line-height: 22px;
     }
 
     .status {
       font-weight: 600;
-      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+      font-size: 13px;
       line-height: 20px;
       color: ${(props) => props.theme.dialogs.disableText};
     }
@@ -65,14 +65,14 @@ const StyledPeopleSelectorInfo = styled.div`
 
   .new-owner {
     font-weight: 600;
-    font-size: ${(props) => props.theme.getCorrectFontSize("15px")};
+    font-size: 15px;
     line-height: 16px;
     margin-bottom: 4px;
   }
 
   .description {
     font-weight: 400;
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
     line-height: 20px;
 
     color: ${(props) => props.theme.dialogs.disableText};
@@ -89,7 +89,7 @@ const StyledPeopleSelector = styled.div`
 
   .label {
     font-weight: 600;
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
     line-height: 20px;
 
     color: ${(props) => props.theme.dialogs.disableText};
@@ -112,7 +112,7 @@ const StyledAvailableList = styled.div`
 
   .list-header {
     font-weight: 600;
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
     line-height: 20px;
 
     margin-bottom: 8px;
@@ -120,7 +120,7 @@ const StyledAvailableList = styled.div`
 
   .list-item {
     font-weight: 400;
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
     line-height: 20px;
 
     margin-bottom: 2px;
@@ -141,7 +141,7 @@ const StyledFooterWrapper = styled.div`
     margin-bottom: 16px;
 
     font-weight: 400;
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
     line-height: 20px;
   }
 
@@ -194,7 +194,7 @@ const StyledSelectedOwner = styled.div`
     color: ${({ currentColorScheme }) => currentColorScheme.text?.accent};
 
     font-weight: 600;
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
     line-height: 20px;
   }
 

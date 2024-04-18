@@ -125,13 +125,13 @@ const HeaderContainer = styled.div`
   @media ${tablet} {
     h1 {
       line-height: 61px;
-      font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
+      font-size: 21px;
     }
   }
 
   @media ${desktop} {
     h1 {
-      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+      font-size: 18px;
       line-height: 59px !important;
     }
   }
@@ -139,7 +139,7 @@ const HeaderContainer = styled.div`
   @media ${mobile} {
     h1 {
       line-height: 53px;
-      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+      font-size: 18px;
     }
   }
 

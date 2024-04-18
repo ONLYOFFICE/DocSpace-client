@@ -78,7 +78,7 @@ const ArticleBodyContent = () => {
   const catalogItems = () => {
     const items: Array<React.ReactNode> = [];
 
-    let resultTree = settingsTree.filter((item) => item?.isHeader);
+    let resultTree = settingsTree.filter((item) => item?.isArticle);
 
     const deletionTKey = isCommunity ? "Common:PaymentsTitle" : "Common:Bonus";
 

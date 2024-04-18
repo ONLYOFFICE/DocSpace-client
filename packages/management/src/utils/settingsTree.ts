@@ -25,11 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import SpacesSvgUrl from "PUBLIC_DIR/images/spaces.react.svg?url";
-import BrandingSvgUrl from "PUBLIC_DIR/images/branding.react.svg?url";
 import DataManagementIconUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-data-management.svg?url";
 import RestoreIconUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-restore.svg?url";
 import PaymentIconUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-payment.svg?url";
 import CatalogSettingsGiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
+import SettingsReactSvgUrl from "PUBLIC_DIR/images/settings.react.svg?url";
 
 export const settingsTree = [
   {
@@ -39,59 +39,78 @@ export const settingsTree = [
     link: "spaces",
     tKey: "Common:Spaces",
     isHeader: true,
+    isArticle: true,
+  },
+  {
+    id: "management-settings_catalog-settings",
+    key: "1",
+    icon: SettingsReactSvgUrl,
+    link: "settings",
+    tKey: "Settings",
+    isHeader: true,
+    isArticle: true,
   },
   {
     id: "management-settings_catalog-branding",
-    key: "1",
-    icon: BrandingSvgUrl,
+    key: "1-1",
+    icon: "",
     link: "branding",
-    tKey: "Branding",
+    tKey: "Settings",
     isHeader: true,
   },
   {
     id: "management-settings_catalog-white-label",
-    key: "1-0",
+    key: "1-1-1",
     icon: "",
     link: "white-label",
     tKey: "WhiteLabel",
   },
   {
     id: "management-settings_catalog-company-info-settings",
-    key: "1-1",
+    key: "1-1-2",
     icon: "",
     link: "company-info-settings",
     tKey: "CompanyInfoSettings",
   },
   {
     id: "management-settings_catalog-additional-resources",
-    key: "1-2",
+    key: "1-1-3",
     icon: "",
     link: "additional-resources",
     tKey: "AdditionalResources",
   },
   {
     id: "management-settings_catalog-backup",
-    key: "2",
+    key: "1-2",
     icon: DataManagementIconUrl,
-    link: "backup",
-    tKey: "Backup",
+    link: "data-backup",
+    tKey: "Settings",
+    isHeader: true,
+  },
+  {
+    id: "management-settings_catalog-backup",
+    key: "1-3",
+    icon: DataManagementIconUrl,
+    link: "auto-backup",
+    tKey: "Settings",
     isHeader: true,
   },
   {
     id: "management-settings_catalog-restore",
-    key: "3",
+    key: "1-4",
     icon: RestoreIconUrl,
     link: "restore",
-    tKey: "RestoreBackup",
+    tKey: "Settings",
     isHeader: true,
   },
   {
     id: "management-settings_catalog-payments",
-    key: "4",
+    key: "3",
     icon: PaymentIconUrl,
     link: "payments",
     tKey: "Common:PaymentsTitle",
     isHeader: true,
+    isArticle: true,
   },
   {
     id: "management-settings_catalog-bonus",

@@ -29,15 +29,15 @@ import styled, { css } from "styled-components";
 import { mobile } from "@docspace/shared/utils";
 
 export const StyledWrapper = styled.div<{
-  currentDeviceType?: string;
-  isResizing?: boolean;
+  isMobile?: boolean;
+  isResizable?: boolean;
 }>`
   @media ${mobile} {
-    ${(props) => !props.isResizing && "display: none"};
+    ${(props) => !props.isResizable && "display: none"};
 
     ${(props) =>
-      props.currentDeviceType === "mobile" &&
-      props.isResizing &&
+      props.isMobile &&
+      props.isResizable &&
       css`
         display: flex;
         background-color: ${props.theme.header.backgroundColor};

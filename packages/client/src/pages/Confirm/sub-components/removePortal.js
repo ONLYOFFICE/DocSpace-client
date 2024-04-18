@@ -44,7 +44,7 @@ import {
 import withLoader from "../withLoader";
 
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "../../../components/DocspaceLogoWrapper";
+import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
 
 const RemovePortal = (props) => {
   const { t, greetingTitle, linkData, companyInfoSettingsData } = props;

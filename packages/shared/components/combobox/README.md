@@ -131,5 +131,6 @@ To use Combobox as a toggle button, you must declare it according to the paramet
 | `size`              |    `oneOf`     |    -     | `base`, `middle`, `big`, `huge`, `content` |  `base`   | Select component width, one of default                                                 |
 | `style`             | `obj`, `array` |    -     |                     -                      |     -     | Accepts css style                                                                      |
 | `onToggle`          |     `func`     |    -     |                     -                      |     -     | The event will be raised when using `displayType: toggle` when clicking on a component |
-| `onBackdropClick`   |     `func`     |    -     |                     -                      |     -     | The event is triggered by clicking outside the component when `withBackdrop : true`    |
+| `withBackdrop`      |     `bool`     |    -     |                     -                      |  `true`   | Indicates that component contains a backdrop                                           |
+| `onBackdropClick`   |     `func`     |    -     |                     -                      |     -     | The event is triggered by clicking outside the component when `withBackdrop: true`     |
 | `showDisabledItems` |     `bool`     |    -     |                     -                      |  `false`  | Display disabled items or not when displayType !== toggle                              |

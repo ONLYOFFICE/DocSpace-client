@@ -114,6 +114,9 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
         setModel(m);
       }
 
+      e.stopPropagation();
+      e.preventDefault();
+
       currentEvent.current = e;
       if (visible) {
         if (!isMobileUtils()) {

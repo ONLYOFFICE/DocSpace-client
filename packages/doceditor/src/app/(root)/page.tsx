@@ -30,6 +30,17 @@ import dynamic from "next/dynamic";
 import AppLoader from "@docspace/shared/components/app-loader";
 
 import { getData } from "@/utils/actions";
+import { RootPageProps } from "@/types";
+
+const initialSearchParams: RootPageProps["searchParams"] = {
+  fileId: undefined,
+  fileid: undefined,
+  version: undefined,
+  doc: undefined,
+  action: undefined,
+  share: undefined,
+  editorType: undefined,
+};
 
 const Root = dynamic(() => import("@/components/Root"), {
   ssr: false,
@@ -42,31 +53,17 @@ export const metadata: Metadata = {
   description: "",
 };
 
-async function Page({
-  searchParams,
-}: {
-  searchParams?: { [key: string]: string };
-}) {
-  const { fileId, fileid, version, doc, action, share, editorType, editForm } =
-    searchParams || {
-      fileId: undefined,
-      fileid: undefined,
-      version: undefined,
-      doc: undefined,
-      action: undefined,
-      share: undefined,
-      editorType: undefined,
-      editForm: undefined,
-    };
+async function Page({ searchParams }: RootPageProps) {
+  const { fileId, fileid, version, doc, action, share, editorType } =
+    searchParams ?? initialSearchParams;
 
   const data = await getData(
     fileId ?? fileid ?? "",
     version,
     doc,
-    action === "view",
+    action,
     share,
     editorType,
-    editForm,
   );
 
   return <Root {...data} />;

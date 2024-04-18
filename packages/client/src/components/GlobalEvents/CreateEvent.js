@@ -69,6 +69,7 @@ const CreateEvent = ({
   withoutDialog,
   preview,
   publicRoomKey,
+  actionEdit,
 }) => {
   const [headerTitle, setHeaderTitle] = React.useState(null);
   const [startValue, setStartValue] = React.useState("");
@@ -164,6 +165,10 @@ const CreateEvent = ({
 
       if (preview) {
         searchParams.append("action", "view");
+      }
+
+      if (actionEdit) {
+        searchParams.append("action", "edit");
       }
 
       if (publicRoomKey) {

@@ -40,7 +40,13 @@ import type {
 import { TUser } from "@docspace/shared/api/people/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
 
-import type { IInitialConfig, TCatchError, TError, TResponse } from "@/types";
+import type {
+  ActionType,
+  IInitialConfig,
+  TCatchError,
+  TError,
+  TResponse,
+} from "@/types";
 
 import { REPLACED_URL_PATH } from "./constants";
 
@@ -174,22 +180,24 @@ export async function getData(
   fileId: string,
   version?: string,
   doc?: string,
-  view?: boolean,
+  action?: ActionType,
   share?: string,
   editorType?: string,
-  editForm?: string,
 ) {
+  const view = action === "view";
+  const edit = action === "edit";
+
   try {
     const searchParams = new URLSearchParams();
 
-    if (view) searchParams.append("view", view ? "true" : "false");
+    if (view) searchParams.append("view", "true");
     if (version) {
       searchParams.append("version", version);
     }
     if (doc) searchParams.append("doc", doc);
     if (share) searchParams.append("share", share);
     if (editorType) searchParams.append("editorType", editorType);
-    if (editForm) searchParams.append("editForm", editForm);
+    if (edit) searchParams.append("edit", "true");
 
     const [config, user, settings] = await Promise.all([
       openEdit(fileId, searchParams.toString(), share),

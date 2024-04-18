@@ -201,9 +201,12 @@ const ArticleMainButtonContent = (props) => {
 
       const event = new Event(Events.CREATE);
 
+      const isPDF = format === "pdf";
+
       const payload = {
         extension: format,
         id: -1,
+        edit: isPDF,
       };
       event.payload = payload;
 

@@ -564,7 +564,7 @@ const StyledSortButton = styled.div<{ viewAs: TViewAs; isDesc: boolean }>`
   .combo-button {
     background: ${(props) =>
       props.theme.filterInput.sort.background} !important;
-    padding-right: 4px;
+    padding-inline-end: 4px;
 
     .icon-button_svg {
       cursor: pointer;

@@ -193,7 +193,9 @@ const RestoreBackup = (props) => {
 
   const backupModules = (
     <div className="restore-backup_modules">
-      {radioButtonState === LOCAL_FILE && <LocalFileModule t={t} />}
+      {radioButtonState === LOCAL_FILE && (
+        <LocalFileModule t={t} isEnableRestore={isEnableRestore} />
+      )}
 
       {radioButtonState === BACKUP_ROOM && <RoomsModule />}
       {radioButtonState === DISK_SPACE && (
@@ -296,32 +298,35 @@ const RestoreBackup = (props) => {
   );
 };
 
-export const Component = inject(
-  ({ settingsStore, backup, currentQuotaStore }) => {
-    const { currentDeviceType, standalone } = settingsStore;
-    const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
-    const {
-      getProgress,
-      clearProgressInterval,
-      setStorageRegions,
-      setThirdPartyStorage,
-      setConnectedThirdPartyAccount,
-      setRestoreResource,
-    } = backup;
+export default inject(({ settingsStore, backup, currentQuotaStore }) => {
+  const { currentDeviceType, standalone, checkEnablePortalSettings } =
+    settingsStore;
+  const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
+  const {
+    getProgress,
+    clearProgressInterval,
+    setStorageRegions,
+    setThirdPartyStorage,
+    setConnectedThirdPartyAccount,
+    setRestoreResource,
+  } = backup;
 
-    const buttonSize =
-      currentDeviceType !== DeviceType.desktop ? "normal" : "small";
+  const buttonSize =
+    currentDeviceType !== DeviceType.desktop ? "normal" : "small";
 
-    return {
-      standalone,
-      isEnableRestore: isRestoreAndAutoBackupAvailable,
-      setStorageRegions,
-      setThirdPartyStorage,
-      buttonSize,
-      setConnectedThirdPartyAccount,
-      clearProgressInterval,
-      getProgress,
-      setRestoreResource,
-    };
-  },
-)(withTranslation(["Settings", "Common"])(observer(RestoreBackup)));
+  const isEnableRestore = checkEnablePortalSettings(
+    isRestoreAndAutoBackupAvailable,
+  );
+
+  return {
+    standalone,
+    isEnableRestore,
+    setStorageRegions,
+    setThirdPartyStorage,
+    buttonSize,
+    setConnectedThirdPartyAccount,
+    clearProgressInterval,
+    getProgress,
+    setRestoreResource,
+  };
+})(withTranslation(["Settings", "Common"])(observer(RestoreBackup)));

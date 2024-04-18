@@ -601,7 +601,7 @@ const StyledSortButton = styled.div<{ viewAs: TViewAs; isDesc: boolean }>`
       ${isMobile &&
       isIOS &&
       css`
-        right: 48px;
+        inset-inline-end: 48px;
       `}
 
       .view-selector-item {

@@ -43,7 +43,6 @@ import config from "../../../../../package.json";
 import ManualBackup from "./backup/manual-backup";
 import AutoBackup from "./backup/auto-backup";
 import { DeviceType } from "@docspace/shared/enums";
-import { isManagement } from "@docspace/shared/utils/common";
 
 const DataManagementWrapper = (props) => {
   const {
@@ -127,9 +126,7 @@ const DataManagementWrapper = (props) => {
   }, []);
 
   const onSelect = (e) => {
-    const url = isManagement()
-      ? `/backup/${e.id}`
-      : `/portal-settings/backup/${e.id}`;
+    const url = `/portal-settings/backup/${e.id}`;
     navigate(
       combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
     );

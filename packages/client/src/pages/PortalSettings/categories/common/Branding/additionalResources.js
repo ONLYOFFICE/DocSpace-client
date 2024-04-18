@@ -138,7 +138,7 @@ const AdditionalResources = (props) => {
 
   const checkWidth = () => {
     const url = isManagement()
-      ? "/branding"
+      ? "/settings/branding"
       : "portal-settings/customization/branding";
     window.innerWidth > size.mobile &&
       location.pathname.includes("additional-resources") &&

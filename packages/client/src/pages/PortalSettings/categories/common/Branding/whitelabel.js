@@ -289,7 +289,7 @@ const WhiteLabelComponent = (props) => {
         <Text fontSize="16px" fontWeight="700">
           {t("WhiteLabel")}
         </Text>
-        {!isSettingPaid && (
+        {!isSettingPaid && !isManagement() && (
           <Badge
             className="paid-badge"
             fontWeight="700"
@@ -592,10 +592,14 @@ export const WhiteLabel = inject(
 
     const {
       whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
-      deviceType,
-      standalone,
+      currentDeviceType,
+      checkEnablePortalSettings,
     } = settingsStore;
     const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+
+    const isSettingPaid = checkEnablePortalSettings(
+      isBrandingAndCustomizationAvailable,
+    );
 
     return {
       setLogoText,
@@ -605,7 +609,7 @@ export const WhiteLabel = inject(
       saveWhiteLabelSettings,
       restoreWhiteLabelSettings,
       defaultWhiteLabelLogoUrls,
-      isSettingPaid: isBrandingAndCustomizationAvailable,
+      isSettingPaid,
       initSettings,
       logoUrlsWhiteLabel,
       setLogoUrlsWhiteLabel,

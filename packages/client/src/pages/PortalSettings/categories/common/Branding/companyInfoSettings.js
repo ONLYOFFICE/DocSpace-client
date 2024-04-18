@@ -514,10 +514,13 @@ export const CompanyInfoSettings = inject(
 
       companyInfoSettingsData,
       buildVersionInfo,
-      deviceType,
+      checkEnablePortalSettings,
     } = settingsStore;
 
     const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+    const isSettingPaid = checkEnablePortalSettings(
+      isBrandingAndCustomizationAvailable,
+    );
 
     return {
       getCompanyInfoSettings,
@@ -528,8 +531,7 @@ export const CompanyInfoSettings = inject(
       setIsLoadedCompanyInfoSettingsData,
       isLoadedCompanyInfoSettingsData,
       buildVersionInfo,
-      isSettingPaid: isBrandingAndCustomizationAvailable,
-      deviceType,
+      isSettingPaid,
     };
   },
 )(

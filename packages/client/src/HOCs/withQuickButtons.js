@@ -100,6 +100,10 @@ export default function withQuickButtons(WrappedComponent) {
       }
     };
 
+    onCreateRoom = () => {
+      console.log("onCreateRoomFromTemplate"); //TODO: Templates
+    };
+
     render() {
       const { isLoading } = this.state;
 
@@ -114,6 +118,7 @@ export default function withQuickButtons(WrappedComponent) {
         isPublicRoom,
         isPersonalRoom,
         isArchiveFolder,
+        isTemplatesFolder,
       } = this.props;
 
       const quickButtonsComponent = (
@@ -134,6 +139,8 @@ export default function withQuickButtons(WrappedComponent) {
           folderCategory={folderCategory}
           onCopyPrimaryLink={this.onCopyPrimaryLink}
           isArchiveFolder={isArchiveFolder}
+          onCreateRoom={this.onCreateRoom}
+          isTemplatesFolder={isTemplatesFolder}
         />
       );
 
@@ -165,6 +172,7 @@ export default function withQuickButtons(WrappedComponent) {
         isTrashFolder,
         isPersonalRoom,
         isArchiveFolder,
+        isTemplatesFolder,
       } = treeFoldersStore;
 
       const { setSharingPanelVisible } = dialogsStore;
@@ -189,6 +197,7 @@ export default function withQuickButtons(WrappedComponent) {
         isArchiveFolder,
         getPrimaryFileLink,
         setShareChanged,
+        isTemplatesFolder,
       };
     },
   )(observer(WithQuickButtons));

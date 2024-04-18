@@ -37,6 +37,7 @@ import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.reat.svg?url";
 import Refresh12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/refresh.react.svg?url";
 import Mute12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/mute.react.svg?url";
 import Mute16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
+import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 
 import { isMobile as isMobileDevice } from "react-device-detect";
 
@@ -111,6 +112,8 @@ const Badges = ({
   isArchiveFolder,
   isRecentTab,
   canEditing,
+  isTemplatesFolder,
+  onCreateRoom,
 }) => {
   const {
     id,
@@ -319,6 +322,17 @@ const Badges = ({
           size={sizeBadge}
           onClick={onCopyPrimaryLink}
           title={t("Files:CopySharedLink")}
+        />
+      )}
+
+      {isTemplatesFolder && (
+        <ColorTheme
+          themeId={ThemeId.IconButton}
+          iconName={CreateRoomReactSvgUrl}
+          className="badge tablet-row-copy-link icons-group  tablet-badge"
+          size={sizeBadge}
+          onClick={onCreateRoom}
+          title={t("Files:CreateRoom")}
         />
       )}
 

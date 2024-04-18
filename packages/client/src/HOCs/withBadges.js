@@ -124,6 +124,10 @@ export default function withBadges(WrappedComponent) {
       }
     };
 
+    onCreateRoom = () => {
+      console.log("onCreateRoomFromTemplate"); //TODO: Templates
+    };
+
     render() {
       const {
         t,
@@ -141,6 +145,7 @@ export default function withBadges(WrappedComponent) {
         isArchiveFolder,
         isPublicRoom,
         isRecentTab,
+        isTemplatesFolder,
       } = this.props;
       const { fileStatus, access, mute } = item;
 
@@ -181,6 +186,8 @@ export default function withBadges(WrappedComponent) {
           isArchiveFolder={isArchiveFolder}
           isRecentTab={isRecentTab}
           canEditing={canEditing}
+          onCreateRoom={this.onCreateRoom}
+          isTemplatesFolder={isTemplatesFolder}
         />
       );
 
@@ -211,6 +218,7 @@ export default function withBadges(WrappedComponent) {
         isArchiveFolderRoot,
         isArchiveFolder,
         isRecentTab,
+        isTemplatesFolder,
       } = treeFoldersStore;
       const { markAsRead, setPinAction, setMuteAction } = filesActionsStore;
       const { isTabletView, isDesktopClient, theme } = settingsStore;
@@ -251,6 +259,7 @@ export default function withBadges(WrappedComponent) {
         isArchiveFolder,
         isPublicRoom: publicRoomStore.isPublicRoom,
         isRecentTab,
+        isTemplatesFolder,
       };
     },
   )(observer(WithBadges));

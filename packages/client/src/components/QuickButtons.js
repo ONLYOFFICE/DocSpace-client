@@ -30,6 +30,7 @@ import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/locked.react.svg?url";
 import FileActionsFavoriteReactSvgUrl from "PUBLIC_DIR/images/file.actions.favorite.react.svg?url";
 import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
+import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 
 import React from "react";
 import styled from "styled-components";
@@ -60,6 +61,8 @@ const QuickButtons = (props) => {
     onClickShare,
     isPersonalRoom,
     isArchiveFolder,
+    onCreateRoom,
+    isTemplatesFolder,
   } = props;
 
   const { id, locked, shared, fileStatus, title, fileExst } = item;
@@ -145,6 +148,19 @@ const QuickButtons = (props) => {
           isDisabled={isDisabled}
           hoverColor={theme.filesQuickButtons.sharedColor}
           title={t("Common:Download")}
+        />
+      )}
+      {isTemplatesFolder && (
+        <ColorTheme
+          themeId={ThemeId.IconButton}
+          iconName={CreateRoomReactSvgUrl}
+          className="badge create-room icons-group"
+          size="medium"
+          onClick={onCreateRoom}
+          color={colorLock}
+          isDisabled={isDisabled}
+          hoverColor={theme.filesQuickButtons.sharedColor}
+          title={t("Files:CreateRoom")}
         />
       )}
       {showCopyLinkIcon && (

@@ -58,6 +58,7 @@ class FilesTableHeader extends React.Component {
       isArchiveFolder,
       indexing,
       roomType,
+      isVirtualDataRoom,
     } = this.props;
 
     const defaultColumns = [];
@@ -290,16 +291,6 @@ class FilesTableHeader extends React.Component {
       ];
       defaultColumns.push(...columns);
     } else {
-      const indexBlock =
-        indexing && roomType === RoomsType.VirtualDataRoom
-          ? {
-              key: "Index",
-              title: t("idx"),
-              enable: this.props.indexColumnIsEnabled,
-              minWidth: 50,
-            }
-          : {};
-
       const authorBlock = !isPublicRoom
         ? {
             key: "Author",
@@ -313,7 +304,6 @@ class FilesTableHeader extends React.Component {
         : {};
 
       const columns = [
-        { ...indexBlock },
         {
           key: "Name",
           title: t("Common:Name"),
@@ -370,6 +360,15 @@ class FilesTableHeader extends React.Component {
         },
       ];
       defaultColumns.push(...columns);
+    }
+
+    if (isVirtualDataRoom && indexing) {
+      defaultColumns.unshift({
+        key: "Index",
+        title: t("idx"),
+        enable: this.props.indexColumnIsEnabled,
+        //     minWidth: 110,
+      });
     }
 
     let columns = getColumns(defaultColumns);
@@ -450,9 +449,11 @@ class FilesTableHeader extends React.Component {
       columnInfoPanelStorageName,
       isRecentTab,
       isArchiveFolder,
+      isVirtualDataRoom,
     } = this.props;
 
     if (
+      isVirtualDataRoom !== prevProps.isVirtualDataRoom ||
       isArchiveFolder !== prevProps.isArchiveFolder ||
       isRooms !== prevProps.isRooms ||
       isTrashFolder !== prevProps.isTrashFolder ||
@@ -670,6 +671,10 @@ export default inject(
 
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
 
+    const isVirtualDataRoom =
+      window.location.pathname.includes("rooms/shared") &&
+      roomType === RoomsType.VirtualDataRoom;
+
     return {
       setRoomsFilter,
       isHeaderChecked,
@@ -723,6 +728,7 @@ export default inject(
       setColumnEnable,
       isTrashFolder,
       isPublicRoom,
+      isVirtualDataRoom,
       publicRoomKey,
 
       isFrame,

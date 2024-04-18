@@ -34,6 +34,7 @@ import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
 import IndexCell from "./IndexCell";
 import { classNames } from "@docspace/shared/utils";
+import { RoomsType } from "@docspace/shared/enums";
 import {
   StyledBadgesContainer,
   StyledQuickButtonsContainer,
@@ -60,11 +61,13 @@ const RowDataComponent = (props) => {
     showHotkeyBorder,
     badgesComponent,
     quickButtonsComponent,
+
+    enableIndexing,
   } = props;
 
   return (
     <>
-      {indexColumnIsEnabled ? (
+      {indexColumnIsEnabled && enableIndexing && (
         <TableCell
           style={
             !indexColumnIsEnabled ? { background: "none" } : dragStyles.style
@@ -76,8 +79,6 @@ const RowDataComponent = (props) => {
             {...props}
           />
         </TableCell>
-      ) : (
-        <div />
       )}
 
       <TableCell
@@ -209,7 +210,7 @@ const RowDataComponent = (props) => {
   );
 };
 
-export default inject(({ tableStore }) => {
+export default inject(({ tableStore, selectedFolderStore }) => {
   const {
     authorColumnIsEnabled,
     createdColumnIsEnabled,
@@ -220,6 +221,13 @@ export default inject(({ tableStore }) => {
     quickButtonsColumnIsEnabled,
   } = tableStore;
 
+  const { indexing, roomType } = selectedFolderStore;
+
+  const enableIndexing =
+    window.location.pathname.includes("rooms/shared") &&
+    roomType === RoomsType.VirtualDataRoom &&
+    indexing;
+
   return {
     authorColumnIsEnabled,
     createdColumnIsEnabled,
@@ -228,5 +236,7 @@ export default inject(({ tableStore }) => {
     indexColumnIsEnabled,
     typeColumnIsEnabled,
     quickButtonsColumnIsEnabled,
+
+    enableIndexing,
   };
 })(observer(RowDataComponent));

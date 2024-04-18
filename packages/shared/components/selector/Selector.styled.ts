@@ -46,7 +46,7 @@ const accessComboboxStyles = css`
 
   .combo-button-label,
   .combo-button-label:hover {
-    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    font-size: 14px;
     text-decoration: none;
   }
 `;
@@ -88,7 +88,7 @@ const StyledHeader = styled.div`
 
   .heading-text {
     font-weight: 700;
-    font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
+    font-size: 21px;
     line-height: 28px;
   }
 `;
@@ -123,7 +123,7 @@ const StyledBody = styled.div<{
   }
 
   .body-description-text {
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
     font-weight: 600;
     line-height: 20px;
     margin-bottom: 12px;
@@ -275,7 +275,7 @@ const StyledEmptyScreen = styled.div<{ withSearch: boolean }>`
 
   .empty-header {
     font-weight: 700;
-    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+    font-size: 16px;
     line-height: 22px;
 
     margin: 0;
@@ -283,7 +283,7 @@ const StyledEmptyScreen = styled.div<{ withSearch: boolean }>`
 
   .empty-description {
     font-weight: 400;
-    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+    font-size: 12px;
     line-height: 16px;
 
     text-align: center;

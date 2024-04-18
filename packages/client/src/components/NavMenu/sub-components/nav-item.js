@@ -131,7 +131,7 @@ const VersionBadge = styled.div`
   border-radius: 5px;
   color: #ffffff;
   display: inline-block;
-  font-size: ${(props) => props.theme.getCorrectFontSize("10px")};
+  font-size: 10px;
   line-height: 8px;
   padding: 3px 6px;
   position: absolute;

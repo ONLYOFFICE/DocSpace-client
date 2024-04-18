@@ -87,15 +87,15 @@ const HeaderContainer = styled.div`
   }
 
   .headline {
-    font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+    font-size: 18px;
     margin-inline-end: 16px;
 
     @media ${tablet} {
-      font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
+      font-size: 21px;
     }
 
     @media ${mobile} {
-      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+      font-size: 18px;
     }
   }
 `;

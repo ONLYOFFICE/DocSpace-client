@@ -169,11 +169,10 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
         : props.theme.socialButton.text.color};
     width: ${(props) => props.theme.socialButton.text.width};
     height: ${(props) => props.theme.socialButton.text.height};
-    font-family: Roboto, "Open Sans", sans-serif, Arial;
+    font-family: Roboto, ${(props) => props.theme.fontFamily};
     font-style: normal;
     font-weight: ${(props) => props.theme.socialButton.text.fontWeight};
-    font-size: ${(props) =>
-      props.theme.getCorrectFontSize(props.theme.socialButton.text.fontSize)};
+    font-size: ${(props) => props.theme.socialButton.text.fontSize};
     line-height: ${(props) => props.theme.socialButton.text.lineHeight};
     letter-spacing: ${(props) => props.theme.socialButton.text.letterSpacing};
     user-select: none;

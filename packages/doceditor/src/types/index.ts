@@ -177,6 +177,7 @@ export interface IInitialConfig {
   Error?: string;
   errorMessage?: string;
   message?: undefined;
+  startFilling?: boolean;
 }
 
 export type TError = {

@@ -52,7 +52,7 @@ import useEditorEvents from "@/hooks/useEditorEvents";
 
 type IConfigType = IConfig & {
   events?: {
-    onRequestStartFilling: (event: object) => void;
+    onRequestStartFilling?: (event: object) => void;
   };
 };
 
@@ -209,7 +209,6 @@ const Editor = ({
     onDocumentStateChange,
     onMetaChange,
     onMakeActionLink,
-    onRequestStartFilling,
   };
 
   if (successAuth) {
@@ -269,6 +268,10 @@ const Editor = ({
     window.DocSpaceConfig?.editor?.requestClose
   ) {
     newConfig.events.onRequestClose = onSDKRequestClose;
+  }
+
+  if (config?.startFilling) {
+    newConfig.events.onRequestStartFilling = onRequestStartFilling;
   }
 
   return (

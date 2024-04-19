@@ -26,6 +26,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { observer } from "mobx-react";
 import { Submenu } from "@docspace/shared/components/submenu";
 import { DeviceType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -36,8 +37,6 @@ import Branding from "../branding";
 import Backup from "../backup";
 import AutoBackup from "../auto-backup";
 import Restore from "../restore";
-
-import config from "PACKAGE_FILE";
 
 const Settings = () => {
   const { t } = useTranslation(["Common", "Settings"]);
@@ -99,4 +98,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default observer(Settings);

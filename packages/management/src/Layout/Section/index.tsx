@@ -31,6 +31,7 @@ import { DeviceType } from "@docspace/shared/enums";
 import Section from "@docspace/shared/components/section";
 
 import SectionHeaderContent from "./Header";
+import Bar from "SRC_DIR/components/Bar";
 
 interface ISectionProps {
   children: React.ReactNode;
@@ -88,7 +89,9 @@ const SectionWrapper = ({
       <Section.SectionHeader>
         <SectionHeaderContent />
       </Section.SectionHeader>
-
+      <Section.SectionWarning>
+        <Bar />
+      </Section.SectionWarning>
       <Section.SectionBody>{children}</Section.SectionBody>
     </Section>
   );

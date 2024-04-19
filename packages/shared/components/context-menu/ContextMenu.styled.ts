@@ -300,10 +300,11 @@ const StyledContextMenu = styled.div<{
   }
 
   .p-contextmenu .scroll-body .p-menuitem {
-    margin-right: ${(props) => `-${props.theme.scrollbar.paddingInlineEnd}`};
+    margin-inline-end: ${(props) =>
+      `-${props.theme.scrollbar.paddingInlineEnd}`};
 
     @media ${mobile} {
-      margin-right: ${(props) =>
+      margin-inline-end: ${(props) =>
         `-${props.theme.scrollbar.paddingInlineEndMobile}`};
     }
   }

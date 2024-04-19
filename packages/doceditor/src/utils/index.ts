@@ -205,3 +205,24 @@ export const getIsZoom = () =>
   typeof window !== "undefined" &&
   (window?.navigator?.userAgent?.includes("ZoomWebKit") ||
     window?.navigator?.userAgent?.includes("ZoomApps"));
+
+// need for separate window in desktop editors
+export const calculateAsideHeight = () => {
+  const viewPort = window?.AscDesktopEditor?.getViewportSettings?.();
+
+  if (!viewPort) return;
+
+  if (viewPort.widgetType === "window") {
+    const { captionHeight } = viewPort;
+    const backdrop = document.getElementsByClassName(
+      "backdrop-active",
+    )[0] as HTMLElement;
+    const aside = document.getElementsByTagName("aside")[0];
+
+    if (aside && backdrop) {
+      backdrop.style.height =
+        aside.style.height = `calc(100dvh - ${captionHeight}px`;
+      backdrop.style.marginTop = aside.style.top = `${captionHeight}px`;
+    }
+  }
+};

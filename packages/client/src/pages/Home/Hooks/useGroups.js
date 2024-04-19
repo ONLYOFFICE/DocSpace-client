@@ -51,7 +51,7 @@ const useGroups = ({
 
     fetchGroups(newFilter, true, true)
       .catch((err) => {
-        console.err(err);
+        console.error(err);
       })
       .finally(() => setIsLoading(false));
   }, [isAccountsPage, isGroupsAccounts, location.pathname, location.search]);

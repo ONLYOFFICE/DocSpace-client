@@ -11,5 +11,6 @@
   "PluginSamples": "Laajennusmallit",
   "PluginSDK": "SDK-laajennus",
   "PluginSDKDescription": "Käyttämällä SDK-laajennusta voit laajentaa DocSpacen toiminnallisuutta, yhdistää kolmansien osapuolien palveluihin tai parantaa olemassaolevaa käyttäjäkokemusta. Täältä löydät GitHubissa saatavilla olevat laajennusmallit.",
-  "PluginSDKInstruction": "Klikkaa painiketta saadaksesi yksityiskohtaiset ohjeet omien laajennusten luomiseen."
+  "PluginSDKInstruction": "Klikkaa painiketta saadaksesi yksityiskohtaiset ohjeet omien laajennusten luomiseen.",
+  "UploadDescription": "Voit lisätä lisäosia laajentaaksesi DocSpacen toiminnallisuutta lisätoiminnoilla. Klikkaa lataa lisäosa tai pudota tiedosta ZIP-arkistoon."
 }

@@ -73,6 +73,7 @@ const ArticleBodyContent = (props) => {
     currentDeviceType,
     campaigns,
     userId,
+    isFrame,
   } = props;
 
   const navigate = useNavigate();
@@ -265,9 +266,11 @@ const ArticleBodyContent = (props) => {
         activeItemId={activeItemId}
       />
 
-      {!isDesktopClient && showText && !firstLoad && campaigns.length > 0 && (
-        <Banner />
-      )}
+      {!isDesktopClient &&
+        showText &&
+        !firstLoad &&
+        campaigns.length > 0 &&
+        !isFrame && <Banner />}
     </>
   );
 };
@@ -314,6 +317,7 @@ export default inject(
       theme,
       setIsBurgerLoading,
       currentDeviceType,
+      isFrame,
     } = settingsStore;
 
     const { campaigns } = campaignsStore;
@@ -346,6 +350,7 @@ export default inject(
       setSelection,
       currentDeviceType,
       campaigns,
+      isFrame,
     };
   },
 )(withTranslation([])(observer(ArticleBodyContent)));

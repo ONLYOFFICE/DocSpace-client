@@ -76,7 +76,7 @@ const SDKContainer = styled(Box)`
 const CategoryHeader = styled.div`
   margin-top: 40px;
   margin-bottom: 16px;
-  font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+  font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: 22px;

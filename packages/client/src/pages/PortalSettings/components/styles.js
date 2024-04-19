@@ -52,14 +52,14 @@ export const StyledMobileCategoryWrapper = styled.div`
   }
 
   .category-item-subheader {
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
     font-weight: 600;
     margin-bottom: 5px;
   }
 
   .category-item-description {
     color: ${(props) => props.theme.client.settings.security.descriptionColor};
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
     max-width: 1024px;
     line-height: 20px;
   }
@@ -69,7 +69,7 @@ export const StyledMobileCategoryWrapper = styled.div`
       theme.interfaceDirection === "rtl"
         ? `margin-left: 7px;`
         : `margin-right: 7px;`}
-    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+    font-size: 16px;
     font-weight: 700;
   }
 

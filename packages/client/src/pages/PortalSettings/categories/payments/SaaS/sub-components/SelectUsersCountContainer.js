@@ -89,7 +89,7 @@ const StyledBody = styled.div`
   .payment-operations_input {
     width: 101px;
     height: 60px;
-    font-size: ${(props) => props.theme.getCorrectFontSize("44px")};
+    font-size: 44px;
     text-align: center;
     margin-left: 20px;
     margin-right: 20px;

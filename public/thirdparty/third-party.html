@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -49,19 +49,14 @@
       function getObjectByLocation(location) {
         if (!location.search || !location.search.length) return null;
 
-        const searchUrl = location.search.substring(1);
-        const object = JSON.parse(
-          '{"' +
-            decodeURIComponent(
-              searchUrl
-                .replace(/"/g, '\\"')
-                .replace(/&/g, '","')
-                .replace(/=/g, '":"')
-            ) +
-            '"}'
-        );
-
-        return object;
+        try {
+          const searchUrl = location.search.substring(1);
+          const params = Object.fromEntries(new URLSearchParams(searchUrl));
+          return params;
+        } catch (e) {
+          console.error(e);
+          return {};
+        }
       }
 
       function renderError(error) {

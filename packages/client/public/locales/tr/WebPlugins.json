@@ -11,5 +11,6 @@
   "PluginSamples": "Eklenti örnekleri",
   "PluginSDK": "Eklenti SDK'sı",
   "PluginSDKDescription": "Eklenti SDK'sını kullanarak DocSpace işlevselliğinizi genişletebilir, üçüncü taraf hizmetlerine bağlanabilir veya mevcut kullanıcı deneyimini geliştirebilirsiniz. Burada GitHub'da bulunan kod kaynağına sahip eklenti örneklerini bulabilirsiniz.",
-  "PluginSDKInstruction": "Kendi eklentilerinizi nasıl oluşturacağınızla ilgili ayrıntılı talimatlar için düğmeye tıklayın."
+  "PluginSDKInstruction": "Kendi eklentilerinizi nasıl oluşturacağınızla ilgili ayrıntılı talimatlar için düğmeye tıklayın.",
+  "UploadDescription": "DocSpace'in işlevselliğini ekstra özelliklerle genişletmek için eklentiler ekleyebilirsiniz. Eklenti yükle'ye tıklayın veya dosyayı ZIP arşivine bırakın."
 }

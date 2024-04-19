@@ -29,6 +29,7 @@ import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 
 import { ThemeProvider } from "@docspace/shared/components/theme-provider";
+import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
 
 import { useStore } from "../../store";
 
@@ -40,7 +41,11 @@ const ThemeProviderWrapper = ({ children }: PropsWithChildren) => {
 
   return (
     <ThemeProvider
-      theme={{ ...theme, interfaceDirection: i18n.dir() }}
+      theme={{
+        ...theme,
+        interfaceDirection: i18n.dir(),
+        fontFamily: getFontFamilyDependingOnLanguage(i18n?.language),
+      }}
       currentColorScheme={currentColorScheme ?? undefined}
     >
       {children}

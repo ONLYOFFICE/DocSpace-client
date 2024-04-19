@@ -11,5 +11,6 @@
   "PluginSamples": "Spraudņu paraugi",
   "PluginSDK": "Spraudņa SDK",
   "PluginSDKDescription": "Izmantojot spraudņa SDK, varat paplašināt savu DocSpace funkcionalitāti, savienot trešās puses pakalpojumus vai uzlabot esošo lietotāja pieredzi. Šeit jūs varat atrast spraudņu paraugus ar koda avotu, kas pieejams GitHub. ",
-  "PluginSDKInstruction": "Noklikšķiniet uz pogas, lai iegūtu detalizētus norādījumus par to, kā izveidot savus spraudņus."
+  "PluginSDKInstruction": "Noklikšķiniet uz pogas, lai iegūtu detalizētus norādījumus par to, kā izveidot savus spraudņus.",
+  "UploadDescription": "Varat pievienot spraudņus, lai paplašinātu DocSpace funkcionalitāti ar papildu funkcijām. ZIP arhīvā noklikšķiniet uz Augšupielādēt spraudni vai nometiet failu."
 }

@@ -82,17 +82,13 @@ const StyledTextInput = styled(Input).attrs((props) => ({
     (props.size === InputSize.huge && props.theme.textInput.lineHeight.huge) ||
     (props.size === InputSize.large && props.theme.textInput.lineHeight.large)};
   font-size: ${(props) =>
-    props.theme.getCorrectFontSize(
-      (props.size === InputSize.base && props.theme.textInput.fontSize.base) ||
-        (props.size === InputSize.middle &&
-          props.theme.textInput.fontSize.middle) ||
-        (props.size === InputSize.big && props.theme.textInput.fontSize.big) ||
-        (props.size === InputSize.huge &&
-          props.theme.textInput.fontSize.huge) ||
-        (props.size === InputSize.large &&
-          props.theme.textInput.fontSize.large) ||
-        props.theme.textInput.fontSize.base,
-    )};
+    (props.size === InputSize.base && props.theme.textInput.fontSize.base) ||
+    (props.size === InputSize.middle &&
+      props.theme.textInput.fontSize.middle) ||
+    (props.size === InputSize.big && props.theme.textInput.fontSize.big) ||
+    (props.size === InputSize.huge && props.theme.textInput.fontSize.huge) ||
+    (props.size === InputSize.large && props.theme.textInput.fontSize.large) ||
+    props.theme.textInput.fontSize.base};
 
   font-weight: ${(props) =>
     props.fontWeight

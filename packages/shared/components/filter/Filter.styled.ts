@@ -597,6 +597,7 @@ const StyledSortButton = styled.div<{ viewAs: TViewAs; isDesc: boolean }>`
       bottom: auto;
       min-width: 200px;
       margin-top: 3px;
+      width: auto;
 
       .view-selector-item {
         display: flex;

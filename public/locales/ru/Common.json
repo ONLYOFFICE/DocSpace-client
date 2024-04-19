@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "О программе",
   "AboutCompanyTitle": "О программе",
   "AccessDenied": "Доступ запрещен",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "Достигнут лимит платных пользователей.",
   "ReadInstructions": "Читать руководства",
   "ReadOnly": "Только чтение",
+  "Reconnect": "Подключить повторно",
   "ReconnectStorage": "Повторное подключение хранилища",
   "RecoverDescribeYourProblemPlaceholder": "Пожалуйста, опишите вашу проблему",
   "RecoverTitle": "Доступ к порталу",

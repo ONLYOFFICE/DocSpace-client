@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "U vezi sa",
   "AboutCompanyTitle": "U vezi ovog programa",
   "AccessDenied": "Pristup odbijen",
@@ -308,6 +308,7 @@
   "QuotaPaidUserLimitError": "Limit plaćenog korisnika je dostignut.",
   "ReadInstructions": "Pročitaj instrukcije",
   "ReadOnly": "Samo za čitanje",
+  "Reconnect": "Poveži ponovo",
   "ReconnectStorage": "Ponovo poveži skladište",
   "RecoverDescribeYourProblemPlaceholder": "Opiši svoj problem",
   "RecoverTitle": "Pristupi oporavku",

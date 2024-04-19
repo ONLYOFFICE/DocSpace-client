@@ -3838,7 +3838,7 @@ class FilesStore {
     searchParams.append("fileId", id);
     if (share) searchParams.append("share", share);
     if (preview) searchParams.append("action", "view");
-    if (editForm) searchParams.append("editForm", editForm);
+    if (editForm) searchParams.append("action", "edit");
 
     const url = combineUrl(
       window.DocSpaceConfig?.proxy?.url,

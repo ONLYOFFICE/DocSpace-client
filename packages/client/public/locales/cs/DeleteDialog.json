@@ -1,6 +1,10 @@
 {
+  "DeleteAllGroupDescription": "Vybrané skupiny budou odstraněny. Uživatelé ve skupinách nebudou z DocSpace odstraněni. Opravdu chcete pokračovat?",
+  "DeleteAllGroupsTitle": "Odstranit skupiny",
   "DeleteFile": "Chystáte se odstranit tento soubor.",
   "DeleteFolder": "Chystáte se odstranit tuto složku.",
+  "DeleteGroupDescription": "Skupina {{groupName}} bude odstraněna. Uživatelé ve skupině nebudou z DocSpace odstraněni. Jste si jisti, že chcete pokračovat?",
+  "DeleteGroupTitle": "Smazat skupinu",
   "DeleteItems": "Chystáte se odstranit tyto položky. ",
   "DeleteItemsSharedNote": "Upozorňujeme, že pokud jste je s někým sdíleli, stanou se nedostupnými.",
   "DeleteRoom": "Chystáte se odstranit tuto místnost. Nebudete ji moci obnovit.",

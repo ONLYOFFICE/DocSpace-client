@@ -152,6 +152,8 @@ export interface ComboboxProps {
   onClickSelectedItem?: (option: TOption) => void;
   withoutBackground?: boolean;
   forceCloseClickOutside?: boolean;
+  /** The event is triggered by clicking outside the component when `withBackdrop === true` */
+  onBackdropClick?: (e?: Event | React.MouseEvent) => void;
   hideMobileView?: boolean;
   isNoFixedHeightOptions?: boolean;
   isMobileView?: boolean;

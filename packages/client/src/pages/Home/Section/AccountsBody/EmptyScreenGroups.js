@@ -40,6 +40,7 @@ import { Grid } from "@docspace/shared/components/grid";
 import { Events } from "@docspace/shared/enums";
 
 const EmptyScreenGroups = ({
+  isRoomAdmin,
   groupsIsFiltered,
   resetGroupsFilter,
   setIsLoading,
@@ -78,29 +79,7 @@ const EmptyScreenGroups = ({
         }
         buttons={
           <Grid gridColumnGap="8px" columnsProp={["12px 1fr"]}>
-            {!groupsIsFiltered ? (
-              <>
-                <Box>
-                  <IconButton
-                    className="empty-folder_container-icon"
-                    size="12"
-                    onClick={onCreateRoom}
-                    iconName={PlusSvgUrl}
-                    isFill
-                  />
-                </Box>
-                <Box marginProp="-4px 0 0 0">
-                  <Link
-                    type="action"
-                    isHovered={true}
-                    fontWeight="600"
-                    onClick={onCreateRoom}
-                  >
-                    {t("PeopleTranslations:CreateGroup")}
-                  </Link>
-                </Box>
-              </>
-            ) : (
+            {groupsIsFiltered ? (
               <>
                 <Box>
                   <IconButton
@@ -122,6 +101,30 @@ const EmptyScreenGroups = ({
                   </Link>
                 </Box>
               </>
+            ) : (
+              !isRoomAdmin && (
+                <>
+                  <Box>
+                    <IconButton
+                      className="empty-folder_container-icon"
+                      size="12"
+                      onClick={onCreateRoom}
+                      iconName={PlusSvgUrl}
+                      isFill
+                    />
+                  </Box>
+                  <Box marginProp="-4px 0 0 0">
+                    <Link
+                      type="action"
+                      isHovered={true}
+                      fontWeight="600"
+                      onClick={onCreateRoom}
+                    >
+                      {t("PeopleTranslations:CreateGroup")}
+                    </Link>
+                  </Box>
+                </>
+              )
             )}
           </Grid>
         }
@@ -131,6 +134,7 @@ const EmptyScreenGroups = ({
 };
 
 export default inject(({ peopleStore, clientLoadingStore, settingsStore }) => {
+  const { isRoomAdmin } = peopleStore.userStore.user;
   const { groupsIsFiltered, resetGroupsFilter } = peopleStore.groupsStore;
 
   const { setIsSectionBodyLoading } = clientLoadingStore;
@@ -140,6 +144,7 @@ export default inject(({ peopleStore, clientLoadingStore, settingsStore }) => {
   };
 
   return {
+    isRoomAdmin,
     groupsIsFiltered,
     resetGroupsFilter,
     setIsLoading,

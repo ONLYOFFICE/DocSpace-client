@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TColorScheme } from "../../themes";
+
 export interface ArticleItemProps {
   /** Accepts className */
   className?: string;
@@ -66,4 +68,5 @@ export interface ArticleItemProps {
   /** Accepts folder id */
   folderId?: string;
   badgeTitle?: string;
+  $currentColorScheme?: TColorScheme;
 }

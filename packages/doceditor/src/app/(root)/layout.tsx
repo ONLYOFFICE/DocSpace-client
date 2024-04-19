@@ -23,16 +23,14 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
+import { redirect } from "next/navigation";
+import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import Scripts from "@/components/Scripts";
 import StyledComponentsRegistry from "@/utils/registry";
 
 import "@/styles/globals.scss";
 import Providers from "@/providers";
 import { getSettings, getUser } from "@/utils/actions";
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
-import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 
 export default async function RootLayout({
   children,
@@ -47,6 +45,14 @@ export default async function RootLayout({
     <html lang="en">
       <head>
         <link id="favicon" rel="shortcut icon" type="image/x-icon" />
+        <meta charSet="utf-8" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
+        />
+        <meta name="google" content="notranslate" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
       <body>
         <StyledComponentsRegistry>

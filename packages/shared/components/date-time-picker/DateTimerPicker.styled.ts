@@ -68,6 +68,14 @@ const TimeCell = styled.span<{ hasError?: boolean }>`
     height: 12px;
     padding: ${({ theme }) =>
       getCorrectFourValuesStyle("0 10px 0 2px", theme.interfaceDirection)};
+
+    path {
+      fill: ${(props) => props.theme.dateTimePicker.colorClockIcon};
+    }
+
+    circle {
+      fill: none;
+    }
   }
 
   ${(props) =>

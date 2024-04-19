@@ -33,7 +33,7 @@ export const Hint = styled.div`
   color: ${(props) => props.theme.tooltip.textColor};
   border-radius: 6px;
   font-weight: 400;
-  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+  font-size: 12px;
   line-height: 16px;
 
   position: relative;

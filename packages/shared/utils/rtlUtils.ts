@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TInterfaceDirection } from "../themes";
+import { DEFAULT_FONT_FAMILY, SYSTEM_FONT_FAMILY } from "../constants";
 
 /* Returns correct text-align value depending on interface direction (ltr/rtl) */
 export const getCorrectTextAlign = (
@@ -99,4 +100,11 @@ export const getCorrectBorderRadius = (
   }
 
   return borderRadiusArr.join(" ");
+};
+
+/* Returns system font family for arabic lang */
+export const getFontFamilyDependingOnLanguage = (lng: string) => {
+  const shouldUseSystemFont = lng === "ar-SA";
+
+  return shouldUseSystemFont ? SYSTEM_FONT_FAMILY : DEFAULT_FONT_FAMILY;
 };

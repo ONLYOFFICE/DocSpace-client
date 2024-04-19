@@ -40,7 +40,7 @@ const TableWrapper = styled(TableContainer)`
   margin-top: 16px;
 
   .header-container-text {
-    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+    font-size: 12px;
   }
 
   .table-container_header {

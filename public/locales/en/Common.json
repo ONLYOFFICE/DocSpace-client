@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "About",
   "AboutCompanyTitle": "About this program",
   "AccessDenied": "Access denied",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "The paid user limit has been reached.",
   "ReadInstructions": "Read instructions",
   "ReadOnly": "Read only",
+  "Reconnect": "Reconnect",
   "ReconnectStorage": "Reconnect storage",
   "RecoverDescribeYourProblemPlaceholder": "Describe your problem",
   "RecoverTitle": "Access recovery",

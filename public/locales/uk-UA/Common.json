@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Інформація",
   "AboutCompanyTitle": "Про цю програму",
   "AccessDenied": "Доступ заборонено",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "Досягнуто обмеження кількості платних користувачів.",
   "ReadInstructions": "Читати інструкції",
   "ReadOnly": "Лише читання",
+  "Reconnect": "Перепідключитися",
   "ReconnectStorage": "Повторно під’єднати сховище",
   "RecoverDescribeYourProblemPlaceholder": "Опишіть свою проблему",
   "RecoverTitle": "Відновлення доступу",

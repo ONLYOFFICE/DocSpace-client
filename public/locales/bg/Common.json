@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Относно",
   "AboutCompanyTitle": "За тази програма",
   "AccessDenied": "Достъпът отказан",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "Лимитът за платени потребители е достигнат.",
   "ReadInstructions": "Прочети инструкции",
   "ReadOnly": "Само за четене",
+  "Reconnect": "Повторно свързване",
   "ReconnectStorage": "Повторно свързване на хранилището",
   "RecoverDescribeYourProblemPlaceholder": "Опишете проблема си",
   "RecoverTitle": "Възстановяване на достъп",

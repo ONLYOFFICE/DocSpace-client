@@ -520,4 +520,5 @@ export const enum EditorConfigErrorType {
   LinkScope = "ASC.Files.Core.Exceptions.LinkScopeException",
   NotFoundScope = "System.IO.FileNotFoundException",
   AccessDeniedScope = "System.Security.SecurityException",
+  TenantQuotaException = "ASC.Core.Tenants.TenantQuotaException",
 }

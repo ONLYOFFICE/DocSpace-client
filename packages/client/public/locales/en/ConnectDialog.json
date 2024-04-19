@@ -1,8 +1,7 @@
-{
+﻿{
   "Account": "Account",
   "ConnectFolderTitle": "Folder title",
   "ConnectionUrl": "Connection URL",
   "Login": "Login",
-  "Reconnect": "Reconnect",
   "SuccessfulConnectionOfAThirdParty": "Third-party service was successfully connected."
 }

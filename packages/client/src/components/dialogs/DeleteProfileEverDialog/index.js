@@ -67,7 +67,7 @@ const StyledModalDialogContainer = styled(ModalDialogContainer)`
 
   .text-warning {
     color: #f24724;
-    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+    font-size: 16px;
     font-weight: 700;
     line-height: 22px;
   }

@@ -52,6 +52,7 @@ import RoReactSvgUrl from "PUBLIC_DIR/images/flags/ro.react.svg?url";
 import RuReactSvgUrl from "PUBLIC_DIR/images/flags/ru.react.svg?url";
 import SkReactSvgUrl from "PUBLIC_DIR/images/flags/sk.react.svg?url";
 import SlReactSvgUrl from "PUBLIC_DIR/images/flags/sl.react.svg?url";
+import SrLatnRSReactSvgUrl from "PUBLIC_DIR/images/flags/sr-Latn-RS.react.svg?url";
 import TrReactSvgUrl from "PUBLIC_DIR/images/flags/tr.react.svg?url";
 import UkUAReactSvgUrl from "PUBLIC_DIR/images/flags/uk-UA.react.svg?url";
 import ViReactSvgUrl from "PUBLIC_DIR/images/flags/vi.react.svg?url";
@@ -86,6 +87,7 @@ export const flagsIcons = new Map([
   ["ru.react.svg", RuReactSvgUrl],
   ["sk.react.svg", SkReactSvgUrl],
   ["sl.react.svg", SlReactSvgUrl],
+  ["sr-Latn-RS.react.svg", SrLatnRSReactSvgUrl],
   ["tr.react.svg", TrReactSvgUrl],
   ["uk-UA.react.svg", UkUAReactSvgUrl],
   ["vi.react.svg", ViReactSvgUrl],

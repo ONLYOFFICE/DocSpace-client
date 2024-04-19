@@ -27,6 +27,7 @@
 import React from "react";
 import { useSSR, useTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
+import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
 import ErrorBoundary from "./ErrorBoundary";
 import App from "../App";
 import i18n from "../i18n";
@@ -54,6 +55,7 @@ const ThemeProviderWrapper = inject(({ settingsStore }, props) => {
     theme: {
       ...settingsStore.theme,
       interfaceDirection: i18n.dir(),
+      fontFamily: getFontFamilyDependingOnLanguage(i18n.language),
     },
     currentColorScheme,
   };

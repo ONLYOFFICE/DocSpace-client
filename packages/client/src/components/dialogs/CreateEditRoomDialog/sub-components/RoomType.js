@@ -67,13 +67,13 @@ const StyledRoomType = styled.div`
       align-items: center;
       .choose_room-title-text {
         font-weight: 600;
-        font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+        font-size: 14px;
         line-height: 16px;
       }
     }
     .choose_room-description {
       font-weight: 400;
-      font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+      font-size: 12px;
       line-height: 16px;
     }
   }

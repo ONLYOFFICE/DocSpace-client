@@ -57,7 +57,7 @@ const StyledGalleryNoThumbnail = styled.div`
 `;
 
 const StyledGalleryFormDescription = styled.div`
-  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+  font-size: 13px;
   font-weight: 400;
   line-height: 20px;
   color: ${(props) => props.theme.infoPanel.gallery.descriptionColor};

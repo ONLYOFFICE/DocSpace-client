@@ -31,7 +31,7 @@ import { mobile } from "@docspace/shared/utils";
 
 const StyledModalDialog = styled(ModalDialog)`
   .heading {
-    font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
+    font-size: 21px;
   }
 
   .generate {

@@ -37,10 +37,11 @@ import { tablet } from "@docspace/shared/utils";
 
 const StyledBar = styled.div`
   border-radius: 6px;
-  padding: 8px 12px;
+  padding: 12px 16px;
   background-color: rgba(248, 249, 249, 1);
 
   @media ${tablet} {
+    padding: 8px 12px;
     margin-bottom: 16px;
   }
 `;

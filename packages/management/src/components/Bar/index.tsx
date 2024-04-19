@@ -24,76 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-
 import React from "react";
-import styled, { css } from "styled-components";
-import { useLocation, useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
+import { observer } from "mobx-react";
 
-import { IconButton } from "@docspace/shared/components/icon-button";
-import Headline from "@docspace/shared/components/headline/Headline";
+import { Text } from "@docspace/shared/components/text";
 
-import { getItemByLink } from "SRC_DIR/utils";
-import Bar from "SRC_DIR/components/Bar";
+import { useStore } from "SRC_DIR/store";
 import { tablet } from "@docspace/shared/utils";
 
-const StyledWrapper = styled.div`
-  display: flex;
-  gap: 16px;
-  align-items: center;
+const StyledBar = styled.div`
+  border-radius: 6px;
+  padding: 8px 12px;
+  background-color: rgba(248, 249, 249, 1);
 
   @media ${tablet} {
-    .bar {
-      display: none;
-    }
+    margin-bottom: 16px;
   }
 `;
 
-const StyledHeader = styled.div`
-  display: flex;
-  gap: 12px;
-  align-items: center;
+const Bar = () => {
+  const { t } = useTranslation(["Management"]);
+  let location = useLocation();
+  const { settingsStore } = useStore();
+  const { portals } = settingsStore;
 
-  .arrow-button {
-    svg {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
-    }
-  }
-`;
+  const barTitle =
+    portals.length > 1 ? t("SettingsForAll") : t("SettingsDisabled");
 
-const SectionHeaderContent = () => {
-  const { t } = useTranslation(["Settings", "Common"]);
+  const isSettings = location.pathname.includes("settings");
 
-  const location = useLocation();
-  const navigate = useNavigate();
-  const path = location.pathname;
-  const item = React.useMemo(() => getItemByLink(path), [path]);
-
-  const onBackToParent = () => {
-    navigate(-1);
-  };
-
+  if (!isSettings) return <></>;
   return (
-    <StyledWrapper>
-      <StyledHeader>
-        {!item?.isHeader && (
-          <IconButton
-            iconName={ArrowPathReactSvgUrl}
-            size={17}
-            isFill={true}
-            onClick={onBackToParent}
-            className="arrow-button"
-          />
-        )}
-        <Headline type="content" truncate={true}>
-          <div className="header">{t(item?.tKey)}</div>
-        </Headline>
-      </StyledHeader>
-      <Bar />
-    </StyledWrapper>
+    <StyledBar className="bar">
+      <Text fontSize="12px" fontWeight="400" lineHeight="16px">
+        {barTitle}
+      </Text>
+    </StyledBar>
   );
 };
 
-export default SectionHeaderContent;
+export default observer(Bar);

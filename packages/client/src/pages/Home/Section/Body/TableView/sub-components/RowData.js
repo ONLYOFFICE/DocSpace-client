@@ -69,10 +69,14 @@ const RowDataComponent = (props) => {
     <>
       {indexColumnIsEnabled && enableIndexing && (
         <TableCell
+          className={classNames(
+            selectionProp?.className,
+            "table-container_index-cell",
+          )}
           style={
             !indexColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
-          {...selectionProp}
+          value={value}
         >
           <IndexCell
             sideColor={theme.filesSection.tableView.row.sideColor}

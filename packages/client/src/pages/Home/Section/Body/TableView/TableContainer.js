@@ -70,6 +70,9 @@ const StyledTableContainer = styled(TableContainer)`
     .table-container_file-name-cell {
       ${fileNameCss}
     }
+    .table-container_index-cell {
+      ${fileNameCss}
+    }
 
     .table-container_row-context-menu-wrapper {
       ${contextCss}

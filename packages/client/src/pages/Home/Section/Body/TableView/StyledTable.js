@@ -126,6 +126,18 @@ const StyledTableRow = styled(TableRow)`
                   padding-left: 24px;
                 `}
         }
+        .table-container_index-cell {
+          ${(props) =>
+            props.theme.interfaceDirection === "rtl"
+              ? css`
+                  margin-right: -24px;
+                  padding-right: 24px;
+                `
+              : css`
+                  margin-left: -24px;
+                  padding-left: 24px;
+                `}
+        }
         .table-container_row-context-menu-wrapper {
           ${(props) =>
             props.theme.interfaceDirection === "rtl"

@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "O",
   "AboutCompanyTitle": "O tym programie",
   "AccessDenied": "Odmowa dostępu",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "Osiągnięto limit płatnych użytkowników.",
   "ReadInstructions": "Przeczytaj instrukcje",
   "ReadOnly": "Tylko do odczytu",
+  "Reconnect": "Połącz ponownie",
   "ReconnectStorage": "Podłącz pamięć ponownie",
   "RecoverDescribeYourProblemPlaceholder": "Opisz swój problem",
   "RecoverTitle": "Odzyskiwanie dostępu",

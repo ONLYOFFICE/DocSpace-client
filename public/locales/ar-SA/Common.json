@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "من نحن",
   "AboutCompanyTitle": "نبذة تعريفية عن البرنامج",
   "AccessDenied": "المحاولة مرفوضة",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "تم الوصول إلى الحد المدفوع للمستخدمين.",
   "ReadInstructions": "اقرأ التعليمات ",
   "ReadOnly": "للقراءة فقط",
+  "Reconnect": "أعد الاتصال",
   "ReconnectStorage": "أعد توصيل وحدة التخزين",
   "RecoverDescribeYourProblemPlaceholder": "اشرح مشكلتك",
   "RecoverTitle": "استعادة الوصول",

@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Hakkında",
   "AboutCompanyTitle": "Bu program hakkında",
   "AccessDenied": "Erişim engellendi",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "Ücretli kullanıcı sınırına ulaşıldı.",
   "ReadInstructions": "Talimatları okuyun",
   "ReadOnly": "Salt okunur",
+  "Reconnect": "Yeniden bağlan",
   "ReconnectStorage": "Depolamayı yeniden bağla",
   "RecoverDescribeYourProblemPlaceholder": "Sorununuzu tarif edin",
   "RecoverTitle": "Erişim kurtarma",

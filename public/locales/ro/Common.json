@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Informații",
   "AboutCompanyTitle": "Despre aplicația",
   "AccessDenied": "Acces refuzat ",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "S-a atins limita maximă de utilizatori cu plată.",
   "ReadInstructions": "Citiți instrucțiuni",
   "ReadOnly": "Doar în citire",
+  "Reconnect": "Reconectare",
   "ReconnectStorage": "Reconectați spaţiu de stocare",
   "RecoverDescribeYourProblemPlaceholder": "Descrieți problema",
   "RecoverTitle": "Restabilirea accesului",

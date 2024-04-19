@@ -911,7 +911,7 @@ import { checkingForUnfixedSize, getSubstring } from "./Table.utils";
 const defaultMinColumnSize = 110;
 const settingsSize = 24;
 
-const minSizeFirstColumn = 210;
+const minSizeFirstColumn = 110;
 
 class TableHeader extends React.Component<
   TableHeaderProps,

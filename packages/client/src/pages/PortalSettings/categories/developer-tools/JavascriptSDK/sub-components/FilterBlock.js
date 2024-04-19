@@ -382,7 +382,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
 
   return "id" in config ? (
     <>
-      <Label className="label" text={t("Files:Filter")} />
+      <Label className="label" text={t("FileFilter")} />
       <ToggleButton
         className="toggle"
         label={t("Files:ByAuthor")}
@@ -404,7 +404,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                 <TextInput
                   scale
                   onChange={onChangeAuthor}
-                  placeholder={t("Common:Search")}
+                  placeholder={t("SearchByNameEmail")}
                   value={author}
                   onFocus={openInviteInputPanel}
                   isAutoFocussed
@@ -457,7 +457,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
     </>
   ) : (
     <>
-      <Label className="label" text={t("Files:Filter")} />
+      <Label className="label" text={t("RoomFilter")} />
       <ToggleButton
         className="toggle"
         label={t("Common:Member")}
@@ -478,7 +478,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                 <TextInput
                   scale
                   onChange={onChangeAuthor}
-                  placeholder={t("Common:Search")}
+                  placeholder={t("SearchByNameEmail")}
                   value={author}
                   onFocus={openInviteInputPanel}
                   isAutoFocussed

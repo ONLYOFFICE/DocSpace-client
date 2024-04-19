@@ -335,7 +335,7 @@ class ManualBackup extends React.Component {
                 label={t("Common:Create")}
                 onClick={this.onMakeTemporaryBackup}
                 primary
-                isDisabled={!isMaxProgress}
+                isDisabled={!isMaxProgress || pageIsDisabled}
                 size={buttonSize}
               />
               {temporaryLink?.length > 0 && isMaxProgress && (

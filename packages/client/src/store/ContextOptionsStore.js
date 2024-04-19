@@ -1014,7 +1014,7 @@ class ContextOptionsStore {
       item.providerKey && item.id === item.rootFolderId;
 
     const isShareable = this.treeFoldersStore.isPersonalRoom
-      ? item.canShare || (!this.userStore.user?.isCollaborator && item.isFolder)
+      ? item.canShare || (item.isFolder && item.security.CreateRoomFrom)
       : false;
 
     const isMedia =

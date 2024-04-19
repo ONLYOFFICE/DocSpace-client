@@ -931,15 +931,13 @@ const SectionHeaderContent = (props) => {
       return getGroupContextOptions(t, currentGroup, false, true);
     }
 
-    const canShare = isPersonalRoom && !isCollaborator;
-
     return [
       {
         id: "header_option_sharing-settings",
         key: "sharing-settings",
         label: t("Files:Share"),
         onClick: onClickShare,
-        disabled: !canShare,
+        disabled: !selectedFolder.security.CreateRoomFrom,
         icon: ShareReactSvgUrl,
       },
       {
@@ -1067,8 +1065,7 @@ const SectionHeaderContent = (props) => {
         onClick: () => {
           onClickCreateRoom({ title: selectedFolder.title, isFolder: true });
         },
-        disabled:
-          isCollaborator || selectedFolder.rootFolderType !== FolderType.USER,
+        disabled: !selectedFolder.security.CreateRoomFrom,
       },
       {
         id: "option_leave-room",

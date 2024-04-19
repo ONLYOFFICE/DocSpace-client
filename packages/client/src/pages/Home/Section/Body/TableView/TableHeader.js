@@ -367,7 +367,7 @@ class FilesTableHeader extends React.Component {
         key: "Index",
         title: t("idx"),
         enable: this.props.indexColumnIsEnabled,
-        //     minWidth: 110,
+        defaultSize: 110,
       });
     }
 
@@ -453,7 +453,6 @@ class FilesTableHeader extends React.Component {
     } = this.props;
 
     if (
-      isVirtualDataRoom !== prevProps.isVirtualDataRoom ||
       isArchiveFolder !== prevProps.isArchiveFolder ||
       isRooms !== prevProps.isRooms ||
       isTrashFolder !== prevProps.isTrashFolder ||

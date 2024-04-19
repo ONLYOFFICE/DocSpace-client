@@ -388,6 +388,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
         label={t("Files:ByAuthor")}
         onChange={toggleAuthor}
         isChecked={isUserFilterSet}
+        isDisabled={!!config.requestToken}
       />
       {isUserFilterSet && (
         <>
@@ -434,6 +435,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
         label={t("Common:Type")}
         onChange={toggleFilterType}
         isChecked={isTypeFilterSet}
+        isDisabled={!!config.requestToken}
       />
       {isTypeFilterSet &&
         ("filterType" in config.filter ? (

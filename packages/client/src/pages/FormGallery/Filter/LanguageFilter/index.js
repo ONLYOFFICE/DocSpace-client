@@ -24,18 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import * as Styled from "./index.styled";
-
 import { withTranslation } from "react-i18next";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
-import { flagsIcons } from "@docspace/shared/utils/image-flags";
-import { convertToCulture } from "@docspace/shared/utils/common";
-import { isMobile } from "@docspace/shared/utils";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-
+import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
 const LanguageFilter = ({
   t,
   oformsFilter,
@@ -48,13 +43,8 @@ const LanguageFilter = ({
   languageFilterLoaded,
   oformFilesLoaded,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const onToggleDropdownIsOpen = () => setIsOpen(!isOpen);
-  const onCloseDropdown = () => setIsOpen(false);
-
-  const onFilterByLocale = async (newLocale) => {
-    await filterOformsByLocale(newLocale);
-    onCloseDropdown();
+  const onFilterByLocale = async (newLocale, icon) => {
+    await filterOformsByLocale(newLocale, icon);
 
     const [sectionScroll] = document.getElementsByClassName("section-scroll");
     sectionScroll.scrollTop = 0;
@@ -71,61 +61,13 @@ const LanguageFilter = ({
     return <RectangleSkeleton width="41px" height="32px" />;
 
   return (
-    <Styled.LanguageFilter>
-      <Styled.LanguangeComboBox
-        id="comboBoxLanguage"
-        tabIndex={1}
-        className={"combobox"}
-        opened={isOpen}
-        onClick={onToggleDropdownIsOpen}
-        onSelect={onCloseDropdown}
-        isDisabled={false}
-        showDisabledItems={true}
-        directionX={"right"}
-        directionY={"both"}
-        scaled={true}
-        size={"base"}
-        manualWidth={"41px"}
-        disableIconClick={false}
-        disableItemClick={false}
-        isDefaultMode={false}
-        fixedDirection={true}
-        advancedOptionsCount={5}
-        fillIcon={false}
-        withBlur={isMobile()}
-        options={[]}
-        selectedOption={{}}
-        advancedOptions={
-          <>
-            {oformLocales?.map((locale) => (
-              <Styled.LanguageFilterItem
-                className={"language-item"}
-                key={locale}
-                isSelected={locale === oformsFilter.locale}
-                icon={flagsIcons?.get(`${convertToCulture(locale)}.react.svg`)}
-                label={
-                  isMobile()
-                    ? t(`Common:Culture_${convertToCulture(locale)}`)
-                    : undefined
-                }
-                onClick={() => onFilterByLocale(locale)}
-                fillIcon={false}
-              />
-            ))}
-          </>
-        }
-      >
-        <Styled.LanguageFilterSelectedItem
-          key={oformsFilter.locale}
-          icon={flagsIcons?.get(
-            `${convertToCulture(
-              oformsFilter.locale || defaultOformLocale,
-            )}.react.svg`,
-          )}
-          fillIcon={false}
-        />
-      </Styled.LanguangeComboBox>
-    </Styled.LanguageFilter>
+    <LanguageCombobox
+      cultures={oformLocales}
+      isAuthenticated
+      onSelectLanguage={onFilterByLocale}
+      selectedCulture={{ key: oformsFilter.locale, icon: oformsFilter.icon }}
+      id="comboBoxLanguage"
+    />
   );
 };
 

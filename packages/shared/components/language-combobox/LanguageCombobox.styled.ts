@@ -23,25 +23,13 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
-import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import styled, { css } from "styled-components";
-import Base from "@docspace/shared/themes/base";
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { mobile } from "@docspace/shared/utils";
 
-export const LanguageFilter = styled.div`
-  width: 41px;
-  box-sizing: border-box;
+import { ComboBox } from "../combobox";
+import { DropDownItem } from "../drop-down-item";
+import { mobile } from "../../utils";
 
-  .dropdown-container {
-    width: 100%;
-    box-sizing: border-box;
-    margin-top: 4px;
-  }
-`;
-
-export const LanguangeComboBox = styled(ComboBox)`
+export const LanguageComboBox = styled(ComboBox)`
   width: 41px;
   padding: 0;
   box-sizing: border-box;
@@ -72,7 +60,7 @@ export const LanguangeComboBox = styled(ComboBox)`
   }
 `;
 
-export const LanguageFilterSelectedItem = styled(DropDownItem)`
+export const SelectedItemComponent = styled(DropDownItem)`
   box-sizing: border-box;
 
   display: flex;
@@ -90,8 +78,7 @@ export const LanguageFilterSelectedItem = styled(DropDownItem)`
     }
   }
 `;
-
-export const LanguageFilterItem = styled(DropDownItem)`
+export const ItemComponent = styled(DropDownItem)`
   height: 32px;
   width: 41px;
   box-sizing: border-box;
@@ -121,5 +108,13 @@ export const LanguageFilterItem = styled(DropDownItem)`
     gap: 8px;
   }
 `;
+export const WrapperComponent = styled.div`
+  width: 41px;
+  box-sizing: border-box;
 
-LanguageFilterItem.defaultProps = { theme: Base };
+  .dropdown-container {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 4px;
+  }
+`;

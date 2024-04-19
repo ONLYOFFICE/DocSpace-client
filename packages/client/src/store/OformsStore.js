@@ -41,10 +41,14 @@ import {
 } from "@docspace/shared/api/oforms";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { convertToLanguage } from "@docspace/shared/utils/common";
+import {
+  convertToCulture,
+  convertToLanguage,
+} from "@docspace/shared/utils/common";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie } from "@docspace/shared/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { flagsIcons } from "@docspace/shared/utils/image-flags";
 
 const myDocumentsFolderId = 2;
 
@@ -111,7 +115,11 @@ class OformsStore {
     this.infoPanelStore.setInfoPanelSelection(gallerySelected);
   };
 
-  setOformLocales = (oformLocales) => (this.oformLocales = oformLocales);
+  setOformLocales = (oformLocales) => {
+    const convertedLocales = oformLocales.map((item) => convertToCulture(item));
+
+    this.oformLocales = convertedLocales;
+  };
 
   setFilterOformsByLocaleIsLoading = (filterOformsByLocaleIsLoading) => {
     this.filterOformsByLocaleIsLoading = filterOformsByLocaleIsLoading;
@@ -316,7 +324,7 @@ class OformsStore {
     runInAction(() => this.fetchOforms(newOformsFilter));
   };
 
-  filterOformsByLocale = async (locale) => {
+  filterOformsByLocale = async (locale, icon) => {
     if (!locale) return;
 
     if (locale !== this.oformsFilter.locale)
@@ -328,6 +336,7 @@ class OformsStore {
     this.oformsFilter.locale = locale;
     this.oformsFilter.categorizeBy = "";
     this.oformsFilter.categoryId = "";
+    this.oformsFilter.icon = icon;
     const newOformsFilter = this.oformsFilter.clone();
 
     runInAction(() => this.fetchOforms(newOformsFilter));

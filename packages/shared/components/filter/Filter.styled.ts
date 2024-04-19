@@ -598,12 +598,6 @@ const StyledSortButton = styled.div<{ viewAs: TViewAs; isDesc: boolean }>`
       min-width: 200px;
       margin-top: 3px;
 
-      ${isMobile &&
-      isIOS &&
-      css`
-        ${({ theme }) => theme.interfaceDirection === "ltr" && `right: 48px;`}
-      `}
-
       .view-selector-item {
         display: flex;
         align-items: center;

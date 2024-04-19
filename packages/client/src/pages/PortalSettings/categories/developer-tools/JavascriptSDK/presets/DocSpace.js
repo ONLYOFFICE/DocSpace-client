@@ -32,12 +32,9 @@ import { TextInput } from "@docspace/shared/components/text-input";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
-import { ComboBox } from "@docspace/shared/components/combobox";
 import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
-
-import { isTablet, isMobile } from "@docspace/shared/utils/device";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
 import CodeBlock from "../sub-components/CodeBlock";
@@ -45,16 +42,16 @@ import { Button } from "@docspace/shared/components/button";
 
 const showPreviewThreshold = 720;
 
+import { WidthSetter } from "../sub-components/WidthSetter";
+import { HeightSetter } from "../sub-components/HeightSetter";
+import { FrameIdSetter } from "../sub-components/FrameIdSetter";
+import { PresetWrapper } from "../sub-components/PresetWrapper";
+
 import {
-  SDKContainer,
   Controls,
-  CategoryHeader,
   CategorySubHeader,
-  CategoryDescription,
-  ControlsGroup,
   Frame,
   Container,
-  RowContainer,
   Preview,
   GetCodeButtonWrapper,
   ControlsSection,
@@ -72,20 +69,20 @@ const DocSpace = (props) => {
     { key: "percent", label: "%", default: true },
     { key: "pixel", label: "px" },
   ];
-
-  const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
-  const [heightDimension, setHeightDimension] = useState(dataDimensions[0]);
-  const [width, setWidth] = useState("100");
-  const [height, setHeight] = useState("100");
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold,
   );
 
+  const defaultWidthDimension = dataDimensions[0],
+    defaultHeightDimension = dataDimensions[0],
+    defaultWidth = "100",
+    defaultHeight = "100";
+
   const [config, setConfig] = useState({
     mode: "manager",
-    width: `${width}${widthDimension.label}`,
-    height: `${height}${heightDimension.label}`,
+    width: `${defaultWidth}${defaultWidthDimension.label}`,
+    height: `${defaultHeight}${defaultHeightDimension.label}`,
     frameId: "ds-frame",
     showHeader: true,
     showTitle: true,
@@ -139,44 +136,6 @@ const DocSpace = (props) => {
     loadFrame();
   };
 
-  const onChangeWidth = (e) => {
-    setConfig((config) => {
-      return { ...config, width: `${e.target.value}${widthDimension.label}` };
-    });
-
-    setWidth(e.target.value);
-  };
-
-  const onChangeHeight = (e) => {
-    setConfig((config) => {
-      return { ...config, height: `${e.target.value}${heightDimension.label}` };
-    });
-
-    setHeight(e.target.value);
-  };
-
-  const onChangeFrameId = (e) => {
-    setConfig((config) => {
-      return { ...config, frameId: e.target.value };
-    });
-  };
-
-  const onChangeWidthDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, width: `${width}${item.label}` };
-    });
-
-    setWidthDimension(item);
-  };
-
-  const onChangeHeightDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, height: `${height}${item.label}` };
-    });
-
-    setHeightDimension(item);
-  };
-
   const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
 
   const closeGetCodeModal = () => setIsGetCodeDialogOpened(false);
@@ -198,14 +157,8 @@ const DocSpace = (props) => {
 
   const preview = (
     <Frame
-      width={
-        widthDimension.label === "px" ? width + widthDimension.label : undefined
-      }
-      height={
-        heightDimension.label === "px"
-          ? height + heightDimension.label
-          : undefined
-      }
+      width={config.width.includes("px") ? config.width : undefined}
+      height={config.height.includes("px") ? config.height : undefined}
       targetId={frameId}
     >
       <Box id={frameId}></Box>
@@ -245,11 +198,10 @@ const DocSpace = (props) => {
   ];
 
   return (
-    <SDKContainer>
-      <CategoryDescription>
-        <Text className="sdk-description">{t("DocspaceDescription")}</Text>
-      </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleDocSpace")}</CategoryHeader>
+    <PresetWrapper
+      description={t("DocspaceDescription")}
+      header={t("CreateSampleDocSpace")}
+    >
       <Container>
         {showPreview && (
           <Preview>
@@ -259,58 +211,25 @@ const DocSpace = (props) => {
         <Controls>
           <ControlsSection>
             <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
-            <ControlsGroup>
-              <Label className="label" text={t("EmbeddingPanel:Width")} />
-              <RowContainer combo>
-                <TextInput
-                  onChange={onChangeWidth}
-                  placeholder={t("EnterWidth")}
-                  value={width}
-                  tabIndex={2}
-                />
-                <ComboBox
-                  size="content"
-                  scaled={false}
-                  scaledOptions={true}
-                  onSelect={onChangeWidthDimension}
-                  options={dataDimensions}
-                  selectedOption={widthDimension}
-                  displaySelectedOption
-                  directionY="bottom"
-                />
-              </RowContainer>
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("EmbeddingPanel:Height")} />
-              <RowContainer combo>
-                <TextInput
-                  onChange={onChangeHeight}
-                  placeholder={t("EnterHeight")}
-                  value={height}
-                  tabIndex={3}
-                />
-                <ComboBox
-                  size="content"
-                  scaled={false}
-                  scaledOptions={true}
-                  onSelect={onChangeHeightDimension}
-                  options={dataDimensions}
-                  selectedOption={heightDimension}
-                  displaySelectedOption
-                  directionY="bottom"
-                />
-              </RowContainer>
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("FrameId")} />
-              <TextInput
-                scale={true}
-                onChange={onChangeFrameId}
-                placeholder={t("EnterId")}
-                value={config.frameId}
-                tabIndex={4}
-              />
-            </ControlsGroup>
+            <WidthSetter
+              t={t}
+              setConfig={setConfig}
+              dataDimensions={dataDimensions}
+              defaultDimension={defaultWidthDimension}
+              defaultWidth={defaultWidth}
+            />
+            <HeightSetter
+              t={t}
+              setConfig={setConfig}
+              dataDimensions={dataDimensions}
+              defaultDimension={defaultHeightDimension}
+              defaultHeight={defaultHeight}
+            />
+            <FrameIdSetter
+              t={t}
+              defaultFrameId={config.frameId}
+              setConfig={setConfig}
+            />
           </ControlsSection>
         </Controls>
       </Container>
@@ -336,7 +255,7 @@ const DocSpace = (props) => {
           />
         </>
       )}
-    </SDKContainer>
+    </PresetWrapper>
   );
 };
 

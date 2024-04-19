@@ -261,6 +261,10 @@ const StyledContextMenu = styled.div<{
 
     -webkit-touch-callout: none;
 
+    @media ${tablet} {
+      padding: 0 16px;
+    }
+
     &:hover {
       background-color: ${(props) =>
         props.noHover

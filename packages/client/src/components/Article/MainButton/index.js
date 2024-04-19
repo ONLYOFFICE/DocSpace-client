@@ -529,6 +529,29 @@ const ArticleMainButtonContent = (props) => {
       key: "pptx",
     };
 
+    const uploadActions = [
+      {
+        id: "actions_upload-files",
+        className: "main-button_drop-down",
+        icon: ActionsUploadReactSvgUrl,
+        label: t("UploadFiles"),
+        onClick: onUploadFileClick,
+        key: "upload-files",
+      },
+    ];
+
+    if (isDesktop()) {
+      uploadActions.push({
+        id: "actions_upload-folders",
+        className: "main-button_drop-down",
+        icon: ActionsUploadReactSvgUrl,
+        label: t("UploadFolder"),
+        disabled: isPrivacy,
+        onClick: onUploadFolderClick,
+        key: "upload-folder",
+      });
+    }
+
     if (
       currentRoomType === RoomsType.FormRoom ||
       (parentRoomType === FolderType.FormRoom && isFolder)
@@ -656,29 +679,6 @@ const ArticleMainButtonContent = (props) => {
           ...formActions,
           createNewFolder,
         ];
-
-    const uploadActions = [
-      {
-        id: "actions_upload-files",
-        className: "main-button_drop-down",
-        icon: ActionsUploadReactSvgUrl,
-        label: t("UploadFiles"),
-        onClick: onUploadFileClick,
-        key: "upload-files",
-      },
-    ];
-
-    if (isDesktop()) {
-      uploadActions.push({
-        id: "actions_upload-folders",
-        className: "main-button_drop-down",
-        icon: ActionsUploadReactSvgUrl,
-        label: t("UploadFolder"),
-        disabled: isPrivacy,
-        onClick: onUploadFolderClick,
-        key: "upload-folder",
-      });
-    }
 
     if (pluginItems.length > 0) {
       // menuModel.push({

@@ -60,7 +60,7 @@ const LoadingWrapper = styled.div<{ color?: string; size: string }>`
 
   color: ${(props) => props.color};
 
-  font-size: ${(props) => props.theme.getCorrectFontSize(props.size)};
+  font-size: ${(props) => props.size};
 `;
 
 const LoadingLabel = styled.span`

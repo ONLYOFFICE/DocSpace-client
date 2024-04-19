@@ -85,6 +85,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     setConvertPasswordDialogVisible,
     version,
     pagesWithoutNavMenu,
+    isFrame,
   } = rest;
 
   const theme = useTheme();
@@ -428,13 +429,13 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       {toast}
       {/* <ReactSmartBanner t={t} ready={ready} /> */}
       {withoutNavMenu ? <></> : <NavMenu />}
-      {currentDeviceType === DeviceType.mobile && <MainBar />}
+      {currentDeviceType === DeviceType.mobile && !isFrame && <MainBar />}
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />
 
       <Main isDesktop={isDesktop}>
-        {currentDeviceType !== DeviceType.mobile && <MainBar />}
+        {currentDeviceType !== DeviceType.mobile && !isFrame && <MainBar />}
         <div className="main-container">
           <Outlet />
         </div>
@@ -540,6 +541,7 @@ const ShellWrapper = inject(
       setConvertPasswordDialogVisible,
       version,
       pagesWithoutNavMenu,
+      isFrame,
     };
   },
 )(observer(Shell));

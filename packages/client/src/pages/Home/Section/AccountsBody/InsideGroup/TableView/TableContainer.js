@@ -168,7 +168,11 @@ const Table = ({
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
-  return (
+  const isEmptyPage = !insideGroupIsLoading && peopleList.length === 0;
+
+  return isEmptyPage ? (
+    <EmptyScreen />
+  ) : (
     <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
       <TableHeader
         columnStorageName={columnStorageName}

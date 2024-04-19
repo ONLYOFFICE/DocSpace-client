@@ -435,7 +435,7 @@ const StyledTrashWarning = styled.div`
     color: ${({ theme }) => theme.section.header.trashErasureLabelText};
 
     font-weight: 400;
-    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+    font-size: 12px;
     line-height: 16px;
 
     width: 100%;
@@ -486,7 +486,7 @@ const StyledTextContainer = styled.div<{
 
 const StyledHeading = styled(Heading)<{ isRootFolderTitle: boolean }>`
   font-weight: 700;
-  font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+  font-size: 18px;
   line-height: 24px;
 
   margin: 0;
@@ -496,12 +496,12 @@ const StyledHeading = styled(Heading)<{ isRootFolderTitle: boolean }>`
     `color: ${props.theme.navigation.rootFolderTitleColor}`};
 
   @media ${tablet} {
-    font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
+    font-size: 21px;
     line-height: 28px;
   }
 
   @media ${mobile} {
-    font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+    font-size: 18px;
     line-height: 24px;
   }
 `;

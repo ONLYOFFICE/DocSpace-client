@@ -39,7 +39,7 @@ const StyledRowContent = styled(RowContent)`
   }
 
   .session-browser {
-    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    font-size: 14px;
     font-weight: 600;
     color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
   }

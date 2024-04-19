@@ -60,7 +60,7 @@ const StyledWrapper = styled.div`
     margin: 10px 0 0;
   }
   .terminate-all-sessions {
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
     font-weight: 600;
   }
   .icon-button {

@@ -167,7 +167,8 @@ const ActiveSessions = ({
         {t("Profile:ActiveSessions")}
       </Text>
 
-      <Text className="auto-delete-title">{t("Profile:AutoDeleteTitle")}</Text>
+      {/* TODO: Uncomment after fix on backend */}
+      {/* <Text className="auto-delete-title">{t("Profile:AutoDeleteTitle")}</Text> */}
 
       <Box className="terminate-session-container">
         <Link

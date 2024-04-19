@@ -47,6 +47,7 @@ const StyledRowContent = styled(RowContent)`
 
 const SessionsRowContent = ({
   id,
+  standalone,
   platform,
   browser,
   date,
@@ -69,10 +70,12 @@ const SessionsRowContent = ({
         <IconButton size={12} iconName={TickSvgUrl} color="#20D21F" />
       )}
       <Text truncate>{convertTime(date)}</Text>
-      <Text truncate>
-        {country}
-        {` ${city}`}
-      </Text>
+      {!standalone && (
+        <Text truncate>
+          {country}
+          {` ${city}`}
+        </Text>
+      )}
       <Text truncate containerWidth="160px">
         {ip}
       </Text>

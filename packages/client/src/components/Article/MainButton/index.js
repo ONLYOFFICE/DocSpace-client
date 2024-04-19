@@ -61,6 +61,7 @@ import styled, { css } from "styled-components";
 import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { getCorrectFourValuesStyle } from "@docspace/shared/utils";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
+import { isDesktop } from "@docspace/shared/utils";
 
 const StyledButton = styled(Button)`
   font-weight: 700;
@@ -485,7 +486,10 @@ const ArticleMainButtonContent = (props) => {
         onClick: onUploadFileClick,
         key: "upload-files",
       },
-      {
+    ];
+
+    if (isDesktop()) {
+      uploadActions.push({
         id: "actions_upload-folders",
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
@@ -493,8 +497,8 @@ const ArticleMainButtonContent = (props) => {
         disabled: isPrivacy,
         onClick: onUploadFolderClick,
         key: "upload-folder",
-      },
-    ];
+      });
+    }
 
     if (pluginItems.length > 0) {
       // menuModel.push({

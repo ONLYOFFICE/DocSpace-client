@@ -1,0 +1,8 @@
+{
+  "PORT": "5015",
+  "HOSTNAME": "0.0.0.0",
+  "app": {
+    "appsettings": "../../../../buildtools/config"
+  }
+}
+

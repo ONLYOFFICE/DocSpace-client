@@ -39,6 +39,7 @@ import {
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { RowContent } from "@docspace/shared/components/row-content";
+import { RoomsType } from "@docspace/shared/enums";
 
 import withContent from "../../../../../HOCs/withContent";
 
@@ -216,6 +217,7 @@ const FilesRowContent = ({
   isDefaultRoomsQuotaSet,
   isStatisticsAvailable,
   showStorageInfo,
+  isVirtualDataRoom,
 }) => {
   const {
     contentLength,
@@ -230,6 +232,7 @@ const FilesRowContent = ({
     tags,
     quotaLimit,
     usedSpace,
+    order,
   } = item;
 
   const contentComponent = () => {
@@ -323,6 +326,18 @@ const FilesRowContent = ({
           {!isRoom && !isRooms && quickButtons}
         </div>
 
+        {isVirtualDataRoom && (
+          <Text
+            containerMinWidth="200px"
+            containerWidth="15%"
+            fontSize="12px"
+            fontWeight={400}
+            className="row_update-text"
+          >
+            {`idx ${order}`}
+          </Text>
+        )}
+
         <Text
           containerMinWidth="200px"
           containerWidth="15%"
@@ -350,13 +365,25 @@ const FilesRowContent = ({
 };
 
 export default inject(
-  ({ currentQuotaStore, settingsStore, treeFoldersStore, filesStore }) => {
+  ({
+    currentQuotaStore,
+    settingsStore,
+    treeFoldersStore,
+    filesStore,
+    selectedFolderStore,
+  }) => {
     const { filter, roomsFilter } = filesStore;
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
       treeFoldersStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
     const filterSortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
+
+    const { indexing, roomType } = selectedFolderStore;
+
+    const isVirtualDataRoom =
+      window.location.pathname.includes("rooms/shared") &&
+      roomType === RoomsType.VirtualDataRoom;
 
     const { isDefaultRoomsQuotaSet, isStatisticsAvailable, showStorageInfo } =
       currentQuotaStore;
@@ -367,6 +394,7 @@ export default inject(
       isDefaultRoomsQuotaSet,
       isStatisticsAvailable,
       showStorageInfo,
+      isVirtualDataRoom,
     };
   },
 )(

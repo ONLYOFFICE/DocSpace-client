@@ -64,7 +64,7 @@ const withHotkeys = (Component) => {
       openItem,
       selectAll,
       activateHotkeys,
-      backToParentFolder,
+      onClickBack,
 
       uploadFile,
       enabledHotkeys,
@@ -247,7 +247,7 @@ const withHotkeys = (Component) => {
     useHotkeys("Enter", () => openItem(t), hotkeysFilter);
 
     //Back to parent folder
-    useHotkeys("Backspace", backToParentFolder, hotkeysFilter);
+    useHotkeys("Backspace", onClickBack, hotkeysFilter);
 
     //Change viewAs
     useHotkeys(
@@ -456,7 +456,7 @@ const withHotkeys = (Component) => {
       const {
         isAvailableOption,
         deleteAction,
-        backToParentFolder,
+        onClickBack,
         setFavoriteAction,
         deleteRooms,
         archiveRooms,
@@ -506,7 +506,7 @@ const withHotkeys = (Component) => {
         openItem,
         selectAll,
         activateHotkeys,
-        backToParentFolder,
+        onClickBack,
 
         uploadFile,
         enabledHotkeys,

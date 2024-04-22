@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "소개",
   "AboutCompanyTitle": "프로그램 소개",
   "AccessDenied": "액세스가 거부되었습니다",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "유료 사용자 한도에 도달했습니다. ",
   "ReadInstructions": "설명 보기",
   "ReadOnly": "읽기 전용",
+  "Reconnect": "다시 연결",
   "ReconnectStorage": "스토리지 다시 연결",
   "RecoverDescribeYourProblemPlaceholder": "겪고 계신 문제를 설명해주세요",
   "RecoverTitle": "액세스 복원",

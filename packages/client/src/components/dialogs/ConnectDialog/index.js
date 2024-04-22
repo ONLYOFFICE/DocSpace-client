@@ -280,7 +280,7 @@ const PureConnectDialogContainer = (props) => {
             isVertical
           >
             <Button
-              label={t("Reconnect")}
+              label={t("Common:Reconnect")}
               size="normal"
               onClick={onReconnect}
               scale

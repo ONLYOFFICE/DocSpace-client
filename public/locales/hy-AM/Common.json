@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Մասին",
   "AboutCompanyTitle": "Ծրագրի մասին",
   "AccessDenied": "Մուտքն արգելված է",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "Վճարովի օգտագործողի սահմանաչափը հասել է:",
   "ReadInstructions": "Կարդալ հրահանգները",
   "ReadOnly": "Միայն կարդալու համար",
+  "Reconnect": "Վերակապակցել",
   "ReconnectStorage": "Կրկին միացրեք պահեստը",
   "RecoverDescribeYourProblemPlaceholder": "Նկարագրեք ձեր խնդիրը",
   "RecoverTitle": "Մատչման վերականգնում",

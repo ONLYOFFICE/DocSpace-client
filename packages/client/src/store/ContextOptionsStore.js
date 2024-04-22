@@ -1228,19 +1228,19 @@ class ContextOptionsStore {
         disabled: !item.startFilling,
       },
       {
-        id: "option_edit-pdf",
-        key: "edit-pdf",
-        label: t("Common:EditPDFForm"),
-        icon: AccessEditReactSvgUrl,
-        onClick: () => this.onOpenPDFEditDialog(item.id),
-        disabled: !item.startFilling,
-      },
-      {
         id: "option_open-pdf",
         key: "open-pdf",
         label: t("Open"),
         icon: EyeReactSvgUrl,
         onClick: () => this.gotoDocEditor(false, item),
+        disabled: false,
+      },
+      {
+        id: "option_edit-pdf",
+        key: "edit-pdf",
+        label: t("Common:EditPDFForm"),
+        icon: AccessEditReactSvgUrl,
+        onClick: () => this.onOpenPDFEditDialog(item.id),
         disabled: false,
       },
       {

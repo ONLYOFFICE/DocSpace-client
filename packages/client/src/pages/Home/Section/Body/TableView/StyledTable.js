@@ -114,18 +114,7 @@ const StyledTableRow = styled(TableRow)`
           background: ${(props) =>
             `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
         }
-        .table-container_file-name-cell {
-          ${(props) =>
-            props.theme.interfaceDirection === "rtl"
-              ? css`
-                  margin-right: -24px;
-                  padding-right: 24px;
-                `
-              : css`
-                  margin-left: -24px;
-                  padding-left: 24px;
-                `}
-        }
+        .table-container_file-name-cell,
         .table-container_index-cell {
           ${(props) =>
             props.theme.interfaceDirection === "rtl"
@@ -138,6 +127,7 @@ const StyledTableRow = styled(TableRow)`
                   padding-left: 24px;
                 `}
         }
+
         .table-container_row-context-menu-wrapper {
           ${(props) =>
             props.theme.interfaceDirection === "rtl"
@@ -231,7 +221,8 @@ const StyledTableRow = styled(TableRow)`
     width: 12px;
   }
 
-  .table-container_file-name-cell {
+  .table-container_file-name-cell,
+  .table-container_index-cell {
     ${(props) =>
       props.showHotkeyBorder &&
       css`
@@ -310,7 +301,8 @@ const StyledTableRow = styled(TableRow)`
         }
       }
 
-      .table-container_file-name-cell {
+      .table-container_file-name-cell,
+      .table-container_index-cell {
         ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`

@@ -144,7 +144,7 @@ const AdditionalResources = (props) => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
-  }, []);
+  }, [isMobileView]);
 
   const checkWidth = () => {
     const url = isManagement()

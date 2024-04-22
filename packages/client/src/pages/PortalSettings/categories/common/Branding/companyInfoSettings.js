@@ -96,6 +96,7 @@ const CompanyInfoSettings = (props) => {
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
+  const isMobileView = deviceType === DeviceType.mobile;
 
   const defaultCompanySettingsError = {
     hasErrorAddress: false,
@@ -128,11 +129,9 @@ const CompanyInfoSettings = (props) => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
-  }, []);
+  }, [isMobileView]);
 
   const checkWidth = () => {
-    const isMobileView = deviceType === DeviceType.mobile;
-
     const url = isManagement()
       ? "/branding"
       : "portal-settings/customization/branding";

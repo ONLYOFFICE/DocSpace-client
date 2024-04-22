@@ -93,12 +93,17 @@ const WhiteLabel = (props) => {
   useEffect(() => {
     init();
     checkWidth();
-    window.addEventListener("resize", checkWidth);
     return () => {
-      window.removeEventListener("resize", checkWidth);
       resetIsInit();
     };
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", checkWidth);
+    return () => {
+      window.removeEventListener("resize", checkWidth);
+    };
+  }, [isMobileView]);
 
   const checkWidth = () => {
     const url = isManagement()

@@ -98,7 +98,7 @@ const EditRoomEvent = ({
     },
     isPrivate: false,
     icon: {
-      uploadedFile: item.logo.large,
+      uploadedFile: item.logo.original,
       tmpFile: "",
       x: 0.5,
       y: 0.5,
@@ -192,7 +192,7 @@ const EditRoomEvent = ({
       if (roomParams.icon.uploadedFile) {
         updateRoom(item, {
           ...room,
-          logo: { big: item.logo.large },
+          logo: { big: item.logo.original },
         });
 
         addActiveItems(null, [room.id]);
@@ -268,7 +268,7 @@ const EditRoomEvent = ({
   }, []);
 
   useEffect(() => {
-    const logo = item?.logo?.large ? item.logo.large : "";
+    const logo = item?.logo?.original ? item.logo.original : "";
     if (logo) {
       fetchLogoAction(logo);
     }

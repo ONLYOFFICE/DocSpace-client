@@ -89,7 +89,7 @@ const PresetTile = (props) => {
         <Text fontSize="16px" lineHeight="22px" fontWeight={700}>
           {title}
         </Text>
-        <img src={image} alt={title} />
+        <img height={180} width={310} src={image} alt={title} />
         <Text lineHeight="20px">{description}</Text>
       </div>
       <Button

@@ -367,7 +367,7 @@ class FilesTableHeader extends React.Component {
         key: "Index",
         title: t("idx"),
         enable: this.props.indexColumnIsEnabled,
-        defaultSize: 110,
+        // defaultSize: 110,
       });
     }
 

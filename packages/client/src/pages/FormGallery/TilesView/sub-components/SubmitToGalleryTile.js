@@ -63,12 +63,12 @@ export const StyledSubmitToGalleryTile = styled.div`
     .title {
       color: ${({ currentColorScheme }) => currentColorScheme.main?.accent};
       font-weight: 600;
-      font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+      font-size: 14px;
       line-height: 16px;
     }
     .body {
       font-weight: 400;
-      font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+      font-size: 12px;
       line-height: 16px;
       color: ${({ theme }) => theme.oformGallery.submitToGalleryTile.bodyText};
     }

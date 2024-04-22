@@ -71,7 +71,7 @@ const StyledFolderInput = styled.div`
   .room_title {
     padding: 5px 0px 5px 0px;
     font-weight: 400;
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
     line-height: 20px;
   }
 

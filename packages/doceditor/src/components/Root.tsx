@@ -50,6 +50,7 @@ import Editor from "./Editor";
 import SelectFileDialog from "./SelectFileDialog";
 import SelectFolderDialog from "./SelectFolderDialog";
 import SharingDialog from "./ShareDialog";
+import { calculateAsideHeight } from "@/utils";
 
 const Root = ({
   settings,
@@ -136,6 +137,19 @@ const Root = ({
       throw new Error(error.message);
     }
   }, [error, isSkipError]);
+
+  React.useEffect(() => {
+    if (
+      isSharingDialogVisible ||
+      isVisibleSelectFolderDialog ||
+      selectFileDialogVisible
+    )
+      calculateAsideHeight();
+  }, [
+    isSharingDialogVisible,
+    isVisibleSelectFolderDialog,
+    selectFileDialogVisible,
+  ]);
 
   return !fileId ? (
     <AppLoader />

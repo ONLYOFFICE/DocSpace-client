@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "About",
   "AboutCompanyTitle": "About this program",
   "AccessDenied": "Access denied",
@@ -90,6 +90,7 @@
   "Culture_si": "සිංහල (ශ්‍රී ලංකාව)",
   "Culture_sk": "Slovenčina (Slovensko)",
   "Culture_sl": "Slovensko (Slovenija)",
+  "Culture_sr-Latn-RS": "Srpski (Srbija)",
   "Culture_tr": "Türkçe (Türkiye)",
   "Culture_uk-UA": "Українська (Україна)",
   "Culture_vi": "Tiếng Việt (Việt Nam)",
@@ -314,6 +315,7 @@
   "QuotaPaidUserLimitError": "The paid user limit has been reached.",
   "ReadInstructions": "Read instructions",
   "ReadOnly": "Read only",
+  "Reconnect": "Reconnect",
   "ReconnectStorage": "Reconnect storage",
   "RecoverDescribeYourProblemPlaceholder": "Describe your problem",
   "RecoverTitle": "Access recovery",
@@ -444,9 +446,9 @@
   "Yes": "Yes",
   "Yesterday": "Yesterday",
   "WED": "WED",
-  "Days": "Days",
   "Months": "Months",
   "Years": "Years",
   "MoveToTrash": "Move to trash",
-  "DeletePermanently": "Delete permanently"
+  "DeletePermanently": "Delete permanently",
+  "You": "You"
 }

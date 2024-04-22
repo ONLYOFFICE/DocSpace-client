@@ -418,11 +418,7 @@ class ProfileActionsStore {
       },
     ];
 
-    if (
-      !window.navigator.userAgent.includes("ZoomWebKit") &&
-      !window.navigator.userAgent.includes("ZoomApps") &&
-      showFrameSignOut
-    ) {
+    if (showFrameSignOut) {
       actions.push({
         key: "user-menu-logout",
         icon: LogoutReactSvgUrl,

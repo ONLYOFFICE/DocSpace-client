@@ -45,8 +45,7 @@ const StyledDropdown = styled.div<{
   font-family: ${(props) => props.theme.fontFamily};
   font-style: normal;
   font-weight: ${(props) => props.theme.dropDown.fontWeight};
-  font-size: ${(props) =>
-    props.theme.getCorrectFontSize(props.theme.dropDown.fontSize)};
+  font-size: ${(props) => props.theme.dropDown.fontSize};
   ${(props) =>
     props.maxHeight &&
     `

@@ -6,7 +6,7 @@ on:
      - develop
     paths:
       - 'public/**'
-      - 'packages/components/**'
+      - 'packages/shared/.storybook/**'
 
 jobs:
   build:
@@ -20,7 +20,7 @@ jobs:
       
       - uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '20.x'
       - run: yarn
       - run: yarn storybook-build
       
@@ -33,7 +33,7 @@ jobs:
 
       - name: Upload storybook files
         run: | 
-             aws s3 cp ./packages/components/storybook-static/ ${{ secrets.AWS_BUCKER_URL }}/ \
+             aws s3 cp ./packages/shared/storybook-static/ ${{ secrets.AWS_BUCKER_URL }}/ \
              --recursive 
      
       - name: Invalidate AWS CLOUDFRONT cache

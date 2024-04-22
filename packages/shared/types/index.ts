@@ -128,6 +128,12 @@ declare global {
         value: unknown,
         callback: unknown,
       ) => void;
+      getViewportSettings?: () => {
+        widgetType: "window" | "tab";
+        captionHeight: number;
+      };
+      onViewportSettingsChanged?: VoidFunction;
+      attachEvent?: (listener: string, callback: VoidFunction) => void;
     };
     cloudCryptoCommand: (
       type: string,

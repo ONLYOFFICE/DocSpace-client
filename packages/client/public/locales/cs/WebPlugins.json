@@ -11,5 +11,6 @@
   "PluginSamples": "Ukázky zásuvných modulů",
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Pomocí sady Plugin SDK můžete rozšířit funkčnost svého systému DocSpace, připojit služby třetích stran nebo vylepšit stávající uživatelské prostředí. Zde najdete ukázky zásuvných modulů se zdrojovým kódem, které jsou k dispozici na GitHubu.",
-  "PluginSDKInstruction": "Kliknutím na tlačítko získáte podrobný návod, jak vytvořit vlastní zásuvné moduly."
+  "PluginSDKInstruction": "Kliknutím na tlačítko získáte podrobný návod, jak vytvořit vlastní zásuvné moduly.",
+  "UploadDescription": "Můžete přidat zásuvné moduly a rozšířit tak funkčnost aplikace DocSpace o další funkce. Klepněte na tlačítko Nahrát zásuvný modul nebo vhoďte soubor do archivu ZIP."
 }

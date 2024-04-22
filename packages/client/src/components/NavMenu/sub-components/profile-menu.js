@@ -106,7 +106,7 @@ const StyledCrossIcon = styled(CrossIcon)`
 StyledCrossIcon.defaultProps = { theme: Base };
 
 const commonStyle = css`
-  font-family: "Open Sans", sans-serif, Arial;
+  font-family: ${(props) => props.theme.fontFamily};
   font-style: normal;
   color: ${(props) => props.theme.menuContainer.color};
   max-width: 300px;
@@ -159,7 +159,7 @@ export const MenuContainer = styled.div`
 MenuContainer.defaultProps = { theme: Base };
 
 export const MainLabelContainer = styled.div`
-  font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+  font-size: 16px;
   line-height: 28px;
 
   width: auto;
@@ -175,7 +175,7 @@ MainLabelContainer.defaultProps = { theme: Base };
 
 export const LabelContainer = styled.div`
   font-weight: normal;
-  font-size: ${(props) => props.theme.getCorrectFontSize("11px")};
+  font-size: 11px;
   line-height: 16px;
 
   ${commonStyle}

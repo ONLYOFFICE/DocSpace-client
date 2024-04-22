@@ -32,7 +32,13 @@ import { ArticleItem } from "@docspace/shared/components/article-item";
 
 import CatalogSettingsReactSvgUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
 
-const PureSettingsItem = ({ t, showText, isActive, onClick }) => {
+const PureSettingsItem = ({
+  t,
+  showText,
+  isActive,
+  onClick,
+  currentColorScheme,
+}) => {
   const onClickAction = React.useCallback(() => {
     onClick && onClick("settings");
   }, [onClick]);
@@ -46,6 +52,7 @@ const PureSettingsItem = ({ t, showText, isActive, onClick }) => {
       onClick={onClickAction}
       isActive={isActive}
       folderId="document_catalog-settings"
+      $currentColorScheme={currentColorScheme}
     />
   );
 };
@@ -57,5 +64,6 @@ const SettingsItem = withTranslation(["FilesSettings", "Common"])(
 export default inject(({ settingsStore }) => {
   return {
     showText: settingsStore.showText,
+    currentColorScheme: settingsStore.currentColorScheme,
   };
 })(observer(SettingsItem));

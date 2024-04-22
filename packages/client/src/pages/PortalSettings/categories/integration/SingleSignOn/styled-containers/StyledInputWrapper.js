@@ -37,7 +37,7 @@ const StyledInputWrapper = styled.div`
 
   .field-input {
     ::placeholder {
-      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+      font-size: 13px;
       font-weight: 400;
     }
   }

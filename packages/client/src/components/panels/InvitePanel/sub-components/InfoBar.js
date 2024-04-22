@@ -36,7 +36,7 @@ const StyledInfoBar = styled.div`
   display: flex;
   background-color: ${(props) => props.theme.infoBar.background};
   color: #333;
-  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+  font-size: 12px;
   padding: 12px 16px;
   border-radius: 6px;
   margin-bottom: 10px;

@@ -76,7 +76,7 @@ const StyledArticleItemHeaderContainer = styled.div<{
   .catalog-item__header-text {
     font-style: normal;
     font-weight: 600;
-    font-size: ${(props) => props.theme.getCorrectFontSize("11px")};
+    font-size: 11px;
     line-height: 14px;
     color: #a3a9ae;
   }
@@ -181,10 +181,7 @@ const StyledArticleItemInitialText = styled(Text)`
   line-height: ${(props) => props.theme.catalogItem.initialText.lineHeight};
   max-height: ${(props) => props.theme.catalogItem.initialText.lineHeight};
   color: ${(props) => props.theme.catalogItem.initialText.color};
-  font-size: ${(props) =>
-    props.theme.getCorrectFontSize(
-      props.theme.catalogItem.initialText.fontSize,
-    )};
+  font-size: ${(props) => props.theme.catalogItem.initialText.fontSize};
   font-weight: ${(props) => props.theme.catalogItem.initialText.fontWeight};
   pointer-events: none;
 
@@ -193,9 +190,7 @@ const StyledArticleItemInitialText = styled(Text)`
     line-height: ${(props) =>
       props.theme.catalogItem.initialText.tablet.lineHeight};
     font-size: ${(props) =>
-      props.theme.getCorrectFontSize(
-        props.theme.catalogItem.initialText.tablet.fontSize,
-      )};
+      props.theme.catalogItem.initialText.tablet.fontSize};
   }
 `;
 
@@ -226,8 +221,7 @@ const StyledArticleItemText = styled(Text)<{ isActive?: boolean }>`
       ? props.theme.catalogItem.text.isActiveColor
       : props.theme.catalogItem.text.color};
 
-  font-size: ${(props) =>
-    props.theme.getCorrectFontSize(props.theme.catalogItem.text.fontSize)};
+  font-size: ${(props) => props.theme.catalogItem.text.fontSize};
   font-weight: ${(props) => props.theme.catalogItem.text.fontWeight};
   white-space: nowrap;
   overflow: hidden;
@@ -236,10 +230,7 @@ const StyledArticleItemText = styled(Text)<{ isActive?: boolean }>`
   @media ${tablet} {
     margin-left: ${(props) => props.theme.catalogItem.text.tablet.marginLeft};
     line-height: ${(props) => props.theme.catalogItem.text.tablet.lineHeight};
-    font-size: ${(props) =>
-      props.theme.getCorrectFontSize(
-        props.theme.catalogItem.text.tablet.fontSize,
-      )};
+    font-size: ${(props) => props.theme.catalogItem.text.tablet.fontSize};
     font-weight: ${(props) => props.theme.catalogItem.text.tablet.fontWeight};
   }
 `;

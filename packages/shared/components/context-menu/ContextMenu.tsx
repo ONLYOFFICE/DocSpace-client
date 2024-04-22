@@ -171,10 +171,11 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
 
       if (visible) {
         hide(e);
-      } else {
-        // @ts-expect-error fix types
-        show(e);
+        return false;
       }
+      // @ts-expect-error fix types
+      show(e);
+      return true;
     },
     [visible, hide, show],
   );

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
@@ -42,14 +42,23 @@ const SelectUsersTypeStep = ({
   searchValue,
   setSearchValue,
 }) => {
+  const filteredUsers = useMemo(
+    () =>
+      users.result.filter(
+        (user) =>
+          !users.existing.find((existingUser) => existingUser.key === user.key),
+      ),
+    [users],
+  );
+
   const [boundaries, setBoundaries] = useState([0, 25]);
   const [dataPortion, setDataPortion] = useState(
-    users.result.slice(...boundaries),
+    filteredUsers.slice(...boundaries),
   );
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
     setBoundaries([leftBoundary, rightBoundary]);
-    setDataPortion(users.result.slice(leftBoundary, rightBoundary));
+    setDataPortion(filteredUsers.slice(leftBoundary, rightBoundary));
   };
 
   const onChangeInput = (value) => {
@@ -68,7 +77,7 @@ const SelectUsersTypeStep = ({
   );
 
   useEffect(() => {
-    setDataPortion(users.result.slice(...boundaries));
+    setDataPortion(filteredUsers.slice(...boundaries));
   }, [users]);
 
   return (
@@ -96,10 +105,10 @@ const SelectUsersTypeStep = ({
 
       <AccountsTable t={t} accountsData={filteredAccounts} />
 
-      {users.result.length > 25 && filteredAccounts.length > 0 && (
+      {filteredUsers.length > 25 && filteredAccounts.length > 0 && (
         <AccountsPaging
           t={t}
-          numberOfItems={users.result.length}
+          numberOfItems={filteredUsers.length}
           setDataPortion={handleDataChange}
         />
       )}

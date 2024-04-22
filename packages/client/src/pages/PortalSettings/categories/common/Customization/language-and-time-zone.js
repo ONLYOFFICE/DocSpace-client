@@ -38,7 +38,7 @@ import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { setCookie } from "@docspace/shared/utils/cookie";
 import { useNavigate } from "react-router-dom";
-import { isMobile } from "@docspace/shared/utils";
+import { isMobileDevice } from "@docspace/shared/utils";
 import checkScrollSettingsBlock from "../utils";
 import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
 import LoaderCustomization from "../sub-components/loaderCustomization";
@@ -97,10 +97,10 @@ const LanguageAndTimeZone = (props) => {
     initSettings,
     isLoadedPage,
     currentColorScheme,
-    currentDeviceType,
+    deviceType,
   } = props;
 
-  const isMobileView = currentDeviceType === DeviceType.mobile;
+  const isMobileView = deviceType === DeviceType.mobile;
 
   const navigate = useNavigate();
 
@@ -418,7 +418,7 @@ const LanguageAndTimeZone = (props) => {
   };
 
   const checkInnerWidth = () => {
-    if (!isMobile()) {
+    if (!isMobileDevice()) {
       setState((val) => ({ ...val, isCustomizationView: true }));
 
       const currentUrl = window.location.href.replace(
@@ -565,7 +565,7 @@ export default inject(({ settingsStore, setup, common, userStore }) => {
     cultures,
     currentColorScheme,
     languageAndTimeZoneSettingsUrl,
-    currentDeviceType,
+    deviceType,
   } = settingsStore;
 
   const { user } = userStore;
@@ -589,7 +589,7 @@ export default inject(({ settingsStore, setup, common, userStore }) => {
     setIsLoaded,
     currentColorScheme,
     languageAndTimeZoneSettingsUrl,
-    currentDeviceType,
+    deviceType,
   };
 })(
   withCultureNames(

@@ -21,7 +21,7 @@ export const EmptyViewHeader = styled.div`
   justify-content: center;
 
   .ev-header {
-    font-size: "16px";
+    font-size: 16px;
     color: ${(props) => props.theme.emptyContent.header.color};
     text-align: center;
     margin-bottom: 8px;
@@ -59,7 +59,7 @@ export const EmptyViewItemWrapper = styled.div`
   }
 
   .ev-item-header {
-    font-size: "13px";
+    font-size: 13px;
     color: ${(props) => props.theme.emptyContent.header.color};
   }
 

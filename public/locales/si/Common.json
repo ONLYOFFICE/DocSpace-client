@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "පිළිබඳව",
   "AboutCompanyTitle": "මෙම මෘදුකාංගය ගැන",
   "AccessRights": "ප්‍රවේශ අයිති",
@@ -224,6 +224,7 @@
   "PunycodeLocalPart": "ස්ථානීය කොටසට අන්තර්ජාතික කේත සහාය නොදක්වයි",
   "QuotaPaidUserLimitError": "ගෙවන ලද පරිශ්‍රීලකයින්ගේ සීමාවට ළඟා වී ඇත.",
   "ReadOnly": "කියවීමට පමණි",
+  "Reconnect": "යළි සබඳින්න",
   "ReconnectStorage": "ආචයනය යළි සබඳින්න",
   "RecoverDescribeYourProblemPlaceholder": "ගැටලුව පැහැදිලි කරන්න",
   "RecoverTitle": "ප්‍රතිසාධනයට ප්‍රවේශය",

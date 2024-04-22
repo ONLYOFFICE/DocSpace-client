@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "À propos de",
   "AboutCompanyTitle": "À propos de ce programme",
   "AccessDenied": " Accès refusé",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "La limite d’utilisateurs payants a été atteinte.",
   "ReadInstructions": "Lire les instructions",
   "ReadOnly": "Lecture seule",
+  "Reconnect": "Reconnexion",
   "ReconnectStorage": "Reconnecter le stockage",
   "RecoverDescribeYourProblemPlaceholder": "Décrivez votre problème",
   "RecoverTitle": "Récupération d'accès",

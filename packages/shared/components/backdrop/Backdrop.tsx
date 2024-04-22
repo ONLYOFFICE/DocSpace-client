@@ -39,7 +39,6 @@ const Backdrop = (props: BackdropProps) => {
     isAside = false,
     withoutBackground = false,
     isModalDialog = false,
-    canOverlay = false,
 
     zIndex = 203,
   } = props;
@@ -55,10 +54,7 @@ const Backdrop = (props: BackdropProps) => {
       const backdrops = document.querySelectorAll(".backdrop-active");
 
       const currentNeedBackdrop =
-        canOverlay ||
-        backdrops.length < 1 ||
-        (isAside && backdrops.length <= 2) ||
-        false;
+        backdrops.length < 1 || (isAside && backdrops.length <= 2) || false;
 
       let currentNeedBackground =
         (currentNeedBackdrop && ((tablet && !withoutBlur) || withBackground)) ||

@@ -32,6 +32,7 @@ import { getSystemTheme } from "@docspace/shared/utils";
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getAppearanceTheme } from "@docspace/shared/api/settings";
 import { TUser } from "@docspace/shared/api/people/types";
+import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
 
 const SYSTEM_THEME = getSystemTheme();
 
@@ -83,6 +84,7 @@ const useTheme = ({ user, i18n }: UseThemeProps) => {
         ...Base,
         currentColorScheme: currentColorTheme,
         interfaceDirection,
+        fontFamily: getFontFamilyDependingOnLanguage(i18n?.language),
       });
 
       return;

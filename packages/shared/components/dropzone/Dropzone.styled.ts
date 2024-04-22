@@ -64,7 +64,7 @@ const StyledDropzone = styled.div<{ $isLoading?: boolean }>`
       flex-direction: row;
       gap: 4px;
 
-      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+      font-size: 13px;
       line-height: 20px;
       &-main {
         font-weight: 600;
@@ -87,7 +87,7 @@ const StyledDropzone = styled.div<{ $isLoading?: boolean }>`
 
     &-exsts {
       font-weight: 600;
-      font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+      font-size: 12px;
       line-height: 16px;
       color: ${(props) => props.theme.createEditRoomDialog.dropzone.exstsColor};
     }

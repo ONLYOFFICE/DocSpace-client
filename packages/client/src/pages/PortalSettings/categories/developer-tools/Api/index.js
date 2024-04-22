@@ -40,7 +40,7 @@ import { DeviceType } from "@docspace/shared/enums";
 
 const EmptyContainer = styled(EmptyScreenContainer)`
   .ec-header {
-    font-size: ${(props) => props.theme.getCorrectFontSize("23px")};
+    font-size: 23px;
   }
 
   .ec-image {
@@ -53,7 +53,7 @@ const EmptyContainer = styled(EmptyScreenContainer)`
   }
 
   .ec-desc {
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
     margin-top: 12px;
     margin-bottom: 22px;
   }

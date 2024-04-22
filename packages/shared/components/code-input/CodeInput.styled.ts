@@ -44,18 +44,18 @@ const InputWrapper = styled.div`
     border-radius: 8px;
     margin: 0 4px;
     text-align: center;
-    font-size: ${(props) => props.theme.getCorrectFontSize("72px")};
+    font-size: 72px;
 
     @media ${tablet} {
       height: 76px;
       width: 64px;
-      font-size: ${(props) => props.theme.getCorrectFontSize("48px")};
+      font-size: 48px;
     }
 
     @media ${mobile} {
       height: 48px;
       width: 40px;
-      font-size: ${(props) => props.theme.getCorrectFontSize("32px")};
+      font-size: 32px;
     }
 
     &:last-child {

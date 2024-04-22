@@ -37,14 +37,14 @@ export const commonSettingsStyles = css`
     }
 
     .category-item-subheader {
-      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+      font-size: 13px;
       font-weight: 600;
       margin-bottom: 5px;
     }
 
     .category-item-description {
       color: #555f65;
-      font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+      font-size: 12px;
       max-width: 1024px;
     }
 
@@ -57,7 +57,7 @@ export const commonSettingsStyles = css`
           : css`
               margin-right: 7px;
             `}
-      font-size: ${(props) => props.theme.getCorrectFontSize("19px")};
+      font-size: 19px;
       font-weight: 600;
     }
 

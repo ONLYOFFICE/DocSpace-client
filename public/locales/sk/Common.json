@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "O aplikácii",
   "AboutCompanyTitle": "O programe",
   "AccessDenied": "Prístup bol zamietnutý",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "Bol dosiahnutý limit platených používateľov.",
   "ReadInstructions": "Prečítajte si pokyny",
   "ReadOnly": "Iba na čítanie",
+  "Reconnect": "Pripojiť znova",
   "ReconnectStorage": "Znova pripojte úložisko",
   "RecoverDescribeYourProblemPlaceholder": "Opíšte svoj problém",
   "RecoverTitle": "Obnova prístupu",

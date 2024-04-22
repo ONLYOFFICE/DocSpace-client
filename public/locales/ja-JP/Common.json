@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "について",
   "AboutCompanyTitle": "本プログラムについて",
   "AccessDenied": "アクセス拒否",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "有料ユーザー数の上限に達しました。",
   "ReadInstructions": "説明を読む",
   "ReadOnly": "読み取り専用",
+  "Reconnect": "再接続",
   "ReconnectStorage": "ストレージを再接続する",
   "RecoverDescribeYourProblemPlaceholder": "ご質問を説明ください",
   "RecoverTitle": "アクセス回復機能",

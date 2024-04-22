@@ -36,7 +36,7 @@ const StyledGalleryEmptyScreen = styled.div`
   }
 
   .info-panel_gallery-empty-screen-text {
-    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+    font-size: 16px;
     font-weight: 700;
     line-height: 22px;
     text-align: center;

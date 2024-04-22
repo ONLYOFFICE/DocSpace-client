@@ -23,7 +23,6 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -69,8 +68,8 @@ const WhiteLabel = (props) => {
     setLogoUrlsWhiteLabel,
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
+    deviceType,
 
-    currentDeviceType,
     resetIsInit,
   } = props;
   const navigate = useNavigate();
@@ -80,7 +79,7 @@ const WhiteLabel = (props) => {
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
   const [isSaving, setIsSaving] = useState(false);
 
-  const isMobileView = currentDeviceType === DeviceType.mobile;
+  const isMobileView = deviceType === DeviceType.mobile;
 
   const init = async () => {
     const isWhiteLabelPage = location.pathname.includes("white-label");
@@ -107,6 +106,7 @@ const WhiteLabel = (props) => {
       : "/portal-settings/customization/branding";
 
     window.innerWidth > size.mobile &&
+      !isMobileView &&
       location.pathname.includes("white-label") &&
       navigate(url);
   };
@@ -550,7 +550,7 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     resetIsInit,
   } = common;
 
-  const { whiteLabelLogoUrls: defaultWhiteLabelLogoUrls, currentDeviceType } =
+  const { whiteLabelLogoUrls: defaultWhiteLabelLogoUrls, deviceType } =
     settingsStore;
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
 
@@ -569,7 +569,7 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
 
-    currentDeviceType,
+    deviceType,
     resetIsInit,
   };
 })(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));

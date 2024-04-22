@@ -74,6 +74,7 @@ import {
   isBetaLanguage,
   getLogoUrl,
 } from "./common";
+import { DeviceType } from "../enums";
 
 export {
   isBetaLanguage,
@@ -141,4 +142,12 @@ export const presentInArray = (
   const pattern = caseInsensitive ? search.toLowerCase() : search;
   const result = array?.findIndex((item) => item === pattern);
   return result !== -1;
+};
+
+export const getDeviceTypeByWidth = (width: number): DeviceType => {
+  if (width <= size.mobile) return DeviceType.mobile;
+
+  if (isTablet(width)) return DeviceType.tablet;
+
+  return DeviceType.desktop;
 };

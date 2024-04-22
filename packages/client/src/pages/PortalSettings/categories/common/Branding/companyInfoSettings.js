@@ -39,6 +39,7 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 import { Link } from "@docspace/shared/components/link";
 import { mobile, size } from "@docspace/shared/utils";
 import { isManagement } from "@docspace/shared/utils/common";
+import { DeviceType } from "@docspace/shared/enums";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderCompanyInfoSettings from "../sub-components/loaderCompanyInfoSettings";
@@ -91,6 +92,7 @@ const CompanyInfoSettings = (props) => {
     isLoadedCompanyInfoSettingsData,
     buildVersionInfo,
     personal,
+    deviceType,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -129,10 +131,13 @@ const CompanyInfoSettings = (props) => {
   }, []);
 
   const checkWidth = () => {
+    const isMobileView = deviceType === DeviceType.mobile;
+
     const url = isManagement()
       ? "/branding"
       : "portal-settings/customization/branding";
     window.innerWidth > size.mobile &&
+      !isMobileView &&
       location.pathname.includes("company-info-settings") &&
       navigate(url);
   };
@@ -507,6 +512,7 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     companyInfoSettingsData,
     buildVersionInfo,
     personal,
+    deviceType,
   } = settingsStore;
 
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
@@ -522,6 +528,7 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     buildVersionInfo,
     personal,
     isSettingPaid: isBrandingAndCustomizationAvailable,
+    deviceType,
   };
 })(
   withLoading(

@@ -56,6 +56,7 @@ import {
   isTouchDevice,
   checkIsSSR,
   INFO_PANEL_WIDTH,
+  isMobileDevice,
 } from "./device";
 import { getCookie } from "./cookie";
 import { Context, Provider, Consumer } from "./context";
@@ -124,6 +125,7 @@ export {
   DomHelpers,
   ObjectUtils,
   getLogoUrl,
+  isMobileDevice,
 };
 
 export const getModalType = () => {

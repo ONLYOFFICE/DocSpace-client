@@ -565,6 +565,9 @@ class FilesTableHeader extends React.Component {
       setHideColumns,
       isFrame,
       showSettings,
+
+      isVirtualDataRoom,
+      indexing,
     } = this.props;
 
     const {
@@ -589,7 +592,7 @@ class FilesTableHeader extends React.Component {
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         sectionWidth={sectionWidth}
         resetColumnsSize={resetColumnsSize}
-        sortingVisible={sortingVisible}
+        sortingVisible={isVirtualDataRoom && indexing ? false : sortingVisible}
         infoPanelVisible={infoPanelVisible}
         useReactWindow={!withPaging}
         tagRef={tagRef}

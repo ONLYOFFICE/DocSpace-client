@@ -48,11 +48,11 @@ const StyledComponent = styled.div`
   max-width: 700px;
   width: 100%;
   font-weight: 400;
-  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+  font-size: 13px;
 
   .header {
     font-weight: 700;
-    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+    font-size: 16px;
     line-height: 22px;
     padding-bottom: 9px;
   }
@@ -103,7 +103,7 @@ const Branding = ({
     };
   }, []);
 
-  if (isMobileView)
+  if (isMobileView && standalone)
     return (
       <MobileView isSettingPaid={isSettingPaid} isManagement={isManagement()} />
     );

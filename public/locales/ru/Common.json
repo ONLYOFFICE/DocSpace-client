@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "О программе",
   "AboutCompanyTitle": "О программе",
   "AccessDenied": "Доступ запрещен",
@@ -89,6 +89,7 @@
   "Culture_si": "සිංහල (ශ්‍රී ලංකාව)",
   "Culture_sk": "Slovenčina (Slovensko)",
   "Culture_sl": "Slovensko (Slovenija)",
+  "Culture_sr-Latn-RS": "Srpski (Srbija)",
   "Culture_tr": "Türkçe (Türkiye)",
   "Culture_uk-UA": "Українська (Україна)",
   "Culture_vi": "Tiếng Việt (Việt Nam)",
@@ -308,6 +309,7 @@
   "QuotaPaidUserLimitError": "Достигнут лимит платных пользователей.",
   "ReadInstructions": "Читать руководства",
   "ReadOnly": "Только чтение",
+  "Reconnect": "Подключить повторно",
   "ReconnectStorage": "Повторное подключение хранилища",
   "RecoverDescribeYourProblemPlaceholder": "Пожалуйста, опишите вашу проблему",
   "RecoverTitle": "Доступ к порталу",

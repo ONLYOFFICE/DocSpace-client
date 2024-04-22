@@ -159,9 +159,10 @@ const ThirdPartyComboBox = ({
   }));
 
   const onSelect = (elem) => {
-    const thirdparty = thirdparties.find(
-      (t) => elem.key === t.id || elem.key === t.category,
-    );
+    const thirdparty = thirdparties.find((t) => {
+      if (t.category) return elem.key === t.category;
+      else return elem.key === t.id;
+    });
 
     thirdparty && setStorageLocaiton(thirdparty);
   };

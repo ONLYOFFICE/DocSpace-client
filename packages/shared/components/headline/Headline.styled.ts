@@ -37,16 +37,12 @@ const StyledHeading = styled(Heading)<StyledHeadingProps>`
   margin: 0;
   line-height: 50px;
   font-size: ${(props) =>
-    props.theme.getCorrectFontSize(
-      props.fontSize ? props.fontSize : size[props.headlineType],
-    )};
+    props.fontSize ? props.fontSize : size[props.headlineType]};
   font-weight: ${(props) => weight[props.headlineType]};
   color: ${(props) => (props.color ? props.color : props.theme.color)};
   ${NoUserSelect}
   @media ${tablet} {
-    ${(props) =>
-      props.headlineType === "content" &&
-      `font-size: ${props.theme.getCorrectFontSize("18px")}`};
+    ${(props) => props.headlineType === "content" && `font-size: 18px`};
   }
 `;
 StyledHeading.defaultProps = { theme: Base };

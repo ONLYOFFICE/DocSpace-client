@@ -70,7 +70,7 @@ const EmptyContentBody = styled.div<{
 
   .ec-header {
     grid-area: headerText;
-    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+    font-size: 16px;
     color: ${(props) => props.theme.emptyContent.header.color};
     text-align: center;
   }

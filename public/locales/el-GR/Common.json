@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Σχετικά",
   "AboutCompanyTitle": "Σχετικά με αυτό το πρόγραμμα",
   "AccessDenied": "Απαγόρευση πρόσβασης",
@@ -89,6 +89,7 @@
   "Culture_si": "සිංහල (ශ්‍රී ලංකාව)",
   "Culture_sk": "Slovenčina (Slovensko)",
   "Culture_sl": "Slovensko (Slovenija)",
+  "Culture_sr-Latn-RS": "Srpski (Srbija)",
   "Culture_tr": "Türkçe (Türkiye)",
   "Culture_uk-UA": "Українська (Україна)",
   "Culture_vi": "Tiếng Việt (Việt Nam)",
@@ -308,6 +309,7 @@
   "QuotaPaidUserLimitError": "Έχει επιτευχθεί το όριο των χρηστών με πληρωμή.",
   "ReadInstructions": "Διαβάστε τις οδηγίες",
   "ReadOnly": "Μόνο για ανάγνωση",
+  "Reconnect": "Επανασύνδεση",
   "ReconnectStorage": "Επανασύνδεση αποθηκευτικού χώρου",
   "RecoverDescribeYourProblemPlaceholder": "Περιγράψτε το πρόβλημά σας",
   "RecoverTitle": "Ανάκτηση πρόσβασης",

@@ -105,7 +105,7 @@ export const StyledTableContainer = styled(TableContainer)`
   }
 
   .header-container-text {
-    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+    font-size: 12px;
   }
 
   .checkboxWrapper {

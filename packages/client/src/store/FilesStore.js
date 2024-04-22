@@ -4004,9 +4004,22 @@ class FilesStore {
     const isDesktopView = isDesktop();
     const tileGap = isDesktopView ? 16 : 14;
     const minTileWidth = 216 + tileGap;
-    const sectionPadding = isDesktopView ? 24 : 16;
-
     const body = document.getElementById("section");
+
+    const elem = document.getElementsByClassName("section-wrapper-content")[0];
+    let containerWidth = 0;
+    if (elem) {
+      const elemPadding = window
+        .getComputedStyle(elem)
+        ?.getPropertyValue("padding");
+
+      containerWidth =
+        elem?.clientWidth -
+        elemPadding.split("px")[1] -
+        elemPadding.split("px")[3];
+    }
+
+    const sectionPadding = body?.offsetWidth - containerWidth - tileGap + 1;
     const sectionWidth = body ? body.offsetWidth - sectionPadding : 0;
 
     return Math.floor(sectionWidth / minTileWidth);

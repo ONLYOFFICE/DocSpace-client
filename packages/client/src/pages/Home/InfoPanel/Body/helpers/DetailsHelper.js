@@ -172,6 +172,7 @@ class DetailsHelper {
               "Date modified",
               "Last modified by",
               "Creation date",
+              this.item.order && "Index",
             ]
           : [
               "Owner",
@@ -183,6 +184,7 @@ class DetailsHelper {
               "Last modified by",
               "Creation date",
               "Versions",
+              this.item.order && "Index",
               "Comments",
             ]
     ).filter((nP) => !!nP);
@@ -215,6 +217,9 @@ class DetailsHelper {
       case "Creation date":
         return this.t("CreationDate");
 
+      case "Index":
+        return "Index";
+
       case "Versions":
         return this.t("InfoPanel:Versions");
       case "Comments":
@@ -239,6 +244,9 @@ class DetailsHelper {
         return this.getAuthorDecoration("createdBy");
       case "Location":
         return this.getItemLocation();
+
+      case "Index":
+        return this.getItemIndex();
 
       case "Type":
         return this.getItemType();
@@ -324,6 +332,10 @@ class DetailsHelper {
 
   getItemSize = () => {
     return text(this.item.contentLength);
+  };
+
+  getItemIndex = () => {
+    return text(this.item.order);
   };
 
   getItemDateModified = () => {

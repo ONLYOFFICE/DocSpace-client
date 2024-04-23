@@ -54,14 +54,15 @@ const ArticleBodyContent = () => {
 
   const { settingsStore } = useStore();
 
-  const { toggleArticleOpen, setIsBurgerLoading } = settingsStore;
+  const { toggleArticleOpen, setIsBurgerLoading, currentColorScheme } =
+    settingsStore;
 
   const [selectedKey, setSelectedKey] = useState("0");
 
   useEffect(() => {
     const path = location.pathname;
     const item = getItemByLink(path);
-    setSelectedKey(item.key);
+    setSelectedKey(item?.key);
     setIsBurgerLoading(false);
   }, []);
 
@@ -71,7 +72,7 @@ const ArticleBodyContent = () => {
 
     if (openingNewTab(url, e)) return;
 
-    setSelectedKey(item.key);
+    setSelectedKey(item?.key);
 
     if (isMobileOnly || isMobile()) {
       toggleArticleOpen();
@@ -97,6 +98,7 @@ const ArticleBodyContent = () => {
           isActive={item.key === selectedKey}
           onClick={(e) => onClickItem(item, e)}
           folderId={item.id}
+          $currentColorScheme={currentColorScheme}
         />
       );
     });

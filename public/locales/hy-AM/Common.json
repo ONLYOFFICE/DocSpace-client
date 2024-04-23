@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Մասին",
   "AboutCompanyTitle": "Ծրագրի մասին",
   "AccessDenied": "Մուտքն արգելված է",
@@ -89,6 +89,7 @@
   "Culture_si": "සිංහල (ශ්‍රී ලංකාව)",
   "Culture_sk": "Slovenčina (Slovensko)",
   "Culture_sl": "Slovensko (Slovenija)",
+  "Culture_sr-Latn-RS": "Srpski (Srbija)",
   "Culture_tr": "Türkçe (Türkiye)",
   "Culture_uk-UA": "Українська (Україна)",
   "Culture_vi": "Tiếng Việt (Việt Nam)",
@@ -308,6 +309,7 @@
   "QuotaPaidUserLimitError": "Վճարովի օգտագործողի սահմանաչափը հասել է:",
   "ReadInstructions": "Կարդալ հրահանգները",
   "ReadOnly": "Միայն կարդալու համար",
+  "Reconnect": "Վերակապակցել",
   "ReconnectStorage": "Կրկին միացրեք պահեստը",
   "RecoverDescribeYourProblemPlaceholder": "Նկարագրեք ձեր խնդիրը",
   "RecoverTitle": "Մատչման վերականգնում",

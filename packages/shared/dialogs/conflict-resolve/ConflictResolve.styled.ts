@@ -66,12 +66,12 @@ const StyledModalDialog = styled(ModalDialog)`
 
     .radio-option-title {
       font-weight: 600;
-      font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+      font-size: 14px;
       line-height: 16px;
     }
 
     .radio-option-description {
-      font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+      font-size: 12px;
       line-height: 16px;
       color: #a3a9ae;
     }

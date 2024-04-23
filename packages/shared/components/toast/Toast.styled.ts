@@ -68,8 +68,7 @@ const StyledToastContainer = styled(ToastContainer)<{ $topOffset: number }>`
   .Toastify__close-button {
     color: ${(props) => props.theme.toast.closeButton.color};
     font-weight: ${(props) => props.theme.toast.closeButton.fontWeight};
-    font-size: ${(props) =>
-      props.theme.getCorrectFontSize(props.theme.toast.closeButton.fontSize)};
+    font-size: ${(props) => props.theme.toast.closeButton.fontSize};
     background: ${(props) => props.theme.toast.closeButton.background};
     outline: none;
     border: none;
@@ -181,9 +180,7 @@ const StyledToastContainer = styled(ToastContainer)<{ $topOffset: number }>`
     margin: ${(props) => props.theme.toast.main.margin};
     padding: ${(props) => props.theme.toast.main.padding};
     min-height: ${(props) => props.theme.toast.main.minHeight};
-    font:
-      normal 12px "Open Sans",
-      sans-serif;
+    font: normal 12px ${(props) => props.theme.fontFamily};
     width: ${(props) => props.theme.toast.main.width};
     right: ${(props) => props.theme.toast.main.right};
 
@@ -288,15 +285,13 @@ const StyledDiv = styled.div<{ type: ToastType }>`
     line-height: ${(props) => props.theme.toastr.title.lineHeight};
 
     color: ${(props) => props.theme.toastr.title.color[props.type]};
-    font-size: ${(props) =>
-      props.theme.getCorrectFontSize(props.theme.toastr.title.fontSize)};
+    font-size: ${(props) => props.theme.toastr.title.fontSize};
   }
 
   .toast-text {
     line-height: ${(props) => props.theme.toastr.text.lineHeight};
     align-self: center;
-    font-size: ${(props) =>
-      props.theme.getCorrectFontSize(props.theme.toastr.text.fontSize)};
+    font-size: ${(props) => props.theme.toastr.text.fontSize};
     color: ${(props) => props.theme.toastr.text.color};
     word-break: break-word;
   }

@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "U vezi sa",
   "AboutCompanyTitle": "U vezi ovog programa",
   "AccessDenied": "Pristup odbijen",
@@ -88,6 +88,7 @@
   "Culture_si": "සිංහල (ශ්‍රී ලංකාව)",
   "Culture_sk": "Slovenčina (Slovensko)",
   "Culture_sl": "Slovensko (Slovenija)",
+  "Culture_sr-Latn-RS": "Srpski (Srbija)",
   "Culture_tr": "Türkçe (Türkiye)",
   "Culture_uk-UA": "Українська (Україна)",
   "Culture_vi": "Tiếng Việt (Việt Nam)",
@@ -307,6 +308,7 @@
   "QuotaPaidUserLimitError": "Limit plaćenog korisnika je dostignut.",
   "ReadInstructions": "Pročitaj instrukcije",
   "ReadOnly": "Samo za čitanje",
+  "Reconnect": "Poveži ponovo",
   "ReconnectStorage": "Ponovo poveži skladište",
   "RecoverDescribeYourProblemPlaceholder": "Opiši svoj problem",
   "RecoverTitle": "Pristupi oporavku",

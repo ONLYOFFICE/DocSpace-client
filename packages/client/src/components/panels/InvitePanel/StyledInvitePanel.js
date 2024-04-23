@@ -141,12 +141,12 @@ const StyledInviteUserBody = styled.div`
 
 const StyledHeading = styled(Heading)`
   font-weight: 700;
-  font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+  font-size: 18px;
 `;
 
 const StyledSubHeader = styled(Heading)`
   font-weight: 700;
-  font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+  font-size: 16px;
   padding-left: 16px;
   padding-right: 16px;
   margin: 16px 0 8px 0;
@@ -168,7 +168,7 @@ const StyledDescription = styled(Text)`
   margin-bottom: 16px;
 
   font-weight: 400;
-  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+  font-size: 12px;
   line-height: 16px;
 `;
 
@@ -189,7 +189,7 @@ const StyledRow = styled.div`
 
   a {
     font-weight: 600;
-    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    font-size: 14px;
     line-height: 16px;
   }
 
@@ -384,9 +384,7 @@ const SearchItemText = styled(Text)`
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: ${(props) =>
-    props.theme.getCorrectFontSize(
-      props.primary ? "14px" : props.info ? "11px" : "12px",
-    )};
+    props.primary ? "14px" : props.info ? "11px" : "12px"};
   font-weight: ${(props) => (props.primary || props.info ? "600" : "400")};
 
   color: ${(props) =>
@@ -468,7 +466,7 @@ const ResetLink = styled(Link)`
     theme.interfaceDirection === "rtl" ? `right` : `left`};
   padding: 0 16px;
   margin-bottom: 16px;
-  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+  font-size: 13px;
   color: ${(props) => props.theme.createEditRoomDialog.commonParam.textColor};
   font-style: normal;
   line-height: 15px;
@@ -518,7 +516,7 @@ const StyledInviteLanguage = styled.div`
   color: ${(props) =>
     props.theme.createEditRoomDialog.commonParam.descriptionColor};
   margin-bottom: 4px;
-  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+  font-size: 13px;
   font-style: normal;
   font-weight: 600;
   line-height: 20px;

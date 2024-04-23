@@ -154,17 +154,15 @@ const ThirdPartyComboBox = ({
 
   const options = thirdparties.map((item) => ({
     label: item.title,
+    title: item.title,
     key: item?.category ?? item.id,
   }));
 
   const onSelect = (elem) => {
-    console.log("123a", elem);
-    console.log("thirdparties", thirdparties);
-
-    const thirdparty = thirdparties.find(
-      (t) => elem.key === t.id || elem.key === t.category,
-    );
-    console.log("thirdparty", thirdparty);
+    const thirdparty = thirdparties.find((t) => {
+      if (t.category) return elem.key === t.category;
+      else return elem.key === t.id;
+    });
 
     thirdparty && setStorageLocaiton(thirdparty);
   };
@@ -184,7 +182,6 @@ const ThirdPartyComboBox = ({
           scaled
           withBackdrop={isMobile}
           size="content"
-          title={t("Common:Role")}
           manualWidth={"fit-content"}
           isMobileView={isMobileOnly}
           directionY="both"

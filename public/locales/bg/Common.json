@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Относно",
   "AboutCompanyTitle": "За тази програма",
   "AccessDenied": "Достъпът отказан",
@@ -89,6 +89,7 @@
   "Culture_si": "සිංහල (ශ්‍රී ලංකාව)",
   "Culture_sk": "Slovenčina (Slovensko)",
   "Culture_sl": "Slovensko (Slovenija)",
+  "Culture_sr-Latn-RS": "Srpski (Srbija)",
   "Culture_tr": "Türkçe (Türkiye)",
   "Culture_uk-UA": "Українська (Україна)",
   "Culture_vi": "Tiếng Việt (Việt Nam)",
@@ -308,6 +309,7 @@
   "QuotaPaidUserLimitError": "Лимитът за платени потребители е достигнат.",
   "ReadInstructions": "Прочети инструкции",
   "ReadOnly": "Само за четене",
+  "Reconnect": "Повторно свързване",
   "ReconnectStorage": "Повторно свързване на хранилището",
   "RecoverDescribeYourProblemPlaceholder": "Опишете проблема си",
   "RecoverTitle": "Възстановяване на достъп",

@@ -39,7 +39,7 @@ import { createPasswordHash } from "@docspace/shared/utils/common";
 import { login } from "@docspace/shared/utils/loginUtils";
 import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordErrorMessage";
 
-import DocspaceLogo from "../../../components/DocspaceLogoWrapper";
+import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
 import withLoader from "../withLoader";
 import { StyledPage, StyledBody, StyledContent } from "./StyledConfirm";
 

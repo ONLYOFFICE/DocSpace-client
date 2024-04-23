@@ -300,8 +300,7 @@ const FilesSelector = ({
 
     if (
       needRoomList ||
-      (!isThirdParty &&
-        currentFolderId === roomsFolderId &&
+      (+currentFolderId === roomsFolderId &&
         rootFolderType === FolderType.Rooms)
     ) {
       setSelectedItemType("rooms");

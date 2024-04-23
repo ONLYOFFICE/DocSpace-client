@@ -34,6 +34,7 @@ import PresentationIcoUrl from "PUBLIC_DIR/images/presentation.ico?url";
 import SpreadSheetIcoUrl from "PUBLIC_DIR/images/spreadsheet.ico?url";
 import TextIcoUrl from "PUBLIC_DIR/images/text.ico?url";
 import PDFIcoUrl from "PUBLIC_DIR/images/pdf.ico?url";
+import { calculateAsideHeight } from "@/utils";
 
 interface UseRootInitProps {
   documentType?: string;
@@ -71,6 +72,16 @@ const useRootInit = ({ documentType }: UseRootInitProps) => {
   React.useEffect(() => {
     if (isRetina() && getCookie("is_retina") == null) {
       setCookie("is_retina", "true", { path: "/" });
+    }
+  }, []);
+
+  React.useEffect(() => {
+    // need for separate window in desktop editors
+    if (window.AscDesktopEditor) {
+      window.AscDesktopEditor.attachEvent?.(
+        "onViewportSettingsChanged",
+        calculateAsideHeight,
+      );
     }
   }, []);
 };

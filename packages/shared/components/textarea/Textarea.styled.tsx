@@ -145,8 +145,7 @@ const StyledTextarea = styled(ClearTextareaAutosize).attrs(
       ? `padding-right: ${props.paddingLeftProp};`
       : `padding-left: ${props.paddingLeftProp};`}
 
-  font-size: ${(props) =>
-    props.theme.getCorrectFontSize(`${props.fontSize}px`)};
+  font-size: ${(props) => `${props.fontSize}px`};
   font-family: ${(props) => props.theme.fontFamily};
   line-height: 1.5;
 
@@ -265,7 +264,7 @@ const Wrapper = styled.div<{
 const Numeration = styled.pre<{ fontSize: string }>`
   display: block;
   position: absolute;
-  font-size: ${(props) => props.theme.getCorrectFontSize(props.fontSize)}px;
+  font-size: ${(props) => props.fontSize}px;
   font-family: ${(props) => props.theme.fontFamily};
   line-height: 1.5;
   margin: 0;

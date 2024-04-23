@@ -29,10 +29,6 @@ import { mobile } from "../../utils";
 
 export const ErrorUnavailableWrapper = styled.div`
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: 64px;
 `;
 

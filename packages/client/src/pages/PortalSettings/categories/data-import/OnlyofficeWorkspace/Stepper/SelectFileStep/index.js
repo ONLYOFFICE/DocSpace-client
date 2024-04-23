@@ -187,7 +187,7 @@ const SelectFileStep = ({
       uploadInterval.current = setInterval(async () => {
         try {
           const res = await getMigrationStatus();
-          setProgress(res.progress);
+          setProgress(res?.progress);
 
           if (res.progress > 10) {
             setIsVisible(false);

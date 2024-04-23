@@ -59,11 +59,31 @@ const Sdk = ({
   const [isDataReady, setIsDataReady] = useState(false);
 
   const formatsDescription = {
-    DOCX: t("Common:SelectDOCXFormat"),
-    DOCXF: t("Common:SelectDOCXFFormat"),
-    BackupOnly: t("Common:SelectBackupOnlyFormat"),
-    IMG: t("Common:SelectIMGFormat"),
-    XLSX: t("Common:SelectXLSXFormat"),
+    DOCX: t("Common:SelectExtensionFiles", { extension: ".DOCX" }),
+    DOCXF: t("Common:SelectExtensionFiles", { extension: ".DOCXF" }),
+    XLSX: t("Common:SelectExtensionFiles", { extension: ".XLSX" }),
+    BackupOnly: t("Common:SelectExtensionFiles", {
+      extension: t("Settings:Backup").toLowerCase(),
+    }),
+    IMG: t("Common:SelectTypeFiles", { type: t("Files:Images").toLowerCase() }),
+    Documents: t("Common:SelectTypeFiles", {
+      type: t("Common:Documents").toLowerCase(),
+    }),
+    Spreadsheets: t("Common:SelectTypeFiles", {
+      type: t("Translations:Spreadsheets").toLowerCase(),
+    }),
+    Presentations: t("Common:SelectTypeFiles", {
+      type: t("Translations:Presentations").toLowerCase(),
+    }),
+    Images: t("Common:SelectTypeFiles", {
+      type: t("Files:Images").toLowerCase(),
+    }),
+    Media: t("Common:SelectExtensionFiles", {
+      extension: t("Files:Media").toLowerCase(),
+    }),
+    Archives: t("Common:SelectTypeFiles", {
+      type: t("Files:Archives").toLowerCase(),
+    }),
   };
 
   useEffect(() => {
@@ -288,6 +308,8 @@ const Sdk = ({
     default:
       component = <AppLoader />;
   }
+
+  console.log(frameConfig?.filterParam);
   return component;
 };
 
@@ -327,4 +349,12 @@ export default inject(
       getFilePrimaryLink,
     };
   },
-)(withTranslation(["JavascriptSdk", "Common"])(observer(Sdk)));
+)(
+  withTranslation([
+    "JavascriptSdk",
+    "Common",
+    "Settings",
+    "Translations",
+    "Files",
+  ])(observer(Sdk)),
+);

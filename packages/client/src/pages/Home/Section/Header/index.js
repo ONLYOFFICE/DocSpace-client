@@ -937,7 +937,7 @@ const SectionHeaderContent = (props) => {
         key: "sharing-settings",
         label: t("Files:Share"),
         onClick: onClickShare,
-        disabled: !selectedFolder.security.CreateRoomFrom,
+        disabled: !selectedFolder.security?.CreateRoomFrom,
         icon: ShareReactSvgUrl,
       },
       {
@@ -1065,7 +1065,7 @@ const SectionHeaderContent = (props) => {
         onClick: () => {
           onClickCreateRoom({ title: selectedFolder.title, isFolder: true });
         },
-        disabled: !selectedFolder.security.CreateRoomFrom,
+        disabled: !selectedFolder.security?.CreateRoomFrom,
       },
       {
         id: "option_leave-room",

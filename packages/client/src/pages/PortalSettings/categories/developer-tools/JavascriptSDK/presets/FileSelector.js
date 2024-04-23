@@ -37,7 +37,6 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { SelectedItem } from "@docspace/shared/components/selected-item";
 import { ColorInput } from "@docspace/shared/components/color-input";
 import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
@@ -78,7 +77,6 @@ import {
   Preview,
   GetCodeButtonWrapper,
   FilesSelectorInputWrapper,
-  SelectedItemsContainer,
   CodeWrapper,
 } from "./StyledPresets";
 
@@ -177,17 +175,6 @@ const FileSelector = (props) => {
   );
   const [typeDisplay, setTypeDisplay] = useState(fileTypeDisplay[0].value);
   const [selectedType, setSelectedType] = useState(fileOptions[0]);
-  const [selectedFileTypes, setSelectedFileTypes] = useState([
-    { key: "file-type-documents", label: t("Common:Documents") },
-    { key: "file-type-folders", label: t("Translations:Folders") },
-    { key: "file-type-spreadsheets", label: t("Translations:Spreadsheets") },
-    { key: "file-type-archives", label: t("Files:Archives") },
-    { key: "file-type-presentations", label: t("Translations:Presentations") },
-    { key: "file-type-images", label: t("Filse:Images") },
-    { key: "file-type-media", label: t("Files:Media") },
-    { key: "file-type-forms-templates", label: t("Files:FormsTemplates") },
-    { key: "file-type-forms", label: t("Files:Forms") },
-  ]);
 
   const [config, setConfig] = useState({
     mode: "file-selector",
@@ -364,23 +351,10 @@ const FileSelector = (props) => {
   const closeGetCodeModal = () => setIsGetCodeDialogOpened(false);
 
   const onTypeSelect = (option) => {
-    // setFileOptions((prevFileOptions) => prevFileOptions.filter((file) => file.key !== option.key));
     setSelectedType(option);
     setConfig((config) => {
       return { ...config, filterParam: option.key };
     });
-
-    // if (!selectedFileTypes.find((type) => type.key === option.key)) {
-    //   setSelectedFileTypes((prevFileTypes) => [...prevFileTypes, option]);
-    // }
-  };
-
-  const deleteSelectedType = (option) => {
-    setFileOptions((prevFileOptions) => [option, ...prevFileOptions]);
-    const filteredTypes = selectedFileTypes.filter(
-      (type) => type.key !== option.key,
-    );
-    setSelectedFileTypes(filteredTypes);
   };
 
   const toggleWithSearch = () => {
@@ -754,10 +728,6 @@ const FileSelector = (props) => {
                   scaled={true}
                   directionY="top"
                   selectedOption={selectedType}
-                  // selectedOption={{
-                  //   key: "Select",
-                  //   label: t("Common:SelectAction"),
-                  // }}
                 />
 
                 <LabelGroup>
@@ -774,16 +744,6 @@ const FileSelector = (props) => {
                     tooltipContent={<Text></Text>}
                   />
                 </LabelGroup>
-
-                {/* <SelectedItemsContainer>
-                  {selectedFileTypes.map((type) => (
-                    <SelectedItem
-                      key={type.key}
-                      onClick={() => deleteSelectedType(type)}
-                      label={type.label}
-                    />
-                  ))}
-                </SelectedItemsContainer> */}
               </>
             )}
           </ControlsSection>

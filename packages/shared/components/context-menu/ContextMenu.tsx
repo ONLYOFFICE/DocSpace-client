@@ -113,8 +113,10 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
         const m = trimSeparator(getContextModel());
         setModel(m);
       }
+
       e.stopPropagation();
       e.preventDefault();
+
       currentEvent.current = e;
       if (visible) {
         if (!isMobileUtils()) {
@@ -154,6 +156,28 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
       setArticleWidth(0);
     },
     [onHide],
+  );
+
+  const toggle = React.useCallback(
+    (
+      e:
+        | React.MouseEvent
+        | MouseEvent
+        | Event
+        | React.ChangeEvent<HTMLInputElement>,
+    ) => {
+      if (currentChangeEvent.current === e || currentEvent.current === e)
+        return;
+
+      if (visible) {
+        hide(e);
+        return false;
+      }
+      // @ts-expect-error fix types
+      show(e);
+      return true;
+    },
+    [visible, hide, show],
   );
 
   React.useEffect(() => {
@@ -301,6 +325,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
     (e: MouseEvent) => {
       if (isOutsideClicked(e)) {
         // TODO: (&& e.button !== 2) restore after global usage
+
         hide(e);
 
         setResetMenu(true);
@@ -392,9 +417,9 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
   React.useImperativeHandle(
     ref,
     () => {
-      return { show, hide, menuRef };
+      return { show, hide, toggle, menuRef };
     },
-    [hide, show],
+    [hide, show, toggle],
   );
 
   const renderContextMenu = () => {

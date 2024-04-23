@@ -24,9 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useCallback, useRef } from "react";
-import { InfiniteLoader, WindowScroller } from "react-virtualized";
-
+import React, { useCallback, useEffect, useRef } from "react";
+import { InfiniteLoader, WindowScroller, List } from "react-virtualized";
 import { StyledList } from "../InfiniteLoader.styled";
 import { GridComponentProps } from "../InfiniteLoader.types";
 
@@ -42,6 +41,11 @@ const GridComponent = ({
   scroll,
 }: GridComponentProps) => {
   const loaderRef = useRef<InfiniteLoader | null>(null);
+  const listRef = useRef<List | null>(null);
+
+  useEffect(() => {
+    listRef?.current?.recomputeRowHeights();
+  });
 
   const isItemLoaded = useCallback(
     ({ index }: { index: number }) => {
@@ -121,7 +125,10 @@ const GridComponent = ({
                 autoHeight
                 height={height}
                 onRowsRendered={onRowsRendered}
-                ref={registerChild}
+                ref={(ref: List | null) => {
+                  listRef.current = ref;
+                  registerChild(ref);
+                }}
                 rowCount={children.length}
                 rowHeight={getItemSize}
                 rowRenderer={renderTile}

@@ -48,7 +48,7 @@ const SubmenuCommon = (props) => {
     loadBaseInfo,
     isLoadedSubmenu,
     getWhiteLabelLogoUrls,
-    currentDeviceType,
+    deviceType,
     isMobileView,
   } = props;
   const navigate = useNavigate();
@@ -118,9 +118,9 @@ const SubmenuCommon = (props) => {
       startSelect={currentTab}
       onSelect={(e) => onSelect(e)}
       topProps={
-        currentDeviceType === DeviceType.desktop
+        deviceType === DeviceType.desktop
           ? 0
-          : currentDeviceType === DeviceType.mobile
+          : deviceType === DeviceType.mobile
             ? "53px"
             : "61px"
       }
@@ -137,9 +137,9 @@ export default inject(({ settingsStore, common }) => {
     getWhiteLabelLogoUrls,
   } = common;
 
-  const currentDeviceType = settingsStore.currentDeviceType;
+  const deviceType = settingsStore.deviceType;
 
-  const isMobileView = currentDeviceType === DeviceType.mobile;
+  const isMobileView = deviceType === DeviceType.mobile;
   return {
     loadBaseInfo: async (page) => {
       await initSettings(page);
@@ -148,7 +148,7 @@ export default inject(({ settingsStore, common }) => {
     setIsLoadedSubmenu,
     isLoadedSubmenu,
     getWhiteLabelLogoUrls,
-    currentDeviceType,
+    deviceType,
     isMobileView,
   };
 })(withLoading(withTranslation("Settings")(observer(SubmenuCommon))));

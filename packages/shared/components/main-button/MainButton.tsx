@@ -24,48 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { ReactSVG } from "react-svg";
 
 import TriangleNavigationDownReactSvgUrl from "PUBLIC_DIR/images/triangle.navigation.down.react.svg?url";
 
 import { Text } from "../text";
-import { ContextMenu } from "../context-menu";
+import { ContextMenu, ContextMenuTypeOnClick } from "../context-menu";
 
 import { GroupMainButton } from "./MainButton.styled";
 import { MainButtonProps } from "./MainButton.types";
 import MainButtonTheme from "./MainButton.theme";
 
 const MainButton = (props: MainButtonProps) => {
-  const { text, model, isDropdown, isDisabled, onAction, opened } = props;
+  const { text, model, isDropdown, isDisabled, onAction } = props;
   const { id, ...rest } = props;
 
   const ref = useRef(null);
   const menuRef = useRef<null | {
     show: (e: React.MouseEvent) => void;
     hide: (e: React.MouseEvent) => void;
+    toggle: (e: React.MouseEvent) => boolean;
+    getVisible: () => boolean;
   }>(null);
-
-  const [isOpen, setIsOpen] = useState(opened || false);
+  const visibleRef = useRef(false);
 
   const stopAction = (e: React.MouseEvent) => e.preventDefault();
 
-  const toggle = (e: React.MouseEvent, isOpenProp: boolean) => {
+  const toggle = (e: React.MouseEvent) => {
     if (!menuRef.current) return;
 
     const menu = menuRef.current;
 
-    if (isOpenProp) {
-      menu.show(e);
-    } else {
+    if (visibleRef.current) {
       menu.hide(e);
+      visibleRef.current = false;
+    } else {
+      visibleRef.current = menu.toggle(e);
     }
-
-    setIsOpen(isOpenProp);
-  };
-
-  const onHide = () => {
-    setIsOpen(false);
   };
 
   const onMainButtonClick = (e: React.MouseEvent) => {
@@ -73,12 +69,26 @@ const MainButton = (props: MainButtonProps) => {
       if (!isDropdown) {
         onAction?.(e);
       } else {
-        toggle(e, !isOpen);
+        toggle(e);
       }
     } else {
       stopAction(e);
     }
   };
+
+  const newModel = React.useMemo(() => {
+    return model.map((m) => {
+      if ("onClick" in m && m.onClick) {
+        const onClick: ContextMenuTypeOnClick = (e) => {
+          visibleRef.current = false;
+          m.onClick?.(e);
+        };
+        return { ...m, onClick };
+      }
+
+      return m;
+    });
+  }, [model]);
 
   return (
     <GroupMainButton {...rest} ref={ref} data-testid="main-button">
@@ -91,12 +101,7 @@ const MainButton = (props: MainButtonProps) => {
               src={TriangleNavigationDownReactSvgUrl}
             />
 
-            <ContextMenu
-              model={model}
-              containerRef={ref}
-              ref={menuRef}
-              //  onHide={onHide}
-            />
+            <ContextMenu model={newModel} containerRef={ref} ref={menuRef} />
           </>
         )}
       </MainButtonTheme>

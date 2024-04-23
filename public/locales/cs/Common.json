@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "O nás",
   "AboutCompanyTitle": "O tomto programu",
   "AccessDenied": "Přístup odepřen",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "Byl dosažen limit placených uživatelů.",
   "ReadInstructions": "Přečtěte si pokyny",
   "ReadOnly": "Pouze pro čtení",
+  "Reconnect": "Připojit znovu",
   "ReconnectStorage": "Opětovné připojení úložiště",
   "RecoverDescribeYourProblemPlaceholder": "Popište svůj problém",
   "RecoverTitle": "Obnovení přístupu",

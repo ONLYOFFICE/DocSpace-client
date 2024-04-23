@@ -42,7 +42,7 @@ export default async function RootLayout({
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
 
   return (
-    <html lang="en">
+    <html lang="en" translate="no">
       <head>
         <link id="favicon" rel="shortcut icon" type="image/x-icon" />
         <meta charSet="utf-8" />

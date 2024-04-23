@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Informationen",
   "AboutCompanyTitle": "Über diese Software",
   "AccessDenied": "Zugriff verweigert",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "Das Limit von Benutzern wurde erreicht.",
   "ReadInstructions": "Anleitung lesen",
   "ReadOnly": "Schreibgeschützt",
+  "Reconnect": "Neu verbinden",
   "ReconnectStorage": "Speicher wieder verbinden",
   "RecoverDescribeYourProblemPlaceholder": "Bitte Problem beschreiben",
   "RecoverTitle": "Zugriffswiederherstellung",

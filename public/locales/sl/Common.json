@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "O nas",
   "AboutCompanyTitle": "O tem programu",
   "AccessDenied": "Dostop je zavrnjen",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "Omejitev števila plačanih uporabnikov je bila dosežena.",
   "ReadInstructions": "Beri navodila",
   "ReadOnly": "Samo za branje",
+  "Reconnect": "Ponovno povezovanje",
   "ReconnectStorage": "Ponovno poveži shrambo",
   "RecoverDescribeYourProblemPlaceholder": "Opišite vaš problem",
   "RecoverTitle": "Dostop za obnovo",

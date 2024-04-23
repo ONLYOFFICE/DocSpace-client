@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Tietoja",
   "AboutCompanyTitle": "Tietoja tästä ohjelmasta",
   "AccessDenied": "Pääsy evätty",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "Maksettu käyttäjien määrän raja on ylitetty.",
   "ReadInstructions": "Lue ohjeet",
   "ReadOnly": "Vain luku",
+  "Reconnect": "Yhdistä uudelleen",
   "ReconnectStorage": "Yhdistä muisti uudelleen",
   "RecoverDescribeYourProblemPlaceholder": "Kuvaile ongelmasi",
   "RecoverTitle": "Käytä palautusta",

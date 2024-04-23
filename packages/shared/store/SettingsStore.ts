@@ -48,7 +48,12 @@ import {
   TVersionBuild,
 } from "../api/settings/types";
 import { TUser } from "../api/people/types";
-import { size as deviceSize, isTablet, getSystemTheme } from "../utils";
+import {
+  size as deviceSize,
+  isTablet,
+  getSystemTheme,
+  getDeviceTypeByWidth,
+} from "../utils";
 import {
   frameCallEvent,
   getShowText,
@@ -62,7 +67,7 @@ import FirebaseHelper from "../utils/firebase";
 import SocketIOHelper from "../utils/socket";
 import { TWhiteLabel } from "../utils/whiteLabelHelper";
 
-import { ThemeKeys, TenantStatus, DeviceType, UrlActionType } from "../enums";
+import { ThemeKeys, TenantStatus, UrlActionType } from "../enums";
 import {
   LANGUAGE,
   COOKIE_EXPIRATION_YEAR,
@@ -1091,11 +1096,19 @@ class SettingsStore {
   };
 
   get currentDeviceType() {
-    if (this.windowWidth <= deviceSize.mobile) return DeviceType.mobile;
+    return getDeviceTypeByWidth(this.windowWidth);
+  }
 
-    if (isTablet(this.windowWidth)) return DeviceType.tablet;
+  get deviceType() {
+    const angleByRadians = (Math.PI / 180) * window.screen.orientation.angle;
+    const width = Math.abs(
+      Math.round(
+        Math.sin(angleByRadians) * window.innerHeight +
+          Math.cos(angleByRadians) * this.windowWidth,
+      ),
+    );
 
-    return DeviceType.desktop;
+    return getDeviceTypeByWidth(width);
   }
 
   get enablePortalRename() {

@@ -103,7 +103,7 @@
   "SettingUpColumns": "Setting up Columns",
   "SettingUpColumnsDescription": "You can disable the ability for users to manage and customize file information columns in list view.",
   "SetUp": "Start setting up",
-  "ShowEditedFiles": "Show edited files in editor ONLYOFFICE",
+  "ShowEditedFiles": "Show files supported by ONLYOFFICE editors",
   "SortOrder": "Sort order",
   "Subtitle": "Subtitle",
   "SubtitleDescription": "Subtitle with additional comments or descriptions for the current directory.",

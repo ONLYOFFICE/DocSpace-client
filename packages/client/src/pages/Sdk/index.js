@@ -309,7 +309,6 @@ const Sdk = ({
       component = <AppLoader />;
   }
 
-  console.log(frameConfig?.filterParam);
   return component;
 };
 

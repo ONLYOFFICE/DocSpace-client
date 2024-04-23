@@ -2046,7 +2046,7 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["open-pdf"]);
       }
 
-      if (!item.security.EditForm) {
+      if (!item.security.EditForm || !item.startFilling) {
         fileOptions = this.removeOptions(fileOptions, ["edit-pdf"]);
       }
 

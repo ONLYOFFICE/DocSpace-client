@@ -3956,7 +3956,7 @@ class FilesStore {
     });
   };
 
-  //Duplicate of countTilesInRow, used to update the number of tiles in a row after the window is resized.
+  //Used to update the number of tiles in a row after the window is resized.
   getCountTilesInRow = () => {
     const isDesktopView = isDesktop();
     const isMobileView = isMobile();
@@ -3978,7 +3978,7 @@ class FilesStore {
 
     containerWidth += tileGap;
     if (!isMobileView) containerWidth -= 1;
-    if (!isDesktopView) containerWidth += 3; //tablet tile margin -3
+    if (!isDesktopView) containerWidth += 3; //tablet tile margin -3px (TileContainer.js)
 
     return Math.floor(containerWidth / minTileWidth);
   };

@@ -31,7 +31,7 @@ import Headline from "@docspace/shared/components/headline/Headline";
 
 const StyledHeadline = styled(Headline)`
   font-weight: 700;
-  font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+  font-size: 18px;
   line-height: 24px;
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
@@ -43,7 +43,7 @@ const StyledHeadline = styled(Headline)`
         `}
 
   @media ${tablet} {
-    font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
+    font-size: 21px;
     line-height: 28px;
   }
 `;

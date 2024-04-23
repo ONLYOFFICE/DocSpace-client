@@ -341,7 +341,7 @@ const StyledHeaderContent = styled.div`
     .files-operations-header,
     .sharing_panel-header {
       margin: 12px 0;
-      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+      font-size: 18px;
     }
   }
 `;
@@ -478,7 +478,7 @@ const StyledSharingBody = styled(Scrollbar)`
   .sharing_panel-text {
     line-height: 24px;
     font-weight: 600;
-    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    font-size: 14px;
   }
 
   .sharing_panel-link {
@@ -589,13 +589,13 @@ const StyledSharingBody = styled(Scrollbar)`
       //padding-right: 15px;
 
       .sharing_panel-remove-icon {
-        font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+        font-size: 12px;
       }
     }
 
     .sharing_panel-text,
     .sharing_panel-link span {
-      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+      font-size: 13px;
     }
   }
 
@@ -621,7 +621,7 @@ const StyledFooter = styled.div`
   .sharing_panel-checkbox {
     span {
       font-weight: 600;
-      font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+      font-size: 14px;
     }
 
     .checkbox {
@@ -667,7 +667,7 @@ const StyledFooter = styled.div`
 
     .sharing_panel-checkbox {
       span {
-        font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+        font-size: 13px;
       }
     }
 

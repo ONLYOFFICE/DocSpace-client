@@ -191,7 +191,7 @@ const StyledDropDown = styled(DropDown)<{ heightProp?: string }>`
     background-color: ${(props) =>
       props.theme.mainButtonMobile.dropDown.backgroundActionMobile};
     border-radius: 3px;
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
     display: block;
   }
 `;

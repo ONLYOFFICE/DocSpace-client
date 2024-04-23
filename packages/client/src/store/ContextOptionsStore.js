@@ -373,7 +373,10 @@ class ContextOptionsStore {
       return toastr.success(t("Translations:LinkCopySuccess"));
     }
 
-    if (item.rootFolderType === FolderType.SHARE) {
+    if (
+      item.rootFolderType === FolderType.Recent ||
+      item.rootFolderType === FolderType.SHARE
+    ) {
       copy(item.webUrl);
       return toastr.success(t("Translations:LinkCopySuccess"));
     }

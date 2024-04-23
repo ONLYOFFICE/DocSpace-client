@@ -55,15 +55,18 @@ const SectionHeaderContent = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const path = location.pathname;
-  const item = getItemByLink(path);
+  const item = React.useMemo(() => getItemByLink(path), [path]);
+  const isBackup = path.includes("backup");
 
   const onBackToParent = () => {
     navigate(-1);
   };
 
+  const headerText = isBackup ? t("Backup") : t(item?.tKey);
+
   return (
     <StyledHeader>
-      {!item?.isHeader && (
+      {item && !item?.isHeader && (
         <IconButton
           iconName={ArrowPathReactSvgUrl}
           size={17}
@@ -73,7 +76,7 @@ const SectionHeaderContent = () => {
         />
       )}
       <Headline type="content" truncate={true}>
-        <div className="header">{t(item?.tKey)}</div>
+        <div className="header">{headerText}</div>
       </Headline>
     </StyledHeader>
   );

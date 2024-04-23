@@ -192,7 +192,7 @@ const EditRoomEvent = ({
       if (roomParams.icon.uploadedFile) {
         updateRoom(item, {
           ...room,
-          logo: { big: item.logo.small },
+          logo: { big: item.logo.original },
         });
 
         addActiveItems(null, [room.id]);
@@ -269,7 +269,6 @@ const EditRoomEvent = ({
 
   useEffect(() => {
     const logo = item?.logo?.original ? item.logo.original : "";
-
     if (logo) {
       fetchLogoAction(logo);
     }

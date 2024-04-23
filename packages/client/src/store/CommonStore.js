@@ -73,12 +73,11 @@ class CommonStore {
   };
 
   initSettings = async (page) => {
-    const isMobileView =
-      this.settingsStore.currentDeviceType === DeviceType.mobile;
+    const isMobileView = this.settingsStore.deviceType === DeviceType.mobile;
 
     if (this.isInit) return;
 
-    this.isInit = true;
+    this.isInit = Boolean(page);
 
     const { standalone } = this.settingsStore;
 

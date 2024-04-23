@@ -40,7 +40,7 @@ const PROXY_BASE_URL = combineUrl(
 );
 
 const bonusUrl = combineUrl(PROXY_BASE_URL, "/bonus");
-const BonusItem = ({ showText, toggleArticleOpen }) => {
+const BonusItem = ({ showText, toggleArticleOpen, currentColorScheme }) => {
   const { t } = useTranslation("Common");
 
   const navigate = useNavigate();
@@ -61,14 +61,16 @@ const BonusItem = ({ showText, toggleArticleOpen }) => {
       onClick={onClick}
       folderId="document_catalog-bonus"
       style={{ marginTop: "16px" }}
+      $currentColorScheme={currentColorScheme}
     />
   );
 };
 
 export default inject(({ settingsStore }) => {
-  const { showText, toggleArticleOpen } = settingsStore;
+  const { showText, toggleArticleOpen, currentColorScheme } = settingsStore;
   return {
     showText,
     toggleArticleOpen,
+    currentColorScheme,
   };
 })(observer(BonusItem));

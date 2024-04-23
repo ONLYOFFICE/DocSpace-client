@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
 import moment from "moment-timezone";
 
 import { isArrayEqual } from "./array";
@@ -54,6 +56,7 @@ import {
   isTouchDevice,
   checkIsSSR,
   INFO_PANEL_WIDTH,
+  isMobileDevice,
 } from "./device";
 import { getCookie } from "./cookie";
 import { Context, Provider, Consumer } from "./context";
@@ -72,6 +75,7 @@ import {
   isBetaLanguage,
   getLogoUrl,
 } from "./common";
+import { DeviceType } from "../enums";
 
 export {
   isBetaLanguage,
@@ -121,6 +125,7 @@ export {
   DomHelpers,
   ObjectUtils,
   getLogoUrl,
+  isMobileDevice,
 };
 
 export const getModalType = () => {
@@ -139,4 +144,12 @@ export const presentInArray = (
   const pattern = caseInsensitive ? search.toLowerCase() : search;
   const result = array?.findIndex((item) => item === pattern);
   return result !== -1;
+};
+
+export const getDeviceTypeByWidth = (width: number): DeviceType => {
+  if (width <= size.mobile) return DeviceType.mobile;
+
+  if (isTablet(width)) return DeviceType.tablet;
+
+  return DeviceType.desktop;
 };

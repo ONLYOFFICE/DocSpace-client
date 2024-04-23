@@ -27,6 +27,7 @@
 import React, { useEffect, useState } from "react";
 import { observer, inject } from "mobx-react";
 import { isMobile } from "@docspace/shared/utils";
+import { DeviceType } from "@docspace/shared/enums";
 
 const withLoading = (WrappedComponent) => {
   const withLoading = (props) => {
@@ -43,9 +44,10 @@ const withLoading = (WrappedComponent) => {
       isBurgerLoading,
       setIsBurgerLoading,
       enablePortalRename,
+      deviceType,
     } = props;
 
-    const [mobileView, setMobileView] = useState(true);
+    const viewMobile = deviceType === DeviceType.mobile;
 
     useEffect(() => {
       if (window.location.pathname.includes("profile")) {
@@ -63,25 +65,9 @@ const withLoading = (WrappedComponent) => {
       }
     }, [isLoadedArticleBody, setIsBurgerLoading]);
 
-    useEffect(() => {
-      window.addEventListener("resize", checkInnerWidth);
-
-      return () => window.removeEventListener("resize", checkInnerWidth);
-    }, []);
-
-    const checkInnerWidth = () => {
-      if (isMobile()) {
-        setMobileView(true);
-      } else {
-        setMobileView(false);
-      }
-    };
-
     const pathname = location.pathname;
     const index = pathname.lastIndexOf("/");
     const setting = pathname.slice(index + 1);
-
-    const viewMobile = !!(isMobile() && mobileView);
 
     const loadedPortalRenaming = enablePortalRename
       ? isLoadedPortalRenaming
@@ -164,8 +150,12 @@ const withLoading = (WrappedComponent) => {
       isLoadedWelcomePageSettings,
     } = common;
 
-    const { isBurgerLoading, setIsBurgerLoading, enablePortalRename } =
-      settingsStore;
+    const {
+      isBurgerLoading,
+      setIsBurgerLoading,
+      enablePortalRename,
+      deviceType,
+    } = settingsStore;
 
     return {
       isLoadedArticleBody,
@@ -180,6 +170,7 @@ const withLoading = (WrappedComponent) => {
       isBurgerLoading,
       setIsBurgerLoading,
       enablePortalRename,
+      deviceType,
     };
   })(observer(withLoading));
 };

@@ -66,6 +66,7 @@ const InfoPanelBodyContent = ({
     (isInsideGroup && (!selectedItems.length || !!selectedItems[0].manager));
   const isPeople =
     getIsPeople() ||
+    (getIsGroups() && !isInsideGroup && !selectedItems[0]?.manager) ||
     (isInsideGroup && selectedItems.length && !selectedItems[0].manager);
 
   const isSeveralItems = props.selectedItems?.length > 1;

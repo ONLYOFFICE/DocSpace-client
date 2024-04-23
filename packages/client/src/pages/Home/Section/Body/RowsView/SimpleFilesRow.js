@@ -167,6 +167,12 @@ const StyledSimpleFilesRow = styled(Row)`
   .badges {
     display: flex;
     align-items: center;
+
+    .badge-version {
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 
   .lock-file {

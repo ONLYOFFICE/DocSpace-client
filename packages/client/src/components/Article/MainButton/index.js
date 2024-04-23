@@ -705,7 +705,6 @@ export default inject(
     const currentFolderId = selectedFolderStore.id;
 
     const { isAdmin, isOwner, isRoomAdmin } = userStore.user;
-    console.log(userStore.user);
     const { isGracePeriod } = currentTariffStatusStore;
 
     const { setOformFromFolderId, oformsFilter } = oformsStore;

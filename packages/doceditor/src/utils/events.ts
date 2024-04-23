@@ -75,8 +75,23 @@ export const onSDKRequestHistoryClose = () => {
 export const onSDKRequestEditRights = async (fileInfo?: TFile) => {
   console.log("ONLYOFFICE Document Editor requests editing rights");
   const url = window.location.href;
-
+  const isPDF = fileInfo?.fileExst === ".pdf";
   const index = url.indexOf("&action=view");
+
+  if (index === -1 && isPDF) {
+    const newURL = new URL(url);
+
+    if (newURL.searchParams.has("action")) {
+      newURL.searchParams.delete("action");
+    }
+
+    newURL.searchParams.append("action", "edit");
+
+    history.pushState({}, "", newURL.toString());
+    document.location.reload();
+
+    return;
+  }
 
   if (index) {
     let convertUrl = url.substring(0, index);

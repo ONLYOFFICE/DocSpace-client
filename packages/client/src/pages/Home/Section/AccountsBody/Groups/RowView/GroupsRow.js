@@ -128,6 +128,7 @@ const GroupsRow = ({
               color={nameColor}
               isTextOverflow={true}
               onClick={onOpenGroup}
+              dir="auto"
             >
               {item.name}
             </Link>

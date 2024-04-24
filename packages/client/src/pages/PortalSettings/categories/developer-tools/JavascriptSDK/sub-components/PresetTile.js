@@ -66,7 +66,8 @@ const TileContainer = styled.div`
     }
 
     .icon {
-      transform: scale(-1, 1);
+      ${({ theme }) =>
+        theme.interfaceDirection === "ltr" && "transform: scale(-1, 1);"}
     }
 
     :hover {

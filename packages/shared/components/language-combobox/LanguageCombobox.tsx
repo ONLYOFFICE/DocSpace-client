@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import { mapCulturesToArray } from "../../utils/common";
 import { isMobile } from "../../utils";
 import { StyledComboBox } from "./LanguageCombobox.styled";
-import { TCulture, ComboboxProps } from "./LanguageCmbobox.types";
+import { TCulture, ComboboxProps } from "./LanguageCombobox.types";
 
 const LanguageCombobox = (props: ComboboxProps) => {
   const { cultures, onSelectLanguage, selectedCulture, className } = props;

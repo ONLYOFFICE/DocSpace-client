@@ -200,7 +200,8 @@ const Editor = ({
   newConfig.events = {
     onDocumentReady,
     onRequestHistoryClose: onSDKRequestHistoryClose,
-    onRequestEditRights: () => onSDKRequestEditRights(fileInfo),
+    onRequestEditRights: () =>
+      onSDKRequestEditRights(fileInfo, newConfig.documentType),
     onAppReady: onSDKAppReady,
     onInfo: onSDKInfo,
     onWarning: onSDKWarning,

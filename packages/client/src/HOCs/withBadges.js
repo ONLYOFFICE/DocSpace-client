@@ -125,7 +125,7 @@ export default function withBadges(WrappedComponent) {
     };
 
     onCreateRoom = () => {
-      console.log("onCreateRoomFromTemplate"); //TODO: Templates
+      this.props.onCreateRoomFromTemplate(this.props.item);
     };
 
     render() {

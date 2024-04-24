@@ -1930,6 +1930,7 @@ class FilesStore {
   getFilesContextOptions = (item, fromInfoPanel) => {
     const isFile = !!item.fileExst || item.contentLength;
     const isRoom = !!item.roomType;
+    const isTemplate = true; //roomType, isTemplate //TODO: Templates
     const isFavorite =
       (item.fileStatus & FileStatus.IsFavorite) === FileStatus.IsFavorite;
 
@@ -2271,6 +2272,20 @@ class FilesStore {
       fileOptions = this.removeSeparator(fileOptions);
 
       return fileOptions;
+    } else if (isTemplate) {
+      let templateOptions = [
+        "select",
+        "open",
+        "separator0",
+        "create-room",
+        "edit-template",
+        "access-settings",
+        "room-info",
+        "separator1",
+        "delete",
+      ];
+
+      return templateOptions;
     } else if (isRoom) {
       const canInviteUserInRoom = item.security?.EditAccess;
       const canRemoveRoom = item.security?.Delete;
@@ -3201,6 +3216,7 @@ class FilesStore {
             : folderUrl;
 
       const isRoom = !!roomType;
+      const isTemplate = true; //TODO: Templates
 
       const icon =
         isRoom && logo?.medium
@@ -3304,6 +3320,7 @@ class FilesStore {
         isEditing,
         roomType,
         isRoom,
+        isTemplate,
         isArchive,
         tags,
         pinned,

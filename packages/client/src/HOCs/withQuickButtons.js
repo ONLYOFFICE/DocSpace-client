@@ -100,10 +100,6 @@ export default function withQuickButtons(WrappedComponent) {
       }
     };
 
-    onCreateRoom = () => {
-      console.log("onCreateRoomFromTemplate"); //TODO: Templates
-    };
-
     render() {
       const { isLoading } = this.state;
 
@@ -119,6 +115,7 @@ export default function withQuickButtons(WrappedComponent) {
         isPersonalRoom,
         isArchiveFolder,
         isTemplatesFolder,
+        onCreateRoomFromTemplate,
       } = this.props;
 
       const quickButtonsComponent = (
@@ -139,7 +136,7 @@ export default function withQuickButtons(WrappedComponent) {
           folderCategory={folderCategory}
           onCopyPrimaryLink={this.onCopyPrimaryLink}
           isArchiveFolder={isArchiveFolder}
-          onCreateRoom={this.onCreateRoom}
+          onCreateRoom={onCreateRoomFromTemplate}
           isTemplatesFolder={isTemplatesFolder}
         />
       );
@@ -164,8 +161,12 @@ export default function withQuickButtons(WrappedComponent) {
       filesStore,
       infoPanelStore,
     }) => {
-      const { lockFileAction, setFavoriteAction, onSelectItem } =
-        filesActionsStore;
+      const {
+        lockFileAction,
+        setFavoriteAction,
+        onSelectItem,
+        onCreateRoomFromTemplate,
+      } = filesActionsStore;
       const {
         isPersonalFolderRoot,
         isArchiveFolderRoot,
@@ -198,6 +199,7 @@ export default function withQuickButtons(WrappedComponent) {
         getPrimaryFileLink,
         setShareChanged,
         isTemplatesFolder,
+        onCreateRoomFromTemplate,
       };
     },
   )(observer(WithQuickButtons));

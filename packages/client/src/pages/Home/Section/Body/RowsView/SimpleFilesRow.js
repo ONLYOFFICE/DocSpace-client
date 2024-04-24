@@ -204,7 +204,8 @@ const StyledSimpleFilesRow = styled(Row)`
       display: none;
     }
 
-    .row-copy-link {
+    .row-copy-link,
+    .tablet-row-create-room {
       display: block;
 
       ${isMobileOnly &&

@@ -2720,6 +2720,14 @@ class FilesActionStore {
     await deleteFilesFromRecent(fileIds);
     await refreshFiles();
   };
+
+  onCreateRoomFromTemplate = (item) => {
+    console.log("onCreateRoomFromTemplate", item); //TODO: Templates
+
+    const event = new Event(Events.CREATE_ROOM_TEMPLATE);
+    event.item = item;
+    window.dispatchEvent(event);
+  };
 }
 
 export default FilesActionStore;

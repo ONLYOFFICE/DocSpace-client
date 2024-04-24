@@ -258,8 +258,6 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
   }, []);
 
   const onCreateRoomTemplate = (e) => {
-    console.log("onCreateRoomTemplate", e);
-
     const visible = e.item ? true : false;
 
     setCreateRoomTemplateDialog({

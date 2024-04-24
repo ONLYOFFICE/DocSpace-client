@@ -75,11 +75,16 @@ const StyledButtonContainer = styled.div`
 
   gap: 8px;
 
-  margin-top: 16px;
+  ${({ isEdit }) =>
+    !isEdit &&
+    css`
+      margin-top: 16px;
+    `};
 `;
 
 const CreateRoomTemplate = (props) => {
-  const { visible, onClose, item, fetchedTags, folderFormValidation } = props;
+  const { visible, onClose, item, fetchedTags, folderFormValidation, isEdit } =
+    props;
   const { roomType, title, logo, createdBy } = item;
   console.log("item", item);
 
@@ -155,7 +160,7 @@ const CreateRoomTemplate = (props) => {
     >
       <ModalDialog.Header>
         <Text fontSize="21px" fontWeight={700}>
-          {t("Files:SaveAsTemplate")}
+          {item.isEdit ? t("Files:EditTemplate") : t("Files:SaveAsTemplate")}
         </Text>
       </ModalDialog.Header>
 
@@ -222,13 +227,15 @@ const CreateRoomTemplate = (props) => {
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
-        <Checkbox
-          label={t("Files:OpenCreatedTemplate")}
-          isChecked={openCreatedIsChecked}
-          onChange={onChangeOpenCreated}
-        />
+        {!item.isEdit && (
+          <Checkbox
+            label={t("Files:OpenCreatedTemplate")}
+            isChecked={openCreatedIsChecked}
+            onChange={onChangeOpenCreated}
+          />
+        )}
 
-        <StyledButtonContainer>
+        <StyledButtonContainer isEdit={item.isEdit}>
           <Button
             id="create-room-template-modal_submit"
             tabIndex={5}

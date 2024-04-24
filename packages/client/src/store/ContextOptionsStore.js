@@ -65,6 +65,7 @@ import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
 import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
+import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 
 import { makeAutoObservable } from "mobx";
@@ -669,9 +670,11 @@ class ContextOptionsStore {
   };
 
   onCreateRoomTemplate = (item) => {
-    const event = new Event(Events.CREATE_ROOM_TEMPLATE);
-    event.item = item;
-    window.dispatchEvent(event);
+    this.filesActionsStore.onCreateRoomFromTemplate(item);
+  };
+
+  onEditRoomTemplate = (item) => {
+    this.filesActionsStore.onCreateRoomFromTemplate({ ...item, isEdit: true });
   };
 
   // onLoadLinks = async (t, item) => {
@@ -1295,11 +1298,27 @@ class ContextOptionsStore {
         disabled: !item.security?.Reconnect,
       },
       {
+        id: "option_create-room",
+        key: "create-room",
+        label: t("CreateRoom"),
+        icon: CreateRoomReactSvgUrl,
+        onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),
+        disabled: false,
+      },
+      {
         id: "option_edit-room",
         key: "edit-room",
         label: t("EditRoom"),
         icon: SettingsReactSvgUrl,
         onClick: () => this.onClickEditRoom(item),
+        disabled: false,
+      },
+      {
+        id: "option_edit-room",
+        key: "edit-template",
+        label: t("EditTemplate"),
+        icon: SettingsReactSvgUrl,
+        onClick: () => this.onEditRoomTemplate(item),
         disabled: false,
       },
       {
@@ -1555,7 +1574,9 @@ class ContextOptionsStore {
         key: "delete",
         label: isRootThirdPartyFolder
           ? t("Common:Disconnect")
-          : t("Common:Delete"),
+          : item.isTemplate
+            ? t("DeleteTemplate")
+            : t("Common:Delete"),
         icon: TrashReactSvgUrl,
         onClick: () =>
           isEditing ? this.onShowEditingToast(t) : this.onClickDelete(item, t),

@@ -318,7 +318,7 @@ const Badges = ({
         <ColorTheme
           themeId={ThemeId.IconButton}
           iconName={TabletLinkReactSvgUrl}
-          className="badge tablet-row-copy-link icons-group  tablet-badge"
+          className="badge tablet-row-copy-link icons-group tablet-badge"
           size={sizeBadge}
           onClick={onCopyPrimaryLink}
           title={t("Files:CopySharedLink")}

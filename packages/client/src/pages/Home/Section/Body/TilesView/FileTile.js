@@ -84,6 +84,7 @@ const FileTile = (props) => {
     onDragOver,
     onDragLeave,
     badgeUrl,
+    additionalInfo,
   } = props;
 
   const temporaryExtension =
@@ -174,8 +175,10 @@ const FileTile = (props) => {
           withShiftSelect={withShiftSelect}
           isHighlight={isHighlight}
           thumbnails1280x720={thumbnails1280x720}
+          additionalInfo={additionalInfo}
         >
           <FilesTileContent
+            t={t}
             item={item}
             sectionWidth={sectionWidth}
             onFilesClick={onFilesClick}

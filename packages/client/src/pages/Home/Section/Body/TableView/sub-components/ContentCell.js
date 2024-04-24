@@ -25,21 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { isMobile } from "@docspace/shared/utils";
 import { StyledText } from "./CellStyles";
 
-const ContentCell = ({ t, item, sideColor }) => {
-  const { contentLength, providerKey, foldersCount, filesCount } = item;
-
-  const additionalComponent = () => {
-    if (!contentLength && !providerKey && !isMobile())
-      return `${t("Translations:Folders")}: ${foldersCount} | ${t("Translations:Files")}: ${filesCount}`;
-
-    return "";
-  };
-
-  const additionalInfo = additionalComponent();
-
+const ContentCell = ({ sideColor, additionalInfo }) => {
   return (
     <StyledText
       color={sideColor}

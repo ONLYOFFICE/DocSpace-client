@@ -207,17 +207,6 @@ const StyledTileContainer = styled.div`
       }
     }
   }
-
-  @media ${tablet} {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: -3px;
-          `
-        : css`
-            margin-right: -3px;
-          `}
-  }
 `;
 
 StyledTileContainer.defaultProps = { theme: Base };

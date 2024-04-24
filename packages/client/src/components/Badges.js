@@ -329,7 +329,7 @@ const Badges = ({
         <ColorTheme
           themeId={ThemeId.IconButton}
           iconName={CreateRoomReactSvgUrl}
-          className="badge tablet-row-copy-link icons-group  tablet-badge"
+          className="badge tablet-row-create-room icons-group  tablet-badge"
           size={sizeBadge}
           onClick={onCreateRoom}
           title={t("Files:CreateRoom")}

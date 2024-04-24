@@ -182,12 +182,14 @@ const StyledSimpleFilesRow = styled(Row)`
     }
   }
 
-  .tablet-row-copy-link {
+  .tablet-row-copy-link,
+  .tablet-row-create-room {
     display: none;
   }
 
   @media ${tablet} {
-    .tablet-row-copy-link {
+    .tablet-row-copy-link,
+    .tablet-row-create-room {
       display: block;
     }
 
@@ -197,7 +199,8 @@ const StyledSimpleFilesRow = styled(Row)`
   }
 
   @media ${mobile} {
-    .tablet-row-copy-link {
+    .tablet-row-copy-link,
+    .tablet-row-create-room {
       display: none;
     }
 

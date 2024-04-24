@@ -30,6 +30,7 @@ import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 
 import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 
 import TileContent from "./sub-components/TileContent";
 import withContent from "../../../../../HOCs/withContent";
@@ -37,6 +38,7 @@ import withBadges from "../../../../../HOCs/withBadges";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { tablet } from "@docspace/shared/utils";
+import { getRoomTypeTitleTranslation } from "SRC_DIR/components/dialogs/CreateEditRoomDialog/data";
 
 const SimpleFilesTileContent = styled(TileContent)`
   .row-main-container {
@@ -132,16 +134,20 @@ const SimpleFilesTileContent = styled(TileContent)`
 `;
 
 const FilesTileContent = ({
+  t,
   item,
   titleWithoutExt,
   linkStyles,
   theme,
   isRooms,
   currentDeviceType,
+  isTemplate,
 }) => {
   const { fileExst, title, viewAccessibility } = item;
 
   const isMedia = viewAccessibility?.ImageView || viewAccessibility?.MediaView;
+
+  const roomType = getRoomTypeTitleTranslation(item.roomType, t);
 
   return (
     <>
@@ -149,6 +155,7 @@ const FilesTileContent = ({
         sideColor={theme.filesSection.tilesView.sideColor}
         isFile={fileExst}
         isRooms={isRooms}
+        className="tile-content"
       >
         <Link
           className="item-file-name"
@@ -164,13 +171,25 @@ const FilesTileContent = ({
         >
           {titleWithoutExt}
         </Link>
+        {isTemplate && (
+          <Text
+            className="item-file-sub-name"
+            color={theme.filesSection.tilesView.subTextColor}
+            fontSize="13px"
+            fontWeight={400}
+            truncate
+          >
+            {roomType}
+          </Text>
+        )}
       </SimpleFilesTileContent>
     </>
   );
 };
 
 export default inject(({ settingsStore, treeFoldersStore }) => {
-  const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
+  const { isRoomsFolder, isArchiveFolder, isTemplatesFolder } =
+    treeFoldersStore;
 
   const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -178,6 +197,7 @@ export default inject(({ settingsStore, treeFoldersStore }) => {
     theme: settingsStore.theme,
     currentDeviceType: settingsStore.currentDeviceType,
     isRooms,
+    isTemplate: isTemplatesFolder,
   };
 })(
   observer(

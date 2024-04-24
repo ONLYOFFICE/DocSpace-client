@@ -40,6 +40,7 @@ import { Base } from "@docspace/shared/themes";
 import { Tags } from "@docspace/shared/components/tags";
 import { Tag } from "@docspace/shared/components/tag";
 import { ROOMS_TYPE_TRANSLATIONS } from "@docspace/shared/constants";
+import TemplatesTile from "./TemplatesTile";
 
 const svgLoader = () => <div style={{ width: "96px" }} />;
 
@@ -100,11 +101,22 @@ const roomsStyles = css`
       isRooms
         ? theme.filesSection.tilesView.tile.roomsBottomBorderRadius
         : theme.filesSection.tilesView.tile.bottomBorderRadius};
+
+    .room-tile_bottom-content-wrapper {
+      display: flex;
+      gap: 20px;
+
+      .room-tile_bottom-content_field {
+        display: flex;
+        flex-direction: column;
+      }
+    }
   }
 `;
 
 const FolderStyles = css`
   height: ${(props) => (props.isRoom ? "120px" : "64px")};
+  height: 126px; //TODO: Templates
 `;
 
 const FileStyles = css`
@@ -150,8 +162,8 @@ const StyledTile = styled.div`
   width: 100%;
   border: ${(props) => props.theme.filesSection.tilesView.tile.border};
 
-  border-radius: ${({ isRooms, theme }) =>
-    isRooms
+  border-radius: ${({ isRooms, isTemplate, theme }) =>
+    isRooms && !isTemplate
       ? theme.filesSection.tilesView.tile.roomsBorderRadius
       : theme.filesSection.tilesView.tile.borderRadius};
   ${(props) => props.showHotkeyBorder && "border-color: #2DA7DB"};
@@ -663,7 +675,7 @@ class Tile extends React.PureComponent {
       isHighlight,
       thumbnails1280x720,
     } = this.props;
-    const { isFolder, isRoom, id, fileExst } = item;
+    const { isFolder, isRoom, isTemplate, id, fileExst } = item;
 
     const renderElement = Object.prototype.hasOwnProperty.call(
       this.props,
@@ -755,9 +767,12 @@ class Tile extends React.PureComponent {
         onClick={this.onFileClick}
         isThirdParty={item.providerType}
         isHighlight={isHighlight}
+        isTemplate={isTemplate}
       >
         {isFolder || (!fileExst && id === -1) ? (
-          isRoom ? (
+          isTemplate ? (
+            <TemplatesTile {...this.props} />
+          ) : isRoom ? (
             <>
               <div className="room-tile_top-content">
                 {renderElement && !(!fileExst && id === -1) && !isEdit && (

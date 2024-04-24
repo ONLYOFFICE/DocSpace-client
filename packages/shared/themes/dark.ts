@@ -2331,6 +2331,7 @@ const Dark: TTheme = {
       sideColor: grayMaxLight,
       color: grayMaxLight,
       textColor: "#858585",
+      subTextColor: "#858585",
     },
 
     animationColor: "rgba(82, 153, 224, 0.16)",

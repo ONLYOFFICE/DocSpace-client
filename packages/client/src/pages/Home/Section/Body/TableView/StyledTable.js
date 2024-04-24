@@ -376,7 +376,8 @@ const StyledBadgesContainer = styled.div`
   }
 
   .row-copy-link,
-  .tablet-row-copy-link {
+  .tablet-row-copy-link,
+  .tablet-row-create-room {
     display: none;
   }
 

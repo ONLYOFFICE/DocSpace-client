@@ -2352,6 +2352,7 @@ export const getBaseTheme = () => {
         sideColor: black,
         color: black,
         textColor: gray,
+        subTextColor: "#657077",
       },
 
       animationColor: "rgba(82, 153, 224, 0.16)",

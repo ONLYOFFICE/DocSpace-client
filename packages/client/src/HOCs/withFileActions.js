@@ -29,6 +29,7 @@ import { inject, observer } from "mobx-react";
 
 import { DeviceType, RoomsType } from "@docspace/shared/enums";
 import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
+import { isMobile } from "@docspace/shared/utils";
 
 export default function withFileActions(WrappedFileItem) {
   class WithFileActions extends React.Component {
@@ -258,6 +259,16 @@ export default function withFileActions(WrappedFileItem) {
       }
     };
 
+    additionalComponent = () => {
+      const { t, item } = this.props;
+      const { contentLength, providerKey, foldersCount, filesCount } = item;
+
+      if (!contentLength && !providerKey && !isMobile())
+        return `${t("Translations:Folders")}: ${foldersCount} | ${t("Translations:Files")}: ${filesCount}`;
+
+      return "";
+    };
+
     render() {
       const {
         item,
@@ -317,6 +328,8 @@ export default function withFileActions(WrappedFileItem) {
 
       const badgeUrl = showPlanetIcon ? Planet12ReactSvgUrl : null;
 
+      const additionalInfo = this.additionalComponent();
+
       return (
         <WrappedFileItem
           onContentFileSelect={this.onContentFileSelect}
@@ -343,6 +356,7 @@ export default function withFileActions(WrappedFileItem) {
           badgeUrl={badgeUrl}
           isRecentTab={isRecentTab}
           canDrag={canDrag}
+          additionalInfo={additionalInfo}
           {...this.props}
         />
       );

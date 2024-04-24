@@ -68,7 +68,6 @@ const LanguageCombobox = (props: ComboboxProps) => {
       displaySelectedOption
       manualWidth="41px"
       noBorder={false}
-      onlyIcon
       type="onlyIcon"
       optionStyle={{ padding: "0 8px" }}
       style={{ padding: "6px 0px" }}

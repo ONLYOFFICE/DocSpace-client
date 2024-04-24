@@ -24,16 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import { TUser } from "@docspace/shared/api/people/types";
+import { TSettings } from "@docspace/shared/api/settings/types";
 
-import React, { createContext, ReactNode } from "react";
-import { RootStore } from "@/store/RootStore";
+import ThemeProvider from "./ThemeProvider";
+import TranslationProvider from "./TranslationProvider";
+import StoreProvider from "./StoreProvider";
 
-export const StoreContext = createContext(RootStore);
+export type TContextData = {
+  user: TUser | undefined;
+  settings: TSettings | undefined;
+};
 
-export const StoreProvider = ({ children }: { children: ReactNode }) => {
+export type TProviders = {
+  children: React.ReactNode;
+  contextData: TContextData;
+};
+
+const Providers = ({ children, contextData }: TProviders) => {
   return (
-    <StoreContext.Provider value={RootStore}>{children}</StoreContext.Provider>
+    <TranslationProvider {...contextData}>
+      <ThemeProvider {...contextData}>
+        <StoreProvider>{children}</StoreProvider>
+      </ThemeProvider>
+    </TranslationProvider>
   );
 };
+
+export default Providers;
 

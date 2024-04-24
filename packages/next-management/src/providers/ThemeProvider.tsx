@@ -24,10 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useContext } from "react";
-import { StoreContext } from "@/providers/StoreProvider";
+"use client";
 
-export const useStores = () => {
-  return useContext(StoreContext);
+import React from "react";
+
+import { ThemeProvider as ComponentThemeProvider } from "@docspace/shared/components/theme-provider";
+import { TUser } from "@docspace/shared/api/people/types";
+import { TSettings } from "@docspace/shared/api/settings/types";
+
+import useTheme from "@/hooks/useTheme";
+import useI18N from "@/hooks/useI18N";
+
+type TThemeProvider = {
+  children: React.ReactNode;
+  settings: TSettings | undefined;
+  user: TUser | undefined;
 };
 
+const ThemeProvider = ({ children, user, settings }: TThemeProvider) => {
+  const { i18n } = useI18N({ settings, user });
+
+  const { theme, currentColorTheme } = useTheme({ user, i18n });
+
+  return (
+    <ComponentThemeProvider
+      theme={theme}
+      currentColorScheme={currentColorTheme}
+    >
+      {children}
+    </ComponentThemeProvider>
+  );
+};
+
+export default ThemeProvider;

@@ -24,10 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useContext } from "react";
-import { StoreContext } from "@/providers/StoreProvider";
+"use client";
 
-export const useStores = () => {
-  return useContext(StoreContext);
+import React from "react";
+import { I18nextProvider } from "react-i18next";
+
+import { TUser } from "@docspace/shared/api/people/types";
+import { TSettings } from "@docspace/shared/api/settings/types";
+
+import useI18N from "@/hooks/useI18N";
+
+type TTranslationProvider = {
+  children: React.ReactNode;
+  settings: TSettings | undefined;
+  user: TUser | undefined;
 };
+
+const TranslationProvider = ({
+  children,
+  settings,
+  user,
+}: TTranslationProvider) => {
+  const { i18n } = useI18N({ settings, user });
+
+  return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
+};
+
+export default TranslationProvider;
 

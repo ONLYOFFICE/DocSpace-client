@@ -24,10 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useContext } from "react";
-import { StoreContext } from "@/providers/StoreProvider";
+"use client";
 
-export const useStores = () => {
-  return useContext(StoreContext);
+import React, { createContext, ReactNode } from "react";
+import { RootStore } from "@/store/RootStore";
+
+export const StoreContext = createContext(RootStore);
+
+const StoreProvider = ({ children }: { children: ReactNode }) => {
+  return (
+    <StoreContext.Provider value={RootStore}>{children}</StoreContext.Provider>
+  );
 };
 
+export default StoreProvider;

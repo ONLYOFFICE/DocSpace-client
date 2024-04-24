@@ -51,7 +51,7 @@ const StyledButtonWrapper = styled.div`
 const StyledDropDownItem = styled(DropDownItem)`
   padding: 0px 16px;
   .drop-down-icon {
-    margin-right: 12px;
+    margin-inline-end: 12px;
     height: 22px;
   }
 `;

@@ -1,12 +1,38 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import copy from "copy-to-clipboard";
 import moment from "moment";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
 
 import { ShareAccessRights } from "../../enums";
+import { LINKS_LIMIT_COUNT } from "../../constants";
 import {
   addExternalLink,
   editExternalLink,
@@ -14,9 +40,12 @@ import {
   getPrimaryLink,
 } from "../../api/files";
 import { TAvailableExternalRights, TFileLink } from "../../api/files/types";
+import { isDesktop } from "../../utils";
+import { copyShareLink } from "../../utils/copy";
 import { TOption } from "../combobox";
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
+import { Tooltip } from "../tooltip";
 import { toastr } from "../toast";
 import { TData } from "../toast/Toast.type";
 import PublicRoomBar from "../public-room-bar";
@@ -88,7 +117,7 @@ const Share = (props: ShareProps) => {
         : await getPrimaryLink(infoPanelSelection.id);
 
       setFileLinks([link]);
-      copy(link.sharedTo.shareLink);
+      copyShareLink(link.sharedTo.shareLink);
       toastr.success(t("Common:GeneralAccessLinkCopied"));
     } catch (error) {
       const message = (error as { message: string }).message
@@ -178,7 +207,7 @@ const Share = (props: ShareProps) => {
           );
       updateLink(link, res);
 
-      copy(link.sharedTo.shareLink);
+      copyShareLink(link.sharedTo.shareLink);
       toastr.success(t("Common:LinkSuccessfullyCopied"));
     } catch (e) {
       toastr.error(e as TData);
@@ -195,17 +224,17 @@ const Share = (props: ShareProps) => {
         ? await editFileLink(
             infoPanelSelection.id,
             link.sharedTo.id,
-            item.access,
+            item.access ?? ({} as ShareAccessRights),
             link.sharedTo.primary,
-            item.internal || false,
+            link.sharedTo.internal || false,
             expDate,
           )
         : await editExternalLink(
             infoPanelSelection.id,
             link.sharedTo.id,
-            item.access,
+            item.access ?? ({} as ShareAccessRights),
             link.sharedTo.primary,
-            item.internal || false,
+            link.sharedTo.internal || false,
             expDate,
           );
 
@@ -221,7 +250,7 @@ const Share = (props: ShareProps) => {
         if (item.access === ShareAccessRights.DenyAccess) {
           toastr.success(t("Common:LinkAccessDenied"));
         } else {
-          copy(link.sharedTo.shareLink);
+          copyShareLink(link.sharedTo.shareLink);
           toastr.success(t("Common:LinkSuccessfullyCopied"));
         }
       }
@@ -259,11 +288,19 @@ const Share = (props: ShareProps) => {
 
       updateLink(link, res);
 
-      copy(link.sharedTo.shareLink);
+      copyShareLink(link.sharedTo.shareLink);
       toastr.success(t("Common:LinkSuccessfullyCopied"));
     } catch (e) {
       toastr.error(e as TData);
     }
+  };
+
+  const getTextTooltip = () => {
+    return (
+      <Text fontSize="12px" noSelect>
+        {t("Common:MaximumNumberOfExternalLinksCreated")}
+      </Text>
+    );
   };
 
   if (hideSharePanel) return null;
@@ -284,12 +321,23 @@ const Share = (props: ShareProps) => {
               {t("Common:SharedLinks")}
             </Text>
             {fileLinks.length > 0 && (
-              <IconButton
-                className="link-to-viewing-icon"
-                iconName={LinksToViewingIconUrl}
-                onClick={addAdditionalLinks}
-                size={16}
-              />
+              <div data-tooltip-id="file-links-tooltip" data-tip="tooltip">
+                <IconButton
+                  className="link-to-viewing-icon"
+                  iconName={LinksToViewingIconUrl}
+                  onClick={addAdditionalLinks}
+                  size={16}
+                  isDisabled={fileLinks.length > LINKS_LIMIT_COUNT}
+                />
+                {fileLinks.length > LINKS_LIMIT_COUNT && (
+                  <Tooltip
+                    float={isDesktop()}
+                    id="file-links-tooltip"
+                    getContent={getTextTooltip}
+                    place="bottom"
+                  />
+                )}
+              </div>
             )}
           </div>
           <LinkRow

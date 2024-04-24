@@ -1,6 +1,10 @@
 {
+  "DeleteAllGroupDescription": "選択したグループは削除されます。グループのユーザーはDocSpaceから削除されません。続けてよろしいですか？",
+  "DeleteAllGroupsTitle": "グループの削除",
   "DeleteFile": "このファイルを削除しようとしています。",
   "DeleteFolder": "このフォルダを削除しようとしています。",
+  "DeleteGroupDescription": "{{groupName}} グループが削除されます。グループ内のユーザーはDocSpaceから削除されません。続けてよろしいですか？",
+  "DeleteGroupTitle": "グループの削除",
   "DeleteItems": "この項目を削除しようとしています。",
   "DeleteItemsSharedNote": "誰かと共有している場合は、利用できなくなりますのでご注意ください。",
   "DeleteRoom": "このルームを削除しようとしています。復元することはできません。",
@@ -10,7 +14,6 @@
   "FolderPermanentlyDeleted": "このフォルダは30日後に完全に削除されます。",
   "ItemsPermanentlyDeleted": "アイテムは30日で永久に削除されます。",
   "MoveToTrashButton": "ゴミ箱への移動",
-  "MoveToTrashFile": "このファイルを削除しようとしています。そうすると、共有されたユーザーに利用可能できなくなります。ファイルは30日後に完全に削除されます。ファイルを削除したいを確認してください。",
   "MoveToTrashTitle": "ゴミ箱に移動しますか？",
   "UnsubscribeButton": "登録解除",
   "UnsubscribeNote": "本当にリストから選択したアイテムの登録を解除してもよろしいですか？",

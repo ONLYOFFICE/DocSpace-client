@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import styled, { css } from "styled-components";
 
 import { Base } from "@docspace/shared/themes";
@@ -7,7 +33,8 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
   background: ${(props) => props.theme.errorContainer.background};
   cursor: default;
   width: ${(props) => (props.isEditor ? "100%" : "auto")};
-  height: ${(props) => (props.isEditor ? "100%" : "100vh")};
+  height: "100%";
+
   ${(props) =>
     props.isEditor &&
     css`
@@ -18,24 +45,24 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
-  padding-top: 36px;
+  padding-top: 100px;
   border: 0;
   box-sizing: border-box;
 
-  $ .error_description_link {
+  .error_description_link {
     color: #2da7db;
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
     font-weight: 600;
   }
 
   #container {
     position: relative;
-    margin: 12px 16px 60px 16px;
+    margin: 64px 16px 48px 16px;
   }
 
   #header {
     font-weight: 700;
-    font-size: ${(props) => props.theme.getCorrectFontSize("23px")};
+    font-size: 23px;
     line-height: 28px;
     margin: 8px 0 20px 0;
     text-align: center;
@@ -43,7 +70,7 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
 
   #text {
     font-weight: 600;
-    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    font-size: 14px;
     line-height: 16px;
     text-align: center;
     margin-bottom: 24px;
@@ -64,13 +91,11 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
     body {
       padding: 24px 24px 0 24px;
     }
-
-    #container {
-      margin: 12px 16px 48px 16px;
-    }
   }
 
   @media ${mobile} {
+    padding-top: 80px;
+
     body {
       padding: 18px 18px 0 18px;
     }

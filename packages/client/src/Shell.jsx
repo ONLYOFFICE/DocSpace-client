@@ -1,20 +1,48 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import moment from "moment-timezone";
 import React, { useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
+import { toast as toastify } from "react-toastify";
 
-import { getLogoFromPath } from "@docspace/shared/utils";
 import { Portal } from "@docspace/shared/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Toast, toastr } from "@docspace/shared/components/toast";
+import { ToastType } from "@docspace/shared/components/toast/Toast.enums";
 import { getRestoreProgress } from "@docspace/shared/api/portal";
 import { updateTempContent } from "@docspace/shared/utils/common";
 import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
+import { sendToastReport } from "@docspace/shared/utils/crashReport";
 
 import config from "PACKAGE_FILE";
 
@@ -38,7 +66,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     isDesktop,
     language,
     FirebaseHelper,
-    // personal,
     setCheckedMaintenance,
     socketHelper,
     setPreparationPortalDialogVisible,
@@ -49,7 +76,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     setSnackbarExist,
     userTheme,
     //user,
-    whiteLabelLogoUrls,
     userId,
     currentDeviceType,
     timezone,
@@ -57,6 +83,9 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     setPortalTariff,
     setFormCreationInfo,
     setConvertPasswordDialogVisible,
+    version,
+    pagesWithoutNavMenu,
+    isFrame,
   } = rest;
 
   const theme = useTheme();
@@ -99,30 +128,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
     moment.locale(language);
   }, []);
-
-  useEffect(() => {
-    if (!whiteLabelLogoUrls) return;
-    const favicon = getLogoFromPath(whiteLabelLogoUrls[2]?.path?.light);
-
-    if (!favicon) return;
-
-    const link = document.querySelector("#favicon-icon");
-    link.href = favicon;
-
-    const shortcutIconLink = document.querySelector("#favicon");
-    shortcutIconLink.href = favicon;
-
-    const appleIconLink = document.querySelector(
-      "link[rel~='apple-touch-icon']",
-    );
-
-    if (appleIconLink) appleIconLink.href = favicon;
-
-    const androidIconLink = document.querySelector(
-      "link[rel~='android-touch-icon']",
-    );
-    if (androidIconLink) androidIconLink.href = favicon;
-  }, [whiteLabelLogoUrls]);
 
   useEffect(() => {
     socketHelper.emit({
@@ -320,7 +325,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   }, [userId]);
 
   useEffect(() => {
-    if (!userId || !window.DocSpaceConfig.imageThumbnails) return;
+    if (!userId || !window.DocSpaceConfig?.imageThumbnails) return;
     initIndexedDb();
 
     return () => {
@@ -386,6 +391,24 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       setTheme(systemTheme);
   }, [systemTheme]);
 
+  useEffect(() => {
+    if (!FirebaseHelper.isEnabled || !isLoaded) return;
+    toastify.onChange((payload) => {
+      if (
+        payload.status === "added" &&
+        (payload.type === ToastType.error || payload.type === ToastType.warning)
+      ) {
+        sendToastReport(
+          userId,
+          version,
+          language,
+          payload?.data,
+          FirebaseHelper,
+        );
+      }
+    });
+  }, [isLoaded]);
+
   const rootElement = document.getElementById("root");
 
   const toast =
@@ -394,19 +417,25 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     ) : (
       <Toast />
     );
+  const location = useLocation();
+
+  const withoutNavMenu =
+    isEditor ||
+    pagesWithoutNavMenu ||
+    location.pathname === "/access-restricted";
 
   return (
     <Layout>
       {toast}
       {/* <ReactSmartBanner t={t} ready={ready} /> */}
-      {isEditor ? <></> : <NavMenu />}
-      {currentDeviceType === DeviceType.mobile && <MainBar />}
+      {withoutNavMenu ? <></> : <NavMenu />}
+      {currentDeviceType === DeviceType.mobile && !isFrame && <MainBar />}
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />
 
       <Main isDesktop={isDesktop}>
-        {currentDeviceType !== DeviceType.mobile && <MainBar />}
+        {currentDeviceType !== DeviceType.mobile && !isFrame && <MainBar />}
         <div className="main-container">
           <Outlet />
         </div>
@@ -427,10 +456,16 @@ const ShellWrapper = inject(
   }) => {
     const { i18n } = useTranslation();
 
-    const { init, isLoaded, setProductVersion, language } = authStore;
+    const {
+      init,
+      isLoaded,
+      setProductVersion,
+      language,
+      version,
+      clientError,
+    } = authStore;
 
     const {
-      personal,
       roomsMode,
       isDesktopClient,
       firebaseHelper,
@@ -440,10 +475,11 @@ const ShellWrapper = inject(
       setSnackbarExist,
       socketHelper,
       setTheme,
-      whiteLabelLogoUrls,
       currentDeviceType,
       isFrame,
       frameConfig,
+      isPortalDeactivate,
+      isPortalRestoring,
     } = settingsStore;
 
     const isBase = settingsStore.theme.isBase;
@@ -457,13 +493,20 @@ const ShellWrapper = inject(
           : "Base"
       : userStore?.user?.theme;
 
-    const { setPortalTariff } = currentTariffStatusStore;
+    const { setPortalTariff, isNotPaidPeriod } = currentTariffStatusStore;
 
     const {
       setConvertPasswordDialogVisible,
 
       setFormCreationInfo,
     } = dialogsStore;
+    const { user } = userStore;
+
+    const pagesWithoutNavMenu =
+      clientError ||
+      isPortalDeactivate ||
+      isPortalRestoring ||
+      (isNotPaidPeriod && !user?.isOwner && !user?.isAdmin);
 
     return {
       loadBaseInfo: async () => {
@@ -481,7 +524,6 @@ const ShellWrapper = inject(
 
       isDesktop: isDesktopClient,
       FirebaseHelper: firebaseHelper,
-      personal,
       setCheckedMaintenance,
       setMaintenanceExist,
       socketHelper,
@@ -492,12 +534,14 @@ const ShellWrapper = inject(
       setSnackbarExist,
       userTheme: isFrame ? frameConfig?.theme : userTheme,
       userId: userStore?.user?.id,
-      whiteLabelLogoUrls,
       currentDeviceType,
       showArticleLoader: clientLoadingStore.showArticleLoader,
       setPortalTariff,
       setFormCreationInfo,
       setConvertPasswordDialogVisible,
+      version,
+      pagesWithoutNavMenu,
+      isFrame,
     };
   },
 )(observer(Shell));

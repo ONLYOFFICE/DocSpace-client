@@ -1,9 +1,36 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import AvatarDarkReactSvgUrl from "PUBLIC_DIR/images/avatar.dark.react.svg?url";
 
 import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
 
 import { TTheme } from "./base";
+import { DEFAULT_FONT_FAMILY } from "../constants";
 
 const {
   black,
@@ -36,6 +63,8 @@ const {
   darkRed,
 
   darkErrorStatus,
+  charlestonGreen,
+  outerSpace,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -43,7 +72,7 @@ const Dark: TTheme = {
   isBase: false,
   color: grayMaxLight,
   backgroundColor: black,
-  fontFamily: "Open Sans, sans-serif, Arial",
+  fontFamily: DEFAULT_FONT_FAMILY,
   fontSize: "13px",
 
   text: {
@@ -204,20 +233,20 @@ const Dark: TTheme = {
 
     dropDown: {
       position: "fixed",
-      right: "32px",
-      bottom: "32px",
+      right: "48px",
+      bottom: "48px",
 
       width: "400px",
 
       zIndex: "202",
 
       mobile: {
-        right: "24px",
-        bottom: "24px",
+        right: "32px",
+        bottom: "40px",
 
         marginLeft: "24px",
 
-        width: "calc(100vw - 48px)",
+        width: "calc(100vw - 64px)",
       },
 
       separatorBackground: white,
@@ -278,7 +307,7 @@ const Dark: TTheme = {
     fontWeight: "500",
     textDecoration: "none",
     padding: "0",
-    borderRadius: "2px",
+    borderRadius: "3px",
     height: "40px",
     heightSmall: "32px",
     textAlign: "left",
@@ -286,23 +315,29 @@ const Dark: TTheme = {
     outline: "none",
     width: "100%",
 
+    border: "1px solid #474747",
     background: black,
-    disableBackgroundColor: "rgba(0, 0, 0, 0.08)",
+
+    borderConnect: "none",
     connectBackground:
       "linear-gradient(0deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), #333333",
-    hoverBackground: "#292929",
-    hoverConnectBackground: "#FFFFFF",
-    activeBackground: "#292929",
-    hoverBorder: "#858585",
 
-    boxShadow: "none",
-    hoverBoxShadow: "none",
+    disableBackgroundColor: "rgba(0, 0, 0, 0.08)",
+
+    hoverBackground: black,
+    hoverBorder: "1px solid #858585",
+    hoverConnectBackground: "#FFFFFF",
+    hoverConnectBorder: "none",
+
+    activeBackground: "#282828",
+    activeBorder: "1px solid #CCCCCC",
+    activeConnectBackground: "rgba(255, 255, 255, 0.64)",
+    activeConnectBorder: "none",
 
     color: "rgba(0, 0, 0, 0.54)",
     disableColor: "rgba(0, 0, 0, 0.4)",
     disabledSvgColor: "#474747",
 
-    border: "1px solid #474747",
     text: {
       width: "100%",
       height: "18px",
@@ -321,16 +356,12 @@ const Dark: TTheme = {
 
     svg: {
       margin: "11px 8px",
-      width: "18px",
-      height: "18px",
-      minWidth: "18px",
-      minHeight: "18px",
+      width: "20px",
+      height: "20px",
+      minWidth: "20px",
+      minHeight: "20px",
       fill: darkBlack,
     },
-  },
-
-  socialButtonsGroup: {
-    border: "1px solid #474747",
   },
 
   groupButton: {
@@ -599,6 +630,16 @@ const Dark: TTheme = {
 
     colorDisabledFileIcons: "#5c5c5c",
 
+    backdrop: {
+      backgroundRGBA: {
+        r: 27,
+        g: 27,
+        b: 27,
+        a: 0.4,
+      },
+      blur: 10,
+    },
+
     content: {
       backgroundColor: black,
       modalBorderRadius: "6px",
@@ -851,8 +892,8 @@ const Dark: TTheme = {
 
     borderColor: grayMaxLight,
 
-    iconColor: "#646464",
-    hoverIconColor: "#858585",
+    iconColor: "#858585",
+    hoverIconColor: "#FFFFFF",
   },
 
   textArea: {
@@ -1052,7 +1093,7 @@ const Dark: TTheme = {
 
     roleWrapperContainer: {
       right: {
-        min: "-5px",
+        min: "-2px",
         small: "-2px",
         base: "-2px",
         medium: "-4px",
@@ -1061,7 +1102,7 @@ const Dark: TTheme = {
       },
 
       bottom: {
-        min: "-5px",
+        min: "-2px",
         small: "3px",
         base: "4px",
         medium: "6px",
@@ -1070,11 +1111,13 @@ const Dark: TTheme = {
       },
 
       width: {
+        min: "12px",
         medium: "16px",
         max: "24px",
       },
 
       height: {
+        min: "12px",
         medium: "16px",
         max: "24px",
       },
@@ -1368,8 +1411,7 @@ const Dark: TTheme = {
     zIndex: "400",
     background: "#333333",
     borderRadius: "6px",
-    boxShadow:
-      "0px 16px 16px rgba(0, 0, 0, 0.16), 0px 8.1px 6.975px rgba(0, 0, 0, 0.108), 0px 3.2px 2.6px rgba(0, 0, 0, 0.08), 0px 0.7px 0.925px rgba(0, 0, 0, 0.052)",
+    boxShadow: "0px 8px 16px 0px #040F1B29",
     // boxShadowMobile: "0px -4px 60px rgba(0, 0, 0, 0.25)",
     border: "1px solid #474747",
   },
@@ -1398,7 +1440,7 @@ const Dark: TTheme = {
       lineHeight: "10px",
 
       color: grayMaxLight,
-      disableColor: gray,
+      disableColor: grayMaxLight,
     },
 
     separator: {
@@ -1599,7 +1641,7 @@ const Dark: TTheme = {
       flex: "0 0 6px",
       marginTopWithBorder: "5px",
       marginTop: "12px",
-      marginRight: "8px",
+      marginRight: "5px",
       marginLeft: "auto",
     },
 
@@ -1641,7 +1683,7 @@ const Dark: TTheme = {
     },
 
     label: {
-      marginRightWithBorder: "8px",
+      marginRightWithBorder: "13px",
       marginRight: "4px",
 
       disabledColor: "#858585",
@@ -1955,7 +1997,7 @@ const Dark: TTheme = {
     expanderColor: "#eeeeee",
     background: black,
     rootFolderTitleColor: "#ADADAD",
-    boxShadow: "0px 12px 40px 0px #00000066",
+    boxShadow: "0px 8px 16px 0px #040F1B29",
 
     icon: {
       fill: "#E06A1B",
@@ -1978,10 +2020,11 @@ const Dark: TTheme = {
   },
 
   header: {
-    backgroundColor: "#1f1f1f ",
+    backgroundColor: "#282828 ",
     recoveryColor: "#4C4C4C",
     linkColor: "#606060",
     productColor: "#eeeeee",
+    height: "48px",
   },
 
   menuContainer: {
@@ -2032,7 +2075,7 @@ const Dark: TTheme = {
 
     links: {
       iconColor: "#858585",
-      iconErrorColor: "rgba(242, 28, 14, 0.5)", // "#F21C0E",
+      iconErrorColor: "#E06451",
       primaryColor: "#ADADAD",
     },
 
@@ -2045,6 +2088,7 @@ const Dark: TTheme = {
       roleSelectorColor: "#a3a9ae",
       disabledRoleSelectorColor: "#a3a9ae",
       roleSelectorArrowColor: "#a3a9ae",
+      createLink: "#858585",
     },
 
     history: {
@@ -2314,6 +2358,11 @@ const Dark: TTheme = {
       arrowRightColor: "#ADADAD",
     },
 
+    info: {
+      backgroundColor: "#282828",
+      color: "#ADADAD",
+    },
+
     bodyDescriptionText: "#858585",
 
     item: {
@@ -2533,6 +2582,13 @@ const Dark: TTheme = {
     },
   },
 
+  emptyView: {
+    items: {
+      hoverColor: charlestonGreen,
+      pressColor: outerSpace,
+    },
+  },
+
   filesEmptyContainer: {
     linkColor: "#adadad",
     privateRoom: {
@@ -2713,8 +2769,7 @@ const Dark: TTheme = {
     background: black,
     borderRadius: "6px",
     mobileBorderRadius: "6px 6px 0 0",
-    boxShadow:
-      "0px 12px 24px rgba(0, 0, 0, 0.12), 0px 8px 16px rgba(0, 0, 0, 0.08), 0px 3.2px 2.6px rgba(0, 0, 0, 0.08)",
+    boxShadow: "0px 8px 16px 0px #040F1B29",
     padding: "6px 0px",
     border: "1px solid #474747",
     devices: {
@@ -3260,6 +3315,10 @@ const Dark: TTheme = {
   sideBarRow: {
     titleColor: white,
     metaDataColor: grayDark,
+  },
+
+  dateTimePicker: {
+    colorClockIcon: "#ADADAD",
   },
 };
 

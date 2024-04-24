@@ -1,6 +1,10 @@
 {
+  "DeleteAllGroupDescription": "Seçilen gruplar silinecektir. Gruplardaki kullanıcılar DocSpace'den kaldırılmayacaktır. Devam etmek istediğinizden emin misiniz?",
+  "DeleteAllGroupsTitle": "Grupları sil",
   "DeleteFile": "Bu dosyayı silmek üzeresiniz. ",
   "DeleteFolder": "Bu klasörü silmek üzeresiniz. ",
+  "DeleteGroupDescription": "Grup {{groupName}} silinecektir. Gruptaki kullanıcılar DocSpace'den kaldırılmayacaktır. Devam etmek istediğinizden emin misiniz?",
+  "DeleteGroupTitle": "Grubu sil",
   "DeleteItems": "Bu öğeleri silmek üzeresiniz. ",
   "DeleteItemsSharedNote": "Bunları birisiyle paylaştıysanız kullanılamayacaklarını lütfen unutmayın.",
   "DeleteRoom": "Bu odayı silmek üzeresiniz. Onu geri yükleyemezsiniz.",
@@ -10,7 +14,6 @@
   "FolderPermanentlyDeleted": "Klasör 30 gün içinde kalıcı olarak silinecek.",
   "ItemsPermanentlyDeleted": "Öğeler 30 gün içinde kalıcı olarak silinecek.",
   "MoveToTrashButton": "Çöp Kutusuna Taşı",
-  "MoveToTrashFile": "Bu dosyayı silmek üzeresiniz. Lütfen bunu birisiyle paylaştıysanız kullanılamayacağını unutmayın. Dosya 30 gün içinde kalıcı olarak silinecek. Devam etmek istediğinizden emin misiniz?",
   "MoveToTrashTitle": "Çöp kutusuna taşı?",
   "UnsubscribeButton": "Abonelikten çık",
   "UnsubscribeNote": "Listeden seçilen öğelerin aboneliğinden çıkmak istediğinizden emin misiniz?",

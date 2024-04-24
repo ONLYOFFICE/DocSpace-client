@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { useState, useCallback, useRef } from "react";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
@@ -11,6 +37,7 @@ import {
   TSelectorCancelButton,
   TSelectorCheckbox,
   TSelectorHeader,
+  TSelectorInfo,
   TSelectorItem,
   TSelectorSearch,
 } from "../../components/selector/Selector.types";
@@ -22,10 +49,16 @@ import { getUserList } from "../../api/people";
 import { TUser } from "../../api/people/types";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import { AvatarRole } from "../../components/avatar";
+import { Text } from "../../components/text";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
 
-const toListItem = (item: TUser) => {
+const toListItem = (
+  item: TUser,
+  t: TTranslation,
+  disableDisabledUsers?: boolean,
+  disableInvitedUsers?: string[],
+) => {
   const {
     id: userId,
     email,
@@ -36,11 +69,22 @@ const toListItem = (item: TUser) => {
     isAdmin,
     isVisitor,
     isCollaborator,
+    isRoomAdmin,
+    status,
   } = item;
 
   const role = getUserRole(item);
 
   const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
+
+  const isInvited = disableInvitedUsers?.includes(userId);
+  const isDisabled = disableDisabledUsers && status === EmployeeStatus.Disabled;
+
+  const disabledText = isInvited
+    ? t("Common:Invited")
+    : isDisabled
+      ? t("Common:Disabled")
+      : "";
 
   const i = {
     id: userId,
@@ -52,7 +96,10 @@ const toListItem = (item: TUser) => {
     isAdmin,
     isVisitor,
     isCollaborator,
+    isRoomAdmin,
     hasAvatar,
+    isDisabled: isInvited || isDisabled,
+    disabledText,
   } as TSelectorItem;
 
   return i;
@@ -76,7 +123,7 @@ const PeopleSelector = ({
   excludeItems,
   currentUserId,
   withOutCurrentAuthorizedUser,
-  withAbilityCreateRoomUsers,
+
   filterUserId,
 
   withFooterCheckbox,
@@ -86,6 +133,16 @@ const PeopleSelector = ({
 
   withHeader,
   headerProps,
+
+  disableDisabledUsers,
+  disableInvitedUsers,
+  isMultiSelect,
+
+  withInfo,
+  infoText,
+
+  emptyScreenHeader,
+  emptyScreenDescription,
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -100,6 +157,21 @@ const PeopleSelector = ({
   const isFirstLoad = useRef(true);
   const afterSearch = useRef(false);
   const totalRef = useRef(0);
+
+  const onSelect = (
+    item: TSelectorItem,
+    isDoubleClick: boolean,
+    doubleClickCallback: () => void,
+  ) => {
+    setSelectedItem((el) => {
+      if (el?.id === item.id) return null;
+
+      return item;
+    });
+    if (isDoubleClick) {
+      doubleClickCallback();
+    }
+  };
 
   const moveCurrentUserToTopOfList = useCallback(
     (listUser: TSelectorItem[]) => {
@@ -149,20 +221,15 @@ const PeopleSelector = ({
 
       const data = response.items
         .filter((item) => {
-          const excludeUser =
-            (!!withAbilityCreateRoomUsers &&
-              !item.isAdmin &&
-              !item.isOwner &&
-              !item.isRoomAdmin) ||
-            item.status === EmployeeStatus.Disabled;
-
-          if ((excludeItems && excludeItems.includes(item.id)) || excludeUser) {
+          if (excludeItems && excludeItems.includes(item.id)) {
             totalDifferent += 1;
             return false;
           }
           return true;
         })
-        .map((item) => toListItem(item));
+        .map((item) =>
+          toListItem(item, t, disableDisabledUsers, disableInvitedUsers),
+        );
 
       const newTotal = withOutCurrentAuthorizedUser
         ? response.total - totalDifferent - 1
@@ -196,12 +263,14 @@ const PeopleSelector = ({
       isFirstLoad.current = false;
     },
     [
+      disableDisabledUsers,
+      disableInvitedUsers,
       excludeItems,
       filter,
       moveCurrentUserToTopOfList,
       removeCurrentUserFromList,
       searchValue,
-      withAbilityCreateRoomUsers,
+      t,
       withOutCurrentAuthorizedUser,
     ],
   );
@@ -257,6 +326,13 @@ const PeopleSelector = ({
       isFirstLoad.current && !searchValue && !afterSearch.current,
   };
 
+  const infoProps: TSelectorInfo = withInfo
+    ? {
+        withInfo,
+        infoText,
+      }
+    : {};
+
   const checkboxSelectorProps: TSelectorCheckbox = withFooterCheckbox
     ? {
         withFooterCheckbox,
@@ -266,11 +342,50 @@ const PeopleSelector = ({
       }
     : {};
 
+  const renderCustomItem = (
+    label: string,
+    userType?: string,
+    email?: string,
+    isGroup?: boolean,
+  ) => {
+    return (
+      <div style={{ width: "100%" }}>
+        <Text
+          className="label"
+          fontWeight={600}
+          fontSize="14px"
+          noSelect
+          truncate
+          dir="auto"
+        >
+          {label}
+        </Text>
+        {!isGroup && (
+          <div style={{ display: "flex" }}>
+            <Text
+              className="label"
+              fontWeight={400}
+              fontSize="12px"
+              noSelect
+              truncate
+              color="#A3A9AE"
+              dir="auto"
+            >
+              {`${userType} | ${email}`}
+            </Text>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <Selector
       id={id}
+      alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
       className={className}
       style={style}
+      renderCustomItem={renderCustomItem}
       {...headerSelectorProps}
       {...searchSelectorProps}
       {...checkboxSelectorProps}
@@ -281,20 +396,23 @@ const PeopleSelector = ({
       disableSubmitButton={disableSubmitButton || !selectedItem}
       submitButtonId={submitButtonId}
       emptyScreenImage={emptyScreenImage}
-      emptyScreenHeader={t("Common:EmptyHeader")}
-      emptyScreenDescription={t("Common:EmptyDescription")}
+      emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyHeader")}
+      emptyScreenDescription={
+        emptyScreenDescription ?? t("Common:EmptyDescription")
+      }
       searchEmptyScreenImage={emptyScreenImage}
       searchEmptyScreenHeader={t("Common:NotFoundUsers")}
       searchEmptyScreenDescription={t("Common:NotFoundUsersDescription")}
       hasNextPage={hasNextPage}
       isNextPageLoading={isNextPageLoading}
       loadNextPage={loadNextPage}
-      isMultiSelect={false}
+      isMultiSelect={isMultiSelect ?? false}
       totalItems={total}
       isLoading={isFirstLoad.current}
       searchLoader={<SearchLoader />}
       rowLoader={<RowLoader isUser isContainer={isFirstLoad.current} />}
-      onSelect={(item) => setSelectedItem(item)}
+      onSelect={onSelect}
+      {...infoProps}
     />
   );
 };

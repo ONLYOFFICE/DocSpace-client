@@ -1,0 +1,20 @@
+{
+  "ErrorConfirmURLError": "Nevažeći email ili istekao link",
+  "ErrorExpiredActivationLink": "Link je istekao",
+  "ErrorInvalidActivationLink": "Nevažeći aktivacioni link",
+  "ErrorNotAllowedOption": "Vaš cenovni plan ne podržava ovu opciju",
+  "ErrorUserNotFound": "Korisnik nije pronađen",
+  "InvalidUsernameOrPassword": "Nevažeće korisničko ime ili lozinka",
+  "LoginWithAccountNotFound": "Ne mogu da pronađem povezani nalog treće strane. Prvo morate da povežete svoj nalog na društvenoj mreži na stranici za uređivanje profila.",
+  "LoginWithBruteForce": "Ovlašćenje je privremeno blokirano",
+  "LoginWithBruteForceCaptcha": "Potvrdi da nisi robot",
+  "RecaptchaInvalid": "Nevažeći Recaptcha",
+  "SsoAttributesNotFound": "Neuspela autentifikacija (atributi tvrdnje nisu pronađeni)",
+  "SsoAuthFailed": "Autentifikacija neuspela",
+  "SsoError": "Interna greška servera",
+  "SsoSettingsCantCreateUser": "Nije moguće kreirati korisnika sa ovim autentifikacionim tokenom",
+  "SsoSettingsDisabled": "Jedinstvena prijava (Single sign-on) je onemogućena",
+  "SsoSettingsEmptyToken": "Autentifikacioni token nije pronađen",
+  "SsoSettingsNotValidToken": "Nevažeći autentifikacioni token",
+  "SsoSettingsUserTerminated": "Ovaj korisnik je onemogućen"
+}

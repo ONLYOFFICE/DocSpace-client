@@ -1,7 +1,34 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 
 import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
+import { DEFAULT_FONT_FAMILY } from "../constants";
 
 export type TColorScheme = {
   id: number;
@@ -73,7 +100,7 @@ export const getBaseTheme = () => {
     isBase: true,
     color: black,
     backgroundColor: white,
-    fontFamily: "Open Sans, sans-serif, Arial",
+    fontFamily: DEFAULT_FONT_FAMILY,
     fontSize: "13px",
 
     text: {
@@ -233,20 +260,20 @@ export const getBaseTheme = () => {
 
       dropDown: {
         position: "fixed",
-        right: "32px",
-        bottom: "32px",
+        right: "48px",
+        bottom: "48px",
 
         width: "400px",
 
         zIndex: "202",
 
         mobile: {
-          right: "24px",
-          bottom: "24px",
+          right: "32px",
+          bottom: "40px",
 
           marginLeft: "24px",
 
-          width: "calc(100vw - 48px)",
+          width: "calc(100vw - 64px)",
         },
         separatorBackground: white,
 
@@ -305,7 +332,7 @@ export const getBaseTheme = () => {
       fontWeight: "500",
       textDecoration: "none",
       padding: "0",
-      borderRadius: "2px",
+      borderRadius: "3px",
       height: "40px",
       heightSmall: "32px",
       textAlign: "left",
@@ -313,22 +340,28 @@ export const getBaseTheme = () => {
       outline: "none",
       width: "100%",
 
+      border: "1px solid #D0D5DA",
       background: white,
-      disableBackgroundColor: "#F8F9F9",
-      connectBackground: "#3B72A7",
-      hoverBackground: white,
-      hoverConnectBackground: "#265A8F",
-      activeBackground: "grayMaxLight",
-      hoverBorder: "#1877f2",
 
-      boxShadow:
-        "0px 1px 1px rgba(0, 0, 0, 0.24),0px 0px 1px rgba(0, 0, 0, 0.12)",
-      hoverBoxShadow: "none",
+      borderConnect: "none",
+      connectBackground: "#3B72A7",
+
+      disableBackgroundColor: "#F8F9F9",
+
+      hoverBackground: white,
+      hoverBorder: "1px solid #5299E0",
+      hoverConnectBackground: "#316DAA",
+      hoverConnectBorder: "none",
+
+      activeBorder: "1px solid #D0D5DA",
+      activeBackground: "#ECEEF1",
+      activeConnectBorder: "none",
+      activeConnectBackground: "#265A8F",
 
       color: "rgba(0, 0, 0, 0.54)",
       disableColor: "#333333",
       disabledSvgColor: "none",
-      border: "none",
+
       text: {
         width: "100%",
         height: "18px",
@@ -347,16 +380,12 @@ export const getBaseTheme = () => {
 
       svg: {
         margin: "11px 8px",
-        width: "18px",
-        height: "18px",
-        minWidth: "18px",
-        minHeight: "18px",
+        width: "20px",
+        height: "20px",
+        minWidth: "20px",
+        minHeight: "20px",
         fill: white,
       },
-    },
-
-    socialButtonsGroup: {
-      border: "1px solid #D0D5DA",
     },
 
     groupButton: {
@@ -629,6 +658,16 @@ export const getBaseTheme = () => {
 
       colorDisabledFileIcons: "#f3f4f4",
 
+      backdrop: {
+        backgroundRGBA: {
+          r: 6,
+          g: 22,
+          b: 38,
+          a: 0.2,
+        },
+        blur: 10,
+      },
+
       content: {
         backgroundColor: white,
         modalPadding: "0 12px 12px",
@@ -881,8 +920,8 @@ export const getBaseTheme = () => {
 
       borderColor: blueMain,
 
-      iconColor: grayMid,
-      hoverIconColor: grayMid,
+      iconColor: gray,
+      hoverIconColor: grayMain,
     },
 
     textArea: {
@@ -974,7 +1013,7 @@ export const getBaseTheme = () => {
       maxWidth: "340px",
       color: white,
       textColor: black,
-      backgroundColor: "#f8f7bf",
+      backgroundColor: "#F8F9F9",
 
       before: {
         border: "none",
@@ -1084,16 +1123,16 @@ export const getBaseTheme = () => {
 
       roleWrapperContainer: {
         right: {
-          min: "-5px",
+          min: "-2px",
           small: "-2px",
           base: "-2px",
           medium: "-4px",
           big: "3px",
-          max: "0px",
+          max: "10px",
         },
 
         bottom: {
-          min: "-5px",
+          min: "-2px",
           small: "3px",
           base: "4px",
           medium: "6px",
@@ -1102,13 +1141,15 @@ export const getBaseTheme = () => {
         },
 
         width: {
+          min: "12px",
           medium: "16px",
-          max: "24px",
+          max: "22px",
         },
 
         height: {
+          min: "12px",
           medium: "16px",
-          max: "24px",
+          max: "22px",
         },
       },
 
@@ -1399,7 +1440,7 @@ export const getBaseTheme = () => {
       zIndex: "400",
       background: white,
       borderRadius: "6px",
-      boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.13)",
+      boxShadow: "0px 8px 16px 0px #040F1B14",
       border: "none",
     },
 
@@ -1427,7 +1468,7 @@ export const getBaseTheme = () => {
         lineHeight: "10px",
 
         color: black,
-        disableColor: gray,
+        disableColor: black,
       },
 
       separator: {
@@ -1630,7 +1671,7 @@ export const getBaseTheme = () => {
         flex: "0 0 6px",
         marginTopWithBorder: "5px",
         marginTop: "12px",
-        marginRight: "8px",
+        marginRight: "5px",
         marginLeft: "auto",
       },
 
@@ -1670,7 +1711,7 @@ export const getBaseTheme = () => {
       },
 
       label: {
-        marginRightWithBorder: "8px",
+        marginRightWithBorder: "13px",
         marginRight: "4px",
 
         disabledColor: grayMid,
@@ -1983,7 +2024,7 @@ export const getBaseTheme = () => {
       expanderColor: black,
       background: white,
       rootFolderTitleColor: "#A3A9AE",
-      boxShadow: " 0px 12px 40px 0px #040F1B1F",
+      boxShadow: "0px 8px 16px 0px #040F1B14",
 
       icon: {
         fill: "#316DAA",
@@ -2010,6 +2051,7 @@ export const getBaseTheme = () => {
       recoveryColor: "#657077",
       linkColor: "#657077",
       productColor: white,
+      height: "48px",
     },
 
     menuContainer: {
@@ -2060,7 +2102,7 @@ export const getBaseTheme = () => {
 
       links: {
         iconColor: "#3B72A7",
-        iconErrorColor: "rgba(242, 28, 14, 0.5)", // "#F21C0E",
+        iconErrorColor: "#F24724",
         primaryColor: "#555F65",
       },
 
@@ -2073,6 +2115,7 @@ export const getBaseTheme = () => {
         roleSelectorColor: "#a3a9ae",
         disabledRoleSelectorColor: "#a3a9ae",
         roleSelectorArrowColor: "#a3a9ae",
+        createLink: "#a3a9ae",
       },
 
       history: {
@@ -2336,6 +2379,11 @@ export const getBaseTheme = () => {
         arrowRightColor: "#657077",
       },
 
+      info: {
+        backgroundColor: "#f8f9f9",
+        color: "#555f65",
+      },
+
       bodyDescriptionText: "#A3A9AE",
 
       item: {
@@ -2562,6 +2610,13 @@ export const getBaseTheme = () => {
       },
     },
 
+    emptyView: {
+      items: {
+        hoverColor: grayLight,
+        pressColor: lightGrayishStrongBlue,
+      },
+    },
+
     filesPanels: {
       color: black,
 
@@ -2734,7 +2789,7 @@ export const getBaseTheme = () => {
       background: white,
       borderRadius: "6px",
       mobileBorderRadius: "6px 6px 0 0",
-      boxShadow: "0px 12px 40px rgba(4, 15, 27, 0.12)",
+      boxShadow: "0px 8px 16px 0px #040F1B14",
       padding: "6px 0px",
       border: "none",
       devices: {
@@ -3282,6 +3337,10 @@ export const getBaseTheme = () => {
     sideBarRow: {
       titleColor: black,
       metaDataColor: gray,
+    },
+
+    dateTimePicker: {
+      colorClockIcon: "#657077",
     },
   };
 };

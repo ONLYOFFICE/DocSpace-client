@@ -41,6 +41,9 @@ import { updateRoomMemberRole } from "@docspace/shared/api/rooms";
 import { toastr } from "@docspace/shared/components/toast";
 import { useState } from "react";
 import { HelpButton } from "@docspace/shared/components/help-button";
+import { getUserRoleOptions } from "@docspace/shared/utils/room-members/getUserRoleOptions";
+import { ShareAccessRights } from "@docspace/shared/enums";
+import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
 
 interface GroupMemberProps {
   t: any;
@@ -51,26 +54,44 @@ interface GroupMemberProps {
 const GroupMember = ({ t, user, infoPanelSelection }: GroupMemberProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
+  const userRole = user.isOwner
+    ? getUserRoleOptions(t).docSpaceAdmin
+    : getUserRoleOptionsByUserAccess(t, user.userAccess || user.groupAccess);
+
   const fullRoomRoleOptions = getUserRoleOptionsByRoomType(
     t,
     infoPanelSelection.roomType,
     false,
   );
-  const selectedUserRoleCBOption = getUserRoleOptionsByUserAccess(
-    t,
-    user.userAccess || user.groupAccess,
-  );
+
+  const userRoleOptions = filterUserRoleOptions(fullRoomRoleOptions, user);
+
+  let type;
+  if (user.isOwner) type = "owner";
+  else if (user.isAdmin) type = "admin";
+  else if (user.isRoomAdmin) type = "manager";
+  else if (user.isCollaborator) type = "collaborator";
+  else type = "user";
+
+  const role = getUserRole(user, userRole?.type);
+
+  let selectedUserRoleCBOption;
+  if (user.isOwner)
+    selectedUserRoleCBOption = {
+      key: "owner",
+      label: t("Common:Owner"),
+      access: ShareAccessRights.FullAccess,
+      type: "owner",
+    };
+  else
+    selectedUserRoleCBOption = getUserRoleOptionsByUserAccess(
+      t,
+      user.userAccess || user.groupAccess,
+    );
+
   const availableUserRoleCBOptions = filterUserRoleOptions(
     fullRoomRoleOptions,
     user,
-  );
-
-  console.log(
-    "GroupMember",
-    user,
-    selectedUserRoleCBOption,
-    availableUserRoleCBOptions,
-    fullRoomRoleOptions,
   );
 
   const onChangeRole = async (userRoleOption) => {
@@ -88,7 +109,7 @@ const GroupMember = ({ t, user, infoPanelSelection }: GroupMemberProps) => {
   return (
     <Styled.GroupMember isExpect={user.isExpect} key={user.id}>
       <Avatar
-        role={selectedUserRoleCBOption?.type}
+        role={role}
         className="avatar"
         size="min"
         userName={user.isExpect ? "" : user.displayName || user.name}
@@ -113,25 +134,28 @@ const GroupMember = ({ t, user, infoPanelSelection }: GroupMemberProps) => {
       </div>
 
       <div className="individual-rights-tooltip">
-        {user.userAccess && user.userAccess !== user.groupAccess && (
-          <HelpButton
-            place="left"
-            offsetRight={0}
-            tooltipContent={
-              <Text fontSize="12px" fontWeight={600}>
-                {t("PeopleTranslations:IndividualRights")}
-              </Text>
-            }
-          />
-        )}
+        {user.userAccess &&
+          user.userAccess !== user.groupAccess &&
+          !user.isOwner && (
+            <HelpButton
+              place="left"
+              offsetRight={0}
+              openOnClick={false}
+              tooltipContent={
+                <Text fontSize="12px" fontWeight={600}>
+                  {t("PeopleTranslations:IndividualRights")}
+                </Text>
+              }
+            />
+          )}
       </div>
 
-      {selectedUserRoleCBOption && availableUserRoleCBOptions && (
+      {userRole && userRoleOptions && (
         <div className="role-wrapper">
-          {user.canEditAccess ? (
+          {user.canEditAccess && !user.isOwner ? (
             <ComboBox
               className="role-combobox"
-              selectedOption={selectedUserRoleCBOption}
+              selectedOption={userRole}
               options={availableUserRoleCBOptions}
               scaled={false}
               withBackdrop={isMobile}
@@ -147,7 +171,7 @@ const GroupMember = ({ t, user, infoPanelSelection }: GroupMemberProps) => {
             />
           ) : (
             <div className="disabled-role-combobox" title={t("Common:Role")}>
-              {selectedUserRoleCBOption.label}
+              {userRole.label}
             </div>
           )}
         </div>

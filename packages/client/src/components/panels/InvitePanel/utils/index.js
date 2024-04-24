@@ -82,7 +82,7 @@ export const getAccessOptions = (
     },
     editor: {
       key: "editor",
-      label: t("Translations:RoleEditor"),
+      label: t("Common:Editor"),
       description: t("Translations:RoleEditorDescription"),
       access: ShareAccessRights.Editing,
       type: "user",

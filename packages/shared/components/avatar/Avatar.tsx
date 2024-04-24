@@ -205,6 +205,7 @@ const AvatarPure = ({
                 id={uniqueTooltipId}
                 getContent={getTooltipContent}
                 place={tooltipPlace}
+                opacity={1}
               />
             )}
           </>

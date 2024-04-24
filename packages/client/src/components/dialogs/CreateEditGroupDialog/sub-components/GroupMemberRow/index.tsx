@@ -24,18 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Avatar } from "@docspace/shared/components/avatar";
-import * as Styled from "./index.styled";
-import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import { ReactSVG } from "react-svg";
-import { getUserTypeLabel } from "@docspace/shared/utils/common";
 import { useTranslation } from "react-i18next";
+
+import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
+
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/shared/components/avatar";
+import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
+import { TUser } from "@docspace/shared/api/people/types";
+
+import * as Styled from "./index.styled";
+
 interface GroupMemberRowProps {
-  groupMember: {
-    avatarSmall: string;
-    displayName: string;
-    email: string;
-  };
+  groupMember: TUser;
   onClickRemove: () => void;
 }
 
@@ -45,16 +50,35 @@ const GroupMemberRow = ({
 }: GroupMemberRowProps) => {
   const { t } = useTranslation(["Common"]);
 
+  const role = getUserRole(groupMember);
+  let avatarRole = AvatarRole.user;
+  switch (role) {
+    case "owner":
+      avatarRole = AvatarRole.owner;
+      break;
+    case "admin":
+      avatarRole = AvatarRole.admin;
+      break;
+    case "manager":
+      avatarRole = AvatarRole.manager;
+      break;
+    case "collaborator":
+      avatarRole = AvatarRole.collaborator;
+      break;
+    default:
+  }
+
   return (
     <Styled.GroupMemberRow>
       <Avatar
-        className={"avatar"}
-        size={"min"}
-        source={groupMember.avatarSmall || groupMember.avatar}
+        className="avatar"
+        size={AvatarSize.min}
+        role={avatarRole}
+        source={groupMember.avatarSmall ?? groupMember.avatar}
       />
       <div className="info">
         <div className="name">{groupMember.displayName}</div>
-        <div className="email">{`${getUserTypeLabel(groupMember.role, t)} | ${groupMember.email}`}</div>
+        <div className="email">{`${getUserTypeLabel(role, t)} | ${groupMember.email}`}</div>
       </div>
       <ReactSVG
         className="remove-icon"

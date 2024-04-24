@@ -26,13 +26,13 @@
 
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import copy from "copy-to-clipboard";
 import moment from "moment";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
 
 import { ShareAccessRights } from "../../enums";
+import { LINKS_LIMIT_COUNT } from "../../constants";
 import {
   addExternalLink,
   editExternalLink,
@@ -40,9 +40,12 @@ import {
   getPrimaryLink,
 } from "../../api/files";
 import { TAvailableExternalRights, TFileLink } from "../../api/files/types";
+import { isDesktop } from "../../utils";
+import { copyShareLink } from "../../utils/copy";
 import { TOption } from "../combobox";
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
+import { Tooltip } from "../tooltip";
 import { toastr } from "../toast";
 import { TData } from "../toast/Toast.type";
 import PublicRoomBar from "../public-room-bar";
@@ -114,7 +117,7 @@ const Share = (props: ShareProps) => {
         : await getPrimaryLink(infoPanelSelection.id);
 
       setFileLinks([link]);
-      copy(link.sharedTo.shareLink);
+      copyShareLink(link.sharedTo.shareLink);
       toastr.success(t("Common:GeneralAccessLinkCopied"));
     } catch (error) {
       const message = (error as { message: string }).message
@@ -204,7 +207,7 @@ const Share = (props: ShareProps) => {
           );
       updateLink(link, res);
 
-      copy(link.sharedTo.shareLink);
+      copyShareLink(link.sharedTo.shareLink);
       toastr.success(t("Common:LinkSuccessfullyCopied"));
     } catch (e) {
       toastr.error(e as TData);
@@ -247,7 +250,7 @@ const Share = (props: ShareProps) => {
         if (item.access === ShareAccessRights.DenyAccess) {
           toastr.success(t("Common:LinkAccessDenied"));
         } else {
-          copy(link.sharedTo.shareLink);
+          copyShareLink(link.sharedTo.shareLink);
           toastr.success(t("Common:LinkSuccessfullyCopied"));
         }
       }
@@ -285,11 +288,19 @@ const Share = (props: ShareProps) => {
 
       updateLink(link, res);
 
-      copy(link.sharedTo.shareLink);
+      copyShareLink(link.sharedTo.shareLink);
       toastr.success(t("Common:LinkSuccessfullyCopied"));
     } catch (e) {
       toastr.error(e as TData);
     }
+  };
+
+  const getTextTooltip = () => {
+    return (
+      <Text fontSize="12px" noSelect>
+        {t("Common:MaximumNumberOfExternalLinksCreated")}
+      </Text>
+    );
   };
 
   if (hideSharePanel) return null;
@@ -310,12 +321,23 @@ const Share = (props: ShareProps) => {
               {t("Common:SharedLinks")}
             </Text>
             {fileLinks.length > 0 && (
-              <IconButton
-                className="link-to-viewing-icon"
-                iconName={LinksToViewingIconUrl}
-                onClick={addAdditionalLinks}
-                size={16}
-              />
+              <div data-tooltip-id="file-links-tooltip" data-tip="tooltip">
+                <IconButton
+                  className="link-to-viewing-icon"
+                  iconName={LinksToViewingIconUrl}
+                  onClick={addAdditionalLinks}
+                  size={16}
+                  isDisabled={fileLinks.length > LINKS_LIMIT_COUNT}
+                />
+                {fileLinks.length > LINKS_LIMIT_COUNT && (
+                  <Tooltip
+                    float={isDesktop()}
+                    id="file-links-tooltip"
+                    getContent={getTextTooltip}
+                    place="bottom"
+                  />
+                )}
+              </div>
             )}
           </div>
           <LinkRow

@@ -91,13 +91,13 @@ const StyledAccountsItemTitle = styled.div`
 
     .info-text__name {
       font-weight: 700;
-      font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+      font-size: 16px;
       line-height: 22px;
     }
 
     .info-text__email {
       font-weight: 600;
-      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+      font-size: 13px;
       line-height: 20px;
       color: ${(props) => props.theme.text.disableColor};
       user-select: text;
@@ -109,7 +109,6 @@ const StyledAccountsItemTitle = styled.div`
   }
 
   .context-button {
-    padding-top: 24px;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
@@ -139,7 +138,7 @@ const StyledAccountContent = styled.div`
 
     .header__text {
       font-weight: 600;
-      font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+      font-size: 14px;
       line-height: 16px;
     }
   }
@@ -186,10 +185,12 @@ const StyledAccountContent = styled.div`
     }
 
     .info_field_groups {
+      margin-top: 8px;
       height: 100%;
     }
 
     .info_groups {
+      margin-top: 4px;
       display: flex;
       flex-direction: column;
       align-items: start;

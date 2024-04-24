@@ -1,6 +1,10 @@
 {
+  "DeleteAllGroupDescription": "Les groupes sélectionnés seront supprimés. Les utilisateurs des groupes ne seront pas supprimés de DocSpace. Souhaitez-vous vraiment continuer ?",
+  "DeleteAllGroupsTitle": "Supprimer les groupes",
   "DeleteFile": "Vous êtes sur le point de supprimer ce fichier.",
   "DeleteFolder": "Vous êtes sur le point de supprimer ce dossier. ",
+  "DeleteGroupDescription": "Le groupe {{groupName}} sera supprimé. Les utilisateurs du groupe ne seront pas supprimés de DocSpace. Souhaitez-vous vraiment continuer ?",
+  "DeleteGroupTitle": "Supprimer le groupe",
   "DeleteItems": "Vous êtes sur le point de supprimer ces éléments. ",
   "DeleteItemsSharedNote": "Veuillez noter que si vous les avez partagés avec quelqu'un, ils deviendront indisponibles.",
   "DeleteRoom": "Vous êtes sur le point de supprimer cette salle. Vous ne pourrez pas la restaurer.",
@@ -10,7 +14,6 @@
   "FolderPermanentlyDeleted": "Le dossier sera définitivement supprimé dans les 30 jours.",
   "ItemsPermanentlyDeleted": "Les éléments seront définitivement supprimés dans les 30 jours.",
   "MoveToTrashButton": "Mettre dans la corbeille",
-  "MoveToTrashFile": "Vous êtes sur le point de supprimer ce fichier. Veuillez noter que si vous l'avez partagé avec quelqu'un, il deviendra indisponible. Le fichier sera définitivement supprimé dans 30 jours. Êtes-vous sûr de vouloir continuer?",
   "MoveToTrashTitle": "Déplacer vers la corbeille ?",
   "UnsubscribeButton": "Se désabonner",
   "UnsubscribeNote": "Êtes-vous sûr de vouloir vous désabonner des éléments sélectionnés dans la liste ?",

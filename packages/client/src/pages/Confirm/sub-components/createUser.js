@@ -58,7 +58,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordErrorMessage";
-import DocspaceLogo from "SRC_DIR/components/DocspaceLogoWrapper";
+import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
 import withLoader from "../withLoader";
 
 import { StyledPage } from "./StyledConfirm";
@@ -514,183 +514,181 @@ const CreateUserForm = (props) => {
 
         <FormWrapper>
           <RegisterContainer registrationForm={registrationForm}>
-            <form className="auth-form-container">
-              <div className="auth-form-fields">
-                <div className="email-container">
+            <div className="auth-form-fields">
+              <div className="email-container">
+                <FieldContainer
+                  className="form-field"
+                  isVertical={true}
+                  labelVisible={false}
+                  hasError={isEmailErrorShow && !emailValid}
+                  errorMessage={
+                    emailErrorText
+                      ? t(`Common:${emailErrorText}`)
+                      : t("Common:RequiredField")
+                  }
+                >
+                  <EmailInput
+                    id="login"
+                    name="login"
+                    type="email"
+                    hasError={isEmailErrorShow && !emailValid}
+                    value={email}
+                    placeholder={t("Common:Email")}
+                    size="large"
+                    scale={true}
+                    isAutoFocussed={true}
+                    tabIndex={1}
+                    isDisabled={isLoading || !!emailFromLink}
+                    autoComplete="username"
+                    onChange={onChangeEmail}
+                    onBlur={onBlurEmail}
+                    onValidateInput={onValidateEmail}
+                    forwardedRef={inputRef}
+                    onKeyDown={onKeyPress}
+                  />
+                </FieldContainer>
+                <Button
+                  className="login-button"
+                  primary
+                  size="medium"
+                  scale={true}
+                  label={t("Common:ContinueButton")}
+                  tabIndex={1}
+                  isDisabled={isLoading}
+                  isLoading={isLoading}
+                  onClick={onContinue}
+                />
+              </div>
+
+              {registrationForm && (
+                <div>
+                  <RegistrationFormGreeting
+                    email={email}
+                    setRegistrationForm={setRegistrationForm}
+                    type={linkData.type}
+                    emailFromLink={emailFromLink}
+                  />
                   <FieldContainer
                     className="form-field"
                     isVertical={true}
                     labelVisible={false}
-                    hasError={isEmailErrorShow && !emailValid}
+                    hasError={!fnameValid}
                     errorMessage={
-                      emailErrorText
-                        ? t(`Common:${emailErrorText}`)
-                        : t("Common:RequiredField")
+                      errorText
+                        ? errorText
+                        : fname.trim().length === 0
+                          ? t("Common:RequiredField")
+                          : t("Common:IncorrectFirstName")
                     }
                   >
-                    <EmailInput
-                      id="login"
-                      name="login"
-                      type="email"
-                      hasError={isEmailErrorShow && !emailValid}
-                      value={email}
-                      placeholder={t("Common:Email")}
+                    <TextInput
+                      id="first-name"
+                      name="first-name"
+                      type="text"
+                      hasError={!fnameValid}
+                      value={fname}
+                      placeholder={t("Common:FirstName")}
                       size="large"
                       scale={true}
-                      isAutoFocussed={true}
                       tabIndex={1}
-                      isDisabled={isLoading || !!emailFromLink}
-                      autoComplete="username"
-                      onChange={onChangeEmail}
-                      onBlur={onBlurEmail}
-                      onValidateInput={onValidateEmail}
-                      forwardedRef={inputRef}
+                      isDisabled={isLoading}
+                      onChange={onChangeFname}
+                      onKeyDown={onKeyPress}
+                      isAutoFocussed
+                    />
+                  </FieldContainer>
+                  <FieldContainer
+                    className="form-field"
+                    isVertical={true}
+                    labelVisible={false}
+                    hasError={!snameValid}
+                    errorMessage={
+                      errorText
+                        ? errorText
+                        : sname.trim().length === 0
+                          ? t("Common:RequiredField")
+                          : t("Common:IncorrectLastName")
+                    }
+                  >
+                    <TextInput
+                      id="last-name"
+                      name="last-name"
+                      type="text"
+                      hasError={!snameValid}
+                      value={sname}
+                      placeholder={t("Common:LastName")}
+                      size="large"
+                      scale={true}
+                      tabIndex={1}
+                      isDisabled={isLoading}
+                      onChange={onChangeSname}
                       onKeyDown={onKeyPress}
                     />
                   </FieldContainer>
+                  <FieldContainer
+                    className="form-field password-field"
+                    isVertical={true}
+                    labelVisible={false}
+                    hasError={isPasswordErrorShow && !passwordValid}
+                    errorMessage={`${t(
+                      "Common:PasswordLimitMessage",
+                    )}: ${getPasswordErrorMessage(t, settings)}`}
+                  >
+                    <PasswordInput
+                      simpleView={false}
+                      hideNewPasswordButton
+                      showCopyLink={false}
+                      passwordSettings={settings}
+                      id="password"
+                      inputName="password"
+                      placeholder={t("Common:Password")}
+                      type="password"
+                      hasError={isPasswordErrorShow && !passwordValid}
+                      inputValue={password}
+                      size="large"
+                      scale={true}
+                      tabIndex={1}
+                      isDisabled={isLoading}
+                      autoComplete="current-password"
+                      onChange={onChangePassword}
+                      onBlur={onBlurPassword}
+                      onKeyDown={onKeyPress}
+                      onValidateInput={onValidatePassword}
+                      tooltipPasswordTitle={`${t(
+                        "Common:PasswordLimitMessage",
+                      )}:`}
+                      tooltipPasswordLength={`${t(
+                        "Common:PasswordMinimumLength",
+                      )}: ${settings ? settings.minLength : 8}`}
+                      tooltipPasswordDigits={`${t(
+                        "Common:PasswordLimitDigits",
+                      )}`}
+                      tooltipPasswordCapital={`${t(
+                        "Common:PasswordLimitUpperCase",
+                      )}`}
+                      tooltipPasswordSpecial={`${t(
+                        "Common:PasswordLimitSpecialSymbols",
+                      )}`}
+                      generatePasswordTitle={t("Wizard:GeneratePassword")}
+                    />
+                  </FieldContainer>
+
                   <Button
                     className="login-button"
                     primary
                     size="medium"
                     scale={true}
-                    label={t("Common:ContinueButton")}
+                    label={
+                      isLoading ? t("Common:LoadingProcessing") : t("SignUp")
+                    }
                     tabIndex={1}
                     isDisabled={isLoading}
                     isLoading={isLoading}
-                    onClick={onContinue}
+                    onClick={onSubmit}
                   />
                 </div>
-
-                {registrationForm && (
-                  <div>
-                    <RegistrationFormGreeting
-                      email={email}
-                      setRegistrationForm={setRegistrationForm}
-                      type={linkData.type}
-                      emailFromLink={emailFromLink}
-                    />
-                    <FieldContainer
-                      className="form-field"
-                      isVertical={true}
-                      labelVisible={false}
-                      hasError={!fnameValid}
-                      errorMessage={
-                        errorText
-                          ? errorText
-                          : fname.trim().length === 0
-                            ? t("Common:RequiredField")
-                            : t("Common:IncorrectFirstName")
-                      }
-                    >
-                      <TextInput
-                        id="first-name"
-                        name="first-name"
-                        type="text"
-                        hasError={!fnameValid}
-                        value={fname}
-                        placeholder={t("Common:FirstName")}
-                        size="large"
-                        scale={true}
-                        tabIndex={1}
-                        isDisabled={isLoading}
-                        onChange={onChangeFname}
-                        onKeyDown={onKeyPress}
-                        isAutoFocussed
-                      />
-                    </FieldContainer>
-                    <FieldContainer
-                      className="form-field"
-                      isVertical={true}
-                      labelVisible={false}
-                      hasError={!snameValid}
-                      errorMessage={
-                        errorText
-                          ? errorText
-                          : sname.trim().length === 0
-                            ? t("Common:RequiredField")
-                            : t("Common:IncorrectLastName")
-                      }
-                    >
-                      <TextInput
-                        id="last-name"
-                        name="last-name"
-                        type="text"
-                        hasError={!snameValid}
-                        value={sname}
-                        placeholder={t("Common:LastName")}
-                        size="large"
-                        scale={true}
-                        tabIndex={1}
-                        isDisabled={isLoading}
-                        onChange={onChangeSname}
-                        onKeyDown={onKeyPress}
-                      />
-                    </FieldContainer>
-                    <FieldContainer
-                      className="form-field password-field"
-                      isVertical={true}
-                      labelVisible={false}
-                      hasError={isPasswordErrorShow && !passwordValid}
-                      errorMessage={`${t(
-                        "Common:PasswordLimitMessage",
-                      )}: ${getPasswordErrorMessage(t, settings)}`}
-                    >
-                      <PasswordInput
-                        simpleView={false}
-                        hideNewPasswordButton
-                        showCopyLink={false}
-                        passwordSettings={settings}
-                        id="password"
-                        inputName="password"
-                        placeholder={t("Common:Password")}
-                        type="password"
-                        hasError={isPasswordErrorShow && !passwordValid}
-                        inputValue={password}
-                        size="large"
-                        scale={true}
-                        tabIndex={1}
-                        isDisabled={isLoading}
-                        autoComplete="current-password"
-                        onChange={onChangePassword}
-                        onBlur={onBlurPassword}
-                        onKeyDown={onKeyPress}
-                        onValidateInput={onValidatePassword}
-                        tooltipPasswordTitle={`${t(
-                          "Common:PasswordLimitMessage",
-                        )}:`}
-                        tooltipPasswordLength={`${t(
-                          "Common:PasswordMinimumLength",
-                        )}: ${settings ? settings.minLength : 8}`}
-                        tooltipPasswordDigits={`${t(
-                          "Common:PasswordLimitDigits",
-                        )}`}
-                        tooltipPasswordCapital={`${t(
-                          "Common:PasswordLimitUpperCase",
-                        )}`}
-                        tooltipPasswordSpecial={`${t(
-                          "Common:PasswordLimitSpecialSymbols",
-                        )}`}
-                        generatePasswordTitle={t("Wizard:GeneratePassword")}
-                      />
-                    </FieldContainer>
-
-                    <Button
-                      className="login-button"
-                      primary
-                      size="medium"
-                      scale={true}
-                      label={
-                        isLoading ? t("Common:LoadingProcessing") : t("SignUp")
-                      }
-                      tabIndex={1}
-                      isDisabled={isLoading}
-                      isLoading={isLoading}
-                      onClick={onSubmit}
-                    />
-                  </div>
-                )}
-              </div>
-            </form>
+              )}
+            </div>
 
             {!emailFromLink && (oauthDataExists() || ssoExists()) && (
               <>

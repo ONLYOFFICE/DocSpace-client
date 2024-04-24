@@ -52,7 +52,10 @@ export const getBackUrl = (
       backUrl = `/rooms/shared/${folderId}/filter?folder=${folderId}`;
     }
   } else {
-    if (rootFolderType === FolderType.SHARE) {
+    if (
+      rootFolderType === FolderType.SHARE ||
+      rootFolderType === FolderType.Recent
+    ) {
       backUrl = `/rooms/personal/filter?folder=recent`;
     } else {
       backUrl = `/rooms/personal/filter?folder=${folderId}`;
@@ -219,3 +222,28 @@ export const getIsZoom = () =>
   (window?.navigator?.userAgent?.includes("ZoomWebKit") ||
     window?.navigator?.userAgent?.includes("ZoomApps"));
 
+// need for separate window in desktop editors
+export const calculateAsideHeight = () => {
+  const viewPort = window?.AscDesktopEditor?.getViewportSettings?.();
+
+  if (!viewPort) return;
+
+  if (viewPort.widgetType === "window") {
+    const { captionHeight } = viewPort;
+    const backdrop =
+      (document.getElementsByClassName("backdrop-active")[0] as HTMLElement) ??
+      (document.getElementsByClassName(
+        "modal-backdrop-active",
+      )[0] as HTMLElement);
+    const aside = document.getElementsByTagName("aside")[0];
+
+    if (backdrop) {
+      backdrop.style.height = `calc(100dvh - ${captionHeight}px`;
+      backdrop.style.marginTop = `${captionHeight}px`;
+    }
+    if (aside) {
+      aside.style.height = `calc(100dvh - ${captionHeight}px`;
+      aside.style.top = `${captionHeight}px`;
+    }
+  }
+};

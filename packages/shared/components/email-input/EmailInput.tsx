@@ -31,6 +31,7 @@ import { InputSize, InputType, TextInputProps } from "../text-input";
 
 import StyledEmailInput from "./EmailInput.styled";
 import { EmailInputProps, TValidate } from "./EmailInput.types";
+import { isIOS, isMobile } from "react-device-detect";
 
 const TextInputWrapper = ({
   onValidateInput,
@@ -50,6 +51,7 @@ const EmailInput = ({
   onBlur,
   onChange,
   hasError,
+  isAutoFocussed,
   ...rest
 }: EmailInputProps) => {
   const [inputValue, setInputValue] = React.useState(value);
@@ -109,8 +111,6 @@ const EmailInput = ({
     [onBlur],
   );
 
-  React.useEffect(() => {}, []);
-
   React.useEffect(() => {
     const validEmail = checkEmail(value);
     setIsValidEmail(validEmail);
@@ -124,6 +124,7 @@ const EmailInput = ({
   return (
     <TextInputWrapper
       {...rest}
+      isAutoFocussed={isMobile && isIOS ? false : isAutoFocussed}
       hasError={isError}
       value={inputValue}
       onChange={onChangeAction}

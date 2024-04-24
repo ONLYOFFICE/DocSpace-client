@@ -91,7 +91,11 @@ const RoomSelector = ({
     isDoubleClick: boolean,
     doubleClickCallback: () => void,
   ) => {
-    setSelectedItem(item);
+    setSelectedItem((el) => {
+      if (el?.id === item.id) return null;
+
+      return item;
+    });
     if (isDoubleClick && !isMultiSelect) {
       doubleClickCallback();
     }
@@ -224,6 +228,7 @@ const RoomSelector = ({
       loadNextPage={onLoadNextPage}
       isLoading={isFirstLoad.current}
       disableSubmitButton={!selectedItem}
+      alwaysShowFooter={items.length !== 0 || Boolean(searchValue)}
       rowLoader={
         <RowLoader
           isMultiSelect={isMultiSelect}

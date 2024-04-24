@@ -41,7 +41,7 @@ import { Link } from "@docspace/shared/components/link";
 import { Badge } from "@docspace/shared/components/badge";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
-import { mobile, isMobile } from "@docspace/shared/utils";
+import { isMobile } from "@docspace/shared/utils";
 
 import ConsumerItem from "./sub-components/consumerItem";
 import ConsumerModalDialog from "./sub-components/consumerModalDialog";
@@ -87,7 +87,7 @@ const RootContainer = styled(Box)`
     gap: 24px;
     align-items: center;
 
-    @media ${mobile} {
+    @media (max-width: 882px) {
       flex-direction: column;
       align-items: baseline;
     }
@@ -205,11 +205,12 @@ class ThirdPartyServices extends React.Component {
 
     const filteredConsumers = consumers.filter(
       (consumer) =>
-        consumer.title !== "Bitly" &&
-        consumer.title !== "WordPress" &&
-        consumer.title !== "DocuSign" &&
+        consumer.name !== "bitly" &&
+        consumer.name !== "wordpress" &&
+        consumer.name !== "docusign" &&
         consumer.name !== "clickatell" && //TODO: hide while 2fa by sms is not working
-        consumer.name !== "twilio",
+        consumer.name !== "twilio" &&
+        consumer.name !== "selectel",
     );
 
     const freeConsumers = filteredConsumers.filter(

@@ -68,8 +68,9 @@ const SelectUsersTypeStep = ({
 
   const filteredAccounts = dataPortion.filter(
     (data) =>
-      data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.email.toLowerCase().startsWith(searchValue.toLowerCase()),
+      data.firstName?.toLowerCase().startsWith(searchValue.toLowerCase()) ||
+      data.lastName?.toLowerCase().startsWith(searchValue.toLowerCase()) ||
+      data.email?.toLowerCase().startsWith(searchValue.toLowerCase()),
   );
 
   useEffect(() => {
@@ -88,14 +89,16 @@ const SelectUsersTypeStep = ({
         displaySettings
       />
 
-      <StyledSearchInput
-        id="search-users-type-input"
-        placeholder={t("Common:Search")}
-        value={searchValue}
-        onChange={onChangeInput}
-        refreshTimeout={100}
-        onClearSearch={onClearSearchInput}
-      />
+      {!checkedUsers.result.length > 0 && (
+        <StyledSearchInput
+          id="search-users-type-input"
+          placeholder={t("Common:Search")}
+          value={searchValue}
+          onChange={onChangeInput}
+          refreshTimeout={100}
+          onClearSearch={onClearSearchInput}
+        />
+      )}
 
       <AccountsTable t={t} accountsData={filteredAccounts} />
 

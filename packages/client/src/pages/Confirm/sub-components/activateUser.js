@@ -50,7 +50,7 @@ import {
   RegisterContainer,
   StyledCreateUserContent,
 } from "./StyledCreateUser";
-import DocspaceLogo from "SRC_DIR/components/DocspaceLogoWrapper";
+import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
 import GreetingUserContainer from "./GreetingUserContainer";
 
 const ActivateUserForm = (props) => {

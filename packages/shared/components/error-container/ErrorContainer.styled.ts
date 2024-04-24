@@ -33,7 +33,8 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
   background: ${(props) => props.theme.errorContainer.background};
   cursor: default;
   width: ${(props) => (props.isEditor ? "100%" : "auto")};
-  height: ${(props) => (props.isEditor ? "100%" : "100vh")};
+  height: "100%";
+
   ${(props) =>
     props.isEditor &&
     css`
@@ -44,24 +45,24 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
-  padding-top: 36px;
+  padding-top: 100px;
   border: 0;
   box-sizing: border-box;
 
-  $ .error_description_link {
+  .error_description_link {
     color: #2da7db;
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
     font-weight: 600;
   }
 
   #container {
     position: relative;
-    margin: 12px 16px 60px 16px;
+    margin: 64px 16px 48px 16px;
   }
 
   #header {
     font-weight: 700;
-    font-size: ${(props) => props.theme.getCorrectFontSize("23px")};
+    font-size: 23px;
     line-height: 28px;
     margin: 8px 0 20px 0;
     text-align: center;
@@ -69,7 +70,7 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
 
   #text {
     font-weight: 600;
-    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    font-size: 14px;
     line-height: 16px;
     text-align: center;
     margin-bottom: 24px;
@@ -90,13 +91,11 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
     body {
       padding: 24px 24px 0 24px;
     }
-
-    #container {
-      margin: 12px 16px 48px 16px;
-    }
   }
 
   @media ${mobile} {
+    padding-top: 80px;
+
     body {
       padding: 18px 18px 0 18px;
     }

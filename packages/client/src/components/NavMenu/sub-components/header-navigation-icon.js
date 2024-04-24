@@ -90,7 +90,7 @@ const StyledContainer = styled.div`
 
       p {
         font-weight: 800;
-        font-size: ${(props) => props.theme.getCorrectFontSize("9px")};
+        font-size: 9px;
         line-height: 12px;
       }
     }

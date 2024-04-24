@@ -85,7 +85,7 @@ const ModalDialogContainer = styled(ModalDialog)`
 
   .toggle-content-dialog {
     .heading-toggle-content {
-      font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+      font-size: 16px;
     }
   }
 

@@ -31,7 +31,8 @@ import { Box } from "@docspace/shared/components/box";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Base } from "@docspace/shared/themes";
-import { mobile } from "@docspace/shared/utils";
+import { mobile, getLogoUrl } from "@docspace/shared/utils";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
 
 const Header = styled.header`
   align-items: left;
@@ -79,12 +80,10 @@ const HeaderUnAuth = ({
   wizardToken,
   isAuthenticated,
   isLoaded,
-  logoUrl,
   theme,
 }) => {
   const { t } = useTranslation("NavMenu");
-
-  const logo = !theme.isBase ? logoUrl?.path?.dark : logoUrl?.path?.light;
+  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
 
   return (
     <Header isLoaded={isLoaded} className="navMenuHeaderUnAuth">
@@ -119,14 +118,13 @@ HeaderUnAuth.propTypes = {
 
 export default inject(({ authStore, settingsStore }) => {
   const { isAuthenticated, isLoaded } = authStore;
-  const { enableAdmMess, wizardToken, logoUrl, theme } = settingsStore;
+  const { enableAdmMess, wizardToken, theme } = settingsStore;
 
   return {
     enableAdmMess,
     wizardToken,
     isAuthenticated,
     isLoaded,
-    logoUrl,
     theme,
   };
 })(observer(HeaderUnAuth));

@@ -27,10 +27,11 @@
 import React from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-import { mobile } from "@docspace/shared/utils";
-import { getLogoFromPath } from "@docspace/shared/utils";
+import { mobile, getLogoUrl } from "@docspace/shared/utils";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
+import { useLocation } from "react-router-dom";
 
-const StyledNav = styled.div`
+const StyledNav = styled.div<{ isError: boolean }>`
   display: none;
   height: 48px;
   align-items: center;
@@ -43,7 +44,7 @@ const StyledNav = styled.div`
     }
   }
   @media ${mobile} {
-    display: flex;
+    display: ${(props) => (props.isError ? "none" : "flex")};
   }
 `;
 
@@ -51,17 +52,13 @@ interface ISimpleNav extends IInitialState {
   theme: IUserTheme;
 }
 
-const SimpleNav = ({ theme, logoUrls }: ISimpleNav) => {
-  const logo = logoUrls && Object.values(logoUrls)[0];
+const SimpleNav = ({ theme }: ISimpleNav) => {
+  const logoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme?.isBase);
+  const location = useLocation();
 
-  const logoUrl = !logo
-    ? undefined
-    : !theme?.isBase
-      ? getLogoFromPath(logo.path.dark)
-      : getLogoFromPath(logo.path.light);
-
+  const isError = location.pathname === "/login/error";
   return (
-    <StyledNav id="login-header" theme={theme}>
+    <StyledNav id="login-header" theme={theme} isError={isError}>
       <img src={logoUrl} />
     </StyledNav>
   );

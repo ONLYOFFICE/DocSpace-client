@@ -77,6 +77,7 @@ const useEditorEvents = ({
   fileInfo,
   config,
   doc,
+  errorMessage,
   t,
 }: UseEventsProps) => {
   const [events, setEvents] = React.useState<IConfigEvents>({});
@@ -110,7 +111,7 @@ const useEditorEvents = ({
           instanceId: reference.referenceData
             ? reference.referenceData.instanceId
             : "",
-          fileId: fileInfo.id,
+          fileId: fileInfo?.id,
           path: reference.path || "",
         };
 
@@ -126,16 +127,18 @@ const useEditorEvents = ({
         winEditor?.close();
         docEditor?.showMessage?.(
           (e as { message?: string })?.message ??
-            t?.("ErrorConnectionLost") ??
+            t("ErrorConnectionLost") ??
             "",
         );
       }
     },
-    [fileInfo.id, t],
+    [fileInfo?.id, t],
   );
 
   const onSDKAppReady = React.useCallback(() => {
     docEditor = window.DocEditor.instances[EDITOR_ID];
+
+    if (errorMessage) return docEditor?.showMessage?.(errorMessage);
 
     console.log("ONLYOFFICE Document Editor is ready", docEditor);
     const url = window.location.href;
@@ -154,10 +157,10 @@ const useEditorEvents = ({
         if (config?.Error) docEditor?.showMessage?.(config.Error);
       }
     }
-  }, [config.Error]);
+  }, [config?.Error, errorMessage]);
 
   const onDocumentReady = React.useCallback(() => {
-    // console.log("onDocumentReady", arguments, { docEditor });
+    // console.log("onDocumentReady", { docEditor });
     setDocumentReady(true);
 
     frameCallCommand("setIsLoaded");
@@ -168,13 +171,15 @@ const useEditorEvents = ({
     //   loadUsersRightsList(docEditor);
     // }
 
-    if (docEditor)
+    if (docEditor) {
+      // console.log("call assign for asc files editor doceditor");
       assign(
         window as unknown as { [key: string]: {} },
         ["ASC", "Files", "Editor", "docEditor"],
         docEditor,
       ); //Do not remove: it's for Back button on Mobile App
-  }, [config.errorMessage]);
+    }
+  }, [config?.errorMessage]);
 
   const getBackUrl = React.useCallback(() => {
     if (!fileInfo) return;
@@ -229,17 +234,17 @@ const useEditorEvents = ({
               ? "xlsx"
               : "docxf";
 
-      let fileName = t?.("Common:NewDocument");
+      let fileName = t("Common:NewDocument");
 
       switch (fileExt) {
         case "xlsx":
-          fileName = t?.("Common:NewSpreadsheet");
+          fileName = t("Common:NewSpreadsheet");
           break;
         case "pptx":
-          fileName = t?.("Common:NewPresentation");
+          fileName = t("Common:NewPresentation");
           break;
         case "docxf":
-          fileName = t?.("Common:NewMasterForm");
+          fileName = t("Common:NewMasterForm");
           break;
         default:
           break;
@@ -257,6 +262,8 @@ const useEditorEvents = ({
   const onSDKRequestCreateNew = React.useCallback(() => {
     const defaultFileName = getDefaultFileName(true);
 
+    if (!fileInfo?.folderId) return;
+
     createFile(fileInfo.folderId, defaultFileName ?? "")
       ?.then((newFile) => {
         const newUrl = combineUrl(
@@ -271,7 +278,7 @@ const useEditorEvents = ({
       .catch((e) => {
         toastr.error(e);
       });
-  }, [fileInfo.folderId, getDefaultFileName]);
+  }, [fileInfo?.folderId, getDefaultFileName]);
 
   const getDocumentHistory = React.useCallback(
     (fileHistory: TEditHistory[], historyLength: number) => {
@@ -287,14 +294,14 @@ const useEditorEvents = ({
 
         changesModified.forEach((item) => {
           item.created = `${new Date(item.created).toLocaleString(
-            config.editorConfig.lang,
+            config?.editorConfig.lang,
           )}`;
         });
 
         let obj = {
           ...(changes.length !== 0 && { changes: changesModified }),
           created: `${new Date(fileHistory[i].created).toLocaleString(
-            config.editorConfig.lang,
+            config?.editorConfig.lang,
           )}`,
           ...(serverVersion && { serverVersion }),
           key: fileHistory[i].key,
@@ -310,13 +317,14 @@ const useEditorEvents = ({
       }
       return result;
     },
-    [config.editorConfig.lang],
+    [config?.editorConfig.lang],
   );
 
   const onSDKRequestRestore = React.useCallback(
     async (event: object) => {
       const restoreVersion = (event as TEvent).data.version;
 
+      if (!fileInfo?.id) return;
       try {
         const updateVersions = await restoreDocumentsVersion(
           fileInfo.id,
@@ -351,7 +359,7 @@ const useEditorEvents = ({
         });
       }
     },
-    [doc, fileInfo.id, getDocumentHistory],
+    [doc, fileInfo?.id, getDocumentHistory],
   );
 
   const onSDKRequestHistory = React.useCallback(async () => {
@@ -361,6 +369,8 @@ const useEditorEvents = ({
       //   const requestToken =
       //     shareIndex > -1 ? search.substring(shareIndex + 6) : null;
       //   const docIdx = search.indexOf("doc=");
+
+      if (!fileInfo?.id) return;
 
       const fileHistory = await getEditHistory(fileInfo.id, doc ?? "");
       const historyLength = fileHistory.length;
@@ -386,7 +396,7 @@ const useEditorEvents = ({
         error: `${errorMessage}`, //TODO: maybe need to display something else.
       });
     }
-  }, [doc, fileInfo.id, getDocumentHistory]);
+  }, [doc, fileInfo?.id, getDocumentHistory]);
 
   const onSDKRequestSendNotify = React.useCallback(
     async (event: object) => {
@@ -396,6 +406,7 @@ const useEditorEvents = ({
       const comment = currEvent.data.message;
       const emails = currEvent.data.emails;
 
+      if (!fileInfo?.id) return;
       try {
         await sendEditorNotify(
           fileInfo.id,
@@ -425,7 +436,7 @@ const useEditorEvents = ({
         toastr.error(e as TData);
       }
     },
-    [fileInfo.id, t, usersInRoom],
+    [fileInfo?.id, t, usersInRoom],
   );
 
   const onSDKRequestUsers = React.useCallback(
@@ -433,6 +444,7 @@ const useEditorEvents = ({
       try {
         const currEvent = event as TEvent;
         const c = currEvent?.data?.c;
+        if (!fileInfo?.id) return;
         const users = await (c == "protect"
           ? getProtectUsers(fileInfo.id)
           : getSharedUsers(fileInfo.id));
@@ -454,13 +466,12 @@ const useEditorEvents = ({
         });
       } catch (e) {
         docEditor?.showMessage?.(
-          ((e as { message?: string })?.message ||
-            t?.("ErrorConnectionLost")) ??
+          ((e as { message?: string })?.message || t("ErrorConnectionLost")) ??
             "",
         );
       }
     },
-    [fileInfo.id, t],
+    [fileInfo?.id, t],
   );
 
   const onSDKRequestHistoryData = React.useCallback(
@@ -472,7 +483,7 @@ const useEditorEvents = ({
         // const shareIndex = search.indexOf("share=");
         // const requestToken =
         //   shareIndex > -1 ? search.substring(shareIndex + 6) : null;
-
+        if (!fileInfo?.id) return;
         const versionDifference = await getEditDiff(
           fileInfo.id,
           version,
@@ -520,7 +531,7 @@ const useEditorEvents = ({
         });
       }
     },
-    [doc, fileInfo.id],
+    [doc, fileInfo?.id],
   );
 
   const onDocumentStateChange = React.useCallback(
@@ -533,21 +544,21 @@ const useEditorEvents = ({
         docSaved
           ? setDocumentTitle(
               docTitle,
-              config.document.fileType,
+              config?.document.fileType ?? "",
               documentReady,
-              successAuth,
+              successAuth ?? false,
               setDocTitle,
             )
           : setDocumentTitle(
               `*${docTitle}`,
-              config.document.fileType,
+              config?.document.fileType ?? "",
               documentReady,
-              successAuth,
+              successAuth ?? false,
               setDocTitle,
             );
       }, 500);
     },
-    [config.document.fileType, docSaved, docTitle, documentReady, successAuth],
+    [config?.document.fileType, docSaved, docTitle, documentReady, successAuth],
   );
 
   const onMetaChange = React.useCallback(
@@ -558,15 +569,15 @@ const useEditorEvents = ({
       if (newTitle && newTitle !== docTitle) {
         setDocumentTitle(
           newTitle,
-          config.document.fileType,
+          config?.document.fileType ?? "",
           documentReady,
-          successAuth,
+          successAuth ?? false,
           setDocTitle,
         );
         setDocTitle(newTitle);
       }
     },
-    [config.document.fileType, docTitle, documentReady, successAuth],
+    [config?.document.fileType, docTitle, documentReady, successAuth],
   );
 
   const onMakeActionLink = React.useCallback((event: object) => {
@@ -588,12 +599,7 @@ const useEditorEvents = ({
   };
 
   React.useEffect(() => {
-    const tempEvents: IConfigEvents = {};
-
-    setEvents(tempEvents);
-  }, [successAuth, user?.isVisitor, config?.documentType, fileInfo]);
-
-  React.useEffect(() => {
+    // console.log("render docspace config", { ...window.DocSpaceConfig });
     if (
       IS_DESKTOP_EDITOR ||
       (typeof window !== "undefined" &&
@@ -643,4 +649,3 @@ const useEditorEvents = ({
 };
 
 export default useEditorEvents;
-

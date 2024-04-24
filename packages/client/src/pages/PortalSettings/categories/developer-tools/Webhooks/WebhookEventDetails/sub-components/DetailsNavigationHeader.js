@@ -28,7 +28,6 @@ import React from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import { NoBoxShadowToast } from "../../styled-components";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { useNavigate } from "react-router-dom";
@@ -88,15 +87,15 @@ const HeaderContainer = styled.div`
   }
 
   .headline {
-    font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+    font-size: 18px;
     margin-inline-end: 16px;
 
     @media ${tablet} {
-      font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
+      font-size: 21px;
     }
 
     @media ${mobile} {
-      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+      font-size: 18px;
     }
   }
 `;
@@ -139,7 +138,6 @@ const DetailsNavigationHeader = (props) => {
           onClick={handleRetryEvent}
         />
       </HeaderContainer>
-      <NoBoxShadowToast />
     </>
   );
 };

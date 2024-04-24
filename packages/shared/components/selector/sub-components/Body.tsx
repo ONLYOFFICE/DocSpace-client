@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { isMobileOnly, isIOS } from "react-device-detect";
+
 import InfiniteLoader from "react-window-infinite-loader";
 import { FixedSizeList as List } from "react-window";
 
@@ -40,6 +40,7 @@ import { BreadCrumbs } from "./BreadCrumbs";
 import { StyledBody, StyledTabs } from "../Selector.styled";
 import { BodyProps } from "../Selector.types";
 import { Item } from "./Item";
+import { Info } from "./Info";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
@@ -97,6 +98,9 @@ const Body = ({
   withTabs,
   tabsData,
   activeTabId,
+
+  withInfo,
+  infoText,
 }: BodyProps) => {
   const [bodyHeight, setBodyHeight] = React.useState(0);
 
@@ -111,28 +115,11 @@ const Body = ({
     }
   }, []);
 
-  const onBodyResize = React.useCallback(
-    (e?: Event) => {
-      const target = e ? (e.target as VisualViewport) : null;
-      if (target && target.height && isMobileOnly && isIOS) {
-        let height = target.height - 64 - HEADER_HEIGHT;
-
-        if (footerVisible) {
-          height -= withFooterCheckbox
-            ? FOOTER_WITH_CHECKBOX_HEIGHT
-            : withFooterInput
-              ? FOOTER_WITH_NEW_NAME_HEIGHT
-              : FOOTER_HEIGHT;
-        }
-        setBodyHeight(height);
-        return;
-      }
-      if (bodyRef && bodyRef.current) {
-        setBodyHeight(bodyRef.current.offsetHeight);
-      }
-    },
-    [footerVisible, withFooterCheckbox, withFooterInput],
-  );
+  const onBodyResize = React.useCallback(() => {
+    if (bodyRef && bodyRef.current) {
+      setBodyHeight(bodyRef.current.offsetHeight);
+    }
+  }, []);
 
   const isItemLoaded = React.useCallback(
     (index: number) => {
@@ -143,11 +130,9 @@ const Body = ({
 
   React.useEffect(() => {
     window.addEventListener("resize", onBodyResize);
-    if (isMobileOnly && isIOS)
-      window.visualViewport?.addEventListener("resize", onBodyResize);
+
     return () => {
       window.removeEventListener("resize", onBodyResize);
-      window.visualViewport?.removeEventListener("resize", onBodyResize);
     };
   }, [onBodyResize]);
 
@@ -163,6 +148,13 @@ const Body = ({
 
   if (withSearch || isSearch || itemsCount > 0) listHeight -= SEARCH_HEIGHT;
   if (withTabs) listHeight -= TABS_HEIGHT;
+  if (withInfo) {
+    const infoEl = document.getElementById("selector-info-text");
+    if (infoEl) {
+      const height = infoEl.getClientRects()[0].height;
+      listHeight -= height;
+    }
+  }
 
   if (withBreadCrumbs) listHeight -= BREAD_CRUMBS_HEIGHT;
 
@@ -209,9 +201,7 @@ const Body = ({
 
       {isSearchLoading || isBreadCrumbsLoading ? (
         searchLoader
-      ) : withSearch ||
-        (itemsCount > 0 && withSearch) ||
-        (withSearch && isSearch) ? (
+      ) : withSearch && (itemsCount > 0 || isSearch) ? (
         <Search
           placeholder={searchPlaceholder}
           value={searchValue}
@@ -220,6 +210,10 @@ const Body = ({
           setIsSearch={setIsSearch}
         />
       ) : null}
+
+      {withInfo && !isLoading && (
+        <Info withInfo={withInfo} infoText={infoText} />
+      )}
 
       {isLoading ? (
         <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>

@@ -52,7 +52,14 @@ const StyledTagInput = styled.div`
   ${({ hasTags }) => !hasTags && "margin-bottom: -8px"}
 `;
 
-const TagInput = ({ t, tagHandler, setIsScrollLocked, isDisabled }) => {
+const TagInput = ({
+  t,
+  tagHandler,
+  setIsScrollLocked,
+  isDisabled,
+  onFocus,
+  onBlur,
+}) => {
   const inputRef = useRef();
   const [tagInput, setTagInput] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -69,13 +76,6 @@ const TagInput = ({ t, tagHandler, setIsScrollLocked, isDisabled }) => {
     setTagInput(text);
   };
 
-  const handleFocus = (event) => {
-    const text = event.target.value;
-    if (text.trim().length > 0) {
-      openDropdown();
-    }
-  };
-
   const openDropdown = () => {
     if (isDisabled) return;
     setIsScrollLocked(true);
@@ -85,6 +85,19 @@ const TagInput = ({ t, tagHandler, setIsScrollLocked, isDisabled }) => {
   const closeDropdown = () => {
     setIsScrollLocked(false);
     setIsDropdownOpen(false);
+  };
+
+  const handleFocus = (event) => {
+    const text = event.target.value;
+    if (text.trim().length > 0) {
+      openDropdown();
+    }
+    onFocus();
+  };
+
+  const handleBlur = () => {
+    closeDropdown();
+    onBlur();
   };
 
   const handleKeyDown = (event) => {
@@ -110,8 +123,8 @@ const TagInput = ({ t, tagHandler, setIsScrollLocked, isDisabled }) => {
         placeholder={t("TagsPlaceholder")}
         value={tagInput}
         onChange={onTagInputChange}
-        onBlur={closeDropdown}
         onFocus={handleFocus}
+        onBlur={handleBlur}
         isDisabled={isDisabled}
         onKeyDown={handleKeyDown}
       />

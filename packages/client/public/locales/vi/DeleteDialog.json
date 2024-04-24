@@ -1,6 +1,10 @@
 {
+  "DeleteAllGroupDescription": "Các nhóm đã được chọn sẽ bị xóa. Người dùng trong các nhóm sẽ không bị xóa khỏi DocSpace. Bạn có chắc muốn tiếp tục?",
+  "DeleteAllGroupsTitle": "Xóa các nhóm",
   "DeleteFile": "Bạn sắp xóa tập tin này. ",
   "DeleteFolder": "Bạn sắp xóa thư mục này. ",
+  "DeleteGroupDescription": "Nhóm {{groupName}} sẽ bị xóa. Người dùng trong nhóm sẽ không bị xóa khỏi DocSpace. Bạn có chắc muốn tiếp tục?",
+  "DeleteGroupTitle": "Xoá nhóm",
   "DeleteItems": "Bạn sắp xóa các mục này. ",
   "DeleteItemsSharedNote": "Xin lưu ý rằng nếu bạn đã chia sẻ chúng với ai đó, chúng sẽ không khả dụng. ",
   "DeleteRoom": "Bạn sắp xóa phòng này. Bạn sẽ không thể khôi phục nó.",
@@ -10,7 +14,6 @@
   "FolderPermanentlyDeleted": "Thư mục sẽ bị xóa vĩnh viễn trong 30 ngày. ",
   "ItemsPermanentlyDeleted": "Các mục sẽ bị xóa vĩnh viễn trong 30 ngày.",
   "MoveToTrashButton": "Chuyển vào Thùng rác",
-  "MoveToTrashFile": "Bạn sắp xóa tập tin này. Xin lưu ý rằng nếu bạn đã chia sẻ nó với ai đó, nó sẽ không khả dụng. Tập tin sẽ bị xóa vĩnh viễn trong 30 ngày. Bạn có chắc chắn muốn tiếp tục không?",
   "MoveToTrashTitle": "Chuyển đến thùng rác?",
   "UnsubscribeButton": "Hủy đăng ký",
   "UnsubscribeNote": "Bạn có chắc muốn hủy đăng ký các mục đã chọn từ danh sách không?",

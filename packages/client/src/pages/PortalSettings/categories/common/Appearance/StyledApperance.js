@@ -27,6 +27,7 @@
 import { mobile } from "@docspace/shared/utils";
 import PlusThemeSvgUrl from "PUBLIC_DIR/images/plus.theme.svg?url";
 import styled, { css } from "styled-components";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 const StyledComponent = styled.div`
   width: 100%;
@@ -34,7 +35,7 @@ const StyledComponent = styled.div`
 
   .header {
     font-weight: 700;
-    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+    font-size: 16px;
     line-height: 22px;
   }
 
@@ -47,7 +48,7 @@ const StyledComponent = styled.div`
   }
 
   .theme-name {
-    font-size: ${(props) => props.theme.getCorrectFontSize("15px")};
+    font-size: 15px;
     line-height: 16px;
     font-weight: 600;
   }
@@ -178,4 +179,35 @@ const StyledTheme = styled.div`
     }
   }
 `;
-export { StyledComponent, StyledTheme };
+
+const StyledModalDialog = styled(ModalDialog)`
+  .modal-close {
+    display: none;
+  }
+
+  #modal-dialog {
+    max-height: none;
+  }
+
+  .hex-color-picker {
+    padding-bottom: 0 !important;
+    width: auto !important;
+
+    .react-colorful__saturation {
+      border-bottom: none;
+
+      .react-colorful__interactive {
+        width: calc(100% - 16px) !important;
+        height: calc(100% - 16px);
+      }
+    }
+
+    .react-colorful__hue {
+      .react-colorful__interactive {
+        width: auto;
+      }
+    }
+  }
+`;
+
+export { StyledComponent, StyledTheme, StyledModalDialog };

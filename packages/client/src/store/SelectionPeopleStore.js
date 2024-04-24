@@ -132,19 +132,42 @@ class SelectionStore {
     this.setSelection(newSelections);
   };
 
-  setBufferSelection = (bufferSelection, addToSelection = true) => {
+  setBufferSelection = (bufferSelection) => {
     this.bufferSelection = bufferSelection;
-    //console.log("setBufferSelection", { bufferSelection });
+  };
 
-    if (bufferSelection) {
-      if (!addToSelection) return;
-      this.setSelection([bufferSelection]);
-      this.incrementUsersRights(bufferSelection);
+  selectRow = (item) => {
+    const isItemSelected = !!this.selection.find((s) => s.id === item.id);
+    const isSingleSelected = isItemSelected && this.selection.length === 1;
 
-      return;
+    if (this.bufferSelection) {
+      this.setBufferSelection(null);
     }
 
-    this.clearSelection();
+    if (isSingleSelected) {
+      this.deselectUser(item);
+    } else {
+      this.clearSelection();
+      this.selectUser(item);
+    }
+  };
+
+  singleContextMenuAction = (item) => {
+    if (this.selection.length) {
+      this.clearSelection();
+    }
+
+    this.setBufferSelection(item);
+  };
+
+  multipleContextMenuAction = (item) => {
+    const isItemSelected = !!this.selection.find((s) => s.id === item.id);
+    const isSingleSelected = isItemSelected && this.selection.length === 1;
+
+    if (!isItemSelected || isSingleSelected) {
+      this.clearSelection();
+      this.setBufferSelection(item);
+    }
   };
 
   selectUser = (user) => {
@@ -189,6 +212,11 @@ class SelectionStore {
     return this.setSelection([]);
   };
 
+  resetSelections = () => {
+    this.setBufferSelection(null);
+    this.clearSelection();
+  };
+
   selectByStatus = (status) => {
     this.bufferSelection = null;
     const list = this.peopleStore.usersStore.peopleList.filter(
@@ -231,6 +259,11 @@ class SelectionStore {
     this.selected = selected;
     const list = this.peopleStore.usersStore.peopleList;
     this.setSelection(this.getUsersBySelected(list, selected));
+
+    if (selected !== "none" && selected !== "close") {
+      this.resetUsersRight();
+      list.forEach((u) => this.incrementUsersRights(u));
+    }
 
     return selected;
   };

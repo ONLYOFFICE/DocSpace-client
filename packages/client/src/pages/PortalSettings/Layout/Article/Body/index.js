@@ -46,7 +46,7 @@ import {
 } from "../../../utils";
 
 import { ArticleItem } from "@docspace/shared/components/article-item";
-import LoaderArticleBody from "./loaderArticleBody";
+import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -64,6 +64,7 @@ const ArticleBodyContent = (props) => {
     currentDeviceType,
     isProfileLoading,
     limitedAccessSpace,
+    currentColorScheme,
   } = props;
 
   const [selectedKeys, setSelectedKeys] = React.useState([]);
@@ -141,7 +142,10 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["5-0"]);
       }
 
-      if (location.pathname.includes("management")) {
+      if (
+        location.pathname.includes("management") &&
+        !location.pathname.includes("profile")
+      ) {
         setSelectedKeys(["6-0"]);
       }
 
@@ -153,12 +157,11 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["8-0"]);
       }
 
-      if (location.pathname.includes("payments")) {
+      if (
+        location.pathname.includes("payments") ||
+        location.pathname.includes("bonus")
+      ) {
         setSelectedKeys(["9-0"]);
-      }
-
-      if (location.pathname.includes("bonus")) {
-        setSelectedKeys(["10-0"]);
       }
     }
   }, [
@@ -305,6 +308,7 @@ const ArticleBodyContent = (props) => {
           style={{
             marginTop: `${item.key.includes(9) ? "16px" : "0"}`,
           }}
+          $currentColorScheme={currentColorScheme}
         />,
       );
     });
@@ -315,7 +319,7 @@ const ArticleBodyContent = (props) => {
   const items = catalogItems();
 
   return !isLoadedArticleBody || isProfileLoading ? (
-    <LoaderArticleBody />
+    <ArticleFolderLoader />
   ) : (
     <>{items}</>
   );
@@ -341,6 +345,7 @@ export default inject(
       toggleArticleOpen,
       currentDeviceType,
       limitedAccessSpace,
+      currentColorScheme,
     } = settingsStore;
 
     const isProfileLoading =
@@ -361,6 +366,7 @@ export default inject(
       currentDeviceType,
       isProfileLoading,
       limitedAccessSpace,
+      currentColorScheme,
     };
   },
 )(

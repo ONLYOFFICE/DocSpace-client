@@ -170,6 +170,7 @@ const ThirdPartyStorage = ({
             thirdpartyAccount={storageLocation.thirdpartyAccount}
             onChangeStorageFolderId={onChangeStorageFolderId}
             isDisabled={isDisabled}
+            createNewFolderIsChecked={createNewFolderIsChecked}
           />
 
           <Checkbox

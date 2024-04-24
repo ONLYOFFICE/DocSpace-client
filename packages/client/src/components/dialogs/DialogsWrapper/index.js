@@ -34,7 +34,6 @@ const DialogsWrapper = (props) => {
     t,
     isAboutDialogVisible,
     setIsAboutDialogVisible,
-    personal,
     buildVersionInfo,
     isDebugDialogVisible,
     setIsDebugDialogVisible,
@@ -46,7 +45,6 @@ const DialogsWrapper = (props) => {
         t={t}
         visible={isAboutDialogVisible}
         onClose={() => setIsAboutDialogVisible(false)}
-        personal={personal}
         buildVersionInfo={buildVersionInfo}
       />
       <DebugInfoDialog
@@ -58,7 +56,7 @@ const DialogsWrapper = (props) => {
 };
 
 export default inject(({ settingsStore, profileActionsStore }) => {
-  const { personal, buildVersionInfo } = settingsStore;
+  const { buildVersionInfo } = settingsStore;
   const {
     isAboutDialogVisible,
     setIsAboutDialogVisible,
@@ -67,7 +65,6 @@ export default inject(({ settingsStore, profileActionsStore }) => {
   } = profileActionsStore;
 
   return {
-    personal,
     buildVersionInfo,
     isAboutDialogVisible,
     setIsAboutDialogVisible,

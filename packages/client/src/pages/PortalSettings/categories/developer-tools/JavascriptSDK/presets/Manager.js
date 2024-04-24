@@ -128,8 +128,7 @@ const showPreviewThreshold = 720;
 
 //   text-overflow: ellipsis;
 //   overflow: hidden;
-//   font-size: ${(props) =>
-//     props.theme.getCorrectFontSize(props.primary ? "14px" : props.info ? "11px" : "12px")};
+//   font-size: ${(props) => props.primary ? "14px" : props.info ? "11px" : "12px"};
 //   font-weight: ${(props) => (props.primary || props.info ? "600" : "400")};
 
 //   color: ${(props) =>
@@ -171,7 +170,7 @@ const Manager = (props) => {
 
   setDocumentTitle(t("JavascriptSdk"));
 
-  const scriptUrl = `${window.location.origin}/static/scripts/api.js`;
+  const scriptUrl = `${window.location.origin}/static/scripts/sdk/1.0.0/api.js`;
 
   const dataSortBy = [
     { key: "DateAndTime", label: t("Common:LastModifiedDate"), default: true },
@@ -734,14 +733,21 @@ const Manager = (props) => {
   );
 
   const code = (
-    <CodeWrapper
-      width={width + widthDimension.label}
-      height={height + heightDimension.label}
-    >
+    <CodeWrapper height="fit-content">
       <CategorySubHeader className="copy-window-code">
-        {t("CopyWindowCode")}
+        {`HTML ${t("CodeTitle")}`}
       </CategorySubHeader>
+      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
+        {t("HtmlCodeDescription")}
+      </Text>
       <Textarea value={codeBlock} heightTextArea={153} />
+      <CategorySubHeader className="copy-window-code">
+        {`JavaScript ${t("CodeTitle")}`}
+      </CategorySubHeader>
+      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
+        {t("JavaScriptCodeDescription")}
+      </Text>
+      <CodeBlock config={config} />
     </CodeWrapper>
   );
 
@@ -750,11 +756,6 @@ const Manager = (props) => {
       key: "preview",
       title: t("Common:Preview"),
       content: preview,
-    },
-    {
-      key: "js",
-      title: "JavaScript",
-      content: <CodeBlock config={config} />,
     },
     {
       key: "code",
@@ -1013,7 +1014,7 @@ const Manager = (props) => {
                       fontSize="12px"
                       lineHeight="16px"
                     >
-                      {t("LinkSettings", {
+                      {t("LinkSetDescription", {
                         parameter:
                           settingsTranslations[selectedLink.settings[0]],
                       })}
@@ -1035,7 +1036,7 @@ const Manager = (props) => {
                       fontSize="12px"
                       lineHeight="16px"
                     >
-                      {t("LinkSettings2", {
+                      {t("LinkSetDescription2", {
                         parameter1:
                           settingsTranslations[selectedLink.settings[0]],
                         parameter2:
@@ -1059,7 +1060,7 @@ const Manager = (props) => {
                       fontSize="12px"
                       lineHeight="16px"
                     >
-                      {t("LinkSettings3", {
+                      {t("LinkSetDescription3", {
                         parameter1:
                           settingsTranslations[selectedLink.settings[0]],
                         parameter2:

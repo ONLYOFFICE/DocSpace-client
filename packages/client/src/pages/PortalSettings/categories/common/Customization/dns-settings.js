@@ -34,7 +34,7 @@ import { Button } from "@docspace/shared/components/button";
 import { inject, observer } from "mobx-react";
 
 import { useNavigate } from "react-router-dom";
-import { isMobile } from "@docspace/shared/utils";
+import { isMobileDevice } from "@docspace/shared/utils";
 import checkScrollSettingsBlock from "../utils";
 import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -157,7 +157,7 @@ const DNSSettings = (props) => {
     isError && setIsError(false);
     setErrorText("");
 
-    const { value } = e.target;
+    const value = e.target.value.trim();
 
     const isValidDomain = parseDomain(value || "", setErrorText, t);
 
@@ -167,7 +167,7 @@ const DNSSettings = (props) => {
     setDNSName(value);
   };
   const checkInnerWidth = useCallback(() => {
-    if (!isMobile()) {
+    if (!isMobileDevice()) {
       setIsCustomizationView(true);
 
       const currentUrl = window.location.href.replace(
@@ -183,7 +183,7 @@ const DNSSettings = (props) => {
     } else {
       setIsCustomizationView(false);
     }
-  }, [isMobile, setIsCustomizationView]);
+  }, [isMobileDevice, setIsCustomizationView]);
 
   const domainExampleText = " ourcompany.com";
 
@@ -202,7 +202,7 @@ const DNSSettings = (props) => {
           <TextInput
             {...textInputProps}
             isDisabled={isLoading || !enable}
-            value={dnsName?.trim()}
+            value={dnsName}
             onChange={onChangeTextInput}
             hasError={isError}
           />

@@ -19,7 +19,7 @@
   "LogoutAllActiveSessionsDescription": "Všechna aktivní připojení kromě tohoto připojení budou odhlášena, protože jsou právě používána.",
   "LogoutBtn": "Odhlášení",
   "LogoutDescription": "Poznámka. Všechna aktivní připojení kromě tohoto připojení budou odhlášena, protože jsou právě používána.",
-  "LogoutFrom": "Odhlášení z {{platform}} {{browser}} ?",
+  "LogoutFrom": "Odhlášení z {{platform}} {{browser}}?",
   "MyProfile": "Můj profil",
   "ProviderSuccessfullyConnected": "Poskytovatel úspěšně připojen",
   "ProviderSuccessfullyDisconnected": "Poskytovatel úspěšně odpojen",

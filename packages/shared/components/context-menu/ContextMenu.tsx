@@ -28,6 +28,7 @@
 import React from "react";
 import { CSSTransition } from "react-transition-group";
 import { useTheme } from "styled-components";
+import { isMobileOnly } from "react-device-detect";
 
 import ArrowLeftReactUrl from "PUBLIC_DIR/images/arrow-left.react.svg?url";
 
@@ -112,8 +113,10 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
         const m = trimSeparator(getContextModel());
         setModel(m);
       }
+
       e.stopPropagation();
       e.preventDefault();
+
       currentEvent.current = e;
       if (visible) {
         if (!isMobileUtils()) {
@@ -155,6 +158,28 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
     [onHide],
   );
 
+  const toggle = React.useCallback(
+    (
+      e:
+        | React.MouseEvent
+        | MouseEvent
+        | Event
+        | React.ChangeEvent<HTMLInputElement>,
+    ) => {
+      if (currentChangeEvent.current === e || currentEvent.current === e)
+        return;
+
+      if (visible) {
+        hide(e);
+        return false;
+      }
+      // @ts-expect-error fix types
+      show(e);
+      return true;
+    },
+    [visible, hide, show],
+  );
+
   React.useEffect(() => {
     if (visible && prevReshow.current !== reshow) {
       setVisible(false);
@@ -193,7 +218,11 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
         left = event.pageX - width + 1;
       }
 
-      if (isTabletUtils() && height > 483) {
+      if (
+        isTabletUtils() &&
+        (height > 483 ||
+          (isMobileOnly && window.innerHeight < window.innerWidth))
+      ) {
         const article = document.getElementById("article-container");
 
         let currentArticleWidth = 0;
@@ -207,7 +236,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
         return;
       }
 
-      if (isMobileUtils() && height > 210) {
+      if (isMobileUtils() && (height > 210 || ignoreChangeView)) {
         setChangeView(true);
         setArticleWidth(0);
 
@@ -296,6 +325,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
     (e: MouseEvent) => {
       if (isOutsideClicked(e)) {
         // TODO: (&& e.button !== 2) restore after global usage
+
         hide(e);
 
         setResetMenu(true);
@@ -387,9 +417,9 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
   React.useImperativeHandle(
     ref,
     () => {
-      return { show, hide, menuRef };
+      return { show, hide, toggle, menuRef };
     },
-    [hide, show],
+    [hide, show, toggle],
   );
 
   const renderContextMenu = () => {
@@ -451,6 +481,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
                           imgClassName="drop-down-item_icon"
                           imgSrc={header.icon}
                           badgeUrl={badgeUrl}
+                          color={header.color || ""}
                         />
                       ) : (
                         <RoomIcon
@@ -505,7 +536,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
 
   const element = renderContextMenu();
 
-  const isMobile = isMobileUtils();
+  const isMobileUtil = isMobileUtils();
 
   const contextMenu = (
     <>
@@ -523,7 +554,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
   );
 
   const root = document.getElementById("root");
-  if (root && isMobile) {
+  if (root && isMobileUtil) {
     const portal = <Portal element={contextMenu} appendTo={root} />;
 
     return portal;

@@ -28,7 +28,11 @@
 /* eslint-disable guard-for-in */
 import transform from "lodash/transform";
 import { RoomSearchArea } from "../../enums";
-import { getObjectByLocation, toUrlParams } from "../../utils/common";
+import {
+  getObjectByLocation,
+  toUrlParams,
+  tryParseArray,
+} from "../../utils/common";
 
 const PAGE = "page";
 const PAGE_COUNT = "count";
@@ -164,8 +168,7 @@ class RoomsFilter {
       (urlFilter[SEARCH_AREA] && urlFilter[SEARCH_AREA]) ||
       defaultFilter.searchArea;
 
-    const tags =
-      (urlFilter[TAGS] && [...urlFilter[TAGS]]) || defaultFilter.tags;
+    const tags = tryParseArray(urlFilter[TAGS]) || defaultFilter.tags;
 
     const sortBy = urlFilter[SORT_BY] || defaultFilter.sortBy;
 

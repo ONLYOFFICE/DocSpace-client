@@ -53,6 +53,7 @@ export const FILE_SIZE = "file_size";
 export const ROOM = "room";
 export const USERS = "users";
 export const USERS_IN_ROOM = "usersInRoom";
+export const PDF_FORM_DIALOG_KEY = "pdf_form_dialog";
 
 export const COUNT_FOR_SHOWING_BAR = 2;
 export const PERCENTAGE_FOR_SHOWING_BAR = 90;
@@ -169,6 +170,12 @@ export const RTL_LANGUAGES = Object.freeze([
   "ur",
   "yi",
 ]);
+
+export const DEFAULT_FONT_FAMILY = "Open Sans, sans-serif, Arial";
+
+// Contains system fonts used in mac, ios, windows, android and linux
+export const SYSTEM_FONT_FAMILY =
+  "-apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Arial, sans-serif, Roboto, Noto Sans Arabic, Geeza Pro, Traditional Arabic, Noto Sans";
 
 export const HTML_EXST = [".htm", ".mht", ".html"];
 

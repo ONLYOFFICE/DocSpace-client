@@ -400,14 +400,14 @@ export const settingsTree = [
         children: [
           {
             id: "portal-settings_catalog-storageManagement_quota-per-room",
-            key: "6-1-0",
+            key: "6-0-1",
             icon: "",
             link: "quota-per-room",
             tKey: "QuotaPerRoom",
           },
           {
             id: "portal-settings_catalog-storageManagement_quota-per-user",
-            key: "6-1-1",
+            key: "6-0-2",
             icon: "",
             link: "quota-per-user",
             tKey: "QuotaPerUser",
@@ -473,7 +473,7 @@ export const settingsTree = [
             key: "7-1-4",
             icon: "",
             link: "editor",
-            tKey: "JavascriptSdk:Editor",
+            tKey: "Common:Editor",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_viewer",
@@ -553,7 +553,7 @@ export const settingsTree = [
   },
   {
     id: "portal-settings_catalog-bonus",
-    key: "10",
+    key: "9",
     type: PageType.bonus,
     link: "bonus",
     tKey: "Common:Bonus",
@@ -561,7 +561,7 @@ export const settingsTree = [
     children: [
       {
         id: "portal-settings_catalog-portal-bonus",
-        key: "10-0",
+        key: "9-0",
         icon: "",
         link: "",
         tKey: "Common:FreeProFeatures",

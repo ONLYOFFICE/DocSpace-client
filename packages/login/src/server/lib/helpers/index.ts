@@ -33,7 +33,6 @@ import {
   getAuthProviders,
   getCapabilities,
   getAppearanceTheme,
-  getLogoUrls,
   getCurrentSsoSettings,
 } from "@docspace/shared/api/settings";
 
@@ -78,15 +77,9 @@ export const getInitialState = async (
     providers: ProvidersType,
     capabilities: ICapabilities,
     availableThemes: IThemes,
-    logoUrls: ILogoUrl[],
     ssoSettings: ISSOSettings;
 
-  const baseSettings = [
-    getSettings(),
-    getBuildVersion(),
-    getAppearanceTheme(),
-    getLogoUrls(),
-  ];
+  const baseSettings = [getSettings(), getBuildVersion(), getAppearanceTheme()];
 
   const settings = [
     getAuthProviders(),
@@ -94,7 +87,7 @@ export const getInitialState = async (
     getCurrentSsoSettings(),
   ];
 
-  [portalSettings, buildInfo, availableThemes, logoUrls] =
+  [portalSettings, buildInfo, availableThemes] =
     await Promise.all(baseSettings);
 
   if (portalSettings.tenantStatus !== TenantStatus.PortalRestore)
@@ -111,7 +104,6 @@ export const getInitialState = async (
     capabilities,
     match: query,
     currentColorScheme,
-    logoUrls,
     ssoSettings,
   };
 

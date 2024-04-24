@@ -20,5 +20,6 @@
   "RegisterTitle": "Reģistrācijas pieprasījums",
   "RegistrationEmailWatermark": "E-pasts",
   "RememberHelper": "Noklusējuma sesijas ilgums ir 20 minūtes. Atzīmējiet šo opciju, lai iestatītu to uz vienu gadu. Lai iestatītu savu vērtību, dodieties uz Iestatījumi.",
-  "ResendCode": "Atkārtoti nosūtīt kodu"
+  "ResendCode": "Atkārtoti nosūtīt kodu",
+  "UserIsAlreadyRegistered": "Lietotājs <1>{{email}}</1> jau ir reģistrēts šajā DocSpace, ievadiet savu paroli vai dodieties atpakaļ, lai turpinātu ar citu e-pasta adresi."
 }

@@ -43,7 +43,7 @@ import Base from "@docspace/shared/themes/base";
 const CategoryHeader = styled.div`
   margin-top: 24px;
   margin-bottom: 16px;
-  font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+  font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: 22px;
@@ -89,7 +89,7 @@ const InfoBar = styled.div`
   display: flex;
   background-color: ${(props) => props.theme.infoBar.background};
   color: #333;
-  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+  font-size: 12px;
   padding: 12px 16px;
   border-radius: 6px;
   margin-bottom: 10px;
@@ -173,7 +173,7 @@ const CSP = ({
 
     if (error) setError(null);
 
-    setCSPSettings({ domains, setDefaultIfEmpty: true });
+    setCSPSettings({ domains });
   };
 
   const addDomain = async () => {

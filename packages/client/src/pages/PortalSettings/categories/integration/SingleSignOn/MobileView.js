@@ -37,7 +37,7 @@ const StyledWrapper = styled.div`
   gap: 20px;
 `;
 
-const MobileView = () => {
+const MobileView = ({ isSSOAvailable }) => {
   const { t } = useTranslation(["SingleSignOn", "Settings"]);
   const navigate = useNavigate();
 
@@ -52,12 +52,16 @@ const MobileView = () => {
         title={t("ServiceProviderSettings")}
         subtitle={t("ServiceProviderSettingsDescription")}
         url="/portal-settings/integration/single-sign-on/sp-settings"
+        withPaidBadge={!isSSOAvailable}
+        badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
       />
       <MobileCategoryWrapper
         title={t("SpMetadata")}
         subtitle={t("SpMetadataDescription")}
         url="/portal-settings/integration/single-sign-on/sp-metadata"
+        withPaidBadge={!isSSOAvailable}
+        badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
       />
     </StyledWrapper>

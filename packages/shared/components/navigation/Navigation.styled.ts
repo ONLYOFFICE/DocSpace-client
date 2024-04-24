@@ -169,6 +169,7 @@ const StyledContainer = styled.div<{
 
     .room-title {
       cursor: pointer;
+      min-height: 33px;
     }
   }
 
@@ -206,7 +207,12 @@ const StyledContainer = styled.div<{
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    min-height: 33px;
     gap: 8px;
+
+    @media ${mobile} {
+      min-height: auto;
+    }
 
     ${(props) =>
       props.showNavigationButton &&
@@ -421,16 +427,24 @@ const StyledTrashWarning = styled.div`
   padding: 8px 12px;
   border-radius: 6px;
 
-  display: flex;
-  align-items: center;
+  display: grid;
   justify-content: ${({ theme }) =>
     theme.interfaceDirection === "rtl" ? `right` : `left`};
 
-  font-weight: 400;
-  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
-  line-height: 16px;
+  .warning-text {
+    color: ${({ theme }) => theme.section.header.trashErasureLabelText};
 
-  color: ${({ theme }) => theme.section.header.trashErasureLabelText};
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+
+    width: 100%;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   background: ${({ theme }) =>
     theme.section.header.trashErasureLabelBackground};
 
@@ -472,7 +486,7 @@ const StyledTextContainer = styled.div<{
 
 const StyledHeading = styled(Heading)<{ isRootFolderTitle: boolean }>`
   font-weight: 700;
-  font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+  font-size: 18px;
   line-height: 24px;
 
   margin: 0;
@@ -482,12 +496,12 @@ const StyledHeading = styled(Heading)<{ isRootFolderTitle: boolean }>`
     `color: ${props.theme.navigation.rootFolderTitleColor}`};
 
   @media ${tablet} {
-    font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
+    font-size: 21px;
     line-height: 28px;
   }
 
   @media ${mobile} {
-    font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+    font-size: 18px;
     line-height: 24px;
   }
 `;
@@ -670,6 +684,7 @@ const StyledBox = styled.div<{
   @media ${mobile} {
     width: ${({ dropBoxWidth }) => `${dropBoxWidth}px`};
     padding-top: 10px !important;
+    inset-inline-start: 0;
   }
 `;
 

@@ -168,6 +168,13 @@ const EditRoomEvent = ({
       const actions = [];
       if (isOwnerChanged) {
         actions.push(changeRoomOwner(t, roomParams?.roomOwner?.id));
+        room.createdBy = {
+          ...room.createdBy,
+          id: roomParams.roomOwner.id,
+          avatarSmall: roomParams.roomOwner.avatar,
+          hasAvatar: roomParams.roomOwner.hasAvatar,
+          displayName: roomParams.roomOwner.label,
+        };
       }
       if (tags.length) {
         actions.push(addTagsToRoom(room.id, tags));
@@ -185,7 +192,7 @@ const EditRoomEvent = ({
       if (roomParams.icon.uploadedFile) {
         updateRoom(item, {
           ...room,
-          logo: { big: item.logo.small },
+          logo: { big: item.logo.original },
         });
 
         addActiveItems(null, [room.id]);
@@ -219,7 +226,10 @@ const EditRoomEvent = ({
 
         await promise;
       } else {
-        !withPaging && updateRoom(item, room);
+        !withPaging &&
+          updateRoom(item, {
+            ...room,
+          });
         // updateInfoPanelSelection();
       }
     } catch (err) {
@@ -259,7 +269,6 @@ const EditRoomEvent = ({
 
   useEffect(() => {
     const logo = item?.logo?.original ? item.logo.original : "";
-
     if (logo) {
       fetchLogoAction(logo);
     }

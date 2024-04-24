@@ -76,7 +76,7 @@ const SDKContainer = styled(Box)`
 const CategoryHeader = styled.div`
   margin-top: 40px;
   margin-bottom: 16px;
-  font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+  font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: 22px;
@@ -155,7 +155,7 @@ const PortalIntegration = (props) => {
       handleOnClick: navigateToPublicRoom,
     },
     {
-      title: t("Editor"),
+      title: t("Common:Editor"),
       description: t("EditorDescription"),
       image: theme.isBase ? EditorImg : EditorImgDark,
       handleOnClick: navigateToEditor,

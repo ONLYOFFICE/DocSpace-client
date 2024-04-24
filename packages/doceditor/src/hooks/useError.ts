@@ -28,23 +28,35 @@ import React from "react";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { frameCallCommand } from "@docspace/shared/utils/common";
-import { Nullable, TTranslation } from "@docspace/shared/types";
+import { TTranslation } from "@docspace/shared/types";
 
 import { TError } from "@/types";
 
 interface UseErrorProps {
   error?: TError;
   editorUrl?: string;
-  t?: Nullable<TTranslation>;
 }
 
-const useError = ({ error, editorUrl, t }: UseErrorProps) => {
+const useError = ({ error, editorUrl }: UseErrorProps) => {
   React.useEffect(() => {
     if (error?.message === "unauthorized") {
       sessionStorage.setItem("referenceUrl", window.location.href);
 
       window.open(
         combineUrl(window.DocSpaceConfig?.proxy?.url, "/login"),
+        "_self",
+      );
+    }
+    if (error?.message === "unavailable") {
+      window.open(
+        combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable"),
+        "_self",
+      );
+    }
+
+    if (error?.message === "restore-backup") {
+      window.open(
+        combineUrl(window.DocSpaceConfig?.proxy?.url, "/preparation-portal"),
         "_self",
       );
     }
@@ -69,23 +81,13 @@ const useError = ({ error, editorUrl, t }: UseErrorProps) => {
     }
   }, [editorUrl, error]);
 
-  const onError = React.useCallback(() => {
-    // window.open(
-    //   combineUrl(window.DocSpaceConfig?.proxy?.url, "/login"),
-    //   "_self",
-    // );
-  }, []);
-
   const getErrorMessage = React.useCallback(() => {
     if (typeof error !== "string") return error?.message;
 
-    if (error === "restore-backup") return t?.("Common:PreparationPortalTitle");
-
     return error;
-  }, [error, t]);
+  }, [error]);
 
-  return { onError, getErrorMessage };
+  return { getErrorMessage };
 };
 
 export default useError;
-

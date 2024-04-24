@@ -299,7 +299,6 @@ const SectionFilterContent = ({
   t,
   filter,
   roomsFilter,
-  personal,
   isRecentTab,
   isFavoritesFolder,
   sectionWidth,
@@ -1927,7 +1926,6 @@ const SectionFilterContent = ({
     return filterOptions;
   }, [
     t,
-    personal,
     providers,
     isPersonalRoom,
     isRooms,
@@ -2403,7 +2401,6 @@ const SectionFilterContent = ({
 
     return commonOptions;
   }, [
-    personal,
     isRooms,
     isAccountsPage,
     isPeopleAccounts,
@@ -2692,7 +2689,7 @@ export default inject(
     const { fetchTags } = tagsStore;
     const { isRoomAdmin } = authStore;
     const { user } = userStore;
-    const { personal, standalone, currentDeviceType } = settingsStore;
+    const { standalone, currentDeviceType } = settingsStore;
     const {
       isFavoritesFolder,
       isRecentTab,
@@ -2754,7 +2751,6 @@ export default inject(
       setViewAs,
       createThumbnails,
 
-      personal,
       isPersonalRoom,
       infoPanelVisible,
       setCurrentRoomsFilter,

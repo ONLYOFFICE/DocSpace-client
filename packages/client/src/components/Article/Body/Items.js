@@ -74,6 +74,7 @@ const Item = ({
   labelBadge,
   iconBadge,
   folderId,
+  currentColorScheme,
 }) => {
   const [isDragActive, setIsDragActive] = useState(false);
 
@@ -129,7 +130,6 @@ const Item = ({
 
   const onClickAction = React.useCallback(
     (e, folderId) => {
-
       setBufferSelection(null);
 
       onClick &&
@@ -175,6 +175,7 @@ const Item = ({
         onClickBadge={onBadgeClick}
         iconBadge={iconBadge}
         badgeTitle={labelBadge ? "" : t("RecycleBinAction")}
+        $currentColorScheme={currentColorScheme}
       />
     </StyledDragAndDrop>
   );
@@ -220,6 +221,7 @@ const Items = ({
   isPaymentPageAvailable,
   currentDeviceType,
   folderAccess,
+  currentColorScheme,
 }) => {
   const getEndOfBlock = React.useCallback(
     (item) => {
@@ -344,6 +346,7 @@ const Items = ({
             labelBadge={labelBadge}
             iconBadge={iconBadge}
             folderId={`document_catalog-${FOLDER_NAMES[item.rootFolderType]}`}
+            currentColorScheme={currentColorScheme}
           />
         );
       });
@@ -425,7 +428,7 @@ export default inject(
   }) => {
     const { isCommunity, isPaymentPageAvailable, currentDeviceType } =
       authStore;
-    const { showText, docSpace } = settingsStore;
+    const { showText, docSpace, currentColorScheme } = settingsStore;
 
     const {
       selection,
@@ -489,6 +492,7 @@ export default inject(
       isPaymentPageAvailable,
       currentDeviceType,
       folderAccess,
+      currentColorScheme,
     };
   },
 )(withTranslation(["Files", "Common", "Translations"])(observer(Items)));

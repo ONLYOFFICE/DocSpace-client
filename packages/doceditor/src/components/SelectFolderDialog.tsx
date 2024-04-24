@@ -29,7 +29,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import FilesSelectorWrapper from "@docspace/shared/selectors/Files/FilesSelector.wrapper";
+import FilesSelectorWrapper from "@docspace/shared/selectors/Files";
 import { DeviceType } from "@docspace/shared/enums";
 
 import { SelectFolderDialogProps } from "@/types";
@@ -44,16 +44,16 @@ const SelectFolderDialog = ({
   fileInfo,
   getIsDisabled,
   filesSettings,
-  i18n,
+
   fileSaveAsExtension,
 }: SelectFolderDialogProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(["Common", "Editor"]);
   const sessionPath = sessionStorage.getItem("filesSelectorPath");
 
   const cancelButtonProps: TSelectorCancelButton = {
     withCancelButton: true,
     onCancel: onClose,
-    cancelButtonLabel: t?.("Common:CancelButton") ?? "",
+    cancelButtonLabel: t("Common:CancelButton"),
     cancelButtonId: "select-file-modal-cancel",
   };
 
@@ -62,7 +62,6 @@ const SelectFolderDialog = ({
 
   return (
     <FilesSelectorWrapper
-      i18nProp={i18n}
       filesSettings={filesSettings}
       {...cancelButtonProps}
       withHeader
@@ -70,16 +69,16 @@ const SelectFolderDialog = ({
       withSearch
       withoutBackButton
       withCancelButton
-      headerLabel={i18n.t?.("Common:SaveButton") ?? ""}
+      headerLabel={t("Common:SaveButton")}
       disabledItems={[]}
       onSubmit={onSubmit}
-      submitButtonLabel={i18n.t?.("Common:SaveHereButton") ?? ""}
+      submitButtonLabel={t("Common:SaveHereButton")}
       submitButtonId="select-file-modal-submit"
       socketHelper={socketHelper}
       socketSubscribers={socketHelper.socketSubscribers}
-      footerInputHeader={i18n.t?.("Editor:FileName") ?? ""}
+      footerInputHeader={t("Editor:FileName")}
       currentFooterInputValue={titleSelectorFolder}
-      footerCheckboxLabel={i18n.t?.("Editor:OpenSavedDocument") ?? ""}
+      footerCheckboxLabel={t("Editor:OpenSavedDocument")}
       isPanelVisible={isVisible}
       isRoomsOnly={false}
       isThirdParty={false}
@@ -98,4 +97,3 @@ const SelectFolderDialog = ({
 };
 
 export default SelectFolderDialog;
-

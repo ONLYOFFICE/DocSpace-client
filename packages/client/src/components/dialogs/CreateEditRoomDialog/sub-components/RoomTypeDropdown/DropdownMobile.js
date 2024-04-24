@@ -52,22 +52,37 @@ const StyledDropdownMobile = styled.div`
 
 StyledDropdownMobile.defaultProps = { theme: Base };
 
-const DropdownMobile = ({ t, open, onClose, chooseRoomType }) => {
+const DropdownMobile = ({
+  t,
+  open,
+  onClose,
+  chooseRoomType,
+  forсeHideDropdown,
+}) => {
   return (
     <>
-      <Backdrop visible={open} onClick={onClose} zIndex={450} />
-      <StyledDropdownMobile className="dropdown-mobile" isOpen={open}>
-        {RoomsTypeValues.map((roomType) => (
-          <RoomType
-            id={roomType}
-            t={t}
-            key={roomType}
-            roomType={roomType}
-            type="dropdownItem"
-            onClick={() => chooseRoomType(roomType)}
-          />
-        ))}
-      </StyledDropdownMobile>
+      <Backdrop
+        visible={open}
+        onClick={onClose}
+        withBackground
+        withoutBlur={false}
+        isAside
+        zIndex={450}
+      />
+      {!forсeHideDropdown && (
+        <StyledDropdownMobile className="dropdown-mobile" isOpen={open}>
+          {RoomsTypeValues.map((roomType) => (
+            <RoomType
+              id={roomType}
+              t={t}
+              key={roomType}
+              roomType={roomType}
+              type="dropdownItem"
+              onClick={() => chooseRoomType(roomType)}
+            />
+          ))}
+        </StyledDropdownMobile>
+      )}
     </>
   );
 };

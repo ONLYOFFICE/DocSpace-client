@@ -26,17 +26,16 @@
 
 import { useRef } from "react";
 import { withTranslation } from "react-i18next";
-
 import { Text } from "@docspace/shared/components/text";
-import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
-import { Avatar } from "@docspace/shared/components/avatar";
+import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 import { StyledAccountsItemTitle } from "../../styles/accounts";
-
+import { inject, observer } from "mobx-react";
 import { decode } from "he";
 
 const GroupsItemTitle = ({
   t,
+  isRoomAdmin,
   isSeveralItems,
   infoPanelSelection,
   getGroupContextOptions,
@@ -56,7 +55,7 @@ const GroupsItemTitle = ({
     <StyledAccountsItemTitle ref={itemTitleRef}>
       <Avatar
         className="avatar"
-        size={"big"}
+        size={AvatarSize.big}
         userName={infoPanelSelection.name}
         isGroup={true}
       />
@@ -81,20 +80,26 @@ const GroupsItemTitle = ({
         )}
       </div>
 
-      <ContextMenuButton
-        id="info-accounts-options"
-        className="context-button"
-        getData={getContextOptions}
-      />
+      {!isRoomAdmin && (
+        <ContextMenuButton
+          id="info-accounts-options"
+          className="context-button"
+          getData={getContextOptions}
+        />
+      )}
     </StyledAccountsItemTitle>
   );
 };
 
-export default withTranslation([
-  "People",
-  "PeopleTranslations",
-  "InfoPanel",
-  "Common",
-  "Translations",
-  "DeleteProfileEverDialog",
-])(GroupsItemTitle);
+export default inject(({ peopleStore }) => ({
+  isRoomAdmin: peopleStore.userStore.user.isRoomAdmin,
+}))(
+  withTranslation([
+    "People",
+    "PeopleTranslations",
+    "InfoPanel",
+    "Common",
+    "Translations",
+    "DeleteProfileEverDialog",
+  ])(observer(GroupsItemTitle)),
+);

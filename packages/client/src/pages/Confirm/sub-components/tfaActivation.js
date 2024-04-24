@@ -27,6 +27,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+
 import { Button } from "@docspace/shared/components/button";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
@@ -39,13 +41,14 @@ import ErrorContainer from "@docspace/shared/components/error-container/ErrorCon
 import { mobile, tablet } from "@docspace/shared/utils";
 import { Link } from "@docspace/shared/components/link";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "../../../components/DocspaceLogoWrapper";
+import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
 import { StyledPage, StyledContent } from "./StyledConfirm";
 import {
   getTfaSecretKeyAndQR,
   validateTfaCode,
 } from "@docspace/shared/api/settings";
 import { loginWithTfaCode } from "@docspace/shared/api/user";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const StyledForm = styled(Box)`
   margin: 56px auto;
@@ -121,6 +124,11 @@ const StyledForm = styled(Box)`
     margin-top: 8px;
   }
 `;
+const PROXY_BASE_URL = combineUrl(
+  window.DocSpaceConfig?.proxy?.url,
+  "/profile",
+);
+
 const TfaActivationForm = withLoader((props) => {
   const {
     t,
@@ -130,6 +138,7 @@ const TfaActivationForm = withLoader((props) => {
     location,
     currentColorScheme,
   } = props;
+  const navigate = useNavigate();
 
   const [code, setCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -138,7 +147,7 @@ const TfaActivationForm = withLoader((props) => {
   const onSubmit = async () => {
     try {
       const { user, hash } = (location && location.state) || {};
-      const { linkData, defaultPage } = props;
+      const { linkData } = props;
 
       setIsLoading(true);
 
@@ -148,13 +157,16 @@ const TfaActivationForm = withLoader((props) => {
         await validateTfaCode(code, linkData.confirmHeader);
       }
 
-      const referenceUrl = sessionStorage.getItem("referenceUrl");
+      // const referenceUrl = sessionStorage.getItem("referenceUrl");
 
-      if (referenceUrl) {
-        sessionStorage.removeItem("referenceUrl");
-      }
+      // if (referenceUrl) {
+      //  sessionStorage.removeItem("referenceUrl");
+      // }
 
-      window.location.replace(referenceUrl || defaultPage);
+      // window.location.replace(referenceUrl || defaultPage);
+      navigate(PROXY_BASE_URL, {
+        state: { openBackupCodesDialog: true },
+      });
     } catch (err) {
       let errorMessage = "";
       if (typeof err === "object") {
@@ -338,5 +350,4 @@ export default inject(({ settingsStore, confirm, tfaStore }) => ({
   tfaIosAppUrl: tfaStore.tfaIosAppUrl,
   tfaWinAppUrl: tfaStore.tfaWinAppUrl,
   currentColorScheme: settingsStore.currentColorScheme,
-  defaultPage: settingsStore.defaultPage,
 }))(withTranslation(["Confirm", "Common"])(observer(TfaActivationWrapper)));

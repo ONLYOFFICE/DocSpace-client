@@ -37,7 +37,7 @@
     mode: "manager", //TODO: ["manager", "editor", "viewer","room-selector", "file-selector", "system"]
     id: null,
     locale: null,
-    theme: "Base",
+    theme: "System",
     editorType: "desktop", //TODO: ["desktop", "embedded"]
     editorGoBack: true,
     selectorType: "exceptPrivacyTrashArchiveFolders", //TODO: ["roomsOnly", "userFolderOnly", "exceptPrivacyTrashArchiveFolders", "exceptSortedByTagsFolders"]
@@ -47,6 +47,7 @@
     showTitle: true,
     showMenu: false,
     showFilter: false,
+    showSignOut: true,
     destroyText: "",
     viewAs: "row", //TODO: ["row", "table", "tile"]
     viewTableColumns: "Name,Type,Tags",
@@ -84,13 +85,8 @@
       "mode",
     ],
     events: {
-      onSelectCallback: (items) => {
-        alert(items[0].label);
-        window.close();
-      },
-      onCloseCallback: () => {
-        window.close();
-      },
+      onSelectCallback: null,
+      onCloseCallback: null,
       onAppReady: null,
       onAppError: (e) => console.log("onAppError", e),
       onEditorCloseCallback: null,
@@ -118,9 +114,19 @@
 
     currentSrc = window.location.host; // more flexible way to check
 
-    const passed =
-      res.response.header &&
-      res.response.header.toLowerCase().includes(currentSrc.toLowerCase());
+    const domains = [...res.response.domains].map((d) => {
+      try {
+        const domain = new URL(d.toLowerCase());
+        const domainFull =
+          domain.host + (domain.pathname !== "/" ? domain.pathname : "");
+
+        return domainFull;
+      } catch {
+        return d;
+      }
+    });
+
+    const passed = domains.includes(currentSrc.toLowerCase());
 
     if (!passed) throw new Error(cspErrorText);
 
@@ -270,27 +276,29 @@
       const logoSrc = `${config.src}/static/images/light_small_logo.react.svg`;
 
       button.innerHTML = `${config?.buttonWithLogo ? `<img width="16px" heigth="16px" src="${logoSrc}" />` : ""}${config?.buttonText || "Select to DocSpace"}`;
-
-      const scriptUrl = `${window.location.origin}/static/scripts/api.js`;
+      const url = new URL(window.location.href);
+      const scriptUrl = `${url.protocol}//${url.hostname}/static/scripts/api.js`;
 
       const configStringify = JSON.stringify(config, function (key, val) {
         return typeof val === "function" ? "" + val : val;
       })
         .replace(lt, rlt)
         .replace(gt, rgt);
+      
+      const windowHeight = 778, windowWidth = 610;
 
       button.addEventListener("click", () => {
         const winHtml = `<!DOCTYPE html>
           <html>
               <head>
                   <meta charset="UTF-8">
-                  <script src="${scriptUrl}"></script>
                   <title>DocSpace</title>
 
                   <style>
                     #${config.frameId}-container {
-                      height: 98vh !important;
-                      width: 98vw !important;
+                      height: 100lvh !important;
+                      width: 100lvw !important;
+                      overflow: hidden;
                     }
 
                     html, body {
@@ -317,7 +325,13 @@
                       onAuthSuccess: eval(${config.events.onAuthSuccess + ""}),
                       onSignOut: eval(${config.events.onSignOut + ""}),
                     }}
-                    window.DocSpace.SDK.initFrame(config)
+                    
+                    const script = document.createElement("script");
+                    
+                    script.setAttribute("src", "${scriptUrl}");
+                    script.onload = () => window.DocSpace.SDK.initFrame(config);
+                    
+                    document.body.appendChild(script);
                   </script>
               </body>
           </html>`;
@@ -326,7 +340,7 @@
           new Blob([winHtml], { type: "text/html" })
         );
 
-        window.open(winUrl, "_blank", `width=610,height=778`);
+        window.open(winUrl, "_blank", `width=${windowWidth},height=${windowHeight}`);
       });
 
       button.setAttribute("id", config.frameId + "-container");

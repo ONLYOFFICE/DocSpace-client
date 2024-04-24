@@ -99,7 +99,7 @@ declare global {
     DocSpace: {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
     };
-    DocSpaceConfig: {
+    DocSpaceConfig?: {
       pdfViewerUrl: string;
       wrongPortalNameUrl?: string;
       api: {
@@ -128,6 +128,12 @@ declare global {
         value: unknown,
         callback: unknown,
       ) => void;
+      getViewportSettings?: () => {
+        widgetType: "window" | "tab";
+        captionHeight: number;
+      };
+      onViewportSettingsChanged?: VoidFunction;
+      attachEvent?: (listener: string, callback: VoidFunction) => void;
     };
     cloudCryptoCommand: (
       type: string,
@@ -146,6 +152,7 @@ declare global {
       toDataURL: () => string;
     };
     dataLayer?: Record<string, unknown>[];
+    errorOnLoad?: Error;
   }
 
   export type ContextMenuModel =

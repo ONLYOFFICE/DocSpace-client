@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { Base } from "../../themes";
-import { desktop, mobile } from "../../utils/device";
+import { desktop } from "../../utils/device";
 
 const BannerWrapper = styled.div<{
   background?: string;
@@ -34,21 +34,23 @@ const BannerWrapper = styled.div<{
 }>`
   overflow: hidden;
   position: relative;
-  min-height: 140px;
-  max-height: 140px;
-  border-radius: 4px;
-  border: 1px solid ${(props) => props.borderColor};
+  min-height: 142px;
+  max-height: 142px;
 
   &::before {
     content: "";
     background-image: url(${(props) => props.background});
     background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: 0% 100%;
+
     position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
     z-index: -1000;
+    inset: 0px;
+
+    border-radius: 4px;
+    border: 1px solid ${(props) => props.borderColor};
+
     ${(props) =>
       props.theme.interfaceDirection === "rtl" &&
       css`
@@ -72,12 +74,6 @@ const BannerWrapper = styled.div<{
     path {
       fill: "#A3A9AE";
     }
-  }
-
-  @media ${mobile} {
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
   }
 `;
 

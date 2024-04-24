@@ -152,7 +152,6 @@ const Table = ({
   fetchMoreInsideGroupUsers,
   insideGroupFilterTotal,
   hasMoreInsideGroupUsers,
-  openGroupAction,
 }) => {
   const ref = useRef(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -169,9 +168,11 @@ const Table = ({
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
-  console.log(peopleList);
+  const isEmptyPage = !insideGroupIsLoading && peopleList.length === 0;
 
-  return (
+  return isEmptyPage ? (
+    <EmptyScreen />
+  ) : (
     <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
       <TableHeader
         columnStorageName={columnStorageName}
@@ -215,7 +216,6 @@ const Table = ({
               emailAccountsInsideGroupColumnIsEnabled
             }
             infoPanelVisible={infoPanelVisible}
-            openGroupAction={openGroupAction}
           />
         ))}
       </TableBody>
@@ -254,7 +254,6 @@ export default inject(
 
     const {
       insideGroupIsLoading,
-      openGroupAction,
       insideGroupFilterTotal,
       hasMoreInsideGroupUsers,
       fetchMoreInsideGroupUsers,
@@ -282,7 +281,6 @@ export default inject(
       fetchMoreInsideGroupUsers,
       insideGroupFilterTotal,
       hasMoreInsideGroupUsers,
-      openGroupAction,
     };
   },
 )(observer(Table));

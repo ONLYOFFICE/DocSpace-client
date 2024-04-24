@@ -77,6 +77,11 @@ const Tile = ({
 
   const getContextModel = () => getFormGalleryContextOptions(item, t, navigate);
 
+  const contextMenuHeader = {
+    icon: getIcon(32, ".docxf"),
+    title: item?.attributes?.name_form,
+  };
+
   const getOptions = () =>
     getFormGalleryContextOptions(item, t, navigate).map((item) => item.key);
 
@@ -142,6 +147,7 @@ const Tile = ({
           <StyledContextMenu
             ignoreChangeView={isMobile()}
             getContextModel={getContextModel}
+            header={contextMenuHeader}
             ref={cm}
             withBackdrop={true}
           />

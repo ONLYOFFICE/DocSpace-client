@@ -24,25 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useState } from "react";
 import { useTheme } from "styled-components";
 
-import { classNames, getLogoFromPath } from "@docspace/shared/utils";
-
+import { classNames, getLogoUrl } from "@docspace/shared/utils";
+import { WhiteLabelLogoType } from "../../enums";
+import { size as deviceSize } from "../../utils";
 import { StyledWrapper } from "./DocspaceLogo.styled";
 import type { DocspaceLogoProps } from "./DocspaceLogo.types";
 
-const DocspaceLogo = ({ className, whiteLabelLogoUrls }: DocspaceLogoProps) => {
+const DocspaceLogo = ({
+  className,
+  isResizable = false,
+}: DocspaceLogoProps) => {
   const theme = useTheme();
 
-  const logo = getLogoFromPath(
-    theme.isBase
-      ? whiteLabelLogoUrls[1]?.path?.light
-      : whiteLabelLogoUrls[1]?.path?.dark,
-  );
+  const [size, setSize] = useState(window.innerWidth);
+
+  const onResize = () => {
+    setSize(window.innerWidth);
+  };
+
+  React.useEffect(() => {
+    if (isResizable) window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
+  }, [isResizable]);
+
+  const isMobile = size <= deviceSize.mobile;
+
+  const logoSize =
+    isResizable && isMobile
+      ? WhiteLabelLogoType.LightSmall
+      : WhiteLabelLogoType.LoginPage;
+
+  const logo = getLogoUrl(logoSize, !theme.isBase);
 
   return (
-    <StyledWrapper>
+    <StyledWrapper isMobile={isMobile} isResizable={isResizable} logo={!!logo}>
       {logo && (
         <img
           src={logo}

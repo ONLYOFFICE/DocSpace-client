@@ -36,7 +36,6 @@ import AccountsPaging from "../../../sub-components/AccountsPaging";
 
 // import UsersInfoBlock from "../../../sub-components/UsersInfoBlock";
 import { Wrapper } from "../StyledStepper";
-import { NoEmailUsersBlock } from "../../../sub-components/NoEmailUsersBlock";
 
 // const LICENSE_LIMIT = 100;
 
@@ -45,12 +44,10 @@ const SelectUsersStep = (props) => {
     t,
     incrementStep,
     decrementStep,
-    users,
     withEmailUsers,
     searchValue,
     setSearchValue,
     cancelMigration,
-    areCheckedUsersEmpty,
   } = props;
 
   const [dataPortion, setDataPortion] = useState(withEmailUsers.slice(0, 25));
@@ -73,8 +70,9 @@ const SelectUsersStep = (props) => {
 
   const filteredAccounts = dataPortion.filter(
     (data) =>
-      data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.email.toLowerCase().startsWith(searchValue.toLowerCase()),
+      data.firstName?.toLowerCase().startsWith(searchValue.toLowerCase()) ||
+      data.lastName?.toLowerCase().startsWith(searchValue.toLowerCase()) ||
+      data.email?.toLowerCase().startsWith(searchValue.toLowerCase()),
   );
 
   const goBack = () => {
@@ -84,10 +82,6 @@ const SelectUsersStep = (props) => {
 
   return (
     <Wrapper>
-      {withEmailUsers.length > 0 && (
-        <NoEmailUsersBlock users={users.withoutEmail.length} t={t} />
-      )}
-
       {withEmailUsers.length > 0 ? (
         <>
           <SaveCancelButtons
@@ -98,7 +92,6 @@ const SelectUsersStep = (props) => {
             cancelButtonLabel={t("Common:Back")}
             showReminder
             displaySettings
-            saveButtonDisabled={areCheckedUsersEmpty}
           />
 
           {/* <UsersInfoBlock
@@ -142,7 +135,6 @@ const SelectUsersStep = (props) => {
           cancelButtonLabel={t("Common:Back")}
           showReminder
           displaySettings
-          saveButtonDisabled={areCheckedUsersEmpty}
         />
       )}
     </Wrapper>
@@ -156,7 +148,6 @@ export default inject(({ importAccountsStore }) => {
     searchValue,
     setSearchValue,
     cancelMigration,
-    areCheckedUsersEmpty,
   } = importAccountsStore;
 
   return {
@@ -165,6 +156,5 @@ export default inject(({ importAccountsStore }) => {
     searchValue,
     setSearchValue,
     cancelMigration,
-    areCheckedUsersEmpty,
   };
 })(observer(SelectUsersStep));

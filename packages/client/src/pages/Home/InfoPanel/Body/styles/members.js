@@ -37,7 +37,7 @@ const StyledUserTypeHeader = styled.div`
 
   .title {
     font-weight: 600;
-    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    font-size: 14px;
     line-height: 20px;
     color: ${(props) => props.theme.infoPanel.members.subtitleColor};
   }
@@ -74,7 +74,7 @@ const StyledUser = styled.div`
 
   .name {
     font-weight: 600;
-    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    font-size: 14px;
     line-height: ${({ theme }) =>
       theme.interfaceDirection === "rtl" ? `20px` : `16px`};
     white-space: nowrap;
@@ -86,7 +86,7 @@ const StyledUser = styled.div`
 
   .me-label {
     font-weight: 600;
-    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    font-size: 14px;
     line-height: ${({ theme }) =>
       theme.interfaceDirection === "rtl" ? `20px` : `16px`};
     color: ${(props) => props.theme.infoPanel.members.meLabelColor};
@@ -109,7 +109,7 @@ const StyledUser = styled.div`
           `}
 
     font-weight: 600;
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
     line-height: 20px;
     white-space: nowrap;
 

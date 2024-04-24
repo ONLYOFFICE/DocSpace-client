@@ -26,7 +26,6 @@
 
 import React from "react";
 
-import { FileType } from "@docspace/shared/enums";
 import { getCookie } from "@docspace/shared/utils";
 import { isRetina } from "@docspace/shared/utils/common";
 import { setCookie } from "@docspace/shared/utils/cookie";
@@ -35,13 +34,13 @@ import PresentationIcoUrl from "PUBLIC_DIR/images/presentation.ico?url";
 import SpreadSheetIcoUrl from "PUBLIC_DIR/images/spreadsheet.ico?url";
 import TextIcoUrl from "PUBLIC_DIR/images/text.ico?url";
 import PDFIcoUrl from "PUBLIC_DIR/images/pdf.ico?url";
+import { calculateAsideHeight } from "@/utils";
 
 interface UseRootInitProps {
   documentType?: string;
-  fileType?: FileType;
 }
 
-const useRootInit = ({ documentType, fileType }: UseRootInitProps) => {
+const useRootInit = ({ documentType }: UseRootInitProps) => {
   React.useEffect(() => {
     let icon: string = "";
 
@@ -68,14 +67,23 @@ const useRootInit = ({ documentType, fileType }: UseRootInitProps) => {
 
       el.href = icon;
     }
-  }, [documentType, fileType]);
+  }, [documentType]);
 
   React.useEffect(() => {
     if (isRetina() && getCookie("is_retina") == null) {
       setCookie("is_retina", "true", { path: "/" });
     }
   }, []);
+
+  React.useEffect(() => {
+    // need for separate window in desktop editors
+    if (window.AscDesktopEditor) {
+      window.AscDesktopEditor.attachEvent?.(
+        "onViewportSettingsChanged",
+        calculateAsideHeight,
+      );
+    }
+  }, []);
 };
 
 export default useRootInit;
-

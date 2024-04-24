@@ -1,1 +1,24 @@
-{}
+{
+  "ChangeDomainDescription": "Alterar o nome de domínio pode causar algumas falhas no sistema. Depois de alterar o nome de domínio, você precisará reconfigurar as seguintes configurações: email, conta, parâmetros jabber.",
+  "ConfigurationDescription": "Você precisa conectar seu domínio ao seu IP atual para alterar as configurações de endereço. Certifique-se de ter acesso às configurações do domínio para poder fazer isso. Após conectar o domínio, crie um nome DocSpace. Você pode alterar o nome do DocSpace criado posteriormente usando as configurações do espaço.",
+  "ConfigurationHeader": "Configuração de espaço atual",
+  "CreateSpaceDescription": "Você conectou com sucesso seu domínio ao seu endereço IP. Para editar as configurações de endereço do espaço, você precisa definir o nome futuro do DocSpace",
+  "CreatingDocSpace": "Criando novo DocSpace",
+  "CurrentSpace": "Espaço atual",
+  "DeletePortalText": "Atenção: somente o proprietário pode excluir o DocSpace selecionado. O proprietário de <1>{{domain}}</1> é <1>{{displayName}}</1> (<5>{{email}}</5>). Se você não for o proprietário, não poderá acessar as configurações de exclusão do DocSpace clicando no botão EXCLUIR e será redirecionado para a seção salas.",
+  "DocSpaceName": "Nome do DocSpace",
+  "DomainName": "Nome do domínio",
+  "DomainNotFound": "Domínio não encontrado, verifique nas configurações de DNS",
+  "DomainSettings": "Configurações de domínio",
+  "EnterDomain": "Insira o nome de domínio",
+  "EnterName": "Digite o nome do espaço",
+  "GoToSpace": "Vá para o espaço",
+  "NewSpace": "Novo espaço",
+  "PortalStats": "Salas: {{roomCount}} | Usuários: {{userCount}} | Espaço de armazenamento usado: {{storageSpace}}",
+  "RestrictAccess": "Restringir o acesso ao gerenciamento de espaços",
+  "SpaceCreated": "Espaço criado",
+  "SpaceCreatedTitle": "O espaço foi criado com sucesso, você pode alternar para ele clicando em “Ir para o espaço”. Para criar vários espaços, fique nas configurações.",
+  "StayInSettings": "Fique nas configurações",
+  "Subheader": "Use esta seção para criar vários espaços e torná-los acessíveis para seus usuários",
+  "VisitSpace": "Visite este espaço depois de criar"
+}

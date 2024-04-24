@@ -172,9 +172,9 @@ const totalItems = items.length;
 const Template = (args: SelectorProps) => {
   const [rendItems, setRendItems] = React.useState(renderedItems);
 
-  const loadNextPage = async (index: number) => {
+  const loadNextPage = React.useCallback(async (index: number) => {
     setRendItems((val) => [...val, ...items.slice(index, index + 100)]);
-  };
+  }, []);
 
   const rowLoader = <StyledRowLoader />;
   const searchLoader = <StyledSearchLoader className="search-loader" />;

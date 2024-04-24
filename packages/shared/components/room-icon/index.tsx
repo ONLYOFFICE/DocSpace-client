@@ -63,7 +63,7 @@ const StyledIcon = styled.div<{
   }
 
   .room-title {
-    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    font-size: 14px;
     font-weight: 700;
     line-height: 16px;
     color: ${(props) =>
@@ -130,7 +130,7 @@ type RoomIconColor = {
 };
 
 type RoomIconImage = {
-  color?: undefined;
+  color?: string | undefined;
   imgSrc: string;
   imgClassName?: string;
 };

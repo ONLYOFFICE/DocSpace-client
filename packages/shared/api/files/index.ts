@@ -137,7 +137,6 @@ export async function getFolderPath(folderId: number) {
   };
 
   const res = (await request(options)) as TGetFolderPath;
-
   return res;
 }
 

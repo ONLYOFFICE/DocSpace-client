@@ -4008,12 +4008,12 @@ class FilesStore {
     });
   };
 
-  //Duplicate of countTilesInRow, used to update the number of tiles in a row after the window is resized.
+  //Used to update the number of tiles in a row after the window is resized.
   getCountTilesInRow = () => {
     const isDesktopView = isDesktop();
+    const isMobileView = isMobile();
     const tileGap = isDesktopView ? 16 : 14;
     const minTileWidth = 216 + tileGap;
-    const body = document.getElementById("section");
 
     const elem = document.getElementsByClassName("section-wrapper-content")[0];
     let containerWidth = 0;
@@ -4028,10 +4028,11 @@ class FilesStore {
         elemPadding.split("px")[3];
     }
 
-    const sectionPadding = body?.offsetWidth - containerWidth - tileGap + 1;
-    const sectionWidth = body ? body.offsetWidth - sectionPadding : 0;
+    containerWidth += tileGap;
+    if (!isMobileView) containerWidth -= 1;
+    if (!isDesktopView) containerWidth += 3; //tablet tile margin -3px (TileContainer.js)
 
-    return Math.floor(sectionWidth / minTileWidth);
+    return Math.floor(containerWidth / minTileWidth);
   };
 
   setInvitationLinks = async (roomId, title, access, linkId) => {

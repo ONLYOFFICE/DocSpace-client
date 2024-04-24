@@ -68,7 +68,7 @@ import styled, { css } from "styled-components";
 import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { getCorrectFourValuesStyle } from "@docspace/shared/utils";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
-import { isDesktop } from "@docspace/shared/utils";
+import { isMobile, isTablet } from "react-device-detect";
 
 const StyledButton = styled(Button)`
   font-weight: 700;
@@ -540,7 +540,7 @@ const ArticleMainButtonContent = (props) => {
       },
     ];
 
-    if (isDesktop()) {
+    if (!(isMobile || isTablet)) {
       uploadActions.push({
         id: "actions_upload-folders",
         className: "main-button_drop-down",
@@ -908,7 +908,6 @@ export default inject(
     const isFolder = selectedFolderStore.isFolder;
 
     const { isAdmin, isOwner, isRoomAdmin } = userStore.user;
-    console.log(userStore.user);
     const { isGracePeriod } = currentTariffStatusStore;
 
     const { setOformFromFolderId, oformsFilter } = oformsStore;

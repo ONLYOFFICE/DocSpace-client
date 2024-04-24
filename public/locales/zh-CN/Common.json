@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "关于",
   "AboutCompanyTitle": "关于本计划",
   "AccessDenied": "拒绝访问",
@@ -281,7 +281,7 @@
   "PasswordLimitUpperCase": "大写字母",
   "PasswordMinimumLength": "最小长度",
   "PaymentsTitle": "付款",
-  "People": "人脉",
+  "People": "人员",
   "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> 每个管理员/高级用户/月",
   "Petabyte": "PB",
   "Phone": "电话",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "已达到付费用户限制。",
   "ReadInstructions": "阅读说明",
   "ReadOnly": "只读",
+  "Reconnect": "重新连接",
   "ReconnectStorage": "重新连接存储空间",
   "RecoverDescribeYourProblemPlaceholder": "描述您的问题",
   "RecoverTitle": "访问恢复",

@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Giới thiệu",
   "AboutCompanyTitle": "Giới thiệu về chương trình này",
   "AccessDenied": "Truy cập bị từ chối",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "Đã đạt đến giới hạn người dùng trả phí.",
   "ReadInstructions": "Đọc hướng dẫn",
   "ReadOnly": "Chỉ đọc",
+  "Reconnect": "Kết nối lại",
   "ReconnectStorage": "Kết nối lại bộ nhớ",
   "RecoverDescribeYourProblemPlaceholder": "Mô tả vấn đề của bạn",
   "RecoverTitle": "Khôi phục truy cập",

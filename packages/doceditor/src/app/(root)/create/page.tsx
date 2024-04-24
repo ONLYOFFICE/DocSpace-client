@@ -31,6 +31,7 @@ import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { createFile, fileCopyAs, getEditorUrl } from "@/utils/actions";
 import CreateFileError from "@/components/CreateFileError";
 import Editor from "@/components/Editor";
+import { EditorConfigErrorType } from "@docspace/shared/enums";
 
 type TSearchParams = {
   parentId: string;
@@ -95,7 +96,12 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
 
   if (file?.id) fileId = file.id;
 
-  if (error && typeof error !== "string" && error.statusCode === 403) {
+  if (
+    error &&
+    typeof error !== "string" &&
+    (error.statusCode === 403 ||
+      error.type === EditorConfigErrorType.TenantQuotaException)
+  ) {
     const documentserverUrl = await getEditorUrl();
 
     return (

@@ -69,7 +69,7 @@ const SectionHeaderContent = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const path = location.pathname;
-  const item = getItemByLink(path);
+  const item = React.useMemo(() => getItemByLink(path), [path]);
 
   const onBackToParent = () => {
     navigate(-1);

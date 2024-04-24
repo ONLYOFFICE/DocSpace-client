@@ -406,6 +406,10 @@ const StyledBadgesContainer = styled.div`
         font-weight: 800;
       }
     }
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .bagde_alert {

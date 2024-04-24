@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Over",
   "AboutCompanyTitle": "Over dit programma",
   "AccessDenied": "Toegang geweigerd",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "De limiet voor betaalde gebruikers is bereikt.",
   "ReadInstructions": "Lees instructies",
   "ReadOnly": "Alleen lezen",
+  "Reconnect": "Opnieuw verbinden",
   "ReconnectStorage": "Opslag opnieuw aansluiten",
   "RecoverDescribeYourProblemPlaceholder": "Beschrijf uw probleem",
   "RecoverTitle": "Toegang herstel",

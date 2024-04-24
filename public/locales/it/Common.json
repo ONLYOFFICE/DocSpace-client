@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Informazioni su",
   "AboutCompanyTitle": "Informazioni sul programma",
   "AccessDenied": " Accesso negato",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "È stato raggiunto il limite di utenti a pagamento.",
   "ReadInstructions": "Leggi le istruzioni",
   "ReadOnly": "In sola lettura",
+  "Reconnect": "Riconnetti",
   "ReconnectStorage": "Ricollega l'archivio",
   "RecoverDescribeYourProblemPlaceholder": "Descrivi il tuo problema",
   "RecoverTitle": "Ripristino dell'accesso",

@@ -62,7 +62,7 @@ const ArticleBodyContent = () => {
   useEffect(() => {
     const path = location.pathname;
     const item = getItemByLink(path);
-    setSelectedKey(item.key);
+    setSelectedKey(item?.key);
     setIsBurgerLoading(false);
   }, []);
 
@@ -72,7 +72,7 @@ const ArticleBodyContent = () => {
 
     if (openingNewTab(url, e)) return;
 
-    setSelectedKey(item.key);
+    setSelectedKey(item?.key);
 
     if (isMobileOnly || isMobile()) {
       toggleArticleOpen();

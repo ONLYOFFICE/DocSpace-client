@@ -26,16 +26,15 @@
 
 "use client";
 
-import { useContext, useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
-import { TenantStatus, WhiteLabelLogoType } from "@docspace/shared/enums";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import {
   getBgPattern,
   getLoginLink,
-  getLogoFromPath,
   getLogoUrl,
   getOAuthToken,
 } from "@docspace/shared/utils/common";
@@ -57,12 +56,15 @@ import GreetingContainer from "../GreetingContainer";
 import Register from "../Register";
 
 import { LoginContent, LoginFormWrapper } from "./Login.styled";
+import { checkIsSSR, isDesktop } from "@docspace/shared/utils";
+import LoginForm from "../LoginForm";
 
 const Login = ({
   searchParams,
   settings,
   capabilities,
   thirdPartyProvider,
+  isAuthenticated,
 }: LoginProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -75,7 +77,7 @@ const Login = ({
   });
 
   const theme = useTheme();
-  const { t } = useTranslation(["Login"]);
+  const { t } = useTranslation(["Login", "Common"]);
 
   const {
     recoverDialogVisible,
@@ -84,6 +86,32 @@ const Login = ({
     openRecoverDialog,
     closeRecoverDialog,
   } = useRecoverDialog({});
+
+  useEffect(() => {
+    if (searchParams) {
+      if (!searchParams.loginData) return;
+
+      const fromBinaryStr = (encodeString: string) => {
+        const decodeStr = atob(encodeString);
+
+        const decoder = new TextDecoder();
+        const charCodeArray = Uint8Array.from(
+          { length: decodeStr.length },
+          (element, index) => decodeStr.charCodeAt(index),
+        );
+
+        return decoder.decode(charCodeArray);
+      };
+
+      const encodeString = searchParams.loginData;
+
+      const decodeString = fromBinaryStr(encodeString);
+      const queryParams = JSON.parse(decodeString);
+
+      setInvitationLinkData(queryParams);
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, [searchParams]);
 
   const ssoExists = () => {
     if (capabilities?.ssoUrl) return true;
@@ -163,6 +191,8 @@ const Login = ({
       }
     : {};
 
+  const isRegisterContainerVisible = !checkIsSSR() && settings?.enabledJoin;
+
   return (
     <LoginFormWrapper id="login-page" bgPattern={bgPattern}>
       <div className="bg-cover" />
@@ -170,7 +200,7 @@ const Login = ({
         <LoginContent>
           <ColorTheme
             themeId={ThemeId.LinkForgotPassword}
-            isRegisterContainerVisible={settings?.enabledJoin}
+            isRegisterContainerVisible={isRegisterContainerVisible}
           >
             <GreetingContainer
               roomName={invitationLinkData.roomName}
@@ -181,6 +211,20 @@ const Login = ({
               type={invitationLinkData.type}
             />
             <FormWrapper id="login-form">
+              <LoginForm
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+                hashSettings={settings?.passwordHash}
+                isDesktop={
+                  typeof window !== "undefined" &&
+                  window["AscDesktopEditor"] !== undefined
+                }
+                match={searchParams}
+                openRecoverDialog={openRecoverDialog}
+                enableAdmMess={settings?.enableAdmMess ?? false}
+                cookieSettingsEnabled={settings?.cookieSettingsEnabled ?? false}
+                emailFromInvitation={invitationLinkData.email}
+              />
               {(oauthDataExists() || ssoExists()) && (
                 <>
                   <div className="line">
@@ -212,12 +256,13 @@ const Login = ({
             </FormWrapper>
           </ColorTheme>
         </LoginContent>
-        {settings?.enabledJoin && (
+        {isRegisterContainerVisible && (
           <Register
             id="login_register"
             enabledJoin
             trustedDomains={settings.trustedDomains}
             trustedDomainsType={settings.trustedDomainsType}
+            isAuthenticated={isAuthenticated ?? false}
           />
         )}
       </Scrollbar>

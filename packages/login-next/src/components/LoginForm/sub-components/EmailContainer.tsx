@@ -61,7 +61,7 @@ const EmailContainer = ({
   onBlurEmail,
   onValidateEmail,
 }: IEmailContainer) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(["Login", "Common"]);
 
   if (emailFromInvitation) {
     const onClickBack = () => {

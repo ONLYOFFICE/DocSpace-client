@@ -23,8 +23,10 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "PUBLIC_DIR/*": ["../../public/*"]
-    }
+      "PUBLIC_DIR/*": ["../../public/*"],
+      "ASSETS_DIR/*": ["./public/*"]
+    },
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "next-env.d.ts",

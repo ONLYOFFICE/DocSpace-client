@@ -28,6 +28,7 @@ import { redirect } from "next/navigation";
 
 import { Toast } from "@docspace/shared/components/toast";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
+import { TenantStatus } from "@docspace/shared/enums";
 
 import { Providers } from "@/providers";
 import StyledComponentsRegistry from "@/utils/registry";
@@ -39,7 +40,6 @@ import {
 import SimpleNav from "@/components/SimpleNav";
 
 import "../styles/globals.scss";
-import { TenantStatus } from "@docspace/shared/enums";
 
 export default async function RootLayout({
   children,
@@ -66,9 +66,16 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en">
+    <html lang="en" translate="no">
       <head>
-        <link id="favicon" rel="shortcut icon" type="image/x-icon" />
+        <link rel="icon" type="image/x-icon" href="/logo.ashx?logotype=3" />
+        <link rel="mask-icon" href="/logo.ashx?logotype=3" />
+        <meta charSet="utf-8" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
+        />
+        <meta name="google" content="notranslate" />
       </head>
       <body>
         <StyledComponentsRegistry>

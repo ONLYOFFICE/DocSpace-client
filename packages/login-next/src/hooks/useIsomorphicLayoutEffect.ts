@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -25,54 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import { useEffect, useLayoutEffect } from "react";
 
-import React from "react";
-import styled, { useTheme } from "styled-components";
+const canUseDOM = typeof window !== "undefined";
+const useIsomorphicLayoutEffect = canUseDOM ? useLayoutEffect : useEffect;
 
-import { mobile } from "@docspace/shared/utils/device";
-import { getLogoFromPath, getLogoUrl } from "@docspace/shared/utils/common";
-import { Base } from "@docspace/shared/themes";
-import { TWhiteLabel } from "@docspace/shared/utils/whiteLabelHelper";
-import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
-
-const StyledSimpleNav = styled.div<{ isError: boolean }>`
-  display: none;
-  height: 48px;
-  align-items: center;
-  justify-content: center;
-  background-color: ${(props) => props.theme?.login?.navBackground};
-
-  svg {
-    path:last-child {
-      fill: ${(props) => props.theme.client?.home?.logoColor};
-    }
-  }
-
-  @media ${mobile} {
-    display: ${(props) => (props.isError ? "none" : "flex")};
-  }
-`;
-
-StyledSimpleNav.defaultProps = { theme: Base };
-
-interface SimpleNavProps {}
-
-const SimpleNav = ({}: SimpleNavProps) => {
-  const theme = useTheme();
-
-  const logoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme?.isBase);
-
-  const isError =
-    typeof window !== "undefined"
-      ? window?.location?.pathname === "/login/error"
-      : false;
-
-  return (
-    <StyledSimpleNav id="login-header" isError={isError}>
-      <img src={logoUrl} alt="logo-url" />
-    </StyledSimpleNav>
-  );
-};
-
-export default SimpleNav;
+export default useIsomorphicLayoutEffect;

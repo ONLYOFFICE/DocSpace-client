@@ -35,12 +35,12 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-
+import { InputSize, InputType } from "@docspace/shared/components/text-input";
 import { TenantTrustedDomainsType } from "@docspace/shared/enums";
 
-import ModalDialogContainer from "../../ModalDialogContainer";
 import { RegisterModalDialogProps } from "@/types";
-import { InputSize, InputType } from "@docspace/shared/components/text-input";
+
+import ModalDialogContainer from "../../ModalDialogContainer";
 
 const RegisterModalDialog = ({
   visible,

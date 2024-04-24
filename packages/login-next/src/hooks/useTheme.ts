@@ -27,7 +27,7 @@
 import React from "react";
 
 import { Base, Dark, TColorScheme, TTheme } from "@docspace/shared/themes";
-import { getSystemTheme } from "@docspace/shared/utils";
+import { getEditorTheme, getSystemTheme } from "@docspace/shared/utils";
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getAppearanceTheme } from "@docspace/shared/api/settings";
 import { TGetColorTheme, TSettings } from "@docspace/shared/api/settings/types";
@@ -76,6 +76,12 @@ const useTheme = ({ colorTheme, settings }: UseThemeProps) => {
         interfaceDirection,
       });
 
+      if (window?.AscDesktopEditor !== undefined) {
+        const editorTheme = getEditorTheme(ThemeKeys.Base);
+
+        window.AscDesktopEditor.execCommand("portal:uitheme", editorTheme);
+      }
+
       return;
     }
 
@@ -84,7 +90,13 @@ const useTheme = ({ colorTheme, settings }: UseThemeProps) => {
       currentColorScheme: currentColorTheme,
       interfaceDirection,
     });
-  }, [currentColorTheme]);
+
+    if (window?.AscDesktopEditor !== undefined) {
+      const editorTheme = getEditorTheme(ThemeKeys.Dark);
+
+      window.AscDesktopEditor.execCommand("portal:uitheme", editorTheme);
+    }
+  }, [currentColorTheme, i18n]);
 
   React.useEffect(() => {
     getCurrentColorTheme();

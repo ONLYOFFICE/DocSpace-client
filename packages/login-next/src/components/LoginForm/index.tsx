@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import ReCAPTCHA from "react-google-recaptcha";
 import { isMobileOnly } from "react-device-detect";
@@ -46,6 +46,7 @@ import { thirdPartyLogin } from "@docspace/shared/api/user";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
+import { TPasswordHash } from "@docspace/shared/api/settings/types";
 
 import { LoginFormProps } from "@/types";
 
@@ -96,14 +97,23 @@ const LoginForm = ({
     authError: "",
   };
 
-  const authCallback = (profile: string) => {
-    localStorage.removeItem("profile");
-    localStorage.removeItem("code");
+  const authCallback = useCallback(
+    async (profile: string) => {
+      localStorage.removeItem("profile");
+      localStorage.removeItem("code");
 
-    thirdPartyLogin(profile)
-      .then((response) => {
-        if (!(response || response.token || response.confirmUrl))
+      try {
+        const response = (await thirdPartyLogin(profile)) as {
+          confirmUrl: string;
+          token: unknown;
+        };
+
+        if (
+          !response ||
+          (response && !response.token && !response.confirmUrl)
+        ) {
           throw new Error("Empty API response");
+        }
 
         setWithCredentialsStatus(true);
 
@@ -119,59 +129,54 @@ const LoginForm = ({
         } else {
           window.location.replace("/");
         }
-      })
-      .catch(() => {
+      } catch (e) {
         toastr.error(
           t("Common:ProviderNotConnected"),
           t("Common:ProviderLoginError"),
         );
-      });
-  };
+      }
+    },
+    [t],
+  );
 
   useEffect(() => {
     const profile = localStorage.getItem("profile");
     if (!profile) return;
 
     authCallback(profile);
-  }, []);
+  }, [authCallback]);
 
   useEffect(() => {
-    message && setErrorText(message);
-    confirmedEmail && setIdentifier(confirmedEmail);
+    if (message) setErrorText(message);
+    if (confirmedEmail) setIdentifier(confirmedEmail);
 
     const messageEmailConfirmed = t("MessageEmailConfirmed");
     const messageAuthorize = t("MessageAuthorize");
 
     const text = `${messageEmailConfirmed} ${messageAuthorize}`;
 
-    confirmedEmail && ready && toastr.success(text);
-    authError && ready && toastr.error(t("Common:ProviderLoginError"));
+    if (confirmedEmail && ready) toastr.success(text);
+    if (authError && ready) toastr.error(t("Common:ProviderLoginError"));
 
     focusInput();
 
     window.authCallback = authCallback;
-  }, [message, confirmedEmail]);
+  }, [message, confirmedEmail, t, ready, authError, authCallback]);
 
   const onChangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
     //console.log("onChangeLogin", e.target.value);
     setIdentifier(e.target.value);
-    if (!IS_ROOMS_MODE) setIsEmailErrorShow(false);
+    setIsEmailErrorShow(false);
     onClearErrors();
   };
 
   const onClearErrors = () => {
-    if (IS_ROOMS_MODE) {
-      !identifierValid && setIdentifierValid(true);
-      errorText && setErrorText("");
-      setIsEmailErrorShow(false);
-    } else {
-      !passwordValid && setPasswordValid(true);
-    }
+    if (!passwordValid) setPasswordValid(true);
   };
 
   const onSubmit = () => {
     //errorText && setErrorText("");
-    let captchaToken = "";
+    let captchaToken: string | undefined | null = "";
 
     if (recaptchaPublicKey && isCaptcha) {
       if (!isCaptchaSuccessful) {
@@ -179,7 +184,7 @@ const LoginForm = ({
         return;
       }
 
-      captchaToken = captchaRef.current.getValue();
+      captchaToken = captchaRef.current?.getValue();
     }
 
     let hasError = false;
@@ -192,10 +197,10 @@ const LoginForm = ({
       setIsEmailErrorShow(true);
     }
 
-    if (IS_ROOMS_MODE && identifierValid) {
-      window.location.replace("/login/code"); //TODO: confirm link?
-      return;
-    }
+    // if (IS_ROOMS_MODE && identifierValid) {
+    //   window.location.replace("/login/code"); //TODO: confirm link?
+    //   return;
+    // }
 
     const pass = password.trim();
 

@@ -38,6 +38,7 @@ import {
   getThirdPartyProviders,
   getCapabilities,
   getSSO,
+  checkIsAuthenticated,
 } from "@/utils/actions";
 import {
   TCapabilities,
@@ -50,11 +51,9 @@ async function Page({
 }: {
   searchParams: { [key: string]: string };
 }) {
-  const [settings, versionBuild, colorTheme] = await Promise.all([
-    getSettings(),
-    getVersionBuild(),
-    getColorTheme(),
-  ]);
+  const isAuth = await checkIsAuthenticated();
+
+  const settings = await getSettings();
 
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
 
@@ -81,9 +80,16 @@ async function Page({
     redirect(`${getBaseUrl()}/wizard`);
   }
 
-  let standalone: boolean = settings?.standalone ? true : false;
-
-  return <Login searchParams={searchParams} />;
+  return (
+    <Login
+      searchParams={searchParams}
+      capabilities={capabilities}
+      settings={settings}
+      thirdPartyProvider={thirdParty}
+      ssoSettings={ssoSettings}
+      isAuthenticated={isAuth}
+    />
+  );
 }
 
 export default Page;

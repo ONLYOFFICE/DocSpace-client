@@ -50,14 +50,15 @@ export type GreetingContainersProps = {
 
 export type LoginProps = {
   searchParams: { [key: string]: string };
+  isAuthenticated?: boolean;
   settings?: TSettings;
   capabilities?: TCapabilities;
-  thirdPartyProvider: TThirdPartyProvider[];
+  thirdPartyProvider?: TThirdPartyProvider[];
+  ssoSettings?: TGetSsoSettings;
 };
 
 export type RegisterProps = {
-  language?: string;
-  isAuthenticated?: boolean;
+  isAuthenticated: boolean;
   enabledJoin: boolean;
   trustedDomainsType?: number;
   trustedDomains?: string[];
@@ -84,7 +85,7 @@ export type RegisterModalDialogProps = {
 export type LoginFormProps = {
   isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
-  hashSettings: TPasswordHash;
+  hashSettings?: TPasswordHash;
   isDesktop: boolean;
   match: { [key: string]: string };
   openRecoverDialog: () => void;

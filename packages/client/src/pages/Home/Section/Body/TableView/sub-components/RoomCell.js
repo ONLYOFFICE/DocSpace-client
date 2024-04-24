@@ -44,13 +44,14 @@ const RoomCell = ({ sideColor, item }) => {
     setIsTooltipLoading(true);
     try {
       const folderPath = await getFolderPath(originId);
-      if (folderPath[0].id === CategoryType.Shared) folderPath.shift();
+      if (folderPath[0].id === CategoryType.SharedRoom) folderPath.shift();
       setPath(folderPath);
     } catch (e) {
       console.error(e);
       setPath([{ id: 0, title: originRoomTitle || originTitle }]);
+    } finally {
+      setIsTooltipLoading(false);
     }
-    setIsTooltipLoading(false);
   };
 
   const canVisibleTitle = originRoomTitle || originTitle;

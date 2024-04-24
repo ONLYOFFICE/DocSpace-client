@@ -115,8 +115,8 @@ const roomsStyles = css`
 `;
 
 const FolderStyles = css`
-  height: ${(props) => (props.isRoom ? "120px" : "64px")};
-  height: 126px; //TODO: Templates
+  height: ${({ isTemplate, isRoom }) =>
+    isTemplate ? "126px" : isRoom ? "120px" : "64px"};
 `;
 
 const FileStyles = css`

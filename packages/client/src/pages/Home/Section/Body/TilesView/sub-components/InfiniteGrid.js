@@ -46,6 +46,7 @@ const Card = ({ children, countTilesInRow, ...rest }) => {
     const isFile = child?.props?.className?.includes("file");
     const isFolder = child?.props?.className?.includes("folder");
     const isRoom = child?.props?.className?.includes("room");
+    const isTemplate = child?.props?.className?.includes("room"); //TODO: Templates
 
     const horizontalGap = 16;
     const verticalGap = 14;
@@ -53,9 +54,11 @@ const Card = ({ children, countTilesInRow, ...rest }) => {
 
     const folderHeight = 64 + verticalGap;
     const roomHeight = 122 + verticalGap;
+    const templateHeight = 128 + verticalGap;
     const fileHeight = 220 + horizontalGap;
     const titleHeight = 20 + headerMargin;
 
+    if (isTemplate) return templateHeight;
     if (isRoom) return roomHeight;
     if (isFolder) return folderHeight;
     if (isFile) return fileHeight;

@@ -33,6 +33,8 @@ import InputParam from "../Params/InputParam";
 import TagDropdown from "./TagDropdown";
 
 const StyledTagInput = styled.div`
+  position: relative;
+
   .set_room_params-tag_input {
     &-label_wrapper {
       &-label {

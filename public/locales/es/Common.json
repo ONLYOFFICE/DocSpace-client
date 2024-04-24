@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Acerca de",
   "AboutCompanyTitle": "Acerca del programa",
   "AccessDenied": "Acceso denegado ",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "Se ha alcanzado el límite de usuarios de pago.",
   "ReadInstructions": "Leer las instrucciones",
   "ReadOnly": "Sólo lectura",
+  "Reconnect": "Volver a conectar",
   "ReconnectStorage": "Volver a conectar el almacenamiento",
   "RecoverDescribeYourProblemPlaceholder": "Describa su problema",
   "RecoverTitle": "Recuperación de acceso",

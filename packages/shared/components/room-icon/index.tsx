@@ -79,7 +79,8 @@ const StyledIcon = styled.div<{
 
   .room-icon_badge {
     position: absolute;
-    margin: 24px 0 0 24px;
+    margin-block: 24px 0;
+    margin-inline: 24px 0;
 
     .room-icon-button {
       width: 12px;

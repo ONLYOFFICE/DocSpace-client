@@ -145,6 +145,10 @@ const Root = ({
       selectFileDialogVisible
     )
       calculateAsideHeight();
+
+    if (isSharingDialogVisible) {
+      setTimeout(calculateAsideHeight, 10);
+    }
   }, [
     isSharingDialogVisible,
     isVisibleSelectFolderDialog,

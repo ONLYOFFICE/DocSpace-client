@@ -59,7 +59,7 @@ export const EmptyViewItemWrapper = styled.div`
   }
 
   .ev-item-header {
-    font-size: 16px;
+    font-size: 13px;
     color: ${(props) => props.theme.emptyContent.header.color};
   }
 

@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Haqqında",
   "AboutCompanyTitle": "Proqram haqqında",
   "AccessDenied": "Giriş qadağandır",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "Ödənişli istifadəçi limitinə çatıldı.",
   "ReadInstructions": "Təlimatları oxuyun",
   "ReadOnly": "Yalnız oxumaq üçün",
+  "Reconnect": "Yenidən qoşul",
   "ReconnectStorage": "Yaddaşı yenidən birləşdirin",
   "RecoverDescribeYourProblemPlaceholder": "Probleminizi təsvir edin",
   "RecoverTitle": "Girişin bərpası",

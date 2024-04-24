@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Par",
   "AboutCompanyTitle": "Par šo programmu",
   "AccessDenied": "Pieeja ir liegta",
@@ -309,6 +309,7 @@
   "QuotaPaidUserLimitError": "Ir sasniegts maksas lietotāju ierobežojums.",
   "ReadInstructions": "Izlasiet norādījumus",
   "ReadOnly": "Tikai lasīt",
+  "Reconnect": "Atkārtoti izveidojiet savienojumu",
   "ReconnectStorage": "Atkārtoti pievienot krātuvi",
   "RecoverDescribeYourProblemPlaceholder": "Aprakstiet savu problēmu",
   "RecoverTitle": "Piekļuves atkopšana",

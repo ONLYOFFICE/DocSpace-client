@@ -480,6 +480,10 @@ const badgesPosition = css`
 
     .badge-new-version {
       order: 1;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     .badge-version-current {

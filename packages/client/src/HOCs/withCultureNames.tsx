@@ -70,7 +70,7 @@ export default function withCultureNames<
     }, []);
 
     const cultureNames = useMemo(
-      () => mapCulturesToArray(cultures, isAuthenticated, i18n),
+      () => mapCulturesToArray(cultures, true, i18n),
       [cultures, isAuthenticated],
     );
     const url = new URL(window.location.href);

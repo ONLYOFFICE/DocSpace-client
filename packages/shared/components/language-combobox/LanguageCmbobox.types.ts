@@ -32,10 +32,11 @@ export type TCulture = {
 
 export type TCultures = TCulture[];
 export interface ComboboxProps {
-  selectedCulture: TCulture;
+  selectedCulture: string;
   cultures: string[];
   tabIndex?: number | string;
-  isAuthenticated: boolean;
   /** Accepts id */
   id?: string;
+  /** Accepts class */
+  className?: string;
 }

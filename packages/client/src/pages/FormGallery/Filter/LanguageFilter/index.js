@@ -43,8 +43,8 @@ const LanguageFilter = ({
   languageFilterLoaded,
   oformFilesLoaded,
 }) => {
-  const onFilterByLocale = async (newLocale, icon) => {
-    await filterOformsByLocale(newLocale, icon);
+  const onFilterByLocale = async (newLocale) => {
+    await filterOformsByLocale(newLocale);
 
     const [sectionScroll] = document.getElementsByClassName("section-scroll");
     sectionScroll.scrollTop = 0;
@@ -65,7 +65,7 @@ const LanguageFilter = ({
       cultures={oformLocales}
       isAuthenticated
       onSelectLanguage={onFilterByLocale}
-      selectedCulture={{ key: oformsFilter.locale, icon: oformsFilter.icon }}
+      selectedCulture={oformsFilter.locale}
       id="comboBoxLanguage"
     />
   );

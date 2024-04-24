@@ -162,6 +162,8 @@ const ComboBoxPure = (props: ComboboxProps) => {
     title,
     className,
     plusBadgeValue,
+    optionStyle,
+    style,
   } = props;
 
   const { tabIndex, onClickSelectedItem } = props;
@@ -223,10 +225,15 @@ const ComboBoxPure = (props: ComboboxProps) => {
         option.disabled ||
         (!displaySelectedOption && option.label === selectedOption.label);
 
-      const isActive =
-        displaySelectedOption && option.label === selectedOption.label;
+      const isActiveOption =
+        typeof option.label === "string"
+          ? option.label === selectedOption.label
+          : option.key === selectedOption.key;
 
-      const isSelected = option.label === selectedOption.label;
+      const isActive = displaySelectedOption && isActiveOption;
+
+      const isSelected = isActiveOption;
+
       return (
         <DropDownItem
           {...option}
@@ -240,6 +247,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
           isModern={noBorder}
           isActive={isActive}
           isSelected={isSelected}
+          style={optionStyle}
         />
       );
     }) as React.ReactNode);
@@ -290,7 +298,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
           open={isOpen}
           forwardedRef={ref}
           clickOutsideAction={handleClickOutside}
-          style={advancedOptions ? { padding: "6px 0px" } : {}}
+          style={style}
           {...dropDownMaxHeightProp}
           {...dropDownManualWidthProp}
           showDisabledItems={showDisabledItems}

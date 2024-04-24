@@ -23,98 +23,34 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { ComboBox } from "../combobox";
-import { DropDownItem } from "../drop-down-item";
-import { mobile } from "../../utils";
 
-export const LanguageComboBox = styled(ComboBox)`
+export const StyledComboBox = styled(ComboBox)`
   width: 41px;
-  padding: 0;
-  box-sizing: border-box;
-
-  .combo-button {
-    padding: 8px;
-    gap: 4px;
-
-    .optionalBlock {
-      margin: 0;
-      & > div {
-        width: 16px;
-        height: 16px;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-    }
-
-    .combo-button-label {
-      display: none;
-    }
-
-    .combo-buttons_arrow-icon {
-      margin: 0;
-    }
-  }
-`;
-
-export const SelectedItemComponent = styled(DropDownItem)`
-  box-sizing: border-box;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .drop-down-icon {
-    margin: 0;
-    width: 16px;
-    height: 16px;
-    div {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-`;
-export const ItemComponent = styled(DropDownItem)`
   height: 32px;
-  width: 41px;
   box-sizing: border-box;
-  padding: 8px;
+  padding: 0;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  :hover {
+    border-color: rgb(163, 169, 174);
+  }
+  .combo-button {
+    padding: 7px;
+  }
 
-  ${({ isSelected, theme }) =>
-    isSelected &&
-    css`
-      background-color: ${theme.dropDownItem.hoverBackgroundColor};
-    `}
-
-  .drop-down-icon {
+  .combo-button_selected-icon-container {
+    margin-right: 0px;
+  }
+  .combo-buttons_arrow-icon {
     margin: 0;
-    width: 16px;
-    height: 16px;
-    line-height: 0 !important;
   }
-
-  @media ${mobile} {
-    height: 36px;
-    width: 100%;
-    justify-content: start;
-    gap: 8px;
-  }
-`;
-export const WrapperComponent = styled.div`
-  width: 41px;
-  box-sizing: border-box;
 
   .dropdown-container {
-    width: 100%;
-    box-sizing: border-box;
-    margin-top: 4px;
+    width: 41px;
+    .drop-down-item {
+      padding: 0;
+    }
   }
 `;

@@ -908,7 +908,7 @@ export function getObjectByLocation(location: Location) {
   if (!location.search || !location.search.length) return null;
 
   try {
-  const searchUrl = location.search.substring(1);
+    const searchUrl = location.search.substring(1);
     const params = Object.fromEntries(new URLSearchParams(searchUrl));
     return params;
   } catch (e) {
@@ -1047,7 +1047,7 @@ export const insertDataLayer = (id: string) => {
 type I18n = I18nextProviderProps["i18n"];
 export const mapCulturesToArray = (
   culturesArg: string[],
-  isAuthenticated: boolean,
+  isBetaBadge: boolean = true,
   i18nArg?: I18n,
 ) => {
   if (i18nArg) {
@@ -1055,9 +1055,9 @@ export const mapCulturesToArray = (
     return culturesArg.map((culture) => {
       return {
         key: culture,
-        ...(isAuthenticated && { label: t(`Culture_${culture}`) }),
+        label: t(`Culture_${culture}`),
         icon: flagsIcons?.get(`${culture}.react.svg`),
-        ...(isAuthenticated && { isBeta: isBetaLanguage(culture) }),
+        ...(isBetaBadge && { isBeta: isBetaLanguage(culture) }),
       };
     });
   }

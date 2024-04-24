@@ -26,21 +26,13 @@
 
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
-import PropTypes from "prop-types";
-import React from "react";
-import { ReactSVG } from "react-svg";
 import styled, { css } from "styled-components";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
 import { tablet } from "@docspace/shared/utils";
-import { isMobile } from "react-device-detect";
 import { withTheme } from "styled-components";
-import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { Loader } from "@docspace/shared/components/loader";
 import { Base } from "@docspace/shared/themes";
-import { ROOMS_TYPE_TRANSLATIONS } from "@docspace/shared/constants";
-
-const svgLoader = () => <div style={{ width: "96px" }} />;
 
 const StyledTemplatesTile = styled.div`
   display: contents;
@@ -170,387 +162,134 @@ const StyledOptionButton = styled.div`
 
 StyledOptionButton.defaultProps = { theme: Base };
 
-const badgesPosition = css`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          right: 9px;
-        `
-      : css`
-          left: 9px;
-        `}
+const TemplatesTile = (props) => {
+  const {
+    checked,
+    contextButtonSpacerWidth,
+    element,
+    indeterminate,
+    item,
+    inProgress,
+    isEdit,
+    getContextModel,
+    hideContextMenu,
+    t,
+    additionalInfo,
+    theme,
+    onContextMenu,
+    cmRef,
+    cbRef,
+    changeCheckbox,
+    onFileIconClick,
+    renderElement,
+    renderContext,
+    getOptions,
+    contextMenuHeader,
+    FilesTileContent,
+    badges,
+    contextMenuTitle,
+  } = props;
+  const { isFolder, isRoom, id, fileExst, createdBy } = item;
 
-  .badges {
-    display: grid;
-    grid-template-columns: repeat(3, fit-content(60px));
-    grid-template-rows: 32px;
-    grid-gap: 7px;
-
-    .badge-new-version {
-      order: 1;
-    }
-
-    .badge-version-current {
-      order: 2;
-    }
-
-    .is-editing,
-    .can-convert {
-      order: 3;
-    }
-  }
-`;
-
-const quickButtonsPosition = css`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          left: 9px;
-        `
-      : css`
-          right: 9px;
-        `}
-
-  .badges {
-    display: grid;
-    grid-template-columns: 32px;
-    grid-template-rows: repeat(3, 32px);
-    grid-gap: 7px;
-  }
-`;
-
-const StyledIcons = styled.div`
-  position: absolute;
-  top: 8px;
-
-  ${(props) => props.isBadges && badgesPosition}
-  ${(props) => props.isQuickButtons && quickButtonsPosition}
-  
-  .badge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
-    background: ${(props) =>
-      props.theme.filesSection.tilesView.tile.backgroundBadgeColor};
-    border-radius: 4px;
-    box-shadow: 0px 2px 4px rgba(4, 15, 27, 0.16);
-  }
-`;
-
-StyledIcons.defaultProps = { theme: Base };
-
-class TemplatesTile extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      errorLoadSrc: false,
-    };
-
-    this.cm = React.createRef();
-    this.tile = React.createRef();
-    this.checkboxContainerRef = React.createRef();
-  }
-
-  onError = () => {
-    this.setState({
-      errorLoadSrc: true,
-    });
-  };
-
-  getIconFile = () => {
-    const { temporaryIcon, thumbnailClick, thumbnail, item } = this.props;
-
-    const icon = item.isPlugin
-      ? item.fileTileIcon
-      : thumbnail && !this.state.errorLoadSrc
-        ? thumbnail
-        : temporaryIcon;
-
-    return (
-      <Link type="page" onClick={thumbnailClick}>
-        {thumbnail && !this.state.errorLoadSrc ? (
-          <img
-            src={thumbnail}
-            className="thumbnail-image"
-            alt="Thumbnail-img"
-            onError={this.onError}
-          />
-        ) : (
-          <ReactSVG className="temporary-icon" src={icon} loading={svgLoader} />
-        )}
-      </Link>
-    );
-  };
-
-  changeCheckbox = (e) => {
-    const { onSelect, item } = this.props;
-    onSelect && onSelect(e.target.checked, item);
-  };
-
-  onFileIconClick = () => {
-    if (!isMobile) return;
-
-    const { onSelect, item } = this.props;
-    onSelect && onSelect(true, item);
-  };
-
-  onFileClick = (e) => {
-    const {
-      onSelect,
-      item,
-      checked,
-      setSelection,
-      withCtrlSelect,
-      withShiftSelect,
-    } = this.props;
-
-    if (e.ctrlKey || e.metaKey) {
-      withCtrlSelect(item);
-      e.preventDefault();
-      return;
-    }
-
-    if (e.shiftKey) {
-      withShiftSelect(item);
-      e.preventDefault();
-      return;
-    }
-
-    if (
-      e.detail === 1 &&
-      !e.target.closest(".badges") &&
-      !e.target.closest(".item-file-name") &&
-      !e.target.closest(".tag")
-    ) {
-      if (
-        e.target.nodeName !== "IMG" &&
-        e.target.nodeName !== "INPUT" &&
-        e.target.nodeName !== "rect" &&
-        e.target.nodeName !== "path" &&
-        e.target.nodeName !== "svg" &&
-        !this.checkboxContainerRef.current?.contains(e.target)
-      ) {
-        setSelection && setSelection([]);
-      }
-
-      onSelect && onSelect(!checked, item);
-    }
-  };
-
-  render() {
-    const {
-      checked,
-      children,
-      contextButtonSpacerWidth,
-      contextOptions,
-      element,
-      indeterminate,
-      tileContextClick,
-      item,
-      inProgress,
-      isEdit,
-      getContextModel,
-      hideContextMenu,
-      t,
-      selectOption,
-      additionalInfo,
-      theme,
-    } = this.props;
-    const { isFolder, isRoom, id, fileExst, createdBy } = item;
-
-    const renderElement = Object.prototype.hasOwnProperty.call(
-      this.props,
-      "element",
-    );
-
-    const renderContext =
-      Object.prototype.hasOwnProperty.call(item, "contextOptions") &&
-      contextOptions.length > 0;
-
-    const getOptions = () => {
-      tileContextClick && tileContextClick();
-      return contextOptions;
-    };
-
-    const onContextMenu = (e) => {
-      tileContextClick && tileContextClick(e.button === 2);
-      if (!this.cm.current.menuRef.current) {
-        this.tile.current.click(e); //TODO: need fix context menu to global
-      }
-      this.cm.current.show(e);
-    };
-    const [FilesTileContent, badges] = children;
-
-    const contextMenuHeader = {
-      icon: children[0].props.item.icon,
-      title: children[0].props.item.title,
-      color: children[0].props.item.logo?.color,
-    };
-
-    const title = item.isFolder
-      ? t("Translations:TitleShowFolderActions")
-      : t("Translations:TitleShowActions");
-
-    const tags = [];
-
-    if (item.providerType) {
-      tags.push({
-        isThirdParty: true,
-        icon: item.thirdPartyIcon,
-        label: item.providerKey,
-        onClick: () =>
-          selectOption({
-            option: "typeProvider",
-            value: item.providerType,
-          }),
-      });
-    }
-
-    if (item?.tags?.length > 0) {
-      tags.push(...item.tags);
-    } else {
-      tags.push({
-        isDefault: true,
-        roomType: item.roomType,
-        label: t(ROOMS_TYPE_TRANSLATIONS[item.roomType]),
-        onClick: () =>
-          selectOption({
-            option: "defaultTypeRoom",
-            value: item.roomType,
-          }),
-      });
-    }
-
-    return (
-      <StyledTemplatesTile>
-        <div className="room-tile-template_top-content">
-          {renderElement && !(!fileExst && id === -1) && !isEdit && (
-            <>
-              {!inProgress ? (
-                <div
-                  className="file-icon_container"
-                  ref={this.checkboxContainerRef}
+  return (
+    <StyledTemplatesTile>
+      <div className="room-tile-template_top-content">
+        {renderElement && !(!fileExst && id === -1) && !isEdit && (
+          <>
+            {!inProgress ? (
+              <div className="file-icon_container" ref={cbRef}>
+                <StyledElement
+                  className="file-icon"
+                  isRoom={isRoom}
+                  onClick={onFileIconClick}
                 >
-                  <StyledElement
-                    className="file-icon"
-                    isRoom={isRoom}
-                    onClick={this.onFileIconClick}
-                  >
-                    {element}
-                  </StyledElement>
+                  {element}
+                </StyledElement>
 
-                  <Checkbox
-                    className="checkbox file-checkbox"
-                    isChecked={checked}
-                    isIndeterminate={indeterminate}
-                    onChange={this.changeCheckbox}
-                  />
-                </div>
-              ) : (
-                <Loader
-                  className="tile-folder-loader"
-                  type="oval"
-                  size="16px"
+                <Checkbox
+                  className="checkbox file-checkbox"
+                  isChecked={checked}
+                  isIndeterminate={indeterminate}
+                  onChange={changeCheckbox}
                 />
-              )}
-            </>
-          )}
-          <StyledContent
-            isFolder={(isFolder && !fileExst) || (!fileExst && id === -1)}
-          >
-            {FilesTileContent}
-            {badges}
-          </StyledContent>
-          <StyledOptionButton spacerWidth={contextButtonSpacerWidth}>
-            {renderContext ? (
-              <ContextMenuButton
-                isFill
-                className="expandButton"
-                directionX="right"
-                getData={getOptions}
-                displayType="toggle"
-                onClick={onContextMenu}
-                title={title}
-              />
+              </div>
             ) : (
-              <div className="expandButton" />
+              <Loader className="tile-folder-loader" type="oval" size="16px" />
             )}
-            <ContextMenu
-              onHide={hideContextMenu}
-              getContextModel={getContextModel}
-              ref={this.cm}
-              header={contextMenuHeader}
-              withBackdrop={true}
-              isRoom={isRoom}
+          </>
+        )}
+        <StyledContent
+          isFolder={(isFolder && !fileExst) || (!fileExst && id === -1)}
+        >
+          {FilesTileContent}
+          {badges}
+        </StyledContent>
+        <StyledOptionButton spacerWidth={contextButtonSpacerWidth}>
+          {renderContext ? (
+            <ContextMenuButton
+              isFill
+              className="expandButton"
+              directionX="right"
+              getData={getOptions}
+              displayType="toggle"
+              onClick={onContextMenu}
+              title={contextMenuTitle}
             />
-          </StyledOptionButton>
-        </div>
-        <div className="room-tile-template_bottom-content">
-          <div className="room-tile_bottom-content-wrapper">
-            <div className="room-tile_bottom-content_field">
-              <Text
-                truncate
-                fontSize="13px"
-                fontWeight={400}
-                color={theme.filesSection.tilesView.subTextColor}
-              >
-                {t("Common:Owner")}
-              </Text>
-              <Text
-                truncate
-                fontSize="13px"
-                fontWeight={400}
-                color={theme.filesSection.tilesView.subTextColor}
-              >
-                {t("Common:Content")}
-              </Text>
-            </div>
-            <div className="room-tile_bottom-content_field">
-              <Text
-                truncate
-                fontSize="13px"
-                fontWeight={600}
-                color={theme.filesSection.tilesView.subTextColor}
-              >
-                {createdBy.displayName}
-              </Text>
-              <Text
-                truncate
-                fontSize="13px"
-                fontWeight={600}
-                color={theme.filesSection.tilesView.subTextColor}
-              >
-                {additionalInfo}
-              </Text>
-            </div>
+          ) : (
+            <div className="expandButton" />
+          )}
+          <ContextMenu
+            onHide={hideContextMenu}
+            getContextModel={getContextModel}
+            ref={cmRef}
+            header={contextMenuHeader}
+            withBackdrop={true}
+            isRoom={isRoom}
+          />
+        </StyledOptionButton>
+      </div>
+      <div className="room-tile-template_bottom-content">
+        <div className="room-tile_bottom-content-wrapper">
+          <div className="room-tile_bottom-content_field">
+            <Text
+              truncate
+              fontSize="13px"
+              fontWeight={400}
+              color={theme.filesSection.tilesView.subTextColor}
+            >
+              {t("Common:Owner")}
+            </Text>
+            <Text
+              truncate
+              fontSize="13px"
+              fontWeight={400}
+              color={theme.filesSection.tilesView.subTextColor}
+            >
+              {t("Common:Content")}
+            </Text>
+          </div>
+          <div className="room-tile_bottom-content_field">
+            <Text
+              truncate
+              fontSize="13px"
+              fontWeight={600}
+              color={theme.filesSection.tilesView.subTextColor}
+            >
+              {createdBy.displayName}
+            </Text>
+            <Text
+              truncate
+              fontSize="13px"
+              fontWeight={600}
+              color={theme.filesSection.tilesView.subTextColor}
+            >
+              {additionalInfo}
+            </Text>
           </div>
         </div>
-      </StyledTemplatesTile>
-    );
-  }
-}
-
-TemplatesTile.propTypes = {
-  checked: PropTypes.bool,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element,
-  ]),
-  className: PropTypes.string,
-  contextButtonSpacerWidth: PropTypes.string,
-  contextOptions: PropTypes.array,
-  element: PropTypes.element,
-  id: PropTypes.string,
-  indeterminate: PropTypes.bool,
-  onSelect: PropTypes.func,
-  tileContextClick: PropTypes.func,
-};
-
-TemplatesTile.defaultProps = {
-  contextButtonSpacerWidth: "32px",
-  item: {},
+      </div>
+    </StyledTemplatesTile>
+  );
 };
 
 export default withTheme(TemplatesTile);

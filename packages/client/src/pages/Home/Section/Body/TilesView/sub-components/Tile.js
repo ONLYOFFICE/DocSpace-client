@@ -771,7 +771,21 @@ class Tile extends React.PureComponent {
       >
         {isFolder || (!fileExst && id === -1) ? (
           isTemplate ? (
-            <TemplatesTile {...this.props} />
+            <TemplatesTile
+              {...this.props}
+              onContextMenu={onContextMenu}
+              cmRef={this.cm}
+              cbRef={this.checkboxContainerRef}
+              changeCheckbox={this.changeCheckbox}
+              onFileIconClick={this.onFileIconClick}
+              renderElement={renderElement}
+              renderContext={renderContext}
+              getOptions={getOptions}
+              contextMenuHeader={contextMenuHeader}
+              FilesTileContent={FilesTileContent}
+              badges={badges}
+              contextMenuTitle={title}
+            />
           ) : isRoom ? (
             <>
               <div className="room-tile_top-content">

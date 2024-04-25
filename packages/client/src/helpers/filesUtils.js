@@ -37,7 +37,7 @@ import { authStore, settingsStore } from "@docspace/shared/store";
 import { FileType, RoomsType } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import i18n from "./i18n";
+import i18n from "../i18n";
 
 import { request } from "@docspace/shared/api/client";
 

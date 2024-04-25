@@ -461,7 +461,9 @@ const SimpleFilesRow = (props) => {
           contentElement={
             isMobileDevice || isRooms ? null : quickButtonsComponent
           }
-          badgesComponent={!isMobileDevice && badgesComponent}
+          badgesComponent={
+            (!isMobileDevice || item.isTemplate) && badgesComponent
+          }
           onSelect={onContentFileSelect}
           onContextClick={fileContextClick}
           isPrivacy={isPrivacy}
@@ -497,7 +499,9 @@ const SimpleFilesRow = (props) => {
               isMobileDevice || isRooms ? quickButtonsComponent : null
             }
             isRooms={isRooms}
-            badgesComponent={isMobileDevice && badgesComponent}
+            badgesComponent={
+              isMobileDevice && !item.isTemplate && badgesComponent
+            }
           />
         </StyledSimpleFilesRow>
       </DragAndDrop>

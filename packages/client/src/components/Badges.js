@@ -330,7 +330,7 @@ const Badges = ({
           themeId={ThemeId.IconButton}
           iconName={CreateRoomReactSvgUrl}
           className="badge tablet-row-create-room icons-group  tablet-badge"
-          size={sizeBadge}
+          size="medium"
           onClick={onCreateRoom}
           title={t("Files:CreateRoom")}
         />

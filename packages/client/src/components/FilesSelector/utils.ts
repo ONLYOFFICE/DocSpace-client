@@ -44,7 +44,6 @@ export const getHeaderLabel = (
   isFormRoom?: boolean,
   isThirdParty?: boolean,
   isSelectFolder?: boolean,
-  isTemplate?: boolean,
 ) => {
   if (isRestore) return t("Common:RestoreTo");
   if (isSelectFolder) return t("Common:SelectFolder");
@@ -53,9 +52,6 @@ export const getHeaderLabel = (
   if (isRestoreAll) return t("Common:Restore");
   if (isSelect) {
     return filterParam ? t("Common:SelectFile") : t("Common:SelectAction");
-  }
-  if (isTemplate) {
-    return t("Files:FromTemplate");
   }
 
   if (isFormRoom) {

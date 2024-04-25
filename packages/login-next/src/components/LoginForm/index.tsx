@@ -46,7 +46,6 @@ import { thirdPartyLogin } from "@docspace/shared/api/user";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
-import { TPasswordHash } from "@docspace/shared/api/settings/types";
 
 import { LoginFormProps } from "@/types";
 
@@ -354,6 +353,7 @@ const LoginForm = ({
           onChange={onChangePassword}
           isAutoFocussed={!!emailFromInvitation}
           inputType={InputType.password}
+          isDisableTooltip
         />
       </FieldContainer>
 

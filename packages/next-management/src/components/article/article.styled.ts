@@ -26,6 +26,7 @@
 
 import styled from "styled-components";
 import { desktop, tablet, mobile } from "@docspace/shared/utils";
+import { TColorScheme } from "@docspace/shared/themes";
 
 export const StyledArticle = styled.article<{
   showText?: boolean;
@@ -110,14 +111,32 @@ export const StyledShowButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  svg {
+    path {
+      fill: ${(props) => props.theme.article.catalogShowText};
+    }
+  }
 `;
 
-export const StyledHideButton = styled.div`
+export const StyledHideButton = styled.div<{
+  currentColorScheme?: TColorScheme;
+}>`
   width: 100%;
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 0 8px;
+
+  .article-hide-menu-text {
+    color: ${({ currentColorScheme }) => currentColorScheme?.main?.accent};
+  }
+
+  svg {
+    path {
+      fill: ${({ currentColorScheme }) => currentColorScheme?.main?.accent};
+    }
+  }
 
   .article-hide-menu-icon > div {
     display: flex;

@@ -27,6 +27,7 @@
 import ArticleHideMenuReactSvgUrl from "PUBLIC_DIR/images/article-hide-menu.react.svg?url";
 import ArticleShowMenuReactSvgUrl from "PUBLIC_DIR/images/article-show-menu.react.svg?url";
 
+import { useTheme } from "styled-components";
 import { ReactSVG } from "react-svg";
 import { Text } from "@docspace/shared/components/text";
 import { useStores } from "@/hooks/useStores";
@@ -40,6 +41,7 @@ export const HideButton = () => {
   const {
     articleStore: { showText, setShowText },
   } = useStores();
+  const theme = useTheme();
 
   return (
     <StyledHideButtonWrapper
@@ -51,7 +53,7 @@ export const HideButton = () => {
           <ReactSVG src={ArticleShowMenuReactSvgUrl} />
         </StyledShowButton>
       ) : (
-        <StyledHideButton>
+        <StyledHideButton currentColorScheme={theme?.currentColorScheme}>
           <ReactSVG
             className="article-hide-menu-icon"
             src={ArticleHideMenuReactSvgUrl}

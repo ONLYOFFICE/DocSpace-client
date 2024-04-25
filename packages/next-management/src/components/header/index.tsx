@@ -27,15 +27,22 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import { StyledWrapper, StyledHeader } from "./header.styled";
+import { observer } from "mobx-react";
+import { useStores } from "@/hooks/useStores";
 
-export const Header = () => {
+import { StyledWrapper, StyledHeader, StyledMenuIcon } from "./header.styled";
+
+export const Header = observer(() => {
   const { t } = useTranslation("Common");
+  const {
+    articleStore: { articleOpen, setArticleOpen },
+  } = useStores();
 
   return (
     <StyledWrapper>
+      <StyledMenuIcon onClick={() => setArticleOpen(!articleOpen)} />
       <StyledHeader>{t("SpaceManagement")}</StyledHeader>
     </StyledWrapper>
   );
-};
+});
 

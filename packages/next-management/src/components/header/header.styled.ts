@@ -24,28 +24,42 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
+
 import styled from "styled-components";
 import { mobile } from "@docspace/shared/utils";
 
 export const StyledWrapper = styled.header`
   position: relative;
-  width: 100vw;
   height: 48px;
   background-color: ${(props) => props.theme.header.backgroundColor};
   display: none;
+  padding: 0 16px;
 
   @media ${mobile} {
     display: flex;
     align-items: center;
-    justify-content: center;
   }
 `;
 
 export const StyledHeader = styled.header`
-  position: absolute;
+  width: 100%;
   font-size: 17px;
   font-style: normal;
   font-weight: 700;
   line-height: 22px;
+  display: flex;
+  justify-content: center;
+`;
+
+export const StyledMenuIcon = styled(MenuIcon)`
+  width: 20px;
+  height: 20px;
+
+  path {
+    fill: ${(props) => props.theme.catalog.headerBurgerColor};
+  }
+
+  cursor: pointer;
 `;
 

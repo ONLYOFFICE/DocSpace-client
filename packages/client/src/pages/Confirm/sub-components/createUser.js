@@ -51,7 +51,11 @@ import {
   getLoginLink,
 } from "@docspace/shared/utils/common";
 import { login } from "@docspace/shared/utils/loginUtils";
-import { PROVIDERS_DATA } from "@docspace/shared/constants";
+import {
+  COOKIE_EXPIRATION_YEAR,
+  LANGUAGE,
+  PROVIDERS_DATA,
+} from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordErrorMessage";
@@ -68,6 +72,8 @@ import GreetingUserContainer from "./GreetingUserContainer";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { isMobile } from "@docspace/shared/utils";
 import { ComboBox } from "@docspace/shared/components/combobox";
+import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
+import { setCookie } from "@docspace/shared/utils/cookie";
 
 const DEFAULT_ROOM_TEXT =
   "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
@@ -105,11 +111,11 @@ const CreateUserForm = (props) => {
     currentColorScheme,
     userNameRegex,
     defaultPage,
-    cultureNames,
-    selectedCultureObj,
-    currentCultureName,
-    onLanguageSelect,
+    cultures,
+    i18n,
   } = props;
+
+  const currentCultureName = i18n.language;
 
   const inputRef = React.useRef(null);
 
@@ -206,6 +212,10 @@ const CreateUserForm = (props) => {
       );
 
       await getUserByEmail(email, headerKey);
+
+      setCookie(LANGUAGE, currentCultureName, {
+        "max-age": COOKIE_EXPIRATION_YEAR,
+      });
 
       window.location.href = combineUrl(
         window.DocSpaceConfig?.proxy?.url,
@@ -467,27 +477,34 @@ const CreateUserForm = (props) => {
       }
     : {};
 
+  const onSelect = (culture) => {
+    i18n.changeLanguage(culture);
+
+    setCookie(LANGUAGE, culture, {
+      "max-age": COOKIE_EXPIRATION_YEAR,
+    });
+
+    const url = new URL(window.location.href);
+    const prevCulture = url.searchParams.get("culture");
+
+    if (prevCulture) {
+      const newUrl = location.href.replace(`&culture=${prevCulture}`, ``);
+
+      window.history.pushState("", "", newUrl);
+    }
+  };
+
   return (
     <StyledPage>
       {!isMobile() && (
-        <ComboBox
+        <LanguageCombobox
           className="language-combo-box"
-          directionY={"both"}
-          options={cultureNames}
-          selectedOption={selectedCultureObj}
-          onSelect={onLanguageSelect}
-          isDisabled={false}
-          scaled={false}
-          scaledOptions={false}
-          size="content"
-          showDisabledItems={true}
-          dropDownMaxHeight={200}
-          manualWidth="70px"
-          fillIcon={false}
-          modernView
-          displaySelectedOption
+          onSelectLanguage={onSelect}
+          cultures={cultures}
+          selectedCulture={currentCultureName}
         />
       )}
+
       <StyledCreateUserContent>
         <GreetingContainer>
           <DocspaceLogo className="docspace-logo" />
@@ -745,6 +762,7 @@ export default inject(({ settingsStore, authStore }) => {
     getPortalPasswordSettings,
     currentColorScheme,
     userNameRegex,
+    cultures,
   } = settingsStore;
   return {
     settings: passwordSettings,
@@ -758,6 +776,7 @@ export default inject(({ settingsStore, authStore }) => {
     capabilities,
     currentColorScheme,
     userNameRegex,
+    cultures,
   };
 })(
   withCultureNames(

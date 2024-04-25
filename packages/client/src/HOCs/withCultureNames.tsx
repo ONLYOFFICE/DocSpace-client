@@ -73,36 +73,9 @@ export default function withCultureNames<
       () => mapCulturesToArray(cultures, true, i18n),
       [cultures, isAuthenticated],
     );
-    const url = new URL(window.location.href);
-    const culture = url.searchParams.get("culture");
-    const currentCultureName = culture ?? getCookie(LANGUAGE);
-    const selectedCultureObj = cultureNames.find(
-      (item) => item.key === currentCultureName,
-    );
-
-    const onLanguageSelect = (e: KeyboardEvent) => {
-      i18n.changeLanguage(e.key);
-
-      setCookie(LANGUAGE, e.key, {
-        "max-age": COOKIE_EXPIRATION_YEAR,
-      });
-
-      if (culture) {
-        window.location.href = url.replace(
-          `culture=${culture}`,
-          `culture=${e.key}`,
-        );
-      }
-    };
 
     return cultures.length > 0 && tReady ? (
-      <WrappedComponent
-        {...(props as T)}
-        cultureNames={cultureNames}
-        currentCultureName={currentCultureName}
-        onLanguageSelect={onLanguageSelect}
-        selectedCultureObj={selectedCultureObj}
-      />
+      <WrappedComponent {...(props as T)} cultureNames={cultureNames} />
     ) : (
       <Loader className="pageLoader" type={LoaderTypes.rombs} size="40px" />
     );

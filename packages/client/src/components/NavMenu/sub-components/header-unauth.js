@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+﻿// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,13 +28,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Box } from "@docspace/shared/components/box";
-import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Base } from "@docspace/shared/themes";
 import { mobile, getLogoUrl } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
-import { ComboBox } from "@docspace/shared/components/combobox";
-import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
+import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
+import { setCookie } from "@docspace/shared/utils/cookie";
+import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
+import i18n from "../../../i18n";
 
 const Header = styled.header`
   align-items: left;
@@ -91,12 +92,28 @@ const HeaderUnAuth = ({
   isAuthenticated,
   isLoaded,
   theme,
-  cultureNames,
-  selectedCultureObj,
-  onLanguageSelect,
+  cultures,
 }) => {
-  const { t } = useTranslation("NavMenu");
   const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
+
+  const currentCultureName = i18n.language;
+
+  const onSelect = (culture) => {
+    i18n.changeLanguage(culture);
+
+    setCookie(LANGUAGE, culture, {
+      "max-age": COOKIE_EXPIRATION_YEAR,
+    });
+
+    const url = new URL(window.location.href);
+    const prevCulture = url.searchParams.get("culture");
+
+    if (prevCulture) {
+      const newUrl = location.href.replace(`&culture=${prevCulture}`, ``);
+
+      window.history.pushState("", "", newUrl);
+    }
+  };
 
   return (
     <Header isLoaded={isLoaded} className="navMenuHeaderUnAuth">
@@ -117,22 +134,11 @@ const HeaderUnAuth = ({
         )}
       </Box>
 
-      <ComboBox
+      <LanguageCombobox
         className="language-combo-box"
-        directionY={"both"}
-        options={cultureNames}
-        selectedOption={selectedCultureObj}
-        onSelect={onLanguageSelect}
-        isDisabled={false}
-        scaled={false}
-        scaledOptions={false}
-        size="content"
-        showDisabledItems={true}
-        dropDownMaxHeight={200}
-        manualWidth="70px"
-        fillIcon={false}
-        modernView
-        displaySelectedOption
+        onSelectLanguage={onSelect}
+        cultures={cultures}
+        selectedCulture={currentCultureName}
       />
     </Header>
   );
@@ -149,7 +155,7 @@ HeaderUnAuth.propTypes = {
 
 export default inject(({ authStore, settingsStore }) => {
   const { isAuthenticated, isLoaded } = authStore;
-  const { enableAdmMess, wizardToken, theme } = settingsStore;
+  const { enableAdmMess, wizardToken, theme, cultures } = settingsStore;
 
   return {
     enableAdmMess,
@@ -157,5 +163,6 @@ export default inject(({ authStore, settingsStore }) => {
     isAuthenticated,
     isLoaded,
     theme,
+    cultures,
   };
-})(withCultureNames(observer(HeaderUnAuth)));
+})(observer(HeaderUnAuth));

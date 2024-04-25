@@ -60,12 +60,10 @@ const LanguageCombobox = (props: ComboboxProps) => {
     onSelectLanguage(culture.key);
   };
 
-  console.log("currentCulture", selectedCulture, cultureNames);
   if (!currentCulture) return <></>;
 
   return (
     <StyledComboBox
-      name="HELLO"
       className={`language-combo-box ${className}`}
       directionY="both"
       options={cultureNames}

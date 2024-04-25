@@ -1,4 +1,3 @@
-import { transform } from "lodash";
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.

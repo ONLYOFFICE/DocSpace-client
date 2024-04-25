@@ -91,7 +91,7 @@ export function changeLanguage(i18n: TI18n, currentLng = getCookie(LANGUAGE)) {
 
 export function createPasswordHash(
   password: string,
-  hashSettings: TPasswordHash,
+  hashSettings?: TPasswordHash,
 ) {
   if (
     !password ||

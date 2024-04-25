@@ -139,6 +139,7 @@ const HeaderUnAuth = ({
         onSelectLanguage={onSelect}
         cultures={cultures}
         selectedCulture={currentCultureName}
+        withBorder={false}
       />
     </Header>
   );

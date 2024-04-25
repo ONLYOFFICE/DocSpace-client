@@ -33,7 +33,13 @@ import { StyledComboBox } from "./LanguageCombobox.styled";
 import { TCulture, ComboboxProps } from "./LanguageCombobox.types";
 
 const LanguageCombobox = (props: ComboboxProps) => {
-  const { cultures, onSelectLanguage, selectedCulture, className } = props;
+  const {
+    cultures,
+    onSelectLanguage,
+    selectedCulture,
+    className,
+    withBorder = true,
+  } = props;
 
   const { i18n } = useTranslation(["Common"]);
 
@@ -54,10 +60,12 @@ const LanguageCombobox = (props: ComboboxProps) => {
     onSelectLanguage(culture.key);
   };
 
+  console.log("currentCulture", selectedCulture, cultureNames);
   if (!currentCulture) return <></>;
 
   return (
     <StyledComboBox
+      name="HELLO"
       className={`language-combo-box ${className}`}
       directionY="both"
       options={cultureNames}
@@ -78,6 +86,7 @@ const LanguageCombobox = (props: ComboboxProps) => {
       style={{ padding: "6px 0px" }}
       isMobileView={isMobile()}
       withBlur={isMobile()}
+      withBorder={withBorder}
     />
   );
 };

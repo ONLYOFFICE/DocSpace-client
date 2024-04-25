@@ -276,6 +276,7 @@ const Login: React.FC<ILoginProps> = ({
           onSelectLanguage={onLanguageSelect}
           cultures={cultures}
           selectedCulture={currentCulture}
+          withBorder={false}
         />
         <LoginContent enabledJoin={enabledJoin}>
           <ColorTheme

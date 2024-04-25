@@ -502,6 +502,7 @@ const CreateUserForm = (props) => {
           onSelectLanguage={onSelect}
           cultures={cultures}
           selectedCulture={currentCultureName}
+          withBorder={false}
         />
       )}
 

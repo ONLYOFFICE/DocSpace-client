@@ -1,3 +1,4 @@
+import { transform } from "lodash";
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -23,21 +24,29 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { ComboBox } from "../combobox";
 
-export const StyledComboBox = styled(ComboBox)`
+export const StyledComboBox = styled(ComboBox)<{ withBorder: boolean }>`
   width: 41px;
   height: 32px;
   box-sizing: border-box;
   padding: 0;
 
-  :hover {
-    border-color: rgb(163, 169, 174);
-  }
   .combo-button {
     padding: 7px;
+
+    ${(props) =>
+      !props.withBorder &&
+      css`
+        border-width: 0;
+        background: transparent;
+      `};
+
+    :hover {
+      border-color: rgb(163, 169, 174);
+    }
   }
 
   .combo-button_selected-icon-container {

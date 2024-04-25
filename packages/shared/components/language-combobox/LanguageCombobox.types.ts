@@ -39,4 +39,6 @@ export interface ComboboxProps {
   id?: string;
   /** Accepts class */
   className?: string;
+  /** Indicates that component contain border */
+  withBorder?: boolean;
 }

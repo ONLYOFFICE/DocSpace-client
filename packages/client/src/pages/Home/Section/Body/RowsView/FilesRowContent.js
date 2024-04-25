@@ -45,9 +45,13 @@ import withContent from "../../../../../HOCs/withContent";
 import { Base } from "@docspace/shared/themes";
 import { ROOMS_TYPE_TRANSLATIONS } from "@docspace/shared/constants";
 
-import { getFileTypeName } from "../../../../../helpers/filesUtils";
+import {
+  getDefaultRoomName,
+  getFileTypeName,
+} from "../../../../../helpers/filesUtils";
 import { SortByFieldName } from "SRC_DIR/helpers/constants";
 import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
+import { decode } from "he";
 
 const SimpleFilesRowContent = styled(RowContent)`
   .row-main-container-wrapper {
@@ -216,6 +220,7 @@ const FilesRowContent = ({
   isDefaultRoomsQuotaSet,
   isStatisticsAvailable,
   showStorageInfo,
+  additionalInfo: additionalInfoProp,
 }) => {
   const {
     contentLength,
@@ -230,6 +235,7 @@ const FilesRowContent = ({
     tags,
     quotaLimit,
     usedSpace,
+    roomType,
   } = item;
 
   const contentComponent = () => {
@@ -246,6 +252,9 @@ const FilesRowContent = ({
 
       case SortByFieldName.Type:
         return getFileTypeName(fileType);
+
+      case SortByFieldName.RoomType:
+        return getDefaultRoomName(roomType, t);
 
       case SortByFieldName.Tags:
         if (tags?.length === 0) return "";
@@ -293,8 +302,12 @@ const FilesRowContent = ({
     return "";
   };
 
-  const additionalInfo = additionalComponent();
+  const additionalInfo =
+    item.isTemplate && additionalInfoProp
+      ? additionalInfoProp
+      : additionalComponent();
   const mainInfo = contentComponent();
+  const authorInfo = item.isTemplate ? decode(fileOwner) : "";
 
   return (
     <>
@@ -322,7 +335,6 @@ const FilesRowContent = ({
           {badgesComponent}
           {!isRoom && !isRooms && quickButtons}
         </div>
-
         <Text
           containerMinWidth="200px"
           containerWidth="15%"
@@ -332,7 +344,6 @@ const FilesRowContent = ({
         >
           {mainInfo}
         </Text>
-
         <Text
           containerMinWidth="90px"
           containerWidth="10%"
@@ -344,19 +355,40 @@ const FilesRowContent = ({
         >
           {additionalInfo}
         </Text>
+        {authorInfo && (
+          <Text
+            containerMinWidth="90px"
+            containerWidth="10%"
+            as="div"
+            className="row-content-text"
+            fontSize="12px"
+            fontWeight={400}
+            truncate={true}
+            title={decode(fileOwner)}
+          >
+            {authorInfo}
+          </Text>
+        )}
       </SimpleFilesRowContent>
     </>
   );
 };
 
 export default inject(
-  ({ currentQuotaStore, settingsStore, treeFoldersStore, filesStore }) => {
+  (
+    { currentQuotaStore, settingsStore, treeFoldersStore, filesStore },
+    { item },
+  ) => {
     const { filter, roomsFilter } = filesStore;
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
       treeFoldersStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
-    const filterSortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
+    const filterSortBy = item.isTemplate
+      ? SortByFieldName.RoomType
+      : isRooms
+        ? roomsFilter.sortBy
+        : filter.sortBy;
 
     const { isDefaultRoomsQuotaSet, isStatisticsAvailable, showStorageInfo } =
       currentQuotaStore;

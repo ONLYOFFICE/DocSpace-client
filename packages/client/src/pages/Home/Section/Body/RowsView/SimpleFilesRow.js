@@ -372,6 +372,7 @@ const SimpleFilesRow = (props) => {
     itemIndex,
     badgeUrl,
     canDrag,
+    additionalInfo,
   } = props;
 
   const isMobileDevice = isMobileUtile();
@@ -493,6 +494,7 @@ const SimpleFilesRow = (props) => {
         >
           <FilesRowContent
             item={item}
+            additionalInfo={additionalInfo}
             sectionWidth={sectionWidth}
             onFilesClick={onFilesClick}
             quickButtons={

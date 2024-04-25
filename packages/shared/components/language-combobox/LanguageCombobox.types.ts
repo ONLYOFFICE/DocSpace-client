@@ -34,7 +34,7 @@ export type TCultures = TCulture[];
 export interface ComboboxProps {
   selectedCulture: string;
   cultures: string[];
-  tabIndex?: number | string;
+  onSelectLanguage: (culture: string) => void;
   /** Accepts id */
   id?: string;
   /** Accepts class */

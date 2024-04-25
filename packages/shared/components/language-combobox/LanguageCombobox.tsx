@@ -23,6 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import React from "react";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -40,16 +41,20 @@ const LanguageCombobox = (props: ComboboxProps) => {
     const withLabel = isMobile() ? i18n : undefined;
 
     return mapCulturesToArray(cultures, false, withLabel);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cultures]);
 
   const currentCulture = cultureNames.find(
     (item) => item.key === selectedCulture,
   );
+
   const onSelect = (culture: TCulture) => {
     if (culture.key === selectedCulture) return;
 
     onSelectLanguage(culture.key);
   };
+
+  if (!currentCulture) return <></>;
 
   return (
     <StyledComboBox

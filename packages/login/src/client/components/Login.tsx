@@ -36,7 +36,6 @@ import {
   getOAuthToken,
   getLoginLink,
   getEditorTheme,
-  mapCulturesToArray,
 } from "@docspace/shared/utils/common";
 import { Link } from "@docspace/shared/components/link";
 import { checkIsSSR, getLogoUrl, getSystemTheme } from "@docspace/shared/utils";
@@ -60,7 +59,7 @@ import GreetingContainer from "./sub-components/GreetingContainer";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import { setCookie } from "@docspace/shared/utils/cookie";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
 
 const themes = {
   Dark: Dark,
@@ -91,11 +90,6 @@ const Login: React.FC<ILoginProps> = ({
   const { search } = location;
   const isRestoringPortal =
     portalSettings?.tenantStatus === TenantStatus.PortalRestore;
-
-  const cultureNames = useMemo(
-    () => mapCulturesToArray(cultures, false),
-    [cultures]
-  );
 
   useEffect(() => {
     if (search) {
@@ -129,6 +123,7 @@ const Login: React.FC<ILoginProps> = ({
   const { t, i18n } = useTranslation(["Login", "Common"]);
 
   const currentCulture = i18n.language;
+
   const [isLoading, setIsLoading] = useState(false);
   const [recoverDialogVisible, setRecoverDialogVisible] = useState(false);
   const [invitationLinkData, setInvitationLinkData] = useState({
@@ -151,13 +146,7 @@ const Login: React.FC<ILoginProps> = ({
     cookieSettingsEnabled: false,
   };
 
-  const selectedCultureObj = cultureNames.find(
-    (item) => item.key === currentCulture
-  );
-
-  const onLanguageSelect = (e: KeyboardEvent) => {
-    const culture = e.key;
-
+  const onLanguageSelect = (culture: string) => {
     i18n.changeLanguage(culture);
 
     setCookie(LANGUAGE, culture, {
@@ -282,22 +271,11 @@ const Login: React.FC<ILoginProps> = ({
     >
       <div className="bg-cover"></div>
       <Scrollbar id="customScrollBar">
-        <ComboBox
+        <LanguageCombobox
           className="language-combo-box"
-          directionY={"both"}
-          options={cultureNames}
-          selectedOption={selectedCultureObj}
-          onSelect={onLanguageSelect}
-          isDisabled={false}
-          scaled={false}
-          scaledOptions={false}
-          size="content"
-          showDisabledItems={true}
-          dropDownMaxHeight={200}
-          manualWidth="70px"
-          fillIcon={false}
-          modernView
-          displaySelectedOption
+          onSelectLanguage={onLanguageSelect}
+          cultures={cultures}
+          selectedCulture={currentCulture}
         />
         <LoginContent enabledJoin={enabledJoin}>
           <ColorTheme

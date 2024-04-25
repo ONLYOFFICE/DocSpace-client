@@ -60,6 +60,34 @@ const StyledStorageLocation = styled.div`
     flex-direction: row;
     gap: 8px;
   }
+
+  .storage-unavailable {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+
+    .drop-down-item_icon {
+      svg {
+        path[fill] {
+          fill: ${(props) => props.theme.dropDownItem.disableColor};
+        }
+
+        path[stroke] {
+          stroke: ${(props) => props.theme.dropDownItem.disableColor};
+        }
+
+        circle[fill] {
+          fill: ${(props) => props.theme.dropDownItem.disableColor};
+        }
+
+        rect[fill] {
+          fill: ${(props) => props.theme.dropDownItem.disableColor};
+        }
+      }
+    }
+
+    color: ${(props) => props.theme.dropDownItem.disableColor};
+  }
 `;
 
 StyledStorageLocation.defaultProps = { theme: Base };
@@ -67,7 +95,7 @@ StyledStorageLocation.defaultProps = { theme: Base };
 const services = {
   GoogleDrive: "google",
   Box: "box",
-  DropboxV2: "dropbox",
+  Dropbox: "dropbox",
   OneDrive: "skydrive",
   Nextcloud: "nextcloud",
   kDrive: "kdrive",
@@ -99,6 +127,14 @@ const ThirdPartyComboBox = ({
 
   isDisabled,
 }) => {
+  const deafultSelectedItem = {
+    key: "length",
+    label:
+      storageLocation?.provider?.title ||
+      t("ThirdPartyStorageComboBoxPlaceholder"),
+  };
+
+  const [selectedItem, setSelectedItem] = useState(deafultSelectedItem);
 
   const thirdparties = connectItems.map((item) => ({
     ...item,
@@ -106,7 +142,6 @@ const ThirdPartyComboBox = ({
   }));
 
   const setStorageLocaiton = (thirparty, isConnected) => {
-    console.log(isConnected, thirparty)
     if (!isConnected) {
       window.open(
         `/portal-settings/integration/third-party-services?service=${services[thirparty.id]}`,
@@ -120,8 +155,6 @@ const ThirdPartyComboBox = ({
   const onShowService = async () => {
     setRoomCreation(true);
     const provider = storageLocation.provider;
-
-    console.log(provider);
 
     if (storageLocation.provider.isOauth) {
       setIsOauthWindowOpen(true);
@@ -176,11 +209,16 @@ const ThirdPartyComboBox = ({
     setSaveThirdpartyResponse(null);
   }, [saveThirdpartyResponse]);
 
-  const options = thirdparties.map((item) => ({
-    label: item.title,
-    title: item.title,
-    key: item.id,
-  }));
+  const options = thirdparties
+    .sort((storage) => (storage.isConnected ? -1 : 1))
+    .map((item) => ({
+      label:
+        item.title + (item.isConnected ? "" : ` (${t("ActivationRequired")})`),
+      title: item.title,
+      key: item.id,
+      icon: item.isConnected ? undefined : ExternalLinkReactSvgUrl,
+      className: item.isConnected ? "" : "storage-unavailable",
+    }));
 
   const onSelect = (elem) => {
     const thirdparty = thirdparties.find((t) => {
@@ -188,6 +226,9 @@ const ThirdPartyComboBox = ({
     });
 
     thirdparty && setStorageLocaiton(thirdparty, thirdparty.isConnected);
+    thirdparty.isConnected
+      ? setSelectedItem(elem)
+      : setSelectedItem(deafultSelectedItem);
   };
 
   return (
@@ -195,12 +236,7 @@ const ThirdPartyComboBox = ({
       <div className="set_room_params-thirdparty">
         <ComboBox
           className="thirdparty-combobox"
-          selectedOption={{
-            key: "length",
-            label:
-              storageLocation?.provider?.title ||
-              t("ThirdPartyStorageComboBoxPlaceholder"),
-          }}
+          selectedOption={selectedItem}
           options={options}
           scaled
           withBackdrop={isMobile}
@@ -230,48 +266,6 @@ const ThirdPartyComboBox = ({
           onClick={onShowService}
         />
       </div>
-
-
-      {/* <StyledDropDownWrapper
-        className="dropdown-content-wrapper"
-        ref={dropdownRef}
-      >
-        <StyledDropDown
-          className="dropdown-content"
-          open={isOpen}
-          forwardedRef={dropdownRef}
-          clickOutsideAction={toggleIsOpen}
-          maxHeight={isMobile() ? 158 : 382}
-          directionY={dropdownDirection}
-          marginTop={dropdownDirection === "bottom" ? "4px" : "-36px"}
-          hasItems={isOpen}
-        >
-          {thirdparties
-            .sort((a) => (a.isAvailable ? -1 : 1))
-            .map((thirdparty) => (
-              <DropDownItem
-                id={thirdparty.id}
-                className={`dropdown-item ${thirdparty.isAvailable ? "" : "storage-unavailable"} ${thirdparty.className ?? ""}`}
-                label={
-                  thirdparty.title +
-                  (thirdparty.isAvailable
-                    ? ""
-                    : ` (${t("ActivationRequired")})`)
-                }
-                key={thirdparty.id}
-                height={32}
-                heightTablet={32}
-                onClick={() =>
-                  setStorageLocaiton(thirdparty, thirdparty.isAvailable)
-                }
-                icon={
-                  !thirdparty.isAvailable ? ExternalLinkReactSvgUrl : undefined
-                }
-              />
-            ))}
-        </StyledDropDown>
-      </StyledDropDownWrapper> */}
-
     </StyledStorageLocation>
   );
 };

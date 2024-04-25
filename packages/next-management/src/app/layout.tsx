@@ -24,17 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { redirect } from "next/navigation";
+import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
+
+import StyledComponentsRegistry from "@/lib/registry";
+import { getSettings, getUser } from "@/lib/actions";
+import Providers from "@/providers";
+
+import { LayoutWrapper } from "@/components/layout";
+
+import "@/styles/globals.scss";
+
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [user, settings] = await Promise.all([getUser(), getSettings()]);
+
+  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+
   return (
     <html lang="en">
       <head>
         <link id="favicon" rel="shortcut icon" type="image/x-icon" />
       </head>
-      <body>{children}</body>
+      <body>
+        <StyledComponentsRegistry>
+          <Providers contextData={{ user, settings }}>
+            <LayoutWrapper>{children}</LayoutWrapper>
+          </Providers>
+        </StyledComponentsRegistry>
+      </body>
     </html>
   );
 }

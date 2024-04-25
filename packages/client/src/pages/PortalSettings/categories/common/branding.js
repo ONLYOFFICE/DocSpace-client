@@ -104,7 +104,7 @@ const Branding = ({
   }, []);
   const hideBlock = isManagement() ? false : portals?.length > 1 ? true : false;
 
-  if (isMobileView)
+  if (isMobileView && standalone)
     return (
       <MobileView isSettingPaid={isSettingPaid} isManagement={isManagement()} />
     );

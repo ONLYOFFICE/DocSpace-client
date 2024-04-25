@@ -314,6 +314,8 @@ class SettingsStore {
 
   windowWidth = window.innerWidth;
 
+  windowAngle = window.screen?.orientation?.angle ?? window.orientation ?? 0;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -1083,6 +1085,10 @@ class SettingsStore {
     }
   };
 
+  setWindowAngle = (angle: number) => {
+    this.windowAngle = angle;
+  };
+
   setWindowWidth = (width: number) => {
     if (width <= deviceSize.mobile && this.windowWidth <= deviceSize.mobile)
       return;
@@ -1100,7 +1106,8 @@ class SettingsStore {
   }
 
   get deviceType() {
-    const angleByRadians = (Math.PI / 180) * window.screen.orientation.angle;
+    const angleByRadians = (Math.PI / 180) * this.windowAngle;
+
     const width = Math.abs(
       Math.round(
         Math.sin(angleByRadians) * window.innerHeight +

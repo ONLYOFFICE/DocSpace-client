@@ -1995,10 +1995,12 @@ class FilesStore {
         "select",
         "fill-form",
         "edit",
+        "open-pdf",
         "preview",
         "view",
         "pdf-view",
         "make-form",
+        "edit-pdf",
         "separator0",
         "submit-to-gallery",
         "separator-SubmitToGallery",
@@ -2038,6 +2040,14 @@ class FilesStore {
 
       if (!canDownload) {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
+      }
+
+      if (!isPdf || item.startFilling) {
+        fileOptions = this.removeOptions(fileOptions, ["open-pdf"]);
+      }
+
+      if (!item.security.EditForm || !item.startFilling) {
+        fileOptions = this.removeOptions(fileOptions, ["edit-pdf"]);
       }
 
       if (!isPdf || !window.DocSpaceConfig?.pdfViewer || isRecycleBinFolder) {
@@ -3150,6 +3160,7 @@ class FilesStore {
         usedSpace,
         isCustomQuota,
         providerId,
+        startFilling,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3321,6 +3332,7 @@ class FilesStore {
         usedSpace,
         isCustomQuota,
         providerId,
+        startFilling,
       };
     });
   };
@@ -3804,7 +3816,7 @@ class FilesStore {
     return folderInfo;
   };
 
-  openDocEditor = (id, preview = false, shareKey = null) => {
+  openDocEditor = (id, preview = false, shareKey = null, editForm = false) => {
     const foundIndex = this.files.findIndex((x) => x.id === id);
     const file = foundIndex !== -1 ? this.files[foundIndex] : undefined;
     if (
@@ -3826,6 +3838,7 @@ class FilesStore {
     searchParams.append("fileId", id);
     if (share) searchParams.append("share", share);
     if (preview) searchParams.append("action", "view");
+    if (editForm) searchParams.append("action", "edit");
 
     const url = combineUrl(
       window.DocSpaceConfig?.proxy?.url,

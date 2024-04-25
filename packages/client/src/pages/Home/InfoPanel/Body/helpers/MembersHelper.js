@@ -153,7 +153,6 @@ class MembersHelper {
         return [
           options.roomAdmin,
           options.collaborator,
-          options.viewer,
           options.formFiller,
           ...deleteOption,
         ];

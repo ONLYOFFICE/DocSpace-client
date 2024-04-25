@@ -239,7 +239,7 @@ class PluginStore {
     this.setIsInit(true);
   };
 
-  updatePlugins = async () => {
+  updatePlugins = async (fromList?: boolean) => {
     if (!this.userStore || !this.userStore.user) return;
 
     const { isAdmin, isOwner } = this.userStore.user;
@@ -254,7 +254,7 @@ class PluginStore {
       );
 
       this.setIsEmptyList(plugins.length === 0);
-      plugins.forEach((plugin) => this.initPlugin(plugin));
+      plugins.forEach((plugin) => this.initPlugin(plugin, undefined, fromList));
 
       setTimeout(() => {
         this.setIsLoading(false);
@@ -298,7 +298,12 @@ class PluginStore {
     }
   };
 
-  initPlugin = (plugin: TAPIPlugin, callback?: (plugin: TPlugin) => void) => {
+  initPlugin = (
+    plugin: TAPIPlugin,
+    callback?: (plugin: TPlugin) => void,
+    fromList?: boolean,
+  ) => {
+    if (!plugin.enabled && !fromList) return;
     const onLoad = async () => {
       const iWindow = this.pluginFrame?.contentWindow as IframeWindow;
 

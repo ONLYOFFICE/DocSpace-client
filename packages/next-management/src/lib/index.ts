@@ -24,22 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { makeAutoObservable } from "mobx";
+export const getMinifyTitle = (title: string) => {
+  const titleArr = title.split(" ");
 
-export class ArticleStore {
-  showText = false;
-  articleOpen = false;
-
-  constructor() {
-    makeAutoObservable(this);
+  if (titleArr.length === 1) {
+    return titleArr[0][0].toUpperCase();
   }
-
-  setShowText = (showText: boolean) => {
-    this.showText = showText;
-  };
-
-  setArticleOpen = (articleOpen: boolean) => {
-    this.articleOpen = articleOpen;
-  };
-}
+  const firstChar = titleArr[0][0].toUpperCase();
+  const secondChar = titleArr[1][0].toUpperCase();
+  return `${firstChar}${secondChar}`;
+};
 

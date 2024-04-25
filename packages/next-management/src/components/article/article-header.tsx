@@ -24,22 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { makeAutoObservable } from "mobx";
+"use client";
 
-export class ArticleStore {
-  showText = false;
-  articleOpen = false;
+import { useTranslation } from "react-i18next";
+import { observer } from "mobx-react";
+import { useStores } from "@/hooks/useStores";
+import { getMinifyTitle } from "@/lib";
+import { StyledArticleHeader } from "./article.styled";
 
-  constructor() {
-    makeAutoObservable(this);
-  }
+export const ArticleHeader = observer(() => {
+  const { t } = useTranslation("Common");
+  const {
+    articleStore: { showText },
+  } = useStores();
 
-  setShowText = (showText: boolean) => {
-    this.showText = showText;
-  };
+  const title = !showText
+    ? getMinifyTitle(t("SpaceManagement"))
+    : t("SpaceManagement");
 
-  setArticleOpen = (articleOpen: boolean) => {
-    this.articleOpen = articleOpen;
-  };
-}
+  return <StyledArticleHeader showText={showText}>{title}</StyledArticleHeader>;
+});
 

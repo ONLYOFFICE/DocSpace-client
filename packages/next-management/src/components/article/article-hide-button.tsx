@@ -24,22 +24,50 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { makeAutoObservable } from "mobx";
+import ArticleHideMenuReactSvgUrl from "PUBLIC_DIR/images/article-hide-menu.react.svg?url";
+import ArticleShowMenuReactSvgUrl from "PUBLIC_DIR/images/article-show-menu.react.svg?url";
 
-export class ArticleStore {
-  showText = false;
-  articleOpen = false;
+import { ReactSVG } from "react-svg";
+import { Text } from "@docspace/shared/components/text";
+import { useStores } from "@/hooks/useStores";
+import {
+  StyledHideButtonWrapper,
+  StyledHideButton,
+  StyledShowButton,
+} from "./article.styled";
 
-  constructor() {
-    makeAutoObservable(this);
-  }
+export const HideButton = () => {
+  const {
+    articleStore: { showText, setShowText },
+  } = useStores();
 
-  setShowText = (showText: boolean) => {
-    this.showText = showText;
-  };
-
-  setArticleOpen = (articleOpen: boolean) => {
-    this.articleOpen = articleOpen;
-  };
-}
+  return (
+    <StyledHideButtonWrapper
+      showText={showText}
+      onClick={() => setShowText(!showText)}
+    >
+      {!showText ? (
+        <StyledShowButton>
+          <ReactSVG src={ArticleShowMenuReactSvgUrl} />
+        </StyledShowButton>
+      ) : (
+        <StyledHideButton>
+          <ReactSVG
+            className="article-hide-menu-icon"
+            src={ArticleHideMenuReactSvgUrl}
+          />
+          <Text
+            className="article-hide-menu-text"
+            fontWeight={600}
+            fontSize="12px"
+            noSelect
+            truncate
+          >
+            Hide menu
+          </Text>
+        </StyledHideButton>
+      )}
+    </StyledHideButtonWrapper>
+  );
+};
 

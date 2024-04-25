@@ -47,8 +47,8 @@ export const getI18NInstance = (lng: string, portalLng: string) => {
       },
     },
 
-    ns: ["Editor", "Common", "DeepLink"],
-    defaultNS: "Editor",
+    ns: ["Management", "Common"],
+    defaultNS: "Management",
 
     react: {
       useSuspense: false,

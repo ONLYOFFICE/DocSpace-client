@@ -99,10 +99,8 @@ const services = {
   OneDrive: "skydrive",
   Nextcloud: "nextcloud",
   kDrive: "kdrive",
-  Yandex: "yandex",
   ownCloud: "owncloud",
   WebDav: "webdav",
-  SharePoint: "sharepoint",
 };
 
 const ThirdPartyComboBox = ({

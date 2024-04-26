@@ -29,6 +29,7 @@ import { tablet, mobile } from "@docspace/shared/utils";
 
 export const StyledSection = styled.section`
   height: 100dvh;
+  width: 100%;
   padding: 0 20px;
   display: flex;
   flex-direction: column;

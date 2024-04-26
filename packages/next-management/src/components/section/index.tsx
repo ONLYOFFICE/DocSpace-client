@@ -26,16 +26,27 @@
 
 "use client";
 
+import React from "react";
+import { usePathname } from "next/navigation";
+import { useTranslation } from "react-i18next";
+
 import Headline from "@docspace/shared/components/headline/Headline";
+
+import { getHeaderByPathname } from "@/lib";
+
 import { StyledSection } from "./section.styled";
 
 export const Section = ({ children }: { children: React.ReactNode }) => {
+  const pathname = usePathname();
+  const { t } = useTranslation("Common");
+
   return (
     <StyledSection>
       <Headline className="headline" type="content" truncate={true}>
-        Spaces
+        {getHeaderByPathname(pathname, t)}
       </Headline>
       {children}
     </StyledSection>
   );
 };
+

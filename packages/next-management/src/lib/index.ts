@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TTranslation } from "@docspace/shared/types";
+
 export const getMinifyTitle = (title: string) => {
   const titleArr = title.split(" ");
 
@@ -33,5 +35,18 @@ export const getMinifyTitle = (title: string) => {
   const firstChar = titleArr[0][0].toUpperCase();
   const secondChar = titleArr[1][0].toUpperCase();
   return `${firstChar}${secondChar}`;
+};
+
+export const getHeaderByPathname = (pathname: string, t: TTranslation) => {
+  switch (pathname) {
+    case "/spaces":
+      return t("Common:Spaces");
+    case "/settings":
+      return t("Common:Settings");
+    case "/payments":
+      return t("Common:PaymentsTitle");
+    default:
+      return t("Common:Spaces");
+  }
 };
 

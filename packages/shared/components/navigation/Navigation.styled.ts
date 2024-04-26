@@ -660,7 +660,7 @@ const StyledBox = styled.div<{
   }
 
   .title-block-text {
-    margin-top: 1px;
+    margin-top: 0px;
 
     @media ${tablet} {
       margin: 0;

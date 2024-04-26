@@ -113,7 +113,14 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
   }
 
   if (fileId || !fileError) {
-    const redirectURL = `${baseURL}/doceditor?fileId=${fileId}`;
+    const searchParams = new URLSearchParams();
+
+    searchParams.append("fileId", fileId?.toString() ?? "");
+    if (action) {
+      searchParams.append("action", action);
+    }
+
+    const redirectURL = `${baseURL}/doceditor?${searchParams.toString()}`;
     return permanentRedirect(redirectURL);
   }
 
@@ -127,4 +134,3 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
 }
 
 export default Page;
-

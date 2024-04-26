@@ -1,6 +1,8 @@
 {
-  "PDFFormDialogTitle": "Ready-made PDF form",
-  "PDFFormInviteDescription": "Congratulations! The form is now ready to be filled out, but there are no participants in the room at the moment. Please invite them to start collecting completed copies from other users.",
+  "PDFFormDialogTitle": "Ready-to-fill-out PDF form",
+  "PDFFormInviteDescription": "Your PDF form is ready to be filled out. Invite other users to this room to start the form filling process.",
   "PDFFormIsReadyToast": "The form is ready to be filled out",
-  "PDFFormSuccessfullyCreatedDescription": "Your <strong>{{fileName}}</strong> form has been successfully created. You can collect completed copies from other users."
+  "PDFFormSuccessfullyCreatedDescription": "Your PDF form is ready to be filled out. Start collecting completed form copies from other users.",
+  "PDFFormEditDialogDescription": "Do you want to switch to the form editing mode? Please note that the form will no longer be available for filling out and you will need to click the Start filling button again after editing to fill it out.",
+  "PDFFormEditDialogTitle": "Form editing"
 }

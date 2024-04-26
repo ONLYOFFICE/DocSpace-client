@@ -30,7 +30,9 @@ import { frameCallCommand } from "@docspace/shared/utils/common";
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 
 const RoomErrors = ({ t, tReady, isInvalid }) => {
-  const headerText = isInvalid ? t("InvalidLink") : t("Common:ExpiredLink");
+  const headerText = isInvalid
+    ? t("Common:InvalidLink")
+    : t("Common:ExpiredLink");
   const bodyText = isInvalid ? t("LinkDoesNotExist") : t("LinkHasExpired");
 
   useEffect(() => {

@@ -1,7 +1,33 @@
-import { getNewFiles } from "@docspace/common/api/files";
-import { ShareAccessRights } from "@docspace/common/constants";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import { getNewFiles } from "@docspace/shared/api/files";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
-import { Events } from "@docspace/common/constants";
+import { Events } from "@docspace/shared/enums";
 
 class DialogsStore {
   authStore;
@@ -9,9 +35,8 @@ class DialogsStore {
   filesStore;
   selectedFolderStore;
   versionHistoryStore;
+  infoPanelStore;
 
-  sharingPanelVisible = false;
-  roomSharingPanelVisible = false;
   ownerPanelVisible = false;
   moveToPanelVisible = false;
   restorePanelVisible = false;
@@ -23,11 +48,13 @@ class DialogsStore {
   downloadDialogVisible = false;
   emptyTrashDialogVisible = false;
   newFilesPanelVisible = false;
+  editGroupMembersDialogVisible = false;
   conflictResolveDialogVisible = false;
   convertDialogVisible = false;
   selectFileDialogVisible = false;
   convertPasswordDialogVisible = false;
   inviteUsersWarningDialogVisible = false;
+  changeQuotaDialogVisible = false;
   unsavedChangesDialogVisible = false;
   moveToPublicRoomVisible = false;
   moveToPublicRoomData = null;
@@ -78,13 +105,18 @@ class DialogsStore {
   leaveRoomDialogVisible = false;
   changeRoomOwnerIsVisible = false;
   changeRoomOwnerData = null;
+  editMembersGroup = null;
+
+  shareFolderDialogVisible = false;
+  cancelUploadDialogVisible = false;
 
   constructor(
     authStore,
     treeFoldersStore,
     filesStore,
     selectedFolderStore,
-    versionHistoryStore
+    versionHistoryStore,
+    infoPanelStore,
   ) {
     makeAutoObservable(this);
 
@@ -93,6 +125,7 @@ class DialogsStore {
     this.selectedFolderStore = selectedFolderStore;
     this.authStore = authStore;
     this.versionHistoryStore = versionHistoryStore;
+    this.infoPanelStore = infoPanelStore;
   }
   setInviteLanguage = (culture) => {
     this.culture = culture;
@@ -113,14 +146,6 @@ class DialogsStore {
     this.restoreRoomDialogVisible = visible;
   };
 
-  setSharingPanelVisible = (sharingPanelVisible) => {
-    this.sharingPanelVisible = sharingPanelVisible;
-  };
-
-  setRoomSharingPanelVisible = (roomSharingPanelVisible) => {
-    this.roomSharingPanelVisible = roomSharingPanelVisible;
-  };
-
   setIsFolderActions = (isFolderActions) => {
     this.isFolderActions = isFolderActions;
   };
@@ -134,7 +159,7 @@ class DialogsStore {
       visible &&
       !this.filesStore.hasSelection &&
       !this.filesStore.hasBufferSelection &&
-      !this.authStore.infoPanelStore.selection
+      !this.infoPanelStore.infoPanelSelection
     )
       return;
 
@@ -163,7 +188,7 @@ class DialogsStore {
       visible &&
       !this.filesStore.hasSelection &&
       !this.filesStore.hasBufferSelection &&
-      !this.authStore.infoPanelStore.selection
+      !this.infoPanelStore.infoPanelSelection
     ) {
       console.log("No files selected");
       return;
@@ -226,6 +251,9 @@ class DialogsStore {
     this.destFolderId = destFolderId;
   };
 
+  setChangeQuotaDialogVisible = (changeQuotaDialogVisible) => {
+    this.changeQuotaDialogVisible = changeQuotaDialogVisible;
+  };
   setNewFilesPanelVisible = async (visible, newId, item) => {
     const { pathParts } = this.selectedFolderStore;
 
@@ -233,8 +261,8 @@ class DialogsStore {
     const newIds = newId
       ? [newId]
       : pathParts
-      ? pathParts.map((p) => p.id)
-      : [];
+        ? pathParts.map((p) => p.id)
+        : [];
     item &&
       pathParts.push({
         id: item.id,
@@ -285,6 +313,14 @@ class DialogsStore {
     this.newFiles = files;
   };
 
+  setEditGroupMembersDialogVisible = (editGroupMembersDialogVisible) => {
+    this.editGroupMembersDialogVisible = editGroupMembersDialogVisible;
+  };
+
+  setEditMembersGroup = (editMembersGroup) => {
+    this.editMembersGroup = editMembersGroup;
+  };
+
   setConflictResolveDialogVisible = (conflictResolveDialogVisible) => {
     this.conflictResolveDialogVisible = conflictResolveDialogVisible;
   };
@@ -326,15 +362,12 @@ class DialogsStore {
   };
 
   createMasterForm = async (fileInfo) => {
-    let newTitle = fileInfo.title;
-    newTitle = newTitle.substring(0, newTitle.lastIndexOf("."));
-
     const event = new Event(Events.CREATE);
 
     const payload = {
       extension: "docxf",
       id: -1,
-      title: `${newTitle}.docxf`,
+      title: fileInfo.title,
       templateId: fileInfo.id,
     };
 
@@ -406,7 +439,7 @@ class DialogsStore {
   setChangeRoomOwnerIsVisible = (
     visible,
     showBackButton = false,
-    setRoomParams
+    setRoomParams,
   ) => {
     this.changeRoomOwnerIsVisible = visible;
 
@@ -434,6 +467,14 @@ class DialogsStore {
   };
   deselectActiveFiles = () => {
     this.filesStore.setSelected("none");
+  };
+
+  setShareFolderDialogVisible = (visible) => {
+    this.shareFolderDialogVisible = visible;
+  };
+
+  setCancelUploadDialogVisible = (visible) => {
+    this.cancelUploadDialogVisible = visible;
   };
 }
 

@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 const { merge } = require("webpack-merge");
 const path = require("path");
 const ModuleFederationPlugin =
@@ -8,14 +34,16 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-//const combineUrl = require("@docspace/common/utils/combineUrl");
-const minifyJson = require("@docspace/common/utils/minifyJson");
-const sharedDeps = require("@docspace/common/constants/sharedDependencies");
-//const beforeBuild = require("@docspace/common/utils/beforeBuild");
+const BannerPlugin = require("webpack").BannerPlugin;
+
+const minifyJson = require("@docspace/shared/utils/minifyJson");
+const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
+
 const baseConfig = require("./webpack.base.js");
 const runtime = require("../../runtime.json");
 const pkg = require("../package.json");
 const deps = pkg.dependencies || {};
+const version = pkg.version;
 const dateHash = runtime?.date || "";
 
 for (let dep in sharedDeps) {
@@ -143,13 +171,35 @@ const clientConfig = {
   ],
 };
 
+const getBuildDate = () => {
+  const timeElapsed = Date.now();
+  const today = new Date(timeElapsed);
+  return JSON.stringify(today.toISOString().split(".")[0] + "Z");
+};
+
+const getBuildYear = () => {
+  const timeElapsed = Date.now();
+  const today = new Date(timeElapsed);
+  return today.getFullYear();
+};
+
 module.exports = (env, argv) => {
   if (argv.mode === "production") {
+    clientConfig.devtool = "source-map";
     clientConfig.mode = "production";
     clientConfig.optimization = {
       splitChunks: { chunks: "all" },
       minimize: !env.minimize,
-      minimizer: [new TerserPlugin()],
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            format: {
+              comments: /\*\s*\(c\)\s+Copyright\s+Ascensio\s+System\s+SIA/i,
+            },
+          },
+          extractComments: false,
+        }),
+      ],
     };
   } else {
     clientConfig.mode = "development";
@@ -173,6 +223,16 @@ module.exports = (env, argv) => {
           runtime.checksums["config.json"] || dateHash
         }`
       ),
+    }),
+    new BannerPlugin({
+      raw: true,
+      banner: `/*
+* (c) Copyright Ascensio System SIA 2009-${getBuildYear()}. All rights reserved
+*
+* https://www.onlyoffice.com/
+*
+* Version: ${version} (build: ${getBuildDate()})
+*/`,
     }),
   ];
 

@@ -1,32 +1,52 @@
-﻿import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import styled from "styled-components";
+import React, { useState } from "react";
+
+import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import AccessEditFormReactSvgUrl from "PUBLIC_DIR/images/access.edit.form.react.svg?url";
 import FileActionsConvertEditDocReactSvgUrl from "PUBLIC_DIR/images/file.actions.convert.edit.doc.react.svg?url";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.reat.svg?url";
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import Refresh12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/refresh.react.svg?url";
 import Mute12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/mute.react.svg?url";
 import Mute16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
 
-import React, { useState } from "react";
-import styled from "styled-components";
 import { isMobile as isMobileDevice } from "react-device-detect";
 
-import Badge from "@docspace/components/badge";
-import IconButton from "@docspace/components/icon-button";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
+import { Badge } from "@docspace/shared/components/badge";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
-import {
-  FileStatus,
-  RoomsType,
-  ShareAccessRights,
-} from "@docspace/common/constants";
-import { Base } from "@docspace/components/themes";
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
+import { Base } from "@docspace/shared/themes";
 
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
-import { isTablet, isDesktop, size } from "@docspace/components/utils/device";
-import { classNames } from "@docspace/components/utils/classNames";
+import { isTablet, isDesktop, size, classNames } from "@docspace/shared/utils";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -89,6 +109,8 @@ const Badges = ({
   isVisitor,
   onCopyPrimaryLink,
   isArchiveFolder,
+  isRecentTab,
+  canEditing,
 }) => {
   const {
     id,
@@ -103,6 +125,7 @@ const Badges = ({
     mute,
     rootFolderId,
     new: newCount,
+    hasDraft,
   } = item;
 
   const showEditBadge = !locked || item.access === 0;
@@ -110,6 +133,7 @@ const Badges = ({
   const isForm = fileExst === ".oform";
   const isPdf = fileExst === ".pdf";
   const isTile = viewAs === "tile";
+  const isViewTable = viewAs === "table";
 
   const countVersions = versionGroup > 999 ? "999+" : versionGroup;
 
@@ -132,7 +156,7 @@ const Badges = ({
   const iconForm =
     sizeBadge === "medium" ? FormFillRectSvgUrl : AccessEditFormReactSvgUrl;
 
-  const iconEdit = !isForm ? FileActionsConvertEditDocReactSvgUrl : iconForm;
+  const iconEdit = !isPdf ? FileActionsConvertEditDocReactSvgUrl : iconForm;
 
   const iconRefresh = desktopView ? Refresh12ReactSvgUrl : RefreshReactSvgUrl;
 
@@ -192,16 +216,32 @@ const Badges = ({
 
   return fileExst ? (
     <div className="badges additional-badges file__badges">
-      {isEditing && !isVisitor && !isPdf && (
+      {hasDraft && (
+        <BadgeWrapper isTile={isTile}>
+          <Badge
+            noHover
+            isVersionBadge
+            className="badge-version badge-version-current tablet-badge icons-group"
+            backgroundColor={theme.filesBadges.badgeBackgroundColor}
+            label={t("BadgeMyDraftTitle")}
+            title={t("BadgeMyDraftTitle")}
+            {...versionBadgeProps}
+            style={{
+              width: "max-content",
+            }}
+          />
+        </BadgeWrapper>
+      )}
+      {isEditing && !isVisitor && !(isRecentTab && !canEditing) && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           isEditing={isEditing}
           iconName={iconEdit}
           className="badge icons-group is-editing tablet-badge tablet-edit"
           size={sizeBadge}
           onClick={onFilesClick}
           hoverColor={theme.filesBadges.hoverIconColor}
-          title={isForm ? t("Common:FillFormButton") : t("Common:EditButton")}
+          title={isPdf ? t("Common:FillFormButton") : t("Common:EditButton")}
         />
       )}
       {item.viewAccessibility?.MustConvert &&
@@ -209,7 +249,7 @@ const Badges = ({
         !isTrashFolder &&
         !isArchiveFolderRoot && (
           <ColorTheme
-            themeId={ThemeType.IconButton}
+            themeId={ThemeId.IconButton}
             onClick={setConvertDialogVisible}
             iconName={iconRefresh}
             className="badge tablet-badge icons-group can-convert"
@@ -241,6 +281,17 @@ const Badges = ({
           />
         </BadgeWrapper>
       )}
+      {/* {isForm  && ( 
+        <BadgeWrapper isTile={isTile}>
+          <HelpButton
+            color="#F2675A"
+            place="bottom"
+            size={isViewTable ? 12 : 16}
+            className="bagde_alert icons-group"
+            tooltipContent={t("BadgeAlertDescription")}
+          />
+        </BadgeWrapper>
+      )} */}
     </div>
   ) : (
     <div
@@ -251,29 +302,29 @@ const Badges = ({
     >
       {showCopyLinkIcon && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={LinkReactSvgUrl}
           className="badge row-copy-link icons-group tablet-badge"
           size={sizeBadge}
           onClick={onCopyPrimaryLink}
-          title={t("Files:CopyGeneralLink")}
+          title={t("Files:CopySharedLink")}
         />
       )}
 
       {showCopyLinkIcon && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={TabletLinkReactSvgUrl}
           className="badge tablet-row-copy-link icons-group  tablet-badge"
           size={sizeBadge}
           onClick={onCopyPrimaryLink}
-          title={t("Files:CopyGeneralLink")}
+          title={t("Files:CopySharedLink")}
         />
       )}
 
       {isRoom && mute && (
         <ColorTheme
-          themeId={ThemeType.IconButtonMute}
+          themeId={ThemeId.IconButtonMute}
           onClick={onUnmuteClick}
           iconName={iconMute}
           size={sizeBadge}
@@ -283,7 +334,7 @@ const Badges = ({
       )}
       {isRoom && pinned && (
         <ColorTheme
-          themeId={ThemeType.IconButtonPin}
+          themeId={ThemeId.IconButtonPin}
           onClick={onUnpinClick}
           className="badge icons-group is-pinned tablet-badge tablet-pinned"
           iconName={iconPin}

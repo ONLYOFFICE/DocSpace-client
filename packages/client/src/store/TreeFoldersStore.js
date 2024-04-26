@@ -1,10 +1,36 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { makeAutoObservable } from "mobx";
-import { getFoldersTree, getSubfolders } from "@docspace/common/api/files";
-import { FolderType } from "@docspace/common/constants";
+import { getFoldersTree, getSubfolders } from "@docspace/shared/api/files";
+import { FolderType } from "@docspace/shared/enums";
 
 class TreeFoldersStore {
   selectedFolderStore;
-  authStore;
+  settingsStore;
   publicRoomStore;
 
   treeFolders = [];
@@ -13,11 +39,11 @@ class TreeFoldersStore {
   rootFoldersTitles = {};
   isLoadingNodes = false;
 
-  constructor(selectedFolderStore, authStore, publicRoomStore) {
+  constructor(selectedFolderStore, settingsStore, publicRoomStore) {
     makeAutoObservable(this);
 
     this.selectedFolderStore = selectedFolderStore;
-    this.authStore = authStore;
+    this.settingsStore = settingsStore;
     this.publicRoomStore = publicRoomStore;
   }
 
@@ -32,7 +58,7 @@ class TreeFoldersStore {
   };
 
   listenTreeFolders = (treeFolders) => {
-    const { socketHelper } = this.authStore.settingsStore;
+    const { socketHelper } = this.settingsStore;
 
     if (treeFolders.length > 0) {
       socketHelper.emit({
@@ -163,7 +189,7 @@ class TreeFoldersStore {
 
   get favoritesFolder() {
     return this.treeFolders.find(
-      (x) => x.rootFolderType === FolderType.Favorites
+      (x) => x.rootFolderType === FolderType.Favorites,
     );
   }
 
@@ -177,13 +203,13 @@ class TreeFoldersStore {
 
   get archiveFolder() {
     return this.treeFolders.find(
-      (x) => x.rootFolderType === FolderType.Archive
+      (x) => x.rootFolderType === FolderType.Archive,
     );
   }
 
   get privacyFolder() {
     return this.treeFolders.find(
-      (x) => x.rootFolderType === FolderType.Privacy
+      (x) => x.rootFolderType === FolderType.Privacy,
     );
   }
 
@@ -214,6 +240,23 @@ class TreeFoldersStore {
   get recycleBinFolderId() {
     return this.recycleBinFolder ? this.recycleBinFolder.id : null;
   }
+
+  getIsAccountsPeople = () => {
+    return window.location.pathname.includes("accounts/people");
+  };
+
+  getIsAccountsInsideGroup = () => {
+    const insideGroupPattern = /accounts\/groups\/.*\/filter/;
+
+    return insideGroupPattern.test(window.location.pathname);
+  };
+
+  getIsAccountsGroups = () => {
+    return (
+      window.location.pathname.includes("accounts/groups") &&
+      !this.getIsAccountsInsideGroup()
+    );
+  };
 
   get isPersonalRoom() {
     return (
@@ -296,6 +339,14 @@ class TreeFoldersStore {
 
   get isPersonalFolderRoot() {
     return FolderType.USER === this.selectedFolderStore.rootFolderType;
+  }
+
+  get isRecentTab() {
+    return this.selectedFolderStore.rootFolderType === FolderType.Recent;
+  }
+
+  get isRoot() {
+    return this.selectedFolderStore?.pathParts?.length === 1;
   }
 
   get selectedKeys() {

@@ -1,13 +1,39 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Text from "@docspace/components/text";
-import { NotificationsType } from "@docspace/common/constants";
-import { getNotificationSubscription } from "@docspace/common/api/settings";
-import Loaders from "@docspace/common/components/Loaders";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
-import toastr from "@docspace/components/toast/toastr";
+import { Text } from "@docspace/shared/components/text";
+import { NotificationsType } from "@docspace/shared/enums";
+import { getNotificationSubscription } from "@docspace/shared/api/settings";
+import NotificationsLoader from "@docspace/shared/skeletons/notifications";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { toastr } from "@docspace/shared/components/toast";
 
 import UsefulTipsContainer from "./sub-components/UsefulTipsContainer";
 import RoomsActionsContainer from "./sub-components/RoomsActionsContainer";
@@ -32,15 +58,14 @@ const Notifications = ({ setSubscriptions, isFirstSubscriptionsLoad }) => {
     ];
 
     try {
-      const [badges, roomsActivity, dailyFeed, tips] = await Promise.all(
-        requests
-      );
+      const [badges, roomsActivity, dailyFeed, tips] =
+        await Promise.all(requests);
 
       setSubscriptions(
         badges.isEnabled,
         roomsActivity.isEnabled,
         dailyFeed.isEnabled,
-        tips.isEnabled
+        tips.isEnabled,
       );
 
       setIsLoading(false);
@@ -85,7 +110,7 @@ const Notifications = ({ setSubscriptions, isFirstSubscriptionsLoad }) => {
       </StyledTextContent>
       <div className="badges-container">
         {isLoadingContent ? (
-          <Loaders.Notifications />
+          <NotificationsLoader />
         ) : (
           <RoomsActionsContainer
             t={t}
@@ -109,7 +134,7 @@ const Notifications = ({ setSubscriptions, isFirstSubscriptionsLoad }) => {
         )}
       </StyledTextContent>
       {isLoadingContent ? (
-        <Loaders.Notifications count={3} />
+        <NotificationsLoader count={3} />
       ) : (
         <div className="badges-container">
           <RoomsActivityContainer

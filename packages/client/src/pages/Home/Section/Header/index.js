@@ -1,4 +1,30 @@
-﻿import FolderLockedReactSvgUrl from "PUBLIC_DIR/images/folder.locked.react.svg?url";
+﻿// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import FolderLockedReactSvgUrl from "PUBLIC_DIR/images/folder.locked.react.svg?url";
 import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
@@ -19,6 +45,8 @@ import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
+import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg?url";
+import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/catalog.trash.react.svg?url";
@@ -30,6 +58,7 @@ import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
+import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.reat.svg?url";
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -37,18 +66,18 @@ import { withTranslation } from "react-i18next";
 import { isMobile, isTablet } from "react-device-detect";
 import styled, { css } from "styled-components";
 import copy from "copy-to-clipboard";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 
-import Loaders from "@docspace/common/components/Loaders";
-import Navigation from "@docspace/common/components/Navigation";
-import FilesFilter from "@docspace/common/api/files/filter";
-import { resendInvitesAgain } from "@docspace/common/api/people";
+import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
+import Navigation from "@docspace/shared/components/navigation";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { resendInvitesAgain } from "@docspace/shared/api/people";
 
-import DropDownItem from "@docspace/components/drop-down-item";
-import { tablet, mobile } from "@docspace/components/utils/device";
-import { Consumer } from "@docspace/components/utils/context";
-import toastr from "@docspace/components/toast/toastr";
-import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { tablet, mobile, Consumer, getLogoUrl } from "@docspace/shared/utils";
+
+import { toastr } from "@docspace/shared/components/toast";
+import { TableGroupMenu } from "@docspace/shared/components/table";
 import {
   Events,
   EmployeeType,
@@ -56,14 +85,17 @@ import {
   DeviceType,
   FolderType,
   ShareAccessRights,
-} from "@docspace/common/constants";
+  WhiteLabelLogoType,
+} from "@docspace/shared/enums";
+import { getLogoFromPath } from "@docspace/shared/utils";
+import { copyShareLink } from "@docspace/shared/utils/copy";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
-import { getLogoFromPath } from "@docspace/common/utils";
+import TariffBar from "SRC_DIR/components/TariffBar";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -113,11 +145,7 @@ const StyledContainer = styled.div`
 
   .header-container {
     min-height: 33px;
-
-    ${(props) =>
-      props.hideContextMenuInsideArchiveRoom &&
-      `.option-button {
-      display: none;}`}
+    align-items: center;
 
     @media ${tablet} {
       height: 61px;
@@ -126,12 +154,51 @@ const StyledContainer = styled.div`
     @media ${mobile} {
       height: 53px;
     }
+
+    .navigation_button {
+      display: block;
+      margin: 0 16px;
+      overflow: visible;
+      min-width: 50px;
+
+      .button-content {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        display: block;
+        padding-top: 3px;
+      }
+
+      @media ${tablet} {
+        display: ${({ isInfoPanelVisible }) =>
+          isInfoPanelVisible ? "none" : "block"};
+      }
+
+      @media ${mobile} {
+        display: none;
+      }
+    }
+
+    .title-icon {
+      svg {
+        path {
+          fill: ${(props) => props.theme.backgroundColor};
+        }
+        rect {
+          stroke: ${(props) => props.theme.backgroundColor};
+        }
+      }
+    }
   }
 `;
 
 const SectionHeaderContent = (props) => {
   const {
     currentFolderId,
+    currentGroup,
+    insideGroupTempTitle,
+    getGroupContextOptions,
     setSelectFileDialogVisible,
     t,
     isPrivacyFolder,
@@ -167,7 +234,6 @@ const SectionHeaderContent = (props) => {
     isGroupMenuBlocked,
 
     onClickBack,
-    hideContextMenuInsideArchiveRoom,
     activeFiles,
     activeFolders,
     selectedFolder,
@@ -189,6 +255,7 @@ const SectionHeaderContent = (props) => {
     setRestoreRoomDialogVisible,
     setArchiveDialogVisible,
     onCopyLink,
+    setShareFolderDialogVisible,
 
     setSelected,
     cbMenuItems,
@@ -202,13 +269,18 @@ const SectionHeaderContent = (props) => {
 
     getAccountsHeaderMenu,
     isAccountsHeaderVisible,
+    isGroupsHeaderVisible,
+    isGroupsHeaderIndeterminate,
+    isGroupsHeaderChecked,
     isAccountsHeaderIndeterminate,
     isAccountsHeaderChecked,
     accountsCbMenuItems,
     getAccountsMenuItemId,
     getAccountsCheckboxItemLabel,
     setAccountsSelected,
+    setGroupsSelected,
     isOwner,
+    isRoomAdmin,
     isCollaborator,
     setInvitePanelOptions,
     isEmptyPage,
@@ -219,8 +291,6 @@ const SectionHeaderContent = (props) => {
     categoryType,
     isPublicRoom,
     theme,
-    whiteLabelLogoUrls,
-    setRoomSharingPanelVisible,
     downloadAction,
     isPublicRoomType,
     isCustomRoomType,
@@ -230,16 +300,28 @@ const SectionHeaderContent = (props) => {
     moveToPublicRoom,
     currentDeviceType,
     isFrame,
+    showTitle,
+    hideInfoPanel,
     onClickArchive,
     setLeaveRoomDialogVisible,
     inRoom,
     onClickCreateRoom,
+    onCreateAndCopySharedLink,
+    showNavigationButton,
+    deleteRooms,
+    setSelection,
+    startUpload,
   } = props;
 
   const navigate = useNavigate();
   const location = useLocation();
+  const { groupId } = useParams();
+
+  const isInsideGroup = !!groupId;
 
   const isAccountsPage = location.pathname.includes("/accounts");
+  const isGroupsPage =
+    location.pathname.includes("/accounts/groups") && !isInsideGroup;
 
   const isSettingsPage = location.pathname.includes("/settings");
 
@@ -278,6 +360,15 @@ const SectionHeaderContent = (props) => {
     setSelectFileDialogVisible(true);
   };
 
+  const onFileChange = React.useCallback(
+    (e) => {
+      startUpload(e.target.files, null, t);
+    },
+    [startUpload, t],
+  );
+
+  const onInputClick = React.useCallback((e) => (e.target.value = null), []);
+
   const onShowGallery = () => {
     const initOformFilter = (
       oformsFilter || oformsFilter.getDefault()
@@ -298,58 +389,80 @@ const SectionHeaderContent = (props) => {
   };
 
   const getContextOptionsPlus = () => {
+    const accountsUserOptions = [
+      isOwner && {
+        id: "accounts-add_administrator",
+        className: "main-button_drop-down",
+        icon: PersonAdminReactSvgUrl,
+        label: t("Common:DocSpaceAdmin"),
+        onClick: onInvite,
+        "data-type": EmployeeType.Admin,
+        key: "administrator",
+      },
+      {
+        id: "accounts-add_manager",
+        className: "main-button_drop-down",
+        icon: PersonManagerReactSvgUrl,
+        label: t("Common:RoomAdmin"),
+        onClick: onInvite,
+        "data-type": EmployeeType.User,
+        key: "manager",
+      },
+      {
+        id: "accounts-add_collaborator",
+        className: "main-button_drop-down",
+        icon: PersonDefaultReactSvgUrl,
+        label: t("Common:PowerUser"),
+        onClick: onInvite,
+        "data-type": EmployeeType.Collaborator,
+        key: "collaborator",
+      },
+      {
+        id: "accounts-add_user",
+        className: "main-button_drop-down",
+        icon: PersonDefaultReactSvgUrl,
+        label: t("Common:User"),
+        onClick: onInvite,
+        "data-type": EmployeeType.Guest,
+        key: "user",
+      },
+      {
+        key: "separator",
+        isSeparator: true,
+      },
+      {
+        id: "accounts-add_invite-again",
+        className: "main-button_drop-down",
+        icon: InviteAgainReactSvgUrl,
+        label: t("People:LblInviteAgain"),
+        onClick: onInviteAgain,
+        "data-action": "invite-again",
+        key: "invite-again",
+      },
+    ];
+
+    const accountsFullOptions = [
+      {
+        id: "actions_invite_user",
+        className: "main-button_drop-down",
+        icon: PersonUserReactSvgUrl,
+        label: t("Common:Invite"),
+        key: "new-user",
+        items: accountsUserOptions,
+      },
+      {
+        id: "create_group",
+        className: "main-button_drop-down",
+        icon: GroupReactSvgUrl,
+        label: t("PeopleTranslations:CreateGroup"),
+        onClick: onCreateGroup,
+        action: "group",
+        key: "group",
+      },
+    ];
+
     if (isAccountsPage) {
-      return [
-        isOwner && {
-          id: "accounts-add_administrator",
-          className: "main-button_drop-down",
-          icon: PersonAdminReactSvgUrl,
-          label: t("Common:DocSpaceAdmin"),
-          onClick: onInvite,
-          "data-type": EmployeeType.Admin,
-          key: "administrator",
-        },
-        {
-          id: "accounts-add_manager",
-          className: "main-button_drop-down",
-          icon: PersonManagerReactSvgUrl,
-          label: t("Common:RoomAdmin"),
-          onClick: onInvite,
-          "data-type": EmployeeType.User,
-          key: "manager",
-        },
-        {
-          id: "accounts-add_collaborator",
-          className: "main-button_drop-down",
-          icon: PersonReactSvgUrl,
-          label: t("Common:PowerUser"),
-          onClick: onInvite,
-          "data-type": EmployeeType.Collaborator,
-          key: "collaborator",
-        },
-        {
-          id: "accounts-add_user",
-          className: "main-button_drop-down",
-          icon: PersonUserReactSvgUrl,
-          label: t("Common:User"),
-          onClick: onInvite,
-          "data-type": EmployeeType.Guest,
-          key: "user",
-        },
-        {
-          key: "separator",
-          isSeparator: true,
-        },
-        {
-          id: "accounts-add_invite-again",
-          className: "main-button_drop-down",
-          icon: InviteAgainReactSvgUrl,
-          label: t("People:LblInviteAgain"),
-          onClick: onInviteAgain,
-          "data-action": "invite-again",
-          key: "invite-again",
-        },
-      ];
+      return isRoomAdmin ? accountsUserOptions : accountsFullOptions;
     }
 
     const options = isRoomsFolder
@@ -462,7 +575,7 @@ const SectionHeaderContent = (props) => {
 
   const createLinkForPortalUsers = () => {
     copy(
-      `${window.location.origin}/filter?folder=${currentFolderId}` //TODO: Change url by category
+      `${window.location.origin}/filter?folder=${currentFolderId}`, //TODO: Change url by category
     );
 
     toastr.success(t("Translations:LinkCopySuccess"));
@@ -509,6 +622,10 @@ const SectionHeaderContent = (props) => {
     return setSharingPanelVisible(true);
   };
 
+  const onClickShare = () => {
+    setShareFolderDialogVisible(true);
+  };
+
   const onDeleteAction = () => {
     setIsFolderActions(true);
 
@@ -526,7 +643,7 @@ const SectionHeaderContent = (props) => {
       };
 
       deleteAction(translations, [selectedFolder], true).catch((err) =>
-        toastr.error(err)
+        toastr.error(err),
       );
     }
   };
@@ -580,7 +697,13 @@ const SectionHeaderContent = (props) => {
   };
 
   const onShareRoom = () => {
-    setRoomSharingPanelVisible(true);
+    copy(window.location.href);
+    toastr.success(t("Translations:LinkCopySuccess"));
+  };
+
+  const onDeleteRoomInArchive = () => {
+    setSelection([selectedFolder]);
+    deleteRooms(t);
   };
 
   const getContextOptionsFolder = () => {
@@ -607,23 +730,21 @@ const SectionHeaderContent = (props) => {
       isPublicRoom,
     } = props;
 
+    const isArchive = selectedFolder.rootFolderType === FolderType.Archive;
+
     if (isPublicRoom) {
       return [
-        security?.Download && {
-          key: "public-room_edit",
-          label: t("Files:DownloadAll"),
-          icon: DownloadReactSvgUrl,
-          onClick: onDownloadAll,
-        },
-        security?.Download && {
-          key: "public-room_separator",
-          isSeparator: true,
-        },
         {
           key: "public-room_share",
-          label: t("Files:ShareRoom"),
-          icon: ShareReactSvgUrl,
+          label: t("Files:CopyLink"),
+          icon: TabletLinkReactSvgUrl,
           onClick: onShareRoom,
+        },
+        security?.Download && {
+          key: "public-room_edit",
+          label: t("Common:Download"),
+          icon: DownloadReactSvgUrl,
+          onClick: onDownloadAll,
         },
       ];
     }
@@ -651,13 +772,19 @@ const SectionHeaderContent = (props) => {
       ];
     }
 
+    if (isInsideGroup) {
+      return getGroupContextOptions(t, currentGroup, false, true);
+    }
+
+    const canShare = isPersonalRoom && !isCollaborator;
+
     return [
       {
         id: "header_option_sharing-settings",
         key: "sharing-settings",
-        label: t("SharingPanel:SharingSettingsTitle"),
-        onClick: onOpenSharingPanel,
-        disabled: true,
+        label: t("Files:Share"),
+        onClick: onClickShare,
+        disabled: !canShare,
         icon: ShareReactSvgUrl,
       },
       {
@@ -676,7 +803,9 @@ const SectionHeaderContent = (props) => {
         disabled:
           isRecycleBinFolder ||
           isPersonalRoom ||
-          ((isPublicRoomType || isCustomRoomType) && haveLinksRight),
+          ((isPublicRoomType || isCustomRoomType) &&
+            haveLinksRight &&
+            !isArchive),
         icon: InvitationLinkReactSvgUrl,
       },
       {
@@ -709,7 +838,7 @@ const SectionHeaderContent = (props) => {
         label: t("Common:ReconnectStorage"),
         icon: ReconnectSvgUrl,
         onClick: () => onClickReconnectStorage(selectedFolder, t),
-        disabled: !selectedFolder.providerKey || !isRoom,
+        disabled: !security?.Reconnect,
       },
       {
         id: "header_option_edit-room",
@@ -722,22 +851,25 @@ const SectionHeaderContent = (props) => {
       {
         id: "header_option_copy-external-link",
         key: "copy-external-link",
-        label: t("Files:CopyGeneralLink"),
+        label: t("Files:CopySharedLink"),
         icon: CopyToReactSvgUrl,
         onClick: async () => {
           if (primaryLink) {
-            copy(primaryLink.sharedTo.shareLink);
+            copyShareLink(primaryLink.sharedTo.shareLink);
             toastr.success(t("Translations:LinkCopySuccess"));
           } else {
             const link = await getPrimaryLink(currentFolderId);
             if (link) {
-              copy(link.sharedTo.shareLink);
+              copyShareLink(link.sharedTo.shareLink);
               toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
               setExternalLink(link);
             }
           }
         },
-        disabled: (!isPublicRoomType && !isCustomRoomType) || !haveLinksRight,
+        disabled:
+          (!isPublicRoomType && !isCustomRoomType) ||
+          !haveLinksRight ||
+          isArchive,
       },
       {
         id: "header_option_invite-users-to-room",
@@ -768,7 +900,7 @@ const SectionHeaderContent = (props) => {
         label: t("MoveToArchive"),
         icon: RoomArchiveSvgUrl,
         onClick: onClickArchiveAction,
-        disabled: !isRoom || !security?.Move,
+        disabled: !isRoom || !security?.Move || isArchive,
         "data-action": "archive",
         action: "archive",
       },
@@ -789,7 +921,7 @@ const SectionHeaderContent = (props) => {
         label: t("LeaveTheRoom"),
         icon: LeaveRoomSvgUrl,
         onClick: onLeaveRoom,
-        disabled: isArchiveFolder || !inRoom || isPublicRoom,
+        disabled: isArchive || !inRoom || isPublicRoom,
       },
       {
         id: "header_option_download",
@@ -798,6 +930,14 @@ const SectionHeaderContent = (props) => {
         onClick: onDownloadAction,
         disabled: !security?.Download,
         icon: DownloadReactSvgUrl,
+      },
+      {
+        id: "header_option_unarchive-room",
+        key: "unarchive-room",
+        label: t("Common:Restore"),
+        onClick: onClickArchiveAction,
+        disabled: !isArchive || !isRoom,
+        icon: MoveReactSvgUrl,
       },
       {
         id: "header_option_move-to",
@@ -812,7 +952,9 @@ const SectionHeaderContent = (props) => {
         key: "copy",
         label: t("Common:Copy"),
         onClick: onCopyAction,
-        disabled: isDisabled || !security?.CopyTo,
+        disabled:
+          isDisabled || (isArchive ? !security?.Copy : !security?.CopyTo),
+
         icon: CopyReactSvgUrl,
       },
       {
@@ -833,8 +975,8 @@ const SectionHeaderContent = (props) => {
         id: "header_option_delete",
         key: "delete",
         label: t("Common:Delete"),
-        onClick: onDeleteAction,
-        disabled: isDisabled || !security?.Delete,
+        onClick: isArchive ? onDeleteRoomInArchive : onDeleteAction,
+        disabled: isArchive ? !isRoom : isDisabled || !security?.Delete,
         icon: CatalogTrashReactSvgUrl,
       },
     ];
@@ -890,7 +1032,9 @@ const SectionHeaderContent = (props) => {
 
   const onChange = (checked) => {
     isAccountsPage
-      ? setAccountsSelected(checked ? "all" : "none")
+      ? !isGroupsPage
+        ? setAccountsSelected(checked ? "all" : "none")
+        : setGroupsSelected(checked ? "all" : "none")
       : setSelected(checked ? "all" : "none");
   };
 
@@ -909,7 +1053,7 @@ const SectionHeaderContent = (props) => {
 
     const path = getCategoryUrl(
       getCategoryTypeByFolderType(rootFolderType, id),
-      id
+      id,
     );
 
     const filter = FilesFilter.getDefault();
@@ -934,6 +1078,7 @@ const SectionHeaderContent = (props) => {
           : "",
     };
 
+    setSelected("none");
     setIsLoading(true);
 
     window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, { state });
@@ -958,13 +1103,22 @@ const SectionHeaderContent = (props) => {
   const onInviteAgain = React.useCallback(() => {
     resendInvitesAgain()
       .then(() =>
-        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios"))
+        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
       )
       .catch((err) => toastr.error(err));
   }, [resendInvitesAgain]);
 
+  const onNavigationButtonClick = () => {
+    onCreateAndCopySharedLink(selectedFolder, t);
+  };
+
+  const onCreateGroup = React.useCallback(() => {
+    const event = new Event(Events.GROUP_CREATE);
+    window.dispatchEvent(event);
+  }, []);
+
   const headerMenu = isAccountsPage
-    ? getAccountsHeaderMenu(t)
+    ? getAccountsHeaderMenu(t, isGroupsPage)
     : getHeaderMenu(t);
 
   const menuItems = getMenuItems();
@@ -979,13 +1133,17 @@ const SectionHeaderContent = (props) => {
     isMobileView: currentDeviceType === DeviceType.mobile,
   };
 
-  if (isAccountsPage) {
+  if (isAccountsPage && !(isGroupsPage && isRoomAdmin)) {
     tableGroupMenuVisible =
-      isAccountsHeaderVisible &&
+      (!isGroupsPage ? isAccountsHeaderVisible : isGroupsHeaderVisible) &&
       tableGroupMenuVisible &&
       headerMenu.some((x) => !x.disabled);
-    tableGroupMenuProps.isChecked = isAccountsHeaderChecked;
-    tableGroupMenuProps.isIndeterminate = isAccountsHeaderIndeterminate;
+    tableGroupMenuProps.isChecked = !isGroupsPage
+      ? isAccountsHeaderChecked
+      : isGroupsHeaderChecked;
+    tableGroupMenuProps.isIndeterminate = !isGroupsPage
+      ? isAccountsHeaderIndeterminate
+      : isGroupsHeaderIndeterminate;
     tableGroupMenuProps.withoutInfoPanelToggler = false;
   } else {
     tableGroupMenuVisible = isHeaderVisible && tableGroupMenuVisible;
@@ -1007,13 +1165,21 @@ const SectionHeaderContent = (props) => {
       ? stateIsRoot
       : isRootFolder || isAccountsPage || isSettingsPage;
 
+  const getInsideGroupTitle = () => {
+    return isLoading || !currentGroup?.name
+      ? insideGroupTempTitle
+      : currentGroup?.name;
+  };
+
   const currentTitle = isSettingsPage
     ? t("Common:Settings")
     : isAccountsPage
-    ? t("Common:Accounts")
-    : isLoading && stateTitle
-    ? stateTitle
-    : title;
+      ? isInsideGroup
+        ? getInsideGroupTitle()
+        : t("Common:Accounts")
+      : isLoading && stateTitle
+        ? stateTitle
+        : title;
 
   const currentCanCreate =
     isLoading && location?.state?.hasOwnProperty("canCreate")
@@ -1026,6 +1192,15 @@ const SectionHeaderContent = (props) => {
       : navigationPath?.length > 1 &&
         navigationPath[navigationPath?.length - 2].title;
 
+  const accountsNavigationPath = isInsideGroup && [
+    {
+      id: 0,
+      title: t("Common:Accounts"),
+      isRoom: false,
+      isRootRoom: true,
+    },
+  ];
+
   const currentIsPublicRoomType =
     isLoading && typeof stateIsPublicRoomType === "boolean"
       ? stateIsPublicRoomType
@@ -1034,39 +1209,37 @@ const SectionHeaderContent = (props) => {
   const isCurrentRoom =
     isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
 
-  if (showHeaderLoader) return <Loaders.SectionHeader />;
+  if (showHeaderLoader) return <SectionHeaderSkeleton />;
 
   const insideTheRoom =
     (categoryType === CategoryType.SharedRoom ||
       categoryType === CategoryType.Archive) &&
     !isCurrentRoom;
 
-  const logo = !theme.isBase
-    ? getLogoFromPath(whiteLabelLogoUrls[0]?.path?.dark)
-    : getLogoFromPath(whiteLabelLogoUrls[0]?.path?.light);
-  const burgerLogo = !theme.isBase
-    ? getLogoFromPath(whiteLabelLogoUrls[5]?.path?.dark)
-    : getLogoFromPath(whiteLabelLogoUrls[5]?.path?.light);
+  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
+  const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !theme.isBase);
+
+  const navigationButtonLabel = showNavigationButton
+    ? t("Files:ShareRoom")
+    : null;
 
   return (
     <Consumer key="header">
       {(context) => (
-        <StyledContainer
-          isRecycleBinFolder={isRecycleBinFolder}
-          hideContextMenuInsideArchiveRoom={hideContextMenuInsideArchiveRoom}
-        >
+        <StyledContainer isRecycleBinFolder={isRecycleBinFolder}>
           {tableGroupMenuVisible ? (
-            <TableGroupMenu {...tableGroupMenuProps} />
+            <TableGroupMenu {...tableGroupMenuProps} withComboBox />
           ) : (
             <div className="header-container">
               <Navigation
                 sectionWidth={context.sectionWidth}
                 showText={showText}
-                isRootFolder={isRoot}
+                isRootFolder={isRoot && !isInsideGroup}
                 canCreate={
                   (currentCanCreate || isAccountsPage) &&
                   !isSettingsPage &&
-                  !isPublicRoom
+                  !isPublicRoom &&
+                  !isInsideGroup
                 }
                 rootRoomTitle={currentRootRoomTitle}
                 title={currentTitle}
@@ -1075,7 +1248,9 @@ const SectionHeaderContent = (props) => {
                 personal={personal}
                 tReady={tReady}
                 menuItems={menuItems}
-                navigationItems={navigationPath}
+                navigationItems={
+                  !isInsideGroup ? navigationPath : accountsNavigationPath
+                }
                 getContextOptionsPlus={getContextOptionsPlus}
                 getContextOptionsFolder={getContextOptionsFolder}
                 onClose={onClose}
@@ -1100,19 +1275,47 @@ const SectionHeaderContent = (props) => {
                 withMenu={!isRoomsFolder}
                 onPlusClick={onCreateRoom}
                 isEmptyPage={isEmptyPage}
-                isRoom={isCurrentRoom}
-                hideInfoPanel={isSettingsPage || isPublicRoom}
+                isRoom={isCurrentRoom || isAccountsPage}
+                hideInfoPanel={hideInfoPanel || isSettingsPage || isPublicRoom}
                 withLogo={isPublicRoom && logo}
                 burgerLogo={isPublicRoom && burgerLogo}
                 isPublicRoom={isPublicRoom}
                 titleIcon={
                   currentIsPublicRoomType && !isPublicRoom && PublicRoomIconUrl
                 }
-                showRootFolderTitle={insideTheRoom}
+                showRootFolderTitle={insideTheRoom || isInsideGroup}
                 currentDeviceType={currentDeviceType}
                 isFrame={isFrame}
+                showTitle={isFrame ? showTitle : true}
+                navigationButtonLabel={navigationButtonLabel}
+                onNavigationButtonClick={onNavigationButtonClick}
+                tariffBar={<TariffBar />}
+                showNavigationButton={!!showNavigationButton}
               />
             </div>
+          )}
+          {isFrame && (
+            <>
+              <input
+                id="customFileInput"
+                className="custom-file-input"
+                multiple
+                type="file"
+                style={{ display: "none" }}
+                onChange={onFileChange}
+                onClick={onInputClick}
+              />
+              <input
+                id="customFolderInput"
+                className="custom-file-input"
+                webkitdirectory=""
+                mozdirectory=""
+                type="file"
+                style={{ display: "none" }}
+                onChange={onFileChange}
+                onClick={onInputClick}
+              />
+            </>
           )}
         </StyledContainer>
       )}
@@ -1122,23 +1325,29 @@ const SectionHeaderContent = (props) => {
 
 export default inject(
   ({
-    auth,
     filesStore,
     peopleStore,
     dialogsStore,
     selectedFolderStore,
     treeFoldersStore,
     filesActionsStore,
-    settingsStore,
+    filesSettingsStore,
     clientLoadingStore,
     publicRoomStore,
     contextOptionsStore,
     oformsStore,
     pluginStore,
+    infoPanelStore,
+    userStore,
+    currentTariffStatusStore,
+    settingsStore,
+    uploadDataStore,
   }) => {
-    const isOwner = auth.userStore.user?.isOwner;
-    const isAdmin = auth.userStore.user?.isAdmin;
-    const isCollaborator = auth?.userStore?.user?.isCollaborator;
+    const { startUpload } = uploadDataStore;
+    const isOwner = userStore.user?.isOwner;
+    const isAdmin = userStore.user?.isAdmin;
+    const isRoomAdmin = userStore.user?.isRoomAdmin;
+    const isCollaborator = userStore.user?.isCollaborator;
 
     const {
       setSelected,
@@ -1165,6 +1374,7 @@ export default inject(
       clearFiles,
       categoryType,
       getPrimaryLink,
+      setSelection,
     } = filesStore;
 
     const {
@@ -1193,8 +1403,8 @@ export default inject(
       setRestoreAllArchive,
       setInvitePanelOptions,
       setInviteUsersWarningDialogVisible,
-      setRoomSharingPanelVisible,
       setLeaveRoomDialogVisible,
+      setShareFolderDialogVisible,
     } = dialogsStore;
 
     const {
@@ -1216,11 +1426,12 @@ export default inject(
       emptyTrashInProgress,
       moveToPublicRoom,
       onClickCreateRoom,
+      deleteRooms,
     } = filesActionsStore;
 
     const { oformsFilter } = oformsStore;
 
-    const { setIsVisible, isVisible } = auth.infoPanelStore;
+    const { setIsVisible, isVisible } = infoPanelStore;
 
     const {
       title,
@@ -1232,18 +1443,20 @@ export default inject(
       inRoom,
       access,
       canCopyPublicLink,
+      rootFolderType,
     } = selectedFolderStore;
 
-    const selectedFolder = { ...selectedFolderStore };
-
+    const selectedFolder = selectedFolderStore.getSelectedFolder();
     const {
-      enablePlugins,
-      theme,
-      whiteLabelLogoUrls,
-      isFrame,
-      currentDeviceType,
-    } = auth.settingsStore;
-    const { isGracePeriod } = auth.currentTariffStatusStore;
+      currentGroup,
+      getGroupContextOptions,
+      setSelected: setGroupsSelected,
+      insideGroupTempTitle,
+    } = peopleStore.groupsStore;
+
+    const { enablePlugins, theme, frameConfig, isFrame, currentDeviceType } =
+      settingsStore;
+    const { isGracePeriod } = currentTariffStatusStore;
 
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
@@ -1256,6 +1469,7 @@ export default inject(
       onClickArchive,
       onClickReconnectStorage,
       onCopyLink,
+      onCreateAndCopySharedLink,
     } = contextOptionsStore;
 
     const canRestoreAll = isArchiveFolder && roomsForRestore.length > 0;
@@ -1263,10 +1477,6 @@ export default inject(
     const canDeleteAll = isArchiveFolder && roomsForDelete.length > 0;
 
     const isEmptyArchive = !canRestoreAll && !canDeleteAll;
-
-    const hideContextMenuInsideArchiveRoom = isArchiveFolderRoot
-      ? !isArchiveFolder
-      : false;
 
     const {
       selectionStore,
@@ -1276,6 +1486,9 @@ export default inject(
 
     const {
       isHeaderVisible: isAccountsHeaderVisible,
+      isGroupsHeaderVisible,
+      isGroupsHeaderIndeterminate,
+      isGroupsHeaderChecked,
       isHeaderIndeterminate: isAccountsHeaderIndeterminate,
       isHeaderChecked: isAccountsHeaderChecked,
       cbMenuItems: accountsCbMenuItems,
@@ -1284,6 +1497,7 @@ export default inject(
     } = headerMenuStore;
 
     const { setSelected: setAccountsSelected } = selectionStore;
+    const { isPublicRoom, primaryLink, setExternalLink } = publicRoomStore;
 
     let folderPath = navigationPath;
 
@@ -1291,17 +1505,30 @@ export default inject(
       folderPath = navigationPath.filter((item) => !item.isRootRoom);
     }
 
-    const isRoot = isFrame
-      ? pathParts?.length === 1 || pathParts?.length === 2
-      : pathParts?.length === 1;
+    const isRoot =
+      isFrame && frameConfig?.id
+        ? pathParts?.length === 1 || pathParts?.length === 2
+        : pathParts?.length === 1;
 
-    const { isPublicRoom, primaryLink, setExternalLink } = publicRoomStore;
+    const haveLinksRight =
+      access === ShareAccessRights.RoomManager ||
+      access === ShareAccessRights.None;
+
+    const isArchive = rootFolderType === FolderType.Archive;
+
+    const showNavigationButton = isLoading
+      ? false
+      : !isPublicRoom &&
+        !isArchive &&
+        canCopyPublicLink &&
+        (isPublicRoomType || isCustomRoomType) &&
+        primaryLink;
 
     return {
       isGracePeriod,
       setInviteUsersWarningDialogVisible,
-      showText: auth.settingsStore.showText,
-      isDesktop: auth.settingsStore.isDesktopClient,
+      showText: settingsStore.showText,
+      isDesktop: settingsStore.isDesktopClient,
       showHeaderLoader,
       isLoading,
       isRootFolder: isPublicRoom && !folderPath?.length ? true : isRoot,
@@ -1319,9 +1546,9 @@ export default inject(
       isHeaderIndeterminate,
       isHeaderChecked,
       isThirdPartySelection,
-      isTabletView: auth.settingsStore.isTabletView,
-      confirmDelete: settingsStore.confirmDelete,
-      personal: auth.settingsStore.personal,
+      isTabletView: settingsStore.isTabletView,
+      confirmDelete: filesSettingsStore.confirmDelete,
+      personal: settingsStore.personal,
       cbMenuItems,
       setSelectedNode: treeFoldersStore.setSelectedNode,
       getFolderInfo,
@@ -1349,7 +1576,6 @@ export default inject(
       isEmptyArchive,
       isPrivacyFolder,
       isArchiveFolder,
-      hideContextMenuInsideArchiveRoom,
 
       setIsLoading,
 
@@ -1393,6 +1619,10 @@ export default inject(
 
       getAccountsHeaderMenu,
       isAccountsHeaderVisible,
+      isGroupsHeaderVisible,
+      isGroupsHeaderIndeterminate,
+      isGroupsHeaderChecked,
+      setGroupsSelected,
       isAccountsHeaderIndeterminate,
       isAccountsHeaderChecked,
       accountsCbMenuItems,
@@ -1401,6 +1631,7 @@ export default inject(
       setAccountsSelected,
       isOwner,
       isAdmin,
+      isRoomAdmin,
       isCollaborator,
       setInvitePanelOptions,
       isEmptyPage,
@@ -1409,14 +1640,24 @@ export default inject(
       emptyTrashInProgress,
       categoryType,
       theme,
-      whiteLabelLogoUrls,
-      setRoomSharingPanelVisible,
       isFrame,
+      showTitle: frameConfig?.showTitle,
+      hideInfoPanel: isFrame && !frameConfig?.infoPanelVisible,
       currentDeviceType,
       setLeaveRoomDialogVisible,
       inRoom,
+      insideGroupTempTitle,
+      currentGroup,
+      getGroupContextOptions,
+      onCreateAndCopySharedLink,
+      showNavigationButton,
+      haveLinksRight,
+      deleteRooms,
+      setSelection,
+      setShareFolderDialogVisible,
+      startUpload,
     };
-  }
+  },
 )(
   withTranslation([
     "Files",
@@ -1428,5 +1669,5 @@ export default inject(
     "People",
     "PeopleTranslations",
     "ChangeUserTypeDialog",
-  ])(observer(SectionHeaderContent))
+  ])(observer(SectionHeaderContent)),
 );

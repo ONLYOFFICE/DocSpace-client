@@ -1,4 +1,30 @@
-﻿import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 import FormBlankReactSvgUrl from "PUBLIC_DIR/images/form.blank.react.svg?url";
 import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
@@ -10,6 +36,8 @@ import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg
 import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url";
 import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
 import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
+import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg?url";
+import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
 import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
@@ -17,51 +45,55 @@ import React from "react";
 
 import { inject, observer } from "mobx-react";
 
-import MainButton from "@docspace/components/main-button";
+import { MainButton } from "@docspace/shared/components/main-button";
+import { toastr } from "@docspace/shared/components/toast";
+import { Button } from "@docspace/shared/components/button";
+
 import { withTranslation } from "react-i18next";
-import Loaders from "@docspace/common/components/Loaders";
 import { encryptionUploadDialog } from "../../../helpers/desktop";
 import { useNavigate, useLocation } from "react-router-dom";
-
 import MobileView from "./MobileView";
 
-import { Events, EmployeeType, DeviceType } from "@docspace/common/constants";
-import toastr from "@docspace/components/toast/toastr";
-import styled, { css } from "styled-components";
-import Button from "@docspace/components/button";
+import { Events, EmployeeType, DeviceType } from "@docspace/shared/enums";
 
-import { resendInvitesAgain } from "@docspace/common/api/people";
-import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
+import styled, { css } from "styled-components";
+
+import { resendInvitesAgain } from "@docspace/shared/api/people";
+import { getCorrectFourValuesStyle } from "@docspace/shared/utils";
+import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
+import { isDesktop } from "@docspace/shared/utils";
 
 const StyledButton = styled(Button)`
   font-weight: 700;
-  font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+  font-size: 16px;
   padding: 0;
   opacity: ${(props) => (props.isDisabled ? 0.6 : 1)};
 
   background-color: ${({ $currentColorScheme }) =>
-    $currentColorScheme.main.accent} !important;
-  background: ${({ $currentColorScheme }) => $currentColorScheme.main.accent};
-  border: ${({ $currentColorScheme }) => $currentColorScheme.main.accent};
+    $currentColorScheme.main?.accent} !important;
+  background: ${({ $currentColorScheme }) => $currentColorScheme.main?.accent};
+  border: ${({ $currentColorScheme }) => $currentColorScheme.main?.accent};
 
   ${(props) =>
     !props.isDisabled &&
     css`
       :hover {
         background-color: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main.accent};
+          $currentColorScheme.main?.accent};
         opacity: 0.85;
         background: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main.accent};
-        border: ${({ $currentColorScheme }) => $currentColorScheme.main.accent};
+          $currentColorScheme.main?.accent};
+        border: ${({ $currentColorScheme }) =>
+          $currentColorScheme.main?.accent};
       }
 
       :active {
         background-color: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main.accent};
+          $currentColorScheme.main?.accent};
         background: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main.accent};
-        border: ${({ $currentColorScheme }) => $currentColorScheme.main.accent};
+          $currentColorScheme.main?.accent};
+        border: ${({ $currentColorScheme }) =>
+          $currentColorScheme.main?.accent};
         opacity: 1;
         filter: brightness(90%);
         cursor: pointer;
@@ -69,7 +101,7 @@ const StyledButton = styled(Button)`
     `}
 
   .button-content {
-    color: ${({ $currentColorScheme }) => $currentColorScheme.text.accent};
+    color: ${({ $currentColorScheme }) => $currentColorScheme.text?.accent};
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -117,6 +149,7 @@ const ArticleMainButtonContent = (props) => {
 
     isOwner,
     isAdmin,
+    isRoomAdmin,
 
     setInvitePanelOptions,
 
@@ -130,6 +163,9 @@ const ArticleMainButtonContent = (props) => {
     isGracePeriod,
     setInviteUsersWarningDialogVisible,
     currentDeviceType,
+
+    isFrame,
+    disableActionButton,
   } = props;
 
   const navigate = useNavigate();
@@ -160,7 +196,7 @@ const ArticleMainButtonContent = (props) => {
 
       window.dispatchEvent(event);
     },
-    [setAction]
+    [setAction],
   );
 
   const onCreateRoom = React.useCallback(() => {
@@ -181,7 +217,7 @@ const ArticleMainButtonContent = (props) => {
     (e) => {
       startUpload(e.target.files, null, t);
     },
-    [startUpload, t]
+    [startUpload, t],
   );
 
   const onUploadFileClick = React.useCallback(() => {
@@ -234,10 +270,15 @@ const ArticleMainButtonContent = (props) => {
   const onInviteAgain = React.useCallback(() => {
     resendInvitesAgain()
       .then(() =>
-        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios"))
+        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
       )
       .catch((err) => toastr.error(err));
   }, [resendInvitesAgain]);
+
+  const onCreateGroup = React.useCallback(() => {
+    const event = new Event(Events.GROUP_CREATE);
+    window.dispatchEvent(event);
+  }, []);
 
   React.useEffect(() => {
     const isFolderHiddenDropdown =
@@ -313,51 +354,90 @@ const ArticleMainButtonContent = (props) => {
       },
     ];
 
-    const addAdmin = isOwner
-      ? [
-          {
-            id: "invite_doc-space-administrator",
-            className: "main-button_drop-down",
-            icon: PersonAdminReactSvgUrl,
-            label: t("Common:DocSpaceAdmin"),
-            onClick: onInvite,
-            action: EmployeeType.Admin,
-            key: "administrator",
-          },
-        ]
-      : [];
+    const accountsUserActions = [
+      ...(isOwner
+        ? [
+            {
+              id: "invite_doc-space-administrator",
+              className: "main-button_drop-down",
+              icon: PersonAdminReactSvgUrl,
+              label: t("Common:DocSpaceAdmin"),
+              onClick: onInvite,
+              action: EmployeeType.Admin,
+              key: "administrator",
+            },
+          ]
+        : []),
+      {
+        id: "invite_room-admin",
+        className: "main-button_drop-down",
+        icon: PersonManagerReactSvgUrl,
+        label: t("Common:RoomAdmin"),
+        onClick: onInvite,
+        action: EmployeeType.User,
+        key: "manager",
+      },
+      {
+        id: "invite_room-collaborator",
+        className: "main-button_drop-down",
+        icon: PersonDefaultReactSvgUrl,
+        label: t("Common:PowerUser"),
+        onClick: onInvite,
+        action: EmployeeType.Collaborator,
+        key: "collaborator",
+      },
+      {
+        id: "invite_user",
+        className: "main-button_drop-down",
+        icon: PersonDefaultReactSvgUrl,
+        label: t("Common:User"),
+        onClick: onInvite,
+        action: EmployeeType.Guest,
+        key: "user",
+      },
+      ...(!isMobileArticle
+        ? [
+            {
+              isSeparator: true,
+              key: "invite-users-separator",
+            },
+          ]
+        : []),
+      {
+        id: "invite_again",
+        className: "main-button_drop-down",
+        icon: InviteAgainReactSvgUrl,
+        label: t("People:LblInviteAgain"),
+        onClick: onInviteAgain,
+        action: "invite-again",
+        key: "invite-again",
+      },
+    ];
+
+    const accountsFullActions = [
+      {
+        id: "actions_invite_user",
+        className: "main-button_drop-down",
+        icon: PersonUserReactSvgUrl,
+        label: t("Common:Invite"),
+        key: "new-user",
+        items: accountsUserActions,
+      },
+      {
+        id: "create_group",
+        className: "main-button_drop-down",
+        icon: GroupReactSvgUrl,
+        label: t("PeopleTranslations:CreateGroup"),
+        onClick: onCreateGroup,
+        action: "group",
+        key: "group",
+      },
+    ];
 
     const actions = isAccountsPage
-      ? [
-          ...addAdmin,
-          {
-            id: "invite_room-admin",
-            className: "main-button_drop-down",
-            icon: PersonManagerReactSvgUrl,
-            label: t("Common:RoomAdmin"),
-            onClick: onInvite,
-            action: EmployeeType.User,
-            key: "manager",
-          },
-          {
-            id: "invite_room-collaborator",
-            className: "main-button_drop-down",
-            icon: PersonReactSvgUrl,
-            label: t("Common:PowerUser"),
-            onClick: onInvite,
-            action: EmployeeType.Collaborator,
-            key: "collaborator",
-          },
-          {
-            id: "invite_user",
-            className: "main-button_drop-down",
-            icon: PersonUserReactSvgUrl,
-            label: t("Common:User"),
-            onClick: onInvite,
-            action: EmployeeType.Guest,
-            key: "user",
-          },
-        ]
+      ? isRoomAdmin
+        ? accountsUserActions
+        : accountsFullActions
       : [
           {
             id: "actions_new-document",
@@ -397,37 +477,28 @@ const ArticleMainButtonContent = (props) => {
           },
         ];
 
-    const uploadActions = isAccountsPage
-      ? [
-          {
-            id: "invite_again",
-            className: "main-button_drop-down",
-            icon: InviteAgainReactSvgUrl,
-            label: t("People:LblInviteAgain"),
-            onClick: onInviteAgain,
-            action: "invite-again",
-            key: "invite-again",
-          },
-        ]
-      : [
-          {
-            id: "actions_upload-files",
-            className: "main-button_drop-down",
-            icon: ActionsUploadReactSvgUrl,
-            label: t("UploadFiles"),
-            onClick: onUploadFileClick,
-            key: "upload-files",
-          },
-          {
-            id: "actions_upload-folders",
-            className: "main-button_drop-down",
-            icon: ActionsUploadReactSvgUrl,
-            label: t("UploadFolder"),
-            disabled: isPrivacy,
-            onClick: onUploadFolderClick,
-            key: "upload-folder",
-          },
-        ];
+    const uploadActions = [
+      {
+        id: "actions_upload-files",
+        className: "main-button_drop-down",
+        icon: ActionsUploadReactSvgUrl,
+        label: t("UploadFiles"),
+        onClick: onUploadFileClick,
+        key: "upload-files",
+      },
+    ];
+
+    if (isDesktop()) {
+      uploadActions.push({
+        id: "actions_upload-folders",
+        className: "main-button_drop-down",
+        icon: ActionsUploadReactSvgUrl,
+        label: t("UploadFolder"),
+        disabled: isPrivacy,
+        onClick: onUploadFolderClick,
+        key: "upload-folder",
+      });
+    }
 
     if (pluginItems.length > 0) {
       // menuModel.push({
@@ -453,13 +524,15 @@ const ArticleMainButtonContent = (props) => {
 
     const menuModel = [...actions];
 
-    menuModel.push({
-      isSeparator: true,
-      key: "separator",
-    });
+    if (!isAccountsPage) {
+      menuModel.push({
+        isSeparator: true,
+        key: "separator",
+      });
 
-    menuModel.push(...uploadActions);
-    setUploadActions(uploadActions);
+      menuModel.push(...uploadActions);
+      setUploadActions(uploadActions);
+    }
 
     setModel(menuModel);
     setActions(actions);
@@ -474,6 +547,7 @@ const ArticleMainButtonContent = (props) => {
     isRoomsFolder,
     isOwner,
     isAdmin,
+    isRoomAdmin,
 
     onCreate,
     onCreateRoom,
@@ -482,17 +556,18 @@ const ArticleMainButtonContent = (props) => {
     onShowSelectFileDialog,
     onUploadFileClick,
     onUploadFolderClick,
+    isMobileArticle,
   ]);
 
-  const mainButtonText = isAccountsPage
-    ? t("Common:Invite")
-    : t("Common:Actions");
+  const mainButtonText = t("Common:Actions");
 
-  const isDisabled = isSettingsPage
-    ? isSettingsPage
-    : isAccountsPage
-    ? !isAccountsPage
-    : !security?.Create;
+  const isDisabled = isFrame
+    ? disableActionButton
+    : isSettingsPage
+      ? isSettingsPage
+      : isAccountsPage
+        ? !isAccountsPage
+        : !security?.Create;
 
   const isProfile = location.pathname.includes("/profile");
 
@@ -510,7 +585,7 @@ const ArticleMainButtonContent = (props) => {
   }
 
   if (showArticleLoader)
-    return isMobileArticle ? null : <Loaders.ArticleButton height="32px" />;
+    return isMobileArticle ? null : <ArticleButtonLoader height="32px" />;
 
   return (
     <>
@@ -521,8 +596,9 @@ const ArticleMainButtonContent = (props) => {
               t={t}
               titleProp={t("Upload")}
               actionOptions={actions}
-              buttonOptions={uploadActions}
-              isRooms={isRoomsFolder}
+              buttonOptions={!isAccountsPage && uploadActions}
+              withoutButton={isRoomsFolder || isAccountsPage}
+              withMenu={!isRoomsFolder}
               mainButtonMobileVisible={
                 mainButtonMobileVisible && mainButtonVisible
               }
@@ -585,7 +661,7 @@ const ArticleMainButtonContent = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     dialogsStore,
     uploadDataStore,
@@ -595,6 +671,8 @@ export default inject(
     oformsStore,
     pluginStore,
     versionHistoryStore,
+    userStore,
+    currentTariffStatusStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
     const { mainButtonMobileVisible } = filesStore;
@@ -619,24 +697,27 @@ export default inject(
     } = dialogsStore;
 
     const { enablePlugins, currentColorScheme, currentDeviceType } =
-      auth.settingsStore;
+      settingsStore;
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
 
     const security = selectedFolderStore.security;
 
     const currentFolderId = selectedFolderStore.id;
 
-    const { isAdmin, isOwner } = auth.userStore.user;
-    const { isGracePeriod } = auth.currentTariffStatusStore;
+    const { isAdmin, isOwner, isRoomAdmin } = userStore.user;
+    console.log(userStore.user);
+    const { isGracePeriod } = currentTariffStatusStore;
 
     const { setOformFromFolderId, oformsFilter } = oformsStore;
     const { mainButtonItemsList } = pluginStore;
 
+    const { frameConfig, isFrame } = settingsStore;
+
     return {
       isGracePeriod,
       setInviteUsersWarningDialogVisible,
-      showText: auth.settingsStore.showText,
-      isMobileArticle: auth.settingsStore.isMobileArticle,
+      showText: settingsStore.showText,
+      isMobileArticle: settingsStore.isMobileArticle,
 
       showArticleLoader,
       isPrivacy: isPrivacyFolder,
@@ -666,6 +747,7 @@ export default inject(
 
       isAdmin,
       isOwner,
+      isRoomAdmin,
 
       mainButtonMobileVisible,
       moveToPanelVisible,
@@ -674,8 +756,11 @@ export default inject(
       versionHistoryPanelVisible,
       security,
       currentDeviceType,
+
+      isFrame,
+      disableActionButton: frameConfig?.disableActionButton,
     };
-  }
+  },
 )(
   withTranslation([
     "Article",
@@ -684,5 +769,5 @@ export default inject(
     "Files",
     "People",
     "PeopleTranslations",
-  ])(observer(ArticleMainButtonContent))
+  ])(observer(ArticleMainButtonContent)),
 );

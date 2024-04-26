@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import {
   createWebhook,
   getAllWebhooks,
@@ -7,11 +33,11 @@ import {
   retryWebhooks,
   toggleEnabledWebhook,
   updateWebhook,
-} from "@docspace/common/api/settings";
+} from "@docspace/shared/api/settings";
 import { makeAutoObservable, runInAction } from "mobx";
 
 class WebhooksStore {
-  authStore;
+  settingsStore;
 
   webhooks = [];
   checkedEventIds = [];
@@ -26,20 +52,20 @@ class WebhooksStore {
   configName = "";
 
   PASSWORD_SETTINGS = {
-    "minLength": 12,
-    "allowedCharactersRegexStr": "[\\x21-\\x7E]",
-    "upperCase": true,
-    "digits": true,
-    "digitsRegexStr": "(?=.*\\d)",
-    "upperCaseRegexStr": "(?=.*[A-Z])",
-    "specSymbols": false,
-    "specSymbolsRegexStr": "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])"
-}
+    minLength: 12,
+    allowedCharactersRegexStr: "[\\x21-\\x7E]",
+    upperCase: true,
+    digits: true,
+    digitsRegexStr: "(?=.*\\d)",
+    upperCaseRegexStr: "(?=.*[A-Z])",
+    specSymbols: false,
+    specSymbolsRegexStr: "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])",
+  };
 
-  constructor(authStore) {
+  constructor(settingsStore) {
     makeAutoObservable(this);
 
-    this.authStore = authStore;
+    this.settingsStore = settingsStore;
   }
 
   setRetryPendingFalse = () => {
@@ -55,8 +81,7 @@ class WebhooksStore {
   };
 
   loadWebhooks = async () => {
-    const { passwordSettings, getPortalPasswordSettings } =
-      this.authStore.settingsStore;
+    const { passwordSettings, getPortalPasswordSettings } = this.settingsStore;
 
     try {
       const webhooksData = await getAllWebhooks();
@@ -102,13 +127,17 @@ class WebhooksStore {
 
   toggleEnabled = async (desiredWebhook) => {
     await toggleEnabledWebhook(desiredWebhook);
-    const index = this.webhooks.findIndex((webhook) => webhook.id === desiredWebhook.id);
+    const index = this.webhooks.findIndex(
+      (webhook) => webhook.id === desiredWebhook.id,
+    );
     this.webhooks[index].enabled = !this.webhooks[index].enabled;
   };
 
   deleteWebhook = async (webhook) => {
     await removeWebhook(webhook.id);
-    this.webhooks = this.webhooks.filter((currentWebhook) => currentWebhook.id !== webhook.id);
+    this.webhooks = this.webhooks.filter(
+      (currentWebhook) => currentWebhook.id !== webhook.id,
+    );
   };
 
   editWebhook = async (prevWebhook, webhookInfo) => {
@@ -120,7 +149,9 @@ class WebhooksStore {
       webhookInfo.ssl,
     );
     this.webhooks = this.webhooks.map((webhook) =>
-      webhook.id === prevWebhook.id ? { ...prevWebhook, ...webhookInfo } : webhook,
+      webhook.id === prevWebhook.id
+        ? { ...prevWebhook, ...webhookInfo }
+        : webhook,
     );
   };
 
@@ -205,10 +236,14 @@ class WebhooksStore {
     const params = {};
     if (filters.deliveryDate !== null) {
       params.deliveryFrom =
-        filters.deliveryDate.format("YYYY-MM-DD") + "T" + filters.deliveryFrom.format("HH:mm:ss");
+        filters.deliveryDate.format("YYYY-MM-DD") +
+        "T" +
+        filters.deliveryFrom.format("HH:mm:ss");
 
       params.deliveryTo =
-        filters.deliveryDate.format("YYYY-MM-DD") + "T" + filters.deliveryTo.format("HH:mm:ss");
+        filters.deliveryDate.format("YYYY-MM-DD") +
+        "T" +
+        filters.deliveryTo.format("HH:mm:ss");
     }
 
     const statusEnum = {

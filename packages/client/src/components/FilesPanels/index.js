@@ -1,8 +1,33 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import {
-  SharingPanel,
   UploadPanel,
   VersionHistoryPanel,
   ChangeOwnerPanel,
@@ -25,28 +50,29 @@ import {
   CreateRoomConfirmDialog,
   ChangeUserTypeDialog,
   SubmitToFormGallery,
+  EditGroupMembersDialog,
+  ChangeQuotaDialog,
   UnsavedChangesDialog,
   DeleteLinkDialog,
-  RoomSharingDialog,
   MoveToPublicRoom,
   BackupToPublicRoom,
   SettingsPluginDialog,
   PluginDialog,
   DeletePluginDialog,
+  ShareFolderDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
 import RestoreRoomDialog from "../dialogs/RestoreRoomDialog";
 import PreparationPortalDialog from "../dialogs/PreparationPortalDialog";
 import FilesSelector from "../FilesSelector";
-import { FilesSelectorFilterTypes } from "@docspace/common/constants";
+import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import LeaveRoomDialog from "../dialogs/LeaveRoomDialog";
 import ChangeRoomOwnerPanel from "../panels/ChangeRoomOwnerPanel";
 
 const Panels = (props) => {
   const {
     uploadPanelVisible,
-    sharingPanelVisible,
     ownerPanelVisible,
     copyPanelVisible,
     moveToPanelVisible,
@@ -77,11 +103,12 @@ const Panels = (props) => {
     changeUserTypeDialogVisible,
     restoreRoomDialogVisible,
     submitToGalleryDialogVisible,
+    editGroupMembersDialogVisible,
+    changeQuotaDialogVisible,
     editLinkPanelIsVisible,
     unsavedChangesDialogVisible,
     deleteLinkDialogVisible,
     embeddingPanelIsVisible,
-    roomSharingPanelVisible,
     moveToPublicRoomVisible,
     backupToPublicRoomVisible,
     settingsPluginDialogVisible,
@@ -89,6 +116,7 @@ const Panels = (props) => {
     leaveRoomDialogVisible,
     changeRoomOwnerIsVisible,
     deletePluginDialogVisible,
+    shareFolderDialogVisible,
   } = props;
 
   const { t } = useTranslation(["Translations", "Common"]);
@@ -114,12 +142,6 @@ const Panels = (props) => {
       <PluginDialog isVisible={pluginDialogVisible} key={"plugin-dialog"} />
     ),
     uploadPanelVisible && <UploadPanel key="upload-panel" />,
-    sharingPanelVisible && (
-      <SharingPanel
-        key="sharing-panel"
-        uploadPanelVisible={uploadPanelVisible}
-      />
-    ),
     ownerPanelVisible && <ChangeOwnerPanel key="change-owner-panel" />,
     (moveToPanelVisible ||
       copyPanelVisible ||
@@ -182,13 +204,16 @@ const Panels = (props) => {
     submitToGalleryDialogVisible && (
       <SubmitToFormGallery key="submit-to-form-gallery-dialog" />
     ),
+    editGroupMembersDialogVisible && (
+      <EditGroupMembersDialog key="edit-group-members-dialog" />
+    ),
+    changeQuotaDialogVisible && <ChangeQuotaDialog key="change-quota-dialog" />,
     editLinkPanelIsVisible && <EditLinkPanel key="edit-link-panel" />,
     unsavedChangesDialogVisible && (
       <UnsavedChangesDialog key="unsaved-dialog" />
     ),
     deleteLinkDialogVisible && <DeleteLinkDialog key="delete-link-dialog" />,
     embeddingPanelIsVisible && <EmbeddingPanel key="embedding-panel" />,
-    roomSharingPanelVisible && <RoomSharingDialog key="room-sharing-dialog" />,
     moveToPublicRoomVisible && (
       <MoveToPublicRoom key="move-to-public-room-panel" />
     ),
@@ -199,12 +224,13 @@ const Panels = (props) => {
     changeRoomOwnerIsVisible && (
       <ChangeRoomOwnerPanel key="change-room-owner" />
     ),
+    shareFolderDialogVisible && <ShareFolderDialog key="share-folder-dialog" />,
   ];
 };
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     dialogsStore,
     uploadDataStore,
     versionHistoryStore,
@@ -213,7 +239,6 @@ export default inject(
     pluginStore,
   }) => {
     const {
-      sharingPanelVisible,
       ownerPanelVisible,
       copyPanelVisible,
       moveToPanelVisible,
@@ -242,23 +267,24 @@ export default inject(
       invitePanelOptions,
       inviteUsersWarningDialogVisible,
       changeUserTypeDialogVisible,
-
+      changeQuotaDialogVisible,
       submitToGalleryDialogVisible,
+      editGroupMembersDialogVisible,
       editLinkPanelIsVisible,
       deleteLinkDialogVisible,
       embeddingPanelIsVisible,
-      roomSharingPanelVisible,
       moveToPublicRoomVisible,
       backupToPublicRoomVisible,
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
+      shareFolderDialogVisible,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
 
     const { uploadPanelVisible } = uploadDataStore;
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
-    const { hotkeyPanelVisible } = auth.settingsStore;
+    const { hotkeyPanelVisible } = settingsStore;
     const { confirmDialogIsLoading } = createEditRoomStore;
 
     const {
@@ -269,7 +295,6 @@ export default inject(
 
     return {
       preparationPortalDialogVisible,
-      sharingPanelVisible,
       uploadPanelVisible,
       ownerPanelVisible,
       copyPanelVisible,
@@ -300,11 +325,12 @@ export default inject(
       changeUserTypeDialogVisible,
       restoreRoomDialogVisible,
       submitToGalleryDialogVisible,
+      editGroupMembersDialogVisible,
+      changeQuotaDialogVisible,
       editLinkPanelIsVisible,
       unsavedChangesDialogVisible,
       deleteLinkDialogVisible,
       embeddingPanelIsVisible,
-      roomSharingPanelVisible,
       moveToPublicRoomVisible,
       backupToPublicRoomVisible,
       settingsPluginDialogVisible,
@@ -312,6 +338,7 @@ export default inject(
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
       deletePluginDialogVisible,
+      shareFolderDialogVisible,
     };
-  }
+  },
 )(observer(Panels));

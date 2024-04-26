@@ -1,10 +1,36 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import { isMobile, mobile } from "@docspace/components/utils/device";
-import Backdrop from "@docspace/components/backdrop";
-import Aside from "@docspace/components/aside";
+import { isMobile, mobile } from "@docspace/shared/utils";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Aside } from "@docspace/shared/components/aside";
 
 import Header from "./sub-components/header";
 import HeaderNav from "./sub-components/header-nav";
@@ -12,16 +38,17 @@ import HeaderUnAuth from "./sub-components/header-unauth";
 import { I18nextProvider, withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import Loaders from "@docspace/common/components/Loaders";
+import { NavMenuHeaderLoader } from "@docspace/shared/skeletons/nav-menu";
 import { LayoutContextConsumer } from "../Layout/context";
 
 import { inject, observer } from "mobx-react";
 import i18n from "./i18n";
 import PreparationPortalDialog from "../dialogs/PreparationPortalDialog";
-import { Base } from "@docspace/components/themes";
-import { DeviceType } from "@docspace/common/constants";
+import { Base } from "@docspace/shared/themes";
+import { DeviceType } from "@docspace/shared/enums";
 
 const StyledContainer = styled.header`
+  height: ${(props) => props.theme.header.height};
   position: relative;
   align-items: center;
   background-color: ${(props) => props.theme.header.backgroundColor};
@@ -51,8 +78,6 @@ const StyledContainer = styled.header`
             }
 
             width: 100vw;
-
-            margin-bottom: 48px;
           }
         `}
 `;
@@ -66,12 +91,12 @@ const NavMenu = (props) => {
   const location = useLocation();
 
   const [isBackdropVisible, setIsBackdropVisible] = React.useState(
-    props.isBackdropVisible
+    props.isBackdropVisible,
   );
   const [isNavOpened, setIsNavOpened] = React.useState(props.isNavHoverEnabled);
   const [isAsideVisible, setIsAsideVisible] = React.useState(props.isNavOpened);
   const [isNavHoverEnabled, setIsNavHoverEnabled] = React.useState(
-    props.isAsideVisible
+    props.isAsideVisible,
   );
 
   const backdropClick = () => {
@@ -128,6 +153,9 @@ const NavMenu = (props) => {
     isFrame,
     showHeader,
     currentDeviceType,
+
+    hideProfileMenu,
+    customHeader,
   } = props;
 
   const isAsideAvailable = !!asideContent;
@@ -137,6 +165,7 @@ const NavMenu = (props) => {
     return <></>;
 
   const isPreparationPortal = location.pathname === "/preparation-portal";
+
   return (
     <LayoutContextConsumer>
       {(value) => (
@@ -151,8 +180,11 @@ const NavMenu = (props) => {
           {!hideHeader &&
             (isLoaded && isAuthenticated ? (
               <>
-                {!isPreparationPortal && <HeaderNav />}
+                {!isPreparationPortal && (
+                  <HeaderNav hideProfileMenu={hideProfileMenu} />
+                )}
                 <Header
+                  customHeader={customHeader}
                   isPreparationPortal={isPreparationPortal}
                   isNavOpened={isNavOpened}
                   onClick={showNav}
@@ -163,7 +195,7 @@ const NavMenu = (props) => {
                 />
               </>
             ) : !isLoaded && isAuthenticated ? (
-              <Loaders.Header />
+              <NavMenuHeaderLoader />
             ) : (
               <HeaderUnAuth />
             ))}
@@ -203,8 +235,8 @@ NavMenu.defaultProps = {
   isDesktop: false,
 };
 
-const NavMenuWrapper = inject(({ auth }) => {
-  const { settingsStore, isAuthenticated, isLoaded, language } = auth;
+const NavMenuWrapper = inject(({ authStore, settingsStore }) => {
+  const { isAuthenticated, isLoaded, language } = authStore;
   const {
     isDesktopClient: isDesktop,
     frameConfig,
@@ -224,8 +256,8 @@ const NavMenuWrapper = inject(({ auth }) => {
   };
 })(observer(withTranslation(["NavMenu", "Common"])(NavMenu)));
 
-export default () => (
+export default ({ ...props }) => (
   <I18nextProvider i18n={i18n}>
-    <NavMenuWrapper />
+    <NavMenuWrapper {...props} />
   </I18nextProvider>
 );

@@ -15,5 +15,18 @@
   "editor": {
     "openOnNewPage": true,
     "requestClose": false
-  }
+  },
+  "management": {
+    "checkDomain": false
+  },
+  "firebase": {
+    "fetchTimeoutMillis": 3600000,
+    "minimumFetchIntervalMillis": 3600000
+  },
+  "campaigns": [
+    "OnlyofficeForDevelopers",
+    "OnlyofficeForPlatform",
+    "BookTraining",
+    "FormGallery"
+  ]
 }

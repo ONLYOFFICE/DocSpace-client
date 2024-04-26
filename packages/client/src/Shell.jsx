@@ -1,35 +1,62 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, Outlet } from "react-router-dom";
-import { inject, observer, Provider as MobxProvider } from "mobx-react";
-import NavMenu from "./components/NavMenu";
-import Main from "./components/Main";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import Layout from "./components/Layout";
-import ScrollToTop from "./components/Layout/ScrollToTop";
-import Toast from "@docspace/components/toast";
-import toastr from "@docspace/components/toast/toastr";
-import { getLogoFromPath, updateTempContent } from "@docspace/common/utils";
+import moment from "moment-timezone";
+import React, { useEffect } from "react";
+import { Outlet, useLocation } from "react-router-dom";
+import { useTheme } from "styled-components";
+import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+import { isMobile, isIOS, isFirefox } from "react-device-detect";
+import { toast as toastify } from "react-toastify";
 
-import ThemeProvider from "@docspace/components/theme-provider";
-import store from "client/store";
+import { Portal } from "@docspace/shared/components/portal";
+import { SnackBar } from "@docspace/shared/components/snackbar";
+import { Toast, toastr } from "@docspace/shared/components/toast";
+import { ToastType } from "@docspace/shared/components/toast/Toast.enums";
+import { getRestoreProgress } from "@docspace/shared/api/portal";
+import { updateTempContent } from "@docspace/shared/utils/common";
+import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
+import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
+import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
+import { sendToastReport } from "@docspace/shared/utils/crashReport";
 
 import config from "PACKAGE_FILE";
-import { I18nextProvider, useTranslation } from "react-i18next";
-import i18n from "./i18n";
 
-import Snackbar from "@docspace/components/snackbar";
-import moment from "moment-timezone";
-//import ReactSmartBanner from "./components/SmartBanner";
-import { useThemeDetector } from "@docspace/common/utils/useThemeDetector";
-import { isMobile, isIOS, isFirefox } from "react-device-detect";
-import IndicatorLoader from "./components/IndicatorLoader";
-import DialogsWrapper from "./components/dialogs/DialogsWrapper";
+import Main from "./components/Main";
+import Layout from "./components/Layout";
+import NavMenu from "./components/NavMenu";
 import MainBar from "./components/MainBar";
-import { Portal } from "@docspace/components";
-import indexedDbHelper from "@docspace/common/utils/indexedDBHelper";
-import { DeviceType, IndexedDBStores } from "@docspace/common/constants";
-import { getRestoreProgress } from "@docspace/common/api/portal";
-import { useTheme } from "styled-components";
+import ScrollToTop from "./components/Layout/ScrollToTop";
+import IndicatorLoader from "./components/IndicatorLoader";
+import ErrorBoundary from "./components/ErrorBoundaryWrapper";
+import DialogsWrapper from "./components/dialogs/DialogsWrapper";
+import useCreateFileError from "./Hooks/useCreateFileError";
+
+// import ReactSmartBanner from "./components/SmartBanner";
 
 const Shell = ({ items = [], page = "home", ...rest }) => {
   const {
@@ -50,15 +77,25 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     setSnackbarExist,
     userTheme,
     //user,
-    whiteLabelLogoUrls,
-    standalone,
     userId,
     currentDeviceType,
     timezone,
     showArticleLoader,
+    setPortalTariff,
+    setFormCreationInfo,
+    setConvertPasswordDialogVisible,
+    version,
+    pagesWithoutNavMenu,
+    isFrame,
   } = rest;
 
   const theme = useTheme();
+
+  useCreateFileError({
+    setPortalTariff,
+    setFormCreationInfo,
+    setConvertPasswordDialogVisible,
+  });
 
   useEffect(() => {
     const regex = /(\/){2,}/g;
@@ -94,47 +131,16 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   }, []);
 
   useEffect(() => {
-    if (!whiteLabelLogoUrls) return;
-    const favicon = getLogoFromPath(whiteLabelLogoUrls[2]?.path?.light);
-
-    if (!favicon) return;
-
-    const link = document.querySelector("#favicon-icon");
-    link.href = favicon;
-
-    const shortcutIconLink = document.querySelector("#favicon");
-    shortcutIconLink.href = favicon;
-
-    const appleIconLink = document.querySelector(
-      "link[rel~='apple-touch-icon']"
-    );
-
-    if (appleIconLink) appleIconLink.href = favicon;
-
-    const androidIconLink = document.querySelector(
-      "link[rel~='android-touch-icon']"
-    );
-    if (androidIconLink) androidIconLink.href = favicon;
-  }, [whiteLabelLogoUrls]);
-
-  useEffect(() => {
     socketHelper.emit({
       command: "subscribe",
       data: { roomParts: "backup-restore" },
     });
-
-    !standalone && // unlimited quota (standalone)
-      socketHelper.emit({
-        command: "subscribe",
-        data: { roomParts: "quota" },
-      });
-
     socketHelper.on("restore-backup", () => {
       getRestoreProgress()
         .then((response) => {
           if (!response) {
             console.log(
-              "Skip show <PreparationPortalDialog /> - empty progress response"
+              "Skip show <PreparationPortalDialog /> - empty progress response",
             );
             return;
           }
@@ -143,6 +149,16 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
         .catch((e) => {
           console.error("getRestoreProgress", e);
         });
+    });
+
+    socketHelper.emit({
+      command: "subscribe",
+      data: { roomParts: "quota" },
+    });
+
+    socketHelper.emit({
+      command: "subscribe",
+      data: { roomParts: "QUOTA", individual: true },
     });
   }, [socketHelper]);
 
@@ -174,7 +190,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     const { fromDate, toDate, desktop } = campaign;
 
     console.log(
-      `FB: 'bar/maintenance' desktop=${desktop} fromDate=${fromDate} toDate=${toDate}`
+      `FB: 'bar/maintenance' desktop=${desktop} fromDate=${fromDate} toDate=${toDate}`,
     );
 
     if (!campaign || !fromDate || !toDate) {
@@ -198,20 +214,20 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     if (now.isBefore(from)) {
       setSnackBarTimer(campaign);
 
-      Snackbar.close();
+      SnackBar.close();
       console.log(`Show snackBar has been delayed for 1 minute`, now);
       skipMaintenance = true;
     }
 
     if (now.isAfter(to)) {
       console.log("Skip snackBar by current date", now);
-      Snackbar.close();
+      SnackBar.close();
       skipMaintenance = true;
     }
 
     if (isDesktop && !desktop) {
       console.log("Skip snackBar by desktop", desktop);
-      Snackbar.close();
+      SnackBar.close();
       skipMaintenance = true;
     }
 
@@ -246,7 +262,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       onAction: () => {
         setMaintenanceExist(false);
         setSnackbarExist(false);
-        Snackbar.close();
+        SnackBar.close();
         localStorage.setItem(LS_CAMPAIGN_DATE, to.format(DATE_FORMAT));
       },
       opacity: 1,
@@ -258,7 +274,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       theme,
     };
 
-    Snackbar.show(barConfig);
+    SnackBar.show(barConfig);
   };
 
   const fetchMaintenance = () => {
@@ -271,7 +287,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
           if (!campaign) {
             setCheckedMaintenance(true);
             clearSnackBarTimer();
-            Snackbar.close();
+            SnackBar.close();
             return;
           }
 
@@ -298,7 +314,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
     FirebaseHelper.checkCampaigns()
       .then((campaigns) => {
-        localStorage.setItem("campaigns", campaigns);
+        localStorage.setItem("docspace_campaigns", campaigns);
       })
       .catch((err) => {
         console.error(err);
@@ -310,7 +326,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   }, [userId]);
 
   useEffect(() => {
-    if (!userId || !window.DocSpaceConfig.imageThumbnails) return;
+    if (!userId || !window.DocSpaceConfig?.imageThumbnails) return;
     initIndexedDb();
 
     return () => {
@@ -349,7 +365,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       Array.from(document.querySelectorAll("style")).forEach((sheet) => {
         if (
           sheet?.textContent?.includes(
-            "-webkit-filter: hue-rotate(180deg) invert(100%) !important;"
+            "-webkit-filter: hue-rotate(180deg) invert(100%) !important;",
           )
         ) {
           sheet.parentNode?.removeChild(sheet);
@@ -376,6 +392,24 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       setTheme(systemTheme);
   }, [systemTheme]);
 
+  useEffect(() => {
+    if (!FirebaseHelper.isEnabled || !isLoaded) return;
+    toastify.onChange((payload) => {
+      if (
+        payload.status === "added" &&
+        (payload.type === ToastType.error || payload.type === ToastType.warning)
+      ) {
+        sendToastReport(
+          userId,
+          version,
+          language,
+          payload?.data,
+          FirebaseHelper,
+        );
+      }
+    });
+  }, [isLoaded]);
+
   const rootElement = document.getElementById("root");
 
   const toast =
@@ -384,19 +418,25 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     ) : (
       <Toast />
     );
+  const location = useLocation();
+
+  const withoutNavMenu =
+    isEditor ||
+    pagesWithoutNavMenu ||
+    location.pathname === "/access-restricted";
 
   return (
     <Layout>
       {toast}
       {/* <ReactSmartBanner t={t} ready={ready} /> */}
-      {isEditor ? <></> : <NavMenu />}
-      {currentDeviceType === DeviceType.mobile && <MainBar />}
+      {withoutNavMenu ? <></> : <NavMenu />}
+      {currentDeviceType === DeviceType.mobile && !isFrame && <MainBar />}
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />
 
       <Main isDesktop={isDesktop}>
-        {currentDeviceType !== DeviceType.mobile && <MainBar />}
+        {currentDeviceType !== DeviceType.mobile && !isFrame && <MainBar />}
         <div className="main-container">
           <Outlet />
         </div>
@@ -405,105 +445,114 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   );
 };
 
-const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
-  const { i18n } = useTranslation();
+const ShellWrapper = inject(
+  ({
+    authStore,
+    settingsStore,
+    backup,
+    clientLoadingStore,
+    userStore,
+    currentTariffStatusStore,
+    dialogsStore,
+  }) => {
+    const { i18n } = useTranslation();
 
-  const { init, isLoaded, settingsStore, setProductVersion, language } = auth;
+    const {
+      init,
+      isLoaded,
+      setProductVersion,
+      language,
+      version,
+      clientError,
+    } = authStore;
 
-  const {
-    personal,
-    roomsMode,
-    isDesktopClient,
-    firebaseHelper,
-    setModuleInfo,
-    setCheckedMaintenance,
-    setMaintenanceExist,
-    setSnackbarExist,
-    socketHelper,
-    setTheme,
-    whiteLabelLogoUrls,
-    standalone,
-    currentDeviceType,
-    isFrame,
-    frameConfig,
-  } = settingsStore;
+    const {
+      personal,
+      roomsMode,
+      isDesktopClient,
+      firebaseHelper,
+      setModuleInfo,
+      setCheckedMaintenance,
+      setMaintenanceExist,
+      setSnackbarExist,
+      socketHelper,
+      setTheme,
+      currentDeviceType,
+      isFrame,
+      frameConfig,
+      isPortalDeactivate,
+      isPortalRestoring,
+    } = settingsStore;
 
-  const isBase = settingsStore.theme.isBase;
-  const { setPreparationPortalDialogVisible } = backup;
+    const isBase = settingsStore.theme.isBase;
+    const { setPreparationPortalDialogVisible } = backup;
 
-  const userTheme = isDesktopClient
-    ? auth?.userStore?.user?.theme
-      ? auth?.userStore?.user?.theme
-      : window.RendererProcessVariable?.theme?.type === "dark"
-      ? "Dark"
-      : "Base"
-    : auth?.userStore?.user?.theme;
+    const userTheme = isDesktopClient
+      ? userStore?.user?.theme
+        ? userStore?.user?.theme
+        : window.RendererProcessVariable?.theme?.type === "dark"
+          ? "Dark"
+          : "Base"
+      : userStore?.user?.theme;
 
-  return {
-    loadBaseInfo: async () => {
-      await init(false, i18n);
+    const { setPortalTariff, isNotPaidPeriod } = currentTariffStatusStore;
 
-      setModuleInfo(config.homepage, "home");
-      setProductVersion(config.version);
+    const {
+      setConvertPasswordDialogVisible,
 
-      if (isDesktopClient) {
-        document.body.classList.add("desktop");
-      }
-    },
-    language,
-    isLoaded,
+      setFormCreationInfo,
+    } = dialogsStore;
+    const { user } = userStore;
 
-    isDesktop: isDesktopClient,
-    FirebaseHelper: firebaseHelper,
-    personal,
-    setCheckedMaintenance,
-    setMaintenanceExist,
-    socketHelper,
-    setPreparationPortalDialogVisible,
-    isBase,
-    setTheme,
-    roomsMode,
-    setSnackbarExist,
-    userTheme: isFrame ? frameConfig?.theme : userTheme,
-    userId: auth?.userStore?.user?.id,
-    whiteLabelLogoUrls,
-    standalone,
-    currentDeviceType,
+    const pagesWithoutNavMenu =
+      clientError ||
+      isPortalDeactivate ||
+      isPortalRestoring ||
+      (isNotPaidPeriod && !user?.isOwner && !user?.isAdmin);
 
-    showArticleLoader: clientLoadingStore.showArticleLoader,
-  };
-})(observer(Shell));
+    return {
+      loadBaseInfo: async () => {
+        await init(false, i18n);
 
-const ThemeProviderWrapper = inject(({ auth, loginStore }) => {
-  const { settingsStore } = auth;
-  let currentColorScheme = false;
-  const { theme } = settingsStore;
-  const { i18n } = useTranslation();
+        setModuleInfo(config.homepage, "home");
+        setProductVersion(config.version);
 
-  if (loginStore) {
-    currentColorScheme = loginStore.currentColorScheme;
-  } else if (auth) {
-    currentColorScheme = settingsStore.currentColorScheme || false;
-  }
+        if (isDesktopClient) {
+          document.body.classList.add("desktop");
+        }
+      },
+      language,
+      isLoaded,
 
-  const { timezone } = settingsStore;
+      isDesktop: isDesktopClient,
+      FirebaseHelper: firebaseHelper,
+      personal,
+      setCheckedMaintenance,
+      setMaintenanceExist,
+      socketHelper,
+      setPreparationPortalDialogVisible,
+      isBase,
+      setTheme,
+      roomsMode,
+      setSnackbarExist,
+      userTheme: isFrame ? frameConfig?.theme : userTheme,
+      userId: userStore?.user?.id,
+      currentDeviceType,
+      showArticleLoader: clientLoadingStore.showArticleLoader,
+      setPortalTariff,
+      setFormCreationInfo,
+      setConvertPasswordDialogVisible,
+      version,
+      pagesWithoutNavMenu,
+      isFrame,
+    };
+  },
+)(observer(Shell));
 
-  window.theme = theme;
-  window.timezone = timezone;
-
-  return {
-    theme: { ...theme, interfaceDirection: i18n.dir() },
-    currentColorScheme,
-    timezone,
-  };
-})(observer(ThemeProvider));
-
-export default () => (
-  <MobxProvider {...store}>
-    <I18nextProvider i18n={i18n}>
-      <ThemeProviderWrapper>
-        <ShellWrapper />
-      </ThemeProviderWrapper>
-    </I18nextProvider>
-  </MobxProvider>
+const Root = () => (
+  <ErrorBoundary>
+    <ShellWrapper />
+  </ErrorBoundary>
 );
+
+export default Root;

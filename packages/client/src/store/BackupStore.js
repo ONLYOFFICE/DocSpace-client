@@ -1,16 +1,46 @@
-import { getBackupProgress } from "@docspace/common/api/portal";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import { getBackupProgress } from "@docspace/shared/api/portal";
 import { makeAutoObservable } from "mobx";
 import {
   saveToLocalStorage,
   getFromLocalStorage,
   removeLocalStorage,
 } from "../pages/PortalSettings/utils";
-import toastr from "@docspace/components/toast/toastr";
-import { AutoBackupPeriod } from "@docspace/common/constants";
-import { combineUrl } from "@docspace/common/utils";
+import { toastr } from "@docspace/shared/components/toast";
+import { AutoBackupPeriod } from "@docspace/shared/enums";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
-import { uploadBackup } from "@docspace/common/api/files";
-
+import {
+  getSettingsThirdParty,
+  getThirdPartyCapabilities,
+  uploadBackup,
+} from "@docspace/shared/api/files";
+import i18n from "../i18n";
 const { EveryDayType, EveryWeekType } = AutoBackupPeriod;
 
 class BackupStore {
@@ -69,6 +99,9 @@ class BackupStore {
   storageRegions = [];
   selectedThirdPartyAccount = null;
   connectedThirdPartyAccount = null;
+  accounts = [];
+  capabilities = [];
+  connectedAccount = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -162,13 +195,100 @@ class BackupStore {
     return false;
   }
 
+  setThirdPartyAccountsInfo = async () => {
+    const [connectedAccount, capabilities] = await Promise.all([
+      getSettingsThirdParty(),
+      getThirdPartyCapabilities(),
+    ]);
+
+    this.setCapabilities(capabilities);
+    this.setConnectedThirdPartyAccount(connectedAccount);
+
+    const providerNames = [
+      ["GoogleDrive", i18n.t("Translations:TypeTitleGoogle")],
+      ["Box", i18n.t("Translations:TypeTitleBoxNet")],
+      ["DropboxV2", i18n.t("Translations:TypeTitleDropBox")],
+      ["SharePoint", i18n.t("Translations:TypeTitleSharePoint")],
+      ["OneDrive", i18n.t("Translations:TypeTitleSkyDrive")],
+      ["WebDav", "Nextcloud"],
+      ["WebDav", "ownCloud"],
+      ["kDrive", i18n.t("Translations:TypeTitlekDrive")],
+      ["Yandex", i18n.t("Translations:TypeTitleYandex")],
+      ["WebDav", i18n.t("Translations:TypeTitleWebDav")],
+    ];
+
+    let accounts = [],
+      selectedAccount = {};
+    let index = 0;
+    providerNames.map((item) => {
+      const { account, isConnected } = this.getThirdPartyAccount(
+        item[0],
+        item[1],
+        index,
+      );
+
+      if (!account) return;
+
+      accounts.push(account);
+
+      if (isConnected) {
+        selectedAccount = { ...accounts[index] };
+      }
+      index++;
+    });
+
+    this.setThirdPartyAccounts(accounts);
+
+    console.log(selectedAccount, accounts);
+
+    this.setSelectedThirdPartyAccount(
+      Object.keys(selectedAccount).length !== 0
+        ? selectedAccount
+        : { ...accounts[0] },
+    );
+  };
+
+  getThirdPartyAccount = (providerKey, serviceTitle, index) => {
+    const accountIndex =
+      this.capabilities &&
+      this.capabilities.findIndex((x) => x[0] === providerKey);
+
+    if (accountIndex === -1) return { account: null, isConnected: false };
+
+    const isConnected =
+      this.connectedThirdPartyAccount?.providerKey === "WebDav"
+        ? serviceTitle === this.connectedThirdPartyAccount?.title
+        : this.capabilities[accountIndex][0] ===
+          this.connectedThirdPartyAccount?.providerKey;
+
+    const account = {
+      key: index.toString(),
+      label: serviceTitle,
+      title: serviceTitle,
+      provider_key: this.capabilities[accountIndex][0],
+      ...(this.capabilities[accountIndex][1] && {
+        provider_link: this.capabilities[accountIndex][1],
+      }),
+      connected: isConnected,
+      ...(isConnected && {
+        provider_id: this.connectedThirdPartyAccount?.providerId,
+        id: this.connectedThirdPartyAccount.id,
+      }),
+    };
+
+    return { account, isConnected };
+  };
+
+  setCapabilities = (capabilities) => {
+    this.capabilities = capabilities;
+  };
+  setThirdPartyAccounts = (accounts) => {
+    this.accounts = accounts;
+  };
+
   setSelectedThirdPartyAccount = (elem) => {
     this.selectedThirdPartyAccount = elem;
   };
-
-  get selectedThirdPartyAccount() {
-    return this.selectedThirdPartyAccount;
-  }
 
   toDefault = () => {
     this.selectedMonthlySchedule = this.defaultMonthlySchedule;
@@ -363,7 +483,7 @@ class BackupStore {
     isStorage,
     moduleName,
     selectedId,
-    selectedStorageTitle
+    selectedStorageTitle,
   ) => {
     saveToLocalStorage("LocalCopyStorageType", moduleName);
 
@@ -371,7 +491,7 @@ class BackupStore {
       saveToLocalStorage("LocalCopyStorage", `${selectedId}`);
       saveToLocalStorage(
         "LocalCopyThirdPartyStorageType",
-        selectedStorageTitle
+        selectedStorageTitle,
       );
       saveToLocalStorage("LocalCopyThirdPartyStorageValues", this.formSettings);
     } else {
@@ -500,7 +620,7 @@ class BackupStore {
   getStorageParams = (
     isCheckedThirdPartyStorage,
     selectedFolderId,
-    selectedStorageId
+    selectedStorageId,
   ) => {
     let storageParams = [
       {
@@ -627,7 +747,7 @@ class BackupStore {
     for (let index = 0; index < length; index++) {
       res = await uploadBackup(
         combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
-        requestsDataArray[index]
+        requestsDataArray[index],
       );
 
       if (!res) return false;
@@ -654,8 +774,8 @@ class BackupStore {
         combineUrl(
           window.DocSpaceConfig?.proxy?.url,
           config.homepage,
-          `${url}?init=true&totalSize=${this.restoreResource.size}&extension=${extension}`
-        )
+          `${url}?init=true&totalSize=${this.restoreResource.size}&extension=${extension}`,
+        ),
       );
 
       if (!res) return false;
@@ -666,7 +786,7 @@ class BackupStore {
 
       const chunks = Math.ceil(
         this.restoreResource.size / chunkUploadSize,
-        chunkUploadSize
+        chunkUploadSize,
       );
 
       const requestsDataArray = [];
@@ -678,7 +798,7 @@ class BackupStore {
         const formData = new FormData();
         formData.append(
           "file",
-          this.restoreResource.slice(offset, offset + chunkUploadSize)
+          this.restoreResource.slice(offset, offset + chunkUploadSize),
         );
 
         requestsDataArray.push(formData);

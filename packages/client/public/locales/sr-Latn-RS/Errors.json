@@ -1,0 +1,7 @@
+{
+  "ErrorEmptyResponse": "Prazan odgovor",
+  "ErrorUnavailableText": "DocSpace nedostupan",
+  "InvalidLink": "Nevažeći link",
+  "LinkDoesNotExist": "Link koji pokušavate da otvorite ne postoji.",
+  "LinkHasExpired": "Link koji ste pratili je istekao."
+}

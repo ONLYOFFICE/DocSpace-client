@@ -45,6 +45,7 @@
   "UnselectAll": "Bỏ chọn tất cả",
   "URL": "URL",
   "ViewRawPayload": "Xem payload thô",
+  "WebhookCreated": "Webhook đã được tạo",
   "WebhookCreationHint": "Webhook này sẽ được chỉ định cho tất cả các sự kiện trong DocSpace",
   "WebhookDetails": "Chi tiết webhook",
   "WebhookEditedSuccessfully": "Cấu hình Webhook đã được chỉnh sửa thành công",

@@ -202,9 +202,12 @@ const ArticleMainButtonContent = (props) => {
 
       const event = new Event(Events.CREATE);
 
+      const isPDF = format === "pdf";
+
       const payload = {
         extension: format,
         id: -1,
+        edit: isPDF,
       };
       event.payload = payload;
 
@@ -231,7 +234,7 @@ const ArticleMainButtonContent = (props) => {
     (filter = FilesSelectorFilterTypes.DOCX) => {
       setSelectFileFormRoomDialogVisible(true, filter);
     },
-    [setSelectFileDialogVisible],
+    [setSelectFileFormRoomDialogVisible],
   );
 
   const onFileChange = React.useCallback(
@@ -345,22 +348,7 @@ const ArticleMainButtonContent = (props) => {
         icon: FormReactSvgUrl,
         label: t("Common:CreatePDFForm"),
         key: "new-form",
-        items: [
-          createTemplateBlankDocxf,
-          showSelectorFormRoomDocx,
-          {
-            id: "actions_template_from-oform",
-            className: "main-button_drop-down_sub",
-            icon: FormReactSvgUrl,
-            label: t("Common:FromReadyTemplate"),
-            onClick: () => {
-              onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.DOCXF);
-            },
-
-            disabled: isPrivacy,
-            key: "form-oform",
-          },
-        ],
+        items: [createTemplateBlankDocxf, showSelectorFormRoomDocx],
       };
 
       const uploadReadyPDFFrom = {
@@ -468,8 +456,8 @@ const ArticleMainButtonContent = (props) => {
       icon: FormBlankReactSvgUrl,
       label: t("Translations:SubNewForm"),
       onClick: onCreate,
-      action: "docxf",
-      key: "docxf",
+      action: "pdf",
+      key: "pdf",
     };
 
     const showSelectorDocx = {
@@ -540,6 +528,29 @@ const ArticleMainButtonContent = (props) => {
       action: "pptx",
       key: "pptx",
     };
+
+    const uploadActions = [
+      {
+        id: "actions_upload-files",
+        className: "main-button_drop-down",
+        icon: ActionsUploadReactSvgUrl,
+        label: t("UploadFiles"),
+        onClick: onUploadFileClick,
+        key: "upload-files",
+      },
+    ];
+
+    if (!(isMobile || isTablet)) {
+      uploadActions.push({
+        id: "actions_upload-folders",
+        className: "main-button_drop-down",
+        icon: ActionsUploadReactSvgUrl,
+        label: t("UploadFolder"),
+        disabled: isPrivacy,
+        onClick: onUploadFolderClick,
+        key: "upload-folder",
+      });
+    }
 
     if (
       currentRoomType === RoomsType.FormRoom ||
@@ -668,29 +679,6 @@ const ArticleMainButtonContent = (props) => {
           ...formActions,
           createNewFolder,
         ];
-
-    const uploadActions = [
-      {
-        id: "actions_upload-files",
-        className: "main-button_drop-down",
-        icon: ActionsUploadReactSvgUrl,
-        label: t("UploadFiles"),
-        onClick: onUploadFileClick,
-        key: "upload-files",
-      },
-    ];
-
-    if (!(isMobile || isTablet)) {
-      uploadActions.push({
-        id: "actions_upload-folders",
-        className: "main-button_drop-down",
-        icon: ActionsUploadReactSvgUrl,
-        label: t("UploadFolder"),
-        disabled: isPrivacy,
-        onClick: onUploadFolderClick,
-        key: "upload-folder",
-      });
-    }
 
     if (pluginItems.length > 0) {
       // menuModel.push({

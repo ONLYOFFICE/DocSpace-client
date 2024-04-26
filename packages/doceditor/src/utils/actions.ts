@@ -40,46 +40,15 @@ import type {
 import { TUser } from "@docspace/shared/api/people/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
 
-import type { IInitialConfig, TCatchError, TError, TResponse } from "@/types";
+import type {
+  ActionType,
+  IInitialConfig,
+  TCatchError,
+  TError,
+  TResponse,
+} from "@/types";
 
 import { REPLACED_URL_PATH } from "./constants";
-
-import { isTemplateFile } from ".";
-
-const processFillFormDraft = async (
-  config: IInitialConfig,
-  searchParams: URLSearchParams,
-
-  share?: string,
-): Promise<[string, IInitialConfig | TError, string | undefined] | void> => {
-  const templateFileId = config.file.id;
-
-  const formUrl = await checkFillFromDraft(templateFileId, share);
-
-  if (!formUrl) return;
-
-  const basePath = getBaseUrl();
-  const url = new URL(basePath + formUrl);
-
-  const queryFileId = url.searchParams.get("fileid");
-
-  if (!queryFileId) return;
-
-  url.searchParams.delete("fileid");
-
-  const combinedSearchParams = new URLSearchParams({
-    ...Object.fromEntries(searchParams),
-    ...Object.fromEntries(url.searchParams),
-  });
-
-  const actions: [Promise<IInitialConfig | TError>] = [
-    openEdit(queryFileId, combinedSearchParams.toString(), share),
-  ];
-
-  const [newConfig] = await Promise.all(actions);
-
-  return [queryFileId, newConfig, url.hash ?? ""];
-};
 
 export async function fileCopyAs(
   fileId: string,
@@ -211,20 +180,24 @@ export async function getData(
   fileId: string,
   version?: string,
   doc?: string,
-  view?: boolean,
+  action?: ActionType,
   share?: string,
   editorType?: string,
 ) {
+  const view = action === "view";
+  const edit = action === "edit";
+
   try {
     const searchParams = new URLSearchParams();
 
-    if (view) searchParams.append("view", view ? "true" : "false");
+    if (view) searchParams.append("view", "true");
     if (version) {
       searchParams.append("version", version);
     }
     if (doc) searchParams.append("doc", doc);
     if (share) searchParams.append("share", share);
     if (editorType) searchParams.append("editorType", editorType);
+    if (edit) searchParams.append("edit", "true");
 
     const [config, user, settings] = await Promise.all([
       openEdit(fileId, searchParams.toString(), share),
@@ -234,6 +207,7 @@ export async function getData(
     ]);
 
     if ("editorConfig" in config && typeof settings !== "string") {
+      const newFileId = config.file.id.toString();
       const response: TResponse = {
         config,
         user,
@@ -241,25 +215,8 @@ export async function getData(
         successAuth: false,
         isSharingAccess: false,
         doc,
-        fileId,
+        fileId: newFileId !== fileId ? newFileId : fileId,
       };
-
-      if (isTemplateFile(response.config)) {
-        const result = await processFillFormDraft(
-          response.config,
-          searchParams,
-          share,
-        );
-
-        if (result) {
-          const [newFileId, newConfig, hash] = result;
-
-          response.fileId = newFileId;
-          response.config = newConfig as IInitialConfig;
-
-          if (hash) response.hash = hash;
-        }
-      }
 
       const successAuth = !!user;
 
@@ -481,4 +438,3 @@ export async function getEditorUrl(
 
   return editorUrl.response as TDocServiceLocation;
 }
-

@@ -24,49 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { Metadata } from "next";
-import dynamic from "next/dynamic";
+import { RoomsType, ShareAccessRights } from "../enums";
 
-import AppLoader from "@docspace/shared/components/app-loader";
+export const getDefaultAccessUser = (
+  roomType: RoomsType,
+): ShareAccessRights => {
+  switch (roomType) {
+    case RoomsType.FormRoom:
+      return ShareAccessRights.FormFilling;
 
-import { getData } from "@/utils/actions";
-import { RootPageProps } from "@/types";
+    case RoomsType.PublicRoom:
+      return ShareAccessRights.RoomManager;
 
-const initialSearchParams: RootPageProps["searchParams"] = {
-  fileId: undefined,
-  fileid: undefined,
-  version: undefined,
-  doc: undefined,
-  action: undefined,
-  share: undefined,
-  editorType: undefined,
+    default:
+      return ShareAccessRights.ReadOnly;
+  }
 };
-
-const Root = dynamic(() => import("@/components/Root"), {
-  ssr: false,
-  loading: () => <AppLoader />,
-});
-
-export const metadata: Metadata = {
-  title: "Onlyoffice DocEditor page",
-
-  description: "",
-};
-
-async function Page({ searchParams }: RootPageProps) {
-  const { fileId, fileid, version, doc, action, share, editorType } =
-    searchParams ?? initialSearchParams;
-
-  const data = await getData(
-    fileId ?? fileid ?? "",
-    version,
-    doc,
-    action,
-    share,
-    editorType,
-  );
-
-  return <Root {...data} />;
-}
-
-export default Page;

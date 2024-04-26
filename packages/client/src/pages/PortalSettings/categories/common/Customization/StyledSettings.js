@@ -142,7 +142,7 @@ const StyledSettingsComponent = styled.div`
     }
 
     @media ${mobile} {
-      padding-right: 8px;
+      padding-inline-end: 8px;
     }
   }
 

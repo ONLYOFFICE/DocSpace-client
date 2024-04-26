@@ -481,33 +481,6 @@ export function convertLanguage(key: string) {
   }
 }
 
-export function convertToCulture(key: string) {
-  switch (key) {
-    case "ar":
-      return "ar-SA";
-    case "en":
-      return "en-US";
-    case "el":
-      return "el-GR";
-    case "hy":
-      return "hy-AM";
-    case "ko":
-      return "ko-KR";
-    case "lo":
-      return "lo-LA";
-    case "pt":
-      return "pt-BR";
-    case "uk":
-      return "uk-UA";
-    case "ja":
-      return "ja-JP";
-    case "zh":
-      return "zh-CN";
-    default:
-      return key;
-  }
-}
-
 export function convertToLanguage(key: string) {
   if (!key) return;
 
@@ -1052,20 +1025,22 @@ export const mapCulturesToArray = (
 ) => {
   if (i18nArg) {
     const t = i18nArg.getFixedT(null, "Common");
-    return culturesArg.map((culture) => {
+    return culturesArg.map((culture, index) => {
       return {
         key: culture,
         label: t(`Culture_${culture}`),
         icon: flagsIcons?.get(`${culture}.react.svg`),
         ...(isBetaBadge && { isBeta: isBetaLanguage(culture) }),
+        index,
       };
     });
   }
 
-  return culturesArg.map((culture) => {
+  return culturesArg.map((culture, index) => {
     return {
       key: culture,
       icon: flagsIcons?.get(`${culture}.react.svg`),
+      index,
     };
   });
 };

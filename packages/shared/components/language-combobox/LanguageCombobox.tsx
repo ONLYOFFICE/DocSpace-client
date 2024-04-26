@@ -57,7 +57,7 @@ const LanguageCombobox = (props: ComboboxProps) => {
   const onSelect = (culture: TCulture) => {
     if (culture.key === selectedCulture) return;
 
-    onSelectLanguage(culture.key);
+    onSelectLanguage(culture);
   };
 
   if (!currentCulture) return <></>;

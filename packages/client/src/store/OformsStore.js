@@ -41,14 +41,10 @@ import {
 } from "@docspace/shared/api/oforms";
 import { toastr } from "@docspace/shared/components/toast";
 
-import {
-  convertToCulture,
-  convertToLanguage,
-} from "@docspace/shared/utils/common";
+import { convertToLanguage } from "@docspace/shared/utils/common";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie } from "@docspace/shared/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { flagsIcons } from "@docspace/shared/utils/image-flags";
 
 const myDocumentsFolderId = 2;
 
@@ -115,11 +111,7 @@ class OformsStore {
     this.infoPanelStore.setInfoPanelSelection(gallerySelected);
   };
 
-  setOformLocales = (oformLocales) => {
-    const convertedLocales = oformLocales.map((item) => convertToCulture(item));
-
-    this.oformLocales = convertedLocales;
-  };
+  setOformLocales = (oformLocales) => (this.oformLocales = oformLocales);
 
   setFilterOformsByLocaleIsLoading = (filterOformsByLocaleIsLoading) => {
     this.filterOformsByLocaleIsLoading = filterOformsByLocaleIsLoading;
@@ -384,6 +376,10 @@ class OformsStore {
 
   get hasMoreForms() {
     return this.oformFiles.length < this.oformsFilterTotal;
+  }
+
+  get oformsCurrentLocal() {
+    return this.oformsFilter.locale;
   }
 }
 

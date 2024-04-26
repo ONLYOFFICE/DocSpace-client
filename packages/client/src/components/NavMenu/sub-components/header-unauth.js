@@ -99,9 +99,11 @@ const HeaderUnAuth = ({
   const currentCultureName = i18n.language;
 
   const onSelect = (culture) => {
-    i18n.changeLanguage(culture);
+    const { key } = culture;
 
-    setCookie(LANGUAGE, culture, {
+    i18n.changeLanguage(key);
+
+    setCookie(LANGUAGE, key, {
       "max-age": COOKIE_EXPIRATION_YEAR,
     });
 

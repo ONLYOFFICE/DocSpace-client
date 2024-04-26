@@ -28,13 +28,14 @@ export type TCulture = {
   key: string;
   icon: string;
   label?: string;
+  index?: number;
 };
 
 export type TCultures = TCulture[];
 export interface ComboboxProps {
   selectedCulture: string;
   cultures: string[];
-  onSelectLanguage: (culture: string) => void;
+  onSelectLanguage: (culture: TCulture) => void;
   /** Accepts id */
   id?: string;
   /** Accepts class */

@@ -146,10 +146,12 @@ const Login: React.FC<ILoginProps> = ({
     cookieSettingsEnabled: false,
   };
 
-  const onLanguageSelect = (culture: string) => {
-    i18n.changeLanguage(culture);
+  const onLanguageSelect = (culture: { key: string }) => {
+    const { key } = culture;
 
-    setCookie(LANGUAGE, culture, {
+    i18n.changeLanguage(key);
+
+    setCookie(LANGUAGE, key, {
       "max-age": COOKIE_EXPIRATION_YEAR,
     });
   };

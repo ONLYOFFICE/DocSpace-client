@@ -31,10 +31,28 @@ import { inject, observer } from "mobx-react";
 
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
+
+const keyedCollections = {
+  ar: "ar-SA",
+  en: "en-US",
+  el: "el-GR",
+  hy: "hy-AM",
+  ko: "ko-KR",
+  lo: "lo-LA",
+  pt: "pt-BR",
+  uk: "uk-UA",
+  ja: "ja-JP",
+  zh: "zh-CN",
+};
+
+const convertToCulture = (key) => {
+  return keyedCollections[key] ?? key;
+};
+
+const getOformLocaleByIndex = (index, array) => {
+  return array[index];
+};
 const LanguageFilter = ({
-  t,
-  oformsFilter,
-  defaultOformLocale,
   oformLocales,
   filterOformsByLocale,
   filterOformsByLocaleIsLoading,
@@ -42,9 +60,14 @@ const LanguageFilter = ({
   categoryFilterLoaded,
   languageFilterLoaded,
   oformFilesLoaded,
+  oformsCurrentLocal,
 }) => {
+  const convertedLocales = oformLocales.map((item) => convertToCulture(item));
+
   const onFilterByLocale = async (newLocale) => {
-    await filterOformsByLocale(newLocale);
+    const key = getOformLocaleByIndex(newLocale.index, oformLocales);
+
+    await filterOformsByLocale(key);
 
     const [sectionScroll] = document.getElementsByClassName("section-scroll");
     sectionScroll.scrollTop = 0;
@@ -62,18 +85,16 @@ const LanguageFilter = ({
 
   return (
     <LanguageCombobox
-      cultures={oformLocales}
+      cultures={convertedLocales}
       isAuthenticated
       onSelectLanguage={onFilterByLocale}
-      selectedCulture={oformsFilter.locale}
+      selectedCulture={convertToCulture(oformsCurrentLocal)}
       id="comboBoxLanguage"
     />
   );
 };
 
 export default inject(({ oformsStore }) => ({
-  oformsFilter: oformsStore.oformsFilter,
-  defaultOformLocale: oformsStore.defaultOformLocale,
   oformLocales: oformsStore.oformLocales,
   filterOformsByLocale: oformsStore.filterOformsByLocale,
   filterOformsByLocaleIsLoading: oformsStore.filterOformsByLocaleIsLoading,
@@ -81,4 +102,5 @@ export default inject(({ oformsStore }) => ({
   categoryFilterLoaded: oformsStore.categoryFilterLoaded,
   languageFilterLoaded: oformsStore.languageFilterLoaded,
   oformFilesLoaded: oformsStore.oformFilesLoaded,
+  oformsCurrentLocal: oformsStore.oformsCurrentLocal,
 }))(withTranslation(["Common"])(observer(LanguageFilter)));

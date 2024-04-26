@@ -37,11 +37,13 @@ import { observer } from "mobx-react";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { ArticleItem } from "@docspace/shared/components/article-item";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Portal } from "@docspace/shared/components/portal";
 
 import { useStores } from "@/hooks/useStores";
 import useDeviceType from "@/hooks/useDeviceType";
 
-import { StyledArticle } from "./article.styled";
+import { StyledArticle, StyledCrossIcon } from "./article.styled";
 import { ArticleHeader } from "./article-header";
 import { HideButton } from "./article-hide-button";
 
@@ -73,7 +75,7 @@ export const Article = observer(() => {
     router.push(`/${key}`);
   };
 
-  return (
+  const articleComponent = (
     <StyledArticle showText={showText} articleOpen={articleOpen}>
       <div className="article__content">
         <ArticleHeader />
@@ -111,5 +113,32 @@ export const Article = observer(() => {
       <HideButton />
     </StyledArticle>
   );
+
+  const renderPortalArticle = () => {
+    const articleElement = (
+      <>
+        <Backdrop
+          visible={articleOpen}
+          onClick={() => setArticleOpen(false)}
+          withBackground
+          //withBlur
+        />
+        {articleOpen && <StyledCrossIcon />}
+        {articleComponent}
+      </>
+    );
+
+    return (
+      <Portal
+        element={articleElement}
+        appendTo={document.body}
+        visible={articleOpen}
+      />
+    );
+  };
+
+  return currentDeviceType === DeviceType.mobile
+    ? renderPortalArticle()
+    : articleComponent;
 });
 

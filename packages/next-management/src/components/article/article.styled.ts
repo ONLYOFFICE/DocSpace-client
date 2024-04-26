@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
+
 import styled from "styled-components";
 import { desktop, tablet, mobile } from "@docspace/shared/utils";
 import { TColorScheme } from "@docspace/shared/themes";
@@ -58,6 +60,7 @@ export const StyledArticle = styled.article<{
   }
 
   @media ${mobile} {
+    z-index: 204;
     display: ${(props) => (props.articleOpen ? "flex" : "none")};
     flex-direction: column;
     min-width: 100dvw;
@@ -82,6 +85,24 @@ export const StyledArticleHeader = styled.h1<{ showText: boolean }>`
   font-weight: 700;
   line-height: 22px;
   ${(props) => !props.showText && "text-align: center"}
+`;
+
+export const StyledCrossIcon = styled(CrossIcon)`
+  position: absolute;
+  top: 37px;
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl" ? `left: 10px` : `right: 10px`};
+  border-radius: 100px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 290;
+  width: 17px;
+  height: 17px;
+  path {
+    stroke: ${(props) => props.theme.catalog.control.fill};
+  }
 `;
 
 export const StyledHideButtonWrapper = styled.div<{ showText: boolean }>`

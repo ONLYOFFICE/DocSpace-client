@@ -40,8 +40,6 @@ const GroupsItemTitle = ({
   infoPanelSelection,
   getGroupContextOptions,
 }) => {
-  if (isSeveralItems) return null;
-
   const itemTitleRef = useRef();
 
   const getContextOptions = () =>
@@ -50,6 +48,8 @@ const GroupsItemTitle = ({
   const groupName = infoPanelSelection.name
     ? decode(infoPanelSelection.name).trim()
     : "";
+
+  if (isSeveralItems) return null;
 
   return (
     <StyledAccountsItemTitle ref={itemTitleRef}>

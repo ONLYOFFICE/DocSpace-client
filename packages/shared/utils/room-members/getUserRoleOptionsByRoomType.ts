@@ -99,7 +99,6 @@ export const getUserRoleOptionsByRoomType = (
       return [
         options.roomAdmin,
         options.collaborator,
-        options.viewer,
         options.formFiller,
         ...deleteOption,
       ];

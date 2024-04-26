@@ -46,14 +46,13 @@ StyledComponent.defaultProps = { theme: Base };
 
 const CustomizationNavbar = ({
   t,
-  isLoaded,
   tReady,
   setIsLoadedCustomizationNavbar,
   isLoadedPage,
   isSettingPaid,
   enablePortalRename,
 }) => {
-  const isLoadedSetting = isLoaded && tReady;
+  const isLoadedSetting = tReady;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -103,9 +102,8 @@ const CustomizationNavbar = ({
 
 export default inject(({ common, settingsStore }) => {
   const { enablePortalRename } = settingsStore;
-  const { isLoaded, setIsLoadedCustomizationNavbar } = common;
+  const { setIsLoadedCustomizationNavbar } = common;
   return {
-    isLoaded,
     setIsLoadedCustomizationNavbar,
     enablePortalRename,
   };

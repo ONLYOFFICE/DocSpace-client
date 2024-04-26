@@ -23,98 +23,72 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { observer, inject } from "mobx-react";
-
-import HeaderIcon from "PUBLIC_DIR/images/ready.pdf.form.modal.svg";
+import { inject, observer } from "mobx-react";
 
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { FormEditingDialogProps } from "./PDFFormEditingDialog.types";
 
-import { Wrapper } from "./CreatedPDFFormDialog.styled";
-import type { CreatedPDFFormDialogProps } from "./CreatedPDFFormDialog.types";
+export const PDFFormEditingDialog = inject<TStore>(
+  ({ filesStore, dialogsStore }) => {
+    const { setPdfFormEditVisible, pdfFormEditData } = dialogsStore;
+    const { openDocEditor } = filesStore;
 
-export const CreatedPDFFormDialog = inject<TStore>(
-  ({ contextOptionsStore, selectedFolderStore }) => {
-    const { onClickInviteUsers, onClickLinkFillForm } = contextOptionsStore;
-    const { id, roomType, security } = selectedFolderStore;
-
-    return {
-      id,
-      roomType,
-      security,
-      onClickInviteUsers,
-      onClickLinkFillForm,
-    };
+    return { setPdfFormEditVisible, openDocEditor, pdfFormEditData };
   },
 )(
   observer(
     ({
-      data,
-      roomType,
-      security,
-      id: selectedFolderId,
-      onClickInviteUsers,
-      onClickLinkFillForm,
-      onClose,
-      visible,
-    }: CreatedPDFFormDialogProps) => {
+      pdfFormEditData,
+      openDocEditor,
+      setPdfFormEditVisible,
+    }: FormEditingDialogProps) => {
       const { t } = useTranslation(["PDFFormDialog", "Common"]);
 
-      const onSubmit = () => {
-        if (data.isFill) {
-          onClickLinkFillForm?.(data.file);
-        } else if (Boolean(roomType) && security?.EditAccess) {
-          onClickInviteUsers?.(selectedFolderId, roomType);
-        }
+      const onClose = () => {
+        setPdfFormEditVisible!(false, null);
+      };
+
+      const handleSubmit = () => {
+        if (pdfFormEditData) openDocEditor!(pdfFormEditData, false, null, true);
 
         onClose();
       };
 
-      const description = data.isFill
-        ? t("PDFFormSuccessfullyCreatedDescription")
-        : t("PDFFormInviteDescription");
-
-      const primaryButtonLabel = data.isFill
-        ? t("Common:Fill")
-        : t("Common:Invite");
-
       return (
         <ModalDialog
+          visible
           autoMaxHeight
-          visible={visible}
           onClose={onClose}
           displayType={ModalDialogType.modal}
         >
-          <ModalDialog.Header>{t("PDFFormDialogTitle")}</ModalDialog.Header>
+          <ModalDialog.Header>
+            {t("PDFFormDialog:PDFFormEditDialogTitle")}
+          </ModalDialog.Header>
           <ModalDialog.Body>
-            <Wrapper>
-              <HeaderIcon />
-              <span>{description}</span>
-            </Wrapper>
+            <span>{t("PDFFormDialog:PDFFormEditDialogDescription")}</span>
           </ModalDialog.Body>
+
           <ModalDialog.Footer>
             <Button
               scale
               primary
               tabIndex={0}
               size={ButtonSize.normal}
-              label={primaryButtonLabel}
-              onClick={onSubmit}
-              // isLoading={isLoading}
+              label={t("Common:EditButton")}
+              onClick={handleSubmit}
             />
             <Button
               scale
               tabIndex={0}
               onClick={onClose}
               size={ButtonSize.normal}
-              label={t("Common:Later")}
-              // isDisabled={isLoading}
+              label={t("Common:CancelButton")}
             />
           </ModalDialog.Footer>
         </ModalDialog>

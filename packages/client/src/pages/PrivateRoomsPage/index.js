@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import DarkGeneralPngUrl from "PUBLIC_DIR/images/dark_general.png";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
@@ -34,11 +34,10 @@ import { Loader } from "@docspace/shared/components/loader";
 import Section from "@docspace/shared/components/section";
 import SectionWrapper from "SRC_DIR/components/Section";
 import { mobile, tablet } from "@docspace/shared/utils";
-import { I18nextProvider, Trans, withTranslation } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 //import { setDocumentTitle } from "@docspace/client/src/helpers/filesUtils";
-import i18n from "./i18n";
 import { toastr } from "@docspace/shared/components/toast";
 import { checkProtocol } from "../../helpers/files-helpers";
 import Base from "@docspace/shared/themes/base";
@@ -250,13 +249,11 @@ const PrivacyPageWrapper = withTranslation(["PrivacyPage"])(
 
 const PrivacyPage = (props) => {
   return (
-    <I18nextProvider i18n={i18n}>
-      <SectionWrapper>
-        <Section.SectionBody>
-          <PrivacyPageWrapper {...props} />
-        </Section.SectionBody>
-      </SectionWrapper>
-    </I18nextProvider>
+    <SectionWrapper>
+      <Section.SectionBody>
+        <PrivacyPageWrapper {...props} />
+      </Section.SectionBody>
+    </SectionWrapper>
   );
 };
 

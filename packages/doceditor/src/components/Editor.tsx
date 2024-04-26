@@ -50,6 +50,12 @@ import {
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
 
+type IConfigType = IConfig & {
+  events?: {
+    onRequestStartFilling?: (event: object) => void;
+  };
+};
+
 const Editor = ({
   config,
   successAuth,
@@ -85,7 +91,7 @@ const Editor = ({
     onDocumentStateChange,
     onMetaChange,
     onMakeActionLink,
-
+    onRequestStartFilling,
     documentReady,
 
     setDocTitle,
@@ -109,7 +115,7 @@ const Editor = ({
     t,
   });
 
-  const newConfig: IConfig = config
+  const newConfig: IConfigType = config
     ? {
         document: config.document,
         documentType: config.documentType,
@@ -194,7 +200,8 @@ const Editor = ({
   newConfig.events = {
     onDocumentReady,
     onRequestHistoryClose: onSDKRequestHistoryClose,
-    onRequestEditRights: () => onSDKRequestEditRights(fileInfo),
+    onRequestEditRights: () =>
+      onSDKRequestEditRights(fileInfo, newConfig.documentType),
     onAppReady: onSDKAppReady,
     onInfo: onSDKInfo,
     onWarning: onSDKWarning,
@@ -262,6 +269,10 @@ const Editor = ({
     window.DocSpaceConfig?.editor?.requestClose
   ) {
     newConfig.events.onRequestClose = onSDKRequestClose;
+  }
+
+  if (config?.startFilling) {
+    newConfig.events.onRequestStartFilling = onRequestStartFilling;
   }
 
   return (

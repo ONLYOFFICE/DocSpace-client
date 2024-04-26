@@ -72,9 +72,10 @@ import saveAs from "file-saver";
 import { isMobile, isIOS } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { toastr } from "@docspace/shared/components/toast";
-import { ShareAccessRights, RoomsType } from "@docspace/shared/enums";
+import { RoomsType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isDesktop } from "@docspace/shared/utils";
+import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { Events } from "@docspace/shared/enums";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 
@@ -631,6 +632,10 @@ class ContextOptionsStore {
     setDeleteDialogVisible(true);
   };
 
+  onOpenPDFEditDialog = (id) => {
+    this.dialogsStore.setPdfFormEditVisible(true, id);
+  };
+
   filterModel = (model, filter) => {
     let options = [];
     let index = 0;
@@ -793,10 +798,7 @@ class ContextOptionsStore {
         visible: true,
         roomId: action ? action : e,
         hideSelector: false,
-        defaultAccess:
-          roomType === RoomsType.PublicRoom
-            ? ShareAccessRights.RoomManager
-            : ShareAccessRights.ReadOnly,
+        defaultAccess: getDefaultAccessUser(roomType),
       });
     }
   };
@@ -1223,6 +1225,22 @@ class ContextOptionsStore {
         label: t("Common:FillFormButton"),
         icon: FormFillRectSvgUrl,
         onClick: () => this.onClickLinkFillForm(item),
+        disabled: !item.startFilling,
+      },
+      {
+        id: "option_open-pdf",
+        key: "open-pdf",
+        label: t("Open"),
+        icon: EyeReactSvgUrl,
+        onClick: () => this.gotoDocEditor(false, item),
+        disabled: false,
+      },
+      {
+        id: "option_edit-pdf",
+        key: "edit-pdf",
+        label: t("Common:EditPDFForm"),
+        icon: AccessEditReactSvgUrl,
+        onClick: () => this.onOpenPDFEditDialog(item.id),
         disabled: false,
       },
       {

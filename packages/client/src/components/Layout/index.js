@@ -61,8 +61,14 @@ const StyledContainer = styled.div`
 `;
 
 const Layout = (props) => {
-  const { children, isTabletView, setIsTabletView, setWindowWidth, isFrame } =
-    props;
+  const {
+    children,
+    isTabletView,
+    setIsTabletView,
+    setWindowWidth,
+    setWindowAngle,
+    isFrame,
+  } = props;
 
   const [contentHeight, setContentHeight] = useState();
   const [isPortrait, setIsPortrait] = useState();
@@ -97,12 +103,23 @@ const Layout = (props) => {
     window.addEventListener("resize", onResize);
 
     if (isMobile || isTabletView || !isFrame) {
-      window.addEventListener("orientationchange", onOrientationChange);
+      if (window.screen?.orientation) {
+        window.screen.orientation.addEventListener(
+          "change",
+          onOrientationChange,
+        );
+      } else {
+        window.addEventListener("orientationchange", onOrientationChange);
+      }
     }
 
     return () => {
       window.removeEventListener("resize", onResize);
       window.removeEventListener("orientationchange", onOrientationChange);
+      window.screen?.orientation?.removeEventListener(
+        "change",
+        onOrientationChange,
+      );
     };
   }, [isTabletView]);
 
@@ -128,6 +145,9 @@ const Layout = (props) => {
     e.preventDefault();
     e.stopPropagation();
 
+    const angle = window.screen?.orientation?.angle ?? window.orientation ?? 0;
+
+    setWindowAngle(angle);
     setWindowWidth(window.innerWidth);
   };
 
@@ -149,12 +169,18 @@ Layout.propTypes = {
 };
 
 export default inject(({ settingsStore }) => {
-  const { isTabletView, setIsTabletView, setWindowWidth, isFrame } =
-    settingsStore;
+  const {
+    isTabletView,
+    setIsTabletView,
+    setWindowWidth,
+    isFrame,
+    setWindowAngle,
+  } = settingsStore;
   return {
     isTabletView,
     setIsTabletView,
     setWindowWidth,
+    setWindowAngle,
     isFrame,
   };
 })(observer(Layout));

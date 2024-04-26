@@ -68,22 +68,6 @@ export const getBackUrl = (
   return `${combineUrl(origin, backUrl)}`;
 };
 
-export const isTemplateFile = (
-  config: IInitialConfig | undefined,
-): config is IInitialConfig => {
-  const fileMeta = config?.file;
-
-  return (
-    !IS_VIEW &&
-    !!fileMeta &&
-    fileMeta.viewAccessibility.WebRestrictedEditing &&
-    fileMeta.security.FillForms &&
-    fileMeta.rootFolderType === FolderType.Rooms &&
-    !fileMeta.security.Edit &&
-    !config.document.isLinkedForMe
-  );
-};
-
 export const showDocEditorMessage = async (
   url: string,
   id: string | number,

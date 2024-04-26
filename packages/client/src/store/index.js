@@ -79,6 +79,7 @@ import ImportAccountsStore from "./ImportAccountsStore";
 import PluginStore from "./PluginStore";
 import InfoPanelStore from "./InfoPanelStore";
 import CampaignsStore from "./CampaignsStore";
+import IndexingStore from "./IndexingStore";
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
@@ -104,6 +105,7 @@ const setupStore = new SettingsSetupStore(
 const confirmStore = new ConfirmStore();
 const backupStore = new BackupStore();
 const commonStore = new CommonStore(settingsStore);
+const indexingStore = new IndexingStore();
 
 const ssoStore = new SsoFormStore();
 
@@ -231,6 +233,7 @@ const contextOptionsStore = new ContextOptionsStore(
   infoPanelStore,
   currentTariffStatusStore,
   userStore,
+  indexingStore,
 );
 
 const hotkeyStore = new HotkeyStore(
@@ -347,6 +350,7 @@ const store = {
   pluginStore,
   storageManagement,
   campaignsStore,
+  indexingStore,
 };
 
 export default store;

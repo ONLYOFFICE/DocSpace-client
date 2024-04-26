@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "من نحن",
   "AboutCompanyTitle": "نبذة تعريفية عن البرنامج",
   "AccessDenied": "المحاولة مرفوضة",
@@ -345,7 +345,6 @@
   "SelectDOCXFormat": "اختيار ملف .DOCX",
   "SelectFile": "اختيار ملف",
   "SelectFiles": "اختر الملفات",
-  "SelectIMGFormat": "اخترملف  IMG",
   "SelectorEmptyScreenHeader": "لا يوجد ملفات أو مجلدات بعد",
   "SelectRoom": "اختر الغرفة",
   "SelectXLSXFormat": "اختر ملف  XLSX",

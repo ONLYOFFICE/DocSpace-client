@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Sobre",
   "AboutCompanyTitle": "Sobre este programa",
   "AccessDenied": "Acesso negado",
@@ -346,7 +346,6 @@
   "SelectFile": "Selecionar ficheiro",
   "SelectFiles": "Selecionar arquivos",
   "SelectFolder": "Selecione a pasta",
-  "SelectIMGFormat": "Selecione o arquivo IMG",
   "SelectorEmptyScreenHeader": "Nenhum arquivo e pasta aqui ainda",
   "SelectRoom": "Selecione o sala",
   "SelectXLSXFormat": "Selecione o arquivo .XLSX",

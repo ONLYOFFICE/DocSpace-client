@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "O",
   "AboutCompanyTitle": "O tym programie",
   "AccessDenied": "Odmowa dostępu",
@@ -346,7 +346,6 @@
   "SelectFile": "Wybierz plik",
   "SelectFiles": "Wybierz pliki",
   "SelectFolder": "Wybierz folder",
-  "SelectIMGFormat": "Wybierz plik IMG",
   "SelectorEmptyScreenHeader": "Brak plików i katalogów",
   "SelectRoom": "Wybierz pokój",
   "SelectXLSXFormat": "Wybierz plik .XLSX",

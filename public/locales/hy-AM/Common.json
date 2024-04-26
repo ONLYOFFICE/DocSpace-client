@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Մասին",
   "AboutCompanyTitle": "Ծրագրի մասին",
   "AccessDenied": "Մուտքն արգելված է",
@@ -346,7 +346,6 @@
   "SelectFile": "Ընտրել ֆայլ",
   "SelectFiles": "Ֆայլերի ընտրություն",
   "SelectFolder": "Ընտեք թղթապանակ",
-  "SelectIMGFormat": "Ընտրեք IMG ֆայլ",
   "SelectorEmptyScreenHeader": "Այստեղ դեռ ֆայլեր և թղթապանակներ չկան",
   "SelectRoom": "Ընտրել Սենյակ",
   "SelectXLSXFormat": "Ընտրել .XLSX ֆայլը",

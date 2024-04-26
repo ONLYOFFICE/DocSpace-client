@@ -53,7 +53,9 @@ export const isMobile = (width?: number) => {
 };
 
 export const isMobileDevice = () => {
-  const angleByRadians = (Math.PI / 180) * window.screen.orientation.angle;
+  const angleByRadians =
+    (Math.PI / 180) *
+    (window.screen?.orientation?.angle ?? window.orientation ?? 0);
   const width = Math.abs(
     Math.round(
       Math.sin(angleByRadians) * window.innerHeight +

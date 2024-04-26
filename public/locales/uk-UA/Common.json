@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Інформація",
   "AboutCompanyTitle": "Про цю програму",
   "AccessDenied": "Доступ заборонено",
@@ -346,7 +346,6 @@
   "SelectFile": "Вибрати файл",
   "SelectFiles": "Вибрати файли",
   "SelectFolder": "Вибрати папку",
-  "SelectIMGFormat": "Вибрати файл IMG",
   "SelectorEmptyScreenHeader": "Тут ще немає файлів і папок",
   "SelectRoom": "Вибрати кімнату",
   "SelectXLSXFormat": "Вибрати файл .XLSX",

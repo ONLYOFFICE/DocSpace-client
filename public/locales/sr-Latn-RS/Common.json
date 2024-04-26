@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "U vezi sa",
   "AboutCompanyTitle": "U vezi ovog programa",
   "AccessDenied": "Pristup odbijen",
@@ -345,7 +345,6 @@
   "SelectFile": "Izaberi datoteku",
   "SelectFiles": "Izaberi datoteke",
   "SelectFolder": "Odaberite folder",
-  "SelectIMGFormat": "Izaberi IMG datoteku",
   "SelectorEmptyScreenHeader": "Još uvek nema datoteka i foldera ovde",
   "SelectRoom": "Izaberi sobu",
   "SelectXLSXFormat": "Izaberi .XLSX datoteku",

@@ -30,7 +30,7 @@ import { ReactSVG } from "react-svg";
 import TriangleNavigationDownReactSvgUrl from "PUBLIC_DIR/images/triangle.navigation.down.react.svg?url";
 
 import { Text } from "../text";
-import { ContextMenu, ContextMenuTypeOnClick } from "../context-menu";
+import { ContextMenu } from "../context-menu";
 
 import { GroupMainButton } from "./MainButton.styled";
 import { MainButtonProps } from "./MainButton.types";
@@ -47,7 +47,6 @@ const MainButton = (props: MainButtonProps) => {
     toggle: (e: React.MouseEvent) => boolean;
     getVisible: () => boolean;
   }>(null);
-  const visibleRef = useRef(false);
 
   const stopAction = (e: React.MouseEvent) => e.preventDefault();
 
@@ -56,12 +55,7 @@ const MainButton = (props: MainButtonProps) => {
 
     const menu = menuRef.current;
 
-    if (visibleRef.current) {
-      menu.hide(e);
-      visibleRef.current = false;
-    } else {
-      visibleRef.current = menu.toggle(e);
-    }
+    menu.toggle(e);
   };
 
   const onMainButtonClick = (e: React.MouseEvent) => {
@@ -76,20 +70,6 @@ const MainButton = (props: MainButtonProps) => {
     }
   };
 
-  const newModel = React.useMemo(() => {
-    return model.map((m) => {
-      if ("onClick" in m && m.onClick) {
-        const onClick: ContextMenuTypeOnClick = (e) => {
-          visibleRef.current = false;
-          m.onClick?.(e);
-        };
-        return { ...m, onClick };
-      }
-
-      return m;
-    });
-  }, [model]);
-
   return (
     <GroupMainButton {...rest} ref={ref} data-testid="main-button">
       <MainButtonTheme {...rest} id={id} onClick={onMainButtonClick}>
@@ -101,7 +81,7 @@ const MainButton = (props: MainButtonProps) => {
               src={TriangleNavigationDownReactSvgUrl}
             />
 
-            <ContextMenu model={newModel} containerRef={ref} ref={menuRef} />
+            <ContextMenu model={model} containerRef={ref} ref={menuRef} />
           </>
         )}
       </MainButtonTheme>

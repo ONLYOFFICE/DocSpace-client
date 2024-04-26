@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Giới thiệu",
   "AboutCompanyTitle": "Giới thiệu về chương trình này",
   "AccessDenied": "Truy cập bị từ chối",
@@ -346,7 +346,6 @@
   "SelectFile": "Chọn tệp",
   "SelectFiles": "Chọn tập tin",
   "SelectFolder": "Chọn thư mục",
-  "SelectIMGFormat": "Chọn tập tin IMG",
   "SelectorEmptyScreenHeader": "Chưa có tập tin và thư mục nào ở đây",
   "SelectRoom": "Chọn phòng",
   "SelectXLSXFormat": "Chọn tập tin .XLSX",

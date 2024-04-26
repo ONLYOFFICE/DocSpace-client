@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "O aplikácii",
   "AboutCompanyTitle": "O programe",
   "AccessDenied": "Prístup bol zamietnutý",
@@ -346,7 +346,6 @@
   "SelectFile": "Vybrať súbor",
   "SelectFiles": "Vyberte súbory",
   "SelectFolder": "Vybrať priečinok",
-  "SelectIMGFormat": "Vyberte súbor IMG",
   "SelectorEmptyScreenHeader": "Zatiaľ tu nie sú žiadne súbory a priečinky",
   "SelectRoom": "Vyberte miestnosť",
   "SelectXLSXFormat": "Vyberte súbor .XLSX",

@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Haqqında",
   "AboutCompanyTitle": "Proqram haqqında",
   "AccessDenied": "Giriş qadağandır",
@@ -346,7 +346,6 @@
   "SelectFile": "Faylı seçin",
   "SelectFiles": "Faylları seçin",
   "SelectFolder": "Qovluq seç",
-  "SelectIMGFormat": "IMG faylını seçin",
   "SelectorEmptyScreenHeader": "Burada hələ heç bir fayl və ya qovluq yoxdur",
   "SelectRoom": "Otaq seçin",
   "SelectXLSXFormat": ".XLSX faylını seçin",

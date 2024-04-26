@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-const ManagementPage = () => {
-  return <div>Management</div>;
+const PaymentsPage = () => {
+  return <div>Payments</div>;
 };
 
-export default ManagementPage;
+export default PaymentsPage;
 

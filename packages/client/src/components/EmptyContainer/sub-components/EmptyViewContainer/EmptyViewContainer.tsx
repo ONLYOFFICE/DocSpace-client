@@ -13,18 +13,33 @@ import {
   getTitle,
 } from "./EmptyViewContainer.helpers";
 
-import type { EmptyViewContainerProps } from "./EmptyViewContainer.types";
+import type {
+  EmptyViewContainerProps,
+  UploadType,
+} from "./EmptyViewContainer.types";
 
 const EmptyViewContainer = observer(
   ({
     type,
+    access,
     folderId,
     security,
     onClickInviteUsers,
     setSelectFileFormRoomDialogVisible,
   }: EmptyViewContainerProps) => {
-    const { t } = useTranslation();
+    const { t } = useTranslation(["EmptyView"]);
     const theme = useTheme();
+
+    const onUploadAction = useCallback((uploadType: UploadType) => {
+      const element =
+        uploadType === "file"
+          ? document.getElementById("customFileInput")
+          : uploadType === "pdf"
+            ? document.getElementById("customPDFInput")
+            : document.getElementById("customFolderInput");
+
+      element?.click();
+    }, []);
 
     const inviteUser = useCallback(() => {
       onClickInviteUsers?.(folderId, type);
@@ -34,6 +49,10 @@ const EmptyViewContainer = observer(
       setSelectFileFormRoomDialogVisible?.(true, FilesSelectorFilterTypes.DOCX);
     }, [setSelectFileFormRoomDialogVisible]);
 
+    const uploadPDFForm = useCallback(() => {
+      setSelectFileFormRoomDialogVisible?.(true, FilesSelectorFilterTypes.PDF);
+    }, [setSelectFileFormRoomDialogVisible]);
+
     const onCreateDocumentForm = useCallback(() => {
       const event: Event & {
         payload?: { extension: string; id: number; withoutDialog: boolean };
@@ -41,7 +60,7 @@ const EmptyViewContainer = observer(
 
       const payload = {
         id: -1,
-        extension: "docxf",
+        extension: "pdf",
         withoutDialog: true,
       };
       event.payload = payload;
@@ -50,21 +69,34 @@ const EmptyViewContainer = observer(
     }, []);
 
     const emptyViewOptions = useMemo(() => {
-      const description = t(getDescription(type));
-      const title = t(getTitle(type));
+      const description = getDescription(type, t, access);
+      const title = getTitle(type, t, access);
       const icon = getIcon(type, theme.isBase);
 
       return { description, title, icon };
-    }, [type, t, theme.isBase]);
+    }, [type, t, theme.isBase, access]);
 
     const options = useMemo(
       () =>
-        getOptions(type, security!, t, {
+        getOptions(type, security!, t, access, {
           inviteUser,
           createFormFromFile,
           onCreateDocumentForm,
+          uploadPDFForm,
+          onUploadAction,
         }),
-      [type, t, inviteUser, createFormFromFile, onCreateDocumentForm, security],
+      [
+        type,
+        access,
+        security,
+
+        t,
+        inviteUser,
+        uploadPDFForm,
+        onUploadAction,
+        createFormFromFile,
+        onCreateDocumentForm,
+      ],
     );
 
     const { description, title, icon } = emptyViewOptions;
@@ -86,9 +118,14 @@ const injectedEmptyViewContainer = inject<TStore>(
 
     const { setSelectFileFormRoomDialogVisible } = dialogsStore;
 
-    const { security } = selectedFolderStore;
+    const { security, access } = selectedFolderStore;
 
-    return { onClickInviteUsers, security, setSelectFileFormRoomDialogVisible };
+    return {
+      access,
+      security,
+      onClickInviteUsers,
+      setSelectFileFormRoomDialogVisible,
+    };
   },
 )(EmptyViewContainer);
 

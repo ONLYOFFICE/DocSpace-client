@@ -60,7 +60,7 @@ const StyledLinkRow = styled.div`
   }
 
   .combo-button {
-    padding-left: 8px;
+    padding-inline-start: 8px;
   }
 
   .link-options {
@@ -82,14 +82,14 @@ const StyledLinkRow = styled.div`
   }
 
   .expire-text {
-    margin-left: 8px;
+    margin-inline-start: 8px;
   }
 
   .link-actions {
     display: flex;
     gap: 16px;
     align-items: center;
-    margin-left: auto;
+    margin-inline-start: auto;
   }
 
   .loader {

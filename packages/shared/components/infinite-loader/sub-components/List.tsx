@@ -180,6 +180,8 @@ const ListComponent = ({
                 overscanRowCount={3}
                 onScroll={onScroll}
                 viewAs={viewAs}
+                // React virtualized sets "LTR" by default.
+                style={{ direction: "inherit" }}
               />
             );
           }}

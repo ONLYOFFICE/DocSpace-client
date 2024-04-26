@@ -72,27 +72,40 @@ export const onSDKRequestHistoryClose = () => {
   document.location.reload();
 };
 
-export const onSDKRequestEditRights = async (fileInfo?: TFile) => {
+export const onSDKRequestEditRights = async (
+  fileInfo?: TFile,
+  documentType?: string,
+) => {
   console.log("ONLYOFFICE Document Editor requests editing rights");
+
   const url = window.location.href;
+  const isPDF = documentType === "pdf";
 
-  const index = url.indexOf("&action=view");
+  if (isPDF) {
+    const newURL = new URL(url);
 
-  if (index) {
-    let convertUrl = url.substring(0, index);
-
-    if (
-      fileInfo?.viewAccessibility?.MustConvert &&
-      fileInfo?.security?.Convert
-    ) {
-      const newUrl = await convertDocumentUrl(fileInfo.id);
-      if (newUrl) {
-        convertUrl = newUrl.webUrl;
-      }
+    if (newURL.searchParams.has("action")) {
+      newURL.searchParams.delete("action");
     }
-    history.pushState({}, "", convertUrl);
+
+    newURL.searchParams.append("action", "edit");
+
+    history.pushState({}, "", newURL.toString());
     document.location.reload();
+
+    return;
   }
+
+  let convertUrl = url;
+
+  if (fileInfo?.viewAccessibility?.MustConvert && fileInfo?.security?.Convert) {
+    const newUrl = await convertDocumentUrl(fileInfo.id);
+    if (newUrl) {
+      convertUrl = newUrl.webUrl;
+    }
+  }
+  history.pushState({}, "", convertUrl);
+  document.location.reload();
 };
 
 export type TRenameEvent = {

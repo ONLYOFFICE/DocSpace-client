@@ -178,9 +178,3 @@ export const SYSTEM_FONT_FAMILY =
   "-apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Arial, sans-serif, Roboto, Noto Sans Arabic, Geeza Pro, Traditional Arabic, Noto Sans";
 
 export const HTML_EXST = [".htm", ".mht", ".html"];
-
-export const COPY_AS = {
-  PDF: "pdf",
-  DOCX: "DOCXF",
-  DOCXF: "DOCXF",
-} as const;

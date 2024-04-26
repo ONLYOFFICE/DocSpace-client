@@ -97,6 +97,7 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
+import TableIndexHeader from "../IndexHeader";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -208,6 +209,7 @@ const SectionHeaderContent = (props) => {
     mainButtonItemsList,
     security,
     setIsFolderActions,
+    setIsIndexEditingMode,
     setBufferSelection,
     setMoveToPanelVisible,
     tReady,
@@ -223,6 +225,7 @@ const SectionHeaderContent = (props) => {
     isArchiveFolder,
     isEmptyFilesList,
     isHeaderVisible,
+    isIndexEditingMode,
     isHeaderChecked,
     isHeaderIndeterminate,
     showText,
@@ -1288,6 +1291,8 @@ const SectionHeaderContent = (props) => {
     isMobileView: currentDeviceType === DeviceType.mobile,
   };
 
+  const tableIndexHeaderProps = { setIsIndexEditingMode, t };
+
   if (isAccountsPage && !(isGroupsPage && isRoomAdmin)) {
     tableGroupMenuVisible =
       (!isGroupsPage ? isAccountsHeaderVisible : isGroupsHeaderVisible) &&
@@ -1384,6 +1389,8 @@ const SectionHeaderContent = (props) => {
         <StyledContainer isRecycleBinFolder={isRecycleBinFolder}>
           {tableGroupMenuVisible ? (
             <TableGroupMenu {...tableGroupMenuProps} withComboBox />
+          ) : isIndexEditingMode ? (
+            <TableIndexHeader {...tableIndexHeaderProps} />
           ) : (
             <div className="header-container">
               <Navigation
@@ -1496,6 +1503,7 @@ export default inject(
     currentTariffStatusStore,
     settingsStore,
     uploadDataStore,
+    indexingStore,
   }) => {
     const { startUpload } = uploadDataStore;
     const isOwner = userStore.user?.isOwner;
@@ -1656,6 +1664,7 @@ export default inject(
       getCheckboxItemLabel: getAccountsCheckboxItemLabel,
     } = headerMenuStore;
 
+    const { isIndexEditingMode, setIsIndexEditingMode } = indexingStore;
     const { setSelected: setAccountsSelected } = selectionStore;
     const { isPublicRoom, primaryLink, setExternalLink } = publicRoomStore;
 
@@ -1703,6 +1712,8 @@ export default inject(
       setIsInfoPanelVisible: setIsVisible,
       isInfoPanelVisible: isVisible,
       isHeaderVisible,
+      isIndexEditingMode,
+      setIsIndexEditingMode,
       isHeaderIndeterminate,
       isHeaderChecked,
       isThirdPartySelection,

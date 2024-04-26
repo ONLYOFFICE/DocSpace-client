@@ -188,7 +188,7 @@ const ForgotPasswordModalDialog = ({
           scale
           primary={false}
           onClick={onDialogClose}
-          isLoading={isLoading}
+          // isLoading={isLoading}
           isDisabled={isLoading}
           tabIndex={2}
         />

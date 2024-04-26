@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 
 import { Toast } from "@docspace/shared/components/toast";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
@@ -56,6 +57,23 @@ export default async function RootLayout({
   ]);
 
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+
+  if (settings === "portal-not-found") {
+    const config = await (
+      await fetch(`${getBaseUrl()}/static/scripts/config.json`)
+    ).json();
+    const hdrs = headers();
+    const host = hdrs.get("host");
+
+    const url = new URL(
+      config.wrongPortalNameUrl ??
+        "https://www.onlyoffice.com/wrongportalname.aspx",
+    );
+
+    url.searchParams.append("url", host ?? "");
+
+    redirect(url.toString());
+  }
 
   if (settings?.tenantStatus === TenantStatus.PortalRestore) {
     redirect(`${getBaseUrl()}/preparation-portal`);

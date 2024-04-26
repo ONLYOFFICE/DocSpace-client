@@ -26,7 +26,7 @@
 
 "use server";
 
-import { headers, cookies } from "next/headers";
+import { cookies } from "next/headers";
 
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 
@@ -39,7 +39,6 @@ import {
   TVersionBuild,
 } from "@docspace/shared/api/settings/types";
 import { TenantStatus } from "@docspace/shared/enums";
-import { TWhiteLabel } from "@docspace/shared/utils/whiteLabelHelper";
 
 export const checkIsAuthenticated = async () => {
   const [request] = createRequest(["/authentication"], [["", ""]], "GET");
@@ -63,6 +62,8 @@ export async function getSettings() {
   const settingsRes = await fetch(getSettings);
 
   if (settingsRes.status === 403) return `access-restricted`;
+
+  if (settingsRes.status === 404) return "portal-not-found";
 
   if (!settingsRes.ok) return;
 
@@ -153,6 +154,7 @@ export const getData = async () => {
   if (
     settings &&
     settings !== "access-restricted" &&
+    settings !== "portal-not-found" &&
     settings.tenantStatus !== TenantStatus.PortalRestore
   ) {
     const response = await Promise.all([

@@ -28,7 +28,8 @@ interface MobileDetailsProps {
   icon: string;
   title: string;
   isError: boolean;
-  isPreviewFile: boolean;
+  isPreviewFile?: boolean;
+  showBackArrow: boolean;
   contextModel: () => ContextMenuModel[];
 
   onHide: VoidFunction;

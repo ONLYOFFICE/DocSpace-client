@@ -64,7 +64,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     deleteDialogVisible,
     pluginContextMenuItems,
     currentDeviceType,
-
+    isPublicFile,
     t,
     getIcon,
     onClose,
@@ -448,6 +448,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       targetFile={targetFile}
       userAccess={userAccess}
       playlistPos={playlistPos}
+      isPublicFile={isPublicFile}
       isPreviewFile={isPreviewFile}
       currentDeviceType={currentDeviceType}
       onClose={onClose}

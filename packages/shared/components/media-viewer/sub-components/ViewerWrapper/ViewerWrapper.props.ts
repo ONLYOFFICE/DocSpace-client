@@ -42,7 +42,8 @@ interface ViewerWrapperProps {
   isImage: boolean;
   isAudio: boolean;
   isVideo: boolean;
-  isPreviewFile: boolean;
+  isPreviewFile?: boolean;
+  isPublicFile?: boolean;
 
   errorTitle: string;
   headerIcon: string;

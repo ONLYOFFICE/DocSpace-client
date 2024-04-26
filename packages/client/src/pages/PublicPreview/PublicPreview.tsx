@@ -86,7 +86,7 @@ const PublicPreview = ({
           t={t}
           visible
           files={files}
-          isPreviewFile
+          isPublicFile
           playlistPos={0}
           playlist={playlist}
           getIcon={getIconUrl}

@@ -46,7 +46,8 @@ interface ViewerProps {
   headerIcon: string;
   toolbar: ReturnType<typeof getCustomToolbar>;
   playlistPos: number;
-  isPreviewFile: boolean;
+  isPreviewFile?: boolean;
+  isPublicFile?: boolean;
 
   currentDeviceType?: DeviceType;
 

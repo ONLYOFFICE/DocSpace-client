@@ -27,7 +27,11 @@
 "use client";
 
 import SpacesSvgUrl from "PUBLIC_DIR/images/spaces.react.svg?url";
-import { useEffect } from "react";
+import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg?url";
+import PaymentIconUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-payment.svg?url";
+
+import React, { useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import { useTheme } from "styled-components";
 import { observer } from "mobx-react";
 
@@ -43,9 +47,11 @@ import { HideButton } from "./article-hide-button";
 
 export const Article = observer(() => {
   const {
-    articleStore: { showText, setShowText, articleOpen },
+    articleStore: { showText, setShowText, articleOpen, setArticleOpen },
   } = useStores();
   const theme = useTheme();
+  const router = useRouter();
+  const pathname = usePathname();
   const { currentDeviceType } = useDeviceType();
 
   useEffect(() => {
@@ -62,6 +68,11 @@ export const Article = observer(() => {
     setShowText(true);
   }, [setShowText, currentDeviceType]);
 
+  const onItemClick = (key: string) => {
+    if (currentDeviceType === DeviceType.mobile) setArticleOpen(!articleOpen);
+    router.push(`/${key}`);
+  };
+
   return (
     <StyledArticle showText={showText} articleOpen={articleOpen}>
       <div className="article__content">
@@ -71,9 +82,29 @@ export const Article = observer(() => {
           text="Spaces"
           icon={SpacesSvgUrl}
           showText={showText}
-          // onClick={onClick}
-          isActive={true}
+          onClick={() => onItemClick("spaces")}
+          isActive={pathname === "/spaces"}
           folderId="management_catalog-spaces"
+          $currentColorScheme={theme?.currentColorScheme}
+        />
+        <ArticleItem
+          key="settings"
+          text="Settings"
+          icon={SettingsReactSvgUrl}
+          showText={showText}
+          onClick={() => onItemClick("settings")}
+          isActive={pathname === "/settings"}
+          folderId="management_catalog-settings"
+          $currentColorScheme={theme?.currentColorScheme}
+        />
+        <ArticleItem
+          key="payments"
+          text="Payments"
+          icon={PaymentIconUrl}
+          showText={showText}
+          onClick={() => onItemClick("payments")}
+          isActive={pathname === "/payments"}
+          folderId="management_catalog-payments"
           $currentColorScheme={theme?.currentColorScheme}
         />
       </div>

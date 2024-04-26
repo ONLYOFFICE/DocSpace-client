@@ -31,12 +31,13 @@ import React, {
   SyntheticEvent,
   useCallback,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from "react";
 
-import { IndexedDBStores } from "@docspace/shared/enums";
-import indexedDBHelper from "@docspace/shared/utils/indexedDBHelper";
+// import { IndexedDBStores } from "@docspace/shared/enums";
+// import indexedDBHelper from "@docspace/shared/utils/indexedDBHelper";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 import {
@@ -101,7 +102,7 @@ export const ImageViewer = ({
   const lastTapTimeRef = useRef<number>(0);
   const isDoubleTapRef = useRef<boolean>(false);
   const setTimeoutIDTapRef = useRef<NodeJS.Timeout>();
-  const changeSourceTimeoutRef = useRef<NodeJS.Timeout>();
+  // const changeSourceTimeoutRef = useRef<NodeJS.Timeout>();
   const startAngleRef = useRef<number>(0);
   const toolbarRef = useRef<ImperativeHandle>(null);
 
@@ -122,50 +123,50 @@ export const ImageViewer = ({
 
   const { isMobile, isDesktop } = devices;
 
-  const changeSource = React.useCallback(
-    (imageUrl: Blob | MediaSource) => {
-      if (!window.DocSpaceConfig?.imageThumbnails) return;
-      changeSourceTimeoutRef.current = setTimeout(() => {
-        if (imgRef.current && !unmountRef.current) {
-          if (!src) return;
+  // const changeSource = React.useCallback(
+  //   (imageUrl: Blob | MediaSource) => {
+  //     if (!window.DocSpaceConfig?.imageThumbnails) return;
+  //     changeSourceTimeoutRef.current = setTimeout(() => {
+  //       if (imgRef.current && !unmountRef.current) {
+  //         if (!src) return;
 
-          if (!isTiff) {
-            imgRef.current.src = URL.createObjectURL(imageUrl);
-          } else {
-            imgRef.current.src = src;
-          }
+  //         if (!isTiff) {
+  //           imgRef.current.src = URL.createObjectURL(imageUrl);
+  //         } else {
+  //           imgRef.current.src = src;
+  //         }
 
-          setIsLoading(() => false);
-        }
-      }, 500);
-    },
-    [src, isTiff],
-  );
+  //         setIsLoading(() => false);
+  //       }
+  //     }, 500);
+  //   },
+  //   [src, isTiff],
+  // );
 
-  const loadImage = React.useCallback(async () => {
-    if (!src || !window.DocSpaceConfig?.imageThumbnails) return;
+  // const loadImage = React.useCallback(async () => {
+  //   if (!src || !window.DocSpaceConfig?.imageThumbnails) return;
 
-    try {
-      const res = await fetch(src);
-      const blob = await res.blob();
+  //   try {
+  //     const res = await fetch(src);
+  //     const blob = await res.blob();
 
-      if (isTiff) {
-        return changeSource(blob);
-      }
+  //     if (isTiff) {
+  //       return changeSource(blob);
+  //     }
 
-      indexedDBHelper.addItem(IndexedDBStores.images, {
-        id: imageId,
-        src: blob,
-        created: new Date(),
-        version,
-      });
+  //     indexedDBHelper.addItem(IndexedDBStores.images, {
+  //       id: imageId,
+  //       src: blob,
+  //       created: new Date(),
+  //       version,
+  //     });
 
-      changeSource(blob);
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-    }
-  }, [src, imageId, version, isTiff, changeSource]);
+  //     changeSource(blob);
+  //   } catch (error) {
+  //     // eslint-disable-next-line no-console
+  //     console.log(error);
+  //   }
+  // }, [src, imageId, version, isTiff, changeSource]);
 
   const resize = useCallback(() => {
     if (!imgRef.current || isLoading) return;
@@ -211,6 +212,7 @@ export const ImageViewer = ({
         rotate: 0,
       });
 
+      console.log("setIsLoading(false)");
       setIsLoading(false);
 
       if (isTiff && src) {
@@ -875,39 +877,40 @@ export const ImageViewer = ({
     };
   }, [onKeyDown]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (unmountRef.current || (isTiff && src)) return;
 
+    console.log("setIsLoading(true)");
     setIsLoading(true);
     setIsError(false);
   }, [src, isTiff]);
 
-  useEffect(() => {
-    if (!window.DocSpaceConfig?.imageThumbnails) return;
+  // useEffect(() => {
+  //   if (!window.DocSpaceConfig?.imageThumbnails) return;
 
-    if (!thumbnailSrc) setIsLoading(true);
-  }, [thumbnailSrc]);
+  //   if (!thumbnailSrc) setIsLoading(true);
+  // }, [thumbnailSrc]);
 
-  useEffect(() => {
-    if (changeSourceTimeoutRef.current)
-      clearTimeout(changeSourceTimeoutRef.current);
-  }, [src, version]);
+  // useEffect(() => {
+  //   if (changeSourceTimeoutRef.current)
+  //     clearTimeout(changeSourceTimeoutRef.current);
+  // }, [src, version]);
 
-  useEffect(() => {
-    if (!imageId || thumbnailSrc || !window.DocSpaceConfig?.imageThumbnails)
-      return;
+  // useEffect(() => {
+  //   if (!imageId || thumbnailSrc || !window.DocSpaceConfig?.imageThumbnails)
+  //     return;
 
-    indexedDBHelper
-      .getItem(IndexedDBStores.images, imageId)
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .then((result: any) => {
-        if (result && result.version === version) {
-          changeSource(result.src);
-        } else {
-          loadImage();
-        }
-      });
-  }, [src, imageId, version, isTiff, loadImage, changeSource, thumbnailSrc]);
+  //   indexedDBHelper
+  //     .getItem(IndexedDBStores.images, imageId)
+  //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //     .then((result: any) => {
+  //       if (result && result.version === version) {
+  //         changeSource(result.src);
+  //       } else {
+  //         loadImage();
+  //       }
+  //     });
+  // }, [src, imageId, version, isTiff, loadImage, changeSource, thumbnailSrc]);
 
   return (
     <>
@@ -931,11 +934,9 @@ export const ImageViewer = ({
           <Image
             draggable="false"
             src={
-              !window.DocSpaceConfig?.imageThumbnails
-                ? src
-                : thumbnailSrc
-                  ? `${thumbnailSrc}&size=1280x720`
-                  : ""
+              window.DocSpaceConfig?.imageThumbnails && thumbnailSrc
+                ? `${thumbnailSrc}&size=1280x720`
+                : src
             }
             ref={imgRef}
             style={style}

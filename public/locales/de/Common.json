@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Informationen",
   "AboutCompanyTitle": "Über diese Software",
   "AccessDenied": "Zugriff verweigert",
@@ -346,7 +346,6 @@
   "SelectFile": "Datei auswählen",
   "SelectFiles": "Dateien auswählen",
   "SelectFolder": "Ordner wählen",
-  "SelectIMGFormat": "IMG-Datei auswählen",
   "SelectorEmptyScreenHeader": "Noch keine Dateien und Ordner vorhanden",
   "SelectRoom": "Raum auswählen",
   "SelectXLSXFormat": ".XLSX-Datei auswählen",

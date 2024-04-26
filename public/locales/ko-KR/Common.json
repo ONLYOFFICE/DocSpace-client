@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "소개",
   "AboutCompanyTitle": "프로그램 소개",
   "AccessDenied": "액세스가 거부되었습니다",
@@ -346,7 +346,6 @@
   "SelectFile": "파일 선택",
   "SelectFiles": "파일 선택",
   "SelectFolder": "폴더를 선택",
-  "SelectIMGFormat": "IMG 파일 선택",
   "SelectorEmptyScreenHeader": "아직 파일과 폴더가 없습니다",
   "SelectRoom": "방 선택",
   "SelectXLSXFormat": ".XLSX 파일 선택",

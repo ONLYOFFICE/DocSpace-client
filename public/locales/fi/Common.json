@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Tietoja",
   "AboutCompanyTitle": "Tietoja tästä ohjelmasta",
   "AccessDenied": "Pääsy evätty",
@@ -346,7 +346,6 @@
   "SelectFile": "Valitse tiedosto",
   "SelectFiles": "Valitse tiedostot",
   "SelectFolder": "Valitse kansio",
-  "SelectIMGFormat": "Valitse IMG-tiedosto",
   "SelectorEmptyScreenHeader": "Täällä ei ole vielä tiedostoja tai kansioita",
   "SelectRoom": "Valitse huone",
   "SelectXLSXFormat": "Valitse .XLSX-tiedosto",

@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "O nás",
   "AboutCompanyTitle": "O tomto programu",
   "AccessDenied": "Přístup odepřen",
@@ -346,7 +346,6 @@
   "SelectFile": "Vybrat soubor",
   "SelectFiles": "Výběr souborů",
   "SelectFolder": "Vybrat složku",
-  "SelectIMGFormat": "Vyberte soubor IMG",
   "SelectorEmptyScreenHeader": "Zatím zde nejsou žádné soubory a složky",
   "SelectRoom": "Vybrat místnost",
   "SelectXLSXFormat": "Vyberte soubor .XLSX",

@@ -180,7 +180,9 @@ const Root = ({
           isSharingAccess={isSharingAccess}
           documentserverUrl={documentserverUrl}
           fileInfo={fileInfo}
-          errorMessage={error?.message ?? t("Common:InvalidLink")}
+          errorMessage={
+            error?.message ?? isSkipError ? t("Common:InvalidLink") : ""
+          }
           onSDKRequestSharingSettings={onSDKRequestSharingSettings}
           onSDKRequestSaveAs={onSDKRequestSaveAs}
           onSDKRequestInsertImage={onSDKRequestInsertImage}

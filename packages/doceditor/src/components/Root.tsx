@@ -155,9 +155,7 @@ const Root = ({
     selectFileDialogVisible,
   ]);
 
-  return !fileId ? (
-    <AppLoader />
-  ) : isShowDeepLink ? (
+  return isShowDeepLink ? (
     <DeepLink
       fileInfo={fileInfo}
       userEmail={user?.email}
@@ -182,7 +180,7 @@ const Root = ({
           isSharingAccess={isSharingAccess}
           documentserverUrl={documentserverUrl}
           fileInfo={fileInfo}
-          errorMessage={error?.message}
+          errorMessage={error?.message ?? t("Common:InvalidLink")}
           onSDKRequestSharingSettings={onSDKRequestSharingSettings}
           onSDKRequestSaveAs={onSDKRequestSaveAs}
           onSDKRequestInsertImage={onSDKRequestInsertImage}

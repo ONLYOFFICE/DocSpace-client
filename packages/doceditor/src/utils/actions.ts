@@ -430,13 +430,40 @@ export async function openEdit(
 
   const res = await fetch(getConfig);
 
-  const config = await res.json();
+  if (res.status !== 404) {
+    const config = await res.json();
 
-  if (res.ok) {
-    config.response.editorUrl = (
-      config.response as IInitialConfig
-    ).editorUrl.replace(REPLACED_URL_PATH, "");
-    return config.response as IInitialConfig;
+    if (res.ok) {
+      config.response.editorUrl = (
+        config.response as IInitialConfig
+      ).editorUrl.replace(REPLACED_URL_PATH, "");
+      return config.response as IInitialConfig;
+    }
+
+    const editorUrl =
+      cookie?.includes("asc_auth_key") || share
+        ? (await getEditorUrl("", share)).docServiceUrl
+        : "";
+
+    const status =
+      config.error?.type === EditorConfigErrorType.NotFoundScope
+        ? "not-found"
+        : config.error?.type === EditorConfigErrorType.AccessDeniedScope
+          ? "access-denied"
+          : res.status === 415
+            ? "not-supported"
+            : undefined;
+
+    const message = status ? config.error.message : undefined;
+
+    const error =
+      cookie?.includes("asc_auth_key") || share
+        ? config.error.type === EditorConfigErrorType.LinkScope
+          ? { message: message ?? "unauthorized", status, editorUrl }
+          : { ...config.error, status, editorUrl }
+        : { message: "unauthorized", status, editorUrl };
+
+    return error as TError;
   }
 
   const editorUrl =
@@ -444,25 +471,10 @@ export async function openEdit(
       ? (await getEditorUrl("", share)).docServiceUrl
       : "";
 
-  const status =
-    config.error?.type === EditorConfigErrorType.NotFoundScope
-      ? "not-found"
-      : config.error?.type === EditorConfigErrorType.AccessDeniedScope
-        ? "access-denied"
-        : res.status === 415
-          ? "not-supported"
-          : undefined;
-
-  const message = status ? config.error.message : undefined;
-
-  const error =
-    cookie?.includes("asc_auth_key") || share
-      ? config.error.type === EditorConfigErrorType.LinkScope
-        ? { message: message ?? "unauthorized", status, editorUrl }
-        : { ...config.error, status, editorUrl }
-      : { message: "unauthorized", status, editorUrl };
-
-  return error as TError;
+  return {
+    status: "not-found",
+    editorUrl,
+  } as TError;
 }
 
 export async function getEditorUrl(

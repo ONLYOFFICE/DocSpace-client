@@ -33,7 +33,7 @@ interface PortalProps {
   appendTo?: HTMLElement;
 }
 
-const Portal = ({ visible, element, appendTo }: PortalProps) => {
+const Portal = ({ visible = false, element, appendTo }: PortalProps) => {
   const [mounted, setMounted] = React.useState(visible);
 
   const domExist = React.useCallback(() => {
@@ -53,11 +53,6 @@ const Portal = ({ visible, element, appendTo }: PortalProps) => {
   return element && mounted
     ? ReactDOM.createPortal(element, appendTo || document.body)
     : null;
-};
-
-Portal.defaultProps = {
-  visible: false,
-  appendTo: null,
 };
 
 export { Portal };

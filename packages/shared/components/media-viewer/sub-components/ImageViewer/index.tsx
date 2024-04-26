@@ -39,6 +39,7 @@ import React, {
 // import { IndexedDBStores } from "@docspace/shared/enums";
 // import indexedDBHelper from "@docspace/shared/utils/indexedDBHelper";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
 import {
   calculateAdjustBoundsUtils,
@@ -103,6 +104,7 @@ export const ImageViewer = ({
   const isDoubleTapRef = useRef<boolean>(false);
   const setTimeoutIDTapRef = useRef<NodeJS.Timeout>();
   // const changeSourceTimeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout>();
   const startAngleRef = useRef<number>(0);
   const toolbarRef = useRef<ImperativeHandle>(null);
 
@@ -212,7 +214,8 @@ export const ImageViewer = ({
         rotate: 0,
       });
 
-      console.log("setIsLoading(false)");
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
       setIsLoading(false);
 
       if (isTiff && src) {
@@ -880,9 +883,15 @@ export const ImageViewer = ({
   useLayoutEffect(() => {
     if (unmountRef.current || (isTiff && src)) return;
 
-    console.log("setIsLoading(true)");
-    setIsLoading(true);
+    timeoutRef.current = setTimeout(() => {
+      setIsLoading(true);
+    }, LOADER_TIMEOUT);
+
     setIsError(false);
+
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
   }, [src, isTiff]);
 
   // useEffect(() => {

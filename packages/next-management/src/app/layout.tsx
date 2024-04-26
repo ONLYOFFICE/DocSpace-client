@@ -44,6 +44,9 @@ export default async function RootLayout({
 
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
 
+  if ((user && !user.isAdmin) || (settings && settings.limitedAccessSpace))
+    redirect(`${getBaseUrl()}/error/403`);
+
   return (
     <html lang="en">
       <head>

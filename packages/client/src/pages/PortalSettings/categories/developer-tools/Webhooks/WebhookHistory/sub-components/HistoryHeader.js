@@ -129,9 +129,9 @@ const HeaderContainer = styled.div`
     @media ${mobile} {
       position: absolute;
       height: 48px;
-      margin-block: -17px 0;
-      margin-inline: -17px 0;
-      width: 100%;
+      margin-block: -9px 0;
+      margin-inline: -15px 0;
+      width: calc(100% + 2px);
       top: 10px;
     }
   }

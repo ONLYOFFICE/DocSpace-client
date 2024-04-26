@@ -40,6 +40,8 @@ const StyledArrowRightIcon = styled(ArrowRightIcon)`
   path {
     fill: ${(props) => props.theme.client.settings.security.arrowFill};
   }
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
 `;
 
 const StyledMobileCategoryWrapper = styled.div`
@@ -67,7 +69,7 @@ const StyledMobileCategoryWrapper = styled.div`
   }
 
   .inherit-title-link {
-    margin-right: 7px;
+    margin-inline-end: 7px;
     font-size: 16px;
     font-weight: 600;
     ${(props) => props.isDisabled && `color: ${props.theme.text.disableColor}`};

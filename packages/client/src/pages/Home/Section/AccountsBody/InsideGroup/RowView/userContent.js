@@ -139,6 +139,7 @@ const UserContent = ({
         color={nameColor}
         isTextOverflow={true}
         noHover
+        dir="auto"
       >
         {statusType === "pending"
           ? email

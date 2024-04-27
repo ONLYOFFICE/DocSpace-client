@@ -35,12 +35,9 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { getBgPattern } from "@docspace/shared/utils/common";
-import { getLogoUrl } from "@docspace/shared/utils";
-import { DeviceType, WhiteLabelLogoType } from "@docspace/shared/enums";
 
 import { getDeepLink } from "./DeepLink.helper";
 import {
-  StyledSimpleNav,
   StyledDeepLink,
   StyledBodyWrapper,
   StyledFileTile,
@@ -50,12 +47,12 @@ import {
   LogoWrapper,
 } from "./DeepLink.styled";
 import { DeepLinkProps } from "./DeepLink.types";
+import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
 
 const DeepLink = ({
   fileInfo,
   userEmail,
   setIsShowDeepLink,
-  currentDeviceType,
   deepLinkConfig,
 }: DeepLinkProps) => {
   const { t } = useTranslation(["DeepLink", "Common"]);
@@ -95,31 +92,13 @@ const DeepLink = ({
       : fileInfo?.title || "";
   };
 
-  const renderLogo = () => {
-    const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
-
-    if (currentDeviceType === DeviceType.mobile) {
-      return (
-        <StyledSimpleNav>
-          <img src={logo} alt="" />
-        </StyledSimpleNav>
-      );
-    } else {
-      return (
-        <LogoWrapper>
-          <img src={logo} alt="docspace-logo" />
-        </LogoWrapper>
-      );
-    }
-  };
-
   const bgPattern = getBgPattern(theme.currentColorScheme?.id);
-
-  const logoElement = renderLogo();
 
   return (
     <StyledWrapper>
-      {logoElement}
+      <LogoWrapper>
+        <DocspaceLogo className="docspace-logo" isResizable />
+      </LogoWrapper>
       <FormWrapper>
         <StyledDeepLink>
           <StyledBodyWrapper>
@@ -164,4 +143,3 @@ const DeepLink = ({
 };
 
 export default DeepLink;
-

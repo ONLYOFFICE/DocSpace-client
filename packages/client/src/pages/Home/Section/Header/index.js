@@ -1656,6 +1656,7 @@ export default inject(
       setSelection,
       setShareFolderDialogVisible,
       startUpload,
+      onClickReconnectStorage,
     };
   },
 )(

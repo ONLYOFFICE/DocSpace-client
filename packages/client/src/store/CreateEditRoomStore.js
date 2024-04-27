@@ -249,7 +249,10 @@ class CreateEditRoomStore {
 
     window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
 
-    isDesktop() && setIsVisible(true);
+    if (isDesktop()) {
+      setIsVisible(true);
+      setView("info_members");
+    }
 
     this.setIsLoading(false);
     this.setConfirmDialogIsLoading(false);

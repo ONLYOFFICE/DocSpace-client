@@ -118,17 +118,15 @@ export const StyledWrapper = styled.div`
 
   @media ${mobile} {
     margin: 0 auto;
+    align-items: flex-start;
   }
 `;
 
 export const LogoWrapper = styled.div`
-  width: 386px;
-  height: 44px;
   margin-top: auto;
   margin-bottom: 64px;
 
   @media ${mobile} {
-    display: none;
+    margin-bottom: 112px;
   }
 `;
-

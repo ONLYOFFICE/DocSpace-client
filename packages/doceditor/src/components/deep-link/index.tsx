@@ -100,7 +100,7 @@ const DeepLink = ({
   return (
     <StyledWrapper>
       <BgBlock bgPattern={bgPattern} />
-      <Scrollbar id="customScrollBar">
+      <Scrollbar>
         <StyledBody>
           <LogoWrapper>
             <DocspaceLogo className="docspace-logo" isResizable />

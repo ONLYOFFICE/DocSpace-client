@@ -24,58 +24,63 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { Button } from "@docspace/shared/components/button";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { isMobile } from "@docspace/shared/utils";
+import styled from "styled-components";
 
-import ModalDialogContainer from "../ModalDialogContainer";
+import { convertTime } from "@docspace/shared/utils/convertTime";
+import { Text } from "@docspace/shared/components/text";
+import { RowContent } from "@docspace/shared/components/row-content";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
 
-const LogoutConnectionDialog = ({
-  visible,
-  onClose,
-  onRemoveSession,
-  data,
-  loading,
+const StyledRowContent = styled(RowContent)`
+  .rowMainContainer {
+    height: 100%;
+  }
+
+  .session-browser {
+    font-size: 14px;
+    font-weight: 600;
+    color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
+  }
+`;
+
+const SessionsRowContent = ({
+  id,
+  standalone,
+  platform,
+  browser,
+  date,
+  country,
+  city,
+  ip,
+  sectionWidth,
+  showTickIcon,
 }) => {
-  const { t } = useTranslation(["Profile", "Common"]);
-
   return (
-    <ModalDialogContainer
-      visible={visible}
-      onClose={onClose}
-      displayType="modal"
+    <StyledRowContent
+      key={id}
+      sectionWidth={sectionWidth}
+      sideColor={theme.profile.activeSessions.tableCellColor}
     >
-      <ModalDialog.Header>
-        {t("Profile:LogoutActiveConnection")}
-      </ModalDialog.Header>
-      <ModalDialog.Body>
-        {t("Profile:LogoutFrom", {
-          platform: data.platform,
-          browser: data.browser,
-        })}
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          key="LogoutBtn"
-          label={t("Profile:LogoutBtn")}
-          size="normal"
-          scale
-          primary={true}
-          onClick={() => onRemoveSession(data.id)}
-          isLoading={loading}
-        />
-        <Button
-          key="CloseBtn"
-          label={t("Common:CancelButton")}
-          size="normal"
-          scale
-          onClick={onClose}
-          isDisabled={loading}
-        />
-      </ModalDialog.Footer>
-    </ModalDialogContainer>
+      <Text fontSize="14px" fontWeight="600">
+        {platform} <span className="session-browser">{`(${browser})`}</span>
+      </Text>
+      {isMobile() && showTickIcon && (
+        <IconButton size={12} iconName={TickSvgUrl} color="#20D21F" />
+      )}
+      <Text truncate>{convertTime(date)}</Text>
+      {!standalone && (
+        <Text truncate>
+          {country}
+          {` ${city}`}
+        </Text>
+      )}
+      <Text truncate containerWidth="160px">
+        {ip}
+      </Text>
+    </StyledRowContent>
   );
 };
 
-export default LogoutConnectionDialog;
+export default SessionsRowContent;

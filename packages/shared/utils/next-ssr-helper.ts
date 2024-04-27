@@ -27,6 +27,7 @@
 import { headers } from "next/headers";
 
 const API_PREFIX = "api/2.0";
+const APISYSTEM_PREFIX = "apisystem";
 
 export const getBaseUrl = () => {
   const hdrs = headers();
@@ -39,9 +40,11 @@ export const getBaseUrl = () => {
   return baseURL;
 };
 
-export const getAPIUrl = () => {
+export const getAPIUrl = (isApiSystem = false) => {
   const baseUrl = getBaseUrl();
-  const baseAPIUrl = `${baseUrl}/${API_PREFIX}`;
+  const baseAPIUrl = isApiSystem
+    ? `${baseUrl}/${APISYSTEM_PREFIX}`
+    : `${baseUrl}/${API_PREFIX}`;
 
   return baseAPIUrl;
 };
@@ -51,10 +54,11 @@ export const createRequest = (
   newHeaders: [string, string][],
   method: string,
   body?: string,
+  isApiSystem?: boolean,
 ) => {
   const hdrs = new Headers(headers());
 
-  const apiURL = getAPIUrl();
+  const apiURL = getAPIUrl(isApiSystem);
 
   newHeaders.forEach((hdr) => {
     if (hdr[0]) hdrs.set(hdr[0], hdr[1]);

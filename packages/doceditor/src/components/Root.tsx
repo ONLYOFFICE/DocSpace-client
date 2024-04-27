@@ -153,7 +153,7 @@ const Root = ({
     selectFileDialogVisible,
   ]);
 
-  return true ? (
+  return isShowDeepLink ? (
     <DeepLink
       fileInfo={fileInfo}
       userEmail={user?.email}

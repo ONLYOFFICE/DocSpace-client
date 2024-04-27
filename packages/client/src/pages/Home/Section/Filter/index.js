@@ -550,7 +550,6 @@ const SectionFilterContent = ({
     } else {
       const newFilter = filter.clone();
 
-      console.log(newFilter);
       newFilter.page = 0;
       newFilter.filterValue = "";
 

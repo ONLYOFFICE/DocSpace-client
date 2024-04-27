@@ -549,6 +549,8 @@ const SectionFilterContent = ({
       navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
     } else {
       const newFilter = filter.clone();
+
+      console.log(newFilter);
       newFilter.page = 0;
       newFilter.filterValue = "";
 
@@ -2582,6 +2584,7 @@ const SectionFilterContent = ({
 
   const clearAll = () => {
     setIsLoading(true);
+
     if (isAccountsPage) {
       const newFilter = isGroupsAccounts
         ? GroupsFilter.getDefault()
@@ -2608,6 +2611,8 @@ const SectionFilterContent = ({
       navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
     } else {
       const newFilter = FilesFilter.getDefault();
+
+      newFilter.folder = filter.folder;
 
       const path = location.pathname.split("/filter")[0];
 

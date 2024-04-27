@@ -121,6 +121,7 @@ export type TSettings = {
   wizardToken?: string;
   defaultPage?: string;
   tagManagerId?: string;
+  limitedAccessSpace: boolean;
 };
 
 export type TCustomSchema = {

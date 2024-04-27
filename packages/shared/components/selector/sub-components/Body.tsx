@@ -1,5 +1,31 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
-import { isMobileOnly, isIOS } from "react-device-detect";
+
 import InfiniteLoader from "react-window-infinite-loader";
 import { FixedSizeList as List } from "react-window";
 
@@ -8,15 +34,17 @@ import { Text } from "../../text";
 
 import { Search } from "./Search";
 import { SelectAll } from "./SelectAll";
-import { Item } from "./Item";
 import { EmptyScreen } from "./EmptyScreen";
 import { BreadCrumbs } from "./BreadCrumbs";
 
-import { StyledBody } from "../Selector.styled";
+import { StyledBody, StyledTabs } from "../Selector.styled";
 import { BodyProps } from "../Selector.types";
+import { Item } from "./Item";
+import { Info } from "./Info";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
+const TABS_HEIGHT = 40;
 const BREAD_CRUMBS_HEIGHT = 38;
 const SEARCH_HEIGHT = 44;
 const BODY_DESCRIPTION_TEXT_HEIGHT = 32;
@@ -30,8 +58,9 @@ const Body = ({
   isSearch,
   isAllIndeterminate,
   isAllChecked,
-  placeholder,
-  value,
+  searchPlaceholder,
+  setIsSearch,
+  searchValue,
   onSearch,
   onClearSearch,
   items,
@@ -50,6 +79,7 @@ const Body = ({
   loadMoreItems,
   hasNextPage,
   totalItems,
+  renderCustomItem,
   isLoading,
   searchLoader,
   rowLoader,
@@ -64,6 +94,13 @@ const Body = ({
   withFooterCheckbox,
   descriptionText,
   withHeader,
+
+  withTabs,
+  tabsData,
+  activeTabId,
+
+  withInfo,
+  infoText,
 }: BodyProps) => {
   const [bodyHeight, setBodyHeight] = React.useState(0);
 
@@ -78,28 +115,11 @@ const Body = ({
     }
   }, []);
 
-  const onBodyResize = React.useCallback(
-    (e?: Event) => {
-      const target = e ? (e.target as VisualViewport) : null;
-      if (target && target.height && isMobileOnly && isIOS) {
-        let height = target.height - 64 - HEADER_HEIGHT;
-
-        if (footerVisible) {
-          height -= withFooterCheckbox
-            ? FOOTER_WITH_CHECKBOX_HEIGHT
-            : withFooterInput
-              ? FOOTER_WITH_NEW_NAME_HEIGHT
-              : FOOTER_HEIGHT;
-        }
-        setBodyHeight(height);
-        return;
-      }
-      if (bodyRef && bodyRef.current) {
-        setBodyHeight(bodyRef.current.offsetHeight);
-      }
-    },
-    [footerVisible, withFooterCheckbox, withFooterInput],
-  );
+  const onBodyResize = React.useCallback(() => {
+    if (bodyRef && bodyRef.current) {
+      setBodyHeight(bodyRef.current.offsetHeight);
+    }
+  }, []);
 
   const isItemLoaded = React.useCallback(
     (index: number) => {
@@ -110,11 +130,9 @@ const Body = ({
 
   React.useEffect(() => {
     window.addEventListener("resize", onBodyResize);
-    if (isMobileOnly && isIOS)
-      window.visualViewport?.addEventListener("resize", onBodyResize);
+
     return () => {
       window.removeEventListener("resize", onBodyResize);
-      window.visualViewport?.removeEventListener("resize", onBodyResize);
     };
   }, [onBodyResize]);
 
@@ -129,6 +147,14 @@ const Body = ({
   let listHeight = bodyHeight - CONTAINER_PADDING;
 
   if (withSearch || isSearch || itemsCount > 0) listHeight -= SEARCH_HEIGHT;
+  if (withTabs) listHeight -= TABS_HEIGHT;
+  if (withInfo) {
+    const infoEl = document.getElementById("selector-info-text");
+    if (infoEl) {
+      const height = infoEl.getClientRects()[0].height;
+      listHeight -= height;
+    }
+  }
 
   if (withBreadCrumbs) listHeight -= BREAD_CRUMBS_HEIGHT;
 
@@ -151,6 +177,7 @@ const Body = ({
       headerHeight={HEADER_HEIGHT}
       footerVisible={footerVisible}
       withHeader={withHeader}
+      withTabs={withTabs}
     >
       {withBreadCrumbs ? (
         isBreadCrumbsLoading ? (
@@ -164,22 +191,35 @@ const Body = ({
         )
       ) : null}
 
+      {withTabs && tabsData && (
+        <StyledTabs
+          startSelect={0}
+          data={tabsData}
+          forsedActiveItemId={activeTabId}
+        />
+      )}
+
       {isSearchLoading || isBreadCrumbsLoading ? (
         searchLoader
-      ) : withSearch || isSearch || (itemsCount > 0 && withSearch) ? (
+      ) : withSearch && (itemsCount > 0 || isSearch) ? (
         <Search
-          placeholder={placeholder}
-          value={value}
+          placeholder={searchPlaceholder}
+          value={searchValue}
           onSearch={onSearch}
           onClearSearch={onClearSearch}
+          setIsSearch={setIsSearch}
         />
       ) : null}
+
+      {withInfo && !isLoading && (
+        <Info withInfo={withInfo} infoText={infoText} />
+      )}
 
       {isLoading ? (
         <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>
       ) : itemsCount === 0 ? (
         <EmptyScreen
-          withSearch={isSearch && !!value}
+          withSearch={isSearch}
           image={emptyScreenImage}
           header={emptyScreenHeader}
           description={emptyScreenDescription}
@@ -196,8 +236,8 @@ const Body = ({
             <SelectAll
               label={selectAllLabel}
               icon={selectAllIcon}
-              isChecked={isAllChecked}
-              isIndeterminate={isAllIndeterminate}
+              isChecked={isAllChecked || false}
+              isIndeterminate={isAllIndeterminate || false}
               onSelectAll={onSelectAll}
               isLoading={isLoading}
               rowLoader={rowLoader}
@@ -223,6 +263,7 @@ const Body = ({
                     isMultiSelect: isMultiSelect || false,
                     rowLoader,
                     isItemLoaded,
+                    renderCustomItem,
                   }}
                   itemSize={48}
                   onItemsRendered={onItemsRendered}

@@ -1,15 +1,45 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { makeAutoObservable, runInAction } from "mobx";
-import authStore from "@docspace/common/store/AuthStore";
-import api from "@docspace/common/api";
-import { setDNSSettings } from "@docspace/common/api/settings";
+
+import api from "@docspace/shared/api";
+import { setDNSSettings } from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
+import { isManagement } from "@docspace/shared/utils/common";
 
 class CommonStore {
+  settingsStore = null;
+
   logoUrlsWhiteLabel = [];
   whiteLabelLogoText = null;
   defaultLogoTextWhiteLabel = null;
 
+  portalName = null;
   dnsSettings = {
     defaultObj: {},
     customObj: {},
@@ -32,8 +62,8 @@ class CommonStore {
   greetingSettingsIsDefault = true;
   enableRestoreButton = false;
 
-  constructor() {
-    this.authStore = authStore;
+  constructor(settingsStore) {
+    this.settingsStore = settingsStore;
     makeAutoObservable(this);
   }
 
@@ -43,15 +73,13 @@ class CommonStore {
   };
 
   initSettings = async (page) => {
-    const isMobileView =
-      authStore.settingsStore.currentDeviceType === DeviceType.mobile;
+    const isMobileView = this.settingsStore.deviceType === DeviceType.mobile;
 
     if (this.isInit) return;
 
-    this.isInit = true;
+    this.isInit = Boolean(page);
 
-    const { settingsStore } = authStore;
-    const { standalone } = settingsStore;
+    const { standalone } = this.settingsStore;
 
     const requests = [];
 
@@ -61,14 +89,14 @@ class CommonStore {
           requests.push(
             this.getWhiteLabelLogoUrls(),
             this.getWhiteLabelLogoText(),
-            this.getIsDefaultWhiteLabel()
+            this.getIsDefaultWhiteLabel(),
           );
           break;
         }
         case "language-and-time-zone":
           requests.push(
-            settingsStore.getPortalTimezones(),
-            settingsStore.getPortalCultures()
+            this.settingsStore.getPortalTimezones(),
+            this.settingsStore.getPortalCultures(),
           );
           break;
         case "dns-settings":
@@ -85,8 +113,8 @@ class CommonStore {
         case "general":
           {
             requests.push(
-              settingsStore.getPortalTimezones(),
-              settingsStore.getPortalCultures()
+              this.settingsStore.getPortalTimezones(),
+              this.settingsStore.getPortalCultures(),
             );
 
             if (standalone) {
@@ -98,7 +126,7 @@ class CommonStore {
           requests.push(
             this.getWhiteLabelLogoUrls(),
             this.getWhiteLabelLogoText(),
-            this.getIsDefaultWhiteLabel()
+            this.getIsDefaultWhiteLabel(),
           );
           break;
 
@@ -119,52 +147,73 @@ class CommonStore {
   };
 
   setWhiteLabelSettings = async (data) => {
-    const { isManagement } = authStore;
     const response = await api.settings.setWhiteLabelSettings(
       data,
-      isManagement
+      isManagement(),
     );
     return Promise.resolve(response);
   };
 
   getWhiteLabelLogoUrls = async () => {
-    const { settingsStore } = authStore;
-    const { whiteLabelLogoUrls } = settingsStore;
-    const logos = JSON.parse(JSON.stringify(whiteLabelLogoUrls));
+    const { getWhiteLabelLogoUrls } = this.settingsStore;
+
+    const logos = await getWhiteLabelLogoUrls();
+
     this.setLogoUrlsWhiteLabel(Object.values(logos));
+
+    return logos;
   };
 
   getWhiteLabelLogoText = async () => {
-    const res = await api.settings.getLogoText();
+    const res = await api.settings.getLogoText(isManagement());
     this.setLogoText(res);
     this.defaultLogoTextWhiteLabel = res;
     return res;
   };
 
-  saveWhiteLabelSettings = async (data) => {
-    const { settingsStore } = authStore;
-    const { getWhiteLabelLogoUrls } = settingsStore;
+  applyNewLogos = (logos) => {
+    const theme =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
 
+    const favicon = document.getElementById("favicon");
+    const logo = document.getElementsByClassName("logo-icon_svg")?.[0];
+    const logoBurger = document.getElementsByClassName("burger-logo")?.[0];
+
+    runInAction(() => {
+      favicon && (favicon.href = logos?.[2]?.path?.["light"]); // we have single favicon for both themes
+      logo && (logo.src = logos?.[0]?.path?.[theme]);
+      logoBurger && (logoBurger.src = logos?.[5]?.path?.[theme]);
+    });
+  };
+
+  saveWhiteLabelSettings = async (data) => {
     await this.setWhiteLabelSettings(data);
-    await getWhiteLabelLogoUrls();
-    this.getWhiteLabelLogoUrls();
+
+    const logos = await this.getWhiteLabelLogoUrls();
     this.getIsDefaultWhiteLabel();
+    this.getWhiteLabelLogoText();
+
+    this.applyNewLogos(logos);
   };
 
   getIsDefaultWhiteLabel = async () => {
-    const res = await api.settings.getIsDefaultWhiteLabel();
+    const res = await api.settings.getIsDefaultWhiteLabel(isManagement());
     const enableRestoreButton = res.map((item) => item.default).includes(false);
     this.enableRestoreButton = enableRestoreButton;
   };
 
-  restoreWhiteLabelSettings = async (isDefault) => {
-    const { settingsStore, isManagement } = authStore;
-    const { getWhiteLabelLogoUrls } = settingsStore;
+  restoreWhiteLabelSettings = async () => {
+    await api.settings.restoreWhiteLabelSettings(isManagement());
 
-    await api.settings.restoreWhiteLabelSettings(isDefault, isManagement);
-    await getWhiteLabelLogoUrls();
-    this.getWhiteLabelLogoUrls();
+    const logos = await this.getWhiteLabelLogoUrls();
     this.getIsDefaultWhiteLabel();
+    this.getWhiteLabelLogoText();
+
+    this.applyNewLogos(logos);
   };
 
   getGreetingSettingsIsDefault = async () => {
@@ -189,15 +238,16 @@ class CommonStore {
     this.dnsSettings.customObj.dnsName = value;
   };
 
+  setPortalName = (value) => {
+    this.portalName = value;
+  };
+
   setDNSSettings = (data) => {
     this.dnsSettings = { defaultObj: data, customObj: data };
   };
 
   getMappedDomain = async () => {
-    const { settingsStore } = authStore;
-    const { getPortal } = settingsStore;
-
-    const res = await getPortal();
+    const res = await api.portal.getPortal();
     const { mappedDomain } = res;
 
     const tempObject = {};

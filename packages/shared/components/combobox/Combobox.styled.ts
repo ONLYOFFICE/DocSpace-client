@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import styled, { css } from "styled-components";
 
 import TriangleDownIcon from "PUBLIC_DIR/images/triangle.down.react.svg";
@@ -9,6 +35,39 @@ import { Loader } from "../loader";
 
 import { ComboBoxSize } from "./Combobox.enums";
 import { TCombobox } from "./Combobox.types";
+
+// for ComboButton with plusBadge (StyledGroupsCombobox)
+const alternativeComboButtonStyles = css<{
+  isOpen?: boolean;
+  plusBadgeValue?: number;
+}>`
+  .combo-button-label {
+    color: ${({ theme, isOpen }) =>
+      theme.comboBox.label[isOpen ? "selectedColor" : "alternativeColor"]};
+  }
+
+  .combo-buttons_expander-icon {
+    path {
+      fill: ${({ theme, isOpen }) =>
+        theme.comboBox.plusBadge[
+          isOpen ? "selectedBgColor" : "bgColor"
+        ]} !important;
+    }
+  }
+
+  :hover {
+    .combo-button-label {
+      color: ${({ theme }) => theme.comboBox.label.selectedColor};
+    }
+
+    .combo-buttons_expander-icon {
+      path {
+        fill: ${({ theme }) =>
+          theme.comboBox.plusBadge.selectedBgColor} !important;
+      }
+    }
+  }
+`;
 
 const StyledComboBox = styled.div<{
   scaled?: boolean;
@@ -115,6 +174,7 @@ const StyledComboButton = styled.div<{
   withAdvancedOptions?: boolean;
   isLoading?: boolean;
   isSelected?: boolean;
+  plusBadgeValue?: number;
 }>`
   display: flex;
   align-items: center;
@@ -183,7 +243,6 @@ const StyledComboButton = styled.div<{
 
   ${(props) =>
     !props.noBorder &&
-    !props.type &&
     `
     border:  ${props.theme.comboBox.button.border};
     border-radius: ${props.theme.comboBox.button.borderRadius};
@@ -243,7 +302,7 @@ const StyledComboButton = styled.div<{
       border-color: ${props.theme.comboBox.button.hoverDisabledBorderColor};
     `}
 
-    ${(props) => props.modernView && hoverModernViewButton}
+    ${(props) => props.modernView && !props.isDisabled && hoverModernViewButton}
 
       
       ${({ fillIcon }) =>
@@ -260,24 +319,21 @@ const StyledComboButton = styled.div<{
   }
   .combo-button-label {
     visibility: ${(props) => (props.isLoading ? "hidden" : "visible")};
-    margin-right: ${(props) =>
-      props.noBorder
-        ? props.theme.comboBox.label.marginRight
-        : props.theme.comboBox.label.marginRightWithBorder};
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        margin-right: 0;
-        margin-left: ${props.noBorder
-          ? props.theme.comboBox.label.marginRight
-          : props.theme.comboBox.label.marginRightWithBorder};
-      `}
+
+    ${({ theme, plusBadgeValue, noBorder }) => {
+      const property = `margin-${theme.interfaceDirection === "rtl" ? "left" : "right"}`;
+      const value = plusBadgeValue
+        ? 0
+        : noBorder
+          ? theme.comboBox.label.marginRight
+          : theme.comboBox.label.marginRightWithBorder;
+
+      return `${property}: ${value};`;
+    }}
     color: ${(props) =>
       props.isDisabled
         ? props.theme.comboBox.label.disabledColor
-        : props.isSelected
-          ? props.theme.comboBox.label.selectedColor
-          : props.theme.comboBox.label.color};
+        : props.theme.comboBox.label.selectedColor};
 
     max-width: ${(props) =>
       props.scaled ? "100%" : props.theme.comboBox.label.maxWidth};
@@ -310,6 +366,8 @@ const StyledComboButton = styled.div<{
         }
       `}
   }
+
+  ${({ plusBadgeValue }) => plusBadgeValue && alternativeComboButtonStyles}
 `;
 StyledComboButton.defaultProps = { theme: Base };
 
@@ -390,10 +448,33 @@ const StyledIcon = styled.div<{
 `;
 StyledIcon.defaultProps = { theme: Base };
 
+const StyledPlusBadge = styled.div<{ isOpen?: boolean }>`
+  height: 12px;
+  padding: 0px 3px;
+  gap: 10px;
+  border-radius: 12px;
+
+  line-height: 12px;
+  font-size: 9px;
+  font-weight: 800;
+
+  background-color: ${({ theme, isOpen }) =>
+    isOpen
+      ? theme.comboBox.plusBadge.selectedBgColor
+      : theme.comboBox.plusBadge.bgColor};
+  color: ${({ theme }) => theme.comboBox.plusBadge.color};
+
+  ${StyledComboButton}:hover & {
+    background-color: ${({ theme }) =>
+      theme.comboBox.plusBadge.selectedBgColor};
+  }
+`;
+
 const StyledArrowIcon = styled.div<{
   isLoading?: boolean;
   displayArrow?: boolean;
   isOpen?: boolean;
+  isDisabled?: boolean;
 }>`
   display: flex;
   align-self: center;
@@ -402,7 +483,10 @@ const StyledArrowIcon = styled.div<{
 
   .combo-buttons_expander-icon {
     path {
-      fill: ${(props) => props.theme.comboBox.label.selectedColor};
+      fill: ${(props) =>
+        props.isDisabled
+          ? props.theme.comboBox.label.disabledColor
+          : props.theme.comboBox.label.selectedColor};
     }
   }
 
@@ -460,10 +544,10 @@ const getDefaultStyles = ({
   $currentColorScheme &&
   theme.isBase &&
   css`
-    border-color: ${isOpen && $currentColorScheme?.main.accent};
+    border-color: ${isOpen && $currentColorScheme?.main?.accent};
 
     :focus {
-      border-color: ${isOpen && $currentColorScheme?.main.accent};
+      border-color: ${isOpen && $currentColorScheme?.main?.accent};
     }
   `;
 
@@ -471,6 +555,7 @@ const StyledThemeComboButton = styled(StyledComboButton)(getDefaultStyles);
 
 export {
   StyledArrowIcon,
+  StyledPlusBadge,
   StyledIcon,
   StyledOptionalItem,
   StyledComboButton,

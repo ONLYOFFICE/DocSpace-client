@@ -1,9 +1,36 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import AvatarDarkReactSvgUrl from "PUBLIC_DIR/images/avatar.dark.react.svg?url";
 
 import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
 
 import { TTheme } from "./base";
+import { DEFAULT_FONT_FAMILY } from "../constants";
 
 const {
   black,
@@ -12,9 +39,11 @@ const {
   grayLight,
   grayLightMid,
   grayMid,
+  grayDarkMid,
   graySilver,
   gray,
   grayMain,
+  grayDark,
   shuttleGrey,
 
   blueMain,
@@ -34,6 +63,8 @@ const {
   darkRed,
 
   darkErrorStatus,
+  charlestonGreen,
+  outerSpace,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -41,7 +72,7 @@ const Dark: TTheme = {
   isBase: false,
   color: grayMaxLight,
   backgroundColor: black,
-  fontFamily: "Open Sans, sans-serif, Arial",
+  fontFamily: DEFAULT_FONT_FAMILY,
   fontSize: "13px",
 
   text: {
@@ -202,20 +233,20 @@ const Dark: TTheme = {
 
     dropDown: {
       position: "fixed",
-      right: "32px",
-      bottom: "32px",
+      right: "48px",
+      bottom: "48px",
 
       width: "400px",
 
       zIndex: "202",
 
       mobile: {
-        right: "24px",
-        bottom: "24px",
+        right: "32px",
+        bottom: "40px",
 
         marginLeft: "24px",
 
-        width: "calc(100vw - 48px)",
+        width: "calc(100vw - 64px)",
       },
 
       separatorBackground: white,
@@ -276,7 +307,7 @@ const Dark: TTheme = {
     fontWeight: "500",
     textDecoration: "none",
     padding: "0",
-    borderRadius: "2px",
+    borderRadius: "3px",
     height: "40px",
     heightSmall: "32px",
     textAlign: "left",
@@ -284,26 +315,32 @@ const Dark: TTheme = {
     outline: "none",
     width: "100%",
 
+    border: "1px solid #474747",
     background: black,
-    disableBackgroundColor: "rgba(0, 0, 0, 0.08)",
+
+    borderConnect: "none",
     connectBackground:
       "linear-gradient(0deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), #333333",
-    hoverBackground: "#292929",
-    hoverConnectBackground: "#FFFFFF",
-    activeBackground: "#292929",
-    hoverBorder: "#858585",
 
-    boxShadow: "none",
-    hoverBoxShadow: "none",
+    disableBackgroundColor: "rgba(0, 0, 0, 0.08)",
+
+    hoverBackground: black,
+    hoverBorder: "1px solid #858585",
+    hoverConnectBackground: "#FFFFFF",
+    hoverConnectBorder: "none",
+
+    activeBackground: "#282828",
+    activeBorder: "1px solid #CCCCCC",
+    activeConnectBackground: "rgba(255, 255, 255, 0.64)",
+    activeConnectBorder: "none",
 
     color: "rgba(0, 0, 0, 0.54)",
     disableColor: "rgba(0, 0, 0, 0.4)",
     disabledSvgColor: "#474747",
 
-    border: "1px solid #474747",
     text: {
       width: "100%",
-      height: "16px",
+      height: "18px",
       margin: "0 11px",
       fontWeight: "500",
       fontSize: "14px",
@@ -318,11 +355,11 @@ const Dark: TTheme = {
     },
 
     svg: {
-      margin: "11px 16px",
-      width: "18px",
-      height: "18px",
-      minWidth: "18px",
-      minHeight: "18px",
+      margin: "11px 8px",
+      width: "20px",
+      height: "20px",
+      minWidth: "20px",
+      minHeight: "20px",
       fill: darkBlack,
     },
   },
@@ -534,7 +571,7 @@ const Dark: TTheme = {
 
   rowContent: {
     icons: {
-      height: "19px",
+      height: "16px",
     },
 
     margin: "0 6px",
@@ -577,6 +614,8 @@ const Dark: TTheme = {
     bgColor: "rgba(20, 20, 20, 0.4)",
     hoverBgColor: "rgba(20, 20, 20, 0.64)",
     pressBgColor: "rgba(20, 20, 20, 0.8)",
+    paddingInlineEnd: "17px !important",
+    paddingInlineEndMobile: "8px !important",
   },
 
   modalDialog: {
@@ -590,6 +629,16 @@ const Dark: TTheme = {
     minHeight: "100%",
 
     colorDisabledFileIcons: "#5c5c5c",
+
+    backdrop: {
+      backgroundRGBA: {
+        r: 27,
+        g: 27,
+        b: 27,
+        a: 0.4,
+      },
+      blur: 10,
+    },
 
     content: {
       backgroundColor: black,
@@ -843,8 +892,8 @@ const Dark: TTheme = {
 
     borderColor: grayMaxLight,
 
-    iconColor: "#646464",
-    hoverIconColor: "#858585",
+    iconColor: "#858585",
+    hoverIconColor: "#FFFFFF",
   },
 
   textArea: {
@@ -934,6 +983,7 @@ const Dark: TTheme = {
     maxWidth: "340px",
     color: "#242424",
     textColor: white,
+    backgroundColor: "#282828",
 
     before: {
       border: "none",
@@ -1023,10 +1073,12 @@ const Dark: TTheme = {
     defaultImage: `url("${AvatarDarkReactSvgUrl}")`,
     initialsContainer: {
       color: white,
+      groupColor: white,
       left: "50%",
       top: "50%",
       transform: "translate(-50%, -50%)",
       fontWeight: "600",
+      groupFontWeight: "700",
 
       fontSize: {
         min: "12px",
@@ -1034,13 +1086,14 @@ const Dark: TTheme = {
         base: "16px",
         medium: "20px",
         big: "34px",
+        groupBig: "23px",
         max: "72px",
       },
     },
 
     roleWrapperContainer: {
       right: {
-        min: "-5px",
+        min: "-2px",
         small: "-2px",
         base: "-2px",
         medium: "-4px",
@@ -1049,7 +1102,7 @@ const Dark: TTheme = {
       },
 
       bottom: {
-        min: "-5px",
+        min: "-2px",
         small: "3px",
         base: "4px",
         medium: "6px",
@@ -1058,11 +1111,13 @@ const Dark: TTheme = {
       },
 
       width: {
+        min: "12px",
         medium: "16px",
         max: "24px",
       },
 
       height: {
+        min: "12px",
         medium: "16px",
         max: "24px",
       },
@@ -1071,6 +1126,7 @@ const Dark: TTheme = {
     imageContainer: {
       backgroundImage: "#606060",
       background: "#606060",
+      groupBackground: grayDarkMid,
       borderRadius: "50%",
       height: "100%",
 
@@ -1342,10 +1398,10 @@ const Dark: TTheme = {
   },
 
   progressBar: {
-    backgroundColor: "#DADDDF",
+    backgroundColor: "#858585",
 
     percent: {
-      background: "#4781D1",
+      background: "#FFFFFF",
     },
   },
 
@@ -1355,8 +1411,7 @@ const Dark: TTheme = {
     zIndex: "400",
     background: "#333333",
     borderRadius: "6px",
-    boxShadow:
-      "0px 16px 16px rgba(0, 0, 0, 0.16), 0px 8.1px 6.975px rgba(0, 0, 0, 0.108), 0px 3.2px 2.6px rgba(0, 0, 0, 0.08), 0px 0.7px 0.925px rgba(0, 0, 0, 0.052)",
+    boxShadow: "0px 8px 16px 0px #040F1B29",
     // boxShadowMobile: "0px -4px 60px rgba(0, 0, 0, 0.25)",
     border: "1px solid #474747",
   },
@@ -1385,7 +1440,7 @@ const Dark: TTheme = {
       lineHeight: "10px",
 
       color: grayMaxLight,
-      disableColor: gray,
+      disableColor: grayMaxLight,
     },
 
     separator: {
@@ -1586,7 +1641,7 @@ const Dark: TTheme = {
       flex: "0 0 6px",
       marginTopWithBorder: "5px",
       marginTop: "12px",
-      marginRight: "8px",
+      marginRight: "5px",
       marginLeft: "auto",
     },
 
@@ -1628,11 +1683,12 @@ const Dark: TTheme = {
     },
 
     label: {
-      marginRightWithBorder: "8px",
+      marginRightWithBorder: "13px",
       marginRight: "4px",
 
       disabledColor: "#858585",
       color: "#858585",
+      alternativeColor: grayDark,
       selectedColor: white,
 
       maxWidth: "175px",
@@ -1651,6 +1707,12 @@ const Dark: TTheme = {
       disabledColor: "#858585",
       color: white,
       selectedColor: white,
+    },
+
+    plusBadge: {
+      color: black,
+      bgColor: grayDark,
+      selectedBgColor: "#ADADAD",
     },
   },
 
@@ -1935,8 +1997,7 @@ const Dark: TTheme = {
     expanderColor: "#eeeeee",
     background: black,
     rootFolderTitleColor: "#ADADAD",
-    publicIcon: "#858585",
-    boxShadow: "0px 12px 40px 0px #00000066",
+    boxShadow: "0px 8px 16px 0px #040F1B29",
 
     icon: {
       fill: "#E06A1B",
@@ -1959,10 +2020,11 @@ const Dark: TTheme = {
   },
 
   header: {
-    backgroundColor: "#1f1f1f ",
+    backgroundColor: "#282828 ",
     recoveryColor: "#4C4C4C",
     linkColor: "#606060",
     productColor: "#eeeeee",
+    height: "48px",
   },
 
   menuContainer: {
@@ -2002,7 +2064,7 @@ const Dark: TTheme = {
 
     backgroundColor: black,
     blurColor: "rgba(20, 20, 20, 0.8)",
-    borderColor: "#292929",
+    borderColor: "#474747",
     thumbnailBorderColor: grayLightMid,
     textColor: white,
 
@@ -2013,7 +2075,7 @@ const Dark: TTheme = {
 
     links: {
       iconColor: "#858585",
-      iconErrorColor: "rgba(242, 28, 14, 0.5)", // "#F21C0E",
+      iconErrorColor: "#E06451",
       primaryColor: "#ADADAD",
     },
 
@@ -2026,6 +2088,7 @@ const Dark: TTheme = {
       roleSelectorColor: "#a3a9ae",
       disabledRoleSelectorColor: "#a3a9ae",
       roleSelectorArrowColor: "#a3a9ae",
+      createLink: "#858585",
     },
 
     history: {
@@ -2046,6 +2109,10 @@ const Dark: TTheme = {
     gallery: {
       borderColor: "#292929",
       descriptionColor: "#eeeeee",
+    },
+
+    search: {
+      boxShadow: "0px 5px 20px 0px rgba(0, 0, 0, 0.16)",
     },
   },
 
@@ -2291,6 +2358,11 @@ const Dark: TTheme = {
       arrowRightColor: "#ADADAD",
     },
 
+    info: {
+      backgroundColor: "#282828",
+      color: "#ADADAD",
+    },
+
     bodyDescriptionText: "#858585",
 
     item: {
@@ -2510,6 +2582,13 @@ const Dark: TTheme = {
     },
   },
 
+  emptyView: {
+    items: {
+      hoverColor: charlestonGreen,
+      pressColor: outerSpace,
+    },
+  },
+
   filesEmptyContainer: {
     linkColor: "#adadad",
     privateRoom: {
@@ -2690,8 +2769,7 @@ const Dark: TTheme = {
     background: black,
     borderRadius: "6px",
     mobileBorderRadius: "6px 6px 0 0",
-    boxShadow:
-      "0px 12px 24px rgba(0, 0, 0, 0.12), 0px 8px 16px rgba(0, 0, 0, 0.08), 0px 3.2px 2.6px rgba(0, 0, 0, 0.08)",
+    boxShadow: "0px 8px 16px 0px #040F1B29",
     padding: "6px 0px",
     border: "1px solid #474747",
     devices: {
@@ -2807,6 +2885,10 @@ const Dark: TTheme = {
       border: `1px solid ${darkErrorStatus}`,
       color: darkErrorStatus,
     },
+
+    backTitle: {
+      color: "#A3A9AE",
+    },
   },
 
   facebookButton: {
@@ -2891,6 +2973,7 @@ const Dark: TTheme = {
 
     settings: {
       iconFill: white,
+      headerTitleColor: "#FFFFFF",
       trashIcon: "#858585",
       article: {
         titleColor: "#c4c4c4",
@@ -2928,7 +3011,13 @@ const Dark: TTheme = {
           tooltipColor: "#F5E9BA",
         },
         auditTrail: {
+          sideColor: "#858585",
+          nameColor: "#eeeeee",
           downloadReportDescriptionColor: "#858585",
+        },
+        loginHistory: {
+          sideColor: "#858585",
+          nameColor: "#eeeeee",
         },
       },
 
@@ -3010,6 +3099,38 @@ const Dark: TTheme = {
         warningColor: "#E06451",
         color: "#E17415",
       },
+
+      migration: {
+        descriptionColor: "#ADADAD",
+        subtitleColor: "#FFFFFF",
+        workspaceBackground: "#333333",
+        workspaceBorder: "1px solid #474747",
+        stepDescriptionColor: "#FFFFFF",
+        fileInputIconColor: "#5c5c5c",
+        infoBlockBackground: "#282828",
+        infoBlockTextColor: "#858585",
+        errorTextColor: "#E06451",
+        existingTextColor: "#3BA420",
+        tableHeaderText: "#858585",
+        tableRowHoverColor: "#3D3D3D",
+        tableRowTextColor: "#858585",
+        comboBoxLabelColor: "#FFFFFF",
+        importSectionBackground: "#282828",
+        importSectionTextColor: "#858585",
+        importItemBackground: "#333333",
+        importItemDisableBackground: "#3D3D3D",
+        importItemTextColor: "#ADADAD",
+        importItemDisableTextColor: "#5C5C5C",
+        importItemDescription: "#A3A9AE",
+        importIconColor: "#a9a9a9",
+        groupMenuBackground: "#333333",
+        groupMenuBorder: "1px solid #474747",
+        groupMenuBoxShadow: "rgba(0, 0, 0, 0.16) 0px 5px 5px 0px",
+      },
+      storageManagement: {
+        grayBackgroundText: "#858585",
+        descriptionColor: "#ADADAD",
+      },
     },
 
     wizard: {
@@ -3082,14 +3203,15 @@ const Dark: TTheme = {
     notifications: {
       textDescriptionColor: "#858585",
     },
-  },
-
-  activeSessions: {
-    color: "#eeeeee",
-    borderColor: "#474747",
-    tickIconColor: "#3BA420",
-    removeIconColor: "#A3A9AE",
-    sortHeaderColor: "#474747",
+    activeSessions: {
+      color: "#eeeeee",
+      borderColor: "#474747",
+      tickIconColor: "#3BA420",
+      removeIconColor: "#A3A9AE",
+      sortHeaderColor: "#474747",
+      tableCellColor: "#858585",
+      dividerColor: "#474747",
+    },
   },
 
   formWrapper: {
@@ -3183,6 +3305,21 @@ const Dark: TTheme = {
     borderColor: "#474747",
     pluginName: "#A3A9AE",
     descriptionColor: "#ADADAD",
+  },
+
+  sdkPresets: {
+    borderColor: "#474747",
+    secondaryColor: "#ADADAD",
+    previewBackgroundColor: "#3D3D3D",
+  },
+
+  sideBarRow: {
+    titleColor: white,
+    metaDataColor: grayDark,
+  },
+
+  dateTimePicker: {
+    colorClockIcon: "#ADADAD",
   },
 };
 

@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { makeAutoObservable } from "mobx";
 import {
   generateCerts,
@@ -7,7 +33,7 @@ import {
   submitSsoForm,
   uploadXmlMetadata,
   validateCerts,
-} from "@docspace/common/api/settings";
+} from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
 import {
   BINDING_POST,
@@ -98,7 +124,6 @@ class SsoFormStore {
   spMetadata = false;
   idpIsModalVisible = false;
   spIsModalVisible = false;
-  confirmationDisableModal = false;
   confirmationResetModal = false;
 
   // errors
@@ -155,12 +180,13 @@ class SsoFormStore {
     }
   };
 
-  ssoToggle = () => {
+  ssoToggle = (t) => {
     if (!this.enableSso) {
       this.enableSso = true;
       this.serviceProviderSettings = true;
     } else {
       this.enableSso = false;
+      !this.hasErrors && this.entityId.trim() !== "" && this.saveSsoSettings(t);
     }
 
     for (let key in this) {
@@ -224,27 +250,12 @@ class SsoFormStore {
     this.defaultSettings = defaultSettings;
   };
 
-  openConfirmationDisableModal = () => {
-    this.confirmationDisableModal = true;
-  };
-
-  closeConfirmationDisableModal = () => {
-    this.confirmationDisableModal = false;
-  };
-
   openResetModal = () => {
     this.confirmationResetModal = true;
   };
 
   closeResetModal = () => {
     this.confirmationResetModal = false;
-  };
-
-  confirmDisable = () => {
-    this.resetForm();
-    this.setIsSsoEnabled(false);
-    this.ssoToggle();
-    this.confirmationDisableModal = false;
   };
 
   confirmReset = () => {
@@ -552,12 +563,12 @@ class SsoFormStore {
     if (meta.singleSignOnService) {
       this.ssoUrlPost = this.getPropValue(
         meta.singleSignOnService,
-        BINDING_POST
+        BINDING_POST,
       );
 
       this.ssoUrlRedirect = this.getPropValue(
         meta.singleSignOnService,
-        BINDING_REDIRECT
+        BINDING_REDIRECT,
       );
     }
 
@@ -568,12 +579,12 @@ class SsoFormStore {
 
       this.sloUrlRedirect = this.getPropValue(
         meta.singleLogoutService,
-        BINDING_REDIRECT
+        BINDING_REDIRECT,
       );
 
       this.sloUrlPost = this.getPropValue(
         meta.singleLogoutService,
-        BINDING_POST
+        BINDING_POST,
       );
     }
 
@@ -598,7 +609,7 @@ class SsoFormStore {
       if (meta.certificate.signing) {
         if (Array.isArray(meta.certificate.signing)) {
           meta.certificate.signing = this.getUniqueItems(
-            meta.certificate.signing
+            meta.certificate.signing,
           ).reverse();
           meta.certificate.signing.forEach((signingCrt) => {
             data.push({
@@ -690,14 +701,14 @@ class SsoFormStore {
   delSpCertificate = (action) => {
     this.resetSpCheckboxes(action);
     this.spCertificates = this.spCertificates.filter(
-      (certificate) => certificate.action !== action
+      (certificate) => certificate.action !== action,
     );
   };
 
   delIdpCertificate = (cert) => {
     this.resetIdpCheckboxes();
     this.idpCertificates = this.idpCertificates.filter(
-      (certificate) => certificate.crt !== cert
+      (certificate) => certificate.crt !== cert,
     );
   };
 
@@ -713,7 +724,7 @@ class SsoFormStore {
       (item) =>
         (item.action === this.spAction ||
           item.action === SSO_SIGNING_ENCRYPT) &&
-        !this.isEdit
+        !this.isEdit,
     );
   };
 
@@ -785,7 +796,7 @@ class SsoFormStore {
 
     if (
       this.idpCertificates.find(
-        (item) => item.crt === this.idpCertificate && !this.isEdit
+        (item) => item.crt === this.idpCertificate && !this.isEdit,
       )
     ) {
       toastr.error(t("CertificateExist"));
@@ -896,7 +907,7 @@ class SsoFormStore {
     if (!this.enableSso || this.isLoadingXml) return true;
     return !this.spCertificates.some(
       (cert) =>
-        cert.action === SSO_SIGNING || cert.action === SSO_SIGNING_ENCRYPT
+        cert.action === SSO_SIGNING || cert.action === SSO_SIGNING_ENCRYPT,
     );
   }
 
@@ -904,7 +915,7 @@ class SsoFormStore {
     if (!this.enableSso || this.isLoadingXml) return true;
     return !this.spCertificates.some(
       (cert) =>
-        cert.action === SSO_ENCRYPT || cert.action === SSO_SIGNING_ENCRYPT
+        cert.action === SSO_ENCRYPT || cert.action === SSO_SIGNING_ENCRYPT,
     );
   }
 }

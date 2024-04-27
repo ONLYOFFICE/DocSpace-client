@@ -1,28 +1,54 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { Link } from "@docspace/shared/components/link";
-import { startBackup } from "@docspace/common/api/portal";
+import { startBackup } from "@docspace/shared/api/portal";
 import { RadioButton } from "@docspace/shared/components/radio-button";
 import { toastr } from "@docspace/shared/components/toast";
-import { BackupStorageType, FolderType } from "@docspace/common/constants";
+import { BackupStorageType, FolderType } from "@docspace/shared/enums";
 import ThirdPartyModule from "./sub-components/ThirdPartyModule";
 import RoomsModule from "./sub-components/RoomsModule";
 import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
 import { StyledModules, StyledManualBackup } from "./../StyledBackup";
 import { getFromLocalStorage, saveToLocalStorage } from "../../../../utils";
-//import { getThirdPartyCommonFolderTree } from "@docspace/common/api/files";
-import DataBackupLoader from "@docspace/common/components/Loaders/DataBackupLoader";
+//import { getThirdPartyCommonFolderTree } from "@docspace/shared/api/files";
+import DataBackupLoader from "@docspace/shared/skeletons/backup/DataBackup";
 import {
   getBackupStorage,
   getStorageRegions,
-} from "@docspace/common/api/settings";
+} from "@docspace/shared/api/settings";
 import { FloatingButton } from "@docspace/shared/components/floating-button";
-import { getSettingsThirdParty } from "@docspace/common/api/files";
+import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-
+import { isManagement } from "@docspace/shared/utils/common";
 let selectedStorageType = "";
 
 class ManualBackup extends React.Component {
@@ -136,14 +162,13 @@ class ManualBackup extends React.Component {
       setDownloadingProgress,
       t,
       clearLocalStorage,
-      isManagement,
     } = this.props;
     const { TemporaryModuleType } = BackupStorageType;
 
     clearLocalStorage();
     saveToLocalStorage("LocalCopyStorageType", "TemporaryStorage");
     try {
-      await startBackup(`${TemporaryModuleType}`, null, false, isManagement);
+      await startBackup(`${TemporaryModuleType}`, null, false, isManagement());
       setDownloadingProgress(1);
       getIntervalProgress(t);
     } catch (e) {
@@ -172,7 +197,7 @@ class ManualBackup extends React.Component {
     moduleName,
     moduleType,
     selectedStorageId,
-    selectedStorageTitle
+    selectedStorageTitle,
   ) => {
     const { isCheckedThirdPartyStorage } = this.state;
     const {
@@ -183,7 +208,6 @@ class ManualBackup extends React.Component {
       setTemporaryLink,
       getStorageParams,
       saveToLocalStorage,
-      isManagement,
     } = this.props;
 
     clearLocalStorage();
@@ -191,7 +215,7 @@ class ManualBackup extends React.Component {
     const storageParams = getStorageParams(
       isCheckedThirdPartyStorage,
       selectedFolder,
-      selectedStorageId
+      selectedStorageId,
     );
 
     const folderId = isCheckedThirdPartyStorage
@@ -202,11 +226,11 @@ class ManualBackup extends React.Component {
       isCheckedThirdPartyStorage,
       moduleName,
       folderId,
-      selectedStorageTitle
+      selectedStorageTitle,
     );
 
     try {
-      await startBackup(moduleType, storageParams, false, isManagement);
+      await startBackup(moduleType, storageParams, false, isManagement());
       setDownloadingProgress(1);
       setTemporaryLink("");
       getIntervalProgress(t);
@@ -274,7 +298,7 @@ class ManualBackup extends React.Component {
             href={dataBackupUrl}
             target="_blank"
             fontSize="13px"
-            color={currentColorScheme.main.accent}
+            color={currentColorScheme.main?.accent}
             isHovered
           >
             {t("Common:LearnMore")}
@@ -394,51 +418,52 @@ class ManualBackup extends React.Component {
   }
 }
 
-export default inject(({ auth, backup, treeFoldersStore }) => {
-  const {
-    clearProgressInterval,
-    clearLocalStorage,
-    // commonThirdPartyList,
-    downloadingProgress,
-    getProgress,
-    getIntervalProgress,
-    setDownloadingProgress,
-    setTemporaryLink,
-    // setCommonThirdPartyList,
-    temporaryLink,
-    getStorageParams,
-    setThirdPartyStorage,
-    setStorageRegions,
-    saveToLocalStorage,
-    setConnectedThirdPartyAccount,
-  } = backup;
-  const { currentTariffStatusStore, isManagement } = auth;
-  const { currentColorScheme, dataBackupUrl } = auth.settingsStore;
-  const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
-  const { isNotPaidPeriod } = currentTariffStatusStore;
+export default inject(
+  ({ settingsStore, backup, treeFoldersStore, currentTariffStatusStore }) => {
+    const {
+      clearProgressInterval,
+      clearLocalStorage,
+      // commonThirdPartyList,
+      downloadingProgress,
+      getProgress,
+      getIntervalProgress,
+      setDownloadingProgress,
+      setTemporaryLink,
+      // setCommonThirdPartyList,
+      temporaryLink,
+      getStorageParams,
+      setThirdPartyStorage,
+      setStorageRegions,
+      saveToLocalStorage,
+      setConnectedThirdPartyAccount,
+    } = backup;
 
-  return {
-    isNotPaidPeriod,
-    setThirdPartyStorage,
-    clearProgressInterval,
-    clearLocalStorage,
-    // commonThirdPartyList,
-    downloadingProgress,
-    getProgress,
-    getIntervalProgress,
-    setDownloadingProgress,
-    setTemporaryLink,
-    setStorageRegions,
-    // setCommonThirdPartyList,
-    temporaryLink,
-    getStorageParams,
-    rootFoldersTitles,
-    fetchTreeFolders,
-    saveToLocalStorage,
-    setConnectedThirdPartyAccount,
+    const { currentColorScheme, dataBackupUrl } = settingsStore;
+    const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
 
-    isManagement,
-    dataBackupUrl,
-    currentColorScheme,
-  };
-})(withTranslation(["Settings", "Common"])(observer(ManualBackup)));
+    return {
+      isNotPaidPeriod,
+      setThirdPartyStorage,
+      clearProgressInterval,
+      clearLocalStorage,
+      // commonThirdPartyList,
+      downloadingProgress,
+      getProgress,
+      getIntervalProgress,
+      setDownloadingProgress,
+      setTemporaryLink,
+      setStorageRegions,
+      // setCommonThirdPartyList,
+      temporaryLink,
+      getStorageParams,
+      rootFoldersTitles,
+      fetchTreeFolders,
+      saveToLocalStorage,
+      setConnectedThirdPartyAccount,
+
+      dataBackupUrl,
+      currentColorScheme,
+    };
+  },
+)(withTranslation(["Settings", "Common"])(observer(ManualBackup)));

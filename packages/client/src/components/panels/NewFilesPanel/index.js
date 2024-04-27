@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { useState, useEffect, useMemo } from "react";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Loader } from "@docspace/shared/components/loader";
@@ -21,16 +47,16 @@ import {
   StyledLink,
 } from "../StyledPanels";
 import { inject, observer } from "mobx-react";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
-import Loaders from "@docspace/common/components/Loaders";
+import { DialogAsideSkeleton } from "@docspace/shared/skeletons/dialog";
 import withLoader from "../../../HOCs/withLoader";
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
-import FilesFilter from "@docspace/common/api/files/filter";
-import { DeviceType } from "@docspace/common/constants";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { DeviceType } from "@docspace/shared/enums";
 
 const SharingBodyStyle = { height: `calc(100vh - 156px)` };
 
@@ -42,8 +68,6 @@ const NewFilesPanel = (props) => {
     newFiles,
     markAsRead,
     setMediaViewerData,
-    addFileToRecentlyViewed,
-    playlist,
     currentFolderId,
     setIsLoading,
     t,
@@ -125,7 +149,7 @@ const NewFilesPanel = (props) => {
         onFileClick(item);
 
         const newListFiles = listFiles.filter(
-          (file) => file.id.toString() !== id
+          (file) => file.id.toString() !== id,
         );
 
         setListFiles(newListFiles);
@@ -170,33 +194,26 @@ const NewFilesPanel = (props) => {
     } else {
       const canEdit = [5, 6, 7].includes(fileType); //TODO: maybe dirty
 
-      const isMediaActive = playlist.findIndex((el) => el.fileId === id) !== -1;
-
       const isMedia =
         item?.viewAccessibility?.ImageView ||
         item?.viewAccessibility?.MediaView;
 
       if (canEdit && providerKey) {
-        return addFileToRecentlyViewed(id)
-          .then(() => console.log("Pushed to recently viewed"))
-          .catch((e) => console.error(e))
-          .finally(
-            window.open(
-              combineUrl(
-                window.DocSpaceConfig?.proxy?.url,
-                config.homepage,
-                `/doceditor?fileId=${id}`
-              ),
-              window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self"
-            )
-          );
+        return window.open(
+          combineUrl(
+            window.DocSpaceConfig?.proxy?.url,
+            config.homepage,
+            `/doceditor?fileId=${id}`,
+          ),
+          window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
+        );
       }
 
       if (isMedia) {
         if (currentFolderId !== item.folderId) {
           const categoryType = getCategoryTypeByFolderType(
             rootFolderType,
-            item.folderId
+            item.folderId,
           );
 
           const state = {
@@ -303,7 +320,7 @@ const NewFilesPanel = (props) => {
             <div key="loader" className="panel-loader-wrapper">
               <Loader type="oval" size="16px" className="panel-loader" />
               <Text as="span">{`${t("Common:LoadingProcessing")} ${t(
-                "Common:LoadingDescription"
+                "Common:LoadingDescription",
               )}`}</Text>
             </div>
           )}
@@ -338,17 +355,17 @@ const NewFilesPanel = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     mediaViewerDataStore,
     filesActionsStore,
     selectedFolderStore,
     dialogsStore,
-    settingsStore,
+    filesSettingsStore,
     clientLoadingStore,
     pluginStore,
   }) => {
-    const { addFileToRecentlyViewed, hasNew, refreshFiles } = filesStore;
+    const { hasNew, refreshFiles } = filesStore;
 
     const { setIsSectionFilterLoading, isLoading } = clientLoadingStore;
 
@@ -356,9 +373,8 @@ export default inject(
       setIsSectionFilterLoading(param);
     };
 
-    const { playlist, setMediaViewerData, setCurrentItem } =
-      mediaViewerDataStore;
-    const { getIcon, getFolderIcon } = settingsStore;
+    const { setMediaViewerData, setCurrentItem } = mediaViewerDataStore;
+    const { getIcon, getFolderIcon } = filesSettingsStore;
     const { markAsRead } = filesActionsStore;
     const { id: currentFolderId } = selectedFolderStore;
 
@@ -373,29 +389,27 @@ export default inject(
 
     return {
       fileItemsList,
-      enablePlugins: auth.settingsStore.enablePlugins,
+      enablePlugins: settingsStore.enablePlugins,
       visible,
       newFiles,
       newFilesIds,
       isLoading,
-      playlist,
       setCurrentItem,
       currentFolderId,
       setMediaViewerData,
-      addFileToRecentlyViewed,
       getIcon,
       getFolderIcon,
       markAsRead,
       setNewFilesPanelVisible,
-      theme: auth.settingsStore.theme,
+      theme: settingsStore.theme,
       hasNew,
       refreshFiles,
       setIsLoading,
-      currentDeviceType: auth.settingsStore.currentDeviceType,
+      currentDeviceType: settingsStore.currentDeviceType,
     };
-  }
+  },
 )(
   withTranslation(["NewFilesPanel", "Common"])(
-    withLoader(observer(NewFilesPanel))(<Loaders.DialogAsideLoader isPanel />)
-  )
+    withLoader(observer(NewFilesPanel))(<DialogAsideSkeleton isPanel />),
+  ),
 );

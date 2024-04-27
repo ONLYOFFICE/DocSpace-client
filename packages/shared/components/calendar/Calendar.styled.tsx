@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import styled, { css } from "styled-components";
 import Base, { TColorScheme } from "../../themes/base";
 
@@ -107,10 +133,9 @@ const DateItem = styled.button<{
   focused: boolean;
   isSecondary?: boolean;
 }>`
-  font-family: "Open Sans";
+  font-family: ${(props) => props.theme.fontFamily};
   font-weight: 600;
-  font-size: ${(props) =>
-    props.theme.getCorrectFontSize(props.isMobile ? "16px" : "13px")};
+  font-size: ${(props) => (props.isMobile ? "16px" : "13px")};
   border-radius: 50%;
 
   border: 2px solid;
@@ -146,23 +171,23 @@ const DateItem = styled.button<{
   ${(props) =>
     props.isCurrent &&
     css`
-      background: ${props.theme.calendar.accent};
+      background: ${props.theme.calendar?.accent};
       :hover {
-        background-color: ${props.theme.calendar.accent};
+        background-color: ${props.theme.calendar?.accent};
       }
 
       :focus {
-        background-color: ${props.theme.calendar.accent};
+        background-color: ${props.theme.calendar?.accent};
       }
     `}
   color: ${(props) =>
     props.disabled
       ? props.theme.calendar.disabledColor
       : props.focused
-        ? props.theme.calendar.accent
+        ? props.theme.calendar?.accent
         : props.theme.calendar.color};
   border-color: ${(props) =>
-    props.focused ? props.theme.calendar.accent : "transparent"};
+    props.focused ? props.theme.calendar?.accent : "transparent"};
 
   ${(props) =>
     props.isCurrent &&
@@ -200,7 +225,7 @@ const HeaderActionIcon = styled(ArrowIcon)`
   transform: rotate(225deg);
   top: ${(props) => (props.isMobile ? "11px" : "8.5px")};
   left: 104%;
-  border-color: ${(props) => props.theme.calendar.accent};
+  border-color: ${(props) => props.theme.calendar?.accent};
 `;
 
 HeaderActionIcon.defaultProps = { theme: Base };
@@ -242,12 +267,12 @@ const RoundButton = styled.button<{ isMobile?: boolean }>`
     outline: ${(props) =>
       props.disabled
         ? `1px solid ${props.theme.calendar?.outlineColor}`
-        : `2px solid ${props.theme.calendar.accent}`};
+        : `2px solid ${props.theme.calendar?.accent}`};
     span {
       border-color: ${(props) =>
         props.disabled
           ? props.theme.calendar.disabledArrow
-          : props.theme.calendar.accent};
+          : props.theme.calendar?.accent};
     }
   }
 `;
@@ -256,10 +281,9 @@ RoundButton.defaultProps = { theme: Base };
 
 const Title = styled.h2<{ isMobile?: boolean; disabled?: boolean }>`
   position: relative;
-  font-family: "Open Sans", sans-serif, Arial;
+  font-family: ${(props) => props.theme.fontFamily};
   font-weight: 700;
-  font-size: ${(props) =>
-    props.theme.getCorrectFontSize(props.isMobile ? "21px" : "18px")};
+  font-size: ${(props) => (props.isMobile ? "21px" : "18px")};
   line-height: ${(props) => (props.isMobile ? "28px" : "24px")};
   color: ${(props) => props.theme.calendar.titleColor};
   border-bottom: 1px dashed transparent;
@@ -277,10 +301,9 @@ Title.defaultProps = { theme: Base };
 
 const Weekday = styled.span<{ isMobile?: boolean }>`
   pointer-events: none;
-  font-family: "Open Sans";
+  font-family: ${(props) => props.theme.fontFamily};
   font-weight: 400;
-  font-size: ${(props) =>
-    props.theme.getCorrectFontSize(props.isMobile ? "16px" : "13px")};
+  font-size: ${(props) => (props.isMobile ? "16px" : "13px")};
   line-height: 16px;
 
   color: ${(props) => props.theme.calendar.weekdayColor};
@@ -296,7 +319,7 @@ const StyledContainerTheme = styled(Container)<{
   isMobile?: boolean;
 }>`
   ${HeaderActionIcon} {
-    border-color: ${(props) => props.$currentColorScheme?.main.accent};
+    border-color: ${(props) => props.$currentColorScheme?.main?.accent};
   }
 `;
 
@@ -308,23 +331,23 @@ const StyledDateItemTheme = styled(DateItem)<{
   ${(props) =>
     props.isCurrent &&
     css`
-      background: ${props.$currentColorScheme?.main.accent};
+      background: ${props.$currentColorScheme?.main?.accent};
       :hover {
-        background-color: ${props.$currentColorScheme?.main.accent};
+        background-color: ${props.$currentColorScheme?.main?.accent};
       }
 
       :focus {
-        background-color: ${props.$currentColorScheme?.main.accent};
+        background-color: ${props.$currentColorScheme?.main?.accent};
       }
     `}
   color: ${(props) =>
     props.disabled
       ? props.theme.calendar.disabledColor
       : props.focused
-        ? props.$currentColorScheme?.main.accent
+        ? props.$currentColorScheme?.main?.accent
         : props.theme.calendar.color};
   border-color: ${(props) =>
-    props.focused ? props.$currentColorScheme?.main.accent : "transparent"};
+    props.focused ? props.$currentColorScheme?.main?.accent : "transparent"};
 `;
 
 const StyledRoundButtonTheme = styled(RoundButton)<{
@@ -334,12 +357,12 @@ const StyledRoundButtonTheme = styled(RoundButton)<{
     outline: ${(props) =>
       props.disabled
         ? `1px solid ${props.theme.calendar?.outlineColor}`
-        : `2px solid ${props.$currentColorScheme?.main.accent}`};
+        : `2px solid ${props.$currentColorScheme?.main?.accent}`};
     span {
       border-color: ${(props) =>
         props.disabled
           ? props.theme.calendar.disabledArrow
-          : props.$currentColorScheme?.main.accent};
+          : props.$currentColorScheme?.main?.accent};
     }
   }
 `;

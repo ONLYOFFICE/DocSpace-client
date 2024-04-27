@@ -45,6 +45,7 @@
   "UnselectAll": "Отменить выбор для всех",
   "URL": "URL",
   "ViewRawPayload": "Просмотр исходной полезной нагрузки",
+  "WebhookCreated": "Вебхук создан",
   "WebhookCreationHint": "Этот вебхук будет назначен всем событиям в DocSpace",
   "WebhookDetails": "Сведения о вебхуке",
   "WebhookEditedSuccessfully": "Конфигурация вебхука успешно отредактирована",

@@ -45,6 +45,7 @@
   "UnselectAll": "全部取消选择",
   "URL": "URL",
   "ViewRawPayload": "查看原始负载",
+  "WebhookCreated": "Webhook 已被创建",
   "WebhookCreationHint": "此 webhook 会被分配给协作空间中的所有事件",
   "WebhookDetails": "Webhook 详细信息",
   "WebhookEditedSuccessfully": "Webhook 配置编辑成功",

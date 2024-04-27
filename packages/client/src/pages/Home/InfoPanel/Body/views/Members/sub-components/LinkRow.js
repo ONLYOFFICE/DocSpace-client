@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React, { useState } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -9,7 +35,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { toastr } from "@docspace/shared/components/toast";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
-import UniverseReactSvgUrl from "PUBLIC_DIR/images/universe.react.svg?url";
+import LinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.reat.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
 import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
@@ -20,9 +46,9 @@ import LoadedReactSvgUrl from "PUBLIC_DIR/images/loaded.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import ClockReactSvg from "PUBLIC_DIR/images/clock.react.svg";
 import moment from "moment-timezone";
-import { RoomsType } from "@docspace/common/constants";
+import { RoomsType } from "@docspace/shared/enums";
 
-import { StyledLinkRow } from "./StyledPublicRoom";
+import { StyledLinkRow } from "./Styled";
 
 const LinkRow = (props) => {
   const {
@@ -56,9 +82,7 @@ const LinkRow = (props) => {
 
   const isLocked = !!password;
   const expiryDate = !!expirationDate;
-  const date = moment(expirationDate)
-    .tz(window.timezone || "")
-    .format("LLL");
+  const date = moment(expirationDate).tz(window.timezone).format("LLL");
 
   const tooltipContent = isExpired
     ? t("Translations:LinkHasExpiredAndHasBeenDisabled")
@@ -113,7 +137,7 @@ const LinkRow = (props) => {
 
   const onCopyExternalLink = () => {
     copy(shareLink);
-    toastr.success(t("Files:LinkSuccessfullyCopied"));
+    toastr.success(t("Common:LinkSuccessfullyCopied"));
     onCloseContextMenu();
   };
 
@@ -129,7 +153,7 @@ const LinkRow = (props) => {
     return [
       {
         key: "edit-link-key",
-        label: t("Files:EditLink"),
+        label: t("Files:LinkSettings"),
         icon: SettingsReactSvgUrl,
         onClick: onEditLink,
       },
@@ -150,12 +174,13 @@ const LinkRow = (props) => {
       //   onClick: onEmbeddingClick,
       // },
 
-      !disabled && {
-        key: "copy-link-settings-key",
-        label: primary ? t("Files:CopyGeneralLink") : t("Files:CopyLink"),
-        icon: CopyToReactSvgUrl,
-        onClick: onCopyExternalLink,
-      },
+      !disabled &&
+        !isExpired && {
+          key: "copy-link-settings-key",
+          label: t("Files:CopySharedLink"),
+          icon: CopyToReactSvgUrl,
+          onClick: onCopyExternalLink,
+        },
 
       // disabled
       //   ? {
@@ -191,11 +216,17 @@ const LinkRow = (props) => {
   const textColor = disabled ? theme.text.disableColor : theme.text.color;
 
   return (
-    <StyledLinkRow {...rest} isExpired={isExpired} isPrimary={primary}>
+    <StyledLinkRow {...rest} isExpired={isExpired}>
       <Avatar
         size="min"
-        source={UniverseReactSvgUrl}
-        roleIcon={expiryDate ? <ClockReactSvg /> : null}
+        source={LinkReactSvgUrl}
+        roleIcon={
+          expiryDate ? (
+            <div className="clock-icon">
+              <ClockReactSvg />
+            </div>
+          ) : null
+        }
         withTooltip={expiryDate}
         tooltipContent={tooltipContent}
       />
@@ -221,7 +252,7 @@ const LinkRow = (props) => {
       {disabled && <Text color={textColor}>{t("Settings:Disabled")}</Text>}
 
       <div className="external-row-icons">
-        {!disabled && !isArchiveFolder && (
+        {!disabled && !isExpired && !isArchiveFolder && (
           <>
             {isLocked && (
               <IconButton
@@ -237,7 +268,7 @@ const LinkRow = (props) => {
               size={16}
               iconName={CopyReactSvgUrl}
               onClick={onCopyExternalLink}
-              title={primary ? t("Files:CopyGeneralLink") : t("Files:CopyLink")}
+              title={t("Files:CopySharedLink")}
             />
           </>
         )}
@@ -258,9 +289,15 @@ const LinkRow = (props) => {
 };
 
 export default inject(
-  ({ auth, dialogsStore, publicRoomStore, treeFoldersStore }) => {
-    const { selectionParentRoom } = auth.infoPanelStore;
-    const { theme } = auth.settingsStore;
+  ({
+    settingsStore,
+    dialogsStore,
+    publicRoomStore,
+    treeFoldersStore,
+    infoPanelStore,
+  }) => {
+    const { infoPanelSelection } = infoPanelStore;
+    const { theme } = settingsStore;
 
     const {
       setEditLinkPanelIsVisible,
@@ -274,18 +311,18 @@ export default inject(
     return {
       setLinkParams,
       editExternalLink,
-      roomId: selectionParentRoom.id,
+      roomId: infoPanelSelection.id,
       setExternalLink,
       setEditLinkPanelIsVisible,
       setDeleteLinkDialogVisible,
       setEmbeddingPanelIsVisible,
       isArchiveFolder: isArchiveFolderRoot,
       theme,
-      isPublicRoomType: selectionParentRoom.roomType === RoomsType.PublicRoom,
+      isPublicRoomType: infoPanelSelection.roomType === RoomsType.PublicRoom,
     };
-  }
+  },
 )(
   withTranslation(["SharingPanel", "Files", "Settings", "Translations"])(
-    observer(LinkRow)
-  )
+    observer(LinkRow),
+  ),
 );

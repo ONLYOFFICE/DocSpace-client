@@ -1,6 +1,34 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React, { useCallback, useEffect, useState } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+
 import { Button } from "@docspace/shared/components/button";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
@@ -9,12 +37,18 @@ import { inject, observer } from "mobx-react";
 import { Box } from "@docspace/shared/components/box";
 import withLoader from "../withLoader";
 import { toastr } from "@docspace/shared/components/toast";
-import ErrorContainer from "@docspace/common/components/ErrorContainer";
+import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 import { mobile, tablet } from "@docspace/shared/utils";
 import { Link } from "@docspace/shared/components/link";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "../../../DocspaceLogo";
+import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
 import { StyledPage, StyledContent } from "./StyledConfirm";
+import {
+  getTfaSecretKeyAndQR,
+  validateTfaCode,
+} from "@docspace/shared/api/settings";
+import { loginWithTfaCode } from "@docspace/shared/api/user";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const StyledForm = styled(Box)`
   margin: 56px auto;
@@ -90,17 +124,21 @@ const StyledForm = styled(Box)`
     margin-top: 8px;
   }
 `;
+const PROXY_BASE_URL = combineUrl(
+  window.DocSpaceConfig?.proxy?.url,
+  "/profile",
+);
+
 const TfaActivationForm = withLoader((props) => {
   const {
     t,
     secretKey,
     qrCode,
-    loginWithCode,
-    loginWithCodeAndCookie,
 
     location,
     currentColorScheme,
   } = props;
+  const navigate = useNavigate();
 
   const [code, setCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -109,23 +147,26 @@ const TfaActivationForm = withLoader((props) => {
   const onSubmit = async () => {
     try {
       const { user, hash } = (location && location.state) || {};
-      const { linkData, defaultPage } = props;
+      const { linkData } = props;
 
       setIsLoading(true);
 
       if (user && hash) {
-        await loginWithCode(user, hash, code);
+        await loginWithTfaCode(user, hash, code);
       } else {
-        await loginWithCodeAndCookie(code, linkData.confirmHeader);
+        await validateTfaCode(code, linkData.confirmHeader);
       }
 
-      const referenceUrl = sessionStorage.getItem("referenceUrl");
+      // const referenceUrl = sessionStorage.getItem("referenceUrl");
 
-      if (referenceUrl) {
-        sessionStorage.removeItem("referenceUrl");
-      }
+      // if (referenceUrl) {
+      //  sessionStorage.removeItem("referenceUrl");
+      // }
 
-      window.location.replace(referenceUrl || defaultPage);
+      // window.location.replace(referenceUrl || defaultPage);
+      navigate(PROXY_BASE_URL, {
+        state: { openBackupCodesDialog: true },
+      });
     } catch (err) {
       let errorMessage = "";
       if (typeof err === "object") {
@@ -268,7 +309,7 @@ const TfaActivationForm = withLoader((props) => {
 });
 
 const TfaActivationWrapper = (props) => {
-  const { getSecretKeyAndQR, linkData, setIsLoaded, setIsLoading } = props;
+  const { linkData, setIsLoaded, setIsLoading } = props;
 
   const [secretKey, setSecretKey] = useState("");
   const [qrCode, setQrCode] = useState("");
@@ -278,7 +319,7 @@ const TfaActivationWrapper = (props) => {
     try {
       setIsLoading(true);
       const confirmKey = linkData.confirmHeader;
-      const res = await getSecretKeyAndQR(confirmKey);
+      const res = await getTfaSecretKeyAndQR(confirmKey);
       const { manualEntryKey, qrCodeSetupImageUrl } = res;
 
       setSecretKey(manualEntryKey);
@@ -302,15 +343,11 @@ const TfaActivationWrapper = (props) => {
   );
 };
 
-export default inject(({ auth, confirm }) => ({
+export default inject(({ settingsStore, confirm, tfaStore }) => ({
   setIsLoaded: confirm.setIsLoaded,
   setIsLoading: confirm.setIsLoading,
-  getSecretKeyAndQR: auth.tfaStore.getSecretKeyAndQR,
-  loginWithCode: auth.loginWithCode,
-  loginWithCodeAndCookie: auth.tfaStore.loginWithCodeAndCookie,
-  tfaAndroidAppUrl: auth.tfaStore.tfaAndroidAppUrl,
-  tfaIosAppUrl: auth.tfaStore.tfaIosAppUrl,
-  tfaWinAppUrl: auth.tfaStore.tfaWinAppUrl,
-  currentColorScheme: auth.settingsStore.currentColorScheme,
-  defaultPage: auth.settingsStore.defaultPage,
+  tfaAndroidAppUrl: tfaStore.tfaAndroidAppUrl,
+  tfaIosAppUrl: tfaStore.tfaIosAppUrl,
+  tfaWinAppUrl: tfaStore.tfaWinAppUrl,
+  currentColorScheme: settingsStore.currentColorScheme,
 }))(withTranslation(["Confirm", "Common"])(observer(TfaActivationWrapper)));

@@ -1,16 +1,41 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { makeAutoObservable } from "mobx";
-import { getLogoFromPath } from "@docspace/common/utils";
 import {
   getDomainName,
   setDomainName,
   setPortalName,
   createNewPortal,
   checkDomain,
-} from "@docspace/common/api/management";
+} from "@docspace/shared/api/management";
 import { TNewPortalData } from "SRC_DIR/types/spaces";
 
 class SpacesStore {
-  authStore = null;
+  settingsStore = null;
 
   createPortalDialogVisible = false;
   deletePortalDialogVisible = false;
@@ -21,8 +46,8 @@ class SpacesStore {
 
   currentPortal = false;
 
-  constructor(authStore) {
-    this.authStore = authStore;
+  constructor(settingsStore) {
+    this.settingsStore = settingsStore;
     makeAutoObservable(this);
   }
 
@@ -30,29 +55,22 @@ class SpacesStore {
     const res = await getDomainName();
     const { settings } = res;
 
-    this.authStore.settingsStore.setPortalDomain(settings);
+    this.settingsStore.setPortalDomain(settings);
   };
 
   get isConnected() {
     return (
-      this.authStore.settingsStore.baseDomain &&
-      this.authStore.settingsStore.baseDomain !== "localhost" &&
-      this.authStore.settingsStore.tenantAlias &&
-      this.authStore.settingsStore.tenantAlias !== "localhost"
+      this.settingsStore.baseDomain &&
+      this.settingsStore.baseDomain !== "localhost" &&
+      this.settingsStore.tenantAlias &&
+      this.settingsStore.tenantAlias !== "localhost"
     );
-  }
-
-  get faviconLogo() {
-    const logos = this.authStore.settingsStore.whiteLabelLogoUrls;
-    if (!logos) return;
-
-    return getLogoFromPath(logos[2]?.path?.light);
   }
 
   setPortalName = async (portalName: string) => {
     try {
       const res = await setPortalName(portalName);
-      this.authStore.settingsStore.setTenantAlias(portalName);
+      this.settingsStore.setTenantAlias(portalName);
       return res;
     } catch (error) {
       console.log(error);
@@ -63,7 +81,7 @@ class SpacesStore {
     try {
       const res = await setDomainName(domain);
       const { settings } = res;
-      this.authStore.settingsStore.setPortalDomain(settings);
+      this.settingsStore.setPortalDomain(settings);
     } catch (error) {
       console.log(error);
     }

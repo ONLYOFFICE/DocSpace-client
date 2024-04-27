@@ -1,15 +1,41 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useLocation, Outlet } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 
-import Article from "@docspace/common/components/Article";
+import Article from "@docspace/shared/components/article";
 import {
   updateTempContent,
   showLoader,
   hideLoader,
-} from "@docspace/common/utils";
-import { regDesktop } from "@docspace/common/desktop";
+} from "@docspace/shared/utils/common";
+import { regDesktop } from "@docspace/shared/utils/desktop";
 
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -20,6 +46,7 @@ import {
   ArticleHeaderContent,
   ArticleMainButtonContent,
 } from "./components/Article";
+import ArticleWrapper from "./components/ArticleWrapper";
 
 const ClientArticle = React.memo(
   ({
@@ -27,9 +54,11 @@ const ClientArticle = React.memo(
     setIsHeaderLoading,
     setIsFilterLoading,
     showArticleLoader,
+    isInfoPanelVisible,
   }) => {
     return (
-      <Article
+      <ArticleWrapper
+        isInfoPanelVisible={isInfoPanelVisible}
         withMainButton={withMainButton}
         onLogoClickAction={() => {
           setIsFilterLoading(true, false);
@@ -48,9 +77,9 @@ const ClientArticle = React.memo(
         <Article.Body>
           <ArticleBodyContent />
         </Article.Body>
-      </Article>
+      </ArticleWrapper>
     );
-  }
+  },
 );
 
 const ClientContent = (props) => {
@@ -66,6 +95,7 @@ const ClientContent = (props) => {
     isDesktop,
     showMenu,
     isFrame,
+    isInfoPanelVisible,
     withMainButton,
     t,
 
@@ -101,7 +131,7 @@ const ClientContent = (props) => {
         setEncryptionKeys,
         isEditor,
         null,
-        t
+        t,
       );
       //   console.log(
       //     "%c%s",
@@ -137,6 +167,7 @@ const ClientContent = (props) => {
         isFrame ? (
           showMenu && (
             <ClientArticle
+              isInfoPanelVisible={isInfoPanelVisible}
               withMainButton={withMainButton}
               setIsHeaderLoading={setIsHeaderLoading}
               setIsFilterLoading={setIsFilterLoading}
@@ -145,6 +176,7 @@ const ClientContent = (props) => {
           )
         ) : (
           <ClientArticle
+            isInfoPanelVisible={isInfoPanelVisible}
             withMainButton={withMainButton}
             setIsHeaderLoading={setIsHeaderLoading}
             setIsFilterLoading={setIsFilterLoading}
@@ -160,7 +192,16 @@ const ClientContent = (props) => {
 };
 
 const Client = inject(
-  ({ auth, clientLoadingStore, filesStore, peopleStore, pluginStore }) => {
+  ({
+    authStore,
+    clientLoadingStore,
+    filesStore,
+    peopleStore,
+    pluginStore,
+    userStore,
+    settingsStore,
+    infoPanelStore,
+  }) => {
     const {
       frameConfig,
       isFrame,
@@ -171,11 +212,11 @@ const Client = inject(
       enablePlugins,
       isDesktopClientInit,
       setIsDesktopClientInit,
-    } = auth.settingsStore;
+    } = settingsStore;
 
-    if (!auth.userStore.user) return;
+    if (!userStore.user) return;
 
-    const { isVisitor } = auth.userStore.user;
+    const { isVisitor } = userStore.user;
 
     const {
       isLoading,
@@ -188,19 +229,23 @@ const Client = inject(
 
     const { isInit: isInitPlugins, initPlugins } = pluginStore;
 
+    const { isVisible } = infoPanelStore;
+    const isProfile = window.location.pathname.includes("/profile");
+
     return {
       isDesktop: isDesktopClient,
       isDesktopClientInit,
       setIsDesktopClientInit,
       isFrame,
       showMenu: frameConfig?.showMenu,
-      user: auth.userStore.user,
-      isAuthenticated: auth.isAuthenticated,
+      user: userStore.user,
+      isAuthenticated: authStore.isAuthenticated,
       encryptionKeys: encryptionKeys,
       isEncryption: isEncryptionSupport,
-      isLoaded: auth.isLoaded && clientLoadingStore.isLoaded,
+      isLoaded: authStore.isLoaded && clientLoadingStore.isLoaded,
       setIsLoaded: clientLoadingStore.setIsLoaded,
       withMainButton,
+      isInfoPanelVisible: isVisible && !isProfile,
       setIsFilterLoading: setIsSectionFilterLoading,
       setIsHeaderLoading: setIsSectionHeaderLoading,
       isLoading,
@@ -215,7 +260,7 @@ const Client = inject(
         await Promise.all(actions);
       },
     };
-  }
+  },
 )(withTranslation("Common")(observer(ClientContent)));
 
 export default () => <Client />;

@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
@@ -7,7 +33,7 @@ import { inject, observer } from "mobx-react";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import RetryIcon from "PUBLIC_DIR/images/refresh.react.svg?url";
 
-import Headline from "@docspace/common/components/Headline";
+import Headline from "@docspace/shared/components/headline/Headline";
 import { IconButton } from "@docspace/shared/components/icon-button";
 // import { Hint } from "../../styled-components";
 
@@ -62,14 +88,14 @@ const HeaderContainer = styled.div`
   }
 
   .headline {
-    font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+    font-size: 18px;
     margin-inline-end: 16px;
 
     @media ${tablet} {
-      font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
+      font-size: 21px;
     }
     @media ${mobile} {
-      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+      font-size: 18px;
     }
   }
 
@@ -103,9 +129,9 @@ const HeaderContainer = styled.div`
     @media ${mobile} {
       position: absolute;
       height: 48px;
-      margin-block: -17px 0;
-      margin-inline: -17px 0;
-      width: 100%;
+      margin-block: -9px 0;
+      margin-inline: -15px 0;
+      width: calc(100% + 2px);
       top: 10px;
     }
   }
@@ -160,7 +186,7 @@ const HistoryHeader = (props) => {
       });
       toastr.success(
         `${t("WebhookRedilivered")}: ${checkedEventIds.length}`,
-        <b>{t("Common:Done")}</b>
+        <b>{t("Common:Done")}</b>,
       );
     } catch (error) {
       console.error(error);
@@ -236,6 +262,7 @@ const HistoryHeader = (props) => {
       isIndeterminate={isIndeterminate}
       withoutInfoPanelToggler
       isBlocked={isRetryPending}
+      withComboBox
     />
   );
 
@@ -262,7 +289,7 @@ const HistoryHeader = (props) => {
   );
 };
 
-export default inject(({ webhooksStore, auth }) => {
+export default inject(({ webhooksStore, settingsStore }) => {
   const {
     isGroupMenuVisible,
     checkAllIds,
@@ -278,8 +305,6 @@ export default inject(({ webhooksStore, auth }) => {
     setRetryPendingFalse,
     setRetryPendingTrue,
   } = webhooksStore;
-
-  const { settingsStore } = auth;
 
   const { theme } = settingsStore;
 

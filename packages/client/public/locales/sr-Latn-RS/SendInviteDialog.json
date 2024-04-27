@@ -1,0 +1,4 @@
+{
+  "SendInviteAgainDialog": "Pozivnica će biti poslata ponovo odabranim korisnicima sa statusom ‘Na čekanju’.",
+  "SendInviteAgainDialogMessage": "Nakon što korisnici prihvate pozivnicu, njihov status će biti promenjen na ‘Aktivan’."
+}

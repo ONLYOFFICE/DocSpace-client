@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import styled, { css } from "styled-components";
 import TextareaAutosize from "react-autosize-textarea";
@@ -15,13 +41,16 @@ const ClearScrollbar = ({
   heightScale,
   hasError,
   heightTextAreaProp,
+  isFullHeight,
+  fullHeight,
   ...props
 }: {
   isDisabled?: boolean;
   heightScale?: boolean;
   hasError?: boolean;
-  heightTextAreaProp?: number;
+  heightTextAreaProp?: string;
   ref?: React.Ref<HTMLDivElement>;
+  // @ts-expect-error error from custom scrollbar
 } & ScrollbarProps) => <Scrollbar {...props} />;
 
 const StyledScrollbar = styled(ClearScrollbar)`
@@ -37,21 +66,27 @@ const StyledScrollbar = styled(ClearScrollbar)`
   }
 
   width: ${(props) => props.theme.textArea.scrollWidth} !important;
-  height: ${(props) => {
-    return props.heightScale
-      ? "67vh"
-      : props.heightTextAreaProp
-        ? `${props.heightTextAreaProp + 2}px`
-        : "91px";
-  }} !important;
+  height: calc(
+    ${(props) => {
+        return props.heightScale
+          ? "67vh"
+          : props.isFullHeight
+            ? `${props.fullHeight}px`
+            : props.heightTextAreaProp
+              ? props.heightTextAreaProp
+              : "91px";
+      }} + 2px
+  ) !important;
 
   textarea {
     height: ${(props) => {
       return props.heightScale
         ? "65vh"
-        : props.heightTextAreaProp
-          ? `${props.heightTextAreaProp}px`
-          : "89px";
+        : props.isFullHeight
+          ? `${props.fullHeight}px`
+          : props.heightTextAreaProp
+            ? props.heightTextAreaProp
+            : "89px";
     }};
   }
   background-color: ${(props) =>
@@ -72,13 +107,11 @@ const ClearTextareaAutosize = React.forwardRef(
       paddingLeftProp,
       isJSONField,
       enableCopy,
-      heightTextAreaProp,
       heightTextArea,
       ...props
     }: TextareaProps & {
       disabled?: boolean;
       readOnly?: boolean;
-      heightTextAreaProp?: number;
     },
     ref: React.Ref<HTMLTextAreaElement>,
   ) => <TextareaAutosize {...props} ref={ref} />,
@@ -112,8 +145,7 @@ const StyledTextarea = styled(ClearTextareaAutosize).attrs(
       ? `padding-right: ${props.paddingLeftProp};`
       : `padding-left: ${props.paddingLeftProp};`}
 
-  font-size: ${(props) =>
-    props.theme.getCorrectFontSize(`${props.fontSize}px`)};
+  font-size: ${(props) => `${props.fontSize}px`};
   font-family: ${(props) => props.theme.fontFamily};
   line-height: 1.5;
 
@@ -202,10 +234,26 @@ const CopyIconWrapper = styled.div<{
 
 CopyIconWrapper.defaultProps = { theme: Base };
 
-const Wrapper = styled.div<{ enableCopy?: boolean; isJSONField?: boolean }>`
+const Wrapper = styled.div<{
+  heightScale?: boolean;
+  isFullHeight?: boolean;
+  fullHeight?: number;
+  heightTextArea?: string;
+  enableCopy?: boolean;
+  isJSONField?: boolean;
+}>`
   position: relative;
 
   max-width: 1200px;
+  height: ${(props) => {
+    return props.heightScale
+      ? "65vh"
+      : props.isFullHeight
+        ? `${props.fullHeight}px`
+        : props.heightTextArea
+          ? props.heightTextArea
+          : "89px";
+  }};
 
   .scroll-wrapper {
     margin-right: ${(props) =>
@@ -216,8 +264,7 @@ const Wrapper = styled.div<{ enableCopy?: boolean; isJSONField?: boolean }>`
 const Numeration = styled.pre<{ fontSize: string }>`
   display: block;
   position: absolute;
-
-  font-size: ${(props) => props.theme.getCorrectFontSize(props.fontSize)};
+  font-size: ${(props) => props.fontSize}px;
   font-family: ${(props) => props.theme.fontFamily};
   line-height: 1.5;
   margin: 0;

@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import styled, { css } from "styled-components";
 import { ToastContainer } from "react-toastify";
 
@@ -40,8 +66,7 @@ const StyledToastContainer = styled(ToastContainer)<{ $topOffset: number }>`
   .Toastify__close-button {
     color: ${(props) => props.theme.toast.closeButton.color};
     font-weight: ${(props) => props.theme.toast.closeButton.fontWeight};
-    font-size: ${(props) =>
-      props.theme.getCorrectFontSize(props.theme.toast.closeButton.fontSize)};
+    font-size: ${(props) => props.theme.toast.closeButton.fontSize};
     background: ${(props) => props.theme.toast.closeButton.background};
     outline: none;
     border: none;
@@ -153,9 +178,7 @@ const StyledToastContainer = styled(ToastContainer)<{ $topOffset: number }>`
     margin: ${(props) => props.theme.toast.main.margin};
     padding: ${(props) => props.theme.toast.main.padding};
     min-height: ${(props) => props.theme.toast.main.minHeight};
-    font:
-      normal 12px "Open Sans",
-      sans-serif;
+    font: normal 12px ${(props) => props.theme.fontFamily};
     width: ${(props) => props.theme.toast.main.width};
     right: ${(props) => props.theme.toast.main.right};
 
@@ -195,7 +218,7 @@ const StyledToastContainer = styled(ToastContainer)<{ $topOffset: number }>`
       `}
   }
 
-  @media only screen and ${mobile} {
+  @media only screen and (${mobile}) {
     left: 0;
     margin: auto;
     right: 0;
@@ -254,21 +277,19 @@ const StyledDiv = styled.div<{ type: ToastType }>`
   margin: 0 15px;
 
   .toast-title {
-    font-weight: ${(props) => props.theme.toastr.title.lineHeight};
+    font-weight: ${(props) => props.theme.toastr.title.fontWeight};
     margin: ${(props) => props.theme.toastr.title.margin};
     margin-bottom: ${(props) => props.theme.toastr.title.marginBottom};
     line-height: ${(props) => props.theme.toastr.title.lineHeight};
 
     color: ${(props) => props.theme.toastr.title.color[props.type]};
-    font-size: ${(props) =>
-      props.theme.getCorrectFontSize(props.theme.toastr.title.fontSize)};
+    font-size: ${(props) => props.theme.toastr.title.fontSize};
   }
 
   .toast-text {
     line-height: ${(props) => props.theme.toastr.text.lineHeight};
     align-self: center;
-    font-size: ${(props) =>
-      props.theme.getCorrectFontSize(props.theme.toastr.text.fontSize)};
+    font-size: ${(props) => props.theme.toastr.text.fontSize};
     color: ${(props) => props.theme.toastr.text.color};
     word-break: break-word;
   }

@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import styled from "styled-components";
 import { Meta, StoryObj } from "@storybook/react";
@@ -5,9 +31,9 @@ import { Meta, StoryObj } from "@storybook/react";
 import CustomSvgUrl from "PUBLIC_DIR/images/icons/32/room/custom.svg?url";
 import ArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import EmptyScreenFilter from "PUBLIC_DIR/images/empty_screen_filter.png";
-
+import { RoomsType } from "../../enums";
 import { Selector } from "./Selector";
-import { SelectorProps, TItem } from "./Selector.types";
+import { SelectorProps, TSelectorItem } from "./Selector.types";
 
 const StyledRowLoader = styled.div`
   width: 100%;
@@ -61,25 +87,34 @@ function makeName() {
 }
 
 const getItems = (count: number) => {
-  const items: TItem[] = [];
+  const items: TSelectorItem[] = [];
 
   for (let i = 0; i < count / 2; i += 1) {
     const label = makeName();
     items.push({
-      key: `user_${i}`,
-      id: `user_${i}`,
+      key: `${label} ${i}`,
+      id: `${label} ${i}`,
       label: `${label} ${i}`,
-      icon: CustomSvgUrl,
+      email: "test",
+      isOwner: false,
+      isAdmin: false,
+      isVisitor: false,
+      isCollaborator: false,
+      avatar: "",
     });
   }
 
   for (let i = 0; i < count / 2; i += 1) {
     const label = makeName();
+
     items.push({
       key: `room_${i}`,
       id: `room_${i}`,
       label: `${label} ${i}`,
       icon: CustomSvgUrl,
+      shared: false,
+      isFolder: true,
+      roomType: RoomsType.CustomRoom,
     });
   }
 
@@ -137,9 +172,9 @@ const totalItems = items.length;
 const Template = (args: SelectorProps) => {
   const [rendItems, setRendItems] = React.useState(renderedItems);
 
-  const loadNextPage = async (index: number) => {
+  const loadNextPage = React.useCallback(async (index: number) => {
     setRendItems((val) => [...val, ...items.slice(index, index + 100)]);
-  };
+  }, []);
 
   const rowLoader = <StyledRowLoader />;
   const searchLoader = <StyledSearchLoader className="search-loader" />;
@@ -153,6 +188,7 @@ const Template = (args: SelectorProps) => {
         margin: "auto",
       }}
     >
+      {/* @ts-expect-error args is good */}
       <Selector
         {...args}
         items={rendItems}
@@ -164,7 +200,9 @@ const Template = (args: SelectorProps) => {
   );
 };
 
+// @ts-expect-error args is good
 export const Default: Story = {
+  // @ts-expect-error args is good
   render: (args) => <Template {...args} />,
   args: {
     headerLabel: "Room list",
@@ -212,7 +250,7 @@ export const Default: Story = {
     descriptionText: "",
   },
 };
-
+// @ts-expect-error args is good
 export const BreadCrumbs: Story = {
   render: (args) => <Template {...args} />,
   args: {
@@ -271,7 +309,7 @@ export const BreadCrumbs: Story = {
     descriptionText: "",
   },
 };
-
+// @ts-expect-error args is good
 export const NewName: Story = {
   render: (args) => <Template {...args} />,
   args: {

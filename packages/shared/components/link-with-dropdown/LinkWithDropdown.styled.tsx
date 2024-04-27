@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import styled, { css } from "styled-components";
 import ExpanderDownReactSvg from "PUBLIC_DIR/images/expander-down.react.svg";
@@ -181,15 +207,15 @@ const StyledText = styled(SimpleText)<{ isTextOverflow?: boolean }>`
 `;
 StyledText.defaultProps = { theme: Base };
 
-const focusColor = css`
-  color: ${(props) => props.theme.linkWithDropdown.color.focus};
-  background: ${(props) => props.theme.linkWithDropdown.background.focus};
-  .expander {
-    path {
-      fill: ${(props) => props.theme.linkWithDropdown.color.focus};
-    }
-  }
-`;
+// const focusColor = css`
+//   color: ${(props) => props.theme.linkWithDropdown.color.focus};
+//   background: ${(props) => props.theme.linkWithDropdown.background.focus};
+//   .expander {
+//     path {
+//       fill: ${(props) => props.theme.linkWithDropdown.color.focus};
+//     }
+//   }
+// `;
 
 const StyledSpan = styled.span<{ $isOpen?: boolean }>`
   display: inline-block;
@@ -213,40 +239,23 @@ const StyledSpan = styled.span<{ $isOpen?: boolean }>`
     }
   }
 
-  ${(props) =>
-    !props.$isOpen &&
-    css`
-      :hover {
-        color: ${props.theme.linkWithDropdown.color.hover};
+  :hover {
+    color: ${(props) => props.theme.linkWithDropdown.color.hover};
 
-        background: ${props.theme.linkWithDropdown.background.hover};
-        .expander {
-          path {
-            fill: ${props.theme.linkWithDropdown.color.hover};
-          }
-        }
-      }
-    `}
-
-  ${(props) =>
-    props.$isOpen
-      ? focusColor
-      : css`
-          :focus-within,
-          :focus {
-            ${focusColor}
-          }
-        `}
-
-  :active {
-    color: ${(props) => props.theme.linkWithDropdown.color.active};
-    background: ${(props) => props.theme.linkWithDropdown.background.active};
+    background: ${(props) => props.theme.linkWithDropdown.background.hover};
     .expander {
       path {
-        fill: ${(props) => props.theme.linkWithDropdown.color.active};
+        fill: ${(props) => props.theme.linkWithDropdown.color.hover};
       }
     }
   }
+
+  ${(props) =>
+    props.$isOpen &&
+    css`
+      color: ${props.theme.linkWithDropdown.color.hover};
+      background: ${props.theme.linkWithDropdown.background.hover};
+    `}
 `;
 StyledSpan.defaultProps = { theme: Base };
 

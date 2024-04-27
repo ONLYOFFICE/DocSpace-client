@@ -1,4 +1,5 @@
 {
+  "AccountWillBeCreated": "Er wordt een DocSpace account aangemaakt voor <1>{{email}}</1>. Voltooi uw registratie:",
   "ChangePasswordSuccess": "Wachtwoord is succesvol gewijzigd",
   "ConfirmOwnerPortalSuccessMessage": "DocSpace eigenaar is met succes gewijzigd. Over 10 seconden wordt u doorgestuurd.",
   "ConfirmOwnerPortalTitle": "Bevestig dat u de eigenaar van het DocSpace wilt wijzigen naar {{newOwner}}.",
@@ -14,7 +15,6 @@
   "EnterCodePlaceholder": "Voer code in",
   "EnterPhone": "Mobiel telefoonnummer invoeren",
   "GetCode": "Code ontvangen",
-  "InviteTitle": "U bent uitgenodigd om lid te worden van dit ruimte!",
   "LoginRegistryButton": "Lid worden van",
   "PassworResetTitle": "Nu kunt u een nieuw wachtwoord aanmaken.",
   "PhoneSubtitle": "De twee-factor authenticatie is ingeschakeld om extra beveiliging te bieden. Voer uw mobiele telefoonnummer in om door te gaan met werken in de DocSpace. Het mobiele telefoonnummer moet ingevoerd worden in een internationaal formaat, met landcode.",
@@ -26,12 +26,8 @@
   "SetAppDescription": "Twee-factor authenticatie is ingeschakeld. Configureer uw authenticator app om in de DocSpace te kunnen blijven werken. U kunt Google Authenticator voor <1>Android</1> en <4>iOS</4> of Authenticator voor <8>Windows Phone</8> gebruiken.",
   "SetAppInstallDescription": "Om de app te verbinden scant u de QR-code of voert u handmatig uw geheime code in <1>{{ secretKey }}</1>, en voert u vervolgens een 6-cijferige code van uw app in het onderstaande veld in.",
   "SetAppTitle": "Configureer uw authenticatietoepassing",
+  "SignUp": "Inschrijven",
   "SuccessDeactivate": "Uw account is succesvol gedeactiveerd. Over 10 seconden wordt u doorgestuurd naar de <1>site</1>.",
   "SuccessReactivate": "Uw account is succesvol opnieuw geactiveerd. Over 10 seconden wordt u doorgestuurd naar de <1>ruimte</1>.",
-  "SuccessRemoved": "Uw account is succesvol verwijderd. Over 10 seconden wordt u doorgestuurd naar de <1>site</1>.",
-  "WelcomeRegister": "Registreren om te beginnen",
-  "WelcomeRegisterViaSocial": "Om te beginnen registreert u zich of logt u in via sociale netwerken",
-  "WelcomeRegisterViaSSO": "Om te beginnen registreet u zich of logt u in via SSO",
-  "WelcomeToDocspace": "Welkom bij onze DocSpace!",
-  "WelcomeToRoom": "Welkom bij de <1>{{ roomName }}</1> kamer!"
+  "SuccessRemoved": "Uw account is succesvol verwijderd. Over 10 seconden wordt u doorgestuurd naar de <1>site</1>."
 }

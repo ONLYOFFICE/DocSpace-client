@@ -1,0 +1,21 @@
+{
+  "AccountLoginType": "පිවිසෙන ගිණුමේ වර්ගය",
+  "DeleteSelfProfile": "පැතිකඩ මකන්න",
+  "DisabledEmployeeStatus": "අබලයි",
+  "DisableUserButton": "අබල කරන්න",
+  "EmailChangeButton": "වි-තැපෑල සංශෝධනය",
+  "EnableUserButton": "සබල කරන්න",
+  "InviteLinkTitle": "ආරාධනා සබැඳිය",
+  "LDAPLbl": "LDAP",
+  "NameChangeButton": "නම සංශෝධනය",
+  "PasswordChangeButton": "මුරපදය සංශෝධනය",
+  "PendingTitle": "පොරොත්තු",
+  "RemoveData": "පෞද්ගලික දත්ත මකන්න",
+  "ResetAuth": "තහවුරුව යළි සකසන්න",
+  "SendInviteAgain": "ආරාධනය නැවතත් යවන්න",
+  "StandardLogin": "සම්මත පිවිසුම",
+  "SuccessChangeUserStatus": "පරිශ්‍රීලකයාගේ තත්‍වය වෙනස් කෙරිණි",
+  "SuccessDeletePersonalData": "පෞද්ගලික දත්ත සාර්ථකව මැකිණි",
+  "SuccessSentInvitation": "ආරාධනය සාර්ථකව යවා ඇත",
+  "SuccessSentMultipleInvitatios": "ආරාධනා සාර්ථකව යවා ඇත"
+}

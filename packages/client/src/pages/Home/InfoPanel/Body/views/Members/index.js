@@ -1,264 +1,147 @@
-import React, { useState, useEffect, useCallback } from "react";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
 
-import {
-  EmployeeActivationStatus,
-  LINKS_LIMIT_COUNT,
-  RoomsType,
-  ShareAccessRights,
-} from "@docspace/common/constants";
-import Loaders from "@docspace/common/components/Loaders";
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
+import { LINKS_LIMIT_COUNT } from "@docspace/shared/constants";
+import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import MembersHelper from "../../helpers/MembersHelper";
 import MembersList from "./sub-components/MembersList";
 import User from "./User";
-import PublicRoomBar from "./sub-components/PublicRoomBar";
-import { LinksBlock, StyledLinkRow } from "./sub-components/StyledPublicRoom";
+import PublicRoomBar from "@docspace/shared/components/public-room-bar";
+import { LinksBlock, StyledLinkRow } from "./sub-components/Styled";
+import EmptyContainer from "./sub-components/EmptyContainer";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
+import { isDesktop } from "@docspace/shared/utils";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
-import PlusReactSvgUrl from "PUBLIC_DIR/images/actions.button.plus.react.svg?url";
+import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 
 import { Avatar } from "@docspace/shared/components/avatar";
-import copy from "copy-to-clipboard";
+import { copyShareLink } from "@docspace/shared/utils/copy";
 import LinkRow from "./sub-components/LinkRow";
 
 const Members = ({
   t,
   selfId,
-  selection,
-
-  updateRoomMembers,
-  setUpdateRoomMembers,
-
-  selectionParentRoom,
-  setSelectionParentRoom,
-
+  isAdmin,
+  infoPanelSelection,
   setIsScrollLocked,
-
-  getRoomMembers,
-  getRoomLinks,
-  updateRoomMemberRole,
-  setView,
-  roomsView,
-  resendEmailInvitations,
-  changeUserType,
   isPublicRoomType,
-
-  setExternalLinks,
   membersFilter,
-  setMembersFilter,
-  externalLinks,
-  members,
-  setMembersList,
-  roomType,
+  infoPanelMembers,
+  setInfoPanelMembers,
   primaryLink,
   isArchiveFolder,
   isPublicRoom,
-
   additionalLinks,
   setLinkParams,
   setEditLinkPanelIsVisible,
   getPrimaryLink,
   setExternalLink,
   withPublicRoomBlock,
+  fetchMembers,
+  membersIsLoading,
+  searchValue,
+  searchResultIsLoading,
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
 
-  const security = selectionParentRoom ? selectionParentRoom.security : {};
-
-  const fetchMembers = async (roomId, clearFilter = true) => {
-    if (isLoading) return;
-    const isPublic = selection?.roomType ?? selectionParentRoom?.roomType;
-    const requests = [getRoomMembers(roomId, clearFilter)];
-
-    if (isPublic && clearFilter && withPublicRoomBlock) {
-      requests.push(getRoomLinks(roomId));
+  const updateInfoPanelMembers = async () => {
+    if (
+      !infoPanelSelection ||
+      !infoPanelSelection.isRoom ||
+      !infoPanelSelection.id
+    ) {
+      return;
     }
 
-    let timerId;
-    if (clearFilter) timerId = setTimeout(() => setIsLoading(true), 300);
-
-    const [data, links] = await Promise.all(requests);
-    clearFilter && setIsLoading(false);
-    clearTimeout(timerId);
-
-    links && setExternalLinks(links);
-
-    const users = [];
-    const administrators = [];
-    const expectedMembers = [];
-    data?.map((fetchedMember) => {
-      const member = {
-        access: fetchedMember.access,
-        canEditAccess: fetchedMember.canEditAccess,
-        ...fetchedMember.sharedTo,
-      };
-
-      if (member.activationStatus === EmployeeActivationStatus.Pending) {
-        member.isExpect = true;
-        expectedMembers.push(member);
-      } else if (
-        member.access === ShareAccessRights.FullAccess ||
-        member.access === ShareAccessRights.RoomManager
-      ) {
-        administrators.push(member);
-      } else {
-        users.push(member);
-      }
-    });
-
-    let hasPrevAdminsTitle =
-      members?.roomId === roomId && !clearFilter
-        ? getHasPrevTitle(members?.administrators, "administration")
-        : false;
-
-    if (administrators.length && !hasPrevAdminsTitle) {
-      administrators.unshift({
-        id: "administration",
-        displayName: t("Administration"),
-        isTitle: true,
-      });
-    }
-
-    let hasPrevUsersTitle =
-      members?.roomId === roomId && !clearFilter
-        ? getHasPrevTitle(members?.users, "user")
-        : false;
-
-    if (users.length && !hasPrevUsersTitle) {
-      users.unshift({ id: "user", displayName: t("Users"), isTitle: true });
-    }
-
-    let hasPrevExpectedTitle =
-      members?.roomId === roomId && !clearFilter
-        ? getHasPrevTitle(members?.expected, "expected")
-        : false;
-
-    if (expectedMembers.length && !hasPrevExpectedTitle) {
-      expectedMembers.unshift({
-        id: "expected",
-        displayName: t("ExpectUsers"),
-        isTitle: true,
-        isExpect: true,
-      });
-    }
-
-    setUpdateRoomMembers(false);
-
-    return {
-      users,
-      administrators,
-      expected: expectedMembers,
-      roomId,
-    };
+    const fetchedMembers = await fetchMembers(t, true, withoutTitlesAndLinks);
+    setInfoPanelMembers(fetchedMembers);
   };
-
-  const getHasPrevTitle = (array, type) => {
-    return array.findIndex((x) => x.id === type) > -1;
-  };
-
-  const updateSelectionParentRoomActionSelection = useCallback(async () => {
-    if (!selection?.isRoom || selection.id === members?.roomId) return;
-
-    const fetchedMembers = await fetchMembers(selection.id);
-    setMembersList(fetchedMembers);
-
-    setSelectionParentRoom({
-      ...selection,
-      members: fetchedMembers,
-    });
-    if (roomsView === "info_members" && !selection?.security?.Read)
-      setView("info_details");
-  }, [selection]);
 
   useEffect(() => {
-    updateSelectionParentRoomActionSelection();
-  }, [selection, updateSelectionParentRoomActionSelection]);
-
-  const updateMembersAction = useCallback(async () => {
-    if (!updateRoomMembers) return;
-
-    const fetchedMembers = await fetchMembers(selection.id);
-
-    setSelectionParentRoom({
-      ...selectionParentRoom,
-      members: fetchedMembers,
-    });
-
-    setMembersList(fetchedMembers);
-  }, [selectionParentRoom, selection?.id, updateRoomMembers]);
-
-  useEffect(() => {
-    updateMembersAction();
-  }, [
-    selectionParentRoom,
-    selection?.id,
-    updateRoomMembers,
-    updateMembersAction,
-  ]);
-
-  const onRepeatInvitation = async () => {
-    resendEmailInvitations(selectionParentRoom.id, true)
-      .then(() =>
-        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios"))
-      )
-      .catch((err) => toastr.error(err));
-  };
+    updateInfoPanelMembers();
+  }, [infoPanelSelection, searchValue]);
 
   const loadNextPage = async () => {
-    const roomId = selectionParentRoom.id;
-    const fetchedMembers = await fetchMembers(roomId, false);
-    const { users, administrators, expected } = fetchedMembers;
+    const roomId = infoPanelSelection.id;
+    const fetchedMembers = await fetchMembers(t, false, withoutTitlesAndLinks);
+    const { users, administrators, expected, groups } = fetchedMembers;
 
     const newMembers = {
       roomId: roomId,
-      administrators: [...members.administrators, ...administrators],
-      users: [...members.users, ...users],
-      expected: [...members.expected, ...expected],
+      administrators: [...infoPanelMembers.administrators, ...administrators],
+      users: [...infoPanelMembers.users, ...users],
+      expected: [...infoPanelMembers.expected, ...expected],
+      groups: [...infoPanelMembers.groups, ...groups],
     };
 
-    setMembersList(newMembers);
-    setSelectionParentRoom({
-      ...selectionParentRoom,
-      members: newMembers,
-    });
+    setInfoPanelMembers(newMembers);
   };
 
-  if (isLoading) return <Loaders.InfoPanelViewLoader view="members" />;
-  else if (!members) return <></>;
+  if (membersIsLoading) return <InfoPanelViewLoader view="members" />;
+  else if (!infoPanelMembers) return <></>;
 
-  const [currentMember] = members.administrators.filter(
-    (member) => member.id === selfId
+  const [currentMember] = infoPanelMembers.administrators.filter(
+    (member) => member.id === selfId,
   );
 
-  const { administrators, users, expected } = members;
-  const membersList = [...administrators, ...users, ...expected];
+  const { administrators, users, expected, groups } = infoPanelMembers;
+
+  const membersList = [...administrators, ...groups, ...users, ...expected];
 
   const adminsTitleCount = administrators.length ? 1 : 0;
   const usersTitleCount = users.length ? 1 : 0;
   const expectedTitleCount = expected.length ? 1 : 0;
+  const groupsTitleCount = groups.length ? 1 : 0;
 
-  const headersCount = adminsTitleCount + usersTitleCount + expectedTitleCount;
-  const dataReadyMembersList = selection?.id === selectionParentRoom?.id;
-
-  if (!dataReadyMembersList) return <></>;
-
-  const canInviteUserInRoomAbility = security?.EditAccess;
+  const headersCount = withoutTitlesAndLinks
+    ? 0
+    : adminsTitleCount +
+      usersTitleCount +
+      expectedTitleCount +
+      groupsTitleCount;
 
   const onAddNewLink = async () => {
     if (isPublicRoom || primaryLink) {
       setLinkParams({ isEdit: false });
       setEditLinkPanelIsVisible(true);
     } else {
-      getPrimaryLink(selectionParentRoom.id).then((link) => {
+      getPrimaryLink(infoPanelSelection.id).then((link) => {
         setExternalLink(link);
-        copy(link.sharedTo.shareLink);
+        copyShareLink(link.sharedTo.shareLink);
         toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
       });
     }
@@ -266,54 +149,19 @@ const Members = ({
 
   const publicRoomItems = [];
 
-  if (isPublicRoomType && withPublicRoomBlock) {
+  if (isPublicRoomType && withPublicRoomBlock && !withoutTitlesAndLinks) {
     if (!isArchiveFolder || primaryLink) {
       publicRoomItems.push(
         <LinksBlock key="general-link_header">
           <Text fontSize="14px" fontWeight={600}>
-            {t("Files:GeneralLink")}
-          </Text>
-        </LinksBlock>
-      );
-    }
-
-    if (primaryLink) {
-      publicRoomItems.push(
-        <LinkRow
-          key="general-link"
-          link={primaryLink}
-          setIsScrollLocked={setIsScrollLocked}
-        />
-      );
-    } else if (!isArchiveFolder) {
-      publicRoomItems.push(
-        <StyledLinkRow onClick={onAddNewLink} key="create-general-link">
-          <Avatar size="min" source={PlusReactSvgUrl} />
-          <Link
-            isHovered
-            type="action"
-            fontSize="14px"
-            fontWeight={600}
-            className="external-row-link"
-          >
-            {t("Files:CreateAndCopy")}
-          </Link>
-        </StyledLinkRow>
-      );
-    }
-
-    if ((primaryLink && !isArchiveFolder) || additionalLinks.length) {
-      publicRoomItems.push(
-        <LinksBlock key="additional-link_header">
-          <Text fontSize="14px" fontWeight={600}>
-            {t("Files:AdditionalLinks")}
+            {t("Common:SharedLinks")}
           </Text>
 
           {!isArchiveFolder && (
             <div
               data-tooltip-id="emailTooltip"
               data-tooltip-content={t(
-                "Files:MaximumNumberOfExternalLinksCreated"
+                "Common:MaximumNumberOfExternalLinksCreated",
               )}
             >
               <IconButton
@@ -327,7 +175,7 @@ const Members = ({
 
               {additionalLinks.length >= LINKS_LIMIT_COUNT && (
                 <Tooltip
-                  float
+                  float={isDesktop()}
                   id="emailTooltip"
                   getContent={({ content }) => (
                     <Text fontSize="12px">{content}</Text>
@@ -337,31 +185,43 @@ const Members = ({
               )}
             </div>
           )}
-        </LinksBlock>
+        </LinksBlock>,
       );
     }
 
-    if (additionalLinks.length) {
+    if (primaryLink && !withoutTitlesAndLinks) {
+      publicRoomItems.push(
+        <LinkRow
+          key="general-link"
+          link={primaryLink}
+          setIsScrollLocked={setIsScrollLocked}
+        />,
+      );
+    }
+
+    if (additionalLinks.length && !withoutTitlesAndLinks) {
       additionalLinks.map((link) => {
         publicRoomItems.push(
           <LinkRow
             link={link}
             key={link?.sharedTo?.id}
             setIsScrollLocked={setIsScrollLocked}
-          />
+          />,
         );
       });
-    } else if (!isArchiveFolder && primaryLink) {
+    } else if (!isArchiveFolder && !primaryLink && !withoutTitlesAndLinks) {
       publicRoomItems.push(
         <StyledLinkRow
           key="create-additional-link"
           className="additional-link"
           onClick={onAddNewLink}
         >
-          <Avatar size="min" source={PlusReactSvgUrl} />
+          <div className="create-link-icon">
+            <IconButton size={12} iconName={PlusIcon} isDisabled />
+          </div>
 
           <Link
-            isHovered
+            noHover
             type="action"
             fontSize="14px"
             fontWeight={600}
@@ -369,14 +229,20 @@ const Members = ({
           >
             {t("Files:CreateNewLink")}
           </Link>
-        </StyledLinkRow>
+        </StyledLinkRow>,
       );
     }
   }
 
   const showPublicRoomBar =
-    ((primaryLink && !isArchiveFolder) || isPublicRoom) && withPublicRoomBlock;
+    ((primaryLink && !isArchiveFolder) || isPublicRoom) &&
+    withPublicRoomBlock &&
+    !withoutTitlesAndLinks;
   const publicRoomItemsLength = publicRoomItems.length;
+
+  if (!membersList.length) {
+    return <EmptyContainer />;
+  }
 
   return (
     <>
@@ -389,7 +255,10 @@ const Members = ({
 
       <MembersList
         loadNextPage={loadNextPage}
-        hasNextPage={membersList.length - headersCount < membersFilter.total}
+        hasNextPage={
+          membersList.length - headersCount < membersFilter.total &&
+          !searchResultIsLoading
+        }
         itemCount={membersFilter.total + headersCount + publicRoomItemsLength}
         showPublicRoomBar={showPublicRoomBar}
         linksBlockLength={publicRoomItemsLength}
@@ -401,25 +270,10 @@ const Members = ({
               t={t}
               user={user}
               key={user.id}
+              showTooltip={isAdmin}
               index={index + publicRoomItemsLength}
-              security={security}
               membersHelper={membersHelper}
               currentMember={currentMember}
-              updateRoomMemberRole={updateRoomMemberRole}
-              roomId={selectionParentRoom.id}
-              roomType={selectionParentRoom.roomType}
-              selectionParentRoom={selectionParentRoom}
-              setSelectionParentRoom={setSelectionParentRoom}
-              changeUserType={changeUserType}
-              setIsScrollLocked={setIsScrollLocked}
-              isTitle={user.isTitle}
-              isExpect={user.isExpect}
-              showInviteIcon={canInviteUserInRoomAbility && user.isExpect}
-              onRepeatInvitation={onRepeatInvitation}
-              setMembers={setMembersList}
-              membersFilter={membersFilter}
-              setMembersFilter={setMembersFilter}
-              fetchMembers={fetchMembers}
               hasNextPage={
                 membersList.length - headersCount < membersFilter.total
               }
@@ -433,127 +287,68 @@ const Members = ({
 
 export default inject(
   ({
-    auth,
+    userStore,
     filesStore,
-    peopleStore,
     selectedFolderStore,
     publicRoomStore,
     treeFoldersStore,
     dialogsStore,
+    infoPanelStore,
   }) => {
     const {
-      selectionParentRoom,
-      setSelectionParentRoom,
-      setView,
-      roomsView,
-
-      updateRoomMembers,
-      setUpdateRoomMembers,
-
+      infoPanelSelection,
       setIsScrollLocked,
-      membersList,
-      setMembersList,
-      selection: selectionItem,
-      getIsRooms,
-    } = auth.infoPanelStore;
-    const {
-      getRoomMembers,
-      getRoomLinks,
-      updateRoomMemberRole,
-      resendEmailInvitations,
-      membersFilter,
-      setMembersFilter,
-      selection,
-      bufferSelection,
-    } = filesStore;
-    const { id: selfId } = auth.userStore.user;
+      infoPanelMembers,
+      setInfoPanelMembers,
+      fetchMembers,
+      membersIsLoading,
+      withPublicRoomBlock,
+      searchValue,
+      searchResultIsLoading,
+    } = infoPanelStore;
+    const { membersFilter } = filesStore;
+    const { id: selfId, isAdmin } = userStore.user;
 
-    const { changeType: changeUserType } = peopleStore;
-    const {
-      roomLinks,
-      setExternalLinks,
-      primaryLink,
-      additionalLinks,
-      setExternalLink,
-    } = publicRoomStore;
+    const { primaryLink, additionalLinks, setExternalLink } = publicRoomStore;
     const { isArchiveFolderRoot } = treeFoldersStore;
     const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
 
     const roomType =
-      selectedFolderStore.roomType ?? selectionParentRoom?.roomType;
+      selectedFolderStore.roomType ?? infoPanelSelection?.roomType;
 
     const isPublicRoomType =
       roomType === RoomsType.PublicRoom || roomType === RoomsType.CustomRoom;
 
     const isPublicRoom = roomType === RoomsType.PublicRoom;
 
-    const room = selectionParentRoom
-      ? selectionParentRoom
-      : selection.length
-        ? selection[0]
-        : bufferSelection
-          ? bufferSelection
-          : null;
-
-    const withPublicRoomBlock =
-      room?.access === ShareAccessRights.RoomManager ||
-      room?.access === ShareAccessRights.None;
-
-    const isShowParentRoom =
-      getIsRooms() &&
-      roomsView === "info_members" &&
-      !selectionItem?.isRoom &&
-      !!selectionParentRoom;
-
     const infoSelection =
-      selectionItem?.length > 1
-        ? null
-        : isShowParentRoom
-        ? selectionParentRoom
-        : selectionItem;
+      infoPanelSelection?.length > 1 ? null : infoPanelSelection;
 
     return {
-      setView,
-      roomsView,
-      selection: infoSelection,
-      selectionParentRoom,
-      setSelectionParentRoom,
-
+      infoPanelSelection: infoSelection,
       setIsScrollLocked,
-
-      getRoomMembers,
-      getRoomLinks,
-      updateRoomMemberRole,
-
-      updateRoomMembers,
-      setUpdateRoomMembers,
-
       selfId,
-
-      resendEmailInvitations,
-      changeUserType,
+      isAdmin,
       isPublicRoomType,
-      setExternalLinks,
       membersFilter,
-      setMembersFilter,
-      externalLinks: roomLinks,
-      members: membersList,
-      setMembersList,
+      infoPanelMembers,
+      setInfoPanelMembers,
       roomType,
       primaryLink,
       isArchiveFolder: isArchiveFolderRoot,
       isPublicRoom,
-
       additionalLinks: additionalLinks,
-      isArchiveFolder: isArchiveFolderRoot,
       setLinkParams,
       setEditLinkPanelIsVisible,
-      primaryLink,
       getPrimaryLink: filesStore.getPrimaryLink,
       setExternalLink,
       withPublicRoomBlock,
+      fetchMembers,
+      membersIsLoading,
+      searchValue,
+      searchResultIsLoading,
     };
-  }
+  },
 )(
   withTranslation([
     "InfoPanel",
@@ -563,5 +358,5 @@ export default inject(
     "PeopleTranslations",
     "Settings",
     "CreateEditRoomDialog",
-  ])(observer(Members))
+  ])(observer(Members)),
 );

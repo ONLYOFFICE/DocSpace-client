@@ -1,10 +1,36 @@
-﻿import PrivacySvgUrl from "PUBLIC_DIR/images/privacy.svg?url";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import PrivacySvgUrl from "PUBLIC_DIR/images/privacy.svg?url";
 import PersonSvgUrl from "PUBLIC_DIR/images/person.svg?url";
 import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
 import RoomsReactSvgUrl from "PUBLIC_DIR/images/rooms.react.svg?url";
 
 import { useNavigate, useLocation } from "react-router-dom";
-import { FolderType, RoomSearchArea } from "@docspace/common/constants";
+import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import { inject, observer } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import EmptyContainer from "./EmptyContainer";
@@ -13,8 +39,8 @@ import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
-import RoomsFilter from "@docspace/common/api/rooms/filter";
-import FilesFilter from "@docspace/common/api/files/filter";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -64,6 +90,8 @@ const RootFolderContainer = (props) => {
 
     myFolder,
     roomsFolder,
+    isPublicRoom,
+    userId,
   } = props;
   const personalDescription = t("EmptyFolderDecription");
 
@@ -75,12 +103,18 @@ const RootFolderContainer = (props) => {
   const noFilesHeader = t("NoFilesHereYet");
   const trashDescription = t("TrashEmptyDescription");
   const favoritesDescription = t("FavoritesEmptyContainerDescription");
-  const recentDescription = t("RecentEmptyContainerDescription");
+  const recentDescription = t("RecentViaLinkEmptyContainerDescription");
 
-  const roomsDescription =
-    isVisitor || isCollaborator
-      ? t("RoomEmptyContainerDescriptionUser")
-      : t("RoomEmptyContainerDescription");
+  const roomsDescription = isPublicRoom ? (
+    <>
+      <div>{t("RoomEmptyAtTheMoment")}</div>
+      <div>{t("FilesWillAppearHere")}</div>
+    </>
+  ) : isVisitor || isCollaborator ? (
+    t("RoomEmptyContainerDescriptionUser")
+  ) : (
+    t("RoomEmptyContainerDescription")
+  );
   const archiveRoomsDescription =
     isVisitor || isCollaborator
       ? t("ArchiveEmptyScreenUser")
@@ -116,7 +150,7 @@ const RootFolderContainer = (props) => {
   };
 
   const onGoToShared = () => {
-    const newFilter = RoomsFilter.getDefault();
+    const newFilter = RoomsFilter.getDefault(userId);
 
     newFilter.searchArea = RoomSearchArea.Active;
 
@@ -293,11 +327,12 @@ const RootFolderContainer = (props) => {
 
   const goToPersonalButtons = (
     <div className="empty-folder_container-links">
-      <img
-        className="empty-folder_container-image"
-        src={PersonSvgUrl}
-        alt="person_icon"
+      <IconButton
+        className="empty-folder_container-icon"
+        size="12"
         onClick={onGoToPersonal}
+        iconName={PersonSvgUrl}
+        isFill
       />
       <Link onClick={onGoToPersonal} {...linkStyles}>
         {t("GoToPersonal")}
@@ -332,14 +367,16 @@ const RootFolderContainer = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     treeFoldersStore,
     selectedFolderStore,
     clientLoadingStore,
+    userStore,
+    publicRoomStore,
   }) => {
     const { isDesktopClient, isEncryptionSupport, organizationName, theme } =
-      auth.settingsStore;
+      settingsStore;
 
     const { setIsSectionFilterLoading } = clientLoadingStore;
 
@@ -352,12 +389,15 @@ export default inject(
     const { isPrivacyFolder, myFolderId, myFolder, roomsFolder } =
       treeFoldersStore;
 
+    const { isPublicRoom } = publicRoomStore;
+
     return {
       theme,
       isPrivacyFolder,
       isDesktop: isDesktopClient,
-      isVisitor: auth?.userStore?.user?.isVisitor,
-      isCollaborator: auth?.userStore?.user?.isCollaborator,
+      isVisitor: userStore?.user?.isVisitor,
+      userId: userStore?.user?.id,
+      isCollaborator: userStore?.user?.isCollaborator,
       isEncryptionSupport,
       organizationName,
       privacyInstructions,
@@ -374,6 +414,7 @@ export default inject(
 
       myFolder,
       roomsFolder,
+      isPublicRoom,
     };
-  }
+  },
 )(withTranslation(["Files"])(observer(RootFolderContainer)));

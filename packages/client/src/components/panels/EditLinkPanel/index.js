@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { useState, useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -14,8 +40,8 @@ import LinkBlock from "./LinkBlock";
 import ToggleBlock from "./ToggleBlock";
 import PasswordAccessBlock from "./PasswordAccessBlock";
 import LimitTimeBlock from "./LimitTimeBlock";
-import { RoomsType } from "@docspace/common/constants";
-import { DeviceType } from "@docspace/common/constants";
+import { RoomsType } from "@docspace/shared/enums";
+import { DeviceType } from "@docspace/shared/enums";
 import moment from "moment";
 
 const EditLinkPanel = (props) => {
@@ -43,7 +69,7 @@ const EditLinkPanel = (props) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [linkNameValue, setLinkNameValue] = useState(
-    link?.sharedTo?.title || ""
+    link?.sharedTo?.title || "",
   );
   const [passwordValue, setPasswordValue] = useState(password);
   const [expirationDate, setExpirationDate] = useState(date);
@@ -182,7 +208,7 @@ const EditLinkPanel = (props) => {
       <ModalDialog.Header>
         {isEdit
           ? isPrimary
-            ? t("Files:EditGeneralLink")
+            ? t("Files:EditSharedLink")
             : isPublic
               ? t("Files:EditAdditionalLink")
               : t("Files:EditLink")
@@ -270,45 +296,54 @@ const EditLinkPanel = (props) => {
     : editLinkPanelComponent;
 };
 
-export default inject(({ auth, dialogsStore, publicRoomStore }) => {
-  const { selectionParentRoom } = auth.infoPanelStore;
-  const {
-    editLinkPanelIsVisible,
-    setEditLinkPanelIsVisible,
-    unsavedChangesDialogVisible,
-    setUnsavedChangesDialog,
-    linkParams,
-  } = dialogsStore;
-  const { externalLinks, editExternalLink, setExternalLink } = publicRoomStore;
-  const { isEdit } = linkParams;
+export default inject(
+  ({
+    authStore,
+    settingsStore,
+    dialogsStore,
+    publicRoomStore,
+    infoPanelStore,
+  }) => {
+    const { infoPanelSelection } = infoPanelStore;
+    const {
+      editLinkPanelIsVisible,
+      setEditLinkPanelIsVisible,
+      unsavedChangesDialogVisible,
+      setUnsavedChangesDialog,
+      linkParams,
+    } = dialogsStore;
+    const { externalLinks, editExternalLink, setExternalLink } =
+      publicRoomStore;
+    const { isEdit } = linkParams;
 
-  const linkId = linkParams?.link?.sharedTo?.id;
-  const link = externalLinks.find((l) => l?.sharedTo?.id === linkId);
+    const linkId = linkParams?.link?.sharedTo?.id;
+    const link = externalLinks.find((l) => l?.sharedTo?.id === linkId);
 
-  const shareLink = link?.sharedTo?.shareLink;
-  const isPublic = selectionParentRoom?.roomType === RoomsType.PublicRoom;
+    const shareLink = link?.sharedTo?.shareLink;
+    const isPublic = infoPanelSelection?.roomType === RoomsType.PublicRoom;
 
-  return {
-    visible: editLinkPanelIsVisible,
-    setIsVisible: setEditLinkPanelIsVisible,
-    isEdit,
-    linkId: link?.sharedTo?.id,
-    editExternalLink,
-    roomId: selectionParentRoom.id,
-    setExternalLink,
-    isLocked: !!link?.sharedTo?.password,
-    password: link?.sharedTo?.password ?? "",
-    date: link?.sharedTo?.expirationDate,
-    isDenyDownload: link?.sharedTo?.denyDownload ?? false,
-    shareLink,
-    externalLinks,
-    unsavedChangesDialogVisible,
-    setUnsavedChangesDialog,
-    link,
-    language: auth.language,
-    isPublic,
-    currentDeviceType: auth.settingsStore.currentDeviceType,
-  };
-})(
-  withTranslation(["SharingPanel", "Common", "Files"])(observer(EditLinkPanel))
+    return {
+      visible: editLinkPanelIsVisible,
+      setIsVisible: setEditLinkPanelIsVisible,
+      isEdit,
+      linkId: link?.sharedTo?.id,
+      editExternalLink,
+      roomId: infoPanelSelection.id,
+      setExternalLink,
+      isLocked: !!link?.sharedTo?.password,
+      password: link?.sharedTo?.password ?? "",
+      date: link?.sharedTo?.expirationDate,
+      isDenyDownload: link?.sharedTo?.denyDownload ?? false,
+      shareLink,
+      externalLinks,
+      unsavedChangesDialogVisible,
+      setUnsavedChangesDialog,
+      link,
+      language: authStore.language,
+      isPublic,
+      currentDeviceType: settingsStore.currentDeviceType,
+    };
+  },
+)(
+  withTranslation(["SharingPanel", "Common", "Files"])(observer(EditLinkPanel)),
 );

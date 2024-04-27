@@ -31,16 +31,13 @@ import { headers } from "next/headers";
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
+import { TGetAllPortals } from "@docspace/shared/api/management/types";
 
-export async function getUser(share?: string) {
+export async function getUser() {
   const hdrs = headers();
   const cookie = hdrs.get("cookie");
 
-  const [getUser] = createRequest(
-    [`/people/@self`],
-    [share ? ["Request-Token", share] : ["", ""]],
-    "GET",
-  );
+  const [getUser] = createRequest([`/people/@self`], [["", ""]], "GET");
 
   if (!cookie?.includes("asc_auth_key")) return undefined;
   const userRes = await fetch(getUser);
@@ -75,5 +72,23 @@ export async function getSettings(share?: string) {
   const settings = await settingsRes.json();
 
   return settings.response as TSettings;
+}
+
+export async function getAllPortals() {
+  const [getAllPortals] = createRequest(
+    [`/portal/get?statistics=true`],
+    [["", ""]],
+    "GET",
+    undefined,
+    true,
+  );
+
+  const portalsRes = await fetch(getAllPortals);
+
+  if (!portalsRes.ok) return;
+
+  const portals = await portalsRes.json();
+
+  return portals as TGetAllPortals;
 }
 

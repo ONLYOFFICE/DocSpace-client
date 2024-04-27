@@ -35,8 +35,6 @@ export interface ScrollbarProps {
   style?: React.CSSProperties;
   /** Enable tracks auto hiding.  */
   autoHide?: boolean;
-  /** Track auto hiding delay in ms.  */
-  hideTrackTimer?: number;
   /** Fix scrollbar size. */
   fixedSize?: boolean;
   /** Disable vertical scrolling. */

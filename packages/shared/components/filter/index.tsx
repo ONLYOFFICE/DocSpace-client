@@ -71,6 +71,7 @@ const FilterInput = React.memo(
     isPeopleAccounts,
     isGroupsAccounts,
     isInsideGroup,
+    isIndexing,
     filterTitle,
     sortByTitle,
 
@@ -223,25 +224,27 @@ const FilterInput = React.memo(
             title={filterTitle}
             userId={userId}
           />
-          <SortButton
-            id="sort-by-button"
-            onSort={onSort}
-            getSortData={getSortData}
-            getSelectedSortData={getSelectedSortData}
-            view={view}
-            viewAs={viewAs === "table" ? "row" : viewAs}
-            viewSettings={viewSettings}
-            onChangeViewAs={onChangeViewAs}
-            onSortButtonClick={onSortButtonClick}
-            viewSelectorVisible={
-              viewSettings &&
-              viewSelectorVisible &&
-              currentDeviceType !== DeviceType.desktop
-            }
-            title={sortByTitle}
-          />
-
+          {!isIndexing && (
+            <SortButton
+              id="sort-by-button"
+              onSort={onSort}
+              getSortData={getSortData}
+              getSelectedSortData={getSelectedSortData}
+              view={view}
+              viewAs={viewAs === "table" ? "row" : viewAs}
+              viewSettings={viewSettings}
+              onChangeViewAs={onChangeViewAs}
+              onSortButtonClick={onSortButtonClick}
+              viewSelectorVisible={
+                viewSettings &&
+                viewSelectorVisible &&
+                currentDeviceType !== DeviceType.desktop
+              }
+              title={sortByTitle}
+            />
+          )}
           {viewSettings &&
+            !isIndexing &&
             currentDeviceType === DeviceType.desktop &&
             viewSelectorVisible && (
               <ViewSelector

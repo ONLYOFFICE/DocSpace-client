@@ -313,6 +313,7 @@ const SectionFilterContent = ({
   isTrash,
   userId,
   isPersonalRoom,
+  isIndexing,
 
   providers,
 
@@ -2655,6 +2656,7 @@ const SectionFilterContent = ({
       isPeopleAccounts={isPeopleAccounts}
       isGroupsAccounts={isGroupsAccounts}
       isInsideGroup={isInsideGroup}
+      isIndexing={isIndexing}
     />
   );
 };
@@ -2672,6 +2674,7 @@ export default inject(
     userStore,
     settingsStore,
     currentQuotaStore,
+    indexingStore,
   }) => {
     const {
       filter,
@@ -2711,6 +2714,7 @@ export default inject(
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { showStorageInfo, isDefaultRoomsQuotaSet } = currentQuotaStore;
 
+    const { isIndexing } = indexingStore;
     const {
       filterStore,
 
@@ -2750,6 +2754,7 @@ export default inject(
       isRooms,
       isTrash,
       isArchiveFolder,
+      isIndexing,
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
       showFilterLoader: clientLoadingStore.showFilterLoader,

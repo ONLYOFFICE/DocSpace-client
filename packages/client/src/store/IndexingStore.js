@@ -27,10 +27,17 @@
 import { makeAutoObservable } from "mobx";
 
 class IndexingStore {
+  selectedFolderStore;
+
   isIndexEditingMode = false;
 
-  constructor() {
+  constructor(selectedFolderStore) {
+    this.selectedFolderStore = selectedFolderStore;
     makeAutoObservable(this);
+  }
+
+  get isIndexing() {
+    return this.selectedFolderStore?.indexing;
   }
 
   setIsIndexEditingMode = (mode) => {

@@ -105,7 +105,7 @@ const setupStore = new SettingsSetupStore(
 const confirmStore = new ConfirmStore();
 const backupStore = new BackupStore();
 const commonStore = new CommonStore(settingsStore);
-const indexingStore = new IndexingStore();
+const indexingStore = new IndexingStore(selectedFolderStore);
 
 const ssoStore = new SsoFormStore();
 

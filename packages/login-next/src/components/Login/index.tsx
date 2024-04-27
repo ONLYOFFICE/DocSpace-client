@@ -191,7 +191,7 @@ const Login = ({
       }
     : {};
 
-  const isRegisterContainerVisible = !checkIsSSR() && settings?.enabledJoin;
+  const isRegisterContainerVisible = settings?.enabledJoin;
 
   return (
     <LoginFormWrapper id="login-page" bgPattern={bgPattern}>

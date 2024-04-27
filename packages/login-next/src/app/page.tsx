@@ -45,6 +45,7 @@ import {
   TGetSsoSettings,
   TThirdPartyProvider,
 } from "@docspace/shared/api/settings/types";
+import { headers } from "next/headers";
 
 async function Page({
   searchParams,
@@ -56,6 +57,23 @@ async function Page({
   const settings = await getSettings();
 
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+
+  if (settings === "portal-not-found") {
+    const config = await (
+      await fetch(`${getBaseUrl()}/static/scripts/config.json`)
+    ).json();
+    const hdrs = headers();
+    const host = hdrs.get("host");
+
+    const url = new URL(
+      config.wrongPortalNameUrl ??
+        "https://www.onlyoffice.com/wrongportalname.aspx",
+    );
+
+    url.searchParams.append("url", host ?? "");
+
+    redirect(url.toString());
+  }
 
   let thirdParty: TThirdPartyProvider[] | undefined;
   let capabilities: TCapabilities | undefined;

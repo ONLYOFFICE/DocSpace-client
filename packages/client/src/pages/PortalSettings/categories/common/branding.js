@@ -103,9 +103,6 @@ const Branding = ({
     };
   }, []);
   const hideBlock = isManagement() ? false : portals?.length > 1 ? true : false;
-
-  const hideBlock = isManagement() ? false : portals?.length > 1 ? true : false;
-
   const showSettings = standalone && !hideBlock;
 
   if (isMobileView)

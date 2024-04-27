@@ -24,33 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { tablet, mobile } from "@docspace/shared/utils";
+"use client";
 
-export const StyledSection = styled.section`
-  height: 100dvh;
-  max-width: 700px;
-  padding: 0 20px;
-  display: flex;
-  flex-direction: column;
-
-  @media ${tablet} {
-    padding: 0 16px;
-  }
-
-  .headline {
-    display: flex;
-    align-items: center;
-
-    height: 69px;
-
-    @media ${tablet} {
-      height: 61px;
-    }
-
-    @media ${mobile} {
-      height: 53px;
-    }
-  }
-`;
+export const MultipleSpaces = () => {
+  return <div>MultipleSpaces</div>;
+};
 

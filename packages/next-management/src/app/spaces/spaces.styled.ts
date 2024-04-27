@@ -25,32 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { tablet, mobile } from "@docspace/shared/utils";
 
-export const StyledSection = styled.section`
-  height: 100dvh;
-  max-width: 700px;
-  padding: 0 20px;
+export const StyledConfigurationSpaces = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 20px;
 
-  @media ${tablet} {
-    padding: 0 16px;
-  }
-
-  .headline {
-    display: flex;
-    align-items: center;
-
-    height: 69px;
-
-    @media ${tablet} {
-      height: 61px;
-    }
-
-    @media ${mobile} {
-      height: 53px;
-    }
+  .title {
+    margin-bottom: 8px;
   }
 `;
 

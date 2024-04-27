@@ -24,8 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { redirect } from "next/navigation";
+import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
+
+import { getAllPortals, getSettings } from "@/lib/actions";
+
+import { MultipleSpaces } from "./multiple";
+import { ConfigurationSpaces } from "./configuration";
+
 const SpacesPage = async () => {
-  return <div>Spaces</div>;
+  const [portals, settings] = await Promise.all([
+    getAllPortals(),
+    getSettings(),
+  ]);
+
+  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+
+  const isConnected =
+    settings?.baseDomain &&
+    settings?.baseDomain !== "localhost" &&
+    settings?.tenantAlias &&
+    settings?.tenantAlias !== "localhost";
+
+  if (isConnected && portals && portals?.tenants?.length > 0)
+    return <MultipleSpaces />;
+  return <ConfigurationSpaces />;
 };
 
 export default SpacesPage;

@@ -24,33 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { tablet, mobile } from "@docspace/shared/utils";
+import { useTranslation } from "react-i18next";
 
-export const StyledSection = styled.section`
-  height: 100dvh;
-  max-width: 700px;
-  padding: 0 20px;
-  display: flex;
-  flex-direction: column;
+import { Text } from "@docspace/shared/components/text";
 
-  @media ${tablet} {
-    padding: 0 16px;
-  }
+import { StyledHeader } from "./configuration.styled";
 
-  .headline {
-    display: flex;
-    align-items: center;
+export const Header = () => {
+  const { t } = useTranslation(["Management"]);
 
-    height: 69px;
-
-    @media ${tablet} {
-      height: 61px;
-    }
-
-    @media ${mobile} {
-      height: 53px;
-    }
-  }
-`;
+  return (
+    <StyledHeader>
+      <Text fontSize="16px" fontWeight={700}>
+        {t("ConfigurationHeader")}
+      </Text>
+      <Text fontSize="12px" lineHeight="16px" fontWeight={400}>
+        {t("ConfigurationDescription")}
+      </Text>
+    </StyledHeader>
+  );
+};
 

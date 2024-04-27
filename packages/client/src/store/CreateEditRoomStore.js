@@ -229,8 +229,6 @@ class CreateEditRoomStore {
       setIsSectionFilterLoading(param);
     };
 
-    setView("info_members");
-
     const state = {
       isRoot: false,
       title: room.title,

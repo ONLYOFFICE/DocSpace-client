@@ -69,7 +69,7 @@ const SyncContainer = ({
         tabIndex={-1}
         className="manual-sync-button"
         size="normal"
-        isDisabled={!isLdapAvailable && isLdapEnabled}
+        isDisabled={!isLdapAvailable && !isLdapEnabled}
         primary
         onClick={syncLdap}
         label={t("LdapSyncButton")}

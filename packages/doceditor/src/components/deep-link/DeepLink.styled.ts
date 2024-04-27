@@ -127,6 +127,6 @@ export const LogoWrapper = styled.div`
   margin-top: 56px;
 
   @media ${mobile} {
-    margin-bottom: 56px;
+    margin-top: 32px;
   }
 `;

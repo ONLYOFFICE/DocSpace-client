@@ -2,14 +2,14 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import {Box} from "@docspace/shared/components/box";
-import {Text} from "@docspace/shared/components/text";
-import {Button} from "@docspace/shared/components/button";
-import {Cron} from "@docspace/shared/components/cron";
+import { Box } from "@docspace/shared/components/box";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { Cron } from "@docspace/shared/components/cron";
 
 import ProgressContainer from "./ProgressContainer";
 import ToggleAutoSync from "./ToggleAutoSync";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 import StyledLdapPage from "../styled-components/StyledLdapPage";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { onChangeUrl } from "../utils";
@@ -137,8 +137,7 @@ const SyncContainer = ({
   return <>{renderBody()}</>;
 };
 
-export default inject(({ auth, ldapStore }) => {
-  const { currentQuotaStore, settingsStore } = auth;
+export default inject(({ currentQuotaStore, settingsStore, ldapStore }) => {
   const { currentDeviceType, theme } = settingsStore;
   const { isLdapAvailable } = currentQuotaStore;
   const { isLdapEnabled, syncLdap, onChangeCron, cron, nextSyncDate } =

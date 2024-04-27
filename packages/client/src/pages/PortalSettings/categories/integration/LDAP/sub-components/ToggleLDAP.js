@@ -1,11 +1,11 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import {Box} from "@docspace/shared/components/box";
+import { Box } from "@docspace/shared/components/box";
 //import FormStore from "@docspace/studio/src/store/SsoFormStore";
-import {Text} from "@docspace/shared/components/text";
-import {ToggleButton} from "@docspace/shared/components/toggle-button";
-import {Badge} from "@docspace/shared/components/badge";
+import { Text } from "@docspace/shared/components/text";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Badge } from "@docspace/shared/components/badge";
 //import DisableSsoConfirmationModal from "./DisableSsoConfirmationModal";
 //import SSOLoader from "../../sub-components/ssoLoader";
 const borderProp = { radius: "6px" };
@@ -84,8 +84,8 @@ const ToggleLDAP = (props) => {
   );
 };
 
-export default inject(({ auth, ldapStore }) => {
-  const { theme } = auth.settingsStore;
+export default inject(({ settingsStore, ldapStore }) => {
+  const { theme } = settingsStore;
   const { enableLdap, isLdapEnabled, toggleLdap } = ldapStore;
 
   console.log({

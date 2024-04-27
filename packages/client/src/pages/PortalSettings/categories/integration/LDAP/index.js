@@ -6,7 +6,7 @@ import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
 import { Link } from "@docspace/shared/components/link";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 import StyledLdapPage from "./styled-components/StyledLdapPage";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
@@ -81,8 +81,7 @@ const LDAP = ({
   );
 };
 
-export default inject(({ auth, ldapStore }) => {
-  const { settingsStore, currentQuotaStore } = auth;
+export default inject(({ ldapStore, settingsStore, currentQuotaStore }) => {
   const { isLdapAvailable } = currentQuotaStore;
   const { ldapSettingsUrl, theme, currentColorScheme, currentDeviceType } =
     settingsStore;

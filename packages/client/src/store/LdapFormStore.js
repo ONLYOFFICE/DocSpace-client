@@ -5,7 +5,7 @@ import {
   getLdapDefaultSettings,
   syncLdap,
   getCronLdap,
-} from "@docspace/common/api/settings";
+} from "@docspace/shared/api/settings";
 import { getNextSynchronization } from "@docspace/shared/components/cron";
 import { makeAutoObservable } from "mobx";
 
@@ -265,7 +265,7 @@ class LdapFormStore {
     if (respose?.id) {
       this.progressBarIntervalId = setInterval(
         this.checkStatus,
-        constants.GET_STATUS_TIMEOUT
+        constants.GET_STATUS_TIMEOUT,
       );
     }
   };
@@ -342,7 +342,7 @@ class LdapFormStore {
     if (respose?.id) {
       this.progressBarIntervalId = setInterval(
         this.checkStatus,
-        constants.GET_STATUS_TIMEOUT
+        constants.GET_STATUS_TIMEOUT,
       );
     }
   };
@@ -370,7 +370,7 @@ class LdapFormStore {
           data.certificateConfirmRequest.certificateErrors
         ) {
           var errors = data.certificateConfirmRequest.certificateErrors.map(
-            (item) => this.mapError(item)
+            (item) => this.mapError(item),
           );
           data.certificateConfirmRequest.certificateErrors = errors;
         }

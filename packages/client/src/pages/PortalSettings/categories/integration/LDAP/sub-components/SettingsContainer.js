@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 import HideButton from "./HideButton";
 import Checkboxes from "./Checkboxes";
 import ConnectionSettings from "./ConnectionSettings";
@@ -85,8 +85,7 @@ const SettingsContainer = ({
   return <>{renderBody()}</>;
 };
 
-export default inject(({ auth, ldapStore }) => {
-  const { settingsStore, currentQuotaStore } = auth;
+export default inject(({ settingsStore, currentQuotaStore, ldapStore }) => {
   const { isLdapAvailable } = currentQuotaStore;
   const { currentDeviceType, theme } = settingsStore;
   const { isSettingsShown } = ldapStore;

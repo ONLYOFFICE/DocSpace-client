@@ -33,6 +33,9 @@ import { SortByFieldName } from "SRC_DIR/helpers/constants";
 import { TableHeader } from "@docspace/shared/components/table";
 import { Events } from "@docspace/shared/enums";
 
+const TABLE_VERSION = "3";
+const TABLE_COLUMNS = `peopleTableColumns_ver-${TABLE_VERSION}`;
+
 class PeopleTableHeader extends React.Component {
   constructor(props) {
     super(props);
@@ -101,7 +104,9 @@ class PeopleTableHeader extends React.Component {
       });
 
     const columns = props.getColumns(defaultColumns);
-    const storageColumns = localStorage.getItem(this.props.tableStorageName);
+    const storageColumns = localStorage.getItem(
+      `${TABLE_COLUMNS}=${this.props.userId}`,
+    );
     const splitColumns = storageColumns && storageColumns.split(",");
 
     const resetColumnsSize =
@@ -164,7 +169,7 @@ class PeopleTableHeader extends React.Component {
   };
 
   setTableColumns = (tableColumns) => {
-    localStorage.setItem(this.props.tableStorageName, tableColumns);
+    localStorage.setItem(`${TABLE_COLUMNS}=${this.props.userId}`, tableColumns);
   };
 
   render() {
@@ -212,6 +217,7 @@ export default inject(
     clientLoadingStore,
     infoPanelStore,
     settingsStore,
+    userStore,
     currentQuotaStore,
     tableStore,
   }) => {
@@ -238,6 +244,7 @@ export default inject(
       setFilter,
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
+      userId: userStore.user?.id,
       infoPanelVisible,
       withPaging,
       isDefaultUsersQuotaSet,

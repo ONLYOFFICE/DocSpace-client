@@ -50,7 +50,6 @@ class FilesTableHeader extends React.Component {
       columnInfoPanelStorageName,
       isPublicRoom,
       isFrame,
-      frameTableColumns,
       isRecentTab,
       isDefaultRoomsQuotaSet,
       showStorageInfo,
@@ -365,15 +364,6 @@ class FilesTableHeader extends React.Component {
       (splitColumns && splitColumns.length !== columns.length) ||
       !splitColumns ||
       isFrame;
-
-    if (isFrame && frameTableColumns) {
-      const frameTableArray = frameTableColumns.split(",");
-
-      columns = columns.map((col) => {
-        col.enable = frameTableArray.includes(col.key) ? true : false;
-        return col;
-      });
-    }
 
     const tableColumns = columns.map((c) => c.enable && c.key);
 
@@ -705,7 +695,6 @@ export default inject(
       publicRoomKey,
 
       isFrame,
-      frameTableColumns: frameConfig?.viewTableColumns,
       isRecentTab,
       showSettings: frameConfig?.showSettings,
       isDefaultRoomsQuotaSet,

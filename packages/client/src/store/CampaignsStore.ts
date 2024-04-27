@@ -40,9 +40,6 @@ import {
   isHideBannerForUser,
 } from "@docspace/shared/utils/campaigns";
 
-const lng: string[] | string = getCookie(LANGUAGE) || "en";
-const language = getLanguage(typeof lng === "object" ? lng[0] : lng);
-
 class CampaignsStore {
   settingsStore: SettingsStore = {} as SettingsStore;
 
@@ -74,6 +71,9 @@ class CampaignsStore {
   getBanner = async () => {
     const { standalone } = this.settingsStore;
     const { userType } = this.userStore;
+
+    const lng: string[] | string = getCookie(LANGUAGE) || "en";
+    const language = getLanguage(typeof lng === "object" ? lng[0] : lng);
 
     let index = Number(localStorage.getItem("bannerIndex") || 0);
 

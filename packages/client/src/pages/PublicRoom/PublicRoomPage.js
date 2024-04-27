@@ -52,6 +52,7 @@ const PublicRoomPage = (props) => {
 
     frameConfig,
     setFrameConfig,
+    isFrame,
     isLoading,
   } = props;
 
@@ -87,7 +88,11 @@ const PublicRoomPage = (props) => {
 
         {!isEmptyPage && (
           <Section.SectionFilter>
-            <SectionFilterContent />
+            {isFrame ? (
+              frameConfig?.showFilter && <SectionFilterContent />
+            ) : (
+              <SectionFilterContent />
+            )}
           </Section.SectionFilter>
         )}
 
@@ -113,7 +118,7 @@ export default inject(
     filesSettingsStore,
     mediaViewerDataStore,
   }) => {
-    const { withPaging, frameConfig, setFrameConfig } = settingsStore;
+    const { withPaging, frameConfig, setFrameConfig, isFrame } = settingsStore;
     const { isLoaded, isLoading, roomStatus, fetchPublicRoom } =
       publicRoomStore;
 
@@ -150,6 +155,7 @@ export default inject(
 
       frameConfig,
       setFrameConfig,
+      isFrame,
     };
   },
 )(observer(PublicRoomPage));

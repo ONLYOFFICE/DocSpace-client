@@ -45,7 +45,7 @@ const Header = styled.h4`
   cursor: default;
 
   .verificationHelpButton {
-    margin-left: 4px;
+    margin-inline-start: 4px;
   }
 
   img {

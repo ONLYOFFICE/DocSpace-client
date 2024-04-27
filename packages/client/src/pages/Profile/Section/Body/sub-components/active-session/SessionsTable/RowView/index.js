@@ -24,41 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
-import Backend from "@docspace/shared/utils/i18next-http-backend";
-import { LANGUAGE } from "@docspace/shared/constants";
-import config from "PACKAGE_FILE";
-import { getCookie } from "@docspace/shared/utils";
-import { loadLanguagePath } from "SRC_DIR/helpers/utils";
-const newInstance = i18n.createInstance();
+import styled from "styled-components";
 
-newInstance
-  .use(Backend)
-  .use(initReactI18next)
-  .init({
-    lng: getCookie(LANGUAGE) || "en",
-    fallbackLng: "en",
-    load: "currentOnly",
-    //debug: true,
+import { RowContainer } from "@docspace/shared/components/row-container";
+import SessionsRow from "./SessionsRow";
 
-    interpolation: {
-      escapeValue: false, // not needed for react as it escapes by default
-      format: function (value, format) {
-        if (format === "lowercase") return value.toLowerCase();
-        return value;
-      },
-    },
+const StyledRowContainer = styled(RowContainer)`
+  margin: 2px 0 20px;
+`;
 
-    backend: {
-      loadPath: loadLanguagePath(config.homepage),
-    },
+const RowView = (props) => {
+  const { t, sectionWidth, sessionsData } = props;
 
-    ns: ["About", "Common"],
+  return (
+    <StyledRowContainer
+      className="sessions-row-container"
+      useReactWindow={false}
+      hasMoreFiles={false}
+      itemHeight={58}
+      itemCount={sessionsData.length}
+      filesLength={sessionsData.length}
+      fetchMoreFiles={() => {}}
+    >
+      {sessionsData.map((item) => (
+        <SessionsRow
+          t={t}
+          key={item.id}
+          item={item}
+          sectionWidth={sectionWidth}
+        />
+      ))}
+    </StyledRowContainer>
+  );
+};
 
-    react: {
-      useSuspense: false,
-    },
-  });
-
-export default newInstance;
+export default RowView;

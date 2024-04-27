@@ -24,41 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
-import Backend from "@docspace/shared/utils/i18next-http-backend";
-import { LANGUAGE } from "@docspace/shared/constants";
-import config from "PACKAGE_FILE";
-import { getCookie } from "@docspace/shared/utils";
+import { RoomsType, ShareAccessRights } from "../enums";
 
-import { loadLanguagePath } from "SRC_DIR/helpers/utils";
+export const getDefaultAccessUser = (
+  roomType: RoomsType,
+): ShareAccessRights => {
+  switch (roomType) {
+    case RoomsType.FormRoom:
+      return ShareAccessRights.FormFilling;
 
-const newInstance = i18n.createInstance();
+    case RoomsType.PublicRoom:
+      return ShareAccessRights.RoomManager;
 
-newInstance
-  .use(Backend)
-  .use(initReactI18next)
-  .init({
-    lng: getCookie(LANGUAGE) || "en",
-    fallbackLng: "en",
-    load: "currentOnly",
-    //debug: true,
-
-    interpolation: {
-      escapeValue: false, // not needed for react as it escapes by default
-      format: function (value, format) {
-        if (format === "lowercase") return value.toLowerCase();
-        return value;
-      },
-    },
-
-    backend: {
-      loadPath: loadLanguagePath(config.homepage),
-    },
-
-    react: {
-      useSuspense: false,
-    },
-  });
-
-export default newInstance;
+    default:
+      return ShareAccessRights.ReadOnly;
+  }
+};

@@ -24,39 +24,63 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
-import Backend from "@docspace/shared/utils/i18next-http-backend";
-import { LANGUAGE } from "@docspace/shared/constants";
-import config from "PACKAGE_FILE";
-import { getCookie } from "@docspace/shared/utils";
-import { loadLanguagePath } from "SRC_DIR/helpers/utils";
-const newInstance = i18n.createInstance();
+import { isMobile } from "@docspace/shared/utils";
+import styled from "styled-components";
 
-newInstance
-  .use(Backend)
-  .use(initReactI18next)
-  .init({
-    lng: getCookie(LANGUAGE) || "en",
-    fallbackLng: "en",
-    load: "currentOnly",
-    //debug: true,
+import { convertTime } from "@docspace/shared/utils/convertTime";
+import { Text } from "@docspace/shared/components/text";
+import { RowContent } from "@docspace/shared/components/row-content";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
 
-    interpolation: {
-      escapeValue: false, // not needed for react as it escapes by default
-      format: function (value, format) {
-        if (format === "lowercase") return value.toLowerCase();
-        return value;
-      },
-    },
+const StyledRowContent = styled(RowContent)`
+  .rowMainContainer {
+    height: 100%;
+  }
 
-    backend: {
-      loadPath: loadLanguagePath(config.homepage, "PrivacyPage"),
-    },
+  .session-browser {
+    font-size: 14px;
+    font-weight: 600;
+    color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
+  }
+`;
 
-    react: {
-      useSuspense: false,
-    },
-  });
+const SessionsRowContent = ({
+  id,
+  standalone,
+  platform,
+  browser,
+  date,
+  country,
+  city,
+  ip,
+  sectionWidth,
+  showTickIcon,
+}) => {
+  return (
+    <StyledRowContent
+      key={id}
+      sectionWidth={sectionWidth}
+      sideColor={theme.profile.activeSessions.tableCellColor}
+    >
+      <Text fontSize="14px" fontWeight="600">
+        {platform} <span className="session-browser">{`(${browser})`}</span>
+      </Text>
+      {isMobile() && showTickIcon && (
+        <IconButton size={12} iconName={TickSvgUrl} color="#20D21F" />
+      )}
+      <Text truncate>{convertTime(date)}</Text>
+      {!standalone && (
+        <Text truncate>
+          {country}
+          {` ${city}`}
+        </Text>
+      )}
+      <Text truncate containerWidth="160px">
+        {ip}
+      </Text>
+    </StyledRowContent>
+  );
+};
 
-export default newInstance;
+export default SessionsRowContent;

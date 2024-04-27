@@ -112,7 +112,7 @@ export const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 56px auto;
+
   max-width: 960px;
   width: 100vw;
 
@@ -123,10 +123,10 @@ export const StyledWrapper = styled.div`
 `;
 
 export const LogoWrapper = styled.div`
-  margin-top: auto;
   margin-bottom: 64px;
+  margin-top: 56px;
 
   @media ${mobile} {
-    margin-bottom: 112px;
+    margin-bottom: 56px;
   }
 `;

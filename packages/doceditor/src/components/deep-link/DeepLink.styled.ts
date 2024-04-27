@@ -109,6 +109,17 @@ export const BgBlock = styled.div<{ bgPattern: string }>`
 `;
 
 export const StyledWrapper = styled.div`
+  height: 100%;
+  width: 100vw;
+  max-width: 960px;
+
+  @media ${mobile} {
+    margin: 0 auto;
+    align-items: flex-start;
+  }
+`;
+
+export const StyledBody = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -121,7 +132,6 @@ export const StyledWrapper = styled.div`
     align-items: flex-start;
   }
 `;
-
 export const LogoWrapper = styled.div`
   margin-bottom: 64px;
   margin-top: 56px;

@@ -35,6 +35,8 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { getBgPattern } from "@docspace/shared/utils/common";
+import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import { getDeepLink } from "./DeepLink.helper";
 import {
@@ -45,9 +47,10 @@ import {
   BgBlock,
   StyledWrapper,
   LogoWrapper,
+  StyledBody,
 } from "./DeepLink.styled";
 import { DeepLinkProps } from "./DeepLink.types";
-import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+
 
 const DeepLink = ({
   fileInfo,
@@ -96,48 +99,52 @@ const DeepLink = ({
 
   return (
     <StyledWrapper>
-      <LogoWrapper>
-        <DocspaceLogo className="docspace-logo" isResizable />
-      </LogoWrapper>
-      <FormWrapper>
-        <StyledDeepLink>
-          <StyledBodyWrapper>
-            <Text className="title">{t("DeepLink:OpeningDocument")}</Text>
-            <StyledFileTile>
-              <img src={getFileIcon()} alt="docspace-logo" />
-              <Text fontSize="14px" fontWeight="600" truncate>
-                {getFileTitle()}
-              </Text>
-            </StyledFileTile>
-            <Text>{t("DeepLink:DeepLinkText")}</Text>
-          </StyledBodyWrapper>
-          <StyledActionsWrapper>
-            <Checkbox
-              label={t("Common:Remember")}
-              isChecked={isRemember}
-              onChange={onChangeCheckbox}
-            />
-            <Button
-              size={ButtonSize.medium}
-              primary
-              label={t("DeepLink:OpenInApp")}
-              onClick={onOpenAppClick}
-            />
-            <Link
-              className="stay-link"
-              type={LinkType.action}
-              fontSize="13px"
-              fontWeight="600"
-              isHovered
-              color={theme.currentColorScheme?.main?.accent}
-              onClick={onStayBrowserClick}
-            >
-              {t("DeepLink:StayInBrowser")}
-            </Link>
-          </StyledActionsWrapper>
-        </StyledDeepLink>
-      </FormWrapper>
       <BgBlock bgPattern={bgPattern} />
+      <Scrollbar id="customScrollBar">
+        <StyledBody>
+          <LogoWrapper>
+            <DocspaceLogo className="docspace-logo" isResizable />
+          </LogoWrapper>
+          <FormWrapper>
+            <StyledDeepLink>
+              <StyledBodyWrapper>
+                <Text className="title">{t("DeepLink:OpeningDocument")}</Text>
+                <StyledFileTile>
+                  <img src={getFileIcon()} alt="docspace-logo" />
+                  <Text fontSize="14px" fontWeight="600" truncate>
+                    {getFileTitle()}
+                  </Text>
+                </StyledFileTile>
+                <Text>{t("DeepLink:DeepLinkText")}</Text>
+              </StyledBodyWrapper>
+              <StyledActionsWrapper>
+                <Checkbox
+                  label={t("Common:Remember")}
+                  isChecked={isRemember}
+                  onChange={onChangeCheckbox}
+                />
+                <Button
+                  size={ButtonSize.medium}
+                  primary
+                  label={t("DeepLink:OpenInApp")}
+                  onClick={onOpenAppClick}
+                />
+                <Link
+                  className="stay-link"
+                  type={LinkType.action}
+                  fontSize="13px"
+                  fontWeight="600"
+                  isHovered
+                  color={theme.currentColorScheme?.main?.accent}
+                  onClick={onStayBrowserClick}
+                >
+                  {t("DeepLink:StayInBrowser")}
+                </Link>
+              </StyledActionsWrapper>
+            </StyledDeepLink>
+          </FormWrapper>
+        </StyledBody>
+      </Scrollbar>
     </StyledWrapper>
   );
 };

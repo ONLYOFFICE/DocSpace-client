@@ -34,8 +34,6 @@ import { TGetColorTheme, TSettings } from "@docspace/shared/api/settings/types";
 
 import useI18N from "./useI18N";
 
-const SYSTEM_THEME = getSystemTheme();
-
 export interface UseThemeProps {
   colorTheme?: TGetColorTheme;
   settings?: TSettings;
@@ -68,6 +66,7 @@ const useTheme = ({ colorTheme, settings }: UseThemeProps) => {
   }, [colorTheme]);
 
   const getUserTheme = React.useCallback(() => {
+    const SYSTEM_THEME = getSystemTheme();
     const interfaceDirection = i18n?.dir ? i18n.dir() : "ltr";
     if (SYSTEM_THEME === ThemeKeys.BaseStr) {
       setTheme({
@@ -105,6 +104,16 @@ const useTheme = ({ colorTheme, settings }: UseThemeProps) => {
   React.useEffect(() => {
     getUserTheme();
   }, [currentColorTheme, getUserTheme]);
+
+  React.useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    mediaQuery.addEventListener("change", getUserTheme);
+
+    return () => {
+      mediaQuery.removeEventListener("change", getUserTheme);
+    };
+  }, [getUserTheme]);
 
   return { theme, currentColorTheme };
 };

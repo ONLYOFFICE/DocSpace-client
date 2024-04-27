@@ -26,26 +26,21 @@
 
 "use server";
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 
-import { TenantStatus } from "@docspace/shared/enums";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
+import { getBgPattern } from "@docspace/shared/utils/common";
 
 import Login from "@/components/Login";
+import { LoginFormWrapper } from "@/components/Login/Login.styled";
 import {
   getSettings,
-  getVersionBuild,
-  getColorTheme,
   getThirdPartyProviders,
   getCapabilities,
   getSSO,
   checkIsAuthenticated,
+  getColorTheme,
 } from "@/utils/actions";
-import {
-  TCapabilities,
-  TGetSsoSettings,
-  TThirdPartyProvider,
-} from "@docspace/shared/api/settings/types";
-import { headers } from "next/headers";
 
 async function Page({
   searchParams,
@@ -54,12 +49,14 @@ async function Page({
 }) {
   const isAuth = await checkIsAuthenticated();
 
-  const [settings, thirdParty, capabilities, ssoSettings] = await Promise.all([
-    getSettings(),
-    getThirdPartyProviders(),
-    getCapabilities(),
-    getSSO(),
-  ]);
+  const [settings, thirdParty, capabilities, ssoSettings, colorTheme] =
+    await Promise.all([
+      getSettings(),
+      getThirdPartyProviders(),
+      getCapabilities(),
+      getSSO(),
+      getColorTheme(),
+    ]);
 
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
 
@@ -91,15 +88,20 @@ async function Page({
     redirect(`${getBaseUrl()}/wizard`);
   }
 
+  const bgPattern = getBgPattern(colorTheme?.selected);
+
   return (
-    <Login
-      searchParams={searchParams}
-      capabilities={capabilities}
-      settings={settings}
-      thirdPartyProvider={thirdParty}
-      ssoSettings={ssoSettings}
-      isAuthenticated={isAuth}
-    />
+    <LoginFormWrapper id="login-page" bgPattern={bgPattern}>
+      <div className="bg-cover" />
+      <Login
+        searchParams={searchParams}
+        capabilities={capabilities}
+        settings={settings}
+        thirdPartyProvider={thirdParty}
+        ssoSettings={ssoSettings}
+        isAuthenticated={isAuth}
+      />
+    </LoginFormWrapper>
   );
 }
 

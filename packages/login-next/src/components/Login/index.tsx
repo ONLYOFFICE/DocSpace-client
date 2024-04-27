@@ -38,7 +38,6 @@ import {
   getLogoUrl,
   getOAuthToken,
 } from "@docspace/shared/utils/common";
-
 import RecoverAccessModalDialog from "@docspace/shared/components/recover-access-modal-dialog/RecoverAccessModalDialog";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
@@ -54,10 +53,9 @@ import useRecoverDialog from "@/hooks/useRecoverDialog";
 
 import GreetingContainer from "../GreetingContainer";
 import Register from "../Register";
+import LoginForm from "../LoginForm";
 
 import { LoginContent, LoginFormWrapper } from "./Login.styled";
-import { checkIsSSR, isDesktop } from "@docspace/shared/utils";
-import LoginForm from "../LoginForm";
 
 const Login = ({
   searchParams,
@@ -179,8 +177,6 @@ const Login = ({
     [],
   );
 
-  const bgPattern = getBgPattern(theme.currentColorScheme?.id);
-
   const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme?.isBase);
 
   const ssoProps = ssoExists()
@@ -194,8 +190,7 @@ const Login = ({
   const isRegisterContainerVisible = settings?.enabledJoin;
 
   return (
-    <LoginFormWrapper id="login-page" bgPattern={bgPattern}>
-      <div className="bg-cover" />
+    <>
       <Scrollbar id="customScrollBar">
         <LoginContent>
           <ColorTheme
@@ -275,7 +270,7 @@ const Login = ({
           id="recover-access-modal"
         />
       )}
-    </LoginFormWrapper>
+    </>
   );
 };
 

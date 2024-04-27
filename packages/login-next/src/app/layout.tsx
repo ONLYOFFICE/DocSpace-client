@@ -47,20 +47,21 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const baseUrl = getBaseUrl();
   const isAuth = await checkIsAuthenticated();
 
-  if (isAuth) redirect("/");
+  if (isAuth) redirect(`${baseUrl}`);
 
   const [settings, colorTheme] = await Promise.all([
     getSettings(),
     getColorTheme(),
   ]);
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+  if (settings === "access-restricted") redirect(`${baseUrl}/${settings}`);
 
   if (settings === "portal-not-found") {
     const config = await (
-      await fetch(`${getBaseUrl()}/static/scripts/config.json`)
+      await fetch(`${baseUrl}/static/scripts/config.json`)
     ).json();
     const hdrs = headers();
     const host = hdrs.get("host");
@@ -76,11 +77,11 @@ export default async function RootLayout({
   }
 
   if (settings?.tenantStatus === TenantStatus.PortalRestore) {
-    redirect(`${getBaseUrl()}/preparation-portal`);
+    redirect(`${baseUrl}/preparation-portal`);
   }
 
   if (settings?.tenantStatus === TenantStatus.PortalDeactivate) {
-    redirect(`${getBaseUrl()}/unavailable`);
+    redirect(`${baseUrl}/unavailable`);
   }
 
   return (

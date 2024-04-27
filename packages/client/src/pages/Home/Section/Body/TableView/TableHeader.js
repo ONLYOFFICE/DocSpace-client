@@ -365,7 +365,7 @@ class FilesTableHeader extends React.Component {
     if (isVirtualDataRoom && indexing) {
       defaultColumns.unshift({
         key: "Index",
-        title: t("idx"),
+        title: "#",
         enable: this.props.indexColumnIsEnabled,
         // defaultSize: 110,
       });

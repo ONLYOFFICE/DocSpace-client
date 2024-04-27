@@ -69,14 +69,15 @@ const ControlButtons = ({
     toggleDropBox?.();
   };
 
-  const navigationButtonBlock = navigationButtonLabel ? (
-    <Button
-      className="navigation_button"
-      label={navigationButtonLabel}
-      size={ButtonSize.extraSmall}
-      onClick={onNavigationButtonClick}
-    />
-  ) : null;
+  const navigationButtonBlock =
+    navigationButtonLabel && !isFrame ? (
+      <Button
+        className="navigation_button"
+        label={navigationButtonLabel}
+        size={ButtonSize.extraSmall}
+        onClick={onNavigationButtonClick}
+      />
+    ) : null;
   const children = tariffBar ? React.cloneElement(tariffBar, { title }) : null;
   const isTabletView = isTablet();
 

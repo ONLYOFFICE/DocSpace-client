@@ -141,7 +141,7 @@ class ProfileActions extends React.PureComponent {
 
   getAvatar = async () => {
     const user = await api.people.getUser();
-    const avatar = user.hasAvatar ? user.avatar : DefaultUserPhoto;
+    const avatar = user?.hasAvatar ? user.avatar : DefaultUserPhoto;
     this.setState({ avatar: avatar });
   };
 

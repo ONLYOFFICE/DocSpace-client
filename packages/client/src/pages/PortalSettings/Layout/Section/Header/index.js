@@ -220,9 +220,10 @@ const SectionHeaderContent = (props) => {
     const arrayOfParams = getArrayOfParams();
 
     const key = getKeyByLink(arrayOfParams, settingsTree);
-    let currKey = key.length > 3 ? key : key[0];
 
-    if (key === "8" || key === "8-0") currKey = "8-0";
+    const keysCollection = key.split("-");
+
+    const currKey = keysCollection.length >= 3 ? key : keysCollection[0];
 
     const header = getTKeyByKey(currKey, settingsTree);
     const isCategory = checkPropertyByLink(

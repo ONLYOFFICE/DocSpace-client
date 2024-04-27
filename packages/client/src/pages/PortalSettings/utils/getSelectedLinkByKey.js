@@ -25,8 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export const getSelectedLinkByKey = (key, treeData, depth = 0) => {
-  let newKey = key.slice(0, 1 + 2 * depth);
+  const keysCollection = key.split("-");
+  let newKey = keysCollection.slice(0, depth + 1).join("-");
+
   const item = treeData.find((item) => item.key === newKey);
+
   if (key === newKey) {
     if (!item.link) return "";
     return "/" + item.link;

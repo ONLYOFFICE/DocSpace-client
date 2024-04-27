@@ -1,7 +1,6 @@
 {
   "ErrorEmptyResponse": "Boş cavab",
   "ErrorUnavailableText": "DocSpace əlçatan deyil",
-  "InvalidLink": "Etibarsız keçid",
   "LinkDoesNotExist": "Açmağa çalışdığınız keçid mövcud deyil.",
   "LinkHasExpired": "İzlədiyiniz keçidin vaxtı keçib."
 }

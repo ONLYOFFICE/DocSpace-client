@@ -105,7 +105,7 @@ const Register = (props: RegisterProps) => {
         onRegisterModalClose();
       }
     }
-  }, []);
+  }, [email, emailErr]);
 
   const onKeyDown = React.useCallback(
     (e: KeyboardEvent) => {

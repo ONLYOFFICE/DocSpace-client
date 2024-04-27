@@ -54,7 +54,12 @@ async function Page({
 }) {
   const isAuth = await checkIsAuthenticated();
 
-  const settings = await getSettings();
+  const [settings, thirdParty, capabilities, ssoSettings] = await Promise.all([
+    getSettings(),
+    getThirdPartyProviders(),
+    getCapabilities(),
+    getSSO(),
+  ]);
 
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
 
@@ -73,18 +78,6 @@ async function Page({
     url.searchParams.append("url", host ?? "");
 
     redirect(url.toString());
-  }
-
-  let thirdParty: TThirdPartyProvider[] | undefined;
-  let capabilities: TCapabilities | undefined;
-  let ssoSettings: TGetSsoSettings | undefined;
-
-  if (settings?.tenantStatus !== TenantStatus.PortalRestore) {
-    [thirdParty, capabilities, ssoSettings] = await Promise.all([
-      getThirdPartyProviders(),
-      getCapabilities(),
-      getSSO(),
-    ]);
   }
 
   const ssoUrl = capabilities ? capabilities.ssoUrl : "";

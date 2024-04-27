@@ -136,6 +136,7 @@ const Table = ({
   filterTotal,
   isRooms,
   isTrashFolder,
+  isIndexEditingMode,
   withPaging,
   columnStorageName,
   columnInfoPanelStorageName,
@@ -203,6 +204,7 @@ const Table = ({
         item={item}
         itemIndex={index}
         index={index}
+        isIndexEditingMode={isIndexEditingMode}
         setFirsElemChecked={setFirsElemChecked}
         setHeaderBorder={setHeaderBorder}
         theme={theme}
@@ -226,6 +228,7 @@ const Table = ({
     highlightFile.id,
     highlightFile.isExst,
     isTrashFolder,
+    isIndexEditingMode,
   ]);
 
   return (
@@ -266,6 +269,8 @@ export default inject(
     tableStore,
     userStore,
     settingsStore,
+
+    indexingStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -287,6 +292,8 @@ export default inject(
       highlightFile,
     } = filesStore;
 
+    const { isIndexEditingMode } = indexingStore;
+
     const { withPaging, theme, currentDeviceType } = settingsStore;
 
     return {
@@ -303,6 +310,7 @@ export default inject(
       filterTotal: isRooms ? roomsFilterTotal : filterTotal,
       isRooms,
       isTrashFolder,
+      isIndexEditingMode,
       withPaging,
       columnStorageName,
       columnInfoPanelStorageName,

@@ -80,6 +80,14 @@ const StyledTableRow = styled(TableRow)`
     border-right: 0; //for Safari
   }
 
+  ${(props) =>
+    props.isIndexEditingMode &&
+    css`
+      .table-container_element {
+        display: flex !important;
+      }
+    `}
+
   .table-container_cell:not(.table-container_element-wrapper) {
     height: auto;
     max-height: 48;

@@ -65,6 +65,7 @@ const FilesTableRow = (props) => {
     id,
     isRooms,
     isTrashFolder,
+    isIndexEditingMode,
     isHighlight,
     hideColumns,
     onDragOver,
@@ -140,6 +141,13 @@ const FilesTableRow = (props) => {
     ? `${item.id}_${item.fileExst}`
     : item.id ?? "";
 
+  const contextOptionProps = isIndexEditingMode
+    ? {}
+    : {
+        contextOptions: item.contextOptions,
+        getContextModel,
+      };
+
   return (
     <StyledDragAndDrop
       id={id}
@@ -163,16 +171,15 @@ const FilesTableRow = (props) => {
         selectionProp={selectionProp}
         key={item.id}
         fileContextClick={fileContextClick}
-        onClick={onMouseClick}
+        onClick={isIndexEditingMode ? () => {} : onMouseClick}
         isActive={isActive}
+        isIndexEditingMode={isIndexEditingMode}
         inProgress={inProgress}
         isFolder={item.isFolder}
         onHideContextMenu={onHideContextMenu}
         isThirdPartyFolder={item.isThirdPartyFolder}
         onDoubleClick={onDoubleClick}
         checked={checkedProps}
-        contextOptions={item.contextOptions}
-        getContextModel={getContextModel}
         showHotkeyBorder={showHotkeyBorder}
         title={
           item.isFolder
@@ -184,6 +191,7 @@ const FilesTableRow = (props) => {
         hideColumns={hideColumns}
         badgeUrl={badgeUrl}
         canDrag={canDrag}
+        {...contextOptionProps}
       >
         {isRooms ? (
           <RoomsRowDataComponent

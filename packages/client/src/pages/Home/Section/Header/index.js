@@ -728,6 +728,7 @@ const SectionHeaderContent = (props) => {
       haveLinksRight,
       isPublicRoomType,
       isPublicRoom,
+      isFrame,
     } = props;
 
     const isArchive = selectedFolder.rootFolderType === FolderType.Archive;
@@ -739,12 +740,14 @@ const SectionHeaderContent = (props) => {
           label: t("Files:CopyLink"),
           icon: TabletLinkReactSvgUrl,
           onClick: onShareRoom,
+          disabled: isFrame,
         },
-        security?.Download && {
+        {
           key: "public-room_edit",
           label: t("Common:Download"),
           icon: DownloadReactSvgUrl,
           onClick: onDownloadAll,
+          disabled: !security?.Download,
         },
       ];
     }

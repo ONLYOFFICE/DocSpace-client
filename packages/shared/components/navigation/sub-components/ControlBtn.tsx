@@ -81,6 +81,11 @@ const ControlButtons = ({
   const children = tariffBar ? React.cloneElement(tariffBar, { title }) : null;
   const isTabletView = isTablet();
 
+  const contextOptionsFolder = getContextOptionsFolder();
+  const containVisible = contextOptionsFolder.some(
+    (item) => item.disabled === false,
+  );
+
   return (
     <StyledControlButtonContainer isFrame={isFrame} showTitle={showTitle}>
       {!isRootFolder || (isTrashFolder && !isEmptyFilesList) ? (
@@ -165,7 +170,7 @@ const ControlButtons = ({
             />
           )}
 
-          {isPublicRoom && (
+          {isPublicRoom && containVisible && (
             <ContextButton
               id="header_optional-button"
               className="option-button"

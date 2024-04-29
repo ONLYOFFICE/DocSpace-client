@@ -40,6 +40,7 @@ import React, {
 // import indexedDBHelper from "@docspace/shared/utils/indexedDBHelper";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";
+import { isPublicPreview } from "@docspace/shared/utils/common";
 
 import {
   calculateAdjustBoundsUtils,
@@ -87,8 +88,8 @@ export const ImageViewer = ({
   mobileDetails,
   toolbar,
   thumbnailSrc,
-  imageId,
-  version,
+  // imageId,
+  // version,
   isTiff,
   contextModel,
   errorTitle,
@@ -855,7 +856,7 @@ export const ImageViewer = ({
     setIsError(true);
   }, []);
 
-  const model = React.useMemo(contextModel, [contextModel]);
+  const model = React.useMemo(() => contextModel(true), [contextModel]);
 
   useEffect(() => {
     unmountRef.current = false;

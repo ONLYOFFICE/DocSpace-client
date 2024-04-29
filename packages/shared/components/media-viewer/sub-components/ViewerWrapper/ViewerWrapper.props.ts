@@ -56,7 +56,7 @@ interface ViewerWrapperProps {
   onDownloadClick?: VoidFunction;
 
   onSetSelectionFile: VoidFunction;
-  contextModel: () => ContextMenuModel[];
+  contextModel: (isError?: boolean) => ContextMenuModel[];
 }
 
 export default ViewerWrapperProps;

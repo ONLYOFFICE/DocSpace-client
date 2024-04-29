@@ -109,7 +109,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     other.archiveRoomsId === targetFile?.rootFolderId ||
     (!targetFile?.security?.Rename && !targetFile?.security?.Delete);
 
-  const getContextModel = () => {
+  const getContextModel = (isError?: boolean) => {
     const {
       onClickDownloadAs,
       onClickLinkEdit,
@@ -132,6 +132,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       t,
       targetFile,
       archiveRoom,
+      Boolean(isPublicFile),
       {
         onClickDownload,
         onClickRename,
@@ -139,19 +140,21 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       },
     );
 
-    const model = getMobileMediaContextModel(t, targetFile, {
-      onShowInfoPanel,
-      onClickDownload,
-      onMoveAction,
-      onCopyAction,
-      onDuplicate,
-      onClickRename,
-      onClickDelete,
-    });
+    const model = getMobileMediaContextModel(
+      t,
+      targetFile,
+      Boolean(isPublicFile),
+      {
+        onShowInfoPanel,
+        onClickDownload,
+        onMoveAction,
+        onCopyAction,
+        onDuplicate,
+        onClickRename,
+        onClickDelete,
+      },
+    );
 
-    if (isPublicFile) {
-      return isMobile ? model.filter((item) => item.key === "download") : [];
-    }
     if (isPdf)
       return getPDFContextModel(t, targetFile, {
         onClickDownloadAs,
@@ -218,7 +221,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
 
     return isMobile
       ? model
-      : isImage && !isMobile
+      : isImage && !isMobile && !isError
         ? desktopModel.filter((el) => el.key !== "download")
         : desktopModel;
   };

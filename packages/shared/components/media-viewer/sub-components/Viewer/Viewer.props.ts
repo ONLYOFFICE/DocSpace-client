@@ -54,7 +54,7 @@ interface ViewerProps {
   onMaskClick?: VoidFunction;
   onNextClick?: VoidFunction;
   onPrevClick?: VoidFunction;
-  contextModel: () => ContextMenuModel[];
+  contextModel: (isError?: boolean) => ContextMenuModel[];
   onDownloadClick?: VoidFunction;
   generateContextMenu: (
     isOpen: boolean,

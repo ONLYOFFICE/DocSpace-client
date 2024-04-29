@@ -1,7 +1,6 @@
 {
   "ErrorEmptyResponse": "Prázdna odpoveď",
   "ErrorUnavailableText": "DocSpace je nedostupný",
-  "InvalidLink": "Neplatný odkaz",
   "LinkDoesNotExist": "Odkaz, ktorý sa pokúšate otvoriť, neexistuje.",
   "LinkHasExpired": "Odkaz, ktorý používate, je neplatný."
 }

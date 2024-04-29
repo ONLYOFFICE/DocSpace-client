@@ -74,7 +74,7 @@ const Editor = ({
   onSDKRequestSelectDocument,
   onSDKRequestReferenceSource,
 }: EditorProps) => {
-  const { t } = useTranslation(["Common", "Editor", "DeepLink"]);
+  const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
 
   const {
     onDocumentReady,
@@ -139,12 +139,21 @@ const Editor = ({
 
   if (fileInfo) {
     const editorGoBack = new URLSearchParams(search).get("editorGoBack");
+    const openFileLocationText = (
+      (
+        i18n.getDataByLanguage(i18n.language) as unknown as {
+          Editor: { [key: string]: string };
+        }
+      )?.["Editor"] as {
+        [key: string]: string;
+      }
+    )?.["FileLocation"];
 
     if (editorGoBack === "false" || user?.isVisitor || !user) {
     } else if (editorGoBack === "event") {
       goBack = {
         requestClose: true,
-        text: t?.("FileLocation"),
+        text: openFileLocationText,
       };
     } else {
       goBack = {
@@ -152,7 +161,7 @@ const Editor = ({
           typeof window !== "undefined"
             ? window.DocSpaceConfig?.editor?.requestClose ?? false
             : false,
-        text: t?.("FileLocation"),
+        text: openFileLocationText,
       };
       if (
         typeof window !== "undefined" &&

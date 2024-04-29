@@ -195,6 +195,7 @@
   "IncorrectPassword": "잘못된 비밀번호입니다",
   "Info": "정보",
   "InfoPanel": "정보 패널",
+  "InvalidLink": "유효하지 않은 링크입니다",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1>님이 안전한 문서 공동작업을 위해 귀하를 DocSpace <1>{{spaceAddress}}</1>에 초대했습니다.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1>님이 안전한 문서 공동작업을 위해 귀하를 <1>{{roomName}}</1> 방에 초대했습니다.",
   "Invite": "초대",

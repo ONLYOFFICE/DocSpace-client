@@ -194,6 +194,7 @@
   "IncorrectPassword": "Netačna lozinka",
   "Info": "Info",
   "InfoPanel": "Info panel",
+  "InvalidLink": "Nevažeći link",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> vas poziva da pristupite DocSpace-u <1>{{spaceAddress}}</1> za sigurnu dokument saradnju",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> vas poziva da pristupite sobi <1>{{roomName}}</1> za sigurnu dokument saradnju",
   "Invite": "Pozovi",

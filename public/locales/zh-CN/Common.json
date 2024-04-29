@@ -195,6 +195,7 @@
   "IncorrectPassword": "密码错误",
   "Info": "信息",
   "InfoPanel": "信息面板",
+  "InvalidLink": "无效链接",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> 邀请您加入协作空间 <1>{{spaceAddress}}</1> 安全地共同编辑处理文档。",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> 邀请您加入房间 <1>{{roomName}}</1> 安全地共同编辑处理文档。",
   "Invite": "邀请",

@@ -217,7 +217,7 @@ export const Viewer = (props: ViewerProps) => {
       contextModel={contextModel}
       onMaskClick={handleMaskClick}
       onContextMenu={onMobileContextMenu}
-      showBackArrow={!isPublicFile}
+      isPublicFile={isPublicFile}
     />
   );
 

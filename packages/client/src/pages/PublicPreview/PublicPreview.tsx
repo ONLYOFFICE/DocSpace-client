@@ -4,12 +4,16 @@ import { observer, inject } from "mobx-react";
 import { useParams, useSearchParams } from "react-router-dom";
 
 import api from "@docspace/shared/api";
+import { UrlActionType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
 import { ViewerLoader } from "@docspace/shared/components/media-viewer/sub-components/ViewerLoader";
 
 import type { TFile } from "@docspace/shared/api/files/types";
-import type { PlaylistType } from "@docspace/shared/components/media-viewer/MediaViewer.types";
+import type {
+  NumberOrString,
+  PlaylistType,
+} from "@docspace/shared/components/media-viewer/MediaViewer.types";
 
 import type { PublicPreviewProps } from "./PublicPreview.types";
 import { DEFAULT_EXTS_IMAGE } from "./PublicPreview.constants";
@@ -17,6 +21,7 @@ import { useDeviceType } from "./PublicPreview.helpers";
 
 const PublicPreview = ({
   getIcon,
+  openUrl,
   getFilesSettings,
   extsImagePreviewed,
 }: PublicPreviewProps) => {
@@ -77,6 +82,21 @@ const PublicPreview = ({
     thumbnailUrl: "",
   }));
 
+  const onDownloadMediaFile = useCallback(
+    (fileId: NumberOrString) => {
+      if (playlist.length > 0) {
+        const viewUrlFile = playlist.find(
+          (file) => file.fileId === fileId,
+        )?.src;
+
+        if (!viewUrlFile) return;
+
+        return openUrl?.(viewUrlFile, UrlActionType.Download);
+      }
+    },
+    [playlist, openUrl],
+  );
+
   if (isLoading) return <ViewerLoader isLoading />;
 
   return (
@@ -93,14 +113,16 @@ const PublicPreview = ({
           currentFileId={playlist[0].fileId}
           currentDeviceType={currentDeviceType}
           extsImagePreviewed={extsImagePreviewed ?? DEFAULT_EXTS_IMAGE}
+          onDownload={onDownloadMediaFile}
         />
       )}
     </div>
   );
 };
 
-export default inject<TStore>(({ filesSettingsStore }) => {
+export default inject<TStore>(({ filesSettingsStore, settingsStore }) => {
   const { getFilesSettings, getIcon, extsImagePreviewed } = filesSettingsStore;
+  const { openUrl } = settingsStore;
 
-  return { getFilesSettings, getIcon, extsImagePreviewed };
+  return { getFilesSettings, getIcon, openUrl, extsImagePreviewed };
 })(observer(PublicPreview));

@@ -124,6 +124,8 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       onCopyLink,
     } = other;
 
+    const isMobile = isMobileUtils() || isTablet();
+
     if (!targetFile) return [];
 
     const desktopModel = getDesktopMediaContextModel(
@@ -147,6 +149,9 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       onClickDelete,
     });
 
+    if (isPublicFile) {
+      return isMobile ? model.filter((item) => item.key === "download") : [];
+    }
     if (isPdf)
       return getPDFContextModel(t, targetFile, {
         onClickDownloadAs,
@@ -210,8 +215,6 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
         });
       });
     }
-
-    const isMobile = isMobileUtils() || isTablet();
 
     return isMobile
       ? model

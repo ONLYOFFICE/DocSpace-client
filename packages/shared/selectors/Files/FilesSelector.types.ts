@@ -101,7 +101,7 @@ export type UseFilesHelpersProps = {
   setSelectedItemSecurity: (value: TFileSecurity | TFolderSecurity) => void;
   isThirdParty: boolean;
   setSelectedTreeNode: (treeNode: TFolder) => void;
-  filterParam?: string;
+  filterParam?: string | number;
   getRootData?: () => Promise<void>;
   onSetBaseFolderPath?: (
     value: number | string | undefined | TBreadCrumb[],
@@ -117,7 +117,6 @@ export type UseFilesHelpersProps = {
   getIcon: (fileExst: string) => string;
   getFilesArchiveError: (name: string) => string;
   isInit: boolean;
-  availableForEditing?: boolean;
   setIsFirstLoad: (value: boolean) => void;
 };
 
@@ -198,5 +197,4 @@ export type FilesSelectorProps = (
   isPanelVisible: boolean;
   currentDeviceType: DeviceType;
   getFilesArchiveError: (name: string) => string;
-  availableForEditing?: boolean;
 };

@@ -34,7 +34,7 @@ import { DEFAULT_FILE_EXTS } from "./FilesSelector.constants";
 const isDisableFolder = (
   folder: TFolder,
   disabledItems: (number | string)[],
-  filterParam?: string,
+  filterParam?: string | number,
 ) => {
   if (!folder.security.Create) return true;
 
@@ -44,11 +44,11 @@ const isDisableFolder = (
 export const convertFoldersToItems: (
   folders: TFolder[],
   disabledItems: (number | string)[],
-  filterParam?: string,
+  filterParam?: string | number,
 ) => TSelectorItem[] = (
   folders: TFolder[],
   disabledItems: (number | string)[],
-  filterParam?: string,
+  filterParam?: string | number,
 ) => {
   const items = folders.map((folder: TFolder) => {
     const {
@@ -90,11 +90,11 @@ export const convertFoldersToItems: (
 export const convertFilesToItems: (
   files: TFile[],
   getIcon: (fileExst: string) => string,
-  filterParam?: string,
+  filterParam?: string | number,
 ) => TSelectorItem[] = (
   files: TFile[],
   getIcon: (fileExst: string) => string,
-  filterParam?: string,
+  filterParam?: string | number,
 ) => {
   const items = files.map((file) => {
     const { id, title, security, folderId, rootFolderType, fileExst } = file;

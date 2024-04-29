@@ -37,7 +37,7 @@ import {
   createPasswordHash,
   frameCallCommand,
 } from "@docspace/shared/utils/common";
-import { RoomsType } from "@docspace/shared/enums";
+import { RoomsType, FilterType } from "@docspace/shared/enums";
 
 const Sdk = ({
   t,
@@ -59,30 +59,35 @@ const Sdk = ({
   const [isDataReady, setIsDataReady] = useState(false);
 
   const formatsDescription = {
-    DOCX: t("Common:SelectExtensionFiles", { extension: ".DOCX" }),
-    DOCXF: t("Common:SelectExtensionFiles", { extension: ".DOCXF" }),
-    XLSX: t("Common:SelectExtensionFiles", { extension: ".XLSX" }),
-    BackupOnly: t("Common:SelectExtensionFiles", {
-      extension: t("Settings:Backup").toLowerCase(),
-    }),
-    IMG: t("Common:SelectTypeFiles", { type: t("Files:Images").toLowerCase() }),
-    Documents: t("Common:SelectTypeFiles", {
+    [FilterType.DocumentsOnly]: t("Common:SelectTypeFiles", {
       type: t("Common:Documents").toLowerCase(),
     }),
-    Spreadsheets: t("Common:SelectTypeFiles", {
+    [FilterType.SpreadsheetsOnly]: t("Common:SelectTypeFiles", {
       type: t("Translations:Spreadsheets").toLowerCase(),
     }),
-    Presentations: t("Common:SelectTypeFiles", {
+    [FilterType.PresentationsOnly]: t("Common:SelectTypeFiles", {
       type: t("Translations:Presentations").toLowerCase(),
     }),
-    Images: t("Common:SelectTypeFiles", {
+    [FilterType.ImagesOnly]: t("Common:SelectTypeFiles", {
       type: t("Files:Images").toLowerCase(),
     }),
-    Media: t("Common:SelectExtensionFiles", {
+    [FilterType.MediaOnly]: t("Common:SelectExtensionFiles", {
       extension: t("Files:Media").toLowerCase(),
     }),
-    Archives: t("Common:SelectTypeFiles", {
+    [FilterType.ArchiveOnly]: t("Common:SelectTypeFiles", {
       type: t("Files:Archives").toLowerCase(),
+    }),
+    [FilterType.FoldersOnly]: t("Common:SelectTypeFiles", {
+      type: t("Translations:Folders").toLowerCase(),
+    }),
+    [FilterType.OFormTemplateOnly]: t("Common:SelectTypeFiles", {
+      type: t("Files:FormsTemplates").toLowerCase(),
+    }),
+    [FilterType.OFormOnly]: t("Common:SelectTypeFiles", {
+      type: t("Files:Forms").toLowerCase(),
+    }),
+    [FilterType.FilesOnly]: t("Common:SelectTypeFiles", {
+      type: t("Files:AllFiles").toLowerCase(),
     }),
   };
 
@@ -298,10 +303,7 @@ const Sdk = ({
           acceptButtonLabel={frameConfig?.acceptButtonLabel}
           cancelButtonLabel={frameConfig?.cancelButtonLabel}
           currentFolderId={frameConfig?.id}
-          descriptionText={
-            formatsDescription[frameConfig?.filterParam || "DOCX"]
-          }
-          availableForEditing={frameConfig?.availableForEditing}
+          descriptionText={formatsDescription[frameConfig?.filterParam] || ""}
         />
       );
       break;

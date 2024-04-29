@@ -26,11 +26,10 @@
 
 import React from "react";
 
-import { getFolder, getFolderInfo } from "../../../api/files";
+import { getFolder, getFolderInfo, getSettingsFiles } from "../../../api/files";
 import FilesFilter from "../../../api/files/filter";
 import {
   ApplyFilterOption,
-  FilesSelectorExtendedFilterTypes,
   FilesSelectorFilterTypes,
   FilterType,
   FolderType,
@@ -74,7 +73,6 @@ const useFilesHelper = ({
   getFilesArchiveError,
   isInit,
   setIsInit,
-  availableForEditing = true,
   setIsFirstLoad,
 }: UseFilesHelpersProps) => {
   const requestRunning = React.useRef(false);
@@ -107,6 +105,8 @@ const useFilesHelper = ({
 
       const filter = FilesFilter.getDefault();
 
+      const { extsWebEdited } = await getSettingsFiles();
+
       filter.page = page;
       filter.pageCount = PAGE_COUNT;
       filter.search = currentSearch;
@@ -114,70 +114,82 @@ const useFilesHelper = ({
       filter.withSubfolders = false;
       if (filterParam) {
         filter.applyFilterOption = ApplyFilterOption.Files;
-        if (availableForEditing) {
-          switch (filterParam) {
-            case FilesSelectorFilterTypes.DOCX:
-              filter.extension = FilesSelectorFilterTypes.DOCX;
-              break;
+        switch (filterParam) {
+          case FilesSelectorFilterTypes.DOCX:
+            filter.extension = FilesSelectorFilterTypes.DOCX;
+            break;
 
-            case FilesSelectorFilterTypes.IMG:
-              filter.filterType = FilterType.ImagesOnly;
-              break;
+          case FilesSelectorFilterTypes.IMG:
+            filter.filterType = FilterType.ImagesOnly;
+            break;
 
-            case FilesSelectorFilterTypes.BackupOnly:
-              filter.extension = "gz,tar";
-              break;
+          case FilesSelectorFilterTypes.BackupOnly:
+            filter.extension = "gz,tar";
+            break;
 
-            case FilesSelectorFilterTypes.DOCXF:
-              filter.filterType = FilterType.OFormTemplateOnly;
-              break;
+          case FilesSelectorFilterTypes.DOCXF:
+            filter.filterType = FilterType.OFormTemplateOnly;
+            break;
 
-            case FilesSelectorFilterTypes.XLSX:
-              filter.filterType = FilterType.SpreadsheetsOnly;
-              break;
+          case FilesSelectorFilterTypes.XLSX:
+            filter.filterType = FilterType.SpreadsheetsOnly;
+            break;
 
-            case FilesSelectorFilterTypes.PDF:
-              filter.extension = FilesSelectorFilterTypes.PDF;
-              break;
+          case FilesSelectorFilterTypes.PDF:
+            filter.extension = FilesSelectorFilterTypes.PDF;
+            break;
 
-            case FilesSelectorFilterTypes.ALL:
-              filter.filterType = FilterType.FilesOnly;
-              break;
+          case FilterType.DocumentsOnly:
+            filter.filterType = FilterType.DocumentsOnly;
+            break;
 
-            default:
-          }
-        } else {
-          switch (filterParam) {
-            case FilesSelectorExtendedFilterTypes.Documents:
-              filter.filterType = FilterType.DocumentsOnly;
-              break;
+          case FilterType.PresentationsOnly:
+            filter.filterType = FilterType.PresentationsOnly;
+            break;
 
-            case FilesSelectorExtendedFilterTypes.Presentations:
-              filter.filterType = FilterType.PresentationsOnly;
-              break;
+          case FilterType.SpreadsheetsOnly:
+            filter.filterType = FilterType.SpreadsheetsOnly;
+            break;
 
-            case FilesSelectorExtendedFilterTypes.Spreadsheets:
-              filter.filterType = FilterType.SpreadsheetsOnly;
-              break;
+          case FilterType.ImagesOnly:
+            filter.filterType = FilterType.ImagesOnly;
+            break;
 
-            case FilesSelectorExtendedFilterTypes.Images:
-              filter.filterType = FilterType.ImagesOnly;
-              break;
+          case FilterType.MediaOnly:
+            filter.filterType = FilterType.MediaOnly;
+            break;
 
-            case FilesSelectorExtendedFilterTypes.Media:
-              filter.filterType = FilterType.MediaOnly;
-              break;
+          case FilterType.ArchiveOnly:
+            filter.filterType = FilterType.ArchiveOnly;
+            break;
 
-            case FilesSelectorExtendedFilterTypes.Archives:
-              filter.filterType = FilterType.ArchiveOnly;
-              break;
+          case FilterType.FoldersOnly:
+            filter.filterType = FilterType.FoldersOnly;
+            break;
 
-            case FilesSelectorFilterTypes.ALL:
-              filter.filterType = FilterType.FilesOnly;
-              break;
+          case FilterType.OFormTemplateOnly:
+            filter.filterType = FilterType.OFormTemplateOnly;
+            break;
 
-            default:
-          }
+          case FilterType.OFormOnly:
+            filter.filterType = FilterType.OFormOnly;
+            break;
+
+          case FilterType.FilesOnly:
+            filter.filterType = FilterType.FilesOnly;
+            break;
+
+          case FilesSelectorFilterTypes.ALL:
+            filter.filterType = FilterType.None;
+            break;
+
+          case "EditorSupportedTypes":
+            filter.extension = extsWebEdited
+              .map((extension) => extension.slice(1))
+              .join(",");
+            break;
+
+          default:
         }
       }
 
@@ -369,7 +381,6 @@ const useFilesHelper = ({
       setTotal,
       setItems,
       rootThirdPartyId,
-      availableForEditing,
     ],
   );
 

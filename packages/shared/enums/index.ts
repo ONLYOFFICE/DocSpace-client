@@ -520,12 +520,16 @@ export const enum WhiteLabelLogoType {
  * @readonly
  */
 export const enum FilesSelectorExtendedFilterTypes {
+  Folders = "Folders",
   Documents = "Documents",
   Presentations = "Presentations",
   Spreadsheets = "Spreadsheets",
   Images = "Images",
   Media = "Media",
   Archives = "Archives",
+  AllFiles = "AllFiles",
+  FormTemplates = "FormTemplates",
+  Forms = "Forms",
 }
 
 export const enum EditorConfigErrorType {

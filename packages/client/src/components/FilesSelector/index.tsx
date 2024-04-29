@@ -134,7 +134,6 @@ const FilesSelectorWrapper = ({
   isRoomBackup,
 
   roomsFolderId,
-  availableForEditing = true,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -374,7 +373,6 @@ const FilesSelectorWrapper = ({
         isMove || isCopy || isRestore ? "select-file-modal-cancel" : ""
       }
       getFilesArchiveError={getFilesArchiveError}
-      availableForEditing={availableForEditing}
     />
   );
 };

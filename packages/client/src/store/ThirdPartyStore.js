@@ -46,7 +46,7 @@ import IconWebdavSmallReactSvgUrl from "PUBLIC_DIR/images/icon_webdav_small.reac
 import IconWebdavReactSvgUrl from "PUBLIC_DIR/images/icon_webdav.react.svg?url";
 import { makeAutoObservable } from "mobx";
 import api from "@docspace/shared/api";
-import i18n from "../helpers/i18n";
+import i18n from "../i18n";
 
 class ThirdPartyStore {
   capabilities = null;

@@ -103,16 +103,23 @@ const Branding = ({
     };
   }, []);
 
+  const hideBlock = isManagement() ? false : portals?.length > 1 ? true : false;
+
+  const showSettings = standalone && !hideBlock;
+
   if (isMobileView)
     return (
-      <MobileView isSettingPaid={isSettingPaid} isManagement={isManagement()} />
+      <MobileView
+        isSettingPaid={isSettingPaid}
+        isManagement={isManagement()}
+        showSettings={showSettings}
+      />
     );
 
-  const hideBlock = isManagement() ? false : portals?.length > 1 ? true : false;
   return (
     <StyledComponent isSettingPaid={isSettingPaid}>
       <Whitelabel />
-      {standalone && !hideBlock && (
+      {showSettings && (
         <>
           <hr />
           {isLoadedCompanyInfoSettingsData ? (

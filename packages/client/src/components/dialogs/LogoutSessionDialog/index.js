@@ -24,44 +24,59 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
-import Backend from "@docspace/shared/utils/i18next-http-backend";
-import { LANGUAGE } from "@docspace/shared/constants";
-import config from "PACKAGE_FILE";
-import { getCookie } from "@docspace/shared/utils";
+import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
-import { loadLanguagePath } from "./utils";
+import ModalDialogContainer from "../ModalDialogContainer";
 
-const newInstance = i18n.createInstance();
+const LogoutSessionDialog = ({
+  t,
+  data,
+  visible,
+  onClose,
+  onRemoveSession,
+  isLoading,
+}) => {
+  const onClick = () => {
+    onRemoveSession(data.id);
+  };
 
-newInstance
-  .use(Backend)
-  .use(initReactI18next)
-  .init({
-    lng: getCookie(LANGUAGE) || "en",
-    fallbackLng: "en",
-    load: "currentOnly",
-    //debug: true,
+  return (
+    <ModalDialogContainer
+      visible={visible}
+      onClose={onClose}
+      displayType="modal"
+    >
+      <ModalDialog.Header>
+        {t("Profile:LogoutActiveConnection")}
+      </ModalDialog.Header>
+      <ModalDialog.Body>
+        {t("Profile:LogoutFrom", {
+          platform: data.platform,
+          browser: data.browser,
+        })}
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          key="LogoutBtn"
+          label={t("Profile:LogoutBtn")}
+          size="normal"
+          scale
+          primary={true}
+          onClick={onClick}
+          isLoading={isLoading}
+        />
+        <Button
+          key="CloseBtn"
+          label={t("Common:CancelButton")}
+          size="normal"
+          scale
+          onClick={onClose}
+          isDisabled={isLoading}
+        />
+      </ModalDialog.Footer>
+    </ModalDialogContainer>
+  );
+};
 
-    interpolation: {
-      escapeValue: false, // not needed for react as it escapes by default
-      format: function (value, format) {
-        if (format === "lowercase") return value.toLowerCase();
-        return value;
-      },
-    },
-
-    backend: {
-      loadPath: loadLanguagePath(config.homepage),
-    },
-
-    ns: ["Files", "Common"],
-    defaultNS: "Files",
-
-    react: {
-      useSuspense: false,
-    },
-  });
-
-export default newInstance;
+export default LogoutSessionDialog;

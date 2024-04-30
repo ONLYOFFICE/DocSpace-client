@@ -47,8 +47,8 @@ class SettingsSetupStore {
   tfaStore = null;
   thirdPartyStore = null;
   isInit = false;
-  logoutVisible = false;
-  logoutAllVisible = false;
+  logoutDialogVisible = false;
+  logoutAllDialogVisible = false;
   viewAs = isDesktop() ? "table" : "row";
 
   isLoadingDownloadReport = false;
@@ -109,6 +109,7 @@ class SettingsSetupStore {
   sessionsIsInit = false;
   sessions = [];
   currentSession = [];
+  platformModalData = {};
 
   constructor(tfaStore, authStore, settingsStore, thirdPartyStore) {
     this.selectionStore = new SelectionStore(this);
@@ -563,9 +564,13 @@ class SettingsSetupStore {
     return api.settings.removeActiveSession(id);
   };
 
-  setLogoutVisible = (visible) => (this.logoutVisible = visible);
+  setLogoutDialogVisible = (visible) => {
+    this.logoutDialogVisible = visible;
+  };
 
-  setLogoutAllVisible = (visible) => (this.logoutAllVisible = visible);
+  setLogoutAllDialogVisible = (visible) => {
+    this.logoutAllDialogVisible = visible;
+  };
 
   getSessions = () => {
     if (this.sessionsIsInit) return;
@@ -578,6 +583,14 @@ class SettingsSetupStore {
 
   setSessions = (sessions) => {
     this.sessions = sessions;
+  };
+
+  setPlatformModalData = (data) => {
+    this.platformModalData = {
+      id: data.id,
+      platform: data.platform,
+      browser: data.browser,
+    };
   };
 }
 

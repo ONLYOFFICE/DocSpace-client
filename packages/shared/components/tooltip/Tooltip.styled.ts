@@ -46,8 +46,6 @@ const StyledTooltip = styled.div<{ maxWidthProp?: string; color?: string }>`
     color: ${(props) => props.theme.tooltip.textColor};
     z-index: 999;
 
-    opacity: 1;
-
     box-sizing: border-box;
 
     p,

@@ -1,24 +1,33 @@
 import React from "react";
-import { RoomsType } from "@docspace/shared/enums";
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 
-import WelComeDarkIcon from "PUBLIC_DIR/images/emptyview/welcome.dark.svg";
-import WelComeLightIcon from "PUBLIC_DIR/images/emptyview/welcome.light.svg";
+import EmptyFormRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.dark.svg";
+import EmptyFormRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.light.svg";
 
 import CreateNewFormIcon from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
 import CreateFromFormIcon from "PUBLIC_DIR/images/emptyview/create.from.document.form.svg";
 import InviteUserFormIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
+import UploadPDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.pdf.form.svg";
+import UploadDevicePDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
 
-import type { Nullable } from "@docspace/shared/types";
+import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
 import type { EmptyViewItemType } from "@docspace/shared/components/empty-view";
 
-import { OptionActions } from "./EmptyViewContainer.types";
+import type { OptionActions } from "./EmptyViewContainer.types";
 
-export const getDescription = (type: RoomsType): string => {
+export const getDescription = (
+  type: RoomsType,
+  t: TTranslation,
+  access: Nullable<ShareAccessRights> | undefined,
+): string => {
+  const isFormFiller = access === ShareAccessRights.FormFilling;
+
   switch (type) {
     case RoomsType.FormRoom:
-      return "To start working in the “Form Filling Room”, add forms and invite participants.";
+      if (isFormFiller) return t("EmptyView:FormFillerRoomEmptyDescription");
+      return t("EmptyView:FormRoomEmptyDescription");
     case RoomsType.EditingRoom:
       return "";
     case RoomsType.PublicRoom:
@@ -30,10 +39,16 @@ export const getDescription = (type: RoomsType): string => {
   }
 };
 
-export const getTitle = (type: RoomsType): string => {
+export const getTitle = (
+  type: RoomsType,
+  t: TTranslation,
+  access: Nullable<ShareAccessRights> | undefined,
+): string => {
+  const isFormFiller = access === ShareAccessRights.FormFilling;
   switch (type) {
     case RoomsType.FormRoom:
-      return "The created!";
+      if (isFormFiller) return t("EmptyView:FormFillerRoomEmptyTitle");
+      return t("EmptyView:FormRoomEmptyTitle");
     case RoomsType.EditingRoom:
       return "";
     case RoomsType.PublicRoom:
@@ -48,7 +63,11 @@ export const getTitle = (type: RoomsType): string => {
 export const getIcon = (type: RoomsType, isBaseTheme: boolean) => {
   switch (type) {
     case RoomsType.FormRoom:
-      return isBaseTheme ? <WelComeLightIcon /> : <WelComeDarkIcon />;
+      return isBaseTheme ? (
+        <EmptyFormRoomLightIcon />
+      ) : (
+        <EmptyFormRoomDarkIcon />
+      );
     case RoomsType.EditingRoom:
       return <div />;
     case RoomsType.PublicRoom:
@@ -65,43 +84,75 @@ export const getOptions = (
   type: RoomsType,
   security: Nullable<TFolderSecurity | TRoomSecurity>,
   t: (str: string) => string,
+  access: Nullable<ShareAccessRights> | undefined,
   actions: OptionActions,
-) => {
-  const Options: Record<RoomsType, EmptyViewItemType[]> = {
-    [RoomsType.FormRoom]: [
-      {
-        title: t("Create new forms"),
-        description: t(
-          "Start working in the room by creating a form. Try our PDF form editor.",
-        ),
-        icon: <CreateNewFormIcon />,
-        key: "create-form",
-        onClick: actions.onCreateDocumentForm,
-      },
-      {
-        title: t("Create a form from a text document"),
-        description: t(
-          "Create a PDF form from the finished document by simply adding fields to fill in.",
-        ),
-        icon: <CreateFromFormIcon />,
-        key: "create-form-form",
-        onClick: actions.createFormFromFile,
-      },
-      {
-        title: t("Invite users"),
-        description: t(
-          "Don't forget to add participants who will fill out the forms. All added PDF forms will be available to fill out.",
-        ),
-        icon: <InviteUserFormIcon />,
-        key: "invite-users",
-        onClick: actions.inviteUser,
-        disabled: !security?.EditAccess,
-      },
-    ],
-    [RoomsType.CustomRoom]: [],
-    [RoomsType.EditingRoom]: [],
-    [RoomsType.PublicRoom]: [],
+): EmptyViewItemType[] => {
+  const isFormFiller = access === ShareAccessRights.FormFilling;
+  const powerUser = access === ShareAccessRights.Collaborator;
+
+  const createNewForm = {
+    title: t("EmptyView:CreateNewFormOptionTitle"),
+    description: t("EmptyView:CreateNewFormOptionDescription"),
+    icon: <CreateNewFormIcon />,
+    key: "create-form",
+    onClick: actions.onCreateDocumentForm,
+    disabled: !security?.Create,
   };
 
-  return Options[type];
+  const uploadFromDocSpace = {
+    title: t("EmptyView:UploadPDFFormOptionTitle"),
+    description: t("EmptyView:UploadPDFFormOptionDescription"),
+    icon: <UploadPDFFormIcon />,
+    key: "upload-pdf-form",
+    onClick: actions.uploadPDFForm,
+    disabled: !security?.Create,
+  };
+
+  const uploadFromDevice = {
+    title: t("EmptyView:UploadDevicePDFFormOptionTitle"),
+    description: t("EmptyView:UploadDevicePDFFormOptionDescription"),
+    icon: <UploadDevicePDFFormIcon />,
+    key: "upload-device-pdf-form",
+    onClick: () => actions.onUploadAction("pdf"),
+    disabled: !powerUser || !security?.Create,
+  };
+
+  const createFormFromDocx = {
+    title: t("EmptyView:CreateFormFromTextDocOptionTitle"),
+    description: t("EmptyView:CreateFormFromTextDocOptionDescription"),
+    icon: <CreateFromFormIcon />,
+    key: "create-form-form",
+    onClick: actions.createFormFromFile,
+    disabled: !security?.Create,
+  };
+
+  const inviteUser = {
+    title: t("EmptyView:InviteUsersOptionTitle"),
+    description: t("EmptyView:InviteUsersOptionDescription"),
+    icon: <InviteUserFormIcon />,
+    key: "invite-users",
+    onClick: actions.inviteUser,
+    disabled: !security?.EditAccess,
+  };
+
+  switch (type) {
+    case RoomsType.FormRoom:
+      if (isFormFiller) return [];
+
+      return [
+        createNewForm,
+        uploadFromDocSpace,
+        createFormFromDocx,
+        inviteUser,
+        uploadFromDevice,
+      ];
+    case RoomsType.EditingRoom:
+      return [];
+    case RoomsType.PublicRoom:
+      return [];
+    case RoomsType.CustomRoom:
+      return [];
+    default:
+      return [];
+  }
 };

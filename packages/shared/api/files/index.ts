@@ -138,7 +138,6 @@ export async function getFolderPath(folderId: number) {
   };
 
   const res = (await request(options)) as TGetFolderPath;
-
   return res;
 }
 
@@ -1395,4 +1394,13 @@ export async function getConnectingStorages() {
   })) as TConnectingStorages;
 
   return res;
+}
+
+export async function startFilling(fileId: string | number): Promise<void> {
+  const options: AxiosRequestConfig = {
+    method: "put",
+    url: `files/file/${fileId}/startfilling`,
+  };
+
+  await request(options);
 }

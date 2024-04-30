@@ -65,7 +65,7 @@ const QuotaPerItemComponent = (props) => {
 
     setIsLoading(true);
 
-    if (defaultQuota === -1) {
+    if (!isQuotaSet) {
       setIsLoading(false);
       return;
     }

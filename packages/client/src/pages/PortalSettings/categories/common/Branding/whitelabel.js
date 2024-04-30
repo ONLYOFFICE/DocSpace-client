@@ -71,6 +71,7 @@ const WhiteLabel = (props) => {
     deviceType,
 
     resetIsInit,
+    standalone,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -82,7 +83,9 @@ const WhiteLabel = (props) => {
   const isMobileView = deviceType === DeviceType.mobile;
 
   const init = async () => {
-    const isWhiteLabelPage = location.pathname.includes("white-label");
+    const isWhiteLabelPage = standalone
+      ? location.pathname.includes("white-label")
+      : true;
 
     if ((isMobileView && isWhiteLabelPage) || !isMobileView) {
       const page = isMobileView ? "white-label" : "branding";
@@ -555,8 +558,11 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     resetIsInit,
   } = common;
 
-  const { whiteLabelLogoUrls: defaultWhiteLabelLogoUrls, deviceType } =
-    settingsStore;
+  const {
+    whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
+    deviceType,
+    standalone,
+  } = settingsStore;
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
 
   return {
@@ -576,5 +582,6 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
 
     deviceType,
     resetIsInit,
+    standalone,
   };
 })(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));

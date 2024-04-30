@@ -23,6 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { AxiosError } from "axios";
 import { isMobile } from "react-device-detect";
 import { useState, useEffect, useCallback } from "react";
 import { getDeviceTypeByWidth } from "@docspace/shared/utils";
@@ -56,4 +57,14 @@ export const useDeviceType = () => {
   }, [onResize]);
 
   return currentDeviceType;
+};
+
+export const isAxiosError = (error: unknown): error is AxiosError => {
+  return (
+    error !== null &&
+    typeof error === "object" &&
+    "isAxiosError" in error &&
+    typeof error.isAxiosError === "boolean" &&
+    error.isAxiosError
+  );
 };

@@ -112,6 +112,7 @@ export type TFile = {
   providerId?: number;
   providerKey?: string;
   providerItem?: boolean;
+  thumbnailUrl?: string;
 };
 
 export type TOpenEditRequest = {

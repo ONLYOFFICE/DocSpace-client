@@ -8,6 +8,7 @@ import { UrlActionType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
 import { ViewerLoader } from "@docspace/shared/components/media-viewer/sub-components/ViewerLoader";
+import Error403 from "@docspace/shared/components/errors/Error403";
 
 import type { TFile } from "@docspace/shared/api/files/types";
 import type {
@@ -17,7 +18,7 @@ import type {
 
 import type { PublicPreviewProps } from "./PublicPreview.types";
 import { DEFAULT_EXTS_IMAGE } from "./PublicPreview.constants";
-import { useDeviceType } from "./PublicPreview.helpers";
+import { isAxiosError, useDeviceType } from "./PublicPreview.helpers";
 
 const PublicPreview = ({
   getIcon,
@@ -32,6 +33,7 @@ const PublicPreview = ({
   const [files, setFiles] = useState<TFile[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchParams] = useSearchParams();
+  const [errorStatus, setErrorStatus] = useState<number>();
 
   const init = useCallback(async () => {
     const key = searchParams.get("share");
@@ -50,7 +52,15 @@ const PublicPreview = ({
 
       setFiles([fileInfo]);
     } catch (error) {
-      if (error instanceof Error) toastr.error(error);
+      if (isAxiosError(error)) {
+        const status = error.response?.status;
+
+        if (status !== undefined && status === 403) {
+          return setErrorStatus(status);
+        }
+
+        toastr.error(error);
+      }
 
       // eslint-disable-next-line no-console
       console.error(error);
@@ -79,7 +89,7 @@ const PublicPreview = ({
     fileStatus: file.fileStatus,
     canShare: file.canShare,
     version: file.version,
-    thumbnailUrl: "",
+    thumbnailUrl: file.thumbnailUrl ?? "",
   }));
 
   const onDownloadMediaFile = useCallback(
@@ -96,6 +106,8 @@ const PublicPreview = ({
     },
     [playlist, openUrl],
   );
+
+  if (errorStatus === 403) return <Error403 />;
 
   if (isLoading) return <ViewerLoader isLoading />;
 

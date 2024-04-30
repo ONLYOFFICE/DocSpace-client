@@ -40,7 +40,6 @@ import React, {
 // import indexedDBHelper from "@docspace/shared/utils/indexedDBHelper";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";
-import { isPublicPreview } from "@docspace/shared/utils/common";
 
 import {
   calculateAdjustBoundsUtils,

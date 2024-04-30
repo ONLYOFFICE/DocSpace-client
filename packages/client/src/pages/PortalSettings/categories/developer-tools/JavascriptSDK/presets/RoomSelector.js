@@ -52,6 +52,11 @@ import { toastr } from "@docspace/shared/components/toast";
 
 const showPreviewThreshold = 720;
 
+import { WidthSetter } from "../sub-components/WidthSetter";
+import { HeightSetter } from "../sub-components/HeightSetter";
+import { FrameIdSetter } from "../sub-components/FrameIdSetter";
+import { PresetWrapper } from "../sub-components/PresetWrapper";
+
 import {
   SDKContainer,
   Controls,
@@ -117,10 +122,11 @@ const RoomSelector = (props) => {
     },
   ];
 
-  const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
-  const [heightDimension, setHeightDimension] = useState(dataDimensions[0]);
-  const [width, setWidth] = useState("100");
-  const [height, setHeight] = useState("100");
+  const defaultWidthDimension = dataDimensions[0],
+    defaultHeightDimension = dataDimensions[0],
+    defaultWidth = "100",
+    defaultHeight = "100";
+
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold,
@@ -136,8 +142,8 @@ const RoomSelector = (props) => {
 
   const [config, setConfig] = useState({
     mode: "room-selector",
-    width: `${width}${widthDimension.label}`,
-    height: `${height}${heightDimension.label}`,
+    width: `${defaultWidth}${defaultWidthDimension.label}`,
+    height: `${defaultHeight}${defaultHeightDimension.label}`,
     frameId: "ds-frame",
     init: true,
     showSelectorCancel: true,
@@ -202,55 +208,8 @@ const RoomSelector = (props) => {
     setConfig((config) => ({ ...config, roomType: option.roomType }));
   };
 
-  const onChangeTab = (tab) => {
-    if (tab.key === "preview" && selectedElementType === "button") {
-      setConfig((config) => ({ ...config, isButtonMode: true }));
-    } else if (tab.key === "selector-preview") {
-      setConfig((config) => ({ ...config, isButtonMode: false }));
-    } else if (tab.key === "code") {
-      setConfig((config) => ({
-        ...config,
-        isButtonMode: selectedElementType === "button",
-      }));
-    }
-  };
-
-  const onChangeWidth = (e) => {
-    setConfig((config) => {
-      return { ...config, width: `${e.target.value}${widthDimension.label}` };
-    });
-
-    setWidth(e.target.value);
-  };
-
-  const onChangeHeight = (e) => {
-    setConfig((config) => {
-      return { ...config, height: `${e.target.value}${heightDimension.label}` };
-    });
-
-    setHeight(e.target.value);
-  };
-
-  const onChangeFrameId = (e) => {
-    setConfig((config) => {
-      return { ...config, frameId: e.target.value };
-    });
-  };
-
-  const onChangeWidthDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, width: `${width}${item.label}` };
-    });
-
-    setWidthDimension(item);
-  };
-
-  const onChangeHeightDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, height: `${height}${item.label}` };
-    });
-
-    setHeightDimension(item);
+  const onChangeTab = () => {
+    loadFrame();
   };
 
   const toggleWithSearch = () => {
@@ -295,13 +254,13 @@ const RoomSelector = (props) => {
   const preview = (
     <Frame
       width={
-        config.id !== undefined && widthDimension.label === "px"
-          ? width + widthDimension.label
+        config.id !== undefined && config.width.includes("px")
+          ? config.width
           : undefined
       }
       height={
-        config.id !== undefined && heightDimension.label === "px"
-          ? height + heightDimension.label
+        config.id !== undefined && config.height.includes("px")
+          ? config.height
           : undefined
       }
       targetId={frameId}
@@ -343,11 +302,10 @@ const RoomSelector = (props) => {
   ];
 
   return (
-    <SDKContainer>
-      <CategoryDescription>
-        <Text className="sdk-description">{t("RoomSelectorDescription")}</Text>
-      </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleRoomSelector")}</CategoryHeader>
+    <PresetWrapper
+      description={t("RoomSelectorDescription")}
+      header={t("CreateSampleRoomSelector")}
+    >
       <Container>
         {showPreview && (
           <Preview>
@@ -410,58 +368,25 @@ const RoomSelector = (props) => {
 
           <ControlsSection>
             <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
-            <ControlsGroup>
-              <Label className="label" text={t("EmbeddingPanel:Width")} />
-              <RowContainer combo>
-                <TextInput
-                  onChange={onChangeWidth}
-                  placeholder={t("EnterWidth")}
-                  value={width}
-                  tabIndex={4}
-                />
-                <ComboBox
-                  size="content"
-                  scaled={false}
-                  scaledOptions={true}
-                  onSelect={onChangeWidthDimension}
-                  options={dataDimensions}
-                  selectedOption={widthDimension}
-                  displaySelectedOption
-                  directionY="bottom"
-                />
-              </RowContainer>
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("EmbeddingPanel:Height")} />
-              <RowContainer combo>
-                <TextInput
-                  onChange={onChangeHeight}
-                  placeholder={t("EnterHeight")}
-                  value={height}
-                  tabIndex={5}
-                />
-                <ComboBox
-                  size="content"
-                  scaled={false}
-                  scaledOptions={true}
-                  onSelect={onChangeHeightDimension}
-                  options={dataDimensions}
-                  selectedOption={heightDimension}
-                  displaySelectedOption
-                  directionY="bottom"
-                />
-              </RowContainer>
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("FrameId")} />
-              <TextInput
-                scale={true}
-                onChange={onChangeFrameId}
-                placeholder={t("EnterId")}
-                value={config.frameId}
-                tabIndex={6}
-              />
-            </ControlsGroup>
+            <WidthSetter
+              t={t}
+              setConfig={setConfig}
+              dataDimensions={dataDimensions}
+              defaultDimension={defaultWidthDimension}
+              defaultWidth={defaultWidth}
+            />
+            <HeightSetter
+              t={t}
+              setConfig={setConfig}
+              dataDimensions={dataDimensions}
+              defaultDimension={defaultHeightDimension}
+              defaultHeight={defaultHeight}
+            />
+            <FrameIdSetter
+              t={t}
+              defaultFrameId={config.frameId}
+              setConfig={setConfig}
+            />
           </ControlsSection>
 
           <ControlsSection>
@@ -527,7 +452,7 @@ const RoomSelector = (props) => {
           />
         </>
       )}
-    </SDKContainer>
+    </PresetWrapper>
   );
 };
 

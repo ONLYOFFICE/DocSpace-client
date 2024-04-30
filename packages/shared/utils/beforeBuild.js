@@ -108,9 +108,9 @@ const beforeBuild = async (
       language = splitted[0];
     }
 
-    truthLng.set(language, language.replace("-", ""));
+    truthLng.set(language, language.replaceAll("-", ""));
 
-    language = language.replace("-", "");
+    language = language.replaceAll("-", "");
 
     const items = collectionByLng.get(language);
 

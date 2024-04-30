@@ -30,6 +30,7 @@ import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
 
 import { TTheme } from "./base";
+import { DEFAULT_FONT_FAMILY } from "../constants";
 
 const {
   black,
@@ -71,7 +72,7 @@ const Dark: TTheme = {
   isBase: false,
   color: grayMaxLight,
   backgroundColor: black,
-  fontFamily: "Open Sans, sans-serif, Arial",
+  fontFamily: DEFAULT_FONT_FAMILY,
   fontSize: "13px",
 
   text: {
@@ -1439,7 +1440,7 @@ const Dark: TTheme = {
       lineHeight: "10px",
 
       color: grayMaxLight,
-      disableColor: gray,
+      disableColor: grayMaxLight,
     },
 
     separator: {
@@ -3202,14 +3203,15 @@ const Dark: TTheme = {
     notifications: {
       textDescriptionColor: "#858585",
     },
-  },
-
-  activeSessions: {
-    color: "#eeeeee",
-    borderColor: "#474747",
-    tickIconColor: "#3BA420",
-    removeIconColor: "#A3A9AE",
-    sortHeaderColor: "#474747",
+    activeSessions: {
+      color: "#eeeeee",
+      borderColor: "#474747",
+      tickIconColor: "#3BA420",
+      removeIconColor: "#A3A9AE",
+      sortHeaderColor: "#474747",
+      tableCellColor: "#858585",
+      dividerColor: "#474747",
+    },
   },
 
   formWrapper: {
@@ -3314,6 +3316,10 @@ const Dark: TTheme = {
   sideBarRow: {
     titleColor: white,
     metaDataColor: grayDark,
+  },
+
+  dateTimePicker: {
+    colorClockIcon: "#ADADAD",
   },
 };
 

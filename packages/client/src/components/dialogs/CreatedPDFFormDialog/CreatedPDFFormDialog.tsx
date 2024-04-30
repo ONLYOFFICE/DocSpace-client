@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
 
 import HeaderIcon from "PUBLIC_DIR/images/ready.pdf.form.modal.svg";
@@ -76,22 +76,13 @@ export const CreatedPDFFormDialog = inject<TStore>(
         onClose();
       };
 
-      const description = data.isFill ? (
-        <Trans
-          t={t}
-          i18nKey="PDFFormSuccessfullyCreatedDescription"
-          values={{ fileName: data?.file.title }}
-          components={{ strong: <strong /> }}
-        />
-      ) : (
-        t("PDFFormInviteDescription")
-      );
+      const description = data.isFill
+        ? t("PDFFormSuccessfullyCreatedDescription")
+        : t("PDFFormInviteDescription");
+
       const primaryButtonLabel = data.isFill
         ? t("Common:Fill")
         : t("Common:Invite");
-      const cancelButtonLabel = data.isFill
-        ? t("Common:CancelButton")
-        : t("Common:Later");
 
       return (
         <ModalDialog
@@ -122,7 +113,7 @@ export const CreatedPDFFormDialog = inject<TStore>(
               tabIndex={0}
               onClick={onClose}
               size={ButtonSize.normal}
-              label={cancelButtonLabel}
+              label={t("Common:Later")}
               // isDisabled={isLoading}
             />
           </ModalDialog.Footer>

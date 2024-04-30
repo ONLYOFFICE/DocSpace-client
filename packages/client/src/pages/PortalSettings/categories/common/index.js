@@ -139,7 +139,7 @@ export default inject(({ settingsStore, common }) => {
 
   const currentDeviceType = settingsStore.currentDeviceType;
 
-  const isMobileView = currentDeviceType === DeviceType.mobile;
+  const isMobileView = settingsStore.deviceType === DeviceType.mobile;
   return {
     loadBaseInfo: async (page) => {
       await initSettings(page);

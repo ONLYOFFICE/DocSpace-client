@@ -50,6 +50,7 @@ import Editor from "./Editor";
 import SelectFileDialog from "./SelectFileDialog";
 import SelectFolderDialog from "./SelectFolderDialog";
 import SharingDialog from "./ShareDialog";
+import { calculateAsideHeight } from "@/utils";
 
 const Root = ({
   settings,
@@ -137,9 +138,24 @@ const Root = ({
     }
   }, [error, isSkipError]);
 
-  return !fileId ? (
-    <AppLoader />
-  ) : isShowDeepLink ? (
+  React.useEffect(() => {
+    if (
+      isSharingDialogVisible ||
+      isVisibleSelectFolderDialog ||
+      selectFileDialogVisible
+    )
+      calculateAsideHeight();
+
+    if (isSharingDialogVisible) {
+      setTimeout(calculateAsideHeight, 10);
+    }
+  }, [
+    isSharingDialogVisible,
+    isVisibleSelectFolderDialog,
+    selectFileDialogVisible,
+  ]);
+
+  return isShowDeepLink ? (
     <DeepLink
       fileInfo={fileInfo}
       userEmail={user?.email}
@@ -164,7 +180,9 @@ const Root = ({
           isSharingAccess={isSharingAccess}
           documentserverUrl={documentserverUrl}
           fileInfo={fileInfo}
-          errorMessage={error?.message}
+          errorMessage={
+            error?.message ?? isSkipError ? t("Common:InvalidLink") : ""
+          }
           onSDKRequestSharingSettings={onSDKRequestSharingSettings}
           onSDKRequestSaveAs={onSDKRequestSaveAs}
           onSDKRequestInsertImage={onSDKRequestInsertImage}

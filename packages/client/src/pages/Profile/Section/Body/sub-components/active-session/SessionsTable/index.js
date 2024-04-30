@@ -24,41 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
-import Backend from "@docspace/shared/utils/i18next-http-backend";
-import { LANGUAGE } from "@docspace/shared/constants";
-import config from "PACKAGE_FILE";
-import { getCookie } from "@docspace/shared/utils";
-import { loadLanguagePath } from "SRC_DIR/helpers/utils";
-const newInstance = i18n.createInstance();
+import { Consumer } from "@docspace/shared/utils/context";
 
-newInstance
-  .use(Backend)
-  .use(initReactI18next)
-  .init({
-    lng: getCookie(LANGUAGE) || "en",
-    fallbackLng: "en",
-    load: "currentOnly",
-    //debug: true,
+import TableView from "./TableView";
+import RowView from "./RowView";
 
-    interpolation: {
-      escapeValue: false, // not needed for react as it escapes by default
-      format: function (value, format) {
-        if (format === "lowercase") return value.toLowerCase();
-        return value;
-      },
-    },
+const SessionsTable = ({ t, viewAs, sessionsData }) => {
+  return (
+    <Consumer>
+      {(context) =>
+        viewAs === "table" ? (
+          <TableView
+            t={t}
+            sectionWidth={context.sectionWidth}
+            sessionsData={sessionsData}
+          />
+        ) : (
+          <RowView
+            t={t}
+            sectionWidth={context.sectionWidth}
+            sessionsData={sessionsData}
+          />
+        )
+      }
+    </Consumer>
+  );
+};
 
-    backend: {
-      loadPath: loadLanguagePath(config.homepage),
-    },
-
-    ns: ["About", "Common"],
-
-    react: {
-      useSuspense: false,
-    },
-  });
-
-export default newInstance;
+export default SessionsTable;

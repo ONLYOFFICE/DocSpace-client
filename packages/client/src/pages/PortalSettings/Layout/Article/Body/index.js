@@ -64,6 +64,7 @@ const ArticleBodyContent = (props) => {
     currentDeviceType,
     isProfileLoading,
     limitedAccessSpace,
+    currentColorScheme,
   } = props;
 
   const [selectedKeys, setSelectedKeys] = React.useState([]);
@@ -156,11 +157,12 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["8-0"]);
       }
 
-      if (
-        location.pathname.includes("payments") ||
-        location.pathname.includes("bonus")
-      ) {
+      if (location.pathname.includes("payments")) {
         setSelectedKeys(["9-0"]);
+      }
+
+      if (location.pathname.includes("bonus")) {
+        setSelectedKeys(["10-0"]);
       }
     }
   }, [
@@ -293,6 +295,10 @@ const ArticleBodyContent = (props) => {
       const icon = getCatalogIconUrlByType(item.type, {
         isSettingsCatalog: true,
       });
+
+      const patternSearching = selectedKeys[0].split("-");
+      const selectedKey = patternSearching[0];
+
       items.push(
         <ArticleItem
           key={item.key}
@@ -301,12 +307,13 @@ const ArticleBodyContent = (props) => {
           showText={showText}
           text={mapKeys(item.tKey)}
           value={item.link}
-          isActive={item.key === selectedKeys[0][0]}
+          isActive={item.key === selectedKey}
           onClick={(e) => onSelect(item.key, e)}
           folderId={item.id}
           style={{
             marginTop: `${item.key.includes(9) ? "16px" : "0"}`,
           }}
+          $currentColorScheme={currentColorScheme}
         />,
       );
     });
@@ -343,6 +350,7 @@ export default inject(
       toggleArticleOpen,
       currentDeviceType,
       limitedAccessSpace,
+      currentColorScheme,
     } = settingsStore;
 
     const isProfileLoading =
@@ -363,6 +371,7 @@ export default inject(
       currentDeviceType,
       isProfileLoading,
       limitedAccessSpace,
+      currentColorScheme,
     };
   },
 )(

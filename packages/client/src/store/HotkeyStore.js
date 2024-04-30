@@ -694,15 +694,7 @@ class HotkeyStore {
   };
 
   get countTilesInRow() {
-    const isDesktopView = isDesktop();
-    const tileGap = isDesktopView ? 16 : 14;
-    const minTileWidth = 216 + tileGap;
-    const sectionPadding = isDesktopView ? 24 : 16;
-
-    const body = document.getElementById("section");
-    const sectionWidth = body ? body.offsetWidth - sectionPadding : 0;
-
-    return Math.floor(sectionWidth / minTileWidth);
+    return this.filesStore.getCountTilesInRow();
   }
 
   get division() {

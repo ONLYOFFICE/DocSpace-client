@@ -79,7 +79,7 @@ const DirectThirdPartyConnection = (props) => {
     initialState,
   );
 
-  const { t } = useTranslation("Translations");
+  const { t } = useTranslation(["Translations", "Common"]);
 
   const onSetSettings = async () => {
     try {
@@ -178,7 +178,7 @@ const DirectThirdPartyConnection = (props) => {
     return [
       {
         key: "connection-settings",
-        label: t("Reconnect"),
+        label: t("Common:Reconnect"),
         onClick: onConnect,
         disabled: false,
         icon: RefreshReactSvgUrl,

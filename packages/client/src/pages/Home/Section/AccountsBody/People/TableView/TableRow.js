@@ -147,7 +147,7 @@ const StyledPeopleRow = styled(TableRow)`
       margin-inline-start: -8px;
 
       .combo-button-label {
-        font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+        font-size: 13px;
         font-weight: 600;
       }
     }
@@ -586,6 +586,7 @@ const PeopleTableRow = (props) => {
               onClick={onEmailClick}
               isTextOverflow
               enableUserSelect
+              dir="auto"
             >
               {email}
             </Link>

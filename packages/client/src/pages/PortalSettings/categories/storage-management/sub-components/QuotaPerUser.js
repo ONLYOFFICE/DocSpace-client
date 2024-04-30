@@ -34,6 +34,10 @@ const QuotaPerUserComponent = (props) => {
 
   const { t } = useTranslation("Settings");
 
+  const initialSizeProp = isDefaultUsersQuotaSet
+    ? { initialSize: defaultUsersQuota }
+    : {};
+
   return (
     <QuotaPerItemComponent
       type="user"
@@ -41,7 +45,7 @@ const QuotaPerUserComponent = (props) => {
       toggleLabel={t("DefineQuotaPerUser")}
       disableQuota={() => setUserQuota(-1, t)}
       saveQuota={(size) => setUserQuota(size, t)}
-      initialSize={defaultUsersQuota}
+      {...initialSizeProp}
       isQuotaSet={isDefaultUsersQuotaSet}
     />
   );

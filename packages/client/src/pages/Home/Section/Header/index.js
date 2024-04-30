@@ -280,6 +280,7 @@ const SectionHeaderContent = (props) => {
     setAccountsSelected,
     setGroupsSelected,
     isOwner,
+    isRoomAdmin,
     isCollaborator,
     setInvitePanelOptions,
     isEmptyPage,
@@ -355,7 +356,7 @@ const SectionHeaderContent = (props) => {
 
   const createPresentation = () => onCreate("pptx");
 
-  const createForm = () => onCreate("docxf");
+  const createForm = () => onCreate("pdf");
 
   const createFormFromFile = () => {
     setSelectFileDialogVisible(true);
@@ -417,20 +418,7 @@ const SectionHeaderContent = (props) => {
       icon: FormReactSvgUrl,
       label: t("Common:CreatePDFForm"),
       key: "new-form",
-      items: [
-        createTemplateForm,
-        createTemplateSelectFormFile,
-        {
-          id: "personal_template_from-oform",
-          className: "main-button_drop-down_sub",
-          icon: FormReactSvgUrl,
-          label: t("Common:FromReadyTemplate"),
-          onClick: () =>
-            onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.DOCXF),
-          disabled: isPrivacyFolder,
-          key: "form-oform",
-        },
-      ],
+      items: [createTemplateForm, createTemplateSelectFormFile],
     };
 
     const uploadReadyPDFFrom = {
@@ -502,76 +490,80 @@ const SectionHeaderContent = (props) => {
   };
 
   const getContextOptionsPlus = () => {
+    const accountsUserOptions = [
+      isOwner && {
+        id: "accounts-add_administrator",
+        className: "main-button_drop-down",
+        icon: PersonAdminReactSvgUrl,
+        label: t("Common:DocSpaceAdmin"),
+        onClick: onInvite,
+        "data-type": EmployeeType.Admin,
+        key: "administrator",
+      },
+      {
+        id: "accounts-add_manager",
+        className: "main-button_drop-down",
+        icon: PersonManagerReactSvgUrl,
+        label: t("Common:RoomAdmin"),
+        onClick: onInvite,
+        "data-type": EmployeeType.User,
+        key: "manager",
+      },
+      {
+        id: "accounts-add_collaborator",
+        className: "main-button_drop-down",
+        icon: PersonDefaultReactSvgUrl,
+        label: t("Common:PowerUser"),
+        onClick: onInvite,
+        "data-type": EmployeeType.Collaborator,
+        key: "collaborator",
+      },
+      {
+        id: "accounts-add_user",
+        className: "main-button_drop-down",
+        icon: PersonDefaultReactSvgUrl,
+        label: t("Common:User"),
+        onClick: onInvite,
+        "data-type": EmployeeType.Guest,
+        key: "user",
+      },
+      {
+        key: "separator",
+        isSeparator: true,
+      },
+      {
+        id: "accounts-add_invite-again",
+        className: "main-button_drop-down",
+        icon: InviteAgainReactSvgUrl,
+        label: t("People:LblInviteAgain"),
+        onClick: onInviteAgain,
+        "data-action": "invite-again",
+        key: "invite-again",
+      },
+    ];
+
+    const accountsFullOptions = [
+      {
+        id: "actions_invite_user",
+        className: "main-button_drop-down",
+        icon: PersonUserReactSvgUrl,
+        label: t("Common:Invite"),
+        key: "new-user",
+        items: accountsUserOptions,
+      },
+      {
+        id: "create_group",
+        className: "main-button_drop-down",
+        icon: GroupReactSvgUrl,
+        label: t("PeopleTranslations:CreateGroup"),
+        onClick: onCreateGroup,
+        action: "group",
+        key: "group",
+      },
+    ];
+
     if (isAccountsPage) {
-      return [
-        {
-          id: "actions_invite_user",
-          className: "main-button_drop-down",
-          icon: PersonUserReactSvgUrl,
-          label: t("Common:Invite"),
-          key: "new-user",
-          items: [
-            isOwner && {
-              id: "accounts-add_administrator",
-              className: "main-button_drop-down",
-              icon: PersonAdminReactSvgUrl,
-              label: t("Common:DocSpaceAdmin"),
-              onClick: onInvite,
-              "data-type": EmployeeType.Admin,
-              key: "administrator",
-            },
-            {
-              id: "accounts-add_manager",
-              className: "main-button_drop-down",
-              icon: PersonManagerReactSvgUrl,
-              label: t("Common:RoomAdmin"),
-              onClick: onInvite,
-              "data-type": EmployeeType.User,
-              key: "manager",
-            },
-            {
-              id: "accounts-add_collaborator",
-              className: "main-button_drop-down",
-              icon: PersonDefaultReactSvgUrl,
-              label: t("Common:PowerUser"),
-              onClick: onInvite,
-              "data-type": EmployeeType.Collaborator,
-              key: "collaborator",
-            },
-            {
-              id: "accounts-add_user",
-              className: "main-button_drop-down",
-              icon: PersonDefaultReactSvgUrl,
-              label: t("Common:User"),
-              onClick: onInvite,
-              "data-type": EmployeeType.Guest,
-              key: "user",
-            },
-            {
-              key: "separator",
-              isSeparator: true,
-            },
-            {
-              id: "accounts-add_invite-again",
-              className: "main-button_drop-down",
-              icon: InviteAgainReactSvgUrl,
-              label: t("People:LblInviteAgain"),
-              onClick: onInviteAgain,
-              "data-action": "invite-again",
-              key: "invite-again",
-            },
-          ],
-        },
-        {
-          id: "create_group",
-          className: "main-button_drop-down",
-          icon: GroupReactSvgUrl,
-          label: t("PeopleTranslations:CreateGroup"),
-          onClick: onCreateGroup,
-          action: "group",
-          key: "group",
-        },
-      ];
+      return isRoomAdmin ? accountsUserOptions : accountsFullOptions;
     }
 
     const createNewDoc = {
@@ -932,7 +924,7 @@ const SectionHeaderContent = (props) => {
         key: "sharing-settings",
         label: t("Files:Share"),
         onClick: onClickShare,
-        disabled: !isPersonalRoom,
+        disabled: !selectedFolder.security?.CreateRoomFrom,
         icon: ShareReactSvgUrl,
       },
       {
@@ -1060,8 +1052,7 @@ const SectionHeaderContent = (props) => {
         onClick: () => {
           onClickCreateRoom({ title: selectedFolder.title, isFolder: true });
         },
-        disabled:
-          isCollaborator || selectedFolder.rootFolderType !== FolderType.USER,
+        disabled: !selectedFolder.security?.CreateRoomFrom,
       },
       {
         id: "option_leave-room",
@@ -1281,7 +1272,7 @@ const SectionHeaderContent = (props) => {
     isMobileView: currentDeviceType === DeviceType.mobile,
   };
 
-  if (isAccountsPage) {
+  if (isAccountsPage && !(isGroupsPage && isRoomAdmin)) {
     tableGroupMenuVisible =
       (!isGroupsPage ? isAccountsHeaderVisible : isGroupsHeaderVisible) &&
       tableGroupMenuVisible &&
@@ -1386,7 +1377,8 @@ const SectionHeaderContent = (props) => {
                 canCreate={
                   (currentCanCreate || isAccountsPage) &&
                   !isSettingsPage &&
-                  !isPublicRoom
+                  !isPublicRoom &&
+                  !isInsideGroup
                 }
                 rootRoomTitle={currentRootRoomTitle}
                 title={currentTitle}
@@ -1492,6 +1484,7 @@ export default inject(
     const { startUpload } = uploadDataStore;
     const isOwner = userStore.user?.isOwner;
     const isAdmin = userStore.user?.isAdmin;
+    const isRoomAdmin = userStore.user?.isRoomAdmin;
     const isCollaborator = userStore.user?.isCollaborator;
 
     const {
@@ -1782,6 +1775,7 @@ export default inject(
       setAccountsSelected,
       isOwner,
       isAdmin,
+      isRoomAdmin,
       isCollaborator,
       setInvitePanelOptions,
       isEmptyPage,

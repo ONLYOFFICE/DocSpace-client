@@ -128,8 +128,7 @@ const showPreviewThreshold = 720;
 
 //   text-overflow: ellipsis;
 //   overflow: hidden;
-//   font-size: ${(props) =>
-//     props.theme.getCorrectFontSize(props.primary ? "14px" : props.info ? "11px" : "12px")};
+//   font-size: ${(props) => props.primary ? "14px" : props.info ? "11px" : "12px"};
 //   font-weight: ${(props) => (props.primary || props.info ? "600" : "400")};
 
 //   color: ${(props) =>

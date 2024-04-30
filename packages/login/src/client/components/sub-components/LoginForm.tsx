@@ -359,6 +359,7 @@ const LoginForm: React.FC<ILoginFormProps> = ({
           onChange={onChangePassword}
           onKeyDown={onKeyDown}
           isAutoFocussed={!!emailFromInvitation}
+          isDisableTooltip
         />
       </FieldContainer>
 

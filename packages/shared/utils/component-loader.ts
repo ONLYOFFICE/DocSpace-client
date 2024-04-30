@@ -24,25 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export default function componentLoader(
-  lazyComponent: Function,
-  attemptsLeft: number = 3,
-) {
+export default function componentLoader(lazyComponent: Function) {
   return new Promise((resolve, reject) => {
+    const hasRefreshed = JSON.parse(
+      window.sessionStorage.getItem("retry-lazy-refreshed") || "false",
+    );
+
     lazyComponent()
-      .then(resolve)
+      .then((component: unknown) => {
+        window.sessionStorage.setItem("retry-lazy-refreshed", "false");
+        resolve(component);
+      })
       .catch((error: unknown) => {
-        // let us retry after 1500 ms
-        setTimeout(() => {
-          if (attemptsLeft === 1) {
-            reject(error);
-            return;
-          }
-          componentLoader(lazyComponent, attemptsLeft - 1).then(
-            resolve,
-            reject,
-          );
-        }, 1500);
+        if (!hasRefreshed) {
+          window.sessionStorage.setItem("retry-lazy-refreshed", "true");
+          return window.location.reload();
+        }
+        reject(error);
       });
   });
 }

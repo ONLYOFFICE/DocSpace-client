@@ -28,6 +28,7 @@ import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 
 import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
+import { DEFAULT_FONT_FAMILY } from "../constants";
 
 export type TColorScheme = {
   id: number;
@@ -99,7 +100,7 @@ export const getBaseTheme = () => {
     isBase: true,
     color: black,
     backgroundColor: white,
-    fontFamily: "Open Sans, sans-serif, Arial",
+    fontFamily: DEFAULT_FONT_FAMILY,
     fontSize: "13px",
 
     text: {
@@ -1467,7 +1468,7 @@ export const getBaseTheme = () => {
         lineHeight: "10px",
 
         color: black,
-        disableColor: gray,
+        disableColor: black,
       },
 
       separator: {
@@ -3225,14 +3226,15 @@ export const getBaseTheme = () => {
       notifications: {
         textDescriptionColor: "#A3A9AE",
       },
-    },
-
-    activeSessions: {
-      color: "#333",
-      borderColor: "#eceef1",
-      tickIconColor: "#35AD17",
-      removeIconColor: "#A3A9AE",
-      sortHeaderColor: "#d0d5da",
+      activeSessions: {
+        color: "#333",
+        borderColor: "#eceef1",
+        tickIconColor: "#35AD17",
+        removeIconColor: "#A3A9AE",
+        sortHeaderColor: "#d0d5da",
+        tableCellColor: "#a3a9ae",
+        dividerColor: "#D0D5DA",
+      },
     },
 
     formWrapper: {
@@ -3336,6 +3338,10 @@ export const getBaseTheme = () => {
     sideBarRow: {
       titleColor: black,
       metaDataColor: gray,
+    },
+
+    dateTimePicker: {
+      colorClockIcon: "#657077",
     },
   };
 };

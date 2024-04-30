@@ -125,13 +125,13 @@ const HeaderContainer = styled.div`
   @media ${tablet} {
     h1 {
       line-height: 61px;
-      font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
+      font-size: 21px;
     }
   }
 
   @media ${desktop} {
     h1 {
-      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+      font-size: 18px;
       line-height: 59px !important;
     }
   }
@@ -139,7 +139,7 @@ const HeaderContainer = styled.div`
   @media ${mobile} {
     h1 {
       line-height: 53px;
-      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+      font-size: 18px;
     }
   }
 
@@ -220,9 +220,10 @@ const SectionHeaderContent = (props) => {
     const arrayOfParams = getArrayOfParams();
 
     const key = getKeyByLink(arrayOfParams, settingsTree);
-    let currKey = key.length > 3 ? key : key[0];
 
-    if (key === "8" || key === "8-0") currKey = "8-0";
+    const keysCollection = key.split("-");
+
+    const currKey = keysCollection.length >= 3 ? key : keysCollection[0];
 
     const header = getTKeyByKey(currKey, settingsTree);
     const isCategory = checkPropertyByLink(

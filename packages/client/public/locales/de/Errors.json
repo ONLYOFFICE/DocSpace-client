@@ -1,7 +1,6 @@
 {
   "ErrorEmptyResponse": "Leere Antwort",
   "ErrorUnavailableText": "DocSpace nicht verfügbar",
-  "InvalidLink": "Ungültiger Link",
   "LinkDoesNotExist": "Der Link, den Sie öffnen möchten, existiert nicht.",
   "LinkHasExpired": "Der von Ihnen verwendete Link ist abgelaufen."
 }

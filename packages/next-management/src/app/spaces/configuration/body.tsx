@@ -24,7 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import toLower from "lodash/toLower";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { Text } from "@docspace/shared/components/text";
@@ -35,47 +37,117 @@ import {
   InputSize,
 } from "@docspace/shared/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { parseDomain, validatePortalName } from "@docspace/shared/utils/common";
+import {
+  setDomainName,
+  setPortalName,
+  checkDomain,
+} from "@docspace/shared/api/management";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { StyledBody } from "./configuration.styled";
 
-export const Body = () => {
+export const Body = ({ domainValidator }) => {
   const { t } = useTranslation(["Management", "Common"]);
   const { currentDeviceType } = useDeviceType();
+  const [domain, setDomain] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [portalNameError, setPortalNameError] = useState<string>("");
+  const [checkDomainError, setCheckDomainError] = useState<string>("");
+  const [domainNameError, setDomainNameError] = useState<null | Array<object>>(
+    null,
+  );
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const domainFieldLabel = (
     <>
-      <Text fontSize="13px" fontWeight={600} className="spaces-domain-text">
+      <Text fontSize="13px" fontWeight={600}>
         {t("Common:Domain")}
       </Text>
       <Text color="#A3A9AE">(example.com)</Text>
     </>
   );
 
-  const onChange = () => {};
+  const onChangeDomain = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (checkDomainError) setCheckDomainError("");
+    if (domainNameError) setDomainNameError(null);
+    setDomain(toLower(e.target.value));
+  };
 
-  const onConnectClick = () => {};
+  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (checkDomainError) setCheckDomainError("");
+    if (portalNameError) setPortalNameError("");
+    setName(toLower(e.target.value));
+  };
 
+  const onConnectClick = async () => {
+    console.log("onConnectClick");
+    if (window?.DocSpaceConfig?.management?.checkDomain) {
+      setIsLoading(true);
+      const checkDomainResult = await checkDomain(`${name}.${domain}`).finally(
+        () => setIsLoading(false),
+      );
+      const isValidDomain = checkDomainResult?.value;
+
+      if (!isValidDomain) {
+        return setCheckDomainError(t("DomainNotFound"));
+      }
+    }
+
+    const isValidDomain = parseDomain(domain, setDomainNameError, t);
+    const isValidPortalName = validatePortalName(
+      name,
+      domainValidator,
+      setPortalNameError,
+      t,
+    );
+
+    if (isValidDomain && isValidPortalName) {
+      try {
+        setIsLoading(true);
+        await setDomainName(domain);
+        await setPortalName(name);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
+  const domainErrorMessage = domainNameError ? domainNameError[0] : "";
   return (
     <StyledBody>
-      <FieldContainer isVertical labelText={domainFieldLabel} labelVisible>
+      <FieldContainer
+        isVertical
+        labelText={domainFieldLabel}
+        labelVisible
+        hasError={!!(domainNameError || checkDomainError)}
+        errorMessage={domainErrorMessage}
+      >
         <TextInput
           type={InputType.text}
           size={InputSize.base}
           placeholder={t("EnterDomain")}
-          value=""
-          onChange={onChange}
+          value={domain}
+          onChange={onChangeDomain}
           tabIndex={1}
           scale
         />
       </FieldContainer>
-      <FieldContainer isVertical labelText={t("DocSpaceName")} labelVisible>
+      <FieldContainer
+        isVertical
+        labelText={t("DocSpaceName")}
+        labelVisible
+        hasError={!!(portalNameError || checkDomainError)}
+        errorMessage={portalNameError || checkDomainError}
+      >
         <TextInput
           type={InputType.text}
           size={InputSize.base}
           placeholder={t("EnterName")}
-          value=""
-          onChange={onChange}
+          value={name}
+          onChange={onChangeName}
           tabIndex={2}
           scale
         />
@@ -90,6 +162,7 @@ export const Body = () => {
         onClick={onConnectClick}
         primary={true}
         tabIndex={3}
+        isLoading={isLoading}
         // scale={false}
       />
     </StyledBody>

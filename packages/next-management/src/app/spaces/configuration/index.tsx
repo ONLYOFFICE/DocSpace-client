@@ -56,11 +56,11 @@ import { Header } from "./header";
 import { Body } from "./body";
 import { StyledWrapper } from "./configuration.styled";
 
-export const ConfigurationSpaces = () => {
+export const ConfigurationSpaces = (props) => {
   return (
     <StyledWrapper>
       <Header />
-      <Body />
+      <Body {...props} />
     </StyledWrapper>
   );
 };

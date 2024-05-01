@@ -48,7 +48,7 @@ const SpacesPage = async () => {
 
   if (isConnected && portals && portals?.tenants?.length > 0)
     return <MultipleSpaces />;
-  return <ConfigurationSpaces />;
+  return <ConfigurationSpaces domainValidator={settings?.domainValidator} />;
 };
 
 export default SpacesPage;

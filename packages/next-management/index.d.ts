@@ -34,3 +34,27 @@ declare module "*.svg?url" {
   export default content;
 }
 
+type TPortals = {
+  created: string;
+  domain: string;
+  industry: number;
+  language: string;
+  name: string;
+  ownerId: string;
+  portalName: string;
+  status: string;
+  tenantId: number;
+  owner: TOwner;
+  timeZoneName: string;
+  quotaUsage: TQuotaUsage;
+  customQuota: number;
+  usedSize: number;
+};
+
+type TNewPortalData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  portalName: string;
+};
+

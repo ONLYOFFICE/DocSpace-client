@@ -100,6 +100,7 @@ const Badges = ({
   onFilesClick,
   onShowVersionHistory,
   onBadgeClick,
+  openLocationFile,
   setConvertDialogVisible,
   viewAs,
   onUnpinClick,
@@ -243,6 +244,7 @@ const Badges = ({
             style={{
               width: "max-content",
             }}
+            onClick={openLocationFile}
           />
         </BadgeWrapper>
       )}

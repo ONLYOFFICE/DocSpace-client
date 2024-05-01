@@ -41,8 +41,6 @@ import { inject, observer } from "mobx-react";
 import { ImageEditor } from "@docspace/shared/components/image-editor";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 
-import { isTablet, isMobile } from "@docspace/shared/utils/device";
-
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
@@ -51,19 +49,19 @@ import { Button } from "@docspace/shared/components/button";
 
 const showPreviewThreshold = 720;
 
+import { WidthSetter } from "../sub-components/WidthSetter";
+import { HeightSetter } from "../sub-components/HeightSetter";
+import { FrameIdSetter } from "../sub-components/FrameIdSetter";
+import { PresetWrapper } from "../sub-components/PresetWrapper";
+
 import {
-  SDKContainer,
   Controls,
-  CategoryHeader,
   CategorySubHeader,
-  CategoryDescription,
   ControlsGroup,
   LabelGroup,
   ControlsSection,
   Frame,
   Container,
-  RowContainer,
-  ColumnContainer,
   Preview,
   GetCodeButtonWrapper,
   FilesSelectorInputWrapper,
@@ -82,10 +80,11 @@ const Viewer = (props) => {
     { key: "pixel", label: "px" },
   ];
 
-  const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
-  const [heightDimension, setHeightDimension] = useState(dataDimensions[0]);
-  const [width, setWidth] = useState("100");
-  const [height, setHeight] = useState("100");
+  const defaultWidthDimension = dataDimensions[0],
+    defaultHeightDimension = dataDimensions[0],
+    defaultWidth = "100",
+    defaultHeight = "100";
+
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold,
@@ -94,8 +93,8 @@ const Viewer = (props) => {
   const [config, setConfig] = useState({
     mode: "viewer",
     editorType: "embedded",
-    width: `${width}${widthDimension.label}`,
-    height: `${height}${heightDimension.label}`,
+    width: `${defaultWidth}${defaultWidthDimension.label}`,
+    height: `${defaultHeight}${defaultHeightDimension.label}`,
     frameId: "ds-frame",
     init: false,
   });
@@ -135,22 +134,6 @@ const Viewer = (props) => {
     loadFrame();
   };
 
-  const onChangeWidth = (e) => {
-    setConfig((config) => {
-      return { ...config, width: `${e.target.value}${widthDimension.label}` };
-    });
-
-    setWidth(e.target.value);
-  };
-
-  const onChangeHeight = (e) => {
-    setConfig((config) => {
-      return { ...config, height: `${e.target.value}${heightDimension.label}` };
-    });
-
-    setHeight(e.target.value);
-  };
-
   const onChangeFileId = async (file) => {
     const newConfig = {
       id: file.id,
@@ -168,28 +151,6 @@ const Viewer = (props) => {
     setConfig((config) => {
       return { ...config, ...newConfig };
     });
-  };
-
-  const onChangeFrameId = (e) => {
-    setConfig((config) => {
-      return { ...config, frameId: e.target.value, init: true };
-    });
-  };
-
-  const onChangeWidthDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, width: `${width}${item.label}` };
-    });
-
-    setWidthDimension(item);
-  };
-
-  const onChangeHeightDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, height: `${height}${item.label}` };
-    });
-
-    setHeightDimension(item);
   };
 
   const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
@@ -214,13 +175,13 @@ const Viewer = (props) => {
   const preview = (
     <Frame
       width={
-        config.id !== undefined && widthDimension.label === "px"
-          ? width + widthDimension.label
+        config.id !== undefined && config.width.includes("px")
+          ? config.width
           : undefined
       }
       height={
-        config.id !== undefined && heightDimension.label === "px"
-          ? height + heightDimension.label
+        config.id !== undefined && config.height.includes("px")
+          ? config.height
           : undefined
       }
       targetId={frameId}
@@ -272,11 +233,10 @@ const Viewer = (props) => {
   ];
 
   return (
-    <SDKContainer>
-      <CategoryDescription>
-        <Text className="sdk-description">{t("ViewerDescription")}</Text>
-      </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleViewer")}</CategoryHeader>
+    <PresetWrapper
+      description={t("ViewerDescription")}
+      header={t("CreateSampleViewer")}
+    >
       <Container>
         {showPreview && (
           <Preview>
@@ -307,58 +267,25 @@ const Viewer = (props) => {
 
           <ControlsSection>
             <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
-            <ControlsGroup>
-              <Label className="label" text={t("EmbeddingPanel:Width")} />
-              <RowContainer combo>
-                <TextInput
-                  onChange={onChangeWidth}
-                  placeholder={t("EnterWidth")}
-                  value={width}
-                  tabIndex={2}
-                />
-                <ComboBox
-                  size="content"
-                  scaled={false}
-                  scaledOptions={true}
-                  onSelect={onChangeWidthDimension}
-                  options={dataDimensions}
-                  selectedOption={widthDimension}
-                  displaySelectedOption
-                  directionY="bottom"
-                />
-              </RowContainer>
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("EmbeddingPanel:Height")} />
-              <RowContainer combo>
-                <TextInput
-                  onChange={onChangeHeight}
-                  placeholder={t("EnterHeight")}
-                  value={height}
-                  tabIndex={3}
-                />
-                <ComboBox
-                  size="content"
-                  scaled={false}
-                  scaledOptions={true}
-                  onSelect={onChangeHeightDimension}
-                  options={dataDimensions}
-                  selectedOption={heightDimension}
-                  displaySelectedOption
-                  directionY="bottom"
-                />
-              </RowContainer>
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("FrameId")} />
-              <TextInput
-                scale={true}
-                onChange={onChangeFrameId}
-                placeholder={t("EnterId")}
-                value={config.frameId}
-                tabIndex={4}
-              />
-            </ControlsGroup>
+            <WidthSetter
+              t={t}
+              setConfig={setConfig}
+              dataDimensions={dataDimensions}
+              defaultDimension={defaultWidthDimension}
+              defaultWidth={defaultWidth}
+            />
+            <HeightSetter
+              t={t}
+              setConfig={setConfig}
+              dataDimensions={dataDimensions}
+              defaultDimension={defaultHeightDimension}
+              defaultHeight={defaultHeight}
+            />
+            <FrameIdSetter
+              t={t}
+              defaultFrameId={config.frameId}
+              setConfig={setConfig}
+            />
           </ControlsSection>
 
           {/* <InterfaceElements>
@@ -447,7 +374,7 @@ const Viewer = (props) => {
           />
         </>
       )}
-    </SDKContainer>
+    </PresetWrapper>
   );
 };
 

@@ -64,22 +64,23 @@ import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 
 const showPreviewThreshold = 720;
 
+import { WidthSetter } from "../sub-components/WidthSetter";
+import { HeightSetter } from "../sub-components/HeightSetter";
+import { FrameIdSetter } from "../sub-components/FrameIdSetter";
+import { PresetWrapper } from "../sub-components/PresetWrapper";
+import { CodeToInsert } from "../sub-components/CodeToInsert";
+
 import {
-  SDKContainer,
   Controls,
-  CategoryHeader,
   CategorySubHeader,
-  CategoryDescription,
   ControlsGroup,
   LabelGroup,
   Frame,
   Container,
-  RowContainer,
   Preview,
   GetCodeButtonWrapper,
   FilesSelectorInputWrapper,
   ControlsSection,
-  CodeWrapper,
   CheckboxGroup,
 } from "./StyledPresets";
 
@@ -97,16 +98,17 @@ const SimpleRoom = (props) => {
     { key: "pixel", label: "px" },
   ];
 
+  const defaultWidthDimension = dataDimensions[0],
+    defaultHeightDimension = dataDimensions[0],
+    defaultWidth = "100",
+    defaultHeight = "100";
+
   const settingsTranslations = {
     password: t("Common:Password").toLowerCase(),
     denyDownload: t("FileContentCopy").toLowerCase(),
     expirationDate: t("LimitByTime").toLowerCase(),
   };
 
-  const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
-  const [heightDimension, setHeightDimension] = useState(dataDimensions[0]);
-  const [width, setWidth] = useState("100");
-  const [height, setHeight] = useState("100");
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold,
@@ -117,8 +119,8 @@ const SimpleRoom = (props) => {
 
   const [config, setConfig] = useState({
     mode: "manager",
-    width: `${width}${widthDimension.label}`,
-    height: `${height}${heightDimension.label}`,
+    width: `${defaultWidth}${defaultWidthDimension.label}`,
+    height: `${defaultHeight}${defaultHeightDimension.label}`,
     frameId: "ds-frame",
     showHeader: false,
     showTitle: true,
@@ -170,22 +172,6 @@ const SimpleRoom = (props) => {
 
   const onChangeTab = () => {
     loadFrame();
-  };
-
-  const onChangeWidth = (e) => {
-    setConfig((config) => {
-      return { ...config, width: `${e.target.value}${widthDimension.label}` };
-    });
-
-    setWidth(e.target.value);
-  };
-
-  const onChangeHeight = (e) => {
-    setConfig((config) => {
-      return { ...config, height: `${e.target.value}${heightDimension.label}` };
-    });
-
-    setHeight(e.target.value);
   };
 
   const onChangeFolderId = async (rooms) => {
@@ -241,28 +227,6 @@ const SimpleRoom = (props) => {
     });
   };
 
-  const onChangeFrameId = (e) => {
-    setConfig((config) => {
-      return { ...config, frameId: e.target.value };
-    });
-  };
-
-  const onChangeWidthDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, width: `${width}${item.label}` };
-    });
-
-    setWidthDimension(item);
-  };
-
-  const onChangeHeightDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, height: `${height}${item.label}` };
-    });
-
-    setHeightDimension(item);
-  };
-
   const onChangeShowTitle = () => {
     setConfig((config) => {
       return { ...config, showTitle: !config.showTitle };
@@ -303,13 +267,13 @@ const SimpleRoom = (props) => {
   const preview = (
     <Frame
       width={
-        config.id !== undefined && widthDimension.label === "px"
-          ? width + widthDimension.label
+        config.id !== undefined && config.width.includes("px")
+          ? config.width
           : undefined
       }
       height={
-        config.id !== undefined && heightDimension.label === "px"
-          ? height + heightDimension.label
+        config.id !== undefined && config.height.includes("px")
+          ? config.height
           : undefined
       }
       targetId={frameId}
@@ -329,22 +293,7 @@ const SimpleRoom = (props) => {
   );
 
   const code = (
-    <CodeWrapper height="fit-content">
-      <CategorySubHeader className="copy-window-code">
-        {`HTML ${t("CodeTitle")}`}
-      </CategorySubHeader>
-      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
-        {t("HtmlCodeDescription")}
-      </Text>
-      <Textarea value={codeBlock} heightTextArea={153} />
-      <CategorySubHeader className="copy-window-code">
-        {`JavaScript ${t("CodeTitle")}`}
-      </CategorySubHeader>
-      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
-        {t("JavaScriptCodeDescription")}
-      </Text>
-      <CodeBlock config={config} />
-    </CodeWrapper>
+    <CodeToInsert t={t} theme={theme} codeBlock={codeBlock} config={config} />
   );
 
   const dataTabs = [
@@ -361,11 +310,10 @@ const SimpleRoom = (props) => {
   ];
 
   return (
-    <SDKContainer>
-      <CategoryDescription>
-        <Text className="sdk-description">{t("PublicRoomDescription")}</Text>
-      </CategoryDescription>
-      <CategoryHeader>{t("CreateSamplePublicRoom")}</CategoryHeader>
+    <PresetWrapper
+      description={t("PublicRoomDescription")}
+      header={t("CreateSamplePublicRoom")}
+    >
       <Container>
         {showPreview && (
           <Preview>
@@ -507,58 +455,25 @@ const SimpleRoom = (props) => {
 
           <ControlsSection>
             <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
-            <ControlsGroup>
-              <Label className="label" text={t("EmbeddingPanel:Width")} />
-              <RowContainer combo>
-                <TextInput
-                  onChange={onChangeWidth}
-                  placeholder={t("EnterWidth")}
-                  value={width}
-                  tabIndex={2}
-                />
-                <ComboBox
-                  size="content"
-                  scaled={false}
-                  scaledOptions={true}
-                  onSelect={onChangeWidthDimension}
-                  options={dataDimensions}
-                  selectedOption={widthDimension}
-                  displaySelectedOption
-                  directionY="bottom"
-                />
-              </RowContainer>
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("EmbeddingPanel:Height")} />
-              <RowContainer combo>
-                <TextInput
-                  onChange={onChangeHeight}
-                  placeholder={t("EnterHeight")}
-                  value={height}
-                  tabIndex={3}
-                />
-                <ComboBox
-                  size="content"
-                  scaled={false}
-                  scaledOptions={true}
-                  onSelect={onChangeHeightDimension}
-                  options={dataDimensions}
-                  selectedOption={heightDimension}
-                  displaySelectedOption
-                  directionY="bottom"
-                />
-              </RowContainer>
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("FrameId")} />
-              <TextInput
-                scale={true}
-                onChange={onChangeFrameId}
-                placeholder={t("EnterId")}
-                value={config.frameId}
-                tabIndex={4}
-              />
-            </ControlsGroup>
+            <WidthSetter
+              t={t}
+              setConfig={setConfig}
+              dataDimensions={dataDimensions}
+              defaultDimension={defaultWidthDimension}
+              defaultWidth={defaultWidth}
+            />
+            <HeightSetter
+              t={t}
+              setConfig={setConfig}
+              dataDimensions={dataDimensions}
+              defaultDimension={defaultHeightDimension}
+              defaultHeight={defaultHeight}
+            />
+            <FrameIdSetter
+              t={t}
+              defaultFrameId={config.frameId}
+              setConfig={setConfig}
+            />
           </ControlsSection>
 
           <ControlsSection>
@@ -631,7 +546,7 @@ const SimpleRoom = (props) => {
           />
         </>
       )}
-    </SDKContainer>
+    </PresetWrapper>
   );
 };
 

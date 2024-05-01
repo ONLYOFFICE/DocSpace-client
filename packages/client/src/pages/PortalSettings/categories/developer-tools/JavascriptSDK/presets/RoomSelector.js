@@ -29,7 +29,6 @@ import { withTranslation } from "react-i18next";
 import debounce from "lodash.debounce";
 import { Box } from "@docspace/shared/components/box";
 import { TextInput } from "@docspace/shared/components/text-input";
-import { Textarea } from "@docspace/shared/components/textarea";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -40,10 +39,7 @@ import { ColorInput } from "@docspace/shared/components/color-input";
 import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
-import { isTablet, isMobile } from "@docspace/shared/utils/device";
-
 import GetCodeDialog from "../sub-components/GetCodeDialog";
-import CodeBlock from "../sub-components/CodeBlock";
 import { Button } from "@docspace/shared/components/button";
 
 import { RoomsType } from "@docspace/shared/enums";
@@ -56,13 +52,11 @@ import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
+import { CodeToInsert } from "../sub-components/CodeToInsert";
 
 import {
-  SDKContainer,
   Controls,
-  CategoryHeader,
   CategorySubHeader,
-  CategoryDescription,
   ControlsGroup,
   ControlsSection,
   Frame,
@@ -70,7 +64,6 @@ import {
   RowContainer,
   Preview,
   GetCodeButtonWrapper,
-  CodeWrapper,
 } from "./StyledPresets";
 
 const RoomSelector = (props) => {
@@ -270,22 +263,7 @@ const RoomSelector = (props) => {
   );
 
   const code = (
-    <CodeWrapper height="fit-content">
-      <CategorySubHeader className="copy-window-code">
-        {`HTML ${t("CodeTitle")}`}
-      </CategorySubHeader>
-      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
-        {t("HtmlCodeDescription")}
-      </Text>
-      <Textarea value={codeBlock} heightTextArea={153} />
-      <CategorySubHeader className="copy-window-code">
-        {`JavaScript ${t("CodeTitle")}`}
-      </CategorySubHeader>
-      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
-        {t("JavaScriptCodeDescription")}
-      </Text>
-      <CodeBlock config={config} />
-    </CodeWrapper>
+    <CodeToInsert t={t} theme={theme} codeBlock={codeBlock} config={config} />
   );
 
   const dataTabs = [

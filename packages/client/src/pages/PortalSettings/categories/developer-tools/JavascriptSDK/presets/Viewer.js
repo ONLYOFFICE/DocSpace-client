@@ -53,6 +53,7 @@ import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
+import { CodeToInsert } from "../sub-components/CodeToInsert";
 
 import {
   Controls,
@@ -201,22 +202,7 @@ const Viewer = (props) => {
   );
 
   const code = (
-    <CodeWrapper height="fit-content">
-      <CategorySubHeader className="copy-window-code">
-        {`HTML ${t("CodeTitle")}`}
-      </CategorySubHeader>
-      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
-        {t("HtmlCodeDescription")}
-      </Text>
-      <Textarea value={codeBlock} heightTextArea={153} />
-      <CategorySubHeader className="copy-window-code">
-        {`JavaScript ${t("CodeTitle")}`}
-      </CategorySubHeader>
-      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
-        {t("JavaScriptCodeDescription")}
-      </Text>
-      <CodeBlock config={config} />
-    </CodeWrapper>
+    <CodeToInsert t={t} theme={theme} codeBlock={codeBlock} config={config} />
   );
 
   const dataTabs = [

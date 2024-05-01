@@ -28,14 +28,11 @@ import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import debounce from "lodash.debounce";
 import { Box } from "@docspace/shared/components/box";
-import { Textarea } from "@docspace/shared/components/textarea";
-import { Text } from "@docspace/shared/components/text";
 import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
-import CodeBlock from "../sub-components/CodeBlock";
 import { Button } from "@docspace/shared/components/button";
 
 const showPreviewThreshold = 720;
@@ -44,6 +41,7 @@ import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
+import { CodeToInsert } from "../sub-components/CodeToInsert";
 
 import {
   Controls,
@@ -164,22 +162,7 @@ const DocSpace = (props) => {
   );
 
   const code = (
-    <CodeWrapper height="fit-content">
-      <CategorySubHeader className="copy-window-code">
-        {`HTML ${t("CodeTitle")}`}
-      </CategorySubHeader>
-      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
-        {t("HtmlCodeDescription")}
-      </Text>
-      <Textarea value={codeBlock} heightTextArea={153} />
-      <CategorySubHeader className="copy-window-code">
-        {`JavaScript ${t("CodeTitle")}`}
-      </CategorySubHeader>
-      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
-        {t("JavaScriptCodeDescription")}
-      </Text>
-      <CodeBlock config={config} />
-    </CodeWrapper>
+    <CodeToInsert t={t} theme={theme} codeBlock={codeBlock} config={config} />
   );
 
   const dataTabs = [

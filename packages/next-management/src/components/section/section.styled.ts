@@ -34,6 +34,14 @@ export const StyledSection = styled.section`
   display: flex;
   flex-direction: column;
 
+  button {
+    width: fit-content;
+
+    @media ${mobile} {
+      width: 100%;
+    }
+  }
+
   @media ${tablet} {
     padding: 0 16px;
   }

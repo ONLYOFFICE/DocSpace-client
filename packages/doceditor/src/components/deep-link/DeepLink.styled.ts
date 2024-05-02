@@ -126,6 +126,7 @@ export const StyledBody = styled.div`
 
   max-width: 960px;
   width: 100vw;
+  margin-bottom: 16px;
 
   @media ${mobile} {
     margin: 0 auto;

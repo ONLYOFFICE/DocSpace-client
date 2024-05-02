@@ -194,7 +194,7 @@ const Login: React.FC<ILoginProps> = ({
           : window.open(
               url,
               "login",
-              "width=800,height=500,status=no,toolbar=no,menubar=no,resizable=yes,scrollbars=no"
+              "width=800,height=500,status=no,toolbar=no,menubar=no,resizable=yes,scrollbars=no,popup=yes"
             );
 
         const code: string = await getOAuthToken(tokenGetterWin);

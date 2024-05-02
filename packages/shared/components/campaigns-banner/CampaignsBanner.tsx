@@ -44,7 +44,7 @@ import useFitText from "./useFitText";
 
 const CampaignsBanner = (props: CampaignsBannerProps) => {
   const {
-    campaignImage,
+    campaignBackground,
     campaignIcon,
     campaignTranslate,
     campaignConfig,
@@ -59,13 +59,13 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
   const hasText = !!Text;
   const isButton = action?.isButton;
 
-  const { fontSize, ref } = useFitText(campaignImage, body?.fontSize);
+  const { fontSize, ref } = useFitText(campaignBackground, body?.fontSize);
 
   return (
     <BannerWrapper
       ref={ref}
       data-testid="campaigns-banner"
-      background={campaignImage}
+      background={campaignBackground}
       borderColor={borderColor}
     >
       <BannerContent>

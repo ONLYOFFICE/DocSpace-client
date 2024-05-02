@@ -27,7 +27,7 @@
 import { useRef, useState, useEffect } from "react";
 
 const useFitText = (
-  campaignImage: string,
+  campaignBackground: string,
   currentFontSize: string = "13px",
 ) => {
   const ref: React.RefObject<HTMLDivElement> = useRef(null);
@@ -36,7 +36,7 @@ const useFitText = (
 
   useEffect(() => {
     setFontSize(parseInt(currentFontSize, 10));
-  }, [campaignImage, currentFontSize]);
+  }, [campaignBackground, currentFontSize]);
 
   useEffect(() => {
     const isOverflow =

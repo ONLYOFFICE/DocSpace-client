@@ -32,7 +32,7 @@ export interface CampaignsBannerProps {
   /** Accepts css style */
   style?: React.CSSProperties;
   /** Background */
-  campaignImage: string;
+  campaignBackground: string;
   /** Icon */
   campaignIcon: string;
   /** Translations */

@@ -523,3 +523,15 @@ export const enum EditorConfigErrorType {
   AccessDeniedScope = "System.Security.SecurityException",
   TenantQuotaException = "ASC.Core.Tenants.TenantQuotaException",
 }
+
+/**
+ * Enum for watermarks.
+ * @readonly
+ */
+export const enum WatermarkAdditions {
+  UserName = 1,
+  UserEmail = 2,
+  UserIpAdress = 4,
+  CurrentDate = 8,
+  RoomName = 16,
+}

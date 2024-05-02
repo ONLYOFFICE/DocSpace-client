@@ -128,7 +128,7 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams }) => {
         isDisabled={false}
         isChecked={watermarksChecked}
       >
-        <Watermarks />
+        <Watermarks setRoomParams={setRoomParams} />
       </Block>
     </StyledVirtualDataRoomBlock>
   );

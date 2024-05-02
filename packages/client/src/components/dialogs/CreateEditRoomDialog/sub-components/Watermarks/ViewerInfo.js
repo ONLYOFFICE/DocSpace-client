@@ -29,25 +29,26 @@ import { useTranslation } from "react-i18next";
 import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { ComboBox } from "@docspace/shared/components/combobox";
 
 import { StyledWatermark } from "./StyledComponent";
+import { WatermarkAdditions } from "@docspace/shared/enums";
 
 const options = (t) => [
   {
-    key: "userName",
+    key: "UserName",
     title: t("UserName"),
   },
   {
-    key: "userEmail",
+    key: "UserEmail",
     title: t("UserEmail"),
   },
   {
-    key: "userIPAddress",
+    key: "UserIpAdress",
     title: t("UserIPAddress"),
   },
   {
-    key: "currentDate",
+    key: "CurrentDate",
     title: t("Common:CurrentDate"),
   },
   {
@@ -55,52 +56,89 @@ const options = (t) => [
     title: t("Common:RoomName"),
   },
 ];
-const ViewerInfoWatermark = () => {
+
+const ViewerInfoWatermark = ({ setParams, initialPosition, dataPosition }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
 
-  const [isChecked, setIsChecked] = useState(true);
-  const [elements, setElements] = useState({
-    userName: false,
-    userEmail: false,
-    userIP: false,
-    currentDate: false,
-    roomName: false,
-  });
-
   const dataTabs = options(t);
+
+  const [elements, setElements] = useState({
+    UserName: false,
+    UserEmail: false,
+    UserIpAdress: false,
+    CurrentDate: false,
+    RoomName: false,
+  });
+  const [selectedPosition, setSelectedPosition] = useState(initialPosition);
+  const [textValue, setTextValue] = useState("");
 
   const onSelect = (item) => {
     const updatedElem = elements[item.key];
     const key = item.key;
-    setElements({ ...elements, [key]: !updatedElem });
+
+    const updatedState = { ...elements, [key]: !updatedElem };
+
+    setElements(updatedState);
+
+    let flagsCount = 0;
+
+    for (const key in updatedState) {
+      const value = updatedState[key];
+
+      if (value) {
+        flagsCount += WatermarkAdditions[key];
+      }
+    }
+
+    setParams({ additions: flagsCount });
   };
-  const onCheckboxChange = () => {
-    setIsChecked(!isChecked);
+
+  const onPositionChange = (item) => {
+    setSelectedPosition(item);
+
+    setParams({ rotate: item.key });
+  };
+
+  const onTextChange = (e) => {
+    const { value } = e.target;
+    setTextValue(value);
+
+    setParams({ text: value });
   };
 
   return (
     <StyledWatermark>
+      <Text className="watermark-title" fontWeight={600} lineHeight="20px">
+        {t("AddWatermarkElements")}
+      </Text>
+      <TabsContainer
+        elements={dataTabs}
+        onSelect={onSelect}
+        multiple
+        withBorder
+      />
       <div>
         <Text className="watermark-title" fontWeight={600} lineHeight="20px">
-          {t("WatermarkElements")}
+          {t("AddStaticText")}
         </Text>
-        <TabsContainer
-          elements={dataTabs}
-          onSelect={onSelect}
-          multiple
-          withBorder
-        />
-        <Text className="watermark-title" fontWeight={600} lineHeight="20px">
-          {t("Position")}
-        </Text>
-        <TextInput scale value={t("Center")} isReadOnly />
-        <Checkbox
-          className="watermark-checkbox"
-          label={t("Semitransparent")}
-          onChange={onCheckboxChange}
-          isChecked={isChecked}
+        <TextInput
+          scale
+          value={textValue}
+          tabIndex={1}
+          isAutoFocussed
+          onChange={onTextChange}
         />
       </div>
+      <Text className="watermark-title" fontWeight={600} lineHeight="20px">
+        {t("Position")}
+      </Text>
+      <ComboBox
+        selectedOption={selectedPosition}
+        options={dataPosition}
+        onSelect={onPositionChange}
+        scaled
+        scaledOptions
+      />
     </StyledWatermark>
   );
 };

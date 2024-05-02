@@ -24,12 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 
-import TextWatermark from "./Text";
 import ViewerInfoWatermark from "./ViewerInfo";
 import { StyledBody } from "./StyledComponent";
 
@@ -43,17 +42,33 @@ const options = (t) => [
     value: viewerInfoWatermark,
   },
   {
-    label: t("Text"),
-    value: textWatermark,
-  },
-  {
     label: t("Common:Image"),
     value: imageWatermark,
   },
 ];
-const Watermarks = () => {
+
+const positionOptions = (t) => [
+  { key: -45, label: t("Diagonal") },
+  { key: 0, label: t("Horizontal") },
+];
+const Watermarks = ({ setRoomParams }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
-  const [type, setType] = useState(textWatermark);
+  const [type, setType] = useState(viewerInfoWatermark);
+
+  const dataPosition = positionOptions(t);
+  const initialPosition = dataPosition[0];
+
+  useEffect(() => {
+    setRoomParams((prevState) => ({
+      ...prevState,
+      watermarks: {
+        enabled: true,
+        rotate: initialPosition.key,
+        text: "",
+        additions: 0,
+      },
+    }));
+  }, []);
 
   const onSelectType = (e) => {
     const { value } = e.target;
@@ -61,6 +76,13 @@ const Watermarks = () => {
     setType(value);
   };
 
+  const setParams = (info) => {
+ 
+    setRoomParams((prevState) => ({
+      ...prevState,
+      watermarks: { ...prevState.watermarks, ...info },
+    }));
+  };
   const typeOptions = options(t);
 
   return (
@@ -75,8 +97,13 @@ const Watermarks = () => {
         onClick={onSelectType}
       />
 
-      {type === textWatermark && <TextWatermark />}
-      {type === viewerInfoWatermark && <ViewerInfoWatermark />}
+      {type === viewerInfoWatermark && (
+        <ViewerInfoWatermark
+          setParams={setParams}
+          initialPosition={initialPosition}
+          dataPosition={dataPosition}
+        />
+      )}
     </StyledBody>
   );
 };

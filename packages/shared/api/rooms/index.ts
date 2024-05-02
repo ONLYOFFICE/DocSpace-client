@@ -477,3 +477,25 @@ export function resetRoomQuota(roomIds) {
 
   return request(options);
 }
+
+export function setRoomWatermarks(
+  roomId: number | string,
+  data: {
+    enabled: boolean;
+    rotate: number;
+    text: string;
+    additions: number;
+    imageScale: number;
+    imageUrl: string;
+    imageWidth: string;
+    imageHeight: string;
+  },
+) {
+  const options = {
+    method: "put",
+    url: `files/rooms/${roomId}/watermark`,
+    data,
+  };
+
+  return request(options);
+}

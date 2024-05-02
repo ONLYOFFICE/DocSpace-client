@@ -1,4 +1,6 @@
 {
+  "AddWatermarkElements": "Add watermark elements",
+  "AddStaticText": "Add static text",
   "Diagonal": "Diagonal",
   "ChooseRoomType": "Choose room type",
   "CollaborationRoomDescription": "Collaborate on one or multiple documents with your team",
@@ -33,7 +35,6 @@
   "RoomEditing": "Room editing",
   "RootFolderLabel": "Root folder",
   "StorageDescription": "Storage quota set per room. You can change this value or turn off storage limit.",
-  "Semitransparent": "Semitransparent",
   "TagsPlaceholder": "Add a tag",
   "Text": "Text",
   "ThirdPartyStorageComboBoxPlaceholder": "Select storage",
@@ -46,7 +47,6 @@
   "UserIPAddress": "User IP Address",
   "ViewOnlyRoomDescription": "Share any ready documents, reports, documentation, and other files for viewing.",
   "ViewOnlyRoomTitle": "View-only room",
-  "WatermarkElements": "Watermark elements",
   "AutomaticIndexing": "Automatic indexing",
   "AutomaticIndexingDescription": "Enable automatic indexing to index files and folders by serial number. Sorting by number will be set as default for all users.",
   "FileLifetime": "File lifetime",

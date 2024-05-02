@@ -31,6 +31,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { RoomsType } from "@docspace/shared/enums";
+import { setRoomWatermarks } from "@docspace/shared/api/rooms";
 
 class CreateEditRoomStore {
   roomParams = null;
@@ -157,6 +158,11 @@ class CreateEditRoomStore {
 
       const actions = [];
 
+      const watermarks = roomParams.watermarks;
+
+      if (watermarks) {
+        await setRoomWatermarks(room.id, watermarks);
+      }
       // delete thirdparty account if not needed
       if (!isThirdparty && storageFolderId)
         await deleteThirdParty(thirdpartyAccount.providerId);

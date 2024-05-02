@@ -36,6 +36,7 @@ import {
   BannerWrapper,
   BannerContent,
   BannerButton,
+  BannerIcon,
 } from "./CampaignsBanner.styled";
 import { CampaignsBannerProps } from "./CampaignsBanner.types";
 
@@ -44,6 +45,7 @@ import useFitText from "./useFitText";
 const CampaignsBanner = (props: CampaignsBannerProps) => {
   const {
     campaignImage,
+    campaignIcon,
     campaignTranslate,
     campaignConfig,
     onAction,
@@ -124,6 +126,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
         iconName={CrossReactSvg}
         onClick={onClose}
       />
+      <BannerIcon icon={campaignIcon} />
     </BannerWrapper>
   );
 };

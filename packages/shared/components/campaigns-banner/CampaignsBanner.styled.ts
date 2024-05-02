@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { Base } from "../../themes";
-import { desktop } from "../../utils/device";
+import { desktop, mobile } from "../../utils/device";
 
 const BannerWrapper = styled.div<{
   background?: string;
@@ -108,4 +108,22 @@ const BannerButton = styled.button<{
   color: ${(props) => props.buttonTextColor};
 `;
 
-export { BannerWrapper, BannerContent, BannerButton };
+const BannerIcon = styled.div<{
+  icon: string;
+}>`
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  background-image: url(${(props) => props.icon});
+  background-size: 100%;
+  background-repeat: no-repeat;
+
+  @media ${mobile} {
+    width: 84px;
+    height: 84px;
+  }
+`;
+
+export { BannerWrapper, BannerContent, BannerButton, BannerIcon };

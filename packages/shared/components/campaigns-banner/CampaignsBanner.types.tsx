@@ -33,6 +33,8 @@ export interface CampaignsBannerProps {
   style?: React.CSSProperties;
   /** Background */
   campaignImage: string;
+  /** Icon */
+  campaignIcon: string;
   /** Translations */
   campaignTranslate: ITranslate;
   /** Config */

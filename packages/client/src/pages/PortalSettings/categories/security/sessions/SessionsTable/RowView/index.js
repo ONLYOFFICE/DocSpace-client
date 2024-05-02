@@ -72,7 +72,7 @@ const StyledRowContainer = styled(RowContainer)`
   }
 
   .header-container-text {
-    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+    font-size: 12px;
     color: #a3a9ae;
   }
 

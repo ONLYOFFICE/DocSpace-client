@@ -38,13 +38,13 @@ const DownLoadWrapper = styled.div`
   .download-report_button {
     width: auto;
     height: auto;
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
-    line-height: ${(props) => props.theme.getCorrectFontSize("20px")};
+    font-size: 13px;
+    line-height: 20px;
     padding-top: 5px;
     padding-bottom: 5px;
 
     @media ${tablet} {
-      font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+      font-size: 14px;
       line-height: 16px;
       padding-top: 11px;
       padding-bottom: 11px;
@@ -58,7 +58,7 @@ const DownLoadWrapper = styled.div`
   .download-report_description {
     font-style: normal;
     font-weight: 400;
-    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+    font-size: 12px;
     line-height: 16px;
 
     height: 16px;

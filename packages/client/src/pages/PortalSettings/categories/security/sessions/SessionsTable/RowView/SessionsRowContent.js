@@ -7,13 +7,13 @@ const StyledRowContent = styled(RowContent)`
     font-weight: 600;
     color: ${(props) => props.theme.activeSessions.textOnlineColor};
     margin-left: 4px;
-    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    font-size: 14px;
   }
 
   .offline {
     font-weight: 600;
     color: ${(props) => props.theme.activeSessions.tableCellColor};
-    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    font-size: 14px;
     margin-left: 4px;
   }
 `;

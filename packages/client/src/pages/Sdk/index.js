@@ -86,8 +86,8 @@ const Sdk = ({
     [FilterType.OFormOnly]: t("Common:SelectTypeFiles", {
       type: t("Files:Forms").toLowerCase(),
     }),
-    [FilterType.FilesOnly]: t("Common:SelectTypeFiles", {
-      type: t("Files:AllFiles").toLowerCase(),
+    EditorSupportedTypes: t("Common:SelectTypeFiles", {
+      type: t("AllTypesAvailableForEditing"),
     }),
   };
 

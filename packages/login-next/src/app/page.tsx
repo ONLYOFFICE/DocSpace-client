@@ -84,10 +84,6 @@ async function Page({
     redirect(ssoUrl);
   }
 
-  if (settings?.wizardToken) {
-    redirect(`${getBaseUrl()}/wizard`);
-  }
-
   const bgPattern = getBgPattern(colorTheme?.selected);
 
   return (

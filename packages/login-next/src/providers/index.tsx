@@ -34,6 +34,8 @@ import ErrorBoundary from "@docspace/shared/components/error-boundary/ErrorBound
 import { TFirebaseSettings } from "@docspace/shared/api/settings/types";
 import FirebaseHelper from "@docspace/shared/utils/firebase";
 import { TUser } from "@docspace/shared/api/people/types";
+import { ThemeKeys } from "@docspace/shared/enums";
+import { Base, Dark } from "@docspace/shared/themes";
 
 import { TDataContext } from "@/types";
 import useI18N from "@/hooks/useI18N";
@@ -64,8 +66,15 @@ export const Providers = ({
     settings: value.settings,
   });
 
+  const currentTheme =
+    typeof window !== "undefined" || !value.systemTheme
+      ? theme
+      : value.systemTheme === ThemeKeys.BaseStr
+        ? Base
+        : Dark;
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={currentTheme}>
       <I18nextProvider i18n={i18n}>
         <ErrorBoundary
           user={{} as TUser}

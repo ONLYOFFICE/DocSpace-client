@@ -31,6 +31,8 @@ import { getEditorTheme, getSystemTheme } from "@docspace/shared/utils";
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getAppearanceTheme } from "@docspace/shared/api/settings";
 import { TGetColorTheme, TSettings } from "@docspace/shared/api/settings/types";
+import { setCookie } from "@docspace/shared/utils/cookie";
+import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 
 import useI18N from "./useI18N";
 
@@ -67,7 +69,9 @@ const useTheme = ({ colorTheme, settings }: UseThemeProps) => {
 
   const getUserTheme = React.useCallback(() => {
     const SYSTEM_THEME = getSystemTheme();
+
     const interfaceDirection = i18n?.dir ? i18n.dir() : "ltr";
+
     if (SYSTEM_THEME === ThemeKeys.BaseStr) {
       setTheme({
         ...Base,
@@ -81,6 +85,8 @@ const useTheme = ({ colorTheme, settings }: UseThemeProps) => {
         window.AscDesktopEditor.execCommand("portal:uitheme", editorTheme);
       }
 
+      setCookie(SYSTEM_THEME_KEY, ThemeKeys.BaseStr);
+
       return;
     }
 
@@ -89,6 +95,8 @@ const useTheme = ({ colorTheme, settings }: UseThemeProps) => {
       currentColorScheme: currentColorTheme,
       interfaceDirection,
     });
+
+    setCookie(SYSTEM_THEME_KEY, ThemeKeys.DarkStr);
 
     if (window?.AscDesktopEditor !== undefined) {
       const editorTheme = getEditorTheme(ThemeKeys.Dark);

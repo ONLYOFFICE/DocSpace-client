@@ -25,11 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { redirect } from "next/navigation";
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 import { Toast } from "@docspace/shared/components/toast";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
-import { TenantStatus } from "@docspace/shared/enums";
+import { TenantStatus, ThemeKeys } from "@docspace/shared/enums";
+import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 
 import { Providers } from "@/providers";
 import StyledComponentsRegistry from "@/utils/registry";
@@ -76,6 +77,10 @@ export default async function RootLayout({
     redirect(url.toString());
   }
 
+  if (settings?.wizardToken) {
+    redirect(`${baseUrl}/wizard`);
+  }
+
   if (settings?.tenantStatus === TenantStatus.PortalRestore) {
     redirect(`${baseUrl}/preparation-portal`);
   }
@@ -83,6 +88,10 @@ export default async function RootLayout({
   if (settings?.tenantStatus === TenantStatus.PortalDeactivate) {
     redirect(`${baseUrl}/unavailable`);
   }
+
+  const cookieStore = cookies();
+
+  const systemTheme = cookieStore.get(SYSTEM_THEME_KEY);
 
   return (
     <html lang="en" translate="no">
@@ -102,6 +111,7 @@ export default async function RootLayout({
             value={{
               settings,
               colorTheme,
+              systemTheme: systemTheme?.value as ThemeKeys,
             }}
           >
             <SimpleNav />

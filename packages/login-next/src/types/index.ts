@@ -33,10 +33,12 @@ import {
   TThirdPartyProvider,
 } from "@docspace/shared/api/settings/types";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
+import { ThemeKeys } from "@docspace/shared/enums";
 
 export type TDataContext = {
   settings?: TSettings;
   colorTheme?: TGetColorTheme;
+  systemTheme?: ThemeKeys;
 };
 
 export type GreetingContainersProps = {

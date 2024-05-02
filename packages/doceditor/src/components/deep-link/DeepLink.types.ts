@@ -35,7 +35,7 @@ export interface DeepLinkProps {
   fileInfo?: TFile;
   userEmail?: string;
 
-  currentDeviceType: DeviceType;
+  currentDeviceType?: DeviceType;
   deepLinkConfig?: TDeepLinkConfig;
 
   setIsShowDeepLink: (value: boolean) => void;

@@ -109,26 +109,34 @@ export const BgBlock = styled.div<{ bgPattern: string }>`
 `;
 
 export const StyledWrapper = styled.div`
+  height: 100%;
+  width: 100vw;
+  max-width: 960px;
+
+  @media ${mobile} {
+    margin: 0 auto;
+    align-items: flex-start;
+  }
+`;
+
+export const StyledBody = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 56px auto;
+
   max-width: 960px;
   width: 100vw;
 
   @media ${mobile} {
     margin: 0 auto;
+    align-items: flex-start;
   }
 `;
-
 export const LogoWrapper = styled.div`
-  width: 386px;
-  height: 44px;
-  margin-top: auto;
   margin-bottom: 64px;
+  margin-top: 56px;
 
   @media ${mobile} {
-    display: none;
+    margin-top: 32px;
   }
 `;
-

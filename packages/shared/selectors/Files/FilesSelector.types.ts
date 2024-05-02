@@ -107,6 +107,7 @@ export type UseFilesHelpersProps = {
     value: number | string | undefined | TBreadCrumb[],
   ) => void;
   isRoomsOnly: boolean;
+  isUserOnly?: boolean;
   rootThirdPartyId?: string;
   getRoomList?: (
     startIndex: number,

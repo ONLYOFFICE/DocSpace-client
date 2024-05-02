@@ -186,6 +186,7 @@ const FilesSelector = ({
     setIsRoot,
     searchValue,
     isRoomsOnly,
+
     onSetBaseFolderPath,
     isInit,
     setIsInit,
@@ -211,6 +212,7 @@ const FilesSelector = ({
     getRootData,
     onSetBaseFolderPath,
     isRoomsOnly,
+    isUserOnly,
     rootThirdPartyId,
     getRoomList,
     getIcon,
@@ -289,7 +291,7 @@ const FilesSelector = ({
       return;
     }
 
-    if (!currentFolderId) {
+    if (!currentFolderId && !isUserOnly) {
       setSelectedItemType("rooms");
       return;
     }
@@ -311,6 +313,7 @@ const FilesSelector = ({
     currentFolderId,
     isRoomsOnly,
     isThirdParty,
+    isUserOnly,
     parentId,
     roomsFolderId,
     rootFolderType,

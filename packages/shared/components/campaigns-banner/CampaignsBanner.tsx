@@ -27,6 +27,7 @@
 import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
 
 import React from "react";
+import { ReactSVG } from "react-svg";
 
 import { Text as TextComponent } from "../text";
 import { Link as LinkComponent } from "../link";
@@ -126,7 +127,9 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
         iconName={CrossReactSvg}
         onClick={onClose}
       />
-      <BannerIcon icon={campaignIcon} />
+      <BannerIcon>
+        <ReactSVG src={campaignIcon} />
+      </BannerIcon>
     </BannerWrapper>
   );
 };

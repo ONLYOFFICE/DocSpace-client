@@ -90,6 +90,10 @@ const BannerContent = styled.div`
       max-width: 167px;
     }
   }
+
+  @media ${mobile} {
+    max-width: 75%;
+  }
 `;
 
 const BannerButton = styled.button<{
@@ -108,22 +112,17 @@ const BannerButton = styled.button<{
   color: ${(props) => props.buttonTextColor};
 `;
 
-const BannerIcon = styled.div<{
-  icon: string;
-}>`
-  width: 60px;
-  height: 60px;
+const BannerIcon = styled.div`
   position: absolute;
   bottom: 0px;
-  right: 0px;
-  background-image: url(${(props) => props.icon});
-  background-size: 100%;
-  background-repeat: no-repeat;
-
-  @media ${mobile} {
-    width: 84px;
-    height: 84px;
-  }
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          left: 0px;
+        `
+      : css`
+          right: 0px;
+        `}
 `;
 
 export { BannerWrapper, BannerContent, BannerButton, BannerIcon };

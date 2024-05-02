@@ -518,7 +518,10 @@ const Manager = (props) => {
 
   const onChangeSearch = (e) => {
     setConfig((config) => {
-      return { ...config, search: e.target.value };
+      return {
+        ...config,
+        filter: { ...config.filter, filterValue: e.target.value },
+      };
     });
   };
 
@@ -1266,7 +1269,7 @@ const Manager = (props) => {
                   scale={true}
                   onChange={onChangeSearch}
                   placeholder={t("Common:Search")}
-                  value={config.search}
+                  value={config.filter.filterValue}
                   tabIndex={5}
                 />
                 <Checkbox

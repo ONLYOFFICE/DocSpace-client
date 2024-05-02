@@ -31,7 +31,7 @@ const next = require("next");
 const dev = process.env.NODE_ENV === "development";
 
 const port = 5011;
-const hostname = "192.168.0.18";
+const hostname = "0.0.0.0";
 
 // when using middleware `hostname` and `port` must be provided below
 const app = next({ dev, hostname, port });

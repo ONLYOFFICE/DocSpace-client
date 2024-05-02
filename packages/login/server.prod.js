@@ -25,14 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 const path = require("path");
-const config = require("./config/config.json");
 
 const dir = path.join(__dirname);
 
 const dev = process.env.NODE_ENV === "development";
 
-const currentPort = config.PORT ?? 5013;
-const hostname = config.HOSTNAME ?? "localhost";
+const currentPort = 5011;
+const hostname = "0.0.0.0";
 
 process.env.NODE_ENV = "production" || process.env.NODE_ENV;
 process.chdir(__dirname);

@@ -76,6 +76,7 @@ const FilesSelector = ({
   onSetBaseFolderPath,
   isUserOnly,
   isRoomsOnly,
+  openRoot,
   isThirdParty,
   rootThirdPartyId,
   roomsFolderId,
@@ -291,7 +292,7 @@ const FilesSelector = ({
       return;
     }
 
-    if (!currentFolderId && !isUserOnly) {
+    if (!currentFolderId && !isUserOnly && !openRoot) {
       setSelectedItemType("rooms");
       return;
     }
@@ -317,6 +318,7 @@ const FilesSelector = ({
     parentId,
     roomsFolderId,
     rootFolderType,
+    openRoot,
     setIsFirstLoad,
   ]);
 
@@ -442,10 +444,24 @@ const FilesSelector = ({
   );
 
   React.useEffect(() => {
-    if (selectedItemType === "rooms") getRoomList(0);
+    if (selectedItemType === "rooms") {
+      getRoomList(0);
+      return;
+    }
+    if (openRoot && !selectedItemId) {
+      getRootData();
+      return;
+    }
     if (selectedItemType === "files" && typeof selectedItemId !== "undefined")
       getFileList(0);
-  }, [getFileList, getRoomList, selectedItemType, selectedItemId]);
+  }, [
+    getFileList,
+    getRoomList,
+    selectedItemType,
+    selectedItemId,
+    getRootData,
+    openRoot,
+  ]);
 
   const headerProps: TSelectorHeader = withHeader
     ? { withHeader, headerProps: { headerLabel } }

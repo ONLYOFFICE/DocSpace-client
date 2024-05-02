@@ -150,6 +150,7 @@ export type FilesSelectorProps = (
     value: number | string | undefined | TBreadCrumb[],
   ) => void;
   isUserOnly?: boolean;
+  openRoot?: boolean;
   isRoomsOnly: boolean;
   isThirdParty: boolean;
   rootThirdPartyId?: string;

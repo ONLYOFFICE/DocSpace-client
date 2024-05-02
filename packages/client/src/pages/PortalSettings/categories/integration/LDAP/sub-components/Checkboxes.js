@@ -47,7 +47,7 @@ const Checkboxes = ({
   );
 };
 
-export default inject(({ settingsStore, currentQuotaStore, ldapStore }) => {
+export default inject(({ currentQuotaStore, ldapStore }) => {
   const { isLdapAvailable } = currentQuotaStore;
   const { isTlsEnabled, isSslEnabled, setIsTlsEnabled, setIsSslEnabled } =
     ldapStore;

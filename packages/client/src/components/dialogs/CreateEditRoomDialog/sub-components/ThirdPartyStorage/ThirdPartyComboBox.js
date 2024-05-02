@@ -226,7 +226,7 @@ const ThirdPartyComboBox = ({
     thirdparty && setStorageLocaiton(thirdparty, thirdparty.isConnected);
     thirdparty.isConnected
       ? setSelectedItem(elem)
-      : setSelectedItem(deafultSelectedItem);
+      : setSelectedItem({ ...deafultSelectedItem });
   };
 
   return (

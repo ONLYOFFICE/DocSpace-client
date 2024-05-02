@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
@@ -76,6 +76,11 @@ const ThirdPartyStorage = ({
 
   fetchConnectingStorages,
 }) => {
+  const channel = useRef(new BroadcastChannel("thirdpartyActivation"));
+  channel.current.onmessage = (shouldRender) => {
+    shouldRender && fetchConnectingStorages()
+  };
+
   const onChangeIsThirdparty = () => {
     if (isDisabled) return;
 

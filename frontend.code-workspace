@@ -8,13 +8,9 @@
       "name": "🚀 @docspace/client",
       "path": "packages/client",
     },
-    {
+     {
       "name": "🔑 @docspace/login",
       "path": "packages/login",
-    },
-    {
-      "name": "🔑 @docspace/login-next",
-      "path": "packages/login-next",
     },
     {
       "name": "📄 @docspace/doceditor",

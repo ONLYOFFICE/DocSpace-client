@@ -39,13 +39,14 @@ const TabsContainer = ({
   elements,
   isDisabled,
   onSelect,
-  selectedItem = 0,
+  selectedItem,
   multiple = false,
   withBorder = false,
 }: TabsContainerProps) => {
   const arrayRefs = React.useRef<HTMLDivElement[]>([]);
   const scrollRef = React.useRef<HTMLDivElement | null>(null);
-  const selected = multiple ? [selectedItem] : selectedItem;
+
+  const selected = !selectedItem ? (multiple ? [] : 0) : selectedItem;
 
   const [state, setState] = React.useState({
     activeTab: selected,

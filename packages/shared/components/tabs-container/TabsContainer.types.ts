@@ -39,7 +39,7 @@ export interface TabsContainerProps {
   /** Sets a callback function that is triggered when the title is selected */
   onSelect: (element: TElement) => void;
   /** Selected title of tabs container */
-  selectedItem: number;
+  selectedItem: number | number[];
   /** Enables multiple select  */
   multiple?: boolean;
   /** Enables Body scroll */

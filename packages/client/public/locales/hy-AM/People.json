@@ -1,5 +1,4 @@
 {
   "LblInviteAgain": "Կրկին հրավիրել",
-  "MessageEmailActivationInstuctionsSentOnEmail": "Էլփոստի ակտիվացման հրահանգներն ուղարկվել են <1>{{email}}</1> Էլփոստի հասցե:",
-  "UserStatus": "Կարգավիճակ"
+  "MessageEmailActivationInstuctionsSentOnEmail": "Էլփոստի ակտիվացման հրահանգներն ուղարկվել են <1>{{email}}</1> Էլփոստի հասցե:"
 }

@@ -1,5 +1,4 @@
 {
   "LblInviteAgain": "ادعوه مرة أخرى",
-  "MessageEmailActivationInstuctionsSentOnEmail": "تم إرسال تعليمات تفعيل البريد الإلكتروني إلى عنوان البريد الإلكتروني <1>{{email}}</1>.",
-  "UserStatus": "الحالة"
+  "MessageEmailActivationInstuctionsSentOnEmail": "تم إرسال تعليمات تفعيل البريد الإلكتروني إلى عنوان البريد الإلكتروني <1>{{email}}</1>."
 }

@@ -1,5 +1,4 @@
 {
   "LblInviteAgain": "Invite again",
-  "MessageEmailActivationInstuctionsSentOnEmail": "The email activation instructions have been sent to the <1>{{email}}</1> email address.",
-  "UserStatus": "Status"
+  "MessageEmailActivationInstuctionsSentOnEmail": "The email activation instructions have been sent to the <1>{{email}}</1> email address."
 }

@@ -69,6 +69,7 @@ import ShareFolderDialog from "./ShareFolderDialog";
 import EditGroupMembersDialog from "./EditGroupMembersDialog";
 import ChangeStorageQuotaDialog from "./ChangeStorageQuotaDialog";
 import DeleteGroupDialog from "./DeleteGroupDialog";
+import DisableUserDialog from "./DisableUserDialog";
 
 export {
   EmptyTrashDialog,
@@ -116,4 +117,5 @@ export {
   ChangeQuotaDialog,
   ChangeStorageQuotaDialog,
   DeleteGroupDialog,
+  DisableUserDialog,
 };

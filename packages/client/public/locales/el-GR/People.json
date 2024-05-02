@@ -1,5 +1,4 @@
 {
   "LblInviteAgain": "Πρόσκληση ξανά",
-  "MessageEmailActivationInstuctionsSentOnEmail": "Οι οδηγίες ενεργοποίησης μέσω email έχουν σταλεί στη διεύθυνση email <1>{{email}}</1>",
-  "UserStatus": "Κατάσταση"
+  "MessageEmailActivationInstuctionsSentOnEmail": "Οι οδηγίες ενεργοποίησης μέσω email έχουν σταλεί στη διεύθυνση email <1>{{email}}</1>"
 }

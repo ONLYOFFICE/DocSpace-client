@@ -1,5 +1,4 @@
 {
   "LblInviteAgain": "Mời lại",
-  "MessageEmailActivationInstuctionsSentOnEmail": "Email hướng dẫn kích hoạt đã được gửi đến địa chỉ email <1>{{email}}</1>.",
-  "UserStatus": "Trạng thái"
+  "MessageEmailActivationInstuctionsSentOnEmail": "Email hướng dẫn kích hoạt đã được gửi đến địa chỉ email <1>{{email}}</1>."
 }

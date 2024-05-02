@@ -236,8 +236,12 @@ const Accounts = (props) => {
 
           {!standalone && (
             <>
-              <Text className={"info_field"} noSelect title={t("UserStatus")}>
-                {t("UserStatus")}
+              <Text
+                className={"info_field"}
+                noSelect
+                title={t("Common:UserStatus")}
+              >
+                {t("Common:UserStatus")}
               </Text>
               <Text
                 className={"info_data first-row"}

@@ -40,4 +40,10 @@ export interface TabsContainerProps {
   onSelect: (element: TElement) => void;
   /** Selected title of tabs container */
   selectedItem: number;
+  /** Enables multiple select  */
+  multiple?: boolean;
+  /** Enables Body scroll */
+  withBodyScroll?: boolean;
+  /** Indicates that component contain border */
+  withBorder?: boolean;
 }

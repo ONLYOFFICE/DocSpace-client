@@ -40,12 +40,15 @@ const TabsContainer = ({
   isDisabled,
   onSelect,
   selectedItem = 0,
+  multiple = false,
+  withBorder = false,
 }: TabsContainerProps) => {
   const arrayRefs = React.useRef<HTMLDivElement[]>([]);
   const scrollRef = React.useRef<HTMLDivElement | null>(null);
+  const selected = multiple ? [selectedItem] : selectedItem;
 
   const [state, setState] = React.useState({
-    activeTab: selectedItem,
+    activeTab: selected,
     onScrollHide: true,
   });
 
@@ -121,11 +124,36 @@ const TabsContainer = ({
   };
 
   const titleClick = (index: number, item: TElement, ref: HTMLDivElement) => {
-    if (state.activeTab !== index) {
-      setState((s) => ({ ...s, activeTab: index }));
+    const { activeTab } = state;
+
+    const setSelection = () => {
       const newItem = { ...item };
       delete newItem.content;
       onSelect?.(newItem);
+    };
+
+    if (multiple) {
+      const indexOperation = () => {
+        const tempArray = [...activeTab];
+
+        if (activeTab.indexOf(index) !== -1) {
+          return activeTab.filter((item) => item !== index);
+        }
+
+        tempArray.push(index);
+        return tempArray;
+      };
+
+      const updatedActiveTab = indexOperation();
+
+      setState((s) => ({ ...s, activeTab: updatedActiveTab }));
+      setSelection();
+      return;
+    }
+
+    if (activeTab !== index) {
+      setState((s) => ({ ...s, activeTab: index }));
+      setSelection();
 
       setTabPosition(index, ref);
     }
@@ -167,36 +195,51 @@ const TabsContainer = ({
     setState((s) => ({ ...s, onScrollHide: true }));
   };
 
+  const content = (
+    <NavItem className="className_items" multiple={multiple}>
+      {elements.map((item, index) => {
+        const isSelected = multiple
+          ? state.activeTab.indexOf(index) !== -1
+          : state.activeTab === index;
+
+        return (
+          <StyledLabelTheme
+            id={item.id}
+            onMouseMove={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            ref={(ref) => {
+              if (ref) arrayRefs.current.push(ref);
+            }}
+            onClick={() => onClick(index, item)}
+            key={item.key}
+            selected={isSelected}
+            isDisabled={isDisabled}
+            multiple={multiple}
+            withBorder={withBorder}
+          >
+            <Text fontWeight={600} className="title_style" fontSize="13px">
+              {item.title}
+            </Text>
+          </StyledLabelTheme>
+        );
+      })}
+    </NavItem>
+  );
   return (
     <>
-      <StyledScrollbar
-        autoHide={state.onScrollHide}
-        className="scrollbar"
-        // @ts-expect-error error from custom scrollbar
-        ref={scrollRef}
-      >
-        <NavItem className="className_items">
-          {elements.map((item, index) => (
-            <StyledLabelTheme
-              id={item.id}
-              onMouseMove={onMouseEnter}
-              onMouseLeave={onMouseLeave}
-              ref={(ref) => {
-                if (ref) arrayRefs.current.push(ref);
-              }}
-              onClick={() => onClick(index, item)}
-              key={item.key}
-              selected={state.activeTab === index}
-              isDisabled={isDisabled}
-            >
-              <Text fontWeight={600} className="title_style" fontSize="13px">
-                {item.title}
-              </Text>
-            </StyledLabelTheme>
-          ))}
-        </NavItem>
-      </StyledScrollbar>
-      <div className="tabs_body">{elements[state.activeTab].content}</div>
+      {!multiple ? (
+        <StyledScrollbar
+          autoHide={state.onScrollHide}
+          className="scrollbar"
+          // @ts-expect-error error from custom scrollbar
+          ref={scrollRef}
+        >
+          {content}
+        </StyledScrollbar>
+      ) : (
+        content
+      )}
+      <div className="tabs_body">{elements[state.activeTab]?.content}</div>
     </>
   );
 };

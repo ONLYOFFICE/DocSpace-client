@@ -1039,6 +1039,7 @@ export const getBaseTheme = () => {
         backgroundColor: blueLightMid,
         hoverBackgroundColor: grayLight,
         disableBackgroundColor: grayLightMid,
+        border: `1px solid ${grayLightMid}`,
 
         title: {
           margin: "7px 15px 7px 15px",

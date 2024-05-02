@@ -37,16 +37,35 @@ const StyledScrollbar = styled(Scrollbar)`
 
 StyledScrollbar.defaultProps = { theme: Base };
 
-const NavItem = styled.div`
+const NavItem = styled.div<{
+  multiple?: boolean;
+}>`
   position: relative;
   white-space: nowrap;
   display: flex;
+
+  ${(props) =>
+    props.multiple &&
+    css`
+      gap: 8px;
+      flex-wrap: wrap;
+    `};
 `;
 NavItem.defaultProps = { theme: Base };
 
-const Label = styled.div<{ isDisabled?: boolean; selected?: boolean }>`
+const Label = styled.div<{
+  isDisabled?: boolean;
+  selected?: boolean;
+  multiple?: boolean;
+  withBorder?: boolean;
+}>`
   height: ${(props) => props.theme.tabsContainer.label.height};
   border-radius: ${(props) => props.theme.tabsContainer.label.borderRadius};
+  ${(props) =>
+    props.withBorder &&
+    css`
+      border: ${props.theme.tabsContainer.label.border};
+    `}
   min-width: ${(props) => props.theme.tabsContainer.label.minWidth};
   width: ${(props) => props.theme.tabsContainer.label.width};
 
@@ -67,7 +86,7 @@ const Label = styled.div<{ isDisabled?: boolean; selected?: boolean }>`
   ${(props) =>
     props.selected
       ? css`
-          cursor: default;
+          cursor: ${!props.multiple ? "default" : "pointer"};
           background-color: ${props.theme.tabsContainer.label.backgroundColor};
           .title_style {
             color: ${props.theme.tabsContainer.label.title.color};

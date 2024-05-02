@@ -54,6 +54,6 @@
   "RestrictCopyAndDownload": "Restrict copy and download",
   "RestrictCopyAndDownloadDescription": "Enable this setting to disable downloads and content copying for users with the \"{{role}}\" role.",
   "AddWatermarksToDocuments": "Add watermarks to documents",
-  "AddWatermarksToDocumentsDescription": "Protect all documents in this room with watermarks. If a document already contains one, it will not be replaced."
+  "AddWatermarksToDocumentsDescription": "Protect all documents in this room with watermarks. If a document already contains one, it will not be replaced.",
   "FilesOlderThan": "Files older than:"
 }

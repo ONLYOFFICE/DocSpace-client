@@ -61,7 +61,6 @@ const {
   strongBlue,
 
   darkRed,
-  darkDividersColor,
   darkErrorStatus,
   charlestonGreen,
   outerSpace,
@@ -1009,7 +1008,8 @@ const Dark: TTheme = {
       backgroundColor: "#d6d6d6",
       hoverBackgroundColor: "#3D3D3D",
       disableBackgroundColor: "#292929",
-      border: `1px solid ${darkDividersColor}`,
+      border: "1px solid #242424",
+
       title: {
         margin: "7px 15px 7px 15px",
         overflow: "hidden",

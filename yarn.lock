@@ -2651,9 +2651,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@docspace/login-next@workspace:packages/login-next":
+"@docspace/login@workspace:packages/login":
   version: 0.0.0-use.local
-  resolution: "@docspace/login-next@workspace:packages/login-next"
+  resolution: "@docspace/login@workspace:packages/login"
   dependencies:
     "@svgr/webpack": "npm:^8.1.0"
     "@types/node": "npm:^20"

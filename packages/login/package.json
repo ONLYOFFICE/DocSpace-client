@@ -1,5 +1,5 @@
 {
-  "name": "@docspace/login-next",
+  "name": "@docspace/login",
   "version": "2.5.0",
   "private": true,
   "scripts": {

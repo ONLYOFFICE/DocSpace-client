@@ -507,7 +507,6 @@ const FilesSelector = ({
         withFooterCheckbox,
         footerCheckboxLabel,
         isChecked: false,
-        setIsChecked: () => {},
       }
     : {};
 

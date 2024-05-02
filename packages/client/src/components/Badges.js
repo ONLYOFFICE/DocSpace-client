@@ -1,4 +1,30 @@
-﻿import styled from "styled-components";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import styled from "styled-components";
 import React, { useState } from "react";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
@@ -100,6 +126,7 @@ const Badges = ({
     rootFolderId,
     new: newCount,
     hasDraft,
+    startFilling,
   } = item;
 
   const showEditBadge = !locked || item.access === 0;
@@ -130,7 +157,7 @@ const Badges = ({
   const iconForm =
     sizeBadge === "medium" ? FormFillRectSvgUrl : AccessEditFormReactSvgUrl;
 
-  const iconEdit = !isPdf ? FileActionsConvertEditDocReactSvgUrl : iconForm;
+  const iconEdit = FileActionsConvertEditDocReactSvgUrl;
 
   const iconRefresh = desktopView ? Refresh12ReactSvgUrl : RefreshReactSvgUrl;
 
@@ -190,6 +217,19 @@ const Badges = ({
 
   return fileExst ? (
     <div className="badges additional-badges file__badges">
+      {startFilling && (
+        <ColorTheme
+          isEditing
+          size={sizeBadge}
+          iconName={iconForm}
+          onClick={onFilesClick}
+          themeId={ThemeId.IconButton}
+          title={t("Common:FillFormButton")}
+          hoverColor={theme.filesBadges.hoverIconColor}
+          className="badge icons-group is-editing tablet-badge tablet-edit"
+        />
+      )}
+
       {hasDraft && (
         <BadgeWrapper isTile={isTile}>
           <Badge
@@ -206,6 +246,7 @@ const Badges = ({
           />
         </BadgeWrapper>
       )}
+
       {isEditing && !isVisitor && !(isRecentTab && !canEditing) && (
         <ColorTheme
           themeId={ThemeId.IconButton}
@@ -215,7 +256,7 @@ const Badges = ({
           size={sizeBadge}
           onClick={onFilesClick}
           hoverColor={theme.filesBadges.hoverIconColor}
-          title={isPdf ? t("Common:FillFormButton") : t("Common:EditButton")}
+          title={t("Common:EditButton")}
         />
       )}
       {item.viewAccessibility?.MustConvert &&

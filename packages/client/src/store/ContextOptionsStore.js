@@ -1,4 +1,30 @@
-﻿import HistoryReactSvgUrl from "PUBLIC_DIR/images/history.react.svg?url";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import HistoryReactSvgUrl from "PUBLIC_DIR/images/history.react.svg?url";
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/move.react.svg?url";
 import CheckBoxReactSvgUrl from "PUBLIC_DIR/images/check-box.react.svg?url";
@@ -46,15 +72,17 @@ import saveAs from "file-saver";
 import { isMobile, isIOS } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { toastr } from "@docspace/shared/components/toast";
-import { ShareAccessRights, RoomsType } from "@docspace/shared/enums";
+import { RoomsType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isDesktop } from "@docspace/shared/utils";
+import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { Events } from "@docspace/shared/enums";
+import { copyShareLink } from "@docspace/shared/utils/copy";
 
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/shared/utils/common";
 import api from "@docspace/shared/api";
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, UrlActionType } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { getFileLink } from "@docspace/shared/api/files";
 
@@ -153,6 +181,7 @@ class ContextOptionsStore {
       customer_title: "NOTITLE",
       provider_key: provider.providerName,
       link: provider.oauthHref,
+      provider_id: item.providerId,
     };
 
     if (provider.isOauth) {
@@ -231,7 +260,7 @@ class ContextOptionsStore {
   };
 
   onOpenLocation = (item) => {
-    this.filesActionsStore.openLocationAction(item);
+    this.filesActionsStore.checkAndOpenLocationAction(item);
   };
 
   onOwnerChange = () => {
@@ -329,6 +358,8 @@ class ContextOptionsStore {
     const { shared, navigationPath, canCopyPublicLink } =
       this.selectedFolderStore;
 
+    const isArchive = item.rootFolderType === FolderType.Archive;
+
     const { href } = item;
     const sharedItem = navigationPath.find((r) => r.shared);
 
@@ -336,9 +367,17 @@ class ContextOptionsStore {
       (sharedItem && sharedItem.canCopyPublicLink) ||
       (shared && canCopyPublicLink);
 
-    if (isShared && !item.isFolder) {
+    if (isShared && !item.isFolder && !isArchive) {
       const fileLinkData = await getFileLink(item.id);
-      copy(fileLinkData.sharedTo.shareLink);
+      copyShareLink(fileLinkData.sharedTo.shareLink);
+      return toastr.success(t("Translations:LinkCopySuccess"));
+    }
+
+    if (
+      item.rootFolderType === FolderType.Recent ||
+      item.rootFolderType === FolderType.SHARE
+    ) {
+      copy(item.webUrl);
       return toastr.success(t("Translations:LinkCopySuccess"));
     }
 
@@ -373,9 +412,9 @@ class ContextOptionsStore {
     const primaryLink = await this.filesStore.getPrimaryLink(item.id);
 
     if (primaryLink) {
-      copy(primaryLink.sharedTo.shareLink);
+      copyShareLink(primaryLink.sharedTo.shareLink);
       item.shared
-        ? toastr.success(t("Files:LinkSuccessfullyCopied"))
+        ? toastr.success(t("Common:LinkSuccessfullyCopied"))
         : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
 
       this.publicRoomStore.setExternalLink(primaryLink);
@@ -400,33 +439,9 @@ class ContextOptionsStore {
   };
 
   gotoDocEditor = (preview = false, item) => {
-    const { isDesktopClient } = this.settingsStore;
+    const { id } = item;
 
-    const { id, providerKey, fileExst } = item;
-
-    const urlFormation = preview
-      ? combineUrl(
-          window.DocSpaceConfig?.proxy?.url,
-          config.homepage,
-          `/doceditor?fileId=${encodeURIComponent(id)}&action=view`,
-        )
-      : null;
-
-    let tab =
-      !isDesktopClient &&
-      window.DocSpaceConfig?.editor?.openOnNewPage &&
-      fileExst
-        ? window.open(
-            combineUrl(
-              window.DocSpaceConfig?.proxy?.url,
-              config.homepage,
-              `/doceditor`,
-            ),
-            "_blank",
-          )
-        : null;
-
-    this.filesStore.openDocEditor(id, providerKey, tab, urlFormation, preview);
+    this.filesStore.openDocEditor(id, preview);
   };
 
   isPwa = () => {
@@ -439,6 +454,9 @@ class ContextOptionsStore {
   onClickDownload = (item, t) => {
     const { fileExst, contentLength, viewUrl } = item;
     const isFile = !!fileExst && contentLength;
+
+    const { openUrl } = this.settingsStore;
+    const { downloadAction } = this.filesActionsStore;
 
     if (isIOS && this.isPwa()) {
       const xhr = new XMLHttpRequest();
@@ -458,10 +476,10 @@ class ContextOptionsStore {
     }
 
     isFile
-      ? window.open(viewUrl, "_self")
-      : this.filesActionsStore
-          .downloadAction(t("Translations:ArchivingData"), item)
-          .catch((err) => toastr.error(err));
+      ? openUrl(viewUrl, UrlActionType.Download)
+      : downloadAction(t("Translations:ArchivingData"), item).catch((err) =>
+          toastr.error(err),
+        );
   };
 
   onClickDownloadAs = () => {
@@ -612,6 +630,10 @@ class ContextOptionsStore {
 
     setUnsubscribe(true);
     setDeleteDialogVisible(true);
+  };
+
+  onOpenPDFEditDialog = (id) => {
+    this.dialogsStore.setPdfFormEditVisible(true, id);
   };
 
   filterModel = (model, filter) => {
@@ -776,10 +798,7 @@ class ContextOptionsStore {
         visible: true,
         roomId: action ? action : e,
         hideSelector: false,
-        defaultAccess:
-          roomType === RoomsType.PublicRoom
-            ? ShareAccessRights.RoomManager
-            : ShareAccessRights.ReadOnly,
+        defaultAccess: getDefaultAccessUser(roomType),
       });
     }
   };
@@ -997,7 +1016,7 @@ class ContextOptionsStore {
       item.providerKey && item.id === item.rootFolderId;
 
     const isShareable = this.treeFoldersStore.isPersonalRoom
-      ? item.canShare || item.isFolder
+      ? item.canShare || (item.isFolder && item.security?.CreateRoomFrom)
       : false;
 
     const isMedia =
@@ -1206,6 +1225,22 @@ class ContextOptionsStore {
         label: t("Common:FillFormButton"),
         icon: FormFillRectSvgUrl,
         onClick: () => this.onClickLinkFillForm(item),
+        disabled: !item.startFilling,
+      },
+      {
+        id: "option_open-pdf",
+        key: "open-pdf",
+        label: t("Open"),
+        icon: EyeReactSvgUrl,
+        onClick: () => this.gotoDocEditor(false, item),
+        disabled: false,
+      },
+      {
+        id: "option_edit-pdf",
+        key: "edit-pdf",
+        label: t("Common:EditPDFForm"),
+        icon: AccessEditReactSvgUrl,
+        onClick: () => this.onOpenPDFEditDialog(item.id),
         disabled: false,
       },
       {
@@ -1268,7 +1303,7 @@ class ContextOptionsStore {
         label: t("Common:ReconnectStorage"),
         icon: ReconnectSvgUrl,
         onClick: () => this.onClickReconnectStorage(item, t),
-        disabled: false,
+        disabled: !item.security?.Reconnect,
       },
       {
         id: "option_edit-room",
@@ -1298,7 +1333,7 @@ class ContextOptionsStore {
 
           const primaryLink = await getPrimaryFileLink(item.id);
           if (primaryLink) {
-            copy(primaryLink.sharedTo.shareLink);
+            copyShareLink(primaryLink.sharedTo.shareLink);
             item.shared
               ? toastr.success(t("Files:LinkSuccessfullyCopied"))
               : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
@@ -1433,7 +1468,7 @@ class ContextOptionsStore {
         label: t("Files:CreateRoom"),
         icon: CatalogRoomsReactSvgUrl,
         onClick: () => this.onClickCreateRoom(item),
-        disabled: this.selectedFolderStore.rootFolderType !== FolderType.USER,
+        disabled: !item.security?.CreateRoomFrom,
       },
       {
         id: "option_download",
@@ -1543,15 +1578,28 @@ class ContextOptionsStore {
     const pluginItems = this.onLoadPlugins(item);
 
     if (pluginItems.length > 0) {
-      options.splice(1, 0, {
-        id: "option_plugin-actions",
-        key: "plugin_actions",
-        label: t("Common:Actions"),
-        icon: PluginActionsSvgUrl,
-        disabled: false,
+      if (!isDesktop() || pluginItems.length === 1) {
+        pluginItems.forEach((plugin) => {
+          options.splice(1, 0, {
+            id: `option_${plugin.key}`,
+            key: plugin.key,
+            label: plugin.label,
+            icon: plugin.icon,
+            disabled: false,
+            onClick: plugin.onClick,
+          });
+        });
+      } else {
+        options.splice(1, 0, {
+          id: "option_plugin-actions",
+          key: "plugin_actions",
+          label: t("Common:Actions"),
+          icon: PluginActionsSvgUrl,
+          disabled: false,
 
-        onLoad: () => this.onLoadPlugins(item),
-      });
+          onLoad: () => this.onLoadPlugins(item),
+        });
+      }
     }
 
     const { isCollaborator } = this.userStore?.user || {
@@ -1568,7 +1616,6 @@ class ContextOptionsStore {
   };
 
   getGroupContextOptions = (t) => {
-    const { personal } = this.settingsStore;
     const { selection, allFilesIsEditing } = this.filesStore;
     const { setDeleteDialogVisible } = this.dialogsStore;
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
@@ -1664,10 +1711,9 @@ class ContextOptionsStore {
     const hasDownloadAccess =
       selection.findIndex((k) => k.security.Download) !== -1;
 
-    const sharingItems =
-      selection.filter(
-        (k) => k.contextOptions.includes("sharing-settings") && k.canShare,
-      ).length && !personal;
+    const sharingItems = selection.filter(
+      (k) => k.contextOptions.includes("sharing-settings") && k.canShare,
+    ).length;
 
     const favoriteItems = selection.filter((k) =>
       k.contextOptions.includes("mark-as-favorite"),
@@ -1740,7 +1786,7 @@ class ContextOptionsStore {
         label: t("Files:CreateRoom"),
         icon: CatalogRoomsReactSvgUrl,
         onClick: this.onClickCreateRoom,
-        disabled: this.selectedFolderStore.rootFolderType !== FolderType.USER,
+        disabled: !selection.security?.CreateRoomFrom,
       },
       {
         key: "download",
@@ -1786,6 +1832,14 @@ class ContextOptionsStore {
         key: "separator1",
         isSeparator: true,
         disabled: !deleteItems || isRootThirdPartyFolder,
+      },
+      {
+        key: "remove-from-recent",
+        label: t("RemoveFromList"),
+        icon: RemoveOutlineSvgUrl,
+        onClick: () =>
+          this.filesActionsStore.onClickRemoveFromRecent(selection),
+        disabled: !this.treeFoldersStore.isRecentTab,
       },
       {
         key: "delete",

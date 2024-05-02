@@ -1,25 +1,56 @@
-import React, { useEffect } from "react";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
+import { useLocation, useParams } from "react-router-dom";
+
+import People from "./People";
+import Groups from "./Groups";
+import InsideGroup from "./InsideGroup";
+
 import { withTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
-
 import { Consumer } from "@docspace/shared/utils";
-
 import withLoader from "SRC_DIR/HOCs/withLoader";
-
-import PeopleRowContainer from "./RowView/PeopleRowContainer";
-import TableView from "./TableView/TableContainer";
 
 const SectionBodyContent = (props) => {
   const {
     tReady,
     accountsViewAs,
-    setSelection,
-    setBufferSelection,
+    isFiltered,
+    setPeopleSelection,
+    setGroupsSelection,
+    setPeopleBufferSelection,
+    setGroupsBufferSelection,
     setChangeOwnerDialogVisible,
     selectUser,
   } = props;
+
   const location = useLocation();
+  const { groupId } = useParams();
 
   useEffect(() => {
     window.addEventListener("mousedown", onMouseDown);
@@ -41,6 +72,7 @@ const SectionBodyContent = (props) => {
     if (
       (e.target.closest(".scroll-body") &&
         !e.target.closest(".user-item") &&
+        !e.target.closest(".group-item") &&
         !e.target.closest(".not-selectable") &&
         !e.target.closest(".info-panel") &&
         !e.target.closest(".table-container_group-menu")) ||
@@ -48,48 +80,64 @@ const SectionBodyContent = (props) => {
       e.target.closest(".add-button") ||
       e.target.closest(".search-input-block")
     ) {
-      setSelection([]);
-      setBufferSelection(null);
+      setPeopleSelection([]);
+      setGroupsSelection([]);
+      setPeopleBufferSelection(null);
+      setGroupsBufferSelection(null);
       window?.getSelection()?.removeAllRanges();
     }
   };
 
+  useEffect(() => {
+    window.addEventListener("mousedown", onMouseDown);
+    if (location?.state?.openChangeOwnerDialog)
+      setChangeOwnerDialogVisible(true);
+
+    return () => window.removeEventListener("mousedown", onMouseDown);
+  }, []);
+
   return (
-    <Consumer>
-      {(context) =>
-        accountsViewAs === "table" ? (
-          <>
-            <TableView sectionWidth={context.sectionWidth} tReady={tReady} />
-          </>
-        ) : (
-          <>
-            <PeopleRowContainer
-              sectionWidth={context.sectionWidth}
-              tReady={tReady}
-            />
-          </>
-        )
-      }
-    </Consumer>
+    <>
+      {location.pathname.includes("/accounts/people") ? (
+        <People />
+      ) : !groupId ? (
+        <Groups />
+      ) : (
+        <InsideGroup />
+      )}
+    </>
   );
 };
 
 export default inject(({ peopleStore }) => {
-  const { viewAs: accountsViewAs } = peopleStore;
+  const { viewAs: accountsViewAs, filterStore } = peopleStore;
+  const { isFiltered } = filterStore;
 
-  const { setSelection, setBufferSelection, selectUser } =
-    peopleStore.selectionStore;
+  const {
+    setSelection: setPeopleSelection,
+    setBufferSelection: setPeopleBufferSelection,
+    selectUser,
+  } = peopleStore.selectionStore;
+
+  const {
+    setSelection: setGroupsSelection,
+    setBufferSelection: setGroupsBufferSelection,
+  } = peopleStore.groupsStore;
+
   const { setChangeOwnerDialogVisible } = peopleStore.dialogStore;
 
   return {
     accountsViewAs,
-    setSelection,
-    setBufferSelection,
+    isFiltered,
+    setPeopleSelection,
+    setGroupsSelection,
+    setPeopleBufferSelection,
+    setGroupsBufferSelection,
     setChangeOwnerDialogVisible,
     selectUser,
   };
 })(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    withLoader(observer(SectionBodyContent))()
-  )
+    withLoader(observer(SectionBodyContent))(),
+  ),
 );

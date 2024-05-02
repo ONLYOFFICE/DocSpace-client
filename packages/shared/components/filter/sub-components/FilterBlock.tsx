@@ -1,8 +1,35 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import { useTranslation } from "react-i18next";
 
 import ClearReactSvgUrl from "PUBLIC_DIR/images/clear.react.svg?url";
 
+import GroupsSelector from "../../../selectors/Groups";
 import PeopleSelector from "../../../selectors/People";
 import RoomSelector from "../../../selectors/Room";
 import { FilterGroups, FilterSelectorTypes } from "../../../enums";
@@ -10,21 +37,25 @@ import { FilterBlockLoader } from "../../../skeletons/filter";
 
 import { Backdrop } from "../../backdrop";
 import { Button, ButtonSize } from "../../button";
-import { Heading, HeadingSize } from "../../heading";
+import { Heading, HeadingLevel, HeadingSize } from "../../heading";
 import { IconButton } from "../../icon-button";
 import { Scrollbar } from "../../scrollbar";
 import { Portal } from "../../portal";
 import { TSelectorItem } from "../../selector";
 
 import {
-  StyledFilterBlock,
-  StyledFilterBlockHeader,
-  StyledFilterBlockFooter,
   StyledControlContainer,
   StyledCrossIcon,
+  StyledFilterBlock,
+  StyledFilterBlockFooter,
+  StyledFilterBlockHeader,
 } from "../Filter.styled";
 
 import { FilterBlockProps, TGroupItem, TItem } from "../Filter.types";
+import {
+  removeGroupManagerFilterValueIfNeeded,
+  syncGroupManagerCheckBox,
+} from "../Filter.utils";
 
 import FilterBlockItem from "./FilterBlockItem";
 
@@ -38,6 +69,9 @@ const FilterBlock = ({
   userId,
   isRooms,
   isAccounts,
+  isPeopleAccounts,
+  isGroupsAccounts,
+  isInsideGroup,
 }: FilterBlockProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -53,7 +87,7 @@ const FilterBlock = ({
 
   const [filterData, setFilterData] = React.useState<TItem[]>([]);
   const [filterValues, setFilterValues] = React.useState<TGroupItem[]>([]);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   const setFilterDataFn = (data: TItem[]) => {
     const filterSubject = data.find(
@@ -75,6 +109,8 @@ const FilterBlock = ({
       )
         filterOwner.groupItem[0].isDisabled = !isSelected;
     }
+
+    syncGroupManagerCheckBox(data);
 
     setFilterData(data);
   };
@@ -215,6 +251,8 @@ const FilterBlock = ({
             (item) => "group" in item && item.group !== group,
           );
         }
+
+        value = removeGroupManagerFilterValueIfNeeded(value);
 
         setFilterValues(value);
         changeSelectedItems(value);
@@ -389,11 +427,11 @@ const FilterBlock = ({
   const isEqualFilter = () => {
     let isEqual = true;
 
-    if (
-      filterValues.length === 0 ||
-      selectedFilterValue.length > filterValues.length
-    )
-      return !isEqual;
+    // if (
+    //   filterValues.length === 0 ||
+    //   selectedFilterValue.length > filterValues.length
+    // )
+    //   return !isEqual;
 
     if (
       (selectedFilterValue.length === 0 && filterValues.length > 0) ||
@@ -439,7 +477,7 @@ const FilterBlock = ({
     return !isEqual;
   };
 
-  const showFooter = isEqualFilter();
+  const showFooter = isLoading ? false : isEqualFilter();
 
   const filterBlockComponent = (
     <>
@@ -449,19 +487,40 @@ const FilterBlock = ({
             <PeopleSelector
               withOutCurrentAuthorizedUser
               className="people-selector"
-              isMultiSelect={false}
-              onAccept={selectOption}
-              onBackClick={onArrowClick}
-              headerLabel={selectorLabel}
+              onSubmit={selectOption}
+              submitButtonLabel=""
+              disableSubmitButton={false}
+              withHeader
+              headerProps={{
+                onBackClick: onArrowClick,
+                headerLabel: selectorLabel,
+                withoutBackButton: false,
+              }}
               currentUserId={userId}
+            />
+          ) : showSelector.type === FilterSelectorTypes.groups ? (
+            <GroupsSelector
+              className="group-selector"
+              onSubmit={selectOption}
+              withHeader
+              headerProps={{
+                onBackClick: onArrowClick,
+                headerLabel: selectorLabel,
+                withoutBackButton: false,
+              }}
             />
           ) : (
             <RoomSelector
-              className="people-selector"
+              className="room-selector"
+              onSubmit={selectOption}
+              withHeader
+              headerProps={{
+                onBackClick: onArrowClick,
+                headerLabel: selectorLabel,
+                withoutBackButton: false,
+              }}
               isMultiSelect={false}
-              onAccept={selectOption}
-              onBackClick={onArrowClick}
-              headerLabel={selectorLabel}
+              withSearch
             />
           )}
           <StyledControlContainer onClick={hideFilterBlock}>
@@ -469,9 +528,11 @@ const FilterBlock = ({
           </StyledControlContainer>
         </StyledFilterBlock>
       ) : (
-        <StyledFilterBlock showFooter={showFooter}>
+        <StyledFilterBlock>
           <StyledFilterBlockHeader>
-            <Heading size={HeadingSize.medium}>{filterHeader}</Heading>
+            <Heading size={HeadingSize.medium} level={HeadingLevel.h1}>
+              {filterHeader}
+            </Heading>
             {showFooter && (
               <IconButton
                 id="filter_search-options-clear"
@@ -484,7 +545,13 @@ const FilterBlock = ({
           </StyledFilterBlockHeader>
           <div className="filter-body">
             {isLoading ? (
-              <FilterBlockLoader isRooms={isRooms} isAccounts={isAccounts} />
+              <FilterBlockLoader
+                isRooms={isRooms}
+                isAccounts={isAccounts}
+                isPeopleAccounts={isPeopleAccounts}
+                isGroupsAccounts={isGroupsAccounts}
+                isInsideGroup={isInsideGroup}
+              />
             ) : (
               <Scrollbar className="filter-body__scrollbar">
                 {filterData.map((item: TItem, index) => {
@@ -507,25 +574,26 @@ const FilterBlock = ({
               </Scrollbar>
             )}
           </div>
-          {showFooter && (
-            <StyledFilterBlockFooter>
-              <Button
-                id="filter_apply-button"
-                size={ButtonSize.normal}
-                primary
-                label={t("Common:ApplyButton")}
-                scale
-                onClick={onFilterAction}
-              />
-              <Button
-                id="filter_cancel-button"
-                size={ButtonSize.normal}
-                label={t("Common:CancelButton")}
-                scale
-                onClick={hideFilterBlock}
-              />
-            </StyledFilterBlockFooter>
-          )}
+
+          <StyledFilterBlockFooter>
+            <Button
+              id="filter_apply-button"
+              size={ButtonSize.normal}
+              primary
+              label={t("Common:ApplyButton")}
+              scale
+              onClick={onFilterAction}
+              isDisabled={!showFooter}
+            />
+            <Button
+              id="filter_cancel-button"
+              size={ButtonSize.normal}
+              label={t("Common:CancelButton")}
+              scale
+              onClick={hideFilterBlock}
+              isDisabled={isLoading}
+            />
+          </StyledFilterBlockFooter>
 
           <StyledControlContainer id="filter_close" onClick={hideFilterBlock}>
             <StyledCrossIcon />

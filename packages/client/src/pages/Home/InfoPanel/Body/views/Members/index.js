@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -5,22 +31,24 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import { LINKS_LIMIT_COUNT } from "@docspace/shared/constants";
-import Loaders from "@docspace/common/components/Loaders";
+import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import MembersHelper from "../../helpers/MembersHelper";
 import MembersList from "./sub-components/MembersList";
 import User from "./User";
-import PublicRoomBar from "./sub-components/PublicRoomBar";
-import { LinksBlock, StyledLinkRow } from "./sub-components/StyledPublicRoom";
+import PublicRoomBar from "@docspace/shared/components/public-room-bar";
+import { LinksBlock, StyledLinkRow } from "./sub-components/Styled";
+import EmptyContainer from "./sub-components/EmptyContainer";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
+import { isDesktop } from "@docspace/shared/utils";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
-import PlusReactSvgUrl from "PUBLIC_DIR/images/actions.button.plus.react.svg?url";
+import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 
 import { Avatar } from "@docspace/shared/components/avatar";
-import copy from "copy-to-clipboard";
+import { copyShareLink } from "@docspace/shared/utils/copy";
 import LinkRow from "./sub-components/LinkRow";
 
 const Members = ({
@@ -44,50 +72,67 @@ const Members = ({
   withPublicRoomBlock,
   fetchMembers,
   membersIsLoading,
+  searchValue,
+  searchResultIsLoading,
 }) => {
+  const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
 
   const updateInfoPanelMembers = async () => {
-    if (!infoPanelSelection) return;
-    const fetchedMembers = await fetchMembers(t);
+    if (
+      !infoPanelSelection ||
+      !infoPanelSelection.isRoom ||
+      !infoPanelSelection.id
+    ) {
+      return;
+    }
+
+    const fetchedMembers = await fetchMembers(t, true, withoutTitlesAndLinks);
     setInfoPanelMembers(fetchedMembers);
   };
 
   useEffect(() => {
     updateInfoPanelMembers();
-  }, [infoPanelSelection]);
+  }, [infoPanelSelection, searchValue]);
 
   const loadNextPage = async () => {
     const roomId = infoPanelSelection.id;
-    const fetchedMembers = await fetchMembers(t, false);
-    const { users, administrators, expected } = fetchedMembers;
+    const fetchedMembers = await fetchMembers(t, false, withoutTitlesAndLinks);
+    const { users, administrators, expected, groups } = fetchedMembers;
 
     const newMembers = {
       roomId: roomId,
       administrators: [...infoPanelMembers.administrators, ...administrators],
       users: [...infoPanelMembers.users, ...users],
       expected: [...infoPanelMembers.expected, ...expected],
+      groups: [...infoPanelMembers.groups, ...groups],
     };
 
     setInfoPanelMembers(newMembers);
   };
 
-  if (membersIsLoading) return <Loaders.InfoPanelViewLoader view="members" />;
+  if (membersIsLoading) return <InfoPanelViewLoader view="members" />;
   else if (!infoPanelMembers) return <></>;
 
   const [currentMember] = infoPanelMembers.administrators.filter(
-    (member) => member.id === selfId
+    (member) => member.id === selfId,
   );
 
-  const { administrators, users, expected } = infoPanelMembers;
+  const { administrators, users, expected, groups } = infoPanelMembers;
 
-  const membersList = [...administrators, ...users, ...expected];
+  const membersList = [...administrators, ...groups, ...users, ...expected];
 
   const adminsTitleCount = administrators.length ? 1 : 0;
   const usersTitleCount = users.length ? 1 : 0;
   const expectedTitleCount = expected.length ? 1 : 0;
+  const groupsTitleCount = groups.length ? 1 : 0;
 
-  const headersCount = adminsTitleCount + usersTitleCount + expectedTitleCount;
+  const headersCount = withoutTitlesAndLinks
+    ? 0
+    : adminsTitleCount +
+      usersTitleCount +
+      expectedTitleCount +
+      groupsTitleCount;
 
   const onAddNewLink = async () => {
     if (isPublicRoom || primaryLink) {
@@ -96,7 +141,7 @@ const Members = ({
     } else {
       getPrimaryLink(infoPanelSelection.id).then((link) => {
         setExternalLink(link);
-        copy(link.sharedTo.shareLink);
+        copyShareLink(link.sharedTo.shareLink);
         toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
       });
     }
@@ -104,19 +149,19 @@ const Members = ({
 
   const publicRoomItems = [];
 
-  if (isPublicRoomType && withPublicRoomBlock) {
+  if (isPublicRoomType && withPublicRoomBlock && !withoutTitlesAndLinks) {
     if (!isArchiveFolder || primaryLink) {
       publicRoomItems.push(
         <LinksBlock key="general-link_header">
           <Text fontSize="14px" fontWeight={600}>
-            {t("Files:SharedLinks")}
+            {t("Common:SharedLinks")}
           </Text>
 
           {!isArchiveFolder && (
             <div
               data-tooltip-id="emailTooltip"
               data-tooltip-content={t(
-                "Files:MaximumNumberOfExternalLinksCreated"
+                "Common:MaximumNumberOfExternalLinksCreated",
               )}
             >
               <IconButton
@@ -130,7 +175,7 @@ const Members = ({
 
               {additionalLinks.length >= LINKS_LIMIT_COUNT && (
                 <Tooltip
-                  float
+                  float={isDesktop()}
                   id="emailTooltip"
                   getContent={({ content }) => (
                     <Text fontSize="12px">{content}</Text>
@@ -140,41 +185,43 @@ const Members = ({
               )}
             </div>
           )}
-        </LinksBlock>
+        </LinksBlock>,
       );
     }
 
-    if (primaryLink) {
+    if (primaryLink && !withoutTitlesAndLinks) {
       publicRoomItems.push(
         <LinkRow
           key="general-link"
           link={primaryLink}
           setIsScrollLocked={setIsScrollLocked}
-        />
+        />,
       );
     }
 
-    if (additionalLinks.length) {
+    if (additionalLinks.length && !withoutTitlesAndLinks) {
       additionalLinks.map((link) => {
         publicRoomItems.push(
           <LinkRow
             link={link}
             key={link?.sharedTo?.id}
             setIsScrollLocked={setIsScrollLocked}
-          />
+          />,
         );
       });
-    } else if (!isArchiveFolder && !primaryLink) {
+    } else if (!isArchiveFolder && !primaryLink && !withoutTitlesAndLinks) {
       publicRoomItems.push(
         <StyledLinkRow
           key="create-additional-link"
           className="additional-link"
           onClick={onAddNewLink}
         >
-          <Avatar size="min" source={PlusReactSvgUrl} />
+          <div className="create-link-icon">
+            <IconButton size={12} iconName={PlusIcon} isDisabled />
+          </div>
 
           <Link
-            isHovered
+            noHover
             type="action"
             fontSize="14px"
             fontWeight={600}
@@ -182,14 +229,20 @@ const Members = ({
           >
             {t("Files:CreateNewLink")}
           </Link>
-        </StyledLinkRow>
+        </StyledLinkRow>,
       );
     }
   }
 
   const showPublicRoomBar =
-    ((primaryLink && !isArchiveFolder) || isPublicRoom) && withPublicRoomBlock;
+    ((primaryLink && !isArchiveFolder) || isPublicRoom) &&
+    withPublicRoomBlock &&
+    !withoutTitlesAndLinks;
   const publicRoomItemsLength = publicRoomItems.length;
+
+  if (!membersList.length) {
+    return <EmptyContainer />;
+  }
 
   return (
     <>
@@ -202,7 +255,10 @@ const Members = ({
 
       <MembersList
         loadNextPage={loadNextPage}
-        hasNextPage={membersList.length - headersCount < membersFilter.total}
+        hasNextPage={
+          membersList.length - headersCount < membersFilter.total &&
+          !searchResultIsLoading
+        }
         itemCount={membersFilter.total + headersCount + publicRoomItemsLength}
         showPublicRoomBar={showPublicRoomBar}
         linksBlockLength={publicRoomItemsLength}
@@ -247,6 +303,8 @@ export default inject(
       fetchMembers,
       membersIsLoading,
       withPublicRoomBlock,
+      searchValue,
+      searchResultIsLoading,
     } = infoPanelStore;
     const { membersFilter } = filesStore;
     const { id: selfId, isAdmin } = userStore.user;
@@ -280,17 +338,17 @@ export default inject(
       isArchiveFolder: isArchiveFolderRoot,
       isPublicRoom,
       additionalLinks: additionalLinks,
-      isArchiveFolder: isArchiveFolderRoot,
       setLinkParams,
       setEditLinkPanelIsVisible,
-      primaryLink,
       getPrimaryLink: filesStore.getPrimaryLink,
       setExternalLink,
       withPublicRoomBlock,
       fetchMembers,
       membersIsLoading,
+      searchValue,
+      searchResultIsLoading,
     };
-  }
+  },
 )(
   withTranslation([
     "InfoPanel",
@@ -300,5 +358,5 @@ export default inject(
     "PeopleTranslations",
     "Settings",
     "CreateEditRoomDialog",
-  ])(observer(Members))
+  ])(observer(Members)),
 );

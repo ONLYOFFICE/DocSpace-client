@@ -1,9 +1,43 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import axios from "axios";
 import { makeAutoObservable } from "mobx";
+
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { LinkType, ValidationStatus } from "../helpers/constants";
+import {
+  frameCallCommand,
+  isPublicRoom as isPublicRoomUtil,
+} from "@docspace/shared/utils/common";
+
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+
+import { LinkType, ValidationStatus } from "../helpers/constants";
 
 class PublicRoomStore {
   externalLinks = [];
@@ -16,9 +50,17 @@ class PublicRoomStore {
   isLoaded = false;
   isLoading = false;
 
-  constructor() {
+  clientLoadingStore;
+
+  constructor(clientLoadingStore) {
+    this.clientLoadingStore = clientLoadingStore;
     makeAutoObservable(this);
   }
+
+  setIsSectionLoading = (param) => {
+    this.clientLoadingStore?.setIsSectionFilterLoading(param);
+    this.clientLoadingStore?.setIsSectionBodyLoading(param);
+  };
 
   setIsLoading = (isLoading) => {
     this.isLoading = isLoading;
@@ -33,6 +75,65 @@ class PublicRoomStore {
     this.roomType = roomType;
 
     if (status === ValidationStatus.Ok) this.isLoaded = true;
+  };
+
+  fetchPublicRoom = (fetchFiles) => {
+    let filterObj = FilesFilter.getFilter(window.location);
+
+    if (!filterObj) return;
+
+    if (filterObj.folder === "@my") {
+      filterObj.folder = this.roomId;
+    }
+
+    this.setIsSectionLoading(true);
+
+    let dataObj = { filter: filterObj };
+
+    if (filterObj && filterObj.authorType) {
+      const authorType = filterObj.authorType;
+      const indexOfUnderscore = authorType.indexOf("_");
+      const type = authorType.slice(0, indexOfUnderscore);
+      const itemId = authorType.slice(indexOfUnderscore + 1);
+
+      if (itemId) {
+        dataObj = {
+          type,
+          itemId,
+          filter: filterObj,
+        };
+      } else {
+        filterObj.authorType = null;
+        dataObj = { filter: filterObj };
+      }
+    }
+
+    if (!dataObj) return;
+
+    const { filter } = dataObj;
+    const newFilter = filter ? filter.clone() : FilesFilter.getDefault();
+    const requests = [Promise.resolve(newFilter)];
+
+    return axios
+      .all(requests)
+      .catch((err) => {
+        Promise.resolve(FilesFilter.getDefault());
+      })
+      .then((data) => {
+        const filter = data[0];
+
+        if (filter) {
+          const folderId = filter.folder;
+          return fetchFiles(folderId, filter);
+        }
+
+        return Promise.resolve();
+      })
+      .finally(() => {
+        this.setIsSectionLoading(false);
+
+        frameCallCommand("setIsLoaded");
+      });
   };
 
   fetchExternalLinks = (roomId) => {
@@ -50,7 +151,7 @@ class PublicRoomStore {
 
     if (link) {
       const linkIndex = externalLinks.findIndex(
-        (l) => l.sharedTo.id === linkId
+        (l) => l.sharedTo.id === linkId,
       );
       externalLinks[linkIndex] = link;
     } else {
@@ -62,7 +163,7 @@ class PublicRoomStore {
 
   setExternalLink = (link) => {
     const linkIndex = this.externalLinks.findIndex(
-      (l) => l.sharedTo.id === link.sharedTo.id
+      (l) => l.sharedTo.id === link.sharedTo.id,
     );
     const externalLinks = this.externalLinks;
 
@@ -95,7 +196,7 @@ class PublicRoomStore {
       linkType,
       password,
       disabled,
-      denyDownload
+      denyDownload,
     );
   };
 
@@ -123,7 +224,7 @@ class PublicRoomStore {
   };
 
   get isPublicRoom() {
-    return this.isLoaded && window.location.pathname === "/rooms/share";
+    return this.isLoaded && isPublicRoomUtil();
   }
 
   get roomLinks() {
@@ -132,7 +233,7 @@ class PublicRoomStore {
         (l) =>
           l.sharedTo.shareLink &&
           !l.sharedTo.isTemplate &&
-          l.sharedTo.linkType === LinkType.External
+          l.sharedTo.linkType === LinkType.External,
       );
     } else {
       return [];

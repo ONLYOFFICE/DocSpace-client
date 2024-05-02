@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2010-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 const Endpoints = require("./mocking/endpoints.js");
 const changeCulture = require("./helpers/changeCulture.js");
 const config = require("../../../../../buildtools/config/appsettings.json");
@@ -7,13 +33,7 @@ const isModel = !!process.env.MODEL;
 
 const cultures = isModel ? ["en"] : config.web.cultures.split(",");
 
-const isPersonal = !!process.env.PERSONAL;
-
-const settingsFile = isPersonal ? `settingsPersonal` : `settings`;
-
-const settingsTranslationFile = isPersonal
-  ? `settingsTranslationPersonal`
-  : `settingsTranslation`;
+const settingsTranslationFile = `settingsTranslation`;
 
 const featureName = isModel
   ? `Files translation(model) `
@@ -23,15 +43,11 @@ Feature(featureName, { timeout: 90 });
 
 Before(async ({ I }) => {
   I.mockData();
-  if (isPersonal) {
-    I.mockEndpoint(Endpoints.settings, settingsFile);
-    I.mockEndpoint(Endpoints.root, "personal");
-  }
 });
 
 for (const culture of cultures) {
   Scenario(`Main page test ${culture}`, { timeout: 30 }, ({ I }) => {
-    changeCulture(culture, isPersonal);
+    changeCulture(culture);
     const isException = ignoringCultures.mainPage.indexOf(culture) != -1;
     I.mockEndpoint(Endpoints.my, "default");
     if (!isException) {
@@ -50,7 +66,7 @@ for (const culture of cultures) {
   });
 
   Scenario(`Profile menu test ${culture}`, { timeout: 30 }, ({ I }) => {
-    changeCulture(culture, isPersonal);
+    changeCulture(culture);
     const isException = ignoringCultures.profileMenu.indexOf(culture) != -1;
     I.mockEndpoint(Endpoints.my, "default");
     if (!isException) {
@@ -69,7 +85,7 @@ for (const culture of cultures) {
   });
 
   Scenario(`Main button test ${culture}`, { timeout: 30 }, ({ I }) => {
-    changeCulture(culture, isPersonal);
+    changeCulture(culture);
     const isException = ignoringCultures.mainButton.indexOf(culture) != -1;
     I.mockEndpoint(Endpoints.my, "default");
     if (!isException) {
@@ -110,7 +126,7 @@ for (const culture of cultures) {
   });
 
   Scenario(`Add button test ${culture}`, { timeout: 30 }, ({ I }) => {
-    changeCulture(culture, isPersonal);
+    changeCulture(culture);
     const isException = ignoringCultures.addButton.indexOf(culture) != -1;
     I.mockEndpoint(Endpoints.my, "default");
     if (!isException) {
@@ -133,7 +149,7 @@ for (const culture of cultures) {
   });
 
   Scenario(`Sort menu test ${culture}`, { timeout: 30 }, ({ I }) => {
-    changeCulture(culture, isPersonal);
+    changeCulture(culture);
     const isException = ignoringCultures.sortMenu.indexOf(culture) != -1;
     I.mockEndpoint(Endpoints.my, "default");
     if (!isException) {
@@ -157,7 +173,7 @@ for (const culture of cultures) {
   });
 
   Scenario(`Filter block test ${culture}`, { timeout: 30 }, ({ I }) => {
-    changeCulture(culture, isPersonal);
+    changeCulture(culture);
     const isException = ignoringCultures.filterBlock.indexOf(culture) != -1;
     I.mockEndpoint(Endpoints.my, "default");
     if (!isException) {
@@ -179,7 +195,7 @@ for (const culture of cultures) {
   });
 
   Scenario(`Context menu test ${culture}`, { timeout: 30 }, ({ I }) => {
-    changeCulture(culture, isPersonal);
+    changeCulture(culture);
     const isException = ignoringCultures.contextMenu.indexOf(culture) != -1;
     I.mockEndpoint(Endpoints.my, "default");
     if (!isException) {

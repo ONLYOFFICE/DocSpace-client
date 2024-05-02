@@ -1,4 +1,5 @@
 {
+  "AccountWillBeCreated": "Uma conta DocSpace será criada para <1>{{email}}</1>. Por favor, complete seu cadastro:",
   "ChangePasswordSuccess": "A palavra-chave foi alterada com êxito",
   "ConfirmOwnerPortalSuccessMessage": "O proprietário do DocSpace foi alterado com êxito. Será reencaminhado dentro de 10 segundos.",
   "ConfirmOwnerPortalTitle": "Por favor, confirme que quer alterar o proprietário do DocSpace para {{newOwner}}.",
@@ -14,7 +15,6 @@
   "EnterCodePlaceholder": "Inserir código",
   "EnterPhone": "Digite o número de telemóvel",
   "GetCode": "Obter código",
-  "InviteTitle": "Convidamos-lhe a juntar-se a este espaço!",
   "LoginRegistryButton": "Juntar-se",
   "PassworResetTitle": "Agora pode criar uma nova palavra-chave.",
   "PhoneSubtitle": "A autenticação de dois fatores está ativa para fornecer maior segurança. Introduza o seu número de telemóvel para continuar a trabalhar no DocSpace. O número de telemóvel tem de ser introduzido utilizando o formato internacional com o código do país.",
@@ -26,12 +26,8 @@
   "SetAppDescription": "A autenticação de dois-fatores está ativada. Configure a sua aplicação de autenticação para continuar a trabalhar no DocSpace. Pode utilizar a autenticação da Google para <1>Android</1> e <4>iOS</4> ou um autenticador para <8>Windows Phone</8>.",
   "SetAppInstallDescription": "Para ligar a app, faça scan ao código QR ou insira manualmente a sua chave secreta <1>{{ secretKey }}</1>, e depois insira o código de 6 dígitos fornecido pela sua app no campo abaixo.",
   "SetAppTitle": "Configure a sua aplicação de autenticação",
+  "SignUp": "Inscrever-se",
   "SuccessDeactivate": "A sua conta foi desativada com êxito. Em 10 segundos será redirecionado para o <1>site</1>.",
   "SuccessReactivate": "A sua conta foi reativada com sucesso. Em 10 segundos será redirecionado para o <1>portal</1>.",
-  "SuccessRemoved": "A sua conta foi removida com êxito. Em 10 segundos será redirecionado(a) para o <1>site</1>.",
-  "WelcomeRegister": "Para começar cadastre-se",
-  "WelcomeRegisterViaSocial": "Para começar cadastre-se ou faça login através das redes sociais",
-  "WelcomeRegisterViaSSO": "Para começar, registre-se ou faça login via SSO",
-  "WelcomeToDocspace": "Bem-vindo ao nosso DocSpace!",
-  "WelcomeToRoom": "Bem-vindo à sala <1>{{ roomName }}</1>!"
+  "SuccessRemoved": "A sua conta foi removida com êxito. Em 10 segundos será redirecionado(a) para o <1>site</1>."
 }

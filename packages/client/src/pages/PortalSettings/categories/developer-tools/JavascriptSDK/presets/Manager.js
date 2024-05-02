@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { useState, useEffect, useRef, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import debounce from "lodash.debounce";
@@ -20,8 +46,12 @@ import { isTablet, isMobile } from "@docspace/shared/utils/device";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
+import CodeBlock from "../sub-components/CodeBlock";
 import { Button } from "@docspace/shared/components/button";
 import { TooltipContent } from "../sub-components/TooltipContent";
+import { useNavigate } from "react-router-dom";
+import { Link } from "@docspace/shared/components/link";
+import FilesFilter from "@docspace/shared/api/files/filter";
 
 import LeftMenuUrl from "PUBLIC_DIR/images/sdk-presets_left-menu.react.svg?url";
 import TitleUrl from "PUBLIC_DIR/images/sdk-presets_title.react.svg?url";
@@ -29,12 +59,12 @@ import ColumnsUrl from "PUBLIC_DIR/images/sdk-presets_columns.react.svg?url";
 import ActionButtonUrl from "PUBLIC_DIR/images/sdk-presets_action-button.react.svg?url";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
 import HeaderUrl from "PUBLIC_DIR/images/sdk-presets_header.react.svg?url";
-import LeftMenuDarkUrl from "PUBLIC_DIR/images/sdk-presets_left-menu_dark.react.svg?url";
-import TitleDarkUrl from "PUBLIC_DIR/images/sdk-presets_title_dark.react.svg?url";
-import ColumnsDarkUrl from "PUBLIC_DIR/images/sdk-presets_columns_dark.react.svg?url";
-import ActionButtonDarkUrl from "PUBLIC_DIR/images/sdk-presets_action-button_dark.react.svg?url";
-import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.react.svg?url";
-import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.react.svg?url";
+import LeftMenuDarkUrl from "PUBLIC_DIR/images/sdk-presets_left-menu_dark.png?url";
+import TitleDarkUrl from "PUBLIC_DIR/images/sdk-presets_title_dark.png?url";
+import ColumnsDarkUrl from "PUBLIC_DIR/images/sdk-presets_columns_dark.png?url";
+import ActionButtonDarkUrl from "PUBLIC_DIR/images/sdk-presets_action-button_dark.png?url";
+import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
+import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 
 const showPreviewThreshold = 720;
 
@@ -98,8 +128,7 @@ const showPreviewThreshold = 720;
 
 //   text-overflow: ellipsis;
 //   overflow: hidden;
-//   font-size: ${(props) =>
-//     props.theme.getCorrectFontSize(props.primary ? "14px" : props.info ? "11px" : "12px")};
+//   font-size: ${(props) => props.primary ? "14px" : props.info ? "11px" : "12px"};
 //   font-weight: ${(props) => (props.primary || props.info ? "600" : "400")};
 
 //   color: ${(props) =>
@@ -135,11 +164,13 @@ import {
 } from "./StyledPresets";
 
 const Manager = (props) => {
-  const { t, setDocumentTitle, fetchExternalLinks, theme } = props;
+  const { t, setDocumentTitle, fetchExternalLinks, theme, currentColorScheme } =
+    props;
+  const navigate = useNavigate();
 
   setDocumentTitle(t("JavascriptSdk"));
 
-  const scriptUrl = `${window.location.origin}/static/scripts/api.js`;
+  const scriptUrl = `${window.location.origin}/static/scripts/sdk/1.0.0/api.js`;
 
   const dataSortBy = [
     { key: "DateAndTime", label: t("Common:LastModifiedDate"), default: true },
@@ -169,6 +200,12 @@ const Manager = (props) => {
     { key: "Owner", label: t("Common:Owner") },
     { key: "Activity", label: t("Files:ByLastModified") },
   ]);
+
+  const settingsTranslations = {
+    password: t("Common:Password").toLowerCase(),
+    denyDownload: t("FileContentCopy").toLowerCase(),
+    expirationDate: t("LimitByTime").toLowerCase(),
+  };
 
   // const roomTypeOptions = [
   //   {
@@ -220,25 +257,32 @@ const Manager = (props) => {
   const [sortBy, setSortBy] = useState(dataSortBy[0]);
   const [sortOrder, setSortOrder] = useState(dataSortOrder[0]);
   const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
-  const [heightDimension, setHeightDimension] = useState(dataDimensions[1]);
+  const [heightDimension, setHeightDimension] = useState(dataDimensions[0]);
   const [width, setWidth] = useState("100");
-  const [height, setHeight] = useState(isTablet() ? "400" : isMobile() ? "206" : "600");
+  const [height, setHeight] = useState("100");
   const [withSubfolders, setWithSubfolders] = useState(false);
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
-  const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);
+  const [showPreview, setShowPreview] = useState(
+    window.innerWidth > showPreviewThreshold,
+  );
   const [sharedLinks, setSharedLinks] = useState(null);
-  const [columnDisplay, setColumnDisplay] = useState(columnDisplayOptions[0].value);
+  const [columnDisplay, setColumnDisplay] = useState(
+    columnDisplayOptions[0].value,
+  );
   const [selectedColumns, setSelectedColumns] = useState([
     { key: "Name", label: t("Common:Name") },
     { key: "Type", label: t("Common:Type") },
     { key: "Tags", label: t("Common:Tags") },
   ]);
+
+  const [selectedLink, setSelectedLink] = useState(null);
+
   // const [filterBy, setFilterBy] = useState({
   //   key: "filter-type-default",
   //   label: t("Common:SelectAction"),
   //   default: true,
   // });
-  const [author, setAuthor] = useState("");
+  // const [author, setAuthor] = useState("");
 
   // const searchRef = useRef();
   // const [searchPanelVisible, setSearchPanelVisible] = useState(false);
@@ -288,10 +332,16 @@ const Manager = (props) => {
 
     const params = objectToGetParams(config);
 
-    loadScript(`${scriptUrl}${params}`, "integration", () => window.DocSpace.SDK.initFrame(config));
+    loadScript(`${scriptUrl}${params}`, "integration", () =>
+      window.DocSpace.SDK.initFrame(config),
+    );
   }, 500);
 
   useEffect(() => {
+    const scroll = document.getElementsByClassName("section-scroll")[0];
+    if (scroll) {
+      scroll.scrollTop = 0;
+    }
     loadFrame();
     return () => destroyFrame();
   });
@@ -325,20 +375,34 @@ const Manager = (props) => {
       if (links.length > 1) {
         const linksOptions = links.map((link) => {
           const { id, title, requestToken } = link.sharedTo;
+          const linkSettings = [];
+
+          if ("password" in link.sharedTo) {
+            linkSettings.push("password");
+          }
+          if ("expirationDate" in link.sharedTo) {
+            linkSettings.push("expirationDate");
+          }
+          if (link.sharedTo.denyDownload) {
+            linkSettings.push("denyDownload");
+          }
 
           return {
             key: id,
             label: title,
             requestToken: requestToken,
+            settings: linkSettings,
           };
         });
 
+        setSelectedLink(linksOptions[0]);
         setSharedLinks(linksOptions);
       }
 
       newConfig.requestToken = links[0].sharedTo?.requestToken;
       newConfig.rootPath = "/rooms/share";
     } else {
+      setSelectedLink(null);
       setSharedLinks(null);
     }
     // setAuthor("");
@@ -352,6 +416,7 @@ const Manager = (props) => {
   };
 
   const onChangeSharedLink = (link) => {
+    setSelectedLink(link);
     setConfig((config) => {
       return { ...config, requestToken: link.requestToken };
     });
@@ -483,15 +548,22 @@ const Manager = (props) => {
     if (!selectedColumns.find((column) => column.key === option.key)) {
       setConfig((config) => ({
         ...config,
-        viewTableColumns: [...selectedColumns, option].map((column) => column.key).join(","),
+        viewTableColumns: [...selectedColumns, option]
+          .map((column) => column.key)
+          .join(","),
       }));
-      setSelectedColumns((prevSelectedColumns) => [...prevSelectedColumns, option]);
+      setSelectedColumns((prevSelectedColumns) => [
+        ...prevSelectedColumns,
+        option,
+      ]);
     }
   };
 
   const deleteSelectedColumn = (option) => {
     setColumnsOptions((prevColumnsOptions) => [option, ...prevColumnsOptions]);
-    const filteredColumns = selectedColumns.filter((column) => column.key !== option.key);
+    const filteredColumns = selectedColumns.filter(
+      (column) => column.key !== option.key,
+    );
     setConfig((config) => ({
       ...config,
       viewTableColumns: filteredColumns.map((column) => column.key).join(","),
@@ -499,9 +571,16 @@ const Manager = (props) => {
     setSelectedColumns(filteredColumns);
   };
 
+  const navigateRoom = (id) => {
+    const filter = FilesFilter.getDefault();
+    filter.folder = id;
+    navigate(`/rooms/shared/${id}/filter?${filter.toUrlParams()}`);
+  };
+
   const onResize = () => {
     const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
-    if (isEnoughWidthForPreview !== showPreview) setShowPreview(isEnoughWidthForPreview);
+    if (isEnoughWidthForPreview !== showPreview)
+      setShowPreview(isEnoughWidthForPreview);
   };
 
   // const onFilterSelect = (option) => {
@@ -637,8 +716,16 @@ const Manager = (props) => {
 
   const preview = (
     <Frame
-      width={width + widthDimension.label}
-      height={height + heightDimension.label}
+      width={
+        config.id !== undefined && widthDimension.label === "px"
+          ? width + widthDimension.label
+          : undefined
+      }
+      height={
+        config.id !== undefined && heightDimension.label === "px"
+          ? height + heightDimension.label
+          : undefined
+      }
       targetId={frameId}
     >
       <Box id={frameId}></Box>
@@ -646,9 +733,21 @@ const Manager = (props) => {
   );
 
   const code = (
-    <CodeWrapper width={width + widthDimension.label} height={height + heightDimension.label}>
-      <CategorySubHeader className="copy-window-code">{t("CopyWindowCode")}</CategorySubHeader>
+    <CodeWrapper height="fit-content">
+      <CategorySubHeader className="copy-window-code">
+        {`HTML ${t("CodeTitle")}`}
+      </CategorySubHeader>
+      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
+        {t("HtmlCodeDescription")}
+      </Text>
       <Textarea value={codeBlock} heightTextArea={153} />
+      <CategorySubHeader className="copy-window-code">
+        {`JavaScript ${t("CodeTitle")}`}
+      </CategorySubHeader>
+      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
+        {t("JavaScriptCodeDescription")}
+      </Text>
+      <CodeBlock config={config} />
     </CodeWrapper>
   );
 
@@ -668,9 +767,9 @@ const Manager = (props) => {
   return (
     <SDKContainer>
       <CategoryDescription>
-        <Text className="sdk-description">{t("ManagerPresetDescription")}</Text>
+        <Text className="sdk-description">{t("CustomDescription")}</Text>
       </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
+      <CategoryHeader>{t("CreateSampleDocSpace")}</CategoryHeader>
       <Container>
         {showPreview && (
           <Preview>
@@ -822,7 +921,7 @@ const Manager = (props) => {
               <LabelGroup>
                 <Checkbox
                   className="checkbox"
-                  label={t("Filter")}
+                  label={t("SearchFilterAndSort")}
                   onChange={onChangeShowFilter}
                   isChecked={config.showFilter}
                 />
@@ -870,22 +969,32 @@ const Manager = (props) => {
                 <HelpButton
                   offsetRight={0}
                   size={12}
-                  tooltipContent={<Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>}
+                  tooltipContent={
+                    <Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>
+                  }
                 />
               </LabelGroup>
               <FilesSelectorInputWrapper>
-                <FilesSelectorInput onSelectFolder={onChangeFolderId} isSelect />
+                <FilesSelectorInput
+                  onSelectFolder={onChangeFolderId}
+                  isSelect
+                />
               </FilesSelectorInputWrapper>
             </ControlsGroup>
             {sharedLinks && (
               <ControlsGroup>
                 <LabelGroup>
-                  <Label className="label" text={t("SharingPanel:ExternalLink")} />
+                  <Label
+                    className="label"
+                    text={t("SharingPanel:ExternalLink")}
+                  />
                   <HelpButton
                     offsetRight={0}
                     size={12}
                     tooltipContent={
-                      <Text fontSize="12px">{t("CreateEditRoomDialog:PublicRoomDescription")}</Text>
+                      <Text fontSize="12px">
+                        {t("CreateEditRoomDialog:PublicRoomDescription")}
+                      </Text>
                     }
                   />
                 </LabelGroup>
@@ -893,10 +1002,86 @@ const Manager = (props) => {
                   scaled={true}
                   onSelect={onChangeSharedLink}
                   options={sharedLinks}
-                  selectedOption={sharedLinks[0]}
+                  selectedOption={selectedLink}
                   displaySelectedOption
                   directionY="bottom"
                 />
+
+                {selectedLink && selectedLink.settings.length === 1 ? (
+                  <div>
+                    <Text
+                      className="linkHelp"
+                      fontSize="12px"
+                      lineHeight="16px"
+                    >
+                      {t("LinkSetDescription", {
+                        parameter:
+                          settingsTranslations[selectedLink.settings[0]],
+                      })}
+                    </Text>
+                    <Link
+                      color={currentColorScheme?.main?.accent}
+                      fontSize="12px"
+                      lineHeight="16px"
+                      onClick={() => navigateRoom(config.id)}
+                    >
+                      {" "}
+                      {t("GoToRoom")}.
+                    </Link>
+                  </div>
+                ) : selectedLink.settings.length === 2 ? (
+                  <div>
+                    <Text
+                      className="linkHelp"
+                      fontSize="12px"
+                      lineHeight="16px"
+                    >
+                      {t("LinkSetDescription2", {
+                        parameter1:
+                          settingsTranslations[selectedLink.settings[0]],
+                        parameter2:
+                          settingsTranslations[selectedLink.settings[1]],
+                      })}
+                    </Text>
+                    <Link
+                      color={currentColorScheme?.main?.accent}
+                      fontSize="12px"
+                      lineHeight="16px"
+                      onClick={() => navigateRoom(config.id)}
+                    >
+                      {" "}
+                      {t("GoToRoom")}.
+                    </Link>
+                  </div>
+                ) : selectedLink.settings.length === 3 ? (
+                  <div>
+                    <Text
+                      className="linkHelp"
+                      fontSize="12px"
+                      lineHeight="16px"
+                    >
+                      {t("LinkSetDescription3", {
+                        parameter1:
+                          settingsTranslations[selectedLink.settings[0]],
+                        parameter2:
+                          settingsTranslations[selectedLink.settings[1]],
+                        parameter3:
+                          settingsTranslations[selectedLink.settings[2]],
+                      })}
+                    </Text>
+                    <Link
+                      color={currentColorScheme?.main?.accent}
+                      fontSize="12px"
+                      lineHeight="16px"
+                      onClick={() => navigateRoom(config.id)}
+                    >
+                      {" "}
+                      {t("GoToRoom")}.
+                    </Link>
+                  </div>
+                ) : (
+                  <></>
+                )}
               </ControlsGroup>
             )}
           </ControlsSection>
@@ -905,10 +1090,10 @@ const Manager = (props) => {
             {/* <ControlsGroup>
             {"id" in config ? (
               <>
-                <Label className="label" text={t("File Filter")} />
+                <Label className="label" text={t("Files:Filter")} />
                 <ToggleButton
                   className="toggle"
-                  label="Author"
+                  label={t("Files:ByAuthor")}
                   onChange={toggleAuthor}
                   isChecked={isUserFilterSet}
                 />
@@ -918,7 +1103,7 @@ const Manager = (props) => {
                       <TextInput
                         scale
                         onChange={onChangeAuthor}
-                        placeholder={"Search by name or email"}
+                        placeholder={t("Common:Search")}
                         value={author}
                         onFocus={openInviteInputPanel}
                         isAutoFocussed
@@ -944,7 +1129,7 @@ const Manager = (props) => {
                 )}
                 <ToggleButton
                   className="toggle"
-                  label="Type"
+                  label={t("Common:Type")}
                   onChange={(e) => {
                     if (!e.target.checked) {
                       const filtered = { ...config.filter };
@@ -968,10 +1153,10 @@ const Manager = (props) => {
               </>
             ) : (
               <>
-                <Label className="label" text={t("Room Filter")} />
+                <Label className="label" text={t("Files:Filter")} />
                 <ToggleButton
                   className="toggle"
-                  label="Member"
+                  label={t("Common:Member")}
                   onChange={toggleMembers}
                   isChecked={isUserFilterSet}
                 />
@@ -993,7 +1178,7 @@ const Manager = (props) => {
                           <TextInput
                             scale
                             onChange={onChangeAuthor}
-                            placeholder={"Search by name or email"}
+                            placeholder={t("Common:Search")}
                             value={author}
                             onFocus={openInviteInputPanel}
                             isAutoFocussed
@@ -1020,7 +1205,7 @@ const Manager = (props) => {
 
                     <Checkbox
                       className="checkbox"
-                      label={"Search by Owners"}
+                      label={t("Translations:SearchByOwner")}
                       onChange={(e) => {
                         setConfig((config) => ({
                           ...config,
@@ -1033,7 +1218,7 @@ const Manager = (props) => {
                 )}
                 <ToggleButton
                   className="toggle"
-                  label="Type"
+                  label={t("Common:Type")}
                   onChange={(e) => {
                     if (!e.target.checked) {
                       const filtered = { ...config.filter };
@@ -1120,7 +1305,9 @@ const Manager = (props) => {
                 <HelpButton
                   offsetRight={0}
                   size={12}
-                  tooltipContent={<Text fontSize="12px">{t("ItemsCountDescription")}</Text>}
+                  tooltipContent={
+                    <Text fontSize="12px">{t("ItemsCountDescription")}</Text>
+                  }
                 />
               </LabelGroup>
               <TextInput
@@ -1213,13 +1400,14 @@ const Manager = (props) => {
 
 export default inject(({ authStore, settingsStore, publicRoomStore }) => {
   const { setDocumentTitle } = authStore;
-  const { theme } = settingsStore;
+  const { theme, currentColorScheme } = settingsStore;
   const { fetchExternalLinks } = publicRoomStore;
 
   return {
     theme,
     setDocumentTitle,
     fetchExternalLinks,
+    currentColorScheme,
   };
 })(
   withTranslation([

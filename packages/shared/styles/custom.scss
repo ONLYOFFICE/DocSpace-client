@@ -1,0 +1,98 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+// Override default variables before the import
+$font-family-base: "Open Sans", sans-serif;
+
+@import url(../../../public/css/fonts.css);
+
+html,
+body {
+  height: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-text-size-adjust: none;
+  overscroll-behavior: none;
+}
+#root {
+  min-height: 100%;
+  position: relative;
+  .pageLoader {
+    position: fixed;
+    inset-inline-start: calc(50% - 20px);
+    top: 35%;
+  }
+}
+
+.table-container_settings-checkbox {
+  padding: 8px 16px;
+}
+
+.hide-filter-drop-down {
+  padding: 16px !important;
+  margin-top: 2px;
+}
+
+.styled-close-button {
+  margin-inline-start: 7px;
+  margin-top: -1px;
+}
+
+.styled-combobox {
+  margin-top: -2px;
+}
+
+body {
+  margin: 0;
+}
+body.loading * {
+  cursor: wait !important;
+}
+body.drag-cursor * {
+  cursor:
+    url('data:image/svg+xml;utf8,<svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="20" height="23" fill="url(%23pattern0)"/><defs><pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1"><use xlink:href="%23image0" transform="scale(0.05 0.0434783)"/></pattern><image id="image0" width="20" height="23" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAXCAYAAAALHW+jAAABS2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxMzggNzkuMTU5ODI0LCAyMDE2LzA5LzE0LTAxOjA5OjAxICAgICAgICAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+IEmuOgAAAzhJREFUOI2VlT1PI1cUhp/58DgZbMAOi2AcQZMFCSHREK3EKsoWNDRYCIkum7+Qf0BP4Y4K8QfSEtEgpUoatLuRiyDxUcSI2JKF8JCZAeyZe08Kj5GxTNgc6ejcO3Puc99zr86M4XkeqRmA05u4rvvGsqxfAEZGRt7Ytl3XWsv09JSampqODMNARNjb26PfjFKpBICIvLJt+1OhUMg+PDzI0tKSu7+/nxMR1tfXI9/3FcDd3d3p2dnZW0AAnUbpAc0+uOV53tfHx8evKpXK5P39fS6Xy5HP54njeOTg4GD06OhoNAzDb7LZ7DiQBay0MoYBtWVZHcdxGB8fJ45jAIIgwDRNSqUSExMTOI4zOjk5+cfY2NjrYVDTskyM7rSptRYA3/cJw/BxpyAIaLV8zs/PmZubsw4PD0srKys/z8/PfwtkUmEGgKm1RmtZAFZFuoqz2SzFYvERWCwWMc3uro7jsLi4yO7u7usgCH4F3CdKZ2dnv9vY2EjW1tZkZeWtxHEsnU5HfN8XERGttbRaLVFKSZIkcnNzIyIiFxcX4nleAswCXwFfACYLCwsiIhJFkbx7973c3t7K51i1WhXP80JgHigBecA2RaQDEIYhImAYTy7tWUvzjPQMM72Sba11W0ScKIqo1WokSYKI/BcLABHp5Rl9ji2iieMY13Upl8vYto3W+kVg9zKf5AmAnSQqD1AoFNjZ2QFAKfUiMJfLoZRyB5+blmX9Vq1WlVKK/+OXl5dxkiR/DQINIDMzM9M5OTl5UVXParUam5ubf56env4oIg9ACPjAnWlZlrRard8/fPj42eoymQyNRiMnIgpQQJJGbSqldBAEq+/f//D31dWVvASL45hms6kdx6mnkBhop1AxK5WKBpJ6vb66tbWVDIFI6iilCMOQcrlcv76+/qkPGKdjsbe3twG01rrRaNQz7XZ72Dl3B4ZBs9nE9303bYgeMCH9NtpRFGGapga+DMPoZnl52emDPGkbwzBQSiEi1ykg6VOnBxf0fgEuMJpG+5mLlhR0B/yTxpiBBdJXwn06t54Bkqp7SPMfW2ZQgQY6Kaw9WPKQ3F7Jj80/uKDX5OaQd89Bpc/5F/DGMQusl3V8AAAAAElFTkSuQmCC"/></defs></svg>')
+      6 6,
+    auto !important;
+}
+body.desktop {
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  mozuserselect: none;
+}
+#snackbar {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  width: calc(100vw - 60px);
+  padding: 30px;
+  bottom: 15px;
+}
+
+#bit-notification-bar-spacer {
+  height: 0px !important;
+}

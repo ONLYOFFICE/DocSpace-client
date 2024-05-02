@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -7,6 +33,7 @@ import { DeviceType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
 import { isArrayEqual } from "@docspace/shared/utils";
+import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
@@ -19,7 +46,7 @@ import {
 } from "../../../utils";
 
 import { ArticleItem } from "@docspace/shared/components/article-item";
-import LoaderArticleBody from "./loaderArticleBody";
+import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -37,6 +64,7 @@ const ArticleBodyContent = (props) => {
     currentDeviceType,
     isProfileLoading,
     limitedAccessSpace,
+    currentColorScheme,
   } = props;
 
   const [selectedKeys, setSelectedKeys] = React.useState([]);
@@ -71,7 +99,7 @@ const ArticleBodyContent = (props) => {
 
     const CurrentSettingsCategoryKey = getCurrentSettingsCategory(
       arrayOfParams,
-      settingsTree
+      settingsTree,
     );
 
     if (link === "") {
@@ -110,19 +138,31 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["4-0"]);
       }
 
-      if (location.pathname.includes("developer")) {
+      if (location.pathname.includes("data-import")) {
         setSelectedKeys(["5-0"]);
       }
 
-      if (location.pathname.includes("delete-data")) {
+      if (
+        location.pathname.includes("management") &&
+        !location.pathname.includes("profile")
+      ) {
         setSelectedKeys(["6-0"]);
       }
 
-      if (location.pathname.includes("payments")) {
+      if (location.pathname.includes("developer")) {
         setSelectedKeys(["7-0"]);
       }
-      if (location.pathname.includes("bonus")) {
+
+      if (location.pathname.includes("delete-data")) {
         setSelectedKeys(["8-0"]);
+      }
+
+      if (location.pathname.includes("payments")) {
+        setSelectedKeys(["9-0"]);
+      }
+
+      if (location.pathname.includes("bonus")) {
+        setSelectedKeys(["10-0"]);
       }
     }
   }, [
@@ -133,21 +173,22 @@ const ArticleBodyContent = (props) => {
     selectedKeys,
   ]);
 
-  const onSelect = (value) => {
+  const onSelect = (value, e) => {
     if (isArrayEqual([value], selectedKeys)) {
       return;
     }
 
+    const settingsPath = `/portal-settings${getSelectedLinkByKey(
+      value + "-0",
+      settingsTree,
+    )}`;
+
+    if (openingNewTab(settingsPath, e)) return;
     // setSelectedKeys([value + "-0"]);
 
     if (currentDeviceType === DeviceType.mobile) {
       toggleArticleOpen();
     }
-
-    const settingsPath = `/portal-settings${getSelectedLinkByKey(
-      value + "-0",
-      settingsTree
-    )}`;
 
     if (settingsPath === location.pathname) return;
 
@@ -188,12 +229,22 @@ const ArticleBodyContent = (props) => {
         return t("RestoreBackup");
       case "PortalDeletion":
         return t("PortalDeletion");
-      case "DeveloperTools":
-        return t("DeveloperTools");
+      case "Common:DeveloperTools":
+        return t("Common:DeveloperTools");
       case "Common:Bonus":
         return t("Common:Bonus");
       case "Common:FreeProFeatures":
         return "Common:FreeProFeatures";
+      case "DataImport":
+        return t("DataImport");
+      case "ImportFromGoogle":
+        return t("ImportFromGoogle");
+      case "ImportFromNextcloud":
+        return t("ImportFromNextcloud");
+      case "ImportFromOnlyoffice":
+        return t("ImportFromOnlyoffice");
+      case "StorageManagement":
+        return t("StorageManagement");
       default:
         throw new Error("Unexpected translation key");
     }
@@ -231,7 +282,7 @@ const ArticleBodyContent = (props) => {
       }
     }
 
-    if (!isOwner || limitedAccessSpace) {
+    if (!isOwner) {
       const index = resultTree.findIndex((n) => n.tKey === "PortalDeletion");
       if (index !== -1) {
         resultTree.splice(index, 1);
@@ -244,6 +295,10 @@ const ArticleBodyContent = (props) => {
       const icon = getCatalogIconUrlByType(item.type, {
         isSettingsCatalog: true,
       });
+
+      const patternSearching = selectedKeys[0].split("-");
+      const selectedKey = patternSearching[0];
+
       items.push(
         <ArticleItem
           key={item.key}
@@ -252,15 +307,14 @@ const ArticleBodyContent = (props) => {
           showText={showText}
           text={mapKeys(item.tKey)}
           value={item.link}
-          isActive={item.key === selectedKeys[0][0]}
-          onClick={() => onSelect(item.key)}
+          isActive={item.key === selectedKey}
+          onClick={(e) => onSelect(item.key, e)}
           folderId={item.id}
           style={{
-            marginTop: `${
-              item.key.includes(7) || item.key.includes(8) ? "16px" : "0"
-            }`,
+            marginTop: `${item.key.includes(9) ? "16px" : "0"}`,
           }}
-        />
+          $currentColorScheme={currentColorScheme}
+        />,
       );
     });
 
@@ -270,7 +324,7 @@ const ArticleBodyContent = (props) => {
   const items = catalogItems();
 
   return !isLoadedArticleBody || isProfileLoading ? (
-    <LoaderArticleBody />
+    <ArticleFolderLoader />
   ) : (
     <>{items}</>
   );
@@ -296,6 +350,7 @@ export default inject(
       toggleArticleOpen,
       currentDeviceType,
       limitedAccessSpace,
+      currentColorScheme,
     } = settingsStore;
 
     const isProfileLoading =
@@ -316,10 +371,11 @@ export default inject(
       currentDeviceType,
       isProfileLoading,
       limitedAccessSpace,
+      currentColorScheme,
     };
-  }
+  },
 )(
   withLoading(
-    withTranslation(["Settings", "Common", "JavascriptSdk"])(observer(ArticleBodyContent))
-  )
+    withTranslation(["Settings", "Common"])(observer(ArticleBodyContent)),
+  ),
 );

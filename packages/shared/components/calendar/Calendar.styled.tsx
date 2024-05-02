@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import styled, { css } from "styled-components";
 import Base, { TColorScheme } from "../../themes/base";
 
@@ -107,10 +133,9 @@ const DateItem = styled.button<{
   focused: boolean;
   isSecondary?: boolean;
 }>`
-  font-family: "Open Sans";
+  font-family: ${(props) => props.theme.fontFamily};
   font-weight: 600;
-  font-size: ${(props) =>
-    props.theme.getCorrectFontSize(props.isMobile ? "16px" : "13px")};
+  font-size: ${(props) => (props.isMobile ? "16px" : "13px")};
   border-radius: 50%;
 
   border: 2px solid;
@@ -256,10 +281,9 @@ RoundButton.defaultProps = { theme: Base };
 
 const Title = styled.h2<{ isMobile?: boolean; disabled?: boolean }>`
   position: relative;
-  font-family: "Open Sans", sans-serif, Arial;
+  font-family: ${(props) => props.theme.fontFamily};
   font-weight: 700;
-  font-size: ${(props) =>
-    props.theme.getCorrectFontSize(props.isMobile ? "21px" : "18px")};
+  font-size: ${(props) => (props.isMobile ? "21px" : "18px")};
   line-height: ${(props) => (props.isMobile ? "28px" : "24px")};
   color: ${(props) => props.theme.calendar.titleColor};
   border-bottom: 1px dashed transparent;
@@ -277,10 +301,9 @@ Title.defaultProps = { theme: Base };
 
 const Weekday = styled.span<{ isMobile?: boolean }>`
   pointer-events: none;
-  font-family: "Open Sans";
+  font-family: ${(props) => props.theme.fontFamily};
   font-weight: 400;
-  font-size: ${(props) =>
-    props.theme.getCorrectFontSize(props.isMobile ? "16px" : "13px")};
+  font-size: ${(props) => (props.isMobile ? "16px" : "13px")};
   line-height: 16px;
 
   color: ${(props) => props.theme.calendar.weekdayColor};

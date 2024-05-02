@@ -10,7 +10,6 @@
   "MessageEmailConfirmed": "Il tuo indirizzo email è stato confermato con successo.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "‎Inserisci l'e-mail che hai usato per la registrazione. Le istruzioni per il recupero della password verranno inviate su di esso.‎",
   "NotFoundCode": "Non riesci a trovare il codice? Controlla la tua cartella «Spam».",
-  "Or": "o",
   "PasswordRecoveryTitle": "Recupero della password",
   "RecoverAccess": "Rimuovi accesso",
   "RecoverContactEmailPlaceholder": "Email di contatto",
@@ -22,6 +21,5 @@
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "‎La durata predefinita della sessione è di 20 minuti. Selezionare questa opzione per impostarla su 1 anno. Per impostare il proprio valore, passare a Impostazioni.‎",
   "ResendCode": "Invia nuovamente il codice",
-  "SignInWithCode": "Accedi con codice segreto",
-  "SignInWithPassword": "Accedi con password"
+  "UserIsAlreadyRegistered": "L'utente <1>{{email}}</1> è già registrato in questo DocSpace, inserisci la tua password o torna indietro per continuare con un'altra email."
 }

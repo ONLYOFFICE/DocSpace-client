@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import api from "@docspace/shared/api";
 import { makeAutoObservable } from "mobx";
 const { Filter } = api;
@@ -19,10 +45,10 @@ class SettingsSetupStore {
   authStore = null;
   settingsStore = null;
   tfaStore = null;
+  thirdPartyStore = null;
   isInit = false;
   logoutDialogVisible = false;
   logoutAllDialogVisible = false;
-  disableDialogVisible = false;
   viewAs = isDesktop() ? "table" : "row";
 
   isLoadingDownloadReport = false;
@@ -86,11 +112,12 @@ class SettingsSetupStore {
   sessionModalData = {};
   platformModalData = {};
 
-  constructor(tfaStore, authStore, settingsStore) {
+  constructor(tfaStore, authStore, settingsStore, thirdPartyStore) {
     this.selectionStore = new SelectionStore(this);
     this.authStore = authStore;
     this.tfaStore = tfaStore;
     this.settingsStore = settingsStore;
+    this.thirdPartyStore = thirdPartyStore;
     makeAutoObservable(this);
   }
 
@@ -129,12 +156,14 @@ class SettingsSetupStore {
             break;
         }
       } else {
-        await this.settingsStore.getPortalPasswordSettings();
-        await this.tfaStore.getTfaType();
-        await this.settingsStore.getIpRestrictionsEnable();
-        await this.settingsStore.getIpRestrictions();
-        await this.settingsStore.getSessionLifetime();
-        await this.settingsStore.getBruteForceProtection();
+        await Promise.all([
+          this.settingsStore.getPortalPasswordSettings(),
+          this.tfaStore.getTfaType(),
+          this.settingsStore.getIpRestrictionsEnable(),
+          this.settingsStore.getIpRestrictions(),
+          this.settingsStore.getSessionLifetime(),
+          this.settingsStore.getBruteForceProtection(),
+        ]);
       }
     }
 
@@ -194,7 +223,7 @@ class SettingsSetupStore {
     const initialSettings = this.integration.smtpSettings.initialSettings;
 
     const fields = Object.keys(settings).filter(
-      (key) => settings[key] !== initialSettings[key]
+      (key) => settings[key] !== initialSettings[key],
     );
 
     return fields.length === 0;
@@ -225,7 +254,7 @@ class SettingsSetupStore {
 
   resetSMTPSettings = async () => {
     const result = await resetSMTPSettings(
-      this.integration.smtpSettings.settings
+      this.integration.smtpSettings.settings,
     );
 
     if (!result) return;
@@ -291,8 +320,8 @@ class SettingsSetupStore {
       combineUrl(
         window.DocSpaceConfig?.proxy?.url,
         `${config.homepage}/portal-settings/security/access-rights/admins`,
-        `/filter?page=${filter.page}` //TODO: Change url by category
-      )
+        `/filter?page=${filter.page}`, //TODO: Change url by category
+      ),
     );
   };
 
@@ -303,7 +332,7 @@ class SettingsSetupStore {
 
   changeAdmins = async (userIds, productId, isAdmin) => {
     const requests = userIds.map((userId) =>
-      api.people.changeProductAdmin(userId, productId, isAdmin)
+      api.people.changeProductAdmin(userId, productId, isAdmin),
     );
 
     await Promise.all(requests);
@@ -444,7 +473,7 @@ class SettingsSetupStore {
     regDateCaption,
     groupHeadCaption,
     guestCaption,
-    guestsCaption
+    guestsCaption,
   ) => {
     return api.settings.setCustomSchema(
       userCaption,
@@ -455,7 +484,7 @@ class SettingsSetupStore {
       regDateCaption,
       groupHeadCaption,
       guestCaption,
-      guestsCaption
+      guestsCaption,
     );
   };
 
@@ -469,9 +498,20 @@ class SettingsSetupStore {
   };
 
   updateConsumerProps = async (newProps) => {
-    const res = await api.settings.updateConsumerProps(newProps);
-    console.log("updateConsumerProps", res);
+    await api.settings.updateConsumerProps(newProps);
+
     await this.getConsumers();
+
+    await Promise.all([
+      api.files.getThirdPartyCapabilities(),
+      api.files.getThirdPartyList(),
+    ]).then(([capabilities, providers]) => {
+      for (let item of capabilities) {
+        item.splice(1, 1);
+      }
+      this.thirdPartyStore.setThirdPartyCapabilities(capabilities); //TODO: Out of bounds read: 1
+      this.thirdPartyStore.setThirdPartyProviders(providers);
+    });
   };
 
   changePassword = (userId, hash, key) => {
@@ -539,12 +579,6 @@ class SettingsSetupStore {
 
   setSessions = (sessions) => {
     this.sessions = sessions;
-  };
-
-  setSessionModalData = (data) => {
-    this.sessionModalData = {
-      ...data,
-    };
   };
 
   setPlatformModalData = (data) => {

@@ -1,4 +1,30 @@
-import React from "react";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import { useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -10,11 +36,15 @@ export default function withContent(WrappedContent) {
   const WithContent = (props) => {
     const {
       item,
-      selectGroup,
       checked,
       selectUser,
       deselectUser,
       setBufferSelection,
+      selectRow,
+      singleContextMenuAction,
+      multipleContextMenuAction,
+      resetSelections,
+      openGroupAction,
 
       theme,
       getModel,
@@ -24,77 +54,48 @@ export default function withContent(WrappedContent) {
     const { mobilePhone, email, role, displayName, avatar } = item;
 
     const onContentRowSelect = (checked, user) => {
+      setBufferSelection(null);
       checked ? selectUser(user) : deselectUser(user);
     };
 
-    const onContentRowClick = (checked, user, addToSelection = true) => {
-      checked
-      ? setBufferSelection(user, addToSelection)
-      : setBufferSelection(null);
+    const onContextClick = (item, isSingleMenu) => {
+      isSingleMenu
+        ? singleContextMenuAction(item)
+        : multipleContextMenuAction(item);
     };
+
+    const onContentRowClick = (e, user) => {
+      if (
+        e.target?.tagName === "A" ||
+        e.target.closest(".checkbox") ||
+        e.target.closest(".table-container_row-checkbox") ||
+        e.target.closest(".type-combobox") ||
+        e.target.closest(".groups-combobox") ||
+        e.target.closest(".paid-badge") ||
+        e.target.closest(".pending-badge") ||
+        e.target.closest(".disabled-badge") ||
+        e.target.closest(".dropdown-container") ||
+        e.detail === 0
+      ) {
+        return;
+      }
+
+      selectRow(user);
+    };
+
+    const onOpenGroup = useCallback(
+      (groupId, withBackURL, tempTitle) => {
+        resetSelections();
+        openGroupAction(groupId, withBackURL, tempTitle);
+      },
+      [resetSelections, openGroupAction],
+    );
 
     const checkedProps = { checked };
 
     const element = (
       <Avatar size="min" role={role} userName={displayName} source={avatar} />
     );
-
-    const getFormattedGroups = () => {
-      let temp = [];
-      const groups = item.groups;
-      const linkColor =
-        item.statusType === "pending"
-          ? theme.peopleWithContent.pendingColor
-          : theme.peopleWithContent.color;
-
-      if (!groups) temp.push({ key: 0, label: "" });
-
-      groups &&
-        groups.map((group) =>
-          temp.push({
-            key: group.id,
-            label: group.name,
-            onClick: () => selectGroup(group.id),
-          })
-        );
-
-      if (temp.length <= 1) {
-        return (
-          <Link
-            isTextOverflow
-            containerMinWidth="120px"
-            containerWidth="15%"
-            type="action"
-            title={temp[0].label}
-            fontSize="12px"
-            fontWeight={400}
-            color={linkColor}
-            onClick={temp[0].onClick}
-          >
-            {temp[0].label}
-          </Link>
-        );
-      } else {
-        return (
-          <LinkWithDropdown
-            className="link-with-dropdown-group"
-            isTextOverflow
-            containerMinWidth="120px"
-            containerWidth="15%"
-            directionY="both"
-            title={temp[0].label}
-            fontSize="12px"
-            fontWeight={400}
-            color={linkColor}
-            data={temp}
-          >
-            {temp[0].label}
-          </LinkWithDropdown>
-        );
-      }
-    };
-
-    const groups = getFormattedGroups();
 
     const onPhoneClick = () => window.open(`sms:${mobilePhone}`);
     const onEmailClick = () => window.open(`mailto:${email}`);
@@ -107,7 +108,6 @@ export default function withContent(WrappedContent) {
       "Translations",
       "Files",
       "ChangeUserTypeDialog",
-      "RoomSelector",
       "DataReassignmentDialog",
     ]);
 
@@ -123,13 +123,15 @@ export default function withContent(WrappedContent) {
       <WrappedContent
         onContentRowSelect={onContentRowSelect}
         onContentRowClick={onContentRowClick}
+        onUserContextClick={onContextClick}
         onPhoneClick={onPhoneClick}
         onEmailClick={onEmailClick}
-        groups={groups}
+        groups={[]}
         checkedProps={checkedProps}
         element={element}
         contextOptionsProps={contextOptionsProps}
         value={value}
+        onOpenGroup={onOpenGroup}
         {...props}
       />
     );
@@ -138,9 +140,9 @@ export default function withContent(WrappedContent) {
   return inject(({ settingsStore, peopleStore, userStore }, { item }) => {
     const { theme, standalone } = settingsStore;
 
-    const { selectGroup } = peopleStore.selectedGroupStore;
     const { getTargetUser } = peopleStore.targetUserStore;
     const { selectionStore, contextOptionsStore } = peopleStore;
+    const { openGroupAction } = peopleStore.groupsStore;
 
     const { getModel } = contextOptionsStore;
 
@@ -150,13 +152,16 @@ export default function withContent(WrappedContent) {
       setBufferSelection,
       selectUser,
       deselectUser,
+      selectRow,
+      singleContextMenuAction,
+      multipleContextMenuAction,
+      resetSelections,
     } = selectionStore;
 
     return {
       theme,
       standalone,
       currentUserId: userStore.user.id,
-      selectGroup,
       fetchProfile: getTargetUser,
       checked: selection.some((el) => el.id === item.id),
       isSeveralSelection: selection.length > 1,
@@ -165,6 +170,11 @@ export default function withContent(WrappedContent) {
       selectUser,
       deselectUser,
       getModel,
+      selectRow,
+      singleContextMenuAction,
+      multipleContextMenuAction,
+      resetSelections,
+      openGroupAction,
     };
   })(observer(WithContent));
 }

@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 /* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
 
@@ -8,7 +34,12 @@ import { getPortalTenantExtra } from "../api/portal";
 import { TUser } from "../api/people/types";
 import { TCapabilities, TThirdPartyProvider } from "../api/settings/types";
 import { logout as logoutDesktop } from "../utils/desktop";
-import { frameCallEvent, isAdmin, isPublicRoom } from "../utils/common";
+import {
+  frameCallEvent,
+  isAdmin,
+  isPublicRoom,
+  insertDataLayer,
+} from "../utils/common";
 import { getCookie, setCookie } from "../utils/cookie";
 import { TTenantExtraRes } from "../api/portal/types";
 import { TenantStatus } from "../enums";
@@ -50,6 +81,8 @@ class AuthStore {
 
   skipModules = false;
 
+  clientError = false;
+
   constructor(
     userStoreConst: UserStore,
     currentTariffStatusStoreConst: CurrentTariffStatusStore,
@@ -83,6 +116,24 @@ class AuthStore {
         }
 
         this.currentQuotaStore?.updateQuotaFeatureValue(featureId, value);
+      });
+    });
+    socketHelper.on("s:change-user-quota-used-value", (options) => {
+      console.log(`[WS] change-user-quota-used-value`, options);
+
+      runInAction(() => {
+        if (options.customQuotaFeature === "user_custom_quota") {
+          this.userStore?.updateUserQuota(
+            options.usedSpace,
+            options.quotaLimit,
+          );
+
+          return;
+        }
+
+        const { customQuotaFeature, ...updatableObject } = options;
+
+        this.currentQuotaStore?.updateTenantCustomQuota(updatableObject);
       });
     });
   }
@@ -122,8 +173,8 @@ class AuthStore {
       !isPortalDeactivated
     ) {
       requests.push(
-        this.userStore?.init(i18n).then(() => {
-          if (this.isQuotaAvailable && !isPortalRestore) {
+        this.userStore?.init(i18n, this.settingsStore.culture).then(() => {
+          if (!isPortalRestore) {
             this.getTenantExtra();
           }
         }),
@@ -145,6 +196,10 @@ class AuthStore {
 
     return Promise.all(requests).then(() => {
       const user = this.userStore?.user;
+
+      if (user?.id) {
+        insertDataLayer(user.id);
+      }
 
       if (
         user &&
@@ -255,13 +310,13 @@ class AuthStore {
     );
   }
 
-  get isQuotaAvailable() {
-    const user = this.userStore?.user;
+  // get isQuotaAvailable() {
+  //   const user = this.userStore?.user;
 
-    if (!user) return false;
+  //   if (!user) return false;
 
-    return user.isOwner || user.isAdmin || this.isRoomAdmin;
-  }
+  //   return user.isOwner || user.isAdmin || this.isRoomAdmin;
+  // }
 
   get isPaymentPageAvailable() {
     const user = this.userStore?.user;
@@ -280,12 +335,6 @@ class AuthStore {
       !!this.settingsStore?.bookTrainingEmail &&
       (user.isOwner || user.isAdmin || this.isRoomAdmin)
     );
-  }
-
-  get isSubmitToGalleryAlertAvailable() {
-    const user = this.userStore?.user;
-    if (!user) return false;
-    return !user.isVisitor;
   }
 
   get isLiveChatAvailable() {
@@ -445,6 +494,10 @@ class AuthStore {
   getCapabilities = async () => {
     const capabilities = await api.settings.getCapabilities();
     if (capabilities) this.setCapabilities(capabilities);
+  };
+
+  setClientError = (clientError: boolean) => {
+    this.clientError = clientError;
   };
 }
 

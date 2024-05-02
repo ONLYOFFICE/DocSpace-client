@@ -3,14 +3,15 @@
   "AddManuallyDescriptionAccounts": "Поканете нови потребители в DocSpace лично чрез имейл",
   "AddManuallyDescriptionRoom": "Добавете съществуващи DocSpace потребители към стаята, като използвате имената или поканете нови потребители лично чрез имейл",
   "EmailErrorMessage": "Невалиден имейл адрес. Можете да редактирате имейла, като щракнете върху него.",
+  "GroupMaxAvailableRoleWarning": "Групите имат максималната налична роля - “{{role}}”. Можете да издадете увеличение на правата след добавяне на група в стаята.",
   "InvitationLanguage": "Език на поканата",
   "InviteAccountSearchPlaceholder": "Поканете хора по имейл",
-  "Invited": "Поканени",
   "InviteRoomSearchPlaceholder": "Поканете хора по име или имейл",
   "InviteViaLink": "Поканете чрез линк",
   "InviteViaLinkDescriptionAccounts": "Създайте универсален линк за самоупълномощаване в DocSpace",
   "InviteViaLinkDescriptionRoom": "Създайте универсален линк за самоупълномощаване в стаята",
   "LinkCopySuccess": "Връзката беше копирана",
   "ResetChange": "Нулирай промяна",
-  "SendInvitation": "Изпращане на покана"
+  "SendInvitation": "Изпращане на покана",
+  "UsersAlreadyAdded": "Някои потребители вече са добавени"
 }

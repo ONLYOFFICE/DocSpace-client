@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { makeAutoObservable } from "mobx";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
@@ -30,7 +56,7 @@ class CreateEditRoomStore {
     settingsStore,
     infoPanelStore,
     currentQuotaStore,
-    clientLoadingStore
+    clientLoadingStore,
   ) {
     makeAutoObservable(this);
 
@@ -90,9 +116,19 @@ class CreateEditRoomStore {
     } = this.filesStore;
     const { preparingDataForCopyingToRoom } = this.filesActionsStore;
 
+    const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
+
+    const isThirdparty = roomParams.storageLocation.isThirdparty;
+    const quotaLimit =
+      isDefaultRoomsQuotaSet && !isThirdparty ? roomParams.quota : null;
+
     const createRoomData = {
       roomType: roomParams.type,
       title: roomParams.title || t("Files:NewRoom"),
+      createAsNewFolder: roomParams.createAsNewFolder ?? true,
+      ...(quotaLimit && {
+        quota: +quotaLimit,
+      }),
     };
 
     const createTagsData = roomParams.tags
@@ -100,7 +136,6 @@ class CreateEditRoomStore {
       .map((t) => t.name);
     const addTagsData = roomParams.tags.map((tag) => tag.name);
 
-    const isThirdparty = roomParams.storageLocation.isThirdparty;
     const storageFolderId = roomParams.storageLocation.storageFolderId;
     const thirdpartyAccount = roomParams.storageLocation.thirdpartyAccount;
 
@@ -119,13 +154,16 @@ class CreateEditRoomStore {
 
       room.isLogoLoading = true;
 
+      const actions = [];
+
       // delete thirdparty account if not needed
       if (!isThirdparty && storageFolderId)
         await deleteThirdParty(thirdpartyAccount.providerId);
 
       // create new tags
-      for (let i = 0; i < createTagsData.length; i++)
-        await createTag(createTagsData[i]);
+      for (let i = 0; i < createTagsData.length; i++) {
+        actions.push(createTag(createTagsData[i]));
+      }
 
       // add new tags to room
       if (!!addTagsData.length)
@@ -191,8 +229,6 @@ class CreateEditRoomStore {
       setIsSectionFilterLoading(param);
     };
 
-    setView("info_members");
-
     const state = {
       isRoot: false,
       title: room.title,
@@ -211,7 +247,10 @@ class CreateEditRoomStore {
 
     window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
 
-    isDesktop() && setIsVisible(true);
+    if (isDesktop()) {
+      setIsVisible(true);
+      setView("info_members");
+    }
 
     this.setIsLoading(false);
     this.setConfirmDialogIsLoading(false);

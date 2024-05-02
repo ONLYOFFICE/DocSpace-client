@@ -1,9 +1,35 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import { TableHeader } from "@docspace/shared/components/table";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { Events } from "@docspace/shared/enums";
-import { SortByFieldName } from "SRC_DIR/helpers/enums";
+import { SortByFieldName } from "SRC_DIR/helpers/constants";
 
 class FilesTableHeader extends React.Component {
   constructor(props) {
@@ -26,6 +52,9 @@ class FilesTableHeader extends React.Component {
       isFrame,
       frameTableColumns,
       isRecentTab,
+      isDefaultRoomsQuotaSet,
+      showStorageInfo,
+      isArchiveFolder,
     } = this.props;
 
     const defaultColumns = [];
@@ -87,6 +116,21 @@ class FilesTableHeader extends React.Component {
           resizable: false,
         },
       ];
+
+      showStorageInfo &&
+        columns.splice(columns.length - 1, 0, {
+          key: "Storage",
+          title:
+            isDefaultRoomsQuotaSet && !isArchiveFolder
+              ? t("Common:StorageAndQuota")
+              : t("Common:Storage"),
+          enable: this.props.roomQuotaColumnIsEnable,
+          sortBy: SortByFieldName.UsedSpace,
+          resizable: true,
+          onChange: this.onColumnChange,
+          onClick: this.onRoomsFilter,
+        });
+
       defaultColumns.push(...columns);
     } else if (isTrashFolder) {
       const columns = [
@@ -391,9 +435,11 @@ class FilesTableHeader extends React.Component {
       columnStorageName,
       columnInfoPanelStorageName,
       isRecentTab,
+      isArchiveFolder,
     } = this.props;
 
     if (
+      isArchiveFolder !== prevProps.isArchiveFolder ||
       isRooms !== prevProps.isRooms ||
       isTrashFolder !== prevProps.isTrashFolder ||
       columnStorageName !== prevProps.columnStorageName ||
@@ -551,8 +597,11 @@ export default inject(
     publicRoomStore,
     clientLoadingStore,
     infoPanelStore,
+    currentQuotaStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
+
+    const { isDefaultRoomsQuotaSet, showStorageInfo } = currentQuotaStore;
 
     const {
       isHeaderChecked,
@@ -565,9 +614,7 @@ export default inject(
       roomsFilter,
       setRoomsFilter,
     } = filesStore;
-    const { isRecentTab, isRoomsFolder, isArchiveFolder, isTrashFolder } =
-      treeFoldersStore;
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const { isRecentTab, isArchiveFolder, isTrashFolder } = treeFoldersStore;
     const withContent = canShare;
     const sortingVisible = true;
     const { withPaging, isFrame, frameConfig } = settingsStore;
@@ -598,6 +645,7 @@ export default inject(
       roomColumnOwnerIsEnabled,
       roomColumnQuickButtonsIsEnabled,
       roomColumnActivityIsEnabled,
+      roomQuotaColumnIsEnable,
 
       getColumns,
       setColumnEnable,
@@ -648,10 +696,10 @@ export default inject(
       roomColumnOwnerIsEnabled,
       roomColumnQuickButtonsIsEnabled,
       roomColumnActivityIsEnabled,
+      roomQuotaColumnIsEnable,
 
       getColumns,
       setColumnEnable,
-      isRooms,
       isTrashFolder,
       isPublicRoom,
       publicRoomKey,
@@ -660,6 +708,9 @@ export default inject(
       frameTableColumns: frameConfig?.viewTableColumns,
       isRecentTab,
       showSettings: frameConfig?.showSettings,
+      isDefaultRoomsQuotaSet,
+      showStorageInfo,
+      isArchiveFolder,
     };
   },
 )(

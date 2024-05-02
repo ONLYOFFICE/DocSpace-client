@@ -1,6 +1,6 @@
 {
   "name": "@docspace/client",
-  "version": "2.0.3",
+  "version": "2.5.1",
   "private": true,
   "homepage": "",
   "scripts": {
@@ -42,11 +42,14 @@
     "test:ui:mobile": "cross-env DEVICE_TYPE=mobile npx codecept-ui"
   },
   "dependencies": {
+    "@codemirror/lang-javascript": "^6.2.2",
+    "@uiw/codemirror-theme-github": "^4.21.25",
+    "@uiw/react-codemirror": "^4.21.24",
     "copy-to-clipboard": "^3.3.3",
     "element-resize-detector": "^1.2.4",
     "file-saver": "^2.0.5",
-    "firebase": "^8.10.1",
-    "hex-to-rgba": "^2.0.1",
+    "firebase": "^10.8.0",
+    "hex-rgb": "^5.0.0",
     "queue-promise": "2.2.1",
     "react-avatar-editor": "^13.0.0",
     "react-colorful": "^5.6.1",

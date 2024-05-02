@@ -10,7 +10,6 @@
   "MessageEmailConfirmed": "Sähköpostisi aktivointi onnistui.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Kirjoita rekisteröinnissä käyttämäsi sähköpostiosoite. Salasanan palautusohjeet lähetetään siihen.",
   "NotFoundCode": "Etkö löydä koodia? Tarkista «Roskaposti» -kansiosi.",
-  "Or": "TAI",
   "PasswordRecoveryTitle": "Salasanan palautus",
   "RecoverAccess": "Palauta käyttöoikeus",
   "RecoverContactEmailPlaceholder": "Sähköposti yhteydenottoa varten",
@@ -22,6 +21,5 @@
   "RegistrationEmailWatermark": "sähköposti",
   "RememberHelper": "Istunnon oletuskesto on 20 minuuttia. Valitse tämä vaihtoehto, jos haluat asettaa sen 1 vuodeksi. Voit asettaa oman arvon Asetuksissa.",
   "ResendCode": "Lähetä koodi uudelleen",
-  "SignInWithCode": "Kirjaudu sisään salaisella koodilla",
-  "SignInWithPassword": "Kirjaudu sisään salasanalla"
+  "UserIsAlreadyRegistered": "Käyttäjä <1>{{email}}</1> on jo rekisteröity tähän DocSpaceen, syötä salasanasi tai mene takaisin jatkaaksesi toisella sähköpostilla."
 }

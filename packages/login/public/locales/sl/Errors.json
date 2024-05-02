@@ -7,6 +7,7 @@
   "InvalidUsernameOrPassword": "Nepravilno uporabniško ime ali geslo",
   "LoginWithAccountNotFound": "Ne morem najti povezanega tujega računa. Najprej morate na strani urejanja profila z računom povezati svoje socialne račune.",
   "LoginWithBruteForce": "Avtorizacija je začasno blokirana",
+  "LoginWithBruteForceCaptcha": "Potrdite, da niste robot",
   "RecaptchaInvalid": "Neveljaven Recaptcha",
   "SsoAttributesNotFound": "Preverjanje ni uspelo (potrditvenih atributov ni mogoče najti)",
   "SsoAuthFailed": "Preverjanje ni uspelo",

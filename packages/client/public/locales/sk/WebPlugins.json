@@ -1,1 +1,16 @@
-{}
+{
+  "DeletePlugin": "Odstrániť plugin",
+  "DeletePluginDescription": "Tento plugin už nebude používateľom DocSpace k dispozícii. Ste si istí, že chcete pokračovať?",
+  "DeletePluginTitle": "Odstrániť plugin?",
+  "ExpandFunctionality": "Rozšírte funkčnosť pomocou pluginu SDK",
+  "GoToRepo": "Prejsť na úložisko",
+  "Metadata": "Metadáta",
+  "NeedSettings": "Potrebujete zadať nastavenia",
+  "NoPlugins": "Nie sú pridané žiadne pluginy",
+  "NotNeedSettings": "Nemusíte zadávať nastavenia",
+  "PluginSamples": "Ukážky pluginov",
+  "PluginSDK": "Plugin SDK",
+  "PluginSDKDescription": "Pomocou pluginu SDK môžete rozšíriť funkčnosť DocSpace, pripojiť služby tretích strán alebo vylepšiť skúsenosti existujúcich používateľov. Tu nájdete ukážky pluginov so zdrojovým kódom, ktoré sú k dispozícii na GitHub.",
+  "PluginSDKInstruction": "Kliknutím na tlačidlo získate podrobné pokyny na vytvorenie vlastných pluginov.",
+  "UploadDescription": "Môžete pridať pluginy, ktoré rozšíria funkčnosť priestoru DocSpace o ďalšie možnosti. Kliknite na Nahrať plugin alebo vložte súbor do archívu ZIP."
+}

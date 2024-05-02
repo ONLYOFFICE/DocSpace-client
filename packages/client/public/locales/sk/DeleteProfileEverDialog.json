@@ -1,4 +1,14 @@
 {
+  "ActionCannotBeUndone": "Vybraní deaktivovaní používatelia budú z DocSpace odstránení. Tento úkon sa nedá vrátiť späť.",
+  "CannotReassignFiles": "Ak vymažete viacerých používateľov naraz, ich súbory nemôžete opätovne priradiť iným používateľom.",
+  "DeleteGroupUsersSuccessMessage": "Používatelia boli úspešne odstránení.",
+  "DeleteMyDocumentsUser": "Všetky osobné súbory a priečinky v časti Moje dokumenty tohto používateľa budú natrvalo vymazané.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Miestnosti vytvorené týmto používateľom a dokumenty uložené v týchto miestnostiach budú automaticky preradené administrátorovi, ktorý realizuje vymazávanie: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Ak chcete vybrať iného cieľového používateľa na opätovné priradenie, priraďte údaje ručne .",
   "DeleteUser": "Odstrániť používateľa",
-  "SuccessfullyDeleteUserInfoMessage": "Používateľ bol úspešne odstránený"
+  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> bude vymazaný. Tento úkon sa nedá odvolať.",
+  "DeletingUsers": "Vymazávanie používateľov",
+  "PleaseNote": "Upozornenie:",
+  "ReassignDataToAnotherUser": "Opätovné priradenie údajov inému používateľovi",
+  "SuccessfullyDeleteUserInfoMessage": "Používateľ bol úspešne odstránený",
+  "ToBeAbleToReassignData": "Aby ste mohli opätovne priradiť údaje, vymazávajte vždy len po jednom používateľovi."
 }

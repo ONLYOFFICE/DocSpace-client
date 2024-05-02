@@ -1,17 +1,47 @@
-﻿import FileActionsLockedReactSvgUrl from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import FileActionsLockedReactSvgUrl from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
 import FileActionsDownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/locked.react.svg?url";
 import FileActionsFavoriteReactSvgUrl from "PUBLIC_DIR/images/file.actions.favorite.react.svg?url";
 import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
+
 import React from "react";
 import styled from "styled-components";
-import IconButton from "@docspace/components/icon-button";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import { isTablet } from "@docspace/components/utils/device";
-import { FileStatus, RoomsType } from "@docspace/common/constants";
 
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { isTablet, isMobile, commonIconsStyles } from "@docspace/shared/utils";
+import {
+  FileStatus,
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
+
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 const QuickButtons = (props) => {
   const {
@@ -27,10 +57,12 @@ const QuickButtons = (props) => {
     viewAs,
     folderCategory,
     isPublicRoom,
+    onClickShare,
+    isPersonalRoom,
     isArchiveFolder,
   } = props;
 
-  const { id, locked, fileStatus, title, fileExst } = item;
+  const { id, locked, shared, fileStatus, title, fileExst } = item;
 
   const isFavorite =
     (fileStatus & FileStatus.IsFavorite) === FileStatus.IsFavorite;
@@ -51,6 +83,10 @@ const QuickButtons = (props) => {
     ? theme.filesQuickButtons.sharedColor
     : theme.filesQuickButtons.color;
 
+  const colorShare = shared
+    ? theme.filesQuickButtons.sharedColor
+    : theme.filesQuickButtons.color;
+
   const tabletViewQuickButton = isTablet();
 
   const sizeQuickButton = isTile || tabletViewQuickButton ? "medium" : "small";
@@ -64,18 +100,28 @@ const QuickButtons = (props) => {
   const isAvailableDownloadFile =
     isPublicRoom && item.security.Download && viewAs === "tile";
 
+  const isAvailableShareFile = isPersonalRoom && item.canShare;
+
+  const isPublicRoomType =
+    item.roomType === RoomsType.PublicRoom ||
+    item.roomType === RoomsType.CustomRoom;
+
+  const haveLinksRight =
+    item?.access === ShareAccessRights.RoomManager ||
+    item?.access === ShareAccessRights.None;
+
   const showCopyLinkIcon =
-    (item.roomType === RoomsType.PublicRoom ||
-      item.roomType === RoomsType.CustomRoom) &&
+    isPublicRoomType &&
+    haveLinksRight &&
     item.shared &&
     !isArchiveFolder &&
     !isTile;
 
   return (
-    <div className="badges additional-badges  badges__quickButtons">
+    <div className="badges additional-badges badges__quickButtons">
       {isAvailableLockFile && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={iconLock}
           className="badge lock-file icons-group"
           size={sizeQuickButton}
@@ -90,7 +136,7 @@ const QuickButtons = (props) => {
       )}
       {isAvailableDownloadFile && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={FileActionsDownloadReactSvgUrl}
           className="badge download-file icons-group"
           size={sizeQuickButton}
@@ -103,7 +149,7 @@ const QuickButtons = (props) => {
       )}
       {showCopyLinkIcon && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={LinkReactSvgUrl}
           className="badge copy-link icons-group"
           size={sizeQuickButton}
@@ -111,12 +157,25 @@ const QuickButtons = (props) => {
           color={colorLock}
           isDisabled={isDisabled}
           hoverColor={theme.filesQuickButtons.sharedColor}
-          title={t("Files:CopyGeneralLink")}
+          title={t("Files:CopySharedLink")}
+        />
+      )}
+      {isAvailableShareFile && (
+        <ColorTheme
+          themeId={ThemeId.IconButton}
+          iconName={LinkReactSvgUrl}
+          className="badge copy-link icons-group"
+          size={sizeQuickButton}
+          onClick={onClickShare}
+          color={colorShare}
+          isDisabled={isDisabled}
+          hoverColor={theme.filesQuickButtons.sharedColor}
+          title={t("Files:CopySharedLink")}
         />
       )}
       {/* {fileExst && !isTrashFolder && displayBadges && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={iconFavorite}
           isFavorite={isFavorite}
           className="favorite badge icons-group"

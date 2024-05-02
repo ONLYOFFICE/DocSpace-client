@@ -1,1 +1,16 @@
-{}
+{
+  "DeletePlugin": "Plagini silin",
+  "DeletePluginDescription": "Bu plagin artıq DocSpace istifadəçiləri üçün əlçatan olmayacaq. Davam etmək istədiyinizə əminsiniz?",
+  "DeletePluginTitle": "Plagin silinsin?",
+  "ExpandFunctionality": "SDK plaginindən istifadə edərək funksionallığı genişləndirin",
+  "GoToRepo": "Anbara gedin",
+  "Metadata": "Metadata",
+  "NeedSettings": "Parametrləri daxil etməlisiniz",
+  "NoPlugins": "Heç bir plagin əlavə edilməyib",
+  "NotNeedSettings": "Parametrləri daxil etməlisiniz",
+  "PluginSamples": "Plagin nümunələri",
+  "PluginSDK": "Plagin SDK",
+  "PluginSDKDescription": "Plugin SDK-dan istifadə edərək, DocSpace funksionallığınızı genişləndirə, üçüncü tərəf xidmətlərinə qoşula və ya mövcud istifadəçi təcrübəsini təkmilləşdirə bilərsiniz. Burada GitHub-da mövcud kod mənbəyi olan plaginlərin nümunələrini tapa bilərsiniz.",
+  "PluginSDKInstruction": "Öz plaginlərinizi necə yaratmaq barədə ətraflı təlimatlar üçün düyməni klikləyin.",
+  "UploadDescription": "DocSpace-in funksionallığını əlavə funksiyalarla genişləndirmək üçün plaginlər əlavə edə bilərsiniz. Plagini quraşdırın və ya faylı ZIP arxivinə yerləşdirin."
+}

@@ -1,17 +1,45 @@
-﻿import RemoveSessionSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import RemoveSessionSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import Box from "@docspace/components/box";
-import HelpButton from "@docspace/components/help-button";
-import toastr from "@docspace/components/toast/toastr";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { Box } from "@docspace/shared/components/box";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { toastr } from "@docspace/shared/components/toast";
 import { useTheme } from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
+import { convertTime } from "@docspace/shared/utils/convertTime";
+
+import { ProfileFooterLoader } from "@docspace/shared/skeletons/profile";
 
 import {
   LogoutConnectionDialog,
@@ -27,8 +55,8 @@ import {
   TableBody,
   TableDataCell,
 } from "./styled-active-sessions";
-import { DeviceType } from "@docspace/common/constants";
-import moment from "moment";
+import { DeviceType } from "@docspace/shared/enums";
+import moment from "moment-timezone";
 
 const removeIcon = (
   <ReactSVG className="remove-icon" src={RemoveSessionSvgUrl} />
@@ -82,7 +110,7 @@ const ActiveSessions = ({
     try {
       setLoading(true);
       await removeAllExecptThis().then(() =>
-        getAllSessions().then((res) => setSessions(res.items))
+        getAllSessions().then((res) => setSessions(res.items)),
       );
     } catch (error) {
       toastr.error(error);
@@ -97,13 +125,13 @@ const ActiveSessions = ({
     try {
       setLoading(true);
       await removeSession(foundSession.id).then(() =>
-        getAllSessions().then((res) => setSessions(res.items))
+        getAllSessions().then((res) => setSessions(res.items)),
       );
       toastr.success(
         t("Profile:SuccessLogout", {
           platform: foundSession.platform,
           browser: foundSession.browser,
-        })
+        }),
       );
     } catch (error) {
       toastr.error(error);
@@ -114,7 +142,7 @@ const ActiveSessions = ({
   };
 
   const convertTime = (date) => {
-    return moment(date).locale(locale).format("L, LTS");
+    return moment(date).tz(window.timezone).locale(locale).format("L, LTS");
   };
   const tableCell = (platform, browser) =>
     interfaceDirection === "rtl" && !isMobile ? (
@@ -132,7 +160,7 @@ const ActiveSessions = ({
         </span>
       </>
     );
-  if (!sessionsIsInit) return <Loaders.ProfileFooter isProfileFooter />;
+  if (!sessionsIsInit) return <ProfileFooterLoader isProfileFooter />;
   return (
     <StyledFooter>
       <Text fontSize="16px" fontWeight={700} lineHeight="22px">
@@ -257,9 +285,9 @@ const ActiveSessions = ({
   );
 };
 
-export default inject(({ auth, setup }) => {
-  const { culture, currentDeviceType } = auth.settingsStore;
-  const { user } = auth.userStore;
+export default inject(({ settingsStore, userStore, setup }) => {
+  const { culture, currentDeviceType } = settingsStore;
+  const { user } = userStore;
   const locale = (user && user.cultureName) || culture || "en";
 
   const {

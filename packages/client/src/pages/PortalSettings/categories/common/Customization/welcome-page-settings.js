@@ -1,21 +1,47 @@
-﻿import CombinedShapeSvgUrl from "PUBLIC_DIR/images/combined.shape.svg?url";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import CombinedShapeSvgUrl from "PUBLIC_DIR/images/combined.shape.svg?url";
 import React from "react";
 import { withTranslation } from "react-i18next";
-import FieldContainer from "@docspace/components/field-container";
-import toastr from "@docspace/components/toast/toastr";
-import TextInput from "@docspace/components/text-input";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { toastr } from "@docspace/shared/components/toast";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 import checkScrollSettingsBlock from "../utils";
 import { StyledSettingsComponent } from "./StyledSettings";
 import LoaderCustomization from "../sub-components/loaderCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 
 let greetingTitleFromSessionStorage = "";
 let greetingTitleDefaultFromSessionStorage = "";
@@ -68,8 +94,9 @@ const WelcomePageSettings = (props) => {
     greetingTitleFromSessionStorage = getFromSessionStorage("greetingTitle");
 
     greetingTitleDefaultFromSessionStorage = getFromSessionStorage(
-      "greetingTitleDefault"
+      "greetingTitleDefault",
     );
+    getGreetingSettingsIsDefault();
 
     setDocumentTitle(t("CustomTitlesWelcome"));
 
@@ -85,7 +112,8 @@ const WelcomePageSettings = (props) => {
         ? greetingSettings
         : greetingTitleDefaultFromSessionStorage;
 
-    if (!isLoaded) initSettings().then(() => setIsLoaded(true));
+    const page = isMobileView ? "language-and-time-zone" : "general";
+    if (!isLoaded) initSettings(page).then(() => setIsLoaded(true));
 
     checkInnerWidth();
     window.addEventListener("resize", checkInnerWidth);
@@ -193,9 +221,10 @@ const WelcomePageSettings = (props) => {
         toastr.success(t("SuccessfullySaveGreetingSettingsMessage"));
       })
       .catch((error) => toastr.error(error))
-      .finally(() =>
-        setState((val) => ({ ...val, isLoadingGreetingSave: false }))
-      );
+      .finally(() => {
+        getGreetingSettingsIsDefault();
+        setState((val) => ({ ...val, isLoadingGreetingSave: false }));
+      });
 
     setState((val) => ({ ...val, showReminder: false }));
 
@@ -206,9 +235,10 @@ const WelcomePageSettings = (props) => {
   const onRestoreGreetingSettings = () => {
     setState((val) => ({ ...val, isLoadingGreetingRestore: true }));
     restoreGreetingTitle()
-      .then(() => {
+      .then((defaultTitle) => {
         setState((val) => ({
           ...val,
+          greetingTitle: defaultTitle,
           showReminder: false,
         }));
 
@@ -218,9 +248,10 @@ const WelcomePageSettings = (props) => {
         toastr.success(t("SuccessfullySaveGreetingSettingsMessage"));
       })
       .catch((error) => toastr.error(error))
-      .finally(() =>
-        setState((val) => ({ ...val, isLoadingGreetingRestore: false }))
-      );
+      .finally(() => {
+        getGreetingSettingsIsDefault();
+        setState((val) => ({ ...val, isLoadingGreetingRestore: false }));
+      });
   };
 
   const settingIsEqualInitialValue = (stateName, value) => {
@@ -257,7 +288,7 @@ const WelcomePageSettings = (props) => {
 
       const currentUrl = window.location.href.replace(
         window.location.origin,
-        ""
+        "",
       );
 
       const newUrl = "/portal-settings/customization/general";
@@ -316,7 +347,7 @@ const WelcomePageSettings = (props) => {
         </Text>
         <Link
           className="link-learn-more"
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           target="_blank"
           isHovered
           href={welcomePageSettingsUrl}
@@ -345,14 +376,14 @@ const WelcomePageSettings = (props) => {
   );
 };
 
-export default inject(({ auth, setup, common }) => {
+export default inject(({ settingsStore, setup, common }) => {
   const {
     greetingSettings,
     organizationName,
     theme,
     currentColorScheme,
     welcomePageSettingsUrl,
-  } = auth.settingsStore;
+  } = settingsStore;
   const { setGreetingTitle, restoreGreetingTitle } = setup;
   const {
     isLoaded,
@@ -380,6 +411,6 @@ export default inject(({ auth, setup, common }) => {
   };
 })(
   withLoading(
-    withTranslation(["Settings", "Common"])(observer(WelcomePageSettings))
-  )
+    withTranslation(["Settings", "Common"])(observer(WelcomePageSettings)),
+  ),
 );

@@ -1,4 +1,31 @@
-﻿import { PageType } from "@docspace/common/constants";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import { PageType } from "@docspace/shared/enums";
+import { DOCSPACE } from "@docspace/shared/constants";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/settings.react.svg?url";
 /**
  * Array for generation current settings tree.
@@ -312,16 +339,94 @@ export const settingsTree = [
     ],
   },
   {
-    id: "portal-settings_catalog-developer-tools",
+    id: "portal-settings_catalog-data-import",
     key: "5",
+    type: PageType.dataImport,
+    link: "data-import",
+    tKey: "DataImport",
+    isHeader: true,
+    children: [
+      {
+        id: "portal-settings_catalog-data-migration",
+        key: "5-0",
+        icon: "",
+        link: "migration",
+        tKey: "DataImport",
+        isCategory: true,
+        children: [
+          {
+            id: "portal-settings_catalog-google-data-migration",
+            key: "5-0-0",
+            icon: "",
+            link: "google",
+            tKey: "ImportFromGoogle",
+            isCategory: true,
+          },
+          {
+            id: "portal-settings_catalog-nextcloud-data-migration",
+            key: "5-0-1",
+            icon: "",
+            link: "nextcloud",
+            tKey: "ImportFromNextcloud",
+            isCategory: true,
+          },
+          {
+            id: "portal-settings_catalog-onlyoffice-data-migration",
+            key: "5-0-2",
+            icon: "",
+            link: "onlyoffice",
+            tKey: "ImportFromOnlyoffice",
+            isCategory: true,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "portal-settings_catalog-portal-storageManagement",
+    key: "6",
+    type: PageType.storageManagement,
+    link: "management",
+    tKey: "StorageManagement",
+    isHeader: true,
+    children: [
+      {
+        id: "portal-settings_catalog-storageManagement",
+        key: "6-0",
+        icon: "",
+        link: "disk-space",
+        tKey: "StorageManagement",
+        isCategory: true,
+        children: [
+          {
+            id: "portal-settings_catalog-storageManagement_quota-per-room",
+            key: "6-0-1",
+            icon: "",
+            link: "quota-per-room",
+            tKey: "QuotaPerRoom",
+          },
+          {
+            id: "portal-settings_catalog-storageManagement_quota-per-user",
+            key: "6-0-2",
+            icon: "",
+            link: "quota-per-user",
+            tKey: "QuotaPerUser",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "portal-settings_catalog-developer-tools",
+    key: "7",
     type: PageType.developerTools,
     link: "developer-tools",
-    tKey: "DeveloperTools",
+    tKey: "Common:DeveloperTools",
     isHeader: true,
     children: [
       {
         id: "portal-settings_catalog-api",
-        key: "5-0",
+        key: "7-0",
         icon: "",
         link: "api",
         tKey: "Api",
@@ -329,15 +434,66 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-javascript-sdk",
-        key: "5-1",
+        key: "7-1",
         icon: "",
         link: "javascript-sdk",
-        tKey: "DeveloperTools",
+        tKey: "Common:DeveloperTools",
         isCategory: true,
+        children: [
+          {
+            id: "portal-settings_catalog-javascript-sdk_public-room",
+            key: "7-1-0",
+            icon: "",
+            link: "public-room",
+            tKey: "Files:PublicRoom",
+          },
+          {
+            id: "portal-settings_catalog-javascript-sdk_custom",
+            key: "7-1-1",
+            icon: "",
+            link: "custom",
+            tKey: "Common:Custom",
+          },
+          {
+            id: "portal-settings_catalog-javascript-sdk_room-selector",
+            key: "7-1-2",
+            icon: "",
+            link: "room-selector",
+            tKey: "JavascriptSdk:RoomSelector",
+          },
+          {
+            id: "portal-settings_catalog-javascript-sdk_file-selector",
+            key: "7-1-3",
+            icon: "",
+            link: "file-selector",
+            tKey: "JavascriptSdk:FileSelector",
+          },
+          {
+            id: "portal-settings_catalog-javascript-sdk_editor",
+            key: "7-1-4",
+            icon: "",
+            link: "editor",
+            tKey: "Common:Editor",
+          },
+          {
+            id: "portal-settings_catalog-javascript-sdk_viewer",
+            key: "7-1-5",
+            icon: "",
+            link: "viewer",
+            tKey: "JavascriptSdk:Viewer",
+          },
+          {
+            id: "portal-settings_catalog-javascript-sdk_docspace",
+            key: "7-1-6",
+            icon: "",
+            link: "docspace",
+            tKey: DOCSPACE,
+          },
+        ],
       },
       {
         id: "portal-settings_catalog-plugin-sdk",
-        key: "5-2",
+        key: "7-2",
         icon: "",
         link: "plugin-sdk",
         tKey: "PluginSDK",
@@ -345,31 +501,31 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-webhooks",
-        key: "5-3",
+        key: "7-3",
         icon: "",
         link: "webhooks",
-        tKey: "DeveloperTools",
+        tKey: "Common:DeveloperTools",
         isCategory: true,
       },
     ],
   },
   {
     id: "portal-settings_catalog-delete",
-    key: "6",
+    key: "8",
     type: PageType.portalDeletion,
     link: "delete-data",
     tKey: "PortalDeletion",
     isHeader: true,
     children: [
       {
-        key: "6-0",
+        key: "8-0",
         icon: "",
         link: "deletion",
         tKey: "PortalDeletion",
         isCategory: true,
       },
       {
-        key: "6-1",
+        key: "8-1",
         icon: "",
         link: "deactivation",
         tKey: "PortalDeactivation",
@@ -379,7 +535,7 @@ export const settingsTree = [
   },
   {
     id: "portal-settings_catalog-payments",
-    key: "7",
+    key: "9",
     type: PageType.payments,
     link: "payments",
     tKey: "Common:PaymentsTitle",
@@ -387,7 +543,7 @@ export const settingsTree = [
     children: [
       {
         id: "portal-settings_catalog-portal-payments",
-        key: "7-0",
+        key: "9-0",
         icon: "",
         link: "portal-payments",
         tKey: "Common:PaymentsTitle",
@@ -397,7 +553,7 @@ export const settingsTree = [
   },
   {
     id: "portal-settings_catalog-bonus",
-    key: "8",
+    key: "9",
     type: PageType.bonus,
     link: "bonus",
     tKey: "Common:Bonus",
@@ -405,7 +561,7 @@ export const settingsTree = [
     children: [
       {
         id: "portal-settings_catalog-portal-bonus",
-        key: "8-0",
+        key: "9-0",
         icon: "",
         link: "",
         tKey: "Common:FreeProFeatures",

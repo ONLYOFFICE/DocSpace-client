@@ -5,6 +5,7 @@
   "HotkeysChangeView": "Comutare între vizualizarea grilă și listă",
   "HotkeysClearAll": "Golește toate selecțiile",
   "HotkeysClose": "Închidere/Anulare acțiune",
+  "HotkeysCopySelected": "Copiere elemente selectate în clipboard",
   "HotkeysCreateDocument": "Creează un document",
   "HotkeysCreateFolder": "Crează un director",
   "HotkeysCreateForm": "Creează un document necompletat dintr-un șablon",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "Creează o prezentare",
   "HotkeysCreateSpreadsheet": "Creează o foaie de calcul",
   "HotkeysCreatingObjects": "Creează elemente",
+  "HotkeysCutSelected": "Decupare elemente selectate în clipboard",
   "HotkeysEnterKey": "Enter",
   "HotkeysExtendSelectionDown": "Extinde selecția în jos",
   "HotkeysExtendSelectionLeft": "Extinde selecția la stânga",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "Deplasează în sus fără a schimba selecția",
   "HotkeysNavigation": "Navigare",
   "HotkeysOpen": "Deschide elementul selectat/Confirmă acțiunea",
+  "HotkeysPasteSelected": "Lipire elemente selectate în clipboard",
   "HotkeysPlayPause": "Redare/Pauză",
   "HotkeysRedoLastUndoneAction": "Reface ultima acțiune care a fost anulată",
   "HotkeysRemove": "Șterge elementele selectate",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "Spațiu",
   "HotkeysUndoLastAction": "Anulează ultima acțiune",
   "HotkeysUploadFile": "Încarcă fișier",
-  "HotkeysUploadingObjects": "Încărcare elemente"
+  "HotkeysUploadingObjects": "Încărcare elemente",
+  "HotkeysZoomIn": "Mărire",
+  "HotkeysZoomOut": "Micșorare"
 }

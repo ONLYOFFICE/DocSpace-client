@@ -1,8 +1,35 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import {
   ShareAccessRights,
   RoomsType,
   EmployeeType,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
+import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 export const getAccessOptions = (
   t,
@@ -10,7 +37,7 @@ export const getAccessOptions = (
   withRemove = false,
   withSeparator = false,
   isOwner = false,
-  standalone = false
+  standalone = false,
 ) => {
   let options = [];
   const accesses = {
@@ -22,6 +49,7 @@ export const getAccessOptions = (
       color: "#EDC409",
       access:
         roomType === -1 ? EmployeeType.Admin : ShareAccessRights.FullAccess,
+      type: "admin",
     },
     roomAdmin: {
       key: "roomAdmin",
@@ -31,6 +59,7 @@ export const getAccessOptions = (
       color: "#EDC409",
       access:
         roomType === -1 ? EmployeeType.User : ShareAccessRights.RoomManager,
+      type: "manager",
     },
     collaborator: {
       key: "collaborator",
@@ -42,42 +71,49 @@ export const getAccessOptions = (
         roomType === -1
           ? EmployeeType.Collaborator
           : ShareAccessRights.Collaborator,
+      type: "collaborator",
     },
     user: {
       key: "user",
       label: t("Common:User"),
       description: t("Translations:RoleUserDescription"),
       access: EmployeeType.Guest,
+      type: "user",
     },
     editor: {
       key: "editor",
-      label: t("Translations:RoleEditor"),
+      label: t("Common:Editor"),
       description: t("Translations:RoleEditorDescription"),
       access: ShareAccessRights.Editing,
+      type: "user",
     },
     formFiller: {
       key: "formFiller",
       label: t("Translations:RoleFormFiller"),
       description: t("Translations:RoleFormFillerDescription"),
       access: ShareAccessRights.FormFilling,
+      type: "user",
     },
     reviewer: {
       key: "reviewer",
       label: t("Translations:RoleReviewer"),
       description: t("Translations:RoleReviewerDescription"),
       access: ShareAccessRights.Review,
+      type: "user",
     },
     commentator: {
       key: "commentator",
       label: t("Translations:RoleCommentator"),
       description: t("Translations:RoleCommentatorDescription"),
       access: ShareAccessRights.Comment,
+      type: "user",
     },
     viewer: {
       key: "viewer",
       label: t("Translations:RoleViewer"),
       description: t("Translations:RoleViewerDescription"),
       access: ShareAccessRights.ReadOnly,
+      type: "user",
     },
   };
 
@@ -133,6 +169,16 @@ export const getAccessOptions = (
     case RoomsType.PublicRoom:
       options = [accesses.roomAdmin, accesses.collaborator];
       break;
+
+    case RoomsType.FormRoom:
+      options = [
+        accesses.roomAdmin,
+        accesses.collaborator,
+        { key: "s1", isSeparator: withSeparator },
+        accesses.viewer,
+        accesses.formFiller,
+      ];
+      break;
     case -1:
       if (isOwner) options.push(accesses.docSpaceAdmin);
 
@@ -153,9 +199,17 @@ export const getAccessOptions = (
     },
     {
       key: "remove",
-      label: t("Translations:Remove"),
+      label: t("Common:Remove"),
     },
   ];
 
   return withRemove ? [...options, ...removeOption] : options;
+};
+
+export const getTopFreeRole = (t, roomType) => {
+  const accesses = getAccessOptions(t, roomType);
+  const freeAccesses = accesses.filter(
+    (item) => !checkIfAccessPaid(item.access) && item.key !== "s1",
+  );
+  return freeAccesses[0];
 };

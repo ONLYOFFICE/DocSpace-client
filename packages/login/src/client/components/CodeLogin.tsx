@@ -1,19 +1,47 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import CodeInput from "@docspace/components/code-input";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { CodeInput } from "@docspace/shared/components/code-input";
 import { Trans } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import { LoginFormWrapper } from "./StyledLogin";
 import BarLogo from "PUBLIC_DIR/images/danger.alert.react.svg";
-import { Dark, Base } from "@docspace/components/themes";
-import { getBgPattern, getLogoFromPath } from "@docspace/common/utils";
+import { Dark, Base } from "@docspace/shared/themes";
+import { getBgPattern, frameCallCommand } from "@docspace/shared/utils/common";
+import { getLogoUrl } from "@docspace/shared/utils";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { useMounted } from "../helpers/useMounted";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
-import LoginContainer from "@docspace/components/ColorTheme/styled/sub-components/LoginContainer";
-import { useThemeDetector } from "@docspace/common/utils/useThemeDetector";
+import LoginContainer from "@docspace/shared/components/color-theme/sub-components/LoginContainer";
+import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 
 interface ILoginProps extends IInitialState {
   isDesktopEditor?: boolean;
@@ -39,7 +67,7 @@ const Bar: React.FC<IBarProp> = (props) => {
   );
 };
 
-const Form: React.FC<ILoginProps> = ({ theme, setTheme, logoUrls }) => {
+const Form: React.FC<ILoginProps> = ({ theme, setTheme }) => {
   const { t } = useTranslation("Login");
   const [invalidCode, setInvalidCode] = useState(false);
   const [expiredCode, setExpiredCode] = useState(false);
@@ -56,6 +84,7 @@ const Form: React.FC<ILoginProps> = ({ theme, setTheme, logoUrls }) => {
         ? Dark
         : Base;
     setTheme(theme);
+    frameCallCommand("setIsLoaded");
   }, []);
 
   useIsomorphicLayoutEffect(() => {
@@ -77,12 +106,7 @@ const Form: React.FC<ILoginProps> = ({ theme, setTheme, logoUrls }) => {
     setInvalidCode(false);
   };
 
-  const logo = logoUrls && Object.values(logoUrls)[1];
-  const logoUrl = !logo
-    ? undefined
-    : !theme?.isBase
-    ? getLogoFromPath(logo.path.dark)
-    : getLogoFromPath(logo.path.light);
+  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme?.isBase);
 
   return (
     <LoginContainer id="code-page" theme={theme}>

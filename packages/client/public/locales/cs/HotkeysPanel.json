@@ -5,6 +5,7 @@
   "HotkeysChangeView": "Přepínat mezi zobrazením mřížky a seznamu",
   "HotkeysClearAll": "Vymazat všechny výběry",
   "HotkeysClose": "Zavřít/odvolat akci",
+  "HotkeysCopySelected": "Kopírování vybraných položek do schránky",
   "HotkeysCreateDocument": "Vytvořit dokument",
   "HotkeysCreateFolder": "Vytvořte složku",
   "HotkeysCreateForm": "Vytvořit prázdnou šablonu formuláře",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "Vytvořit prezentaci",
   "HotkeysCreateSpreadsheet": "Vytvořit tabulku",
   "HotkeysCreatingObjects": "Vytváření položek",
+  "HotkeysCutSelected": "Vyjmutí vybraných položek do schránky",
   "HotkeysEnterKey": "Zadat",
   "HotkeysExtendSelectionDown": "Rozšířit výběr dolů",
   "HotkeysExtendSelectionLeft": "Rozšířit výběr vlevo",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "Přesunout nahoru bez změny výběru",
   "HotkeysNavigation": "Navigace",
   "HotkeysOpen": "Otevřít vybranou položku/potvrdit akci",
+  "HotkeysPasteSelected": "Vložit vybrané položky ze schránky",
   "HotkeysPlayPause": "Přehrát/Pozastavit",
   "HotkeysRedoLastUndoneAction": "Znovu provést poslední zrušenou akci",
   "HotkeysRemove": "Odstranit vybrané položky",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "Mezera",
   "HotkeysUndoLastAction": "Vrátit poslední akci",
   "HotkeysUploadFile": "Nahrát soubor",
-  "HotkeysUploadingObjects": "Nahrávání položek"
+  "HotkeysUploadingObjects": "Nahrávání položek",
+  "HotkeysZoomIn": "Přiblížení",
+  "HotkeysZoomOut": "Zvětšení"
 }

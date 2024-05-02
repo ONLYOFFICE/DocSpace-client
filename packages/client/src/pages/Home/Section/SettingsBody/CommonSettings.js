@@ -1,22 +1,46 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import ToggleButton from "@docspace/components/toggle-button";
-import Heading from "@docspace/components/heading";
-import Box from "@docspace/components/box";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Heading } from "@docspace/shared/components/heading";
+import { Box } from "@docspace/shared/components/box";
 import StyledSettings from "./StyledSettings";
 
 const PersonalSettings = ({
   storeOriginalFiles,
   confirmDelete,
-  updateIfExist,
   forceSave,
 
   isVisitor,
   //favoritesSection,
   //recentSection,
 
-  setUpdateIfExist,
   setStoreOriginal,
 
   setConfirmDelete,
@@ -47,10 +71,6 @@ const PersonalSettings = ({
     setConfirmDelete(!confirmDelete, "confirmDelete");
   }, [setConfirmDelete, confirmDelete]);
 
-  const onChangeUpdateIfExist = React.useCallback(() => {
-    setUpdateIfExist(!updateIfExist, "updateIfExist");
-  }, [setUpdateIfExist, updateIfExist]);
-
   const onChangeForceSave = React.useCallback(() => {
     setForceSave(!forceSave);
   }, [setForceSave, forceSave]);
@@ -70,7 +90,7 @@ const PersonalSettings = ({
         .catch((err) => toastr.error(err))
         .finally(() => setIsLoadingFavorites(false));
     },
-    [setIsLoadingFavorites, setFavoritesSetting]
+    [setIsLoadingFavorites, setFavoritesSetting],
   );
 
   const onChangeRecent = React.useCallback(
@@ -80,7 +100,7 @@ const PersonalSettings = ({
         .catch((err) => toastr.error(err))
         .finally(() => setIsLoadingRecent(false));
     },
-    [setIsLoadingRecent, setRecentSetting]
+    [setIsLoadingRecent, setRecentSetting],
   );
 
   const thumbnailsSizeLabel = "Thumbnails 1280x720";
@@ -122,14 +142,6 @@ const PersonalSettings = ({
             label={t("DisplayNotification")}
             onChange={onChangeDeleteConfirm}
             isChecked={confirmDelete}
-          />
-        )}
-        {!isVisitor && (
-          <ToggleButton
-            className="toggle-btn"
-            label={t("UpdateOrCreate")}
-            onChange={onChangeUpdateIfExist}
-            isChecked={updateIfExist}
           />
         )}
       </Box>
@@ -189,14 +201,12 @@ const PersonalSettings = ({
   );
 };
 
-export default inject(({ auth, settingsStore, treeFoldersStore }) => {
+export default inject(({ userStore, filesSettingsStore, treeFoldersStore }) => {
   const {
     storeOriginalFiles,
     confirmDelete,
-    updateIfExist,
     forcesave,
 
-    setUpdateIfExist,
     setStoreOriginal,
 
     setConfirmDelete,
@@ -213,23 +223,21 @@ export default inject(({ auth, settingsStore, treeFoldersStore }) => {
 
     setThumbnails1280x720,
     thumbnails1280x720,
-  } = settingsStore;
+  } = filesSettingsStore;
 
   const { myFolderId, commonFolderId } = treeFoldersStore;
 
   return {
     storeOriginalFiles,
     confirmDelete,
-    updateIfExist,
     forceSave: forcesave,
 
     myFolderId,
     commonFolderId,
-    isVisitor: auth.userStore.user.isVisitor,
+    isVisitor: userStore.user.isVisitor,
     favoritesSection,
     recentSection,
 
-    setUpdateIfExist,
     setStoreOriginal,
 
     setConfirmDelete,

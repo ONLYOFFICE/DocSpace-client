@@ -10,7 +10,6 @@
   "MessageEmailConfirmed": "تم تفعيل عنوان بريدك الإلكتروني بنجاح.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "من فضلك، أدخل عنوان البريد الإلكتروني الذي استخدمته للتسجيل. سيتم إرسال تعليمات استعادة كلمة المرور إليه.",
   "NotFoundCode": "لا يمكنك العثور على الرمز؟ قم بالتأكد من ملف البريد غير المرغوب فيه.",
-  "Or": "أو",
   "PasswordRecoveryTitle": "استعادة كلمة السر",
   "RecoverAccess": "استعادة الوصول",
   "RecoverContactEmailPlaceholder": "تواصل بالبريد الاكتروني",
@@ -22,6 +21,5 @@
   "RegistrationEmailWatermark": "بريد إلكتروني",
   "RememberHelper": "العمر الافتراضي للجلسة هو 20 دقيقة. حدد هذا الخيار لتعيينه على عام واحد. لتعيين القيمة الخاصة بك ، انتقل إلى الإعدادات.",
   "ResendCode": "أعد إرسال الرمز",
-  "SignInWithCode": "تسجيل الدخول باستخدام الرمز السري",
-  "SignInWithPassword": "تسجيل الدخول بكلمة مرور"
+  "UserIsAlreadyRegistered": "المستخدم <1>{{email}}</1>  مسجل بالفعل في DocSpace، أدخل كلمة المرور الخاصة بك أو ارجع للمتابعة باستخدام بريد إلكتروني آخر."
 }

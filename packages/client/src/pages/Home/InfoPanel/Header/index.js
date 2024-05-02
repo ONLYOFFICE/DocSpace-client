@@ -1,21 +1,48 @@
-﻿import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import IconButton from "@docspace/components/icon-button";
-import Text from "@docspace/components/text";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Text } from "@docspace/shared/components/text";
 
-import Submenu from "@docspace/components/submenu";
+import { Submenu } from "@docspace/shared/components/submenu";
 import {
   isDesktop as isDesktopUtils,
   isMobile as isMobileUtils,
   isTablet as isTabletUtils,
-} from "@docspace/components/utils/device";
+} from "@docspace/shared/utils";
 
 import { StyledInfoPanelHeader } from "./styles/common";
 
-import { PluginFileType } from "SRC_DIR/helpers/plugins/constants";
+import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
+import { FolderType } from "@docspace/shared/enums";
 
 const InfoPanelHeaderContent = (props) => {
   const {
@@ -34,6 +61,7 @@ const InfoPanelHeaderContent = (props) => {
     resetView,
     myRoomsId,
     archiveRoomsId,
+    myFolderId,
   } = props;
 
   const [isTablet, setIsTablet] = useState(false);
@@ -43,12 +71,12 @@ const InfoPanelHeaderContent = (props) => {
   const isAccounts = getIsAccounts();
   const isTrash = getIsTrash();
 
-  const isNoItem =
-    selection?.isSelectedFolder && selection?.id === selection?.rootFolderId;
+  const isRoot =
+    selection?.isFolder && selection?.id === selection?.rootFolderId;
   const isSeveralItems = selection && Array.isArray(selection);
 
   const withSubmenu =
-    !isNoItem && !isSeveralItems && !isGallery && !isAccounts && !isTrash;
+    !isRoot && !isSeveralItems && !isGallery && !isAccounts && !isTrash;
 
   useEffect(() => {
     checkWidth();
@@ -70,6 +98,7 @@ const InfoPanelHeaderContent = (props) => {
   const setMembers = () => setView("info_members");
   const setHistory = () => setView("info_history");
   const setDetails = () => setView("info_details");
+  const setShare = () => setView("info_share");
 
   //const isArchiveRoot = rootFolderType === FolderType.Archive;
 
@@ -93,13 +122,19 @@ const InfoPanelHeaderContent = (props) => {
       content: null,
     },
   ];
-  // const selectionRoomRights = selectionParentRoom
-  //   ? selectionParentRoom.security?.Read
-  //   : selection?.security?.Read;
 
   const roomsSubmenu = [...submenuData];
 
   const personalSubmenu = [submenuData[1], submenuData[2]];
+
+  if (selection?.canShare) {
+    personalSubmenu.unshift({
+      id: "info_share",
+      name: t("Files:Share"),
+      onClick: setShare,
+      content: null,
+    });
+  }
 
   if (enablePlugins && infoPanelItemsList.length > 0) {
     const isRoom = !!selection?.roomType;
@@ -153,6 +188,10 @@ const InfoPanelHeaderContent = (props) => {
     });
   }
 
+  const isRoomsType =
+    selection?.rootFolderType === FolderType.Rooms ||
+    selection?.rootFolderType === FolderType.Archive;
+
   return (
     <StyledInfoPanelHeader isTablet={isTablet} withSubmenu={withSubmenu}>
       <div className="main">
@@ -177,8 +216,7 @@ const InfoPanelHeaderContent = (props) => {
 
       {withSubmenu && (
         <div className="submenu">
-          {selection?.rootFolderId === myRoomsId ||
-          selection?.rootFolderId === archiveRoomsId ? (
+          {isRoomsType ? (
             <Submenu
               style={{ width: "100%" }}
               data={roomsSubmenu}
@@ -197,56 +235,54 @@ const InfoPanelHeaderContent = (props) => {
   );
 };
 
-export default inject(({ auth, treeFoldersStore, pluginStore }) => {
-  const { infoPanelItemsList } = pluginStore;
+export default inject(
+  ({ settingsStore, treeFoldersStore, infoPanelStore, pluginStore }) => {
+    const { infoPanelItemsList } = pluginStore;
 
-  const {
-    selection,
-    setIsVisible,
-    roomsView,
-    fileView,
-    setView,
-    getIsFiles,
-    getIsRooms,
-    getIsGallery,
-    getIsAccounts,
-    getIsTrash,
-    resetView,
-    //selectionParentRoom,
-  } = auth.infoPanelStore;
+    const {
+      infoPanelSelection,
+      setIsVisible,
+      roomsView,
+      fileView,
+      setView,
+      getIsFiles,
+      getIsRooms,
+      getIsGallery,
+      getIsAccounts,
+      getIsTrash,
+      resetView,
+    } = infoPanelStore;
 
-  const { myRoomsId, archiveRoomsId } = treeFoldersStore;
+    const { myRoomsId, archiveRoomsId, myFolderId } = treeFoldersStore;
 
-  const { enablePlugins } = auth.settingsStore;
+    const { enablePlugins } = settingsStore;
 
-  return {
-    selection,
-    setIsVisible,
-    roomsView,
-    fileView,
-    setView,
-    getIsFiles,
-    getIsRooms,
-    getIsGallery,
-    getIsAccounts,
-    getIsTrash,
-    infoPanelItemsList,
-    resetView,
+    return {
+      selection: infoPanelSelection,
+      setIsVisible,
+      roomsView,
+      fileView,
+      setView,
+      getIsFiles,
+      getIsRooms,
+      getIsGallery,
+      getIsAccounts,
+      getIsTrash,
+      infoPanelItemsList,
+      resetView,
 
-    myRoomsId,
-    archiveRoomsId,
+      myRoomsId,
+      archiveRoomsId,
 
-    enablePlugins,
-
-    //  rootFolderType,
-
-    //selectionParentRoom,
-  };
-})(
+      enablePlugins,
+      myFolderId,
+    };
+  },
+)(
   withTranslation(["Common", "InfoPanel"])(
-    InfoPanelHeaderContent
+    InfoPanelHeaderContent,
     // withLoader(observer(InfoPanelHeaderContent))(
     //   <Loaders.InfoPanelHeaderLoader />
     // )
-  )
+  ),
 );

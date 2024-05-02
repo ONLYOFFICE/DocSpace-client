@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React, {
   useEffect,
   useState,
@@ -8,12 +34,15 @@ import React, {
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import Backdrop from "@docspace/components/backdrop";
-import Aside from "@docspace/components/aside";
-import Button from "@docspace/components/button";
-import toastr from "@docspace/components/toast/toastr";
-import Portal from "@docspace/components/portal";
-import { isDesktop, isMobile, size } from "@docspace/components/utils/device";
+import { DeviceType } from "@docspace/shared/enums";
+import { LOADER_TIMEOUT } from "@docspace/shared/constants";
+
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Aside } from "@docspace/shared/components/aside";
+import { Button } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
+import { Portal } from "@docspace/shared/components/portal";
+import { isDesktop, isMobile, size } from "@docspace/shared/utils";
 
 import {
   StyledBlock,
@@ -27,12 +56,10 @@ import {
 import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
 import ExternalLinks from "./sub-components/ExternalLinks";
-import Scrollbar from "@docspace/components/scrollbar";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import InfoBar from "./sub-components/InfoBar";
-import { DeviceType } from "@docspace/common/constants";
 import InvitePanelLoader from "./sub-components/InvitePanelLoader";
-import { TIMEOUT } from "../../../helpers/filesConstants";
 
 const InvitePanel = ({
   folders,
@@ -53,9 +80,8 @@ const InvitePanel = ({
   defaultAccess,
   inviteUsers,
   setInfoPanelIsMobileHidden,
-  reloadSelectionParentRoom,
-  setUpdateRoomMembers,
-  roomsView,
+  updateInfoPanelSelection,
+  addInfoPanelMembers,
   setInviteLanguage,
   getUsersList,
   filter,
@@ -64,7 +90,7 @@ const InvitePanel = ({
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     () =>
       ((!userLink || !guestLink || !collaboratorLink) && !adminLink) ||
-      roomId !== -1
+      roomId !== -1,
   );
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [hasErrors, setHasErrors] = useState(false);
@@ -85,7 +111,7 @@ const InvitePanel = ({
   const invitePanelBodyRef = useRef();
   const invitePanelWrapper = useRef(null);
   const invitePanelRef = useRef(null);
-  const windowHeight = useRef(window.innerHeight);
+  const loaderRef = useRef();
 
   const onChangeExternalLinksVisible = (visible) => {
     setExternalLinksVisible(visible);
@@ -126,10 +152,17 @@ const InvitePanel = ({
     });
   };
 
+  const clearLoaderTimeout = () => {
+    clearTimeout(loaderRef.current);
+    loaderRef.current = undefined;
+  };
+
   const disableInvitePanelLoader = () => {
-    setTimeout(() => {
+    if (loaderRef.current) return;
+
+    loaderRef.current = setTimeout(() => {
       setInvitePanelIsLoading(false);
-    }, TIMEOUT);
+    }, LOADER_TIMEOUT);
   };
 
   useEffect(() => {
@@ -189,31 +222,13 @@ const InvitePanel = ({
     return () => {
       window.removeEventListener("resize", onCheckHeight);
       window.removeEventListener("mousedown", onMouseDown);
+      clearLoaderTimeout();
     };
   }, []);
 
   useEffect(() => {
     isMobileView && window.addEventListener("mousedown", onMouseDown);
   }, [isMobileView]);
-
-  useEffect(() => {
-    window.visualViewport.addEventListener("resize", onResize);
-
-    return () => {
-      window.visualViewport.removeEventListener("resize", onResize);
-    };
-  }, []);
-
-  const onResize = useCallback((e) => {
-    const diff = windowHeight.current - e.target.height;
-
-    if (invitePanelRef.current) {
-      invitePanelRef.current.style.height = `${e.target.height - 64}px`;
-      // invitePanelRef.current.style.bottom = `${diff}px`;
-      invitePanelWrapper.current.style.height = `${e.target.height}px`;
-      invitePanelWrapper.current.style.bottom = `${diff}px`;
-    }
-  }, []);
 
   const onMouseDown = (e) => {
     if (e.target.id === "InvitePanelWrapper") onClose();
@@ -251,7 +266,9 @@ const InvitePanel = ({
         ? (newItem.type = item.access)
         : (newItem.access = item.access);
 
-      item.avatar ? (newItem.id = item.id) : (newItem.email = item.email);
+      item.avatar || item.isGroup
+        ? (newItem.id = item.id)
+        : (newItem.email = item.email);
 
       return newItem;
     });
@@ -267,19 +284,27 @@ const InvitePanel = ({
 
     try {
       setIsLoading(true);
-      roomId === -1
+      const isRooms = roomId !== -1;
+      const result = !isRooms
         ? await inviteUsers(data)
         : await setRoomSecurity(roomId, data);
 
       setIsLoading(false);
 
-      if (roomsView === "info_members") {
-        setUpdateRoomMembers(true);
+      if (isRooms) {
+        addInfoPanelMembers(t, result.members);
       }
+
+      console.log(result);
 
       onClose();
       toastr.success(t("Common:UsersInvited"));
-      reloadSelectionParentRoom();
+
+      if (result?.warning) {
+        toastr.warning(result?.warning);
+      }
+
+      updateInfoPanelSelection();
     } catch (err) {
       toastr.error(err);
       setIsLoading(false);
@@ -362,33 +387,32 @@ const InvitePanel = ({
         <>
           {scrollAllPanelContent ? (
             <div className="invite-panel-body" ref={invitePanelBodyRef}>
-              <Scrollbar stype="mediumBlack">{bodyInvitePanel}</Scrollbar>
+              <Scrollbar>{bodyInvitePanel}</Scrollbar>
             </div>
           ) : (
             bodyInvitePanel
           )}
-          {hasInvitedUsers && (
-            <StyledButtons>
-              <Button
-                className="send-invitation"
-                scale={true}
-                size={"normal"}
-                isDisabled={hasErrors}
-                primary
-                onClick={onClickSend}
-                label={t("SendInvitation")}
-                isLoading={isLoading}
-              />
-              <Button
-                className="cancel-button"
-                scale={true}
-                size={"normal"}
-                onClick={onClose}
-                label={t("Common:CancelButton")}
-                isDisabled={isLoading}
-              />
-            </StyledButtons>
-          )}
+
+          <StyledButtons>
+            <Button
+              className="send-invitation"
+              scale={true}
+              size={"normal"}
+              isDisabled={hasErrors || !hasInvitedUsers}
+              primary
+              onClick={onClickSend}
+              label={t("SendInvitation")}
+              isLoading={isLoading}
+            />
+            <Button
+              className="cancel-button"
+              scale={true}
+              size={"normal"}
+              onClick={onClose}
+              label={t("Common:CancelButton")}
+              isDisabled={isLoading}
+            />
+          </StyledButtons>
         </>
       )}
     </>
@@ -448,67 +472,73 @@ const InvitePanel = ({
     : invitePanelComponent;
 };
 
-export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
-  const { theme, currentDeviceType } = auth.settingsStore;
+export default inject(
+  ({
+    settingsStore,
+    peopleStore,
+    filesStore,
+    dialogsStore,
+    infoPanelStore,
+  }) => {
+    const { theme, currentDeviceType } = settingsStore;
 
-  const { getUsersByQuery, inviteUsers, getUsersList } = peopleStore.usersStore;
-  const { filter } = peopleStore.filterStore;
-  const {
-    setIsMobileHidden: setInfoPanelIsMobileHidden,
-    reloadSelectionParentRoom,
-    setUpdateRoomMembers,
-    roomsView,
-    filesView,
-  } = auth.infoPanelStore;
+    const { getUsersByQuery, inviteUsers, getUsersList } =
+      peopleStore.usersStore;
+    const { filter } = peopleStore.filterStore;
+    const {
+      setIsMobileHidden: setInfoPanelIsMobileHidden,
+      updateInfoPanelSelection,
+      addInfoPanelMembers,
+    } = infoPanelStore;
 
-  const {
-    getPortalInviteLinks,
-    userLink,
-    guestLink,
-    adminLink,
-    collaboratorLink,
-  } = peopleStore.inviteLinksStore;
+    const {
+      getPortalInviteLinks,
+      userLink,
+      guestLink,
+      adminLink,
+      collaboratorLink,
+    } = peopleStore.inviteLinksStore;
 
-  const {
-    inviteItems,
-    invitePanelOptions,
-    setInviteItems,
-    setInvitePanelOptions,
-    setInviteLanguage,
-  } = dialogsStore;
+    const {
+      inviteItems,
+      invitePanelOptions,
+      setInviteItems,
+      setInvitePanelOptions,
+      setInviteLanguage,
+    } = dialogsStore;
 
-  const { getFolderInfo, setRoomSecurity, getRoomSecurityInfo, folders } =
-    filesStore;
+    const { getFolderInfo, setRoomSecurity, getRoomSecurityInfo, folders } =
+      filesStore;
 
-  return {
-    folders,
-    setInviteLanguage,
-    getUsersByQuery,
-    getRoomSecurityInfo,
-    inviteItems,
-    roomId: invitePanelOptions.roomId,
-    setInviteItems,
-    setInvitePanelOptions,
-    setRoomSecurity,
-    theme,
-    visible: invitePanelOptions.visible,
-    defaultAccess: invitePanelOptions.defaultAccess,
-    getFolderInfo,
-    getPortalInviteLinks,
-    userLink,
-    guestLink,
-    adminLink,
-    collaboratorLink,
-    inviteUsers,
-    setInfoPanelIsMobileHidden,
-    reloadSelectionParentRoom,
-    setUpdateRoomMembers,
-    roomsView,
-    getUsersList,
-    filter,
-    currentDeviceType,
-  };
-})(
+    return {
+      folders,
+      setInviteLanguage,
+      getUsersByQuery,
+      getRoomSecurityInfo,
+      inviteItems,
+      roomId: invitePanelOptions.roomId,
+      setInviteItems,
+      setInvitePanelOptions,
+      setRoomSecurity,
+      theme,
+      visible: invitePanelOptions.visible,
+      defaultAccess: invitePanelOptions.defaultAccess,
+      getFolderInfo,
+      getPortalInviteLinks,
+      userLink,
+      guestLink,
+      adminLink,
+      collaboratorLink,
+      inviteUsers,
+      setInfoPanelIsMobileHidden,
+      updateInfoPanelSelection,
+      addInfoPanelMembers,
+      getUsersList,
+      filter,
+      currentDeviceType,
+    };
+  },
+)(
   withTranslation([
     "InviteDialog",
     "SharingPanel",
@@ -516,5 +546,5 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
     "Common",
     "InfoPanel",
     "PeopleSelector",
-  ])(observer(InvitePanel))
+  ])(observer(InvitePanel)),
 );

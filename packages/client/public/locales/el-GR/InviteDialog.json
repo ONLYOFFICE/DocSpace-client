@@ -3,12 +3,15 @@
   "AddManuallyDescriptionAccounts": "Προσκαλέστε νέους χρήστες στο DocSpace προσωπικά μέσω email",
   "AddManuallyDescriptionRoom": "Προσθέστε υπάρχοντες χρήστες του DocSpace στο δωμάτιο χρησιμοποιώντας τα ονόματα ή προσκαλέστε νέους χρήστες προσωπικά μέσω email",
   "EmailErrorMessage": "Η διεύθυνση email δεν είναι έγκυρη. Μπορείτε να επεξεργαστείτε το email κάνοντας κλικ πάνω του.",
+  "GroupMaxAvailableRoleWarning": "Οι ομάδες έχουν τον μέγιστο διαθέσιμο ρόλο – «{{role}}». Μπορείτε να εκδώσετε αύξηση των δικαιωμάτων μετά την προσθήκη μιας ομάδας στο δωμάτιο.",
+  "InvitationLanguage": "Γλώσσα πρόσκλησης",
   "InviteAccountSearchPlaceholder": "Πρόσκληση ατόμων μέσω email",
-  "Invited": "Προσκλήθηκε",
   "InviteRoomSearchPlaceholder": "Πρόσκληση ατόμων με όνομα ή email",
   "InviteViaLink": "Πρόσκληση μέσω συνδέσμου",
   "InviteViaLinkDescriptionAccounts": "Δημιουργήστε μια καθολική σύνδεση για αυτοεξουσιοδότηση στο DocSpace",
   "InviteViaLinkDescriptionRoom": "Δημιουργήστε έναν καθολικό σύνδεσμο για αυτοεξουσιοδότηση στην αίθουσα",
   "LinkCopySuccess": "Ο σύνδεσμος έχει αντιγραφεί",
-  "SendInvitation": "Αποστολή πρόσκλησης"
+  "ResetChange": "Επαναφορά αλλαγής",
+  "SendInvitation": "Αποστολή πρόσκλησης",
+  "UsersAlreadyAdded": "Ορισμένοι χρήστες έχουν ήδη προστεθεί"
 }

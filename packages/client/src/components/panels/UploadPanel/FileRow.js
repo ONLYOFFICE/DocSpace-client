@@ -1,8 +1,34 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React, { Component } from "react";
 import styled, { css } from "styled-components";
-import Row from "@docspace/components/row";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
+import { Row } from "@docspace/shared/components/row";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 import LoadingButton from "./SubComponents/LoadingButton";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -10,8 +36,9 @@ import SimulatePassword from "../../../components/SimulatePassword";
 import ErrorFileUpload from "./SubComponents/ErrorFileUpload.js";
 import ActionsUploadedFile from "./SubComponents/ActionsUploadedFile";
 import { isMobile } from "react-device-detect";
-import NoUserSelect from "@docspace/components/utils/commonStyles";
-import Button from "@docspace/components/button";
+import { NoUserSelect } from "@docspace/shared/utils";
+import { Button } from "@docspace/shared/components/button";
+import { tablet } from "@docspace/shared/utils";
 
 const StyledFileRow = styled(Row)`
   width: calc(100% - 16px);
@@ -44,7 +71,11 @@ const StyledFileRow = styled(Row)`
     ${(props) =>
       props.showPasswordInput &&
       css`
-        margin-top: ${isMobile ? "-44px" : "-48px"};
+        margin-top: -40px;
+
+        @media ${tablet} {
+          margin-top: -44px;
+        }
       `}
   }
 
@@ -75,7 +106,7 @@ const StyledFileRow = styled(Row)`
   }
   .password-input {
     position: absolute;
-    top: 44px;
+    top: 48px;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
@@ -285,7 +316,6 @@ class FileRow extends Component {
       isMedia,
       ext,
       name,
-      isPersonal,
       isMediaActive,
       downloadInCurrentTab,
     } = this.props;
@@ -354,13 +384,13 @@ class FileRow extends Component {
             {item.fileId && !item.error ? (
               <ActionsUploadedFile
                 item={item}
-                isPersonal={isPersonal}
                 onCancelCurrentUpload={this.onCancelCurrentUpload}
               />
             ) : item.error || (!item.fileId && uploaded) ? (
               <ErrorFileUpload
                 t={t}
                 item={item}
+                theme={theme}
                 onTextClick={this.onTextClick}
                 showPasswordInput={showPasswordInput}
               />
@@ -400,8 +430,13 @@ class FileRow extends Component {
 }
 export default inject(
   (
-    { auth, uploadDataStore, mediaViewerDataStore, settingsStore },
-    { item }
+    {
+      filesSettingsStore,
+      uploadDataStore,
+      mediaViewerDataStore,
+      settingsStore,
+    },
+    { item },
   ) => {
     let ext;
     let name;
@@ -425,8 +460,8 @@ export default inject(
 
     name = splitted.join(".");
 
-    const { personal, theme } = auth.settingsStore;
-    const { canViewedDocs, getIconSrc, isArchive } = settingsStore;
+    const { theme } = settingsStore;
+    const { canViewedDocs, getIconSrc, isArchive } = filesSettingsStore;
     const {
       uploaded,
       cancelCurrentUpload,
@@ -441,8 +476,8 @@ export default inject(
       mediaViewerDataStore;
 
     const isMedia =
-      item.fileInfo?.viewAccessability?.ImageView ||
-      item.fileInfo?.viewAccessability?.MediaView;
+      item.fileInfo?.viewAccessibility?.ImageView ||
+      item.fileInfo?.viewAccessibility?.MediaView;
 
     const isMediaActive =
       playlist.findIndex((el) => el.fileId === item.fileId) !== -1;
@@ -455,7 +490,6 @@ export default inject(
       !canViewedDocs(ext);
 
     return {
-      isPersonal: personal,
       theme,
       uploaded,
       isMedia: !!isMedia,
@@ -476,5 +510,5 @@ export default inject(
       setCurrentItem,
       clearUploadedFilesHistory,
     };
-  }
+  },
 )(withTranslation("UploadPanel")(observer(FileRow)));

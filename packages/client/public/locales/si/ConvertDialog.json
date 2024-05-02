@@ -1,0 +1,11 @@
+{
+  "ConversionMessage": "ඔබ උඩුගත කරන සියළුම ලේඛන වේගයෙන් සංස්කරණය සඳහා ඔෆිස් විවෘත XML ආකෘතියට (docx, xlsx හෝ pptx) හරවනු ලැබේ.",
+  "ConvertedFileDestination": "ගොනුවේ පිටපත <strong>{{folderTitle}}</strong> බහාලුමේ තබනු ඇත.",
+  "DocumentConversionTitle": "ලේඛනය හැරවීම",
+  "FailedToConvert": "හැරවීමට අසමත් විය",
+  "FileUploadTitle": "උඩුගත කරන්න",
+  "HideMessage": "මෙම පණිවිඩය නැවත නොපෙන්වන්න",
+  "InfoCreateFileIn": "නව '{{fileTitle}}' ගොනුව '{{folderTitle}}' හි සාදා ඇත",
+  "OpenFileMessage": "ඔබ විවෘත කරන ලේඛන ගොනුව ඉක්මනින් බැලීම සහ සංස්කරණය සඳහා ඔෆිස් විවෘත XML ආකෘතියට හරවනු ලැබේ.",
+  "SaveOriginalFormatMessage": "ගොනුවේ පිටපත මුල් ආකෘතියෙන් සුරකින්න"
+}

@@ -1,5 +1,5 @@
 {
   "LblInviteAgain": "ادعوه مرة أخرى",
-  "NotFoundUsers": "لم يتم العثور على مستخدمين",
+  "MessageEmailActivationInstuctionsSentOnEmail": "تم إرسال تعليمات تفعيل البريد الإلكتروني إلى عنوان البريد الإلكتروني <1>{{email}}</1>.",
   "UserStatus": "الحالة"
 }

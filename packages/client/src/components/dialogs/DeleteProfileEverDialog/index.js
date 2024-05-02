@@ -1,17 +1,42 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import Button from "@docspace/components/button";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Text from "@docspace/components/text";
-import { withTranslation, Trans } from "react-i18next";
-import api from "@docspace/common/api";
-import toastr from "@docspace/components/toast/toastr";
+import { Button } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { withTranslation } from "react-i18next";
+import api from "@docspace/shared/api";
+
 import ModalDialogContainer from "../ModalDialogContainer";
-import Link from "@docspace/components/link";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
-import { mobileMore } from "@docspace/components/utils/device";
+import { mobileMore } from "@docspace/shared/utils";
+import BodyComponent from "./sub-components/BodyComponent";
 
 const { deleteUser } = api.people;
 const { Filter } = api;
@@ -42,7 +67,7 @@ const StyledModalDialogContainer = styled(ModalDialogContainer)`
 
   .text-warning {
     color: #f24724;
-    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+    font-size: 16px;
     font-weight: 700;
     line-height: 22px;
   }
@@ -65,7 +90,7 @@ const StyledModalDialogContainer = styled(ModalDialogContainer)`
 
 const DeleteProfileEverDialogComponent = (props) => {
   const {
-    user,
+    usersToDelete,
     t,
     onClose,
     tReady,
@@ -74,38 +99,24 @@ const DeleteProfileEverDialogComponent = (props) => {
     setDeleteProfileDialogVisible,
     setDataReassignmentDeleteProfile,
     setIsDeletingUserWithReassignment,
-    userPerformedDeletion,
     setDialogData,
     getUsersList,
+    needResetUserSelection,
+    removeUser,
+    userIds,
+    filter,
+    setSelected,
+    deleteWithoutReassign,
+    onlyOneUser,
   } = props;
   const [isRequestRunning, setIsRequestRunning] = React.useState(false);
 
   const needReassignData =
-    user.isRoomAdmin || user.isOwner || user.isAdmin || user.isCollaborator;
-
-  const deleteMessage = (
-    <Trans i18nKey="DeleteUserMessage" ns="DeleteProfileEverDialog" t={t}>
-      {{ userCaption: t("Common:User") }}
-      <strong>{{ user: user.displayName }}</strong>
-    </Trans>
-  );
-  const warningMessageMyDocuments = t("DeleteMyDocumentsUser");
-  const warningMessageReassign = (
-    <Trans
-      i18nKey="DeleteReassignDescriptionUser"
-      ns="DeleteProfileEverDialog"
-      t={t}
-    >
-      {{ warningMessageMyDocuments }}
-      <strong>
-        {{ userPerformedDeletion: userPerformedDeletion.displayName }}
-        {{ userYou: t("Common:You") }}
-      </strong>
-    </Trans>
-  );
-  const warningMessage = needReassignData
-    ? warningMessageReassign
-    : warningMessageMyDocuments;
+    onlyOneUser &&
+    (usersToDelete[0].isRoomAdmin ||
+      usersToDelete[0].isOwner ||
+      usersToDelete[0].isAdmin ||
+      usersToDelete[0].isCollaborator);
 
   const onDeleteUser = (id) => {
     const filter = Filter.getDefault();
@@ -121,17 +132,35 @@ const DeleteProfileEverDialogComponent = (props) => {
       .catch((error) => toastr.error(error))
       .finally(() => {
         setIsRequestRunning(false);
+        needResetUserSelection && setSelected("close");
         onClose();
       });
   };
-
+  const onDeleteUsers = (ids) => {
+    setIsRequestRunning(true);
+    removeUser(ids, filter)
+      .then(() => {
+        toastr.success(t("DeleteGroupUsersSuccessMessage"));
+      })
+      .catch((error) => toastr.error(error))
+      .finally(() => {
+        onClose();
+        setIsRequestRunning(false);
+        setSelected("close");
+      });
+  };
   const onDeleteProfileEver = () => {
-    if (!needReassignData) {
-      onDeleteUser(user.id);
+    if (deleteWithoutReassign) {
+      onDeleteUsers(userIds);
       return;
     }
 
-    setDialogData(user);
+    if (!needReassignData) {
+      onlyOneUser ? onDeleteUser(usersToDelete[0].id) : onDeleteUsers(userIds);
+      return;
+    }
+
+    setDialogData(usersToDelete[0]);
 
     setIsDeletingUserWithReassignment(true);
     setDataReassignmentDialogVisible(true);
@@ -140,7 +169,7 @@ const DeleteProfileEverDialogComponent = (props) => {
   };
 
   const onClickReassignData = () => {
-    setDialogData(user);
+    setDialogData(usersToDelete[0]);
 
     setDataReassignmentDialogVisible(true);
     setDataReassignmentDeleteProfile(true);
@@ -154,24 +183,18 @@ const DeleteProfileEverDialogComponent = (props) => {
       onClose={onClose}
       needReassignData={needReassignData}
     >
-      <ModalDialog.Header>{t("DeleteUser")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {onlyOneUser ? t("DeleteUser") : t("DeletingUsers")}
+      </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text className="user-delete">{deleteMessage}</Text>
-        <Text className="text-warning">{t("Common:Warning")}!</Text>
-        <Text className="text-delete-description">{warningMessage}</Text>
-
-        {needReassignData && (
-          <Link
-            className="reassign-data"
-            type="action"
-            fontSize="13px"
-            fontWeight={600}
-            isHovered={true}
-            onClick={onClickReassignData}
-          >
-            {t("DeleteProfileEverDialog:ReassignDataToAnotherUser")}
-          </Link>
-        )}
+        <BodyComponent
+          needReassignData={needReassignData}
+          onClickReassignData={onClickReassignData}
+          deleteWithoutReassign={deleteWithoutReassign}
+          users={usersToDelete}
+          onlyOneUser={onlyOneUser}
+          t={t}
+        />
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -207,10 +230,10 @@ DeleteProfileEverDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default inject(({ peopleStore }) => {
-  const { dialogStore, selectionStore } = peopleStore;
+export default inject(({ peopleStore }, { users }) => {
+  const { dialogStore, selectionStore, filterStore, usersStore } = peopleStore;
 
-  const { getUsersList } = peopleStore.usersStore;
+  const { getUsersList, needResetUserSelection } = peopleStore.usersStore;
 
   const {
     setDataReassignmentDialogVisible,
@@ -220,7 +243,17 @@ export default inject(({ peopleStore }) => {
     setDialogData,
   } = dialogStore;
 
-  const { setSelected } = selectionStore;
+  const {
+    getUsersToRemoveIds: userIds,
+    setSelected,
+    selection,
+  } = selectionStore;
+
+  const usersToDelete = users.length ? users : selection;
+
+  const onlyUsers = usersToDelete.every((el) => el.role === "user");
+  const deleteWithoutReassign = usersToDelete.length > 1 && !onlyUsers;
+  const onlyOneUser = usersToDelete.length === 1;
 
   return {
     setDataReassignmentDialogVisible,
@@ -229,8 +262,13 @@ export default inject(({ peopleStore }) => {
     setIsDeletingUserWithReassignment,
     setDialogData,
     setSelected,
-    removeUser: peopleStore.usersStore.removeUser,
-    userPerformedDeletion: peopleStore.authStore.userStore.user,
+    removeUser: usersStore.removeUser,
+    needResetUserSelection,
+    filter: filterStore.filter,
     getUsersList,
+    deleteWithoutReassign,
+    onlyOneUser,
+    userIds,
+    usersToDelete,
   };
 })(observer(DeleteProfileEverDialog));

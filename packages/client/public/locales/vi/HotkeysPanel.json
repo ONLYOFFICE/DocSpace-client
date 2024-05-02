@@ -5,6 +5,7 @@
   "HotkeysChangeView": "Chuyển giữa chế độ xem lưới và danh sách",
   "HotkeysClearAll": "Xóa tất cả các lựa chọn",
   "HotkeysClose": "Đóng/Hoàn tác",
+  "HotkeysCopySelected": "Sao chép các mục đã chọn vào bộ nhớ tạm",
   "HotkeysCreateDocument": "Tạo tài liệu",
   "HotkeysCreateFolder": "Tạo thư mục",
   "HotkeysCreateForm": "Tạo mẫu biểu mẫu trống",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "Tạo Bản trình chiếu",
   "HotkeysCreateSpreadsheet": "Tạo bảng tính",
   "HotkeysCreatingObjects": "Tạo mục",
+  "HotkeysCutSelected": "Cắt các mục đã chọn vào bộ nhớ tạm",
   "HotkeysEnterKey": "Nhập",
   "HotkeysExtendSelectionDown": "Mở rộng lựa chọn xuống",
   "HotkeysExtendSelectionLeft": "Mở rộng lựa chọn bên trái",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "Di chuyển lên mà không thay đổi lựa chọn",
   "HotkeysNavigation": "Điều hướng",
   "HotkeysOpen": "Mở mục đã chọn/Xác nhận hành động",
+  "HotkeysPasteSelected": "Dán các mục đã chọn từ bộ nhớ tạm",
   "HotkeysPlayPause": "Phát/Tạm Dừng",
   "HotkeysRedoLastUndoneAction": "Thực hiện lại hành động cuối cùng",
   "HotkeysRemove": "Xóa các mục đã chọn",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "Khoảng cách",
   "HotkeysUndoLastAction": "Hoàn tác hành động cuối cùng",
   "HotkeysUploadFile": "Tải file lên",
-  "HotkeysUploadingObjects": "Đang tải lên các mục"
+  "HotkeysUploadingObjects": "Đang tải lên các mục",
+  "HotkeysZoomIn": "Phóng to",
+  "HotkeysZoomOut": "Thu nhỏ"
 }

@@ -107,7 +107,6 @@ const Selector = ({
   withFooterCheckbox,
   footerCheckboxLabel,
   isChecked,
-  setIsChecked,
 
   items,
   renderCustomItem,
@@ -517,12 +516,10 @@ const Selector = ({
         footerCheckboxLabel,
         isChecked: isFooterCheckboxChecked,
         setIsFooterCheckboxChecked,
-        setIsChecked,
       }
     : ({
         isChecked: isFooterCheckboxChecked,
         setIsFooterCheckboxChecked,
-        setIsChecked,
       } as TSelectorFooterCheckbox);
 
   const tabsProps: TWithTabs = withTabs

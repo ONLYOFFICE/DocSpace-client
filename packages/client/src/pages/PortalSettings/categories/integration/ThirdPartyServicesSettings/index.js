@@ -120,12 +120,10 @@ class ThirdPartyServices extends React.Component {
     showLoader();
     const urlParts = window.location.href.split("?");
     if (urlParts.length > 1) {
-      setTimeout(() => {
-        const queryValue = urlParts[1].split("=")[1];
-        fetchAndSetConsumers(queryValue)
-          .then((isConsumerExist) => isConsumerExist && this.onModalOpen())
-          .finally(() => hideLoader());
-      }, 100);
+      const queryValue = urlParts[1].split("=")[1];
+      fetchAndSetConsumers(queryValue)
+        .then((isConsumerExist) => isConsumerExist && this.onModalOpen())
+        .finally(() => hideLoader());
     } else {
       getConsumers().finally(() => hideLoader());
     }

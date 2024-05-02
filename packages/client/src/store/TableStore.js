@@ -44,7 +44,6 @@ const COLUMNS_SIZE_INFO_PANEL = `filesColumnsSizeInfoPanel_ver-${TableVersions.F
 const COLUMNS_ROOMS_SIZE_INFO_PANEL = `roomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
 const COLUMNS_TRASH_SIZE_INFO_PANEL = `trashColumnsSizeInfoPanel_ver-${TableVersions.Trash}`;
 const COLUMNS_RECENT_SIZE_INFO_PANEL = `recentColumnsSizeInfoPanel_ver-${TableVersions.Recent}`;
-const COLUMNS_SDK_SIZE_INFO_PANEL = `filesSDKColumnsSizeInfoPanel_ver-${TableVersions.Files}`;
 
 class TableStore {
   authStore;
@@ -408,8 +407,6 @@ class TableStore {
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
 
-
-
     const tableStorageName = isRooms
       ? `${TABLE_ROOMS_COLUMNS}=${userId}`
       : getIsAccountsPeople()
@@ -453,8 +450,6 @@ class TableStore {
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
-
-    if (isFrame) return `${COLUMNS_SDK_SIZE_INFO_PANEL}=${userId}`;
 
     const columnInfoPanelStorageName = isRooms
       ? `${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`

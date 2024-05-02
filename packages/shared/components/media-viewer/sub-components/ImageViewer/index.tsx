@@ -87,8 +87,8 @@ export const ImageViewer = ({
   mobileDetails,
   toolbar,
   thumbnailSrc,
-  imageId,
-  version,
+  // imageId,
+  // version,
   isTiff,
   contextModel,
   errorTitle,
@@ -944,7 +944,7 @@ export const ImageViewer = ({
             draggable="false"
             src={
               window.DocSpaceConfig?.imageThumbnails && thumbnailSrc
-                ? `${thumbnailSrc}&size=1280x720`
+                ? `${thumbnailSrc}&size=3840x2160`
                 : src
             }
             ref={imgRef}

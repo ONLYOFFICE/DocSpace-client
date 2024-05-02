@@ -27,6 +27,7 @@
     "babel.config.ts",
     "index.d.ts",
     "tsconfig.eslint.json",
-    "routes"
+    "routes",
+    "polyfills",
   ]
 }

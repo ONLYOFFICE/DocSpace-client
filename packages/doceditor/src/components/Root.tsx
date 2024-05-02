@@ -35,7 +35,6 @@ import AppLoader from "@docspace/shared/components/app-loader";
 import { TResponse } from "@/types";
 import useError from "@/hooks/useError";
 
-import useDeviceType from "@/hooks/useDeviceType";
 import useRootInit from "@/hooks/useRootInit";
 import useDeepLink from "@/hooks/useDeepLink";
 import useSelectFileDialog from "@/hooks/useSelectFileDialog";
@@ -85,7 +84,6 @@ const Root = ({
     editorUrl: documentserverUrl,
   });
 
-  const { currentDeviceType } = useDeviceType();
   const { isShowDeepLink, setIsShowDeepLink } = useDeepLink({
     settings,
     fileInfo,
@@ -155,13 +153,10 @@ const Root = ({
     selectFileDialogVisible,
   ]);
 
-  return !fileId ? (
-    <AppLoader />
-  ) : isShowDeepLink ? (
+  return isShowDeepLink ? (
     <DeepLink
       fileInfo={fileInfo}
       userEmail={user?.email}
-      currentDeviceType={currentDeviceType}
       deepLinkConfig={settings?.deepLink}
       setIsShowDeepLink={setIsShowDeepLink}
     />
@@ -182,7 +177,9 @@ const Root = ({
           isSharingAccess={isSharingAccess}
           documentserverUrl={documentserverUrl}
           fileInfo={fileInfo}
-          errorMessage={error?.message}
+          errorMessage={
+            error?.message ?? isSkipError ? t("Common:InvalidLink") : ""
+          }
           onSDKRequestSharingSettings={onSDKRequestSharingSettings}
           onSDKRequestSaveAs={onSDKRequestSaveAs}
           onSDKRequestInsertImage={onSDKRequestInsertImage}

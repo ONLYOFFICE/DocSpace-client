@@ -67,7 +67,7 @@ const Tooltip = React.forwardRef<TooltipRefProps, TooltipProps>(
       float,
       noArrow = true,
       fallbackAxisSideDirection,
-      opacity,
+      opacity = 1,
       imperativeModeOnly,
       ...rest
     },

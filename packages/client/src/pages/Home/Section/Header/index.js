@@ -870,6 +870,7 @@ const SectionHeaderContent = (props) => {
       haveLinksRight,
       isPublicRoomType,
       isPublicRoom,
+      isFrame,
     } = props;
 
     const isArchive = selectedFolder.rootFolderType === FolderType.Archive;
@@ -881,12 +882,14 @@ const SectionHeaderContent = (props) => {
           label: t("Files:CopyLink"),
           icon: TabletLinkReactSvgUrl,
           onClick: onShareRoom,
+          disabled: isFrame,
         },
-        security?.Download && {
+        {
           key: "public-room_edit",
           label: t("Common:Download"),
           icon: DownloadReactSvgUrl,
           onClick: onDownloadAll,
+          disabled: !security?.Download,
         },
       ];
     }
@@ -918,15 +921,13 @@ const SectionHeaderContent = (props) => {
       return getGroupContextOptions(t, currentGroup, false, true);
     }
 
-    const canShare = isPersonalRoom && !isCollaborator;
-
     return [
       {
         id: "header_option_sharing-settings",
         key: "sharing-settings",
         label: t("Files:Share"),
         onClick: onClickShare,
-        disabled: !canShare,
+        disabled: !selectedFolder.security?.CreateRoomFrom,
         icon: ShareReactSvgUrl,
       },
       {
@@ -980,7 +981,7 @@ const SectionHeaderContent = (props) => {
         label: t("Common:ReconnectStorage"),
         icon: ReconnectSvgUrl,
         onClick: () => onClickReconnectStorage(selectedFolder, t),
-        disabled: !security?.Reconnect,
+        disabled: !security?.EditRoom || !security?.Reconnect,
       },
       {
         id: "header_option_edit-room",
@@ -1054,8 +1055,7 @@ const SectionHeaderContent = (props) => {
         onClick: () => {
           onClickCreateRoom({ title: selectedFolder.title, isFolder: true });
         },
-        disabled:
-          isCollaborator || selectedFolder.rootFolderType !== FolderType.USER,
+        disabled: !selectedFolder.security?.CreateRoomFrom,
       },
       {
         id: "option_leave-room",
@@ -1804,6 +1804,7 @@ export default inject(
       setSelection,
       setShareFolderDialogVisible,
       startUpload,
+      onClickReconnectStorage,
     };
   },
 )(

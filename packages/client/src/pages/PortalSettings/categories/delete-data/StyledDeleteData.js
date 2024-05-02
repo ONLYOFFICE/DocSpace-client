@@ -59,7 +59,7 @@ export const ButtonWrapper = styled.div`
   align-items: center;
 
   .request-again-link {
-    margin-left: 4px;
+    margin-inline-start: 4px;
   }
 
   @media ${mobile} {

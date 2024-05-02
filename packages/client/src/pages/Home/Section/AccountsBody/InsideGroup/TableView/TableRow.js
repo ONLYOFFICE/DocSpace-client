@@ -583,6 +583,7 @@ const InsideGroupTableRow = (props) => {
               onClick={onEmailClick}
               isTextOverflow
               enableUserSelect
+              dir="auto"
             >
               {email}
             </Link>

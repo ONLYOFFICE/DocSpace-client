@@ -1521,6 +1521,19 @@ class TableHeader extends React.Component<
             } else if (item !== `${settingsSize}px`) {
               const percent = (getSubstring(item) / oldWidth) * 100;
 
+              if (percent === 100) {
+                const enableColumnsLength = columns.filter(
+                  (column) => !column.defaultSize && column.enable,
+                ).length;
+
+                if (enableColumnsLength !== 1) {
+                  localStorage.removeItem(columnStorageName);
+                  this.resetColumns();
+
+                  return;
+                }
+              }
+
               let newItemWidth = defaultColumnSize
                 ? `${defaultColumnSize}px`
                 : percent === 0

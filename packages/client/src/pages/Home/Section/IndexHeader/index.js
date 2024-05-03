@@ -63,6 +63,7 @@ const StyledTableIndexMenu = styled.div`
   }
   @media ${mobile} {
     height: 48px;
+    padding: 0px 18px;
   }
 
   .table-header_index-separator {

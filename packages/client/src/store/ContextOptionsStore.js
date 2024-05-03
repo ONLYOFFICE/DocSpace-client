@@ -1344,7 +1344,7 @@ class ContextOptionsStore {
       {
         id: "option_sharing-settings",
         key: "sharing-settings",
-        label: t("Files:Share"),
+        label: t("Common:Share"),
         icon: ShareReactSvgUrl,
         onClick: () => this.onClickShare(item),
         disabled: !isShareable,

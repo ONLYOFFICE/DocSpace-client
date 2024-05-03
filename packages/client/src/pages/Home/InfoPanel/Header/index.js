@@ -130,7 +130,7 @@ const InfoPanelHeaderContent = (props) => {
   if (selection?.canShare) {
     personalSubmenu.unshift({
       id: "info_share",
-      name: t("Files:Share"),
+      name: t("Common:Share"),
       onClick: setShare,
       content: null,
     });

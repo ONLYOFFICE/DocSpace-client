@@ -28,6 +28,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import api from "@docspace/shared/api";
 import { size } from "@docspace/shared/utils";
 import { FileStatus } from "@docspace/shared/enums";
+import { toastr } from "@docspace/shared/components/toast";
 
 class VersionHistoryStore {
   isVisible = false;
@@ -154,7 +155,7 @@ class VersionHistoryStore {
         updatedVersions.unshift(newVersion);
         this.setVerHistoryFileVersions(updatedVersions);
       })
-      .catch((e) => console.error(e))
+      .catch((e) => toastr.error(e))
       .finally(() => {
         clearTimeout(this.timerId);
         this.timerId = null;

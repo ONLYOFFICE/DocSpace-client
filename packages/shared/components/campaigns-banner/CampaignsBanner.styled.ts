@@ -120,6 +120,7 @@ const BannerIcon = styled.div`
     props.theme.interfaceDirection === "rtl"
       ? css`
           left: 0px;
+          transform: scaleX(-1);
         `
       : css`
           right: 0px;

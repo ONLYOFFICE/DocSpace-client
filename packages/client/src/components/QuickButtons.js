@@ -60,6 +60,7 @@ const QuickButtons = (props) => {
     onClickShare,
     isPersonalRoom,
     isArchiveFolder,
+    isIndexEditingMode,
   } = props;
 
   const { id, locked, shared, fileStatus, title, fileExst } = item;
@@ -119,7 +120,7 @@ const QuickButtons = (props) => {
 
   return (
     <div className="badges additional-badges badges__quickButtons">
-      {isAvailableLockFile && (
+      {isAvailableLockFile && !isIndexEditingMode && (
         <ColorTheme
           themeId={ThemeId.IconButton}
           iconName={iconLock}
@@ -134,7 +135,7 @@ const QuickButtons = (props) => {
           title={t("UnblockVersion")}
         />
       )}
-      {isAvailableDownloadFile && (
+      {isAvailableDownloadFile && !isIndexEditingMode && (
         <ColorTheme
           themeId={ThemeId.IconButton}
           iconName={FileActionsDownloadReactSvgUrl}
@@ -147,7 +148,7 @@ const QuickButtons = (props) => {
           title={t("Common:Download")}
         />
       )}
-      {showCopyLinkIcon && (
+      {showCopyLinkIcon && !isIndexEditingMode && (
         <ColorTheme
           themeId={ThemeId.IconButton}
           iconName={LinkReactSvgUrl}
@@ -160,7 +161,7 @@ const QuickButtons = (props) => {
           title={t("Files:CopySharedLink")}
         />
       )}
-      {isAvailableShareFile && (
+      {isAvailableShareFile && !isIndexEditingMode && (
         <ColorTheme
           themeId={ThemeId.IconButton}
           iconName={LinkReactSvgUrl}

@@ -114,6 +114,7 @@ export default function withQuickButtons(WrappedComponent) {
         isPublicRoom,
         isPersonalRoom,
         isArchiveFolder,
+        isIndexEditingMode,
       } = this.props;
 
       const quickButtonsComponent = (
@@ -134,6 +135,7 @@ export default function withQuickButtons(WrappedComponent) {
           folderCategory={folderCategory}
           onCopyPrimaryLink={this.onCopyPrimaryLink}
           isArchiveFolder={isArchiveFolder}
+          isIndexEditingMode={isIndexEditingMode}
         />
       );
 
@@ -156,6 +158,7 @@ export default function withQuickButtons(WrappedComponent) {
       treeFoldersStore,
       filesStore,
       infoPanelStore,
+      indexingStore,
     }) => {
       const { lockFileAction, setFavoriteAction, onSelectItem } =
         filesActionsStore;
@@ -166,6 +169,8 @@ export default function withQuickButtons(WrappedComponent) {
         isPersonalRoom,
         isArchiveFolder,
       } = treeFoldersStore;
+
+      const { isIndexEditingMode } = indexingStore;
 
       const { setSharingPanelVisible } = dialogsStore;
 
@@ -189,6 +194,7 @@ export default function withQuickButtons(WrappedComponent) {
         isArchiveFolder,
         getPrimaryFileLink,
         setShareChanged,
+        isIndexEditingMode,
       };
     },
   )(observer(WithQuickButtons));

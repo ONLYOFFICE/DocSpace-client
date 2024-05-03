@@ -60,5 +60,7 @@ export const getI18NInstance = (portalLng: string) => {
     });
   });
 
+  i18n.changeLanguage(portalLng);
+
   return i18n;
 };

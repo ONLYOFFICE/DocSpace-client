@@ -42,6 +42,7 @@ export interface InfiniteLoaderProps {
   className?: string;
   infoPanelVisible?: boolean;
   countTilesInRow?: number;
+  isIndexEditingMode: boolean;
 }
 
 export interface ListComponentProps extends InfiniteLoaderProps {

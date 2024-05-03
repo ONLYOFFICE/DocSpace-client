@@ -55,6 +55,8 @@ import { TooltipContent } from "../sub-components/TooltipContent";
 
 import SubtitleUrl from "PUBLIC_DIR/images/sdk-presets_subtitle.react.svg?url";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_files-search.react.svg?url";
+import SubtitleUrlDark from "PUBLIC_DIR/images/sdk-presets_subtitle_dark.png?url";
+import SearchUrlDark from "PUBLIC_DIR/images/sdk-presets_files-search_dark.png?url";
 
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -585,7 +587,7 @@ const FileSelector = (props) => {
                   <TooltipContent
                     title={t("Subtitle")}
                     description={t("SubtitleDescription")}
-                    img={SubtitleUrl}
+                    img={theme.isBase ? SubtitleUrl : SubtitleUrlDark}
                   />
                 }
               />
@@ -605,7 +607,7 @@ const FileSelector = (props) => {
                   <TooltipContent
                     title={t("Common:Search")}
                     description={t("FilesSearchDescription")}
-                    img={SearchUrl}
+                    img={theme.isBase ? SearchUrl : SearchUrlDark}
                   />
                 }
               />

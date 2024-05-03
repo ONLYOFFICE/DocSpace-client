@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useCallback, useEffect, useRef } from "react";
-import { InfiniteLoader, WindowScroller } from "react-virtualized";
+import { InfiniteLoader, WindowScroller, List } from "react-virtualized";
 
 import { TableSkeleton } from "../../../skeletons/table";
 import { RowsSkeleton } from "../../../skeletons/rows";
@@ -49,9 +49,10 @@ const ListComponent = ({
   infoPanelVisible,
 }: ListComponentProps) => {
   const loaderRef = useRef<InfiniteLoader | null>(null);
+  const listRef = useRef<List | null>(null);
 
   useEffect(() => {
-    loaderRef?.current?.forceUpdate();
+    listRef?.current?.forceUpdate();
   });
 
   const getLoader = (style: React.CSSProperties, key: string) => {
@@ -164,7 +165,10 @@ const ListComponent = ({
                 autoHeight
                 height={height}
                 onRowsRendered={onRowsRendered}
-                ref={registerChild}
+                ref={(ref: List | null) => {
+                  listRef.current = ref;
+                  registerChild(ref);
+                }}
                 rowCount={hasMoreFiles ? children.length + 2 : children.length}
                 rowHeight={itemSize}
                 rowRenderer={viewAs === "table" ? renderTable : renderRow}
@@ -176,6 +180,8 @@ const ListComponent = ({
                 overscanRowCount={3}
                 onScroll={onScroll}
                 viewAs={viewAs}
+                // React virtualized sets "LTR" by default.
+                style={{ direction: "inherit" }}
               />
             );
           }}

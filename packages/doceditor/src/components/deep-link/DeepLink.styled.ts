@@ -109,26 +109,35 @@ export const BgBlock = styled.div<{ bgPattern: string }>`
 `;
 
 export const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 56px auto;
-  max-width: 960px;
+  height: 100%;
   width: 100vw;
+  max-width: 960px;
 
   @media ${mobile} {
     margin: 0 auto;
+    align-items: flex-start;
   }
 `;
 
-export const LogoWrapper = styled.div`
-  width: 386px;
-  height: 44px;
-  margin-top: auto;
-  margin-bottom: 64px;
+export const StyledBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  max-width: 960px;
+  width: 100vw;
+  margin-bottom: 16px;
 
   @media ${mobile} {
-    display: none;
+    margin: 0 auto;
+    align-items: flex-start;
   }
 `;
+export const LogoWrapper = styled.div`
+  margin-bottom: 64px;
+  margin-top: 56px;
 
+  @media ${mobile} {
+    margin-top: 32px;
+  }
+`;

@@ -23,21 +23,56 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import hexRgb from "hex-rgb";
+import styled from "styled-components";
 
-export const enum ThemeId {
-  IconWrapper = "iconWrapper",
-  IconButton = "iconButton",
-  IconButtonPin = "iconButtonPin",
-  IconButtonMute = "iconButtonMute",
-  IndicatorFilterButton = "indicatorFilterButton",
-  FilterBlockItemTag = "filterBlockItemTag",
-  VersionBadge = "versionBadge",
-  LinkForgotPassword = "linkForgotPassword",
-  LoadingButton = "loadingButton",
-  InfoPanelToggle = "infoPanelToggle",
-  Link = "link",
-  IndicatorLoader = "indicatorLoader",
-  Progress = "progress",
-  SubmenuText = "submenuText",
-  IndexIconButton = "indexIconButton",
-}
+import { Base, TColorScheme } from "../../../themes";
+
+const indexWrapperBackground = (props: {
+  $currentColorScheme: TColorScheme;
+}) => {
+  const { red, green, blue } = hexRgb(props.$currentColorScheme?.main?.accent);
+
+  return `rgba(${red}, ${green}, ${blue}, 0.25)`;
+};
+
+const StyledIndexWrapper = styled.div<{
+  $currentColorScheme: TColorScheme | undefined;
+}>`
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+
+  .index-up-icon {
+    transform: rotate(-90deg);
+  }
+
+  .index-down-icon {
+    transform: rotate(90deg);
+  }
+
+  &:hover {
+    cursor: pointer;
+    background: ${(props) => indexWrapperBackground(props)};
+
+    svg {
+      cursor: pointer;
+
+      path {
+        fill: ${(props) => props.$currentColorScheme?.main?.accent} !important;
+      }
+
+      circle {
+        stroke: ${(props) =>
+          props.$currentColorScheme?.main?.accent} !important;
+      }
+    }
+  }
+`;
+
+StyledIndexWrapper.defaultProps = { theme: Base };
+
+export default StyledIndexWrapper;

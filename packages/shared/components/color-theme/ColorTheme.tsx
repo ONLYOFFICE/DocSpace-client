@@ -44,6 +44,7 @@ import LoadingButton from "./styled-components/loadingButton";
 import ProgressColorTheme from "./styled-components/progress";
 import VersionBadgeTheme from "./styled-components/versionBadge";
 import SubmenuTextTheme from "./styled-components/submenuText";
+import StyledIndexWrapper from "./sub-components/StyledIndexWrapper";
 
 const ColorTheme = forwardRef<
   HTMLDivElement,
@@ -72,6 +73,17 @@ const ColorTheme = forwardRef<
             themeId={themeId}
             $currentColorScheme={currentColorScheme}
           />
+        );
+      }
+      case ThemeId.IndexIconButton: {
+        return (
+          <StyledIndexWrapper $currentColorScheme={currentColorScheme}>
+            <IconButtonTheme
+              {...props}
+              themeId={themeId}
+              $currentColorScheme={currentColorScheme}
+            />
+          </StyledIndexWrapper>
         );
       }
 

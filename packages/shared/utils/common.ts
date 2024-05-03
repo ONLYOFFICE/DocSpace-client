@@ -65,6 +65,7 @@ import { TI18n, TTranslation } from "../types";
 import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
 import { TRoom } from "../api/rooms/types";
+import { TPasswordHash } from "../api/settings/types";
 import TopLoaderService from "../components/top-loading-indicator";
 
 import { Encoder } from "./encoder";
@@ -90,7 +91,7 @@ export function changeLanguage(i18n: TI18n, currentLng = getCookie(LANGUAGE)) {
 
 export function createPasswordHash(
   password: string,
-  hashSettings: { [key: string]: boolean },
+  hashSettings?: TPasswordHash,
 ) {
   if (
     !password ||

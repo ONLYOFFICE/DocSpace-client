@@ -20,6 +20,5 @@
   "RegisterTitle": "Demande d'inscription",
   "RegistrationEmailWatermark": "Adresse de courriel",
   "RememberHelper": "Par défaut, la durée de validité de la session est de 20 minutes. Cochez cette option pour la définir sur 1 an. Vous pouvez définir votre propre valeur en accédant aux paramètres.",
-  "ResendCode": "Renvoyer le code",
-  "UserIsAlreadyRegistered": "L'utilisateur <1>{{email}}</1> est déjà enregistré dans ce DocSpace, saisissez votre mot de passe ou revenez en arrière pour continuer avec un autre e-mail."
+  "ResendCode": "Renvoyer le code"
 }

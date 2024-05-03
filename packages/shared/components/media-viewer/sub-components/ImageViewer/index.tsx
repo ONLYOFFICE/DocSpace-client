@@ -851,9 +851,18 @@ export const ImageViewer = ({
     }
   };
 
-  const onError = useCallback(() => {
-    setIsError(true);
-  }, []);
+  const onError = useCallback(
+    (e: SyntheticEvent<HTMLImageElement, Event>) => {
+      if (window.DocSpaceConfig?.imageThumbnails && thumbnailSrc && src) {
+        // if thumbnailSrc is unavailable, try to load original image
+        e.currentTarget.src = src;
+        return;
+      }
+
+      setIsError(true);
+    },
+    [src, thumbnailSrc],
+  );
 
   const model = React.useMemo(() => contextModel(true), [contextModel]);
 
@@ -944,7 +953,7 @@ export const ImageViewer = ({
             draggable="false"
             src={
               window.DocSpaceConfig?.imageThumbnails && thumbnailSrc
-                ? `${thumbnailSrc}&size=1280x720`
+                ? `${thumbnailSrc}&size=3840x2160`
                 : src
             }
             ref={imgRef}

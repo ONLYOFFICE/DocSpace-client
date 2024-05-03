@@ -416,3 +416,13 @@ export type TFilesUsedSpace = {
     usedSpace: number;
   };
 };
+
+export type TConnectingStorage = {
+  name: string;
+  key: string;
+  connected: boolean;
+  oauth: boolean;
+  redirectUrl: string;
+};
+
+export type TConnectingStorages = TConnectingStorage[];

@@ -453,7 +453,6 @@ export default inject(
       openConnectWindow,
       fetchThirdPartyProviders,
       setConnectDialogVisible,
-      setSelectedThirdPartyAccount,
       isConnectDialogReconnect,
       saveAfterReconnectOAuth,
       setSaveAfterReconnectOAuth,

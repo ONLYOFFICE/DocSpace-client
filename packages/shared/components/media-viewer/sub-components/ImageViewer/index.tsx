@@ -864,7 +864,7 @@ export const ImageViewer = ({
     [src, thumbnailSrc],
   );
 
-  const model = React.useMemo(contextModel, [contextModel]);
+  const model = React.useMemo(() => contextModel(true), [contextModel]);
 
   useEffect(() => {
     unmountRef.current = false;

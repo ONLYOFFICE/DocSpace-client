@@ -23,37 +23,15 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
-import type { Dispatch, SetStateAction } from "react";
-
-import type { getCustomToolbar } from "../../MediaViewer.helpers";
-import type { DevicesType } from "../../MediaViewer.types";
-
-interface ImageViewerProps {
-  src?: string;
-  thumbnailSrc?: string;
-  isTiff?: boolean;
-  imageId: number;
-  version: number;
-  errorTitle: string;
-  isFistImage: boolean;
-  isLastImage: boolean;
-  panelVisible: boolean;
-  mobileDetails: JSX.Element;
-  toolbar: ReturnType<typeof getCustomToolbar>;
-  devices: DevicesType;
-
-  onPrev?: VoidFunction;
-  onNext?: VoidFunction;
-  onMask?: VoidFunction;
-  contextModel: (isError?: boolean) => ContextMenuModel[];
-  resetToolbarVisibleTimer: VoidFunction;
-  setIsOpenContextMenu: Dispatch<SetStateAction<boolean>>;
-  generateContextMenu: (
-    isOpen: boolean,
-    right?: string,
-    bottom?: string,
-  ) => JSX.Element;
-}
-
-export default ImageViewerProps;
+export const DEFAULT_EXTS_IMAGE = [
+  ".svg",
+  ".bmp",
+  ".gif",
+  ".jpeg",
+  ".jpg",
+  ".png",
+  ".ico",
+  ".tif",
+  ".tiff",
+  ".webp",
+];

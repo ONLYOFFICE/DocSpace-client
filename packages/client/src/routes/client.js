@@ -37,6 +37,9 @@ import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 import FilesView from "SRC_DIR/pages/Home/View/Files";
 import AccountsView from "SRC_DIR/pages/Home/View/Accounts";
 import SettingsView from "SRC_DIR/pages/Home/View/Settings";
+const PublicPreview = loadable(() =>
+  componentLoader(() => import("../pages/PublicPreview/PublicPreview")),
+);
 
 import { generalRoutes } from "./general";
 
@@ -378,6 +381,16 @@ const ClientRoutes = [
           <FormGallery />
         </ErrorBoundary>
       </PrivateRoute>
+    ),
+  },
+  {
+    path: "/share/preview/:id",
+    element: (
+      <PublicRoute>
+        <ErrorBoundary>
+          <PublicPreview />
+        </ErrorBoundary>
+      </PublicRoute>
     ),
   },
   {

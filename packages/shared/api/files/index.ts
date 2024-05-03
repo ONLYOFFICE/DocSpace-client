@@ -470,10 +470,15 @@ export async function createFile(
 //   return request(options);
 // }
 
-export async function getFileInfo(fileId: number) {
+export async function getFileInfo(fileId: number | string, share?: string) {
   const options: AxiosRequestConfig = {
     method: "get",
     url: `/files/file/${fileId}`,
+    headers: share
+      ? {
+          "Request-Token": share,
+        }
+      : undefined,
   };
 
   const res = (await request(options)) as TFile;

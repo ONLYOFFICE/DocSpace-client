@@ -1,5 +1,6 @@
 {
   "AboutDataImport": "Data import includes several steps: data upload, parsing, import configuration, and import. Your backup file will be stored in ONLYOFFICE DocSpace servers for 24 hours, and then it will be automatically deleted.",
+  "AccountAlreadyExists": "Account already exists",
   "AccentColor": "Accent",
   "AccessRightsAccessToProduct": "Access to {{product}} module is given to",
   "AccessRightsAllUsers": "All {{users}}",
@@ -213,6 +214,7 @@
   "RestoreBackupDescription": "Use this option to restore your space from the previously saved backup file.",
   "RestoreBackupResetInfoWarningText": "All current passwords will be reset. DocSpace users will get an email with the access restoration link.",
   "RestoreBackupWarningText": "DocSpace will become unavailable during the restore process. After the restore is complete all the changes made after the date of the selected restore point will be lost.",
+  "RolesAreSet": "Roles already set for the selected users.",
   "RoomsModule": "Backup room",
   "RoomsModuleDescription": "You may create a new room specifically for the backup, choose one of the existing rooms, or save the copy in their {{roomName}} room.",
   "SaveToApply": "Click the <strong>Save</strong> button at the bottom to apply.",
@@ -296,6 +298,7 @@
   "UseHttp": "Use Http",
   "UserAgreement": "I confirm and want to proceed",
   "UserLimitExceeded": "User limit exceeded. To proceed to the next step, please adjust the number of users or increase the DocSpace user limit.",
+  "UsersAreRegistered": "You selected users registered in your DocSpace, with the roles already set. Please proceed to the next step or go back to select more users.",
   "UsersSectionDescription": "Section \"Users\" includes the users you selected in the previous step. By default, it is always enabled and can't be unselected.",
   "UseSpecialChar": "Use special characters",
   "UseUpperCase": "Use capital letters",

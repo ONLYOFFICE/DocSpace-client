@@ -113,6 +113,7 @@ const BannerButton = styled.button<{
 `;
 
 const BannerIcon = styled.div`
+  z-index: -1;
   position: absolute;
   bottom: 0px;
   ${(props) =>

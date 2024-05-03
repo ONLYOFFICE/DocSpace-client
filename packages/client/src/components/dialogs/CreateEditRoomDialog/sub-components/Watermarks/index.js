@@ -31,9 +31,9 @@ import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group
 
 import ViewerInfoWatermark from "./ViewerInfo";
 import { StyledBody } from "./StyledComponent";
+import { WatermarkAdditions } from "@docspace/shared/enums";
 
-const textWatermark = "text",
-  imageWatermark = "image",
+const imageWatermark = "image",
   viewerInfoWatermark = "viewerInfo";
 
 const options = (t) => [
@@ -51,6 +51,34 @@ const positionOptions = (t) => [
   { key: -45, label: t("Diagonal") },
   { key: 0, label: t("Horizontal") },
 ];
+
+const elementsOptions = (t) => [
+  {
+    key: "UserName",
+    title: t("UserName"),
+    index: 0,
+  },
+  {
+    key: "UserEmail",
+    title: t("UserEmail"),
+    index: 1,
+  },
+  {
+    key: "UserIpAdress",
+    title: t("UserIPAddress"),
+    index: 2,
+  },
+  {
+    key: "CurrentDate",
+    title: t("Common:CurrentDate"),
+    index: 3,
+  },
+  {
+    key: "RoomName",
+    title: t("Common:RoomName"),
+    index: 4,
+  },
+];
 const Watermarks = ({ setRoomParams }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
   const [type, setType] = useState(viewerInfoWatermark);
@@ -58,14 +86,20 @@ const Watermarks = ({ setRoomParams }) => {
   const dataPosition = positionOptions(t);
   const initialPosition = dataPosition[0];
 
+  const dataTabs = elementsOptions(t);
+  const initialTab = [dataTabs[0]];
+
   useEffect(() => {
+    let additions = 0;
+    initialTab.map((item) => (additions += WatermarkAdditions[item.key]));
+
     setRoomParams((prevState) => ({
       ...prevState,
       watermarks: {
         enabled: true,
         rotate: initialPosition.key,
         text: "",
-        additions: 0,
+        additions,
       },
     }));
   }, []);
@@ -77,7 +111,6 @@ const Watermarks = ({ setRoomParams }) => {
   };
 
   const setParams = (info) => {
- 
     setRoomParams((prevState) => ({
       ...prevState,
       watermarks: { ...prevState.watermarks, ...info },
@@ -102,6 +135,8 @@ const Watermarks = ({ setRoomParams }) => {
           setParams={setParams}
           initialPosition={initialPosition}
           dataPosition={dataPosition}
+          dataTabs={dataTabs}
+          initialTab={initialTab}
         />
       )}
     </StyledBody>

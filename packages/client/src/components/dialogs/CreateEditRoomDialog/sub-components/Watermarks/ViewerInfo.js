@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import { TextInput } from "@docspace/shared/components/text-input";
@@ -34,56 +34,45 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 import { StyledWatermark } from "./StyledComponent";
 import { WatermarkAdditions } from "@docspace/shared/enums";
 
-const options = (t) => [
-  {
-    key: "UserName",
-    title: t("UserName"),
-  },
-  {
-    key: "UserEmail",
-    title: t("UserEmail"),
-  },
-  {
-    key: "UserIpAdress",
-    title: t("UserIPAddress"),
-  },
-  {
-    key: "CurrentDate",
-    title: t("Common:CurrentDate"),
-  },
-  {
-    key: "RoomName",
-    title: t("Common:RoomName"),
-  },
-];
-
-const ViewerInfoWatermark = ({ setParams, initialPosition, dataPosition }) => {
-  const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
-
-  const dataTabs = options(t);
-
-  const [elements, setElements] = useState({
+const getInitialState = (initialTab) => {
+  const state = {
     UserName: false,
     UserEmail: false,
     UserIpAdress: false,
     CurrentDate: false,
     RoomName: false,
+  };
+
+  initialTab.map((item) => {
+    state[item.key] = true;
   });
+
+  return state;
+};
+
+const ViewerInfoWatermark = ({
+  setParams,
+  initialPosition,
+  dataPosition,
+  dataTabs,
+  initialTab,
+}) => {
+  const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
+  const elements = useRef(getInitialState(initialTab));
+
   const [selectedPosition, setSelectedPosition] = useState(initialPosition);
   const [textValue, setTextValue] = useState("");
 
   const onSelect = (item) => {
-    const updatedElem = elements[item.key];
-    const key = item.key;
-
-    const updatedState = { ...elements, [key]: !updatedElem };
-
-    setElements(updatedState);
-
+    let elementsData = elements.current;
     let flagsCount = 0;
 
-    for (const key in updatedState) {
-      const value = updatedState[key];
+    const key = item.key;
+
+    elementsData[key] = !elementsData[item.key];
+
+    for (const key in elementsData) {
+      const value = elementsData[key];
 
       if (value) {
         flagsCount += WatermarkAdditions[key];
@@ -114,6 +103,7 @@ const ViewerInfoWatermark = ({ setParams, initialPosition, dataPosition }) => {
       <TabsContainer
         elements={dataTabs}
         onSelect={onSelect}
+        selectedItem={initialTab.map((item) => item.index)}
         multiple
         withBorder
       />

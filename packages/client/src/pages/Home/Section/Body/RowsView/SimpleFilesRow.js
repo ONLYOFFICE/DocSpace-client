@@ -362,6 +362,7 @@ const SimpleFilesRow = (props) => {
     itemIndex,
     badgeUrl,
     canDrag,
+    isIndexEditingMode,
   } = props;
 
   const isMobileDevice = isMobileUtile();
@@ -462,6 +463,7 @@ const SimpleFilesRow = (props) => {
           contextButtonSpacerWidth={displayShareButton}
           dragging={dragging && isDragging}
           isDragging={dragging}
+          isIndexEditingMode={isIndexEditingMode}
           isActive={isActive}
           inProgress={inProgress}
           isThirdPartyFolder={item.isThirdPartyFolder}

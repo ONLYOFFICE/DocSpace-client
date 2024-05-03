@@ -85,7 +85,7 @@ const Sdk = ({
   );
 
   useEffect(() => {
-    if (window.parent && !frameConfig && isLoaded) {
+    if (window.parent && !frameConfig?.frameId && isLoaded) {
       callCommand("setConfig");
     }
   }, [callCommand, isLoaded]);
@@ -211,12 +211,6 @@ const Sdk = ({
   const onClose = useCallback(() => {
     frameCallEvent({ event: "onCloseCallback" });
   }, [frameCallEvent]);
-
-  const onCloseCallback = !!frameConfig?.events.onCloseCallback
-    ? {
-        onClose,
-      }
-    : {};
 
   let component;
 

@@ -142,7 +142,7 @@ const useFilesHelper = ({
         }
       }
 
-      const id = isUserOnly ? "@my" : selectedItemId || "";
+      const id = selectedItemId ?? (isUserOnly ? "@my" : "");
 
       filter.folder = id.toString();
 

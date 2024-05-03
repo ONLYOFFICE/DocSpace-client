@@ -101,6 +101,7 @@ const OnlyofficeWorkspace = ({
   currentDeviceType,
   getMigrationStatus,
   setUsers,
+  filteredUsers,
 }) => {
   const [showReminder, setShowReminder] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
@@ -235,7 +236,13 @@ const OnlyofficeWorkspace = ({
           <Text className="step-title">{getStepTitle(t, currentStep)}</Text>
         </Box>
         <Box className="step-description">
-          {getWorkspaceStepDescription(t, currentStep, renderTooltip, Trans)}
+          {getWorkspaceStepDescription(
+            t,
+            currentStep,
+            renderTooltip,
+            Trans,
+            filteredUsers.length === 0,
+          )}
         </Box>
         <StepContent
           t={t}
@@ -251,7 +258,7 @@ const OnlyofficeWorkspace = ({
 };
 
 export default inject(({ setup, settingsStore, importAccountsStore }) => {
-  const { clearCheckedAccounts, getMigrationStatus, setUsers } =
+  const { clearCheckedAccounts, getMigrationStatus, setUsers, filteredUsers } =
     importAccountsStore;
   const { viewAs, setViewAs } = setup;
   const { currentDeviceType } = settingsStore;
@@ -263,5 +270,6 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
     currentDeviceType,
     getMigrationStatus,
     setUsers,
+    filteredUsers,
   };
 })(withTranslation(["Common, Settings"])(observer(OnlyofficeWorkspace)));

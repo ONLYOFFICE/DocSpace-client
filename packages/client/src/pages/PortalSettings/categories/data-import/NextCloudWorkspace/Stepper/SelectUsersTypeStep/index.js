@@ -43,16 +43,8 @@ const SelectUsersTypeStep = (props) => {
     users,
     searchValue,
     setSearchValue,
+    filteredUsers,
   } = props;
-
-  const filteredUsers = useMemo(
-    () =>
-      users.result.filter(
-        (user) =>
-          !users.existing.find((existingUser) => existingUser.key === user.key),
-      ),
-    [users],
-  );
 
   const [boundaries, setBoundaries] = useState([0, 25]);
   const [dataPortion, setDataPortion] = useState(
@@ -95,46 +87,49 @@ const SelectUsersTypeStep = (props) => {
         displaySettings
       />
 
-      {!checkedUsers.result.length > 0 && (
-        <SearchInput
-          id="search-checkedUsers-type-input"
-          className="importUsersSearch"
-          placeholder={t("Common:Search")}
-          value={searchValue}
-          onChange={onChangeInput}
-          refreshTimeout={100}
-          onClearSearch={onClearSearchInput}
-        />
-      )}
+      {filteredUsers.length > 0 && (
+        <>
+          {!checkedUsers.result.length > 0 && (
+            <SearchInput
+              id="search-checkedUsers-type-input"
+              className="importUsersSearch"
+              placeholder={t("Common:Search")}
+              value={searchValue}
+              onChange={onChangeInput}
+              refreshTimeout={100}
+              onClearSearch={onClearSearchInput}
+            />
+          )}
 
-      <AccountsTable t={t} accountsData={filteredAccounts} />
+          <AccountsTable t={t} accountsData={filteredAccounts} />
 
-      {filteredUsers.length > 25 && filteredAccounts.length > 0 && (
-        <AccountsPaging
-          t={t}
-          numberOfItems={filteredUsers.length}
-          setDataPortion={handleDataChange}
-          filteredUsers={filteredUsers}
-        />
-      )}
+          {filteredUsers.length > 25 && filteredAccounts.length > 0 && (
+            <AccountsPaging
+              t={t}
+              numberOfItems={filteredUsers.length}
+              setDataPortion={handleDataChange}
+            />
+          )}
 
-      {filteredAccounts.length > 0 && (
-        <SaveCancelButtons
-          className="save-cancel-buttons"
-          onSaveClick={incrementStep}
-          onCancelClick={decrementStep}
-          showReminder={true}
-          saveButtonLabel={t("Settings:NextStep")}
-          cancelButtonLabel={t("Common:Back")}
-          displaySettings
-        />
+          {filteredAccounts.length > 0 && (
+            <SaveCancelButtons
+              className="save-cancel-buttons"
+              onSaveClick={incrementStep}
+              onCancelClick={decrementStep}
+              showReminder={true}
+              saveButtonLabel={t("Settings:NextStep")}
+              cancelButtonLabel={t("Common:Back")}
+              displaySettings
+            />
+          )}
+        </>
       )}
     </Wrapper>
   );
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { checkedUsers, users, searchValue, setSearchValue } =
+  const { checkedUsers, users, searchValue, setSearchValue, filteredUsers } =
     importAccountsStore;
 
   return {
@@ -142,5 +137,6 @@ export default inject(({ importAccountsStore }) => {
     users,
     searchValue,
     setSearchValue,
+    filteredUsers,
   };
 })(observer(SelectUsersTypeStep));

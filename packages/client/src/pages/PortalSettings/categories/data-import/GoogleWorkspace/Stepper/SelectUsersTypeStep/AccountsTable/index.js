@@ -40,7 +40,6 @@ const AccountsTable = ({
   changeGroupType,
   UserTypes,
   toggleAllAccounts,
-  filteredUsers,
 }) => {
   const typeOptions = [
     {
@@ -78,7 +77,6 @@ const AccountsTable = ({
             sectionWidth={context.sectionWidth}
             accountsData={accountsData}
             typeOptions={typeOptions}
-            filteredUsers={filteredUsers}
           />
         ) : (
           <RowView
@@ -86,7 +84,6 @@ const AccountsTable = ({
             sectionWidth={context.sectionWidth}
             accountsData={accountsData}
             typeOptions={typeOptions}
-            filteredUsers={filteredUsers}
           />
         )
       }

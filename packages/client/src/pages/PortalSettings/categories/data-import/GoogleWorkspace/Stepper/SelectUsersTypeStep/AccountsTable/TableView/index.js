@@ -285,6 +285,7 @@ export default inject(({ userStore, importAccountsStore }) => {
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
+    filteredUsers,
   } = importAccountsStore;
 
   return {
@@ -294,5 +295,6 @@ export default inject(({ userStore, importAccountsStore }) => {
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
+    filteredUsers,
   };
 })(observer(TableView));

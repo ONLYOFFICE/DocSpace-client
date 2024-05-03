@@ -99,6 +99,13 @@ class ImportAccountsStore {
     );
   }
 
+  get filteredUsers() {
+    return this.users.result.filter(
+      (user) =>
+        !this.users.existing.some((existingUser) => existingUser.key === user.key),
+    );
+  }
+
   setResultUsers = () => {
     const checkedIds = this.checkedUsers.withoutEmail.map(
       (checkedUser) => checkedUser.key,

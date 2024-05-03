@@ -41,7 +41,6 @@ const AccountsTable = (props) => {
     changeGroupType,
     UserTypes,
     toggleAllAccounts,
-    filteredUsers,
   } = props;
 
   const setTypeDocspaceAdmin = () => {
@@ -84,7 +83,6 @@ const AccountsTable = (props) => {
             sectionWidth={context.sectionWidth}
             accountsData={accountsData}
             typeOptions={typeOptions}
-            filteredUsers={filteredUsers}
           />
         ) : (
           <RowView
@@ -92,7 +90,6 @@ const AccountsTable = (props) => {
             sectionWidth={context.sectionWidth}
             accountsData={accountsData}
             typeOptions={typeOptions}
-            filteredUsers={filteredUsers}
           />
         )
       }

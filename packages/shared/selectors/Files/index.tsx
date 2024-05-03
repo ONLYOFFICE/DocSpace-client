@@ -76,6 +76,7 @@ const FilesSelector = ({
   onSetBaseFolderPath,
   isUserOnly,
   isRoomsOnly,
+  openRoot,
   isThirdParty,
   rootThirdPartyId,
   roomsFolderId,
@@ -186,6 +187,7 @@ const FilesSelector = ({
     setIsRoot,
     searchValue,
     isRoomsOnly,
+
     onSetBaseFolderPath,
     isInit,
     setIsInit,
@@ -211,6 +213,7 @@ const FilesSelector = ({
     getRootData,
     onSetBaseFolderPath,
     isRoomsOnly,
+    isUserOnly,
     rootThirdPartyId,
     getRoomList,
     getIcon,
@@ -289,7 +292,7 @@ const FilesSelector = ({
       return;
     }
 
-    if (!currentFolderId) {
+    if (!currentFolderId && !isUserOnly && !openRoot) {
       setSelectedItemType("rooms");
       return;
     }
@@ -311,9 +314,11 @@ const FilesSelector = ({
     currentFolderId,
     isRoomsOnly,
     isThirdParty,
+    isUserOnly,
     parentId,
     roomsFolderId,
     rootFolderType,
+    openRoot,
     setIsFirstLoad,
   ]);
 
@@ -439,10 +444,24 @@ const FilesSelector = ({
   );
 
   React.useEffect(() => {
-    if (selectedItemType === "rooms") getRoomList(0);
+    if (selectedItemType === "rooms") {
+      getRoomList(0);
+      return;
+    }
+    if (openRoot && !selectedItemId) {
+      getRootData();
+      return;
+    }
     if (selectedItemType === "files" && typeof selectedItemId !== "undefined")
       getFileList(0);
-  }, [getFileList, getRoomList, selectedItemType, selectedItemId]);
+  }, [
+    getFileList,
+    getRoomList,
+    selectedItemType,
+    selectedItemId,
+    getRootData,
+    openRoot,
+  ]);
 
   const headerProps: TSelectorHeader = withHeader
     ? { withHeader, headerProps: { headerLabel } }
@@ -507,7 +526,6 @@ const FilesSelector = ({
         withFooterCheckbox,
         footerCheckboxLabel,
         isChecked: false,
-        setIsChecked: () => {},
       }
     : {};
 

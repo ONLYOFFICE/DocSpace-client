@@ -147,7 +147,7 @@ const Editor = ({
       )?.["Editor"] as {
         [key: string]: string;
       }
-    )?.["FileLocation"];
+    )?.["FileLocation"]; // t("FileLocation");
 
     if (editorGoBack === "false" || user?.isVisitor || !user) {
     } else if (editorGoBack === "event") {
@@ -305,3 +305,4 @@ const Editor = ({
 };
 
 export default Editor;
+

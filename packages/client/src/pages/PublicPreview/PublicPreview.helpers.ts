@@ -23,37 +23,48 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { AxiosError } from "axios";
+import { isMobile } from "react-device-detect";
+import { useState, useEffect, useCallback } from "react";
+import { getDeviceTypeByWidth } from "@docspace/shared/utils";
+import { DeviceType } from "@docspace/shared/enums";
 
-import type { Dispatch, SetStateAction } from "react";
+export const useDeviceType = () => {
+  const [currentDeviceType, setCurrentDeviceType] = useState<DeviceType>(() =>
+    getDeviceTypeByWidth(window.innerWidth),
+  );
 
-import type { getCustomToolbar } from "../../MediaViewer.helpers";
-import type { DevicesType } from "../../MediaViewer.types";
+  const onResize = useCallback(() => {
+    setCurrentDeviceType(getDeviceTypeByWidth(window.innerWidth));
+  }, []);
 
-interface ImageViewerProps {
-  src?: string;
-  thumbnailSrc?: string;
-  isTiff?: boolean;
-  imageId: number;
-  version: number;
-  errorTitle: string;
-  isFistImage: boolean;
-  isLastImage: boolean;
-  panelVisible: boolean;
-  mobileDetails: JSX.Element;
-  toolbar: ReturnType<typeof getCustomToolbar>;
-  devices: DevicesType;
+  useEffect(() => {
+    window.addEventListener("resize", onResize);
 
-  onPrev?: VoidFunction;
-  onNext?: VoidFunction;
-  onMask?: VoidFunction;
-  contextModel: (isError?: boolean) => ContextMenuModel[];
-  resetToolbarVisibleTimer: VoidFunction;
-  setIsOpenContextMenu: Dispatch<SetStateAction<boolean>>;
-  generateContextMenu: (
-    isOpen: boolean,
-    right?: string,
-    bottom?: string,
-  ) => JSX.Element;
-}
+    if (isMobile) {
+      if (window.screen.orientation) {
+        window.screen.orientation.addEventListener("change", onResize);
+      } else {
+        window.addEventListener("orientationchange", onResize);
+      }
+    }
 
-export default ImageViewerProps;
+    return () => {
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("orientationchange", onResize);
+      window.screen?.orientation?.removeEventListener("change", onResize);
+    };
+  }, [onResize]);
+
+  return currentDeviceType;
+};
+
+export const isAxiosError = (error: unknown): error is AxiosError => {
+  return (
+    error !== null &&
+    typeof error === "object" &&
+    "isAxiosError" in error &&
+    typeof error.isAxiosError === "boolean" &&
+    error.isAxiosError
+  );
+};

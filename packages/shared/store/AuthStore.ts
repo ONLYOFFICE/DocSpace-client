@@ -39,6 +39,7 @@ import {
   isAdmin,
   isPublicRoom,
   insertDataLayer,
+  isPublicPreview,
 } from "../utils/common";
 import { getCookie, setCookie } from "../utils/cookie";
 import { TTenantExtraRes } from "../api/portal/types";
@@ -169,6 +170,7 @@ class AuthStore {
     if (
       this.settingsStore?.isLoaded &&
       this.settingsStore?.socketUrl &&
+      !isPublicPreview() &&
       !isPublicRoom() &&
       !isPortalDeactivated
     ) {

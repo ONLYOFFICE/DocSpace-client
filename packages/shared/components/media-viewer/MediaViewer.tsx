@@ -64,7 +64,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     deleteDialogVisible,
     pluginContextMenuItems,
     currentDeviceType,
-
+    isPublicFile,
     t,
     getIcon,
     onClose,
@@ -109,7 +109,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     other.archiveRoomsId === targetFile?.rootFolderId ||
     (!targetFile?.security?.Rename && !targetFile?.security?.Delete);
 
-  const getContextModel = () => {
+  const getContextModel = (isError?: boolean) => {
     const {
       onClickDownloadAs,
       onClickLinkEdit,
@@ -124,12 +124,15 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       onCopyLink,
     } = other;
 
+    const isMobile = isMobileUtils() || isTablet();
+
     if (!targetFile) return [];
 
     const desktopModel = getDesktopMediaContextModel(
       t,
       targetFile,
       archiveRoom,
+      Boolean(isPublicFile),
       {
         onClickDownload,
         onClickRename,
@@ -137,15 +140,20 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       },
     );
 
-    const model = getMobileMediaContextModel(t, targetFile, {
-      onShowInfoPanel,
-      onClickDownload,
-      onMoveAction,
-      onCopyAction,
-      onDuplicate,
-      onClickRename,
-      onClickDelete,
-    });
+    const model = getMobileMediaContextModel(
+      t,
+      targetFile,
+      Boolean(isPublicFile),
+      {
+        onShowInfoPanel,
+        onClickDownload,
+        onMoveAction,
+        onCopyAction,
+        onDuplicate,
+        onClickRename,
+        onClickDelete,
+      },
+    );
 
     if (isPdf)
       return getPDFContextModel(t, targetFile, {
@@ -211,11 +219,9 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       });
     }
 
-    const isMobile = isMobileUtils() || isTablet();
-
     return isMobile
       ? model
-      : isImage && !isMobile
+      : isImage && !isMobile && !isError
         ? desktopModel.filter((el) => el.key !== "download")
         : desktopModel;
   };
@@ -448,6 +454,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       targetFile={targetFile}
       userAccess={userAccess}
       playlistPos={playlistPos}
+      isPublicFile={isPublicFile}
       isPreviewFile={isPreviewFile}
       currentDeviceType={currentDeviceType}
       onClose={onClose}

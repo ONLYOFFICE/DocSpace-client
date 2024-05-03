@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
 import Dialog from "./sub-components/Dialog";
-import { getTitleWithoutExtension } from "SRC_DIR/helpers/filesUtils";
+import { getTitleWithoutExtension } from "@docspace/shared/utils";
 
 const RenameEvent = ({
   type,

@@ -47,6 +47,7 @@ const ListComponent = ({
   className,
   scroll,
   infoPanelVisible,
+  isIndexEditingMode,
 }: ListComponentProps) => {
   const loaderRef = useRef<InfiniteLoader | null>(null);
 
@@ -120,6 +121,13 @@ const ListComponent = ({
       ? localStorage.getItem(columnInfoPanelStorageName)
       : localStorage.getItem(columnStorageName);
 
+    let indexEditingColumn;
+
+    if (isIndexEditingMode && storageSize) {
+      const storage = storageSize?.split(" ");
+      indexEditingColumn = storage?.splice(0, storage.length - 2);
+    }
+
     const isLoaded = isItemLoaded({ index });
     if (!isLoaded) return getLoader(style, key);
 
@@ -129,7 +137,9 @@ const ListComponent = ({
         style={{
           ...style,
           display: "grid",
-          gridTemplateColumns: storageSize!,
+          gridTemplateColumns: isIndexEditingMode
+            ? `${indexEditingColumn?.join(" ")} 24px 75px`
+            : storageSize!,
         }}
         key={key}
       >

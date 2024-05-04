@@ -75,6 +75,8 @@ export interface SectionContainerProps {
   isSectionHeaderAvailable: boolean;
   viewAs?: TViewAs;
   children: React.ReactNode;
+  withBodyScroll: boolean;
+  currentDeviceType?: DeviceType;
 }
 
 export interface SectionFilterProps {

@@ -499,3 +499,10 @@ export function setRoomWatermarks(
 
   return request(options);
 }
+
+export function getWatermarkSettings(roomId: number | string) {
+  return request({
+    method: "get",
+    url: `files/rooms/${roomId}/watermark`,
+  });
+}

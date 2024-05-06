@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
+import { inject, observer } from "mobx-react";
+
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
+
 import FileLifetime from "./FileLifetime";
 import Watermarks from "../sub-components/Watermarks";
 
@@ -68,12 +71,18 @@ const Block = ({
   );
 };
 
-const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams }) => {
+const VirtualDataRoomBlock = ({
+  t,
+  roomParams,
+  setRoomParams,
+  isEdit,
+  isWatermarks,
+}) => {
   const role = t("Translations:RoleViewer");
 
   const [fileLifetimeChecked, setFileLifetimeChecked] = useState(false);
   const [copyAndDownloadChecked, setCopyAndDownloadChecked] = useState(false);
-  const [watermarksChecked, setWatermarksChecked] = useState(false);
+  const [watermarksChecked, setWatermarksChecked] = useState(isWatermarks);
 
   const onChangeAutomaticIndexing = () => {
     setRoomParams({ ...roomParams, indexing: !roomParams.indexing });
@@ -128,10 +137,16 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams }) => {
         isDisabled={false}
         isChecked={watermarksChecked}
       >
-        <Watermarks setRoomParams={setRoomParams} />
+        <Watermarks setRoomParams={setRoomParams} isEdit={isEdit} />
       </Block>
     </StyledVirtualDataRoomBlock>
   );
 };
 
-export default VirtualDataRoomBlock;
+export default inject(({ createEditRoomStore }) => {
+  const { watermarksSettings } = createEditRoomStore;
+
+  return {
+    isWatermarks: watermarksSettings?.enabled,
+  };
+})(observer(VirtualDataRoomBlock));

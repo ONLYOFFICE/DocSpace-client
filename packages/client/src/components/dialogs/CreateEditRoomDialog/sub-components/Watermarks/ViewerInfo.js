@@ -26,13 +26,15 @@
 
 import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+
 import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
+import { WatermarkAdditions } from "@docspace/shared/enums";
 
 import { StyledWatermark } from "./StyledComponent";
-import { WatermarkAdditions } from "@docspace/shared/enums";
 
 const getInitialState = (initialTab) => {
   const state = {
@@ -51,7 +53,7 @@ const getInitialState = (initialTab) => {
 };
 
 const ViewerInfoWatermark = ({
-  setParams,
+  setWatermarksSettings,
   initialPosition,
   dataPosition,
   dataTabs,
@@ -79,20 +81,20 @@ const ViewerInfoWatermark = ({
       }
     }
 
-    setParams({ additions: flagsCount });
+    setWatermarksSettings({ additions: flagsCount });
   };
 
   const onPositionChange = (item) => {
     setSelectedPosition(item);
 
-    setParams({ rotate: item.key });
+    setWatermarksSettings({ rotate: item.key });
   };
 
   const onTextChange = (e) => {
     const { value } = e.target;
     setTextValue(value);
 
-    setParams({ text: value });
+    setWatermarksSettings({ text: value });
   };
 
   return (
@@ -132,4 +134,10 @@ const ViewerInfoWatermark = ({
     </StyledWatermark>
   );
 };
-export default ViewerInfoWatermark;
+
+export default inject(({ createEditRoomStore }) => {
+  const { setWatermarksSettings } = createEditRoomStore;
+  return {
+    setWatermarksSettings,
+  };
+})(observer(ViewerInfoWatermark));

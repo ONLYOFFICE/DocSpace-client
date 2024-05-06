@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import { EditRoomDialog } from "../dialogs";
 import { Encoder } from "@docspace/shared/utils/encoder";
 import api from "@docspace/shared/api";
-import { getRoomInfo } from "@docspace/shared/api/rooms";
+import { getRoomInfo, getWatermarkSettings } from "@docspace/shared/api/rooms";
 import { toastr } from "@docspace/shared/components/toast";
 
 const EditRoomEvent = ({
@@ -75,12 +75,15 @@ const EditRoomEvent = ({
 
   defaultRoomsQuota,
   isDefaultRoomsQuotaSet,
+
+  setWatermarksSettings,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
   const [fetchedTags, setFetchedTags] = useState([]);
   const [fetchedImage, setFetchedImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isInitLoading, setIsInitLoading] = useState(false);
 
   const startTags = Object.values(item.tags);
   const startObjTags = startTags.map((tag, i) => ({ id: i, name: tag }));
@@ -269,23 +272,26 @@ const EditRoomEvent = ({
   }, []);
 
   useEffect(() => {
-    const logo = item?.logo?.large ? item.logo.large : "";
-    if (logo) {
-      fetchLogoAction(logo);
-    }
-  }, []);
-
-  const fetchTagsAction = useCallback(async () => {
-    const tags = await fetchTags();
-    setFetchedTags(tags);
-  }, []);
-
-  useEffect(() => {
-    fetchTagsAction();
-  }, [fetchTagsAction]);
-
-  useEffect(() => {
     setCreateRoomDialogVisible(true);
+    setIsInitLoading(true);
+
+    const logo = item?.logo?.large ? item.logo.large : "";
+
+    const requests = [fetchTags(), getWatermarkSettings(item.id)];
+
+    if (logo) requests.push(fetchLogoAction);
+
+    const fetchInfo = async () => {
+      const [tags, watermarks] = await Promise.all(requests);
+      
+      setFetchedTags(tags);
+      setWatermarksSettings(watermarks);
+
+      setIsInitLoading(false);
+    };
+
+    fetchInfo();
+
     return () => setCreateRoomDialogVisible(false);
   }, []);
 
@@ -299,6 +305,7 @@ const EditRoomEvent = ({
       fetchedTags={fetchedTags}
       fetchedImage={fetchedImage}
       isLoading={isLoading}
+      isInitLoading={isInitLoading}
     />
   );
 };
@@ -314,6 +321,7 @@ export default inject(
     filesSettingsStore,
     infoPanelStore,
     currentQuotaStore,
+    createEditRoomStore,
   }) => {
     const {
       editRoom,
@@ -345,6 +353,7 @@ export default inject(
     const { updateInfoPanelSelection } = infoPanelStore;
 
     const { defaultRoomsQuota, isDefaultRoomsQuotaSet } = currentQuotaStore;
+    const { setWatermarksSettings } = createEditRoomStore;
 
     return {
       defaultRoomsQuota,
@@ -382,6 +391,7 @@ export default inject(
 
       updateInfoPanelSelection,
       changeRoomOwner,
+      setWatermarksSettings,
     };
   },
 )(observer(EditRoomEvent));

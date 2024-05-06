@@ -47,6 +47,7 @@ class CreateEditRoomStore {
   settingsStore = null;
   infoPanelStore = null;
   currentQuotaStore = null;
+  watermarksSettings = null;
 
   constructor(
     filesStore,
@@ -90,6 +91,18 @@ class CreateEditRoomStore {
 
   setRoomIsCreated = (onClose) => {
     this.onClose = onClose;
+  };
+
+  setWatermarksSettings = (watermarksSettings) => {
+    if (!watermarksSettings) {
+      this.watermarksSettings = null;
+      return;
+    }
+
+    this.watermarksSettings = {
+      ...this.watermarksSettings,
+      ...watermarksSettings,
+    };
   };
 
   onCreateRoom = async (withConfirm = false, t) => {
@@ -158,9 +171,7 @@ class CreateEditRoomStore {
 
       const actions = [];
 
-      const watermarks = roomParams.watermarks;
-
-      if (watermarks) {
+      if (this.watermarksSettings) {
         await setRoomWatermarks(room.id, watermarks);
       }
       // delete thirdparty account if not needed

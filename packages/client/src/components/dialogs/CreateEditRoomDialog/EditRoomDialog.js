@@ -42,6 +42,7 @@ const EditRoomDialog = ({
   fetchedRoomParams,
   fetchedTags,
   fetchedImage,
+  isInitLoading,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isValidTitle, setIsValidTitle] = useState(true);
@@ -131,6 +132,7 @@ const EditRoomDialog = ({
       visible={visible}
       onClose={onCloseAction}
       isScrollLocked={isScrollLocked}
+      isLoading={isInitLoading}
       withFooterBorder
     >
       <ModalDialog.Header>

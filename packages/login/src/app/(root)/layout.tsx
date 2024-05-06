@@ -51,10 +51,7 @@ export default async function RootLayout({
   const baseUrl = getBaseUrl();
   const isAuth = await checkIsAuthenticated();
 
-  console.log
-
   if (isAuth) redirect(`${baseUrl}`);
-
 
   const [settings, colorTheme] = await Promise.all([
     getSettings(),

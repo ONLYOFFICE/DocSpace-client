@@ -113,9 +113,12 @@ const BannerButton = styled.button<{
 `;
 
 const BannerIcon = styled.div`
+  width: 100px;
+  height: 80px;
   z-index: -1;
   position: absolute;
-  bottom: 0px;
+  bottom: 1px;
+
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
@@ -125,6 +128,16 @@ const BannerIcon = styled.div`
       : css`
           right: 0px;
         `}
+
+  @media ${mobile} {
+    width: 140px;
+    height: 112px;
+
+    svg {
+      width: 140px;
+      height: 112px;
+    }
+  }
 `;
 
 export { BannerWrapper, BannerContent, BannerButton, BannerIcon };

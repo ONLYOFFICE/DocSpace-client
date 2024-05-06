@@ -249,7 +249,7 @@ class ProfileActionsStore {
     } = this.settingsStore;
     const isAdmin = this.authStore.isAdmin;
     const isCommunity = this.authStore.isCommunity;
-    const { isOwner } = this.userStore.user;
+    // const { isOwner } = this.userStore.user;
 
     // const settingsModule = modules.find((module) => module.id === "settings");
     // const peopleAvailable = modules.some((m) => m.appName === "people");

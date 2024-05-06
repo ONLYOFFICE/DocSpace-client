@@ -56,6 +56,7 @@ const ViewerWrapper = memo(
       playlistPos,
       isPreviewFile,
       currentDeviceType,
+      isPublicFile,
 
       onClose,
       onNextClick,
@@ -174,6 +175,7 @@ const ViewerWrapper = memo(
         playlistPos={playlistPos}
         isPreviewFile={isPreviewFile}
         currentDeviceType={currentDeviceType}
+        isPublicFile={isPublicFile}
         onMaskClick={onClose}
         onNextClick={onNextClick}
         onPrevClick={onPrevClick}

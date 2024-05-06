@@ -90,7 +90,8 @@ export interface MediaViewerProps {
   /** Position of the current file in the playlist. */
   playlistPos: number;
   /** Indicates if the current file is a preview. */
-  isPreviewFile: boolean;
+  isPreviewFile?: boolean;
+  isPublicFile?: boolean;
   /** List of playlists. */
   playlist: PlaylistType[];
   /** List of file extensions that can be previewed as images. */

@@ -123,6 +123,10 @@ export const isPublicRoom = () => {
   );
 };
 
+export const isPublicPreview = () => {
+  return window.location.pathname.includes("/share/preview/");
+};
+
 export const getUserTypeLabel = (
   role: "owner" | "admin" | "user" | "collaborator" | "manager" | undefined,
   t: TTranslation,

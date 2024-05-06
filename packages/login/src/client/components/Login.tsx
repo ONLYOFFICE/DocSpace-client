@@ -170,7 +170,7 @@ const Login: React.FC<ILoginProps> = ({
   };
 
   const onSocialButtonClick = useCallback(
-    async (e: HTMLElementEvent<HTMLButtonElement | HTMLElement>) => {
+    (e: HTMLElementEvent<HTMLButtonElement | HTMLElement>) => {
       const { target } = e;
       let targetElement = target;
 
@@ -180,6 +180,7 @@ const Login: React.FC<ILoginProps> = ({
       ) {
         targetElement = target.parentElement;
       }
+
       const providerName = targetElement.dataset.providername;
       let url = targetElement.dataset.url || "";
 
@@ -197,18 +198,18 @@ const Login: React.FC<ILoginProps> = ({
               "width=800,height=500,status=no,toolbar=no,menubar=no,resizable=yes,scrollbars=no,popup=yes"
             );
 
-        const code: string = await getOAuthToken(tokenGetterWin);
+        getOAuthToken(tokenGetterWin).then((code) => {
+          const token = window.btoa(
+            JSON.stringify({
+              auth: providerName,
+              mode: "popup",
+              callback: "authCallback",
+            })
+          );
 
-        const token = window.btoa(
-          JSON.stringify({
-            auth: providerName,
-            mode: "popup",
-            callback: "authCallback",
-          })
-        );
-
-        if (tokenGetterWin && typeof tokenGetterWin !== "string")
-          tokenGetterWin.location.href = getLoginLink(token, code);
+          if (tokenGetterWin && typeof tokenGetterWin !== "string")
+            tokenGetterWin.location.href = getLoginLink(token, code);
+        });
       } catch (err) {
         console.log(err);
       }

@@ -214,6 +214,8 @@ const Sdk = ({
 
   let component;
 
+  if (!frameConfig) return;
+
   switch (mode) {
     case "room-selector":
       const cancelButtonProps = frameConfig?.showSelectorCancel

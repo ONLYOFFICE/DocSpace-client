@@ -76,6 +76,7 @@ import {
   getLogoUrl,
 } from "./common";
 import { DeviceType } from "../enums";
+import { TFile } from "../api/files/types";
 
 export {
   isBetaLanguage,
@@ -152,4 +153,14 @@ export const getDeviceTypeByWidth = (width: number): DeviceType => {
   if (isTablet(width)) return DeviceType.tablet;
 
   return DeviceType.desktop;
+};
+
+export const getTitleWithoutExtension = (
+  item: TFile,
+  fromTemplate: boolean,
+) => {
+  const titleWithoutExst = item.title.split(".").slice(0, -1).join(".");
+  return titleWithoutExst && item.fileExst && !fromTemplate
+    ? titleWithoutExst
+    : item.title;
 };

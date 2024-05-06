@@ -60,7 +60,7 @@
   "ItemsCountDescription": "ඔබට එක් පිටුවක පෙන්වන ගොනු / බහාලුම් ගණන දැක්වීමට හැකි අතර, කිනම් පිටුවෙන් පෙන්වීම ආරම්භ කළ යුතු දැයි සඳහන් කරන්න.",
   "JavascriptSdk": "ජාවාස්ක්‍රිප්ට් SDK",
   "LimitByTime": "කාල පරාසය අනුව සීමා කරන්න",
-  "LinkSetDescription": "මෙම සබැඳිය {parameter}} න් ආරක්ෂිතයි. සබැඳිය වින්‍යාසගත කිරීමට,",
+  "LinkSetDescription": "මෙම සබැඳිය {{parameter}} න් ආරක්ෂිතයි. සබැඳිය වින්‍යාසගත කිරීමට,",
   "LinkSetDescription2": "මෙම සබැඳිය සඳහා {{parameter1}} සහ {{parameter2}} සකසා ඇත. එය වින්‍යාසගත කිරීමට,",
   "LinkSetDescription3": "මෙම සබැඳිය සඳහා {{parameter1}}, {{parameter2}} සහ {{parameter3}} සකසා ඇත. එය වින්‍යාසගත කිරීමට,",
   "Logo": "ලාංඡනය",

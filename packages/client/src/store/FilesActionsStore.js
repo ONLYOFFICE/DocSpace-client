@@ -1210,7 +1210,7 @@ class FilesActionStore {
               setSelectedFolder(roomsFolder);
             }
 
-            this.updateCurrentFolder(null, null, null, operationId);
+            // this.updateCurrentFolder(null, null, null, operationId);
           })
 
           .then(() => {
@@ -1263,7 +1263,7 @@ class FilesActionStore {
 
             await this.uploadDataStore.loopFilesOperations(data, pbData);
 
-            this.updateCurrentFolder(null, [items], null, operationId);
+            // this.updateCurrentFolder(null, [items], null, operationId);
           })
 
           .then(() => {

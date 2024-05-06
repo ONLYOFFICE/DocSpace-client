@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   }
 
   .desciption {
-    color: ${(props) => props.theme.activeSessions.subtitleColor};
+    color: ${(props) => props.theme.profile.activeSessions.subtitleColor};
     margin-bottom: 20px;
   }
 `;
@@ -26,7 +26,7 @@ const AllSessionsBlock = (props) => {
   };
 
   const foundSession = allSessions.find(
-    (session) => session?.userId === data?.userId
+    (session) => session?.userId === data?.userId,
   );
 
   const sessionsData = foundSession

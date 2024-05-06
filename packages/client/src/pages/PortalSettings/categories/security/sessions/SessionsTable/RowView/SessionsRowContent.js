@@ -5,14 +5,14 @@ import { RowContent } from "@docspace/shared/components/row-content";
 const StyledRowContent = styled(RowContent)`
   .online {
     font-weight: 600;
-    color: ${(props) => props.theme.activeSessions.textOnlineColor};
+    color: ${(props) => props.theme.profile.activeSessions.textOnlineColor};
     margin-left: 4px;
     font-size: 14px;
   }
 
   .offline {
     font-weight: 600;
-    color: ${(props) => props.theme.activeSessions.tableCellColor};
+    color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
     font-size: 14px;
     margin-left: 4px;
   }
@@ -38,7 +38,7 @@ const SessionsRowContent = ({ sectionWidth, item }) => {
     <StyledRowContent
       key={userId}
       sectionWidth={sectionWidth}
-      sideColor={theme.activeSessions.tableCellColor}
+      sideColor={theme.profile.activeSessions.tableCellColor}
     >
       <Text fontSize="14px" fontWeight="600">
         {displayName}

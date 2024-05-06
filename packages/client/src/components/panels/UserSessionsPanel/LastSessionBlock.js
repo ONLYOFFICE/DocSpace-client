@@ -12,7 +12,7 @@ const StyledLastSessionBlock = styled.div`
   }
 
   .online {
-    color: ${(props) => props.theme.activeSessions.textOnlineColor};
+    color: ${(props) => props.theme.profile.activeSessions.textOnlineColor};
   }
 
   .session-info-wrapper {

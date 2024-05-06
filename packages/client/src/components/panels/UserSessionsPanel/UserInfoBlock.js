@@ -22,14 +22,14 @@ const StyledUserInfoBlock = styled.div`
   .icon-button_svg {
     svg {
       path {
-        fill: ${(props) => props.theme.activeSessions.iconColor};
+        fill: ${(props) => props.theme.profile.activeSessions.iconColor};
       }
     }
   }
 
   span {
     font-size: 13px;
-    color: ${(props) => props.theme.activeSessions.tableCellColor};
+    color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
     font-weight: 600;
   }
 

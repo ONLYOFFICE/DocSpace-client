@@ -25,21 +25,23 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
+import { inject, observer } from "mobx-react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Button } from "@docspace/shared/components/button";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 
 import ModalDialogContainer from "../ModalDialogContainer";
 
 const LogoutAllSessionDialog = ({
   t,
+  data,
   visible,
-  onClose,
   isLoading,
+  onClose,
   onRemoveAllSessions,
   onRemoveAllExceptThis,
+  isSeveralSelection,
 }) => {
   const [isChecked, setIsChecked] = useState(false);
 
@@ -51,6 +53,29 @@ const LogoutAllSessionDialog = ({
     isChecked ? onRemoveAllSessions() : onRemoveAllExceptThis();
   };
 
+  const isProfile = location.pathname.includes("/profile");
+
+  const bodySubtitle =
+    isSeveralSelection || isProfile
+      ? t("Profile:LogoutDescription")
+      : t("Profile:LogoutCurrentUserDescription", {
+          displayName: data?.displayName,
+        });
+
+  const bodyText = !isSeveralSelection && (
+    <>
+      <Text style={{ margin: "15px 0px" }}>
+        {t("Profile:DescriptionForSecurity")}
+      </Text>
+      <Checkbox
+        style={{ display: "inline-flex" }}
+        label={t("Profile:ChangePasswordAfterLoggingOut")}
+        isChecked={isChecked}
+        onChange={onChangeCheckbox}
+      />
+    </>
+  );
+
   return (
     <ModalDialogContainer
       visible={visible}
@@ -61,18 +86,8 @@ const LogoutAllSessionDialog = ({
         {t("Profile:LogoutAllActiveConnections")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text>{t("Profile:LogoutDescription")}</Text>
-        <Text style={{ margin: "15px 0" }}>
-          {t("Profile:DescriptionForSecurity")}
-        </Text>
-        <Box displayProp="flex" alignItems="center">
-          <Checkbox
-            className="change-password"
-            isChecked={isChecked}
-            onChange={onChangeCheckbox}
-          />
-          {t("Profile:ChangePasswordAfterLoggingOut")}
-        </Box>
+        {bodySubtitle}
+        {bodyText}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -99,4 +114,10 @@ const LogoutAllSessionDialog = ({
   );
 };
 
-export default LogoutAllSessionDialog;
+export default inject(({ peopleStore }) => {
+  const { isSeveralSelection } = peopleStore.selectionStore;
+
+  return {
+    isSeveralSelection,
+  };
+})(observer(LogoutAllSessionDialog));

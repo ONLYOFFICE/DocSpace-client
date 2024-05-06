@@ -317,6 +317,8 @@ const Panels = (props) => {
       />
     ),
     pdfFormEditVisible && <PDFFormEditingDialog key="pdf-form-edit-dialog" />,
+
+    userSessionsPanelVisible && <UserSessionsPanel key="user-sessions-panel" />,
   ];
 };
 

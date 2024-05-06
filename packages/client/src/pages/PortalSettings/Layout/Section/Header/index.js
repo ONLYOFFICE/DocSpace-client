@@ -27,6 +27,9 @@
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
+import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
+import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
+import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
@@ -157,6 +160,35 @@ const HeaderContainer = styled.div`
 
 const StyledContainer = styled.div`
   .group-button-menu-container {
+    height: 69px;
+    position: absolute;
+    z-index: 201;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+
+    @media ${tablet} {
+      height: 60px;
+    }
+
+    @media ${mobile} {
+      height: 52px;
+    }
+
+    .table-container_group-menu {
+      border-image-slice: 0;
+      border-image-source: none;
+      border-bottom: 1px solid
+        ${(props) => props.theme.filesSection.tableView.row.borderColor};
+      box-shadow: ${(props) =>
+        props.theme.profile.activeSessions.boxShadowColor};
+      padding: 0px;
+    }
+
+    .table-container_group-menu-separator {
+      margin: 0 16px;
+    }
+
     ${(props) =>
       props.viewAs === "table"
         ? css`
@@ -186,6 +218,8 @@ const SectionHeaderContent = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const isSessionsPage = location.pathname.includes("/sessions");
 
   const [state, setState] = React.useState({
     header: "",
@@ -291,13 +325,17 @@ const SectionHeaderContent = (props) => {
   };
 
   const onCheck = (checked) => {
-    const { setSelected } = props;
-    setSelected(checked ? "all" : "close");
+    const { setupSetSelected, peopleSetSelected } = props;
+    isSessionsPage
+      ? peopleSetSelected(checked ? "all" : "close", isSessionsPage)
+      : setupSetSelected(checked ? "all" : "close");
   };
 
   const onSelectAll = () => {
-    const { setSelected } = props;
-    setSelected("all");
+    const { setupSetSelected, peopleSetSelected } = props;
+    isSessionsPage
+      ? peopleSetSelected("all", isSessionsPage)
+      : setupSetSelected("all");
   };
 
   const removeAdmins = () => {
@@ -310,15 +348,46 @@ const SectionHeaderContent = (props) => {
     t,
     isLoadedSectionHeader,
 
-    isHeaderIndeterminate,
-    isHeaderChecked,
-    isHeaderVisible,
-    selection,
+    isSetupleHeaderIndeterminate,
+    isSetupHeaderVisible,
+    isSetupHeaderChecked,
+
+    isPeopleHeaderIndeterminate,
+    isPeopleHeaderVisible,
+    isPeopleHeaderChecked,
+    setupSelection,
+    setDisableDialogVisible,
+    setLogoutAllDialogVisible,
+    isSeveralSelection,
+    peopleSelection,
+    setSessionModalData,
+    setUserSessionPanelVisible,
   } = props;
   const { header, isCategoryOrHeader, isNeedPaidIcon } = state;
   const arrayOfParams = getArrayOfParams();
 
-  const menuItems = (
+  const menuItems = isSessionsPage ? (
+    <>
+      <DropDownItem
+        key="all"
+        label={t("Files:All")}
+        data-index={1}
+        onClick={onSelectAll}
+      />
+      <DropDownItem
+        key="online"
+        label={t("Common:Online")}
+        data-index={2}
+        onClick={() => console.log("online")}
+      />
+      <DropDownItem
+        key="offline"
+        label={t("Common:Offline")}
+        data-index={3}
+        onClick={() => console.log("offline")}
+      />
+    </>
+  ) : (
     <>
       <DropDownItem
         key="all"
@@ -326,17 +395,57 @@ const SectionHeaderContent = (props) => {
         data-index={1}
         onClick={onSelectAll}
       />
+      <></>
     </>
   );
 
-  const headerMenu = [
-    {
-      label: t("Common:Delete"),
-      disabled: !selection || !selection.length > 0,
-      onClick: removeAdmins,
-      iconUrl: DeleteReactSvgUrl,
-    },
-  ];
+  const onClickSessions = () => {
+    setSessionModalData({ ...peopleSelection[0] });
+    setUserSessionPanelVisible(true);
+  };
+
+  const onClickLogout = () => {
+    setSessionModalData({ displayName: peopleSelection[0].displayName });
+    setLogoutAllDialogVisible(true);
+  };
+
+  const onClickDisable = () => {
+    setDisableDialogVisible(true);
+  };
+
+  const headerMenu = isSessionsPage
+    ? [
+        {
+          id: "sessions",
+          key: "Sessions",
+          label: t("Common:Sessions"),
+          disabled: isSeveralSelection,
+          onClick: onClickSessions,
+          iconUrl: HistoryFinalizedReactSvgUrl,
+        },
+        {
+          id: "logout",
+          key: "Logout",
+          label: t("Common:Logout"),
+          onClick: onClickLogout,
+          iconUrl: LogoutReactSvgUrl,
+        },
+        {
+          id: "Disable",
+          key: "Disable",
+          label: t("Common:DisableUserButton"),
+          onClick: onClickDisable,
+          iconUrl: RemoveSvgUrl,
+        },
+      ]
+    : [
+        {
+          label: t("Common:Delete"),
+          disabled: !setupSelection || !setupSelection.length > 0,
+          onClick: removeAdmins,
+          iconUrl: DeleteReactSvgUrl,
+        },
+      ];
 
   const pathname = location.pathname;
 
@@ -344,6 +453,18 @@ const SectionHeaderContent = (props) => {
     pathname.includes("google") ||
     pathname.includes("nextcloud") ||
     pathname.includes("onlyoffice");
+
+  const isHeaderVisible = isSessionsPage
+    ? isPeopleHeaderVisible
+    : isSetupHeaderVisible;
+
+  const isHeaderChecked = isSessionsPage
+    ? isPeopleHeaderChecked
+    : isSetupHeaderChecked;
+
+  const isHeaderIndeterminate = isSessionsPage
+    ? isPeopleHeaderIndeterminate
+    : isSetupleHeaderIndeterminate;
 
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>
@@ -419,47 +540,77 @@ const SectionHeaderContent = (props) => {
   );
 };
 
-export default inject(({ currentQuotaStore, setup, common }) => {
-  const {
-    isBrandingAndCustomizationAvailable,
-    isRestoreAndAutoBackupAvailable,
-    isSSOAvailable,
-  } = currentQuotaStore;
-  const { addUsers, removeAdmins } = setup.headerAction;
-  const { toggleSelector } = setup;
-  const {
-    selected,
-    setSelected,
-    isHeaderIndeterminate,
-    isHeaderChecked,
-    isHeaderVisible,
-    deselectUser,
-    selectAll,
-    selection,
-  } = setup.selectionStore;
-  const { admins, selectorIsOpen } = setup.security.accessRight;
-  const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
-  return {
-    addUsers,
-    removeAdmins,
-    selected,
-    setSelected,
-    admins,
-    isHeaderIndeterminate,
-    isHeaderChecked,
-    isHeaderVisible,
-    deselectUser,
-    selectAll,
-    toggleSelector,
-    selectorIsOpen,
-    selection,
-    isLoadedSectionHeader,
-    setIsLoadedSectionHeader,
-    isBrandingAndCustomizationAvailable,
-    isRestoreAndAutoBackupAvailable,
-    isSSOAvailable,
-  };
-})(
+export default inject(
+  ({ currentQuotaStore, setup, common, peopleStore, dialogsStore }) => {
+    const {
+      isBrandingAndCustomizationAvailable,
+      isRestoreAndAutoBackupAvailable,
+      isSSOAvailable,
+    } = currentQuotaStore;
+    const { addUsers, removeAdmins } = setup.headerAction;
+    const {
+      toggleSelector,
+      setDisableDialogVisible,
+      setLogoutDialogVisible,
+      setLogoutAllDialogVisible,
+      setSessionModalData,
+    } = setup;
+    const {
+      selected,
+      setSelected: setupSetSelected,
+      isHeaderIndeterminate: isSetupHeaderIndeterminate,
+      isHeaderChecked: isSetupHeaderChecked,
+      isHeaderVisible: isSetupHeaderVisible,
+      deselectUser,
+      selectAll,
+      selection: setupSelection,
+    } = setup.selectionStore;
+
+    const {
+      isHeaderIndeterminate: isPeopleHeaderIndeterminate,
+      isHeaderChecked: isPeopleHeaderChecked,
+      isHeaderVisible: isPeopleHeaderVisible,
+      setSelected: peopleSetSelected,
+      isSeveralSelection,
+      selection: peopleSelection,
+    } = peopleStore.selectionStore;
+
+    const { admins, selectorIsOpen } = setup.security.accessRight;
+    const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
+    const { setUserSessionPanelVisible } = dialogsStore;
+    return {
+      addUsers,
+      removeAdmins,
+      selected,
+      setupSetSelected,
+      admins,
+      isSetupHeaderIndeterminate,
+      isSetupHeaderChecked,
+      isSetupHeaderVisible,
+      deselectUser,
+      selectAll,
+      toggleSelector,
+      selectorIsOpen,
+      setupSelection,
+      isLoadedSectionHeader,
+      setIsLoadedSectionHeader,
+      isBrandingAndCustomizationAvailable,
+      isRestoreAndAutoBackupAvailable,
+      isSSOAvailable,
+      peopleSetSelected,
+      peopleSelection,
+      isPeopleHeaderIndeterminate,
+      isPeopleHeaderChecked,
+      isPeopleHeaderVisible,
+      isSeveralSelection,
+      setDisableDialogVisible,
+      setLogoutDialogVisible,
+      setLogoutAllDialogVisible,
+      setSessionModalData,
+      setUserSessionPanelVisible,
+    };
+  },
+)(
   withLoading(
     withTranslation(["Settings", "SingleSignOn", "Common", "JavascriptSdk"])(
       observer(SectionHeaderContent),

@@ -18,7 +18,7 @@ const StyledRowContent = styled(RowContent)`
   .date {
     font-size: 14px;
     font-weight: 600;
-    color: ${(props) => props.theme.activeSessions.tableCellColor};
+    color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
     margin-left: 4px;
   }
 
@@ -49,7 +49,7 @@ const SessionsRowContent = ({
     <StyledRowContent
       key={id}
       sectionWidth={sectionWidth}
-      sideColor={theme.activeSessions.tableCellColor}
+      sideColor={theme.profile.activeSessions.tableCellColor}
     >
       <Text fontSize="14px" fontWeight="600" containerWidth="160px" truncate>
         {platform}, {browser}

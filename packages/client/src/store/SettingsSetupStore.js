@@ -49,6 +49,7 @@ class SettingsSetupStore {
   isInit = false;
   logoutDialogVisible = false;
   logoutAllDialogVisible = false;
+  disableDialogVisible = false;
   viewAs = isDesktop() ? "table" : "row";
 
   isLoadingDownloadReport = false;
@@ -579,6 +580,12 @@ class SettingsSetupStore {
 
   setSessions = (sessions) => {
     this.sessions = sessions;
+  };
+
+  setSessionModalData = (data) => {
+    this.sessionModalData = {
+      ...data,
+    };
   };
 
   setPlatformModalData = (data) => {

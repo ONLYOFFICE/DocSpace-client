@@ -112,10 +112,9 @@ class DialogsStore {
   editMembersGroup = null;
   pdfFormEditVisible = false;
   pdfFormEditData = null;
-
   shareFolderDialogVisible = false;
+  userSessionsPanelVisible = false;
   cancelUploadDialogVisible = false;
-
   selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;
 
   constructor(
@@ -517,6 +516,10 @@ class DialogsStore {
   setPdfFormEditVisible = (visible, data) => {
     this.pdfFormEditVisible = visible;
     this.pdfFormEditData = data;
+  };
+
+  setUserSessionPanelVisible = (visible) => {
+    this.userSessionsPanelVisible = visible;
   };
 }
 

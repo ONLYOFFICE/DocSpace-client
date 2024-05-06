@@ -41,7 +41,7 @@ import {
 } from "@/utils/actions";
 import SimpleNav from "@/components/SimpleNav";
 
-import "../styles/globals.scss";
+import "../../styles/globals.scss";
 
 export default async function RootLayout({
   children,
@@ -51,7 +51,10 @@ export default async function RootLayout({
   const baseUrl = getBaseUrl();
   const isAuth = await checkIsAuthenticated();
 
+  console.log
+
   if (isAuth) redirect(`${baseUrl}`);
+
 
   const [settings, colorTheme] = await Promise.all([
     getSettings(),

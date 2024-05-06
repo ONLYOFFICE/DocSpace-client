@@ -478,7 +478,7 @@ export function resetRoomQuota(roomIds) {
   return request(options);
 }
 
-export function setRoomWatermarks(
+export function setWatermarkSettings(
   roomId: number | string,
   data: {
     enabled: boolean;

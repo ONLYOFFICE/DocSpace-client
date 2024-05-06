@@ -53,17 +53,18 @@ const getInitialState = (initialTab) => {
 };
 
 const ViewerInfoWatermark = ({
-  setWatermarksSettings,
+  setWatermarks,
   initialPosition,
   dataPosition,
   dataTabs,
   initialTab,
+  initialText,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
   const elements = useRef(getInitialState(initialTab));
 
   const [selectedPosition, setSelectedPosition] = useState(initialPosition);
-  const [textValue, setTextValue] = useState("");
+  const [textValue, setTextValue] = useState(initialText ?? "");
 
   const onSelect = (item) => {
     let elementsData = elements.current;
@@ -81,20 +82,20 @@ const ViewerInfoWatermark = ({
       }
     }
 
-    setWatermarksSettings({ additions: flagsCount });
+    setWatermarks({ additions: flagsCount });
   };
 
   const onPositionChange = (item) => {
     setSelectedPosition(item);
 
-    setWatermarksSettings({ rotate: item.key });
+    setWatermarks({ rotate: item.key });
   };
 
   const onTextChange = (e) => {
     const { value } = e.target;
     setTextValue(value);
 
-    setWatermarksSettings({ text: value });
+    setWatermarks({ text: value });
   };
 
   return (
@@ -136,8 +137,8 @@ const ViewerInfoWatermark = ({
 };
 
 export default inject(({ createEditRoomStore }) => {
-  const { setWatermarksSettings } = createEditRoomStore;
+  const { setWatermarks } = createEditRoomStore;
   return {
-    setWatermarksSettings,
+    setWatermarks,
   };
 })(observer(ViewerInfoWatermark));

@@ -32,6 +32,7 @@ import { Encoder } from "@docspace/shared/utils/encoder";
 import api from "@docspace/shared/api";
 import { getRoomInfo, getWatermarkSettings } from "@docspace/shared/api/rooms";
 import { toastr } from "@docspace/shared/components/toast";
+import { setWatermarkSettings } from "@docspace/shared/api/rooms";
 
 const EditRoomEvent = ({
   addActiveItems,
@@ -76,7 +77,8 @@ const EditRoomEvent = ({
   defaultRoomsQuota,
   isDefaultRoomsQuotaSet,
 
-  setWatermarksSettings,
+  setWatermarks,
+  watermarksSettings,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
@@ -187,6 +189,10 @@ const EditRoomEvent = ({
       if (removedTags.length)
         actions.push(removeTagsFromRoom(room.id, removedTags));
 
+      if (watermarksSettings) {
+        actions.push(setWatermarkSettings(room.id, watermarksSettings));
+      }
+
       await Promise.all(actions);
 
       if (!!item.logo.original && !roomParams.icon.uploadedFile) {
@@ -283,9 +289,9 @@ const EditRoomEvent = ({
 
     const fetchInfo = async () => {
       const [tags, watermarks] = await Promise.all(requests);
-      
+
       setFetchedTags(tags);
-      setWatermarksSettings(watermarks);
+      setWatermarks(watermarks);
 
       setIsInitLoading(false);
     };
@@ -353,7 +359,7 @@ export default inject(
     const { updateInfoPanelSelection } = infoPanelStore;
 
     const { defaultRoomsQuota, isDefaultRoomsQuotaSet } = currentQuotaStore;
-    const { setWatermarksSettings } = createEditRoomStore;
+    const { setWatermarks, watermarksSettings } = createEditRoomStore;
 
     return {
       defaultRoomsQuota,
@@ -391,7 +397,8 @@ export default inject(
 
       updateInfoPanelSelection,
       changeRoomOwner,
-      setWatermarksSettings,
+      setWatermarks,
+      watermarksSettings,
     };
   },
 )(observer(EditRoomEvent));

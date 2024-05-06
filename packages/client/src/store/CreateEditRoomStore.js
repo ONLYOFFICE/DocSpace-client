@@ -31,7 +31,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { RoomsType } from "@docspace/shared/enums";
-import { setRoomWatermarks } from "@docspace/shared/api/rooms";
+import { setWatermarkSettings } from "@docspace/shared/api/rooms";
 
 class CreateEditRoomStore {
   roomParams = null;
@@ -93,7 +93,7 @@ class CreateEditRoomStore {
     this.onClose = onClose;
   };
 
-  setWatermarksSettings = (watermarksSettings) => {
+  setWatermarks = (watermarksSettings) => {
     if (!watermarksSettings) {
       this.watermarksSettings = null;
       return;
@@ -102,6 +102,7 @@ class CreateEditRoomStore {
     this.watermarksSettings = {
       ...this.watermarksSettings,
       ...watermarksSettings,
+      enabled: true,
     };
   };
 
@@ -172,7 +173,7 @@ class CreateEditRoomStore {
       const actions = [];
 
       if (this.watermarksSettings) {
-        await setRoomWatermarks(room.id, watermarks);
+        await setWatermarkSettings(room.id, this.watermarksSettings);
       }
       // delete thirdparty account if not needed
       if (!isThirdparty && storageFolderId)

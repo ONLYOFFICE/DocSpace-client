@@ -92,12 +92,14 @@ const getInitialTabs = (additions, t) => {
 const getInitialRotate = (rotate, t) => {
   const dataRotate = rotateOptions(t);
 
-  if (!rotate) return dataRotate[0];
+  if (rotate === undefined) return dataRotate[0];
 
-  return dataRotate.filter((item) => item.key === rotate);
+  return dataRotate.find((item) => {
+    return item.key === rotate;
+  });
 };
 
-const Watermarks = ({ setWatermarksSettings, watermarksSettings, isEdit }) => {
+const Watermarks = ({ setWatermarks, watermarksSettings, isEdit }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
   const [type, setType] = useState(viewerInfoWatermark);
 
@@ -116,11 +118,10 @@ const Watermarks = ({ setWatermarksSettings, watermarksSettings, isEdit }) => {
 
   useEffect(() => {
     if (!isEdit) {
-      setWatermarksSettings({
-        enabled: true,
+      setWatermarks({
         rotate: initialInfoRef.initialRotate.key,
         text: "",
-        additions: WatermarkAdditions.UserEmail,
+        additions: WatermarkAdditions.UserName,
       });
     }
   }, []);
@@ -153,6 +154,7 @@ const Watermarks = ({ setWatermarksSettings, watermarksSettings, isEdit }) => {
           dataPosition={initialInfoRef.dataRotate}
           dataTabs={initialInfoRef.dataTabs}
           initialTab={initialInfoRef.initialTabs}
+          initialText={watermarksSettings?.text}
         />
       )}
     </StyledBody>
@@ -160,9 +162,9 @@ const Watermarks = ({ setWatermarksSettings, watermarksSettings, isEdit }) => {
 };
 
 export default inject(({ createEditRoomStore }) => {
-  const { setWatermarksSettings, watermarksSettings } = createEditRoomStore;
+  const { setWatermarks, watermarksSettings } = createEditRoomStore;
   return {
-    setWatermarksSettings,
+    setWatermarks,
     watermarksSettings,
   };
 })(observer(Watermarks));

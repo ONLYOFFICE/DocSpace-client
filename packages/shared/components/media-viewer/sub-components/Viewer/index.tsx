@@ -65,6 +65,7 @@ export const Viewer = (props: ViewerProps) => {
     targetFile,
     headerIcon,
     playlistPos,
+    isPublicFile,
     isPreviewFile,
     currentDeviceType,
     onNextClick,
@@ -216,6 +217,7 @@ export const Viewer = (props: ViewerProps) => {
       contextModel={contextModel}
       onMaskClick={handleMaskClick}
       onContextMenu={onMobileContextMenu}
+      isPublicFile={isPublicFile}
     />
   );
 
@@ -230,7 +232,11 @@ export const Viewer = (props: ViewerProps) => {
   return (
     <StyledViewerContainer visible={visible}>
       {!isFullscreen && !isMobile && panelVisible && !isPdf && (
-        <DesktopDetails title={title} onMaskClick={handleMaskClick} />
+        <DesktopDetails
+          title={title}
+          onMaskClick={handleMaskClick}
+          showCloseButton={!isPublicFile}
+        />
       )}
 
       {playlist.length > 1 && !isFullscreen && !isMobile && (

@@ -117,8 +117,8 @@ export const SocialButtonsGroup = memo(
               onClose={moreAuthClose}
               providers={providers}
               onSocialLoginClick={onClick}
-              ssoLabel={ssoLabel}
-              ssoUrl={ssoUrl}
+              ssoLabel={ssoLabel ?? ""}
+              ssoUrl={ssoUrl ?? ""}
               isSignUp
             />
           </div>

@@ -158,7 +158,6 @@
   "RoomUnpinned": "房间已取消置顶",
   "SearchByContent": "按文件内容搜索",
   "SendByEmail": "通过邮件发送",
-  "Share": "分享",
   "ShareFolder": "共享文件夹",
   "ShareFolderDescription": "系统会创建一个新房间，并将所选文件夹的所有内容复制到其中。之后，您可以邀请其他用户在房间内协作处理文件。",
   "ShareRoom": "分享房间",

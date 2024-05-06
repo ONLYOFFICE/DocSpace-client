@@ -158,7 +158,6 @@
   "RoomUnpinned": "방의 고정이 해제되었습니다",
   "SearchByContent": "파일 콘텐츠로 검색",
   "SendByEmail": "이메일로 전송",
-  "Share": "공유",
   "ShareFolder": "폴더 공유",
   "ShareFolderDescription": "새 방이 생성되고 선택한 폴더의 모든 내용이 해당 방에 복사됩니다. 그 다음 다른 사용자를 초대하여 방에 있는 파일을 공동작업할 수 있습니다.",
   "ShareRoom": "방 공유",

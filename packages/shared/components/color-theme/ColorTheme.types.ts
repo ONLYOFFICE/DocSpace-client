@@ -88,6 +88,7 @@ export interface InfoPanelToggleColorTheme extends DefaultColorThemeProps {
 
 export interface LinkForgotPasswordColorTheme extends DefaultColorThemeProps {
   themeId: ThemeId.LinkForgotPassword;
+  isRegisterContainerVisible?: boolean;
 }
 
 export interface LoadingButtonColorTheme extends DefaultColorThemeProps {

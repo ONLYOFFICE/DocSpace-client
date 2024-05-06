@@ -8,7 +8,7 @@
       "name": "🚀 @docspace/client",
       "path": "packages/client",
     },
-    {
+     {
       "name": "🔑 @docspace/login",
       "path": "packages/login",
     },

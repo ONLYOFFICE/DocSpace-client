@@ -50,6 +50,12 @@ import {
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
 
+type IConfigType = IConfig & {
+  events?: {
+    onRequestStartFilling?: (event: object) => void;
+  };
+};
+
 const Editor = ({
   config,
   successAuth,
@@ -68,7 +74,7 @@ const Editor = ({
   onSDKRequestSelectDocument,
   onSDKRequestReferenceSource,
 }: EditorProps) => {
-  const { t } = useTranslation(["Common", "Editor", "DeepLink"]);
+  const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
 
   const {
     onDocumentReady,
@@ -85,7 +91,7 @@ const Editor = ({
     onDocumentStateChange,
     onMetaChange,
     onMakeActionLink,
-
+    onRequestStartFilling,
     documentReady,
 
     setDocTitle,
@@ -109,7 +115,7 @@ const Editor = ({
     t,
   });
 
-  const newConfig: IConfig = config
+  const newConfig: IConfigType = config
     ? {
         document: config.document,
         documentType: config.documentType,
@@ -133,12 +139,21 @@ const Editor = ({
 
   if (fileInfo) {
     const editorGoBack = new URLSearchParams(search).get("editorGoBack");
+    const openFileLocationText = (
+      (
+        i18n.getDataByLanguage(i18n.language) as unknown as {
+          Editor: { [key: string]: string };
+        }
+      )?.["Editor"] as {
+        [key: string]: string;
+      }
+    )?.["FileLocation"]; // t("FileLocation");
 
     if (editorGoBack === "false" || user?.isVisitor || !user) {
     } else if (editorGoBack === "event") {
       goBack = {
         requestClose: true,
-        text: t?.("FileLocation"),
+        text: openFileLocationText,
       };
     } else {
       goBack = {
@@ -146,7 +161,7 @@ const Editor = ({
           typeof window !== "undefined"
             ? window.DocSpaceConfig?.editor?.requestClose ?? false
             : false,
-        text: t?.("FileLocation"),
+        text: openFileLocationText,
       };
       if (
         typeof window !== "undefined" &&
@@ -194,7 +209,8 @@ const Editor = ({
   newConfig.events = {
     onDocumentReady,
     onRequestHistoryClose: onSDKRequestHistoryClose,
-    onRequestEditRights: () => onSDKRequestEditRights(fileInfo),
+    onRequestEditRights: () =>
+      onSDKRequestEditRights(fileInfo, newConfig.documentType),
     onAppReady: onSDKAppReady,
     onInfo: onSDKInfo,
     onWarning: onSDKWarning,
@@ -264,6 +280,10 @@ const Editor = ({
     newConfig.events.onRequestClose = onSDKRequestClose;
   }
 
+  if (config?.startFilling) {
+    newConfig.events.onRequestStartFilling = onRequestStartFilling;
+  }
+
   return (
     <DocumentEditor
       id={"docspace_editor"}
@@ -285,3 +305,4 @@ const Editor = ({
 };
 
 export default Editor;
+

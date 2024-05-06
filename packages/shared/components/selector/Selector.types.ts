@@ -283,13 +283,11 @@ export type TSelectorCheckbox =
       withFooterCheckbox: true;
       footerCheckboxLabel: string;
       isChecked: boolean;
-      setIsChecked: React.Dispatch<React.SetStateAction<boolean>>;
     }
   | {
       withFooterCheckbox?: undefined;
       footerCheckboxLabel?: undefined;
       isChecked?: boolean;
-      setIsChecked?: undefined;
     };
 
 export type TSelectorFooterCheckbox = TSelectorCheckbox & {

@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Informații",
   "AboutCompanyTitle": "Despre aplicația",
   "AccessDenied": "Acces refuzat ",
@@ -195,6 +195,7 @@
   "IncorrectPassword": "Parolă incorectă",
   "Info": "Informații",
   "InfoPanel": "Panou informații",
+  "InvalidLink": "Link-ul invalid",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> vă invită să asociați la DocSpace <1>{{spaceAddress}}</1> pentru colaborarea securizată asupra documentelor.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> vă invită să participați la sala <1>{{roomName}}</1> pentru colaborarea securizată asupra documentelor.",
   "Invite": "Invitaţie",
@@ -360,6 +361,7 @@
   "SettingsGeneral": "General",
   "SettingsPersonal": "Personal",
   "SetToDefault": "Setează valorile prestabilite",
+  "Share": "Partajează",
   "SharedLinks": "Link-urile partajate",
   "ShareDocument": "Partajează acest document",
   "ShareDocumentDescription": "Oferire acces la acest document și definire niveluri de permisiuni.",

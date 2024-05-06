@@ -179,8 +179,4 @@ export const SYSTEM_FONT_FAMILY =
 
 export const HTML_EXST = [".htm", ".mht", ".html"];
 
-export const COPY_AS = {
-  PDF: "pdf",
-  DOCX: "DOCXF",
-  DOCXF: "DOCXF",
-} as const;
+export const SYSTEM_THEME_KEY = "system_theme";

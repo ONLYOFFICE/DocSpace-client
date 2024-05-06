@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Относно",
   "AboutCompanyTitle": "За тази програма",
   "AccessDenied": "Достъпът отказан",
@@ -195,6 +195,7 @@
   "IncorrectPassword": "Грешна парола",
   "Info": "Информация",
   "InfoPanel": "Информационен панел",
+  "InvalidLink": "Невалиден линк",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> ви кани да се присъедините към DocSpace <1>{{spaceAddress}}</1> за защитена съвместна работа с документи.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> ви кани да се присъедините към стаята <1>{{roomName}}</1> за защитена съвместна работа по документи.",
   "Invite": "Каня",
@@ -360,6 +361,7 @@
   "SettingsGeneral": "Общи",
   "SettingsPersonal": "Персонален",
   "SetToDefault": "Задайте по подразбиране",
+  "Share": "Сподели",
   "SharedLinks": "Споделени линкове",
   "ShareDocument": "Споделете този документ",
   "ShareDocumentDescription": "Осигурете достъп до документа и задайте нивата на разрешение.",

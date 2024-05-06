@@ -46,11 +46,12 @@ import IconWebdavSmallReactSvgUrl from "PUBLIC_DIR/images/icon_webdav_small.reac
 import IconWebdavReactSvgUrl from "PUBLIC_DIR/images/icon_webdav.react.svg?url";
 import { makeAutoObservable } from "mobx";
 import api from "@docspace/shared/api";
-import i18n from "../helpers/i18n";
+import i18n from "../i18n";
 
 class ThirdPartyStore {
   capabilities = null;
   providers = [];
+  connectingStorages = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -69,6 +70,20 @@ class ThirdPartyStore {
   fetchThirdPartyProviders = async () => {
     const list = await api.files.getThirdPartyList();
     this.setThirdPartyProviders(list);
+  };
+
+  fetchConnectingStorages = async () => {
+    const res = await api.files.getConnectingStorages();
+
+    this.connectingStorages = res.map((storage) => ({
+      id: storage.name,
+      className: `storage_${storage.key}`,
+      providerKey: storage.key !== "WebDav" ? storage.key : storage.name,
+      isConnected: storage.connected,
+      isOauth: storage.oauth,
+      oauthHref: storage.redirectUrl,
+      category: storage.name,
+    }));
   };
 
   saveThirdParty = (

@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "О программе",
   "AboutCompanyTitle": "О программе",
   "AccessDenied": "Доступ запрещен",
@@ -195,6 +195,7 @@
   "IncorrectPassword": "Неправильный пароль",
   "Info": "Информация",
   "InfoPanel": "Информационная панель",
+  "InvalidLink": "Недействительная ссылка",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> приглашает вас присоединиться к DocSpace <1>{{spaceAddress}}</1> для безопасной совместной работы над документами.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> приглашает вас присоединиться к комнате <1>{{roomName}}</1> для безопасной совместной работы над документами.",
   "Invite": "Пригласить",
@@ -360,6 +361,7 @@
   "SettingsGeneral": "Общие",
   "SettingsPersonal": "Персональные",
   "SetToDefault": "Установить по умолчанию",
+  "Share": "Доступ",
   "SharedLinks": "Общие ссылки",
   "ShareDocument": "Поделиться этим документом",
   "ShareDocumentDescription": "Предоставьте доступ к документу и установите уровень доступа.",

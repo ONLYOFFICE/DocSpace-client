@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Over",
   "AboutCompanyTitle": "Over dit programma",
   "AccessDenied": "Toegang geweigerd",
@@ -195,6 +195,7 @@
   "IncorrectPassword": "Onjuist wachtwoord",
   "Info": "Info",
   "InfoPanel": "Infopaneel",
+  "InvalidLink": "Ongeldige link",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> nodigt u uit om lid te worden van DocSpace <1>{{spaceAddress}}</1> om veilig samen te werken aan documenten.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> nodigt u uit om lid te worden van de kamer <1>{{roomName}}</1> om veilig samen te werken aan documenten.",
   "Invite": "Uitnodigen",
@@ -360,6 +361,7 @@
   "SettingsGeneral": "Algemeen",
   "SettingsPersonal": "Persoonlijk",
   "SetToDefault": "Standaard instellen",
+  "Share": "Delen",
   "SharedLinks": "Gedeelde links",
   "ShareDocument": "Deel dit document",
   "ShareDocumentDescription": "Geef toegang tot het document en stel de machtigingsniveaus in.",

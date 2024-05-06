@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Tietoja",
   "AboutCompanyTitle": "Tietoja tästä ohjelmasta",
   "AccessDenied": "Pääsy evätty",
@@ -195,6 +195,7 @@
   "IncorrectPassword": "Väärä salasana",
   "Info": "Info",
   "InfoPanel": "Tietopaneeli",
+  "InvalidLink": "Virheellinen linkki",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> kutsuu sinut liittymään DocSpaceen <1>{{spaceAddress}}</1> turvallista asiakirjayhteistyötä varten.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> kutsuu sinut liittymään huoneeseen  <1>{{roomName}}</1> turvallista asiakirjayhteistyötä varten.",
   "Invite": "Kutsu",
@@ -360,6 +361,7 @@
   "SettingsGeneral": "Yleistä",
   "SettingsPersonal": "Henkilökohtainen",
   "SetToDefault": "Aseta oletukseksi",
+  "Share": "Jaa",
   "SharedLinks": "Jaetut linkit",
   "ShareDocument": "Jaa tämä asiakirja",
   "ShareDocumentDescription": "Aseta asiakirjalle oikeudet ja käyttöoikeustasot.",

@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "O nas",
   "AboutCompanyTitle": "O tem programu",
   "AccessDenied": "Dostop je zavrnjen",
@@ -195,6 +195,7 @@
   "IncorrectPassword": "Napačno geslo",
   "Info": "Informacija",
   "InfoPanel": "Informacijski panel",
+  "InvalidLink": "Neveljavna povezava",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> vas vabi, da se pridružite DocSpace <1>{{spaceAddress}}</1> za varno sodelovanje pri dokumentih.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> vas vabi, da se pridružite sobi <1>{{roomName}}</1> za varno sodelovanje pri dokumentih.",
   "Invite": "Povabi",
@@ -360,6 +361,7 @@
   "SettingsGeneral": "Splošno",
   "SettingsPersonal": "Osebno",
   "SetToDefault": "Nastavi na prevzeto",
+  "Share": "Deli",
   "SharedLinks": "Skupne povezave",
   "ShareDocument": "Deli ta dokument",
   "ShareDocumentDescription": "Omogočite dostop do dokumenta in nastavite ravni dovoljenj.",

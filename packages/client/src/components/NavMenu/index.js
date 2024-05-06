@@ -35,17 +35,17 @@ import { Aside } from "@docspace/shared/components/aside";
 import Header from "./sub-components/header";
 import HeaderNav from "./sub-components/header-nav";
 import HeaderUnAuth from "./sub-components/header-unauth";
-import { I18nextProvider, withTranslation } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import { NavMenuHeaderLoader } from "@docspace/shared/skeletons/nav-menu";
 import { LayoutContextConsumer } from "../Layout/context";
 
 import { inject, observer } from "mobx-react";
-import i18n from "./i18n";
 import PreparationPortalDialog from "../dialogs/PreparationPortalDialog";
 import { Base } from "@docspace/shared/themes";
 import { DeviceType } from "@docspace/shared/enums";
+import { isPublicPreview } from "@docspace/shared/utils/common";
 
 const StyledContainer = styled.header`
   height: ${(props) => props.theme.header.height};
@@ -159,7 +159,7 @@ const NavMenu = (props) => {
   } = props;
 
   const isAsideAvailable = !!asideContent;
-  const hideHeader = !showHeader && isFrame;
+  const hideHeader = (!showHeader && isFrame) || isPublicPreview();
 
   if (currentDeviceType !== DeviceType.mobile || !isMobile() || hideHeader)
     return <></>;
@@ -256,8 +256,4 @@ const NavMenuWrapper = inject(({ authStore, settingsStore }) => {
   };
 })(observer(withTranslation(["NavMenu", "Common"])(NavMenu)));
 
-export default ({ ...props }) => (
-  <I18nextProvider i18n={i18n}>
-    <NavMenuWrapper {...props} />
-  </I18nextProvider>
-);
+export default ({ ...props }) => <NavMenuWrapper {...props} />;

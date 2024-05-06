@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Par",
   "AboutCompanyTitle": "Par šo programmu",
   "AccessDenied": "Pieeja ir liegta",
@@ -195,6 +195,7 @@
   "IncorrectPassword": "Nepareiza parole",
   "Info": "Informācija",
   "InfoPanel": "Informācijas panelis",
+  "InvalidLink": "Nederīga saite",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> aicina jūs pievienoties DocSpace <1>{{spaceAddress}}</1> drošai sadarbībai ar dokumentiem.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> aicina jūs pievienoties telpai <1>{{roomName}}</1> drošai sadarbībai ar dokumentiem.",
   "Invite": "Uzaicināt",
@@ -360,6 +361,7 @@
   "SettingsGeneral": "Vispārīgi",
   "SettingsPersonal": "Privāts",
   "SetToDefault": "Iestatīt uz noklusējumu",
+  "Share": "Kopīgot",
   "SharedLinks": "Kopīgotās saites",
   "ShareDocument": "Nosūtīt šo dokumentu",
   "ShareDocumentDescription": "Nodrošiniet piekļuvi dokumentam un iestatiet atļauju līmeņus.",

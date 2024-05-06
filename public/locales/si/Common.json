@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "පිළිබඳව",
   "AboutCompanyTitle": "මෙම මෘදුකාංගය ගැන",
   "AccessRights": "ප්‍රවේශ අයිති",
@@ -262,6 +262,7 @@
   "Settings": "සැකසුම්",
   "SettingsGeneral": "සාමාන්‍ය",
   "SettingsPersonal": "පෞද්ගලික",
+  "Share": "බෙදාගන්න",
   "ShareVia": "මෙමගින් බෙදාගන්න",
   "ShowMore": "තව පෙන්වන්න",
   "SignInWithFacebook": "ෆේස්බුක් සමඟ පිවිසෙන්න",

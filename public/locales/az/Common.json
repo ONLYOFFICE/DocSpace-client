@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Haqqında",
   "AboutCompanyTitle": "Proqram haqqında",
   "AccessDenied": "Giriş qadağandır",
@@ -195,6 +195,7 @@
   "IncorrectPassword": "Yanlış şifrə",
   "Info": "Məlumat",
   "InfoPanel": "Məlumat paneli",
+  "InvalidLink": "Etibarsız keçid",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> təhlükəsiz sənəd əməkdaşlığı üçün sizi DocSpace <1>{{spaceAddress}}</1>-ə qoşulmağa dəvət edir.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> təhlükəsiz sənəd əməkdaşlığı üçün sizi <1>{{roomName}}</1> otağına qoşulmağa dəvət edir.",
   "Invite": "Dəvət edin",
@@ -360,6 +361,7 @@
   "SettingsGeneral": "Ümumi",
   "SettingsPersonal": "Şəxsi",
   "SetToDefault": "Defolta ayarlayın",
+  "Share": "Paylaş",
   "SharedLinks": "Paylaşılan linklər",
   "ShareDocument": "Bu sənədi paylaşın",
   "ShareDocumentDescription": "Sənədə daxil olun və icazə səviyyələrini təyin edin.",

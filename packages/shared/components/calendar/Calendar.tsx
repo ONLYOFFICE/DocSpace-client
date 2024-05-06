@@ -28,6 +28,7 @@
 import React, { useEffect, useState } from "react";
 import { useTheme } from "styled-components";
 import moment from "moment";
+import "moment/locale/ar-sa";
 
 import { Days, Months, Years } from "./sub-components";
 

@@ -31,7 +31,6 @@ import {
 } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
 import { Events } from "@docspace/shared/enums";
-import { COPY_AS } from "@docspace/shared/constants";
 
 class DialogsStore {
   authStore;
@@ -111,6 +110,8 @@ class DialogsStore {
   changeRoomOwnerIsVisible = false;
   changeRoomOwnerData = null;
   editMembersGroup = null;
+  pdfFormEditVisible = false;
+  pdfFormEditData = null;
 
   shareFolderDialogVisible = false;
   cancelUploadDialogVisible = false;
@@ -379,17 +380,13 @@ class DialogsStore {
 
   createFromTemplateForm = (fileInfo) => {
     this.createMasterForm(fileInfo, {
-      extension: COPY_AS[this.selectFileFormRoomFilterParam],
+      extension: "pdf",
       withoutDialog: true,
-      preview:
-        this.selectFileFormRoomFilterParam === FilesSelectorFilterTypes.PDF,
     });
   };
 
   createMasterForm = async (fileInfo, options) => {
-    const { extension = "docxf", withoutDialog, preview } = options;
-
-    console.log({ extension, withoutDialog, preview });
+    const { extension = "pdf", withoutDialog, preview } = options;
 
     const newTitle = fileInfo.title;
 
@@ -516,6 +513,11 @@ class DialogsStore {
 
   setCancelUploadDialogVisible = (visible) => {
     this.cancelUploadDialogVisible = visible;
+  };
+
+  setPdfFormEditVisible = (visible, data) => {
+    this.pdfFormEditVisible = visible;
+    this.pdfFormEditData = data;
   };
 
   setCreateRoomTemplateDialogVisible = (visible) => {

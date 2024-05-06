@@ -153,6 +153,7 @@ declare global {
     };
     dataLayer?: Record<string, unknown>[];
     errorOnLoad?: Error;
+    authCallback?: (profile: string) => Promise<void>;
   }
 
   export type ContextMenuModel =

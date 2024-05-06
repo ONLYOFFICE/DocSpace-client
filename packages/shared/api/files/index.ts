@@ -62,6 +62,7 @@ import {
   TThirdPartyCapabilities,
   TTirdParties,
   TUploadOperation,
+  TConnectingStorages,
 } from "./types";
 
 export async function openEdit(
@@ -469,10 +470,15 @@ export async function createFile(
 //   return request(options);
 // }
 
-export async function getFileInfo(fileId: number) {
+export async function getFileInfo(fileId: number | string, share?: string) {
   const options: AxiosRequestConfig = {
     method: "get",
     url: `/files/file/${fileId}`,
+    headers: share
+      ? {
+          "Request-Token": share,
+        }
+      : undefined,
   };
 
   const res = (await request(options)) as TFile;
@@ -1384,4 +1390,22 @@ export async function getFilesUsedSpace() {
   const res = (await request(options)) as TFilesUsedSpace;
 
   return res;
+}
+
+export async function getConnectingStorages() {
+  const res = (await request({
+    method: "get",
+    url: "files/thirdparty/providers",
+  })) as TConnectingStorages;
+
+  return res;
+}
+
+export async function startFilling(fileId: string | number): Promise<void> {
+  const options: AxiosRequestConfig = {
+    method: "put",
+    url: `files/file/${fileId}/startfilling`,
+  };
+
+  await request(options);
 }

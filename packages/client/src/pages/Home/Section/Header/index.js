@@ -870,6 +870,7 @@ const SectionHeaderContent = (props) => {
       haveLinksRight,
       isPublicRoomType,
       isPublicRoom,
+      isFrame,
     } = props;
 
     const isArchive = selectedFolder.rootFolderType === FolderType.Archive;
@@ -881,12 +882,14 @@ const SectionHeaderContent = (props) => {
           label: t("Files:CopyLink"),
           icon: TabletLinkReactSvgUrl,
           onClick: onShareRoom,
+          disabled: isFrame,
         },
-        security?.Download && {
+        {
           key: "public-room_edit",
           label: t("Common:Download"),
           icon: DownloadReactSvgUrl,
           onClick: onDownloadAll,
+          disabled: !security?.Download,
         },
       ];
     }
@@ -922,7 +925,7 @@ const SectionHeaderContent = (props) => {
       {
         id: "header_option_sharing-settings",
         key: "sharing-settings",
-        label: t("Files:Share"),
+        label: t("Common:Share"),
         onClick: onClickShare,
         disabled: !selectedFolder.security?.CreateRoomFrom,
         icon: ShareReactSvgUrl,
@@ -978,7 +981,7 @@ const SectionHeaderContent = (props) => {
         label: t("Common:ReconnectStorage"),
         icon: ReconnectSvgUrl,
         onClick: () => onClickReconnectStorage(selectedFolder, t),
-        disabled: !security?.Reconnect,
+        disabled: !security?.EditRoom || !security?.Reconnect,
       },
       {
         id: "header_option_edit-room",
@@ -1801,6 +1804,7 @@ export default inject(
       setSelection,
       setShareFolderDialogVisible,
       startUpload,
+      onClickReconnectStorage,
     };
   },
 )(

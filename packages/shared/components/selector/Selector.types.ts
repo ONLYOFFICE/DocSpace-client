@@ -283,13 +283,11 @@ export type TSelectorCheckbox =
       withFooterCheckbox: true;
       footerCheckboxLabel: string;
       isChecked: boolean;
-      setIsChecked: React.Dispatch<React.SetStateAction<boolean>>;
     }
   | {
       withFooterCheckbox?: undefined;
       footerCheckboxLabel?: undefined;
       isChecked?: boolean;
-      setIsChecked?: undefined;
     };
 
 export type TSelectorFooterCheckbox = TSelectorCheckbox & {
@@ -393,24 +391,27 @@ export type FooterProps = TSelectorFooterSubmitButton &
 
 type TSelectorItemLogo =
   | {
-      color?: undefined;
-      icon?: undefined;
       avatar: string;
-      role?: AvatarRole;
+      color?: undefined;
       hasAvatar?: boolean;
+      icon?: undefined;
+      iconOriginal?: string;
+      role?: AvatarRole;
     }
   | {
-      hasAvatar?: undefined;
-      color: string;
-      icon?: undefined;
       avatar?: undefined;
+      color: string;
+      hasAvatar?: undefined;
+      icon?: undefined;
+      iconOriginal?: string;
       role?: undefined;
     }
   | {
-      hasAvatar?: undefined;
-      color?: undefined;
-      icon: string;
       avatar?: undefined;
+      color?: undefined;
+      hasAvatar?: undefined;
+      icon: string;
+      iconOriginal: string;
       role?: undefined;
     };
 

@@ -43,7 +43,7 @@ class GroupsTableHeader extends React.Component {
         key: "Name",
         title: props.t("Common:Title"),
         resizable: true,
-        enable: props.managerAccountsGroupsColumnIsEnabled,
+        enable: true,
         default: true,
         sortBy: "title",
         minWidth: 210,
@@ -52,7 +52,7 @@ class GroupsTableHeader extends React.Component {
       {
         key: "Head of Group",
         title: props.t("Common:HeadOfGroup"),
-        enable: true,
+        enable: props.managerAccountsGroupsColumnIsEnabled,
         sortBy: "manager",
         onClick: this.onFilter,
         resizable: true,

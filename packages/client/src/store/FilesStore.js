@@ -4222,6 +4222,31 @@ class FilesStore {
     this.selectedFolderStore.setNavigationPath(navigationPath);
   };
 
+  setInRoomFolder = (roomId, inRoom) => {
+    const newFolders = this.folders;
+    const folderIndex = newFolders.findIndex((r) => r.id === roomId);
+
+    const isRoot = this.selectedFolderStore.isRootFolder;
+
+    if (!isRoot) {
+      this.selectedFolderStore.setInRoom(true);
+    } else {
+      if (folderIndex > -1) {
+        newFolders[folderIndex].inRoom = inRoom;
+        this.setFolders(newFolders);
+
+        if (
+          this.bufferSelection &&
+          this.bufferSelection.id === newFolders[folderIndex].id
+        ) {
+          const newBufferSelection = { ...this.bufferSelection };
+          newBufferSelection.inRoom = inRoom;
+          this.setBufferSelection(newBufferSelection);
+        }
+      }
+    }
+  };
+
   get isFiltered() {
     const { isRoomsFolder, isArchiveFolder } = this.treeFoldersStore;
 

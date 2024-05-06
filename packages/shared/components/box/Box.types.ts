@@ -95,4 +95,6 @@ export interface BoxProps {
   className?: string;
   id?: string;
   style?: React.CSSProperties;
+
+  onClick?: () => void;
 }

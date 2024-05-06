@@ -785,7 +785,7 @@ const SectionHeaderContent = (props) => {
       {
         id: "header_option_sharing-settings",
         key: "sharing-settings",
-        label: t("Files:Share"),
+        label: t("Common:Share"),
         onClick: onClickShare,
         disabled: !canShare,
         icon: ShareReactSvgUrl,

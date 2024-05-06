@@ -33,11 +33,15 @@ import {
   ShareAccessRights,
 } from "@docspace/shared/enums";
 //import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { getCorrectDate, getCookie } from "@docspace/shared/utils";
+import {
+  getCorrectDate,
+  getCookie,
+  getTitleWithoutExtension,
+} from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
 import config from "PACKAGE_FILE";
 //import EditingWrapperComponent from "../components/EditingWrapperComponent";
-import { getTitleWithoutExtension } from "SRC_DIR/helpers/filesUtils";
+
 //import { getDefaultFileName } from "@docspace/client/src/helpers/filesUtils";
 //import ItemIcon from "../components/ItemIcon";
 

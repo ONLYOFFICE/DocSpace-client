@@ -83,8 +83,15 @@ const StyledButtonContainer = styled.div`
 `;
 
 const CreateRoomTemplate = (props) => {
-  const { visible, onClose, item, fetchedTags, folderFormValidation, isEdit } =
-    props;
+  const {
+    visible,
+    onClose,
+    item,
+    fetchedTags,
+    folderFormValidation,
+    isEdit,
+    setAccessSettingsIsVisible,
+  } = props;
   const { roomType, title, logo, createdBy } = item;
   console.log("item", item);
 
@@ -148,6 +155,10 @@ const CreateRoomTemplate = (props) => {
     setOpenCreatedIsChecked(!openCreatedIsChecked);
   };
 
+  const onOpenAccessSettings = () => {
+    setAccessSettingsIsVisible(true);
+  };
+
   const tagHandler = new TagHandler(tags, setRoomTags, fetchedTags);
 
   return (
@@ -198,7 +209,7 @@ const CreateRoomTemplate = (props) => {
           <ChangeRoomOwner
             roomOwner={createdBy}
             isTemplate
-            onOwnerChange={() => console.log("Access settings")}
+            onOwnerChange={onOpenAccessSettings}
           />
 
           <div>
@@ -262,7 +273,10 @@ const CreateRoomTemplate = (props) => {
   );
 };
 
-export default inject(({ settingsStore }) => {
+export default inject(({ settingsStore, dialogsStore }) => {
   const { folderFormValidation } = settingsStore;
-  return { folderFormValidation };
+  const { setTemplateAccessSettingsVisible: setAccessSettingsIsVisible } =
+    dialogsStore;
+
+  return { folderFormValidation, setAccessSettingsIsVisible };
 })(observer(CreateRoomTemplate));

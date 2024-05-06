@@ -195,5 +195,11 @@
   "WantToRestoreTheRoom": "All shared links in this room will become active, and its contents will be available to everyone with the link. Do you want to restore the room?",
   "WantToRestoreTheRooms": "All shared links in restored rooms will become active, and their contents will be available to everyone with the room links. Do you want to restore the rooms?",
   "WithSubfolders": "With subfolders",
-  "YouLeftTheRoom": "You have left the room"
+  "YouLeftTheRoom": "You have left the room",
+  "TemplateAvailable": "Template available to everyone",
+  "TemplateAvailableDescription": "All DocSpace and Room admins will be able to create rooms using this template.",
+  "AddUsersOrGroups": "Add Users or Groups",
+  "AddUsersOrGroupsDescription": "The added administrators will be able to create rooms using this template.",
+  "AddUsersOrGroupsInfo": "Only DocSpace and Room admins are shown her",
+  "AddUsersOrGroupsInfoGroups": "Only DocSpace and Room admins from the selected groups will be able to create rooms using this template."
 }

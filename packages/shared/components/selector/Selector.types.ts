@@ -295,8 +295,12 @@ export type TSelectorFooterCheckbox = TSelectorCheckbox & {
 };
 
 export type TSelectorInfo =
-  | { withInfo: true; infoText: string }
-  | { withInfo?: undefined; infoText?: undefined };
+  | { withInfo: true; infoText: string; withInfoBadge?: boolean }
+  | {
+      withInfo?: undefined;
+      infoText?: undefined;
+      withInfoBadge?: undefined;
+    };
 
 export type SelectorProps = TSelectorHeader &
   TSelectorInfo &
@@ -377,6 +381,7 @@ export type BodyProps = TSelectorBreadCrumbs &
     withFooterInput?: boolean;
     withFooterCheckbox?: boolean;
     descriptionText?: string;
+    withInfoBadge?: boolean;
   };
 
 export type FooterProps = TSelectorFooterSubmitButton &

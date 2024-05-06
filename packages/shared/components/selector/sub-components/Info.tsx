@@ -26,17 +26,27 @@
 
 import React from "react";
 
+import { ReactSVG } from "react-svg";
+import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import { Text } from "../../text";
 
 import { TSelectorInfo } from "../Selector.types";
 import { StyledInfo } from "../Selector.styled";
 
-export const Info = ({ infoText }: TSelectorInfo) => {
+export const Info = ({ infoText, withInfoBadge }: TSelectorInfo) => {
   return (
     <StyledInfo id="selector-info-text">
-      <Text fontSize="12px" fontWeight={400} lineHeight="16px" className="text">
-        {infoText}
-      </Text>
+      <div className="selector-info-text-wrapper">
+        {withInfoBadge && <ReactSVG src={InfoIcon} />}
+        <Text
+          fontSize="12px"
+          fontWeight={400}
+          lineHeight="16px"
+          className="text"
+        >
+          {infoText}
+        </Text>
+      </div>
     </StyledInfo>
   );
 };

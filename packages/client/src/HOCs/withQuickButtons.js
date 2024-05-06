@@ -100,6 +100,10 @@ export default function withQuickButtons(WrappedComponent) {
       }
     };
 
+    onCreateRoom = () => {
+      this.props.onCreateRoomFromTemplate(this.props.item);
+    };
+
     render() {
       const { isLoading } = this.state;
 
@@ -115,7 +119,6 @@ export default function withQuickButtons(WrappedComponent) {
         isPersonalRoom,
         isArchiveFolder,
         isTemplatesFolder,
-        onCreateRoomFromTemplate,
       } = this.props;
 
       const quickButtonsComponent = (
@@ -136,7 +139,7 @@ export default function withQuickButtons(WrappedComponent) {
           folderCategory={folderCategory}
           onCopyPrimaryLink={this.onCopyPrimaryLink}
           isArchiveFolder={isArchiveFolder}
-          onCreateRoom={onCreateRoomFromTemplate}
+          onCreateRoom={this.onCreateRoom}
           isTemplatesFolder={isTemplatesFolder}
         />
       );

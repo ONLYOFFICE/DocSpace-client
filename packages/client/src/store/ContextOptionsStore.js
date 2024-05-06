@@ -682,6 +682,10 @@ class ContextOptionsStore {
     this.filesActionsStore.onCreateRoomFromTemplate({ ...item, isEdit: true });
   };
 
+  onOpenTemplateAccessOptions = () => {
+    this.dialogsStore.setTemplateAccessSettingsVisible(true);
+  };
+
   // onLoadLinks = async (t, item) => {
   //   const promise = new Promise(async (resolve, reject) => {
   //     let linksArray = [];
@@ -1337,6 +1341,14 @@ class ContextOptionsStore {
         label: t("EditTemplate"),
         icon: SettingsReactSvgUrl,
         onClick: () => this.onEditRoomTemplate(item),
+        disabled: false,
+      },
+      {
+        id: "option_access-settings",
+        key: "access-settings",
+        label: t("AccessSettings"),
+        icon: PersonReactSvgUrl,
+        onClick: () => this.onOpenTemplateAccessOptions(),
         disabled: false,
       },
       {

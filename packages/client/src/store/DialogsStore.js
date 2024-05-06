@@ -116,6 +116,7 @@ class DialogsStore {
   shareFolderDialogVisible = false;
   cancelUploadDialogVisible = false;
   createRoomTemplateDialogVisible = false;
+  templateAccessSettingsVisible = true;
 
   selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;
 
@@ -522,6 +523,10 @@ class DialogsStore {
 
   setCreateRoomTemplateDialogVisible = (visible) => {
     this.createRoomTemplateDialogVisible = visible;
+  };
+
+  setTemplateAccessSettingsVisible = (isVisible) => {
+    this.templateAccessSettingsVisible = isVisible;
   };
 }
 

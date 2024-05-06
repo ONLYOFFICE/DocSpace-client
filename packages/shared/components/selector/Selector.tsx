@@ -134,6 +134,7 @@ const Selector = ({
 
   withInfo,
   infoText,
+  withInfoBadge,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
   const [isSearch, setIsSearch] = React.useState<boolean>(false);
@@ -530,6 +531,7 @@ const Selector = ({
     ? {
         withInfo,
         infoText,
+        withInfoBadge,
       }
     : {};
 

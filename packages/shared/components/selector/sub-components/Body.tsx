@@ -101,6 +101,7 @@ const Body = ({
 
   withInfo,
   infoText,
+  withInfoBadge,
 }: BodyProps) => {
   const [bodyHeight, setBodyHeight] = React.useState(0);
 
@@ -212,7 +213,11 @@ const Body = ({
       ) : null}
 
       {withInfo && !isLoading && (
-        <Info withInfo={withInfo} infoText={infoText} />
+        <Info
+          withInfo={withInfo}
+          infoText={infoText}
+          withInfoBadge={withInfoBadge}
+        />
       )}
 
       {isLoading ? (

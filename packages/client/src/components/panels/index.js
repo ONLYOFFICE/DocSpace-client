@@ -33,6 +33,7 @@ import UploadPanel from "./UploadPanel";
 import HotkeyPanel from "./HotkeysPanel";
 import InvitePanel from "./InvitePanel";
 import EditLinkPanel from "./EditLinkPanel";
+import TemplateAccessSettingsPanel from "./TemplateAccessSettingsPanel";
 
 export {
   AddUsersPanel,
@@ -44,4 +45,5 @@ export {
   HotkeyPanel,
   InvitePanel,
   EditLinkPanel,
+  TemplateAccessSettingsPanel,
 };

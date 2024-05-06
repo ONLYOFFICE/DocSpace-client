@@ -438,6 +438,11 @@ const StyledInfo = styled.div`
   .text {
     color: ${(props) => props.theme.selector.info.color};
   }
+
+  .selector-info-text-wrapper {
+    display: flex;
+    gap: 8px;
+  }
 `;
 
 StyledSelector.defaultProps = { theme: Base };

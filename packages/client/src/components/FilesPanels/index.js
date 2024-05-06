@@ -41,6 +41,7 @@ import {
   InvitePanel,
   EditLinkPanel,
   EmbeddingPanel,
+  TemplateAccessSettingsPanel,
 } from "../panels";
 import {
   ConnectDialog,
@@ -131,6 +132,7 @@ const Panels = (props) => {
     shareFolderDialogVisible,
     pdfFormEditVisible,
     createRoomTemplateDialogVisible,
+    templateAccessSettingsVisible,
   } = props;
 
   const [createPDFFormFile, setCreatePDFFormFile] = useState({
@@ -320,6 +322,9 @@ const Panels = (props) => {
     createRoomTemplateDialogVisible && (
       <CreateRoomTemplateDialog key="create-room-template-dialog" />
     ),
+    templateAccessSettingsVisible && (
+      <TemplateAccessSettingsPanel key="template-access-settings" />
+    ),
   ];
 };
 
@@ -380,6 +385,7 @@ export default inject(
       shareFolderDialogVisible,
       pdfFormEditVisible,
       createRoomTemplateDialogVisible,
+      templateAccessSettingsVisible,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -447,6 +453,7 @@ export default inject(
       shareFolderDialogVisible,
       pdfFormEditVisible,
       createRoomTemplateDialogVisible,
+      templateAccessSettingsVisible,
     };
   },
 )(observer(Panels));

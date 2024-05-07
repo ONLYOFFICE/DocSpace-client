@@ -72,14 +72,17 @@ const VirtualDataRoomBlock = ({
   t,
   roomParams,
   setRoomParams,
-  isEdit,
-  isWatermarks,
+  isEdit = false,
+  isWatermarks = false,
+  setWatermarks,
 }) => {
   const role = t("Translations:RoleViewer");
 
   const [fileLifetimeChecked, setFileLifetimeChecked] = useState(false);
   const [copyAndDownloadChecked, setCopyAndDownloadChecked] = useState(false);
-  const [watermarksChecked, setWatermarksChecked] = useState(isWatermarks);
+  const [watermarksChecked, setWatermarksChecked] = useState(
+    isWatermarks && isEdit,
+  );
 
   const onChangeAutomaticIndexing = () => {
     setRoomParams({ ...roomParams, indexing: !roomParams.indexing });
@@ -95,6 +98,8 @@ const VirtualDataRoomBlock = ({
 
   const onChangeAddWatermarksToDocuments = () => {
     setWatermarksChecked(!watermarksChecked);
+
+    setWatermarks({ enabled: !watermarksChecked });
   };
 
   return (
@@ -141,9 +146,10 @@ const VirtualDataRoomBlock = ({
 };
 
 export default inject(({ createEditRoomStore }) => {
-  const { watermarksSettings } = createEditRoomStore;
+  const { watermarksSettings, setWatermarks } = createEditRoomStore;
 
   return {
+    setWatermarks,
     isWatermarks: watermarksSettings?.enabled,
   };
 })(observer(VirtualDataRoomBlock));

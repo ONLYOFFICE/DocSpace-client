@@ -97,12 +97,9 @@ class CreateEditRoomStore {
 
   setWatermarks = (watermarksSettings, isInit = false) => {
     if (isInit) {
-      this.initialWatermarksSettings = {
-        ...watermarksSettings,
-        enabled: true,
-      };
+      this.initialWatermarksSettings = watermarksSettings;
+      this.watermarksSettings = watermarksSettings;
 
-      this.watermarksSettings = this.initialWatermarksSettings;
       return;
     }
 
@@ -118,7 +115,6 @@ class CreateEditRoomStore {
   };
 
   isEqualWatermarkChanges = () => {
-   
     return isEqual(this.watermarksSettings, this.initialWatermarksSettings);
   };
 

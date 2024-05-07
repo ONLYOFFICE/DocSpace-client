@@ -81,24 +81,27 @@ const tabsOptions = (t) => [
   },
 ];
 
-const getInitialTabs = (additions, t) => {
+const getInitialTabs = (additions, isEdit, t) => {
   const dataTabs = tabsOptions(t);
 
-  if (!additions) return [dataTabs[0]];
+  if (!isEdit || !additions) return [dataTabs[0]];
 
   return dataTabs.filter((item) => additions & WatermarkAdditions[item.key]);
 };
 
-const getInitialRotate = (rotate, t) => {
+const getInitialRotate = (rotate, isEdit, t) => {
   const dataRotate = rotateOptions(t);
 
-  if (rotate === undefined) return dataRotate[0];
+  if (!isEdit || rotate === undefined) return dataRotate[0];
 
   return dataRotate.find((item) => {
     return item.key === rotate;
   });
 };
 
+const getInitialText = (text, isEdit) => {
+  return isEdit && text ? text : "";
+};
 const Watermarks = ({ setWatermarks, watermarksSettings, isEdit }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
   const [type, setType] = useState(viewerInfoWatermark);
@@ -109,8 +112,9 @@ const Watermarks = ({ setWatermarks, watermarksSettings, isEdit }) => {
     initialInfo.current = {
       dataRotate: rotateOptions(t),
       dataTabs: tabsOptions(t),
-      initialRotate: getInitialRotate(watermarksSettings?.rotate, t),
-      initialTabs: getInitialTabs(watermarksSettings?.additions, t),
+      initialRotate: getInitialRotate(watermarksSettings?.rotate, isEdit, t),
+      initialTabs: getInitialTabs(watermarksSettings?.additions, isEdit, t),
+      initialText: getInitialText(watermarksSettings?.text, isEdit),
     };
   }
 
@@ -118,14 +122,16 @@ const Watermarks = ({ setWatermarks, watermarksSettings, isEdit }) => {
 
   useEffect(() => {
     if (!isEdit) {
-      setWatermarks({
-        rotate: initialInfoRef.initialRotate.key,
-        text: "",
-        additions: WatermarkAdditions.UserName,
-      });
+      setWatermarks(
+        {
+          rotate: initialInfoRef.initialRotate.key,
+          text: "",
+          additions: WatermarkAdditions.UserName,
+          enabled: true,
+        },
+        true,
+      );
     }
-
-    return () => setWatermarks(null);
   }, []);
 
   const onSelectType = (e) => {
@@ -156,7 +162,7 @@ const Watermarks = ({ setWatermarks, watermarksSettings, isEdit }) => {
           dataPosition={initialInfoRef.dataRotate}
           dataTabs={initialInfoRef.dataTabs}
           initialTab={initialInfoRef.initialTabs}
-          initialText={watermarksSettings?.text}
+          initialText={initialInfoRef.initialText}
         />
       )}
     </StyledBody>

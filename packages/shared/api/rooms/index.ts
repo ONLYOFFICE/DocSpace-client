@@ -506,3 +506,10 @@ export function getWatermarkSettings(roomId: number | string) {
     url: `files/rooms/${roomId}/watermark`,
   });
 }
+
+export function deleteWatermarkSettings(roomId: number | string) {
+  return request({
+    method: "delete",
+    url: `files/rooms/${roomId}/watermark`,
+  });
+}

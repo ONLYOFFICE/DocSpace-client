@@ -30,7 +30,11 @@ import { useTranslation } from "react-i18next";
 import { EditRoomDialog } from "../dialogs";
 import { Encoder } from "@docspace/shared/utils/encoder";
 import api from "@docspace/shared/api";
-import { getRoomInfo, getWatermarkSettings } from "@docspace/shared/api/rooms";
+import {
+  deleteWatermarkSettings,
+  getRoomInfo,
+  getWatermarkSettings,
+} from "@docspace/shared/api/rooms";
 import { toastr } from "@docspace/shared/components/toast";
 import { setWatermarkSettings } from "@docspace/shared/api/rooms";
 
@@ -190,7 +194,11 @@ const EditRoomEvent = ({
         actions.push(removeTagsFromRoom(room.id, removedTags));
 
       if (watermarksSettings) {
-        actions.push(setWatermarkSettings(room.id, watermarksSettings));
+        const request = !watermarksSettings.enabled
+          ? deleteWatermarkSettings(room.id)
+          : setWatermarkSettings(room.id, watermarksSettings);
+
+        actions.push(request);
       }
 
       await Promise.all(actions);

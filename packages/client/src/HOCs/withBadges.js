@@ -127,8 +127,17 @@ export default function withBadges(WrappedComponent) {
     openLocationFile = () => {
       const { checkAndOpenLocationAction, item } = this.props;
 
-      //TODO: need to add ExtraLocationTitle, ExtraLocation,
-      checkAndOpenLocationAction?.(item);
+      const { draftLocation, ...options } = item;
+
+      const file = {
+        ...options,
+        ExtraLocationTitle: draftLocation.folderTitle,
+        ExtraLocation: draftLocation.folderId,
+        id: draftLocation.fileId,
+        title: draftLocation.fileTitle,
+      };
+
+      checkAndOpenLocationAction?.(file);
     };
 
     render() {

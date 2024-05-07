@@ -106,6 +106,7 @@ import {
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { getFileLink } from "@docspace/shared/api/files";
 import { resendInvitesAgain } from "@docspace/shared/api/people";
+import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -1946,7 +1947,7 @@ class ContextOptionsStore {
   };
 
   onCreateFormFromFile = () => {
-    setSelectFileDialogVisible(true);
+    this.dialogsStore.setSelectFileDialogVisible(true);
   };
 
   onShowGallery = () => {
@@ -1957,7 +1958,7 @@ class ContextOptionsStore {
     ).toUrlParams();
 
     window.DocSpace.navigate(
-      `/form-gallery/${currentFolderId}/filter?${initOformFilter}`,
+      `/form-gallery/${this.selectedFolderStore.id}/filter?${initOformFilter}`,
     );
   };
 
@@ -1971,10 +1972,13 @@ class ContextOptionsStore {
     element?.click();
   };
 
-  getFolderModel = (t, isAccountsPage) => {
+  getFolderModel = (t) => {
     const { isLoading } = this.clientLoadingStore;
     const { security } = this.selectedFolderStore;
     const { isPublicRoom } = this.publicRoomStore;
+
+    const isAccountsPage =
+      window?.DocSpace?.location.pathname.includes("/accounts");
 
     const stateCanCreate = window?.DocSpace?.location?.state?.canCreate;
     const isSettingsPage =
@@ -1996,7 +2000,9 @@ class ContextOptionsStore {
       !isPublicRoom &&
       !isInsideGroup;
 
-    if (!canCreate) return null;
+    const someDialogIsOpen = checkDialogsOpen();
+
+    if (!canCreate || isMobile || someDialogIsOpen) return null;
 
     const isOwner = this.userStore.user?.isOwner;
     const isRoomAdmin = this.userStore.user?.isRoomAdmin;

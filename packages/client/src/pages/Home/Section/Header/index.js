@@ -825,7 +825,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const getContextOptionsPlus = () => {
-    return getFolderModel(t, isAccountsPage);
+    return getFolderModel(t);
   };
 
   const onNavigationButtonClick = () => {

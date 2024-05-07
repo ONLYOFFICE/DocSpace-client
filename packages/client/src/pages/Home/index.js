@@ -59,6 +59,7 @@ import {
   useGroups,
   useInsideGroup,
 } from "./Hooks";
+import { ContextMenu } from "@docspace/shared/components/context-menu";
 
 const PureHome = (props) => {
   const {
@@ -157,6 +158,7 @@ const PureHome = (props) => {
     getRooms,
     setSelectedFolder,
     userId,
+    getFolderModel,
   } = props;
 
   const location = useLocation();
@@ -282,12 +284,27 @@ const PureHome = (props) => {
     isLoading,
   });
 
+  const documentContextMenuListener = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    if (!getContextModel()) return;
+
+    if (cmRef.current) cmRef.current.show(e);
+
+    console.log(
+      "documentContextMenuListenerdocumentContextMenuListenerdocumentContextMenuListener",
+    );
+  };
+
   React.useEffect(() => {
     window.addEventListener("popstate", onClickBack);
+    document.addEventListener("contextmenu", documentContextMenuListener);
 
     return () => {
       setSelectedFolder(null);
       window.removeEventListener("popstate", onClickBack);
+      document.removeEventListener("contextmenu", documentContextMenuListener);
     };
   }, []);
 
@@ -335,6 +352,12 @@ const PureHome = (props) => {
   sectionProps.secondaryProgressBarIcon = secondaryProgressDataStoreIcon;
   sectionProps.showSecondaryButtonAlert = secondaryProgressDataStoreAlert;
 
+  const cmRef = React.useRef(null);
+
+  const getContextModel = () => {
+    return getFolderModel(t, isAccountsPage);
+  };
+
   return (
     <>
       {isSettingsPage ? (
@@ -381,7 +404,14 @@ const PureHome = (props) => {
           )}
 
         <Section.SectionBody isAccounts={isAccountsPage}>
-          <Outlet />
+          <>
+            <Outlet />
+            <ContextMenu
+              ref={cmRef}
+              getContextModel={getContextModel}
+              withBackdrop
+            />
+          </>
         </Section.SectionBody>
 
         <Section.InfoPanelHeader>
@@ -419,6 +449,7 @@ export default inject(
     userStore,
     currentTariffStatusStore,
     settingsStore,
+    contextOptionsStore,
   }) => {
     const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
@@ -433,9 +464,10 @@ export default inject(
       setIsSectionBodyLoading,
       setIsSectionFilterLoading,
       isLoading,
-
       showFilterLoader,
     } = clientLoadingStore;
+
+    const { getFolderModel } = contextOptionsStore;
 
     const setIsLoading = (param, withoutTimer, withHeaderLoader) => {
       if (withHeaderLoader) setIsSectionHeaderLoading(param, !withoutTimer);
@@ -647,6 +679,7 @@ export default inject(
       updateProfileCulture,
       getRooms,
       setSelectedFolder,
+      getFolderModel,
     };
   },
 )(observer(Home));

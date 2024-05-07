@@ -101,6 +101,11 @@ const RoomSelector = (props) => {
       default: true,
     },
     {
+      key: "room-filling-form-collaboration",
+      label: t("CreateEditRoomDialog:FormFilingRoomTitle"),
+      roomType: RoomsType.FormRoom,
+    },
+    {
       key: "room-type-collaboration",
       label: t("CreateEditRoomDialog:CollaborationRoomTitle"),
       roomType: RoomsType.EditingRoom,
@@ -184,7 +189,7 @@ const RoomSelector = (props) => {
     loadFrame();
     return destroyFrame;
   });
-  
+
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
     if (scroll) {

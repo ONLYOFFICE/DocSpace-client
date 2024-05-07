@@ -114,6 +114,11 @@ const minSearchValue = 3;
 export const FilterBlock = ({ t, config, setConfig }) => {
   const roomTypeOptions = [
     {
+      key: "room-filling-form-collaboration",
+      label: t("CreateEditRoomDialog:FormFilingRoomTitle"),
+      roomType: RoomsType.FormRoom,
+    },
+    {
       key: "room-type-collaboration",
       label: t("CreateEditRoomDialog:CollaborationRoomTitle"),
       roomType: RoomsType.EditingRoom,
@@ -334,10 +339,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
   };
 
   const clearMembers = clearConstructor("subjectId");
-  const toggleMembers = toggleConstructor(
-    clearMembers,
-    setIsUserFilterSet,
-  );
+  const toggleMembers = toggleConstructor(clearMembers, setIsUserFilterSet);
 
   const clearAuthorType = clearConstructor("authorType");
   const toggleAuthor = toggleConstructor(clearAuthorType, setIsUserFilterSet);

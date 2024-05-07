@@ -232,7 +232,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
       return (
         <DropDownItem
           {...option}
-          className="drop-down-item"
+          className={`drop-down-item ${"className" in option ? option.className : ""}`}
           textOverflow={textOverflow}
           key={option.key}
           disabled={disabled}

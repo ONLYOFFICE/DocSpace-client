@@ -20,6 +20,5 @@
   "RegisterTitle": "Sorğunun qeydiyyatı",
   "RegistrationEmailWatermark": "Elektron poçt",
   "RememberHelper": "Susmaya görə sessiya müddəti 20 dəqiqədir. Müddəti 1 ilə uzatmaq üçün qutunu klikləyin. Digər müddəti təyin etmək üçün, Ayarlar bölməsinə keçin.",
-  "ResendCode": "Kodu yenidən göndərin",
-  "UserIsAlreadyRegistered": "<1>{{email}}</1> istifadəçisi artıq bu DocSpace-də qeydiyyatdan keçib, parolunuzu daxil edin və ya başqa e-poçtla davam etmək üçün geri qayıdın."
+  "ResendCode": "Kodu yenidən göndərin"
 }

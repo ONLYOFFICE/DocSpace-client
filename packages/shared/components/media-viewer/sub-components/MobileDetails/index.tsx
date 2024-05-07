@@ -48,6 +48,7 @@ const MobileDetails = memo(
         title,
         isError,
         isPreviewFile,
+        isPublicFile,
         onHide,
         onMaskClick,
         onContextMenu,
@@ -65,7 +66,9 @@ const MobileDetails = memo(
 
       return (
         <StyledMobileDetails>
-          <BackArrow className="mobile-close" onClick={onMaskClick} />
+          {!isPublicFile && (
+            <BackArrow className="mobile-close" onClick={onMaskClick} />
+          )}
           <Text fontSize="14px" color="#fff" className="title">
             {title}
           </Text>

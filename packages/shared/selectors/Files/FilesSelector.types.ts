@@ -107,6 +107,7 @@ export type UseFilesHelpersProps = {
     value: number | string | undefined | TBreadCrumb[],
   ) => void;
   isRoomsOnly: boolean;
+  isUserOnly?: boolean;
   rootThirdPartyId?: string;
   getRoomList?: (
     startIndex: number,
@@ -149,6 +150,7 @@ export type FilesSelectorProps = (
     value: number | string | undefined | TBreadCrumb[],
   ) => void;
   isUserOnly?: boolean;
+  openRoot?: boolean;
   isRoomsOnly: boolean;
   isThirdParty: boolean;
   rootThirdPartyId?: string;

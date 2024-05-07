@@ -674,6 +674,7 @@ class InfoPanelStore {
         mergedMembers.groups,
       );
 
+      this.filesStore.setInRoomFolder(roomId, true);
       this.setInfoPanelMembers(mergedMembers);
     }
   };

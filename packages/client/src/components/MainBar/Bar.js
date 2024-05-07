@@ -49,6 +49,8 @@ const Bar = (props) => {
     firstLoad,
 
     isAdmin,
+    isPowerUser,
+    isRoomAdmin,
     userEmail,
     setMaintenanceExist,
     withActivationBar,
@@ -118,7 +120,6 @@ const Bar = (props) => {
         setBarVisible((value) => ({
           ...value,
           roomQuota: !closed.includes(QuotaBarTypes.RoomQuota),
-          storageQuota: !closed.includes(QuotaBarTypes.StorageQuota),
           tenantCustomQuota: !closed.includes(QuotaBarTypes.TenantCustomQuota),
           userQuota: !closed.includes(QuotaBarTypes.UserQuota),
           storageAndRoomQuota: !closed.includes(
@@ -127,6 +128,12 @@ const Bar = (props) => {
           storageAndUserQuota: !closed.includes(
             QuotaBarTypes.RoomAndStorageQuota,
           ),
+        }));
+      }
+      if (isAdmin || isPowerUser || isRoomAdmin) {
+        setBarVisible((value) => ({
+          ...value,
+          storageQuota: !closed.includes(QuotaBarTypes.StorageQuota),
         }));
       }
 
@@ -139,7 +146,7 @@ const Bar = (props) => {
     } else {
       setBarVisible({
         roomQuota: isAdmin,
-        storageQuota: isAdmin,
+        storageQuota: isAdmin || isPowerUser || isRoomAdmin,
         tenantCustomQuota: isAdmin,
         userQuota: isAdmin,
         storageAndUserQuota: isAdmin,
@@ -397,6 +404,8 @@ export default inject(
 
     return {
       isAdmin: user?.isAdmin,
+      isPowerUser: user?.isCollaborator,
+      isRoomAdmin: user?.isRoomAdmin,
       userEmail: user?.email,
       withActivationBar,
       sendActivationLink,

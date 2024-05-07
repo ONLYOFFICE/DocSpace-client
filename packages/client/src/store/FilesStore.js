@@ -1410,7 +1410,6 @@ class FilesStore {
         `${url}?${RoomsFilter.getDefault().toUrlParams()}`,
       );
     }
-
     this.setIsErrorRoomNotAvailable(false);
     this.setIsLoadedFetchFiles(false);
 
@@ -1420,7 +1419,6 @@ class FilesStore {
 
     if (filterStorageItem && !filter) {
       const splitFilter = filterStorageItem.split(",");
-
       filterData.sortBy = splitFilter[0];
       filterData.pageCount = +splitFilter[1];
       filterData.sortOrder = splitFilter[2];
@@ -1457,12 +1455,18 @@ class FilesStore {
           await this.publicRoomStore.getExternalLinks(data.current.id);
         }
 
+        if (data.current?.indexing && filterData.sortBy !== "customOrder") {
+          filterData.sortBy = "customOrder";
+          return window.DocSpace.navigate(
+            `${window.DocSpace.location.pathname}?${filterData.toUrlParams()}`,
+          );
+        }
+
         if (newTotal > 0) {
           const lastPage = filterData.getLastPage();
 
           if (filterData.page > lastPage) {
             filterData.page = lastPage;
-
             return this.fetchFiles(
               folderId,
               filterData,

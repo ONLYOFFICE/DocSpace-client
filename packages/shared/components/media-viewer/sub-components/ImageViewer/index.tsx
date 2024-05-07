@@ -930,6 +930,20 @@ export const ImageViewer = ({
   //     });
   // }, [src, imageId, version, isTiff, loadImage, changeSource, thumbnailSrc]);
 
+  useEffect(() => {
+    const onWheelEvent = (event: WheelEvent) => {
+      if (event.ctrlKey) event.preventDefault();
+    };
+
+    window.addEventListener("wheel", onWheelEvent, {
+      passive: false,
+    });
+
+    return () => {
+      window.removeEventListener("wheel", onWheelEvent);
+    };
+  }, []);
+
   return (
     <>
       {isMobile && !backgroundBlack && mobileDetails}

@@ -58,6 +58,11 @@ const BannerWrapper = styled.div<{
       `}
   }
 
+  @media ${mobile} {
+    min-height: 132px;
+    max-height: 132px;
+  }
+
   .close-icon {
     position: absolute;
     ${(props) =>
@@ -122,11 +127,11 @@ const BannerIcon = styled.div`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          left: 0px;
+          left: 1px;
           transform: scaleX(-1);
         `
       : css`
-          right: 0px;
+          right: 1px;
         `}
 
   @media ${mobile} {

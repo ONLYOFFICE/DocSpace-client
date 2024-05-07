@@ -29,10 +29,10 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { WatermarkAdditions } from "@docspace/shared/enums";
 
 import ViewerInfoWatermark from "./ViewerInfo";
 import { StyledBody } from "./StyledComponent";
-import { WatermarkAdditions } from "@docspace/shared/enums";
 
 const imageWatermark = "image",
   viewerInfoWatermark = "viewerInfo";
@@ -124,6 +124,8 @@ const Watermarks = ({ setWatermarks, watermarksSettings, isEdit }) => {
         additions: WatermarkAdditions.UserName,
       });
     }
+
+    return () => setWatermarks(null);
   }, []);
 
   const onSelectType = (e) => {

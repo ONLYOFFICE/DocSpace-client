@@ -291,7 +291,7 @@ const EditRoomEvent = ({
       const [tags, watermarks] = await Promise.all(requests);
 
       setFetchedTags(tags);
-      setWatermarks(watermarks);
+      setWatermarks(watermarks, true);
 
       setIsInitLoading(false);
     };

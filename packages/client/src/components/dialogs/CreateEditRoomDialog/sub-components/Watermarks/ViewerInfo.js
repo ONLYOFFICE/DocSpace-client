@@ -118,7 +118,6 @@ const ViewerInfoWatermark = ({
           scale
           value={textValue}
           tabIndex={1}
-          isAutoFocussed
           onChange={onTextChange}
         />
       </div>

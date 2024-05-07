@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
+import isEqual from "lodash/isEqual";
+
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -93,7 +95,17 @@ class CreateEditRoomStore {
     this.onClose = onClose;
   };
 
-  setWatermarks = (watermarksSettings) => {
+  setWatermarks = (watermarksSettings, isInit = false) => {
+    if (isInit) {
+      this.initialWatermarksSettings = {
+        ...watermarksSettings,
+        enabled: true,
+      };
+
+      this.watermarksSettings = this.initialWatermarksSettings;
+      return;
+    }
+
     if (!watermarksSettings) {
       this.watermarksSettings = null;
       return;
@@ -102,8 +114,12 @@ class CreateEditRoomStore {
     this.watermarksSettings = {
       ...this.watermarksSettings,
       ...watermarksSettings,
-      enabled: true,
     };
+  };
+
+  isEqualWatermarkChanges = () => {
+   
+    return isEqual(this.watermarksSettings, this.initialWatermarksSettings);
   };
 
   onCreateRoom = async (withConfirm = false, t) => {

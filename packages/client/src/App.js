@@ -36,6 +36,8 @@ import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import store from "client/store";
 import i18n from "./i18n";
 
+import "@docspace/shared/polyfills/broadcastchannel";
+
 import "@docspace/shared/styles/custom.scss";
 
 import router from "./router";

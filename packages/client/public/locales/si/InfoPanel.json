@@ -1,9 +1,11 @@
 {
   "AccountsEmptyScreenText": "පරිශ්‍රීලකයින්ගේ විස්තර මෙතැන බලන්න",
+  "Administration": "පරිපාලනය",
   "AndMoreLabel": "සහ <strong>තවත් {{count}}</strong>",
   "CreationDate": "සෑදූ දිනය",
   "Data": "දත්ත",
   "DateModified": "සංශෝධිත දිනය",
+  "ExpectUsers": "අපේක්‍ෂිත පරිශ්‍රීලකයින්",
   "FeedCreateFileSeveral": "ගොනු එක් කෙරිණි",
   "FeedCreateFileSingle": "ගොනුව සෑදිණි",
   "FeedCreateFolderSeveral": "බහාලුම් එක් කෙරිණි",
@@ -26,7 +28,10 @@
   "FeedUpdateUser": "{{role}} භූමිකාව පවරා ඇත",
   "FileExtension": "ගොනුවේ දිගුව",
   "FilesEmptyScreenText": "ගොනු සහ බහාලුම්වල විස්තර මෙතැන බලන්න",
+  "GalleryEmptyScreenText": "ආකෘතිපත්‍ර අච්චුවේ විස්තර මෙතැන බලන්න",
+  "GroupsEmptyScreenText": "මෙතැන සමූහයේ විස්තර බලන්න",
   "HistoryEmptyScreenText": "ක්‍රියාකාරකම් ඉතිහාසය මෙහි පෙන්වනු ඇත",
+  "InfoBanner": "ආරාධිත පරිශ්‍රීලකයින්ගේ ලැයිස්තුවේ සියලුම කාමර වලට පූර්ණ ප්‍රවේශය සහිත මෙම DocSpace හිමිකරු සහ/හෝ පරිපාලකයින් ද ඇතුළත් වේ. හිමිකරුට සහ/හෝ පරිපාලකයාට වෙනත් ප්‍රවේශ අයිතීන් පැවරීමට නොහැකිය. කාමරයකට එක් කළ පසු සියලුම වෙනස්කම් පිළිබඳව ඔවුන්ට දැනුම් දෙනු ලැබේ.",
   "ItemsSelected": "අථක සෑදිණි",
   "LastModifiedBy": "අවසාන සංශෝධනය",
   "Properties": "ගුණාංග",
@@ -35,5 +40,6 @@
   "StorageType": "ආචයන වර්ගය",
   "SubmenuDetails": "විස්තර",
   "SubmenuHistory": "ඉතිහාසය",
+  "Users": "පරිශ්‍රීලකයින්",
   "Versions": "අනුවාද"
 }

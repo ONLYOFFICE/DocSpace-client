@@ -1132,11 +1132,17 @@ export function getLdapSettings() {
   return request(options);
 }
 
-export function saveLdapSettings(data) {
-  const options = {
-    method: "post",
-    url: "/settings/ldap",
+export function saveLdapSettings(settings, acceptCertificate = false) {
+  const data = {
+    settings: JSON.stringify(settings),
+    acceptCertificate,
   };
+
+  return request({
+    method: "post",
+    url: `/settings/ldap`,
+    data,
+  });
 }
 
 export function migrationClear() {

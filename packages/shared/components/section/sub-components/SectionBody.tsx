@@ -65,7 +65,19 @@ const SectionBody = React.memo(
 
     const onContextMenu = React.useCallback(
       (e: MouseEvent | React.MouseEvent<Element, MouseEvent>) => {
-        if (!getContextModel || !getContextModel()) return;
+        const bodyElem = document.getElementsByClassName(
+          "section-body",
+        )[0] as HTMLDivElement;
+
+        const target = e.target as Node;
+
+        if (
+          !getContextModel ||
+          !getContextModel() ||
+          !bodyElem ||
+          !bodyElem.contains(target)
+        )
+          return;
 
         e.stopPropagation();
         e.preventDefault();
@@ -76,17 +88,10 @@ const SectionBody = React.memo(
     );
 
     React.useEffect(() => {
-      const sectionElem = document.getElementsByClassName(
-        "section-body",
-      )[0] as HTMLElement;
+      document.addEventListener("contextmenu", onContextMenu);
 
-      if (sectionElem) {
-        sectionElem.addEventListener("contextmenu", onContextMenu);
-      }
       return () => {
-        if (sectionElem) {
-          sectionElem.removeEventListener("contextmenu", onContextMenu);
-        }
+        document.removeEventListener("contextmenu", onContextMenu);
       };
     }, [onContextMenu]);
 
@@ -102,6 +107,15 @@ const SectionBody = React.memo(
           tabIndex: -1,
         }
       : {};
+
+    const contextBlock = (
+      <ContextMenu
+        ref={cmRef}
+        getContextModel={getContextModel}
+        withBackdrop
+        model={[]}
+      />
+    );
 
     return uploadFiles ? (
       <StyledDropZoneBody
@@ -142,11 +156,7 @@ const SectionBody = React.memo(
           </div>
         )}
 
-        <ContextMenu
-          ref={cmRef}
-          getContextModel={getContextModel}
-          withBackdrop
-        />
+        {contextBlock}
       </StyledDropZoneBody>
     ) : (
       <StyledSectionBody
@@ -155,6 +165,7 @@ const SectionBody = React.memo(
         isDesktop={isDesktop}
         settingsStudio={settingsStudio}
         isFormGallery={isFormGallery}
+        className="section-body"
       >
         {withScroll ? (
           currentDeviceType !== DeviceType.mobile ? (
@@ -181,6 +192,7 @@ const SectionBody = React.memo(
         ) : (
           <div className="section-wrapper">{children}</div>
         )}
+        {contextBlock}
       </StyledSectionBody>
     );
   },

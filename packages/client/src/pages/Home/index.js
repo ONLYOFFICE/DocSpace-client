@@ -59,7 +59,6 @@ import {
   useGroups,
   useInsideGroup,
 } from "./Hooks";
-import { ContextMenu } from "@docspace/shared/components/context-menu";
 
 const PureHome = (props) => {
   const {
@@ -284,27 +283,17 @@ const PureHome = (props) => {
     isLoading,
   });
 
-  const documentContextMenuListener = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-
-    if (!getContextModel()) return;
-
-    if (cmRef.current) cmRef.current.show(e);
-
-    console.log(
-      "documentContextMenuListenerdocumentContextMenuListenerdocumentContextMenuListener",
-    );
+  const getContextModel = () => {
+    if (isFrame) return null;
+    return getFolderModel(t);
   };
 
   React.useEffect(() => {
     window.addEventListener("popstate", onClickBack);
-    document.addEventListener("contextmenu", documentContextMenuListener);
 
     return () => {
       setSelectedFolder(null);
       window.removeEventListener("popstate", onClickBack);
-      document.removeEventListener("contextmenu", documentContextMenuListener);
     };
   }, []);
 
@@ -351,12 +340,7 @@ const PureHome = (props) => {
   sectionProps.secondaryProgressBarValue = secondaryProgressDataStorePercent;
   sectionProps.secondaryProgressBarIcon = secondaryProgressDataStoreIcon;
   sectionProps.showSecondaryButtonAlert = secondaryProgressDataStoreAlert;
-
-  const cmRef = React.useRef(null);
-
-  const getContextModel = () => {
-    return getFolderModel(t, isAccountsPage);
-  };
+  sectionProps.getContextModel = getContextModel;
 
   return (
     <>
@@ -406,11 +390,6 @@ const PureHome = (props) => {
         <Section.SectionBody isAccounts={isAccountsPage}>
           <>
             <Outlet />
-            <ContextMenu
-              ref={cmRef}
-              getContextModel={getContextModel}
-              withBackdrop
-            />
           </>
         </Section.SectionBody>
 

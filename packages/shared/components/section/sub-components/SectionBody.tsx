@@ -29,6 +29,7 @@ import React from "react";
 // import { inject, observer } from "mobx-react";
 
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { ContextMenu } from "@docspace/shared/components/context-menu";
 
 import { DeviceType } from "@docspace/shared/enums";
 
@@ -52,8 +53,42 @@ const SectionBody = React.memo(
     isDesktop,
     settingsStudio = false,
     currentDeviceType,
+    getContextModel,
   }: SectionBodyProps) => {
     const focusRef = React.useRef<HTMLDivElement | null>(null);
+    const cmRef = React.useRef<null | {
+      show: (e: React.MouseEvent | MouseEvent) => void;
+      hide: (e: React.MouseEvent | MouseEvent) => void;
+      toggle: (e: React.MouseEvent | MouseEvent) => boolean;
+      getVisible: () => boolean;
+    }>(null);
+
+    const onContextMenu = React.useCallback(
+      (e: MouseEvent | React.MouseEvent<Element, MouseEvent>) => {
+        if (!getContextModel || !getContextModel()) return;
+
+        e.stopPropagation();
+        e.preventDefault();
+
+        if (cmRef.current) cmRef.current.toggle(e);
+      },
+      [getContextModel],
+    );
+
+    React.useEffect(() => {
+      const sectionElem = document.getElementsByClassName(
+        "section-body",
+      )[0] as HTMLElement;
+
+      if (sectionElem) {
+        sectionElem.addEventListener("contextmenu", onContextMenu);
+      }
+      return () => {
+        if (sectionElem) {
+          sectionElem.removeEventListener("contextmenu", onContextMenu);
+        }
+      };
+    }, [onContextMenu]);
 
     React.useEffect(() => {
       if (!autoFocus) return;
@@ -106,6 +141,12 @@ const SectionBody = React.memo(
             <StyledSpacer />
           </div>
         )}
+
+        <ContextMenu
+          ref={cmRef}
+          getContextModel={getContextModel}
+          withBackdrop
+        />
       </StyledDropZoneBody>
     ) : (
       <StyledSectionBody

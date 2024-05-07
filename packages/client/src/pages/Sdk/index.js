@@ -55,6 +55,7 @@ const Sdk = ({
   getRoomsIcon,
   fetchExternalLinks,
   getFilePrimaryLink,
+  getFilesSettings,
 }) => {
   const [isDataReady, setIsDataReady] = useState(false);
 
@@ -95,6 +96,10 @@ const Sdk = ({
       callCommandLoad("setIsLoaded");
     }
   }, [callCommandLoad, isDataReady]);
+
+  useEffect(() => {
+    getFilesSettings();
+  }, []);
 
   const { mode } = useParams();
   const selectorType = new URLSearchParams(window.location.search).get(
@@ -291,7 +296,7 @@ export default inject(
       settingsStore;
     const { loadCurrentUser, user } = userStore;
     const { updateProfileCulture } = peopleStore.targetUserStore;
-    const { getIcon, getRoomsIcon } = filesSettingsStore;
+    const { getIcon, getRoomsIcon, getFilesSettings } = filesSettingsStore;
     const { fetchExternalLinks } = publicRoomStore;
     const { getFilePrimaryLink } = filesStore;
 
@@ -310,6 +315,7 @@ export default inject(
       user,
       fetchExternalLinks,
       getFilePrimaryLink,
+      getFilesSettings,
     };
   },
 )(withTranslation(["JavascriptSdk", "Common"])(observer(Sdk)));

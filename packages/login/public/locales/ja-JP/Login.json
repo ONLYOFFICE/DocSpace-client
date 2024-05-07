@@ -20,6 +20,5 @@
   "RegisterTitle": "登録申請",
   "RegistrationEmailWatermark": "メール",
   "RememberHelper": "デフォルトのセッションライフタイムは20分です。このオプションをチェックすると、1年間に設定されます。独自の値を設定するには、「設定」で設定します。",
-  "ResendCode": "コードの再送信",
-  "UserIsAlreadyRegistered": "ユーザー<1>{{email}}</1>はすでにこのDocSpaceに登録されています。パスワードを入力するか、前に戻って別のメールアドレスでログインしてください。"
+  "ResendCode": "コードの再送信"
 }

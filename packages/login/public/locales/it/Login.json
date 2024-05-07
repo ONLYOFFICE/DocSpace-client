@@ -20,6 +20,5 @@
   "RegisterTitle": "Richiesta di inscrizione ",
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "‎La durata predefinita della sessione è di 20 minuti. Selezionare questa opzione per impostarla su 1 anno. Per impostare il proprio valore, passare a Impostazioni.‎",
-  "ResendCode": "Invia nuovamente il codice",
-  "UserIsAlreadyRegistered": "L'utente <1>{{email}}</1> è già registrato in questo DocSpace, inserisci la tua password o torna indietro per continuare con un'altra email."
+  "ResendCode": "Invia nuovamente il codice"
 }

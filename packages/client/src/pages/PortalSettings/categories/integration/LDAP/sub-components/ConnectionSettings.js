@@ -129,7 +129,7 @@ const ConnectionSettings = (props) => {
           isRequired
         >
           <TextInput
-            pattern="[1-9]*"
+            pattern="[0-9]*"
             name={PORT_NUMBER}
             hasError={errors.portNumber}
             onChange={onChangeValue}

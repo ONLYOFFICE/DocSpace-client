@@ -44,18 +44,18 @@ class LdapFormStore {
   isSslEnabled = false;
 
   requiredSettings = {
-    server: "",
-    userDN: "",
+    server: "LDAP://192.168.1.56", //TODO: change to ""
+    userDN: "ou=people,dc=planetexpress,dc=com", //TODO: change to ""
     loginAttribute: "uid",
-    portNumber: "389",
-    userFilter: "(objectclass=*)",
+    portNumber: "10389", //TODO: change to 389
+    userFilter: "(objectClass=inetOrgPerson)", //TODO: change to "(objectclass=*)"
     firstName: "givenName",
     secondName: "sn",
     mail: "mail",
   };
 
-  login = "";
-  password = "";
+  login = "cn=admin,dc=planetexpress,dc=com"; //TODO: change to ""
+  password = "GoodNewsEveryone"; //TODO: change to ""
   authentication = true;
   acceptCertificate = false;
   isSendWelcomeEmail = false;
@@ -138,9 +138,8 @@ class LdapFormStore {
       getCronLdap(),
     ]);
 
-    if (settings.status == "fulfilled") this.mapSettings(settings.value);
-
-    if (cron.status == "fulfilled") this.mapCron(cron.value);
+    //if (settings.status == "fulfilled") this.mapSettings(settings.value); //TODO: uncomment
+    //if (cron.status == "fulfilled") this.mapCron(cron.value); //TODO: uncomment
 
     /*
     "response": {
@@ -270,7 +269,7 @@ class LdapFormStore {
     }
   };
 
-  saveLdapSettings = async () => {
+  save = async () => {
     this.inProgress = false;
     this.progressStatus = {
       percents: 0,

@@ -2,10 +2,10 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import {Box} from "@docspace/shared/components/box";
-import {TextInput} from "@docspace/shared/components/text-input";
-import {FieldContainer} from "@docspace/shared/components/field-container";
-import {Textarea} from "@docspace/shared/components/textarea";
+import { Box } from "@docspace/shared/components/box";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { Textarea } from "@docspace/shared/components/textarea";
 
 const USER_DN = "userDN",
   SERVER = "server",
@@ -61,6 +61,7 @@ const ConnectionSettings = (props) => {
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
+          labelVisible={true}
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.server}
           labelText={t("LdapServer")}
@@ -79,6 +80,7 @@ const ConnectionSettings = (props) => {
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
+          labelVisible={true}
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.userDN}
           labelText={t("LdapUserDN")}
@@ -97,6 +99,7 @@ const ConnectionSettings = (props) => {
         <FieldContainer
           style={LAST_FIELD_STYLE}
           isVertical
+          labelVisible={true}
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.loginAttribute}
           labelText={t("LdapLoginAttribute")}
@@ -117,6 +120,7 @@ const ConnectionSettings = (props) => {
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
+          labelVisible={true}
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.portNumber}
           labelText={t("LdapPortNumber")}
@@ -137,6 +141,7 @@ const ConnectionSettings = (props) => {
         <FieldContainer
           style={LAST_FIELD_STYLE}
           isVertical
+          labelVisible={true}
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.userFilter}
           labelText={t("LdapUserFilter")}
@@ -169,13 +174,8 @@ export default inject(({ ldapStore }) => {
     errors,
   } = ldapStore;
 
-  const {
-    portNumber,
-    userFilter,
-    userDN,
-    server,
-    loginAttribute,
-  } = requiredSettings;
+  const { portNumber, userFilter, userDN, server, loginAttribute } =
+    requiredSettings;
   return {
     setServer,
     setUserDN,

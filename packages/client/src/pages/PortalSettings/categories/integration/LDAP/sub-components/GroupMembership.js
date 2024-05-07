@@ -2,12 +2,12 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import {ToggleButton} from "@docspace/shared/components/toggle-button";
-import {HelpButton} from "@docspace/shared/components/help-button";
-import {Box} from "@docspace/shared/components/box";
-import {TextInput} from "@docspace/shared/components/text-input";
-import {FieldContainer} from "@docspace/shared/components/field-container";
-import {Textarea} from "@docspace/shared/components/textarea";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Box } from "@docspace/shared/components/box";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { Textarea } from "@docspace/shared/components/textarea";
 
 const FIELD_STYLE = { marginBottom: "0px" };
 
@@ -70,6 +70,7 @@ const GroupMembership = (props) => {
       <Box className="group_membership-container">
         <FieldContainer
           isVertical
+          labelVisible={true}
           style={FIELD_STYLE}
           errorMessage={t("Common:EmptyFieldError")}
           labelText={t("LdapGroupDN")}
@@ -87,6 +88,7 @@ const GroupMembership = (props) => {
         </FieldContainer>
         <FieldContainer
           isVertical
+          labelVisible={true}
           style={FIELD_STYLE}
           errorMessage={t("Common:EmptyFieldError")}
           labelText={t("LdapUserAttribute")}
@@ -105,6 +107,7 @@ const GroupMembership = (props) => {
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
+          labelVisible={true}
           errorMessage={t("Common:EmptyFieldError")}
           labelText={t("LdapGroupFilter")}
           tooltipContent={t("LdapGroupFilterTooltip")}
@@ -123,6 +126,7 @@ const GroupMembership = (props) => {
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
+          labelVisible={true}
           errorMessage={t("Common:EmptyFieldError")}
           labelText={t("LdapGroupNameAttribute")}
           isRequired
@@ -139,6 +143,7 @@ const GroupMembership = (props) => {
         </FieldContainer>
         <FieldContainer
           isVertical
+          labelVisible={true}
           errorMessage={t("Common:EmptyFieldError")}
           labelText={t("LdapGroupAttribute")}
           isRequired

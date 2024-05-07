@@ -78,6 +78,7 @@ const RoomsItemHeader = ({
   };
 
   const onClickInviteUsers = () => {
+    onSelectItem();
     setIsMobileHidden(true);
     const parentRoomId = infoPanelSelection.id;
 

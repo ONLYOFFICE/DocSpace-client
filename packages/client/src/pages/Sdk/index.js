@@ -55,6 +55,7 @@ const Sdk = ({
   getRoomsIcon,
   fetchExternalLinks,
   getFilePrimaryLink,
+  getFilesSettings,
 }) => {
   const [isDataReady, setIsDataReady] = useState(false);
 
@@ -85,7 +86,7 @@ const Sdk = ({
   );
 
   useEffect(() => {
-    if (window.parent && !frameConfig && isLoaded) {
+    if (window.parent && !frameConfig?.frameId && isLoaded) {
       callCommand("setConfig");
     }
   }, [callCommand, isLoaded]);
@@ -96,20 +97,14 @@ const Sdk = ({
     }
   }, [callCommandLoad, isDataReady]);
 
+  useEffect(() => {
+    getFilesSettings();
+  }, []);
+
   const { mode } = useParams();
   const selectorType = new URLSearchParams(window.location.search).get(
     "selectorType",
   );
-
-  const toRelativeUrl = (data) => {
-    try {
-      const url = new URL(data);
-      const rel = url.toString().substring(url.origin.length);
-      return rel;
-    } catch {
-      return data;
-    }
-  };
 
   const handleMessage = async (e) => {
     const eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
@@ -170,10 +165,10 @@ const Sdk = ({
 
   const onSelectRoom = useCallback(
     async (data) => {
-      if (data[0].logo?.large !== "") {
-        data[0].icon = toRelativeUrl(data[0].logo?.large);
-      } else {
+      if (data[0].icon === "") {
         data[0].icon = await getRoomsIcon(data[0].roomType, false, 32);
+      } else {
+        data[0].icon = data[0].iconOriginal;
       }
 
       if (
@@ -222,13 +217,9 @@ const Sdk = ({
     frameCallEvent({ event: "onCloseCallback" });
   }, [frameCallEvent]);
 
-  const onCloseCallback = !!frameConfig?.events.onCloseCallback
-    ? {
-        onClose,
-      }
-    : {};
-
   let component;
+
+  if (!frameConfig) return;
 
   switch (mode) {
     case "room-selector":
@@ -305,7 +296,7 @@ export default inject(
       settingsStore;
     const { loadCurrentUser, user } = userStore;
     const { updateProfileCulture } = peopleStore.targetUserStore;
-    const { getIcon, getRoomsIcon } = filesSettingsStore;
+    const { getIcon, getRoomsIcon, getFilesSettings } = filesSettingsStore;
     const { fetchExternalLinks } = publicRoomStore;
     const { getFilePrimaryLink } = filesStore;
 
@@ -324,6 +315,7 @@ export default inject(
       user,
       fetchExternalLinks,
       getFilePrimaryLink,
+      getFilesSettings,
     };
   },
 )(withTranslation(["JavascriptSdk", "Common"])(observer(Sdk)));

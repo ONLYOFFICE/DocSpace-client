@@ -41,7 +41,7 @@ import {
 } from "@/utils/actions";
 import SimpleNav from "@/components/SimpleNav";
 
-import "../styles/globals.scss";
+import "../../styles/globals.scss";
 
 export default async function RootLayout({
   children,

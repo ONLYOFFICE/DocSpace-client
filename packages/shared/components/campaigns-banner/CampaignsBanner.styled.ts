@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { Base } from "../../themes";
-import { desktop, mobile } from "../../utils/device";
+import { tablet, mobile } from "../../utils/device";
 
 const BannerWrapper = styled.div<{
   background?: string;
@@ -90,13 +90,21 @@ const BannerContent = styled.div`
   flex-direction: column;
   gap: 8px;
 
-  @media ${desktop} {
+  .header {
+    max-width: 167px;
+  }
+
+  @media ${tablet} {
     .header {
-      max-width: 167px;
+      max-width: 180px;
     }
   }
 
   @media ${mobile} {
+    .header {
+      max-width: 75%;
+    }
+
     max-width: 75%;
   }
 `;

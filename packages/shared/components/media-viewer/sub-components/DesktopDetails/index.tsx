@@ -40,20 +40,24 @@ export const DesktopDetails = ({
   onMaskClick,
   title,
   className,
+  showCloseButton,
 }: DesktopDetailsProps) => {
   return (
     <DesktopDetailsContainer className={className}>
       <Text isBold fontSize="14px" className="title">
         {title}
       </Text>
-      <ControlBtn onClick={onMaskClick} className="mediaPlayerClose">
-        <IconButton
-          color="#fff"
-          iconName={ViewerMediaCloseSvgUrl}
-          size={28}
-          isClickable
-        />
-      </ControlBtn>
+
+      {showCloseButton && (
+        <ControlBtn onClick={onMaskClick} className="mediaPlayerClose">
+          <IconButton
+            color="#fff"
+            iconName={ViewerMediaCloseSvgUrl}
+            size={28}
+            isClickable
+          />
+        </ControlBtn>
+      )}
     </DesktopDetailsContainer>
   );
 };

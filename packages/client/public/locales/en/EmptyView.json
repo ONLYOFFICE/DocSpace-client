@@ -1,0 +1,16 @@
+{
+  "FormRoomEmptyDescription": "Get started with quick actions:",
+  "FormRoomEmptyTitle": "Welcome to the Form filling room",
+  "FormFillerRoomEmptyTitle": "No docs here yet",
+  "FormFillerRoomEmptyDescription": "Files and folders uploaded by admins will appeared here.",
+  "CreateNewFormOptionTitle": "Create a form from scratch",
+  "CreateNewFormOptionDescription": "Create a new form from blank, insert fillable fields and adjust them as you need.",
+  "CreateFormFromTextDocOptionTitle": "Create a form from document",
+  "CreateFormFromTextDocOptionDescription": "Turn your text documents into fillable forms by adding the required fields.",
+  "InviteUsersOptionTitle": "Invite users",
+  "InviteUsersOptionDescription": "Invite other users to this room to start the form filling process and collect completed copies.",
+  "UploadPDFFormOptionTitle": "Upload a PDF form",
+  "UploadPDFFormOptionDescription": "Move a ready-to-fill-out PDF form to this room from your DocSpace.",
+  "UploadDevicePDFFormOptionTitle": "Download the complete PDF form",
+  "UploadDevicePDFFormOptionDescription": "Download a PDF form from your device, and the system will automatically convert it into a form that can be filled out."
+}

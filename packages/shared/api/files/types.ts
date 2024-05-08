@@ -112,6 +112,7 @@ export type TFile = {
   providerId?: number;
   providerKey?: string;
   providerItem?: boolean;
+  thumbnailUrl?: string;
 };
 
 export type TOpenEditRequest = {
@@ -185,6 +186,7 @@ export type TFolder = {
   isArchive?: boolean;
   roomType?: RoomsType;
   path?: TPathParts[];
+  type?: FolderType;
 };
 
 export type TGetFolderPath = TFolder[];
@@ -414,3 +416,13 @@ export type TFilesUsedSpace = {
     usedSpace: number;
   };
 };
+
+export type TConnectingStorage = {
+  name: string;
+  key: string;
+  connected: boolean;
+  oauth: boolean;
+  redirectUrl: string;
+};
+
+export type TConnectingStorages = TConnectingStorage[];

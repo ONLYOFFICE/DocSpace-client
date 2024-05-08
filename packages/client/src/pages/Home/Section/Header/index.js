@@ -68,9 +68,10 @@ import {
   DeviceType,
   FolderType,
   ShareAccessRights,
+  FilesSelectorFilterTypes,
   WhiteLabelLogoType,
 } from "@docspace/shared/enums";
-import { getLogoFromPath } from "@docspace/shared/utils";
+
 import { copyShareLink } from "@docspace/shared/utils/copy";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -195,7 +196,6 @@ const SectionHeaderContent = (props) => {
     showHeaderLoader,
     isDesktop,
     isTabletView,
-    personal,
     navigationPath,
     getHeaderMenu,
     isRecycleBinFolder,
@@ -264,6 +264,7 @@ const SectionHeaderContent = (props) => {
     emptyTrashInProgress,
     categoryType,
     isPublicRoom,
+    isFormRoomType,
     theme,
     downloadAction,
     isPublicRoomType,
@@ -282,6 +283,7 @@ const SectionHeaderContent = (props) => {
     onClickCreateRoom,
     onCreateAndCopySharedLink,
     showNavigationButton,
+    setSelectFileFormRoomDialogVisible,
     deleteRooms,
     setSelection,
     startUpload,
@@ -516,15 +518,13 @@ const SectionHeaderContent = (props) => {
       return getGroupContextOptions(t, currentGroup, false, true);
     }
 
-    const canShare = isPersonalRoom && !isCollaborator;
-
     return [
       {
         id: "header_option_sharing-settings",
         key: "sharing-settings",
         label: t("Common:Share"),
         onClick: onClickShare,
-        disabled: !canShare,
+        disabled: !selectedFolder.security?.CreateRoomFrom,
         icon: ShareReactSvgUrl,
       },
       {
@@ -652,8 +652,7 @@ const SectionHeaderContent = (props) => {
         onClick: () => {
           onClickCreateRoom({ title: selectedFolder.title, isFolder: true });
         },
-        disabled:
-          isCollaborator || selectedFolder.rootFolderType !== FolderType.USER,
+        disabled: !selectedFolder.security?.CreateRoomFrom,
       },
       {
         id: "option_leave-room",
@@ -960,7 +959,6 @@ const SectionHeaderContent = (props) => {
                 title={currentTitle}
                 isDesktop={isDesktop}
                 isTabletView={isTabletView}
-                personal={personal}
                 tReady={tReady}
                 menuItems={menuItems}
                 navigationItems={
@@ -1110,6 +1108,7 @@ export default inject(
       setRestoreAllArchive,
       setInviteUsersWarningDialogVisible,
       setLeaveRoomDialogVisible,
+      setSelectFileFormRoomDialogVisible,
       setShareFolderDialogVisible,
     } = dialogsStore;
 
@@ -1147,6 +1146,8 @@ export default inject(
       access,
       canCopyPublicLink,
       rootFolderType,
+      parentRoomType,
+      isFolder,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -1163,6 +1164,9 @@ export default inject(
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
     const isCustomRoomType = roomType === RoomsType.CustomRoom;
+    const isFormRoomType =
+      roomType === RoomsType.FormRoom ||
+      (parentRoomType === FolderType.FormRoom && isFolder);
 
     const {
       onClickEditRoom,
@@ -1251,7 +1255,6 @@ export default inject(
       isThirdPartySelection,
       isTabletView: settingsStore.isTabletView,
       confirmDelete: filesSettingsStore.confirmDelete,
-      personal: settingsStore.personal,
       cbMenuItems,
       setSelectedNode: treeFoldersStore.setSelectedNode,
       getFolderInfo,
@@ -1308,6 +1311,7 @@ export default inject(
       onClickBack,
       isPublicRoomType,
       isCustomRoomType,
+      isFormRoomType,
       isPublicRoom,
       primaryLink,
       getPrimaryLink,
@@ -1345,6 +1349,7 @@ export default inject(
       onCreateAndCopySharedLink,
       showNavigationButton,
       haveLinksRight,
+      setSelectFileFormRoomDialogVisible,
       deleteRooms,
       setSelection,
       setShareFolderDialogVisible,

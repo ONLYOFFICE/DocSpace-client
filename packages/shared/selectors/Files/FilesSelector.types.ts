@@ -101,7 +101,7 @@ export type UseFilesHelpersProps = {
   setSelectedItemSecurity: (value: TFileSecurity | TFolderSecurity) => void;
   isThirdParty: boolean;
   setSelectedTreeNode: (treeNode: TFolder) => void;
-  filterParam?: string;
+  filterParam?: string | number;
   getRootData?: () => Promise<void>;
   onSetBaseFolderPath?: (
     value: number | string | undefined | TBreadCrumb[],

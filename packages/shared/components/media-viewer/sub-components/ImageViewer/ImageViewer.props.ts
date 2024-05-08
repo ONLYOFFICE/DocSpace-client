@@ -46,7 +46,7 @@ interface ImageViewerProps {
   onPrev?: VoidFunction;
   onNext?: VoidFunction;
   onMask?: VoidFunction;
-  contextModel: () => ContextMenuModel[];
+  contextModel: (isError?: boolean) => ContextMenuModel[];
   resetToolbarVisibleTimer: VoidFunction;
   setIsOpenContextMenu: Dispatch<SetStateAction<boolean>>;
   generateContextMenu: (

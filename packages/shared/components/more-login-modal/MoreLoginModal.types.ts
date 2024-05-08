@@ -26,6 +26,8 @@
 
 import type { PROVIDERS_DATA } from "@docspace/shared/constants";
 
+import { TTranslation } from "../../types";
+
 export type ProvidersDataType = typeof PROVIDERS_DATA;
 
 interface IProvider {
@@ -41,6 +43,6 @@ export interface MoreLoginModalProps {
   onSocialLoginClick: (e: React.MouseEvent<Element, MouseEvent>) => void;
   ssoLabel: string;
   ssoUrl: string;
-  t: (key: string, opts?: unknown) => string;
+  t: TTranslation;
   isSignUp: boolean;
 }

@@ -8,10 +8,10 @@
     "url": ""
   },
   "wrongPortalNameUrl": "",
-  "thumbnails1280x720": false,
+  "thumbnails1280x720": true,
   "pdfViewer": false,
   "pdfViewerUrl": "sdkjs/pdf/src/engine/viewer.js",
-  "imageThumbnails": false,
+  "imageThumbnails": true,
   "editor": {
     "openOnNewPage": true,
     "requestClose": false

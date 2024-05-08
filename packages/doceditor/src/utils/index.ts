@@ -31,7 +31,7 @@ import { convertFile } from "@docspace/shared/api/files";
 import { TEditHistory } from "@docspace/shared/api/files/types";
 import { FolderType } from "@docspace/shared/enums";
 
-import { IInitialConfig } from "@/types";
+import type { IInitialConfig } from "@/types";
 
 import { IS_VIEW } from "./constants";
 
@@ -66,22 +66,6 @@ export const getBackUrl = (
   const origin = url.substring(0, url.indexOf("/doceditor"));
 
   return `${combineUrl(origin, backUrl)}`;
-};
-
-export const isTemplateFile = (
-  config: IInitialConfig | undefined,
-): config is IInitialConfig => {
-  const fileMeta = config?.file;
-
-  return (
-    !IS_VIEW &&
-    !!fileMeta &&
-    fileMeta.viewAccessibility.WebRestrictedEditing &&
-    fileMeta.security.FillForms &&
-    fileMeta.rootFolderType === FolderType.Rooms &&
-    !fileMeta.security.Edit &&
-    !config.document.isLinkedForMe
-  );
 };
 
 export const showDocEditorMessage = async (

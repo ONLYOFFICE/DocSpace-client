@@ -26,6 +26,7 @@
 
 import type { TTheme } from "@docspace/shared/themes";
 import type store from "./src/store";
+import "@docspace/shared/index.d";
 
 declare module "*.svg" {
   const SVG: React.VFC<React.SVGProps<SVGSVGElement>>;

@@ -66,7 +66,10 @@ const CreateEvent = ({
   eventDialogVisible,
   keepNewFileName,
   setPortalTariff,
+  withoutDialog,
+  preview,
   publicRoomKey,
+  actionEdit,
 }) => {
   const [headerTitle, setHeaderTitle] = React.useState(null);
   const [startValue, setStartValue] = React.useState("");
@@ -97,7 +100,7 @@ const CreateEvent = ({
 
     if (!extension) return setEventDialogVisible(true);
 
-    if (!keepNewFileName) {
+    if (!keepNewFileName && !withoutDialog) {
       setEventDialogVisible(true);
     } else {
       onSave(null, title || defaultName);
@@ -106,7 +109,7 @@ const CreateEvent = ({
     return () => {
       setEventDialogVisible(false);
     };
-  }, [extension, title, fromTemplate]);
+  }, [extension, title, fromTemplate, withoutDialog]);
 
   const onSave = (e, value, open = true) => {
     let item;
@@ -159,6 +162,14 @@ const CreateEvent = ({
       searchParams.append("fileTitle", `${newValue}.${extension}`);
       searchParams.append("open", open);
       searchParams.append("id", id);
+
+      if (preview) {
+        searchParams.append("action", "view");
+      }
+
+      if (actionEdit) {
+        searchParams.append("action", "edit");
+      }
 
       if (publicRoomKey) {
         searchParams.append("share", publicRoomKey);

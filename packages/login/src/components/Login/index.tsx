@@ -63,6 +63,7 @@ const Login = ({
   capabilities,
   thirdPartyProvider,
   isAuthenticated,
+  timers,
 }: LoginProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -84,6 +85,10 @@ const Login = ({
     openRecoverDialog,
     closeRecoverDialog,
   } = useRecoverDialog({});
+
+  useEffect(() => {
+    console.log("Login page API requests timings:", { ...timers });
+  }, [timers]);
 
   useEffect(() => {
     if (searchParams) {

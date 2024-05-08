@@ -47,7 +47,14 @@ async function Page({
 }: {
   searchParams: { [key: string]: string };
 }) {
+  const timers = { isAuth: 0, otherOperations: 0 };
+  const startIsAuthDate = new Date();
+
   const isAuth = await checkIsAuthenticated();
+
+  timers.isAuth = new Date().getTime() - startIsAuthDate.getTime();
+
+  const startOtherOperationsDate = new Date();
 
   const [settings, thirdParty, capabilities, ssoSettings, colorTheme] =
     await Promise.all([
@@ -57,6 +64,9 @@ async function Page({
       getSSO(),
       getColorTheme(),
     ]);
+
+  timers.otherOperations =
+    new Date().getTime() - startOtherOperationsDate.getTime();
 
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
 
@@ -96,6 +106,7 @@ async function Page({
         thirdPartyProvider={thirdParty}
         ssoSettings={ssoSettings}
         isAuthenticated={isAuth}
+        timers={timers}
       />
     </LoginFormWrapper>
   );

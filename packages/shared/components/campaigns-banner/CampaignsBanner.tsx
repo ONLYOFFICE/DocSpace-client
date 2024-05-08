@@ -60,16 +60,19 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
   const hasText = !!Text;
   const isButton = action?.isButton;
 
-  const { fontSize, ref } = useFitText(campaignBackground, body?.fontSize);
+  const { fontSize, ref, wrapperRef } = useFitText(
+    campaignBackground,
+    body?.fontSize,
+  );
 
   return (
     <BannerWrapper
-      ref={ref}
+      ref={wrapperRef}
       data-testid="campaigns-banner"
       background={campaignBackground}
       borderColor={borderColor}
     >
-      <BannerContent>
+      <BannerContent ref={ref}>
         {hasTitle && (
           <TextComponent
             className="header"

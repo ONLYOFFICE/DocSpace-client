@@ -31,6 +31,7 @@ const useFitText = (
   currentFontSize: string = "13px",
 ) => {
   const ref: React.RefObject<HTMLDivElement> = useRef(null);
+  const wrapperRef: React.RefObject<HTMLDivElement> = useRef(null);
 
   const [fontSize, setFontSize] = useState(parseInt(currentFontSize, 10));
 
@@ -40,15 +41,17 @@ const useFitText = (
 
   useEffect(() => {
     const isOverflow =
-      !!ref.current && ref.current.scrollHeight > ref.current.offsetHeight;
+      !!ref.current &&
+      !!wrapperRef.current &&
+      ref.current.scrollHeight > wrapperRef.current.offsetHeight;
 
     if (isOverflow) {
       const newFontSize = fontSize - 1;
       setFontSize(newFontSize);
     }
-  }, [currentFontSize, fontSize, ref?.current?.scrollHeight]);
+  }, [fontSize]);
 
-  return { fontSize: `${fontSize}px`, ref };
+  return { fontSize: `${fontSize}px`, ref, wrapperRef };
 };
 
 export default useFitText;

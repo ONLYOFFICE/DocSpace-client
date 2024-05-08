@@ -2298,6 +2298,22 @@ class ContextOptionsStore {
       });
     }
 
+    const formActions = isDesktop()
+      ? [
+          {
+            id: "personal_form-template",
+            icon: FormReactSvgUrl,
+            label: t("Translations:NewForm"),
+            key: "new-form-base",
+            items: [
+              createTemplateForm,
+              createTemplateNewFormFile,
+              templateOformsGallery,
+            ],
+          },
+        ]
+      : [createTemplateForm, createTemplateNewFormFile, templateOformsGallery];
+
     const options = isRoomsFolder
       ? [
           {
@@ -2311,18 +2327,7 @@ class ContextOptionsStore {
           createNewDoc,
           createNewSpreadsheet,
           createNewPresentation,
-
-          {
-            id: "personal_form-template",
-            icon: FormReactSvgUrl,
-            label: t("Translations:NewForm"),
-            key: "new-form-base",
-            items: [
-              createTemplateForm,
-              createTemplateNewFormFile,
-              templateOformsGallery,
-            ],
-          },
+          ...formActions,
           createNewFolder,
           { key: "separator", isSeparator: true },
           uploadFiles,

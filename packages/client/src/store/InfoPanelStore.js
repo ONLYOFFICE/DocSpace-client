@@ -133,8 +133,10 @@ class InfoPanelStore {
   };
 
   setSearchValue = (value) => {
-    this.setSearchResultIsLoading(true);
-    this.searchValue = value;
+    if (value !== this.searchValue) {
+      this.setSearchResultIsLoading(true);
+      this.searchValue = value;
+    }
   };
 
   resetSearch = () => {

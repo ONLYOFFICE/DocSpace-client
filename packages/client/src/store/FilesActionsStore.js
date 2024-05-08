@@ -1211,6 +1211,11 @@ class FilesActionStore {
             }
 
             // this.updateCurrentFolder(null, null, null, operationId);
+            this.dialogsStore.setIsFolderActions(false);
+            return setTimeout(
+              () => clearSecondaryProgressData(operationId),
+              TIMEOUT,
+            );
           })
 
           .then(() => {
@@ -1264,6 +1269,11 @@ class FilesActionStore {
             await this.uploadDataStore.loopFilesOperations(data, pbData);
 
             // this.updateCurrentFolder(null, [items], null, operationId);
+            this.dialogsStore.setIsFolderActions(false);
+            return setTimeout(
+              () => clearSecondaryProgressData(operationId),
+              TIMEOUT,
+            );
           })
 
           .then(() => {

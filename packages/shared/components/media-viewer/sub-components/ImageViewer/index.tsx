@@ -99,6 +99,7 @@ export const ImageViewer = ({
   const containerRef = useRef<HTMLDivElement>(null);
 
   const unmountRef = useRef<boolean>(false);
+  const isLoaded = useRef<boolean>(false);
 
   const lastTapTimeRef = useRef<number>(0);
   const isDoubleTapRef = useRef<boolean>(false);
@@ -214,6 +215,7 @@ export const ImageViewer = ({
         rotate: 0,
       });
 
+      isLoaded.current = true;
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
       setIsLoading(false);
@@ -892,9 +894,13 @@ export const ImageViewer = ({
   useLayoutEffect(() => {
     if (unmountRef.current || (isTiff && src)) return;
 
-    timeoutRef.current = setTimeout(() => {
-      setIsLoading(true);
-    }, LOADER_TIMEOUT);
+    if (!isLoaded.current) {
+      timeoutRef.current = setTimeout(() => {
+        setIsLoading(true);
+      }, LOADER_TIMEOUT);
+    }
+
+    isLoaded.current = false;
 
     setIsError(false);
 
@@ -929,6 +935,20 @@ export const ImageViewer = ({
   //       }
   //     });
   // }, [src, imageId, version, isTiff, loadImage, changeSource, thumbnailSrc]);
+
+  useEffect(() => {
+    const onWheelEvent = (event: WheelEvent) => {
+      if (event.ctrlKey) event.preventDefault();
+    };
+
+    window.addEventListener("wheel", onWheelEvent, {
+      passive: false,
+    });
+
+    return () => {
+      window.removeEventListener("wheel", onWheelEvent);
+    };
+  }, []);
 
   return (
     <>

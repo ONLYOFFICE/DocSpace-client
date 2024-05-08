@@ -134,6 +134,7 @@ const FilesSelectorWrapper = ({
   isRoomBackup,
 
   roomsFolderId,
+  openRoot,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -326,6 +327,7 @@ const FilesSelectorWrapper = ({
 
   return (
     <FilesSelector
+      openRoot={openRoot}
       socketHelper={socketHelper}
       socketSubscribers={socketSubscribers}
       disabledItems={disabledItems}
@@ -339,7 +341,7 @@ const FilesSelectorWrapper = ({
       isThirdParty={isThirdParty}
       rootThirdPartyId={rootThirdPartyId}
       roomsFolderId={roomsFolderId}
-      currentFolderId={currentFolderId}
+      currentFolderId={isFormRoom && openRoot ? "" : currentFolderId}
       parentId={parentId}
       rootFolderType={rootFolderType || FolderType.Rooms}
       currentDeviceType={currentDeviceType}

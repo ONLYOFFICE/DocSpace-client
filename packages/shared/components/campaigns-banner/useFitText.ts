@@ -49,7 +49,7 @@ const useFitText = (
       const newFontSize = fontSize - 1;
       setFontSize(newFontSize);
     }
-  }, [fontSize]);
+  }, [fontSize, wrapperRef?.current?.offsetHeight]);
 
   return { fontSize: `${fontSize}px`, ref, wrapperRef };
 };

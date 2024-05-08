@@ -651,6 +651,38 @@ class InfoPanelStore {
     };
   };
 
+  fetchMoreMembers = async (t, withoutTitles) => {
+    const roomId = this.infoPanelSelection.id;
+    const oldMembers = this.infoPanelMembers;
+
+    const data = await this.filesStore.getRoomMembers(roomId, false);
+
+    const newMembers = this.convertMembers(t, data, false, true);
+
+    const mergedMembers = {
+      roomId: roomId,
+      administrators: [
+        ...oldMembers.administrators,
+        ...newMembers.administrators,
+      ],
+      users: [...oldMembers.users, ...newMembers.users],
+      expected: [...oldMembers.expected, ...newMembers.expectedMembers],
+      groups: [...oldMembers.groups, ...newMembers.groups],
+    };
+
+    if (!withoutTitles) {
+      this.addMembersTitle(
+        t,
+        mergedMembers.administrators,
+        mergedMembers.users,
+        mergedMembers.expected,
+        mergedMembers.groups,
+      );
+    }
+
+    this.setInfoPanelMembers(mergedMembers);
+  };
+
   addInfoPanelMembers = (t, members) => {
     const convertedMembers = this.convertMembers(t, members);
 

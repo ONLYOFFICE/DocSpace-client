@@ -46,11 +46,19 @@ const EmptyViewContainer = observer(
     }, [onClickInviteUsers, folderId, type]);
 
     const createFormFromFile = useCallback(() => {
-      setSelectFileFormRoomDialogVisible?.(true, FilesSelectorFilterTypes.DOCX);
+      setSelectFileFormRoomDialogVisible?.(
+        true,
+        FilesSelectorFilterTypes.DOCX,
+        true,
+      );
     }, [setSelectFileFormRoomDialogVisible]);
 
     const uploadPDFForm = useCallback(() => {
-      setSelectFileFormRoomDialogVisible?.(true, FilesSelectorFilterTypes.PDF);
+      setSelectFileFormRoomDialogVisible?.(
+        true,
+        FilesSelectorFilterTypes.PDF,
+        true,
+      );
     }, [setSelectFileFormRoomDialogVisible]);
 
     const onCreateDocumentForm = useCallback(() => {

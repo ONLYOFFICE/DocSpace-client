@@ -141,4 +141,5 @@ export type FilesSelectorProps = {
   settings: unknown;
 
   roomsFolderId?: number;
+  openRoot?: boolean;
 };

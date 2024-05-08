@@ -41,6 +41,8 @@ export default async function RootLayout({
 
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
 
+  const api_host = process.env.API_HOST?.trim();
+
   return (
     <html lang="en" translate="no">
       <head>
@@ -56,7 +58,9 @@ export default async function RootLayout({
       </head>
       <body>
         <StyledComponentsRegistry>
-          <Providers contextData={{ user, settings }}>{children}</Providers>
+          <Providers contextData={{ user, settings }} api_host={api_host}>
+            {children}
+          </Providers>
         </StyledComponentsRegistry>
 
         <Scripts />

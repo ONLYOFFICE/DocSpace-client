@@ -44,8 +44,13 @@ const TranslationProvider = ({
   children,
   settings,
   user,
+  api_host,
 }: TTranslationProvider) => {
   const { i18n } = useI18N({ settings, user });
+
+  React.useEffect(() => {
+    console.log("API_HOST: ", api_host);
+  }, [api_host]);
 
   return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
 };

@@ -105,6 +105,8 @@ export default async function RootLayout({
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY);
 
+  const api_host = process.env.API_HOST?.trim();
+
   return (
     <html lang="en" translate="no">
       <head>
@@ -126,6 +128,7 @@ export default async function RootLayout({
               systemTheme: systemTheme?.value as ThemeKeys,
             }}
             timers={timers}
+            api_host={api_host}
           >
             <SimpleNav />
             <Toast isSSR />

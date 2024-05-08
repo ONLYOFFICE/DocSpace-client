@@ -65,7 +65,7 @@ export const createRequest = (
 
   const host = hdrs.get("x-forwarded-host");
 
-  if (host) hdrs.set("origin", host);
+  if (host && process.env.API_HOST?.trim()) hdrs.set("origin", host);
 
   const urls = paths.map((path) => `${apiURL}${path}`);
 

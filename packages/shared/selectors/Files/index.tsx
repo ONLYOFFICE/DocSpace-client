@@ -403,6 +403,7 @@ const FilesSelector = ({
 
   const onClearSearchAction = React.useCallback(
     (callback?: Function) => {
+      if (!searchValue) return;
       setIsFirstLoad(true);
       setItems([]);
 
@@ -411,7 +412,7 @@ const FilesSelector = ({
       callback?.();
       afterSearch.current = true;
     },
-    [setIsFirstLoad],
+    [searchValue, setIsFirstLoad],
   );
 
   React.useEffect(() => {

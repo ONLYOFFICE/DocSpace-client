@@ -1210,7 +1210,12 @@ class FilesActionStore {
               setSelectedFolder(roomsFolder);
             }
 
-            this.updateCurrentFolder(null, null, null, operationId);
+            // this.updateCurrentFolder(null, null, null, operationId);
+            this.dialogsStore.setIsFolderActions(false);
+            return setTimeout(
+              () => clearSecondaryProgressData(operationId),
+              TIMEOUT,
+            );
           })
 
           .then(() => {
@@ -1263,7 +1268,12 @@ class FilesActionStore {
 
             await this.uploadDataStore.loopFilesOperations(data, pbData);
 
-            this.updateCurrentFolder(null, [items], null, operationId);
+            // this.updateCurrentFolder(null, [items], null, operationId);
+            this.dialogsStore.setIsFolderActions(false);
+            return setTimeout(
+              () => clearSecondaryProgressData(operationId),
+              TIMEOUT,
+            );
           })
 
           .then(() => {
@@ -2619,14 +2629,8 @@ class FilesActionStore {
   };
 
   onLeaveRoom = (t, isOwner = false) => {
-    const {
-      updateRoomMemberRole,
-      removeFiles,
-      folders,
-      setFolders,
-      selection,
-      bufferSelection,
-    } = this.filesStore;
+    const { updateRoomMemberRole, removeFiles, selection, bufferSelection } =
+      this.filesStore;
     const { user } = this.userStore;
 
     const roomId = selection.length
@@ -2654,12 +2658,7 @@ class FilesActionStore {
         if (!isRoot) {
           this.selectedFolderStore.setInRoom(false);
         } else {
-          const newFolders = folders;
-          const folderIndex = newFolders.findIndex((r) => r.id === roomId);
-          if (folderIndex > -1) {
-            newFolders[folderIndex].inRoom = false;
-            setFolders(newFolders);
-          }
+          this.filesStore.setInRoomFolder(roomId, false);
         }
       }
 

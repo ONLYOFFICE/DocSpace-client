@@ -44,16 +44,23 @@ import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
-import CodeBlock from "../sub-components/CodeBlock";
 import { Button } from "@docspace/shared/components/button";
-
-const showPreviewThreshold = 720;
 
 import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { CodeToInsert } from "../sub-components/CodeToInsert";
+
+import {
+  showPreviewThreshold,
+  scriptUrl,
+  dataDimensions,
+  defaultWidthDimension,
+  defaultHeightDimension,
+  defaultWidth,
+  defaultHeight,
+} from "../constants";
 
 import {
   Controls,
@@ -66,25 +73,12 @@ import {
   Preview,
   GetCodeButtonWrapper,
   FilesSelectorInputWrapper,
-  CodeWrapper,
 } from "./StyledPresets";
 
 const Viewer = (props) => {
   const { t, setDocumentTitle, getFilePrimaryLink, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
-
-  const scriptUrl = `${window.location.origin}/static/scripts/sdk/1.0.0/api.js`;
-
-  const dataDimensions = [
-    { key: "percent", label: "%", default: true },
-    { key: "pixel", label: "px" },
-  ];
-
-  const defaultWidthDimension = dataDimensions[0],
-    defaultHeightDimension = dataDimensions[0],
-    defaultWidth = "100",
-    defaultHeight = "100";
 
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(
@@ -126,7 +120,7 @@ const Viewer = (props) => {
     loadFrame();
     return () => destroyFrame();
   });
-  
+
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
     if (scroll) {

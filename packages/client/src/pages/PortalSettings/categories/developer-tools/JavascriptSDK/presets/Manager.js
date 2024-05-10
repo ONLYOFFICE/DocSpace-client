@@ -62,14 +62,22 @@ import ActionButtonDarkUrl from "PUBLIC_DIR/images/sdk-presets_action-button_dar
 import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 
-const showPreviewThreshold = 720;
-
 import { FilterBlock } from "../sub-components/FilterBlock";
 import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { CodeToInsert } from "../sub-components/CodeToInsert";
+
+import {
+  showPreviewThreshold,
+  scriptUrl,
+  dataDimensions,
+  defaultWidthDimension,
+  defaultHeightDimension,
+  defaultWidth,
+  defaultHeight,
+} from "../constants";
 
 import {
   Controls,
@@ -94,8 +102,6 @@ const Manager = (props) => {
 
   setDocumentTitle(t("JavascriptSdk"));
 
-  const scriptUrl = `${window.location.origin}/static/scripts/sdk/1.0.0/api.js`;
-
   const dataSortBy = [
     { key: "DateAndTime", label: t("Common:LastModifiedDate"), default: true },
     { key: "AZ", label: t("Common:Title") },
@@ -108,11 +114,6 @@ const Manager = (props) => {
   const dataSortOrder = [
     { key: "descending", label: t("Descending"), default: true },
     { key: "ascending", label: t("Ascending") },
-  ];
-
-  const dataDimensions = [
-    { key: "percent", label: "%", default: true },
-    { key: "pixel", label: "px" },
   ];
 
   const columnDisplayOptions = [
@@ -130,11 +131,6 @@ const Manager = (props) => {
     denyDownload: t("FileContentCopy").toLowerCase(),
     expirationDate: t("LimitByTime").toLowerCase(),
   };
-
-  const defaultWidthDimension = dataDimensions[0],
-    defaultHeightDimension = dataDimensions[0],
-    defaultWidth = "100",
-    defaultHeight = "100";
 
   const [sortBy, setSortBy] = useState(dataSortBy[0]);
   const [sortOrder, setSortOrder] = useState(dataSortOrder[0]);

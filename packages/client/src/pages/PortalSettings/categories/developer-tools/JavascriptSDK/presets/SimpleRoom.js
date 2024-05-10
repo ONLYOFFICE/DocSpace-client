@@ -62,13 +62,21 @@ import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
 import TitleDarkUrl from "PUBLIC_DIR/images/sdk-presets_title_dark.png?url";
 import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 
-const showPreviewThreshold = 720;
-
 import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { CodeToInsert } from "../sub-components/CodeToInsert";
+
+import {
+  showPreviewThreshold,
+  scriptUrl,
+  dataDimensions,
+  defaultWidthDimension,
+  defaultHeightDimension,
+  defaultWidth,
+  defaultHeight,
+} from "../constants";
 
 import {
   Controls,
@@ -90,18 +98,6 @@ const SimpleRoom = (props) => {
   const navigate = useNavigate();
 
   setDocumentTitle(t("JavascriptSdk"));
-
-  const scriptUrl = `${window.location.origin}/static/scripts/sdk/1.0.0/api.js`;
-
-  const dataDimensions = [
-    { key: "percent", label: "%", default: true },
-    { key: "pixel", label: "px" },
-  ];
-
-  const defaultWidthDimension = dataDimensions[0],
-    defaultHeightDimension = dataDimensions[0],
-    defaultWidth = "100",
-    defaultHeight = "100";
 
   const settingsTranslations = {
     password: t("Common:Password").toLowerCase(),
@@ -165,7 +161,7 @@ const SimpleRoom = (props) => {
     loadFrame();
     return () => destroyFrame();
   });
-  
+
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
     if (scroll) {

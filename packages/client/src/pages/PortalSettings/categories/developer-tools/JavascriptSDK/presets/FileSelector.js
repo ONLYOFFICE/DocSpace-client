@@ -56,13 +56,21 @@ import SearchUrlDark from "PUBLIC_DIR/images/sdk-presets_files-search_dark.png?u
 
 import { toastr } from "@docspace/shared/components/toast";
 
-const showPreviewThreshold = 720;
-
 import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { CodeToInsert } from "../sub-components/CodeToInsert";
+
+import {
+  showPreviewThreshold,
+  scriptUrl,
+  dataDimensions,
+  defaultWidthDimension,
+  defaultHeightDimension,
+  defaultWidth,
+  defaultHeight,
+} from "../constants";
 
 import {
   Controls,
@@ -82,13 +90,6 @@ const FileSelector = (props) => {
   const { t, setDocumentTitle, fetchExternalLinks, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
-
-  const scriptUrl = `${window.location.origin}/static/scripts/sdk/1.0.0/api.js`;
-
-  const dataDimensions = [
-    { key: "percent", label: "%", default: true },
-    { key: "pixel", label: "px" },
-  ];
 
   const elementDisplayOptions = [
     { value: "element", label: t("ElementItself") },
@@ -151,11 +152,6 @@ const FileSelector = (props) => {
       label: t(`Files:AllFiles`),
     },
   ];
-
-  const defaultWidthDimension = dataDimensions[0],
-    defaultHeightDimension = dataDimensions[0],
-    defaultWidth = "100",
-    defaultHeight = "100";
 
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(

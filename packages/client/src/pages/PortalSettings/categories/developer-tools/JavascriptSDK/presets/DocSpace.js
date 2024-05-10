@@ -35,13 +35,21 @@ import { inject, observer } from "mobx-react";
 import GetCodeDialog from "../sub-components/GetCodeDialog";
 import { Button } from "@docspace/shared/components/button";
 
-const showPreviewThreshold = 720;
-
 import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { CodeToInsert } from "../sub-components/CodeToInsert";
+
+import {
+  showPreviewThreshold,
+  scriptUrl,
+  dataDimensions,
+  defaultWidthDimension,
+  defaultHeightDimension,
+  defaultWidth,
+  defaultHeight,
+} from "../constants";
 
 import {
   Controls,
@@ -51,7 +59,6 @@ import {
   Preview,
   GetCodeButtonWrapper,
   ControlsSection,
-  CodeWrapper,
 } from "./StyledPresets";
 
 const DocSpace = (props) => {
@@ -59,21 +66,10 @@ const DocSpace = (props) => {
 
   setDocumentTitle(t("JavascriptSdk"));
 
-  const scriptUrl = `${window.location.origin}/static/scripts/sdk/1.0.0/api.js`;
-
-  const dataDimensions = [
-    { key: "percent", label: "%", default: true },
-    { key: "pixel", label: "px" },
-  ];
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold,
   );
-
-  const defaultWidthDimension = dataDimensions[0],
-    defaultHeightDimension = dataDimensions[0],
-    defaultWidth = "100",
-    defaultHeight = "100";
 
   const [config, setConfig] = useState({
     mode: "manager",
@@ -123,7 +119,7 @@ const DocSpace = (props) => {
     loadFrame();
     return () => destroyFrame();
   });
-  
+
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
     if (scroll) {
@@ -136,7 +132,6 @@ const DocSpace = (props) => {
   };
 
   const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
-
   const closeGetCodeModal = () => setIsGetCodeDialogOpened(false);
 
   const onResize = () => {

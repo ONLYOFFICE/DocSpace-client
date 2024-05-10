@@ -29,7 +29,6 @@ import { withTranslation } from "react-i18next";
 import debounce from "lodash.debounce";
 import { Box } from "@docspace/shared/components/box";
 import { TextInput } from "@docspace/shared/components/text-input";
-import { Textarea } from "@docspace/shared/components/textarea";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -41,14 +40,11 @@ import { ColorInput } from "@docspace/shared/components/color-input";
 import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
-import { isTablet, isMobile } from "@docspace/shared/utils/device";
-
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Button } from "@docspace/shared/components/button";
 import { FilterType } from "@docspace/shared/enums";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
-import CodeBlock from "../sub-components/CodeBlock";
 
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { TooltipContent } from "../sub-components/TooltipContent";
@@ -62,12 +58,15 @@ import { toastr } from "@docspace/shared/components/toast";
 
 const showPreviewThreshold = 720;
 
+import { WidthSetter } from "../sub-components/WidthSetter";
+import { HeightSetter } from "../sub-components/HeightSetter";
+import { FrameIdSetter } from "../sub-components/FrameIdSetter";
+import { PresetWrapper } from "../sub-components/PresetWrapper";
+import { CodeToInsert } from "../sub-components/CodeToInsert";
+
 import {
-  SDKContainer,
   Controls,
-  CategoryHeader,
   CategorySubHeader,
-  CategoryDescription,
   ControlsGroup,
   LabelGroup,
   ControlsSection,
@@ -77,7 +76,6 @@ import {
   Preview,
   GetCodeButtonWrapper,
   FilesSelectorInputWrapper,
-  CodeWrapper,
 } from "./StyledPresets";
 
 const FileSelector = (props) => {
@@ -154,10 +152,11 @@ const FileSelector = (props) => {
     },
   ];
 
-  const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
-  const [heightDimension, setHeightDimension] = useState(dataDimensions[0]);
-  const [width, setWidth] = useState("100");
-  const [height, setHeight] = useState("100");
+  const defaultWidthDimension = dataDimensions[0],
+    defaultHeightDimension = dataDimensions[0],
+    defaultWidth = "100",
+    defaultHeight = "100";
+
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold,
@@ -171,8 +170,8 @@ const FileSelector = (props) => {
 
   const [config, setConfig] = useState({
     mode: "file-selector",
-    width: `${width}${widthDimension.label}`,
-    height: `${height}${heightDimension.label}`,
+    width: `${defaultWidth}${defaultWidthDimension.label}`,
+    height: `${defaultHeight}${defaultHeightDimension.label}`,
     frameId: "ds-frame",
     init: true,
     showSelectorCancel: true,
@@ -253,22 +252,6 @@ const FileSelector = (props) => {
     }
   };
 
-  const onChangeWidth = (e) => {
-    setConfig((config) => {
-      return { ...config, width: `${e.target.value}${widthDimension.label}` };
-    });
-
-    setWidth(e.target.value);
-  };
-
-  const onChangeHeight = (e) => {
-    setConfig((config) => {
-      return { ...config, height: `${e.target.value}${heightDimension.label}` };
-    });
-
-    setHeight(e.target.value);
-  };
-
   const onChangeFolderId = async (id, publicInPath) => {
     let newConfig = { id, requestToken: null, rootPath: "/rooms/shared/" };
 
@@ -306,12 +289,6 @@ const FileSelector = (props) => {
     });
   };
 
-  const onChangeFrameId = (e) => {
-    setConfig((config) => {
-      return { ...config, frameId: e.target.value };
-    });
-  };
-
   const changeColumnsOption = (e) => {
     setTypeDisplay(e.target.value);
     setConfig((config) => {
@@ -323,22 +300,6 @@ const FileSelector = (props) => {
             : e.target.value,
       };
     });
-  };
-
-  const onChangeWidthDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, width: `${width}${item.label}` };
-    });
-
-    setWidthDimension(item);
-  };
-
-  const onChangeHeightDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, height: `${height}${item.label}` };
-    });
-
-    setHeightDimension(item);
   };
 
   const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
@@ -355,10 +316,6 @@ const FileSelector = (props) => {
   const toggleWithSearch = () => {
     setConfig((config) => ({ ...config, withSearch: !config.withSearch }));
   };
-
-  // const toggleBreadCrumbs = () => {
-  //   setConfig((config) => ({ ...config, withBreadCrumbs: !config.withBreadCrumbs }));
-  // };
 
   const toggleWithSubtitle = () => {
     setConfig((config) => ({ ...config, withSubtitle: !config.withSubtitle }));
@@ -397,14 +354,8 @@ const FileSelector = (props) => {
 
   const preview = (
     <Frame
-      width={
-        widthDimension.label === "px" ? width + widthDimension.label : undefined
-      }
-      height={
-        heightDimension.label === "px"
-          ? height + heightDimension.label
-          : undefined
-      }
+      width={config.width.includes("px") ? config.width : undefined}
+      height={config.height.includes("px") ? config.height : undefined}
       targetId={frameId}
     >
       <Box id={frameId}></Box>
@@ -412,22 +363,7 @@ const FileSelector = (props) => {
   );
 
   const code = (
-    <CodeWrapper height="fit-content">
-      <CategorySubHeader className="copy-window-code">
-        {`HTML ${t("CodeTitle")}`}
-      </CategorySubHeader>
-      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
-        {t("HtmlCodeDescription")}
-      </Text>
-      <Textarea value={codeBlock} heightTextArea={153} />
-      <CategorySubHeader className="copy-window-code">
-        {`JavaScript ${t("CodeTitle")}`}
-      </CategorySubHeader>
-      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
-        {t("JavaScriptCodeDescription")}
-      </Text>
-      <CodeBlock config={config} />
-    </CodeWrapper>
+    <CodeToInsert t={t} theme={theme} codeBlock={codeBlock} config={config} />
   );
 
   const dataTabs = [
@@ -444,11 +380,10 @@ const FileSelector = (props) => {
   ];
 
   return (
-    <SDKContainer>
-      <CategoryDescription>
-        <Text className="sdk-description">{t("FileSelectorDescription")}</Text>
-      </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleFileSelector")}</CategoryHeader>
+    <PresetWrapper
+      description={t("FileSelectorDescription")}
+      header={t("CreateSampleFileSelector")}
+    >
       <Container>
         {showPreview && (
           <Preview>
@@ -511,58 +446,25 @@ const FileSelector = (props) => {
 
           <ControlsSection>
             <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
-            <ControlsGroup>
-              <Label className="label" text={t("EmbeddingPanel:Width")} />
-              <RowContainer combo>
-                <TextInput
-                  onChange={onChangeWidth}
-                  placeholder={t("EnterWidth")}
-                  value={width}
-                  tabIndex={2}
-                />
-                <ComboBox
-                  size="content"
-                  scaled={false}
-                  scaledOptions={true}
-                  onSelect={onChangeWidthDimension}
-                  options={dataDimensions}
-                  selectedOption={widthDimension}
-                  displaySelectedOption
-                  directionY="bottom"
-                />
-              </RowContainer>
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("EmbeddingPanel:Height")} />
-              <RowContainer combo>
-                <TextInput
-                  onChange={onChangeHeight}
-                  placeholder={t("EnterHeight")}
-                  value={height}
-                  tabIndex={3}
-                />
-                <ComboBox
-                  size="content"
-                  scaled={false}
-                  scaledOptions={true}
-                  onSelect={onChangeHeightDimension}
-                  options={dataDimensions}
-                  selectedOption={heightDimension}
-                  displaySelectedOption
-                  directionY="bottom"
-                />
-              </RowContainer>
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("FrameId")} />
-              <TextInput
-                scale={true}
-                onChange={onChangeFrameId}
-                placeholder={t("EnterId")}
-                value={config.frameId}
-                tabIndex={4}
-              />
-            </ControlsGroup>
+            <WidthSetter
+              t={t}
+              setConfig={setConfig}
+              dataDimensions={dataDimensions}
+              defaultDimension={defaultWidthDimension}
+              defaultWidth={defaultWidth}
+            />
+            <HeightSetter
+              t={t}
+              setConfig={setConfig}
+              dataDimensions={dataDimensions}
+              defaultDimension={defaultHeightDimension}
+              defaultHeight={defaultHeight}
+            />
+            <FrameIdSetter
+              t={t}
+              defaultFrameId={config.frameId}
+              setConfig={setConfig}
+            />
           </ControlsSection>
 
           <ControlsSection>
@@ -733,7 +635,7 @@ const FileSelector = (props) => {
           />
         </>
       )}
-    </SDKContainer>
+    </PresetWrapper>
   );
 };
 

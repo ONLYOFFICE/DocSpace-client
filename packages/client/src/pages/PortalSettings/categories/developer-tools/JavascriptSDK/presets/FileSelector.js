@@ -179,7 +179,6 @@ const FileSelector = (props) => {
     withSearch: true,
     acceptButtonLabel: t("Common:SelectAction"),
     cancelButtonLabel: t("Common:CancelButton"),
-    // withBreadCrumbs: true,
     withSubtitle: true,
     filterParam: FilesSelectorFilterTypes.ALL,
     isButtonMode: selectedElementType === "button",
@@ -469,12 +468,6 @@ const FileSelector = (props) => {
 
           <ControlsSection>
             <Label className="label">{t("InterfaceElements")}</Label>
-            {/* <Checkbox
-              className="checkbox"
-              label={t("Common:Title")}
-              onChange={toggleBreadCrumbs}
-              isChecked={config.withBreadCrumbs}
-            /> */}
 
             <LabelGroup>
               <Checkbox

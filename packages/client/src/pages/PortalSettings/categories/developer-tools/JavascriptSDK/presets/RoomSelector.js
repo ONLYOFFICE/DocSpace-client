@@ -39,9 +39,6 @@ import { ColorInput } from "@docspace/shared/components/color-input";
 import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
-import GetCodeDialog from "../sub-components/GetCodeDialog";
-import { Button } from "@docspace/shared/components/button";
-
 import { RoomsType } from "@docspace/shared/enums";
 
 import { toastr } from "@docspace/shared/components/toast";
@@ -51,6 +48,7 @@ import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { CodeToInsert } from "../sub-components/CodeToInsert";
+import { GetCodeBlock } from "../sub-components/GetCodeBlock";
 
 import {
   showPreviewThreshold,
@@ -71,7 +69,6 @@ import {
   Container,
   RowContainer,
   Preview,
-  GetCodeButtonWrapper,
 } from "./StyledPresets";
 
 const RoomSelector = (props) => {
@@ -121,7 +118,6 @@ const RoomSelector = (props) => {
     },
   ];
 
-  const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold,
   );
@@ -224,10 +220,6 @@ const RoomSelector = (props) => {
       return { ...config, cancelButtonLabel: e.target.value };
     });
   };
-
-  const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
-
-  const closeGetCodeModal = () => setIsGetCodeDialogOpened(false);
 
   const onResize = () => {
     const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
@@ -413,27 +405,7 @@ const RoomSelector = (props) => {
         </Controls>
       </Container>
 
-      {!showPreview && (
-        <>
-          <GetCodeButtonWrapper>
-            <Button
-              id="get-sdk-code-button"
-              primary
-              size="normal"
-              scale
-              label={t("GetCode")}
-              onClick={openGetCodeModal}
-            />
-          </GetCodeButtonWrapper>
-
-          <GetCodeDialog
-            t={t}
-            visible={isGetCodeDialogOpened}
-            codeBlock={codeBlock}
-            onClose={closeGetCodeModal}
-          />
-        </>
-      )}
+      {!showPreview && <GetCodeBlock t={t} codeBlock={codeBlock} />}
     </PresetWrapper>
   );
 };

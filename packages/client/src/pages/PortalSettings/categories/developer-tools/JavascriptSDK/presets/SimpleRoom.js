@@ -28,8 +28,6 @@ import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import debounce from "lodash.debounce";
 import { Box } from "@docspace/shared/components/box";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { Textarea } from "@docspace/shared/components/textarea";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
@@ -38,8 +36,6 @@ import RoomsSelectorInput from "SRC_DIR/components/RoomsSelectorInput";
 import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
-import { isTablet, isMobile } from "@docspace/shared/utils/device";
-
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
@@ -47,7 +43,6 @@ import GetCodeDialog from "../sub-components/GetCodeDialog";
 import { Button } from "@docspace/shared/components/button";
 
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
-import CodeBlock from "../sub-components/CodeBlock";
 
 import { TooltipContent } from "../sub-components/TooltipContent";
 import { useNavigate } from "react-router-dom";
@@ -67,6 +62,7 @@ import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { CodeToInsert } from "../sub-components/CodeToInsert";
+import { GetCodeBlock } from "../sub-components/GetCodeBlock";
 
 import {
   showPreviewThreshold,
@@ -86,7 +82,6 @@ import {
   Frame,
   Container,
   Preview,
-  GetCodeButtonWrapper,
   FilesSelectorInputWrapper,
   ControlsSection,
   CheckboxGroup,
@@ -105,7 +100,6 @@ const SimpleRoom = (props) => {
     expirationDate: t("LimitByTime").toLowerCase(),
   };
 
-  const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold,
   );
@@ -237,10 +231,6 @@ const SimpleRoom = (props) => {
       return { ...config, showFilter: !config.showFilter };
     });
   };
-
-  const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
-
-  const closeGetCodeModal = () => setIsGetCodeDialogOpened(false);
 
   const onResize = () => {
     const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
@@ -524,27 +514,7 @@ const SimpleRoom = (props) => {
         </Controls>
       </Container>
 
-      {!showPreview && (
-        <>
-          <GetCodeButtonWrapper>
-            <Button
-              id="get-sdk-code-button"
-              primary
-              size="normal"
-              scale
-              label={t("GetCode")}
-              onClick={openGetCodeModal}
-            />
-          </GetCodeButtonWrapper>
-
-          <GetCodeDialog
-            t={t}
-            visible={isGetCodeDialogOpened}
-            codeBlock={codeBlock}
-            onClose={closeGetCodeModal}
-          />
-        </>
-      )}
+      {!showPreview && <GetCodeBlock t={t} codeBlock={codeBlock} />}
     </PresetWrapper>
   );
 };

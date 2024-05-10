@@ -39,14 +39,12 @@ import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
 
-import GetCodeDialog from "../sub-components/GetCodeDialog";
-import { Button } from "@docspace/shared/components/button";
-
 import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { CodeToInsert } from "../sub-components/CodeToInsert";
+import { GetCodeBlock } from "../sub-components/GetCodeBlock";
 
 import {
   showPreviewThreshold,
@@ -67,7 +65,6 @@ import {
   Frame,
   Container,
   Preview,
-  GetCodeButtonWrapper,
   FilesSelectorInputWrapper,
 } from "./StyledPresets";
 
@@ -76,7 +73,6 @@ const Editor = (props) => {
 
   setDocumentTitle(t("JavascriptSdk"));
 
-  const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold,
   );
@@ -115,7 +111,7 @@ const Editor = (props) => {
     loadFrame();
     return () => destroyFrame();
   });
-  
+
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
     if (scroll) {
@@ -145,10 +141,6 @@ const Editor = (props) => {
       return { ...config, ...newConfig };
     });
   };
-
-  const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
-
-  const closeGetCodeModal = () => setIsGetCodeDialogOpened(false);
 
   const onResize = () => {
     const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
@@ -292,27 +284,7 @@ const Editor = (props) => {
         </Controls>
       </Container>
 
-      {!showPreview && (
-        <>
-          <GetCodeButtonWrapper>
-            <Button
-              id="get-sdk-code-button"
-              primary
-              size="normal"
-              scale
-              label={t("GetCode")}
-              onClick={openGetCodeModal}
-            />
-          </GetCodeButtonWrapper>
-
-          <GetCodeDialog
-            t={t}
-            visible={isGetCodeDialogOpened}
-            codeBlock={codeBlock}
-            onClose={closeGetCodeModal}
-          />
-        </>
-      )}
+      {!showPreview && <GetCodeBlock t={t} codeBlock={codeBlock} />}
     </PresetWrapper>
   );
 };

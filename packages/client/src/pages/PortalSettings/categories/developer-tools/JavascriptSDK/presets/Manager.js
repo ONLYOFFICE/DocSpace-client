@@ -42,8 +42,6 @@ import { inject, observer } from "mobx-react";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
 
-import GetCodeDialog from "../sub-components/GetCodeDialog";
-import { Button } from "@docspace/shared/components/button";
 import { TooltipContent } from "../sub-components/TooltipContent";
 import { useNavigate } from "react-router-dom";
 import { Link } from "@docspace/shared/components/link";
@@ -68,6 +66,7 @@ import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { CodeToInsert } from "../sub-components/CodeToInsert";
+import { GetCodeBlock } from "../sub-components/GetCodeBlock";
 
 import {
   showPreviewThreshold,
@@ -89,7 +88,6 @@ import {
   Container,
   ColumnContainer,
   Preview,
-  GetCodeButtonWrapper,
   FilesSelectorInputWrapper,
   SelectedItemsContainer,
   CheckboxGroup,
@@ -135,7 +133,6 @@ const Manager = (props) => {
   const [sortBy, setSortBy] = useState(dataSortBy[0]);
   const [sortOrder, setSortOrder] = useState(dataSortOrder[0]);
   const [withSubfolders, setWithSubfolders] = useState(false);
-  const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold,
   );
@@ -358,10 +355,6 @@ const Manager = (props) => {
     }
     setColumnDisplay(e.target.value);
   };
-
-  const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
-
-  const closeGetCodeModal = () => setIsGetCodeDialogOpened(false);
 
   const onColumnSelect = (option) => {
     setColumnsOptions((prevColumnsOptions) =>
@@ -847,27 +840,7 @@ const Manager = (props) => {
         </Controls>
       </Container>
 
-      {!showPreview && (
-        <>
-          <GetCodeButtonWrapper>
-            <Button
-              id="get-sdk-code-button"
-              primary
-              size="normal"
-              scale
-              label={t("GetCode")}
-              onClick={openGetCodeModal}
-            />
-          </GetCodeButtonWrapper>
-
-          <GetCodeDialog
-            t={t}
-            visible={isGetCodeDialogOpened}
-            codeBlock={codeBlock}
-            onClose={closeGetCodeModal}
-          />
-        </>
-      )}
+      {!showPreview && <GetCodeBlock t={t} codeBlock={codeBlock} />}
     </PresetWrapper>
   );
 };

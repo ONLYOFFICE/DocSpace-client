@@ -24,12 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import debounce from "lodash.debounce";
 import { Box } from "@docspace/shared/components/box";
 import { TextInput } from "@docspace/shared/components/text-input";
-import { Textarea } from "@docspace/shared/components/textarea";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -44,7 +43,6 @@ import { inject, observer } from "mobx-react";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
-import CodeBlock from "../sub-components/CodeBlock";
 import { Button } from "@docspace/shared/components/button";
 import { TooltipContent } from "../sub-components/TooltipContent";
 import { useNavigate } from "react-router-dom";
@@ -67,26 +65,26 @@ import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 const showPreviewThreshold = 720;
 
 import { FilterBlock } from "../sub-components/FilterBlock";
+import { WidthSetter } from "../sub-components/WidthSetter";
+import { HeightSetter } from "../sub-components/HeightSetter";
+import { FrameIdSetter } from "../sub-components/FrameIdSetter";
+import { PresetWrapper } from "../sub-components/PresetWrapper";
+import { CodeToInsert } from "../sub-components/CodeToInsert";
 
 import {
-  SDKContainer,
   Controls,
-  CategoryHeader,
   CategorySubHeader,
-  CategoryDescription,
   ControlsGroup,
   LabelGroup,
   ControlsSection,
   Frame,
   Container,
-  RowContainer,
   ColumnContainer,
   Preview,
   GetCodeButtonWrapper,
   FilesSelectorInputWrapper,
   SelectedItemsContainer,
   CheckboxGroup,
-  CodeWrapper,
 } from "./StyledPresets";
 
 const Manager = (props) => {
@@ -133,12 +131,13 @@ const Manager = (props) => {
     expirationDate: t("LimitByTime").toLowerCase(),
   };
 
+  const defaultWidthDimension = dataDimensions[0],
+    defaultHeightDimension = dataDimensions[0],
+    defaultWidth = "100",
+    defaultHeight = "100";
+
   const [sortBy, setSortBy] = useState(dataSortBy[0]);
   const [sortOrder, setSortOrder] = useState(dataSortOrder[0]);
-  const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
-  const [heightDimension, setHeightDimension] = useState(dataDimensions[0]);
-  const [width, setWidth] = useState("100");
-  const [height, setHeight] = useState("100");
   const [withSubfolders, setWithSubfolders] = useState(false);
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(
@@ -158,8 +157,8 @@ const Manager = (props) => {
 
   const [config, setConfig] = useState({
     mode: "manager",
-    width: `${width}${widthDimension.label}`,
-    height: `${height}${heightDimension.label}`,
+    width: `${defaultWidth}${defaultWidthDimension.label}`,
+    height: `${defaultHeight}${defaultHeightDimension.label}`,
     frameId: "ds-frame",
     showHeader: true,
     showTitle: true,
@@ -204,7 +203,7 @@ const Manager = (props) => {
     loadFrame();
     return () => destroyFrame();
   });
-  
+
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
     if (scroll) {
@@ -214,22 +213,6 @@ const Manager = (props) => {
 
   const onChangeTab = () => {
     loadFrame();
-  };
-
-  const onChangeWidth = (e) => {
-    setConfig((config) => {
-      return { ...config, width: `${e.target.value}${widthDimension.label}` };
-    });
-
-    setWidth(e.target.value);
-  };
-
-  const onChangeHeight = (e) => {
-    setConfig((config) => {
-      return { ...config, height: `${e.target.value}${heightDimension.label}` };
-    });
-
-    setHeight(e.target.value);
   };
 
   const onChangeFolderId = async (id, publicInPath) => {
@@ -284,12 +267,6 @@ const Manager = (props) => {
     });
   };
 
-  const onChangeFrameId = (e) => {
-    setConfig((config) => {
-      return { ...config, frameId: e.target.value };
-    });
-  };
-
   const onChangeWithSubfolders = (e) => {
     setConfig((config) => {
       return { ...config, withSubfolders: !withSubfolders };
@@ -312,22 +289,6 @@ const Manager = (props) => {
     });
 
     setSortOrder(item);
-  };
-
-  const onChangeWidthDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, width: `${width}${item.label}` };
-    });
-
-    setWidthDimension(item);
-  };
-
-  const onChangeHeightDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, height: `${height}${item.label}` };
-    });
-
-    setHeightDimension(item);
   };
 
   const onChangeShowHeader = (e) => {
@@ -459,16 +420,8 @@ const Manager = (props) => {
 
   const preview = (
     <Frame
-      width={
-        config.id !== undefined && widthDimension.label === "px"
-          ? width + widthDimension.label
-          : undefined
-      }
-      height={
-        config.id !== undefined && heightDimension.label === "px"
-          ? height + heightDimension.label
-          : undefined
-      }
+      width={config.width.includes("px") ? config.width : undefined}
+      height={config.height.includes("px") ? config.height : undefined}
       targetId={frameId}
     >
       <Box id={frameId}></Box>
@@ -476,22 +429,7 @@ const Manager = (props) => {
   );
 
   const code = (
-    <CodeWrapper height="fit-content">
-      <CategorySubHeader className="copy-window-code">
-        {`HTML ${t("CodeTitle")}`}
-      </CategorySubHeader>
-      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
-        {t("HtmlCodeDescription")}
-      </Text>
-      <Textarea value={codeBlock} heightTextArea={153} />
-      <CategorySubHeader className="copy-window-code">
-        {`JavaScript ${t("CodeTitle")}`}
-      </CategorySubHeader>
-      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
-        {t("JavaScriptCodeDescription")}
-      </Text>
-      <CodeBlock config={config} />
-    </CodeWrapper>
+    <CodeToInsert t={t} theme={theme} codeBlock={codeBlock} config={config} />
   );
 
   const dataTabs = [
@@ -508,11 +446,10 @@ const Manager = (props) => {
   ];
 
   return (
-    <SDKContainer>
-      <CategoryDescription>
-        <Text className="sdk-description">{t("CustomDescription")}</Text>
-      </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleDocSpace")}</CategoryHeader>
+    <PresetWrapper
+      description={t("CustomDescription")}
+      header={t("CreateSampleDocSpace")}
+    >
       <Container>
         {showPreview && (
           <Preview>
@@ -522,58 +459,25 @@ const Manager = (props) => {
         <Controls>
           <ControlsSection>
             <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
-            <ControlsGroup>
-              <Label className="label" text={t("EmbeddingPanel:Width")} />
-              <RowContainer combo>
-                <TextInput
-                  onChange={onChangeWidth}
-                  placeholder={t("EnterWidth")}
-                  value={width}
-                  tabIndex={2}
-                />
-                <ComboBox
-                  size="content"
-                  scaled={false}
-                  scaledOptions={true}
-                  onSelect={onChangeWidthDimension}
-                  options={dataDimensions}
-                  selectedOption={widthDimension}
-                  displaySelectedOption
-                  directionY="bottom"
-                />
-              </RowContainer>
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("EmbeddingPanel:Height")} />
-              <RowContainer combo>
-                <TextInput
-                  onChange={onChangeHeight}
-                  placeholder={t("EnterHeight")}
-                  value={height}
-                  tabIndex={3}
-                />
-                <ComboBox
-                  size="content"
-                  scaled={false}
-                  scaledOptions={true}
-                  onSelect={onChangeHeightDimension}
-                  options={dataDimensions}
-                  selectedOption={heightDimension}
-                  displaySelectedOption
-                  directionY="bottom"
-                />
-              </RowContainer>
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("FrameId")} />
-              <TextInput
-                scale={true}
-                onChange={onChangeFrameId}
-                placeholder={t("EnterId")}
-                value={config.frameId}
-                tabIndex={4}
-              />
-            </ControlsGroup>
+            <WidthSetter
+              t={t}
+              setConfig={setConfig}
+              dataDimensions={dataDimensions}
+              defaultDimension={defaultWidthDimension}
+              defaultWidth={defaultWidth}
+            />
+            <HeightSetter
+              t={t}
+              setConfig={setConfig}
+              dataDimensions={dataDimensions}
+              defaultDimension={defaultHeightDimension}
+              defaultHeight={defaultHeight}
+            />
+            <FrameIdSetter
+              t={t}
+              defaultFrameId={config.frameId}
+              setConfig={setConfig}
+            />
           </ControlsSection>
 
           <ControlsSection>
@@ -968,7 +872,7 @@ const Manager = (props) => {
           />
         </>
       )}
-    </SDKContainer>
+    </PresetWrapper>
   );
 };
 

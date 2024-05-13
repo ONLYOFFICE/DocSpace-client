@@ -523,3 +523,8 @@ export const enum EditorConfigErrorType {
   AccessDeniedScope = "System.Security.SecurityException",
   TenantQuotaException = "ASC.Core.Tenants.TenantQuotaException",
 }
+
+export const enum VDRIndexingAction {
+  HigherIndex = "HigherIndex",
+  LowerIndex = "LowerIndex",
+}

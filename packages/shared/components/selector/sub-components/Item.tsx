@@ -36,6 +36,7 @@ import { RoomIcon } from "../../room-icon";
 import { StyledItem } from "../Selector.styled";
 import { ItemProps, Data, TSelectorItem } from "../Selector.types";
 import { RoomsType } from "../../../enums";
+import NewItem from "./NewItem";
 
 const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
   const prevData = prevProps.data;
@@ -90,7 +91,14 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       email,
       isGroup,
       disabledText,
+      isCreateNewItem,
+      onCreateClick,
     } = item;
+
+    if (isCreateNewItem)
+      return (
+        <NewItem label={label} onCreateClick={onCreateClick} style={style} />
+      );
 
     const showPlanetIcon =
       (item.roomType === RoomsType.PublicRoom ||

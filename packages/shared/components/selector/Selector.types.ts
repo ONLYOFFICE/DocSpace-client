@@ -435,6 +435,8 @@ type TSelectorItemType =
       security?: undefined;
       isGroup?: undefined;
       name?: undefined;
+      isCreateNewItem?: undefined;
+      onCreateClick?: undefined;
     }
   | {
       email?: undefined;
@@ -455,6 +457,8 @@ type TSelectorItemType =
       security?: TFileSecurity;
       isGroup?: undefined;
       name?: undefined;
+      isCreateNewItem?: undefined;
+      onCreateClick?: undefined;
     }
   | {
       email?: undefined;
@@ -475,6 +479,8 @@ type TSelectorItemType =
       security?: TRoomSecurity;
       isGroup?: undefined;
       name?: undefined;
+      isCreateNewItem?: undefined;
+      onCreateClick?: undefined;
     }
   | {
       email?: undefined;
@@ -495,6 +501,8 @@ type TSelectorItemType =
       security?: TFolderSecurity;
       isGroup?: undefined;
       name?: undefined;
+      isCreateNewItem?: undefined;
+      onCreateClick?: undefined;
     }
   | {
       email?: undefined;
@@ -515,6 +523,30 @@ type TSelectorItemType =
       security?: TFolderSecurity;
       isGroup: true;
       name: string;
+      isCreateNewItem?: undefined;
+      onCreateClick?: undefined;
+    }
+  | {
+      email?: undefined;
+      fileExst?: undefined;
+      roomType?: undefined;
+      shared?: undefined;
+      isOwner?: undefined;
+      isAdmin?: undefined;
+      isVisitor?: undefined;
+      isCollaborator?: undefined;
+      isRoomAdmin?: undefined;
+      access?: undefined;
+      isFolder?: undefined;
+      parentId?: undefined;
+      rootFolderType?: undefined;
+      filesCount?: undefined;
+      foldersCount?: undefined;
+      security?: undefined;
+      isGroup?: undefined;
+      name?: undefined;
+      isCreateNewItem: boolean;
+      onCreateClick: VoidFunction;
     };
 
 export type TSelectorItem = TSelectorItemLogo &

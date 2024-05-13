@@ -89,6 +89,16 @@ function makeName() {
 const getItems = (count: number) => {
   const items: TSelectorItem[] = [];
 
+  console.log("call");
+
+  items.push({
+    key: "create_new",
+    id: "create_new_item",
+    label: "New folder",
+    isCreateNewItem: true,
+    onCreateClick: () => {},
+  });
+
   for (let i = 0; i < count / 2; i += 1) {
     const label = makeName();
     items.push({

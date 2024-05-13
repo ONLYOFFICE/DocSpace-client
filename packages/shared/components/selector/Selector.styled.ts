@@ -186,6 +186,7 @@ const StyledItem = styled.div<{
   isSelected: boolean | undefined;
   isDisabled?: boolean;
   isMultiSelect: boolean;
+  noHover?: boolean;
 }>`
   display: flex;
   align-items: center;
@@ -245,12 +246,13 @@ const StyledItem = styled.div<{
         `
       : css`
           ${props.isSelected && !props.isMultiSelect && selectedCss}
-          @media (hover: hover) {
+          ${!props.noHover &&
+          ` @media (hover: hover) {
             &:hover {
               cursor: pointer;
               background: ${props.theme.selector.item.hoverBackground};
             }
-          }
+          }`}
         `}
 `;
 

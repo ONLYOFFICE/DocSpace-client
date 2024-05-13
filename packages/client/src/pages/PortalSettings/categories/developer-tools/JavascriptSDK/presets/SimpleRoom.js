@@ -39,14 +39,10 @@ import { inject, observer } from "mobx-react";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
-import GetCodeDialog from "../sub-components/GetCodeDialog";
-import { Button } from "@docspace/shared/components/button";
-
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
 
 import { TooltipContent } from "../sub-components/TooltipContent";
 import { useNavigate } from "react-router-dom";
-import { Link } from "@docspace/shared/components/link";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { RoomsType } from "@docspace/shared/enums";
@@ -63,6 +59,7 @@ import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { CodeToInsert } from "../sub-components/CodeToInsert";
 import { GetCodeBlock } from "../sub-components/GetCodeBlock";
+import { SharedLinkHint } from "../sub-components/SharedLinkHint";
 
 import {
   showPreviewThreshold,
@@ -93,12 +90,6 @@ const SimpleRoom = (props) => {
   const navigate = useNavigate();
 
   setDocumentTitle(t("JavascriptSdk"));
-
-  const settingsTranslations = {
-    password: t("Common:Password").toLowerCase(),
-    denyDownload: t("FileContentCopy").toLowerCase(),
-    expirationDate: t("LimitByTime").toLowerCase(),
-  };
 
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold,
@@ -244,6 +235,8 @@ const SimpleRoom = (props) => {
     navigate(`/rooms/shared/${id}/filter?${filter.toUrlParams()}`);
   };
 
+  const redirectToSelectedRoom = () => navigateRoom(config.id);
+
   useEffect(() => {
     window.addEventListener("resize", onResize);
     return () => {
@@ -363,80 +356,13 @@ const SimpleRoom = (props) => {
                   displaySelectedOption
                   directionY="bottom"
                 />
-                {selectedLink && selectedLink.settings.length === 1 ? (
-                  <div>
-                    <Text
-                      className="linkHelp"
-                      fontSize="12px"
-                      lineHeight="16px"
-                    >
-                      {t("LinkSetDescription", {
-                        parameter:
-                          settingsTranslations[selectedLink.settings[0]],
-                      })}
-                    </Text>
-                    <Link
-                      color={currentColorScheme?.main?.accent}
-                      fontSize="12px"
-                      lineHeight="16px"
-                      onClick={() => navigateRoom(config.id)}
-                    >
-                      {" "}
-                      {t("GoToRoom")}.
-                    </Link>
-                  </div>
-                ) : selectedLink.settings.length === 2 ? (
-                  <div>
-                    <Text
-                      className="linkHelp"
-                      fontSize="12px"
-                      lineHeight="16px"
-                    >
-                      {t("LinkSetDescription2", {
-                        parameter1:
-                          settingsTranslations[selectedLink.settings[0]],
-                        parameter2:
-                          settingsTranslations[selectedLink.settings[1]],
-                      })}
-                    </Text>
-                    <Link
-                      color={currentColorScheme?.main?.accent}
-                      fontSize="12px"
-                      lineHeight="16px"
-                      onClick={() => navigateRoom(config.id)}
-                    >
-                      {" "}
-                      {t("GoToRoom")}.
-                    </Link>
-                  </div>
-                ) : selectedLink.settings.length === 3 ? (
-                  <div>
-                    <Text
-                      className="linkHelp"
-                      fontSize="12px"
-                      lineHeight="16px"
-                    >
-                      {t("LinkSetDescription3", {
-                        parameter1:
-                          settingsTranslations[selectedLink.settings[0]],
-                        parameter2:
-                          settingsTranslations[selectedLink.settings[1]],
-                        parameter3:
-                          settingsTranslations[selectedLink.settings[2]],
-                      })}
-                    </Text>
-                    <Link
-                      color={currentColorScheme?.main?.accent}
-                      fontSize="12px"
-                      lineHeight="16px"
-                      onClick={() => navigateRoom(config.id)}
-                    >
-                      {" "}
-                      {t("GoToRoom")}.
-                    </Link>
-                  </div>
-                ) : (
-                  <></>
+                {selectedLink && (
+                  <SharedLinkHint
+                    t={t}
+                    linkSettings={selectedLink.settings}
+                    redirectToSelectedRoom={redirectToSelectedRoom}
+                    currentColorScheme={currentColorScheme}
+                  />
                 )}
               </ControlsGroup>
             )}

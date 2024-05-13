@@ -45,6 +45,8 @@ export interface ScrollbarProps {
   isFullHeight?: boolean;
   /** Calculated height of content depending on number of lines in pixels */
   fullHeight?: number;
+  /** Wrap children in context that contains scrollbar instance */
+  createContext?: boolean;
 
   onScroll?: React.UIEventHandler<HTMLDivElement>;
   scrollclass?: string;

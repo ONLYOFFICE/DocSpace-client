@@ -48,6 +48,7 @@ const SubInfoPanelBody = ({
       $isScrollLocked={scrollLocked}
       noScrollY={scrollLocked}
       scrollclass="section-scroll info-panel-scroll"
+      createContext
     >
       {children}
     </StyledScrollbar>

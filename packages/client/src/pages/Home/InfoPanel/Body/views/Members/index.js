@@ -36,7 +36,11 @@ import MembersHelper from "../../helpers/MembersHelper";
 import MembersList from "./sub-components/MembersList";
 import User from "./User";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
-import { LinksBlock, StyledLinkRow } from "./sub-components/Styled";
+import {
+  LinksBlock,
+  StyledLinkRow,
+  StyledPublicRoomBarContainer,
+} from "./sub-components/Styled";
 import EmptyContainer from "./sub-components/EmptyContainer";
 
 import { Text } from "@docspace/shared/components/text";
@@ -236,10 +240,12 @@ const Members = ({
   return (
     <>
       {showPublicRoomBar && (
-        <PublicRoomBar
-          headerText={t("Files:RoomAvailableViaExternalLink")}
-          bodyText={t("CreateEditRoomDialog:PublicRoomBarDescription")}
-        />
+        <StyledPublicRoomBarContainer>
+          <PublicRoomBar
+            headerText={t("Files:RoomAvailableViaExternalLink")}
+            bodyText={t("CreateEditRoomDialog:PublicRoomBarDescription")}
+          />
+        </StyledPublicRoomBarContainer>
       )}
 
       <MembersList
@@ -251,6 +257,7 @@ const Members = ({
         itemCount={membersFilter.total + headersCount + publicRoomItemsLength}
         showPublicRoomBar={showPublicRoomBar}
         linksBlockLength={publicRoomItemsLength}
+        withoutTitlesAndLinks={withoutTitlesAndLinks}
       >
         {publicRoomItems}
         {membersList.map((user, index) => {

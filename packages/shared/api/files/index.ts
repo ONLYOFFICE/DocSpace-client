@@ -1386,3 +1386,23 @@ export async function getFilesUsedSpace() {
 
   return res;
 }
+
+export async function changeIndex(
+  id: number,
+  order: number,
+  isFolder: boolean,
+) {
+  const url = isFolder ? `/files/folder/${id}/order` : `/files/${id}/order`;
+  return request({
+    method: "put",
+    url,
+    data: { order },
+  });
+}
+
+export async function reorder(id: number) {
+  return request({
+    method: "put",
+    url: `api/2.0/files/rooms/${id}/reorder`,
+  });
+}

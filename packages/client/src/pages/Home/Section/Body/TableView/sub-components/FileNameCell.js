@@ -50,6 +50,9 @@ const FileNameCell = ({
 
   const isMedia = viewAccessibility?.ImageView || viewAccessibility?.MediaView;
 
+  const indexingClass = isIndexEditingMode ? "item-file-name-index" : "";
+  const linkProps = isIndexEditingMode ? null : { ...linkStyles };
+
   return (
     <>
       {inProgress ? (
@@ -77,16 +80,15 @@ const FileNameCell = ({
           </div>
         </TableCell>
       )}
-
       <Link
         type="page"
         title={title}
         fontWeight="600"
         fontSize="13px"
-        {...linkStyles}
         color={theme.filesSection.tableView.fileName.linkColor}
         isTextOverflow
-        className="item-file-name"
+        {...linkProps}
+        className={`item-file-name ${indexingClass}`}
         dir="auto"
       >
         {titleWithoutExt}

@@ -292,6 +292,10 @@ const StyledTableRow = styled(TableRow)`
     padding-inline: 0 8px;
   }
 
+  .item-file-name-index {
+    text-decoration: none;
+  }
+
   ${(props) =>
     props.isHighlight &&
     css`

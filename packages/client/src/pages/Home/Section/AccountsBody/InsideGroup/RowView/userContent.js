@@ -47,7 +47,7 @@ const StyledRowContent = styled(RowContent)`
 
     .badges {
       flex-direction: row-reverse;
-      margin-top: 10px;
+
       margin-inline-end: 12px;
 
       .paid-badge {

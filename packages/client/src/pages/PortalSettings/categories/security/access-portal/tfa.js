@@ -36,6 +36,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { LearnMoreWrapper } from "../StyledSecurity";
 import { size } from "@docspace/shared/utils";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import TfaLoader from "../sub-components/loaders/tfa-loader";
@@ -70,6 +71,11 @@ const TwoFactorAuth = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const getSettingsFromDefault = () => {
+    const defaultSettings = getFromSessionStorage("defaultTfaSettings");
+    if (defaultSettings) setType(defaultSettings);
+  };
+
   const getSettings = async () => {
     const currentSettings = getFromSessionStorage("currentTfaSettings");
 
@@ -85,17 +91,25 @@ const TwoFactorAuth = (props) => {
 
   useEffect(() => {
     checkWidth();
+    window.addEventListener("resize", checkWidth);
 
     if (!isInit) initSettings("tfa").then(() => setIsLoading(true));
     else setIsLoading(true);
 
-    window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useEffect(() => {
-    tfaSettings && getSettings();
-  }, [tfaSettings]);
+    if (!isInit || !tfaSettings) return;
+    const currentSettings = getFromSessionStorage("currentTfaSettings");
+    const defaultSettings = getFromSessionStorage("defaultTfaSettings");
+
+    if (isEqual(currentSettings, defaultSettings)) {
+      getSettings();
+    } else {
+      getSettingsFromDefault();
+    }
+  }, [isLoading, tfaSettings]);
 
   useEffect(() => {
     if (!isLoading) return;
@@ -103,7 +117,7 @@ const TwoFactorAuth = (props) => {
     const defaultSettings = getFromSessionStorage("defaultTfaSettings");
     saveToSessionStorage("currentTfaSettings", type);
 
-    if (defaultSettings === type) {
+    if (isEqual(defaultSettings, type)) {
       setShowReminder(false);
     } else {
       setShowReminder(true);
@@ -124,16 +138,15 @@ const TwoFactorAuth = (props) => {
 
   const onSaveClick = async () => {
     const { t, setTfaSettings } = props;
-
     setIsSaving(true);
 
     try {
       const res = await setTfaSettings(type);
-
-      toastr.success(t("SuccessfullySaveSettingsMessage"));
-      saveToSessionStorage("defaultTfaSettings", type);
-      setIsSaving(false);
+      setType(type);
       setShowReminder(false);
+      saveToSessionStorage("defaultTfaSettings", type);
+      saveToSessionStorage("currentTfaSettings", type);
+      toastr.success(t("SuccessfullySaveSettingsMessage"));
 
       if (res) {
         setIsInit(false);
@@ -142,11 +155,14 @@ const TwoFactorAuth = (props) => {
     } catch (error) {
       toastr.error(error);
     }
+
+    setIsSaving(false);
   };
 
   const onCancelClick = () => {
     const defaultSettings = getFromSessionStorage("defaultTfaSettings");
-    setType(defaultSettings);
+    saveToSessionStorage("currentTfaSettings", defaultSettings);
+    setType(defaultSettings || "none");
     setShowReminder(false);
   };
 

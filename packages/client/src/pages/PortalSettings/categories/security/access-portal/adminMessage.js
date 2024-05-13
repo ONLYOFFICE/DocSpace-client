@@ -72,6 +72,15 @@ const AdminMessage = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const getSettingsFromDefault = () => {
+    const defaultSettings = getFromSessionStorage(
+      "defaultAdminMessageSettings",
+    );
+    if (defaultSettings) {
+      setType(defaultSettings);
+    }
+  };
+
   const getSettings = () => {
     const currentSettings = getFromSessionStorage(
       "currentAdminMessageSettings",
@@ -100,7 +109,18 @@ const AdminMessage = (props) => {
 
   useEffect(() => {
     if (!isInit) return;
-    getSettings();
+    const currentSettings = getFromSessionStorage(
+      "currentAdminMessageSettings",
+    );
+    const defaultSettings = getFromSessionStorage(
+      "defaultAdminMessageSettings",
+    );
+
+    if (isEqual(currentSettings, defaultSettings)) {
+      getSettings();
+    } else {
+      getSettingsFromDefault();
+    }
   }, [isLoading, isInit]);
 
   useEffect(() => {
@@ -134,6 +154,7 @@ const AdminMessage = (props) => {
     const turnOn = type === "enable" ? true : false;
     setMessageSettings(turnOn);
     toastr.success(t("SuccessfullySaveSettingsMessage"));
+    saveToSessionStorage("currentAdminMessageSettings", type);
     saveToSessionStorage("defaultAdminMessageSettings", type);
     setShowReminder(false);
   };
@@ -142,7 +163,7 @@ const AdminMessage = (props) => {
     const defaultSettings = getFromSessionStorage(
       "defaultAdminMessageSettings",
     );
-    setType(defaultSettings);
+    setType(defaultSettings || "disabled");
     setShowReminder(false);
   };
 

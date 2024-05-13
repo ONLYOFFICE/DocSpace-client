@@ -46,10 +46,10 @@ const useFitText = (
       ref.current.scrollHeight > wrapperRef.current.offsetHeight;
 
     if (isOverflow) {
-      const newFontSize = fontSize - 1;
+      const newFontSize = fontSize - 2;
       setFontSize(newFontSize);
     }
-  }, [fontSize, wrapperRef?.current?.offsetHeight]);
+  }, [fontSize]);
 
   return { fontSize: `${fontSize}px`, ref, wrapperRef };
 };

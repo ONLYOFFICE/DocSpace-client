@@ -26,10 +26,9 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import debounce from "lodash.debounce";
 import { Box } from "@docspace/shared/components/box";
 import { TabsContainer } from "@docspace/shared/components/tabs-container";
-import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
+import { objectToGetParams } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
 import { WidthSetter } from "../sub-components/WidthSetter";
@@ -38,6 +37,8 @@ import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { CodeToInsert } from "../sub-components/CodeToInsert";
 import { GetCodeBlock } from "../sub-components/GetCodeBlock";
+
+import { loadFrame } from "../utils";
 
 import {
   showPreviewThreshold,
@@ -97,22 +98,10 @@ const DocSpace = (props) => {
     window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
   };
 
-  const loadFrame = debounce(() => {
-    const script = document.getElementById("integration");
-
-    if (script) {
-      script.remove();
-    }
-
-    const params = objectToGetParams(config);
-
-    loadScript(`${scriptUrl}${params}`, "integration", () =>
-      window.DocSpace.SDK.initFrame(config),
-    );
-  }, 500);
+  const loadCurrentFrame = () => loadFrame(config, scriptUrl);
 
   useEffect(() => {
-    loadFrame();
+    loadCurrentFrame();
     return () => destroyFrame();
   });
 
@@ -122,10 +111,6 @@ const DocSpace = (props) => {
       scroll.scrollTop = 0;
     }
   }, []);
-
-  const onChangeTab = () => {
-    loadFrame();
-  };
 
   const onResize = () => {
     const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
@@ -177,7 +162,7 @@ const DocSpace = (props) => {
       <Container>
         {showPreview && (
           <Preview>
-            <TabsContainer onSelect={onChangeTab} elements={dataTabs} />
+            <TabsContainer onSelect={loadCurrentFrame} elements={dataTabs} />
           </Preview>
         )}
         <Controls>

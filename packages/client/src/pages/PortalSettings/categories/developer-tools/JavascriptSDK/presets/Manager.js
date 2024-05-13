@@ -68,6 +68,8 @@ import { CodeToInsert } from "../sub-components/CodeToInsert";
 import { GetCodeBlock } from "../sub-components/GetCodeBlock";
 import { SharedLinkHint } from "../sub-components/SharedLinkHint";
 
+import { loadFrame } from "../utils";
+
 import {
   showPreviewThreshold,
   scriptUrl,
@@ -172,22 +174,10 @@ const Manager = (props) => {
     window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
   };
 
-  const loadFrame = debounce(() => {
-    const script = document.getElementById("integration");
-
-    if (script) {
-      script.remove();
-    }
-
-    const params = objectToGetParams(config);
-
-    loadScript(`${scriptUrl}${params}`, "integration", () =>
-      window.DocSpace.SDK.initFrame(config),
-    );
-  }, 500);
+  const loadCurrentFrame = () => loadFrame(config, scriptUrl);
 
   useEffect(() => {
-    loadFrame();
+    loadCurrentFrame();
     return () => destroyFrame();
   });
 
@@ -197,10 +187,6 @@ const Manager = (props) => {
       scroll.scrollTop = 0;
     }
   }, []);
-
-  const onChangeTab = () => {
-    loadFrame();
-  };
 
   const onChangeFolderId = async (id, publicInPath) => {
     let newConfig = { id, requestToken: null, rootPath: "/rooms/shared/" };
@@ -438,7 +424,7 @@ const Manager = (props) => {
       <Container>
         {showPreview && (
           <Preview>
-            <TabsContainer onSelect={onChangeTab} elements={dataTabs} />
+            <TabsContainer onSelect={loadCurrentFrame} elements={dataTabs} />
           </Preview>
         )}
         <Controls>

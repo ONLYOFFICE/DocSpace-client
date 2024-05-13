@@ -48,6 +48,8 @@ import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { CodeToInsert } from "../sub-components/CodeToInsert";
 import { GetCodeBlock } from "../sub-components/GetCodeBlock";
 
+import { loadFrame } from "../utils";
+
 import {
   showPreviewThreshold,
   scriptUrl,
@@ -97,22 +99,10 @@ const Viewer = (props) => {
     window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
   };
 
-  const loadFrame = debounce(() => {
-    const script = document.getElementById("integration");
-
-    if (script) {
-      script.remove();
-    }
-
-    const params = objectToGetParams(config);
-
-    loadScript(`${scriptUrl}${params}`, "integration", () =>
-      window.DocSpace.SDK.initFrame(config),
-    );
-  }, 500);
+  const loadCurrentFrame = () => loadFrame(config, scriptUrl);
 
   useEffect(() => {
-    loadFrame();
+    loadCurrentFrame();
     return () => destroyFrame();
   });
 
@@ -123,10 +113,6 @@ const Viewer = (props) => {
     }
   }, []);
 
-  const onChangeTab = () => {
-    loadFrame();
-  };
-
   const onChangeFileId = async (file) => {
     const newConfig = {
       id: file.id,
@@ -135,7 +121,7 @@ const Viewer = (props) => {
     };
 
     if (file.inPublic) {
-      const link = await getFilePrimaryLink(file.id);
+      const link = await file.id;
       const { requestToken } = link.sharedTo;
 
       newConfig.requestToken = requestToken;
@@ -216,7 +202,7 @@ const Viewer = (props) => {
           <Preview>
             <TabsContainer
               isDisabled={config?.id === undefined}
-              onSelect={onChangeTab}
+              onSelect={loadCurrentFrame}
               elements={dataTabs}
             />
           </Preview>

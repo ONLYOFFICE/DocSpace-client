@@ -61,6 +61,8 @@ import { CodeToInsert } from "../sub-components/CodeToInsert";
 import { GetCodeBlock } from "../sub-components/GetCodeBlock";
 import { SharedLinkHint } from "../sub-components/SharedLinkHint";
 
+import { loadFrame } from "../utils";
+
 import {
   showPreviewThreshold,
   scriptUrl,
@@ -128,22 +130,10 @@ const SimpleRoom = (props) => {
     window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
   };
 
-  const loadFrame = debounce(() => {
-    const script = document.getElementById("integration");
-
-    if (script) {
-      script.remove();
-    }
-
-    const params = objectToGetParams(config);
-
-    loadScript(`${scriptUrl}${params}`, "integration", () =>
-      window.DocSpace.SDK.initFrame(config),
-    );
-  }, 500);
+  const loadCurrentFrame = () => loadFrame(config, scriptUrl);
 
   useEffect(() => {
-    loadFrame();
+    loadCurrentFrame();
     return () => destroyFrame();
   });
 
@@ -153,10 +143,6 @@ const SimpleRoom = (props) => {
       scroll.scrollTop = 0;
     }
   }, []);
-
-  const onChangeTab = () => {
-    loadFrame();
-  };
 
   const onChangeFolderId = async (rooms) => {
     const publicRoom = rooms[0];
@@ -301,7 +287,7 @@ const SimpleRoom = (props) => {
           <Preview>
             <TabsContainer
               isDisabled={config?.id === undefined}
-              onSelect={onChangeTab}
+              onSelect={loadCurrentFrame}
               elements={dataTabs}
             />
           </Preview>

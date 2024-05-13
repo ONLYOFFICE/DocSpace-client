@@ -60,6 +60,8 @@ import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { CodeToInsert } from "../sub-components/CodeToInsert";
 import { GetCodeBlock } from "../sub-components/GetCodeBlock";
 
+import { loadFrame } from "../utils";
+
 import {
   showPreviewThreshold,
   scriptUrl,
@@ -196,22 +198,10 @@ const FileSelector = (props) => {
     window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
   };
 
-  const loadFrame = debounce(() => {
-    const script = document.getElementById("integration");
-
-    if (script) {
-      script.remove();
-    }
-
-    const params = objectToGetParams(config);
-
-    loadScript(`${scriptUrl}${params}`, "integration", () =>
-      window.DocSpace.SDK.initFrame(config),
-    );
-  }, 500);
+  const loadCurrentFrame = () => loadFrame(config, scriptUrl);
 
   useEffect(() => {
-    loadFrame();
+    loadCurrentFrame();
     return () => destroyFrame();
   });
 
@@ -228,19 +218,6 @@ const FileSelector = (props) => {
       ...config,
       isButtonMode: e.target.value === "button",
     }));
-  };
-
-  const onChangeTab = (tab) => {
-    if (tab.key === "preview" && selectedElementType === "button") {
-      setConfig((config) => ({ ...config, isButtonMode: true }));
-    } else if (tab.key === "selector-preview") {
-      setConfig((config) => ({ ...config, isButtonMode: false }));
-    } else if (tab.key === "code") {
-      setConfig((config) => ({
-        ...config,
-        isButtonMode: selectedElementType === "button",
-      }));
-    }
   };
 
   const onChangeFolderId = async (id, publicInPath) => {
@@ -374,7 +351,7 @@ const FileSelector = (props) => {
       <Container>
         {showPreview && (
           <Preview>
-            <TabsContainer onSelect={onChangeTab} elements={dataTabs} />
+            <TabsContainer onSelect={loadCurrentFrame} elements={dataTabs} />
           </Preview>
         )}
         <Controls>

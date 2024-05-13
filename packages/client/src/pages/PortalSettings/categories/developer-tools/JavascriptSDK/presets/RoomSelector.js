@@ -50,6 +50,8 @@ import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { CodeToInsert } from "../sub-components/CodeToInsert";
 import { GetCodeBlock } from "../sub-components/GetCodeBlock";
 
+import { loadFrame } from "../utils";
+
 import {
   showPreviewThreshold,
   scriptUrl,
@@ -162,22 +164,10 @@ const RoomSelector = (props) => {
     window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
   };
 
-  const loadFrame = debounce(() => {
-    const script = document.getElementById("integration");
-
-    if (script) {
-      script.remove();
-    }
-
-    const params = objectToGetParams(config);
-
-    loadScript(`${scriptUrl}${params}`, "integration", () =>
-      window.DocSpace.SDK.initFrame(config),
-    );
-  }, 500);
+  const loadCurrentFrame = () => loadFrame(config, scriptUrl);
 
   useEffect(() => {
-    loadFrame();
+    loadCurrentFrame();
     return destroyFrame;
   });
 
@@ -199,10 +189,6 @@ const RoomSelector = (props) => {
   const changeRoomType = (option) => {
     setRoomType(option);
     setConfig((config) => ({ ...config, roomType: option.roomType }));
-  };
-
-  const onChangeTab = () => {
-    loadFrame();
   };
 
   const toggleWithSearch = () => {
@@ -283,7 +269,7 @@ const RoomSelector = (props) => {
       <Container>
         {showPreview && (
           <Preview>
-            <TabsContainer onSelect={onChangeTab} elements={dataTabs} />
+            <TabsContainer onSelect={loadCurrentFrame} elements={dataTabs} />
           </Preview>
         )}
         <Controls>

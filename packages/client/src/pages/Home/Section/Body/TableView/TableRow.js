@@ -73,6 +73,7 @@ const FilesTableRow = (props) => {
     badgeUrl,
     isRecentTab,
     canDrag,
+    onEditIndex,
   } = props;
   const { acceptBackground, background } = theme.dragAndDrop;
 
@@ -106,6 +107,10 @@ const FilesTableRow = (props) => {
             : background
           : "none",
     },
+  };
+
+  const onChangeIndex = (action) => {
+    return onEditIndex(action, item);
   };
 
   const onDragOverEvent = (dragActive, e) => {
@@ -172,13 +177,14 @@ const FilesTableRow = (props) => {
         key={item.id}
         fileContextClick={fileContextClick}
         onClick={isIndexEditingMode ? () => {} : onMouseClick}
+        onChangeIndex={onChangeIndex}
         isActive={isActive}
         isIndexEditingMode={isIndexEditingMode}
         inProgress={inProgress}
         isFolder={item.isFolder}
         onHideContextMenu={onHideContextMenu}
         isThirdPartyFolder={item.isThirdPartyFolder}
-        onDoubleClick={onDoubleClick}
+        onDoubleClick={isIndexEditingMode ? () => {} : onDoubleClick}
         checked={checkedProps}
         showHotkeyBorder={showHotkeyBorder}
         title={

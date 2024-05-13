@@ -142,6 +142,7 @@ const Table = ({
   columnInfoPanelStorageName,
   highlightFile,
   currentDeviceType,
+  onEditIndex
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -204,6 +205,7 @@ const Table = ({
         item={item}
         itemIndex={index}
         index={index}
+        onEditIndex={onEditIndex}
         isIndexEditingMode={isIndexEditingMode}
         setFirsElemChecked={setFirsElemChecked}
         setHeaderBorder={setHeaderBorder}
@@ -272,6 +274,7 @@ export default inject(
     settingsStore,
 
     indexingStore,
+    filesActionsStore
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -294,6 +297,7 @@ export default inject(
     } = filesStore;
 
     const { isIndexEditingMode } = indexingStore;
+    const {changeIndex} = filesActionsStore;
 
     const { withPaging, theme, currentDeviceType } = settingsStore;
 
@@ -317,6 +321,7 @@ export default inject(
       columnInfoPanelStorageName,
       highlightFile,
       currentDeviceType,
+      onEditIndex: changeIndex,
     };
   },
 )(observer(Table));

@@ -54,6 +54,8 @@ import {
   moveToFolder,
   getFolder,
   deleteFilesFromRecent,
+  changeIndex,
+  reorder,
 } from "@docspace/shared/api/files";
 import {
   ConflictResolveType,
@@ -63,6 +65,7 @@ import {
   FolderType,
   RoomsType,
   ShareAccessRights,
+  VDRIndexingAction,
 } from "@docspace/shared/enums";
 import { makeAutoObservable } from "mobx";
 
@@ -2719,6 +2722,32 @@ class FilesActionStore {
 
     await deleteFilesFromRecent(fileIds);
     await refreshFiles();
+  };
+  changeIndex = async (action, item) => {
+    const { filesList } = this.filesStore;
+    const { id } = this.selectedFolderStore;
+    const index = filesList.findIndex((elem) => elem.id === item?.id);
+
+    const operationId = uniqueid("operation_");
+    const isUpperIndex = action === VDRIndexingAction.HigherIndex;
+    const isLowerIndex = action === VDRIndexingAction.LowerIndex;
+    let replaceable;
+    if (isUpperIndex && index !== 0) {
+      replaceable = filesList[index - 1];
+    }
+
+    if (isLowerIndex && index !== filesList.length - 1) {
+      replaceable = filesList[index + 1];
+    }
+    if (!replaceable) return;
+
+    await changeIndex(item?.id, replaceable.order, item?.isFolder);
+    this.updateCurrentFolder(null, [id], true, operationId);
+  };
+
+  reorder = async () => {
+    // console.log("reorder");
+    await reorder(item?.id);
   };
 }
 

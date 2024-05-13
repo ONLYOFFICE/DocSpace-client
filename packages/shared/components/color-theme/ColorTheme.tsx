@@ -77,7 +77,10 @@ const ColorTheme = forwardRef<
       }
       case ThemeId.IndexIconButton: {
         return (
-          <StyledIndexWrapper $currentColorScheme={currentColorScheme}>
+          <StyledIndexWrapper
+            $currentColorScheme={currentColorScheme}
+            onClick={props.onClick}
+          >
             <IconButtonTheme
               {...props}
               themeId={themeId}

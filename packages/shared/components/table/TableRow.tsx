@@ -26,6 +26,7 @@
 
 import React, { useRef } from "react";
 import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
+import { VDRIndexingAction } from "../../enums";
 
 import { ContextMenu } from "../context-menu";
 import {
@@ -52,6 +53,7 @@ const TableRow = (props: TableRowProps) => {
     getContextModel,
     badgeUrl,
     isIndexEditingMode,
+    onChangeIndex,
     ...rest
   } = props;
 
@@ -106,14 +108,14 @@ const TableRow = (props: TableRowProps) => {
                 iconName={ArrowReactSvgUrl}
                 className="index-up-icon"
                 size="small"
-                // onClick={onClickShare}
+                onClick={() => onChangeIndex(VDRIndexingAction.HigherIndex)}
               />
               <ColorTheme
                 themeId={ThemeId.IndexIconButton}
                 iconName={ArrowReactSvgUrl}
                 className="index-down-icon"
                 size="small"
-                // onClick={onClickShare}
+                onClick={() => onChangeIndex(VDRIndexingAction.LowerIndex)}
               />
             </>
           ) : (

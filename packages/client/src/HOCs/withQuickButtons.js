@@ -118,6 +118,7 @@ export default function withQuickButtons(WrappedComponent) {
         isPublicRoom,
         isPersonalRoom,
         isArchiveFolder,
+        currentDeviceType,
         isTemplatesFolder,
       } = this.props;
 
@@ -139,6 +140,7 @@ export default function withQuickButtons(WrappedComponent) {
           folderCategory={folderCategory}
           onCopyPrimaryLink={this.onCopyPrimaryLink}
           isArchiveFolder={isArchiveFolder}
+          currentDeviceType={currentDeviceType}
           onCreateRoom={this.onCreateRoom}
           isTemplatesFolder={isTemplatesFolder}
         />
@@ -189,6 +191,7 @@ export default function withQuickButtons(WrappedComponent) {
 
       return {
         theme: settingsStore.theme,
+        currentDeviceType: settingsStore.currentDeviceType,
         isAdmin: authStore.isAdmin,
         lockFileAction,
         setFavoriteAction,

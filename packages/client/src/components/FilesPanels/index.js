@@ -131,6 +131,7 @@ const Panels = (props) => {
     deletePluginDialogVisible,
     shareFolderDialogVisible,
     pdfFormEditVisible,
+    selectFileFormRoomOpenRoot,
     createRoomTemplateDialogVisible,
     templateAccessSettingsVisible,
   } = props;
@@ -269,6 +270,7 @@ const Panels = (props) => {
         isPanelVisible
         key="select-file-form-room-dialog"
         onClose={onCloseFileFormRoomDialog}
+        openRoot={selectFileFormRoomOpenRoot}
         onSelectFile={createFromTemplateForm}
         filterParam={selectFileFormRoomFilterParam}
         descriptionText={descriptionTextFileFormRoomDialog}
@@ -384,6 +386,7 @@ export default inject(
       changeRoomOwnerIsVisible,
       shareFolderDialogVisible,
       pdfFormEditVisible,
+      selectFileFormRoomOpenRoot,
       createRoomTemplateDialogVisible,
       templateAccessSettingsVisible,
     } = dialogsStore;
@@ -452,6 +455,7 @@ export default inject(
       deletePluginDialogVisible,
       shareFolderDialogVisible,
       pdfFormEditVisible,
+      selectFileFormRoomOpenRoot,
       createRoomTemplateDialogVisible,
       templateAccessSettingsVisible,
     };

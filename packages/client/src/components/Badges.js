@@ -101,6 +101,7 @@ const Badges = ({
   onFilesClick,
   onShowVersionHistory,
   onBadgeClick,
+  openLocationFile,
   setConvertDialogVisible,
   viewAs,
   onUnpinClick,
@@ -227,7 +228,7 @@ const Badges = ({
           iconName={iconForm}
           onClick={onFilesClick}
           themeId={ThemeId.IconButton}
-          title={t("Common:FillFormButton")}
+          title={t("Common:ReadyToFillOut")}
           hoverColor={theme.filesBadges.hoverIconColor}
           className="badge icons-group is-editing tablet-badge tablet-edit"
         />
@@ -246,6 +247,7 @@ const Badges = ({
             style={{
               width: "max-content",
             }}
+            onClick={openLocationFile}
           />
         </BadgeWrapper>
       )}

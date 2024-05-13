@@ -726,6 +726,7 @@ class Tile extends React.PureComponent {
         isThirdParty: true,
         icon: item.thirdPartyIcon,
         label: item.providerKey,
+        providerType: item.providerType,
         onClick: () =>
           selectOption({
             option: "typeProvider",

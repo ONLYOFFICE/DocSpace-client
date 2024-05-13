@@ -63,6 +63,8 @@ const Root = ({
   fileId,
   hash,
 }: TResponse) => {
+  const editorRef = React.useRef<null | HTMLElement>(null);
+
   const documentserverUrl = config?.editorUrl ?? error?.editorUrl;
   const fileInfo = config?.file;
 
@@ -141,8 +143,18 @@ const Root = ({
       isSharingDialogVisible ||
       isVisibleSelectFolderDialog ||
       selectFileDialogVisible
-    )
+    ) {
       calculateAsideHeight();
+
+      const activeElement = document.activeElement as HTMLElement | null;
+
+      if (activeElement && activeElement.tagName === "IFRAME") {
+        editorRef.current = activeElement;
+        activeElement.blur();
+      }
+    } else if (editorRef.current) {
+      editorRef.current.focus();
+    }
 
     if (isSharingDialogVisible) {
       setTimeout(calculateAsideHeight, 10);

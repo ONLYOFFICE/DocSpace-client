@@ -93,6 +93,7 @@ const TagDropdown = ({
         heightTablet={32}
         key={i}
         label={tag}
+        onMouseDown={preventDefault}
         onClick={() => addFetchedTag(tag)}
       />
     ));

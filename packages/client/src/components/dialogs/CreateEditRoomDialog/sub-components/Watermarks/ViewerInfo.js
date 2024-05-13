@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -35,6 +35,34 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 import { WatermarkAdditions } from "@docspace/shared/enums";
 
 import { StyledWatermark } from "./StyledComponent";
+
+const tabsOptions = (t) => [
+  {
+    key: "UserName",
+    title: t("UserName"),
+    index: 0,
+  },
+  {
+    key: "UserEmail",
+    title: t("UserEmail"),
+    index: 1,
+  },
+  {
+    key: "UserIpAdress",
+    title: t("UserIPAddress"),
+    index: 2,
+  },
+  {
+    key: "CurrentDate",
+    title: t("Common:CurrentDate"),
+    index: 3,
+  },
+  {
+    key: "RoomName",
+    title: t("Common:RoomName"),
+    index: 4,
+  },
+];
 
 const getInitialState = (initialTab) => {
   const state = {
@@ -52,19 +80,59 @@ const getInitialState = (initialTab) => {
   return state;
 };
 
+const getInitialText = (text, isEdit) => {
+  return isEdit && text ? text : "";
+};
+
+const getInitialTabs = (additions, isEdit, t) => {
+  const dataTabs = tabsOptions(t);
+
+  if (!isEdit || !additions) return [dataTabs[0]];
+
+  return dataTabs.filter((item) => additions & WatermarkAdditions[item.key]);
+};
+
 const ViewerInfoWatermark = ({
+  getInitialRotate,
+  rotateOptions,
+  isEdit,
+
   setWatermarks,
-  initialPosition,
-  dataPosition,
-  dataTabs,
-  initialTab,
-  initialText,
+  watermarksSettings,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
-  const elements = useRef(getInitialState(initialTab));
 
-  const [selectedPosition, setSelectedPosition] = useState(initialPosition);
-  const [textValue, setTextValue] = useState(initialText ?? "");
+  const elements = useRef(null);
+  const initialInfo = useRef(null);
+
+  if (initialInfo.current === null) {
+    initialInfo.current = {
+      dataRotate: rotateOptions(t),
+      dataTabs: tabsOptions(t),
+      rotate: getInitialRotate(watermarksSettings?.rotate, isEdit, false, t),
+      tabs: getInitialTabs(watermarksSettings?.additions, isEdit, t),
+      text: getInitialText(watermarksSettings?.text, isEdit),
+      additions: watermarksSettings?.additions ?? WatermarkAdditions.UserName,
+    };
+
+    elements.current = getInitialState(initialInfo.current.tabs);
+  }
+
+  const initialInfoRef = initialInfo.current;
+
+  useEffect(() => {
+    setWatermarks({
+      rotate: initialInfoRef.rotate.key,
+      text: initialInfoRef.text,
+      enabled: true,
+      additions: initialInfoRef.additions,
+    });
+  }, []);
+
+  const [selectedPosition, setSelectedPosition] = useState(
+    initialInfoRef.rotate,
+  );
+  const [textValue, setTextValue] = useState(initialInfoRef.text);
 
   const onSelect = (item) => {
     let elementsData = elements.current;
@@ -81,21 +149,20 @@ const ViewerInfoWatermark = ({
         flagsCount += WatermarkAdditions[key];
       }
     }
-
-    setWatermarks({ additions: flagsCount });
+    setWatermarks({ ...watermarksSettings, additions: flagsCount });
   };
 
   const onPositionChange = (item) => {
     setSelectedPosition(item);
 
-    setWatermarks({ rotate: item.key });
+    setWatermarks({ ...watermarksSettings, rotate: item.key });
   };
 
   const onTextChange = (e) => {
     const { value } = e.target;
     setTextValue(value);
 
-    setWatermarks({ text: value });
+    setWatermarks({ ...watermarksSettings, text: value });
   };
 
   return (
@@ -104,9 +171,9 @@ const ViewerInfoWatermark = ({
         {t("AddWatermarkElements")}
       </Text>
       <TabsContainer
-        elements={dataTabs}
+        elements={initialInfoRef.dataTabs}
         onSelect={onSelect}
-        selectedItem={initialTab.map((item) => item.index)}
+        selectedItem={initialInfoRef.tabs.map((item) => item.index)}
         multiple
         withBorder
       />
@@ -126,7 +193,7 @@ const ViewerInfoWatermark = ({
       </Text>
       <ComboBox
         selectedOption={selectedPosition}
-        options={dataPosition}
+        options={initialInfoRef.dataRotate}
         onSelect={onPositionChange}
         scaled
         scaledOptions
@@ -136,8 +203,9 @@ const ViewerInfoWatermark = ({
 };
 
 export default inject(({ createEditRoomStore }) => {
-  const { setWatermarks } = createEditRoomStore;
+  const { setWatermarks, watermarksSettings } = createEditRoomStore;
   return {
     setWatermarks,
+    watermarksSettings,
   };
 })(observer(ViewerInfoWatermark));

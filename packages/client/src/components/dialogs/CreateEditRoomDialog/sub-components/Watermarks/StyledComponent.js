@@ -38,6 +38,12 @@ const StyledWatermark = styled.div`
   .watermark-checkbox {
     margin: 18px 0 0 0;
   }
+
+  .options-wrapper {
+    display: grid;
+    grid-template-columns: minmax(216px, 1fr) minmax(216px, 1fr);
+    gap: 16px;
+  }
 `;
 const StyledBody = styled.div`
   .types-content {

@@ -24,15 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { WatermarkAdditions } from "@docspace/shared/enums";
 
 import ViewerInfoWatermark from "./ViewerInfo";
 import { StyledBody } from "./StyledComponent";
+import ImageWatermark from "./ImageWatermark";
 
 const imageWatermark = "image",
   viewerInfoWatermark = "viewerInfo";
@@ -53,44 +53,16 @@ const rotateOptions = (t) => [
   { key: 0, label: t("Horizontal") },
 ];
 
-const tabsOptions = (t) => [
-  {
-    key: "UserName",
-    title: t("UserName"),
-    index: 0,
-  },
-  {
-    key: "UserEmail",
-    title: t("UserEmail"),
-    index: 1,
-  },
-  {
-    key: "UserIpAdress",
-    title: t("UserIPAddress"),
-    index: 2,
-  },
-  {
-    key: "CurrentDate",
-    title: t("Common:CurrentDate"),
-    index: 3,
-  },
-  {
-    key: "RoomName",
-    title: t("Common:RoomName"),
-    index: 4,
-  },
+const imageRotateOptions = () => [
+  { key: 0, label: "0" },
+  { key: 30, label: "30" },
+  { key: 45, label: "45" },
+  { key: 60, label: "60" },
+  { key: 90, label: "90" },
 ];
 
-const getInitialTabs = (additions, isEdit, t) => {
-  const dataTabs = tabsOptions(t);
-
-  if (!isEdit || !additions) return [dataTabs[0]];
-
-  return dataTabs.filter((item) => additions & WatermarkAdditions[item.key]);
-};
-
-const getInitialRotate = (rotate, isEdit, t) => {
-  const dataRotate = rotateOptions(t);
+const getInitialRotate = (rotate, isEdit, isImage, t) => {
+  const dataRotate = isImage ? imageRotateOptions() : rotateOptions(t);
 
   if (!isEdit || rotate === undefined) return dataRotate[0];
 
@@ -99,40 +71,18 @@ const getInitialRotate = (rotate, isEdit, t) => {
   });
 };
 
-const getInitialText = (text, isEdit) => {
-  return isEdit && text ? text : "";
-};
-const Watermarks = ({ setWatermarks, watermarksSettings, isEdit }) => {
-  const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
-  const [type, setType] = useState(viewerInfoWatermark);
-
-  const initialInfo = useRef(null);
-
-  if (initialInfo.current === null) {
-    initialInfo.current = {
-      dataRotate: rotateOptions(t),
-      dataTabs: tabsOptions(t),
-      initialRotate: getInitialRotate(watermarksSettings?.rotate, isEdit, t),
-      initialTabs: getInitialTabs(watermarksSettings?.additions, isEdit, t),
-      initialText: getInitialText(watermarksSettings?.text, isEdit),
-    };
+const getOptionType = (additions, isEdit) => {
+  if (isEdit) {
+    return additions === 0 ? imageWatermark : viewerInfoWatermark;
   }
 
-  const initialInfoRef = initialInfo.current;
-
-  useEffect(() => {
-    if (!isEdit) {
-      setWatermarks(
-        {
-          rotate: initialInfoRef.initialRotate.key,
-          text: "",
-          additions: WatermarkAdditions.UserName,
-          enabled: true,
-        },
-        true,
-      );
-    }
-  }, []);
+  return viewerInfoWatermark;
+};
+const Watermarks = ({ isEdit, watermarksSettings }) => {
+  const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
+  const [type, setType] = useState(
+    getOptionType(watermarksSettings?.additions, isEdit),
+  );
 
   const onSelectType = (e) => {
     const { value } = e.target;
@@ -141,8 +91,6 @@ const Watermarks = ({ setWatermarks, watermarksSettings, isEdit }) => {
   };
 
   const typeOptions = options(t);
-
-  console.log("============Watermarks render", watermarksSettings);
 
   return (
     <StyledBody>
@@ -158,11 +106,16 @@ const Watermarks = ({ setWatermarks, watermarksSettings, isEdit }) => {
 
       {type === viewerInfoWatermark && (
         <ViewerInfoWatermark
-          initialPosition={initialInfoRef.initialRotate}
-          dataPosition={initialInfoRef.dataRotate}
-          dataTabs={initialInfoRef.dataTabs}
-          initialTab={initialInfoRef.initialTabs}
-          initialText={initialInfoRef.initialText}
+          isEdit={isEdit}
+          getInitialRotate={getInitialRotate}
+          rotateOptions={rotateOptions}
+        />
+      )}
+      {type === imageWatermark && (
+        <ImageWatermark
+          isEdit={isEdit}
+          getInitialRotate={getInitialRotate}
+          rotateOptions={imageRotateOptions}
         />
       )}
     </StyledBody>
@@ -170,9 +123,8 @@ const Watermarks = ({ setWatermarks, watermarksSettings, isEdit }) => {
 };
 
 export default inject(({ createEditRoomStore }) => {
-  const { setWatermarks, watermarksSettings } = createEditRoomStore;
+  const { watermarksSettings } = createEditRoomStore;
   return {
-    setWatermarks,
     watermarksSettings,
   };
 })(observer(Watermarks));

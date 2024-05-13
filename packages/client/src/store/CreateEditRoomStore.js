@@ -98,24 +98,44 @@ class CreateEditRoomStore {
   setWatermarks = (watermarksSettings, isInit = false) => {
     if (isInit) {
       this.initialWatermarksSettings = watermarksSettings;
-      this.watermarksSettings = watermarksSettings;
-
-      return;
     }
 
-    if (!watermarksSettings) {
-      this.watermarksSettings = null;
-      return;
-    }
-
-    this.watermarksSettings = {
-      ...this.watermarksSettings,
-      ...watermarksSettings,
-    };
+    this.watermarksSettings = watermarksSettings;
   };
 
   isEqualWatermarkChanges = () => {
     return isEqual(this.watermarksSettings, this.initialWatermarksSettings);
+  };
+
+  getWatermarkRequest = async (room) => {
+    if (!this.watermarksSettings.image) {
+      return setWatermarkSettings(room.id, this.watermarksSettings);
+    }
+
+    const { uploadRoomLogo } = this.filesStore;
+
+    const watermarkImage = this.watermarksSettings.image;
+    const uploadWatermarkData = new FormData();
+    uploadWatermarkData.append(0, watermarkImage);
+
+    const response = await uploadRoomLogo(uploadWatermarkData);
+
+    let newImage = new Image();
+    newImage.src = URL.createObjectURL(watermarkImage);
+
+    newImage.onload = () => {
+      let width = newImage.width;
+      let height = newImage.height;
+
+      return setWatermarkSettings(room.id, {
+        enabled: true,
+        imageScale: this.watermarksSettings.imageScale,
+        rotate: this.watermarksSettings.rotate,
+        imageUrl: response.data,
+        imageWidth: width,
+        imageHeight: height,
+      });
+    };
   };
 
   onCreateRoom = async (withConfirm = false, t) => {
@@ -184,13 +204,16 @@ class CreateEditRoomStore {
 
       const actions = [];
 
+      const requests = [];
+
       if (this.watermarksSettings) {
-        await setWatermarkSettings(room.id, this.watermarksSettings);
+        requests.push(this.getWatermarkRequest(room));
       }
       // delete thirdparty account if not needed
       if (!isThirdparty && storageFolderId)
-        await deleteThirdParty(thirdpartyAccount.providerId);
+        requests.push(deleteThirdParty(thirdpartyAccount.providerId));
 
+      await Promise.all(requests);
       // create new tags
       for (let i = 0; i < createTagsData.length; i++) {
         actions.push(createTag(createTagsData[i]));
@@ -205,6 +228,7 @@ class CreateEditRoomStore {
         await uploadRoomLogo(uploadLogoData).then(async (response) => {
           const url = URL.createObjectURL(roomParams.icon.uploadedFile);
           const img = new Image();
+
           img.onload = async () => {
             const { x, y, zoom } = roomParams.icon;
             try {

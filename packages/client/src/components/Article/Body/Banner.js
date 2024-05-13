@@ -39,7 +39,8 @@ const Banner = ({
   setSubmitToGalleryDialogVisible,
   setClosedCampaigns,
   getBanner,
-  campaignImage,
+  campaignBackground,
+  campaignIcon,
   campaignTranslate,
   campaignConfig,
   currentCampaign,
@@ -73,12 +74,13 @@ const Banner = ({
 
   return (
     <StyledWrapper>
-      {campaignImage &&
+      {campaignBackground &&
         campaignTranslate &&
         campaignConfig &&
         currentCampaign && (
           <CampaignsBanner
-            campaignImage={campaignImage}
+            campaignBackground={campaignBackground}
+            campaignIcon={campaignIcon}
             campaignTranslate={campaignTranslate}
             campaignConfig={campaignConfig}
             onAction={onAction}
@@ -94,7 +96,8 @@ export default inject(({ dialogsStore, campaignsStore }) => {
   const {
     setClosedCampaigns,
     getBanner,
-    campaignImage,
+    campaignBackground,
+    campaignIcon,
     campaignTranslate,
     campaignConfig,
     currentCampaign,
@@ -104,7 +107,8 @@ export default inject(({ dialogsStore, campaignsStore }) => {
     setSubmitToGalleryDialogVisible,
     setClosedCampaigns,
     getBanner,
-    campaignImage,
+    campaignBackground,
+    campaignIcon,
     campaignTranslate,
     campaignConfig,
     currentCampaign,

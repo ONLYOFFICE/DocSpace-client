@@ -142,7 +142,8 @@ const StyledLdapPage = styled(Box)`
     margin-top: 8px;
   }
 
-  .manual-sync-button {
+  .manual-sync-button,
+  .auto-sync-button {
     margin-top: 16px;
   }
 

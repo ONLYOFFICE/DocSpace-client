@@ -1279,6 +1279,16 @@ export function syncLdap() {
   return request(options);
 }
 
+export function saveCronLdap(cron) {
+  const options = {
+    method: "post",
+    url: "/settings/ldap/cron",
+    data: { Cron: cron },
+  };
+
+  return request(options);
+}
+
 export function getCronLdap() {
   const options = {
     method: "get",

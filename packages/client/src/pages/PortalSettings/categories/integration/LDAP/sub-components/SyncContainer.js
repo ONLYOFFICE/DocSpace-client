@@ -21,6 +21,7 @@ const SyncContainer = ({
   isLdapEnabled,
   isMobileView,
   syncLdap,
+  saveCronLdap,
   onChangeCron,
   cron,
   nextSyncDate,
@@ -111,10 +112,10 @@ const SyncContainer = ({
           )}
           <Button
             tabIndex={-1}
-            className="manual-sync-button"
+            className="auto-sync-button"
             size="normal"
             primary
-            // onClick={syncLdap} TODO: add saving logic
+            onClick={saveCronLdap}
             label={t("Common:SaveButton")}
           />
         </>
@@ -140,8 +141,14 @@ const SyncContainer = ({
 export default inject(({ currentQuotaStore, settingsStore, ldapStore }) => {
   const { currentDeviceType, theme } = settingsStore;
   const { isLdapAvailable } = currentQuotaStore;
-  const { isLdapEnabled, syncLdap, onChangeCron, cron, nextSyncDate } =
-    ldapStore;
+  const {
+    isLdapEnabled,
+    syncLdap,
+    saveCronLdap,
+    onChangeCron,
+    cron,
+    nextSyncDate,
+  } = ldapStore;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
@@ -150,6 +157,7 @@ export default inject(({ currentQuotaStore, settingsStore, ldapStore }) => {
     isLdapEnabled,
     isMobileView,
     syncLdap,
+    saveCronLdap,
     onChangeCron,
     cron,
     nextSyncDate,

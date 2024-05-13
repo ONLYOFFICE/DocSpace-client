@@ -4,6 +4,7 @@ import {
   getLdapStatus,
   getLdapDefaultSettings,
   syncLdap,
+  saveCronLdap,
   getCronLdap,
 } from "@docspace/shared/api/settings";
 import { getNextSynchronization } from "@docspace/shared/components/cron";
@@ -267,6 +268,12 @@ class LdapFormStore {
         constants.GET_STATUS_TIMEOUT,
       );
     }
+  };
+
+  saveCronLdap = async () => {
+    const respose = await saveCronLdap(this.cron);
+
+    console.log("Save ldap CRON result", { respose });
   };
 
   save = async () => {

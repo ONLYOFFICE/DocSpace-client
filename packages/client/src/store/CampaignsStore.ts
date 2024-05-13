@@ -45,7 +45,9 @@ class CampaignsStore {
 
   userStore: UserStore = {} as UserStore;
 
-  campaignImage: string | null = null;
+  campaignBackground: string | null = null;
+
+  campaignIcon: string | null = null;
 
   campaignTranslate: string | null = null;
 
@@ -99,6 +101,7 @@ class CampaignsStore {
     }
 
     const image = await getImage(currentCampaign, standalone);
+    const icon = await getImage(currentCampaign, standalone, true);
     const translate = await getTranslation(
       currentCampaign,
       language,
@@ -113,7 +116,8 @@ class CampaignsStore {
 
     runInAction(() => {
       this.currentCampaign = currentCampaign;
-      this.campaignImage = image;
+      this.campaignBackground = image;
+      this.campaignIcon = icon;
       this.campaignTranslate = translate;
       this.campaignConfig = config;
     });

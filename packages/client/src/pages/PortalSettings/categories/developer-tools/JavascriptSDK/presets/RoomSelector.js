@@ -101,6 +101,11 @@ const RoomSelector = (props) => {
       default: true,
     },
     {
+      key: "room-filling-form-collaboration",
+      label: t("CreateEditRoomDialog:FormFilingRoomTitle"),
+      roomType: RoomsType.FormRoom,
+    },
+    {
       key: "room-type-collaboration",
       label: t("CreateEditRoomDialog:CollaborationRoomTitle"),
       roomType: RoomsType.EditingRoom,
@@ -181,13 +186,16 @@ const RoomSelector = (props) => {
   }, 500);
 
   useEffect(() => {
+    loadFrame();
+    return destroyFrame;
+  });
+
+  useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
     if (scroll) {
       scroll.scrollTop = 0;
     }
-    loadFrame();
-    return destroyFrame;
-  });
+  }, []);
 
   const toggleButtonMode = (e) => {
     setSelectedElementType(e.target.value);

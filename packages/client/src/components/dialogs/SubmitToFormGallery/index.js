@@ -134,8 +134,8 @@ const SubmitToFormGallery = ({
     return (
       <FilesSelector
         key="select-file-dialog"
-        filterParam={FilesSelectorFilterTypes.DOCXF}
-        descriptionText={t("Common:SelectDOCXFFormat")}
+        filterParam={FilesSelectorFilterTypes.PDF}
+        descriptionText={t("Common:SelectPDFFormat")}
         isPanelVisible={true}
         onSelectFile={onSelectForm}
         onClose={onCloseFormSelector}

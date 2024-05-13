@@ -10,6 +10,7 @@
   "StorageAndRoomHeader": "Storage and rooms limits are about to be exceeded.",
   "StorageAndUserHeader": "Storage and admins/power users limits are about to be exceeded.",
   "StorageQuotaDescription": "You can remove the unnecessary files or <1>{{clickHere}}</1> to find a more suitable pricing plan for your DocSpace.",
+  "StorageQuotaUserDescription": "You can remove the unnecessary files to free up disk space.",
   "StorageQuotaExceeded": "Storage quota exceeded",
   "StorageQuotaHeader": "Storage space amount is about to be exceeded: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "You can remove the unnecessary files or change quota in the <1>Storage management settings.</1>",

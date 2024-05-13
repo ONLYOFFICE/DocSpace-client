@@ -3161,6 +3161,7 @@ class FilesStore {
         isCustomQuota,
         providerId,
         startFilling,
+        draftLocation,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3333,6 +3334,7 @@ class FilesStore {
         isCustomQuota,
         providerId,
         startFilling,
+        draftLocation,
       };
     });
   };

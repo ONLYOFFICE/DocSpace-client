@@ -87,6 +87,11 @@ const TableRow = (props: TableRowProps) => {
     return contextOptions;
   };
 
+  const changeIndex = (e, action) => {
+    e.stopPropagation();
+    onChangeIndex(action);
+  };
+
   return (
     <StyledTableRow
       onContextMenu={onContextMenu}
@@ -108,14 +113,14 @@ const TableRow = (props: TableRowProps) => {
                 iconName={ArrowReactSvgUrl}
                 className="index-up-icon"
                 size="small"
-                onClick={() => onChangeIndex(VDRIndexingAction.HigherIndex)}
+                onClick={(e) => changeIndex(e, VDRIndexingAction.HigherIndex)}
               />
               <ColorTheme
                 themeId={ThemeId.IndexIconButton}
                 iconName={ArrowReactSvgUrl}
                 className="index-down-icon"
                 size="small"
-                onClick={() => onChangeIndex(VDRIndexingAction.LowerIndex)}
+                onClick={(e) => changeIndex(e, VDRIndexingAction.LowerIndex)}
               />
             </>
           ) : (

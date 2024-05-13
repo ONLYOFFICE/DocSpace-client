@@ -316,6 +316,7 @@ const SectionHeaderContent = (props) => {
     deleteRooms,
     setSelection,
     startUpload,
+    reorder,
   } = props;
 
   const navigate = useNavigate();
@@ -1291,7 +1292,12 @@ const SectionHeaderContent = (props) => {
     isMobileView: currentDeviceType === DeviceType.mobile,
   };
 
-  const tableIndexHeaderProps = { setIsIndexEditingMode, t };
+  const tableIndexHeaderProps = {
+    setIsIndexEditingMode,
+    t,
+    reorder,
+    selectedFolder,
+  };
 
   if (isAccountsPage && !(isGroupsPage && isRoomAdmin)) {
     tableGroupMenuVisible =
@@ -1590,6 +1596,7 @@ export default inject(
       moveToPublicRoom,
       onClickCreateRoom,
       deleteRooms,
+      reorder,
     } = filesActionsStore;
 
     const { oformsFilter } = oformsStore;
@@ -1828,6 +1835,7 @@ export default inject(
       setSelection,
       setShareFolderDialogVisible,
       startUpload,
+      reorder,
     };
   },
 )(

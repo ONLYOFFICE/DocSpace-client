@@ -1403,6 +1403,6 @@ export async function changeIndex(
 export async function reorder(id: number) {
   return request({
     method: "put",
-    url: `api/2.0/files/rooms/${id}/reorder`,
+    url: `/files/rooms/${id}/reorder`,
   });
 }

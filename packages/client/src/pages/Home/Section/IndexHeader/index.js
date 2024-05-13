@@ -102,7 +102,12 @@ const StyledTableIndexMenu = styled.div`
   }
 `;
 
-const TableIndexHeader = ({ setIsIndexEditingMode, t }) => {
+const TableIndexHeader = ({
+  setIsIndexEditingMode,
+  t,
+  reorder,
+  selectedFolder,
+}) => {
   return (
     <StyledTableIndexMenu>
       <div className="table-header_index-container">
@@ -111,7 +116,10 @@ const TableIndexHeader = ({ setIsIndexEditingMode, t }) => {
         </Text>
 
         <div className="table-header_index-separator" />
-        <div className="table-header_reorder-container">
+        <div
+          className="table-header_reorder-container"
+          onClick={() => reorder(selectedFolder?.id)}
+        >
           <IconButton
             className="table-header_reorder-icon"
             size="16"

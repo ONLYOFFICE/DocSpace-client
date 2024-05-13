@@ -2731,6 +2731,7 @@ class FilesActionStore {
     const operationId = uniqueid("operation_");
     const isUpperIndex = action === VDRIndexingAction.HigherIndex;
     const isLowerIndex = action === VDRIndexingAction.LowerIndex;
+
     let replaceable;
     if (isUpperIndex && index !== 0) {
       replaceable = filesList[index - 1];
@@ -2745,9 +2746,10 @@ class FilesActionStore {
     this.updateCurrentFolder(null, [id], true, operationId);
   };
 
-  reorder = async () => {
-    // console.log("reorder");
-    await reorder(item?.id);
+  reorder = async (id) => {
+    const operationId = uniqueid("operation_");
+    await reorder(id);
+    this.updateCurrentFolder(null, [id], true, operationId);
   };
 }
 

@@ -170,8 +170,8 @@ const Login: React.FC<ILoginProps> = ({
   };
 
   const onSocialButtonClick = useCallback(
-    (e: HTMLElementEvent<HTMLButtonElement | HTMLElement>) => {
-      const { target } = e;
+    (e: React.MouseEvent<Element, MouseEvent>) => {
+      const target = e.target as HTMLElement;
       let targetElement = target;
 
       if (

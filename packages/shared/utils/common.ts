@@ -633,7 +633,7 @@ export const getPowerFromBytes = (bytes: number, maxPower = 6) => {
 };
 
 export const getSizeFromBytes = (bytes: number, power: number) => {
-  return parseFloat((bytes / 1024 ** power).toFixed(2));
+  return Math.floor(bytes / 1024 ** power);
 };
 
 export const getConvertedSize = (t: (key: string) => string, bytes: number) => {

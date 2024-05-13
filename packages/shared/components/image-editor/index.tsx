@@ -75,4 +75,4 @@ const ImageEditor = ({
   );
 };
 
-export { ImageEditor, AvatarPreview };
+export { ImageEditor, AvatarPreview, Dropzone };

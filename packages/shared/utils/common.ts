@@ -32,6 +32,7 @@ import find from "lodash/find";
 import moment from "moment-timezone";
 import { isMobile } from "react-device-detect";
 import sjcl from "sjcl";
+import resizeImage from "resize-image";
 
 import LoginPageSvgUrl from "PUBLIC_DIR/images/logo/loginpage.svg?url";
 import DarkLoginPageSvgUrl from "PUBLIC_DIR/images/logo/dark_loginpage.svg?url";
@@ -1068,3 +1069,67 @@ export function getLogoUrl(
 ) {
   return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}`;
 }
+
+
+export const imageProcessing = async (file: File) => {
+  const ONE_MEGABYTE = 1024 * 1024;
+  const COMPRESSION_RATIO = 2;
+  const NO_COMPRESSION_RATIO = 1;
+
+  const imageBitMap = await createImageBitmap(file);
+
+  const width = imageBitMap.width;
+  const height = imageBitMap.height;
+
+  // @ts-expect-error imageBitMap
+  const canvas = resizeImage.resize2Canvas(imageBitMap, width, height);
+
+  async function resizeRecursiveAsync(
+    img: { width: number; height: number },
+    compressionRatio = COMPRESSION_RATIO,
+    depth = 0,
+  ): Promise<unknown> {
+    const data = resizeImage.resize(
+      // @ts-expect-error canvas
+      canvas,
+      img.width / compressionRatio,
+      img.height / compressionRatio,
+      resizeImage.JPEG,
+    );
+
+    const newFile = await fetch(data)
+      .then((res) => res.blob())
+      .then((blob) => {
+        const f = new File([blob], "File name", {
+          type: "image/jpg",
+        });
+        return f;
+      });
+
+    console.log("file", newFile);
+    // const stepMessage = `Step ${depth + 1}`;
+    // const sizeMessage = `size = ${file.size} bytes`;
+    // const compressionRatioMessage = `compressionRatio = ${compressionRatio}`;
+
+    // console.log(`${stepMessage} ${sizeMessage} ${compressionRatioMessage}`);
+
+    if (newFile.size < ONE_MEGABYTE) {
+      return newFile;
+    }
+
+    if (depth > 5) {
+      // console.log("start");
+      throw new Error("recursion depth exceeded");
+    }
+
+    return new Promise((resolve) => {
+      // eslint-disable-next-line no-promise-executor-return
+      return resolve(newFile);
+    }).then(() => resizeRecursiveAsync(img, compressionRatio + 1, depth + 1));
+  }
+
+  return resizeRecursiveAsync(
+    { width, height },
+    file.size > ONE_MEGABYTE ? COMPRESSION_RATIO : NO_COMPRESSION_RATIO,
+  );
+};

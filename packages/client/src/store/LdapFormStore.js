@@ -104,6 +104,13 @@ class LdapFormStore {
       ldapMapping,
       authentication,
       acceptCertificate,
+
+      groupMembership,
+      groupDN,
+      userAttribute,
+      groupFilter,
+      groupAttribute,
+      groupNameAttribute,
     } = data;
 
     const { FirstNameAttribute, SecondNameAttribute, MailAttribute } =
@@ -127,6 +134,13 @@ class LdapFormStore {
     this.authentication = authentication;
     this.acceptCertificate = acceptCertificate;
     this.isSendWelcomeEmail = sendWelcomeEmail;
+
+    this.groupMembership = groupMembership;
+    this.groupDN = groupDN;
+    this.userAttribute = userAttribute;
+    this.groupFilter = groupFilter;
+    this.groupAttribute = groupAttribute;
+    this.groupNameAttribute = groupNameAttribute;
   };
 
   mapCron = (data) => {

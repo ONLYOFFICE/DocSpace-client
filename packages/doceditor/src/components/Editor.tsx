@@ -60,6 +60,7 @@ const Editor = ({
   fileInfo,
   isSharingAccess,
   errorMessage,
+  isSkipError,
 
   onSDKRequestSharingSettings,
   onSDKRequestSaveAs,
@@ -96,6 +97,7 @@ const Editor = ({
     config,
     doc,
     errorMessage,
+    isSkipError,
     t,
   });
 
@@ -278,7 +280,7 @@ const Editor = ({
       id={"docspace_editor"}
       documentServerUrl={documentserverUrl}
       config={
-        errorMessage
+        errorMessage || isSkipError
           ? {
               events: {
                 onAppReady: onSDKAppReady,
@@ -294,4 +296,3 @@ const Editor = ({
 };
 
 export default Editor;
-

@@ -136,12 +136,15 @@ const ViewerInfoWatermark = ({
   const initialInfoRef = initialInfo.current;
 
   useEffect(() => {
-    setWatermarks({
-      rotate: initialInfoRef.rotate.key,
-      text: initialInfoRef.text,
-      enabled: true,
-      additions: initialInfoRef.additions,
-    });
+    setWatermarks(
+      {
+        rotate: initialInfoRef.rotate.key,
+        text: initialInfoRef.text,
+        enabled: true,
+        additions: initialInfoRef.additions,
+      },
+      true,
+    );
   }, []);
 
   const [selectedPosition, setSelectedPosition] = useState(

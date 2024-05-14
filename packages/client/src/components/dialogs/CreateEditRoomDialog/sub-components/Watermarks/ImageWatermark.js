@@ -117,14 +117,17 @@ const ImageWatermark = ({
   const initialInfoRef = initialInfo.current;
 
   useEffect(() => {
-    setWatermarks({
-      rotate: initialInfoRef.rotate.key,
-      imageScale: initialInfoRef.scale.key,
-      imageUrl: initialInfoRef.url,
-      text: "",
-      enabled: true,
-      additions: 0,
-    });
+    setWatermarks(
+      {
+        rotate: initialInfoRef.rotate.key,
+        imageScale: initialInfoRef.scale.key,
+        imageUrl: initialInfoRef.url,
+        text: "",
+        enabled: true,
+        additions: 0,
+      },
+      true,
+    );
   }, []);
 
   const [selectedRotate, setRotate] = useState(initialInfoRef.rotate);

@@ -50,6 +50,7 @@ class CreateEditRoomStore {
   infoPanelStore = null;
   currentQuotaStore = null;
   watermarksSettings = null;
+  isImageType = false;
 
   constructor(
     filesStore,
@@ -103,10 +104,29 @@ class CreateEditRoomStore {
     this.watermarksSettings = watermarksSettings;
   };
 
+  setIsImageWatermarkType = (isImageType, isInit) => {
+    if (isInit) {
+      this.initialIsImageType = isImageType;
+    }
+
+    this.isImageType = isImageType;
+  };
+
   isEqualWatermarkChanges = () => {
+    if (this.isImageType !== this.initialIsImageType) return false;
+
     return isEqual(this.watermarksSettings, this.initialWatermarksSettings);
   };
 
+  isNotWatermarkSet = () => {
+    console.log(!this.isImageType && this.watermarksSettings.additions === 0);
+    if (this.isImageType && !this.watermarksSettings.imageUrl) return true;
+
+    if (!this.isImageType && this.watermarksSettings.additions === 0)
+      return true;
+
+    return false;
+  };
   getWatermarkRequest = async (room) => {
     if (!this.watermarksSettings.image) {
       return setWatermarkSettings(room.id, this.watermarksSettings);

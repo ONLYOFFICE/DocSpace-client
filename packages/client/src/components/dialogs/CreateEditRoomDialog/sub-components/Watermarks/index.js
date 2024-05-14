@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -55,16 +55,26 @@ const getOptionType = (additions, isEdit) => {
 
   return viewerInfoWatermark;
 };
-const Watermarks = ({ isEdit, watermarksSettings }) => {
+const Watermarks = ({
+  isEdit,
+  watermarksSettings,
+  isImageType,
+  setIsImageWatermarkType,
+}) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
   const [type, setType] = useState(
     getOptionType(watermarksSettings?.additions, isEdit),
   );
 
+  useEffect(() => {
+    setIsImageWatermarkType(type === imageWatermark, true);
+  }, []);
+
   const onSelectType = (e) => {
     const { value } = e.target;
 
     setType(value);
+    setIsImageWatermarkType(value === imageWatermark);
   };
 
   const typeOptions = options(t);
@@ -81,15 +91,21 @@ const Watermarks = ({ isEdit, watermarksSettings }) => {
         onClick={onSelectType}
       />
 
-      {type === viewerInfoWatermark && <ViewerInfoWatermark isEdit={isEdit} />}
-      {type === imageWatermark && <ImageWatermark isEdit={isEdit} />}
+      {isImageType ? (
+        <ImageWatermark isEdit={isEdit} />
+      ) : (
+        <ViewerInfoWatermark isEdit={isEdit} />
+      )}
     </StyledBody>
   );
 };
 
 export default inject(({ createEditRoomStore }) => {
-  const { watermarksSettings } = createEditRoomStore;
+  const { watermarksSettings, setIsImageWatermarkType, isImageType } =
+    createEditRoomStore;
   return {
     watermarksSettings,
+    isImageType,
+    setIsImageWatermarkType,
   };
 })(observer(Watermarks));

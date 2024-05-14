@@ -83,6 +83,7 @@ const EditRoomEvent = ({
 
   setWatermarks,
   watermarksSettings,
+  isNotWatermarkSet,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
@@ -193,7 +194,7 @@ const EditRoomEvent = ({
       if (removedTags.length)
         actions.push(removeTagsFromRoom(room.id, removedTags));
 
-      if (watermarksSettings) {
+      if (watermarksSettings && !isNotWatermarkSet()) {
         const request = !watermarksSettings.enabled
           ? deleteWatermarkSettings(room.id)
           : setWatermarkSettings(room.id, watermarksSettings);
@@ -367,7 +368,8 @@ export default inject(
     const { updateInfoPanelSelection } = infoPanelStore;
 
     const { defaultRoomsQuota, isDefaultRoomsQuotaSet } = currentQuotaStore;
-    const { setWatermarks, watermarksSettings } = createEditRoomStore;
+    const { setWatermarks, watermarksSettings, isNotWatermarkSet } =
+      createEditRoomStore;
 
     return {
       defaultRoomsQuota,
@@ -407,6 +409,7 @@ export default inject(
       changeRoomOwner,
       setWatermarks,
       watermarksSettings,
+      isNotWatermarkSet,
     };
   },
 )(observer(EditRoomEvent));

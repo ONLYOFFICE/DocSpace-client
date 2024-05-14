@@ -127,7 +127,7 @@ const ViewerInfoWatermark = ({
       rotate: getInitialRotate(watermarksSettings?.rotate, isEdit, t),
       tabs: getInitialTabs(watermarksSettings?.additions, isEdit, t),
       text: getInitialText(watermarksSettings?.text, isEdit),
-      additions: watermarksSettings?.additions ?? WatermarkAdditions.UserName,
+      additions: watermarksSettings?.additions || WatermarkAdditions.UserName,
     };
 
     elements.current = getInitialState(initialInfo.current.tabs);

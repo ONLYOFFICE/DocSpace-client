@@ -119,8 +119,8 @@ class CreateEditRoomStore {
   };
 
   isNotWatermarkSet = () => {
-    console.log(!this.isImageType && this.watermarksSettings.additions === 0);
-    if (this.isImageType && !this.watermarksSettings.imageUrl) return true;
+    
+    if (this.isImageType && !this.watermarksSettings.image) return true;
 
     if (!this.isImageType && this.watermarksSettings.additions === 0)
       return true;
@@ -226,7 +226,7 @@ class CreateEditRoomStore {
 
       const requests = [];
 
-      if (this.watermarksSettings) {
+      if (this.watermarksSettings && !this.isNotWatermarkSet()) {
         requests.push(this.getWatermarkRequest(room));
       }
       // delete thirdparty account if not needed

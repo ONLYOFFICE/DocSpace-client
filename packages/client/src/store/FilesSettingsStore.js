@@ -64,6 +64,7 @@ class FilesSettingsStore {
   recentSection = null;
   hideConfirmConvertSave = null;
   keepNewFileName = null;
+  openEditorInSameTab = false;
   thumbnails1280x720 = window.DocSpaceConfig?.thumbnails1280x720 || false;
   chunkUploadSize = 1024 * 1023; // 1024 * 1023; //~0.999mb
   chunkUploadCount = 5;
@@ -203,6 +204,10 @@ class FilesSettingsStore {
     api.files
       .changeKeepNewFileName(data)
       .then((res) => this.setFilesSetting("keepNewFileName", res));
+  };
+
+  setOpenEditorInSameTab = (value) => {
+    this.openEditorInSameTab = value;
   };
 
   setEnableThirdParty = async (data, setting) => {

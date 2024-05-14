@@ -72,6 +72,7 @@ const FilterBlock = ({
   isPeopleAccounts,
   isGroupsAccounts,
   isInsideGroup,
+  disableThirdParty,
 }: FilterBlockProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -521,6 +522,7 @@ const FilterBlock = ({
               }}
               isMultiSelect={false}
               withSearch
+              disableThirdParty={disableThirdParty}
             />
           )}
           <StyledControlContainer onClick={hideFilterBlock}>

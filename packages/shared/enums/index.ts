@@ -515,3 +515,8 @@ export const enum EditorConfigErrorType {
   AccessDeniedScope = "System.Security.SecurityException",
   TenantQuotaException = "ASC.Core.Tenants.TenantQuotaException",
 }
+
+export const enum RoomsStorageFilter {
+  internal = 1,
+  thirdparty = 2,
+}

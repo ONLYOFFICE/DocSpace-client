@@ -2655,6 +2655,7 @@ const SectionFilterContent = ({
       isPeopleAccounts={isPeopleAccounts}
       isGroupsAccounts={isGroupsAccounts}
       isInsideGroup={isInsideGroup}
+      disableThirdParty={isTrash}
     />
   );
 };

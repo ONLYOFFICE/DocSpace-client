@@ -868,7 +868,7 @@ const SectionFilterContent = ({
               PaymentsType.Paid === filter.payments?.toString()
                 ? t("Common:Paid")
                 : t("Common:Free"),
-            group: "filter-group",
+            group: "filter-account",
           });
         }
 

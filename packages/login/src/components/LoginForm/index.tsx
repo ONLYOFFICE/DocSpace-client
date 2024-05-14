@@ -333,9 +333,6 @@ const LoginForm = ({
     ldapDomain: "",
   };
 
-  ldapEnabled = true; //TODO: remove
-  ldapDomain = "planetexpress.com"; //TODO: remove
-
   return (
     <form className="auth-form-container">
       <EmailContainer

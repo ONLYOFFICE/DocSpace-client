@@ -216,6 +216,7 @@ export type TLoginSettings = {
 
 export type TCapabilities = {
   ldapEnabled: boolean;
+  ldapDomain: string;
   providers: string[];
   ssoLabel: string;
   oauthEnabled: boolean;

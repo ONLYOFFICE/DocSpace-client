@@ -136,15 +136,15 @@ const ViewerInfoWatermark = ({
   const initialInfoRef = initialInfo.current;
 
   useEffect(() => {
-    setWatermarks(
-      {
-        rotate: initialInfoRef.rotate.key,
-        text: initialInfoRef.text,
-        enabled: true,
-        additions: initialInfoRef.additions,
-      },
-      true,
-    );
+    if (!isEdit)
+      setWatermarks(
+        {
+          rotate: initialInfoRef.rotate.key,
+          text: initialInfoRef.text,
+          additions: initialInfoRef.additions,
+        },
+        true,
+      );
   }, []);
 
   const [selectedPosition, setSelectedPosition] = useState(
@@ -167,20 +167,20 @@ const ViewerInfoWatermark = ({
         flagsCount += WatermarkAdditions[key];
       }
     }
-    setWatermarks({ ...watermarksSettings, additions: flagsCount });
+    setWatermarks({ additions: flagsCount }); 
   };
 
   const onPositionChange = (item) => {
     setSelectedPosition(item);
 
-    setWatermarks({ ...watermarksSettings, rotate: item.key });
+    setWatermarks({ rotate: item.key });
   };
 
   const onTextChange = (e) => {
     const { value } = e.target;
     setTextValue(value);
 
-    setWatermarks({ ...watermarksSettings, text: value });
+    setWatermarks({ text: value });
   };
 
   return (

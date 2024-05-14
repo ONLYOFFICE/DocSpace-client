@@ -7,7 +7,7 @@ import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 
 import FileLifetime from "./FileLifetime";
-import Watermarks from "../sub-components/Watermarks";
+import WatermarkBlock from "./Watermarks/WatermarkBlock";
 
 const StyledVirtualDataRoomBlock = styled.div`
   .virtual-data-room-block {
@@ -68,21 +68,11 @@ const Block = ({
   );
 };
 
-const VirtualDataRoomBlock = ({
-  t,
-  roomParams,
-  setRoomParams,
-  isEdit = false,
-  isWatermarks = false,
-  setWatermarks,
-}) => {
+const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams, isEdit }) => {
   const role = t("Translations:RoleViewer");
 
   const [fileLifetimeChecked, setFileLifetimeChecked] = useState(false);
   const [copyAndDownloadChecked, setCopyAndDownloadChecked] = useState(false);
-  const [watermarksChecked, setWatermarksChecked] = useState(
-    isWatermarks && isEdit,
-  );
 
   const onChangeAutomaticIndexing = () => {
     setRoomParams({ ...roomParams, indexing: !roomParams.indexing });
@@ -94,12 +84,6 @@ const VirtualDataRoomBlock = ({
 
   const onChangeRestrictCopyAndDownload = () => {
     setCopyAndDownloadChecked(!copyAndDownloadChecked);
-  };
-
-  const onChangeAddWatermarksToDocuments = () => {
-    setWatermarksChecked(!watermarksChecked);
-
-    setWatermarks({ enabled: !watermarksChecked });
   };
 
   return (
@@ -132,24 +116,10 @@ const VirtualDataRoomBlock = ({
         isDisabled={false}
         isChecked={copyAndDownloadChecked}
       ></Block>
-      <Block
-        headerText={t("AddWatermarksToDocuments")}
-        bodyText={t("AddWatermarksToDocumentsDescription")}
-        onChange={onChangeAddWatermarksToDocuments}
-        isDisabled={false}
-        isChecked={watermarksChecked}
-      >
-        <Watermarks setRoomParams={setRoomParams} isEdit={isEdit} />
-      </Block>
+
+      <WatermarkBlock BlockComponent={Block} t={t} isEdit={isEdit} />
     </StyledVirtualDataRoomBlock>
   );
 };
 
-export default inject(({ createEditRoomStore }) => {
-  const { watermarksSettings, setWatermarks } = createEditRoomStore;
-
-  return {
-    setWatermarks,
-    isWatermarks: watermarksSettings?.enabled,
-  };
-})(observer(VirtualDataRoomBlock));
+export default VirtualDataRoomBlock;

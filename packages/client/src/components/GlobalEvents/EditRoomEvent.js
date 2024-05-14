@@ -195,9 +195,7 @@ const EditRoomEvent = ({
         actions.push(removeTagsFromRoom(room.id, removedTags));
 
       if (watermarksSettings && !isNotWatermarkSet()) {
-        const request = !watermarksSettings.enabled
-          ? deleteWatermarkSettings(room.id)
-          : setWatermarkSettings(room.id, watermarksSettings);
+        const request = setWatermarkSettings(room.id, watermarksSettings);
 
         actions.push(request);
       }
@@ -300,6 +298,7 @@ const EditRoomEvent = ({
       const [tags, watermarks] = await Promise.all(requests);
 
       setFetchedTags(tags);
+      console.log("watermarks", watermarks);
       setWatermarks(watermarks, true);
 
       setIsInitLoading(false);

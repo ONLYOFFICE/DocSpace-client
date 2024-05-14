@@ -117,17 +117,17 @@ const ImageWatermark = ({
   const initialInfoRef = initialInfo.current;
 
   useEffect(() => {
-    setWatermarks(
-      {
-        rotate: initialInfoRef.rotate.key,
-        imageScale: initialInfoRef.scale.key,
-        imageUrl: initialInfoRef.url,
-        text: "",
-        enabled: true,
-        additions: 0,
-      },
-      true,
-    );
+    if (!isEdit)
+      setWatermarks(
+        {
+          rotate: initialInfoRef.rotate.key,
+          imageScale: initialInfoRef.scale.key,
+          imageUrl: initialInfoRef.url,
+          text: "",
+          additions: 0,
+        },
+        true,
+      );
   }, []);
 
   const [selectedRotate, setRotate] = useState(initialInfoRef.rotate);
@@ -138,8 +138,7 @@ const ImageWatermark = ({
 
     imageProcessing(file)
       .then((f) => {
-        if (f instanceof File)
-          setWatermarks({ ...watermarksSettings, image: f });
+        if (f instanceof File) setWatermarks({ image: f });
       })
       .catch((error) => {
         if (
@@ -153,13 +152,13 @@ const ImageWatermark = ({
   const onScaleChange = (item) => {
     setScale(item);
 
-    setWatermarks({ ...watermarksSettings, imageScale: item.key });
+    setWatermarks({ imageScale: item.key });
   };
 
   const onRotateChange = (item) => {
     setRotate(item);
 
-    setWatermarks({ ...watermarksSettings, rotate: item.key });
+    setWatermarks({ rotate: item.key });
   };
 
   const rotateItems = () => {

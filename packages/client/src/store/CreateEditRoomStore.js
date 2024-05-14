@@ -101,7 +101,10 @@ class CreateEditRoomStore {
       this.initialWatermarksSettings = watermarksSettings;
     }
 
-    this.watermarksSettings = watermarksSettings;
+    this.watermarksSettings = {
+      ...this.watermarksSettings,
+      ...watermarksSettings,
+    };
   };
 
   setIsImageWatermarkType = (isImageType, isInit) => {
@@ -119,7 +122,6 @@ class CreateEditRoomStore {
   };
 
   isNotWatermarkSet = () => {
-    
     if (this.isImageType && !this.watermarksSettings.image) return true;
 
     if (!this.isImageType && this.watermarksSettings.additions === 0)
@@ -226,7 +228,11 @@ class CreateEditRoomStore {
 
       const requests = [];
 
-      if (this.watermarksSettings && !this.isNotWatermarkSet()) {
+      if (
+        this.watermarksSettings &&
+        !this.isNotWatermarkSet() &&
+        this.watermarksSettings.enabled
+      ) {
         requests.push(this.getWatermarkRequest(room));
       }
       // delete thirdparty account if not needed

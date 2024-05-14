@@ -1,8 +1,16 @@
 import React from "react";
+import { P, match } from "ts-pattern";
+
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 
 import EmptyFormRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.dark.svg";
 import EmptyFormRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.light.svg";
+
+import EmptyFormRoomCollaboratorDarkIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.collaborator.dark.svg";
+import EmptyFormRoomCollaboratorLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.collaborator.light.svg";
+
+import EmptyFormRoomFillingDarkIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.filling.dark.svg";
+import EmptyFormRoomFillingLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.filling.light.svg";
 
 import CreateNewFormIcon from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
 import CreateFromFormIcon from "PUBLIC_DIR/images/emptyview/create.from.document.form.svg";
@@ -17,10 +25,12 @@ import type { EmptyViewItemType } from "@docspace/shared/components/empty-view";
 
 import type { OptionActions } from "./EmptyViewContainer.types";
 
+type AccessType = Nullable<ShareAccessRights> | undefined;
+
 export const getDescription = (
   type: RoomsType,
   t: TTranslation,
-  access: Nullable<ShareAccessRights> | undefined,
+  access: AccessType,
 ): string => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
 
@@ -42,7 +52,7 @@ export const getDescription = (
 export const getTitle = (
   type: RoomsType,
   t: TTranslation,
-  access: Nullable<ShareAccessRights> | undefined,
+  access: AccessType,
 ): string => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   switch (type) {
@@ -60,31 +70,44 @@ export const getTitle = (
   }
 };
 
-export const getIcon = (type: RoomsType, isBaseTheme: boolean) => {
-  switch (type) {
-    case RoomsType.FormRoom:
-      return isBaseTheme ? (
-        <EmptyFormRoomLightIcon />
-      ) : (
-        <EmptyFormRoomDarkIcon />
-      );
-    case RoomsType.EditingRoom:
-      return <div />;
-    case RoomsType.PublicRoom:
-      return <div />;
-    case RoomsType.CustomRoom:
-      return <div />;
-    default:
+export const getIcon = (
+  type: RoomsType,
+  isBaseTheme: boolean,
+  access: AccessType,
+): JSX.Element => {
+  return (
+    match([type, access])
+      .with([RoomsType.FormRoom, ShareAccessRights.FormFilling], () =>
+        isBaseTheme ? (
+          <EmptyFormRoomFillingLightIcon />
+        ) : (
+          <EmptyFormRoomFillingDarkIcon />
+        ),
+      )
+      .with([RoomsType.FormRoom, ShareAccessRights.Collaborator], () =>
+        isBaseTheme ? (
+          <EmptyFormRoomCollaboratorLightIcon />
+        ) : (
+          <EmptyFormRoomCollaboratorDarkIcon />
+        ),
+      )
+      .with([RoomsType.FormRoom, P._], () =>
+        isBaseTheme ? <EmptyFormRoomLightIcon /> : <EmptyFormRoomDarkIcon />,
+      )
+
+      .with([RoomsType.EditingRoom, P._], () => <div />)
+      .with([RoomsType.PublicRoom, P._], () => <div />)
+      .with([RoomsType.CustomRoom, P._], () => <div />)
       // eslint-disable-next-line react/jsx-no-useless-fragment
-      return <></>;
-  }
+      .otherwise(() => <></>)
+  );
 };
 
 export const getOptions = (
   type: RoomsType,
   security: Nullable<TFolderSecurity | TRoomSecurity>,
   t: (str: string) => string,
-  access: Nullable<ShareAccessRights> | undefined,
+  access: AccessType,
   actions: OptionActions,
 ): EmptyViewItemType[] => {
   const isFormFiller = access === ShareAccessRights.FormFilling;

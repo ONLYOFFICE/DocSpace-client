@@ -24,16 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
-
 import { toastr } from "@docspace/shared/components/toast";
 
 import { CreateRoomTemplateDialog } from "../dialogs";
-let timerId = null;
 const CreateRoomTemplateEvent = (props) => {
-  const { visible, onClose, item, fetchTags } = props;
+  const { visible, item, fetchTags, setTemplateEventVisible } = props;
 
   const [fetchedTags, setFetchedTags] = useState([]);
 
@@ -43,8 +40,18 @@ const CreateRoomTemplateEvent = (props) => {
   }, []);
 
   useEffect(() => {
+    setTemplateEventVisible(true);
+  });
+
+  useEffect(() => {
     fetchTagsAction();
   }, [fetchTagsAction]);
+
+  const onClose = () => {
+    props.onClose();
+
+    setTemplateEventVisible(false);
+  };
 
   return (
     <CreateRoomTemplateDialog
@@ -57,7 +64,8 @@ const CreateRoomTemplateEvent = (props) => {
   );
 };
 
-export default inject(({ tagsStore }) => {
+export default inject(({ tagsStore, dialogsStore }) => {
   const { fetchTags } = tagsStore;
-  return { fetchTags };
+  const { setTemplateEventVisible } = dialogsStore;
+  return { fetchTags, setTemplateEventVisible };
 })(observer(CreateRoomTemplateEvent));

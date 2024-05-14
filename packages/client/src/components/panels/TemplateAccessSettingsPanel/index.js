@@ -56,10 +56,13 @@ import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 
 const TemplateAccessSettingsPanel = ({
   t,
+  item,
   visible,
   setIsVisible,
   setInfoPanelIsMobileHidden,
   currentDeviceType,
+  onCreateRoomFromTemplate,
+  templateEventVisible,
 }) => {
   const [isAvailable, setIsAvailable] = useState(false);
   const [inviteItems, setInviteItems] = useState([]);
@@ -102,6 +105,13 @@ const TemplateAccessSettingsPanel = ({
 
   const onAvailableChange = () => {
     setIsAvailable(!isAvailable);
+  };
+
+  const onArrowClick = () => {
+    onClose();
+    if (item && !templateEventVisible) {
+      onCreateRoomFromTemplate({ ...item, isEdit: true });
+    }
   };
 
   const onClose = () => {
@@ -188,7 +198,7 @@ const TemplateAccessSettingsPanel = ({
           size={17}
           iconName={ArrowPathReactSvgUrl}
           className="sharing_panel-arrow"
-          onClick={() => console.log("onArrowClick")} //TODO: Templates
+          onClick={onArrowClick}
         />
         <StyledHeading>{t("Files:AccessSettings")}</StyledHeading>
       </StyledBlock>
@@ -279,14 +289,30 @@ const TemplateAccessSettingsPanel = ({
 };
 
 export default inject(
-  ({ settingsStore, peopleStore, dialogsStore, infoPanelStore }) => {
+  ({
+    settingsStore,
+    peopleStore,
+    dialogsStore,
+    infoPanelStore,
+    filesStore,
+    filesActionsStore,
+  }) => {
     const { theme, currentDeviceType } = settingsStore;
-
     const { getUsersByQuery } = peopleStore.usersStore;
     const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
+    const { selection, bufferSelection } = filesStore;
+    const { onCreateRoomFromTemplate } = filesActionsStore;
+    const {
+      templateAccessSettingsVisible,
+      setTemplateAccessSettingsVisible,
+      templateEventVisible,
+    } = dialogsStore;
 
-    const { templateAccessSettingsVisible, setTemplateAccessSettingsVisible } =
-      dialogsStore;
+    const item = selection.length
+      ? selection[0]
+      : bufferSelection
+        ? bufferSelection
+        : null;
 
     return {
       getUsersByQuery,
@@ -295,6 +321,9 @@ export default inject(
       setIsVisible: setTemplateAccessSettingsVisible,
       setInfoPanelIsMobileHidden,
       currentDeviceType,
+      item,
+      onCreateRoomFromTemplate,
+      templateEventVisible,
     };
   },
 )(

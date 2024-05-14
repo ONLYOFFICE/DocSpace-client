@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mobile } from "@docspace/shared/utils";
 
 export const EmptyViewWrapper = styled.div`
   margin-inline: auto;
@@ -33,6 +34,13 @@ export const EmptyViewHeader = styled.div`
     text-align: center;
     text-wrap: balance;
     max-width: 300px;
+  }
+
+  @media ${mobile} {
+    > svg {
+      height: 105px;
+      width: 150px;
+    }
   }
 `;
 

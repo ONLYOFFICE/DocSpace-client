@@ -139,8 +139,9 @@ class LdapFormStore {
       getCronLdap(),
     ]);
 
-    //if (settings.status == "fulfilled") this.mapSettings(settings.value); //TODO: uncomment
-    //if (cron.status == "fulfilled") this.mapCron(cron.value); //TODO: uncomment
+    if (settings.status == "fulfilled") this.mapSettings(settings.value);
+    const cronWithoutSeconds = cron.value.replace("* ", "");
+    if (cron.status == "fulfilled") this.mapCron(cronWithoutSeconds);
 
     /*
     "response": {
@@ -271,7 +272,8 @@ class LdapFormStore {
   };
 
   saveCronLdap = async () => {
-    const respose = await saveCronLdap(this.cron);
+    const cronWithSeconds = `0 ${this.cron}`;
+    const respose = await saveCronLdap(cronWithSeconds);
 
     console.log("Save ldap CRON result", { respose });
   };

@@ -27,7 +27,6 @@
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { Box } from "@docspace/shared/components/box";
-import { TextInput } from "@docspace/shared/components/text-input";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -35,7 +34,6 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { ColorInput } from "@docspace/shared/components/color-input";
 import { objectToGetParams } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
@@ -60,6 +58,7 @@ import { CodeToInsert } from "../sub-components/CodeToInsert";
 import { GetCodeBlock } from "../sub-components/GetCodeBlock";
 import { SelectTextInput } from "../sub-components/SelectTextInput";
 import { CancelTextInput } from "../sub-components/CancelTextInput";
+import { MainElementParameter } from "../sub-components/MainElementParameter";
 
 import { loadFrame } from "../utils";
 
@@ -81,7 +80,6 @@ import {
   ControlsSection,
   Frame,
   Container,
-  RowContainer,
   Preview,
   FilesSelectorInputWrapper,
 } from "./StyledPresets";
@@ -90,19 +88,6 @@ const FileSelector = (props) => {
   const { t, setDocumentTitle, fetchExternalLinks, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
-
-  const elementDisplayOptions = [
-    { value: "element", label: t("ElementItself") },
-    {
-      value: "button",
-      label: (
-        <RowContainer>
-          {t("Common:Button")}
-          <Text color="gray">{`(${t("ElementCalledAfterClicking")})`}</Text>
-        </RowContainer>
-      ),
-    },
-  ];
 
   const fileTypeDisplay = [
     { value: FilesSelectorFilterTypes.ALL, label: t("AllTypes") },
@@ -157,9 +142,6 @@ const FileSelector = (props) => {
     window.innerWidth > showPreviewThreshold,
   );
   const [sharedLinks, setSharedLinks] = useState(null);
-  const [selectedElementType, setSelectedElementType] = useState(
-    elementDisplayOptions[1].value,
-  );
   const [typeDisplay, setTypeDisplay] = useState(fileTypeDisplay[0].value);
   const [selectedType, setSelectedType] = useState(fileOptions[0]);
 
@@ -176,7 +158,7 @@ const FileSelector = (props) => {
     cancelButtonLabel: t("Common:CancelButton"),
     withSubtitle: true,
     filterParam: FilesSelectorFilterTypes.ALL,
-    isButtonMode: selectedElementType === "button",
+    isButtonMode: true,
     buttonWithLogo: true,
     events: {
       onSelectCallback: (items) => {
@@ -212,14 +194,6 @@ const FileSelector = (props) => {
       scroll.scrollTop = 0;
     }
   }, []);
-
-  const toggleButtonMode = (e) => {
-    setSelectedElementType(e.target.value);
-    setConfig((config) => ({
-      ...config,
-      isButtonMode: e.target.value === "button",
-    }));
-  };
 
   const onChangeFolderId = async (id, publicInPath) => {
     let newConfig = { id, requestToken: null, rootPath: "/rooms/shared/" };
@@ -292,10 +266,6 @@ const FileSelector = (props) => {
       setShowPreview(isEnoughWidthForPreview);
   };
 
-  const setButtonColor = (color) => {
-    setConfig((config) => ({ ...config, buttonColor: color }));
-  };
-
   useEffect(() => {
     window.addEventListener("resize", onResize);
     return () => {
@@ -344,58 +314,12 @@ const FileSelector = (props) => {
           </Preview>
         )}
         <Controls>
-          <ControlsSection>
-            <CategorySubHeader>{t("MainElementParameter")}</CategorySubHeader>
-            <RadioButtonGroup
-              orientation="vertical"
-              options={elementDisplayOptions}
-              name="elementDisplayInput"
-              selected={selectedElementType}
-              onClick={toggleButtonMode}
-              spacing="8px"
-            />
-            {config.isButtonMode && (
-              <>
-                <CategorySubHeader>
-                  {t("ButtonCustomization")}
-                </CategorySubHeader>
-                <ControlsGroup>
-                  <Label className="label" text={t("ButtonColor")} />
-                  <ColorInput
-                    scale
-                    handleChange={setButtonColor}
-                    defaultColor={"#5299E0"}
-                  />
-                </ControlsGroup>
-                <ControlsGroup>
-                  <Label className="label" text={t("ButtonText")} />
-                  <TextInput
-                    scale
-                    onChange={(e) => {
-                      setConfig((config) => ({
-                        ...config,
-                        buttonText: e.target.value,
-                      }));
-                    }}
-                    placeholder={t("SelectToDocSpace")}
-                    value={config.buttonText}
-                    tabIndex={3}
-                  />
-                  <Checkbox
-                    className="checkbox"
-                    label={t("Logo")}
-                    onChange={() => {
-                      setConfig((config) => ({
-                        ...config,
-                        buttonWithLogo: !config.buttonWithLogo,
-                      }));
-                    }}
-                    isChecked={config.buttonWithLogo}
-                  />
-                </ControlsGroup>
-              </>
-            )}
-          </ControlsSection>
+          <MainElementParameter
+            t={t}
+            config={config}
+            setConfig={setConfig}
+            isButtonMode
+          />
 
           <ControlsSection>
             <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>

@@ -28,14 +28,10 @@ import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import debounce from "lodash.debounce";
 import { Box } from "@docspace/shared/components/box";
-import { TextInput } from "@docspace/shared/components/text-input";
 import { Label } from "@docspace/shared/components/label";
-import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { TabsContainer } from "@docspace/shared/components/tabs-container";
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { ColorInput } from "@docspace/shared/components/color-input";
 import { objectToGetParams } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
@@ -51,6 +47,7 @@ import { CodeToInsert } from "../sub-components/CodeToInsert";
 import { GetCodeBlock } from "../sub-components/GetCodeBlock";
 import { SelectTextInput } from "../sub-components/SelectTextInput";
 import { CancelTextInput } from "../sub-components/CancelTextInput";
+import { MainElementParameter } from "../sub-components/MainElementParameter";
 
 import { loadFrame } from "../utils";
 
@@ -67,11 +64,9 @@ import {
 import {
   Controls,
   CategorySubHeader,
-  ControlsGroup,
   ControlsSection,
   Frame,
   Container,
-  RowContainer,
   Preview,
 } from "./StyledPresets";
 
@@ -79,19 +74,6 @@ const RoomSelector = (props) => {
   const { t, setDocumentTitle, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
-
-  const elementDisplayOptions = [
-    { value: "element", label: t("ElementItself") },
-    {
-      value: "button",
-      label: (
-        <RowContainer>
-          {t("Common:Button")}
-          <Text color="gray">{`(${t("ElementCalledAfterClicking")})`}</Text>
-        </RowContainer>
-      ),
-    },
-  ];
 
   const roomTypeOptions = [
     {
@@ -124,9 +106,6 @@ const RoomSelector = (props) => {
 
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold,
-  );
-  const [selectedElementType, setSelectedElementType] = useState(
-    elementDisplayOptions[0].value,
   );
   const [roomType, setRoomType] = useState(roomTypeOptions[0]);
 
@@ -180,14 +159,6 @@ const RoomSelector = (props) => {
     }
   }, []);
 
-  const toggleButtonMode = (e) => {
-    setSelectedElementType(e.target.value);
-    setConfig((config) => ({
-      ...config,
-      isButtonMode: e.target.value === "button",
-    }));
-  };
-
   const changeRoomType = (option) => {
     setRoomType(option);
     setConfig((config) => ({ ...config, roomType: option.roomType }));
@@ -201,10 +172,6 @@ const RoomSelector = (props) => {
     const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
     if (isEnoughWidthForPreview !== showPreview)
       setShowPreview(isEnoughWidthForPreview);
-  };
-
-  const setButtonColor = (color) => {
-    setConfig((config) => ({ ...config, buttonColor: color }));
   };
 
   useEffect(() => {
@@ -263,58 +230,7 @@ const RoomSelector = (props) => {
           </Preview>
         )}
         <Controls>
-          <ControlsSection>
-            <CategorySubHeader>{t("MainElementParameter")}</CategorySubHeader>
-            <RadioButtonGroup
-              orientation="vertical"
-              options={elementDisplayOptions}
-              name="elementDisplayInput"
-              selected={selectedElementType}
-              onClick={toggleButtonMode}
-              spacing="8px"
-            />
-            {config.isButtonMode && (
-              <>
-                <CategorySubHeader>
-                  {t("ButtonCustomization")}
-                </CategorySubHeader>
-                <ControlsGroup>
-                  <Label className="label" text={t("ButtonColor")} />
-                  <ColorInput
-                    scale
-                    handleChange={setButtonColor}
-                    defaultColor={"#5299E0"}
-                  />
-                </ControlsGroup>
-                <ControlsGroup>
-                  <Label className="label" text={t("ButtonText")} />
-                  <TextInput
-                    scale
-                    onChange={(e) => {
-                      setConfig((config) => ({
-                        ...config,
-                        buttonText: e.target.value,
-                      }));
-                    }}
-                    placeholder={t("SelectToDocSpace")}
-                    value={config.buttonText}
-                    tabIndex={3}
-                  />
-                  <Checkbox
-                    className="checkbox"
-                    label={t("Logo")}
-                    onChange={() => {
-                      setConfig((config) => ({
-                        ...config,
-                        buttonWithLogo: !config.buttonWithLogo,
-                      }));
-                    }}
-                    isChecked={config.buttonWithLogo}
-                  />
-                </ControlsGroup>
-              </>
-            )}
-          </ControlsSection>
+          <MainElementParameter t={t} config={config} setConfig={setConfig}/>
 
           <ControlsSection>
             <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
@@ -358,7 +274,7 @@ const RoomSelector = (props) => {
             <ComboBox
               onSelect={changeRoomType}
               options={roomTypeOptions}
-              scaled={true}
+              scaled
               selectedOption={roomType}
               displaySelectedOption
               directionY="top"

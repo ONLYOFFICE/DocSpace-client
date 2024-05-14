@@ -318,7 +318,7 @@ const FileSelector = (props) => {
             t={t}
             config={config}
             setConfig={setConfig}
-            isButtonMode
+            isButtonMode={config.isButtonMode}
           />
 
           <ControlsSection>

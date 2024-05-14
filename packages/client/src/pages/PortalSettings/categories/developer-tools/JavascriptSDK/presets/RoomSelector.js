@@ -230,7 +230,12 @@ const RoomSelector = (props) => {
           </Preview>
         )}
         <Controls>
-          <MainElementParameter t={t} config={config} setConfig={setConfig}/>
+          <MainElementParameter
+            t={t}
+            config={config}
+            setConfig={setConfig}
+            isButtonMode={config.isButtonMode}
+          />
 
           <ControlsSection>
             <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>

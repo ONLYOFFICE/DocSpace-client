@@ -36,7 +36,7 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { ColorInput } from "@docspace/shared/components/color-input";
-import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
+import { objectToGetParams } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
 import { RoomsType } from "@docspace/shared/enums";
@@ -49,6 +49,8 @@ import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { CodeToInsert } from "../sub-components/CodeToInsert";
 import { GetCodeBlock } from "../sub-components/GetCodeBlock";
+import { SelectTextInput } from "../sub-components/SelectTextInput";
+import { CancelTextInput } from "../sub-components/CancelTextInput";
 
 import { loadFrame } from "../utils";
 
@@ -193,18 +195,6 @@ const RoomSelector = (props) => {
 
   const toggleWithSearch = () => {
     setConfig((config) => ({ ...config, withSearch: !config.withSearch }));
-  };
-
-  const onChangeAcceptLabel = (e) => {
-    setConfig((config) => {
-      return { ...config, acceptButtonLabel: e.target.value };
-    });
-  };
-
-  const onChangeCancelLabel = (e) => {
-    setConfig((config) => {
-      return { ...config, cancelButtonLabel: e.target.value };
-    });
   };
 
   const onResize = () => {
@@ -357,22 +347,8 @@ const RoomSelector = (props) => {
               onChange={toggleWithSearch}
               isChecked={config.withSearch}
             />
-            <Label className="label" text={t("SelectButtonText")} />
-            <TextInput
-              scale={true}
-              onChange={onChangeAcceptLabel}
-              placeholder={t("Common:SelectAction")}
-              value={config.acceptButtonLabel}
-              tabIndex={7}
-            />
-            <Label className="label" text={t("CancelButtonText")} />
-            <TextInput
-              scale={true}
-              onChange={onChangeCancelLabel}
-              placeholder={t("Common:CancelButton")}
-              value={config.cancelButtonLabel}
-              tabIndex={8}
-            />
+            <SelectTextInput t={t} config={config} setConfig={setConfig} />
+            <CancelTextInput t={t} config={config} setConfig={setConfig} />
           </ControlsSection>
 
           <ControlsSection>

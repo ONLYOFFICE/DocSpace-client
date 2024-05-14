@@ -26,20 +26,14 @@
 
 import styled, { css } from "styled-components";
 import { Heading } from "@docspace/shared/components/heading";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { ComboBox } from "@docspace/shared/components/combobox";
 import { Box } from "@docspace/shared/components/box";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { Text } from "@docspace/shared/components/text";
-import { Button } from "@docspace/shared/components/button";
-import { HelpButton } from "@docspace/shared/components/help-button";
 import { Link } from "@docspace/shared/components/link";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { mobile, commonIconsStyles } from "@docspace/shared/utils";
-import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import CrossIconMobile from "PUBLIC_DIR/images/cross.react.svg";
-import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
 import { isMobile, desktop, commonInputStyles } from "@docspace/shared/utils";
 import Base from "@docspace/shared/themes/base";
 
@@ -210,6 +204,17 @@ const StyledRow = styled.div`
   .combo-buttons_expander-icon path {
     fill: ${(props) => props.theme.text.disableColor};
   }
+
+  .remove-icon {
+    cursor: pointer;
+    margin-inline-start: auto;
+
+    svg {
+      path {
+        fill: ${(props) => props.theme.text.disableColor};
+      }
+    }
+  }
 `;
 
 const StyledInviteInput = styled.div`
@@ -264,21 +269,6 @@ const StyledInviteInput = styled.div`
   :focus-within {
     border-color: ${(props) => props.theme.inputBlock.borderColor};
   }
-`;
-
-const StyledAccessSelector = styled.div`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: 16px;
-        `
-      : css`
-          margin-right: 16px;
-        `}
-`;
-
-const StyledEditInput = styled(TextInput)`
-  width: 100%;
 `;
 
 const StyledInviteInputContainer = styled.div`
@@ -350,12 +340,6 @@ const SearchItemText = styled(Text)`
 
 SearchItemText.defaultProps = { theme: Base };
 
-const StyledEditButton = styled(Button)`
-  width: 32px;
-  height: 32px;
-  padding: 0px;
-`;
-
 const iconStyles = css`
   ${commonIconsStyles}
   path {
@@ -366,36 +350,11 @@ const iconStyles = css`
   }
 `;
 
-const StyledCheckIcon = styled(CheckIcon)`
-  ${iconStyles}
-`;
-
-StyledCheckIcon.defaultProps = { theme: Base };
-
 const StyledCrossIcon = styled(CrossIcon)`
   ${iconStyles}
 `;
 
 StyledCrossIcon.defaultProps = { theme: Base };
-
-const StyledDeleteIcon = styled(DeleteIcon)`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: auto;
-        `
-      : css`
-          margin-left: auto;
-        `}
-
-  ${iconStyles}
-`;
-
-StyledDeleteIcon.defaultProps = { theme: Base };
-
-const StyledHelpButton = styled(HelpButton)`
-  margin-inline-start: 8px;
-`;
 
 const StyledButtons = styled(Box)`
   padding: 16px;
@@ -413,17 +372,6 @@ const StyledButtons = styled(Box)`
 const StyledLink = styled(Link)`
   float: ${({ theme }) =>
     theme.interfaceDirection === "rtl" ? `left` : `right`};
-`;
-
-const ResetLink = styled(Link)`
-  float: ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? `right` : `left`};
-  padding: 0 16px;
-  margin-bottom: 16px;
-  font-size: 13px;
-  color: ${(props) => props.theme.createEditRoomDialog.commonParam.textColor};
-  font-style: normal;
-  line-height: 15px;
 `;
 
 StyledButtons.defaultProps = { theme: Base };
@@ -459,60 +407,7 @@ const StyledControlContainer = styled.div`
     left: unset;
   }
 `;
-const StyledInviteLanguage = styled.div`
-  padding-left: 16px;
-  padding-right: 16px;
-  margin-top: -12px;
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  height: 28px;
-  color: ${(props) =>
-    props.theme.createEditRoomDialog.commonParam.descriptionColor};
-  margin-bottom: 4px;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 20px;
-  .list-link {
-    margin-left: 4px;
-    color: ${(props) => props.theme.createEditRoomDialog.commonParam.textColor};
-  }
 
-  .invitation-language {
-    color: ${(props) =>
-      props.theme.createEditRoomDialog.commonParam.descriptionColor};
-  }
-  .language-combo-box {
-    .combo-button {
-      padding-left: 6px;
-      padding-right: 6px;
-    }
-
-    .combo-buttons_arrow-icon {
-      margin-left: 0px;
-    }
-
-    .combo-button_closed:not(:hover) .combo-button-label {
-      color: ${(props) =>
-        props.theme.createEditRoomDialog.commonParam.descriptionColor};
-    }
-    .combo-button_closed:not(:hover) .combo-buttons_arrow-icon {
-      svg {
-        path {
-          fill: ${(props) =>
-            props.theme.createEditRoomDialog.commonParam.descriptionColor};
-        }
-      }
-    }
-  }
-
-  .language-combo-box-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-  }
-`;
 const StyledCrossIconMobile = styled(CrossIconMobile)`
   width: 17px;
   height: 17px;
@@ -520,6 +415,32 @@ const StyledCrossIconMobile = styled(CrossIconMobile)`
   path {
     fill: ${(props) => props.theme.catalog.control.fill};
   }
+`;
+
+const StyledBody = styled.div`
+  display: contents;
+
+  ${({ isDisabled, theme }) =>
+    isDisabled
+      ? css`
+          .invite-input-text {
+            pointer-events: none;
+            cursor: default;
+            color: ${theme.text.disableColor};
+          }
+          .invite-input-avatar {
+            opacity: 0.5;
+          }
+
+          .invite-input {
+            box-shadow: unset !important;
+          }
+        `
+      : css`
+          .invite-input-text {
+            color: ${theme.text.color};
+          }
+        `};
 `;
 
 StyledCrossIcon.defaultProps = { theme: Base };
@@ -533,21 +454,14 @@ export {
   StyledInviteInputContainer,
   StyledDropDown,
   SearchItemText,
-  StyledEditInput,
-  StyledEditButton,
-  StyledCheckIcon,
   StyledCrossIcon,
-  StyledHelpButton,
-  StyledDeleteIcon,
   StyledButtons,
   StyledLink,
-  ResetLink,
   ScrollList,
-  StyledAccessSelector,
   StyledToggleButton,
   StyledDescription,
-  StyledInviteLanguage,
   StyledControlContainer,
   StyledCrossIconMobile,
   StyledInviteUserBody,
+  StyledBody,
 };

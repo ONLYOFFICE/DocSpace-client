@@ -48,7 +48,7 @@ import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 import AddUsersPanel from "../../AddUsersPanel";
-import { getTopFreeRole } from "../utils";
+import { getAccessOptions, getTopFreeRole } from "../utils";
 
 import {
   StyledSubHeader,
@@ -60,13 +60,14 @@ import {
   StyledDescription,
   StyledCrossIcon,
 } from "../StyledInvitePanel";
+import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 
 const minSearchValue = 1;
 const PEOPLE_TAB_ID = "0";
 
 const InviteInput = ({
   t,
-  roomId = 254, //TODO: Templates
+  roomId = 281, //TODO: Templates
   onClose,
   roomType,
   inviteItems,
@@ -74,9 +75,12 @@ const InviteInput = ({
   addUsersPanelVisible,
   setAddUsersPanelVisible,
   isMobileView,
+  isOwner,
+  standalone,
+  isDisabled,
 }) => {
   const [inputValue, setInputValue] = useState("");
-  const [selectedTab, setSelectedTab] = useState("");
+  const [selectedTab, setSelectedTab] = useState(PEOPLE_TAB_ID);
   const [usersList, setUsersList] = useState([]);
   const [isAddEmailPanelBlocked, setIsAddEmailPanelBlocked] = useState(true);
   const [dropDownWidth, setDropDownWidth] = useState(0);
@@ -267,13 +271,22 @@ const InviteInput = ({
   const filter = new Filter();
   filter.role = [EmployeeType.Admin, EmployeeType.User]; // 1(EmployeeType.User) - RoomAdmin | 3(EmployeeType.Admin) - DocSpaceAdmin
 
+  const accessOptions = getAccessOptions(
+    t,
+    roomType,
+    false,
+    true,
+    isOwner,
+    standalone,
+  );
+
   return (
     <>
-      <StyledSubHeader>
+      <StyledSubHeader className="invite-input-text">
         {t("Files:AddUsersOrGroups")}
 
         <StyledLink
-          className="link-list"
+          className="link-list invite-input-text"
           fontWeight="600"
           type="action"
           isHovered
@@ -301,6 +314,7 @@ const InviteInput = ({
             isAutoFocussed={true}
             type="search"
             withBorder={false}
+            isDisabled={isDisabled}
           />
 
           <div className="append" onClick={onClearInput}>
@@ -331,6 +345,7 @@ const InviteInput = ({
             onClose={closeUsersPanel}
             visible={addUsersPanelVisible}
             tempDataItems={inviteItems}
+            accessOptions={accessOptions}
             setDataItems={addItems}
             isMultiSelect
             withoutBackground={isMobileView}
@@ -349,6 +364,7 @@ const InviteInput = ({
             filter={filter}
             setActiveTabId={getSelectedTab}
             isUsersList
+            defaultAccess={getDefaultAccessUser(roomType)}
           />
         )}
       </StyledInviteInputContainer>

@@ -24,50 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import InfoEditReactSvgUrl from "PUBLIC_DIR/images/info.edit.react.svg?url";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
-import AlertSvgUrl from "PUBLIC_DIR/images/icons/12/alert.react.svg?url";
-import { useState, useEffect } from "react";
+import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
+import { ReactSVG } from "react-svg";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
-
-import { parseAddresses } from "@docspace/shared/utils";
-import { getAccessOptions } from "../utils";
 import { getUserTypeLabel } from "@docspace/shared/utils/common";
+import { StyledInviteUserBody } from "../StyledInvitePanel";
 
-import {
-  StyledEditInput,
-  StyledEditButton,
-  StyledCheckIcon,
-  StyledCrossIcon,
-  StyledHelpButton,
-  StyledDeleteIcon,
-  StyledInviteUserBody,
-} from "../StyledInvitePanel";
-import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
-
-const Item = ({
-  t,
-  item,
-  setInviteItems,
-  inviteItems,
-  changeInviteItem,
-  setHasErrors,
-  roomType,
-  isOwner,
-  standalone,
-}) => {
-  const {
-    avatar,
-    displayName,
-    email,
-    id,
-    errors,
-    access,
-    isGroup,
-    name: groupName,
-    warning,
-  } = item;
+const Item = ({ t, item, setInviteItems, inviteItems, isDisabled }) => {
+  const { avatar, displayName, email, id, isGroup, name: groupName } = item;
 
   const name = isGroup
     ? groupName
@@ -78,30 +44,6 @@ const Item = ({
       : email;
   const source = !!avatar ? avatar : isGroup ? "" : AtReactSvgUrl;
 
-  const [edit, setEdit] = useState(false);
-  const [inputValue, setInputValue] = useState(name);
-  const [parseErrors, setParseErrors] = useState(errors);
-
-  console.log("roomType", roomType);
-
-  const accesses = getAccessOptions(
-    t,
-    roomType,
-    true,
-    true,
-    isOwner,
-    standalone,
-  );
-
-  const filteredAccesses = item.isGroup
-    ? filterGroupRoleOptions(accesses)
-    : filterUserRoleOptions(accesses, item, true);
-
-  console.log("filteredAccesses", filteredAccesses);
-
-  const defaultAccess = filteredAccesses.find(
-    (option) => option.access === +access,
-  );
   const getUserType = (item) => {
     if (item.isOwner) return "owner";
     if (item.isAdmin) return "admin";
@@ -111,86 +53,29 @@ const Item = ({
   };
 
   const type = getUserType(item);
-
-  const typeLabel = item?.isEmailInvite
-    ? getUserTypeLabel(defaultAccess.type, t)
-    : (type === "user" && defaultAccess?.type !== type) ||
-        (defaultAccess?.type === "manager" && type !== "admin")
-      ? getUserTypeLabel(defaultAccess.type, t)
-      : getUserTypeLabel(type, t);
-
-  const errorsInList = () => {
-    const hasErrors = inviteItems.some((item) => !!item.errors?.length);
-    setHasErrors(hasErrors);
-  };
-
-  const onEdit = (e) => {
-    if (e.detail === 2) {
-      setEdit(true);
-    }
-  };
-
-  const cancelEdit = (e) => {
-    setInputValue(name);
-    setEdit(false);
-  };
-
-  const saveEdit = (e) => {
-    const value = inputValue === "" ? name : inputValue;
-
-    setEdit(false);
-    validateValue(value);
-  };
-
-  const onKeyPress = (e) => {
-    if (edit) {
-      if (e.key === "Enter") {
-        saveEdit();
-      }
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyPress);
-    return () => document.removeEventListener("keyup", onKeyPress);
-  });
-
-  const validateValue = (value) => {
-    const email = parseAddresses(value);
-    const parseErrors = email[0].parseErrors;
-    const errors = !!parseErrors.length ? parseErrors : [];
-
-    setParseErrors(errors);
-    changeInviteItem({ id, email: value, errors }).then(() => errorsInList());
-  };
-
-  const changeValue = (e) => {
-    const value = e.target.value.trim();
-
-    setInputValue(value);
-  };
-
-  const hasError = parseErrors && !!parseErrors.length;
+  const typeLabel = getUserTypeLabel(type, t);
 
   const removeItem = () => {
     const newItems = inviteItems.filter((item) => item.id !== id);
-
     setInviteItems(newItems);
   };
 
-  const selectItemAccess = (selected) => {
-    if (selected.key === "remove") return removeItem();
+  // const canDelete = !isOwner; //TODO: Templates
+  const canDelete = isDisabled ? false : true; //TODO: Templates
 
-    changeInviteItem({ id, access: selected.access });
-  };
-
-  const textProps = !!avatar || isGroup ? {} : { onClick: onEdit };
-
-  const displayBody = (
+  return (
     <>
+      <Avatar
+        size="min"
+        role={type}
+        source={source}
+        isGroup={isGroup}
+        userName={groupName}
+        className="invite-input-avatar"
+      />
       <StyledInviteUserBody>
-        <Text {...textProps} truncate noSelect>
-          {inputValue}
+        <Text truncate noSelect className="invite-input-text">
+          {name}
         </Text>
 
         {!isGroup && (
@@ -206,60 +91,13 @@ const Item = ({
           </Text>
         )}
       </StyledInviteUserBody>
-
-      {hasError ? (
-        <>
-          <StyledHelpButton
-            iconName={InfoEditReactSvgUrl}
-            displayType="auto"
-            offsetRight={0}
-            tooltipContent={t("EmailErrorMessage")}
-            openOnClick={false}
-            size={16}
-            color="#F21C0E"
-          />
-          <StyledDeleteIcon
-            className="delete-icon"
-            size="medium"
-            onClick={removeItem}
-          />
-        </>
-      ) : (
-        <>
-          {warning && (
-            <div className="warning">
-              <StyledHelpButton
-                tooltipContent={warning}
-                iconName={AlertSvgUrl}
-              />
-            </div>
-          )}
-        </>
+      {canDelete && (
+        <ReactSVG
+          className="remove-icon"
+          src={RemoveReactSvgUrl}
+          onClick={removeItem}
+        />
       )}
-    </>
-  );
-
-  const okIcon = <StyledCheckIcon size="scale" />;
-  const cancelIcon = <StyledCrossIcon size="scale" />;
-
-  const editBody = (
-    <>
-      <StyledEditInput value={inputValue} onChange={changeValue} />
-      <StyledEditButton icon={okIcon} onClick={saveEdit} />
-      <StyledEditButton icon={cancelIcon} onClick={cancelEdit} />
-    </>
-  );
-
-  return (
-    <>
-      <Avatar
-        size="min"
-        role={type}
-        source={source}
-        isGroup={isGroup}
-        userName={groupName}
-      />
-      {edit ? editBody : displayBody}
     </>
   );
 };

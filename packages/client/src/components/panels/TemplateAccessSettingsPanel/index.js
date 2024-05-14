@@ -45,6 +45,7 @@ import {
   StyledSubHeader,
   StyledToggleButton,
   StyledDescription,
+  StyledBody,
 } from "./StyledInvitePanel";
 
 import ItemsList from "./sub-components/ItemsList";
@@ -68,8 +69,6 @@ const TemplateAccessSettingsPanel = ({
   const [scrollAllPanelContent, setScrollAllPanelContent] = useState(false);
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
   const [isMobileView, setIsMobileView] = useState(isMobile());
-
-  const invitePanelBodyRef = useRef();
 
   const zIndex = 311;
 
@@ -139,29 +138,31 @@ const TemplateAccessSettingsPanel = ({
             {t("Files:TemplateAvailableDescription")}
           </StyledDescription>
         </StyledBlock>
-        <InviteInput
-          t={t}
-          onClose={onClose}
-          inviteItems={inviteItems}
-          setInviteItems={setInviteItems}
-          roomType={roomType}
-          addUsersPanelVisible={addUsersPanelVisible}
-          setAddUsersPanelVisible={setAddUsersPanelVisible}
-          isMobileView={isMobileView}
-        />
-        <StyledSubHeader>{t("Files:AccessToTemplate")}</StyledSubHeader>
-        {hasInvitedUsers && (
-          <ItemsList
+        <StyledBody isDisabled={isAvailable}>
+          <InviteInput
             t={t}
+            onClose={onClose}
             inviteItems={inviteItems}
             setInviteItems={setInviteItems}
-            setHasErrors={setHasErrors}
             roomType={roomType}
-            scrollAllPanelContent={scrollAllPanelContent}
-            invitePanelBodyRef={invitePanelBodyRef}
+            addUsersPanelVisible={addUsersPanelVisible}
+            setAddUsersPanelVisible={setAddUsersPanelVisible}
             isMobileView={isMobileView}
+            isDisabled={isAvailable}
           />
-        )}
+          <StyledSubHeader className="invite-input-text">
+            {t("Files:AccessToTemplate")}
+          </StyledSubHeader>
+          {hasInvitedUsers && (
+            <ItemsList
+              t={t}
+              inviteItems={inviteItems}
+              setInviteItems={setInviteItems}
+              scrollAllPanelContent={scrollAllPanelContent}
+              isDisabled={isAvailable}
+            />
+          )}
+        </StyledBody>
       </>
     );
   }, [
@@ -171,7 +172,6 @@ const TemplateAccessSettingsPanel = ({
     setHasErrors,
     scrollAllPanelContent,
     hasInvitedUsers,
-    invitePanelBodyRef,
   ]);
 
   const invitePanelNode = (
@@ -195,7 +195,7 @@ const TemplateAccessSettingsPanel = ({
       {
         <>
           {scrollAllPanelContent ? (
-            <div className="invite-panel-body" ref={invitePanelBodyRef}>
+            <div className="invite-panel-body">
               <Scrollbar>{bodyInvitePanel}</Scrollbar>
             </div>
           ) : (

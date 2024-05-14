@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect, useRef, memo, useCallback } from "react";
-import { inject, observer } from "mobx-react";
+import { useState, useEffect, useRef, memo, useCallback } from "react";
 import { FixedSizeList as List } from "react-window";
 import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
 import useResizeObserver from "use-resize-observer";
@@ -38,18 +37,7 @@ const FOOTER_HEIGHT = 73;
 const USER_ITEM_HEIGHT = 48;
 
 const Row = memo(({ data, index, style }) => {
-  const {
-    inviteItems,
-    setInviteItems,
-    changeInviteItem,
-    t,
-    setHasErrors,
-    roomType,
-    isOwner,
-    setIsOpenItemAccess,
-    isMobileView,
-    standalone,
-  } = data;
+  const { inviteItems, setInviteItems, t, isDisabled } = data;
 
   if (inviteItems === undefined) return;
 
@@ -66,14 +54,8 @@ const Row = memo(({ data, index, style }) => {
         t={t}
         item={item}
         setInviteItems={setInviteItems}
-        changeInviteItem={changeInviteItem}
         inviteItems={inviteItems}
-        setHasErrors={setHasErrors}
-        roomType={roomType}
-        isOwner={isOwner}
-        setIsOpenItemAccess={setIsOpenItemAccess}
-        isMobileView={isMobileView}
-        standalone={standalone}
+        isDisabled={isDisabled}
       />
     </StyledRow>
   );
@@ -83,20 +65,13 @@ const ItemsList = ({
   t,
   setInviteItems,
   inviteItems,
-  changeInviteItem,
-  setHasErrors,
-  roomType,
-  isOwner,
   externalLinksVisible,
   scrollAllPanelContent,
-  invitePanelBodyRef,
-  isMobileView,
-  standalone,
+  isDisabled,
 }) => {
   const [bodyHeight, setBodyHeight] = useState(0);
   const [offsetTop, setOffsetTop] = useState(0);
   const [isTotalListHeight, setIsTotalListHeight] = useState(false);
-  const [isOpenItemAccess, setIsOpenItemAccess] = useState(false);
   const bodyRef = useRef();
   const { height } = useResizeObserver({ ref: bodyRef });
   const { interfaceDirection } = useTheme();
@@ -106,22 +81,13 @@ const ItemsList = ({
     const heightList = height ? height : bodyRef.current.offsetHeight;
     const totalHeightItems = inviteItems.length * USER_ITEM_HEIGHT;
     const listAreaHeight = heightList;
-    const heightBody = invitePanelBodyRef?.current?.clientHeight;
-    const fullHeightList = heightBody - bodyRef.current.offsetTop;
-    const heightWitchOpenItemAccess = Math.max(scrollHeight, fullHeightList);
 
     const calculatedHeight = scrollAllPanelContent
-      ? Math.max(
-          totalHeightItems,
-          listAreaHeight,
-          isOpenItemAccess ? heightWitchOpenItemAccess : 0,
-        )
+      ? Math.max(totalHeightItems, listAreaHeight, 0)
       : heightList - FOOTER_HEIGHT;
 
     const finalHeight = scrollAllPanelContent
-      ? isOpenItemAccess
-        ? calculatedHeight
-        : totalHeightItems
+      ? totalHeightItems
       : calculatedHeight;
 
     setBodyHeight(finalHeight);
@@ -136,7 +102,6 @@ const ItemsList = ({
     bodyRef?.current?.offsetHeight,
     inviteItems.length,
     scrollAllPanelContent,
-    isOpenItemAccess,
   ]);
 
   useEffect(() => {
@@ -147,13 +112,9 @@ const ItemsList = ({
     height,
     inviteItems.length,
     scrollAllPanelContent,
-    isOpenItemAccess,
   ]);
 
   const overflowStyle = scrollAllPanelContent ? "hidden" : "scroll";
-
-  const willChangeStyle =
-    isMobileView && isOpenItemAccess ? "auto" : "transform";
 
   return (
     <ScrollList
@@ -163,23 +124,17 @@ const ItemsList = ({
       isTotalListHeight={isTotalListHeight}
     >
       <List
-        style={{ overflow: overflowStyle, willChange: willChangeStyle }}
+        style={{ overflow: overflowStyle, willChange: "transform" }}
         direction={interfaceDirection}
         height={bodyHeight}
         width="auto"
         itemCount={inviteItems.length}
         itemSize={USER_ITEM_HEIGHT}
         itemData={{
+          t,
           inviteItems,
           setInviteItems,
-          changeInviteItem,
-          setHasErrors,
-          roomType,
-          isOwner,
-          setIsOpenItemAccess,
-          isMobileView,
-          t,
-          standalone,
+          isDisabled,
         }}
         outerElementType={!scrollAllPanelContent && CustomScrollbarsVirtualList}
       >
@@ -189,14 +144,4 @@ const ItemsList = ({
   );
 };
 
-export default inject(({ userStore, dialogsStore, settingsStore }) => {
-  const { changeInviteItem } = dialogsStore;
-  const { isOwner } = userStore.user;
-  const { standalone } = settingsStore;
-
-  return {
-    changeInviteItem,
-    isOwner,
-    standalone,
-  };
-})(observer(ItemsList));
+export default ItemsList;

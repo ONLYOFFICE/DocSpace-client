@@ -143,11 +143,20 @@ const toListItem = (
   } as TSelectorItem;
 };
 
-type AddUsersPanelProps = {
+export type TSelectorInfo =
+  | { withInfo: true; infoText: string; withInfoBadge?: boolean }
+  | {
+      withInfo?: undefined;
+      infoText?: undefined;
+      withInfoBadge?: undefined;
+    };
+
+type AddUsersPanelProps = TSelectorInfo & {
   isEncrypted: boolean;
   defaultAccess: ShareAccessRights;
   onClose: () => void;
   onParentPanelClose: () => void;
+  setActiveTabId: (tab: string) => void;
 
   setDataItems: (items: TSelectorItem[]) => void;
 
@@ -189,6 +198,9 @@ const AddUsersPanel = ({
 
   invitedUsers,
   disableDisabledUsers,
+  infoText,
+  withInfo,
+  setActiveTabId: setActiveTabIdProp,
 }: AddUsersPanelProps) => {
   const theme = useTheme();
   const { t } = useTranslation([
@@ -301,10 +313,14 @@ const AddUsersPanel = ({
     (access) => access.access === accessRight,
   )[0];
 
-  const changeActiveTab = useCallback((tab: number | string) => {
-    setActiveTabId(`${tab}`);
-    isFirstLoad.current = true;
-  }, []);
+  const changeActiveTab = useCallback(
+    (tab: number | string) => {
+      setActiveTabIdProp(`${tab}`);
+      setActiveTabId(`${tab}`);
+      isFirstLoad.current = true;
+    },
+    [setActiveTabIdProp],
+  );
 
   const onSearch = useCallback(
     (value: string, callback?: Function) => {
@@ -565,6 +581,8 @@ const AddUsersPanel = ({
           isLoading={isLoading}
           searchLoader={<SearchLoader />}
           isSearchLoading={isInit}
+          infoText={infoText}
+          withInfo={withInfo}
           rowLoader={
             <RowLoader
               isUser

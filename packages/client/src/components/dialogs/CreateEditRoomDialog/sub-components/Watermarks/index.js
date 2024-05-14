@@ -48,29 +48,6 @@ const options = (t) => [
   },
 ];
 
-const rotateOptions = (t) => [
-  { key: -45, label: t("Diagonal") },
-  { key: 0, label: t("Horizontal") },
-];
-
-const imageRotateOptions = () => [
-  { key: 0, label: "0" },
-  { key: 30, label: "30" },
-  { key: 45, label: "45" },
-  { key: 60, label: "60" },
-  { key: 90, label: "90" },
-];
-
-const getInitialRotate = (rotate, isEdit, isImage, t) => {
-  const dataRotate = isImage ? imageRotateOptions() : rotateOptions(t);
-
-  if (!isEdit || rotate === undefined) return dataRotate[0];
-
-  return dataRotate.find((item) => {
-    return item.key === rotate;
-  });
-};
-
 const getOptionType = (additions, isEdit) => {
   if (isEdit) {
     return additions === 0 ? imageWatermark : viewerInfoWatermark;
@@ -104,20 +81,8 @@ const Watermarks = ({ isEdit, watermarksSettings }) => {
         onClick={onSelectType}
       />
 
-      {type === viewerInfoWatermark && (
-        <ViewerInfoWatermark
-          isEdit={isEdit}
-          getInitialRotate={getInitialRotate}
-          rotateOptions={rotateOptions}
-        />
-      )}
-      {type === imageWatermark && (
-        <ImageWatermark
-          isEdit={isEdit}
-          getInitialRotate={getInitialRotate}
-          rotateOptions={imageRotateOptions}
-        />
-      )}
+      {type === viewerInfoWatermark && <ViewerInfoWatermark isEdit={isEdit} />}
+      {type === imageWatermark && <ImageWatermark isEdit={isEdit} />}
     </StyledBody>
   );
 };

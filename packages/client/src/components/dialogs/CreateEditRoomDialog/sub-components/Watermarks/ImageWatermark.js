@@ -59,28 +59,43 @@ import { StyledWatermark } from "./StyledComponent";
 import { FileInput } from "@docspace/shared/components/file-input";
 
 import { imageProcessing } from "@docspace/shared/utils/common";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
-const scaleOptions = () => [
+const scaleOptions = [
   { key: 100, label: "100" },
   { key: 200, label: "200" },
   { key: 300, label: "300" },
   { key: 400, label: "400" },
   { key: 500, label: "500" },
 ];
+
+const rotateOptions = [
+  { key: 0, label: "0" },
+  { key: 30, label: "30" },
+  { key: 45, label: "45" },
+  { key: 60, label: "60" },
+  { key: 90, label: "90" },
+];
 const getInitialScale = (scale, isEdit) => {
-  const dataScale = scaleOptions();
+  if (!isEdit || scale === undefined || scale === 0) return scaleOptions[0];
 
-  if (!isEdit || scale === undefined || scale === 0) return dataScale[0];
-
-  return dataScale.find((item) => {
+  return scaleOptions.find((item) => {
     return item.key === scale;
   });
 };
 
+const getInitialRotate = (rotate, isEdit) => {
+  if (!isEdit || rotate === undefined) return rotateOptions[0];
+
+  const item = rotateOptions.find((item) => {
+    return item.key === rotate;
+  });
+
+  return !item ? rotateOptions[0] : item;
+};
+
 const ImageWatermark = ({
-  getInitialRotate,
   isEdit,
-  rotateOptions,
 
   setWatermarks,
   watermarksSettings,
@@ -91,9 +106,9 @@ const ImageWatermark = ({
 
   if (initialInfo.current === null) {
     initialInfo.current = {
-      dataScale: scaleOptions(),
-      dataRotate: rotateOptions(t),
-      rotate: getInitialRotate(watermarksSettings?.rotate, isEdit, true, t),
+      dataScale: scaleOptions,
+      dataRotate: rotateOptions,
+      rotate: getInitialRotate(watermarksSettings?.rotate, isEdit),
       scale: getInitialScale(watermarksSettings?.imageScale, isEdit),
       url: watermarksSettings?.imageUrl ?? "",
     };
@@ -144,6 +159,39 @@ const ImageWatermark = ({
     setWatermarks({ ...watermarksSettings, rotate: item.key });
   };
 
+  const rotateItems = () => {
+    const items = rotateOptions.map((item) => {
+      return (
+        <DropDownItem
+          className="access-right-item"
+          key={item.key}
+          data-key={item.key}
+          onClick={() => onRotateChange(item)}
+        >
+          {item.label}&deg;
+        </DropDownItem>
+      );
+    });
+
+    return <div style={{ display: "contents" }}>{items}</div>;
+  };
+
+  const scaleItems = () => {
+    const items = scaleOptions.map((item) => {
+      return (
+        <DropDownItem
+          className="access-right-item"
+          key={item.key}
+          data-key={item.key}
+          onClick={() => onRotateChange(item)}
+        >
+          {item.label}&#37;
+        </DropDownItem>
+      );
+    });
+
+    return <div style={{ display: "contents" }}>{items}</div>;
+  };
   return (
     <StyledWatermark>
       <FileInput accept={["image/png", "image/jpeg"]} onInput={onInput} scale />
@@ -154,24 +202,33 @@ const ImageWatermark = ({
             {t("Scale")}
           </Text>
           <ComboBox
-            selectedOption={selectedScale}
-            options={initialInfoRef.dataScale}
             onSelect={onScaleChange}
             scaled
             scaledOptions
-          />
+            advancedOptions={scaleItems()}
+            options={[]}
+            selectedOption={{}}
+          >
+            <div>{selectedScale.label}&#37;</div>
+          </ComboBox>
         </div>
         <div>
           <Text className="watermark-title" fontWeight={600} lineHeight="20px">
             {t("Rotate")}
           </Text>
+
           <ComboBox
-            selectedOption={selectedRotate}
-            options={initialInfoRef.dataRotate}
             onSelect={onRotateChange}
             scaled
             scaledOptions
-          />
+            advancedOptions={rotateItems()}
+            options={[]}
+            selectedOption={{}}
+            advancedOptionsCount={rotateOptions.length}
+            fillIcon={false}
+          >
+            <div>{selectedRotate.label}&deg;</div>
+          </ComboBox>
         </div>
       </div>
     </StyledWatermark>

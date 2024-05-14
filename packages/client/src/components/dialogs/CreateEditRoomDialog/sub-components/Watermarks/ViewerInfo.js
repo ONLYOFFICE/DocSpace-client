@@ -92,9 +92,24 @@ const getInitialTabs = (additions, isEdit, t) => {
   return dataTabs.filter((item) => additions & WatermarkAdditions[item.key]);
 };
 
+const rotateOptions = (t) => [
+  { key: -45, label: t("Diagonal") },
+  { key: 0, label: t("Horizontal") },
+];
+
+const getInitialRotate = (rotate, isEdit, t) => {
+  const dataRotate = rotateOptions(t);
+
+  if (!isEdit || rotate === undefined) return dataRotate[0];
+
+  const item = dataRotate.find((item) => {
+    return item.key === rotate;
+  });
+
+  return !item ? dataRotate[0] : item;
+};
+
 const ViewerInfoWatermark = ({
-  getInitialRotate,
-  rotateOptions,
   isEdit,
 
   setWatermarks,
@@ -109,7 +124,7 @@ const ViewerInfoWatermark = ({
     initialInfo.current = {
       dataRotate: rotateOptions(t),
       dataTabs: tabsOptions(t),
-      rotate: getInitialRotate(watermarksSettings?.rotate, isEdit, false, t),
+      rotate: getInitialRotate(watermarksSettings?.rotate, isEdit, t),
       tabs: getInitialTabs(watermarksSettings?.additions, isEdit, t),
       text: getInitialText(watermarksSettings?.text, isEdit),
       additions: watermarksSettings?.additions ?? WatermarkAdditions.UserName,

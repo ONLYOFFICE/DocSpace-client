@@ -70,6 +70,7 @@ const LoginForm = ({
   cookieSettingsEnabled,
   recaptchaPublicKey,
   emailFromInvitation,
+  capabilities,
 }: LoginFormProps) => {
   const [isEmailErrorShow, setIsEmailErrorShow] = useState(false);
   const [errorText, setErrorText] = useState("");
@@ -79,6 +80,9 @@ const LoginForm = ({
   const [password, setPassword] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const [isLdapLoginChecked, setIsLdapLoginChecked] = useState(
+    capabilities?.ldapEnabled || false,
+  );
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const [isCaptcha, setIsCaptcha] = useState(false);
   const [isCaptchaSuccessful, setIsCaptchaSuccess] = useState(false);
@@ -213,12 +217,16 @@ const LoginForm = ({
     if (hasError) return;
 
     setIsLoading(true);
-    const hash = createPasswordHash(pass, hashSettings);
+
+    const hash = !isLdapLoginChecked
+      ? createPasswordHash(pass, hashSettings)
+      : undefined;
+    const pwd = isLdapLoginChecked ? pass : undefined;
 
     isDesktop && checkPwd();
     const session = !isChecked;
 
-    login(user, hash, session, captchaToken)
+    login(user, hash, pwd, session, captchaToken)
       .then((res: string | object) => {
         const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath = sessionStorage.getItem("referenceUrl");
@@ -291,6 +299,9 @@ const LoginForm = ({
 
   const onChangeCheckbox = () => setIsChecked(!isChecked);
 
+  const onChangeLdapLoginCheckbox = () =>
+    setIsLdapLoginChecked(!isLdapLoginChecked);
+
   const onClick = () => {
     setIsDialogVisible(true);
     setIsDisabled(true);
@@ -317,6 +328,14 @@ const LoginForm = ({
 
   const passwordErrorMessage = errorMessage();
 
+  let { ldapEnabled, ldapDomain } = capabilities || {
+    ldapEnabled: false,
+    ldapDomain: "",
+  };
+
+  ldapEnabled = true; //TODO: remove
+  ldapDomain = "planetexpress.com"; //TODO: remove
+
   return (
     <form className="auth-form-container">
       <EmailContainer
@@ -328,6 +347,7 @@ const LoginForm = ({
         onChangeLogin={onChangeLogin}
         onBlurEmail={onBlurEmail}
         onValidateEmail={onValidateEmail}
+        isLdapLogin={isLdapLoginChecked}
       />
 
       <FieldContainer
@@ -394,6 +414,30 @@ const LoginForm = ({
           </Link>
         </div>
       </div>
+      {ldapEnabled && ldapDomain && (
+        <div className="login-forgot-wrapper">
+          <div className="login-checkbox-wrapper">
+            <Checkbox
+              id="login_ldap-checkbox"
+              className="login-checkbox"
+              isChecked={isLdapLoginChecked}
+              onChange={onChangeLdapLoginCheckbox}
+              label={`Sign in to: ${ldapDomain}`} //TODO: Add translation
+              helpButton={
+                <HelpButton
+                  id="login_ldap-hint"
+                  className="help-button"
+                  offsetRight={0}
+                  tooltipContent={
+                    <Text fontSize="12px">{t("SignInLdapHelper")}</Text> //TODO: Add ldap helper
+                  }
+                  tooltipMaxWidth={isMobileOnly ? "240px" : "340px"}
+                />
+              }
+            />
+          </div>
+        </div>
+      )}
 
       {isDialogVisible && (
         <ForgotPasswordModalDialog

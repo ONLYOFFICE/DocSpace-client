@@ -95,6 +95,7 @@ export type LoginFormProps = {
   recaptchaPublicKey?: string;
   emailFromInvitation?: string;
   cookieSettingsEnabled: boolean;
+  capabilities: TCapabilities | undefined;
 };
 
 export type ForgotPasswordModalDialogProps = {

@@ -220,6 +220,7 @@ const Login = ({
                 enableAdmMess={settings?.enableAdmMess ?? false}
                 cookieSettingsEnabled={settings?.cookieSettingsEnabled ?? false}
                 emailFromInvitation={invitationLinkData.email}
+                capabilities={capabilities}
               />
               {(oauthDataExists() || ssoExists()) && (
                 <>

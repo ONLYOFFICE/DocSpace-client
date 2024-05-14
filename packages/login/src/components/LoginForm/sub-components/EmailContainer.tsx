@@ -36,8 +36,13 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.left.react.svg?url";
 
 import { DEFAULT_EMAIL_TEXT } from "@/utils/constants";
-import { InputSize, InputType } from "@docspace/shared/components/text-input";
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/shared/components/text-input";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
+import { TCapabilities } from "@docspace/shared/api/settings/types";
 
 interface IEmailContainer {
   emailFromInvitation?: string;
@@ -48,6 +53,7 @@ interface IEmailContainer {
   onChangeLogin: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlurEmail: () => void;
   onValidateEmail: (res: TValidate) => undefined;
+  isLdapLogin: boolean;
 }
 
 const EmailContainer = ({
@@ -60,6 +66,7 @@ const EmailContainer = ({
   onChangeLogin,
   onBlurEmail,
   onValidateEmail,
+  isLdapLogin,
 }: IEmailContainer) => {
   const { t } = useTranslation(["Login", "Common"]);
 
@@ -115,23 +122,42 @@ const EmailContainer = ({
         errorText ? t(`Common:${errorText}`) : t("Common:RequiredField")
       } //TODO: Add wrong login server error
     >
-      <EmailInput
-        id="login_username"
-        name="login"
-        type={InputType.email}
-        hasError={isEmailErrorShow}
-        value={identifier}
-        placeholder={t("RegistrationEmailWatermark")}
-        size={InputSize.large}
-        scale={true}
-        isAutoFocussed={true}
-        tabIndex={1}
-        isDisabled={isLoading}
-        autoComplete="username"
-        onChange={onChangeLogin}
-        onBlur={onBlurEmail}
-        onValidateInput={onValidateEmail}
-      />
+      {isLdapLogin ? (
+        <TextInput
+          id="login_username"
+          name="login"
+          type={InputType.text}
+          hasError={isEmailErrorShow}
+          value={identifier}
+          placeholder={"Email or username"} //TODO: Add translation
+          size={InputSize.large}
+          scale={true}
+          isAutoFocussed={true}
+          tabIndex={1}
+          isDisabled={isLoading}
+          autoComplete="off"
+          onChange={onChangeLogin}
+          onBlur={onBlurEmail}
+        />
+      ) : (
+        <EmailInput
+          id="login_username"
+          name="login"
+          type={InputType.email}
+          hasError={isEmailErrorShow}
+          value={identifier}
+          placeholder={t("RegistrationEmailWatermark")}
+          size={InputSize.large}
+          scale={true}
+          isAutoFocussed={true}
+          tabIndex={1}
+          isDisabled={isLoading}
+          autoComplete="off"
+          onChange={onChangeLogin}
+          onBlur={onBlurEmail}
+          onValidateInput={onValidateEmail}
+        />
+      )}
     </FieldContainer>
   );
 };

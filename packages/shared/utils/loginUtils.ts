@@ -30,7 +30,8 @@ import { setWithCredentialsStatus } from "../api/client";
 
 export async function login(
   user: string,
-  hash: string,
+  hash: null | undefined | string = "",
+  password: null | undefined | string = "",
   session = true,
   captchaToken: null | undefined | string = "",
 ): Promise<string | object> {
@@ -38,6 +39,7 @@ export async function login(
     const response = (await api.user.login(
       user,
       hash,
+      password,
       session,
       captchaToken,
     )) as {

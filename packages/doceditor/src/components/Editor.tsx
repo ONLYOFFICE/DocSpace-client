@@ -269,8 +269,9 @@ const Editor = ({
   }
 
   if (
-    typeof window !== "undefined" &&
-    window.DocSpaceConfig?.editor?.requestClose
+    (typeof window !== "undefined" &&
+      window.DocSpaceConfig?.editor?.requestClose) ||
+    IS_ZOOM
   ) {
     newConfig.events.onRequestClose = onSDKRequestClose;
   }

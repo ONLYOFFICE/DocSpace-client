@@ -148,8 +148,9 @@ class InfoPanelStore {
 
   setSelectionHistory = (obj) => {
     this.selectionHistory = obj;
-    this.historyWithFileList =
-      this.infoPanelSelection.isFolder || this.infoPanelSelection.isRoom;
+    if (obj)
+      this.historyWithFileList =
+        this.infoPanelSelection.isFolder || this.infoPanelSelection.isRoom;
   };
 
   resetView = () => {
@@ -270,6 +271,11 @@ class InfoPanelStore {
       );
     } else {
       newInfoPanelSelection = [...Array(selectedItems.length).keys()];
+    }
+
+    if (!selectedItems.length && !newInfoPanelSelection.parentId) {
+      this.setSelectionHistory(null);
+      this.setInfoPanelSelectedGroup(null);
     }
 
     this.setInfoPanelSelection(newInfoPanelSelection);

@@ -32,7 +32,7 @@ import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import GroupMember from "./GroupMember";
 import useFetchGroup from "./useFetchGroup";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Groups = ({
   infoPanelSelection,
@@ -41,6 +41,8 @@ const Groups = ({
   infoPanelSelectedGroup,
   setInfoPanelSelectedGroup,
 }) => {
+  const [isShowLoader, setIsShowLoader] = useState(false);
+
   const { groupId: paramsGroupId } = useParams();
   const isInsideGroup = !!paramsGroupId;
 
@@ -51,10 +53,20 @@ const Groups = ({
 
   useFetchGroup(groupId, group?.id, setGroup);
 
-  const groupManager = infoPanelSelection?.manager;
+  useEffect(() => {
+    const showLoaderTimer = setTimeout(() => setIsShowLoader(true), 500);
+    return () => clearTimeout(showLoaderTimer);
+  }, []);
+
+  const groupManager = group?.manager;
   const groupMembers = group?.members?.filter(
     (user) => user.id !== groupManager?.id,
   );
+
+  if (!group) {
+    if (isShowLoader) return <InfoPanelViewLoader view="groups" />;
+    return null;
+  }
 
   return (
     <Styled.GroupsContent>

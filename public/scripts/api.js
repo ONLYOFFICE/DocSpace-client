@@ -112,7 +112,7 @@
     const response = await fetch(`${targetSrc}/api/2.0/security/csp`);
     const res = await response.json();
 
-    currentSrc = window.location.host; // more flexible way to check
+    currentSrc = window.location.host || new URL(window.location.origin).host; // more flexible way to check
 
     const domains = [...res.response.domains].map((d) => {
       try {
@@ -284,8 +284,9 @@
       })
         .replace(lt, rlt)
         .replace(gt, rgt);
-      
-      const windowHeight = 778, windowWidth = 610;
+
+      const windowHeight = 778,
+        windowWidth = 610;
 
       button.addEventListener("click", () => {
         const winHtml = `<!DOCTYPE html>
@@ -340,7 +341,11 @@
           new Blob([winHtml], { type: "text/html" })
         );
 
-        window.open(winUrl, "_blank", `width=${windowWidth},height=${windowHeight}`);
+        window.open(
+          winUrl,
+          "_blank",
+          `width=${windowWidth},height=${windowHeight}`
+        );
       });
 
       button.setAttribute("id", config.frameId + "-container");

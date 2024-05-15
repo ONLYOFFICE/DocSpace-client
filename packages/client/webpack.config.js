@@ -338,7 +338,7 @@ module.exports = (env, argv) => {
         "./shell": "./src/Shell",
         "./store": "./src/store",
         "./Layout": "./src/components/Layout",
-        "./Layout/context": "./src/components/Layout/context.js",
+        // "./Layout/context": "./src/components/Layout/context.js",
         "./Main": "./src/components/Main",
         "./NavMenu": "./src/components/NavMenu",
         "./PreparationPortalDialog":

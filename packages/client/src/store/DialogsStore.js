@@ -116,7 +116,7 @@ class DialogsStore {
   shareFolderDialogVisible = false;
   cancelUploadDialogVisible = false;
   createRoomTemplateDialogVisible = false;
-  templateAccessSettingsVisible = true;
+  templateAccessSettingsVisible = false;
   templateEventVisible = false;
 
   selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;

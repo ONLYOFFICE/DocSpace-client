@@ -27,14 +27,14 @@
 import { Base } from "@docspace/shared/themes";
 import styled from "styled-components";
 
-export const ChangeRoomOwner = styled.div`
-  .change-owner-display {
+export const TemplateAccess = styled.div`
+  .template-access {
     display: flex;
     align-items: center;
     gap: 8px;
     margin: 8px 0;
 
-    .change-owner-display-name {
+    .template-access-name {
       display: flex;
       align-items: center;
       gap: 4px;
@@ -45,14 +45,43 @@ export const ChangeRoomOwner = styled.div`
     }
   }
 
-  .change-owner-display-wrapper {
-    display: block;
+  .template-access-description {
+    margin-bottom: 8px;
+  }
+
+  .template-access-wrapper {
+    display: flex;
     align-items: center;
 
-    .change-owner-link {
+    .template-access-link {
       margin-left: auto;
     }
   }
+
+  .access-avatar-container {
+    display: flex;
+
+    .template-access-avatar:not(:first-child) {
+      margin-left: -8px;
+      z-index: 2;
+    }
+
+    .template-access-avatar:last-child {
+      z-index: 1;
+    }
+
+    .template-access-avatar {
+      border: 1px solid rgb(255, 255, 255);
+      border-radius: 50%;
+      z-index: 3;
+    }
+  }
+
+  .template-access-avatar-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 `;
 
-ChangeRoomOwner.defaultProps = { theme: Base };
+TemplateAccess.defaultProps = { theme: Base };

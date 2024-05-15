@@ -39,7 +39,7 @@ import InputParam from "../CreateEditRoomDialog/sub-components/Params/InputParam
 import TagInput from "../CreateEditRoomDialog/sub-components/TagInput";
 import TagHandler from "../CreateEditRoomDialog/handlers/TagHandler";
 import { ImageEditor } from "@docspace/shared/components/image-editor";
-import ChangeRoomOwner from "../CreateEditRoomDialog/sub-components/ChangeRoomOwner";
+import TemplateAccess from "./sub-components/TemplateAccess";
 import PreviewTile from "@docspace/shared/components/image-editor/PreviewTile";
 import { getRoomTypeTitleTranslation } from "../CreateEditRoomDialog/data";
 
@@ -206,10 +206,9 @@ const CreateRoomTemplate = (props) => {
             // isDisabled={isDisabled}
           />
 
-          <ChangeRoomOwner
+          <TemplateAccess
             roomOwner={createdBy}
-            isTemplate
-            onOwnerChange={onOpenAccessSettings}
+            onOpenAccessSettings={onOpenAccessSettings}
           />
 
           <div>
@@ -250,7 +249,7 @@ const CreateRoomTemplate = (props) => {
           <Button
             id="create-room-template-modal_submit"
             tabIndex={5}
-            label={t("Files:CreateTemplate")}
+            label={isEdit ? t("Common:SaveButton") : t("Files:CreateTemplate")}
             size="normal"
             primary
             scale

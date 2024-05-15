@@ -96,12 +96,12 @@ const TagInput = ({
     if (text.trim().length > 0) {
       openDropdown();
     }
-    onFocus();
+    onFocus && onFocus();
   };
 
   const handleBlur = () => {
     closeDropdown();
-    onBlur();
+    onBlur && onBlur();
   };
 
   const handleKeyDown = (event) => {

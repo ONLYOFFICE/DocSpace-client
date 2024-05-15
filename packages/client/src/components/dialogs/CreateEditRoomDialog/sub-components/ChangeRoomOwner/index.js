@@ -38,14 +38,13 @@ const ChangeRoomOwner = ({
   roomOwner,
   onOwnerChange,
   currentColorScheme,
-  isTemplate,
 }) => {
   const userName = roomOwner.displayName ?? roomOwner.label;
 
   return (
-    <Styled.ChangeRoomOwner isTemplate={isTemplate}>
+    <Styled.ChangeRoomOwner>
       <Text className="change-owner-label" fontWeight={600} fontSize="13px">
-        {isTemplate ? `${t("Files:AccessToTemplate")}:` : t("Files:RoomOwner")}
+        {t("Files:RoomOwner")}
       </Text>
 
       <div className="change-owner-display-wrapper">
@@ -74,10 +73,10 @@ const ChangeRoomOwner = ({
           type="action"
           fontWeight={600}
           fontSize="13px"
-          color={isTemplate ? null : currentColorScheme.main?.accent}
+          color={currentColorScheme.main?.accent}
           onClick={onOwnerChange}
         >
-          {isTemplate ? t("Files:AccessSettings") : t("Common:ChangeButton")}
+          {t("Common:ChangeButton")}
         </Link>
       </div>
     </Styled.ChangeRoomOwner>

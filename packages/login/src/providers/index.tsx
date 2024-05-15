@@ -49,9 +49,11 @@ export const Providers = ({
   value,
   timers,
   api_host,
+  redirectURL,
 }: {
   children: React.ReactNode;
   value: TDataContext;
+  redirectURL: string;
 }) => {
   const firebaseHelper = new FirebaseHelper(
     value.settings?.firebase ?? ({} as TFirebaseSettings),
@@ -61,6 +63,10 @@ export const Providers = ({
     console.log("Layout API requests timings:", { ...timers });
     console.log("API_HOST: ", api_host);
   }, [api_host, timers]);
+
+  React.useEffect(() => {
+    if (redirectURL) window.location.replace("/");
+  }, [redirectURL]);
 
   const { currentDeviceType } = useDeviceType();
 

@@ -80,7 +80,7 @@ const UsersRowContent = ({
         <Text className="username">{displayName}</Text>
         {isDuplicate && (
           <Text className="user-existing">
-            ({t("Settings:ExistingAccount")})
+            ({t("Settings:AccountAlreadyExists")})
           </Text>
         )}
       </Box>

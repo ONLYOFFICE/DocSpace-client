@@ -154,12 +154,12 @@ const TableView = ({
   sectionWidth,
   accountsData,
   typeOptions,
-  users,
   checkedUsers,
   toggleAccount,
   toggleAllAccounts,
   isAccountChecked,
   setSearchValue,
+  filteredUsers,
 }) => {
   const tableRef = useRef(null);
   const [hideColumns, setHideColumns] = useState(false);
@@ -168,10 +168,10 @@ const TableView = ({
 
   const isIndeterminate =
     checkedUsers.result.length > 0 &&
-    checkedUsers.result.length !== users.result.length;
+    checkedUsers.result.length !== filteredUsers.length;
 
   const toggleAll = (isChecked) =>
-    toggleAllAccounts(isChecked, users.result, checkedAccountType);
+    toggleAllAccounts(isChecked, filteredUsers, checkedAccountType);
 
   const onClearFilter = () => {
     setSearchValue("");
@@ -201,7 +201,7 @@ const TableView = ({
             withoutInfoPanelToggler
             withComboBox={false}
             isIndeterminate={isIndeterminate}
-            isChecked={checkedUsers.result.length === users.result.length}
+            isChecked={checkedUsers.result.length === filteredUsers.length}
             onChange={toggleAll}
           />
         </div>
@@ -216,7 +216,7 @@ const TableView = ({
             columnStorageName={columnStorageName}
             columnInfoPanelStorageName={columnInfoPanelStorageName}
             isIndeterminate={isIndeterminate}
-            isChecked={checkedUsers.result.length === users.result.length}
+            isChecked={checkedUsers.result.length === filteredUsers.length}
             toggleAll={toggleAll}
             setHideColumns={setHideColumns}
           />
@@ -280,21 +280,21 @@ const TableView = ({
 export default inject(({ userStore, importAccountsStore }) => {
   const { id: userId } = userStore.user;
   const {
-    users,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
+    filteredUsers,
   } = importAccountsStore;
 
   return {
     userId,
-    users,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
+    filteredUsers,
   };
 })(observer(TableView));

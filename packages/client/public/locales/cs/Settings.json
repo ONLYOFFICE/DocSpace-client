@@ -125,7 +125,6 @@
   "ErrorMessageBruteForceProtection": "Zadaný argument byl mimo rozsah platných hodnot.",
   "ErrorOccuredDownloadLog": "Při importu dat došlo k chybám. Stáhněte si protokol a zkontrolujte je.",
   "ErrorsWereFound": "bylo nalezeno {{errors}} chyb",
-  "ExistingAccount": "Stávající účet",
   "ForcePathStyle": "Vynutit styl cesty",
   "GroupsDescription": "Uživatelé, které jste vybrali v předchozím kroku, budou importováni do skupin vytvořených v {{serviceName}}. Skupiny se zobrazí v sekci Účty.",
   "HexCode": "Hexadecimální kód",

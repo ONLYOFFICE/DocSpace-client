@@ -126,7 +126,6 @@
   "ErrorMessageBruteForceProtection": "L'argument spécifié était en dehors de la plage des valeurs valides.",
   "ErrorOccuredDownloadLog": "Les erreurs se sont produites lors de l’importation des données. Téléchargez le journal pour les vérifier.",
   "ErrorsWereFound": "{{errors}} erreurs ont été détectées",
-  "ExistingAccount": "Compte existant",
   "ForcePathStyle": "Force le style de chemin",
   "GroupsDescription": "Les utilisateurs que vous avez sélectionnés à l'étape précédente seront importés vers les groupes qu'on a créé dans {{serviceName}}. Groupes apparaîtront dans la section Comptes.",
   "HexCode": "Code hexadécimal ",

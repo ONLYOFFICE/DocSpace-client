@@ -9,8 +9,6 @@
   "DisableRoomQuota": "Onemogući kvotu za ovu sobu",
   "FillingFormsRoomDescription": "Pravite, delite i popunjavajte šablone dokumenata ili radite sa gotovim unapred postavljenim podešavanjima da biste brzo kreirali dokumente bilo kog tipa.",
   "FillingFormsRoomTitle": "Soba za popunjavanje obrazaca",
-  "FormRoomDescription": "Delite obrasce sa bilo kim i sakupite kompletne obrasce u Complete folderu. Korisnici mogu da popune bilo koji obrazac više puta stvarajući zasebne konačne datoteke. U osnovnim sobama za obrasce, ne možete da dodate više korisničkih uloga u obrasce.",
-  "FormRoomTitle": "Osnovna soba za obrasce",
   "Icon": "Ikonica",
   "MakeRoomPrivateDescription": "Sve datoteke u ovoj sobi će biti šifrovane.",
   "MakeRoomPrivateLimitationsWarningDescription": "Pomoću ove funkcije možete pozvati samo postojeće DocSpace korisnike. Nakon kreiranja sobe, nećete moći da promenite listu korisnika.",

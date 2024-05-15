@@ -15,7 +15,6 @@
   "LightTheme": "Nền sáng",
   "LogoutActiveConnection": "Đăng xuất khỏi kết nối đang hoạt động",
   "LogoutAllActiveConnections": "Đăng xuất khỏi tất cả các kết nối đang hoạt động",
-  "LogoutAllActiveSessions": "Đăng xuất khỏi tất cả các phiên hoạt động",
   "LogoutAllActiveSessionsDescription": "Tất cả các kết nối đang hoạt động ngoại trừ kết nối này sẽ được đăng xuất, vì nó hiện đang được sử dụng.",
   "LogoutBtn": "Đăng xuất",
   "LogoutDescription": "Lưu ý. Tất cả các kết nối đang hoạt động ngoại trừ kết nối này sẽ được đăng xuất, vì nó hiện đang được sử dụng.",

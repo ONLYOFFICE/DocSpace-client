@@ -15,7 +15,6 @@
   "LightTheme": "Svetlá téma",
   "LogoutActiveConnection": "Odhlásiť sa z aktívneho pripojenia",
   "LogoutAllActiveConnections": "Odhlásiť sa zo všetkých aktívnych pripojení",
-  "LogoutAllActiveSessions": "Odhlásiť sa zo všetkých aktívnych relácií",
   "LogoutAllActiveSessionsDescription": "Budú odhlásené všetky aktívne pripojenia okrem tohto pripojenia, keďže sa práve používa.",
   "LogoutBtn": "Odhlásiť sa",
   "LogoutDescription": "Poznámka. Budú odhlásené všetky aktívne pripojenia okrem tohto pripojenia, keďže sa práve používa.",

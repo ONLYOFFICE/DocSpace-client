@@ -9,8 +9,6 @@
   "DisableRoomQuota": "Dezactivare cotă de stocare pentru această sală",
   "FillingFormsRoomDescription": "Creaţi, partajați şi completaţi șabloane de documente sau utilizaţi presetările pentru a crea orice tip de documente.",
   "FillingFormsRoomTitle": "Sala de completare a formularelor",
-  "FormRoomDescription": "Partajarea formulareșor cu oricine și stocarea formularelor completate în folderul Formulare competate. Formularul se poate completa de mai milte ori și se poate salva ca un fișier final separat.  În Sală formular de bază, nu este posibilă adăugarea rolurilor multiple de utilizator pentru formulare.",
-  "FormRoomTitle": "Sală formular de bază",
   "Icon": "Pictogramă",
   "MakeRoomPrivateDescription": "Toate fişierele din această sală vor fi criptate.",
   "MakeRoomPrivateLimitationsWarningDescription": "Această funcţie vă permite să invitaţi doar utilizatorii DocSpace existenți. După crearea unei săli, nu veţi putea modifica lista de utilizatori.",

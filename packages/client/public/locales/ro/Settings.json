@@ -126,7 +126,6 @@
   "ErrorMessageBruteForceProtection": "Valoarea introdusă se află în afara intervalului de valori permis.",
   "ErrorOccuredDownloadLog": "Au intervenit erori în timpul importului de date. Descărcați jurnalul de activități pentru a le verifica.",
   "ErrorsWereFound": "{{errors}} de erori au fost găsite",
-  "ExistingAccount": "Cont deja existent",
   "ForcePathStyle": "Tip cale forțat",
   "GroupsDescription": "Utilizatorii pe care i-ați selectat  în etapa anterioară vor fi importați în grupurile create în {{serviceName}}. Grupurile vor fi afișate în secțiunea Conturi.",
   "HexCode": "Cod hexa",

@@ -125,7 +125,6 @@
   "ErrorMessageBruteForceProtection": "Podani argument je bil izven obsega veljavnih vrednosti.",
   "ErrorOccuredDownloadLog": "Med uvozom podatkov je prišlo do napak. Prenesite dnevnik, da jih preverite.",
   "ErrorsWereFound": "Najdenih je bilo {{errors}} napak",
-  "ExistingAccount": "Obstoječi račun",
   "ForcePathStyle": "Stil vsiljene poti",
   "GroupsDescription": "Uporabniki, ki ste jih izbrali v prejšnjem koraku, bodo uvoženi v skupine, ustvarjene v {{serviceName}}. Skupine bodo prikazane v razdelku Računi.",
   "HexCode": "Hex koda",

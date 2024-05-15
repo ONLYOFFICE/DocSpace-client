@@ -125,7 +125,6 @@
   "ErrorMessageBruteForceProtection": "Göstərilən arqument etibarlı dəyər diapazonundan kənarda idi.",
   "ErrorOccuredDownloadLog": "Məlumatı idxal edərkən xətalar baş verdi. Onları yoxlamaq üçün jurnalı endirin.",
   "ErrorsWereFound": "{{errors}} xətalar tapıldı",
-  "ExistingAccount": "Mövcud hesab",
   "ForcePathStyle": "Məcburi Keçid Üslubu",
   "GroupsDescription": "Əvvəlki addımda seçdiyiniz istifadəçilər {{serviceName}} daxilində yaradılmış qruplara köçürüləcək. Qruplar Hesablar bölməsində görünəcək.",
   "HexCode": "Hex kodu",

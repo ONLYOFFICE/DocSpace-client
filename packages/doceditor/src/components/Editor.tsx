@@ -66,6 +66,7 @@ const Editor = ({
   fileInfo,
   isSharingAccess,
   errorMessage,
+  isSkipError,
 
   onSDKRequestSharingSettings,
   onSDKRequestSaveAs,
@@ -102,6 +103,7 @@ const Editor = ({
     config,
     doc,
     errorMessage,
+    isSkipError,
     t,
   });
 
@@ -274,8 +276,9 @@ const Editor = ({
   }
 
   if (
-    typeof window !== "undefined" &&
-    window.DocSpaceConfig?.editor?.requestClose
+    (typeof window !== "undefined" &&
+      window.DocSpaceConfig?.editor?.requestClose) ||
+    IS_ZOOM
   ) {
     newConfig.events.onRequestClose = onSDKRequestClose;
   }
@@ -289,7 +292,7 @@ const Editor = ({
       id={"docspace_editor"}
       documentServerUrl={documentserverUrl}
       config={
-        errorMessage
+        errorMessage || isSkipError
           ? {
               events: {
                 onAppReady: onSDKAppReady,
@@ -305,4 +308,3 @@ const Editor = ({
 };
 
 export default Editor;
-

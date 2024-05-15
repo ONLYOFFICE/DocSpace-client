@@ -32,7 +32,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { isMobile, isMobileOnly } from "react-device-detect";
 
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
-import { isTablet as isTabletUtils, tablet } from "@docspace/shared/utils";
+import {
+  isTablet as isTabletUtils,
+  mobileMore,
+  tablet,
+} from "@docspace/shared/utils";
 
 const StyledContainer = styled.div`
   user-select: none;
@@ -55,6 +59,14 @@ const StyledContainer = styled.div`
       padding: env(safe-area-inset-top) env(safe-area-inset-right)
         env(safe-area-inset-bottom) env(safe-area-inset-left);
     `}
+
+  @media ${mobileMore} {
+    #customScrollBar {
+      > .scroll-wrapper > .scroller > .scroll-body {
+        padding-inline: 0px !important;
+      }
+    }
+  }
 `;
 
 const Layout = (props) => {

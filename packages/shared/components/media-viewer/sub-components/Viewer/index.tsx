@@ -251,6 +251,7 @@ export const Viewer = (props: ViewerProps) => {
 
       {isImage ? (
         <ImageViewer
+          key={fileUrl}
           isTiff={isTiff}
           devices={devices}
           toolbar={toolbar}

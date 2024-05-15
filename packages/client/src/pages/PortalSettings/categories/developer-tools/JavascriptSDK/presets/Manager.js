@@ -26,7 +26,6 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import debounce from "lodash.debounce";
 import { Box } from "@docspace/shared/components/box";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Label } from "@docspace/shared/components/label";
@@ -37,7 +36,7 @@ import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group
 import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import { SelectedItem } from "@docspace/shared/components/selected-item";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
-import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
+import { objectToGetParams } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
@@ -67,6 +66,7 @@ import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { CodeToInsert } from "../sub-components/CodeToInsert";
 import { GetCodeBlock } from "../sub-components/GetCodeBlock";
 import { SharedLinkHint } from "../sub-components/SharedLinkHint";
+import { SearchTerm } from "../sub-components/SearchTerm";
 
 import { loadFrame } from "../utils";
 
@@ -128,7 +128,6 @@ const Manager = (props) => {
 
   const [sortBy, setSortBy] = useState(dataSortBy[0]);
   const [sortOrder, setSortOrder] = useState(dataSortOrder[0]);
-  const [withSubfolders, setWithSubfolders] = useState(false);
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold,
   );
@@ -240,14 +239,6 @@ const Manager = (props) => {
     });
   };
 
-  const onChangeWithSubfolders = (e) => {
-    setConfig((config) => {
-      return { ...config, withSubfolders: !withSubfolders };
-    });
-
-    setWithSubfolders(!withSubfolders);
-  };
-
   const onChangeSortBy = (item) => {
     setConfig((config) => {
       return { ...config, sortby: item.key };
@@ -312,15 +303,6 @@ const Manager = (props) => {
     });
   };
 
-  const onChangeSearch = (e) => {
-    setConfig((config) => {
-      return {
-        ...config,
-        filter: { ...config.filter, filterValue: e.target.value },
-      };
-    });
-  };
-
   const changeColumnsOption = (e) => {
     if (e.target.value === "default") {
       setConfig((config) => ({
@@ -371,7 +353,7 @@ const Manager = (props) => {
     filter.folder = id;
     navigate(`/rooms/shared/${id}/filter?${filter.toUrlParams()}`);
   };
-  
+
   const redirectToSelectedRoom = () => navigateRoom(config.id);
 
   const onResize = () => {
@@ -625,12 +607,14 @@ const Manager = (props) => {
                   directionY="bottom"
                 />
 
-                {selectedLink && <SharedLinkHint
+                {selectedLink && (
+                  <SharedLinkHint
                     t={t}
                     linkSettings={selectedLink.settings}
                     redirectToSelectedRoom={redirectToSelectedRoom}
                     currentColorScheme={currentColorScheme}
-                  />}
+                  />
+                )}
               </ControlsGroup>
             )}
           </ControlsSection>
@@ -640,22 +624,7 @@ const Manager = (props) => {
               <FilterBlock t={t} config={config} setConfig={setConfig} />
             </ColumnContainer>
             <ControlsGroup>
-              <Label className="label" text={t("SearchTerm")} />
-              <ColumnContainer>
-                <TextInput
-                  scale={true}
-                  onChange={onChangeSearch}
-                  placeholder={t("Common:Search")}
-                  value={config.filter.filterValue}
-                  tabIndex={5}
-                />
-                <Checkbox
-                  className="checkbox"
-                  label={t("Files:WithSubfolders")}
-                  onChange={onChangeWithSubfolders}
-                  isChecked={withSubfolders}
-                />
-              </ColumnContainer>
+              <SearchTerm t={t} config={config} setConfig={setConfig} />
             </ControlsGroup>
             <ControlsGroup>
               <Label className="label" text={t("Common:SortBy")} />
@@ -691,7 +660,7 @@ const Manager = (props) => {
                 />
               </LabelGroup>
               <TextInput
-                scale={true}
+                scale
                 onChange={onChangeCount}
                 placeholder={t("EnterCount")}
                 value={config.count}
@@ -701,7 +670,7 @@ const Manager = (props) => {
             <ControlsGroup>
               <Label className="label" text={t("Page")} />
               <TextInput
-                scale={true}
+                scale
                 onChange={onChangePage}
                 placeholder={t("EnterPage")}
                 value={config.page}

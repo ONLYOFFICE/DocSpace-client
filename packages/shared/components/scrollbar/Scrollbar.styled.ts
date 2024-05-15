@@ -127,7 +127,7 @@ const StyledScrollbar = styled(Scrollbar)<{ $fixedSize?: boolean }>`
     }
   }
 
-  .thumb-vertical {
+  & > .track > .thumb-vertical {
     width: ${({ $fixedSize }) => ($fixedSize ? "8px" : "4px")} !important;
     transition: width linear 0.1s;
 
@@ -142,7 +142,7 @@ const StyledScrollbar = styled(Scrollbar)<{ $fixedSize?: boolean }>`
     }
   }
 
-  .thumb-horizontal {
+  & > .track > .thumb-horizontal {
     height: ${({ $fixedSize }) => ($fixedSize ? "8px" : "4px")} !important;
     transition: height linear 0.1s;
 

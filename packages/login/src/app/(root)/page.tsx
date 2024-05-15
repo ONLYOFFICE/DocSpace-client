@@ -26,10 +26,13 @@
 
 "use server";
 import { redirect } from "next/navigation";
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { getBgPattern } from "@docspace/shared/utils/common";
+
+import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
+import { ThemeKeys } from "@docspace/shared/enums";
 
 import Login from "@/components/Login";
 import { LoginFormWrapper } from "@/components/Login/Login.styled";
@@ -48,11 +51,6 @@ async function Page({
   searchParams: { [key: string]: string };
 }) {
   const timers = { isAuth: 0, otherOperations: 0 };
-  const startIsAuthDate = new Date();
-
-  const isAuth = await checkIsAuthenticated();
-
-  timers.isAuth = new Date().getTime() - startIsAuthDate.getTime();
 
   const startOtherOperationsDate = new Date();
 
@@ -96,6 +94,10 @@ async function Page({
 
   const bgPattern = getBgPattern(colorTheme?.selected);
 
+  const cookieStore = cookies();
+
+  const systemTheme = cookieStore.get(SYSTEM_THEME_KEY);
+
   return (
     <LoginFormWrapper id="login-page" bgPattern={bgPattern}>
       <div className="bg-cover" />
@@ -105,7 +107,8 @@ async function Page({
         settings={settings}
         thirdPartyProvider={thirdParty}
         ssoSettings={ssoSettings}
-        isAuthenticated={isAuth}
+        isAuthenticated={false}
+        systemTheme={systemTheme?.value as ThemeKeys}
         timers={timers}
       />
     </LoginFormWrapper>

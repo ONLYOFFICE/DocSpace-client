@@ -29,10 +29,18 @@ import type { NextRequest } from "next/server";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
-  return NextResponse.json({ status: "healthy" }, { status: 200 });
+  if (request.url === "health")
+    return NextResponse.json({ status: "healthy" }, { status: 200 });
+
+  const isAuth = !!request.cookies.get("asc_auth_key")?.value;
+
+  const url = request.nextUrl.clone();
+  url.pathname = "/";
+
+  if (isAuth) return NextResponse.redirect("http://192.168.0.18");
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: "/health",
+  matcher: ["/health", "/"],
 };

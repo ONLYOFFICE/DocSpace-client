@@ -47,6 +47,8 @@ import pkgFile from "../../package.json";
 export const Providers = ({
   children,
   value,
+  timers,
+  api_host,
 }: {
   children: React.ReactNode;
   value: TDataContext;
@@ -54,6 +56,11 @@ export const Providers = ({
   const firebaseHelper = new FirebaseHelper(
     value.settings?.firebase ?? ({} as TFirebaseSettings),
   );
+
+  React.useEffect(() => {
+    console.log("Layout API requests timings:", { ...timers });
+    console.log("API_HOST: ", api_host);
+  }, [api_host, timers]);
 
   const { currentDeviceType } = useDeviceType();
 

@@ -82,6 +82,9 @@ const DEFAULT_SUBJECT_FILTER = null;
 const QUOTA_FILTER = "quotaFilter";
 const DEFAULT_QUOTA_FILTER = null;
 
+const STORAGE_FILTER = "storageFilter";
+const DEFAULT_STORAGE_FILTER = null;
+
 class RoomsFilter {
   static getDefault(userId) {
     const defaultFilter = new RoomsFilter(
@@ -180,6 +183,10 @@ class RoomsFilter {
     const withoutTags = urlFilter[WITHOUT_TAGS] || defaultFilter.withoutTags;
     const quotaFilter = urlFilter[QUOTA_FILTER] || defaultFilter.quotaFilter;
 
+    const storageFilter =
+      (urlFilter[STORAGE_FILTER] && urlFilter[STORAGE_FILTER]) ||
+      defaultFilter.storageFilter;
+
     const newFilter = new RoomsFilter(
       page,
       pageCount,
@@ -198,6 +205,7 @@ class RoomsFilter {
       withoutTags,
       subjectFilter,
       quotaFilter,
+      storageFilter,
     );
 
     return newFilter;
@@ -221,6 +229,7 @@ class RoomsFilter {
     withoutTags = DEFAULT_WITHOUT_TAGS,
     subjectFilter = DEFAULT_SUBJECT_FILTER,
     quotaFilter = DEFAULT_QUOTA_FILTER,
+    storageFilter = DEFAULT_STORAGE_FILTER,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -239,6 +248,7 @@ class RoomsFilter {
     this.withoutTags = withoutTags;
     this.subjectFilter = subjectFilter;
     this.quotaFilter = quotaFilter;
+    this.storageFilter = storageFilter;
   }
 
   getStartIndex = () => {
@@ -284,6 +294,7 @@ class RoomsFilter {
       withoutTags,
       subjectFilter,
       quotaFilter,
+      storageFilter,
     } = this;
 
     const dtoFilter = {
@@ -304,6 +315,7 @@ class RoomsFilter {
       withoutTags,
       subjectFilter,
       quotaFilter,
+      storageFilter,
     };
 
     const str = toUrlParams(dtoFilter, true);
@@ -328,6 +340,7 @@ class RoomsFilter {
       withoutTags,
       subjectFilter,
       quotaFilter,
+      storageFilter,
     } = this;
 
     const dtoFilter = {};
@@ -377,6 +390,7 @@ class RoomsFilter {
     }
 
     if (quotaFilter) dtoFilter[QUOTA_FILTER] = quotaFilter;
+    if (storageFilter) dtoFilter[STORAGE_FILTER] = storageFilter;
 
     dtoFilter[PAGE] = page + 1;
     dtoFilter[SORT_BY] = sortBy;
@@ -466,6 +480,7 @@ class RoomsFilter {
       this.withoutTags,
       this.subjectFilter,
       this.quotaFilter,
+      this.storageFilter,
     );
   }
 

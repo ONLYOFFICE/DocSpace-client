@@ -35,6 +35,7 @@ import {
   RoomsType,
   RoomsProviderType,
   ShareAccessRights,
+  Events,
 } from "@docspace/shared/enums";
 
 import { RoomsTypes } from "@docspace/shared/utils";
@@ -46,7 +47,10 @@ import { toastr } from "@docspace/shared/components/toast";
 import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
 import { getDaysRemaining } from "@docspace/shared/utils/common";
-import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import {
+  MEDIA_VIEW_URL,
+  PDF_FORM_DIALOG_KEY,
+} from "@docspace/shared/constants";
 
 import {
   getCategoryType,
@@ -353,6 +357,17 @@ class FilesStore {
       );
     });
 
+    socketHelper.on("s:modify-room", (option) => {
+      switch (option.cmd) {
+        case "create-form":
+          this.wsCreatedPDFForm(option);
+          break;
+
+        default:
+          break;
+      }
+    });
+
     socketHelper.on("s:stop-edit-file", (id) => {
       const { socketSubscribers } = socketHelper;
       const pathParts = `FILE-${id}`;
@@ -637,6 +652,30 @@ class FilesStore {
         }
       });
     }
+  };
+
+  wsCreatedPDFForm = (option) => {
+    if (!option.data) return;
+
+    const file = JSON.parse(option.data);
+
+    if (this.selectedFolderStore.id !== file.folderId) return;
+
+    const localKey = `${PDF_FORM_DIALOG_KEY}-${this.userStore.user.id}`;
+
+    const isFirst = JSON.parse(localStorage.getItem(localKey) ?? "true");
+
+    const event = new CustomEvent(Events.CREATE_PDF_FORM_FILE, {
+      detail: {
+        file,
+        isFill: !option.isOneMember,
+        isFirst,
+      },
+    });
+
+    if (isFirst) localStorage.setItem(localKey, "false");
+
+    window?.dispatchEvent(event);
   };
 
   setIsErrorRoomNotAvailable = (state) => {
@@ -1956,10 +1995,12 @@ class FilesStore {
         "select",
         "fill-form",
         "edit",
+        "open-pdf",
         "preview",
         "view",
         "pdf-view",
         "make-form",
+        "edit-pdf",
         "separator0",
         "submit-to-gallery",
         "separator-SubmitToGallery",
@@ -1999,6 +2040,14 @@ class FilesStore {
 
       if (!canDownload) {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
+      }
+
+      if (!isPdf || item.startFilling) {
+        fileOptions = this.removeOptions(fileOptions, ["open-pdf"]);
+      }
+
+      if (!item.security.EditForm || !item.startFilling) {
+        fileOptions = this.removeOptions(fileOptions, ["edit-pdf"]);
       }
 
       if (!isPdf || !window.DocSpaceConfig?.pdfViewer || isRecycleBinFolder) {
@@ -3111,6 +3160,8 @@ class FilesStore {
         usedSpace,
         isCustomQuota,
         providerId,
+        startFilling,
+        draftLocation,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3282,6 +3333,8 @@ class FilesStore {
         usedSpace,
         isCustomQuota,
         providerId,
+        startFilling,
+        draftLocation,
       };
     });
   };
@@ -3765,7 +3818,7 @@ class FilesStore {
     return folderInfo;
   };
 
-  openDocEditor = (id, preview = false, shareKey = null) => {
+  openDocEditor = (id, preview = false, shareKey = null, editForm = false) => {
     const foundIndex = this.files.findIndex((x) => x.id === id);
     const file = foundIndex !== -1 ? this.files[foundIndex] : undefined;
     if (
@@ -3787,6 +3840,7 @@ class FilesStore {
     searchParams.append("fileId", id);
     if (share) searchParams.append("share", share);
     if (preview) searchParams.append("action", "view");
+    if (editForm) searchParams.append("action", "edit");
 
     const url = combineUrl(
       window.DocSpaceConfig?.proxy?.url,
@@ -4168,6 +4222,31 @@ class FilesStore {
     if (pathPartsRoomIndex === -1) return;
     navigationPath[pathPartsRoomIndex].shared = shared;
     this.selectedFolderStore.setNavigationPath(navigationPath);
+  };
+
+  setInRoomFolder = (roomId, inRoom) => {
+    const newFolders = this.folders;
+    const folderIndex = newFolders.findIndex((r) => r.id === roomId);
+
+    const isRoot = this.selectedFolderStore.isRootFolder;
+
+    if (!isRoot) {
+      this.selectedFolderStore.setInRoom(true);
+    } else {
+      if (folderIndex > -1) {
+        newFolders[folderIndex].inRoom = inRoom;
+        this.setFolders(newFolders);
+
+        if (
+          this.bufferSelection &&
+          this.bufferSelection.id === newFolders[folderIndex].id
+        ) {
+          const newBufferSelection = { ...this.bufferSelection };
+          newBufferSelection.inRoom = inRoom;
+          this.setBufferSelection(newBufferSelection);
+        }
+      }
+    }
   };
 
   get isFiltered() {

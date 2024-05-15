@@ -106,6 +106,7 @@ const FilesSelector = ({
   withSearch: withSearchProp,
   withBreadCrumbs: withBreadCrumbsProp,
   filesSettings,
+  cancelButtonLabel,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -403,6 +404,7 @@ const FilesSelector = ({
 
   const onClearSearchAction = React.useCallback(
     (callback?: Function) => {
+      if (!searchValue) return;
       setIsFirstLoad(true);
       setItems([]);
 
@@ -411,7 +413,7 @@ const FilesSelector = ({
       callback?.();
       afterSearch.current = true;
     },
-    [setIsFirstLoad],
+    [searchValue, setIsFirstLoad],
   );
 
   React.useEffect(() => {
@@ -507,7 +509,7 @@ const FilesSelector = ({
   const cancelButtonProps: TSelectorCancelButton = withCancelButton
     ? {
         withCancelButton,
-        cancelButtonLabel: t("Common:CancelButton"),
+        cancelButtonLabel: cancelButtonLabel || t("Common:CancelButton"),
         cancelButtonId,
         onCancel,
       }

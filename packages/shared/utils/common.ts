@@ -65,6 +65,7 @@ import { TI18n, TTranslation } from "../types";
 import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
 import { TRoom } from "../api/rooms/types";
+import { TPasswordHash } from "../api/settings/types";
 import TopLoaderService from "../components/top-loading-indicator";
 
 import { Encoder } from "./encoder";
@@ -90,7 +91,7 @@ export function changeLanguage(i18n: TI18n, currentLng = getCookie(LANGUAGE)) {
 
 export function createPasswordHash(
   password: string,
-  hashSettings: { [key: string]: boolean },
+  hashSettings?: TPasswordHash,
 ) {
   if (
     !password ||
@@ -120,6 +121,10 @@ export const isPublicRoom = () => {
     window.location.pathname === "/rooms/share" ||
     window.location.pathname.includes(PUBLIC_MEDIA_VIEW_URL)
   );
+};
+
+export const isPublicPreview = () => {
+  return window.location.pathname.includes("/share/preview/");
 };
 
 export const getUserTypeLabel = (
@@ -633,7 +638,7 @@ export const getPowerFromBytes = (bytes: number, maxPower = 6) => {
 };
 
 export const getSizeFromBytes = (bytes: number, power: number) => {
-  return parseFloat((bytes / 1024 ** power).toFixed(2));
+  return Math.floor(bytes / 1024 ** power);
 };
 
 export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
@@ -938,12 +943,8 @@ export function tryParseArray(str: string) {
   }
 }
 
-const RoomsValues = Object.values(RoomsType).filter(
+export const RoomsTypeValues = Object.values(RoomsType).filter(
   (item): item is number => typeof item === "number",
-);
-
-export const RoomsTypeValues = RoomsValues.filter(
-  (room) => room !== RoomsType.FormRoom,
 );
 
 export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(

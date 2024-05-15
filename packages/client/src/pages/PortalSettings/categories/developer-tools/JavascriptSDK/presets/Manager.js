@@ -41,8 +41,6 @@ import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
-import { isTablet, isMobile } from "@docspace/shared/utils/device";
-
 import { HelpButton } from "@docspace/shared/components/help-button";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
@@ -68,79 +66,7 @@ import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 
 const showPreviewThreshold = 720;
 
-// import { FilterType, RoomsType } from "@docspace/shared/enums";
-
-// import { ToggleButton } from "@docspace/shared/components/toggle-button";
-
-// import styled from "styled-components";
-// import { DropDown } from "@docspace/shared/components/drop-down";
-// import Filter from "@docspace/shared/api/people/filter";
-// import { getUserList, getMembersList } from "@docspace/shared/api/people";
-// import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-// import { Avatar } from "@docspace/shared/components/avatar";
-// import Base from "@docspace/shared/themes/base";
-
-// const UserInputContainer = styled.div`
-//   position: relative;
-//   display: flex;
-//   align-items: center;
-//   width: 100%;
-
-//   .header_aside-panel {
-//     max-width: 100% !important;
-//   }
-// `;
-
-// const UserInput = styled.div`
-//   width: 100%;
-//   width: -moz-available;
-//   width: -webkit-fill-available;
-//   width: fill-available;
-
-//   .input-link {
-//     height: 32px;
-
-//     > input {
-//       height: 30px;
-//     }
-//   }
-// `;
-
-// const StyledDropDown = styled(DropDown)`
-//   ${(props) => props.width && `width: ${props.width}px`};
-//   left: 0;
-
-//   .list-item {
-//     display: flex;
-//     align-items: center;
-//     gap: 8px;
-//     height: 48px;
-
-//     .list-item_content {
-//       text-overflow: ellipsis;
-//       overflow: hidden;
-//     }
-//   }
-// `;
-
-// const SearchItemText = styled(Text)`
-//   line-height: 16px;
-
-//   text-overflow: ellipsis;
-//   overflow: hidden;
-//   font-size: ${(props) => props.primary ? "14px" : props.info ? "11px" : "12px"};
-//   font-weight: ${(props) => (props.primary || props.info ? "600" : "400")};
-
-//   color: ${(props) =>
-//     (props.primary && !props.disabled) || props.info
-//       ? props.theme.text.color
-//       : props.theme.text.emailColor};
-//   ${(props) => props.info && `margin-left: auto`}
-// `;
-
-// SearchItemText.defaultProps = { theme: Base };
-
-// const minSearchValue = 3;
+import { FilterBlock } from "../sub-components/FilterBlock";
 
 import {
   SDKContainer,
@@ -207,53 +133,6 @@ const Manager = (props) => {
     expirationDate: t("LimitByTime").toLowerCase(),
   };
 
-  // const roomTypeOptions = [
-  //   {
-  //     key: "room-type-collaboration",
-  //     label: t("CreateEditRoomDialog:CollaborationRoomTitle"),
-  //     roomType: RoomsType.EditingRoom,
-  //   },
-  //   { key: "room-type-public", label: t("Files:PublicRoom"), roomType: RoomsType.PublicRoom },
-  //   {
-  //     key: "room-type-custom",
-  //     label: t("CreateEditRoomDialog:CustomRoomTitle"),
-  //     roomType: RoomsType.CustomRoom,
-  //   },
-  // ];
-
-  // const filterOptions = [
-  //   { key: "filter-type-all", label: t("Files:AllFiles"), typeKey: FilterType.FilesOnly },
-  //   {
-  //     key: "filter-type-documents",
-  //     label: t("Common:Documents"),
-  //     typeKey: FilterType.DocumentsOnly,
-  //   },
-  //   {
-  //     key: "filter-type-folders",
-  //     label: t("Translations:Folders"),
-  //     typeKey: FilterType.FoldersOnly,
-  //   },
-  //   {
-  //     key: "filter-type-spreadsheets",
-  //     label: t("Translations:Spreadsheets"),
-  //     typeKey: FilterType.SpreadsheetsOnly,
-  //   },
-  //   { key: "filter-type-archives", label: t("Files:Archives"), typeKey: FilterType.ArchiveOnly },
-  //   {
-  //     key: "filter-type-presentations",
-  //     label: t("Translations:Presentations"),
-  //     typeKey: FilterType.PresentationsOnly,
-  //   },
-  //   { key: "filter-type-images", label: t("Filse:Images"), typeKey: FilterType.ImagesOnly },
-  //   { key: "filter-type-media", label: t("Files:Media"), typeKey: FilterType.MediaOnly },
-  //   {
-  //     key: "filter-type-forms-templates",
-  //     label: t("Files:FormsTemplates"),
-  //     typeKey: FilterType.OFormTemplateOnly,
-  //   },
-  //   { key: "filter-type-forms", label: t("Files:Forms"), typeKey: FilterType.OFormOnly },
-  // ];
-
   const [sortBy, setSortBy] = useState(dataSortBy[0]);
   const [sortOrder, setSortOrder] = useState(dataSortOrder[0]);
   const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
@@ -276,22 +155,6 @@ const Manager = (props) => {
   ]);
 
   const [selectedLink, setSelectedLink] = useState(null);
-
-  // const [filterBy, setFilterBy] = useState({
-  //   key: "filter-type-default",
-  //   label: t("Common:SelectAction"),
-  //   default: true,
-  // });
-  // const [author, setAuthor] = useState("");
-
-  // const searchRef = useRef();
-  // const [searchPanelVisible, setSearchPanelVisible] = useState(false);
-  // const [usersList, setUsersList] = useState([]);
-  // const dropDownMaxHeight = usersList.length > 5 ? { maxHeight: 240 } : {};
-  // const [isUserFilterSet, setIsUserFilterSet] = useState(false);
-  // const [isTypeFilterSet, setIsTypeFilterSet] = useState(false);
-  // const [selectedUser, setSelectedUser] = useState(null);
-  // const [selectedType, setSelectedType] = useState(null);
 
   const [config, setConfig] = useState({
     mode: "manager",
@@ -338,13 +201,16 @@ const Manager = (props) => {
   }, 500);
 
   useEffect(() => {
+    loadFrame();
+    return () => destroyFrame();
+  });
+  
+  useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
     if (scroll) {
       scroll.scrollTop = 0;
     }
-    loadFrame();
-    return () => destroyFrame();
-  });
+  }, []);
 
   const onChangeTab = () => {
     loadFrame();
@@ -405,10 +271,6 @@ const Manager = (props) => {
       setSelectedLink(null);
       setSharedLinks(null);
     }
-    // setAuthor("");
-    // setUsersList([]);
-    // setIsUserFilterSet(false);
-    // setIsTypeFilterSet(false);
 
     setConfig((config) => {
       return { ...config, ...newConfig };
@@ -438,7 +300,7 @@ const Manager = (props) => {
 
   const onChangeSortBy = (item) => {
     setConfig((config) => {
-      return { ...config, sortby: item.key };
+      return { ...config, filter: { ...config.filter, sortby: item.key } };
     });
 
     setSortBy(item);
@@ -446,7 +308,7 @@ const Manager = (props) => {
 
   const onChangeSortOrder = (item) => {
     setConfig((config) => {
-      return { ...config, sortorder: item.key };
+      return { ...config, filter: { ...config.filter, sortorder: item.key } };
     });
 
     setSortOrder(item);
@@ -506,13 +368,13 @@ const Manager = (props) => {
 
   const onChangeCount = (e) => {
     setConfig((config) => {
-      return { ...config, count: e.target.value };
+      return { ...config, filter: { ...config.filter, count: e.target.value } };
     });
   };
 
   const onChangePage = (e) => {
     setConfig((config) => {
-      return { ...config, page: e.target.value };
+      return { ...config, filter: { ...config.filter, page: e.target.value } };
     });
   };
 
@@ -585,128 +447,6 @@ const Manager = (props) => {
     if (isEnoughWidthForPreview !== showPreview)
       setShowPreview(isEnoughWidthForPreview);
   };
-
-  // const onFilterSelect = (option) => {
-  //   setFilterBy(option);
-  //   setConfig((config) => ({
-  //     ...config,
-  //     filter: {
-  //       ...config.filter,
-  //       filterType: option.typeKey,
-  //     },
-  //   }));
-  // };
-
-  // const closeInviteInputPanel = (e) => {
-  //   if (e?.target?.tagName?.toUpperCase() === "INPUT") return;
-
-  //   setSearchPanelVisible(false);
-  // };
-
-  // const openInviteInputPanel = () => {
-  //   setSearchPanelVisible(true);
-  // };
-
-  // const onKeyDown = (event) => {
-  //   const keyCode = event.code;
-
-  //   const isAcceptableEvents =
-  //     keyCode === "ArrowUp" || keyCode === "ArrowDown" || keyCode === "Enter";
-
-  //   if (isAcceptableEvents && author.length > 2) return;
-
-  //   event.stopPropagation();
-  // };
-
-  // const searchByQuery = async (value) => {
-  //   const query = value.trim();
-
-  //   if (query.length >= minSearchValue) {
-  //     const filter = Filter.getFilterWithOutDisabledUser();
-  //     filter.search = query;
-
-  //     // const users = await getMembersList(roomId, filter);
-  //     const users = await getUserList(filter);
-
-  //     setUsersList(users.items);
-  //   }
-
-  //   if (!query) {
-  //     closeInviteInputPanel();
-  //     setInputValue("");
-  //     setUsersList([]);
-  //   }
-  // };
-
-  // const debouncedSearch = useCallback(
-  //   debounce((value) => searchByQuery(value), 300),
-  //   [],
-  // );
-
-  // const onChangeAuthor = (e) => {
-  //   const value = e.target.value;
-  //   const clearValue = value.trim();
-
-  //   setAuthor(value);
-
-  //   if (clearValue.length < minSearchValue) {
-  //     setUsersList([]);
-  //     return;
-  //   }
-
-  //   if ((!!usersList.length || clearValue.length >= minSearchValue) && !searchPanelVisible) {
-  //     openInviteInputPanel();
-  //   }
-
-  //   debouncedSearch(clearValue);
-  // };
-  // const getItemContent = (item) => {
-  //   const { avatar, displayName, email, id } = item;
-
-  //   const addUser = () => {
-  //     closeInviteInputPanel();
-  //     setAuthor("");
-  //     setUsersList([]);
-  //     setSelectedUser(displayName);
-  //     setConfig((config) => ({
-  //       ...config,
-  //       filter:
-  //         "id" in config
-  //           ? { ...config.filter, authorType: `user_${item.id}` }
-  //           : { ...config.filter, subjectId: item.id },
-  //     }));
-  //   };
-
-  //   return (
-  //     <DropDownItem key={id} onClick={addUser} height={48} heightTablet={48} className="list-item">
-  //       <Avatar size="min" role="user" source={avatar} />
-  //       <div className="list-item_content">
-  //         <SearchItemText primary>{displayName}</SearchItemText>
-  //         <SearchItemText>{email}</SearchItemText>
-  //       </div>
-  //     </DropDownItem>
-  //   );
-  // };
-
-  // const foundUsers = usersList.map((user) => getItemContent(user));
-
-  // const toggleMembers = (e) => {
-  //   if (!e.target.checked) {
-  //     const filtered = { ...config.filter };
-  //     delete filtered.subjectId;
-  //     setConfig((config) => ({ ...config, filter: filtered }));
-  //   }
-  //   setIsUserFilterSet(e.target.checked);
-  // };
-
-  // const toggleAuthor = (e) => {
-  //   if (!e.target.checked) {
-  //     const filtered = { ...config.filter };
-  //     delete filtered.authorType;
-  //     setConfig((config) => ({ ...config, filter: filtered }));
-  //   }
-  //   setIsUserFilterSet(e.target.checked);
-  // };
 
   useEffect(() => {
     window.addEventListener("resize", onResize);
@@ -1090,178 +830,9 @@ const Manager = (props) => {
           </ControlsSection>
           <ControlsSection>
             <CategorySubHeader>{t("AdvancedDisplay")}</CategorySubHeader>
-            {/* <ControlsGroup>
-            {"id" in config ? (
-              <>
-                <Label className="label" text={t("Files:Filter")} />
-                <ToggleButton
-                  className="toggle"
-                  label={t("Files:ByAuthor")}
-                  onChange={toggleAuthor}
-                  isChecked={isUserFilterSet}
-                />
-                {isUserFilterSet && (
-                  <UserInputContainer>
-                    <UserInput ref={searchRef}>
-                      <TextInput
-                        scale
-                        onChange={onChangeAuthor}
-                        placeholder={t("Common:Search")}
-                        value={author}
-                        onFocus={openInviteInputPanel}
-                        isAutoFocussed
-                        onKeyDown={onKeyDown}
-                        tabIndex={5}
-                      />
-                    </UserInput>
-                    {author.length >= minSearchValue && (
-                      <StyledDropDown
-                        width={searchRef?.current?.offsetWidth}
-                        isDefaultMode={false}
-                        open={searchPanelVisible}
-                        manualX="16px"
-                        showDisabledItems
-                        clickOutsideAction={closeInviteInputPanel}
-                        eventTypes="click"
-                        {...dropDownMaxHeight}
-                      >
-                        {!!usersList.length ? foundUsers : ""}
-                      </StyledDropDown>
-                    )}
-                  </UserInputContainer>
-                )}
-                <ToggleButton
-                  className="toggle"
-                  label={t("Common:Type")}
-                  onChange={(e) => {
-                    if (!e.target.checked) {
-                      const filtered = { ...config.filter };
-                      delete filtered.filterType;
-                      setConfig((config) => ({ ...config, filter: filtered }));
-                    }
-                    setIsTypeFilterSet(e.target.checked);
-                  }}
-                  isChecked={isTypeFilterSet}
-                />
-                {isTypeFilterSet && (
-                  <ComboBox
-                    onSelect={onFilterSelect}
-                    options={filterOptions}
-                    scaled
-                    selectedOption={filterBy}
-                    displaySelectedOption
-                    directionY="top"
-                  />
-                )}
-              </>
-            ) : (
-              <>
-                <Label className="label" text={t("Files:Filter")} />
-                <ToggleButton
-                  className="toggle"
-                  label={t("Common:Member")}
-                  onChange={toggleMembers}
-                  isChecked={isUserFilterSet}
-                />
-                {isUserFilterSet && (
-                  <>
-                    {"subjectId" in config.filter ? (
-                      <SelectedItem
-                        onClick={() => {
-                          const filtered = { ...config.filter };
-                          delete filtered.subjectId;
-                          setConfig((config) => ({ ...config, filter: filtered }));
-                        }}
-                        onClose={() => {}}
-                        label={selectedUser}
-                      />
-                    ) : (
-                      <UserInputContainer>
-                        <UserInput ref={searchRef}>
-                          <TextInput
-                            scale
-                            onChange={onChangeAuthor}
-                            placeholder={t("Common:Search")}
-                            value={author}
-                            onFocus={openInviteInputPanel}
-                            isAutoFocussed
-                            onKeyDown={onKeyDown}
-                            tabIndex={5}
-                          />
-                        </UserInput>
-                        {author.length >= minSearchValue && (
-                          <StyledDropDown
-                            width={searchRef?.current?.offsetWidth}
-                            isDefaultMode={false}
-                            open={searchPanelVisible}
-                            manualX="16px"
-                            showDisabledItems
-                            clickOutsideAction={closeInviteInputPanel}
-                            eventTypes="click"
-                            {...dropDownMaxHeight}
-                          >
-                            {!!usersList.length ? foundUsers : ""}
-                          </StyledDropDown>
-                        )}
-                      </UserInputContainer>
-                    )}
-
-                    <Checkbox
-                      className="checkbox"
-                      label={t("Translations:SearchByOwner")}
-                      onChange={(e) => {
-                        setConfig((config) => ({
-                          ...config,
-                          filter: { ...config.filter, subjectFilter: e.target.checked ? 0 : 1 },
-                        }));
-                      }}
-                      isChecked={false}
-                    />
-                  </>
-                )}
-                <ToggleButton
-                  className="toggle"
-                  label={t("Common:Type")}
-                  onChange={(e) => {
-                    if (!e.target.checked) {
-                      const filtered = { ...config.filter };
-                      delete filtered.type;
-                      setConfig((config) => ({ ...config, filter: filtered }));
-                    }
-                    setIsTypeFilterSet(e.target.checked);
-                  }}
-                  isChecked={isTypeFilterSet}
-                />
-                {isTypeFilterSet &&
-                  ("type" in config.filter ? (
-                    <SelectedItem
-                      onClick={() => {
-                        const filtered = { ...config.filter };
-                        delete filtered.type;
-                        setConfig((config) => ({ ...config, filter: filtered }));
-                      }}
-                      onClose={() => {}}
-                      label={selectedType}
-                    />
-                  ) : (
-                    <ComboBox
-                      onSelect={(option) => {
-                        setConfig((config) => ({
-                          ...config,
-                          filter: { ...config.filter, type: option.roomType },
-                        }));
-                        setSelectedType(option.label);
-                      }}
-                      options={roomTypeOptions}
-                      scaled={true}
-                      selectedOption={filterBy}
-                      displaySelectedOption
-                      directionY="top"
-                    />
-                  ))}
-              </>
-            )}
-          </ControlsGroup> */}
+            <ColumnContainer>
+              <FilterBlock t={t} config={config} setConfig={setConfig} />
+            </ColumnContainer>
             <ControlsGroup>
               <Label className="label" text={t("SearchTerm")} />
               <ColumnContainer>
@@ -1317,7 +888,7 @@ const Manager = (props) => {
                 scale={true}
                 onChange={onChangeCount}
                 placeholder={t("EnterCount")}
-                value={config.count}
+                value={config.filter.count}
                 tabIndex={6}
               />
             </ControlsGroup>
@@ -1327,8 +898,8 @@ const Manager = (props) => {
                 scale={true}
                 onChange={onChangePage}
                 placeholder={t("EnterPage")}
-                value={config.page}
-                isDisabled={!config.count}
+                value={config.filter.page || 1}
+                isDisabled={!config.filter.count}
                 tabIndex={7}
               />
             </ControlsGroup>

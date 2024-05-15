@@ -63,7 +63,6 @@ const BruteForceProtection = (props) => {
 
   const [currentNumberAttempt, setCurrentNumberAttempt] =
     useState(defaultNumberAttempt);
-
   const [currentBlockingTime, setCurrentBlockingTime] =
     useState(defaultBlockingTime);
   const [currentCheckPeriod, setCurrentCheckPeriod] =
@@ -152,24 +151,12 @@ const BruteForceProtection = (props) => {
   };
 
   const getSettings = () => {
-    const currentSettings = getFromSessionStorage(
-      "currentBruteForceProtection",
-    );
-
     const defaultData = {
       numberAttempt: defaultNumberAttempt.replace(/^0+/, ""),
       blockingTime: defaultBlockingTime.replace(/^0+/, ""),
       checkPeriod: defaultCheckPeriod.replace(/^0+/, ""),
     };
     saveToSessionStorage("defaultBruteForceProtection", defaultData);
-
-    if (currentSettings) {
-      setCurrentNumberAttempt(currentSettings.numberAttempt);
-      setCurrentBlockingTime(currentSettings.blockingTime);
-      setCurrentCheckPeriod(currentSettings.checkPeriod);
-      setIsGetSettingsLoaded(true);
-      return;
-    }
 
     setCurrentNumberAttempt(defaultNumberAttempt);
     setCurrentBlockingTime(defaultBlockingTime);
@@ -248,9 +235,9 @@ const BruteForceProtection = (props) => {
     const defaultSettings = getFromSessionStorage(
       "defaultBruteForceProtection",
     );
-    setCurrentNumberAttempt(defaultSettings.numberAttempt);
-    setCurrentBlockingTime(defaultSettings.blockingTime);
-    setCurrentCheckPeriod(defaultSettings.checkPeriod);
+    setCurrentNumberAttempt(defaultSettings?.numberAttempt || "5");
+    setCurrentBlockingTime(defaultSettings?.blockingTime || "60");
+    setCurrentCheckPeriod(defaultSettings?.checkPeriod || "60");
     setShowReminder(false);
   };
 

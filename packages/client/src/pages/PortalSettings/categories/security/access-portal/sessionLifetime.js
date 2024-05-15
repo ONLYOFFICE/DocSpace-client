@@ -83,6 +83,16 @@ const SessionLifetime = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const getSettingsFromDefault = () => {
+    const defaultSettings = getFromSessionStorage(
+      "defaultSessionLifetimeSettings",
+    );
+    if (defaultSettings) {
+      setType(defaultSettings.type);
+      setSessionLifetime(defaultSettings.lifetime);
+    }
+  };
+
   const getSettings = () => {
     const currentSettings = getFromSessionStorage(
       "currentSessionLifetimeSettings",
@@ -95,19 +105,11 @@ const SessionLifetime = (props) => {
     saveToSessionStorage("defaultSessionLifetimeSettings", defaultData);
 
     if (currentSettings) {
-      setSessionLifetime(currentSettings.lifetime);
-      setType(currentSettings.type);
-    } else {
-      setSessionLifetime(lifetime?.toString());
-      setType(enabled);
-    }
-
-    if (currentSettings) {
       setType(currentSettings.type);
       setSessionLifetime(currentSettings.lifetime);
     } else {
-      setType(enabled);
       setSessionLifetime(lifetime?.toString());
+      setType(enabled);
     }
     setIsLoading(true);
   };
@@ -124,7 +126,18 @@ const SessionLifetime = (props) => {
 
   useEffect(() => {
     if (!isInit) return;
-    getSettings();
+    const currentSettings = getFromSessionStorage(
+      "currentSessionLifetimeSettings",
+    );
+    const defaultSettings = getFromSessionStorage(
+      "defaultSessionLifetimeSettings",
+    );
+
+    if (isEqual(currentSettings, defaultSettings)) {
+      getSettings();
+    } else {
+      getSettingsFromDefault();
+    }
   }, [isLoading]);
 
   useEffect(() => {
@@ -208,8 +221,8 @@ const SessionLifetime = (props) => {
     const defaultSettings = getFromSessionStorage(
       "defaultSessionLifetimeSettings",
     );
-    setType(defaultSettings.type);
-    setSessionLifetime(defaultSettings.lifetime);
+    setType(defaultSettings?.type);
+    setSessionLifetime(defaultSettings?.lifetime || "1440");
     setShowReminder(false);
   };
 

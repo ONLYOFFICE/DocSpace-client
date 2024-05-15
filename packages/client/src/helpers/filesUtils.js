@@ -119,7 +119,7 @@ export const getDefaultFileName = (format) => {
       return i18n.t("Common:NewSpreadsheet");
     case "pptx":
       return i18n.t("Common:NewPresentation");
-    case "docxf":
+    case "pdf":
       return i18n.t("Common:NewMasterForm");
     default:
       return i18n.t("Common:NewFolder");
@@ -225,11 +225,4 @@ export const connectedCloudsTypeIcon = (key) => {
       return CloudServicesWebdavReactSvgUrl;
     default:
   }
-};
-
-export const getTitleWithoutExtension = (item, fromTemplate) => {
-  const titleWithoutExst = item.title.split(".").slice(0, -1).join(".");
-  return titleWithoutExst && item.fileExst && !fromTemplate
-    ? titleWithoutExst
-    : item.title;
 };

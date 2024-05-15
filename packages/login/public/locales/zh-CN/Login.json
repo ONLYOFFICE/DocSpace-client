@@ -20,6 +20,5 @@
   "RegisterTitle": "注册请求",
   "RegistrationEmailWatermark": "邮箱",
   "RememberHelper": "默认会话寿命为20分钟。勾选此选项以将其设为1年。如需自行设置其值，请前往设置。",
-  "ResendCode": "重新发送代码",
-  "UserIsAlreadyRegistered": "用户 <1>{{email}}</1> 已注册协作空间，请输入密码，或返回使用另一电子邮件继续。"
+  "ResendCode": "重新发送代码"
 }

@@ -66,7 +66,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     isDesktop,
     language,
     FirebaseHelper,
-    // personal,
     setCheckedMaintenance,
     socketHelper,
     setPreparationPortalDialogVisible,
@@ -467,7 +466,6 @@ const ShellWrapper = inject(
     } = authStore;
 
     const {
-      personal,
       roomsMode,
       isDesktopClient,
       firebaseHelper,
@@ -526,7 +524,6 @@ const ShellWrapper = inject(
 
       isDesktop: isDesktopClient,
       FirebaseHelper: firebaseHelper,
-      personal,
       setCheckedMaintenance,
       setMaintenanceExist,
       socketHelper,

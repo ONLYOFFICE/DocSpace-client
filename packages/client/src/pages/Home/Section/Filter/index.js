@@ -299,7 +299,6 @@ const SectionFilterContent = ({
   t,
   filter,
   roomsFilter,
-  personal,
   isRecentTab,
   isFavoritesFolder,
   sectionWidth,
@@ -852,9 +851,20 @@ const SectionFilterContent = ({
 
         if (accountsFilter?.payments?.toString()) {
           filterValues.push({
-            key: filter.payments.toString(),
+            key: filter.payments?.toString(),
             label:
-              PaymentsType.Paid === filter.payments.toString()
+              PaymentsType.Paid === filter.payments?.toString()
+                ? t("Common:Paid")
+                : t("Common:Free"),
+            group: "filter-account",
+          });
+        }
+
+        if (insideGroupFilter?.payments?.toString()) {
+          filterValues.push({
+            key: filter.payments?.toString(),
+            label:
+              PaymentsType.Paid === filter.payments?.toString()
                 ? t("Common:Paid")
                 : t("Common:Free"),
             group: "filter-account",
@@ -1928,7 +1938,6 @@ const SectionFilterContent = ({
     return filterOptions;
   }, [
     t,
-    personal,
     providers,
     isPersonalRoom,
     isRooms,
@@ -2404,7 +2413,6 @@ const SectionFilterContent = ({
 
     return commonOptions;
   }, [
-    personal,
     isRooms,
     isAccountsPage,
     isPeopleAccounts,
@@ -2655,6 +2663,7 @@ const SectionFilterContent = ({
       isPeopleAccounts={isPeopleAccounts}
       isGroupsAccounts={isGroupsAccounts}
       isInsideGroup={isInsideGroup}
+      disableThirdParty={isTrash}
     />
   );
 };
@@ -2696,7 +2705,7 @@ export default inject(
     const { fetchTags } = tagsStore;
     const { isRoomAdmin } = authStore;
     const { user } = userStore;
-    const { personal, standalone, currentDeviceType } = settingsStore;
+    const { standalone, currentDeviceType } = settingsStore;
     const {
       isFavoritesFolder,
       isRecentTab,
@@ -2758,7 +2767,6 @@ export default inject(
       setViewAs,
       createThumbnails,
 
-      personal,
       isPersonalRoom,
       infoPanelVisible,
       setCurrentRoomsFilter,

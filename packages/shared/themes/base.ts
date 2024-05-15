@@ -260,20 +260,20 @@ export const getBaseTheme = () => {
 
       dropDown: {
         position: "fixed",
-        right: "32px",
-        bottom: "32px",
+        right: "48px",
+        bottom: "48px",
 
         width: "400px",
 
         zIndex: "202",
 
         mobile: {
-          right: "24px",
-          bottom: "24px",
+          right: "32px",
+          bottom: "40px",
 
           marginLeft: "24px",
 
-          width: "calc(100vw - 48px)",
+          width: "calc(100vw - 64px)",
         },
         separatorBackground: white,
 
@@ -2116,6 +2116,7 @@ export const getBaseTheme = () => {
         disabledRoleSelectorColor: "#a3a9ae",
         roleSelectorArrowColor: "#a3a9ae",
         createLink: "#a3a9ae",
+        linkAccessComboboxExpired: "#a3a9ae",
       },
 
       history: {
@@ -2607,6 +2608,13 @@ export const getBaseTheme = () => {
       button: {
         colorLink: "#657077",
         colorText: "#555F65",
+      },
+    },
+
+    emptyView: {
+      items: {
+        hoverColor: grayLight,
+        pressColor: lightGrayishStrongBlue,
       },
     },
 
@@ -3219,14 +3227,15 @@ export const getBaseTheme = () => {
       notifications: {
         textDescriptionColor: "#A3A9AE",
       },
-    },
-
-    activeSessions: {
-      color: "#333",
-      borderColor: "#eceef1",
-      tickIconColor: "#35AD17",
-      removeIconColor: "#A3A9AE",
-      sortHeaderColor: "#d0d5da",
+      activeSessions: {
+        color: "#333",
+        borderColor: "#eceef1",
+        tickIconColor: "#35AD17",
+        removeIconColor: "#A3A9AE",
+        sortHeaderColor: "#d0d5da",
+        tableCellColor: "#a3a9ae",
+        dividerColor: "#D0D5DA",
+      },
     },
 
     formWrapper: {

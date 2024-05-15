@@ -50,6 +50,12 @@ import {
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
 
+type IConfigType = IConfig & {
+  events?: {
+    onRequestStartFilling?: (event: object) => void;
+  };
+};
+
 const Editor = ({
   config,
   successAuth,
@@ -60,6 +66,7 @@ const Editor = ({
   fileInfo,
   isSharingAccess,
   errorMessage,
+  isSkipError,
 
   onSDKRequestSharingSettings,
   onSDKRequestSaveAs,
@@ -85,7 +92,7 @@ const Editor = ({
     onDocumentStateChange,
     onMetaChange,
     onMakeActionLink,
-
+    onRequestStartFilling,
     documentReady,
 
     setDocTitle,
@@ -96,6 +103,7 @@ const Editor = ({
     config,
     doc,
     errorMessage,
+    isSkipError,
     t,
   });
 
@@ -109,7 +117,7 @@ const Editor = ({
     t,
   });
 
-  const newConfig: IConfig = config
+  const newConfig: IConfigType = config
     ? {
         document: config.document,
         documentType: config.documentType,
@@ -203,7 +211,8 @@ const Editor = ({
   newConfig.events = {
     onDocumentReady,
     onRequestHistoryClose: onSDKRequestHistoryClose,
-    onRequestEditRights: () => onSDKRequestEditRights(fileInfo),
+    onRequestEditRights: () =>
+      onSDKRequestEditRights(fileInfo, newConfig.documentType),
     onAppReady: onSDKAppReady,
     onInfo: onSDKInfo,
     onWarning: onSDKWarning,
@@ -267,10 +276,15 @@ const Editor = ({
   }
 
   if (
-    typeof window !== "undefined" &&
-    window.DocSpaceConfig?.editor?.requestClose
+    (typeof window !== "undefined" &&
+      window.DocSpaceConfig?.editor?.requestClose) ||
+    IS_ZOOM
   ) {
     newConfig.events.onRequestClose = onSDKRequestClose;
+  }
+
+  if (config?.startFilling) {
+    newConfig.events.onRequestStartFilling = onRequestStartFilling;
   }
 
   return (
@@ -278,7 +292,7 @@ const Editor = ({
       id={"docspace_editor"}
       documentServerUrl={documentserverUrl}
       config={
-        errorMessage
+        errorMessage || isSkipError
           ? {
               events: {
                 onAppReady: onSDKAppReady,
@@ -294,4 +308,3 @@ const Editor = ({
 };
 
 export default Editor;
-

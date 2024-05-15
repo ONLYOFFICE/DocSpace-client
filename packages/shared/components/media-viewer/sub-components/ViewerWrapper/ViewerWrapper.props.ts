@@ -42,7 +42,8 @@ interface ViewerWrapperProps {
   isImage: boolean;
   isAudio: boolean;
   isVideo: boolean;
-  isPreviewFile: boolean;
+  isPreviewFile?: boolean;
+  isPublicFile?: boolean;
 
   errorTitle: string;
   headerIcon: string;
@@ -55,7 +56,7 @@ interface ViewerWrapperProps {
   onDownloadClick?: VoidFunction;
 
   onSetSelectionFile: VoidFunction;
-  contextModel: () => ContextMenuModel[];
+  contextModel: (isError?: boolean) => ContextMenuModel[];
 }
 
 export default ViewerWrapperProps;

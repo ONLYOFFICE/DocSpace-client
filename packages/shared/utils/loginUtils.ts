@@ -32,7 +32,7 @@ export async function login(
   user: string,
   hash: string,
   session = true,
-  captchaToken: string = "",
+  captchaToken: null | undefined | string = "",
 ): Promise<string | object> {
   try {
     const response = (await api.user.login(

@@ -46,6 +46,7 @@ import { getShareOptions, getAccessOptions } from "../Share.helpers";
 import { LinkRowProps } from "../Share.types";
 
 import ExpiredComboBox from "./ExpiredComboBox";
+import { Text } from "@docspace/shared/components/text";
 
 const LinkRow = ({
   onAddClick,
@@ -105,20 +106,26 @@ const LinkRow = ({
             />
           )}
           <div className="link-options">
-            <ComboBox
-              className="internal-combobox"
-              directionY="both"
-              options={shareOptions}
-              selectedOption={shareOption ?? ({} as TOption)}
-              onSelect={(item) => changeShareOption(item, link)}
-              scaled={false}
-              scaledOptions={false}
-              showDisabledItems
-              size={ComboBoxSize.content}
-              fillIcon={false}
-              modernView
-              isDisabled={isExpiredLink || isLoaded}
-            />
+            {!isExpiredLink ? (
+              <ComboBox
+                className="internal-combobox"
+                directionY="both"
+                options={shareOptions}
+                selectedOption={shareOption ?? ({} as TOption)}
+                onSelect={(item) => changeShareOption(item, link)}
+                scaled={false}
+                scaledOptions={false}
+                showDisabledItems
+                size={ComboBoxSize.content}
+                fillIcon={false}
+                modernView
+                isDisabled={isLoaded}
+              />
+            ) : (
+              <Text className="internal-combobox_expiered">
+                {shareOption?.label}
+              </Text>
+            )}
             <ExpiredComboBox
               link={link}
               changeExpirationOption={changeExpirationOption}

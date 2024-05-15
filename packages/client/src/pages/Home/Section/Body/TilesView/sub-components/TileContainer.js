@@ -339,15 +339,12 @@ TileContainer.defaultProps = {
 };
 
 export default inject(({ settingsStore, filesStore, treeFoldersStore }) => {
-  const { personal } = settingsStore;
   const { filter } = filesStore;
   const { isFavoritesFolder, isRecentFolder } = treeFoldersStore;
 
   const isDesc = filter?.sortOrder === "desc";
 
   return {
-    personal,
-
     isFavoritesFolder,
     isRecentFolder,
     isDesc,

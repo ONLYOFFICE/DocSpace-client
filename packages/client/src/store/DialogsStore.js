@@ -25,7 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { getNewFiles } from "@docspace/shared/api/files";
-import { ShareAccessRights } from "@docspace/shared/enums";
+import {
+  FilesSelectorFilterTypes,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
 import { Events } from "@docspace/shared/enums";
 
@@ -52,6 +55,7 @@ class DialogsStore {
   conflictResolveDialogVisible = false;
   convertDialogVisible = false;
   selectFileDialogVisible = false;
+  selectFileFormRoomDialogVisible = false;
   convertPasswordDialogVisible = false;
   inviteUsersWarningDialogVisible = false;
   changeQuotaDialogVisible = false;
@@ -106,9 +110,14 @@ class DialogsStore {
   changeRoomOwnerIsVisible = false;
   changeRoomOwnerData = null;
   editMembersGroup = null;
+  pdfFormEditVisible = false;
+  pdfFormEditData = null;
 
   shareFolderDialogVisible = false;
   cancelUploadDialogVisible = false;
+
+  selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;
+  selectFileFormRoomOpenRoot = false;
 
   constructor(
     authStore,
@@ -361,14 +370,45 @@ class DialogsStore {
     this.selectFileDialogVisible = visible;
   };
 
-  createMasterForm = async (fileInfo) => {
+  setSelectFileFormRoomDialogVisible = (
+    visible,
+    filterParam = FilesSelectorFilterTypes.DOCX,
+    openRoot = false,
+  ) => {
+    this.selectFileFormRoomDialogVisible = visible;
+    this.selectFileFormRoomFilterParam = filterParam;
+    this.selectFileFormRoomOpenRoot = openRoot;
+  };
+
+  createFromTemplateForm = (fileInfo) => {
+    this.createMasterForm(fileInfo, {
+      extension: "pdf",
+      withoutDialog: true,
+    });
+  };
+
+  createMasterForm = async (fileInfo, options) => {
+    const { extension = "pdf", withoutDialog, preview } = options;
+
+    const newTitle = fileInfo.title;
+
+    let lastIndex = newTitle.lastIndexOf(".");
+
+    if (lastIndex === -1) {
+      lastIndex = newTitle.length;
+    }
+
     const event = new Event(Events.CREATE);
 
+    const title = newTitle.substring(0, lastIndex);
+
     const payload = {
-      extension: "docxf",
+      extension,
       id: -1,
-      title: fileInfo.title,
+      title: withoutDialog ? title : `${title}.${extension}`,
       templateId: fileInfo.id,
+      withoutDialog,
+      preview,
     };
 
     event.payload = payload;
@@ -475,6 +515,11 @@ class DialogsStore {
 
   setCancelUploadDialogVisible = (visible) => {
     this.cancelUploadDialogVisible = visible;
+  };
+
+  setPdfFormEditVisible = (visible, data) => {
+    this.pdfFormEditVisible = visible;
+    this.pdfFormEditData = data;
   };
 }
 

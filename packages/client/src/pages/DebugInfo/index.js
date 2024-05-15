@@ -171,7 +171,6 @@ const DebugInfoDialog = (props) => {
 DebugInfoDialog.propTypes = {
   visible: PropTypes.bool,
   onClose: PropTypes.func,
-  personal: PropTypes.bool,
   buildVersionInfo: PropTypes.object,
 };
 

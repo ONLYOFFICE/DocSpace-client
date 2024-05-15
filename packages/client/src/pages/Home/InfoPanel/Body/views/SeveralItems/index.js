@@ -35,7 +35,7 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { StyledSeveralItemsContainer } from "../../styles/severalItems";
 
-const SeveralItems = ({ isAccounts, theme, selectedItems }) => {
+const SeveralItems = ({ isPeople, theme, selectedItems }) => {
   const { t } = useTranslation("InfoPanel");
 
   const emptyScreenAlt = theme.isBase
@@ -46,15 +46,15 @@ const SeveralItems = ({ isAccounts, theme, selectedItems }) => {
     ? EmptyScreenPersonSvgUrl
     : EmptyScreenPersonSvgDarkUrl;
 
-  const imgSrc = isAccounts ? emptyScreenPerson : emptyScreenAlt;
+  const imgSrc = isPeople ? emptyScreenPerson : emptyScreenAlt;
 
-  const itemsText = isAccounts
+  const itemsText = isPeople
     ? t("InfoPanel:SelectedUsers")
     : t("InfoPanel:ItemsSelected");
 
   return (
     <StyledSeveralItemsContainer
-      isAccounts={isAccounts}
+      isPeople={isPeople}
       className="no-thumbnail-img-wrapper"
     >
       <img src={imgSrc} />

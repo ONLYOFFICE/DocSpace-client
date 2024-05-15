@@ -53,6 +53,7 @@ export const FILE_SIZE = "file_size";
 export const ROOM = "room";
 export const USERS = "users";
 export const USERS_IN_ROOM = "usersInRoom";
+export const PDF_FORM_DIALOG_KEY = "pdf_form_dialog";
 
 export const COUNT_FOR_SHOWING_BAR = 2;
 export const PERCENTAGE_FOR_SHOWING_BAR = 90;
@@ -177,3 +178,5 @@ export const SYSTEM_FONT_FAMILY =
   "-apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Arial, sans-serif, Roboto, Noto Sans Arabic, Geeza Pro, Traditional Arabic, Noto Sans";
 
 export const HTML_EXST = [".htm", ".mht", ".html"];
+
+export const SYSTEM_THEME_KEY = "system_theme";

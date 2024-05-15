@@ -24,9 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { forwardRef, useImperativeHandle, useState } from "react";
+import React, {
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 
 import MediaContextMenu from "PUBLIC_DIR/images/vertical-dots.react.svg";
+
+import { useClickOutside } from "../../../../utils/useClickOutside";
+
 import ImageViewerToolbarProps, {
   ImperativeHandle,
   ToolbarItemType,
@@ -50,10 +58,16 @@ const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
     },
     ref,
   ) => {
+    const contextMenuRef = useRef<HTMLLIElement>(null);
+
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [percent, setPercent] = useState<number>(() =>
       Math.round(percentValue * 100),
     );
+
+    useClickOutside(contextMenuRef, () => {
+      setIsOpen(false);
+    });
 
     useImperativeHandle(
       ref,
@@ -71,6 +85,7 @@ const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
       const contextMenu = generateContextMenu(isOpen);
       return (
         <ToolbarItem
+          ref={contextMenuRef}
           style={{ position: "relative" }}
           key={item.key}
           onClick={() => {

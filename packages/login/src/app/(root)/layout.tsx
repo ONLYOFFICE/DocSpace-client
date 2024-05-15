@@ -49,14 +49,26 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const baseUrl = getBaseUrl();
+
+  const timers = { isAuth: 0, otherOperations: 0 };
+
+  const startIsAuthDate = new Date();
+
   const isAuth = await checkIsAuthenticated();
 
+  timers.isAuth = new Date().getTime() - startIsAuthDate.getTime();
+
   if (isAuth) redirect(`${baseUrl}`);
+
+  const startOtherOperationsDate = new Date();
 
   const [settings, colorTheme] = await Promise.all([
     getSettings(),
     getColorTheme(),
   ]);
+
+  timers.otherOperations =
+    new Date().getTime() - startOtherOperationsDate.getTime();
 
   if (settings === "access-restricted") redirect(`${baseUrl}/${settings}`);
 
@@ -93,6 +105,8 @@ export default async function RootLayout({
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY);
 
+  const api_host = process.env.API_HOST?.trim();
+
   return (
     <html lang="en" translate="no">
       <head>
@@ -113,6 +127,8 @@ export default async function RootLayout({
               colorTheme,
               systemTheme: systemTheme?.value as ThemeKeys,
             }}
+            timers={timers}
+            api_host={api_host}
           >
             <SimpleNav />
             <Toast isSSR />

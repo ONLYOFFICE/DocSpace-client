@@ -33,8 +33,8 @@ import { Text } from "../text";
 import StyledSocialButton from "./SocialButton.styled";
 import type { SocialButtonProps } from "./SocialButton.types";
 
-export const SocialButton = memo(
-  ({
+export const SocialButton = memo((props: SocialButtonProps) => {
+  const {
     label = "",
     size = "base",
     IconComponent,
@@ -44,33 +44,35 @@ export const SocialButton = memo(
     isDisabled = false,
     noHover = false,
     ...otherProps
-  }: SocialButtonProps) => {
-    return (
-      <StyledSocialButton
-        data-testid="social-button"
-        size={size}
-        noHover={noHover}
-        tabIndex={tabIndex}
-        isConnect={isConnect}
-        isDisabled={isDisabled}
-        {...otherProps}
+  } = props;
+  return (
+    <StyledSocialButton
+      data-testid="social-button"
+      size={size}
+      noHover={noHover}
+      tabIndex={tabIndex}
+      isConnect={isConnect}
+      isDisabled={isDisabled}
+      {...otherProps}
+    >
+      <div
+        data-url={props["data-url"]}
+        data-providername={props["data-providername"]}
+        className="social-button-container"
       >
-        <div {...otherProps} className="social-button-container">
-          {IconComponent ? (
-            <IconComponent className="iconWrapper" />
-          ) : (
-            <ReactSVG className="iconWrapper" src={iconName} />
-          )}
-          {label && (
-            <Text as="div" className="social_button_text">
-              {label}
-            </Text>
-          )}
-        </div>
-      </StyledSocialButton>
-    );
-  },
-  equal,
-);
+        {IconComponent ? (
+          <IconComponent className="iconWrapper" />
+        ) : (
+          <ReactSVG className="iconWrapper" src={iconName} />
+        )}
+        {label && (
+          <Text as="div" className="social_button_text">
+            {label}
+          </Text>
+        )}
+      </div>
+    </StyledSocialButton>
+  );
+}, equal);
 
 SocialButton.displayName = "SocialButton";

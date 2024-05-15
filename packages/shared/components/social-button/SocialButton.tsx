@@ -55,7 +55,7 @@ export const SocialButton = memo(
         isDisabled={isDisabled}
         {...otherProps}
       >
-        <div className="social-button-container" {...otherProps}>
+        <div {...otherProps} className="social-button-container">
           {IconComponent ? (
             <IconComponent className="iconWrapper" />
           ) : (

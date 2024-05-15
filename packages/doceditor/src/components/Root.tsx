@@ -26,7 +26,7 @@
 
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
@@ -62,6 +62,7 @@ const Root = ({
   doc,
   fileId,
   hash,
+  timer,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
 
@@ -76,6 +77,10 @@ const Root = ({
     error?.status === "not-supported";
 
   const { t } = useTranslation(["Editor", "Common"]);
+
+  useEffect(() => {
+    console.log("editor timer: ", timer);
+  }, [timer]);
 
   useRootInit({
     documentType: config?.documentType,

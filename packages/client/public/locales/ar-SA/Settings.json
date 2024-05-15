@@ -126,7 +126,6 @@
   "ErrorMessageBruteForceProtection": "الحجة المحددة كانت خارج نطاق القيم المتاحة.",
   "ErrorOccuredDownloadLog": "حدثت أخطاء أثناء استيراد البيانات. قم بتنزيل السجل للتحقق منها.",
   "ErrorsWereFound": "تم العثور على أخطاء {{errors}}",
-  "ExistingAccount": "حساب موجود",
   "ForcePathStyle": "فرض نمط المسار",
   "GroupsDescription": "سيتم استيراد المستخدمين الذين حددتهم في الخطوة السابقة إلى مجموعات تم إنشاؤها في {{serviceName}}. ستظهر المجموعات في قسم الحسابات.",
   "HexCode": "رمز سداسي عشري",

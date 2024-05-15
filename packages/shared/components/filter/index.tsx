@@ -81,6 +81,8 @@ const FilterInput = React.memo(
     onClearFilter,
     currentDeviceType,
     userId,
+
+    disableThirdParty,
   }: FilterProps) => {
     const [viewSettings, setViewSettings] = React.useState<
       TViewSelectorOption[]
@@ -222,6 +224,7 @@ const FilterInput = React.memo(
             isInsideGroup={isInsideGroup}
             title={filterTitle}
             userId={userId}
+            disableThirdParty={disableThirdParty}
           />
           <SortButton
             id="sort-by-button"

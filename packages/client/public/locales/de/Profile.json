@@ -15,7 +15,6 @@
   "LightTheme": "Heller Modus",
   "LogoutActiveConnection": "Abmelden von der aktiven Verbindung",
   "LogoutAllActiveConnections": "Abmelden von allen aktiven Verbindungen",
-  "LogoutAllActiveSessions": "Abmelden von allen aktiven Sitzungen",
   "LogoutAllActiveSessionsDescription": "Alle aktiven Verbindungen mit Ausnahme dieser Verbindung werden abgemeldet, da sie gerade in Gebrauch ist.",
   "LogoutBtn": "Abmelden",
   "LogoutDescription": "Hinweis. Alle aktiven Verbindungen mit Ausnahme dieser Verbindung werden abgemeldet, da sie gerade in Gebrauch ist.",

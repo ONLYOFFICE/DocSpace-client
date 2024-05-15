@@ -30,7 +30,7 @@ import { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
-import { WhiteLabelLogoType } from "@docspace/shared/enums";
+import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
 import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import {
   getBgPattern,
@@ -63,6 +63,8 @@ const Login = ({
   capabilities,
   thirdPartyProvider,
   isAuthenticated,
+  timers,
+  systemTheme,
 }: LoginProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -74,7 +76,8 @@ const Login = ({
     type: "",
   });
 
-  const theme = useTheme();
+  console.log("api res", settings, capabilities, thirdPartyProvider);
+
   const { t } = useTranslation(["Login", "Common"]);
 
   const {
@@ -84,6 +87,10 @@ const Login = ({
     openRecoverDialog,
     closeRecoverDialog,
   } = useRecoverDialog({});
+
+  useEffect(() => {
+    console.log("Login page API requests timings:", { ...timers });
+  }, [timers]);
 
   useEffect(() => {
     if (searchParams) {
@@ -178,7 +185,9 @@ const Login = ({
     [],
   );
 
-  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme?.isBase);
+  const isDark = systemTheme === ThemeKeys.DarkStr;
+
+  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, isDark);
 
   const ssoProps = ssoExists()
     ? {
@@ -189,6 +198,8 @@ const Login = ({
     : {};
 
   const isRegisterContainerVisible = settings?.enabledJoin;
+
+  console.log("settings", settings);
 
   return (
     <>

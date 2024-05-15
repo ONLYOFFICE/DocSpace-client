@@ -179,6 +179,7 @@ export interface FilterBlockProps {
   isPeopleAccounts: boolean;
   isGroupsAccounts: boolean;
   isInsideGroup: boolean;
+  disableThirdParty?: boolean;
 }
 
 export interface FilterButtonProps {
@@ -195,6 +196,7 @@ export interface FilterButtonProps {
   id: string;
   title: string;
   userId: string;
+  disableThirdParty?: boolean;
 }
 
 export interface FilterProps {
@@ -241,4 +243,6 @@ export interface FilterProps {
   onClearFilter: () => void;
   currentDeviceType: DeviceType;
   userId: string;
+
+  disableThirdParty?: boolean;
 }

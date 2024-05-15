@@ -99,6 +99,10 @@ const RootContainer = styled(Box)`
     gap: 8px;
     align-items: center;
     margin-bottom: -4px;
+
+    .paid-badge {
+      cursor: auto;
+    }
   }
 `;
 
@@ -282,6 +286,7 @@ class ThirdPartyServices extends React.Component {
                     {t("IncludedInBusiness")}
                   </Text>
                   <Badge
+                    className="paid-badge"
                     backgroundColor="#EDC409"
                     fontWeight="700"
                     label={t("Common:Paid")}

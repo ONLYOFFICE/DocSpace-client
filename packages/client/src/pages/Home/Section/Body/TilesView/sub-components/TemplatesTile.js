@@ -34,6 +34,11 @@ import { Text } from "@docspace/shared/components/text";
 import { Loader } from "@docspace/shared/components/loader";
 import { Base } from "@docspace/shared/themes";
 
+const checkedStyle = css`
+  background: ${({ theme }) =>
+    theme.filesSection.tilesView.tile.roomsCheckedColor};
+`;
+
 const StyledTemplatesTile = styled.div`
   display: contents;
 
@@ -88,6 +93,23 @@ const StyledTemplatesTile = styled.div`
         overflow: hidden;
         gap: 8px;
       }
+    }
+  }
+
+  ${(props) =>
+    !props.isEdit &&
+    (props.checked || props.isActive) &&
+    css`
+      .room-tile-template_top-content,
+      .room-tile-template_bottom-content {
+        ${checkedStyle}
+      }
+    `}
+
+  :hover {
+    .room-tile-template_top-content,
+    .room-tile-template_bottom-content {
+      ${checkedStyle}
     }
   }
 `;
@@ -188,11 +210,12 @@ const TemplatesTile = (props) => {
     FilesTileContent,
     badges,
     contextMenuTitle,
+    isActive,
   } = props;
   const { isFolder, isRoom, id, fileExst, createdBy } = item;
 
   return (
-    <StyledTemplatesTile>
+    <StyledTemplatesTile checked={checked} isActive={isActive} isEdit={isEdit}>
       <div className="room-tile-template_top-content">
         {renderElement && !(!fileExst && id === -1) && !isEdit && (
           <>

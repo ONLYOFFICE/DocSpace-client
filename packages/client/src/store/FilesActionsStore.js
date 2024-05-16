@@ -2120,6 +2120,14 @@ class FilesActionStore {
     return this.convertToArray(itemsCollection);
   };
 
+  getTemplatesFolderOptions = (itemsCollection, t) => {
+    const deleteOption = this.getOption("delete", t);
+
+    itemsCollection.set("delete", deleteOption);
+
+    return this.convertToArray(itemsCollection);
+  };
+
   getAnotherFolderOptions = (itemsCollection, t) => {
     const createRoom = this.getOption("create-room", t);
     const download = this.getOption("download", t);
@@ -2258,6 +2266,7 @@ class FilesActionStore {
       isRoomsFolder,
       isArchiveFolder,
       isRecentTab,
+      isTemplatesFolder,
     } = this.treeFoldersStore;
 
     let itemsCollection = new Map();
@@ -2278,6 +2287,9 @@ class FilesActionStore {
       return this.getArchiveRoomsFolderOptions(itemsCollection, t);
 
     if (isRoomsFolder) return this.getRoomsFolderOptions(itemsCollection, t);
+
+    if (isTemplatesFolder)
+      return this.getTemplatesFolderOptions(itemsCollection, t);
 
     return this.getAnotherFolderOptions(itemsCollection, t);
   };

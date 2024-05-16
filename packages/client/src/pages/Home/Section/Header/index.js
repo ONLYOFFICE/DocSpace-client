@@ -41,7 +41,6 @@ import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/catalog.trash.react.svg?url";
 
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
-
 import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.reat.svg?url";
@@ -51,7 +50,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import copy from "copy-to-clipboard";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import Navigation from "@docspace/shared/components/navigation";
@@ -68,7 +67,6 @@ import {
   DeviceType,
   FolderType,
   ShareAccessRights,
-  FilesSelectorFilterTypes,
   WhiteLabelLogoType,
 } from "@docspace/shared/enums";
 
@@ -256,7 +254,6 @@ const SectionHeaderContent = (props) => {
     setAccountsSelected,
     setGroupsSelected,
     isRoomAdmin,
-    isCollaborator,
     isEmptyPage,
 
     isLoading,
@@ -264,7 +261,6 @@ const SectionHeaderContent = (props) => {
     emptyTrashInProgress,
     categoryType,
     isPublicRoom,
-    isFormRoomType,
     theme,
     downloadAction,
     isPublicRoomType,
@@ -283,15 +279,17 @@ const SectionHeaderContent = (props) => {
     onClickCreateRoom,
     onCreateAndCopySharedLink,
     showNavigationButton,
-    setSelectFileFormRoomDialogVisible,
     deleteRooms,
     setSelection,
     startUpload,
     getFolderModel,
     onCreateRoom,
+    isTemplatesFolder,
+    onEditRoomTemplate,
+    onOpenTemplateAccessOptions,
+    onCreateRoomFromTemplate,
   } = props;
 
-  const navigate = useNavigate();
   const location = useLocation();
   const { groupId } = useParams();
 
@@ -445,6 +443,57 @@ const SectionHeaderContent = (props) => {
     deleteRooms(t);
   };
 
+  const getTemplateOptions = () => {
+    return [
+      {
+        id: "header_option_create-room",
+        key: "create-room",
+        label: t("Files:CreateRoom"),
+        icon: CatalogRoomsReactSvgUrl,
+        onClick: () => onCreateRoomFromTemplate(selectedFolder),
+        disabled: false,
+      },
+      {
+        id: "header_option_edit-room",
+        key: "edit-template",
+        label: t("EditTemplate"),
+        icon: SettingsReactSvgUrl,
+        onClick: () => onEditRoomTemplate(selectedFolder),
+        disabled: false,
+      },
+      {
+        id: "header_option_access-settings",
+        key: "access-settings",
+        label: t("AccessSettings"),
+        icon: PersonReactSvgUrl,
+        onClick: () => onOpenTemplateAccessOptions(),
+        disabled: false,
+      },
+      {
+        id: "header_option_show-info",
+        key: "show-info",
+        label: t("Common:Info"),
+        onClick: onShowInfo,
+        disabled: false,
+        icon: InfoOutlineReactSvgUrl,
+      },
+      {
+        id: "header_option_separator",
+        key: "separator",
+        isSeparator: true,
+        disabled: false,
+      },
+      {
+        id: "header_option_delete",
+        key: "delete",
+        label: t("DeleteTemplate"),
+        icon: CatalogTrashReactSvgUrl,
+        onClick: onDeleteAction,
+        disabled: false,
+      },
+    ];
+  };
+
   const getContextOptionsFolder = () => {
     const {
       t,
@@ -457,7 +506,6 @@ const SectionHeaderContent = (props) => {
 
       onClickEditRoom,
       onClickInviteUsers,
-      onShowInfoPanel,
       onClickReconnectStorage,
 
       canRestoreAll,
@@ -471,6 +519,8 @@ const SectionHeaderContent = (props) => {
     } = props;
 
     const isArchive = selectedFolder.rootFolderType === FolderType.Archive;
+
+    if (isTemplatesFolder) return getTemplateOptions();
 
     if (isPublicRoom) {
       return [
@@ -1056,7 +1106,6 @@ export default inject(
   }) => {
     const { startUpload } = uploadDataStore;
     const isRoomAdmin = userStore.user?.isRoomAdmin;
-    const isCollaborator = userStore.user?.isCollaborator;
 
     const {
       setSelected,
@@ -1108,7 +1157,6 @@ export default inject(
       setRestoreAllArchive,
       setInviteUsersWarningDialogVisible,
       setLeaveRoomDialogVisible,
-      setSelectFileFormRoomDialogVisible,
       setShareFolderDialogVisible,
     } = dialogsStore;
 
@@ -1117,7 +1165,7 @@ export default inject(
       isRoomsFolder,
       isArchiveFolder,
       isPersonalRoom,
-      isArchiveFolderRoot,
+      isTemplatesFolder,
     } = treeFoldersStore;
 
     const {
@@ -1129,8 +1177,8 @@ export default inject(
       onClickBack,
       emptyTrashInProgress,
       moveToPublicRoom,
-      onClickCreateRoom,
       deleteRooms,
+      onCreateRoomFromTemplate,
     } = filesActionsStore;
 
     const { setIsVisible, isVisible } = infoPanelStore;
@@ -1146,8 +1194,6 @@ export default inject(
       access,
       canCopyPublicLink,
       rootFolderType,
-      parentRoomType,
-      isFolder,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -1164,20 +1210,19 @@ export default inject(
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
     const isCustomRoomType = roomType === RoomsType.CustomRoom;
-    const isFormRoomType =
-      roomType === RoomsType.FormRoom ||
-      (parentRoomType === FolderType.FormRoom && isFolder);
 
     const {
       onClickEditRoom,
       onClickInviteUsers,
-      onShowInfoPanel,
       onClickArchive,
       onClickReconnectStorage,
       onCopyLink,
       onCreateAndCopySharedLink,
       getFolderModel,
       onCreateRoom,
+      onClickCreateRoom,
+      onEditRoomTemplate,
+      onOpenTemplateAccessOptions,
     } = contextOptionsStore;
 
     const canRestoreAll = isArchiveFolder && roomsForRestore.length > 0;
@@ -1298,7 +1343,6 @@ export default inject(
       onClickEditRoom,
       onClickCreateRoom,
       onClickInviteUsers,
-      onShowInfoPanel,
       onClickArchive,
       onCopyLink,
 
@@ -1311,7 +1355,6 @@ export default inject(
       onClickBack,
       isPublicRoomType,
       isCustomRoomType,
-      isFormRoomType,
       isPublicRoom,
       primaryLink,
       getPrimaryLink,
@@ -1332,7 +1375,6 @@ export default inject(
       getAccountsCheckboxItemLabel,
       setAccountsSelected,
       isRoomAdmin,
-      isCollaborator,
       isEmptyPage,
       emptyTrashInProgress,
       categoryType,
@@ -1349,7 +1391,6 @@ export default inject(
       onCreateAndCopySharedLink,
       showNavigationButton,
       haveLinksRight,
-      setSelectFileFormRoomDialogVisible,
       deleteRooms,
       setSelection,
       setShareFolderDialogVisible,
@@ -1357,6 +1398,11 @@ export default inject(
       onClickReconnectStorage,
       getFolderModel,
       onCreateRoom,
+      isTemplatesFolder,
+      onClickCreateRoom,
+      onEditRoomTemplate,
+      onOpenTemplateAccessOptions,
+      onCreateRoomFromTemplate,
     };
   },
 )(

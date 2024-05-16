@@ -38,6 +38,8 @@ class IndexingStore {
   }
 
   setIsIndexing = (indexing) => {
+    // turn off the mode if we are no longer in indexed folders
+    if (!indexing && this.isIndexEditingMode) this.setIsIndexEditingMode(false);
     this.isIndexing = indexing;
   };
 

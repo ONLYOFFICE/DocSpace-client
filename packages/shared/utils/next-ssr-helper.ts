@@ -40,7 +40,9 @@ export const getBaseUrl = () => {
 };
 
 export const getAPIUrl = () => {
-  const baseUrl = process.env.API_HOST?.trim() ?? getBaseUrl();
+  // const baseUrl = process.env.API_HOST?.trim() ?? getBaseUrl();
+
+  const baseUrl = getBaseUrl();
 
   const baseAPIUrl = `${baseUrl}/${API_PREFIX}`;
 

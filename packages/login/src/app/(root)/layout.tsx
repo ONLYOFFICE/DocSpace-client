@@ -107,6 +107,14 @@ export default async function RootLayout({
     redirectUrl = `unavailable`;
   }
 
+  const internalRequest = api_host
+    ? await fetch(`${api_host}/api/2.0/settings?withPassword=true`)
+    : undefined;
+
+  let internalRequestJson = undefined;
+
+  if (internalRequest?.ok) internalRequestJson = await internalRequest.json();
+
   return (
     <html lang="en" translate="no">
       <head>
@@ -129,6 +137,8 @@ export default async function RootLayout({
             }}
             timers={timers}
             api_host={api_host}
+            internalRequest={internalRequest}
+            internalRequestJson={internalRequestJson}
             redirectURL={redirectUrl}
           >
             <SimpleNav systemTheme={systemTheme?.value as ThemeKeys} />

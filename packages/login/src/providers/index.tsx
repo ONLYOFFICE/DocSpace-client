@@ -50,6 +50,8 @@ export const Providers = ({
   timers,
   api_host,
   redirectURL,
+  internalRequest,
+  internalRequestJson,
 }: {
   children: React.ReactNode;
   value: TDataContext;
@@ -62,7 +64,9 @@ export const Providers = ({
   React.useEffect(() => {
     console.log("Layout API requests timings:", { ...timers });
     console.log("API_HOST: ", api_host);
-  }, [api_host, timers]);
+    console.log("internal request", internalRequest);
+    console.log("JSON internal request", internalRequestJson);
+  }, [api_host, timers, internalRequest, internalRequestJson]);
 
   React.useEffect(() => {
     if (redirectURL) window.location.replace("/");

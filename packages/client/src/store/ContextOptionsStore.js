@@ -1208,8 +1208,7 @@ class ContextOptionsStore {
 
     const isArchive = item.rootFolderType === FolderType.Archive;
 
-    const isVirtualDataRoom =
-      this.selectedFolderStore.roomType === RoomsType.VirtualDataRoom;
+    const { isIndexing } = this.indexingStore;
 
     const indexOptions = {
       id: "option_edit-index",
@@ -1217,7 +1216,7 @@ class ContextOptionsStore {
       label: t("Common:EditIndex"),
       icon: EditIndexReactSvgUrl,
       onClick: () => this.onEditIndex(),
-      disabled: !isVirtualDataRoom,
+      disabled: !isIndexing,
     };
 
     const optionsModel = [

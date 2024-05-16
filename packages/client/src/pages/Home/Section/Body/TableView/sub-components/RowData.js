@@ -62,12 +62,12 @@ const RowDataComponent = (props) => {
     badgesComponent,
     quickButtonsComponent,
 
-    enableIndexing,
+    isIndexing,
   } = props;
 
   return (
     <>
-      {indexColumnIsEnabled && enableIndexing && (
+      {indexColumnIsEnabled && isIndexing && (
         <TableCell
           className={classNames(
             selectionProp?.className,
@@ -214,7 +214,7 @@ const RowDataComponent = (props) => {
   );
 };
 
-export default inject(({ tableStore, selectedFolderStore }) => {
+export default inject(({ tableStore, indexingStore }) => {
   const {
     authorColumnIsEnabled,
     createdColumnIsEnabled,
@@ -225,12 +225,7 @@ export default inject(({ tableStore, selectedFolderStore }) => {
     quickButtonsColumnIsEnabled,
   } = tableStore;
 
-  const { indexing, roomType } = selectedFolderStore;
-
-  const enableIndexing =
-    window.location.pathname.includes("rooms/shared") &&
-    roomType === RoomsType.VirtualDataRoom &&
-    indexing;
+  const { isIndexing } = indexingStore;
 
   return {
     authorColumnIsEnabled,
@@ -241,6 +236,6 @@ export default inject(({ tableStore, selectedFolderStore }) => {
     typeColumnIsEnabled,
     quickButtonsColumnIsEnabled,
 
-    enableIndexing,
+    isIndexing,
   };
 })(observer(RowDataComponent));

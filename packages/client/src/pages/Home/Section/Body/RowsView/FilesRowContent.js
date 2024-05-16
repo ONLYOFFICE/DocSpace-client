@@ -39,7 +39,6 @@ import {
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { RowContent } from "@docspace/shared/components/row-content";
-import { RoomsType } from "@docspace/shared/enums";
 
 import withContent from "../../../../../HOCs/withContent";
 
@@ -217,7 +216,7 @@ const FilesRowContent = ({
   isDefaultRoomsQuotaSet,
   isStatisticsAvailable,
   showStorageInfo,
-  isVirtualDataRoom,
+  isIndexing,
 }) => {
   const {
     contentLength,
@@ -326,7 +325,7 @@ const FilesRowContent = ({
           {!isRoom && !isRooms && quickButtons}
         </div>
 
-        {isVirtualDataRoom && (
+        {isIndexing && (
           <Text
             containerMinWidth="200px"
             containerWidth="15%"
@@ -370,7 +369,7 @@ export default inject(
     settingsStore,
     treeFoldersStore,
     filesStore,
-    selectedFolderStore,
+    indexingStore,
   }) => {
     const { filter, roomsFilter } = filesStore;
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
@@ -379,11 +378,7 @@ export default inject(
     const isRooms = isRoomsFolder || isArchiveFolder;
     const filterSortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
 
-    const { indexing, roomType } = selectedFolderStore;
-
-    const isVirtualDataRoom =
-      window.location.pathname.includes("rooms/shared") &&
-      roomType === RoomsType.VirtualDataRoom;
+    const { isIndexing } = indexingStore;
 
     const { isDefaultRoomsQuotaSet, isStatisticsAvailable, showStorageInfo } =
       currentQuotaStore;
@@ -394,7 +389,7 @@ export default inject(
       isDefaultRoomsQuotaSet,
       isStatisticsAvailable,
       showStorageInfo,
-      isVirtualDataRoom,
+      isIndexing,
     };
   },
 )(

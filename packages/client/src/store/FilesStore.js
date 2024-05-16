@@ -93,6 +93,7 @@ class FilesStore {
   publicRoomStore;
   settingsStore;
   currentQuotaStore;
+  indexingStore;
 
   pluginStore;
 
@@ -197,6 +198,7 @@ class FilesStore {
     userStore,
     currentTariffStatusStore,
     settingsStore,
+    indexingStore,
   ) {
     const pathname = window.location.pathname.toLowerCase();
     this.isEditor = pathname.indexOf("doceditor") !== -1;
@@ -215,6 +217,7 @@ class FilesStore {
     this.infoPanelStore = infoPanelStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.settingsStore = settingsStore;
+    this.indexingStore = indexingStore;
 
     this.roomsController = new AbortController();
     this.filesController = new AbortController();
@@ -1455,6 +1458,12 @@ class FilesStore {
           await this.publicRoomStore.getExternalLinks(data.current.id);
         }
 
+        if (data.current.indexing || data.current.order) {
+          this.indexingStore.setIsIndexing(true);
+        } else if (data.current.rootFolderId !== FolderType.COMMON) {
+          this.indexingStore.setIsIndexing(false);
+        }
+
         if (data.current?.indexing && filterData.sortBy !== "customOrder") {
           filterData.sortBy = "customOrder";
           return window.DocSpace.navigate(
@@ -1707,6 +1716,9 @@ class FilesStore {
     withFilterLocalStorage = false,
   ) => {
     const { setSelectedNode, roomsFolderId } = this.treeFoldersStore;
+    const { setIsIndexing, isIndexing } = this.indexingStore;
+
+    if (isIndexing) setIsIndexing(false);
 
     if (this.clientLoadingStore.isLoading) {
       this.filesController.abort();

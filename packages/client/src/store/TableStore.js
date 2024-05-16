@@ -99,7 +99,7 @@ class TableStore {
     treeFoldersStore,
     userStore,
     settingsStore,
-    selectedFolderStore,
+    indexingStore,
   ) {
     makeAutoObservable(this);
 
@@ -107,7 +107,7 @@ class TableStore {
     this.treeFoldersStore = treeFoldersStore;
     this.userStore = userStore;
     this.settingsStore = settingsStore;
-    this.selectedFolderStore = selectedFolderStore;
+    this.indexingStore = indexingStore;
   }
 
   setRoomColumnType = (enable) => {
@@ -412,7 +412,7 @@ class TableStore {
       getIsAccountsInsideGroup,
     } = this.treeFoldersStore;
 
-    const { indexing, roomType } = this.selectedFolderStore;
+    const { isIndexing } = this.indexingStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
@@ -431,7 +431,7 @@ class TableStore {
               ? `${TABLE_TRASH_COLUMNS}=${userId}`
               : isRecentTab
                 ? `${TABLE_RECENT_COLUMNS}=${userId}`
-                : indexing && roomType === RoomsType.VirtualDataRoom
+                : isIndexing
                   ? `${TABLE_VDR_INDEXING_COLUMNS}=${userId}`
                   : `${TABLE_COLUMNS}=${userId}`;
   }
@@ -439,7 +439,7 @@ class TableStore {
   get columnStorageName() {
     const { isRoomsFolder, isArchiveFolder, isTrashFolder, isRecentTab } =
       this.treeFoldersStore;
-    const { indexing, roomType } = this.selectedFolderStore;
+    const { isIndexing } = this.indexingStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
@@ -452,7 +452,7 @@ class TableStore {
         ? `${COLUMNS_TRASH_SIZE}=${userId}`
         : isRecentTab
           ? `${COLUMNS_RECENT_SIZE}=${userId}`
-          : indexing && roomType === RoomsType.VirtualDataRoom
+          : isIndexing
             ? `${COLUMNS_VDR_INDEXING_SIZE}=${userId}`
             : `${COLUMNS_SIZE}=${userId}`;
   }

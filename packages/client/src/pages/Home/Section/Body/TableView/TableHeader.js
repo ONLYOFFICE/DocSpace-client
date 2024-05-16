@@ -26,7 +26,6 @@
 
 import React from "react";
 import { TableHeader } from "@docspace/shared/components/table";
-import { RoomsType } from "@docspace/shared/enums";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { Events } from "@docspace/shared/enums";
@@ -56,9 +55,7 @@ class FilesTableHeader extends React.Component {
       isDefaultRoomsQuotaSet,
       showStorageInfo,
       isArchiveFolder,
-      indexing,
-      roomType,
-      isVirtualDataRoom,
+      isIndexing,
     } = this.props;
 
     const defaultColumns = [];
@@ -362,7 +359,7 @@ class FilesTableHeader extends React.Component {
       defaultColumns.push(...columns);
     }
 
-    if (isVirtualDataRoom && indexing) {
+    if (isIndexing) {
       defaultColumns.unshift({
         key: "Index",
         title: "#",
@@ -566,8 +563,8 @@ class FilesTableHeader extends React.Component {
       isFrame,
       showSettings,
 
-      isVirtualDataRoom,
-      indexing,
+      isIndexing,
+      isIndexEditingMode,
     } = this.props;
 
     const {
@@ -592,7 +589,8 @@ class FilesTableHeader extends React.Component {
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         sectionWidth={sectionWidth}
         resetColumnsSize={resetColumnsSize}
-        sortingVisible={isVirtualDataRoom && indexing ? false : sortingVisible}
+        sortingVisible={isIndexing ? false : sortingVisible}
+        isIndexEditingMode={isIndexEditingMode}
         infoPanelVisible={infoPanelVisible}
         useReactWindow={!withPaging}
         tagRef={tagRef}
@@ -615,12 +613,13 @@ export default inject(
     clientLoadingStore,
     infoPanelStore,
     currentQuotaStore,
+    indexingStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
     const { isDefaultRoomsQuotaSet, showStorageInfo } = currentQuotaStore;
 
-    const { indexing, roomType } = selectedFolderStore;
+    const { isIndexEditingMode, isIndexing } = indexingStore;
 
     const {
       isHeaderChecked,
@@ -673,10 +672,6 @@ export default inject(
 
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
 
-    const isVirtualDataRoom =
-      window.location.pathname.includes("rooms/shared") &&
-      roomType === RoomsType.VirtualDataRoom;
-
     return {
       setRoomsFilter,
       isHeaderChecked,
@@ -685,8 +680,7 @@ export default inject(
       withContent,
       sortingVisible,
 
-      indexing,
-      roomType,
+      isIndexing,
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
 
@@ -730,7 +724,6 @@ export default inject(
       setColumnEnable,
       isTrashFolder,
       isPublicRoom,
-      isVirtualDataRoom,
       publicRoomKey,
 
       isFrame,
@@ -740,6 +733,7 @@ export default inject(
       isDefaultRoomsQuotaSet,
       showStorageInfo,
       isArchiveFolder,
+      isIndexEditingMode,
     };
   },
 )(

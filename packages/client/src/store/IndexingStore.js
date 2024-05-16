@@ -30,15 +30,16 @@ class IndexingStore {
   selectedFolderStore;
 
   isIndexEditingMode = false;
+  isIndexing = false;
 
   constructor(selectedFolderStore) {
     this.selectedFolderStore = selectedFolderStore;
     makeAutoObservable(this);
   }
 
-  get isIndexing() {
-    return this.selectedFolderStore?.indexing;
-  }
+  setIsIndexing = (indexing) => {
+    this.isIndexing = indexing;
+  };
 
   setIsIndexEditingMode = (mode) => {
     this.isIndexEditingMode = mode;

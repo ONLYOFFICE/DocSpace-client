@@ -151,6 +151,7 @@ const filesStore = new FilesStore(
   userStore,
   currentTariffStatusStore,
   settingsStore,
+  indexingStore,
 );
 
 const mediaViewerDataStore = new MediaViewerDataStore(
@@ -264,7 +265,7 @@ const tableStore = new TableStore(
   treeFoldersStore,
   userStore,
   settingsStore,
-  selectedFolderStore,
+  indexingStore,
 );
 
 infoPanelStore.filesSettingsStore = filesSettingsStore;

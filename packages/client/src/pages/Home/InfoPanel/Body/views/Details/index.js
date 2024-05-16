@@ -28,12 +28,17 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-
-import { FileType, FolderType } from "@docspace/shared/enums";
+import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
+import { FileType, FolderType, RoomsType } from "@docspace/shared/enums";
 import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
 
 import DetailsHelper from "../../helpers/DetailsHelper.js";
-import { StyledNoThumbnail, StyledThumbnail } from "../../styles/details.js";
+import {
+  StyledNoThumbnail,
+  StyledThumbnail,
+  StyledPublicRoomBar,
+} from "../../styles/details.js";
 import { StyledProperties, StyledSubtitle } from "../../styles/common.js";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 const Details = ({
@@ -49,6 +54,7 @@ const Details = ({
   isArchive,
   isDefaultRoomsQuotaSet,
   setNewInfoPanelSelection,
+  onCreateRoomFromTemplate,
 }) => {
   const [itemProperties, setItemProperties] = useState([]);
 
@@ -85,6 +91,10 @@ const Details = ({
     }
   }, [selection]);
 
+  const onCreateRoom = () => {
+    onCreateRoomFromTemplate(selection);
+  };
+
   useEffect(() => {
     createThumbnailAction();
   }, [selection, createThumbnailAction]);
@@ -99,9 +109,36 @@ const Details = ({
   const isLoadedRoomIcon = !!selection.logo?.large;
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
 
+  // const isTemplate = selection.roomType === RoomsType.TemplateRoom; //TODO: Templates
+  const isTemplate = true; //TODO: Templates
+
   return (
     <>
-      {selection.thumbnailUrl && !isThumbnailError ? (
+      {isTemplate ? (
+        <StyledPublicRoomBar
+          headerText={t("Files:RoomTemplate")}
+          iconName={FormReactSvgUrl} // #657077 //TODO: Templates
+          bodyText={
+            <>
+              <Text
+                fontSize="12px"
+                fontWeight={400}
+                className="room-template_text"
+              >
+                {t("Files:RoomTemplateDescription")}
+              </Text>
+
+              <Button
+                label={t("Files:CreateRoom")}
+                className="room-template_button"
+                onClick={onCreateRoom}
+                size="extraSmall"
+                primary
+              />
+            </>
+          }
+        />
+      ) : selection.thumbnailUrl && !isThumbnailError ? (
         <StyledThumbnail
           isImageOrMedia={
             selection?.viewAccessibility?.ImageView ||
@@ -135,13 +172,11 @@ const Details = ({
           />
         </StyledNoThumbnail>
       )}
-
       <StyledSubtitle>
         <Text fontWeight="600" fontSize="14px">
           {t("Properties")}
         </Text>
       </StyledSubtitle>
-
       <StyledProperties>
         {itemProperties.map((property) => {
           return (
@@ -179,7 +214,7 @@ export default inject(
     const { culture } = settingsStore;
     const { user } = userStore;
 
-    const { selectTag } = filesActionsStore;
+    const { selectTag, onCreateRoomFromTemplate } = filesActionsStore;
 
     const isVisitor = user.isVisitor;
     const isCollaborator = user.isCollaborator;
@@ -199,6 +234,7 @@ export default inject(
       isArchive,
       isDefaultRoomsQuotaSet,
       setNewInfoPanelSelection,
+      onCreateRoomFromTemplate,
     };
   },
 )(withTranslation(["InfoPanel", "Common", "Translations", "Files"])(Details));

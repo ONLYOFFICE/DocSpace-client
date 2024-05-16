@@ -46,9 +46,15 @@ const StyledPublicRoomBar = styled.div`
   .header-body {
     display: flex;
     height: fit-content;
+    align-items: center;
     width: 100%;
     gap: 8px;
     font-weight: 600;
+
+    .header-icon {
+      height: 16px;
+      width: 16px;
+    }
   }
 
   .text-container_header {

@@ -27,6 +27,7 @@
 import styled from "styled-components";
 import { isMobile, isTablet } from "react-device-detect";
 import { Base } from "@docspace/shared/themes";
+import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 
 const StyledThumbnail = styled.div`
   display: flex;
@@ -69,7 +70,24 @@ const StyledNoThumbnail = styled.div`
   }
 `;
 
+const StyledPublicRoomBar = styled(PublicRoomBar)`
+  margin-bottom: -2px;
+
+  .text-container_body {
+    margin-top: 2px;
+
+    .room-template_button {
+      margin-top: 10px;
+    }
+
+    .room-template_text {
+      color: ${({ theme }) => theme.infoPanel.links.primaryColor};
+    }
+  }
+`;
+
 StyledThumbnail.defaultProps = { theme: Base };
 StyledNoThumbnail.defaultProps = { theme: Base };
+StyledPublicRoomBar.defaultProps = { theme: Base };
 
-export { StyledThumbnail, StyledNoThumbnail };
+export { StyledThumbnail, StyledNoThumbnail, StyledPublicRoomBar };

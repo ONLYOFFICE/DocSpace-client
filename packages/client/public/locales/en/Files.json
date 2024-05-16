@@ -202,5 +202,7 @@
   "AddUsersOrGroupsDescription": "The added administrators will be able to create rooms using this template.",
   "AddUsersOrGroupsInfo": "Only <strong>DocSpace</strong> and <strong>Room admins</strong> are shown here",
   "AddUsersOrGroupsInfoGroups": "Only <strong>DocSpace</strong> and <strong>Room admins</strong> from the selected groups will be able to create rooms using this template.",
-  "AddAdminByNameOrEmail": "Add admin by name or email"
+  "AddAdminByNameOrEmail": "Add admin by name or email",
+  "RoomTemplate": "Room template",
+  "RoomTemplateDescription": "Use this template to quickly create a new room."
 }

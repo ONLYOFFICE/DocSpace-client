@@ -127,6 +127,16 @@ const InfoPanelHeaderContent = (props) => {
 
   const personalSubmenu = [submenuData[1], submenuData[2]];
 
+  const templateSubmenu = [
+    {
+      id: "info_members",
+      name: t("Common:Accesses"),
+      onClick: setMembers,
+      content: null,
+    },
+    submenuData[2],
+  ];
+
   if (selection?.canShare) {
     personalSubmenu.unshift({
       id: "info_share",
@@ -192,6 +202,9 @@ const InfoPanelHeaderContent = (props) => {
     selection?.rootFolderType === FolderType.Rooms ||
     selection?.rootFolderType === FolderType.Archive;
 
+  // const isTemplate = selection?.rootFolderType === FolderType.Templates;
+  const isTemplate = true; //TODO: Templates
+
   return (
     <StyledInfoPanelHeader isTablet={isTablet} withSubmenu={withSubmenu}>
       <div className="main">
@@ -216,7 +229,13 @@ const InfoPanelHeaderContent = (props) => {
 
       {withSubmenu && (
         <div className="submenu">
-          {isRoomsType ? (
+          {isTemplate ? (
+            <Submenu
+              style={{ width: "100%" }}
+              data={templateSubmenu}
+              forsedActiveItemId={roomsView}
+            />
+          ) : isRoomsType ? (
             <Submenu
               style={{ width: "100%" }}
               data={roomsSubmenu}

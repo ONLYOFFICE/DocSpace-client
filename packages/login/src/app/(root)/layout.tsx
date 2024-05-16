@@ -107,13 +107,13 @@ export default async function RootLayout({
     redirectUrl = `unavailable`;
   }
 
-  const internalRequest = await fetch(
-    `${api_host}/api/2.0/settings?withPassword=true`,
-  );
+  const internalRequest = api_host
+    ? await fetch(`${api_host}/api/2.0/settings?withPassword=true`)
+    : undefined;
 
-  let internalRequestJson = "";
+  let internalRequestJson = undefined;
 
-  if (internalRequest.ok) internalRequestJson = await internalRequest.json();
+  if (internalRequest?.ok) internalRequestJson = await internalRequest.json();
 
   return (
     <html lang="en" translate="no">

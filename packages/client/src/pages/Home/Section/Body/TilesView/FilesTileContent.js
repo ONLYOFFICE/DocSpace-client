@@ -141,9 +141,8 @@ const FilesTileContent = ({
   theme,
   isRooms,
   currentDeviceType,
-  isTemplate,
 }) => {
-  const { fileExst, title, viewAccessibility } = item;
+  const { fileExst, title, viewAccessibility, isTemplate } = item;
 
   const isMedia = viewAccessibility?.ImageView || viewAccessibility?.MediaView;
 

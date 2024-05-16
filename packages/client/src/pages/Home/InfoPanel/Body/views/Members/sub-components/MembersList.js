@@ -38,7 +38,7 @@ import { RowLoader } from "@docspace/shared/skeletons/selector";
 import { isMobile, mobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import { StyledUserTypeHeader } from "../../../styles/members";
-import { ScrollbarContext } from "@docspace/shared/components/scrollbar/custom-scrollbar";
+import { ScrollbarContext } from "@docspace/shared/components/scrollbar";
 
 const MainStyles = styled.div`
   #members-list-header {

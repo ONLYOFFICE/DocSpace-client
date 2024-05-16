@@ -37,10 +37,9 @@ import { Scrollbar } from "./custom-scrollbar";
 const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
   (props, ref) => {
     const {
-      id,
       onScroll,
       autoHide = true,
-      scrollclass,
+      scrollClass,
       fixedSize = false,
       className,
       ...rest
@@ -63,13 +62,13 @@ const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
           <div
             {...restLibProps}
             key="scroll-renderer-div"
-            className={classNames("scroller", scrollclass || "") || "scroller"}
+            className={classNames("scroller", scrollClass || "") || "scroller"}
             ref={elementRef}
             onScroll={onScroll}
           />
         );
       },
-      [onScroll, scrollclass],
+      [onScroll, scrollClass],
     );
 
     const showTracks = useMemo(
@@ -111,7 +110,6 @@ const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
     return (
       <StyledScrollbar
         {...rest}
-        id={id}
         data-testid="scrollbar"
         disableTracksWidthCompensation
         $fixedSize={fixedSize}

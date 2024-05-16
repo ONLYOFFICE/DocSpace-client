@@ -173,7 +173,7 @@ const StyledScrollbar = styled(Scrollbar)<{ $fixedSize?: boolean }>`
   }
 
   // tracks shown if scroll element was not auto hidden, hovered
-  // and there is no another nesting scroll element or backdrop
+  // and there is no another nesting hovered scroll element or backdrop
   &.auto-hide.scroll-visible:hover:not(:has(&:hover, .backdrop-active)) {
     .track {
       opacity: 1;

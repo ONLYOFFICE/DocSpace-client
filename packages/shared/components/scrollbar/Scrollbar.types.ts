@@ -29,6 +29,8 @@ import { ScrollbarType } from "./Scrollbar.enums";
 export interface ScrollbarProps {
   /** Accepts class */
   className?: string;
+  /** This class will be placed on scroller element */
+  scrollClass?: string;
   /** Accepts id  */
   id?: string;
   /** Accepts css style  */
@@ -41,15 +43,10 @@ export interface ScrollbarProps {
   noScrollY?: boolean;
   /** Disable horizontal scrolling. */
   noScrollX?: boolean;
-  /** Calculating height of content depending on number of lines */
-  isFullHeight?: boolean;
-  /** Calculated height of content depending on number of lines in pixels */
-  fullHeight?: number;
   /** Wrap children in context that contains scrollbar instance */
   createContext?: boolean;
 
   onScroll?: React.UIEventHandler<HTMLDivElement>;
-  scrollclass?: string;
   children?: React.ReactNode;
 }
 

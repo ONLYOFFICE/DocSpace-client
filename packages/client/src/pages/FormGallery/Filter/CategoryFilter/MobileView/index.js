@@ -124,7 +124,7 @@ const CategoryFilterMobile = ({
         >
           <Scrollbar
             style={{ position: "absolute" }}
-            scrollclass="section-scroll"
+            scrollClass="section-scroll"
             ref={scrollRef}
           >
             <DropDownItem

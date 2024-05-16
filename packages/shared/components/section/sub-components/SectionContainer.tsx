@@ -44,7 +44,7 @@ const SectionContainer = React.forwardRef<
       {...props}
     >
       {withBodyScroll && currentDeviceType !== DeviceType.mobile ? (
-        <Scrollbar id="sectionScroll" scrollclass="section-scroll" fixedSize>
+        <Scrollbar id="sectionScroll" scrollClass="section-scroll" fixedSize>
           {children}
         </Scrollbar>
       ) : (

@@ -126,7 +126,6 @@
   "ErrorMessageBruteForceProtection": "Norādītais arguments bija ārpus derīgo vērtību diapazona.",
   "ErrorOccuredDownloadLog": "Datu importēšanas laikā radās kļūdas. Lejupielādējiet žurnālu, lai tos pārbaudītu.",
   "ErrorsWereFound": "tika atrasta (-s){{errors}} kļūda (-s)",
-  "ExistingAccount": "Esošs konts",
   "ForcePathStyle": "Uzspiest ceļa stilu",
   "GroupsDescription": "Lietotāji, kurus atlasījāt iepriekšējā darbībā, tiks importēti grupās, kas izveidotas {{serviceName}}. Grupas tiks parādītas sadaļā Konti.",
   "HexCode": "Heksadecimālais kods",

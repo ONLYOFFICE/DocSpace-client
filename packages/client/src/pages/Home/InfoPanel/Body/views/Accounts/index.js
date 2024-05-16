@@ -288,7 +288,7 @@ const Accounts = (props) => {
                 {infoPanelSelection.groups.map((group) => (
                   <Link
                     key={group.id}
-                    className={"info_data first-row info_group"}
+                    className={"info_data info_group"}
                     isHovered={true}
                     fontSize={"13px"}
                     lineHeight={"20px"}

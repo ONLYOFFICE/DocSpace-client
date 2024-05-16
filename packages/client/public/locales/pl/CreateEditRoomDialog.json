@@ -9,8 +9,6 @@
   "DisableRoomQuota": "Wyłącz limit dla tego pokoju",
   "FillingFormsRoomDescription": "Buduj, udostępniaj i wypełniaj szablony dokumentów lub pracuj z gotowymi presetami, aby szybko tworzyć dokumenty dowolnego rodzaju.",
   "FillingFormsRoomTitle": "Pokój do wypełniania formularzy",
-  "FormRoomDescription": "Udostępniaj formularze wszystkim użytkownikom i zbieraj wypełnione formularze w katalogu Gotowe. Użytkownicy mogą wielokrotnie wypełniać poszczególne formularze, tworząc oddzielne pliki końcowe. W podstawowych pokojach z formularzami  nie można dodawać wielu ról użytkowników do formularzy.",
-  "FormRoomTitle": "Podstawowy pokój z formularzami",
   "Icon": "Ikona",
   "MakeRoomPrivateDescription": "Wszystkie pliki w tym pokoju zostaną zaszyfrowane.",
   "MakeRoomPrivateLimitationsWarningDescription": "Dzięki tej funkcji możesz zapraszać tylko istniejących użytkowników DocSpace. Po utworzeniu pokoju nie będziesz w stanie zmienić listy użytkowników.",

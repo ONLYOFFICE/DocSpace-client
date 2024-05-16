@@ -47,6 +47,8 @@ export type RoomSelectorProps = TSelectorHeader &
     submitButtonLabel?: string;
     withSearch?: boolean;
 
+    disableThirdParty?: boolean;
+
     emptyScreenHeader?: string;
     emptyScreenDescription?: string;
   };

@@ -38,6 +38,7 @@ import {
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import api from "../../api";
 import RoomsFilter from "../../api/rooms/filter";
+import { RoomsStorageFilter } from "../../enums";
 
 import { TTranslation } from "../../types";
 
@@ -70,6 +71,8 @@ const RoomSelector = ({
   onCancel,
 
   roomType,
+
+  disableThirdParty,
   emptyScreenHeader,
   emptyScreenDescription,
 }: RoomSelectorProps) => {
@@ -141,6 +144,8 @@ const RoomSelector = ({
       filter.type = roomType;
       filter.filterValue = searchValue || null;
 
+      if (disableThirdParty) filter.storageFilter = RoomsStorageFilter.internal;
+
       const {
         folders,
         total: totalCount,
@@ -171,7 +176,7 @@ const RoomSelector = ({
 
       setIsNextPageLoading(false);
     },
-    [excludeItems, roomType, searchValue, setIsDataReady],
+    [disableThirdParty, excludeItems, roomType, searchValue, setIsDataReady],
   );
 
   const headerSelectorProps: TSelectorHeader = withHeader

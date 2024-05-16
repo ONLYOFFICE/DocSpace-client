@@ -29,10 +29,25 @@ import type { NextRequest } from "next/server";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
-  return NextResponse.json({ status: "healthy" }, { status: 200 });
+  const host = request.headers.get("x-forwarded-host");
+  const proto = request.headers.get("x-forwarded-proto");
+
+  const redirectUrl = `${proto}:${host}`;
+
+  if (request.nextUrl.pathname === "/health") {
+    console.log("Get login health check for portal: ", redirectUrl);
+    return NextResponse.json({ status: "healthy" }, { status: 200 });
+  }
+
+  const isAuth = !!request.cookies.get("asc_auth_key")?.value;
+
+  const url = request.nextUrl.clone();
+  url.pathname = "/";
+
+  if (isAuth && redirectUrl) return NextResponse.redirect(redirectUrl);
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: "/health",
+  matcher: ["/health", "/"],
 };

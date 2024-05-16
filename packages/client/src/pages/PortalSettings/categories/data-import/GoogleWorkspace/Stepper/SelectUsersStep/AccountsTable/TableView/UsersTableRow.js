@@ -88,7 +88,7 @@ const UsersTableRow = ({
 
       <TableCell>
         {isDuplicate ? (
-          <Text className="user-existing">{t("Settings:ExistingAccount")}</Text>
+          <Text className="user-existing">{t("Settings:AccountAlreadyExists")}</Text>
         ) : (
           <Text className="not-existing">{NOT_EXIST}</Text>
         )}

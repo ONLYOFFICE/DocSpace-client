@@ -126,7 +126,6 @@
   "ErrorMessageBruteForceProtection": "O argumento especificado estava fora do intervalo de valores válidos.",
   "ErrorOccuredDownloadLog": "Ocorreram erros durante a importação de dados. Baixe o log para verificá-los.",
   "ErrorsWereFound": "{{errors}} erros foram encontrados",
-  "ExistingAccount": "Conta existente",
   "ForcePathStyle": "Forçar a Formatação do Destino",
   "GroupsDescription": "Os usuários selecionados na etapa anterior serão importados para grupos criados em {{serviceName}}. Os grupos aparecerão na seção Contas.",
   "HexCode": "Código hexadecimal",

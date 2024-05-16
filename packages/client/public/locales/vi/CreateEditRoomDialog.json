@@ -9,8 +9,6 @@
   "DisableRoomQuota": "Tắt hạn mức cho phòng này",
   "FillingFormsRoomDescription": "Xây dựng, chia sẻ và điền vào các mẫu tài liệu hoặc làm việc với các cài đặt sẵn để nhanh chóng tạo bất kỳ loại tài liệu nào.",
   "FillingFormsRoomTitle": "Phòng điền vào các mẫu",
-  "FormRoomDescription": "Chia sẻ biểu mẫu với bất kỳ ai và thu thập các biểu mẫu hoàn thành trong thư mục Hoàn thành. Người dùng có thể điền vào bất kỳ biểu mẫu nào nhiều lần để tạo các tập tin cuối cùng riêng biệt. Trong các phòng biểu mẫu Cơ bản, bạn không thể thêm nhiều vai trò người dùng vào các biểu mẫu.",
-  "FormRoomTitle": "Phòng biểu mẫu Cơ bản",
   "Icon": "Biểu tượng",
   "MakeRoomPrivateDescription": "Tất cả các tập tin trong phòng này sẽ được mã hóa.",
   "MakeRoomPrivateLimitationsWarningDescription": "Với tính năng này, bạn chỉ có thể mời người dùng DocSpace hiện có. Sau khi tạo một phòng, bạn sẽ không thể thay đổi danh sách người dùng.",

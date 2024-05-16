@@ -106,6 +106,7 @@ const FilesSelector = ({
   withSearch: withSearchProp,
   withBreadCrumbs: withBreadCrumbsProp,
   filesSettings,
+  cancelButtonLabel,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -508,7 +509,7 @@ const FilesSelector = ({
   const cancelButtonProps: TSelectorCancelButton = withCancelButton
     ? {
         withCancelButton,
-        cancelButtonLabel: t("Common:CancelButton"),
+        cancelButtonLabel: cancelButtonLabel || t("Common:CancelButton"),
         cancelButtonId,
         onCancel,
       }

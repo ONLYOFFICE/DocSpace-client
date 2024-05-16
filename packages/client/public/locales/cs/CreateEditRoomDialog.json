@@ -9,8 +9,6 @@
   "DisableRoomQuota": "Zakázat kvóty pro tuto místnost",
   "FillingFormsRoomDescription": "Vytvářejte, sdílejte a vyplňujte šablony dokumentů nebo pracujte s připravenými předvolbami a rychle vytvářejte dokumenty libovolného typu.",
   "FillingFormsRoomTitle": "Místnost pro vyplňování formulářů",
-  "FormRoomDescription": "Formuláře můžete sdílet s kýmkoli a vyplněné formuláře shromažďovat ve složce Kompletní. Uživatelé mohou vyplnit libovolný formulář vícekrát a vytvořit samostatné konečné soubory. V místnostech se základními formuláři nelze k formulářům přidávat více uživatelských rolí.",
-  "FormRoomTitle": "Základní formulářová místnost",
   "Icon": "Ikona",
   "MakeRoomPrivateDescription": "Všechny soubory v této místnosti budou zašifrovány.",
   "MakeRoomPrivateLimitationsWarningDescription": "Pomocí této funkce můžete pozvat pouze stávající uživatele služby DocSpace. Po vytvoření místnosti nebudete moci seznam uživatelů měnit.",

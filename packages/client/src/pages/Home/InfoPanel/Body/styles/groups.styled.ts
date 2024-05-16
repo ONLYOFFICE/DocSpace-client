@@ -27,7 +27,7 @@
 import styled, { css } from "styled-components";
 
 export const GroupsContent = styled.div<{}>`
-  margin-top: 128px;
+  padding-top: 128px;
   margin-inline-start: auto;
 
   .group-member {

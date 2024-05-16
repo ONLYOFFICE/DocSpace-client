@@ -125,7 +125,6 @@
   "ErrorMessageBruteForceProtection": "Belirtilen bağımsız değişken geçerli değer aralığının dışındaydı.",
   "ErrorOccuredDownloadLog": "Veri içe aktarma sırasında hatalar oluştu. Kontrol etmek için günlüğü indirin.",
   "ErrorsWereFound": "{{errors}} hata bulundu",
-  "ExistingAccount": "Mevcut hesap",
   "ForcePathStyle": "Zorla Yol Stili",
   "GroupsDescription": "Önceki adımda seçtiğiniz kullanıcılar {{serviceName}} içinde oluşturulan gruplara aktarılacaktır. Gruplar Hesaplar bölümünde görünecektir.",
   "HexCode": "Onaltılık kod",

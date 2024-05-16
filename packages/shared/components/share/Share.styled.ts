@@ -73,6 +73,14 @@ const StyledLinkRow = styled.div`
     padding: 0px;
   }
 
+  .internal-combobox_expiered {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+    margin: 6px 8px;
+    color: ${({ theme }) => theme.infoPanel.members.linkAccessComboboxExpired};
+  }
+
   .expired-options {
     padding: 0px;
 

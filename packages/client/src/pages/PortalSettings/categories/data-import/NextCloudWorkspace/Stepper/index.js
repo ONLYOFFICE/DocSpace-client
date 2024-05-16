@@ -37,7 +37,12 @@ import { Text } from "@docspace/shared/components/text";
 
 import { Trans } from "react-i18next";
 
-export const getStepsData = (t, currentStep, setCurrentStep) => {
+export const getStepsData = (
+  t,
+  currentStep,
+  setCurrentStep,
+  isTypeSelectEmpty,
+) => {
   const isSixthStep = currentStep === 6;
 
   const incrementStep = () => {
@@ -89,7 +94,12 @@ export const getStepsData = (t, currentStep, setCurrentStep) => {
     },
     {
       title: t("Settings:SelectUserTypes"),
-      description: (
+      description: isTypeSelectEmpty ? (
+        <>
+          <b>{t("Settings:RolesAreSet")}</b>
+          <div>{t("Settings:UsersAreRegistered")}</div>
+        </>
+      ) : (
         <>
           <Trans t={t} ns="Settings" i18nKey="SelectUserTypesDescription">
             Select DocSpace roles for the imported users: <b>DocSpace admin</b>,{" "}

@@ -44,12 +44,18 @@ export const GroupMemberRow = styled.div<{}>`
     align-items: flex-start;
     justify-content: center;
     padding: 9px 0;
+    width: 100%;
+    overflow: hidden;
 
     .name {
       color: ${({ theme }) => theme.sideBarRow.titleColor};
       font-size: 14px;
       font-weight: 600;
       line-height: 16px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
     }
 
     .email {
@@ -57,6 +63,10 @@ export const GroupMemberRow = styled.div<{}>`
       font-size: 10px;
       font-weight: 400;
       line-height: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
     }
   }
 

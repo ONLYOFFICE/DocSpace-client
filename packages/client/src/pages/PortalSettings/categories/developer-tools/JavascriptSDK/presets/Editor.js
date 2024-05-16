@@ -205,20 +205,20 @@ const Editor = (props) => {
               className="checkbox"
               label={t("RightPanelCollapsed")}
               onChange={() => {}}
-              isChecked={true}
+              isChecked
             />
             <Checkbox
               className="checkbox"
               label={t("TabPlugins")}
               onChange={() => {}}
-              isChecked={true}
+              isChecked
             />
             <RowContainer>
-              <Checkbox label={t("Chat")} onChange={() => {}} isChecked={true} />
+              <Checkbox label={t("Chat")} onChange={() => {}} isChecked />
               <Text color="gray">({t("InLeftPanel")})</Text>
             </RowContainer>
             <RowContainer>
-              <Checkbox label={t("FeedbackAndSupport")} onChange={() => {}} isChecked={true} />
+              <Checkbox label={t("FeedbackAndSupport")} onChange={() => {}} isChecked />
               <Text color="gray">({t("InLeftPanel")})</Text>
             </RowContainer>
           </InterfaceElements> */}

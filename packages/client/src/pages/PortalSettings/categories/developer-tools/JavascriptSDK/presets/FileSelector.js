@@ -391,7 +391,7 @@ const FileSelector = (props) => {
                   />
                 </LabelGroup>
                 <ComboBox
-                  scaled={true}
+                  scaled
                   onSelect={onChangeSharedLink}
                   options={sharedLinks}
                   selectedOption={sharedLinks[0]}
@@ -423,7 +423,7 @@ const FileSelector = (props) => {
                       label: t("Common:SelectAction"),
                     }
                   }
-                  scaled={true}
+                  scaled
                   directionY="top"
                   selectedOption={selectedType}
                 />

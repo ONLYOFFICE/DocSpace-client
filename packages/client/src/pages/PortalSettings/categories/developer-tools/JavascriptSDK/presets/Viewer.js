@@ -208,14 +208,14 @@ const Viewer = (props) => {
               className="checkbox"
               label={t("TabPlugins")}
               onChange={() => {}}
-              isChecked={true}
+              isChecked
             />
             <RowContainer>
-              <Checkbox label={t("Chat")} onChange={() => {}} isChecked={true} />
+              <Checkbox label={t("Chat")} onChange={() => {}} isChecked />
               <Text color="gray">({t("InLeftPanel")})</Text>
             </RowContainer>
             <RowContainer>
-              <Checkbox label={t("FeedbackAndSupport")} onChange={() => {}} isChecked={true} />
+              <Checkbox label={t("FeedbackAndSupport")} onChange={() => {}} isChecked />
               <Text color="gray">({t("InLeftPanel")})</Text>
             </RowContainer>
           </InterfaceElements>
@@ -236,7 +236,7 @@ const Viewer = (props) => {
               { key: "2", label: "50%" },
               { key: "3", label: "25%" },
             ]}
-            scaled={true}
+            scaled
             selectedOption={{ key: "1", label: "100%", default: true }}
             displaySelectedOption
             directionY="top"
@@ -250,7 +250,7 @@ const Viewer = (props) => {
               { key: "3", label: "90%" },
               { key: "4", label: "180%" },
             ]}
-            scaled={true}
+            scaled
             selectedOption={{ key: "1", label: "45%", default: true }}
             displaySelectedOption
             directionY="top"

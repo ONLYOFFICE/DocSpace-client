@@ -291,7 +291,7 @@ const SimpleRoom = (props) => {
                   />
                 </LabelGroup>
                 <ComboBox
-                  scaled={true}
+                  scaled
                   onSelect={onChangeSharedLink}
                   options={sharedLinks}
                   selectedOption={selectedLink}

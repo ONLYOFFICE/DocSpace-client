@@ -550,7 +550,7 @@ const Manager = (props) => {
                   />
                 </LabelGroup>
                 <ComboBox
-                  scaled={true}
+                  scaled
                   onSelect={onChangeSharedLink}
                   options={sharedLinks}
                   selectedOption={selectedLink}
@@ -582,7 +582,7 @@ const Manager = (props) => {
               <ComboBox
                 onSelect={onChangeSortBy}
                 options={dataSortBy}
-                scaled={true}
+                scaled
                 selectedOption={sortBy}
                 displaySelectedOption
                 directionY="top"
@@ -593,7 +593,7 @@ const Manager = (props) => {
               <ComboBox
                 onSelect={onChangeSortOrder}
                 options={dataSortOrder}
-                scaled={true}
+                scaled
                 selectedOption={sortOrder}
                 displaySelectedOption
                 directionY="top"
@@ -624,7 +624,7 @@ const Manager = (props) => {
                       label: t("Common:SelectAction"),
                     }
                   }
-                  scaled={true}
+                  scaled
                   directionY="top"
                   selectedOption={{
                     key: "Select",

@@ -273,7 +273,7 @@ const Members = ({
             <User
               t={t}
               user={user}
-              key={user.id}
+              key={user.id || user.email} // user.email for users added via email
               showTooltip={isAdmin}
               index={index + publicRoomItemsLength}
               membersHelper={membersHelper}

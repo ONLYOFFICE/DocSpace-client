@@ -66,6 +66,7 @@ import {
   THistoryData,
   UseEventsProps,
 } from "@/types";
+import { useTranslation } from "react-i18next";
 
 type IConfigEvents = Pick<IConfig, "events">;
 
@@ -78,6 +79,7 @@ const useEditorEvents = ({
   config,
   doc,
   errorMessage,
+  isSkipError,
   t,
 }: UseEventsProps) => {
   const [events, setEvents] = React.useState<IConfigEvents>({});
@@ -138,7 +140,8 @@ const useEditorEvents = ({
   const onSDKAppReady = React.useCallback(() => {
     docEditor = window.DocEditor.instances[EDITOR_ID];
 
-    if (errorMessage) return docEditor?.showMessage?.(errorMessage);
+    if (errorMessage || isSkipError)
+      return docEditor?.showMessage?.(errorMessage || t("Common:InvalidLink"));
 
     console.log("ONLYOFFICE Document Editor is ready", docEditor);
     const url = window.location.href;
@@ -157,7 +160,7 @@ const useEditorEvents = ({
         if (config?.Error) docEditor?.showMessage?.(config.Error);
       }
     }
-  }, [config?.Error, errorMessage]);
+  }, [config?.Error, errorMessage, isSkipError, t]);
 
   const onDocumentReady = React.useCallback(() => {
     // console.log("onDocumentReady", { docEditor });

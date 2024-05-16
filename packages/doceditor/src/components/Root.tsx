@@ -72,7 +72,7 @@ const Root = ({
 
   const isSkipError =
     error?.status === "not-found" ||
-    (error?.status === "access-denied" && error.editorUrl) ||
+    (error?.status === "access-denied" && !!error.editorUrl) ||
     error?.status === "not-supported";
 
   const { t } = useTranslation(["Editor", "Common"]);
@@ -189,9 +189,8 @@ const Root = ({
           isSharingAccess={isSharingAccess}
           documentserverUrl={documentserverUrl}
           fileInfo={fileInfo}
-          errorMessage={
-            error?.message ?? isSkipError ? t("Common:InvalidLink") : ""
-          }
+          errorMessage={error?.message}
+          isSkipError={!!isSkipError}
           onSDKRequestSharingSettings={onSDKRequestSharingSettings}
           onSDKRequestSaveAs={onSDKRequestSaveAs}
           onSDKRequestInsertImage={onSDKRequestInsertImage}

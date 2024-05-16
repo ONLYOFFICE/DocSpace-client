@@ -209,6 +209,7 @@ export type EditorProps = {
   fileInfo?: TFile;
   isSharingAccess?: boolean;
   errorMessage?: string;
+  isSkipError?: boolean;
 
   onSDKRequestSharingSettings?: () => void;
   onSDKRequestSaveAs?: (event: object) => void;
@@ -321,6 +322,7 @@ export interface UseEventsProps {
   config?: IInitialConfig;
   doc?: string;
   errorMessage?: string;
+  isSkipError?: boolean;
   t: TTranslation;
 }
 

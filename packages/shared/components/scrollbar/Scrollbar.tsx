@@ -28,7 +28,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTheme } from "styled-components";
 import throttle from "lodash/throttle";
 
-import { classNames } from "../../utils";
+import { classNames, isTouchDevice } from "../../utils";
 
 import StyledScrollbar from "./Scrollbar.styled";
 import { ScrollbarProps } from "./Scrollbar.types";
@@ -105,7 +105,8 @@ const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
         }
       : {};
 
-    const autoHideContentProps = autoHide ? { onMouseMove: showTracks } : {};
+    const autoHideContentProps =
+      autoHide && !isTouchDevice ? { onMouseMove: showTracks } : {};
 
     return (
       <StyledScrollbar

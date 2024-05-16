@@ -42,8 +42,6 @@ export const getBaseUrl = () => {
 export const getAPIUrl = () => {
   const baseUrl = process.env.API_HOST?.trim() ?? getBaseUrl();
 
-  console.log("base url", baseUrl);
-
   const baseAPIUrl = `${baseUrl}/${API_PREFIX}`;
 
   return baseAPIUrl;

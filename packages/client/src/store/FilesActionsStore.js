@@ -1207,7 +1207,8 @@ class FilesActionStore {
             }
 
             if (!isRoomsFolder) {
-              setSelectedFolder(roomsFolder);
+              // setSelectedFolder(roomsFolder);
+              window.DocSpace.navigate("/");
             }
 
             // this.updateCurrentFolder(null, null, null, operationId);

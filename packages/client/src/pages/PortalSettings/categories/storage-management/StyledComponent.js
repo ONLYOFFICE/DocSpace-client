@@ -35,11 +35,16 @@ const StyledBaseQuotaComponent = styled.div`
     margin-bottom: 20px;
   }
 
+  .paid-badge {
+    cursor: auto;
+  }
+
   .toggle-container {
     margin-bottom: 32px;
     .quotas_toggle-button {
       position: static;
     }
+
     .toggle_label {
       margin-top: 10px;
       margin-bottom: 16px;
@@ -168,6 +173,10 @@ const StyledFolderTagColor = styled.div`
 
 const StyledStatistics = styled.div`
   max-width: 700px;
+
+  .paid-badge {
+    cursor: auto;
+  }
 
   .statistics-description {
     margin-bottom: 20px;

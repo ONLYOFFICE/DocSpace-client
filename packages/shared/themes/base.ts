@@ -2094,6 +2094,7 @@ export const getBaseTheme = () => {
       borderColor: grayLightMid,
       thumbnailBorderColor: grayLightMid,
       textColor: black,
+      errorColor: "#F21C0E",
 
       closeButtonWrapperPadding: "0px",
       closeButtonIcon: white,

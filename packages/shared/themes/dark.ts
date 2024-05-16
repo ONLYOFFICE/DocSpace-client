@@ -2065,6 +2065,7 @@ const Dark: TTheme = {
     borderColor: "#474747",
     thumbnailBorderColor: grayLightMid,
     textColor: white,
+    errorColor: "#E06451",
 
     closeButtonWrapperPadding: "6px",
     closeButtonIcon: black,

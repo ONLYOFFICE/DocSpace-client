@@ -401,6 +401,10 @@
           let goBack = config.editorGoBack;
           config.editorCustomization.uiTheme = config.theme;
 
+          if (!config.id || config.id === "undefined" || config.id === "null") {
+            config.id = -1; //editor default wrong file id error
+          }
+
           const customization = JSON.stringify(config.editorCustomization);
 
           if (
@@ -422,6 +426,10 @@
         case "viewer": {
           let goBack = config.editorGoBack;
           config.editorCustomization.uiTheme = config.theme;
+
+          if (!config.id || config.id === "undefined" || config.id === "null") {
+            config.id = -1; //editor default wrong file id error
+          }
 
           const customization = JSON.stringify(config.editorCustomization);
 

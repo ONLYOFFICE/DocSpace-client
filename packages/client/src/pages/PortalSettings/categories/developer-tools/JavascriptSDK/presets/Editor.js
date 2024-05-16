@@ -26,14 +26,11 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import debounce from "lodash.debounce";
 import { Box } from "@docspace/shared/components/box";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
-import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 
@@ -43,13 +40,11 @@ import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
-import { CodeToInsert } from "../sub-components/CodeToInsert";
-import { GetCodeBlock } from "../sub-components/GetCodeBlock";
+import { PreviewBlock } from "../sub-components/PreviewBlock";
 
 import { loadFrame } from "../utils";
 
 import {
-  showPreviewThreshold,
   scriptUrl,
   dataDimensions,
   defaultWidthDimension,
@@ -66,7 +61,6 @@ import {
   ControlsSection,
   Frame,
   Container,
-  Preview,
   FilesSelectorInputWrapper,
 } from "./StyledPresets";
 
@@ -75,10 +69,6 @@ const Editor = (props) => {
 
   setDocumentTitle(t("JavascriptSdk"));
 
-  const [showPreview, setShowPreview] = useState(
-    window.innerWidth > showPreviewThreshold,
-  );
-
   const [config, setConfig] = useState({
     mode: "editor",
     width: `${defaultWidth}${defaultWidthDimension.label}`,
@@ -86,8 +76,6 @@ const Editor = (props) => {
     frameId: "ds-frame",
     init: false,
   });
-
-  const params = objectToGetParams(config);
 
   const frameId = config.frameId || "ds-frame";
 
@@ -128,21 +116,6 @@ const Editor = (props) => {
     });
   };
 
-  const onResize = () => {
-    const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
-    if (isEnoughWidthForPreview !== showPreview)
-      setShowPreview(isEnoughWidthForPreview);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", onResize);
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, [showPreview]);
-
-  const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
-
   const preview = (
     <Frame
       width={
@@ -158,9 +131,7 @@ const Editor = (props) => {
       targetId={frameId}
     >
       {config.id !== undefined ? (
-        <>
-          <Box id={frameId}></Box>
-        </>
+        <Box id={frameId}></Box>
       ) : (
         <EmptyIframeContainer
           text={t("FilePreview")}
@@ -171,38 +142,22 @@ const Editor = (props) => {
     </Frame>
   );
 
-  const code = (
-    <CodeToInsert t={t} theme={theme} codeBlock={codeBlock} config={config} />
-  );
-
-  const dataTabs = [
-    {
-      key: "preview",
-      title: t("Common:Preview"),
-      content: preview,
-    },
-    {
-      key: "code",
-      title: t("Code"),
-      content: code,
-    },
-  ];
-
   return (
     <PresetWrapper
       description={t("EditorDescription")}
       header={t("CreateSampleEditor")}
     >
       <Container>
-        {showPreview && (
-          <Preview>
-            <TabsContainer
-              isDisabled={config?.id === undefined}
-              onSelect={loadCurrentFrame}
-              elements={dataTabs}
-            />
-          </Preview>
-        )}
+        <PreviewBlock
+          t={t}
+          loadCurrentFrame={loadCurrentFrame}
+          preview={preview}
+          theme={theme}
+          frameId={frameId}
+          scriptUrl={scriptUrl}
+          config={config}
+          isDisabled={config?.id === undefined}
+        />
         <Controls>
           <ControlsSection>
             <CategorySubHeader>{t("FileId")}</CategorySubHeader>
@@ -269,8 +224,6 @@ const Editor = (props) => {
           </InterfaceElements> */}
         </Controls>
       </Container>
-
-      {!showPreview && <GetCodeBlock t={t} codeBlock={codeBlock} />}
     </PresetWrapper>
   );
 };

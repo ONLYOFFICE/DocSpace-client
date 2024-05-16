@@ -31,8 +31,6 @@ import { Box } from "@docspace/shared/components/box";
 import { Label } from "@docspace/shared/components/label";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
-import { TabsContainer } from "@docspace/shared/components/tabs-container";
-import { objectToGetParams } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
 import { RoomsType } from "@docspace/shared/enums";
@@ -43,16 +41,14 @@ import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
-import { CodeToInsert } from "../sub-components/CodeToInsert";
-import { GetCodeBlock } from "../sub-components/GetCodeBlock";
 import { SelectTextInput } from "../sub-components/SelectTextInput";
 import { CancelTextInput } from "../sub-components/CancelTextInput";
 import { MainElementParameter } from "../sub-components/MainElementParameter";
+import { PreviewBlock } from "../sub-components/PreviewBlock";
 
 import { loadFrame } from "../utils";
 
 import {
-  showPreviewThreshold,
   scriptUrl,
   dataDimensions,
   defaultWidthDimension,
@@ -67,7 +63,6 @@ import {
   ControlsSection,
   Frame,
   Container,
-  Preview,
 } from "./StyledPresets";
 
 const RoomSelector = (props) => {
@@ -104,9 +99,6 @@ const RoomSelector = (props) => {
     },
   ];
 
-  const [showPreview, setShowPreview] = useState(
-    window.innerWidth > showPreviewThreshold,
-  );
   const [roomType, setRoomType] = useState(roomTypeOptions[0]);
 
   const debouncedOnSelect = debounce((items) => {
@@ -137,8 +129,6 @@ const RoomSelector = (props) => {
     },
   });
 
-  const params = objectToGetParams(config);
-
   const frameId = config.frameId || "ds-frame";
 
   const destroyFrame = () => {
@@ -168,21 +158,6 @@ const RoomSelector = (props) => {
     setConfig((config) => ({ ...config, withSearch: !config.withSearch }));
   };
 
-  const onResize = () => {
-    const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
-    if (isEnoughWidthForPreview !== showPreview)
-      setShowPreview(isEnoughWidthForPreview);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", onResize);
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, [showPreview]);
-
-  const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
-
   const preview = (
     <Frame
       width={
@@ -201,34 +176,21 @@ const RoomSelector = (props) => {
     </Frame>
   );
 
-  const code = (
-    <CodeToInsert t={t} theme={theme} codeBlock={codeBlock} config={config} />
-  );
-
-  const dataTabs = [
-    {
-      key: "preview",
-      title: t("Common:Preview"),
-      content: preview,
-    },
-    {
-      key: "code",
-      title: t("Code"),
-      content: code,
-    },
-  ];
-
   return (
     <PresetWrapper
       description={t("RoomSelectorDescription")}
       header={t("CreateSampleRoomSelector")}
     >
       <Container>
-        {showPreview && (
-          <Preview>
-            <TabsContainer onSelect={loadCurrentFrame} elements={dataTabs} />
-          </Preview>
-        )}
+        <PreviewBlock
+          t={t}
+          loadCurrentFrame={loadCurrentFrame}
+          preview={preview}
+          theme={theme}
+          frameId={frameId}
+          scriptUrl={scriptUrl}
+          config={config}
+        />
         <Controls>
           <MainElementParameter
             t={t}
@@ -287,8 +249,6 @@ const RoomSelector = (props) => {
           </ControlsSection>
         </Controls>
       </Container>
-
-      {!showPreview && <GetCodeBlock t={t} codeBlock={codeBlock} />}
     </PresetWrapper>
   );
 };

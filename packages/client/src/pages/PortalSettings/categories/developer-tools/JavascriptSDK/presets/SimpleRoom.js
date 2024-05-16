@@ -26,14 +26,11 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import debounce from "lodash.debounce";
 import { Box } from "@docspace/shared/components/box";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
-import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import RoomsSelectorInput from "SRC_DIR/components/RoomsSelectorInput";
-import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
@@ -57,14 +54,12 @@ import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
-import { CodeToInsert } from "../sub-components/CodeToInsert";
-import { GetCodeBlock } from "../sub-components/GetCodeBlock";
 import { SharedLinkHint } from "../sub-components/SharedLinkHint";
+import { PreviewBlock } from "../sub-components/PreviewBlock";
 
 import { loadFrame } from "../utils";
 
 import {
-  showPreviewThreshold,
   scriptUrl,
   dataDimensions,
   defaultWidthDimension,
@@ -80,7 +75,6 @@ import {
   LabelGroup,
   Frame,
   Container,
-  Preview,
   FilesSelectorInputWrapper,
   ControlsSection,
   CheckboxGroup,
@@ -93,9 +87,6 @@ const SimpleRoom = (props) => {
 
   setDocumentTitle(t("JavascriptSdk"));
 
-  const [showPreview, setShowPreview] = useState(
-    window.innerWidth > showPreviewThreshold,
-  );
   const [sharedLinks, setSharedLinks] = useState(null);
 
   const [selectedLink, setSelectedLink] = useState(null);
@@ -121,8 +112,6 @@ const SimpleRoom = (props) => {
       withSubfolders: false,
     },
   });
-
-  const params = objectToGetParams(config);
 
   const frameId = config.frameId || "ds-frame";
 
@@ -209,12 +198,6 @@ const SimpleRoom = (props) => {
     });
   };
 
-  const onResize = () => {
-    const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
-    if (isEnoughWidthForPreview !== showPreview)
-      setShowPreview(isEnoughWidthForPreview);
-  };
-
   const navigateRoom = (id) => {
     const filter = FilesFilter.getDefault();
     filter.folder = id;
@@ -222,15 +205,6 @@ const SimpleRoom = (props) => {
   };
 
   const redirectToSelectedRoom = () => navigateRoom(config.id);
-
-  useEffect(() => {
-    window.addEventListener("resize", onResize);
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, [showPreview]);
-
-  const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
 
   const preview = (
     <Frame
@@ -247,9 +221,7 @@ const SimpleRoom = (props) => {
       targetId={frameId}
     >
       {config.id !== undefined ? (
-        <>
-          <Box id={frameId}></Box>
-        </>
+        <Box id={frameId}></Box>
       ) : (
         <EmptyIframeContainer
           text={t("RoomPreview")}
@@ -260,38 +232,22 @@ const SimpleRoom = (props) => {
     </Frame>
   );
 
-  const code = (
-    <CodeToInsert t={t} theme={theme} codeBlock={codeBlock} config={config} />
-  );
-
-  const dataTabs = [
-    {
-      key: "preview",
-      title: t("Common:Preview"),
-      content: preview,
-    },
-    {
-      key: "code",
-      title: t("Code"),
-      content: code,
-    },
-  ];
-
   return (
     <PresetWrapper
       description={t("PublicRoomDescription")}
       header={t("CreateSamplePublicRoom")}
     >
       <Container>
-        {showPreview && (
-          <Preview>
-            <TabsContainer
-              isDisabled={config?.id === undefined}
-              onSelect={loadCurrentFrame}
-              elements={dataTabs}
-            />
-          </Preview>
-        )}
+        <PreviewBlock
+          t={t}
+          loadCurrentFrame={loadCurrentFrame}
+          preview={preview}
+          theme={theme}
+          frameId={frameId}
+          scriptUrl={scriptUrl}
+          config={config}
+          isDisabled={config?.id === undefined}
+        />
         <Controls>
           <ControlsSection>
             <CategorySubHeader>{t("DataDisplay")}</CategorySubHeader>
@@ -425,8 +381,6 @@ const SimpleRoom = (props) => {
           </ControlsSection>
         </Controls>
       </Container>
-
-      {!showPreview && <GetCodeBlock t={t} codeBlock={codeBlock} />}
     </PresetWrapper>
   );
 };

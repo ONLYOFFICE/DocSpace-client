@@ -31,10 +31,8 @@ import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
-import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { objectToGetParams } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
@@ -54,16 +52,14 @@ import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
-import { CodeToInsert } from "../sub-components/CodeToInsert";
-import { GetCodeBlock } from "../sub-components/GetCodeBlock";
 import { SelectTextInput } from "../sub-components/SelectTextInput";
 import { CancelTextInput } from "../sub-components/CancelTextInput";
 import { MainElementParameter } from "../sub-components/MainElementParameter";
+import { PreviewBlock } from "../sub-components/PreviewBlock";
 
 import { loadFrame } from "../utils";
 
 import {
-  showPreviewThreshold,
   scriptUrl,
   dataDimensions,
   defaultWidthDimension,
@@ -80,7 +76,6 @@ import {
   ControlsSection,
   Frame,
   Container,
-  Preview,
   FilesSelectorInputWrapper,
 } from "./StyledPresets";
 
@@ -138,9 +133,6 @@ const FileSelector = (props) => {
     },
   ];
 
-  const [showPreview, setShowPreview] = useState(
-    window.innerWidth > showPreviewThreshold,
-  );
   const [sharedLinks, setSharedLinks] = useState(null);
   const [typeDisplay, setTypeDisplay] = useState(fileTypeDisplay[0].value);
   const [selectedType, setSelectedType] = useState(fileOptions[0]);
@@ -172,8 +164,6 @@ const FileSelector = (props) => {
       onSignOut: null,
     },
   });
-
-  const params = objectToGetParams(config);
 
   const frameId = config.frameId || "ds-frame";
 
@@ -260,21 +250,6 @@ const FileSelector = (props) => {
     setConfig((config) => ({ ...config, withSubtitle: !config.withSubtitle }));
   };
 
-  const onResize = () => {
-    const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
-    if (isEnoughWidthForPreview !== showPreview)
-      setShowPreview(isEnoughWidthForPreview);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", onResize);
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, [showPreview]);
-
-  const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
-
   const preview = (
     <Frame
       width={config.width.includes("px") ? config.width : undefined}
@@ -285,34 +260,21 @@ const FileSelector = (props) => {
     </Frame>
   );
 
-  const code = (
-    <CodeToInsert t={t} theme={theme} codeBlock={codeBlock} config={config} />
-  );
-
-  const dataTabs = [
-    {
-      key: "preview",
-      title: t("Common:Preview"),
-      content: preview,
-    },
-    {
-      key: "code",
-      title: t("Code"),
-      content: code,
-    },
-  ];
-
   return (
     <PresetWrapper
       description={t("FileSelectorDescription")}
       header={t("CreateSampleFileSelector")}
     >
       <Container>
-        {showPreview && (
-          <Preview>
-            <TabsContainer onSelect={loadCurrentFrame} elements={dataTabs} />
-          </Preview>
-        )}
+        <PreviewBlock
+          t={t}
+          loadCurrentFrame={loadCurrentFrame}
+          preview={preview}
+          theme={theme}
+          frameId={frameId}
+          scriptUrl={scriptUrl}
+          config={config}
+        />
         <Controls>
           <MainElementParameter
             t={t}
@@ -470,8 +432,6 @@ const FileSelector = (props) => {
           </ControlsSection>
         </Controls>
       </Container>
-
-      {!showPreview && <GetCodeBlock t={t} codeBlock={codeBlock} />}
     </PresetWrapper>
   );
 };

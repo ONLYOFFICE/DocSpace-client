@@ -27,21 +27,17 @@
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { Box } from "@docspace/shared/components/box";
-import { TabsContainer } from "@docspace/shared/components/tabs-container";
-import { objectToGetParams } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
 import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
-import { CodeToInsert } from "../sub-components/CodeToInsert";
-import { GetCodeBlock } from "../sub-components/GetCodeBlock";
+import { PreviewBlock } from "../sub-components/PreviewBlock";
 
 import { loadFrame } from "../utils";
 
 import {
-  showPreviewThreshold,
   scriptUrl,
   dataDimensions,
   defaultWidthDimension,
@@ -55,7 +51,6 @@ import {
   CategorySubHeader,
   Frame,
   Container,
-  Preview,
   ControlsSection,
 } from "./StyledPresets";
 
@@ -63,10 +58,6 @@ const DocSpace = (props) => {
   const { t, setDocumentTitle, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
-
-  const [showPreview, setShowPreview] = useState(
-    window.innerWidth > showPreviewThreshold,
-  );
 
   const [config, setConfig] = useState({
     mode: "manager",
@@ -90,8 +81,6 @@ const DocSpace = (props) => {
     },
   });
 
-  const params = objectToGetParams(config);
-
   const frameId = config.frameId || "ds-frame";
 
   const destroyFrame = () => {
@@ -112,21 +101,6 @@ const DocSpace = (props) => {
     }
   }, []);
 
-  const onResize = () => {
-    const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
-    if (isEnoughWidthForPreview !== showPreview)
-      setShowPreview(isEnoughWidthForPreview);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", onResize);
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, [showPreview]);
-
-  const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
-
   const preview = (
     <Frame
       width={config.width.includes("px") ? config.width : undefined}
@@ -137,34 +111,21 @@ const DocSpace = (props) => {
     </Frame>
   );
 
-  const code = (
-    <CodeToInsert t={t} theme={theme} codeBlock={codeBlock} config={config} />
-  );
-
-  const dataTabs = [
-    {
-      key: "preview",
-      title: t("Common:Preview"),
-      content: preview,
-    },
-    {
-      key: "code",
-      title: t("Code"),
-      content: code,
-    },
-  ];
-
   return (
     <PresetWrapper
       description={t("DocspaceDescription")}
       header={t("CreateSampleDocSpace")}
     >
       <Container>
-        {showPreview && (
-          <Preview>
-            <TabsContainer onSelect={loadCurrentFrame} elements={dataTabs} />
-          </Preview>
-        )}
+        <PreviewBlock
+          t={t}
+          loadCurrentFrame={loadCurrentFrame}
+          preview={preview}
+          theme={theme}
+          frameId={frameId}
+          scriptUrl={scriptUrl}
+          config={config}
+        />
         <Controls>
           <ControlsSection>
             <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
@@ -190,8 +151,6 @@ const DocSpace = (props) => {
           </ControlsSection>
         </Controls>
       </Container>
-
-      {!showPreview && <GetCodeBlock t={t} codeBlock={codeBlock} />}
     </PresetWrapper>
   );
 };

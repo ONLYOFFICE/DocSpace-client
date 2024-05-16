@@ -29,7 +29,7 @@ import { Button } from "@docspace/shared/components/button";
 
 import { GetCodeButtonWrapper } from "../presets/StyledPresets";
 
-export const GetCodeBlock = ({ t, codeBlock }) => {
+export const GetCodeBlock = ({ t, codeBlock, isDisabled }) => {
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
 
   const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
@@ -45,6 +45,7 @@ export const GetCodeBlock = ({ t, codeBlock }) => {
           scale
           label={t("GetCode")}
           onClick={openGetCodeModal}
+          isDisabled={isDisabled}
         />
       </GetCodeButtonWrapper>
 

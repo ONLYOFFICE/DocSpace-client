@@ -27,16 +27,13 @@
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { Box } from "@docspace/shared/components/box";
-import { TextInput } from "@docspace/shared/components/text-input";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import { SelectedItem } from "@docspace/shared/components/selected-item";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
-import { objectToGetParams } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
@@ -63,17 +60,15 @@ import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
-import { CodeToInsert } from "../sub-components/CodeToInsert";
-import { GetCodeBlock } from "../sub-components/GetCodeBlock";
 import { SharedLinkHint } from "../sub-components/SharedLinkHint";
 import { SearchTerm } from "../sub-components/SearchTerm";
 import { ItemsCountBlock } from "../sub-components/ItemsCountBlock";
 import { DisplayPageBlock } from "../sub-components/DisplayPageBlock";
+import { PreviewBlock } from "../sub-components/PreviewBlock";
 
 import { loadFrame } from "../utils";
 
 import {
-  showPreviewThreshold,
   scriptUrl,
   dataDimensions,
   defaultWidthDimension,
@@ -91,7 +86,6 @@ import {
   Frame,
   Container,
   ColumnContainer,
-  Preview,
   FilesSelectorInputWrapper,
   SelectedItemsContainer,
   CheckboxGroup,
@@ -130,9 +124,6 @@ const Manager = (props) => {
 
   const [sortBy, setSortBy] = useState(dataSortBy[0]);
   const [sortOrder, setSortOrder] = useState(dataSortOrder[0]);
-  const [showPreview, setShowPreview] = useState(
-    window.innerWidth > showPreviewThreshold,
-  );
   const [sharedLinks, setSharedLinks] = useState(null);
   const [columnDisplay, setColumnDisplay] = useState(
     columnDisplayOptions[0].value,
@@ -166,8 +157,6 @@ const Manager = (props) => {
       withSubfolders: false,
     },
   });
-
-  const params = objectToGetParams(config);
 
   const frameId = config.frameId || "ds-frame";
 
@@ -346,21 +335,6 @@ const Manager = (props) => {
 
   const redirectToSelectedRoom = () => navigateRoom(config.id);
 
-  const onResize = () => {
-    const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
-    if (isEnoughWidthForPreview !== showPreview)
-      setShowPreview(isEnoughWidthForPreview);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", onResize);
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, [showPreview]);
-
-  const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
-
   const preview = (
     <Frame
       width={config.width.includes("px") ? config.width : undefined}
@@ -371,34 +345,21 @@ const Manager = (props) => {
     </Frame>
   );
 
-  const code = (
-    <CodeToInsert t={t} theme={theme} codeBlock={codeBlock} config={config} />
-  );
-
-  const dataTabs = [
-    {
-      key: "preview",
-      title: t("Common:Preview"),
-      content: preview,
-    },
-    {
-      key: "code",
-      title: t("Code"),
-      content: code,
-    },
-  ];
-
   return (
     <PresetWrapper
       description={t("CustomDescription")}
       header={t("CreateSampleDocSpace")}
     >
       <Container>
-        {showPreview && (
-          <Preview>
-            <TabsContainer onSelect={loadCurrentFrame} elements={dataTabs} />
-          </Preview>
-        )}
+        <PreviewBlock
+          t={t}
+          loadCurrentFrame={loadCurrentFrame}
+          preview={preview}
+          theme={theme}
+          frameId={frameId}
+          scriptUrl={scriptUrl}
+          config={config}
+        />
         <Controls>
           <ControlsSection>
             <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
@@ -643,11 +604,7 @@ const Manager = (props) => {
               count={config.filter.count}
               setConfig={setConfig}
             />
-            <DisplayPageBlock
-              t={t}
-              config={config}
-              setConfig={setConfig}
-            />
+            <DisplayPageBlock t={t} config={config} setConfig={setConfig} />
             <Label className="label" text={t("DisplayColumns")} />
             <RadioButtonGroup
               orientation="vertical"
@@ -691,8 +648,6 @@ const Manager = (props) => {
           </ControlsSection>
         </Controls>
       </Container>
-
-      {!showPreview && <GetCodeBlock t={t} codeBlock={codeBlock} />}
     </PresetWrapper>
   );
 };

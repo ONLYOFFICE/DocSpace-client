@@ -200,6 +200,7 @@
   "TemplateAvailableDescription": "All DocSpace and Room admins will be able to create rooms using this template.",
   "AddUsersOrGroups": "Add Users or Groups",
   "AddUsersOrGroupsDescription": "The added administrators will be able to create rooms using this template.",
-  "AddUsersOrGroupsInfo": "Only DocSpace and Room admins are shown her",
-  "AddUsersOrGroupsInfoGroups": "Only DocSpace and Room admins from the selected groups will be able to create rooms using this template."
+  "AddUsersOrGroupsInfo": "Only <strong>DocSpace</strong> and <strong>Room admins</strong> are shown here",
+  "AddUsersOrGroupsInfoGroups": "Only <strong>DocSpace</strong> and <strong>Room admins</strong> from the selected groups will be able to create rooms using this template.",
+  "AddAdminByNameOrEmail": "Add admin by name or email"
 }

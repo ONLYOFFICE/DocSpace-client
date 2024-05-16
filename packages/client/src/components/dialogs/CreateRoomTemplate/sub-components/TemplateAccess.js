@@ -40,10 +40,10 @@ const TemplateAccess = ({ t, roomOwner, onOpenAccessSettings }) => {
   const groupsList = [{}, {}, {}];
   const avatarList = [];
 
+  const usersLength = usersList.length;
+
   const maxAvatarsCount =
-    usersList.length >= MAX_AVATARS_COUNT
-      ? MAX_AVATARS_COUNT
-      : usersList.length;
+    usersLength >= MAX_AVATARS_COUNT ? MAX_AVATARS_COUNT : usersLength;
 
   let index = 0;
   while (avatarList.length !== maxAvatarsCount) {
@@ -51,22 +51,23 @@ const TemplateAccess = ({ t, roomOwner, onOpenAccessSettings }) => {
 
     avatarList.push(
       <Avatar
-        className="template-access-avatar"
+        className="template-access_avatar"
         size="min"
         role={""}
         isDefaultSource={roomOwner.hasAvatar}
         source={roomOwner.avatarSmall ?? roomOwner.avatar}
         userName={userName}
+        key={index}
       />,
     );
     index++;
   }
 
-  const isAvailableToEveryone = true;
+  const isAvailableToEveryone = false; //TODO: Templates
 
   return (
     <Styled.TemplateAccess>
-      <Text className="template-access-label" fontWeight={600} fontSize="13px">
+      <Text className="template-access_label" fontWeight={600} fontSize="13px">
         {`${t("Files:AccessToTemplate")}:`}
       </Text>
 
@@ -75,11 +76,11 @@ const TemplateAccess = ({ t, roomOwner, onOpenAccessSettings }) => {
           headerText={t("Files:TemplateAvailable")}
           bodyText={
             <>
-              <div className="template-access-description">
+              <div className="template-access_description">
                 {t("Files:TemplateAvailableDescription")}
               </div>
               <Link
-                className="template-access-link"
+                className="template-access_link"
                 isHovered
                 type="action"
                 fontWeight={600}
@@ -92,19 +93,37 @@ const TemplateAccess = ({ t, roomOwner, onOpenAccessSettings }) => {
           }
         />
       ) : (
-        <div className="template-access-wrapper">
-          <div className="template-access-container">
-            <div className="template-access-avatar-container">
-              <div className="access-avatar-container">{avatarList}</div>
-              <Text fontWeight={600} fontSize="14px">
-                {t("Common:MeLabel")}{" "}
-                {`and ${usersList.length} User and ${groupsList.length} Groups`}
-              </Text>
-            </div>
+        <div className="template-access_wrapper">
+          <div className="template-access_avatar-container">
+            {usersLength === 1 ? (
+              <>
+                <Avatar
+                  size="min"
+                  role={""}
+                  isDefaultSource={roomOwner.hasAvatar}
+                  source={roomOwner.avatarSmall ?? roomOwner.avatar}
+                  userName={userName}
+                />
+                <div className="template-access_display-name">
+                  <Text fontWeight={600} fontSize="13px">
+                    {userName}
+                  </Text>
+                  <Text className="me-label">({t("Common:MeLabel")})</Text>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="access-avatar-container">{avatarList}</div>
+                <Text fontWeight={600} fontSize="14px">
+                  {t("Common:MeLabel")}
+                  {`and ${usersList.length} User and ${groupsList.length} Groups`}
+                </Text>
+              </>
+            )}
           </div>
 
           <Link
-            className="template-access-link"
+            className="template-access_link"
             isHovered
             type="action"
             fontWeight={600}

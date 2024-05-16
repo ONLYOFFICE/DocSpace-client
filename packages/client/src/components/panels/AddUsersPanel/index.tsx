@@ -43,6 +43,7 @@ import {
   TAccessRight,
   TSelectorAccessRights,
   TSelectorCancelButton,
+  TSelectorInfo,
   TWithTabs,
 } from "@docspace/shared/components/selector/Selector.types";
 import { toastr } from "@docspace/shared/components/toast";
@@ -143,14 +144,6 @@ const toListItem = (
   } as TSelectorItem;
 };
 
-export type TSelectorInfo =
-  | { withInfo: true; infoText: string; withInfoBadge?: boolean }
-  | {
-      withInfo?: undefined;
-      infoText?: undefined;
-      withInfoBadge?: undefined;
-    };
-
 type AddUsersPanelProps = TSelectorInfo & {
   isEncrypted: boolean;
   defaultAccess: ShareAccessRights;
@@ -200,6 +193,7 @@ const AddUsersPanel = ({
   disableDisabledUsers,
   infoText,
   withInfo,
+  withInfoBadge,
   setActiveTabId: setActiveTabIdProp,
 }: AddUsersPanelProps) => {
   const theme = useTheme();
@@ -512,6 +506,14 @@ const AddUsersPanel = ({
       }
     : {};
 
+  const infoProps: TSelectorInfo = withInfo
+    ? {
+        withInfo,
+        infoText,
+        withInfoBadge,
+      }
+    : {};
+
   return (
     <>
       <Backdrop
@@ -581,8 +583,6 @@ const AddUsersPanel = ({
           isLoading={isLoading}
           searchLoader={<SearchLoader />}
           isSearchLoading={isInit}
-          infoText={infoText}
-          withInfo={withInfo}
           rowLoader={
             <RowLoader
               isUser
@@ -593,6 +593,7 @@ const AddUsersPanel = ({
             />
           }
           {...withTabsProps}
+          {...infoProps}
         />
       </Aside>
     </>

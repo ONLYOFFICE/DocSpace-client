@@ -61,6 +61,10 @@ const StyledModalDialog = styled(ModalDialog)`
     align-items: flex-start;
     justify-content: start;
     gap: 16px;
+
+    .tile-header {
+      padding: 12px 15px;
+    }
   }
 
   .modal-footer {
@@ -249,7 +253,9 @@ const CreateRoomTemplate = (props) => {
           <Button
             id="create-room-template-modal_submit"
             tabIndex={5}
-            label={isEdit ? t("Common:SaveButton") : t("Files:CreateTemplate")}
+            label={
+              item.isEdit ? t("Common:SaveButton") : t("Files:CreateTemplate")
+            }
             size="normal"
             primary
             scale

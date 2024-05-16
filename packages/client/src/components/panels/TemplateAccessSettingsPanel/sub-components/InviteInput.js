@@ -26,16 +26,13 @@
 
 import debounce from "lodash.debounce";
 import { inject, observer } from "mobx-react";
-import { withTranslation } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import { useMemo, useState, useCallback, useEffect, useRef } from "react";
 
 import { Avatar } from "@docspace/shared/components/avatar";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { toastr } from "@docspace/shared/components/toast";
-import { Aside } from "@docspace/shared/components/aside";
-import { Backdrop } from "@docspace/shared/components/backdrop";
-import PeopleSelector from "@docspace/shared/selectors/People";
 import Filter from "@docspace/shared/api/people/filter";
 import { getMembersList } from "@docspace/shared/api/people";
 import {
@@ -280,6 +277,13 @@ const InviteInput = ({
     standalone,
   );
 
+  const infoText =
+    selectedTab === PEOPLE_TAB_ID ? (
+      <Trans i18nKey="AddUsersOrGroupsInfo" ns="Files" t={t}></Trans>
+    ) : (
+      <Trans i18nKey="AddUsersOrGroupsInfoGroups" ns="Files" t={t}></Trans>
+    );
+
   return (
     <>
       <StyledSubHeader className="invite-input-text">
@@ -305,11 +309,7 @@ const InviteInput = ({
             className="invite-input"
             scale
             onChange={onChange}
-            placeholder={
-              roomId === -1
-                ? t("InviteAccountSearchPlaceholder")
-                : t("InviteRoomSearchPlaceholder")
-            }
+            placeholder={t("Files:AddAdminByNameOrEmail")}
             value={inputValue}
             isAutoFocussed={true}
             type="search"
@@ -353,11 +353,7 @@ const InviteInput = ({
             roomId={roomId} // fixed groups request // need template id for correct working
             withGroups={!isPublicRoomType}
             withInfo
-            infoText={
-              selectedTab === PEOPLE_TAB_ID
-                ? t("Files:AddUsersOrGroupsInfo")
-                : t("Files:AddUsersOrGroupsInfoGroups")
-            }
+            infoText={infoText}
             withInfoBadge
             invitedUsers={invitedUsers}
             disableDisabledUsers

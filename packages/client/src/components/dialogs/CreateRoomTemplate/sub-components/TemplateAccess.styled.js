@@ -28,59 +28,57 @@ import { Base } from "@docspace/shared/themes";
 import styled from "styled-components";
 
 export const TemplateAccess = styled.div`
-  .template-access {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 8px 0;
-
-    .template-access-name {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-
-      .me-label {
-        color: ${({ theme }) => theme.text.disableColor};
-      }
-    }
-  }
-
-  .template-access-description {
+  .template-access_description {
     margin-bottom: 8px;
   }
 
-  .template-access-wrapper {
+  .template-access_wrapper {
     display: flex;
     align-items: center;
+    margin-top: 12px;
 
-    .template-access-link {
+    .template-access_link {
       margin-left: auto;
     }
   }
 
-  .access-avatar-container {
-    display: flex;
-
-    .template-access-avatar:not(:first-child) {
-      margin-left: -8px;
-      z-index: 2;
-    }
-
-    .template-access-avatar:last-child {
-      z-index: 1;
-    }
-
-    .template-access-avatar {
-      border: 1px solid rgb(255, 255, 255);
-      border-radius: 50%;
-      z-index: 3;
-    }
-  }
-
-  .template-access-avatar-container {
+  .template-access_avatar-container {
     display: flex;
     align-items: center;
     gap: 8px;
+
+    .access-avatar-container {
+      display: flex;
+
+      .template-access_avatar:not(:first-child) {
+        margin-left: -8px;
+        z-index: 2;
+      }
+
+      .template-access_avatar:last-child {
+        z-index: 1;
+      }
+
+      .template-access_avatar {
+        border: ${(props) => `1px solid ${props.theme.backgroundColor}`};
+        border-radius: 50%;
+        z-index: 3;
+      }
+    }
+  }
+
+  .template-access_label {
+    margin-bottom: 8px;
+  }
+
+  .template-access_display-name {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .me-label {
+      color: ${({ theme }) => theme.text.disableColor};
+    }
   }
 `;
 

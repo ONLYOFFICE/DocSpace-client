@@ -67,6 +67,8 @@ import { CodeToInsert } from "../sub-components/CodeToInsert";
 import { GetCodeBlock } from "../sub-components/GetCodeBlock";
 import { SharedLinkHint } from "../sub-components/SharedLinkHint";
 import { SearchTerm } from "../sub-components/SearchTerm";
+import { ItemsCountBlock } from "../sub-components/ItemsCountBlock";
+import { DisplayPageBlock } from "../sub-components/DisplayPageBlock";
 
 import { loadFrame } from "../utils";
 
@@ -288,18 +290,6 @@ const Manager = (props) => {
   const onChangeShowFilter = (e) => {
     setConfig((config) => {
       return { ...config, showFilter: !config.showFilter };
-    });
-  };
-
-  const onChangeCount = (e) => {
-    setConfig((config) => {
-      return { ...config, filter: { ...config.filter, count: e.target.value } };
-    });
-  };
-
-  const onChangePage = (e) => {
-    setConfig((config) => {
-      return { ...config, filter: { ...config.filter, page: e.target.value } };
     });
   };
 
@@ -648,36 +638,16 @@ const Manager = (props) => {
                 directionY="top"
               />
             </ControlsGroup>
-            <ControlsGroup>
-              <LabelGroup>
-                <Label className="label" text={t("ItemsCount")} />
-                <HelpButton
-                  offsetRight={0}
-                  size={12}
-                  tooltipContent={
-                    <Text fontSize="12px">{t("ItemsCountDescription")}</Text>
-                  }
-                />
-              </LabelGroup>
-              <TextInput
-                scale
-                onChange={onChangeCount}
-                placeholder={t("EnterCount")}
-                value={config.filter.count}
-                tabIndex={6}
-              />
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("Page")} />
-              <TextInput
-                scale
-                onChange={onChangePage}
-                placeholder={t("EnterPage")}
-                value={config.filter.page || 1}
-                isDisabled={!config.filter.count}
-                tabIndex={7}
-              />
-            </ControlsGroup>
+            <ItemsCountBlock
+              t={t}
+              count={config.filter.count}
+              setConfig={setConfig}
+            />
+            <DisplayPageBlock
+              t={t}
+              config={config}
+              setConfig={setConfig}
+            />
             <Label className="label" text={t("DisplayColumns")} />
             <RadioButtonGroup
               orientation="vertical"

@@ -271,6 +271,7 @@ export const Viewer = (props: ViewerProps) => {
           generateContextMenu={generateContextMenu}
           setIsOpenContextMenu={setIsOpenContextMenu}
           resetToolbarVisibleTimer={resetToolbarVisibleTimer}
+          isPublicFile={isPublicFile}
         />
       ) : isVideo || isAudio ? (
         <ViewerPlayer

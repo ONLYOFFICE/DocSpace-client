@@ -339,6 +339,7 @@ const SectionFilterContent = ({
   isRoomAdmin,
   showStorageInfo,
   isDefaultRoomsQuotaSet,
+  isTemplate,
 }) => {
   const location = useLocation();
   const { groupId } = useParams();
@@ -1691,7 +1692,7 @@ const SectionFilterContent = ({
       {
         key: FilterGroups.roomFilterSubject,
         group: FilterGroups.roomFilterSubject,
-        label: t("Common:Member"),
+        label: isTemplate ? t("TemplateOwner") : t("Common:Member"),
         isHeader: true,
         withoutSeparator: true,
         withMultiItems: true,
@@ -1800,7 +1801,7 @@ const SectionFilterContent = ({
         filterOptions.push(...tagsOptions);
       }
 
-      if (connectedThirdParty.length > 0) {
+      if (connectedThirdParty.length > 0 && !isTemplate) {
         const thirdPartyOptions = connectedThirdParty.map((thirdParty) => {
           const key = Object.entries(RoomsProviderType).find(
             (item) => item[0] === thirdParty,
@@ -2713,6 +2714,7 @@ export default inject(
       isArchiveFolder,
       isPersonalRoom,
       isTrashFolder: isTrash,
+      isTemplatesFolder,
     } = treeFoldersStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
@@ -2795,6 +2797,7 @@ export default inject(
       setRoomsFilter,
       standalone,
       currentDeviceType,
+      isTemplate: isTemplatesFolder,
     };
   },
 )(

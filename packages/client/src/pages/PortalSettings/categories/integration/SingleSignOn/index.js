@@ -58,7 +58,7 @@ const SingleSignOn = (props) => {
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
   useEffect(() => {
-    isSSOAvailable && !isMobileView && init();
+    isSSOAvailable && init();
     setDocumentTitle(t("Settings:SingleSignOn"));
   }, []);
 

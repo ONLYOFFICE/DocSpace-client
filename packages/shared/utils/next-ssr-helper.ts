@@ -34,7 +34,7 @@ export const getBaseUrl = () => {
   const host = hdrs.get("x-forwarded-host");
   const proto = hdrs.get("x-forwarded-proto");
 
-  const baseURL = `${proto}:${host}`;
+  const baseURL = `${proto}://${host}`;
 
   return baseURL;
 };

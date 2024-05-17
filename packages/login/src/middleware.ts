@@ -32,7 +32,7 @@ export function middleware(request: NextRequest) {
   const host = request.headers.get("x-forwarded-host");
   const proto = request.headers.get("x-forwarded-proto");
 
-  const redirectUrl = `${proto}:${host}`;
+  const redirectUrl = `${proto}://${host}`;
 
   if (request.nextUrl.pathname === "/health") {
     console.log("Get login health check for portal: ", redirectUrl);

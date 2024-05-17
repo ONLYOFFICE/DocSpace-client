@@ -248,6 +248,14 @@ const StyledContainer = styled.div<{
     grid-template-columns: ${(props) =>
       props.isRootFolder ? "auto 1fr" : "29px auto 1fr"};
   }
+
+  .title-block-badge {
+    margin-left: 8px;
+
+    div {
+      background-color: ${(props) => props.theme.catalog.header.iconFill};
+    }
+  }
 `;
 
 const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)<{
@@ -482,6 +490,14 @@ const StyledTextContainer = styled.div<{
       overflow: hidden;
       text-overflow: ellipsis;
     `};
+
+  .title-block-badge {
+    div {
+      ${(props) =>
+        props.isRootFolderTitle &&
+        `background-color: ${props.theme.navigation.rootFolderTitleColor}`};
+    }
+  }
 `;
 
 const StyledHeading = styled(Heading)<{ isRootFolderTitle: boolean }>`

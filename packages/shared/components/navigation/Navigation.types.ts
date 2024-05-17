@@ -104,6 +104,7 @@ export interface ITextProps {
   isRootFolderTitle: boolean;
   onClick: () => void;
   className?: string;
+  badgeLabel?: string;
 }
 
 export interface INavigationLogoProps {
@@ -201,4 +202,5 @@ export interface INavigationProps {
   onNavigationButtonClick?: () => void;
   tariffBar: React.ReactElement;
   showNavigationButton: boolean;
+  badgeLabel?: string;
 }

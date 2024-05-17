@@ -987,6 +987,8 @@ const SectionHeaderContent = (props) => {
     ? t("Files:ShareRoom")
     : null;
 
+  const badgeLabel = isTemplatesFolder ? t("Files:Template") : "";
+
   return (
     <Consumer key="header">
       {(context) => (
@@ -1054,6 +1056,7 @@ const SectionHeaderContent = (props) => {
                 onNavigationButtonClick={onNavigationButtonClick}
                 tariffBar={<TariffBar />}
                 showNavigationButton={!!showNavigationButton}
+                badgeLabel={badgeLabel}
               />
             </div>
           )}

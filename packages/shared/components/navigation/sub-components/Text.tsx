@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { Badge } from "../../badge";
 
 import {
   StyledArrowIcon,
@@ -42,6 +43,7 @@ const Text = ({
   isOpen,
   isRootFolderTitle,
   onClick,
+  badgeLabel,
   ...rest
 }: ITextProps) => {
   return (
@@ -58,9 +60,19 @@ const Text = ({
       >
         {title}
       </StyledHeading>
-
+      {badgeLabel && (
+        <Badge
+          className="title-block-badge"
+          label={badgeLabel}
+          fontSize="9px"
+          padding="2px 5px"
+          fontWeight={700}
+          borderRadius="50px"
+          noHover
+          isHovered={false}
+        />
+      )}
       {isRootFolderTitle && <StyledArrowIcon />}
-
       {!isRootFolderTitle && !isRootFolder ? (
         isOpen ? (
           <StyledExpanderDownIconRotate />

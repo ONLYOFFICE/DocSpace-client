@@ -205,5 +205,6 @@
   "AddAdminByNameOrEmail": "Add admin by name or email",
   "RoomTemplate": "Room template",
   "RoomTemplateDescription": "Use this template to quickly create a new room.",
-  "TemplateOwner": "Template owner"
+  "TemplateOwner": "Template owner",
+  "Template": "Template"
 }

@@ -82,6 +82,7 @@ const Navigation = ({
   onNavigationButtonClick,
   tariffBar,
   showNavigationButton,
+  badgeLabel,
   ...rest
 }: INavigationProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -177,6 +178,7 @@ const Navigation = ({
         isRootFolder={isRootFolder}
         onClick={toggleDropBox}
         isRootFolderTitle={false}
+        badgeLabel={!showRootFolderNavigation ? badgeLabel : ""}
       />
     </div>
   );
@@ -197,6 +199,7 @@ const Navigation = ({
         isRootFolder={isRootFolder}
         isRootFolderTitle
         onClick={onTextClick}
+        badgeLabel={badgeLabel}
       />
 
       {navigationTitleNode}

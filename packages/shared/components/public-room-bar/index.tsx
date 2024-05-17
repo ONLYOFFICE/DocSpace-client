@@ -47,7 +47,12 @@ const PublicRoomBar = (props: PublicRoomBarProps) => {
             {headerText}
           </Text>
         </div>
-        <Text className="text-container_body" fontSize="12px" fontWeight={400}>
+        <Text
+          className="text-container_body"
+          fontSize="12px"
+          fontWeight={400}
+          as="div"
+        >
           {bodyText}
         </Text>
       </div>

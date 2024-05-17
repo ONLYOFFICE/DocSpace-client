@@ -75,6 +75,7 @@ const Members = ({
   membersIsLoading,
   searchValue,
   searchResultIsLoading,
+  setAccessSettingsIsVisible,
 }) => {
   const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
@@ -134,6 +135,10 @@ const Members = ({
         toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
       });
     }
+  };
+
+  const onOpenAccessSettings = () => {
+    setAccessSettingsIsVisible(true);
   };
 
   const publicRoomItems = [];
@@ -229,6 +234,33 @@ const Members = ({
     !withoutTitlesAndLinks;
   const publicRoomItemsLength = publicRoomItems.length;
 
+  const isTemplate = infoPanelSelection?.isTemplate; //TODO: Templates
+  const isAvailableToEveryone = true; //TODO: Templates
+  if (isTemplate && isAvailableToEveryone) {
+    return (
+      <PublicRoomBar
+        headerText={t("Files:TemplateAvailable")}
+        bodyText={
+          <>
+            <div className="template-access_description">
+              {t("Files:TemplateAvailableDescription")}
+            </div>
+            <Link
+              className="template-access_link"
+              isHovered
+              type="action"
+              fontWeight={600}
+              fontSize="13px"
+              onClick={onOpenAccessSettings}
+            >
+              {t("Files:AccessSettings")}
+            </Link>
+          </>
+        }
+      />
+    );
+  }
+
   if (!membersList.length) {
     return <EmptyContainer />;
   }
@@ -301,7 +333,11 @@ export default inject(
 
     const { primaryLink, additionalLinks, setExternalLink } = publicRoomStore;
     const { isArchiveFolderRoot } = treeFoldersStore;
-    const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
+    const {
+      setLinkParams,
+      setEditLinkPanelIsVisible,
+      setTemplateAccessSettingsVisible: setAccessSettingsIsVisible,
+    } = dialogsStore;
 
     const roomType =
       selectedFolderStore.roomType ?? infoPanelSelection?.roomType;
@@ -338,6 +374,7 @@ export default inject(
       membersIsLoading,
       searchValue,
       searchResultIsLoading,
+      setAccessSettingsIsVisible,
     };
   },
 )(

@@ -26,7 +26,7 @@
 
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
@@ -62,6 +62,7 @@ const Root = ({
   doc,
   fileId,
   hash,
+  timer,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
 
@@ -72,10 +73,14 @@ const Root = ({
 
   const isSkipError =
     error?.status === "not-found" ||
-    (error?.status === "access-denied" && error.editorUrl) ||
+    (error?.status === "access-denied" && !!error.editorUrl) ||
     error?.status === "not-supported";
 
   const { t } = useTranslation(["Editor", "Common"]);
+
+  useEffect(() => {
+    console.log("editor timer: ", timer);
+  }, [timer]);
 
   useRootInit({
     documentType: config?.documentType,
@@ -189,9 +194,8 @@ const Root = ({
           isSharingAccess={isSharingAccess}
           documentserverUrl={documentserverUrl}
           fileInfo={fileInfo}
-          errorMessage={
-            error?.message ?? isSkipError ? t("Common:InvalidLink") : ""
-          }
+          errorMessage={error?.message}
+          isSkipError={!!isSkipError}
           onSDKRequestSharingSettings={onSDKRequestSharingSettings}
           onSDKRequestSaveAs={onSDKRequestSaveAs}
           onSDKRequestInsertImage={onSDKRequestInsertImage}

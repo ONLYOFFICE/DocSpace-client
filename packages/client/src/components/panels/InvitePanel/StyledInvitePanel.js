@@ -425,6 +425,7 @@ const StyledCrossIcon = styled(CrossIcon)`
 StyledCrossIcon.defaultProps = { theme: Base };
 
 const StyledDeleteIcon = styled(DeleteIcon)`
+cursor: pointer;
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`

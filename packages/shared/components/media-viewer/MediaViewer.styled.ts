@@ -140,6 +140,7 @@ export const StyledSwitchToolbar = styled.div<StyledSwitchToolbarProps>`
   display: block;
   opacity: 0;
   transition: all 0.3s;
+  top: 0;
 
   ${(props) =>
     props.left ? "left: 0" : props.isPDFFile ? "right: 20px" : "right: 0"};
@@ -154,7 +155,7 @@ export const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
   color: ${(props) => props.theme.mediaViewer.color};
   display: ${(props) => (props.visible ? "block" : "none")};
   overflow: hidden;
-  span {
+  > span {
     position: fixed;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"

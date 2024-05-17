@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { redirect } from "next/navigation";
+import { permanentRedirect, redirect } from "next/navigation";
 import { cookies, headers } from "next/headers";
 
 import { Toast } from "@docspace/shared/components/toast";
@@ -49,16 +49,28 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const baseUrl = getBaseUrl();
-  const isAuth = await checkIsAuthenticated();
 
-  if (isAuth) redirect(`${baseUrl}`);
+  const timers = { isAuth: 0, otherOperations: 0 };
+
+  const cookieStore = cookies();
+
+  const systemTheme = cookieStore.get(SYSTEM_THEME_KEY);
+
+  let redirectUrl = "";
+
+  const api_host = process.env.API_HOST?.trim();
+
+  const startOtherOperationsDate = new Date();
 
   const [settings, colorTheme] = await Promise.all([
     getSettings(),
     getColorTheme(),
   ]);
 
-  if (settings === "access-restricted") redirect(`${baseUrl}/${settings}`);
+  timers.otherOperations =
+    new Date().getTime() - startOtherOperationsDate.getTime();
+
+  if (settings === "access-restricted") redirectUrl = `/${settings}`;
 
   if (settings === "portal-not-found") {
     const config = await (
@@ -74,24 +86,26 @@ export default async function RootLayout({
 
     url.searchParams.append("url", host ?? "");
 
-    redirect(url.toString());
+    redirectUrl = url.toString();
   }
 
-  if (settings?.wizardToken) {
-    redirect(`${baseUrl}/wizard`);
+  if (typeof settings !== "string" && settings?.wizardToken) {
+    redirectUrl = `wizard`;
   }
 
-  if (settings?.tenantStatus === TenantStatus.PortalRestore) {
-    redirect(`${baseUrl}/preparation-portal`);
+  if (
+    typeof settings !== "string" &&
+    settings?.tenantStatus === TenantStatus.PortalRestore
+  ) {
+    redirectUrl = `preparation-portal`;
   }
 
-  if (settings?.tenantStatus === TenantStatus.PortalDeactivate) {
-    redirect(`${baseUrl}/unavailable`);
+  if (
+    typeof settings !== "string" &&
+    settings?.tenantStatus === TenantStatus.PortalDeactivate
+  ) {
+    redirectUrl = `unavailable`;
   }
-
-  const cookieStore = cookies();
-
-  const systemTheme = cookieStore.get(SYSTEM_THEME_KEY);
 
   return (
     <html lang="en" translate="no">
@@ -109,12 +123,15 @@ export default async function RootLayout({
         <StyledComponentsRegistry>
           <Providers
             value={{
-              settings,
+              settings: typeof settings !== "string" ? settings : undefined,
               colorTheme,
               systemTheme: systemTheme?.value as ThemeKeys,
             }}
+            timers={timers}
+            api_host={api_host}
+            redirectURL={redirectUrl}
           >
-            <SimpleNav />
+            <SimpleNav systemTheme={systemTheme?.value as ThemeKeys} />
             <Toast isSSR />
             {children}
           </Providers>

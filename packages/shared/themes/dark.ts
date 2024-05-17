@@ -2067,6 +2067,7 @@ const Dark: TTheme = {
     borderColor: "#474747",
     thumbnailBorderColor: grayLightMid,
     textColor: white,
+    errorColor: "#E06451",
 
     closeButtonWrapperPadding: "6px",
     closeButtonIcon: black,
@@ -2080,7 +2081,7 @@ const Dark: TTheme = {
     },
 
     members: {
-      iconColor: "#A3A9AE",
+      iconColor: "#858585",
       iconHoverColor: "#ffffff",
       isExpectName: "#A3A9AE",
       subtitleColor: "#a3a9ae",
@@ -2089,6 +2090,7 @@ const Dark: TTheme = {
       disabledRoleSelectorColor: "#a3a9ae",
       roleSelectorArrowColor: "#a3a9ae",
       createLink: "#858585",
+      linkAccessComboboxExpired: "#a3a9ae",
     },
 
     history: {

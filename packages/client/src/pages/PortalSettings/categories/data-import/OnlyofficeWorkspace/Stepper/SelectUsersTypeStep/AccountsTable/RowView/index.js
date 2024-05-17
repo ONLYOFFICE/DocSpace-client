@@ -128,7 +128,7 @@ const RowView = ({
   sectionWidth,
   accountsData,
   typeOptions,
-  users,
+  filteredUsers,
   checkedUsers,
   toggleAccount,
   toggleAllAccounts,
@@ -137,12 +137,12 @@ const RowView = ({
 }) => {
   const isIndeterminate =
     checkedUsers.result.length > 0 &&
-    checkedUsers.result.length !== users.result.length;
+    checkedUsers.result.length !== filteredUsers.length;
 
-  const isChecked = checkedUsers.result.length === users.result.length;
+  const isChecked = checkedUsers.result.length === filteredUsers.length;
 
   const toggleAll = (isChecked) =>
-    toggleAllAccounts(isChecked, users.result, checkedAccountType);
+    toggleAllAccounts(isChecked, filteredUsers, checkedAccountType);
 
   const onClearFilter = () => {
     setSearchValue("");
@@ -226,7 +226,7 @@ const RowView = ({
 
 export default inject(({ importAccountsStore }) => {
   const {
-    users,
+    filteredUsers,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
@@ -235,7 +235,7 @@ export default inject(({ importAccountsStore }) => {
   } = importAccountsStore;
 
   return {
-    users,
+    filteredUsers,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,

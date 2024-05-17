@@ -50,6 +50,7 @@ import AccessSelector from "./AccessSelector";
 const Item = ({
   t,
   item,
+  theme,
   setInviteItems,
   inviteItems,
   changeInviteItem,
@@ -216,7 +217,7 @@ const Item = ({
             tooltipContent={t("EmailErrorMessage")}
             openOnClick={false}
             size={16}
-            color="#F21C0E"
+            color={theme.infoPanel.errorColor}
           />
           <StyledDeleteIcon
             className="delete-icon"

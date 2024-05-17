@@ -56,6 +56,7 @@ export type FilesSelectorProps = {
   isRestore: boolean;
   isRestoreAll?: boolean;
   isSelect?: boolean;
+  isFormRoom?: boolean;
 
   filterParam?: string;
 
@@ -140,4 +141,5 @@ export type FilesSelectorProps = {
   settings: unknown;
 
   roomsFolderId?: number;
+  openRoot?: boolean;
 };

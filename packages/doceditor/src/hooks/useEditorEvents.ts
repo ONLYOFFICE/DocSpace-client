@@ -37,6 +37,7 @@ import {
   getSharedUsers,
   restoreDocumentsVersion,
   sendEditorNotify,
+  startFilling,
 } from "@docspace/shared/api/files";
 import {
   TEditHistory,
@@ -597,6 +598,18 @@ const useEditorEvents = ({
     docEditor?.setActionLink?.(linkFormation);
   }, []);
 
+  const onRequestStartFilling = React.useCallback(
+    (event: object) => {
+      console.log("onRequestStartFilling", { event });
+
+      if (!fileInfo?.id) return;
+
+      docEditor?.startFilling?.();
+      startFilling(fileInfo?.id);
+    },
+    [fileInfo?.id],
+  );
+
   const generateLink = (actionData: {}) => {
     return encodeURIComponent(JSON.stringify(actionData));
   };
@@ -646,7 +659,7 @@ const useEditorEvents = ({
     onDocumentStateChange,
     onMetaChange,
     onMakeActionLink,
-
+    onRequestStartFilling,
     setDocTitle,
   };
 };

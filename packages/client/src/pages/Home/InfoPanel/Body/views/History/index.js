@@ -149,7 +149,7 @@ export default inject(
       getInfoPanelItemIcon,
       openUser,
     } = infoPanelStore;
-    const { personal, culture } = settingsStore;
+    const { culture } = settingsStore;
 
     const { getHistory } = filesStore;
     const { checkAndOpenLocationAction } = filesActionsStore;
@@ -159,7 +159,6 @@ export default inject(
     const isCollaborator = user.isCollaborator;
 
     return {
-      personal,
       culture,
       selectionHistory,
       setSelectionHistory,

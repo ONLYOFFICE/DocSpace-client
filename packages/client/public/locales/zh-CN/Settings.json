@@ -123,7 +123,6 @@
   "EnterTitle": "请输入标题",
   "ErrorMessageBruteForceProtection": "指定的参数超出有效值范围。",
   "ErrorsWereFound": "发现 {{errors}} 个错误",
-  "ExistingAccount": "已有账号",
   "ForcePathStyle": "力路风格",
   "GroupsDescription": "您在上一步中选择的用户将被导入 {{serviceName}} 中创建的群组。群组会在“账号”板块显示。",
   "HexCode": "十六进制代码",

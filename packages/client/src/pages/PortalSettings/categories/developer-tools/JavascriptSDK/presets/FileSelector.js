@@ -37,7 +37,6 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { SelectedItem } from "@docspace/shared/components/selected-item";
 import { ColorInput } from "@docspace/shared/components/color-input";
 import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
@@ -46,6 +45,7 @@ import { isTablet, isMobile } from "@docspace/shared/utils/device";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Button } from "@docspace/shared/components/button";
+import { FilterType } from "@docspace/shared/enums";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
 import CodeBlock from "../sub-components/CodeBlock";
@@ -77,7 +77,6 @@ import {
   Preview,
   GetCodeButtonWrapper,
   FilesSelectorInputWrapper,
-  SelectedItemsContainer,
   CodeWrapper,
 } from "./StyledPresets";
 
@@ -108,28 +107,52 @@ const FileSelector = (props) => {
 
   const fileTypeDisplay = [
     { value: FilesSelectorFilterTypes.ALL, label: t("AllTypes") },
-    { value: "custom-types", label: t("SelectTypes") },
+    { value: "EditorSupportedTypes", label: t("AllTypesSupportedByEditor") },
+    { value: "SelectorTypes", label: t("SelectTypes") },
   ];
 
-  const [fileOptions, setFileOptions] = useState([
+  const fileOptions = [
     {
-      key: FilesSelectorFilterTypes.DOCX,
-      label: FilesSelectorFilterTypes.DOCX,
-    },
-    { key: FilesSelectorFilterTypes.IMG, label: FilesSelectorFilterTypes.IMG },
-    {
-      key: FilesSelectorFilterTypes.BackupOnly,
-      label: FilesSelectorFilterTypes.BackupOnly,
+      key: FilterType.FoldersOnly,
+      label: t(`Translations:Folders`),
     },
     {
-      key: FilesSelectorFilterTypes.DOCXF,
-      label: FilesSelectorFilterTypes.DOCXF,
+      key: FilterType.DocumentsOnly,
+      label: t(`Common:Documents`),
     },
     {
-      key: FilesSelectorFilterTypes.XLSX,
-      label: FilesSelectorFilterTypes.XLSX,
+      key: FilterType.PresentationsOnly,
+      label: t(`Translations:Presentations`),
     },
-  ]);
+    {
+      key: FilterType.SpreadsheetsOnly,
+      label: t(`Translations:Spreadsheets`),
+    },
+    {
+      key: FilterType.OFormTemplateOnly,
+      label: t(`Files:FormsTemplates`),
+    },
+    {
+      key: FilterType.OFormOnly,
+      label: t(`Files:Forms`),
+    },
+    {
+      key: FilterType.ArchiveOnly,
+      label: t(`Files:Archives`),
+    },
+    {
+      key: FilterType.ImagesOnly,
+      label: t(`Files:Images`),
+    },
+    {
+      key: FilterType.MediaOnly,
+      label: t(`Files:Media`),
+    },
+    {
+      key: FilterType.FilesOnly,
+      label: t(`Files:AllFiles`),
+    },
+  ];
 
   const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
   const [heightDimension, setHeightDimension] = useState(dataDimensions[0]);
@@ -145,17 +168,6 @@ const FileSelector = (props) => {
   );
   const [typeDisplay, setTypeDisplay] = useState(fileTypeDisplay[0].value);
   const [selectedType, setSelectedType] = useState(fileOptions[0]);
-  const [selectedFileTypes, setSelectedFileTypes] = useState([
-    { key: "file-type-documents", label: t("Common:Documents") },
-    { key: "file-type-folders", label: t("Translations:Folders") },
-    { key: "file-type-spreadsheets", label: t("Translations:Spreadsheets") },
-    { key: "file-type-archives", label: t("Files:Archives") },
-    { key: "file-type-presentations", label: t("Translations:Presentations") },
-    { key: "file-type-images", label: t("Filse:Images") },
-    { key: "file-type-media", label: t("Files:Media") },
-    { key: "file-type-forms-templates", label: t("Files:FormsTemplates") },
-    { key: "file-type-forms", label: t("Files:Forms") },
-  ]);
 
   const [config, setConfig] = useState({
     mode: "file-selector",
@@ -209,13 +221,16 @@ const FileSelector = (props) => {
   }, 500);
 
   useEffect(() => {
+    loadFrame();
+    return () => destroyFrame();
+  });
+
+  useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
     if (scroll) {
       scroll.scrollTop = 0;
     }
-    loadFrame();
-    return () => destroyFrame();
-  });
+  }, []);
 
   const toggleButtonMode = (e) => {
     setSelectedElementType(e.target.value);
@@ -303,9 +318,9 @@ const FileSelector = (props) => {
       return {
         ...config,
         filterParam:
-          e.target.value === FilesSelectorFilterTypes.ALL
-            ? FilesSelectorFilterTypes.ALL
-            : selectedType,
+          e.target.value === "SelectorTypes"
+            ? selectedType.key
+            : e.target.value,
       };
     });
   };
@@ -331,23 +346,10 @@ const FileSelector = (props) => {
   const closeGetCodeModal = () => setIsGetCodeDialogOpened(false);
 
   const onTypeSelect = (option) => {
-    // setFileOptions((prevFileOptions) => prevFileOptions.filter((file) => file.key !== option.key));
     setSelectedType(option);
     setConfig((config) => {
       return { ...config, filterParam: option.key };
     });
-
-    // if (!selectedFileTypes.find((type) => type.key === option.key)) {
-    //   setSelectedFileTypes((prevFileTypes) => [...prevFileTypes, option]);
-    // }
-  };
-
-  const deleteSelectedType = (option) => {
-    setFileOptions((prevFileOptions) => [option, ...prevFileOptions]);
-    const filteredTypes = selectedFileTypes.filter(
-      (type) => type.key !== option.key,
-    );
-    setSelectedFileTypes(filteredTypes);
   };
 
   const toggleWithSearch = () => {
@@ -690,7 +692,7 @@ const FileSelector = (props) => {
               onClick={changeColumnsOption}
               spacing="8px"
             />
-            {typeDisplay === "custom-types" && (
+            {typeDisplay === "SelectorTypes" && (
               <>
                 <ComboBox
                   onSelect={onTypeSelect}
@@ -703,21 +705,7 @@ const FileSelector = (props) => {
                   scaled={true}
                   directionY="top"
                   selectedOption={selectedType}
-                  // selectedOption={{
-                  //   key: "Select",
-                  //   label: t("Common:SelectAction"),
-                  // }}
                 />
-
-                {/* <SelectedItemsContainer>
-                  {selectedFileTypes.map((type) => (
-                    <SelectedItem
-                      key={type.key}
-                      onClick={() => deleteSelectedType(type)}
-                      label={type.label}
-                    />
-                  ))}
-                </SelectedItemsContainer> */}
               </>
             )}
           </ControlsSection>

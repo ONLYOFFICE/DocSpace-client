@@ -116,6 +116,7 @@ const Section = (props: SectionProps) => {
     isMobileHidden,
     canDisplay,
     anotherDialogOpen,
+    getContextModel,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -235,6 +236,7 @@ const Section = (props: SectionProps) => {
               settingsStudio={settingsStudio}
               isFormGallery={isFormGallery}
               currentDeviceType={currentDeviceType}
+              getContextModel={getContextModel}
             >
               {isSectionHeaderAvailable &&
                 currentDeviceType !== DeviceType.desktop && (

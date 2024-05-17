@@ -9,8 +9,6 @@
   "DisableRoomQuota": "このルームの容量制限を無効にする",
   "FillingFormsRoomDescription": "文書テンプレートの作成、共有、記入、または準備されたプリセットを使用して、あらゆるタイプの文書をすばやく作成できます。",
   "FillingFormsRoomTitle": "フォームへの記入用ルーム",
-  "FormRoomDescription": "フォームを誰とでも共有し、「記入済み」フォルダに完成したフォームを収集できます。ユーザーは、任意のフォームに複数回入力し、別々の最終ファイルを作成できます。基本フォーム ルームでは、フォームに複数のユーザー 役割を追加することはできません。",
-  "FormRoomTitle": "基本フォームルーム",
   "Icon": "アイコン",
   "MakeRoomPrivateDescription": "このルームにあるファイルはすべて暗号化されます。",
   "MakeRoomPrivateLimitationsWarningDescription": "この機能では、既存のDocSpaceユーザーだけを招待することができます。ルームを作成した後、ユーザーリストを変更することはできません。",

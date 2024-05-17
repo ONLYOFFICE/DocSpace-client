@@ -228,6 +228,36 @@
       }
     },
     {
+      "label": "Frontend | start:internal",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn start:internal",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | start-prod:internal",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn start-prod:internal",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | build-and-start-prod",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; yarn build ; yarn start-prod",

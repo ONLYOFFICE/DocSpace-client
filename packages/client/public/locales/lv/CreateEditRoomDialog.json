@@ -9,8 +9,6 @@
   "DisableRoomQuota": "Atspējot kvotu šai telpai",
   "FillingFormsRoomDescription": "Veidojiet, kopīgojiet un aizpildiet dokumentu veidnes vai strādājiet ar gataviem sākotnējiem iestatījumiem, lai ātri izveidotu jebkura veida dokumentus.",
   "FillingFormsRoomTitle": "Veidlapu telpas aizpildīšana",
-  "FormRoomDescription": "Kopīgojiet veidlapas ar ikvienu un apkopojiet aizpildītās veidlapas mapē Aizpildīt. Lietotāji var aizpildīt jebkuru veidlapu vairākas reizes, izveidojot atsevišķus gala failus. Pamata veidlapu telpās veidlapām nevar pievienot vairākas lietotāju lomas.",
-  "FormRoomTitle": "Pamatformas telpa",
   "Icon": "Ikona",
   "MakeRoomPrivateDescription": "Visi faili šajā telpā tiks šifrēti.",
   "MakeRoomPrivateLimitationsWarningDescription": "Izmantojot šo funkciju, varat uzaicināt tikai esošos DocSpace lietotājus. Pēc telpas izveides jūs nevarēsiet mainīt lietotāju sarakstu.",

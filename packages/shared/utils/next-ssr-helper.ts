@@ -40,7 +40,10 @@ export const getBaseUrl = () => {
 };
 
 export const getAPIUrl = () => {
-  const baseUrl = getBaseUrl();
+  const baseUrl = process.env.API_HOST?.trim() ?? getBaseUrl();
+
+  // const baseUrl = getBaseUrl();
+
   const baseAPIUrl = `${baseUrl}/${API_PREFIX}`;
 
   return baseAPIUrl;
@@ -59,6 +62,10 @@ export const createRequest = (
   newHeaders.forEach((hdr) => {
     if (hdr[0]) hdrs.set(hdr[0], hdr[1]);
   });
+
+  const baseURL = getBaseUrl();
+
+  if (baseURL && process.env.API_HOST?.trim()) hdrs.set("origin", baseURL);
 
   const urls = paths.map((path) => `${apiURL}${path}`);
 

@@ -91,7 +91,6 @@ const CompanyInfoSettings = (props) => {
     setIsLoadedCompanyInfoSettingsData,
     isLoadedCompanyInfoSettingsData,
     buildVersionInfo,
-    personal,
     deviceType,
   } = props;
   const navigate = useNavigate();
@@ -366,7 +365,6 @@ const CompanyInfoSettings = (props) => {
         visible={showModal}
         onClose={onCloseModal}
         buildVersionInfo={buildVersionInfo}
-        personal={personal}
         previewData={companySettings}
       />
 
@@ -510,7 +508,6 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
 
     companyInfoSettingsData,
     buildVersionInfo,
-    personal,
     deviceType,
   } = settingsStore;
 
@@ -525,7 +522,6 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     setIsLoadedCompanyInfoSettingsData,
     isLoadedCompanyInfoSettingsData,
     buildVersionInfo,
-    personal,
     isSettingPaid: isBrandingAndCustomizationAvailable,
     deviceType,
   };

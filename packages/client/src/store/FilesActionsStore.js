@@ -1692,15 +1692,8 @@ class FilesActionStore {
 
         return !allFilesIsEditing && canDelete && hasSelection;
       case "create-room":
-        const { isCollaborator } = this.userStore?.user || {
-          isCollaborator: false,
-        };
-
-        const canCreateRoom =
-          !isCollaborator && rootFolderType === FolderType.USER;
-
+        const canCreateRoom = selection.some((s) => s.security?.CreateRoomFrom);
         return canCreateRoom;
-
       case "change-quota":
         return hasRoomsToChangeQuota;
       case "disable-quota":

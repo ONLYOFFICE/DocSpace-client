@@ -32,9 +32,10 @@ import {
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
-import {
+import type {
   NonFunctionProperties,
   NonFunctionPropertyNames,
+  Nullable,
   TCreatedBy,
   TPathParts,
 } from "@docspace/shared/types";
@@ -138,6 +139,8 @@ class SelectedFolderStore {
 
   canShare = false;
 
+  parentRoomType: Nullable<FolderType> = null;
+
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -181,6 +184,7 @@ class SelectedFolderStore {
       canCopyPublicLink: this.canCopyPublicLink,
       type: this.type,
       isRootFolder: this.isRootFolder,
+      parentRoomType: this.parentRoomType,
     };
   };
 
@@ -225,6 +229,7 @@ class SelectedFolderStore {
     this.security = null;
     this.type = null;
     this.inRoom = false;
+    this.parentRoomType = null;
   };
 
   setParentId = (parentId: number) => {

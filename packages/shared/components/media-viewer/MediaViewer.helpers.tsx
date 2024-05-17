@@ -145,6 +145,7 @@ export const getPDFContextModel = (
 export const getMobileMediaContextModel = (
   t: TranslationType,
   targetFile: TFile,
+  isPublicFile: boolean,
   funcs: Omit<
     ContextFunctions,
     "onClickDownloadAs" | "onCopyLink" | "onPreviewClick" | "onClickLinkEdit"
@@ -169,7 +170,7 @@ export const getMobileMediaContextModel = (
       onClick: () => {
         return onShowInfoPanel?.(targetFile);
       },
-      disabled: false,
+      disabled: isPublicFile,
     },
     {
       key: "download",
@@ -183,7 +184,7 @@ export const getMobileMediaContextModel = (
       label: t("Common:MoveTo"),
       icon: MoveReactSvgUrl,
       onClick: onMoveAction,
-      disabled: !targetFile.security.Move,
+      disabled: !targetFile.security.Move || isPublicFile,
     },
     {
       id: "option_copy-to",
@@ -191,7 +192,7 @@ export const getMobileMediaContextModel = (
       label: t("Common:Copy"),
       icon: CopyReactSvgUrl,
       onClick: onCopyAction,
-      disabled: !targetFile.security.Copy,
+      disabled: !targetFile.security.Copy || isPublicFile,
     },
     {
       id: "option_create-copy",
@@ -199,27 +200,27 @@ export const getMobileMediaContextModel = (
       label: t("Common:Duplicate"),
       icon: DuplicateReactSvgUrl,
       onClick: () => onDuplicate?.(targetFile, t),
-      disabled: !targetFile.security.Duplicate,
+      disabled: !targetFile.security.Duplicate || isPublicFile,
     },
     {
       key: "rename",
       label: t("Common:Rename"),
       icon: RenameReactSvgUrl,
       onClick: () => onClickRename?.(targetFile),
-      disabled: !targetFile.security.Rename,
+      disabled: !targetFile.security.Rename || isPublicFile,
     },
 
     {
       key: "separator0",
       isSeparator: true,
-      disabled: !targetFile.security.Delete,
+      disabled: !targetFile.security.Delete || isPublicFile,
     },
     {
       key: "delete",
       label: t("Common:Delete"),
       icon: TrashReactSvgUrl,
       onClick: () => onClickDelete?.(targetFile, t),
-      disabled: !targetFile.security.Delete,
+      disabled: !targetFile.security.Delete || isPublicFile,
     },
   ];
 
@@ -230,6 +231,7 @@ export const getDesktopMediaContextModel = (
   t: TranslationType,
   targetFile: TFile,
   archiveRoom: boolean,
+  isPublicFile: boolean,
   funcs: Pick<
     ContextFunctions,
     "onClickDownload" | "onClickRename" | "onClickDelete"
@@ -250,14 +252,14 @@ export const getDesktopMediaContextModel = (
       label: t("Common:Rename"),
       icon: RenameReactSvgUrl,
       onClick: () => onClickRename?.(targetFile),
-      disabled: archiveRoom,
+      disabled: archiveRoom || isPublicFile,
     },
     {
       key: "delete",
       label: t("Common:Delete"),
       icon: TrashReactSvgUrl,
       onClick: () => onClickDelete?.(targetFile, t),
-      disabled: archiveRoom,
+      disabled: archiveRoom || isPublicFile,
     },
   ];
 

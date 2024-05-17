@@ -24,18 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
-import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
-import MobileLayout from "./MobileLayout";
+import { inject, observer } from "mobx-react";
+import styled, { css } from "styled-components";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { isMobile, isMobileOnly } from "react-device-detect";
+
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import {
   isTablet as isTabletUtils,
-  isMobile as isMobileUtils,
+  mobileMore,
   tablet,
 } from "@docspace/shared/utils";
-import { isMobile, isMobileOnly } from "react-device-detect";
-import { inject, observer } from "mobx-react";
 
 const StyledContainer = styled.div`
   user-select: none;
@@ -58,6 +59,14 @@ const StyledContainer = styled.div`
       padding: env(safe-area-inset-top) env(safe-area-inset-right)
         env(safe-area-inset-bottom) env(safe-area-inset-left);
     `}
+
+  @media ${mobileMore} {
+    #customScrollBar {
+      > .scroll-wrapper > .scroller > .scroll-body {
+        padding-inline: 0px !important;
+      }
+    }
+  }
 `;
 
 const Layout = (props) => {
@@ -157,7 +166,7 @@ const Layout = (props) => {
       contentHeight={contentHeight}
       isPortrait={isPortrait}
     >
-      {isMobileUtils() ? <MobileLayout {...props} /> : children}
+      <Scrollbar id="customScrollBar">{children}</Scrollbar>
     </StyledContainer>
   );
 };

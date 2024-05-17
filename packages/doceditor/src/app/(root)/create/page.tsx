@@ -120,7 +120,7 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
       searchParams.append("action", action);
     }
 
-    const redirectURL = `${baseURL}/doceditor?${searchParams.toString()}`;
+    const redirectURL = `/doceditor?${searchParams.toString()}`;
     return permanentRedirect(redirectURL);
   }
 

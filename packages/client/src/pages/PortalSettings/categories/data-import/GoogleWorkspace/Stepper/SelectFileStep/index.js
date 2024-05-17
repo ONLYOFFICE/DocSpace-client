@@ -119,7 +119,7 @@ const SelectFileStep = ({
 
   const goBack = () => {
     cancelMigration();
-    setTimeout(() => navigate(-1), 100);
+    setTimeout(() => navigate("/portal-settings/data-import/migration"), 100);
   };
 
   const checkMigrationStatusAndUpdate = async () => {

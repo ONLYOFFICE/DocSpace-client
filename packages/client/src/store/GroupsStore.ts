@@ -651,6 +651,8 @@ class GroupsStore {
   };
 
   changeGroupContextSelection = (group: TGroup, isSingleMenu: boolean) => {
+    this.peopleStore.selectionStore.setBufferSelection(null);
+
     if (isSingleMenu) {
       this.singleContextMenuAction(group);
     } else {

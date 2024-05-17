@@ -898,7 +898,7 @@ const Manager = (props) => {
                 scale={true}
                 onChange={onChangePage}
                 placeholder={t("EnterPage")}
-                value={config.filter.page || 1}
+                value={config.filter.page}
                 isDisabled={!config.filter.count}
                 tabIndex={7}
               />

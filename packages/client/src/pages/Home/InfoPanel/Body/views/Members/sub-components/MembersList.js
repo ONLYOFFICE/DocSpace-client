@@ -89,7 +89,7 @@ const MembersList = (props) => {
   });
 
   const listOfTitles = list
-    .filter((x) => x.props.isTitle)
+    .filter((x) => x.props.user?.isTitle)
     .map((item) => {
       return {
         displayName: item.props.user.displayName,

@@ -125,7 +125,6 @@
   "ErrorMessageBruteForceProtection": "Het opgegeven argument lag buiten het bereik van geldige waarden.",
   "ErrorOccuredDownloadLog": "Er zijn fouten opgetreden tijdens het importeren van gegevens. Download het logbestand om dit te controleren.",
   "ErrorsWereFound": "{{errors}} fouten gevonden",
-  "ExistingAccount": "Bestaand account",
   "ForcePathStyle": "Forceer Path Style",
   "GroupsDescription": "Gebruikers die u in de vorige stap hebt geselecteerd, worden geïmporteerd in groepen die zijn aangemaakt in {{serviceName}}. Groepen verschijnen in het gedeelte Accounts.",
   "HexCode": "Hexcode",

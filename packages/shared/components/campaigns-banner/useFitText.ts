@@ -27,28 +27,31 @@
 import { useRef, useState, useEffect } from "react";
 
 const useFitText = (
-  campaignImage: string,
+  campaignBackground: string,
   currentFontSize: string = "13px",
 ) => {
   const ref: React.RefObject<HTMLDivElement> = useRef(null);
+  const wrapperRef: React.RefObject<HTMLDivElement> = useRef(null);
 
   const [fontSize, setFontSize] = useState(parseInt(currentFontSize, 10));
 
   useEffect(() => {
     setFontSize(parseInt(currentFontSize, 10));
-  }, [campaignImage, currentFontSize]);
+  }, [campaignBackground, currentFontSize]);
 
   useEffect(() => {
     const isOverflow =
-      !!ref.current && ref.current.scrollHeight > ref.current.offsetHeight;
+      !!ref.current &&
+      !!wrapperRef.current &&
+      ref.current.scrollHeight > wrapperRef.current.offsetHeight;
 
     if (isOverflow) {
-      const newFontSize = fontSize - 1;
+      const newFontSize = fontSize - 2;
       setFontSize(newFontSize);
     }
-  }, [currentFontSize, fontSize, ref?.current?.scrollHeight]);
+  }, [fontSize]);
 
-  return { fontSize: `${fontSize}px`, ref };
+  return { fontSize: `${fontSize}px`, ref, wrapperRef };
 };
 
 export default useFitText;

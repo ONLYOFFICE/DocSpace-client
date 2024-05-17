@@ -37,9 +37,13 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const startDate = new Date();
   const [user, settings] = await Promise.all([getUser(), getSettings()]);
+  const timer = new Date().getTime() - startDate.getTime();
 
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+
+  const api_host = process.env.API_HOST?.trim();
 
   return (
     <html lang="en" translate="no">
@@ -56,7 +60,13 @@ export default async function RootLayout({
       </head>
       <body>
         <StyledComponentsRegistry>
-          <Providers contextData={{ user, settings }}>{children}</Providers>
+          <Providers
+            contextData={{ user, settings }}
+            api_host={api_host}
+            timer={timer}
+          >
+            {children}
+          </Providers>
         </StyledComponentsRegistry>
 
         <Scripts />

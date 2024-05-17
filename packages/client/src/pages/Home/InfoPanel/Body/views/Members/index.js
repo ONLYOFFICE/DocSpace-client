@@ -71,6 +71,7 @@ const Members = ({
   setExternalLink,
   withPublicRoomBlock,
   fetchMembers,
+  fetchMoreMembers,
   membersIsLoading,
   searchValue,
   searchResultIsLoading,
@@ -96,19 +97,7 @@ const Members = ({
   }, [infoPanelSelection, searchValue]);
 
   const loadNextPage = async () => {
-    const roomId = infoPanelSelection.id;
-    const fetchedMembers = await fetchMembers(t, false, withoutTitlesAndLinks);
-    const { users, administrators, expected, groups } = fetchedMembers;
-
-    const newMembers = {
-      roomId: roomId,
-      administrators: [...infoPanelMembers.administrators, ...administrators],
-      users: [...infoPanelMembers.users, ...users],
-      expected: [...infoPanelMembers.expected, ...expected],
-      groups: [...infoPanelMembers.groups, ...groups],
-    };
-
-    setInfoPanelMembers(newMembers);
+    await fetchMoreMembers(t, withoutTitlesAndLinks);
   };
 
   if (membersIsLoading) return <InfoPanelViewLoader view="members" />;
@@ -301,6 +290,7 @@ export default inject(
       infoPanelMembers,
       setInfoPanelMembers,
       fetchMembers,
+      fetchMoreMembers,
       membersIsLoading,
       withPublicRoomBlock,
       searchValue,
@@ -344,6 +334,7 @@ export default inject(
       setExternalLink,
       withPublicRoomBlock,
       fetchMembers,
+      fetchMoreMembers,
       membersIsLoading,
       searchValue,
       searchResultIsLoading,

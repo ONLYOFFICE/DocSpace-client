@@ -9,8 +9,6 @@
   "DisableRoomQuota": "Désactiver le quota pour cette salle",
   "FillingFormsRoomDescription": "Créez, partagez et remplissez des modèles de documents ou utilisez les modèles prêts à l’emploi pour créer rapidement des documents de tout type.",
   "FillingFormsRoomTitle": "Salle de remplissage de formulaires",
-  "FormRoomDescription": "Partagez les formulaires avec n'importe qui et placez les formulaires terminés dans le dossier Terminés. Les utilisateurs peuvent remplir un formulaire plusieurs fois et créer un fichier final séparé à chaque fois. Dans les salles de formulaires de base, vous ne pouvez pas ajouter plusieurs rôles d'utilisateur aux formulaires.",
-  "FormRoomTitle": "Salle de formulaires de base",
   "Icon": "Icône",
   "MakeRoomPrivateDescription": "Tous les fichiers de cette salle seront chiffrés.",
   "MakeRoomPrivateLimitationsWarningDescription": "Cette fonction vous permet d’inviter uniquement les utilisateurs existants de DocSpace. Après avoir créé une salle, vous ne pourrez pas modifier la liste des utilisateurs.",

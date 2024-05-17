@@ -126,7 +126,6 @@
   "ErrorMessageBruteForceProtection": "Specificirani argument je izvan opsega validnih vrednosti.",
   "ErrorOccuredDownloadLog": "Došlo je do grešaka prilikom uvoza podataka. Preuzmite zapisnik da biste ih proverili.",
   "ErrorsWereFound": "{{errors}} greške su pronađene",
-  "ExistingAccount": "Postojeći nalog",
   "ForcePathStyle": "Prisili Stil Putanje",
   "GroupsDescription": "Korisnici koje ste odabrali u prethodnom koraku biće uvezeni u grupe kreirane u {{serviceName}}. Grupe će se pojaviti u odeljku Računi.",
   "HexCode": "Hex kod",

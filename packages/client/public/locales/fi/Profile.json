@@ -15,7 +15,6 @@
   "LightTheme": "Kevyt teema",
   "LogoutActiveConnection": "Kirjaudu ulos aktiivisesta yhteydestä",
   "LogoutAllActiveConnections": "Kirjaudu ulos aktiivisista yhteyksistä",
-  "LogoutAllActiveSessions": "Kirjaudu ulos aktiivisista istunnoista",
   "LogoutAllActiveSessionsDescription": "Kaikki aktiiviset yhteydet paitsi tämä yhteys kirjataan ulos, koska se on tällä hetkellä käytössä oleva.",
   "LogoutBtn": "Kirjaudu ulos",
   "LogoutDescription": "Huom. Kaikki aktiiviset yhteydet paitsi tämä yhteys kirjataan ulos, koska se on tällä hetkellä käytössä oleva.",

@@ -39,6 +39,7 @@ interface ImageViewerProps {
   isFistImage: boolean;
   isLastImage: boolean;
   panelVisible: boolean;
+  isPublicFile?: boolean;
   mobileDetails: JSX.Element;
   toolbar: ReturnType<typeof getCustomToolbar>;
   devices: DevicesType;

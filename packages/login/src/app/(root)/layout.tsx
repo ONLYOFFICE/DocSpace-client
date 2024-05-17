@@ -137,7 +137,6 @@ export default async function RootLayout({
             }}
             timers={timers}
             api_host={api_host}
-            internalRequest={internalRequest}
             internalRequestJson={internalRequestJson}
             redirectURL={redirectUrl}
           >

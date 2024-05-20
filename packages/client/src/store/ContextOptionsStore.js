@@ -304,8 +304,10 @@ class ContextOptionsStore {
   onRestoreAction = () => {
     const { setIsMobileHidden } = this.infoPanelStore;
     setIsMobileHidden(true);
-    console.log("Click");
-    this.dialogsStore.setRestorePanelVisible(true);
+
+    this.dialogsStore.setRestoreDialogVisible(true);
+
+    // this.dialogsStore.setRestorePanelVisible(true);
   };
 
   onCopyAction = () => {

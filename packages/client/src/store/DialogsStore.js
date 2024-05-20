@@ -119,6 +119,8 @@ class DialogsStore {
   selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;
   selectFileFormRoomOpenRoot = false;
 
+  restoreDialogVisible = false;
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -520,6 +522,10 @@ class DialogsStore {
   setPdfFormEditVisible = (visible, data) => {
     this.pdfFormEditVisible = visible;
     this.pdfFormEditData = data;
+  };
+
+  setRestoreDialogVisible = (visible) => {
+    this.restoreDialogVisible = visible;
   };
 }
 

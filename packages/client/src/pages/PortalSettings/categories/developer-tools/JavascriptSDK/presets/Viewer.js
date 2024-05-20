@@ -108,7 +108,7 @@ const Viewer = (props) => {
     };
 
     if (file.inPublic) {
-      const link = await file.id;
+      const link = await getFilePrimaryLink(file.id);
       const { requestToken } = link.sharedTo;
 
       newConfig.requestToken = requestToken;

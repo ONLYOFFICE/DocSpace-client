@@ -28,10 +28,7 @@
 
 import { headers } from "next/headers";
 
-import {
-  createRequest,
-  getBaseUrl,
-} from "@docspace/shared/utils/next-ssr-helper";
+import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import { TenantStatus, EditorConfigErrorType } from "@docspace/shared/enums";
 import type {
   TDocServiceLocation,
@@ -80,6 +77,7 @@ export async function fileCopyAs(
         enableExternalExt,
         password,
       }),
+      false,
     );
 
     const file = await (await fetch(createFile)).json();
@@ -141,6 +139,7 @@ export async function createFile(
       [["Content-Type", "application/json;charset=utf-8"]],
       "POST",
       JSON.stringify({ title, templateId, formId }),
+      false,
     );
 
     const file = await (await fetch(createFile)).json();
@@ -311,6 +310,8 @@ export async function getUser(share?: string) {
     [`/people/@self`],
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
+    undefined,
+    false,
   );
 
   if (!cookie?.includes("asc_auth_key")) return undefined;
@@ -335,6 +336,8 @@ export async function getSettings(share?: string) {
     ],
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
+    undefined,
+    false,
   );
 
   const settingsRes = await fetch(getSettings);
@@ -360,6 +363,7 @@ export async function checkFillFromDraft(
     ],
     "POST",
     JSON.stringify({ fileId: templateFileId }),
+    false,
   );
 
   const response = await fetch(checkFillFormDraft);
@@ -383,6 +387,8 @@ export async function openEdit(
     [`/files/file/${fileId}/openedit?${searchParams}`],
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
+    undefined,
+    false,
   );
 
   const res = await fetch(getConfig);
@@ -442,6 +448,8 @@ export async function getEditorUrl(
     [`/files/docservice?${editorSearchParams ? editorSearchParams : ""}`],
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
+    undefined,
+    false,
   );
 
   const res = await fetch(request);

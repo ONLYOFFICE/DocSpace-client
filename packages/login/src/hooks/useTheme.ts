@@ -39,17 +39,23 @@ import useI18N from "./useI18N";
 export interface UseThemeProps {
   colorTheme?: TGetColorTheme;
   settings?: TSettings;
+  systemTheme?: ThemeKeys;
 }
 
-const useTheme = ({ colorTheme, settings }: UseThemeProps) => {
+const useTheme = ({ colorTheme, settings, systemTheme }: UseThemeProps) => {
   const { i18n } = useI18N({ settings });
 
   const [currentColorTheme, setCurrentColorTheme] =
     React.useState<TColorScheme>({} as TColorScheme);
 
-  const [theme, setTheme] = React.useState<TTheme>({
-    ...Base,
-    currentColorScheme: currentColorTheme,
+  const [theme, setTheme] = React.useState<TTheme>(() => {
+    if (systemTheme === ThemeKeys.DarkStr) {
+      return { ...Dark, currentColorScheme: currentColorTheme };
+    }
+    return {
+      ...Base,
+      currentColorScheme: currentColorTheme,
+    };
   });
 
   const isRequestRunning = React.useRef(false);

@@ -68,9 +68,12 @@ export const Providers = ({
     settings: value.settings,
   });
 
+  console.log(value);
+
   const { theme } = useTheme({
     colorTheme: value.colorTheme,
     settings: value.settings,
+    systemTheme: value.systemTheme,
   });
 
   const currentTheme =

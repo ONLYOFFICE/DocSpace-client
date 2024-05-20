@@ -12,6 +12,8 @@
   "LdapLoginAttributeTooltip": "Enter the object attribute corresponding to the user login.",
   "LdapLoginTooltip": "Please specify Login user who has LDAP server/Active Directory read access rights.",
   "LdapMail": "Mail",
+  "LdapAvatar": "Profile photo",
+  "LdapQuota": "User quota",
   "LdapPasswordTooltip": "Enter the password for the user with the access rights to read data from LDAP server/Active Directory.",
   "LdapPortNumber": "Port Number",
   "LdapPortNumberTooltip": "Enter the port number for your LDAP server/Active Directory.",

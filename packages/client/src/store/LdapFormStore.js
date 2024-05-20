@@ -45,14 +45,16 @@ class LdapFormStore {
   isSslEnabled = false;
 
   requiredSettings = {
-    server: "LDAP://192.168.1.56", //TODO: change to ""
+    server: "LDAP://192.168.1.55", //TODO: change to ""
     userDN: "ou=people,dc=planetexpress,dc=com", //TODO: change to ""
     loginAttribute: "uid",
     portNumber: "10389", //TODO: change to 389
-    userFilter: "(objectClass=inetOrgPerson)", //TODO: change to "(objectclass=*)"
+    userFilter: "(uid=*)", //TODO: change to "(objectclass=*)"
     firstName: "givenName",
     secondName: "sn",
     mail: "mail",
+    avatarAttribute: "jpegPhoto",
+    userQuotaLimit: "",
   };
 
   login = "cn=admin,dc=planetexpress,dc=com"; //TODO: change to ""
@@ -144,7 +146,7 @@ class LdapFormStore {
   };
 
   mapCron = (data) => {
-    console.log("LDAP cron settings data", { data });
+    console.log("LDAP cron settings data", { data }); //TODO: add mapping
   };
 
   load = async () => {
@@ -154,39 +156,11 @@ class LdapFormStore {
     ]);
 
     if (settings.status == "fulfilled") this.mapSettings(settings.value);
-    const cronWithoutSeconds = cron.value.replace("* ", "");
-    if (cron.status == "fulfilled") this.mapCron(cronWithoutSeconds);
 
-    /*
-    "response": {
-      "enableLdapAuthentication": false,
-      "startTls": false,
-      "ssl": false,
-      "sendWelcomeEmail": false,
-      "server": "",
-      "userDN": "",
-      "portNumber": 389,
-      "userFilter": "(uid=*)",
-      "loginAttribute": "uid",
-      "ldapMapping": {
-        "FirstNameAttribute": "givenName",
-        "SecondNameAttribute": "sn",
-        "MailAttribute": "mail",
-        "TitleAttribute": "title",
-        "MobilePhoneAttribute": "mobile",
-        "LocationAttribute": "street"
-      },
-      "accessRights": {},
-      "groupMembership": false,
-      "groupDN": "",
-      "userAttribute": "uid",
-      "groupFilter": "(objectClass=posixGroup)",
-      "groupAttribute": "memberUid",
-      "groupNameAttribute": "cn",
-      "authentication": true,
-      "acceptCertificate": false
+    if (cron.status == "fulfilled") {
+      const cronWithoutSeconds = cron.value ? cron.value.replace("* ", "") : "";
+      this.mapCron(cronWithoutSeconds);
     }
-      */
   };
 
   setServer = (server) => {
@@ -212,6 +186,7 @@ class LdapFormStore {
   setFirstName = (firstName) => {
     this.requiredSettings.firstName = firstName;
   };
+
   setSecondName = (secondName) => {
     this.requiredSettings.secondName = secondName;
   };
@@ -220,9 +195,18 @@ class LdapFormStore {
     this.requiredSettings.mail = mail;
   };
 
+  setAvatarAttribute = (avatarAttribute) => {
+    this.requiredSettings.avatarAttribute = avatarAttribute;
+  };
+
+  setUserQuotaLimit = (userQuotaLimit) => {
+    this.requiredSettings.userQuotaLimit = userQuotaLimit;
+  };
+
   setLogin = (login) => {
     this.login = login;
   };
+
   setPassword = (password) => {
     this.password = password;
   };

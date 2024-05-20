@@ -47,8 +47,7 @@ import pkgFile from "../../package.json";
 export const Providers = ({
   children,
   value,
-  timers,
-  api_host,
+
   redirectURL,
 }: {
   children: React.ReactNode;
@@ -60,12 +59,7 @@ export const Providers = ({
   );
 
   React.useEffect(() => {
-    console.log("Layout API requests timings:", { ...timers });
-    console.log("API_HOST: ", api_host);
-  }, [api_host, timers]);
-
-  React.useEffect(() => {
-    if (redirectURL) window.location.replace("/");
+    if (redirectURL) window.location.replace(redirectURL);
   }, [redirectURL]);
 
   const { currentDeviceType } = useDeviceType();

@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { permanentRedirect, redirect } from "next/navigation";
 import { cookies, headers } from "next/headers";
 
 import { Toast } from "@docspace/shared/components/toast";
@@ -32,14 +31,10 @@ import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { TenantStatus, ThemeKeys } from "@docspace/shared/enums";
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 
-import { Providers } from "@/providers";
 import StyledComponentsRegistry from "@/utils/registry";
-import {
-  checkIsAuthenticated,
-  getColorTheme,
-  getSettings,
-} from "@/utils/actions";
 import SimpleNav from "@/components/SimpleNav";
+import { Providers } from "@/providers";
+import { getColorTheme, getSettings } from "@/utils/actions";
 
 import "../../styles/globals.scss";
 
@@ -50,25 +45,16 @@ export default async function RootLayout({
 }) {
   const baseUrl = getBaseUrl();
 
-  const timers = { isAuth: 0, otherOperations: 0 };
-
   const cookieStore = cookies();
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY);
 
   let redirectUrl = "";
 
-  const api_host = process.env.API_HOST?.trim();
-
-  const startOtherOperationsDate = new Date();
-
   const [settings, colorTheme] = await Promise.all([
     getSettings(),
     getColorTheme(),
   ]);
-
-  timers.otherOperations =
-    new Date().getTime() - startOtherOperationsDate.getTime();
 
   if (settings === "access-restricted") redirectUrl = `/${settings}`;
 
@@ -123,12 +109,10 @@ export default async function RootLayout({
         <StyledComponentsRegistry>
           <Providers
             value={{
-              settings: typeof settings !== "string" ? settings : undefined,
+              settings: typeof settings === "string" ? undefined : settings,
               colorTheme,
               systemTheme: systemTheme?.value as ThemeKeys,
             }}
-            timers={timers}
-            api_host={api_host}
             redirectURL={redirectUrl}
           >
             <SimpleNav systemTheme={systemTheme?.value as ThemeKeys} />

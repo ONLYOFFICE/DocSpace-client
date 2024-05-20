@@ -43,7 +43,6 @@ const useRecoverDialog = ({}) => {
   const recoverDialogEmailPlaceholder = t(
     "Login:RecoverContactEmailPlaceholder",
   );
-
   const recoverDialogTextBody = t("Login:RecoverTextBody");
 
   return {

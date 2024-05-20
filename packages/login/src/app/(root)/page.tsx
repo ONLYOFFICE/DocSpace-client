@@ -25,12 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use server";
+
 import { redirect } from "next/navigation";
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 
-import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { getBgPattern } from "@docspace/shared/utils/common";
-
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 import { ThemeKeys } from "@docspace/shared/enums";
 
@@ -41,7 +40,6 @@ import {
   getThirdPartyProviders,
   getCapabilities,
   getSSO,
-  checkIsAuthenticated,
   getColorTheme,
 } from "@/utils/actions";
 
@@ -50,10 +48,6 @@ async function Page({
 }: {
   searchParams: { [key: string]: string };
 }) {
-  const timers = { isAuth: 0, otherOperations: 0 };
-
-  const startOtherOperationsDate = new Date();
-
   const [settings, thirdParty, capabilities, ssoSettings, colorTheme] =
     await Promise.all([
       getSettings(),
@@ -62,28 +56,6 @@ async function Page({
       getSSO(),
       getColorTheme(),
     ]);
-
-  timers.otherOperations =
-    new Date().getTime() - startOtherOperationsDate.getTime();
-
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
-
-  if (settings === "portal-not-found") {
-    const config = await (
-      await fetch(`${getBaseUrl()}/static/scripts/config.json`)
-    ).json();
-    const hdrs = headers();
-    const host = hdrs.get("host");
-
-    const url = new URL(
-      config.wrongPortalNameUrl ??
-        "https://www.onlyoffice.com/wrongportalname.aspx",
-    );
-
-    url.searchParams.append("url", host ?? "");
-
-    redirect(url.toString());
-  }
 
   const ssoUrl = capabilities ? capabilities.ssoUrl : "";
   const hideAuthPage = ssoSettings ? ssoSettings.hideAuthPage : false;
@@ -104,12 +76,11 @@ async function Page({
       <Login
         searchParams={searchParams}
         capabilities={capabilities}
-        settings={settings}
+        settings={typeof settings === "string" ? undefined : settings}
         thirdPartyProvider={thirdParty}
         ssoSettings={ssoSettings}
         isAuthenticated={false}
         systemTheme={systemTheme?.value as ThemeKeys}
-        timers={timers}
       />
     </LoginFormWrapper>
   );

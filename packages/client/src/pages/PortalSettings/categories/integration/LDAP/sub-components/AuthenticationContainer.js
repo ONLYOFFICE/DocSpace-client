@@ -77,6 +77,7 @@ const AuthenticationContainer = (props) => {
         >
           <TextInput
             name={PASSWORD}
+            type="password"
             hasError={errors.password}
             onChange={onChangeValue}
             value={password}

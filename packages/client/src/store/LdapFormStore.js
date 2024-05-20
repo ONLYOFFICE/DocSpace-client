@@ -115,8 +115,13 @@ class LdapFormStore {
       groupNameAttribute,
     } = data;
 
-    const { FirstNameAttribute, SecondNameAttribute, MailAttribute } =
-      ldapMapping;
+    const {
+      FirstNameAttribute,
+      SecondNameAttribute,
+      MailAttribute,
+      AvatarAttribute,
+      UserQuotaLimit,
+    } = ldapMapping;
 
     this.isLdapEnabled = enableLdapAuthentication;
     this.isTlsEnabled = startTls;
@@ -131,6 +136,8 @@ class LdapFormStore {
       firstName: FirstNameAttribute,
       secondName: SecondNameAttribute,
       mail: MailAttribute,
+      avatarAttribute: AvatarAttribute,
+      userQuotaLimit: UserQuotaLimit,
     };
 
     this.authentication = authentication;
@@ -325,6 +332,8 @@ class LdapFormStore {
         firstNameAttribute: this.requiredSettings.firstName,
         secondNameAttribute: this.requiredSettings.secondName,
         mailAttribute: this.requiredSettings.mail,
+        avatarAttribute: this.requiredSettings.avatarAttribute,
+        userQuotaLimit: this.requiredSettings.userQuotaLimit,
       },
       accessRights: {},
       groupMembership: this.groupMembership,

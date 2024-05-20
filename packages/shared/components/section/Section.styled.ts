@@ -556,23 +556,15 @@ const StyledSectionContainer = styled.section<SectionContainerProps>`
   }
 
   .progress-bar_container {
-    position: absolute;
+    position: fixed;
     bottom: 0;
 
     display: grid;
     grid-gap: 24px;
     margin-bottom: 24px;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 24px;
-            left: 0;
-          `
-        : css`
-            margin-right: 24px;
-            right: 0;
-          `}
+    margin-inline-end: 24px;
+    inset-inline-end: ${(props) =>
+      props.isInfoPanelVisible ? INFO_PANEL_WIDTH : 0}px;
 
     .layout-progress-bar_wrapper {
       position: static;

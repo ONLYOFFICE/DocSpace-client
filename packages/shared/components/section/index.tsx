@@ -200,6 +200,7 @@ const Section = (props: SectionProps) => {
           viewAs={viewAs}
           ref={containerRef}
           isSectionHeaderAvailable={isSectionHeaderAvailable}
+          isInfoPanelVisible={isInfoPanelVisible}
           showTwoProgress={showTwoProgress}
           withBodyScroll={withBodyScroll}
           currentDeviceType={currentDeviceType}

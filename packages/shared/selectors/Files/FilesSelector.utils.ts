@@ -97,7 +97,8 @@ export const convertFilesToItems: (
   filterParam?: string,
 ) => {
   const items = files.map((file) => {
-    const { id, title, security, folderId, rootFolderType, fileExst } = file;
+    const { id, title, security, folderId, rootFolderType, fileExst, viewUrl } =
+      file;
 
     const icon = getIcon(fileExst || DEFAULT_FILE_EXTS);
     const label = title.replace(fileExst, "") || fileExst;
@@ -112,6 +113,7 @@ export const convertFilesToItems: (
       rootFolderType,
       isDisabled: !filterParam,
       fileExst,
+      viewUrl,
     };
   });
   return items;

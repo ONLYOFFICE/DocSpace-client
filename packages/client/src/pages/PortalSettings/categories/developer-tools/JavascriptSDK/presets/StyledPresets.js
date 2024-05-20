@@ -212,6 +212,12 @@ export const Frame = styled(Box)`
   .frame-container {
     height: 100% !important;
   }
+
+  .draggable-core-iframe-cover {
+    position: absolute;
+    display: none;
+    inset: 0;
+  }
 `;
 
 Frame.defaultProps = { theme: Base };

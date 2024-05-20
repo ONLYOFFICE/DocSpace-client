@@ -157,6 +157,14 @@ const StyledScrollbar = styled(Scrollbar)<{ $fixedSize?: boolean }>`
     }
   }
 
+  // fix when iframe breaks dragging scroll
+  &:has(> .track > .dragging) {
+    .draggable-core-iframe-cover {
+      display: block;
+      z-index: 999999;
+    }
+  }
+
   // ------- Auto hide styles -------
 
   &.auto-hide {

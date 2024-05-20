@@ -60,21 +60,26 @@ const WatermarkBlock = ({
   setWatermarks,
   isEdit = false,
   isWatermarks = false,
+  initialWatermarksSettings,
   t,
 }) => {
   useEffect(() => {
-    console.log("!!!!watermarksChecked", watermarksChecked);
-    if (!isEdit) setWatermarks({ enabled: watermarksChecked }, true);
+    setWatermarks(
+      isEdit ? initialWatermarksSettings : { enabled: watermarksChecked },
+      true,
+    );
   }, []);
 
   const [watermarksChecked, setWatermarksChecked] = useState(
     isWatermarks && isEdit,
   );
+
   const onChangeAddWatermarksToDocuments = () => {
     setWatermarksChecked(!watermarksChecked);
 
     setWatermarks({ enabled: !watermarksChecked });
   };
+
   return (
     <BlockComponent
       headerText={t("AddWatermarksToDocuments")}
@@ -89,10 +94,10 @@ const WatermarkBlock = ({
 };
 
 export default inject(({ createEditRoomStore }) => {
-  const { setWatermarks, watermarksSettings } = createEditRoomStore;
+  const { setWatermarks, initialWatermarksSettings } = createEditRoomStore;
   return {
     setWatermarks,
-
-    isWatermarks: watermarksSettings?.enabled,
+    isWatermarks: initialWatermarksSettings?.enabled,
+    initialWatermarksSettings,
   };
 })(observer(WatermarkBlock));

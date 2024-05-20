@@ -56,10 +56,11 @@ import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { inject, observer } from "mobx-react";
 import { StyledWatermark } from "./StyledComponent";
-import { FileInput } from "@docspace/shared/components/file-input";
 
-import { imageProcessing } from "@docspace/shared/utils/common";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+
+import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
+import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 
 const scaleOptions = [
   { key: 100, label: "100" },
@@ -77,7 +78,7 @@ const rotateOptions = [
   { key: 90, label: "90" },
 ];
 const getInitialScale = (scale, isEdit) => {
-  if (!isEdit || scale === undefined || scale === 0) return scaleOptions[0];
+  if (!isEdit || !scale) return scaleOptions[0];
 
   return scaleOptions.find((item) => {
     return item.key === scale;
@@ -85,7 +86,7 @@ const getInitialScale = (scale, isEdit) => {
 };
 
 const getInitialRotate = (rotate, isEdit) => {
-  if (!isEdit || rotate === undefined) return rotateOptions[0];
+  if (!isEdit) return rotateOptions[0];
 
   const item = rotateOptions.find((item) => {
     return item.key === rotate;
@@ -96,9 +97,8 @@ const getInitialRotate = (rotate, isEdit) => {
 
 const ImageWatermark = ({
   isEdit,
-
   setWatermarks,
-  watermarksSettings,
+  initialWatermarksSettings,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
 
@@ -106,49 +106,51 @@ const ImageWatermark = ({
 
   if (initialInfo.current === null) {
     initialInfo.current = {
-      dataScale: scaleOptions,
-      dataRotate: rotateOptions,
-      rotate: getInitialRotate(watermarksSettings?.rotate, isEdit),
-      scale: getInitialScale(watermarksSettings?.imageScale, isEdit),
-      url: watermarksSettings?.imageUrl ?? "",
+      rotate: getInitialRotate(initialWatermarksSettings?.rotate, isEdit),
+      scale: getInitialScale(initialWatermarksSettings?.imageScale, isEdit),
+      url: initialWatermarksSettings?.imageUrl ?? "",
     };
   }
 
   const initialInfoRef = initialInfo.current;
 
   useEffect(() => {
-    if (!isEdit)
-      setWatermarks(
-        {
-          rotate: initialInfoRef.rotate.key,
-          imageScale: initialInfoRef.scale.key,
-          imageUrl: initialInfoRef.url,
-          text: "",
-          additions: 0,
-        },
-        true,
-      );
+    setWatermarks(
+      {
+        rotate: initialInfoRef.rotate.key,
+        additions: 0,
+        isImage: true,
+        enabled: true,
+        ...(initialWatermarksSettings && {
+          imageHeight: initialWatermarksSettings.imageHeight,
+          imageScale: initialWatermarksSettings.imageScale,
+          imageWidth: initialWatermarksSettings.imageWidth,
+          imageUrl: initialWatermarksSettings.imageUrl,
+        }),
+      },
+      true,
+    );
   }, []);
 
   const [selectedRotate, setRotate] = useState(initialInfoRef.rotate);
   const [selectedScale, setScale] = useState(initialInfoRef.scale);
 
-  const onInput = (file) => {
-    console.log("onInput", file);
+  // const onInput = (file) => {
+  //   console.log("onInput", file);
 
-    imageProcessing(file)
-      .then((f) => {
-        if (f instanceof File) setWatermarks({ image: f });
-      })
-      .catch((error) => {
-        if (
-          error instanceof Error &&
-          error.message === "recursion depth exceeded"
-        ) {
-          toastr.error(t("Common:SizeImageLarge"));
-        }
-      });
-  };
+  //   imageProcessing(file)
+  //     .then((f) => {
+  //       if (f instanceof File) setWatermarks({ image: f });
+  //     })
+  //     .catch((error) => {
+  //       if (
+  //         error instanceof Error &&
+  //         error.message === "recursion depth exceeded"
+  //       ) {
+  //         toastr.error(t("Common:SizeImageLarge"));
+  //       }
+  //     });
+  // };
   const onScaleChange = (item) => {
     setScale(item);
 
@@ -185,7 +187,7 @@ const ImageWatermark = ({
           className="access-right-item"
           key={item.key}
           data-key={item.key}
-          onClick={() => onRotateChange(item)}
+          onClick={() => onScaleChange(item)}
         >
           {item.label}&#37;
         </DropDownItem>
@@ -194,10 +196,20 @@ const ImageWatermark = ({
 
     return <div style={{ display: "contents" }}>{items}</div>;
   };
+
+  const onSelectFile = (fileInfo) => {
+    setWatermarks({ image: fileInfo });
+  };
+
   return (
     <StyledWatermark>
-      <FileInput accept={["image/png", "image/jpeg"]} onInput={onInput} scale />
-
+      {/* <FileInput accept={["image/png", "image/jpeg"]} onInput={onInput} scale /> */}
+      <FilesSelectorInput
+        onSelectFile={onSelectFile}
+        filterParam={FilesSelectorFilterTypes.IMG}
+        isSelect
+        scale
+      />
       <div className="options-wrapper">
         <div>
           <Text className="watermark-title" fontWeight={600} lineHeight="20px">
@@ -238,9 +250,9 @@ const ImageWatermark = ({
 };
 
 export default inject(({ createEditRoomStore }) => {
-  const { setWatermarks, watermarksSettings } = createEditRoomStore;
+  const { setWatermarks, initialWatermarksSettings } = createEditRoomStore;
   return {
     setWatermarks,
-    watermarksSettings,
+    initialWatermarksSettings,
   };
 })(observer(ImageWatermark));

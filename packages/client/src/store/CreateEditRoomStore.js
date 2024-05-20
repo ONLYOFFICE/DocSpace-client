@@ -96,9 +96,21 @@ class CreateEditRoomStore {
     this.onClose = onClose;
   };
 
-  setWatermarks = (watermarksSettings, isInit = false) => {
-    if (isInit) {
-      this.initialWatermarksSettings = watermarksSettings;
+  setInitialWatermarks = (watermarksSettings) => {
+    if (!watermarksSettings) {
+      this.initialWatermarksSettings = { enabled: false };
+
+      return;
+    }
+
+    this.initialWatermarksSettings = watermarksSettings;
+    this.initialWatermarksSettings.isImage = !!watermarksSettings.imageUrl;
+  };
+
+  setWatermarks = (watermarksSettings, isReplacing) => {
+    if (isReplacing) {
+      this.watermarksSettings = watermarksSettings;
+      return;
     }
 
     this.watermarksSettings = {
@@ -107,57 +119,62 @@ class CreateEditRoomStore {
     };
   };
 
-  setIsImageWatermarkType = (isImageType, isInit) => {
-    if (isInit) {
-      this.initialIsImageType = isImageType;
-    }
-
-    this.isImageType = isImageType;
-  };
-
   isEqualWatermarkChanges = () => {
-    if (this.isImageType !== this.initialIsImageType) return false;
-
     return isEqual(this.watermarksSettings, this.initialWatermarksSettings);
   };
 
   isNotWatermarkSet = () => {
-    if (this.isImageType && !this.watermarksSettings.image) return true;
+    if (this.watermarksSettings.isImage && !this.watermarksSettings.image)
+      return true;
 
-    if (!this.isImageType && this.watermarksSettings.additions === 0)
+    if (
+      !this.watermarksSettings.isImage &&
+      this.watermarksSettings.additions === 0
+    )
       return true;
 
     return false;
   };
+
   getWatermarkRequest = async (room) => {
     if (!this.watermarksSettings.image) {
-      return setWatermarkSettings(room.id, this.watermarksSettings);
+      return setWatermarkSettings(room.id, {
+        enabled: this.watermarksSettings.enabled,
+        rotate: this.watermarksSettings.rotate,
+        text: this.watermarksSettings.text,
+        additions: this.watermarksSettings.additions,
+      });
     }
 
-    const { uploadRoomLogo } = this.filesStore;
+    const getMeta = (url, onSetInfo) => {
+      const img = new Image();
 
-    const watermarkImage = this.watermarksSettings.image;
-    const uploadWatermarkData = new FormData();
-    uploadWatermarkData.append(0, watermarkImage);
+      img.onload = () => onSetInfo(null, img);
+      img.onerror = (err) => onSetInfo(err);
+      img.src = url;
+    };
 
-    const response = await uploadRoomLogo(uploadWatermarkData);
+    //TODO: Return the decision when it will be possible to upload images.
+    //const { uploadRoomLogo } = this.filesStore;
+    //  const watermarkImage = this.watermarksSettings.image;
+    //  const uploadWatermarkData = new FormData();
+    //  uploadWatermarkData.append(0, watermarkImage);
+    //  const response = await uploadRoomLogo(uploadWatermarkData);
 
-    let newImage = new Image();
-    newImage.src = URL.createObjectURL(watermarkImage);
+    const imageInfo = this.watermarksSettings.image;
 
-    newImage.onload = () => {
-      let width = newImage.width;
-      let height = newImage.height;
+    getMeta(imageInfo.viewUrl, (err, img) => {
+      if (err) return;
 
-      return setWatermarkSettings(room.id, {
-        enabled: true,
+      setWatermarkSettings(room.id, {
+        enabled: this.watermarksSettings.enabled,
         imageScale: this.watermarksSettings.imageScale,
         rotate: this.watermarksSettings.rotate,
-        imageUrl: response.data,
-        imageWidth: width,
-        imageHeight: height,
+        imageId: imageInfo.id,
+        imageWidth: img.naturalWidth,
+        imageHeight: img.naturalHeight,
       });
-    };
+    });
   };
 
   onCreateRoom = async (withConfirm = false, t) => {

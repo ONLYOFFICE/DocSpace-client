@@ -100,7 +100,7 @@ const rotateOptions = (t) => [
 const getInitialRotate = (rotate, isEdit, t) => {
   const dataRotate = rotateOptions(t);
 
-  if (!isEdit || rotate === undefined) return dataRotate[0];
+  if (!isEdit) return dataRotate[0];
 
   const item = dataRotate.find((item) => {
     return item.key === rotate;
@@ -113,7 +113,8 @@ const ViewerInfoWatermark = ({
   isEdit,
 
   setWatermarks,
-  watermarksSettings,
+
+  initialWatermarksSettings,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
 
@@ -124,10 +125,9 @@ const ViewerInfoWatermark = ({
     initialInfo.current = {
       dataRotate: rotateOptions(t),
       dataTabs: tabsOptions(t),
-      rotate: getInitialRotate(watermarksSettings?.rotate, isEdit, t),
-      tabs: getInitialTabs(watermarksSettings?.additions, isEdit, t),
-      text: getInitialText(watermarksSettings?.text, isEdit),
-      additions: watermarksSettings?.additions || WatermarkAdditions.UserName,
+      tabs: getInitialTabs(initialWatermarksSettings?.additions, isEdit, t),
+      rotate: getInitialRotate(initialWatermarksSettings?.rotate, isEdit, t),
+      text: getInitialText(initialWatermarksSettings?.text, isEdit),
     };
 
     elements.current = getInitialState(initialInfo.current.tabs);
@@ -136,15 +136,20 @@ const ViewerInfoWatermark = ({
   const initialInfoRef = initialInfo.current;
 
   useEffect(() => {
-    if (!isEdit)
-      setWatermarks(
-        {
-          rotate: initialInfoRef.rotate.key,
-          text: initialInfoRef.text,
-          additions: initialInfoRef.additions,
-        },
-        true,
-      );
+    setWatermarks(
+      {
+        rotate: initialInfoRef.rotate.key,
+        text: initialInfoRef.text,
+        additions:
+          initialWatermarksSettings?.additions || WatermarkAdditions.UserName,
+        isImage: false,
+        enabled: true,
+        imageWidth: 0,
+        imageHeight: 0,
+        imageScale: 0,
+      },
+      true,
+    );
   }, []);
 
   const [selectedPosition, setSelectedPosition] = useState(
@@ -167,7 +172,7 @@ const ViewerInfoWatermark = ({
         flagsCount += WatermarkAdditions[key];
       }
     }
-    setWatermarks({ additions: flagsCount }); 
+    setWatermarks({ additions: flagsCount });
   };
 
   const onPositionChange = (item) => {
@@ -221,9 +226,10 @@ const ViewerInfoWatermark = ({
 };
 
 export default inject(({ createEditRoomStore }) => {
-  const { setWatermarks, watermarksSettings } = createEditRoomStore;
+  const { setWatermarks, initialWatermarksSettings } = createEditRoomStore;
   return {
     setWatermarks,
-    watermarksSettings,
+
+    initialWatermarksSettings,
   };
 })(observer(ViewerInfoWatermark));

@@ -81,7 +81,8 @@ const EditRoomEvent = ({
   defaultRoomsQuota,
   isDefaultRoomsQuotaSet,
 
-  setWatermarks,
+  setInitialWatermarks,
+  getWatermarkRequest,
   watermarksSettings,
   isNotWatermarkSet,
 }) => {
@@ -194,8 +195,11 @@ const EditRoomEvent = ({
       if (removedTags.length)
         actions.push(removeTagsFromRoom(room.id, removedTags));
 
+      
+
       if (watermarksSettings && !isNotWatermarkSet()) {
-        const request = setWatermarkSettings(room.id, watermarksSettings);
+       
+        const request = getWatermarkRequest(room, watermarksSettings);
 
         actions.push(request);
       }
@@ -298,8 +302,8 @@ const EditRoomEvent = ({
       const [tags, watermarks] = await Promise.all(requests);
 
       setFetchedTags(tags);
-      console.log("watermarks", watermarks);
-      setWatermarks(watermarks, true);
+
+      setInitialWatermarks(watermarks);
 
       setIsInitLoading(false);
     };
@@ -367,8 +371,12 @@ export default inject(
     const { updateInfoPanelSelection } = infoPanelStore;
 
     const { defaultRoomsQuota, isDefaultRoomsQuotaSet } = currentQuotaStore;
-    const { setWatermarks, watermarksSettings, isNotWatermarkSet } =
-      createEditRoomStore;
+    const {
+      setInitialWatermarks,
+      watermarksSettings,
+      isNotWatermarkSet,
+      getWatermarkRequest,
+    } = createEditRoomStore;
 
     return {
       defaultRoomsQuota,
@@ -406,9 +414,10 @@ export default inject(
 
       updateInfoPanelSelection,
       changeRoomOwner,
-      setWatermarks,
+      setInitialWatermarks,
       watermarksSettings,
       isNotWatermarkSet,
+      getWatermarkRequest,
     };
   },
 )(observer(EditRoomEvent));

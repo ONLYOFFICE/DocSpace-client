@@ -55,26 +55,21 @@ const getOptionType = (additions, isEdit) => {
 
   return viewerInfoWatermark;
 };
-const Watermarks = ({
-  isEdit,
-  watermarksSettings,
-  isImageType,
-  setIsImageWatermarkType,
-}) => {
+const Watermarks = ({ isEdit, setWatermarks, initialWatermarksSettings }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
   const [type, setType] = useState(
-    getOptionType(watermarksSettings?.additions, isEdit),
+    getOptionType(initialWatermarksSettings?.additions, isEdit),
   );
 
   useEffect(() => {
-    setIsImageWatermarkType(type === imageWatermark, true);
+    !isEdit && setWatermarks({ isImage: type === imageWatermark });
   }, []);
 
   const onSelectType = (e) => {
     const { value } = e.target;
 
     setType(value);
-    setIsImageWatermarkType(value === imageWatermark);
+    setWatermarks({ isImage: type === imageWatermark });
   };
 
   const typeOptions = options(t);
@@ -91,7 +86,7 @@ const Watermarks = ({
         onClick={onSelectType}
       />
 
-      {isImageType ? (
+      {type === imageWatermark ? (
         <ImageWatermark isEdit={isEdit} />
       ) : (
         <ViewerInfoWatermark isEdit={isEdit} />
@@ -101,11 +96,9 @@ const Watermarks = ({
 };
 
 export default inject(({ createEditRoomStore }) => {
-  const { watermarksSettings, setIsImageWatermarkType, isImageType } =
-    createEditRoomStore;
+  const { setWatermarks, initialWatermarksSettings } = createEditRoomStore;
   return {
-    watermarksSettings,
-    isImageType,
-    setIsImageWatermarkType,
+    setWatermarks,
+    initialWatermarksSettings,
   };
 })(observer(Watermarks));

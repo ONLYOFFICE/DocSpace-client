@@ -532,6 +532,8 @@ const StyledSectionContainer = styled.section<SectionContainerProps>`
   }
 
   .section-scroll > .scroll-body {
+    display: flex;
+    flex-direction: column;
     padding-inline-start: 20px !important;
 
     @media ${tablet} {

@@ -34,13 +34,17 @@ export const getBaseUrl = () => {
   const host = hdrs.get("x-forwarded-host");
   const proto = hdrs.get("x-forwarded-proto");
 
-  const baseURL = `${proto}:${host}`;
+  const baseURL = `${proto}://${host}`;
 
   return baseURL;
 };
 
-export const getAPIUrl = () => {
-  const baseUrl = process.env.API_HOST?.trim() ?? getBaseUrl();
+export const getAPIUrl = (internalRequest: boolean) => {
+  const baseUrl = internalRequest
+    ? process.env.API_HOST?.trim() ?? getBaseUrl()
+    : getBaseUrl();
+
+  // const baseUrl = getBaseUrl();
 
   const baseAPIUrl = `${baseUrl}/${API_PREFIX}`;
 
@@ -52,18 +56,19 @@ export const createRequest = (
   newHeaders: [string, string][],
   method: string,
   body?: string,
+  internalRequest: boolean = true,
 ) => {
   const hdrs = new Headers(headers());
 
-  const apiURL = getAPIUrl();
+  const apiURL = getAPIUrl(internalRequest);
 
   newHeaders.forEach((hdr) => {
     if (hdr[0]) hdrs.set(hdr[0], hdr[1]);
   });
 
-  const host = hdrs.get("x-forwarded-host");
+  const baseURL = getBaseUrl();
 
-  if (host && process.env.API_HOST?.trim()) hdrs.set("origin", host);
+  if (baseURL && process.env.API_HOST?.trim()) hdrs.set("origin", baseURL);
 
   const urls = paths.map((path) => `${apiURL}${path}`);
 

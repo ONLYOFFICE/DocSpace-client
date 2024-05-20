@@ -348,7 +348,7 @@ ContextMenuButtonPure.defaultProps = {
   size: 16,
   isDisabled: false,
   directionX: "left",
-  isFill: false,
+  isFill: true,
 
   usePortal: true,
   displayIconBorder: false,

@@ -54,7 +54,7 @@ export const checkIsAuthenticated = async () => {
 
 export async function getSettings() {
   const [getSettings] = createRequest(
-    [`/settings?withPassword=false`],
+    [`/settings?withPassword=true`],
     [["", ""]],
     "GET",
   );

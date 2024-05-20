@@ -53,7 +53,7 @@ const SsoComboBox = (props) => {
   };
 
   return (
-    <FieldContainer isVertical labelText={labelText}>
+    <FieldContainer isVertical labelVisible labelText={labelText}>
       <StyledInputWrapper>
         <ComboBox
           id={name}

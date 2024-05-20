@@ -130,7 +130,7 @@ const DocSpace = (props) => {
     loadFrame();
     return () => destroyFrame();
   });
-
+  
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
     if (scroll) {
@@ -211,13 +211,6 @@ const DocSpace = (props) => {
       }
       targetId={frameId}
     >
-      <div // Cover iframe when parent scroll dragging. Needs for parent scroll to work properly
-        style={{
-          width: width + widthDimension.label,
-          height: height + heightDimension.label,
-        }}
-        className="draggable-core-iframe-cover"
-      />
       <Box id={frameId}></Box>
     </Frame>
   );

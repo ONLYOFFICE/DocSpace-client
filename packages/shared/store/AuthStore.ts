@@ -39,6 +39,7 @@ import {
   isAdmin,
   isPublicRoom,
   insertDataLayer,
+  isPublicPreview,
 } from "../utils/common";
 import { getCookie, setCookie } from "../utils/cookie";
 import { TTenantExtraRes } from "../api/portal/types";
@@ -80,6 +81,8 @@ class AuthStore {
   skipRequest = false;
 
   skipModules = false;
+
+  clientError = false;
 
   constructor(
     userStoreConst: UserStore,
@@ -167,11 +170,12 @@ class AuthStore {
     if (
       this.settingsStore?.isLoaded &&
       this.settingsStore?.socketUrl &&
+      !isPublicPreview() &&
       !isPublicRoom() &&
       !isPortalDeactivated
     ) {
       requests.push(
-        this.userStore?.init(i18n).then(() => {
+        this.userStore?.init(i18n, this.settingsStore.culture).then(() => {
           if (!isPortalRestore) {
             this.getTenantExtra();
           }
@@ -492,6 +496,10 @@ class AuthStore {
   getCapabilities = async () => {
     const capabilities = await api.settings.getCapabilities();
     if (capabilities) this.setCapabilities(capabilities);
+  };
+
+  setClientError = (clientError: boolean) => {
+    this.clientError = clientError;
   };
 }
 

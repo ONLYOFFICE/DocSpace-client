@@ -81,6 +81,8 @@ export interface PluginsProps {
   ) => Promise<unknown>;
   addPlugin: (data: FormData) => Promise<void>;
 
+  updatePlugins: (fromList?: boolean) => Promise<void>;
+
   currentColorScheme: TColorScheme;
   theme: TTheme;
 

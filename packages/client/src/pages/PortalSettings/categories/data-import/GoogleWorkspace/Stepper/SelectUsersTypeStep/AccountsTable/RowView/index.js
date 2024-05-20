@@ -47,18 +47,21 @@ const StyledRowContainer = styled(RowContainer)`
 
   .table-group-menu {
     height: 61px;
-    position: absolute;
+    position: sticky;
     z-index: 201;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            right: -16px;
+            margin-right: -16px;
           `
         : css`
-            left: -16px;
+            margin-left: -16px;
           `}
     width: 100%;
-    margin-top: -35.5px;
+
+    margin-top: 20px;
+    top: 61px;
+    margin-bottom: -29.5px;
 
     .table-container_group-menu {
       padding: 0px 16px;
@@ -125,19 +128,19 @@ const RowView = ({
   sectionWidth,
   accountsData,
   typeOptions,
-  users,
   checkedUsers,
   toggleAccount,
   toggleAllAccounts,
   isAccountChecked,
   setSearchValue,
+  filteredUsers,
 }) => {
   const isIndeterminate =
     checkedUsers.result.length > 0 &&
-    checkedUsers.result.length !== users.result.length;
+    checkedUsers.result.length !== filteredUsers.length;
 
   const toggleAll = (isChecked) =>
-    toggleAllAccounts(isChecked, users.result, checkedAccountType);
+    toggleAllAccounts(isChecked, filteredUsers, checkedAccountType);
 
   const onClearFilter = () => setSearchValue("");
 
@@ -164,7 +167,7 @@ const RowView = ({
             withoutInfoPanelToggler
             withComboBox={false}
             isIndeterminate={isIndeterminate}
-            isChecked={checkedUsers.result.length === users.result.length}
+            isChecked={checkedUsers.result.length === filteredUsers.length}
             onChange={toggleAll}
           />
         </div>
@@ -219,20 +222,20 @@ const RowView = ({
 
 export default inject(({ importAccountsStore }) => {
   const {
-    users,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
+    filteredUsers,
   } = importAccountsStore;
 
   return {
-    users,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
+    filteredUsers,
   };
 })(observer(RowView));

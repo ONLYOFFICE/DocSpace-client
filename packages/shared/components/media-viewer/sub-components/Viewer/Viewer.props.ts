@@ -46,14 +46,15 @@ interface ViewerProps {
   headerIcon: string;
   toolbar: ReturnType<typeof getCustomToolbar>;
   playlistPos: number;
-  isPreviewFile: boolean;
+  isPreviewFile?: boolean;
+  isPublicFile?: boolean;
 
   currentDeviceType?: DeviceType;
 
   onMaskClick?: VoidFunction;
   onNextClick?: VoidFunction;
   onPrevClick?: VoidFunction;
-  contextModel: () => ContextMenuModel[];
+  contextModel: (isError?: boolean) => ContextMenuModel[];
   onDownloadClick?: VoidFunction;
   generateContextMenu: (
     isOpen: boolean,

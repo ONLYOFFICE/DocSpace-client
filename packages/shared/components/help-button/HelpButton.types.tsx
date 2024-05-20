@@ -62,4 +62,5 @@ export interface HelpButtonProps {
   offsetRight?: number;
   offsetBottom?: number;
   offsetLeft?: number;
+  openOnClick?: boolean;
 }

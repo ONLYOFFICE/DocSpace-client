@@ -46,7 +46,7 @@ import {
 } from "../../../utils";
 
 import { ArticleItem } from "@docspace/shared/components/article-item";
-import LoaderArticleBody from "./loaderArticleBody";
+import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -64,6 +64,7 @@ const ArticleBodyContent = (props) => {
     currentDeviceType,
     isProfileLoading,
     limitedAccessSpace,
+    currentColorScheme,
   } = props;
 
   const [selectedKeys, setSelectedKeys] = React.useState([]);
@@ -141,7 +142,10 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["5-0"]);
       }
 
-      if (location.pathname.includes("management")) {
+      if (
+        location.pathname.includes("management") &&
+        !location.pathname.includes("profile")
+      ) {
         setSelectedKeys(["6-0"]);
       }
 
@@ -291,6 +295,10 @@ const ArticleBodyContent = (props) => {
       const icon = getCatalogIconUrlByType(item.type, {
         isSettingsCatalog: true,
       });
+
+      const patternSearching = selectedKeys[0].split("-");
+      const selectedKey = patternSearching[0];
+
       items.push(
         <ArticleItem
           key={item.key}
@@ -299,12 +307,13 @@ const ArticleBodyContent = (props) => {
           showText={showText}
           text={mapKeys(item.tKey)}
           value={item.link}
-          isActive={item.key === selectedKeys[0][0]}
+          isActive={item.key === selectedKey}
           onClick={(e) => onSelect(item.key, e)}
           folderId={item.id}
           style={{
             marginTop: `${item.key.includes(9) ? "16px" : "0"}`,
           }}
+          $currentColorScheme={currentColorScheme}
         />,
       );
     });
@@ -315,7 +324,7 @@ const ArticleBodyContent = (props) => {
   const items = catalogItems();
 
   return !isLoadedArticleBody || isProfileLoading ? (
-    <LoaderArticleBody />
+    <ArticleFolderLoader />
   ) : (
     <>{items}</>
   );
@@ -341,6 +350,7 @@ export default inject(
       toggleArticleOpen,
       currentDeviceType,
       limitedAccessSpace,
+      currentColorScheme,
     } = settingsStore;
 
     const isProfileLoading =
@@ -361,6 +371,7 @@ export default inject(
       currentDeviceType,
       isProfileLoading,
       limitedAccessSpace,
+      currentColorScheme,
     };
   },
 )(

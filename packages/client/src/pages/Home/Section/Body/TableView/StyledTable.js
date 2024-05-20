@@ -179,7 +179,7 @@ const StyledTableRow = styled(TableRow)`
 
   .table-container_element-wrapper,
   .table-container_row-loader {
-    min-width: ${(props) => (props.isRoom ? "40px" : "36px")};
+    min-width: 40px;
     border-bottom: unset;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
@@ -207,16 +207,16 @@ const StyledTableRow = styled(TableRow)`
       ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
-              margin-right: 4px;
+              margin-right: 8px;
             `
           : css`
-              margin-left: 4px;
+              margin-left: 8px;
             `}
     }
   }
 
   .table-container_row-checkbox {
-    width: 16px;
+    width: 12px;
   }
 
   .table-container_file-name-cell {
@@ -277,7 +277,8 @@ const StyledTableRow = styled(TableRow)`
   }
 
   .item-file-name {
-    padding: 14px 8px 14px 0px;
+    padding-block: 14px;
+    padding-inline: 0 8px;
   }
 
   ${(props) =>
@@ -401,9 +402,13 @@ const StyledBadgesContainer = styled.div`
             `}
       p {
         letter-spacing: 0.5px;
-        font-size: ${(props) => props.theme.getCorrectFontSize("9px")};
+        font-size: 9px;
         font-weight: 800;
       }
+    }
+
+    &:hover {
+      cursor: pointer;
     }
   }
 

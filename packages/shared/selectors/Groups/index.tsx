@@ -54,6 +54,8 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
   const [hasNextPage, setHasNextPage] = useState(false);
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);
   const [itemsList, setItemsList] = useState<TSelectorItem[]>([]);
+  const [selectedItem, setSelectedItem] = useState<TSelectorItem | null>(null);
+
   const isFirstLoad = useRef(true);
   const afterSearch = useRef(false);
   const totalRef = useRef(0);
@@ -67,6 +69,12 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
     isDoubleClick: boolean,
     doubleClickCallback: () => void,
   ) => {
+    setSelectedItem((el) => {
+      if (el?.id === item.id) return null;
+
+      return item;
+    });
+
     if (isDoubleClick) {
       doubleClickCallback();
     }
@@ -145,23 +153,24 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
         ...headerProps,
         headerLabel: headerProps?.headerLabel || t("Common:Groups"),
       }}
+      alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
       withSearch
       searchPlaceholder={t("Common:Search")}
       onSearch={onSearch}
       searchValue={searchValue}
       onClearSearch={onClearSearch}
       isSearchLoading={false}
-      disableSubmitButton={false}
+      disableSubmitButton={!selectedItem}
       isMultiSelect={false}
       items={itemsList}
       submitButtonLabel={t("Common:SelectAction")}
       onSubmit={onSubmitAction}
       cancelButtonLabel={t("Common:CancelButton")}
       emptyScreenImage={emptyScreenImg}
-      emptyScreenHeader={t("Common:GroupsNotFoundHeader")} // Todo: Update empty screen texts when they are ready
+      emptyScreenHeader={t("Common:NotFoundGroups")}
       emptyScreenDescription={t("Common:GroupsNotFoundDescription")}
       searchEmptyScreenImage={emptyScreenImg}
-      searchEmptyScreenHeader={t("Common:GroupsNotFoundHeader")}
+      searchEmptyScreenHeader={t("Common:NotFoundGroups")}
       searchEmptyScreenDescription={t("Common:GroupsNotFoundDescription")}
       totalItems={totalRef.current}
       hasNextPage={hasNextPage}

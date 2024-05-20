@@ -38,6 +38,7 @@ import {
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import api from "../../api";
 import RoomsFilter from "../../api/rooms/filter";
+import { RoomsStorageFilter } from "../../enums";
 
 import { TTranslation } from "../../types";
 
@@ -70,6 +71,8 @@ const RoomSelector = ({
   onCancel,
 
   roomType,
+
+  disableThirdParty,
 }: RoomSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -91,7 +94,11 @@ const RoomSelector = ({
     isDoubleClick: boolean,
     doubleClickCallback: () => void,
   ) => {
-    setSelectedItem(item);
+    setSelectedItem((el) => {
+      if (el?.id === item.id) return null;
+
+      return item;
+    });
     if (isDoubleClick && !isMultiSelect) {
       doubleClickCallback();
     }
@@ -135,6 +142,8 @@ const RoomSelector = ({
       filter.type = roomType;
       filter.filterValue = searchValue || null;
 
+      if (disableThirdParty) filter.storageFilter = RoomsStorageFilter.internal;
+
       const {
         folders,
         total: totalCount,
@@ -165,7 +174,7 @@ const RoomSelector = ({
 
       setIsNextPageLoading(false);
     },
-    [excludeItems, roomType, searchValue, setIsDataReady],
+    [disableThirdParty, excludeItems, roomType, searchValue, setIsDataReady],
   );
 
   const headerSelectorProps: TSelectorHeader = withHeader
@@ -224,6 +233,7 @@ const RoomSelector = ({
       loadNextPage={onLoadNextPage}
       isLoading={isFirstLoad.current}
       disableSubmitButton={!selectedItem}
+      alwaysShowFooter={items.length !== 0 || Boolean(searchValue)}
       rowLoader={
         <RowLoader
           isMultiSelect={isMultiSelect}

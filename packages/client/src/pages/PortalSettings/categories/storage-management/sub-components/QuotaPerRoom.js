@@ -33,13 +33,17 @@ const QuotaPerRoomComponent = (props) => {
   const { setRoomQuota, defaultRoomsQuota, isDefaultRoomsQuotaSet } = props;
   const { t } = useTranslation("Settings");
 
+  const initialSizeProp = isDefaultRoomsQuotaSet
+    ? { initialSize: defaultRoomsQuota }
+    : {};
+
   return (
     <QuotaPerItemComponent
       formLabel={t("QuotaPerRoom")}
       toggleLabel={t("DefineQuotaPerRoom")}
       disableQuota={() => setRoomQuota(-1, t)}
       saveQuota={(size) => setRoomQuota(size, t)}
-      initialSize={defaultRoomsQuota}
+      {...initialSizeProp}
       isQuotaSet={isDefaultRoomsQuotaSet}
     />
   );

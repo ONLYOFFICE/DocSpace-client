@@ -58,19 +58,21 @@ const ComboBoxPure = (props: ComboboxProps) => {
   // };
 
   const handleClickOutside = (e: Event) => {
-    const { setIsOpenItemAccess, onToggle } = props;
+    const { withBackdrop, onBackdropClick, setIsOpenItemAccess, onToggle } =
+      props;
 
     const target = e.target as HTMLElement;
 
     if (ref.current && ref.current.contains(target)) return;
 
-    if (onToggle) return;
+    if (onToggle && !(withBackdrop && onBackdropClick)) return;
 
-    // onToggle?.(e, !isOpen);
     setIsOpenItemAccess?.(!isOpen);
     setIsOpen((v) => {
       return !v;
     });
+
+    if (withBackdrop) onBackdropClick?.(e);
   };
 
   const comboBoxClick = (e: React.MouseEvent) => {
@@ -230,7 +232,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
       return (
         <DropDownItem
           {...option}
-          className="drop-down-item"
+          className={`drop-down-item ${"className" in option ? option.className : ""}`}
           textOverflow={textOverflow}
           key={option.key}
           disabled={disabled}

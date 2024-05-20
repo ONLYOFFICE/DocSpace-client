@@ -93,6 +93,7 @@ const TagDropdown = ({
         heightTablet={32}
         key={i}
         label={tag}
+        onMouseDown={preventDefault}
         onClick={() => addFetchedTag(tag)}
       />
     ));
@@ -134,24 +135,20 @@ const TagDropdown = ({
   const dropdownItems = calcualateDisplayedDropdownItems();
 
   return (
-    <StyledDropDownWrapper
-      ref={dropdownRef}
-      className="dropdown-content-wrapper"
-      onMouseDown={preventDefault}
+    <StyledDropDown
+      className="dropdown-content"
+      open={open}
+      forwardedRef={dropdownRef}
+      maxHeight={dropdownMaxHeight}
+      showDisabledItems={false}
+      hasItems={!!dropdownItems.length}
+      clickOutsideAction={onClickOutside}
+      withBackdrop={false}
+      isDefaultMode={false}
+      manualY="54px"
     >
-      <StyledDropDown
-        className="dropdown-content"
-        open={open}
-        forwardedRef={dropdownRef}
-        maxHeight={dropdownMaxHeight}
-        showDisabledItems={false}
-        hasItems={!!dropdownItems.length}
-        clickOutsideAction={onClickOutside}
-        withBackdrop={false}
-      >
-        {dropdownItems}
-      </StyledDropDown>
-    </StyledDropDownWrapper>
+      {dropdownItems}
+    </StyledDropDown>
   );
 };
 

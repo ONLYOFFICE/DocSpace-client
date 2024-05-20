@@ -43,14 +43,14 @@ const StyledNoItemContainer = styled.div`
 
   .no-item-text {
     font-weight: 600;
-    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    font-size: 14px;
     line-height: 16px;
     text-align: center;
   }
 
   .no-history-text {
     font-weight: 700;
-    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+    font-size: 16px;
     line-height: 22px;
     text-align: center;
   }

@@ -35,11 +35,16 @@ const StyledBaseQuotaComponent = styled.div`
     margin-bottom: 20px;
   }
 
+  .paid-badge {
+    cursor: auto;
+  }
+
   .toggle-container {
     margin-bottom: 32px;
     .quotas_toggle-button {
       position: static;
     }
+
     .toggle_label {
       margin-top: 10px;
       margin-bottom: 16px;
@@ -97,9 +102,9 @@ const StyledDiscSpaceUsedComponent = styled.div`
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-right: 8px;
+      margin-inline-end: 8px;
       p {
-        margin-right: 16px;
+        margin-inline-end: 16px;
       }
     }
     .disk-space_icon {
@@ -129,11 +134,11 @@ const StyledDiagramComponent = styled.div`
 
     .diagram_folder-tag {
       display: flex;
-      margin-right: 24px;
+      margin-inline-end: 24px;
       padding-bottom: 8px;
 
       .tag_text {
-        margin-left: 4px;
+        margin-inline-start: 4px;
       }
     }
 
@@ -145,8 +150,9 @@ const StyledDiagramComponent = styled.div`
 
 const StyledFolderTagSection = styled.div`
   height: 12px;
-  border-right: ${(props) =>
-    `1px solid ${props.theme.client.settings.payment.backgroundColor}`};
+  ${(props) =>
+    props.width !== 0 &&
+    `border-inline-end: 1px solid ${props.theme.client.settings.payment.backgroundColor}`};
   background: ${(props) => props.color};
   width: ${(props) => props.width + "%"};
 
@@ -162,11 +168,15 @@ const StyledFolderTagColor = styled.div`
   height: 12px;
   background: ${(props) => props.color};
   border-radius: 50%;
-  margin-right: 4px;
+  margin-inline-end: 4px;
 `;
 
 const StyledStatistics = styled.div`
   max-width: 700px;
+
+  .paid-badge {
+    cursor: auto;
+  }
 
   .statistics-description {
     margin-bottom: 20px;
@@ -219,6 +229,7 @@ const StyledMainInfo = styled.div`
   display: flex;
   flex-wrap: wrap;
   background: ${(props) => props.theme.client.settings.payment.backgroundColor};
+  border-radius: 6px;
 
   column-gap: 24px;
   row-gap: 12px;

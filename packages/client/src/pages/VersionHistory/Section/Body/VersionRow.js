@@ -84,6 +84,7 @@ const VersionRow = (props) => {
     enablePlugins,
     currentDeviceType,
     openUrl,
+    setIsVerHistoryPanel,
   } = props;
 
   const navigate = useNavigate();
@@ -158,11 +159,13 @@ const VersionRow = (props) => {
         const correctDevice = currPluginItem.devices
           ? currPluginItem.devices.includes(currentDeviceType)
           : true;
-        if (correctDevice)
+        if (correctDevice) {
+          setIsVerHistoryPanel(false);
           return currPluginItem.onClick({
             ...info,
             viewUrl: `${info.viewUrl}&version=${info.version}`,
           });
+        }
       }
     }
 
@@ -186,6 +189,10 @@ const VersionRow = (props) => {
   //     toastr.error(err)
   //   );
   // };
+
+  const onContextMenu = (event) => {
+    if (showEditPanel) event.stopPropagation();
+  };
 
   const contextOptions = [
     {
@@ -238,7 +245,7 @@ const VersionRow = (props) => {
       isEditing={isEditing}
       contextTitle={t("Common:Actions")}
     >
-      <div className={`version-row_${index}`}>
+      <div className={`version-row_${index}`} onContextMenu={onContextMenu}>
         <Box displayProp="flex" className="row-header">
           <VersionBadge
             theme={theme}
@@ -373,6 +380,7 @@ export default inject(
       isEditing,
       isEditingVersion,
       fileSecurity,
+      setIsVerHistoryPanel,
     } = versionHistoryStore;
 
     const isEdit = isEditingVersion || isEditing;
@@ -393,6 +401,7 @@ export default inject(
       openUser,
       setIsVisible,
       openUrl,
+      setIsVerHistoryPanel,
     };
   },
 )(

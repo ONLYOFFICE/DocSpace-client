@@ -70,13 +70,22 @@ const TrustedMail = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const regexp = /^[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9](?:\.[a-zA-Z]{1,})+/; //check domain name valid
+  const regexp =
+    /^[a-zA-Z0-9][a-zA-Z0-9-]{0,255}[a-zA-Z0-9](?:\.[a-zA-Z]{1,})+/; //check domain name valid
 
   const [type, setType] = useState("0");
   const [domains, setDomains] = useState([]);
   const [showReminder, setShowReminder] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const getSettingsFromDefault = () => {
+    const defaultSettings = getFromSessionStorage("defaultTrustedMailSettings");
+    if (defaultSettings) {
+      setType(defaultSettings.type);
+      setDomains(defaultSettings.domains);
+    }
+  };
 
   const getSettings = () => {
     const currentSettings = getFromSessionStorage("currentTrustedMailSettings");
@@ -99,9 +108,20 @@ const TrustedMail = (props) => {
 
   useEffect(() => {
     checkWidth();
-    getSettings();
     window.addEventListener("resize", checkWidth);
+
     return () => window.removeEventListener("resize", checkWidth);
+  }, []);
+
+  useEffect(() => {
+    const currentSettings = getFromSessionStorage("currentTrustedMailSettings");
+    const defaultSettings = getFromSessionStorage("defaultTrustedMailSettings");
+
+    if (isEqual(currentSettings, defaultSettings)) {
+      getSettings();
+    } else {
+      getSettingsFromDefault();
+    }
   }, [isLoading]);
 
   useEffect(() => {
@@ -151,6 +171,7 @@ const TrustedMail = (props) => {
   const onSaveClick = async () => {
     setIsSaving(true);
     const valid = domains.map((domain) => regexp.test(domain));
+    console.log("valid", valid);
     if (type === "1" && valid.includes(false)) {
       setIsSaving(false);
       toastr.error(t("Common:IncorrectDomain"));
@@ -164,6 +185,10 @@ const TrustedMail = (props) => {
         inviteUsersAsVisitors: true,
       };
       await setMailDomainSettings(data);
+      saveToSessionStorage("currentTrustedMailSettings", {
+        type: type,
+        domains: domains,
+      });
       saveToSessionStorage("defaultTrustedMailSettings", {
         type: type,
         domains: domains,
@@ -179,8 +204,9 @@ const TrustedMail = (props) => {
 
   const onCancelClick = () => {
     const defaultSettings = getFromSessionStorage("defaultTrustedMailSettings");
-    setType(defaultSettings.type);
-    setDomains(defaultSettings.domains);
+    saveToSessionStorage("currentTrustedMailSettings", defaultSettings);
+    setType(defaultSettings?.type || "0");
+    setDomains(defaultSettings?.domains || []);
     setShowReminder(false);
   };
 

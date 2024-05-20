@@ -336,7 +336,7 @@ export const ViewerPlayer = ({
   };
 
   const togglePlay = useCallback(() => {
-    if (!videoRef.current) return;
+    if (!videoRef.current || isError) return;
 
     if (isMobile && !isPlaying && isVideo) {
       restartToolbarVisibleTimer();
@@ -355,6 +355,7 @@ export const ViewerPlayer = ({
     isMobile,
     isPlaying,
     isVideo,
+    isError,
     setPanelVisible,
     restartToolbarVisibleTimer,
     removeToolbarVisibleTimer,
@@ -430,6 +431,7 @@ export const ViewerPlayer = ({
 
   const handleVideoEnded = () => {
     setIsPlaying(false);
+
     if (isMobile) removePanelVisibleTimeout();
   };
 
@@ -622,6 +624,8 @@ export const ViewerPlayer = ({
     };
   }, [onKeyDown]);
 
+  const posterUrl = thumbnailSrc ? `${thumbnailSrc}&size=1280x720` : undefined;
+
   return (
     <>
       {isMobile && panelVisible && mobileDetails}
@@ -638,7 +642,7 @@ export const ViewerPlayer = ({
             preload="metadata"
             style={lodash.omit(style, ["x", "y"])}
             src={thumbnailSrc ? src : `${src}#t=0.001`}
-            poster={thumbnailSrc && `${thumbnailSrc}&size=1280x720`}
+            poster={posterUrl}
             onError={hadleError}
             onClick={handleClickVideo}
             onEnded={handleVideoEnded}
@@ -648,6 +652,7 @@ export const ViewerPlayer = ({
             onPlaying={() => setIsWaiting(false)}
             onDurationChange={handleDurationChange}
             onLoadedMetadata={handleLoadedMetaDataVideo}
+            onPlay={() => setIsPlaying(true)}
           />
           <PlayerBigPlayButton
             onClick={handleBigPlayButtonClick}

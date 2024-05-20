@@ -14,50 +14,22 @@
     -->
     <link
       id="favicon"
-      rel="shortcut icon"
-      sizes="any"
-      href="/storage/whitelabel/root/favicon.png"
-      onerror="this.onerror=null;this.href='favicon.ico';"
-    />
-    <link
-      id="favicon-icon"
       rel="icon"
-      href="/storage/whitelabel/root/favicon.png"
-      onerror="this.onerror=null;this.href='favicon.ico';"
+      type="image/x-icon"
+      href="/logo.ashx?logotype=3"
     />
+    <link rel="mask-icon" href="/logo.ashx?logotype=3" />
 
     <link rel="manifest" href="/manifest.json" />
     <!-- Tell the browser it's a PWA -->
     <!-- <meta name="mobile-web-app-capable" content="yes" /> -->
     <!-- Tell iOS it's a PWA -->
     <!-- <meta name="apple-mobile-web-app-capable" content="yes" /> -->
-    <!-- <link rel="apple-touch-icon" href="../../../public/appIcon-180.png" /> -->
-
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
 
     <meta name="react-apple-itunes-app" content="app-id=944896972" />
     <meta
       name="react-google-play-app"
       content="app-id=com.onlyoffice.documents"
-    />
-
-    <link
-      rel="apple-touch-icon"
-      href="/storage/whitelabel/root/favicon.png"
-      onerror="this.onerror=null;this.href='favicon.ico';"
-    />
-    <link
-      rel="android-touch-icon"
-      href="/storage/whitelabel/root/favicon.png"
-      onerror="this.onerror=null;this.href='favicon.ico';"
     />
 
     <!-- <%= htmlWebpackPlugin.options.custom %> -->
@@ -118,6 +90,9 @@
         })
         .catch((e) => {
           console.error(e);
+          window.DocSpaceConfig = {
+            errorOnLoad: e,
+          };
         });
     </script>
   </body>

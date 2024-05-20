@@ -71,11 +71,11 @@ import {
 } from "./StyledPresets";
 
 const Viewer = (props) => {
-  const { t, setDocumentTitle, getFilePrimaryLink } = props;
+  const { t, setDocumentTitle, getFilePrimaryLink, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
-  const scriptUrl = `${window.location.origin}/static/scripts/api.js`;
+  const scriptUrl = `${window.location.origin}/static/scripts/sdk/1.0.0/api.js`;
 
   const dataDimensions = [
     { key: "percent", label: "%", default: true },
@@ -123,13 +123,16 @@ const Viewer = (props) => {
   }, 500);
 
   useEffect(() => {
+    loadFrame();
+    return () => destroyFrame();
+  });
+  
+  useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
     if (scroll) {
       scroll.scrollTop = 0;
     }
-    loadFrame();
-    return () => destroyFrame();
-  });
+  }, []);
 
   const onChangeTab = () => {
     loadFrame();
@@ -240,11 +243,21 @@ const Viewer = (props) => {
   );
 
   const code = (
-    <CodeWrapper>
+    <CodeWrapper height="fit-content">
       <CategorySubHeader className="copy-window-code">
-        {t("CopyWindowCode")}
+        {`HTML ${t("CodeTitle")}`}
       </CategorySubHeader>
+      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
+        {t("HtmlCodeDescription")}
+      </Text>
       <Textarea value={codeBlock} heightTextArea={153} />
+      <CategorySubHeader className="copy-window-code">
+        {`JavaScript ${t("CodeTitle")}`}
+      </CategorySubHeader>
+      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
+        {t("JavaScriptCodeDescription")}
+      </Text>
+      <CodeBlock config={config} />
     </CodeWrapper>
   );
 
@@ -253,11 +266,6 @@ const Viewer = (props) => {
       key: "preview",
       title: t("Common:Preview"),
       content: preview,
-    },
-    {
-      key: "js",
-      title: "JavaScript",
-      content: <CodeBlock config={config} />,
     },
     {
       key: "code",

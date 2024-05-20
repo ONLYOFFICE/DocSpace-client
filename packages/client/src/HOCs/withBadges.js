@@ -31,7 +31,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import Badges from "../components/Badges";
 import config from "PACKAGE_FILE";
-import copy from "copy-to-clipboard";
+import { copyShareLink } from "@docspace/shared/utils/copy";
 import { toastr } from "@docspace/shared/components/toast";
 import { isMobileOnly } from "react-device-detect";
 
@@ -116,14 +116,28 @@ export default function withBadges(WrappedComponent) {
     };
 
     onCopyPrimaryLink = async () => {
-      if (isMobileOnly) return;
-
       const { t, item, getPrimaryLink } = this.props;
       const primaryLink = await getPrimaryLink(item.id);
       if (primaryLink) {
-        copy(primaryLink.sharedTo.shareLink);
+        copyShareLink(primaryLink.sharedTo.shareLink);
         toastr.success(t("Common:LinkSuccessfullyCopied"));
       }
+    };
+
+    openLocationFile = () => {
+      const { checkAndOpenLocationAction, item } = this.props;
+
+      const { draftLocation, ...options } = item;
+
+      const file = {
+        ...options,
+        ExtraLocationTitle: draftLocation.folderTitle,
+        ExtraLocation: draftLocation.folderId,
+        id: draftLocation.fileId,
+        title: draftLocation.fileTitle,
+      };
+
+      checkAndOpenLocationAction?.(file);
     };
 
     render() {
@@ -175,6 +189,7 @@ export default function withBadges(WrappedComponent) {
           onBadgeClick={this.onBadgeClick}
           onUnpinClick={this.onUnpinClick}
           onUnmuteClick={this.onUnmuteClick}
+          openLocationFile={this.openLocationFile}
           setConvertDialogVisible={this.setConvertDialogVisible}
           onFilesClick={onFilesClick}
           viewAs={viewAs}
@@ -214,7 +229,12 @@ export default function withBadges(WrappedComponent) {
         isArchiveFolder,
         isRecentTab,
       } = treeFoldersStore;
-      const { markAsRead, setPinAction, setMuteAction } = filesActionsStore;
+      const {
+        markAsRead,
+        setPinAction,
+        setMuteAction,
+        checkAndOpenLocationAction,
+      } = filesActionsStore;
       const { isTabletView, isDesktopClient, theme } = settingsStore;
       const { setIsVerHistoryPanel, fetchFileVersions } = versionHistoryStore;
       const {
@@ -253,6 +273,7 @@ export default function withBadges(WrappedComponent) {
         isArchiveFolder,
         isPublicRoom: publicRoomStore.isPublicRoom,
         isRecentTab,
+        checkAndOpenLocationAction,
       };
     },
   )(observer(WithBadges));

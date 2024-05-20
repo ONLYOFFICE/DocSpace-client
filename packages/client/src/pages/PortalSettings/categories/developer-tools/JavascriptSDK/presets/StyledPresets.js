@@ -79,7 +79,7 @@ export const Controls = styled(Box)`
 export const CategoryHeader = styled.div`
   margin-top: 24px;
   margin-bottom: 24px;
-  font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+  font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: 22px;
@@ -95,7 +95,7 @@ export const CategoryHeader = styled.div`
 `;
 
 export const CategorySubHeader = styled.div`
-  font-size: ${(props) => props.theme.getCorrectFontSize("15px")};
+  font-size: 15px;
   font-style: normal;
   font-weight: 600;
   line-height: 16px;
@@ -252,6 +252,19 @@ export const ColumnContainer = styled(Box)`
   flex-direction: column;
   display: flex;
   gap: 8px;
+
+  .toggle {
+    position: relative;
+  }
+
+  @media ${tablet} {
+    gap: 4px;
+  }
+
+  ${isMobile() &&
+  css`
+    gap: 4px;
+  `}
 `;
 
 export const Preview = styled(Box)`
@@ -303,5 +316,6 @@ export const CodeWrapper = styled.div`
   margin-top: 16px;
 
   width: calc(${(props) => (props.width ? props.width : "100%")} + 2px);
+  max-width: 800px;
   height: calc(${(props) => (props.height ? props.height : "400px")} + 2px);
 `;

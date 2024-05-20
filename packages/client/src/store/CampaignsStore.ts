@@ -40,15 +40,14 @@ import {
   isHideBannerForUser,
 } from "@docspace/shared/utils/campaigns";
 
-const lng: string[] | string = getCookie(LANGUAGE) || "en";
-const language = getLanguage(typeof lng === "object" ? lng[0] : lng);
-
 class CampaignsStore {
   settingsStore: SettingsStore = {} as SettingsStore;
 
   userStore: UserStore = {} as UserStore;
 
-  campaignImage: string | null = null;
+  campaignBackground: string | null = null;
+
+  campaignIcon: string | null = null;
 
   campaignTranslate: string | null = null;
 
@@ -75,6 +74,9 @@ class CampaignsStore {
     const { standalone } = this.settingsStore;
     const { userType } = this.userStore;
 
+    const lng: string[] | string = getCookie(LANGUAGE) || "en";
+    const language = getLanguage(typeof lng === "object" ? lng[0] : lng);
+
     let index = Number(localStorage.getItem("bannerIndex") || 0);
 
     if (this.campaigns.length === 0) {
@@ -99,6 +101,7 @@ class CampaignsStore {
     }
 
     const image = await getImage(currentCampaign, standalone);
+    const icon = await getImage(currentCampaign, standalone, true);
     const translate = await getTranslation(
       currentCampaign,
       language,
@@ -113,7 +116,8 @@ class CampaignsStore {
 
     runInAction(() => {
       this.currentCampaign = currentCampaign;
-      this.campaignImage = image;
+      this.campaignBackground = image;
+      this.campaignIcon = icon;
       this.campaignTranslate = translate;
       this.campaignConfig = config;
     });

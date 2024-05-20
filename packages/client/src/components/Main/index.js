@@ -26,14 +26,14 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled, { css } from "styled-components";
-import { isMobile, isIOS, isFirefox } from "react-device-detect";
+import styled from "styled-components";
+import { isMobile } from "react-device-detect";
 
-import { mobile, isMobile as isMobileUtils } from "@docspace/shared/utils";
+import { isMobile as isMobileUtils } from "@docspace/shared/utils";
 
 const StyledMain = styled.main`
   height: ${(props) => props.mainHeight && `${props.mainHeight}px`};
-  width: 100vw;
+  width: 100%;
   z-index: 0;
   display: flex;
   flex-direction: column;
@@ -47,12 +47,6 @@ const StyledMain = styled.main`
     flex-direction: row;
     box-sizing: border-box;
   }
-
-  /** @media ${mobile} {
-    height: ${isIOS && !isFirefox
-    ? "calc(var(--vh, 1vh) * 100)"
-    : "calc(100vh - 64px)"};
-  } */
 `;
 
 const Main = (props) => {
@@ -120,7 +114,6 @@ const Main = (props) => {
     },
     [mainBarVisible, isBannerVisible, isFrame],
   );
-
   return <StyledMain className="main" mainHeight={mainHeight} {...props} />;
 };
 

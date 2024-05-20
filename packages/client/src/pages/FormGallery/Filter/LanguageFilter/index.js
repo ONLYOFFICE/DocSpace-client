@@ -33,7 +33,6 @@ import { inject, observer } from "mobx-react";
 
 import { flagsIcons } from "@docspace/shared/utils/image-flags";
 import { convertToCulture } from "@docspace/shared/utils/common";
-import { Backdrop } from "@docspace/shared/components/backdrop";
 import { isMobile } from "@docspace/shared/utils";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
@@ -73,12 +72,6 @@ const LanguageFilter = ({
 
   return (
     <Styled.LanguageFilter>
-      <Backdrop
-        visible={isOpen}
-        withBackground={isMobile()}
-        onClick={onCloseDropdown}
-        withoutBlur={!isMobile()}
-      />
       <Styled.LanguangeComboBox
         id="comboBoxLanguage"
         tabIndex={1}
@@ -99,6 +92,7 @@ const LanguageFilter = ({
         fixedDirection={true}
         advancedOptionsCount={5}
         fillIcon={false}
+        withBlur={isMobile()}
         options={[]}
         selectedOption={{}}
         advancedOptions={

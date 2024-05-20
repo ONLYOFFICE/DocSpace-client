@@ -1,6 +1,6 @@
 {
   "name": "@docspace/client",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "private": true,
   "homepage": "",
   "scripts": {
@@ -10,6 +10,8 @@
     "deploy": "shx --silent mkdir -p ../../../publish/web/client && shx cp -r dist/* ../../../publish/web/client",
     "start": "yarn build:translations && NODE_OPTIONS=--openssl-legacy-provider webpack-cli serve",
     "start-prod": "serve dist -s -p 5001",
+    "start:internal": "yarn build:translations && NODE_OPTIONS=--openssl-legacy-provider webpack-cli serve",
+    "start-prod:internal": "serve dist -s -p 5001",
     "analyze": "webpack --profile --json  --env mode=analyze  && webpack-bundle-analyzer bundle/output/path/stats.json"
   },
   "old-scripts": {
@@ -43,8 +45,7 @@
   },
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.2",
-    "@lezer/highlight": "^1.2.0",
-    "@uiw/codemirror-themes": "^4.21.24",
+    "@uiw/codemirror-theme-github": "^4.21.25",
     "@uiw/react-codemirror": "^4.21.24",
     "copy-to-clipboard": "^3.3.3",
     "element-resize-detector": "^1.2.4",

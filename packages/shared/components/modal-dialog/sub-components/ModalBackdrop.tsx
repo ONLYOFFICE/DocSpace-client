@@ -26,33 +26,39 @@
 
 import React from "react";
 import styled from "styled-components";
+import { TTheme } from "@docspace/shared/themes";
 
 import { mobile } from "../../../utils";
-
 import { ModalDialogBackdropProps } from "../ModalDialog.types";
 
-const backdropFilter = (props: { modalSwipeOffset?: number }) =>
-  `${
-    props.modalSwipeOffset
-      ? `blur(${
-          props.modalSwipeOffset < 0 && 8 - props.modalSwipeOffset * -0.0667
-        }px)`
-      : "blur(8px)"
-  }`;
+const backdropFilter = (props: {
+  theme: TTheme;
+  modalSwipeOffset?: number;
+}) => {
+  const blur = props.theme.modalDialog.backdrop.blur;
+  const swipeOffset = props.modalSwipeOffset;
+
+  if (!swipeOffset) return `blur(${blur}px)`;
+  return `blur(${blur + swipeOffset * (blur / 120)}px)`;
+};
+
+const backdropBackground = (props: {
+  theme: TTheme;
+  modalSwipeOffset?: number;
+}) => {
+  const { r, g, b, a } = props.theme.modalDialog.backdrop.backgroundRGBA;
+  const swipeOffset = props.modalSwipeOffset;
+
+  if (!swipeOffset) return `rgba(${r}, ${g}, ${b}, ${a})`;
+  return `rgba(${r}, ${g}, ${b}, ${a + swipeOffset * (a / 120)})`;
+};
 
 const StyledModalBackdrop = styled.div.attrs(
-  (props: { modalSwipeOffset?: number; zIndex?: number }) => ({
+  (props: { theme: TTheme; modalSwipeOffset?: number; zIndex?: number }) => ({
     style: {
       backdropFilter: backdropFilter(props),
       WebkitBackdropFilter: backdropFilter(props),
-      background: `${
-        props.modalSwipeOffset
-          ? `rgba(6, 22, 38, ${
-              props.modalSwipeOffset < 0 &&
-              0.2 - props.modalSwipeOffset * -0.002
-            })`
-          : `rgba(6, 22, 38, 0.2)`
-      }`,
+      background: backdropBackground(props),
     },
   }),
 )<{ modalSwipeOffset?: number; zIndex?: number }>`

@@ -51,7 +51,7 @@ const StyledWrapper = styled.div`
     margin: 24px 0;
 
     .field-label {
-      font-size: ${(props) => props.theme.getCorrectFontSize("15px")};
+      font-size: 15px;
       font-weight: 600;
     }
   }

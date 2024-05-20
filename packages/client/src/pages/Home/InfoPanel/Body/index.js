@@ -66,6 +66,7 @@ const InfoPanelBodyContent = ({
     (isInsideGroup && (!selectedItems.length || !!selectedItems[0].manager));
   const isPeople =
     getIsPeople() ||
+    (getIsGroups() && !isInsideGroup && !selectedItems[0]?.manager) ||
     (isInsideGroup && selectedItems.length && !selectedItems[0].manager);
 
   const isSeveralItems = props.selectedItems?.length > 1;
@@ -166,10 +167,10 @@ const InfoPanelBodyContent = ({
   }, [selectedItems, selectedFolder, groupId]);
 
   // * DEV-ONLY - Logs selection change
-  useEffect(() => {
-    console.log("\nfor-dev  Selected items: ", selectedItems);
-    console.log("\nfor-dev  Selected folder: ", selectedFolder);
-  }, [selectedItems, selectedFolder]);
+  // useEffect(() => {
+  //   console.log("\nfor-dev  Selected items: ", selectedItems);
+  //   console.log("\nfor-dev  Selected folder: ", selectedFolder);
+  // }, [selectedItems, selectedFolder]);
 
   return (
     <StyledInfoPanelBody>

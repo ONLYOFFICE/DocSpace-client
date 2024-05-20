@@ -50,8 +50,8 @@ import ChangeNameDialog from "./ChangeNameDialog";
 import AvatarEditorDialog from "./AvatarEditorDialog";
 import DeletePortalDialog from "./DeletePortalDialog";
 import InviteUsersWarningDialog from "./InviteUsersWarningDialog";
-import LogoutConnectionDialog from "./LogoutConnectionDialog";
-import LogoutAllConnectionDialog from "./LogoutAllConnectionDialog";
+import LogoutSessionDialog from "./LogoutSessionDialog";
+import LogoutAllSessionDialog from "./LogoutAllSessionDialog";
 import CreateRoomConfirmDialog from "./CreateRoomConfirmDialog";
 import PortalRenamingDialog from "./PortalRenamingDialog";
 import DataReassignmentDialog from "./DataReassignmentDialog";
@@ -68,6 +68,7 @@ import DeletePluginDialog from "./DeletePluginDialog";
 import ShareFolderDialog from "./ShareFolderDialog";
 import EditGroupMembersDialog from "./EditGroupMembersDialog";
 import ChangeStorageQuotaDialog from "./ChangeStorageQuotaDialog";
+import DeleteGroupDialog from "./DeleteGroupDialog";
 
 export {
   EmptyTrashDialog,
@@ -96,9 +97,9 @@ export {
   ChangeNameDialog,
   AvatarEditorDialog,
   DeletePortalDialog,
-  LogoutConnectionDialog,
+  LogoutSessionDialog,
   InviteUsersWarningDialog,
-  LogoutAllConnectionDialog,
+  LogoutAllSessionDialog,
   PortalRenamingDialog,
   DataReassignmentDialog,
   SubmitToFormGallery,
@@ -114,4 +115,5 @@ export {
   EditGroupMembersDialog,
   ChangeQuotaDialog,
   ChangeStorageQuotaDialog,
+  DeleteGroupDialog,
 };

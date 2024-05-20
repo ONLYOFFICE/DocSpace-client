@@ -45,6 +45,7 @@
   "UnselectAll": "Αποεπιλογή όλων",
   "URL": "URL",
   "ViewRawPayload": "Προβολή ακατέργαστου φορτίου",
+  "WebhookCreated": "Webhook δημιουργήθηκε",
   "WebhookCreationHint": "Αυτό το webhook θα εκχωρηθεί σε όλα τα συμβάντα στο DocSpace",
   "WebhookDetails": "Λεπτομέρειες Webhook",
   "WebhookEditedSuccessfully": "Η επεξεργασία της διαμόρφωσης Webhook έγινε επιτυχώς",

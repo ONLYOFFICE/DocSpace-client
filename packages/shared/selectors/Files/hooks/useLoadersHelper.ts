@@ -26,13 +26,12 @@
 
 import React from "react";
 
-import { UseLoadersHelperProps } from "../FilesSelector.types";
 import {
   MIN_LOADER_TIMER,
   SHOW_LOADER_TIMER,
 } from "../FilesSelector.constants";
 
-const useLoadersHelper = ({ items, isInit }: UseLoadersHelperProps) => {
+const useLoadersHelper = () => {
   const [isBreadCrumbsLoading, setIsBreadCrumbsLoading] =
     React.useState<boolean>(true);
   const [isNextPageLoading, setIsNextPageLoading] =
@@ -122,12 +121,6 @@ const useLoadersHelper = ({ items, isInit }: UseLoadersHelperProps) => {
       }
     }
   }, [isBreadCrumbsLoading]);
-
-  React.useEffect(() => {
-    if ((items.length || !isInit) && isFirstLoad) {
-      setIsFirstLoad(false);
-    }
-  }, [isFirstLoad, items, isInit]);
 
   React.useEffect(() => {
     calculateLoader();

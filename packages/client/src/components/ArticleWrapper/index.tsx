@@ -88,7 +88,6 @@ export default inject<TStore>(
       currentDeviceType,
       standalone,
       isBurgerLoading,
-      whiteLabelLogoUrls,
     } = settingsStore;
 
     const { isFreeTariff, isNonProfit, isTrial, currentTariffPlanTitle } =
@@ -116,7 +115,6 @@ export default inject<TStore>(
       showProgress,
 
       isBurgerLoading,
-      whiteLabelLogoUrls,
       isEnterprise,
       isTrial,
       isLicenseDateExpired,

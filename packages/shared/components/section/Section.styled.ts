@@ -477,10 +477,7 @@ const tabletProps = css<{ viewAs?: TViewAs }>`
     width: 100%;
     position: sticky;
     top: 0;
-    background: ${(props) =>
-      props.viewAs === "profile" || props.viewAs === "settings"
-        ? props.theme.section.header.backgroundColor
-        : props.theme.section.header.background};
+    background: ${(props) => props.theme.section.header.backgroundColor};
 
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
@@ -491,6 +488,12 @@ const tabletProps = css<{ viewAs?: TViewAs }>`
             padding-right: 0;
           `}
     z-index: 201;
+    @media ${mobile} {
+      min-width: 100vw;
+      margin-inline-start: -16px;
+      padding-inline-end: 16px;
+      padding-inline-start: 16px;
+    }
   }
   .section-body_filter {
     display: block;
@@ -750,14 +753,23 @@ const StyledSectionPaging = styled.div`
 StyledSectionPaging.defaultProps = { theme: Base };
 
 const StyledSectionSubmenu = styled.div`
+  background: ${(props) => props.theme.section.header.backgroundColor};
   width: calc(100% - 20px);
+  z-index: 1;
 
   @media ${tablet} {
-    width: calc(100% - 16px);
+    width: calc(100% + 32px);
+    position: sticky;
+    top: 61px;
+    margin: 0 -16px;
+    & > div {
+      padding: 0 16px;
+    }
   }
 
   @media ${mobile} {
-    width: 100%;
+    position: sticky;
+    top: 53px;
   }
 `;
 

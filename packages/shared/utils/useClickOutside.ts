@@ -25,12 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react";
 
-export const useClickOutside = (
-  ref: { current: HTMLElement },
-  handler: () => void,
-  ...deps: unknown[]
+"use client";
+
+import { DependencyList, RefObject, useEffect } from "react";
+
+export const useClickOutside = <T extends HTMLElement>(
+  ref: RefObject<T>,
+  handler: VoidFunction,
+  ...deps: DependencyList
 ) => {
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {

@@ -230,6 +230,7 @@ const Client = inject(
     const { isInit: isInitPlugins, initPlugins } = pluginStore;
 
     const { isVisible } = infoPanelStore;
+    const isProfile = window.location.pathname.includes("/profile");
 
     return {
       isDesktop: isDesktopClient,
@@ -244,7 +245,7 @@ const Client = inject(
       isLoaded: authStore.isLoaded && clientLoadingStore.isLoaded,
       setIsLoaded: clientLoadingStore.setIsLoaded,
       withMainButton,
-      isInfoPanelVisible: isVisible,
+      isInfoPanelVisible: isVisible && !isProfile,
       setIsFilterLoading: setIsSectionFilterLoading,
       setIsHeaderLoading: setIsSectionHeaderLoading,
       isLoading,

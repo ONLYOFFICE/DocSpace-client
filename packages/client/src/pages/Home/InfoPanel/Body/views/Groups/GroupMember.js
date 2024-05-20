@@ -23,13 +23,17 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
+import styled from "styled-components";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
 import { useState, useRef } from "react";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { inject } from "mobx-react";
 import { useTranslation } from "react-i18next";
+
+const StyledContextMenu = styled(ContextMenu)`
+  min-width: auto !important;
+`;
 
 const GroupMember = ({
   userId,
@@ -108,14 +112,12 @@ const GroupMember = ({
             onClick={onClick}
             getData={() => model}
           />
-          <ContextMenu
+          <StyledContextMenu
             model={model}
             containerRef={iconRef}
             ref={buttonMenuRef}
             onHide={onHide}
             scaled={false}
-            leftOffset={-8}
-            topOffset={8}
           />
         </div>
       </div>

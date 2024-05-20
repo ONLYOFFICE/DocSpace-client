@@ -1,6 +1,10 @@
 {
+  "DeleteAllGroupDescription": "Os grupos selecionados serão excluídos. Os usuários dos grupos não serão removidos do DocSpace. Você tem certeza que quer continuar?",
+  "DeleteAllGroupsTitle": "Excluir grupos",
   "DeleteFile": "Você está prestes a excluir este arquivo. ",
   "DeleteFolder": "Você está prestes a excluir esta pasta. ",
+  "DeleteGroupDescription": "O grupo {{groupName}} será excluído. Os usuários do grupo não serão removidos do DocSpace. Você tem certeza que quer continuar?",
+  "DeleteGroupTitle": "Excluir grupo",
   "DeleteItems": "Você está prestes a excluir esses itens. ",
   "DeleteItemsSharedNote": "Observe que se você os compartilhou com alguém, eles ficarão indisponíveis.",
   "DeleteRoom": "Você está prestes a excluir esta sala. Você não será capaz de restaurá-lo.",
@@ -10,7 +14,6 @@
   "FolderPermanentlyDeleted": "A pasta será excluída permanentemente em 30 dias.",
   "ItemsPermanentlyDeleted": "Os itens serão excluídos permanentemente em 30 dias.",
   "MoveToTrashButton": "Mover para a lixeira",
-  "MoveToTrashFile": "Você está prestes a apagar este arquivo. Observe que, se você o compartilhou com alguém, ele se tornará indisponível. O arquivo será excluído permanentemente em 30 dias. Você tem certeza de que quer continuar?",
   "MoveToTrashTitle": "Mover para a lixeira?",
   "UnsubscribeButton": "Cancelar assinatura",
   "UnsubscribeNote": "Você tem certeza de que deseja cancelar a inscrição dos itens selecionados da lista?",

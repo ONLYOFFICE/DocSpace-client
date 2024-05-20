@@ -37,6 +37,7 @@ import { InputBlock } from "@docspace/shared/components/input-block";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 
 import AccessSelector from "./AccessSelector";
 
@@ -48,7 +49,6 @@ import {
   StyledToggleButton,
   StyledDescription,
 } from "../StyledInvitePanel";
-import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 
 const ExternalLinks = ({
   t,
@@ -87,10 +87,7 @@ const ExternalLinks = ({
   };
 
   const editLink = async () => {
-    const type =
-      roomType === RoomsType.PublicRoom
-        ? ShareAccessRights.Collaborator
-        : ShareAccessRights.ReadOnly;
+    const type = getDefaultAccessUser(roomType);
 
     const link = await setInvitationLinks(roomId, "Invite", type);
 
@@ -228,16 +225,16 @@ const ExternalLinks = ({
       </StyledDescription>
       {externalLinksVisible && (
         <StyledInviteInputContainer key={activeLink.id}>
-          <StyledInviteInput>
+          <StyledInviteInput isShowCross>
             <InputBlock
               className="input-link"
+              iconSize={16}
+              iconButtonClassName="copy-link-icon"
               scale
               value={activeLink.shareLink}
               isReadOnly
               iconName={CopyReactSvgUrl}
               onIconClick={onCopyLink}
-              hoverColor="#333333"
-              iconColor="#A3A9AE"
             />
           </StyledInviteInput>
           <AccessSelector

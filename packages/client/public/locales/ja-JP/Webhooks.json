@@ -45,6 +45,7 @@
   "UnselectAll": "すべて選択解除",
   "URL": "URL",
   "ViewRawPayload": "生のペイロードを見る",
+  "WebhookCreated": "ウェブフックが作成されました",
   "WebhookCreationHint": "このWebhookはDocSpaceのすべてのイベントに割り当てられます",
   "WebhookDetails": "ウェブフックの詳細",
   "WebhookEditedSuccessfully": "ウェブフックの設定が正常に編集されました",

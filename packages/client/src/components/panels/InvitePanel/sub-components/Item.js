@@ -33,8 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 
 import { parseAddresses } from "@docspace/shared/utils";
 import { getAccessOptions } from "../utils";
-import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
-import { capitalize } from "lodash";
+import { getUserTypeLabel } from "@docspace/shared/utils/common";
 
 import {
   StyledEditInput,
@@ -51,6 +50,7 @@ import AccessSelector from "./AccessSelector";
 const Item = ({
   t,
   item,
+  theme,
   setInviteItems,
   inviteItems,
   changeInviteItem,
@@ -111,7 +111,6 @@ const Item = ({
     return "user";
   };
 
-  const role = getUserRole(item);
   const type = getUserType(item);
 
   const typeLabel = item?.isEmailInvite
@@ -216,8 +215,9 @@ const Item = ({
             displayType="auto"
             offsetRight={0}
             tooltipContent={t("EmailErrorMessage")}
+            openOnClick={false}
             size={16}
-            color="#F21C0E"
+            color={theme.infoPanel.errorColor}
           />
           <StyledDeleteIcon
             className="delete-icon"
@@ -269,7 +269,7 @@ const Item = ({
     <>
       <Avatar
         size="min"
-        role={role}
+        role={type}
         source={source}
         isGroup={isGroup}
         userName={groupName}

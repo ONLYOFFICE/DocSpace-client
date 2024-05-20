@@ -69,11 +69,11 @@ import {
 } from "./StyledPresets";
 
 const RoomSelector = (props) => {
-  const { t, setDocumentTitle } = props;
+  const { t, setDocumentTitle, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
-  const scriptUrl = `${window.location.origin}/static/scripts/api.js`;
+  const scriptUrl = `${window.location.origin}/static/scripts/sdk/1.0.0/api.js`;
 
   const dataDimensions = [
     { key: "percent", label: "%", default: true },
@@ -99,6 +99,11 @@ const RoomSelector = (props) => {
       label: t("AllTypes"),
       roomType: undefined,
       default: true,
+    },
+    {
+      key: "room-filling-form-collaboration",
+      label: t("CreateEditRoomDialog:FormFilingRoomTitle"),
+      roomType: RoomsType.FormRoom,
     },
     {
       key: "room-type-collaboration",
@@ -181,13 +186,16 @@ const RoomSelector = (props) => {
   }, 500);
 
   useEffect(() => {
+    loadFrame();
+    return destroyFrame;
+  });
+
+  useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
     if (scroll) {
       scroll.scrollTop = 0;
     }
-    loadFrame();
-    return destroyFrame;
-  });
+  }, []);
 
   const toggleButtonMode = (e) => {
     setSelectedElementType(e.target.value);
@@ -311,14 +319,21 @@ const RoomSelector = (props) => {
   );
 
   const code = (
-    <CodeWrapper
-      width={width + widthDimension.label}
-      height={height + heightDimension.label}
-    >
+    <CodeWrapper height="fit-content">
       <CategorySubHeader className="copy-window-code">
-        {t("CopyWindowCode")}
+        {`HTML ${t("CodeTitle")}`}
       </CategorySubHeader>
+      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
+        {t("HtmlCodeDescription")}
+      </Text>
       <Textarea value={codeBlock} heightTextArea={153} />
+      <CategorySubHeader className="copy-window-code">
+        {`JavaScript ${t("CodeTitle")}`}
+      </CategorySubHeader>
+      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
+        {t("JavaScriptCodeDescription")}
+      </Text>
+      <CodeBlock config={config} />
     </CodeWrapper>
   );
 
@@ -327,11 +342,6 @@ const RoomSelector = (props) => {
       key: "preview",
       title: t("Common:Preview"),
       content: preview,
-    },
-    {
-      key: "js",
-      title: "JavaScript",
-      content: <CodeBlock config={config} />,
     },
     {
       key: "code",

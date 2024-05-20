@@ -39,7 +39,6 @@ import { RoomIcon } from "@docspace/shared/components/room-icon";
 const Details = ({
   t,
   selection,
-  personal,
   culture,
   createThumbnail,
   getInfoPanelItemIcon,
@@ -65,7 +64,6 @@ const Details = ({
     item: selection,
     openUser,
     navigate,
-    personal,
     culture,
     selectTag,
     isDefaultRoomsQuotaSet,
@@ -178,7 +176,7 @@ export default inject(
       setNewInfoPanelSelection,
     } = infoPanelStore;
     const { createThumbnail } = filesStore;
-    const { personal, culture } = settingsStore;
+    const { culture } = settingsStore;
     const { user } = userStore;
 
     const { selectTag } = filesActionsStore;
@@ -190,7 +188,6 @@ export default inject(
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
     return {
-      personal,
       culture,
       selection: infoPanelSelection,
       createThumbnail,

@@ -102,14 +102,13 @@ export const StyledInfo = styled.div`
 
   .rows-container {
     display: grid;
-    grid-template-columns: minmax(75px, auto) 1fr;
+    grid-template-columns: minmax(75px, auto) minmax(0, 1fr);
     gap: 24px;
     max-width: 100%;
 
     .profile-block {
       display: flex;
       flex-direction: column;
-      overflow: hidden;
 
       .profile-block-field {
         display: flex;
@@ -148,16 +147,24 @@ export const StyledInfo = styled.div`
         margin-top: 11px;
         gap: 8px;
 
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-right: -8px;
+              `
+            : css`
+                margin-left: -8px;
+              `}
+
         .language-combo-box .combo-button {
           padding-inline-end: 0px;
-
           ${(props) =>
             props.theme.interfaceDirection === "rtl"
               ? css`
-                  padding-right: 0px;
+                  padding-right: 8px;
                 `
               : css`
-                  padding-left: 0px;
+                  padding-left: 8px;
                 `}
         }
 
@@ -303,8 +310,7 @@ export const StyledInfo = styled.div`
         .mobile-profile-label {
           min-width: 100%;
           max-width: 100%;
-          font-size: ${(props) =>
-            props.theme.getCorrectFontSize("12px")} !important;
+          font-size: 12px !important;
           line-height: 16px !important;
           white-space: nowrap;
           color: rgb(163, 169, 174);
@@ -313,8 +319,7 @@ export const StyledInfo = styled.div`
         .mobile-profile-label-field {
           padding-left: 0px;
           max-width: 100%;
-          font-size: ${(props) =>
-            props.theme.getCorrectFontSize("12px")} !important;
+          font-size: 12px !important;
           line-height: 16px;
         }
 
@@ -344,8 +349,7 @@ export const StyledInfo = styled.div`
 
         .mobile-profile-password {
           max-width: 100%;
-          font-size: ${(props) =>
-            props.theme.getCorrectFontSize("12px")} !important;
+          font-size: 12px !important;
           line-height: 16px !important;
         }
       }

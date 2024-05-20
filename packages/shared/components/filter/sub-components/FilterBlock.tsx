@@ -72,6 +72,7 @@ const FilterBlock = ({
   isPeopleAccounts,
   isGroupsAccounts,
   isInsideGroup,
+  disableThirdParty,
 }: FilterBlockProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -521,6 +522,7 @@ const FilterBlock = ({
               }}
               isMultiSelect={false}
               withSearch
+              disableThirdParty={disableThirdParty}
             />
           )}
           <StyledControlContainer onClick={hideFilterBlock}>
@@ -528,7 +530,7 @@ const FilterBlock = ({
           </StyledControlContainer>
         </StyledFilterBlock>
       ) : (
-        <StyledFilterBlock showFooter={showFooter}>
+        <StyledFilterBlock>
           <StyledFilterBlockHeader>
             <Heading size={HeadingSize.medium} level={HeadingLevel.h1}>
               {filterHeader}
@@ -574,25 +576,26 @@ const FilterBlock = ({
               </Scrollbar>
             )}
           </div>
-          {showFooter && (
-            <StyledFilterBlockFooter>
-              <Button
-                id="filter_apply-button"
-                size={ButtonSize.normal}
-                primary
-                label={t("Common:ApplyButton")}
-                scale
-                onClick={onFilterAction}
-              />
-              <Button
-                id="filter_cancel-button"
-                size={ButtonSize.normal}
-                label={t("Common:CancelButton")}
-                scale
-                onClick={hideFilterBlock}
-              />
-            </StyledFilterBlockFooter>
-          )}
+
+          <StyledFilterBlockFooter>
+            <Button
+              id="filter_apply-button"
+              size={ButtonSize.normal}
+              primary
+              label={t("Common:ApplyButton")}
+              scale
+              onClick={onFilterAction}
+              isDisabled={!showFooter}
+            />
+            <Button
+              id="filter_cancel-button"
+              size={ButtonSize.normal}
+              label={t("Common:CancelButton")}
+              scale
+              onClick={hideFilterBlock}
+              isDisabled={isLoading}
+            />
+          </StyledFilterBlockFooter>
 
           <StyledControlContainer id="filter_close" onClick={hideFilterBlock}>
             <StyledCrossIcon />

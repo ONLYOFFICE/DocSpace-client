@@ -67,7 +67,7 @@ const Tooltip = React.forwardRef<TooltipRefProps, TooltipProps>(
       float,
       noArrow = true,
       fallbackAxisSideDirection,
-      opacity,
+      opacity = 1,
       imperativeModeOnly,
       ...rest
     },
@@ -116,6 +116,20 @@ const Tooltip = React.forwardRef<TooltipRefProps, TooltipProps>(
             flip({
               crossAxis: false,
               fallbackAxisSideDirection,
+              fallbackPlacements: [
+                "right",
+                "bottom",
+                "left",
+                "top",
+                "top-start",
+                "top-end",
+                "right-start",
+                "right-end",
+                "bottom-start",
+                "bottom-end",
+                "left-start",
+                "left-end",
+              ],
             }),
             shift(),
           ]}

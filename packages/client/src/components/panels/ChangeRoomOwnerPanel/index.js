@@ -56,6 +56,8 @@ const StyledChangeRoomOwner = styled.div`
       }
 
       .selector_footer-checkbox {
+        background-color: ${(props) =>
+          props.theme.filesPanels.aside.backgroundColor};
         padding: 17px 0 1px 0;
       }
     `}
@@ -76,7 +78,6 @@ const ChangeRoomOwner = (props) => {
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
-  const [isChecked, setIsChecked] = useState(!showBackButton);
 
   useEffect(() => {
     document.addEventListener("keyup", onKeyUp, false);
@@ -91,7 +92,12 @@ const ChangeRoomOwner = (props) => {
     if (e.keyCode === 13 || e.which === 13) onChangeRoomOwner();
   };
 
-  const onChangeRoomOwner = async (user) => {
+  const onChangeRoomOwner = async (
+    user,
+    selectedAccess,
+    newFooterInputValue,
+    isChecked,
+  ) => {
     if (showBackButton) {
       setRoomParams && setRoomParams(user[0]);
     } else {
@@ -144,12 +150,15 @@ const ChangeRoomOwner = (props) => {
           isLoading={isLoading}
           withFooterCheckbox={!showBackButton}
           footerCheckboxLabel={t("Files:LeaveTheRoom")}
-          isChecked={isChecked}
-          setIsChecked={setIsChecked}
+          isChecked={!showBackButton}
           withOutCurrentAuthorizedUser
           filterUserId={roomOwnerId}
           currentUserId={userId}
           disableDisabledUsers
+          withInfo
+          infoText={t("CreateEditRoomDialog:PeopleSelectorInfo")}
+          emptyScreenHeader={t("Common:NotFoundUsers")}
+          emptyScreenDescription={t("CreateEditRoomDialog:PeopleSelectorInfo")}
         />
       </Aside>
     </StyledChangeRoomOwner>
@@ -201,4 +210,10 @@ export default inject(
       updateInfoPanelSelection,
     };
   },
-)(observer(withTranslation(["Files"])(ChangeRoomOwner)));
+)(
+  observer(
+    withTranslation(["Files", "CreateEditRoomDialog", "Common"])(
+      ChangeRoomOwner,
+    ),
+  ),
+);

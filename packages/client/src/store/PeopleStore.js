@@ -220,8 +220,7 @@ class PeopleStore {
   };
   disableUserQuota = async (users, t) => {
     const { setCustomUserQuota, getPeopleListItem } = this.usersStore;
-    const { infoPanelStore } = this.authStore;
-    const { setInfoPanelSelection } = infoPanelStore;
+    const { setInfoPanelSelection } = this.infoPanelStore;
 
     const userIDs = users.map((user) => {
       return user?.id ? user.id : user;
@@ -245,8 +244,7 @@ class PeopleStore {
   };
   resetUserQuota = async (users, t) => {
     const { resetUserQuota, getPeopleListItem } = this.usersStore;
-    const { infoPanelStore } = this.authStore;
-    const { setInfoPanelSelection } = infoPanelStore;
+    const { setInfoPanelSelection } = this.infoPanelStore;
     const userIDs = users.map((user) => {
       return user?.id ? user.id : user;
     });
@@ -381,6 +379,14 @@ class PeopleStore {
       return options;
     }
   };
+
+  onDeleteClick = () => {
+    const { setDeleteGroupDialogVisible } = this.dialogStore;
+    const { selection, setGroupName } = this.groupsStore;
+    setGroupName(selection[0].name);
+    setDeleteGroupDialogVisible(true);
+  };
+
   getHeaderMenu = (t, isGroupsPage = false) => {
     const {
       hasUsersToMakeEmployees,
@@ -394,8 +400,6 @@ class PeopleStore {
       selection,
     } = this.selectionStore;
 
-    const { selection: groupsSelection, groupsFilter } = this.groupsStore;
-
     const { setSendInviteDialogVisible } = this.dialogStore;
     const { toggleDeleteProfileEverDialog } = this.contextOptionsStore;
 
@@ -407,20 +411,7 @@ class PeopleStore {
           id: "menu-delete",
           key: "delete",
           label: t("Common:Delete"),
-          onClick: () => {
-            Promise.all(
-              groupsSelection.map(async (group) => deleteGroup(group.id)),
-            )
-              .then(() => {
-                toastr.success(t("PeopleTranslations:SuccessDeleteGroups"));
-                this.groupsStore.setSelection([]);
-                this.groupsStore.getGroups(groupsFilter, true);
-              })
-              .catch((err) => {
-                toastr.error(err.message);
-                console.error(err);
-              });
-          },
+          onClick: () => this.onDeleteClick(),
           iconUrl: DeleteReactSvgUrl,
         },
       ];

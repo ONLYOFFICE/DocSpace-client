@@ -39,7 +39,6 @@ const TileContainer = styled.div`
 
   width: 100%;
   max-width: 342px;
-  height: 334px;
 
   padding: 12px 16px;
 
@@ -67,7 +66,8 @@ const TileContainer = styled.div`
     }
 
     .icon {
-      transform: scale(-1, 1);
+      ${({ theme }) =>
+        theme.interfaceDirection === "ltr" && "transform: scale(-1, 1);"}
     }
 
     :hover {
@@ -90,7 +90,7 @@ const PresetTile = (props) => {
         <Text fontSize="16px" lineHeight="22px" fontWeight={700}>
           {title}
         </Text>
-        <img src={image} alt={title} />
+        <img height={180} width={310} src={image} alt={title} />
         <Text lineHeight="20px">{description}</Text>
       </div>
       <Button

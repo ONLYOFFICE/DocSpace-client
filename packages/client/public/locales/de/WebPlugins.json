@@ -11,5 +11,6 @@
   "PluginSamples": "Plugin-Beispiele",
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Mit dem Plugin SDK können Sie die DocSpace-Funktionalität erweitern, die Dienste von Drittanbietern einbinden oder die bestehende Benutzererfahrung verbessern. Hier finden Sie die Plugin-Beispiele mit Quellcode, die auf GitHub verfügbar sind. ",
-  "PluginSDKInstruction": "Klicken Sie auf die Schaltfläche, um eine detaillierte Anleitung zur Erstellung eigener Plugins zu erhalten."
+  "PluginSDKInstruction": "Klicken Sie auf die Schaltfläche, um eine detaillierte Anleitung zur Erstellung eigener Plugins zu erhalten.",
+  "UploadDescription": " Sie können Plugins hinzufügen, um die Funktionalität von DocSpace um zusätzliche Funktionen zu erweitern. Klicken Sie auf Plugin hochladen oder legen Sie die Datei im ZIP-Archiv ab."
 }

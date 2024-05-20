@@ -27,8 +27,8 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { toastr } from "@docspace/shared/components/toast";
+import { copyShareLink } from "@docspace/shared/utils/copy";
 import QuickButtons from "../components/QuickButtons";
-import copy from "copy-to-clipboard";
 
 export default function withQuickButtons(WrappedComponent) {
   class WithQuickButtons extends React.Component {
@@ -83,7 +83,7 @@ export default function withQuickButtons(WrappedComponent) {
       const { t, item, getPrimaryFileLink, setShareChanged } = this.props;
       const primaryLink = await getPrimaryFileLink(item.id);
       if (primaryLink) {
-        copy(primaryLink.sharedTo.shareLink);
+        copyShareLink(primaryLink.sharedTo.shareLink);
         item.shared
           ? toastr.success(t("Common:LinkSuccessfullyCopied"))
           : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
@@ -95,7 +95,7 @@ export default function withQuickButtons(WrappedComponent) {
       const { t, item, getPrimaryLink } = this.props;
       const primaryLink = await getPrimaryLink(item.id);
       if (primaryLink) {
-        copy(primaryLink.sharedTo.shareLink);
+        copyShareLink(primaryLink.sharedTo.shareLink);
         toastr.success(t("Common:LinkSuccessfullyCopied"));
       }
     };
@@ -114,6 +114,7 @@ export default function withQuickButtons(WrappedComponent) {
         isPublicRoom,
         isPersonalRoom,
         isArchiveFolder,
+        currentDeviceType,
       } = this.props;
 
       const quickButtonsComponent = (
@@ -134,6 +135,7 @@ export default function withQuickButtons(WrappedComponent) {
           folderCategory={folderCategory}
           onCopyPrimaryLink={this.onCopyPrimaryLink}
           isArchiveFolder={isArchiveFolder}
+          currentDeviceType={currentDeviceType}
         />
       );
 
@@ -177,6 +179,7 @@ export default function withQuickButtons(WrappedComponent) {
 
       return {
         theme: settingsStore.theme,
+        currentDeviceType: settingsStore.currentDeviceType,
         isAdmin: authStore.isAdmin,
         lockFileAction,
         setFavoriteAction,

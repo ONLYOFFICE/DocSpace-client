@@ -27,7 +27,7 @@
 import styled, { css } from "styled-components";
 
 export const GroupsContent = styled.div<{}>`
-  margin-top: 128px;
+  padding-top: 128px;
   margin-inline-start: auto;
 
   .group-member {
@@ -52,7 +52,7 @@ export const GroupsContent = styled.div<{}>`
         gap: 4px;
         .name {
           max-width: 180px;
-          font-size: ${({ theme }) => theme.getCorrectFontSize("14px")};
+          font-size: 14px;
           font-weight: 600;
           line-height: 16px;
           overflow: hidden;
@@ -66,7 +66,8 @@ export const GroupsContent = styled.div<{}>`
       .email {
         max-width: 180px;
         color: #a3a9ae;
-        font-size: ${({ theme }) => theme.getCorrectFontSize("10px")};
+        font-size: 12px;
+        line-height: 16px;
         font-style: normal;
         font-weight: 400;
         overflow: hidden;
@@ -83,7 +84,7 @@ export const GroupsContent = styled.div<{}>`
       .group-manager-tag {
         white-space: nowrap;
         color: #d0d5da;
-        font-size: ${({ theme }) => theme.getCorrectFontSize("12px")};
+        font-size: 12px;
         font-weight: 600;
         line-height: 16px;
       }

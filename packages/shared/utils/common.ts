@@ -40,7 +40,7 @@ import DocseditorSvgUrl from "PUBLIC_DIR/images/logo/docseditor.svg?url";
 import LightSmallSvgUrl from "PUBLIC_DIR/images/logo/lightsmall.svg?url";
 import DocsEditoRembedSvgUrl from "PUBLIC_DIR/images/logo/docseditorembed.svg?url";
 import DarkLightSmallSvgUrl from "PUBLIC_DIR/images/logo/dark_lightsmall.svg?url";
-import FaviconIco from "PUBLIC_DIR/favicon.ico";
+import FaviconIco from "PUBLIC_DIR/images/logo/favicon.ico";
 
 import BackgroundPatternReactSvgUrl from "PUBLIC_DIR/images/background.pattern.react.svg?url";
 import BackgroundPatternOrangeReactSvgUrl from "PUBLIC_DIR/images/background.pattern.orange.react.svg?url";
@@ -57,6 +57,7 @@ import {
   ShareAccessRights,
   ThemeKeys,
   ErrorKeys,
+  WhiteLabelLogoType,
 } from "../enums";
 import { LANGUAGE, PUBLIC_MEDIA_VIEW_URL, RTL_LANGUAGES } from "../constants";
 
@@ -64,13 +65,13 @@ import { TI18n, TTranslation } from "../types";
 import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
 import { TRoom } from "../api/rooms/types";
+import { TPasswordHash } from "../api/settings/types";
 import TopLoaderService from "../components/top-loading-indicator";
 
 import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie } from "./cookie";
 import { checkIsSSR } from "./device";
-import { AvatarRole } from "../components/avatar/Avatar.enums";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -90,7 +91,7 @@ export function changeLanguage(i18n: TI18n, currentLng = getCookie(LANGUAGE)) {
 
 export function createPasswordHash(
   password: string,
-  hashSettings: { [key: string]: boolean },
+  hashSettings?: TPasswordHash,
 ) {
   if (
     !password ||
@@ -122,9 +123,13 @@ export const isPublicRoom = () => {
   );
 };
 
+export const isPublicPreview = () => {
+  return window.location.pathname.includes("/share/preview/");
+};
+
 export const getUserTypeLabel = (
-  role: AvatarRole | undefined,
-  t: (key: string) => string,
+  role: "owner" | "admin" | "user" | "collaborator" | "manager" | undefined,
+  t: TTranslation,
 ) => {
   switch (role) {
     case "owner":
@@ -387,7 +392,7 @@ export function getProviderLabel(provider: string, t: (key: string) => string) {
     case "microsoft":
       return t("Common:ProviderMicrosoft");
     case "sso":
-      return t("Common:ProviderSso");
+      return t("Common:SSO");
     case "zoom":
       return t("Common:ProviderZoom");
     case "sso-full":
@@ -584,10 +589,17 @@ export function getLoginLink(token: string, code: string) {
   );
 }
 
+const FRAME_NAME = "frameDocSpace";
+
+const getFrameId = () => {
+  return window.self.name.replace(`${FRAME_NAME}__#`, "");
+};
+
 export const frameCallbackData = (methodReturnData: unknown) => {
   window.parent.postMessage(
     JSON.stringify({
       type: "onMethodReturn",
+      frameId: getFrameId(),
       methodReturnData,
     }),
     "*",
@@ -598,6 +610,7 @@ export const frameCallEvent = (eventReturnData: unknown) => {
   window.parent.postMessage(
     JSON.stringify({
       type: "onEventReturn",
+      frameId: getFrameId(),
       eventReturnData,
     }),
     "*",
@@ -611,6 +624,7 @@ export const frameCallCommand = (
   window.parent.postMessage(
     JSON.stringify({
       type: "onCallCommand",
+      frameId: getFrameId(),
       commandName,
       commandData,
     }),
@@ -624,7 +638,7 @@ export const getPowerFromBytes = (bytes: number, maxPower = 6) => {
 };
 
 export const getSizeFromBytes = (bytes: number, power: number) => {
-  return parseFloat((bytes / 1024 ** power).toFixed(2));
+  return Math.floor(bytes / 1024 ** power);
 };
 
 export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
@@ -897,23 +911,35 @@ export function getObjectByLocation(location: Location) {
 
   try {
     const searchUrl = location.search.substring(1);
-    const decodedString = decodeURIComponent(searchUrl)
-      .replace(/\["/g, '["')
-      .replace(/"\]/g, '"]')
-      .replace(/"/g, '\\"')
-      .replace(/&/g, '","')
-      .replace(/=/g, '":"')
-      .replace(/\\/g, "\\\\")
-      .replace(/\[\\\\"/g, '["')
-      .replace(/\\\\"\]/g, '"]')
-      .replace(/"\[/g, "[")
-      .replace(/\]"/g, "]")
-      .replace(/\\\\",\\\\"/g, '","')
-      .replace(/\\\\\\\\"/g, '\\"');
-    const object = JSON.parse(`{"${decodedString}"}`);
-    return object;
+    const params = Object.fromEntries(new URLSearchParams(searchUrl));
+    return params;
   } catch (e) {
+    console.error(e);
     return {};
+  }
+}
+
+export function tryParse(str: string) {
+  try {
+    if (!str) return undefined;
+
+    return JSON.parse(str);
+  } catch (e) {
+    console.error(e);
+    return undefined;
+  }
+}
+
+export function tryParseArray(str: string) {
+  try {
+    const res = tryParse(str);
+
+    if (!Array.isArray(res)) return undefined;
+
+    return res;
+  } catch (e) {
+    console.error(e);
+    return undefined;
   }
 }
 
@@ -1039,3 +1065,11 @@ export const insertDataLayer = (id: string) => {
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ user_id: id });
 };
+
+export function getLogoUrl(
+  logoType: WhiteLabelLogoType,
+  dark: boolean = false,
+  def: boolean = false,
+) {
+  return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}`;
+}

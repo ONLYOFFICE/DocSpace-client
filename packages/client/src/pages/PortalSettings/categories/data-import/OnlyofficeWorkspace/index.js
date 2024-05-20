@@ -28,7 +28,8 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { getStepTitle, getWorkspaceStepDescription } from "../../../utils";
-import { tablet, isMobile } from "@docspace/shared/utils/device";
+import { tablet } from "@docspace/shared/utils/device";
+import { isMobile } from "react-device-detect";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -100,6 +101,7 @@ const OnlyofficeWorkspace = ({
   currentDeviceType,
   getMigrationStatus,
   setUsers,
+  filteredUsers,
 }) => {
   const [showReminder, setShowReminder] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
@@ -185,7 +187,11 @@ const OnlyofficeWorkspace = ({
           );
         }
 
-        if (res.parseResult.operation === "parse" && res.isCompleted) {
+        if (
+          res.parseResult.operation === "parse" &&
+          res.isCompleted &&
+          res.error
+        ) {
           setUsers(res.parseResult);
           setCurrentStep(2);
         }
@@ -206,8 +212,13 @@ const OnlyofficeWorkspace = ({
     return clearCheckedAccounts;
   }, []);
 
-  if (isMobile()) {
-    return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
+  if (isMobile) {
+    return (
+      <BreakpointWarning
+        isMobileUnavailableOnly
+        sectionName={t("Settings:DataImport")}
+      />
+    );
   }
 
   if (!shouldRender) return <SelectFileLoader />;
@@ -225,7 +236,13 @@ const OnlyofficeWorkspace = ({
           <Text className="step-title">{getStepTitle(t, currentStep)}</Text>
         </Box>
         <Box className="step-description">
-          {getWorkspaceStepDescription(t, currentStep, renderTooltip, Trans)}
+          {getWorkspaceStepDescription(
+            t,
+            currentStep,
+            renderTooltip,
+            Trans,
+            filteredUsers.length === 0,
+          )}
         </Box>
         <StepContent
           t={t}
@@ -241,7 +258,7 @@ const OnlyofficeWorkspace = ({
 };
 
 export default inject(({ setup, settingsStore, importAccountsStore }) => {
-  const { clearCheckedAccounts, getMigrationStatus, setUsers } =
+  const { clearCheckedAccounts, getMigrationStatus, setUsers, filteredUsers } =
     importAccountsStore;
   const { viewAs, setViewAs } = setup;
   const { currentDeviceType } = settingsStore;
@@ -253,5 +270,6 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
     currentDeviceType,
     getMigrationStatus,
     setUsers,
+    filteredUsers,
   };
 })(withTranslation(["Common, Settings"])(observer(OnlyofficeWorkspace)));

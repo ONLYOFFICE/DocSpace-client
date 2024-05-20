@@ -30,6 +30,7 @@ import { AvatarRole } from "../avatar";
 import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
 import { TRoomSecurity } from "../../api/rooms/types";
 import { TSubmenuItem } from "../submenu";
+import { SelectorAccessRightsMode } from "./Selector.enums";
 
 // header
 
@@ -61,7 +62,15 @@ export type TBreadCrumb = {
   label: string;
   isRoom?: boolean;
   minWidth?: string;
-  onClick?: (e: React.MouseEvent, open: boolean, item: TBreadCrumb) => void;
+  onClick?: ({
+    e,
+    open,
+    item,
+  }: {
+    e: React.MouseEvent;
+    open: boolean;
+    item: TBreadCrumb;
+  }) => void;
   roomType?: RoomsType;
 };
 
@@ -194,7 +203,7 @@ export type TSelectorSubmitButton = {
 };
 
 type TSelectorFooterSubmitButton = Omit<TSelectorSubmitButton, "onSubmit"> & {
-  onSubmit: (item?: TSelectorItem) => Promise<void>;
+  onSubmit: (item?: TSelectorItem | React.MouseEvent) => Promise<void>;
 };
 
 // cancel button
@@ -222,19 +231,32 @@ export type TAccessRight = {
   access: string | number;
 };
 
+type TWithAccessRightsProps = {
+  withAccessRights: true;
+  accessRights: TAccessRight[];
+  selectedAccessRight: TAccessRight | null;
+  onAccessRightsChange: (access: TAccessRight) => void;
+  accessRightsMode?: SelectorAccessRightsMode;
+};
+
+type TWithoutAccessRightsProps = {
+  withAccessRights?: undefined;
+  accessRights?: undefined;
+  selectedAccessRight?: undefined;
+  onAccessRightsChange?: undefined;
+  accessRightsMode?: undefined;
+};
+
 export type TSelectorAccessRights =
-  | {
-      withAccessRights: true;
-      accessRights: TAccessRight[];
-      selectedAccessRight: TAccessRight | null;
-      onAccessRightsChange: (access: TAccessRight) => void;
-    }
-  | {
-      withAccessRights?: undefined;
-      accessRights?: undefined;
-      selectedAccessRight?: undefined;
-      onAccessRightsChange?: undefined;
-    };
+  | TWithAccessRightsProps
+  | TWithoutAccessRightsProps;
+
+export type AccessSelectorProps = Omit<
+  TWithAccessRightsProps,
+  "withAccessRights"
+> & {
+  footerRef: React.RefObject<HTMLDivElement>;
+};
 
 // footer input
 
@@ -261,20 +283,23 @@ export type TSelectorCheckbox =
       withFooterCheckbox: true;
       footerCheckboxLabel: string;
       isChecked: boolean;
-      setIsChecked: React.Dispatch<React.SetStateAction<boolean>>;
     }
   | {
       withFooterCheckbox?: undefined;
       footerCheckboxLabel?: undefined;
       isChecked?: boolean;
-      setIsChecked?: undefined;
     };
 
 export type TSelectorFooterCheckbox = TSelectorCheckbox & {
   setIsFooterCheckboxChecked: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+export type TSelectorInfo =
+  | { withInfo: true; infoText: string }
+  | { withInfo?: undefined; infoText?: undefined };
+
 export type SelectorProps = TSelectorHeader &
+  TSelectorInfo &
   TWithTabs &
   TSelectorSelectAll &
   TSelectorEmptyScreen &
@@ -320,6 +345,7 @@ export type SelectorProps = TSelectorHeader &
   };
 
 export type BodyProps = TSelectorBreadCrumbs &
+  TSelectorInfo &
   TWithTabs &
   TSelectorBodySearch &
   TSelectorSelectAll &
@@ -365,24 +391,27 @@ export type FooterProps = TSelectorFooterSubmitButton &
 
 type TSelectorItemLogo =
   | {
-      color?: undefined;
-      icon?: undefined;
       avatar: string;
-      role?: AvatarRole;
+      color?: undefined;
       hasAvatar?: boolean;
+      icon?: undefined;
+      iconOriginal?: string;
+      role?: AvatarRole;
     }
   | {
-      hasAvatar?: undefined;
-      color: string;
-      icon?: undefined;
       avatar?: undefined;
+      color: string;
+      hasAvatar?: undefined;
+      icon?: undefined;
+      iconOriginal?: string;
       role?: undefined;
     }
   | {
-      hasAvatar?: undefined;
-      color?: undefined;
-      icon: string;
       avatar?: undefined;
+      color?: undefined;
+      hasAvatar?: undefined;
+      icon: string;
+      iconOriginal: string;
       role?: undefined;
     };
 
@@ -396,6 +425,7 @@ type TSelectorItemType =
       isAdmin: boolean;
       isVisitor: boolean;
       isCollaborator: boolean;
+      isRoomAdmin: boolean;
       access?: ShareAccessRights | string | number;
       isFolder?: undefined;
       parentId?: undefined;
@@ -415,6 +445,7 @@ type TSelectorItemType =
       isAdmin?: undefined;
       isVisitor?: undefined;
       isCollaborator?: undefined;
+      isRoomAdmin?: undefined;
       access?: undefined;
       isFolder?: undefined;
       parentId?: string | number;
@@ -434,6 +465,7 @@ type TSelectorItemType =
       isAdmin?: undefined;
       isVisitor?: undefined;
       isCollaborator?: undefined;
+      isRoomAdmin?: undefined;
       access?: undefined;
       isFolder: boolean;
       parentId?: string | number;
@@ -453,6 +485,7 @@ type TSelectorItemType =
       isAdmin?: undefined;
       isVisitor?: undefined;
       isCollaborator?: undefined;
+      isRoomAdmin?: undefined;
       access?: undefined;
       isFolder: boolean;
       parentId?: string | number;
@@ -472,6 +505,7 @@ type TSelectorItemType =
       isAdmin?: undefined;
       isVisitor?: undefined;
       isCollaborator?: undefined;
+      isRoomAdmin?: undefined;
       access?: undefined;
       isFolder?: undefined;
       parentId?: string | number;

@@ -36,7 +36,7 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { toastr } from "@docspace/shared/components/toast";
 
 const Wrapper = styled.div`
-  margin: 0 0 16px;
+  margin: 16px 0 16px;
   display: flex;
   align-items: center;
 
@@ -47,7 +47,7 @@ const Wrapper = styled.div`
 
 const InfoText = styled(Text)`
   margin-top: -8px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   font-size: 12px;
   color: ${(props) => props.theme.client.settings.migration.subtitleColor};
 `;
@@ -55,7 +55,7 @@ const InfoText = styled(Text)`
 const ErrorText = styled(Text)`
   font-size: 12px;
   color: ${(props) => props.theme.client.settings.migration.errorTextColor};
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 `;
 
 const ImportCompleteStep = ({
@@ -70,8 +70,11 @@ const ImportCompleteStep = ({
   const [importResult, setImportResult] = useState({
     succeedUsers: 0,
     failedUsers: 0,
+    errors: [],
   });
   const navigate = useNavigate();
+
+  const [isSaving, setIsSaving] = useState(false);
 
   const onDownloadLog = async () => {
     try {
@@ -101,7 +104,11 @@ const ImportCompleteStep = ({
     }
     clearCheckedAccounts();
     clearMigration();
-    setTimeout(() => navigate(-1), 1000);
+    setIsSaving(true);
+    setTimeout(() => {
+      setIsSaving(false);
+      navigate(-1);
+    }, 1000);
   };
 
   useEffect(() => {
@@ -110,6 +117,7 @@ const ImportCompleteStep = ({
         setImportResult({
           succeedUsers: res.parseResult.successedUsers,
           failedUsers: res.parseResult.failedUsers,
+          errors: res.parseResult.errors,
         }),
       );
     } catch (error) {
@@ -134,9 +142,13 @@ const ImportCompleteStep = ({
         </ErrorText>
       )}
 
+      {importResult.errors?.length > 0 && (
+        <ErrorText>{t("Settings:ErrorOccuredDownloadLog")}</ErrorText>
+      )}
+
       <Wrapper>
         <Checkbox
-          label={t("Settings:SendWelcomeLetter")}
+          label={t("Settings:SendInviteLetter")}
           isChecked={isChecked}
           onChange={onChangeCheckbox}
         />
@@ -145,7 +157,7 @@ const ImportCompleteStep = ({
           offsetRight={0}
           style={{ margin: "0px 5px" }}
           tooltipContent={
-            <Text fontSize="12px">{t("Settings:WelcomeLetterTooltip")}</Text>
+            <Text fontSize="12px">{t("Settings:InviteLetterTooltip")}</Text>
           }
         />
       </Wrapper>
@@ -158,6 +170,7 @@ const ImportCompleteStep = ({
         cancelButtonLabel={t("Settings:DownloadLog")}
         displaySettings
         showReminder
+        isSaving={isSaving}
       />
     </>
   );

@@ -26,7 +26,7 @@
 
 import React from "react";
 import { useTheme } from "styled-components";
-import { isIOS, isMobileOnly } from "react-device-detect";
+
 import { Portal } from "../portal";
 import { DomHelpers, isTablet } from "../../utils";
 
@@ -373,31 +373,10 @@ const DropDown = ({
       cleanChildren &&
       rowHeights &&
       rowHeights.reduce((a: number, b: number) => a + b, 0);
-    let calculatedHeight =
+    const calculatedHeight =
       fullHeight > 0 && maxHeight && fullHeight < maxHeight
         ? fullHeight
         : maxHeight;
-
-    const container = DomHelpers.getViewport();
-
-    if (
-      isIOS &&
-      isMobileOnly &&
-      container?.height !== window.visualViewport?.height
-    ) {
-      const rects = dropDownRef.current?.getBoundingClientRect();
-      const parentRects = forwardedRef?.current?.getBoundingClientRect();
-
-      const parentHeight = parentRects?.height || DEFAULT_PARENT_HEIGHT;
-
-      if (window.visualViewport) {
-        const rectsTop = rects?.top || 0;
-
-        const height = window.visualViewport.height - rectsTop - parentHeight;
-
-        if (rects && calculatedHeight > height) calculatedHeight = height;
-      }
-    }
 
     const dropDownMaxHeightProp = maxHeight
       ? { height: `${calculatedHeight}px` }

@@ -37,7 +37,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { TableGroupMenu } from "@docspace/shared/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import LoaderSectionHeader from "../loaderSectionHeader";
-import { mobile, tablet, desktop } from "@docspace/shared/utils";
+import { mobile, tablet, desktop, isMobile } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Badge } from "@docspace/shared/components/badge";
 import {
@@ -74,6 +74,8 @@ const HeaderContainer = styled.div`
       white-space: nowrap;
       overflow: hidden;
       color: ${(props) => props.theme.client.settings.headerTitleColor};
+      display: flex;
+      align-items: center;
     }
   }
   .action-wrapper {
@@ -123,13 +125,13 @@ const HeaderContainer = styled.div`
   @media ${tablet} {
     h1 {
       line-height: 61px;
-      font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
+      font-size: 21px;
     }
   }
 
   @media ${desktop} {
     h1 {
-      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+      font-size: 18px;
       line-height: 59px !important;
     }
   }
@@ -137,7 +139,7 @@ const HeaderContainer = styled.div`
   @media ${mobile} {
     h1 {
       line-height: 53px;
-      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+      font-size: 18px;
     }
   }
 
@@ -179,6 +181,7 @@ const SectionHeaderContent = (props) => {
     isRestoreAndAutoBackupAvailable,
     tReady,
     setIsLoadedSectionHeader,
+    isSSOAvailable,
   } = props;
 
   const navigate = useNavigate();
@@ -203,6 +206,9 @@ const SectionHeaderContent = (props) => {
         return isBrandingAndCustomizationAvailable;
       case "AdditionalResources":
         return isBrandingAndCustomizationAvailable;
+      case "SingleSignOn:ServiceProviderSettings":
+      case "SingleSignOn:SpMetadata":
+        return isSSOAvailable;
       default:
         return true;
     }
@@ -214,9 +220,10 @@ const SectionHeaderContent = (props) => {
     const arrayOfParams = getArrayOfParams();
 
     const key = getKeyByLink(arrayOfParams, settingsTree);
-    let currKey = key.length > 3 ? key : key[0];
 
-    if (key === "8" || key === "8-0") currKey = "8-0";
+    const keysCollection = key.split("-");
+
+    const currKey = keysCollection.length >= 3 ? key : keysCollection[0];
 
     const header = getTKeyByKey(currKey, settingsTree);
     const isCategory = checkPropertyByLink(
@@ -331,6 +338,13 @@ const SectionHeaderContent = (props) => {
     },
   ];
 
+  const pathname = location.pathname;
+
+  const isServicePage =
+    pathname.includes("google") ||
+    pathname.includes("nextcloud") ||
+    pathname.includes("onlyoffice");
+
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>
       {isHeaderVisible ? (
@@ -359,7 +373,18 @@ const SectionHeaderContent = (props) => {
           )}
           <Headline type="content" truncate={true}>
             <div className="settings-section_header">
-              <div className="header"> {t(header)}</div>
+              <div className="header">
+                {isMobile() && isServicePage && (
+                  <IconButton
+                    iconName={ArrowPathReactSvgUrl}
+                    size="17"
+                    isFill={true}
+                    onClick={onBackToParent}
+                    className="arrow-button"
+                  />
+                )}
+                {t(header)}
+              </div>
               {isNeedPaidIcon ? (
                 <Badge
                   backgroundColor="#EDC409"
@@ -398,6 +423,7 @@ export default inject(({ currentQuotaStore, setup, common }) => {
   const {
     isBrandingAndCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
+    isSSOAvailable,
   } = currentQuotaStore;
   const { addUsers, removeAdmins } = setup.headerAction;
   const { toggleSelector } = setup;
@@ -431,6 +457,7 @@ export default inject(({ currentQuotaStore, setup, common }) => {
     setIsLoadedSectionHeader,
     isBrandingAndCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
+    isSSOAvailable,
   };
 })(
   withLoading(

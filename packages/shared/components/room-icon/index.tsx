@@ -63,7 +63,7 @@ const StyledIcon = styled.div<{
   }
 
   .room-title {
-    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    font-size: 14px;
     font-weight: 700;
     line-height: 16px;
     color: ${(props) =>
@@ -79,7 +79,8 @@ const StyledIcon = styled.div<{
 
   .room-icon_badge {
     position: absolute;
-    margin: 24px 0 0 24px;
+    margin-block: 24px 0;
+    margin-inline: 24px 0;
 
     .room-icon-button {
       width: 12px;
@@ -130,7 +131,7 @@ type RoomIconColor = {
 };
 
 type RoomIconImage = {
-  color?: undefined;
+  color?: string | undefined;
   imgSrc: string;
   imgClassName?: string;
 };

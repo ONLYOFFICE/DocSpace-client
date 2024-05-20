@@ -60,7 +60,7 @@ const StyledLinkRow = styled.div`
   }
 
   .combo-button {
-    padding-left: 8px;
+    padding-inline-start: 8px;
   }
 
   .link-options {
@@ -73,6 +73,14 @@ const StyledLinkRow = styled.div`
     padding: 0px;
   }
 
+  .internal-combobox_expiered {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+    margin: 6px 8px;
+    color: ${({ theme }) => theme.infoPanel.members.linkAccessComboboxExpired};
+  }
+
   .expired-options {
     padding: 0px;
 
@@ -82,14 +90,14 @@ const StyledLinkRow = styled.div`
   }
 
   .expire-text {
-    margin-left: 8px;
+    margin-inline-start: 8px;
   }
 
   .link-actions {
     display: flex;
     gap: 16px;
     align-items: center;
-    margin-left: auto;
+    margin-inline-start: auto;
   }
 
   .loader {
@@ -101,6 +109,11 @@ const StyledLinkRow = styled.div`
     height: 32px;
     width: 32px;
   }
+
+  .create-and-copy_link {
+    width: 100%;
+    color: ${({ theme }) => theme.infoPanel.members.createLink};
+  }
 `;
 
 const StyledSquare = styled.div`
@@ -110,6 +123,10 @@ const StyledSquare = styled.div`
   border-radius: 3px;
   padding: 10px;
   background: ${(props) => props.theme.avatar.icon.background};
+  cursor: pointer;
+  .icon-button_svg {
+    cursor: pointer;
+  }
 `;
 
 export { StyledLinks, StyledLinkRow, StyledSquare };

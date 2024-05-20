@@ -41,15 +41,16 @@ const SelectUsersTypeStep = ({
   checkedUsers,
   searchValue,
   setSearchValue,
+  filteredUsers,
 }) => {
   const [boundaries, setBoundaries] = useState([0, 25]);
   const [dataPortion, setDataPortion] = useState(
-    users.result.slice(...boundaries),
+    filteredUsers.slice(...boundaries),
   );
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
     setBoundaries([leftBoundary, rightBoundary]);
-    setDataPortion(users.result.slice(leftBoundary, rightBoundary));
+    setDataPortion(filteredUsers.slice(leftBoundary, rightBoundary));
   };
 
   const onChangeInput = (value) => {
@@ -62,12 +63,13 @@ const SelectUsersTypeStep = ({
 
   const filteredAccounts = dataPortion.filter(
     (data) =>
-      data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.email.toLowerCase().startsWith(searchValue.toLowerCase()),
+      data.firstName?.toLowerCase().startsWith(searchValue.toLowerCase()) ||
+      data.lastName?.toLowerCase().startsWith(searchValue.toLowerCase()) ||
+      data.email?.toLowerCase().startsWith(searchValue.toLowerCase()),
   );
 
   useEffect(() => {
-    setDataPortion(users.result.slice(...boundaries));
+    setDataPortion(filteredUsers.slice(...boundaries));
   }, [users]);
 
   return (
@@ -82,43 +84,49 @@ const SelectUsersTypeStep = ({
         displaySettings
       />
 
-      <SearchInput
-        id="search-users-type-input"
-        placeholder={t("Common:Search")}
-        style={{ marginTop: "20px" }}
-        value={searchValue}
-        onChange={onChangeInput}
-        refreshTimeout={100}
-        onClearSearch={onClearSearchInput}
-      />
+      {filteredUsers.length > 0 && (
+        <>
+          {!checkedUsers.result.length > 0 && (
+            <SearchInput
+              id="search-users-type-input"
+              placeholder={t("Common:Search")}
+              style={{ marginTop: "20px" }}
+              value={searchValue}
+              onChange={onChangeInput}
+              refreshTimeout={100}
+              onClearSearch={onClearSearchInput}
+            />
+          )}
 
-      <AccountsTable t={t} accountsData={filteredAccounts} />
+          <AccountsTable t={t} accountsData={filteredAccounts} />
 
-      {users.result.length > 25 && filteredAccounts.length > 0 && (
-        <AccountsPaging
-          t={t}
-          numberOfItems={users.result.length}
-          setDataPortion={handleDataChange}
-        />
-      )}
+          {filteredUsers.length > 25 && filteredAccounts.length > 0 && (
+            <AccountsPaging
+              t={t}
+              numberOfItems={filteredUsers.length}
+              setDataPortion={handleDataChange}
+            />
+          )}
 
-      {filteredAccounts.length > 0 && (
-        <SaveCancelButtons
-          className="save-cancel-buttons"
-          onSaveClick={onNextStep}
-          onCancelClick={onPrevStep}
-          showReminder
-          saveButtonLabel={t("Settings:NextStep")}
-          cancelButtonLabel={t("Common:Back")}
-          displaySettings
-        />
+          {filteredAccounts.length > 0 && (
+            <SaveCancelButtons
+              className="save-cancel-buttons"
+              onSaveClick={onNextStep}
+              onCancelClick={onPrevStep}
+              showReminder
+              saveButtonLabel={t("Settings:NextStep")}
+              cancelButtonLabel={t("Common:Back")}
+              displaySettings
+            />
+          )}
+        </>
       )}
     </>
   );
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { users, checkedUsers, searchValue, setSearchValue } =
+  const { users, checkedUsers, searchValue, setSearchValue, filteredUsers } =
     importAccountsStore;
 
   return {
@@ -126,5 +134,6 @@ export default inject(({ importAccountsStore }) => {
     checkedUsers,
     searchValue,
     setSearchValue,
+    filteredUsers,
   };
 })(observer(SelectUsersTypeStep));

@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
 import React from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
@@ -132,6 +134,7 @@ const notify = (
       closeButton: withCross && <CloseButton />,
       autoClose: timeout === 0 ? false : timeout < 750 ? 5000 : timeout || 5000,
       position: centerPosition ? "top-center" : undefined,
+      containerId: "toast-container",
     },
   );
 };

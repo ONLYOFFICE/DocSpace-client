@@ -46,12 +46,14 @@ import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url
 const UserSelectTableContainer = styled(StyledTableContainer)`
   .table-group-menu {
     height: 69px;
-    position: absolute;
+    position: sticky;
     z-index: 201;
-    left: 0px;
-    width: 100%;
+    width: calc(100% + 40px);
+    margin-top: 20px;
+    margin-left: -20px;
+    top: 0;
 
-    margin-top: -35.5px;
+    margin-bottom: -37.5px;
 
     .table-container_group-menu {
       border-image-slice: 0;
@@ -95,12 +97,12 @@ const TableView = (props) => {
     sectionWidth,
     accountsData,
     typeOptions,
-    users,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
+    filteredUsers,
   } = props;
   const tableRef = useRef(null);
   const [hideColumns, setHideColumns] = useState(false);
@@ -109,10 +111,10 @@ const TableView = (props) => {
 
   const isIndeterminate =
     checkedUsers.result.length > 0 &&
-    checkedUsers.result.length !== users.result.length;
+    checkedUsers.result.length !== filteredUsers.length;
 
   const toggleAll = (isChecked) =>
-    toggleAllAccounts(isChecked, users.result, checkedAccountType);
+    toggleAllAccounts(isChecked, filteredUsers, checkedAccountType);
 
   const onClearFilter = () => {
     setSearchValue("");
@@ -142,7 +144,7 @@ const TableView = (props) => {
             withoutInfoPanelToggler
             withComboBox={false}
             isIndeterminate={isIndeterminate}
-            isChecked={checkedUsers.result.length === users.result.length}
+            isChecked={checkedUsers.result.length === filteredUsers.length}
             onChange={toggleAll}
           />
         </div>
@@ -156,7 +158,7 @@ const TableView = (props) => {
             columnStorageName={columnStorageName}
             columnInfoPanelStorageName={columnInfoPanelStorageName}
             isIndeterminate={isIndeterminate}
-            isChecked={checkedUsers.result.length === users.result.length}
+            isChecked={checkedUsers.result.length === filteredUsers.length}
             toggleAll={toggleAll}
             setHideColumns={setHideColumns}
           />
@@ -220,21 +222,21 @@ const TableView = (props) => {
 export default inject(({ userStore, importAccountsStore }) => {
   const { id: userId } = userStore.user;
   const {
-    users,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
+    filteredUsers,
   } = importAccountsStore;
 
   return {
     userId,
-    users,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
+    filteredUsers,
   };
 })(observer(TableView));

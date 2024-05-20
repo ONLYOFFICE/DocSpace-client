@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import copy from "copy-to-clipboard";
 
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
@@ -34,8 +33,9 @@ import CopyIcon from "PUBLIC_DIR/images/copy.react.svg?url";
 
 import { RowSkeleton } from "../../../skeletons/share";
 import { TFileLink } from "../../../api/files/types";
+import { copyShareLink } from "../../../utils/copy";
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
-import { Link, LinkType } from "../../link";
+import { Link } from "../../link";
 import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
 import { IconButton } from "../../icon-button";
 import { toastr } from "../../toast";
@@ -46,6 +46,7 @@ import { getShareOptions, getAccessOptions } from "../Share.helpers";
 import { LinkRowProps } from "../Share.types";
 
 import ExpiredComboBox from "./ExpiredComboBox";
+import { Text } from "@docspace/shared/components/text";
 
 const LinkRow = ({
   onAddClick,
@@ -62,21 +63,16 @@ const LinkRow = ({
   const accessOptions = getAccessOptions(t, availableExternalRights);
 
   const onCopyLink = (link: TFileLink) => {
-    copy(link.sharedTo.shareLink);
+    copyShareLink(link.sharedTo.shareLink);
     toastr.success(t("Common:LinkSuccessfullyCopied"));
   };
 
   return !links?.length ? (
-    <StyledLinkRow>
+    <StyledLinkRow onClick={onAddClick}>
       <StyledSquare>
         <IconButton size={12} iconName={PlusIcon} isDisabled />
       </StyledSquare>
-      <Link
-        type={LinkType.action}
-        isHovered
-        fontWeight={600}
-        onClick={onAddClick}
-      >
+      <Link className="create-and-copy_link" noHover fontWeight={600}>
         {t("Common:CreateAndCopy")}
       </Link>
     </StyledLinkRow>
@@ -110,20 +106,26 @@ const LinkRow = ({
             />
           )}
           <div className="link-options">
-            <ComboBox
-              className="internal-combobox"
-              directionY="both"
-              options={shareOptions}
-              selectedOption={shareOption ?? ({} as TOption)}
-              onSelect={(item) => changeShareOption(item, link)}
-              scaled={false}
-              scaledOptions={false}
-              showDisabledItems
-              size={ComboBoxSize.content}
-              fillIcon={false}
-              modernView
-              isDisabled={isExpiredLink || isLoaded}
-            />
+            {!isExpiredLink ? (
+              <ComboBox
+                className="internal-combobox"
+                directionY="both"
+                options={shareOptions}
+                selectedOption={shareOption ?? ({} as TOption)}
+                onSelect={(item) => changeShareOption(item, link)}
+                scaled={false}
+                scaledOptions={false}
+                showDisabledItems
+                size={ComboBoxSize.content}
+                fillIcon={false}
+                modernView
+                isDisabled={isLoaded}
+              />
+            ) : (
+              <Text className="internal-combobox_expiered">
+                {shareOption?.label}
+              </Text>
+            )}
             <ExpiredComboBox
               link={link}
               changeExpirationOption={changeExpirationOption}
@@ -147,7 +149,7 @@ const LinkRow = ({
               scaledOptions={false}
               showDisabledItems
               size={ComboBoxSize.content}
-              fillIcon
+              fillIcon={true}
               modernView
               type="onlyIcon"
               isDisabled={isExpiredLink || isLoaded}

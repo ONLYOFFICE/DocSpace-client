@@ -44,8 +44,16 @@ const CategoryFilterDesktop = ({
   ...rest
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const onToggleDropdownIsOpen = () => setIsOpen(!isOpen);
+  const onOpenDropdown = () => setIsOpen(true);
   const onCloseDropdown = () => setIsOpen(false);
+
+  const onBackdropClick = (e) => {
+    if (
+      e?.target?.className !== "item-content" &&
+      e?.target?.className !== "dropdown-item"
+    )
+      onCloseDropdown();
+  };
 
   const [hoveredSub, setHoveredSub] = useState(null);
 
@@ -58,7 +66,8 @@ const CategoryFilterDesktop = ({
         tabIndex={1}
         className={"combobox"}
         opened={isOpen}
-        onClick={onToggleDropdownIsOpen}
+        onToggle={onOpenDropdown}
+        onBackdropClick={onBackdropClick}
         onSelect={onCloseDropdown}
         isDisabled={false}
         showDisabledItems={true}
@@ -67,6 +76,8 @@ const CategoryFilterDesktop = ({
         directionY={"both"}
         scaled={true}
         size={"content"}
+        withoutBackground
+        withBackdrop
         disableIconClick={false}
         disableItemClick={false}
         isDefaultMode={false}

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
+import { isIOS, isMobile } from "react-device-detect";
 
 import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
 
@@ -152,7 +153,7 @@ const StyledButton = styled.div<{ isOpen: boolean }>`
 
 StyledButton.defaultProps = { theme: Base };
 
-const StyledFilterBlock = styled.div<{ showFooter?: boolean }>`
+const StyledFilterBlock = styled.div`
   position: fixed;
   top: 0;
 
@@ -198,7 +199,7 @@ const StyledFilterBlock = styled.div<{ showFooter?: boolean }>`
   }
 
   .filter-body {
-    height: ${(props) => (props.showFooter ? "calc(100% - 125px)" : "100%")};
+    height: calc(100% - 125px);
 
     .combo-item {
       padding: 0;
@@ -208,7 +209,7 @@ const StyledFilterBlock = styled.div<{ showFooter?: boolean }>`
       justify-content: space-between;
 
       .combo-button-label {
-        font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+        font-size: 13px;
         font-weight: 400;
         line-height: 20px;
       }
@@ -333,7 +334,7 @@ const StyledFilterBlockItemSelector = styled.div`
 
 const StyledFilterBlockItemSelectorText = styled(Text)`
   font-weight: 600;
-  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+  font-size: 13px;
   line-height: 15px;
   color: ${(props) => props.theme.filterInput.filter.color};
   ${(props) =>
@@ -365,7 +366,7 @@ const StyledFilterBlockItemTagText = styled(Text)<{ isSelected?: boolean }>`
   height: 20px;
 
   font-weight: 400;
-  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+  font-size: 13px;
   line-height: 20px;
 
   ${(props) => props.isSelected && selectedItemTagText}
@@ -408,7 +409,7 @@ const StyledFilterBlockItemToggle = styled.div`
 
 const StyledFilterBlockItemToggleText = styled(Text)`
   font-weight: 600;
-  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+  font-size: 13px;
   line-height: 36px;
 `;
 
@@ -563,6 +564,7 @@ const StyledSortButton = styled.div<{ viewAs: TViewAs; isDesc: boolean }>`
   .combo-button {
     background: ${(props) =>
       props.theme.filterInput.sort.background} !important;
+    padding-inline-end: 4px;
 
     .icon-button_svg {
       cursor: pointer;
@@ -595,6 +597,7 @@ const StyledSortButton = styled.div<{ viewAs: TViewAs; isDesc: boolean }>`
       bottom: auto;
       min-width: 200px;
       margin-top: 3px;
+      width: auto;
 
       .view-selector-item {
         display: flex;

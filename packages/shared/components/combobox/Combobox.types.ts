@@ -47,6 +47,7 @@ export type TOption =
       isSelected?: boolean;
       internal?: boolean;
       access?: ShareAccessRights;
+      className?: string;
     }
   | {
       key: string | number;
@@ -63,6 +64,7 @@ export type TOption =
       isSelected?: undefined;
       internal?: undefined;
       access?: ShareAccessRights;
+      className?: string;
     };
 
 export interface ComboboxProps {
@@ -152,6 +154,8 @@ export interface ComboboxProps {
   onClickSelectedItem?: (option: TOption) => void;
   withoutBackground?: boolean;
   forceCloseClickOutside?: boolean;
+  /** The event is triggered by clicking outside the component when `withBackdrop === true` */
+  onBackdropClick?: (e?: Event | React.MouseEvent) => void;
   hideMobileView?: boolean;
   isNoFixedHeightOptions?: boolean;
   isMobileView?: boolean;

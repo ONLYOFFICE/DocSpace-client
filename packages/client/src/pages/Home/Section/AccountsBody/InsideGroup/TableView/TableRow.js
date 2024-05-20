@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
+import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 import { TableRow } from "@docspace/shared/components/table";
@@ -37,6 +38,8 @@ import withContent from "SRC_DIR/HOCs/withPeopleContent";
 import Badges from "../../Badges";
 import { Base } from "@docspace/shared/themes";
 import { useNavigate } from "react-router-dom";
+
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 
 const StyledWrapper = styled.div`
   display: contents;
@@ -119,6 +122,7 @@ const StyledPeopleRow = styled(TableRow)`
     opacity: ${(props) => (props.hideColumns ? 0 : 1)};
 
     & > div {
+      width: auto;
       max-width: fit-content;
     }
   }
@@ -138,7 +142,7 @@ const StyledPeopleRow = styled(TableRow)`
       margin-inline-start: -8px;
 
       .combo-button-label {
-        font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+        font-size: 13px;
         font-weight: 600;
       }
     }
@@ -202,24 +206,25 @@ const InsideGroupTableRow = (props) => {
     checkedProps,
     onContentRowSelect,
     onContentRowClick,
+    onUserContextClick,
     onEmailClick,
 
     isOwner,
     theme,
     changeUserType,
 
-    setBufferSelection,
     isActive,
-    isSeveralSelection,
     canChangeUserType,
     hideColumns,
     value,
     standalone,
-    openGroupAction,
+    onOpenGroup,
 
     typeAccountsInsideGroupColumnIsEnabled,
     groupAccountsInsideGroupColumnIsEnabled,
     emailAccountsInsideGroupColumnIsEnabled,
+    showStorageInfo,
+    storageAccountsColumnIsEnabled,
   } = props;
 
   const {
@@ -306,9 +311,9 @@ const InsideGroupTableRow = (props) => {
     [item, changeUserType],
   );
 
-  const onOpenGroup = React.useCallback(
-    ({ action, title }) => openGroupAction(action, false, title),
-    [openGroupAction],
+  const onOpenGroupClick = React.useCallback(
+    ({ action, title }) => onOpenGroup(action, false, title),
+    [onOpenGroup],
   );
 
   // const getRoomsOptions = React.useCallback(() => {
@@ -371,9 +376,9 @@ const InsideGroupTableRow = (props) => {
             label: groups[0].name + " ",
           }}
           plusBadgeValue={groups.length - 1}
-          onSelect={onOpenGroup}
+          onSelect={onOpenGroupClick}
           options={groupItems}
-          scaled
+          scaled={false}
           directionY="both"
           size="content"
           modernView
@@ -413,7 +418,7 @@ const InsideGroupTableRow = (props) => {
         }
         options={typesOptions}
         onSelect={onTypeChange}
-        scaled
+        scaled={false}
         directionY="both"
         size="content"
         displaySelectedOption
@@ -447,32 +452,18 @@ const InsideGroupTableRow = (props) => {
   const typeCell = renderTypeCell();
 
   const onChange = (e) => {
-    //console.log("onChange");
     onContentRowSelect && onContentRowSelect(e.target.checked, item);
   };
 
-  const onRowContextClick = React.useCallback(() => {
-    //console.log("userContextClick");
-    onContentRowClick && onContentRowClick(!isChecked, item, false);
-  }, [isChecked, item, onContentRowClick]);
+  const onRowContextClick = React.useCallback(
+    (rightMouseButtonClick) => {
+      onUserContextClick?.(item, !rightMouseButtonClick);
+    },
+    [item, onUserContextClick],
+  );
 
-  const onRowClick = (e) => {
-    if (
-      e.target.closest(".checkbox") ||
-      e.target.closest(".table-container_row-checkbox") ||
-      e.target.closest(".type-combobox") ||
-      e.target.closest(".paid-badge") ||
-      e.target.closest(".pending-badge") ||
-      e.target.closest(".disabled-badge") ||
-      e.detail === 0
-    ) {
-      return;
-    }
+  const onRowClick = (e) => onContentRowClick?.(e, item);
 
-    //console.log("onRowClick");
-
-    onContentRowClick && onContentRowClick(!isChecked, item);
-  };
   const isPaidUser = !standalone && !isVisitor;
   return (
     <StyledWrapper
@@ -533,10 +524,7 @@ const InsideGroupTableRow = (props) => {
         )}
 
         {groupAccountsInsideGroupColumnIsEnabled ? (
-          <TableCell
-            className={"table-cell_groups"}
-            onClick={(e) => e.stopPropagation()}
-          >
+          <TableCell className={"table-cell_groups"}>
             {renderGroupsCell()}
           </TableCell>
         ) : (
@@ -595,6 +583,7 @@ const InsideGroupTableRow = (props) => {
               onClick={onEmailClick}
               isTextOverflow
               enableUserSelect
+              dir="auto"
             >
               {email}
             </Link>
@@ -602,11 +591,32 @@ const InsideGroupTableRow = (props) => {
         ) : (
           <div />
         )}
+
+        {showStorageInfo &&
+          (storageAccountsColumnIsEnabled ? (
+            <TableCell className={"table-cell_Storage/Quota"}>
+              <SpaceQuota hideColumns={hideColumns} item={item} type="user" />
+            </TableCell>
+          ) : (
+            <div />
+          ))}
       </StyledPeopleRow>
     </StyledWrapper>
   );
 };
 
-export default withTranslation(["People", "Common", "Settings"])(
-  withContent(InsideGroupTableRow),
+export default inject(({ currentQuotaStore, tableStore }) => {
+  const { showStorageInfo } = currentQuotaStore;
+  const { storageAccountsColumnIsEnabled } = tableStore;
+
+  return {
+    showStorageInfo,
+    storageAccountsColumnIsEnabled,
+  };
+})(
+  withContent(
+    withTranslation(["People", "Common", "Settings"])(
+      observer(InsideGroupTableRow),
+    ),
+  ),
 );

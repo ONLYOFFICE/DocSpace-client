@@ -76,6 +76,7 @@ const FilesSelector = ({
   onSetBaseFolderPath,
   isUserOnly,
   isRoomsOnly,
+  openRoot,
   isThirdParty,
   rootThirdPartyId,
   roomsFolderId,
@@ -105,6 +106,7 @@ const FilesSelector = ({
   withSearch: withSearchProp,
   withBreadCrumbs: withBreadCrumbsProp,
   filesSettings,
+  cancelButtonLabel,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -160,7 +162,7 @@ const FilesSelector = ({
     setIsFirstLoad,
     showBreadCrumbsLoader,
     showLoader,
-  } = useLoadersHelper({ items, isInit });
+  } = useLoadersHelper();
 
   const { isRoot, setIsRoot, getRootData } = useRootHelper({
     setIsBreadCrumbsLoading,
@@ -172,6 +174,7 @@ const FilesSelector = ({
     setIsNextPageLoading,
     isUserOnly,
     setIsInit,
+    setIsFirstLoad,
   });
 
   const { getRoomList } = useRoomsHelper({
@@ -185,9 +188,11 @@ const FilesSelector = ({
     setIsRoot,
     searchValue,
     isRoomsOnly,
+
     onSetBaseFolderPath,
     isInit,
     setIsInit,
+    setIsFirstLoad,
   });
 
   const { getFileList } = useFilesHelper({
@@ -209,10 +214,11 @@ const FilesSelector = ({
     getRootData,
     onSetBaseFolderPath,
     isRoomsOnly,
+    isUserOnly,
     rootThirdPartyId,
     getRoomList,
     getIcon,
-
+    setIsFirstLoad,
     setIsSelectedParentFolder,
     roomsFolderId,
     getFilesArchiveError,
@@ -243,6 +249,7 @@ const FilesSelector = ({
         ]);
         setSelectedItemId(item.id);
         setSearchValue("");
+        setSelectedFileInfo(null);
 
         if (item.parentId === 0 && item.rootFolderType === FolderType.Rooms) {
           setSelectedItemType("rooms");
@@ -286,7 +293,7 @@ const FilesSelector = ({
       return;
     }
 
-    if (!currentFolderId) {
+    if (!currentFolderId && !isUserOnly && !openRoot) {
       setSelectedItemType("rooms");
       return;
     }
@@ -295,8 +302,7 @@ const FilesSelector = ({
 
     if (
       needRoomList ||
-      (!isThirdParty &&
-        currentFolderId === roomsFolderId &&
+      (+currentFolderId === roomsFolderId &&
         rootFolderType === FolderType.Rooms)
     ) {
       setSelectedItemType("rooms");
@@ -309,9 +315,11 @@ const FilesSelector = ({
     currentFolderId,
     isRoomsOnly,
     isThirdParty,
+    isUserOnly,
     parentId,
     roomsFolderId,
     rootFolderType,
+    openRoot,
     setIsFirstLoad,
   ]);
 
@@ -396,6 +404,7 @@ const FilesSelector = ({
 
   const onClearSearchAction = React.useCallback(
     (callback?: Function) => {
+      if (!searchValue) return;
       setIsFirstLoad(true);
       setItems([]);
 
@@ -404,7 +413,7 @@ const FilesSelector = ({
       callback?.();
       afterSearch.current = true;
     },
-    [setIsFirstLoad],
+    [searchValue, setIsFirstLoad],
   );
 
   React.useEffect(() => {
@@ -437,21 +446,28 @@ const FilesSelector = ({
   );
 
   React.useEffect(() => {
-    if (selectedItemType === "rooms") getRoomList(0);
+    if (selectedItemType === "rooms") {
+      getRoomList(0);
+      return;
+    }
+    if (openRoot && !selectedItemId) {
+      getRootData();
+      return;
+    }
     if (selectedItemType === "files" && typeof selectedItemId !== "undefined")
       getFileList(0);
-  }, [getFileList, getRoomList, selectedItemType, selectedItemId]);
+  }, [
+    getFileList,
+    getRoomList,
+    selectedItemType,
+    selectedItemId,
+    getRootData,
+    openRoot,
+  ]);
 
   const headerProps: TSelectorHeader = withHeader
     ? { withHeader, headerProps: { headerLabel } }
     : {};
-
-  // const withSearch = withSearchProp
-  //   ? prevWithSearch.current && isFirstLoad
-  //     ? prevWithSearch.current
-  //     : !!searchValue ||
-  //       (!isRoot && items?.length ? items.length > 0 : !isRoot && isFirstLoad)
-  //   : false;
 
   const withSearch = withSearchProp
     ? isRoot
@@ -493,7 +509,7 @@ const FilesSelector = ({
   const cancelButtonProps: TSelectorCancelButton = withCancelButton
     ? {
         withCancelButton,
-        cancelButtonLabel: t("Common:CancelButton"),
+        cancelButtonLabel: cancelButtonLabel || t("Common:CancelButton"),
         cancelButtonId,
         onCancel,
       }
@@ -512,7 +528,6 @@ const FilesSelector = ({
         withFooterCheckbox,
         footerCheckboxLabel,
         isChecked: false,
-        setIsChecked: () => {},
       }
     : {};
 

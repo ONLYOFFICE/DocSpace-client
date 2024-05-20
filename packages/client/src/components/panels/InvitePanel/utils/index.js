@@ -82,7 +82,7 @@ export const getAccessOptions = (
     },
     editor: {
       key: "editor",
-      label: t("Translations:RoleEditor"),
+      label: t("Common:Editor"),
       description: t("Translations:RoleEditorDescription"),
       access: ShareAccessRights.Editing,
       type: "user",
@@ -175,7 +175,6 @@ export const getAccessOptions = (
         accesses.roomAdmin,
         accesses.collaborator,
         { key: "s1", isSeparator: withSeparator },
-        accesses.viewer,
         accesses.formFiller,
       ];
       break;

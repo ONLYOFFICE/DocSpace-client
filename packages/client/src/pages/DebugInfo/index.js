@@ -55,6 +55,11 @@ const StyledModalDialog = styled(ModalDialog)`
     a {
       color: #4781d1;
     }
+
+    .debug-info-body,
+    .debug-info-footer {
+      user-select: text;
+    }
   }
 
   .markdown-wrapper {
@@ -130,7 +135,7 @@ const DebugInfoDialog = (props) => {
         )}
         <Text>{`# User Agent: ${navigator.userAgent}`}</Text>
       </ModalDialog.Body>
-      <ModalDialog.Footer>
+      <ModalDialog.Footer className="debug-info-footer">
         <Box
           className="markdown-wrapper"
           overflowProp="auto"
@@ -166,7 +171,6 @@ const DebugInfoDialog = (props) => {
 DebugInfoDialog.propTypes = {
   visible: PropTypes.bool,
   onClose: PropTypes.func,
-  personal: PropTypes.bool,
   buildVersionInfo: PropTypes.object,
 };
 

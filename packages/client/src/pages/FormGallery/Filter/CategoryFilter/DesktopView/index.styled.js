@@ -45,7 +45,7 @@ export const CategoryFilter = styled(ComboBox)`
 
   .combo-button-label {
     font-weight: 400;
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
     line-height: 20px;
   }
 
@@ -65,7 +65,7 @@ export const CategoryFilterItem = styled(DropDownItem)`
   box-sizing: border-box;
   padding: 8px 12px;
 
-  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+  font-size: 12px;
   font-weight: 600;
   line-height: 16px;
 
@@ -147,7 +147,7 @@ export const CategoryFilterSubListItem = styled(DropDownItem)`
   box-sizing: border-box;
   padding: 8px 16px;
 
-  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+  font-size: 13px;
   font-weight: 600;
   line-height: 20px;
 `;

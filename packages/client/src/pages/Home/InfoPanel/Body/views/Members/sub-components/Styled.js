@@ -73,6 +73,20 @@ const StyledLinkRow = styled.div`
   gap: 12px;
   height: 100%;
   background: ${(props) => props.theme.backgroundColor};
+  cursor: pointer;
+
+  .icon-button_svg {
+    cursor: pointer;
+  }
+
+  .create-link-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    padding: 10px;
+    background: ${(props) => props.theme.avatar.icon.background};
+  }
 
   .external-row-link {
     white-space: nowrap;
@@ -97,6 +111,19 @@ const StyledLinkRow = styled.div`
     `}
   }
 
+  .clock-icon {
+    svg {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+
+    width: 12px;
+    height: 12px;
+    border: ${(props) => `1px solid ${props.theme.backgroundColor}`};
+    border-radius: 50%;
+  }
+
   .avatar_role-wrapper {
     ${({ isExpired, theme }) => css`
       svg {
@@ -105,6 +132,10 @@ const StyledLinkRow = styled.div`
             ? theme.infoPanel.links.iconErrorColor
             : theme.infoPanel.links.iconColor};
         }
+      }
+
+      circle {
+        fill: ${(props) => props.theme.backgroundColor};
       }
     `}
   }

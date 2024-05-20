@@ -36,11 +36,8 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { StyledTitle } from "../../../styles/common";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import RoomsContextBtn from "./context-btn";
-import {
-  FolderType,
-  RoomsType,
-  ShareAccessRights,
-} from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 
 const RoomsItemHeader = ({
   t,
@@ -50,13 +47,13 @@ const RoomsItemHeader = ({
   isGracePeriod,
   setInvitePanelOptions,
   setInviteUsersWarningDialogVisible,
-  isPublicRoomType,
   roomsView,
-  setSelected,
+  setSelection,
   setBufferSelection,
   isArchive,
   hasLinks,
   setShowSearchBlock,
+  roomType,
 }) => {
   const itemTitleRef = useRef();
 
@@ -76,11 +73,12 @@ const RoomsItemHeader = ({
   const isRoomMembersPanel = selection?.isRoom && roomsView === "info_members";
 
   const onSelectItem = () => {
-    setSelected("none");
+    setSelection([]);
     setBufferSelection(selection);
   };
 
   const onClickInviteUsers = () => {
+    onSelectItem();
     setIsMobileHidden(true);
     const parentRoomId = infoPanelSelection.id;
 
@@ -93,9 +91,7 @@ const RoomsItemHeader = ({
       visible: true,
       roomId: parentRoomId,
       hideSelector: false,
-      defaultAccess: isPublicRoomType
-        ? ShareAccessRights.RoomManager
-        : ShareAccessRights.ReadOnly,
+      defaultAccess: getDefaultAccessUser(roomType),
     });
   };
 
@@ -171,6 +167,10 @@ export default inject(
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
     const isArchive = selection?.rootFolderType === FolderType.Archive;
 
+    const roomType =
+      selectedFolderStore.roomType ??
+      infoPanelStore.infoPanelSelection?.roomType;
+
     return {
       selection,
       roomsView,
@@ -184,14 +184,11 @@ export default inject(
       setInviteUsersWarningDialogVisible:
         dialogsStore.setInviteUsersWarningDialogVisible,
 
-      isPublicRoomType:
-        (selectedFolderStore.roomType ??
-          infoPanelStore.infoPanelSelection?.roomType) === RoomsType.PublicRoom,
-
-      setSelected: filesStore.setSelected,
+      setSelection: filesStore.setSelection,
       setBufferSelection: filesStore.setBufferSelection,
       isArchive,
       hasLinks: externalLinks.length,
+      roomType,
     };
   },
 )(

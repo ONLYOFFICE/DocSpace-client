@@ -34,19 +34,16 @@ const TABLE_ACCOUNTS_INSIDE_GROUP_COLUMNS = `insideGroupTableColumns_ver-${Table
 const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
 const TABLE_TRASH_COLUMNS = `trashTableColumns_ver-${TableVersions.Trash}`;
 const TABLE_RECENT_COLUMNS = `recentTableColumns_ver-${TableVersions.Recent}`;
-const TABLE_SDK_COLUMNS = `filesSDKTableColumns_ver-${TableVersions.Files}`;
 
 const COLUMNS_SIZE = `filesColumnsSize_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE = `roomsColumnsSize_ver-${TableVersions.Rooms}`;
 const COLUMNS_TRASH_SIZE = `trashColumnsSize_ver-${TableVersions.Trash}`;
 const COLUMNS_RECENT_SIZE = `recentColumnsSize_ver-${TableVersions.Recent}`;
-const COLUMNS_SDK_SIZE = `filesSDKColumnsSize_ver-${TableVersions.Files}`;
 
 const COLUMNS_SIZE_INFO_PANEL = `filesColumnsSizeInfoPanel_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE_INFO_PANEL = `roomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
 const COLUMNS_TRASH_SIZE_INFO_PANEL = `trashColumnsSizeInfoPanel_ver-${TableVersions.Trash}`;
 const COLUMNS_RECENT_SIZE_INFO_PANEL = `recentColumnsSizeInfoPanel_ver-${TableVersions.Recent}`;
-const COLUMNS_SDK_SIZE_INFO_PANEL = `filesSDKColumnsSizeInfoPanel_ver-${TableVersions.Files}`;
 
 class TableStore {
   authStore;
@@ -176,18 +173,22 @@ class TableStore {
   setAccountsInsideGroupColumnGroup = (enable) =>
     (this.groupAccountsInsideGroupColumnIsEnabled = enable);
 
-  setColumnsEnable = () => {
+  setColumnsEnable = (frameTableColumns) => {
     const storageColumns = localStorage.getItem(this.tableStorageName);
-    const splitColumns = storageColumns && storageColumns.split(",");
+    const splitColumns = storageColumns
+      ? storageColumns.split(",")
+      : frameTableColumns
+        ? frameTableColumns.split(",")
+        : null;
 
     if (splitColumns) {
       const {
         isRoomsFolder,
         isArchiveFolder,
         isTrashFolder,
-        isAccountsPeople,
-        isAccountsGroups,
-        isAccountsInsideGroup,
+        getIsAccountsPeople,
+        getIsAccountsGroups,
+        getIsAccountsInsideGroup,
       } = this.treeFoldersStore;
       const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -200,7 +201,7 @@ class TableStore {
         return;
       }
 
-      if (isAccountsPeople) {
+      if (getIsAccountsPeople()) {
         this.setAccountsColumnType(splitColumns.includes("Type"));
         this.setAccountsColumnEmail(splitColumns.includes("Mail"));
         this.setAccountsColumnGroup(splitColumns.includes("Department"));
@@ -208,14 +209,14 @@ class TableStore {
         return;
       }
 
-      if (isAccountsGroups) {
+      if (getIsAccountsGroups()) {
         this.setAccountsGroupsColumnManager(
           splitColumns.includes("Head of Group"),
         );
         return;
       }
 
-      if (isAccountsInsideGroup) {
+      if (getIsAccountsInsideGroup()) {
         this.setAccountsInsideGroupColumnType(splitColumns.includes("Type"));
         this.setAccountsInsideGroupColumnEmail(splitColumns.includes("Mail"));
         this.setAccountsInsideGroupColumnGroup(
@@ -250,9 +251,9 @@ class TableStore {
       isRoomsFolder,
       isArchiveFolder,
       isTrashFolder,
-      isAccountsPeople,
-      isAccountsGroups,
-      isAccountsInsideGroup,
+      getIsAccountsPeople,
+      getIsAccountsGroups,
+      getIsAccountsInsideGroup,
     } = this.treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -276,7 +277,7 @@ class TableStore {
         return;
 
       case "Department":
-        isAccountsPeople
+        getIsAccountsPeople()
           ? this.setAccountsColumnGroup(!this.groupAccountsColumnIsEnabled)
           : this.setAccountsInsideGroupColumnGroup(
               !this.groupAccountsInsideGroupColumnIsEnabled,
@@ -301,9 +302,9 @@ class TableStore {
       case "Type":
         isRooms
           ? this.setRoomColumnType(!this.roomColumnTypeIsEnabled)
-          : isAccountsPeople
+          : getIsAccountsPeople()
             ? this.setAccountsColumnType(!this.typeAccountsColumnIsEnabled)
-            : isAccountsInsideGroup
+            : getIsAccountsInsideGroup()
               ? this.setAccountsInsideGroupColumnType(
                   !this.typeAccountsInsideGroupColumnIsEnabled,
                 )
@@ -335,7 +336,7 @@ class TableStore {
         return;
 
       case "Mail":
-        isAccountsPeople
+        getIsAccountsPeople()
           ? this.setAccountsColumnEmail(!this.emailAccountsColumnIsEnabled)
           : this.setAccountsInsideGroupColumnEmail(
               !this.emailAccountsInsideGroupColumnIsEnabled,
@@ -343,7 +344,7 @@ class TableStore {
         return;
 
       case "Storage":
-        isAccountsPeople
+        getIsAccountsPeople()
           ? this.setAccountsColumnStorage(!this.storageAccountsColumnIsEnabled)
           : this.setRoomColumnQuota(!this.roomQuotaColumnIsEnable);
         return;
@@ -360,8 +361,10 @@ class TableStore {
   };
 
   getColumns = (defaultColumns) => {
+    const { isFrame, frameConfig } = this.settingsStore;
     const storageColumns = localStorage.getItem(this.tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
+    const frameTableColumns = frameConfig?.viewTableColumns;
 
     const columns = [];
 
@@ -375,59 +378,53 @@ class TableStore {
         columns.push(col);
       }
       return columns;
+    } else if (isFrame && frameTableColumns) {
+      this.setColumnsEnable(frameTableColumns);
+
+      const frameTableArray = frameTableColumns.split(",");
+      return defaultColumns.map((col) => {
+        col.enable = frameTableArray.includes(col.key) ? true : false;
+        return col;
+      });
     } else {
       return defaultColumns;
     }
   };
 
+  // Column names
   get tableStorageName() {
     const {
       isRoomsFolder,
       isArchiveFolder,
       isTrashFolder,
-      isAccountsPeople,
-      isAccountsGroups,
+      getIsAccountsPeople,
+      getIsAccountsGroups,
       isRecentTab,
-      isAccountsInsideGroup,
+      getIsAccountsInsideGroup,
     } = this.treeFoldersStore;
+
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
 
-    if (isFrame) return `${TABLE_SDK_COLUMNS}=${userId}`;
-
-    console.log(
-      "Table log tableStorageName",
-      isRooms
-        ? `${TABLE_ROOMS_COLUMNS}=${userId}`
-        : isAccountsPeople
-          ? `${TABLE_ACCOUNTS_PEOPLE_COLUMNS}=${userId}`
-          : isAccountsGroups
-            ? `${TABLE_ACCOUNTS_GROUPS_COLUMNS}=${userId}`
-            : isAccountsInsideGroup
-              ? `${TABLE_ACCOUNTS_INSIDE_GROUP_COLUMNS}=${userId}`
-              : isTrashFolder
-                ? `${TABLE_TRASH_COLUMNS}=${userId}`
-                : isRecentTab
-                  ? `${TABLE_RECENT_COLUMNS}=${userId}`
-                  : `${TABLE_COLUMNS}=${userId}`,
-    );
-
-    return isRooms
+    const tableStorageName = isRooms
       ? `${TABLE_ROOMS_COLUMNS}=${userId}`
-      : isAccountsPeople
+      : getIsAccountsPeople()
         ? `${TABLE_ACCOUNTS_PEOPLE_COLUMNS}=${userId}`
-        : isAccountsGroups
+        : getIsAccountsGroups()
           ? `${TABLE_ACCOUNTS_GROUPS_COLUMNS}=${userId}`
-          : isAccountsInsideGroup
+          : getIsAccountsInsideGroup()
             ? `${TABLE_ACCOUNTS_INSIDE_GROUP_COLUMNS}=${userId}`
             : isTrashFolder
               ? `${TABLE_TRASH_COLUMNS}=${userId}`
               : isRecentTab
                 ? `${TABLE_RECENT_COLUMNS}=${userId}`
                 : `${TABLE_COLUMNS}=${userId}`;
+
+    return isFrame ? `SDK_${tableStorageName}` : tableStorageName;
   }
 
+  // Table column sizes
   get columnStorageName() {
     const { isRoomsFolder, isArchiveFolder, isTrashFolder, isRecentTab } =
       this.treeFoldersStore;
@@ -435,28 +432,18 @@ class TableStore {
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
 
-    if (isFrame) return `${COLUMNS_SDK_SIZE}=${userId}`;
-
-    console.log(
-      "Table log columnStorageName",
-      isRooms
-        ? `${COLUMNS_ROOMS_SIZE}=${userId}`
-        : isTrashFolder
-          ? `${COLUMNS_TRASH_SIZE}=${userId}`
-          : isRecentTab
-            ? `${COLUMNS_RECENT_SIZE}=${userId}`
-            : `${COLUMNS_SIZE}=${userId}`,
-    );
-
-    return isRooms
+    const columnStorageName = isRooms
       ? `${COLUMNS_ROOMS_SIZE}=${userId}`
       : isTrashFolder
         ? `${COLUMNS_TRASH_SIZE}=${userId}`
         : isRecentTab
           ? `${COLUMNS_RECENT_SIZE}=${userId}`
           : `${COLUMNS_SIZE}=${userId}`;
+
+    return isFrame ? `SDK_${columnStorageName}` : columnStorageName;
   }
 
+  // Column names for info-panel
   get columnInfoPanelStorageName() {
     const { isRoomsFolder, isArchiveFolder, isTrashFolder, isRecentTab } =
       this.treeFoldersStore;
@@ -464,15 +451,17 @@ class TableStore {
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
 
-    if (isFrame) return `${COLUMNS_SDK_SIZE_INFO_PANEL}=${userId}`;
-
-    return isRooms
+    const columnInfoPanelStorageName = isRooms
       ? `${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`
       : isTrashFolder
         ? `${COLUMNS_TRASH_SIZE_INFO_PANEL}=${userId}`
         : isRecentTab
           ? `${COLUMNS_RECENT_SIZE_INFO_PANEL}=${userId}`
           : `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
+
+    return isFrame
+      ? `SDK_${columnInfoPanelStorageName}`
+      : columnInfoPanelStorageName;
   }
 
   get filesColumnStorageName() {

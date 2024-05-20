@@ -111,7 +111,6 @@ const InvitePanel = ({
   const invitePanelBodyRef = useRef();
   const invitePanelWrapper = useRef(null);
   const invitePanelRef = useRef(null);
-  const windowHeight = useRef(window.innerHeight);
   const loaderRef = useRef();
 
   const onChangeExternalLinksVisible = (visible) => {
@@ -231,25 +230,6 @@ const InvitePanel = ({
     isMobileView && window.addEventListener("mousedown", onMouseDown);
   }, [isMobileView]);
 
-  useEffect(() => {
-    window.visualViewport.addEventListener("resize", onResize);
-
-    return () => {
-      window.visualViewport.removeEventListener("resize", onResize);
-    };
-  }, []);
-
-  const onResize = useCallback((e) => {
-    const diff = windowHeight.current - e.target.height;
-
-    if (invitePanelRef.current) {
-      invitePanelRef.current.style.height = `${e.target.height - 64}px`;
-      // invitePanelRef.current.style.bottom = `${diff}px`;
-      invitePanelWrapper.current.style.height = `${e.target.height}px`;
-      invitePanelWrapper.current.style.bottom = `${diff}px`;
-    }
-  }, []);
-
   const onMouseDown = (e) => {
     if (e.target.id === "InvitePanelWrapper") onClose();
   };
@@ -312,7 +292,24 @@ const InvitePanel = ({
       setIsLoading(false);
 
       if (isRooms) {
-        addInfoPanelMembers(t, result.members);
+        const newInfoPanelMembers = [
+          ...result.members,
+          ...data.invitations.map((invitation) => ({
+            access: invitation.access,
+            sharedTo: {
+              name: invitation.email,
+              userName: invitation.email,
+              email: invitation.email,
+              displayName: invitation.email,
+              status: 1,
+              activationStatus: 2,
+              usedSpace: 0,
+              hasAvatar: false,
+            },
+            canEditAccess: false,
+          })),
+        ];
+        addInfoPanelMembers(t, newInfoPanelMembers);
       }
 
       onClose();
@@ -410,28 +407,27 @@ const InvitePanel = ({
           ) : (
             bodyInvitePanel
           )}
-          {hasInvitedUsers && (
-            <StyledButtons>
-              <Button
-                className="send-invitation"
-                scale={true}
-                size={"normal"}
-                isDisabled={hasErrors}
-                primary
-                onClick={onClickSend}
-                label={t("SendInvitation")}
-                isLoading={isLoading}
-              />
-              <Button
-                className="cancel-button"
-                scale={true}
-                size={"normal"}
-                onClick={onClose}
-                label={t("Common:CancelButton")}
-                isDisabled={isLoading}
-              />
-            </StyledButtons>
-          )}
+
+          <StyledButtons>
+            <Button
+              className="send-invitation"
+              scale={true}
+              size={"normal"}
+              isDisabled={hasErrors || !hasInvitedUsers}
+              primary
+              onClick={onClickSend}
+              label={t("SendInvitation")}
+              isLoading={isLoading}
+            />
+            <Button
+              className="cancel-button"
+              scale={true}
+              size={"normal"}
+              onClick={onClose}
+              label={t("Common:CancelButton")}
+              isDisabled={isLoading}
+            />
+          </StyledButtons>
         </>
       )}
     </>

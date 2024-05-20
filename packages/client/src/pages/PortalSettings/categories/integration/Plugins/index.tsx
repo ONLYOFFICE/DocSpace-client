@@ -56,6 +56,8 @@ const PluginPage = ({
   updatePlugin,
   addPlugin,
 
+  updatePlugins,
+
   theme,
   isLoading,
   isEmptyList,
@@ -72,6 +74,10 @@ const PluginPage = ({
   React.useEffect(() => {
     setDocumentTitle(t("Common:Plugins"));
   }, [t]);
+
+  React.useEffect(() => {
+    updatePlugins(true);
+  }, [updatePlugins]);
 
   return isLoading || (!isEmptyList && pluginList.length === 0) ? (
     <StyledContainer>
@@ -133,6 +139,7 @@ export default inject(
     const {
       pluginList,
       updatePlugin,
+      updatePlugins,
       setCurrentSettingsDialogPlugin,
       setSettingsPluginDialogVisible,
 
@@ -153,6 +160,7 @@ export default inject(
       pluginList,
 
       updatePlugin,
+      updatePlugins,
 
       openSettingsDialog,
 

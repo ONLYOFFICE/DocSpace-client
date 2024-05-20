@@ -62,22 +62,29 @@ const ControlButtons = ({
   tariffBar,
   title,
   isEmptyPage,
+  onCloseDropBox,
 }: IControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
     toggleDropBox?.();
   };
 
-  const navigationButtonBlock = navigationButtonLabel ? (
-    <Button
-      className="navigation_button"
-      label={navigationButtonLabel}
-      size={ButtonSize.extraSmall}
-      onClick={onNavigationButtonClick}
-    />
-  ) : null;
+  const navigationButtonBlock =
+    navigationButtonLabel && !isFrame ? (
+      <Button
+        className="navigation_button"
+        label={navigationButtonLabel}
+        size={ButtonSize.extraSmall}
+        onClick={onNavigationButtonClick}
+      />
+    ) : null;
   const children = tariffBar ? React.cloneElement(tariffBar, { title }) : null;
   const isTabletView = isTablet();
+
+  const contextOptionsFolder = getContextOptionsFolder();
+  const containVisible = contextOptionsFolder.some(
+    (item) => item.disabled === false,
+  );
 
   return (
     <StyledControlButtonContainer isFrame={isFrame} showTitle={showTitle}>
@@ -91,6 +98,7 @@ const ControlButtons = ({
               onPlusClick={onPlusClick}
               isFrame={isFrame}
               title={titles?.actions}
+              onCloseDropBox={onCloseDropBox}
             />
           )}
 
@@ -116,6 +124,7 @@ const ControlButtons = ({
             title={titles?.actions}
             isTrashFolder={isTrashFolder}
             isMobile={isMobile || false}
+            onCloseDropBox={onCloseDropBox}
           />
 
           {!isDesktop && (
@@ -138,6 +147,7 @@ const ControlButtons = ({
               onPlusClick={onPlusClick}
               isFrame={isFrame}
               title={titles?.actions}
+              onCloseDropBox={onCloseDropBox}
             />
           )}
           {!isDesktop && (
@@ -160,7 +170,7 @@ const ControlButtons = ({
             />
           )}
 
-          {isPublicRoom && (
+          {isPublicRoom && containVisible && (
             <ContextButton
               id="header_optional-button"
               className="option-button"
@@ -169,6 +179,7 @@ const ControlButtons = ({
               title={titles?.contextMenu}
               isTrashFolder={isTrashFolder}
               isMobile={isMobile || false}
+              onCloseDropBox={onCloseDropBox}
             />
           )}
         </>

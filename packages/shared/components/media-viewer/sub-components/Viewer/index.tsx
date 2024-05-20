@@ -33,7 +33,6 @@ import React, {
 } from "react";
 
 import { DeviceType } from "@docspace/shared/enums";
-import { Portal } from "@docspace/shared/components/portal";
 import { includesMethod } from "@docspace/shared/utils/typeGuards";
 import type { TContextMenuRef } from "@docspace/shared/components/context-menu";
 
@@ -65,6 +64,7 @@ export const Viewer = (props: ViewerProps) => {
     targetFile,
     headerIcon,
     playlistPos,
+    isPublicFile,
     isPreviewFile,
     currentDeviceType,
     onNextClick,
@@ -216,6 +216,7 @@ export const Viewer = (props: ViewerProps) => {
       contextModel={contextModel}
       onMaskClick={handleMaskClick}
       onContextMenu={onMobileContextMenu}
+      isPublicFile={isPublicFile}
     />
   );
 
@@ -230,7 +231,11 @@ export const Viewer = (props: ViewerProps) => {
   return (
     <StyledViewerContainer visible={visible}>
       {!isFullscreen && !isMobile && panelVisible && !isPdf && (
-        <DesktopDetails title={title} onMaskClick={handleMaskClick} />
+        <DesktopDetails
+          title={title}
+          onMaskClick={handleMaskClick}
+          showCloseButton={!isPublicFile}
+        />
       )}
 
       {playlist.length > 1 && !isFullscreen && !isMobile && (
@@ -245,90 +250,78 @@ export const Viewer = (props: ViewerProps) => {
       )}
 
       {isImage ? (
-        <Portal
-          visible
-          element={
-            <ImageViewer
-              isTiff={isTiff}
-              devices={devices}
-              toolbar={toolbar}
-              errorTitle={errorTitle}
-              panelVisible={panelVisible}
-              mobileDetails={mobileDetails}
-              imageId={playlistFile.fileId}
-              version={playlistFile.version}
-              isLastImage={!isNotLastElement}
-              isFistImage={!isNotFirstElement}
-              thumbnailSrc={playlistFile.thumbnailUrl}
-              src={fileUrl}
-              onMask={onMaskClick}
-              onPrev={onPrevClick}
-              onNext={onNextClick}
-              contextModel={contextModel}
-              generateContextMenu={generateContextMenu}
-              setIsOpenContextMenu={setIsOpenContextMenu}
-              resetToolbarVisibleTimer={resetToolbarVisibleTimer}
-            />
-          }
+        <ImageViewer
+          key={fileUrl}
+          isTiff={isTiff}
+          devices={devices}
+          toolbar={toolbar}
+          errorTitle={errorTitle}
+          panelVisible={panelVisible}
+          mobileDetails={mobileDetails}
+          imageId={playlistFile.fileId}
+          version={playlistFile.version}
+          isLastImage={!isNotLastElement}
+          isFistImage={!isNotFirstElement}
+          thumbnailSrc={playlistFile.thumbnailUrl}
+          src={fileUrl}
+          onMask={onMaskClick}
+          onPrev={onPrevClick}
+          onNext={onNextClick}
+          contextModel={contextModel}
+          generateContextMenu={generateContextMenu}
+          setIsOpenContextMenu={setIsOpenContextMenu}
+          resetToolbarVisibleTimer={resetToolbarVisibleTimer}
+          isPublicFile={isPublicFile}
         />
       ) : isVideo || isAudio ? (
-        <Portal
-          visible
-          element={
-            <ViewerPlayer
-              isError={isError}
-              src={fileUrl}
-              devices={devices}
-              isAudio={isAudio}
-              isVideo={isVideo}
-              audioIcon={audioIcon}
-              errorTitle={errorTitle}
-              panelVisible={panelVisible}
-              isFullScreen={isFullscreen}
-              isPreviewFile={isPreviewFile}
-              mobileDetails={mobileDetails}
-              isLastImage={!isNotLastElement}
-              isFistImage={!isNotFirstElement}
-              isOpenContextMenu={isOpenContextMenu}
-              thumbnailSrc={playlistFile.thumbnailUrl}
-              canDownload={!!targetFile?.security.Download}
-              onPrev={onPrevClick}
-              onNext={onNextClick}
-              setIsError={setIsError}
-              onMask={handleMaskClick}
-              contextModel={contextModel}
-              setPanelVisible={setPanelVisible}
-              setIsFullScreen={setIsFullScreen}
-              onDownloadClick={onDownloadClick}
-              generateContextMenu={generateContextMenu}
-              removeToolbarVisibleTimer={removeToolbarVisibleTimer}
-              removePanelVisibleTimeout={removePanelVisibleTimeout}
-              restartToolbarVisibleTimer={restartToolbarVisibleTimer}
-            />
-          }
+        <ViewerPlayer
+          isError={isError}
+          src={fileUrl}
+          devices={devices}
+          isAudio={isAudio}
+          isVideo={isVideo}
+          audioIcon={audioIcon}
+          errorTitle={errorTitle}
+          panelVisible={panelVisible}
+          isFullScreen={isFullscreen}
+          isPreviewFile={isPreviewFile}
+          mobileDetails={mobileDetails}
+          isLastImage={!isNotLastElement}
+          isFistImage={!isNotFirstElement}
+          isOpenContextMenu={isOpenContextMenu}
+          thumbnailSrc={playlistFile.thumbnailUrl}
+          canDownload={!!targetFile?.security.Download}
+          onPrev={onPrevClick}
+          onNext={onNextClick}
+          setIsError={setIsError}
+          onMask={handleMaskClick}
+          contextModel={contextModel}
+          setPanelVisible={setPanelVisible}
+          setIsFullScreen={setIsFullScreen}
+          onDownloadClick={onDownloadClick}
+          generateContextMenu={generateContextMenu}
+          removeToolbarVisibleTimer={removeToolbarVisibleTimer}
+          removePanelVisibleTimeout={removePanelVisibleTimeout}
+          restartToolbarVisibleTimer={restartToolbarVisibleTimer}
+          isThirdParty={targetFile?.providerItem}
         />
       ) : (
         isPdf && (
-          <Portal
-            visible
-            element={
-              <PDFViewer
-                title={title}
-                toolbar={toolbar}
-                devices={devices}
-                src={fileUrl ?? ""}
-                mobileDetails={mobileDetails}
-                isLastImage={!isNotLastElement}
-                isFistImage={!isNotFirstElement}
-                isPDFSidebarOpen={isPDFSidebarOpen}
-                onNext={onNextClick}
-                onPrev={onPrevClick}
-                onMask={handleMaskClick}
-                generateContextMenu={generateContextMenu}
-                setIsOpenContextMenu={setIsOpenContextMenu}
-                setIsPDFSidebarOpen={setIsPDFSidebarOpen}
-              />
-            }
+          <PDFViewer
+            title={title}
+            toolbar={toolbar}
+            devices={devices}
+            src={fileUrl ?? ""}
+            mobileDetails={mobileDetails}
+            isLastImage={!isNotLastElement}
+            isFistImage={!isNotFirstElement}
+            isPDFSidebarOpen={isPDFSidebarOpen}
+            onNext={onNextClick}
+            onPrev={onPrevClick}
+            onMask={handleMaskClick}
+            generateContextMenu={generateContextMenu}
+            setIsOpenContextMenu={setIsOpenContextMenu}
+            setIsPDFSidebarOpen={setIsPDFSidebarOpen}
           />
         )
       )}

@@ -297,7 +297,7 @@ const useFiles = ({
           const event = new Event(Events.CREATE);
 
           const payload = {
-            extension: "docxf",
+            extension: "pdf",
             id: -1,
             fromTemplate: true,
             title: gallerySelected.attributes.name_form,

@@ -37,6 +37,7 @@ import {
   TSelectorCancelButton,
   TSelectorCheckbox,
   TSelectorHeader,
+  TSelectorInfo,
   TSelectorItem,
   TSelectorSearch,
 } from "../../components/selector/Selector.types";
@@ -68,6 +69,7 @@ const toListItem = (
     isAdmin,
     isVisitor,
     isCollaborator,
+    isRoomAdmin,
     status,
   } = item;
 
@@ -78,10 +80,10 @@ const toListItem = (
   const isInvited = disableInvitedUsers?.includes(userId);
   const isDisabled = disableDisabledUsers && status === EmployeeStatus.Disabled;
 
-  const disabledText = isDisabled
-    ? t("Common:Disabled")
-    : isInvited
-      ? t("Common:Invited")
+  const disabledText = isInvited
+    ? t("Common:Invited")
+    : isDisabled
+      ? t("Common:Disabled")
       : "";
 
   const i = {
@@ -94,6 +96,7 @@ const toListItem = (
     isAdmin,
     isVisitor,
     isCollaborator,
+    isRoomAdmin,
     hasAvatar,
     isDisabled: isInvited || isDisabled,
     disabledText,
@@ -121,13 +124,11 @@ const PeopleSelector = ({
   currentUserId,
   withOutCurrentAuthorizedUser,
 
-  withAbilityCreateRoomUsers,
   filterUserId,
 
   withFooterCheckbox,
   footerCheckboxLabel,
   isChecked,
-  setIsChecked,
 
   withHeader,
   headerProps,
@@ -135,6 +136,12 @@ const PeopleSelector = ({
   disableDisabledUsers,
   disableInvitedUsers,
   isMultiSelect,
+
+  withInfo,
+  infoText,
+
+  emptyScreenHeader,
+  emptyScreenDescription,
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -155,7 +162,11 @@ const PeopleSelector = ({
     isDoubleClick: boolean,
     doubleClickCallback: () => void,
   ) => {
-    setSelectedItem(item);
+    setSelectedItem((el) => {
+      if (el?.id === item.id) return null;
+
+      return item;
+    });
     if (isDoubleClick) {
       doubleClickCallback();
     }
@@ -209,13 +220,7 @@ const PeopleSelector = ({
 
       const data = response.items
         .filter((item) => {
-          const excludeUser =
-            withAbilityCreateRoomUsers &&
-            !item.isAdmin &&
-            !item.isOwner &&
-            !item.isRoomAdmin;
-
-          if ((excludeItems && excludeItems.includes(item.id)) || excludeUser) {
+          if (excludeItems && excludeItems.includes(item.id)) {
             totalDifferent += 1;
             return false;
           }
@@ -265,7 +270,6 @@ const PeopleSelector = ({
       removeCurrentUserFromList,
       searchValue,
       t,
-      withAbilityCreateRoomUsers,
       withOutCurrentAuthorizedUser,
     ],
   );
@@ -321,12 +325,18 @@ const PeopleSelector = ({
       isFirstLoad.current && !searchValue && !afterSearch.current,
   };
 
+  const infoProps: TSelectorInfo = withInfo
+    ? {
+        withInfo,
+        infoText,
+      }
+    : {};
+
   const checkboxSelectorProps: TSelectorCheckbox = withFooterCheckbox
     ? {
         withFooterCheckbox,
         footerCheckboxLabel,
         isChecked,
-        setIsChecked,
       }
     : {};
 
@@ -370,6 +380,7 @@ const PeopleSelector = ({
   return (
     <Selector
       id={id}
+      alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
       className={className}
       style={style}
       renderCustomItem={renderCustomItem}
@@ -383,8 +394,10 @@ const PeopleSelector = ({
       disableSubmitButton={disableSubmitButton || !selectedItem}
       submitButtonId={submitButtonId}
       emptyScreenImage={emptyScreenImage}
-      emptyScreenHeader={t("Common:EmptyHeader")}
-      emptyScreenDescription={t("Common:EmptyDescription")}
+      emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyHeader")}
+      emptyScreenDescription={
+        emptyScreenDescription ?? t("Common:EmptyDescription")
+      }
       searchEmptyScreenImage={emptyScreenImage}
       searchEmptyScreenHeader={t("Common:NotFoundUsers")}
       searchEmptyScreenDescription={t("Common:NotFoundUsersDescription")}
@@ -397,6 +410,7 @@ const PeopleSelector = ({
       searchLoader={<SearchLoader />}
       rowLoader={<RowLoader isUser isContainer={isFirstLoad.current} />}
       onSelect={onSelect}
+      {...infoProps}
     />
   );
 };

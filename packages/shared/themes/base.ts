@@ -28,6 +28,7 @@ import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 
 import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
+import { DEFAULT_FONT_FAMILY } from "../constants";
 
 export type TColorScheme = {
   id: number;
@@ -99,7 +100,7 @@ export const getBaseTheme = () => {
     isBase: true,
     color: black,
     backgroundColor: white,
-    fontFamily: "Open Sans, sans-serif, Arial",
+    fontFamily: DEFAULT_FONT_FAMILY,
     fontSize: "13px",
 
     text: {
@@ -331,7 +332,7 @@ export const getBaseTheme = () => {
       fontWeight: "500",
       textDecoration: "none",
       padding: "0",
-      borderRadius: "2px",
+      borderRadius: "3px",
       height: "40px",
       heightSmall: "32px",
       textAlign: "left",
@@ -379,10 +380,10 @@ export const getBaseTheme = () => {
 
       svg: {
         margin: "11px 8px",
-        width: "18px",
-        height: "18px",
-        minWidth: "18px",
-        minHeight: "18px",
+        width: "20px",
+        height: "20px",
+        minWidth: "20px",
+        minHeight: "20px",
         fill: white,
       },
     },
@@ -657,6 +658,16 @@ export const getBaseTheme = () => {
 
       colorDisabledFileIcons: "#f3f4f4",
 
+      backdrop: {
+        backgroundRGBA: {
+          r: 6,
+          g: 22,
+          b: 38,
+          a: 0.2,
+        },
+        blur: 10,
+      },
+
       content: {
         backgroundColor: white,
         modalPadding: "0 12px 12px",
@@ -909,8 +920,8 @@ export const getBaseTheme = () => {
 
       borderColor: blueMain,
 
-      iconColor: grayMid,
-      hoverIconColor: grayMid,
+      iconColor: gray,
+      hoverIconColor: grayMain,
     },
 
     textArea: {
@@ -1002,7 +1013,7 @@ export const getBaseTheme = () => {
       maxWidth: "340px",
       color: white,
       textColor: black,
-      backgroundColor: "#f8f7bf",
+      backgroundColor: "#F8F9F9",
 
       before: {
         border: "none",
@@ -1112,16 +1123,16 @@ export const getBaseTheme = () => {
 
       roleWrapperContainer: {
         right: {
-          min: "-5px",
+          min: "-2px",
           small: "-2px",
           base: "-2px",
           medium: "-4px",
           big: "3px",
-          max: "0px",
+          max: "10px",
         },
 
         bottom: {
-          min: "-5px",
+          min: "-2px",
           small: "3px",
           base: "4px",
           medium: "6px",
@@ -1130,13 +1141,15 @@ export const getBaseTheme = () => {
         },
 
         width: {
+          min: "12px",
           medium: "16px",
-          max: "24px",
+          max: "22px",
         },
 
         height: {
+          min: "12px",
           medium: "16px",
-          max: "24px",
+          max: "22px",
         },
       },
 
@@ -1427,7 +1440,7 @@ export const getBaseTheme = () => {
       zIndex: "400",
       background: white,
       borderRadius: "6px",
-      boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.13)",
+      boxShadow: "0px 8px 16px 0px #040F1B14",
       border: "none",
     },
 
@@ -1455,7 +1468,7 @@ export const getBaseTheme = () => {
         lineHeight: "10px",
 
         color: black,
-        disableColor: gray,
+        disableColor: black,
       },
 
       separator: {
@@ -1658,7 +1671,7 @@ export const getBaseTheme = () => {
         flex: "0 0 6px",
         marginTopWithBorder: "5px",
         marginTop: "12px",
-        marginRight: "8px",
+        marginRight: "5px",
         marginLeft: "auto",
       },
 
@@ -1698,7 +1711,7 @@ export const getBaseTheme = () => {
       },
 
       label: {
-        marginRightWithBorder: "8px",
+        marginRightWithBorder: "13px",
         marginRight: "4px",
 
         disabledColor: grayMid,
@@ -2011,7 +2024,7 @@ export const getBaseTheme = () => {
       expanderColor: black,
       background: white,
       rootFolderTitleColor: "#A3A9AE",
-      boxShadow: " 0px 12px 40px 0px #040F1B1F",
+      boxShadow: "0px 8px 16px 0px #040F1B14",
 
       icon: {
         fill: "#316DAA",
@@ -2038,6 +2051,7 @@ export const getBaseTheme = () => {
       recoveryColor: "#657077",
       linkColor: "#657077",
       productColor: white,
+      height: "48px",
     },
 
     menuContainer: {
@@ -2080,6 +2094,7 @@ export const getBaseTheme = () => {
       borderColor: grayLightMid,
       thumbnailBorderColor: grayLightMid,
       textColor: black,
+      errorColor: "#F21C0E",
 
       closeButtonWrapperPadding: "0px",
       closeButtonIcon: white,
@@ -2088,7 +2103,7 @@ export const getBaseTheme = () => {
 
       links: {
         iconColor: "#3B72A7",
-        iconErrorColor: "rgba(242, 28, 14, 0.5)", // "#F21C0E",
+        iconErrorColor: "#F24724",
         primaryColor: "#555F65",
       },
 
@@ -2101,6 +2116,8 @@ export const getBaseTheme = () => {
         roleSelectorColor: "#a3a9ae",
         disabledRoleSelectorColor: "#a3a9ae",
         roleSelectorArrowColor: "#a3a9ae",
+        createLink: "#a3a9ae",
+        linkAccessComboboxExpired: "#a3a9ae",
       },
 
       history: {
@@ -2362,6 +2379,11 @@ export const getBaseTheme = () => {
       breadCrumbs: {
         prevItemColor: "#657077",
         arrowRightColor: "#657077",
+      },
+
+      info: {
+        backgroundColor: "#f8f9f9",
+        color: "#555f65",
       },
 
       bodyDescriptionText: "#A3A9AE",
@@ -2769,7 +2791,7 @@ export const getBaseTheme = () => {
       background: white,
       borderRadius: "6px",
       mobileBorderRadius: "6px 6px 0 0",
-      boxShadow: "0px 12px 40px rgba(4, 15, 27, 0.12)",
+      boxShadow: "0px 8px 16px 0px #040F1B14",
       padding: "6px 0px",
       border: "none",
       devices: {
@@ -3206,14 +3228,15 @@ export const getBaseTheme = () => {
       notifications: {
         textDescriptionColor: "#A3A9AE",
       },
-    },
-
-    activeSessions: {
-      color: "#333",
-      borderColor: "#eceef1",
-      tickIconColor: "#35AD17",
-      removeIconColor: "#A3A9AE",
-      sortHeaderColor: "#d0d5da",
+      activeSessions: {
+        color: "#333",
+        borderColor: "#eceef1",
+        tickIconColor: "#35AD17",
+        removeIconColor: "#A3A9AE",
+        sortHeaderColor: "#d0d5da",
+        tableCellColor: "#a3a9ae",
+        dividerColor: "#D0D5DA",
+      },
     },
 
     formWrapper: {
@@ -3317,6 +3340,10 @@ export const getBaseTheme = () => {
     sideBarRow: {
       titleColor: black,
       metaDataColor: gray,
+    },
+
+    dateTimePicker: {
+      colorClockIcon: "#657077",
     },
   };
 };

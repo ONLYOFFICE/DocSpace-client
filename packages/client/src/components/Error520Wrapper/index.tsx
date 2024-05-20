@@ -34,12 +34,8 @@ const Error520Wrapper = (props: Error520Props) => {
 };
 
 export default inject<TStore>(({ authStore, settingsStore, userStore }) => {
-  const {
-    whiteLabelLogoUrls,
-    firebaseHelper,
-    currentDeviceType,
-    currentColorScheme,
-  } = settingsStore;
+  const { firebaseHelper, currentDeviceType, currentColorScheme } =
+    settingsStore;
   const { user } = userStore;
   const version = authStore.version;
 
@@ -48,7 +44,6 @@ export default inject<TStore>(({ authStore, settingsStore, userStore }) => {
     version,
     firebaseHelper,
     currentDeviceType,
-    whiteLabelLogoUrls,
     currentColorScheme,
   };
 })(observer(Error520Wrapper));

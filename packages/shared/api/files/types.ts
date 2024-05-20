@@ -109,7 +109,10 @@ export type TFile = {
   viewUrl: string;
   webUrl: string;
   availableExternalRights?: TAvailableExternalRights;
+  providerId?: number;
   providerKey?: string;
+  providerItem?: boolean;
+  thumbnailUrl?: string;
 };
 
 export type TOpenEditRequest = {
@@ -413,3 +416,13 @@ export type TFilesUsedSpace = {
     usedSpace: number;
   };
 };
+
+export type TConnectingStorage = {
+  name: string;
+  key: string;
+  connected: boolean;
+  oauth: boolean;
+  redirectUrl: string;
+};
+
+export type TConnectingStorages = TConnectingStorage[];

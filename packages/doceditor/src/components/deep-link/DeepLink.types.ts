@@ -33,12 +33,9 @@ import { TDeepLinkConfig } from "./DeepLink.helper";
 
 export interface DeepLinkProps {
   fileInfo?: TFile;
-  logoUrls: TWhiteLabel[];
   userEmail?: string;
 
-  theme: TTheme;
-
-  currentDeviceType: DeviceType;
+  currentDeviceType?: DeviceType;
   deepLinkConfig?: TDeepLinkConfig;
 
   setIsShowDeepLink: (value: boolean) => void;

@@ -29,13 +29,13 @@
     constructor() {
       this.browser = {};
       this.unsupportedBrowsers = {
-        Chrome: 102,
-        Firefox: 102,
+        Chrome: 109,
+        Firefox: 109,
         IE: 11,
-        Edge: 102,
+        Edge: 109,
         Opera: 90,
-        Safari: 14,
-        SafariMobile: 14,
+        Safari: 16,
+        SafariMobile: 16,
         AscDesktopEditor: 6,
         SamsungBrowser: 4,
         UCBrowser: 12,
@@ -50,7 +50,7 @@
         let temp = [];
         let match =
           agent.match(
-            /(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i
+            /(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i,
           ) || [];
 
         if (/trident/i.test(match[1])) {
@@ -60,7 +60,7 @@
 
         if (match[1] === "Chrome") {
           temp = agent.match(
-            /\b(OPR|Edge|AscDesktopEditor|SamsungBrowser|UCBrowser)\/(\d+.\d)/
+            /\b(OPR|Edge|AscDesktopEditor|SamsungBrowser|UCBrowser)\/(\d+.\d)/,
           );
 
           const userOS =

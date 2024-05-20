@@ -48,7 +48,12 @@ import {
   TVersionBuild,
 } from "../api/settings/types";
 import { TUser } from "../api/people/types";
-import { size as deviceSize, isTablet, getSystemTheme } from "../utils";
+import {
+  size as deviceSize,
+  isTablet,
+  getSystemTheme,
+  getDeviceTypeByWidth,
+} from "../utils";
 import {
   frameCallEvent,
   getShowText,
@@ -62,7 +67,7 @@ import FirebaseHelper from "../utils/firebase";
 import SocketIOHelper from "../utils/socket";
 import { TWhiteLabel } from "../utils/whiteLabelHelper";
 
-import { ThemeKeys, TenantStatus, DeviceType, UrlActionType } from "../enums";
+import { ThemeKeys, TenantStatus, UrlActionType } from "../enums";
 import {
   LANGUAGE,
   COOKIE_EXPIRATION_YEAR,
@@ -182,8 +187,6 @@ class SettingsStore {
   isEncryptionSupport = false;
 
   encryptionKeys: { [key: string]: string | boolean } = {};
-
-  personal = false;
 
   docSpace = true;
 
@@ -310,6 +313,8 @@ class SettingsStore {
   userNameRegex = "";
 
   windowWidth = window.innerWidth;
+
+  windowAngle = window.screen?.orientation?.angle ?? window.orientation ?? 0;
 
   constructor() {
     makeAutoObservable(this);
@@ -536,7 +541,7 @@ class SettingsStore {
       newSettings = window.__ASC_INITIAL_EDITOR_STATE__.portalSettings;
     else newSettings = await api.settings.getSettings(true);
 
-    if (window.AscDesktopEditor !== undefined || this.personal) {
+    if (window.AscDesktopEditor !== undefined) {
       const dp = combineUrl(window.DocSpaceConfig?.proxy?.url, MEDIA_VIEW_URL);
       this.setDefaultPage(dp);
     }
@@ -632,11 +637,7 @@ class SettingsStore {
     this.setIsLoading(true);
     const requests = [];
 
-    requests.push(
-      this.getPortalSettings(),
-      this.getAppearanceTheme(),
-      this.getWhiteLabelLogoUrls(),
-    );
+    requests.push(this.getPortalSettings(), this.getAppearanceTheme());
 
     await Promise.all(requests);
 
@@ -732,6 +733,8 @@ class SettingsStore {
 
     this.setLogoUrls(Object.values(res));
     this.setLogoUrl(Object.values(res));
+
+    return res;
   };
 
   getDomainName = async () => {
@@ -1015,10 +1018,12 @@ class SettingsStore {
   };
 
   get isFrame() {
-    const isFrame = this.frameConfig?.name === window.name;
-    window.DocSpaceConfig.isFrame = isFrame;
+    const isFrame = this.frameConfig
+      ? window.name.includes(this.frameConfig?.name)
+      : false;
 
-    console.log("Table log isFrame", isFrame);
+    if (window.DocSpaceConfig) window.DocSpaceConfig.isFrame = isFrame;
+
     return isFrame;
   }
 
@@ -1080,6 +1085,10 @@ class SettingsStore {
     }
   };
 
+  setWindowAngle = (angle: number) => {
+    this.windowAngle = angle;
+  };
+
   setWindowWidth = (width: number) => {
     if (width <= deviceSize.mobile && this.windowWidth <= deviceSize.mobile)
       return;
@@ -1093,11 +1102,20 @@ class SettingsStore {
   };
 
   get currentDeviceType() {
-    if (this.windowWidth <= deviceSize.mobile) return DeviceType.mobile;
+    return getDeviceTypeByWidth(this.windowWidth);
+  }
 
-    if (isTablet(this.windowWidth)) return DeviceType.tablet;
+  get deviceType() {
+    const angleByRadians = (Math.PI / 180) * this.windowAngle;
 
-    return DeviceType.desktop;
+    const width = Math.abs(
+      Math.round(
+        Math.sin(angleByRadians) * window.innerHeight +
+          Math.cos(angleByRadians) * this.windowWidth,
+      ),
+    );
+
+    return getDeviceTypeByWidth(width);
   }
 
   get enablePortalRename() {

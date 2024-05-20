@@ -48,12 +48,10 @@ export interface UseRootHelperProps {
   setIsInit: (value: boolean) => void;
   treeFolders?: TFolder[];
   isUserOnly?: boolean;
+  setIsFirstLoad: (value: boolean) => void;
 }
 
-export interface UseLoadersHelperProps {
-  items: TSelectorItem[];
-  isInit: boolean;
-}
+export interface UseLoadersHelperProps {}
 
 export type UseSocketHelperProps = {
   socketHelper: SocketIOHelper;
@@ -82,6 +80,7 @@ export type UseRoomsHelperProps = {
   ) => void;
   isInit: boolean;
   setIsInit: (value: boolean) => void;
+  setIsFirstLoad: (value: boolean) => void;
 };
 
 export type UseFilesHelpersProps = {
@@ -102,12 +101,13 @@ export type UseFilesHelpersProps = {
   setSelectedItemSecurity: (value: TFileSecurity | TFolderSecurity) => void;
   isThirdParty: boolean;
   setSelectedTreeNode: (treeNode: TFolder) => void;
-  filterParam?: string;
+  filterParam?: string | number;
   getRootData?: () => Promise<void>;
   onSetBaseFolderPath?: (
     value: number | string | undefined | TBreadCrumb[],
   ) => void;
   isRoomsOnly: boolean;
+  isUserOnly?: boolean;
   rootThirdPartyId?: string;
   getRoomList?: (
     startIndex: number,
@@ -118,6 +118,7 @@ export type UseFilesHelpersProps = {
   getIcon: (fileExst: string) => string;
   getFilesArchiveError: (name: string) => string;
   isInit: boolean;
+  setIsFirstLoad: (value: boolean) => void;
 };
 
 export type TSelectedFileInfo = {
@@ -149,6 +150,7 @@ export type FilesSelectorProps = (
     value: number | string | undefined | TBreadCrumb[],
   ) => void;
   isUserOnly?: boolean;
+  openRoot?: boolean;
   isRoomsOnly: boolean;
   isThirdParty: boolean;
   rootThirdPartyId?: string;

@@ -348,7 +348,7 @@ ContextMenuButtonPure.defaultProps = {
   size: 16,
   isDisabled: false,
   directionX: "left",
-  isFill: false,
+  isFill: true,
 
   usePortal: true,
   displayIconBorder: false,
@@ -363,7 +363,8 @@ const compare = (
   if (
     prevProps.opened === nextProps.opened &&
     prevProps.displayType === nextProps.displayType &&
-    prevProps.isDisabled === nextProps.isDisabled
+    prevProps.isDisabled === nextProps.isDisabled &&
+    prevProps.getData === nextProps.getData
   ) {
     return true;
   }

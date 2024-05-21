@@ -47,7 +47,7 @@ import pkgFile from "../../package.json";
 export const Providers = ({
   children,
   value,
-
+  timers,
   redirectURL,
 }: {
   children: React.ReactNode;
@@ -61,6 +61,10 @@ export const Providers = ({
   React.useEffect(() => {
     if (redirectURL) window.location.replace(redirectURL);
   }, [redirectURL]);
+
+  React.useEffect(() => {
+    console.log("Timers:", { ...timers });
+  }, [timers]);
 
   const { currentDeviceType } = useDeviceType();
 

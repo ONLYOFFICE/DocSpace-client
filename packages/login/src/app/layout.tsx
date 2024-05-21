@@ -51,10 +51,17 @@ export default async function RootLayout({
 
   let redirectUrl = "";
 
+  const timers = { otherOperations: 0 };
+
+  const startOtherOperationsDate = new Date();
+
   const [settings, colorTheme] = await Promise.all([
     getSettings(),
     getColorTheme(),
   ]);
+
+  timers.otherOperations =
+    new Date().getTime() - startOtherOperationsDate.getTime();
 
   if (settings === "access-restricted") redirectUrl = `/${settings}`;
 
@@ -118,6 +125,7 @@ export default async function RootLayout({
               systemTheme: systemTheme?.value as ThemeKeys,
             }}
             redirectURL={redirectUrl}
+            timers={timers}
           >
             <Toast isSSR />
             {children}

@@ -141,6 +141,16 @@ const StyledLinkRow = styled.div`
   }
 `;
 
+const ROOMS_ITEM_HEADER_HEIGHT = "80px";
+
+export const StyledPublicRoomBarContainer = styled.div`
+  position: sticky;
+  top: ${ROOMS_ITEM_HEADER_HEIGHT};
+  background: ${(props) => props.theme.backgroundColor};
+  overflow: hidden;
+  z-index: 1;
+`;
+
 StyledLinkRow.defaultProps = { theme: Base };
 
 export { StyledCrossIcon, LinksBlock, StyledLinkRow };

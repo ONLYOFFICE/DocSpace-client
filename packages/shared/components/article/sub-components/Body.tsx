@@ -31,7 +31,7 @@ const ArticleBody = ({ children }: { children: React.ReactNode }) => {
   return (
     <Scrollbar
       className="article-body__scrollbar"
-      scrollclass="article-scroller"
+      scrollClass="article-scroller"
     >
       {children}
     </Scrollbar>

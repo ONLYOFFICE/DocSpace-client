@@ -87,8 +87,6 @@ const useTheme = ({ colorTheme, systemTheme, i18n }: UseThemeProps) => {
 
     const interfaceDirection = i18n?.dir ? i18n.dir() : "ltr";
 
-    console.log("====", { ...currentColorTheme });
-
     if (SYSTEM_THEME === ThemeKeys.BaseStr) {
       setTheme({
         ...Base,
@@ -139,8 +137,6 @@ const useTheme = ({ colorTheme, systemTheme, i18n }: UseThemeProps) => {
       mediaQuery.removeEventListener("change", getUserTheme);
     };
   }, [getUserTheme]);
-
-  console.log({ ...theme.currentColorScheme });
 
   return { theme, currentColorTheme };
 };

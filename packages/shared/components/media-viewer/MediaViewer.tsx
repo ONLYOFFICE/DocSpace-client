@@ -303,6 +303,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
           break;
 
         case KeyboardEventKeys.Escape:
+          event.stopPropagation();
           if (!deleteDialogVisible) onClose?.();
           break;
 

@@ -24,9 +24,58 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { createContext } from "react";
+import { useState, useCallback } from "react";
+import debounce from "lodash.debounce";
 
-const LayoutContext = createContext({});
+import { Label } from "@docspace/shared/components/label";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 
-export const LayoutContextProvider = LayoutContext.Provider;
-export const LayoutContextConsumer = LayoutContext.Consumer;
+import { ColumnContainer } from "../presets/StyledPresets";
+
+export const SearchTerm = ({ t, config, setConfig }) => {
+  const [value, setValue] = useState(config.filter.filterValue);
+
+  const debouncedSetConfig = useCallback(
+    debounce((value) => {
+      setConfig((config) => ({
+        ...config,
+        filter: { ...config.filter, filterValue: value },
+      }));
+    }, 500),
+    [setConfig],
+  );
+
+  const onChangeSearch = (e) => {
+    setValue(e.target.value);
+    debouncedSetConfig(e.target.value);
+  };
+
+  const onChangeWithSubfolders = () => {
+    setConfig((config) => ({
+      ...config,
+      withSubfolders: !config.withSubfolders,
+    }));
+  };
+
+  return (
+    <>
+      <Label className="label" text={t("SearchTerm")} />
+      <ColumnContainer>
+        <TextInput
+          scale
+          onChange={onChangeSearch}
+          placeholder={t("Common:Search")}
+          value={value}
+          tabIndex={5}
+        />
+        <Checkbox
+          className="checkbox"
+          label={t("Files:WithSubfolders")}
+          onChange={onChangeWithSubfolders}
+          isChecked={config.withSubfolders}
+        />
+      </ColumnContainer>
+    </>
+  );
+};

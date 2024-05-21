@@ -49,6 +49,7 @@ const FilterButton = ({
   id,
   title,
   userId,
+  disableThirdParty,
 }: FilterButtonProps) => {
   const [showFilterBlock, setShowFilterBlock] = React.useState(false);
 
@@ -84,6 +85,7 @@ const FilterButton = ({
           isGroupsAccounts={isGroupsAccounts}
           isInsideGroup={isInsideGroup}
           userId={userId}
+          disableThirdParty={disableThirdParty}
         />
       )}
     </>

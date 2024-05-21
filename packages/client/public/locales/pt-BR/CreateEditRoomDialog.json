@@ -9,8 +9,6 @@
   "DisableRoomQuota": "Desativar cota para esta sala",
   "FillingFormsRoomDescription": "Crie, compartilhe e preencha modelos de documentos ou trabalhe com as predefinições prontas para criar rapidamente documentos de qualquer tipo.",
   "FillingFormsRoomTitle": "Sala de preenchimento de formulários",
-  "FormRoomDescription": "Compartilhe formulários com qualquer pessoa e reúna os formulários completos na pasta Completo. Os usuários podem preencher qualquer formulário várias vezes, criando arquivos finais separados. Nas salas de formulário Básico, não é possível adicionar várias funções de usuário aos formulários.",
-  "FormRoomTitle": "Sala de formulário básico",
   "Icon": "Ícone",
   "MakeRoomPrivateDescription": "Todos os arquivos nesta sala serão criptografados.",
   "MakeRoomPrivateLimitationsWarningDescription": "Com esse recurso, você pode convidar apenas usuários existentes do DocSpace. Depois de criar uma sala, você não poderá alterar a lista de usuários.",

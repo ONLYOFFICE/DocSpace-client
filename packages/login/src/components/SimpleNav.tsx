@@ -28,12 +28,11 @@
 "use client";
 
 import React from "react";
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 
 import { mobile } from "@docspace/shared/utils/device";
-import { getLogoFromPath, getLogoUrl } from "@docspace/shared/utils/common";
-import { Base } from "@docspace/shared/themes";
-import { TWhiteLabel } from "@docspace/shared/utils/whiteLabelHelper";
+import { getLogoUrl } from "@docspace/shared/utils/common";
+import { Base, Dark } from "@docspace/shared/themes";
 import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
 
 const StyledSimpleNav = styled.div<{ isError: boolean }>`
@@ -56,20 +55,25 @@ const StyledSimpleNav = styled.div<{ isError: boolean }>`
 
 StyledSimpleNav.defaultProps = { theme: Base };
 
-interface SimpleNavProps {}
+interface SimpleNavProps {
+  systemTheme: ThemeKeys;
+}
 
-const SimpleNav = ({}: SimpleNavProps) => {
-  const theme = useTheme();
+const SimpleNav = ({ systemTheme }: SimpleNavProps) => {
+  const isDark = systemTheme === ThemeKeys.DarkStr;
+  const logoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, isDark);
 
-  const logoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme?.isBase);
-
-  const isError =
-    typeof window !== "undefined"
-      ? window?.location?.pathname === "/login/error"
-      : false;
+  const isError = false;
+  typeof window !== "undefined"
+    ? window?.location?.pathname === "/login/error"
+    : false;
 
   return (
-    <StyledSimpleNav id="login-header" isError={isError}>
+    <StyledSimpleNav
+      id="login-header"
+      isError={isError}
+      theme={isDark ? Dark : Base}
+    >
       <img src={logoUrl} alt="logo-url" />
     </StyledSimpleNav>
   );

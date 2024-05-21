@@ -93,6 +93,7 @@ export const ImageViewer = ({
   contextModel,
   errorTitle,
   devices,
+  isPublicFile,
 }: ImageViewerProps) => {
   const imgRef = useRef<HTMLImageElement>(null);
   const imgWrapperRef = useRef<HTMLDivElement>(null);
@@ -523,7 +524,7 @@ export const ImageViewer = ({
               : dx,
           y: dy,
           opacity:
-            style.scale.get() === 1 && !isDesktop && mdy > 0
+            style.scale.get() === 1 && !isDesktop && mdy > 0 && !isPublicFile
               ? imgRef.current.height / 10 / mdy
               : style.opacity.get(),
           immediate: true,
@@ -541,7 +542,7 @@ export const ImageViewer = ({
           cancel();
         }
 
-        if (style.scale.get() === 1 && !isDesktop) {
+        if (style.scale.get() === 1 && !isDesktop && !isPublicFile) {
           if (mdx < -imgRef.current.width / 4) {
             return onNext?.();
           }

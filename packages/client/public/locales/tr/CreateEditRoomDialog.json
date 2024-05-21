@@ -9,8 +9,6 @@
   "DisableRoomQuota": "Bu oda için kotayı devre dışı bırak",
   "FillingFormsRoomDescription": "Belge şablonları oluşturun, paylaşın ve doldurun veya her türden belgeyi hızla oluşturmak için hazır ön ayarlarla çalışın.",
   "FillingFormsRoomTitle": "Doldurma formları odası",
-  "FormRoomDescription": "Formları herkesle paylaşın ve tamamlanan formları Tamamlandı klasöründe toplayın. Kullanıcılar herhangi bir formu birden fazla kez doldurarak ayrı nihai dosyalar oluşturabilir. Basic form odalarında formlara birden fazla kullanıcı rolü ekleyemezsiniz.",
-  "FormRoomTitle": "Basic form odası",
   "Icon": "Simge",
   "MakeRoomPrivateDescription": "Bu odadaki tüm dosyalar şifrelenecektir.",
   "MakeRoomPrivateLimitationsWarningDescription": "Bu özellik ile sadece mevcut DocSpace kullanıcılarını davet edebilirsiniz. Bir oda oluşturduktan sonra kullanıcı listesini değiştiremezsiniz.",

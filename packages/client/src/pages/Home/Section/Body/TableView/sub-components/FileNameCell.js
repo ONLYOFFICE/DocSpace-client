@@ -27,6 +27,7 @@
 import React from "react";
 import { Link } from "@docspace/shared/components/link";
 import { Checkbox } from "@docspace/shared/components/checkbox";
+import { classNames } from "@docspace/shared/utils";
 import { TableCell } from "@docspace/shared/components/table";
 import { Loader } from "@docspace/shared/components/loader";
 
@@ -63,7 +64,10 @@ const FileNameCell = ({
         />
       ) : (
         <TableCell
-          className="table-container_element-wrapper"
+          className={classNames("table-container_element-wrapper", {
+            ["table-container-index"]: isIndexEditingMode,
+          })}
+          style={{background: "none !important"}}
           hasAccess={true}
           checked={checked}
         >

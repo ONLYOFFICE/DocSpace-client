@@ -104,6 +104,25 @@ const StyledTableRow = styled(TableRow)`
         position: relative;
       `}
   }
+  
+   .table-container_file-name-cell {
+    
+    .table-container-index {
+      background: ${(props) => `${props.theme.filesSection.tableView.row.indexFixed} !important`};
+    }
+
+  } 
+
+   &:hover {
+    .table-container_file-name-cell {
+    
+    .table-container-index {
+      background: ${(props) => `${props.theme.filesSection.tableView.row.indexFixed} !important`};
+    }
+
+    }
+    } 
+
 
   ${(props) =>
     props.isRoom &&
@@ -115,12 +134,13 @@ const StyledTableRow = styled(TableRow)`
     `}
   ${(props) =>
     !props.isDragging &&
+    !props.isIndexUpdated &&
     css`
       :hover {
         .table-container_cell {
           cursor: pointer;
-          background: ${(props) =>
-            `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+          background: ${(props) => props.isIndexEditingMode ?
+            `${props.theme.filesSection.tableView.row.indexActive} !important` : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
         }
         .table-container_file-name-cell,
         .table-container_index-cell {
@@ -150,9 +170,49 @@ const StyledTableRow = styled(TableRow)`
         }
       }
     `}
+
+    ${(props) =>
+    props.isIndexUpdated &&
+    css`
+      .table-container_cell {
+        cursor: pointer;
+        background: ${(props) =>
+          `${props.theme.filesSection.tableView.row.indexUpdate} !important`};
+      }
+      .table-container_file-name-cell {
+        margin-right: 0px;
+        padding-right: 0px;
+      }
+      .table-container_index-cell {
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-right: -24px;
+                padding-right: 24px;
+              `
+            : css`
+                margin-left: -24px;
+                padding-left: 24px;
+              `}
+      }
+
+      .table-container_row-context-menu-wrapper {
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-left: -20px;
+                padding-left: 20px;
+              `
+            : css`
+                margin-right: -20px;
+                padding-right: 20px;
+              `}
+      }
+    `}
   .table-container_cell {
     background: ${(props) =>
       (props.checked || props.isActive) &&
+      !props.isIndexUpdated &&
       `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
     cursor: ${(props) =>
       !props.isThirdPartyFolder &&

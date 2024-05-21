@@ -74,6 +74,7 @@ const FilesTableRow = (props) => {
     isRecentTab,
     canDrag,
     onEditIndex,
+    isIndexUpdated,
   } = props;
   const { acceptBackground, background } = theme.dragAndDrop;
 
@@ -185,7 +186,8 @@ const FilesTableRow = (props) => {
         onHideContextMenu={onHideContextMenu}
         isThirdPartyFolder={item.isThirdPartyFolder}
         onDoubleClick={isIndexEditingMode ? () => {} : onDoubleClick}
-        checked={checkedProps}
+        checked={checkedProps || isIndexUpdated}
+        isIndexUpdated={isIndexUpdated}
         showHotkeyBorder={showHotkeyBorder}
         title={
           item.isFolder

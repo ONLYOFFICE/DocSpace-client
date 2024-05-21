@@ -25,31 +25,31 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
-import PropTypes from "prop-types";
 import { observer, inject } from "mobx-react";
 
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 
-import { StyledPreparationPortal } from "./StyledPreparationPortal";
+import { StyledPreparationPortal } from "./PreparationPortal.styled";
 import { Text } from "../../components/text";
 import { getRestoreProgress } from "../../api/portal";
 import { ColorTheme, ThemeId } from "../../components/color-theme";
+import { IPreparationPortal } from "./PreparationPortal.types";
 
-const baseSize = 1073741824; //number of bytes in one GB
+const baseSize = 1073741824; // number of bytes in one GB
 const unSizeMultiplicationFactor = 3;
 const baseFirstMultiplicationFactor = 700;
 const baseSecondMultiplicationFactor = 400;
 const baseThirdMultiplicationFactor = 180;
-const firstBound = 10,
-  secondBound = 63,
-  thirdBound = 98;
+const firstBound = 10;
+const secondBound = 63;
+const thirdBound = 98;
 
-let timerId = null,
-  progressTimerId = null,
-  prevProgress;
-let requestsCount = 0;
+let timerId: ReturnType<typeof setInterval> | null;
+let progressTimerId: ReturnType<typeof setInterval> | null;
+let prevProgress: number = 0;
+let requestsCount: number = 0;
 
-const PreparationPortal = (props) => {
+const PreparationPortal = (props: IPreparationPortal) => {
   const {
     multiplicationFactor,
     t,
@@ -63,8 +63,8 @@ const PreparationPortal = (props) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const clearAllIntervals = () => {
-    clearInterval(timerId);
-    clearInterval(progressTimerId);
+    if (timerId) clearInterval(timerId);
+    if (progressTimerId) clearInterval(progressTimerId);
 
     progressTimerId = null;
     timerId = null;
@@ -76,8 +76,8 @@ const PreparationPortal = (props) => {
     }, 5000);
   };
 
-  const reachingFirstBoundary = (percent) => {
-    let progress = percent;
+  const reachingFirstBoundary = (percentage: number) => {
+    let progress = percentage;
     const delay = baseFirstMultiplicationFactor * multiplicationFactor;
 
     if (progressTimerId) return;
@@ -87,13 +87,13 @@ const PreparationPortal = (props) => {
 
       if (progress !== firstBound) setPercent(progress);
       else {
-        clearInterval(progressTimerId);
+        if (progressTimerId) clearInterval(progressTimerId);
         progressTimerId = null;
       }
     }, delay);
   };
-  const reachingSecondBoundary = (percent) => {
-    let progress = percent;
+  const reachingSecondBoundary = (percentage: number) => {
+    let progress = percentage;
 
     const delay = baseSecondMultiplicationFactor * multiplicationFactor;
 
@@ -104,14 +104,14 @@ const PreparationPortal = (props) => {
 
       if (progress !== secondBound) setPercent(progress);
       else {
-        clearInterval(progressTimerId);
+        if (progressTimerId) clearInterval(progressTimerId);
         progressTimerId = null;
       }
     }, delay);
   };
 
-  const reachingThirdBoundary = (percent) => {
-    let progress = percent;
+  const reachingThirdBoundary = (percentage: number) => {
+    let progress = percentage;
     const delay = baseThirdMultiplicationFactor * multiplicationFactor;
     if (progressTimerId) return;
 
@@ -120,18 +120,22 @@ const PreparationPortal = (props) => {
 
       if (progress < thirdBound) setPercent(progress);
       else {
-        clearInterval(progressTimerId);
+        if (progressTimerId) clearInterval(progressTimerId);
         progressTimerId = null;
       }
     }, delay);
   };
+
   useEffect(() => {
     if (percent >= firstBound) {
       if (percent < secondBound) {
         reachingSecondBoundary(percent);
         return;
-      } else reachingThirdBoundary(percent);
+      }
+
+      reachingThirdBoundary(percent);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [percent]);
 
   const getIntervalProgress = async () => {
@@ -145,8 +149,8 @@ const PreparationPortal = (props) => {
       }
 
       if (response.error) {
-        clearInterval(timerId);
-        clearInterval(progressTimerId);
+        if (timerId) clearInterval(timerId);
+        if (progressTimerId) clearInterval(progressTimerId);
 
         progressTimerId = null;
         timerId = null;
@@ -160,7 +164,7 @@ const PreparationPortal = (props) => {
       if (currProgress > 0 && prevProgress !== currProgress) {
         setPercent(currProgress);
 
-        clearInterval(progressTimerId);
+        if (progressTimerId) clearInterval(progressTimerId);
         progressTimerId = null;
       }
 
@@ -171,14 +175,14 @@ const PreparationPortal = (props) => {
         clearLocalStorage();
         returnToPortal();
       }
-    } catch (error) {
+    } catch (error: any) {
       clearAllIntervals();
       setErrorMessage(error);
     }
   };
 
   const getRecoveryProgress = async () => {
-    const errorMessage = (error) => {
+    const getMessage = (error: any) => {
       if (typeof error !== "object") return error;
 
       return (
@@ -196,10 +200,11 @@ const PreparationPortal = (props) => {
         setErrorMessage(t("Common:ErrorInternalServer"));
         return;
       }
-      const { error, progress } = response;
+
+      const { progress, error } = response;
 
       if (error) {
-        setErrorMessage(response.error);
+        setErrorMessage(error);
 
         return;
       }
@@ -213,17 +218,18 @@ const PreparationPortal = (props) => {
       }
 
       setPercent(progress);
-    } catch (err) {
+    } catch (err: any) {
       const status = err?.response?.status;
       const needCreationTableTime = status === 404;
 
       if (needCreationTableTime && requestsCount < 3) {
+        // eslint-disable-next-line no-plusplus
         requestsCount++;
         getRecoveryProgress();
         return;
       }
 
-      setErrorMessage(errorMessage(err));
+      setErrorMessage(getMessage(err));
     }
   };
   useEffect(() => {
@@ -234,6 +240,7 @@ const PreparationPortal = (props) => {
     return () => {
       clearAllIntervals();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const headerText = errorMessage
@@ -241,7 +248,7 @@ const PreparationPortal = (props) => {
     : t("Common:PreparationPortalTitle");
 
   return (
-    <StyledPreparationPortal errorMessage={errorMessage} isDialog={isDialog}>
+    <StyledPreparationPortal errorMessage={!!errorMessage} isDialog={isDialog}>
       <ErrorContainer
         headerText={withoutHeader ? "" : headerText}
         style={style}
@@ -251,15 +258,10 @@ const PreparationPortal = (props) => {
           {errorMessage ? (
             <Text className="preparation-portal_error">{`${errorMessage}`}</Text>
           ) : (
-            <ColorTheme
-              themeId={ThemeId.Progress}
-              percent={percent}
-              errorMessage={errorMessage}
-              className="preparation-portal_body-wrapper"
-            >
+            <ColorTheme themeId={ThemeId.Progress} percent={percent}>
               <div className="preparation-portal_progress">
                 <div className="preparation-portal_progress-bar">
-                  <div className="preparation-portal_progress-line"></div>
+                  <div className="preparation-portal_progress-line" />
                 </div>
                 <Text className="preparation-portal_percent">{`${percent} %`}</Text>
               </div>
@@ -274,7 +276,7 @@ const PreparationPortal = (props) => {
   );
 };
 
-const PreparationPortalWrapper = inject(({ backup }) => {
+export default inject(({ backup }) => {
   const { backupSize, clearLocalStorage } = backup;
 
   const multiplicationFactor = backupSize
@@ -288,15 +290,3 @@ const PreparationPortalWrapper = inject(({ backup }) => {
 })(
   withTranslation(["PreparationPortal", "Common"])(observer(PreparationPortal)),
 );
-
-PreparationPortal.propTypes = {
-  withoutHeader: PropTypes.bool,
-  isDialog: PropTypes.bool,
-};
-
-PreparationPortal.defaultProps = {
-  withoutHeader: false,
-  isDialog: false,
-};
-
-export default (props) => <PreparationPortalWrapper {...props} />;

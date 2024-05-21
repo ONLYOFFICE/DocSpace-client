@@ -316,7 +316,7 @@ const LoginForm = ({
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Enter") {
         if (isModalOpen) return;
-        console.log("submit");
+
         onSubmit();
       }
     };

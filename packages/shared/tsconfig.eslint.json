@@ -1,0 +1,33 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    // 👇️ add all the directories and files
+    // that you want to lint here
+    "utils",
+    "components",
+    "enums",
+    "constants",
+    "themes",
+    "types",
+    "skeletons",
+    "HOC",
+    "hooks",
+    "api",
+    "sw",
+    "selectors",
+    "store",
+    "dialogs",
+    "pages",
+    // add all files in which you see
+    // the "parserOptions.project" error
+    ".eslintrc.cjs",
+    "__mocks__",
+    "jest.config.ts",
+    ".storybook",
+    "babel.config.ts",
+    "index.d.ts",
+    "tsconfig.eslint.json",
+    "routes",
+    "polyfills",
+  ]
+}

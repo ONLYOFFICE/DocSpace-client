@@ -1,4 +1,30 @@
-﻿import CloudServicesGoogleDriveReactSvgUrl from "PUBLIC_DIR/images/cloud.services.google.drive.react.svg?url";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import CloudServicesGoogleDriveReactSvgUrl from "PUBLIC_DIR/images/cloud.services.google.drive.react.svg?url";
 import CloudServicesBoxReactSvgUrl from "PUBLIC_DIR/images/cloud.services.box.react.svg?url";
 import CloudServicesDropboxReactSvgUrl from "PUBLIC_DIR/images/cloud.services.dropbox.react.svg?url";
 import CloudServicesOnedriveReactSvgUrl from "PUBLIC_DIR/images/cloud.services.onedrive.react.svg?url";
@@ -7,14 +33,13 @@ import CloudServicesYandexReactSvgUrl from "PUBLIC_DIR/images/cloud.services.yan
 import CloudServicesNextcloudReactSvgUrl from "PUBLIC_DIR/images/cloud.services.nextcloud.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
 import CloudServicesWebdavReactSvgUrl from "PUBLIC_DIR/images/cloud.services.webdav.react.svg?url";
-import authStore from "@docspace/common/store/AuthStore";
-import { FileType, RoomsType } from "@docspace/common/constants";
+import { authStore, settingsStore } from "@docspace/shared/store";
+import { FileType, RoomsType } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
-import { combineUrl, toUrlParams } from "@docspace/common/utils";
-import { addFileToRecentlyViewed } from "@docspace/common/api/files";
-import i18n from "./i18n";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import i18n from "../i18n";
 
-import { request } from "@docspace/common/api/client";
+import { request } from "@docspace/shared/api/client";
 
 export const getFileTypeName = (fileType) => {
   switch (fileType) {
@@ -35,6 +60,7 @@ export const getFileTypeName = (fileType) => {
     case FileType.Document:
     case FileType.OFormTemplate:
     case FileType.OForm:
+    case FileType.PDF:
       return i18n.t("Files:Document");
     default:
       return i18n.t("Files:Folder");
@@ -60,11 +86,16 @@ export const getDefaultRoomName = (room, t) => {
 
     case RoomsType.PublicRoom:
       return t("Files:PublicRoom");
+
+    case RoomsType.VirtualDataRoom:
+      return t("Files:VirtualDataRoom");
+    case RoomsType.FormRoom:
+      return t("Files:FormRoom");
   }
 };
 
 export const setDocumentTitle = (subTitle = null) => {
-  const { isAuthenticated, settingsStore, product: currentModule } = authStore;
+  const { isAuthenticated, product: currentModule } = authStore;
   const { organizationName } = settingsStore;
 
   let title;
@@ -91,7 +122,7 @@ export const getDefaultFileName = (format) => {
       return i18n.t("Common:NewSpreadsheet");
     case "pptx":
       return i18n.t("Common:NewPresentation");
-    case "docxf":
+    case "pdf":
       return i18n.t("Common:NewMasterForm");
     default:
       return i18n.t("Common:NewFolder");
@@ -100,94 +131,6 @@ export const getDefaultFileName = (format) => {
 
 export const getUnexpectedErrorText = () => {
   return i18n.t("Common:UnexpectedError");
-};
-
-export const addFileToRecent = async (fileId) => {
-  try {
-    await addFileToRecentlyViewed(fileId);
-    console.log("Pushed to recently viewed");
-  } catch (e) {
-    console.error(e);
-  }
-};
-export const openDocEditor = async (
-  id,
-  providerKey = null,
-  tab = null,
-  url = null,
-  isPrivacy,
-  isPreview = false,
-  shareKey = null
-) => {
-  if (!providerKey && id && !isPrivacy && !shareKey) {
-    await addFileToRecent(id);
-  }
-
-  const share = shareKey ? `&share=${shareKey}` : "";
-  const preview = isPreview ? "&action=view" : "";
-
-  if (!url && id) {
-    url = combineUrl(
-      window.DocSpaceConfig?.proxy?.url,
-      config.homepage,
-      `/doceditor?fileId=${encodeURIComponent(id)}${preview}${share}`
-    );
-  }
-
-  if (tab) {
-    if (url) {
-      tab.location = url.indexOf("share") !== -1 ? url : `${url}${share}`;
-    } else {
-      tab.close();
-    }
-  } else {
-    window.open(
-      url,
-      window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self"
-    );
-  }
-
-  return Promise.resolve();
-};
-
-export const getDataSaveAs = async (params) => {
-  try {
-    const data = await request({
-      baseURL: combineUrl(window.DocSpaceConfig?.proxy?.url),
-      method: "get",
-      url: `/filehandler.ashx?${params}`,
-      responseType: "text",
-    });
-
-    return data;
-  } catch (e) {
-    console.error("error");
-  }
-};
-export const SaveAs = (title, url, folderId, openNewTab) => {
-  const options = {
-    action: "create",
-    fileuri: url,
-    title: title,
-    folderid: folderId,
-    response: openNewTab ? null : "message",
-  };
-
-  const params = toUrlParams(options, true);
-  if (!openNewTab) {
-    return getDataSaveAs(params);
-  } else {
-    const handlerUrl = combineUrl(
-      window.DocSpaceConfig?.proxy?.url,
-      config.homepage,
-      window["AscDesktopEditor"] !== undefined //FIX Save as with open new tab on DesktopEditors
-        ? "/Products/Files/HttpHandlers/"
-        : "",
-      `/filehandler.ashx?${params}`
-    );
-    //console.log({ handlerUrl });
-    window.open(handlerUrl, "_blank");
-  }
 };
 
 export const connectedCloudsTitleTranslation = (key, t) => {
@@ -285,11 +228,4 @@ export const connectedCloudsTypeIcon = (key) => {
       return CloudServicesWebdavReactSvgUrl;
     default:
   }
-};
-
-export const getTitleWithoutExtension = (item, fromTemplate) => {
-  const titleWithoutExst = item.title.split(".").slice(0, -1).join(".");
-  return titleWithoutExst && item.fileExst && !fromTemplate
-    ? titleWithoutExst
-    : item.title;
 };

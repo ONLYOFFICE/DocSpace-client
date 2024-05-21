@@ -5,6 +5,7 @@
   "HotkeysChangeView": "Переключання між поданням сітки та поданням списку",
   "HotkeysClearAll": "Скасувати весь вибір",
   "HotkeysClose": "Закрити/Скасувати дію",
+  "HotkeysCopySelected": "Копіювати вибрані елементи до буфера обміну",
   "HotkeysCreateDocument": "Створити документ",
   "HotkeysCreateFolder": "Створити папку",
   "HotkeysCreateForm": "Створити пустий із шаблону",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "Створити презентацію",
   "HotkeysCreateSpreadsheet": "Створити таблицю",
   "HotkeysCreatingObjects": "Створення елементів",
+  "HotkeysCutSelected": "Вирізати вибрані елементи до буфера обміну",
   "HotkeysEnterKey": "Ввести",
   "HotkeysExtendSelectionDown": "Розширити виділення вниз",
   "HotkeysExtendSelectionLeft": "Розширити виділення ліворуч",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "Перейти вгору, не змінюючи вибір",
   "HotkeysNavigation": "Навігація",
   "HotkeysOpen": "Відкрити вибраний елемент/Підтвердити дію",
+  "HotkeysPasteSelected": "Вставити вибрані елементи із буфера обміну",
   "HotkeysPlayPause": "Відтворити/Призупинити",
   "HotkeysRedoLastUndoneAction": "Повторити останню скасовану дію",
   "HotkeysRemove": "Видалити вибрані елементи",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "Пробіл",
   "HotkeysUndoLastAction": "Скасувати останню дію",
   "HotkeysUploadFile": "Завантажити файл",
-  "HotkeysUploadingObjects": "Передавання елементів"
+  "HotkeysUploadingObjects": "Передавання елементів",
+  "HotkeysZoomIn": "Збільшити",
+  "HotkeysZoomOut": "Зменшити"
 }

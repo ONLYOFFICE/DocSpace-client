@@ -1,11 +1,37 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { EditRoomDialog } from "../dialogs";
-import { Encoder } from "@docspace/common/utils/encoder";
-import api from "@docspace/common/api";
-import { getRoomInfo } from "@docspace/common/api/rooms";
-import toastr from "@docspace/components/toast/toastr";
+import { Encoder } from "@docspace/shared/utils/encoder";
+import api from "@docspace/shared/api";
+import { getRoomInfo } from "@docspace/shared/api/rooms";
+import { toastr } from "@docspace/shared/components/toast";
 
 const EditRoomEvent = ({
   addActiveItems,
@@ -44,7 +70,11 @@ const EditRoomEvent = ({
   updateLogoPathsCacheBreaker,
   removeLogoPaths,
 
-  reloadInfoPanelSelection,
+  updateInfoPanelSelection,
+  changeRoomOwner,
+
+  defaultRoomsQuota,
+  isDefaultRoomsQuotaSet,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
@@ -75,6 +105,11 @@ const EditRoomEvent = ({
       zoom: 1,
     },
     roomOwner: item.createdBy,
+    indexing: item.indexing,
+
+    ...(isDefaultRoomsQuotaSet && {
+      quota: item.quotaLimit,
+    }),
   };
 
   const updateRoom = (oldRoom, newRoom) => {
@@ -93,9 +128,18 @@ const EditRoomEvent = ({
   };
 
   const onSave = async (roomParams) => {
+    const quotaLimit = roomParams?.quota || item.quotaLimit;
+
     const editRoomParams = {
       title: roomParams.title || t("Files:NewRoom"),
+      ...(isDefaultRoomsQuotaSet && {
+        quota: +quotaLimit,
+      }),
     };
+
+    const isTitleChanged = roomParams?.title !== item.title;
+    const isQuotaChanged = quotaLimit !== item.quotaLimit;
+    const isOwnerChanged = roomParams?.roomOwner?.id !== item.createdBy.id;
 
     const tags = roomParams.tags.map((tag) => tag.name);
     const newTags = roomParams.tags.filter((t) => t.isNew).map((t) => t.name);
@@ -104,19 +148,43 @@ const EditRoomEvent = ({
     const uploadLogoData = new FormData();
     uploadLogoData.append(0, roomParams.icon.uploadedFile);
 
+    let room = null;
+
     try {
       setIsLoading(true);
 
-      let room = await editRoom(item.id, editRoomParams);
+      room =
+        isTitleChanged || isQuotaChanged
+          ? await editRoom(item.id, editRoomParams)
+          : item;
 
       room.isLogoLoading = true;
 
+      const createTagActions = [];
       for (let i = 0; i < newTags.length; i++) {
-        await createTag(newTags[i]);
+        createTagActions.push(createTag(newTags[i]));
       }
+      await Promise.all(createTagActions);
 
-      room = await addTagsToRoom(room.id, tags);
-      room = await removeTagsFromRoom(room.id, removedTags);
+      const actions = [];
+      if (isOwnerChanged) {
+        actions.push(changeRoomOwner(t, roomParams?.roomOwner?.id));
+        room.createdBy = {
+          ...room.createdBy,
+          id: roomParams.roomOwner.id,
+          avatarSmall: roomParams.roomOwner.avatar,
+          hasAvatar: roomParams.roomOwner.hasAvatar,
+          displayName: roomParams.roomOwner.label,
+        };
+      }
+      if (tags.length) {
+        actions.push(addTagsToRoom(room.id, tags));
+        room.tags = tags;
+      }
+      if (removedTags.length)
+        actions.push(removeTagsFromRoom(room.id, removedTags));
+
+      await Promise.all(actions);
 
       if (!!item.logo.original && !roomParams.icon.uploadedFile) {
         room = await removeLogoFromRoom(room.id);
@@ -125,7 +193,7 @@ const EditRoomEvent = ({
       if (roomParams.icon.uploadedFile) {
         updateRoom(item, {
           ...room,
-          logo: { big: item.logo.small },
+          logo: { big: item.logo.original },
         });
 
         addActiveItems(null, [room.id]);
@@ -133,28 +201,37 @@ const EditRoomEvent = ({
         const response = await uploadRoomLogo(uploadLogoData);
         const url = URL.createObjectURL(roomParams.icon.uploadedFile);
         const img = new Image();
-        img.onload = async () => {
-          const { x, y, zoom } = roomParams.icon;
 
-          try {
-            room = await addLogoToRoom(room.id, {
-              tmpFile: response.data,
-              ...calculateRoomLogoParams(img, x, y, zoom),
-            });
-          } catch (e) {
-            toastr.error(e);
-          }
+        const promise = new Promise((resolve) => {
+          img.onload = async () => {
+            const { x, y, zoom } = roomParams.icon;
 
-          !withPaging && updateRoom(item, room);
+            try {
+              room = await addLogoToRoom(room.id, {
+                tmpFile: response.data,
+                ...calculateRoomLogoParams(img, x, y, zoom),
+              });
+            } catch (e) {
+              toastr.error(e);
+            }
 
-          reloadInfoPanelSelection();
-          URL.revokeObjectURL(img.src);
-          setActiveFolders([]);
-        };
-        img.src = url;
+            !withPaging && updateRoom(item, room);
+            // updateInfoPanelSelection();
+            URL.revokeObjectURL(img.src);
+            setActiveFolders([]);
+            resolve();
+          };
+
+          img.src = url;
+        });
+
+        await promise;
       } else {
-        !withPaging && updateRoom(item, room);
-        reloadInfoPanelSelection();
+        !withPaging &&
+          updateRoom(item, {
+            ...room,
+          });
+        // updateInfoPanelSelection();
       }
     } catch (err) {
       console.log(err);
@@ -165,13 +242,14 @@ const EditRoomEvent = ({
         updateEditedSelectedRoom(editRoomParams.title, tags);
         if (item.logo.original && !roomParams.icon.uploadedFile) {
           removeLogoPaths();
-          reloadInfoPanelSelection();
+          // updateInfoPanelSelection();
         } else if (!item.logo.original && roomParams.icon.uploadedFile)
           addDefaultLogoPaths();
         else if (item.logo.original && roomParams.icon.uploadedFile)
           updateLogoPathsCacheBreaker();
       }
 
+      updateInfoPanelSelection(room);
       setIsLoading(false);
       onClose();
     }
@@ -185,14 +263,13 @@ const EditRoomEvent = ({
         (buf) =>
           new File([buf], "fetchedFile", {
             type: `image/${imgExst}`,
-          })
+          }),
       );
     setFetchedImage(file);
   }, []);
 
   useEffect(() => {
     const logo = item?.logo?.original ? item.logo.original : "";
-
     if (logo) {
       fetchLogoAction(logo);
     }
@@ -228,13 +305,15 @@ const EditRoomEvent = ({
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     tagsStore,
     filesActionsStore,
     selectedFolderStore,
     dialogsStore,
-    settingsStore,
+    filesSettingsStore,
+    infoPanelStore,
+    currentQuotaStore,
   }) => {
     const {
       editRoom,
@@ -259,12 +338,17 @@ export default inject(
       removeLogoPaths,
       updateLogoPathsCacheBreaker,
     } = selectedFolderStore;
-    const { updateCurrentFolder } = filesActionsStore;
-    const { getThirdPartyIcon } = settingsStore.thirdPartyStore;
+    const { updateCurrentFolder, changeRoomOwner } = filesActionsStore;
+    const { getThirdPartyIcon } = filesSettingsStore.thirdPartyStore;
     const { setCreateRoomDialogVisible } = dialogsStore;
-    const { withPaging } = auth.settingsStore;
-    const { reloadSelection: reloadInfoPanelSelection } = auth.infoPanelStore;
+    const { withPaging } = settingsStore;
+    const { updateInfoPanelSelection } = infoPanelStore;
+
+    const { defaultRoomsQuota, isDefaultRoomsQuotaSet } = currentQuotaStore;
+
     return {
+      defaultRoomsQuota,
+      isDefaultRoomsQuotaSet,
       addActiveItems,
       setActiveFolders,
 
@@ -296,7 +380,8 @@ export default inject(
       updateLogoPathsCacheBreaker,
       removeLogoPaths,
 
-      reloadInfoPanelSelection,
+      updateInfoPanelSelection,
+      changeRoomOwner,
     };
-  }
+  },
 )(observer(EditRoomEvent));

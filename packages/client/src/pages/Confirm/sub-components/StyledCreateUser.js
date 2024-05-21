@@ -1,46 +1,41 @@
-import styled from "styled-components";
-import Box from "@docspace/components/box";
-import { mobile, tablet } from "@docspace/components/utils/device";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const ButtonsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+import styled, { css } from "styled-components";
+import { Box } from "@docspace/shared/components/box";
+import { mobile, tablet } from "@docspace/shared/utils";
 
-  .buttonWrapper {
-    margin-bottom: 8px;
-    width: 100%;
-  }
-`;
+const DESKTOP_WIDTH = 384;
+const TABLET_WIDTH = 480;
 
-export const ConfirmContainer = styled(Box)`
-  width: 100%;
-  margin: 56px auto;
-  display: flex;
-  flex: 1fr 1fr;
-  gap: 80px;
-  flex-direction: row;
-  justify-content: center;
-
-  @media ${tablet} {
-    display: flex;
-    flex: 1fr;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-  }
+export const StyledCreateUserContent = styled.div`
+  margin: 88px auto;
 
   @media ${mobile} {
-    margin: 0 auto;
-    width: 100%;
-    flex: 1fr;
-    flex-direction: column;
-    gap: 24px;
-
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-left: 8px;`
-        : `padding-right: 8px;`}
+    margin-top: 0px;
   }
 `;
 
@@ -49,97 +44,48 @@ export const GreetingContainer = styled.div`
   flex-direction: column;
   align-items: left;
   height: 100%;
-  width: 496px;
+  width: ${DESKTOP_WIDTH}px;
+
+  margin-bottom: 32px;
 
   @media ${tablet} {
-    width: 480px;
+    width: 100%;
+    max-width: ${TABLET_WIDTH}px;
   }
 
-  @media ${mobile} {
-    width: 100%;
-  }
-
-  .greeting-title {
-    width: 100%;
-    padding-bottom: 32px;
-
-    @media ${tablet} {
+  .tooltip {
+    p {
       text-align: center;
     }
 
     @media ${mobile} {
-      padding-bottom: 24px;
+      padding: 0 25px;
     }
-  }
-
-  .greeting-block {
-    display: flex;
-    flex-direction: row;
-
-    .user-info {
-      display: flex;
-      flex-direction: column;
-
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `margin-right: 12px;`
-          : `margin-left: 12px;`}
-      justify-content: center;
-    }
-
-    .avatar {
-      height: 54px;
-      width: 54px;
-    }
-  }
-
-  .tooltip {
-    position: relative;
-    display: inline-block;
-    margin-top: 16px;
-    border: 1px solid ${(props) => props.theme.invitePage.borderColor};
-    padding: 16px;
-    border-radius: 6px;
-  }
-
-  .tooltip .tooltiptext {
-    margin: 0;
-    width: 100%;
-    white-space: pre-line;
   }
 
   .docspace-logo {
     width: 100%;
-    padding-bottom: 32px;
+    padding-bottom: 16px;
+    height: 26.56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     .injected-svg {
-      height: 44px;
-    }
-
-    @media ${tablet} {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-bottom: 40px;
+      height: 26.56px;
     }
   }
 `;
 
 export const RegisterContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  
   height: 100%;
   width: 100%;
 
   .or-label {
-    text-transform: uppercase;
     margin: 0 8px;
   }
 
-  .more-label {
-    padding-top: 18px;
-  }
 
   .line {
     display: flex;
@@ -160,14 +106,17 @@ export const RegisterContainer = styled.div`
     line-height: 0px;
     margin: 0px;
   }
-
-  .auth-form-container {
+ 
+  .auth-form-fields {
     width: 100%;
 
     .password-field{
         margin-bottom: 24px;
     }
 
+    .email-container{
+      ${(props) => props.registrationForm && "display:none"};
+    }
     @media ${tablet} {
       width: 100%;
     }
@@ -178,5 +127,50 @@ export const RegisterContainer = styled.div`
 
   .password-field-wrapper {
     width: 100%;
+  }
+
+  .greeting-container{
+    margin-bottom: 32px;
+    p{
+      text-align: center;
+    }
+    .back-sign-in-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      margin-bottom: 16px;
+      .back-button {
+        position: absolute;
+        max-width: 60px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                right: 0;
+              `
+            : css`
+                left: 0;
+              `};
+        display: flex;
+        gap: 4px;
+
+        svg {
+          ${(props) =>
+            props.theme.interfaceDirection === "rtl" &&
+            " transform: rotate(180deg)"};
+        }
+
+        p {
+          color: ${(props) => props.theme.login.backTitle.color};
+        }
+
+        p:hover {
+          cursor: pointer;
+        }
+      }
+    }
   }
 }`;

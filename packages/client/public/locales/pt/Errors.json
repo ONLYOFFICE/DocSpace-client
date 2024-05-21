@@ -1,8 +1,6 @@
 {
-  "Error401Text": "Desculpe, este recurso não está acessível de momento.",
-  "Error403Text": "Desculpe, acesso negado.",
-  "Error404Text": "Desculpe, o recurso não foi encontrado.",
   "ErrorEmptyResponse": "Resposta vazia",
-  "ErrorOfflineText": "Não foi encontrada qualquer conexão à internet",
-  "ErrorUnavailableText": "O DocSpace não está disponível"
+  "ErrorUnavailableText": "O DocSpace não está disponível",
+  "LinkDoesNotExist": "O link que você está tentando abrir não existe.",
+  "LinkHasExpired": "O link que você seguiu expirou."
 }

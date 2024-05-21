@@ -5,6 +5,7 @@
   "HotkeysChangeView": "グリッドとリスト表示の切り替え",
   "HotkeysClearAll": "全選択を解除",
   "HotkeysClose": "閉じる/アクションを元に戻す",
+  "HotkeysCopySelected": "選択した項目をクリップボードにコピー",
   "HotkeysCreateDocument": "文書を作成します",
   "HotkeysCreateFolder": "フォルダーを作成する",
   "HotkeysCreateForm": "空白フォームのテンプレートを作成",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "プレゼンテーションを作成する",
   "HotkeysCreateSpreadsheet": "スプレッドシートを作成する",
   "HotkeysCreatingObjects": "アイテムの作成",
+  "HotkeysCutSelected": "選択した項目をクリップボードにカット",
   "HotkeysEnterKey": "入力",
   "HotkeysExtendSelectionDown": "選択範囲の拡大（下）",
   "HotkeysExtendSelectionLeft": "選択範囲の拡大（左）",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "選択を変えずに移動（上）",
   "HotkeysNavigation": "ナビゲーション",
   "HotkeysOpen": "選択されているアイテムを開く/アクションを確認",
+  "HotkeysPasteSelected": "選択した項目をクリップボードにペースト",
   "HotkeysPlayPause": "再生/一時停止",
   "HotkeysRedoLastUndoneAction": "元に戻したアクションをやり直す",
   "HotkeysRemove": "選択されているアイテムを解除",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "スペース",
   "HotkeysUndoLastAction": "直前のアクションを元に戻す",
   "HotkeysUploadFile": "ファイルをアップロード",
-  "HotkeysUploadingObjects": "アイテムのアップロード"
+  "HotkeysUploadingObjects": "アイテムのアップロード",
+  "HotkeysZoomIn": "拡大",
+  "HotkeysZoomOut": "縮小"
 }

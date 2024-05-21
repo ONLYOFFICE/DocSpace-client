@@ -1,16 +1,43 @@
-﻿import MediaDownloadReactSvgUrl from "PUBLIC_DIR/images/media.download.react.svg?url";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import MediaDownloadReactSvgUrl from "PUBLIC_DIR/images/media.download.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import React, { useState, useRef, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import copy from "copy-to-clipboard";
 
-import toastr from "@docspace/components/toast/toastr";
-import { objectToGetParams } from "@docspace/common/utils";
+import { toastr } from "@docspace/shared/components/toast";
+import { objectToGetParams } from "@docspace/shared/utils/common";
 
-import InputBlock from "@docspace/components/input-block";
-import IconButton from "@docspace/components/icon-button";
-import DropDown from "@docspace/components/drop-down";
-import DropDownItem from "@docspace/components/drop-down-item";
+import { InputBlock } from "@docspace/shared/components/input-block";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { DropDown } from "@docspace/shared/components/drop-down";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 
 import AccessSelector from "./AccessSelector";
 
@@ -22,7 +49,6 @@ import {
   StyledToggleButton,
   StyledDescription,
 } from "../StyledInvitePanel";
-import { RoomsType, ShareAccessRights } from "@docspace/common/constants";
 
 const ExternalLinks = ({
   t,
@@ -61,10 +87,7 @@ const ExternalLinks = ({
   };
 
   const editLink = async () => {
-    const type =
-      roomType === RoomsType.PublicRoom
-        ? ShareAccessRights.RoomManager
-        : ShareAccessRights.ReadOnly;
+    const type = getDefaultAccessUser(roomType);
 
     const link = await setInvitationLinks(roomId, "Invite", type);
 
@@ -104,8 +127,8 @@ const ExternalLinks = ({
       toastr.success(
         `${t("Translations:LinkCopySuccess")}. ${t(
           "Translations:LinkValidTime",
-          { days_count: 7 }
-        )}`
+          { days_count: 7 },
+        )}`,
       );
       copy(link);
     }
@@ -138,7 +161,7 @@ const ExternalLinks = ({
 
       closeActionLinks();
     },
-    [closeActionLinks, t]
+    [closeActionLinks, t],
   );
 
   const shareTwitter = useCallback(
@@ -155,7 +178,7 @@ const ExternalLinks = ({
 
       closeActionLinks();
     },
-    [closeActionLinks]
+    [closeActionLinks],
   );
 
   return (
@@ -179,11 +202,11 @@ const ExternalLinks = ({
               fixedDirection={true}
             >
               <DropDownItem
-                label={`${t("SharingPanel:ShareVia")} e-mail`}
+                label={`${t("Common:ShareVia")} e-mail`}
                 onClick={() => shareEmail(activeLink[0])}
               />
               <DropDownItem
-                label={`${t("SharingPanel:ShareVia")} Twitter`}
+                label={`${t("Common:ShareVia")} Twitter`}
                 onClick={() => shareTwitter(activeLink[0])}
               />
             </DropDown>
@@ -202,16 +225,16 @@ const ExternalLinks = ({
       </StyledDescription>
       {externalLinksVisible && (
         <StyledInviteInputContainer key={activeLink.id}>
-          <StyledInviteInput>
+          <StyledInviteInput isShowCross>
             <InputBlock
               className="input-link"
+              iconSize={16}
+              iconButtonClassName="copy-link-icon"
               scale
               value={activeLink.shareLink}
               isReadOnly
               iconName={CopyReactSvgUrl}
               onIconClick={onCopyLink}
-              hoverColor="#333333"
-              iconColor="#A3A9AE"
             />
           </StyledInviteInput>
           <AccessSelector
@@ -230,8 +253,8 @@ const ExternalLinks = ({
   );
 };
 
-export default inject(({ auth, dialogsStore, filesStore }) => {
-  const { isOwner } = auth.userStore.user;
+export default inject(({ userStore, dialogsStore, filesStore }) => {
+  const { isOwner } = userStore.user;
   const { invitePanelOptions } = dialogsStore;
   const { setInvitationLinks } = filesStore;
   const { roomId, hideSelector, defaultAccess } = invitePanelOptions;

@@ -7,6 +7,7 @@
   "InvalidUsernameOrPassword": "Սխալ մուտքանուն կամ գաղտնաբառ",
   "LoginWithAccountNotFound": "Հնարավոր չէ գտնել կապված երրորդ կողմի հաշիվը: Դուք պետք է նախ միացնեք ձեր սոցիալական ցանցի հաշիվը պրոֆիլի խմբագրման էջում:",
   "LoginWithBruteForce": "Թույլտվությունը ժամանակավորապես արգելափակված է",
+  "LoginWithBruteForceCaptcha": "Հաստատեք, որ դուք ռոբոտ չեք",
   "RecaptchaInvalid": "Անվավեր Recaptcha",
   "SsoAttributesNotFound": "Նույնականացումը ձախողվեց (հաստատման հատկանիշները չեն գտնվել)",
   "SsoAuthFailed": "Նույնականացումը չհաջողվեց",

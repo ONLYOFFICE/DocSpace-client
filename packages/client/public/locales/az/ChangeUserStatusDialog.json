@@ -1,1 +1,11 @@
-{}
+{
+  "DisableGeneralDescription": "Lazım gələrsə, deaktiv istifadəçiləri silə və ya aktivləşdirə bilərsiniz. Nəzərə alın ki, siz portal sahibi və özünüz kimi istifadəçiləri deaktiv edə bilməzsiniz.",
+  "DisableUser": "İstifadəçini deaktiv edin",
+  "DisableUserDescription": "Bu istifadəçini deaktiv etsəniz, onlar DocSpace-ə daxil ola bilməyəcək və onların sənədləri və məlumatları toxunulmaz qalacaq.",
+  "DisableUsers": "İstifadəçiləri deaktiv edin",
+  "DisableUsersDescription": "Bu istifadəçiləri deaktiv etsəniz, onlar DocSpace-ə daxil ola bilməyəcək və onların sənədləri və məlumatları toxunulmaz qalacaq.",
+  "EnableUser": "İstifadəçini aktivləşdirin",
+  "EnableUserDescription": "Bu istifadəçini aktiv etsəniz, onlar DocSpace-ə yenidən daxil ola və öz sənədlərinə və məlumatlarına giriş əldə edəcəklər.",
+  "EnableUsers": "İstifadəçiləri aktivləşdirin",
+  "EnableUsersDescription": "Bu istifadəçiləri aktivləşdirsəniz, onlar DocSpace-ə yenidən daxil ola və öz sənədlərinə və məlumatlarına giriş əldə edəcəklər."
+}

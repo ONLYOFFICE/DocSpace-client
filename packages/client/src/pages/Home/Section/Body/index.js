@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
@@ -9,10 +35,10 @@ import EmptyContainer from "../../../../components/EmptyContainer";
 import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
 import withHotkeys from "../../../../HOCs/withHotkeys";
-import { Consumer } from "@docspace/components/utils/context";
-import { isElementInViewport } from "@docspace/common/utils";
-import { isMobile, isTablet } from "@docspace/components/utils/device";
-import { DeviceType } from "@docspace/common/constants";
+import { Consumer, isMobile, isTablet } from "@docspace/shared/utils";
+import { isElementInViewport } from "@docspace/shared/utils/common";
+
+import { DeviceType } from "@docspace/shared/enums";
 
 let currentDroppable = null;
 let isDragActive = false;
@@ -42,7 +68,7 @@ const SectionBodyContent = (props) => {
     filesList,
     uploaded,
     onClickBack,
-
+    isEmptyPage,
     movingInProgress,
     currentDeviceType,
   } = props;
@@ -53,7 +79,7 @@ const SectionBodyContent = (props) => {
 
   useEffect(() => {
     const customScrollElm = document.querySelector(
-      "#customScrollBar > .scroll-wrapper > .scroller"
+      "#customScrollBar > .scroll-wrapper > .scroller",
     );
 
     if (isTablet() || isMobile() || currentDeviceType !== DeviceType.desktop) {
@@ -104,7 +130,7 @@ const SectionBodyContent = (props) => {
         const bodyScroll =
           isMobile() || currentDeviceType === DeviceType.mobile
             ? document.querySelector(
-                "#customScrollBar > .scroll-wrapper > .scroller"
+                "#customScrollBar > .scroll-wrapper > .scroller",
               )
             : document.querySelector(".section-scroll");
 
@@ -113,8 +139,8 @@ const SectionBodyContent = (props) => {
           (isMobile() || currentDeviceType === DeviceType.mobile
             ? 57
             : viewAs === "table"
-            ? 40
-            : 48);
+              ? 40
+              : 48);
 
         bodyScroll.scrollTo(0, count);
       }
@@ -205,7 +231,13 @@ const SectionBodyContent = (props) => {
   };
 
   const onMouseUp = (e) => {
-    document.body.classList.remove("drag-cursor");
+    setStartDrag(false);
+
+    setTimeout(() => {
+      isDragActive = false;
+      setDragging(false);
+      document.body.classList.remove("drag-cursor");
+    }, 0);
 
     const treeElem = e.target.closest(".tree-drag");
     const treeDataValue = treeElem?.dataset?.value;
@@ -217,18 +249,13 @@ const SectionBodyContent = (props) => {
     const title = elem && elem.dataset.title;
     const value = elem && elem.getAttribute("value");
     if ((!value && !treeValue) || isRecycleBinFolder || !isDragActive) {
-      setStartDrag(false);
-      setTimeout(() => setDragging(false), 0);
-      isDragActive = false;
       return;
     }
 
-    const folderId = value ? value.split("_")[1] : treeValue;
-
-    setStartDrag(false);
-    setTimeout(() => setDragging(false), 0);
+    const folderId = value
+      ? value.split("_").slice(1, -3).join("_")
+      : treeValue;
     onMoveTo(folderId, title);
-    isDragActive = false;
     return;
   };
 
@@ -236,7 +263,7 @@ const SectionBodyContent = (props) => {
     const id = isNaN(+destFolderId) ? destFolderId : +destFolderId;
     moveDragItems(id, title, {
       copy: t("Common:CopyOperation"),
-      move: t("Translations:MoveToOperation"),
+      move: t("Common:MoveToOperation"),
     });
   };
 
@@ -263,14 +290,17 @@ const SectionBodyContent = (props) => {
 
   if (isEmptyFilesList && movingInProgress) return <></>;
 
-  const isEmptyPage = isEmptyFilesList;
+  const showEmptyPage = isEmptyFilesList;
 
   return (
     <Consumer>
       {(context) =>
-        isEmptyPage ? (
+        showEmptyPage ? (
           <>
-            <EmptyContainer sectionWidth={context.sectionWidth} />
+            <EmptyContainer
+              sectionWidth={context.sectionWidth}
+              isEmptyPage={isEmptyPage}
+            />
           </>
         ) : viewAs === "tile" ? (
           <>
@@ -295,7 +325,7 @@ const SectionBodyContent = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     selectedFolderStore,
     treeFoldersStore,
@@ -319,7 +349,7 @@ export default inject(
       scrollToItem,
       setScrollToItem,
       filesList,
-
+      isEmptyPage,
       movingInProgress,
     } = filesStore;
     return {
@@ -346,11 +376,12 @@ export default inject(
       uploaded: uploadDataStore.uploaded,
       onClickBack: filesActionsStore.onClickBack,
       movingInProgress,
-      currentDeviceType: auth.settingsStore,
+      currentDeviceType: settingsStore.currentDeviceType,
+      isEmptyPage,
     };
-  }
+  },
 )(
   withTranslation(["Files", "Common", "Translations"])(
-    withHotkeys(withLoader(observer(SectionBodyContent))())
-  )
+    withHotkeys(withLoader(observer(SectionBodyContent))()),
+  ),
 );

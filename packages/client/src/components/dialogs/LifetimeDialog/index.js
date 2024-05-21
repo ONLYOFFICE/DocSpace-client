@@ -1,10 +1,9 @@
 import { useEffect } from "react";
-import ModalDialog from "@docspace/components/modal-dialog";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { StyledLifetimeDialog } from "./StyledLifetimeDialog";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
 import { withTranslation } from "react-i18next";
-import toastr from "@docspace/components/toast/toastr";
 import { inject, observer } from "mobx-react";
 
 const LifetimeDialogComponent = (props) => {
@@ -78,7 +77,7 @@ const LifetimeDialogComponent = (props) => {
 };
 
 const LifetimeDialog = withTranslation(["Common", "Files"])(
-  LifetimeDialogComponent
+  LifetimeDialogComponent,
 );
 
 export default inject(({ dialogsStore }) => {

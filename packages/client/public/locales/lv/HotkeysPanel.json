@@ -5,6 +5,7 @@
   "HotkeysChangeView": "Pārslēgties starp režģa un saraksta skatu",
   "HotkeysClearAll": "Notīrīt visas atlases",
   "HotkeysClose": "Aizvērt/atsaukt darbību",
+  "HotkeysCopySelected": "Kopējiet atlasītos vienumus starpliktuvē",
   "HotkeysCreateDocument": "Izveidot dokumentu",
   "HotkeysCreateFolder": "Izveidot mapi",
   "HotkeysCreateForm": "Izveidot tukšu veidlapas veidni",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "Izveidot prezentāciju",
   "HotkeysCreateSpreadsheet": "Izveidot tabulu",
   "HotkeysCreatingObjects": "Izveidot vienumus",
+  "HotkeysCutSelected": "Izgrieziet atlasītos vienumus starpliktuvē",
   "HotkeysEnterKey": "Ievadīt",
   "HotkeysExtendSelectionDown": "Paplašināt atlasi uz leju",
   "HotkeysExtendSelectionLeft": "Paplašināt atlasi pa kreisi",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "Pārvietojieties uz augšu, nemainot atlasi",
   "HotkeysNavigation": "Navigācija",
   "HotkeysOpen": "Atvērt atlasīto vienumu/Apstiprināt darbību",
+  "HotkeysPasteSelected": "Ielīmējiet atlasītos vienumus no starpliktuves",
   "HotkeysPlayPause": "Atskaņot/pauzēt",
   "HotkeysRedoLastUndoneAction": "Atkārtot pēdējo atsaukto darbību",
   "HotkeysRemove": "Noņemt atlasītos vienumus",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "Atstarpe",
   "HotkeysUndoLastAction": "Atsaukt pēdējo darbību",
   "HotkeysUploadFile": "Augšupielādēt failu",
-  "HotkeysUploadingObjects": "Notiek vienumu augšupielāde"
+  "HotkeysUploadingObjects": "Notiek vienumu augšupielāde",
+  "HotkeysZoomIn": "Pietuvināt",
+  "HotkeysZoomOut": "Attālināt"
 }

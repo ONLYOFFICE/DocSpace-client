@@ -1,5 +1,5 @@
 {
-  "DisableGeneralDescription": " You can later delete or enable the disabled users if needed. Note that you can’t disable users such as the Owner and yourself.",
+  "DisableGeneralDescription": "You can later delete or enable the disabled users if needed. Note that you can’t disable users such as the Owner and yourself.",
   "DisableUser": "Disable user",
   "DisableUserDescription": "If you Disable this user, they won’t be able to log in to DocSpace, while their documents and data will remain intact.",
   "DisableUsers": "Disable users",

@@ -1,14 +1,41 @@
-import { Link, ModalDialog } from "@docspace/components";
-import { Button } from "@docspace/components";
-import { useState, useRef } from "react";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import { Link } from "@docspace/shared/components/link";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+import { useState, useRef, useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import FilesSelector from "@docspace/client/src/components/FilesSelector";
-import { FilesSelectorFilterTypes } from "@docspace/common/constants";
-import toastr from "@docspace/components/toast/toastr";
+import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import { toastr } from "@docspace/shared/components/toast";
 
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import * as Styled from "./index.styled";
 
@@ -22,8 +49,11 @@ const SubmitToFormGallery = ({
   currentColorScheme,
   canSubmitToFormGallery,
   submitToFormGallery,
+  fetchGuideLink,
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [guideLink, setGuideLink] = useState(null);
 
   const abortControllerRef = useRef(new AbortController());
 
@@ -65,7 +95,7 @@ const SubmitToFormGallery = ({
       file,
       formItem.title,
       "en",
-      abortControllerRef.current?.signal
+      abortControllerRef.current?.signal,
     )
       .then((res) => {
         if (!res.data) throw new Error(res.statusText);
@@ -91,19 +121,28 @@ const SubmitToFormGallery = ({
     onClose();
   };
 
+  useEffect(() => {
+    (async () => {
+      const fetchedGuideLink = await fetchGuideLink();
+      setGuideLink(fetchedGuideLink);
+    })();
+  }, []);
+
   if (!canSubmitToFormGallery()) return null;
 
   if (isSelectingForm)
     return (
       <FilesSelector
         key="select-file-dialog"
-        filterParam={FilesSelectorFilterTypes.DOCXF}
-        descriptionText={t("Common:SelectDOCXFFormat")}
+        filterParam={FilesSelectorFilterTypes.PDF}
+        descriptionText={t("Common:SelectPDFFormat")}
         isPanelVisible={true}
         onSelectFile={onSelectForm}
         onClose={onCloseFormSelector}
       />
     );
+
+  console.log(formItem);
 
   return (
     <Styled.SubmitToGalleryDialog
@@ -123,8 +162,8 @@ const SubmitToFormGallery = ({
             Learn how to create perfect forms and increase your chance to get
             approval in our
             <Link
-              color={currentColorScheme.main.accent}
-              href="https://www.onlyoffice.com/blog/2022/07/when-design-matters-how-to-create-beautiful-forms-with-oforms"
+              color={currentColorScheme.main?.accent}
+              href={guideLink || "#"}
               type={"page"}
               target={"_blank"}
               isBold
@@ -138,21 +177,21 @@ const SubmitToFormGallery = ({
 
         {formItem && (
           <Styled.FormItem>
-            <ReactSVG className="icon" src={getIcon(24, formItem.exst)} />
+            <ReactSVG className="icon" src={getIcon(24, formItem.fileExst)} />
             <div className="item-title">
               {formItem?.title ? (
                 [
                   <span className="name" key="name">
                     {formItem.title}
                   </span>,
-                  formItem.exst && (
+                  formItem.fileExst && (
                     <span className="exst" key="exst">
-                      {formItem.exst}
+                      {formItem.fileExst}
                     </span>
                   ),
                 ]
               ) : (
-                <span className="name">{"" + formItem.exst}</span>
+                <span className="name">{"" + formItem.fileExst}</span>
               )}
             </div>
           </Styled.FormItem>
@@ -189,14 +228,21 @@ const SubmitToFormGallery = ({
 };
 
 export default inject(
-  ({ auth, accessRightsStore, dialogsStore, settingsStore, oformsStore }) => ({
+  ({
+    accessRightsStore,
+    dialogsStore,
+    settingsStore,
+    filesSettingsStore,
+    oformsStore,
+  }) => ({
     visible: dialogsStore.submitToGalleryDialogVisible,
     setVisible: dialogsStore.setSubmitToGalleryDialogVisible,
     formItem: dialogsStore.formItem,
     setFormItem: dialogsStore.setFormItem,
-    getIcon: settingsStore.getIcon,
-    currentColorScheme: auth.settingsStore.currentColorScheme,
+    getIcon: filesSettingsStore.getIcon,
+    currentColorScheme: settingsStore.currentColorScheme,
     canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
     submitToFormGallery: oformsStore.submitToFormGallery,
-  })
+    fetchGuideLink: oformsStore.fetchGuideLink,
+  }),
 )(withTranslation("Common", "FormGallery")(observer(SubmitToFormGallery)));

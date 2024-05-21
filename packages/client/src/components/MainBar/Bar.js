@@ -1,14 +1,41 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React, { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import difference from "lodash/difference";
 import { withTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { ADS_TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 
-import { getConvertedSize } from "@docspace/common/utils";
-
-import { getBannerAttribute } from "@docspace/components/utils/banner";
-import SnackBar from "@docspace/components/snackbar";
+import { getConvertedSize } from "@docspace/shared/utils/common";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { getBannerAttribute } from "@docspace/shared/utils";
+import { SnackBar } from "@docspace/shared/components/snackbar";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
 
 import QuotasBar from "./QuotasBar";
@@ -22,6 +49,8 @@ const Bar = (props) => {
     firstLoad,
 
     isAdmin,
+    isPowerUser,
+    isRoomAdmin,
     userEmail,
     setMaintenanceExist,
     withActivationBar,
@@ -45,15 +74,23 @@ const Bar = (props) => {
     currentColorScheme,
 
     setMainBarVisible,
+    showUserPersonalQuotaBar,
+
+    tenantCustomQuota,
+    showTenantCustomQuotaBar,
   } = props;
+
+  const navigate = useNavigate();
 
   const [barVisible, setBarVisible] = useState({
     roomQuota: false,
     storageQuota: false,
+    tenantCustomQuota: false,
     userQuota: false,
     storageAndUserQuota: false,
     storageAndRoomQuota: false,
     confirmEmail: false,
+    personalUserQuota: false,
   });
 
   const [htmlLink, setHtmlLink] = useState();
@@ -61,7 +98,7 @@ const Bar = (props) => {
 
   const { loadLanguagePath } = getBannerAttribute();
 
-  const updateBanner = async () => {
+  const updateBanner = React.useCallback(async () => {
     const bar = (localStorage.getItem("bar") || "")
       .split(",")
       .filter((bar) => bar.length > 0);
@@ -83,28 +120,39 @@ const Bar = (props) => {
         setBarVisible((value) => ({
           ...value,
           roomQuota: !closed.includes(QuotaBarTypes.RoomQuota),
-          storageQuota: !closed.includes(QuotaBarTypes.StorageQuota),
+          tenantCustomQuota: !closed.includes(QuotaBarTypes.TenantCustomQuota),
           userQuota: !closed.includes(QuotaBarTypes.UserQuota),
           storageAndRoomQuota: !closed.includes(
-            QuotaBarTypes.UserAndStorageQuota
+            QuotaBarTypes.UserAndStorageQuota,
           ),
           storageAndUserQuota: !closed.includes(
-            QuotaBarTypes.RoomAndStorageQuota
+            QuotaBarTypes.RoomAndStorageQuota,
           ),
+        }));
+      }
+      if (isAdmin || isPowerUser || isRoomAdmin) {
+        setBarVisible((value) => ({
+          ...value,
+          storageQuota: !closed.includes(QuotaBarTypes.StorageQuota),
         }));
       }
 
       if (!closed.includes(QuotaBarTypes.ConfirmEmail)) {
         setBarVisible((value) => ({ ...value, confirmEmail: true }));
       }
+      if (!closed.includes(QuotaBarTypes.PersonalUserQuota)) {
+        setBarVisible((value) => ({ ...value, personalUserQuota: true }));
+      }
     } else {
       setBarVisible({
         roomQuota: isAdmin,
-        storageQuota: isAdmin,
+        storageQuota: isAdmin || isPowerUser || isRoomAdmin,
+        tenantCustomQuota: isAdmin,
         userQuota: isAdmin,
         storageAndUserQuota: isAdmin,
         storageAndRoomQuota: isAdmin,
         confirmEmail: true,
+        personalUserQuota: true,
       });
     }
 
@@ -119,7 +167,7 @@ const Bar = (props) => {
 
     localStorage.setItem("barIndex", index);
     return;
-  };
+  }, []);
 
   useEffect(() => {
     const updateTimeout = setTimeout(() => updateBanner(), 1000);
@@ -148,10 +196,22 @@ const Bar = (props) => {
     setMaintenanceExist(false);
   };
 
-  const onClickQuota = (isRoomQuota) => {
-    onPaymentsClick && onPaymentsClick();
+  const onClickQuota = (type) => {
+    type === QuotaBarTypes.StorageQuota && onPaymentsClick && onPaymentsClick();
+    type === QuotaBarTypes.TenantCustomQuota && onClickTenantCustomQuota();
 
-    onCloseQuota(isRoomQuota);
+    onCloseQuota(type);
+  };
+
+  const onClickTenantCustomQuota = (type) => {
+    const managementPageUrl = combineUrl(
+      "/portal-settings",
+      "/management/disk-space",
+    );
+
+    navigate(managementPageUrl);
+
+    onCloseQuota(type);
   };
 
   const onCloseQuota = (currentBar) => {
@@ -169,6 +229,9 @@ const Bar = (props) => {
       case QuotaBarTypes.StorageQuota:
         setBarVisible((value) => ({ ...value, storageQuota: false }));
         break;
+      case QuotaBarTypes.TenantCustomQuota:
+        setBarVisible((value) => ({ ...value, tenantCustomQuota: false }));
+        break;
       case QuotaBarTypes.UserQuota:
         setBarVisible((value) => ({ ...value, userQuota: false }));
         break;
@@ -177,6 +240,9 @@ const Bar = (props) => {
         break;
       case QuotaBarTypes.RoomAndStorageQuota:
         setBarVisible((value) => ({ ...value, storageAndRoomQuota: false }));
+        break;
+      case QuotaBarTypes.PersonalUserQuota:
+        setBarVisible((value) => ({ ...value, personalUserQuota: false }));
         break;
     }
 
@@ -234,11 +300,25 @@ const Bar = (props) => {
         currentValue: getConvertedSize(t, usedTotalStorageSizeCount),
       };
     }
+    if (showTenantCustomQuotaBar && barVisible.tenantCustomQuota) {
+      return {
+        type: QuotaBarTypes.TenantCustomQuota,
+        maxValue: getConvertedSize(t, tenantCustomQuota),
+        currentValue: getConvertedSize(t, usedTotalStorageSizeCount),
+      };
+    }
+
     if (showUserQuotaBar && barVisible.userQuota) {
       return {
         type: QuotaBarTypes.UserQuota,
         maxValue: maxCountManagersByQuota,
         currentValue: addedManagersCount,
+      };
+    }
+
+    if (showUserPersonalQuotaBar && barVisible.personalUserQuota) {
+      return {
+        type: QuotaBarTypes.PersonalUserQuota,
       };
     }
     return null;
@@ -274,7 +354,9 @@ const Bar = (props) => {
       {...currentBar}
       onClick={onClickQuota}
       onClose={onCloseQuota}
+      onClickTenantCustomQuota={onClickTenantCustomQuota}
       onLoad={onLoad}
+      isAdmin={isAdmin}
     />
   ) : withActivationBar && barVisible.confirmEmail && tReady ? (
     <ConfirmEmailBar
@@ -294,50 +376,61 @@ const Bar = (props) => {
   ) : null;
 };
 
-export default inject(({ auth, profileActionsStore }) => {
-  const { user, withActivationBar, sendActivationLink } = auth.userStore;
+export default inject(
+  ({ settingsStore, profileActionsStore, userStore, currentQuotaStore }) => {
+    const { user, withActivationBar, sendActivationLink } = userStore;
 
-  const { onPaymentsClick } = profileActionsStore;
+    const { onPaymentsClick } = profileActionsStore;
 
-  const {
-    maxCountRoomsByQuota,
-    usedRoomsCount,
+    const {
+      maxCountRoomsByQuota,
+      usedRoomsCount,
 
-    maxTotalSizeByQuota,
-    usedTotalStorageSizeCount,
+      maxTotalSizeByQuota,
+      usedTotalStorageSizeCount,
 
-    maxCountManagersByQuota,
-    addedManagersCount,
+      maxCountManagersByQuota,
+      addedManagersCount,
 
-    showRoomQuotaBar,
-    showStorageQuotaBar,
-    showUserQuotaBar,
-  } = auth.currentQuotaStore;
+      showRoomQuotaBar,
+      showStorageQuotaBar,
+      showUserQuotaBar,
+      showUserPersonalQuotaBar,
+      tenantCustomQuota,
+      showTenantCustomQuotaBar,
+    } = currentQuotaStore;
 
-  const { currentColorScheme, setMainBarVisible } = auth.settingsStore;
+    const { currentColorScheme, setMainBarVisible } = settingsStore;
 
-  return {
-    isAdmin: user?.isAdmin,
-    userEmail: user?.email,
-    withActivationBar,
-    sendActivationLink,
+    return {
+      isAdmin: user?.isAdmin,
+      isPowerUser: user?.isCollaborator,
+      isRoomAdmin: user?.isRoomAdmin,
+      userEmail: user?.email,
+      withActivationBar,
+      sendActivationLink,
 
-    onPaymentsClick,
+      onPaymentsClick,
 
-    maxCountRoomsByQuota,
-    usedRoomsCount,
+      maxCountRoomsByQuota,
+      usedRoomsCount,
 
-    maxTotalSizeByQuota,
-    usedTotalStorageSizeCount,
+      maxTotalSizeByQuota,
+      usedTotalStorageSizeCount,
 
-    maxCountManagersByQuota,
-    addedManagersCount,
+      maxCountManagersByQuota,
+      addedManagersCount,
 
-    showRoomQuotaBar,
-    showStorageQuotaBar,
-    showUserQuotaBar,
+      showRoomQuotaBar,
+      showStorageQuotaBar,
+      showUserQuotaBar,
 
-    currentColorScheme,
-    setMainBarVisible,
-  };
-})(withTranslation(["Profile", "Common"])(observer(Bar)));
+      currentColorScheme,
+      setMainBarVisible,
+
+      showUserPersonalQuotaBar,
+      tenantCustomQuota,
+      showTenantCustomQuotaBar,
+    };
+  },
+)(withTranslation(["Profile", "Common"])(observer(Bar)));

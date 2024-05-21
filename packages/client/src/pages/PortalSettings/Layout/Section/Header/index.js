@@ -1,4 +1,30 @@
-﻿import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
 import React from "react";
@@ -6,21 +32,22 @@ import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
-import Headline from "@docspace/common/components/Headline";
-import IconButton from "@docspace/components/icon-button";
-import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
-import DropDownItem from "@docspace/components/drop-down-item";
+import Headline from "@docspace/shared/components/headline/Headline";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { TableGroupMenu } from "@docspace/shared/components/table";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import LoaderSectionHeader from "../loaderSectionHeader";
-import { tablet, desktop } from "@docspace/components/utils/device";
+import { mobile, tablet, desktop, isMobile } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
-import Badge from "@docspace/components/badge";
+import { Badge } from "@docspace/shared/components/badge";
 import {
   getKeyByLink,
   settingsTree,
   getTKeyByKey,
   checkPropertyByLink,
 } from "../../../utils";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import TariffBar from "SRC_DIR/components/TariffBar";
 
 const HeaderContainer = styled.div`
   position: relative;
@@ -46,6 +73,9 @@ const HeaderContainer = styled.div`
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
+      color: ${(props) => props.theme.client.settings.headerTitleColor};
+      display: flex;
+      align-items: center;
     }
   }
   .action-wrapper {
@@ -95,15 +125,33 @@ const HeaderContainer = styled.div`
   @media ${tablet} {
     h1 {
       line-height: 61px;
-      font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
+      font-size: 21px;
     }
   }
 
   @media ${desktop} {
     h1 {
-      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+      font-size: 18px;
       line-height: 59px !important;
     }
+  }
+
+  @media ${mobile} {
+    h1 {
+      line-height: 53px;
+      font-size: 18px;
+    }
+  }
+
+  .tariff-bar {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: auto;
+          `
+        : css`
+            margin-left: auto;
+          `}
   }
 `;
 
@@ -133,6 +181,7 @@ const SectionHeaderContent = (props) => {
     isRestoreAndAutoBackupAvailable,
     tReady,
     setIsLoadedSectionHeader,
+    isSSOAvailable,
   } = props;
 
   const navigate = useNavigate();
@@ -157,6 +206,9 @@ const SectionHeaderContent = (props) => {
         return isBrandingAndCustomizationAvailable;
       case "AdditionalResources":
         return isBrandingAndCustomizationAvailable;
+      case "SingleSignOn:ServiceProviderSettings":
+      case "SingleSignOn:SpMetadata":
+        return isSSOAvailable;
       default:
         return true;
     }
@@ -168,20 +220,21 @@ const SectionHeaderContent = (props) => {
     const arrayOfParams = getArrayOfParams();
 
     const key = getKeyByLink(arrayOfParams, settingsTree);
-    let currKey = key.length > 3 ? key : key[0];
 
-    if (key === "8" || key === "8-0") currKey = "8-0";
+    const keysCollection = key.split("-");
+
+    const currKey = keysCollection.length >= 3 ? key : keysCollection[0];
 
     const header = getTKeyByKey(currKey, settingsTree);
     const isCategory = checkPropertyByLink(
       arrayOfParams,
       settingsTree,
-      "isCategory"
+      "isCategory",
     );
     const isHeader = checkPropertyByLink(
       arrayOfParams,
       settingsTree,
-      "isHeader"
+      "isHeader",
     );
     const isCategoryOrHeader = isCategory || isHeader;
 
@@ -285,6 +338,13 @@ const SectionHeaderContent = (props) => {
     },
   ];
 
+  const pathname = location.pathname;
+
+  const isServicePage =
+    pathname.includes("google") ||
+    pathname.includes("nextcloud") ||
+    pathname.includes("onlyoffice");
+
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>
       {isHeaderVisible ? (
@@ -295,6 +355,7 @@ const SectionHeaderContent = (props) => {
             isChecked={isHeaderChecked}
             isIndeterminate={isHeaderIndeterminate}
             headerMenu={headerMenu}
+            withComboBox
           />
         </div>
       ) : !isLoadedSectionHeader ? (
@@ -312,7 +373,18 @@ const SectionHeaderContent = (props) => {
           )}
           <Headline type="content" truncate={true}>
             <div className="settings-section_header">
-              <div className="header"> {t(header)}</div>
+              <div className="header">
+                {isMobile() && isServicePage && (
+                  <IconButton
+                    iconName={ArrowPathReactSvgUrl}
+                    size="17"
+                    isFill={true}
+                    onClick={onBackToParent}
+                    className="arrow-button"
+                  />
+                )}
+                {t(header)}
+              </div>
               {isNeedPaidIcon ? (
                 <Badge
                   backgroundColor="#EDC409"
@@ -326,6 +398,10 @@ const SectionHeaderContent = (props) => {
               )}
             </div>
           </Headline>
+          <div className="tariff-bar">
+            <TariffBar />
+          </div>
+
           {props.addUsers && (
             <div className="action-wrapper">
               <IconButton
@@ -343,11 +419,11 @@ const SectionHeaderContent = (props) => {
   );
 };
 
-export default inject(({ auth, setup, common }) => {
-  const { currentQuotaStore } = auth;
+export default inject(({ currentQuotaStore, setup, common }) => {
   const {
     isBrandingAndCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
+    isSSOAvailable,
   } = currentQuotaStore;
   const { addUsers, removeAdmins } = setup.headerAction;
   const { toggleSelector } = setup;
@@ -381,11 +457,12 @@ export default inject(({ auth, setup, common }) => {
     setIsLoadedSectionHeader,
     isBrandingAndCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
+    isSSOAvailable,
   };
 })(
   withLoading(
-    withTranslation(["Settings", "SingleSignOn", "Common"])(
-      observer(SectionHeaderContent)
-    )
-  )
+    withTranslation(["Settings", "SingleSignOn", "Common", "JavascriptSdk"])(
+      observer(SectionHeaderContent),
+    ),
+  ),
 );

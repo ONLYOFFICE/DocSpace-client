@@ -1,1 +1,11 @@
-{}
+{
+  "DisableGeneralDescription": "Sau đó, bạn có thể xóa hoặc kích hoạt người dùng đã bị vô hiệu hóa nếu cần. Lưu ý rằng bạn không thể vô hiệu hóa người dùng như Chủ sở hữu và chính bạn.",
+  "DisableUser": "Vô hiệu hóa người dùng",
+  "DisableUserDescription": "Nếu bạn Vô hiệu hóa người dùng này, họ sẽ không thể đăng nhập vào DocSpace, trong khi tài liệu và dữ liệu của họ sẽ vẫn còn nguyên vẹn.",
+  "DisableUsers": "Vô hiệu hóa người dùng",
+  "DisableUsersDescription": "Nếu bạn Vô hiệu hóa những người dùng này, họ sẽ không thể đăng nhập vào DocSpace, trong khi tài liệu và dữ liệu của họ sẽ vẫn còn nguyên vẹn.",
+  "EnableUser": "Kích hoạt người dùng",
+  "EnableUserDescription": "Nếu bạn kích hoạt người dùng này, họ sẽ có thể đăng nhập lại vào DocSpace và truy cập tài liệu và dữ liệu của họ.",
+  "EnableUsers": "Kích hoạt người dùng",
+  "EnableUsersDescription": "Nếu bạn kích hoạt những người dùng này, họ sẽ có thể đăng nhập lại vào DocSpace và truy cập tài liệu và dữ liệu của họ."
+}

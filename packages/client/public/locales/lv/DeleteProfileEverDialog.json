@@ -1,4 +1,14 @@
 {
+  "ActionCannotBeUndone": "Atlasītie atspējotie lietotāji tiks noņemti no DocSpace. Šo darbību nevarēs atsaukt.",
+  "CannotReassignFiles": "Ja vienlaikus izdzēšat vairākus lietotājus, jūs nevarat atkārtoti piešķirt viņu failus citiem lietotājiem.",
+  "DeleteGroupUsersSuccessMessage": "Lietotāji ir veiksmīgi izdzēsti.",
+  "DeleteMyDocumentsUser": "Visi šī lietotāja personiskie faili un mapes sadaļā Mani dokumenti tiks neatgriezeniski izdzēsti.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Šī lietotāja izveidotās telpas un šajās telpās glabātie dokumenti tiks automātiski piešķirti administratoram, kurš izdzēsīs: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Manuāli atkārtoti piešķiriet datus, lai atkārtotai piešķiršanai izvēlētos citu mērķa lietotāju.",
   "DeleteUser": "Dzēst lietotāju",
-  "SuccessfullyDeleteUserInfoMessage": "Lietotājs ir veiksmīgi izdzēsts"
+  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> tiks izdzēsts. Šo darbību nevar atsaukt.",
+  "DeletingUsers": "Lietotāju dzēšana",
+  "PleaseNote": "Ievērojiet:",
+  "ReassignDataToAnotherUser": "Atkārtoti piešķirt datus citam lietotājam",
+  "SuccessfullyDeleteUserInfoMessage": "Lietotājs ir veiksmīgi izdzēsts",
+  "ToBeAbleToReassignData": "Lai varētu atkārtoti piešķirt datus, vienlaikus izdzēsiet vienu lietotāju."
 }

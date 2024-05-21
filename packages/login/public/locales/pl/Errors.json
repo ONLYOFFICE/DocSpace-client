@@ -7,6 +7,7 @@
   "InvalidUsernameOrPassword": "Nieprawidłowa nazwa użytkownika lub hasło.",
   "LoginWithAccountNotFound": "Nie można znaleźć powiązanego konta osób trzecich. Musisz połączyć swoje konto społecznościowe na stronie edycji profilu.",
   "LoginWithBruteForce": "Autoryzacja tymczasowo zablokowana",
+  "LoginWithBruteForceCaptcha": "Potwierdź, że nie jesteś robotem",
   "RecaptchaInvalid": "Nieprawidłowy kod reCAPTCHA",
   "SsoAttributesNotFound": "Uwierzytelnianie nie powiodło się (nie znaleziono atrybutów asercji)",
   "SsoAuthFailed": "Uwierzytelnianie nie powiodło się",

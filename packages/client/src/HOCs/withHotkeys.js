@@ -1,11 +1,37 @@
-import React, { useEffect } from "react";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import { useEffect, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { observer, inject } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-import { Events } from "@docspace/common/constants";
-import toastr from "@docspace/components/toast/toastr";
+import { Events } from "@docspace/shared/enums";
+import { toastr } from "@docspace/shared/components/toast";
 import throttle from "lodash/throttle";
-import { checkDialogsOpen } from "@docspace/common/utils/checkDialogsOpen";
+import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 const withHotkeys = (Component) => {
   const WithHotkeys = (props) => {
@@ -38,7 +64,7 @@ const withHotkeys = (Component) => {
       openItem,
       selectAll,
       activateHotkeys,
-      backToParentFolder,
+      onClickBack,
 
       uploadFile,
       enabledHotkeys,
@@ -67,17 +93,24 @@ const withHotkeys = (Component) => {
 
     const navigate = useNavigate();
 
+    const [isEnabled, setIsEnabled] = useState(true);
+
     const hotkeysFilter = {
       filter: (ev) =>
         ev.target?.type === "checkbox" || ev.target?.tagName !== "INPUT",
       filterPreventDefault: false,
       enableOnTags: ["INPUT"],
-      enabled: enabledHotkeys && !mediaViewerIsVisible && !filesIsLoading,
+      enabled:
+        enabledHotkeys && !mediaViewerIsVisible && !filesIsLoading && isEnabled,
       // keyup: true,
       // keydown: false,
     };
 
-    const onKeyDown = (e) => activateHotkeys(e);
+    const onKeyDown = (e) => {
+      const someDialogIsOpen = checkDialogsOpen();
+      setIsEnabled(!someDialogIsOpen);
+      activateHotkeys(e);
+    };
 
     const folderWithNoAction =
       isFavoritesFolder ||
@@ -165,7 +198,7 @@ const withHotkeys = (Component) => {
             break;
         }
       },
-      hotkeysFilter
+      hotkeysFilter,
     );
 
     // //Select bottom element
@@ -211,16 +244,16 @@ const withHotkeys = (Component) => {
     useHotkeys("ctrl+RIGHT, command+RIGHT", moveCaretRight, hotkeysFilter);
 
     //Open item
-    useHotkeys("Enter", openItem, hotkeysFilter);
+    useHotkeys("Enter", () => openItem(t), hotkeysFilter);
 
     //Back to parent folder
-    useHotkeys("Backspace", backToParentFolder, hotkeysFilter);
+    useHotkeys("Backspace", onClickBack, hotkeysFilter);
 
     //Change viewAs
     useHotkeys(
       "v",
       () => (viewAs === "tile" ? setViewAs("table") : setViewAs("tile")),
-      hotkeysFilter
+      hotkeysFilter,
     );
 
     //Crete document
@@ -255,7 +288,7 @@ const withHotkeys = (Component) => {
         setSelectFileDialogVisible(true);
       },
 
-      hotkeysFilter
+      hotkeysFilter,
     );
 
     //Crete folder
@@ -312,7 +345,7 @@ const withHotkeys = (Component) => {
         }
       },
       hotkeysFilter,
-      [confirmDelete]
+      [confirmDelete],
     );
 
     // //TODO: Undo the last action
@@ -335,14 +368,14 @@ const withHotkeys = (Component) => {
     useHotkeys(
       "Ctrl+num_divide, Ctrl+/, command+/",
       () => setHotkeyPanelVisible(true),
-      hotkeysFilter
+      hotkeysFilter,
     );
 
     useHotkeys("Ctrl+c, command+c", () => copyToClipboard(t), hotkeysFilter);
     useHotkeys(
       "Ctrl+x, command+x",
       () => copyToClipboard(t, true),
-      hotkeysFilter
+      hotkeysFilter,
     );
 
     //Upload file
@@ -353,7 +386,7 @@ const withHotkeys = (Component) => {
         uploadFile(false, navigate, t);
       },
 
-      hotkeysFilter
+      hotkeysFilter,
     );
 
     //Upload folder
@@ -364,7 +397,7 @@ const withHotkeys = (Component) => {
         uploadFile(true);
       },
 
-      hotkeysFilter
+      hotkeysFilter,
     );
 
     return <Component {...props} />;
@@ -372,15 +405,17 @@ const withHotkeys = (Component) => {
 
   return inject(
     ({
-      auth,
+      settingsStore,
       filesStore,
       dialogsStore,
-      settingsStore,
+      filesSettingsStore,
       filesActionsStore,
       hotkeyStore,
       mediaViewerDataStore,
       treeFoldersStore,
       selectedFolderStore,
+      userStore,
+      currentTariffStatusStore,
     }) => {
       const {
         setSelected,
@@ -421,17 +456,17 @@ const withHotkeys = (Component) => {
       const {
         isAvailableOption,
         deleteAction,
-        backToParentFolder,
+        onClickBack,
         setFavoriteAction,
         deleteRooms,
         archiveRooms,
       } = filesActionsStore;
 
       const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
-      const { setHotkeyPanelVisible } = auth.settingsStore;
-      const { isGracePeriod } = auth.currentTariffStatusStore;
+      const { setHotkeyPanelVisible } = settingsStore;
+      const { isGracePeriod } = currentTariffStatusStore;
 
-      const isVisitor = auth.userStore.user?.isVisitor;
+      const isVisitor = userStore.user?.isVisitor;
 
       const {
         isFavoritesFolder,
@@ -451,7 +486,7 @@ const withHotkeys = (Component) => {
         setHotkeyPanelVisible,
         setDeleteDialogVisible,
         setSelectFileDialogVisible,
-        confirmDelete: settingsStore.confirmDelete,
+        confirmDelete: filesSettingsStore.confirmDelete,
         deleteAction,
         isAvailableOption,
 
@@ -471,7 +506,7 @@ const withHotkeys = (Component) => {
         openItem,
         selectAll,
         activateHotkeys,
-        backToParentFolder,
+        onClickBack,
 
         uploadFile,
         enabledHotkeys,
@@ -499,7 +534,7 @@ const withHotkeys = (Component) => {
 
         uploadClipboardFiles,
       };
-    }
+    },
   )(observer(WithHotkeys));
 };
 

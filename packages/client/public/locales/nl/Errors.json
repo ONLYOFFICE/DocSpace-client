@@ -1,8 +1,6 @@
 {
-  "Error401Text": "Sorry, de bron is momenteel niet beschikbaar.",
-  "Error403Text": "Sorry, toegang geweigerd.",
-  "Error404Text": "Sorry, de bron kan niet worden gevonden.",
   "ErrorEmptyResponse": "Lege reactie",
-  "ErrorOfflineText": "Geen internetverbinding gevonden",
-  "ErrorUnavailableText": "DocSpace niet beschikbaar"
+  "ErrorUnavailableText": "DocSpace niet beschikbaar",
+  "LinkDoesNotExist": "De link die u probeert te openen bestaat niet.",
+  "LinkHasExpired": "De link die u heeft gevolgd is verlopen."
 }

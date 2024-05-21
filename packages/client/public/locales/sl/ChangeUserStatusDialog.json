@@ -1,1 +1,11 @@
-{}
+{
+  "DisableGeneralDescription": "Po potrebi lahko onemogočene uporabnike kasneje izbrišete ali omogočite. Upoštevajte, da ne morete onemogočiti uporabnikov, kot sta lastnik in vi.",
+  "DisableUser": "Onemogoči uporabnika",
+  "DisableUserDescription": "Če onemogočite tega uporabnika, se ne bo mogel prijaviti v DocSpace, njegovi dokumenti in podatki pa bodo ostali nedotaknjeni.",
+  "DisableUsers": "Onemogoči uporabnike",
+  "DisableUsersDescription": "Če onemogočite te uporabnike, se ne bodo mogli prijaviti v DocSpace, njihovi dokumenti in podatki pa bodo ostali nedotaknjeni.",
+  "EnableUser": "Omogoči uporabnika",
+  "EnableUserDescription": "Če omogočite tega uporabnika, se bo lahko ponovno prijavil v DocSpace in dostopal do svojih dokumentov in podatkov.",
+  "EnableUsers": "Omogoči uporabnike",
+  "EnableUsersDescription": "Če omogočite te uporabnike, se bodo lahko znova prijavili v DocSpace in dostopali do svojih dokumentov in podatkov."
+}

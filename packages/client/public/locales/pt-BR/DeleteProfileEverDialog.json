@@ -1,4 +1,14 @@
 {
+  "ActionCannotBeUndone": "Os usuários desabilitados selecionados serão removidos do DocSpace. Essa ação não pode ser desfeita.",
+  "CannotReassignFiles": "Se você excluir vários usuários de uma vez, não poderá reatribuir seus arquivos a outros usuários.",
+  "DeleteGroupUsersSuccessMessage": "Os usuários foram excluídos com sucesso.",
+  "DeleteMyDocumentsUser": "Todos os arquivos e pastas pessoais na seção Meus documentos deste usuário serão excluídos permanentemente.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} As salas criadas por este usuário e os documentos armazenados nessas salas serão reatribuídos automaticamente a um administrador que executa a exclusão: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Reatribua os dados manualmente para escolher outro usuário de destino para reatribuição.",
   "DeleteUser": "Excluir usuário",
-  "SuccessfullyDeleteUserInfoMessage": "O usuário foi excluído com sucesso"
+  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> será excluído. Essa ação não pode ser desfeita.",
+  "DeletingUsers": "Excluindo usuários",
+  "PleaseNote": "Observe:",
+  "ReassignDataToAnotherUser": "Reatribuir dados a outro usuário",
+  "SuccessfullyDeleteUserInfoMessage": "O usuário foi excluído com sucesso",
+  "ToBeAbleToReassignData": "Para poder reatribuir dados, exclua um usuário por vez."
 }

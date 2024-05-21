@@ -3,12 +3,15 @@
   "AddManuallyDescriptionAccounts": "Convide novos usuários para o DocSpace pessoalmente por e-mail",
   "AddManuallyDescriptionRoom": "Adicione usuários existentes do DocSpace à sala usando os nomes ou convide novos usuários pessoalmente por e-mail",
   "EmailErrorMessage": "Endereço de email inválido. Você pode editar o e-mail clicando nele.",
+  "GroupMaxAvailableRoleWarning": "Os grupos têm a função máxima disponível - “{{role}}”. Você pode emitir um aumento de direitos após adicionar um grupo à sala.",
+  "InvitationLanguage": "Idioma do convite",
   "InviteAccountSearchPlaceholder": "Convidar pessoas por e-mail",
-  "Invited": "Convidado",
   "InviteRoomSearchPlaceholder": "Convidar pessoas por nome ou e-mail",
   "InviteViaLink": "Convidar pelo link",
   "InviteViaLinkDescriptionAccounts": "Crie um link universal para autoautorização no DocSpace",
   "InviteViaLinkDescriptionRoom": "Crie um link universal para auto-autorização na sala",
   "LinkCopySuccess": "O link foi copiado",
-  "SendInvitation": "Enviar convite"
+  "ResetChange": "Redefinir alteração",
+  "SendInvitation": "Enviar convite",
+  "UsersAlreadyAdded": "Alguns usuários já foram adicionados"
 }

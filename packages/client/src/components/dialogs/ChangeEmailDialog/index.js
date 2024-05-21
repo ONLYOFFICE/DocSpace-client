@@ -1,15 +1,43 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import PropTypes from "prop-types";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
-import EmailInput from "@docspace/components/email-input";
-import FieldContainer from "@docspace/components/field-container";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { EmailInput } from "@docspace/shared/components/email-input";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { toastr } from "@docspace/shared/components/toast";
+
 import { withTranslation } from "react-i18next";
 import ModalDialogContainer from "../ModalDialogContainer";
-import { sendInstructionsToChangeEmail } from "@docspace/common/api/people";
-import toastr from "@docspace/components/toast/toastr";
-import { errorKeys } from "@docspace/components/utils/constants";
+import { sendInstructionsToChangeEmail } from "@docspace/shared/api/people";
+
+import { ErrorKeys } from "@docspace/shared/enums";
 import { inject, observer } from "mobx-react";
 class ChangeEmailDialogComponent extends React.Component {
   constructor(props) {
@@ -69,7 +97,7 @@ class ChangeEmailDialogComponent extends React.Component {
         .catch((error) => toastr.error(error))
         .finally(() => {
           this.setState({ isRequestRunning: false }, () =>
-            this.props.onClose()
+            this.props.onClose(),
           );
         });
     });
@@ -97,27 +125,27 @@ class ChangeEmailDialogComponent extends React.Component {
     } else {
       const translatedErrors = emailErrors.map((errorKey) => {
         switch (errorKey) {
-          case errorKeys.LocalDomain:
+          case ErrorKeys.LocalDomain:
             return t("Common:LocalDomain");
-          case errorKeys.IncorrectDomain:
+          case ErrorKeys.IncorrectDomain:
             return t("Common:IncorrectDomain");
-          case errorKeys.DomainIpAddress:
+          case ErrorKeys.DomainIpAddress:
             return t("Common:DomainIpAddress");
-          case errorKeys.PunycodeDomain:
+          case ErrorKeys.PunycodeDomain:
             return t("Common:PunycodeDomain");
-          case errorKeys.PunycodeLocalPart:
+          case ErrorKeys.PunycodeLocalPart:
             return t("Common:PunycodeLocalPart");
-          case errorKeys.IncorrectLocalPart:
+          case ErrorKeys.IncorrectLocalPart:
             return t("Common:IncorrectLocalPart");
-          case errorKeys.SpacesInLocalPart:
+          case ErrorKeys.SpacesInLocalPart:
             return t("Common:SpacesInLocalPart");
-          case errorKeys.MaxLengthExceeded:
+          case ErrorKeys.MaxLengthExceeded:
             return t("Common:MaxLengthExceeded");
-          case errorKeys.IncorrectEmail:
+          case ErrorKeys.IncorrectEmail:
             return t("Common:IncorrectEmail");
-          case errorKeys.ManyEmails:
+          case ErrorKeys.ManyEmails:
             return t("Common:ManyEmails");
-          case errorKeys.EmptyEmail:
+          case ErrorKeys.EmptyEmail:
             return t("Common:EmptyEmail");
           default:
             throw new Error("Unknown translation key");
@@ -209,7 +237,7 @@ class ChangeEmailDialogComponent extends React.Component {
 }
 
 const ChangeEmailDialog = withTranslation(["ChangeEmailDialog", "Common"])(
-  ChangeEmailDialogComponent
+  ChangeEmailDialogComponent,
 );
 
 ChangeEmailDialog.propTypes = {
@@ -218,15 +246,15 @@ ChangeEmailDialog.propTypes = {
   user: PropTypes.object.isRequired,
 };
 
-export default inject(({ auth, peopleStore }) => {
+export default inject(({ settingsStore, peopleStore, userStore }) => {
   const { updateProfile } = peopleStore.targetUserStore;
   const { updateProfileInUsers } = peopleStore.usersStore;
-  const { user: profile } = auth.userStore;
+  const { user: profile } = userStore;
 
   return {
     updateProfile,
     updateProfileInUsers,
-    isTabletView: auth.settingsStore.isTabletView,
+    isTabletView: settingsStore.isTabletView,
     profile,
   };
 })(observer(ChangeEmailDialog));

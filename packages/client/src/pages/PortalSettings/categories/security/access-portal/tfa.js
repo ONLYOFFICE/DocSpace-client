@@ -1,19 +1,46 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import RadioButtonGroup from "@docspace/components/radio-button-group";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import toastr from "@docspace/components/toast/toastr";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { toastr } from "@docspace/shared/components/toast";
 import { LearnMoreWrapper } from "../StyledSecurity";
-import { size } from "@docspace/components/utils/device";
+import { size } from "@docspace/shared/utils";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import isEqual from "lodash/isEqual";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import TfaLoader from "../sub-components/loaders/tfa-loader";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -32,7 +59,6 @@ const TwoFactorAuth = (props) => {
     currentColorScheme,
     tfaSettingsUrl,
     currentDeviceType,
-    getTfaType,
     smsAvailable,
     appAvailable,
     tfaSettings,
@@ -44,6 +70,11 @@ const TwoFactorAuth = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const getSettingsFromDefault = () => {
+    const defaultSettings = getFromSessionStorage("defaultTfaSettings");
+    if (defaultSettings) setType(defaultSettings);
+  };
 
   const getSettings = async () => {
     const currentSettings = getFromSessionStorage("currentTfaSettings");
@@ -58,23 +89,27 @@ const TwoFactorAuth = (props) => {
     setIsLoading(true);
   };
 
-  const getTfaTypeFn = async () => {
-    await getTfaType();
-  };
-
   useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
+
+    if (!isInit) initSettings("tfa").then(() => setIsLoading(true));
+    else setIsLoading(true);
+
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useEffect(() => {
-    if (smsAvailable === null || appAvailable === null) getTfaTypeFn();
-  }, [smsAvailable, appAvailable]);
+    if (!isInit || !tfaSettings) return;
+    const currentSettings = getFromSessionStorage("currentTfaSettings");
+    const defaultSettings = getFromSessionStorage("defaultTfaSettings");
 
-  useEffect(() => {
-    tfaSettings && getSettings();
-  }, [tfaSettings]);
+    if (isEqual(currentSettings, defaultSettings)) {
+      getSettings();
+    } else {
+      getSettingsFromDefault();
+    }
+  }, [isLoading, tfaSettings]);
 
   useEffect(() => {
     if (!isLoading) return;
@@ -82,7 +117,7 @@ const TwoFactorAuth = (props) => {
     const defaultSettings = getFromSessionStorage("defaultTfaSettings");
     saveToSessionStorage("currentTfaSettings", type);
 
-    if (defaultSettings === type) {
+    if (isEqual(defaultSettings, type)) {
       setShowReminder(false);
     } else {
       setShowReminder(true);
@@ -102,17 +137,16 @@ const TwoFactorAuth = (props) => {
   };
 
   const onSaveClick = async () => {
-    const { t, setTfaSettings, getTfaConfirmLink } = props;
-
+    const { t, setTfaSettings } = props;
     setIsSaving(true);
 
     try {
       const res = await setTfaSettings(type);
-
-      toastr.success(t("SuccessfullySaveSettingsMessage"));
-      saveToSessionStorage("defaultTfaSettings", type);
-      setIsSaving(false);
+      setType(type);
       setShowReminder(false);
+      saveToSessionStorage("defaultTfaSettings", type);
+      saveToSessionStorage("currentTfaSettings", type);
+      toastr.success(t("SuccessfullySaveSettingsMessage"));
 
       if (res) {
         setIsInit(false);
@@ -121,11 +155,14 @@ const TwoFactorAuth = (props) => {
     } catch (error) {
       toastr.error(error);
     }
+
+    setIsSaving(false);
   };
 
   const onCancelClick = () => {
     const defaultSettings = getFromSessionStorage("defaultTfaSettings");
-    setType(defaultSettings);
+    saveToSessionStorage("currentTfaSettings", defaultSettings);
+    setType(defaultSettings || "none");
     setShowReminder(false);
   };
 
@@ -141,7 +178,7 @@ const TwoFactorAuth = (props) => {
         </Text>
         <Link
           className="link-learn-more"
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           target="_blank"
           isHovered
           href={tfaSettingsUrl}
@@ -160,7 +197,7 @@ const TwoFactorAuth = (props) => {
         options={[
           {
             id: "tfa-disabled",
-            label: t("Disabled"),
+            label: t("Common:Disabled"),
             value: "none",
           },
           //TODO: hide while 2fa by sms is not working
@@ -199,23 +236,22 @@ const TwoFactorAuth = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ settingsStore, setup, tfaStore }) => {
   const {
     setTfaSettings,
-    getTfaConfirmLink,
+
     tfaSettings,
     smsAvailable,
     appAvailable,
-    getTfaType,
-  } = auth.tfaStore;
+  } = tfaStore;
 
   const { isInit, initSettings, setIsInit } = setup;
   const { currentColorScheme, tfaSettingsUrl, currentDeviceType } =
-    auth.settingsStore;
+    settingsStore;
 
   return {
     setTfaSettings,
-    getTfaConfirmLink,
+
     tfaSettings,
     smsAvailable,
     appAvailable,
@@ -225,6 +261,5 @@ export default inject(({ auth, setup }) => {
     currentColorScheme,
     tfaSettingsUrl,
     currentDeviceType,
-    getTfaType,
   };
 })(withTranslation(["Settings", "Common"])(observer(TwoFactorAuth)));

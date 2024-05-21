@@ -5,6 +5,7 @@
   "HotkeysChangeView": "Izgara ve liste görünümü arasında geçiş yap",
   "HotkeysClearAll": "Tüm seçimleri temizle",
   "HotkeysClose": "Kapat/Eylemi geri al",
+  "HotkeysCopySelected": "Seçilen öğeleri panoya kopyala",
   "HotkeysCreateDocument": "Belge Oluştur",
   "HotkeysCreateFolder": "Klasör Oluştur",
   "HotkeysCreateForm": "Boş form şablonu oluştur",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "Sunum Oluştur",
   "HotkeysCreateSpreadsheet": "Elektronik Tablo Oluştur",
   "HotkeysCreatingObjects": "Öğeler oluşturuluyor",
+  "HotkeysCutSelected": "Seçilen öğeleri panoya kes",
   "HotkeysEnterKey": "Giriş",
   "HotkeysExtendSelectionDown": "Seçimi aşağı genişlet",
   "HotkeysExtendSelectionLeft": "Seçimi sola genişlet",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "Seçimi değiştirmeden yukarı git",
   "HotkeysNavigation": "Gezinti",
   "HotkeysOpen": "Seçili öğeyi aç/İşlemi onayla",
+  "HotkeysPasteSelected": "Seçilen öğeleri panodan yapıştır",
   "HotkeysPlayPause": "Oynat/Duraklat",
   "HotkeysRedoLastUndoneAction": "Geri alınan son eylemi yeniden yap",
   "HotkeysRemove": "Seçili öğeleri kaldır",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "Boşluk",
   "HotkeysUndoLastAction": "Son işlemi geri al",
   "HotkeysUploadFile": "Dosya yükle",
-  "HotkeysUploadingObjects": "Öğeler yükleniyor"
+  "HotkeysUploadingObjects": "Öğeler yükleniyor",
+  "HotkeysZoomIn": "Yakınlaştır",
+  "HotkeysZoomOut": "Uzaklaştır"
 }

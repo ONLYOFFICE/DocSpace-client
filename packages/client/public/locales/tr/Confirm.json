@@ -1,4 +1,5 @@
 {
+  "AccountWillBeCreated": "<1>{{email}}</1> için bir DocSpace hesabı oluşturulacaktır. Lütfen kaydınızı tamamlayın:",
   "ChangePasswordSuccess": "Şifre başarıyla değiştirildi",
   "ConfirmOwnerPortalSuccessMessage": "DocSpace sahibi başarıyla değiştirildi. 10 saniye içinde yönlendirileceksiniz.",
   "ConfirmOwnerPortalTitle": "DocSpace sahibini {{newOwner}} olarak değiştirmek istediğinizi lütfen onaylayın.",
@@ -14,7 +15,6 @@
   "EnterCodePlaceholder": "Kodu girin",
   "EnterPhone": "Cep telefonu numarası giriniz",
   "GetCode": "Kod al",
-  "InviteTitle": "Bu alana katılmaya davet edildiniz!",
   "LoginRegistryButton": "Katıl",
   "PassworResetTitle": "Şimdi yeni şifre oluşturabilirsiniz.",
   "PhoneSubtitle": "İki aşamalı doğrulama ekstra güvenliği sağlamak için etkinleştirilmiştir. DocSpace'te çalışmaya devam etmek için mobil telefon numaranızı giriniz. Mobil telefon numarası ülke koduyla girilmelidir.",
@@ -26,6 +26,7 @@
   "SetAppDescription": "İki faktörlü kimlik doğrulama etkinleştirildi. DocSpace üzerinde çalışmaya devam etmek için kimlik doğrulama uygulamanızı yapılandırın. <1>Android</1> ve <4>iOS</4> için Google Authenticator'ı veya <8>Windows Phone</8> için Authenticator'ı kullanabilirsiniz.",
   "SetAppInstallDescription": "Uygulamayı bağlamak için QR kodunu tarayın veya gizli anahtarınızı <1>{{ secretKey }}</1> manuel olarak girin ve ardından uygulamanızdan 6 haneli bir kodu aşağıdaki alana girin.",
   "SetAppTitle": "Kimlik doğrulama uygulamanızı yapılandırın",
+  "SignUp": "Kaydol",
   "SuccessDeactivate": "Hesabınız başarıyla devre dışı bırakıldı. 10 saniye içinde <1>siteye</1> yönlendirileceksiniz",
   "SuccessReactivate": "Hesabınız başarıyla yeniden etkinleştirildi. 10 saniye içinde <1>portal</1>'a yönlendirileceksiniz.",
   "SuccessRemoved": "Hesabınız başarıyla kaldırıldı. 10 saniye içinde <1>siteye</1> yönlendirileceksiniz."

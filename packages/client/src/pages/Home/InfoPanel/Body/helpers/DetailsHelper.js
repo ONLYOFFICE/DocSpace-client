@@ -1,12 +1,38 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 
-import { LANGUAGE } from "@docspace/common/constants";
+import { LANGUAGE } from "@docspace/shared/constants";
 
-import getCorrectDate from "@docspace/components/utils/getCorrectDate";
+import { getCorrectDate, getCookie } from "@docspace/shared/utils";
 
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
-import Tag from "@docspace/components/tag";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Tag } from "@docspace/shared/components/tag";
 import { decode } from "he";
 
 import {
@@ -15,7 +41,9 @@ import {
   getFileTypeName,
 } from "@docspace/client/src/helpers/filesUtils";
 import CommentEditor from "../sub-components/CommentEditor";
-import { getCookie } from "@docspace/components/utils/cookie";
+
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
+
 // Property Content Components
 
 const text = (text) => (
@@ -57,7 +85,7 @@ export const decodeString = (str) => {
     : "...";
 };
 
-export const parseAndFormatDate = (date, personal, culture) => {
+export const parseAndFormatDate = (date, culture) => {
   const locale = getCookie(LANGUAGE) || culture;
   const correctDate = getCorrectDate(locale, date);
   return correctDate;
@@ -71,11 +99,12 @@ class DetailsHelper {
     this.item = props.item;
     this.navigate = props.navigate;
     this.openUser = props.openUser;
-    this.personal = props.personal;
     this.culture = props.culture;
     this.isVisitor = props.isVisitor;
     this.isCollaborator = props.isCollaborator;
     this.selectTag = props.selectTag;
+    this.isDefaultRoomsQuotaSet = props.isDefaultRoomsQuotaSet;
+    this.setNewInfoPanelSelection = props.setNewInfoPanelSelection;
   }
 
   getPropertyList = () => {
@@ -115,6 +144,8 @@ class DetailsHelper {
         return "info_details_comments";
       case "Tags":
         return "info_details_tags";
+      case "Storage":
+        return "info_details_storage";
     }
   };
 
@@ -130,29 +161,30 @@ class DetailsHelper {
             "Last modified by",
             "Creation date",
             this.item.tags.length && "Tags",
+            "Storage",
           ]
         : this.item.isFolder
-        ? [
-            "Owner",
-            //"Location",
-            "Type",
-            "Content",
-            "Date modified",
-            "Last modified by",
-            "Creation date",
-          ]
-        : [
-            "Owner",
-            //"Location",
-            "Type",
-            "File extension",
-            "Size",
-            "Date modified",
-            "Last modified by",
-            "Creation date",
-            "Versions",
-            "Comments",
-          ]
+          ? [
+              "Owner",
+              //"Location",
+              "Type",
+              "Content",
+              "Date modified",
+              "Last modified by",
+              "Creation date",
+            ]
+          : [
+              "Owner",
+              //"Location",
+              "Type",
+              "File extension",
+              "Size",
+              "Date modified",
+              "Last modified by",
+              "Creation date",
+              "Versions",
+              "Comments",
+            ]
     ).filter((nP) => !!nP);
   };
 
@@ -189,13 +221,22 @@ class DetailsHelper {
         return this.t("Common:Comments");
       case "Tags":
         return this.t("Common:Tags");
+      case "Storage":
+        if (this.item.usedSpace !== undefined) {
+          return this.isDefaultRoomsQuotaSet &&
+            this.item.quotaLimit !== undefined
+            ? this.t("Common:StorageAndQuota")
+            : this.t("Common:Storage");
+        }
+
+        return <></>;
     }
   };
 
   getPropertyContent = (propertyId) => {
     switch (propertyId) {
       case "Owner":
-        return this.getItemOwner();
+        return this.getAuthorDecoration("createdBy");
       case "Location":
         return this.getItemLocation();
 
@@ -217,7 +258,7 @@ class DetailsHelper {
       case "Date modified":
         return this.getItemDateModified();
       case "Last modified by":
-        return this.getItemLastModifiedBy();
+        return this.getAuthorDecoration("updatedBy");
       case "Creation date":
         return this.getItemCreationDate();
 
@@ -227,17 +268,24 @@ class DetailsHelper {
         return this.getItemComments();
       case "Tags":
         return this.getItemTags();
+      case "Storage":
+        return this.getQuotaItem();
     }
   };
 
   /// Property  //
 
-  getItemOwner = () => {
-    const onOpenUser = () => this.openUser(this.item.createdBy, this.navigate);
+  getAuthorDecoration = (byField = "createdBy") => {
+    const onClick = () => this.openUser(this.item[byField], this.navigate);
 
-    return this.personal || this.isVisitor || this.isCollaborator
-      ? text(decode(this.item.createdBy?.displayName))
-      : link(decode(this.item.createdBy?.displayName), onOpenUser);
+    const displayName = this.item[byField]?.displayName;
+    const name = displayName ? decode(displayName) : "";
+
+    //console.log("getAuthorDecoration", { name, displayName });
+
+    return this.isVisitor || this.isCollaborator
+      ? text(name)
+      : link(name, onClick);
   };
 
   getItemLocation = () => {
@@ -248,13 +296,13 @@ class DetailsHelper {
     return text(
       this.item.isRoom
         ? getDefaultRoomName(this.item.roomType, this.t)
-        : getFileTypeName(this.item.fileType)
+        : getFileTypeName(this.item.fileType),
     );
   };
 
   getItemFileExtention = () => {
     return text(
-      this.item.fileExst ? this.item.fileExst.split(".")[1].toUpperCase() : "-"
+      this.item.fileExst ? this.item.fileExst.split(".")[1].toUpperCase() : "-",
     );
   };
 
@@ -269,8 +317,8 @@ class DetailsHelper {
   getItemContent = () => {
     return text(
       `${this.t("Translations:Folders")}: ${this.item.foldersCount} | ${this.t(
-        "Translations:Files"
-      )}: ${this.item.filesCount}`
+        "Translations:Files",
+      )}: ${this.item.filesCount}`,
     );
   };
 
@@ -279,23 +327,11 @@ class DetailsHelper {
   };
 
   getItemDateModified = () => {
-    return text(
-      parseAndFormatDate(this.item.updated, this.personal, this.culture)
-    );
-  };
-
-  getItemLastModifiedBy = () => {
-    const onOpenUser = () => this.openUser(this.item.updatedBy, this.navigate);
-
-    return this.personal || this.isVisitor || this.isCollaborator
-      ? text(decode(this.item.updatedBy?.displayName))
-      : link(decode(this.item.updatedBy?.displayName), onOpenUser);
+    return text(parseAndFormatDate(this.item.updated, this.culture));
   };
 
   getItemCreationDate = () => {
-    return text(
-      parseAndFormatDate(this.item.created, this.personal, this.culture)
-    );
+    return text(parseAndFormatDate(this.item.created, this.culture));
   };
 
   getItemVersions = () => {
@@ -308,6 +344,24 @@ class DetailsHelper {
 
   getItemTags = () => {
     return tagList(this.item.tags, this.selectTag);
+  };
+
+  getQuotaItem = () => {
+    const onSuccess = () => {
+      this.setNewInfoPanelSelection();
+    };
+
+    if (this.item.usedSpace !== undefined) {
+      return (
+        <SpaceQuota
+          item={this.item}
+          isReadOnly={!this.item?.security?.EditRoom}
+          onSuccess={onSuccess}
+        />
+      );
+    }
+
+    return <></>;
   };
 }
 

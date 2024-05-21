@@ -1,4 +1,5 @@
 {
+  "AccountWillBeCreated": "Račun DocSpace bo ustvarjen za <1>{{email}}</1>. Prosimo, dokončajte registracijo:",
   "ChangePasswordSuccess": "Geslo je bilo uspešno spremenjeno",
   "ConfirmOwnerPortalSuccessMessage": "Lastnik DocSpace je bil uspešno spremenjen. Čez 10 sekund boste preusmerjeni.",
   "ConfirmOwnerPortalTitle": "Potrdite, da želite spremeniti lastnika DocSpace v {{newOwner}}.",
@@ -14,7 +15,6 @@
   "EnterCodePlaceholder": "Vnesite kodo",
   "EnterPhone": "Vnesi telefonsko številko",
   "GetCode": "Pridobi kodo",
-  "InviteTitle": "Vabljeni ste, da se pridružite temu prostoru!",
   "LoginRegistryButton": "Pridruži se",
   "PassworResetTitle": "Zdaj lahko ustvarite novo geslo.",
   "PhoneSubtitle": "Dvofaktorska avtentikacija je omogočena za zagotavljanje dodatne varnosti. Vnesite svojo telefonsko številko za nadaljevanje delo v DocSpace. Vnesena mora biti mobilna številka z mednarodnim formatom s kodo države.",
@@ -26,6 +26,7 @@
   "SetAppDescription": "Omogočena je dvofaktorska avtentikacija. Za nadaljevanje dela v DocSpace konfigurirajte aplikacijo za avtentikacijo. Google Authenticator lahko uporabite za <1>Android</1> in <4>iOS</4> ali Avtentikator za <8>Windows Telefon</8>.",
   "SetAppInstallDescription": "Če želite povezati aplikacijo, skenirajte kodo QR ali ročno vnesite svoj skrivni ključ <1>{{ secretKey }}</1>, nato vnesite 6-mestno kodo iz aplikacije v polje spodaj.",
   "SetAppTitle": "Konfigurirajte vašo aplikacijo za avtentikacijo",
+  "SignUp": "Prijava",
   "SuccessDeactivate": "Vaš račun je bil uspešno ponovno aktiviran. Čez 10 sekund boste preusmerjeni na <1>stran</1>.",
   "SuccessReactivate": "Vaš račun je bil uspešno ponovno aktiviran. Čez 10 sekund boste preusmerjeni v <1>portal</1>.",
   "SuccessRemoved": "Vaš račun je bil uspešno odstranjen. Čez 10 sekund boste preusmerjeni na <1>stran</1>."

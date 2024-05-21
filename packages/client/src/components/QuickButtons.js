@@ -1,16 +1,51 @@
-﻿import FileActionsLockedReactSvgUrl from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import FileActionsLockedReactSvgUrl from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
 import FileActionsDownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/locked.react.svg?url";
 import FileActionsFavoriteReactSvgUrl from "PUBLIC_DIR/images/file.actions.favorite.react.svg?url";
 import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
 import LifetimeReactSvgUrl from "PUBLIC_DIR/images/lifetime.react.svg?url";
+import LockedReact12SvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
+
+import React, { useMemo } from "react";
 import styled from "styled-components";
-import { isTablet } from "@docspace/components/utils/device";
-import { FileStatus, RoomsType } from "@docspace/common/constants";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
-import Tooltip from "@docspace/components/tooltip";
-import Text from "@docspace/components/text";
+import { isTablet, isMobile, commonIconsStyles } from "@docspace/shared/utils";
+import {
+  DeviceType,
+  FileStatus,
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
+import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Text } from "@docspace/shared/components/text";
+
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 const StyledQuickButtons = styled.div`
   .file-lifetime {
@@ -41,17 +76,29 @@ const QuickButtons = (props) => {
     viewAs,
     folderCategory,
     isPublicRoom,
+    onClickShare,
+    isPersonalRoom,
     isArchiveFolder,
+    currentDeviceType,
   } = props;
 
-  const { id, locked, fileStatus, title, fileExst } = item;
+  const isMobile = currentDeviceType === DeviceType.mobile;
+
+  const { id, locked, shared, fileStatus, title, fileExst } = item;
 
   const isFavorite =
     (fileStatus & FileStatus.IsFavorite) === FileStatus.IsFavorite;
 
   const isTile = viewAs === "tile";
+  const isRow = viewAs == "row";
 
-  const iconLock = locked ? FileActionsLockedReactSvgUrl : LockedReactSvgUrl;
+  const iconLock = useMemo(() => {
+    if (isMobile) {
+      return LockedReact12SvgUrl;
+    }
+
+    return locked ? FileActionsLockedReactSvgUrl : LockedReactSvgUrl;
+  }, [locked, isMobile]);
 
   const colorLock = locked
     ? theme.filesQuickButtons.sharedColor
@@ -65,22 +112,40 @@ const QuickButtons = (props) => {
     ? theme.filesQuickButtons.sharedColor
     : theme.filesQuickButtons.color;
 
+  const colorShare = shared
+    ? theme.filesQuickButtons.sharedColor
+    : theme.filesQuickButtons.color;
+
   const tabletViewQuickButton = isTablet();
 
   const sizeQuickButton = isTile || tabletViewQuickButton ? "medium" : "small";
-
-  const displayBadges = viewAs === "table" || isTile || tabletViewQuickButton;
+  const displayBadges =
+    viewAs === "table" ||
+    (isRow && locked && isMobile) ||
+    isTile ||
+    tabletViewQuickButton;
 
   const setFavorite = () => onClickFavorite(isFavorite);
 
   const isAvailableLockFile =
     !folderCategory && fileExst && displayBadges && item.security.Lock;
+
   const isAvailableDownloadFile =
     isPublicRoom && item.security.Download && viewAs === "tile";
 
+  const isAvailableShareFile = isPersonalRoom && item.canShare;
+
+  const isPublicRoomType =
+    item.roomType === RoomsType.PublicRoom ||
+    item.roomType === RoomsType.CustomRoom;
+
+  const haveLinksRight =
+    item?.access === ShareAccessRights.RoomManager ||
+    item?.access === ShareAccessRights.None;
+
   const showCopyLinkIcon =
-    (item.roomType === RoomsType.PublicRoom ||
-      item.roomType === RoomsType.CustomRoom) &&
+    isPublicRoomType &&
+    haveLinksRight &&
     item.shared &&
     !isArchiveFolder &&
     !isTile;
@@ -97,11 +162,11 @@ const QuickButtons = (props) => {
   );
 
   return (
-    <StyledQuickButtons className="badges additional-badges  badges__quickButtons">
+    <StyledQuickButtons className="badges additional-badges badges__quickButtons">
       {showLifetimeIcon && (
         <>
           <ColorTheme
-            themeId={ThemeType.IconButton}
+            themeId={ThemeId.IconButton}
             iconName={LifetimeReactSvgUrl}
             className="badge file-lifetime icons-group"
             size={sizeQuickButton}
@@ -122,7 +187,7 @@ const QuickButtons = (props) => {
 
       {isAvailableLockFile && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={iconLock}
           className="badge lock-file icons-group"
           size={sizeQuickButton}
@@ -137,7 +202,7 @@ const QuickButtons = (props) => {
       )}
       {isAvailableDownloadFile && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={FileActionsDownloadReactSvgUrl}
           className="badge download-file icons-group"
           size={sizeQuickButton}
@@ -150,7 +215,7 @@ const QuickButtons = (props) => {
       )}
       {showCopyLinkIcon && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={LinkReactSvgUrl}
           className="badge copy-link icons-group"
           size={sizeQuickButton}
@@ -158,12 +223,25 @@ const QuickButtons = (props) => {
           color={colorLock}
           isDisabled={isDisabled}
           hoverColor={theme.filesQuickButtons.sharedColor}
-          title={t("Files:CopyGeneralLink")}
+          title={t("Files:CopySharedLink")}
+        />
+      )}
+      {isAvailableShareFile && (
+        <ColorTheme
+          themeId={ThemeId.IconButton}
+          iconName={LinkReactSvgUrl}
+          className="badge copy-link icons-group"
+          size={sizeQuickButton}
+          onClick={onClickShare}
+          color={colorShare}
+          isDisabled={isDisabled}
+          hoverColor={theme.filesQuickButtons.sharedColor}
+          title={t("Files:CopySharedLink")}
         />
       )}
       {/* {fileExst && !isTrashFolder && displayBadges && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={iconFavorite}
           isFavorite={isFavorite}
           className="favorite badge icons-group"

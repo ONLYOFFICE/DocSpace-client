@@ -1,4 +1,5 @@
 {
+  "AccountWillBeCreated": "将为 <1>{{email}}</1> 创建协作空间账号。请完成您的注册：",
   "ChangePasswordSuccess": "密码已成功更改",
   "ConfirmOwnerPortalSuccessMessage": "协作空间所有者已更改成功。10秒内您将被重定向至。",
   "ConfirmOwnerPortalTitle": "请确认您是否想将门户所有者变更为{{newOwner}}。",
@@ -14,7 +15,6 @@
   "EnterCodePlaceholder": "输入代码",
   "EnterPhone": "请填写您的手机号码",
   "GetCode": "获取代码",
-  "InviteTitle": "欢迎您加入此协作空间！",
   "LoginRegistryButton": "加入",
   "PassworResetTitle": "现在您可创建新密码。",
   "PhoneSubtitle": "双因素身份验证功能可提供额外的协作空间安全性。请输入您的手机号码，以继续在协作空间上工作。必须使用具有国家/地区代码的国际格式输入手机号码。",
@@ -26,6 +26,7 @@
   "SetAppDescription": "双因素身份验证功能已启用。请配置您的身份验证应用，以便继续使用协作空间。如果您使用的是<1>Android</1>与<4>iOS</4>系统，则可使用Google Authenticator。<8>Windows Phone</8>可使用Authenticator。",
   "SetAppInstallDescription": "如需连接应用，请扫描二维码或手动输入您的密钥<1>{{ secretKey }}</1>，然后在下方的字段中输入应用中的6位数字码。",
   "SetAppTitle": "配置您的身份验证应用",
+  "SignUp": "注册",
   "SuccessDeactivate": "您的账户已成功停用。10 秒后您将被重定向至<1>站点</1>。",
   "SuccessReactivate": "您的账户已成功重新启用。10 秒后您将被重定向至<1>门户</1>。",
   "SuccessRemoved": "您的账户已删除成功。10 秒钟后，您将被重新转到<1>site</1>。"

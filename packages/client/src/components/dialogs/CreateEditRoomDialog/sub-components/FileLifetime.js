@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Text from "@docspace/components/text";
-import TextInput from "@docspace/components/text-input";
-import ComboBox from "@docspace/components/combobox";
-import { mobile } from "@docspace/components/utils/device";
+import { Text } from "@docspace/shared/components/text";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { mobile } from "@docspace/shared/utils/device";
 
 const StyledFileLifetime = styled.div`
   margin-top: 12px;

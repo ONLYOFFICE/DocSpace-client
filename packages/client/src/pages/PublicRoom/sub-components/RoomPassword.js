@@ -1,16 +1,43 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React, { useState, useEffect, useRef } from "react";
 import { withTranslation } from "react-i18next";
-import Text from "@docspace/components/text";
-import PasswordInput from "@docspace/components/password-input";
-import Button from "@docspace/components/button";
-import FieldContainer from "@docspace/components/field-container";
+import { Text } from "@docspace/shared/components/text";
+import { PasswordInput } from "@docspace/shared/components/password-input";
+import { Button } from "@docspace/shared/components/button";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 import { inject, observer } from "mobx-react";
 import { StyledPage, StyledBody, StyledContent } from "./RoomStyles";
-// import { createPasswordHash } from "@docspace/common/utils";
-import toastr from "@docspace/components/toast/toastr";
-import FormWrapper from "@docspace/components/form-wrapper";
-import DocspaceLogo from "../../../DocspaceLogo";
-import { ValidationResult } from "../../../helpers/constants";
+// import { createPasswordHash } from "@docspace/shared/utils/common";
+import { frameCallCommand } from "@docspace/shared/utils/common";
+import { toastr } from "@docspace/shared/components/toast";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import { ValidationStatus } from "../../../helpers/constants";
 
 import PublicRoomIcon from "PUBLIC_DIR/images/icons/32/room/public.svg";
 
@@ -18,12 +45,16 @@ const RoomPassword = (props) => {
   const { t, roomKey, validatePublicRoomPassword, setRoomData, roomTitle } =
     props;
 
+  console.log("render");
+
   const [password, setPassword] = useState("");
   const [passwordValid, setPasswordValid] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
   const inputRef = useRef(null);
+
+  useEffect(() => frameCallCommand("setIsLoaded"), []);
 
   useEffect(() => {
     if (inputRef && inputRef.current) {
@@ -54,21 +85,19 @@ const RoomPassword = (props) => {
       setIsLoading(false);
 
       switch (res?.status) {
-        case ValidationResult.Ok: {
+        case ValidationStatus.Ok: {
           setRoomData(res); // Ok
           return;
         }
-        // case ValidationResult.Invalid: {
+        // case ValidationStatus.Invalid: {
         //   setErrorMessage(""); // Invalid
-        //   toastr.error("Invalid");
         //   return;
         // }
-        // case ValidationResult.Expired: {
+        // case ValidationStatus.Expired: {
         //   setErrorMessage(""); // Expired
-        //   toastr.error("Expired");
         //   return;
         // }
-        case ValidationResult.InvalidPassword: {
+        case ValidationStatus.InvalidPassword: {
           setErrorMessage(t("Common:IncorrectPassword"));
           return;
         }

@@ -7,6 +7,7 @@
   "InvalidUsernameOrPassword": "Geçersiz kullanıcı adı veya şifre.",
   "LoginWithAccountNotFound": "İlişkili üçüncü parti hesap bulunamıyor. Sosyal ağ hesabınızı profil düzenleme sayfasında bağlamanız gerekiyor.",
   "LoginWithBruteForce": "Yetkilendirme geçici olarak engellendi",
+  "LoginWithBruteForceCaptcha": "Robot olmadığınızı doğrulayın",
   "RecaptchaInvalid": "Geçersiz Recaptcha",
   "SsoAttributesNotFound": "Kimlik doğrulama başarısız oldu (onay öznitelikleri bulunamadı)",
   "SsoAuthFailed": "Kimlik doğrulama başarısız oldu",

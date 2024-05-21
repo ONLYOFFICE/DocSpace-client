@@ -5,6 +5,7 @@
   "HotkeysChangeView": "Превключване между изглед на мрежа и списък",
   "HotkeysClearAll": "Изчистване на всички селекции",
   "HotkeysClose": "Затваряне/Отмяна на действие",
+  "HotkeysCopySelected": "Копирай избраните елементи в клипборда",
   "HotkeysCreateDocument": "Създаване на документ",
   "HotkeysCreateFolder": "Създай папка",
   "HotkeysCreateForm": "Създаване на празен шаблон на формуляр",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "Създаване на презентация",
   "HotkeysCreateSpreadsheet": "Създайте таблица",
   "HotkeysCreatingObjects": "Създаване на елементи",
+  "HotkeysCutSelected": "Изрежи избраните елементи в клипборда",
   "HotkeysEnterKey": "Влез",
   "HotkeysExtendSelectionDown": "Разширяване на избора надолу",
   "HotkeysExtendSelectionLeft": "Разширяване на избора вляво",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "Преместване нагоре без промяна на избора",
   "HotkeysNavigation": "Навигация",
   "HotkeysOpen": "Отваряне на избрания елемент/Потвърждаване на действието",
+  "HotkeysPasteSelected": "Постави избраните елементи в клипборда",
   "HotkeysPlayPause": "Възпроизвеждане/Пауза",
   "HotkeysRedoLastUndoneAction": "Повторете последното неизвършено действие",
   "HotkeysRemove": "Премахване на избраните елементи",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "Пространство",
   "HotkeysUndoLastAction": "Отмяна на последното действие",
   "HotkeysUploadFile": "Качи файл",
-  "HotkeysUploadingObjects": "Качване на елементи"
+  "HotkeysUploadingObjects": "Качване на елементи",
+  "HotkeysZoomIn": "Приближи",
+  "HotkeysZoomOut": "Отдалечи"
 }

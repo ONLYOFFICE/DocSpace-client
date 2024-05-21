@@ -1,19 +1,46 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
-import { useLocation, useNavigate, Outlet } from "react-router-dom";
+import { useLocation, useNavigate, Outlet, useParams } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { showLoader, hideLoader } from "@docspace/common/utils";
+import { showLoader, hideLoader } from "@docspace/shared/utils/common";
 
-import Section from "@docspace/common/components/Section";
-
+import Section from "@docspace/shared/components/section";
+import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
 
 import {
   SectionFilterContent,
   SectionHeaderContent,
   SectionPagingContent,
+  SectionSubmenuContent,
   SectionWarningContent,
 } from "./Section";
 import AccountsDialogs from "./Section/AccountsBody/Dialogs";
@@ -29,6 +56,8 @@ import {
   useOperations,
   useAccounts,
   useSettings,
+  useGroups,
+  useInsideGroup,
 } from "./Hooks";
 
 const PureHome = (props) => {
@@ -38,10 +67,12 @@ const PureHome = (props) => {
 
     //homepage,
     setIsLoading,
+    isLoading,
 
     setToPreviewFile,
     playlist,
 
+    folderSecurity,
     getFileInfo,
     gallerySelected,
     setIsUpdatingRowItem,
@@ -71,7 +102,6 @@ const PureHome = (props) => {
     files,
     selection,
     filesList,
-    removeFirstUrl,
 
     createFile,
     createFolder,
@@ -108,6 +138,8 @@ const PureHome = (props) => {
 
     accountsViewAs,
     fetchPeople,
+    fetchGroups,
+    fetchGroup,
     setSelectedNode,
     onClickBack,
 
@@ -123,14 +155,21 @@ const PureHome = (props) => {
     loadCurrentUser,
     updateProfileCulture,
     getRooms,
+    setSelectedFolder,
+    userId,
+    getFolderModel,
   } = props;
 
   const location = useLocation();
+  const { groupId } = useParams();
 
   const isSettingsPage =
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
   const isAccountsPage = location.pathname.includes("/accounts");
+  const isPeopleAccounts = location.pathname.includes("accounts/people");
+  const isGroupsAccounts =
+    location.pathname.includes("accounts/groups") && !groupId;
 
   const { onDrop } = useFiles({
     t,
@@ -155,9 +194,10 @@ const PureHome = (props) => {
     setIsPreview,
 
     setIsUpdatingRowItem,
-    removeFirstUrl,
 
     gallerySelected,
+    folderSecurity,
+    userId,
   });
 
   const { showUploadPanel } = useOperations({
@@ -179,6 +219,7 @@ const PureHome = (props) => {
   useAccounts({
     t,
     isAccountsPage,
+    isPeopleAccounts,
     location,
 
     setIsLoading,
@@ -186,6 +227,27 @@ const PureHome = (props) => {
     setSelectedNode,
     fetchPeople,
     setPortalTariff,
+  });
+
+  useGroups({
+    t,
+    isAccountsPage,
+    isGroupsAccounts,
+    location,
+
+    setIsLoading,
+
+    setSelectedNode,
+    fetchGroups,
+  });
+
+  useInsideGroup({
+    t,
+    groupId,
+    location,
+    setIsLoading,
+    setPortalTariff,
+    fetchGroup,
   });
 
   useSettings({
@@ -218,12 +280,19 @@ const PureHome = (props) => {
     loadCurrentUser,
     updateProfileCulture,
     getRooms,
+    isLoading,
   });
+
+  const getContextModel = () => {
+    if (isFrame) return null;
+    return getFolderModel(t);
+  };
 
   React.useEffect(() => {
     window.addEventListener("popstate", onClickBack);
 
     return () => {
+      setSelectedFolder(null);
       window.removeEventListener("popstate", onClickBack);
     };
   }, []);
@@ -241,6 +310,7 @@ const PureHome = (props) => {
       firstLoad,
       isLoaded: !firstLoad,
       viewAs: accountsViewAs,
+      isAccounts: isAccountsPage,
     };
 
     if (!isAccountsPage) {
@@ -256,6 +326,8 @@ const PureHome = (props) => {
 
       sectionProps.isEmptyPage = isEmptyPage;
       sectionProps.isTrashFolder = isRecycleBinFolder;
+    } else {
+      sectionProps.isAccounts = isAccountsPage;
     }
   }
 
@@ -268,6 +340,7 @@ const PureHome = (props) => {
   sectionProps.secondaryProgressBarValue = secondaryProgressDataStorePercent;
   sectionProps.secondaryProgressBarIcon = secondaryProgressDataStoreIcon;
   sectionProps.showSecondaryButtonAlert = secondaryProgressDataStoreAlert;
+  sectionProps.getContextModel = getContextModel;
 
   return (
     <>
@@ -285,16 +358,16 @@ const PureHome = (props) => {
         </>
       )}
       <MediaViewer />
-      <Section {...sectionProps}>
+      <SectionWrapper {...sectionProps}>
         {(!isErrorRoomNotAvailable || isAccountsPage || isSettingsPage) && (
           <Section.SectionHeader>
-            {isFrame ? (
-              showTitle && <SectionHeaderContent />
-            ) : (
-              <SectionHeaderContent />
-            )}
+            <SectionHeaderContent />
           </Section.SectionHeader>
         )}
+
+        <Section.SectionSubmenu>
+          <SectionSubmenuContent />
+        </Section.SectionSubmenu>
 
         {isRecycleBinFolder && !isEmptyPage && (
           <Section.SectionWarning>
@@ -314,8 +387,10 @@ const PureHome = (props) => {
             </Section.SectionFilter>
           )}
 
-        <Section.SectionBody>
-          <Outlet />
+        <Section.SectionBody isAccounts={isAccountsPage}>
+          <>
+            <Outlet />
+          </>
         </Section.SectionBody>
 
         <Section.InfoPanelHeader>
@@ -330,7 +405,7 @@ const PureHome = (props) => {
             <SectionPagingContent tReady={tReady} />
           </Section.SectionPaging>
         )}
-      </Section>
+      </SectionWrapper>
     </>
   );
 };
@@ -339,7 +414,7 @@ const Home = withTranslation(["Files", "People"])(PureHome);
 
 export default inject(
   ({
-    auth,
+    authStore,
     filesStore,
     uploadDataStore,
     treeFoldersStore,
@@ -350,7 +425,12 @@ export default inject(
     tagsStore,
     selectedFolderStore,
     clientLoadingStore,
+    userStore,
+    currentTariffStatusStore,
+    settingsStore,
+    contextOptionsStore,
   }) => {
+    const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
       secondaryProgressDataStore,
       primaryProgressDataStore,
@@ -363,9 +443,10 @@ export default inject(
       setIsSectionBodyLoading,
       setIsSectionFilterLoading,
       isLoading,
-
       showFilterLoader,
     } = clientLoadingStore;
+
+    const { getFolderModel } = contextOptionsStore;
 
     const setIsLoading = (param, withoutTimer, withHeaderLoader) => {
       if (withHeaderLoader) setIsSectionHeaderLoading(param, !withoutTimer);
@@ -449,9 +530,7 @@ export default inject(
       ? filesStore.selectionTitle
       : null;
 
-    const { setToPreviewFile, playlist, removeFirstUrl } = mediaViewerDataStore;
-
-    const { settingsStore, currentTariffStatusStore } = auth;
+    const { setToPreviewFile, playlist } = mediaViewerDataStore;
 
     const { setPortalTariff } = currentTariffStatusStore;
 
@@ -465,13 +544,10 @@ export default inject(
       getSettings,
     } = settingsStore;
 
-    const {
-      usersStore,
-
-      viewAs: accountsViewAs,
-    } = peopleStore;
+    const { usersStore, groupsStore, viewAs: accountsViewAs } = peopleStore;
 
     const { getUsersList: fetchPeople } = usersStore;
+    const { getGroups: fetchGroups, fetchGroup } = groupsStore;
 
     if (!firstLoad) {
       if (isLoading) {
@@ -490,8 +566,9 @@ export default inject(
       converted,
       isRecycleBinFolder,
       isPrivacyFolder,
-      isVisitor: auth.userStore.user.isVisitor,
-
+      isVisitor: userStore.user.isVisitor,
+      userId: userStore?.user?.id,
+      folderSecurity,
       primaryProgressDataVisible,
       primaryProgressDataPercent,
       primaryProgressDataIcon,
@@ -524,6 +601,7 @@ export default inject(
 
       setDragging,
       setIsLoading,
+      isLoading,
       fetchFiles,
       fetchRooms,
 
@@ -534,7 +612,6 @@ export default inject(
       setToPreviewFile,
       setIsPreview,
       playlist,
-      removeFirstUrl,
 
       getFileInfo,
       gallerySelected,
@@ -545,7 +622,7 @@ export default inject(
       isFrame,
       showTitle: frameConfig?.showTitle,
       showFilter: frameConfig?.showFilter,
-      user: auth.userStore.user,
+      user: userStore.user,
       folders,
       files,
       selection,
@@ -563,21 +640,25 @@ export default inject(
 
       accountsViewAs,
       fetchPeople,
+      fetchGroups,
+      fetchGroup,
       setSelectedNode,
       onClickBack,
 
       showFilterLoader,
 
       getSettings,
-      logout: auth.logout,
-      login: auth.login,
+      logout: authStore.logout,
+      login: authStore.login,
 
       createTag,
       addTagsToRoom,
       removeTagsFromRoom,
-      loadCurrentUser: auth.userStore.loadCurrentUser,
+      loadCurrentUser: userStore.loadCurrentUser,
       updateProfileCulture,
       getRooms,
+      setSelectedFolder,
+      getFolderModel,
     };
-  }
+  },
 )(observer(Home));

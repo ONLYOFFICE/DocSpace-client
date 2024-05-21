@@ -1,1 +1,11 @@
-{}
+{
+  "DisableGeneralDescription": "Se necessario, è possibile eliminare o abilitare successivamente gli utenti disabilitati. Tieni presente che non puoi disabilitare utenti come il Proprietario e te stesso.",
+  "DisableUser": "Disabilita utente",
+  "DisableUserDescription": "Se disabiliti questo utente, non sarà in grado di accedere a DocSpace, mentre i suoi documenti e dati rimarranno intatti.",
+  "DisableUsers": "Disabilita utenti",
+  "DisableUsersDescription": "Se disabiliti questi utenti, non saranno in grado di accedere a DocSpace, mentre i loro documenti e dati rimarranno intatti.",
+  "EnableUser": "Abilita utente",
+  "EnableUserDescription": "Se abiliti questo utente, potrà accedere nuovamente a DocSpace e accedere ai propri documenti e dati.",
+  "EnableUsers": "Abilita utenti",
+  "EnableUsersDescription": "Se abiliti questi utenti, potranno accedere nuovamente a DocSpace e accedere ai propri documenti e dati."
+}

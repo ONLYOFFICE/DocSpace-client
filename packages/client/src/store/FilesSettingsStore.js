@@ -679,6 +679,15 @@ class FilesSettingsStore {
 
     return this.getIconUrl(extension, size);
   };
+
+  get openOnNewPage() {
+    if (
+      window.navigator.userAgent.includes("ZoomWebKit") ||
+      window.navigator.userAgent.includes("ZoomApps")
+    )
+      return false;
+    return !this.openEditorInSameTab;
+  }
 }
 
 export default FilesSettingsStore;

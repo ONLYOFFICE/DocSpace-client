@@ -72,7 +72,7 @@ const SessionsRowContent = ({
       {(country || city) && (
         <Text truncate>
           {country}
-          {country && city && " "}
+          {country && city && ", "}
           {city}
         </Text>
       )}

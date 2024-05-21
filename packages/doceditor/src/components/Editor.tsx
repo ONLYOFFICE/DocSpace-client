@@ -49,6 +49,7 @@ import {
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
+import useFilesSettings from "@/hooks/useFilesSettings";
 
 type IConfigType = IConfig & {
   events?: {
@@ -77,6 +78,14 @@ const Editor = ({
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
 
+  const { filesSettings } = useFilesSettings({});
+  const isZoom =
+    typeof window !== "undefined"
+      ? window.navigator.userAgent.includes("ZoomWebKit") ||
+        window.navigator.userAgent.includes("ZoomApps")
+      : false;
+  const openOnNewPage = isZoom ? false : !filesSettings?.openEditorInSameTab;
+
   const {
     onDocumentReady,
     onSDKRequestOpen,
@@ -104,6 +113,7 @@ const Editor = ({
     doc,
     errorMessage,
     isSkipError,
+    openOnNewPage,
     t,
   });
 
@@ -169,10 +179,7 @@ const Editor = ({
         typeof window !== "undefined" &&
         !window.DocSpaceConfig?.editor?.requestClose
       ) {
-        goBack.blank =
-          typeof window !== "undefined"
-            ? window.DocSpaceConfig?.editor?.openOnNewPage ?? true
-            : false;
+        goBack.blank = openOnNewPage ? true : false;
         goBack.url = getBackUrl(fileInfo.rootFolderType, fileInfo.folderId);
       }
     }
@@ -237,8 +244,7 @@ const Editor = ({
       newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
       if (
         IS_DESKTOP_EDITOR ||
-        (typeof window !== "undefined" &&
-          window.DocSpaceConfig?.editor?.openOnNewPage === false)
+        (typeof window !== "undefined" && !openOnNewPage)
       ) {
         newConfig.events.onRequestCreateNew = onSDKRequestCreateNew;
       }

@@ -156,7 +156,10 @@ const Header = (props) => {
 
   return (
     <StyledHeader
-      showContextButton={(isAdmin && !profile?.isOwner) || isMe}
+      showContextButton={
+        (isAdmin && !profile?.isOwner) ||
+        (isMe && !profile?.isLDAP && !profile?.isSSO)
+      }
       isVisitor={isVisitor || isCollaborator}
     >
       <IconButton
@@ -170,11 +173,12 @@ const Header = (props) => {
       <div>
         <Headline className="header-headline" type="content">
           {t("Profile:MyProfile")}
-          {profile?.isLDAP && ` (${t("PeopleTranslations:LDAPLbl")})`}
+          {profile?.isLDAP && ` (${t("Common:LDAP")})`}
         </Headline>
       </div>
       <div className="action-button">
-        {((isAdmin && !profile?.isOwner) || isMe) && (
+        {((isAdmin && !profile?.isOwner) ||
+          (isMe && !profile?.isLDAP && !profile?.isSSO)) && (
           <ContextMenuButton
             directionX="right"
             title={t("Common:Actions")}

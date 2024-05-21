@@ -206,6 +206,7 @@
   "LastModifiedDate": "අවසාන සංශෝධිත දිනය",
   "LastName": "අග නම",
   "LatePayment": "ප්‍රමාද ගෙවීම",
+  "LDAP": "LDAP",
   "LearnMore": "තව දැනගන්න",
   "LinkAccessDenied": "සබැඳියට ප්‍රවේශය ප්‍රතික්ෂේපිතයි",
   "LinkExpireAfter": "සබැඳිය <1>{{date}}</1>ට පසු කල් ඉකුත් වේ",

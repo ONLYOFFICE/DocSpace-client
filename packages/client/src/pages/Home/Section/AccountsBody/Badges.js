@@ -93,6 +93,7 @@ const Badges = ({
   filter,
   infoPanelVisible,
   isSSO = false,
+  isLDAP = false,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -117,6 +118,19 @@ const Badges = ({
       className="badges additional-badges"
       infoPanelVisible={infoPanelVisible}
     >
+      {isLDAP && (
+        <Badge
+          className="accounts-badge"
+          label={t("Common:LDAP")}
+          color={"#FFFFFF"}
+          backgroundColor="#8570BD"
+          fontSize={"9px"}
+          fontWeight={800}
+          noHover
+          lineHeight={"13px"}
+          onClick={onClickSSO}
+        />
+      )}
       {isSSO && (
         <Badge
           className="accounts-badge"

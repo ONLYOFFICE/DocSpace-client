@@ -206,6 +206,7 @@
   "LastModifiedDate": "Modifikované",
   "LastName": "Priezvisko",
   "LatePayment": "Neskorá platba",
+  "LDAP": "LDAP",
   "LearnMore": "Zistiť viac",
   "LinkAccessDenied": "Prístup k odkazu bol zamietnutý",
   "LinkExpireAfter": "Platnosť odkazu vyprší po <1>{{date}}</1>",

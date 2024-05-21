@@ -206,6 +206,7 @@
   "LastModifiedDate": "Ngày sửa đổi lần cuối",
   "LastName": "Họ",
   "LatePayment": "Chậm thanh toán",
+  "LDAP": "LDAP",
   "LearnMore": "Tìm hiểu thêm",
   "LinkAccessDenied": "Truy cập vào liên kết đã bị từ chối",
   "LinkExpireAfter": "Liên kết sẽ hết hạn sau <1>{{date}} </1>",

@@ -206,6 +206,7 @@
   "LastModifiedDate": "Дата на последната промяна",
   "LastName": "Фамилия",
   "LatePayment": "Просрочено плащане",
+  "LDAP": "LDAP",
   "LearnMore": "Научи повече",
   "LinkAccessDenied": "Достъпът до линка е отказан",
   "LinkExpireAfter": "Линкът ще изтече след <1>{{date}}</1>",

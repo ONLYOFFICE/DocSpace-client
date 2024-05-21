@@ -206,6 +206,7 @@
   "LastModifiedDate": "Datum zadnje spremembe",
   "LastName": "Priimek",
   "LatePayment": "Zamuda pri plačilu",
+  "LDAP": "LDAP",
   "LearnMore": "Izvedi več",
   "LinkAccessDenied": "Dostop do povezave je bil zavrnjen",
   "LinkExpireAfter": "Povezava bo potekla z dnem <1>{{date}}</1>",

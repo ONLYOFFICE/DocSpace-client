@@ -206,6 +206,7 @@
   "LastModifiedDate": "تاريخ التعديل الأخير",
   "LastName": "الاسم الأخير",
   "LatePayment": "سداد متأخر",
+  "LDAP": "LDAP",
   "LearnMore": "معرفة المزيد",
   "LinkAccessDenied": "تم رفض الوصول إلى الرابط",
   "LinkExpireAfter": "ستنتهي صلاحية الرابط  بعد <1>{{date}}</1>",

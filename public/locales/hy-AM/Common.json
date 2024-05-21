@@ -206,6 +206,7 @@
   "LastModifiedDate": "Վերջին փոփոխության ամսաթիվը",
   "LastName": "Վերջին անունը",
   "LatePayment": "Վերջին վճարումը",
+  "LDAP": "LDAP",
   "LearnMore": "Իմանալ ավելին",
   "LinkAccessDenied": "Հղման մուտքը մերժվել է",
   "LinkExpireAfter": "Հղման ժամկետը կսպառվի <1>{{date}}</1>-ից հետո",

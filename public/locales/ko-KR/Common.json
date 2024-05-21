@@ -206,6 +206,7 @@
   "LastModifiedDate": "마지막 수정 날짜",
   "LastName": "성",
   "LatePayment": "마지막 지불",
+  "LDAP": "LDAP",
   "LearnMore": "더 보기",
   "LinkAccessDenied": "링크에 대한 액세스가 거부되었습니다",
   "LinkExpireAfter": "링크가 <1>{{date}}</1> 후에 만료됩니다",

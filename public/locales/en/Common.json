@@ -212,6 +212,7 @@
   "LastName": "Last name",
   "LatePayment": "Late payment",
   "Later": "Later",
+  "LDAP": "LDAP",
   "LearnMore": "Learn more",
   "LinkAccessDenied": "Access to the link has been denied",
   "LinkExpireAfter": "The link will expire after <1>{{date}}</1>",

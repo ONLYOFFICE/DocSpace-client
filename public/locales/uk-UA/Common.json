@@ -206,6 +206,7 @@
   "LastModifiedDate": "Дата останньої зміни",
   "LastName": "Прізвище",
   "LatePayment": "Прострочений платіж",
+  "LDAP": "LDAP",
   "LearnMore": "Докладніше",
   "LinkAccessDenied": "Доступ до посилання заборонений",
   "LinkExpireAfter": "Посилання буде недійсним після <1>{{date}}</1>",

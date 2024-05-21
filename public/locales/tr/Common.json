@@ -206,6 +206,7 @@
   "LastModifiedDate": "Son değiştirilme tarihi",
   "LastName": "Soy isim",
   "LatePayment": "Gecikmiş ödeme",
+  "LDAP": "LDAP",
   "LearnMore": "Daha fazlasını öğrenin",
   "LinkAccessDenied": "Bağlantıya erişim reddedildi",
   "LinkExpireAfter": "Bağlantı <1>{{date}}</1> tarihinden sonra sona erecektir",

@@ -206,6 +206,7 @@
   "LastModifiedDate": "Viimeisin muokkauspäivä",
   "LastName": "Sukunimi",
   "LatePayment": "Myöhästynyt maksu",
+  "LDAP": "LDAP",
   "LearnMore": "Lue lisää",
   "LinkAccessDenied": "Pääsy linkin kautta on evätty",
   "LinkExpireAfter": "Linkki vanhenee <1>{{date}}</1> jälkeen",

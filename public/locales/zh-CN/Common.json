@@ -206,6 +206,7 @@
   "LastModifiedDate": "上次修改日期",
   "LastName": "姓氏",
   "LatePayment": "逾期付款",
+  "LDAP": "LDAP",
   "LearnMore": "了解更多",
   "LinkAccessDenied": "对该链接的访问被拒绝",
   "LinkExpireAfter": "链接将在 <1>{{date}}</1>后过期",

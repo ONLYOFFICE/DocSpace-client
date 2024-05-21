@@ -206,6 +206,7 @@
   "LastModifiedDate": "Pēdējās modifikācijas datums",
   "LastName": "Uzvārds",
   "LatePayment": "Maksājumu kavējumi",
+  "LDAP": "LDAP",
   "LearnMore": "Uzzināt vairāk",
   "LinkAccessDenied": "Piekļuve saitei ir liegta",
   "LinkExpireAfter": "Saites derīguma termiņš beigsies pēc <1>{{date}}</1>",

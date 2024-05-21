@@ -206,6 +206,7 @@
   "LastModifiedDate": "変更日",
   "LastName": "姓",
   "LatePayment": "延滞料",
+  "LDAP": "LDAP",
   "LearnMore": "詳細はこちら",
   "LinkAccessDenied": "リンクへのアクセスが拒否されました",
   "LinkExpireAfter": "リンクの有効期限は<1>{{date}}</1>です",

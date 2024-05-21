@@ -206,6 +206,7 @@
   "LastModifiedDate": "Fecha de actualización",
   "LastName": "Apellido",
   "LatePayment": "Pago atrasado",
+  "LDAP": "LDAP",
   "LearnMore": "Más información",
   "LinkAccessDenied": "El acceso al enlace ha sido denegado.",
   "LinkExpireAfter": "El enlace caducará después del <1>{{date}}</1>",

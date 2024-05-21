@@ -206,6 +206,7 @@
   "LastModifiedDate": "Datum laatste wijziging",
   "LastName": "Achternaam",
   "LatePayment": "Betalingsachterstand",
+  "LDAP": "LDAP",
   "LearnMore": "Meer informatie",
   "LinkAccessDenied": "Toegang tot de link is geweigerd",
   "LinkExpireAfter": "De link verloopt na <1>{{date}}</1>",

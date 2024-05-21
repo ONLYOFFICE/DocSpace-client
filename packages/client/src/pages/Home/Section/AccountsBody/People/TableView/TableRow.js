@@ -243,6 +243,7 @@ const PeopleTableRow = (props) => {
     isVisitor,
     isCollaborator,
     isSSO,
+    isLDAP,
   } = item;
 
   const isPending = statusType === "pending" || statusType === "disabled";
@@ -517,7 +518,12 @@ const PeopleTableRow = (props) => {
                 ? displayName
                 : email}
           </Link>
-          <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
+          <Badges
+            statusType={statusType}
+            isPaid={isPaidUser}
+            isSSO={isSSO}
+            isLDAP={isLDAP}
+          />
         </TableCell>
 
         {typeAccountsColumnIsEnabled ? (

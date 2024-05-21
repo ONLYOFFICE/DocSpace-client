@@ -126,9 +126,9 @@ const SessionsTableRow = (props) => {
         <Text className="session-info" truncate>
           {(country || city) && (
             <>
-              {country && <>{country}</>}
+              {country}
               {country && city && ", "}
-              {city && <>{city}</>}
+              {city}
               <span className="divider"></span>
             </>
           )}

@@ -24,63 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { isMobile } from "@docspace/shared/utils";
-import styled from "styled-components";
+import { useState, useCallback } from "react";
+import { Label } from "@docspace/shared/components/label";
+import { TextInput } from "@docspace/shared/components/text-input";
+import debounce from "lodash.debounce";
 
-import { convertTime } from "@docspace/shared/utils/convertTime";
-import { Text } from "@docspace/shared/components/text";
-import { RowContent } from "@docspace/shared/components/row-content";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
+export const CancelTextInput = ({ t, config, setConfig }) => {
+  const [value, setValue] = useState(config.cancelButtonLabel);
 
-const StyledRowContent = styled(RowContent)`
-  .rowMainContainer {
-    height: 100%;
-  }
+  const debouncedSetConfig = useCallback(
+    debounce((value) => {
+      setConfig((config) => {
+        return { ...config, cancelButtonLabel: value };
+      });
+    }, 500),
+    [setConfig],
+  );
 
-  .session-browser {
-    font-size: 14px;
-    font-weight: 600;
-    color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
-  }
-`;
+  const onChangeCancelLabel = (e) => {
+    setValue(e.target.value);
+    debouncedSetConfig(e.target.value);
+  };
 
-const SessionsRowContent = ({
-  id,
-  platform,
-  browser,
-  date,
-  country,
-  city,
-  ip,
-  sectionWidth,
-  showTickIcon,
-}) => {
   return (
-    <StyledRowContent
-      key={id}
-      sectionWidth={sectionWidth}
-      sideColor={theme.profile.activeSessions.tableCellColor}
-    >
-      <Text fontSize="14px" fontWeight="600">
-        {platform} <span className="session-browser">{`(${browser})`}</span>
-      </Text>
-      {isMobile() && showTickIcon && (
-        <IconButton size={12} iconName={TickSvgUrl} color="#20D21F" />
-      )}
-      <Text truncate>{convertTime(date)}</Text>
-      {(country || city) && (
-        <Text truncate>
-          {country}
-          {country && city && ", "}
-          {city}
-        </Text>
-      )}
-      <Text truncate containerWidth="160px">
-        {ip}
-      </Text>
-    </StyledRowContent>
+    <>
+      <Label className="label" text={t("CancelButtonText")} />
+      <TextInput
+        scale
+        onChange={onChangeCancelLabel}
+        placeholder={t("Common:CancelButton")}
+        value={value}
+        tabIndex={8}
+      />
+    </>
   );
 };
-
-export default SessionsRowContent;

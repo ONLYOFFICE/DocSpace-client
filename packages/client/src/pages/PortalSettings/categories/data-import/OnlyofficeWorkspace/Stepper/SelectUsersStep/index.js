@@ -32,9 +32,9 @@ import { SearchInput } from "@docspace/shared/components/search-input";
 
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../../sub-components/AccountsPaging";
-// import UsersInfoBlock from "./../../../sub-components/UsersInfoBlock";
+import UsersInfoBlock from "./../../../sub-components/UsersInfoBlock";
 
-// const LICENSE_LIMIT = 100;
+const LICENSE_LIMIT = 10;
 
 const SelectUsersStep = ({
   t,
@@ -46,6 +46,7 @@ const SelectUsersStep = ({
   searchValue,
   setSearchValue,
   cancelMigration,
+  checkedUsers,
 }) => {
   const [dataPortion, setDataPortion] = useState(withEmailUsers.slice(0, 25));
 
@@ -92,15 +93,17 @@ const SelectUsersStep = ({
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
         displaySettings
-        saveButtonDisabled={areCheckedUsersEmpty}
+        saveButtonDisabled={
+          areCheckedUsersEmpty || checkedUsers.withEmail.length > LICENSE_LIMIT
+        }
       />
 
-      {/* <UsersInfoBlock
+      <UsersInfoBlock
         t={t}
-        selectedUsers={numberOfCheckedAccounts}
-        totalUsers={users.length}
+        selectedUsers={checkedUsers.withEmail.length}
+        totalUsers={withEmailUsers.length}
         totalLicenceLimit={LICENSE_LIMIT}
-      /> */}
+      />
 
       <SearchInput
         id="search-users-input"
@@ -131,7 +134,10 @@ const SelectUsersStep = ({
           saveButtonLabel={t("Settings:NextStep")}
           cancelButtonLabel={t("Common:Back")}
           displaySettings
-          saveButtonDisabled={areCheckedUsersEmpty}
+          saveButtonDisabled={
+            areCheckedUsersEmpty ||
+            checkedUsers.withEmail.length > LICENSE_LIMIT
+          }
         />
       )}
     </>
@@ -146,6 +152,7 @@ export default inject(({ importAccountsStore }) => {
     setResultUsers,
     areCheckedUsersEmpty,
     cancelMigration,
+    checkedUsers,
   } = importAccountsStore;
 
   return {
@@ -155,5 +162,6 @@ export default inject(({ importAccountsStore }) => {
     searchValue,
     setSearchValue,
     cancelMigration,
+    checkedUsers,
   };
 })(observer(SelectUsersStep));

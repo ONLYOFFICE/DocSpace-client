@@ -36,10 +36,10 @@ import { Text } from "@docspace/shared/components/text";
 
 import { Wrapper } from "../StyledStepper";
 
-// import UsersInfoBlock from "../../../sub-components/UsersInfoBlock";
+import UsersInfoBlock from "../../../sub-components/UsersInfoBlock";
 import { NoEmailUsersBlock } from "../../../sub-components/NoEmailUsersBlock";
 
-// const LICENSE_LIMIT = 100;
+const LICENSE_LIMIT = 3;
 
 const AddEmailsStep = (props) => {
   const {
@@ -51,6 +51,7 @@ const AddEmailsStep = (props) => {
     setSearchValue,
     setResultUsers,
     areCheckedUsersEmpty,
+    checkedUsers,
   } = props;
 
   const [dataPortion, setDataPortion] = useState(
@@ -80,6 +81,9 @@ const AddEmailsStep = (props) => {
     incrementStep();
   };
 
+  const numberOfSelectedUsers =
+    checkedUsers.withEmail.length + checkedUsers.withoutEmail.length;
+
   return (
     <Wrapper>
       {users.withoutEmail.length > 0 && (
@@ -100,15 +104,17 @@ const AddEmailsStep = (props) => {
             cancelButtonLabel={t("Common:Back")}
             showReminder
             displaySettings
-            saveButtonDisabled={areCheckedUsersEmpty}
+            saveButtonDisabled={
+              areCheckedUsersEmpty || numberOfSelectedUsers > LICENSE_LIMIT
+            }
           />
 
-          {/* <UsersInfoBlock
+          <UsersInfoBlock
             t={t}
-            selectedUsers={numberOfCheckedAccounts}
+            selectedUsers={numberOfSelectedUsers}
             totalUsers={users.withoutEmail.length}
             totalLicenceLimit={LICENSE_LIMIT}
-          /> */}
+          />
 
           <SearchInput
             id="search-users-input"
@@ -143,7 +149,9 @@ const AddEmailsStep = (props) => {
         cancelButtonLabel={t("Common:Back")}
         showReminder
         displaySettings
-        saveButtonDisabled={areCheckedUsersEmpty}
+        saveButtonDisabled={
+          areCheckedUsersEmpty || numberOfSelectedUsers > LICENSE_LIMIT
+        }
       />
     </Wrapper>
   );
@@ -157,6 +165,7 @@ export default inject(({ setup, importAccountsStore }) => {
     users,
     setResultUsers,
     areCheckedUsersEmpty,
+    checkedUsers,
   } = importAccountsStore;
 
   return {
@@ -166,5 +175,6 @@ export default inject(({ setup, importAccountsStore }) => {
     users,
     setResultUsers,
     areCheckedUsersEmpty,
+    checkedUsers,
   };
 })(observer(AddEmailsStep));

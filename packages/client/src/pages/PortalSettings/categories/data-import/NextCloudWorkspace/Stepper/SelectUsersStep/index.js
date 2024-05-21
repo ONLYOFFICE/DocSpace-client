@@ -34,10 +34,10 @@ import { Text } from "@docspace/shared/components/text";
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../../sub-components/AccountsPaging";
 
-// import UsersInfoBlock from "../../../sub-components/UsersInfoBlock";
+import UsersInfoBlock from "../../../sub-components/UsersInfoBlock";
 import { Wrapper } from "../StyledStepper";
 
-// const LICENSE_LIMIT = 100;
+const LICENSE_LIMIT = 3;
 
 const SelectUsersStep = (props) => {
   const {
@@ -48,6 +48,7 @@ const SelectUsersStep = (props) => {
     searchValue,
     setSearchValue,
     cancelMigration,
+    checkedUsers,
   } = props;
 
   const [dataPortion, setDataPortion] = useState(withEmailUsers.slice(0, 25));
@@ -94,12 +95,14 @@ const SelectUsersStep = (props) => {
             displaySettings
           />
 
-          {/* <UsersInfoBlock
+          <UsersInfoBlock
             t={t}
-            selectedUsers={numberOfCheckedAccounts}
-            totalUsers={users.length}
+            selectedUsers={
+              checkedUsers.withEmail.length + checkedUsers.withoutEmail.length
+            }
+            totalUsers={withEmailUsers.length}
             totalLicenceLimit={LICENSE_LIMIT}
-          /> */}
+          />
 
           <SearchInput
             id="search-users-input"
@@ -148,6 +151,7 @@ export default inject(({ importAccountsStore }) => {
     searchValue,
     setSearchValue,
     cancelMigration,
+    checkedUsers,
   } = importAccountsStore;
 
   return {
@@ -156,5 +160,6 @@ export default inject(({ importAccountsStore }) => {
     searchValue,
     setSearchValue,
     cancelMigration,
+    checkedUsers,
   };
 })(observer(SelectUsersStep));

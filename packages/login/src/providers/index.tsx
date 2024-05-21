@@ -68,14 +68,14 @@ export const Providers = ({
     settings: value.settings,
   });
 
-  const { theme } = useTheme({
+  const { theme, currentColorTheme } = useTheme({
     colorTheme: value.colorTheme,
     systemTheme: value.systemTheme,
     i18n,
   });
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme} currentColorScheme={currentColorTheme}>
       <I18nextProvider i18n={i18n}>
         <ErrorBoundary
           user={{} as TUser}

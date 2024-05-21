@@ -43,15 +43,27 @@ export interface UseThemeProps {
 
 const useTheme = ({ colorTheme, systemTheme, i18n }: UseThemeProps) => {
   const [currentColorTheme, setCurrentColorTheme] =
-    React.useState<TColorScheme>({} as TColorScheme);
+    React.useState<TColorScheme>(() => {
+      if (!colorTheme) return {} as TColorScheme;
+
+      return (
+        colorTheme.themes.find((theme) => theme.id === colorTheme.selected) ??
+        ({} as TColorScheme)
+      );
+    });
 
   const [theme, setTheme] = React.useState<TTheme>(() => {
+    const currColorTheme = colorTheme
+      ? colorTheme.themes.find((theme) => theme.id === colorTheme.selected) ??
+        ({} as TColorScheme)
+      : ({} as TColorScheme);
+
     if (systemTheme === ThemeKeys.DarkStr) {
-      return { ...Dark, currentColorScheme: currentColorTheme };
+      return { ...Dark, currentColorScheme: currColorTheme };
     }
     return {
       ...Base,
-      currentColorScheme: currentColorTheme,
+      currentColorScheme: currColorTheme,
     };
   });
 
@@ -74,6 +86,8 @@ const useTheme = ({ colorTheme, systemTheme, i18n }: UseThemeProps) => {
     const SYSTEM_THEME = getSystemTheme();
 
     const interfaceDirection = i18n?.dir ? i18n.dir() : "ltr";
+
+    console.log("====", { ...currentColorTheme });
 
     if (SYSTEM_THEME === ThemeKeys.BaseStr) {
       setTheme({
@@ -114,7 +128,7 @@ const useTheme = ({ colorTheme, systemTheme, i18n }: UseThemeProps) => {
 
   React.useEffect(() => {
     getUserTheme();
-  }, [currentColorTheme, getUserTheme]);
+  }, [getUserTheme]);
 
   React.useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -125,6 +139,8 @@ const useTheme = ({ colorTheme, systemTheme, i18n }: UseThemeProps) => {
       mediaQuery.removeEventListener("change", getUserTheme);
     };
   }, [getUserTheme]);
+
+  console.log({ ...theme.currentColorScheme });
 
   return { theme, currentColorTheme };
 };

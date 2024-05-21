@@ -79,12 +79,8 @@ const Editor = ({
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
 
   const { filesSettings } = useFilesSettings({});
-  const isZoom =
-    typeof window !== "undefined"
-      ? window.navigator.userAgent.includes("ZoomWebKit") ||
-        window.navigator.userAgent.includes("ZoomApps")
-      : false;
-  const openOnNewPage = isZoom ? false : !filesSettings?.openEditorInSameTab;
+
+  const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
 
   const {
     onDocumentReady,

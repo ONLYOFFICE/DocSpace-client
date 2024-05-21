@@ -130,20 +130,16 @@ const SessionsTableRow = (props) => {
               <span className="divider"></span>
               {ip}
             </>
-          ) : country ? (
-            <>
-              {country}
-              <span className="divider"></span>
-              {ip}
-            </>
-          ) : city ? (
-            <>
-              {city}
-              <span className="divider"></span>
-              {ip}
-            </>
           ) : (
-            <>{ip}</>
+            <>
+              {country || city ? (
+                <>
+                  {country || city}
+                  <span className="divider"></span>
+                </>
+              ) : null}
+              {ip}
+            </>
           )}
         </Text>
       </TableCell>

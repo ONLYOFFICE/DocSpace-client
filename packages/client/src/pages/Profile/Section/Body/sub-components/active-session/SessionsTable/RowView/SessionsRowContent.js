@@ -69,10 +69,17 @@ const SessionsRowContent = ({
         <IconButton size={12} iconName={TickSvgUrl} color="#20D21F" />
       )}
       <Text truncate>{convertTime(date)}</Text>
-      {country && city && (
+      {(country || city) && (
         <Text truncate>
-          {country}
-          {` ${city}`}
+          {country && city ? (
+            <>
+              {country} {city}
+            </>
+          ) : country ? (
+            <>{country}</>
+          ) : (
+            <>{city}</>
+          )}
         </Text>
       )}
       <Text truncate containerWidth="160px">

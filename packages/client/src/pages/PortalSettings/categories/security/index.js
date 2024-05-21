@@ -40,6 +40,7 @@ import AccessLoader from "./sub-components/loaders/access-loader";
 import AuditTrail from "./audit-trail/index.js";
 import { resetSessionStorage } from "../../utils";
 import { DeviceType } from "@docspace/shared/enums";
+import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 const SecurityWrapper = (props) => {
   const { t, loadBaseInfo, resetIsInit, currentDeviceType } = props;
@@ -110,13 +111,7 @@ const SecurityWrapper = (props) => {
       data={data}
       startSelect={currentTab}
       onSelect={(e) => onSelect(e)}
-      topProps={
-        currentDeviceType === DeviceType.desktop
-          ? 0
-          : currentDeviceType === DeviceType.mobile
-            ? "53px"
-            : "61px"
-      }
+      topProps={SECTION_HEADER_HEIGHT[currentDeviceType]}
     />
   );
 };

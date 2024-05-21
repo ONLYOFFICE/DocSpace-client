@@ -215,6 +215,7 @@ const filesActionsStore = new FilesActionsStore(
   currentTariffStatusStore,
   peopleStore,
   currentQuotaStore,
+  indexingStore,
 );
 
 const contextOptionsStore = new ContextOptionsStore(

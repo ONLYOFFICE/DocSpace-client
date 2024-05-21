@@ -124,23 +124,15 @@ const SessionsTableRow = (props) => {
 
       <TableCell>
         <Text className="session-info" truncate>
-          {country && city ? (
+          {(country || city) && (
             <>
-              {country}, {city}
+              {country && <>{country}</>}
+              {country && city && ", "}
+              {city && <>{city}</>}
               <span className="divider"></span>
-              {ip}
-            </>
-          ) : (
-            <>
-              {country || city ? (
-                <>
-                  {country || city}
-                  <span className="divider"></span>
-                </>
-              ) : null}
-              {ip}
             </>
           )}
+          {ip}
         </Text>
       </TableCell>
 

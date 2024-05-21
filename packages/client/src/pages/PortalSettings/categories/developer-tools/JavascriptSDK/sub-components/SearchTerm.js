@@ -24,57 +24,58 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { headers } from "next/headers";
+import { useState, useCallback } from "react";
+import debounce from "lodash.debounce";
 
-const API_PREFIX = "api/2.0";
+import { Label } from "@docspace/shared/components/label";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 
-export const getBaseUrl = () => {
-  const hdrs = headers();
+import { ColumnContainer } from "../presets/StyledPresets";
 
-  const host = hdrs.get("x-forwarded-host");
-  const proto = hdrs.get("x-forwarded-proto");
+export const SearchTerm = ({ t, config, setConfig }) => {
+  const [value, setValue] = useState(config.filter.filterValue);
 
-  const baseURL = `${proto}://${host}`;
-
-  return baseURL;
-};
-
-export const getAPIUrl = (internalRequest: boolean) => {
-  const baseUrl = internalRequest
-    ? process.env.API_HOST?.trim() ?? getBaseUrl()
-    : getBaseUrl();
-
-  // const baseUrl = getBaseUrl();
-
-  const baseAPIUrl = `${baseUrl}/${API_PREFIX}`;
-
-  return baseAPIUrl;
-};
-
-export const createRequest = (
-  paths: string[],
-  newHeaders: [string, string][],
-  method: string,
-  body?: string,
-  internalRequest: boolean = true,
-) => {
-  const hdrs = new Headers(headers());
-
-  const apiURL = getAPIUrl(internalRequest);
-
-  newHeaders.forEach((hdr) => {
-    if (hdr[0]) hdrs.set(hdr[0], hdr[1]);
-  });
-
-  const baseURL = getBaseUrl();
-
-  if (baseURL && process.env.API_HOST?.trim()) hdrs.set("origin", baseURL);
-
-  const urls = paths.map((path) => `${apiURL}${path}`);
-
-  const requests = urls.map(
-    (url) => new Request(url, { headers: hdrs, method, body }),
+  const debouncedSetConfig = useCallback(
+    debounce((value) => {
+      setConfig((config) => ({
+        ...config,
+        filter: { ...config.filter, filterValue: value },
+      }));
+    }, 500),
+    [setConfig],
   );
 
-  return requests;
+  const onChangeSearch = (e) => {
+    setValue(e.target.value);
+    debouncedSetConfig(e.target.value);
+  };
+
+  const onChangeWithSubfolders = () => {
+    setConfig((config) => ({
+      ...config,
+      withSubfolders: !config.withSubfolders,
+    }));
+  };
+
+  return (
+    <>
+      <Label className="label" text={t("SearchTerm")} />
+      <ColumnContainer>
+        <TextInput
+          scale
+          onChange={onChangeSearch}
+          placeholder={t("Common:Search")}
+          value={value}
+          tabIndex={5}
+        />
+        <Checkbox
+          className="checkbox"
+          label={t("Files:WithSubfolders")}
+          onChange={onChangeWithSubfolders}
+          isChecked={config.withSubfolders}
+        />
+      </ColumnContainer>
+    </>
+  );
 };

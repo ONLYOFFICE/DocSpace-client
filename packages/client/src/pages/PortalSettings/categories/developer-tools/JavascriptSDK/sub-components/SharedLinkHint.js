@@ -24,57 +24,50 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { headers } from "next/headers";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 
-const API_PREFIX = "api/2.0";
+export const SharedLinkHint = ({
+  t,
+  linkSettings,
+  redirectToSelectedRoom,
+  currentColorScheme,
+}) => {
+  const settingsTranslations = {
+    password: t("Common:Password").toLowerCase(),
+    denyDownload: t("FileContentCopy").toLowerCase(),
+    expirationDate: t("LimitByTime").toLowerCase(),
+  };
 
-export const getBaseUrl = () => {
-  const hdrs = headers();
-
-  const host = hdrs.get("x-forwarded-host");
-  const proto = hdrs.get("x-forwarded-proto");
-
-  const baseURL = `${proto}://${host}`;
-
-  return baseURL;
-};
-
-export const getAPIUrl = (internalRequest: boolean) => {
-  const baseUrl = internalRequest
-    ? process.env.API_HOST?.trim() ?? getBaseUrl()
-    : getBaseUrl();
-
-  // const baseUrl = getBaseUrl();
-
-  const baseAPIUrl = `${baseUrl}/${API_PREFIX}`;
-
-  return baseAPIUrl;
-};
-
-export const createRequest = (
-  paths: string[],
-  newHeaders: [string, string][],
-  method: string,
-  body?: string,
-  internalRequest: boolean = true,
-) => {
-  const hdrs = new Headers(headers());
-
-  const apiURL = getAPIUrl(internalRequest);
-
-  newHeaders.forEach((hdr) => {
-    if (hdr[0]) hdrs.set(hdr[0], hdr[1]);
-  });
-
-  const baseURL = getBaseUrl();
-
-  if (baseURL && process.env.API_HOST?.trim()) hdrs.set("origin", baseURL);
-
-  const urls = paths.map((path) => `${apiURL}${path}`);
-
-  const requests = urls.map(
-    (url) => new Request(url, { headers: hdrs, method, body }),
+  return (
+    linkSettings.length > 0 && (
+      <div>
+        <Text className="linkHelp" fontSize="12px" lineHeight="16px">
+          {linkSettings.length === 2
+            ? t("LinkSetDescription2", {
+                parameter1: settingsTranslations[linkSettings[0]],
+                parameter2: settingsTranslations[linkSettings[1]],
+              })
+            : linkSettings.length === 3
+              ? t("LinkSetDescription3", {
+                  parameter1: settingsTranslations[linkSettings[0]],
+                  parameter2: settingsTranslations[linkSettings[1]],
+                  parameter3: settingsTranslations[linkSettings[2]],
+                })
+              : t("LinkSetDescription", {
+                  parameter: settingsTranslations[linkSettings[0]],
+                })}
+        </Text>
+        <Link
+          color={currentColorScheme?.main?.accent}
+          fontSize="12px"
+          lineHeight="16px"
+          onClick={redirectToSelectedRoom}
+        >
+          {" "}
+          {t("GoToRoom")}.
+        </Link>
+      </div>
+    )
   );
-
-  return requests;
 };

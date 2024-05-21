@@ -24,57 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { headers } from "next/headers";
+import { Textarea } from "@docspace/shared/components/textarea";
+import { Text } from "@docspace/shared/components/text";
+import CodeBlock from "../sub-components/CodeBlock";
 
-const API_PREFIX = "api/2.0";
+import {
+  CategorySubHeader,
+  CodeWrapper,
+} from "../presets/StyledPresets";
 
-export const getBaseUrl = () => {
-  const hdrs = headers();
-
-  const host = hdrs.get("x-forwarded-host");
-  const proto = hdrs.get("x-forwarded-proto");
-
-  const baseURL = `${proto}://${host}`;
-
-  return baseURL;
-};
-
-export const getAPIUrl = (internalRequest: boolean) => {
-  const baseUrl = internalRequest
-    ? process.env.API_HOST?.trim() ?? getBaseUrl()
-    : getBaseUrl();
-
-  // const baseUrl = getBaseUrl();
-
-  const baseAPIUrl = `${baseUrl}/${API_PREFIX}`;
-
-  return baseAPIUrl;
-};
-
-export const createRequest = (
-  paths: string[],
-  newHeaders: [string, string][],
-  method: string,
-  body?: string,
-  internalRequest: boolean = true,
-) => {
-  const hdrs = new Headers(headers());
-
-  const apiURL = getAPIUrl(internalRequest);
-
-  newHeaders.forEach((hdr) => {
-    if (hdr[0]) hdrs.set(hdr[0], hdr[1]);
-  });
-
-  const baseURL = getBaseUrl();
-
-  if (baseURL && process.env.API_HOST?.trim()) hdrs.set("origin", baseURL);
-
-  const urls = paths.map((path) => `${apiURL}${path}`);
-
-  const requests = urls.map(
-    (url) => new Request(url, { headers: hdrs, method, body }),
-  );
-
-  return requests;
-};
+export const CodeToInsert = ({ t, theme, codeBlock, config }) => (
+  <CodeWrapper height="fit-content">
+    <CategorySubHeader className="copy-window-code">
+      {`HTML ${t("CodeTitle")}`}
+    </CategorySubHeader>
+    <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
+      {t("HtmlCodeDescription")}
+    </Text>
+    <Textarea value={codeBlock} heightTextArea={153} />
+    <CategorySubHeader className="copy-window-code">
+      {`JavaScript ${t("CodeTitle")}`}
+    </CategorySubHeader>
+    <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
+      {t("JavaScriptCodeDescription")}
+    </Text>
+    <CodeBlock config={config} />
+  </CodeWrapper>
+);

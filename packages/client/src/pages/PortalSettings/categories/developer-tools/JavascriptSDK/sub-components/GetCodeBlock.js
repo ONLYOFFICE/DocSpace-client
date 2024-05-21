@@ -23,58 +23,38 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { useState } from "react";
+import GetCodeDialog from "../sub-components/GetCodeDialog";
+import { Button } from "@docspace/shared/components/button";
 
-import { headers } from "next/headers";
+import { GetCodeButtonWrapper } from "../presets/StyledPresets";
 
-const API_PREFIX = "api/2.0";
+export const GetCodeBlock = ({ t, codeBlock, isDisabled }) => {
+  const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
 
-export const getBaseUrl = () => {
-  const hdrs = headers();
+  const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
+  const closeGetCodeModal = () => setIsGetCodeDialogOpened(false);
 
-  const host = hdrs.get("x-forwarded-host");
-  const proto = hdrs.get("x-forwarded-proto");
+  return (
+    <>
+      <GetCodeButtonWrapper>
+        <Button
+          id="get-sdk-code-button"
+          primary
+          size="normal"
+          scale
+          label={t("GetCode")}
+          onClick={openGetCodeModal}
+          isDisabled={isDisabled}
+        />
+      </GetCodeButtonWrapper>
 
-  const baseURL = `${proto}://${host}`;
-
-  return baseURL;
-};
-
-export const getAPIUrl = (internalRequest: boolean) => {
-  const baseUrl = internalRequest
-    ? process.env.API_HOST?.trim() ?? getBaseUrl()
-    : getBaseUrl();
-
-  // const baseUrl = getBaseUrl();
-
-  const baseAPIUrl = `${baseUrl}/${API_PREFIX}`;
-
-  return baseAPIUrl;
-};
-
-export const createRequest = (
-  paths: string[],
-  newHeaders: [string, string][],
-  method: string,
-  body?: string,
-  internalRequest: boolean = true,
-) => {
-  const hdrs = new Headers(headers());
-
-  const apiURL = getAPIUrl(internalRequest);
-
-  newHeaders.forEach((hdr) => {
-    if (hdr[0]) hdrs.set(hdr[0], hdr[1]);
-  });
-
-  const baseURL = getBaseUrl();
-
-  if (baseURL && process.env.API_HOST?.trim()) hdrs.set("origin", baseURL);
-
-  const urls = paths.map((path) => `${apiURL}${path}`);
-
-  const requests = urls.map(
-    (url) => new Request(url, { headers: hdrs, method, body }),
+      <GetCodeDialog
+        t={t}
+        visible={isGetCodeDialogOpened}
+        codeBlock={codeBlock}
+        onClose={closeGetCodeModal}
+      />
+    </>
   );
-
-  return requests;
 };

@@ -24,57 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { headers } from "next/headers";
+export const showPreviewThreshold = 720;
 
-const API_PREFIX = "api/2.0";
+export const scriptUrl = `${window.location.origin}/static/scripts/sdk/1.0.0/api.js`;
 
-export const getBaseUrl = () => {
-  const hdrs = headers();
+export const dataDimensions = [
+  { key: "percent", label: "%", default: true },
+  { key: "pixel", label: "px" },
+];
 
-  const host = hdrs.get("x-forwarded-host");
-  const proto = hdrs.get("x-forwarded-proto");
-
-  const baseURL = `${proto}://${host}`;
-
-  return baseURL;
-};
-
-export const getAPIUrl = (internalRequest: boolean) => {
-  const baseUrl = internalRequest
-    ? process.env.API_HOST?.trim() ?? getBaseUrl()
-    : getBaseUrl();
-
-  // const baseUrl = getBaseUrl();
-
-  const baseAPIUrl = `${baseUrl}/${API_PREFIX}`;
-
-  return baseAPIUrl;
-};
-
-export const createRequest = (
-  paths: string[],
-  newHeaders: [string, string][],
-  method: string,
-  body?: string,
-  internalRequest: boolean = true,
-) => {
-  const hdrs = new Headers(headers());
-
-  const apiURL = getAPIUrl(internalRequest);
-
-  newHeaders.forEach((hdr) => {
-    if (hdr[0]) hdrs.set(hdr[0], hdr[1]);
-  });
-
-  const baseURL = getBaseUrl();
-
-  if (baseURL && process.env.API_HOST?.trim()) hdrs.set("origin", baseURL);
-
-  const urls = paths.map((path) => `${apiURL}${path}`);
-
-  const requests = urls.map(
-    (url) => new Request(url, { headers: hdrs, method, body }),
-  );
-
-  return requests;
-};
+export const defaultWidthDimension = dataDimensions[0];
+export const defaultHeightDimension = dataDimensions[0];
+export const defaultWidth = "100";
+export const defaultHeight = "100";

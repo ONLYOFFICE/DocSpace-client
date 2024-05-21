@@ -289,6 +289,7 @@ export const GetCodeButtonWrapper = styled.div`
   bottom: 0;
   margin-top: 32px;
   background-color: ${({ theme }) => theme.backgroundColor};
+  z-index: 1;
 
   @media ${mobile} {
     position: fixed;

@@ -24,63 +24,42 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { isMobile } from "@docspace/shared/utils";
-import styled from "styled-components";
+import { useState, useCallback } from "react";
+import debounce from "lodash.debounce";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Label } from "@docspace/shared/components/label";
 
-import { convertTime } from "@docspace/shared/utils/convertTime";
-import { Text } from "@docspace/shared/components/text";
-import { RowContent } from "@docspace/shared/components/row-content";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
+import { ControlsGroup } from "../presets/StyledPresets";
 
-const StyledRowContent = styled(RowContent)`
-  .rowMainContainer {
-    height: 100%;
-  }
+export const FrameIdSetter = (props) => {
+  const { t, defaultFrameId, setConfig } = props;
 
-  .session-browser {
-    font-size: 14px;
-    font-weight: 600;
-    color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
-  }
-`;
+  const [frameId, setFrameId] = useState(defaultFrameId);
 
-const SessionsRowContent = ({
-  id,
-  platform,
-  browser,
-  date,
-  country,
-  city,
-  ip,
-  sectionWidth,
-  showTickIcon,
-}) => {
+  const debouncedSetConfig = useCallback(
+    debounce((frameId) => {
+      setConfig((config) => {
+        return { ...config, frameId };
+      });
+    }, 500),
+    [setConfig],
+  );
+
+  const onChangeFrameId = (e) => {
+    setFrameId(e.target.value);
+    debouncedSetConfig(e.target.value);
+  };
+
   return (
-    <StyledRowContent
-      key={id}
-      sectionWidth={sectionWidth}
-      sideColor={theme.profile.activeSessions.tableCellColor}
-    >
-      <Text fontSize="14px" fontWeight="600">
-        {platform} <span className="session-browser">{`(${browser})`}</span>
-      </Text>
-      {isMobile() && showTickIcon && (
-        <IconButton size={12} iconName={TickSvgUrl} color="#20D21F" />
-      )}
-      <Text truncate>{convertTime(date)}</Text>
-      {(country || city) && (
-        <Text truncate>
-          {country}
-          {country && city && ", "}
-          {city}
-        </Text>
-      )}
-      <Text truncate containerWidth="160px">
-        {ip}
-      </Text>
-    </StyledRowContent>
+    <ControlsGroup>
+      <Label className="label" text={t("FrameId")} />
+      <TextInput
+        scale
+        value={frameId}
+        onChange={onChangeFrameId}
+        placeholder={t("EnterId")}
+        tabIndex={4}
+      />
+    </ControlsGroup>
   );
 };
-
-export default SessionsRowContent;

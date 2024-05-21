@@ -23,64 +23,24 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
-import { isMobile } from "@docspace/shared/utils";
-import styled from "styled-components";
-
-import { convertTime } from "@docspace/shared/utils/convertTime";
 import { Text } from "@docspace/shared/components/text";
-import { RowContent } from "@docspace/shared/components/row-content";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
 
-const StyledRowContent = styled(RowContent)`
-  .rowMainContainer {
-    height: 100%;
-  }
+import {
+  SDKContainer,
+  CategoryHeader,
+  CategoryDescription,
+} from "../presets/StyledPresets";
 
-  .session-browser {
-    font-size: 14px;
-    font-weight: 600;
-    color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
-  }
-`;
+export const PresetWrapper = (props) => {
+  const { children, description, header } = props;
 
-const SessionsRowContent = ({
-  id,
-  platform,
-  browser,
-  date,
-  country,
-  city,
-  ip,
-  sectionWidth,
-  showTickIcon,
-}) => {
   return (
-    <StyledRowContent
-      key={id}
-      sectionWidth={sectionWidth}
-      sideColor={theme.profile.activeSessions.tableCellColor}
-    >
-      <Text fontSize="14px" fontWeight="600">
-        {platform} <span className="session-browser">{`(${browser})`}</span>
-      </Text>
-      {isMobile() && showTickIcon && (
-        <IconButton size={12} iconName={TickSvgUrl} color="#20D21F" />
-      )}
-      <Text truncate>{convertTime(date)}</Text>
-      {(country || city) && (
-        <Text truncate>
-          {country}
-          {country && city && ", "}
-          {city}
-        </Text>
-      )}
-      <Text truncate containerWidth="160px">
-        {ip}
-      </Text>
-    </StyledRowContent>
+    <SDKContainer>
+      <CategoryDescription>
+        <Text className="sdk-description">{description}</Text>
+      </CategoryDescription>
+      <CategoryHeader>{header}</CategoryHeader>
+      {children}
+    </SDKContainer>
   );
 };
-
-export default SessionsRowContent;

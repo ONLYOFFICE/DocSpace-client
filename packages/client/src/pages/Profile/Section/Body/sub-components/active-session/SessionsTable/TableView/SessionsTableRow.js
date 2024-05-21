@@ -82,7 +82,6 @@ const SessionsTableRow = (props) => {
   const {
     item,
     hideColumns,
-    standalone,
     currentSession,
     setPlatformModalData,
     setLogoutDialogVisible,
@@ -125,15 +124,15 @@ const SessionsTableRow = (props) => {
 
       <TableCell>
         <Text className="session-info" truncate>
-          {!standalone ? (
+          {(country || city) && (
             <>
-              {country}, {city}
+              {country}
+              {country && city && ", "}
+              {city}
               <span className="divider"></span>
-              {ip}
             </>
-          ) : (
-            <>{ip}</>
           )}
+          {ip}
         </Text>
       </TableCell>
 
@@ -153,13 +152,11 @@ const SessionsTableRow = (props) => {
   );
 };
 
-export default inject(({ setup, settingsStore }) => {
-  const { standalone } = settingsStore;
+export default inject(({ setup }) => {
   const { currentSession, setLogoutDialogVisible, setPlatformModalData } =
     setup;
 
   return {
-    standalone,
     currentSession,
     setLogoutDialogVisible,
     setPlatformModalData,

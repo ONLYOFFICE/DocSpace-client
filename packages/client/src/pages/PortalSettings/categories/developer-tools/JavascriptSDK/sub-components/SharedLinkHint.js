@@ -24,63 +24,50 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { isMobile } from "@docspace/shared/utils";
-import styled from "styled-components";
-
-import { convertTime } from "@docspace/shared/utils/convertTime";
+import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import { RowContent } from "@docspace/shared/components/row-content";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
 
-const StyledRowContent = styled(RowContent)`
-  .rowMainContainer {
-    height: 100%;
-  }
-
-  .session-browser {
-    font-size: 14px;
-    font-weight: 600;
-    color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
-  }
-`;
-
-const SessionsRowContent = ({
-  id,
-  platform,
-  browser,
-  date,
-  country,
-  city,
-  ip,
-  sectionWidth,
-  showTickIcon,
+export const SharedLinkHint = ({
+  t,
+  linkSettings,
+  redirectToSelectedRoom,
+  currentColorScheme,
 }) => {
+  const settingsTranslations = {
+    password: t("Common:Password").toLowerCase(),
+    denyDownload: t("FileContentCopy").toLowerCase(),
+    expirationDate: t("LimitByTime").toLowerCase(),
+  };
+
   return (
-    <StyledRowContent
-      key={id}
-      sectionWidth={sectionWidth}
-      sideColor={theme.profile.activeSessions.tableCellColor}
-    >
-      <Text fontSize="14px" fontWeight="600">
-        {platform} <span className="session-browser">{`(${browser})`}</span>
-      </Text>
-      {isMobile() && showTickIcon && (
-        <IconButton size={12} iconName={TickSvgUrl} color="#20D21F" />
-      )}
-      <Text truncate>{convertTime(date)}</Text>
-      {(country || city) && (
-        <Text truncate>
-          {country}
-          {country && city && ", "}
-          {city}
+    linkSettings.length > 0 && (
+      <div>
+        <Text className="linkHelp" fontSize="12px" lineHeight="16px">
+          {linkSettings.length === 2
+            ? t("LinkSetDescription2", {
+                parameter1: settingsTranslations[linkSettings[0]],
+                parameter2: settingsTranslations[linkSettings[1]],
+              })
+            : linkSettings.length === 3
+              ? t("LinkSetDescription3", {
+                  parameter1: settingsTranslations[linkSettings[0]],
+                  parameter2: settingsTranslations[linkSettings[1]],
+                  parameter3: settingsTranslations[linkSettings[2]],
+                })
+              : t("LinkSetDescription", {
+                  parameter: settingsTranslations[linkSettings[0]],
+                })}
         </Text>
-      )}
-      <Text truncate containerWidth="160px">
-        {ip}
-      </Text>
-    </StyledRowContent>
+        <Link
+          color={currentColorScheme?.main?.accent}
+          fontSize="12px"
+          lineHeight="16px"
+          onClick={redirectToSelectedRoom}
+        >
+          {" "}
+          {t("GoToRoom")}.
+        </Link>
+      </div>
+    )
   );
 };
-
-export default SessionsRowContent;

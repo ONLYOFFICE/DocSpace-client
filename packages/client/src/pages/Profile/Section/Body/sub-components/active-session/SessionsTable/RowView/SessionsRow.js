@@ -36,7 +36,6 @@ import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
 const SessionsRow = (props) => {
   const {
     item,
-    standalone,
     sectionWidth,
     currentSession,
     setPlatformModalData,
@@ -88,19 +87,16 @@ const SessionsRow = (props) => {
         ip={item.ip}
         sectionWidth={sectionWidth}
         showTickIcon={showTickIcon}
-        standalone={standalone}
       />
     </Row>
   );
 };
 
-export default inject(({ setup, settingsStore }) => {
-  const { standalone } = settingsStore;
+export default inject(({ setup }) => {
   const { currentSession, setLogoutDialogVisible, setPlatformModalData } =
     setup;
 
   return {
-    standalone,
     currentSession,
     setLogoutDialogVisible,
     setPlatformModalData,

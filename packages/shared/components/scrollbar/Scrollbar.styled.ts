@@ -113,6 +113,7 @@ const StyledScrollbar = styled(Scrollbar)<{ $fixedSize?: boolean }>`
     background-color: ${(props) =>
       props.color ? props.color : props.theme.scrollbar.bgColor} !important;
     position: relative;
+    cursor: default !important;
 
     :hover {
       background-color: ${(props) =>

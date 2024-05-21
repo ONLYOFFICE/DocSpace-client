@@ -74,7 +74,9 @@ const EmptyScreenGroups = ({
         }
         descriptionText={
           !groupsIsFiltered
-            ? t("Common:EmptyGroupsDescription")
+            ? !isRoomAdmin
+              ? t("Common:EmptyGroupsDescription")
+              : ""
             : t("Common:NotFoundGroupsDescription")
         }
         buttons={

@@ -39,8 +39,13 @@ export const getBaseUrl = () => {
   return baseURL;
 };
 
-export const getAPIUrl = () => {
-  const baseUrl = getBaseUrl();
+export const getAPIUrl = (internalRequest: boolean) => {
+  const baseUrl = internalRequest
+    ? process.env.API_HOST?.trim() ?? getBaseUrl()
+    : getBaseUrl();
+
+  // const baseUrl = getBaseUrl();
+
   const baseAPIUrl = `${baseUrl}/${API_PREFIX}`;
 
   return baseAPIUrl;
@@ -51,14 +56,19 @@ export const createRequest = (
   newHeaders: [string, string][],
   method: string,
   body?: string,
+  internalRequest: boolean = true,
 ) => {
   const hdrs = new Headers(headers());
 
-  const apiURL = getAPIUrl();
+  const apiURL = getAPIUrl(internalRequest);
 
   newHeaders.forEach((hdr) => {
     if (hdr[0]) hdrs.set(hdr[0], hdr[1]);
   });
+
+  const baseURL = getBaseUrl();
+
+  if (baseURL && process.env.API_HOST?.trim()) hdrs.set("origin", baseURL);
 
   const urls = paths.map((path) => `${apiURL}${path}`);
 

@@ -15,7 +15,6 @@
   "LightTheme": "Svetla tema",
   "LogoutActiveConnection": "Odjava iz aktivne povezave",
   "LogoutAllActiveConnections": "Odjava iz vseh aktivnih povezav",
-  "LogoutAllActiveSessions": "Odjava iz vseh aktivnih sej",
   "LogoutAllActiveSessionsDescription": "Vse aktivne povezave bodo odjavljene, razen te, ki je trenutno v uporabi.",
   "LogoutBtn": "Odjava",
   "LogoutDescription": "Opomba. Vse aktivne povezave bodo odjavljene, razen te, ki je trenutno v uporabi.",

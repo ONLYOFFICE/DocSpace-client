@@ -125,7 +125,6 @@
   "EnterTitle": "Titel eingeben",
   "ErrorMessageBruteForceProtection": "Das angegebene Argument lag außerhalb des gültigen Wertebereichs.",
   "ErrorsWereFound": "Es wurden {{errors}} Fehler gefunden",
-  "ExistingAccount": "Bestehendes Konto",
   "ForcePathStyle": "Erzwinge Pfad-Stil",
   "GroupsDescription": "Benutzer, die Sie im vorherigen Schritt ausgewählt haben, werden in Gruppen importiert, die in {{serviceName}} erstellt wurden. Gruppen werden im Abschnitt „Konten“ angezeigt.",
   "HexCode": "Hex-Code",

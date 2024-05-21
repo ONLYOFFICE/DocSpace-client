@@ -30,7 +30,7 @@ import { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
-import { WhiteLabelLogoType } from "@docspace/shared/enums";
+import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
 import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import {
   getBgPattern,
@@ -63,6 +63,8 @@ const Login = ({
   capabilities,
   thirdPartyProvider,
   isAuthenticated,
+  timers,
+  systemTheme,
 }: LoginProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -74,7 +76,8 @@ const Login = ({
     type: "",
   });
 
-  const theme = useTheme();
+  console.log("api res", settings, capabilities, thirdPartyProvider);
+
   const { t } = useTranslation(["Login", "Common"]);
 
   const {
@@ -84,6 +87,10 @@ const Login = ({
     openRecoverDialog,
     closeRecoverDialog,
   } = useRecoverDialog({});
+
+  useEffect(() => {
+    console.log("Login page API requests timings:", { ...timers });
+  }, [timers]);
 
   useEffect(() => {
     if (searchParams) {
@@ -130,7 +137,7 @@ const Login = ({
   };
 
   const onSocialButtonClick = useCallback(
-    async (e: React.MouseEvent<Element, MouseEvent>) => {
+    (e: React.MouseEvent<HTMLButtonElement | HTMLElement>) => {
       const target = e.target as HTMLElement;
       let targetElement = target;
 
@@ -140,6 +147,7 @@ const Login = ({
       ) {
         targetElement = target.parentElement;
       }
+
       const providerName = targetElement.dataset.providername;
       let url = targetElement.dataset.url || "";
 
@@ -158,18 +166,18 @@ const Login = ({
                 "width=800,height=500,status=no,toolbar=no,menubar=no,resizable=yes,scrollbars=no,popup=yes",
               );
 
-        const code: string = await getOAuthToken(tokenGetterWin);
+        getOAuthToken(tokenGetterWin).then((code) => {
+          const token = window.btoa(
+            JSON.stringify({
+              auth: providerName,
+              mode: "popup",
+              callback: "authCallback",
+            }),
+          );
 
-        const token = window.btoa(
-          JSON.stringify({
-            auth: providerName,
-            mode: "popup",
-            callback: "authCallback",
-          }),
-        );
-
-        if (tokenGetterWin && typeof tokenGetterWin !== "string")
-          tokenGetterWin.location.href = getLoginLink(token, code);
+          if (tokenGetterWin && typeof tokenGetterWin !== "string")
+            tokenGetterWin.location.href = getLoginLink(token, code);
+        });
       } catch (err) {
         console.log(err);
       }
@@ -177,7 +185,9 @@ const Login = ({
     [],
   );
 
-  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme?.isBase);
+  const isDark = systemTheme === ThemeKeys.DarkStr;
+
+  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, isDark);
 
   const ssoProps = ssoExists()
     ? {
@@ -188,6 +198,8 @@ const Login = ({
     : {};
 
   const isRegisterContainerVisible = settings?.enabledJoin;
+
+  console.log("settings", settings);
 
   return (
     <>

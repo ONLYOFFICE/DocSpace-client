@@ -116,6 +116,7 @@ class DialogsStore {
   userSessionsPanelVisible = false;
   cancelUploadDialogVisible = false;
   selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;
+  selectFileFormRoomOpenRoot = false;
 
   constructor(
     authStore,
@@ -371,9 +372,11 @@ class DialogsStore {
   setSelectFileFormRoomDialogVisible = (
     visible,
     filterParam = FilesSelectorFilterTypes.DOCX,
+    openRoot = false,
   ) => {
     this.selectFileFormRoomDialogVisible = visible;
     this.selectFileFormRoomFilterParam = filterParam;
+    this.selectFileFormRoomOpenRoot = openRoot;
   };
 
   createFromTemplateForm = (fileInfo) => {

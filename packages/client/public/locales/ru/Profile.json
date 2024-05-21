@@ -17,7 +17,6 @@
   "LightTheme": "Светлая тема",
   "LogoutActiveConnection": "Выйти из активного подключения",
   "LogoutAllActiveConnections": "Выйти из всех активных подключений",
-  "LogoutAllActiveSessions": "Выйти из всех активных сессий",
   "LogoutFromAllSessions": "Выйти из всех сессий",
   "LogoutAllActiveSessionsDescription": "Все активные подключения, кроме этого подключения, будут отключены, так как оно используется в данный момент.",
   "LogoutBtn": "Выйти",

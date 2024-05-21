@@ -95,6 +95,16 @@ const PasswordStrength = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
+  const getSettingsFromDefault = () => {
+    const defaultSettings = getFromSessionStorage("defaultPasswordSettings");
+    if (defaultSettings) {
+      setPasswordLen(defaultSettings.minLength);
+      setUseUpperCase(defaultSettings.upperCase);
+      setUseDigits(defaultSettings.digits);
+      setUseSpecialSymbols(defaultSettings.specSymbols);
+    }
+  };
+
   const getSettings = () => {
     const currentSettings = getFromSessionStorage("currentPasswordSettings");
 
@@ -131,7 +141,14 @@ const PasswordStrength = (props) => {
 
   useEffect(() => {
     if (!isInit || !passwordSettings) return;
-    getSettings();
+    const currentSettings = getFromSessionStorage("currentPasswordSettings");
+    const defaultSettings = getFromSessionStorage("defaultPasswordSettings");
+
+    if (isEqual(currentSettings, defaultSettings)) {
+      getSettings();
+    } else {
+      getSettingsFromDefault();
+    }
   }, [isLoading, passwordSettings]);
 
   useEffect(() => {
@@ -208,10 +225,10 @@ const PasswordStrength = (props) => {
   const onCancelClick = () => {
     const defaultSettings = getFromSessionStorage("defaultPasswordSettings");
     saveToSessionStorage("currentPasswordSettings", defaultSettings);
-    setPasswordLen(defaultSettings.minLength);
-    setUseUpperCase(defaultSettings.upperCase);
-    setUseDigits(defaultSettings.digits);
-    setUseSpecialSymbols(defaultSettings.specSymbols);
+    setPasswordLen(defaultSettings?.minLength || 8);
+    setUseUpperCase(defaultSettings?.upperCase);
+    setUseDigits(defaultSettings?.digits);
+    setUseSpecialSymbols(defaultSettings?.specSymbols);
     setShowReminder(false);
   };
 

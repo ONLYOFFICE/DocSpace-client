@@ -9,8 +9,6 @@
   "DisableRoomQuota": "Vypnúť kvótu pre túto miestnosť",
   "FillingFormsRoomDescription": "Vytvárajte, zdieľajte a vypĺňajte šablóny dokumentov alebo pracujte s pripravenými presetmi na rýchle vytváranie dokumentov akéhokoľvek typu.",
   "FillingFormsRoomTitle": "Miestnosť na vypĺňanie formulárov",
-  "FormRoomDescription": "Zdieľajte formuláre s kýmkoľvek a uchovávajte vyplnené formuláre v priečinku Vyplnené. Používatelia môžu vyplniť ľubovoľný formulár viackrát a vytvoriť tak niekoľko samostatných výsledných súborov. V miestnostiach so Základnými formulármi nemôžete k formulárom pridať viacero používateľských rolí.",
-  "FormRoomTitle": "Miestnosť so základnými formulármi",
   "Icon": "Ikona",
   "MakeRoomPrivateDescription": "Všetky súbory v tejto miestnosti budú zašifrované.",
   "MakeRoomPrivateLimitationsWarningDescription": "Pomocou tejto funkcie môžete pozývať iba existujúcich používateľov DocSpace. Po vytvorení miestnosti už nebudete môcť zmeniť zoznam používateľov.",

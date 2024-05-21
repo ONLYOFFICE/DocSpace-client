@@ -851,9 +851,20 @@ const SectionFilterContent = ({
 
         if (accountsFilter?.payments?.toString()) {
           filterValues.push({
-            key: filter.payments.toString(),
+            key: filter.payments?.toString(),
             label:
-              PaymentsType.Paid === filter.payments.toString()
+              PaymentsType.Paid === filter.payments?.toString()
+                ? t("Common:Paid")
+                : t("Common:Free"),
+            group: "filter-account",
+          });
+        }
+
+        if (insideGroupFilter?.payments?.toString()) {
+          filterValues.push({
+            key: filter.payments?.toString(),
+            label:
+              PaymentsType.Paid === filter.payments?.toString()
                 ? t("Common:Paid")
                 : t("Common:Free"),
             group: "filter-account",
@@ -2652,6 +2663,7 @@ const SectionFilterContent = ({
       isPeopleAccounts={isPeopleAccounts}
       isGroupsAccounts={isGroupsAccounts}
       isInsideGroup={isInsideGroup}
+      disableThirdParty={isTrash}
     />
   );
 };

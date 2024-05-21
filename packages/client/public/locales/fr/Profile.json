@@ -15,7 +15,6 @@
   "LightTheme": "Thème clair",
   "LogoutActiveConnection": "Déconnexion de la connexion active",
   "LogoutAllActiveConnections": "Déconnexion de toutes les connexions actives",
-  "LogoutAllActiveSessions": "Déconnexion de toutes les sessions actives",
   "LogoutAllActiveSessionsDescription": "Toutes les connexions actives seront désactivées, à l’exception de cette connexion, car elle est en cours d’utilisation.",
   "LogoutBtn": "Se déconnecter",
   "LogoutDescription": "Remarque : toutes les connexions actives seront désactivées, à l’exception de cette connexion, car elle est en cours d’utilisation.",

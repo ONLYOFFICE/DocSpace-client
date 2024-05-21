@@ -131,6 +131,7 @@ const Panels = (props) => {
     shareFolderDialogVisible,
     userSessionsPanelVisible,
     pdfFormEditVisible,
+    selectFileFormRoomOpenRoot,
   } = props;
 
   const [createPDFFormFile, setCreatePDFFormFile] = useState({
@@ -267,6 +268,7 @@ const Panels = (props) => {
         isPanelVisible
         key="select-file-form-room-dialog"
         onClose={onCloseFileFormRoomDialog}
+        openRoot={selectFileFormRoomOpenRoot}
         onSelectFile={createFromTemplateForm}
         filterParam={selectFileFormRoomFilterParam}
         descriptionText={descriptionTextFileFormRoomDialog}
@@ -379,6 +381,7 @@ export default inject(
       shareFolderDialogVisible,
       userSessionsPanelVisible,
       pdfFormEditVisible,
+      selectFileFormRoomOpenRoot,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -446,6 +449,7 @@ export default inject(
       shareFolderDialogVisible,
       userSessionsPanelVisible,
       pdfFormEditVisible,
+      selectFileFormRoomOpenRoot,
     };
   },
 )(observer(Panels));

@@ -52,6 +52,7 @@ const PureText = ({
 
 const StyledText = styled(PureText)`
   text-decoration: ${(props) => props.theme.link.textDecoration};
+  text-underline-offset: 2px;
 
   ${(props) =>
     props.enableUserSelect

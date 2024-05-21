@@ -125,7 +125,6 @@
   "ErrorMessageBruteForceProtection": "Đối số được chỉ định nằm ngoài phạm vi giá trị hợp lệ.",
   "ErrorOccuredDownloadLog": "Đã xảy ra lỗi trong quá trình nhập dữ liệu. Hãy tải nhật ký xuống để kiểm tra.",
   "ErrorsWereFound": "đã tìm thấy {{errors}} lỗi",
-  "ExistingAccount": "Tài khoản đã có",
   "ForcePathStyle": "Kiểu đường dẫn bắt buộc",
   "GroupsDescription": "Người dùng mà bạn đã chọn ở bước trước sẽ được nhập vào các nhóm được tạo trong {{serviceName}}. Các nhóm sẽ xuất hiện trong phần Tài khoản.",
   "HexCode": "Mã Hex",

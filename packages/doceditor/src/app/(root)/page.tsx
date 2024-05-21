@@ -57,6 +57,8 @@ async function Page({ searchParams }: RootPageProps) {
   const { fileId, fileid, version, doc, action, share, editorType } =
     searchParams ?? initialSearchParams;
 
+  const startDate = new Date();
+
   const data = await getData(
     fileId ?? fileid ?? "",
     version,
@@ -66,7 +68,9 @@ async function Page({ searchParams }: RootPageProps) {
     editorType,
   );
 
-  return <Root {...data} />;
+  const timer = new Date().getTime() - startDate.getTime();
+
+  return <Root {...data} timer={timer} />;
 }
 
 export default Page;

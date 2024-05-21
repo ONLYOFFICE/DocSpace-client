@@ -466,6 +466,8 @@ const SectionHeaderContent = (props) => {
     ? isPeopleHeaderIndeterminate
     : isSetupleHeaderIndeterminate;
 
+  const withoutInfoPanelToggler = isSessionsPage ? true : false;
+
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>
       {isHeaderVisible ? (
@@ -477,6 +479,7 @@ const SectionHeaderContent = (props) => {
             isIndeterminate={isHeaderIndeterminate}
             headerMenu={headerMenu}
             withComboBox
+            withoutInfoPanelToggler={withoutInfoPanelToggler}
           />
         </div>
       ) : !isLoadedSectionHeader ? (

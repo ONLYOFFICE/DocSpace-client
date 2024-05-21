@@ -68,23 +68,14 @@ export const Providers = ({
     settings: value.settings,
   });
 
-  console.log(value);
-
   const { theme } = useTheme({
     colorTheme: value.colorTheme,
-    settings: value.settings,
     systemTheme: value.systemTheme,
+    i18n,
   });
 
-  const currentTheme =
-    typeof window !== "undefined" || !value.systemTheme
-      ? theme
-      : value.systemTheme === ThemeKeys.BaseStr
-        ? Base
-        : Dark;
-
   return (
-    <ThemeProvider theme={currentTheme}>
+    <ThemeProvider theme={theme}>
       <I18nextProvider i18n={i18n}>
         <ErrorBoundary
           user={{} as TUser}

@@ -26,49 +26,47 @@
 
 "use client";
 
-import React from "react";
-import styled from "styled-components";
-import { tablet, mobile } from "../../utils";
-import { Base } from "../../themes";
+import { useTranslation } from "react-i18next";
 
-const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 32px;
-  background: ${(props) => props.theme.formWrapper.background};
-  box-shadow: ${(props) => props.theme.formWrapper.boxShadow};
-  border-radius: 12px;
-  max-width: 320px;
-  min-width: 320px;
+import { Link, LinkType } from "@docspace/shared/components/link";
+import RecoverAccessModalDialog from "@docspace/shared/components/recover-access-modal-dialog/RecoverAccessModalDialog";
 
-  @media ${tablet} {
-    max-width: 416px;
-    min-width: 416px;
-  }
+import useRecoverDialog from "@/hooks/useRecoverDialog";
 
-  @media ${mobile} {
-    padding: 0;
-    border-radius: 0;
-    box-shadow: none !important;
-    max-width: 100%;
-    min-width: 100%;
-    background: transparent !important;
-  }
-`;
+const RecoverAccess = () => {
+  const { t } = useTranslation(["Login", "Common"]);
 
-StyledWrapper.defaultProps = { theme: Base };
+  const {
+    recoverDialogVisible,
+    recoverDialogEmailPlaceholder,
+    recoverDialogTextBody,
+    openRecoverDialog,
+    closeRecoverDialog,
+  } = useRecoverDialog({});
 
-interface FormWrapperProps {
-  children: React.ReactNode;
-  id?: string;
-  className?: string;
-  style?: React.CSSProperties;
-}
-
-const FormWrapper = (props: FormWrapperProps) => {
-  const { children } = props;
-  return <StyledWrapper {...props}>{children}</StyledWrapper>;
+  return (
+    <>
+      <Link
+        fontWeight={600}
+        fontSize="13px"
+        type={LinkType.action}
+        isHovered
+        className="login-link recover-link"
+        onClick={openRecoverDialog}
+      >
+        {t("RecoverAccess")}
+      </Link>
+      {recoverDialogVisible && (
+        <RecoverAccessModalDialog
+          visible={recoverDialogVisible}
+          onClose={closeRecoverDialog}
+          textBody={recoverDialogTextBody}
+          emailPlaceholderText={recoverDialogEmailPlaceholder}
+          id="recover-access-modal"
+        />
+      )}
+    </>
+  );
 };
 
-export { FormWrapper };
+export default RecoverAccess;

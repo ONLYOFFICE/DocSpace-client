@@ -51,7 +51,7 @@ export default function GlobalError({ error }: { error: Error }) {
 
   const { i18n } = useI18N({ settings });
   const { currentDeviceType } = useDeviceType();
-  const { theme } = useTheme({});
+  const { theme } = useTheme({ i18n });
   const firebaseHelper = useMemo(() => {
     return new FirebaseHelper(settings?.firebase ?? ({} as TFirebaseSettings));
   }, [settings?.firebase]);

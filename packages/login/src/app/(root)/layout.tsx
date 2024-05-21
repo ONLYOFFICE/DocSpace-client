@@ -24,103 +24,76 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 
-import { Toast } from "@docspace/shared/components/toast";
-import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
-import { TenantStatus, ThemeKeys } from "@docspace/shared/enums";
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
+import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
+import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
 
-import StyledComponentsRegistry from "@/utils/registry";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+
 import SimpleNav from "@/components/SimpleNav";
-import { Providers } from "@/providers";
+import { LoginContent, LoginFormWrapper } from "@/components/Login";
+import Register from "@/components/Register";
+import GreetingContainer from "@/components/GreetingContainer";
 import { getColorTheme, getSettings } from "@/utils/actions";
 
-import "../../styles/globals.scss";
-
-export default async function RootLayout({
+export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const baseUrl = getBaseUrl();
-
-  const cookieStore = cookies();
-
-  const systemTheme = cookieStore.get(SYSTEM_THEME_KEY);
-
-  let redirectUrl = "";
-
   const [settings, colorTheme] = await Promise.all([
     getSettings(),
     getColorTheme(),
   ]);
 
-  if (settings === "access-restricted") redirectUrl = `/${settings}`;
+  const cookieStore = cookies();
 
-  if (settings === "portal-not-found") {
-    const config = await (
-      await fetch(`${baseUrl}/static/scripts/config.json`)
-    ).json();
-    const hdrs = headers();
-    const host = hdrs.get("host");
+  const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as ThemeKeys;
 
-    const url = new URL(
-      config.wrongPortalNameUrl ??
-        "https://www.onlyoffice.com/wrongportalname.aspx",
-    );
+  const bgPattern = getBgPattern(colorTheme?.selected);
 
-    url.searchParams.append("url", host ?? "");
+  const objectSettings = typeof settings === "string" ? undefined : settings;
 
-    redirectUrl = url.toString();
-  }
+  const isRegisterContainerVisible = objectSettings?.enabledJoin;
 
-  if (typeof settings !== "string" && settings?.wizardToken) {
-    redirectUrl = `wizard`;
-  }
+  const isDark = systemTheme === ThemeKeys.DarkStr;
 
-  if (
-    typeof settings !== "string" &&
-    settings?.tenantStatus === TenantStatus.PortalRestore
-  ) {
-    redirectUrl = `preparation-portal`;
-  }
-
-  if (
-    typeof settings !== "string" &&
-    settings?.tenantStatus === TenantStatus.PortalDeactivate
-  ) {
-    redirectUrl = `unavailable`;
-  }
+  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, isDark);
 
   return (
-    <html lang="en" translate="no">
-      <head>
-        <link rel="icon" type="image/x-icon" href="/logo.ashx?logotype=3" />
-        <link rel="mask-icon" href="/logo.ashx?logotype=3" />
-        <meta charSet="utf-8" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
-        />
-        <meta name="google" content="notranslate" />
-      </head>
-      <body>
-        <StyledComponentsRegistry>
-          <Providers
-            value={{
-              settings: typeof settings === "string" ? undefined : settings,
-              colorTheme,
-              systemTheme: systemTheme?.value as ThemeKeys,
-            }}
-            redirectURL={redirectUrl}
-          >
-            <SimpleNav systemTheme={systemTheme?.value as ThemeKeys} />
-            <Toast isSSR />
-            {children}
-          </Providers>
-        </StyledComponentsRegistry>
-      </body>
-    </html>
+    <div style={{ width: "100%", height: "100%" }}>
+      <SimpleNav systemTheme={systemTheme} />
+
+      <LoginFormWrapper id="login-page" bgPattern={bgPattern}>
+        <div className="bg-cover" />
+        <Scrollbar id="customScrollBar">
+          <LoginContent>
+            <ColorTheme
+              themeId={ThemeId.LinkForgotPassword}
+              isRegisterContainerVisible={isRegisterContainerVisible}
+            >
+              <GreetingContainer
+                logoUrl={logoUrl}
+                greetingSettings={objectSettings?.greetingSettings}
+              />
+              <FormWrapper id="login-form">{children}</FormWrapper>
+            </ColorTheme>
+          </LoginContent>
+          {isRegisterContainerVisible && (
+            <Register
+              id="login_register"
+              enabledJoin
+              trustedDomains={objectSettings.trustedDomains}
+              trustedDomainsType={objectSettings.trustedDomainsType}
+              isAuthenticated={false}
+            />
+          )}
+        </Scrollbar>
+      </LoginFormWrapper>
+    </div>
   );
 }

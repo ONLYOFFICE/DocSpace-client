@@ -31,6 +31,7 @@ class IndexingStore {
 
   isIndexEditingMode = false;
   isIndexing = false;
+  updateSelection = [];
 
   constructor(selectedFolderStore) {
     this.selectedFolderStore = selectedFolderStore;
@@ -43,7 +44,14 @@ class IndexingStore {
     this.isIndexing = indexing;
   };
 
+  setUpdateSelection = (selection) => {
+    this.updateSelection = selection;
+  };
+
   setIsIndexEditingMode = (mode) => {
+    if (!mode) {
+      this.setUpdateSelection([]);
+    }
     this.isIndexEditingMode = mode;
   };
 }

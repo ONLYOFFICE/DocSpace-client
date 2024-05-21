@@ -105,6 +105,7 @@ class FilesActionStore {
   publicRoomStore;
   infoPanelStore;
   peopleStore;
+  indexingStore;
   userStore = null;
   currentTariffStatusStore = null;
   currentQuotaStore = null;
@@ -132,6 +133,7 @@ class FilesActionStore {
     currentTariffStatusStore,
     peopleStore,
     currentQuotaStore,
+    indexingStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -151,6 +153,7 @@ class FilesActionStore {
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.peopleStore = peopleStore;
     this.currentQuotaStore = currentQuotaStore;
+    this.indexingStore = indexingStore;
   }
 
   setIsBulkDownload = (isBulkDownload) => {
@@ -2726,6 +2729,7 @@ class FilesActionStore {
   changeIndex = async (action, item) => {
     const { filesList } = this.filesStore;
     const { id } = this.selectedFolderStore;
+    const { updateSelection, setUpdateSelection } = this.indexingStore;
     const index = filesList.findIndex((elem) => elem.id === item?.id);
 
     const operationId = uniqueid("operation_");
@@ -2743,6 +2747,20 @@ class FilesActionStore {
     if (!replaceable) return;
 
     await changeIndex(item?.id, replaceable.order, item?.isFolder);
+
+    const newSelection = [...updateSelection];
+    const addedArray = [item.id, replaceable.id];
+
+    for (const id of addedArray) {
+      const exist = updateSelection.find(
+        (selectionItem) => selectionItem === id,
+      );
+
+      if (exist) continue;
+      newSelection.push(id);
+    }
+
+    setUpdateSelection(newSelection);
     this.updateCurrentFolder(null, [id], true, operationId);
   };
 

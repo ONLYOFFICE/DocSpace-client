@@ -82,10 +82,12 @@ const StyledTableContainer = styled(TableContainer)`
   .table-row-selected + .table-row-selected {
     .table-row {
       .table-container_file-name-cell,
+      .table-container_index-cell,
       .table-container_row-context-menu-wrapper {
         border-image-slice: 1;
       }
-      .table-container_file-name-cell {
+      .table-container_file-name-cell,
+      .table-container_index-cell {
         ${fileNameCss}
         border-left: 0; //for Safari macOS
         border-right: 0; //for Safari macOS
@@ -104,7 +106,8 @@ const StyledTableContainer = styled(TableContainer)`
 
   .files-item:not(.table-row-selected) + .table-row-selected {
     .table-row {
-      .table-container_file-name-cell {
+      .table-container_file-name-cell,
+      .table-container_index-cell {
         ${fileNameCss}
       }
 
@@ -142,7 +145,7 @@ const Table = ({
   columnInfoPanelStorageName,
   highlightFile,
   currentDeviceType,
-  onEditIndex
+  onEditIndex,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -274,7 +277,7 @@ export default inject(
     settingsStore,
 
     indexingStore,
-    filesActionsStore
+    filesActionsStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -297,7 +300,7 @@ export default inject(
     } = filesStore;
 
     const { isIndexEditingMode } = indexingStore;
-    const {changeIndex} = filesActionsStore;
+    const { changeIndex } = filesActionsStore;
 
     const { withPaging, theme, currentDeviceType } = settingsStore;
 

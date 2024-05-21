@@ -26,7 +26,7 @@
 
 import React from "react";
 
-import { getFolder, getFolderInfo } from "../../../api/files";
+import { getFolder, getFolderInfo, getSettingsFiles } from "../../../api/files";
 import FilesFilter from "../../../api/files/filter";
 import {
   ApplyFilterOption,
@@ -65,6 +65,7 @@ const useFilesHelper = ({
   getRootData,
   onSetBaseFolderPath,
   isRoomsOnly,
+  isUserOnly,
   rootThirdPartyId,
   getRoomList,
   getIcon,
@@ -105,6 +106,8 @@ const useFilesHelper = ({
 
       const filter = FilesFilter.getDefault();
 
+      const { extsWebEdited } = await getSettingsFiles();
+
       filter.page = page;
       filter.pageCount = PAGE_COUNT;
       filter.search = currentSearch;
@@ -133,15 +136,65 @@ const useFilesHelper = ({
             filter.filterType = FilterType.SpreadsheetsOnly;
             break;
 
-          case FilesSelectorFilterTypes.ALL:
+          case FilesSelectorFilterTypes.PDF:
+            filter.extension = FilesSelectorFilterTypes.PDF;
+            break;
+
+          case FilterType.DocumentsOnly:
+            filter.filterType = FilterType.DocumentsOnly;
+            break;
+
+          case FilterType.PresentationsOnly:
+            filter.filterType = FilterType.PresentationsOnly;
+            break;
+
+          case FilterType.SpreadsheetsOnly:
+            filter.filterType = FilterType.SpreadsheetsOnly;
+            break;
+
+          case FilterType.ImagesOnly:
+            filter.filterType = FilterType.ImagesOnly;
+            break;
+
+          case FilterType.MediaOnly:
+            filter.filterType = FilterType.MediaOnly;
+            break;
+
+          case FilterType.ArchiveOnly:
+            filter.filterType = FilterType.ArchiveOnly;
+            break;
+
+          case FilterType.FoldersOnly:
+            filter.filterType = FilterType.FoldersOnly;
+            break;
+
+          case FilterType.OFormTemplateOnly:
+            filter.filterType = FilterType.OFormTemplateOnly;
+            break;
+
+          case FilterType.OFormOnly:
+            filter.filterType = FilterType.OFormOnly;
+            break;
+
+          case FilterType.FilesOnly:
             filter.filterType = FilterType.FilesOnly;
+            break;
+
+          case FilesSelectorFilterTypes.ALL:
+            filter.filterType = FilterType.None;
+            break;
+
+          case "EditorSupportedTypes":
+            filter.extension = extsWebEdited
+              .map((extension) => extension.slice(1))
+              .join(",");
             break;
 
           default:
         }
       }
 
-      const id = selectedItemId || "";
+      const id = selectedItemId ?? (isUserOnly ? "@my" : "");
 
       filter.folder = id.toString();
 
@@ -149,7 +202,7 @@ const useFilesHelper = ({
         folderId: string | number,
         isErrorPath = false,
       ) => {
-        if (initRef.current && getRootData) {
+        if (initRef.current && getRootData && folderId !== "@my") {
           const folder = await getFolderInfo(folderId, true);
 
           const isArchive = folder.rootFolderType === FolderType.Archive;
@@ -247,7 +300,7 @@ const useFilesHelper = ({
           //   if (item.roomType) breadCrumbs[idx].isRoom = true;
           // });
 
-          if (!isThirdParty && !isRoomsOnly)
+          if (!isThirdParty && !isRoomsOnly && !isUserOnly)
             breadCrumbs.unshift({ ...DEFAULT_BREAD_CRUMB });
 
           onSetBaseFolderPath?.(isErrorPath ? [] : breadCrumbs);
@@ -308,6 +361,7 @@ const useFilesHelper = ({
       setIsNextPageLoading,
       searchValue,
       filterParam,
+      isUserOnly,
       selectedItemId,
       getRootData,
       setSelectedItemSecurity,

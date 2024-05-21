@@ -190,6 +190,10 @@ const VersionRow = (props) => {
   //   );
   // };
 
+  const onContextMenu = (event) => {
+    if (showEditPanel) event.stopPropagation();
+  };
+
   const contextOptions = [
     {
       key: "open",
@@ -241,7 +245,7 @@ const VersionRow = (props) => {
       isEditing={isEditing}
       contextTitle={t("Common:Actions")}
     >
-      <div className={`version-row_${index}`}>
+      <div className={`version-row_${index}`} onContextMenu={onContextMenu}>
         <Box displayProp="flex" className="row-header">
           <VersionBadge
             theme={theme}

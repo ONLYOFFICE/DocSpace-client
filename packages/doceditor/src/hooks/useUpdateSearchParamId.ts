@@ -24,3 +24,4 @@ const useUpdateSearchParamId = (
 };
 
 export default useUpdateSearchParamId;
+

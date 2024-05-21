@@ -84,7 +84,7 @@ const StyledTableContainer = styled(TableContainer)`
   }
 
   .header-container-text {
-    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+    font-size: 12px;
   }
 
   .checkboxWrapper {
@@ -150,7 +150,7 @@ const TableView = ({
   sectionWidth,
   accountsData,
   typeOptions,
-  users,
+  filteredUsers,
   checkedUsers,
   toggleAccount,
   toggleAllAccounts,
@@ -164,12 +164,12 @@ const TableView = ({
 
   const isIndeterminate =
     checkedUsers.result.length > 0 &&
-    checkedUsers.result.length !== users.result.length;
+    checkedUsers.result.length !== filteredUsers.length;
 
-  const isChecked = checkedUsers.result.length === users.result.length;
+  const isChecked = checkedUsers.result.length === filteredUsers.length;
 
   const toggleAll = (isChecked) => {
-    toggleAllAccounts(isChecked, users.result, checkedAccountType);
+    toggleAllAccounts(isChecked, filteredUsers, checkedAccountType);
   };
 
   const onClearFilter = () => {
@@ -278,7 +278,7 @@ const TableView = ({
 export default inject(({ userStore, importAccountsStore }) => {
   const { id: userId } = userStore.user;
   const {
-    users,
+    filteredUsers,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
@@ -288,7 +288,7 @@ export default inject(({ userStore, importAccountsStore }) => {
 
   return {
     userId,
-    users,
+    filteredUsers,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,

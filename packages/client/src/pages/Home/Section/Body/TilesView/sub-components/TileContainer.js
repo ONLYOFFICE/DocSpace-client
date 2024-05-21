@@ -179,7 +179,7 @@ const StyledTileContainer = styled.div`
           flex-direction: row;
           align-items: center;
 
-          font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+          font-size: 12px;
           font-weight: 600;
 
           color: ${(props) => props.theme.filterInput.sort.tileSortColor};
@@ -339,15 +339,12 @@ TileContainer.defaultProps = {
 };
 
 export default inject(({ settingsStore, filesStore, treeFoldersStore }) => {
-  const { personal } = settingsStore;
   const { filter } = filesStore;
   const { isFavoritesFolder, isRecentFolder } = treeFoldersStore;
 
   const isDesc = filter?.sortOrder === "desc";
 
   return {
-    personal,
-
     isFavoritesFolder,
     isRecentFolder,
     isDesc,

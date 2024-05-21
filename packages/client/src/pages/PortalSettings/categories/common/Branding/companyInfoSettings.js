@@ -39,6 +39,7 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 import { Link } from "@docspace/shared/components/link";
 import { mobile, size } from "@docspace/shared/utils";
 import { isManagement } from "@docspace/shared/utils/common";
+import { DeviceType } from "@docspace/shared/enums";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderCompanyInfoSettings from "../sub-components/loaderCompanyInfoSettings";
@@ -58,7 +59,7 @@ const StyledComponent = styled.div`
   }
 
   .text-input {
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
   }
 
   .save-cancel-buttons {
@@ -90,10 +91,11 @@ const CompanyInfoSettings = (props) => {
     setIsLoadedCompanyInfoSettingsData,
     isLoadedCompanyInfoSettingsData,
     buildVersionInfo,
-    personal,
+    deviceType,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
+  const isMobileView = deviceType === DeviceType.mobile;
 
   const defaultCompanySettingsError = {
     hasErrorAddress: false,
@@ -126,13 +128,14 @@ const CompanyInfoSettings = (props) => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
-  }, []);
+  }, [isMobileView]);
 
   const checkWidth = () => {
     const url = isManagement()
       ? "/branding"
       : "portal-settings/customization/branding";
     window.innerWidth > size.mobile &&
+      !isMobileView &&
       location.pathname.includes("company-info-settings") &&
       navigate(url);
   };
@@ -362,7 +365,6 @@ const CompanyInfoSettings = (props) => {
         visible={showModal}
         onClose={onCloseModal}
         buildVersionInfo={buildVersionInfo}
-        personal={personal}
         previewData={companySettings}
       />
 
@@ -506,7 +508,7 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
 
     companyInfoSettingsData,
     buildVersionInfo,
-    personal,
+    deviceType,
   } = settingsStore;
 
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
@@ -520,8 +522,8 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     setIsLoadedCompanyInfoSettingsData,
     isLoadedCompanyInfoSettingsData,
     buildVersionInfo,
-    personal,
     isSettingPaid: isBrandingAndCustomizationAvailable,
+    deviceType,
   };
 })(
   withLoading(

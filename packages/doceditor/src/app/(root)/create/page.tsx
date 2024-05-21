@@ -31,6 +31,7 @@ import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { createFile, fileCopyAs, getEditorUrl } from "@/utils/actions";
 import CreateFileError from "@/components/CreateFileError";
 import Editor from "@/components/Editor";
+import { EditorConfigErrorType } from "@docspace/shared/enums";
 
 type TSearchParams = {
   parentId: string;
@@ -43,6 +44,7 @@ type TSearchParams = {
   open?: string;
   fromFile?: string;
   fromTemplate?: string;
+  action?: string;
 };
 
 async function Page({ searchParams }: { searchParams: TSearchParams }) {
@@ -62,6 +64,7 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
 
     fromTemplate,
     formId,
+    action,
   } = searchParams;
 
   if (!parentId || !fileTitle) redirect(baseURL);
@@ -73,6 +76,7 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
     parentId,
     id,
     open,
+    action,
     password,
   };
 
@@ -92,7 +96,12 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
 
   if (file?.id) fileId = file.id;
 
-  if (error && typeof error !== "string" && error.statusCode === 403) {
+  if (
+    error &&
+    typeof error !== "string" &&
+    (error.statusCode === 403 ||
+      error.type === EditorConfigErrorType.TenantQuotaException)
+  ) {
     const documentserverUrl = await getEditorUrl();
 
     return (
@@ -104,7 +113,14 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
   }
 
   if (fileId || !fileError) {
-    const redirectURL = `${baseURL}/doceditor?fileId=${fileId}`;
+    const searchParams = new URLSearchParams();
+
+    searchParams.append("fileId", fileId?.toString() ?? "");
+    if (action) {
+      searchParams.append("action", action);
+    }
+
+    const redirectURL = `/doceditor?${searchParams.toString()}`;
     return permanentRedirect(redirectURL);
   }
 

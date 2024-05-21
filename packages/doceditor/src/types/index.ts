@@ -50,11 +50,23 @@ export type TGoBack = {
   url?: string;
 };
 
+export type ActionType = "view" | "edit";
+
 export type TDocumentInfoSharingSettings = {
   user: string;
   permissions: string;
 };
-
+export type RootPageProps = {
+  searchParams: Partial<{
+    fileId: string;
+    fileid: string;
+    version: string;
+    doc: string;
+    action: ActionType;
+    share: string;
+    editorType: string;
+  }>;
+};
 export type TDocumentInfo = {
   favorite: boolean;
   folder: string;
@@ -165,6 +177,7 @@ export interface IInitialConfig {
   Error?: string;
   errorMessage?: string;
   message?: undefined;
+  startFilling?: boolean;
 }
 
 export type TError = {
@@ -209,6 +222,7 @@ export type EditorProps = {
   fileInfo?: TFile;
   isSharingAccess?: boolean;
   errorMessage?: string;
+  isSkipError?: boolean;
 
   onSDKRequestSharingSettings?: () => void;
   onSDKRequestSaveAs?: (event: object) => void;
@@ -321,6 +335,7 @@ export interface UseEventsProps {
   config?: IInitialConfig;
   doc?: string;
   errorMessage?: string;
+  isSkipError?: boolean;
   t: TTranslation;
 }
 
@@ -361,6 +376,7 @@ export type TDocEditor = {
   setHistoryData?: (obj: THistoryData) => void;
   setActionLink: (link: string) => void;
   setUsers?: ({ c, users }: { c: string; users: TSharedUsers[] }) => void;
+  startFilling?: VoidFunction;
 };
 
 export type TCatchError =

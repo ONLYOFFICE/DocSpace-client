@@ -51,7 +51,6 @@ const PureConnectDialogContainer = (props) => {
     saveThirdParty,
     openConnectWindow,
     setConnectDialogVisible,
-    personal,
     folderFormValidation,
     isConnectionViaBackupModule,
     roomCreation,
@@ -280,7 +279,7 @@ const PureConnectDialogContainer = (props) => {
             isVertical
           >
             <Button
-              label={t("Reconnect")}
+              label={t("Common:Reconnect")}
               size="normal"
               onClick={onReconnect}
               scale
@@ -418,7 +417,7 @@ export default inject(
       openConnectWindow,
       fetchThirdPartyProviders,
     } = filesSettingsStore.thirdPartyStore;
-    const { personal, folderFormValidation } = settingsStore;
+    const { folderFormValidation } = settingsStore;
 
     const { id, folders } = selectedFolderStore;
     const {
@@ -454,7 +453,6 @@ export default inject(
       openConnectWindow,
       fetchThirdPartyProviders,
       setConnectDialogVisible,
-      personal,
       isConnectDialogReconnect,
       saveAfterReconnectOAuth,
       setSaveAfterReconnectOAuth,

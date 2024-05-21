@@ -236,7 +236,6 @@ const LinkRow = (props) => {
         </Text>
       ) : (
         <Link
-          isHovered
           type="action"
           fontSize="14px"
           fontWeight={600}

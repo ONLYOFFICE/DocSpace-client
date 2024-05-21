@@ -78,13 +78,10 @@ const useRootInit = ({ documentType }: UseRootInitProps) => {
   React.useEffect(() => {
     // need for separate window in desktop editors
     if (window.AscDesktopEditor) {
-      const viewPort = window.AscDesktopEditor.getViewportSettings?.();
-
-      if (!viewPort || !viewPort?.isEditor) return;
-
-      window.AscDesktopEditor.onViewportSettingsChanged = () => {
-        calculateAsideHeight();
-      };
+      window.AscDesktopEditor.attachEvent?.(
+        "onViewportSettingsChanged",
+        calculateAsideHeight,
+      );
     }
   }, []);
 };

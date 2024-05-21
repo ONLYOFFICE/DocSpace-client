@@ -28,6 +28,8 @@
 
 import React from "react";
 
+import { ButtonKeys } from "../../enums";
+
 import { Header } from "./sub-components/Header";
 import { Body } from "./sub-components/Body";
 import { Footer } from "./sub-components/Footer";
@@ -105,7 +107,6 @@ const Selector = ({
   withFooterCheckbox,
   footerCheckboxLabel,
   isChecked,
-  setIsChecked,
 
   items,
   renderCustomItem,
@@ -383,6 +384,19 @@ const Selector = ({
     setFooterVisible(isEqual);
   }, [selectedItems, newSelectedItems]);
 
+  React.useEffect(() => {
+    const onKeyboardAction = (e: KeyboardEvent) => {
+      if (e.key === ButtonKeys.esc) {
+        onCancel?.();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyboardAction);
+    return () => {
+      window.removeEventListener("keydown", onKeyboardAction);
+    };
+  }, [onCancel]);
+
   React.useLayoutEffect(() => {
     if (items) {
       if (
@@ -502,12 +516,10 @@ const Selector = ({
         footerCheckboxLabel,
         isChecked: isFooterCheckboxChecked,
         setIsFooterCheckboxChecked,
-        setIsChecked,
       }
     : ({
         isChecked: isFooterCheckboxChecked,
         setIsFooterCheckboxChecked,
-        setIsChecked,
       } as TSelectorFooterCheckbox);
 
   const tabsProps: TWithTabs = withTabs

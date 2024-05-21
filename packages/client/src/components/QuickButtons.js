@@ -30,12 +30,14 @@ import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/locked.react.svg?url";
 import FileActionsFavoriteReactSvgUrl from "PUBLIC_DIR/images/file.actions.favorite.react.svg?url";
 import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
+import LockedReact12SvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 
 import { isTablet, isMobile, commonIconsStyles } from "@docspace/shared/utils";
 import {
+  DeviceType,
   FileStatus,
   RoomsType,
   ShareAccessRights,
@@ -60,7 +62,10 @@ const QuickButtons = (props) => {
     onClickShare,
     isPersonalRoom,
     isArchiveFolder,
+    currentDeviceType,
   } = props;
+
+  const isMobile = currentDeviceType === DeviceType.mobile;
 
   const { id, locked, shared, fileStatus, title, fileExst } = item;
 
@@ -68,8 +73,15 @@ const QuickButtons = (props) => {
     (fileStatus & FileStatus.IsFavorite) === FileStatus.IsFavorite;
 
   const isTile = viewAs === "tile";
+  const isRow = viewAs == "row";
 
-  const iconLock = locked ? FileActionsLockedReactSvgUrl : LockedReactSvgUrl;
+  const iconLock = useMemo(() => {
+    if (isMobile) {
+      return LockedReact12SvgUrl;
+    }
+
+    return locked ? FileActionsLockedReactSvgUrl : LockedReactSvgUrl;
+  }, [locked, isMobile]);
 
   const colorLock = locked
     ? theme.filesQuickButtons.sharedColor
@@ -90,13 +102,17 @@ const QuickButtons = (props) => {
   const tabletViewQuickButton = isTablet();
 
   const sizeQuickButton = isTile || tabletViewQuickButton ? "medium" : "small";
-
-  const displayBadges = viewAs === "table" || isTile || tabletViewQuickButton;
+  const displayBadges =
+    viewAs === "table" ||
+    (isRow && locked && isMobile) ||
+    isTile ||
+    tabletViewQuickButton;
 
   const setFavorite = () => onClickFavorite(isFavorite);
 
   const isAvailableLockFile =
     !folderCategory && fileExst && displayBadges && item.security.Lock;
+
   const isAvailableDownloadFile =
     isPublicRoom && item.security.Download && viewAs === "tile";
 

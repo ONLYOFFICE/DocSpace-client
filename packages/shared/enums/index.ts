@@ -89,6 +89,7 @@ export const enum ApplyFilterOption {
  */
 export const enum FilesSelectorFilterTypes {
   DOCX = "DOCX",
+  PDF = "PDF",
   IMG = "IMG",
   GZ = "GZ",
   DOCXF = "DOCXF",
@@ -213,6 +214,11 @@ export const enum FolderType {
   Templates = 12,
   Privacy = 13,
   Rooms = 14,
+  FormRoom = 15,
+  EditingRoom = 16,
+  ReviewRoom = 17,
+  ReadOnlyRoom = 18,
+  CustomRoom = 19,
   Archive = 20,
 
   Done = 25,
@@ -332,6 +338,7 @@ export const enum Events {
   CHANGE_USER_TYPE = "change_user_type",
   CHANGE_QUOTA = "change_quota",
   CREATE_PLUGIN_FILE = "create_plugin_file",
+  CREATE_PDF_FORM_FILE = "create_pdf_form_file",
 }
 
 /**
@@ -446,7 +453,7 @@ export const enum ParseErrorTypes {
 
 export const enum ButtonKeys {
   enter = "enter",
-  esc = "esc",
+  esc = "Escape",
   tab = "Tab",
 }
 
@@ -508,9 +515,32 @@ export const enum WhiteLabelLogoType {
   Notification = 8,
 }
 
+/**
+ * Enum for files selector filter extended.
+ * @readonly
+ */
+export const enum FilesSelectorExtendedFilterTypes {
+  Folders = "Folders",
+  Documents = "Documents",
+  Presentations = "Presentations",
+  Spreadsheets = "Spreadsheets",
+  Images = "Images",
+  Media = "Media",
+  Archives = "Archives",
+  AllFiles = "AllFiles",
+  FormTemplates = "FormTemplates",
+  Forms = "Forms",
+}
+
 export const enum EditorConfigErrorType {
   System = "System.Exception",
   LinkScope = "ASC.Files.Core.Exceptions.LinkScopeException",
   NotFoundScope = "System.IO.FileNotFoundException",
   AccessDeniedScope = "System.Security.SecurityException",
+  TenantQuotaException = "ASC.Core.Tenants.TenantQuotaException",
+}
+
+export const enum RoomsStorageFilter {
+  internal = 1,
+  thirdparty = 2,
 }

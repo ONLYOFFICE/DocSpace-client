@@ -40,7 +40,7 @@ const StyledRowContainer = styled(RowContainer)`
 
   .row-list-item {
     cursor: pointer;
-    padding-inline-end: ${() => (isMobile() ? "5px" : "15px")};
+    padding-inline-end: 16px;
   }
   .row-item::after {
     bottom: -3px;

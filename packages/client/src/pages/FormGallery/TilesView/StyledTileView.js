@@ -399,7 +399,7 @@ const StyledTileContainer = styled.div`
           flex-direction: row;
           align-items: center;
 
-          font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+          font-size: 12px;
           font-weight: 600;
 
           color: ${(props) => props.theme.filterInput.sort.tileSortColor};

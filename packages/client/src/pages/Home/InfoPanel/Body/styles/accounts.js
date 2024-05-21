@@ -37,7 +37,6 @@ const StyledAccountsItemTitle = styled.div`
   justify-content: start;
   gap: 16px;
   position: fixed;
-  margin-top: -128px;
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
@@ -91,13 +90,13 @@ const StyledAccountsItemTitle = styled.div`
 
     .info-text__name {
       font-weight: 700;
-      font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+      font-size: 16px;
       line-height: 22px;
     }
 
     .info-text__email {
       font-weight: 600;
-      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+      font-size: 13px;
       line-height: 20px;
       color: ${(props) => props.theme.text.disableColor};
       user-select: text;
@@ -126,11 +125,13 @@ const StyledAccountContent = styled.div`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          margin: 128px 0 0 auto;
+          margin: 0px 0 0 auto;
         `
       : css`
-          margin: 128px auto 0 0;
+          margin: 0px auto 0 0;
         `}
+
+  padding-top: 128px;
 
   .data__header {
     width: 100%;
@@ -138,7 +139,7 @@ const StyledAccountContent = styled.div`
 
     .header__text {
       font-weight: 600;
-      font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+      font-size: 14px;
       line-height: 16px;
     }
   }
@@ -190,6 +191,7 @@ const StyledAccountContent = styled.div`
     }
 
     .info_groups {
+      align-self: start;
       margin-top: 4px;
       display: flex;
       flex-direction: column;

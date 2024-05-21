@@ -66,7 +66,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     isDesktop,
     language,
     FirebaseHelper,
-    // personal,
     setCheckedMaintenance,
     socketHelper,
     setPreparationPortalDialogVisible,
@@ -430,13 +429,12 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       {toast}
       {/* <ReactSmartBanner t={t} ready={ready} /> */}
       {withoutNavMenu ? <></> : <NavMenu />}
-      {currentDeviceType === DeviceType.mobile && !isFrame && <MainBar />}
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />
 
       <Main isDesktop={isDesktop}>
-        {currentDeviceType !== DeviceType.mobile && !isFrame && <MainBar />}
+        {!isFrame && <MainBar />}
         <div className="main-container">
           <Outlet />
         </div>
@@ -467,7 +465,6 @@ const ShellWrapper = inject(
     } = authStore;
 
     const {
-      personal,
       roomsMode,
       isDesktopClient,
       firebaseHelper,
@@ -526,7 +523,6 @@ const ShellWrapper = inject(
 
       isDesktop: isDesktopClient,
       FirebaseHelper: firebaseHelper,
-      personal,
       setCheckedMaintenance,
       setMaintenanceExist,
       socketHelper,

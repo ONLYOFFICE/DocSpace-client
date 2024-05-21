@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import PersonalLogoReactSvgUrl from "PUBLIC_DIR/images/personal.logo.react.svg?url";
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
@@ -98,7 +97,7 @@ const StyledLink = styled.div`
   display: inline;
   .nav-menu-header_link {
     color: ${(props) => props.theme.header.linkColor};
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
   }
 
   a {
@@ -156,12 +155,10 @@ const HeaderComponent = ({
   isAuthenticated,
   isAdmin,
   backdropClick,
-  isPersonal,
   isPreparationPortal,
   theme,
   toggleArticleOpen,
   logoUrl,
-
   customHeader,
   ...props
 }) => {
@@ -243,37 +240,24 @@ const HeaderComponent = ({
       <Header
         module={currentProductName}
         isLoaded={isLoaded}
-        isPersonal={isPersonal}
         isPreparationPortal={isPreparationPortal}
         isAuthenticated={isAuthenticated}
         className="navMenuHeader hidingHeader"
         needNavMenu={false}
         isDesktopView={isDesktopView}
       >
-        {((isPersonal && location.pathname.includes("files")) ||
-          (!isPersonal && currentProductId !== "home")) &&
-          !isFormGallery && <HeaderCatalogBurger onClick={toggleArticleOpen} />}
+        {currentProductId !== "home" && !isFormGallery && (
+          <HeaderCatalogBurger onClick={toggleArticleOpen} />
+        )}
         {customHeader ? (
           <>{customHeader}</>
         ) : (
           <LinkWithoutRedirect className="header-logo-wrapper" to={defaultPage}>
-            {!isPersonal ? (
-              <img alt="logo" src={logo} className="header-logo-icon" />
-            ) : (
-              <img
-                alt="logo"
-                className="header-logo-icon"
-                src={combineUrl(
-                  window.DocSpaceConfig?.proxy?.url,
-                  PersonalLogoReactSvgUrl,
-                )}
-              />
-            )}
+            <img alt="logo" src={logo} className="header-logo-icon" />
           </LinkWithoutRedirect>
         )}
         {/* {isNavAvailable &&
           isDesktopView &&
-          !isPersonal &&
           currentProductId !== "home" && (
             <StyledNavigationIconsWrapper>
               {mainModules.map((item) => {
@@ -372,18 +356,11 @@ export default inject(({ settingsStore, authStore }) => {
 
     version,
   } = authStore;
-  const {
-    logoUrl,
-    defaultPage,
-    currentProductId,
-    personal: isPersonal,
-    theme,
-    toggleArticleOpen,
-  } = settingsStore;
+  const { logoUrl, defaultPage, currentProductId, theme, toggleArticleOpen } =
+    settingsStore;
 
   return {
     theme,
-    isPersonal,
     isAdmin,
     defaultPage,
     logoUrl,

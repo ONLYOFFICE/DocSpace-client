@@ -30,6 +30,7 @@ import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
 
 import { TTheme } from "./base";
+import { DEFAULT_FONT_FAMILY } from "../constants";
 
 const {
   black,
@@ -62,6 +63,8 @@ const {
   darkRed,
 
   darkErrorStatus,
+  charlestonGreen,
+  outerSpace,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -69,7 +72,7 @@ const Dark: TTheme = {
   isBase: false,
   color: grayMaxLight,
   backgroundColor: black,
-  fontFamily: "Open Sans, sans-serif, Arial",
+  fontFamily: DEFAULT_FONT_FAMILY,
   fontSize: "13px",
 
   text: {
@@ -230,20 +233,20 @@ const Dark: TTheme = {
 
     dropDown: {
       position: "fixed",
-      right: "32px",
-      bottom: "32px",
+      right: "48px",
+      bottom: "48px",
 
       width: "400px",
 
       zIndex: "202",
 
       mobile: {
-        right: "24px",
-        bottom: "24px",
+        right: "32px",
+        bottom: "40px",
 
         marginLeft: "24px",
 
-        width: "calc(100vw - 48px)",
+        width: "calc(100vw - 64px)",
       },
 
       separatorBackground: white,
@@ -2064,6 +2067,7 @@ const Dark: TTheme = {
     borderColor: "#474747",
     thumbnailBorderColor: grayLightMid,
     textColor: white,
+    errorColor: "#E06451",
 
     closeButtonWrapperPadding: "6px",
     closeButtonIcon: black,
@@ -2077,7 +2081,7 @@ const Dark: TTheme = {
     },
 
     members: {
-      iconColor: "#A3A9AE",
+      iconColor: "#858585",
       iconHoverColor: "#ffffff",
       isExpectName: "#A3A9AE",
       subtitleColor: "#a3a9ae",
@@ -2086,6 +2090,7 @@ const Dark: TTheme = {
       disabledRoleSelectorColor: "#a3a9ae",
       roleSelectorArrowColor: "#a3a9ae",
       createLink: "#858585",
+      linkAccessComboboxExpired: "#a3a9ae",
     },
 
     history: {
@@ -2576,6 +2581,13 @@ const Dark: TTheme = {
     button: {
       colorLink: "#ADADAD",
       colorText: "#ADADAD",
+    },
+  },
+
+  emptyView: {
+    items: {
+      hoverColor: charlestonGreen,
+      pressColor: outerSpace,
     },
   },
 
@@ -3193,14 +3205,15 @@ const Dark: TTheme = {
     notifications: {
       textDescriptionColor: "#858585",
     },
-  },
-
-  activeSessions: {
-    color: "#eeeeee",
-    borderColor: "#474747",
-    tickIconColor: "#3BA420",
-    removeIconColor: "#A3A9AE",
-    sortHeaderColor: "#474747",
+    activeSessions: {
+      color: "#eeeeee",
+      borderColor: "#474747",
+      tickIconColor: "#3BA420",
+      removeIconColor: "#A3A9AE",
+      sortHeaderColor: "#474747",
+      tableCellColor: "#858585",
+      dividerColor: "#474747",
+    },
   },
 
   formWrapper: {

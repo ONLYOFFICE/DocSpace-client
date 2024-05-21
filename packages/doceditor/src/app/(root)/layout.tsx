@@ -37,18 +37,36 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const startDate = new Date();
   const [user, settings] = await Promise.all([getUser(), getSettings()]);
+  const timer = new Date().getTime() - startDate.getTime();
 
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
 
+  const api_host = process.env.API_HOST?.trim();
+
   return (
-    <html lang="en">
+    <html lang="en" translate="no">
       <head>
         <link id="favicon" rel="shortcut icon" type="image/x-icon" />
+        <meta charSet="utf-8" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
+        />
+        <meta name="google" content="notranslate" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
       <body>
         <StyledComponentsRegistry>
-          <Providers contextData={{ user, settings }}>{children}</Providers>
+          <Providers
+            contextData={{ user, settings }}
+            api_host={api_host}
+            timer={timer}
+          >
+            {children}
+          </Providers>
         </StyledComponentsRegistry>
 
         <Scripts />

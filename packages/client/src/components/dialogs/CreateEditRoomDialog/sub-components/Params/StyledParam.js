@@ -57,14 +57,14 @@ const StyledParam = styled.div`
       .set_room_params-info-title-text {
         user-select: none;
         font-weight: 600;
-        font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+        font-size: 13px;
         line-height: 20px;
       }
     }
     .set_room_params-info-description {
       user-select: none;
       font-weight: 400;
-      font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+      font-size: 12px;
       line-height: 16px;
       color: ${(props) =>
         props.theme.createEditRoomDialog.commonParam.descriptionColor};

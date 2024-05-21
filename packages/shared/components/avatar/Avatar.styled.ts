@@ -168,7 +168,7 @@ const NamedAvatar = styled.div<{ size: AvatarSize; isGroup: boolean }>`
     props.theme.avatar.initialsContainer[
       props.isGroup ? "groupFontWeight" : "fontWeight"
     ]};
-  font-size: ${(props) => props.theme.getCorrectFontSize(fontSizeStyle(props))};
+  font-size: ${(props) => fontSizeStyle(props)};
 
   ${NoUserSelect}
 `;

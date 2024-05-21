@@ -101,12 +101,13 @@ export type UseFilesHelpersProps = {
   setSelectedItemSecurity: (value: TFileSecurity | TFolderSecurity) => void;
   isThirdParty: boolean;
   setSelectedTreeNode: (treeNode: TFolder) => void;
-  filterParam?: string;
+  filterParam?: string | number;
   getRootData?: () => Promise<void>;
   onSetBaseFolderPath?: (
     value: number | string | undefined | TBreadCrumb[],
   ) => void;
   isRoomsOnly: boolean;
+  isUserOnly?: boolean;
   rootThirdPartyId?: string;
   getRoomList?: (
     startIndex: number,
@@ -149,6 +150,7 @@ export type FilesSelectorProps = (
     value: number | string | undefined | TBreadCrumb[],
   ) => void;
   isUserOnly?: boolean;
+  openRoot?: boolean;
   isRoomsOnly: boolean;
   isThirdParty: boolean;
   rootThirdPartyId?: string;

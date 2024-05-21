@@ -93,7 +93,6 @@ const StyledLinkRow = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
-    color: ${({ theme }) => theme.infoPanel.members.createLink};
   }
 
   .external-row-icons {

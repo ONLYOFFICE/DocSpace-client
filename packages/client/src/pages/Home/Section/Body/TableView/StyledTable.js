@@ -402,9 +402,13 @@ const StyledBadgesContainer = styled.div`
             `}
       p {
         letter-spacing: 0.5px;
-        font-size: ${(props) => props.theme.getCorrectFontSize("9px")};
+        font-size: 9px;
         font-weight: 800;
       }
+    }
+
+    &:hover {
+      cursor: pointer;
     }
   }
 

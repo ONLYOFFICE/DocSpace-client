@@ -48,7 +48,7 @@ const StyledEmbeddingPanel = styled.div`
 
     .hotkeys_heading {
       font-weight: 700;
-      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+      font-size: 18px;
     }
   }
 `;

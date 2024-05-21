@@ -129,11 +129,11 @@ declare global {
         callback: unknown,
       ) => void;
       getViewportSettings?: () => {
-        isEditor: boolean;
-        isSeparateWindow: boolean;
+        widgetType: "window" | "tab";
         captionHeight: number;
       };
       onViewportSettingsChanged?: VoidFunction;
+      attachEvent?: (listener: string, callback: VoidFunction) => void;
     };
     cloudCryptoCommand: (
       type: string,
@@ -153,6 +153,7 @@ declare global {
     };
     dataLayer?: Record<string, unknown>[];
     errorOnLoad?: Error;
+    authCallback?: (profile: string) => Promise<void>;
   }
 
   export type ContextMenuModel =

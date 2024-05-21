@@ -55,7 +55,7 @@ const Template = (args: CampaignsBannerProps) => (
 export const Default: Story = {
   render: (args) => <Template {...args} />,
   args: {
-    campaignImage: "", // TODO: add url on image
+    campaignBackground: "", // TODO: add url on image
     campaignTranslate: translates,
     campaignConfig: config,
   },

@@ -191,7 +191,7 @@ const StyledDropDown = styled(DropDown)<{ heightProp?: string }>`
     background-color: ${(props) =>
       props.theme.mainButtonMobile.dropDown.backgroundActionMobile};
     border-radius: 3px;
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
     display: block;
   }
 `;
@@ -213,6 +213,37 @@ const StyledButtonOptions = styled.div<{ withoutButton?: boolean }>`
       ? props.theme.mainButtonMobile.buttonWrapper.background
       : props.theme.mainButtonMobile.buttonOptions.backgroundColor};
   color: ${(props) => props.theme.mainButtonMobile.buttonOptions.color};
+
+  .sublevel {
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `padding-right: 48px;`
+        : `padding-left: 48px;`}
+  }
+  .main-button_drop-down {
+    color: ${(props) => props.theme.mainButtonMobile.dropDown.buttonColor};
+
+    svg {
+      path[fill] {
+        fill: ${(props) => props.theme.mainButtonMobile.dropDown.buttonColor};
+      }
+
+      path[stroke] {
+        stroke: ${(props) => props.theme.mainButtonMobile.dropDown.buttonColor};
+      }
+    }
+
+    background-color: transparent;
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: ${(props) =>
+          isMobile
+            ? props.theme.mainButtonMobile.buttonOptions.backgroundColor
+            : props.theme.mainButtonMobile.dropDown.hoverButtonColor};
+      }
+    }
+  }
 `;
 
 StyledButtonOptions.defaultProps = { theme: Base };

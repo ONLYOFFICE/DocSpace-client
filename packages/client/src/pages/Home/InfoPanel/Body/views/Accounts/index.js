@@ -53,6 +53,7 @@ const Accounts = (props) => {
     setPeopleBufferSelection,
 
     showStorageInfo,
+    standalone,
   } = props;
 
   const navigate = useNavigate();
@@ -233,18 +234,22 @@ const Accounts = (props) => {
           </Text>
           {typeData}
 
-          <Text className={"info_field"} noSelect title={t("UserStatus")}>
-            {t("UserStatus")}
-          </Text>
-          <Text
-            className={"info_data first-row"}
-            fontSize={"13px"}
-            fontWeight={600}
-            noSelect
-            title={statusLabel}
-          >
-            {statusText}
-          </Text>
+          {!standalone && (
+            <>
+              <Text className={"info_field"} noSelect title={t("UserStatus")}>
+                {t("UserStatus")}
+              </Text>
+              <Text
+                className={"info_data first-row"}
+                fontSize={"13px"}
+                fontWeight={600}
+                noSelect
+                title={statusLabel}
+              >
+                {statusText}
+              </Text>
+            </>
+          )}
           {showStorageInfo && (
             <>
               <Text
@@ -283,7 +288,7 @@ const Accounts = (props) => {
                 {infoPanelSelection.groups.map((group) => (
                   <Link
                     key={group.id}
-                    className={"info_data first-row info_group"}
+                    className={"info_data info_group"}
                     isHovered={true}
                     fontSize={"13px"}
                     lineHeight={"20px"}
@@ -310,6 +315,7 @@ export default inject(
     accessRightsStore,
     infoPanelStore,
     currentQuotaStore,
+    settingsStore,
   }) => {
     const { isOwner, isAdmin, id: selfId } = userStore.user;
     const { changeType: changeUserType, usersStore } = peopleStore;
@@ -323,6 +329,8 @@ export default inject(
     } = peopleStore.selectionStore;
 
     const { showStorageInfo } = currentQuotaStore;
+    const { standalone } = settingsStore;
+
     return {
       isOwner,
       isAdmin,
@@ -335,6 +343,7 @@ export default inject(
       setPeopleSelection,
       setPeopleBufferSelection,
       showStorageInfo,
+      standalone,
     };
   },
 )(

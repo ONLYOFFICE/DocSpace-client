@@ -66,6 +66,7 @@ const AccountsItemTitle = ({
     ? infoPanelSelection.avatar
     : DefaultUserPhoto;
   const isSSO = infoPanelSelection.isSSO || false;
+  const isLDAP = infoPanelSelection.isLDAP || false;
   const displayName = infoPanelSelection.displayName
     ? decode(infoPanelSelection.displayName).trim()
     : "";
@@ -74,6 +75,7 @@ const AccountsItemTitle = ({
     <StyledAccountsItemTitle
       isPending={isPending}
       isSSO={isSSO}
+      isLDAP={isLDAP}
       ref={itemTitleRef}
     >
       <Avatar
@@ -110,6 +112,19 @@ const AccountsItemTitle = ({
             label={t("Common:SSO")}
             color={"#FFFFFF"}
             backgroundColor="#22C386"
+            fontSize={"9px"}
+            fontWeight={800}
+            noHover
+            lineHeight={"13px"}
+          />
+        )}
+
+        {isLDAP && (
+          <Badge
+            className="ldap-badge"
+            label={t("Common:LDAP")}
+            color={"#FFFFFF"}
+            backgroundColor="#8570BD"
             fontSize={"9px"}
             fontWeight={800}
             noHover

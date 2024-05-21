@@ -206,6 +206,20 @@ const MainProfile = (props) => {
             />
           </div>
         )}
+        {profile.isLDAP && (
+          <div className="badges-wrapper">
+            <Badge
+              className="sso-badge"
+              label={t("Common:LDAP")}
+              color={"#FFFFFF"}
+              backgroundColor="#8570BD"
+              fontSize={"9px"}
+              fontWeight={800}
+              noHover
+              lineHeight={"13px"}
+            />
+          </div>
+        )}
       </StyledAvatarWrapper>
       <StyledInfo
         withActivationBar={withActivationBar}
@@ -259,7 +273,20 @@ const MainProfile = (props) => {
                 />
               )}
 
-              {!profile.isSSO && (
+              {profile.isLDAP && (
+                <Badge
+                  className="ldap-badge"
+                  label={t("Common:LDAP")}
+                  color={"#FFFFFF"}
+                  backgroundColor="#8570BD"
+                  fontSize={"9px"}
+                  fontWeight={800}
+                  noHover
+                  lineHeight={"13px"}
+                />
+              )}
+
+              {!profile.isSSO && !profile.isLDAP && (
                 <IconButton
                   className="edit-button"
                   iconName={PencilOutlineReactSvgUrl}
@@ -290,7 +317,7 @@ const MainProfile = (props) => {
                     place="bottom"
                   />
                 )}
-                {!profile.isSSO && (
+                {!profile.isSSO && !profile.isLDAP && (
                   <IconButton
                     className="edit-button email-edit-button"
                     iconName={PencilOutlineReactSvgUrl}

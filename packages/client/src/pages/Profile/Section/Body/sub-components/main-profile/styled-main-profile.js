@@ -118,7 +118,8 @@ export const StyledInfo = styled.div`
         line-height: 20px;
       }
 
-      .sso-badge {
+      .sso-badge,
+      .ldap-badge {
         ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`

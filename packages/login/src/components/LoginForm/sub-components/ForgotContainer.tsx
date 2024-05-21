@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { isMobileOnly } from "react-device-detect";
 
@@ -32,6 +32,8 @@ import { Checkbox } from "@docspace/shared/components/checkbox";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
+
+import { LoginDispatchContext } from "@/components/Login";
 
 import ForgotPasswordModalDialog from "./ForgotPasswordModalDialog";
 
@@ -48,16 +50,19 @@ const ForgotContainer = ({
   identifier,
   onChangeCheckbox,
 }: IForgotContainer) => {
+  const { setIsModalOpen } = useContext(LoginDispatchContext);
   const { t } = useTranslation(["Login", "Common"]);
 
   const [isDialogVisible, setIsDialogVisible] = useState(false);
 
   const onClick = () => {
     setIsDialogVisible(true);
+    setIsModalOpen(true);
   };
 
   const onDialogClose = () => {
     setIsDialogVisible(false);
+    setIsModalOpen(false);
   };
 
   return (

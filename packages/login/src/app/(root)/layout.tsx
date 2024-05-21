@@ -29,14 +29,12 @@ import { cookies } from "next/headers";
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
-
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import SimpleNav from "@/components/SimpleNav";
 import { LoginContent, LoginFormWrapper } from "@/components/Login";
-import Register from "@/components/Register";
 import GreetingContainer from "@/components/GreetingContainer";
 import { getColorTheme, getSettings } from "@/utils/actions";
 
@@ -83,15 +81,6 @@ export default async function Layout({
               <FormWrapper id="login-form">{children}</FormWrapper>
             </ColorTheme>
           </LoginContent>
-          {isRegisterContainerVisible && (
-            <Register
-              id="login_register"
-              enabledJoin
-              trustedDomains={objectSettings.trustedDomains}
-              trustedDomainsType={objectSettings.trustedDomainsType}
-              isAuthenticated={false}
-            />
-          )}
         </Scrollbar>
       </LoginFormWrapper>
     </div>

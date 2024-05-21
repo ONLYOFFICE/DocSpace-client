@@ -24,11 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import Login from "@/components/Login";
 import { getSettings } from "@/utils/actions";
+import Login from "@/components/Login";
 import LoginForm from "@/components/LoginForm";
 import ThirdParty from "@/components/ThirdParty";
 import RecoverAccess from "@/components/RecoverAccess";
+import Register from "@/components/Register";
 
 async function Page() {
   const settings = await getSettings();
@@ -43,6 +44,15 @@ async function Page() {
           />
           <ThirdParty />
           {settings.enableAdmMess && <RecoverAccess />}
+          {settings.enabledJoin && (
+            <Register
+              id="login_register"
+              enabledJoin
+              trustedDomains={settings.trustedDomains}
+              trustedDomainsType={settings.trustedDomainsType}
+              isAuthenticated={false}
+            />
+          )}
         </>
       )}
     </Login>

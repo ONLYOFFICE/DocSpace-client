@@ -28,20 +28,25 @@
 
 import React, { createContext, useState } from "react";
 
-export const LoginLoadingValueContext = createContext(false);
+export const LoginValueContext = createContext({
+  isLoading: false,
+  isModalOpen: false,
+});
 
-export const LoginLoadingDispatchContext = createContext(
-  (value: boolean) => {},
-);
+export const LoginDispatchContext = createContext({
+  setIsLoading: (value: boolean) => {},
+  setIsModalOpen: (value: boolean) => {},
+});
 
 export const LoginContext = ({ children }: { children: React.ReactNode }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <LoginLoadingDispatchContext.Provider value={setIsLoading}>
-      <LoginLoadingValueContext.Provider value={isLoading}>
+    <LoginDispatchContext.Provider value={{ setIsLoading, setIsModalOpen }}>
+      <LoginValueContext.Provider value={{ isLoading, isModalOpen }}>
         {children}
-      </LoginLoadingValueContext.Provider>
-    </LoginLoadingDispatchContext.Provider>
+      </LoginValueContext.Provider>
+    </LoginDispatchContext.Provider>
   );
 };

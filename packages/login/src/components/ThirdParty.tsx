@@ -50,7 +50,7 @@ import {
   getThirdPartyProviders,
 } from "@/utils/actions";
 
-import { LoginLoadingValueContext } from "./Login";
+import { LoginDispatchContext, LoginValueContext } from "./Login";
 
 const StyledThirdParty = styled.div<{ isVisible: boolean }>`
   width: 100%;
@@ -58,7 +58,8 @@ const StyledThirdParty = styled.div<{ isVisible: boolean }>`
 `;
 
 const ThirdParty = () => {
-  const isLoading = useContext(LoginLoadingValueContext);
+  const { isLoading } = useContext(LoginValueContext);
+  const { setIsModalOpen } = useContext(LoginDispatchContext);
 
   const searchParams = useSearchParams();
 
@@ -185,6 +186,7 @@ const ThirdParty = () => {
         <SocialButtonsGroup
           providers={thirdPartyProvider ?? undefined}
           onClick={onSocialButtonClick}
+          onMoreAuthToggle={setIsModalOpen}
           t={t}
           isDisabled={isLoading}
           {...ssoProps}

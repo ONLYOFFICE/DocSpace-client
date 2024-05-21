@@ -57,18 +57,15 @@ import PasswordContainer from "./sub-components/PasswordContainer";
 import ForgotContainer from "./sub-components/ForgotContainer";
 
 import { StyledCaptcha } from "./LoginForm.styled";
-import {
-  LoginLoadingDispatchContext,
-  LoginLoadingValueContext,
-} from "../Login";
+import { LoginDispatchContext, LoginValueContext } from "../Login";
 
 const LoginForm = ({
   hashSettings,
   cookieSettingsEnabled,
   reCaptchaPublicKey,
 }: LoginFormProps) => {
-  const isLoading = useContext(LoginLoadingValueContext);
-  const setIsLoading = useContext(LoginLoadingDispatchContext);
+  const { isLoading, isModalOpen } = useContext(LoginValueContext);
+  const { setIsLoading } = useContext(LoginDispatchContext);
 
   const searchParams = useSearchParams();
 
@@ -188,7 +185,7 @@ const LoginForm = ({
     if (!passwordValid) setPasswordValid(true);
   };
 
-  const onSubmit = () => {
+  const onSubmit = useCallback(() => {
     //errorText && setErrorText("");
     let captchaToken: string | undefined | null = "";
 
@@ -271,7 +268,18 @@ const LoginForm = ({
         setPasswordValid(!errorMessage);
         setIsLoading(false);
       });
-  };
+  }, [
+    hashSettings,
+    identifier,
+    identifierValid,
+    isCaptcha,
+    isCaptchaSuccessful,
+    isChecked,
+    isDesktop,
+    password,
+    reCaptchaPublicKey,
+    setIsLoading,
+  ]);
 
   const onBlurEmail = () => {
     !identifierValid && setIsEmailErrorShow(true);
@@ -303,6 +311,22 @@ const LoginForm = ({
       return errorText ? t(`Common:${errorText}`) : t("Common:RequiredField");
     }
   };
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        if (isModalOpen) return;
+        console.log("submit");
+        onSubmit();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [isModalOpen, onSubmit]);
 
   const passwordErrorMessage = errorMessage();
 

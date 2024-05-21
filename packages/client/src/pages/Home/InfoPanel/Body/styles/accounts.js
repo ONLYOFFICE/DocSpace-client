@@ -37,7 +37,6 @@ const StyledAccountsItemTitle = styled.div`
   justify-content: start;
   gap: 16px;
   position: fixed;
-  margin-top: -128px;
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
@@ -126,11 +125,13 @@ const StyledAccountContent = styled.div`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          margin: 128px 0 0 auto;
+          margin: 0px 0 0 auto;
         `
       : css`
-          margin: 128px auto 0 0;
+          margin: 0px auto 0 0;
         `}
+
+  padding-top: 128px;
 
   .data__header {
     width: 100%;
@@ -190,6 +191,7 @@ const StyledAccountContent = styled.div`
     }
 
     .info_groups {
+      align-self: start;
       margin-top: 4px;
       display: flex;
       flex-direction: column;

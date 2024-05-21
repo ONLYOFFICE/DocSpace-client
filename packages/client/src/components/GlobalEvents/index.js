@@ -114,7 +114,7 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
       fromTemplate: payload.fromTemplate || null,
       withoutDialog: payload.withoutDialog ?? false,
       preview: payload.preview ?? false,
-
+      actionEdit: payload.edit ?? false,
       onClose: () => {
         setCreateDialogProps({
           visible: false,
@@ -127,6 +127,7 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
           onClose: null,
           withoutDialog: false,
           preview: false,
+          actionEdit: false,
         });
       },
     });

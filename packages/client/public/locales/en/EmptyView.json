@@ -1,0 +1,16 @@
+{
+  "CreateFormFromTextDocOptionDescription": "Turn your text documents into fillable forms by adding the required fields.",
+  "CreateFormFromTextDocOptionTitle": "Create a form from document",
+  "CreateNewFormOptionDescription": "Create a new form from blank, insert fillable fields and adjust them as you need.",
+  "CreateNewFormOptionTitle": "Create a form from scratch",
+  "FormFillerRoomEmptyDescription": "Files and folders uploaded by admins will appeared here.",
+  "FormFillerRoomEmptyTitle": "No docs here yet",
+  "FormRoomEmptyDescription": "Get started with quick actions:",
+  "FormRoomEmptyTitle": "Welcome to the Form filling room",
+  "InviteUsersOptionDescription": "Invite other users to this room to start the form filling process and collect completed copies.",
+  "InviteUsersOptionTitle": "Invite users",
+  "UploadDevicePDFFormOptionDescription": "Download a PDF form from your device, and the system will automatically convert it into a form that can be filled out.",
+  "UploadDevicePDFFormOptionTitle": "Download the complete PDF form",
+  "UploadPDFFormOptionDescription": "Move a ready-to-fill-out PDF form to this room from your DocSpace.",
+  "UploadPDFFormOptionTitle": "Upload a PDF form"
+}

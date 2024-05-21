@@ -618,6 +618,8 @@ class GroupsStore {
     const isGroupSelected = !!this.selection.find((s) => s.id === group.id);
     const isSingleSelected = isGroupSelected && this.selection.length === 1;
 
+    this.peopleStore.selectionStore.setBufferSelection(null);
+
     if (this.bufferSelection) {
       this.setBufferSelection(null);
     }
@@ -649,6 +651,8 @@ class GroupsStore {
   };
 
   changeGroupContextSelection = (group: TGroup, isSingleMenu: boolean) => {
+    this.peopleStore.selectionStore.setBufferSelection(null);
+
     if (isSingleMenu) {
       this.singleContextMenuAction(group);
     } else {

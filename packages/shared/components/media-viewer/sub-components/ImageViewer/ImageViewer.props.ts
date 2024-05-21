@@ -39,6 +39,7 @@ interface ImageViewerProps {
   isFistImage: boolean;
   isLastImage: boolean;
   panelVisible: boolean;
+  isPublicFile?: boolean;
   mobileDetails: JSX.Element;
   toolbar: ReturnType<typeof getCustomToolbar>;
   devices: DevicesType;
@@ -46,7 +47,7 @@ interface ImageViewerProps {
   onPrev?: VoidFunction;
   onNext?: VoidFunction;
   onMask?: VoidFunction;
-  contextModel: () => ContextMenuModel[];
+  contextModel: (isError?: boolean) => ContextMenuModel[];
   resetToolbarVisibleTimer: VoidFunction;
   setIsOpenContextMenu: Dispatch<SetStateAction<boolean>>;
   generateContextMenu: (

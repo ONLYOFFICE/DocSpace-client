@@ -134,8 +134,10 @@ class InfoPanelStore {
   };
 
   setSearchValue = (value) => {
-    this.setSearchResultIsLoading(true);
-    this.searchValue = value;
+    if (value !== this.searchValue) {
+      this.setSearchResultIsLoading(true);
+      this.searchValue = value;
+    }
   };
 
   resetSearch = () => {
@@ -147,8 +149,9 @@ class InfoPanelStore {
 
   setSelectionHistory = (obj) => {
     this.selectionHistory = obj;
-    this.historyWithFileList =
-      this.infoPanelSelection.isFolder || this.infoPanelSelection.isRoom;
+    if (obj)
+      this.historyWithFileList =
+        this.infoPanelSelection.isFolder || this.infoPanelSelection.isRoom;
   };
 
   resetView = () => {
@@ -269,6 +272,11 @@ class InfoPanelStore {
       );
     } else {
       newInfoPanelSelection = [...Array(selectedItems.length).keys()];
+    }
+
+    if (!selectedItems.length && !newInfoPanelSelection.parentId) {
+      this.setSelectionHistory(null);
+      this.setInfoPanelSelectedGroup(null);
     }
 
     this.setInfoPanelSelection(newInfoPanelSelection);
@@ -652,6 +660,38 @@ class InfoPanelStore {
     };
   };
 
+  fetchMoreMembers = async (t, withoutTitles) => {
+    const roomId = this.infoPanelSelection.id;
+    const oldMembers = this.infoPanelMembers;
+
+    const data = await this.filesStore.getRoomMembers(roomId, false);
+
+    const newMembers = this.convertMembers(t, data, false, true);
+
+    const mergedMembers = {
+      roomId: roomId,
+      administrators: [
+        ...oldMembers.administrators,
+        ...newMembers.administrators,
+      ],
+      users: [...oldMembers.users, ...newMembers.users],
+      expected: [...oldMembers.expected, ...newMembers.expectedMembers],
+      groups: [...oldMembers.groups, ...newMembers.groups],
+    };
+
+    if (!withoutTitles) {
+      this.addMembersTitle(
+        t,
+        mergedMembers.administrators,
+        mergedMembers.users,
+        mergedMembers.expected,
+        mergedMembers.groups,
+      );
+    }
+
+    this.setInfoPanelMembers(mergedMembers);
+  };
+
   addInfoPanelMembers = (t, members) => {
     const convertedMembers = this.convertMembers(t, members);
 
@@ -675,6 +715,7 @@ class InfoPanelStore {
         mergedMembers.groups,
       );
 
+      this.filesStore.setInRoomFolder(roomId, true);
       this.setInfoPanelMembers(mergedMembers);
     }
   };

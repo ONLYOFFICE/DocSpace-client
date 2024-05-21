@@ -51,7 +51,6 @@ const RoomsItemHeader = ({
   isGracePeriod,
   setInvitePanelOptions,
   setInviteUsersWarningDialogVisible,
-  isPublicRoomType,
   roomsView,
   setSelection,
   setBufferSelection,
@@ -60,6 +59,7 @@ const RoomsItemHeader = ({
   setCalendarDay,
   openHistory,
   setShowSearchBlock,
+  roomType,
 }) => {
   const itemTitleRef = useRef();
 
@@ -84,6 +84,7 @@ const RoomsItemHeader = ({
   };
 
   const onClickInviteUsers = () => {
+    onSelectItem();
     setIsMobileHidden(true);
     const parentRoomId = infoPanelSelection.id;
 
@@ -96,9 +97,7 @@ const RoomsItemHeader = ({
       visible: true,
       roomId: parentRoomId,
       hideSelector: false,
-      defaultAccess: isPublicRoomType
-        ? ShareAccessRights.RoomManager
-        : ShareAccessRights.ReadOnly,
+      defaultAccess: getDefaultAccessUser(roomType),
     });
   };
 
@@ -181,6 +180,10 @@ export default inject(
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
     const isArchive = selection?.rootFolderType === FolderType.Archive;
 
+    const roomType =
+      selectedFolderStore.roomType ??
+      infoPanelStore.infoPanelSelection?.roomType;
+
     return {
       selection,
       roomsView,
@@ -194,15 +197,12 @@ export default inject(
       setInviteUsersWarningDialogVisible:
         dialogsStore.setInviteUsersWarningDialogVisible,
 
-      isPublicRoomType:
-        (selectedFolderStore.roomType ??
-          infoPanelStore.infoPanelSelection?.roomType) === RoomsType.PublicRoom,
-
       setSelection: filesStore.setSelection,
       setBufferSelection: filesStore.setBufferSelection,
       isArchive,
       hasLinks: externalLinks.length,
       setCalendarDay,
+      roomType,
     };
   },
 )(

@@ -210,7 +210,8 @@ const SortButton = ({
         advancedOptionsCount={advancedOptionsCount}
         onSelect={() => {}}
         withBlur={false}
-        withBackdrop={false}
+        withBackdrop
+        onBackdropClick={toggleCombobox}
       >
         <IconButton iconName={SortReactSvgUrl} size={16} />
       </ComboBox>

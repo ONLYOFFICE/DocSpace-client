@@ -68,22 +68,6 @@ export const getBackUrl = (
   return `${combineUrl(origin, backUrl)}`;
 };
 
-export const isTemplateFile = (
-  config: IInitialConfig | undefined,
-): config is IInitialConfig => {
-  const fileMeta = config?.file;
-
-  return (
-    !IS_VIEW &&
-    !!fileMeta &&
-    fileMeta.viewAccessibility.WebRestrictedEditing &&
-    fileMeta.security.FillForms &&
-    fileMeta.rootFolderType === FolderType.Rooms &&
-    !fileMeta.security.Edit &&
-    !config.document.isLinkedForMe
-  );
-};
-
 export const showDocEditorMessage = async (
   url: string,
   id: string | number,
@@ -230,15 +214,20 @@ export const calculateAsideHeight = () => {
 
   if (viewPort.widgetType === "window") {
     const { captionHeight } = viewPort;
-    const backdrop = document.getElementsByClassName(
-      "backdrop-active",
-    )[0] as HTMLElement;
+    const backdrop =
+      (document.getElementsByClassName("backdrop-active")[0] as HTMLElement) ??
+      (document.getElementsByClassName(
+        "modal-backdrop-active",
+      )[0] as HTMLElement);
     const aside = document.getElementsByTagName("aside")[0];
 
-    if (aside && backdrop) {
-      backdrop.style.height =
-        aside.style.height = `calc(100dvh - ${captionHeight}px`;
-      backdrop.style.marginTop = aside.style.top = `${captionHeight}px`;
+    if (backdrop) {
+      backdrop.style.height = `calc(100dvh - ${captionHeight}px`;
+      backdrop.style.marginTop = `${captionHeight}px`;
+    }
+    if (aside) {
+      aside.style.height = `calc(100dvh - ${captionHeight}px`;
+      aside.style.top = `${captionHeight}px`;
     }
   }
 };

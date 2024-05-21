@@ -129,7 +129,6 @@ const PeopleSelector = ({
   withFooterCheckbox,
   footerCheckboxLabel,
   isChecked,
-  setIsChecked,
 
   withHeader,
   headerProps,
@@ -338,7 +337,6 @@ const PeopleSelector = ({
         withFooterCheckbox,
         footerCheckboxLabel,
         isChecked,
-        setIsChecked,
       }
     : {};
 

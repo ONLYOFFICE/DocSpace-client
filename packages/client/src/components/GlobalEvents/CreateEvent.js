@@ -34,10 +34,10 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { setEncryptionAccess } from "SRC_DIR/helpers/desktop";
 import config from "PACKAGE_FILE";
 
-import { getTitleWithoutExtension } from "SRC_DIR/helpers/filesUtils";
 import { getDefaultFileName } from "@docspace/client/src/helpers/filesUtils";
 
 import Dialog from "./sub-components/Dialog";
+import { getTitleWithoutExtension } from "@docspace/shared/utils";
 
 const CreateEvent = ({
   id,
@@ -69,6 +69,7 @@ const CreateEvent = ({
   withoutDialog,
   preview,
   publicRoomKey,
+  actionEdit,
 }) => {
   const [headerTitle, setHeaderTitle] = React.useState(null);
   const [startValue, setStartValue] = React.useState("");
@@ -164,6 +165,10 @@ const CreateEvent = ({
 
       if (preview) {
         searchParams.append("action", "view");
+      }
+
+      if (actionEdit) {
+        searchParams.append("action", "edit");
       }
 
       if (publicRoomKey) {

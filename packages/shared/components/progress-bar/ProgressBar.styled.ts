@@ -33,7 +33,7 @@ const loadingAnimation = keyframes`
   }
 
   100% {
-    transform: translateX(300%);
+    transform: translateX(400%);
   }
 `;
 

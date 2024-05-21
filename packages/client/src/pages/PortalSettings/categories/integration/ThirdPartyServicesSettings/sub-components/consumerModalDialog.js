@@ -111,6 +111,9 @@ class ConsumerModalDialog extends React.Component {
         onChangeLoading(false);
         hideLoader();
         toastr.success(t("ThirdPartyPropsActivated"));
+
+        const channel = new BroadcastChannel("thirdpartyActivation");
+        channel.postMessage(true);
       })
       .catch((error) => {
         onChangeLoading(false);

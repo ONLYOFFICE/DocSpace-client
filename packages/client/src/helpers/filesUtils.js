@@ -37,7 +37,7 @@ import { authStore, settingsStore } from "@docspace/shared/store";
 import { FileType, RoomsType } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import i18n from "./i18n";
+import i18n from "../i18n";
 
 import { request } from "@docspace/shared/api/client";
 
@@ -60,6 +60,7 @@ export const getFileTypeName = (fileType) => {
     case FileType.Document:
     case FileType.OFormTemplate:
     case FileType.OForm:
+    case FileType.PDF:
       return i18n.t("Files:Document");
     default:
       return i18n.t("Files:Folder");
@@ -121,7 +122,7 @@ export const getDefaultFileName = (format) => {
       return i18n.t("Common:NewSpreadsheet");
     case "pptx":
       return i18n.t("Common:NewPresentation");
-    case "docxf":
+    case "pdf":
       return i18n.t("Common:NewMasterForm");
     default:
       return i18n.t("Common:NewFolder");
@@ -227,11 +228,4 @@ export const connectedCloudsTypeIcon = (key) => {
       return CloudServicesWebdavReactSvgUrl;
     default:
   }
-};
-
-export const getTitleWithoutExtension = (item, fromTemplate) => {
-  const titleWithoutExst = item.title.split(".").slice(0, -1).join(".");
-  return titleWithoutExst && item.fileExst && !fromTemplate
-    ? titleWithoutExst
-    : item.title;
 };

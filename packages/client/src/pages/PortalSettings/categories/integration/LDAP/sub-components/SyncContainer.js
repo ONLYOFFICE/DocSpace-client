@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
-import { Button } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Cron } from "@docspace/shared/components/cron";
 
 import ProgressContainer from "./ProgressContainer";
@@ -14,7 +14,7 @@ import StyledLdapPage from "../styled-components/StyledLdapPage";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { onChangeUrl } from "../utils";
 import { useNavigate } from "react-router-dom";
-import { isMobile } from "@docspace/shared/utils/device";
+import { isMobile, isDesktop } from "@docspace/shared/utils/device";
 
 const SyncContainer = ({
   isLdapAvailable,
@@ -45,6 +45,8 @@ const SyncContainer = ({
     }
   };
 
+  const buttonSize = isDesktop() ? ButtonSize.small : ButtonSize.normal;
+
   const renderBody = () => (
     <Box className="ldap_sync-container">
       <Text
@@ -69,7 +71,7 @@ const SyncContainer = ({
       <Button
         tabIndex={-1}
         className="manual-sync-button"
-        size="normal"
+        size={buttonSize}
         isDisabled={!isLdapAvailable && !isLdapEnabled}
         primary
         onClick={syncLdap}

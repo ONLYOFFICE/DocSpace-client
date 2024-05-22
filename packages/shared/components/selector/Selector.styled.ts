@@ -222,6 +222,10 @@ const StyledItem = styled.div<{
       `}
   }
 
+  .input-component {
+    margin-inline-start: 8px;
+  }
+
   .checkbox {
     svg {
       margin-inline-end: 0px;

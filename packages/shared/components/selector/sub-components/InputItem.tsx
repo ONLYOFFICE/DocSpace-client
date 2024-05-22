@@ -31,6 +31,7 @@ import CancelIconSvgUrl from "PUBLIC_DIR/images/selector.input.cancel.svg?url";
 
 import { InputSize, InputType, TextInput } from "../../text-input";
 import { IconButton } from "../../icon-button";
+import { RoomIcon } from "../../room-icon";
 
 import { StyledInputWrapper, StyledItem } from "../Selector.styled";
 
@@ -39,13 +40,20 @@ const InputItem = ({
   onAcceptInput,
   onCancelInput,
   style,
+
+  color,
+  icon,
 }: {
   defaultInputValue: string;
   onAcceptInput: (value: string) => void;
   onCancelInput: VoidFunction;
   style: React.CSSProperties;
+
+  color?: string;
+  icon?: string;
 }) => {
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = React.useState(defaultInputValue);
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
 
   const onAcceptInputAction = () => {
     onAcceptInput(value);
@@ -57,6 +65,13 @@ const InputItem = ({
     setValue(newVal);
   };
 
+  React.useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.select();
+    }
+  }, []);
+
   return (
     <StyledItem
       key="input-item"
@@ -66,12 +81,28 @@ const InputItem = ({
       noHover
       style={style}
     >
+      {color ? (
+        <RoomIcon
+          color={color}
+          title={value}
+          showDefault
+          className="item-logo"
+        />
+      ) : icon ? (
+        <RoomIcon
+          title={value}
+          className="item-logo"
+          imgClassName="room-logo"
+          imgSrc={icon}
+          showDefault={false}
+        />
+      ) : null}
       <TextInput
         value={value}
-        placeholder={defaultInputValue}
         size={InputSize.base}
         type={InputType.text}
         onChange={onChange}
+        forwardedRef={inputRef}
       />
       <StyledInputWrapper onClick={onAcceptInputAction}>
         <IconButton iconName={AcceptIconSvgUrl} size={16} />

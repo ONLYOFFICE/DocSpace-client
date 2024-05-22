@@ -107,6 +107,8 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           onAcceptInput={onAcceptInput}
           onCancelInput={onCancelInput}
           style={style}
+          color={color}
+          icon={icon}
         />
       );
     }

@@ -29,6 +29,7 @@ import styled from "styled-components";
 import { Meta, StoryObj } from "@storybook/react";
 
 import ArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
+import FolderSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
 import EmptyScreenFilter from "PUBLIC_DIR/images/empty_screen_filter.png";
 
 import { AvatarRole } from "../avatar";
@@ -103,6 +104,7 @@ const getItems = (count: number) => {
     id: "input_item",
     label: "",
     isInputItem: true,
+    icon: FolderSvgUrl,
     defaultInputValue: "New folder",
     onAcceptInput: () => {},
     onCancelInput: () => {},

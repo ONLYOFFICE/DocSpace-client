@@ -498,6 +498,9 @@ export type TSelectorItemInput = MergeTypes<
   {
     isInputItem: boolean;
     defaultInputValue: string;
+    icon?: string;
+    color?: string;
+
     onAcceptInput: (value: string) => void;
     onCancelInput: VoidFunction;
   }

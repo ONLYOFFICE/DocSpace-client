@@ -25,23 +25,50 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+"use client";
+
+import React, { useLayoutEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import { useSearchParams } from "next/navigation";
 
 import { Text } from "@docspace/shared/components/text";
 
 import { GreetingContainersProps } from "@/types";
 import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";
+import { getInvitationLinkData } from "@/utils";
 
 const GreetingContainer = ({
-  roomName,
-  firstName,
-  lastName,
-  greetingSettings,
   logoUrl,
-  type,
+  greetingSettings,
 }: GreetingContainersProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(["Login"]);
+
+  const searchParams = useSearchParams();
+
+  const [invitationLinkData, setInvitationLinkData] = useState({
+    email: "",
+    roomName: "",
+    firstName: "",
+    lastName: "",
+    type: "",
+  });
+
+  useLayoutEffect(() => {
+    if (!searchParams) return;
+
+    const encodeString = searchParams.get("loginData");
+
+    if (!encodeString) return;
+
+    const queryParams = getInvitationLinkData(encodeString);
+
+    if (!queryParams) return;
+
+    setInvitationLinkData(queryParams);
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }, [searchParams]);
+
+  const { type, roomName, firstName, lastName } = invitationLinkData;
 
   return (
     <>

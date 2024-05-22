@@ -291,24 +291,25 @@ const InvitePanel = ({
 
       setIsLoading(false);
 
+      const invitedViaEmail = data.invitations
+        .filter((inv) => inv.email && !inv.id)
+        .map((invitation) => ({
+          access: invitation.access,
+          sharedTo: {
+            name: invitation.email,
+            userName: invitation.email,
+            email: invitation.email,
+            displayName: invitation.email,
+            status: 1,
+            activationStatus: 2,
+            usedSpace: 0,
+            hasAvatar: false,
+          },
+          canEditAccess: false,
+        }));
+
       if (isRooms) {
-        const newInfoPanelMembers = [
-          ...result.members,
-          ...data.invitations.map((invitation) => ({
-            access: invitation.access,
-            sharedTo: {
-              name: invitation.email,
-              userName: invitation.email,
-              email: invitation.email,
-              displayName: invitation.email,
-              status: 1,
-              activationStatus: 2,
-              usedSpace: 0,
-              hasAvatar: false,
-            },
-            canEditAccess: false,
-          })),
-        ];
+        const newInfoPanelMembers = [...result.members, ...invitedViaEmail];
         addInfoPanelMembers(t, newInfoPanelMembers);
       }
 

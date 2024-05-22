@@ -84,7 +84,6 @@ const ForgotPasswordModalDialog = ({
 
   const onKeyDown = React.useCallback(
     (e: KeyboardEvent) => {
-      //console.log("onKeyDown", e.key);
       if (e.key === "Enter") {
         onSendPasswordInstructions();
         e.preventDefault();

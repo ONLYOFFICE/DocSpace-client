@@ -24,7 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+"use client";
+
+import React, { useCallback, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
@@ -35,8 +37,9 @@ import { sendRegisterRequest } from "@docspace/shared/api/settings";
 
 import { RegisterProps } from "@/types";
 
-import RegisterModalDialog from "./sub-components/RegisterModalDialog";
+import { LoginDispatchContext } from "../Login";
 
+import RegisterModalDialog from "./sub-components/RegisterModalDialog";
 import { StyledRegister } from "./Register.styled";
 
 const Register = (props: RegisterProps) => {
@@ -48,6 +51,9 @@ const Register = (props: RegisterProps) => {
 
     id,
   } = props;
+
+  const { setIsModalOpen } = useContext(LoginDispatchContext);
+
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -62,13 +68,15 @@ const Register = (props: RegisterProps) => {
 
   const onRegisterClick = () => {
     setVisible(true);
+    setIsModalOpen(true);
   };
 
-  const onRegisterModalClose = () => {
+  const onRegisterModalClose = useCallback(() => {
     setVisible(false);
     setEmail("");
     setEmailErr(false);
-  };
+    setIsModalOpen(false);
+  }, [setIsModalOpen]);
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e) {
@@ -105,7 +113,7 @@ const Register = (props: RegisterProps) => {
         onRegisterModalClose();
       }
     }
-  }, [email, emailErr]);
+  }, [email, emailErr, onRegisterModalClose]);
 
   const onKeyDown = React.useCallback(
     (e: KeyboardEvent) => {

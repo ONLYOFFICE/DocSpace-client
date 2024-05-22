@@ -19,5 +19,6 @@
   "RegisterTitle": "Yêu cầu đăng ký",
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "Thời lượng của phiên mặc định là 20 phút. Hãy chọn tùy chọn này để đặt thành 1 năm. Để đặt giá trị của riêng bạn, hãy đi đến Cài đặt.",
-  "ResendCode": "Gửi lại mã"
+  "ResendCode": "Gửi lại mã",
+  "UserIsAlreadyRegistered": "Người dùng <1>{{email}} </1> đã được đăng ký trong DocSpace này, hãy nhập mật khẩu của bạn hoặc quay lại để tiếp tục với một email khác."
 }

@@ -35,7 +35,7 @@ import { getLogoUrl } from "@docspace/shared/utils/common";
 import { Base, Dark } from "@docspace/shared/themes";
 import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
 
-const StyledSimpleNav = styled.div<{ isError: boolean }>`
+const StyledSimpleNav = styled.div`
   display: none;
   height: 48px;
   align-items: center;
@@ -49,7 +49,7 @@ const StyledSimpleNav = styled.div<{ isError: boolean }>`
   }
 
   @media ${mobile} {
-    display: ${(props) => (props.isError ? "none" : "flex")};
+    display: flex;
   }
 `;
 
@@ -63,17 +63,8 @@ const SimpleNav = ({ systemTheme }: SimpleNavProps) => {
   const isDark = systemTheme === ThemeKeys.DarkStr;
   const logoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, isDark);
 
-  const isError = false;
-  typeof window !== "undefined"
-    ? window?.location?.pathname === "/login/error"
-    : false;
-
   return (
-    <StyledSimpleNav
-      id="login-header"
-      isError={isError}
-      theme={isDark ? Dark : Base}
-    >
+    <StyledSimpleNav id="login-header" theme={isDark ? Dark : Base}>
       <img src={logoUrl} alt="logo-url" />
     </StyledSimpleNav>
   );

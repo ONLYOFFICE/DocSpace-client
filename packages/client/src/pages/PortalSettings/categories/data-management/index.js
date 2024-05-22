@@ -44,6 +44,7 @@ import ManualBackup from "./backup/manual-backup";
 import AutoBackup from "./backup/auto-backup";
 import { DeviceType } from "@docspace/shared/enums";
 import { isManagement } from "@docspace/shared/utils/common";
+import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 const DataManagementWrapper = (props) => {
   const {
@@ -144,13 +145,7 @@ const DataManagementWrapper = (props) => {
       data={data}
       startSelect={currentTab}
       onSelect={(e) => onSelect(e)}
-      topProps={
-        currentDeviceType === DeviceType.desktop
-          ? 0
-          : currentDeviceType === DeviceType.mobile
-            ? "53px"
-            : "61px"
-      }
+      topProps={SECTION_HEADER_HEIGHT[currentDeviceType]}
     />
   );
 };

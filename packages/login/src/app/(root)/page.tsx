@@ -24,94 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use server";
-import { redirect } from "next/navigation";
-import { cookies, headers } from "next/headers";
-
-import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
-import { getBgPattern } from "@docspace/shared/utils/common";
-
-import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
-import { ThemeKeys } from "@docspace/shared/enums";
-
+import { getSettings } from "@/utils/actions";
 import Login from "@/components/Login";
-import { LoginFormWrapper } from "@/components/Login/Login.styled";
-import {
-  getSettings,
-  getThirdPartyProviders,
-  getCapabilities,
-  getSSO,
-  checkIsAuthenticated,
-  getColorTheme,
-} from "@/utils/actions";
+import LoginForm from "@/components/LoginForm";
+import ThirdParty from "@/components/ThirdParty";
+import RecoverAccess from "@/components/RecoverAccess";
+import Register from "@/components/Register";
 
-async function Page({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string };
-}) {
-  const timers = { isAuth: 0, otherOperations: 0 };
-
-  const startOtherOperationsDate = new Date();
-
-  const [settings, thirdParty, capabilities, ssoSettings, colorTheme] =
-    await Promise.all([
-      getSettings(),
-      getThirdPartyProviders(),
-      getCapabilities(),
-      getSSO(),
-      getColorTheme(),
-    ]);
-
-  timers.otherOperations =
-    new Date().getTime() - startOtherOperationsDate.getTime();
-
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
-
-  if (settings === "portal-not-found") {
-    const config = await (
-      await fetch(`${getBaseUrl()}/static/scripts/config.json`)
-    ).json();
-    const hdrs = headers();
-    const host = hdrs.get("host");
-
-    const url = new URL(
-      config.wrongPortalNameUrl ??
-        "https://www.onlyoffice.com/wrongportalname.aspx",
-    );
-
-    url.searchParams.append("url", host ?? "");
-
-    redirect(url.toString());
-  }
-
-  const ssoUrl = capabilities ? capabilities.ssoUrl : "";
-  const hideAuthPage = ssoSettings ? ssoSettings.hideAuthPage : false;
-
-  if (ssoUrl && hideAuthPage && searchParams.skipssoredirect !== "true") {
-    redirect(ssoUrl);
-  }
-
-  const bgPattern = getBgPattern(colorTheme?.selected);
-
-  const cookieStore = cookies();
-
-  const systemTheme = cookieStore.get(SYSTEM_THEME_KEY);
+async function Page() {
+  const settings = await getSettings();
 
   return (
-    <LoginFormWrapper id="login-page" bgPattern={bgPattern}>
-      <div className="bg-cover" />
-      <Login
-        searchParams={searchParams}
-        capabilities={capabilities}
-        settings={settings}
-        thirdPartyProvider={thirdParty}
-        ssoSettings={ssoSettings}
-        isAuthenticated={false}
-        systemTheme={systemTheme?.value as ThemeKeys}
-        timers={timers}
-      />
-    </LoginFormWrapper>
+    <Login>
+      {settings && typeof settings !== "string" && (
+        <>
+          <LoginForm
+            hashSettings={settings?.passwordHash}
+            cookieSettingsEnabled={settings?.cookieSettingsEnabled}
+          />
+          <ThirdParty />
+          {settings.enableAdmMess && <RecoverAccess />}
+          {settings.enabledJoin && (
+            <Register
+              id="login_register"
+              enabledJoin
+              trustedDomains={settings.trustedDomains}
+              trustedDomainsType={settings.trustedDomainsType}
+              isAuthenticated={false}
+            />
+          )}
+        </>
+      )}
+    </Login>
   );
 }
 

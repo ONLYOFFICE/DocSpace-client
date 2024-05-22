@@ -200,31 +200,37 @@ const Section = (props: SectionProps) => {
           viewAs={viewAs}
           ref={containerRef}
           isSectionHeaderAvailable={isSectionHeaderAvailable}
+          isInfoPanelVisible={isInfoPanelVisible}
           showTwoProgress={showTwoProgress}
+          withBodyScroll={withBodyScroll}
+          currentDeviceType={currentDeviceType}
         >
-          {isSectionHeaderAvailable &&
-            currentDeviceType === DeviceType.desktop && (
-              <SubSectionHeader
-                className="section-header_header"
-                isFormGallery={isFormGallery}
-              >
-                {sectionHeaderContent}
-              </SubSectionHeader>
-            )}
+          {currentDeviceType !== DeviceType.mobile && (
+            <div className="section-sticky-container">
+              {isSectionHeaderAvailable && (
+                <SubSectionHeader
+                  className="section-header_header"
+                  isFormGallery={isFormGallery}
+                >
+                  {sectionHeaderContent}
+                </SubSectionHeader>
+              )}
 
-          {isSectionSubmenuAvailable &&
-            currentDeviceType === DeviceType.desktop && (
-              <SubSectionSubmenu>{sectionSubmenuContent}</SubSectionSubmenu>
-            )}
-          {isSectionFilterAvailable &&
-            currentDeviceType === DeviceType.desktop && (
-              <SubSectionFilter
-                className="section-header_filter"
-                viewAs={viewAs}
-              >
-                {sectionFilterContent}
-              </SubSectionFilter>
-            )}
+              {isSectionSubmenuAvailable && (
+                <SubSectionSubmenu>{sectionSubmenuContent}</SubSectionSubmenu>
+              )}
+
+              {isSectionFilterAvailable &&
+                currentDeviceType === DeviceType.desktop && (
+                  <SubSectionFilter
+                    className="section-header_filter"
+                    viewAs={viewAs}
+                  >
+                    {sectionFilterContent}
+                  </SubSectionFilter>
+                )}
+            </div>
+          )}
 
           {isSectionBodyAvailable && (
             <SubSectionBody
@@ -239,7 +245,7 @@ const Section = (props: SectionProps) => {
               getContextModel={getContextModel}
             >
               {isSectionHeaderAvailable &&
-                currentDeviceType !== DeviceType.desktop && (
+                currentDeviceType === DeviceType.mobile && (
                   <SubSectionHeader
                     className="section-body_header"
                     isFormGallery={isFormGallery}
@@ -251,7 +257,7 @@ const Section = (props: SectionProps) => {
                 <SubSectionWarning>{sectionWarningContent}</SubSectionWarning>
               )}
               {isSectionSubmenuAvailable &&
-                currentDeviceType !== DeviceType.desktop && (
+                currentDeviceType === DeviceType.mobile && (
                   <SubSectionSubmenu>{sectionSubmenuContent}</SubSectionSubmenu>
                 )}
               {isSectionFilterAvailable &&

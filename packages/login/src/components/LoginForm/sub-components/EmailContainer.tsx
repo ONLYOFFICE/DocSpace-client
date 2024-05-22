@@ -32,12 +32,12 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { IconButton } from "@docspace/shared/components/icon-button";
+import { InputSize, InputType } from "@docspace/shared/components/text-input";
+import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.left.react.svg?url";
 
 import { DEFAULT_EMAIL_TEXT } from "@/utils/constants";
-import { InputSize, InputType } from "@docspace/shared/components/text-input";
-import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 
 interface IEmailContainer {
   emailFromInvitation?: string;
@@ -45,6 +45,7 @@ interface IEmailContainer {
   errorText?: string;
   identifier: string;
   isLoading: boolean;
+
   onChangeLogin: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlurEmail: () => void;
   onValidateEmail: (res: TValidate) => undefined;

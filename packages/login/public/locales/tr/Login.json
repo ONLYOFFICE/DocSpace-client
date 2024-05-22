@@ -19,5 +19,6 @@
   "RegisterTitle": "Kayıt talebi",
   "RegistrationEmailWatermark": "E-posta",
   "RememberHelper": "Varsayılan oturum ömrü 20 dakikadır. 1 yıla ayarlamak için bu seçeneği işaretleyin. Kendi sürenizi ayarlamak için Ayarlar'a gidin.",
-  "ResendCode": "Kodu yeniden gönder"
+  "ResendCode": "Kodu yeniden gönder",
+  "UserIsAlreadyRegistered": "Kullanıcı <1>{{email}}</1> bu DocSpace'e zaten kayıtlı, şifrenizi girin veya başka bir e-posta ile devam etmek için geri dönün."
 }

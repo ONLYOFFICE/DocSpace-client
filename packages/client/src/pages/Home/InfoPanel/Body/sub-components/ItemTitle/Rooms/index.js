@@ -42,6 +42,7 @@ import {
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
+import Search from "../../Search";
 
 const RoomsItemHeader = ({
   t,
@@ -56,6 +57,7 @@ const RoomsItemHeader = ({
   setBufferSelection,
   isArchive,
   hasLinks,
+  showSearchBlock,
   setCalendarDay,
   openHistory,
   setShowSearchBlock,
@@ -105,6 +107,8 @@ const RoomsItemHeader = ({
 
   return (
     <StyledTitle ref={itemTitleRef}>
+      {isRoomMembersPanel && showSearchBlock && <Search />}
+
       <div className="item-icon">
         <RoomIcon
           color={selection.logo?.color}
@@ -172,6 +176,7 @@ export default inject(
       infoPanelSelection,
       roomsView,
       setIsMobileHidden,
+      showSearchBlock,
       setShowSearchBlock,
       setCalendarDay,
     } = infoPanelStore;
@@ -189,6 +194,7 @@ export default inject(
       roomsView,
       infoPanelSelection,
       setIsMobileHidden,
+      showSearchBlock,
       setShowSearchBlock,
 
       isGracePeriod: currentTariffStatusStore.isGracePeriod,

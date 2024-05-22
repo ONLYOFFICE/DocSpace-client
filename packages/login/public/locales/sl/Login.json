@@ -19,5 +19,6 @@
   "RegisterTitle": "Zahteva za registracijo",
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "Privzeta življenjska doba seje je 20 minut. Preverite to možnost, če jo želite nastaviti na 1 leto. Če želite nastaviti poljubno vrednost, pojdite v Nastavitve.",
-  "ResendCode": "Ponovno pošlji kodo"
+  "ResendCode": "Ponovno pošlji kodo",
+  "UserIsAlreadyRegistered": "Uporabnik <1>{{email}}</1> je že registriran v tem prostoru DocSpace. Vnesite svoje geslo ali se vrnite nazaj in nadaljujte z drugim e-mail naslovom."
 }

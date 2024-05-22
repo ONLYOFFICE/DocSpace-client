@@ -98,7 +98,7 @@ const getItems = (count: number) => {
     onCreateClick: () => {},
   });
 
-  for (let i = 0; i < count / 2; i += 1) {
+  for (let i = 0; i < count; i += 1) {
     const label = makeName();
     items.push({
       key: `${label} ${i}`,

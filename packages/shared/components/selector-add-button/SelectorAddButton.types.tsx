@@ -39,4 +39,6 @@ export interface SelectorAddButtonProps {
   style?: React.CSSProperties;
   /** Specifies the icon name */
   iconName?: string;
+  /** Change colors to accent */
+  isAction?: boolean;
 }

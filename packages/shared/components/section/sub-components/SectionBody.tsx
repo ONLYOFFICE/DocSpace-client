@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 // import { inject, observer } from "mobx-react";
 
@@ -58,6 +59,7 @@ const SectionBody = React.memo(
       toggle: (e: React.MouseEvent | MouseEvent) => boolean;
       getVisible: () => boolean;
     }>(null);
+    const location = useLocation();
 
     const onContextMenu = React.useCallback(
       (e: MouseEvent | React.MouseEvent<Element, MouseEvent>) => {
@@ -95,7 +97,7 @@ const SectionBody = React.memo(
       if (!autoFocus) return;
 
       if (focusRef.current) focusRef.current.focus({ preventScroll: true });
-    }, [autoFocus]);
+    }, [autoFocus, location.pathname]);
 
     const focusProps = autoFocus
       ? {

@@ -137,7 +137,7 @@
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} օգտվողները հաջողությամբ ներմուծվեցին:",
   "ImportFromGoogle": "Ներմուծում Google Workspace-ից",
   "ImportFromNextcloud": "Ներմուծում Nextcloud-ից",
-  "ImportFromOnlyoffice": "Ներմուծում Onlyoffice Workspace-ից",
+  "ImportFromOnlyoffice": "Ներմուծում ONLYOFFICE Workspace-ից",
   "ImportProcessingDescription": "Տվյալների տեղափոխումն ընթացքի մեջ է: Խնդրում ենք սպասել.",
   "ImportSectionDescription": "Ընտրել բաժիններ ներմուծման համար: Դրանք կհայտնվեն DocSpace-ի համապատասխան բաժիններում։",
   "IncludedInBusiness": "Ներառված է բիզնես պլանում",

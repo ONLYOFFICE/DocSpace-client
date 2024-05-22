@@ -107,6 +107,7 @@ const FilesSelector = ({
   withBreadCrumbs: withBreadCrumbsProp,
   filesSettings,
   cancelButtonLabel,
+  titleIconTooltip,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -585,6 +586,7 @@ const FilesSelector = ({
             : getFileList
       }
       descriptionText={descriptionText}
+      titleIconTooltip={titleIconTooltip}
       disableFirstFetch
     />
   );

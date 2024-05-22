@@ -48,7 +48,7 @@ const FileLifetime = ({ t }) => {
   const dateOptions = [
     {
       key: 1,
-      label: t("Common:Days"),
+      label: t("Common:Days")[0].toUpperCase() + t("Common:Days").slice(1),
       "data-type": 1,
     },
     {

@@ -82,6 +82,8 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
 
     const {
       label,
+      isCreateNewItem,
+      onCreateClick,
       avatar,
       icon,
       role,
@@ -91,14 +93,13 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       email,
       isGroup,
       disabledText,
-      isCreateNewItem,
-      onCreateClick,
     } = item;
 
-    if (isCreateNewItem)
+    if (isCreateNewItem) {
       return (
         <NewItem label={label} onCreateClick={onCreateClick} style={style} />
       );
+    }
 
     const showPlanetIcon =
       (item.roomType === RoomsType.PublicRoom ||
@@ -109,7 +110,10 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
 
     const currentRole = role || AvatarRole.user;
 
-    const typeLabel = getUserTypeLabel(role, t);
+    const typeLabel = getUserTypeLabel(
+      role as "owner" | "admin" | "user" | "collaborator" | "manager",
+      t,
+    );
 
     const onChangeAction = () => {
       onSelect?.(item, false);

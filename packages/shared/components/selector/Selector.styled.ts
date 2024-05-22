@@ -327,7 +327,10 @@ const StyledBreadCrumbs = styled.div<{
 
 StyledBreadCrumbs.defaultProps = { theme: Base };
 
-const StyledItemText = styled(Text)<{ isCurrent: boolean; isLoading: boolean }>`
+const StyledItemText = styled(Text)<{
+  isCurrent: boolean;
+  isLoading?: boolean;
+}>`
   ${(props) =>
     !props.isCurrent &&
     css`

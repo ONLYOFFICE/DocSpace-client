@@ -184,9 +184,11 @@ const Body = ({
           breadCrumbsLoader
         ) : (
           <BreadCrumbs
+            withBreadCrumbs
+            isBreadCrumbsLoading={isLoading}
             breadCrumbs={breadCrumbs}
+            breadCrumbsLoader={breadCrumbsLoader}
             onSelectBreadCrumb={onSelectBreadCrumb}
-            isLoading={isLoading}
           />
         )
       ) : null}
@@ -232,17 +234,20 @@ const Body = ({
           {!!descriptionText && (
             <Text className="body-description-text">{descriptionText}</Text>
           )}
-          {isMultiSelect && withSelectAll && !isSearch && (
-            <SelectAll
-              label={selectAllLabel}
-              icon={selectAllIcon}
-              isChecked={isAllChecked || false}
-              isIndeterminate={isAllIndeterminate || false}
-              onSelectAll={onSelectAll}
-              isLoading={isLoading}
-              rowLoader={rowLoader}
-            />
-          )}
+          {isMultiSelect && withSelectAll && !isSearch ? (
+            isLoading ? (
+              rowLoader
+            ) : (
+              <SelectAll
+                withSelectAll
+                selectAllIcon={selectAllIcon}
+                selectAllLabel={selectAllLabel}
+                isAllChecked={isAllChecked}
+                isAllIndeterminate={isAllIndeterminate}
+                onSelectAll={onSelectAll}
+              />
+            )
+          ) : null}
 
           {bodyHeight && (
             <InfiniteLoader

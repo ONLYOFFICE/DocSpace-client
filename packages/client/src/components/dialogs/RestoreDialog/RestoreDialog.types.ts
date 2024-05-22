@@ -22,6 +22,11 @@
 //
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+
+import type { TFile } from "@docspace/shared/api/files/types";
+
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 export interface RestoreDialogProps
-  extends Partial<Pick<TStore["dialogsStore"], "setRestoreDialogVisible">> {}
+  extends Partial<Pick<TStore["dialogsStore"], "setRestoreDialogVisible">> {
+  items: TFile[];
+}

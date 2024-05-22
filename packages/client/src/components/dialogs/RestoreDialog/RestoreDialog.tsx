@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
 
@@ -34,12 +34,16 @@ import {
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { RestoreDialogProps } from "./RestoreDialog.types";
 
-export const RestoreDialog = inject<TStore>(({ dialogsStore }) => {
+export const RestoreDialog = inject<TStore>(({ dialogsStore, filesStore }) => {
   const { setRestoreDialogVisible } = dialogsStore;
 
-  return { setRestoreDialogVisible };
+  const { selection, bufferSelection } = filesStore;
+
+  const items = selection.length > 0 ? selection : [bufferSelection];
+
+  return { setRestoreDialogVisible, items };
 })(
-  observer(({ setRestoreDialogVisible }: RestoreDialogProps) => {
+  observer(({ setRestoreDialogVisible, items }: RestoreDialogProps) => {
     const { t } = useTranslation(["RestoreDialog", "Common"]);
 
     const onClose = () => {
@@ -48,7 +52,18 @@ export const RestoreDialog = inject<TStore>(({ dialogsStore }) => {
 
     const onSubmit = () => {
       // TODO!
+      onClose();
     };
+
+    const description = useMemo(
+      () =>
+        t(
+          items.length > 1
+            ? "RestoreDialog:ConfirmationRestoreMultipleFiles"
+            : "RestoreDialog:ConfirmationRestoreFile",
+        ),
+      [items.length, t],
+    );
 
     return (
       <ModalDialog
@@ -58,9 +73,7 @@ export const RestoreDialog = inject<TStore>(({ dialogsStore }) => {
         displayType={ModalDialogType.modal}
       >
         <ModalDialog.Header>{t("Common:Restore")}</ModalDialog.Header>
-        <ModalDialog.Body>
-          {t("RestoreDialog:ConfirmationRestoreFile")}
-        </ModalDialog.Body>
+        <ModalDialog.Body>{description}</ModalDialog.Body>
         <ModalDialog.Footer>
           <Button
             scale

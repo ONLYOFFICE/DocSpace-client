@@ -98,6 +98,16 @@ const getItems = (count: number) => {
     onCreateClick: () => {},
   });
 
+  items.push({
+    key: "input_item",
+    id: "input_item",
+    label: "",
+    isInputItem: true,
+    defaultInputValue: "New folder",
+    onAcceptInput: () => {},
+    onCancelInput: () => {},
+  });
+
   for (let i = 0; i < count; i += 1) {
     const label = makeName();
     items.push({

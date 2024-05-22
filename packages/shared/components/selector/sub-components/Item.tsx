@@ -37,6 +37,7 @@ import { StyledItem } from "../Selector.styled";
 import { ItemProps, Data, TSelectorItem } from "../Selector.types";
 import { RoomsType } from "../../../enums";
 import NewItem from "./NewItem";
+import InputItem from "./InputItem";
 
 const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
   const prevData = prevProps.data;
@@ -84,6 +85,10 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       label,
       isCreateNewItem,
       onCreateClick,
+      isInputItem,
+      defaultInputValue,
+      onAcceptInput,
+      onCancelInput,
       avatar,
       icon,
       role,
@@ -94,6 +99,17 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       isGroup,
       disabledText,
     } = item;
+
+    if (isInputItem) {
+      return (
+        <InputItem
+          defaultInputValue={defaultInputValue}
+          onAcceptInput={onAcceptInput}
+          onCancelInput={onCancelInput}
+          style={style}
+        />
+      );
+    }
 
     if (isCreateNewItem) {
       return (

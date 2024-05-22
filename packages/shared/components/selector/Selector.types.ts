@@ -412,6 +412,10 @@ type TSelectorItemEmpty = {
   name?: undefined;
   isCreateNewItem?: undefined;
   onCreateClick?: undefined;
+  isInputItem?: undefined;
+  defaultInputValue?: undefined;
+  onAcceptInput?: undefined;
+  onCancelInput?: undefined;
 };
 
 export type TSelectorItemUser = MergeTypes<
@@ -489,13 +493,24 @@ export type TSelectorItemNew = MergeTypes<
   }
 >;
 
+export type TSelectorItemInput = MergeTypes<
+  TSelectorItemEmpty,
+  {
+    isInputItem: boolean;
+    defaultInputValue: string;
+    onAcceptInput: (value: string) => void;
+    onCancelInput: VoidFunction;
+  }
+>;
+
 type TSelectorItemType =
   | TSelectorItemUser
   | TSelectorItemFile
   | TSelectorItemFolder
   | TSelectorItemRoom
   | TSelectorItemGroup
-  | TSelectorItemNew;
+  | TSelectorItemNew
+  | TSelectorItemInput;
 
 export type TSelectorItem = TSelectorItemType & {
   label: string;

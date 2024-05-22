@@ -2391,6 +2391,9 @@ export const getBaseTheme = () => {
       item: {
         hoverBackground: grayLight,
         selectedBackground: lightHover,
+
+        inputButtonBorder: "#D0D5DA",
+        inputButtonBorderHover: grayMain,
       },
 
       emptyScreen: {

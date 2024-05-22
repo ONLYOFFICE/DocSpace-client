@@ -48,7 +48,7 @@ const NewItem = ({
       isMultiSelect={false}
       noHover
     >
-      <SelectorAddButton onClick={onCreateClick} />
+      <SelectorAddButton onClick={onCreateClick} isAction />
       <Text
         className="label label-disabled"
         fontWeight={600}

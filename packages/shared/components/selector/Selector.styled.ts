@@ -445,6 +445,36 @@ const StyledInfo = styled.div`
   }
 `;
 
+const StyledInputWrapper = styled.div`
+  width: 32px;
+  height: 32px;
+
+  margin-inline-start: 8px;
+
+  border: 1px solid ${(props) => props.theme.selector.item.inputButtonBorder};
+  border-radius: 3px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  :hover {
+    div {
+      cursor: pointer;
+    }
+    cursor: pointer;
+
+    border-color: ${(props) =>
+      props.theme.selector.item.inputButtonBorderHover};
+
+    path {
+      fill: ${(props) => props.theme.selector.item.inputButtonBorderHover};
+    }
+  }
+`;
+
 StyledSelector.defaultProps = { theme: Base };
 StyledHeader.defaultProps = { theme: Base };
 StyledBody.defaultProps = { theme: Base };
@@ -454,6 +484,7 @@ StyledEmptyScreen.defaultProps = { theme: Base };
 StyledArrowRightSvg.defaultProps = { theme: Base };
 StyledComboBox.defaultProps = { theme: Base };
 StyledInfo.defaultProps = { theme: Base };
+StyledInputWrapper.defaultProps = { theme: Base };
 
 export {
   StyledSelector,
@@ -473,4 +504,5 @@ export {
   StyledTabs,
   StyledInfo,
   StyledAccessSelector,
+  StyledInputWrapper,
 };

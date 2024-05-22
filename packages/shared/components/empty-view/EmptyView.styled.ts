@@ -63,7 +63,7 @@ export const EmptyViewItemWrapper = styled.div`
     width: 36px;
     height: 36px;
 
-    flex: 1 0 36px;
+    flex: 0 0 36px;
   }
 
   .ev-item-header {
@@ -77,7 +77,7 @@ export const EmptyViewItemWrapper = styled.div`
   }
 
   .ev-item__arrow-icon {
-    flex: 1 0 12px;
+    flex: 0 0 12px;
   }
 
   @media (hover: hover) {
@@ -94,5 +94,6 @@ export const EmptyViewItemWrapper = styled.div`
 export const EmptyViewItemBody = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
+  flex-grow: 1;
 `;

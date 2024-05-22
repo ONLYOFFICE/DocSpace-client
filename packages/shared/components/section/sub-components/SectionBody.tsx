@@ -28,10 +28,7 @@ import React from "react";
 
 // import { inject, observer } from "mobx-react";
 
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
-
-import { DeviceType } from "@docspace/shared/enums";
 
 import {
   StyledDropZoneBody,
@@ -52,7 +49,6 @@ const SectionBody = React.memo(
 
     isDesktop,
     settingsStudio = false,
-    currentDeviceType,
     getContextModel,
   }: SectionBodyProps) => {
     const focusRef = React.useRef<HTMLDivElement | null>(null);
@@ -98,7 +94,7 @@ const SectionBody = React.memo(
     React.useEffect(() => {
       if (!autoFocus) return;
 
-      if (focusRef.current) focusRef.current.focus();
+      if (focusRef.current) focusRef.current.focus({ preventScroll: true });
     }, [autoFocus]);
 
     const focusProps = autoFocus
@@ -128,27 +124,12 @@ const SectionBody = React.memo(
         className="section-body"
       >
         {withScroll ? (
-          currentDeviceType !== DeviceType.mobile ? (
-            <Scrollbar
-              id="sectionScroll"
-              scrollclass="section-scroll"
-              fixedSize
-            >
-              <div className="section-wrapper">
-                <div className="section-wrapper-content" {...focusProps}>
-                  {children}
-                  <StyledSpacer />
-                </div>
-              </div>
-            </Scrollbar>
-          ) : (
-            <div className="section-wrapper">
-              <div className="section-wrapper-content" {...focusProps}>
-                {children}
-                <StyledSpacer />
-              </div>
+          <div className="section-wrapper">
+            <div className="section-wrapper-content" {...focusProps}>
+              {children}
+              <StyledSpacer />
             </div>
-          )
+          </div>
         ) : (
           <div className="section-wrapper">
             {children}
@@ -168,27 +149,12 @@ const SectionBody = React.memo(
         className="section-body"
       >
         {withScroll ? (
-          currentDeviceType !== DeviceType.mobile ? (
-            <Scrollbar
-              id="sectionScroll"
-              scrollclass="section-scroll"
-              fixedSize
-            >
-              <div className="section-wrapper">
-                <div className="section-wrapper-content" {...focusProps}>
-                  {children}
-                  <StyledSpacer className="settings-mobile" />
-                </div>
-              </div>
-            </Scrollbar>
-          ) : (
-            <div className="section-wrapper">
-              <div className="section-wrapper-content" {...focusProps}>
-                {children}
-                <StyledSpacer className="settings-mobile" />
-              </div>
+          <div className="section-wrapper">
+            <div className="section-wrapper-content" {...focusProps}>
+              {children}
+              <StyledSpacer className="settings-mobile" />
             </div>
-          )
+          </div>
         ) : (
           <div className="section-wrapper">{children}</div>
         )}

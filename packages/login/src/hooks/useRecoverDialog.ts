@@ -24,26 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
+
+import { LoginDispatchContext } from "@/components/Login";
 
 const useRecoverDialog = ({}) => {
   const [recoverDialogVisible, setRecoverDialogVisible] = useState(false);
+
+  const { setIsModalOpen } = useContext(LoginDispatchContext);
 
   const { t } = useTranslation(["Login"]);
 
   const openRecoverDialog = () => {
     setRecoverDialogVisible(true);
+    setIsModalOpen(true);
   };
 
   const closeRecoverDialog = () => {
     setRecoverDialogVisible(false);
+    setIsModalOpen(false);
   };
 
   const recoverDialogEmailPlaceholder = t(
     "Login:RecoverContactEmailPlaceholder",
   );
-
   const recoverDialogTextBody = t("Login:RecoverTextBody");
 
   return {

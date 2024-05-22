@@ -39,9 +39,9 @@ import ThirdParty from "./ThirdPartyServicesSettings";
 import SMTPSettings from "./SMTPSettings";
 import DocumentService from "./DocumentService";
 import PluginPage from "./Plugins";
-import { DeviceType } from "@docspace/shared/enums";
 import { Badge } from "@docspace/shared/components/badge";
 import { Box } from "@docspace/shared/components/box";
+import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 const IntegrationWrapper = (props) => {
   const {
@@ -142,13 +142,7 @@ const IntegrationWrapper = (props) => {
       data={data}
       startSelect={currentTab}
       onSelect={onSelect}
-      topProps={
-        currentDeviceType === DeviceType.desktop
-          ? 0
-          : currentDeviceType === DeviceType.mobile
-            ? "53px"
-            : "61px"
-      }
+      topProps={SECTION_HEADER_HEIGHT[currentDeviceType]}
     />
   );
 };

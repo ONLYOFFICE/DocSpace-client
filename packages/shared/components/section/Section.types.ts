@@ -73,8 +73,11 @@ export interface SectionBodyProps {
 export interface SectionContainerProps {
   showTwoProgress?: boolean;
   isSectionHeaderAvailable: boolean;
+  isInfoPanelVisible?: boolean;
   viewAs?: TViewAs;
   children: React.ReactNode;
+  withBodyScroll: boolean;
+  currentDeviceType?: DeviceType;
 }
 
 export interface SectionFilterProps {

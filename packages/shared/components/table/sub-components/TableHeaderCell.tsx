@@ -31,7 +31,7 @@ import { Checkbox } from "../../checkbox";
 
 import { Text } from "../../text";
 import { IconButton } from "../../icon-button";
-import { globalColors } from "../../../themes";
+import { globalColors } from "../../../themes/globalColors";
 
 import { StyledTableHeaderCell } from "../Table.styled";
 import { TableHeaderCellProps } from "../Table.types";

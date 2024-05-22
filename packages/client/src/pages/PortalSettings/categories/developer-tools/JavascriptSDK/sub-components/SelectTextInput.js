@@ -24,9 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useLayoutEffect } from "react";
+import { useState, useCallback } from "react";
+import { Label } from "@docspace/shared/components/label";
+import { TextInput } from "@docspace/shared/components/text-input";
+import debounce from "lodash.debounce";
 
-const canUseDOM = typeof window !== "undefined";
-const useIsomorphicLayoutEffect = canUseDOM ? useLayoutEffect : useEffect;
+export const SelectTextInput = ({ t, config, setConfig }) => {
+  const [value, setValue] = useState(config.acceptButtonLabel);
 
-export default useIsomorphicLayoutEffect;
+  const debouncedSetConfig = useCallback(
+    debounce((value) => {
+      setConfig((config) => {
+        return { ...config, acceptButtonLabel: value };
+      });
+    }, 500),
+    [setConfig],
+  );
+
+  const onChangeAcceptLabel = (e) => {
+    setValue(e.target.value);
+    debouncedSetConfig(e.target.value);
+  };
+
+  return (
+    <>
+      <Label className="label" text={t("SelectButtonText")} />
+      <TextInput
+        scale
+        onChange={onChangeAcceptLabel}
+        placeholder={t("Common:SelectAction")}
+        value={value}
+        tabIndex={7}
+      />
+    </>
+  );
+};

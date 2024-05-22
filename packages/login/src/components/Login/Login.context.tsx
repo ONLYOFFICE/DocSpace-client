@@ -24,9 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { notFound } from "next/navigation";
+"use client";
 
-export default function NotFoundCatchAll() {
-  notFound();
-}
+import React, { createContext, useState } from "react";
 
+export const LoginValueContext = createContext({
+  isLoading: false,
+  isModalOpen: false,
+  ldapDomain: "",
+});
+
+export const LoginDispatchContext = createContext({
+  setIsLoading: (value: boolean) => {},
+  setIsModalOpen: (value: boolean) => {},
+  setLdapDomain: (value: string) => {},
+});
+
+export const LoginContext = ({ children }: { children: React.ReactNode }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [ldapDomain, setLdapDomain] = useState("");
+
+  return (
+    <LoginDispatchContext.Provider
+      value={{ setIsLoading, setIsModalOpen, setLdapDomain }}
+    >
+      <LoginValueContext.Provider
+        value={{ isLoading, isModalOpen, ldapDomain }}
+      >
+        {children}
+      </LoginValueContext.Provider>
+    </LoginDispatchContext.Provider>
+  );
+};

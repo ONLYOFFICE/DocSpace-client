@@ -252,6 +252,7 @@ const FilesMediaViewer = (props) => {
         state: {
           ...location.state,
           fromMediaViewer: true,
+          disableScrollToTop: true,
         },
       });
     },

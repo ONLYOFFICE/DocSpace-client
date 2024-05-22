@@ -24,9 +24,29 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useLayoutEffect } from "react";
+"use client";
 
-const canUseDOM = typeof window !== "undefined";
-const useIsomorphicLayoutEffect = canUseDOM ? useLayoutEffect : useEffect;
+import React, { createContext, useState } from "react";
 
-export default useIsomorphicLayoutEffect;
+export const LoginValueContext = createContext({
+  isLoading: false,
+  isModalOpen: false,
+});
+
+export const LoginDispatchContext = createContext({
+  setIsLoading: (value: boolean) => {},
+  setIsModalOpen: (value: boolean) => {},
+});
+
+export const LoginContext = ({ children }: { children: React.ReactNode }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  return (
+    <LoginDispatchContext.Provider value={{ setIsLoading, setIsModalOpen }}>
+      <LoginValueContext.Provider value={{ isLoading, isModalOpen }}>
+        {children}
+      </LoginValueContext.Provider>
+    </LoginDispatchContext.Provider>
+  );
+};

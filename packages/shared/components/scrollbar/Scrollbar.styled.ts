@@ -55,6 +55,7 @@ const StyledScrollbar = styled(Scrollbar)<{ $fixedSize?: boolean }>`
     padding: 4px;
     border-radius: 8px !important;
     background: transparent !important;
+    z-index: 201;
 
     @media ${desktop} {
       &:hover {
@@ -111,8 +112,8 @@ const StyledScrollbar = styled(Scrollbar)<{ $fixedSize?: boolean }>`
     touch-action: none;
     background-color: ${(props) =>
       props.color ? props.color : props.theme.scrollbar.bgColor} !important;
-    z-index: 201;
     position: relative;
+    cursor: default !important;
 
     :hover {
       background-color: ${(props) =>
@@ -127,7 +128,7 @@ const StyledScrollbar = styled(Scrollbar)<{ $fixedSize?: boolean }>`
     }
   }
 
-  .thumb-vertical {
+  & > .track > .thumb-vertical {
     width: ${({ $fixedSize }) => ($fixedSize ? "8px" : "4px")} !important;
     transition: width linear 0.1s;
 
@@ -142,7 +143,7 @@ const StyledScrollbar = styled(Scrollbar)<{ $fixedSize?: boolean }>`
     }
   }
 
-  .thumb-horizontal {
+  & > .track > .thumb-horizontal {
     height: ${({ $fixedSize }) => ($fixedSize ? "8px" : "4px")} !important;
     transition: height linear 0.1s;
 
@@ -154,6 +155,51 @@ const StyledScrollbar = styled(Scrollbar)<{ $fixedSize?: boolean }>`
 
     @media ${tablet} {
       height: 4px !important;
+    }
+  }
+
+  // fix when iframe breaks dragging scroll
+  &:has(> .track > .dragging) {
+    iframe {
+      pointer-events: none;
+    }
+  }
+
+  // ------- Auto hide styles -------
+
+  &.auto-hide {
+    // tracks hidden by default
+    .track {
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+
+    // tracks always shown if hovered or thumb dragged
+    .track:is(:hover, :has(> .dragging)) {
+      opacity: 1;
+    }
+  }
+
+  // tracks shown if scroll element was not auto hidden, hovered
+  // and there is no another nesting hovered scroll element, dragging thumb or backdrop
+  &.auto-hide.scroll-visible:hover:not(
+      :has(
+          &:hover.trackYVisible,
+          &:hover.trackXVisible,
+          .thumb.dragging,
+          .backdrop-active
+        )
+    ) {
+    > .track {
+      opacity: 1;
+    }
+  }
+  // no hover logic for touch devices
+  @media (hover: none) {
+    &.auto-hide.scroll-visible:not(:has(.backdrop-active)) {
+      .track {
+        opacity: 1;
+      }
     }
   }
 `;

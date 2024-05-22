@@ -26,16 +26,19 @@
 
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
+import { inject, observer } from "mobx-react";
 
-export default function ScrollToTop() {
+function ScrollToTop({ currentDeviceType }) {
   const { pathname, state } = useLocation();
   const scrollRef = useRef();
 
   useEffect(() => {
+    const scrollId =
+      currentDeviceType === "mobile" ? "#customScrollBar" : "#sectionScroll";
     scrollRef.current = document.querySelector(
-      "#customScrollBar > .scroll-wrapper > .scroller",
+      `${scrollId} > .scroll-wrapper > .scroller`,
     );
-  }, []);
+  }, [pathname, currentDeviceType]);
 
   useEffect(() => {
     !state?.disableScrollToTop &&
@@ -45,3 +48,7 @@ export default function ScrollToTop() {
 
   return null;
 }
+
+export default inject(({ settingsStore }) => ({
+  currentDeviceType: settingsStore.currentDeviceType,
+}))(observer(ScrollToTop));

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { thirdPartyLogin } from "@docspace/shared/utils/loginUtils";
-import { TTranslation } from "@docspace/shared/types";
+import { Nullable, TTranslation } from "@docspace/shared/types";
 
 import { MessageKey } from "./enums";
 
@@ -102,4 +102,39 @@ export const getMessageKeyTranslate = (t: TTranslation, message: string) => {
     default:
       return t("Common:Error");
   }
+};
+
+export const getInvitationLinkData = (encodeString: string) => {
+  const fromBinaryStr = (encodeString: string) => {
+    const decodeStr = atob(encodeString);
+
+    const decoder = new TextDecoder();
+    const charCodeArray = Uint8Array.from(
+      { length: decodeStr.length },
+      (element, index) => decodeStr.charCodeAt(index),
+    );
+
+    return decoder.decode(charCodeArray);
+  };
+
+  const decodeString = fromBinaryStr(encodeString);
+  const queryParams = JSON.parse(decodeString) as {
+    email: string;
+    roomName: string;
+    firstName: string;
+    lastName: string;
+    type: string;
+  };
+
+  return queryParams;
+};
+
+export const getEmailFromInvitation = (encodeString: Nullable<string>) => {
+  if (!encodeString) return "";
+
+  const queryParams = getInvitationLinkData(encodeString);
+
+  if (!queryParams || !queryParams.email) return "";
+
+  return queryParams.email;
 };

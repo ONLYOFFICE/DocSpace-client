@@ -50,7 +50,7 @@
   "BackupListWarningText": "Jos poistat luettelosta kohteita, myös vastaavat tiedostot poistetaan. Tätä toimintoa ei voi kumota. Jos haluat poistaa kaikki tiedostot, käytä linkkiä:",
   "BlockingTime": "Estoaika (sek)",
   "Branding": "Brändäys",
-  "BrandingSectionDescription": "Tarkenna yrityksesi tiedot, lisää linkit Docspace-käyttöliittymässä näkyvät ulkoiset resurssit ja sähköpostiosoitteet.",
+  "BrandingSectionDescription": "Tarkenna yrityksesi tiedot, lisää linkit DocSpace-käyttöliittymässä näkyvät ulkoiset resurssit ja sähköpostiosoitteet.",
   "BrandingSubtitle": "Käytä tätä vaihtoehtoa tarjotaksesi käyttäjille brändikokemusta.",
   "BreakpointMobileWarningText": "Tämä osio ei ole käytettävissä mobiiliversiossa",
   "BreakpointMobileWarningTextPrompt": "Ole hyvä ja käytä työpöytää tai tablettia käyttääksesi <1>{{sectionName}}</1>.",

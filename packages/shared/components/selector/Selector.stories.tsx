@@ -28,10 +28,11 @@ import React from "react";
 import styled from "styled-components";
 import { Meta, StoryObj } from "@storybook/react";
 
-import CustomSvgUrl from "PUBLIC_DIR/images/icons/32/room/custom.svg?url";
 import ArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import EmptyScreenFilter from "PUBLIC_DIR/images/empty_screen_filter.png";
-import { RoomsType } from "../../enums";
+
+import { AvatarRole } from "../avatar";
+
 import { Selector } from "./Selector";
 import { SelectorProps, TSelectorItem } from "./Selector.types";
 
@@ -89,8 +90,6 @@ function makeName() {
 const getItems = (count: number) => {
   const items: TSelectorItem[] = [];
 
-  console.log("call");
-
   items.push({
     key: "create_new",
     id: "create_new_item",
@@ -110,21 +109,10 @@ const getItems = (count: number) => {
       isAdmin: false,
       isVisitor: false,
       isCollaborator: false,
+      isRoomAdmin: false,
       avatar: "",
-    });
-  }
-
-  for (let i = 0; i < count / 2; i += 1) {
-    const label = makeName();
-
-    items.push({
-      key: `room_${i}`,
-      id: `room_${i}`,
-      label: `${label} ${i}`,
-      icon: CustomSvgUrl,
-      shared: false,
-      isFolder: true,
-      roomType: RoomsType.CustomRoom,
+      role: AvatarRole.owner,
+      hasAvatar: false,
     });
   }
 

@@ -451,7 +451,8 @@ export type TSelectorItemFolder = MergeTypes<
     filesCount: number;
     foldersCount: number;
     security: TFolderSecurity;
-    icon: string;
+    icon?: string;
+    avatar?: string;
   }
 >;
 

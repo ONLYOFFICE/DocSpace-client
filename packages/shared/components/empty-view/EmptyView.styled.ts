@@ -66,6 +66,39 @@ export const EmptyViewItemWrapper = styled.div`
     flex: 0 0 36px;
   }
 
+  :nth-child(1) .ev-item__icon {
+    rect {
+      color: #5299e0;
+    }
+    path {
+      color: #4781d1;
+    }
+  }
+  :nth-child(2) .ev-item__icon {
+    rect {
+      color: #2db482;
+    }
+    path {
+      color: #2db482;
+    }
+  }
+  :nth-child(3) .ev-item__icon {
+    rect {
+      color: #f97a0b;
+    }
+    path {
+      color: #f97a0b;
+    }
+  }
+  :nth-child(4) .ev-item__icon {
+    rect {
+      color: #6d4ec2;
+    }
+    path {
+      color: #6d4ec2;
+    }
+  }
+
   .ev-item-header {
     font-size: 13px;
     color: ${(props) => props.theme.emptyContent.header.color};

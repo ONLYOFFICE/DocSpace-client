@@ -267,7 +267,8 @@ class UsersStore {
   };
 
   getUserContextOptions = (isMySelf, statusType, userRole, status) => {
-    const { isOwner, isAdmin, isVisitor, isCollaborator } = this.userStore.user;
+    const { isOwner, isAdmin, isVisitor, isCollaborator, isLDAP } =
+      this.userStore.user;
 
     const options = [];
 
@@ -285,11 +286,12 @@ class UsersStore {
         }
 
         if (isMySelf) {
-          options.push("separator-1");
-
-          options.push("change-name");
-          options.push("change-email");
-          options.push("change-password");
+          if (!isLDAP) {
+            options.push("separator-1");
+            options.push("change-name");
+            options.push("change-email");
+            options.push("change-password");
+          }
 
           if (isOwner) {
             options.push("separator-2");

@@ -86,7 +86,7 @@ export type UseRoomsHelperProps = {
 
 export type UseFilesHelpersProps = {
   roomsFolderId?: number;
-  setBreadCrumbs: (items: TBreadCrumb[]) => void;
+  setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setIsBreadCrumbsLoading: (value: boolean) => void;
   setIsSelectedParentFolder: (value: boolean) => void;
   setIsNextPageLoading: (value: boolean) => void;
@@ -121,6 +121,7 @@ export type UseFilesHelpersProps = {
   isInit: boolean;
   setIsFirstLoad: (value: boolean) => void;
   withCreateFolder: boolean;
+  setSelectedItemId: (value: number | string) => void;
 };
 
 export type TSelectedFileInfo = {

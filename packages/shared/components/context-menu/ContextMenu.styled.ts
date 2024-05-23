@@ -111,14 +111,15 @@ const StyledContextMenu = styled.div<{
     box-shadow: ${(props) => props.theme.newContextMenu.boxShadow};
     -moz-box-shadow: ${(props) => props.theme.newContextMenu.boxShadow};
     -webkit-box-shadow: ${(props) => props.theme.newContextMenu.boxShadow};
-    padding: ${(props) => props.theme.newContextMenu.padding};
-
-    @media ${tablet} {
-      ${(props) => props.changeView && styledTabletView}
-    }
 
     @media ${mobile} {
       ${(props) => props.changeView && styledMobileView}
+    }
+
+    .scroll-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
   }
 
@@ -223,7 +224,6 @@ const StyledContextMenu = styled.div<{
     box-shadow: ${(props) => props.theme.dropDown.boxShadow};
     -moz-box-shadow: ${(props) => props.theme.dropDown.boxShadow};
     -webkit-box-shadow: ${(props) => props.theme.dropDown.boxShadow};
-    padding: 4px 0px;
 
     white-space: nowrap;
     overflow: hidden;
@@ -246,7 +246,7 @@ const StyledContextMenu = styled.div<{
     position: relative;
     border: ${(props) => props.theme.dropDownItem.border};
     margin: ${(props) => props.theme.dropDownItem.margin};
-    padding: ${(props) => props.theme.dropDownItem.padding};
+    padding: 0 16px;
     font-family: ${(props) => props.theme.fontFamily};
     font-style: normal;
     background: none;
@@ -260,10 +260,6 @@ const StyledContextMenu = styled.div<{
     text-transform: none;
 
     -webkit-touch-callout: none;
-
-    @media ${tablet} {
-      padding: 0 16px;
-    }
 
     &:hover {
       background-color: ${(props) =>
@@ -296,11 +292,18 @@ const StyledContextMenu = styled.div<{
     &:hover {
       cursor: default !important;
     }
+
+    @media ${mobile} {
+      margin-right: 8px !important;
+      width: calc(100% - 24px) !important;
+    }
   }
 
   .p-contextmenu .p-menuitem {
     position: relative;
     margin: ${(props) => props.theme.dropDownItem.margin};
+
+    min-width: max-content;
   }
 
   .p-contextmenu .scroll-body .p-menuitem {
@@ -390,5 +393,15 @@ const StyledContextMenu = styled.div<{
 StyledContextMenu.defaultProps = {
   theme: Base,
 };
+
+export const StyledList = styled.ul<{
+  listHeight: number;
+}>`
+  & > :first-child {
+    .scroll-body {
+      height: ${(props) => `${props.listHeight}px`};
+    }
+  }
+`;
 
 export { StyledContextMenu };

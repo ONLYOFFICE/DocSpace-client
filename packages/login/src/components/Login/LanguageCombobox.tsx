@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { setLanguageWithoutReload } from "@docspace/shared/utils/common";
+import { setLanguageForUnauthorized } from "@docspace/shared/utils/common";
 import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
 import useDeviceType from "@/hooks/useDeviceType";
 import { DeviceType } from "@docspace/shared/enums";
@@ -42,7 +42,7 @@ const LanguageComboboxWrapper = (props: TLanguageCombobox) => {
   const onLanguageSelect = (culture: { key: string }) => {
     const { key } = culture;
 
-    setLanguageWithoutReload(key, i18n);
+    setLanguageForUnauthorized(key, i18n);
   };
 
   const { currentDeviceType } = useDeviceType();

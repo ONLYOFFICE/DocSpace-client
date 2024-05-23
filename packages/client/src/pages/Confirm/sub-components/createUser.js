@@ -49,7 +49,7 @@ import {
   createPasswordHash,
   getOAuthToken,
   getLoginLink,
-  setLanguageWithoutReload,
+  setLanguageForUnauthorized,
 } from "@docspace/shared/utils/common";
 import { login } from "@docspace/shared/utils/loginUtils";
 import {
@@ -72,7 +72,6 @@ import {
 import GreetingUserContainer from "./GreetingUserContainer";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { isMobile } from "@docspace/shared/utils";
-import { ComboBox } from "@docspace/shared/components/combobox";
 import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
 import { setCookie } from "@docspace/shared/utils/cookie";
 
@@ -481,20 +480,18 @@ const CreateUserForm = (props) => {
   const onSelect = (culture) => {
     const { key } = culture;
 
-    setLanguageWithoutReload(key, i18n);
+    setLanguageForUnauthorized(key, i18n);
   };
 
   return (
     <StyledPage>
-      {!isMobile() && (
-        <LanguageCombobox
+      <LanguageCombobox
           className="language-combo-box"
-          onSelectLanguage={onSelect}
-          cultures={cultures}
-          selectedCulture={currentCultureName}
-          withBorder={false}
-        />
-      )}
+        onSelectLanguage={onSelect}
+        cultures={cultures}
+        selectedCulture={currentCultureName}
+        withBorder={false}
+      />
 
       <StyledCreateUserContent>
         <GreetingContainer>

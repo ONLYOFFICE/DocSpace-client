@@ -1083,9 +1083,7 @@ export function getLogoUrl(
   return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}`;
 }
 
-export function setLanguageWithoutReload(culture: string, i18n: TI18n) {
-  i18n.changeLanguage(culture);
-
+export function setLanguageForUnauthorized(culture: string) {
   setCookie(LANGUAGE, culture, {
     "max-age": COOKIE_EXPIRATION_YEAR,
   });
@@ -1098,4 +1096,6 @@ export function setLanguageWithoutReload(culture: string, i18n: TI18n) {
 
     window.history.pushState("", "", newUrl);
   }
+
+  window.location.reload();
 }

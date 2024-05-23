@@ -36,7 +36,7 @@ import { LanguageCombobox } from "@docspace/shared/components/language-combobox"
 import { setCookie } from "@docspace/shared/utils/cookie";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
 import i18n from "../../../i18n";
-import { setLanguageWithoutReload } from "@docspace/shared/utils/common";
+import { setLanguageForUnauthorized } from "@docspace/shared/utils/common";
 
 const Header = styled.header`
   align-items: left;
@@ -101,7 +101,7 @@ const HeaderUnAuth = ({
 
   const onSelect = (culture) => {
     const { key } = culture;
-    setLanguageWithoutReload(key, i18n);
+    setLanguageForUnauthorized(key, i18n);
   };
 
   return (
@@ -129,6 +129,7 @@ const HeaderUnAuth = ({
         cultures={cultures}
         selectedCulture={currentCultureName}
         withBorder={false}
+        isMobileView
       />
     </Header>
   );

@@ -395,25 +395,16 @@ class ContextOptionsStore {
       (shared && canCopyPublicLink);
 
     if (isShared && !isArchive) {
-      if (item.isFolder) {
-        try {
-          const fileLinkData = await getFolderLink(item.id);
-          copyShareLink(fileLinkData.sharedTo.shareLink);
-          toastr.success(t("Translations:LinkCopySuccess"));
-        } catch (error) {
-          toastr.error(error);
-        }
-        return;
-      } else {
-        try {
-          const fileLinkData = await getFileLink(item.id);
-          copyShareLink(fileLinkData.sharedTo.shareLink);
-          toastr.success(t("Translations:LinkCopySuccess"));
-        } catch (error) {
-          toastr.error(error);
-        }
-        return;
+      try {
+        const itemLink = item.isFolder
+          ? await getFolderLink(item.id)
+          : await getFileLink(item.id);
+        copyShareLink(itemLink.sharedTo.shareLink);
+        toastr.success(t("Translations:LinkCopySuccess"));
+      } catch (error) {
+        toastr.error(error);
       }
+      return;
     }
 
     if (

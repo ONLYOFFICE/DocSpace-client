@@ -97,7 +97,6 @@ export const LoginFormWrapper = styled.div<{ bgPattern: string }>`
       margin-bottom: 16px;
       .back-title {
         position: absolute;
-        max-width: 60px;
         text-overflow: ellipsis;
         overflow: hidden;
 

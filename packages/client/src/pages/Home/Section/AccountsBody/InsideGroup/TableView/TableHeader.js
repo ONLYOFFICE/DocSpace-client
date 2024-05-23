@@ -1,9 +1,36 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { TableHeader } from "@docspace/shared/components/table";
 import { Events } from "@docspace/shared/enums";
+import { SortByFieldName } from "SRC_DIR/helpers/constants";
 
 const TABLE_VERSION = "6";
 const TABLE_COLUMNS = `insideGroupTableColumns_ver-${TABLE_VERSION}`;
@@ -24,12 +51,11 @@ class InsideGroupTableHeader extends React.Component {
         sortBy: "AZ",
         minWidth: 210,
         onClick: this.onFilter,
-        onIconClick: this.onIconClick,
       },
       {
         key: "Type",
         title: t("Common:Type"),
-        enable: true,
+        enable: props.typeAccountsInsideGroupColumnIsEnabled,
         sortBy: "type",
         resizable: true,
         onChange: this.onColumnChange,
@@ -38,7 +64,7 @@ class InsideGroupTableHeader extends React.Component {
       {
         key: "Department",
         title: t("Common:Group"),
-        enable: true,
+        enable: props.groupAccountsInsideGroupColumnIsEnabled,
         sortBy: "department",
         resizable: true,
         onChange: this.onColumnChange,
@@ -54,7 +80,7 @@ class InsideGroupTableHeader extends React.Component {
       {
         key: "Mail",
         title: t("Common:Email"),
-        enable: true,
+        enable: props.emailAccountsInsideGroupColumnIsEnabled,
         resizable: true,
         sortBy: "email",
         onChange: this.onColumnChange,
@@ -62,37 +88,31 @@ class InsideGroupTableHeader extends React.Component {
       },
     ];
 
-    const columns = this.getColumns(defaultColumns);
+    props.showStorageInfo &&
+      defaultColumns.push({
+        key: "Storage",
+        title: props.isDefaultUsersQuotaSet
+          ? t("Common:StorageAndQuota")
+          : t("Common:Storage"),
+        enable: props.storageAccountsColumnIsEnabled,
+        sortBy: SortByFieldName.UsedSpace,
+        resizable: true,
+        onChange: this.onColumnChange,
+        onClick: this.onFilter,
+      });
+
+    const columns = props.getColumns(defaultColumns);
 
     this.state = { columns };
   }
-
-  getColumns = (defaultColumns) => {
-    const storageColumns = localStorage.getItem(
-      `${TABLE_COLUMNS}=${this.props.userId}`,
-    );
-    const columns = [];
-
-    if (storageColumns) {
-      const splitColumns = storageColumns.split(",");
-
-      for (let col of defaultColumns) {
-        const column = splitColumns.find((key) => key === col.key);
-        column ? (col.enable = true) : (col.enable = false);
-
-        columns.push(col);
-      }
-      return columns;
-    } else {
-      return defaultColumns;
-    }
-  };
 
   onColumnChange = (key, e) => {
     const { columns } = this.state;
     const columnIndex = columns.findIndex((c) => c.key === key);
 
     if (columnIndex === -1) return;
+
+    this.props.setColumnEnable(key);
 
     columns[columnIndex].enable = !columns[columnIndex].enable;
     this.setState({ columns });
@@ -133,18 +153,6 @@ class InsideGroupTableHeader extends React.Component {
 
     setIsLoading(true);
     setFilter(newFilter);
-    navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
-  };
-
-  onIconClick = () => {
-    const { filter, setIsLoading, navigate, location } = this.props;
-    const newFilter = filter.clone();
-
-    newFilter.sortOrder =
-      newFilter.sortOrder === "ascending" ? "descending" : "ascending";
-
-    setIsLoading(true);
-
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
@@ -193,13 +201,27 @@ export default inject(
     infoPanelStore,
     settingsStore,
     userStore,
+    tableStore,
+    currentQuotaStore,
   }) => {
-    const { filterStore } = peopleStore;
+    const { groupsStore } = peopleStore;
 
-    const { filter, setFilter } = filterStore;
+    const { insideGroupFilter: filter, setInsideGroupFilter: setFilter } =
+      groupsStore;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { withPaging } = settingsStore;
+
+    const {
+      getColumns,
+      setColumnEnable,
+      typeAccountsInsideGroupColumnIsEnabled,
+      groupAccountsInsideGroupColumnIsEnabled,
+      emailAccountsInsideGroupColumnIsEnabled,
+      storageAccountsColumnIsEnabled,
+    } = tableStore;
+
+    const { showStorageInfo, isDefaultUsersQuotaSet } = currentQuotaStore;
 
     return {
       filter,
@@ -209,6 +231,15 @@ export default inject(
       userId: userStore.user?.id,
       infoPanelVisible,
       withPaging,
+
+      getColumns,
+      setColumnEnable,
+      typeAccountsInsideGroupColumnIsEnabled,
+      groupAccountsInsideGroupColumnIsEnabled,
+      emailAccountsInsideGroupColumnIsEnabled,
+      storageAccountsColumnIsEnabled,
+      showStorageInfo,
+      isDefaultUsersQuotaSet,
     };
   },
 )(

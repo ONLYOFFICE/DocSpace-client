@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "@docspace/shared/api";
@@ -13,6 +39,7 @@ class CommonStore {
   whiteLabelLogoText = null;
   defaultLogoTextWhiteLabel = null;
 
+  portalName = null;
   dnsSettings = {
     defaultObj: {},
     customObj: {},
@@ -46,12 +73,11 @@ class CommonStore {
   };
 
   initSettings = async (page) => {
-    const isMobileView =
-      this.settingsStore.currentDeviceType === DeviceType.mobile;
+    const isMobileView = this.settingsStore.deviceType === DeviceType.mobile;
 
     if (this.isInit) return;
 
-    this.isInit = true;
+    this.isInit = Boolean(page);
 
     const { standalone } = this.settingsStore;
 
@@ -63,14 +89,14 @@ class CommonStore {
           requests.push(
             this.getWhiteLabelLogoUrls(),
             this.getWhiteLabelLogoText(),
-            this.getIsDefaultWhiteLabel()
+            this.getIsDefaultWhiteLabel(),
           );
           break;
         }
         case "language-and-time-zone":
           requests.push(
             this.settingsStore.getPortalTimezones(),
-            this.settingsStore.getPortalCultures()
+            this.settingsStore.getPortalCultures(),
           );
           break;
         case "dns-settings":
@@ -88,7 +114,7 @@ class CommonStore {
           {
             requests.push(
               this.settingsStore.getPortalTimezones(),
-              this.settingsStore.getPortalCultures()
+              this.settingsStore.getPortalCultures(),
             );
 
             if (standalone) {
@@ -100,7 +126,7 @@ class CommonStore {
           requests.push(
             this.getWhiteLabelLogoUrls(),
             this.getWhiteLabelLogoText(),
-            this.getIsDefaultWhiteLabel()
+            this.getIsDefaultWhiteLabel(),
           );
           break;
 
@@ -123,46 +149,71 @@ class CommonStore {
   setWhiteLabelSettings = async (data) => {
     const response = await api.settings.setWhiteLabelSettings(
       data,
-      isManagement()
+      isManagement(),
     );
     return Promise.resolve(response);
   };
 
   getWhiteLabelLogoUrls = async () => {
-    const { whiteLabelLogoUrls } = this.settingsStore;
-    const logos = JSON.parse(JSON.stringify(whiteLabelLogoUrls));
+    const { getWhiteLabelLogoUrls } = this.settingsStore;
+
+    const logos = await getWhiteLabelLogoUrls();
+
     this.setLogoUrlsWhiteLabel(Object.values(logos));
+
+    return logos;
   };
 
   getWhiteLabelLogoText = async () => {
-    const res = await api.settings.getLogoText();
+    const res = await api.settings.getLogoText(isManagement());
     this.setLogoText(res);
     this.defaultLogoTextWhiteLabel = res;
     return res;
   };
 
-  saveWhiteLabelSettings = async (data) => {
-    const { getWhiteLabelLogoUrls } = this.settingsStore;
+  applyNewLogos = (logos) => {
+    const theme =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
 
+    const favicon = document.getElementById("favicon");
+    const logo = document.getElementsByClassName("logo-icon_svg")?.[0];
+    const logoBurger = document.getElementsByClassName("burger-logo")?.[0];
+
+    runInAction(() => {
+      favicon && (favicon.href = logos?.[2]?.path?.["light"]); // we have single favicon for both themes
+      logo && (logo.src = logos?.[0]?.path?.[theme]);
+      logoBurger && (logoBurger.src = logos?.[5]?.path?.[theme]);
+    });
+  };
+
+  saveWhiteLabelSettings = async (data) => {
     await this.setWhiteLabelSettings(data);
-    await getWhiteLabelLogoUrls();
-    this.getWhiteLabelLogoUrls();
+
+    const logos = await this.getWhiteLabelLogoUrls();
     this.getIsDefaultWhiteLabel();
+    this.getWhiteLabelLogoText();
+
+    this.applyNewLogos(logos);
   };
 
   getIsDefaultWhiteLabel = async () => {
-    const res = await api.settings.getIsDefaultWhiteLabel();
+    const res = await api.settings.getIsDefaultWhiteLabel(isManagement());
     const enableRestoreButton = res.map((item) => item.default).includes(false);
     this.enableRestoreButton = enableRestoreButton;
   };
 
   restoreWhiteLabelSettings = async () => {
-    const { getWhiteLabelLogoUrls } = this.settingsStore;
-
     await api.settings.restoreWhiteLabelSettings(isManagement());
-    await getWhiteLabelLogoUrls();
-    this.getWhiteLabelLogoUrls();
+
+    const logos = await this.getWhiteLabelLogoUrls();
     this.getIsDefaultWhiteLabel();
+    this.getWhiteLabelLogoText();
+
+    this.applyNewLogos(logos);
   };
 
   getGreetingSettingsIsDefault = async () => {
@@ -185,6 +236,10 @@ class CommonStore {
 
   setDNSName = (value) => {
     this.dnsSettings.customObj.dnsName = value;
+  };
+
+  setPortalName = (value) => {
+    this.portalName = value;
   };
 
   setDNSSettings = (data) => {

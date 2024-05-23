@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React, { useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -5,10 +31,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 import queryString from "query-string";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
-import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { UrlActionType } from "@docspace/shared/enums";
 
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
+import { Portal } from "@docspace/shared/components/portal";
 
 const FilesMediaViewer = (props) => {
   const {
@@ -66,6 +92,10 @@ const FilesMediaViewer = (props) => {
     isOpenMediaViewer,
     someDialogIsOpen,
     currentDeviceType,
+    changeUrl,
+    fetchPublicRoom,
+    isPublicRoom,
+    openUrl,
   } = props;
 
   const navigate = useNavigate();
@@ -89,6 +119,12 @@ const FilesMediaViewer = (props) => {
   useEffect(() => {
     if (previewFile) {
       // fetch file after preview with
+
+      if (isPublicRoom) {
+        fetchPublicRoom(fetchFiles);
+        return;
+      }
+
       fetchFiles(previewFile.folderId).finally(() => {
         setIsLoading(false);
       });
@@ -113,12 +149,10 @@ const FilesMediaViewer = (props) => {
 
   const onChangeUrl = useCallback(
     (id) => {
-      const url = combineUrl(MEDIA_VIEW_URL, id);
-
+      changeUrl(id);
       setCurrentId(id);
-      navigate(url);
     },
-    [setCurrentId, navigate],
+    [setCurrentId, changeUrl],
   );
 
   const resetSelection = () => {
@@ -183,7 +217,7 @@ const FilesMediaViewer = (props) => {
     (id) => {
       if (playlist.length > 0) {
         let viewUrlFile = playlist.find((file) => file.fileId === id).src;
-        return window.open(viewUrlFile, "_self");
+        return openUrl(viewUrlFile, UrlActionType.Download);
       }
     },
     [playlist],
@@ -218,6 +252,7 @@ const FilesMediaViewer = (props) => {
         state: {
           ...location.state,
           fromMediaViewer: true,
+          disableScrollToTop: true,
         },
       });
     },
@@ -242,41 +277,46 @@ const FilesMediaViewer = (props) => {
 
   return (
     visible && (
-      <MediaViewer
-        t={t}
-        files={files}
-        getIcon={getIcon}
-        visible={visible}
-        playlist={playlist}
-        prevMedia={prevMedia}
-        nextMedia={nextMedia}
-        onCopyLink={onCopyLink}
-        userAccess={userAccess}
-        onChangeUrl={onChangeUrl}
-        isPreviewFile={firstLoad}
-        onDuplicate={onDuplicate}
-        onMoveAction={onMoveAction}
-        onCopyAction={onCopyAction}
-        onClose={onMediaViewerClose}
-        onDelete={onDeleteMediaFile}
-        onClickRename={onClickRename}
-        onClickDelete={onClickDelete}
-        setActiveFiles={setActiveFiles}
-        archiveRoomsId={archiveRoomsId}
-        onPreviewClick={onPreviewClick}
-        onDownload={onDownloadMediaFile}
-        onClickLinkEdit={onClickLinkEdit}
-        onClickDownload={onClickDownload}
-        onShowInfoPanel={onShowInfoPanel}
-        playlistPos={currentPostionIndex}
-        currentFileId={currentMediaFileId}
-        onClickDownloadAs={onClickDownloadAs}
-        currentDeviceType={currentDeviceType}
-        extsImagePreviewed={extsImagePreviewed}
-        setBufferSelection={setBufferSelection}
-        onEmptyPlaylistError={onMediaViewerClose}
-        deleteDialogVisible={deleteDialogVisible}
-        pluginContextMenuItems={pluginContextMenuItems}
+      <Portal
+        visible
+        element={
+          <MediaViewer
+            t={t}
+            files={files}
+            getIcon={getIcon}
+            visible={visible}
+            playlist={playlist}
+            prevMedia={prevMedia}
+            nextMedia={nextMedia}
+            onCopyLink={onCopyLink}
+            userAccess={userAccess}
+            onChangeUrl={onChangeUrl}
+            isPreviewFile={firstLoad}
+            onDuplicate={onDuplicate}
+            onMoveAction={onMoveAction}
+            onCopyAction={onCopyAction}
+            onClose={onMediaViewerClose}
+            onDelete={onDeleteMediaFile}
+            onClickRename={onClickRename}
+            onClickDelete={onClickDelete}
+            setActiveFiles={setActiveFiles}
+            archiveRoomsId={archiveRoomsId}
+            onPreviewClick={onPreviewClick}
+            onDownload={onDownloadMediaFile}
+            onClickLinkEdit={onClickLinkEdit}
+            onClickDownload={onClickDownload}
+            onShowInfoPanel={onShowInfoPanel}
+            playlistPos={currentPostionIndex}
+            currentFileId={currentMediaFileId}
+            onClickDownloadAs={onClickDownloadAs}
+            currentDeviceType={currentDeviceType}
+            extsImagePreviewed={extsImagePreviewed}
+            setBufferSelection={setBufferSelection}
+            onEmptyPlaylistError={onMediaViewerClose}
+            deleteDialogVisible={deleteDialogVisible}
+            pluginContextMenuItems={pluginContextMenuItems}
+          />
+        }
       />
     )
   );
@@ -294,13 +334,16 @@ export default inject(
     clientLoadingStore,
     pluginStore,
     settingsStore,
+    publicRoomStore,
   }) => {
-    const { currentDeviceType } = settingsStore;
+    const { currentDeviceType, openUrl } = settingsStore;
     const {
       firstLoad,
 
       setIsSectionFilterLoading,
     } = clientLoadingStore;
+
+    const { fetchPublicRoom, isPublicRoom } = publicRoomStore;
 
     const setIsLoading = (param) => {
       setIsSectionFilterLoading(param);
@@ -335,6 +378,7 @@ export default inject(
       setCurrentId,
       nextMedia,
       prevMedia,
+      changeUrl,
     } = mediaViewerDataStore;
     const { deleteItemAction } = filesActionsStore;
     const { getIcon, extsImagePreviewed, extsMediaPreviewed } =
@@ -428,6 +472,10 @@ export default inject(
       setActiveFiles,
       pluginContextMenuItems,
       currentDeviceType,
+      changeUrl,
+      fetchPublicRoom,
+      isPublicRoom,
+      openUrl,
     };
   },
 )(withTranslation(["Files", "Translations"])(observer(FilesMediaViewer)));

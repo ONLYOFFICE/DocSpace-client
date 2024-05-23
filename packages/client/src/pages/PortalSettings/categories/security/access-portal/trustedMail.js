@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -44,13 +70,22 @@ const TrustedMail = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const regexp = /^[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9](?:\.[a-zA-Z]{1,})+/; //check domain name valid
+  const regexp =
+    /^[a-zA-Z0-9][a-zA-Z0-9-]{0,255}[a-zA-Z0-9](?:\.[a-zA-Z]{1,})+/; //check domain name valid
 
   const [type, setType] = useState("0");
   const [domains, setDomains] = useState([]);
   const [showReminder, setShowReminder] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const getSettingsFromDefault = () => {
+    const defaultSettings = getFromSessionStorage("defaultTrustedMailSettings");
+    if (defaultSettings) {
+      setType(defaultSettings.type);
+      setDomains(defaultSettings.domains);
+    }
+  };
 
   const getSettings = () => {
     const currentSettings = getFromSessionStorage("currentTrustedMailSettings");
@@ -73,9 +108,20 @@ const TrustedMail = (props) => {
 
   useEffect(() => {
     checkWidth();
-    getSettings();
     window.addEventListener("resize", checkWidth);
+
     return () => window.removeEventListener("resize", checkWidth);
+  }, []);
+
+  useEffect(() => {
+    const currentSettings = getFromSessionStorage("currentTrustedMailSettings");
+    const defaultSettings = getFromSessionStorage("defaultTrustedMailSettings");
+
+    if (isEqual(currentSettings, defaultSettings)) {
+      getSettings();
+    } else {
+      getSettingsFromDefault();
+    }
   }, [isLoading]);
 
   useEffect(() => {
@@ -125,6 +171,7 @@ const TrustedMail = (props) => {
   const onSaveClick = async () => {
     setIsSaving(true);
     const valid = domains.map((domain) => regexp.test(domain));
+    console.log("valid", valid);
     if (type === "1" && valid.includes(false)) {
       setIsSaving(false);
       toastr.error(t("Common:IncorrectDomain"));
@@ -138,6 +185,10 @@ const TrustedMail = (props) => {
         inviteUsersAsVisitors: true,
       };
       await setMailDomainSettings(data);
+      saveToSessionStorage("currentTrustedMailSettings", {
+        type: type,
+        domains: domains,
+      });
       saveToSessionStorage("defaultTrustedMailSettings", {
         type: type,
         domains: domains,
@@ -153,8 +204,9 @@ const TrustedMail = (props) => {
 
   const onCancelClick = () => {
     const defaultSettings = getFromSessionStorage("defaultTrustedMailSettings");
-    setType(defaultSettings.type);
-    setDomains(defaultSettings.domains);
+    saveToSessionStorage("currentTrustedMailSettings", defaultSettings);
+    setType(defaultSettings?.type || "0");
+    setDomains(defaultSettings?.domains || []);
     setShowReminder(false);
   };
 
@@ -192,7 +244,7 @@ const TrustedMail = (props) => {
         options={[
           {
             id: "trusted-mail-disabled",
-            label: t("Disabled"),
+            label: t("Common:Disabled"),
             value: "0",
           },
           {

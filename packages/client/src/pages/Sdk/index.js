@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { useState, useEffect, useCallback, useRef } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -11,7 +37,7 @@ import {
   createPasswordHash,
   frameCallCommand,
 } from "@docspace/shared/utils/common";
-import { RoomsType } from "@docspace/shared/enums";
+import { RoomsType, FilterType } from "@docspace/shared/enums";
 
 const Sdk = ({
   t,
@@ -29,15 +55,41 @@ const Sdk = ({
   getRoomsIcon,
   fetchExternalLinks,
   getFilePrimaryLink,
+  getFilesSettings,
 }) => {
   const [isDataReady, setIsDataReady] = useState(false);
 
   const formatsDescription = {
-    DOCX: t("Common:SelectDOCXFormat"),
-    DOCXF: t("Common:SelectDOCXFFormat"),
-    BackupOnly: t("Common:SelectBackupOnlyFormat"),
-    IMG: t("Common:SelectIMGFormat"),
-    XLSX: t("Common:SelectXLSXFormat"),
+    [FilterType.DocumentsOnly]: t("Common:SelectTypeFiles", {
+      type: t("Common:Documents").toLowerCase(),
+    }),
+    [FilterType.SpreadsheetsOnly]: t("Common:SelectTypeFiles", {
+      type: t("Translations:Spreadsheets").toLowerCase(),
+    }),
+    [FilterType.PresentationsOnly]: t("Common:SelectTypeFiles", {
+      type: t("Translations:Presentations").toLowerCase(),
+    }),
+    [FilterType.ImagesOnly]: t("Common:SelectTypeFiles", {
+      type: t("Files:Images").toLowerCase(),
+    }),
+    [FilterType.MediaOnly]: t("Common:SelectExtensionFiles", {
+      extension: t("Files:Media").toLowerCase(),
+    }),
+    [FilterType.ArchiveOnly]: t("Common:SelectTypeFiles", {
+      type: t("Files:Archives").toLowerCase(),
+    }),
+    [FilterType.FoldersOnly]: t("Common:SelectTypeFiles", {
+      type: t("Translations:Folders").toLowerCase(),
+    }),
+    [FilterType.OFormTemplateOnly]: t("Common:SelectTypeFiles", {
+      type: t("Files:FormsTemplates").toLowerCase(),
+    }),
+    [FilterType.OFormOnly]: t("Common:SelectTypeFiles", {
+      type: t("Files:Forms").toLowerCase(),
+    }),
+    EditorSupportedTypes: t("Common:SelectTypeFiles", {
+      type: t("AllTypesAvailableForEditing"),
+    }),
   };
 
   useEffect(() => {
@@ -59,7 +111,7 @@ const Sdk = ({
   );
 
   useEffect(() => {
-    if (window.parent && !frameConfig && isLoaded) {
+    if (window.parent && !frameConfig?.frameId && isLoaded) {
       callCommand("setConfig");
     }
   }, [callCommand, isLoaded]);
@@ -70,20 +122,14 @@ const Sdk = ({
     }
   }, [callCommandLoad, isDataReady]);
 
+  useEffect(() => {
+    getFilesSettings();
+  }, []);
+
   const { mode } = useParams();
   const selectorType = new URLSearchParams(window.location.search).get(
     "selectorType",
   );
-
-  const toRelativeUrl = (data) => {
-    try {
-      const url = new URL(data);
-      const rel = url.toString().substring(url.origin.length);
-      return rel;
-    } catch {
-      return data;
-    }
-  };
 
   const handleMessage = async (e) => {
     const eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
@@ -144,10 +190,10 @@ const Sdk = ({
 
   const onSelectRoom = useCallback(
     async (data) => {
-      if (data[0].logo?.large !== "") {
-        data[0].icon = toRelativeUrl(data[0].logo?.large);
-      } else {
+      if (data[0].icon === "") {
         data[0].icon = await getRoomsIcon(data[0].roomType, false, 32);
+      } else {
+        data[0].icon = data[0].iconOriginal;
       }
 
       if (
@@ -196,29 +242,35 @@ const Sdk = ({
     frameCallEvent({ event: "onCloseCallback" });
   }, [frameCallEvent]);
 
-  const onCloseCallback = !!frameConfig?.events.onCloseCallback
-    ? {
-        onClose,
-      }
-    : {};
-
   let component;
+
+  if (!frameConfig) return;
 
   switch (mode) {
     case "room-selector":
+      const cancelButtonProps = frameConfig?.showSelectorCancel
+        ? {
+            withCancelButton: true,
+            cancelButtonLabel: frameConfig?.cancelButtonLabel,
+            onCancel: onClose,
+          }
+        : {};
+
+      const headerProps = frameConfig?.showSelectorHeader
+        ? { withHeader: true, headerProps: { headerLabel: "" } }
+        : {};
+
       component = (
         <RoomSelector
-          withCancelButton={frameConfig?.showSelectorCancel}
-          withHeader={frameConfig?.showSelectorHeader}
-          onAccept={onSelectRoom}
-          onCancel={onClose}
+          {...cancelButtonProps}
+          {...headerProps}
+          onSubmit={onSelectRoom}
           withSearch={frameConfig?.withSearch}
-          withoutBackButton
-          acceptButtonLabel={frameConfig?.acceptButtonLabel}
-          cancelButtonLabel={frameConfig?.cancelButtonLabel}
+          submitButtonLabel={frameConfig?.acceptButtonLabel}
           roomType={frameConfig?.roomType}
           onSelect={() => {}}
           setIsDataReady={setIsDataReady}
+          isMultiSelect={false}
         />
       );
       break;
@@ -242,15 +294,14 @@ const Sdk = ({
           acceptButtonLabel={frameConfig?.acceptButtonLabel}
           cancelButtonLabel={frameConfig?.cancelButtonLabel}
           currentFolderId={frameConfig?.id}
-          descriptionText={
-            formatsDescription[frameConfig?.filterParam || "DOCX"]
-          }
+          descriptionText={formatsDescription[frameConfig?.filterParam] || ""}
         />
       );
       break;
     default:
       component = <AppLoader />;
   }
+
   return component;
 };
 
@@ -269,7 +320,7 @@ export default inject(
       settingsStore;
     const { loadCurrentUser, user } = userStore;
     const { updateProfileCulture } = peopleStore.targetUserStore;
-    const { getIcon, getRoomsIcon } = filesSettingsStore;
+    const { getIcon, getRoomsIcon, getFilesSettings } = filesSettingsStore;
     const { fetchExternalLinks } = publicRoomStore;
     const { getFilePrimaryLink } = filesStore;
 
@@ -288,6 +339,15 @@ export default inject(
       user,
       fetchExternalLinks,
       getFilePrimaryLink,
+      getFilesSettings,
     };
   },
-)(withTranslation(["JavascriptSdk", "Common"])(observer(Sdk)));
+)(
+  withTranslation([
+    "JavascriptSdk",
+    "Common",
+    "Settings",
+    "Translations",
+    "Files",
+  ])(observer(Sdk)),
+);

@@ -1,5 +1,32 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
-import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/catalog.user.react.svg?url";
+// import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/catalog.user.react.svg?url";
+import CatalogDocumentsReactSvgUrl from "PUBLIC_DIR/images/catalog.documents.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
 import CatalogArchiveReactSvgUrl from "PUBLIC_DIR/images/catalog.archive.react.svg?url";
 import CatalogSharedReactSvgUrl from "PUBLIC_DIR/images/catalog.shared.react.svg?url";
@@ -15,9 +42,11 @@ import CatalogSettingsSecurityReactSvgUrl from "PUBLIC_DIR/images/icons/16/catal
 import CatalogSettingsDataManagementReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-data-management.svg?url";
 import CatalogSettingsRestoreReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-restore.svg?url";
 import CatalogSettingsIntegrationReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
+import CatalogSettingsDataReactSvgUrl from "PUBLIC_DIR/images/catalog.import.react.svg?url";
 import CatalogSettingsDeveloperReactSvgUrl from "PUBLIC_DIR/images/catalog.developer.react.svg?url";
 import CatalogSettingsPaymentReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-payment.svg?url";
 import CatalogSettingsGiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
+import CatalogSettingsStorageManagementReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-storage-management.svg?url";
 
 import CatalogFolder20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.folder.react.svg?url";
 import CatalogUser20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.user.react.svg?url";
@@ -36,9 +65,11 @@ import CatalogSettingsSecurity20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/cat
 import CatalogSettingsDataManagement20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-data-management.svg?url";
 import CatalogSettingsRestore20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-restore.svg?url";
 import CatalogSettingsIntegration20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-integration.svg?url";
+import CatalogSettingsData20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-import.svg?url";
 import CatalogSettingsDeveloper20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-developer.svg?url";
 import CatalogSettingsPayment20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-payment.svg?url";
 import CatalogSettingsGift20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-gift.svg?url";
+import CatalogSettingsStorageManagement20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-storage-management.svg?url";
 
 import { FolderType, PageType } from "../enums";
 import { isMobile, isTablet } from "./device";
@@ -59,7 +90,7 @@ const defaultIcon: Record<SizeType, string> = {
 
 const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
   16: {
-    [FolderType.USER]: CatalogUserReactSvgUrl,
+    [FolderType.USER]: CatalogDocumentsReactSvgUrl,
     [FolderType.Rooms]: CatalogRoomsReactSvgUrl,
     [FolderType.Archive]: CatalogArchiveReactSvgUrl,
     [FolderType.SHARE]: CatalogSharedReactSvgUrl,
@@ -75,10 +106,12 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [PageType.backup]: CatalogSettingsDataManagementReactSvgUrl,
     [PageType.restore]: CatalogSettingsRestoreReactSvgUrl,
     [PageType.integration]: CatalogSettingsIntegrationReactSvgUrl,
+    [PageType.dataImport]: CatalogSettingsDataReactSvgUrl,
     [PageType.developerTools]: CatalogSettingsDeveloperReactSvgUrl,
     [PageType.portalDeletion]: CatalogTrashReactSvgUrl,
     [PageType.payments]: CatalogSettingsPaymentReactSvgUrl,
     [PageType.bonus]: CatalogSettingsGiftReactSvgUrl,
+    [PageType.storageManagement]: CatalogSettingsStorageManagementReactSvgUrl,
   },
   20: {
     [FolderType.USER]: CatalogUser20ReactSvgUrl,
@@ -97,10 +130,12 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [PageType.backup]: CatalogSettingsDataManagement20ReactSvgUrl,
     [PageType.restore]: CatalogSettingsRestore20ReactSvgUrl,
     [PageType.integration]: CatalogSettingsIntegration20ReactSvgUrl,
+    [PageType.dataImport]: CatalogSettingsData20ReactSvgUrl,
     [PageType.developerTools]: CatalogSettingsDeveloper20ReactSvgUrl,
     [PageType.portalDeletion]: CatalogTrash20ReactSvgUrl,
     [PageType.payments]: CatalogSettingsPayment20ReactSvgUrl,
     [PageType.bonus]: CatalogSettingsGift20ReactSvgUrl,
+    [PageType.storageManagement]: CatalogSettingsStorageManagement20ReactSvgUrl,
   },
 };
 

@@ -1,54 +1,94 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import { Navigate } from "react-router-dom";
 import loadable from "@loadable/component";
 
-import PrivateRoute from "@docspace/common/components/PrivateRoute";
-import PublicRoute from "@docspace/common/components/PublicRoute";
+import PrivateRoute from "../components/PrivateRouteWrapper";
+import PublicRoute from "../components/PublicRouteWrapper";
 import Error404 from "@docspace/shared/components/errors/Error404";
-
+import componentLoader from "@docspace/shared/utils/component-loader";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
 import FilesView from "SRC_DIR/pages/Home/View/Files";
 import AccountsView from "SRC_DIR/pages/Home/View/Accounts";
 import SettingsView from "SRC_DIR/pages/Home/View/Settings";
+const PublicPreview = loadable(() =>
+  componentLoader(() => import("../pages/PublicPreview/PublicPreview")),
+);
 
 import { generalRoutes } from "./general";
 
-const Client = loadable(() => import("../Client"));
+const Client = loadable(() => componentLoader(() => import("../Client")));
 
-const Home = loadable(() => import("../pages/Home"));
+const Home = loadable(() => componentLoader(() => import("../pages/Home")));
 
-const Sdk = loadable(() => import("../pages/Sdk"));
+const Sdk = loadable(() => componentLoader(() => import("../pages/Sdk")));
 
-const FormGallery = loadable(() => import("../pages/FormGallery"));
-const PublicRoom = loadable(() => import("../pages/PublicRoom"));
-const About = loadable(() => import("../pages/About"));
-const Wizard = loadable(() => import("../pages/Wizard"));
-const PreparationPortal = loadable(() => import("../pages/PreparationPortal"));
-const PortalUnavailable = loadable(() => import("../pages/PortalUnavailable"));
-const ErrorUnavailable = loadable(
-  () => import("../components/ErrorUnavailableWrapper"),
+const FormGallery = loadable(() =>
+  componentLoader(() => import("../pages/FormGallery")),
 );
-const AccessRestricted = loadable(
-  () => import("@docspace/shared/components/errors/AccessRestricted"),
+const PublicRoom = loadable(() =>
+  componentLoader(() => import("../pages/PublicRoom")),
 );
-
-const Error401 = loadable(
-  () => import("@docspace/shared/components/errors/Error401"),
+const About = loadable(() => componentLoader(() => import("../pages/About")));
+const Wizard = loadable(() => componentLoader(() => import("../pages/Wizard")));
+const PreparationPortal = loadable(() =>
+  componentLoader(() => import("@docspace/shared/pages/PreparationPortal")),
 );
-
-const Error403 = loadable(
-  () => import("@docspace/shared/components/errors/Error403"),
+const PortalUnavailable = loadable(() =>
+  componentLoader(() => import("../pages/PortalUnavailable")),
+);
+const ErrorUnavailable = loadable(() =>
+  componentLoader(() => import("../components/ErrorUnavailableWrapper")),
 );
 
-const Error520 = loadable(() => import("../components/Error520Wrapper"));
-
-const ErrorAccessRestricted = loadable(
-  () => import("@docspace/shared/components/errors/AccessRestricted"),
+const Error401 = loadable(() =>
+  componentLoader(() => import("@docspace/shared/components/errors/Error401")),
 );
 
-const ErrorOffline = loadable(
-  () => import("@docspace/shared/components/errors/ErrorOffline"),
+const Error403 = loadable(() =>
+  componentLoader(() => import("@docspace/shared/components/errors/Error403")),
+);
+
+const Error520 = loadable(() =>
+  componentLoader(() => import("../components/Error520Wrapper")),
+);
+
+const ErrorAccessRestricted = loadable(() =>
+  componentLoader(
+    () => import("@docspace/shared/components/errors/AccessRestricted"),
+  ),
+);
+
+const ErrorOffline = loadable(() =>
+  componentLoader(
+    () => import("@docspace/shared/components/errors/ErrorOffline"),
+  ),
 );
 
 const ClientRoutes = [
@@ -259,7 +299,7 @@ const ClientRoutes = [
             path: "accounts/groups/:groupId",
             element: (
               <PrivateRoute restricted withManager>
-                <Navigate to="/accounts/groups/:groupId/filter" replace />
+                <Navigate to="filter" replace />
               </PrivateRoute>
             ),
           },
@@ -344,6 +384,16 @@ const ClientRoutes = [
     ),
   },
   {
+    path: "/share/preview/:id",
+    element: (
+      <PublicRoute>
+        <ErrorBoundary>
+          <PublicPreview />
+        </ErrorBoundary>
+      </PublicRoute>
+    ),
+  },
+  {
     path: "/rooms/share",
     element: (
       <PublicRoute>
@@ -356,6 +406,14 @@ const ClientRoutes = [
     children: [
       {
         index: true,
+        element: (
+          <PublicRoute>
+            <FilesView />
+          </PublicRoute>
+        ),
+      },
+      {
+        path: "media/view/:id",
         element: (
           <PublicRoute>
             <FilesView />
@@ -413,7 +471,7 @@ const ClientRoutes = [
     element: (
       <PublicRoute>
         <ErrorBoundary>
-          <AccessRestricted />
+          <ErrorAccessRestricted />
         </ErrorBoundary>
       </PublicRoute>
     ),

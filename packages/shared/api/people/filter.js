@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { getObjectByLocation, toUrlParams } from "../../utils/common";
 
 const DEFAULT_PAGE = 0;
@@ -13,6 +39,7 @@ const DEFAULT_GROUP = null;
 const DEFAULT_PAYMENTS = null;
 const DEFAULT_ACCOUNT_LOGIN_TYPE = null;
 const DEFAULT_WITHOUT_GROUP = false;
+const DEFAULT_QUOTA_FILTER = null;
 
 const ACTIVE_EMPLOYEE_STATUS = 1;
 
@@ -28,6 +55,7 @@ const PAGE_COUNT = "pagecount";
 const PAYMENTS = "payments";
 const ACCOUNT_LOGIN_TYPE = "accountLoginType";
 const WITHOUT_GROUP = "withoutGroup";
+const QUOTA_FILTER = "quotaFilter";
 
 class Filter {
   static getDefault(total = DEFAULT_TOTAL) {
@@ -80,6 +108,7 @@ class Filter {
     const accountLoginType =
       urlFilter[ACCOUNT_LOGIN_TYPE] || defaultFilter.accountLoginType;
     const withoutGroup = urlFilter[WITHOUT_GROUP] || defaultFilter.withoutGroup;
+    const quotaFilter = urlFilter[QUOTA_FILTER] || defaultFilter.quotaFilter;
 
     const newFilter = new Filter(
       page,
@@ -95,6 +124,7 @@ class Filter {
       payments,
       accountLoginType,
       withoutGroup,
+      quotaFilter,
     );
 
     return newFilter;
@@ -114,6 +144,7 @@ class Filter {
     payments = DEFAULT_PAYMENTS,
     accountLoginType = DEFAULT_ACCOUNT_LOGIN_TYPE,
     withoutGroup = DEFAULT_WITHOUT_GROUP,
+    quotaFilter = DEFAULT_QUOTA_FILTER,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -128,6 +159,7 @@ class Filter {
     this.payments = payments;
     this.accountLoginType = accountLoginType;
     this.withoutGroup = withoutGroup;
+    this.quotaFilter = quotaFilter;
   }
 
   getStartIndex = () => {
@@ -155,6 +187,7 @@ class Filter {
       payments,
       accountLoginType,
       withoutGroup,
+      quotaFilter,
     } = this;
 
     let employeetype = null;
@@ -178,6 +211,7 @@ class Filter {
       payments,
       accountLoginType,
       withoutGroup,
+      quotaFilter,
     };
 
     dtoFilter = { ...dtoFilter, ...employeetype };
@@ -200,6 +234,7 @@ class Filter {
       payments,
       accountLoginType,
       withoutGroup,
+      quotaFilter,
     } = this;
 
     const dtoFilter = {};
@@ -231,6 +266,8 @@ class Filter {
     if (withoutGroup) {
       dtoFilter[WITHOUT_GROUP] = withoutGroup;
     }
+
+    if (quotaFilter) dtoFilter[QUOTA_FILTER] = quotaFilter;
 
     dtoFilter[PAGE] = page + 1;
     dtoFilter[SORT_BY] = sortBy;
@@ -266,6 +303,7 @@ class Filter {
           this.payments,
           this.accountLoginType,
           this.withoutGroup,
+          this.quotaFilter,
         );
   }
 

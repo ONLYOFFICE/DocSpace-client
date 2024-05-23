@@ -1,4 +1,30 @@
-﻿import FavoritesReactSvgUrl from "PUBLIC_DIR/images/favorites.react.svg?url";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import FavoritesReactSvgUrl from "PUBLIC_DIR/images/favorites.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
@@ -9,6 +35,10 @@ import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
+import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
+import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
+import DefaultQuotaReactSvgUrl from "PUBLIC_DIR/images/default.quota.react.svg?url";
+import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import {
   checkFileConflicts,
   deleteFile,
@@ -27,6 +57,7 @@ import {
 } from "@docspace/shared/api/files";
 import {
   ConflictResolveType,
+  Events,
   FileAction,
   FileStatus,
   FolderType,
@@ -46,9 +77,8 @@ import { muteRoomNotification } from "@docspace/shared/api/settings";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import AccountsFilter from "@docspace/shared/api/people/filter";
-import { RoomSearchArea } from "@docspace/shared/enums";
+import { RoomSearchArea, UrlActionType } from "@docspace/shared/enums";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
-import { Events } from "@docspace/shared/enums";
 import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import {
@@ -56,6 +86,7 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 class FilesActionStore {
   settingsStore;
@@ -73,7 +104,7 @@ class FilesActionStore {
   peopleStore;
   userStore = null;
   currentTariffStatusStore = null;
-
+  currentQuotaStore = null;
   isBulkDownload = false;
   isLoadedSearchFiles = false;
   isGroupMenuBlocked = false;
@@ -97,6 +128,7 @@ class FilesActionStore {
     userStore,
     currentTariffStatusStore,
     peopleStore,
+    currentQuotaStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -115,6 +147,7 @@ class FilesActionStore {
     this.userStore = userStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.peopleStore = peopleStore;
+    this.currentQuotaStore = currentQuotaStore;
   }
 
   setIsBulkDownload = (isBulkDownload) => {
@@ -549,6 +582,7 @@ class FilesActionStore {
       this.uploadDataStore;
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =
       secondaryProgressDataStore;
+    const { openUrl } = this.settingsStore;
 
     const { addActiveItems } = this.filesStore;
     const { label } = translations;
@@ -600,7 +634,7 @@ class FilesActionStore {
           this.setIsBulkDownload(false);
 
           if (item.url) {
-            window.location.href = item.url;
+            openUrl(item.url, UrlActionType.Download, true);
           } else {
             setSecondaryProgressBarData({
               visible: true,
@@ -622,12 +656,13 @@ class FilesActionStore {
         operationId,
       });
       setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
-      return toastr.error(err.message ? err.message : err);
+      return toastr.error(err);
     }
   };
 
   downloadAction = (label, item, folderId) => {
     const { bufferSelection } = this.filesStore;
+    const { openUrl } = this.settingsStore;
 
     const selection = item
       ? [item]
@@ -644,7 +679,7 @@ class FilesActionStore {
     const items = [];
 
     if (selection.length === 1 && selection[0].fileExst && !folderId) {
-      window.open(selection[0].viewUrl, "_self");
+      openUrl(selection[0].viewUrl, UrlActionType.Download);
       return Promise.resolve();
     }
 
@@ -1172,10 +1207,16 @@ class FilesActionStore {
             }
 
             if (!isRoomsFolder) {
-              setSelectedFolder(roomsFolder);
+              // setSelectedFolder(roomsFolder);
+              window.DocSpace.navigate("/");
             }
 
-            this.updateCurrentFolder(null, null, null, operationId);
+            // this.updateCurrentFolder(null, null, null, operationId);
+            this.dialogsStore.setIsFolderActions(false);
+            return setTimeout(
+              () => clearSecondaryProgressData(operationId),
+              TIMEOUT,
+            );
           })
 
           .then(() => {
@@ -1183,8 +1224,8 @@ class FilesActionStore {
               folders.length !== 1 && Array.isArray(folders)
                 ? t("ArchivedRoomsAction")
                 : Array.isArray(folders)
-                  ? t("ArchivedRoomAction", { name: folders[0].title })
-                  : t("ArchivedRoomAction", { name: folders.title });
+                  ? t("Common:ArchivedRoomAction", { name: folders[0].title })
+                  : t("Common:ArchivedRoomAction", { name: folders.title });
 
             toastr.success(successTranslation);
           })
@@ -1228,7 +1269,12 @@ class FilesActionStore {
 
             await this.uploadDataStore.loopFilesOperations(data, pbData);
 
-            this.updateCurrentFolder(null, [items], null, operationId);
+            // this.updateCurrentFolder(null, [items], null, operationId);
+            this.dialogsStore.setIsFolderActions(false);
+            return setTimeout(
+              () => clearSecondaryProgressData(operationId),
+              TIMEOUT,
+            );
           })
 
           .then(() => {
@@ -1272,28 +1318,37 @@ class FilesActionStore {
 
     const newFilter = roomsFilter.clone();
 
-    if (tag !== "no-tag") {
+    if (tag.label !== "no-tag") {
       const tags = newFilter.tags ? [...newFilter.tags] : [];
 
       if (tags.length > 0) {
-        const idx = tags.findIndex((item) => item === tag);
+        const idx = tags.findIndex((item) => item === tag.label);
 
         if (idx > -1) {
           //TODO: remove tag here if already selected
           return;
         }
       }
-      tags.push(tag);
 
-      newFilter.tags = [...tags];
+      if (tag.roomType) {
+        if (!!newFilter.type && +newFilter.type === tag.roomType) return;
+        newFilter.type = tag.roomType;
+      } else if (tag.providerType) {
+        if (!!newFilter.provider && +newFilter.provider === tag.providerType)
+          return;
+        newFilter.provider = tag.providerType;
+      } else {
+        tags.push(tag.label);
+        newFilter.tags = [...tags];
+      }
+
       newFilter.withoutTags = false;
     } else {
       newFilter.withoutTags = true;
     }
-
     setIsLoading(true);
     window.DocSpace.navigate(
-      `${window.DocSpace.location.pathname}?${newFilter.toUrlParams()}`,
+      `${window.DocSpace.location.pathname}?${newFilter.toUrlParams(this.userStore?.user?.id)}`,
     );
   };
 
@@ -1365,6 +1420,17 @@ class FilesActionStore {
     window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`, { state });
   };
 
+  nameWithoutExtension = (title) => {
+    const indexPoint = title.lastIndexOf(".");
+    const splitTitle = title.split(".");
+    const splitTitleLength = splitTitle.length;
+
+    const titleWithoutExtension =
+      splitTitleLength <= 2 ? splitTitle[0] : title.slice(0, indexPoint);
+
+    return titleWithoutExtension;
+  };
+
   checkAndOpenLocationAction = async (item) => {
     const { categoryType } = this.filesStore;
     const { myRoomsId, myFolderId, archiveRoomsId, recycleBinFolderId } =
@@ -1376,7 +1442,7 @@ class FilesActionStore {
       setIsSectionFilterLoading(param);
     };
 
-    const { ExtraLocationTitle, ExtraLocation, fileExst } = item;
+    const { ExtraLocationTitle, ExtraLocation, fileExst, folderId } = item;
 
     const isRoot =
       ExtraLocation === myRoomsId ||
@@ -1398,8 +1464,10 @@ class FilesActionStore {
 
     const newFilter = FilesFilter.getDefault();
 
-    newFilter.search = item.title;
-    newFilter.folder = ExtraLocation;
+    const title = this.nameWithoutExtension(item.title);
+
+    newFilter.search = title;
+    newFilter.folder = ExtraLocation || folderId;
 
     setIsLoading(
       window.DocSpace.location.search !== `?${newFilter.toUrlParams()}` ||
@@ -1574,8 +1642,15 @@ class FilesActionStore {
   };
 
   isAvailableOption = (option) => {
-    const { canConvertSelected, hasSelection, allFilesIsEditing, selection } =
-      this.filesStore;
+    const {
+      canConvertSelected,
+      hasSelection,
+      allFilesIsEditing,
+      selection,
+      hasRoomsToResetQuota,
+      hasRoomsToDisableQuota,
+      hasRoomsToChangeQuota,
+    } = this.filesStore;
 
     const { rootFolderType } = this.selectedFolderStore;
     const canDownload = selection.every((s) => s.security?.Download);
@@ -1617,14 +1692,14 @@ class FilesActionStore {
 
         return !allFilesIsEditing && canDelete && hasSelection;
       case "create-room":
-        const { isCollaborator } = this.userStore?.user || {
-          isCollaborator: false,
-        };
-
-        const canCreateRoom =
-          !isCollaborator && rootFolderType === FolderType.USER;
-
+        const canCreateRoom = selection.some((s) => s.security?.CreateRoomFrom);
         return canCreateRoom;
+      case "change-quota":
+        return hasRoomsToChangeQuota;
+      case "disable-quota":
+        return hasRoomsToDisableQuota;
+      case "default-quota":
+        return hasRoomsToResetQuota;
     }
   };
 
@@ -1768,14 +1843,64 @@ class FilesActionStore {
     window.dispatchEvent(event);
   };
 
+  changeRoomQuota = (items, successCallback, abortCallback) => {
+    const event = new Event(Events.CHANGE_QUOTA);
+
+    const itemsIDs = items.map((item) => {
+      return item?.id ? item.id : item;
+    });
+
+    const payload = {
+      visible: true,
+      type: "room",
+      ids: itemsIDs,
+      successCallback,
+      abortCallback,
+    };
+
+    event.payload = payload;
+
+    window.dispatchEvent(event);
+  };
+  disableRoomQuota = async (items, t) => {
+    const { setCustomRoomQuota } = this.filesStore;
+
+    const userIDs = items.map((item) => {
+      return item?.id ? item.id : item;
+    });
+
+    try {
+      await setCustomRoomQuota(-1, userIDs);
+      toastr.success(t("Common:StorageQuotaDisabled"));
+    } catch (e) {
+      toastr.error(e);
+    }
+  };
+
+  resetRoomQuota = async (items, t) => {
+    const { resetRoomQuota } = this.filesStore;
+
+    const userIDs = items.map((item) => {
+      return item?.id ? item.id : item;
+    });
+
+    try {
+      await resetRoomQuota(userIDs);
+      toastr.success(t("Common:StorageQuotaReset"));
+    } catch (e) {
+      toastr.error(e);
+    }
+  };
   getOption = (option, t) => {
     const {
-      setSharingPanelVisible,
+      // setSharingPanelVisible,
       setDownloadDialogVisible,
       setMoveToPanelVisible,
       setCopyPanelVisible,
       setDeleteDialogVisible,
     } = this.dialogsStore;
+    const { selection } = this.filesStore;
+    const { showStorageInfo } = this.currentQuotaStore;
 
     switch (option) {
       case "show-info":
@@ -1880,6 +2005,40 @@ class FilesActionStore {
             onClick: () => this.archiveRooms("unarchive"),
             disabled: false,
           };
+      case "change-quota":
+        if (!this.isAvailableOption("change-quota")) return null;
+        else
+          return {
+            id: "menu-change-quota",
+            key: "change-quota",
+            label: t("Common:ChangeQuota"),
+            iconUrl: ChangQuotaReactSvgUrl,
+            onClick: () => this.changeRoomQuota(selection),
+            disabled: !showStorageInfo,
+          };
+      case "default-quota":
+        if (!this.isAvailableOption("default-quota")) return null;
+        else
+          return {
+            id: "menu-default-quota",
+            key: "default-quota",
+            label: t("Common:SetToDefault"),
+            iconUrl: DefaultQuotaReactSvgUrl,
+            onClick: () => this.resetRoomQuota(selection, t),
+            disabled: !showStorageInfo,
+          };
+      case "disable-quota":
+        if (!this.isAvailableOption("disable-quota")) return null;
+        else
+          return {
+            id: "menu-disable-quota",
+            key: "disable-quota",
+            label: t("Common:DisableQuota"),
+            iconUrl: DisableQuotaReactSvgUrl,
+            onClick: () => this.disableRoomQuota(selection, t),
+            disabled: !showStorageInfo,
+          };
+
       case "delete-room":
         if (!this.isAvailableOption("delete-room")) return null;
         else
@@ -1915,6 +2074,13 @@ class FilesActionStore {
             },
             iconUrl: DeleteReactSvgUrl,
           };
+      case "remove-from-recent":
+        return {
+          id: "menu-remove-from-recent",
+          label: t("RemoveFromList"),
+          onClick: () => this.onClickRemoveFromRecent(selection),
+          iconUrl: RemoveOutlineSvgUrl,
+        };
     }
   };
 
@@ -1928,8 +2094,16 @@ class FilesActionStore {
 
     const pin = this.getOption(pinName, t);
     const archive = this.getOption("archive", t);
+    const changeQuota = this.getOption("change-quota", t);
+    const disableQuota = this.getOption("disable-quota", t);
+    const defaultQuota = this.getOption("default-quota", t);
 
-    itemsCollection.set(pinName, pin).set("archive", archive);
+    itemsCollection
+      .set(pinName, pin)
+      .set("archive", archive)
+      .set("change-quota", changeQuota)
+      .set("default-quota", defaultQuota)
+      .set("disable-quota", disableQuota);
     return this.convertToArray(itemsCollection);
   };
 
@@ -1972,13 +2146,14 @@ class FilesActionStore {
     const downloadAs = this.getOption("downloadAs", t);
     const copy = this.getOption("copy", t);
     const showInfo = this.getOption("showInfo", t);
+    const removeFromRecent = this.getOption("remove-from-recent", t);
 
     itemsCollection
-
       .set("download", download)
       .set("downloadAs", downloadAs)
       .set("copy", copy)
-      .set("showInfo", showInfo);
+      .set("showInfo", showInfo)
+      .set("removeFromRecent", removeFromRecent);
 
     return this.convertToArray(itemsCollection);
   };
@@ -2077,12 +2252,12 @@ class FilesActionStore {
   getHeaderMenu = (t) => {
     const {
       isFavoritesFolder,
-      isRecentFolder,
       isRecycleBinFolder,
       isPrivacyFolder,
       isShareFolder,
       isRoomsFolder,
       isArchiveFolder,
+      isRecentTab,
     } = this.treeFoldersStore;
 
     let itemsCollection = new Map();
@@ -2097,7 +2272,7 @@ class FilesActionStore {
 
     if (isShareFolder) return this.getShareFolderOptions(itemsCollection, t);
 
-    if (isRecentFolder) return this.getRecentFolderOptions(itemsCollection, t);
+    if (isRecentTab) return this.getRecentFolderOptions(itemsCollection, t);
 
     if (isArchiveFolder)
       return this.getArchiveRoomsFolderOptions(itemsCollection, t);
@@ -2109,7 +2284,7 @@ class FilesActionStore {
 
   onMarkAsRead = (item) => this.markAsRead([], [`${item.id}`], item);
 
-  openFileAction = (item, t) => {
+  openFileAction = (item, t, e) => {
     const { openDocEditor, isPrivacyFolder, setSelection } = this.filesStore;
     const { currentDeviceType } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
@@ -2117,7 +2292,7 @@ class FilesActionStore {
 
     const { isLoading, setIsSectionFilterLoading } = this.clientLoadingStore;
     const { isRecycleBinFolder, isRecentTab } = this.treeFoldersStore;
-    const { setMediaViewerData } = this.mediaViewerDataStore;
+    const { setMediaViewerData, getUrl } = this.mediaViewerDataStore;
     const { setConvertDialogVisible, setConvertItem } = this.dialogsStore;
 
     const { roomType, title: currentTitle } = this.selectedFolderStore;
@@ -2154,8 +2329,6 @@ class FilesActionStore {
     if (isFolder) {
       const { isRoom, rootFolderType, title, roomType: itemRoomType } = item;
 
-      setIsLoading(true);
-
       const path = getCategoryUrl(
         getCategoryTypeByFolderType(rootFolderType, id),
         id,
@@ -2163,6 +2336,12 @@ class FilesActionStore {
 
       const filter = FilesFilter.getDefault();
       filter.folder = id;
+
+      const url = `${path}?${filter.toUrlParams()}`;
+
+      if (openingNewTab(url, e)) return;
+
+      setIsLoading(true);
 
       const state = {
         title,
@@ -2175,7 +2354,7 @@ class FilesActionStore {
 
       setSelection([]);
 
-      window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, { state });
+      window.DocSpace.navigate(url, { state });
     } else {
       if (canConvert) {
         setConvertItem({ ...item, isOpen: true });
@@ -2187,40 +2366,20 @@ class FilesActionStore {
         this.onMarkAsRead(item);
 
       if (canWebEdit || canViewedDocs) {
-        let tab =
-          !this.settingsStore.isDesktopClient &&
-          window.DocSpaceConfig?.editor?.openOnNewPage &&
-          !isFolder
-            ? window.open(
-                combineUrl(
-                  window.DocSpaceConfig?.proxy?.url,
-                  config.homepage,
-                  `/doceditor?fileId=${id}`,
-                ),
-                "_blank",
-              )
-            : null;
-
-        const isPreview = item.isForm
-          ? !item.security.FillForms
-          : !item.security.Edit;
-
         const shareWebUrl = new URL(webUrl);
         const shareKey = isRecentTab
           ? getObjectByLocation(shareWebUrl)?.share
           : "";
 
-        return openDocEditor(id, providerKey, tab, null, isPreview, shareKey);
+        return openDocEditor(id, false, shareKey);
       }
 
       if (isMediaOrImage) {
         setMediaViewerData({ visible: true, id });
 
-        const url = combineUrl(MEDIA_VIEW_URL, id);
+        const url = getUrl(id);
 
-        if (this.publicRoomStore.isPublicRoom) return;
-
-        window.DocSpace.navigate(url);
+        window.DocSpace.navigate(url, { state: { disableScrollToTop: true } });
         return;
       }
 
@@ -2349,10 +2508,13 @@ class FilesActionStore {
       filter.searchArea = RoomSearchArea.Archive;
     }
 
-    window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, {
-      state,
-      replace: true,
-    });
+    window.DocSpace.navigate(
+      `${path}?${filter.toUrlParams(this.userStore?.user?.id, true)}`,
+      {
+        state,
+        replace: true,
+      },
+    );
   };
 
   moveToPublicRoom = (folderId) => {
@@ -2468,14 +2630,8 @@ class FilesActionStore {
   };
 
   onLeaveRoom = (t, isOwner = false) => {
-    const {
-      updateRoomMemberRole,
-      removeFiles,
-      folders,
-      setFolders,
-      selection,
-      bufferSelection,
-    } = this.filesStore;
+    const { updateRoomMemberRole, removeFiles, selection, bufferSelection } =
+      this.filesStore;
     const { user } = this.userStore;
 
     const roomId = selection.length
@@ -2503,12 +2659,7 @@ class FilesActionStore {
         if (!isRoot) {
           this.selectedFolderStore.setInRoom(false);
         } else {
-          const newFolders = folders;
-          const folderIndex = newFolders.findIndex((r) => r.id === roomId);
-          if (folderIndex > -1) {
-            newFolders[folderIndex].inRoom = false;
-            setFolders(newFolders);
-          }
+          this.filesStore.setInRoomFolder(roomId, false);
         }
       }
 
@@ -2547,6 +2698,13 @@ class FilesActionStore {
       .finally(() => {
         setSelected("none");
       });
+  };
+
+  onClickRemoveFromRecent = (selection) => {
+    const { setSelected } = this.filesStore;
+    const ids = selection.map((item) => item.id);
+    this.removeFilesFromRecent(ids);
+    setSelected("none");
   };
 
   removeFilesFromRecent = async (fileIds) => {

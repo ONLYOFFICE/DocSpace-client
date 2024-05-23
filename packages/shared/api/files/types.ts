@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { TCreatedBy, TPathParts } from "../../types";
 import { TUser } from "../people/types";
 import {
@@ -43,6 +69,16 @@ export type TFileSecurity = {
   SubmitToFormGallery: boolean;
 };
 
+export type TAvailableExternalRights = {
+  Comment: boolean;
+  CustomFilter: boolean;
+  Editing: boolean;
+  None: boolean;
+  Read: boolean;
+  Restrict: boolean;
+  Review: boolean;
+};
+
 export type TFile = {
   access: ShareAccessRights;
   canShare: boolean;
@@ -72,6 +108,11 @@ export type TFile = {
   viewAccessibility: TFileViewAccessibility;
   viewUrl: string;
   webUrl: string;
+  availableExternalRights?: TAvailableExternalRights;
+  providerId?: number;
+  providerKey?: string;
+  providerItem?: boolean;
+  thumbnailUrl?: string;
 };
 
 export type TOpenEditRequest = {
@@ -81,6 +122,13 @@ export type TOpenEditRequest = {
   type: string;
   file: TFile;
   errorMessage: string;
+};
+
+export type TGetReferenceData = {
+  fileKey: number | string;
+  instanceId: string;
+  sourceFileId?: number;
+  path?: string;
 };
 
 export type TGetReferenceDataRequest = {
@@ -137,6 +185,8 @@ export type TFolder = {
   rootFolderType: FolderType;
   isArchive?: boolean;
   roomType?: RoomsType;
+  path?: TPathParts[];
+  type?: FolderType;
 };
 
 export type TGetFolderPath = TFolder[];
@@ -259,14 +309,14 @@ export type TEditHistoryUser = {
 };
 
 export type TEditHistoryChanges = {
-  created: Date;
+  created: string;
   user: TEditHistoryUser;
 };
 
 export type TEditHistory = {
   changes: TEditHistoryChanges[];
   changesHistory: string;
-  created: Date;
+  created: string;
   id: number;
   key: string;
   serverVersion?: string;
@@ -343,6 +393,36 @@ export type TFileLink = {
     requestToken: string;
     shareLink: string;
     title: string;
+    expirationDate?: string;
+    internal?: boolean;
   };
 };
 
+export type TFilesUsedSpace = {
+  myDocumentsUsedSpace: {
+    title: string;
+    usedSpace: number;
+  };
+  trashUsedSpace: {
+    title: string;
+    usedSpace: number;
+  };
+  archiveUsedSpace: {
+    title: string;
+    usedSpace: number;
+  };
+  roomsUsedSpace: {
+    title: string;
+    usedSpace: number;
+  };
+};
+
+export type TConnectingStorage = {
+  name: string;
+  key: string;
+  connected: boolean;
+  oauth: boolean;
+  redirectUrl: string;
+};
+
+export type TConnectingStorages = TConnectingStorage[];

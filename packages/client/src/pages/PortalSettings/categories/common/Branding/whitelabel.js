@@ -1,3 +1,28 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -26,7 +51,7 @@ import {
 } from "../../../utils/whiteLabelHelper";
 
 import isEqual from "lodash/isEqual";
-import { DeviceType } from "@docspace/shared/enums";
+import { DeviceType, WhiteLabelLogoType } from "@docspace/shared/enums";
 
 const WhiteLabel = (props) => {
   const {
@@ -43,9 +68,10 @@ const WhiteLabel = (props) => {
     setLogoUrlsWhiteLabel,
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
+    deviceType,
 
-    currentDeviceType,
     resetIsInit,
+    standalone,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -54,10 +80,12 @@ const WhiteLabel = (props) => {
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
   const [isSaving, setIsSaving] = useState(false);
 
-  const isMobileView = currentDeviceType === DeviceType.mobile;
+  const isMobileView = deviceType === DeviceType.mobile;
 
   const init = async () => {
-    const isWhiteLabelPage = location.pathname.includes("white-label");
+    const isWhiteLabelPage = standalone
+      ? location.pathname.includes("white-label")
+      : true;
 
     if ((isMobileView && isWhiteLabelPage) || !isMobileView) {
       const page = isMobileView ? "white-label" : "branding";
@@ -68,12 +96,17 @@ const WhiteLabel = (props) => {
   useEffect(() => {
     init();
     checkWidth();
-    window.addEventListener("resize", checkWidth);
     return () => {
-      window.removeEventListener("resize", checkWidth);
       resetIsInit();
     };
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", checkWidth);
+    return () => {
+      window.removeEventListener("resize", checkWidth);
+    };
+  }, [isMobileView]);
 
   const checkWidth = () => {
     const url = isManagement()
@@ -81,6 +114,7 @@ const WhiteLabel = (props) => {
       : "/portal-settings/customization/branding";
 
     window.innerWidth > size.mobile &&
+      !isMobileView &&
       location.pathname.includes("white-label") &&
       navigate(url);
   };
@@ -129,7 +163,7 @@ const WhiteLabel = (props) => {
         options.text,
         options.fontSize,
         isDocsEditorName ? "#fff" : "#000",
-        options.alignCenter
+        options.alignCenter,
       );
       const logoDark = generateLogo(
         options.width,
@@ -137,7 +171,7 @@ const WhiteLabel = (props) => {
         options.text,
         options.fontSize,
         "#fff",
-        options.alignCenter
+        options.alignCenter,
       );
       newLogos[i].path.light = logoLight;
       newLogos[i].path.dark = logoDark;
@@ -158,21 +192,21 @@ const WhiteLabel = (props) => {
 
   const onChangeLogo = async (e) => {
     const id = e.target.id.split("_");
-    const index = id[1];
+    const type = id[1];
     const theme = id[2];
 
     let file = e.target.files[0];
 
-    const { data } = await uploadLogo(file);
+    const { data } = await uploadLogo(file, type);
 
     if (data.Success) {
       const url = data.Message;
       const newArr = logoUrlsWhiteLabel;
 
       if (theme === "light") {
-        newArr[index - 1].path.light = url;
+        newArr[type - 1].path.light = url;
       } else if (theme === "dark") {
-        newArr[index - 1].path.dark = url;
+        newArr[type - 1].path.dark = url;
       }
 
       setLogoUrlsWhiteLabel(newArr);
@@ -222,12 +256,12 @@ const WhiteLabel = (props) => {
 
   const isEqualLogo = isEqual(logoUrlsWhiteLabel, defaultWhiteLabelLogoUrls);
   const isEqualText = defaultLogoTextWhiteLabel === logoTextWhiteLabel;
-  const showReminder = !isEqualLogo || !isEqualText;
+  const saveButtonDisabled = isEqualLogo && isEqualText;
 
   return !isLoadedData ? (
     <LoaderWhiteLabel />
   ) : (
-    <WhiteLabelWrapper showReminder={showReminder}>
+    <WhiteLabelWrapper showReminder={!saveButtonDisabled}>
       <Text className="subtitle">{t("BrandingSubtitle")}</Text>
 
       <div className="header-container">
@@ -306,7 +340,7 @@ const WhiteLabel = (props) => {
               title={t("Profile:LightTheme")}
               src={logoUrlsWhiteLabel[0].path.light}
               imageClass="logo-header background-light"
-              inputId="logoUploader_1_light"
+              inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}
               linkId="link-space-header-light"
               onChangeText={t("ChangeLogoButton")}
               onChange={onChangeLogo}
@@ -316,7 +350,7 @@ const WhiteLabel = (props) => {
               title={t("Profile:DarkTheme")}
               src={logoUrlsWhiteLabel[0].path.dark}
               imageClass="logo-header background-dark"
-              inputId="logoUploader_1_dark"
+              inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_dark`}
               linkId="link-space-header-dark"
               onChangeText={t("ChangeLogoButton")}
               onChange={onChangeLogo}
@@ -339,7 +373,7 @@ const WhiteLabel = (props) => {
               title={t("Profile:LightTheme")}
               src={logoUrlsWhiteLabel[5].path.light}
               imageClass="border-img logo-compact background-light"
-              inputId="logoUploader_6_light"
+              inputId={`logoUploader_${WhiteLabelLogoType.LeftMenu}_light`}
               linkId="link-compact-left-menu-light"
               onChangeText={t("ChangeLogoButton")}
               onChange={onChangeLogo}
@@ -349,7 +383,7 @@ const WhiteLabel = (props) => {
               title={t("Profile:DarkTheme")}
               src={logoUrlsWhiteLabel[5].path.dark}
               imageClass="border-img logo-compact background-dark"
-              inputId="logoUploader_6_dark"
+              inputId={`logoUploader_${WhiteLabelLogoType.LeftMenu}_dark`}
               linkId="link-compact-left-menu-dark"
               onChangeText={t("ChangeLogoButton")}
               onChange={onChangeLogo}
@@ -372,7 +406,7 @@ const WhiteLabel = (props) => {
               title={t("Profile:LightTheme")}
               src={logoUrlsWhiteLabel[1].path.light}
               imageClass="border-img logo-big background-white"
-              inputId="logoUploader_2_light"
+              inputId={`logoUploader_${WhiteLabelLogoType.LoginPage}_light`}
               linkId="link-login-emails-light"
               onChangeText={t("ChangeLogoButton")}
               onChange={onChangeLogo}
@@ -382,7 +416,7 @@ const WhiteLabel = (props) => {
               title={t("Profile:DarkTheme")}
               src={logoUrlsWhiteLabel[1].path.dark}
               imageClass="border-img logo-big background-dark"
-              inputId="logoUploader_2_dark"
+              inputId={`logoUploader_${WhiteLabelLogoType.LoginPage}_dark`}
               linkId="link-login-emails-dark"
               onChangeText={t("ChangeLogoButton")}
               onChange={onChangeLogo}
@@ -405,7 +439,7 @@ const WhiteLabel = (props) => {
               title={t("Profile:LightTheme")}
               src={logoUrlsWhiteLabel[6].path.light}
               imageClass="border-img logo-about background-white"
-              inputId="logoUploader_7_light"
+              inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_light`}
               linkId="link-about-light"
               onChangeText={t("ChangeLogoButton")}
               onChange={onChangeLogo}
@@ -415,7 +449,7 @@ const WhiteLabel = (props) => {
               title={t("Profile:DarkTheme")}
               src={logoUrlsWhiteLabel[6].path.dark}
               imageClass="border-img logo-about background-dark"
-              inputId="logoUploader_7_dark"
+              inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_dark`}
               linkId="link-about-dark"
               onChangeText={t("ChangeLogoButton")}
               onChange={onChangeLogo}
@@ -436,7 +470,7 @@ const WhiteLabel = (props) => {
           <Logo
             src={logoUrlsWhiteLabel[2].path.light}
             imageClass="border-img logo-favicon"
-            inputId="logoUploader_3_light"
+            inputId={`logoUploader_${WhiteLabelLogoType.Favicon}_light`}
             linkId="link-favicon"
             onChangeText={t("ChangeLogoButton")}
             onChange={onChangeLogo}
@@ -456,7 +490,7 @@ const WhiteLabel = (props) => {
           <Logo
             isEditor={true}
             src={logoUrlsWhiteLabel[3].path.light}
-            inputId="logoUploader_4_light"
+            inputId={`logoUploader_${WhiteLabelLogoType.DocsEditor}_light`}
             linkId="link-editors-header"
             onChangeText={t("ChangeLogoButton")}
             onChange={onChangeLogo}
@@ -476,7 +510,7 @@ const WhiteLabel = (props) => {
           <Logo
             src={logoUrlsWhiteLabel[4].path.light}
             imageClass="border-img logo-embedded-editor background-white"
-            inputId="logoUploader_5_light"
+            inputId={`logoUploader_${WhiteLabelLogoType.DocsEditorEmbed}_light`}
             linkId="link-embedded-editor"
             onChangeText={t("ChangeLogoButton")}
             onChange={onChangeLogo}
@@ -497,9 +531,9 @@ const WhiteLabel = (props) => {
         displaySettings={true}
         hasScroll={true}
         hideBorder={true}
-        showReminder={showReminder}
+        showReminder={!saveButtonDisabled}
         reminderText={t("YouHaveUnsavedChanges")}
-        saveButtonDisabled={isEqualLogo && isEqualText}
+        saveButtonDisabled={saveButtonDisabled}
         disableRestoreToDefault={!enableRestoreButton}
         isSaving={isSaving}
         additionalClassSaveButton="white-label-save"
@@ -524,8 +558,11 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     resetIsInit,
   } = common;
 
-  const { whiteLabelLogoUrls: defaultWhiteLabelLogoUrls, currentDeviceType } =
-    settingsStore;
+  const {
+    whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
+    deviceType,
+    standalone,
+  } = settingsStore;
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
 
   return {
@@ -543,7 +580,8 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
 
-    currentDeviceType,
+    deviceType,
     resetIsInit,
+    standalone,
   };
 })(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));

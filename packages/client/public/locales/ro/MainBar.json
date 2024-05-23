@@ -2,13 +2,17 @@
   "ClickHere": "Apăsaţi aici",
   "ConfirmEmailDescription": "Utilizaţi linkul de activare din email. Nu aţi primit un email cu link-ul de activare?",
   "ConfirmEmailHeader": "Activați adresa de email ({{ email }}) pentru a avea acces la funcţiile DocSpace.",
+  "PersonalUserQuotaAdminsDescription": "Pentru a încărca și a crea fișiere și dosare noi, eliberați spațiu de stocare sau gestionați cota de stocare pentru fiecare utilizator din secțiunea <1>Setările de gestionare a spațiului de stocare.</1>.",
+  "PersonalUserQuotaDescription": "Pentru a încărca și a crea fișiere și dosare noi, eliberați spațiu de stocare sau contactați administratorul pentru a majora capacităţile de stocare.",
   "RequestActivation": "Solicitaţi activarea din nou",
   "RoomQuotaDescription": "Puteţi arhiva sălile inutile sau <1>{{clickHere}}</1> pentru a găsi un abonament mai potrivit pentru spaţiul dvs DocSpace.",
   "RoomQuotaHeader": "Cota sălilor este pe punctul de a fi depăşită: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Limite de stocare și cota sălilor sunt pe punctul de a fi depăşiti.",
   "StorageAndUserHeader": "Limite de stocare pentru administratori/utilizatori avansați sunt pe punctul de a fi depăşiti.",
   "StorageQuotaDescription": "Puteţi elimina fişierele inutile sau <1>{{{clickHere}}</1> pentru a găsi un abonament mai potrivit pentru spaţiul dvs DocSpace.",
+  "StorageQuotaExceeded": "Cotă de stocare a fost depășită",
   "StorageQuotaHeader": "Cota spaţiului de stocare este pe punctul de a fi depăşită: {{currentValue}} / {{maxValue}}",
+  "TenantCustomQuotaDescription": "Puteţi elimina fişierele inutile sau modifica cotă de stocare din secțiunea <1>Setările de gestionare a spațiului de stocare.</1>.",
   "UserQuotaDescription": "<1>{{clickHere}}</1> pentru a găsi cea mai bună ofertă pentru spațiul dvs DocSpace.",
   "UserQuotaHeader": "Numărul maxim de administratori/utilizatori avansați este pe punctul de a fi depăşit. {{currentValue}} / {{maxValue}}."
 }

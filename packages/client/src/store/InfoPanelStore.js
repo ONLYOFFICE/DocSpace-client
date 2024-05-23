@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { makeAutoObservable } from "mobx";
 import moment from "moment";
 
@@ -33,7 +59,7 @@ const observedKeys = [
 
 const infoMembers = "info_members";
 const infoHistory = "info_history";
-// const infoDetails = "info_details";
+const infoDetails = "info_details";
 
 class InfoPanelStore {
   userStore = null;
@@ -69,6 +95,8 @@ class InfoPanelStore {
   showSearchBlock = false;
   searchValue = "";
 
+  infoPanelSelectedGroup = null;
+
   constructor(userStore) {
     this.userStore = userStore;
 
@@ -77,8 +105,21 @@ class InfoPanelStore {
 
   // Setters
 
+  setInfoPanelSelectedGroup = (group) => {
+    this.infoPanelSelectedGroup = group;
+  };
+
   setIsVisible = (bool) => {
-    this.setView(infoMembers);
+    if (
+      (this.infoPanelSelectedItems.length &&
+        !this.infoPanelSelectedItems[0]?.isRoom) ||
+      (this.selectedFolderStore && !this.selectedFolderStore?.inRoom)
+    ) {
+      this.setView(infoDetails);
+    } else {
+      this.setView(infoMembers);
+    }
+
     this.isVisible = bool;
     this.isScrollLocked = false;
   };
@@ -92,8 +133,10 @@ class InfoPanelStore {
   };
 
   setSearchValue = (value) => {
-    this.setSearchResultIsLoading(true);
-    this.searchValue = value;
+    if (value !== this.searchValue) {
+      this.setSearchResultIsLoading(true);
+      this.searchValue = value;
+    }
   };
 
   resetSearch = () => {
@@ -105,8 +148,9 @@ class InfoPanelStore {
 
   setSelectionHistory = (obj) => {
     this.selectionHistory = obj;
-    this.historyWithFileList =
-      this.infoPanelSelection.isFolder || this.infoPanelSelection.isRoom;
+    if (obj)
+      this.historyWithFileList =
+        this.infoPanelSelection.isFolder || this.infoPanelSelection.isRoom;
   };
 
   resetView = () => {
@@ -116,7 +160,7 @@ class InfoPanelStore {
 
   setView = (view) => {
     this.roomsView = view;
-    this.fileView = view === infoMembers ? infoHistory : view;
+    this.fileView = view === infoMembers ? infoDetails : view;
     this.isScrollLocked = false;
     if (view !== infoMembers) this.setInfoPanelMembers(null);
 
@@ -198,8 +242,11 @@ class InfoPanelStore {
   getViewItem = () => {
     const isRooms = this.getIsRooms();
 
+    const pathname = window.location.pathname.toLowerCase();
+    const isMedia = pathname.indexOf("view") !== -1;
+
     if (
-      isRooms &&
+      (isRooms || isMedia) &&
       this.roomsView === infoMembers &&
       !this.infoPanelSelectedItems[0]?.isRoom
     ) {
@@ -224,6 +271,11 @@ class InfoPanelStore {
       );
     } else {
       newInfoPanelSelection = [...Array(selectedItems.length).keys()];
+    }
+
+    if (!selectedItems.length && !newInfoPanelSelection.parentId) {
+      this.setSelectionHistory(null);
+      this.setInfoPanelSelectedGroup(null);
     }
 
     this.setInfoPanelSelection(newInfoPanelSelection);
@@ -317,8 +369,8 @@ class InfoPanelStore {
                 null,
                 item.roomType,
               )
-      : item.isFolder && item.folderType
-        ? this.filesSettingsStore.getIconByFolderType(item.folderType, size)
+      : item.isFolder
+        ? this.filesSettingsStore.getIconByFolderType(item.type, size)
         : this.filesSettingsStore.getIcon(size, item.fileExst || ".file");
   };
 
@@ -342,7 +394,7 @@ class InfoPanelStore {
     const path = [
       window.DocSpaceConfig?.proxy?.url,
       config.homepage,
-      "/accounts",
+      "/accounts/people",
     ];
 
     const newFilter = Filter.getDefault();
@@ -353,6 +405,8 @@ class InfoPanelStore {
 
     this.selectedFolderStore.setSelectedFolder(null);
     this.treeFoldersStore.setSelectedNode(["accounts"]);
+    this.filesStore.resetSelections();
+
     navigate(combineUrl(...path), { state: { user } });
   };
 
@@ -485,7 +539,7 @@ class InfoPanelStore {
     if (administrators.length && !hasPrevAdminsTitle) {
       administrators.unshift({
         id: "administration",
-        displayName: t("Administration"),
+        displayName: t("InfoPanel:Administration"),
         isTitle: true,
       });
     }
@@ -503,7 +557,11 @@ class InfoPanelStore {
     let hasPrevUsersTitle = this.getHasPrevTitle(users, "user");
 
     if (users.length && !hasPrevUsersTitle) {
-      users.unshift({ id: "user", displayName: t("Users"), isTitle: true });
+      users.unshift({
+        id: "user",
+        displayName: t("InfoPanel:Users"),
+        isTitle: true,
+      });
     }
 
     let hasPrevExpectedTitle = this.getHasPrevTitle(
@@ -514,7 +572,7 @@ class InfoPanelStore {
     if (expectedMembers.length && !hasPrevExpectedTitle) {
       expectedMembers.unshift({
         id: "expected",
-        displayName: t("ExpectUsers"),
+        displayName: t("InfoPanel:ExpectUsers"),
         isTitle: true,
         isExpect: true,
       });
@@ -601,20 +659,63 @@ class InfoPanelStore {
     };
   };
 
-  addInfoPanelMembers = (t, members, clearFilter) => {
-    const newMembers = this.convertMembers(t, members, clearFilter);
+  fetchMoreMembers = async (t, withoutTitles) => {
+    const roomId = this.infoPanelSelection.id;
+    const oldMembers = this.infoPanelMembers;
+
+    const data = await this.filesStore.getRoomMembers(roomId, false);
+
+    const newMembers = this.convertMembers(t, data, false, true);
+
+    const mergedMembers = {
+      roomId: roomId,
+      administrators: [
+        ...oldMembers.administrators,
+        ...newMembers.administrators,
+      ],
+      users: [...oldMembers.users, ...newMembers.users],
+      expected: [...oldMembers.expected, ...newMembers.expectedMembers],
+      groups: [...oldMembers.groups, ...newMembers.groups],
+    };
+
+    if (!withoutTitles) {
+      this.addMembersTitle(
+        t,
+        mergedMembers.administrators,
+        mergedMembers.users,
+        mergedMembers.expected,
+        mergedMembers.groups,
+      );
+    }
+
+    this.setInfoPanelMembers(mergedMembers);
+  };
+
+  addInfoPanelMembers = (t, members) => {
+    const convertedMembers = this.convertMembers(t, members);
 
     if (this.infoPanelMembers) {
       const { roomId, administrators, users, expected, groups } =
         this.infoPanelMembers;
 
-      this.setInfoPanelMembers({
+      const mergedMembers = {
         roomId: roomId,
-        administrators: [...administrators, ...newMembers.administrators],
-        users: [...users, ...newMembers.users],
-        expected: [...expected, ...newMembers.expectedMembers],
-        groups: [...groups, ...newMembers.groups],
-      });
+        administrators: [...administrators, ...convertedMembers.administrators],
+        users: [...users, ...convertedMembers.users],
+        expected: [...expected, ...convertedMembers.expectedMembers],
+        groups: [...groups, ...convertedMembers.groups],
+      };
+
+      this.addMembersTitle(
+        t,
+        mergedMembers.administrators,
+        mergedMembers.users,
+        mergedMembers.expected,
+        mergedMembers.groups,
+      );
+
+      this.filesStore.setInRoomFolder(roomId, true);
+      this.setInfoPanelMembers(mergedMembers);
     }
   };
 
@@ -646,14 +747,13 @@ class InfoPanelStore {
   ) => {
     const { getFileInfo } = this.filesStore;
 
-    const expDate = moment(expirationDate);
     const res = await editExternalLink(
       fileId,
       linkId,
       access,
       primary,
       internal,
-      expDate,
+      expirationDate,
     );
     await getFileInfo(fileId);
     return res;

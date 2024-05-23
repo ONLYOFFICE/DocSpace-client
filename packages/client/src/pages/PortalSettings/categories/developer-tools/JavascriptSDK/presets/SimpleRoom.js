@@ -1,70 +1,100 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import debounce from "lodash.debounce";
 import { Box } from "@docspace/shared/components/box";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { Textarea } from "@docspace/shared/components/textarea";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
-import { TabsContainer } from "@docspace/shared/components/tabs-container";
-import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
-import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
+import RoomsSelectorInput from "SRC_DIR/components/RoomsSelectorInput";
 import { inject, observer } from "mobx-react";
 
-import { isTablet, isMobile } from "@docspace/shared/utils/device";
-
 import { HelpButton } from "@docspace/shared/components/help-button";
-
-import GetCodeDialog from "../sub-components/GetCodeDialog";
-import { Button } from "@docspace/shared/components/button";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
 
-const showPreviewThreshold = 720;
+import { TooltipContent } from "../sub-components/TooltipContent";
+import { useNavigate } from "react-router-dom";
+import FilesFilter from "@docspace/shared/api/files/filter";
+
+import { RoomsType } from "@docspace/shared/enums";
+
+import TitleUrl from "PUBLIC_DIR/images/sdk-presets_title.react.svg?url";
+import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
+
+import TitleDarkUrl from "PUBLIC_DIR/images/sdk-presets_title_dark.png?url";
+import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
+
+import { WidthSetter } from "../sub-components/WidthSetter";
+import { HeightSetter } from "../sub-components/HeightSetter";
+import { FrameIdSetter } from "../sub-components/FrameIdSetter";
+import { PresetWrapper } from "../sub-components/PresetWrapper";
+import { SharedLinkHint } from "../sub-components/SharedLinkHint";
+import { PreviewBlock } from "../sub-components/PreviewBlock";
+
+import { loadFrame } from "../utils";
 
 import {
-  SDKContainer,
+  scriptUrl,
+  dataDimensions,
+  defaultWidthDimension,
+  defaultHeightDimension,
+  defaultWidth,
+  defaultHeight,
+} from "../constants";
+
+import {
   Controls,
-  CategoryHeader,
   CategorySubHeader,
-  CategoryDescription,
   ControlsGroup,
   LabelGroup,
   Frame,
   Container,
-  RowContainer,
-  Preview,
-  GetCodeButtonWrapper,
   FilesSelectorInputWrapper,
   ControlsSection,
-  CodeWrapper,
+  CheckboxGroup,
 } from "./StyledPresets";
 
 const SimpleRoom = (props) => {
-  const { t, setDocumentTitle, fetchExternalLinks } = props;
+  const { t, setDocumentTitle, fetchExternalLinks, currentColorScheme, theme } =
+    props;
+  const navigate = useNavigate();
 
   setDocumentTitle(t("JavascriptSdk"));
 
-  const scriptUrl = `${window.location.origin}/static/scripts/api.js`;
-
-  const dataDimensions = [
-    { key: "percent", label: "%", default: true },
-    { key: "pixel", label: "px" },
-  ];
-
-  const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
-  const [heightDimension, setHeightDimension] = useState(dataDimensions[1]);
-  const [width, setWidth] = useState("100");
-  const [height, setHeight] = useState(isTablet() ? "400" : isMobile() ? "206" : "600");
-  const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
-  const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);
   const [sharedLinks, setSharedLinks] = useState(null);
+
+  const [selectedLink, setSelectedLink] = useState(null);
 
   const [config, setConfig] = useState({
     mode: "manager",
-    width: `${width}${widthDimension.label}`,
-    height: `${height}${heightDimension.label}`,
+    width: `${defaultWidth}${defaultWidthDimension.label}`,
+    height: `${defaultHeight}${defaultHeightDimension.label}`,
     frameId: "ds-frame",
     showHeader: false,
     showTitle: true,
@@ -83,76 +113,66 @@ const SimpleRoom = (props) => {
     },
   });
 
-  const params = objectToGetParams(config);
-
   const frameId = config.frameId || "ds-frame";
 
   const destroyFrame = () => {
     window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
   };
 
-  const loadFrame = debounce(() => {
-    const script = document.getElementById("integration");
-
-    if (script) {
-      script.remove();
-    }
-
-    const params = objectToGetParams(config);
-
-    loadScript(`${scriptUrl}${params}`, "integration", () => window.DocSpace.SDK.initFrame(config));
-  }, 500);
+  const loadCurrentFrame = () => loadFrame(config, scriptUrl);
 
   useEffect(() => {
-    loadFrame();
+    loadCurrentFrame();
     return () => destroyFrame();
   });
 
-  const onChangeTab = () => {
-    loadFrame();
-  };
-
-  const onChangeWidth = (e) => {
-    setConfig((config) => {
-      return { ...config, width: `${e.target.value}${widthDimension.label}` };
-    });
-
-    setWidth(e.target.value);
-  };
-
-  const onChangeHeight = (e) => {
-    setConfig((config) => {
-      return { ...config, height: `${e.target.value}${heightDimension.label}` };
-    });
-
-    setHeight(e.target.value);
-  };
-
-  const onChangeFolderId = async (id, publicInPath) => {
-    let newConfig = { id, requestToken: null, rootPath: "/rooms/shared/" };
-
-    if (!!publicInPath) {
-      const links = await fetchExternalLinks(publicInPath.id);
-
-      if (links.length > 1) {
-        const linksOptions = links.map((link) => {
-          const { id, title, requestToken } = link.sharedTo;
-
-          return {
-            key: id,
-            label: title,
-            requestToken: requestToken,
-          };
-        });
-
-        setSharedLinks(linksOptions);
-      }
-
-      newConfig.requestToken = links[0].sharedTo?.requestToken;
-      newConfig.rootPath = "/rooms/share";
-    } else {
-      setSharedLinks(null);
+  useEffect(() => {
+    const scroll = document.getElementsByClassName("section-scroll")[0];
+    if (scroll) {
+      scroll.scrollTop = 0;
     }
+  }, []);
+
+  const onChangeFolderId = async (rooms) => {
+    const publicRoom = rooms[0];
+
+    let newConfig = {
+      id: publicRoom.id,
+      requestToken: null,
+      rootPath: "/rooms/shared/",
+    };
+
+    const links = await fetchExternalLinks(publicRoom.id);
+
+    if (links.length > 1) {
+      const linksOptions = links.map((link) => {
+        const { id, title, requestToken } = link.sharedTo;
+        const linkSettings = [];
+
+        if ("password" in link.sharedTo) {
+          linkSettings.push("password");
+        }
+        if ("expirationDate" in link.sharedTo) {
+          linkSettings.push("expirationDate");
+        }
+        if (link.sharedTo.denyDownload) {
+          linkSettings.push("denyDownload");
+        }
+
+        return {
+          key: id,
+          label: title,
+          requestToken: requestToken,
+          settings: linkSettings,
+        };
+      });
+
+      setSelectedLink(linksOptions[0]);
+      setSharedLinks(linksOptions);
+    }
+
+    newConfig.requestToken = links[0].sharedTo?.requestToken;
+    newConfig.rootPath = "/rooms/share";
 
     setConfig((config) => {
       return { ...config, ...newConfig, init: true };
@@ -160,107 +180,74 @@ const SimpleRoom = (props) => {
   };
 
   const onChangeSharedLink = (link) => {
+    setSelectedLink(link);
     setConfig((config) => {
       return { ...config, requestToken: link.requestToken };
     });
   };
 
-  const onChangeFrameId = (e) => {
+  const onChangeShowTitle = () => {
     setConfig((config) => {
-      return { ...config, frameId: e.target.value };
+      return { ...config, showTitle: !config.showTitle };
     });
   };
 
-  const onChangeWidthDimension = (item) => {
+  const onChangeShowFilter = (e) => {
     setConfig((config) => {
-      return { ...config, width: `${width}${item.label}` };
+      return { ...config, showFilter: !config.showFilter };
     });
-
-    setWidthDimension(item);
   };
 
-  const onChangeHeightDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, height: `${height}${item.label}` };
-    });
-
-    setHeightDimension(item);
+  const navigateRoom = (id) => {
+    const filter = FilesFilter.getDefault();
+    filter.folder = id;
+    navigate(`/rooms/shared/${id}/filter?${filter.toUrlParams()}`);
   };
 
-  const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
-
-  const closeGetCodeModal = () => setIsGetCodeDialogOpened(false);
-
-  const onResize = () => {
-    const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
-    if (isEnoughWidthForPreview !== showPreview) setShowPreview(isEnoughWidthForPreview);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", onResize);
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, [showPreview]);
-
-  const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
+  const redirectToSelectedRoom = () => navigateRoom(config.id);
 
   const preview = (
     <Frame
-      width={width + widthDimension.label}
-      height={height + heightDimension.label}
+      width={
+        config.id !== undefined && config.width.includes("px")
+          ? config.width
+          : undefined
+      }
+      height={
+        config.id !== undefined && config.height.includes("px")
+          ? config.height
+          : undefined
+      }
       targetId={frameId}
     >
       {config.id !== undefined ? (
-        <>
-          <Box id={frameId}></Box>
-        </>
+        <Box id={frameId}></Box>
       ) : (
         <EmptyIframeContainer
-          text={t("SelectRoom")}
-          width={width + widthDimension.label}
-          height={height + heightDimension.label}
+          text={t("RoomPreview")}
+          width="100%"
+          height="100%"
         />
       )}
     </Frame>
   );
 
-  const code = (
-    <CodeWrapper>
-      <CategorySubHeader className="copy-window-code">{t("CopyWindowCode")}</CategorySubHeader>
-      <Textarea value={codeBlock} heightTextArea={153} />
-    </CodeWrapper>
-  );
-
-  const dataTabs = [
-    {
-      key: "preview",
-      title: t("Common:Preview"),
-      content: preview,
-    },
-    {
-      key: "code",
-      title: t("Code"),
-      content: code,
-    },
-  ];
-
   return (
-    <SDKContainer>
-      <CategoryDescription>
-        <Text className="sdk-description">{t("SimpleRoomPresetDescription")}</Text>
-      </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
+    <PresetWrapper
+      description={t("PublicRoomDescription")}
+      header={t("CreateSamplePublicRoom")}
+    >
       <Container>
-        {showPreview && (
-          <Preview>
-            <TabsContainer
-              isDisabled={config?.id === undefined}
-              onSelect={onChangeTab}
-              elements={dataTabs}
-            />
-          </Preview>
-        )}
+        <PreviewBlock
+          t={t}
+          loadCurrentFrame={loadCurrentFrame}
+          preview={preview}
+          theme={theme}
+          frameId={frameId}
+          scriptUrl={scriptUrl}
+          config={config}
+          isDisabled={config?.id === undefined}
+        />
         <Controls>
           <ControlsSection>
             <CategorySubHeader>{t("DataDisplay")}</CategorySubHeader>
@@ -270,129 +257,144 @@ const SimpleRoom = (props) => {
                 <HelpButton
                   offsetRight={0}
                   size={12}
-                  tooltipContent={<Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>}
+                  tooltipContent={
+                    <Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>
+                  }
                 />
               </LabelGroup>
               <FilesSelectorInputWrapper>
-                <FilesSelectorInput onSelectFolder={onChangeFolderId} isSelect isRoomsOnly />
+                <RoomsSelectorInput
+                  roomType={RoomsType.PublicRoom}
+                  withSearch
+                  withCancelButton
+                  onSubmit={onChangeFolderId}
+                  withHeader
+                  headerProps={{ headerLabel: t("Common:SelectAction") }}
+                />
               </FilesSelectorInputWrapper>
             </ControlsGroup>
             {sharedLinks && (
               <ControlsGroup>
                 <LabelGroup>
-                  <Label className="label" text={t("SharingPanel:ExternalLink")} />
+                  <Label
+                    className="label"
+                    text={t("SharingPanel:ExternalLink")}
+                  />
                   <HelpButton
                     offsetRight={0}
                     size={12}
                     tooltipContent={
-                      <Text fontSize="12px">{t("CreateEditRoomDialog:PublicRoomDescription")}</Text>
+                      <Text fontSize="12px">
+                        {t("CreateEditRoomDialog:PublicRoomDescription")}
+                      </Text>
                     }
                   />
                 </LabelGroup>
                 <ComboBox
-                  scaled={true}
+                  scaled
                   onSelect={onChangeSharedLink}
                   options={sharedLinks}
-                  selectedOption={sharedLinks[0]}
+                  selectedOption={selectedLink}
                   displaySelectedOption
                   directionY="bottom"
                 />
+                {selectedLink && (
+                  <SharedLinkHint
+                    t={t}
+                    linkSettings={selectedLink.settings}
+                    redirectToSelectedRoom={redirectToSelectedRoom}
+                    currentColorScheme={currentColorScheme}
+                  />
+                )}
               </ControlsGroup>
             )}
           </ControlsSection>
 
           <ControlsSection>
             <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
-            <ControlsGroup>
-              <Label className="label" text={t("EmbeddingPanel:Width")} />
-              <RowContainer combo>
-                <TextInput
-                  onChange={onChangeWidth}
-                  placeholder={t("EnterWidth")}
-                  value={width}
-                  tabIndex={2}
+            <WidthSetter
+              t={t}
+              setConfig={setConfig}
+              dataDimensions={dataDimensions}
+              defaultDimension={defaultWidthDimension}
+              defaultWidth={defaultWidth}
+            />
+            <HeightSetter
+              t={t}
+              setConfig={setConfig}
+              dataDimensions={dataDimensions}
+              defaultDimension={defaultHeightDimension}
+              defaultHeight={defaultHeight}
+            />
+            <FrameIdSetter
+              t={t}
+              defaultFrameId={config.frameId}
+              setConfig={setConfig}
+            />
+          </ControlsSection>
+
+          <ControlsSection>
+            <CategorySubHeader>{t("InterfaceElements")}</CategorySubHeader>
+
+            <CheckboxGroup>
+              <LabelGroup>
+                <Checkbox
+                  className="checkbox"
+                  label={t("Common:Title")}
+                  onChange={onChangeShowTitle}
+                  isChecked={config.showTitle}
                 />
-                <ComboBox
-                  size="content"
-                  scaled={false}
-                  scaledOptions={true}
-                  onSelect={onChangeWidthDimension}
-                  options={dataDimensions}
-                  selectedOption={widthDimension}
-                  displaySelectedOption
-                  directionY="bottom"
+                <HelpButton
+                  place="right"
+                  offsetRight={4}
+                  size={12}
+                  tooltipContent={
+                    <TooltipContent
+                      title={t("Common:Title")}
+                      description={t("ManagerTitleDescription")}
+                      img={theme.isBase ? TitleUrl : TitleDarkUrl}
+                    />
+                  }
                 />
-              </RowContainer>
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("EmbeddingPanel:Height")} />
-              <RowContainer combo>
-                <TextInput
-                  onChange={onChangeHeight}
-                  placeholder={t("EnterHeight")}
-                  value={height}
-                  tabIndex={3}
+              </LabelGroup>
+              <LabelGroup>
+                <Checkbox
+                  className="checkbox"
+                  label={t("SearchFilterAndSort")}
+                  onChange={onChangeShowFilter}
+                  isChecked={config.showFilter}
                 />
-                <ComboBox
-                  size="content"
-                  scaled={false}
-                  scaledOptions={true}
-                  onSelect={onChangeHeightDimension}
-                  options={dataDimensions}
-                  selectedOption={heightDimension}
-                  displaySelectedOption
-                  directionY="bottom"
+                <HelpButton
+                  place="right"
+                  offsetRight={4}
+                  size={12}
+                  tooltipContent={
+                    <TooltipContent
+                      title={t("SearchBlock")}
+                      description={t("ManagerSearchBlockDescription")}
+                      img={theme.isBase ? SearchUrl : SearchDarkUrl}
+                    />
+                  }
                 />
-              </RowContainer>
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("FrameId")} />
-              <TextInput
-                scale={true}
-                onChange={onChangeFrameId}
-                placeholder={t("EnterId")}
-                value={config.frameId}
-                tabIndex={4}
-              />
-            </ControlsGroup>
+              </LabelGroup>
+            </CheckboxGroup>
           </ControlsSection>
         </Controls>
       </Container>
-
-      {!showPreview && (
-        <>
-          <GetCodeButtonWrapper>
-            <Button
-              id="get-sdk-code-button"
-              primary
-              size="normal"
-              scale
-              label={t("GetCode")}
-              onClick={openGetCodeModal}
-            />
-          </GetCodeButtonWrapper>
-
-          <GetCodeDialog
-            t={t}
-            visible={isGetCodeDialogOpened}
-            codeBlock={codeBlock}
-            onClose={closeGetCodeModal}
-          />
-        </>
-      )}
-    </SDKContainer>
+    </PresetWrapper>
   );
 };
 
 export default inject(({ authStore, settingsStore, publicRoomStore }) => {
   const { setDocumentTitle } = authStore;
-  const { theme } = settingsStore;
+  const { theme, currentColorScheme } = settingsStore;
   const { fetchExternalLinks } = publicRoomStore;
 
   return {
     theme,
     setDocumentTitle,
     fetchExternalLinks,
+    currentColorScheme,
   };
 })(
   withTranslation([

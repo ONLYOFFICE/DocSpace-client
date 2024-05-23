@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import styled, { css } from "styled-components";
 
 import { Base } from "@docspace/shared/themes";
@@ -107,7 +133,7 @@ const StyledTitle = styled.div`
 
   .text {
     font-weight: 600;
-    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+    font-size: 16px;
     line-height: 22px;
     max-height: 44px;
     margin: 0 8px;
@@ -119,7 +145,7 @@ const StyledTitle = styled.div`
   }
 
   .free-label {
-    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    font-size: 14px;
     font-weight: 600;
     line-height: 16px;
 
@@ -185,17 +211,24 @@ const StyledSearchContainer = styled.div`
   box-sizing: border-box;
   position: absolute;
   top: 0;
-  left: 0;
+  inset-inline: 0 -20px;
   display: flex;
   align-items: center;
   gap: 8px;
   height: 68px;
-  width: 100%;
   padding: 0 16px;
   border-radius: 0 0 6px 6px;
   background-color: ${(props) => props.theme.infoPanel.backgroundColor};
   z-index: 101;
-  box-shadow: 0px 5px 20px 0px rgba(4, 15, 27, 0.07);
+  box-shadow: ${({ theme }) => theme.infoPanel.search.boxShadow};
+
+  @media ${tablet} {
+    inset-inline: 0;
+  }
+
+  @media ${mobile} {
+    inset-inline: 0 -14px;
+  }
 `;
 
 const StyledLink = styled.div`
@@ -207,7 +240,7 @@ const StyledLink = styled.div`
 
   a,
   .link {
-    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-size: 13px;
     font-weight: 600;
     line-height: 15px;
   }
@@ -234,15 +267,18 @@ const StyledProperties = styled.div`
     grid-template-columns: 120px 1fr;
     grid-column-gap: 24px;
 
+    -webkit-box-align: center;
+    align-items: center;
+
     .property-title {
-      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+      font-size: 13px;
     }
 
     .property-content {
       max-width: 100%;
       margin: auto 0;
       font-weight: 600;
-      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+      font-size: 13px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -317,6 +353,10 @@ const StyledProperties = styled.div`
         -webkit-box-orient: vertical;
       }
     }
+  }
+
+  .info_details_comments {
+    align-items: start;
   }
 `;
 

@@ -1,8 +1,34 @@
-import React from "react";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import React, { useEffect, useRef, useState } from "react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { RoomsType } from "@docspace/shared/constants";
+import { DOCSPACE } from "@docspace/shared/constants";
 import { inject, observer } from "mobx-react";
 
 import { mobile, tablet } from "@docspace/shared/utils/device";
@@ -15,18 +41,21 @@ import { Text } from "@docspace/shared/components/text";
 import CSP from "./sub-components/csp";
 import PresetTile from "./sub-components/PresetTile";
 
-import SimpleRoomImg from "PUBLIC_DIR/images/sdk-presets_simple-room.react.svg?url";
-import ManagerImg from "PUBLIC_DIR/images/sdk-presets_manager.react.svg?url";
+import DocspaceImg from "PUBLIC_DIR/images/sdk-presets_docspace.react.svg?url";
+import PublicRoomImg from "PUBLIC_DIR/images/sdk-presets_public-room.react.svg?url";
 import RoomSelectorImg from "PUBLIC_DIR/images/sdk-presets_room-selector.react.svg?url";
 import FileSelectorImg from "PUBLIC_DIR/images/sdk-presets_file-selector.react.svg?url";
 import EditorImg from "PUBLIC_DIR/images/sdk-presets_editor.react.svg?url";
 import ViewerImg from "PUBLIC_DIR/images/sdk-presets_viewer.react.svg?url";
-import SimpleRoomImgDark from "PUBLIC_DIR/images/sdk-presets_simple-room_dark.react.svg?url";
-import ManagerImgDark from "PUBLIC_DIR/images/sdk-presets_manager_dark.react.svg?url";
+import CustomImg from "PUBLIC_DIR/images/sdk-presets_custom.react.svg?url";
+
+import DocspaceImgDark from "PUBLIC_DIR/images/sdk-presets_docspace_dark.react.svg?url";
+import PublicRoomImgDark from "PUBLIC_DIR/images/sdk-presets_public-room_dark.react.svg?url";
 import RoomSelectorImgDark from "PUBLIC_DIR/images/sdk-presets_room-selector_dark.react.svg?url";
 import FileSelectorImgDark from "PUBLIC_DIR/images/sdk-presets_file-selector_dark.react.svg?url";
 import EditorImgDark from "PUBLIC_DIR/images/sdk-presets_editor_dark.react.svg?url";
 import ViewerImgDark from "PUBLIC_DIR/images/sdk-presets_viewer_dark.react.svg?url";
+import CustomImgDark from "PUBLIC_DIR/images/sdk-presets_custom_dark.react.svg?url";
 
 const SDKContainer = styled(Box)`
   @media ${tablet} {
@@ -37,12 +66,17 @@ const SDKContainer = styled(Box)`
   css`
     width: 100%;
   `}
+
+  .presets-flex {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const CategoryHeader = styled.div`
   margin-top: 40px;
   margin-bottom: 16px;
-  font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+  font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: 22px;
@@ -85,12 +119,23 @@ const PresetsContainer = styled.div`
 const PortalIntegration = (props) => {
   const { t, setDocumentTitle, currentColorScheme, sdkLink, theme } = props;
 
+  const isSmall = useRef(
+    (() => {
+      const content = document.querySelector(".section-wrapper-content");
+      const rect = content.getBoundingClientRect();
+      return rect.width <= 600;
+    })(),
+  );
+
+  const [isFlex, setIsFlex] = useState(isSmall.current);
+
   setDocumentTitle(t("JavascriptSdk"));
 
   const navigate = useNavigate();
 
-  const navigateToSimpleRoom = () => navigate("room");
-  const navigateToManager = () => navigate("manager");
+  const navigateToDocspace = () => navigate("docspace");
+  const navigateToPublicRoom = () => navigate("public-room");
+  const navigateToCustom = () => navigate("custom");
   const navigateToRoomSelector = () => navigate("room-selector");
   const navigateToFileSelector = () => navigate("file-selector");
   const navigateToEditor = () => navigate("editor");
@@ -98,19 +143,19 @@ const PortalIntegration = (props) => {
 
   const presetsData = [
     {
-      title: t("Common:Room"),
-      description: t("SimpleRoomDescription"),
-      image: theme.isBase ? SimpleRoomImg : SimpleRoomImgDark,
-      handleOnClick: navigateToSimpleRoom,
+      title: DOCSPACE,
+      description: t("DocspaceDescription"),
+      image: theme.isBase ? DocspaceImg : DocspaceImgDark,
+      handleOnClick: navigateToDocspace,
     },
     {
-      title: t("Manager"),
-      description: t("ManagerDescription"),
-      image: theme.isBase ? ManagerImg : ManagerImgDark,
-      handleOnClick: navigateToManager,
+      title: t("Files:PublicRoom"),
+      description: t("PublicRoomDescription"),
+      image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,
+      handleOnClick: navigateToPublicRoom,
     },
     {
-      title: t("Editor"),
+      title: t("Common:Editor"),
       description: t("EditorDescription"),
       image: theme.isBase ? EditorImg : EditorImgDark,
       handleOnClick: navigateToEditor,
@@ -133,7 +178,30 @@ const PortalIntegration = (props) => {
       image: theme.isBase ? FileSelectorImg : FileSelectorImgDark,
       handleOnClick: navigateToFileSelector,
     },
+    {
+      title: t("Common:Custom"),
+      description: t("CustomDescription"),
+      image: theme.isBase ? CustomImg : CustomImgDark,
+      handleOnClick: navigateToCustom,
+    },
   ];
+
+  const onResize = (entries) => {
+    const belowThreshold = entries[0].contentRect.width <= 600;
+    if (belowThreshold !== isSmall.current) {
+      isSmall.current = belowThreshold;
+      setIsFlex(belowThreshold);
+    }
+  };
+
+  useEffect(() => {
+    const observer = new ResizeObserver(onResize);
+    const content = document.querySelector(".section-wrapper-content");
+    observer.observe(content);
+    return () => {
+      observer.unobserve(content);
+    };
+  }, []);
 
   return (
     <SDKContainer>
@@ -145,15 +213,18 @@ const PortalIntegration = (props) => {
           fontWeight="400"
           onClick={() => window.open(sdkLink, "_blank")}
         >
+          {" "}
           {t("APILink")}.
         </Link>
         <CSP t={t} />
       </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
-      <Text lineHeight="20px" color={theme.sdkPresets?.secondaryColor}>
+      {/* <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
+      <Text lineHeight="20px" color={theme.sdkPresets?.secondaryColor}> */}
+      <CategoryHeader>{t("SelectModeEmbedding")}</CategoryHeader>
+      <Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
         {t("InitializeSDK")}
       </Text>
-      <PresetsContainer>
+      <PresetsContainer className={`${isFlex ? "presets-flex" : ""}`}>
         {presetsData.map((data) => (
           <PresetTile
             t={t}

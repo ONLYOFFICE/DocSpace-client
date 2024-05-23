@@ -1,8 +1,39 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+"use client";
+
 import styled from "styled-components";
 import { tablet, mobile } from "../../../utils";
 import { Base } from "../../../themes";
 
-const LoginContainer = styled.div`
+const LoginContainer = styled.div<{
+  type: string;
+  isRegisterContainerVisible: boolean;
+}>`
   user-select: none;
   display: flex;
   flex-direction: column;
@@ -10,6 +41,9 @@ const LoginContainer = styled.div`
   //margin: 56px auto 0 auto;
   max-width: 960px;
   z-index: 0;
+
+  margin-bottom: ${(props) =>
+    props.isRegisterContainerVisible ? "100px" : "16px"};
 
   .remember-wrapper {
     max-width: 170px;
@@ -28,7 +62,8 @@ const LoginContainer = styled.div`
   }
 
   @media ${mobile} {
-    margin: 0 auto 0 auto;
+    margin-left: auto;
+    margin-right: auto;
     max-width: 100%;
     width: calc(100% - 32px);
   }
@@ -49,6 +84,7 @@ const LoginContainer = styled.div`
 
   .recover-link {
     min-height: 19px;
+    margin-top: 20px;
   }
 
   .greeting-title {
@@ -69,7 +105,7 @@ const LoginContainer = styled.div`
 
   .or-label {
     color: ${(props) => props.theme.login.orTextColor};
-    margin: 0 32px;
+    margin: 0 8px;
   }
 
   .line {
@@ -109,7 +145,7 @@ const LoginContainer = styled.div`
     padding: 14px 12px;
     text-align: center;
     font-weight: 600;
-    font-size: ${(props) => props.theme.getCorrectFontSize("11px")};
+    font-size: 11px;
     line-height: 12px;
     color: #333;
     svg {
@@ -127,18 +163,14 @@ const LoginContainer = styled.div`
   }
 
   .auth-form-container {
-    width: 320px;
-
-    @media ${tablet} {
-      width: 100%;
-    }
+    width: 100%;
 
     .field-body {
       input,
       .password-input > div {
         background: ${(props) => props.theme.input.backgroundColor};
         color: ${(props) => props.theme.input.color};
-        border-color: ${(props) => props.theme.input.borderColor};
+        //border-color: ${(props) => props.theme.input.borderColor};
       }
     }
 
@@ -221,7 +253,7 @@ const LoginContainer = styled.div`
       margin: 0 8px;
     }
 
-    .login-or-access {
+    /* .login-or-access {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -230,7 +262,7 @@ const LoginContainer = styled.div`
       & > :first-child {
         margin-top: 24px;
       }
-    }
+    } */
   }
 
   .logo-wrapper {
@@ -238,8 +270,9 @@ const LoginContainer = styled.div`
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 46px;
-    padding-bottom: 40px;
+    height: ${(props) => (props.type === "invitation" ? "26.56px" : "44px")};
+    padding-bottom: ${(props) =>
+      props.type === "invitation" ? "16px" : "40px"};
 
     svg {
       path:last-child {

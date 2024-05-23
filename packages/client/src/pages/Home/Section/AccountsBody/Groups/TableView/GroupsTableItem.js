@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -17,65 +43,55 @@ import { Avatar } from "@docspace/shared/components/avatar";
 const GroupsTableItem = ({
   t,
   item,
+  itemIndex,
   theme,
   hideColumns,
   selection,
-  setSelection,
   bufferSelection,
-  setBufferSelection,
-  setCurrentGroup,
   getGroupContextOptions,
-  setInsideGroupBackUrl,
-}) => {
-  const navigate = useNavigate();
+  openGroupAction,
+  managerAccountsGroupsColumnIsEnabled,
 
+  changeGroupSelection,
+  changeGroupContextSelection,
+  selectRow,
+}) => {
   const isChecked = selection.includes(item);
   const isActive = bufferSelection?.id === item.id;
 
-  const onChange = (e) => {
-    if (!isChecked) setSelection([...selection, item]);
-    else setSelection(selection.filter((g) => g.id !== item.id));
+  const onChange = () => {
+    changeGroupSelection(item, isChecked);
   };
 
-  const onRowContextClick = () => {
-    setBufferSelection(item);
+  const onRowContextClick = (rightMouseButtonClick) => {
+    changeGroupContextSelection(item, !rightMouseButtonClick);
   };
 
   const onOpenGroup = () => {
-    setSelection([]);
-    setBufferSelection(null);
-    setCurrentGroup(null);
-    setInsideGroupBackUrl(
-      `${window.location.pathname}${window.location.search}`,
-    );
-
-    navigate(`/accounts/groups/${item.id}/filter`);
+    openGroupAction(item.id, true, item.name);
   };
 
   const onRowClick = (e) => {
     if (
+      e.target?.tagName === "SPAN" ||
+      e.target?.tagName === "A" ||
       e.target.closest(".checkbox") ||
       e.target.closest(".table-container_row-checkbox") ||
       e.detail === 0
     )
       return;
 
-    setBufferSelection(item);
-
-    if (selection.length === 1 && selection[0].id === item.id) {
-      setSelection([]);
-      return;
-    }
-
-    setSelection([item]);
+    selectRow(item);
   };
+
+  let value = `folder_${item.id}_false_index_${itemIndex}`;
 
   return (
     <Styled.GroupsRowWrapper
       className={`group-item ${
         (isChecked || isActive) && "table-row-selected"
       }`}
-      value={item.id}
+      value={value}
     >
       <Styled.GroupsRow
         key={item.id}
@@ -117,23 +133,29 @@ const GroupsTableItem = ({
             fontSize="12px"
             isTextOverflow
             className="table-cell_group-manager"
+            dir="auto"
           >
             {item.name}
           </Link>
         </TableCell>
 
-        <TableCell className={"table-container_group-manager"}>
-          <Text
-            title={item.manager.displayName}
-            fontWeight="600"
-            fontSize="13px"
-            isTextOverflow
-            className="table-cell_group-manager"
-            color={"#A3A9AE"}
-          >
-            {item.manager.displayName}
-          </Text>
-        </TableCell>
+        {managerAccountsGroupsColumnIsEnabled ? (
+          <TableCell className={"table-container_group-manager"}>
+            <Text
+              title={item.manager?.displayName}
+              fontWeight="600"
+              fontSize="13px"
+              isTextOverflow
+              className="table-cell_group-manager"
+              color={"#A3A9AE"}
+              dir="auto"
+            >
+              {item.manager?.displayName}
+            </Text>
+          </TableCell>
+        ) : (
+          <div />
+        )}
       </Styled.GroupsRow>
     </Styled.GroupsRowWrapper>
   );
@@ -141,12 +163,13 @@ const GroupsTableItem = ({
 
 export default inject(({ peopleStore }) => ({
   selection: peopleStore.groupsStore.selection,
-  setSelection: peopleStore.groupsStore.setSelection,
   bufferSelection: peopleStore.groupsStore.bufferSelection,
-  setBufferSelection: peopleStore.groupsStore.setBufferSelection,
-  setCurrentGroup: peopleStore.groupsStore.setCurrentGroup,
   getGroupContextOptions: peopleStore.groupsStore.getGroupContextOptions,
-  setInsideGroupBackUrl: peopleStore.groupsStore.setInsideGroupBackUrl,
+  openGroupAction: peopleStore.groupsStore.openGroupAction,
+  changeGroupSelection: peopleStore.groupsStore.changeGroupSelection,
+  changeGroupContextSelection:
+    peopleStore.groupsStore.changeGroupContextSelection,
+  selectRow: peopleStore.groupsStore.selectRow,
 }))(
   withTranslation(
     "People",

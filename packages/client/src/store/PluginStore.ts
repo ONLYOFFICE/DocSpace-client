@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 /* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
 import { cloneDeep } from "lodash";
@@ -89,6 +115,8 @@ class PluginStore {
 
   isEmptyList = false;
 
+  needPageReload = false;
+
   constructor(
     settingsStore: SettingsStore,
     selectedFolderStore: SelectedFolderStore,
@@ -100,6 +128,10 @@ class PluginStore {
 
     makeAutoObservable(this);
   }
+
+  setNeedPageReload = (value: boolean) => {
+    this.needPageReload = value;
+  };
 
   setIsLoading = (value: boolean) => {
     this.isLoading = value;
@@ -207,7 +239,7 @@ class PluginStore {
     this.setIsInit(true);
   };
 
-  updatePlugins = async () => {
+  updatePlugins = async (fromList?: boolean) => {
     if (!this.userStore || !this.userStore.user) return;
 
     const { isAdmin, isOwner } = this.userStore.user;
@@ -222,7 +254,7 @@ class PluginStore {
       );
 
       this.setIsEmptyList(plugins.length === 0);
-      plugins.forEach((plugin) => this.initPlugin(plugin));
+      plugins.forEach((plugin) => this.initPlugin(plugin, undefined, fromList));
 
       setTimeout(() => {
         this.setIsLoading(false);
@@ -235,6 +267,8 @@ class PluginStore {
   addPlugin = async (data: FormData) => {
     try {
       const plugin = await api.plugins.addPlugin(data);
+
+      this.setNeedPageReload(true);
 
       this.initPlugin(plugin);
     } catch (e) {
@@ -264,7 +298,12 @@ class PluginStore {
     }
   };
 
-  initPlugin = (plugin: TAPIPlugin, callback?: (plugin: TPlugin) => void) => {
+  initPlugin = (
+    plugin: TAPIPlugin,
+    callback?: (plugin: TPlugin) => void,
+    fromList?: boolean,
+  ) => {
+    if (!plugin.enabled && !fromList) return;
     const onLoad = async () => {
       const iWindow = this.pluginFrame?.contentWindow as IframeWindow;
 
@@ -275,7 +314,7 @@ class PluginStore {
 
       newPlugin.scopes =
         typeof newPlugin.scopes === "string"
-          ? newPlugin.scopes.split(",")
+          ? (newPlugin.scopes.split(",") as PluginScopes[])
           : newPlugin.scopes;
 
       newPlugin.iconUrl = getPluginUrl(newPlugin.url, "");
@@ -377,6 +416,8 @@ class PluginStore {
       if (typeof status !== "boolean")
         currentStatus = oldPlugin?.enabled || false;
 
+      currentSettings = currentStatus ? settings : "";
+
       const plugin = await api.plugins.updatePlugin(
         name,
         currentStatus,
@@ -404,6 +445,8 @@ class PluginStore {
 
     plugin.enabled = true;
 
+    this.setNeedPageReload(true);
+
     this.installPlugin(plugin, false);
   };
 
@@ -413,6 +456,7 @@ class PluginStore {
     if (!plugin) return;
 
     plugin.enabled = false;
+    plugin.settings = "";
 
     if (plugin.scopes.includes(PluginScopes.ContextMenu)) {
       this.deactivateContextMenuItems(plugin);
@@ -788,6 +832,7 @@ class PluginStore {
 
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
+    const storeId = this.selectedFolderStore.id;
 
     Array.from(items).forEach(([key, value]) => {
       const correctUserType = value.usersType
@@ -801,7 +846,7 @@ class PluginStore {
       if (!correctUserType || !correctDevice) return;
 
       const newItems: IMainButtonItem[] = [];
-      const storeId = this.selectedFolderStore.id;
+
       if (value.items && storeId) {
         value.items.forEach((i) => {
           const onClick = async () => {
@@ -839,9 +884,10 @@ class PluginStore {
 
       const onClick = async () => {
         if (!value.onClick) return;
-        if (!storeId) return;
+        const currStoreId = this.selectedFolderStore.id;
+        if (!currStoreId) return;
 
-        const message = await value.onClick(storeId);
+        const message = await value.onClick(currStoreId);
 
         messageActions(
           message,

@@ -1,6 +1,5 @@
 {
   "Desc": "DocSpace登録データの設定をお願いします。",
-  "Domain": "ドメイン:",
   "ErrorEmail": "無効なEメールアドレス",
   "ErrorInitWizard": "サービスは現在利用できません、後でもう一度お試しください。",
   "ErrorInitWizardButton": "もう一度お試しください。",

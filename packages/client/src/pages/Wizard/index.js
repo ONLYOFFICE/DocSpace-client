@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
@@ -16,10 +42,11 @@ import { Button } from "@docspace/shared/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 import { FileInput } from "@docspace/shared/components/file-input";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import { Loader } from "@docspace/shared/components/loader";
 
-import withCultureNames from "@docspace/common/hoc/withCultureNames";
+import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 
 import {
   createPasswordHash,
@@ -41,8 +68,7 @@ import {
   StyledContent,
 } from "./StyledWizard";
 import { getUserTimezone, getSelectZone } from "./timezonesHelper";
-
-import DocspaceLogo from "../../components/DocspaceLogoWrapper";
+import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import {
   DEFAULT_SELECT_TIMEZONE,
@@ -289,207 +315,209 @@ const Wizard = (props) => {
   return (
     <Wrapper>
       <div className="bg-cover"></div>
-      <StyledContent>
-        <WizardContainer>
-          <DocspaceLogo className="docspace-logo" />
-          <Text
-            as="div"
-            fontWeight={700}
-            fontSize="23px"
-            className="welcome-text"
-          >
-            {t("WelcomeTitle")}
-          </Text>
-          <FormWrapper>
-            <Text fontWeight={600} fontSize="16px" className="form-header">
-              {t("Desc")}
+      <Scrollbar id="customScrollBar">
+        <StyledContent>
+          <WizardContainer>
+            <DocspaceLogo className="docspace-logo" />
+            <Text
+              as="div"
+              fontWeight={700}
+              fontSize="23px"
+              className="welcome-text"
+            >
+              {t("WelcomeTitle")}
             </Text>
-            <FieldContainer
-              className="wizard-field"
-              isVertical={true}
-              labelVisible={false}
-              hasError={hasErrorEmail}
-              errorMessage={t("ErrorEmail")}
-            >
-              <EmailInput
-                name="wizard-email"
-                tabIndex={1}
-                size="large"
-                scale={true}
-                placeholder={t("Common:Email")}
-                emailSettings={emailSettings}
-                hasError={hasErrorEmail}
-                onValidateInput={onEmailChangeHandler}
-                isDisabled={isCreated}
-              />
-            </FieldContainer>
-
-            <FieldContainer
-              className="wizard-field password-field"
-              isVertical={true}
-              labelVisible={false}
-              hasError={hasErrorPass}
-              errorMessage={t("ErrorPassword")}
-            >
-              <PasswordInput
-                ref={refPassInput}
-                tabIndex={2}
-                size="large"
-                scale={true}
-                inputValue={password}
-                passwordSettings={passwordSettings}
-                isDisabled={isCreated}
-                placeholder={t("Common:Password")}
-                hideNewPasswordButton={true}
-                isDisableTooltip={true}
-                isTextTooltipVisible={false}
-                hasError={hasErrorPass}
-                onChange={onChangePassword}
-                autoComplete="current-password"
-                onValidateInput={isValidPassHandler}
-              />
-            </FieldContainer>
-            <StyledLink>
-              <IconButton
-                size="12"
-                iconName={RefreshReactSvgUrl}
-                onClick={generatePassword}
-              />
-              <Link
-                className="generate-password-link"
-                type="action"
-                fontWeight={600}
-                isHovered={true}
-                onClick={generatePassword}
-              >
-                {t("GeneratePassword")}
-              </Link>
-            </StyledLink>
-
-            {isLicenseRequired && (
+            <FormWrapper>
+              <Text fontWeight={600} fontSize="16px" className="form-header">
+                {t("Desc")}
+              </Text>
               <FieldContainer
-                className="license-filed"
+                className="wizard-field"
                 isVertical={true}
                 labelVisible={false}
-                hasError={hasErrorLicense}
-                errorMessage={
-                  invalidLicense
-                    ? t("ErrorLicenseBody")
-                    : t("ErrorUploadLicenseFile")
-                }
+                hasError={hasErrorEmail}
+                errorMessage={t("ErrorEmail")}
               >
-                <FileInput
-                  scale
+                <EmailInput
+                  name="wizard-email"
+                  tabIndex={1}
                   size="large"
-                  accept={[".lic"]}
-                  placeholder={t("PlaceholderLicense")}
-                  onInput={onLicenseFileHandler}
-                  hasError={hasErrorLicense}
+                  scale={true}
+                  placeholder={t("Common:Email")}
+                  emailSettings={emailSettings}
+                  hasError={hasErrorEmail}
+                  onValidateInput={onEmailChangeHandler}
+                  isDisabled={isCreated}
                 />
               </FieldContainer>
-            )}
-            <StyledInfo>
-              <Text color="#A3A9AE" fontWeight={400}>
-                {t("Domain")}
-              </Text>
-              <Text fontWeight={600} className="machine-name">
-                {machineName}
-              </Text>
-            </StyledInfo>
-            <StyledInfo>
-              <Text color="#A3A9AE" fontWeight={400}>
-                {t("Common:Language")}
-              </Text>
-              <div className="wrapper__language-selector">
+
+              <FieldContainer
+                className="wizard-field password-field"
+                isVertical={true}
+                labelVisible={false}
+                hasError={hasErrorPass}
+                errorMessage={t("ErrorPassword")}
+              >
+                <PasswordInput
+                  ref={refPassInput}
+                  tabIndex={2}
+                  size="large"
+                  scale={true}
+                  inputValue={password}
+                  passwordSettings={passwordSettings}
+                  isDisabled={isCreated}
+                  placeholder={t("Common:Password")}
+                  hideNewPasswordButton={true}
+                  isDisableTooltip={true}
+                  isTextTooltipVisible={false}
+                  hasError={hasErrorPass}
+                  onChange={onChangePassword}
+                  autoComplete="current-password"
+                  onValidateInput={isValidPassHandler}
+                />
+              </FieldContainer>
+              <StyledLink>
+                <IconButton
+                  size="12"
+                  iconName={RefreshReactSvgUrl}
+                  onClick={generatePassword}
+                />
+                <Link
+                  className="generate-password-link"
+                  type="action"
+                  fontWeight={600}
+                  isHovered={true}
+                  onClick={generatePassword}
+                >
+                  {t("GeneratePassword")}
+                </Link>
+              </StyledLink>
+
+              {isLicenseRequired && (
+                <FieldContainer
+                  className="license-filed"
+                  isVertical={true}
+                  labelVisible={false}
+                  hasError={hasErrorLicense}
+                  errorMessage={
+                    invalidLicense
+                      ? t("ErrorLicenseBody")
+                      : t("ErrorUploadLicenseFile")
+                  }
+                >
+                  <FileInput
+                    scale
+                    size="large"
+                    accept={[".lic"]}
+                    placeholder={t("PlaceholderLicense")}
+                    onInput={onLicenseFileHandler}
+                    hasError={hasErrorLicense}
+                  />
+                </FieldContainer>
+              )}
+              <StyledInfo>
+                <Text color="#A3A9AE" fontWeight={400}>
+                  {t("Common:Domain")}
+                </Text>
+                <Text fontWeight={600} className="machine-name">
+                  {machineName}
+                </Text>
+              </StyledInfo>
+              <StyledInfo>
+                <Text color="#A3A9AE" fontWeight={400}>
+                  {t("Common:Language")}
+                </Text>
+                <div className="wrapper__language-selector">
+                  <ComboBox
+                    withoutPadding
+                    directionY="both"
+                    options={cultureNames || []}
+                    selectedOption={selectedLanguage || {}}
+                    onSelect={onLanguageSelect}
+                    isDisabled={isCreated}
+                    scaled={isMobile()}
+                    scaledOptions={false}
+                    size="content"
+                    showDisabledItems={true}
+                    dropDownMaxHeight={364}
+                    manualWidth="250px"
+                    isDefaultMode={!isMobile()}
+                    withBlur={isMobile()}
+                    fillIcon={false}
+                    modernView={true}
+                  />
+                  {selectedLanguage?.isBeta && (
+                    <BetaBadge withOutFeedbackLink place="bottom" />
+                  )}
+                </div>
+              </StyledInfo>
+              <StyledInfo>
+                <Text color="#A3A9AE" fontWeight={400}>
+                  {t("Timezone")}
+                </Text>
                 <ComboBox
+                  textOverflow
                   withoutPadding
                   directionY="both"
-                  options={cultureNames || []}
-                  selectedOption={selectedLanguage || {}}
-                  onSelect={onLanguageSelect}
+                  options={timezones || []}
+                  selectedOption={selectedTimezone || {}}
+                  onSelect={onTimezoneSelect}
                   isDisabled={isCreated}
                   scaled={isMobile()}
                   scaledOptions={false}
                   size="content"
                   showDisabledItems={true}
                   dropDownMaxHeight={364}
-                  manualWidth="250px"
+                  manualWidth="350px"
                   isDefaultMode={!isMobile()}
                   withBlur={isMobile()}
                   fillIcon={false}
                   modernView={true}
                 />
-                {selectedLanguage?.isBeta && (
-                  <BetaBadge withOutFeedbackLink place="bottom" />
-                )}
-              </div>
-            </StyledInfo>
-            <StyledInfo>
-              <Text color="#A3A9AE" fontWeight={400}>
-                {t("Timezone")}
-              </Text>
-              <ComboBox
-                textOverflow
-                withoutPadding
-                directionY="both"
-                options={timezones || []}
-                selectedOption={selectedTimezone || {}}
-                onSelect={onTimezoneSelect}
-                isDisabled={isCreated}
-                scaled={isMobile()}
-                scaledOptions={false}
-                size="content"
-                showDisabledItems={true}
-                dropDownMaxHeight={364}
-                manualWidth="350px"
-                isDefaultMode={!isMobile()}
-                withBlur={isMobile()}
-                fillIcon={false}
-                modernView={true}
-              />
-            </StyledInfo>
+              </StyledInfo>
 
-            <StyledAcceptTerms>
-              <Checkbox
-                className="wizard-checkbox"
-                id="license"
-                name="confirm"
-                label={t("License")}
-                isChecked={agreeTerms}
-                onChange={onAgreeTermsChange}
-                isDisabled={isCreated}
-                hasError={hasErrorAgree}
-              />
-              <Link
-                type="page"
-                color={
-                  hasErrorAgree
-                    ? theme.checkbox.errorColor
-                    : theme.client.wizard.linkColor
-                }
-                fontSize="13px"
-                target="_blank"
-                href={
-                  urlLicense
-                    ? urlLicense
-                    : "https://gnu.org/licenses/gpl-3.0.html"
-                }
-              >
-                {t("LicenseLink")}
-              </Link>
-            </StyledAcceptTerms>
+              <StyledAcceptTerms>
+                <Checkbox
+                  className="wizard-checkbox"
+                  id="license"
+                  name="confirm"
+                  label={t("License")}
+                  isChecked={agreeTerms}
+                  onChange={onAgreeTermsChange}
+                  isDisabled={isCreated}
+                  hasError={hasErrorAgree}
+                />
+                <Link
+                  type="page"
+                  color={
+                    hasErrorAgree
+                      ? theme.checkbox.errorColor
+                      : theme.client.wizard.linkColor
+                  }
+                  fontSize="13px"
+                  target="_blank"
+                  href={
+                    urlLicense
+                      ? urlLicense
+                      : "https://gnu.org/licenses/gpl-3.0.html"
+                  }
+                >
+                  {t("LicenseLink")}
+                </Link>
+              </StyledAcceptTerms>
 
-            <Button
-              size="medium"
-              scale={true}
-              primary
-              label={t("Common:ContinueButton")}
-              isLoading={isCreated}
-              onClick={onContinueClick}
-            />
-          </FormWrapper>
-        </WizardContainer>
-      </StyledContent>
+              <Button
+                size="medium"
+                scale={true}
+                primary
+                label={t("Common:ContinueButton")}
+                isLoading={isCreated}
+                onClick={onContinueClick}
+              />
+            </FormWrapper>
+          </WizardContainer>
+        </StyledContent>
+      </Scrollbar>
     </Wrapper>
   );
 };

@@ -1,4 +1,30 @@
-﻿import React, { useCallback } from "react";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
@@ -33,8 +59,7 @@ import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
 
 import { getDefaultRoomName } from "SRC_DIR/helpers/filesUtils";
 
-import { SSO_LABEL, TableVersions } from "SRC_DIR/helpers/constants";
-import { SortByFieldName } from "SRC_DIR/helpers/enums";
+import { SortByFieldName, TableVersions } from "SRC_DIR/helpers/constants";
 
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
@@ -231,6 +256,17 @@ const getTags = (filterValues) => {
   return tags;
 };
 
+const getQuotaFilter = (filterValues) => {
+  const filterType = result(
+    find(filterValues, (value) => {
+      return value.group === FilterGroups.filterQuota;
+    }),
+    "key",
+  );
+
+  return filterType?.toString() ? +filterType : null;
+};
+
 const TABLE_COLUMNS = `filesTableColumns_ver-${TableVersions.Files}`;
 
 const COLUMNS_SIZE_INFO_PANEL = `filesColumnsSizeInfoPanel_ver-${TableVersions.Files}`;
@@ -263,7 +299,6 @@ const SectionFilterContent = ({
   t,
   filter,
   roomsFilter,
-  personal,
   isRecentTab,
   isFavoritesFolder,
   sectionWidth,
@@ -302,6 +337,8 @@ const SectionFilterContent = ({
   standalone,
   currentDeviceType,
   isRoomAdmin,
+  showStorageInfo,
+  isDefaultRoomsQuotaSet,
 }) => {
   const location = useLocation();
   const { groupId } = useParams();
@@ -332,7 +369,7 @@ const SectionFilterContent = ({
         const role = getRole(data);
         const payments = getPayments(data);
         const accountLoginType = getAccountLoginType(data);
-
+        const quota = getQuotaFilter(data) || null;
         const newFilter = isInsideGroup
           ? insideGroupFilter.clone()
           : accountsFilter.clone();
@@ -348,6 +385,9 @@ const SectionFilterContent = ({
           newFilter.activationStatus = status;
         }
 
+        if (quota) {
+          newFilter.quotaFilter = quota;
+        }
         newFilter.page = 0;
 
         newFilter.role = role;
@@ -392,6 +432,7 @@ const SectionFilterContent = ({
 
         const providerType = getProviderType(data) || null;
         const tags = getTags(data) || null;
+        const quota = getQuotaFilter(data) || null;
 
         const newFilter = roomsFilter.clone();
 
@@ -401,6 +442,10 @@ const SectionFilterContent = ({
 
         newFilter.subjectFilter = null;
         newFilter.subjectId = null;
+
+        if (quota) {
+          newFilter.quotaFilter = quota;
+        }
 
         if (subjectId) {
           newFilter.subjectId = subjectId;
@@ -431,7 +476,7 @@ const SectionFilterContent = ({
           newFilter.searchArea === RoomSearchArea.Active
             ? "rooms/shared"
             : "rooms/archived";
-        navigate(`${path}/filter?${newFilter.toUrlParams()}`);
+        navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
       } else {
         const filterType = getFilterType(data) || null;
 
@@ -492,7 +537,7 @@ const SectionFilterContent = ({
     }
     setIsLoading(true);
     if (isRooms) {
-      const newFilter = RoomsFilter.getDefault();
+      const newFilter = RoomsFilter.clean();
       newFilter.searchArea = roomsFilter.searchArea;
 
       const path =
@@ -500,9 +545,10 @@ const SectionFilterContent = ({
           ? "rooms/shared"
           : "rooms/archived";
 
-      navigate(`${path}/filter?${newFilter.toUrlParams()}`);
+      navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
     } else {
       const newFilter = filter.clone();
+
       newFilter.page = 0;
       newFilter.filterValue = "";
 
@@ -563,7 +609,7 @@ const SectionFilterContent = ({
             ? "rooms/shared"
             : "rooms/archived";
 
-        navigate(`${path}/filter?${newFilter.toUrlParams()}`);
+        navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
       } else {
         const newFilter = filter.clone();
         newFilter.page = 0;
@@ -628,7 +674,7 @@ const SectionFilterContent = ({
             ? "rooms/shared"
             : "rooms/archived";
         setRoomsFilter(newFilter);
-        navigate(`${path}/filter?${newFilter.toUrlParams()}`);
+        navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
       } else {
         const path = location.pathname.split("/filter")[0];
 
@@ -788,11 +834,37 @@ const SectionFilterContent = ({
           });
         }
 
-        if (filter?.payments?.toString()) {
+        if (accountsFilter.quotaFilter) {
+          const key = +accountsFilter.quotaFilter;
+
+          const label =
+            key === FilterKeys.customQuota
+              ? t("Common:CustomQuota")
+              : t("Common:DefaultQuota");
+
           filterValues.push({
-            key: filter.payments.toString(),
+            key: accountsFilter.quotaFilter,
+            label: label,
+            group: FilterGroups.filterQuota,
+          });
+        }
+
+        if (accountsFilter?.payments?.toString()) {
+          filterValues.push({
+            key: filter.payments?.toString(),
             label:
-              PaymentsType.Paid === filter.payments.toString()
+              PaymentsType.Paid === filter.payments?.toString()
+                ? t("Common:Paid")
+                : t("Common:Free"),
+            group: "filter-account",
+          });
+        }
+
+        if (insideGroupFilter?.payments?.toString()) {
+          filterValues.push({
+            key: filter.payments?.toString(),
+            label:
+              PaymentsType.Paid === filter.payments?.toString()
                 ? t("Common:Paid")
                 : t("Common:Free"),
             group: "filter-account",
@@ -802,7 +874,7 @@ const SectionFilterContent = ({
         if (filter?.accountLoginType?.toString()) {
           const label =
             AccountLoginType.SSO === filter.accountLoginType.toString()
-              ? SSO_LABEL
+              ? t("Common:SSO")
               : AccountLoginType.LDAP === filter.accountLoginType.toString()
                 ? t("PeopleTranslations:LDAPLbl")
                 : t("PeopleTranslations:StandardLogin");
@@ -965,6 +1037,20 @@ const SectionFilterContent = ({
           key: key,
           label: label,
           group: FilterGroups.roomFilterType,
+        });
+      }
+      if (roomsFilter.quotaFilter) {
+        const key = roomsFilter.quotaFilter;
+
+        const label =
+          key === FilterKeys.customQuota
+            ? t("Common:CustomQuota")
+            : t("Common:DefaultQuota");
+
+        filterValues.push({
+          key: roomsFilter.quotaFilter,
+          label: label,
+          group: FilterGroups.filterQuota,
         });
       }
 
@@ -1145,6 +1231,7 @@ const SectionFilterContent = ({
     roomsFilter.tags?.length,
     roomsFilter.excludeSubject,
     roomsFilter.withoutTags,
+    roomsFilter.quotaFilter,
     // roomsFilter.withSubfolders,
     // roomsFilter.searchInContent,
     userId,
@@ -1174,6 +1261,28 @@ const SectionFilterContent = ({
   ]);
 
   const getFilterData = React.useCallback(async () => {
+    const quotaFilter = [
+      {
+        key: FilterGroups.filterQuota,
+        group: FilterGroups.filterQuota,
+        label: t("Common:StorageQuota"),
+        isHeader: true,
+        withoutSeparator: true,
+        withMultiItems: true,
+      },
+      {
+        id: "filter_custom-quota",
+        key: FilterKeys.customQuota,
+        group: FilterGroups.filterQuota,
+        label: t("Common:CustomQuota"),
+      },
+      {
+        id: "filter_default-quota",
+        key: FilterKeys.defaultQuota,
+        group: FilterGroups.filterQuota,
+        label: t("Common:DefaultQuota"),
+      },
+    ];
     if (isPeopleAccounts || isInsideGroup) {
       const groupItems = [
         {
@@ -1328,7 +1437,7 @@ const SectionFilterContent = ({
         {
           key: AccountLoginType.SSO,
           group: "filter-login-type",
-          label: SSO_LABEL,
+          label: t("Common:SSO"),
         },
         //TODO: uncomment after ldap be ready
         /*{
@@ -1352,7 +1461,9 @@ const SectionFilterContent = ({
       if (!standalone) filterOptions.push(...accountItems);
       // filterOptions.push(...roomItems);
       filterOptions.push(...accountLoginTypeItems);
-
+      showStorageInfo &&
+        isDefaultRoomsQuotaSet &&
+        filterOptions.push(...quotaFilter);
       return filterOptions;
     }
 
@@ -1434,38 +1545,32 @@ const SectionFilterContent = ({
           ]
         : "";
 
-    const images = !isRecentTab
-      ? [
-          {
-            id: "filter_type-images",
-            key: FilterType.ImagesOnly.toString(),
-            group: FilterGroups.filterType,
-            label: t("Images").toLowerCase(),
-          },
-        ]
-      : "";
+    const images = [
+      {
+        id: "filter_type-images",
+        key: FilterType.ImagesOnly.toString(),
+        group: FilterGroups.filterType,
+        label: t("Images").toLowerCase(),
+      },
+    ];
 
-    const archives = !isRecentTab
-      ? [
-          {
-            id: "filter_type-archive",
-            key: FilterType.ArchiveOnly.toString(),
-            group: FilterGroups.filterType,
-            label: t("Archives").toLowerCase(),
-          },
-        ]
-      : "";
+    const archives = [
+      {
+        id: "filter_type-archive",
+        key: FilterType.ArchiveOnly.toString(),
+        group: FilterGroups.filterType,
+        label: t("Archives").toLowerCase(),
+      },
+    ];
 
-    const media = !isRecentTab
-      ? [
-          {
-            id: "filter_type-media",
-            key: FilterType.MediaOnly.toString(),
-            group: FilterGroups.filterType,
-            label: t("Media").toLowerCase(),
-          },
-        ]
-      : "";
+    const media = [
+      {
+        id: "filter_type-media",
+        key: FilterType.MediaOnly.toString(),
+        group: FilterGroups.filterType,
+        label: t("Media").toLowerCase(),
+      },
+    ];
 
     const typeOptions = isRooms
       ? [
@@ -1624,6 +1729,7 @@ const SectionFilterContent = ({
         group: FilterGroups.roomFilterOwner,
         label: t("Translations:SearchByOwner"),
         isCheckbox: true,
+        isDisabled: false,
       },
     ];
 
@@ -1719,6 +1825,10 @@ const SectionFilterContent = ({
 
         filterOptions.push(...thirdPartyOptions);
       }
+
+      showStorageInfo &&
+        isDefaultRoomsQuotaSet &&
+        filterOptions.push(...quotaFilter);
     } else {
       if (!isRecentTab && !isFavoritesFolder && !isTrash) {
         const foldersOptions = [
@@ -1828,7 +1938,6 @@ const SectionFilterContent = ({
     return filterOptions;
   }, [
     t,
-    personal,
     providers,
     isPersonalRoom,
     isRooms,
@@ -1868,14 +1977,14 @@ const SectionFilterContent = ({
       const firstName = {
         id: "sort-by_first-name",
         key: "firstname",
-        label: t("Common:ByFirstNameSorting"),
+        label: t("Common:FirstName"),
         default: true,
       };
 
       const lastName = {
         id: "sort-by_last-name",
         key: "lastname",
-        label: t("Common:ByLastNameSorting"),
+        label: t("Common:LastName"),
         default: true,
       };
 
@@ -1900,15 +2009,26 @@ const SectionFilterContent = ({
         default: true,
       };
 
+      const storage = {
+        id: "sort-quota",
+        key: SortByFieldName.UsedSpace,
+        label: t("Common:Storage"),
+        default: true,
+      };
+
       const hideableColumns = {
         Type: type,
         Department: department,
         Mail: email,
       };
 
+      if (showStorageInfo) {
+        hideableColumns.Storage = storage;
+      }
+
       options.push(firstName, lastName);
 
-      if ((viewAs = "table")) {
+      if (accountsViewAs === "table") {
         const tableColumns = isInsideGroup
           ? TABLE_INSIDE_GROUP_COLUMNS
           : TABLE_PEOPLE_COLUMNS;
@@ -1938,6 +2058,9 @@ const SectionFilterContent = ({
             !hide && options.push(hideableColumns[columnTitle]);
           }
         });
+      } else {
+        options.push(type, department, email);
+        if (showStorageInfo) options.push(storage);
       }
 
       return options;
@@ -1962,7 +2085,7 @@ const SectionFilterContent = ({
 
       groupsOptions.push(title);
 
-      if ((viewAs = "table")) {
+      if (accountsViewAs === "table") {
         const availableSort = localStorage
           ?.getItem(`${TABLE_GROUPS_COLUMNS}=${userId}`)
           ?.split(",");
@@ -1980,6 +2103,8 @@ const SectionFilterContent = ({
 
           !hide && groupsOptions.push(manager);
         }
+      } else {
+        groupsOptions.push(manager);
       }
 
       return groupsOptions;
@@ -2061,6 +2186,13 @@ const SectionFilterContent = ({
       default: true,
     };
 
+    const sortByStorage = {
+      id: "sort-by_storage",
+      key: SortByFieldName.UsedSpace,
+      label: t("Common:Storage"),
+      default: true,
+    };
+
     commonOptions.push(name);
 
     if (viewAs === "table") {
@@ -2073,44 +2205,43 @@ const SectionFilterContent = ({
           ?.getItem(`${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`)
           ?.split(" ");
 
+        const hideOption = infoPanelVisible && infoPanelColumnsSize;
+
         if (availableSort?.includes("Type")) {
           const idx = availableSort.findIndex((x) => x === "Type");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
+          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
 
           !hide && commonOptions.push(roomType);
         }
 
         if (availableSort?.includes("Tags")) {
           const idx = availableSort.findIndex((x) => x === "Tags");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
+          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
 
           !hide && commonOptions.push(tags);
         }
 
         if (availableSort?.includes("Owner")) {
           const idx = availableSort.findIndex((x) => x === "Owner");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
+          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
 
           !hide && commonOptions.push(owner);
         }
 
         if (availableSort?.includes("Activity")) {
           const idx = availableSort.findIndex((x) => x === "Activity");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
+          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
 
           !hide && commonOptions.push(modifiedDate);
+        }
+
+        if (showStorageInfo && availableSort?.includes("Storage")) {
+          const idx = availableSort.findIndex(
+            (x) => x === SortByFieldName.UsedSpace,
+          );
+          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
+
+          !hide && commonOptions.push(sortByStorage);
         }
       } else if (isTrash) {
         const availableSort = localStorage
@@ -2264,6 +2395,7 @@ const SectionFilterContent = ({
         commonOptions.push(tags);
         commonOptions.push(owner);
         commonOptions.push(modifiedDate);
+        commonOptions.push(sortByStorage);
       } else if (isTrash) {
         // commonOptions.push(authorOption);
         // commonOptions.push(creationDate);
@@ -2281,7 +2413,6 @@ const SectionFilterContent = ({
 
     return commonOptions;
   }, [
-    personal,
     isRooms,
     isAccountsPage,
     isPeopleAccounts,
@@ -2291,6 +2422,7 @@ const SectionFilterContent = ({
     userId,
     infoPanelVisible,
     viewAs,
+    accountsViewAs,
     isPersonalRoom,
     isTrash,
   ]);
@@ -2325,7 +2457,9 @@ const SectionFilterContent = ({
         if (group === "filter-login-type") {
           newFilter.accountLoginType = null;
         }
-
+        if (group === FilterGroups.filterQuota) {
+          newFilter.quotaFilter = null;
+        }
         if (group === FilterGroups.filterGroup && isPeopleAccounts) {
           newFilter.withoutGroup = false;
           newFilter.group = null;
@@ -2359,6 +2493,10 @@ const SectionFilterContent = ({
 
         if (group === FilterGroups.roomFilterType) {
           newFilter.type = null;
+        }
+
+        if (group === FilterGroups.filterQuota) {
+          newFilter.quotaFilter = null;
         }
 
         if (group === FilterGroups.roomFilterSubject) {
@@ -2401,7 +2539,7 @@ const SectionFilterContent = ({
             ? "rooms/shared"
             : "rooms/archived";
 
-        navigate(`${path}/filter?${newFilter.toUrlParams()}`);
+        navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
       } else {
         const newFilter = filter.clone();
 
@@ -2453,6 +2591,7 @@ const SectionFilterContent = ({
 
   const clearAll = () => {
     setIsLoading(true);
+
     if (isAccountsPage) {
       const newFilter = isGroupsAccounts
         ? GroupsFilter.getDefault()
@@ -2465,7 +2604,7 @@ const SectionFilterContent = ({
 
       navigate(`${url}${newFilter.toUrlParams()}`);
     } else if (isRooms) {
-      const newFilter = RoomsFilter.getDefault();
+      const newFilter = RoomsFilter.clean();
 
       if (isArchiveFolder) {
         newFilter.searchArea = RoomSearchArea.Archive;
@@ -2476,9 +2615,11 @@ const SectionFilterContent = ({
           ? "rooms/shared"
           : "rooms/archived";
 
-      navigate(`${path}/filter?${newFilter.toUrlParams()}`);
+      navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
     } else {
       const newFilter = FilesFilter.getDefault();
+
+      newFilter.folder = filter.folder;
 
       const path = location.pathname.split("/filter")[0];
 
@@ -2522,6 +2663,7 @@ const SectionFilterContent = ({
       isPeopleAccounts={isPeopleAccounts}
       isGroupsAccounts={isGroupsAccounts}
       isInsideGroup={isInsideGroup}
+      disableThirdParty={isTrash}
     />
   );
 };
@@ -2538,6 +2680,7 @@ export default inject(
     infoPanelStore,
     userStore,
     settingsStore,
+    currentQuotaStore,
   }) => {
     const {
       filter,
@@ -2562,7 +2705,7 @@ export default inject(
     const { fetchTags } = tagsStore;
     const { isRoomAdmin } = authStore;
     const { user } = userStore;
-    const { personal, standalone, currentDeviceType } = settingsStore;
+    const { standalone, currentDeviceType } = settingsStore;
     const {
       isFavoritesFolder,
       isRecentTab,
@@ -2575,6 +2718,7 @@ export default inject(
     const isRooms = isRoomsFolder || isArchiveFolder;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
+    const { showStorageInfo, isDefaultRoomsQuotaSet } = currentQuotaStore;
 
     const {
       filterStore,
@@ -2599,6 +2743,9 @@ export default inject(
 
     return {
       isRoomAdmin,
+      showStorageInfo,
+      isDefaultRoomsQuotaSet,
+
       user,
       userId: user?.id,
 
@@ -2620,7 +2767,6 @@ export default inject(
       setViewAs,
       createThumbnails,
 
-      personal,
       isPersonalRoom,
       infoPanelVisible,
       setCurrentRoomsFilter,

@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 (function () {
   const defaultConfig = {
     src: new URL(document.currentScript.src).origin,
@@ -11,8 +37,8 @@
     mode: "manager", //TODO: ["manager", "editor", "viewer","room-selector", "file-selector", "system"]
     id: null,
     locale: null,
-    theme: "Base",
-    editorType: "embedded", //TODO: ["desktop", "embedded"]
+    theme: "System",
+    editorType: "desktop", //TODO: ["desktop", "embedded"]
     editorGoBack: true,
     selectorType: "exceptPrivacyTrashArchiveFolders", //TODO: ["roomsOnly", "userFolderOnly", "exceptPrivacyTrashArchiveFolders", "exceptSortedByTagsFolders"]
     showSelectorCancel: false,
@@ -21,6 +47,7 @@
     showTitle: true,
     showMenu: false,
     showFilter: false,
+    showSignOut: true,
     destroyText: "",
     viewAs: "row", //TODO: ["row", "table", "tile"]
     viewTableColumns: "Name,Type,Tags",
@@ -33,6 +60,7 @@
     filterParam: "ALL",
     buttonColor: "#5299E0",
     infoPanelVisible: true,
+    downloadToEvent: false,
     filter: {
       // filterType: 0,
       // type: 0,
@@ -43,6 +71,7 @@
       search: "",
       withSubfolders: false,
     },
+    editorCustomization: {},
     keysForReload: [
       "src",
       "rootPath",
@@ -56,33 +85,48 @@
       "mode",
     ],
     events: {
-      onSelectCallback: (items) => {
-        alert(items[0].label);
-        window.close();
-      },
-      onCloseCallback: () => {
-        window.close();
-      },
+      onSelectCallback: null,
+      onCloseCallback: null,
       onAppReady: null,
       onAppError: (e) => console.log("onAppError", e),
       onEditorCloseCallback: null,
       onAuthSuccess: null,
       onSignOut: null,
+      onDownload: null,
     },
   };
+
+  const lt = /</g;
+  const rlt = "&lt;";
+  const gt = />/g;
+  const rgt = "&rt;";
 
   const cspErrorText =
     "The current domain is not set in the Content Security Policy (CSP) settings.";
 
   const validateCSP = async (targetSrc) => {
-    const currentSrc = window.location.origin;
+    let currentSrc = window.location.origin;
 
-    if (currentSrc.indexOf(targetSrc) !== -1) return; //TODO: try work with localhost
+    if (currentSrc.indexOf(targetSrc) !== -1) return; // skip check for the same domain
 
     const response = await fetch(`${targetSrc}/api/2.0/security/csp`);
     const res = await response.json();
-    const passed =
-      res.response.header && res.response.header.includes(currentSrc);
+
+    currentSrc = window.location.host || new URL(window.location.origin).host; // more flexible way to check
+
+    const domains = [...res.response.domains].map((d) => {
+      try {
+        const domain = new URL(d.toLowerCase());
+        const domainFull =
+          domain.host + (domain.pathname !== "/" ? domain.pathname : "");
+
+        return domainFull;
+      } catch {
+        return d;
+      }
+    });
+
+    const passed = domains.includes(currentSrc.toLowerCase());
 
     if (!passed) throw new Error(cspErrorText);
 
@@ -139,22 +183,73 @@
       container.style.justifyContent = "center";
       container.style.alignItems = "center";
 
-      const loader = document.createElement("img");
-      loader.setAttribute("src", `${config.src}/static/images/loader.svg`);
-      loader.setAttribute("width", `64px`);
-      loader.setAttribute("height", `64px`);
+      // const loader = document.createElement("img");
+      // loader.setAttribute("src", `${config.src}/static/images/loader.svg`);
+      // loader.setAttribute("width", `64px`);
+      // loader.setAttribute("height", `64px`);
 
-      if (
-        config.theme === "Dark" ||
-        (config.theme === "System" &&
-          window.matchMedia("(prefers-color-scheme: dark)"))
-      ) {
-        container.style.backgroundColor = "#333333";
-        loader.style.filter =
-          "invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%)";
-      }
+      // if (
+      //   config.theme === "Dark" ||
+      //   (config.theme === "System" &&
+      //     window.matchMedia("(prefers-color-scheme: dark)"))
+      // ) {
+      //   container.style.backgroundColor = "#333333";
+      //   loader.style.filter =
+      //     "invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%)";
+      // }
+
+      const loader = document.createElement("div");
+      const loaderClass = `${config.frameId}-loader__element`;
+      loader.setAttribute("class", loaderClass);
 
       container.appendChild(loader);
+
+      const style = document.createElement("style");
+      style.innerHTML = `
+      @keyframes rotate {
+        0%{
+          transform: rotate(-45deg);
+        }
+        15%{
+          transform: rotate(45deg);
+        }
+        30%{
+          transform: rotate(135deg);
+        }
+        45%{
+          transform: rotate(225deg);
+        }
+        60%, 100%{
+          transform: rotate(315deg);
+        }
+      }
+      
+    .${loaderClass} {
+      width: 74px;
+      height: 74px;
+
+      border: 4px solid rgba(51,51,51, 0.1);
+      border-top-color: #333333;
+      border-radius: 50%;
+
+      transform: rotate(-45deg);
+     
+      position: relative;
+
+      box-sizing: border-box;
+
+      animation: 1s linear infinite rotate;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .${loaderClass} {
+        border-color: rgba(204, 204, 204, 0.1);
+        border-top-color: #CCCCCC;
+      }
+    }
+    `;
+
+      container.appendChild(style);
 
       container.setAttribute("id", config.frameId + "-loader");
 
@@ -181,21 +276,30 @@
       const logoSrc = `${config.src}/static/images/light_small_logo.react.svg`;
 
       button.innerHTML = `${config?.buttonWithLogo ? `<img width="16px" heigth="16px" src="${logoSrc}" />` : ""}${config?.buttonText || "Select to DocSpace"}`;
+      const url = new URL(window.location.href);
+      const scriptUrl = `${url.protocol}//${url.hostname}/static/scripts/api.js`;
 
-      const scriptUrl = `${window.location.origin}/static/scripts/api.js`;
+      const configStringify = JSON.stringify(config, function (key, val) {
+        return typeof val === "function" ? "" + val : val;
+      })
+        .replace(lt, rlt)
+        .replace(gt, rgt);
+
+      const windowHeight = 778,
+        windowWidth = 610;
 
       button.addEventListener("click", () => {
         const winHtml = `<!DOCTYPE html>
           <html>
               <head>
                   <meta charset="UTF-8">
-                  <script src="${scriptUrl}"></script>
                   <title>DocSpace</title>
 
                   <style>
                     #${config.frameId}-container {
-                      height: 98vh !important;
-                      width: 98vw !important;
+                      height: 100lvh !important;
+                      width: 100lvw !important;
+                      overflow: hidden;
                     }
 
                     html, body {
@@ -213,9 +317,7 @@
               <body style="margin:0;">
                   <div id=${config.frameId}></div>
                   <script id="integration">
-                    const config = {...${JSON.stringify(config, function (key, val) {
-                      return typeof val === "function" ? "" + val : val;
-                    })}, width: "100%", height: "100%", events: {
+                    const config = {...${configStringify}, width: "100%", height: "100%", events: {
                       onSelectCallback: eval(${config.events.onSelectCallback + ""}),
                       onCloseCallback: eval(${config.events.onCloseCallback + ""}),
                       onAppReady: eval(${config.events.onAppReady + ""}),
@@ -224,14 +326,26 @@
                       onAuthSuccess: eval(${config.events.onAuthSuccess + ""}),
                       onSignOut: eval(${config.events.onSignOut + ""}),
                     }}
-                    window.DocSpace.SDK.initFrame(config)
+                    
+                    const script = document.createElement("script");
+                    
+                    script.setAttribute("src", "${scriptUrl}");
+                    script.onload = () => window.DocSpace.SDK.initFrame(config);
+                    
+                    document.body.appendChild(script);
                   </script>
               </body>
           </html>`;
 
-        const winUrl = URL.createObjectURL(new Blob([winHtml], { type: "text/html" }));
+        const winUrl = URL.createObjectURL(
+          new Blob([winHtml], { type: "text/html" })
+        );
 
-        window.open(winUrl, "_blank", `width=610,height=778`);
+        window.open(
+          winUrl,
+          "_blank",
+          `width=${windowWidth},height=${windowHeight}`
+        );
       });
 
       button.setAttribute("id", config.frameId + "-container");
@@ -285,6 +399,13 @@
 
         case "editor": {
           let goBack = config.editorGoBack;
+          config.editorCustomization.uiTheme = config.theme;
+
+          if (!config.id || config.id === "undefined" || config.id === "null") {
+            config.id = -1; //editor default wrong file id error
+          }
+
+          const customization = JSON.stringify(config.editorCustomization);
 
           if (
             config.events.onEditorCloseCallback &&
@@ -293,7 +414,7 @@
             goBack = "event";
           }
 
-          path = `/doceditor/?fileId=${config.id}&type=${config.editorType}&editorGoBack=${goBack}`;
+          path = `/doceditor/?fileId=${config.id}&editorType=${config.editorType}&editorGoBack=${goBack}&customization=${customization}`;
 
           if (config.requestToken) {
             path = `${path}&share=${config.requestToken}`;
@@ -304,6 +425,13 @@
 
         case "viewer": {
           let goBack = config.editorGoBack;
+          config.editorCustomization.uiTheme = config.theme;
+
+          if (!config.id || config.id === "undefined" || config.id === "null") {
+            config.id = -1; //editor default wrong file id error
+          }
+
+          const customization = JSON.stringify(config.editorCustomization);
 
           if (
             config.events.onEditorCloseCallback &&
@@ -312,7 +440,7 @@
             goBack = "event";
           }
 
-          path = `/doceditor/?fileId=${config.id}&type=${config.editorType}&action=view&editorGoBack=${goBack}`;
+          path = `/doceditor/?fileId=${config.id}&editorType=${config.editorType}&action=view&editorGoBack=${goBack}&customization=${customization}`;
 
           if (config.requestToken) {
             path = `${path}&share=${config.requestToken}`;
@@ -461,7 +589,11 @@
 
     initButton(config) {
       const configFull = { ...defaultConfig, ...config };
-      this.config = { ...this.config, ...configFull, events: { ...defaultConfig.events } };
+      this.config = {
+        ...this.config,
+        ...configFull,
+        events: { ...defaultConfig.events },
+      };
 
       const target = document.getElementById(this.config.frameId);
 
@@ -473,7 +605,7 @@
         this.#classNames = target.className;
 
         const isSelfReplace = target.parentNode.isEqualNode(
-          document.getElementById(this.config.frameId + "-container"),
+          document.getElementById(this.config.frameId + "-container")
         );
 
         target && isSelfReplace
@@ -494,6 +626,10 @@
 
     initFrame(config) {
       const configFull = { ...defaultConfig, ...config };
+      Object.entries(configFull).map(([key, value]) => {
+        if (typeof value === "string")
+          configFull[key] = value.replaceAll(rlt, "<").replaceAll(rgt, ">");
+      });
       this.config = { ...this.config, ...configFull };
 
       const target = document.getElementById(this.config.frameId);
@@ -519,8 +655,8 @@
         renderContainer.id = this.config.frameId + "-container";
         renderContainer.classList = ["frame-container"];
         renderContainer.style.position = "relative";
-        renderContainer.style.width = this.config.width;
-        renderContainer.style.height = this.config.height || "100%";
+        renderContainer.style.width = "100%";
+        renderContainer.style.height = "100%";
 
         renderContainer.appendChild(iframe);
         renderContainer.appendChild(frameLoader);
@@ -603,7 +739,9 @@
       target.innerHTML = this.config.destroyText;
       target.className = this.#classNames;
 
-      const targetFrame = document.getElementById(this.config.frameId + "-container");
+      const targetFrame = document.getElementById(
+        this.config.frameId + "-container"
+      );
 
       window.removeEventListener("message", this.#onMessage, false);
       this.#isConnected = false;

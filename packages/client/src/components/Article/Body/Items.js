@@ -1,4 +1,30 @@
-﻿import PropTypes from "prop-types";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
@@ -48,6 +74,7 @@ const Item = ({
   labelBadge,
   iconBadge,
   folderId,
+  currentColorScheme,
 }) => {
   const [isDragActive, setIsDragActive] = useState(false);
 
@@ -70,7 +97,7 @@ const Item = ({
         startUpload(files, uploadToFolder, t);
       }
     },
-    [t, dragging, setDragging, startUpload, uploadEmptyFolders]
+    [t, dragging, setDragging, startUpload, uploadEmptyFolders],
   );
 
   const onDrop = React.useCallback(
@@ -85,7 +112,7 @@ const Item = ({
         onDropZoneUpload(items);
       }
     },
-    [item, startUpload, dragging, setDragging]
+    [item, startUpload, dragging, setDragging],
   );
 
   const onDragOver = React.useCallback(
@@ -94,7 +121,7 @@ const Item = ({
         setIsDragActive(dragActive);
       }
     },
-    [isDragActive]
+    [isDragActive],
   );
 
   const onDragLeave = React.useCallback(() => {
@@ -102,18 +129,19 @@ const Item = ({
   }, []);
 
   const onClickAction = React.useCallback(
-    (folderId) => {
+    (e, folderId) => {
       setBufferSelection(null);
 
       onClick &&
         onClick(
+          e,
           folderId,
           item.title,
           item.rootFolderType,
-          item.security.Create
+          item.security.Create,
         );
     },
-    [onClick, item.title, item.rootFolderType]
+    [onClick, item.title, item.rootFolderType],
   );
 
   return (
@@ -147,6 +175,7 @@ const Item = ({
         onClickBadge={onBadgeClick}
         iconBadge={iconBadge}
         badgeTitle={labelBadge ? "" : t("RecycleBinAction")}
+        $currentColorScheme={currentColorScheme}
       />
     </StyledDragAndDrop>
   );
@@ -192,6 +221,7 @@ const Items = ({
   isPaymentPageAvailable,
   currentDeviceType,
   folderAccess,
+  currentColorScheme,
 }) => {
   const getEndOfBlock = React.useCallback(
     (item) => {
@@ -204,7 +234,7 @@ const Items = ({
           return false;
       }
     },
-    [docSpace]
+    [docSpace],
   );
 
   const getFolderIcon = React.useCallback((item) => {
@@ -220,13 +250,13 @@ const Items = ({
       if (
         !draggableItems ||
         draggableItems.find(
-          (x) => x.id === item.id && x.isFolder === item.isFolder
+          (x) => x.id === item.id && x.isFolder === item.isFolder,
         )
       )
         return false;
 
       const isArchive = draggableItems.find(
-        (f) => f.rootFolderType === FolderType.Archive
+        (f) => f.rootFolderType === FolderType.Archive,
       );
 
       if (
@@ -238,7 +268,7 @@ const Items = ({
 
       if (item.rootFolderType === FolderType.TRASH && startDrag && !isArchive) {
         return draggableItems.some(
-          (draggableItem) => draggableItem.security.Delete
+          (draggableItem) => draggableItem.security.Delete,
         );
       }
 
@@ -252,17 +282,17 @@ const Items = ({
 
       return false;
     },
-    [currentId, draggableItems, isAdmin]
+    [currentId, draggableItems, isAdmin],
   );
 
   const onMoveTo = React.useCallback(
     (destFolderId, title) => {
       moveDragItems(destFolderId, title, {
-        copy: t("Translations:CopyOperation"),
-        move: t("Translations:MoveToOperation"),
+        copy: t("Common:CopyOperation"),
+        move: t("Common:MoveToOperation"),
       });
     },
-    [moveDragItems, t]
+    [moveDragItems, t],
   );
 
   const onRemove = React.useCallback(() => {
@@ -316,6 +346,7 @@ const Items = ({
             labelBadge={labelBadge}
             iconBadge={iconBadge}
             folderId={`document_catalog-${FOLDER_NAMES[item.rootFolderType]}`}
+            currentColorScheme={currentColorScheme}
           />
         );
       });
@@ -338,7 +369,7 @@ const Items = ({
             key="accounts-item"
             onClick={onClick}
             isActive={activeItemId === "accounts"}
-          />
+          />,
         );
 
       if (!isVisitor) items.splice(3, 0, <CatalogDivider key="other-header" />);
@@ -368,7 +399,7 @@ const Items = ({
       firstLoad,
       activeItemId,
       emptyTrashInProgress,
-    ]
+    ],
   );
 
   return <>{getItems(data)}</>;
@@ -397,7 +428,7 @@ export default inject(
   }) => {
     const { isCommunity, isPaymentPageAvailable, currentDeviceType } =
       authStore;
-    const { showText, docSpace } = settingsStore;
+    const { showText, docSpace, currentColorScheme } = settingsStore;
 
     const {
       selection,
@@ -461,6 +492,7 @@ export default inject(
       isPaymentPageAvailable,
       currentDeviceType,
       folderAccess,
+      currentColorScheme,
     };
-  }
+  },
 )(withTranslation(["Files", "Common", "Translations"])(observer(Items)));

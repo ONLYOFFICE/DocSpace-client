@@ -1,6 +1,34 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+
+import { SortByFieldName } from "SRC_DIR/helpers/constants";
 
 import { TableHeader } from "@docspace/shared/components/table";
 import { Events } from "@docspace/shared/enums";
@@ -13,6 +41,7 @@ class PeopleTableHeader extends React.Component {
     super(props);
 
     const { t } = props;
+    const { isDefaultUsersQuotaSet, showStorageInfo } = this.props;
 
     const defaultColumns = [
       {
@@ -24,12 +53,11 @@ class PeopleTableHeader extends React.Component {
         sortBy: "AZ",
         minWidth: 210,
         onClick: this.onFilter,
-        onIconClick: this.onIconClick,
       },
       {
         key: "Type",
         title: t("Common:Type"),
-        enable: true,
+        enable: props.typeAccountsColumnIsEnabled,
         sortBy: "type",
         resizable: true,
         onChange: this.onColumnChange,
@@ -38,7 +66,7 @@ class PeopleTableHeader extends React.Component {
       {
         key: "Department",
         title: t("Common:Group"),
-        enable: true,
+        enable: props.groupAccountsColumnIsEnabled,
         sortBy: "department",
         resizable: true,
         onChange: this.onColumnChange,
@@ -54,7 +82,7 @@ class PeopleTableHeader extends React.Component {
       {
         key: "Mail",
         title: t("Common:Email"),
-        enable: true,
+        enable: props.emailAccountsColumnIsEnabled,
         resizable: true,
         sortBy: "email",
         onChange: this.onColumnChange,
@@ -62,31 +90,33 @@ class PeopleTableHeader extends React.Component {
       },
     ];
 
-    const columns = this.getColumns(defaultColumns);
+    showStorageInfo &&
+      defaultColumns.push({
+        key: "Storage",
+        title: isDefaultUsersQuotaSet
+          ? t("Common:StorageAndQuota")
+          : t("Common:Storage"),
+        enable: props.storageAccountsColumnIsEnabled,
+        sortBy: SortByFieldName.UsedSpace,
+        resizable: true,
+        onChange: this.onColumnChange,
+        onClick: this.onFilter,
+      });
 
-    this.state = { columns };
-  }
-
-  getColumns = (defaultColumns) => {
+    const columns = props.getColumns(defaultColumns);
     const storageColumns = localStorage.getItem(
       `${TABLE_COLUMNS}=${this.props.userId}`,
     );
-    const columns = [];
+    const splitColumns = storageColumns && storageColumns.split(",");
 
-    if (storageColumns) {
-      const splitColumns = storageColumns.split(",");
+    const resetColumnsSize =
+      (splitColumns && splitColumns.length !== columns.length) || !splitColumns;
 
-      for (let col of defaultColumns) {
-        const column = splitColumns.find((key) => key === col.key);
-        column ? (col.enable = true) : (col.enable = false);
+    const tableColumns = columns.map((c) => c.enable && c.key);
+    this.setTableColumns(tableColumns);
 
-        columns.push(col);
-      }
-      return columns;
-    } else {
-      return defaultColumns;
-    }
-  };
+    this.state = { columns, resetColumnsSize };
+  }
 
   onColumnChange = (key, e) => {
     const { columns } = this.state;
@@ -94,11 +124,13 @@ class PeopleTableHeader extends React.Component {
 
     if (columnIndex === -1) return;
 
+    this.props.setColumnEnable(key);
+
     columns[columnIndex].enable = !columns[columnIndex].enable;
     this.setState({ columns });
 
     const tableColumns = columns.map((c) => c.enable && c.key);
-    localStorage.setItem(`${TABLE_COLUMNS}=${this.props.userId}`, tableColumns);
+    this.setTableColumns(tableColumns);
 
     const event = new Event(Events.CHANGE_COLUMN);
 
@@ -136,20 +168,12 @@ class PeopleTableHeader extends React.Component {
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
-  onIconClick = () => {
-    const { filter, setIsLoading, navigate, location } = this.props;
-    const newFilter = filter.clone();
-
-    newFilter.sortOrder =
-      newFilter.sortOrder === "ascending" ? "descending" : "ascending";
-
-    setIsLoading(true);
-
-    navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
+  setTableColumns = (tableColumns) => {
+    localStorage.setItem(`${TABLE_COLUMNS}=${this.props.userId}`, tableColumns);
   };
 
   render() {
-    const { columns } = this.state;
+    const { columns, resetColumnsSize } = this.state;
     const {
       containerRef,
       filter,
@@ -177,6 +201,7 @@ class PeopleTableHeader extends React.Component {
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         sectionWidth={sectionWidth}
+        resetColumnsSize={resetColumnsSize}
         checkboxMargin="12px"
         infoPanelVisible={infoPanelVisible}
         useReactWindow={!withPaging}
@@ -193,6 +218,8 @@ export default inject(
     infoPanelStore,
     settingsStore,
     userStore,
+    currentQuotaStore,
+    tableStore,
   }) => {
     const { filterStore } = peopleStore;
 
@@ -200,6 +227,17 @@ export default inject(
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { withPaging } = settingsStore;
+
+    const { isDefaultUsersQuotaSet, showStorageInfo } = currentQuotaStore;
+
+    const {
+      getColumns,
+      setColumnEnable,
+      typeAccountsColumnIsEnabled,
+      emailAccountsColumnIsEnabled,
+      groupAccountsColumnIsEnabled,
+      storageAccountsColumnIsEnabled,
+    } = tableStore;
 
     return {
       filter,
@@ -209,6 +247,15 @@ export default inject(
       userId: userStore.user?.id,
       infoPanelVisible,
       withPaging,
+      isDefaultUsersQuotaSet,
+      showStorageInfo,
+
+      getColumns,
+      setColumnEnable,
+      typeAccountsColumnIsEnabled,
+      emailAccountsColumnIsEnabled,
+      groupAccountsColumnIsEnabled,
+      storageAccountsColumnIsEnabled,
     };
   },
 )(

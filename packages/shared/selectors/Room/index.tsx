@@ -1,12 +1,44 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import EmptyScreenCorporateSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
 
 import { Selector, TSelectorItem } from "../../components/selector";
+import {
+  TSelectorCancelButton,
+  TSelectorHeader,
+  TSelectorSearch,
+} from "../../components/selector/Selector.types";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import api from "../../api";
 import RoomsFilter from "../../api/rooms/filter";
+import { RoomsStorageFilter } from "../../enums";
 
 import { TTranslation } from "../../types";
 
@@ -20,88 +52,82 @@ const RoomSelector = ({
   className,
   style,
 
-  excludeItems = [],
-
-  headerLabel,
-  withoutBackButton,
-  onBackClick,
+  excludeItems,
 
   withSearch,
-  searchPlaceholder,
-  onSearch,
-  onClearSearch,
 
-  onSelect,
   isMultiSelect,
-  selectedItems,
-  acceptButtonLabel,
-  onAccept,
+
+  submitButtonLabel,
+  onSubmit,
 
   withHeader,
-  withSelectAll,
-  selectAllLabel,
-  selectAllIcon,
-  onSelectAll,
+  headerProps,
 
   setIsDataReady,
-  withAccessRights,
-  accessRights,
-  selectedAccessRight,
-  onAccessRightsChange,
 
   withCancelButton,
   cancelButtonLabel,
   onCancel,
 
-  emptyScreenImage,
-  emptyScreenHeader,
-  emptyScreenDescription,
-  searchEmptyScreenImage,
-  searchEmptyScreenHeader,
-  searchEmptyScreenDescription,
-
   roomType,
-}: RoomSelectorProps) => {
-  const { t }: { t: TTranslation } = useTranslation(["RoomSelector", "Common"]);
 
-  const [isFirstLoad, setIsFirstLoad] = React.useState(true);
+  disableThirdParty,
+}: RoomSelectorProps) => {
+  const { t }: { t: TTranslation } = useTranslation(["Common"]);
+
   const [searchValue, setSearchValue] = React.useState("");
   const [hasNextPage, setHasNextPage] = React.useState(false);
   const [isNextPageLoading, setIsNextPageLoading] = React.useState(false);
-
+  const [selectedItem, setSelectedItem] = React.useState<TSelectorItem | null>(
+    null,
+  );
   const [total, setTotal] = React.useState(-1);
 
   const [items, setItems] = React.useState<TSelectorItem[]>([]);
 
+  const isFirstLoad = React.useRef(true);
+  const afterSearch = React.useRef(false);
+
+  const onSelect = (
+    item: TSelectorItem,
+    isDoubleClick: boolean,
+    doubleClickCallback: () => void,
+  ) => {
+    setSelectedItem((el) => {
+      if (el?.id === item.id) return null;
+
+      return item;
+    });
+    if (isDoubleClick && !isMultiSelect) {
+      doubleClickCallback();
+    }
+  };
+
   useEffect(() => {
-    setIsDataReady?.(!isFirstLoad);
-  }, [isFirstLoad, setIsDataReady]);
+    setIsDataReady?.(!isFirstLoad.current);
+  }, [setIsDataReady]);
 
   const onSearchAction = React.useCallback(
     (value: string, callback?: Function) => {
-      onSearch?.(value);
+      isFirstLoad.current = true;
+      afterSearch.current = true;
       setSearchValue(() => {
-        setIsFirstLoad(true);
-
         return value;
       });
       callback?.();
     },
-    [onSearch],
+    [],
   );
 
-  const onClearSearchAction = React.useCallback(
-    (callback?: Function) => {
-      onClearSearch?.();
-      setSearchValue(() => {
-        setIsFirstLoad(true);
-
-        return "";
-      });
-      callback?.();
-    },
-    [onClearSearch],
-  );
+  const onClearSearchAction = React.useCallback((callback?: Function) => {
+    isFirstLoad.current = true;
+    afterSearch.current = true;
+    setSearchValue(() => {
+      return "";
+    });
+    callback?.();
+  }, []);
 
   const onLoadNextPage = React.useCallback(
     async (startIndex: number) => {
@@ -113,8 +139,10 @@ const RoomSelector = ({
 
       filter.page = page;
       filter.pageCount = PAGE_COUNT;
-
+      filter.type = roomType;
       filter.filterValue = searchValue || null;
+
+      if (disableThirdParty) filter.storageFilter = RoomsStorageFilter.internal;
 
       const {
         folders,
@@ -122,92 +150,97 @@ const RoomSelector = ({
         count,
       } = await api.rooms.getRooms(filter);
 
-      const rooms = convertToItems(folders);
+      const rooms = convertToItems(folders).filter((x) =>
+        excludeItems ? !excludeItems.includes(x.id) : true,
+      );
 
       setHasNextPage(count === PAGE_COUNT);
 
-      setItems((prevItems) => {
-        const newItems = rooms.filter((x) => !excludeItems.includes(x.id));
-        const filteredByRoomType = rooms.filter(
-          (x) => !excludeItems.includes(x.id) && x.roomType === roomType,
-        );
+      if (isFirstLoad) {
+        setTotal(totalCount);
 
-        if (isFirstLoad) {
-          setTotal(totalCount);
-          setIsFirstLoad(false);
-          return roomType ? filteredByRoomType : newItems;
-        }
+        setItems([...rooms] as TSelectorItem[]);
+      } else {
+        setItems((prevItems) => {
+          const newItems = [...rooms] as TSelectorItem[];
 
-        return roomType ? filteredByRoomType : [...prevItems, ...newItems];
-      });
+          return [...prevItems, ...newItems];
+        });
+      }
+
+      if (isFirstLoad.current) setIsDataReady?.(true);
+
+      isFirstLoad.current = false;
 
       setIsNextPageLoading(false);
     },
-    [isFirstLoad, excludeItems, searchValue, roomType],
+    [disableThirdParty, excludeItems, roomType, searchValue, setIsDataReady],
   );
 
-  React.useEffect(() => {
-    onLoadNextPage(0);
-  }, [roomType]);
+  const headerSelectorProps: TSelectorHeader = withHeader
+    ? {
+        withHeader,
+        headerProps: {
+          ...headerProps,
+          headerLabel: headerProps.headerLabel || t("Common:RoomList"),
+        },
+      }
+    : {};
+
+  const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton
+    ? {
+        withCancelButton: true,
+        cancelButtonLabel: cancelButtonLabel || t("Common:CancelButton"),
+        onCancel,
+      }
+    : {};
+
+  const searchSelectorProps: TSelectorSearch = withSearch
+    ? {
+        withSearch: true,
+        searchPlaceholder: t("Common:Search"),
+        searchValue,
+        onSearch: onSearchAction,
+        onClearSearch: onClearSearchAction,
+        searchLoader: <SearchLoader />,
+        isSearchLoading:
+          isFirstLoad.current && !searchValue && !afterSearch.current,
+      }
+    : {};
 
   return (
     <Selector
       id={id}
       className={className}
       style={style}
-      headerLabel={headerLabel || t("RoomList")}
-      onBackClick={onBackClick}
-      searchPlaceholder={searchPlaceholder || t("Common:Search")}
-      searchValue={searchValue}
-      onSearch={onSearchAction}
-      onClearSearch={onClearSearchAction}
+      {...headerSelectorProps}
+      {...cancelButtonSelectorProps}
+      {...searchSelectorProps}
       onSelect={onSelect}
       items={items}
-      acceptButtonLabel={acceptButtonLabel || t("Common:SelectAction")}
-      onAccept={onAccept}
-      withHeader={withHeader}
-      withCancelButton={withCancelButton}
-      cancelButtonLabel={cancelButtonLabel || t("Common:CancelButton")}
-      onCancel={onCancel}
+      submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
+      onSubmit={onSubmit}
       isMultiSelect={isMultiSelect}
-      selectedItems={selectedItems}
-      withSelectAll={withSelectAll}
-      selectAllLabel={selectAllLabel}
-      selectAllIcon={selectAllIcon}
-      onSelectAll={onSelectAll}
-      withAccessRights={withAccessRights}
-      accessRights={accessRights}
-      selectedAccessRight={selectedAccessRight}
-      onAccessRightsChange={onAccessRightsChange}
-      emptyScreenImage={emptyScreenImage || EmptyScreenCorporateSvgUrl}
-      emptyScreenHeader={emptyScreenHeader || t("EmptyRoomsHeader")}
-      emptyScreenDescription={
-        emptyScreenDescription || t("EmptyRoomsDescription")
-      }
-      searchEmptyScreenImage={
-        searchEmptyScreenImage || EmptyScreenCorporateSvgUrl
-      }
-      searchEmptyScreenHeader={
-        searchEmptyScreenHeader || t("Common:NotFoundTitle")
-      }
-      searchEmptyScreenDescription={
-        searchEmptyScreenDescription || t("Common:SearchEmptyRoomsDescription")
-      }
+      emptyScreenImage={EmptyScreenCorporateSvgUrl}
+      emptyScreenHeader={t("Common:EmptyRoomsHeader")}
+      emptyScreenDescription={t("Common:EmptyRoomsDescription")}
+      searchEmptyScreenImage={EmptyScreenCorporateSvgUrl}
+      searchEmptyScreenHeader={t("Common:NotFoundTitle")}
+      searchEmptyScreenDescription={t("Common:SearchEmptyRoomsDescription")}
       totalItems={total}
       hasNextPage={hasNextPage}
       isNextPageLoading={isNextPageLoading}
       loadNextPage={onLoadNextPage}
-      isLoading={isFirstLoad}
-      searchLoader={<SearchLoader />}
+      isLoading={isFirstLoad.current}
+      disableSubmitButton={!selectedItem}
+      alwaysShowFooter={items.length !== 0 || Boolean(searchValue)}
       rowLoader={
         <RowLoader
           isMultiSelect={isMultiSelect}
-          isContainer={isFirstLoad}
+          isContainer={isFirstLoad.current}
           isUser={false}
         />
       }
-      withSearch={withSearch}
-      withoutBackButton={withoutBackButton}
     />
   );
 };

@@ -1,6 +1,10 @@
 {
+  "DeleteAllGroupDescription": "Die ausgewählten Gruppen werden gelöscht. Benutzer in den Gruppen werden nicht aus DocSpace entfernt. Sind Sie sicher, dass Sie fortfahren möchten?",
+  "DeleteAllGroupsTitle": "Gruppen löschen",
   "DeleteFile": "Sie möchten diese Datei löschen.",
   "DeleteFolder": "Sie möchten diesen Ordner löschen. ",
+  "DeleteGroupDescription": "Die Gruppe {{groupName}} wird gelöscht. Benutzer in der Gruppe werden nicht aus DocSpace entfernt. Sind Sie sicher, dass Sie fortfahren möchten?",
+  "DeleteGroupTitle": "Gruppe löschen",
   "DeleteItems": "Sie löschen diese Objekte. ",
   "DeleteItemsSharedNote": "Bitte beachten Sie, dass die Daten nicht mehr verfügbar sind, wenn Sie diese mit jemandem geteilt haben.",
   "DeleteRoom": "Sie löschen diesen Raum. Dies kann nicht rückgängig gemacht.",
@@ -10,7 +14,6 @@
   "FolderPermanentlyDeleted": "Der Ordner wird nach 30 Tagen endgültig gelöscht.",
   "ItemsPermanentlyDeleted": "Objekte werden innerhalb von 30 Tagen endgültig gelöscht.",
   "MoveToTrashButton": "In den Papierkorb verschieben",
-  "MoveToTrashFile": "Möchten Sie wirklich das Dokument löschen. Bitte beachten Sie, dass es nicht mehr verfügbar wird, wenn Sie es mit jemandem geteilt haben. Die Datei wird in 30 Tagen endgültig gelöscht. Möchten Sie fortsetzen?",
   "MoveToTrashTitle": "In Papierkorb verschieben?",
   "UnsubscribeButton": "Abbestellen",
   "UnsubscribeNote": "Sind Sie sicher, dass Sie die ausgewählten Elemente aus der Liste abbestellen möchten?",

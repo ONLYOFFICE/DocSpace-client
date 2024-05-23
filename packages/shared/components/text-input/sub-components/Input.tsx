@@ -1,30 +1,68 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import MaskedInput from "react-text-mask";
 
 import { TextInputProps } from "../TextInput.types";
+import { InputType } from "../TextInput.enums";
 
 const Input = ({
   isAutoFocussed,
   isDisabled,
   isReadOnly,
-  hasError,
-  hasWarning,
-  scale,
-  withBorder,
-  keepCharPositions,
-  guide,
   fontWeight,
-  isBold,
   forwardedRef,
   className,
   dir = "auto",
-  size,
   mask,
+  type = InputType.text,
+  placeholder = " ",
+  value = "",
+  maxLength = 255,
+  scale,
+  tabIndex = -1,
+  hasError,
+  hasWarning,
+  autoComplete = "off",
+  withBorder,
+  keepCharPositions,
+  guide = "false",
+  isBold,
+  size,
   ...props
 }: TextInputProps) => {
   const rest = {
     autoFocus: isAutoFocussed,
     ref: forwardedRef || null,
+    value,
+    maxLength,
+    tabIndex,
+    autoComplete,
+    guide,
   };
 
   return mask ? (
@@ -33,33 +71,20 @@ const Input = ({
       keepCharPositions
       guide={false}
       mask={mask}
+      type={type}
+      placeholder={placeholder}
       {...props}
     />
   ) : (
     <input
       className={`${className} input-component not-selectable`}
       dir={dir}
+      type={type}
+      placeholder={placeholder}
       {...props}
       {...rest}
     />
   );
 };
 
-Input.defaultProps = {
-  type: "text",
-  // Empty placeholder by default needed for RTL mode to make :placeholder-shown work to put cursor on the right side of input
-  placeholder: " ",
-  value: "",
-  maxLength: 255,
-  size: "base",
-  scale: false,
-  tabIndex: -1,
-  hasError: false,
-  hasWarning: false,
-  autoComplete: "off",
-  withBorder: true,
-  keepCharPositions: false,
-  guide: false,
-  isBold: false,
-};
 export { Input };

@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable prefer-regex-literals */
 import { makeAutoObservable, runInAction } from "mobx";
@@ -22,19 +48,26 @@ import {
   TVersionBuild,
 } from "../api/settings/types";
 import { TUser } from "../api/people/types";
-import { size as deviceSize, isTablet, getSystemTheme } from "../utils";
+import {
+  size as deviceSize,
+  isTablet,
+  getSystemTheme,
+  getDeviceTypeByWidth,
+} from "../utils";
 import {
   frameCallEvent,
   getShowText,
-  initArticleAlertsData,
   isPublicRoom,
+  insertTagManager,
+  isManagement,
 } from "../utils/common";
 import { setCookie, getCookie } from "../utils/cookie";
 import { combineUrl } from "../utils/combineUrl";
 import FirebaseHelper from "../utils/firebase";
 import SocketIOHelper from "../utils/socket";
 import { TWhiteLabel } from "../utils/whiteLabelHelper";
-import { ThemeKeys, TenantStatus, DeviceType, ArticleAlerts } from "../enums";
+
+import { ThemeKeys, TenantStatus, UrlActionType } from "../enums";
 import {
   LANGUAGE,
   COOKIE_EXPIRATION_YEAR,
@@ -155,8 +188,6 @@ class SettingsStore {
 
   encryptionKeys: { [key: string]: string | boolean } = {};
 
-  personal = false;
-
   docSpace = true;
 
   roomsMode = false;
@@ -269,8 +300,6 @@ class SettingsStore {
 
   documentationEmail = null;
 
-  articleAlertsData = initArticleAlertsData();
-
   cspDomains: string[] = [];
 
   publicRoomKey = "";
@@ -284,6 +313,8 @@ class SettingsStore {
   userNameRegex = "";
 
   windowWidth = window.innerWidth;
+
+  windowAngle = window.screen?.orientation?.angle ?? window.orientation ?? 0;
 
   constructor() {
     makeAutoObservable(this);
@@ -445,6 +476,10 @@ class SettingsStore {
     return `${this.helpLink}/userguides/docspace-managing-users.aspx`;
   }
 
+  get installationGuidesUrl() {
+    return `${this.helpLink}/installation/docspace-enterprise-index.aspx`;
+  }
+
   get sdkLink() {
     return `${this.apiDocsLink}/docspace/jssdk/`;
   }
@@ -506,7 +541,7 @@ class SettingsStore {
       newSettings = window.__ASC_INITIAL_EDITOR_STATE__.portalSettings;
     else newSettings = await api.settings.getSettings(true);
 
-    if (window.AscDesktopEditor !== undefined || this.personal) {
+    if (window.AscDesktopEditor !== undefined) {
       const dp = combineUrl(window.DocSpaceConfig?.proxy?.url, MEDIA_VIEW_URL);
       this.setDefaultPage(dp);
     }
@@ -584,21 +619,25 @@ class SettingsStore {
     if (origSettings?.domainValidator) {
       this.domainValidator = origSettings.domainValidator;
     }
+
+    if (origSettings?.tagManagerId) {
+      insertTagManager(origSettings.tagManagerId);
+    }
   };
 
   get isPortalDeactivate() {
     return this.tenantStatus === TenantStatus.PortalDeactivate;
   }
 
+  get isPortalRestoring() {
+    return this.tenantStatus === TenantStatus.PortalRestore;
+  }
+
   init = async () => {
     this.setIsLoading(true);
     const requests = [];
 
-    requests.push(
-      this.getPortalSettings(),
-      this.getAppearanceTheme(),
-      this.getWhiteLabelLogoUrls(),
-    );
+    requests.push(this.getPortalSettings(), this.getAppearanceTheme());
 
     await Promise.all(requests);
 
@@ -690,10 +729,12 @@ class SettingsStore {
   };
 
   getWhiteLabelLogoUrls = async () => {
-    const res = await api.settings.getLogoUrls();
+    const res = await api.settings.getLogoUrls(null, isManagement());
 
     this.setLogoUrls(Object.values(res));
     this.setLogoUrl(Object.values(res));
+
+    return res;
   };
 
   getDomainName = async () => {
@@ -977,8 +1018,13 @@ class SettingsStore {
   };
 
   get isFrame() {
-    // console.log("get isFrame:", this.frameConfig?.name === window.name);
-    return this.frameConfig?.name === window.name;
+    const isFrame = this.frameConfig
+      ? window.name.includes(this.frameConfig?.name)
+      : false;
+
+    if (window.DocSpaceConfig) window.DocSpaceConfig.isFrame = isFrame;
+
+    return isFrame;
   }
 
   setAppearanceTheme = (theme: TColorScheme[]) => {
@@ -1008,43 +1054,6 @@ class SettingsStore {
     if (currentColorScheme) this.setCurrentColorScheme(currentColorScheme);
   };
 
-  updateArticleAlertsData = ({
-    current,
-    available,
-  }: {
-    current: ArticleAlerts;
-    available: ArticleAlerts[];
-  }) => {
-    this.articleAlertsData = {
-      current: current || this.articleAlertsData.current,
-      available: available || this.articleAlertsData.available,
-    };
-    localStorage.setItem(
-      "articleAlertsData",
-      JSON.stringify(this.articleAlertsData),
-    );
-  };
-
-  incrementIndexOfArticleAlertsData = () => {
-    const { current, available } = this.articleAlertsData;
-    if (!available.length) return;
-
-    let next = null;
-    const indexOfCurrent = available.indexOf(current);
-    if (indexOfCurrent + 1 === available.length) next = available[0];
-    else next = available[indexOfCurrent + 1];
-
-    if (next) this.updateArticleAlertsData({ current: next, available });
-  };
-
-  removeAlertFromArticleAlertsData = (alertToRemove: ArticleAlerts) => {
-    const { current, available } = this.articleAlertsData;
-    const filteredAvailable = available.filter(
-      (alert) => alert !== alertToRemove,
-    );
-    this.updateArticleAlertsData({ current, available: filteredAvailable });
-  };
-
   setInterfaceDirection = (direction: string) => {
     this.interfaceDirection = direction;
     localStorage.setItem("interfaceDirection", direction);
@@ -1071,7 +1080,13 @@ class SettingsStore {
       return domains;
     } catch (e) {
       toastr.error(e as TData);
+
+      throw e;
     }
+  };
+
+  setWindowAngle = (angle: number) => {
+    this.windowAngle = angle;
   };
 
   setWindowWidth = (width: number) => {
@@ -1087,11 +1102,20 @@ class SettingsStore {
   };
 
   get currentDeviceType() {
-    if (this.windowWidth <= deviceSize.mobile) return DeviceType.mobile;
+    return getDeviceTypeByWidth(this.windowWidth);
+  }
 
-    if (isTablet(this.windowWidth)) return DeviceType.tablet;
+  get deviceType() {
+    const angleByRadians = (Math.PI / 180) * this.windowAngle;
 
-    return DeviceType.desktop;
+    const width = Math.abs(
+      Math.round(
+        Math.sin(angleByRadians) * window.innerHeight +
+          Math.cos(angleByRadians) * this.windowWidth,
+      ),
+    );
+
+    return getDeviceTypeByWidth(width);
   }
 
   get enablePortalRename() {
@@ -1099,6 +1123,18 @@ class SettingsStore {
       !this.standalone || (this.standalone && this.baseDomain !== "localhost")
     );
   }
+
+  openUrl = (url: string, action: UrlActionType, replace: boolean = false) => {
+    if (action === UrlActionType.Download) {
+      return this.isFrame &&
+        this.frameConfig?.downloadToEvent &&
+        this.frameConfig?.events.onDownload
+        ? frameCallEvent({ event: "onDownload", data: url })
+        : replace
+          ? (window.location.href = url)
+          : window.open(url, "_self");
+    }
+  };
 }
 
 export { SettingsStore };

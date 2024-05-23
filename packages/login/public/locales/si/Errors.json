@@ -1,0 +1,19 @@
+{
+  "ErrorConfirmURLError": "වලංගු නොවන හෝ ඉකුත් වූ සබැඳියකි",
+  "ErrorExpiredActivationLink": "සබැඳිය ඉකුත් වී ඇත",
+  "ErrorInvalidActivationLink": "වැරදි සක්‍රියන සබැඳියකි",
+  "ErrorNotAllowedOption": "ඔබගේ මිලකරණ සැලසුම මෙම විකල්පයට සහාය නොදක්වයි",
+  "ErrorUserNotFound": "පරිශ්‍රීලකයා හමු නොවිණි",
+  "InvalidUsernameOrPassword": "පරිශ්‍රීලක නාමය හෝ මුරපදය වැරදිය",
+  "LoginWithAccountNotFound": "ආශ්‍රිත තෙවන පාර්ශ්ව ගිණුමක් හමු නොවිණි. ඔබ මුලින්ම පැතිකඩ සංස්කරණ පිටුව හරහා සමාජ ජාල ගිණුම් සම්බන්ධ කළ යුතුය.",
+  "LoginWithBruteForce": "බලයදීම තාවකාලිකව අවහිර කර ඇත.",
+  "RecaptchaInvalid": "වැරදි විසඳුමකි",
+  "SsoAttributesNotFound": "බලය දීමට අසමත් විය (ප්‍රකාශන උපලක්‍ෂණ හමු නොවිණි)",
+  "SsoAuthFailed": "බලය දීමට අසමත් විය",
+  "SsoError": "අභ්‍යන්තර සේවාදායකයේ දෝෂයකි",
+  "SsoSettingsCantCreateUser": "මෙම බලය දීමේ නිමිත්ත මගින් පරිශ්‍රීලකයෙකු සෑදීමට නොහැකි විය",
+  "SsoSettingsDisabled": "තනි පිවිසුම අබලයි",
+  "SsoSettingsEmptyToken": "බලයදීමේ නිමිත්ත හමු නොවිණි",
+  "SsoSettingsNotValidToken": "වැරදි බලයදීමේ නිමිත්තකි",
+  "SsoSettingsUserTerminated": "මෙම පරිශ්‍රීලකයා අබලයි"
+}

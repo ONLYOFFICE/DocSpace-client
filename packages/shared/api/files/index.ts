@@ -1,6 +1,36 @@
-import axios, { AxiosRequestConfig } from "axios";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ConflictResolveType, FolderType } from "../../enums";
+import axios, { AxiosRequestConfig } from "axios";
+import moment from "moment";
+import {
+  ConflictResolveType,
+  FolderType,
+  ShareAccessRights,
+} from "../../enums";
 import {
   checkFilterInstance,
   decodeDisplayName,
@@ -18,9 +48,11 @@ import {
   TFile,
   TFileLink,
   TFilesSettings,
+  TFilesUsedSpace,
   TFolder,
   TGetFolder,
   TGetFolderPath,
+  TGetReferenceData,
   TGetReferenceDataRequest,
   TOpenEditRequest,
   TOperation,
@@ -30,6 +62,7 @@ import {
   TThirdPartyCapabilities,
   TTirdParties,
   TUploadOperation,
+  TConnectingStorages,
 } from "./types";
 
 export async function openEdit(
@@ -72,12 +105,7 @@ export async function openEdit(
   return res;
 }
 
-export async function getReferenceData(data: {
-  fileKey: number;
-  instanceId: string;
-  sourceFileId: number;
-  path: string;
-}) {
+export async function getReferenceData(data: TGetReferenceData) {
   const options: AxiosRequestConfig = {
     method: "post",
     url: `/files/file/referencedata`,
@@ -89,7 +117,10 @@ export async function getReferenceData(data: {
   return res;
 }
 
-export async function getFolderInfo(folderId: number, skipRedirect = false) {
+export async function getFolderInfo(
+  folderId: number | string,
+  skipRedirect = false,
+) {
   const options: AxiosRequestConfig = {
     method: "get",
     url: `/files/folder/${folderId}`,
@@ -107,14 +138,13 @@ export async function getFolderPath(folderId: number) {
   };
 
   const res = (await request(options)) as TGetFolderPath;
-
   return res;
 }
 
 export async function getFolder(
   folderId: string | number,
   filter: FilesFilter,
-  signal: AbortSignal,
+  signal?: AbortSignal,
 ) {
   let params = folderId;
 
@@ -134,7 +164,9 @@ export async function getFolder(
     signal,
   };
 
-  const res = (await request(options)) as TGetFolder;
+  const skipRedirect = true;
+
+  const res = (await request(options, skipRedirect)) as TGetFolder;
 
   res.files = decodeDisplayName(res.files);
   res.folders = decodeDisplayName(res.folders);
@@ -155,14 +187,23 @@ export async function getFoldersTree() {
 
   return folders.map((data, index) => {
     const { new: newItems, pathParts, current } = data;
-    const { foldersCount, filesCount } = current;
-    const { parentId, title, id, rootFolderType, security } = current;
+
+    const {
+      parentId,
+      title,
+      id,
+      rootFolderType,
+      security,
+      foldersCount,
+      filesCount,
+    } = current;
 
     const type = +rootFolderType;
 
     const name = getFolderClassNameByType(type);
 
     return {
+      ...current,
       id,
       key: `0-${index}`,
       parentId,
@@ -175,7 +216,8 @@ export async function getFoldersTree() {
       filesCount,
       newItems,
       security,
-    };
+      new: newItems,
+    } as TFolder;
   });
 }
 
@@ -341,8 +383,8 @@ export async function deleteFolder(
 export async function createFile(
   folderId: number,
   title: string,
-  templateId: number,
-  formId: number,
+  templateId?: number,
+  formId?: number,
 ) {
   const data = { title, templateId, formId };
   const options: AxiosRequestConfig = {
@@ -430,10 +472,15 @@ export async function createFile(
 //   return request(options);
 // }
 
-export async function getFileInfo(fileId: number) {
+export async function getFileInfo(fileId: number | string, share?: string) {
   const options: AxiosRequestConfig = {
     method: "get",
     url: `/files/file/${fileId}`,
+    headers: share
+      ? {
+          "Request-Token": share,
+        }
+      : undefined,
   };
 
   const res = (await request(options)) as TFile;
@@ -442,9 +489,9 @@ export async function getFileInfo(fileId: number) {
 }
 
 export async function updateFile(
-  fileId: string,
+  fileId: string | number,
   title: string,
-  lastVersion: number,
+  lastVersion?: number,
 ) {
   const data = { title, lastVersion };
   const options: AxiosRequestConfig = {
@@ -627,7 +674,7 @@ export async function getProgress() {
 }
 
 export async function checkFileConflicts(
-  destFolderId: number,
+  destFolderId: number | string,
   folderIds: number[],
   fileIds: number[],
 ) {
@@ -722,14 +769,18 @@ export async function getNewFiles(folderId: number) {
 }
 
 // TODO: update res type
-export async function convertFile(fileId: null, password = null, sync = false) {
+export async function convertFile(
+  fileId: string | number | null,
+  password = null,
+  sync = false,
+) {
   const data = { password, sync };
 
-  const res = await request({
+  const res = (await request({
     method: "put",
     url: `/files/file/${fileId}/checkconversion`,
     data,
-  });
+  })) as { result: { webUrl: string } }[];
 
   return res;
 }
@@ -929,9 +980,9 @@ export function getSettingsThirdParty() {
   return request({ method: "get", url: "files/thirdparty/backup" });
 }
 
-// export function deleteThirdParty(providerId) {
-//   return request({ method: "delete", url: `files/thirdparty/${providerId}` });
-// }
+export function deleteThirdParty(providerId: string) {
+  return request({ method: "delete", url: `files/thirdparty/${providerId}` });
+}
 
 export async function getThirdPartyCapabilities() {
   const res = (await request({
@@ -1017,12 +1068,14 @@ export async function getEncryptionKeys() {
 }
 
 // TODO: Need update res type
-export function getEncryptionAccess(fileId: number) {
-  return request({
+export async function getEncryptionAccess(fileId: number | string) {
+  const res = (await request({
     method: "get",
     url: `privacyroom/access/${fileId}`,
     data: fileId,
-  });
+  })) as { [key: string]: string | boolean };
+
+  return res;
 }
 
 // export function updateFileStream(file, fileId, encrypted, forcesave) {
@@ -1089,7 +1142,7 @@ export async function createThumbnails(fileIds: number[]) {
   return res;
 }
 
-export async function getPresignedUri(fileId: number) {
+export async function getPresignedUri(fileId: number | string) {
   const res = (await request({
     method: "get",
     url: `files/file/${fileId}/presigned`,
@@ -1098,13 +1151,14 @@ export async function getPresignedUri(fileId: number) {
   return res;
 }
 
-// TODO: Need update res type
-export function checkFillFormDraft(fileId: number) {
-  return request({
+export async function checkFillFormDraft(fileId: number | string) {
+  const res = (await request({
     method: "post",
     url: `files/masterform/${fileId}/checkfillformdraft`,
     data: { fileId },
-  });
+  })) as string;
+
+  return res;
 }
 
 export async function fileCopyAs(
@@ -1174,7 +1228,7 @@ export async function getSharedUsers(fileId: number) {
     url: `/files/file/${fileId}/sharedusers`,
   };
 
-  const res = (await request(options)) as TSharedUsers;
+  const res = (await request(options)) as TSharedUsers[];
 
   return res;
 }
@@ -1185,14 +1239,14 @@ export async function getProtectUsers(fileId: number) {
     url: `/files/file/${fileId}/protectusers`,
   };
 
-  const res = (await request(options)) as TSharedUsers;
+  const res = (await request(options)) as TSharedUsers[];
 
   return res;
 }
 
 export async function sendEditorNotify(
-  fileId: number,
-  actionLink: {},
+  fileId: number | string,
+  actionLink: string,
   emails: string[],
   message: string,
 ) {
@@ -1253,7 +1307,7 @@ export async function getFileLink(fileId: number) {
 }
 
 export async function getExternalLinks(
-  fileId: number,
+  fileId: number | string,
   startIndex = 0,
   count = 50,
 ) {
@@ -1262,7 +1316,7 @@ export async function getExternalLinks(
   const res = (await request({
     method: "get",
     url: `files/file/${fileId}/links${linkParams}`,
-  })) as TFileLink[];
+  })) as { items: TFileLink[] };
 
   return res;
 }
@@ -1277,12 +1331,12 @@ export async function getPrimaryLink(fileId: number) {
 }
 
 export async function editExternalLink(
-  fileId: number,
-  linkId: number,
-  access: number,
+  fileId: number | string,
+  linkId: number | string,
+  access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
-  expirationDate: string,
+  expirationDate: moment.Moment,
 ) {
   const res = (await request({
     method: "put",
@@ -1294,8 +1348,8 @@ export async function editExternalLink(
 }
 
 export async function addExternalLink(
-  fileId: number,
-  access: number,
+  fileId: number | string,
+  access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
 ) {
@@ -1329,3 +1383,31 @@ export function deleteFilesFromRecent(fileIds: number[]) {
   });
 }
 
+export async function getFilesUsedSpace() {
+  const options: AxiosRequestConfig = {
+    method: "get",
+    url: `/files/filesusedspace`,
+  };
+
+  const res = (await request(options)) as TFilesUsedSpace;
+
+  return res;
+}
+
+export async function getConnectingStorages() {
+  const res = (await request({
+    method: "get",
+    url: "files/thirdparty/providers",
+  })) as TConnectingStorages;
+
+  return res;
+}
+
+export async function startFilling(fileId: string | number): Promise<void> {
+  const options: AxiosRequestConfig = {
+    method: "put",
+    url: `files/file/${fileId}/startfilling`,
+  };
+
+  await request(options);
+}

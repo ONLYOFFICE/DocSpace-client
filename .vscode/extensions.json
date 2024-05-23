@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "ymotongpoo.licenser",
+    "folke.vscode-monorepo-workspace",
+    "orta.vscode-jest",
+    "firsttris.vscode-jest-runner",
+    "spencerwmiles.vscode-task-buttons",
+    "esbenp.prettier-vscode",
+    "formulahendry.auto-close-tag",
+    "formulahendry.auto-complete-tag",
+    "formulahendry.auto-rename-tag",
+    "mrmlnc.vscode-duplicate",
+    "ms-python.python"
+  ]
+}

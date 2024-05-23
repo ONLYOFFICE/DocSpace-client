@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React, {
   useEffect,
   useState,
@@ -85,7 +111,6 @@ const InvitePanel = ({
   const invitePanelBodyRef = useRef();
   const invitePanelWrapper = useRef(null);
   const invitePanelRef = useRef(null);
-  const windowHeight = useRef(window.innerHeight);
   const loaderRef = useRef();
 
   const onChangeExternalLinksVisible = (visible) => {
@@ -205,25 +230,6 @@ const InvitePanel = ({
     isMobileView && window.addEventListener("mousedown", onMouseDown);
   }, [isMobileView]);
 
-  useEffect(() => {
-    window.visualViewport.addEventListener("resize", onResize);
-
-    return () => {
-      window.visualViewport.removeEventListener("resize", onResize);
-    };
-  }, []);
-
-  const onResize = useCallback((e) => {
-    const diff = windowHeight.current - e.target.height;
-
-    if (invitePanelRef.current) {
-      invitePanelRef.current.style.height = `${e.target.height - 64}px`;
-      // invitePanelRef.current.style.bottom = `${diff}px`;
-      invitePanelWrapper.current.style.height = `${e.target.height}px`;
-      invitePanelWrapper.current.style.bottom = `${diff}px`;
-    }
-  }, []);
-
   const onMouseDown = (e) => {
     if (e.target.id === "InvitePanelWrapper") onClose();
   };
@@ -285,8 +291,26 @@ const InvitePanel = ({
 
       setIsLoading(false);
 
+      const invitedViaEmail = data.invitations
+        .filter((inv) => inv.email && !inv.id)
+        .map((invitation) => ({
+          access: invitation.access,
+          sharedTo: {
+            name: invitation.email,
+            userName: invitation.email,
+            email: invitation.email,
+            displayName: invitation.email,
+            status: 1,
+            activationStatus: 2,
+            usedSpace: 0,
+            hasAvatar: false,
+          },
+          canEditAccess: false,
+        }));
+
       if (isRooms) {
-        addInfoPanelMembers(t, result.members, true);
+        const newInfoPanelMembers = [...result.members, ...invitedViaEmail];
+        addInfoPanelMembers(t, newInfoPanelMembers);
       }
 
       onClose();
@@ -384,28 +408,27 @@ const InvitePanel = ({
           ) : (
             bodyInvitePanel
           )}
-          {hasInvitedUsers && (
-            <StyledButtons>
-              <Button
-                className="send-invitation"
-                scale={true}
-                size={"normal"}
-                isDisabled={hasErrors}
-                primary
-                onClick={onClickSend}
-                label={t("SendInvitation")}
-                isLoading={isLoading}
-              />
-              <Button
-                className="cancel-button"
-                scale={true}
-                size={"normal"}
-                onClick={onClose}
-                label={t("Common:CancelButton")}
-                isDisabled={isLoading}
-              />
-            </StyledButtons>
-          )}
+
+          <StyledButtons>
+            <Button
+              className="send-invitation"
+              scale={true}
+              size={"normal"}
+              isDisabled={hasErrors || !hasInvitedUsers}
+              primary
+              onClick={onClickSend}
+              label={t("SendInvitation")}
+              isLoading={isLoading}
+            />
+            <Button
+              className="cancel-button"
+              scale={true}
+              size={"normal"}
+              onClick={onClose}
+              label={t("Common:CancelButton")}
+              isDisabled={isLoading}
+            />
+          </StyledButtons>
         </>
       )}
     </>

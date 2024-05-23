@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 /* eslint-disable no-restricted-syntax */
 import React from "react";
 import { DebouncedFunc } from "lodash";
@@ -1180,7 +1206,7 @@ class TableHeader extends React.Component<
 
     // TODO: If defaultSize(75px) is less than defaultMinColumnSize(110px) the calculations work correctly
     const defaultSize =
-      columns.find((col) => col.defaultSize)?.defaultSize || 0;
+      columns.find((col) => col.defaultSize && col.enable)?.defaultSize || 0;
 
     // TODO: Fixed columns size if something went wrong
     if (storageSize) {
@@ -1306,7 +1332,7 @@ class TableHeader extends React.Component<
         tableInfoPanelContainer.forEach((item, index) => {
           const column = document.getElementById(`column_${index}`);
 
-          if (column?.dataset?.minWidth) {
+          if (column?.dataset?.minWidth && column?.dataset?.default) {
             gridTemplateColumns.push(
               `${containerWidth - defaultSize - settingsSize}px`,
             );
@@ -1351,7 +1377,9 @@ class TableHeader extends React.Component<
             getSubstring(tableInfoPanelContainer[0])
           ) {
             const currentContentWidth =
-              contentWidth - +getSubstring(tableInfoPanelContainer[0]);
+              enabledColumnsCount > 0
+                ? contentWidth - +getSubstring(tableInfoPanelContainer[0])
+                : contentWidth;
 
             let overWidth = 0;
 
@@ -1371,10 +1399,12 @@ class TableHeader extends React.Component<
                   gridTemplateColumns.push("0px");
                 } else if (item !== `${settingsSize}px`) {
                   const percent =
-                    (getSubstring(item) /
-                      (changedWidth -
-                        +getSubstring(tableInfoPanelContainer[0]))) *
-                    100;
+                    enabledColumnsCount === 0
+                      ? 100
+                      : (getSubstring(item) /
+                          (changedWidth -
+                            +getSubstring(tableInfoPanelContainer[0]))) *
+                        100;
 
                   const newItemWidth = defaultColumnSize
                     ? `${defaultColumnSize}px`
@@ -1492,6 +1522,19 @@ class TableHeader extends React.Component<
             } else if (item !== `${settingsSize}px`) {
               const percent = (getSubstring(item) / oldWidth) * 100;
 
+              if (percent === 100) {
+                const enableColumnsLength = columns.filter(
+                  (column) => !column.defaultSize && column.enable,
+                ).length;
+
+                if (enableColumnsLength !== 1) {
+                  localStorage.removeItem(columnStorageName);
+                  this.resetColumns();
+
+                  return;
+                }
+              }
+
               let newItemWidth = defaultColumnSize
                 ? `${defaultColumnSize}px`
                 : percent === 0
@@ -1592,7 +1635,7 @@ class TableHeader extends React.Component<
 
     let countColumns = 0;
     const defaultColumnSize =
-      columns.find((col) => col.defaultSize)?.defaultSize || 0;
+      columns.find((col) => col.defaultSize && col.enable)?.defaultSize || 0;
 
     newGridTemplateColumns.forEach((item, index) => {
       const unfixedSize = checkingForUnfixedSize(item, defaultColumnSize);
@@ -1659,6 +1702,9 @@ class TableHeader extends React.Component<
       infoPanelVisible,
     } = this.props;
 
+    localStorage.removeItem(columnStorageName);
+    localStorage.removeItem(columnInfoPanelStorageName);
+
     let str = "";
 
     const enableColumns = columns
@@ -1671,8 +1717,8 @@ class TableHeader extends React.Component<
       : document.getElementById("table-container");
     const containerWidth = container ? container.clientWidth : 0;
 
-    const firstColumnPercent = 40;
-    const percent = 60 / enableColumns.length;
+    const firstColumnPercent = enableColumns.length > 0 ? 40 : 100;
+    const percent = enableColumns.length > 0 ? 60 / enableColumns.length : 0;
 
     const wideColumnSize = `${(containerWidth * firstColumnPercent) / 100}px`;
     const otherColumns = `${(containerWidth * percent) / 100}px`;
@@ -1696,9 +1742,13 @@ class TableHeader extends React.Component<
       this.headerRef.current.style.width = `${containerWidth}px`;
     }
 
-    if (str)
-      if (!infoPanelVisible) localStorage.setItem(columnStorageName, str);
-      else localStorage.setItem(columnInfoPanelStorageName || "", str);
+    if (str) {
+      if (!infoPanelVisible) {
+        localStorage.setItem(columnStorageName, str);
+      } else {
+        localStorage.setItem(columnInfoPanelStorageName, str);
+      }
+    }
 
     this.onResize();
   };

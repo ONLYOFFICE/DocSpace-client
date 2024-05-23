@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { useGesture } from "@use-gesture/react";
 import { useSpring, config } from "@react-spring/web";
 import { isDesktop as isDesktopDeviceDetect } from "react-device-detect";
@@ -5,13 +31,15 @@ import React, {
   SyntheticEvent,
   useCallback,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from "react";
 
-import { IndexedDBStores } from "@docspace/shared/enums";
-import indexedDBHelper from "@docspace/shared/utils/indexedDBHelper";
+// import { IndexedDBStores } from "@docspace/shared/enums";
+// import indexedDBHelper from "@docspace/shared/utils/indexedDBHelper";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
 import {
   calculateAdjustBoundsUtils,
@@ -59,23 +87,26 @@ export const ImageViewer = ({
   mobileDetails,
   toolbar,
   thumbnailSrc,
-  imageId,
-  version,
+  // imageId,
+  // version,
   isTiff,
   contextModel,
   errorTitle,
   devices,
+  isPublicFile,
 }: ImageViewerProps) => {
   const imgRef = useRef<HTMLImageElement>(null);
   const imgWrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const unmountRef = useRef<boolean>(false);
+  const isLoaded = useRef<boolean>(false);
 
   const lastTapTimeRef = useRef<number>(0);
   const isDoubleTapRef = useRef<boolean>(false);
   const setTimeoutIDTapRef = useRef<NodeJS.Timeout>();
-  const changeSourceTimeoutRef = useRef<NodeJS.Timeout>();
+  // const changeSourceTimeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout>();
   const startAngleRef = useRef<number>(0);
   const toolbarRef = useRef<ImperativeHandle>(null);
 
@@ -96,50 +127,50 @@ export const ImageViewer = ({
 
   const { isMobile, isDesktop } = devices;
 
-  const changeSource = React.useCallback(
-    (imageUrl: Blob | MediaSource) => {
-      if (!window.DocSpaceConfig?.imageThumbnails) return;
-      changeSourceTimeoutRef.current = setTimeout(() => {
-        if (imgRef.current && !unmountRef.current) {
-          if (!src) return;
+  // const changeSource = React.useCallback(
+  //   (imageUrl: Blob | MediaSource) => {
+  //     if (!window.DocSpaceConfig?.imageThumbnails) return;
+  //     changeSourceTimeoutRef.current = setTimeout(() => {
+  //       if (imgRef.current && !unmountRef.current) {
+  //         if (!src) return;
 
-          if (!isTiff) {
-            imgRef.current.src = URL.createObjectURL(imageUrl);
-          } else {
-            imgRef.current.src = src;
-          }
+  //         if (!isTiff) {
+  //           imgRef.current.src = URL.createObjectURL(imageUrl);
+  //         } else {
+  //           imgRef.current.src = src;
+  //         }
 
-          setIsLoading(() => false);
-        }
-      }, 500);
-    },
-    [src, isTiff],
-  );
+  //         setIsLoading(() => false);
+  //       }
+  //     }, 500);
+  //   },
+  //   [src, isTiff],
+  // );
 
-  const loadImage = React.useCallback(async () => {
-    if (!src || !window.DocSpaceConfig?.imageThumbnails) return;
+  // const loadImage = React.useCallback(async () => {
+  //   if (!src || !window.DocSpaceConfig?.imageThumbnails) return;
 
-    try {
-      const res = await fetch(src);
-      const blob = await res.blob();
+  //   try {
+  //     const res = await fetch(src);
+  //     const blob = await res.blob();
 
-      if (isTiff) {
-        return changeSource(blob);
-      }
+  //     if (isTiff) {
+  //       return changeSource(blob);
+  //     }
 
-      indexedDBHelper.addItem(IndexedDBStores.images, {
-        id: imageId,
-        src: blob,
-        created: new Date(),
-        version,
-      });
+  //     indexedDBHelper.addItem(IndexedDBStores.images, {
+  //       id: imageId,
+  //       src: blob,
+  //       created: new Date(),
+  //       version,
+  //     });
 
-      changeSource(blob);
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-    }
-  }, [src, imageId, version, isTiff, changeSource]);
+  //     changeSource(blob);
+  //   } catch (error) {
+  //     // eslint-disable-next-line no-console
+  //     console.log(error);
+  //   }
+  // }, [src, imageId, version, isTiff, changeSource]);
 
   const resize = useCallback(() => {
     if (!imgRef.current || isLoading) return;
@@ -184,6 +215,9 @@ export const ImageViewer = ({
         scale: 1,
         rotate: 0,
       });
+
+      isLoaded.current = true;
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
       setIsLoading(false);
 
@@ -490,7 +524,7 @@ export const ImageViewer = ({
               : dx,
           y: dy,
           opacity:
-            style.scale.get() === 1 && !isDesktop && mdy > 0
+            style.scale.get() === 1 && !isDesktop && mdy > 0 && !isPublicFile
               ? imgRef.current.height / 10 / mdy
               : style.opacity.get(),
           immediate: true,
@@ -508,7 +542,7 @@ export const ImageViewer = ({
           cancel();
         }
 
-        if (style.scale.get() === 1 && !isDesktop) {
+        if (style.scale.get() === 1 && !isDesktop && !isPublicFile) {
           if (mdx < -imgRef.current.width / 4) {
             return onNext?.();
           }
@@ -820,11 +854,20 @@ export const ImageViewer = ({
     }
   };
 
-  const onError = useCallback(() => {
-    setIsError(true);
-  }, []);
+  const onError = useCallback(
+    (e: SyntheticEvent<HTMLImageElement, Event>) => {
+      if (window.DocSpaceConfig?.imageThumbnails && thumbnailSrc && src) {
+        // if thumbnailSrc is unavailable, try to load original image
+        e.currentTarget.src = src;
+        return;
+      }
 
-  const model = React.useMemo(contextModel, [contextModel]);
+      setIsError(true);
+    },
+    [src, thumbnailSrc],
+  );
+
+  const model = React.useMemo(() => contextModel(true), [contextModel]);
 
   useEffect(() => {
     unmountRef.current = false;
@@ -849,39 +892,64 @@ export const ImageViewer = ({
     };
   }, [onKeyDown]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (unmountRef.current || (isTiff && src)) return;
 
-    setIsLoading(true);
+    if (!isLoaded.current) {
+      timeoutRef.current = setTimeout(() => {
+        setIsLoading(true);
+      }, LOADER_TIMEOUT);
+    }
+
+    isLoaded.current = false;
+
     setIsError(false);
+
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
   }, [src, isTiff]);
 
+  // useEffect(() => {
+  //   if (!window.DocSpaceConfig?.imageThumbnails) return;
+
+  //   if (!thumbnailSrc) setIsLoading(true);
+  // }, [thumbnailSrc]);
+
+  // useEffect(() => {
+  //   if (changeSourceTimeoutRef.current)
+  //     clearTimeout(changeSourceTimeoutRef.current);
+  // }, [src, version]);
+
+  // useEffect(() => {
+  //   if (!imageId || thumbnailSrc || !window.DocSpaceConfig?.imageThumbnails)
+  //     return;
+
+  //   indexedDBHelper
+  //     .getItem(IndexedDBStores.images, imageId)
+  //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //     .then((result: any) => {
+  //       if (result && result.version === version) {
+  //         changeSource(result.src);
+  //       } else {
+  //         loadImage();
+  //       }
+  //     });
+  // }, [src, imageId, version, isTiff, loadImage, changeSource, thumbnailSrc]);
+
   useEffect(() => {
-    if (!window.DocSpaceConfig?.imageThumbnails) return;
+    const onWheelEvent = (event: WheelEvent) => {
+      if (event.ctrlKey) event.preventDefault();
+    };
 
-    if (!thumbnailSrc) setIsLoading(true);
-  }, [thumbnailSrc]);
+    window.addEventListener("wheel", onWheelEvent, {
+      passive: false,
+    });
 
-  useEffect(() => {
-    if (changeSourceTimeoutRef.current)
-      clearTimeout(changeSourceTimeoutRef.current);
-  }, [src, version]);
-
-  useEffect(() => {
-    if (!imageId || thumbnailSrc || !window.DocSpaceConfig?.imageThumbnails)
-      return;
-
-    indexedDBHelper
-      .getItem(IndexedDBStores.images, imageId)
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .then((result: any) => {
-        if (result && result.version === version) {
-          changeSource(result.src);
-        } else {
-          loadImage();
-        }
-      });
-  }, [src, imageId, version, isTiff, loadImage, changeSource, thumbnailSrc]);
+    return () => {
+      window.removeEventListener("wheel", onWheelEvent);
+    };
+  }, []);
 
   return (
     <>
@@ -905,11 +973,9 @@ export const ImageViewer = ({
           <Image
             draggable="false"
             src={
-              !window.DocSpaceConfig?.imageThumbnails
-                ? src
-                : thumbnailSrc
-                  ? `${thumbnailSrc}&size=1280x720`
-                  : ""
+              window.DocSpaceConfig?.imageThumbnails && thumbnailSrc
+                ? `${thumbnailSrc}&size=3840x2160`
+                : src
             }
             ref={imgRef}
             style={style}

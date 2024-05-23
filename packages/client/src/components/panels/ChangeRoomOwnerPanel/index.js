@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
@@ -30,6 +56,8 @@ const StyledChangeRoomOwner = styled.div`
       }
 
       .selector_footer-checkbox {
+        background-color: ${(props) =>
+          props.theme.filesPanels.aside.backgroundColor};
         padding: 17px 0 1px 0;
       }
     `}
@@ -50,7 +78,6 @@ const ChangeRoomOwner = (props) => {
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
-  const [isChecked, setIsChecked] = useState(!showBackButton);
 
   useEffect(() => {
     document.addEventListener("keyup", onKeyUp, false);
@@ -65,7 +92,12 @@ const ChangeRoomOwner = (props) => {
     if (e.keyCode === 13 || e.which === 13) onChangeRoomOwner();
   };
 
-  const onChangeRoomOwner = async (user) => {
+  const onChangeRoomOwner = async (
+    user,
+    selectedAccess,
+    newFooterInputValue,
+    isChecked,
+  ) => {
     if (showBackButton) {
       setRoomParams && setRoomParams(user[0]);
     } else {
@@ -89,16 +121,9 @@ const ChangeRoomOwner = (props) => {
   const filter = new Filter();
   filter.role = [EmployeeType.Admin, EmployeeType.User]; // 1(EmployeeType.User) - RoomAdmin | 3(EmployeeType.Admin) - DocSpaceAdmin
 
-  const backClickProp = showBackButton ? { onBackClick } : {};
-
   const asideComponent = (
     <StyledChangeRoomOwner showBackButton={showBackButton}>
-      <Backdrop
-        onClick={onClose}
-        visible={visible}
-        zIndex={320}
-        isAside={true}
-      />
+      <Backdrop onClick={onClose} visible={visible} zIndex={320} isAside />
       <Aside
         currentDeviceType={currentDeviceType}
         className="header_aside-panel"
@@ -108,22 +133,32 @@ const ChangeRoomOwner = (props) => {
       >
         <PeopleSelector
           withCancelButton
-          {...backClickProp}
-          onAccept={onChangeRoomOwner}
+          cancelButtonLabel=""
           onCancel={onClose}
-          acceptButtonLabel={
+          onSubmit={onChangeRoomOwner}
+          submitButtonLabel={
             showBackButton ? t("Common:SelectAction") : t("Files:AssignOwner")
           }
-          headerLabel={t("Files:ChangeTheRoomOwner")}
+          disableSubmitButton={false}
+          withHeader
+          headerProps={{
+            onBackClick,
+            withoutBackButton: !showBackButton,
+            headerLabel: t("Files:ChangeTheRoomOwner"),
+          }}
           filter={filter}
           isLoading={isLoading}
           withFooterCheckbox={!showBackButton}
           footerCheckboxLabel={t("Files:LeaveTheRoom")}
-          isChecked={isChecked}
-          setIsChecked={setIsChecked}
+          isChecked={!showBackButton}
           withOutCurrentAuthorizedUser
           filterUserId={roomOwnerId}
           currentUserId={userId}
+          disableDisabledUsers
+          withInfo
+          infoText={t("CreateEditRoomDialog:PeopleSelectorInfo")}
+          emptyScreenHeader={t("Common:NotFoundUsers")}
+          emptyScreenDescription={t("CreateEditRoomDialog:PeopleSelectorInfo")}
         />
       </Aside>
     </StyledChangeRoomOwner>
@@ -174,5 +209,11 @@ export default inject(
       userId: id,
       updateInfoPanelSelection,
     };
-  }
-)(observer(withTranslation(["Files"])(ChangeRoomOwner)));
+  },
+)(
+  observer(
+    withTranslation(["Files", "CreateEditRoomDialog", "Common"])(
+      ChangeRoomOwner,
+    ),
+  ),
+);

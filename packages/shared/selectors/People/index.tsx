@@ -1,84 +1,176 @@
-import { useState, useEffect, useCallback } from "react";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import { useState, useCallback, useRef } from "react";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
-import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
 import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
 
 import { Selector } from "../../components/selector";
-import { TSelectorItem } from "../../components/selector/Selector.types";
+import {
+  TSelectorCancelButton,
+  TSelectorCheckbox,
+  TSelectorHeader,
+  TSelectorInfo,
+  TSelectorItem,
+  TSelectorSearch,
+} from "../../components/selector/Selector.types";
 import { EmployeeStatus } from "../../enums";
 import { TTranslation } from "../../types";
-import { LOADER_TIMEOUT } from "../../constants";
 import { getUserRole } from "../../utils/common";
 import Filter from "../../api/people/filter";
 import { getUserList } from "../../api/people";
 import { TUser } from "../../api/people/types";
-import useLoadingWithTimeout from "../../hooks/useLoadingWithTimeout";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import { AvatarRole } from "../../components/avatar";
+import { Text } from "../../components/text";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
 
+const toListItem = (
+  item: TUser,
+  t: TTranslation,
+  disableDisabledUsers?: boolean,
+  disableInvitedUsers?: string[],
+) => {
+  const {
+    id: userId,
+    email,
+    avatar,
+    displayName,
+    hasAvatar,
+    isOwner,
+    isAdmin,
+    isVisitor,
+    isCollaborator,
+    isRoomAdmin,
+    status,
+  } = item;
+
+  const role = getUserRole(item);
+
+  const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
+
+  const isInvited = disableInvitedUsers?.includes(userId);
+  const isDisabled = disableDisabledUsers && status === EmployeeStatus.Disabled;
+
+  const disabledText = isInvited
+    ? t("Common:Invited")
+    : isDisabled
+      ? t("Common:Disabled")
+      : "";
+
+  const i = {
+    id: userId,
+    email,
+    avatar: userAvatar,
+    label: displayName || email,
+    role: AvatarRole[role],
+    isOwner,
+    isAdmin,
+    isVisitor,
+    isCollaborator,
+    isRoomAdmin,
+    hasAvatar,
+    isDisabled: isInvited || isDisabled,
+    disabledText,
+  } as TSelectorItem;
+
+  return i;
+};
+
 const PeopleSelector = ({
-  acceptButtonLabel,
-  accessRights,
-  cancelButtonLabel,
-  className,
-  emptyScreenDescription,
-  emptyScreenHeader,
-  headerLabel,
+  submitButtonLabel,
+  submitButtonId,
+  onSubmit,
+  disableSubmitButton,
+
   id,
-  isMultiSelect,
-  items,
-  onAccept,
-
-  onBackClick,
-  onCancel,
-
-  searchEmptyScreenDescription,
-  searchEmptyScreenHeader,
-  searchPlaceholder,
-  selectAllIcon = CatalogAccountsReactSvgUrl,
-  selectAllLabel,
-  selectedAccessRight,
-  selectedItems,
+  className,
   style,
-  withAccessRights,
-  withCancelButton,
-  withSelectAll,
-  filter,
-  excludeItems = [],
-  currentUserId,
 
+  cancelButtonLabel,
+  onCancel,
+  withCancelButton,
+
+  filter,
+  excludeItems,
+  currentUserId,
   withOutCurrentAuthorizedUser,
-  withAbilityCreateRoomUsers,
+
+  filterUserId,
+
   withFooterCheckbox,
   footerCheckboxLabel,
   isChecked,
-  setIsChecked,
-  filterUserId,
+
+  withHeader,
+  headerProps,
+
+  disableDisabledUsers,
+  disableInvitedUsers,
+  isMultiSelect,
+
+  withInfo,
+  infoText,
+
+  emptyScreenHeader,
+  emptyScreenDescription,
 }: PeopleSelectorProps) => {
-  const { t }: { t: TTranslation } = useTranslation([
-    "PeopleSelector",
-    "PeopleTranslations",
-    "People",
-    "Common",
-  ]);
+  const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
   const theme = useTheme();
 
-  const [itemsList, setItemsList] = useState(items);
+  const [itemsList, setItemsList] = useState<TSelectorItem[]>([]);
   const [searchValue, setSearchValue] = useState("");
   const [total, setTotal] = useState<number>(-1);
   const [hasNextPage, setHasNextPage] = useState(true);
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);
-  const [isLoading, setIsLoading] = useLoadingWithTimeout<boolean>(
-    LOADER_TIMEOUT,
-    false,
-  );
+  const [selectedItem, setSelectedItem] = useState<TSelectorItem | null>(null);
+  const isFirstLoad = useRef(true);
+  const afterSearch = useRef(false);
+  const totalRef = useRef(0);
+
+  const onSelect = (
+    item: TSelectorItem,
+    isDoubleClick: boolean,
+    doubleClickCallback: () => void,
+  ) => {
+    setSelectedItem((el) => {
+      if (el?.id === item.id) return null;
+
+      return item;
+    });
+    if (isDoubleClick) {
+      doubleClickCallback();
+    }
+  };
 
   const moveCurrentUserToTopOfList = useCallback(
     (listUser: TSelectorItem[]) => {
@@ -108,49 +200,11 @@ const PeopleSelector = ({
     [currentUserId, filterUserId],
   );
 
-  const toListItem = (item: TUser) => {
-    const {
-      id: userId,
-      email,
-      avatar,
-      displayName,
-      hasAvatar,
-      isOwner,
-      isAdmin,
-      isVisitor,
-      isCollaborator,
-    } = item;
-
-    const role = getUserRole(item);
-
-    const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
-
-    const i = {
-      id: userId,
-      email,
-      avatar: userAvatar,
-      label: displayName || email,
-      role: AvatarRole[role],
-      isOwner,
-      isAdmin,
-      isVisitor,
-      isCollaborator,
-      hasAvatar,
-      shared: false,
-    } as TSelectorItem;
-
-    return i;
-  };
-
   const loadNextPage = useCallback(
-    async (startIndex: number, search = searchValue) => {
+    async (startIndex: number) => {
       const pageCount = 100;
 
       setIsNextPageLoading(true);
-
-      if (startIndex === 0) {
-        setIsLoading(true);
-      }
 
       const currentFilter =
         typeof filter === "function" ? filter() : filter ?? Filter.getDefault();
@@ -158,129 +212,205 @@ const PeopleSelector = ({
       currentFilter.page = startIndex / pageCount;
       currentFilter.pageCount = pageCount;
 
-      if (search.length) {
-        currentFilter.search = search;
-      }
+      currentFilter.search = searchValue || null;
 
       const response = await getUserList(currentFilter);
 
-      let newItems = startIndex && itemsList ? itemsList : [];
-      let totalDifferent = startIndex ? response.total - total : 0;
+      let totalDifferent = startIndex ? response.total - totalRef.current : 0;
 
       const data = response.items
         .filter((item) => {
-          const excludeUser =
-            (!!withAbilityCreateRoomUsers &&
-              !item.isAdmin &&
-              !item.isOwner &&
-              !item.isRoomAdmin) ||
-            item.status === EmployeeStatus.Disabled;
-
-          if (excludeItems.includes(item.id) || excludeUser) {
+          if (excludeItems && excludeItems.includes(item.id)) {
             totalDifferent += 1;
             return false;
           }
           return true;
         })
-        .map((item) => toListItem(item));
-
-      const tempItems = [...newItems, ...data];
-
-      newItems = withOutCurrentAuthorizedUser
-        ? removeCurrentUserFromList(tempItems)
-        : moveCurrentUserToTopOfList(tempItems);
+        .map((item) =>
+          toListItem(item, t, disableDisabledUsers, disableInvitedUsers),
+        );
 
       const newTotal = withOutCurrentAuthorizedUser
         ? response.total - totalDifferent - 1
         : response.total - totalDifferent;
 
-      setHasNextPage(newItems.length < newTotal);
-      setItemsList(newItems);
+      if (isFirstLoad) {
+        const newItems = withOutCurrentAuthorizedUser
+          ? removeCurrentUserFromList(data)
+          : moveCurrentUserToTopOfList(data);
+
+        setHasNextPage(newItems.length < newTotal);
+        setItemsList(newItems);
+      } else {
+        setItemsList((i) => {
+          const tempItems = [...i, ...data];
+
+          const newItems = withOutCurrentAuthorizedUser
+            ? removeCurrentUserFromList(tempItems)
+            : moveCurrentUserToTopOfList(tempItems);
+
+          setHasNextPage(newItems.length < newTotal);
+
+          return newItems;
+        });
+      }
+
       setTotal(newTotal);
+      totalRef.current = newTotal;
 
       setIsNextPageLoading(false);
-      setIsLoading(false);
+      isFirstLoad.current = false;
     },
     [
+      disableDisabledUsers,
+      disableInvitedUsers,
       excludeItems,
       filter,
-      itemsList,
       moveCurrentUserToTopOfList,
       removeCurrentUserFromList,
       searchValue,
-      setIsLoading,
-      total,
-      withAbilityCreateRoomUsers,
+      t,
       withOutCurrentAuthorizedUser,
     ],
   );
 
-  const onSearch = (value: string) => {
-    setSearchValue(value);
-    loadNextPage(0, value);
-  };
+  const onSearch = useCallback((value: string, callback?: Function) => {
+    isFirstLoad.current = true;
+    afterSearch.current = true;
+    setSearchValue(() => {
+      return value;
+    });
+    callback?.();
+  }, []);
 
-  const onClearSearch = () => {
-    setSearchValue("");
-    loadNextPage(0, "");
-  };
-
-  useEffect(() => {
-    loadNextPage(0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  const onClearSearch = useCallback((callback?: Function) => {
+    isFirstLoad.current = true;
+    afterSearch.current = true;
+    setSearchValue(() => {
+      return "";
+    });
+    callback?.();
   }, []);
 
   const emptyScreenImage = theme.isBase
     ? EmptyScreenPersonsSvgUrl
     : EmptyScreenPersonsSvgDarkUrl;
 
+  const headerSelectorProps: TSelectorHeader = withHeader
+    ? {
+        withHeader,
+        headerProps: {
+          ...headerProps,
+          headerLabel: headerProps.headerLabel || t("Common:ListAccounts"),
+        },
+      }
+    : ({} as TSelectorHeader);
+
+  const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton
+    ? {
+        withCancelButton,
+        cancelButtonLabel: cancelButtonLabel || t("Common:CancelButton"),
+        onCancel,
+      }
+    : ({} as TSelectorCancelButton);
+
+  const searchSelectorProps: TSelectorSearch = {
+    withSearch: true,
+    searchPlaceholder: t("Common:Search"),
+    searchValue,
+    onSearch,
+    onClearSearch,
+    searchLoader: <SearchLoader />,
+    isSearchLoading:
+      isFirstLoad.current && !searchValue && !afterSearch.current,
+  };
+
+  const infoProps: TSelectorInfo = withInfo
+    ? {
+        withInfo,
+        infoText,
+      }
+    : {};
+
+  const checkboxSelectorProps: TSelectorCheckbox = withFooterCheckbox
+    ? {
+        withFooterCheckbox,
+        footerCheckboxLabel,
+        isChecked,
+      }
+    : {};
+
+  const renderCustomItem = (
+    label: string,
+    userType?: string,
+    email?: string,
+    isGroup?: boolean,
+  ) => {
+    return (
+      <div style={{ width: "100%" }}>
+        <Text
+          className="label"
+          fontWeight={600}
+          fontSize="14px"
+          noSelect
+          truncate
+          dir="auto"
+        >
+          {label}
+        </Text>
+        {!isGroup && (
+          <div style={{ display: "flex" }}>
+            <Text
+              className="label"
+              fontWeight={400}
+              fontSize="12px"
+              noSelect
+              truncate
+              color="#A3A9AE"
+              dir="auto"
+            >
+              {`${userType} | ${email}`}
+            </Text>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <Selector
       id={id}
+      alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
       className={className}
       style={style}
-      headerLabel={headerLabel || t("ListAccounts")}
-      onBackClick={onBackClick}
-      searchPlaceholder={searchPlaceholder || t("Common:Search")}
-      searchValue={searchValue}
-      onSearch={onSearch}
-      onClearSearch={onClearSearch}
+      renderCustomItem={renderCustomItem}
+      {...headerSelectorProps}
+      {...searchSelectorProps}
+      {...checkboxSelectorProps}
+      {...cancelButtonSelectorProps}
       items={itemsList}
-      isMultiSelect={isMultiSelect}
-      selectedItems={selectedItems}
-      acceptButtonLabel={acceptButtonLabel || t("Common:SelectAction")}
-      onAccept={onAccept}
-      withSelectAll={withSelectAll}
-      selectAllLabel={selectAllLabel || t("AllAccounts")}
-      selectAllIcon={selectAllIcon}
-      withAccessRights={withAccessRights}
-      accessRights={accessRights}
-      selectedAccessRight={selectedAccessRight}
-      withCancelButton={withCancelButton}
-      cancelButtonLabel={cancelButtonLabel || t("Common:CancelButton")}
-      onCancel={onCancel}
+      submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
+      onSubmit={onSubmit}
+      disableSubmitButton={disableSubmitButton || !selectedItem}
+      submitButtonId={submitButtonId}
       emptyScreenImage={emptyScreenImage}
-      emptyScreenHeader={emptyScreenHeader || t("EmptyHeader")}
-      emptyScreenDescription={emptyScreenDescription || t("EmptyDescription")}
+      emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyHeader")}
+      emptyScreenDescription={
+        emptyScreenDescription ?? t("Common:EmptyDescription")
+      }
       searchEmptyScreenImage={emptyScreenImage}
-      searchEmptyScreenHeader={
-        searchEmptyScreenHeader || t("People:NotFoundUsers")
-      }
-      searchEmptyScreenDescription={
-        searchEmptyScreenDescription || t("People:NotFoundUsersDescription")
-      }
+      searchEmptyScreenHeader={t("Common:NotFoundUsers")}
+      searchEmptyScreenDescription={t("Common:NotFoundUsersDescription")}
       hasNextPage={hasNextPage}
       isNextPageLoading={isNextPageLoading}
       loadNextPage={loadNextPage}
+      isMultiSelect={isMultiSelect ?? false}
       totalItems={total}
-      isLoading={isLoading}
-      withFooterCheckbox={withFooterCheckbox}
-      footerCheckboxLabel={footerCheckboxLabel}
-      isChecked={isChecked}
-      setIsChecked={setIsChecked}
+      isLoading={isFirstLoad.current}
       searchLoader={<SearchLoader />}
-      isSearchLoading={isLoading}
-      rowLoader={<RowLoader isUser isContainer={isLoading} />}
+      rowLoader={<RowLoader isUser isContainer={isFirstLoad.current} />}
+      onSelect={onSelect}
+      {...infoProps}
     />
   );
 };

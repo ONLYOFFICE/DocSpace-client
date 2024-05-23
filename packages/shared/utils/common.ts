@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 /* eslint-disable no-console */
 /* eslint-disable no-multi-str */
 /* eslint-disable no-plusplus */
@@ -14,7 +40,7 @@ import DocseditorSvgUrl from "PUBLIC_DIR/images/logo/docseditor.svg?url";
 import LightSmallSvgUrl from "PUBLIC_DIR/images/logo/lightsmall.svg?url";
 import DocsEditoRembedSvgUrl from "PUBLIC_DIR/images/logo/docseditorembed.svg?url";
 import DarkLightSmallSvgUrl from "PUBLIC_DIR/images/logo/dark_lightsmall.svg?url";
-import FaviconIco from "PUBLIC_DIR/favicon.ico";
+import FaviconIco from "PUBLIC_DIR/images/logo/favicon.ico";
 
 import BackgroundPatternReactSvgUrl from "PUBLIC_DIR/images/background.pattern.react.svg?url";
 import BackgroundPatternOrangeReactSvgUrl from "PUBLIC_DIR/images/background.pattern.orange.react.svg?url";
@@ -23,27 +49,29 @@ import BackgroundPatternRedReactSvgUrl from "PUBLIC_DIR/images/background.patter
 import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pattern.purple.react.svg?url";
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
+import { parseAddress } from "./email";
 
 import {
-  ArticleAlerts,
   FolderType,
   RoomsType,
   ShareAccessRights,
   ThemeKeys,
+  ErrorKeys,
+  WhiteLabelLogoType,
 } from "../enums";
-import { LANGUAGE, RTL_LANGUAGES } from "../constants";
+import { LANGUAGE, PUBLIC_MEDIA_VIEW_URL, RTL_LANGUAGES } from "../constants";
 
-import { TI18n } from "../types";
+import { TI18n, TTranslation } from "../types";
 import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
 import { TRoom } from "../api/rooms/types";
+import { TPasswordHash } from "../api/settings/types";
 import TopLoaderService from "../components/top-loading-indicator";
 
 import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie } from "./cookie";
 import { checkIsSSR } from "./device";
-import { AvatarRole } from "../components/avatar/Avatar.enums";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -63,7 +91,7 @@ export function changeLanguage(i18n: TI18n, currentLng = getCookie(LANGUAGE)) {
 
 export function createPasswordHash(
   password: string,
-  hashSettings: { [key: string]: boolean },
+  hashSettings?: TPasswordHash,
 ) {
   if (
     !password ||
@@ -89,12 +117,19 @@ export function createPasswordHash(
 }
 
 export const isPublicRoom = () => {
-  return window.location.pathname === "/rooms/share";
+  return (
+    window.location.pathname === "/rooms/share" ||
+    window.location.pathname.includes(PUBLIC_MEDIA_VIEW_URL)
+  );
+};
+
+export const isPublicPreview = () => {
+  return window.location.pathname.includes("/share/preview/");
 };
 
 export const getUserTypeLabel = (
-  role: AvatarRole | undefined,
-  t: (key: string) => string,
+  role: "owner" | "admin" | "user" | "collaborator" | "manager" | undefined,
+  t: TTranslation,
 ) => {
   switch (role) {
     case "owner":
@@ -112,6 +147,71 @@ export const getUserTypeLabel = (
   }
 };
 
+export const parseDomain = (
+  domain: string,
+  setError: Function,
+  t: (key: string) => string,
+) => {
+  const parsedDomain = parseAddress(`test@${domain}`);
+
+  if (parsedDomain?.parseErrors && parsedDomain?.parseErrors.length > 0) {
+    const translatedErrors = parsedDomain.parseErrors.map((error) => {
+      switch (error.errorKey) {
+        case ErrorKeys.LocalDomain:
+          return t("Common:LocalDomain");
+        case ErrorKeys.IncorrectDomain:
+        case ErrorKeys.IncorrectEmail:
+          return t("Common:IncorrectDomain");
+        case ErrorKeys.DomainIpAddress:
+          return t("Common:DomainIpAddress");
+        case ErrorKeys.PunycodeDomain:
+          return t("Common:PunycodeDomain");
+        case ErrorKeys.PunycodeLocalPart:
+          return t("Common:PunycodeLocalPart");
+        case ErrorKeys.IncorrectLocalPart:
+          return t("Common:IncorrectLocalPart");
+        case ErrorKeys.SpacesInLocalPart:
+          return t("Common:SpacesInLocalPart");
+        case ErrorKeys.MaxLengthExceeded:
+          return t("Common:MaxLengthExceeded");
+        default:
+          return t("Common:IncorrectDomain");
+      }
+    });
+
+    setError(translatedErrors);
+  }
+
+  return parsedDomain.isValid();
+};
+
+export const validatePortalName = (
+  value: string,
+  nameValidator: { minLength: number; maxLength: number; regex: RegExp },
+  setError: Function,
+  t: TTranslation,
+) => {
+  const validName = new RegExp(nameValidator.regex);
+  switch (true) {
+    case value === "":
+      return setError(t("Settings:PortalNameEmpty"));
+    case value.length < nameValidator.minLength ||
+      value.length > nameValidator.maxLength:
+      return setError(
+        t("Settings:PortalNameLength", {
+          minLength: nameValidator.minLength.toString(),
+          maxLength: nameValidator.maxLength.toString(),
+        }),
+      );
+    case !validName.test(value):
+      return setError(t("Settings:PortalNameIncorrect"));
+
+    default:
+      setError(null);
+  }
+  return validName.test(value);
+};
+
 export const getShowText = () => {
   const showArticle = localStorage.getItem("showArticle");
 
@@ -124,30 +224,6 @@ export const getShowText = () => {
 
 export const isManagement = () => {
   return window.location.pathname.includes("management");
-};
-
-export const initArticleAlertsData = () => {
-  const savedArticleAlertsData = localStorage.getItem("articleAlertsData");
-  if (savedArticleAlertsData)
-    return JSON.parse(savedArticleAlertsData) as {
-      current: ArticleAlerts;
-      available: ArticleAlerts[];
-    };
-
-  const articleAlertsArray = Object.values(ArticleAlerts).filter(
-    (item, index) => Object.values(ArticleAlerts).indexOf(item) === index,
-  );
-  const defaultArticleAlertsData = {
-    current: articleAlertsArray[0],
-    available: articleAlertsArray,
-  };
-
-  localStorage.setItem(
-    "articleAlertsData",
-    JSON.stringify(defaultArticleAlertsData),
-  );
-
-  return defaultArticleAlertsData;
 };
 
 export function updateTempContent(isAuth = false) {
@@ -301,7 +377,30 @@ export function getProviderTranslation(
       return "";
   }
 }
-
+export function getProviderLabel(provider: string, t: (key: string) => string) {
+  switch (provider) {
+    case "apple":
+      return t("Common:ProviderApple");
+    case "google":
+      return t("Common:ProviderGoogle");
+    case "facebook":
+      return t("Common:ProviderFacebook");
+    case "twitter":
+      return t("Common:ProviderTwitter");
+    case "linkedin":
+      return t("Common:ProviderLinkedIn");
+    case "microsoft":
+      return t("Common:ProviderMicrosoft");
+    case "sso":
+      return t("Common:SSO");
+    case "zoom":
+      return t("Common:ProviderZoom");
+    case "sso-full":
+      return t("Common:ProviderSsoSetting");
+    default:
+      return "";
+  }
+}
 export const isLanguageRtl = (lng: string) => {
   if (!lng) return;
 
@@ -490,10 +589,17 @@ export function getLoginLink(token: string, code: string) {
   );
 }
 
+const FRAME_NAME = "frameDocSpace";
+
+const getFrameId = () => {
+  return window.self.name.replace(`${FRAME_NAME}__#`, "");
+};
+
 export const frameCallbackData = (methodReturnData: unknown) => {
   window.parent.postMessage(
     JSON.stringify({
       type: "onMethodReturn",
+      frameId: getFrameId(),
       methodReturnData,
     }),
     "*",
@@ -504,21 +610,35 @@ export const frameCallEvent = (eventReturnData: unknown) => {
   window.parent.postMessage(
     JSON.stringify({
       type: "onEventReturn",
+      frameId: getFrameId(),
       eventReturnData,
     }),
     "*",
   );
 };
 
-export const frameCallCommand = (commandName: string, commandData: unknown) => {
+export const frameCallCommand = (
+  commandName: string,
+  commandData?: unknown,
+) => {
   window.parent.postMessage(
     JSON.stringify({
       type: "onCallCommand",
+      frameId: getFrameId(),
       commandName,
       commandData,
     }),
     "*",
   );
+};
+
+export const getPowerFromBytes = (bytes: number, maxPower = 6) => {
+  const power = Math.floor(Math.log(bytes) / Math.log(1024));
+  return power <= maxPower ? power : maxPower;
+};
+
+export const getSizeFromBytes = (bytes: number, power: number) => {
+  return Math.floor(bytes / 1024 ** power);
 };
 
 export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
@@ -538,12 +658,38 @@ export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
   if (bytes <= 0) return `${`0 ${t("Common:Bytes")}`}`;
 
   if (bytes >= 1024) {
-    power = Math.floor(Math.log(bytes) / Math.log(1024));
-    power = power < sizeNames.length ? power : sizeNames.length - 1;
-    resultSize = parseFloat((bytes / 1024 ** power).toFixed(2));
+    power = getPowerFromBytes(bytes, sizeNames.length - 1);
+    resultSize = getSizeFromBytes(bytes, power);
   }
 
   return `${resultSize} ${sizeNames[power]}`;
+};
+
+export const getConvertedQuota = (
+  t: (key: string) => string,
+  bytes: number,
+) => {
+  if (bytes === -1) return t("Common:Unlimited");
+  return getConvertedSize(t, bytes);
+};
+
+export const getSpaceQuotaAsText = (
+  t: (key: string) => string,
+  usedSpace: number,
+  quotaLimit: number,
+  isDefaultQuotaSet: boolean,
+) => {
+  const usedValue = getConvertedQuota(t, usedSpace);
+  const quotaValue = getConvertedQuota(t, quotaLimit);
+
+  if (isDefaultQuotaSet) return `${usedValue} / ${quotaValue}`;
+
+  return usedValue;
+};
+
+export const conversionToBytes = (size: number, power: number) => {
+  const value = Math.floor(size) * 1024 ** power;
+  return value.toString();
 };
 
 export const getBgPattern = (colorSchemeId: number | undefined) => {
@@ -763,26 +909,37 @@ export const toUrlParams = (
 export function getObjectByLocation(location: Location) {
   if (!location.search || !location.search.length) return null;
 
-  const searchUrl = location.search.substring(1);
-  const decodedString = decodeURIComponent(searchUrl)
-    .replace(/\["/g, '["')
-    .replace(/"\]/g, '"]')
-    .replace(/"/g, '\\"')
-    .replace(/&/g, '","')
-    .replace(/=/g, '":"')
-    .replace(/\\/g, "\\\\")
-    .replace(/\[\\\\"/g, '["')
-    .replace(/\\\\"\]/g, '"]')
-    .replace(/"\[/g, "[")
-    .replace(/\]"/g, "]")
-    .replace(/\\\\",\\\\"/g, '","')
-    .replace(/\\\\\\\\"/g, '\\"');
-
   try {
-    const object = JSON.parse(`{"${decodedString}"}`);
-    return object;
+    const searchUrl = location.search.substring(1);
+    const params = Object.fromEntries(new URLSearchParams(searchUrl));
+    return params;
   } catch (e) {
+    console.error(e);
     return {};
+  }
+}
+
+export function tryParse(str: string) {
+  try {
+    if (!str) return undefined;
+
+    return JSON.parse(str);
+  } catch (e) {
+    console.error(e);
+    return undefined;
+  }
+}
+
+export function tryParseArray(str: string) {
+  try {
+    const res = tryParse(str);
+
+    if (!Array.isArray(res)) return undefined;
+
+    return res;
+  } catch (e) {
+    console.error(e);
+    return undefined;
   }
 }
 
@@ -799,25 +956,29 @@ export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(
 );
 
 export const getSystemTheme = () => {
-  const isDesktopClient = window.AscDesktopEditor !== undefined;
-  const desktopClientTheme = window?.RendererProcessVariable?.theme;
-  const isDark =
-    desktopClientTheme?.id === "theme-dark" ||
-    desktopClientTheme?.id === "theme-contrast-dark" ||
-    (desktopClientTheme?.id === "theme-system" &&
-      desktopClientTheme?.system === "dark");
+  if (typeof window !== "undefined") {
+    const isDesktopClient = window?.AscDesktopEditor !== undefined;
+    const desktopClientTheme = window?.RendererProcessVariable?.theme;
+    const isDark =
+      desktopClientTheme?.id === "theme-dark" ||
+      desktopClientTheme?.id === "theme-contrast-dark" ||
+      (desktopClientTheme?.id === "theme-system" &&
+        desktopClientTheme?.system === "dark");
 
-  return isDesktopClient
-    ? isDark
-      ? ThemeKeys.DarkStr
-      : ThemeKeys.BaseStr
-    : window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? ThemeKeys.DarkStr
-      : ThemeKeys.BaseStr;
+    return isDesktopClient
+      ? isDark
+        ? ThemeKeys.DarkStr
+        : ThemeKeys.BaseStr
+      : window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? ThemeKeys.DarkStr
+        : ThemeKeys.BaseStr;
+  }
+
+  return ThemeKeys.BaseStr;
 };
 
-export const getEditorTheme = (theme: ThemeKeys) => {
+export const getEditorTheme = (theme?: ThemeKeys) => {
   switch (theme) {
     case ThemeKeys.BaseStr:
       return "default-light";
@@ -883,3 +1044,32 @@ export const getIconPathByFolderType = (
 
   return folderIconPath[folderType ?? FolderType.DEFAULT] ?? defaultPath;
 };
+
+export const insertTagManager = (id: string) => {
+  const script = document.createElement("script");
+  script.innerHTML = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','${id}');`;
+
+  const noScript = document.createElement("noscript");
+  noScript.innerHTML = `<iframe src="https://www.googletagmanager.com/ns.html?id=${id}"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
+
+  document.head.insertBefore(script, document.head.childNodes[0]);
+  document.body.insertBefore(noScript, document.body.childNodes[0]);
+};
+
+export const insertDataLayer = (id: string) => {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ user_id: id });
+};
+
+export function getLogoUrl(
+  logoType: WhiteLabelLogoType,
+  dark: boolean = false,
+  def: boolean = false,
+) {
+  return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}`;
+}

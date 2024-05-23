@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import styled, { css } from "styled-components";
 import { isMobileOnly } from "react-device-detect";
 
@@ -17,6 +43,7 @@ import { TViewAs } from "../../types";
 import { Scrollbar } from "../scrollbar";
 import DragAndDrop from "../drag-and-drop/DragAndDrop";
 import { SectionContainerProps } from "./Section.types";
+import { SECTION_HEADER_HEIGHT } from "./Section.constants";
 
 const StyledScrollbar = styled(Scrollbar)<{ $isScrollLocked?: boolean }>`
   ${({ $isScrollLocked }) =>
@@ -451,10 +478,7 @@ const tabletProps = css<{ viewAs?: TViewAs }>`
     width: 100%;
     position: sticky;
     top: 0;
-    background: ${(props) =>
-      props.viewAs === "profile" || props.viewAs === "settings"
-        ? props.theme.section.header.backgroundColor
-        : props.theme.section.header.background};
+    background: ${(props) => props.theme.section.header.backgroundColor};
 
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
@@ -465,6 +489,12 @@ const tabletProps = css<{ viewAs?: TViewAs }>`
             padding-right: 0;
           `}
     z-index: 201;
+    @media ${mobile} {
+      min-width: 100vw;
+      margin-inline-start: -16px;
+      padding-inline-end: 16px;
+      padding-inline-start: 16px;
+    }
   }
   .section-body_filter {
     display: block;
@@ -478,14 +508,7 @@ const sizeBetweenIcons = "8px";
 const StyledSectionContainer = styled.section<SectionContainerProps>`
   position: relative;
 
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          padding: 0 20px 0 0;
-        `
-      : css`
-          padding: 0 0 0 20px;
-        `}
+  ${(props) => !props.withBodyScroll && "padding-inline-start: 20px;"}
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -497,40 +520,51 @@ const StyledSectionContainer = styled.section<SectionContainerProps>`
   @media ${tablet} {
     width: 100%;
     max-width: 100vw !important;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 0 16px 0 0;
-          `
-        : css`
-            padding: 0 0 0 16px;
-          `}
+
+    ${(props) => !props.withBodyScroll && "padding-inline-start: 16px;"}
     ${tabletProps};
   }
 
   @media ${mobile} {
     width: 100vw !important;
     max-width: 100vw !important;
+    padding-inline-start: 16px;
+  }
+
+  .section-scroll > .scroll-body {
+    display: flex;
+    flex-direction: column;
+    padding-inline-start: 20px !important;
+
+    @media ${tablet} {
+      padding-inline-start: 16px !important;
+    }
+  }
+
+  .section-sticky-container {
+    position: sticky;
+    top: 0;
+    background: ${(props) => props.theme.section.header.backgroundColor};
+    z-index: 201;
+    padding-inline: 20px;
+    margin-inline: -20px -17px;
+
+    @media ${tablet} {
+      padding-inline: 16px;
+      margin-inline: -16px;
+    }
   }
 
   .progress-bar_container {
-    position: absolute;
+    position: fixed;
     bottom: 0;
 
     display: grid;
     grid-gap: 24px;
     margin-bottom: 24px;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 24px;
-            left: 0;
-          `
-        : css`
-            margin-right: 24px;
-            right: 0;
-          `}
+    margin-inline-end: 24px;
+    inset-inline-end: ${(props) =>
+      props.isInfoPanelVisible ? INFO_PANEL_WIDTH : 0}px;
 
     .layout-progress-bar_wrapper {
       position: static;
@@ -589,14 +623,6 @@ const StyledSectionContainer = styled.section<SectionContainerProps>`
 StyledSectionContainer.defaultProps = { theme: Base };
 
 const StyledSectionFilter = styled.div`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: 20px;
-        `
-      : css`
-          margin-right: 20px;
-        `}
   @media ${tablet} {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
@@ -623,18 +649,18 @@ const StyledSectionHeader = styled.div<{ isFormGallery?: boolean }>`
   position: relative;
   display: flex;
 
-  height: 69px;
-  min-height: 69px;
+  height: ${SECTION_HEADER_HEIGHT.desktop};
+  min-height: ${SECTION_HEADER_HEIGHT.desktop};
 
   @media ${tablet} {
-    height: 61px;
-    min-height: 61px;
+    height: ${SECTION_HEADER_HEIGHT.tablet};
+    min-height: ${SECTION_HEADER_HEIGHT.tablet};
 
     ${({ isFormGallery }) =>
       isFormGallery &&
       css`
-        height: 69px;
-        min-height: 69px;
+        height: ${SECTION_HEADER_HEIGHT.desktop};
+        min-height: ${SECTION_HEADER_HEIGHT.desktop};
       `}
 
     .header-container {
@@ -644,18 +670,9 @@ const StyledSectionHeader = styled.div<{ isFormGallery?: boolean }>`
   }
 
   @media ${mobile} {
-    height: 53px;
-    min-height: 53px;
+    height: ${SECTION_HEADER_HEIGHT.mobile};
+    min-height: ${SECTION_HEADER_HEIGHT.mobile};
   }
-
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          padding-left: 20px;
-        `
-      : css`
-          padding-right: 20px;
-        `}
 
   box-sizing: border-box;
 
@@ -671,28 +688,8 @@ const StyledSectionHeader = styled.div<{ isFormGallery?: boolean }>`
     display: flex;
   }
 
-  @media ${tablet} {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 16px;
-            margin-left: 0px;
-          `
-        : css`
-            padding-right: 16px;
-            margin-right: 0px;
-          `}
-  }
-
   @media ${mobile} {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 0px;
-          `
-        : css`
-            margin-right: 0px;
-          `}
+    margin-inline-end: 0;
   }
 `;
 
@@ -724,14 +721,23 @@ const StyledSectionPaging = styled.div`
 StyledSectionPaging.defaultProps = { theme: Base };
 
 const StyledSectionSubmenu = styled.div`
-  width: calc(100% - 20px);
+  background: ${(props) => props.theme.section.header.backgroundColor};
+  width: 100%;
+  z-index: 1;
 
   @media ${tablet} {
-    width: calc(100% - 16px);
+    width: calc(100% + 32px);
+    position: sticky;
+    top: ${SECTION_HEADER_HEIGHT.tablet};
+    margin: 0 -16px;
+    & > div {
+      padding: 0 16px;
+    }
   }
 
   @media ${mobile} {
-    width: 100%;
+    position: sticky;
+    top: ${SECTION_HEADER_HEIGHT.mobile};
   }
 `;
 

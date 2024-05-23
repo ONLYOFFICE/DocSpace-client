@@ -1,5 +1,38 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+/* eslint-disable class-methods-use-this */
+/* eslint-disable guard-for-in */
+import transform from "lodash/transform";
 import { RoomSearchArea } from "../../enums";
-import { getObjectByLocation, toUrlParams } from "../../utils/common";
+import {
+  getObjectByLocation,
+  toUrlParams,
+  tryParseArray,
+} from "../../utils/common";
 
 const PAGE = "page";
 const PAGE_COUNT = "count";
@@ -46,9 +79,46 @@ const DEFAULT_WITHOUT_TAGS = false;
 const SUBJECT_FILTER = "subjectFilter";
 const DEFAULT_SUBJECT_FILTER = null;
 
+const QUOTA_FILTER = "quotaFilter";
+const DEFAULT_QUOTA_FILTER = null;
+
+const STORAGE_FILTER = "storageFilter";
+const DEFAULT_STORAGE_FILTER = null;
+
 class RoomsFilter {
-  static getDefault(total = DEFAULT_TOTAL) {
-    return new RoomsFilter(DEFAULT_PAGE, DEFAULT_PAGE_COUNT, total);
+  static getDefault(userId) {
+    const defaultFilter = new RoomsFilter(
+      DEFAULT_PAGE,
+      DEFAULT_PAGE_COUNT,
+      DEFAULT_TOTAL,
+    );
+
+    if (userId) {
+      try {
+        const filterStorageItem =
+          defaultFilter.searchArea === RoomSearchArea.Active
+            ? JSON.parse(
+                localStorage.getItem(`UserRoomsSharedFilter=${userId}`),
+              )
+            : JSON.parse(
+                localStorage.getItem(`UserRoomsArchivedFilter=${userId}`),
+              );
+        if (filterStorageItem) {
+          // eslint-disable-next-line no-restricted-syntax
+          for (const filterProperty in filterStorageItem) {
+            defaultFilter[filterProperty] = filterStorageItem[filterProperty];
+          }
+        }
+      } catch (e) {
+        return defaultFilter;
+      }
+    }
+
+    return defaultFilter;
+  }
+
+  static clean() {
+    return new RoomsFilter(DEFAULT_PAGE, DEFAULT_PAGE_COUNT, DEFAULT_TOTAL);
   }
 
   static getFilter(location) {
@@ -101,8 +171,7 @@ class RoomsFilter {
       (urlFilter[SEARCH_AREA] && urlFilter[SEARCH_AREA]) ||
       defaultFilter.searchArea;
 
-    const tags =
-      (urlFilter[TAGS] && [...urlFilter[TAGS]]) || defaultFilter.tags;
+    const tags = tryParseArray(urlFilter[TAGS]) || defaultFilter.tags;
 
     const sortBy = urlFilter[SORT_BY] || defaultFilter.sortBy;
 
@@ -112,6 +181,11 @@ class RoomsFilter {
       urlFilter[EXCLUDE_SUBJECT] || defaultFilter.excludeSubject;
 
     const withoutTags = urlFilter[WITHOUT_TAGS] || defaultFilter.withoutTags;
+    const quotaFilter = urlFilter[QUOTA_FILTER] || defaultFilter.quotaFilter;
+
+    const storageFilter =
+      (urlFilter[STORAGE_FILTER] && urlFilter[STORAGE_FILTER]) ||
+      defaultFilter.storageFilter;
 
     const newFilter = new RoomsFilter(
       page,
@@ -130,6 +204,8 @@ class RoomsFilter {
       excludeSubject,
       withoutTags,
       subjectFilter,
+      quotaFilter,
+      storageFilter,
     );
 
     return newFilter;
@@ -152,6 +228,8 @@ class RoomsFilter {
     excludeSubject = DEFAULT_EXCLUDE_SUBJECT,
     withoutTags = DEFAULT_WITHOUT_TAGS,
     subjectFilter = DEFAULT_SUBJECT_FILTER,
+    quotaFilter = DEFAULT_QUOTA_FILTER,
+    storageFilter = DEFAULT_STORAGE_FILTER,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -169,6 +247,8 @@ class RoomsFilter {
     this.excludeSubject = excludeSubject;
     this.withoutTags = withoutTags;
     this.subjectFilter = subjectFilter;
+    this.quotaFilter = quotaFilter;
+    this.storageFilter = storageFilter;
   }
 
   getStartIndex = () => {
@@ -181,6 +261,19 @@ class RoomsFilter {
 
   hasPrev = () => {
     return this.page > 0;
+  };
+
+  toJSON = (filter) => {
+    const filterObject = transform(
+      filter,
+      (result, value, key) => {
+        if (value instanceof Function) return result;
+        if (value === null || value === false) return result;
+        result[key] = value;
+      },
+      {},
+    );
+    return JSON.stringify(filterObject);
   };
 
   toApiUrlParams = () => {
@@ -200,6 +293,8 @@ class RoomsFilter {
       excludeSubject,
       withoutTags,
       subjectFilter,
+      quotaFilter,
+      storageFilter,
     } = this;
 
     const dtoFilter = {
@@ -219,13 +314,15 @@ class RoomsFilter {
       excludeSubject,
       withoutTags,
       subjectFilter,
+      quotaFilter,
+      storageFilter,
     };
 
     const str = toUrlParams(dtoFilter, true);
     return str;
   };
 
-  toUrlParams = () => {
+  toUrlParams = (userId, withLocalStorage) => {
     const {
       page,
       pageCount,
@@ -242,6 +339,8 @@ class RoomsFilter {
       excludeSubject,
       withoutTags,
       subjectFilter,
+      quotaFilter,
+      storageFilter,
     } = this;
 
     const dtoFilter = {};
@@ -290,12 +389,71 @@ class RoomsFilter {
       dtoFilter[SUBJECT_FILTER] = subjectFilter.toString();
     }
 
+    if (quotaFilter) dtoFilter[QUOTA_FILTER] = quotaFilter;
+    if (storageFilter) dtoFilter[STORAGE_FILTER] = storageFilter;
+
     dtoFilter[PAGE] = page + 1;
     dtoFilter[SORT_BY] = sortBy;
     dtoFilter[SORT_ORDER] = sortOrder;
     dtoFilter[SEARCH_TYPE] = withSubfolders;
 
-    const str = toUrlParams(dtoFilter, true);
+    let archivedStorageFilter = null;
+    let sharedStorageFilter = null;
+
+    try {
+      archivedStorageFilter = JSON.parse(
+        localStorage.getItem(`UserRoomsArchivedFilter=${userId}`),
+      );
+
+      sharedStorageFilter = JSON.parse(
+        localStorage.getItem(`UserRoomsSharedFilter=${userId}`),
+      );
+    } catch (e) {
+      //  console.log(e);
+    }
+
+    const defaultFilter = new RoomsFilter(
+      DEFAULT_PAGE,
+      DEFAULT_PAGE_COUNT,
+      DEFAULT_TOTAL,
+    );
+
+    if (!sharedStorageFilter && userId) {
+      localStorage.setItem(
+        `UserRoomsSharedFilter=${userId}`,
+        this.toJSON(defaultFilter),
+      );
+    }
+
+    if (!archivedStorageFilter && userId) {
+      defaultFilter.searchArea = RoomSearchArea.Archive;
+      localStorage.setItem(
+        `UserRoomsArchivedFilter=${userId}`,
+        this.toJSON(defaultFilter),
+      );
+    }
+
+    const filterJSON = this.toJSON(dtoFilter);
+
+    const currentStorageFilter =
+      dtoFilter.searchArea === RoomSearchArea.Active
+        ? sharedStorageFilter
+        : archivedStorageFilter;
+
+    const urlParams =
+      withLocalStorage && currentStorageFilter
+        ? currentStorageFilter
+        : dtoFilter;
+
+    if (userId && !withLocalStorage) {
+      if (dtoFilter.searchArea === RoomSearchArea.Active) {
+        localStorage.setItem(`UserRoomsSharedFilter=${userId}`, filterJSON);
+      } else {
+        localStorage.setItem(`UserRoomsArchivedFilter=${userId}`, filterJSON);
+      }
+    }
+
+    const str = toUrlParams(urlParams, true);
     return str;
   };
 
@@ -321,6 +479,8 @@ class RoomsFilter {
       this.excludeSubject,
       this.withoutTags,
       this.subjectFilter,
+      this.quotaFilter,
+      this.storageFilter,
     );
   }
 

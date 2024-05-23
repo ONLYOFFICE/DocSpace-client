@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import styled, { css } from "styled-components";
 
 import { Base } from "../../themes";
@@ -20,7 +46,7 @@ const disabledAndHeaderStyle = css`
   &:hover {
     cursor: default;
     background-color: ${(props) =>
-    props.theme.dropDownItem.hoverDisabledBackgroundColor};
+      props.theme.dropDownItem.hoverDisabledBackgroundColor};
   }
 `;
 
@@ -80,30 +106,30 @@ const StyledDropdownItem = styled.div<{
     svg {
       path[fill] {
         fill: ${(props) =>
-    props.disabled
-      ? props.theme.dropDownItem.icon.disableColor
-      : props.theme.dropDownItem.icon.color};
+          props.disabled
+            ? props.theme.dropDownItem.icon.disableColor
+            : props.theme.dropDownItem.icon.color};
       }
 
       path[stroke] {
         stroke: ${(props) =>
-    props.disabled
-      ? props.theme.dropDownItem.icon.disableColor
-      : props.theme.dropDownItem.icon.color};
+          props.disabled
+            ? props.theme.dropDownItem.icon.disableColor
+            : props.theme.dropDownItem.icon.color};
       }
 
       circle[fill] {
         fill: ${(props) =>
-    props.disabled
-      ? props.theme.dropDownItem.icon.disableColor
-      : props.theme.dropDownItem.icon.color};
+          props.disabled
+            ? props.theme.dropDownItem.icon.disableColor
+            : props.theme.dropDownItem.icon.color};
       }
 
       rect[fill] {
         fill: ${(props) =>
-    props.disabled
-      ? props.theme.dropDownItem.icon.disableColor
-      : props.theme.dropDownItem.icon.color};
+          props.disabled
+            ? props.theme.dropDownItem.icon.disableColor
+            : props.theme.dropDownItem.icon.color};
       }
     }
   }
@@ -111,8 +137,7 @@ const StyledDropdownItem = styled.div<{
   ${fontStyle}
 
   font-weight: ${(props) => props.theme.dropDownItem.fontWeight};
-  font-size: ${(props) =>
-    props.theme.getCorrectFontSize(props.theme.dropDownItem.fontSize)};
+  font-size: ${(props) => props.theme.dropDownItem.fontSize};
   color: ${(props) => props.theme.dropDownItem.color};
   text-transform: none;
 
@@ -120,13 +145,13 @@ const StyledDropdownItem = styled.div<{
 
   &:hover {
     ${(props) =>
-    !props.noHover &&
-    !props.isHeader &&
-    css`
+      !props.noHover &&
+      !props.isHeader &&
+      css`
         background-color: ${props.theme.dropDownItem.hoverBackgroundColor};
         text-align: left;
         ${props.theme.interfaceDirection === "rtl" &&
-      css`
+        css`
           text-align: right;
         `}
       `}
@@ -134,8 +159,8 @@ const StyledDropdownItem = styled.div<{
 
   &:active {
     ${({ isHeader, theme }) =>
-    !isHeader &&
-    css`
+      !isHeader &&
+      css`
         background-color: ${theme.dropDownItem.hoverBackgroundColor};
       `}
   }
@@ -160,7 +185,7 @@ const StyledDropdownItem = styled.div<{
     cursor: pointer;
 
     ${({ theme }) =>
-    theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
   }
 
   ${({ isHeader, theme }) =>
@@ -171,7 +196,7 @@ const StyledDropdownItem = styled.div<{
       padding: 13px 16px 18.2px 16px;
       margin: 0 0 6px 0;
       border-bottom: ${theme.dropDownItem.separator.borderBottom};
-      font-size: ${(props) => props.theme.getCorrectFontSize("15px")};
+      font-size: 15px;
       font-weight: 600;
       line-height: 16px !important;
       cursor: default;
@@ -202,14 +227,14 @@ const StyledDropdownItem = styled.div<{
 
   .submenu-arrow {
     ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? `margin-right: auto;
+      props.theme.interfaceDirection === "rtl"
+        ? `margin-right: auto;
            transform: scaleX(-1);
         `
-      : `margin-left: auto;`}
+        : `margin-left: auto;`}
     ${(props) =>
-    props.isActive &&
-    css`
+      props.isActive &&
+      css`
         transform: rotate(90deg);
         height: auto;
       `}
@@ -265,7 +290,19 @@ const ElementWrapper = styled.div`
   display: flex;
   align-items: center;
   ${(props) =>
-    props.theme.interfaceDirection === "rtl" ? css`margin-right: auto;` : css`margin-left: auto;`}
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-right: auto;
+        `
+      : css`
+          margin-left: auto;
+        `}
 `;
 
-export { StyledDropdownItem, IconWrapper, WrapperToggle, WrapperBadge, ElementWrapper };
+export {
+  StyledDropdownItem,
+  IconWrapper,
+  WrapperToggle,
+  WrapperBadge,
+  ElementWrapper,
+};

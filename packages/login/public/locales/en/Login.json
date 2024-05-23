@@ -1,7 +1,6 @@
 {
   "CodeSubtitle": "We sent a 6-digit code to {{email}}. The code has a limited validity period, so enter it as soon as possible.",
   "CodeTitle": "The code was emailed to you",
-  "CookieSettingsTitle": "Session lifetime",
   "ErrorInvalidText": "In 10 seconds you will be redirected to the <1>DocSpace</1>",
   "ExpiredCode": "This code is no longer valid. Request a new code and try again.",
   "ForgotPassword": "Forgot your password?",
@@ -10,7 +9,6 @@
   "MessageEmailConfirmed": "Your email address was activated successfully.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Please, enter the email address you used for registration. The password recovery instructions will be sent to it.",
   "NotFoundCode": "Can't find the code? Check your spam folder.",
-  "Or": "OR",
   "PasswordRecoveryTitle": "Password recovery",
   "RecoverAccess": "Recover access",
   "RecoverContactEmailPlaceholder": "Contact email",
@@ -22,6 +20,5 @@
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "The default session lifetime is 20 minutes. Check this option to set it to 1 year. To set your own value, go to Settings.",
   "ResendCode": "Resend code",
-  "SignInWithCode": "Sign in with secret code",
-  "SignInWithPassword": "Sign in with password"
+  "UserIsAlreadyRegistered": "User <1>{{email}}</1> is already registered in this DocSpace, enter your password or go back to continue with another email."
 }

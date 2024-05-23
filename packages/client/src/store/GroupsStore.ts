@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { makeAutoObservable, runInAction } from "mobx";
 import * as groupsApi from "@docspace/shared/api/groups";
 import { Events } from "@docspace/shared/enums";
@@ -12,6 +38,7 @@ import config from "PACKAGE_FILE";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import AccountsFilter from "@docspace/shared/api/people/filter";
 import api from "@docspace/shared/api";
+import { TGroup } from "@docspace/shared/api/groups/types";
 
 class GroupsStore {
   authStore;
@@ -24,19 +51,29 @@ class GroupsStore {
 
   groups: any[] | undefined;
 
-  selection = [];
+  selection: TGroup[] = [];
 
   bufferSelection = null;
 
+  groupName = "";
+
+  selected = "none";
+
   groupsFilter = GroupsFilter.getDefault();
+
+  isLoading = false;
 
   groupsIsIsLoading = false;
 
-  currentGroup = null;
+  insideGroupIsLoading = false;
+
+  currentGroup: TGroup | null = null;
 
   insideGroupFilter = InsideGroupFilter.getDefault();
 
   insideGroupBackUrl: string | null = null;
+
+  insideGroupTempTitle: string | null = null;
 
   constructor(
     authStore: any,
@@ -87,12 +124,24 @@ class GroupsStore {
     window.DocSpace.navigate(`accounts/groups/filter?${filter.toUrlParams()}`);
   };
 
+  setGroupName = (name: string) => {
+    this.groupName = name;
+  };
+
+  setIsLoading = (isLoading: boolean) => {
+    this.isLoading = isLoading;
+  };
+
   get groupsFilterTotal() {
     return this.groupsFilter.total;
   }
 
   get hasMoreGroups() {
     return this.groups.length < this.groupsFilterTotal;
+  }
+
+  get insideGroupFilterTotal() {
+    return this.insideGroupFilter.total;
   }
 
   get groupsIsFiltered() {
@@ -146,12 +195,20 @@ class GroupsStore {
     );
   };
 
-  setCurrentGroup = (currentGroup = null) => {
+  setCurrentGroup = (currentGroup: TGroup | null = null) => {
     this.currentGroup = currentGroup;
+  };
+
+  setInsideGroupLoading = (value: boolean) => {
+    this.insideGroupIsLoading = value;
   };
 
   setInsideGroupBackUrl = (url: string) => {
     this.insideGroupBackUrl = url;
+  };
+
+  setInsideGroupTempTitle = (title: string | null) => {
+    this.insideGroupTempTitle = title;
   };
 
   getGroups = async (
@@ -171,6 +228,16 @@ class GroupsStore {
       filterData.sortBy = splitFilter[0];
       filterData.pageCount = +splitFilter[1];
       filterData.sortOrder = splitFilter[2];
+    }
+
+    if (!this.authStore.settingsStore.withPaging) {
+      const isCustomCountPage =
+        filter && filter.pageCount !== 100 && filter.pageCount !== 25;
+
+      if (!isCustomCountPage) {
+        filterData.page = 0;
+        filterData.pageCount = 100;
+      }
     }
 
     const res = await groupsApi.getGroups(filterData);
@@ -214,6 +281,8 @@ class GroupsStore {
     updateFilter = false,
     withFilterLocalStorage = false,
   ) => {
+    this.setInsideGroupLoading(true);
+
     const filterData = filter ? filter.clone() : AccountsFilter.getDefault();
     filterData.group = groupId;
 
@@ -246,30 +315,76 @@ class GroupsStore {
     filterData.total = filteredMembersRes.total;
 
     group && this.setCurrentGroup(group);
+
     this.peopleStore.usersStore.setUsers(filteredMembersRes.items);
 
     if (updateFilter) {
       this.setInsideGroupFilterParams(filterData);
     }
 
+    this.setInsideGroupLoading(false);
+
     return Promise.resolve(filteredMembersRes.items);
   };
 
-  setSelection = (selection) => (this.selection = selection);
+  get hasMoreInsideGroupUsers() {
+    return (
+      this.peopleStore.usersStore.users.length < this.insideGroupFilter.total
+    );
+  }
 
-  setBufferSelection = (bufferSelection) =>
+  fetchMoreInsideGroupUsers = async () => {
+    if (!this.hasMoreInsideGroupUsers || this.insideGroupIsLoading) return;
+    this.insideGroupIsLoading = true;
+
+    const newFilter = this.insideGroupFilter.clone();
+    newFilter.page += 1;
+    this.setInsideGroupFilterParams(newFilter);
+
+    const res = await api.people.getUserList(newFilter);
+
+    runInAction(() => {
+      this.peopleStore.usersStore.setUsers([
+        ...this.peopleStore.usersStore.users,
+        ...res.items,
+      ]);
+      this.insideGroupFilter = newFilter;
+      this.insideGroupIsLoading = false;
+    });
+  };
+
+  setSelection = (selection: TGroup[]) => (this.selection = selection);
+
+  setBufferSelection = (bufferSelection: any) =>
     (this.bufferSelection = bufferSelection);
+
+  setSelected = (selected: "all" | "none") => {
+    this.bufferSelection = null;
+    this.selected = selected;
+    this.setSelection(this.getGroupsBySelected(selected));
+    return selected;
+  };
+
+  getGroupsBySelected = (selected: "all" | "none") => {
+    if (selected === "all" && this.groups) return [...this.groups];
+    return [];
+  };
 
   setSelections = (added, removed, clear = false) => {
     if (clear) this.selection = [];
 
     let newSelections = [...this.selection];
 
-    for (let row of added) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const row of added) {
       if (!row) return;
 
       const [element] = row.getElementsByClassName("group-item");
-      const groupId = element?.getAttribute("value");
+      const value = element?.getAttribute("value");
+
+      const splitValue = value && value.split("_");
+      const groupId = splitValue.slice(1, -3).join("_");
+
       if (!groupId) return;
 
       const isNotSelected =
@@ -280,11 +395,15 @@ class GroupsStore {
       }
     }
 
-    for (let row of removed) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const row of removed) {
       if (!row) return;
 
       const [element] = row.getElementsByClassName("group-item");
-      const groupId = element?.getAttribute("value");
+      const value = element?.getAttribute("value");
+
+      const splitValue = value && value.split("_");
+      const groupId = splitValue.slice(1, -3).join("_");
       if (!groupId) return;
 
       const isSelected =
@@ -297,9 +416,66 @@ class GroupsStore {
     this.setSelection(newSelections);
   };
 
-  getGroupContextOptions = (t, item) => {
+  onDeleteClick = (name: string) => {
+    this.setGroupName(name);
+    this.peopleStore.dialogStore.setDeleteGroupDialogVisible(true);
+  };
+
+  onDeleteGroup = async (t, groupId) => {
+    this.setIsLoading(true);
+
+    if (!groupId) {
+      this.setIsLoading(false);
+      return;
+    }
+
+    try {
+      await groupsApi.deleteGroup(groupId);
+      toastr.success(t("PeopleTranslations:SuccessDeleteGroup"));
+      this.setSelection([]);
+      this.getGroups(this.groupsFilter, true);
+      this.infoPanelStore.setInfoPanelSelection(null);
+      this.setIsLoading(false);
+      this.peopleStore.dialogStore.setDeleteGroupDialogVisible(false);
+    } catch (err) {
+      toastr.error(err.message);
+      console.error(err);
+      this.setIsLoading(false);
+      this.peopleStore.dialogStore.setDeleteGroupDialogVisible(false);
+    }
+  };
+
+  onDeleteAllGroups = (t) => {
+    this.setIsLoading(true);
+
+    try {
+      Promise.all(
+        this.selection.map(async (group) => groupsApi.deleteGroup(group.id)),
+      ).then(() => {
+        toastr.success(t("PeopleTranslations:SuccessDeleteGroups"));
+        this.setSelection([]);
+        this.getGroups(this.groupsFilter, true);
+        this.setIsLoading(false);
+        this.peopleStore.dialogStore.setDeleteGroupDialogVisible(false);
+      });
+    } catch (err) {
+      toastr.error(err.message);
+      console.error(err);
+      this.setIsLoading(false);
+      this.peopleStore.dialogStore.setDeleteGroupDialogVisible(false);
+    }
+  };
+
+  getGroupContextOptions = (
+    t,
+    item,
+    forInfoPanel = false,
+    forInsideGroup = false,
+  ) => {
+    const { isRoomAdmin } = this.peopleStore.userStore.user;
+
     return [
-      {
+      !isRoomAdmin && {
         id: "edit-group",
         key: "edit-group",
         className: "group-menu_drop-down",
@@ -312,43 +488,37 @@ class GroupsStore {
           window.dispatchEvent(event);
         },
       },
-      {
+      !forInfoPanel && {
         id: "info",
         key: "group-info",
         className: "group-menu_drop-down",
-        label: t("Info"),
-        title: t("Info"),
+        label: t("Common:Info"),
+        title: t("Common:Info"),
         icon: InfoReactSvgUrl,
         onClick: () => {
-          const { setIsVisible } = this.infoPanelStore;
-          this.selection = [item];
-          setIsVisible(true);
+          if (!forInsideGroup) {
+            if (this.selection.length < 1) {
+              this.setBufferSelection(item);
+            }
+          } else {
+            this.peopleStore.selectionStore.setSelection([]);
+            this.peopleStore.selectionStore.setBufferSelection(null);
+          }
+          this.infoPanelStore.setIsVisible(true);
         },
       },
-      {
+      !isRoomAdmin && {
         key: "separator",
         isSeparator: true,
       },
-      {
+      !isRoomAdmin && {
         id: "delete-group",
         key: "delete-group",
         className: "group-menu_drop-down",
-        label: t("Delete"),
-        title: t("Delete"),
+        label: t("Common:Delete"),
+        title: t("Common:Delete"),
         icon: TrashReactSvgUrl,
-        onClick: async () => {
-          const groupId = item.id;
-          groupsApi
-            .deleteGroup(groupId)!
-            .then(() => {
-              toastr.success(t("Group was deleted successfully"));
-              this.getGroups();
-            })
-            .catch((err) => {
-              toastr.error(err.message);
-              console.error(err);
-            });
-        },
+        onClick: () => this.onDeleteClick(item.name),
       },
     ];
   };
@@ -356,7 +526,138 @@ class GroupsStore {
   clearInsideGroup = () => {
     this.currentGroup = null;
     this.insideGroupBackUrl = null;
+    this.insideGroupTempTitle = null;
     this.peopleStore.usersStore.setUsers([]);
+  };
+
+  openGroupAction = (
+    groupId: string,
+    withBackURL: boolean,
+    tempTitle: string,
+  ) => {
+    this.setSelection([]);
+    this.setBufferSelection(null);
+    this.setCurrentGroup(null);
+    this.setInsideGroupTempTitle(tempTitle);
+
+    if (withBackURL) {
+      const url = `${window.location.pathname}${window.location.search}`;
+      this.setInsideGroupBackUrl(url);
+    }
+
+    window.DocSpace.navigate(`/accounts/groups/${groupId}`);
+  };
+
+  updateGroup = async (
+    groupId: string,
+    groupName: string,
+    groupManagerId: string,
+    membersToAdd: string[],
+    membersToRemove: string[],
+  ) => {
+    const {
+      infoPanelSelection,
+      setInfoPanelSelection,
+      setInfoPanelSelectedGroup,
+      getIsInsideGroup,
+    } = this.peopleStore.infoPanelStore;
+
+    try {
+      const res = await groupsApi.updateGroup(
+        groupId,
+        groupName,
+        groupManagerId,
+        membersToAdd,
+        membersToRemove,
+      );
+
+      if (this.groups && this.groups.length > 0) {
+        this.groups = this.groups.map((g) => (g.id === groupId ? res : g));
+      }
+
+      if (getIsInsideGroup() && this.currentGroup?.id === groupId) {
+        this.setCurrentGroup(res);
+        const members = await api.people.getUserList(
+          this.insideGroupFilter.clone(),
+        );
+        this.peopleStore.usersStore.setUsers(members.items);
+      }
+
+      if (infoPanelSelection?.id === res.id) {
+        setInfoPanelSelection({ ...infoPanelSelection, ...res });
+        setInfoPanelSelectedGroup(res);
+      }
+    } catch (err: any) {
+      toastr.error(err.message);
+    }
+  };
+
+  selectGroup = (group: TGroup) => {
+    this.setSelection([...this.selection, group]);
+  };
+
+  deselectGroup = (group: TGroup) => {
+    const newSelection = this.selection.filter((s) => s.id !== group.id);
+
+    this.setSelection(newSelection);
+  };
+
+  changeGroupSelection = (group: TGroup, isSelected: boolean) => {
+    if (this.bufferSelection) {
+      this.setBufferSelection(null);
+    }
+
+    if (isSelected) {
+      this.deselectGroup(group);
+    } else {
+      this.selectGroup(group);
+    }
+  };
+
+  selectRow = (group: TGroup) => {
+    const isGroupSelected = !!this.selection.find((s) => s.id === group.id);
+    const isSingleSelected = isGroupSelected && this.selection.length === 1;
+
+    this.peopleStore.selectionStore.setBufferSelection(null);
+
+    if (this.bufferSelection) {
+      this.setBufferSelection(null);
+    }
+
+    if (isSingleSelected) {
+      this.deselectGroup(group);
+    } else {
+      this.setSelection([]);
+      this.selectGroup(group);
+    }
+  };
+
+  singleContextMenuAction = (group: TGroup) => {
+    if (this.selection.length) {
+      this.setSelection([]);
+    }
+
+    this.setBufferSelection(group);
+  };
+
+  multipleContextMenuAction = (group: TGroup) => {
+    const isGroupSelected = !!this.selection.find((s) => s.id === group.id);
+    const isSingleSelected = isGroupSelected && this.selection.length === 1;
+
+    if (!isGroupSelected || isSingleSelected) {
+      this.setSelection([]);
+      this.setBufferSelection(group);
+    }
+  };
+
+  changeGroupContextSelection = (group: TGroup, isSingleMenu: boolean) => {
+    this.peopleStore.selectionStore.setBufferSelection(null);
+
+    if (isSingleMenu) {
+      this.singleContextMenuAction(group);
+    } else {
+      this.multipleContextMenuAction(group);
+    }
   };
 }
 

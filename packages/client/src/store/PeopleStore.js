@@ -1,10 +1,39 @@
-﻿import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import EnableReactSvgUrl from "PUBLIC_DIR/images/enable.react.svg?url";
 import DisableReactSvgUrl from "PUBLIC_DIR/images/disable.react.svg?url";
 import ChangeToEmployeeReactSvgUrl from "PUBLIC_DIR/images/change.to.employee.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import { makeAutoObservable, runInAction } from "mobx";
+import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
+import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
+import DefaultQuotaReactSvgUrl from "PUBLIC_DIR/images/default.quota.react.svg?url";
 import GroupsStore from "./GroupsStore";
 import UsersStore from "./UsersStore";
 import TargetUserStore from "./TargetUserStore";
@@ -27,6 +56,7 @@ import {
   Events,
 } from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
+import { deleteGroup } from "@docspace/shared/api/groups";
 
 class PeopleStore {
   contextOptionsStore = null;
@@ -169,6 +199,74 @@ class PeopleStore {
     return true;
   };
 
+  changeUserQuota = (users, successCallback, abortCallback) => {
+    const event = new Event(Events.CHANGE_QUOTA);
+
+    const userIDs = users.map((user) => {
+      return user?.id ? user.id : user;
+    });
+
+    const payload = {
+      visible: true,
+      type: "user",
+      ids: userIDs,
+      successCallback,
+      abortCallback,
+    };
+
+    event.payload = payload;
+
+    window.dispatchEvent(event);
+  };
+  disableUserQuota = async (users, t) => {
+    const { setCustomUserQuota, getPeopleListItem } = this.usersStore;
+    const { setInfoPanelSelection } = this.infoPanelStore;
+
+    const userIDs = users.map((user) => {
+      return user?.id ? user.id : user;
+    });
+
+    try {
+      const items = await setCustomUserQuota(-1, userIDs);
+      const users = [];
+      items.map((u) => users.push(getPeopleListItem(u)));
+
+      if (items.length === 1) {
+        setInfoPanelSelection(getPeopleListItem(items[0]));
+      } else {
+        setInfoPanelSelection(items);
+      }
+
+      toastr.success(t("Common:StorageQuotaDisabled"));
+    } catch (e) {
+      toastr.error(e);
+    }
+  };
+  resetUserQuota = async (users, t) => {
+    const { resetUserQuota, getPeopleListItem } = this.usersStore;
+    const { setInfoPanelSelection } = this.infoPanelStore;
+    const userIDs = users.map((user) => {
+      return user?.id ? user.id : user;
+    });
+
+    try {
+      const items = await resetUserQuota(userIDs);
+
+      const users = [];
+      items.map((u) => users.push(getPeopleListItem(u)));
+
+      if (items.length === 1) {
+        setInfoPanelSelection(getPeopleListItem(items[0]));
+      } else {
+        setInfoPanelSelection(items);
+      }
+
+      toastr.success(t("Common:StorageQuotaReset"));
+    } catch (e) {
+      toastr.error(e);
+    }
+  };
+
   onChangeStatus = (status) => {
     const users = [];
 
@@ -281,13 +379,24 @@ class PeopleStore {
       return options;
     }
   };
-  getHeaderMenu = (t) => {
+
+  onDeleteClick = () => {
+    const { setDeleteGroupDialogVisible } = this.dialogStore;
+    const { selection, setGroupName } = this.groupsStore;
+    setGroupName(selection[0].name);
+    setDeleteGroupDialogVisible(true);
+  };
+
+  getHeaderMenu = (t, isGroupsPage = false) => {
     const {
       hasUsersToMakeEmployees,
       hasUsersToActivate,
       hasUsersToDisable,
       hasUsersToInvite,
       hasUsersToRemove,
+      hasUsersToChangeQuota,
+      hasUsersToResetQuota,
+      hasUsersToDisableQuota,
       selection,
     } = this.selectionStore;
 
@@ -295,6 +404,17 @@ class PeopleStore {
     const { toggleDeleteProfileEverDialog } = this.contextOptionsStore;
 
     const { isVisible } = this.infoPanelStore;
+
+    if (isGroupsPage)
+      return [
+        {
+          id: "menu-delete",
+          key: "delete",
+          label: t("Common:Delete"),
+          onClick: () => this.onDeleteClick(),
+          iconUrl: DeleteReactSvgUrl,
+        },
+      ];
 
     const headerMenu = [
       {
@@ -340,6 +460,30 @@ class PeopleStore {
         disabled: !hasUsersToDisable,
         onClick: () => this.onChangeStatus(EmployeeStatus.Disabled),
         iconUrl: DisableReactSvgUrl,
+      },
+      {
+        id: "menu-change-quota",
+        key: "change-quota",
+        label: t("Common:ChangeQuota"),
+        disabled: !hasUsersToChangeQuota,
+        iconUrl: ChangQuotaReactSvgUrl,
+        onClick: () => this.changeUserQuota(selection),
+      },
+      {
+        id: "menu-default-quota",
+        key: "default-quota",
+        label: t("Common:SetToDefault"),
+        disabled: !hasUsersToResetQuota,
+        iconUrl: DefaultQuotaReactSvgUrl,
+        onClick: () => this.resetUserQuota(selection, t),
+      },
+      {
+        id: "menu-disable-quota",
+        key: "disable-quota",
+        label: t("Common:DisableQuota"),
+        disabled: !hasUsersToDisableQuota,
+        iconUrl: DisableQuotaReactSvgUrl,
+        onClick: () => this.disableUserQuota(selection, t),
       },
       {
         id: "menu-delete",

@@ -41,7 +41,6 @@ import {
   getLoginLink,
   getLogoUrl,
   getOAuthToken,
-  setLanguageWithoutReload,
 } from "@docspace/shared/utils/common";
 import RecoverAccessModalDialog from "@docspace/shared/components/recover-access-modal-dialog/RecoverAccessModalDialog";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
@@ -50,7 +49,6 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
 import { Text } from "@docspace/shared/components/text";
-import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
 
 import SSOIcon from "PUBLIC_DIR/images/sso.react.svg?url";
 
@@ -62,7 +60,8 @@ import Register from "../Register";
 import LoginForm from "../LoginForm";
 
 import { LoginContent, LoginFormWrapper } from "./Login.styled";
-import { setCookie } from "@docspace/shared/utils/cookie";
+
+import LanguageCombobox from "./LanguageCombobox";
 
 const Login = ({
   searchParams,
@@ -126,12 +125,6 @@ const Login = ({
       window.history.replaceState({}, document.title, window.location.pathname);
     }
   }, [searchParams]);
-
-  const onLanguageSelect = (culture: { key: string }) => {
-    const { key } = culture;
-
-    setLanguageWithoutReload(key, i18n);
-  };
 
   const ssoExists = () => {
     if (capabilities?.ssoUrl) return true;
@@ -220,13 +213,11 @@ const Login = ({
     <>
       <Scrollbar id="customScrollBar">
         <LanguageCombobox
-          className="language-combo-box"
-          onSelectLanguage={onLanguageSelect}
           cultures={cultures}
-          selectedCulture={currentCulture}
-          withBorder={false}
+          currentCulture={currentCulture}
+          i18n={i18n}
         />
-        
+
         <LoginContent>
           <ColorTheme
             themeId={ThemeId.LinkForgotPassword}

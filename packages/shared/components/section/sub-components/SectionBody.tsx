@@ -85,6 +85,18 @@ const SectionBody = React.memo(
       [getContextModel],
     );
 
+    const focusSectionBody = React.useCallback(() => {
+      if (focusRef.current) focusRef.current.focus({ preventScroll: true });
+    }, []);
+
+    const onBodyFocusOut = React.useCallback(
+      (e: FocusEvent) => {
+        if (e.relatedTarget !== null) return;
+        focusSectionBody();
+      },
+      [focusSectionBody],
+    );
+
     React.useEffect(() => {
       document.addEventListener("contextmenu", onContextMenu);
 
@@ -96,8 +108,24 @@ const SectionBody = React.memo(
     React.useEffect(() => {
       if (!autoFocus) return;
 
-      if (focusRef.current) focusRef.current.focus({ preventScroll: true });
-    }, [autoFocus, location.pathname]);
+      focusSectionBody();
+    }, [autoFocus, location.pathname, focusSectionBody]);
+
+    React.useEffect(() => {
+      if (!autoFocus) return;
+
+      const customScrollbar = document.querySelector(
+        "#customScrollBar > .scroll-wrapper > .scroller > .scroll-body",
+      );
+      customScrollbar?.removeAttribute("tabIndex");
+
+      document.body.addEventListener("focusout", onBodyFocusOut);
+
+      return () => {
+        customScrollbar?.setAttribute("tabIndex", "-1");
+        document.body.removeEventListener("focusout", onBodyFocusOut);
+      };
+    }, [autoFocus, onBodyFocusOut]);
 
     const focusProps = autoFocus
       ? {

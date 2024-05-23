@@ -27,20 +27,23 @@
 import { makeAutoObservable } from "mobx";
 
 class IndexingStore {
-  selectedFolderStore;
+  infoPanelStore;
 
   isIndexEditingMode = false;
   isIndexing = false;
   updateSelection = [];
 
-  constructor(selectedFolderStore) {
-    this.selectedFolderStore = selectedFolderStore;
+  constructor(infoPanelStore) {
+    this.infoPanelStore = infoPanelStore;
     makeAutoObservable(this);
   }
 
   setIsIndexing = (indexing) => {
     // turn off the mode if we are no longer in indexed folders
+    const { setIsVisible } = this.infoPanelStore;
     if (!indexing && this.isIndexEditingMode) this.setIsIndexEditingMode(false);
+    if (!indexing) setIsVisible(false);
+
     this.isIndexing = indexing;
   };
 
@@ -48,10 +51,28 @@ class IndexingStore {
     this.updateSelection = selection;
   };
 
+  setUpdateItems = (items) => {
+    const newSelection = [...this.updateSelection];
+
+    for (const item of items) {
+      const exist = this.updateSelection.find(
+        (selectionItem) =>
+          selectionItem.id === item.id &&
+          selectionItem.fileExst === item.fileExst,
+      );
+
+      if (exist) continue;
+      newSelection.push(item);
+    }
+    this.setUpdateSelection(newSelection);
+  };
+
   setIsIndexEditingMode = (mode) => {
     if (!mode) {
       this.setUpdateSelection([]);
     }
+    const { setIsVisible } = this.infoPanelStore;
+    setIsVisible(false);
     this.isIndexEditingMode = mode;
   };
 }

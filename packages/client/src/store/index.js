@@ -105,7 +105,6 @@ const setupStore = new SettingsSetupStore(
 const confirmStore = new ConfirmStore();
 const backupStore = new BackupStore();
 const commonStore = new CommonStore(settingsStore);
-const indexingStore = new IndexingStore(selectedFolderStore);
 
 const ssoStore = new SsoFormStore();
 
@@ -115,6 +114,7 @@ const clientLoadingStore = new ClientLoadingStore();
 const publicRoomStore = new PublicRoomStore(clientLoadingStore);
 
 const infoPanelStore = new InfoPanelStore(userStore);
+const indexingStore = new IndexingStore(infoPanelStore);
 
 const treeFoldersStore = new TreeFoldersStore(
   selectedFolderStore,

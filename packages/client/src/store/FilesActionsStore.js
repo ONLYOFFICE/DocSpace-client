@@ -2729,7 +2729,7 @@ class FilesActionStore {
   changeIndex = async (action, item) => {
     const { filesList } = this.filesStore;
     const { id } = this.selectedFolderStore;
-    const { updateSelection, setUpdateSelection } = this.indexingStore;
+    const { setUpdateItems } = this.indexingStore;
     const index = filesList.findIndex((elem) => elem.id === item?.id);
 
     const operationId = uniqueid("operation_");
@@ -2748,19 +2748,9 @@ class FilesActionStore {
 
     await changeIndex(item?.id, replaceable.order, item?.isFolder);
 
-    const newSelection = [...updateSelection];
-    const addedArray = [item.id, replaceable.id];
+    const items = [item, replaceable];
 
-    for (const id of addedArray) {
-      const exist = updateSelection.find(
-        (selectionItem) => selectionItem === id,
-      );
-
-      if (exist) continue;
-      newSelection.push(id);
-    }
-
-    setUpdateSelection(newSelection);
+    setUpdateItems(items);
     this.updateCurrentFolder(null, [id], true, operationId);
   };
 

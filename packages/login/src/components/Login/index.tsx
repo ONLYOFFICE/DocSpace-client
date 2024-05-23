@@ -212,11 +212,7 @@ const Login = ({
   return (
     <>
       <Scrollbar id="customScrollBar">
-        <LanguageCombobox
-          cultures={cultures}
-          currentCulture={currentCulture}
-          i18n={i18n}
-        />
+        <LanguageCombobox cultures={cultures} currentCulture={currentCulture} />
 
         <LoginContent>
           <ColorTheme

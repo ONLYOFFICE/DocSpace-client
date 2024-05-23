@@ -135,7 +135,7 @@ const LoginForm = ({
         );
       }
     },
-    [t],
+    [t, currentCulture],
   );
 
   useEffect(() => {

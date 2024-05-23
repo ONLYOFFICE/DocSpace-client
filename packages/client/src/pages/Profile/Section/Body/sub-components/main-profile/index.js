@@ -343,12 +343,14 @@ const MainProfile = (props) => {
             </div>
             <div className="profile-block-field profile-block-password">
               <Text fontWeight={600}>********</Text>
-              <IconButton
-                className="edit-button password-edit-button"
-                iconName={PencilOutlineReactSvgUrl}
-                size="12"
-                onClick={onChangePasswordClick}
-              />
+              {!profile.isSSO && !profile.isLDAP && (
+                <IconButton
+                  className="edit-button password-edit-button"
+                  iconName={PencilOutlineReactSvgUrl}
+                  size="12"
+                  onClick={onChangePasswordClick}
+                />
+              )}
             </div>
             <div className="language-combo-box-wrapper">
               <ComboBox

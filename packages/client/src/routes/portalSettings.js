@@ -354,6 +354,24 @@ const Viewer = loadable(() =>
   ),
 );
 
+const OAuthCreatePage = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/developer-tools/OAuth/OAuthCreatePage"
+      ),
+  ),
+);
+
+const OAuthEditPage = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/developer-tools/OAuth/OAuthEditPage"
+      ),
+  ),
+);
+
 const PortalSettingsRoutes = {
   path: "portal-settings/",
   element: (

@@ -187,12 +187,14 @@ const Editor = ({
   >["customization"] = JSON.parse(customization || "{}");
 
   const theme = sdkCustomization?.uiTheme || user?.theme;
+  const showClose = document.referrer !== "" && window.history.length > 1;
 
   if (newConfig.editorConfig)
     newConfig.editorConfig.customization = {
       ...newConfig.editorConfig.customization,
       ...sdkCustomization,
       goback: { ...goBack },
+      close: { visible: showClose, text: "Close file" },
       uiTheme: getEditorTheme(theme as ThemeKeys),
     };
 
@@ -280,6 +282,7 @@ const Editor = ({
   if (
     (typeof window !== "undefined" &&
       window.DocSpaceConfig?.editor?.requestClose) ||
+    showClose ||
     IS_ZOOM
   ) {
     newConfig.events.onRequestClose = onSDKRequestClose;

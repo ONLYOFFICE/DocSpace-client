@@ -62,6 +62,7 @@ export type UseSocketHelperProps = {
   disabledItems: (string | number)[];
   filterParam?: string;
   getIcon: (fileExst: string) => string;
+  withCreateFolder: boolean;
 };
 
 export type UseRoomsHelperProps = {
@@ -119,6 +120,7 @@ export type UseFilesHelpersProps = {
   getFilesArchiveError: (name: string) => string;
   isInit: boolean;
   setIsFirstLoad: (value: boolean) => void;
+  withCreateFolder: boolean;
 };
 
 export type TSelectedFileInfo = {
@@ -199,4 +201,6 @@ export type FilesSelectorProps = (
   isPanelVisible: boolean;
   currentDeviceType: DeviceType;
   getFilesArchiveError: (name: string) => string;
+
+  withCreateFolder: boolean;
 };

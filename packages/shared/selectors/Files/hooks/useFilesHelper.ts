@@ -25,8 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 
-import { getFolder, getFolderInfo, getSettingsFiles } from "../../../api/files";
+import FolderSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
+
+import {
+  createFolder,
+  getFolder,
+  getFolderInfo,
+  getSettingsFiles,
+} from "../../../api/files";
 import FilesFilter from "../../../api/files/filter";
 import {
   ApplyFilterOption,
@@ -75,7 +83,10 @@ const useFilesHelper = ({
   isInit,
   setIsInit,
   setIsFirstLoad,
+  withCreateFolder,
 }: UseFilesHelpersProps) => {
+  const { t } = useTranslation(["Common"]);
+
   const requestRunning = React.useRef(false);
   const initRef = React.useRef(isInit);
   const firstLoadRef = React.useRef(isFirstLoad);
@@ -92,6 +103,55 @@ const useFilesHelper = ({
   React.useEffect(() => {
     initRef.current = isInit;
   }, [isInit]);
+
+  const onCancelInput = React.useCallback(() => {
+    if (!withCreateFolder) return;
+
+    setItems((value) => {
+      if (!value[1].isInputItem) return value;
+
+      const newValue = [...value];
+
+      newValue.splice(1, 1);
+
+      return newValue;
+    });
+  }, [setItems, withCreateFolder]);
+
+  const onAcceptInput = React.useCallback(
+    async (value: string) => {
+      if (!withCreateFolder || !selectedItemId) return;
+
+      await createFolder(selectedItemId, value);
+
+      onCancelInput();
+    },
+    [onCancelInput, selectedItemId, withCreateFolder],
+  );
+
+  const addInputItem = React.useCallback(() => {
+    if (!withCreateFolder) return;
+
+    const inputItem: TSelectorItem = {
+      label: "",
+      id: "new-folder-input",
+      isInputItem: true,
+      onAcceptInput,
+      onCancelInput,
+      defaultInputValue: t("NewFolder"),
+      icon: FolderSvgUrl,
+    };
+
+    setItems((value) => {
+      if (value[1].isInputItem) return value;
+
+      const newValue = [...value];
+
+      newValue.splice(1, 0, inputItem);
+
+      return newValue;
+    });
+  }, [onAcceptInput, onCancelInput, setItems, t, withCreateFolder]);
 
   const getFileList = React.useCallback(
     async (startIndex: number) => {
@@ -310,7 +370,18 @@ const useFilesHelper = ({
         }
 
         if (firstLoadRef.current || startIndex === 0) {
-          setTotal(total);
+          if (withCreateFolder) {
+            setTotal(total + 1);
+            itemList.unshift({
+              isCreateNewItem: true,
+              label: "New folder",
+              id: "create-folder-item",
+              key: "create-folder-item",
+              onCreateClick: addInputItem,
+            });
+          } else {
+            setTotal(total);
+          }
           setItems(itemList);
         } else {
           setItems((prevState) => {
@@ -361,8 +432,8 @@ const useFilesHelper = ({
       setIsNextPageLoading,
       searchValue,
       filterParam,
-      isUserOnly,
       selectedItemId,
+      isUserOnly,
       getRootData,
       setSelectedItemSecurity,
       getIcon,
@@ -380,8 +451,10 @@ const useFilesHelper = ({
       setIsBreadCrumbsLoading,
       roomsFolderId,
       setIsSelectedParentFolder,
-      setTotal,
+      withCreateFolder,
       setItems,
+      setTotal,
+      addInputItem,
       rootThirdPartyId,
     ],
   );

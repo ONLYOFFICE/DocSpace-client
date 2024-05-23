@@ -107,6 +107,7 @@ const FilesSelector = ({
   withBreadCrumbs: withBreadCrumbsProp,
   filesSettings,
   cancelButtonLabel,
+  withCreateFolder,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -148,6 +149,7 @@ const FilesSelector = ({
     socketSubscribers,
     disabledItems,
     filterParam,
+    withCreateFolder,
     getIcon,
     setItems,
     setBreadCrumbs,
@@ -224,6 +226,7 @@ const FilesSelector = ({
     getFilesArchiveError,
     isInit,
     setIsInit,
+    withCreateFolder,
   });
 
   const onSelectAction = React.useCallback(

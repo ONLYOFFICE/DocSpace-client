@@ -47,7 +47,6 @@ export const Providers = ({
   children,
   value,
   timers,
-  api_host,
   redirectURL,
 }: {
   children: React.ReactNode;
@@ -59,32 +58,25 @@ export const Providers = ({
   );
 
   React.useEffect(() => {
-    console.log("Layout API requests timings:", { ...timers });
-    console.log("API_HOST: ", api_host);
-  }, [api_host, timers]);
+    if (redirectURL) window.location.replace(redirectURL);
+  }, [redirectURL]);
 
   React.useEffect(() => {
-    if (redirectURL) window.location.replace("/");
-  }, [redirectURL]);
+    console.log("Timers:", { ...timers });
+  }, [timers]);
 
   const { i18n } = useI18N({
     settings: value.settings,
   });
 
-  const { theme } = useTheme({
+  const { theme, currentColorTheme } = useTheme({
     colorTheme: value.colorTheme,
-    settings: value.settings,
+    systemTheme: value.systemTheme,
+    i18n,
   });
 
-  const currentTheme =
-    typeof window !== "undefined" || !value.systemTheme
-      ? theme
-      : value.systemTheme === ThemeKeys.BaseStr
-        ? Base
-        : Dark;
-
   return (
-    <ThemeProvider theme={currentTheme}>
+    <ThemeProvider theme={theme} currentColorScheme={currentColorTheme}>
       <I18nextProvider i18n={i18n}>
         <ErrorBoundaryWrapper
           user={{} as TUser}

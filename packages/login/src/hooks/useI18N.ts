@@ -39,39 +39,12 @@ interface UseI18NProps {
 }
 
 const useI18N = ({ settings }: UseI18NProps) => {
-  const [i18n, setI18N] = React.useState<i18n>(
-    getI18NInstance(getCookie(LANGUAGE) ?? settings?.culture ?? "en") ??
-      ({} as i18n),
-  );
-
-  const isInit = React.useRef(false);
-
   React.useEffect(() => {
     if (!settings?.timezone) return;
     window.timezone = settings.timezone;
   }, [settings?.timezone]);
 
-  React.useEffect(() => {
-    isInit.current = true;
-
-    let currentLanguage: string = settings?.culture ?? "en";
-
-    const cookieLang = getCookie(LANGUAGE);
-
-    if (cookieLang) {
-      currentLanguage = cookieLang;
-    } else {
-      setCookie(LANGUAGE, currentLanguage);
-    }
-
-    currentLanguage = getLanguage(currentLanguage);
-
-    const instance = getI18NInstance(currentLanguage);
-
-    if (instance) setI18N(instance);
-  }, [settings?.culture]);
-
-  return { i18n };
+  return { i18n: getI18NInstance(settings?.culture ?? "en") };
 };
 
 export default useI18N;

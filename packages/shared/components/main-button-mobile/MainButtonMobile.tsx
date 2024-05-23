@@ -363,7 +363,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
           {isMobile ? (
             <Scrollbar
               style={{ position: "absolute" }}
-              scrollclass="section-scroll"
+              scrollClass="section-scroll"
               ref={dropDownRef}
             >
               {children}

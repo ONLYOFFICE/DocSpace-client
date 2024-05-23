@@ -24,10 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
 import { ScrollbarType } from "./Scrollbar.enums";
 import { ScrollbarComponent as Scrollbar } from "./Scrollbar";
+import { ScrollbarContext } from "./custom-scrollbar";
+import { CustomScrollbarsVirtualList } from "./sub-components";
+import type { ScrollbarProps } from "./Scrollbar.types";
 
-export { ScrollbarType };
-export { Scrollbar };
-export { CustomScrollbarsVirtualList } from "./sub-components/index";
-export type { ScrollbarProps } from "./Scrollbar.types";
+export {
+  Scrollbar,
+  ScrollbarProps,
+  ScrollbarType,
+  CustomScrollbarsVirtualList,
+  ScrollbarContext,
+};

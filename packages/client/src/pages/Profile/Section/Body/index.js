@@ -41,7 +41,7 @@ import FileManagement from "./sub-components/file-management";
 import InterfaceTheme from "./sub-components/interface-theme";
 
 import { tablet } from "@docspace/shared/utils";
-import { DeviceType } from "@docspace/shared/enums";
+import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 const Wrapper = styled.div`
   display: flex;
@@ -51,6 +51,14 @@ const Wrapper = styled.div`
   @media ${tablet} {
     width: 100%;
     max-width: 100%;
+  }
+`;
+
+const StyledSubMenu = styled(Submenu)`
+  > .sticky {
+    z-index: 201;
+    margin-inline-end: -17px;
+    padding-inline-end: 17px;
   }
 `;
 
@@ -102,17 +110,11 @@ const SectionBodyContent = (props) => {
   return (
     <Wrapper>
       <MainProfile />
-      <Submenu
+      <StyledSubMenu
         data={data}
         startSelect={currentTab}
         onSelect={onSelect}
-        topProps={
-          currentDeviceType === DeviceType.desktop
-            ? 0
-            : currentDeviceType === DeviceType.mobile
-              ? "53px"
-              : "61px"
-        }
+        topProps={SECTION_HEADER_HEIGHT[currentDeviceType]}
       />
     </Wrapper>
   );

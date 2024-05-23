@@ -263,8 +263,8 @@ const PeopleTableRow = (props) => {
 
     const adminOption = {
       key: "admin",
-      title: t("Common:DocSpaceAdmin"),
-      label: t("Common:DocSpaceAdmin"),
+      title: t("Common:DocspaceAdmin"),
+      label: t("Common:DocspaceAdmin"),
       action: "admin",
     };
     const managerOption = {
@@ -342,7 +342,7 @@ const PeopleTableRow = (props) => {
       case "owner":
         return t("Common:Owner");
       case "admin":
-        return t("Common:DocSpaceAdmin");
+        return t("Common:DocspaceAdmin");
       case "manager":
         return t("Common:RoomAdmin");
       case "collaborator":

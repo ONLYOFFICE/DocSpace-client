@@ -56,7 +56,7 @@ const PortalDeletion = (props) => {
   };
 
   useEffect(() => {
-    setDocumentTitle(t("DeleteDocSpace"));
+    setDocumentTitle(t("DeleteDocspace"));
     fetchData();
     onCheckView();
     window.addEventListener("resize", onCheckView);

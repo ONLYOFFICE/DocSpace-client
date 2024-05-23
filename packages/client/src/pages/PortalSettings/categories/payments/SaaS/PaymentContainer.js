@@ -146,7 +146,7 @@ const PaymentContainer = (props) => {
             <>
               <Text isBold>{t("ManagerTypesDescription")}</Text>
               <br />
-              <Text isBold>{t("Common:DocSpaceAdmin")}</Text>
+              <Text isBold>{t("Common:DocspaceAdmin")}</Text>
               <Text>{t("AdministratorDescription")}</Text>
               <br />
               <Text isBold>{t("Common:RoomAdmin")}</Text>

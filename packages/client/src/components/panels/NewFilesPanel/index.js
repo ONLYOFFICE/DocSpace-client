@@ -199,16 +199,12 @@ const NewFilesPanel = (props) => {
         item?.viewAccessibility?.ImageView ||
         item?.viewAccessibility?.MediaView;
 
-      const searchParams = new URLSearchParams();
-      searchParams.append("fileId", id);
-      if (!openOnNewPage) searchParams.append("fromManager", "true");
-
       if (canEdit && providerKey) {
         return window.open(
           combineUrl(
             window.DocSpaceConfig?.proxy?.url,
             config.homepage,
-            `/doceditor?${searchParams.toString()}`,
+            `/doceditor?fileId=${id}`,
           ),
           openOnNewPage ? "_blank" : "_self",
         );

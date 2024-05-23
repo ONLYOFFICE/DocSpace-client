@@ -183,7 +183,6 @@ const CreateEvent = ({
         searchParams.append("fromTemplate", fromTemplate);
         searchParams.append("formId", gallerySelected.id);
       }
-      if (!openOnNewPage) searchParams.append("fromManager", "true");
 
       const url = combineUrl(
         window.location.origin,

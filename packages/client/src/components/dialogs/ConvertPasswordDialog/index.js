@@ -102,7 +102,6 @@ const ConvertPasswordDialogComponent = (props) => {
       searchParams.append("templateId", id);
       searchParams.append("password", password);
       searchParams.append("fromFile", true);
-      if (!openOnNewPage) searchParams.append("fromManager", "true");
 
       const url = combineUrl(
         window.location.origin,

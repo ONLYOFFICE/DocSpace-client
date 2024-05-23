@@ -881,6 +881,11 @@ class SettingsStore {
     return new SocketIOHelper(socketUrl, this.publicRoomKey);
   }
 
+  get socketOnlineStatusHelper() {
+    const socketUrl = "/onlineusers";
+    return new SocketIOHelper(socketUrl, this.publicRoomKey);
+  }
+
   getBuildVersionInfo = async () => {
     let versionInfo = null;
     if (window?.__ASC_INITIAL_EDITOR_STATE__?.versionInfo)

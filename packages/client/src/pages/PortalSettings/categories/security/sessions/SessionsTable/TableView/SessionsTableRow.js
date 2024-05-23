@@ -1,5 +1,5 @@
 import { inject, observer } from "mobx-react";
-import { useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Base } from "@docspace/shared/themes";
 import styled, { css } from "styled-components";
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
@@ -146,7 +146,11 @@ const SessionsTableRow = (props) => {
     setDisableDialogVisible,
     setSessionModalData,
     setUserSessionPanelVisible,
+    socketHelper,
+    socketOnlineStatusHelper,
   } = props;
+
+  const [users, setUsers] = useState([]);
 
   const onClickSessions = () => {
     setSessionModalData({ ...item });
@@ -186,6 +190,35 @@ const SessionsTableRow = (props) => {
       onClick: onClickDisable,
     },
   ];
+  // useEffect(() => {
+  //   const userIds = item.userId;
+
+  //   if (socketOnlineStatusHelper.isEnabled) {
+  //     socketOnlineStatusHelper.emit({
+  //       command: "getSessionsInPortal",
+  //       data: { userIds },
+  //     });
+  //     socketOnlineStatusHelper.on("statuses-in-room", (data) => {
+  //       console.log(data);
+  //     });
+  //   }
+  // }, [socketOnlineStatusHelper]);
+
+  useEffect(() => {
+    const userIds = item.userId;
+    socketHelper.emit({
+      command: "subscribe",
+      data: { roomParts: "onlineusers" },
+    });
+
+    socketHelper.emit({
+      command: "getSessionsInPortal",
+      data: { userIds },
+    });
+    socketHelper.on("getSessionsInPortal", (data) => {
+      console.log(data);
+    });
+  }, [socketHelper]);
 
   const isChecked = checkedProps.checked;
   const isOnline = status === "Online";
@@ -281,7 +314,7 @@ const SessionsTableRow = (props) => {
   );
 };
 
-export default inject(({ setup, dialogsStore }) => {
+export default inject(({ setup, dialogsStore, settingsStore }) => {
   const { setUserSessionPanelVisible } = dialogsStore;
   const {
     setLogoutAllDialogVisible,
@@ -289,10 +322,14 @@ export default inject(({ setup, dialogsStore }) => {
     setSessionModalData,
   } = setup;
 
+  const { socketHelper, socketOnlineStatusHelper } = settingsStore;
+
   return {
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
     setSessionModalData,
     setUserSessionPanelVisible,
+    socketHelper,
+    socketOnlineStatusHelper,
   };
 })(withContent(observer(SessionsTableRow)));

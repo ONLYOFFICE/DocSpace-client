@@ -60,9 +60,11 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
   const [model, setModel] = React.useState<ContextMenuModel[] | null>(null);
   const [changeView, setChangeView] = React.useState(false);
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
-  const [onLoad, setOnLoad] = React.useState<
-    undefined | (() => Promise<ContextMenuModel[]>)
+  const [mobileSubMenuItems, setMobileSubMenuItems] = React.useState<
+    ContextMenuModel[] | undefined
   >(undefined);
+  const [mobileHeader, setMobileHeader] = React.useState<string>("");
+
   const [articleWidth, setArticleWidth] = React.useState(0);
 
   const prevReshow = React.useRef(false);
@@ -204,7 +206,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
         ? rects.left - currentLeftOffset - currentRightOffset
         : event.pageX + 1;
       let top = rects ? rects.top : event.pageY + 1;
-      const width =
+      let width =
         menuRef.current && menuRef.current.offsetParent
           ? menuRef.current.offsetWidth
           : DomHelpers.getHiddenElementOuterWidth(menuRef.current);
@@ -214,29 +216,46 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
           : DomHelpers.getHiddenElementOuterHeight(menuRef.current);
       const viewport = DomHelpers.getViewport();
 
+      const mobileView = isMobileUtils() && (height > 210 || ignoreChangeView);
+
+      if (!mobileView) {
+        const options = menuRef?.current?.getElementsByClassName("p-menuitem");
+        const optionsWidth: number[] = [];
+
+        if (options) {
+          Array.from(options).forEach((option) =>
+            optionsWidth.push(option.clientWidth),
+          );
+
+          const widthMaxContent = Math.max(...optionsWidth);
+
+          width = width || widthMaxContent;
+        }
+      }
+
       if (theme.interfaceDirection === "rtl" && !rects && left > width) {
         left = event.pageX - width + 1;
       }
 
-      if (
-        isTabletUtils() &&
-        (height > 483 ||
-          (isMobileOnly && window.innerHeight < window.innerWidth))
-      ) {
-        const article = document.getElementById("article-container");
+      // if (
+      //   isTabletUtils() &&
+      //   (height > 483 ||
+      //     (isMobileOnly && window.innerHeight < window.innerWidth))
+      // ) {
+      //   const article = document.getElementById("article-container");
 
-        let currentArticleWidth = 0;
-        if (article) {
-          currentArticleWidth = article.offsetWidth;
-        }
+      //   let currentArticleWidth = 0;
+      //   if (article) {
+      //     currentArticleWidth = article.offsetWidth;
+      //   }
 
-        setChangeView(true);
-        setArticleWidth(currentArticleWidth);
+      //   setChangeView(true);
+      //   setArticleWidth(currentArticleWidth);
 
-        return;
-      }
+      //   return;
+      // }
 
-      if (isMobileUtils() && (height > 210 || ignoreChangeView)) {
+      if (mobileView) {
         setChangeView(true);
         setArticleWidth(0);
 
@@ -260,7 +279,10 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
 
       // fit
       if (top < document.body.scrollTop) {
-        top = document.body.scrollTop;
+        const marginTop = 16;
+
+        if (document.body.scrollTop === 0) top = marginTop;
+        else top = document.body.scrollTop;
       }
 
       if (containerRef) {
@@ -276,6 +298,8 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
       if (menuRef.current) {
         menuRef.current.style.left = `${left}px`;
         menuRef.current.style.top = `${top}px`;
+
+        if (!mobileView) menuRef.current.style.width = `${width}px`;
       }
     }
   };
@@ -399,14 +423,20 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
     };
   }, [documentResizeListener, onHide, visible]);
 
-  const onMobileItemClick = (
+  const onMobileItemClick = async (
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+    label: string,
+    items?: ContextMenuModel[],
     loadFunc?: () => Promise<ContextMenuModel[]>,
   ) => {
     e.stopPropagation();
 
     setShowMobileMenu(true);
-    if (loadFunc) setOnLoad(loadFunc);
+
+    const res = loadFunc ? await loadFunc() : items;
+    setMobileSubMenuItems(res);
+
+    setMobileHeader(label);
   };
 
   const onBackClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -506,7 +536,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
                 )}
 
                 <Text className="text" truncate dir="auto">
-                  {header.title}
+                  {showMobileMenu ? mobileHeader : header.title}
                 </Text>
               </div>
             )}
@@ -516,7 +546,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
                 root
                 resetMenu={resetMenu}
                 onLeafClick={onLeafClick}
-                onLoad={onLoad}
+                mobileSubMenuItems={mobileSubMenuItems}
               />
             ) : (
               <SubMenu
@@ -524,7 +554,6 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
                 root
                 resetMenu={resetMenu}
                 onLeafClick={onLeafClick}
-                changeView={changeView}
                 onMobileItemClick={onMobileItemClick}
               />
             )}

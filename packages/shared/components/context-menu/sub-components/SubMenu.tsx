@@ -32,21 +32,14 @@ import { useTheme } from "styled-components";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import OutsdideIcon from "PUBLIC_DIR/images/arrow.outside.react.svg";
-import { isMobile as isMobileDevice } from "react-device-detect";
 
-import {
-  classNames,
-  ObjectUtils,
-  DomHelpers,
-  isMobile,
-  isTablet,
-} from "../../../utils";
+import { classNames, ObjectUtils, DomHelpers, isMobile } from "../../../utils";
 import { ContextMenuSkeleton } from "../../../skeletons/context-menu";
 
-import { Scrollbar } from "../../scrollbar";
 import { ToggleButton } from "../../toggle-button";
+import { Scrollbar } from "../../scrollbar";
 
-import { SubMenuItem } from "../ContextMenu.styled";
+import { SubMenuItem, StyledList } from "../ContextMenu.styled";
 import {
   ContextMenuModel,
   ContextMenuType,
@@ -63,19 +56,13 @@ const SubMenu = (props: {
   ) => void;
   onMobileItemClick?: (
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
-    loadFunc: () => Promise<ContextMenuModel[]>,
+    label: string,
+    items?: ContextMenuModel[],
+    loadFunc?: () => Promise<ContextMenuModel[]>,
   ) => void;
-  changeView?: boolean;
   onLoad?: () => Promise<ContextMenuModel[]>;
 }) => {
-  const {
-    onLeafClick,
-    root,
-    resetMenu,
-    changeView,
-    onMobileItemClick,
-    onLoad,
-  } = props;
+  const { onLeafClick, root, resetMenu, onMobileItemClick, onLoad } = props;
 
   const [model, setModel] = useState(props?.model);
   const [isLoading, setIsLoading] = useState(false);
@@ -86,7 +73,7 @@ const SubMenu = (props: {
   const theme = useTheme();
 
   const onItemMouseEnter = (e: React.MouseEvent, item: ContextMenuType) => {
-    if (item.disabled || isMobileDevice) {
+    if (item.disabled) {
       e.preventDefault();
       return;
     }
@@ -98,16 +85,18 @@ const SubMenu = (props: {
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
     item: ContextMenuType,
   ) => {
-    if (item.onLoad) {
-      e.preventDefault();
-      if (!isMobile() && !isTablet()) return;
+    const { disabled, url, onClick, items, action, label } = item;
 
-      if (isMobile() || isTablet()) onMobileItemClick?.(e, item.onLoad);
-      else onLeafClick?.(e);
+    if (label && (items || item.onLoad)) {
+      e.preventDefault();
+      if (!isMobile()) return;
+
+      if (items) onMobileItemClick?.(e, label as string, items, undefined);
+      else if (item.onLoad)
+        onMobileItemClick?.(e, label as string, undefined, item.onLoad);
       return;
     }
 
-    const { disabled, url, onClick, items, action } = item;
     if (disabled) {
       e.preventDefault();
       return;
@@ -134,7 +123,9 @@ const SubMenu = (props: {
     const containerOffset = DomHelpers.getOffset(parentItem);
     const viewport = DomHelpers.getViewport();
 
-    const subListWidth = subMenuRef.current?.offsetParent
+    const options = subMenuRef.current?.getElementsByClassName("p-menuitem");
+
+    let subListWidth = subMenuRef.current?.offsetParent
       ? subMenuRef.current.offsetWidth
       : DomHelpers.getHiddenElementOuterWidth(subMenuRef.current);
 
@@ -144,16 +135,49 @@ const SubMenu = (props: {
 
     const isRtl = theme.interfaceDirection === "rtl";
 
+    if (!isMobile() && options) {
+      const optionsWidth: number[] = [];
+      Array.from(options).forEach((option) =>
+        optionsWidth.push(Math.ceil(option.getBoundingClientRect().width)),
+      );
+
+      const widthMaxContent = Math.max(...optionsWidth);
+
+      subListWidth = subListWidth || widthMaxContent;
+    }
+
     if (subMenuRef.current) {
-      subMenuRef.current.style.top = "0px";
+      let subMenuRefTop = null;
+
+      if (!isMobile()) subMenuRef.current.style.width = `${subListWidth}px`;
+
+      if (!isMobile() && !root) {
+        const firstList = parentItem?.firstChild as HTMLElement;
+
+        const menuItemActive = firstList.querySelector(
+          ".p-menuitem-active",
+        ) as HTMLElement;
+
+        const top = menuItemActive.offsetTop;
+        const scroller = firstList.querySelector(".scroller") as HTMLElement;
+        const scrollTop = scroller.scrollTop;
+        const positionActiveItem = top - scrollTop;
+
+        subMenuRefTop = positionActiveItem - 2;
+        subMenuRef.current.style.top = `${subMenuRefTop}px`;
+      }
 
       const submenuRects = subMenuRef.current.getBoundingClientRect();
 
-      if (submenuRects.bottom > viewport.height) {
+      if (submenuRects.bottom > viewport.height && subMenuRefTop) {
         const submenuMargin = 16;
-        const topOffset = submenuRects.bottom - viewport.height + submenuMargin;
 
-        subMenuRef.current.style.top = `${-1 * topOffset}px`;
+        const topOffset =
+          subMenuRefTop -
+          (submenuRects.bottom - viewport.height) -
+          submenuMargin;
+
+        subMenuRef.current.style.top = `${topOffset}px`;
       }
 
       if (isRtl) {
@@ -205,29 +229,6 @@ const SubMenu = (props: {
     />
   );
 
-  const renderSubMenu = (item: ContextMenuType) => {
-    const loaderItem = {
-      id: "link-loader-option",
-      key: "link-loader",
-      isLoader: true,
-      label: <ContextMenuSkeleton />,
-    };
-
-    if (item.items || item.onLoad) {
-      return (
-        <SubMenu
-          model={item.onLoad ? [loaderItem] : item.items || []}
-          resetMenu={item !== activeItem}
-          onLeafClick={onLeafClick}
-          // onEnter={onEnter}
-          onLoad={item.onLoad}
-        />
-      );
-    }
-
-    return null;
-  };
-
   const renderMenuitem = (
     item: ContextMenuType,
     index: number,
@@ -273,7 +274,7 @@ const SubMenu = (props: {
     const subMenuIcon = (item.items || item.onLoad) && (
       <ArrowIcon className={subMenuIconClassName} />
     );
-    const subMenu = renderSubMenu(item);
+
     const dataKeys = Object.fromEntries(
       Object.entries(item).filter((el) => el[0].indexOf("data-") === 0),
     );
@@ -330,7 +331,6 @@ const SubMenu = (props: {
           onMouseEnter={(e) => onItemMouseEnter(e, item)}
         >
           {content}
-          {subMenu}
           <ToggleButton
             isChecked={item.checked || false}
             onChange={onClick}
@@ -350,7 +350,6 @@ const SubMenu = (props: {
         onMouseEnter={(e) => onItemMouseEnter(e, item)}
       >
         {content}
-        {subMenu}
       </li>
     );
   };
@@ -389,78 +388,93 @@ const SubMenu = (props: {
   };
 
   const renderMenu = () => {
-    if (model) {
-      if (changeView) {
-        const newModel = model.filter(
-          (item: ContextMenuModel) => item && !item.disabled,
+    if (!model) return null;
+
+    return model.map((item: ContextMenuModel, index: number) => {
+      if (item?.disabled) return null;
+      return renderItem(item, index);
+    });
+  };
+
+  const renderSubMenuLower = () => {
+    if (!model) return null;
+    const submenu: JSX.Element[] = [];
+
+    const loaderItem = {
+      id: "link-loader-option",
+      key: "link-loader",
+      isLoader: true,
+      label: <ContextMenuSkeleton />,
+    };
+
+    model.forEach((item) => {
+      const contextMenuTypeItem = item as ContextMenuType;
+
+      if (contextMenuTypeItem?.items || contextMenuTypeItem?.onLoad) {
+        submenu.push(
+          <SubMenu
+            key={`sub-menu_${item.id}`}
+            model={
+              contextMenuTypeItem?.onLoad
+                ? [loaderItem]
+                : contextMenuTypeItem?.items || []
+            }
+            resetMenu={item !== activeItem}
+            onLeafClick={onLeafClick}
+            onLoad={contextMenuTypeItem?.onLoad}
+          />,
         );
-        const rowHeights: number[] = newModel.map((item: ContextMenuModel) => {
-          if (!item) return 0;
-          if (item.isSeparator) return 13;
-          return 36;
-        });
-
-        // const getItemSize = (index) => rowHeights[index];
-
-        const height = rowHeights.reduce((a, b) => a + b);
-        const viewport = DomHelpers.getViewport();
-
-        const listHeight =
-          height + 61 > viewport.height - 64
-            ? viewport.height - 125
-            : height + 5;
-
-        return (
-          <Scrollbar style={{ height: listHeight }}>
-            {model.map((item: ContextMenuModel, index: number) => {
-              if (!item || item?.disabled) return null;
-
-              return renderItem(item, index);
-            })}
-          </Scrollbar>
-        );
-
-        // return (
-        //   <VariableSizeList
-        //     height={listHeight}
-        //     width={"auto"}
-        //     itemCount={newModel.length}
-        //     itemSize={getItemSize}
-        //     itemData={newModel}
-        //     outerElementType={CustomScrollbarsVirtualList}
-        //   >
-        //     {renderItem}
-        //   </VariableSizeList>
-        // );
       }
+    });
 
-      return model.map((item: ContextMenuModel, index: number) => {
-        if (item?.disabled) return null;
-        return renderItem(item, index);
-      });
-    }
-
-    return null;
+    return submenu;
   };
 
   const className = classNames({ "p-submenu-list": !root });
   const submenu = renderMenu();
   const active = isActive();
+  const submenuLower = renderSubMenuLower();
 
-  return (
-    <CSSTransition
-      nodeRef={subMenuRef}
-      classNames="p-contextmenusub"
-      in={active}
-      timeout={{ enter: 0, exit: 0 }}
-      unmountOnExit
-      onEnter={onEnter}
-    >
-      <ul ref={subMenuRef} className={`${className} not-selectable`}>
-        {submenu}
-      </ul>
-    </CSSTransition>
+  const newModel = model.filter(
+    (item: ContextMenuModel) => item && !item.disabled,
   );
+  const rowHeights: number[] = newModel.map((item: ContextMenuModel) => {
+    if (!item) return 0;
+    if (item.isSeparator) return 13;
+    return 36;
+  });
+
+  const height = rowHeights.reduce((a, b) => a + b);
+  const viewport = DomHelpers.getViewport();
+  const paddingList = 12;
+  const marginsList = 32;
+
+  const listHeight =
+    height + paddingList + marginsList > viewport.height
+      ? viewport.height - marginsList
+      : height + paddingList;
+
+  if (model) {
+    return (
+      <CSSTransition
+        nodeRef={subMenuRef}
+        classNames="p-contextmenusub"
+        in={active}
+        timeout={{ enter: 0, exit: 0 }}
+        unmountOnExit
+        onEnter={onEnter}
+      >
+        <StyledList
+          ref={subMenuRef}
+          className={`${className} not-selectable`}
+          listHeight={height + paddingList}
+        >
+          <Scrollbar style={{ height: listHeight }}>{submenu}</Scrollbar>
+          {submenuLower}
+        </StyledList>
+      </CSSTransition>
+    );
+  }
 };
 
 export { SubMenu };

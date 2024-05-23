@@ -40,7 +40,8 @@ interface UseI18NProps {
 
 const useI18N = ({ settings }: UseI18NProps) => {
   const [i18n, setI18N] = React.useState<i18n>(
-    getI18NInstance(settings?.culture ?? "en") ?? ({} as i18n),
+    getI18NInstance(getCookie(LANGUAGE) ?? settings?.culture ?? "en") ??
+      ({} as i18n),
   );
 
   const isInit = React.useRef(false);

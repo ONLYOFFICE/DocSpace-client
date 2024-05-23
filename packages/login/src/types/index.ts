@@ -58,6 +58,7 @@ export type LoginProps = {
   thirdPartyProvider?: TThirdPartyProvider[];
   ssoSettings?: TGetSsoSettings;
   systemTheme?: ThemeKeys;
+  cultures: string[];
 };
 
 export type RegisterProps = {
@@ -96,6 +97,7 @@ export type LoginFormProps = {
   recaptchaPublicKey?: string;
   emailFromInvitation?: string;
   cookieSettingsEnabled: boolean;
+  currentCulture: string;
 };
 
 export type ForgotPasswordModalDialogProps = {

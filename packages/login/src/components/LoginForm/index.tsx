@@ -88,7 +88,7 @@ const LoginForm = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const captchaRef = useRef<ReCAPTCHA>(null);
 
-  const { t, ready, i18n } = useTranslation(["Login", "Common"]);
+  const { t, ready } = useTranslation(["Login", "Common"]);
   const theme = useTheme();
 
   const { message, confirmedEmail, authError } = match || {
@@ -98,8 +98,8 @@ const LoginForm = ({
   };
   const authCallback = useCallback(
     async (profile: string) => {
-    localStorage.removeItem("profile");
-    localStorage.removeItem("code");
+      localStorage.removeItem("profile");
+      localStorage.removeItem("code");
 
       try {
         const response = (await thirdPartyLogin(profile, currentCulture)) as {
@@ -370,15 +370,15 @@ const LoginForm = ({
                 onChange={onChangeCheckbox}
                 label={t("Common:Remember")}
                 helpButton={
-                    <HelpButton
-                      id="login_remember-hint"
-                      className="help-button"
-                      offsetRight={0}
-                      tooltipContent={
-                        <Text fontSize="12px">{t("RememberHelper")}</Text>
-                      }
-                      tooltipMaxWidth={isMobileOnly ? "240px" : "340px"}
-                    />
+                  <HelpButton
+                    id="login_remember-hint"
+                    className="help-button"
+                    offsetRight={0}
+                    tooltipContent={
+                      <Text fontSize="12px">{t("RememberHelper")}</Text>
+                    }
+                    tooltipMaxWidth={isMobileOnly ? "240px" : "340px"}
+                  />
                 }
               />
             )}

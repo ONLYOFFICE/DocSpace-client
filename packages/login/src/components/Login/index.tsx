@@ -31,12 +31,17 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
 import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
-import { PROVIDERS_DATA } from "@docspace/shared/constants";
+import {
+  COOKIE_EXPIRATION_YEAR,
+  LANGUAGE,
+  PROVIDERS_DATA,
+} from "@docspace/shared/constants";
 import {
   getBgPattern,
   getLoginLink,
   getLogoUrl,
   getOAuthToken,
+  setLanguageWithoutReload,
 } from "@docspace/shared/utils/common";
 import RecoverAccessModalDialog from "@docspace/shared/components/recover-access-modal-dialog/RecoverAccessModalDialog";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
@@ -45,6 +50,7 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
 import { Text } from "@docspace/shared/components/text";
+import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
 
 import SSOIcon from "PUBLIC_DIR/images/sso.react.svg?url";
 
@@ -56,6 +62,7 @@ import Register from "../Register";
 import LoginForm from "../LoginForm";
 
 import { LoginContent, LoginFormWrapper } from "./Login.styled";
+import { setCookie } from "@docspace/shared/utils/cookie";
 
 const Login = ({
   searchParams,
@@ -65,6 +72,7 @@ const Login = ({
   isAuthenticated,
   timers,
   systemTheme,
+  cultures,
 }: LoginProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -78,7 +86,8 @@ const Login = ({
 
   console.log("api res", settings, capabilities, thirdPartyProvider);
 
-  const { t } = useTranslation(["Login", "Common"]);
+  const { t, i18n } = useTranslation(["Login", "Common"]);
+  const currentCulture = i18n.language;
 
   const {
     recoverDialogVisible,
@@ -117,6 +126,12 @@ const Login = ({
       window.history.replaceState({}, document.title, window.location.pathname);
     }
   }, [searchParams]);
+
+  const onLanguageSelect = (culture: { key: string }) => {
+    const { key } = culture;
+
+    setLanguageWithoutReload(key, i18n);
+  };
 
   const ssoExists = () => {
     if (capabilities?.ssoUrl) return true;
@@ -204,6 +219,14 @@ const Login = ({
   return (
     <>
       <Scrollbar id="customScrollBar">
+        <LanguageCombobox
+          className="language-combo-box"
+          onSelectLanguage={onLanguageSelect}
+          cultures={cultures}
+          selectedCulture={currentCulture}
+          withBorder={false}
+        />
+        
         <LoginContent>
           <ColorTheme
             themeId={ThemeId.LinkForgotPassword}
@@ -231,6 +254,7 @@ const Login = ({
                 enableAdmMess={settings?.enableAdmMess ?? false}
                 cookieSettingsEnabled={settings?.cookieSettingsEnabled ?? false}
                 emailFromInvitation={invitationLinkData.email}
+                currentCulture={currentCulture}
               />
               {(oauthDataExists() || ssoExists()) && (
                 <>

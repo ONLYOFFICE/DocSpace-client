@@ -43,6 +43,7 @@ import {
   getSSO,
   checkIsAuthenticated,
   getColorTheme,
+  getPortalCultures,
 } from "@/utils/actions";
 
 async function Page({
@@ -54,14 +55,21 @@ async function Page({
 
   const startOtherOperationsDate = new Date();
 
-  const [settings, thirdParty, capabilities, ssoSettings, colorTheme] =
-    await Promise.all([
-      getSettings(),
-      getThirdPartyProviders(),
-      getCapabilities(),
-      getSSO(),
-      getColorTheme(),
-    ]);
+  const [
+    settings,
+    thirdParty,
+    capabilities,
+    ssoSettings,
+    colorTheme,
+    cultures,
+  ] = await Promise.all([
+    getSettings(),
+    getThirdPartyProviders(),
+    getCapabilities(),
+    getSSO(),
+    getColorTheme(),
+    getPortalCultures(),
+  ]);
 
   timers.otherOperations =
     new Date().getTime() - startOtherOperationsDate.getTime();
@@ -110,6 +118,7 @@ async function Page({
         isAuthenticated={false}
         systemTheme={systemTheme?.value as ThemeKeys}
         timers={timers}
+        cultures={cultures}
       />
     </LoginFormWrapper>
   );

@@ -446,11 +446,12 @@ class FilesTableHeader extends React.Component {
       columnInfoPanelStorageName,
       isRecentTab,
       isArchiveFolder,
-      isVirtualDataRoom,
+      isIndexEditingMode,
     } = this.props;
 
     if (
       isArchiveFolder !== prevProps.isArchiveFolder ||
+      isIndexEditingMode !== prevProps.isIndexEditingMode ||
       isRooms !== prevProps.isRooms ||
       isTrashFolder !== prevProps.isTrashFolder ||
       columnStorageName !== prevProps.columnStorageName ||

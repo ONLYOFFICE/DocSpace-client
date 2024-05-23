@@ -1190,6 +1190,7 @@ class TableHeader extends React.Component<
       infoPanelVisible = false,
       columns,
       setHideColumns,
+      isIndexEditingMode,
     } = this.props;
 
     let activeColumnIndex = null;
@@ -1499,6 +1500,7 @@ class TableHeader extends React.Component<
               +index === tableContainer.length - 1 ||
               (column ? column.dataset.enable === "true" : item !== "0px");
             const defaultColumnSize = column && column.dataset.defaultSize;
+            const isSettingColumn = Number(index) === tableContainer.length - 1;
 
             const isActiveNow = item === "0px" && enable;
             if (isActiveNow && column) activeColumnIndex = index;
@@ -1518,7 +1520,9 @@ class TableHeader extends React.Component<
                 getSubstring(gridTemplateColumns[+index - colIndex]) +
                 getSubstring(item)
               }px`;
-            } else if (item !== `${settingsSize}px`) {
+            } else if (isSettingColumn && !isIndexEditingMode) {
+              gridTemplateColumns.push(`${settingsSize}px`);
+            } else if (item !== `${settingsSize}px` || isIndexEditingMode) {
               const percent = (getSubstring(item) / oldWidth) * 100;
 
               let newItemWidth = defaultColumnSize

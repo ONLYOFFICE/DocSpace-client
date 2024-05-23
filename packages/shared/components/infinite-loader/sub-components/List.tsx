@@ -137,9 +137,7 @@ const ListComponent = ({
         style={{
           ...style,
           display: "grid",
-          gridTemplateColumns: isIndexEditingMode
-            ? `${indexEditingColumn?.join(" ")} 24px 75px`
-            : storageSize!,
+          gridTemplateColumns: storageSize!,
         }}
         key={key}
       >

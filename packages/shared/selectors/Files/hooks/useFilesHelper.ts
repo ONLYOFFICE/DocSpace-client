@@ -65,6 +65,7 @@ const useFilesHelper = ({
   getRootData,
   onSetBaseFolderPath,
   isRoomsOnly,
+  isUserOnly,
   rootThirdPartyId,
   getRoomList,
   getIcon,
@@ -141,7 +142,7 @@ const useFilesHelper = ({
         }
       }
 
-      const id = selectedItemId || "";
+      const id = selectedItemId ?? (isUserOnly ? "@my" : "");
 
       filter.folder = id.toString();
 
@@ -149,7 +150,7 @@ const useFilesHelper = ({
         folderId: string | number,
         isErrorPath = false,
       ) => {
-        if (initRef.current && getRootData) {
+        if (initRef.current && getRootData && folderId !== "@my") {
           const folder = await getFolderInfo(folderId, true);
 
           const isArchive = folder.rootFolderType === FolderType.Archive;
@@ -247,7 +248,7 @@ const useFilesHelper = ({
           //   if (item.roomType) breadCrumbs[idx].isRoom = true;
           // });
 
-          if (!isThirdParty && !isRoomsOnly)
+          if (!isThirdParty && !isRoomsOnly && !isUserOnly)
             breadCrumbs.unshift({ ...DEFAULT_BREAD_CRUMB });
 
           onSetBaseFolderPath?.(isErrorPath ? [] : breadCrumbs);
@@ -308,6 +309,7 @@ const useFilesHelper = ({
       setIsNextPageLoading,
       searchValue,
       filterParam,
+      isUserOnly,
       selectedItemId,
       getRootData,
       setSelectedItemSecurity,

@@ -660,7 +660,7 @@ const StyledBox = styled.div<{
   }
 
   .title-block-text {
-    margin-top: 1px;
+    margin-top: 0px;
 
     @media ${tablet} {
       margin: 0;
@@ -684,6 +684,7 @@ const StyledBox = styled.div<{
   @media ${mobile} {
     width: ${({ dropBoxWidth }) => `${dropBoxWidth}px`};
     padding-top: 10px !important;
+    inset-inline-start: 0;
   }
 `;
 

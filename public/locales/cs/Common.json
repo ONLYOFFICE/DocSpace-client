@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "O nás",
   "AboutCompanyTitle": "O tomto programu",
   "AccessDenied": "Přístup odepřen",
@@ -195,6 +195,7 @@
   "IncorrectPassword": "Nesprávné heslo",
   "Info": "Info",
   "InfoPanel": "Informační panel",
+  "InvalidLink": "Neplatný odkaz",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> vás zve do DocSpace <1>{{{spaceAddress}}</1> pro bezpečnou spolupráci na dokumentech.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> vás zve do místnosti <1>{{roomName}}</1>  pro bezpečnou spolupráci na dokumentech.",
   "Invite": "Pozvat",
@@ -360,6 +361,7 @@
   "SettingsGeneral": "Obecné",
   "SettingsPersonal": "Osobní",
   "SetToDefault": "Nastavení na výchozí hodnotu",
+  "Share": "Sdílet",
   "SharedLinks": "Sdílené odkazy",
   "ShareDocument": "Sdílet tento dokument",
   "ShareDocumentDescription": "Zajistěte přístup k dokumentu a nastavte úrovně oprávnění.",

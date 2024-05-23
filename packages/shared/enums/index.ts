@@ -446,7 +446,7 @@ export const enum ParseErrorTypes {
 
 export const enum ButtonKeys {
   enter = "enter",
-  esc = "esc",
+  esc = "Escape",
   tab = "Tab",
 }
 
@@ -514,4 +514,9 @@ export const enum EditorConfigErrorType {
   NotFoundScope = "System.IO.FileNotFoundException",
   AccessDeniedScope = "System.Security.SecurityException",
   TenantQuotaException = "ASC.Core.Tenants.TenantQuotaException",
+}
+
+export const enum RoomsStorageFilter {
+  internal = 1,
+  thirdparty = 2,
 }

@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "O",
   "AboutCompanyTitle": "O tym programie",
   "AccessDenied": "Odmowa dostępu",
@@ -195,6 +195,7 @@
   "IncorrectPassword": "Nieprawidłowe hasło",
   "Info": "Info",
   "InfoPanel": "Panel informacyjny",
+  "InvalidLink": "Nieprawidłowy link",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> zaprasza Cię do DocSpace <1>{{spaceAddress}}</1> w celu bezpiecznej współpracy nad dokumentami.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> zaprasza Cię do pokoju <1>{{roomName}}</1> w celu bezpiecznej współpracy nad dokumentami.",
   "Invite": "Zaprosić",
@@ -360,6 +361,7 @@
   "SettingsGeneral": "Ogólne",
   "SettingsPersonal": "Osobiste",
   "SetToDefault": "Ustawiono wartość domyślną",
+  "Share": "Udostępnij",
   "SharedLinks": "Udostępnione linki",
   "ShareDocument": "Udostępnij ten dokument",
   "ShareDocumentDescription": "Zapewnij dostęp do dokumentu i skonfiguruj poziomy uprawnień.",

@@ -30,6 +30,7 @@ import { TRoom } from "../../api/rooms/types";
 import { getIconPathByFolderType } from "../../utils/common";
 import { iconSize32 } from "../../utils/image-helpers";
 import { DEFAULT_FILE_EXTS } from "./FilesSelector.constants";
+import { getTitleWithoutExtension } from "../../utils";
 
 export const convertFoldersToItems: (
   folders: TFolder[],
@@ -87,7 +88,7 @@ export const convertFilesToItems: (
     const { id, title, security, folderId, rootFolderType, fileExst } = file;
 
     const icon = getIcon(fileExst || DEFAULT_FILE_EXTS);
-    const label = title.replace(fileExst, "") || fileExst;
+    const label = getTitleWithoutExtension(file, false);
 
     return {
       id,

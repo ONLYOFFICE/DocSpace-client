@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "O aplikácii",
   "AboutCompanyTitle": "O programe",
   "AccessDenied": "Prístup bol zamietnutý",
@@ -195,6 +195,7 @@
   "IncorrectPassword": "Nesprávne heslo",
   "Info": "Informácie",
   "InfoPanel": "Informačný panel",
+  "InvalidLink": "Neplatný odkaz",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> vás pozýva, aby ste sa pripojili k priestoru DocSpace <1>{{{spaceAddress}}</1> na bezpečnú spoluprácu na dokumentoch.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> vás pozýva, aby ste sa pripojili k miestnosti <1>{{roomName}}</1> na bezpečnú spoluprácu na dokumentoch.",
   "Invite": "Pozvať",
@@ -360,6 +361,7 @@
   "SettingsGeneral": "Všeobecné",
   "SettingsPersonal": "Personal",
   "SetToDefault": "Nastaviť na predvolené nastavenia",
+  "Share": "Zdieľať",
   "SharedLinks": "Zdieľané odkazy",
   "ShareDocument": "Zdieľať tento dokument",
   "ShareDocumentDescription": "Poskytnúť prístup k dokumentu a nastaviť úrovne oprávnení.",

@@ -60,6 +60,7 @@ const Editor = ({
   fileInfo,
   isSharingAccess,
   errorMessage,
+  isSkipError,
 
   onSDKRequestSharingSettings,
   onSDKRequestSaveAs,
@@ -68,7 +69,7 @@ const Editor = ({
   onSDKRequestSelectDocument,
   onSDKRequestReferenceSource,
 }: EditorProps) => {
-  const { t } = useTranslation(["Common", "Editor", "DeepLink"]);
+  const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
 
   const {
     onDocumentReady,
@@ -96,6 +97,7 @@ const Editor = ({
     config,
     doc,
     errorMessage,
+    isSkipError,
     t,
   });
 
@@ -133,12 +135,21 @@ const Editor = ({
 
   if (fileInfo) {
     const editorGoBack = new URLSearchParams(search).get("editorGoBack");
+    const openFileLocationText = (
+      (
+        i18n.getDataByLanguage(i18n.language) as unknown as {
+          Editor: { [key: string]: string };
+        }
+      )?.["Editor"] as {
+        [key: string]: string;
+      }
+    )?.["FileLocation"]; // t("FileLocation");
 
     if (editorGoBack === "false" || user?.isVisitor || !user) {
     } else if (editorGoBack === "event") {
       goBack = {
         requestClose: true,
-        text: t?.("FileLocation"),
+        text: openFileLocationText,
       };
     } else {
       goBack = {
@@ -146,7 +157,7 @@ const Editor = ({
           typeof window !== "undefined"
             ? window.DocSpaceConfig?.editor?.requestClose ?? false
             : false,
-        text: t?.("FileLocation"),
+        text: openFileLocationText,
       };
       if (
         typeof window !== "undefined" &&
@@ -258,8 +269,9 @@ const Editor = ({
   }
 
   if (
-    typeof window !== "undefined" &&
-    window.DocSpaceConfig?.editor?.requestClose
+    (typeof window !== "undefined" &&
+      window.DocSpaceConfig?.editor?.requestClose) ||
+    IS_ZOOM
   ) {
     newConfig.events.onRequestClose = onSDKRequestClose;
   }
@@ -269,7 +281,7 @@ const Editor = ({
       id={"docspace_editor"}
       documentServerUrl={documentserverUrl}
       config={
-        errorMessage
+        errorMessage || isSkipError
           ? {
               events: {
                 onAppReady: onSDKAppReady,

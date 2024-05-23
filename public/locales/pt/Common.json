@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Sobre",
   "AboutCompanyTitle": "Sobre este programa",
   "AccessDenied": "Acesso negado",
@@ -195,6 +195,7 @@
   "IncorrectPassword": "Palavra-chave incorreta",
   "Info": "Informação",
   "InfoPanel": "Painel de informação",
+  "InvalidLink": "Link inválido",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> convida você para participar do DocSpace <1>{{spaceAddress}}</1> para colaboração segura de documentos.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> convida você para participar da sala <1>{{roomName}}</1> para colaboração segura de documentos.",
   "Invite": "Convidar",
@@ -360,6 +361,7 @@
   "SettingsGeneral": "Geral",
   "SettingsPersonal": "Pessoal",
   "SetToDefault": "Definido como padrão",
+  "Share": "Partilhar",
   "SharedLinks": "Links compartilhados",
   "ShareDocument": "Compartilhe este documento",
   "ShareDocumentDescription": "Forneça acesso ao documento e defina os níveis de permissão.",

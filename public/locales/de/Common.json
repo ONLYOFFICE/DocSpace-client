@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Informationen",
   "AboutCompanyTitle": "Über diese Software",
   "AccessDenied": "Zugriff verweigert",
@@ -195,6 +195,7 @@
   "IncorrectPassword": "Falsches Passwort",
   "Info": "Informationen",
   "InfoPanel": "Info-Panel",
+  "InvalidLink": "Ungültiger Link",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> lädt Sie ein, dem DocSpace <1>{{spaceAddress}}</1> für die sichere Zusammenarbeit an Dokumenten beizutreten.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> lädt Sie ein, dem Raum <1>{{roomName}}</1> für die sichere Zusammenarbeit an Dokumenten beizutreten.",
   "Invite": "Einladen",
@@ -360,6 +361,7 @@
   "SettingsGeneral": "Allgemein",
   "SettingsPersonal": "Persönlich",
   "SetToDefault": "Auf Standardeinstellung setzen",
+  "Share": "Freigeben",
   "SharedLinks": "Freigegebene Links",
   "ShareDocument": "Dieses Dokument freigeben",
   "ShareDocumentDescription": "Gewähren Sie Zugriff auf das Dokument und legen Sie die Berechtigungsstufen fest.",

@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Մասին",
   "AboutCompanyTitle": "Ծրագրի մասին",
   "AccessDenied": "Մուտքն արգելված է",
@@ -195,6 +195,7 @@
   "IncorrectPassword": "Սխալ գաղտնաբառ",
   "Info": "Տեղեկություններ",
   "InfoPanel": "Տեղեկատվական վահանակ",
+  "InvalidLink": "Անվավեր հղում",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1>-ը հրավիրում է ձեզ միանալ ԴոկՍպեյսի <1>{{spaceAddress}}</1> փաստաթղթի անվտանգ համագործակցության համար:",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1>-ը հրավիրում է ձեզ միանալ սենյակին <1>{{roomName}}</1>՝ փաստաթղթերի անվտանգ համագործակցության համար:",
   "Invite": "Հրավիրել",
@@ -360,6 +361,7 @@
   "SettingsGeneral": "Ընդհանուր",
   "SettingsPersonal": "Անձնական",
   "SetToDefault": "Սահմանել լռելյայն",
+  "Share": "Համօգտագործել",
   "SharedLinks": "Համօգտագործվող հղումներ",
   "ShareDocument": "Համօգտագործել այս փաստաթուղթը",
   "ShareDocumentDescription": "Տրամադրել մուտք դեպի փաստաթուղթ և սահմանել թույլտվությունների մակարդակները",

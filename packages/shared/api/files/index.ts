@@ -137,7 +137,6 @@ export async function getFolderPath(folderId: number) {
   };
 
   const res = (await request(options)) as TGetFolderPath;
-
   return res;
 }
 
@@ -164,7 +163,9 @@ export async function getFolder(
     signal,
   };
 
-  const res = (await request(options)) as TGetFolder;
+  const skipRedirect = true;
+
+  const res = (await request(options, skipRedirect)) as TGetFolder;
 
   res.files = decodeDisplayName(res.files);
   res.folders = decodeDisplayName(res.folders);

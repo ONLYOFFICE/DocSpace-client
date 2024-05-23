@@ -46,4 +46,6 @@ export type RoomSelectorProps = TSelectorHeader &
     setIsDataReady?: (value: boolean) => void;
     submitButtonLabel?: string;
     withSearch?: boolean;
+
+    disableThirdParty?: boolean;
   };

@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "소개",
   "AboutCompanyTitle": "프로그램 소개",
   "AccessDenied": "액세스가 거부되었습니다",
@@ -195,6 +195,7 @@
   "IncorrectPassword": "잘못된 비밀번호입니다",
   "Info": "정보",
   "InfoPanel": "정보 패널",
+  "InvalidLink": "유효하지 않은 링크입니다",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1>님이 안전한 문서 공동작업을 위해 귀하를 DocSpace <1>{{spaceAddress}}</1>에 초대했습니다.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1>님이 안전한 문서 공동작업을 위해 귀하를 <1>{{roomName}}</1> 방에 초대했습니다.",
   "Invite": "초대",
@@ -360,6 +361,7 @@
   "SettingsGeneral": "일반",
   "SettingsPersonal": "개인",
   "SetToDefault": "기본값으로 설정",
+  "Share": "공유",
   "SharedLinks": "공유된 링크",
   "ShareDocument": "이 문서 공유",
   "ShareDocumentDescription": "문서에 대한 액세스를 제공하고 권한 수준을 설정하세요.",

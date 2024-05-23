@@ -319,6 +319,8 @@ class FileRow extends Component {
       isPersonal,
       isMediaActive,
       downloadInCurrentTab,
+      isPlugin,
+      onPluginClick,
     } = this.props;
 
     const { showPasswordInput, password, passwordValid } = this.state;
@@ -348,13 +350,13 @@ class FileRow extends Component {
         >
           <>
             {item.fileId ? (
-              isMedia ? (
+              isMedia || (isPlugin && onPluginClick) ? (
                 <Link
                   className="upload-panel_file-row-link"
                   fontWeight="600"
                   color={item.error && "#A3A9AE"}
                   truncate
-                  onClick={onMediaClick}
+                  onClick={isMedia ? onMediaClick : onPluginClick}
                 >
                   {name}
                   {fileExtension}
@@ -437,6 +439,7 @@ export default inject(
       uploadDataStore,
       mediaViewerDataStore,
       settingsStore,
+      pluginStore,
     },
     { item },
   ) => {
@@ -458,6 +461,31 @@ export default inject(
       ext = item.fileInfo.fileExst;
       splitted = item.fileInfo.title.split(".");
       if (!!ext) splitted.splice(-1);
+    }
+
+    const { fileItemsList } = pluginStore;
+    const { enablePlugins, currentDeviceType } = settingsStore;
+
+    let isPlugin = false;
+    let onPluginClick = null;
+
+    if (fileItemsList && enablePlugins) {
+      let currPluginItem = null;
+
+      fileItemsList.forEach((i) => {
+        if (i.key === item?.fileInfo?.fileExst) currPluginItem = i.value;
+      });
+
+      if (currPluginItem) {
+        const correctDevice = currPluginItem.devices
+          ? currPluginItem.devices.includes(currentDeviceType)
+          : true;
+        if (correctDevice) {
+          isPlugin = true;
+          onPluginClick = () =>
+            currPluginItem.onClick({ ...item, ...item.fileInfo });
+        }
+      }
     }
 
     name = splitted.join(".");
@@ -512,6 +540,9 @@ export default inject(
 
       setCurrentItem,
       clearUploadedFilesHistory,
+
+      isPlugin,
+      onPluginClick,
     };
   },
 )(withTranslation("UploadPanel")(observer(FileRow)));

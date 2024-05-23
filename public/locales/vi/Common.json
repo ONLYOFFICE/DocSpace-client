@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Giới thiệu",
   "AboutCompanyTitle": "Giới thiệu về chương trình này",
   "AccessDenied": "Truy cập bị từ chối",
@@ -195,6 +195,7 @@
   "IncorrectPassword": "Mật khẩu không chính xác",
   "Info": "Thông tin",
   "InfoPanel": "Bảng thông tin",
+  "InvalidLink": "Liên kết không hợp lệ",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> mời bạn tham gia DocSpace <1>{{spaceAddress}} </1> để cùng làm việc trên tài liệu một cách an toàn.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> mời bạn tham gia phòng <1>{{roomName}} </1> để cùng làm việc trên tài liệu một cách an toàn.",
   "Invite": "Mời",
@@ -360,6 +361,7 @@
   "SettingsGeneral": "Cài đặt chung",
   "SettingsPersonal": "Cá nhân",
   "SetToDefault": "Đặt thành mặc định",
+  "Share": "Chia sẻ",
   "SharedLinks": "Liên kết được chia sẻ",
   "ShareDocument": "Chia sẻ tài liệu này",
   "ShareDocumentDescription": "Cung cấp quyền truy cập vào tài liệu và đặt mức cấp phép.",

@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Σχετικά",
   "AboutCompanyTitle": "Σχετικά με αυτό το πρόγραμμα",
   "AccessDenied": "Απαγόρευση πρόσβασης",
@@ -195,6 +195,7 @@
   "IncorrectPassword": "Λανθασμένος κωδικός πρόσβασης",
   "Info": "Πληροφορίες",
   "InfoPanel": "Πίνακας πληροφοριών",
+  "InvalidLink": "Μη έγκυρος σύνδεσμος",
   "InvitationToPortal": "Ο <1>{{firstName}} {{lastName}}</1> σας προσκαλεί να συμμετάσχετε στο DocSpace <1>{{spaceAddress}}</1> για ασφαλή συνεργασία σε έγγραφα.",
   "InvitationToRoom": "Ο <1>{{firstName}} {{lastName}}</1> σας προσκαλεί να συμμετάσχετε στο δωμάτιο <1>{{roomName}}</1> για ασφαλή συνεργασία σε έγγραφα.",
   "Invite": "Πρόσκληση",
@@ -360,6 +361,7 @@
   "SettingsGeneral": "Γενικά",
   "SettingsPersonal": "Προσωπικά",
   "SetToDefault": "Ορισμός σε προεπιλεγμένη τιμή",
+  "Share": "Κοινή χρήση",
   "SharedLinks": "Κοινόχρηστοι σύνδεσμοι",
   "ShareDocument": "Κοινή χρήση αυτού του εγγράφου",
   "ShareDocumentDescription": "Παρέχετε πρόσβαση στο έγγραφο και ορίστε τα επίπεδα δικαιωμάτων.",

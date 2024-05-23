@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "من نحن",
   "AboutCompanyTitle": "نبذة تعريفية عن البرنامج",
   "AccessDenied": "المحاولة مرفوضة",
@@ -195,6 +195,7 @@
   "IncorrectPassword": "كلمة مرور غير صحيحة",
   "Info": "معلومات",
   "InfoPanel": "شريط البيانات",
+  "InvalidLink": "رابط غير صالح",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1>  يدعوك للانضمام الى DocSpace <1>{{spaceAddress}}</1> للتعاون الآمن في المستندات.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1>  يدعوك للانضمام للغرفة <1>{{roomName}}</1> للتعاون الآمن في المستندات.",
   "Invite": "دعوة",
@@ -359,6 +360,7 @@
   "SettingsGeneral": "عام",
   "SettingsPersonal": "شخصي",
   "SetToDefault": "تعيين الاعدادات الافتراضية",
+  "Share": "شارك",
   "SharedLinks": "الروابط المشتركة",
   "ShareDocument": "شارك هذا المستند",
   "ShareDocumentDescription": "توفير الوصول إلى المستند وتعيين مستويات الأذونات.",

@@ -549,6 +549,7 @@ const SectionFilterContent = ({
       navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
     } else {
       const newFilter = filter.clone();
+
       newFilter.page = 0;
       newFilter.filterValue = "";
 
@@ -851,9 +852,20 @@ const SectionFilterContent = ({
 
         if (accountsFilter?.payments?.toString()) {
           filterValues.push({
-            key: filter.payments.toString(),
+            key: filter.payments?.toString(),
             label:
-              PaymentsType.Paid === filter.payments.toString()
+              PaymentsType.Paid === filter.payments?.toString()
+                ? t("Common:Paid")
+                : t("Common:Free"),
+            group: "filter-account",
+          });
+        }
+
+        if (insideGroupFilter?.payments?.toString()) {
+          filterValues.push({
+            key: filter.payments?.toString(),
+            label:
+              PaymentsType.Paid === filter.payments?.toString()
                 ? t("Common:Paid")
                 : t("Common:Free"),
             group: "filter-account",
@@ -2582,6 +2594,7 @@ const SectionFilterContent = ({
 
   const clearAll = () => {
     setIsLoading(true);
+
     if (isAccountsPage) {
       const newFilter = isGroupsAccounts
         ? GroupsFilter.getDefault()
@@ -2608,6 +2621,8 @@ const SectionFilterContent = ({
       navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
     } else {
       const newFilter = FilesFilter.getDefault();
+
+      newFilter.folder = filter.folder;
 
       const path = location.pathname.split("/filter")[0];
 
@@ -2651,6 +2666,7 @@ const SectionFilterContent = ({
       isPeopleAccounts={isPeopleAccounts}
       isGroupsAccounts={isGroupsAccounts}
       isInsideGroup={isInsideGroup}
+      disableThirdParty={isTrash}
     />
   );
 };

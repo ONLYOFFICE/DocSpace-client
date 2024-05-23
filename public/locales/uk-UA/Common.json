@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Інформація",
   "AboutCompanyTitle": "Про цю програму",
   "AccessDenied": "Доступ заборонено",
@@ -195,6 +195,7 @@
   "IncorrectPassword": "Неправильний пароль",
   "Info": "Інформація",
   "InfoPanel": "Інформаційна панель",
+  "InvalidLink": "Недійсне посилання",
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> запрошує вас приєднатися до простору DocSpace <1>{{spaceAddress}}</1> для безпечної спільної роботи над документами.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> запрошує вас приєднатися до кімнати <1>{{roomName}}</1> для безпечної спільної роботи над документами.",
   "Invite": "Запросити",
@@ -360,6 +361,7 @@
   "SettingsGeneral": "Загальні",
   "SettingsPersonal": "Особисте",
   "SetToDefault": "Встановити за замовчуванням",
+  "Share": "Надати спільний доступ",
   "SharedLinks": "Спільні посилання",
   "ShareDocument": "Поділитися цим документом",
   "ShareDocumentDescription": "Надайте доступ до документа та встановіть рівні дозволів.",

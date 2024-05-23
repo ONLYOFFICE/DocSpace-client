@@ -438,7 +438,7 @@ const Manager = (props) => {
 
   const onChangeSortBy = (item) => {
     setConfig((config) => {
-      return { ...config, sortby: item.key };
+      return { ...config, filter: { ...config.filter, sortby: item.key } };
     });
 
     setSortBy(item);
@@ -446,7 +446,7 @@ const Manager = (props) => {
 
   const onChangeSortOrder = (item) => {
     setConfig((config) => {
-      return { ...config, sortorder: item.key };
+      return { ...config, filter: { ...config.filter, sortorder: item.key } };
     });
 
     setSortOrder(item);
@@ -506,19 +506,22 @@ const Manager = (props) => {
 
   const onChangeCount = (e) => {
     setConfig((config) => {
-      return { ...config, count: e.target.value };
+      return { ...config, filter: { ...config.filter, count: e.target.value } };
     });
   };
 
   const onChangePage = (e) => {
     setConfig((config) => {
-      return { ...config, page: e.target.value };
+      return { ...config, filter: { ...config.filter, page: e.target.value } };
     });
   };
 
   const onChangeSearch = (e) => {
     setConfig((config) => {
-      return { ...config, search: e.target.value };
+      return {
+        ...config,
+        filter: { ...config.filter, filterValue: e.target.value },
+      };
     });
   };
 
@@ -1266,7 +1269,7 @@ const Manager = (props) => {
                   scale={true}
                   onChange={onChangeSearch}
                   placeholder={t("Common:Search")}
-                  value={config.search}
+                  value={config.filter.filterValue}
                   tabIndex={5}
                 />
                 <Checkbox
@@ -1314,7 +1317,7 @@ const Manager = (props) => {
                 scale={true}
                 onChange={onChangeCount}
                 placeholder={t("EnterCount")}
-                value={config.count}
+                value={config.filter.count}
                 tabIndex={6}
               />
             </ControlsGroup>
@@ -1324,8 +1327,8 @@ const Manager = (props) => {
                 scale={true}
                 onChange={onChangePage}
                 placeholder={t("EnterPage")}
-                value={config.page}
-                isDisabled={!config.count}
+                value={config.filter.page}
+                isDisabled={!config.filter.count}
                 tabIndex={7}
               />
             </ControlsGroup>

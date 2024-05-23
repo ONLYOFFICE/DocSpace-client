@@ -78,6 +78,7 @@ const LoginForm = ({
   const confirmedEmail = searchParams.get("confirmedEmail");
   const authError = searchParams.get("authError");
   const loginData = searchParams.get("loginData");
+  const referenceUrl = searchParams.get("referenceUrl");
 
   const isDesktop =
     typeof window !== "undefined" && window["AscDesktopEditor"] !== undefined;
@@ -135,7 +136,8 @@ const LoginForm = ({
           return window.location.replace(response.confirmUrl);
         }
 
-        const redirectPath = sessionStorage.getItem("referenceUrl");
+        const redirectPath =
+          referenceUrl || sessionStorage.getItem("referenceUrl");
 
         if (redirectPath) {
           sessionStorage.removeItem("referenceUrl");
@@ -150,7 +152,7 @@ const LoginForm = ({
         );
       }
     },
-    [t],
+    [t, referenceUrl],
   );
 
   useEffect(() => {
@@ -242,7 +244,8 @@ const LoginForm = ({
     login(user, hash, pwd, session, captchaToken)
       .then((res: string | object) => {
         const isConfirm = typeof res === "string" && res.includes("confirm");
-        const redirectPath = sessionStorage.getItem("referenceUrl");
+        const redirectPath =
+          referenceUrl || sessionStorage.getItem("referenceUrl");
         if (redirectPath && !isConfirm) {
           sessionStorage.removeItem("referenceUrl");
           window.location.href = redirectPath;
@@ -289,6 +292,7 @@ const LoginForm = ({
     password,
     reCaptchaPublicKey,
     setIsLoading,
+    referenceUrl,
   ]);
 
   const onBlurEmail = () => {

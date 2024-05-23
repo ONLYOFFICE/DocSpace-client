@@ -26,7 +26,7 @@
 
 import { ScrollbarType } from "./Scrollbar.enums";
 
-export interface ScrollbarProps {
+export type ScrollbarProps = {
   /** Accepts class */
   className?: string;
   /** This class will be placed on scroller element */
@@ -50,14 +50,13 @@ export interface ScrollbarProps {
 
   onScroll?: React.UIEventHandler<HTMLDivElement>;
   children?: React.ReactNode;
-}
+};
 
-export interface CustomScrollbarsVirtualListProps {
-  onScroll?: React.UIEventHandler<HTMLDivElement>;
+export type CustomScrollbarsVirtualListProps = Pick<
+  ScrollbarProps,
+  "style" | "onScroll" | "children" | "className" | "autoFocus"
+> & {
   forwardedRef?: React.ForwardedRef<unknown>;
-  style?: React.CSSProperties;
-  children?: React.ReactNode;
-  className?: string;
-  stype?: ScrollbarType;
   contentRef?: React.MutableRefObject<HTMLDivElement | null>;
-}
+  stype?: ScrollbarType;
+};

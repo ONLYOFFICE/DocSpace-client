@@ -37,6 +37,7 @@ const CustomScrollbars = ({
   children,
   className,
   contentRef,
+  autoFocus,
 }: CustomScrollbarsVirtualListProps) => {
   const refSetter = (
     scrollbarsRef: React.RefObject<Scrollbar>,
@@ -64,6 +65,7 @@ const CustomScrollbars = ({
       style={{ ...style, overflow: "hidden" }}
       onScroll={onScroll}
       className={className}
+      autoFocus={autoFocus}
     >
       {children}
       <div className="additional-scroll-height" />
@@ -77,4 +79,13 @@ const CustomScrollbarsVirtualList = React.forwardRef(
   ),
 );
 
-export { CustomScrollbarsVirtualList };
+const CustomScrollbarsVirtualListWithAutoFocus = React.forwardRef(
+  (props: CustomScrollbarsVirtualListProps, ref) => (
+    <CustomScrollbars {...props} forwardedRef={ref} autoFocus />
+  ),
+);
+
+export {
+  CustomScrollbarsVirtualList,
+  CustomScrollbarsVirtualListWithAutoFocus,
+};

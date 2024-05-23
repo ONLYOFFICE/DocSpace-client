@@ -30,7 +30,6 @@ import React from "react";
 import { I18nextProvider } from "react-i18next";
 
 import { ThemeProvider } from "@docspace/shared/components/theme-provider";
-import ErrorBoundary from "@docspace/shared/components/error-boundary/ErrorBoundary";
 import { TFirebaseSettings } from "@docspace/shared/api/settings/types";
 import FirebaseHelper from "@docspace/shared/utils/firebase";
 import { TUser } from "@docspace/shared/api/people/types";
@@ -40,9 +39,9 @@ import { Base, Dark } from "@docspace/shared/themes";
 import { TDataContext } from "@/types";
 import useI18N from "@/hooks/useI18N";
 import useTheme from "@/hooks/useTheme";
-import useDeviceType from "@/hooks/useDeviceType";
 
 import pkgFile from "../../package.json";
+import ErrorBoundaryWrapper from "./ErrorBoundary";
 
 export const Providers = ({
   children,
@@ -68,8 +67,6 @@ export const Providers = ({
     if (redirectURL) window.location.replace("/");
   }, [redirectURL]);
 
-  const { currentDeviceType } = useDeviceType();
-
   const { i18n } = useI18N({
     settings: value.settings,
   });
@@ -89,14 +86,13 @@ export const Providers = ({
   return (
     <ThemeProvider theme={currentTheme}>
       <I18nextProvider i18n={i18n}>
-        <ErrorBoundary
+        <ErrorBoundaryWrapper
           user={{} as TUser}
           version={pkgFile.version}
           firebaseHelper={firebaseHelper}
-          currentDeviceType={currentDeviceType}
         >
           {children}
-        </ErrorBoundary>
+        </ErrorBoundaryWrapper>
       </I18nextProvider>
     </ThemeProvider>
   );

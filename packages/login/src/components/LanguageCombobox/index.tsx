@@ -24,18 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
+import { useTranslation } from "react-i18next";
 import { setLanguageForUnauthorized } from "@docspace/shared/utils/common";
 import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
-import useDeviceType from "@/hooks/useDeviceType";
+import { TPortalCultures } from "@docspace/shared/api/settings/types";
 import { DeviceType } from "@docspace/shared/enums";
 
+import useDeviceType from "@/hooks/useDeviceType";
+
 export interface TLanguageCombobox {
-  currentCulture: string;
-  cultures: string[];
+  cultures: TPortalCultures;
 }
 
 const LanguageComboboxWrapper = (props: TLanguageCombobox) => {
-  const { currentCulture, cultures } = props;
+  const { cultures } = props;
+  const { i18n } = useTranslation(["Login", "Common"]);
+
+  const currentCulture = i18n.language;
 
   const onLanguageSelect = (culture: { key: string }) => {
     const { key } = culture;

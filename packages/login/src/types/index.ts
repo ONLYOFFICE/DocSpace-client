@@ -86,7 +86,6 @@ export type LoginFormProps = {
   hashSettings?: TPasswordHash;
   reCaptchaPublicKey?: string;
   cookieSettingsEnabled: boolean;
-  currentCulture: string;
 };
 
 export type ForgotPasswordModalDialogProps = {

@@ -63,7 +63,6 @@ const LoginForm = ({
   hashSettings,
   cookieSettingsEnabled,
   reCaptchaPublicKey,
-  currentCulture,
 }: LoginFormProps) => {
   const { isLoading, isModalOpen } = useContext(LoginValueContext);
   const { setIsLoading } = useContext(LoginDispatchContext);
@@ -72,8 +71,9 @@ const LoginForm = ({
 
   const theme = useTheme();
 
-  const { t, ready } = useTranslation(["Login", "Common"]);
-
+  const { t, ready, i18n } = useTranslation(["Login", "Common"]);
+  const currentCulture = i18n.language;
+  
   const message = searchParams.get("message");
   const confirmedEmail = searchParams.get("confirmedEmail");
   const authError = searchParams.get("authError");
@@ -176,8 +176,6 @@ const LoginForm = ({
 
     if (confirmedEmail && ready) toastr.success(text);
     if (authError && ready) toastr.error(t("Common:ProviderLoginError"));
-
-    
   }, [message, confirmedEmail, t, ready, authError, authCallback]);
 
   const onChangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -287,6 +285,7 @@ const LoginForm = ({
     reCaptchaPublicKey,
     setIsLoading,
     referenceUrl,
+    currentCulture,
   ]);
 
   const onBlurEmail = () => {
@@ -358,14 +357,14 @@ const LoginForm = ({
         passwordErrorMessage={passwordErrorMessage}
         password={password}
         onChangePassword={onChangePassword}
-        />
+      />
 
       <ForgotContainer
         cookieSettingsEnabled={cookieSettingsEnabled}
-                isChecked={isChecked}
+        isChecked={isChecked}
         identifier={identifier}
         onChangeCheckbox={onChangeCheckbox}
-                  />
+      />
 
       {reCaptchaPublicKey && isCaptcha && (
         <StyledCaptcha isCaptchaError={isCaptchaError}>

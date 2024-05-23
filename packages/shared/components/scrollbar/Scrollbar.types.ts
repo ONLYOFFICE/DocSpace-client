@@ -58,5 +58,6 @@ export interface CustomScrollbarsVirtualListProps {
   style?: React.CSSProperties;
   children?: React.ReactNode;
   className?: string;
-  stype: ScrollbarType;
+  stype?: ScrollbarType;
+  contentRef?: React.MutableRefObject<HTMLDivElement | null>;
 }

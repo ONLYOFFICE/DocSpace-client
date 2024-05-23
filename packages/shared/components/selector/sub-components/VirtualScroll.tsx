@@ -24,57 +24,29 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable react/prop-types */
-import React from "react";
-import { ScrollbarComponent } from "../Scrollbar";
-import { CustomScrollbarsVirtualListProps } from "../Scrollbar.types";
-import { Scrollbar } from "../custom-scrollbar";
+import { forwardRef, useEffect, useRef } from "react";
 
-const CustomScrollbars = ({
-  onScroll,
-  forwardedRef,
-  style,
-  children,
-  className,
-  contentRef,
-}: CustomScrollbarsVirtualListProps) => {
-  const refSetter = (
-    scrollbarsRef: React.RefObject<Scrollbar>,
-    forwardedRefArg: unknown,
-  ) => {
-    // @ts-expect-error Don`t know how fix it
-    const ref = scrollbarsRef?.contentElement ?? null;
+import { CustomScrollbarsVirtualList } from "../../scrollbar";
 
-    if (typeof forwardedRefArg === "function") {
-      forwardedRefArg(ref);
-    } else {
-      forwardedRefArg = ref;
+export const VirtualScroll = forwardRef((props, ref) => {
+  const scrollContentRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const isSearchInputFocused =
+      document.activeElement?.classList.contains("search-input-block");
+
+    if (!isSearchInputFocused) {
+      scrollContentRef.current?.focus();
     }
+  }, []);
 
-    if (contentRef) {
-      contentRef.current = ref;
-    }
-  };
   return (
-    <ScrollbarComponent
-      // @ts-expect-error error from custom scrollbar
-      ref={(scrollbarsRef: React.RefObject<Scrollbar>) =>
-        refSetter(scrollbarsRef, forwardedRef)
-      }
-      style={{ ...style, overflow: "hidden" }}
-      onScroll={onScroll}
-      className={className}
-    >
-      {children}
-      <div className="additional-scroll-height" />
-    </ScrollbarComponent>
+    <CustomScrollbarsVirtualList
+      {...props}
+      ref={ref}
+      contentRef={scrollContentRef}
+    />
   );
-};
+});
 
-const CustomScrollbarsVirtualList = React.forwardRef(
-  (props: CustomScrollbarsVirtualListProps, ref) => (
-    <CustomScrollbars {...props} forwardedRef={ref} />
-  ),
-);
-
-export { CustomScrollbarsVirtualList };
+VirtualScroll.displayName = "VirtualScroll";

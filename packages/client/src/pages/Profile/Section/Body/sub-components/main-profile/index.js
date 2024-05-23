@@ -189,7 +189,7 @@ const MainProfile = (props) => {
           role={role}
           source={userAvatar}
           userName={profile.displayName}
-          editing={true}
+          editing={!profile.isLDAP}
           editAction={() => setChangeAvatarVisible(true)}
         />
         {profile.isSSO && (

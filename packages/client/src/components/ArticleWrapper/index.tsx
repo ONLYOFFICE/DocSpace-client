@@ -48,7 +48,6 @@ export default inject<TStore>(
       isLiveChatAvailable,
 
       isPaymentPageAvailable,
-      isEnterprise,
     } = authStore;
 
     const { getActions, getUserRole, onProfileClick, isShowLiveChat } =
@@ -115,7 +114,7 @@ export default inject<TStore>(
       showProgress,
 
       isBurgerLoading,
-      isEnterprise,
+
       isTrial,
       isLicenseDateExpired,
       trialDaysLeft,

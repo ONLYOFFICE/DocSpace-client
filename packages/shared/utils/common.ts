@@ -62,7 +62,12 @@ import {
   ErrorKeys,
   WhiteLabelLogoType,
 } from "../enums";
-import { LANGUAGE, PUBLIC_MEDIA_VIEW_URL, RTL_LANGUAGES } from "../constants";
+import {
+  COOKIE_EXPIRATION_YEAR,
+  LANGUAGE,
+  PUBLIC_MEDIA_VIEW_URL,
+  RTL_LANGUAGES,
+} from "../constants";
 
 import { TI18n, TTranslation } from "../types";
 import { TUser } from "../api/people/types";
@@ -73,7 +78,7 @@ import TopLoaderService from "../components/top-loading-indicator";
 
 import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
-import { getCookie } from "./cookie";
+import { getCookie, setCookie } from "./cookie";
 import { checkIsSSR } from "./device";
 
 export const desktopConstants = Object.freeze({
@@ -83,6 +88,7 @@ export const desktopConstants = Object.freeze({
 });
 
 let timer: null | ReturnType<typeof setTimeout> = null;
+type I18n = I18nextProviderProps["i18n"];
 
 export function changeLanguage(i18n: TI18n, currentLng = getCookie(LANGUAGE)) {
   return currentLng
@@ -1042,7 +1048,6 @@ export const insertDataLayer = (id: string) => {
   window.dataLayer.push({ user_id: id });
 };
 
-type I18n = I18nextProviderProps["i18n"];
 export const mapCulturesToArray = (
   culturesArg: string[],
   isBetaBadge: boolean = true,
@@ -1076,4 +1081,21 @@ export function getLogoUrl(
   def: boolean = false,
 ) {
   return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}`;
+}
+
+export function setLanguageWithoutReload(culture: string, i18n: I18n) {
+  i18n.changeLanguage(culture);
+
+  setCookie(LANGUAGE, culture, {
+    "max-age": COOKIE_EXPIRATION_YEAR,
+  });
+
+  const url = new URL(window.location.href);
+  const prevCulture = url.searchParams.get("culture");
+
+  if (prevCulture) {
+    const newUrl = window.location.href.replace(`&culture=${prevCulture}`, ``);
+
+    window.history.pushState("", "", newUrl);
+  }
 }

@@ -36,6 +36,7 @@ import { LanguageCombobox } from "@docspace/shared/components/language-combobox"
 import { setCookie } from "@docspace/shared/utils/cookie";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
 import i18n from "../../../i18n";
+import { setLanguageWithoutReload } from "@docspace/shared/utils/common";
 
 const Header = styled.header`
   align-items: left;
@@ -100,21 +101,7 @@ const HeaderUnAuth = ({
 
   const onSelect = (culture) => {
     const { key } = culture;
-
-    i18n.changeLanguage(key);
-
-    setCookie(LANGUAGE, key, {
-      "max-age": COOKIE_EXPIRATION_YEAR,
-    });
-
-    const url = new URL(window.location.href);
-    const prevCulture = url.searchParams.get("culture");
-
-    if (prevCulture) {
-      const newUrl = location.href.replace(`&culture=${prevCulture}`, ``);
-
-      window.history.pushState("", "", newUrl);
-    }
+    setLanguageWithoutReload(key, i18n);
   };
 
   return (

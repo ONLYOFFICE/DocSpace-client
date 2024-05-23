@@ -49,6 +49,7 @@ import {
   createPasswordHash,
   getOAuthToken,
   getLoginLink,
+  setLanguageWithoutReload,
 } from "@docspace/shared/utils/common";
 import { login } from "@docspace/shared/utils/loginUtils";
 import {
@@ -480,20 +481,7 @@ const CreateUserForm = (props) => {
   const onSelect = (culture) => {
     const { key } = culture;
 
-    i18n.changeLanguage(key);
-
-    setCookie(LANGUAGE, key, {
-      "max-age": COOKIE_EXPIRATION_YEAR,
-    });
-
-    const url = new URL(window.location.href);
-    const prevCulture = url.searchParams.get("culture");
-
-    if (prevCulture) {
-      const newUrl = location.href.replace(`&culture=${prevCulture}`, ``);
-
-      window.history.pushState("", "", newUrl);
-    }
+    setLanguageWithoutReload(key, i18n);
   };
 
   return (

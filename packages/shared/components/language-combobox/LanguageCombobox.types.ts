@@ -42,4 +42,5 @@ export interface ComboboxProps {
   className?: string;
   /** Indicates that component contain border */
   withBorder?: boolean;
+  isMobileView?: boolean;
 }

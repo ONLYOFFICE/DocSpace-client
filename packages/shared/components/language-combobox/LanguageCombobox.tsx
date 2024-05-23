@@ -28,7 +28,6 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { mapCulturesToArray } from "../../utils/common";
-import { isMobile } from "../../utils";
 import { StyledComboBox } from "./LanguageCombobox.styled";
 import { TCulture, ComboboxProps } from "./LanguageCombobox.types";
 
@@ -39,16 +38,15 @@ const LanguageCombobox = (props: ComboboxProps) => {
     selectedCulture,
     className,
     withBorder = true,
+    isMobileView = false,
   } = props;
 
   const { i18n } = useTranslation(["Common"]);
+  const withLabel = isMobileView ? i18n : undefined;
 
   const cultureNames = useMemo(() => {
-    const withLabel = isMobile() ? i18n : undefined;
-
     return mapCulturesToArray(cultures, false, withLabel);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cultures]);
+  }, [cultures, withLabel]);
 
   const currentCulture = cultureNames.find(
     (item) => item.key === selectedCulture,
@@ -82,8 +80,8 @@ const LanguageCombobox = (props: ComboboxProps) => {
       type="onlyIcon"
       optionStyle={{ padding: "0 8px" }}
       style={{ padding: "6px 0px" }}
-      isMobileView={isMobile()}
-      withBlur={isMobile()}
+      isMobileView={isMobileView}
+      withBlur={isMobileView}
       withBorder={withBorder}
     />
   );

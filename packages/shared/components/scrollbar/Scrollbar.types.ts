@@ -45,6 +45,8 @@ export interface ScrollbarProps {
   noScrollX?: boolean;
   /** Wrap children in context that contains scrollbar instance */
   createContext?: boolean;
+  /** Set focus on scroll content element after first render */
+  autoFocus?: boolean;
 
   onScroll?: React.UIEventHandler<HTMLDivElement>;
   children?: React.ReactNode;

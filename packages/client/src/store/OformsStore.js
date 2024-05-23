@@ -377,10 +377,6 @@ class OformsStore {
   get hasMoreForms() {
     return this.oformFiles.length < this.oformsFilterTotal;
   }
-
-  get oformsCurrentLocal() {
-    return this.oformsFilter.locale;
-  }
 }
 
 export default OformsStore;

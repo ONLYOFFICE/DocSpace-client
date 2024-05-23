@@ -60,7 +60,7 @@ const LanguageFilter = ({
   categoryFilterLoaded,
   languageFilterLoaded,
   oformFilesLoaded,
-  oformsCurrentLocal,
+  oformsLocal,
 }) => {
   const convertedLocales = oformLocales.map((item) => convertToCulture(item));
 
@@ -88,19 +88,32 @@ const LanguageFilter = ({
       cultures={convertedLocales}
       isAuthenticated
       onSelectLanguage={onFilterByLocale}
-      selectedCulture={convertToCulture(oformsCurrentLocal)}
+      selectedCulture={convertToCulture(oformsLocal)}
       id="comboBoxLanguage"
     />
   );
 };
 
-export default inject(({ oformsStore }) => ({
-  oformLocales: oformsStore.oformLocales,
-  filterOformsByLocale: oformsStore.filterOformsByLocale,
-  filterOformsByLocaleIsLoading: oformsStore.filterOformsByLocaleIsLoading,
-  setLanguageFilterLoaded: oformsStore.setLanguageFilterLoaded,
-  categoryFilterLoaded: oformsStore.categoryFilterLoaded,
-  languageFilterLoaded: oformsStore.languageFilterLoaded,
-  oformFilesLoaded: oformsStore.oformFilesLoaded,
-  oformsCurrentLocal: oformsStore.oformsCurrentLocal,
-}))(withTranslation(["Common"])(observer(LanguageFilter)));
+export default inject(({ oformsStore }) => {
+  const {
+    oformLocales,
+    filterOformsByLocale,
+    filterOformsByLocaleIsLoading,
+    setLanguageFilterLoaded,
+    languageFilterLoaded,
+    oformFilesLoaded,
+    categoryFilterLoaded,
+    oformsFilter,
+  } = oformsStore;
+
+  return {
+    oformLocales,
+    filterOformsByLocale,
+    filterOformsByLocaleIsLoading,
+    setLanguageFilterLoaded,
+    categoryFilterLoaded,
+    languageFilterLoaded,
+    oformFilesLoaded,
+    oformsLocal: oformsFilter.locale,
+  };
+})(withTranslation(["Common"])(observer(LanguageFilter)));

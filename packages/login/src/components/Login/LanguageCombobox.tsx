@@ -28,21 +28,19 @@ import { setLanguageForUnauthorized } from "@docspace/shared/utils/common";
 import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
 import useDeviceType from "@/hooks/useDeviceType";
 import { DeviceType } from "@docspace/shared/enums";
-import { TI18n } from "@docspace/shared/types";
 
 export interface TLanguageCombobox {
   currentCulture: string;
   cultures: string[];
-  i18n: TI18n;
 }
 
 const LanguageComboboxWrapper = (props: TLanguageCombobox) => {
-  const { currentCulture, cultures, i18n } = props;
+  const { currentCulture, cultures } = props;
 
   const onLanguageSelect = (culture: { key: string }) => {
     const { key } = culture;
 
-    setLanguageForUnauthorized(key, i18n);
+    setLanguageForUnauthorized(key);
   };
 
   const { currentDeviceType } = useDeviceType();

@@ -2467,11 +2467,14 @@ export const getBaseTheme = () => {
       roomType: {
         listItem: {
           background: "none",
+          hoverBackground: "#F8F9F9",
           borderColor: "#ECEEF1",
+          activeBorderColor: "#5299E0",
           descriptionText: "#A3A9AE",
         },
         dropdownButton: {
           background: "none",
+          hoverBackground: "#f3f4f4",
           borderColor: "#ECEEF1",
           isOpenBorderColor: "#2DA7DB",
           descriptionText: "#A3A9AE",

@@ -197,10 +197,8 @@ const Sessions = ({
   );
 };
 
-export default inject(({ userStore, settingsStore, setup, peopleStore }) => {
-  const { culture, currentDeviceType } = settingsStore;
-  const { user } = userStore;
-  const locale = (user && user.cultureName) || culture || "en";
+export default inject(({ settingsStore, setup, peopleStore }) => {
+  const { currentDeviceType } = settingsStore;
   const { clearSelection, allSessions, setAllSessions } =
     peopleStore.selectionStore;
 
@@ -218,7 +216,6 @@ export default inject(({ userStore, settingsStore, setup, peopleStore }) => {
   } = setup;
 
   return {
-    locale,
     currentDeviceType,
     viewAs,
     setViewAs,
@@ -236,6 +233,6 @@ export default inject(({ userStore, settingsStore, setup, peopleStore }) => {
   };
 })(
   withTranslation(["Settings", "Profile", "Common", "ChangeUserStatusDialog"])(
-    observer(Sessions)
-  )
+    observer(Sessions),
+  ),
 );

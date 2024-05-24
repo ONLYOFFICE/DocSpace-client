@@ -1,5 +1,5 @@
 import { inject, observer } from "mobx-react";
-import { useState, useEffect, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import { Base } from "@docspace/shared/themes";
 import styled, { css } from "styled-components";
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
@@ -150,8 +150,6 @@ const SessionsTableRow = (props) => {
     socketUsersHelper,
   } = props;
 
-  const [users, setUsers] = useState([]);
-
   const onClickSessions = () => {
     setSessionModalData({ ...item });
     setUserSessionPanelVisible(true);
@@ -190,19 +188,6 @@ const SessionsTableRow = (props) => {
       onClick: onClickDisable,
     },
   ];
-  // useEffect(() => {
-  //   const userIds = item.userId;
-
-  //   if (socketUsersHelper.isEnabled) {
-  //     socketUsersHelper.emit({
-  //       command: "getSessionsInPortal",
-  //       data: { userIds },
-  //     });
-  //     socketUsersHelper.on("statuses-in-room", (data) => {
-  //       console.log(data);
-  //     });
-  //   }
-  // }, [socketUsersHelper]);
 
   useEffect(() => {
     const userIds = item.userId;

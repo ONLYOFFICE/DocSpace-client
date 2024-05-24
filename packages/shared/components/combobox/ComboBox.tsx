@@ -166,6 +166,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
     plusBadgeValue,
     optionStyle,
     style,
+    withLabel = true,
   } = props;
 
   const { tabIndex, onClickSelectedItem } = props;
@@ -227,10 +228,9 @@ const ComboBoxPure = (props: ComboboxProps) => {
         option.disabled ||
         (!displaySelectedOption && option.label === selectedOption.label);
 
-      const isActiveOption =
-        typeof option.label === "string"
-          ? option.label === selectedOption.label
-          : option.key === selectedOption.key;
+      const isActiveOption = withLabel
+        ? option.label === selectedOption.label
+        : option.key === selectedOption.key;
 
       const isActive = displaySelectedOption && isActiveOption;
 

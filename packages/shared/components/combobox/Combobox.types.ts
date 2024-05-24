@@ -166,6 +166,7 @@ export interface ComboboxProps {
   withBlur?: boolean;
   title?: string;
   plusBadgeValue?: number;
+  withLabel?: boolean;
 }
 
 export interface ComboButtonProps {

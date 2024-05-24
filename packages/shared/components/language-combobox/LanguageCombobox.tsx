@@ -83,6 +83,7 @@ const LanguageCombobox = (props: ComboboxProps) => {
       isMobileView={isMobileView}
       withBlur={isMobileView}
       withBorder={withBorder}
+      withLabel={!!withLabel}
     />
   );
 };

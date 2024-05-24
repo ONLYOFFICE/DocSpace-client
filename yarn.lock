@@ -2873,7 +2873,7 @@ __metadata:
     screenfull: "npm:^5.2.0"
     serve: "npm:^14.2.0"
     sjcl: "npm:^1.0.8"
-    socket.io-client: "npm:^4.6.1"
+    socket.io-client: "npm:^4.7.5"
     storybook: "npm:7.6.12"
     storybook-addon-designs: "npm:beta"
     storybook-dark-mode: "npm:^3.0.3"
@@ -25364,15 +25364,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"socket.io-client@npm:^4.6.1":
-  version: 4.7.4
-  resolution: "socket.io-client@npm:4.7.4"
+"socket.io-client@npm:^4.7.5":
+  version: 4.7.5
+  resolution: "socket.io-client@npm:4.7.5"
   dependencies:
     "@socket.io/component-emitter": "npm:~3.1.0"
     debug: "npm:~4.3.2"
     engine.io-client: "npm:~6.5.2"
     socket.io-parser: "npm:~4.2.4"
-  checksum: dff61e3e802424518ac95b55cf41bd0853644a63ece6a6104e815c836ae855b03901f0df83a0044567f653ef8da09177ae824fa17a1c2c188fbedfae21fb5827
+  checksum: a9e118081dc1669a63af3abd9defce94f85c8ed8d9146cd7a77665b5f1f78baf0b9f4155cf0fce7770856f97493416551abcba686f02778045f4768ceaafed5c
   languageName: node
   linkType: hard
 

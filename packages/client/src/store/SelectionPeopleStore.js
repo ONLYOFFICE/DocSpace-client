@@ -180,6 +180,7 @@ class SelectionStore {
     if (exists) return;
 
     this.setSelection([...this.selection, user]);
+    this.peopleStore.accountsHotkeysStore.setHotkeyCaret(null);
 
     this.incrementUsersRights(user);
   };
@@ -264,6 +265,8 @@ class SelectionStore {
       this.resetUsersRight();
       list.forEach((u) => this.incrementUsersRights(u));
     }
+
+    this.peopleStore.accountsHotkeysStore.setHotkeyCaret(null);
 
     return selected;
   };

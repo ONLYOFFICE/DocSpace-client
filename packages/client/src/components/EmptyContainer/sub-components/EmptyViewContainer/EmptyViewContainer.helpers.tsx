@@ -4,9 +4,9 @@ import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import EmptyFormRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.dark.svg";
 import EmptyFormRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.light.svg";
 
-import CreateNewFormIcon from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
-import CreateFromFormIcon from "PUBLIC_DIR/images/emptyview/create.from.document.form.svg";
-import InviteUserFormIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
+// import CreateNewFormIcon from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
+// import CreateFromFormIcon from "PUBLIC_DIR/images/emptyview/create.from.document.form.svg";
+// import InviteUserFormIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
 import UploadPDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.pdf.form.svg";
 import UploadDevicePDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
 
@@ -88,16 +88,16 @@ export const getOptions = (
   actions: OptionActions,
 ): EmptyViewItemType[] => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
-  const powerUser = access === ShareAccessRights.Collaborator;
+  // const powerUser = access === ShareAccessRights.Collaborator;
 
-  const createNewForm = {
-    title: t("EmptyView:CreateNewFormOptionTitle"),
-    description: t("EmptyView:CreateNewFormOptionDescription"),
-    icon: <CreateNewFormIcon />,
-    key: "create-form",
-    onClick: actions.onCreateDocumentForm,
-    disabled: !security?.Create,
-  };
+  // const createNewForm = {
+  //   title: t("EmptyView:CreateNewFormOptionTitle"),
+  //   description: t("EmptyView:CreateNewFormOptionDescription"),
+  //   icon: <CreateNewFormIcon />,
+  //   key: "create-form",
+  //   onClick: actions.onCreateDocumentForm,
+  //   disabled: !security?.Create,
+  // };
 
   const uploadFromDocSpace = {
     title: t("EmptyView:UploadPDFFormOptionTitle"),
@@ -114,36 +114,36 @@ export const getOptions = (
     icon: <UploadDevicePDFFormIcon />,
     key: "upload-device-pdf-form",
     onClick: () => actions.onUploadAction("pdf"),
-    disabled: !powerUser || !security?.Create,
-  };
-
-  const createFormFromDocx = {
-    title: t("EmptyView:CreateFormFromTextDocOptionTitle"),
-    description: t("EmptyView:CreateFormFromTextDocOptionDescription"),
-    icon: <CreateFromFormIcon />,
-    key: "create-form-form",
-    onClick: actions.createFormFromFile,
     disabled: !security?.Create,
   };
 
-  const inviteUser = {
-    title: t("EmptyView:InviteUsersOptionTitle"),
-    description: t("EmptyView:InviteUsersOptionDescription"),
-    icon: <InviteUserFormIcon />,
-    key: "invite-users",
-    onClick: actions.inviteUser,
-    disabled: !security?.EditAccess,
-  };
+  // const createFormFromDocx = {
+  //   title: t("EmptyView:CreateFormFromTextDocOptionTitle"),
+  //   description: t("EmptyView:CreateFormFromTextDocOptionDescription"),
+  //   icon: <CreateFromFormIcon />,
+  //   key: "create-form-form",
+  //   onClick: actions.createFormFromFile,
+  //   disabled: !security?.Create,
+  // };
+
+  // const inviteUser = {
+  //   title: t("EmptyView:InviteUsersOptionTitle"),
+  //   description: t("EmptyView:InviteUsersOptionDescription"),
+  //   icon: <InviteUserFormIcon />,
+  //   key: "invite-users",
+  //   onClick: actions.inviteUser,
+  //   disabled: !security?.EditAccess,
+  // };
 
   switch (type) {
     case RoomsType.FormRoom:
       if (isFormFiller) return [];
 
       return [
-        createNewForm,
         uploadFromDocSpace,
-        createFormFromDocx,
-        inviteUser,
+        // createNewForm,
+        // createFormFromDocx,
+        // inviteUser,
         uploadFromDevice,
       ];
     case RoomsType.EditingRoom:

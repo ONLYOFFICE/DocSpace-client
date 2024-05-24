@@ -27,6 +27,9 @@
 /* eslint-disable no-bitwise */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/sort-comp */
+
+"use client";
+
 import { cnb } from "cnbuilder";
 import * as React from "react";
 import { DraggableData } from "react-draggable";

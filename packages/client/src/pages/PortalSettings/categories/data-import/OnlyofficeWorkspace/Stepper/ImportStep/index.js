@@ -60,7 +60,7 @@ const ImportStep = ({
     setImportOptions({ [name]: checked });
   };
 
-  const serviceName = "Onlyoffice Workspace";
+  const serviceName = "ONLYOFFICE Workspace";
   const users =
     t("Settings:Employees")[0].toUpperCase() + t("Settings:Employees").slice(1);
 

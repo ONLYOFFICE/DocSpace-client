@@ -24,9 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { notFound } from "next/navigation";
+import NotFoundError from "@/components/NotFoundError";
 
-export default function NotFoundCatchAll() {
-  notFound();
+export default function NotFound() {
+  return <NotFoundError />;
 }
-

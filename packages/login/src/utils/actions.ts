@@ -143,36 +143,3 @@ export async function getSSO() {
 
   return sso.response as TGetSsoSettings;
 }
-
-export const getData = async () => {
-  const [settings, ...rest] = await Promise.all([
-    getSettings(),
-    getVersionBuild(),
-    getColorTheme(),
-  ]);
-
-  if (
-    settings &&
-    settings !== "access-restricted" &&
-    settings !== "portal-not-found" &&
-    settings.tenantStatus !== TenantStatus.PortalRestore
-  ) {
-    const response = await Promise.all([
-      getThirdPartyProviders(),
-      getCapabilities(),
-      getSSO(),
-    ]);
-
-    return [settings, ...rest, ...response];
-  }
-
-  return [settings, ...rest];
-};
-
-export const updateCookie = (name: string, value: string, options: object) => {
-  "use server";
-
-  const cookieStore = cookies();
-
-  cookieStore.set(name, value, options);
-};

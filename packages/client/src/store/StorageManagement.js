@@ -145,7 +145,7 @@ class StorageManagement {
   };
 
   updateQuotaInfo = async (type) => {
-    const { getTenantExtra } = this.authStore;
+    const { fetchPortalQuota } = this.currentQuotaStore;
     const { getFilesListItems } = this.filesStore;
     const { usersStore } = this.peopleStore;
     const { getPeopleListItem } = usersStore;
@@ -156,7 +156,7 @@ class StorageManagement {
     const roomFilterData = RoomsFilter.getDefault();
     roomFilterData.pageCount = FILTER_COUNT;
 
-    const requests = [getTenantExtra()];
+    const requests = [fetchPortalQuota()];
 
     type === "user"
       ? requests.push(getUserList(userFilterData))

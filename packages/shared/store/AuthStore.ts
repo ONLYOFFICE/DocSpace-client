@@ -226,25 +226,37 @@ class AuthStore {
     return this.tenantExtra?.opensource;
   }
 
+  fetchTenantExtra = (refresh: boolean) => {
+    return getPortalTenantExtra(refresh).then((result) => {
+      if (!result) return;
+
+      const { tariff, quota, ...tenantExtra } = result;
+
+      this.tenantExtra = tenantExtra;
+    });
+  };
+
   getTenantExtra = async () => {
     let refresh = false;
+
     if (window.location.search === "?complete=true") {
       window.history.replaceState({}, document.title, window.location.pathname);
       refresh = true;
     }
+    const user = this.userStore?.user?.isVisitor;
 
-    const result = await getPortalTenantExtra(refresh);
+    const request = [];
 
-    if (!result) return;
+    request.push(this.currentTariffStatusStore?.fetchPortalTariff(refresh));
 
-    const { tariff, quota, ...tenantExtra } = result;
+    if (!user) {
+      request.push(
+        this.currentQuotaStore?.fetchPortalQuota(refresh),
+        this.fetchTenantExtra(refresh),
+      );
+    }
 
-    runInAction(() => {
-      this.tenantExtra = { ...tenantExtra };
-    });
-
-    this.currentQuotaStore?.setPortalQuotaValue(quota);
-    this.currentTariffStatusStore?.setPortalTariffValue(tariff);
+    await Promise.all(request);
   };
 
   setLanguage() {

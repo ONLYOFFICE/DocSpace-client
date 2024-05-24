@@ -163,19 +163,10 @@ class CurrentTariffStatusStore {
     return getDaysLeft(this.dueDate);
   }
 
-  setPortalTariffValue = async (res: TPortalTariff) => {
-    this.portalTariffStatus = res;
-
-    this.setIsLoaded(true);
-  };
-
-  setPortalTariff = async () => {
-    const res = await api.portal.getPortalTariff();
-
-    if (!res) return;
-
-    runInAction(() => {
+  fetchPortalTariff = async (refresh?: boolean) => {
+    return api.portal.getPortalTariff(refresh).then((res) => {
       this.portalTariffStatus = res;
+      this.setIsLoaded(true);
     });
   };
 }

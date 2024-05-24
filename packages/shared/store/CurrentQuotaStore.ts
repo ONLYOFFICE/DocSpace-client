@@ -338,18 +338,12 @@ class CurrentQuotasStore {
     });
   };
 
-  setPortalQuota = async () => {
-    try {
-      const res = await api.portal.getPortalQuota();
-
-      if (!res) return;
-
+  fetchPortalQuota = async (refresh: boolean) => {
+    return api.portal.getPortalQuota(refresh).then((res) => {
       this.setPortalQuotaValue(res);
 
       this.setIsLoaded(true);
-    } catch (e) {
-      toastr.error(e as TData);
-    }
+    });
   };
 
   setUserQuota = async (quota: string | number, t: (key: string) => string) => {

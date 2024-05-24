@@ -127,12 +127,12 @@ class PaymentStore {
   basicSettings = async () => {
     if (!this.currentTariffStatusStore || !this.currentQuotaStore) return;
 
-    const { setPortalTariff, setPayerInfo } = this.currentTariffStatusStore;
+    const { fetchPortalTariff, setPayerInfo } = this.currentTariffStatusStore;
     const { addedManagersCount } = this.currentQuotaStore;
 
     this.setIsUpdatingBasicSettings(true);
 
-    const requests = [setPortalTariff()];
+    const requests = [fetchPortalTariff()];
 
     if (this.isAlreadyPaid) requests.push(this.setPaymentAccount());
     else requests.push(this.getBasicPaymentLink(addedManagersCount));

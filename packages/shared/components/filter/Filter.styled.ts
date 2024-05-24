@@ -656,7 +656,7 @@ const StyledSortButton = styled.div<{ viewAs: TViewAs; isDesc: boolean }>`
           visibility: hidden;
           cursor: pointer;
           ${(props) =>
-            props.isDesc &&
+            !props.isDesc &&
             css`
               transform: rotate(180deg);
             `}

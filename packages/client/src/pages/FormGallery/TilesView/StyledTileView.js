@@ -366,7 +366,7 @@ const StyledTileContainer = styled.div`
               display: none;
               cursor: pointer;
               ${(props) =>
-                props.isDesc &&
+                !props.isDesc &&
                 css`
                   transform: rotate(180deg);
                 `}

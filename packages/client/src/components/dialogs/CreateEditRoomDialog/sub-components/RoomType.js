@@ -98,15 +98,14 @@ const StyledRoomType = styled.div`
 const StyledListItem = styled(StyledRoomType)`
   background-color: ${(props) =>
     props.theme.createEditRoomDialog.roomType.listItem.background};
-
-  &:hover {
-    background-color: ${(props) =>
-      props.theme.createEditRoomDialog.roomType.listItem.hoverBackground};
-  }
-
   border: 1px solid
     ${(props) => props.theme.createEditRoomDialog.roomType.listItem.borderColor};
   border-radius: 6px;
+
+  &:hover:not(:active) {
+    background-color: ${(props) =>
+      props.theme.createEditRoomDialog.roomType.listItem.hoverBackground};
+  }
 
   &:active {
     border-color: ${(props) =>
@@ -127,7 +126,7 @@ const StyledDropdownButton = styled(StyledRoomType)`
   ${({ isOpen }) =>
     !isOpen &&
     css`
-      &:hover {
+      &:hover:not(:active) {
         background-color: ${(props) =>
           props.theme.createEditRoomDialog.roomType.dropdownButton
             .hoverBackground};
@@ -140,6 +139,12 @@ const StyledDropdownButton = styled(StyledRoomType)`
       ? props.theme.createEditRoomDialog.roomType.dropdownButton
           .isOpenBorderColor
       : props.theme.createEditRoomDialog.roomType.dropdownButton.borderColor};
+
+  &:active {
+    border-color: ${(props) =>
+      props.theme.createEditRoomDialog.roomType.dropdownButton
+        .isOpenBorderColor};
+  }
 
   .choose_room-description {
     color: ${(props) =>

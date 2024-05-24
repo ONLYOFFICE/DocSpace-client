@@ -44,9 +44,9 @@ import { isMobile, isMobileOnly } from "react-device-detect";
 import AppLoader from "@docspace/shared/components/app-loader";
 import SSOLoader from "./sub-components/ssoLoader";
 import { WebhookConfigsLoader } from "./Webhooks/sub-components/Loaders";
-import { DeviceType } from "@docspace/shared/enums";
 import PluginSDK from "./PluginSDK";
 import { Badge } from "@docspace/shared/components/badge";
+import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 const StyledSubmenu = styled(Submenu)`
   .sticky {
@@ -151,13 +151,7 @@ const DeveloperToolsWrapper = (props) => {
         data={data}
         startSelect={currentTab}
         onSelect={onSelect}
-        topProps={
-          currentDeviceType === DeviceType.desktop
-            ? 0
-            : currentDeviceType === DeviceType.mobile
-              ? "53px"
-              : "61px"
-        }
+        topProps={SECTION_HEADER_HEIGHT[currentDeviceType]}
       />
     </Suspense>
   );

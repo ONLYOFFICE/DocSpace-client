@@ -49,6 +49,7 @@ export const SocialButtonsGroup = memo(
     ssoSVG,
     t,
     isDisabled,
+    onMoreAuthToggle,
   }: SocialButtonProps) => {
     const [moreAuthVisible, setMoreAuthVisible] = useState(false);
 
@@ -59,10 +60,12 @@ export const SocialButtonsGroup = memo(
 
     const moreAuthClose = () => {
       setMoreAuthVisible(false);
+      onMoreAuthToggle?.(false);
     };
 
     const moreAuthOpen = () => {
       setMoreAuthVisible(true);
+      onMoreAuthToggle?.(true);
     };
     const elements = showingProviders.map((item) => {
       const provider = item.provider;

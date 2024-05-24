@@ -24,9 +24,49 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { notFound } from "next/navigation";
+"use client";
 
-export default function NotFoundCatchAll() {
-  notFound();
-}
+import { useTranslation } from "react-i18next";
 
+import { Link, LinkType } from "@docspace/shared/components/link";
+import RecoverAccessModalDialog from "@docspace/shared/components/recover-access-modal-dialog/RecoverAccessModalDialog";
+
+import useRecoverDialog from "@/hooks/useRecoverDialog";
+
+const RecoverAccess = () => {
+  const { t } = useTranslation(["Login", "Common"]);
+
+  const {
+    recoverDialogVisible,
+    recoverDialogEmailPlaceholder,
+    recoverDialogTextBody,
+    openRecoverDialog,
+    closeRecoverDialog,
+  } = useRecoverDialog({});
+
+  return (
+    <>
+      <Link
+        fontWeight={600}
+        fontSize="13px"
+        type={LinkType.action}
+        isHovered
+        className="login-link recover-link"
+        onClick={openRecoverDialog}
+      >
+        {t("RecoverAccess")}
+      </Link>
+      {recoverDialogVisible && (
+        <RecoverAccessModalDialog
+          visible={recoverDialogVisible}
+          onClose={closeRecoverDialog}
+          textBody={recoverDialogTextBody}
+          emailPlaceholderText={recoverDialogEmailPlaceholder}
+          id="recover-access-modal"
+        />
+      )}
+    </>
+  );
+};
+
+export default RecoverAccess;

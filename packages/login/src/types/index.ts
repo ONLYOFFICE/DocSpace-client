@@ -42,12 +42,8 @@ export type TDataContext = {
 };
 
 export type GreetingContainersProps = {
-  roomName?: string;
-  firstName?: string;
-  lastName?: string;
   greetingSettings?: string;
   logoUrl?: string;
-  type: string;
 };
 
 export type LoginProps = {
@@ -86,15 +82,8 @@ export type RegisterModalDialogProps = {
 };
 
 export type LoginFormProps = {
-  isLoading: boolean;
-  setIsLoading: (isLoading: boolean) => void;
   hashSettings?: TPasswordHash;
-  isDesktop: boolean;
-  match: { [key: string]: string };
-  openRecoverDialog: () => void;
-  enableAdmMess: boolean;
-  recaptchaPublicKey?: string;
-  emailFromInvitation?: string;
+  reCaptchaPublicKey?: string;
   cookieSettingsEnabled: boolean;
 };
 

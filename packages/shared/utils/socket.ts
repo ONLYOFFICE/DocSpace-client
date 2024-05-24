@@ -38,9 +38,6 @@ export type TOnCallback = {
   enableQuota: boolean;
   quota: number;
 };
-let client: Socket<DefaultEventsMap, DefaultEventsMap> | null = null;
-let callbacks: { eventName: string; callback: (value: TOnCallback) => void }[] =
-  [];
 
 const subscribers = new Set<string>();
 
@@ -74,16 +71,24 @@ export type TConfig = {
 };
 
 class SocketIOHelper {
+  client: Socket<DefaultEventsMap, DefaultEventsMap> | null = null;
+
+  callbacks: { eventName: string; callback: (value: TOnCallback) => void }[] =
+    [];
+
   socketUrl: string | null = null;
 
-  constructor(url: string, publicRoomKey: string) {
+  ns: string | undefined;
+
+  constructor(url: string, publicRoomKey: string, ns: string = "/files") {
     if (!url) return;
 
     this.socketUrl = url;
+    this.ns = ns;
 
-    if (client) return;
+    if (this.client) return;
 
-    const origin = window.location.origin;
+    const origin = window.location.origin + ns;
 
     const config: TConfig = {
       withCredentials: true,
@@ -98,22 +103,22 @@ class SocketIOHelper {
       };
     }
 
-    client = io(origin, config);
+    this.client = io(origin, config);
 
-    client.on("connect", () => {
-      console.log("socket is connected");
-      if (callbacks?.length > 0) {
-        callbacks.forEach(({ eventName, callback }) => {
-          if (!client) return;
-          client.on(eventName, callback);
+    this.client.on("connect", () => {
+      console.log(`socket ${ns} is connected`);
+      if (this.callbacks?.length > 0) {
+        this.callbacks.forEach(({ eventName, callback }) => {
+          if (!this.client) return;
+          this.client.on(eventName, callback);
         });
-        callbacks = [];
+        this.callbacks = [];
       }
     });
-    client.on("connect_error", (err) =>
+    this.client.on("connect_error", (err) =>
       console.log("socket connect error", err),
     );
-    client.on("disconnect", () => console.log("socket is disconnected"));
+    this.client.on("disconnect", () => console.log("socket is disconnected"));
 
     // DEV tests
     // window.socketHelper = this;
@@ -130,7 +135,7 @@ class SocketIOHelper {
   emit = ({ command, data, room = null }: TEmit) => {
     if (!this.isEnabled) return;
 
-    console.log("[WS] emit", command, data, room);
+    console.log(`[WS] [NS:${this.ns}] emit`, command, data, room);
 
     const ids =
       !data || !data.roomParts
@@ -151,42 +156,42 @@ class SocketIOHelper {
       }
     });
 
-    if (!client) return;
+    if (!this.client) return;
 
-    if (!client.connected) {
-      client.on("connect", () => {
+    if (!this.client.connected) {
+      this.client.on("connect", () => {
         if (room !== null) {
-          if (!client) return;
+          if (!this.client) return;
           // @ts-expect-error need refactoring
           client.to(room).emit(command, data);
         } else {
-          if (!client) return;
-          client.emit(command, data);
+          if (!this.client) return;
+          this.client.emit(command, data);
         }
       });
     } else if (room) {
       // @ts-expect-error need refactoring
       client.to(room).emit(command, data);
     } else {
-      client.emit(command, data);
+      this.client.emit(command, data);
     }
   };
 
   on = (eventName: string, callback: (value: TOptSocket) => void) => {
     if (!this.isEnabled) {
-      callbacks.push({ eventName, callback });
+      this.callbacks.push({ eventName, callback });
       return;
     }
 
-    if (!client) return;
+    if (!this.client) return;
 
-    if (!client.connected) {
-      client.on("connect", () => {
-        if (!client) return;
-        client.on(eventName, callback);
+    if (!this.client.connected) {
+      this.client.on("connect", () => {
+        if (!this.client) return;
+        this.client.on(eventName, callback);
       });
     } else {
-      client.on(eventName, callback);
+      this.client.on(eventName, callback);
     }
   };
 }

@@ -147,7 +147,7 @@ const SessionsTableRow = (props) => {
     setSessionModalData,
     setUserSessionPanelVisible,
     socketHelper,
-    socketOnlineStatusHelper,
+    socketUsersHelper,
   } = props;
 
   const [users, setUsers] = useState([]);
@@ -193,32 +193,32 @@ const SessionsTableRow = (props) => {
   // useEffect(() => {
   //   const userIds = item.userId;
 
-  //   if (socketOnlineStatusHelper.isEnabled) {
-  //     socketOnlineStatusHelper.emit({
+  //   if (socketUsersHelper.isEnabled) {
+  //     socketUsersHelper.emit({
   //       command: "getSessionsInPortal",
   //       data: { userIds },
   //     });
-  //     socketOnlineStatusHelper.on("statuses-in-room", (data) => {
+  //     socketUsersHelper.on("statuses-in-room", (data) => {
   //       console.log(data);
   //     });
   //   }
-  // }, [socketOnlineStatusHelper]);
+  // }, [socketUsersHelper]);
 
   useEffect(() => {
     const userIds = item.userId;
-    socketHelper.emit({
+    socketUsersHelper.emit({
       command: "subscribe",
       data: { roomParts: "onlineusers" },
     });
 
-    socketHelper.emit({
+    socketUsersHelper.emit({
       command: "getSessionsInPortal",
       data: { userIds },
     });
-    socketHelper.on("getSessionsInPortal", (data) => {
+    socketUsersHelper.on("getSessionsInPortal", (data) => {
       console.log(data);
     });
-  }, [socketHelper]);
+  }, [socketUsersHelper]);
 
   const isChecked = checkedProps.checked;
   const isOnline = status === "Online";
@@ -322,7 +322,7 @@ export default inject(({ setup, dialogsStore, settingsStore }) => {
     setSessionModalData,
   } = setup;
 
-  const { socketHelper, socketOnlineStatusHelper } = settingsStore;
+  const { socketHelper, socketUsersHelper } = settingsStore;
 
   return {
     setLogoutAllDialogVisible,
@@ -330,6 +330,6 @@ export default inject(({ setup, dialogsStore, settingsStore }) => {
     setSessionModalData,
     setUserSessionPanelVisible,
     socketHelper,
-    socketOnlineStatusHelper,
+    socketUsersHelper,
   };
 })(withContent(observer(SessionsTableRow)));

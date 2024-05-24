@@ -24,61 +24,55 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { Meta, StoryObj } from "@storybook/react";
+import styled from "styled-components";
+import { tablet } from "@docspace/shared/utils";
 
-import { Box } from "../box";
+const StyledPreparationPortal = styled.div<{
+  errorMessage?: boolean;
+  isDialog?: boolean;
+}>`
+  width: 100%;
+  @media ${tablet} {
+    margin-top: ${(props) => (props.isDialog ? "0px" : "48px")};
+  }
 
-import { SnackBar } from "./Snackbar";
-import { SnackbarProps } from "./Snackbar.types";
+  #header {
+    font-size: 23px;
+  }
+  #text {
+    color: #a3a9ae;
+    font-size: 13px;
+    line-height: 20px;
+    max-width: 480px;
+  }
+  .logo-wrapper {
+    ${(props) => props.isDialog && "display: none"};
+  }
 
-const meta = {
-  title: "Components/SnackBar",
-  component: SnackBar,
-  parameters: {
-    docs: {
-      description: {
-        component: "SnackBar is used for displaying important messages.",
-      },
-    },
-  },
-  argTypes: {
-    textColor: { control: "color" },
-    backgroundColor: { control: "color" },
-    showIcon: { control: "boolean" },
-  },
-} satisfies Meta<typeof SnackBar>;
-type Story = StoryObj<typeof meta>;
+  #container {
+    ${(props) => props.isDialog && "margin-top:0"};
+  }
+  .preparation-portal_body-wrapper {
+    margin-bottom: 24px;
+    width: 100%;
+    max-width: ${(props) => (props.errorMessage ? "560px" : "480px")};
+    box-sizing: border-box;
+    align-items: center;
+    .preparation-portal_error {
+      text-align: center;
+      color: ${(props) => props.theme.preparationPortalProgress.errorTextColor};
+    }
 
-export default meta;
+    .preparation-portal_text {
+      text-align: center;
+      color: ${(props) =>
+        props.theme.preparationPortalProgress.descriptionTextColor};
+    }
+  }
 
-const Wrapper = ({ children }: { children: React.ReactNode }) => (
-  <Box id="main-bar" displayProp="grid">
-    {children}
-  </Box>
-);
+  .restoring-portal {
+    height: 100%;
+  }
+`;
 
-const BaseTemplate = (args: SnackbarProps) => (
-  <Wrapper>
-    <SnackBar {...args} onClose={() => {}} />
-  </Wrapper>
-);
-
-export const base: Story = {
-  render: (args) => <BaseTemplate {...args} />,
-  args: {
-    backgroundImg: "",
-    backgroundColor: "#f8f7bf",
-    textColor: "#000",
-    opacity: 1,
-    headerText: "Attention",
-    text: "We apologize for any short-term technical issues in service functioning, that may appear on 22.06.2021 during the update of ONLYOFFICE Personal.",
-    showIcon: true,
-    fontSize: "13px",
-    fontWeight: 400,
-    textAlign: "left",
-    htmlContent: "",
-    countDownTime: 0,
-    sectionWidth: 500,
-  },
-};
+export { StyledPreparationPortal };

@@ -129,6 +129,16 @@ const Body = ({
     [hasNextPage, itemsCount],
   );
 
+  const onLoadMoreItems = React.useCallback(
+    (startIndex: number) => {
+      // first page loads in selector's useEffect
+      if (startIndex === 1) return;
+
+      loadMoreItems(startIndex);
+    },
+    [loadMoreItems],
+  );
+
   React.useEffect(() => {
     window.addEventListener("resize", onBodyResize);
 
@@ -250,7 +260,7 @@ const Body = ({
               ref={listOptionsRef}
               isItemLoaded={isItemLoaded}
               itemCount={totalItems}
-              loadMoreItems={loadMoreItems}
+              loadMoreItems={onLoadMoreItems}
             >
               {({ onItemsRendered, ref }) => (
                 <List

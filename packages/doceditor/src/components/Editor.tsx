@@ -194,7 +194,7 @@ const Editor = ({
       ...newConfig.editorConfig.customization,
       ...sdkCustomization,
       goback: { ...goBack },
-      close: { visible: showClose, text: "Close file" },
+      close: { visible: showClose, text: t("Common:CloseButton") },
       uiTheme: getEditorTheme(theme as ThemeKeys),
     };
 

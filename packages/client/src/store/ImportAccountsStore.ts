@@ -39,17 +39,72 @@ import {
   migrationClear,
 } from "@docspace/shared/api/settings";
 
-class ImportAccountsStore {
-  services = [];
+type TUser = {
+  key: string;
+  email: string;
+  displayName: string;
+  firstName: string;
+  userType: string;
+  migratingFiles: {
+    foldersCount: number;
+    filesCount: number;
+    bytesTotal: number;
+  };
+  shouldImport: boolean;
+};
 
-  users = {
+type TUsers = {
+  new: TUser[];
+  existing: TUser[];
+  withoutEmail: TUser[];
+  result: TUser[];
+};
+
+type TCheckedUsers = {
+  withEmail: TUser[];
+  withoutEmail: TUser[];
+  result: TUser[];
+};
+
+type TGroup = {
+  groupName: string;
+  userUidList: string[];
+  shouldImport: boolean;
+};
+
+type TResponseData = {
+  migratorName: string;
+  operation: string;
+  failedArchives: string[];
+  users: TUser[];
+  withoutEmailUsers: TUser[];
+  existUsers: TUser[];
+  groups: TGroup[];
+  importPersonalFiles: boolean;
+  importSharedFiles: boolean;
+  importSharedFolders: boolean;
+  importCommonFiles: boolean;
+  importProjectFiles: boolean;
+  importGroups: boolean;
+  successedUsers: number;
+  failedUsers: number;
+  files: string[];
+  errors: string[];
+};
+
+type CheckedAccountTypes = "withEmail" | "withoutEmail" | "result";
+
+class ImportAccountsStore {
+  services: string[] = [];
+
+  users: TUsers = {
     new: [],
     existing: [],
     withoutEmail: [],
     result: [],
   };
 
-  checkedUsers = {
+  checkedUsers: TCheckedUsers = {
     withEmail: [],
     withoutEmail: [],
     result: [],
@@ -62,7 +117,9 @@ class ImportAccountsStore {
   };
 
   isFileLoading = false;
+
   isLoading = false;
+
   isMigrationInit = false;
 
   searchValue = "";
@@ -102,7 +159,9 @@ class ImportAccountsStore {
   get filteredUsers() {
     return this.users.result.filter(
       (user) =>
-        !this.users.existing.some((existingUser) => existingUser.key === user.key),
+        !this.users.existing.some(
+          (existingUser) => existingUser.key === user.key,
+        ),
     );
   }
 
@@ -127,7 +186,7 @@ class ImportAccountsStore {
     });
   };
 
-  setUsers = (data) => {
+  setUsers = (data: TResponseData) => {
     runInAction(() => {
       this.users = {
         new: data.users,
@@ -143,23 +202,23 @@ class ImportAccountsStore {
     });
   };
 
-  setIsFileLoading = (isLoading) => {
+  setIsFileLoading = (isLoading: boolean) => {
     this.isFileLoading = isLoading;
   };
 
-  setIsLoading = (isLoading) => {
+  setIsLoading = (isLoading: boolean) => {
     this.isLoading = isLoading;
   };
 
-  setIsMigrationInit = (isMigrationInit) => {
+  setIsMigrationInit = (isMigrationInit: boolean) => {
     this.isMigrationInit = isMigrationInit;
   };
 
-  setSearchValue = (value) => {
+  setSearchValue = (value: string) => {
     this.searchValue = value;
   };
 
-  changeEmail = (key, email) => {
+  changeEmail = (key: string, email: string) => {
     this.users = {
       ...this.users,
       withoutEmail: this.users.withoutEmail.map((user) =>
@@ -168,7 +227,7 @@ class ImportAccountsStore {
     };
   };
 
-  toggleAccount = (account, checkedAccountType) => {
+  toggleAccount = (account: TUser, checkedAccountType: CheckedAccountTypes) => {
     this.checkedUsers = this.checkedUsers[checkedAccountType].some(
       (user) => user.key === account.key,
     )
@@ -187,13 +246,17 @@ class ImportAccountsStore {
         };
   };
 
-  toggleAllAccounts = (isChecked, accounts, checkedAccountType) => {
+  toggleAllAccounts = (
+    isChecked: boolean,
+    accounts: TUser[],
+    checkedAccountType: CheckedAccountTypes,
+  ) => {
     this.checkedUsers = isChecked
       ? { ...this.checkedUsers, [checkedAccountType]: [...accounts] }
       : { ...this.checkedUsers, [checkedAccountType]: [] };
   };
 
-  isAccountChecked = (key, checkedAccountType) =>
+  isAccountChecked = (key: string, checkedAccountType: CheckedAccountTypes) =>
     this.checkedUsers[checkedAccountType].some((user) => user.key === key);
 
   clearCheckedAccounts = () => {
@@ -221,7 +284,7 @@ class ImportAccountsStore {
     });
   };
 
-  changeUserType = (key, type) => {
+  changeUserType = (key: string, type: string) => {
     this.users = {
       ...this.users,
       result: this.users.result.map((user) =>
@@ -230,7 +293,7 @@ class ImportAccountsStore {
     };
   };
 
-  changeGroupType = (type) => {
+  changeGroupType = (type: string) => {
     const checkedKeys = this.checkedUsers.result.map(
       (checkedUser) => checkedUser.key,
     );
@@ -246,25 +309,32 @@ class ImportAccountsStore {
   //   return this.checkedAccounts.length;
   // }
 
-  multipleFileUploading = async (files, setProgress, isAbort) => {
+  multipleFileUploading = async (
+    files: File[],
+    setProgress: (progress: number) => void,
+    isAbort: React.MutableRefObject<boolean>,
+  ) => {
     try {
       const location = combineUrl(
         window.location.origin,
         "migrationFileUpload.ashx",
       );
-      const requestsDataArray = [];
+      const requestsDataArray: { formData: FormData; fileName: string }[] = [];
 
-      const res = await axios.post(location + "?Init=true");
+      const res: { data: { ChunkSize: number } } = await axios.post(
+        `${location}?Init=true`,
+      );
+
       const chunkUploadSize = res.data.ChunkSize;
 
-      if (isAbort.current) return;
+      if (isAbort!.current) return;
 
       const chunksNumber = files
-        .map((file) => Math.ceil(file.size / chunkUploadSize, chunkUploadSize))
+        .map((file) => Math.ceil(file.size / chunkUploadSize))
         .reduce((curr, next) => curr + next, 0);
 
       files.forEach((file) => {
-        const chunks = Math.ceil(file.size / chunkUploadSize, chunkUploadSize);
+        const chunks = Math.ceil(file.size / chunkUploadSize);
         let chunkCounter = 0;
 
         while (chunkCounter < chunks) {
@@ -272,7 +342,7 @@ class ImportAccountsStore {
           const formData = new FormData();
           formData.append("file", file.slice(offset, offset + chunkUploadSize));
           requestsDataArray.push({ formData, fileName: file.name });
-          chunkCounter++;
+          chunkCounter += 1;
         }
       });
 
@@ -280,13 +350,14 @@ class ImportAccountsStore {
 
       while (chunk < chunksNumber && this.isFileLoading) {
         if (isAbort.current) return;
+        // eslint-disable-next-line no-await-in-loop
         await uploadFile(
-          location + `?Name=${requestsDataArray[chunk].fileName}`,
+          `${location}?Name=${requestsDataArray[chunk].fileName}`,
           requestsDataArray[chunk].formData,
         );
         const progress = (chunk / chunksNumber) * 100;
         setProgress(Math.ceil(progress));
-        chunk++;
+        chunk += 1;
       }
     } catch (e) {
       console.error(e);
@@ -295,7 +366,11 @@ class ImportAccountsStore {
     }
   };
 
-  singleFileUploading = async (file, setProgress, isAbort) => {
+  singleFileUploading = async (
+    file: File,
+    setProgress: (progress: number) => void,
+    isAbort: React.MutableRefObject<boolean>,
+  ) => {
     try {
       const location = combineUrl(
         window.location.origin,
@@ -304,9 +379,11 @@ class ImportAccountsStore {
       const requestsDataArray = [];
       let chunk = 0;
 
-      const res = await axios.post(location + "?Init=true");
+      const res: { data: { ChunkSize: number } } = await axios.post(
+        `${location}?Init=true`,
+      );
       const chunkUploadSize = res.data.ChunkSize;
-      const chunks = Math.ceil(file.size / chunkUploadSize, chunkUploadSize);
+      const chunks = Math.ceil(file.size / chunkUploadSize);
 
       if (isAbort.current) return;
 
@@ -315,19 +392,20 @@ class ImportAccountsStore {
         const formData = new FormData();
         formData.append("file", file.slice(offset, offset + chunkUploadSize));
         requestsDataArray.push(formData);
-        chunk++;
+        chunk += 1;
       }
 
       chunk = 0;
       while (chunk < chunks && this.isFileLoading) {
         if (isAbort.current) return;
+        // eslint-disable-next-line no-await-in-loop
         await uploadFile(
-          location + `?Name=${file.name}`,
+          `${location}?Name=${file.name}`,
           requestsDataArray[chunk],
         );
         const progress = (chunk / chunks) * 100;
         setProgress(Math.ceil(progress));
-        chunk++;
+        chunk += 1;
       }
     } catch (e) {
       console.error(e);
@@ -336,23 +414,25 @@ class ImportAccountsStore {
     }
   };
 
-  setImportOptions = (value) => {
+  setImportOptions = (value: Record<string, boolean>) => {
     this.importOptions = { ...this.importOptions, ...value };
   };
 
-  setServices = (service) => {
-    this.services = service;
+  setServices = (services: string[]) => {
+    this.services = services;
   };
 
+  // eslint-disable-next-line class-methods-use-this
   getMigrationList = () => {
     return migrationList();
   };
 
-  initMigrationName = (name) => {
+  // eslint-disable-next-line class-methods-use-this
+  initMigrationName = (name: string) => {
     return migrationName(name);
   };
 
-  proceedFileMigration = (migratorName) => {
+  proceedFileMigration = (migratorName: string) => {
     const users = this.finalUsers.map((item) =>
       Object.assign(item, { shouldImport: true }),
     );
@@ -364,19 +444,23 @@ class ImportAccountsStore {
     });
   };
 
+  // eslint-disable-next-line class-methods-use-this
   cancelMigration = () => {
     return migrationCancel();
   };
 
+  // eslint-disable-next-line class-methods-use-this
   clearMigration = () => {
     return migrationClear();
   };
 
+  // eslint-disable-next-line class-methods-use-this
   getMigrationStatus = () => {
     return migrationStatus();
   };
 
-  getMigrationLog = async () => {
+  // eslint-disable-next-line class-methods-use-this
+  getMigrationLog = () => {
     return migrationLog()
       .then((response) => {
         if (!response || !response.data) return null;
@@ -388,7 +472,8 @@ class ImportAccountsStore {
       });
   };
 
-  sendWelcomeLetter = (data) => {
+  // eslint-disable-next-line class-methods-use-this
+  sendWelcomeLetter = (data: { isSendWelcomeEmail: boolean }) => {
     return migrationFinish(data);
   };
 }

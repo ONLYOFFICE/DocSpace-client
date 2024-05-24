@@ -1,3 +1,4 @@
+import { i18n } from "i18next";
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -30,26 +31,40 @@ import { Base, Dark, TColorScheme, TTheme } from "@docspace/shared/themes";
 import { getEditorTheme, getSystemTheme } from "@docspace/shared/utils";
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getAppearanceTheme } from "@docspace/shared/api/settings";
-import { TGetColorTheme, TSettings } from "@docspace/shared/api/settings/types";
+import { TGetColorTheme } from "@docspace/shared/api/settings/types";
 import { setCookie } from "@docspace/shared/utils/cookie";
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 
-import useI18N from "./useI18N";
-
 export interface UseThemeProps {
   colorTheme?: TGetColorTheme;
-  settings?: TSettings;
+  systemTheme?: ThemeKeys;
+  i18n: i18n;
 }
 
-const useTheme = ({ colorTheme, settings }: UseThemeProps) => {
-  const { i18n } = useI18N({ settings });
-
+const useTheme = ({ colorTheme, systemTheme, i18n }: UseThemeProps) => {
   const [currentColorTheme, setCurrentColorTheme] =
-    React.useState<TColorScheme>({} as TColorScheme);
+    React.useState<TColorScheme>(() => {
+      if (!colorTheme) return {} as TColorScheme;
 
-  const [theme, setTheme] = React.useState<TTheme>({
-    ...Base,
-    currentColorScheme: currentColorTheme,
+      return (
+        colorTheme.themes.find((theme) => theme.id === colorTheme.selected) ??
+        ({} as TColorScheme)
+      );
+    });
+
+  const [theme, setTheme] = React.useState<TTheme>(() => {
+    const currColorTheme = colorTheme
+      ? colorTheme.themes.find((theme) => theme.id === colorTheme.selected) ??
+        ({} as TColorScheme)
+      : ({} as TColorScheme);
+
+    if (systemTheme === ThemeKeys.DarkStr) {
+      return { ...Dark, currentColorScheme: currColorTheme };
+    }
+    return {
+      ...Base,
+      currentColorScheme: currColorTheme,
+    };
   });
 
   const isRequestRunning = React.useRef(false);
@@ -111,7 +126,7 @@ const useTheme = ({ colorTheme, settings }: UseThemeProps) => {
 
   React.useEffect(() => {
     getUserTheme();
-  }, [currentColorTheme, getUserTheme]);
+  }, [getUserTheme]);
 
   React.useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");

@@ -19,5 +19,6 @@
   "RegisterTitle": "Solicitud de registro",
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "La duración de la sesión por defecto es de 20 minutos. Marque esta opción para establecerla en 1 año. Para establecer su propio valor, vaya a Ajustes.",
-  "ResendCode": "Reenviar código"
+  "ResendCode": "Reenviar código",
+  "UserIsAlreadyRegistered": "El usuario <1>{{email}}</1> ya está registrado en este DocSpace, introduzca su contraseña o regrese para continuar con otro correo electrónico."
 }

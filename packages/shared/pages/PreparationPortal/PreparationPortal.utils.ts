@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { getRestoreProgress } from "../../api/portal";
-import { removeLocalStorageItems } from "../../utils/pageSessionStorages";
 
 const baseSecondMultiplicationFactor = 400;
 const baseThirdMultiplicationFactor = 180;
@@ -37,13 +36,13 @@ let prevProgress: number = 0;
 let requestsCount: number = 0;
 
 export const clearLocalStorage = () => {
-  removeLocalStorageItems([
+  [
     "LocalCopyStorageType",
     "LocalCopyFolder",
     "LocalCopyStorage",
     "LocalCopyThirdPartyStorageType",
     "LocalCopyThirdPartyStorageValues",
-  ]);
+  ].forEach((k) => localStorage.removeItem(k));
 };
 export const reachingSecondBoundary = (
   percentage: number,

@@ -27,6 +27,7 @@
 import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
 
 import React from "react";
+import { ReactSVG } from "react-svg";
 
 import { Text as TextComponent } from "../text";
 import { Link as LinkComponent } from "../link";
@@ -36,6 +37,7 @@ import {
   BannerWrapper,
   BannerContent,
   BannerButton,
+  BannerIcon,
 } from "./CampaignsBanner.styled";
 import { CampaignsBannerProps } from "./CampaignsBanner.types";
 
@@ -43,7 +45,8 @@ import useFitText from "./useFitText";
 
 const CampaignsBanner = (props: CampaignsBannerProps) => {
   const {
-    campaignImage,
+    campaignBackground,
+    campaignIcon,
     campaignTranslate,
     campaignConfig,
     onAction,
@@ -57,16 +60,19 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
   const hasText = !!Text;
   const isButton = action?.isButton;
 
-  const { fontSize, ref } = useFitText(campaignImage, body?.fontSize);
+  const { fontSize, ref, wrapperRef } = useFitText(
+    campaignBackground,
+    body?.fontSize,
+  );
 
   return (
     <BannerWrapper
-      ref={ref}
+      ref={wrapperRef}
       data-testid="campaigns-banner"
-      background={campaignImage}
+      background={campaignBackground}
       borderColor={borderColor}
     >
-      <BannerContent>
+      <BannerContent ref={ref}>
         {hasTitle && (
           <TextComponent
             className="header"
@@ -124,6 +130,9 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
         iconName={CrossReactSvg}
         onClick={onClose}
       />
+      <BannerIcon>
+        <ReactSVG src={campaignIcon} />
+      </BannerIcon>
     </BannerWrapper>
   );
 };

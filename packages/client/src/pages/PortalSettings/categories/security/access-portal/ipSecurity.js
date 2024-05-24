@@ -96,6 +96,14 @@ const IpSecurity = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
+  const getSettingsFromDefault = () => {
+    const defaultSettings = getFromSessionStorage("defaultIPSettings");
+    if (defaultSettings) {
+      setEnable(defaultSettings.enable);
+      setIps(defaultSettings.ips);
+    }
+  };
+
   const getSettings = () => {
     const currentSettings = getFromSessionStorage("currentIPSettings");
     const defaultData = {
@@ -125,7 +133,14 @@ const IpSecurity = (props) => {
 
   useEffect(() => {
     if (!isInit) return;
-    getSettings();
+    const currentSettings = getFromSessionStorage("currentIPSettings");
+    const defaultSettings = getFromSessionStorage("defaultIPSettings");
+
+    if (isEqual(currentSettings, defaultSettings)) {
+      getSettings();
+    } else {
+      getSettingsFromDefault();
+    }
   }, [isLoading]);
 
   useEffect(() => {
@@ -189,6 +204,10 @@ const IpSecurity = (props) => {
       await setIpRestrictions(ipsObjectArr);
       await setIpRestrictionsEnable(enable);
 
+      saveToSessionStorage("currentIPSettings", {
+        enable: enable,
+        ips: ips,
+      });
       saveToSessionStorage("defaultIPSettings", {
         enable: enable,
         ips: ips,
@@ -204,8 +223,8 @@ const IpSecurity = (props) => {
 
   const onCancelClick = () => {
     const defaultSettings = getFromSessionStorage("defaultIPSettings");
-    setEnable(defaultSettings.enable);
-    setIps(defaultSettings.ips);
+    setEnable(defaultSettings?.enable);
+    setIps(defaultSettings?.ips);
     setShowReminder(false);
   };
 

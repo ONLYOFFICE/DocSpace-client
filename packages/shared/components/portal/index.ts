@@ -24,16 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
 import React from "react";
 import ReactDOM from "react-dom";
 
 interface PortalProps {
   visible?: boolean;
   element: React.ReactNode;
-  appendTo?: HTMLElement;
+  appendTo?: HTMLElement | null;
 }
 
-const Portal = ({ visible = false, element, appendTo }: PortalProps) => {
+const Portal = ({ visible = false, element, appendTo = null }: PortalProps) => {
   const [mounted, setMounted] = React.useState(visible);
 
   const domExist = React.useCallback(() => {

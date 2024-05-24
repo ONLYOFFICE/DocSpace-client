@@ -182,7 +182,9 @@ class ScrollbarThumb extends React.Component<ScrollbarThumbProps, unknown> {
       return;
     }
 
-    ev.preventDefault();
+    if (ev.cancelable) {
+      ev.preventDefault();
+    }
     ev.stopPropagation();
 
     if (!isUndef(ev.offsetX)) {

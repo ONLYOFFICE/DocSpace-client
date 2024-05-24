@@ -9,8 +9,6 @@
   "DisableRoomQuota": "Onemogoči kvoto za to sobo",
   "FillingFormsRoomDescription": "Oblikujte, delite in izpolnite predloge dokumentov ali delajte s pripravljenimi prednastavitvami za hitro ustvarjanje dokumentov katere koli vrste.",
   "FillingFormsRoomTitle": "Soba za vnašanje obrazcev",
-  "FormRoomDescription": "Delite obrazce s komerkoli in zbirajte celotne obrazce v mapi Dokončano. Uporabniki lahko kateri koli obrazec izpolnijo večkrat in ustvarijo ločene končne datoteke. V sobah z osnovnimi obrazci obrazcem ne morete več dodati uporabniških vlog.",
-  "FormRoomTitle": "Soba z osnovnimi obrazci",
   "Icon": "Ikona",
   "MakeRoomPrivateDescription": "Vse datoteke v tej sobi bodo šifrirane.",
   "MakeRoomPrivateLimitationsWarningDescription": "S to funkcijo lahko povabite samo obstoječe uporabnike DocSpace. Ko ustvarite sobo, ne boste mogli spremeniti seznama uporabnikov.",

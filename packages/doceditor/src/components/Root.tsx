@@ -26,7 +26,7 @@
 
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
@@ -35,7 +35,6 @@ import AppLoader from "@docspace/shared/components/app-loader";
 import { TResponse } from "@/types";
 import useError from "@/hooks/useError";
 
-import useDeviceType from "@/hooks/useDeviceType";
 import useRootInit from "@/hooks/useRootInit";
 import useDeepLink from "@/hooks/useDeepLink";
 import useSelectFileDialog from "@/hooks/useSelectFileDialog";
@@ -63,7 +62,10 @@ const Root = ({
   doc,
   fileId,
   hash,
+  timer,
 }: TResponse) => {
+  const editorRef = React.useRef<null | HTMLElement>(null);
+
   const documentserverUrl = config?.editorUrl ?? error?.editorUrl;
   const fileInfo = config?.file;
 
@@ -71,10 +73,14 @@ const Root = ({
 
   const isSkipError =
     error?.status === "not-found" ||
-    (error?.status === "access-denied" && error.editorUrl) ||
+    (error?.status === "access-denied" && !!error.editorUrl) ||
     error?.status === "not-supported";
 
   const { t } = useTranslation(["Editor", "Common"]);
+
+  useEffect(() => {
+    console.log("editor timer: ", timer);
+  }, [timer]);
 
   useRootInit({
     documentType: config?.documentType,
@@ -85,7 +91,6 @@ const Root = ({
     editorUrl: documentserverUrl,
   });
 
-  const { currentDeviceType } = useDeviceType();
   const { isShowDeepLink, setIsShowDeepLink } = useDeepLink({
     settings,
     fileInfo,
@@ -143,8 +148,18 @@ const Root = ({
       isSharingDialogVisible ||
       isVisibleSelectFolderDialog ||
       selectFileDialogVisible
-    )
+    ) {
       calculateAsideHeight();
+
+      const activeElement = document.activeElement as HTMLElement | null;
+
+      if (activeElement && activeElement.tagName === "IFRAME") {
+        editorRef.current = activeElement;
+        activeElement.blur();
+      }
+    } else if (editorRef.current) {
+      editorRef.current.focus();
+    }
 
     if (isSharingDialogVisible) {
       setTimeout(calculateAsideHeight, 10);
@@ -159,7 +174,6 @@ const Root = ({
     <DeepLink
       fileInfo={fileInfo}
       userEmail={user?.email}
-      currentDeviceType={currentDeviceType}
       deepLinkConfig={settings?.deepLink}
       setIsShowDeepLink={setIsShowDeepLink}
     />
@@ -180,9 +194,8 @@ const Root = ({
           isSharingAccess={isSharingAccess}
           documentserverUrl={documentserverUrl}
           fileInfo={fileInfo}
-          errorMessage={
-            error?.message ?? isSkipError ? t("Common:InvalidLink") : ""
-          }
+          errorMessage={error?.message}
+          isSkipError={!!isSkipError}
           onSDKRequestSharingSettings={onSDKRequestSharingSettings}
           onSDKRequestSaveAs={onSDKRequestSaveAs}
           onSDKRequestInsertImage={onSDKRequestInsertImage}

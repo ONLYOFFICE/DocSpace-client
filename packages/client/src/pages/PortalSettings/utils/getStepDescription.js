@@ -29,6 +29,7 @@ export const getGoogleStepDescription = (
   stepIndex,
   renderTooltip,
   Trans,
+  isTypeSelectEmpty,
 ) => {
   switch (stepIndex) {
     case 1:
@@ -36,7 +37,12 @@ export const getGoogleStepDescription = (
     case 2:
       return t("Settings:SelectUsersDescriptionGoogle");
     case 3:
-      return (
+      return isTypeSelectEmpty ? (
+        <>
+          <b>{t("Settings:RolesAreSet")}</b>
+          <div>{t("Settings:UsersAreRegistered")}</div>
+        </>
+      ) : (
         <>
           <Trans t={t} ns="Settings" i18nKey="SelectUserTypesDescription">
             Select DocSpace roles for the imported users: <b>DocSpace admin</b>,{" "}
@@ -63,6 +69,7 @@ export const getWorkspaceStepDescription = (
   stepIndex,
   renderTooltip,
   Trans,
+  isTypeSelectEmpty,
 ) => {
   switch (stepIndex) {
     case 1:
@@ -70,7 +77,12 @@ export const getWorkspaceStepDescription = (
     case 2:
       return t("Settings:SelectUsersDescriptionWorkspace");
     case 3:
-      return (
+      return isTypeSelectEmpty ? (
+        <>
+          <b>{t("Settings:RolesAreSet")}</b>
+          <div>{t("Settings:UsersAreRegistered")}</div>
+        </>
+      ) : (
         <>
           <Trans t={t} ns="Settings" i18nKey="SelectUserTypesDescription">
             Select DocSpace roles for the imported users: <b>DocSpace admin</b>,{" "}

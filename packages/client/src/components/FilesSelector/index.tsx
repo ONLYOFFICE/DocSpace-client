@@ -134,6 +134,7 @@ const FilesSelectorWrapper = ({
   isRoomBackup,
 
   roomsFolderId,
+  openRoot,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -326,6 +327,7 @@ const FilesSelectorWrapper = ({
 
   return (
     <FilesSelector
+      openRoot={openRoot}
       socketHelper={socketHelper}
       socketSubscribers={socketSubscribers}
       disabledItems={disabledItems}
@@ -339,7 +341,7 @@ const FilesSelectorWrapper = ({
       isThirdParty={isThirdParty}
       rootThirdPartyId={rootThirdPartyId}
       roomsFolderId={roomsFolderId}
-      currentFolderId={currentFolderId || 0}
+      currentFolderId={isFormRoom && openRoot ? "" : currentFolderId}
       parentId={parentId}
       rootFolderType={rootFolderType || FolderType.Rooms}
       currentDeviceType={currentDeviceType}
@@ -485,7 +487,7 @@ export default inject(
       (rootFolderType === FolderType.Archive ||
       rootFolderType === FolderType.TRASH
         ? undefined
-        : selectedId !== selectionsWithoutEditing[0]?.id
+        : selectedId === selectionsWithoutEditing[0]?.id
           ? parentId
           : selectedId);
 

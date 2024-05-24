@@ -124,6 +124,22 @@ export default function withBadges(WrappedComponent) {
       }
     };
 
+    openLocationFile = () => {
+      const { checkAndOpenLocationAction, item } = this.props;
+
+      const { draftLocation, ...options } = item;
+
+      const file = {
+        ...options,
+        ExtraLocationTitle: draftLocation.folderTitle,
+        ExtraLocation: draftLocation.folderId,
+        id: draftLocation.fileId,
+        title: draftLocation.fileTitle,
+      };
+
+      checkAndOpenLocationAction?.(file);
+    };
+
     render() {
       const {
         t,
@@ -173,6 +189,7 @@ export default function withBadges(WrappedComponent) {
           onBadgeClick={this.onBadgeClick}
           onUnpinClick={this.onUnpinClick}
           onUnmuteClick={this.onUnmuteClick}
+          openLocationFile={this.openLocationFile}
           setConvertDialogVisible={this.setConvertDialogVisible}
           onFilesClick={onFilesClick}
           viewAs={viewAs}
@@ -212,7 +229,12 @@ export default function withBadges(WrappedComponent) {
         isArchiveFolder,
         isRecentTab,
       } = treeFoldersStore;
-      const { markAsRead, setPinAction, setMuteAction } = filesActionsStore;
+      const {
+        markAsRead,
+        setPinAction,
+        setMuteAction,
+        checkAndOpenLocationAction,
+      } = filesActionsStore;
       const { isTabletView, isDesktopClient, theme } = settingsStore;
       const { setIsVerHistoryPanel, fetchFileVersions } = versionHistoryStore;
       const {
@@ -251,6 +273,7 @@ export default function withBadges(WrappedComponent) {
         isArchiveFolder,
         isPublicRoom: publicRoomStore.isPublicRoom,
         isRecentTab,
+        checkAndOpenLocationAction,
       };
     },
   )(observer(WithBadges));

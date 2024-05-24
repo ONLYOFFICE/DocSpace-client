@@ -9,8 +9,6 @@
   "DisableRoomQuota": "Disattiva la quota per questa stanza",
   "FillingFormsRoomDescription": "Crea, condividi e compila modelli di documenti o lavora con i moduli precompilati per creare rapidamente documenti di qualsiasi tipo.",
   "FillingFormsRoomTitle": "Stanza di compilazione di moduli",
-  "FormRoomDescription": "Condividi moduli con chiunque e raccogli i moduli completi nella cartella Compilati. Gli utenti possono compilare qualsiasi modulo più volte creando diversi file finali. Nelle Stanze dei moduli di base non è possibile aggiungere più ruoli utente ai moduli.",
-  "FormRoomTitle": "Stanze dei moduli di base",
   "Icon": "Icona",
   "MakeRoomPrivateDescription": "Tutti i file in questa stanza verranno crittografati.",
   "MakeRoomPrivateLimitationsWarningDescription": "Con questa funzione, puoi invitare solo gli utenti esistenti di DocSpace. Dopo aver creato una stanza, non sarai in grado di modificare l’elenco degli utenti.",

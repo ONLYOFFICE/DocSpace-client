@@ -31,7 +31,7 @@ import { InfiniteLoaderComponent } from "../infinite-loader";
 import { StyledTableBody } from "./Table.styled";
 import { TableBodyProps } from "./Table.types";
 
-const TableBody = (props: TableBodyProps) => {
+const TableBodyPure = (props: TableBodyProps) => {
   const {
     columnStorageName,
     columnInfoPanelStorageName,
@@ -72,5 +72,7 @@ const TableBody = (props: TableBodyProps) => {
     <StyledTableBody className="table-container_body" {...props} />
   );
 };
+
+const TableBody = React.memo(TableBodyPure);
 
 export { TableBody };

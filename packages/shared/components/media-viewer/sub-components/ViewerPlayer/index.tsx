@@ -431,6 +431,7 @@ export const ViewerPlayer = ({
 
   const handleVideoEnded = () => {
     setIsPlaying(false);
+
     if (isMobile) removePanelVisibleTimeout();
   };
 
@@ -651,6 +652,7 @@ export const ViewerPlayer = ({
             onPlaying={() => setIsWaiting(false)}
             onDurationChange={handleDurationChange}
             onLoadedMetadata={handleLoadedMetaDataVideo}
+            onPlay={() => setIsPlaying(true)}
           />
           <PlayerBigPlayButton
             onClick={handleBigPlayButtonClick}

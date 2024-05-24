@@ -9,8 +9,6 @@
   "DisableRoomQuota": "Ota tämän huoneen kiintiö pois käytöstä",
   "FillingFormsRoomDescription": "Rakenna, jaa ja täytä dokumenttipohjia tai tee töitä valmiiden pohjien kanssa luodaksesi nopeasti kaikentyyppisiä dokumentteja.",
   "FillingFormsRoomTitle": "Lomakkeiden täyttöhuone",
-  "FormRoomDescription": "Jaa lomakkeita kenen tahansa kanssa ja kerää täytettyjä lomakkeita ”Täytetyt lomakkeet”-osiossa. Käyttäjät voivat täyttää minkä tahansa lomakkeen useita kertoja luomalla erillisiä lopullisia tiedostoja. Peruslomake-huoneissa et voi lisätä useita käyttäjärooleja lomakkeisiin.",
-  "FormRoomTitle": "Peruslomakehuone",
   "Icon": "Kuvake",
   "MakeRoomPrivateDescription": "Kaikki tämän huoneen tiedostot salataan.",
   "MakeRoomPrivateLimitationsWarningDescription": "Tällä toiminnolla, voit kutsua vai olemassa olevia DocSpace-käyttäjiä. Huoneen luomisen jälkeen et voi muuttaa käyttäjien listaa.",

@@ -9,8 +9,6 @@
   "DisableRoomQuota": "Die Quote für diesen Raum deaktivieren",
   "FillingFormsRoomDescription": "Erstellen, teilen und füllen Sie Dokumentvorlagen oder arbeiten Sie mit den fertigen Voreinstellungen, um schnell Dokumente jeder Art zu erstellen.",
   "FillingFormsRoomTitle": "Ausfüllen von Formularen Raum",
-  "FormRoomDescription": "Geben Sie Formulare für andere frei und sammeln Sie die vollständigen Formulare im Ordner „Abgeschlossen“. Benutzer können jedes Formular mehrmals ausfüllen und so separate endgültige Dateien erstellen. In Basic-Formularräumen können Sie den Formularen nicht mehrere Benutzerrollen hinzufügen.",
-  "FormRoomTitle": "Basic-Formularraum",
   "Icon": "Icon",
   "MakeRoomPrivateDescription": "Alle Dateien in diesem Raum werden verschlüsselt.",
   "MakeRoomPrivateLimitationsWarningDescription": "Mit dieser Funktion können Sie nur bestehende DocSpace-Benutzer einladen. Nachdem Sie einen Raum erstellt haben, können Sie die Liste der Benutzer nicht mehr ändern.",

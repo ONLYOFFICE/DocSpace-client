@@ -36,6 +36,10 @@ export type TTfa = {
   avaliable: boolean;
 };
 
+export type TGetSsoSettings = {
+  hideAuthPage: boolean;
+};
+
 export type TGetCSPSettings = {
   domains: string[];
   header: string;
@@ -122,6 +126,7 @@ export type TSettings = {
   defaultPage?: string;
   tagManagerId?: string;
   limitedAccessSpace: boolean;
+  enabledJoin?: boolean;
 };
 
 export type TCustomSchema = {

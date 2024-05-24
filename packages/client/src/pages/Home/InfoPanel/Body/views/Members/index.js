@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
@@ -36,7 +36,11 @@ import MembersHelper from "../../helpers/MembersHelper";
 import MembersList from "./sub-components/MembersList";
 import User from "./User";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
-import { LinksBlock, StyledLinkRow } from "./sub-components/Styled";
+import {
+  LinksBlock,
+  StyledLinkRow,
+  StyledPublicRoomBarContainer,
+} from "./sub-components/Styled";
 import EmptyContainer from "./sub-components/EmptyContainer";
 
 import { Text } from "@docspace/shared/components/text";
@@ -46,6 +50,7 @@ import { Tooltip } from "@docspace/shared/components/tooltip";
 import { isDesktop } from "@docspace/shared/utils";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
+import { ScrollbarContext } from "@docspace/shared/components/scrollbar";
 
 import { Avatar } from "@docspace/shared/components/avatar";
 import { copyShareLink } from "@docspace/shared/utils/copy";
@@ -71,12 +76,15 @@ const Members = ({
   setExternalLink,
   withPublicRoomBlock,
   fetchMembers,
+  fetchMoreMembers,
   membersIsLoading,
   searchValue,
   searchResultIsLoading,
 }) => {
   const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
+
+  const scrollContext = useContext(ScrollbarContext);
 
   const updateInfoPanelMembers = async () => {
     if (
@@ -95,20 +103,13 @@ const Members = ({
     updateInfoPanelMembers();
   }, [infoPanelSelection, searchValue]);
 
+  useEffect(() => {
+    if (searchResultIsLoading) return;
+    scrollContext?.parentScrollbar?.scrollToTop();
+  }, [searchResultIsLoading]);
+
   const loadNextPage = async () => {
-    const roomId = infoPanelSelection.id;
-    const fetchedMembers = await fetchMembers(t, false, withoutTitlesAndLinks);
-    const { users, administrators, expected, groups } = fetchedMembers;
-
-    const newMembers = {
-      roomId: roomId,
-      administrators: [...infoPanelMembers.administrators, ...administrators],
-      users: [...infoPanelMembers.users, ...users],
-      expected: [...infoPanelMembers.expected, ...expected],
-      groups: [...infoPanelMembers.groups, ...groups],
-    };
-
-    setInfoPanelMembers(newMembers);
+    await fetchMoreMembers(t, withoutTitlesAndLinks);
   };
 
   if (membersIsLoading) return <InfoPanelViewLoader view="members" />;
@@ -247,10 +248,12 @@ const Members = ({
   return (
     <>
       {showPublicRoomBar && (
-        <PublicRoomBar
-          headerText={t("Files:RoomAvailableViaExternalLink")}
-          bodyText={t("CreateEditRoomDialog:PublicRoomBarDescription")}
-        />
+        <StyledPublicRoomBarContainer>
+          <PublicRoomBar
+            headerText={t("Files:RoomAvailableViaExternalLink")}
+            bodyText={t("CreateEditRoomDialog:PublicRoomBarDescription")}
+          />
+        </StyledPublicRoomBarContainer>
       )}
 
       <MembersList
@@ -262,6 +265,7 @@ const Members = ({
         itemCount={membersFilter.total + headersCount + publicRoomItemsLength}
         showPublicRoomBar={showPublicRoomBar}
         linksBlockLength={publicRoomItemsLength}
+        withoutTitlesAndLinks={withoutTitlesAndLinks}
       >
         {publicRoomItems}
         {membersList.map((user, index) => {
@@ -269,7 +273,7 @@ const Members = ({
             <User
               t={t}
               user={user}
-              key={user.id}
+              key={user.id || user.email} // user.email for users added via email
               showTooltip={isAdmin}
               index={index + publicRoomItemsLength}
               membersHelper={membersHelper}
@@ -301,6 +305,7 @@ export default inject(
       infoPanelMembers,
       setInfoPanelMembers,
       fetchMembers,
+      fetchMoreMembers,
       membersIsLoading,
       withPublicRoomBlock,
       searchValue,
@@ -344,6 +349,7 @@ export default inject(
       setExternalLink,
       withPublicRoomBlock,
       fetchMembers,
+      fetchMoreMembers,
       membersIsLoading,
       searchValue,
       searchResultIsLoading,

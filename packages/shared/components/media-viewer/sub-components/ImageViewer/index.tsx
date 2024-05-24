@@ -87,18 +87,20 @@ export const ImageViewer = ({
   mobileDetails,
   toolbar,
   thumbnailSrc,
-  imageId,
-  version,
+  // imageId,
+  // version,
   isTiff,
   contextModel,
   errorTitle,
   devices,
+  isPublicFile,
 }: ImageViewerProps) => {
   const imgRef = useRef<HTMLImageElement>(null);
   const imgWrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const unmountRef = useRef<boolean>(false);
+  const isLoaded = useRef<boolean>(false);
 
   const lastTapTimeRef = useRef<number>(0);
   const isDoubleTapRef = useRef<boolean>(false);
@@ -214,6 +216,7 @@ export const ImageViewer = ({
         rotate: 0,
       });
 
+      isLoaded.current = true;
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
       setIsLoading(false);
@@ -521,7 +524,7 @@ export const ImageViewer = ({
               : dx,
           y: dy,
           opacity:
-            style.scale.get() === 1 && !isDesktop && mdy > 0
+            style.scale.get() === 1 && !isDesktop && mdy > 0 && !isPublicFile
               ? imgRef.current.height / 10 / mdy
               : style.opacity.get(),
           immediate: true,
@@ -539,7 +542,7 @@ export const ImageViewer = ({
           cancel();
         }
 
-        if (style.scale.get() === 1 && !isDesktop) {
+        if (style.scale.get() === 1 && !isDesktop && !isPublicFile) {
           if (mdx < -imgRef.current.width / 4) {
             return onNext?.();
           }
@@ -851,11 +854,20 @@ export const ImageViewer = ({
     }
   };
 
-  const onError = useCallback(() => {
-    setIsError(true);
-  }, []);
+  const onError = useCallback(
+    (e: SyntheticEvent<HTMLImageElement, Event>) => {
+      if (window.DocSpaceConfig?.imageThumbnails && thumbnailSrc && src) {
+        // if thumbnailSrc is unavailable, try to load original image
+        e.currentTarget.src = src;
+        return;
+      }
 
-  const model = React.useMemo(contextModel, [contextModel]);
+      setIsError(true);
+    },
+    [src, thumbnailSrc],
+  );
+
+  const model = React.useMemo(() => contextModel(true), [contextModel]);
 
   useEffect(() => {
     unmountRef.current = false;
@@ -883,9 +895,13 @@ export const ImageViewer = ({
   useLayoutEffect(() => {
     if (unmountRef.current || (isTiff && src)) return;
 
-    timeoutRef.current = setTimeout(() => {
-      setIsLoading(true);
-    }, LOADER_TIMEOUT);
+    if (!isLoaded.current) {
+      timeoutRef.current = setTimeout(() => {
+        setIsLoading(true);
+      }, LOADER_TIMEOUT);
+    }
+
+    isLoaded.current = false;
 
     setIsError(false);
 
@@ -921,6 +937,20 @@ export const ImageViewer = ({
   //     });
   // }, [src, imageId, version, isTiff, loadImage, changeSource, thumbnailSrc]);
 
+  useEffect(() => {
+    const onWheelEvent = (event: WheelEvent) => {
+      if (event.ctrlKey) event.preventDefault();
+    };
+
+    window.addEventListener("wheel", onWheelEvent, {
+      passive: false,
+    });
+
+    return () => {
+      window.removeEventListener("wheel", onWheelEvent);
+    };
+  }, []);
+
   return (
     <>
       {isMobile && !backgroundBlack && mobileDetails}
@@ -944,7 +974,7 @@ export const ImageViewer = ({
             draggable="false"
             src={
               window.DocSpaceConfig?.imageThumbnails && thumbnailSrc
-                ? `${thumbnailSrc}&size=1280x720`
+                ? `${thumbnailSrc}&size=3840x2160`
                 : src
             }
             ref={imgRef}

@@ -34,6 +34,7 @@ import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import { UrlActionType } from "@docspace/shared/enums";
 
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
+import { Portal } from "@docspace/shared/components/portal";
 
 const FilesMediaViewer = (props) => {
   const {
@@ -251,6 +252,7 @@ const FilesMediaViewer = (props) => {
         state: {
           ...location.state,
           fromMediaViewer: true,
+          disableScrollToTop: true,
         },
       });
     },
@@ -275,41 +277,46 @@ const FilesMediaViewer = (props) => {
 
   return (
     visible && (
-      <MediaViewer
-        t={t}
-        files={files}
-        getIcon={getIcon}
-        visible={visible}
-        playlist={playlist}
-        prevMedia={prevMedia}
-        nextMedia={nextMedia}
-        onCopyLink={onCopyLink}
-        userAccess={userAccess}
-        onChangeUrl={onChangeUrl}
-        isPreviewFile={firstLoad}
-        onDuplicate={onDuplicate}
-        onMoveAction={onMoveAction}
-        onCopyAction={onCopyAction}
-        onClose={onMediaViewerClose}
-        onDelete={onDeleteMediaFile}
-        onClickRename={onClickRename}
-        onClickDelete={onClickDelete}
-        setActiveFiles={setActiveFiles}
-        archiveRoomsId={archiveRoomsId}
-        onPreviewClick={onPreviewClick}
-        onDownload={onDownloadMediaFile}
-        onClickLinkEdit={onClickLinkEdit}
-        onClickDownload={onClickDownload}
-        onShowInfoPanel={onShowInfoPanel}
-        playlistPos={currentPostionIndex}
-        currentFileId={currentMediaFileId}
-        onClickDownloadAs={onClickDownloadAs}
-        currentDeviceType={currentDeviceType}
-        extsImagePreviewed={extsImagePreviewed}
-        setBufferSelection={setBufferSelection}
-        onEmptyPlaylistError={onMediaViewerClose}
-        deleteDialogVisible={deleteDialogVisible}
-        pluginContextMenuItems={pluginContextMenuItems}
+      <Portal
+        visible
+        element={
+          <MediaViewer
+            t={t}
+            files={files}
+            getIcon={getIcon}
+            visible={visible}
+            playlist={playlist}
+            prevMedia={prevMedia}
+            nextMedia={nextMedia}
+            onCopyLink={onCopyLink}
+            userAccess={userAccess}
+            onChangeUrl={onChangeUrl}
+            isPreviewFile={firstLoad}
+            onDuplicate={onDuplicate}
+            onMoveAction={onMoveAction}
+            onCopyAction={onCopyAction}
+            onClose={onMediaViewerClose}
+            onDelete={onDeleteMediaFile}
+            onClickRename={onClickRename}
+            onClickDelete={onClickDelete}
+            setActiveFiles={setActiveFiles}
+            archiveRoomsId={archiveRoomsId}
+            onPreviewClick={onPreviewClick}
+            onDownload={onDownloadMediaFile}
+            onClickLinkEdit={onClickLinkEdit}
+            onClickDownload={onClickDownload}
+            onShowInfoPanel={onShowInfoPanel}
+            playlistPos={currentPostionIndex}
+            currentFileId={currentMediaFileId}
+            onClickDownloadAs={onClickDownloadAs}
+            currentDeviceType={currentDeviceType}
+            extsImagePreviewed={extsImagePreviewed}
+            setBufferSelection={setBufferSelection}
+            onEmptyPlaylistError={onMediaViewerClose}
+            deleteDialogVisible={deleteDialogVisible}
+            pluginContextMenuItems={pluginContextMenuItems}
+          />
+        }
       />
     )
   );

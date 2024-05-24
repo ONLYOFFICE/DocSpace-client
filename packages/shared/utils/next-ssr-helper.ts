@@ -40,8 +40,13 @@ export const getBaseUrl = () => {
   return baseURL;
 };
 
-export const getAPIUrl = (isApiSystem = false) => {
-  const baseUrl = getBaseUrl();
+export const getAPIUrl = (internalRequest: boolean, isApiSystem: boolean) => {
+  const baseUrl = internalRequest
+    ? process.env.API_HOST?.trim() ?? getBaseUrl()
+    : getBaseUrl();
+
+  // const baseUrl = getBaseUrl();
+
   const baseAPIUrl = isApiSystem
     ? `${baseUrl}/${APISYSTEM_PREFIX}`
     : `${baseUrl}/${API_PREFIX}`;
@@ -54,15 +59,20 @@ export const createRequest = (
   newHeaders: [string, string][],
   method: string,
   body?: string,
-  isApiSystem?: boolean,
+  internalRequest: boolean = true,
+  isApiSystem: boolean = false,
 ) => {
   const hdrs = new Headers(headers());
 
-  const apiURL = getAPIUrl(isApiSystem);
+  const apiURL = getAPIUrl(internalRequest, isApiSystem);
 
   newHeaders.forEach((hdr) => {
     if (hdr[0]) hdrs.set(hdr[0], hdr[1]);
   });
+
+  const baseURL = getBaseUrl();
+
+  if (baseURL && process.env.API_HOST?.trim()) hdrs.set("origin", baseURL);
 
   const urls = paths.map((path) => `${apiURL}${path}`);
 

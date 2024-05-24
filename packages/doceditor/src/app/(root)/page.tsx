@@ -48,7 +48,7 @@ const Root = dynamic(() => import("@/components/Root"), {
 });
 
 export const metadata: Metadata = {
-  title: "Onlyoffice DocEditor page",
+  title: "ONLYOFFICE DocEditor page",
 
   description: "",
 };
@@ -56,6 +56,8 @@ export const metadata: Metadata = {
 async function Page({ searchParams }: RootPageProps) {
   const { fileId, fileid, version, doc, action, share, editorType } =
     searchParams ?? initialSearchParams;
+
+  const startDate = new Date();
 
   const data = await getData(
     fileId ?? fileid ?? "",
@@ -66,7 +68,9 @@ async function Page({ searchParams }: RootPageProps) {
     editorType,
   );
 
-  return <Root {...data} />;
+  const timer = new Date().getTime() - startDate.getTime();
+
+  return <Root {...data} timer={timer} />;
 }
 
 export default Page;

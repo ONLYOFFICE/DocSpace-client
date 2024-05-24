@@ -15,7 +15,6 @@
   "LightTheme": "Tema claro",
   "LogoutActiveConnection": "Salir de la conexión activa",
   "LogoutAllActiveConnections": "Salir de todas las conexiones activas",
-  "LogoutAllActiveSessions": "Salir de todas las sesiones activas",
   "LogoutAllActiveSessionsDescription": "Todas las conexiones activas excepto esta conexión se desconectarán, ya que está actualmente en uso.",
   "LogoutBtn": "Cerrar sesión",
   "LogoutDescription": "Aviso. Todas las conexiones activas excepto esta conexión se desconectarán, ya que está actualmente en uso.",

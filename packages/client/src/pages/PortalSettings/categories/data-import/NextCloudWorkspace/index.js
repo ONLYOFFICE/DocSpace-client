@@ -63,10 +63,16 @@ const NextcloudWorkspace = (props) => {
     currentDeviceType,
     getMigrationStatus,
     setUsers,
+    filteredUsers,
   } = props;
   const [currentStep, setCurrentStep] = useState(1);
   const [shouldRender, setShouldRender] = useState(false);
-  const StepsData = getStepsData(t, currentStep, setCurrentStep);
+  const StepsData = getStepsData(
+    t,
+    currentStep,
+    setCurrentStep,
+    filteredUsers.length === 0,
+  );
   const navigate = useNavigate();
 
   useViewEffect({
@@ -163,7 +169,7 @@ const NextcloudWorkspace = (props) => {
 };
 
 export default inject(({ setup, settingsStore, importAccountsStore }) => {
-  const { clearCheckedAccounts, getMigrationStatus, setUsers } =
+  const { clearCheckedAccounts, getMigrationStatus, setUsers, filteredUsers } =
     importAccountsStore;
   const { initSettings, viewAs, setViewAs } = setup;
   const { currentDeviceType } = settingsStore;
@@ -177,6 +183,7 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
     currentDeviceType,
     getMigrationStatus,
     setUsers,
+    filteredUsers,
   };
 })(
   withTranslation(["Common, SMTPSettings, Settings"])(

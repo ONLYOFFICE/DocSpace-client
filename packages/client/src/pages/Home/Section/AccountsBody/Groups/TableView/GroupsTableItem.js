@@ -90,7 +90,7 @@ const GroupsTableItem = ({
     <Styled.GroupsRowWrapper
       className={`group-item ${
         (isChecked || isActive) && "table-row-selected"
-      }`}
+      } ${item.id}`}
       value={value}
     >
       <Styled.GroupsRow

@@ -31,6 +31,7 @@ import { inject, observer } from "mobx-react";
 
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
+import { DeviceType } from "@docspace/shared/enums";
 
 const keyedCollections = {
   ar: "ar-SA",
@@ -61,6 +62,7 @@ const LanguageFilter = ({
   languageFilterLoaded,
   oformFilesLoaded,
   oformsLocal,
+  isMobileView,
 }) => {
   const convertedLocales = oformLocales.map((item) => convertToCulture(item));
 
@@ -90,11 +92,12 @@ const LanguageFilter = ({
       onSelectLanguage={onFilterByLocale}
       selectedCulture={convertToCulture(oformsLocal)}
       id="comboBoxLanguage"
+      isMobileView={isMobileView}
     />
   );
 };
 
-export default inject(({ oformsStore }) => {
+export default inject(({ oformsStore, settingsStore }) => {
   const {
     oformLocales,
     filterOformsByLocale,
@@ -106,6 +109,10 @@ export default inject(({ oformsStore }) => {
     oformsFilter,
   } = oformsStore;
 
+  const { currentDeviceType } = settingsStore;
+
+  const isMobileView = currentDeviceType === DeviceType.mobile;
+
   return {
     oformLocales,
     filterOformsByLocale,
@@ -115,5 +122,7 @@ export default inject(({ oformsStore }) => {
     languageFilterLoaded,
     oformFilesLoaded,
     oformsLocal: oformsFilter.locale,
+
+    isMobileView,
   };
 })(withTranslation(["Common"])(observer(LanguageFilter)));

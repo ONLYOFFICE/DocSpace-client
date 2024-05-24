@@ -887,6 +887,9 @@ class SettingsStore {
         this.publicRoomKey,
         "/files",
       );
+
+      // TODO: comment this line
+      window.socketFilesClient = this.sockerFilesClient;
     }
 
     return this.sockerFilesClient;
@@ -901,6 +904,9 @@ class SettingsStore {
         this.publicRoomKey,
         "/onlineusers",
       );
+
+      // TODO: comment this line
+      window.socketUsersClient = this.socketUsersClient;
     }
 
     return this.socketUsersClient;

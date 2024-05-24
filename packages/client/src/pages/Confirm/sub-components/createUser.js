@@ -324,6 +324,7 @@ const CreateUserForm = (props) => {
       Email: linkData.email,
       Key: linkData.key,
       SerializedProfile: profile,
+      culture: currentCultureName,
     };
 
     signupOAuth(signupAccount)
@@ -486,7 +487,7 @@ const CreateUserForm = (props) => {
   return (
     <StyledPage>
       <LanguageCombobox
-          className="language-combo-box"
+        className="language-combo-box"
         onSelectLanguage={onSelect}
         cultures={cultures}
         selectedCulture={currentCultureName}

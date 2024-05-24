@@ -9,10 +9,17 @@
   "FormRoomEmptyTitle": "Welcome to the Form filling room",
   "CustomRoomEmptyTitle": "Welcome to the Custom room",
   "CollaboratorEmptyTitle": "The room is empty.",
-  "InviteUsersOptionDescription": "Don't forget to add participants who will fill out the form All added PDF forms are available for you to fill out",
+  "InviteUsersOptionDescription": "Add portal members for joint editing in the room",
+  "InviteUsersOptionFormRoomDescription": "Don't forget to add participants who will fill out the form All added PDF forms are available for you to fill out",
   "InviteUsersOptionTitle": "Inviting Attendees",
   "UploadDevicePDFFormOptionDescription": "Download a PDF form from your device, and the system will automatically convert it into a form that can be filled out.",
   "UploadDevicePDFFormOptionTitle": "Download the complete PDF form",
   "UploadPDFFormOptionDescription": "Start working in the room from select the PDF from DocSpace",
-  "UploadPDFFormOptionTitle": "Upload ready PDF form from Docspace"
+  "UploadPDFFormOptionTitle": "Upload ready PDF form from Docspace",
+  "CreateNewFileTitle": "Create a new file",
+  "CreateNewFileDescription": "Start working in the room by creating files or folders",
+  "UploadDeviceOptionTitle": "Upload from your Device",
+  "UploadDeviceOptionDescription": "Upload any type files from your personal device",
+  "UploadFromDocSpaceTitle": "Upload from DocSpace",
+  "UploadFromDocSpaceDescription": "Upload any type files from Documents or Rooms"
 }

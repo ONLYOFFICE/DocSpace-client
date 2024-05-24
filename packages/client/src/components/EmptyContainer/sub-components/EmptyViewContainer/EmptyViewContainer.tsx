@@ -14,7 +14,9 @@ import {
 } from "./EmptyViewContainer.helpers";
 
 import type {
+  CreateEvent,
   EmptyViewContainerProps,
+  ExtensiontionType,
   UploadType,
 } from "./EmptyViewContainer.types";
 
@@ -27,7 +29,7 @@ const EmptyViewContainer = observer(
     onClickInviteUsers,
     setSelectFileFormRoomDialogVisible,
   }: EmptyViewContainerProps) => {
-    const { t } = useTranslation(["EmptyView"]);
+    const { t } = useTranslation(["EmptyView", "Files", "Common"]);
     const theme = useTheme();
 
     const onUploadAction = useCallback((uploadType: UploadType) => {
@@ -45,36 +47,28 @@ const EmptyViewContainer = observer(
       onClickInviteUsers?.(folderId, type);
     }, [onClickInviteUsers, folderId, type]);
 
-    const createFormFromFile = useCallback(() => {
-      setSelectFileFormRoomDialogVisible?.(
-        true,
-        FilesSelectorFilterTypes.DOCX,
-        true,
-      );
-    }, [setSelectFileFormRoomDialogVisible]);
+    const uploadFromDocspace = useCallback(
+      (filterParam: FilesSelectorFilterTypes, openRoot: boolean = true) => {
+        setSelectFileFormRoomDialogVisible?.(true, filterParam, openRoot);
+      },
+      [setSelectFileFormRoomDialogVisible],
+    );
 
-    const uploadPDFForm = useCallback(() => {
-      setSelectFileFormRoomDialogVisible?.(
-        true,
-        FilesSelectorFilterTypes.PDF,
-        true,
-      );
-    }, [setSelectFileFormRoomDialogVisible]);
+    const onCreate = useCallback(
+      (extension: ExtensiontionType, withoutDialog?: boolean) => {
+        const event: CreateEvent = new Event(Events.CREATE);
 
-    const onCreateDocumentForm = useCallback(() => {
-      const event: Event & {
-        payload?: { extension: string; id: number; withoutDialog: boolean };
-      } = new Event(Events.CREATE);
+        const payload = {
+          id: -1,
+          extension,
+          withoutDialog,
+        };
+        event.payload = payload;
 
-      const payload = {
-        id: -1,
-        extension: "pdf",
-        withoutDialog: true,
-      };
-      event.payload = payload;
-
-      window.dispatchEvent(event);
-    }, []);
+        window.dispatchEvent(event);
+      },
+      [],
+    );
 
     const emptyViewOptions = useMemo(() => {
       const description = getDescription(type, t, access);
@@ -88,9 +82,8 @@ const EmptyViewContainer = observer(
       () =>
         getOptions(type, security!, t, access, {
           inviteUser,
-          createFormFromFile,
-          onCreateDocumentForm,
-          uploadPDFForm,
+          onCreate,
+          uploadFromDocspace,
           onUploadAction,
         }),
       [
@@ -100,10 +93,9 @@ const EmptyViewContainer = observer(
 
         t,
         inviteUser,
-        uploadPDFForm,
+        uploadFromDocspace,
         onUploadAction,
-        createFormFromFile,
-        onCreateDocumentForm,
+        onCreate,
       ],
     );
 

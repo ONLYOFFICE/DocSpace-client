@@ -78,7 +78,7 @@ const EmptyFolderContainer = ({
     [t, canCreateFiles, type],
   );
 
-  if (roomType === RoomsType.FormRoom) {
+  if (isRoom) {
     return <EmptyViewContainer type={roomType} folderId={folderId} />;
   }
 

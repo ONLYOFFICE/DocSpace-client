@@ -27,10 +27,15 @@
 import React from "react";
 
 import styled, { css } from "styled-components";
+
+import TemplateRoomIcon from "PUBLIC_DIR/images/template-room-icon.react.svg?url";
+import { ReactSVG } from "react-svg";
+
 import { Base } from "../../themes";
 import { Text } from "../text";
 
 import { IconButton } from "../icon-button";
+import { classNames } from "../../utils";
 
 const StyledIcon = styled.div<{
   size: string;
@@ -100,6 +105,47 @@ const StyledIcon = styled.div<{
   }
 `;
 
+const StyledTemplateIcon = styled.div<{
+  size: string;
+  isArchive?: boolean;
+  color?: string;
+}>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: ${(props) => props.size};
+  width: ${(props) => props.size};
+
+  .room-icon-svg {
+    position: absolute;
+
+    height: ${(props) => props.size};
+    width: ${(props) => props.size};
+
+    svg path {
+      fill: ${(props) =>
+        props.isArchive
+          ? props.theme.roomIcon.backgroundArchive
+          : `#${props.color}`};
+    }
+  }
+
+  .room-title {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 16px;
+    color: ${({ isArchive, color, theme }) =>
+      isArchive ? theme.roomIcon.backgroundArchive : `#${color}`};
+    position: relative;
+  }
+
+  .room-image {
+    width: 24px;
+    height: 24px;
+  }
+`;
+
 StyledIcon.defaultProps = { theme: Base };
 
 // interface RoomIconProps {
@@ -117,6 +163,7 @@ StyledIcon.defaultProps = { theme: Base };
 type RoomIconDefault = {
   title: string;
   isArchive?: boolean;
+  isTemplate?: boolean;
   size?: string;
   radius?: string;
   showDefault: boolean;
@@ -156,6 +203,7 @@ const RoomIcon = ({
   badgeUrl,
   onBadgeClick,
   className,
+  isTemplate = false,
 }: RoomIconProps) => {
   const [correctImage, setCorrectImage] = React.useState(true);
 
@@ -182,6 +230,29 @@ const RoomIcon = ({
   React.useEffect(() => {
     prefetchImage();
   }, [prefetchImage]);
+
+  if (isTemplate) {
+    return (
+      <StyledTemplateIcon
+        size={size}
+        color={color}
+        isArchive={isArchive}
+        className={className}
+        data-testid="room-icon"
+      >
+        <ReactSVG className="room-icon-svg" src={TemplateRoomIcon} />
+        {correctImage ? (
+          <img
+            className={classNames([imgClassName, "room-image"])}
+            src={imgSrc}
+            alt="room icon"
+          />
+        ) : (
+          <Text className="room-title">{roomTitle}</Text>
+        )}
+      </StyledTemplateIcon>
+    );
+  }
 
   return (
     <StyledIcon

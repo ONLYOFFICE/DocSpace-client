@@ -90,6 +90,7 @@ const ItemIcon = ({
   color,
   isArchive,
   badgeUrl,
+  isTemplate,
 }) => {
   const isLoadedRoomIcon = !!logo?.medium;
   const showDefaultRoomIcon = !isLoadedRoomIcon && isRoom;
@@ -101,6 +102,7 @@ const ItemIcon = ({
           color={color}
           title={title}
           isArchive={isArchive}
+          isTemplate={isTemplate}
           showDefault={showDefaultRoomIcon}
           imgClassName="react-svg-icon"
           imgSrc={isRoom ? logo?.medium : icon}

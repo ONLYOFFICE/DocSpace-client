@@ -354,9 +354,9 @@ const ArticleMainButtonContent = (props) => {
       const showSelectorFormRoomDocx = {
         id: "actions_form-room_template_from-file",
         className: "main-button_drop-down_sub",
-        icon: FormFileReactSvgUrl,
+        icon: FormGalleryReactSvgUrl,
         label: t("Common:ChooseFromTemplates"),
-        onClick: () => onShowFormRoomSelectFileDialog(),
+        onClick: () => onShowGallery(),
         disabled: isPrivacy,
         key: "form-file",
       };

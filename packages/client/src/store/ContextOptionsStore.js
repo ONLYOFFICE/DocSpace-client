@@ -1996,25 +1996,34 @@ class ContextOptionsStore {
   };
 
   getContextOptionsPlusFormRoom = (t, actions) => {
-    const {
-      createTemplateForm,
-      createTemplateSelectFormFile,
-      templateOformsGallery,
-      createNewFolder,
-      createNewDoc,
-      createNewPresentation,
-      createNewSpreadsheet,
-      uploadFiles,
-      uploadFolder,
-    } = actions;
+    // const {
+    //   // createTemplateForm,
+    //   // createTemplateSelectFormFile,
+    //   // templateOformsGallery,
+    //   // createNewFolder,
+    //   // createNewDoc,
+    //   // createNewPresentation,
+    //   // createNewSpreadsheet,
+    //   // uploadFiles,
+    //   // uploadFolder,
+    // } = actions;
 
-    const templatePDFForm = {
-      id: "personal_template-PDF-form",
-      className: "main-button_drop-down",
-      icon: FormReactSvgUrl,
-      label: t("Common:CreatePDFForm"),
-      key: "new-form",
-      items: [createTemplateForm, createTemplateSelectFormFile],
+    // const templatePDFForm = {
+    //   id: "personal_template-PDF-form",
+    //   className: "main-button_drop-down",
+    //   icon: FormReactSvgUrl,
+    //   label: t("Common:CreatePDFForm"),
+    //   key: "new-form",
+    //   items: [createTemplateForm, createTemplateSelectFormFile],
+    // };
+
+    const showSelectorFormRoomDocx = {
+      id: "actions_form-room_template_from-file",
+      className: "main-button_drop-down_sub",
+      icon: FormGalleryReactSvgUrl,
+      label: t("Common:ChooseFromTemplates"),
+      onClick: () => this.onShowGallery(),
+      key: "form-file",
     };
 
     const uploadReadyPDFFrom = {
@@ -2044,44 +2053,55 @@ class ContextOptionsStore {
       ],
     };
 
-    const moreActions = {
-      id: "personal_more-form",
+    const createNewFolder = {
+      id: "actions_new-folder",
       className: "main-button_drop-down",
-      icon: PluginMoreReactSvgUrl,
-      label: t("Common:More"),
-      disabled: false,
-      key: "more-form",
-      items: [
-        createNewFolder,
-        {
-          isSeparator: true,
-          key: "personal_more-form__separator-1",
-        },
-        createNewDoc,
-        createNewPresentation,
-        createNewSpreadsheet,
-        {
-          isSeparator: true,
-          key: "personal_more-form__separator-2",
-        },
-        uploadFiles,
-        uploadFolder,
-      ],
+      icon: CatalogFolderReactSvgUrl,
+      label: t("Files:CreateNewFolder"),
+      onClick: () => this.onCreate(),
+      key: "new-folder",
     };
 
+    // const moreActions = {
+    //   id: "personal_more-form",
+    //   className: "main-button_drop-down",
+    //   icon: PluginMoreReactSvgUrl,
+    //   label: t("Common:More"),
+    //   disabled: false,
+    //   key: "more-form",
+    //   items: [
+    //     createNewFolder,
+    //     {
+    //       isSeparator: true,
+    //       key: "personal_more-form__separator-1",
+    //     },
+    //     createNewDoc,
+    //     createNewPresentation,
+    //     createNewSpreadsheet,
+    //     {
+    //       isSeparator: true,
+    //       key: "personal_more-form__separator-2",
+    //     },
+    //     uploadFiles,
+    //     uploadFolder,
+    //   ],
+    // };
+
     return [
-      templatePDFForm,
-      templateOformsGallery,
-      {
-        isSeparator: true,
-        key: "separator",
-      },
       uploadReadyPDFFrom,
+      showSelectorFormRoomDocx,
+      // templateOformsGallery,
+      // templatePDFForm,
+      // {
+      //   isSeparator: true,
+      //   key: "separator",
+      // },
       {
         isSeparator: true,
         key: "separator-1",
       },
-      moreActions,
+      createNewFolder,
+      // moreActions,
     ];
   };
 

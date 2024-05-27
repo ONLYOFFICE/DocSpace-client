@@ -24,83 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import {
-  mobile,
-  tablet,
-  getCorrectBorderRadius,
-  getCorrectFourValuesStyle,
-} from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
 import CrossIconSvgUrl from "PUBLIC_DIR/images/cross.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
-
-const StyledTableIndexMenu = styled.div`
-  position: relative;
-
-  background: ${(props) => props.theme.tableContainer.groupMenu.background};
-  border-bottom: ${(props) =>
-    props.theme.tableContainer.groupMenu.borderBottom};
-  box-shadow: ${(props) => props.theme.tableContainer.groupMenu.boxShadow};
-  border-radius: ${({ theme }) =>
-    getCorrectBorderRadius("0px 0px 6px 6px", theme.interfaceDirection)};
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-
-  width: 100%;
-  margin: 0px 0px 0px -20px;
-  padding: 0 20px 0 20px;
-  height: 68px;
-
-  z-index: 199;
-
-  @media ${tablet} {
-    height: 60px;
-  }
-  @media ${mobile} {
-    height: 48px;
-    padding: 0px 18px;
-  }
-
-  .table-header_index-separator {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? `border-left: ${props.theme.tableContainer.groupMenu.borderRight};`
-        : `border-right: ${props.theme.tableContainer.groupMenu.borderRight};`}
-    width: 1px;
-    height: 21px;
-    margin: ${({ theme }) =>
-      getCorrectFourValuesStyle("0 16px 0 20px", theme.interfaceDirection)};
-
-    @media ${tablet} {
-      height: 36px;
-    }
-
-    @media ${mobile} {
-      height: 20px;
-    }
-  }
-
-  .table-header_reorder-icon {
-    margin-right: 8px;
-  }
-
-  .table-header_index-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .table-header_reorder-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-`;
+import { StyledTableIndexMenu } from "./StyledIndexHeader";
 
 const TableIndexHeader = ({
   setIsIndexEditingMode,
@@ -138,7 +66,7 @@ const TableIndexHeader = ({
         size="16"
         onClick={() => setIsIndexEditingMode(false)}
         iconName={CrossIconSvgUrl}
-        isFill={true}
+        isFill
         isClickable={false}
       />
     </StyledTableIndexMenu>

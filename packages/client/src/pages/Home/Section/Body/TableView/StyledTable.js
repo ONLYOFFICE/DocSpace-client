@@ -104,25 +104,6 @@ const StyledTableRow = styled(TableRow)`
         position: relative;
       `}
   }
-  
-   .table-container_file-name-cell {
-    
-    .table-container-index {
-      background: ${(props) => `${props.theme.filesSection.tableView.row.indexFixed} !important`};
-    }
-
-  } 
-
-   &:hover {
-    .table-container_file-name-cell {
-    
-    .table-container-index {
-      background: ${(props) => `${props.theme.filesSection.tableView.row.indexFixed} !important`};
-    }
-
-    }
-    } 
-
 
   ${(props) =>
     props.isRoom &&
@@ -139,8 +120,10 @@ const StyledTableRow = styled(TableRow)`
       :hover {
         .table-container_cell {
           cursor: pointer;
-          background: ${(props) => props.isIndexEditingMode ?
-            `${props.theme.filesSection.tableView.row.indexActive} !important` : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+          background: ${(props) =>
+            props.isIndexEditingMode
+              ? `${props.theme.filesSection.tableView.row.indexActive} !important`
+              : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
         }
         .table-container_file-name-cell,
         .table-container_index-cell {
@@ -177,12 +160,11 @@ const StyledTableRow = styled(TableRow)`
       .table-container_cell {
         cursor: pointer;
         background: ${(props) =>
-          `${props.theme.filesSection.tableView.row.indexUpdate} !important`};
+          props.isIndexEditingMode
+            ? `${props.theme.filesSection.tableView.row.indexActive} !important`
+            : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
       }
-      .table-container_file-name-cell {
-        margin-right: 0px;
-        padding-right: 0px;
-      }
+      .table-container_file-name-cell,
       .table-container_index-cell {
         ${(props) =>
           props.theme.interfaceDirection === "rtl"
@@ -201,11 +183,11 @@ const StyledTableRow = styled(TableRow)`
           props.theme.interfaceDirection === "rtl"
             ? css`
                 margin-left: -20px;
-                padding-left: 20px;
+                padding-left: 20px !important;
               `
             : css`
                 margin-right: -20px;
-                padding-right: 20px;
+                padding-right: 20px !important;
               `}
       }
     `}

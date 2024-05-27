@@ -29,7 +29,7 @@ import React from "react";
 import InfiniteLoader from "react-window-infinite-loader";
 import { FixedSizeList as List } from "react-window";
 
-import { CustomScrollbarsVirtualList, Scrollbar } from "../../scrollbar";
+import { Scrollbar } from "../../scrollbar";
 import { Text } from "../../text";
 
 import { Search } from "./Search";
@@ -41,6 +41,7 @@ import { StyledBody, StyledTabs } from "../Selector.styled";
 import { BodyProps } from "../Selector.types";
 import { Item } from "./Item";
 import { Info } from "./Info";
+import { VirtualScroll } from "./VirtualScroll";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
@@ -268,7 +269,7 @@ const Body = ({
                   itemSize={48}
                   onItemsRendered={onItemsRendered}
                   ref={ref}
-                  outerElementType={CustomScrollbarsVirtualList}
+                  outerElementType={VirtualScroll}
                 >
                   {Item}
                 </List>

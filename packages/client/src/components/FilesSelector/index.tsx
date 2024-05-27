@@ -56,7 +56,7 @@ import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import { FilesSelectorProps } from "./FilesSelector.types";
 import { getAcceptButtonLabel, getHeaderLabel, getIsDisabled } from "./utils";
 
-const disabledItems: (string | number)[] = [];
+let disabledItems: (string | number)[] = [];
 
 const FilesSelectorWrapper = ({
   isPanelVisible = false,
@@ -176,6 +176,12 @@ const FilesSelectorWrapper = ({
     (name: string) => t("Common:ArchivedRoomAction", { name }),
     [t],
   );
+
+  React.useEffect(() => {
+    return () => {
+      disabledItems = [];
+    };
+  }, []);
 
   const onAccept = async (
     selectedItemId: string | number | undefined,

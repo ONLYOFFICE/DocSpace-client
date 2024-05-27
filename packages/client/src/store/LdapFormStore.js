@@ -8,6 +8,7 @@ import {
   getCronLdap,
 } from "@docspace/shared/api/settings";
 import { getNextSynchronization } from "@docspace/shared/components/cron";
+import { EmployeeType } from "@docspace/shared/enums";
 import { makeAutoObservable } from "mobx";
 
 const constants = {
@@ -138,6 +139,7 @@ class LdapFormStore {
       mail: MailAttribute,
       avatarAttribute: AvatarAttribute,
       userQuotaLimit: UserQuotaLimit,
+      userType: EmployeeType.Collaborator,
     };
 
     this.authentication = authentication;
@@ -208,6 +210,10 @@ class LdapFormStore {
 
   setUserQuotaLimit = (userQuotaLimit) => {
     this.requiredSettings.userQuotaLimit = userQuotaLimit;
+  };
+
+  setUserType = (userType) => {
+    this.requiredSettings.userType = userType;
   };
 
   setLogin = (login) => {
@@ -346,6 +352,7 @@ class LdapFormStore {
       login: this.login,
       password: this.password,
       acceptCertificate: this.acceptCertificate,
+      usersType: this.requiredSettings.userType,
     };
 
     console.log({ settings });

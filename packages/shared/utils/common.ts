@@ -1088,6 +1088,8 @@ export function setLanguageForUnauthorized(culture: string) {
     "max-age": COOKIE_EXPIRATION_YEAR,
   });
 
+  if (!window) return;
+
   const url = new URL(window.location.href);
   const prevCulture = url.searchParams.get("culture");
 

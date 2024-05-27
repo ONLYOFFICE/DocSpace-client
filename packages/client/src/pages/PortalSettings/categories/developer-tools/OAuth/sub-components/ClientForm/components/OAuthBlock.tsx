@@ -1,16 +1,24 @@
 import React from "react";
+
+import { TTranslation } from "@docspace/shared/types";
+import { IClientReqDTO } from "@docspace/shared/utils/oauth/interfaces";
+
 import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
 
 import BlockHeader from "./BlockHeader";
 import MultiInputGroup from "./MultiInputGroup";
 
 interface OAuthBlockProps {
-  t: any;
+  t: TTranslation;
 
   redirectUrisValue: string[];
   allowedOriginsValue: string[];
 
-  changeValue: (name: string, value: string) => void;
+  changeValue: (
+    name: keyof IClientReqDTO,
+    value: string,
+    remove?: boolean,
+  ) => void;
   requiredErrorFields: string[];
 
   isEdit: boolean;
@@ -33,7 +41,7 @@ const OAuthBlock = ({
           t={t}
           label={t("RedirectsURLS")}
           placeholder={t("EnterURL")}
-          name={"redirect_uris"}
+          name="redirect_uris"
           onAdd={changeValue}
           currentValue={redirectUrisValue}
           helpButtonText={t("RedirectsURLSHelpButton")}
@@ -44,7 +52,7 @@ const OAuthBlock = ({
           t={t}
           label={t("AllowedOrigins")}
           placeholder={t("EnterURL")}
-          name={"allowed_origins"}
+          name="allowed_origins"
           onAdd={changeValue}
           currentValue={allowedOriginsValue}
           helpButtonText={t("AllowedOriginsHelpButton")}

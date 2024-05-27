@@ -35,7 +35,6 @@ const ButtonsBlock = ({
   return (
     <StyledButtonContainer>
       <Button
-        // @ts-ignore
         label={saveLabel}
         isLoading={isRequestRunning}
         isDisabled={saveButtonDisabled}
@@ -46,7 +45,6 @@ const ButtonsBlock = ({
       />
 
       <Button
-        // @ts-ignore
         label={cancelLabel}
         isDisabled={cancelButtonDisabled}
         size={buttonSize}

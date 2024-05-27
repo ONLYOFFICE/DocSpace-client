@@ -2,41 +2,35 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 import {
   addClient,
-  getClient,
   updateClient,
   changeClientStatus,
   regenerateSecret,
   deleteClient,
   getClientList,
-  getScope,
   getScopeList,
   getConsentList,
   revokeUserClient,
 } from "@docspace/shared/api/oauth";
-
 import {
   IClientListProps,
   IClientProps,
   IClientReqDTO,
-  INoAuthClientProps,
   IScope,
 } from "@docspace/shared/utils/oauth/interfaces";
-
 import { toastr } from "@docspace/shared/components/toast";
+import { AuthenticationMethod } from "@docspace/shared/enums";
+import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { UserStore } from "@docspace/shared/store/UserStore";
+import { TTranslation } from "@docspace/shared/types";
 
-import SettingsIcon from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
-import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
 import EnableReactSvgUrl from "PUBLIC_DIR/images/enable.react.svg?url";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 import OauthRevokeSvgUrl from "PUBLIC_DIR/images/oauth.revoke.svg?url";
-import { transformToClientProps } from "@docspace/shared/utils/oauth";
-import { AuthenticationMethod } from "@docspace/shared/enums";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
-import { UserStore } from "@docspace/shared/store/UserStore";
-import { TTranslation } from "@docspace/shared/types";
+import SettingsIcon from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
+import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
 
 const PAGE_LIMIT = 100;
 
@@ -76,9 +70,7 @@ export interface OAuthStoreProps {
   editClient: (clientId: string) => void;
 
   clients: IClientProps[];
-  fetchClient: (
-    clientId: string
-  ) => Promise<IClientProps | INoAuthClientProps | undefined>;
+
   fetchClients: () => Promise<void>;
   fetchNextClients: (startIndex: number) => Promise<void>;
 
@@ -113,17 +105,14 @@ export interface OAuthStoreProps {
   setActiveClient: (clientId: string) => void;
 
   scopes: IScope[];
-  fetchScope: (name: string) => Promise<IScope>;
   fetchScopes: () => Promise<void>;
 
   getContextMenuItems: (
     t: TTranslation,
     item: IClientProps,
     isInfo?: boolean,
-    isSettings?: boolean
-  ) => {
-    [key: string]: any | string | boolean | ((clientId: string) => void);
-  }[];
+    isSettings?: boolean,
+  ) => ContextMenuModel[];
 
   clientList: IClientProps[];
   isEmptyClientList: boolean;
@@ -137,13 +126,19 @@ class OAuthStore implements OAuthStoreProps {
   viewAs: ViewAsType = "table";
 
   currentPage: number = 0;
+
   nextPage: number | null = null;
+
   itemCount: number = 0;
 
   infoDialogVisible: boolean = false;
+
   previewDialogVisible: boolean = false;
+
   disableDialogVisible: boolean = false;
+
   deleteDialogVisible: boolean = false;
+
   resetDialogVisible: boolean = false;
 
   selection: string[] = [];
@@ -210,12 +205,10 @@ class OAuthStore implements OAuthStoreProps {
   setSelection = (clientId: string) => {
     if (!clientId) {
       this.selection = [];
+    } else if (this.selection.includes(clientId)) {
+      this.selection = this.selection.filter((s) => s !== clientId);
     } else {
-      if (this.selection.includes(clientId)) {
-        this.selection = this.selection.filter((s) => s !== clientId);
-      } else {
-        this.selection.push(clientId);
-      }
+      this.selection.push(clientId);
     }
   };
 
@@ -239,34 +232,20 @@ class OAuthStore implements OAuthStoreProps {
   setActiveClient = (clientId: string) => {
     if (!clientId) {
       this.activeClients = [];
+    } else if (this.activeClients.includes(clientId)) {
+      this.activeClients = this.activeClients.filter((s) => s !== clientId);
     } else {
-      if (this.activeClients.includes(clientId)) {
-        this.activeClients = this.activeClients.filter((s) => s !== clientId);
-      } else {
-        this.activeClients.push(clientId);
-      }
+      this.activeClients.push(clientId);
     }
   };
 
   editClient = (clientId: string) => {
     this.setInfoDialogVisible(false);
     this.setPreviewDialogVisible(false);
-    //@ts-ignore
+
     window?.DocSpace?.navigate(
-      `/portal-settings/developer-tools/oauth/${clientId}`
+      `/portal-settings/developer-tools/oauth/${clientId}`,
     );
-  };
-
-  fetchClient = async (clientId: string) => {
-    try {
-      const client = await getClient(clientId);
-
-      return client;
-    } catch (e: unknown) {
-      const err = e as TData;
-      toastr.error(err);
-      console.log(e);
-    }
   };
 
   fetchClients = async () => {
@@ -275,10 +254,11 @@ class OAuthStore implements OAuthStoreProps {
       const clientList: IClientListProps = await getClientList(0, PAGE_LIMIT);
 
       runInAction(() => {
-        this.clients = [...this.clients, ...clientList.content];
+        this.clients = [...clientList.content];
         this.selection = [];
         this.currentPage = clientList.page;
         this.nextPage = clientList.next || null;
+
         if (clientList.next) {
           this.itemCount = clientList.content.length + 2;
         } else {
@@ -289,7 +269,6 @@ class OAuthStore implements OAuthStoreProps {
     } catch (e) {
       const err = e as TData;
       toastr.error(err);
-      console.log(e);
     }
   };
 
@@ -303,7 +282,6 @@ class OAuthStore implements OAuthStoreProps {
     } catch (e) {
       const err = e as TData;
       toastr.error(err);
-      console.log(e);
     }
   };
 
@@ -320,7 +298,7 @@ class OAuthStore implements OAuthStoreProps {
 
     const clientList: IClientListProps = await getClientList(
       this.nextPage || page,
-      PAGE_LIMIT
+      PAGE_LIMIT,
     );
 
     runInAction(() => {
@@ -350,7 +328,6 @@ class OAuthStore implements OAuthStoreProps {
     } catch (e) {
       const err = e as TData;
       toastr.error(err);
-      console.log(e);
     }
   };
 
@@ -383,7 +360,6 @@ class OAuthStore implements OAuthStoreProps {
     } catch (e) {
       const err = e as TData;
       toastr.error(err);
-      console.log(e);
     }
   };
 
@@ -401,21 +377,19 @@ class OAuthStore implements OAuthStoreProps {
     } catch (e) {
       const err = e as TData;
       toastr.error(err);
-      console.log(e);
     }
   };
 
   regenerateSecret = async (clientId: string) => {
     try {
-      const { client_secret } = await regenerateSecret(clientId);
+      const { client_secret: clientSecret } = await regenerateSecret(clientId);
 
-      this.setClientSecret(client_secret);
+      this.setClientSecret(clientSecret);
 
-      return client_secret;
+      return clientSecret;
     } catch (e) {
       const err = e as TData;
       toastr.error(err);
-      console.log(e);
     }
   };
 
@@ -432,7 +406,7 @@ class OAuthStore implements OAuthStoreProps {
 
       runInAction(() => {
         this.clients = this.clients.filter(
-          (c) => !clientsId.includes(c.clientId)
+          (c) => !clientsId.includes(c.clientId),
         );
       });
 
@@ -440,21 +414,6 @@ class OAuthStore implements OAuthStoreProps {
     } catch (e) {
       const err = e as TData;
       toastr.error(err);
-      console.log(e);
-    }
-  };
-
-  fetchScope = async (name: string) => {
-    try {
-      const scope = await getScope(name);
-
-      return scope;
-    } catch (e) {
-      const err = e as TData;
-      toastr.error(err);
-      console.log(e);
-
-      return {} as IScope;
     }
   };
 
@@ -466,7 +425,6 @@ class OAuthStore implements OAuthStoreProps {
     } catch (e) {
       const err = e as TData;
       toastr.error(err);
-      console.log(e);
     }
   };
 
@@ -483,7 +441,7 @@ class OAuthStore implements OAuthStoreProps {
 
       runInAction(() => {
         this.consents = this.consents.filter(
-          (c) => !clientsId.includes(c.clientId)
+          (c) => !clientsId.includes(c.clientId),
         );
       });
 
@@ -491,15 +449,14 @@ class OAuthStore implements OAuthStoreProps {
     } catch (e) {
       const err = e as TData;
       toastr.error(err);
-      console.log(e);
     }
   };
 
   getContextMenuItems = (
-    t: any,
+    t: TTranslation,
     item: IClientProps,
     isInfo?: boolean,
-    isSettings: boolean = true
+    isSettings: boolean = true,
   ) => {
     const { clientId } = item;
 
@@ -558,7 +515,7 @@ class OAuthStore implements OAuthStoreProps {
     ];
 
     if (!isSettings) {
-      const items: any = [];
+      const items: ContextMenuModel[] = [];
 
       if (!isGroupContext) {
         items.push(openOption);
@@ -626,7 +583,7 @@ class OAuthStore implements OAuthStoreProps {
         this.setActiveClient("");
         this.setSelection("");
 
-        //TODO OAuth, show toast
+        // TODO OAuth, show toast
       }
     };
 

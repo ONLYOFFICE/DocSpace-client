@@ -17,14 +17,14 @@ const BlockHeader = ({
   return (
     <StyledHeaderRow className={className}>
       <Text
-        fontSize={"16px"}
+        fontSize="16px"
         fontWeight={700}
-        lineHeight={"22px"}
+        lineHeight="22px"
         title={header}
-        tag={""}
-        as={"p"}
-        color={""}
-        textAlign={""}
+        tag=""
+        as="p"
+        color=""
+        textAlign=""
       >
         {header}
       </Text>

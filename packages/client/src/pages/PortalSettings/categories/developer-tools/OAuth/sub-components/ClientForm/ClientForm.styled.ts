@@ -89,6 +89,10 @@ const StyledInputGroup = styled.div`
     gap: 0px;
   }
 
+  .label {
+    height: 20px;
+  }
+
   .select {
     display: flex;
     flex-direction: row;
@@ -129,6 +133,8 @@ StyledInputGroup.defaultProps = { theme: Base };
 
 const StyledInputRow = styled.div`
   width: 100%;
+
+  position: relative;
 
   display: flex;
   flex-direction: row;
@@ -224,6 +230,63 @@ const StyledButtonContainer = styled.div`
   }
 `;
 
+const StyledInputAddBlock = styled.div`
+  width: calc(100% - 40px);
+  height: 44px;
+
+  padding: 0 6px;
+
+  box-sizing: border-box;
+
+  cursor: pointer;
+
+  z-index: 200;
+
+  display: none;
+
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  background: ${(props) => props.theme.backgroundColor};
+
+  position: absolute;
+  top: 40px;
+  left: 0px;
+
+  border-radius: 3px;
+  border: 1px solid #d0d5da;
+
+  box-shadow: ${(props) => props.theme.navigation.boxShadow};
+
+  .add-block {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    p {
+      color: #4781d1;
+    }
+
+    svg path {
+      fill: #4781d1;
+    }
+  }
+`;
+
+const StyledCheckboxGroup = styled.div`
+  width: 100%;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 4px;
+`;
+
 export {
   StyledContainer,
   StyledBlock,
@@ -236,4 +299,6 @@ export {
   StyledScopesName,
   StyledScopesCheckbox,
   StyledButtonContainer,
+  StyledInputAddBlock,
+  StyledCheckboxGroup,
 };

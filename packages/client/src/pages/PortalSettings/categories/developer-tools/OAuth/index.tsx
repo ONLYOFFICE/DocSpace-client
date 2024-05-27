@@ -1,12 +1,11 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-//@ts-ignore
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-//@ts-ignore
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
-//@ts-ignore
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import OAuthEmptyScreen from "./sub-components/EmptyScreen";
@@ -19,7 +18,6 @@ import PreviewDialog from "./sub-components/PreviewDialog";
 import OAuthLoader from "./sub-components/List/Loader";
 import DisableDialog from "./sub-components/DisableDialog";
 import DeleteDialog from "./sub-components/DeleteDialog";
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 const MIN_LOADER_TIME = 500;
 
@@ -55,7 +53,7 @@ const OAuth = ({
       const currentDate = new Date();
 
       const ms = Math.abs(
-        startLoadingRef.current.getTime() - currentDate.getTime()
+        startLoadingRef.current.getTime() - currentDate.getTime(),
       );
 
       if (ms < MIN_LOADER_TIME)
@@ -147,5 +145,5 @@ export default inject(
       disableDialogVisible,
       deleteDialogVisible,
     };
-  }
+  },
 )(observer(OAuth));

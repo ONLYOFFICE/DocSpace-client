@@ -1,6 +1,7 @@
 import React from "react";
 
 import {
+  IClientReqDTO,
   IFilteredScopes,
   IScope,
 } from "@docspace/shared/utils/oauth/interfaces";
@@ -9,7 +10,7 @@ import {
   getScopeTKeyName,
 } from "@docspace/shared/utils/oauth";
 import { ScopeGroup, ScopeType } from "@docspace/shared/enums";
-
+import { TTranslation } from "@docspace/shared/types";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
@@ -24,8 +25,8 @@ import {
 interface IScopesBlockProps {
   scopes: IScope[];
   selectedScopes: string[];
-  onAddScope: (name: string, scope: string) => void;
-  t: any;
+  onAddScope: (name: keyof IClientReqDTO, scope: string) => void;
+  t: TTranslation;
   isEdit: boolean;
 }
 
@@ -38,7 +39,7 @@ const ScopesBlock = ({
 }: IScopesBlockProps) => {
   const [checkedScopes, setCheckedScopes] = React.useState<string[]>([]);
   const [filteredScopes, setFilteredScopes] = React.useState<IFilteredScopes>(
-    filterScopeByGroup(selectedScopes, scopes)
+    filterScopeByGroup(selectedScopes, scopes),
   );
 
   React.useEffect(() => {
@@ -46,12 +47,12 @@ const ScopesBlock = ({
 
     setCheckedScopes([...selectedScopes]);
     setFilteredScopes({ ...filtered });
-  }, [selectedScopes]);
+  }, [scopes, selectedScopes]);
 
   const onAddCheckedScope = (
     group: ScopeGroup,
     type: ScopeType,
-    name: string = ""
+    name: string = "",
   ) => {
     const isChecked = checkedScopes.includes(name);
 
@@ -74,7 +75,7 @@ const ScopesBlock = ({
       } else {
         setFilteredScopes((val) => {
           const isReadChecked = checkedScopes.includes(
-            val[group].read?.name || ""
+            val[group].read?.name || "",
           );
 
           val[group].isChecked = isReadChecked;
@@ -91,67 +92,63 @@ const ScopesBlock = ({
   };
 
   const getRenderedScopeList = () => {
-    const list = [];
+    const list: React.ReactNode[] = [];
 
-    for (let key in filteredScopes) {
+    Object.entries(filteredScopes).forEach(([key, value]) => {
       const name = getScopeTKeyName(key as ScopeGroup);
 
-      const scope = filteredScopes[key];
-
-      const isReadDisabled = scope.checkedType === ScopeType.write;
-      const isReadChecked = scope.isChecked;
+      const isReadDisabled = value.checkedType === ScopeType.write;
+      const isReadChecked = value.isChecked;
 
       const row = (
         <React.Fragment key={name}>
           <StyledScopesName>
             <Text
               className="scope-name"
-              fontSize={"14px"}
+              fontSize="14px"
               fontWeight={600}
-              lineHeight={"16px"}
+              lineHeight="16px"
             >
               {t(`Common:${name}`)}
             </Text>
 
-            {scope.read?.name && (
+            {value.read?.name && (
               <Text
-                className={"scope-desc"}
-                fontSize={"12px"}
+                className="scope-desc"
+                fontSize="12px"
                 fontWeight={400}
-                lineHeight={"16px"}
+                lineHeight="16px"
               >
                 <Text
-                  className={"scope-desc"}
-                  as={"span"}
-                  fontSize={"12px"}
+                  className="scope-desc"
+                  as="span"
+                  fontSize="12px"
                   fontWeight={600}
-                  lineHeight={"16px"}
+                  lineHeight="16px"
                 >
-                  {scope.read?.name}
+                  {value.read?.name}
                 </Text>{" "}
-                — {t(`Common:${scope.read?.tKey}`)}
+                — {t(`Common:${value.read?.tKey}`)}
               </Text>
             )}
-            {scope.write?.name && (
-              <>
+            {value.write?.name && (
+              <Text
+                className="scope-desc"
+                fontSize="12px"
+                fontWeight={400}
+                lineHeight="16px"
+              >
                 <Text
-                  className={"scope-desc"}
-                  fontSize={"12px"}
-                  fontWeight={400}
-                  lineHeight={"16px"}
+                  className="scope-desc"
+                  as="span"
+                  fontSize="12px"
+                  fontWeight={600}
+                  lineHeight="16px"
                 >
-                  <Text
-                    className={"scope-desc"}
-                    as={"span"}
-                    fontSize={"12px"}
-                    fontWeight={600}
-                    lineHeight={"16px"}
-                  >
-                    {scope.write?.name}
-                  </Text>{" "}
-                  — {t(`Common:${scope.write?.tKey}`)}
-                </Text>
-              </>
+                  {value.write?.name}
+                </Text>{" "}
+                — {t(`Common:${value.write?.tKey}`)}
+              </Text>
             )}
           </StyledScopesName>
           <StyledScopesCheckbox>
@@ -163,21 +160,21 @@ const ScopesBlock = ({
                 onAddCheckedScope(
                   key as ScopeGroup,
                   ScopeType.read,
-                  scope.read?.name
+                  value.read?.name,
                 )
               }
             />
           </StyledScopesCheckbox>
           <StyledScopesCheckbox>
-            {scope.write?.name && (
+            {value.write?.name && (
               <Checkbox
                 isChecked={isReadDisabled}
-                isDisabled={isEdit || !scope.write?.name}
+                isDisabled={isEdit || !value.write?.name}
                 onChange={() =>
                   onAddCheckedScope(
                     key as ScopeGroup,
                     ScopeType.write,
-                    scope.write?.name
+                    value.write?.name,
                   )
                 }
               />
@@ -187,7 +184,8 @@ const ScopesBlock = ({
       );
 
       list.push(row);
-    }
+    });
+
     return list;
   };
 
@@ -203,18 +201,18 @@ const ScopesBlock = ({
 
       <Text
         className="header"
-        fontSize={"14px"}
+        fontSize="14px"
         fontWeight={600}
-        lineHeight={"22px"}
+        lineHeight="22px"
       >
         {t("Read")}
       </Text>
 
       <Text
         className="header header-last"
-        fontSize={"14px"}
+        fontSize="14px"
         fontWeight={600}
-        lineHeight={"22px"}
+        lineHeight="22px"
       >
         {t("Write")}
       </Text>

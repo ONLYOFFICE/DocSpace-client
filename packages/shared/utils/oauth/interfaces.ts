@@ -23,6 +23,25 @@ export interface INoAuthClientProps {
   policyUrl?: string;
   termsUrl?: string;
   scopes?: string[];
+
+  clientId?: undefined;
+  clientSecret?: undefined;
+  description?: undefined;
+
+  authenticationMethods?: undefined;
+  tenant?: undefined;
+  redirectUris?: undefined;
+  logoutRedirectUri?: undefined;
+  enabled?: undefined;
+  invalidated?: undefined;
+
+  allowedOrigins?: undefined;
+  createdOn?: undefined;
+  modifiedOn?: undefined;
+  createdBy?: undefined;
+  modifiedBy?: undefined;
+  creatorAvatar?: undefined;
+  creatorDisplayName?: undefined;
 }
 
 export interface IClientProps {
@@ -42,7 +61,6 @@ export interface IClientProps {
   scopes: string[];
   websiteUrl: string;
   allowedOrigins: string[];
-
   createdOn?: Date;
   modifiedOn?: Date;
   createdBy?: string;

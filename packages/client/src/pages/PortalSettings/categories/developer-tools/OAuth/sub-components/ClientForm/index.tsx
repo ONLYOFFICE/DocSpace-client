@@ -6,8 +6,12 @@ import { useTranslation } from "react-i18next";
 import {
   IClientProps,
   IClientReqDTO,
+  INoAuthClientProps,
 } from "@docspace/shared/utils/oauth/interfaces";
 import { AuthenticationMethod } from "@docspace/shared/enums";
+import { toastr } from "@docspace/shared/components/toast";
+import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { getClient } from "@docspace/shared/api/oauth";
 
 import ResetDialog from "../ResetDialog";
 
@@ -19,18 +23,10 @@ import ScopesBlock from "./components/ScopesBlock";
 import ButtonsBlock from "./components/ButtonsBlock";
 
 import { StyledContainer } from "./ClientForm.styled";
-
 import { ClientFormProps, ClientStore } from "./ClientForm.types";
-import ClientFormLoader from "./Loader";
+import { isValidUrl } from "./ClientForm.utils";
 
-export function isValidUrl(url: string) {
-  try {
-    new URL(url);
-    return true;
-  } catch (err) {
-    return false;
-  }
-}
+import ClientFormLoader from "./Loader";
 
 const ClientForm = ({
   id,
@@ -39,17 +35,16 @@ const ClientForm = ({
 
   scopeList,
 
-  fetchClient,
   fetchScopes,
 
   saveClient,
   updateClient,
 
-  setResetDialogVisible,
   resetDialogVisible,
+  setResetDialogVisible,
 
-  setClientSecretProps,
   clientSecretProps,
+  setClientSecretProps,
 
   currentDeviceType,
 }: ClientFormProps) => {
@@ -59,9 +54,9 @@ const ClientForm = ({
   const [isRequestRunning, setIsRequestRunning] =
     React.useState<boolean>(false);
 
-  const [initialClient, setInitialClient] = React.useState<IClientProps>(
-    {} as IClientProps
-  );
+  const [initialClient, setInitialClient] = React.useState<
+    IClientProps | INoAuthClientProps
+  >({} as IClientProps);
   const [form, setForm] = React.useState<IClientReqDTO>({
     name: "",
     logo: "",
@@ -99,44 +94,34 @@ const ClientForm = ({
     }
   }, [clientSecretProps, setClientSecretProps]);
 
+  const onCancelClick = () => {
+    navigate("/portal-settings/developer-tools/oauth");
+  };
+
   const onSaveClick = async () => {
     try {
       if (!id) {
         let isValid = true;
-        for (let key in form) {
-          switch (key) {
-            case "name":
-            case "logo":
-            case "website_url":
-            case "terms_url":
-            case "policy_url":
-              if (form[key] === "") {
-                if (!requiredErrorFields.includes(key))
-                  setRequiredErrorFields((s) => [...s, key]);
 
-                console.log(key);
-                isValid = false;
-              }
-              isValid = isValid && !errorFields.includes(key);
+        Object.entries(form).forEach(([key, value]) => {
+          if (key === "description" || key === "logout_redirect_uri") return;
 
-              break;
+          if (
+            (value === "" && typeof value === "string") ||
+            (value.length === 0 && value instanceof Array)
+          ) {
+            if (!requiredErrorFields.includes(key))
+              setRequiredErrorFields((s) => [...s, key]);
 
-            case "redirect_uris":
-            case "allowed_origins":
-            case "scopes":
-              if (form[key].length === 0) {
-                if (!requiredErrorFields.includes(key))
-                  setRequiredErrorFields((s) => [...s, key]);
-
-                isValid = false;
-              }
-              isValid = isValid && !errorFields.includes(key);
-              console.log(key);
-              break;
+            isValid = false;
           }
-        }
 
-        console.log(isValid);
+          isValid = isValid && !errorFields.includes(key);
+
+          if (key === "website_url" && !isValidUrl(value)) {
+            isValid = false;
+          }
+        });
 
         if (!isValid) return;
 
@@ -149,117 +134,107 @@ const ClientForm = ({
 
       onCancelClick();
     } catch (e) {
-      console.log(e);
+      toastr.error(e as unknown as TData);
     }
   };
 
-  const onCancelClick = () => {
-    navigate("/portal-settings/developer-tools/oauth");
-  };
-
   const onResetClick = React.useCallback(async () => {
-    if (!setResetDialogVisible) return;
-    setResetDialogVisible(true);
+    setResetDialogVisible?.(true);
+  }, [setResetDialogVisible]);
 
-    // setClientSecret(newSecret);
-  }, [clientId, setResetDialogVisible]);
-
-  const onChangeForm = (name: string, value: string | boolean) => {
+  const onChangeForm = (
+    name: keyof IClientReqDTO,
+    value: string | boolean,
+    remove?: boolean,
+  ) => {
     setForm((val) => {
-      const newVal = { ...val };
+      if (!(name in val)) return val;
 
-      if (newVal[name as keyof IClientReqDTO] instanceof Array) {
-        //@ts-ignore
-        if (newVal[name as keyof IClientReqDTO].includes(value)) {
-          //@ts-ignore
-          newVal[name as keyof IClientReqDTO] = newVal[
-            name as keyof IClientReqDTO
-            //@ts-ignore
-          ].filter((v: string) => v !== value);
-        } else {
-          //@ts-ignore
-          newVal[name as keyof IClientReqDTO].push(value);
+      const newVal: IClientReqDTO = { ...val };
+
+      let item = newVal[name];
+
+      if (typeof value === "string" && item instanceof Array) {
+        if (item.includes(value) && remove) {
+          item = item.filter((v: string) => v !== value);
+        } else if (!item.includes(value)) {
+          item.push(value);
         }
       } else {
-        //@ts-ignore
-        newVal[name as keyof IClientReqDTO] = value;
+        item = value;
       }
+
+      function updateForm<K extends keyof IClientReqDTO>(
+        key: K,
+        v: IClientReqDTO[K],
+      ) {
+        newVal[key] = v;
+      }
+
+      updateForm(name, item);
 
       return { ...newVal };
     });
   };
 
   const getClientData = React.useCallback(async () => {
-    if (!fetchScopes || !fetchClient) return;
+    if (clientId) return;
 
     const actions = [];
 
     if (id && !client) {
-      actions.push(fetchClient(id));
+      actions.push(getClient(id));
     }
 
-    if (scopeList?.length === 0) actions.push(fetchScopes());
+    if (scopeList?.length === 0) actions.push(fetchScopes?.());
 
     try {
-      const [fetchedClient, ...rest] = await Promise.all(actions);
+      if (actions.length > 0) setIsLoading(true);
 
-      if (id) {
+      const [fetchedClient] = await Promise.all(actions);
+
+      const item = fetchedClient ?? client;
+
+      if (id && item) {
         setForm({
-          name: fetchedClient?.name || client?.name || "",
-          logo: fetchedClient?.logo || client?.logo || "",
-          website_url: fetchedClient?.websiteUrl || client?.websiteUrl || "",
-          description: fetchedClient?.description || client?.description || "",
+          name: item.name,
+          logo: item.logo,
+          website_url: item.websiteUrl,
+          description: item.description ?? "",
 
-          redirect_uris: fetchedClient?.redirectUris
-            ? [...fetchedClient?.redirectUris]
-            : client?.redirectUris
-              ? [...client?.redirectUris]
-              : [],
-          allowed_origins: fetchedClient?.allowedOrigins
-            ? [...fetchedClient.allowedOrigins]
-            : client?.allowedOrigins
-              ? [...client.allowedOrigins]
-              : [],
-          logout_redirect_uri:
-            fetchedClient?.logoutRedirectUri || client?.logoutRedirectUri || "",
+          redirect_uris: item.redirectUris ? [...item.redirectUris] : [],
+          allowed_origins: item.allowedOrigins ? [...item.allowedOrigins] : [],
+          logout_redirect_uri: item.logoutRedirectUri ?? "",
 
-          terms_url: fetchedClient?.termsUrl || client?.termsUrl || "",
-          policy_url: fetchedClient?.policyUrl || client?.policyUrl || "",
+          terms_url: item.termsUrl ?? "",
+          policy_url: item.policyUrl ?? "",
 
-          allow_pkce:
-            fetchedClient?.authenticationMethods.includes(
-              AuthenticationMethod.none
-            ) ||
-            client?.authenticationMethods.includes(AuthenticationMethod.none) ||
-            false,
+          allow_pkce: item.authenticationMethods
+            ? item.authenticationMethods.includes(AuthenticationMethod.none)
+            : false,
 
-          scopes: fetchedClient?.scopes
-            ? [...fetchedClient.scopes]
-            : client?.scopes
-              ? [...client.scopes]
-              : [],
+          scopes: item.scopes ? [...item.scopes] : [],
         });
 
-        setClientId(fetchedClient?.clientId || client?.clientId || "");
-        setClientSecret(
-          fetchedClient?.clientSecret || client?.clientSecret || ""
-        );
+        setClientId(item.clientId ?? " ");
+        setClientSecret(item.clientSecret ?? " ");
 
-        setInitialClient(client || fetchedClient || ({} as IClientProps));
+        setInitialClient(item ?? ({} as IClientProps));
       }
 
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500);
     } catch (e) {
       setIsLoading(false);
 
-      console.log(e);
+      toastr.error(e as unknown as TData);
     }
-  }, [id, fetchScopes]);
+  }, [clientId, id, client, scopeList?.length, fetchScopes]);
 
   React.useEffect(() => {
-    setIsLoading(true);
     getClientData();
-  }, [getClientData, fetchScopes]);
+  }, [getClientData]);
 
   const onBlur = (key: string) => {
     if (
@@ -287,29 +262,31 @@ const ClientForm = ({
     let isValid = true;
 
     if (isEdit) {
-      for (let key in form) {
+      Object.entries(form).forEach(([key, value]) => {
         switch (key) {
           case "name":
-            isValid = isValid && !!form[key];
+            isValid = isValid && !!value;
 
             if (
-              form[key] &&
+              value &&
               !errorFields.includes(key) &&
-              (form[key].length < 3 || form[key].length > 256)
+              (value.length < 3 || value.length > 256)
             ) {
               isValid = false;
 
-              return setErrorFields((value) => {
-                return [...value, key];
+              setErrorFields((val) => {
+                return [...val, key];
               });
+
+              return;
             }
 
             if (
               errorFields.includes(key) &&
-              (!form[key] || (form[key].length > 2 && form[key].length < 256))
+              (!value || (value.length > 2 && value.length < 257))
             ) {
-              setErrorFields((value) => {
-                return value.filter((n) => n !== key);
+              setErrorFields((val) => {
+                return val.filter((n) => n !== key);
               });
 
               return;
@@ -318,8 +295,11 @@ const ClientForm = ({
             isValid = isValid && !errorFields.includes(key);
 
             break;
+
+          default:
+            break;
         }
-      }
+      });
 
       return (
         isValid &&
@@ -332,41 +312,48 @@ const ClientForm = ({
           form.allowed_origins.length !== initialClient.allowedOrigins.length ||
           form.allow_pkce !==
             initialClient.authenticationMethods.includes(
-              AuthenticationMethod.none
+              AuthenticationMethod.none,
             ))
       );
     }
 
-    for (let key in form) {
+    Object.entries(form).forEach(([key, value]) => {
       switch (key) {
         case "name":
         case "logo":
-        case "website_url":
         case "terms_url":
         case "policy_url":
+        case "website_url":
           if (
             errorFields.includes(key) &&
-            (!form[key] || (form[key].length > 2 && form[key].length < 256))
+            (!value || (value.length > 2 && value.length < 256))
           ) {
-            setErrorFields((value) => {
-              return value.filter((n) => n !== key);
-            });
+            if (
+              (key === "website_url" && isValidUrl(value)) ||
+              key !== "website_url"
+            )
+              setErrorFields((val) => {
+                return val.filter((n) => n !== key);
+              });
           }
 
-          if (requiredErrorFields.includes(key) && form[key] !== "")
-            setRequiredErrorFields((value) => value.filter((v) => v !== key));
+          if (requiredErrorFields.includes(key) && value !== "")
+            setRequiredErrorFields((val) => val.filter((v) => v !== key));
 
           break;
 
         case "redirect_uris":
         case "allowed_origins":
         case "scopes":
-          if (requiredErrorFields.includes(key) && form[key].length > 0)
-            setRequiredErrorFields((value) => value.filter((v) => v !== key));
+          if (requiredErrorFields.includes(key) && value.length > 0)
+            setRequiredErrorFields((val) => val.filter((v) => v !== key));
 
           break;
+
+        default:
+          break;
       }
-    }
+    });
 
     return isValid;
   };
@@ -453,7 +440,6 @@ export default inject(
       clientList,
       scopeList,
 
-      fetchClient,
       fetchScopes,
 
       saveClient,
@@ -471,7 +457,6 @@ export default inject(
     const props: ClientFormProps = {
       scopeList,
 
-      fetchClient,
       fetchScopes,
 
       saveClient,
@@ -485,13 +470,11 @@ export default inject(
     };
 
     if (id) {
-      const client = clientList.find(
-        (client: IClientProps) => client.clientId === id
-      );
+      const client = clientList.find((c: IClientProps) => c.clientId === id);
 
       props.client = client;
     }
 
     return { ...props };
-  }
+  },
 )(observer(ClientForm));

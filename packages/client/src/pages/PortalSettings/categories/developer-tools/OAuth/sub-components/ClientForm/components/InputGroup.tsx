@@ -88,15 +88,13 @@ const InputGroup = ({
         removeMargin
         hasError={isError}
       >
-        {children ? (
-          children
-        ) : (
+        {children || (
           <>
             {isRequestRunning ? (
               <RectangleSkeleton
-                className={"loader"}
-                width={"100%"}
-                height={"32px"}
+                className="loader"
+                width="100%"
+                height="32px"
               />
             ) : (
               <InputBlock

@@ -7,7 +7,6 @@ import { StyledInputGroup } from "../ClientForm.styled";
 
 interface TextAreaProps {
   label: string;
-
   name: string;
   value: string;
   placeholder: string;
@@ -29,14 +28,14 @@ const TextAreaGroup = ({
     <StyledInputGroup>
       <div className="label">
         <Text
-          fontSize={"13px"}
+          fontSize="13px"
           fontWeight={600}
-          lineHeight={"20px"}
-          title={""}
-          tag={""}
-          as={"p"}
-          color={""}
-          textAlign={""}
+          lineHeight="20px"
+          title=""
+          tag=""
+          as="p"
+          color=""
+          textAlign=""
         >
           {label}
         </Text>

@@ -1,16 +1,20 @@
 import React from "react";
+
+import { TTranslation } from "@docspace/shared/types";
+import { IClientReqDTO } from "@docspace/shared/utils/oauth/interfaces";
+
 import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
 
 import BlockHeader from "./BlockHeader";
 import InputGroup from "./InputGroup";
 
 interface SupportBlockProps {
-  t: any;
+  t: TTranslation;
 
   policyUrlValue: string;
   termsUrlValue: string;
 
-  changeValue: (name: string, value: string) => void;
+  changeValue: (name: keyof IClientReqDTO, value: string) => void;
 
   isEdit: boolean;
   errorFields: string[];
@@ -33,7 +37,7 @@ const SupportBlock = ({
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
 
-    changeValue(target.name, target.value);
+    changeValue(target.name as keyof IClientReqDTO, target.value);
   };
 
   const policyRequiredError = requiredErrorFields.includes("policy_url");
@@ -47,7 +51,7 @@ const SupportBlock = ({
       <StyledInputBlock>
         <InputGroup
           label={t("PrivacyPolicyURL")}
-          name={"policy_url"}
+          name="policy_url"
           placeholder={t("EnterURL")}
           value={policyUrlValue}
           error={
@@ -64,7 +68,7 @@ const SupportBlock = ({
         />
         <InputGroup
           label={t("TermsOfServiceURL")}
-          name={"terms_url"}
+          name="terms_url"
           placeholder={t("EnterURL")}
           value={termsUrlValue}
           error={
@@ -73,7 +77,7 @@ const SupportBlock = ({
               : t("ThisRequiredField")
           }
           onChange={onChange}
-          helpButtonText={t("TermsOfServiceURLHelpButton")} 
+          helpButtonText={t("TermsOfServiceURLHelpButton")}
           disabled={isEdit}
           isRequired
           isError={termsError || termsRequiredError}

@@ -2,10 +2,10 @@ import React from "react";
 import { Trans } from "react-i18next";
 
 import { TTranslation } from "@docspace/shared/types";
-
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Checkbox } from "@docspace/shared/components/checkbox";
+import { IClientReqDTO } from "@docspace/shared/utils/oauth/interfaces";
 
 import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
 
@@ -23,7 +23,7 @@ interface BasicBlockProps {
   descriptionValue: string;
   allowPkce: boolean;
 
-  changeValue: (name: string, value: string | boolean) => void;
+  changeValue: (name: keyof IClientReqDTO, value: string | boolean) => void;
 
   isEdit: boolean;
   errorFields: string[];
@@ -32,12 +32,12 @@ interface BasicBlockProps {
 }
 
 function getImageDimensions(
-  image: any
+  image: HTMLImageElement,
 ): Promise<{ width: number; height: number }> {
-  return new Promise((resolve, reject) => {
-    image.onload = function (e: any) {
-      const width = this.width;
-      const height = this.height;
+  return new Promise((resolve) => {
+    image.onload = () => {
+      const width = image.width;
+      const height = image.height;
       resolve({ height, width });
     };
   });
@@ -47,9 +47,9 @@ function compressImage(
   image: HTMLImageElement,
   scale: number,
   initialWidth: number,
-  initialHeight: number
-): any {
-  return new Promise((resolve, reject) => {
+  initialHeight: number,
+): Promise<Blob | undefined | null> {
+  return new Promise((resolve) => {
     const canvas = document.createElement("canvas");
 
     canvas.width = scale * initialWidth;
@@ -81,11 +81,11 @@ const BasicBlock = ({
   onBlur,
 }: BasicBlockProps) => {
   const onChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const target = e.target;
 
-    changeValue(target.name, target.value);
+    changeValue(target.name as keyof IClientReqDTO, target.value);
   };
 
   const onSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,43 +94,45 @@ const BasicBlock = ({
 
     if (file) {
       const imgEl = document.getElementsByClassName(
-        "client-logo"
+        "client-logo",
       )[0] as HTMLImageElement;
 
       imgEl.src = URL.createObjectURL(file);
 
       const { height, width } = await getImageDimensions(imgEl);
 
-      const MAX_WIDTH = 32; //if we resize by width, this is the max width of compressed image
-      const MAX_HEIGHT = 32; //if we resize by height, this is the max height of the compressed image
+      const MAX_WIDTH = 32; // if we resize by width, this is the max width of compressed image
+      const MAX_HEIGHT = 32; // if we resize by height, this is the max height of the compressed image
 
       const widthRatioBlob = await compressImage(
         imgEl,
         MAX_WIDTH / width,
         width,
-        height
+        height,
       );
       const heightRatioBlob = await compressImage(
         imgEl,
         MAX_HEIGHT / height,
         width,
-        height
+        height,
       );
 
-      //pick the smaller blob between both
-      const compressedBlob =
-        widthRatioBlob.size > heightRatioBlob.size
-          ? heightRatioBlob
-          : widthRatioBlob;
+      if (widthRatioBlob && heightRatioBlob) {
+        // pick the smaller blob between both
+        const compressedBlob =
+          widthRatioBlob.size > heightRatioBlob.size
+            ? heightRatioBlob
+            : widthRatioBlob;
 
-      const reader = new FileReader();
-      reader.readAsDataURL(compressedBlob);
+        const reader = new FileReader();
+        reader.readAsDataURL(compressedBlob);
 
-      reader.onload = () => {
-        const result = reader.result as string;
+        reader.onload = () => {
+          const result = reader.result as string;
 
-        changeValue("logo", result);
-      };
+          changeValue("logo", result);
+        };
+      }
     }
   };
 
@@ -146,11 +148,11 @@ const BasicBlock = ({
 
   return (
     <StyledBlock>
-      <BlockHeader header={"Basic info"} />
+      <BlockHeader header="Basic info" />
       <StyledInputBlock>
         <InputGroup
           label={t("AppName")}
-          name={"name"}
+          name="name"
           placeholder={t("Common:EnterName")}
           value={nameValue}
           error={isNameError ? `${t("ErrorName")} 3` : t("ThisRequiredField")}
@@ -161,7 +163,7 @@ const BasicBlock = ({
         />
         <InputGroup
           label={t("WebsiteUrl")}
-          name={"website_url"}
+          name="website_url"
           placeholder={t("EnterURL")}
           value={websiteUrlValue}
           error={
@@ -193,7 +195,7 @@ const BasicBlock = ({
 
         <TextAreaGroup
           label={t("Common:Description")}
-          name={"description"}
+          name="description"
           placeholder={t("EnterDescription")}
           value={descriptionValue}
           onChange={onChange}
@@ -201,13 +203,13 @@ const BasicBlock = ({
         />
         <InputGroup
           label={t("AuthenticationMethod")}
-          name={"website_url"}
+          name="website_url"
           placeholder={t("EnterURL")}
           value={websiteUrlValue}
           error=""
           onChange={() => {}}
         >
-          <div className={"pkce"}>
+          <div className="pkce">
             <Checkbox
               label={t("AllowPKCE")}
               isChecked={allowPkce}

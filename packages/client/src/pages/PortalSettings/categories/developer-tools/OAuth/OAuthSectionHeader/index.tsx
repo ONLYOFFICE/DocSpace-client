@@ -5,12 +5,15 @@ import Headline from "@docspace/shared/components/headline/Headline";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
+import LoaderSectionHeader from "SRC_DIR/pages/PortalSettings/Layout/Section/loaderSectionHeader";
 
-import { HeaderContainer } from "./SectionHeader.styled";
-import { OAuthSectionHeaderProps } from "./SectionHeader.types";
+import {
+  StyledContainer,
+  HeaderContainer,
+} from "../../../../Layout/Section/Header";
 
-const OAuthSectionHeader = ({ isEdit }: OAuthSectionHeaderProps) => {
-  const { t } = useTranslation(["OAuth"]);
+const OAuthSectionHeader = ({ isEdit }: { isEdit: boolean }) => {
+  const { t, ready } = useTranslation(["OAuth"]);
 
   const navigate = useNavigate();
 
@@ -18,25 +21,28 @@ const OAuthSectionHeader = ({ isEdit }: OAuthSectionHeaderProps) => {
     navigate("/portal-settings/developer-tools/oauth");
   };
 
-  const NavigationHeader = () => (
-    <>
-      <IconButton
-        iconName={ArrowPathReactSvgUrl}
-        size={17}
-        isFill
-        onClick={onBack}
-        className="arrow-button"
-      />
-      <Headline type="content" truncate className="headline">
-        {isEdit ? t("EditApp") : t("NewApp")}
-      </Headline>
-    </>
-  );
+  if (!ready) return <LoaderSectionHeader />;
 
   return (
-    <HeaderContainer>
-      <NavigationHeader />
-    </HeaderContainer>
+    <StyledContainer>
+      <HeaderContainer>
+        <Headline type="content" truncate>
+          <div className="settings-section_header">
+            <div className="header">
+              <IconButton
+                iconName={ArrowPathReactSvgUrl}
+                size={17}
+                isFill
+                onClick={onBack}
+                className="arrow-button"
+              />
+
+              {isEdit ? t("EditApp") : t("NewApp")}
+            </div>
+          </div>
+        </Headline>
+      </HeaderContainer>
+    </StyledContainer>
   );
 };
 

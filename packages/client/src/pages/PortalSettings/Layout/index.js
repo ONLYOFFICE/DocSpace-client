@@ -89,6 +89,8 @@ const Layout = ({
 
   const webhookHistoryPath = `/portal-settings/developer-tools/webhooks/${id}`;
   const webhookDetailsPath = `/portal-settings/developer-tools/webhooks/${id}/${eventId}`;
+  const oauthCreatePath = `/portal-settings/developer-tools/oauth/create`;
+  const oauthEditPath = `/portal-settings/developer-tools/oauth/${id}`;
   const currentPath = window.location.pathname;
 
   return (
@@ -108,6 +110,9 @@ const Layout = ({
               <HistoryHeader />
             ) : currentPath === webhookDetailsPath ? (
               <DetailsNavigationHeader />
+            ) : currentPath === oauthCreatePath ||
+              currentPath === oauthEditPath ? (
+              <OAuthSectionHeader />
             ) : (
               <SectionHeaderContent />
             )}

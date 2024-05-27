@@ -3,6 +3,7 @@ import { Trans } from "react-i18next";
 import copy from "copy-to-clipboard";
 
 import { toastr } from "@docspace/shared/components/toast";
+import { TTranslation } from "@docspace/shared/types";
 
 import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
 
@@ -10,7 +11,7 @@ import BlockHeader from "./BlockHeader";
 import InputGroup from "./InputGroup";
 
 interface ClientBlockProps {
-  t: any;
+  t: TTranslation;
 
   idValue: string;
   secretValue: string;
@@ -33,7 +34,7 @@ const ClientBlock = ({
     setValue({ id: idValue, secret: secretValue });
   }, [idValue, secretValue]);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {};
+  const onChange = () => {};
 
   const onCopyClick = (name: string) => {
     if (name === "id") {
@@ -53,20 +54,20 @@ const ClientBlock = ({
       <StyledInputBlock>
         <InputGroup
           label={t("ID")}
-          name={""}
-          placeholder={""}
+          name=""
+          placeholder=""
           value={value.id}
-          error={""}
+          error=""
           onChange={onChange}
           withCopy
           onCopyClick={() => onCopyClick("id")}
         />
         <InputGroup
           label={t("Secret")}
-          name={""}
-          placeholder={""}
+          name=""
+          placeholder=""
           value={value.secret}
-          error={""}
+          error=""
           onChange={onChange}
           withCopy
           isPassword

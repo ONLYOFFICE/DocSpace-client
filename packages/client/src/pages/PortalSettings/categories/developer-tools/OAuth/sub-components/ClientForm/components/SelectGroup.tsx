@@ -46,14 +46,14 @@ const SelectGroup = ({
     <StyledInputGroup>
       <div className="label">
         <Text
-          fontSize={"13px"}
+          fontSize="13px"
           fontWeight={600}
-          lineHeight={"20px"}
-          title={""}
-          tag={""}
-          as={"p"}
-          color={""}
-          textAlign={""}
+          lineHeight="20px"
+          title=""
+          tag=""
+          as="p"
+          color=""
+          textAlign=""
         >
           {label} *
         </Text>
@@ -61,32 +61,33 @@ const SelectGroup = ({
       <div className="select">
         <img
           className="client-logo"
-          style={{ display: !!value ? "block" : "none" }}
+          style={{ display: value ? "block" : "none" }}
+          alt="img"
           src={value}
         />
         <SelectorAddButton onClick={onClick} />
         <Text
-          fontSize={"13px"}
+          fontSize="13px"
           fontWeight={600}
-          lineHeight={"20px"}
-          title={""}
-          tag={""}
-          as={"p"}
-          color={""}
-          textAlign={""}
+          lineHeight="20px"
+          title=""
+          tag=""
+          as="p"
+          color=""
+          textAlign=""
         >
           {selectLabel}
         </Text>
       </div>
       <Text
-        fontSize={"12px"}
+        fontSize="12px"
         fontWeight={600}
-        lineHeight={"16px"}
-        title={""}
-        tag={""}
-        as={"p"}
-        color={""}
-        textAlign={""}
+        lineHeight="16px"
+        title=""
+        tag=""
+        as="p"
+        color=""
+        textAlign=""
         className="description"
       >
         {description}

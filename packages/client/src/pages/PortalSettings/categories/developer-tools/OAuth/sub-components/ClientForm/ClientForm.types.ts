@@ -1,13 +1,12 @@
-//@ts-ignore
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 import {
   IClientProps,
   IClientReqDTO,
   IScope,
 } from "@docspace/shared/utils/oauth/interfaces";
-//@ts-ignore
-import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+
+import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
 
 export interface InputProps {
   value: string;
@@ -44,14 +43,10 @@ export interface ClientFormProps {
 
   scopeList?: IScope[];
 
-  fetchClient?: (clientId: string) => Promise<IClientProps>;
   fetchScopes?: () => Promise<void>;
 
-  saveClient?: (client: IClientReqDTO) => Promise<IClientProps>;
-  updateClient?: (
-    clientId: string,
-    client: IClientReqDTO
-  ) => Promise<IClientReqDTO>;
+  saveClient?: (client: IClientReqDTO) => Promise<void>;
+  updateClient?: (clientId: string, client: IClientReqDTO) => Promise<void>;
 
   resetDialogVisible?: boolean;
   setResetDialogVisible?: (value: boolean) => void;

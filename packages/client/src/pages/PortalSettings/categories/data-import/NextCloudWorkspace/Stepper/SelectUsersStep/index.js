@@ -37,7 +37,7 @@ import AccountsPaging from "../../../sub-components/AccountsPaging";
 import UsersInfoBlock from "../../../sub-components/UsersInfoBlock";
 import { Wrapper } from "../StyledStepper";
 
-const LICENSE_LIMIT = 3;
+import { parseQuota } from "../../../utils";
 
 const SelectUsersStep = (props) => {
   const {
@@ -49,12 +49,16 @@ const SelectUsersStep = (props) => {
     setSearchValue,
     cancelMigration,
     checkedUsers,
+    quotaCharacteristics,
+    users,
   } = props;
 
   const [dataPortion, setDataPortion] = useState(withEmailUsers.slice(0, 25));
+  const [quota, setQuota] = useState({ used: 0, max: 0 });
 
   useEffect(() => {
     setSearchValue("");
+    setQuota(parseQuota(quotaCharacteristics[1]));
   }, []);
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
@@ -81,6 +85,14 @@ const SelectUsersStep = (props) => {
     setTimeout(decrementStep, 100);
   };
 
+  const numberOfSelectedUsers =
+    checkedUsers.withEmail.length + checkedUsers.withoutEmail.length;
+
+  const totalUsedUsers =
+    quota.used +
+    checkedUsers.withEmail.filter((user) => !user.isDuplicate).length +
+    checkedUsers.withoutEmail.length;
+
   return (
     <Wrapper>
       {withEmailUsers.length > 0 ? (
@@ -95,14 +107,15 @@ const SelectUsersStep = (props) => {
             displaySettings
           />
 
-          <UsersInfoBlock
-            t={t}
-            selectedUsers={
-              checkedUsers.withEmail.length + checkedUsers.withoutEmail.length
-            }
-            totalUsers={withEmailUsers.length}
-            totalLicenceLimit={LICENSE_LIMIT}
-          />
+          {quota.max && (
+            <UsersInfoBlock
+              t={t}
+              totalUsedUsers={totalUsedUsers}
+              selectedUsers={numberOfSelectedUsers}
+              totalUsers={withEmailUsers.length + users.withoutEmail.length}
+              totalLicenceLimit={quota.max}
+            />
+          )}
 
           <SearchInput
             id="search-users-input"
@@ -144,7 +157,7 @@ const SelectUsersStep = (props) => {
   );
 };
 
-export default inject(({ importAccountsStore }) => {
+export default inject(({ importAccountsStore, currentQuotaStore }) => {
   const {
     users,
     withEmailUsers,
@@ -153,6 +166,7 @@ export default inject(({ importAccountsStore }) => {
     cancelMigration,
     checkedUsers,
   } = importAccountsStore;
+  const { quotaCharacteristics } = currentQuotaStore;
 
   return {
     users,
@@ -161,5 +175,6 @@ export default inject(({ importAccountsStore }) => {
     setSearchValue,
     cancelMigration,
     checkedUsers,
+    quotaCharacteristics,
   };
 })(observer(SelectUsersStep));

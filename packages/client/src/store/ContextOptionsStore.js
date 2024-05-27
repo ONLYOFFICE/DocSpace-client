@@ -106,7 +106,7 @@ import {
   FilesSelectorFilterTypes,
 } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { getFileLink } from "@docspace/shared/api/files";
+import { getFileLink, getFolderLink } from "@docspace/shared/api/files";
 import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
@@ -394,10 +394,17 @@ class ContextOptionsStore {
       (sharedItem && sharedItem.canCopyPublicLink) ||
       (shared && canCopyPublicLink);
 
-    if (isShared && !item.isFolder && !isArchive) {
-      const fileLinkData = await getFileLink(item.id);
-      copyShareLink(fileLinkData.sharedTo.shareLink);
-      return toastr.success(t("Translations:LinkCopySuccess"));
+    if (isShared && !isArchive) {
+      try {
+        const itemLink = item.isFolder
+          ? await getFolderLink(item.id)
+          : await getFileLink(item.id);
+        copyShareLink(itemLink.sharedTo.shareLink);
+        toastr.success(t("Translations:LinkCopySuccess"));
+      } catch (error) {
+        toastr.error(error);
+      }
+      return;
     }
 
     if (

@@ -178,7 +178,7 @@
   "PasswordMinLenght": "Lunghezza della password minima",
   "Path": "Percorso",
   "PersonalFiles": "File personali",
-  "PersonalFilesDescription": "I file e i documenti dell'utente verranno importati in Documenti > I miei documenti.",
+  "PersonalFilesDescription": "I file e i documenti dell'utente verranno importati in Documenti > Documenti.",
   "PortalAccess": "Accesso a DocSpace",
   "PortalCreatedDate": "Data di creazione del portale: {{date}}",
   "PortalDeactivation": "Disattiva DocSpace",

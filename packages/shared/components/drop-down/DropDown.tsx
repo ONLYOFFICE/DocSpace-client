@@ -37,6 +37,7 @@ import { Row } from "./sub-components/Row";
 
 import { DropDownProps } from "./DropDown.types";
 import { DEFAULT_PARENT_HEIGHT } from "./DropDown.constants";
+import { Backdrop } from "../backdrop";
 
 const DropDown = ({
   directionY = "bottom",
@@ -67,6 +68,11 @@ const DropDown = ({
   manualY,
   className,
   style,
+  withoutBackground,
+  withBackground,
+  withBackdrop,
+  isAside,
+  withBlur,
 }: DropDownProps) => {
   const theme = useTheme();
 
@@ -382,42 +388,59 @@ const DropDown = ({
       ? { height: `${calculatedHeight}px` }
       : {};
 
+    const toggleDropDown = () => {
+      clickOutsideAction?.({} as Event, !open);
+    };
+
     return (
-      <StyledDropdown
-        ref={dropDownRef}
-        style={style}
-        // {...this.props}
-        directionX={state.directionX}
-        directionY={state.directionY}
-        manualY={state.manualY}
-        isMobileView={isMobileView}
-        itemCount={itemCount}
-        {...dropDownMaxHeightProp}
-        directionXStylesDisabled={directionXStylesDisabled}
-        isDropdownReady={state.isDropdownReady}
-        open={open}
-        maxHeight={maxHeight}
-        zIndex={zIndex}
-        manualWidth={manualWidth}
-        className={className}
-        manualX={manualX}
-      >
-        <VirtualList
-          Row={Row}
-          theme={theme}
-          width={state.width}
+      <>
+        {withBackdrop ? (
+          <Backdrop
+            visible={open || false}
+            zIndex={310}
+            onClick={toggleDropDown}
+            withoutBlur={!withBlur}
+            isAside={isAside}
+            withBackground={withBackground}
+            withoutBackground={withoutBackground}
+          />
+        ) : null}
+        <StyledDropdown
+          ref={dropDownRef}
+          style={style}
+          // {...this.props}
+          directionX={state.directionX}
+          directionY={state.directionY}
+          manualY={state.manualY}
+          isMobileView={isMobileView}
           itemCount={itemCount}
+          {...dropDownMaxHeightProp}
+          directionXStylesDisabled={directionXStylesDisabled}
+          isDropdownReady={state.isDropdownReady}
+          open={open}
           maxHeight={maxHeight}
-          cleanChildren={cleanChildren}
-          calculatedHeight={calculatedHeight}
-          isNoFixedHeightOptions={isNoFixedHeightOptions || false}
-          getItemSize={getItemSize}
-          isOpen={open || false}
-          enableKeyboardEvents={enableKeyboardEvents || false}
+          zIndex={zIndex}
+          manualWidth={manualWidth}
+          className={className}
+          manualX={manualX}
         >
-          {children}
-        </VirtualList>
-      </StyledDropdown>
+          <VirtualList
+            Row={Row}
+            theme={theme}
+            width={state.width}
+            itemCount={itemCount}
+            maxHeight={maxHeight}
+            cleanChildren={cleanChildren}
+            calculatedHeight={calculatedHeight}
+            isNoFixedHeightOptions={isNoFixedHeightOptions || false}
+            getItemSize={getItemSize}
+            isOpen={open || false}
+            enableKeyboardEvents={enableKeyboardEvents || false}
+          >
+            {children}
+          </VirtualList>
+        </StyledDropdown>
+      </>
     );
   };
 

@@ -88,7 +88,7 @@ class InfoPanelStore {
   infoPanelSelection = null;
   infoPanelRoom = null;
   membersIsLoading = false;
-  searchResultIsLoading = false;
+  isMembersPanelUpdating = false;
 
   shareChanged = false;
 
@@ -128,15 +128,8 @@ class InfoPanelStore {
 
   setShowSearchBlock = (bool) => (this.showSearchBlock = bool);
 
-  setSearchResultIsLoading = (isLoading) => {
-    this.searchResultIsLoading = isLoading;
-  };
-
   setSearchValue = (value) => {
-    if (value !== this.searchValue) {
-      this.setSearchResultIsLoading(true);
-      this.searchValue = value;
-    }
+    this.searchValue = value;
   };
 
   resetSearch = () => {
@@ -169,6 +162,10 @@ class InfoPanelStore {
 
   setIsScrollLocked = (isScrollLocked) => {
     this.isScrollLocked = isScrollLocked;
+  };
+
+  setIsMembersPanelUpdating = (isMembersPanelUpdating) => {
+    this.isMembersPanelUpdating = isMembersPanelUpdating;
   };
 
   // Selection helpers //
@@ -229,6 +226,10 @@ class InfoPanelStore {
         : bufferSelection
           ? bufferSelection
           : null;
+  }
+
+  get isRoomMembersPanelOpen() {
+    return this.infoPanelSelection?.isRoom && this.roomsView === infoMembers;
   }
 
   get withPublicRoomBlock() {
@@ -643,7 +644,6 @@ class InfoPanelStore {
     const [data, links] = await Promise.all(requests);
     clearFilter && this.setMembersIsLoading(false);
     clearTimeout(timerId);
-    this.setSearchResultIsLoading(false);
 
     links && this.publicRoomStore.setExternalLinks(links);
 
@@ -691,32 +691,21 @@ class InfoPanelStore {
     this.setInfoPanelMembers(mergedMembers);
   };
 
-  addInfoPanelMembers = (t, members) => {
-    const convertedMembers = this.convertMembers(t, members);
-
-    if (this.infoPanelMembers) {
-      const { roomId, administrators, users, expected, groups } =
-        this.infoPanelMembers;
-
-      const mergedMembers = {
-        roomId: roomId,
-        administrators: [...administrators, ...convertedMembers.administrators],
-        users: [...users, ...convertedMembers.users],
-        expected: [...expected, ...convertedMembers.expectedMembers],
-        groups: [...groups, ...convertedMembers.groups],
-      };
-
-      this.addMembersTitle(
-        t,
-        mergedMembers.administrators,
-        mergedMembers.users,
-        mergedMembers.expected,
-        mergedMembers.groups,
-      );
-
-      this.filesStore.setInRoomFolder(roomId, true);
-      this.setInfoPanelMembers(mergedMembers);
+  updateInfoPanelMembers = async (t) => {
+    if (
+      !this.infoPanelSelection ||
+      !this.infoPanelSelection.isRoom ||
+      !this.infoPanelSelection.id
+    ) {
+      return;
     }
+
+    this.setIsMembersPanelUpdating(true);
+
+    const fetchedMembers = await this.fetchMembers(t, true, !!this.searchValue);
+    this.setInfoPanelMembers(fetchedMembers);
+
+    this.setIsMembersPanelUpdating(false);
   };
 
   openShareTab = () => {

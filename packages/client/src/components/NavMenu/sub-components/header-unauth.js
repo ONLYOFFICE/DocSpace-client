@@ -33,10 +33,9 @@ import { Base } from "@docspace/shared/themes";
 import { mobile, getLogoUrl } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
-import { setCookie } from "@docspace/shared/utils/cookie";
-import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
-import i18n from "../../../i18n";
 import { setLanguageForUnauthorized } from "@docspace/shared/utils/common";
+
+import i18n from "../../../i18n";
 
 const Header = styled.header`
   align-items: left;
@@ -123,14 +122,16 @@ const HeaderUnAuth = ({
         )}
       </Box>
 
-      <LanguageCombobox
-        className="language-combo-box"
-        onSelectLanguage={onSelect}
-        cultures={cultures}
-        selectedCulture={currentCultureName}
-        withBorder={false}
-        isMobileView
-      />
+      {!wizardToken && (
+        <LanguageCombobox
+          className="language-combo-box"
+          onSelectLanguage={onSelect}
+          cultures={cultures}
+          selectedCulture={currentCultureName}
+          withBorder={false}
+          isMobileView
+        />
+      )}
     </Header>
   );
 };

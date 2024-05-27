@@ -1132,57 +1132,7 @@ export function getLdapSettings() {
   return request(options);
 }
 
-export function saveLdapSettings(ldapFormData) {
-  const {
-    enableLdapAuthentication,
-    startTls,
-    ssl,
-    sendWelcomeEmail,
-    server,
-    userDN,
-    portNumber,
-    userFilter,
-    loginAttribute,
-    ldapMapping,
-    accessRights,
-    groupMembership,
-    groupDN,
-    userAttribute,
-    groupFilter,
-    groupAttribute,
-    groupNameAttribute,
-    authentication,
-    login,
-    password,
-    acceptCertificate,
-  } = ldapFormData;
-
-  const settings = {
-    EnableLdapAuthentication: enableLdapAuthentication,
-    AcceptCertificate: acceptCertificate,
-    StartTls: startTls,
-    Ssl: ssl,
-    SendWelcomeEmail: sendWelcomeEmail,
-    Server: server,
-    UserDN: userDN,
-    PortNumber: portNumber,
-    UserFilter: userFilter,
-    LoginAttribute: loginAttribute,
-    LdapMapping: ldapMapping,
-    AccessRights: accessRights,
-    GroupMembership: groupMembership,
-    GroupDN: groupDN,
-    UserAttribute: userAttribute,
-    GroupFilter: groupFilter,
-    GroupAttribute: groupAttribute,
-    GroupNameAttribute: groupNameAttribute,
-    Authentication: authentication,
-    Login: login,
-    Password: password,
-  };
-
-  // console.log({ settings });
-
+export function saveLdapSettings(settings) {
   return request({
     method: "post",
     url: `/settings/ldap`,

@@ -66,6 +66,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     isItemLoaded,
     rowLoader,
     renderCustomItem,
+    setInputItemVisible,
   }: Data = data;
   const { t } = useTranslation(["Common"]);
 
@@ -109,6 +110,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           style={style}
           color={color}
           icon={icon}
+          setInputItemVisible={setInputItemVisible}
         />
       );
     }

@@ -102,6 +102,7 @@ const Body = ({
 
   withInfo,
   infoText,
+  setInputItemVisible,
 }: BodyProps) => {
   const [bodyHeight, setBodyHeight] = React.useState(0);
 
@@ -270,6 +271,7 @@ const Body = ({
                     rowLoader,
                     isItemLoaded,
                     renderCustomItem,
+                    setInputItemVisible,
                   }}
                   itemSize={48}
                   onItemsRendered={onItemsRendered}

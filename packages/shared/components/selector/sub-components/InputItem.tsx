@@ -43,6 +43,8 @@ const InputItem = ({
 
   color,
   icon,
+
+  setInputItemVisible,
 }: {
   defaultInputValue: string;
   onAcceptInput: (value: string) => void;
@@ -51,13 +53,45 @@ const InputItem = ({
 
   color?: string;
   icon?: string;
+
+  setInputItemVisible: (value: boolean) => void;
 }) => {
   const [value, setValue] = React.useState(defaultInputValue);
+
+  const requestRunning = React.useRef<boolean>(false);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
 
-  const onAcceptInputAction = () => {
-    onAcceptInput(value);
-  };
+  const onAcceptInputAction = React.useCallback(async () => {
+    if (requestRunning.current) return;
+    requestRunning.current = true;
+    await onAcceptInput(value);
+
+    requestRunning.current = false;
+  }, [onAcceptInput, value]);
+
+  React.useEffect(() => {
+    setInputItemVisible(true);
+
+    return () => {
+      setInputItemVisible(false);
+    };
+  }, [setInputItemVisible]);
+
+  React.useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (e.key === "Enter") onAcceptInputAction();
+      else if (e.key === "Escape") onCancelInput();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [onAcceptInputAction, onCancelInput]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newVal = e.target.value;

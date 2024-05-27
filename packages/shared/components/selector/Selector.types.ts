@@ -354,6 +354,8 @@ export type BodyProps = TSelectorBreadCrumbs &
 
     isMultiSelect: boolean;
 
+    setInputItemVisible: (value: boolean) => void;
+
     items: TSelectorItem[];
     renderCustomItem?: (
       label: string,
@@ -538,6 +540,7 @@ export type Data = {
     email?: string,
     isGroup?: boolean,
   ) => React.ReactNode | null;
+  setInputItemVisible: (value: boolean) => void;
 };
 
 export interface ItemProps {

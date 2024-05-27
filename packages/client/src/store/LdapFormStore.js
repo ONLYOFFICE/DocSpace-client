@@ -46,11 +46,11 @@ class LdapFormStore {
   isSslEnabled = false;
 
   requiredSettings = {
-    server: "LDAP://192.168.1.55", //TODO: change to ""
-    userDN: "ou=people,dc=planetexpress,dc=com", //TODO: change to ""
+    server: "",
+    userDN: "",
     loginAttribute: "uid",
-    portNumber: "10389", //TODO: change to 389
-    userFilter: "(uid=*)", //TODO: change to "(objectclass=*)"
+    portNumber: "",
+    userFilter: "(uid=*)",
     firstName: "givenName",
     secondName: "sn",
     mail: "mail",
@@ -58,8 +58,8 @@ class LdapFormStore {
     userQuotaLimit: "",
   };
 
-  login = "cn=admin,dc=planetexpress,dc=com"; //TODO: change to ""
-  password = "GoodNewsEveryone"; //TODO: change to ""
+  login = "";
+  password = "";
   authentication = true;
   acceptCertificate = false;
   isSendWelcomeEmail = false;
@@ -259,6 +259,8 @@ class LdapFormStore {
   restoreToDefault = async () => {
     const response = await getLdapDefaultSettings();
     this.mapSettings(response);
+
+    this.save(true);
   };
 
   syncLdap = async () => {
@@ -289,7 +291,7 @@ class LdapFormStore {
     console.log("Save ldap CRON result", { respose });
   };
 
-  save = async () => {
+  save = async (toDefault = false) => {
     this.inProgress = false;
     this.progressStatus = {
       percents: 0,
@@ -301,26 +303,28 @@ class LdapFormStore {
     let isErrorExist = false;
     this.errors = {};
 
-    if (this.authentication) {
-      this.errors.login = this.login.trim() === "";
-      this.errors.password = this.password.trim() === "";
+    if (!toDefault) {
+      if (this.authentication) {
+        this.errors.login = this.login.trim() === "";
+        this.errors.password = this.password.trim() === "";
 
-      isErrorExist = this.errors.login || this.errors.password;
-    }
-
-    for (var key in this.requiredSettings) {
-      console.log({ key });
-      if (
-        this.requiredSettings[key] &&
-        typeof this.requiredSettings[key] == "string" &&
-        this.requiredSettings[key].trim() === ""
-      ) {
-        isErrorExist = true;
-        this.errors[key] = true;
+        isErrorExist = this.errors.login || this.errors.password;
       }
-    }
 
-    if (isErrorExist) return;
+      for (var key in this.requiredSettings) {
+        console.log({ key });
+        if (
+          this.requiredSettings[key] &&
+          typeof this.requiredSettings[key] == "string" &&
+          this.requiredSettings[key].trim() === ""
+        ) {
+          isErrorExist = true;
+          this.errors[key] = true;
+        }
+      }
+
+      if (isErrorExist) return;
+    }
 
     console.log("saving settings");
 

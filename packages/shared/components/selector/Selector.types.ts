@@ -171,6 +171,8 @@ export interface EmptyScreenProps {
   searchHeader: string;
   searchDescription: string;
   withSearch: boolean;
+
+  items: TSelectorItem[];
 }
 
 type TSelectorEmptyScreen = {
@@ -414,6 +416,7 @@ type TSelectorItemEmpty = {
   name?: undefined;
   isCreateNewItem?: undefined;
   onCreateClick?: undefined;
+  onBackClick?: undefined;
   isInputItem?: undefined;
   defaultInputValue?: undefined;
   onAcceptInput?: undefined;
@@ -492,6 +495,7 @@ export type TSelectorItemNew = MergeTypes<
   {
     isCreateNewItem: boolean;
     onCreateClick: VoidFunction;
+    onBackClick: VoidFunction;
   }
 >;
 

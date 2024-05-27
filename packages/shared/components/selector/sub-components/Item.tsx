@@ -86,6 +86,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       label,
       isCreateNewItem,
       onCreateClick,
+
       isInputItem,
       defaultInputValue,
       onAcceptInput,
@@ -115,10 +116,16 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       );
     }
 
-    if (isCreateNewItem) {
+    if (
+      isCreateNewItem &&
+      (items.length > 2 || (items.length === 2 && !items[1].isInputItem))
+    ) {
       return (
         <NewItem label={label} onCreateClick={onCreateClick} style={style} />
       );
+    }
+    if (isCreateNewItem) {
+      return null;
     }
 
     const showPlanetIcon =

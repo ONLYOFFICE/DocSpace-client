@@ -2377,6 +2377,9 @@ const Dark: TTheme = {
 
     emptyScreen: {
       descriptionColor: "#ADADAD",
+      buttonColor: "#ADADAD",
+      hoverButtonColor: "#FFFFFF",
+      pressedButtonColor: "#CCCCCC",
     },
   },
 

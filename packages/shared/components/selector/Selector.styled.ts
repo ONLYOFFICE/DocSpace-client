@@ -272,6 +272,36 @@ const StyledEmptyScreen = styled.div<{ withSearch: boolean }>`
 
   box-sizing: border-box;
 
+  .buttons {
+    margin-top: 32px;
+
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+
+    .empty-folder_container-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .empty-folder_link {
+        color: ${(props) => props.theme.selector.emptyScreen.buttonColor};
+      }
+
+      &:hover {
+        .empty-folder_link {
+          color: ${(props) =>
+            props.theme.selector.emptyScreen.hoverButtonColor};
+        }
+
+        svg path {
+          fill: ${(props) => props.theme.selector.emptyScreen.hoverButtonColor};
+        }
+      }
+    }
+  }
+
   .empty-image {
     max-width: 72px;
     max-height: 72px;

@@ -79,9 +79,6 @@ const InputItem = ({
 
   React.useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-
       if (e.key === "Enter") onAcceptInputAction();
       else if (e.key === "Escape") onCancelInput();
     };

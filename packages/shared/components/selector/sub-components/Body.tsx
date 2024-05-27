@@ -109,7 +109,16 @@ const Body = ({
   const bodyRef = React.useRef<HTMLDivElement>(null);
   const listOptionsRef = React.useRef<null | InfiniteLoader>(null);
 
-  const itemsCount = hasNextPage ? items.length + 1 : items.length;
+  const isEmptyInput =
+    items.length === 2 && items[1].isInputItem && items[0].isCreateNewItem;
+
+  const itemsCount = hasNextPage
+    ? items.length + 1
+    : items.length === 1 && items[0].isCreateNewItem
+      ? 0
+      : isEmptyInput
+        ? 1
+        : items.length;
 
   const resetCache = React.useCallback(() => {
     if (listOptionsRef && listOptionsRef.current) {
@@ -230,6 +239,7 @@ const Body = ({
           searchImage={searchEmptyScreenImage}
           searchHeader={searchEmptyScreenHeader}
           searchDescription={searchEmptyScreenDescription}
+          items={items}
         />
       ) : (
         <>
@@ -265,7 +275,7 @@ const Body = ({
                   width="100%"
                   itemCount={itemsCount}
                   itemData={{
-                    items,
+                    items: isEmptyInput ? [items[1]] : items,
                     onSelect,
                     isMultiSelect: isMultiSelect || false,
                     rowLoader,

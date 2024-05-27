@@ -2398,6 +2398,10 @@ export const getBaseTheme = () => {
 
       emptyScreen: {
         descriptionColor: cyanBlueDarkShade,
+
+        buttonColor: "#657077",
+        hoverButtonColor: "#333333",
+        pressedButtonColor: "#555F65",
       },
     },
 

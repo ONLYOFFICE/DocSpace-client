@@ -2473,14 +2473,14 @@ export const getBaseTheme = () => {
         },
         dropdownButton: {
           background: "none",
-          hoverBackground: "#f3f4f4",
+          hoverBackground: "#F8F9F9",
           borderColor: "#ECEEF1",
           isOpenBorderColor: "#2DA7DB",
           descriptionText: "#A3A9AE",
         },
         dropdownItem: {
           background: "#ffffff",
-          hoverBackground: "#f3f4f4",
+          hoverBackground: "#F8F9F9",
           descriptionText: "#A3A9AE",
         },
         displayItem: {

@@ -1218,6 +1218,7 @@ class ContextOptionsStore {
     let withOpen = item.id !== this.selectedFolderStore.id;
     const isPublicRoomType =
       item.roomType === RoomsType.PublicRoom ||
+      item.roomType === RoomsType.FormRoom ||
       item.roomType === RoomsType.CustomRoom;
 
     if (item.isRoom && withOpen) {

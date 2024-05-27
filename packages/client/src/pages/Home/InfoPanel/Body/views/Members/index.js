@@ -322,7 +322,9 @@ export default inject(
       selectedFolderStore.roomType ?? infoPanelSelection?.roomType;
 
     const isPublicRoomType =
-      roomType === RoomsType.PublicRoom || roomType === RoomsType.CustomRoom;
+      roomType === RoomsType.PublicRoom ||
+      roomType === RoomsType.CustomRoom ||
+      roomType === RoomsType.FormRoom;
 
     const isPublicRoom = roomType === RoomsType.PublicRoom;
 

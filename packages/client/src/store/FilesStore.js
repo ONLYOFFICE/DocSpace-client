@@ -1451,6 +1451,7 @@ class FilesStore {
 
         if (
           (data.current.roomType === RoomsType.PublicRoom ||
+            data.current.roomType === RoomsType.FormRoom ||
             data.current.roomType === RoomsType.CustomRoom) &&
           !this.publicRoomStore.isPublicRoom
         ) {
@@ -2295,6 +2296,7 @@ class FilesStore {
 
       const isPublicRoomType =
         item.roomType === RoomsType.PublicRoom ||
+        item.roomType === RoomsType.FormRoom ||
         item.roomType === RoomsType.CustomRoom;
       const isCustomRoomType = item.roomType === RoomsType.CustomRoom;
 

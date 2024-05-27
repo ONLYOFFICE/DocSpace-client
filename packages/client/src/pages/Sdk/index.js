@@ -198,7 +198,8 @@ const Sdk = ({
 
       if (
         data[0].roomType === RoomsType.PublicRoom ||
-        (data[0].roomType === RoomsType.CustomRoom && data[0].shared)
+        (data[0].roomType === RoomsType.CustomRoom && data[0].shared) ||
+        (data[0].roomType === RoomsType.FormRoom && data[0].shared)
       ) {
         const links = await fetchExternalLinks(data[0].id);
 

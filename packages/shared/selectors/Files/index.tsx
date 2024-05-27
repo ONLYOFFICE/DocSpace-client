@@ -293,6 +293,7 @@ const FilesSelector = ({
     isInit,
     setIsInit,
     withCreateFolder,
+    setSelectedItemId,
   });
 
   const onSelectAction = React.useCallback(

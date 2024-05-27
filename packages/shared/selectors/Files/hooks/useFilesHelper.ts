@@ -84,6 +84,7 @@ const useFilesHelper = ({
   setIsInit,
   setIsFirstLoad,
   withCreateFolder,
+  setSelectedItemId,
 }: UseFilesHelpersProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -388,6 +389,16 @@ const useFilesHelper = ({
               id: "create-folder-item",
               key: "create-folder-item",
               onCreateClick: addInputItem,
+              onBackClick: () => {
+                setSelectedItemId(current.parentId);
+                setBreadCrumbs((val) => {
+                  const newVal = [...val];
+
+                  newVal.pop();
+
+                  return newVal;
+                });
+              },
             });
           } else {
             setTotal(total);
@@ -465,6 +476,7 @@ const useFilesHelper = ({
       setItems,
       setTotal,
       addInputItem,
+      setSelectedItemId,
       rootThirdPartyId,
     ],
   );

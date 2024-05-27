@@ -98,7 +98,7 @@ export type UseFilesHelpersProps = {
   setIsRoot: (value: boolean) => void;
   setIsInit: (value: boolean) => void;
   searchValue?: string;
-  disabledItems: string[] | number[];
+  disabledItems: (string | number)[];
   setSelectedItemSecurity: (value: TFileSecurity | TFolderSecurity) => void;
   isThirdParty: boolean;
   setSelectedTreeNode: (treeNode: TFolder) => void;
@@ -121,6 +121,7 @@ export type UseFilesHelpersProps = {
   isInit: boolean;
   setIsFirstLoad: (value: boolean) => void;
   withCreateFolder: boolean;
+  setSelectedItemId: (value: number | string) => void;
 };
 
 export type TSelectedFileInfo = {
@@ -140,7 +141,7 @@ export type FilesSelectorProps = (
 ) & {
   socketHelper: SocketIOHelper;
   socketSubscribers: Set<string>;
-  disabledItems: string[] | number[];
+  disabledItems: (string | number)[];
   filterParam?: string;
   withoutBackButton: boolean;
   withBreadCrumbs: boolean;

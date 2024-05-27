@@ -128,8 +128,8 @@ const useSocketHelper = ({
 
             let idx = 0;
 
-            if (value[0].isInputItem) idx = 1;
-            if (value[1].isInputItem) idx = 2;
+            if (value[0]?.isInputItem) idx = 1;
+            if (value[1]?.isInputItem) idx = 2;
 
             newValue.splice(idx, 0, item);
 
@@ -144,9 +144,9 @@ const useSocketHelper = ({
 
           for (let i = 0; i < value.length - 1; i += 1) {
             if (
-              !value[i].isFolder &&
-              !value[i].isCreateNewItem &&
-              !value[i].isInputItem
+              !value[i]?.isFolder &&
+              !value[i]?.isCreateNewItem &&
+              !value[i]?.isInputItem
             )
               break;
 

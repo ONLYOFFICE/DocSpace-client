@@ -3229,13 +3229,17 @@ export const getBaseTheme = () => {
         textDescriptionColor: "#A3A9AE",
       },
       activeSessions: {
-        color: "#333",
+        color: "#333333",
         borderColor: "#eceef1",
         tickIconColor: "#35AD17",
         removeIconColor: "#A3A9AE",
         sortHeaderColor: "#d0d5da",
+        textOnlineColor: "#35ad17",
+        boxShadowColor: "rgba(4, 15, 27, 0.07) 0px 5px 20px",
         tableCellColor: "#a3a9ae",
         dividerColor: "#D0D5DA",
+        iconColor: "#657077",
+        subtitleColor: "#657077",
       },
     },
 

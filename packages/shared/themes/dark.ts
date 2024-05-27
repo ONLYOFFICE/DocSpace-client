@@ -3211,8 +3211,12 @@ const Dark: TTheme = {
       tickIconColor: "#3BA420",
       removeIconColor: "#A3A9AE",
       sortHeaderColor: "#474747",
+      textOnlineColor: "#3BA420",
+      boxShadowColor: "rgba(0, 0, 0, 0.12) 0px 40px 60px",
       tableCellColor: "#858585",
       dividerColor: "#474747",
+      iconColor: "#858585",
+      subtitleColor: "#858585",
     },
   },
 

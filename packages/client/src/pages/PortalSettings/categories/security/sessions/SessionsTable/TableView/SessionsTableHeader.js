@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { TableHeader } from "@docspace/shared/components/table";
 
-const TABLE_VERSION = "5";
+const TABLE_VERSION = "4";
 const TABLE_COLUMNS = `SecuritySessionsColumns_ver-${TABLE_VERSION}`;
 
 const getColumns = (defaultColumns, userId) => {
@@ -62,16 +62,9 @@ const SessionsTableHeader = (props) => {
       onChange: onColumnChange,
     },
     {
-      key: "Country",
-      title: t("Common:Country"),
+      key: "Location",
+      title: t("Common:Location"),
       enable: true,
-      resizable: true,
-      onChange: onColumnChange,
-    },
-    {
-      key: "IpAddress",
-      title: t("Common:IpAddress"),
-      enable: false,
       resizable: true,
       onChange: onColumnChange,
     },

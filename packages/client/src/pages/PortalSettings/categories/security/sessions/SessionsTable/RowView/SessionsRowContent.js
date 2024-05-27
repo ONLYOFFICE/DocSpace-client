@@ -49,10 +49,14 @@ const SessionsRowContent = ({ sectionWidth, item }) => {
         {platform}
         {` ${browser}`}
       </Text>
-      <Text fontSize="12px" fontWeight="600">
-        {country}
-        {` ${city}`}
-      </Text>
+
+      {(country || city) && (
+        <Text fontSize="12px" fontWeight="600">
+          {country}
+          {country && city && ` ${city}`}
+        </Text>
+      )}
+
       <Text fontSize="12px" fontWeight="600" containerWidth="160px">
         {ip}
       </Text>

@@ -9,7 +9,7 @@ import SessionsTableRow from "./SessionsTableRow";
 import { TableContainer } from "@docspace/shared/components/table";
 import { TableBody } from "@docspace/shared/components/table";
 
-const TABLE_VERSION = "5";
+const TABLE_VERSION = "4";
 const COLUMNS_SIZE = `securitySessionsColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelSessionsColumnsSize_ver-${TABLE_VERSION}`;
 

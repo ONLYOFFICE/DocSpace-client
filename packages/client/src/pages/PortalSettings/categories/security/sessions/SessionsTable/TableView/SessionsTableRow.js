@@ -117,6 +117,15 @@ const StyledTableRow = styled(TableRow)`
     color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
   }
 
+  .divider {
+    display: inline-block;
+    height: 12px;
+    width: 2px;
+    background-color: ${(props) =>
+      props.theme.profile.activeSessions.dividerColor};
+    margin: -2px 5px;
+  }
+
   .online {
     font-weight: 600;
     color: ${(props) => props.theme.profile.activeSessions.textOnlineColor};
@@ -282,15 +291,14 @@ const SessionsTableRow = (props) => {
 
         <TableCell>
           <Text className="session-info" truncate>
-            {country},&nbsp;
-          </Text>
-          <Text className="session-info" truncate>
-            {city}
-          </Text>
-        </TableCell>
-
-        <TableCell>
-          <Text className="session-info" truncate>
+            {(country || city) && (
+              <>
+                {country}
+                {country && city && ", "}
+                {city}
+                <span className="divider"></span>
+              </>
+            )}
             {ip}
           </Text>
         </TableCell>

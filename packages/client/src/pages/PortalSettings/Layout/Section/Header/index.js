@@ -57,9 +57,11 @@ const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   max-width: calc(100vw - 32px);
+
   .settings-section_header {
     display: flex;
     align-items: center;
+
     .settings-section_badge {
       ${(props) =>
         props.theme.interfaceDirection === "rtl"
@@ -81,6 +83,7 @@ const HeaderContainer = styled.div`
       align-items: center;
     }
   }
+
   .action-wrapper {
     flex-grow: 1;
 
@@ -167,14 +170,6 @@ const StyledContainer = styled.div`
     left: 0px;
     width: 100%;
 
-    @media ${tablet} {
-      height: 60px;
-    }
-
-    @media ${mobile} {
-      height: 52px;
-    }
-
     .table-container_group-menu {
       border-image-slice: 0;
       border-image-source: none;
@@ -201,8 +196,13 @@ const StyledContainer = styled.div`
           `}
 
     @media ${tablet} {
+      height: 60px;
       margin: 0 -16px;
       width: calc(100% + 32px);
+    }
+
+    @media ${mobile} {
+      margin: 0px -2px;
     }
   }
 `;

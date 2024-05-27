@@ -1,10 +1,7 @@
-import { observer, inject } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
 import { convertTime } from "@docspace/shared/utils/convertTime";
 import { RowContent } from "@docspace/shared/components/row-content";
-import { ReactSVG } from "react-svg";
 
-import RemoveSessionSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import styled from "styled-components";
 
 const StyledRowContent = styled(RowContent)`
@@ -21,29 +18,10 @@ const StyledRowContent = styled(RowContent)`
     color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
     margin-left: 4px;
   }
-
-  .mainIcons {
-    height: 0px;
-    cursor: pointer;
-  }
 `;
 
-const SessionsRowContent = ({
-  item,
-  sectionWidth,
-  setPlatformModalData,
-  setLogoutDialogVisible,
-}) => {
+const SessionsRowContent = ({ item, sectionWidth }) => {
   const { id, platform, browser, country, city, date } = item;
-
-  const onClickDisable = () => {
-    setLogoutDialogVisible(true);
-    setPlatformModalData({
-      id: item.id,
-      platform: item.platform,
-      browser: item.browser,
-    });
-  };
 
   return (
     <StyledRowContent
@@ -55,19 +33,15 @@ const SessionsRowContent = ({
         {platform}, {browser}
         <span className="date">{convertTime(date)}</span>
       </Text>
-      <ReactSVG src={RemoveSessionSvgUrl} onClick={onClickDisable} />
-      <Text fontSize="12px" fontWeight="600">
-        {country}
-        {` ${city}`}
-      </Text>
+      <></>
+      {(country || city) && (
+        <Text fontSize="12px" fontWeight="600">
+          {country}
+          {country && city && ` ${city}`}
+        </Text>
+      )}
     </StyledRowContent>
   );
 };
 
-export default inject(({ setup }) => {
-  const { setPlatformModalData } = setup;
-
-  return {
-    setPlatformModalData,
-  };
-})(observer(SessionsRowContent));
+export default SessionsRowContent;

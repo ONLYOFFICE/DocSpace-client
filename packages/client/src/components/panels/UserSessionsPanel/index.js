@@ -102,6 +102,6 @@ export default inject(({ setup, peopleStore, dialogsStore }) => {
   };
 })(
   withTranslation(["Settings", "Profile", "Common"])(
-    observer(UserSessionsPanel)
-  )
+    observer(UserSessionsPanel),
+  ),
 );

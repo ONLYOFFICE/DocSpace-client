@@ -43,10 +43,16 @@ const StyledLastSessionBlock = styled.div`
     }
 
     .session-info-right-container {
+      width: 100%;
+      overflow: hidden;
       p {
         font-weight: 600;
         padding: 8px;
         font-size: 13px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
       }
     }
   }
@@ -66,17 +72,22 @@ const LastSessionBlock = (props) => {
           <Text>{t("Common:Active")}</Text>
           <Text>{t("Common:Platform")}</Text>
           <Text>{t("Common:Browser")}</Text>
-          <Text>{t("Common:IpAddress")}</Text>
-          <Text>{t("Common:Country")}</Text>
-          <Text>{t("Common:City")}</Text>
+          <Text>{t("Common:Location")}</Text>
         </div>
         <div className="session-info-right-container">
           <Text className={isOnline && "online"}>{status}</Text>
           <Text>{platform}</Text>
           <Text>{browser}</Text>
-          <Text>{ip}</Text>
-          <Text>{country}</Text>
-          <Text>{city}</Text>
+          <Text>
+            {(country || city) && (
+              <>
+                {country}
+                {country && city && ", "}
+                {`${city} `}
+              </>
+            )}
+            {ip}
+          </Text>
         </div>
       </Box>
     </StyledLastSessionBlock>

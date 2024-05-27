@@ -78,17 +78,14 @@ class SocketIOHelper {
 
   socketUrl: string | null = null;
 
-  ns: string | undefined;
-
-  constructor(url: string, publicRoomKey: string, ns: string = "/files") {
+  constructor(url: string, publicRoomKey: string) {
     if (!url) return;
 
     this.socketUrl = url;
-    this.ns = ns;
 
     if (this.client) return;
 
-    const origin = window.location.origin + ns;
+    const origin = window.location.origin;
 
     const config: TConfig = {
       withCredentials: true,
@@ -106,7 +103,7 @@ class SocketIOHelper {
     this.client = io(origin, config);
 
     this.client.on("connect", () => {
-      console.log(`socket ${ns} is connected`);
+      console.log(`socket is connected`);
       if (this.callbacks?.length > 0) {
         this.callbacks.forEach(({ eventName, callback }) => {
           if (!this.client) return;
@@ -132,7 +129,7 @@ class SocketIOHelper {
   emit = ({ command, data, room = null }: TEmit) => {
     if (!this.isEnabled) return;
 
-    console.log(`[WS] [NS:${this.ns}] emit`, command, data, room);
+    console.log(`[WS] emit`, command, data, room);
 
     const ids =
       !data || !data.roomParts

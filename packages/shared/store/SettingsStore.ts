@@ -874,42 +874,22 @@ class SettingsStore {
     this.publicRoomKey = key;
   };
 
-  sockerFilesClient: SocketIOHelper | null = null;
-
-  socketUsersClient: SocketIOHelper | null = null;
+  socketFilesClient: SocketIOHelper | null = null;
 
   get socketHelper() {
     const socketUrl = isPublicRoom() && !this.publicRoomKey ? "" : "/socket.io"; // this.socketUrl;
 
-    if (!this.sockerFilesClient) {
-      this.sockerFilesClient = new SocketIOHelper(
+    if (!this.socketFilesClient) {
+      this.socketFilesClient = new SocketIOHelper(
         socketUrl,
         this.publicRoomKey,
-        "/files",
       );
 
       // TODO: comment this line
-      window.socketFilesClient = this.sockerFilesClient;
+      window.socketFilesClient = this.socketFilesClient;
     }
 
-    return this.sockerFilesClient;
-  }
-
-  get socketUsersHelper() {
-    const socketUrl = isPublicRoom() && !this.publicRoomKey ? "" : "/socket.io"; // this.socketUrl;
-
-    if (!this.socketUsersClient) {
-      this.socketUsersClient = new SocketIOHelper(
-        socketUrl,
-        this.publicRoomKey,
-        "/onlineusers",
-      );
-
-      // TODO: comment this line
-      window.socketUsersClient = this.socketUsersClient;
-    }
-
-    return this.socketUsersClient;
+    return this.socketFilesClient;
   }
 
   getBuildVersionInfo = async () => {

@@ -200,19 +200,21 @@ const SessionsTableRow = (props) => {
 
   useEffect(() => {
     const userIds = item.userId;
-    socketUsersHelper.emit({
+
+    socketHelper.emit({
       command: "subscribe",
-      data: { roomParts: "onlineusers" },
+      data: { roomParts: "statuses-in-room" },
     });
 
-    socketUsersHelper.emit({
+    socketHelper.emit({
       command: "getSessionsInPortal",
       data: { userIds },
     });
-    socketUsersHelper.on("getSessionsInPortal", (data) => {
+
+    socketHelper.on("statuses-in-room", (data) => {
       console.log(data);
     });
-  }, [socketUsersHelper]);
+  }, [item.userId, socketHelper]);
 
   const isChecked = checkedProps.checked;
   const isOnline = status === "Online";

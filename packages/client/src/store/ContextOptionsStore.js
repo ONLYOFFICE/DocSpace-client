@@ -2030,7 +2030,7 @@ class ContextOptionsStore {
       id: "personal_upload-ready-Pdf-from",
       className: "main-button_drop-down_sub",
       icon: ActionsUploadReactSvgUrl,
-      label: t("Common:UploadReadyPDFForm"),
+      label: t("Common:UploadPDFForm"),
       key: "personal_upload-ready-Pdf-from",
       items: [
         {

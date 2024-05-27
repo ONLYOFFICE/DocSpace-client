@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { inject, observer } from "mobx-react";
 import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.react.svg?url";
 import React from "react";
 import PropTypes from "prop-types";
@@ -107,9 +108,10 @@ const StyledListItem = styled(StyledRoomType)`
       props.theme.createEditRoomDialog.roomType.listItem.hoverBackground};
   }
 
+  ${(props) => console.log(props.accentColor)}
+
   &:active {
-    border-color: ${(props) =>
-      props.theme.createEditRoomDialog.roomType.listItem.activeBorderColor};
+    border-color: ${({ accentColor }) => accentColor};
   }
 
   .choose_room-description {
@@ -134,16 +136,15 @@ const StyledDropdownButton = styled(StyledRoomType)`
     `}
 
   border: 1px solid
-    ${(props) =>
-    props.isOpen
-      ? props.theme.createEditRoomDialog.roomType.dropdownButton
-          .isOpenBorderColor
-      : props.theme.createEditRoomDialog.roomType.dropdownButton.borderColor};
+    ${({ isOpen, accentColor, theme }) =>
+    isOpen
+      ? accentColor
+      : theme.createEditRoomDialog.roomType.dropdownButton.borderColor};
+
+  ${(props) => console.log(props.accentColor)}
 
   &:active {
-    border-color: ${(props) =>
-      props.theme.createEditRoomDialog.roomType.dropdownButton
-        .isOpenBorderColor};
+    border-color: ${({ accentColor }) => accentColor};
   }
 
   .choose_room-description {
@@ -205,12 +206,15 @@ const RoomType = ({
   isOpen,
   id,
   selectedId,
+  currentColorScheme,
 }) => {
   const room = {
     type: roomType,
     title: getRoomTypeTitleTranslation(roomType, t),
     description: getRoomTypeDescriptionTranslation(roomType, t),
   };
+
+  const accentColor = currentColorScheme?.main?.accent;
 
   const arrowClassName =
     type === "dropdownButton"
@@ -246,7 +250,12 @@ const RoomType = ({
   );
 
   return type === "listItem" ? (
-    <StyledListItem id={id} title={t(room.title)} onClick={onClick}>
+    <StyledListItem
+      accentColor={accentColor}
+      id={id}
+      title={t(room.title)}
+      onClick={onClick}
+    >
       {content}
     </StyledListItem>
   ) : type === "dropdownButton" ? (
@@ -256,6 +265,7 @@ const RoomType = ({
       onClick={onClick}
       isOpen={isOpen}
       data-selected-id={selectedId}
+      accentColor={accentColor}
     >
       {content}
     </StyledDropdownButton>
@@ -266,6 +276,7 @@ const RoomType = ({
       onClick={onClick}
       isOpen={isOpen}
       data-selected-id={selectedId}
+      currentColorScheme={currentColorScheme}
     >
       {content}
     </StyledDropdownItem>
@@ -274,6 +285,7 @@ const RoomType = ({
       id={id}
       title={t(room.title)}
       data-selected-id={selectedId}
+      currentColorScheme={currentColorScheme}
     >
       {content}
     </StyledDisplayItem>
@@ -295,6 +307,9 @@ RoomType.propTypes = {
     "dropdownItem",
   ]),
   isOpen: PropTypes.bool,
+  currentColorScheme: PropTypes.object,
 };
 
-export default RoomType;
+export default inject(({ settingsStore }) => ({
+  currentColorScheme: settingsStore.currentColorScheme,
+}))(observer(RoomType));

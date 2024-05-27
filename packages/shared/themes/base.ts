@@ -2469,7 +2469,6 @@ export const getBaseTheme = () => {
           background: "none",
           hoverBackground: "#F8F9F9",
           borderColor: "#ECEEF1",
-          activeBorderColor: "#5299E0",
           descriptionText: "#A3A9AE",
         },
         dropdownButton: {

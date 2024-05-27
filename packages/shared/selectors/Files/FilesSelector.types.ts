@@ -121,7 +121,6 @@ export type UseFilesHelpersProps = {
   isInit: boolean;
   setIsFirstLoad: (value: boolean) => void;
   withCreateFolder: boolean;
-  setSelectedItemId: (value: number | string) => void;
 };
 
 export type TSelectedFileInfo = {

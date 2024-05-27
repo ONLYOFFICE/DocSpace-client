@@ -84,7 +84,6 @@ const useFilesHelper = ({
   setIsInit,
   setIsFirstLoad,
   withCreateFolder,
-  setSelectedItemId,
 }: UseFilesHelpersProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -127,15 +126,17 @@ const useFilesHelper = ({
     async (value: string) => {
       if (!withCreateFolder || !selectedItemId) return;
 
-      const folder = await createFolder(selectedItemId, value);
+      await createFolder(selectedItemId, value);
 
-      setBreadCrumbs((val) => {
-        return [...val, { id: folder.id, label: folder.title }];
-      });
+      onCancelInput();
 
-      setSelectedItemId(folder.id);
+      // setBreadCrumbs((val) => {
+      //   return [...val, { id: folder.id, label: folder.title }];
+      // });
+
+      // setSelectedItemId(folder.id);
     },
-    [withCreateFolder, selectedItemId, setBreadCrumbs, setSelectedItemId],
+    [withCreateFolder, selectedItemId, onCancelInput],
   );
 
   const addInputItem = React.useCallback(() => {

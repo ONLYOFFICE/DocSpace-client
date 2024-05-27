@@ -13,6 +13,10 @@ export interface EmptyViewContainerProps {
 
   onClickInviteUsers?: (folderId: string | number, roomType: RoomsType) => void;
   setSelectFileFormRoomDialogVisible?: TStore["dialogsStore"]["setSelectFileFormRoomDialogVisible"];
+  onCreateAndCopySharedLink?: TStore["contextOptionsStore"]["onCreateAndCopySharedLink"];
+  selectedFolder?: ReturnType<
+    TStore["selectedFolderStore"]["getSelectedFolder"]
+  >;
 }
 
 export type OptionActions = {
@@ -21,4 +25,5 @@ export type OptionActions = {
   onCreateDocumentForm: VoidFunction;
   uploadPDFForm: VoidFunction;
   onUploadAction: (type: UploadType) => void;
+  createAndCopySharedLink: VoidFunction;
 };

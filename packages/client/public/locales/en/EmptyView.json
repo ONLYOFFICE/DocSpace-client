@@ -12,5 +12,7 @@
   "UploadDevicePDFFormOptionDescription": "Upload your PDF form from your device",
   "UploadDevicePDFFormOptionTitle": "Upload a PDF form",
   "UploadPDFFormOptionDescription": "Select PDF form from DocSpace",
-  "UploadPDFFormOptionTitle": "Select a PDF form"
+  "UploadPDFFormOptionTitle": "Select a PDF form",
+  "ShareOptionTitle": "Share room to fill out forms",
+  "ShareOptionDescription": "Copy public link or invite other users to this room to start the form filling process and collect completed copies."
 }

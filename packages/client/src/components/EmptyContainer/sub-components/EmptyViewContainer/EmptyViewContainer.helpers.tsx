@@ -9,6 +9,7 @@ import EmptyFormRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.
 // import InviteUserFormIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
 import UploadPDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.pdf.form.svg";
 import UploadDevicePDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
+import SharedIcon from "PUBLIC_DIR/images/emptyview/share.svg";
 
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
@@ -117,6 +118,15 @@ export const getOptions = (
     disabled: !security?.Create,
   };
 
+  const shareRoom = {
+    title: t("EmptyView:ShareOptionTitle"),
+    description: t("EmptyView:ShareOptionDescription"),
+    icon: <SharedIcon />,
+    key: "share-room",
+    onClick: actions.createAndCopySharedLink,
+    disabled: false,
+  };
+
   // const createFormFromDocx = {
   //   title: t("EmptyView:CreateFormFromTextDocOptionTitle"),
   //   description: t("EmptyView:CreateFormFromTextDocOptionDescription"),
@@ -145,6 +155,7 @@ export const getOptions = (
         // createFormFromDocx,
         // inviteUser,
         uploadFromDevice,
+        shareRoom,
       ];
     case RoomsType.EditingRoom:
       return [];

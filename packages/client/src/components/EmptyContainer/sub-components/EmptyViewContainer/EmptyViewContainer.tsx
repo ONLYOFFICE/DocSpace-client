@@ -24,7 +24,9 @@ const EmptyViewContainer = observer(
     access,
     folderId,
     security,
+    selectedFolder,
     onClickInviteUsers,
+    onCreateAndCopySharedLink,
     setSelectFileFormRoomDialogVisible,
   }: EmptyViewContainerProps) => {
     const { t } = useTranslation(["EmptyView"]);
@@ -61,6 +63,12 @@ const EmptyViewContainer = observer(
       );
     }, [setSelectFileFormRoomDialogVisible]);
 
+    const createAndCopySharedLink = useCallback(() => {
+      if (!selectedFolder) return;
+
+      onCreateAndCopySharedLink?.(selectedFolder, t);
+    }, [selectedFolder, onCreateAndCopySharedLink, t]);
+
     const onCreateDocumentForm = useCallback(() => {
       const event: Event & {
         payload?: { extension: string; id: number; withoutDialog: boolean };
@@ -92,6 +100,7 @@ const EmptyViewContainer = observer(
           onCreateDocumentForm,
           uploadPDFForm,
           onUploadAction,
+          createAndCopySharedLink,
         }),
       [
         type,
@@ -104,6 +113,7 @@ const EmptyViewContainer = observer(
         onUploadAction,
         createFormFromFile,
         onCreateDocumentForm,
+        createAndCopySharedLink,
       ],
     );
 
@@ -122,16 +132,21 @@ const EmptyViewContainer = observer(
 
 const injectedEmptyViewContainer = inject<TStore>(
   ({ contextOptionsStore, selectedFolderStore, dialogsStore }) => {
-    const { onClickInviteUsers } = contextOptionsStore;
+    const { onClickInviteUsers, onCreateAndCopySharedLink } =
+      contextOptionsStore;
 
     const { setSelectFileFormRoomDialogVisible } = dialogsStore;
 
     const { security, access } = selectedFolderStore;
 
+    const selectedFolder = selectedFolderStore.getSelectedFolder();
+
     return {
       access,
       security,
+      selectedFolder,
       onClickInviteUsers,
+      onCreateAndCopySharedLink,
       setSelectFileFormRoomDialogVisible,
     };
   },

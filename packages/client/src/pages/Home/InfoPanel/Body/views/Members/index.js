@@ -69,6 +69,7 @@ const Members = ({
   primaryLink,
   isArchiveFolder,
   isPublicRoom,
+  isFormRoom,
   additionalLinks,
   setLinkParams,
   setEditLinkPanelIsVisible,
@@ -158,7 +159,7 @@ const Members = ({
             {t("Common:SharedLinks")}
           </Text>
 
-          {!isArchiveFolder && (
+          {!isArchiveFolder && !isFormRoom && (
             <div
               data-tooltip-id="emailTooltip"
               data-tooltip-content={t(
@@ -321,10 +322,12 @@ export default inject(
     const roomType =
       selectedFolderStore.roomType ?? infoPanelSelection?.roomType;
 
+    const isFormRoom = roomType === RoomsType.FormRoom;
+
     const isPublicRoomType =
       roomType === RoomsType.PublicRoom ||
       roomType === RoomsType.CustomRoom ||
-      roomType === RoomsType.FormRoom;
+      isFormRoom;
 
     const isPublicRoom = roomType === RoomsType.PublicRoom;
 
@@ -337,6 +340,7 @@ export default inject(
       selfId,
       isAdmin,
       isPublicRoomType,
+      isFormRoom,
       membersFilter,
       infoPanelMembers,
       setInfoPanelMembers,

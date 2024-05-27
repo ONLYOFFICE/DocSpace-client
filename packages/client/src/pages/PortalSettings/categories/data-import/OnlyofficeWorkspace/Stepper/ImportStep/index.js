@@ -54,13 +54,14 @@ const ImportStep = ({
   showReminder,
   importOptions,
   setImportOptions,
+  user,
 }) => {
   const onChange = (e, name) => {
     const checked = e.target.checked;
     setImportOptions({ [name]: checked });
   };
 
-  const serviceName = "Onlyoffice Workspace";
+  const serviceName = "ONLYOFFICE Workspace";
   const users =
     t("Settings:Employees")[0].toUpperCase() + t("Settings:Employees").slice(1);
 
@@ -149,7 +150,9 @@ const ImportStep = ({
         isChecked={importOptions.importCommonFiles}
         onChange={(e) => onChange(e, "importCommonFiles")}
         sectionName={t("Common:CommonFiles")}
-        description={t("Settings:CommonFilesDescription")}
+        description={t("Settings:CommonFilesDescription", {
+          user: user.displayName,
+        })}
         exportSection={{
           sectionName: t("Common:Common"),
           workspace: serviceName,
@@ -191,10 +194,13 @@ const ImportStep = ({
   );
 };
 
-export default inject(({ importAccountsStore }) => {
+export default inject(({ importAccountsStore, userStore }) => {
   const { importOptions, setImportOptions } = importAccountsStore;
 
+  const { user } = userStore;
+
   return {
+    user,
     importOptions,
     setImportOptions,
   };

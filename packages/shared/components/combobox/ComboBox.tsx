@@ -180,6 +180,10 @@ const ComboBoxPure = (props: ComboboxProps) => {
     setSelectedOption(selectedOptionProps);
   }, [selectedOptionProps]);
 
+  React.useEffect(() => {
+    setIsOpen(false);
+  }, [withLabel]);
+
   const dropDownMaxHeightProp = dropDownMaxHeight
     ? { maxHeight: dropDownMaxHeight }
     : {};

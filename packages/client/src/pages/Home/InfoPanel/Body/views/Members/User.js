@@ -276,7 +276,7 @@ const User = ({
   const uniqueTooltipId = `userTooltip_${Math.random()}`;
 
   const tooltipContent = `${
-    user.isOwner ? t("Common:DocSpaceOwner") : t("Common:DocSpaceAdmin")
+    user.isOwner ? t("Common:DocspaceOwner") : t("Common:DocspaceAdmin")
   }. ${t("Common:HasFullAccess")}`;
 
   return user.isTitle ? (

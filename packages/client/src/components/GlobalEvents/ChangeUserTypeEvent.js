@@ -136,7 +136,7 @@ const ChangeUserTypeEvent = ({
   const getType = (type) => {
     switch (type) {
       case "admin":
-        return t("Common:DocSpaceAdmin");
+        return t("Common:DocspaceAdmin");
       case "manager":
         return t("Common:RoomAdmin");
       case "collaborator":

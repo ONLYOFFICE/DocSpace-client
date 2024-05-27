@@ -2035,7 +2035,7 @@ class ContextOptionsStore {
           id: "personal_upload-from-docspace",
           className: "main-button_drop-down",
           icon: ActionsUploadReactSvgUrl,
-          label: t("Common:FromDocSpace"),
+          label: t("Common:FromDocspace"),
           key: "personal_upload-from-docspace",
           onClick: () =>
             this.onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.PDF),
@@ -2139,7 +2139,7 @@ class ContextOptionsStore {
         id: "accounts-add_administrator",
         className: "main-button_drop-down",
         icon: PersonAdminReactSvgUrl,
-        label: t("Common:DocSpaceAdmin"),
+        label: t("Common:DocspaceAdmin"),
         onClick: this.onInvite,
         "data-type": EmployeeType.Admin,
         key: "administrator",

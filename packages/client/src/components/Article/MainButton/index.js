@@ -362,7 +362,7 @@ const ArticleMainButtonContent = (props) => {
             id: "actions_upload-from-docspace",
             className: "main-button_drop-down",
             icon: ActionsUploadReactSvgUrl,
-            label: t("Common:FromDocSpace"),
+            label: t("Common:FromDocspace"),
             key: "actions_upload-from-docspace",
             onClick: () =>
               onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.PDF),
@@ -595,7 +595,7 @@ const ArticleMainButtonContent = (props) => {
               id: "invite_doc-space-administrator",
               className: "main-button_drop-down",
               icon: PersonAdminReactSvgUrl,
-              label: t("Common:DocSpaceAdmin"),
+              label: t("Common:DocspaceAdmin"),
               onClick: onInvite,
               action: EmployeeType.Admin,
               key: "administrator",

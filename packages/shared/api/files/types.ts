@@ -295,6 +295,7 @@ export type TFilesSettings = {
   storeOriginalFiles: boolean;
   templatesSection: boolean;
   updateIfExist: boolean;
+  openEditorInSameTab: boolean;
 };
 
 export type TPresignedUri = {

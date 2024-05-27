@@ -111,7 +111,7 @@ class ImportAccountsStore {
   };
 
   UserTypes = {
-    DocSpaceAdmin: "DocSpaceAdmin",
+    DocSpaceAdmin: "DocspaceAdmin",
     RoomAdmin: "RoomAdmin",
     User: "Collaborator",
   };

@@ -43,8 +43,8 @@ export const getAccessOptions = (
   const accesses = {
     docSpaceAdmin: {
       key: "docSpaceAdmin",
-      label: t("Common:DocSpaceAdmin"),
-      description: t("Translations:RoleDocSpaceAdminDescription"),
+      label: t("Common:DocspaceAdmin"),
+      description: t("Translations:RoleDocspaceAdminDescription"),
       ...(!standalone && { quota: t("Common:Paid") }),
       color: "#EDC409",
       access:

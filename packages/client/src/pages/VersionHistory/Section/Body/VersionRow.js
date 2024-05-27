@@ -85,6 +85,7 @@ const VersionRow = (props) => {
     currentDeviceType,
     openUrl,
     setIsVerHistoryPanel,
+    openOnNewPage,
   } = props;
 
   const navigate = useNavigate();
@@ -144,7 +145,7 @@ const VersionRow = (props) => {
     if (MediaView || ImageView) {
       return window.open(
         combineUrl(MEDIA_VIEW_URL, info.id),
-        window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
+        openOnNewPage ? "_blank" : "_self",
       );
     }
 
@@ -169,10 +170,7 @@ const VersionRow = (props) => {
       }
     }
 
-    window.open(
-      info.webUrl,
-      window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
-    );
+    window.open(info.webUrl, openOnNewPage ? "_blank" : "_self");
   };
 
   const onRestoreClick = () => {
@@ -364,6 +362,7 @@ export default inject(
     pluginStore,
     infoPanelStore,
     userStore,
+    filesSettingsStore,
   }) => {
     const { user } = userStore;
     const { openUser, setIsVisible } = infoPanelStore;
@@ -386,6 +385,8 @@ export default inject(
     const isEdit = isEditingVersion || isEditing;
     const canChangeVersionFileHistory = !isEdit && fileSecurity?.EditHistory;
 
+    const { openOnNewPage } = filesSettingsStore;
+
     return {
       currentDeviceType,
       fileItemsList,
@@ -402,6 +403,7 @@ export default inject(
       setIsVisible,
       openUrl,
       setIsVerHistoryPanel,
+      openOnNewPage,
     };
   },
 )(

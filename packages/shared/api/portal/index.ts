@@ -27,7 +27,13 @@
 import { AxiosRequestConfig } from "axios";
 import { EmployeeType } from "../../enums";
 import { request } from "../client";
-import { TPaymentQuota, TPortal, TPortalTariff, TTenantExtra } from "./types";
+import {
+  TPaymentQuota,
+  TPortal,
+  TPortalTariff,
+  TRestoreProgress,
+  TTenantExtra,
+} from "./types";
 
 export function getShortenedLink(link) {
   return request({
@@ -169,8 +175,13 @@ export function startRestore(backupId, storageType, storageParams, notify) {
   });
 }
 
-export function getRestoreProgress() {
-  return request({ method: "get", url: "/portal/getrestoreprogress" });
+export async function getRestoreProgress() {
+  const res = (await request({
+    method: "get",
+    url: "/portal/getrestoreprogress",
+  })) as TRestoreProgress;
+
+  return res;
 }
 
 export function enableRestore() {

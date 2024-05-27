@@ -58,7 +58,6 @@ const Scripts = () => {
                 window.navigator.userAgent.includes("ZoomApps")
               ) {
                 window.DocSpaceConfig.editor = {
-                  openOnNewPage: false,
                   requestClose: true,
                 };
               }

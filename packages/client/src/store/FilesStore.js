@@ -3819,6 +3819,7 @@ class FilesStore {
   };
 
   openDocEditor = (id, preview = false, shareKey = null, editForm = false) => {
+    const { openOnNewPage } = this.filesSettingsStore;
     const foundIndex = this.files.findIndex((x) => x.id === id);
     const file = foundIndex !== -1 ? this.files[foundIndex] : undefined;
     if (
@@ -3848,10 +3849,7 @@ class FilesStore {
       `/doceditor?${searchParams.toString()}`,
     );
 
-    window.open(
-      url,
-      window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
-    );
+    window.open(url, openOnNewPage ? "_blank" : "_self");
   };
 
   createThumbnails = async (files = null) => {

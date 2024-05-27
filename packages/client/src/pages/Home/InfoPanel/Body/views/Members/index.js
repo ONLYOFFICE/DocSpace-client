@@ -156,7 +156,7 @@ const Members = ({
       publicRoomItems.push(
         <LinksBlock key="general-link_header">
           <Text fontSize="14px" fontWeight={600}>
-            {t("Common:SharedLinks")}
+            {isFormRoom ? t("Common:PublicLink") : t("Common:SharedLinks")}
           </Text>
 
           {!isArchiveFolder && !isFormRoom && (
@@ -251,8 +251,16 @@ const Members = ({
       {showPublicRoomBar && (
         <StyledPublicRoomBarContainer>
           <PublicRoomBar
-            headerText={t("Files:RoomAvailableViaExternalLink")}
-            bodyText={t("CreateEditRoomDialog:PublicRoomBarDescription")}
+            headerText={
+              isFormRoom
+                ? t("Files:RoomAvailableViaSharedLink")
+                : t("Files:RoomAvailableViaExternalLink")
+            }
+            bodyText={
+              isFormRoom
+                ? t("CreateEditRoomDialog:FormRoomBarDescription")
+                : t("CreateEditRoomDialog:PublicRoomBarDescription")
+            }
           />
         </StyledPublicRoomBarContainer>
       )}

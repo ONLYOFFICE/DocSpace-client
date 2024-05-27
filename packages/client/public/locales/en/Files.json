@@ -144,6 +144,7 @@
   "RestoreAll": "Restore all",
   "RevokeLink": "Revoke link",
   "RoomAvailableViaExternalLink": "Room available via external link",
+  "RoomAvailableViaSharedLink": "Room available via shared link",
   "RoomCreated": "Room created",
   "RoomEmptyAtTheMoment": "This room is empty at the moment.",
   "RoomEmptyContainerDescription": "Please create the first room.",

@@ -100,7 +100,9 @@ const SelectUsersStep = ({
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
         displaySettings
-        saveButtonDisabled={areCheckedUsersEmpty || totalUsedUsers > quota.max}
+        saveButtonDisabled={
+          areCheckedUsersEmpty || (quota.max && totalUsedUsers > quota.max)
+        }
       />
 
       {quota.max && (
@@ -143,7 +145,7 @@ const SelectUsersStep = ({
           cancelButtonLabel={t("Common:Back")}
           displaySettings
           saveButtonDisabled={
-            areCheckedUsersEmpty || totalUsedUsers > quota.max
+            areCheckedUsersEmpty || (quota.max && totalUsedUsers > quota.max)
           }
         />
       )}

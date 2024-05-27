@@ -117,7 +117,7 @@ const AddEmailsStep = (props) => {
             showReminder
             displaySettings
             saveButtonDisabled={
-              areCheckedUsersEmpty || totalUsedUsers > quota.max
+              areCheckedUsersEmpty || (quota.max && totalUsedUsers > quota.max)
             }
           />
 
@@ -164,7 +164,9 @@ const AddEmailsStep = (props) => {
         cancelButtonLabel={t("Common:Back")}
         showReminder
         displaySettings
-        saveButtonDisabled={areCheckedUsersEmpty || totalUsedUsers > quota.max}
+        saveButtonDisabled={
+          areCheckedUsersEmpty || (quota.max && totalUsedUsers > quota.max)
+        }
       />
     </Wrapper>
   );

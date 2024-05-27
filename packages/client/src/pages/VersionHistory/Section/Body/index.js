@@ -31,7 +31,7 @@ import { inject, observer } from "mobx-react";
 import { VariableSizeList as List, areEqual } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 import HistoryRowsSkeleton from "@docspace/shared/skeletons/history";
-import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
+import { CustomScrollbarsVirtualListWithAutoFocus } from "@docspace/shared/components/scrollbar";
 import { StyledBody, StyledVersionList } from "./StyledVersionHistory";
 class SectionBodyContent extends React.Component {
   constructor(props) {
@@ -140,7 +140,7 @@ class SectionBodyContent extends React.Component {
             itemSize={this.getSize}
             itemCount={versions.length}
             itemData={versions}
-            outerElementType={CustomScrollbarsVirtualList}
+            outerElementType={CustomScrollbarsVirtualListWithAutoFocus}
           >
             {this.renderRow}
           </List>

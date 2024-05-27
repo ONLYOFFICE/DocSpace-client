@@ -2463,8 +2463,8 @@ const Dark: TTheme = {
         descriptionText: "#A3A9AE",
       },
       displayItem: {
-        background: "#474747",
-        borderColor: "#474747",
+        background: "#282828",
+        borderColor: "#282828",
         descriptionText: "#a3a9ae",
       },
     },

@@ -87,8 +87,8 @@ const Accounts = (props) => {
     const adminOption = {
       id: "info-account-type_docspace-admin",
       key: "admin",
-      title: t("Common:DocSpaceAdmin"),
-      label: t("Common:DocSpaceAdmin"),
+      title: t("Common:DocspaceAdmin"),
+      label: t("Common:DocspaceAdmin"),
       action: "admin",
     };
     const managerOption = {

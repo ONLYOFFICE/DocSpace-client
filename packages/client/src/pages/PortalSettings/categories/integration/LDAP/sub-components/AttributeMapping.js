@@ -71,8 +71,8 @@ const AttributeMapping = (props) => {
         key: EmployeeType.Collaborator,
         label: t("Common:PowerUser"),
       },
-      { key: EmployeeType.RoomAdmin, label: t("Common:RoomAdmin") },
-      { key: EmployeeType.DocSpaceAdmin, label: t("Common:DocspaceAdmin") },
+      { key: EmployeeType.User, label: t("Common:RoomAdmin") },
+      { key: EmployeeType.Admin, label: t("Common:DocspaceAdmin") },
     ];
     return options;
   }, [t]);

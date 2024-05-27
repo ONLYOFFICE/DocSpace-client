@@ -14487,7 +14487,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>DocSpaceAdmin</name>
+								<name>DocspaceAdmin</name>
 								<description/>
 								<comment/>
 								<default_text/>
@@ -14615,7 +14615,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>DocSpaceOwner</name>
+								<name>DocspaceOwner</name>
 								<description/>
 								<comment/>
 								<default_text/>
@@ -22423,7 +22423,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>FromDocSpace</name>
+								<name>FromDocspace</name>
 								<description/>
 								<comment/>
 								<default_text/>
@@ -45463,7 +45463,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>SelectFromDocSpace</name>
+								<name>SelectFromDocspace</name>
 								<description/>
 								<comment/>
 								<default_text/>

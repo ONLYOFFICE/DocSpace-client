@@ -40,6 +40,7 @@ import TargetUserStore from "./TargetUserStore";
 import EditingFormStore from "./EditingFormStore";
 import FilterStore from "./FilterStore";
 import SelectionStore from "./SelectionPeopleStore";
+import AccountsHotkeysStore from "./AccountsHotkeysStore";
 import HeaderMenuStore from "./HeaderMenuStore";
 
 import InviteLinksStore from "./InviteLinksStore";
@@ -77,10 +78,12 @@ class PeopleStore {
   profileActionsStore = null;
   infoPanelStore = null;
   userStore = null;
+  accountsHotkeysStore = null;
 
   isInit = false;
   viewAs = isDesktop() ? "table" : "row";
   isLoadedProfileSectionBody = false;
+  enabledHotkeys = true;
 
   constructor(
     authStore,
@@ -101,6 +104,7 @@ class PeopleStore {
       infoPanelStore,
       userStore,
     );
+    this.accountsHotkeysStore = new AccountsHotkeysStore(this);
     this.groupsStore = new GroupsStore(
       authStore,
       this,
@@ -311,8 +315,8 @@ class PeopleStore {
     const adminOption = {
       id: "menu_change-user_administrator",
       className: "group-menu_drop-down",
-      label: t("Common:DocSpaceAdmin"),
-      title: t("Common:DocSpaceAdmin"),
+      label: t("Common:DocspaceAdmin"),
+      title: t("Common:DocspaceAdmin"),
       onClick: (e) => this.onChangeType(e),
       "data-action": "admin",
       key: "administrator",
@@ -530,6 +534,10 @@ class PeopleStore {
     else if (user.isCollaborator) return "collaborator";
     else if (user.isVisitor) return "user";
     else return "manager";
+  };
+
+  setEnabledHotkeys = (enabledHotkeys) => {
+    this.enabledHotkeys = enabledHotkeys;
   };
 }
 

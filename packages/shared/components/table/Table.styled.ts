@@ -346,7 +346,7 @@ const StyledTableHeaderCell = styled.div<{
     display: ${(props) =>
       props.isActive && props.showIcon ? "block" : "none"};
     ${(props) =>
-      props.sorted &&
+      !props.sorted &&
       css`
         transform: scale(1, -1);
         padding: ${getCorrectFourValuesStyle(

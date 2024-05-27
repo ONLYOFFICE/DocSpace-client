@@ -915,6 +915,17 @@ export async function changeKeepNewFileName(val: boolean) {
   return res;
 }
 
+export async function changeOpenEditorInSameTab(val: boolean) {
+  const data = { set: val };
+  const res = (await request({
+    method: "put",
+    url: "files/settings/openeditorinsametab",
+    data,
+  })) as boolean;
+
+  return res;
+}
+
 export function enableThirdParty(val: boolean) {
   const data = { set: val };
   return request({ method: "put", url: "files/thirdparty", data });

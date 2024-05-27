@@ -114,7 +114,6 @@ declare global {
       imageThumbnails?: boolean;
       editor?: {
         requestClose: boolean;
-        openOnNewPage: boolean;
       };
       firebase: {
         fetchTimeoutMillis?: number;

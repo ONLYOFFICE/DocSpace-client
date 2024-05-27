@@ -76,6 +76,7 @@ const NewFilesPanel = (props) => {
     currentDeviceType,
     fileItemsList,
     enablePlugins,
+    openOnNewPage,
   } = props;
 
   const [listFiles, setListFiles] = useState(newFiles);
@@ -205,7 +206,7 @@ const NewFilesPanel = (props) => {
             config.homepage,
             `/doceditor?fileId=${id}`,
           ),
-          window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
+          openOnNewPage ? "_blank" : "_self",
         );
       }
 
@@ -374,7 +375,7 @@ export default inject(
     };
 
     const { setMediaViewerData, setCurrentItem } = mediaViewerDataStore;
-    const { getIcon, getFolderIcon } = filesSettingsStore;
+    const { getIcon, getFolderIcon, openOnNewPage } = filesSettingsStore;
     const { markAsRead } = filesActionsStore;
     const { id: currentFolderId } = selectedFolderStore;
 
@@ -406,6 +407,7 @@ export default inject(
       refreshFiles,
       setIsLoading,
       currentDeviceType: settingsStore.currentDeviceType,
+      openOnNewPage,
     };
   },
 )(

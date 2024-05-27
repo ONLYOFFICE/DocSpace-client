@@ -108,8 +108,6 @@ const StyledListItem = styled(StyledRoomType)`
       props.theme.createEditRoomDialog.roomType.listItem.hoverBackground};
   }
 
-  ${(props) => console.log(props.accentColor)}
-
   &:active {
     border-color: ${({ accentColor }) => accentColor};
   }
@@ -140,8 +138,6 @@ const StyledDropdownButton = styled(StyledRoomType)`
     isOpen
       ? accentColor
       : theme.createEditRoomDialog.roomType.dropdownButton.borderColor};
-
-  ${(props) => console.log(props.accentColor)}
 
   &:active {
     border-color: ${({ accentColor }) => accentColor};

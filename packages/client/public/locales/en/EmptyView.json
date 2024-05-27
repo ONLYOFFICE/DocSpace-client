@@ -9,8 +9,8 @@
   "FormRoomEmptyTitle": "Welcome to the Form filling room",
   "InviteUsersOptionDescription": "Invite other users to this room to start the form filling process and collect completed copies.",
   "InviteUsersOptionTitle": "Invite users",
-  "UploadDevicePDFFormOptionDescription": "Download a PDF form from your device, and the system will automatically convert it into a form that can be filled out.",
-  "UploadDevicePDFFormOptionTitle": "Download the complete PDF form",
-  "UploadPDFFormOptionDescription": "Move a ready-to-fill-out PDF form to this room from your DocSpace.",
-  "UploadPDFFormOptionTitle": "Upload a PDF form"
+  "UploadDevicePDFFormOptionDescription": "Upload your PDF form from your device",
+  "UploadDevicePDFFormOptionTitle": "Upload a PDF form",
+  "UploadPDFFormOptionDescription": "Select PDF form from DocSpace",
+  "UploadPDFFormOptionTitle": "Select a PDF form"
 }

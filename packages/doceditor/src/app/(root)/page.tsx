@@ -48,7 +48,7 @@ const Root = dynamic(() => import("@/components/Root"), {
 });
 
 export const metadata: Metadata = {
-  title: "Onlyoffice DocEditor page",
+  title: "ONLYOFFICE DocEditor page",
 
   description: "",
 };

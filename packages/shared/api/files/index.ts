@@ -1309,6 +1309,15 @@ export async function getFileLink(fileId: number) {
   return res;
 }
 
+export async function getFolderLink(fileId: number) {
+  const res = (await request({
+    method: "get",
+    url: `/files/folder/${fileId}/link`,
+  })) as TFileLink;
+
+  return res;
+}
+
 export async function getExternalLinks(
   fileId: number | string,
   startIndex = 0,

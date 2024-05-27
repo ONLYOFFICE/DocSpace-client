@@ -24,22 +24,29 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import { forwardRef, useEffect, useRef } from "react";
 
-import { ScrollbarType } from "./Scrollbar.enums";
-import { ScrollbarComponent as Scrollbar } from "./Scrollbar";
-import { ScrollbarContext } from "./custom-scrollbar";
-import {
-  CustomScrollbarsVirtualList,
-  CustomScrollbarsVirtualListWithAutoFocus,
-} from "./sub-components";
-import type { ScrollbarProps } from "./Scrollbar.types";
+import { CustomScrollbarsVirtualList } from "../../scrollbar";
 
-export {
-  Scrollbar,
-  ScrollbarProps,
-  ScrollbarType,
-  CustomScrollbarsVirtualList,
-  CustomScrollbarsVirtualListWithAutoFocus,
-  ScrollbarContext,
-};
+export const VirtualScroll = forwardRef((props, ref) => {
+  const scrollContentRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const isSearchInputFocused =
+      document.activeElement?.classList.contains("search-input-block");
+
+    if (!isSearchInputFocused) {
+      scrollContentRef.current?.focus();
+    }
+  }, []);
+
+  return (
+    <CustomScrollbarsVirtualList
+      {...props}
+      ref={ref}
+      contentRef={scrollContentRef}
+    />
+  );
+});
+
+VirtualScroll.displayName = "VirtualScroll";

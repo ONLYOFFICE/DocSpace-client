@@ -126,3 +126,8 @@ export type TTenantExtra = {
   licenseAccept: Date;
   enableTariffPage: boolean;
 };
+
+export type TRestoreProgress = {
+  progress: number;
+  error?: any;
+};

@@ -24,22 +24,55 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import styled from "styled-components";
+import { tablet } from "@docspace/shared/utils";
 
-import { ScrollbarType } from "./Scrollbar.enums";
-import { ScrollbarComponent as Scrollbar } from "./Scrollbar";
-import { ScrollbarContext } from "./custom-scrollbar";
-import {
-  CustomScrollbarsVirtualList,
-  CustomScrollbarsVirtualListWithAutoFocus,
-} from "./sub-components";
-import type { ScrollbarProps } from "./Scrollbar.types";
+const StyledPreparationPortal = styled.div<{
+  errorMessage?: boolean;
+  isDialog?: boolean;
+}>`
+  width: 100%;
+  @media ${tablet} {
+    margin-top: ${(props) => (props.isDialog ? "0px" : "48px")};
+  }
 
-export {
-  Scrollbar,
-  ScrollbarProps,
-  ScrollbarType,
-  CustomScrollbarsVirtualList,
-  CustomScrollbarsVirtualListWithAutoFocus,
-  ScrollbarContext,
-};
+  #header {
+    font-size: 23px;
+  }
+  #text {
+    color: #a3a9ae;
+    font-size: 13px;
+    line-height: 20px;
+    max-width: 480px;
+  }
+  .logo-wrapper {
+    ${(props) => props.isDialog && "display: none"};
+  }
+
+  #container {
+    ${(props) => props.isDialog && "margin-top:0"};
+  }
+  .preparation-portal_body-wrapper {
+    margin-bottom: 24px;
+    width: 100%;
+    max-width: ${(props) => (props.errorMessage ? "560px" : "480px")};
+    box-sizing: border-box;
+    align-items: center;
+    .preparation-portal_error {
+      text-align: center;
+      color: ${(props) => props.theme.preparationPortalProgress.errorTextColor};
+    }
+
+    .preparation-portal_text {
+      text-align: center;
+      color: ${(props) =>
+        props.theme.preparationPortalProgress.descriptionTextColor};
+    }
+  }
+
+  .restoring-portal {
+    height: 100%;
+  }
+`;
+
+export { StyledPreparationPortal };

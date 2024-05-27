@@ -54,11 +54,4 @@ export const StyledComboBox = styled(ComboBox)<{ withBorder: boolean }>`
   .combo-buttons_arrow-icon {
     margin: 0;
   }
-
-  .dropdown-container {
-    width: 41px;
-    .drop-down-item {
-      padding: 0;
-    }
-  }
 `;

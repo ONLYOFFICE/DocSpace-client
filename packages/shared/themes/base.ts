@@ -2391,10 +2391,17 @@ export const getBaseTheme = () => {
       item: {
         hoverBackground: grayLight,
         selectedBackground: lightHover,
+
+        inputButtonBorder: "#D0D5DA",
+        inputButtonBorderHover: grayMain,
       },
 
       emptyScreen: {
         descriptionColor: cyanBlueDarkShade,
+
+        buttonColor: "#657077",
+        hoverButtonColor: "#333333",
+        pressedButtonColor: "#555F65",
       },
     },
 

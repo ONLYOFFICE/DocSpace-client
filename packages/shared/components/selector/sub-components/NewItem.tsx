@@ -24,42 +24,45 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export type IconOptions = {
-  color: string;
+import React from "react";
+
+import { Text } from "../../text";
+import { SelectorAddButton } from "../../selector-add-button";
+
+import { StyledItem } from "../Selector.styled";
+
+const NewItem = ({
+  label,
+  style,
+  onCreateClick,
+}: {
+  label: string;
+  style: React.CSSProperties;
+  onCreateClick: VoidFunction;
+}) => {
+  return (
+    <StyledItem
+      key="create-new-item"
+      style={style}
+      isSelected={false}
+      isMultiSelect={false}
+      noHover
+    >
+      <SelectorAddButton onClick={onCreateClick} isAction />
+      <Text
+        className="label label-disabled clicked-label"
+        fontWeight={600}
+        fontSize="14px"
+        noSelect
+        truncate
+        dir="auto"
+        onClick={onCreateClick}
+        title={label}
+      >
+        {label}
+      </Text>
+    </StyledItem>
+  );
 };
-export type SocialButtonSize = "base" | "small";
 
-export interface StyledSocialButtonProps {
-  /** Accepts id */
-  id?: string;
-  /** Accepts tabindex prop */
-  tabIndex: number;
-
-  noHover: boolean;
-  /** Changes the button style if the user is connected to the social network account */
-  isConnect: boolean;
-  /** Accepts class */
-  className?: string;
-  /** Sets the button to present a disabled state */
-  isDisabled: boolean;
-  /** Sets the image size. Contains the small and the basic size options */
-  size: SocialButtonSize;
-  /** Accepts the icon options  */
-  $iconOptions?: IconOptions;
-  /** Accepts css style */
-  style?: React.CSSProperties;
-  /** Sets a callback function that is triggered when the button is clicked */
-  onClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
-}
-
-export interface SocialButtonProps extends Partial<StyledSocialButtonProps> {
-  /** Button text */
-  label?: string;
-  /** Button icon */
-  iconName?: string;
-
-  "data-url"?: string;
-  "data-providername"?: string;
-
-  IconComponent?: JSX.ElementType;
-}
+export default NewItem;

@@ -34,8 +34,8 @@ import { ContextMenuModel } from "../../context-menu";
 
 import {
   TBreadCrumb,
-  BreadCrumbsProps,
   TDisplayedItem,
+  TSelectorBreadCrumbs,
 } from "../Selector.types";
 import {
   StyledBreadCrumbs,
@@ -45,20 +45,20 @@ import {
 
 const BreadCrumbs = ({
   breadCrumbs,
+  isBreadCrumbsLoading,
   onSelectBreadCrumb,
-  isLoading,
-}: BreadCrumbsProps) => {
+}: TSelectorBreadCrumbs) => {
   const [displayedItems, setDisplayedItems] = React.useState<TDisplayedItem[]>(
     [],
   );
 
   const onClickItem = React.useCallback(
     ({ item }: { item: TBreadCrumb }) => {
-      if (isLoading) return;
+      if (isBreadCrumbsLoading) return;
 
-      onSelectBreadCrumb(item);
+      onSelectBreadCrumb?.(item);
     },
-    [isLoading, onSelectBreadCrumb],
+    [isBreadCrumbsLoading, onSelectBreadCrumb],
   );
 
   const calculateDisplayedItems = React.useCallback(
@@ -214,11 +214,12 @@ const BreadCrumbs = ({
             noSelect
             truncate
             isCurrent={index === displayedItems.length - 1}
-            isLoading={isLoading || false}
+            isLoading={isBreadCrumbsLoading}
             onClick={() => {
-              if (index === displayedItems.length - 1 || isLoading) return;
+              if (index === displayedItems.length - 1 || isBreadCrumbsLoading)
+                return;
 
-              onSelectBreadCrumb({
+              onSelectBreadCrumb?.({
                 id: item.id,
                 label: item.label,
                 isRoom: item.isRoom,

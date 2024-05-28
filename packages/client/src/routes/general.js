@@ -77,14 +77,6 @@ const generalRoutes = [
           </PrivateRoute>
         ),
       },
-      {
-        path: "authorized-apps",
-        element: (
-          <PrivateRoute>
-            <Profile />
-          </PrivateRoute>
-        ),
-      },
     ],
   },
 ];

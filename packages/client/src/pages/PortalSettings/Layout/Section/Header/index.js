@@ -49,7 +49,7 @@ import {
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import TariffBar from "SRC_DIR/components/TariffBar";
 
-export const HeaderContainer = styled.div`
+const HeaderContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
@@ -155,7 +155,7 @@ export const HeaderContainer = styled.div`
   }
 `;
 
-export const StyledContainer = styled.div`
+const StyledContainer = styled.div`
   .group-button-menu-container {
     ${(props) =>
       props.viewAs === "table"

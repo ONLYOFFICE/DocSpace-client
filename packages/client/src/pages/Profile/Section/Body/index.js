@@ -41,8 +41,6 @@ import FileManagement from "./sub-components/file-management";
 import InterfaceTheme from "./sub-components/interface-theme";
 
 import { tablet } from "@docspace/shared/utils";
-import { DeviceType } from "@docspace/shared/enums";
-import AuthorizedApps from "./sub-components/authorized-apps";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 const Wrapper = styled.div`
@@ -83,11 +81,6 @@ const SectionBodyContent = (props) => {
       id: "interface-theme",
       name: t("InterfaceTheme"),
       content: <InterfaceTheme />,
-    },
-    {
-      id: "authorized-apps",
-      name: t("OAuth:AuthorizedApps"),
-      content: <AuthorizedApps />,
     },
   ];
 
@@ -148,7 +141,6 @@ export default inject(({ settingsStore, peopleStore, clientLoadingStore }) => {
       "DeleteSelfProfileDialog",
       "Notifications",
       "ConnectDialog",
-      "OAuth",
     ])(SectionBodyContent),
   ),
 );

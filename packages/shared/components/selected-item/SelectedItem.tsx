@@ -45,7 +45,6 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
     group,
     forwardedRef,
     classNameCloseButton,
-    hideCross,
     title,
   } = props;
   if (!label) return null;
@@ -79,16 +78,14 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
       >
         {label}
       </StyledLabel>
-      {!hideCross && (
-        <IconButton
-          className={`selected-tag-removed ${classNameCloseButton}`}
-          iconName={CrossReactSvgUrl}
-          size={12}
-          onClick={onCloseClick}
-          isFill
-          isDisabled={isDisabled}
-        />
-      )}
+      <IconButton
+        className={`selected-tag-removed ${classNameCloseButton}`}
+        iconName={CrossReactSvgUrl}
+        size={12}
+        onClick={onCloseClick}
+        isFill
+        isDisabled={isDisabled}
+      />
     </StyledSelectedItem>
   );
 };

@@ -58,25 +58,23 @@ export type TTableColumn = {
 };
 
 export interface TableHeaderProps {
-  containerRef: { current: HTMLDivElement | null };
+  containerRef: { current: HTMLDivElement };
   columns: TTableColumn[];
-  sortBy?: string;
-  sorted?: boolean;
+  sortBy: string;
+  sorted: boolean;
   columnStorageName: string;
   sectionWidth: number;
-  onClick?: () => void;
-  resetColumnsSize?: boolean;
-  isLengthenHeader?: boolean;
-  sortingVisible?: boolean;
-  infoPanelVisible?: boolean;
+  onClick: () => void;
+  resetColumnsSize: boolean;
+  isLengthenHeader: boolean;
+  sortingVisible: boolean;
+  infoPanelVisible: boolean;
   useReactWindow: boolean;
   showSettings: boolean;
-  setHideColumns?: (value: boolean) => void;
-  columnInfoPanelStorageName?: string;
+  setHideColumns: (value: boolean) => void;
+  columnInfoPanelStorageName: string;
   settingsTitle?: string;
-  tagRef?:
-    | React.ForwardedRef<HTMLDivElement>
-    | ((node: HTMLDivElement) => void);
+  tagRef: React.ForwardedRef<HTMLDivElement>;
   theme: TTheme;
 }
 
@@ -89,9 +87,7 @@ export interface TableHeaderCellProps {
   sortBy: string;
   defaultSize?: number;
   sortingVisible: boolean;
-  tagRef?:
-    | React.ForwardedRef<HTMLDivElement>
-    | ((node: HTMLDivElement) => void);
+  tagRef: React.ForwardedRef<HTMLDivElement>;
 }
 
 export interface TableSettingsProps {
@@ -101,7 +97,7 @@ export interface TableSettingsProps {
 
 export interface TableBodyProps {
   columnStorageName: string;
-  columnInfoPanelStorageName?: string;
+  columnInfoPanelStorageName: string;
   fetchMoreFiles: (params: IndexRange) => Promise<void>;
   children: React.ReactNode[];
   filesLength: number;
@@ -109,28 +105,27 @@ export interface TableBodyProps {
   itemCount: number;
   itemHeight: number;
   useReactWindow: boolean;
-  onScroll?: () => void;
-  infoPanelVisible?: boolean;
+  onScroll: () => void;
+  infoPanelVisible: boolean;
 }
 
 export interface TableRowProps {
-  fileContextClick?: (value?: boolean) => void;
+  fileContextClick: (value?: boolean) => void;
   children: React.ReactNode;
-  contextOptions?: ContextMenuModel[];
-  onHideContextMenu?: () => void;
-  selectionProp?: { className: string };
-  className?: string;
-  style?: React.CSSProperties;
-  title?: string;
+  contextOptions: ContextMenuModel[];
+  onHideContextMenu: () => void;
+  selectionProp: { className: string };
+  className: string;
+  style: React.CSSProperties;
+  title: string;
   getContextModel: () => ContextMenuModel[];
-  onClick?: (e: React.MouseEvent) => void;
-  badgeUrl?: string;
+  badgeUrl: string;
 }
 
 export interface TableCellProps {
   className: string;
-  forwardedRef?: React.ForwardedRef<HTMLDivElement>;
-  style?: React.CSSProperties;
+  forwardedRef: React.ForwardedRef<HTMLDivElement>;
+  style: React.CSSProperties;
   children?: React.ReactNode;
 }
 

@@ -28,7 +28,7 @@ import moment from "moment-timezone";
 
 export default function getCorrectDate(
   locale: string,
-  date: string | Date,
+  date: string,
   dateFormat = "L",
   timeFormat = "LT",
 ) {

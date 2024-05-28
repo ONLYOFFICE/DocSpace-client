@@ -619,6 +619,7 @@ class InfoPanelStore {
     t,
     clearFilter = true,
     withoutTitlesAndLinks = false,
+    membersFilter,
   ) => {
     if (this.membersIsLoading) return;
     const roomId = this.infoPanelSelection.id;
@@ -626,7 +627,9 @@ class InfoPanelStore {
     const isPublic =
       this.infoPanelSelection?.roomType ?? this.infoPanelSelection?.roomType;
 
-    const requests = [this.filesStore.getRoomMembers(roomId, clearFilter)];
+    const requests = [
+      this.filesStore.getRoomMembers(roomId, clearFilter, membersFilter),
+    ];
 
     if (
       isPublic &&

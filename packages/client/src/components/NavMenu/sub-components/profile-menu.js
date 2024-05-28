@@ -208,7 +208,6 @@ class ProfileMenu extends React.Component {
         open={open}
         clickOutsideAction={clickOutsideAction}
         forwardedRef={forwardedRef}
-        isDefaultMode={false}
         withBlur={true}
         isBannerVisible={isBannerVisible}
         withPortal={true}
@@ -237,15 +236,7 @@ class ProfileMenu extends React.Component {
   };
 
   render() {
-    const { open } = this.props;
-
-    const element = this.renderDropDown();
-
-    const root = document.getElementById("root");
-
-    const wrapper = <StyledWrapper>{element}</StyledWrapper>;
-
-    return <>{<Portal element={wrapper} appendTo={root} visible={open} />}</>;
+    return <StyledWrapper>{this.renderDropDown()}</StyledWrapper>;
   }
 }
 

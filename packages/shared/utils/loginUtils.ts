@@ -34,6 +34,7 @@ export async function login(
   password: null | undefined | string = "",
   session = true,
   captchaToken: null | undefined | string = "",
+  currentCultureName: string = "",
 ): Promise<string | object> {
   try {
     const response = (await api.user.login(
@@ -42,6 +43,7 @@ export async function login(
       password,
       session,
       captchaToken,
+      currentCultureName,
     )) as {
       token?: string;
       tfa?: string;

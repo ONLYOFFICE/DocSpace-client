@@ -32,6 +32,7 @@ export function login(
   password,
   session,
   recaptchaResponse,
+  culture,
 ) {
   const data = {
     userName,
@@ -39,6 +40,7 @@ export function login(
     password,
     session,
     recaptchaResponse,
+    culture,
   };
 
   return request({
@@ -49,12 +51,12 @@ export function login(
   });
 }
 
-export function thirdPartyLogin(SerializedProfile) {
+export function thirdPartyLogin(SerializedProfile, culture) {
   return request({
     method: "post",
     url: "authentication",
     skipLogout: true,
-    data: { SerializedProfile },
+    data: { SerializedProfile, culture },
   });
 }
 

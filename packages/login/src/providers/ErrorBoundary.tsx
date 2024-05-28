@@ -24,39 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { memo } from "react";
+import useDeviceType from "@/hooks/useDeviceType";
+import ErrorBoundary from "@docspace/shared/components/error-boundary/ErrorBoundary";
+import { ErrorBoundaryProps } from "./ErrorBoundary.types";
 
-import { DropDownItem } from "../../drop-down-item";
+const ErrorBoundaryWrapper = (props: ErrorBoundaryProps) => {
+  const { currentDeviceType } = useDeviceType();
 
-import { RowProps } from "../DropDown.types";
+  return <ErrorBoundary {...props} currentDeviceType={currentDeviceType} />;
+};
 
-const Row = memo(({ data, index, style }: RowProps) => {
-  const { children, theme, activedescendant, handleMouseMove } = data;
-
-  const option = Array.isArray(children) ? children[index] : null;
-
-  const separator = option?.props?.isSeparator
-    ? { width: `calc(100% - 32px)`, height: `1px` }
-    : {};
-
-  const optionStyle = option?.props.style ?? {};
-
-  const newStyle = { ...style, ...separator, ...optionStyle };
-
-  return (
-    <DropDownItem
-      theme={theme}
-      {...option?.props}
-      noHover
-      style={newStyle}
-      onMouseMove={() => {
-        handleMouseMove?.(index);
-      }}
-      isActiveDescendant={activedescendant === index}
-    />
-  );
-});
-
-Row.displayName = "Row";
-
-export { Row };
+export default ErrorBoundaryWrapper;

@@ -23,40 +23,35 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import styled, { css } from "styled-components";
 
-import React, { memo } from "react";
+import { ComboBox } from "../combobox";
 
-import { DropDownItem } from "../../drop-down-item";
+export const StyledComboBox = styled(ComboBox)<{ withBorder: boolean }>`
+  width: 41px;
+  height: 32px;
+  box-sizing: border-box;
+  padding: 0;
 
-import { RowProps } from "../DropDown.types";
+  .combo-button {
+    padding: 7px;
 
-const Row = memo(({ data, index, style }: RowProps) => {
-  const { children, theme, activedescendant, handleMouseMove } = data;
+    ${(props) =>
+      !props.withBorder &&
+      css`
+        border-width: 0;
+        background: transparent;
+      `};
 
-  const option = Array.isArray(children) ? children[index] : null;
+    :hover {
+      border-color: rgb(163, 169, 174);
+    }
+  }
 
-  const separator = option?.props?.isSeparator
-    ? { width: `calc(100% - 32px)`, height: `1px` }
-    : {};
-
-  const optionStyle = option?.props.style ?? {};
-
-  const newStyle = { ...style, ...separator, ...optionStyle };
-
-  return (
-    <DropDownItem
-      theme={theme}
-      {...option?.props}
-      noHover
-      style={newStyle}
-      onMouseMove={() => {
-        handleMouseMove?.(index);
-      }}
-      isActiveDescendant={activedescendant === index}
-    />
-  );
-});
-
-Row.displayName = "Row";
-
-export { Row };
+  .combo-button_selected-icon-container {
+    margin-right: 0px;
+  }
+  .combo-buttons_arrow-icon {
+    margin: 0;
+  }
+`;

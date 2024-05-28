@@ -75,6 +75,17 @@ export const LoginFormWrapper = styled.div<{ bgPattern: string }>`
       text-align: center;
     }
   }
+
+  .language-combo-box {
+    position: fixed;
+    right: 28px;
+    top: 28px;
+
+    @media ${mobile} {
+      top: 7px;
+      right: 8px;
+    }
+  }
   .invitation-info-container {
     margin-bottom: 16px;
     .sign-in-container {
@@ -86,7 +97,6 @@ export const LoginFormWrapper = styled.div<{ bgPattern: string }>`
       margin-bottom: 16px;
       .back-title {
         position: absolute;
-        max-width: 60px;
         text-overflow: ellipsis;
         overflow: hidden;
 

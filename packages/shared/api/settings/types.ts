@@ -240,3 +240,5 @@ export type TPaymentSettings = {
   };
   max: number;
 };
+
+export type TPortalCultures = string[];

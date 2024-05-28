@@ -53,6 +53,7 @@ export function setCookie(
   name: string,
   value: string,
   options: { [key: string]: unknown } = {},
+  disableEncoding = false,
 ) {
   options = {
     path: "/",
@@ -63,8 +64,9 @@ export function setCookie(
     options.expires = options.expires.toUTCString();
   }
 
-  let updatedCookie =
-    encodeURIComponent(name) + "=" + encodeURIComponent(value);
+  let updatedCookie = disableEncoding
+    ? encodeURIComponent(name) + "=" + value
+    : encodeURIComponent(name) + "=" + encodeURIComponent(value);
 
   Object.keys(options).forEach((optionKey) => {
     updatedCookie += "; " + optionKey;

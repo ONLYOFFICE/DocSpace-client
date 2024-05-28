@@ -59,11 +59,13 @@ export type TRes = {
   request?: {
     responseType: string;
   };
+  headers: { [key: string]: boolean | string };
 };
 
 export type TReqOption = {
   skipUnauthorized?: boolean;
   skipLogout?: boolean;
+  withRedirect?: boolean;
 };
 
 class AxiosClient {
@@ -139,6 +141,9 @@ class AxiosClient {
 
     const apiBaseURL = combineUrl(origin, proxyURL, apiPrefix);
 
+    if (!headers.cookie.includes(origin))
+      headers.cookie = `${headers.cookie};x-docspace-address=${origin}`;
+
     const axiosConfig: AxiosRequestConfig = {
       baseURL: apiBaseURL,
       responseType: "json",
@@ -183,12 +188,21 @@ class AxiosClient {
   ) => {
     const onSuccess = (response: TRes) => {
       const error = this.getResponseError(response);
+
       if (error) throw new Error(error);
+
+      if (response.headers["x-redirect-uri"] && options.withRedirect) {
+        const redirectUri = response.headers["x-redirect-uri"];
+
+        if (typeof redirectUri === "string")
+          return window.location.replace(redirectUri);
+      }
 
       if (!response || !response.data || response.isAxiosError) return null;
 
       if (
         response.data &&
+        typeof response.data !== "string" &&
         typeof response.data === "object" &&
         "total" in response.data
       )
@@ -202,7 +216,9 @@ class AxiosClient {
       if (options.baseURL === "/apisystem" && !response.data.response)
         return response.data;
 
-      return response.data.response;
+      return typeof response.data.response !== "undefined"
+        ? response.data.response
+        : response.data;
     };
 
     const onError = (error: TError) => {

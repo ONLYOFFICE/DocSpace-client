@@ -25,28 +25,27 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useState, useTransition, Suspense } from "react";
-import styled, { css } from "styled-components";
-import { Submenu } from "@docspace/shared/components/submenu";
-
-import { Box } from "@docspace/shared/components/box";
-import { inject, observer } from "mobx-react";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import config from "PACKAGE_FILE";
-
-import { useNavigate } from "react-router-dom";
-import JavascriptSDK from "./JavascriptSDK";
-import Webhooks from "./Webhooks";
-
-import Api from "./Api";
-
 import { useTranslation } from "react-i18next";
-import { isMobile, isMobileOnly } from "react-device-detect";
+import { useNavigate } from "react-router-dom";
+import styled, { css } from "styled-components";
+import { inject, observer } from "mobx-react";
+
+import { Submenu } from "@docspace/shared/components/submenu";
+import { Box } from "@docspace/shared/components/box";
 import AppLoader from "@docspace/shared/components/app-loader";
-import SSOLoader from "./sub-components/ssoLoader";
-import { WebhookConfigsLoader } from "./Webhooks/sub-components/Loaders";
-import PluginSDK from "./PluginSDK";
 import { Badge } from "@docspace/shared/components/badge";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
+import config from "PACKAGE_FILE";
+
+import JavascriptSDK from "./JavascriptSDK";
+import Webhooks from "./Webhooks";
+import Api from "./Api";
+import PluginSDK from "./PluginSDK";
+import OAuth from "./OAuth";
+
+import SSOLoader from "./sub-components/ssoLoader";
 
 const StyledSubmenu = styled(Submenu)`
   .sticky {
@@ -66,6 +65,7 @@ const DeveloperToolsWrapper = (props) => {
     "Settings",
     "WebPlugins",
     "Common",
+    "OAuth",
   ]);
   const [isPending, startTransition] = useTransition();
 
@@ -110,6 +110,11 @@ const DeveloperToolsWrapper = (props) => {
       id: "webhooks",
       name: t("Webhooks:Webhooks"),
       content: <Webhooks />,
+    },
+    {
+      id: "oauth",
+      name: t("OAuth:OAuth"),
+      content: <OAuth />,
     },
   ];
 

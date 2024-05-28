@@ -1119,8 +1119,8 @@ class TableHeader extends React.Component<
       ? columnSize.right - e.clientX
       : e.clientX - columnSize.left;
 
-    const tableContainer = containerRef.current.style.gridTemplateColumns;
-    const widths = tableContainer.split(" ");
+    const tableContainer = containerRef.current?.style.gridTemplateColumns;
+    const widths = tableContainer?.split(" ") as string[];
 
     const minSize = column.dataset.minWidth
       ? column.dataset.minWidth
@@ -1137,8 +1137,8 @@ class TableHeader extends React.Component<
     }
 
     const str = widths.join(" ");
-
-    containerRef.current.style.gridTemplateColumns = str;
+    if (containerRef.current)
+      containerRef.current.style.gridTemplateColumns = str;
     if (this.headerRef?.current)
       this.headerRef.current.style.gridTemplateColumns = str;
 
@@ -1153,17 +1153,18 @@ class TableHeader extends React.Component<
       containerRef,
     } = this.props;
 
-    if (!infoPanelVisible) {
-      localStorage.setItem(
-        columnStorageName,
-        containerRef.current.style.gridTemplateColumns,
-      );
-    } else {
-      localStorage.setItem(
-        columnInfoPanelStorageName,
-        containerRef.current.style.gridTemplateColumns,
-      );
-    }
+    if (containerRef.current)
+      if (!infoPanelVisible) {
+        localStorage.setItem(
+          columnStorageName,
+          containerRef.current.style.gridTemplateColumns,
+        );
+      } else {
+        localStorage.setItem(
+          columnInfoPanelStorageName || "",
+          containerRef.current.style.gridTemplateColumns,
+        );
+      }
 
     window.removeEventListener("mousemove", this.onMouseMove);
     window.removeEventListener("mouseup", this.onMouseUp);
@@ -1275,7 +1276,7 @@ class TableHeader extends React.Component<
       let contentColumnsCountInfoPanel = 0;
 
       const storageInfoPanelSize = localStorage.getItem(
-        columnInfoPanelStorageName,
+        columnInfoPanelStorageName || "",
       );
 
       if (storageInfoPanelSize) {
@@ -1324,7 +1325,7 @@ class TableHeader extends React.Component<
 
       if (hideColumns !== hideColumnsConst) {
         this.setState({ hideColumns: hideColumnsConst });
-        setHideColumns(hideColumnsConst);
+        setHideColumns?.(hideColumnsConst);
       }
 
       if (hideColumnsConst) {
@@ -1613,11 +1614,11 @@ class TableHeader extends React.Component<
       }
 
       if (infoPanelVisible)
-        localStorage.setItem(columnInfoPanelStorageName, str);
+        localStorage.setItem(columnInfoPanelStorageName || "", str);
       else localStorage.setItem(columnStorageName, str);
 
       if (!infoPanelVisible) {
-        localStorage.removeItem(columnInfoPanelStorageName);
+        localStorage.removeItem(columnInfoPanelStorageName || "");
       }
     }
   };
@@ -1790,12 +1791,12 @@ class TableHeader extends React.Component<
                   key={column.key ?? "empty-cell"}
                   index={index}
                   column={column}
-                  sorted={sorted}
-                  sortBy={sortBy}
+                  sorted={sorted || false}
+                  sortBy={sortBy || ""}
                   resizable={resizable}
                   defaultSize={column.defaultSize}
                   onMouseDown={this.onMouseDown}
-                  sortingVisible={sortingVisible}
+                  sortingVisible={sortingVisible || false}
                   tagRef={tagRef}
                 />
               );

@@ -102,13 +102,23 @@ const Body = ({
 
   withInfo,
   infoText,
+  setInputItemVisible,
 }: BodyProps) => {
   const [bodyHeight, setBodyHeight] = React.useState(0);
 
   const bodyRef = React.useRef<HTMLDivElement>(null);
   const listOptionsRef = React.useRef<null | InfiniteLoader>(null);
 
-  const itemsCount = hasNextPage ? items.length + 1 : items.length;
+  const isEmptyInput =
+    items.length === 2 && items[1].isInputItem && items[0].isCreateNewItem;
+
+  const itemsCount = hasNextPage
+    ? items.length + 1
+    : items.length === 1 && items[0].isCreateNewItem
+      ? 0
+      : isEmptyInput
+        ? 1
+        : items.length;
 
   const resetCache = React.useCallback(() => {
     if (listOptionsRef && listOptionsRef.current) {
@@ -185,9 +195,11 @@ const Body = ({
           breadCrumbsLoader
         ) : (
           <BreadCrumbs
+            withBreadCrumbs
+            isBreadCrumbsLoading={isLoading}
             breadCrumbs={breadCrumbs}
+            breadCrumbsLoader={breadCrumbsLoader}
             onSelectBreadCrumb={onSelectBreadCrumb}
-            isLoading={isLoading}
           />
         )
       ) : null}
@@ -227,23 +239,27 @@ const Body = ({
           searchImage={searchEmptyScreenImage}
           searchHeader={searchEmptyScreenHeader}
           searchDescription={searchEmptyScreenDescription}
+          items={items}
         />
       ) : (
         <>
           {!!descriptionText && (
             <Text className="body-description-text">{descriptionText}</Text>
           )}
-          {isMultiSelect && withSelectAll && !isSearch && (
-            <SelectAll
-              label={selectAllLabel}
-              icon={selectAllIcon}
-              isChecked={isAllChecked || false}
-              isIndeterminate={isAllIndeterminate || false}
-              onSelectAll={onSelectAll}
-              isLoading={isLoading}
-              rowLoader={rowLoader}
-            />
-          )}
+          {isMultiSelect && withSelectAll && !isSearch ? (
+            isLoading ? (
+              rowLoader
+            ) : (
+              <SelectAll
+                withSelectAll
+                selectAllIcon={selectAllIcon}
+                selectAllLabel={selectAllLabel}
+                isAllChecked={isAllChecked}
+                isAllIndeterminate={isAllIndeterminate}
+                onSelectAll={onSelectAll}
+              />
+            )
+          ) : null}
 
           {bodyHeight && (
             <InfiniteLoader
@@ -259,12 +275,13 @@ const Body = ({
                   width="100%"
                   itemCount={itemsCount}
                   itemData={{
-                    items,
+                    items: isEmptyInput ? [items[1]] : items,
                     onSelect,
                     isMultiSelect: isMultiSelect || false,
                     rowLoader,
                     isItemLoaded,
                     renderCustomItem,
+                    setInputItemVisible,
                   }}
                   itemSize={48}
                   onItemsRendered={onItemsRendered}

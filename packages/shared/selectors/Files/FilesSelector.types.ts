@@ -62,6 +62,7 @@ export type UseSocketHelperProps = {
   disabledItems: (string | number)[];
   filterParam?: string;
   getIcon: (fileExst: string) => string;
+  withCreateFolder: boolean;
 };
 
 export type UseRoomsHelperProps = {
@@ -85,7 +86,7 @@ export type UseRoomsHelperProps = {
 
 export type UseFilesHelpersProps = {
   roomsFolderId?: number;
-  setBreadCrumbs: (items: TBreadCrumb[]) => void;
+  setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setIsBreadCrumbsLoading: (value: boolean) => void;
   setIsSelectedParentFolder: (value: boolean) => void;
   setIsNextPageLoading: (value: boolean) => void;
@@ -97,7 +98,7 @@ export type UseFilesHelpersProps = {
   setIsRoot: (value: boolean) => void;
   setIsInit: (value: boolean) => void;
   searchValue?: string;
-  disabledItems: string[] | number[];
+  disabledItems: (string | number)[];
   setSelectedItemSecurity: (value: TFileSecurity | TFolderSecurity) => void;
   isThirdParty: boolean;
   setSelectedTreeNode: (treeNode: TFolder) => void;
@@ -119,6 +120,8 @@ export type UseFilesHelpersProps = {
   getFilesArchiveError: (name: string) => string;
   isInit: boolean;
   setIsFirstLoad: (value: boolean) => void;
+  withCreateFolder: boolean;
+  setSelectedItemId: (value: number | string) => void;
 };
 
 export type TSelectedFileInfo = {
@@ -138,7 +141,7 @@ export type FilesSelectorProps = (
 ) & {
   socketHelper: SocketIOHelper;
   socketSubscribers: Set<string>;
-  disabledItems: string[] | number[];
+  disabledItems: (string | number)[];
   filterParam?: string;
   withoutBackButton: boolean;
   withBreadCrumbs: boolean;
@@ -199,4 +202,6 @@ export type FilesSelectorProps = (
   isPanelVisible: boolean;
   currentDeviceType: DeviceType;
   getFilesArchiveError: (name: string) => string;
+
+  withCreateFolder: boolean;
 };

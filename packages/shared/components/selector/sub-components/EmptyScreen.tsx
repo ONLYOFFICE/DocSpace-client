@@ -25,12 +25,26 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTranslation } from "react-i18next";
+
+import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
+import UpSvgUrl from "PUBLIC_DIR/images/up.svg?url";
 
 import { Heading } from "../../heading";
 import { Text } from "../../text";
+import { IconButton } from "../../icon-button";
+import { Link, LinkType } from "../../link";
 
 import { StyledEmptyScreen } from "../Selector.styled";
 import { EmptyScreenProps } from "../Selector.types";
+
+const linkStyles = {
+  isHovered: true,
+  type: LinkType.action,
+  fontWeight: "600",
+  className: "empty-folder_link",
+  display: "flex",
+};
 
 const EmptyScreen = ({
   image,
@@ -40,10 +54,15 @@ const EmptyScreen = ({
   searchHeader,
   searchDescription,
   withSearch,
+  items,
 }: EmptyScreenProps) => {
+  const { t } = useTranslation(["Common"]);
+
   const currentImage = withSearch ? searchImage : image;
   const currentHeader = withSearch ? searchHeader : header;
   const currentDescription = withSearch ? searchDescription : description;
+
+  const createItem = items.length > 0 ? items[0] : null;
 
   return (
     <StyledEmptyScreen withSearch={withSearch}>
@@ -56,6 +75,34 @@ const EmptyScreen = ({
       <Text className="empty-description" noSelect>
         {currentDescription}
       </Text>
+      {createItem && (
+        <div className="buttons">
+          <div className="empty-folder_container-links">
+            <IconButton
+              className="empty-folder_container-icon"
+              size={12}
+              onClick={createItem.onCreateClick}
+              iconName={PlusSvgUrl}
+              isFill
+            />
+            <Link {...linkStyles} onClick={createItem.onCreateClick}>
+              {items[0].label}
+            </Link>
+          </div>
+          <div className="empty-folder_container-links">
+            <IconButton
+              className="empty-folder_container-icon"
+              size={12}
+              onClick={createItem.onBackClick}
+              iconName={UpSvgUrl}
+              isFill
+            />
+            <Link {...linkStyles} onClick={createItem.onBackClick}>
+              {t("Common:Back")}
+            </Link>
+          </div>
+        </div>
+      )}
     </StyledEmptyScreen>
   );
 };

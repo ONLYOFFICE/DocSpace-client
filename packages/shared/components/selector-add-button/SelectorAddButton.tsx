@@ -36,6 +36,7 @@ import { SelectorAddButtonProps } from "./SelectorAddButton.types";
 const SelectorAddButton = (props: SelectorAddButtonProps) => {
   const {
     isDisabled = false,
+    isAction,
     title,
     className,
     id,
@@ -52,6 +53,7 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
     <StyledButton
       {...props}
       isDisabled={isDisabled}
+      isAction={isAction}
       title={title}
       onClick={onClickAction}
       className={className}

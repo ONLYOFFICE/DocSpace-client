@@ -255,7 +255,11 @@ class AccountsHotkeysStore {
       const scroll = document.getElementsByClassName(
         "section-scroll",
       ) as HTMLCollectionOf<HTMLElement>;
-      if (scroll && scroll[0]) scroll[0].focus();
+
+      if (scroll && scroll[0]) {
+        const scrollElem = scroll[0]?.firstChild as HTMLElement;
+        scrollElem?.focus();
+      }
     }
 
     if (!this.hotkeyCaret && selection.length) {

@@ -2370,10 +2370,16 @@ const Dark: TTheme = {
     item: {
       hoverBackground: "#3d3d3d",
       selectedBackground: "#3d3d3d",
+
+      inputButtonBorder: "#474747",
+      inputButtonBorderHover: grayMaxLight,
     },
 
     emptyScreen: {
       descriptionColor: "#ADADAD",
+      buttonColor: "#ADADAD",
+      hoverButtonColor: "#FFFFFF",
+      pressedButtonColor: "#CCCCCC",
     },
   },
 

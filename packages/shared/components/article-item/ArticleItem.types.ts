@@ -40,7 +40,7 @@ export interface ArticleItemProps {
   /** Sets the catalog item to display text */
   showText?: boolean;
   /** Invokes a function upon clicking on a catalog item */
-  onClick?: (id?: string) => void;
+  onClick?: (e: React.MouseEvent, id?: string) => void;
   /** Invokes a function upon dragging and dropping a catalog item */
   onDrop?: (id?: string, text?: string) => void;
   /** Tells when the catalog item should display initial on icon, text should be hidden */

@@ -126,9 +126,8 @@ const useSocketHelper = ({
           if (withCreateFolder) {
             const newValue = [...value];
 
-            let idx = 0;
+            let idx = 1;
 
-            if (value[0]?.isInputItem) idx = 1;
             if (value[1]?.isInputItem) idx = 2;
 
             newValue.splice(idx, 0, item);

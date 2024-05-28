@@ -165,6 +165,8 @@ class CurrentTariffStatusStore {
 
   fetchPortalTariff = async (refresh?: boolean) => {
     return api.portal.getPortalTariff(refresh).then((res) => {
+      if (!res) return;
+
       this.portalTariffStatus = res;
       this.setIsLoaded(true);
     });

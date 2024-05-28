@@ -338,7 +338,7 @@ class CurrentQuotasStore {
     });
   };
 
-  fetchPortalQuota = async (refresh: boolean) => {
+  fetchPortalQuota = async (refresh?: boolean) => {
     return api.portal.getPortalQuota(refresh).then((res) => {
       this.setPortalQuotaValue(res);
 

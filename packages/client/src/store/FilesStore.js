@@ -1464,13 +1464,6 @@ class FilesStore {
           this.indexingStore.setIsIndexing(false);
         }
 
-        if (data.current?.indexing && filterData.sortBy !== "customOrder") {
-          filterData.sortBy = "customOrder";
-          return window.DocSpace.navigate(
-            `${window.DocSpace.location.pathname}?${filterData.toUrlParams()}`,
-          );
-        }
-
         if (newTotal > 0) {
           const lastPage = filterData.getLastPage();
 
@@ -3350,6 +3343,20 @@ class FilesStore {
     //return [...this.folders, ...this.files];
 
     const newFolders = [...this.folders];
+
+    const orderItems = [...this.folders, ...this.files].filter((x) => x.order);
+    if (orderItems.length > 0) {
+      orderItems.sort((a, b) => {
+        if (a.order.length < b.order.length) {
+          return -1;
+        }
+        if (b.order.length < a.order.length) {
+          return 1;
+        }
+        return a.order - b.order;
+      });
+      return this.getFilesListItems(orderItems);
+    }
 
     newFolders.sort((a, b) => {
       const firstValue = a.roomType ? 1 : 0;

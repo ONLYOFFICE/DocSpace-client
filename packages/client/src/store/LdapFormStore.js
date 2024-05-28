@@ -8,7 +8,7 @@ import {
   getCronLdap,
 } from "@docspace/shared/api/settings";
 import { getNextSynchronization } from "@docspace/shared/components/cron";
-import { EmployeeType } from "@docspace/shared/enums";
+import { EmployeeType, LDAPOpeation } from "@docspace/shared/enums";
 import { makeAutoObservable } from "mobx";
 
 const constants = {
@@ -270,6 +270,7 @@ class LdapFormStore {
       completed: false,
       error: "",
       source: "",
+      operationType: LDAPOpeation.Sync,
     };
 
     const respose = await syncLdap();
@@ -277,6 +278,7 @@ class LdapFormStore {
     console.log(respose);
 
     if (respose?.id) {
+      this.inProgress = true;
       this.progressBarIntervalId = setInterval(
         this.checkStatus,
         constants.GET_STATUS_TIMEOUT,
@@ -298,6 +300,7 @@ class LdapFormStore {
       completed: false,
       error: "",
       source: "",
+      operationType: LDAPOpeation.SaveAndSync,
     };
 
     let isErrorExist = false;
@@ -366,6 +369,7 @@ class LdapFormStore {
     console.log(respose);
 
     if (respose?.id) {
+      this.inProgress = true;
       this.progressBarIntervalId = setInterval(
         this.checkStatus,
         constants.GET_STATUS_TIMEOUT,

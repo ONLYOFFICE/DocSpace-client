@@ -9,7 +9,7 @@ import { Cron } from "@docspace/shared/components/cron";
 
 import ProgressContainer from "./ProgressContainer";
 import ToggleAutoSync from "./ToggleAutoSync";
-import { DeviceType } from "@docspace/shared/enums";
+import { DeviceType, LDAPOpeation } from "@docspace/shared/enums";
 import StyledLdapPage from "../styled-components/StyledLdapPage";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { onChangeUrl } from "../utils";
@@ -80,7 +80,7 @@ const SyncContainer = ({
         //isLoading={isSaving}
       />
 
-      <ProgressContainer />
+      <ProgressContainer operation={LDAPOpeation.Sync} />
 
       <ToggleAutoSync isLDAPAvailable={isLdapAvailable} />
 

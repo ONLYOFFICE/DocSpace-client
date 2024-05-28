@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { DeviceType } from "@docspace/shared/enums";
+import { DeviceType, LDAPOpeation } from "@docspace/shared/enums";
 import HideButton from "./HideButton";
 import Checkboxes from "./Checkboxes";
 import ConnectionSettings from "./ConnectionSettings";
@@ -10,9 +10,11 @@ import AttributeMapping from "./AttributeMapping";
 import ButtonsContainer from "./ButtonsContainer";
 import AuthenticationContainer from "./AuthenticationContainer";
 import AdvancedSettings from "./AdvancedSettings";
+import ProgressContainer from "./ProgressContainer";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import StyledLdapPage from "../styled-components/StyledLdapPage";
+
 import { useNavigate } from "react-router-dom";
 import { isMobile } from "@docspace/shared/utils/device";
 
@@ -66,6 +68,8 @@ const SettingsContainer = ({
           <AuthenticationContainer />
           <AdvancedSettings />
           <ButtonsContainer />
+
+          <ProgressContainer operation={LDAPOpeation.SaveAndSync} />
         </>
       )}
     </>

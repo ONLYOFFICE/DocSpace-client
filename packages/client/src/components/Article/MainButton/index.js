@@ -331,16 +331,16 @@ const ArticleMainButtonContent = (props) => {
 
   const createActionsForFormRoom = React.useCallback(
     (actions) => {
-      // const {
-      // formGallery,
-      // uploadActions,
-      // createNewFolder,
-      // showSelectorFormRoomDocx,
-      // createNewDocumentDocx,
-      // createTemplateBlankDocxf,
-      // createNewPresentationPptx,
-      // createNewSpreadsheetXlsx,
-      // } = actions;
+      const {
+        formGallery,
+        // uploadActions,
+        // createNewFolder,
+        // showSelectorFormRoomDocx,
+        // createNewDocumentDocx,
+        // createTemplateBlankDocxf,
+        // createNewPresentationPptx,
+        // createNewSpreadsheetXlsx,
+      } = actions;
 
       const createNewFolder = {
         id: "actions_new-folder",
@@ -356,7 +356,7 @@ const ArticleMainButtonContent = (props) => {
         className: "main-button_drop-down_sub",
         icon: FormGalleryReactSvgUrl,
         label: t("Common:ChooseFromTemplates"),
-        onClick: () => onShowGallery(),
+        onClick: formGallery.onClick,
         disabled: isPrivacy,
         key: "form-file",
       };
@@ -429,7 +429,7 @@ const ArticleMainButtonContent = (props) => {
       //   items: moreActions.items.filter((item) => !item.isSeparator),
       // };
 
-      const mobileMoreActions = uploadPDFFrom.items;
+      const mobileMoreActions = null;
       const formRoomActions = [
         // templatePDFForm,
         // formGallery,
@@ -450,6 +450,7 @@ const ArticleMainButtonContent = (props) => {
       const mobileFormRoomActions = [
         // templatePDFForm,
         // formGallery,
+        uploadPDFFrom,
         showSelectorFormRoomDocx,
         createNewFolder,
       ];

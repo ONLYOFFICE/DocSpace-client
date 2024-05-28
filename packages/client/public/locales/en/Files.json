@@ -162,6 +162,8 @@
   "SendByEmail": "Send by email",
   "ShareFolder": "Share folder",
   "ShareFolderDescription": "A new room will be created and all the contents of the selected folder will be copied there. Afterward, you can invite other users to collaborate on the files within a room.",
+  "SharePDFFormModalDescription": "A new room will be created and the PDF form will be copied there. You can then invite other users to fill out the form in the room.",
+  "SharePDFFormModalTitle": "Share PDF form",
   "ShareRoom": "Share room",
   "ShowLinkActions": "Show link actions",
   "ShowVersionHistory": "Show version history",

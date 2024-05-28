@@ -266,7 +266,14 @@ class UsersStore {
     else return "manager";
   };
 
-  getUserContextOptions = (isMySelf, statusType, userRole, status) => {
+  getUserContextOptions = (
+    isMySelf,
+    isUserSSO,
+    isUserLDAP,
+    statusType,
+    userRole,
+    status,
+  ) => {
     const { isOwner, isAdmin, isVisitor, isCollaborator, isLDAP } =
       this.userStore.user;
 
@@ -305,10 +312,13 @@ class UsersStore {
                 userRole === "manager" ||
                 userRole === "collaborator"))
           ) {
-            options.push("separator-1");
+            if (!isUserLDAP && !isUserSSO) {
+              options.push("separator-1");
 
-            options.push("change-email");
-            options.push("change-password");
+              options.push("change-email");
+              options.push("change-password");
+            }
+
             options.push("reset-auth");
 
             options.push("separator-2");
@@ -469,6 +479,8 @@ class UsersStore {
 
     const options = this.getUserContextOptions(
       isMySelf,
+      isSSO,
+      isLDAP,
       statusType,
       role,
       status,

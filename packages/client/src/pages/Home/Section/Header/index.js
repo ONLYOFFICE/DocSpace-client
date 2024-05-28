@@ -465,7 +465,6 @@ const SectionHeaderContent = (props) => {
 
       security,
       haveLinksRight,
-      isPublicRoomType,
       isPublicRoom,
       isFrame,
     } = props;
@@ -828,7 +827,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const onNavigationButtonClick = () => {
-    onCreateAndCopySharedLink(selectedFolder, t);
+    onCreateAndCopySharedLink(props.roomItem, t);
   };
 
   const headerMenu = isAccountsPage
@@ -1148,6 +1147,7 @@ export default inject(
       rootFolderType,
       parentRoomType,
       isFolder,
+      shared,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -1222,13 +1222,21 @@ export default inject(
 
     const isArchive = rootFolderType === FolderType.Archive;
 
+    const sharedItem = navigationPath.find((r) => r.shared);
+
     const showNavigationButton = isLoading
       ? false
-      : !isPublicRoom &&
-        !isArchive &&
-        canCopyPublicLink &&
-        (isPublicRoomType || isCustomRoomType || isFormRoomType) &&
-        primaryLink;
+      : (!isPublicRoom &&
+          !isArchive &&
+          canCopyPublicLink &&
+          (isPublicRoomType || isCustomRoomType || isFormRoomType) &&
+          shared) ||
+        (sharedItem && sharedItem.canCopyPublicLink);
+
+    const roomItem =
+      navigationPath.length > 1
+        ? navigationPath[navigationPath.length - 2]
+        : selectedFolder;
 
     return {
       isGracePeriod,
@@ -1355,6 +1363,8 @@ export default inject(
       onClickReconnectStorage,
       getFolderModel,
       onCreateRoom,
+
+      roomItem,
     };
   },
 )(

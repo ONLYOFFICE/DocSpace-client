@@ -622,7 +622,7 @@ const ArticleMainButtonContent = (props) => {
               id: "invite_doc-space-administrator",
               className: "main-button_drop-down",
               icon: PersonAdminReactSvgUrl,
-              label: t("Common:DocSpaceAdmin"),
+              label: t("Common:DocspaceAdmin"),
               onClick: onInvite,
               action: EmployeeType.Admin,
               key: "administrator",

@@ -336,6 +336,7 @@ export interface UseEventsProps {
   doc?: string;
   errorMessage?: string;
   isSkipError?: boolean;
+  openOnNewPage: boolean;
   t: TTranslation;
 }
 

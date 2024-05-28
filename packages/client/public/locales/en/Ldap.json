@@ -41,5 +41,6 @@
   "LdapUserDN": "User DN",
   "LdapUserDNTooltip": "Enter the distinguished name to the directory containing users you want to add.",
   "LdapUserFilter": "User Filter",
-  "LdapUserFilterTooltip": "Use the search LDAP filter to select the users who must be imported."
+  "LdapUserFilterTooltip": "Use the search LDAP filter to select the users who must be imported.",
+  "LdapUserType": "User Type"
 }

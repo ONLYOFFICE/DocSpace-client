@@ -99,16 +99,26 @@ class AuthStore {
 
     const { socketHelper } = this.settingsStore;
 
-    socketHelper.on("s:change-quota-used-value", ({ featureId, value }) => {
-      console.log(`[WS] change-quota-used-value ${featureId}:${value}`);
+    socketHelper.on("s:change-quota-used-value", (res) => {
+      console.log(
+        `[WS] change-quota-used-value ${res?.featureId}:${res?.value}`,
+      );
+
+      if (!res || !res?.featureId) return;
+      const { featureId, value } = res;
 
       runInAction(() => {
         this.currentQuotaStore?.updateQuotaUsedValue(featureId, value);
       });
     });
 
-    socketHelper.on("s:change-quota-feature-value", ({ featureId, value }) => {
-      console.log(`[WS] change-quota-feature-value ${featureId}:${value}`);
+    socketHelper.on("s:change-quota-feature-value", (res) => {
+      console.log(
+        `[WS] change-quota-feature-value ${res?.featureId}:${res?.value}`,
+      );
+
+      if (!res || !res?.featureId) return;
+      const { featureId, value } = res;
 
       runInAction(() => {
         if (featureId === "free") {

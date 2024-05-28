@@ -31,7 +31,7 @@
   "PublicRoomLinkValidTime": "Tento odkaz je platný do {{date}}. Po uplynutí jeho platnosti nebude možné získať prístup do miestnosti prostredníctvom tohto odkazu.",
   "RoleCommentator": "Komentátor",
   "RoleCommentatorDescription": "Operácie s existujúcimi súbormi: prezeranie, komentovanie.",
-  "RoleDocSpaceAdminDescription": "Administrátori DocSpace majú prístup k nastaveniam DocSpace, môžu spravovať a archivovať miestnosti, pozývať nových používateľov a prideľovať role, ktoré sú nižšie ako pozícia administrátora. Všetci administrátori majú prístup do sekcie Osobné.",
+  "RoleDocspaceAdminDescription": "Administrátori DocSpace majú prístup k nastaveniam DocSpace, môžu spravovať a archivovať miestnosti, pozývať nových používateľov a prideľovať role, ktoré sú nižšie ako pozícia administrátora. Všetci administrátori majú prístup do sekcie Osobné.",
   "RoleEditorDescription": "Operácie s existujúcimi súbormi: prezeranie, úprava, vypĺňanie formulárov, kontrola, komentovanie.",
   "RoleFormFiller": "Vyplnenie formulára",
   "RoleFormFillerDescription": "Operácie s existujúcimi súbormi: prezeranie, vypĺňanie formulárov, kontrola, komentovanie.",

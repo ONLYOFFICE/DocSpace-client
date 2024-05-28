@@ -81,6 +81,7 @@ const useEditorEvents = ({
   doc,
   errorMessage,
   isSkipError,
+  openOnNewPage,
   t,
 }: UseEventsProps) => {
   const [events, setEvents] = React.useState<IConfigEvents>({});
@@ -274,15 +275,12 @@ const useEditorEvents = ({
           window.DocSpaceConfig?.proxy?.url,
           `/doceditor?fileId=${encodeURIComponent(newFile.id)}`,
         );
-        window.open(
-          newUrl,
-          window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
-        );
+        window.open(newUrl, openOnNewPage ? "_blank" : "_self");
       })
       .catch((e) => {
         toastr.error(e);
       });
-  }, [fileInfo?.folderId, getDefaultFileName]);
+  }, [fileInfo?.folderId, getDefaultFileName, openOnNewPage]);
 
   const getDocumentHistory = React.useCallback(
     (fileHistory: TEditHistory[], historyLength: number) => {
@@ -616,11 +614,7 @@ const useEditorEvents = ({
 
   React.useEffect(() => {
     // console.log("render docspace config", { ...window.DocSpaceConfig });
-    if (
-      IS_DESKTOP_EDITOR ||
-      (typeof window !== "undefined" &&
-        window.DocSpaceConfig?.editor?.openOnNewPage === false)
-    )
+    if (IS_DESKTOP_EDITOR || (typeof window !== "undefined" && !openOnNewPage))
       return;
 
     //FireFox security issue fix (onRequestCreateNew will be blocked)
@@ -637,7 +631,7 @@ const useEditorEvents = ({
     url.searchParams.append("doctype", documentType);
     url.searchParams.append("title", defaultFileName ?? "");
     setCreateUrl(url.toString());
-  }, [config?.documentType, getDefaultFileName]);
+  }, [config?.documentType, getDefaultFileName, openOnNewPage]);
 
   return {
     events,

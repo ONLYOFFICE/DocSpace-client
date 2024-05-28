@@ -535,7 +535,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>CreatingDocSpace</name>
+								<name>CreatingDocspace</name>
 								<description/>
 								<comment/>
 								<default_text/>
@@ -919,7 +919,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>DocSpaceName</name>
+								<name>DocspaceName</name>
 								<description/>
 								<comment/>
 								<default_text/>

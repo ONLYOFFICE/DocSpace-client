@@ -145,7 +145,7 @@ const CreatePortalDialog = () => {
       onClose={onClose}
       displayType="modal"
     >
-      <ModalDialog.Header>{t("CreatingDocSpace")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("CreatingDocspace")}</ModalDialog.Header>
       <ModalDialog.Body className="create-docspace-body">
         <Text noSelect={true}>{t("CreateSpaceDescription")}</Text>
         <div className="create-docspace-input-block">
@@ -154,7 +154,7 @@ const CreatePortalDialog = () => {
             fontWeight="600"
             style={{ paddingBottom: "5px" }}
           >
-            {t("DocSpaceName")}
+            {t("DocspaceName")}
           </Text>
           <TextInput
             onChange={onHandleName}

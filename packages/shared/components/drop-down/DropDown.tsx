@@ -84,7 +84,6 @@ const DropDown = ({
     directionY,
     manualY,
     width: 0,
-    borderOffset: theme?.isBase ? 0 : 2, // need to remove the difference in width with the parent in a dark theme
     isDropdownReady: false, // need to avoid scrollbar appearing during dropdown position calculation
   });
 
@@ -169,9 +168,7 @@ const DropDown = ({
       ...s,
       directionX,
       directionY,
-      width: dropDownRef.current
-        ? dropDownRef.current.offsetWidth - state.borderOffset
-        : 240,
+      width: dropDownRef.current ? dropDownRef.current.offsetWidth : 240,
       isDropdownReady: true,
     }));
   }, [
@@ -181,7 +178,6 @@ const DropDown = ({
     forwardedRef,
     offsetLeft,
     right,
-    state.borderOffset,
     theme?.interfaceDirection,
     top,
   ]);
@@ -255,9 +251,7 @@ const DropDown = ({
         directionX: x,
         directionY: y,
         manualY: mY,
-        width: dropDownRef.current
-          ? dropDownRef.current.offsetWidth - state.borderOffset
-          : 240,
+        width: dropDownRef.current ? dropDownRef.current.offsetWidth : 240,
         isDropdownReady: true,
       }));
     }
@@ -269,7 +263,6 @@ const DropDown = ({
     state.directionX,
     state.directionY,
     state.manualY,
-    state.borderOffset,
   ]);
 
   // const handleClickOutside = (e: any) => {

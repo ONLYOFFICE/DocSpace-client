@@ -50,12 +50,14 @@ const NewItem = ({
     >
       <SelectorAddButton onClick={onCreateClick} isAction />
       <Text
-        className="label label-disabled"
+        className="label label-disabled clicked-label"
         fontWeight={600}
         fontSize="14px"
         noSelect
         truncate
         dir="auto"
+        onClick={onCreateClick}
+        title={label}
       >
         {label}
       </Text>

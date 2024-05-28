@@ -222,6 +222,11 @@ const StyledItem = styled.div<{
       `}
   }
 
+  .clicked-label {
+    width: fit-content;
+    cursor: pointer;
+  }
+
   .input-component {
     margin-inline-start: 8px;
   }

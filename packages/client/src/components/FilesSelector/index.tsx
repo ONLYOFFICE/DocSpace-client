@@ -34,6 +34,7 @@ import FilesSelector from "@docspace/shared/selectors/Files";
 import { toastr } from "@docspace/shared/components/toast";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import {
+  TFile,
   TFileSecurity,
   TFolder,
   TFolderSecurity,
@@ -41,7 +42,7 @@ import {
 import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
-import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
+import { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TTranslation } from "@docspace/shared/types";
 
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
@@ -54,6 +55,8 @@ import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
 import { getAcceptButtonLabel, getHeaderLabel, getIsDisabled } from "./utils";
+
+let disabledItems: (string | number)[] = [];
 
 const FilesSelectorWrapper = ({
   isPanelVisible = false,
@@ -87,7 +90,7 @@ const FilesSelectorWrapper = ({
   treeFolders,
 
   selection,
-  disabledItems,
+  // disabledItems,
   setConflictDialogData,
   checkFileConflicts,
   itemOperationToFolder,
@@ -169,8 +172,16 @@ const FilesSelectorWrapper = ({
     onCloseAction();
   };
 
-  const getFilesArchiveError = (name: string) =>
-    t("Common:ArchivedRoomAction", { name });
+  const getFilesArchiveError = React.useCallback(
+    (name: string) => t("Common:ArchivedRoomAction", { name }),
+    [t],
+  );
+
+  React.useEffect(() => {
+    return () => {
+      disabledItems = [];
+    };
+  }, []);
 
   const onAccept = async (
     selectedItemId: string | number | undefined,
@@ -375,6 +386,9 @@ const FilesSelectorWrapper = ({
         isMove || isCopy || isRestore ? "select-file-modal-cancel" : ""
       }
       getFilesArchiveError={getFilesArchiveError}
+      withCreateFolder={
+        (isMove || isCopy || isRestore || isRestoreAll) ?? false
+      }
     />
   );
 };
@@ -471,10 +485,13 @@ export default inject(
         ? selections
         : selections.filter((f) => f && !f?.isEditing);
 
-    const disabledItems: (string | number)[] = [];
-
-    selectionsWithoutEditing.forEach((item) => {
-      if ((item?.isFolder || item?.parentId) && item?.id) {
+    selectionsWithoutEditing.forEach((item: TFile | TFolder | TRoom) => {
+      if (
+        (("isFolder" in item && item?.isFolder) ||
+          ("parentId" in item && item?.parentId)) &&
+        item?.id &&
+        !disabledItems.includes(item.id)
+      ) {
         disabledItems.push(item.id);
       }
     });

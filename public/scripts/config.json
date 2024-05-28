@@ -13,7 +13,6 @@
   "pdfViewerUrl": "sdkjs/pdf/src/engine/viewer.js",
   "imageThumbnails": true,
   "editor": {
-    "openOnNewPage": true,
     "requestClose": false
   },
   "management": {

@@ -181,6 +181,7 @@ class SelectionStore {
     if (exists) return;
 
     this.setSelection([...this.selection, user]);
+    this.peopleStore.accountsHotkeysStore.setHotkeyCaret(null);
 
     this.incrementUsersRights(user);
   };
@@ -266,8 +267,10 @@ class SelectionStore {
       list.forEach((u) => this.incrementUsersRights(u));
     }
 
+    this.peopleStore.accountsHotkeysStore.setHotkeyCaret(null);
     isSessionsPage
       ? this.setSelection(this.getUsersBySelected(sessions, selected))
+
       : this.setSelection(this.getUsersBySelected(list, selected));
 
     return selected;

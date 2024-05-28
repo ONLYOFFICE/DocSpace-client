@@ -55,7 +55,7 @@ export const getHeaderLabel = (
   }
 
   if (isFormRoom) {
-    return t("Common:SelectFromDocSpace");
+    return t("Common:SelectFromDocspace");
   }
 
   if (filterParam === FilesSelectorFilterTypes.DOCX)

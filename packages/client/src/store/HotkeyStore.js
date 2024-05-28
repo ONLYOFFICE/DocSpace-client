@@ -135,7 +135,7 @@ class HotkeyStore {
 
     if (!hotkeyCaret) {
       const scroll = document.getElementsByClassName("section-scroll");
-      scroll && scroll[0] && scroll[0].focus();
+      scroll && scroll[0] && scroll[0]?.firstChild.focus();
     }
 
     if (!hotkeyCaret && selection.length) {

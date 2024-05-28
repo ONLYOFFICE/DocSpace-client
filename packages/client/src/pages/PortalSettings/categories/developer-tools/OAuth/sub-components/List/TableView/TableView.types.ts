@@ -11,7 +11,7 @@ export interface TableViewProps {
   setSelection?: (clientId: string) => void;
   getContextMenuItems?: (
     t: TTranslation,
-    item: IClientProps
+    item: IClientProps,
   ) => ContextMenuModel[];
   bufferSelection?: IClientProps | null;
   activeClients?: string[];
@@ -35,7 +35,7 @@ export interface RowProps {
   tagCount: number;
   getContextMenuItems?: (
     t: TTranslation,
-    item: IClientProps
+    item: IClientProps,
   ) => ContextMenuModel[];
   setSelection?: (clientId: string) => void;
   changeClientStatus?: (clientId: string, status: boolean) => Promise<void>;

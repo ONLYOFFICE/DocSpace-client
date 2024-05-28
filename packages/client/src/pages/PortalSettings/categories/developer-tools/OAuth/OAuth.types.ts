@@ -6,7 +6,7 @@ import { ViewAsType } from "SRC_DIR/store/OAuthStore";
 
 export interface OAuthProps {
   viewAs: ViewAsType;
-  setViewAs: (viewAs: ViewAsType) => void;
+  setViewAs: (viewAs: string) => void;
 
   clientList: IClientProps[];
   isEmptyClientList: boolean;

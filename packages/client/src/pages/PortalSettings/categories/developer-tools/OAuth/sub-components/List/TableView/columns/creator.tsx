@@ -31,7 +31,7 @@ const CreatorCell = ({ avatar, displayName }: CreatorCellProps) => {
         role={AvatarRole.user}
       />
 
-      <Text className={"description-text"} fontWeight="600" fontSize="13px">
+      <Text className="description-text" fontWeight="600" fontSize="13px">
         {displayName}
       </Text>
     </>

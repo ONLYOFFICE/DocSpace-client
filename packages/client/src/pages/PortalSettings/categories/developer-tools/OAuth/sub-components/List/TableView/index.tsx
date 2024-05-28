@@ -1,10 +1,10 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-//@ts-ignore
 import elementResizeDetectorMaker from "element-resize-detector";
 
+import { UserStore } from "@docspace/shared/store/UserStore";
 import { TableBody } from "@docspace/shared/components/table";
-//@ts-ignore
+
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 
 import Row from "./Row";
@@ -12,7 +12,6 @@ import Header from "./Header";
 
 import { TableViewProps } from "./TableView.types";
 import { TableWrapper } from "./TableView.styled";
-import { UserStore } from "@docspace/shared/store/UserStore";
 
 const TABLE_VERSION = "1";
 const COLUMNS_SIZE = `oauthConfigColumnsSize_ver-${TABLE_VERSION}`;
@@ -36,7 +35,7 @@ const TableView = ({
   fetchNextClients,
 }: TableViewProps) => {
   const tableRef = React.useRef<HTMLDivElement>(null);
-  const tagRef = React.useRef<HTMLDivElement>(null);
+  const tagRef = React.useRef<HTMLDivElement | null>(null);
 
   const [tagCount, setTagCount] = React.useState(0);
 
@@ -49,7 +48,7 @@ const TableView = ({
   }, []);
 
   const onResize = React.useCallback(
-    (node: HTMLDivElement) => {
+    (node: HTMLElement) => {
       const element = tagRef?.current ? tagRef?.current : node;
 
       if (element) {
@@ -57,33 +56,37 @@ const TableView = ({
 
         const columns = Math.floor(width / 120);
 
-        if (columns != tagCount) setTagCount(columns);
+        if (columns !== tagCount) setTagCount(columns);
       }
     },
     [tagCount],
   );
 
-  const onSetTagRef = React.useCallback((node: HTMLDivElement) => {
-    if (node) {
-      //@ts-ignore
-      tagRef.current = node;
-      onResize(node);
+  const onSetTagRef = React.useCallback(
+    (node: HTMLDivElement) => {
+      if (node) {
+        tagRef.current = node;
+        onResize(node);
 
-      elementResizeDetector.listenTo(node, onResize);
-    }
-  }, []);
+        elementResizeDetector.listenTo(node, onResize);
+      }
+    },
+    [onResize],
+  );
 
   const clickOutside = React.useCallback(
-    (e: any) => {
+    (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target) return;
       if (
-        e.target.closest(".checkbox") ||
-        e.target.closest(".table-container_row-checkbox") ||
+        target.closest(".checkbox") ||
+        target.closest(".table-container_row-checkbox") ||
         e.detail === 0
       ) {
         return;
       }
 
-      setSelection && setSelection("");
+      setSelection?.("");
     },
     [setSelection],
   );
@@ -102,7 +105,7 @@ const TableView = ({
     async ({ startIndex }: { startIndex: number; stopIndex: number }) => {
       await fetchNextClients?.(startIndex);
     },
-    [],
+    [fetchNextClients],
   );
 
   return (
@@ -117,6 +120,7 @@ const TableView = ({
         itemHeight={49}
         useReactWindow
         columnStorageName={columnStorageName}
+        columnInfoPanelStorageName=" "
         filesLength={items.length}
         fetchMoreFiles={fetchMoreFiles}
         hasMoreFiles={hasNextPage || false}

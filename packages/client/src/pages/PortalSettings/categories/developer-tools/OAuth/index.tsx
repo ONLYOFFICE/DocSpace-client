@@ -8,16 +8,16 @@ import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
-import OAuthEmptyScreen from "./sub-components/EmptyScreen";
-import List from "./sub-components/List";
-
 import { OAuthContainer } from "./StyledOAuth";
 import { OAuthProps } from "./OAuth.types";
+
 import InfoDialog from "./sub-components/InfoDialog";
 import PreviewDialog from "./sub-components/PreviewDialog";
 import OAuthLoader from "./sub-components/List/Loader";
 import DisableDialog from "./sub-components/DisableDialog";
 import DeleteDialog from "./sub-components/DeleteDialog";
+import OAuthEmptyScreen from "./sub-components/EmptyScreen";
+import List from "./sub-components/List";
 
 const MIN_LOADER_TIME = 500;
 
@@ -65,7 +65,7 @@ const OAuth = ({
 
     setIsLoading(false);
     setIsInit(true);
-  }, [isInit, setIsInit]);
+  }, [fetchClients, fetchScopes, isInit, setIsInit]);
 
   useViewEffect({
     view: viewAs,
@@ -81,24 +81,22 @@ const OAuth = ({
 
   React.useEffect(() => {
     setDocumentTitle(t("OAuth"));
-  }, []);
+  }, [t]);
 
   return (
     <OAuthContainer>
-      <>
-        {isLoading ? (
-          <OAuthLoader viewAs={viewAs} currentDeviceType={currentDeviceType} />
-        ) : isEmptyClientList ? (
-          <OAuthEmptyScreen t={t} />
-        ) : (
-          <List
-            t={t}
-            clients={clientList}
-            viewAs={viewAs}
-            currentDeviceType={currentDeviceType}
-          />
-        )}
-      </>
+      {isLoading ? (
+        <OAuthLoader viewAs={viewAs} currentDeviceType={currentDeviceType} />
+      ) : isEmptyClientList ? (
+        <OAuthEmptyScreen t={t} />
+      ) : (
+        <List
+          clients={clientList}
+          viewAs={viewAs}
+          currentDeviceType={currentDeviceType}
+        />
+      )}
+
       {infoDialogVisible && <InfoDialog visible={infoDialogVisible} />}
       {disableDialogVisible && <DisableDialog />}
       {previewDialogVisible && <PreviewDialog visible={previewDialogVisible} />}

@@ -1,7 +1,7 @@
 import { TTranslation } from "@docspace/shared/types";
 import { IClientProps } from "@docspace/shared/utils/oauth/interfaces";
 import { ContextMenuModel } from "@docspace/shared/components/context-menu";
-//@ts-ignore
+
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
 
 export interface RowViewProps {
@@ -13,7 +13,7 @@ export interface RowViewProps {
   setSelection?: (clientId: string) => void;
   getContextMenuItems?: (
     t: TTranslation,
-    item: IClientProps
+    item: IClientProps,
   ) => ContextMenuModel[];
   activeClients?: string[];
   hasNextPage?: boolean;
@@ -29,7 +29,7 @@ export interface RowProps {
   sectionWidth: number;
   getContextMenuItems?: (
     t: TTranslation,
-    item: IClientProps
+    item: IClientProps,
   ) => ContextMenuModel[];
   setSelection?: (clientId: string) => void;
   changeClientStatus?: (clientId: string, status: boolean) => Promise<void>;

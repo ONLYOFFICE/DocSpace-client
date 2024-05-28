@@ -5,7 +5,6 @@ import { TableCell } from "@docspace/shared/components/table";
 import { Tags } from "@docspace/shared/components/tags";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
-
 import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 import { getCookie } from "@docspace/shared/utils/cookie";
 
@@ -72,62 +71,60 @@ const Row = (props: RowProps) => {
   const modifiedDate = getCorrectDate(locale || "", item.modifiedOn || "");
 
   return (
-    <>
-      <StyledRowWrapper className="handle">
-        <StyledTableRow
-          contextOptions={contextOptions || []}
-          onClick={handleRowClick}
-          getContextModel={getContextMenuModel}
-        >
-          <TableCell className={"table-container_file-name-cell"}>
-            <NameCell
-              name={item.name}
-              icon={item.logo}
-              isChecked={isChecked}
-              inProgress={inProgress}
-              clientId={item.clientId}
-              setSelection={setSelection}
+    <StyledRowWrapper className="handle">
+      <StyledTableRow
+        contextOptions={contextOptions || []}
+        onClick={handleRowClick}
+        getContextModel={getContextMenuModel}
+      >
+        <TableCell className="table-container_file-name-cell">
+          <NameCell
+            name={item.name}
+            icon={item.logo}
+            isChecked={isChecked}
+            inProgress={inProgress}
+            clientId={item.clientId}
+            setSelection={setSelection}
+          />
+        </TableCell>
+        <TableCell className="">
+          <CreatorCell
+            avatar={item.creatorAvatar || ""}
+            displayName={item.creatorDisplayName || ""}
+          />
+        </TableCell>
+        <TableCell className="">
+          <Text
+            as="span"
+            fontWeight={400}
+            className="mr-8 textOverflow description-text"
+          >
+            {modifiedDate}
+          </Text>
+        </TableCell>
+        <TableCell className="">
+          <Text
+            as="span"
+            fontWeight={400}
+            className="mr-8 textOverflow description-text"
+          >
+            <Tags
+              tags={item.scopes}
+              removeTagIcon
+              columnCount={tagCount}
+              onSelectTag={() => {}}
             />
-          </TableCell>
-          <TableCell className="">
-            <CreatorCell
-              avatar={item.creatorAvatar || ""}
-              displayName={item.creatorDisplayName || ""}
-            />
-          </TableCell>
-          <TableCell className="">
-            <Text
-              as="span"
-              fontWeight={400}
-              className="mr-8 textOverflow description-text"
-            >
-              {modifiedDate}
-            </Text>
-          </TableCell>
-          <TableCell className="">
-            <Text
-              as="span"
-              fontWeight={400}
-              className="mr-8 textOverflow description-text"
-            >
-              <Tags
-                tags={item.scopes}
-                removeTagIcon
-                columnCount={tagCount}
-                onSelectTag={() => {}}
-              />
-            </Text>
-          </TableCell>
-          <TableCell className="">
-            <ToggleButton
-              className="toggle toggleButton"
-              isChecked={item.enabled}
-              onChange={handleToggleEnabled}
-            />
-          </TableCell>
-        </StyledTableRow>
-      </StyledRowWrapper>
-    </>
+          </Text>
+        </TableCell>
+        <TableCell className="">
+          <ToggleButton
+            className="toggle toggleButton"
+            isChecked={item.enabled}
+            onChange={handleToggleEnabled}
+          />
+        </TableCell>
+      </StyledTableRow>
+    </StyledRowWrapper>
   );
 };
 

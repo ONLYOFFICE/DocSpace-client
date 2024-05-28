@@ -21,7 +21,6 @@ export const RowContent = ({
     <StyledRowContent sectionWidth={sectionWidth}>
       <ContentWrapper>
         <FlexWrapper>
-          {/* @ts-ignore */}
           <Text
             fontWeight={600}
             fontSize="14px"
@@ -31,12 +30,9 @@ export const RowContent = ({
           </Text>
         </FlexWrapper>
 
-        <>
-          {/* @ts-ignore */}
-          <Text fontWeight={600} fontSize="12px" color="#A3A9AE">
-            {item.description}
-          </Text>
-        </>
+        <Text fontWeight={600} fontSize="12px" color="#A3A9AE">
+          {item.description}
+        </Text>
       </ContentWrapper>
 
       <ToggleButtonWrapper>

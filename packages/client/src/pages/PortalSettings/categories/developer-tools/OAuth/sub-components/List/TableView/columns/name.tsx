@@ -41,7 +41,7 @@ const NameCell = ({
   setSelection,
 }: NameCellProps) => {
   const onChange = () => {
-    setSelection && setSelection(clientId);
+    setSelection?.(clientId);
   };
 
   return (
@@ -56,7 +56,7 @@ const NameCell = ({
         <TableCell className="table-container_element-wrapper">
           <StyledContainer className="table-container_element-container">
             <div className="table-container_element">
-              {icon && <StyledImage src={icon} alt={"App icon"} />}
+              {icon && <StyledImage src={icon} alt="App icon" />}
             </div>
             <Checkbox
               className="table-container_row-checkbox"

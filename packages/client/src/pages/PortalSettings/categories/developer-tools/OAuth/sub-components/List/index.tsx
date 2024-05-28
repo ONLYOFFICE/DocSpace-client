@@ -2,14 +2,11 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import { IClientProps } from "@docspace/shared/utils/oauth/interfaces";
-import { TTranslation } from "@docspace/shared/types";
 import { Text } from "@docspace/shared/components/text";
 
 import { Consumer } from "@docspace/shared/utils/context";
 
-//@ts-ignore
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
-//@ts-ignore
 import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
 
 import TableView from "./TableView";
@@ -36,7 +33,6 @@ export const StyledContainer = styled.div`
 `;
 
 interface ListProps {
-  t: TTranslation;
   clients: IClientProps[];
   viewAs: ViewAsType;
   currentDeviceType: DeviceUnionType;
@@ -48,35 +44,33 @@ const List = ({ clients, viewAs, currentDeviceType }: ListProps) => {
   return (
     <StyledContainer>
       <Text
-        fontSize={"12px"}
+        fontSize="12px"
         fontWeight={400}
-        lineHeight={"16px"}
-        title={"OAuth description"}
-        tag={""}
-        as={"p"}
-        color={""}
-        textAlign={""}
+        lineHeight="16px"
+        title="OAuth description"
+        tag=""
+        as="p"
+        color=""
+        textAlign=""
         className="description"
       >
         {t("OAuthAppDescription")}
       </Text>
       <RegisterNewButton t={t} currentDeviceType={currentDeviceType} />
       <Consumer>
-        {(context) => (
-          <>
-            {viewAs === "table" ? (
-              <TableView
-                items={clients || []}
-                sectionWidth={context.sectionWidth || 0}
-              />
-            ) : (
-              <RowView
-                items={clients || []}
-                sectionWidth={context.sectionWidth || 0}
-              />
-            )}
-          </>
-        )}
+        {(context) =>
+          viewAs === "table" ? (
+            <TableView
+              items={clients || []}
+              sectionWidth={context.sectionWidth || 0}
+            />
+          ) : (
+            <RowView
+              items={clients || []}
+              sectionWidth={context.sectionWidth || 0}
+            />
+          )
+        }
       </Consumer>
     </StyledContainer>
   );

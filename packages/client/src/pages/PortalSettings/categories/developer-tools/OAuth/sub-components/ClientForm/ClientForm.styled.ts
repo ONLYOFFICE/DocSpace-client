@@ -255,7 +255,7 @@ const StyledInputAddBlock = styled.div`
   left: 0px;
 
   border-radius: 3px;
-  border: 1px solid #d0d5da;
+  border: ${(props) => props.theme.oauth.clientForm.headerBorder};
 
   box-shadow: ${(props) => props.theme.navigation.boxShadow};
 

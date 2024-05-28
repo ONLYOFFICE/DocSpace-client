@@ -53,32 +53,30 @@ export const OAuthRow = (props: RowProps) => {
   const contextOptions = getContextMenuItems && getContextMenuItems(t, item);
 
   const element = (
-    <img style={{ borderRadius: "3px" }} src={item.logo} alt={"App logo"} />
+    <img style={{ borderRadius: "3px" }} src={item.logo} alt="App logo" />
   );
 
   return (
-    <>
-      <Row
-        key={item.clientId}
-        // data={item}
-        contextOptions={contextOptions}
-        onRowClick={handleRowClick}
-        element={element}
-        mode={"modern"}
-        checked={isChecked}
+    <Row
+      key={item.clientId}
+      // data={item}
+      contextOptions={contextOptions}
+      onRowClick={handleRowClick}
+      element={element}
+      mode="modern"
+      checked={isChecked}
+      inProgress={inProgress}
+      onSelect={() => setSelection && setSelection(item.clientId)}
+    >
+      <RowContent
+        sectionWidth={sectionWidth}
+        item={item}
+        isChecked={isChecked}
         inProgress={inProgress}
-        onSelect={() => setSelection && setSelection(item.clientId)}
-      >
-        <RowContent
-          sectionWidth={sectionWidth}
-          item={item}
-          isChecked={isChecked}
-          inProgress={inProgress}
-          setSelection={setSelection}
-          handleToggleEnabled={handleToggleEnabled}
-        />
-      </Row>
-    </>
+        setSelection={setSelection}
+        handleToggleEnabled={handleToggleEnabled}
+      />
+    </Row>
   );
 };
 

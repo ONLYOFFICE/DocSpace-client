@@ -24,39 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { memo } from "react";
+import { inject, observer } from "mobx-react";
+import { setLanguageForUnauthorized } from "@docspace/shared/utils/common";
+import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
+import { TPortalCultures } from "@docspace/shared/api/settings/types";
+import { DeviceType } from "@docspace/shared/enums";
 
-import { DropDownItem } from "../../drop-down-item";
+export interface TLanguageCombobox {
+  cultures: TPortalCultures;
+  currentDeviceType: string;
+  currentCultureName: string;
+}
 
-import { RowProps } from "../DropDown.types";
+const LanguageComboboxWrapper = (props: TLanguageCombobox) => {
+  const { cultures, currentCultureName, currentDeviceType } = props;
 
-const Row = memo(({ data, index, style }: RowProps) => {
-  const { children, theme, activedescendant, handleMouseMove } = data;
+  const onLanguageSelect = (culture: { key: string }) => {
+    const { key } = culture;
 
-  const option = Array.isArray(children) ? children[index] : null;
+    setLanguageForUnauthorized(key);
+  };
 
-  const separator = option?.props?.isSeparator
-    ? { width: `calc(100% - 32px)`, height: `1px` }
-    : {};
+  const isMobileView = currentDeviceType === DeviceType.mobile;
 
-  const optionStyle = option?.props.style ?? {};
-
-  const newStyle = { ...style, ...separator, ...optionStyle };
+  if (isMobileView) return <></>;
 
   return (
-    <DropDownItem
-      theme={theme}
-      {...option?.props}
-      noHover
-      style={newStyle}
-      onMouseMove={() => {
-        handleMouseMove?.(index);
-      }}
-      isActiveDescendant={activedescendant === index}
+    <LanguageCombobox
+      className="language-combo-box"
+      onSelectLanguage={onLanguageSelect}
+      cultures={cultures}
+      selectedCulture={currentCultureName}
+      withBorder={false}
     />
   );
-});
+};
 
-Row.displayName = "Row";
+export default inject<TStore>(({ settingsStore }) => {
+  const { currentDeviceType } = settingsStore;
 
-export { Row };
+  return {
+    currentDeviceType,
+  };
+})(observer(LanguageComboboxWrapper));

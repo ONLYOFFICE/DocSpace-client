@@ -155,6 +155,16 @@ const Body = ({
     resetCache();
   }, [resetCache, hasNextPage]);
 
+  // scroll to top after changing tab
+  React.useEffect(() => {
+    if (!withTabs) return;
+    const scrollElement = document.querySelector(".selector-body-scroll");
+
+    if (scrollElement) {
+      scrollElement.scrollTo(0, 0);
+    }
+  }, [withTabs, activeTabId]);
+
   let listHeight = bodyHeight - CONTAINER_PADDING;
 
   if (withSearch || isSearch || itemsCount > 0) listHeight -= SEARCH_HEIGHT;

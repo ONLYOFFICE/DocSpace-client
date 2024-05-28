@@ -2452,23 +2452,25 @@ const Dark: TTheme = {
     roomType: {
       listItem: {
         background: "none",
+        hoverBackground: "#282828",
         borderColor: "#474747",
         descriptionText: "#A3A9AE",
       },
       dropdownButton: {
         background: "none",
+        hoverBackground: "#282828",
         borderColor: "#474747",
         isOpenBorderColor: "#F97A0B",
         descriptionText: "#A3A9AE",
       },
       dropdownItem: {
         background: "#333333",
-        hoverBackground: "#474747",
+        hoverBackground: "#282828",
         descriptionText: "#A3A9AE",
       },
       displayItem: {
-        background: "#474747",
-        borderColor: "#474747",
+        background: "#282828",
+        borderColor: "#282828",
         descriptionText: "#a3a9ae",
       },
     },
@@ -2498,7 +2500,7 @@ const Dark: TTheme = {
       background: "#333333",
       borderColor: "#474747",
       item: {
-        hoverBackground: "#474747",
+        hoverBackground: "#282828",
       },
     },
 

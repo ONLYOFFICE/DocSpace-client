@@ -113,7 +113,7 @@ const DeveloperToolsWrapper = (props) => {
     },
     {
       id: "oauth",
-      name: t("OAuth:Oauth"),
+      name: t("OAuth:OAuth"),
       content: <OAuth />,
     },
   ];

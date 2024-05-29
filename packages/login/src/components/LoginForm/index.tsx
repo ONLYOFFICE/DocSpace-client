@@ -362,6 +362,7 @@ const LoginForm = ({
         onBlurEmail={onBlurEmail}
         onValidateEmail={onValidateEmail}
         isLdapLogin={isLdapLoginChecked}
+        ldapDomain={ldapDomain}
       />
 
       <PasswordContainer

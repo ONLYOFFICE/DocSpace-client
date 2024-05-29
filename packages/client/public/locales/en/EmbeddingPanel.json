@@ -3,5 +3,7 @@
   "CodeCopySuccess": "Code has been copied to the clipboard",
   "EmbedCode": "Embed code",
   "Height": "Height",
-  "Width": "Width"
+  "Width": "Width",
+  "EmbeddingDescription": "Embed Public room into your website or blog. Apply additional display settings for customizing the embedded content.",
+  "CodeSuccessfullyCopied": "Code to insert successfully copied to clipboard"
 }

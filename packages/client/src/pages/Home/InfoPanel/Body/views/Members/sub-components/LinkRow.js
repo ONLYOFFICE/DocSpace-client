@@ -149,6 +149,8 @@ const LinkRow = (props) => {
     setIsScrollLocked(false);
   };
 
+  const isDisabled = disabled || isExpired;
+
   const getData = () => {
     return [
       {
@@ -167,20 +169,20 @@ const LinkRow = (props) => {
       //   icon: ShareReactSvgUrl,
       //   // onClick: () => args.onClickLabel("label2"),
       // },
-      // !isExpired && {
-      //   key: "embedding-settings-key",
-      //   label: t("Files:EmbeddingSettings"),
-      //   icon: CodeReactSvgUrl,
-      //   onClick: onEmbeddingClick,
-      // },
 
-      !disabled &&
-        !isExpired && {
-          key: "copy-link-settings-key",
-          label: t("Files:CopySharedLink"),
-          icon: CopyToReactSvgUrl,
-          onClick: onCopyExternalLink,
-        },
+      !isDisabled && {
+        key: "copy-link-settings-key",
+        label: t("Files:CopySharedLink"),
+        icon: CopyToReactSvgUrl,
+        onClick: onCopyExternalLink,
+      },
+
+      !isDisabled && {
+        key: "embedding-settings-key",
+        label: t("Files:EmbeddingSettings"),
+        icon: CodeReactSvgUrl,
+        onClick: onEmbeddingClick,
+      },
 
       // disabled
       //   ? {

@@ -3331,6 +3331,10 @@ const Dark: TTheme = {
   dateTimePicker: {
     colorClockIcon: "#ADADAD",
   },
+
+  embeddingPanel: {
+    descriptionTextColor: "#ADADAD",
+  },
 };
 
 export default Dark;

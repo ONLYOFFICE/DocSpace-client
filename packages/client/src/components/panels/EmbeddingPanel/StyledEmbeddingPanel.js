@@ -27,6 +27,7 @@
 import styled, { css } from "styled-components";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { Base } from "@docspace/shared/themes";
+import { Box } from "@docspace/shared/components/box";
 
 const StyledEmbeddingPanel = styled.div`
   .embedding-panel {
@@ -46,9 +47,10 @@ const StyledEmbeddingPanel = styled.div`
     padding: 0 16px;
     border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
 
-    .hotkeys_heading {
+    .embedding_heading {
       font-weight: 700;
-      font-size: 18px;
+      font-size: 21px;
+      margin: 12px 0;
     }
   }
 `;
@@ -64,50 +66,54 @@ const StyledScrollbar = styled(Scrollbar)`
 const StyledBody = styled.div`
   .embedding-panel_body {
     padding: 20px 16px 0 16px;
-  }
 
-  .embedding-panel_links-container {
-    display: flex;
-    .embedding-panel_link {
-      box-sizing: border-box;
-
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 8px;
-            `
-          : css`
-              margin-right: 8px;
-            `}
-
-      border: 1px solid #eceef1;
-      border-radius: 16px;
-      line-height: 20px;
-      padding: 3px 15px;
-
-      text-decoration: none;
+    .embedding-panel_description {
+      color: ${({ theme }) => theme.embeddingPanel.descriptionTextColor};
+      margin-bottom: 18px;
     }
 
-    .embedding-panel_link_active {
-      color: #ffffff;
-      background: #265a8f;
+    .embedding-panel_header-text {
+      margin-bottom: 16px;
     }
-  }
 
-  .embedding-panel_inputs-container {
-    display: flex;
-    margin-top: 16px;
+    .embedding-panel_checkbox-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
 
-    .embedding-panel_input {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 8px;
-            `
-          : css`
-              margin-right: 8px;
-            `}
-      width: 94px;
+      .embedding-panel_checkbox-element {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+    }
+
+    .embedding-panel_inputs-container {
+      display: flex;
+      margin-bottom: 20px;
+      gap: 8px;
+
+      .embedding-panel_block {
+        width: 100%;
+
+        .embedding-panel_size-block {
+          display: flex;
+          align-items: center;
+          height: 32px;
+        }
+      }
+
+      .embedding-panel_input {
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-left: 8px;
+              `
+            : css`
+                margin-right: 8px;
+              `}
+        width: 94px;
+      }
     }
   }
 
@@ -139,4 +145,17 @@ const StyledBody = styled.div`
   }
 `;
 
-export { StyledEmbeddingPanel, StyledScrollbar, StyledBody };
+const StyledButtons = styled(Box)`
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  background: ${({ theme }) => theme.filesPanels.sharing.backgroundButtons};
+  border-top: ${({ theme }) => theme.filesPanels.sharing.borderTop};
+`;
+
+export { StyledEmbeddingPanel, StyledScrollbar, StyledBody, StyledButtons };

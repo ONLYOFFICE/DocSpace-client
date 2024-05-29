@@ -3354,6 +3354,10 @@ export const getBaseTheme = () => {
     dateTimePicker: {
       colorClockIcon: "#657077",
     },
+
+    embeddingPanel: {
+      descriptionTextColor: "#657077",
+    },
   };
 };
 

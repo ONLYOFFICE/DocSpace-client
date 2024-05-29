@@ -154,10 +154,12 @@ class LdapFormStore {
     this.groupNameAttribute = groupNameAttribute;
   };
 
-  mapCron = (data) => {
-    this.setCron(data);
+  mapCron = (cron) => {
+    const cronWithoutSeconds = cron ? cron.replace("0 ", "") : null;
 
-    this.isCronEnabled && this.setNextSyncDate(data);
+    this.setCron(cronWithoutSeconds);
+
+    this.isCronEnabled && this.setNextSyncDate(cronWithoutSeconds);
   };
 
   load = async () => {
@@ -169,12 +171,10 @@ class LdapFormStore {
     if (settingsRes.status == "fulfilled") this.mapSettings(settingsRes.value);
 
     if (cronRes.status == "fulfilled") {
-      const cronWithoutSeconds = cronRes?.value?.cron
-        ? cronRes.value.cron.replace("0 ", "")
-        : null;
-
-      this.mapCron(cronWithoutSeconds);
+      this.mapCron(cronRes.value?.cron);
     }
+
+    //TDOD: handle error
   };
 
   setServer = (server) => {
@@ -262,8 +262,8 @@ class LdapFormStore {
   };
 
   restoreToDefault = async () => {
-    const response = await getLdapDefaultSettings();
-    this.mapSettings(response);
+    const settingsRes = await getLdapDefaultSettings();
+    this.mapSettings(settingsRes);
 
     this.save(true);
   };
@@ -293,9 +293,10 @@ class LdapFormStore {
 
   saveCronLdap = async () => {
     const cronWithSeconds = `0 ${this.cron}`;
+
     const respose = await saveCronLdap(cronWithSeconds);
 
-    console.log("Save ldap CRON result", { respose });
+    return respose;
   };
 
   save = async (toDefault = false) => {
@@ -376,13 +377,13 @@ class LdapFormStore {
     if (respose?.id) {
       this.inProgress = true;
       this.progressBarIntervalId = setInterval(
-        this.checkStatus,
+        () => this.checkStatus(toDefault),
         constants.GET_STATUS_TIMEOUT,
       );
     }
   };
 
-  checkStatus = () => {
+  checkStatus = (toDefault = false) => {
     if (this.alreadyChecking) {
       return;
     }
@@ -390,13 +391,13 @@ class LdapFormStore {
     this.inProgress = true;
 
     getLdapStatus()
-      .then(this.onGetStatus)
+      .then((data) => this.onGetStatus(data, toDefault))
       .catch((e) => {
         this.alreadyChecking = false;
       });
   };
 
-  onGetStatus = (data) => {
+  onGetStatus = async (data, toDefault) => {
     this.alreadyChecking = false;
     try {
       if (data?.error) {
@@ -429,7 +430,7 @@ class LdapFormStore {
       if (status.warning && this.lastWarning !== status.warning) {
         this.lastWarning = status.warning;
         console.warn(status.warning);
-        //toastr.warning(status.warning, "", { timeOut: 0, extendedTimeOut: 0 });
+        //TODO: replace to toastr.warning(status.warning, "", { timeOut: 0, extendedTimeOut: 0 });
       }
 
       if (this.isCompleted(status)) {
@@ -438,6 +439,12 @@ class LdapFormStore {
         if (status.error) throw status.error;
 
         this.endProcess();
+
+        if (toDefault) {
+          // this.load();
+          const response = await getCronLdap();
+          this.mapCron(response?.cron);
+        }
       }
     } catch (error) {
       //showError(error);

@@ -72,7 +72,7 @@
   "ChooseBackupFiles": "Wybierz pliki kopii zapasowej",
   "ClearBackupList": "Usuń wszystkie kopie zapasowe",
   "CloseMenu": "Zamknij menu",
-  "CommonFilesDescription": "Dla plików w sekcji Wspólne zostanie utworzony osobny pokój (pokój Wspólny). Tylko administratorzy DocSpace będą mieli dostęp do tego pokoju Domyślnie, właścicielem pokoju będzie użytkownik inicjujący import: Jan Kowalski (Ty).",
+  "CommonFilesDescription": "Dla plików w sekcji Wspólne zostanie utworzony osobny pokój (pokój Wspólny). Tylko administratorzy DocSpace będą mieli dostęp do tego pokoju Domyślnie, właścicielem pokoju będzie użytkownik inicjujący import: {{user}} (Ty).",
   "CompanyInfoSettings": "Ustawienia informacji o firmie",
   "CompanyInfoSettingsDescription": "Dana informacja wyświetli się w oknie <1>{{link}}</1>.",
   "ConfirmEmailSended": "Wiadomość e-mail z potwierdzeniem została wysłana do {{ownerName}}",

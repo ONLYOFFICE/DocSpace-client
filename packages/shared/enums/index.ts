@@ -339,6 +339,7 @@ export const enum Events {
   CHANGE_QUOTA = "change_quota",
   CREATE_PLUGIN_FILE = "create_plugin_file",
   CREATE_PDF_FORM_FILE = "create_pdf_form_file",
+  Share_PDF_Form = "share_pdf_form",
 }
 
 /**

@@ -761,6 +761,13 @@ class FilesStore {
     }
   };
 
+  removeActiveItem = (file) => {
+    console.log(this.activeFiles);
+
+    this.activeFiles =
+      this.activeFiles?.filter((item) => item.id !== file.id) ?? [];
+  };
+
   addActiveItems = (files, folders, destFolderId) => {
     if (folders && folders.length) {
       if (!this.activeFolders.length) {

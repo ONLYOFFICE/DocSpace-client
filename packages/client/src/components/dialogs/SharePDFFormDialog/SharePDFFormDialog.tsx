@@ -25,51 +25,87 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
 import { useTranslation } from "react-i18next";
-// import { observer, inject } from "mobx-react";
+import { observer, inject } from "mobx-react";
 
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { Events, RoomsType } from "@docspace/shared/enums";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
-export const SharePDFFormDialog = () => {
-  const { t } = useTranslation(["Files", "Common"]);
+import type {
+  EventWithPayload,
+  SharePDFFormDialogProps,
+} from "./SharePDFFormDialog.type";
 
-  const onSubmit = () => {};
+export const SharePDFFormDialog = inject<TStore>(
+  ({ filesActionsStore, filesStore }) => {
+    const { setProcessCreatingRoomFromData } = filesActionsStore;
+    const { setBufferSelection } = filesStore;
 
-  const onClose = () => {};
+    return { setProcessCreatingRoomFromData, setBufferSelection };
+  },
+)(
+  observer(
+    ({
+      file,
+      onClose,
+      setBufferSelection,
+      setProcessCreatingRoomFromData,
+    }: SharePDFFormDialogProps) => {
+      const { t } = useTranslation(["Files", "Common"]);
 
-  return (
-    <ModalDialog
-      visible
-      autoMaxHeight
-      onClose={onClose}
-      displayType={ModalDialogType.modal}
-    >
-      <ModalDialog.Header>
-        {t("Files:SharePDFFormModalTitle")}
-      </ModalDialog.Header>
-      <ModalDialog.Body>
-        {t("Files:SharePDFFormModalDescription")}
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          scale
-          primary
-          tabIndex={0}
-          size={ButtonSize.normal}
-          label={t("Files:CreateRoom")}
-          onClick={onSubmit}
-        />
-        <Button
-          scale
-          tabIndex={0}
-          onClick={onClose}
-          size={ButtonSize.normal}
-          label={t("Common:Cancel")}
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
-  );
-};
+      const onSubmit = () => {
+        setBufferSelection?.(file);
+        setProcessCreatingRoomFromData?.(true);
+        const event: EventWithPayload = new Event(Events.ROOM_CREATE);
+
+        event.payload = {
+          startRoomType: RoomsType.FormRoom,
+        };
+
+        window.dispatchEvent(event);
+
+        onClose();
+      };
+
+      const handleOnClose = () => {
+        onClose();
+      };
+
+      return (
+        <ModalDialog
+          visible
+          autoMaxHeight
+          onClose={handleOnClose}
+          displayType={ModalDialogType.modal}
+        >
+          <ModalDialog.Header>
+            {t("Files:SharePDFFormModalTitle")}
+          </ModalDialog.Header>
+          <ModalDialog.Body>
+            {t("Files:SharePDFFormModalDescription")}
+          </ModalDialog.Body>
+          <ModalDialog.Footer>
+            <Button
+              scale
+              primary
+              tabIndex={0}
+              size={ButtonSize.normal}
+              label={t("Files:CreateRoom")}
+              onClick={onSubmit}
+            />
+            <Button
+              scale
+              tabIndex={0}
+              onClick={handleOnClose}
+              size={ButtonSize.normal}
+              label={t("Common:Cancel")}
+            />
+          </ModalDialog.Footer>
+        </ModalDialog>
+      );
+    },
+  ),
+);

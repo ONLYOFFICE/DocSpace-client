@@ -76,6 +76,7 @@ import LeaveRoomDialog from "../dialogs/LeaveRoomDialog";
 import ChangeRoomOwnerPanel from "../panels/ChangeRoomOwnerPanel";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
 import { PDFFormEditingDialog } from "../dialogs/PDFFormEditingDialog";
+import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
 
 const Panels = (props) => {
   const {
@@ -138,6 +139,12 @@ const Panels = (props) => {
     onClose: null,
   });
 
+  const [sharePDFForm, setSharePDFForm] = useState({
+    visible: false,
+    data: null,
+    onClose: null,
+  });
+
   const { t } = useTranslation(["Translations", "Common", "PDFFormDialog"]);
 
   const onClose = () => {
@@ -183,19 +190,39 @@ const Panels = (props) => {
     [],
   );
 
+  const handleSharePDFForm = useCallback(
+    /**
+     * @param {CustomEvent} event
+     */
+    (event) => {
+      const { file } = event.detail;
+
+      setSharePDFForm({
+        visible: true,
+        file,
+        onClose: () => {
+          setSharePDFForm({ visible: false, onClose: null, file: null });
+        },
+      });
+    },
+    [],
+  );
+
   useEffect(() => {
     window.addEventListener(
       Events.CREATE_PDF_FORM_FILE,
       handleCreatePDFFormFile,
     );
+    window.addEventListener(Events.Share_PDF_Form, handleSharePDFForm);
 
     return () => {
       window.removeEventListener(
         Events.CREATE_PDF_FORM_FILE,
         handleCreatePDFFormFile,
       );
+      window.removeEventListener(Events.Share_PDF_Form, handleSharePDFForm);
     };
-  }, [handleCreatePDFFormFile]);
+  }, [handleCreatePDFFormFile, handleSharePDFForm]);
 
   return [
     settingsPluginDialogVisible && (
@@ -246,7 +273,7 @@ const Panels = (props) => {
     changeUserTypeDialogVisible && (
       <ChangeUserTypeDialog key="change-user-type-dialog" />
     ),
-    createRoomDialogVisible && <CreateRoomDialog key="create-room-dialog" />,
+    // createRoomDialogVisible && <CreateRoomDialog key="create-room-dialog" />,
     (createRoomConfirmDialogVisible || confirmDialogIsLoading) && (
       <CreateRoomConfirmDialog key="create-room-confirm-dialog" />
     ),
@@ -317,6 +344,9 @@ const Panels = (props) => {
       />
     ),
     pdfFormEditVisible && <PDFFormEditingDialog key="pdf-form-edit-dialog" />,
+    sharePDFForm.visible && (
+      <SharePDFFormDialog key="share-pdf-form-dialog" {...sharePDFForm} />
+    ),
   ];
 };
 

@@ -24,44 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-import React from "react";
-import { withTranslation } from "react-i18next";
+import type { TFile } from "@docspace/shared/api/files/types";
+import type { RoomsType } from "@docspace/shared/enums";
 
-import withLoader from "@docspace/client/src/HOCs/withLoader";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import CreateEditRoomDilogHeaderLoader from "@docspace/shared/skeletons/create-edit-room/DilogHeader";
+export interface SharePDFFormDialogProps
+  extends Partial<
+      Pick<TStore["filesActionsStore"], "setProcessCreatingRoomFromData">
+    >,
+    Partial<Pick<TStore["filesStore"], "setBufferSelection">> {
+  onClose: VoidFunction;
+  file: TFile;
+}
 
-const DialogHeader = ({
-  t,
-  isEdit,
-  isChooseRoomType,
-  onArrowClick,
-  disabledIcon,
-}) => {
-  return (
-    <>
-      {isEdit ? (
-        <span>{t("RoomEditing")}</span>
-      ) : isChooseRoomType ? (
-        <span>{t("ChooseRoomType")}</span>
-      ) : (
-        <div className="header-with-button">
-          {!disabledIcon && (
-            <IconButton
-              size={17}
-              iconName={ArrowPathReactSvgUrl}
-              className="sharing_panel-arrow"
-              onClick={onArrowClick}
-            />
-          )}
-          <div>{t("Files:CreateRoom")}</div>
-        </div>
-      )}
-    </>
-  );
+export type EventWithPayload = Event & {
+  payload?: {
+    startRoomType: RoomsType;
+  };
 };
-
-export default withTranslation(["CreateEditRoomDialog", "Files"])(
-  withLoader(DialogHeader)(<CreateEditRoomDilogHeaderLoader />),
-);

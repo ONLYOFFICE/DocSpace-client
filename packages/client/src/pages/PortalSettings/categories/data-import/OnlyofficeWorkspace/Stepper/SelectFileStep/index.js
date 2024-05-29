@@ -181,7 +181,10 @@ const SelectFileStep = ({
     setProgress(0);
     setIsVisible(true);
     try {
-      if (Array.isArray(file)) throw new Error(t("Common:SomethingWentWrong"));
+      if (Array.isArray(file)) {
+        setShowErrorText(true);
+        throw new Error(t("Common:SomethingWentWrong"));
+      }
       await singleFileUploading(file, setProgress, isAbort);
       await initMigrationName(searchParams.get("service"));
 

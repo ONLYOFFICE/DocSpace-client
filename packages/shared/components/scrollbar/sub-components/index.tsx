@@ -38,6 +38,7 @@ const CustomScrollbars = ({
   className,
   contentRef,
   autoFocus,
+  scrollClass,
 }: CustomScrollbarsVirtualListProps) => {
   const refSetter = (
     scrollbarsRef: React.RefObject<Scrollbar>,
@@ -66,6 +67,7 @@ const CustomScrollbars = ({
       onScroll={onScroll}
       className={className}
       autoFocus={autoFocus}
+      scrollClass={scrollClass}
     >
       {children}
       <div className="additional-scroll-height" />

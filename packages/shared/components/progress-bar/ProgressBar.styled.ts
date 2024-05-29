@@ -27,6 +27,28 @@
 import styled, { keyframes } from "styled-components";
 import { Base } from "../../themes";
 
+const StyledProgressBarContainer = styled.div`
+  .progress-bar_full-text {
+    display: block;
+    position: absolute;
+    margin-top: 8px;
+  }
+
+  .progress-bar_status-text {
+    display: block;
+    position: absolute;
+    color: ${(props) => props.theme.progressBar.color.status} !important;
+  }
+
+  .progress-bar_status-error {
+    display: block;
+    position: absolute;
+    color: ${(props) => props.theme.progressBar.color.error} !important;
+  }
+`;
+
+StyledProgressBarContainer.defaultProps = { theme: Base };
+
 const loadingAnimation = keyframes`
  0% {
     transform: translateX(-50%);
@@ -44,12 +66,6 @@ const StyledProgressBar = styled.div<{ percent: number }>`
   overflow: hidden;
   border-radius: 3px;
   background-color: ${(props) => props.theme.progressBar.backgroundColor};
-
-  .progress-bar_full-text {
-    display: block;
-    position: absolute;
-    margin-top: 8px;
-  }
 
   .progress-bar_percent {
     float: left;
@@ -74,4 +90,4 @@ const StyledProgressBar = styled.div<{ percent: number }>`
 
 StyledProgressBar.defaultProps = { theme: Base };
 
-export default StyledProgressBar;
+export { StyledProgressBarContainer, StyledProgressBar };

@@ -17,7 +17,7 @@ const ProgressContainer = ({
   return (
     inProgress && (
       <Box className="ldap_progress-container">
-        <ProgressBar percent={percents} label={source || error} />
+        <ProgressBar percent={percents} status={source} error={error} />
       </Box>
     )
   );

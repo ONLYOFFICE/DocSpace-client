@@ -1,5 +1,4 @@
-{
-  "Authentication": "Autenticazione",
+﻿{
   "AuthViaNTLM": "Autenticazione tramite NTLM",
   "EnableSSL": "Attiva SSL",
   "EnterDomain": "Inserisci il dominio",

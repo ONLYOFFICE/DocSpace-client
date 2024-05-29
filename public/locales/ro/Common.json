@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Informații",
   "AboutCompanyTitle": "Despre aplicația",
   "AccessDenied": "Acces refuzat ",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "Sala '{{name}}' este arhivată",
   "Attention": "Atenție",
   "Audio": "Audio",
+  "Authentication": "Autentificare",
   "Authorization": "Autorizare",
   "Back": "Înapoi",
   "BarMaintenanceDescription": "Ne cerem scuze pentru orice problemă tehnică pe termen scurt care poate apărea în funcționarea serviciului la data de {{targetDate}} pe parcursul actualizării {{productName}}.",

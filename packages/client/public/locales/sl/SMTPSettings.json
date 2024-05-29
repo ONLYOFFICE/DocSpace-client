@@ -1,5 +1,4 @@
-{
-  "Authentication": "Preverjanje pristnosti",
+﻿{
   "AuthViaNTLM": "Avtentikacija preko NTLM",
   "EnableSSL": "Omogoči SSL",
   "EnterDomain": "Vnesi domeno",

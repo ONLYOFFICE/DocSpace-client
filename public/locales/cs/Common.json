@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "O nás",
   "AboutCompanyTitle": "O tomto programu",
   "AccessDenied": "Přístup odepřen",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "Místnost '{{name}}' je archivována",
   "Attention": "Pozornost",
   "Audio": "Audio",
+  "Authentication": "Autentizace",
   "Authorization": "Autorizace",
   "Back": "Zpět",
   "BarMaintenanceDescription": "Omlouváme se za případné krátkodobé technické problémy ve fungování služby, které se mohou objevit dne {{targetDate}} během aktualizace {{productName}}.",

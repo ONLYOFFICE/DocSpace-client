@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "පිළිබඳව",
   "AboutCompanyTitle": "මෙම මෘදුකාංගය ගැන",
   "AccessDenied": "ප්‍රවේශය ප්‍රතික්‍ෂේපිතයි",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "'{{name}}' කාමරය සංරක්‍ෂිතයි",
   "Attention": "අවධානය",
   "Audio": "ශ්‍රව්‍ය",
+  "Authentication": "තහවුරුව",
   "Authorization": "බලය දීම",
   "Back": "ආපසු",
   "BarMaintenanceDescription": "{{productName}} යාවත්කාලය අතරතුර {{targetDate}} දී දිස්විය හැකි සේවා ක්‍රියාකාරිත්‍ව ආශ්‍රිත කෙටි කාලීන තාක්‍ෂණික ගැටළු ඉවසා සිටින්න.",

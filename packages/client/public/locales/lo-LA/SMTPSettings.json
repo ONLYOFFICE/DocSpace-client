@@ -1,5 +1,4 @@
-{
-  "Authentication": "ການຢືນຢັນ",
+﻿{
   "AuthViaNTLM": "ກວດສອບ ຜ່ານ NTLM",
   "EnableSSL": "ເປີດໃຊ້ SSL",
   "EnterDomain": "ໃສ່ໂດເມນ",

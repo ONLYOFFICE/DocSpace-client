@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Giới thiệu",
   "AboutCompanyTitle": "Giới thiệu về chương trình này",
   "AccessDenied": "Truy cập bị từ chối",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "Phòng '{{name}}' đã được sao lưu",
   "Attention": "Chú ý",
   "Audio": "Âm thanh",
+  "Authentication": "Xác thực",
   "Authorization": "Ủy quyền",
   "Back": "Quay lại",
   "BarMaintenanceDescription": "Chúng tôi xin lỗi vì bất kỳ vấn đề kỹ thuật ngắn hạn nào trong hoạt động của dịch vụ có thể xảy ra trên {{targetDate}} trong quá trình cập nhật {{productName}}.",

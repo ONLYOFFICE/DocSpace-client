@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "소개",
   "AboutCompanyTitle": "프로그램 소개",
   "AccessDenied": "액세스가 거부되었습니다",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "'{{name}}' 방이 아카이브되었습니다",
   "Attention": "주의",
   "Audio": "오디오",
+  "Authentication": "인증",
   "Authorization": "승인",
   "Back": "뒤로",
   "BarMaintenanceDescription": "{{productName}} 업데이트 중 {{targetDate}}에 나타날 수 있는 서비스 기능의 단기적 기술 문제에 대해 사과 드립니다.",

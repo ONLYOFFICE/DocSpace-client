@@ -1,5 +1,4 @@
-{
-  "Authentication": "Autentificare",
+﻿{
   "AuthViaNTLM": "Autorizare prin NTLM",
   "EnableSSL": "Activare autentificare unică",
   "EnterDomain": "Introduceți domeniul",

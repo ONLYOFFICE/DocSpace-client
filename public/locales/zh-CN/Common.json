@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "关于",
   "AboutCompanyTitle": "关于本计划",
   "AccessDenied": "拒绝访问",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "房间'{{name}}'已归档",
   "Attention": "注意",
   "Audio": "音频",
+  "Authentication": "身份验证",
   "Authorization": "授权",
   "Back": "后退",
   "BarMaintenanceDescription": "对于在{{targetDate}}时{{productName}}更新期间可能出现的服务运行短期技术问题，我们深表歉意。",

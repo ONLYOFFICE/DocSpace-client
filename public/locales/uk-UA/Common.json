@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Інформація",
   "AboutCompanyTitle": "Про цю програму",
   "AccessDenied": "Доступ заборонено",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "Кімнату «{{name}}» архівовано",
   "Attention": "Увагу",
   "Audio": "Аудіо",
+  "Authentication": "Автентифікація",
   "Authorization": "Авторизація",
   "Back": "Назад",
   "BarMaintenanceDescription": "Просимо вибачення за короткочасні технічні проблеми в роботі служби, які можуть виникнути {{targetDate}} під час оновлення {{productName}}.",

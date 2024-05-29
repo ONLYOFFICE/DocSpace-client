@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "من نحن",
   "AboutCompanyTitle": "نبذة تعريفية عن البرنامج",
   "AccessDenied": "المحاولة مرفوضة",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "تمت أرشفة الغرفة \"{{name}}\"",
   "Attention": "انتباه",
   "Audio": "الصوت",
+  "Authentication": "المصادقة",
   "Authorization": "المصادقة",
   "Back": "خلف",
   "BarMaintenanceDescription": "نعتذر عن أي مشكلات فنية قصيرة الأمد في الخدمة التي قد تظهر في {{targetDate}} أثناء تحديث {{productName}}.",

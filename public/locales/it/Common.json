@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Informazioni su",
   "AboutCompanyTitle": "Informazioni sul programma",
   "AccessDenied": " Accesso negato",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "La stanza '{{name}}' è archiviata",
   "Attention": "Attenzione",
   "Audio": "Audio",
+  "Authentication": "Autenticazione",
   "Authorization": "Autorizzazione",
   "Back": "Indietro",
   "BarMaintenanceDescription": "Ci scusiamo per gli eventuali problemi tecnici a breve termine nel funzionamento di servizio, che possono apparire il {{targetDate}} durante l'aggiornamento di {{productName}}.",

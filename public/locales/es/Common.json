@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Acerca de",
   "AboutCompanyTitle": "Acerca del programa",
   "AccessDenied": "Acceso denegado ",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "La sala ‘{{name}}’ está archivada",
   "Attention": "¡Atención",
   "Audio": "Audio",
+  "Authentication": "Autenticación",
   "Authorization": "Autorización",
   "Back": "Volver",
   "BarMaintenanceDescription": "Pedimos disculpas por cualquier problema técnico de corta duración en el funcionamiento del servicio que pueda aparecer el día {{targetDate}} durante la actualización de {{productName}}.",

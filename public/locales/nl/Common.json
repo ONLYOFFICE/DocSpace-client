@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Over",
   "AboutCompanyTitle": "Over dit programma",
   "AccessDenied": "Toegang geweigerd",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "De kamer \"{{name}}\" is gearchiveerd",
   "Attention": "Attentie",
   "Audio": "Audio",
+  "Authentication": "Authenticatie",
   "Authorization": "Autorisatie",
   "Back": "Terug",
   "BarMaintenanceDescription": "Onze excuses voor eventuele kortstondige technische problemen in het functioneren van de dienst die kunnen optreden op {{targetDate}} tijdens de update van {{productName}}.",

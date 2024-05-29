@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "About",
   "AboutCompanyTitle": "About this program",
   "AccessDenied": "Access denied",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "The room '{{name}}' is archived",
   "Attention": "Attention",
   "Audio": "Audio",
+  "Authentication": "Authentication",
   "Authorization": "Authorization",
   "Back": "Back",
   "BarMaintenanceDescription": "We apologize for any short-term technical issues in service functioning that may appear on {{targetDate}} during the update of {{productName}}.",

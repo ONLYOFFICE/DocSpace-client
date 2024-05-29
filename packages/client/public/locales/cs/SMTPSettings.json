@@ -1,5 +1,4 @@
-{
-  "Authentication": "Autentizace",
+﻿{
   "AuthViaNTLM": "Autentizace prostřednictvím NTLM",
   "EnableSSL": "Povolit SSL",
   "EnterDomain": "Zadejte doménu",

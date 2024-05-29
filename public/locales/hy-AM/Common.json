@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Մասին",
   "AboutCompanyTitle": "Ծրագրի մասին",
   "AccessDenied": "Մուտքն արգելված է",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "«{{name}}» սենյակը արխիվացված է",
   "Attention": "Ուշադրություն",
   "Audio": "Ձայնային",
+  "Authentication": "Նույնականացում",
   "Authorization": "Լիազորում",
   "Back": "Հետ",
   "BarMaintenanceDescription": "Մենք ներողություն ենք խնդրում ծառայության աշխատանքի ցանկացած կարճաժամկետ տեխնիկական խնդրի համար, որը կարող է հայտնվել {{targetDate}}-ին՝ {{productName}}-ի թարմացման ժամանակ:",

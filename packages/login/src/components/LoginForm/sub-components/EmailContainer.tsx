@@ -133,7 +133,7 @@ const EmailContainer = ({
           value={identifier}
           placeholder={t("LDAPUsernamePlaceholder", {
             ldap_domain: ldapDomain,
-          })} //TODO: Add translation
+          })}
           size={InputSize.large}
           scale={true}
           isAutoFocussed={true}

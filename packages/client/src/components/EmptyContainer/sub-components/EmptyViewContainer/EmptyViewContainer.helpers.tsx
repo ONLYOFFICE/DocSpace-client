@@ -63,9 +63,9 @@ export const getDescription = (
     access !== ShareAccessRights.RoomManager &&
     !isCollaborator;
 
-  if (isCollaborator) return t("EmptyView:CollaboratorEmptyTitle");
-
   if (isNotAdmin) return t("EmptyView:UserEmptyDescription");
+
+  if (isCollaborator) return t("EmptyView:CollaboratorEmptyDesciprtion");
 
   return t("EmptyView:EmptyDescription");
 };

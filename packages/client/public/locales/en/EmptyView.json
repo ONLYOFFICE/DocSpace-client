@@ -1,5 +1,6 @@
 {
   "CollaboratorEmptyTitle": "The room is empty.",
+  "CollaboratorEmptyDesciprtion": "Get started with quick actions:",
   "CreateFormFromTextDocOptionDescription": "Simply add fields to create PDF forms from ready made documents",
   "CreateFormFromTextDocOptionTitle": "Create a form from a prepared document",
   "CreateNewFileDescription": "Start working in the room by creating files or folders",

@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useRef, useCallback } from "react";
-import { isMobileOnly, isIOS } from "react-device-detect";
+import React, { useEffect, useRef } from "react";
 
 import { DeviceType } from "../../../enums";
 import { Portal } from "../../portal";

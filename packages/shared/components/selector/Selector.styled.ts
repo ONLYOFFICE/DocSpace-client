@@ -186,6 +186,7 @@ const StyledItem = styled.div<{
   isSelected: boolean | undefined;
   isDisabled?: boolean;
   isMultiSelect: boolean;
+  noHover?: boolean;
 }>`
   display: flex;
   align-items: center;
@@ -221,6 +222,15 @@ const StyledItem = styled.div<{
       `}
   }
 
+  .clicked-label {
+    width: fit-content;
+    cursor: pointer;
+  }
+
+  .input-component {
+    margin-inline-start: 8px;
+  }
+
   .checkbox {
     svg {
       margin-inline-end: 0px;
@@ -245,12 +255,13 @@ const StyledItem = styled.div<{
         `
       : css`
           ${props.isSelected && !props.isMultiSelect && selectedCss}
-          @media (hover: hover) {
+          ${!props.noHover &&
+          ` @media (hover: hover) {
             &:hover {
               cursor: pointer;
               background: ${props.theme.selector.item.hoverBackground};
             }
-          }
+          }`}
         `}
 `;
 
@@ -265,6 +276,36 @@ const StyledEmptyScreen = styled.div<{ withSearch: boolean }>`
   padding: 0 28px;
 
   box-sizing: border-box;
+
+  .buttons {
+    margin-top: 32px;
+
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+
+    .empty-folder_container-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .empty-folder_link {
+        color: ${(props) => props.theme.selector.emptyScreen.buttonColor};
+      }
+
+      &:hover {
+        .empty-folder_link {
+          color: ${(props) =>
+            props.theme.selector.emptyScreen.hoverButtonColor};
+        }
+
+        svg path {
+          fill: ${(props) => props.theme.selector.emptyScreen.hoverButtonColor};
+        }
+      }
+    }
+  }
 
   .empty-image {
     max-width: 72px;
@@ -325,7 +366,10 @@ const StyledBreadCrumbs = styled.div<{
 
 StyledBreadCrumbs.defaultProps = { theme: Base };
 
-const StyledItemText = styled(Text)<{ isCurrent: boolean; isLoading: boolean }>`
+const StyledItemText = styled(Text)<{
+  isCurrent: boolean;
+  isLoading?: boolean;
+}>`
   ${(props) =>
     !props.isCurrent &&
     css`
@@ -440,6 +484,36 @@ const StyledInfo = styled.div`
   }
 `;
 
+const StyledInputWrapper = styled.div`
+  width: 32px;
+  height: 32px;
+
+  margin-inline-start: 8px;
+
+  border: 1px solid ${(props) => props.theme.selector.item.inputButtonBorder};
+  border-radius: 3px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  :hover {
+    div {
+      cursor: pointer;
+    }
+    cursor: pointer;
+
+    border-color: ${(props) =>
+      props.theme.selector.item.inputButtonBorderHover};
+
+    path {
+      fill: ${(props) => props.theme.selector.item.inputButtonBorderHover};
+    }
+  }
+`;
+
 StyledSelector.defaultProps = { theme: Base };
 StyledHeader.defaultProps = { theme: Base };
 StyledBody.defaultProps = { theme: Base };
@@ -449,6 +523,7 @@ StyledEmptyScreen.defaultProps = { theme: Base };
 StyledArrowRightSvg.defaultProps = { theme: Base };
 StyledComboBox.defaultProps = { theme: Base };
 StyledInfo.defaultProps = { theme: Base };
+StyledInputWrapper.defaultProps = { theme: Base };
 
 export {
   StyledSelector,
@@ -468,4 +543,5 @@ export {
   StyledTabs,
   StyledInfo,
   StyledAccessSelector,
+  StyledInputWrapper,
 };

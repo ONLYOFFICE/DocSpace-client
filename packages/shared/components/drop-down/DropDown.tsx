@@ -37,6 +37,7 @@ import { Row } from "./sub-components/Row";
 
 import { DropDownProps } from "./DropDown.types";
 import { DEFAULT_PARENT_HEIGHT } from "./DropDown.constants";
+import { Backdrop } from "../backdrop";
 
 const DropDown = ({
   directionY = "bottom",
@@ -67,6 +68,11 @@ const DropDown = ({
   manualY,
   className,
   style,
+  withoutBackground,
+  withBackground,
+  withBackdrop,
+  isAside,
+  withBlur,
 }: DropDownProps) => {
   const theme = useTheme();
 
@@ -78,7 +84,6 @@ const DropDown = ({
     directionY,
     manualY,
     width: 0,
-    borderOffset: theme?.isBase ? 0 : 2, // need to remove the difference in width with the parent in a dark theme
     isDropdownReady: false, // need to avoid scrollbar appearing during dropdown position calculation
   });
 
@@ -163,9 +168,7 @@ const DropDown = ({
       ...s,
       directionX,
       directionY,
-      width: dropDownRef.current
-        ? dropDownRef.current.offsetWidth - state.borderOffset
-        : 240,
+      width: dropDownRef.current ? dropDownRef.current.offsetWidth : 240,
       isDropdownReady: true,
     }));
   }, [
@@ -175,7 +178,6 @@ const DropDown = ({
     forwardedRef,
     offsetLeft,
     right,
-    state.borderOffset,
     theme?.interfaceDirection,
     top,
   ]);
@@ -249,9 +251,7 @@ const DropDown = ({
         directionX: x,
         directionY: y,
         manualY: mY,
-        width: dropDownRef.current
-          ? dropDownRef.current.offsetWidth - state.borderOffset
-          : 240,
+        width: dropDownRef.current ? dropDownRef.current.offsetWidth : 240,
         isDropdownReady: true,
       }));
     }
@@ -263,7 +263,6 @@ const DropDown = ({
     state.directionX,
     state.directionY,
     state.manualY,
-    state.borderOffset,
   ]);
 
   // const handleClickOutside = (e: any) => {
@@ -382,42 +381,59 @@ const DropDown = ({
       ? { height: `${calculatedHeight}px` }
       : {};
 
+    const toggleDropDown = () => {
+      clickOutsideAction?.({} as Event, !open);
+    };
+
     return (
-      <StyledDropdown
-        ref={dropDownRef}
-        style={style}
-        // {...this.props}
-        directionX={state.directionX}
-        directionY={state.directionY}
-        manualY={state.manualY}
-        isMobileView={isMobileView}
-        itemCount={itemCount}
-        {...dropDownMaxHeightProp}
-        directionXStylesDisabled={directionXStylesDisabled}
-        isDropdownReady={state.isDropdownReady}
-        open={open}
-        maxHeight={maxHeight}
-        zIndex={zIndex}
-        manualWidth={manualWidth}
-        className={className}
-        manualX={manualX}
-      >
-        <VirtualList
-          Row={Row}
-          theme={theme}
-          width={state.width}
+      <>
+        {withBackdrop ? (
+          <Backdrop
+            visible={open || false}
+            zIndex={310}
+            onClick={toggleDropDown}
+            withoutBlur={!withBlur}
+            isAside={isAside}
+            withBackground={withBackground}
+            withoutBackground={withoutBackground}
+          />
+        ) : null}
+        <StyledDropdown
+          ref={dropDownRef}
+          style={style}
+          // {...this.props}
+          directionX={state.directionX}
+          directionY={state.directionY}
+          manualY={state.manualY}
+          isMobileView={isMobileView}
           itemCount={itemCount}
+          {...dropDownMaxHeightProp}
+          directionXStylesDisabled={directionXStylesDisabled}
+          isDropdownReady={state.isDropdownReady}
+          open={open}
           maxHeight={maxHeight}
-          cleanChildren={cleanChildren}
-          calculatedHeight={calculatedHeight}
-          isNoFixedHeightOptions={isNoFixedHeightOptions || false}
-          getItemSize={getItemSize}
-          isOpen={open || false}
-          enableKeyboardEvents={enableKeyboardEvents || false}
+          zIndex={zIndex}
+          manualWidth={manualWidth}
+          className={className}
+          manualX={manualX}
         >
-          {children}
-        </VirtualList>
-      </StyledDropdown>
+          <VirtualList
+            Row={Row}
+            theme={theme}
+            width={state.width}
+            itemCount={itemCount}
+            maxHeight={maxHeight}
+            cleanChildren={cleanChildren}
+            calculatedHeight={calculatedHeight}
+            isNoFixedHeightOptions={isNoFixedHeightOptions || false}
+            getItemSize={getItemSize}
+            isOpen={open || false}
+            enableKeyboardEvents={enableKeyboardEvents || false}
+          >
+            {children}
+          </VirtualList>
+        </StyledDropdown>
+      </>
     );
   };
 

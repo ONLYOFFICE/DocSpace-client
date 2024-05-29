@@ -29,7 +29,10 @@
 import { ScrollbarType } from "./Scrollbar.enums";
 import { ScrollbarComponent as Scrollbar } from "./Scrollbar";
 import { ScrollbarContext } from "./custom-scrollbar";
-import { CustomScrollbarsVirtualList } from "./sub-components";
+import {
+  CustomScrollbarsVirtualList,
+  CustomScrollbarsVirtualListWithAutoFocus,
+} from "./sub-components";
 import type { ScrollbarProps } from "./Scrollbar.types";
 
 export {
@@ -37,5 +40,6 @@ export {
   ScrollbarProps,
   ScrollbarType,
   CustomScrollbarsVirtualList,
+  CustomScrollbarsVirtualListWithAutoFocus,
   ScrollbarContext,
 };

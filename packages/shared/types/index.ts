@@ -55,6 +55,8 @@ export type NonFunctionProperties<T, ExcludeTypes> = Pick<
   NonFunctionPropertyNames<T, ExcludeTypes>
 >;
 
+export type MergeTypes<T, MergedType> = Omit<T, keyof MergedType> & MergedType;
+
 export type TPathParts = {
   id: number;
   title: string;
@@ -112,7 +114,6 @@ declare global {
       imageThumbnails?: boolean;
       editor?: {
         requestClose: boolean;
-        openOnNewPage: boolean;
       };
       firebase: {
         fetchTimeoutMillis?: number;

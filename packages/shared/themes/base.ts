@@ -2394,10 +2394,17 @@ export const getBaseTheme = () => {
       item: {
         hoverBackground: grayLight,
         selectedBackground: lightHover,
+
+        inputButtonBorder: "#D0D5DA",
+        inputButtonBorderHover: grayMain,
       },
 
       emptyScreen: {
         descriptionColor: cyanBlueDarkShade,
+
+        buttonColor: "#657077",
+        hoverButtonColor: "#333333",
+        pressedButtonColor: "#555F65",
       },
     },
 
@@ -2470,18 +2477,20 @@ export const getBaseTheme = () => {
       roomType: {
         listItem: {
           background: "none",
+          hoverBackground: "#F8F9F9",
           borderColor: "#ECEEF1",
           descriptionText: "#A3A9AE",
         },
         dropdownButton: {
           background: "none",
+          hoverBackground: "#F8F9F9",
           borderColor: "#ECEEF1",
           isOpenBorderColor: "#2DA7DB",
           descriptionText: "#A3A9AE",
         },
         dropdownItem: {
           background: "#ffffff",
-          hoverBackground: "#f3f4f4",
+          hoverBackground: "#F8F9F9",
           descriptionText: "#A3A9AE",
         },
         displayItem: {

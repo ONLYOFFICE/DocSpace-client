@@ -110,6 +110,7 @@ const SelectFileDialog = ({
       submitButtonId="select-file-modal-submit"
       cancelButtonId="select-file-modal-cancel"
       {...fileTypeDetection}
+      withCreateFolder={false}
     />
   );
 };

@@ -54,7 +54,7 @@ export type ScrollbarProps = {
 
 export type CustomScrollbarsVirtualListProps = Pick<
   ScrollbarProps,
-  "style" | "onScroll" | "children" | "className" | "autoFocus"
+  "style" | "onScroll" | "children" | "className" | "autoFocus" | "scrollClass"
 > & {
   forwardedRef?: React.ForwardedRef<unknown>;
   contentRef?: React.MutableRefObject<HTMLDivElement | null>;

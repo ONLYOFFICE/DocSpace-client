@@ -10,11 +10,13 @@ const ButtonContainer = ({ saveLdapSettings, restoreToDefault }) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
   const onSaveClick = () => {
-    saveLdapSettings().catch((e) => toastr.error(e));
+    saveLdapSettings()
+      .then(() => toastr.success(t("Settings:SuccessfullySaveSettingsMessage")))
+      .catch((e) => toastr.error(e));
   };
   const onResetClick = () => {
     restoreToDefault()
-      .then(() => toastr.success("Settings:SuccessfullySaveSettingsMessage"))
+      .then(() => toastr.success(t("Settings:SuccessfullySaveSettingsMessage")))
       .catch((e) => toastr.error(e));
   };
   return (

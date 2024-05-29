@@ -65,7 +65,7 @@ const GroupMembership = (props) => {
           onChange={setIsGroupMembership}
           label={t("LdapGroupMembership")}
         />
-        <HelpButton tooltipContent={"LdapGroupMembershipTooltip"} />
+        <HelpButton tooltipContent={t("LdapGroupMembershipTooltip")} />
       </div>
       <Box className="group_membership-container">
         <FieldContainer
@@ -75,7 +75,7 @@ const GroupMembership = (props) => {
           errorMessage={t("Common:EmptyFieldError")}
           labelText={t("LdapGroupDN")}
           isRequired
-          tooltipContent="GroupDNTooltip"
+          tooltipContent={t("LdapGroupDNTooltip")}
         >
           <TextInput
             className="field-input"
@@ -93,7 +93,7 @@ const GroupMembership = (props) => {
           errorMessage={t("Common:EmptyFieldError")}
           labelText={t("LdapUserAttribute")}
           isRequired
-          tooltipContent="UserAttributeTooltip"
+          tooltipContent={t("LdapGroupUserAttributeTooltip")}
         >
           <TextInput
             className="field-input"
@@ -130,7 +130,7 @@ const GroupMembership = (props) => {
           errorMessage={t("Common:EmptyFieldError")}
           labelText={t("LdapGroupNameAttribute")}
           isRequired
-          tooltipContent="GroupNameAttributeTooltip"
+          tooltipContent={t("LdapGroupNameAttributeTooltip")}
         >
           <TextInput
             className="field-input"
@@ -147,7 +147,7 @@ const GroupMembership = (props) => {
           errorMessage={t("Common:EmptyFieldError")}
           labelText={t("LdapGroupAttribute")}
           isRequired
-          tooltipContent="GroupAttributeTooltip"
+          tooltipContent={t("LdapGroupAttributeTooltip")}
         >
           <TextInput
             className="field-input"

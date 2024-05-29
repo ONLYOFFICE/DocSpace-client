@@ -36,11 +36,19 @@ const StyledLdapPage = styled(Box)`
     margin-left: 12px;
   }
 
-  .checkbox-container {
+  .ldap_checkbox-container {
     margin: 20px 0 20px 0;
     display: grid;
     grid-template-rows: 1fr 1fr;
     grid-gap: 12px;
+
+    .ldap_checkbox-header {
+      display: flex;
+      align-items: baseline;
+      .help-icon {
+        padding-left: 8px;
+      }
+    }
   }
 
   .ldap_connection-container {
@@ -59,7 +67,9 @@ const StyledLdapPage = styled(Box)`
     grid-gap: 12px;
   }
 
-  .group_membership-header {
+  .group_membership-header,
+  .ldap_authentication-header,
+  .ldap_advanced-settings-header {
     display: flex;
     align-items: baseline;
     .help-icon {

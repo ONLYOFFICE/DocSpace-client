@@ -3,6 +3,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Box } from "@docspace/shared/components/box";
+import { HelpButton } from "@docspace/shared/components/help-button";
 
 const Checkboxes = ({
   isLdapAvailable,
@@ -26,23 +27,29 @@ const Checkboxes = ({
   };
 
   return (
-    <Box className="checkbox-container">
-      <Checkbox
-        tabIndex={1}
-        className="checkbox"
-        isDisabled={!isLdapAvailable}
-        label={t("LdapEnableStartTls")}
-        isChecked={isTlsEnabled}
-        onChange={onChangeTls}
-      />
-      <Checkbox
-        tabIndex={2}
-        className="checkbox"
-        isDisabled={!isLdapAvailable}
-        label={t("LdapEnableSSL")}
-        isChecked={isSslEnabled}
-        onChange={onChangeSsl}
-      />
+    <Box className="ldap_checkbox-container">
+      <div className="ldap_checkbox-header">
+        <Checkbox
+          tabIndex={1}
+          className="ldap_checkbox-starttls"
+          isDisabled={!isLdapAvailable}
+          label={t("LdapEnableStartTls")}
+          isChecked={isTlsEnabled}
+          onChange={onChangeTls}
+        />
+        <HelpButton tooltipContent={t("LdapEnableStartTlsTooltip")} />
+      </div>
+      <div className="ldap_checkbox-header">
+        <Checkbox
+          tabIndex={2}
+          className="ldap_checkbox-ssl"
+          isDisabled={!isLdapAvailable}
+          label={t("LdapEnableSSL")}
+          isChecked={isSslEnabled}
+          onChange={onChangeSsl}
+        />
+        <HelpButton tooltipContent={t("LdapEnableSSLTooltip")} />
+      </div>
     </Box>
   );
 };

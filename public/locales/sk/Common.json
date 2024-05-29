@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "Miestnosť '{{name}}' je archivovaná",
   "Attention": "Pozor",
   "Audio": "Audio",
+  "Authentication": "Autentifikácia",
   "Authorization": "Autorizácia",
   "Back": "Späť",
   "BarMaintenanceDescription": "Ospravedlňujeme sa za akékoľvek krátkodobé technické problémy s fungovaním služby, ktoré sa môžu objaviť  na{{targetDate}} počas aktualizácie {{productName}}.",

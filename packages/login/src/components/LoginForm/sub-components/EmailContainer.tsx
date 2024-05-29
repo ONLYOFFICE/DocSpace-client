@@ -54,6 +54,7 @@ interface IEmailContainer {
   onBlurEmail: () => void;
   onValidateEmail: (res: TValidate) => undefined;
   isLdapLogin: boolean;
+  ldapDomain: string;
 }
 
 const EmailContainer = ({
@@ -67,6 +68,7 @@ const EmailContainer = ({
   onBlurEmail,
   onValidateEmail,
   isLdapLogin,
+  ldapDomain,
 }: IEmailContainer) => {
   const { t } = useTranslation(["Login", "Common"]);
 
@@ -129,7 +131,9 @@ const EmailContainer = ({
           type={InputType.text}
           hasError={isEmailErrorShow}
           value={identifier}
-          placeholder={"Email or username"} //TODO: Add translation
+          placeholder={t("LDAPUsernamePlaceholder", {
+            ldap_domain: ldapDomain,
+          })}
           size={InputSize.large}
           scale={true}
           isAutoFocussed={true}

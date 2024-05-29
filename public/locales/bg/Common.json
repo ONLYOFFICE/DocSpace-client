@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "Стаята '{{name}}' е архивирана",
   "Attention": "Внимание",
   "Audio": "Аудио",
+  "Authentication": "Заверка",
   "Authorization": "Удостоверяване",
   "Back": "Назад",
   "BarMaintenanceDescription": "Извиняваме се за краткосрочни технически проблеми при функционирането на услугата, които може да се появят на {{targetDate}} по време на актуализацията на {{productName}}.",

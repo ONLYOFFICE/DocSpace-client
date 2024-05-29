@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "'{{name}}' odası arşivlendi",
   "Attention": "Dikkat",
   "Audio": "Audio",
+  "Authentication": "Doğrulama",
   "Authorization": "Yetki",
   "Back": "Geri",
   "BarMaintenanceDescription": "{{productName}} güncellemesi esnasında {{targetDate}} tarihinde hizmet işleyişinde ortaya çıkabilecek kısa vadeli teknik sorunlar için özür dileriz.",

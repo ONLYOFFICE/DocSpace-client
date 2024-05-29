@@ -1,5 +1,4 @@
 {
-  "Authentication": "身份验证",
   "AuthViaNTLM": "通过 NTLM 授权",
   "EnableSSL": "启用S​​SL",
   "EnterDomain": "输入域",

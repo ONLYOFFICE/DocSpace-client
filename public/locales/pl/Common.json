@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "Pokój '{{name}}' został zarchiwizowany",
   "Attention": "Uwaga",
   "Audio": "Audio",
+  "Authentication": "Poświadczenie",
   "Authorization": "Autoryzacja",
   "Back": "Wróć",
   "BarMaintenanceDescription": "Przepraszamy za wszelkie chwilowe problemy techniczne w funkcjonowaniu usługi, które mogą zaistnieć  {{targetDate}} podczas aktualizowania {{productName}}.",

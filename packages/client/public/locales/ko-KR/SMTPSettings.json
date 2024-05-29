@@ -1,5 +1,4 @@
 {
-  "Authentication": "인증",
   "AuthViaNTLM": "NTLM을 통한 인증",
   "EnableSSL": "SSL을 사용하도록 설정",
   "EnterDomain": "도메인 입력",

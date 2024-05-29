@@ -1,5 +1,4 @@
 {
-  "Authentication": "Autentifikācija",
   "AuthViaNTLM": "Autentificēšana, izmantojot NTLM",
   "EnableSSL": "Izmantot SSL",
   "EnterDomain": "Ievadiet domēnu",

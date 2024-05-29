@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "Комната '{{name}}' заархивирована",
   "Attention": "Внимание",
   "Audio": "Аудио",
+  "Authentication": "Аутентификация",
   "Authorization": "Авторизация",
   "Back": "Назад",
   "BarMaintenanceDescription": "Приносим свои извинения за временные неполадки в работе сервиса, которые могут возникнуть {{targetDate}} в процессе обновления облачного решения {{productName}}.",

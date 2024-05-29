@@ -1,5 +1,4 @@
 {
-  "Authentication": "Xác thực",
   "AuthViaNTLM": "Xác thực qua NTLM",
   "EnableSSL": "Bật SSL",
   "EnterDomain": "Nhập tên miền",

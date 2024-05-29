@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "'{{name}}' ルームがアーカイブされました",
   "Attention": "注意",
   "Audio": "オーディオ",
+  "Authentication": "認証",
   "Authorization": "許可",
   "Back": "前に",
   "BarMaintenanceDescription": "この度は、{{productName}}のアップデートに伴い、{{targetDate}}にサービス機能の短期的な技術的問題が発生する可能性がありますことをお詫び申し上げます.",

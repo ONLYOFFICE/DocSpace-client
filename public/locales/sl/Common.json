@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "Soba '{{name}}' je arhivirana",
   "Attention": "Pozornost",
   "Audio": "Audio",
+  "Authentication": "Preverjanje pristnosti",
   "Authorization": "Avtorizacija",
   "Back": "Nazaj",
   "BarMaintenanceDescription": "Opravičujemo se za morebitne krajše tehnične težave pri delovanju storitve, ki se lahko pojavijo na {{targetDate}} med posodobitvijo {{productName}}.",

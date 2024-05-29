@@ -1,5 +1,4 @@
 {
-  "Authentication": "Tunnistus",
   "AuthViaNTLM": "Todennus NTLM:n kautta",
   "EnableSSL": "Ota käyttöön SSL",
   "EnterDomain": "Syötä verkkotunnus",

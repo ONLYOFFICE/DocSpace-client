@@ -41,7 +41,7 @@ const AuthenticationContainer = (props) => {
     <form>
       <div className="ldap_authentication-header">
         <ToggleButton
-          label={"Authentication"}
+          label={t("Common:Authentication")}
           className="toggle"
           isChecked={authentication}
           onChange={setIsAuthentication}

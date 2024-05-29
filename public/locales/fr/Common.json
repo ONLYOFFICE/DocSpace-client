@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "La salle '{{name}}' est archivée",
   "Attention": "Attention",
   "Audio": "Audio",
+  "Authentication": "Authentification",
   "Authorization": "Autorisation",
   "Back": "Retour",
   "BarMaintenanceDescription": "Nous vous prions de bien vouloir nous excuser pour tout problème technique de courte durée dans le fonctionnement du service, qui pourrait apparaître le {{targetDate}} lors de la mise à jour de {{productName}}.",

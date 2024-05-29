@@ -72,7 +72,7 @@
   "ChooseBackupFiles": "Izaberi rezervne datoteke",
   "ClearBackupList": "Obriši sve rezervne kopije",
   "CloseMenu": "Zatvori meni",
-  "CommonFilesDescription": "Za datoteke u odeljku ‘Zajedničko’, biće kreirana posebna soba (Zajednička soba). Samo administratori DocSpace-a će imati pristup ovoj sobi. Po podrazumevanim podešavanjima, vlasnik sobe će biti korisnik koji je inicirao uvoz: John Smith (Vi).",
+  "CommonFilesDescription": "Za datoteke u odeljku ‘Zajedničko’, biće kreirana posebna soba (Zajednička soba). Samo administratori DocSpace-a će imati pristup ovoj sobi. Po podrazumevanim podešavanjima, vlasnik sobe će biti korisnik koji je inicirao uvoz: {{user}} (Vi).",
   "CompanyInfoSettings": "Informacije o Kompaniji podešavanja",
   "CompanyInfoSettingsDescription": "Ova informacija će biti prikazana u <1>{{link}}</1> prozoru.",
   "ConfirmEmailSended": "Email konfirmacije je poslat {{ownerName}}",

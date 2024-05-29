@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "Telpa {{name}} ir arhivēta",
   "Attention": "Uzmanību",
   "Audio": "Audio",
+  "Authentication": "Autentifikācija",
   "Authorization": "Autorizācija",
   "Back": "Atpakaļ",
   "BarMaintenanceDescription": "Mēs atvainojamies par jebkādām īslaicīgām tehniskām problēmām pakalpojuma darbībā, kas var būt šajā datumā: {{targetDate}} {{productName}} atjaunināšanas laikā.",

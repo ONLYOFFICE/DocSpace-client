@@ -72,12 +72,12 @@ const SyncContainer = ({
         tabIndex={-1}
         className="manual-sync-button"
         size={buttonSize}
-        isDisabled={!isLdapAvailable && !isLdapEnabled}
         primary
         onClick={syncLdap}
         label={t("LdapSyncButton")}
         //minwidth={displaySettings && "auto"}
         //isLoading={isSaving}
+        isDisabled={!isLdapAvailable || !isLdapEnabled}
       />
 
       <ProgressContainer operation={LDAPOpeation.Sync} />
@@ -119,6 +119,7 @@ const SyncContainer = ({
             primary
             onClick={saveCronLdap}
             label={t("Common:SaveButton")}
+            isDisabled={!isLdapAvailable || !isLdapEnabled}
           />
         </>
       )}

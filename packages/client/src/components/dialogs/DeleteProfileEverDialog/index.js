@@ -62,7 +62,11 @@ const StyledModalDialogContainer = styled(ModalDialogContainer)`
 
   .user-delete {
     line-height: 20px;
-    padding-bottom: 16px;
+    ${(props) =>
+      (!props.areUsersOnly || props.deleteWithoutReassign) &&
+      css`
+        padding-bottom: 16px;
+      `}
   }
 
   .text-warning {
@@ -184,6 +188,8 @@ const DeleteProfileEverDialogComponent = (props) => {
       visible={visible}
       onClose={onClose}
       needReassignData={needReassignData}
+      deleteWithoutReassign={deleteWithoutReassign}
+      areUsersOnly={areUsersOnly}
     >
       <ModalDialog.Header>
         {onlyOneUser ? t("DeleteUser") : t("DeletingUsers")}

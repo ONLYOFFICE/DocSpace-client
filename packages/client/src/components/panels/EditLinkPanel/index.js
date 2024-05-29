@@ -64,6 +64,7 @@ const EditLinkPanel = (props) => {
     language,
     isPublic,
     currentDeviceType,
+    setLinkParams,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -129,6 +130,7 @@ const EditLinkPanel = (props) => {
     editExternalLink(roomId, newLink)
       .then((link) => {
         setExternalLink(link);
+        setLinkParams({ link, roomId });
 
         if (isEdit) {
           copy(linkValue);
@@ -311,6 +313,7 @@ export default inject(
       unsavedChangesDialogVisible,
       setUnsavedChangesDialog,
       linkParams,
+      setLinkParams,
     } = dialogsStore;
     const { externalLinks, editExternalLink, setExternalLink } =
       publicRoomStore;
@@ -342,6 +345,7 @@ export default inject(
       language: authStore.language,
       isPublic,
       currentDeviceType: settingsStore.currentDeviceType,
+      setLinkParams,
     };
   },
 )(

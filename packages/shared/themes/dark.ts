@@ -3334,6 +3334,7 @@ const Dark: TTheme = {
 
   embeddingPanel: {
     descriptionTextColor: "#ADADAD",
+    iconColor: "#ADADAD",
   },
 };
 

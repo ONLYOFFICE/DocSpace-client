@@ -72,6 +72,22 @@ const StyledBody = styled.div`
       margin-bottom: 18px;
     }
 
+    .embedding-panel_bar {
+      margin: 23px 0px 21px 0px;
+
+      .embedding-panel_bar-header {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .header-icon {
+        svg path {
+          fill: ${({ theme }) => theme.embeddingPanel.iconColor};
+        }
+      }
+    }
+
     .embedding-panel_header-text {
       margin-bottom: 16px;
     }

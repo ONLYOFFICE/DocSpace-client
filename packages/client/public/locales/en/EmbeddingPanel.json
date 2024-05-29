@@ -5,5 +5,7 @@
   "Height": "Height",
   "Width": "Width",
   "EmbeddingDescription": "Embed Public room into your website or blog. Apply additional display settings for customizing the embedded content.",
-  "CodeSuccessfullyCopied": "Code to insert successfully copied to clipboard"
+  "CodeSuccessfullyCopied": "Code to insert successfully copied to clipboard",
+  "LinkProtectedWithPassword": "The link is protected with a password.",
+  "ContentRestricted": "Content copying, file downloading and printing are restricted."
 }

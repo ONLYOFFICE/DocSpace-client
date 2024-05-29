@@ -41,10 +41,12 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Scrollbar } from "@docspace/shared/components/scrollbar/custom-scrollbar";
+import PublicRoomBar from "@docspace/shared/components/public-room-bar";
+import { Link, LinkType } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { TOption } from "@docspace/shared/components/combobox";
 import { TTranslation } from "@docspace/shared/types";
-import { TTheme } from "@docspace/shared/themes";
+import { TColorScheme, TTheme } from "@docspace/shared/themes";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
@@ -53,6 +55,7 @@ import HeaderUrl from "PUBLIC_DIR/images/sdk-presets_header.react.svg?url";
 import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
 import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
+import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 
 import {
   StyledEmbeddingPanel,
@@ -64,6 +67,34 @@ import {
 import { DisplayBlock } from "./sub-components/DisplayBlock";
 import { CheckboxElement } from "./sub-components/CheckboxElement";
 
+type LinkParamsLinkShareToType = {
+  denyDownload: boolean;
+  id: string;
+  internal: boolean;
+  isExpired: boolean;
+  linkType: number;
+  primary: boolean;
+  requestToken: string;
+  shareLink: string;
+  title: string;
+  password?: string;
+};
+
+type LinkParamsLinkType = {
+  access: number;
+  canEditAccess: boolean;
+  isLocked: boolean;
+  isOwner: boolean;
+  sharedTo: LinkParamsLinkShareToType;
+  subjectType: number;
+};
+
+type LinkParamsType = {
+  roomId?: number;
+  isEdit?: boolean;
+  link: LinkParamsLinkType;
+};
+
 type EmbeddingPanelProps = {
   t: TTranslation;
   theme: TTheme;
@@ -71,19 +102,34 @@ type EmbeddingPanelProps = {
   roomId: number;
   visible: boolean;
   setEmbeddingPanelIsVisible: (value: boolean) => void;
+  setEditLinkPanelIsVisible: (value: boolean) => void;
   currentDeviceType: DeviceType;
+  currentColorScheme: TColorScheme;
+  denyDownload: boolean;
+  linkParams: LinkParamsType;
+  setLinkParams: (linkParams: LinkParamsType) => void;
 };
 
 const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   const {
     t,
     theme,
-    requestToken,
-    roomId,
     visible,
     setEmbeddingPanelIsVisible,
+    setEditLinkPanelIsVisible,
     currentDeviceType,
+    currentColorScheme,
+    linkParams,
+    setLinkParams,
   } = props;
+
+  const { roomId, link } = linkParams;
+  const {
+    requestToken,
+    title: linkTitle,
+    password: withPassword,
+    denyDownload,
+  } = link.sharedTo;
 
   const dataDimensions = [
     { key: "percent", label: "%", default: true },
@@ -183,6 +229,11 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     onClose();
   };
 
+  const onEditLink = () => {
+    setEditLinkPanelIsVisible(true);
+    setLinkParams({ isEdit: true, link });
+  };
+
   const onKeyPress = (e: KeyboardEvent) =>
     (e.key === "Esc" || e.key === "Escape") && onClose();
 
@@ -195,6 +246,41 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   });
 
   console.log("Embedding config", config);
+
+  const barTitle = (
+    <div className="embedding-panel_bar-header">
+      <Link
+        isHovered
+        type={LinkType.action}
+        fontSize="13px"
+        fontWeight={600}
+        color={currentColorScheme?.main?.accent}
+        onClick={onEditLink}
+      >
+        {linkTitle}
+      </Link>
+      <Text fontSize="12px" fontWeight={600}>
+        {t("Files:Protected")}
+      </Text>
+    </div>
+  );
+
+  const contentRestrictedTitle = t("EmbeddingPanel:ContentRestricted");
+  const withPasswordTitle = t("EmbeddingPanel:LinkProtectedWithPassword");
+
+  let barSubTitle = "";
+
+  if (withPassword) {
+    barSubTitle = withPasswordTitle;
+
+    if (denyDownload) {
+      barSubTitle += ` ${contentRestrictedTitle}`;
+    }
+  } else {
+    barSubTitle = contentRestrictedTitle;
+  }
+
+  const showLinkBar = withPassword || denyDownload;
 
   const embeddingPanelComponent = (
     <StyledEmbeddingPanel>
@@ -216,6 +302,15 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
               <Text className="embedding-panel_description">
                 {t("EmbeddingPanel:EmbeddingDescription")}
               </Text>
+
+              {showLinkBar && (
+                <PublicRoomBar
+                  className="embedding-panel_bar"
+                  headerText={barTitle}
+                  bodyText={barSubTitle}
+                  iconName={TabletLinkReactSvgUrl}
+                />
+              )}
 
               <Text
                 className="embedding-panel_header-text"
@@ -335,17 +430,26 @@ export default inject(
     dialogsStore: DialogsStore;
     settingsStore: SettingsStore;
   }) => {
-    const { embeddingPanelIsVisible, setEmbeddingPanelIsVisible, linkParams } =
-      dialogsStore;
-    const { theme, currentDeviceType } = settingsStore;
+    const {
+      embeddingPanelIsVisible,
+      setEmbeddingPanelIsVisible,
+      linkParams,
+      setEditLinkPanelIsVisible,
+      setLinkParams,
+    } = dialogsStore;
+    const { theme, currentColorScheme, currentDeviceType } = settingsStore;
+
+    console.log("linkParams", linkParams);
 
     return {
       theme,
+      currentDeviceType,
+      currentColorScheme,
       visible: embeddingPanelIsVisible,
       setEmbeddingPanelIsVisible,
-      requestToken: linkParams?.link?.sharedTo?.requestToken,
-      roomId: linkParams?.roomId,
-      currentDeviceType,
+      setEditLinkPanelIsVisible,
+      linkParams,
+      setLinkParams,
     };
   },
 )(

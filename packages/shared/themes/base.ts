@@ -3357,6 +3357,7 @@ export const getBaseTheme = () => {
 
     embeddingPanel: {
       descriptionTextColor: "#657077",
+      iconColor: "#657077",
     },
   };
 };

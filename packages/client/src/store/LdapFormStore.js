@@ -39,6 +39,7 @@ const ldapCertificateProblem = {
 };
 
 class LdapFormStore {
+  isLoaded = false;
   isLdapEnabled = false;
   enableLdap = false;
   isSettingsShown = false;
@@ -174,6 +175,7 @@ class LdapFormStore {
       this.mapCron(cronRes.value?.cron);
     }
 
+    this.isLoaded = true;
     //TDOD: handle error
   };
 

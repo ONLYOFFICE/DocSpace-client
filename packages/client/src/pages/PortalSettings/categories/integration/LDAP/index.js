@@ -15,6 +15,7 @@ import ToggleLDAP from "./sub-components/ToggleLDAP";
 import SyncContainer from "./sub-components/SyncContainer";
 import LdapMobileView from "./sub-components/LdapMobileView";
 import SettingsContainer from "./sub-components/SettingsContainer";
+import LdapLoader from "./sub-components/LdapLoader";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const LDAP = ({
@@ -25,6 +26,7 @@ const LDAP = ({
   load,
   isMobileView,
   isLdapEnabled,
+  isLoaded,
 }) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
   const [isSmallWindow, setIsSmallWindow] = useState(false);
@@ -46,6 +48,7 @@ const LDAP = ({
     }
   };
 
+  if (!isLoaded) return <LdapLoader />;
   return (
     <StyledLdapPage
       isSmallWindow={isSmallWindow}
@@ -85,7 +88,7 @@ export default inject(({ ldapStore, settingsStore, currentQuotaStore }) => {
   const { isLdapAvailable } = currentQuotaStore;
   const { ldapSettingsUrl, theme, currentColorScheme, currentDeviceType } =
     settingsStore;
-  const { load, isLdapEnabled } = ldapStore;
+  const { load, isLdapEnabled, isLoaded } = ldapStore;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
@@ -97,5 +100,6 @@ export default inject(({ ldapStore, settingsStore, currentQuotaStore }) => {
     load,
     isMobileView,
     isLdapEnabled,
+    isLoaded,
   };
 })(observer(LDAP));

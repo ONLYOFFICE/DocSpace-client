@@ -11,8 +11,14 @@ import { Badge } from "@docspace/shared/components/badge";
 const borderProp = { radius: "6px" };
 
 const ToggleAutoSync = (props) => {
-  const { theme, toggleCron, isLDAPAvailable, isCronEnabled, isStatusEmpty } =
-    props;
+  const {
+    theme,
+    toggleCron,
+    isLDAPAvailable,
+    isLdapEnabled,
+    isCronEnabled,
+    isStatusEmpty,
+  } = props;
 
   const { t } = useTranslation(["Ldap", "Common"]);
 
@@ -41,7 +47,7 @@ const ToggleAutoSync = (props) => {
             //   ? openConfirmationDisableModal
             //   : ldapToggle
           }
-          isDisabled={!isLDAPAvailable}
+          isDisabled={!isLDAPAvailable || !isLdapEnabled}
         />
 
         <div className="toggle-caption">

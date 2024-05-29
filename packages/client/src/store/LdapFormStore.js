@@ -155,19 +155,24 @@ class LdapFormStore {
   };
 
   mapCron = (data) => {
-    console.log("LDAP cron settings data", { data }); //TODO: add mapping
+    this.setCron(data);
+
+    this.isCronEnabled && this.setNextSyncDate(data);
   };
 
   load = async () => {
-    const [settings, cron] = await Promise.allSettled([
+    const [settingsRes, cronRes] = await Promise.allSettled([
       getLdapSettings(),
       getCronLdap(),
     ]);
 
-    if (settings.status == "fulfilled") this.mapSettings(settings.value);
+    if (settingsRes.status == "fulfilled") this.mapSettings(settingsRes.value);
 
-    if (cron.status == "fulfilled") {
-      const cronWithoutSeconds = cron.value ? cron.value.replace("* ", "") : "";
+    if (cronRes.status == "fulfilled") {
+      const cronWithoutSeconds = cronRes?.value?.cron
+        ? cronRes.value.cron.replace("0 ", "")
+        : null;
+
       this.mapCron(cronWithoutSeconds);
     }
   };

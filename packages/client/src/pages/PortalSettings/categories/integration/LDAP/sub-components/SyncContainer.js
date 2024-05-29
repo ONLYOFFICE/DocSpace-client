@@ -104,7 +104,7 @@ const SyncContainer = ({
               fontSize="12px"
               fontWeight={600}
               lineHeight="16px"
-              color={"#A3A9AE"}
+              // color={"#A3A9AE"}
               noSelect
             >
               {`${t("LdapNextSync")}: ${nextSyncDate

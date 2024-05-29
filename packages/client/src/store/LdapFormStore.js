@@ -441,7 +441,6 @@ class LdapFormStore {
         this.endProcess();
 
         if (toDefault) {
-          // this.load();
           const response = await getCronLdap();
           this.mapCron(response?.cron);
         }

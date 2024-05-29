@@ -58,5 +58,8 @@ export interface SocialButtonProps extends Partial<StyledSocialButtonProps> {
   /** Button icon */
   iconName?: string;
 
+  "data-url"?: string;
+  "data-providername"?: string;
+
   IconComponent?: JSX.ElementType;
 }

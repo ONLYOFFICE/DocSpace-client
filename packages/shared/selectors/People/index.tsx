@@ -86,7 +86,7 @@ const toListItem = (
       ? t("Common:Disabled")
       : "";
 
-  const i = {
+  const i: TSelectorItem = {
     id: userId,
     email,
     avatar: userAvatar,
@@ -100,7 +100,7 @@ const toListItem = (
     hasAvatar,
     isDisabled: isInvited || isDisabled,
     disabledText,
-  } as TSelectorItem;
+  };
 
   return i;
 };

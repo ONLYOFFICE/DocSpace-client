@@ -72,7 +72,7 @@
   "ChooseBackupFiles": "Atlasīt dublējuma failus",
   "ClearBackupList": "Dzēst visus dublējumus",
   "CloseMenu": "Aizvērt izvēlni",
-  "CommonFilesDescription": "Kopējās sadaļas failiem tiks izveidota atsevišķa telpa (kopējā telpa). Tikai DocSpace administratoriem būs piekļuve šai telpai. Pēc noklusējuma telpas īpašnieks būs lietotājs, kas uzsāks importēšanu: Džons Smits (jūs).",
+  "CommonFilesDescription": "Kopējās sadaļas failiem tiks izveidota atsevišķa telpa (kopējā telpa). Tikai DocSpace administratoriem būs piekļuve šai telpai. Pēc noklusējuma telpas īpašnieks būs lietotājs, kas uzsāks importēšanu: {{user}} (jūs).",
   "CompanyInfoSettings": "Uzņēmuma informācijas iestatījumi",
   "CompanyInfoSettingsDescription": "Šī informācija tiks parādīta logā <1>{{link}}</1>.",
   "ConfirmEmailSended": "Apstiprinājuma e-pasts ir nosūtīts uz {{ownerName}}",

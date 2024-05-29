@@ -337,7 +337,10 @@ export async function getTrashFolderList() {
 //   return request(options);
 // }
 
-export async function createFolder(parentFolderId: number, title: string) {
+export async function createFolder(
+  parentFolderId: number | string,
+  title: string,
+) {
   const data = { title };
   const options: AxiosRequestConfig = {
     method: "post",
@@ -906,6 +909,17 @@ export async function changeKeepNewFileName(val: boolean) {
   const res = (await request({
     method: "put",
     url: "files/keepnewfilename",
+    data,
+  })) as boolean;
+
+  return res;
+}
+
+export async function changeOpenEditorInSameTab(val: boolean) {
+  const data = { set: val };
+  const res = (await request({
+    method: "put",
+    url: "files/settings/openeditorinsametab",
     data,
   })) as boolean;
 

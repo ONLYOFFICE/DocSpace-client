@@ -30,7 +30,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { makeAutoObservable, runInAction } from "mobx";
 import {
   migrationList,
-  migrationName,
+  initMigration,
   migrationStatus,
   migrationCancel,
   migrationFinish,
@@ -38,64 +38,30 @@ import {
   migrateFile,
   migrationClear,
 } from "@docspace/shared/api/settings";
-
-type TUser = {
-  key: string;
-  email: string;
-  displayName: string;
-  firstName: string;
-  userType: string;
-  migratingFiles: {
-    foldersCount: number;
-    filesCount: number;
-    bytesTotal: number;
-  };
-  shouldImport: boolean;
-};
+import {
+  TWorkspaceService,
+  TSendWelcomeEmailData,
+  TMigrationUser,
+  TMigrationStatusResult,
+} from "@docspace/shared/api/settings/types";
 
 type TUsers = {
-  new: TUser[];
-  existing: TUser[];
-  withoutEmail: TUser[];
-  result: TUser[];
+  new: TMigrationUser[];
+  existing: TMigrationUser[];
+  withoutEmail: TMigrationUser[];
+  result: TMigrationUser[];
 };
 
 type TCheckedUsers = {
-  withEmail: TUser[];
-  withoutEmail: TUser[];
-  result: TUser[];
-};
-
-type TGroup = {
-  groupName: string;
-  userUidList: string[];
-  shouldImport: boolean;
-};
-
-type TResponseData = {
-  migratorName: string;
-  operation: string;
-  failedArchives: string[];
-  users: TUser[];
-  withoutEmailUsers: TUser[];
-  existUsers: TUser[];
-  groups: TGroup[];
-  importPersonalFiles: boolean;
-  importSharedFiles: boolean;
-  importSharedFolders: boolean;
-  importCommonFiles: boolean;
-  importProjectFiles: boolean;
-  importGroups: boolean;
-  successedUsers: number;
-  failedUsers: number;
-  files: string[];
-  errors: string[];
+  withEmail: TMigrationUser[];
+  withoutEmail: TMigrationUser[];
+  result: TMigrationUser[];
 };
 
 type CheckedAccountTypes = "withEmail" | "withoutEmail" | "result";
 
 class ImportAccountsStore {
-  services: string[] = [];
+  services: TWorkspaceService[] = [];
 
   users: TUsers = {
     new: [],
@@ -186,7 +152,7 @@ class ImportAccountsStore {
     });
   };
 
-  setUsers = (data: TResponseData) => {
+  setUsers = (data: TMigrationStatusResult) => {
     runInAction(() => {
       this.users = {
         new: data.users,
@@ -227,7 +193,10 @@ class ImportAccountsStore {
     };
   };
 
-  toggleAccount = (account: TUser, checkedAccountType: CheckedAccountTypes) => {
+  toggleAccount = (
+    account: TMigrationUser,
+    checkedAccountType: CheckedAccountTypes,
+  ) => {
     this.checkedUsers = this.checkedUsers[checkedAccountType].some(
       (user) => user.key === account.key,
     )
@@ -248,7 +217,7 @@ class ImportAccountsStore {
 
   toggleAllAccounts = (
     isChecked: boolean,
-    accounts: TUser[],
+    accounts: TMigrationUser[],
     checkedAccountType: CheckedAccountTypes,
   ) => {
     this.checkedUsers = isChecked
@@ -304,10 +273,6 @@ class ImportAccountsStore {
       ),
     };
   };
-
-  // get numberOfCheckedAccounts() {
-  //   return this.checkedAccounts.length;
-  // }
 
   multipleFileUploading = async (
     files: File[],
@@ -418,7 +383,7 @@ class ImportAccountsStore {
     this.importOptions = { ...this.importOptions, ...value };
   };
 
-  setServices = (services: string[]) => {
+  setServices = (services: TWorkspaceService[]) => {
     this.services = services;
   };
 
@@ -428,11 +393,11 @@ class ImportAccountsStore {
   };
 
   // eslint-disable-next-line class-methods-use-this
-  initMigrationName = (name: string) => {
-    return migrationName(name);
+  initMigrationName = (name: TWorkspaceService) => {
+    return initMigration(name);
   };
 
-  proceedFileMigration = (migratorName: string) => {
+  proceedFileMigration = (migratorName: TWorkspaceService) => {
     const users = this.finalUsers.map((item) =>
       Object.assign(item, { shouldImport: true }),
     );
@@ -461,19 +426,16 @@ class ImportAccountsStore {
 
   // eslint-disable-next-line class-methods-use-this
   getMigrationLog = () => {
-    return migrationLog()
-      .then((response) => {
-        if (!response || !response.data) return null;
-        return response.data;
-      })
-      .catch((error) => {
-        console.log("Request Failed:", { error });
-        return Promise.reject(error);
-      });
+    try {
+      return migrationLog();
+    } catch (error) {
+      console.log("Request Failed:", { error });
+      return Promise.reject(error);
+    }
   };
 
   // eslint-disable-next-line class-methods-use-this
-  sendWelcomeLetter = (data: { isSendWelcomeEmail: boolean }) => {
+  sendWelcomeLetter = (data: TSendWelcomeEmailData) => {
     return migrationFinish(data);
   };
 }

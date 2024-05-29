@@ -239,3 +239,64 @@ export type TPaymentSettings = {
   };
   max: number;
 };
+
+export type TWorkspaceService = "Workspace" | "GoogleWorkspace" | "Nextcloud";
+
+export type TMigrationGroup = {
+  groupName: string;
+  userUidList: string[];
+  shouldImport: boolean;
+};
+
+export type TImportOptions = {
+  importGroups: boolean;
+  importPersonalFiles: boolean;
+  importSharedFiles: boolean;
+  importSharedFolders: boolean;
+  importCommonFiles: boolean;
+  importProjectFiles: boolean;
+};
+
+export type TMigrationUser = {
+  key: string;
+  email: string;
+  displayName: string;
+  firstName: string;
+  userType: string;
+  migratingFiles: {
+    foldersCount: number;
+    filesCount: number;
+    bytesTotal: number;
+  };
+  shouldImport: boolean;
+};
+
+export type TMigrationStatusResult = {
+  migratorName: TWorkspaceService;
+  operation: string;
+  failedArchives: string[];
+  users: TMigrationUser[];
+  withoutEmailUsers: TMigrationUser[];
+  existUsers: TMigrationUser[];
+  groups: TMigrationGroup[];
+  successedUsers: number;
+  failedUsers: number;
+  files: string[];
+  errors: string[];
+} & TImportOptions;
+
+export type TWorkspaceStatusResponse =
+  | {
+      error: string;
+      isCompleted: boolean;
+      progress: number;
+      parseResult: TMigrationStatusResult;
+    }
+  | undefined;
+
+export type TMigrationData = {
+  users: TMigrationUser[];
+  migratorName: TWorkspaceService;
+} & TImportOptions;
+
+export type TSendWelcomeEmailData = { isSendWelcomeEmail: boolean };

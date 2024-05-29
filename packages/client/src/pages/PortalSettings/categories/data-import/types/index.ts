@@ -24,10 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import Providers from "./components/Providers";
-
-const DataImport = () => {
-  return <Providers />;
-};
-
-export default DataImport;
+export interface ProvidersProps {
+  theme: TStore["settingsStore"]["theme"];
+  services: TStore["importAccountsStore"]["services"];
+  setServices: TStore["importAccountsStore"]["setServices"];
+  getMigrationList: TStore["importAccountsStore"]["getMigrationList"];
+  getMigrationStatus: TStore["importAccountsStore"]["getMigrationStatus"];
+  setDocumentTitle: TStore["authStore"]["setDocumentTitle"];
+  isMigrationInit: TStore["importAccountsStore"]["isMigrationInit"];
+  setIsMigrationInit: TStore["importAccountsStore"]["setIsMigrationInit"];
+}

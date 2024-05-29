@@ -118,6 +118,8 @@ const DeleteProfileEverDialogComponent = (props) => {
       usersToDelete[0].isAdmin ||
       usersToDelete[0].isCollaborator);
 
+  const areUsersOnly = usersToDelete.every((user) => user.isVisitor);
+
   const onDeleteUser = (id) => {
     const filter = Filter.getDefault();
     setIsRequestRunning(true);
@@ -193,6 +195,7 @@ const DeleteProfileEverDialogComponent = (props) => {
           deleteWithoutReassign={deleteWithoutReassign}
           users={usersToDelete}
           onlyOneUser={onlyOneUser}
+          areUsersOnly={areUsersOnly}
           t={t}
         />
       </ModalDialog.Body>

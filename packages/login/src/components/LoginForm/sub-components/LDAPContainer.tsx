@@ -53,14 +53,14 @@ const LDAPContainer = ({
           className="login-checkbox"
           isChecked={isLdapLoginChecked}
           onChange={onChangeLdapLoginCheckbox}
-          label={`Sign in to: ${ldapDomain}`} //TODO: Add translation
+          label={t("SignInLDAP", { ldap_domain: ldapDomain })}
           helpButton={
             <HelpButton
               id="login_ldap-hint"
               className="help-button"
               offsetRight={0}
               tooltipContent={
-                <Text fontSize="12px">{t("SignInLdapHelper")}</Text> //TODO: Add ldap helper
+                <Text fontSize="12px">{t("SignInLdapHelper")}</Text>
               }
               tooltipMaxWidth={isMobileOnly ? "240px" : "340px"}
             />

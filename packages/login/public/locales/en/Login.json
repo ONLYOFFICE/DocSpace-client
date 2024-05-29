@@ -20,5 +20,7 @@
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "The default session lifetime is 20 minutes. Check this option to set it to 1 year. To set your own value, go to Settings.",
   "ResendCode": "Resend code",
-  "UserIsAlreadyRegistered": "User <1>{{email}}</1> is already registered in this DocSpace, enter your password or go back to continue with another email."
+  "UserIsAlreadyRegistered": "User <1>{{email}}</1> is already registered in this DocSpace, enter your password or go back to continue with another email.",
+  "SignInLDAP": "Sign in to: {{ldap_domain}}",
+  "SignInLdapHelper": "Use credentials for the corporate domain"
 }

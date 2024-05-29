@@ -115,6 +115,7 @@ export default function withQuickButtons(WrappedComponent) {
         isPersonalRoom,
         isArchiveFolder,
         isIndexEditingMode,
+        currentDeviceType,
       } = this.props;
 
       const quickButtonsComponent = (
@@ -136,6 +137,7 @@ export default function withQuickButtons(WrappedComponent) {
           onCopyPrimaryLink={this.onCopyPrimaryLink}
           isArchiveFolder={isArchiveFolder}
           isIndexEditingMode={isIndexEditingMode}
+          currentDeviceType={currentDeviceType}
         />
       );
 
@@ -182,6 +184,7 @@ export default function withQuickButtons(WrappedComponent) {
 
       return {
         theme: settingsStore.theme,
+        currentDeviceType: settingsStore.currentDeviceType,
         isAdmin: authStore.isAdmin,
         lockFileAction,
         setFavoriteAction,

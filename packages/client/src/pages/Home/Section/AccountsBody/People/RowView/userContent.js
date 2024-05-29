@@ -46,7 +46,7 @@ const StyledRowContent = styled(RowContent)`
 
     .badges {
       flex-direction: row-reverse;
-      margin-top: 9px;
+
       margin-inline-end: 12px;
 
       .paid-badge {
@@ -127,6 +127,7 @@ const UserContent = ({
         color={nameColor}
         isTextOverflow={true}
         noHover
+        dir="auto"
       >
         {statusType === "pending"
           ? email

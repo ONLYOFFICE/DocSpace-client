@@ -29,7 +29,6 @@ import { inject, observer } from "mobx-react";
 
 import ViewHelper from "./helpers/ViewHelper";
 import ItemTitle from "./sub-components/ItemTitle";
-import Search from "./sub-components/Search";
 
 import { StyledInfoPanelBody } from "./styles/common";
 import { useParams } from "react-router-dom";
@@ -66,6 +65,7 @@ const InfoPanelBodyContent = ({
     (isInsideGroup && (!selectedItems.length || !!selectedItems[0].manager));
   const isPeople =
     getIsPeople() ||
+    (getIsGroups() && !isInsideGroup && !selectedItems[0]?.manager) ||
     (isInsideGroup && selectedItems.length && !selectedItems[0].manager);
 
   const isSeveralItems = props.selectedItems?.length > 1;
@@ -173,8 +173,6 @@ const InfoPanelBodyContent = ({
 
   return (
     <StyledInfoPanelBody>
-      {showSearchBlock && <Search />}
-
       {!isNoItem && (
         <ItemTitle
           {...defaultProps}

@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TTranslation } from "../../types";
 import type { PROVIDERS_DATA } from "../../constants";
 
 export type ProvidersDataType = typeof PROVIDERS_DATA;
@@ -36,13 +37,13 @@ interface IProvider {
 
 export interface SocialButtonProps {
   providers: IProvider[] | undefined;
-  provider: string;
-  ssoLabel: string;
-  ssoUrl: string;
-  ssoSVG: string;
-  t: (key: string, opts?: unknown) => string;
+  ssoLabel?: string;
+  ssoUrl?: string;
+  ssoSVG?: string;
+  t: TTranslation;
   /** Sets a callback function that is triggered when the button is clicked */
-  onClick: (e: React.MouseEvent<Element, MouseEvent>) => void;
+  onClick: (e: React.MouseEvent<Element, MouseEvent>) => void | Promise<void>;
+  onMoreAuthToggle?: (value: boolean) => void;
   /** Sets the button to present a disabled state */
   isDisabled: boolean;
 }

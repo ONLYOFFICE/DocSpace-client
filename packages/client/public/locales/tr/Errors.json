@@ -1,7 +1,6 @@
 {
   "ErrorEmptyResponse": "Boş yanıt",
   "ErrorUnavailableText": "DocSpace kullanılamıyor",
-  "InvalidLink": "Geçersiz bağlantı",
   "LinkDoesNotExist": "Açmaya çalıştığınız bağlantı mevcut değil.",
   "LinkHasExpired": "Takip ettiğiniz bağlantının süresi doldu."
 }

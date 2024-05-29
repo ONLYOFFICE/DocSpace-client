@@ -472,7 +472,7 @@ const PeopleTableRow = (props) => {
     <StyledWrapper
       className={`user-item ${
         isChecked || isActive ? "table-row-selected" : ""
-      }`}
+      } ${item.id}`}
       value={value}
     >
       <StyledPeopleRow
@@ -586,6 +586,7 @@ const PeopleTableRow = (props) => {
               onClick={onEmailClick}
               isTextOverflow
               enableUserSelect
+              dir="auto"
             >
               {email}
             </Link>

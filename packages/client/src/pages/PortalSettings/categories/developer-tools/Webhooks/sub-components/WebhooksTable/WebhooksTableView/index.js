@@ -59,13 +59,13 @@ const TableWrapper = styled(TableContainer)`
         border-top: ${(props) =>
           `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
 
-        margin-left: -24px;
-        padding-left: 24px;
+        margin-inline-start: -24px;
+        padding-inline-start: 24px;
       }
 
       .table-container_row-context-menu-wrapper {
-        margin-right: -20px;
-        padding-right: 20px;
+        margin-inline-end: -20px;
+        padding-inline-end: 20px;
       }
     }
   }

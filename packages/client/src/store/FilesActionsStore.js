@@ -1213,10 +1213,16 @@ class FilesActionStore {
             }
 
             if (!isRoomsFolder) {
-              setSelectedFolder(roomsFolder);
+              // setSelectedFolder(roomsFolder);
+              window.DocSpace.navigate("/");
             }
 
-            this.updateCurrentFolder(null, null, null, operationId);
+            // this.updateCurrentFolder(null, null, null, operationId);
+            this.dialogsStore.setIsFolderActions(false);
+            return setTimeout(
+              () => clearSecondaryProgressData(operationId),
+              TIMEOUT,
+            );
           })
 
           .then(() => {
@@ -1269,7 +1275,12 @@ class FilesActionStore {
 
             await this.uploadDataStore.loopFilesOperations(data, pbData);
 
-            this.updateCurrentFolder(null, [items], null, operationId);
+            // this.updateCurrentFolder(null, [items], null, operationId);
+            this.dialogsStore.setIsFolderActions(false);
+            return setTimeout(
+              () => clearSecondaryProgressData(operationId),
+              TIMEOUT,
+            );
           })
 
           .then(() => {
@@ -1687,15 +1698,8 @@ class FilesActionStore {
 
         return !allFilesIsEditing && canDelete && hasSelection;
       case "create-room":
-        const { isCollaborator } = this.userStore?.user || {
-          isCollaborator: false,
-        };
-
-        const canCreateRoom =
-          !isCollaborator && rootFolderType === FolderType.USER;
-
+        const canCreateRoom = selection.some((s) => s.security?.CreateRoomFrom);
         return canCreateRoom;
-
       case "change-quota":
         return hasRoomsToChangeQuota;
       case "disable-quota":
@@ -2381,7 +2385,7 @@ class FilesActionStore {
 
         const url = getUrl(id);
 
-        window.DocSpace.navigate(url);
+        window.DocSpace.navigate(url, { state: { disableScrollToTop: true } });
         return;
       }
 
@@ -2632,14 +2636,8 @@ class FilesActionStore {
   };
 
   onLeaveRoom = (t, isOwner = false) => {
-    const {
-      updateRoomMemberRole,
-      removeFiles,
-      folders,
-      setFolders,
-      selection,
-      bufferSelection,
-    } = this.filesStore;
+    const { updateRoomMemberRole, removeFiles, selection, bufferSelection } =
+      this.filesStore;
     const { user } = this.userStore;
 
     const roomId = selection.length
@@ -2667,12 +2665,7 @@ class FilesActionStore {
         if (!isRoot) {
           this.selectedFolderStore.setInRoom(false);
         } else {
-          const newFolders = folders;
-          const folderIndex = newFolders.findIndex((r) => r.id === roomId);
-          if (folderIndex > -1) {
-            newFolders[folderIndex].inRoom = false;
-            setFolders(newFolders);
-          }
+          this.filesStore.setInRoomFolder(roomId, false);
         }
       }
 

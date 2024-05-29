@@ -92,6 +92,7 @@ export interface InfoPanelToggleColorTheme extends DefaultColorThemeProps {
 
 export interface LinkForgotPasswordColorTheme extends DefaultColorThemeProps {
   themeId: ThemeId.LinkForgotPassword;
+  isRegisterContainerVisible?: boolean;
 }
 
 export interface LoadingButtonColorTheme extends DefaultColorThemeProps {
@@ -102,7 +103,6 @@ export interface ProgressColorTheme extends DefaultColorThemeProps {
   themeId: ThemeId.Progress;
   percent?: number;
   $currentColorScheme?: TColorScheme;
-  theme: TTheme;
 }
 
 export interface VersionBadgeTheme extends DefaultColorThemeProps {

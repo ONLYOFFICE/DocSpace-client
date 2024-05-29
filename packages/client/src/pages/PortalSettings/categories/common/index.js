@@ -38,6 +38,7 @@ import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderSubmenu from "./sub-components/loaderSubmenu";
 import { resetSessionStorage } from "../../utils";
 import { DeviceType } from "@docspace/shared/enums";
+import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 const SubmenuCommon = (props) => {
   const {
@@ -117,13 +118,7 @@ const SubmenuCommon = (props) => {
       data={data}
       startSelect={currentTab}
       onSelect={(e) => onSelect(e)}
-      topProps={
-        currentDeviceType === DeviceType.desktop
-          ? 0
-          : currentDeviceType === DeviceType.mobile
-            ? "53px"
-            : "61px"
-      }
+      topProps={SECTION_HEADER_HEIGHT[currentDeviceType]}
     />
   );
 };
@@ -139,7 +134,7 @@ export default inject(({ settingsStore, common }) => {
 
   const currentDeviceType = settingsStore.currentDeviceType;
 
-  const isMobileView = currentDeviceType === DeviceType.mobile;
+  const isMobileView = settingsStore.deviceType === DeviceType.mobile;
   return {
     loadBaseInfo: async (page) => {
       await initSettings(page);

@@ -25,7 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
-import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/catalog.user.react.svg?url";
+// import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/catalog.user.react.svg?url";
+import CatalogDocumentsReactSvgUrl from "PUBLIC_DIR/images/catalog.documents.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
 import CatalogArchiveReactSvgUrl from "PUBLIC_DIR/images/catalog.archive.react.svg?url";
 import CatalogSharedReactSvgUrl from "PUBLIC_DIR/images/catalog.shared.react.svg?url";
@@ -89,7 +90,7 @@ const defaultIcon: Record<SizeType, string> = {
 
 const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
   16: {
-    [FolderType.USER]: CatalogUserReactSvgUrl,
+    [FolderType.USER]: CatalogDocumentsReactSvgUrl,
     [FolderType.Rooms]: CatalogRoomsReactSvgUrl,
     [FolderType.Archive]: CatalogArchiveReactSvgUrl,
     [FolderType.SHARE]: CatalogSharedReactSvgUrl,

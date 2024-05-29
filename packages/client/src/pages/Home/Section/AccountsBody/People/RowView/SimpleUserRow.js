@@ -146,7 +146,7 @@ const SimpleUserRow = (props) => {
     <StyledWrapper
       className={`user-item row-wrapper ${
         isChecked || isActive ? "row-selected" : ""
-      }`}
+      } ${item.id}`}
       value={value}
       checked={isChecked}
       isActive={isActive}

@@ -42,6 +42,7 @@ import {
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
+import Search from "../../Search";
 
 const RoomsItemHeader = ({
   t,
@@ -51,15 +52,16 @@ const RoomsItemHeader = ({
   isGracePeriod,
   setInvitePanelOptions,
   setInviteUsersWarningDialogVisible,
-  isPublicRoomType,
   roomsView,
   setSelection,
   setBufferSelection,
   isArchive,
   hasLinks,
+  showSearchBlock,
   setCalendarDay,
   openHistory,
   setShowSearchBlock,
+  roomType,
 }) => {
   const itemTitleRef = useRef();
 
@@ -84,6 +86,7 @@ const RoomsItemHeader = ({
   };
 
   const onClickInviteUsers = () => {
+    onSelectItem();
     setIsMobileHidden(true);
     const parentRoomId = infoPanelSelection.id;
 
@@ -96,9 +99,7 @@ const RoomsItemHeader = ({
       visible: true,
       roomId: parentRoomId,
       hideSelector: false,
-      defaultAccess: isPublicRoomType
-        ? ShareAccessRights.RoomManager
-        : ShareAccessRights.ReadOnly,
+      defaultAccess: getDefaultAccessUser(roomType),
     });
   };
 
@@ -106,6 +107,8 @@ const RoomsItemHeader = ({
 
   return (
     <StyledTitle ref={itemTitleRef}>
+      {isRoomMembersPanel && showSearchBlock && <Search />}
+
       <div className="item-icon">
         <RoomIcon
           color={selection.logo?.color}
@@ -173,6 +176,7 @@ export default inject(
       infoPanelSelection,
       roomsView,
       setIsMobileHidden,
+      showSearchBlock,
       setShowSearchBlock,
       setCalendarDay,
     } = infoPanelStore;
@@ -181,11 +185,16 @@ export default inject(
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
     const isArchive = selection?.rootFolderType === FolderType.Archive;
 
+    const roomType =
+      selectedFolderStore.roomType ??
+      infoPanelStore.infoPanelSelection?.roomType;
+
     return {
       selection,
       roomsView,
       infoPanelSelection,
       setIsMobileHidden,
+      showSearchBlock,
       setShowSearchBlock,
 
       isGracePeriod: currentTariffStatusStore.isGracePeriod,
@@ -194,15 +203,12 @@ export default inject(
       setInviteUsersWarningDialogVisible:
         dialogsStore.setInviteUsersWarningDialogVisible,
 
-      isPublicRoomType:
-        (selectedFolderStore.roomType ??
-          infoPanelStore.infoPanelSelection?.roomType) === RoomsType.PublicRoom,
-
       setSelection: filesStore.setSelection,
       setBufferSelection: filesStore.setBufferSelection,
       isArchive,
       hasLinks: externalLinks.length,
       setCalendarDay,
+      roomType,
     };
   },
 )(

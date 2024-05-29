@@ -236,6 +236,7 @@ const contextOptionsStore = new ContextOptionsStore(
   currentTariffStatusStore,
   userStore,
   indexingStore,
+  clientLoadingStore,
 );
 
 const hotkeyStore = new HotkeyStore(

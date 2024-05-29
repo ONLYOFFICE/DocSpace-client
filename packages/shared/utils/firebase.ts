@@ -171,8 +171,11 @@ class FirebaseHelper {
     return Promise.resolve(campaigns);
   }
 
-  async getCampaignsImages(campaign: string) {
+  async getCampaignsImages(campaign: string, isIcon: boolean) {
     const domain = this.config?.authDomain;
+    if (isIcon) {
+      return `https://${domain}/images/campaign.${campaign.toLowerCase()}.icon.svg`;
+    }
     return `https://${domain}/images/campaign.${campaign.toLowerCase()}.svg`;
   }
 

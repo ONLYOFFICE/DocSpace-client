@@ -75,6 +75,7 @@ import FilesSelector from "../FilesSelector";
 import LeaveRoomDialog from "../dialogs/LeaveRoomDialog";
 import ChangeRoomOwnerPanel from "../panels/ChangeRoomOwnerPanel";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
+import { PDFFormEditingDialog } from "../dialogs/PDFFormEditingDialog";
 
 const Panels = (props) => {
   const {
@@ -127,6 +128,8 @@ const Panels = (props) => {
     changeRoomOwnerIsVisible,
     deletePluginDialogVisible,
     shareFolderDialogVisible,
+    pdfFormEditVisible,
+    selectFileFormRoomOpenRoot,
   } = props;
 
   const [createPDFFormFile, setCreatePDFFormFile] = useState({
@@ -263,6 +266,7 @@ const Panels = (props) => {
         isPanelVisible
         key="select-file-form-room-dialog"
         onClose={onCloseFileFormRoomDialog}
+        openRoot={selectFileFormRoomOpenRoot}
         onSelectFile={createFromTemplateForm}
         filterParam={selectFileFormRoomFilterParam}
         descriptionText={descriptionTextFileFormRoomDialog}
@@ -312,6 +316,7 @@ const Panels = (props) => {
         {...createPDFFormFile}
       />
     ),
+    pdfFormEditVisible && <PDFFormEditingDialog key="pdf-form-edit-dialog" />,
   ];
 };
 
@@ -370,6 +375,8 @@ export default inject(
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
       shareFolderDialogVisible,
+      pdfFormEditVisible,
+      selectFileFormRoomOpenRoot,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -435,6 +442,8 @@ export default inject(
       changeRoomOwnerIsVisible,
       deletePluginDialogVisible,
       shareFolderDialogVisible,
+      pdfFormEditVisible,
+      selectFileFormRoomOpenRoot,
     };
   },
 )(observer(Panels));

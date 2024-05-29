@@ -230,8 +230,6 @@ class CreateEditRoomStore {
       setIsSectionFilterLoading(param);
     };
 
-    setView("info_members");
-
     const state = {
       isRoot: false,
       title: room.title,
@@ -250,7 +248,10 @@ class CreateEditRoomStore {
 
     window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
 
-    isDesktop() && setIsVisible(true);
+    if (isDesktop()) {
+      setIsVisible(true);
+      setView("info_members");
+    }
 
     this.setIsLoading(false);
     this.setConfirmDialogIsLoading(false);

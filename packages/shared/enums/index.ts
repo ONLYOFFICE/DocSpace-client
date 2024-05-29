@@ -453,7 +453,7 @@ export const enum ParseErrorTypes {
 
 export const enum ButtonKeys {
   enter = "enter",
-  esc = "esc",
+  esc = "Escape",
   tab = "Tab",
 }
 
@@ -516,12 +516,34 @@ export const enum WhiteLabelLogoType {
   Notification = 8,
 }
 
+/**
+ * Enum for files selector filter extended.
+ * @readonly
+ */
+export const enum FilesSelectorExtendedFilterTypes {
+  Folders = "Folders",
+  Documents = "Documents",
+  Presentations = "Presentations",
+  Spreadsheets = "Spreadsheets",
+  Images = "Images",
+  Media = "Media",
+  Archives = "Archives",
+  AllFiles = "AllFiles",
+  FormTemplates = "FormTemplates",
+  Forms = "Forms",
+}
+
 export const enum EditorConfigErrorType {
   System = "System.Exception",
   LinkScope = "ASC.Files.Core.Exceptions.LinkScopeException",
   NotFoundScope = "System.IO.FileNotFoundException",
   AccessDeniedScope = "System.Security.SecurityException",
   TenantQuotaException = "ASC.Core.Tenants.TenantQuotaException",
+}
+
+export const enum RoomsStorageFilter {
+  internal = 1,
+  thirdparty = 2,
 }
 
 export const enum VDRIndexingAction {

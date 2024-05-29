@@ -28,6 +28,7 @@ import { DeviceType } from "../../enums";
 import { TViewAs } from "../../types";
 
 import { FloatingButtonIcons } from "../floating-button";
+import { ContextMenuModel } from "../context-menu";
 
 export interface SubInfoPanelHeaderProps {
   children: React.JSX.Element | null;
@@ -66,13 +67,17 @@ export interface SectionBodyProps {
   isFormGallery?: boolean;
   isDesktop?: boolean;
   currentDeviceType?: DeviceType;
+  getContextModel?: () => ContextMenuModel[];
 }
 
 export interface SectionContainerProps {
   showTwoProgress?: boolean;
   isSectionHeaderAvailable: boolean;
+  isInfoPanelVisible?: boolean;
   viewAs?: TViewAs;
   children: React.ReactNode;
+  withBodyScroll: boolean;
+  currentDeviceType?: DeviceType;
 }
 
 export interface SectionFilterProps {
@@ -138,4 +143,5 @@ export interface SectionProps {
   canDisplay?: boolean;
   anotherDialogOpen?: boolean;
   isDesktop?: boolean;
+  getContextModel?: () => ContextMenuModel[];
 }

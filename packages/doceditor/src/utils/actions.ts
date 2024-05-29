@@ -28,10 +28,7 @@
 
 import { headers } from "next/headers";
 
-import {
-  createRequest,
-  getBaseUrl,
-} from "@docspace/shared/utils/next-ssr-helper";
+import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import { TenantStatus, EditorConfigErrorType } from "@docspace/shared/enums";
 import type {
   TDocServiceLocation,
@@ -40,46 +37,15 @@ import type {
 import { TUser } from "@docspace/shared/api/people/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
 
-import type { IInitialConfig, TCatchError, TError, TResponse } from "@/types";
+import type {
+  ActionType,
+  IInitialConfig,
+  TCatchError,
+  TError,
+  TResponse,
+} from "@/types";
 
 import { REPLACED_URL_PATH } from "./constants";
-
-import { isTemplateFile } from ".";
-
-const processFillFormDraft = async (
-  config: IInitialConfig,
-  searchParams: URLSearchParams,
-
-  share?: string,
-): Promise<[string, IInitialConfig | TError, string | undefined] | void> => {
-  const templateFileId = config.file.id;
-
-  const formUrl = await checkFillFromDraft(templateFileId, share);
-
-  if (!formUrl) return;
-
-  const basePath = getBaseUrl();
-  const url = new URL(basePath + formUrl);
-
-  const queryFileId = url.searchParams.get("fileid");
-
-  if (!queryFileId) return;
-
-  url.searchParams.delete("fileid");
-
-  const combinedSearchParams = new URLSearchParams({
-    ...Object.fromEntries(searchParams),
-    ...Object.fromEntries(url.searchParams),
-  });
-
-  const actions: [Promise<IInitialConfig | TError>] = [
-    openEdit(queryFileId, combinedSearchParams.toString(), share),
-  ];
-
-  const [newConfig] = await Promise.all(actions);
-
-  return [queryFileId, newConfig, url.hash ?? ""];
-};
 
 export async function fileCopyAs(
   fileId: string,
@@ -111,6 +77,7 @@ export async function fileCopyAs(
         enableExternalExt,
         password,
       }),
+      false,
     );
 
     const file = await (await fetch(createFile)).json();
@@ -172,6 +139,7 @@ export async function createFile(
       [["Content-Type", "application/json;charset=utf-8"]],
       "POST",
       JSON.stringify({ title, templateId, formId }),
+      false,
     );
 
     const file = await (await fetch(createFile)).json();
@@ -211,20 +179,24 @@ export async function getData(
   fileId: string,
   version?: string,
   doc?: string,
-  view?: boolean,
+  action?: ActionType,
   share?: string,
   editorType?: string,
 ) {
+  const view = action === "view";
+  const edit = action === "edit";
+
   try {
     const searchParams = new URLSearchParams();
 
-    if (view) searchParams.append("view", view ? "true" : "false");
+    if (view) searchParams.append("view", "true");
     if (version) {
       searchParams.append("version", version);
     }
     if (doc) searchParams.append("doc", doc);
     if (share) searchParams.append("share", share);
     if (editorType) searchParams.append("editorType", editorType);
+    if (edit) searchParams.append("edit", "true");
 
     const [config, user, settings] = await Promise.all([
       openEdit(fileId, searchParams.toString(), share),
@@ -234,6 +206,7 @@ export async function getData(
     ]);
 
     if ("editorConfig" in config && typeof settings !== "string") {
+      const newFileId = config.file.id.toString();
       const response: TResponse = {
         config,
         user,
@@ -241,25 +214,8 @@ export async function getData(
         successAuth: false,
         isSharingAccess: false,
         doc,
-        fileId,
+        fileId: newFileId !== fileId ? newFileId : fileId,
       };
-
-      if (isTemplateFile(response.config)) {
-        const result = await processFillFormDraft(
-          response.config,
-          searchParams,
-          share,
-        );
-
-        if (result) {
-          const [newFileId, newConfig, hash] = result;
-
-          response.fileId = newFileId;
-          response.config = newConfig as IInitialConfig;
-
-          if (hash) response.hash = hash;
-        }
-      }
 
       const successAuth = !!user;
 
@@ -354,6 +310,8 @@ export async function getUser(share?: string) {
     [`/people/@self`],
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
+    undefined,
+    false,
   );
 
   if (!cookie?.includes("asc_auth_key")) return undefined;
@@ -378,6 +336,8 @@ export async function getSettings(share?: string) {
     ],
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
+    undefined,
+    false,
   );
 
   const settingsRes = await fetch(getSettings);
@@ -403,6 +363,7 @@ export async function checkFillFromDraft(
     ],
     "POST",
     JSON.stringify({ fileId: templateFileId }),
+    false,
   );
 
   const response = await fetch(checkFillFormDraft);
@@ -426,17 +387,46 @@ export async function openEdit(
     [`/files/file/${fileId}/openedit?${searchParams}`],
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
+    undefined,
+    false,
   );
 
   const res = await fetch(getConfig);
 
-  const config = await res.json();
+  if (res.status !== 404) {
+    const config = await res.json();
 
-  if (res.ok) {
-    config.response.editorUrl = (
-      config.response as IInitialConfig
-    ).editorUrl.replace(REPLACED_URL_PATH, "");
-    return config.response as IInitialConfig;
+    if (res.ok) {
+      config.response.editorUrl = (
+        config.response as IInitialConfig
+      ).editorUrl.replace(REPLACED_URL_PATH, "");
+      return config.response as IInitialConfig;
+    }
+
+    const editorUrl =
+      cookie?.includes("asc_auth_key") || share
+        ? (await getEditorUrl("", share)).docServiceUrl
+        : "";
+
+    const status =
+      config.error?.type === EditorConfigErrorType.NotFoundScope
+        ? "not-found"
+        : config.error?.type === EditorConfigErrorType.AccessDeniedScope
+          ? "access-denied"
+          : res.status === 415
+            ? "not-supported"
+            : undefined;
+
+    const message = status ? config.error.message : undefined;
+
+    const error =
+      cookie?.includes("asc_auth_key") || share
+        ? config.error.type === EditorConfigErrorType.LinkScope
+          ? { message: message ?? "unauthorized", status, editorUrl }
+          : { ...config.error, status, editorUrl }
+        : { message: "unauthorized", status, editorUrl };
+
+    return error as TError;
   }
 
   const editorUrl =
@@ -444,25 +434,10 @@ export async function openEdit(
       ? (await getEditorUrl("", share)).docServiceUrl
       : "";
 
-  const status =
-    config.error?.type === EditorConfigErrorType.NotFoundScope
-      ? "not-found"
-      : config.error?.type === EditorConfigErrorType.AccessDeniedScope
-        ? "access-denied"
-        : res.status === 415
-          ? "not-supported"
-          : undefined;
-
-  const message = status ? config.error.message : undefined;
-
-  const error =
-    cookie?.includes("asc_auth_key") || share
-      ? config.error.type === EditorConfigErrorType.LinkScope
-        ? { message: message ?? "unauthorized", status, editorUrl }
-        : { ...config.error, status, editorUrl }
-      : { message: "unauthorized", status, editorUrl };
-
-  return error as TError;
+  return {
+    status: "not-found",
+    editorUrl,
+  } as TError;
 }
 
 export async function getEditorUrl(
@@ -473,6 +448,8 @@ export async function getEditorUrl(
     [`/files/docservice?${editorSearchParams ? editorSearchParams : ""}`],
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
+    undefined,
+    false,
   );
 
   const res = await fetch(request);
@@ -481,4 +458,3 @@ export async function getEditorUrl(
 
   return editorUrl.response as TDocServiceLocation;
 }
-

@@ -84,7 +84,7 @@ const GroupsRow = ({
       isActive={isActive}
       className={`group-item row-wrapper ${
         isChecked || isActive ? "row-selected" : ""
-      }`}
+      } ${item.id}`}
       value={item.id}
     >
       <div className={"group-item"}>
@@ -128,6 +128,7 @@ const GroupsRow = ({
               color={nameColor}
               isTextOverflow={true}
               onClick={onOpenGroup}
+              dir="auto"
             >
               {item.name}
             </Link>

@@ -1206,7 +1206,7 @@ class TableHeader extends React.Component<
 
     // TODO: If defaultSize(75px) is less than defaultMinColumnSize(110px) the calculations work correctly
     const defaultSize =
-      columns.find((col) => col.defaultSize)?.defaultSize || 0;
+      columns.find((col) => col.defaultSize && col.enable)?.defaultSize || 0;
 
     // TODO: Fixed columns size if something went wrong
     if (storageSize) {
@@ -1525,6 +1525,19 @@ class TableHeader extends React.Component<
             } else if (item !== `${settingsSize}px` || isIndexEditingMode) {
               const percent = (getSubstring(item) / oldWidth) * 100;
 
+              if (percent === 100) {
+                const enableColumnsLength = columns.filter(
+                  (column) => !column.defaultSize && column.enable,
+                ).length;
+
+                if (enableColumnsLength !== 1) {
+                  localStorage.removeItem(columnStorageName);
+                  this.resetColumns();
+
+                  return;
+                }
+              }
+
               let newItemWidth = defaultColumnSize
                 ? `${defaultColumnSize}px`
                 : percent === 0
@@ -1625,7 +1638,7 @@ class TableHeader extends React.Component<
 
     let countColumns = 0;
     const defaultColumnSize =
-      columns.find((col) => col.defaultSize)?.defaultSize || 0;
+      columns.find((col) => col.defaultSize && col.enable)?.defaultSize || 0;
 
     newGridTemplateColumns.forEach((item, index) => {
       const unfixedSize = checkingForUnfixedSize(item, defaultColumnSize);
@@ -1707,8 +1720,8 @@ class TableHeader extends React.Component<
       : document.getElementById("table-container");
     const containerWidth = container ? container.clientWidth : 0;
 
-    const firstColumnPercent = 40;
-    const percent = 60 / enableColumns.length;
+    const firstColumnPercent = enableColumns.length > 0 ? 40 : 100;
+    const percent = enableColumns.length > 0 ? 60 / enableColumns.length : 0;
 
     const wideColumnSize = `${(containerWidth * firstColumnPercent) / 100}px`;
     const otherColumns = `${(containerWidth * percent) / 100}px`;

@@ -93,7 +93,6 @@ const StyledLinkRow = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
-    color: ${({ theme }) => theme.infoPanel.members.createLink};
   }
 
   .external-row-icons {
@@ -140,6 +139,16 @@ const StyledLinkRow = styled.div`
       }
     `}
   }
+`;
+
+const ROOMS_ITEM_HEADER_HEIGHT = "80px";
+
+export const StyledPublicRoomBarContainer = styled.div`
+  position: sticky;
+  top: ${ROOMS_ITEM_HEADER_HEIGHT};
+  background: ${(props) => props.theme.backgroundColor};
+  overflow: hidden;
+  z-index: 1;
 `;
 
 StyledLinkRow.defaultProps = { theme: Base };

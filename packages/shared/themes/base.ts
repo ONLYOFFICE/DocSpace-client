@@ -2094,6 +2094,7 @@ export const getBaseTheme = () => {
       borderColor: grayLightMid,
       thumbnailBorderColor: grayLightMid,
       textColor: black,
+      errorColor: "#F21C0E",
 
       closeButtonWrapperPadding: "0px",
       closeButtonIcon: white,
@@ -2116,6 +2117,7 @@ export const getBaseTheme = () => {
         disabledRoleSelectorColor: "#a3a9ae",
         roleSelectorArrowColor: "#a3a9ae",
         createLink: "#a3a9ae",
+        linkAccessComboboxExpired: "#a3a9ae",
       },
 
       history: {
@@ -3229,14 +3231,15 @@ export const getBaseTheme = () => {
       notifications: {
         textDescriptionColor: "#A3A9AE",
       },
-    },
-
-    activeSessions: {
-      color: "#333",
-      borderColor: "#eceef1",
-      tickIconColor: "#35AD17",
-      removeIconColor: "#A3A9AE",
-      sortHeaderColor: "#d0d5da",
+      activeSessions: {
+        color: "#333",
+        borderColor: "#eceef1",
+        tickIconColor: "#35AD17",
+        removeIconColor: "#A3A9AE",
+        sortHeaderColor: "#d0d5da",
+        tableCellColor: "#a3a9ae",
+        dividerColor: "#D0D5DA",
+      },
     },
 
     formWrapper: {

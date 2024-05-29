@@ -167,12 +167,11 @@ const StyledSimpleFilesRow = styled(Row)`
   .badges {
     display: flex;
     align-items: center;
-  }
 
-  .lock-file {
-    cursor: ${(props) => (props.withAccess ? "pointer" : "default")};
-    svg {
-      height: 12px;
+    .badge-version {
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
@@ -235,6 +234,7 @@ const StyledSimpleFilesRow = styled(Row)`
   }
 
   .lock-file {
+    cursor: ${(props) => (props.withAccess ? "pointer" : "default")};
     svg {
       height: 16px;
     }
@@ -286,20 +286,26 @@ const StyledSimpleFilesRow = styled(Row)`
   }
 
   @media ${mobile} {
+    .lock-file {
+      svg {
+        height: 12px;
+      }
+    }
+
     .badges {
       gap: 8px;
     }
 
-    .badges__quickButtons:not(:empty) {
+    /* .badges__quickButtons:not(:empty) {
       ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 8px;
-            `
-          : css`
-              margin-left: 8px;
-            `}
-    }
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 8px;
+          `
+        : css`
+            margin-left: 8px;
+          `}
+    } */
     .room__badges:empty,
     .file__badges:empty,
     .folder__badges:empty,

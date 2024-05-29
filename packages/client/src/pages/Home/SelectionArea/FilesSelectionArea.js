@@ -59,7 +59,7 @@ const SelectionArea = (props) => {
 
   const setTilesCount = () => {
     const newCount = getCountTilesInRow();
-    if (countTilesInRow !== newCount) setCountTilesInRow(newCount);
+    setCountTilesInRow(newCount);
   };
 
   const onMove = ({ added, removed, clear }) => {

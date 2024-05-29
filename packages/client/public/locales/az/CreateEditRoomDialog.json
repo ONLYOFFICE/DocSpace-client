@@ -9,8 +9,6 @@
   "DisableRoomQuota": "Bu otaq üçün kvotanı deaktiv edin",
   "FillingFormsRoomDescription": "İstənilən sənəd növünü cəld yaratmaq üçün sənəd şablonlarını yaradın, paylaşın və doldurun və ya əvvəlcədən təyin edilmiş parametrlərlə işləyin.",
   "FillingFormsRoomTitle": "Formaların doldurulması otağı",
-  "FormRoomDescription": "Formaları hər kəslə paylaşın və bütün formaları Tamamlanmış qovluğunda toplayın. İstifadəçilər ayrı-ayrı son fayllar yaradaraq istənilən formanı bir neçə dəfə doldura bilər. Əsas forma otaqlarında formalara birdən çox istifadəçi rolu əlavə edə bilməzsiniz.",
-  "FormRoomTitle": "Əsas forma otağı",
   "Icon": "Simvol",
   "MakeRoomPrivateDescription": "Bu otaqdakı bütün fayllar şifrələnəcək.",
   "MakeRoomPrivateLimitationsWarningDescription": "Bu funksiya ilə siz yalnız mövcud DocSpace istifadəçilərini dəvət edə bilərsiniz. Otaq yaratdıqdan sonra istifadəçi siyahısını dəyişə bilməzsiniz.",

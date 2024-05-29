@@ -158,7 +158,7 @@ const withHotkeys = (Component) => {
       document.addEventListener("paste", onPaste);
 
       return () => {
-        window.removeEventListener("keypress", throttledKeyDownEvent);
+        window.removeEventListener("keydown", throttledKeyDownEvent);
         document.removeEventListener("paste", onPaste);
       };
     });

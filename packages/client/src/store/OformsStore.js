@@ -316,7 +316,7 @@ class OformsStore {
     runInAction(() => this.fetchOforms(newOformsFilter));
   };
 
-  filterOformsByLocale = async (locale) => {
+  filterOformsByLocale = async (locale, icon) => {
     if (!locale) return;
 
     if (locale !== this.oformsFilter.locale)
@@ -328,6 +328,7 @@ class OformsStore {
     this.oformsFilter.locale = locale;
     this.oformsFilter.categorizeBy = "";
     this.oformsFilter.categoryId = "";
+    this.oformsFilter.icon = icon;
     const newOformsFilter = this.oformsFilter.clone();
 
     runInAction(() => this.fetchOforms(newOformsFilter));

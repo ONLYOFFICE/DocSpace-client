@@ -72,7 +72,7 @@
   "ChooseBackupFiles": "Valitse varmuuskopiotiedostot",
   "ClearBackupList": "Poista kaikki varmuuskopiot",
   "CloseMenu": "Sulje menu ",
-  "CommonFilesDescription": "Erillinen huone luodaan Yleistä-osion tiedostoille (Yleistä-huone). Vain DocSpace-järjestelmänvalvojilla on oikeudet tähän huoneeseen. Huoneen omistaja on oletuksena käyttäjä, joka voi aloittaa tuonnin: John Smith (sinä).",
+  "CommonFilesDescription": "Erillinen huone luodaan Yleistä-osion tiedostoille (Yleistä-huone). Vain DocSpace-järjestelmänvalvojilla on oikeudet tähän huoneeseen. Huoneen omistaja on oletuksena käyttäjä, joka voi aloittaa tuonnin: {{user}} (sinä).",
   "CompanyInfoSettings": "Yrityksen info-asetukset",
   "CompanyInfoSettingsDescription": "Tämä informaatio näytetään <1>{{link}}</1> ikkunassa.",
   "ConfirmEmailSended": "Vahvistusviesti on lähetetty osoitteen {{ownerName}}",

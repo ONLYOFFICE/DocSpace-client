@@ -36,6 +36,8 @@ import { RoomIcon } from "../../room-icon";
 import { StyledItem } from "../Selector.styled";
 import { ItemProps, Data, TSelectorItem } from "../Selector.types";
 import { RoomsType } from "../../../enums";
+import NewItem from "./NewItem";
+import InputItem from "./InputItem";
 
 const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
   const prevData = prevProps.data;
@@ -64,6 +66,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     isItemLoaded,
     rowLoader,
     renderCustomItem,
+    setInputItemVisible,
   }: Data = data;
   const { t } = useTranslation(["Common"]);
 
@@ -81,6 +84,13 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
 
     const {
       label,
+      isCreateNewItem,
+      onCreateClick,
+
+      isInputItem,
+      defaultInputValue,
+      onAcceptInput,
+      onCancelInput,
       avatar,
       icon,
       role,
@@ -92,6 +102,32 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       disabledText,
     } = item;
 
+    if (isInputItem) {
+      return (
+        <InputItem
+          defaultInputValue={defaultInputValue}
+          onAcceptInput={onAcceptInput}
+          onCancelInput={onCancelInput}
+          style={style}
+          color={color}
+          icon={icon}
+          setInputItemVisible={setInputItemVisible}
+        />
+      );
+    }
+
+    if (
+      isCreateNewItem &&
+      (items.length > 2 || (items.length === 2 && !items[1].isInputItem))
+    ) {
+      return (
+        <NewItem label={label} onCreateClick={onCreateClick} style={style} />
+      );
+    }
+    if (isCreateNewItem) {
+      return null;
+    }
+
     const showPlanetIcon =
       (item.roomType === RoomsType.PublicRoom ||
         item.roomType === RoomsType.CustomRoom) &&
@@ -101,7 +137,10 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
 
     const currentRole = role || AvatarRole.user;
 
-    const typeLabel = getUserTypeLabel(role, t);
+    const typeLabel = getUserTypeLabel(
+      role as "owner" | "admin" | "user" | "collaborator" | "manager",
+      t,
+    );
 
     const onChangeAction = () => {
       onSelect?.(item, false);

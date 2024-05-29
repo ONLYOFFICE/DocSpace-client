@@ -37,6 +37,8 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import { AuthenticatedAction, ValidationResult } from "SRC_DIR/helpers/enums";
+import { getCookie } from "@docspace/shared/utils";
+import { LANGUAGE } from "@docspace/shared/constants";
 
 const ConfirmRoute = ({
   doAuthenticated,
@@ -57,8 +59,9 @@ const ConfirmRoute = ({
 
   React.useEffect(() => {
     if (location.search.includes("culture")) return;
-
-    storeIsLoaded && i18n.changeLanguage(culture);
+    const lng = getCookie(LANGUAGE);
+ 
+    storeIsLoaded && i18n.changeLanguage(lng); 
   }, [storeIsLoaded]);
 
   const location = useLocation();

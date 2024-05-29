@@ -43,6 +43,7 @@ const useSocketHelper = ({
   socketSubscribers,
   disabledItems,
   filterParam,
+  withCreateFolder,
   setItems,
   setBreadCrumbs,
   setTotal,
@@ -109,9 +110,9 @@ const useSocketHelper = ({
 
       if (opt?.type === "file" && "folderId" in data) {
         item = convertFilesToItems([data], getIcon, filterParam)[0];
-      } else if (opt?.type === "folder" && "roomType" in data) {
+      } else if (opt?.type === "folder" && !("folderId" in data)) {
         item =
-          data.roomType && "tags" in data
+          "roomType" in data && data.roomType && "tags" in data
             ? convertRoomsToItems([data])[0]
             : convertFoldersToItems([data], disabledItems, filterParam)[0];
       }
@@ -122,6 +123,18 @@ const useSocketHelper = ({
         if (opt.type === "folder") {
           setTotal((v) => v + 1);
 
+          if (withCreateFolder) {
+            const newValue = [...value];
+
+            let idx = 1;
+
+            if (value[1]?.isInputItem) idx = 2;
+
+            newValue.splice(idx, 0, item);
+
+            return newValue;
+          }
+
           return [item, ...value];
         }
 
@@ -129,7 +142,12 @@ const useSocketHelper = ({
           let idx = 0;
 
           for (let i = 0; i < value.length - 1; i += 1) {
-            if (!value[i].isFolder) break;
+            if (
+              !value[i]?.isFolder &&
+              !value[i]?.isCreateNewItem &&
+              !value[i]?.isInputItem
+            )
+              break;
 
             idx = i + 1;
           }
@@ -146,7 +164,7 @@ const useSocketHelper = ({
         return value;
       });
     },
-    [disabledItems, filterParam, getIcon, setItems, setTotal],
+    [disabledItems, filterParam, getIcon, setItems, setTotal, withCreateFolder],
   );
 
   const updateItem = React.useCallback(

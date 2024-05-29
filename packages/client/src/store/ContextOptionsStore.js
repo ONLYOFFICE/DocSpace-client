@@ -2051,6 +2051,7 @@ class ContextOptionsStore {
       ],
     };
 
+    const showUploadFolder = !(isMobile || isTablet);
     const moreActions = {
       id: "personal_more-form",
       className: "main-button_drop-down",
@@ -2072,7 +2073,7 @@ class ContextOptionsStore {
           key: "personal_more-form__separator-2",
         },
         uploadFiles,
-        uploadFolder,
+        showUploadFolder ? uploadFolder : null,
       ],
     };
 
@@ -2321,6 +2322,7 @@ class ContextOptionsStore {
         ]
       : [createTemplateForm, createTemplateNewFormFile, templateOformsGallery];
 
+    const showUploadFolder = !(isMobile || isTablet);
     const options = isRoomsFolder
       ? [
           {
@@ -2338,7 +2340,7 @@ class ContextOptionsStore {
           createNewFolder,
           { key: "separator", isSeparator: true },
           uploadFiles,
-          uploadFolder,
+          showUploadFolder ? uploadFolder : null,
         ];
 
     if (mainButtonItemsList && enablePlugins) {

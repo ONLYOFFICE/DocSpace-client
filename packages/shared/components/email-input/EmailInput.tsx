@@ -25,13 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { isIOS, isMobile } from "react-device-detect";
 
 import { EmailSettings, parseAddress } from "../../utils";
 import { InputSize, InputType, TextInputProps } from "../text-input";
 
 import StyledEmailInput from "./EmailInput.styled";
 import { EmailInputProps, TValidate } from "./EmailInput.types";
-import { isIOS, isMobile } from "react-device-detect";
 
 const TextInputWrapper = ({
   onValidateInput,

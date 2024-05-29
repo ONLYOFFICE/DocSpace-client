@@ -14,7 +14,9 @@ import {
 } from "./EmptyViewContainer.helpers";
 
 import type {
+  CreateEvent,
   EmptyViewContainerProps,
+  ExtensiontionType,
   UploadType,
 } from "./EmptyViewContainer.types";
 
@@ -29,7 +31,7 @@ const EmptyViewContainer = observer(
     onCreateAndCopySharedLink,
     setSelectFileFormRoomDialogVisible,
   }: EmptyViewContainerProps) => {
-    const { t } = useTranslation(["EmptyView"]);
+    const { t } = useTranslation(["EmptyView", "Files", "Common"]);
     const theme = useTheme();
 
     const onUploadAction = useCallback((uploadType: UploadType) => {
@@ -47,21 +49,28 @@ const EmptyViewContainer = observer(
       onClickInviteUsers?.(folderId, type);
     }, [onClickInviteUsers, folderId, type]);
 
-    const createFormFromFile = useCallback(() => {
-      setSelectFileFormRoomDialogVisible?.(
-        true,
-        FilesSelectorFilterTypes.DOCX,
-        true,
-      );
-    }, [setSelectFileFormRoomDialogVisible]);
+    const uploadFromDocspace = useCallback(
+      (filterParam: FilesSelectorFilterTypes, openRoot: boolean = true) => {
+        setSelectFileFormRoomDialogVisible?.(true, filterParam, openRoot);
+      },
+      [setSelectFileFormRoomDialogVisible],
+    );
 
-    const uploadPDFForm = useCallback(() => {
-      setSelectFileFormRoomDialogVisible?.(
-        true,
-        FilesSelectorFilterTypes.PDF,
-        true,
-      );
-    }, [setSelectFileFormRoomDialogVisible]);
+    const onCreate = useCallback(
+      (extension: ExtensiontionType, withoutDialog?: boolean) => {
+        const event: CreateEvent = new Event(Events.CREATE);
+
+        const payload = {
+          id: -1,
+          extension,
+          withoutDialog,
+        };
+        event.payload = payload;
+
+        window.dispatchEvent(event);
+      },
+      [],
+    );
 
     const createAndCopySharedLink = useCallback(() => {
       if (!selectedFolder) return;
@@ -69,25 +78,10 @@ const EmptyViewContainer = observer(
       onCreateAndCopySharedLink?.(selectedFolder, t);
     }, [selectedFolder, onCreateAndCopySharedLink, t]);
 
-    const onCreateDocumentForm = useCallback(() => {
-      const event: Event & {
-        payload?: { extension: string; id: number; withoutDialog: boolean };
-      } = new Event(Events.CREATE);
-
-      const payload = {
-        id: -1,
-        extension: "pdf",
-        withoutDialog: true,
-      };
-      event.payload = payload;
-
-      window.dispatchEvent(event);
-    }, []);
-
     const emptyViewOptions = useMemo(() => {
       const description = getDescription(type, t, access);
       const title = getTitle(type, t, access);
-      const icon = getIcon(type, theme.isBase);
+      const icon = getIcon(type, theme.isBase, access);
 
       return { description, title, icon };
     }, [type, t, theme.isBase, access]);
@@ -96,9 +90,8 @@ const EmptyViewContainer = observer(
       () =>
         getOptions(type, security!, t, access, {
           inviteUser,
-          createFormFromFile,
-          onCreateDocumentForm,
-          uploadPDFForm,
+          onCreate,
+          uploadFromDocspace,
           onUploadAction,
           createAndCopySharedLink,
         }),
@@ -109,11 +102,10 @@ const EmptyViewContainer = observer(
 
         t,
         inviteUser,
-        uploadPDFForm,
+        uploadFromDocspace,
         onUploadAction,
-        createFormFromFile,
-        onCreateDocumentForm,
         createAndCopySharedLink,
+        onCreate,
       ],
     );
 

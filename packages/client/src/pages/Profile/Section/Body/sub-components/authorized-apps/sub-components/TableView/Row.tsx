@@ -35,53 +35,51 @@ const Row = (props: RowProps) => {
     getContextMenuItems ? getContextMenuItems(t, item, false, false) : [];
 
   return (
-    <>
-      <StyledRowWrapper className="handle">
-        <StyledTableRow
-          contextOptions={contextOptions}
-          getContextModel={getContextMenuModel}
-        >
-          <TableCell className={"table-container_file-name-cell"}>
-            <NameCell
-              name={item.name}
-              icon={item.logo}
-              isChecked={isChecked}
-              inProgress={inProgress}
-              clientId={item.clientId}
-              setSelection={setSelection}
-            />
-          </TableCell>
+    <StyledRowWrapper className="handle">
+      <StyledTableRow
+        contextOptions={contextOptions}
+        getContextModel={getContextMenuModel}
+      >
+        <TableCell className="table-container_file-name-cell">
+          <NameCell
+            name={item.name}
+            icon={item.logo}
+            isChecked={isChecked}
+            inProgress={inProgress}
+            clientId={item.clientId}
+            setSelection={setSelection}
+          />
+        </TableCell>
 
-          <TableCell className="">
-            <Text
-              as="span"
-              fontWeight={400}
-              className="mr-8 textOverflow description-text"
+        <TableCell className="">
+          <Text
+            as="span"
+            fontWeight={400}
+            className="mr-8 textOverflow description-text"
+          >
+            <Link
+              className="description-text"
+              href={item.websiteUrl}
+              type={LinkType.action}
+              target={LinkTarget.blank}
+              isHovered
             >
-              <Link
-                className="description-text"
-                href={item.websiteUrl}
-                type={LinkType.action}
-                target={LinkTarget.blank}
-                isHovered
-              >
-                {item.websiteUrl}
-              </Link>
-            </Text>
-          </TableCell>
+              {item.websiteUrl}
+            </Link>
+          </Text>
+        </TableCell>
 
-          <TableCell className="">
-            <Text
-              as="span"
-              fontWeight={400}
-              className="mr-8 textOverflow description-text"
-            >
-              {modifiedDate}
-            </Text>
-          </TableCell>
-        </StyledTableRow>
-      </StyledRowWrapper>
-    </>
+        <TableCell className="">
+          <Text
+            as="span"
+            fontWeight={400}
+            className="mr-8 textOverflow description-text"
+          >
+            {modifiedDate}
+          </Text>
+        </TableCell>
+      </StyledTableRow>
+    </StyledRowWrapper>
   );
 };
 

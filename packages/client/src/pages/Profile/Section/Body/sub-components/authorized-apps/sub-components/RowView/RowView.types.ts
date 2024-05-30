@@ -12,7 +12,7 @@ export interface RowViewProps {
     t: TTranslation,
     item: IClientProps,
     isInfo: boolean,
-    isSettings: boolean
+    isSettings: boolean,
   ) => ContextMenuModel[];
   activeClients?: string[];
   hasNextPage?: boolean;
@@ -30,7 +30,7 @@ export interface RowProps {
     t: TTranslation,
     item: IClientProps,
     isInfo: boolean,
-    isSettings: boolean
+    isSettings: boolean,
   ) => ContextMenuModel[];
   setSelection?: (clientId: string) => void;
   changeClientStatus?: (clientId: string, status: boolean) => Promise<void>;

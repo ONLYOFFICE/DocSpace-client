@@ -2,7 +2,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 
 import { TableBody } from "@docspace/shared/components/table";
-//@ts-ignore
+import { UserStore } from "@docspace/shared/store/UserStore";
+
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 
 import Row from "./Row";
@@ -10,7 +11,6 @@ import Header from "./Header";
 
 import { TableViewProps } from "./TableView.types";
 import { TableWrapper } from "./TableView.styled";
-import { UserStore } from "@docspace/shared/store/UserStore";
 
 const TABLE_VERSION = "1";
 const COLUMNS_SIZE = `consentColumnsSize_ver-${TABLE_VERSION}`;
@@ -41,7 +41,7 @@ const TableView = ({
         return;
       }
 
-      setSelection && setSelection("");
+      setSelection?.("");
     },
     [setSelection],
   );
@@ -60,7 +60,7 @@ const TableView = ({
     async ({ startIndex }: { startIndex: number; stopIndex: number }) => {
       await fetchNextClients?.(startIndex);
     },
-    [],
+    [fetchNextClients],
   );
 
   return (

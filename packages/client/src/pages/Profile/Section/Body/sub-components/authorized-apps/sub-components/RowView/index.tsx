@@ -1,11 +1,9 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
 
-//@ts-ignore
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 
-import OAuthRow from "./Row";
+import { OAuthRow } from "./Row";
 
 import { RowViewProps } from "./RowView.types";
 import { StyledRowContainer } from "./RowView.styled";
@@ -30,7 +28,7 @@ const RowView = (props: RowViewProps) => {
     async ({ startIndex }: { startIndex: number; stopIndex: number }) => {
       await fetchNextClients?.(startIndex);
     },
-    []
+    [fetchNextClients],
   );
 
   return (
@@ -59,32 +57,30 @@ const RowView = (props: RowViewProps) => {
   );
 };
 
-export default inject(
-  ({ oauthStore }: { auth: any; oauthStore: OAuthStoreProps }) => {
-    const {
-      viewAs,
-      setViewAs,
-      selection,
-      setSelection,
-      changeClientStatus,
-      getContextMenuItems,
-      activeClients,
-      hasNextPage,
-      itemCount,
-      fetchNextClients,
-    } = oauthStore;
+export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
+  const {
+    viewAs,
+    setViewAs,
+    selection,
+    setSelection,
+    changeClientStatus,
+    getContextMenuItems,
+    activeClients,
+    hasNextPage,
+    itemCount,
+    fetchNextClients,
+  } = oauthStore;
 
-    return {
-      viewAs,
-      setViewAs,
-      changeClientStatus,
-      selection,
-      setSelection,
-      activeClients,
-      getContextMenuItems,
-      hasNextPage,
-      itemCount,
-      fetchNextClients,
-    };
-  }
-)(observer(RowView));
+  return {
+    viewAs,
+    setViewAs,
+    changeClientStatus,
+    selection,
+    setSelection,
+    activeClients,
+    getContextMenuItems,
+    hasNextPage,
+    itemCount,
+    fetchNextClients,
+  };
+})(observer(RowView));

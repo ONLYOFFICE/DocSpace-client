@@ -8,19 +8,7 @@ import {
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
-// @ts-ignore
-import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
-import { IClientProps } from "@docspace/shared/utils/oauth/interfaces";
-
-interface RevokeDialogProps {
-  visible: boolean;
-
-  onClose: () => void;
-  selection: string[];
-  bufferSelection: IClientProps;
-  onRevoke: (value: string[]) => Promise<void>;
-  currentDeviceType: DeviceUnionType;
-}
+import { RevokeDialogProps } from "../AuthorizedApps.types";
 
 const RevokeDialog = ({
   visible,
@@ -57,7 +45,10 @@ const RevokeDialog = ({
   );
 
   const onRevokeAction = async () => {
+    if (isRequestRunning) return;
+
     setIsRequestRunning(true);
+
     if (isGroup) {
       await onRevoke(selection);
     } else {

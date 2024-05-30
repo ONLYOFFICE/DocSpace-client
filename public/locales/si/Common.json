@@ -350,7 +350,7 @@
   "Sending": "යැවෙමින්...",
   "SendRequest": "ඉල්ලීම යවන්න",
   "Sessions": "වාර",
-  "SetDiskSpaceQuota": "මෙම DocSpace සඳහා තැටියේ උපරිම ඉඩ පෙන්වීමට ආචයන සලාකය සකසන්න.",
+  "SetDiskSpaceQuota": "මෙම {{portalName}} සඳහා තැටියේ උපරිම ඉඩ පෙන්වීමට ආචයන සලාකය සකසන්න.",
   "SetQuotaStorageLimit": "ආචයන සීමාව දැක්වීමට සලාකය සකසන්න.",
   "Settings": "සැකසුම්",
   "SettingsGeneral": "සාමාන්‍ය",

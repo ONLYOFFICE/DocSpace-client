@@ -362,7 +362,7 @@
   "Sending": "Sending...",
   "SendRequest": "Send request",
   "Sessions": "Sessions",
-  "SetDiskSpaceQuota": "Set storage quota to define the maximum disk space for this DocSpace.",
+  "SetDiskSpaceQuota": "Set storage quota to define the maximum disk space for this {{portalName}}.",
   "SetQuotaStorageLimit": "Set quota to define storage limit.",
   "Settings": "Settings",
   "SettingsGeneral": "General",

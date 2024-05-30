@@ -351,7 +351,7 @@
   "Sending": "Đang gửi...",
   "SendRequest": "Gửi yêu cầu",
   "Sessions": "Phiên",
-  "SetDiskSpaceQuota": "Đặt hạn mức lưu trữ để xác định dung lượng ổ đĩa tối đa cho DocSpace này.",
+  "SetDiskSpaceQuota": "Đặt hạn mức lưu trữ để xác định dung lượng ổ đĩa tối đa cho {{portalName}} này.",
   "SetQuotaStorageLimit": "Đặt hạn mức để xác định giới hạn lưu trữ.",
   "Settings": "Cài đặt",
   "SettingsGeneral": "Cài đặt chung",

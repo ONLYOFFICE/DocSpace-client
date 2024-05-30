@@ -351,7 +351,7 @@
   "Sending": "Senden...",
   "SendRequest": "Anfrage senden",
   "Sessions": "Sitzungen",
-  "SetDiskSpaceQuota": "Legen Sie die Speicherquote fest, um den maximalen Speicherplatz für diesen DocSpace zu definieren.",
+  "SetDiskSpaceQuota": "Legen Sie die Speicherquote fest, um den maximalen Speicherplatz für diesen {{portalName}} zu definieren.",
   "SetQuotaStorageLimit": "Legen Sie die Quota fest, um den Speicherplatz zu definieren.",
   "Settings": "Einstellungen",
   "SettingsGeneral": "Allgemein",

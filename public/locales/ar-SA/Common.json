@@ -350,7 +350,7 @@
   "Sending": "جارٍ الإرسال...",
   "SendRequest": "أرسل الطلب",
   "Sessions": "الجلسات",
-  "SetDiskSpaceQuota": "قم بتعيين حصة التخزين لتحديد الحد الأقصى لمساحة القرص لـ DocSpace.",
+  "SetDiskSpaceQuota": "قم بتعيين حصة التخزين لتحديد الحد الأقصى لمساحة القرص لـ {{portalName}}.",
   "SetQuotaStorageLimit": "قم بتعيين الحصة لتحديد حد التخزين.",
   "Settings": "الإعدادات",
   "SettingsGeneral": "عام",

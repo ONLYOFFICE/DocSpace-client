@@ -351,7 +351,7 @@
   "Sending": "Invio in corso...",
   "SendRequest": "‎Invia richiesta‎",
   "Sessions": "Sessioni",
-  "SetDiskSpaceQuota": "Imposta la quota di archiviazione per definire lo spazio su disco massimo per questo DocSpace.",
+  "SetDiskSpaceQuota": "Imposta la quota di archiviazione per definire lo spazio su disco massimo per questo {{portalName}}.",
   "SetQuotaStorageLimit": "Imposta la quota per definire il limite di archiviazione.",
   "Settings": "Impostazioni",
   "SettingsGeneral": "Generale",

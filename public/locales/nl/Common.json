@@ -351,7 +351,7 @@
   "Sending": "Verzenden...",
   "SendRequest": "Stuur verzoek",
   "Sessions": "Sessies",
-  "SetDiskSpaceQuota": "Stel opslagquota in om de maximale schijfruimte voor deze DocSpace te bepalen.",
+  "SetDiskSpaceQuota": "Stel opslagquota in om de maximale schijfruimte voor deze {{portalName}} te bepalen.",
   "SetQuotaStorageLimit": "Stel quota in om de opslaglimiet te bepalen.",
   "Settings": "Instellingen",
   "SettingsGeneral": "Algemeen",

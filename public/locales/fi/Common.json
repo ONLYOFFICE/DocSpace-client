@@ -351,7 +351,7 @@
   "Sending": "Lähetetään...",
   "SendRequest": "Lähetä pyyntö",
   "Sessions": "Istunnot",
-  "SetDiskSpaceQuota": "Aseta muistikiintiö määrittääksesi maksimilevytilan tälle DocSpacelle.",
+  "SetDiskSpaceQuota": "Aseta muistikiintiö määrittääksesi maksimilevytilan tälle {{portalName}}.",
   "SetQuotaStorageLimit": "Aseta kiintiö määrittääksesi muistin rajan.",
   "Settings": "Asetukset",
   "SettingsGeneral": "Yleistä",

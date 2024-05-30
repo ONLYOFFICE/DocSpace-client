@@ -351,7 +351,7 @@
   "Sending": "Enviando...",
   "SendRequest": "Enviar solicitud",
   "Sessions": "Sesiones",
-  "SetDiskSpaceQuota": "Establezca una cuota de almacenamiento para definir el espacio máximo en disco para este DocSpace.",
+  "SetDiskSpaceQuota": "Establezca una cuota de almacenamiento para definir el espacio máximo en disco para este {{portalName}}.",
   "SetQuotaStorageLimit": "Establezca una cuota para definir el límite de almacenamiento.",
   "Settings": "Configuración",
   "SettingsGeneral": "General",

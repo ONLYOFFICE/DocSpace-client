@@ -351,7 +351,7 @@
   "Sending": "Sūta...",
   "SendRequest": "Sūtīt pieprasījumu",
   "Sessions": "Sesijas",
-  "SetDiskSpaceQuota": "Iestatiet krātuves kvotu, lai definētu maksimālo vietu šajā DocSpace diskā.",
+  "SetDiskSpaceQuota": "Iestatiet krātuves kvotu, lai definētu maksimālo vietu šajā {{portalName}} diskā.",
   "SetQuotaStorageLimit": "Iestatiet kvotu, lai definētu krātuves ierobežojumu.",
   "Settings": "Iestatījumi",
   "SettingsGeneral": "Vispārīgi",

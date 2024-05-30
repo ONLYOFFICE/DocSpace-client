@@ -351,7 +351,7 @@
   "Sending": "Pošiljanje...",
   "SendRequest": "Pošlji zahtevo",
   "Sessions": "Seje",
-  "SetDiskSpaceQuota": "Nastavite kvoto shranjevanja, da določite največji prostor na disku za ta DocSpace.",
+  "SetDiskSpaceQuota": "Nastavite kvoto shranjevanja, da določite največji prostor na disku za ta {{portalName}}.",
   "SetQuotaStorageLimit": "Nastavite kvoto, da določite omejitev prostora za shranjevanje.",
   "Settings": "Nastavitve",
   "SettingsGeneral": "Splošno",

@@ -351,7 +351,7 @@
   "Sending": "În curs de trimitere...",
   "SendRequest": "Trimite solicitarea",
   "Sessions": "Sesiuni",
-  "SetDiskSpaceQuota": "Setați cota de stocare pentru a defini spațiul maxim de stocare pentru acest spațiu DocSpace.",
+  "SetDiskSpaceQuota": "Setați cota de stocare pentru a defini spațiul maxim de stocare pentru acest spațiu {{portalName}}.",
   "SetQuotaStorageLimit": "Serați cota pentru a defini limita spațiului de stocare.",
   "Settings": "Setări",
   "SettingsGeneral": "General",

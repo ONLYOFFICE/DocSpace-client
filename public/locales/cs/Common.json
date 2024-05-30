@@ -351,7 +351,7 @@
   "Sending": "Odeslání...",
   "SendRequest": "Odeslat požadavek",
   "Sessions": "Relace",
-  "SetDiskSpaceQuota": "Nastavte kvótu úložiště a určete maximální prostor na disku pro tento prostor DocSpace.",
+  "SetDiskSpaceQuota": "Nastavte kvótu úložiště a určete maximální prostor na disku pro tento prostor {{portalName}}.",
   "SetQuotaStorageLimit": "Nastavení kvóty pro definování limitu úložiště.",
   "Settings": "Nastavení",
   "SettingsGeneral": "Obecné",

@@ -351,7 +351,7 @@
   "Sending": "Göndərilir...",
   "SendRequest": "Sorğunu göndər",
   "Sessions": "Sessiyalar",
-  "SetDiskSpaceQuota": "Bu DocSpace üçün maksimum disk yerini müəyyən etmək üçün yaddaş kvotasını təyin edin.",
+  "SetDiskSpaceQuota": "Bu {{portalName}} üçün maksimum disk yerini müəyyən etmək üçün yaddaş kvotasını təyin edin.",
   "SetQuotaStorageLimit": "Yaddaş limitini müəyyənləşdirmək üçün kvota təyin edin.",
   "Settings": "Ayarlar",
   "SettingsGeneral": "Ümumi",

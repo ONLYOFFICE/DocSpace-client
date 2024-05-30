@@ -18,7 +18,7 @@
   "LoginRegistryButton": "Katıl",
   "PassworResetTitle": "Şimdi yeni şifre oluşturabilirsiniz.",
   "PhoneSubtitle": "İki aşamalı doğrulama ekstra güvenliği sağlamak için etkinleştirilmiştir. {{portalName}}'te çalışmaya devam etmek için mobil telefon numaranızı giriniz. Mobil telefon numarası ülke koduyla girilmelidir.",
-  "PortalContinueTitle": "Lütfen DocSpace'inizi yeniden etkinleştirmek istediğinizi onaylayın.",
+  "PortalContinueTitle": "Lütfen {{portalName}}'inizi yeniden etkinleştirmek istediğinizi onaylayın.",
   "PortalDeactivateTitle": "Lütfen DocSpace'inizi devre dışı bırakmak istediğinizi onaylayın.",
   "PortalRemoveTitle": "Lütfen DocSpace'inizi silmek istediğinizi onaylayın.",
   "Reactivate": "Yeniden etkinleştir",

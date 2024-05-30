@@ -18,7 +18,7 @@
   "LoginRegistryButton": "Dołącz",
   "PassworResetTitle": "Teraz możesz utworzyć nowe hasło.",
   "PhoneSubtitle": "Uwierzytelnianie dwuskładnikowe umożliwia udostępnienie dodatkowego zabezpieczenia. Wpisz numer telefonu komórkowego, aby kontynuować pracę w {{portalName}}. Numer telefonu komórkowego należy wprowadzić przy użyciu międzynarodowego formatu z kodem kraju.",
-  "PortalContinueTitle": "Potwierdź, że chcesz reaktywować DocSpace.",
+  "PortalContinueTitle": "Potwierdź, że chcesz reaktywować {{portalName}}.",
   "PortalDeactivateTitle": "Potwierdź, że chcesz dezaktywować DocSpace.",
   "PortalRemoveTitle": "Potwierdź, że chcesz usunąć DocSpace.",
   "Reactivate": "Reaktywuj",

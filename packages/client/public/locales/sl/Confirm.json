@@ -18,7 +18,7 @@
   "LoginRegistryButton": "Pridruži se",
   "PassworResetTitle": "Zdaj lahko ustvarite novo geslo.",
   "PhoneSubtitle": "Dvofaktorska avtentikacija je omogočena za zagotavljanje dodatne varnosti. Vnesite svojo telefonsko številko za nadaljevanje delo v {{portalName}}. Vnesena mora biti mobilna številka z mednarodnim formatom s kodo države.",
-  "PortalContinueTitle": "Potrdi, če želiš znova aktivirati svoj DocSpace.",
+  "PortalContinueTitle": "Potrdi, če želiš znova aktivirati svoj {{portalName}}.",
   "PortalDeactivateTitle": "Potrdi, če želiš deaktivirati svoj DocSpace.",
   "PortalRemoveTitle": "Potrdi, če želiš izbrisati svoj DocSpace.",
   "Reactivate": "Ponovno aktiviraj",

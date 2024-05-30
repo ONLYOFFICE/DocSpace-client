@@ -18,7 +18,7 @@
   "LoginRegistryButton": "Qoşulun",
   "PassworResetTitle": "İndi yeni şifrə yarada bilərsiniz.",
   "PhoneSubtitle": "Əlavə təhlükəsizliyini təmin etmək üçün iki faktorlu autentifikasiya işə salınıb. {{portalName}} işə davam etmək üçün mobil telefon nömrənizi daxil edin. Mobil telefon nömrəsi ölkə kodu ilə beynəlxalq formatda daxil edilməlidir.",
-  "PortalContinueTitle": "Lütfən, DocSpace-i yenidən aktivləşdirmək istədiyinizi təsdiqləyin.",
+  "PortalContinueTitle": "Lütfən, {{portalName}}-i yenidən aktivləşdirmək istədiyinizi təsdiqləyin.",
   "PortalDeactivateTitle": "Lütfən, DocSpace-i deaktiv etmək istədiyinizi təsdiqləyin.",
   "PortalRemoveTitle": "Lütfən, DocSpace-i silmək istədiyinizi təsdiqləyin.",
   "Reactivate": "Yenidən aktivləşdirin",

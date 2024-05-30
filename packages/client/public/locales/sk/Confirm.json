@@ -18,7 +18,7 @@
   "LoginRegistryButton": "Pripojiť",
   "PassworResetTitle": "Teraz si môžete vytvoriť nové heslo.",
   "PhoneSubtitle": "Dvojfaktorové overenie je povolené na zabezpečenie dodatočnej bezpečnosti. Ak chcete pokračovať v práci v {{portalName}}, zadajte číslo svojho mobilného telefónu. Číslo mobilného telefónu musí byť zadané v medzinárodnom formáte s kódom krajiny.",
-  "PortalContinueTitle": "Potvrďte, že chcete znova aktivovať svoj DocSpace.",
+  "PortalContinueTitle": "Potvrďte, že chcete znova aktivovať svoj {{portalName}}.",
   "PortalDeactivateTitle": "Potvrďte, že chcete deaktivovať svoj DocSpace.",
   "PortalRemoveTitle": "Potvrďte, že chcete vymazať svoj DocSpace.",
   "Reactivate": "Znova aktivovať",

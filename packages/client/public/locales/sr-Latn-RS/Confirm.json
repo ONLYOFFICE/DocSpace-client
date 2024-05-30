@@ -18,7 +18,7 @@
   "LoginRegistryButton": "Pridruži se",
   "PassworResetTitle": "Sada možete kreirati novu lozinku.",
   "PhoneSubtitle": "Dvofaktorska autentifikacija je omogućena radi dodatne sigurnosti. Unesite svoj broj mobilnog telefona kako biste nastavili sa radom u {{portalName}}-u. Broj mobilnog telefona mora biti unet u međunarodnom formatu sa pozivnim brojem zemlje.",
-  "PortalContinueTitle": "Potvrdite da želite da ponovo aktivirate svoj DocSpace.",
+  "PortalContinueTitle": "Potvrdite da želite da ponovo aktivirate svoj {{portalName}}.",
   "PortalDeactivateTitle": "Potvrdite da želite da deaktivirate svoj DocSpace.",
   "PortalRemoveTitle": "Potvrdite da želite da obrišete svoj DocSpace.",
   "Reactivate": "Ponovo aktiviraj",

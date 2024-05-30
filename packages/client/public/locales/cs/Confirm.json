@@ -18,7 +18,7 @@
   "LoginRegistryButton": "Připojit se",
   "PassworResetTitle": "Nyní si můžete vytvořit nové heslo.",
   "PhoneSubtitle": "Dvoufázové ověření je povoleno k zajištění ještě větší bezpečnosti. Zadejte Vaše telefonní číslo, abyste mohli pokračovat v práci na {{portalName}}. Číslo mobilního telefonu musí být zadáno v mezinárodním formátu včetně kódu země.",
-  "PortalContinueTitle": "Potvrďte prosím, že chcete znovu aktivovat svůj prostor DocSpace.",
+  "PortalContinueTitle": "Potvrďte prosím, že chcete znovu aktivovat svůj prostor {{portalName}}.",
   "PortalDeactivateTitle": "Potvrďte prosím, že chcete deaktivovat svůj DocSpace.",
   "PortalRemoveTitle": "Potvrďte, že chcete odstranit svůj prostor DocSpace.",
   "Reactivate": "Znovu aktivovat",

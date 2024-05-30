@@ -18,7 +18,7 @@
   "LoginRegistryButton": "Beitreten",
   "PassworResetTitle": "Jetzt können Sie ein neues Kennwort erstellen.",
   "PhoneSubtitle": "Die Zwei-Faktor-Authentifizierung ist für die zusätzliche Sicherheit. Geben Sie eine neue Telefonnummer ein, um die Arbeit auf dem {{portalName}} fortzusetzen. Die Mobiltelefonnummer muss im internationalen Format mit dem Ländercode eingegeben werden.",
-  "PortalContinueTitle": "Veuillez confirmer que vous souhaitez réactiver votre DocSpace.",
+  "PortalContinueTitle": "Veuillez confirmer que vous souhaitez réactiver votre {{portalName}}.",
   "PortalDeactivateTitle": "Bitte bestätigen Sie, dass Sie Ihren DocSpace deaktivieren möchten.",
   "PortalRemoveTitle": "Bitte bestätigen Sie, dass Sie Ihren DocSpace löschen möchten.",
   "Reactivate": "Wieder aktivieren",

@@ -18,7 +18,7 @@
   "LoginRegistryButton": "انضم",
   "PassworResetTitle": "الآن يمكنك إنشاء كلمة مرور جديدة.",
   "PhoneSubtitle": "تم تمكين المصادقة ذات العاملين لتوفير أمان إضافي. أدخل رقم هاتفك المحمول لمتابعة العمل في {{portalName}}. يجب إدخال رقم الهاتف المحمول باستخدام تنسيق دولي مع رمز البلد.",
-  "PortalContinueTitle": "يرجى تأكيد رغبتك في إعادة تنشيط DocSpace الخاص بك.",
+  "PortalContinueTitle": "يرجى تأكيد رغبتك في إعادة تنشيط {{portalName}} الخاص بك.",
   "PortalDeactivateTitle": "يرجى تأكيد رغبتك في إلغاء تنشيط DocSpace الخاص بك.",
   "PortalRemoveTitle": "يرجى تأكيد رغبتك في حذف DocSpace الخاص بك.",
   "Reactivate": "اعادة تفعيل",

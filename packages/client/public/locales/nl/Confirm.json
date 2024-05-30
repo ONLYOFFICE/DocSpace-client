@@ -18,7 +18,7 @@
   "LoginRegistryButton": "Lid worden van",
   "PassworResetTitle": "Nu kunt u een nieuw wachtwoord aanmaken.",
   "PhoneSubtitle": "De twee-factor authenticatie is ingeschakeld om extra beveiliging te bieden. Voer uw mobiele telefoonnummer in om door te gaan met werken in de {{portalName}}. Het mobiele telefoonnummer moet ingevoerd worden in een internationaal formaat, met landcode.",
-  "PortalContinueTitle": "Bevestig dat u uw DocSpace opnieuw wilt activeren.",
+  "PortalContinueTitle": "Bevestig dat u uw {{portalName}} opnieuw wilt activeren.",
   "PortalDeactivateTitle": "Bevestig dat u uw DocSpace wilt deactiveren.",
   "PortalRemoveTitle": "Bevestig dat u uw DocSpace wilt verwijderen.",
   "Reactivate": "Opnieuw activeren",

@@ -7,5 +7,5 @@
   "EnableUser": "Benutzer freigeben",
   "EnableUserDescription": "Wenn Sie diesen Benutzer aktivieren, kann er sich wieder bei DocSpace anmelden und auf seine Dokumente und Daten zugreifen.",
   "EnableUsers": "Benutzer freischalten",
-  "EnableUsersDescription": "Wenn Sie diese Benutzer freigeben, können sie sich wieder in DocSpace einloggen und auf ihre Dokumente und Daten zugreifen."
+  "EnableUsersDescription": "Wenn Sie diese Benutzer freigeben, können sie sich wieder in {{portalName}} einloggen und auf ihre Dokumente und Daten zugreifen."
 }

@@ -7,5 +7,5 @@
   "EnableUser": "Aktivovať používateľa",
   "EnableUserDescription": "Ak tohto používateľa aktivujete, bude sa môcť opäť prihlásiť do DocSpace a bude mať prístup k svojim dokumentom a údajom.",
   "EnableUsers": "Aktivovať používateľov",
-  "EnableUsersDescription": "Ak aktivujete týchto používateľov, budú sa môcť opäť prihlásiť do DocSpace a získajú prístup k svojim dokumentom a údajom."
+  "EnableUsersDescription": "Ak aktivujete týchto používateľov, budú sa môcť opäť prihlásiť do {{portalName}} a získajú prístup k svojim dokumentom a údajom."
 }

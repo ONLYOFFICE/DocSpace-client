@@ -7,5 +7,5 @@
   "EnableUser": "Gebruiker inschakelen",
   "EnableUserDescription": "Als u deze gebruiker inschakelt, kan hij/zij zich weer aanmelden bij DocSpace en toegang krijgen tot zijn/haar documenten en gegevens.",
   "EnableUsers": "Gebruikers inschakelen",
-  "EnableUsersDescription": "Als u deze gebruikers inschakelt, kunnen zij zich weer aanmelden bij DocSpace en toegang krijgen tot hun documenten en gegevens."
+  "EnableUsersDescription": "Als u deze gebruikers inschakelt, kunnen zij zich weer aanmelden bij {{portalName}} en toegang krijgen tot hun documenten en gegevens."
 }

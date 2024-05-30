@@ -7,5 +7,5 @@
   "EnableUser": "Activer l'utilisateur",
   "EnableUserDescription": "Si vous activez cet utilisateur, il pourra à nouveau se connecter à DocSpace et accéder à ses documents et données.",
   "EnableUsers": "Activer les utilisateurs",
-  "EnableUsersDescription": "Si vous activez ces utilisateurs, ils pourront à nouveau se connecter à DocSpace et accéder à leurs documents et données."
+  "EnableUsersDescription": "Si vous activez ces utilisateurs, ils pourront à nouveau se connecter à {{portalName}} et accéder à leurs documents et données."
 }

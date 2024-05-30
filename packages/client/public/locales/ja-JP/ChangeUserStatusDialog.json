@@ -7,5 +7,5 @@
   "EnableUser": "ユーザーを有効にするActivare utilizator",
   "EnableUserDescription": "このユーザーを有効にすると、再度DocSpaceにログインし、文書やデータにアクセスできるようになります。",
   "EnableUsers": "ユーザーを有効にする",
-  "EnableUsersDescription": "このユーザーを有効にすると、再度DocSpaceにログインし、文書やデータにアクセスできるようになります。"
+  "EnableUsersDescription": "このユーザーを有効にすると、再度{{portalName}}にログインし、文書やデータにアクセスできるようになります。"
 }

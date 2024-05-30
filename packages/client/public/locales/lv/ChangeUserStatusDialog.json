@@ -7,5 +7,5 @@
   "EnableUser": "Iespējot lietotāju",
   "EnableUserDescription": "Ja iespējosiet šo lietotāju, viņš varēs vēlreiz pieteikties DocSpace un piekļūt saviem dokumentiem un datiem.",
   "EnableUsers": "Iespējot lietotājus",
-  "EnableUsersDescription": "Ja iespējosiet šos lietotājus, viņi varēs vēlreiz pieteikties DocSpace un piekļūt saviem dokumentiem un datiem."
+  "EnableUsersDescription": "Ja iespējosiet šos lietotājus, viņi varēs vēlreiz pieteikties {{portalName}} un piekļūt saviem dokumentiem un datiem."
 }

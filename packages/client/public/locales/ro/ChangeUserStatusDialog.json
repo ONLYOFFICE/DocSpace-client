@@ -7,5 +7,5 @@
   "EnableUser": "Activare utilizator",
   "EnableUserDescription": "Dacă activați acest utilizator, acesta se va putea conecta din nou la spațiu DocSpace și va putea accesa documentele și datele.",
   "EnableUsers": "Activare utilizatori",
-  "EnableUsersDescription": "Dacă activați acest utilizator, acesta se va putea conecta din nou la spațiu DocSpace și va putea accesa documentele și datele."
+  "EnableUsersDescription": "Dacă activați acest utilizator, acesta se va putea conecta din nou la spațiu {{portalName}} și va putea accesa documentele și datele."
 }

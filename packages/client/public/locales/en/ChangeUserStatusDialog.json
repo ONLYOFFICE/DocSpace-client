@@ -7,5 +7,5 @@
   "EnableUser": "Enable user",
   "EnableUserDescription": "If you enable this user, they will be able to log in to DocSpace again and access their documents and data.",
   "EnableUsers": "Enable users",
-  "EnableUsersDescription": "If you enable these users, they will be able to log in to DocSpace again and access their documents and data."
+  "EnableUsersDescription": "If you enable these users, they will be able to log in to {{portalName}} again and access their documents and data."
 }

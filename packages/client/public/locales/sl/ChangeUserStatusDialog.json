@@ -7,5 +7,5 @@
   "EnableUser": "Omogoči uporabnika",
   "EnableUserDescription": "Če omogočite tega uporabnika, se bo lahko ponovno prijavil v DocSpace in dostopal do svojih dokumentov in podatkov.",
   "EnableUsers": "Omogoči uporabnike",
-  "EnableUsersDescription": "Če omogočite te uporabnike, se bodo lahko znova prijavili v DocSpace in dostopali do svojih dokumentov in podatkov."
+  "EnableUsersDescription": "Če omogočite te uporabnike, se bodo lahko znova prijavili v {{portalName}} in dostopali do svojih dokumentov in podatkov."
 }

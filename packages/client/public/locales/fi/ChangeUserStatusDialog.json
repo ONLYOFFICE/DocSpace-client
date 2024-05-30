@@ -4,6 +4,5 @@
   "DisableUsers": "Ota käyttäjät pois käytöstä ",
   "EnableUser": "Ota käyttäjä takaisin käyttöön",
   "EnableUserDescription": "Jos otat tämän käyttäjän takaisin käyttöön, hän pystyy kirjautumaan jälleen DocSpaceen ja pääsee käsiksi asiakirjoihin ja tietoihin.",
-  "EnableUsers": "Ota käyttäjät takaisin käyttöön",
-  "EnableUsersDescription": "Jos otat nämä käyttäjät takaisin käyttöön, he pystyvät jälleen kirjautumaan DocSpaceen ja pääsevät käsiksi asiakirjoihin ja tietoihin. "
+  "EnableUsers": "Ota käyttäjät takaisin käyttöön"
 }

@@ -3,6 +3,6 @@
   "ChangeUserTypeHeader": "Schimbați tipul utilizatorului",
   "ChangeUserTypeMessage": "Utilizatorii de tipul '{{ firstType }}' vor fi transferați la tipul '{{ secondType }}'.",
   "ChangeUserTypeMessageMulti": "Utilizatorii pe care le-aţi selectat vor fi trecuţi la categoria '{{ secondType }}'.",
-  "ChangeUserTypeMessageWarning": "Nu puteți schimba tipul administratorului de DocSpace și nici al dumneavoastră.",
+  "ChangeUserTypeMessageWarning": "Nu puteți schimba tipul administratorului de {{portalName}} și nici al dumneavoastră.",
   "SuccessChangeUserType": "Tipul utilizatorului a fost modificat cu succes"
 }

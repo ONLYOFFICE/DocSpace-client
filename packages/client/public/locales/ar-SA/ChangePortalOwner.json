@@ -6,7 +6,7 @@
   "ChangeUser": "تغيير المستخدم",
   "DeactivateOrDeletePortal": "قم بإلغاء تنشيط {{portalName}} أو حذفه",
   "DoTheSame": "افعل نفس الشيء مثل المسؤولين",
-  "ManagePortal": "إدارة تكوين DocSpace",
+  "ManagePortal": "إدارة تكوين {{portalName}}",
   "ManageUser": "إدارة حسابات المستخدمين",
   "NewPortalOwner": "مالك DocSpace جديد",
   "PortalOwnerCan": "يمكن لمالك DocSpace:",

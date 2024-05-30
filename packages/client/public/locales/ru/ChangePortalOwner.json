@@ -6,7 +6,7 @@
   "ChangeUser": "Сменить пользователя",
   "DeactivateOrDeletePortal": "Отключить или удалить {{portalName}}",
   "DoTheSame": "Делайте то же, что и администраторы",
-  "ManagePortal": "Управлять настройками DocSpace",
+  "ManagePortal": "Управлять настройками {{portalName}}",
   "ManageUser": "Управлять учетными записями пользователей",
   "NewPortalOwner": "Новый владелец DocSpace",
   "PortalOwnerCan": "Владелец DocSpace может:",

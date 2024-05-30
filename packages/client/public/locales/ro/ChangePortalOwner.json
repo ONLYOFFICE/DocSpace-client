@@ -6,7 +6,7 @@
   "ChangeUser": "Schimbare utilizator",
   "DeactivateOrDeletePortal": "Dezactivare sau ştergere {{portalName}} ",
   "DoTheSame": "Faceţi aceleaşi lucruri ca și administratori",
-  "ManagePortal": "Gestionați configurarea spațiului DocSpace",
+  "ManagePortal": "Gestionați configurarea spațiului {{portalName}}",
   "ManageUser": "Gestionați conturile de utilizator",
   "NewPortalOwner": "Proprietarul nou al DocSpace",
   "PortalOwnerCan": "Proprietarul DocSpace poate:",

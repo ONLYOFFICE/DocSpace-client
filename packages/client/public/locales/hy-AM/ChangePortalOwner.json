@@ -6,7 +6,7 @@
   "ChangeUser": "Փոխել օգտվողին",
   "DeactivateOrDeletePortal": "Ապագործունացնել կամ ջնջել {{portalName}}-ը",
   "DoTheSame": "Արեք նույնը, ինչ ադմինիստրատորները",
-  "ManagePortal": "Կառավարել DocSpace-ի կազմաձևումը",
+  "ManagePortal": "Կառավարել {{portalName}}-ի կազմաձևումը",
   "ManageUser": "Կառավարել օգտվողների հաշիվները",
   "NewPortalOwner": "DocSpace-ի նոր սեփականատեր",
   "PortalOwnerCan": "DocSpace-ի տնօրինողը կարող է",

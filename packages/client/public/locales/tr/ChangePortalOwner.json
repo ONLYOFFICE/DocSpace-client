@@ -6,7 +6,7 @@
   "ChangeUser": "Kullanıcıyı değiştir",
   "DeactivateOrDeletePortal": "{{portalName}}'i devre dışı bırak veya sil",
   "DoTheSame": "Yöneticilerle aynı şeyi yap",
-  "ManagePortal": "DocSpace yapılandırmasını yönet",
+  "ManagePortal": "{{portalName}} yapılandırmasını yönet",
   "ManageUser": "Kullanıcı hesaplarını yönet",
   "NewPortalOwner": "Yeni DocSpace sahibi",
   "PortalOwnerCan": "DocSpace sahibi şunları yapabilir:",

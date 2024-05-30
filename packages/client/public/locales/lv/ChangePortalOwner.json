@@ -6,7 +6,7 @@
   "ChangeUser": "Mainīt lietotāju",
   "DeactivateOrDeletePortal": "Deaktivizēt vai izdzēst {{portalName}}",
   "DoTheSame": "Dariet to pašu, ko administratori",
-  "ManagePortal": "Pārvaldīt DocSpace konfigurāciju",
+  "ManagePortal": "Pārvaldīt {{portalName}} konfigurāciju",
   "ManageUser": "Pārvaldīt lietotāju kontus",
   "NewPortalOwner": "Jauns DocSpace īpašnieks",
   "PortalOwnerCan": "DocSpace īpašnieks var:",

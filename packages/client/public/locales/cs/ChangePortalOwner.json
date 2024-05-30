@@ -6,7 +6,7 @@
   "ChangeUser": "Změna uživatele",
   "DeactivateOrDeletePortal": "Deaktivace nebo odstranění {{portalName}}",
   "DoTheSame": "Postupujte stejně jako správci",
-  "ManagePortal": "Spravovat konfiguraci DocSpace",
+  "ManagePortal": "Spravovat konfiguraci {{portalName}}",
   "ManageUser": "Spravovat uživatelské účty",
   "NewPortalOwner": "Nový majitel DocSpace",
   "PortalOwnerCan": "Majitel DocSpace může:",

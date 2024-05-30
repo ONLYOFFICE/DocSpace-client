@@ -6,7 +6,7 @@
   "ChangeUser": "Thay đổi người dùng",
   "DeactivateOrDeletePortal": "Vô hiệu hóa hoặc xóa {{portalName}}",
   "DoTheSame": "Làm tương tự như quản trị viên",
-  "ManagePortal": "Quản lý cấu hình DocSpace",
+  "ManagePortal": "Quản lý cấu hình {{portalName}}",
   "ManageUser": "Quản lý tài khoản người dùng",
   "NewPortalOwner": "Chủ sở hữu DocSpace mới",
   "PortalOwnerCan": "Chủ sở hữu DocSpace có thể:",

@@ -36,6 +36,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import toLower from "lodash/toLower";
 import { TranslationType } from "SRC_DIR/types/spaces";
 import { parseDomain, validatePortalName } from "@docspace/shared/utils/common";
+import { PORTAL } from "@docspace/shared/constants";
 
 type TConfigurationSection = {
   t: TranslationType;
@@ -126,7 +127,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
           </Text>
         </div>
         <Text fontSize="12px" lineHeight="16px" fontWeight={400}>
-          {t("ConfigurationDescription")}
+          {t("ConfigurationDescription", { portalName: PORTAL })}
         </Text>
       </div>
       <div className="spaces-input-wrapper">

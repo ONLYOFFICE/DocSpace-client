@@ -1,6 +1,6 @@
 {
   "ChangeDomainDescription": "Zmiana nazwy domeny może spowodować awarię niektórych systemów. Po zmianie należy ponownie skonfigurować następujące parametry: e-mail, konto, parametry jabber.",
-  "ConfigurationDescription": "Aby zmienić ustawienia adresu, należy połączyć domenę ze swoim bieżącym adresem IP. Upewnij się, że masz dostęp do ustawień domeny, aby móc to zrobić. Po połączeniu domeny utwórz nazwę DocSpace. Możesz zmienić utworzoną nazwę DocSpace później z poziomu ustawień obszaru.",
+  "ConfigurationDescription": "Aby zmienić ustawienia adresu, należy połączyć domenę ze swoim bieżącym adresem IP. Upewnij się, że masz dostęp do ustawień domeny, aby móc to zrobić. Po połączeniu domeny utwórz nazwę {{portalName}}. Możesz zmienić utworzoną nazwę {{portalName}} później z poziomu ustawień obszaru.",
   "ConfigurationHeader": "Konfiguracja bieżącego obszaru",
   "CreateSpaceDescription": "Domena została pomyślnie połączona z Twoim adresem IP. Aby móc edytować ustawienia dresu obszaru, musisz skonfigurować przyszłą nazwę DocSpace",
   "CreatingDocspace": "Tworzenie nowego obszaru DocSpace",

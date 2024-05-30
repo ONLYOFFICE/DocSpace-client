@@ -1,6 +1,6 @@
 {
   "ChangeDomainDescription": "Das Ändern des Domainnamens kann zu Systemausfällen führen. Nach dem Ändern des Domainnamens müssen Sie die folgenden Einstellungen neu konfigurieren: E-Mail, Konto, Jabber-Parameter.",
-  "ConfigurationDescription": "Sie müssen Ihre Domain mit Ihrer aktuellen IP verbinden, um die Adresseinstellungen zu ändern. Stellen Sie bitte sicher, dass Sie Zugriff auf die Domain-Einstellungen haben, um dies tun zu können. Erstellen Sie nach dem Verbinden der Domain einen DocSpace-Namen. Sie können den erstellten DocSpace-Namen später über die Space-Einstellungen ändern.",
+  "ConfigurationDescription": "Sie müssen Ihre Domain mit Ihrer aktuellen IP verbinden, um die Adresseinstellungen zu ändern. Stellen Sie bitte sicher, dass Sie Zugriff auf die Domain-Einstellungen haben, um dies tun zu können. Erstellen Sie nach dem Verbinden der Domain einen {{portalName}}-Namen. Sie können den erstellten {{portalName}}-Namen später über die Space-Einstellungen ändern.",
   "ConfigurationHeader": "Konfiguration des aktuellen Space",
   "CreateSpaceDescription": "Sie haben Ihre Domain erfolgreich mit Ihrer IP-Adresse verbunden. Um die Space-Adresseinstellungen zu bearbeiten, müssen Sie den zukünftigen DocSpace-Namen festlegen",
   "CreatingDocspace": "Neuen DocSpace erstellen",

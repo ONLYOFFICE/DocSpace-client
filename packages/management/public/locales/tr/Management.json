@@ -1,6 +1,6 @@
 {
   "ChangeDomainDescription": "Alan adının değiştirilmesi bazı sistemlerin arızalanmasına neden olabilir. Alan adını değiştirdikten sonra posta, hesap, jabber parametreleri gibi ayarları yeniden yapılandırmanız gerekecektir.",
-  "ConfigurationDescription": "Adres ayarlarını değiştirmek için alan adınızı mevcut IP'nize bağlamanız gerekmektedir. Bunu yapabilmek için lütfen alan adı ayarlarına erişiminiz olduğundan emin olun. Alanı bağladıktan sonra bir DocSpace adı oluşturun. Oluşturulan DocSpace adını daha sonra alan ayarlarını kullanarak değiştirebilirsiniz.",
+  "ConfigurationDescription": "Adres ayarlarını değiştirmek için alan adınızı mevcut IP'nize bağlamanız gerekmektedir. Bunu yapabilmek için lütfen alan adı ayarlarına erişiminiz olduğundan emin olun. Alanı bağladıktan sonra bir {{portalName}} adı oluşturun. Oluşturulan {{portalName}} adını daha sonra alan ayarlarını kullanarak değiştirebilirsiniz.",
   "ConfigurationHeader": "Mevcut alan yapılandırması",
   "CreateSpaceDescription": "Alan adınızı IP adresinize başarıyla bağladınız. Alan adresi ayarlarını düzenlemek için gelecekteki DocSpace adını ayarlamanız gerekir",
   "CreatingDocspace": "Yeni DocSpace oluşturma",

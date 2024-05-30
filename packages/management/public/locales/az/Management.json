@@ -1,6 +1,6 @@
 {
   "ChangeDomainDescription": "Domen adının dəyişdirilməsi bəzi sistemlərin nasazlığına səbəb ola bilər. Domeni dəyişdirdikdən sonra aşağıdakı parametrləri yenidən konfiqurasiya etməlisiniz: poçt, hesab, jabber parametrləri.",
-  "ConfigurationDescription": "Ünvan parametrlərini dəyişmək üçün domeninizi mövcud IP-yə qoşmalısınız. Zəhmət olmasa, bunu etmək üçün, domen parametrlərinə girişiniz olduğundan əmin olun. Domeni birləşdirdikdən sonra DocSpace adını yaradın. Yaradılmış DocSpace adını daha sonra boşluq parametrlərindən istifadə edərək dəyişə bilərsiniz.",
+  "ConfigurationDescription": "Ünvan parametrlərini dəyişmək üçün domeninizi mövcud IP-yə qoşmalısınız. Zəhmət olmasa, bunu etmək üçün, domen parametrlərinə girişiniz olduğundan əmin olun. Domeni birləşdirdikdən sonra {{portalName}} adını yaradın. Yaradılmış {{portalName}} adını daha sonra boşluq parametrlərindən istifadə edərək dəyişə bilərsiniz.",
   "ConfigurationHeader": "Cari sahə konfiqurasiyası",
   "CreateSpaceDescription": "Domeninizi IP ünvanınızla uğurla əlaqələndirdiniz. Domen ünvanı parametrlərini redaktə etmək üçün gələcək DocSpace adını təyin etməlisiniz",
   "CreatingDocspace": "Yeni DocSpace yaradılır",

@@ -1,6 +1,6 @@
 {
   "ChangeDomainDescription": "ドメイン名を変更すると、システム障害が発生する場合があります。ドメイン名を変更した後、メール、アカウント、jabberパラメータの設定を再設定する必要があります。",
-  "ConfigurationDescription": "アドレス設定を変更するには、ドメインを現在のIPに接続する必要があります。ドメイン設定にアクセスできることを確認してください。ドメインを接続した後、DocSpace名を作成します。作成したDocSpace名は後でスペース設定で変更することができます。",
+  "ConfigurationDescription": "アドレス設定を変更するには、ドメインを現在のIPに接続する必要があります。ドメイン設定にアクセスできることを確認してください。ドメインを接続した後、{{portalName}}名を作成します。作成した{{portalName}}名は後でスペース設定で変更することができます。",
   "ConfigurationHeader": "現在のスペース設定 ",
   "CreateSpaceDescription": "ドメインとIPアドレスの接続が完了しました。スペースアドレスの設定を編集するには、将来のDocSpace名を設定する必要があります。",
   "CreatingDocspace": "新しいDocSpaceの作成",

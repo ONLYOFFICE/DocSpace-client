@@ -1,6 +1,6 @@
 {
   "ChangeDomainDescription": "Menjanje imena domena može prouzrokovati pad sistema. Nakon menjanja imena domena moraćete ponovo konfigurisati sledeća podešavanja: mail, nalog, jabber parametre.",
-  "ConfigurationDescription": "Morate povezati svoj domen sa vašom trenutnom IP adresom kako biste promenili podešavanja adrese. Molimo vas da se uverite da imate pristup postavkama domena kako biste to mogli da uradite. Nakon što povežete domen, kreirajte ime DocSpace-a. Kasnije možete promeniti kreirano ime DocSpace-a koristeći podešavanja prostora.",
+  "ConfigurationDescription": "Morate povezati svoj domen sa vašom trenutnom IP adresom kako biste promenili podešavanja adrese. Molimo vas da se uverite da imate pristup postavkama domena kako biste to mogli da uradite. Nakon što povežete domen, kreirajte ime {{portalName}}-a. Kasnije možete promeniti kreirano ime {{portalName}}-a koristeći podešavanja prostora.",
   "ConfigurationHeader": "Trenutna konfiguracija prostora",
   "CreateSpaceDescription": "Uspešno ste povezali svoj domen na vašu IP adresu. Da biste uredili podešavanja adrese prostora, potrebno je da postavite buduće ime DocSpace-a",
   "CreatingDocspace": "Kreiranje novog DocSpace-a",

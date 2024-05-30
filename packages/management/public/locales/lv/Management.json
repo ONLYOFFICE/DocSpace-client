@@ -1,6 +1,6 @@
 {
   "ChangeDomainDescription": "Domēna nosaukuma maiņa var izraisīt dažu sistēmu kļūmi. Pēc domēna nosaukuma maiņas jums būs jāpārkonfigurē šādi iestatījumi: pasts, konts, Jabber parametri.",
-  "ConfigurationDescription": "Lai mainītu adreses iestatījumus, domēns ir jāsavieno ar pašreizējo IP adresi. Pārliecinieties, ka jums ir piekļuve domēna iestatījumiem, lai to varētu izdarīt. Pēc domēna savienošanas izveidojiet DocSpace nosaukumu. Vēlāk varat mainīt izveidoto DocSpace nosaukumu, izmantojot telpas iestatījumus.",
+  "ConfigurationDescription": "Lai mainītu adreses iestatījumus, domēns ir jāsavieno ar pašreizējo IP adresi. Pārliecinieties, ka jums ir piekļuve domēna iestatījumiem, lai to varētu izdarīt. Pēc domēna savienošanas izveidojiet {{portalName}} nosaukumu. Vēlāk varat mainīt izveidoto {{portalName}} nosaukumu, izmantojot telpas iestatījumus.",
   "ConfigurationHeader": "Pašreizējā telpu konfigurācija",
   "CreateSpaceDescription": "Domēns ir veiksmīgi savienots ar IP adresi. Lai rediģētu telpas adreses iestatījumus, jums ir jāiestata turpmākais DocSpace nosaukums",
   "CreatingDocspace": "Jauna DocSpace izveide",

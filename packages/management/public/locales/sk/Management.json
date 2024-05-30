@@ -1,6 +1,6 @@
 {
   "ChangeDomainDescription": "Zmena názvu domény môže spôsobiť zlyhanie niektorých systémov. Po zmene názvu domény potrebujete znovu nakonfigurovať nasledujúce nastavenia: mail, účet, parametre jabber.",
-  "ConfigurationDescription": "Musíte pripojiť svoju doménu k aktuálnej IP adrese, aby ste mohli zmeniť nastavenia adresy. Uistite sa, že máte prístup k nastaveniam domény, aby ste mali možnosť to urobiť. Po pripojení domény vytvorte názov DocSpace. Vytvorený názov DocSpace môžete neskôr zmeniť pomocou nastavení priestoru.",
+  "ConfigurationDescription": "Musíte pripojiť svoju doménu k aktuálnej IP adrese, aby ste mohli zmeniť nastavenia adresy. Uistite sa, že máte prístup k nastaveniam domény, aby ste mali možnosť to urobiť. Po pripojení domény vytvorte názov {{portalName}}. Vytvorený názov {{portalName}} môžete neskôr zmeniť pomocou nastavení priestoru.",
   "ConfigurationHeader": "Aktuálna konfigurácia priestoru",
   "CreateSpaceDescription": "Úspešne ste pripojili doménu k vašej IP adrese. Ak chcete upraviť nastavenia adresy priestoru, musíte nastaviť budúce meno DocSpace",
   "CreatingDocspace": "Vytvorenie nového priestoru DocSpace",

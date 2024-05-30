@@ -1,6 +1,6 @@
 {
   "ChangeDomainDescription": "Als u de domeinnaam aanpast, kunnen sommige systemen niet meer werken. Na het aanpassen van de domeinnaam moet u de volgende instellingen opnieuw configureren: mail, account, jabber parameters.",
-  "ConfigurationDescription": "U moet uw domein verbinden met uw huidige IP om de adresinstellingen te wijzigen. Zorg ervoor dat u toegang hebt tot de domeininstellingen om dat te kunnen doen. Nadat u het domein hebt verbonden, maakt u een DocSpace naam. U kunt de gemaakte DocSpace naam later wijzigen met behulp van de ruimte instellingen.",
+  "ConfigurationDescription": "U moet uw domein verbinden met uw huidige IP om de adresinstellingen te wijzigen. Zorg ervoor dat u toegang hebt tot de domeininstellingen om dat te kunnen doen. Nadat u het domein hebt verbonden, maakt u een {{portalName}} naam. U kunt de gemaakte {{portalName}} naam later wijzigen met behulp van de ruimte instellingen.",
   "ConfigurationHeader": "Huidige ruimte configuratie",
   "CreateSpaceDescription": "U heeft met succes uw domein aan uw IP-adres gekoppeld. Om de ruimte adresinstellingen te bewerken, moet u de toekomstige DocSpace naam instellen",
   "CreatingDocspace": "Een nieuwe DocSpace aanmaken",

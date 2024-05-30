@@ -1,6 +1,6 @@
 {
   "ChangeDomainDescription": "La modifica del nome di dominio potrebbe causare qualche guasto al sistema. Dopo aver modificato il nome del dominio sarà necessario riconfigurare le seguenti impostazioni: parametri mail, account, jabber.",
-  "ConfigurationDescription": "Devi connettere il tuo dominio al tuo IP attuale per modificare le impostazioni dell'indirizzo. Assicurati di avere accesso alle impostazioni del dominio per poterlo fare. Dopo aver connesso il dominio, crea un nome DocSpace. È possibile modificare il nome DocSpace creato successivamente utilizzando le impostazioni dello spazio.",
+  "ConfigurationDescription": "Devi connettere il tuo dominio al tuo IP attuale per modificare le impostazioni dell'indirizzo. Assicurati di avere accesso alle impostazioni del dominio per poterlo fare. Dopo aver connesso il dominio, crea un nome {{portalName}}. È possibile modificare il nome {{portalName}} creato successivamente utilizzando le impostazioni dello spazio.",
   "ConfigurationHeader": "Configurazione dello spazio attuale",
   "CreateSpaceDescription": "Hai collegato con successo il tuo dominio al tuo indirizzo IP. Per modificare le impostazioni dell'indirizzo dello spazio è necessario impostare il futuro nome di DocSpace",
   "CreatingDocspace": "Creazione di un nuovo DocSpace",

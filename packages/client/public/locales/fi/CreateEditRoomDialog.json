@@ -13,7 +13,6 @@
   "MakeRoomPrivateDescription": "Kaikki tämän huoneen tiedostot salataan.",
   "MakeRoomPrivateLimitationsWarningDescription": "Tällä toiminnolla, voit kutsua vai olemassa olevia {{portalName}}-käyttäjiä. Huoneen luomisen jälkeen et voi muuttaa käyttäjien listaa.",
   "MakeRoomPrivateTitle": "Tee huoneesta yksityinen",
-  "PeopleSelectorInfo": "Vain huoneen pääkäyttäjä tai DocSpacen järjestelmänvalvoja voi olla huoneen omistaja",
   "PublicRoomBarDescription": "Tämä huone on linkin kautta avoin kaikille. Ulkoisilla käyttäjillä on ainoastaan tiedostojen katseluoikeudet.",
   "PublicRoomDescription": "Kutsu käyttäjiä ulkoisten linkkien kautta katselemaan asiakirjoja ilman rekisteröitymistä. Voit myös upottaa tämän huoneen mihin tahansa verkkokäyttöliittymään.",
   "PublicRoomSystemFoldersDescription": "Järjestelmäkansiot säilyttävät lomakkeiden kopioita niiden eri täyttövaiheissa. Lomakkeita, joita täytetään, säilytetään Keskeneräiset-kansiossa, ja valmiita lomakkeita säilytetään Valmiit-kansiossa.",

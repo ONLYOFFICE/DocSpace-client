@@ -13,7 +13,7 @@
   "MakeRoomPrivateDescription": "Alle Dateien in diesem Raum werden verschlüsselt.",
   "MakeRoomPrivateLimitationsWarningDescription": "Mit dieser Funktion können Sie nur bestehende {{portalName}}-Benutzer einladen. Nachdem Sie einen Raum erstellt haben, können Sie die Liste der Benutzer nicht mehr ändern.",
   "MakeRoomPrivateTitle": "Machen Sie den Raum privat",
-  "PeopleSelectorInfo": "Nur ein Raumadministrator oder ein DocSpace-Administrator kann Besitzer des Raums werden",
+  "PeopleSelectorInfo": "Nur ein Raumadministrator oder ein {{portalName}}-Administrator kann Besitzer des Raums werden",
   "PublicRoomBarDescription": "Dieser Raum steht jedem mit dem Link zur Verfügung. Externe Benutzer haben für alle Dateien die Berechtigung \"Nur Anzeigen\".",
   "PublicRoomDescription": "Laden Sie Nutzer über externe Links ein, um Dokumente ohne Registrierung einzusehen. Sie können diesen Raum auch in eine beliebige Weboberfläche einbetten.",
   "PublicRoomSystemFoldersDescription": "In Systemordnern werden Kopien von Formularen in unterschiedlichen Fertigstellungsstadien gespeichert. Formulare, die ausgefüllt werden, werden im Ordner „In Bearbeitung“ gespeichert, und ausgefüllte Formulare werden im Ordner „Abgeschlossen“ gespeichert.",

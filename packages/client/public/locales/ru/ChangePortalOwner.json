@@ -2,7 +2,7 @@
   "AppointAdmin": "Назначить администраторов",
   "BackupPortal": "Выполнять резервное копирование данных {{portalName}}",
   "ChangeInstruction": "Чтобы изменить владельца {{portalName}}, выберите имя нового владельца ниже.",
-  "ChangeOwner": "Сменить владельца DocSpace",
+  "ChangeOwner": "Сменить владельца {{portalName}}",
   "ChangeUser": "Сменить пользователя",
   "DeactivateOrDeletePortal": "Отключить или удалить DocSpace",
   "DoTheSame": "Делайте то же, что и администраторы",

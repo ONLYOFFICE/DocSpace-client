@@ -117,7 +117,7 @@ const ChangePortalOwnerDialog = ({
     t("SetAccessRights"),
     t("ManagePortal"),
     t("ManageUser"),
-    t("ChangePortalOwner:ChangeOwner"),
+    t("ChangePortalOwner:ChangeOwner", { portalName: PORTAL }),
     t("BackupPortal", { portalName: PORTAL }),
     t("DeactivateOrDeletePortal"),
   ];

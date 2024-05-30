@@ -1,7 +1,7 @@
 {
   "AppointAdmin": "Nomina amministratori",
   "ChangeInstruction": "Per modificare il proprietario di {{portalName}}, scegli il nome del nuovo proprietario di seguito.",
-  "ChangeOwner": "Cambia proprietario di DocSpace",
+  "ChangeOwner": "Cambia proprietario di {{portalName}}",
   "ChangeUser": "Cambia utente",
   "DeactivateOrDeletePortal": "Disattiva o elimina DocSpace",
   "DoTheSame": "Fai lo stesso com gli amministratori",

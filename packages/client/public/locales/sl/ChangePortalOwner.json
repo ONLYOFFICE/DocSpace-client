@@ -2,7 +2,7 @@
   "AppointAdmin": "Imenovanje skrbnikov",
   "BackupPortal": "Varnostno kopirajte podatke {{portalName}}",
   "ChangeInstruction": "Če želite spremeniti lastnika {{portalName}}, spodaj izberite ime novega lastnika.",
-  "ChangeOwner": "Zamenjaj lastnika DocSpace",
+  "ChangeOwner": "Zamenjaj lastnika {{portalName}}",
   "ChangeUser": "Zamenjaj uporabnika",
   "DeactivateOrDeletePortal": "Deaktiviraj ali izbriši DocSpace",
   "DoTheSame": "Naredite enako kot skrbniki",

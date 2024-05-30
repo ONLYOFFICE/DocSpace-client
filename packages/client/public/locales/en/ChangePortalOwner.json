@@ -2,7 +2,7 @@
   "AppointAdmin": "Appoint administrators",
   "BackupPortal": "Backup {{portalName}} data",
   "ChangeInstruction": "To change the {{portalName}} owner, please choose the name of the new owner below.",
-  "ChangeOwner": "Change DocSpace owner",
+  "ChangeOwner": "Change {{portalName}} owner",
   "ChangeUser": "Change user",
   "DeactivateOrDeletePortal": "Deactivate or delete DocSpace",
   "DoTheSame": "Do the same as administrators",

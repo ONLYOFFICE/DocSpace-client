@@ -1,7 +1,7 @@
 {
   "AppointAdmin": "Beheerders benoemen",
   "ChangeInstruction": "Om de {{portalName}} eigenaar te wijzigen, kiest u hieronder de naam van de nieuwe eigenaar.",
-  "ChangeOwner": "DocSpace eigenaar wijzigen",
+  "ChangeOwner": "{{portalName}} eigenaar wijzigen",
   "ChangeUser": "Gebruiker wijzigen",
   "DeactivateOrDeletePortal": "DocSpace deactiveren of verwijderen",
   "DoTheSame": "Doe hetzelfde als beheerders",

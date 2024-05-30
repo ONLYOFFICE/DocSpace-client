@@ -2,7 +2,7 @@
   "AppointAdmin": "Նշանակեք ադմինիստրատորներ",
   "BackupPortal": "Պահուստային {{portalName}}-ի տվյալները",
   "ChangeInstruction": "{{portalName}}-ի սեփականատիրոջը փոխելու համար խնդրում ենք ստորև ընտրել նոր սեփականատիրոջ անունը:",
-  "ChangeOwner": "Փոխել DocSpace-ի տնօրինողին",
+  "ChangeOwner": "Փոխել {{portalName}}-ի տնօրինողին",
   "ChangeUser": "Փոխել օգտվողին",
   "DeactivateOrDeletePortal": "Ապագործունացնել կամ ջնջել DocSpace-ը",
   "DoTheSame": "Արեք նույնը, ինչ ադմինիստրատորները",

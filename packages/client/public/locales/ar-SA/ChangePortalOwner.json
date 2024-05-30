@@ -2,7 +2,7 @@
   "AppointAdmin": "تعيين المسؤولين",
   "BackupPortal": "بيانات {{portalName}} الاحتياطية",
   "ChangeInstruction": "لتغيير مالك {{portalName}}، يرجى اختيار اسم المالك الجديد أدناه.",
-  "ChangeOwner": "تغيير مالك DocSpace",
+  "ChangeOwner": "تغيير مالك {{portalName}}",
   "ChangeUser": "تغيير المستخدم",
   "DeactivateOrDeletePortal": "قم بإلغاء تنشيط DocSpace أو حذفه",
   "DoTheSame": "افعل نفس الشيء مثل المسؤولين",

@@ -2,7 +2,7 @@
   "AppointAdmin": "Priraďte administrátorov",
   "BackupPortal": "Zálohovať dáta {{portalName}}",
   "ChangeInstruction": "Ak chcete zmeniť vlastníka {{portalName}}, nižšie vyberte meno nového vlastníka.",
-  "ChangeOwner": "Zmeniť vlastníka DocSpace",
+  "ChangeOwner": "Zmeniť vlastníka {{portalName}}",
   "ChangeUser": "Zmeniť používateľa",
   "DeactivateOrDeletePortal": "Deaktivovať alebo vymazať DocSpace",
   "DoTheSame": "Robte to, čo robia administrátori",

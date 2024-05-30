@@ -415,7 +415,7 @@
   "TrialDaysLeft": "Sınaq {{count}} günləri",
   "TrialExpired": "Sınaq müddəti bitdi",
   "TryBusiness": "Biznesi yoxlayın",
-  "TurnOffDiskSpaceLimit": "Bu DocSpace üçün disk sahəsi limitini söndürün.",
+  "TurnOffDiskSpaceLimit": "Bu {{portalName}} üçün disk sahəsi limitini söndürün.",
   "Type": "Növ",
   "UnexpectedError": "Gözlənilməz xəta baş verdi. Daha sonra yenidən cəhd edin və ya dəstək xidməti ilə əlaqə saxlayın.",
   "Unknown": "Bilinməyən",

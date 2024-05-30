@@ -17,7 +17,7 @@
   "GetCode": "Obtenir le code",
   "LoginRegistryButton": "S'inscrire",
   "PassworResetTitle": "Maintenant, vous pouvez créer un nouveau mot de passe.",
-  "PhoneSubtitle": "L'authentification à 2 facteurs est activée pour assurer une protection supplémentaire. Entrez votre numéro de téléphone portable pour continuer le travail dans DocSpace. Le numéro de téléphone portable doit être entré en utilisant le format international avec le code du pays.",
+  "PhoneSubtitle": "L'authentification à 2 facteurs est activée pour assurer une protection supplémentaire. Entrez votre numéro de téléphone portable pour continuer le travail dans {{portalName}}. Le numéro de téléphone portable doit être entré en utilisant le format international avec le code du pays.",
   "PortalContinueTitle": "Veuillez confirmer que vous souhaitez réactiver votre DocSpace.",
   "PortalDeactivateTitle": "Veuillez confirmer que vous souhaitez désactiver votre DocSpace.",
   "PortalRemoveTitle": "Veuillez confirmer que vous souhaitez supprimer votre DocSpace.",

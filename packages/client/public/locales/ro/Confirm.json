@@ -17,7 +17,7 @@
   "GetCode": "Obține codul",
   "LoginRegistryButton": "Înregistrați-vă",
   "PassworResetTitle": "Acum puteți crea o parolă nouă",
-  "PhoneSubtitle": "Autentificarea cu doi factori este activată ca o măsură suplimentară de securitate. Introduceți numărul dvs de telefon pentru a continua lucrul în cadrul spațiului DocSpace. Numărul de telefon mobil trebuie introdus în format internațional cu prefixul de țară.",
+  "PhoneSubtitle": "Autentificarea cu doi factori este activată ca o măsură suplimentară de securitate. Introduceți numărul dvs de telefon pentru a continua lucrul în cadrul spațiului {{portalName}}. Numărul de telefon mobil trebuie introdus în format internațional cu prefixul de țară.",
   "PortalContinueTitle": "Confirmaţi că doriţi să reactivaţi spaţiul dvs DocSpace.",
   "PortalDeactivateTitle": "Confirmaţi că doriţi să dezactivați spaţiul dvs DocSpace.",
   "PortalRemoveTitle": "Confirmaţi că doriţi să ştergeţi spaţiul dvs DocSpace.",

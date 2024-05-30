@@ -17,7 +17,7 @@
   "GetCode": "Get code",
   "LoginRegistryButton": "Join",
   "PassworResetTitle": "Now you can create a new password.",
-  "PhoneSubtitle": "The two-factor authentication is enabled to provide additional security. Enter your mobile phone number to continue working in the DocSpace. Mobile phone number must be entered using an international format with the country code.",
+  "PhoneSubtitle": "The two-factor authentication is enabled to provide additional security. Enter your mobile phone number to continue working in the {{portalName}}. Mobile phone number must be entered using an international format with the country code.",
   "PortalContinueTitle": "Please confirm that you want to reactivate your DocSpace.",
   "PortalDeactivateTitle": "Please confirm that you want to deactivate your DocSpace.",
   "PortalRemoveTitle": "Please confirm that you want to delete your DocSpace.",

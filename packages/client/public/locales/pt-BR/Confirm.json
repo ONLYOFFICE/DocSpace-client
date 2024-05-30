@@ -17,7 +17,7 @@
   "GetCode": "Obtenha código",
   "LoginRegistryButton": "Aderir",
   "PassworResetTitle": "Agora você pode criar uma nova senha.",
-  "PhoneSubtitle": "A autenticação de dois fatores está habilitada para fornecer segurança adicional. Insira seu número de telefone para continuar a trabalhar no DocSpace. O número de celular deve ser inserido usando um formato internacional com o código de país.",
+  "PhoneSubtitle": "A autenticação de dois fatores está habilitada para fornecer segurança adicional. Insira seu número de telefone para continuar a trabalhar no {{portalName}}. O número de celular deve ser inserido usando um formato internacional com o código de país.",
   "PortalContinueTitle": "Confirme que deseja reativar seu DocSpace.",
   "PortalDeactivateTitle": "Por favor, confirme que você deseja desativar seu DocSpace.",
   "PortalRemoveTitle": "Por favor, confirme que você deseja excluir seu DocSpace.",

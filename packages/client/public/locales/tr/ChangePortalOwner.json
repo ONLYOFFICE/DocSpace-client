@@ -9,6 +9,6 @@
   "ManagePortal": "{{portalName}} yapılandırmasını yönet",
   "ManageUser": "Kullanıcı hesaplarını yönet",
   "NewPortalOwner": "Yeni {{portalName}} sahibi",
-  "PortalOwnerCan": "DocSpace sahibi şunları yapabilir:",
+  "PortalOwnerCan": "{{portalName}} sahibi şunları yapabilir:",
   "SetAccessRights": "Erişim haklarını ayarla"
 }

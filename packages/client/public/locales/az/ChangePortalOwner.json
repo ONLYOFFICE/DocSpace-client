@@ -9,6 +9,6 @@
   "ManagePortal": "{{portalName}} konfiqurasiyasını idarə edin",
   "ManageUser": "İstifadəçi hesablarını idarə edin",
   "NewPortalOwner": "Yeni {{portalName}} sahibi",
-  "PortalOwnerCan": "DocSpace sahibi edə bilər:",
+  "PortalOwnerCan": "{{portalName}} sahibi edə bilər:",
   "SetAccessRights": "Giriş hüquqlarını təyin edin"
 }

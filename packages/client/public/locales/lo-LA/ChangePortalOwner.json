@@ -8,6 +8,6 @@
   "DoTheSame": "ເຮັດເຊັ່ນດຽວກັນກັບຜູ້ບໍລິຫານ",
   "ManageUser": "ຈັດການບັນຊີຜູ້ໃຊ້ ",
   "NewPortalOwner": "ເຈົ້າຂອງ {{portalName}} ໃໝ່",
-  "PortalOwnerCan": "ເຈົ້າຂອງ DocSpace ສາມາດ:",
+  "PortalOwnerCan": "ເຈົ້າຂອງ {{portalName}} ສາມາດ:",
   "SetAccessRights": "ກໍານົດສິດການເຂົ້າເຖິງ"
 }

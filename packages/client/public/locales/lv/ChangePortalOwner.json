@@ -9,6 +9,6 @@
   "ManagePortal": "Pārvaldīt {{portalName}} konfigurāciju",
   "ManageUser": "Pārvaldīt lietotāju kontus",
   "NewPortalOwner": "Jauns {{portalName}} īpašnieks",
-  "PortalOwnerCan": "DocSpace īpašnieks var:",
+  "PortalOwnerCan": "{{portalName}} īpašnieks var:",
   "SetAccessRights": "Iestatīt piekļuves tiesības"
 }

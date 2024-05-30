@@ -8,6 +8,6 @@
   "DoTheSame": "Postępuj tak samo jak administratorzy",
   "ManageUser": "Zarządzaj kontami użytkowników",
   "NewPortalOwner": "Nowy właściciel {{portalName}}",
-  "PortalOwnerCan": "Właściciel DocSpace może:",
+  "PortalOwnerCan": "Właściciel {{portalName}} może:",
   "SetAccessRights": "Konfiguruj prawa dostępu"
 }

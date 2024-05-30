@@ -218,7 +218,7 @@ const ChangePortalOwnerDialog = ({
 
         <StyledAvailableList>
           <Text className="list-header" noSelect title={t("PortalOwnerCan")}>
-            {t("PortalOwnerCan")}
+            {t("PortalOwnerCan", { portalName: PORTAL })}
           </Text>
 
           {ownerRights?.map((item) => (

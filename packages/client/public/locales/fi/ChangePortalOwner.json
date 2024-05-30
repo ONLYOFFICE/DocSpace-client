@@ -9,6 +9,6 @@
   "ManagePortal": "Hallitse {{portalName}} asetuksia",
   "ManageUser": " Hallitse käyttäjätilejä",
   "NewPortalOwner": "Uusi {{portalName}}-omistaja",
-  "PortalOwnerCan": "DocSpace omistaja voi:",
+  "PortalOwnerCan": "{{portalName}} omistaja voi:",
   "SetAccessRights": "Aseta pääsyoikeudet"
 }

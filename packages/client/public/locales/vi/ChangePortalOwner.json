@@ -9,6 +9,6 @@
   "ManagePortal": "Quản lý cấu hình {{portalName}}",
   "ManageUser": "Quản lý tài khoản người dùng",
   "NewPortalOwner": "Chủ sở hữu {{portalName}} mới",
-  "PortalOwnerCan": "Chủ sở hữu DocSpace có thể:",
+  "PortalOwnerCan": "Chủ sở hữu {{portalName}} có thể:",
   "SetAccessRights": "Đặt quyền truy cập"
 }

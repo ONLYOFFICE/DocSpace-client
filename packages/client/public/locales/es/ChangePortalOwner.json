@@ -9,6 +9,6 @@
   "ManagePortal": "Gestionar la configuración de {{portalName}}",
   "ManageUser": "Gestionar las cuentas de usuarios",
   "NewPortalOwner": "Nuevo propietario de {{portalName}}",
-  "PortalOwnerCan": "El propietario de DocSpace puede:",
+  "PortalOwnerCan": "El propietario de {{portalName}} puede:",
   "SetAccessRights": "Establecer permisos de acceso"
 }

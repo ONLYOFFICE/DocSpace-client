@@ -9,6 +9,6 @@
   "ManagePortal": "{{portalName}} 구성 관리",
   "ManageUser": "사용자 계정 관리",
   "NewPortalOwner": "새 {{portalName}} 소유자",
-  "PortalOwnerCan": "DocSpace 소유자가 할 수 있는 것:",
+  "PortalOwnerCan": "{{portalName}} 소유자가 할 수 있는 것:",
   "SetAccessRights": "액세스 권한 설정"
 }

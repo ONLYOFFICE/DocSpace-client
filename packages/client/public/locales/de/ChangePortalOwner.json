@@ -9,6 +9,6 @@
   "ManagePortal": "{{portalName}} einrichten",
   "ManageUser": "Benutzerprofile verwalten",
   "NewPortalOwner": "Neuer {{portalName}}-Besitzer",
-  "PortalOwnerCan": "DocSpace-Besitzer können:",
+  "PortalOwnerCan": "{{portalName}}-Besitzer können:",
   "SetAccessRights": "Zugriffsrechte festlegen"
 }

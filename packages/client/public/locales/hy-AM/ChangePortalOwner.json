@@ -9,6 +9,6 @@
   "ManagePortal": "Կառավարել {{portalName}}-ի կազմաձևումը",
   "ManageUser": "Կառավարել օգտվողների հաշիվները",
   "NewPortalOwner": "{{portalName}}-ի նոր սեփականատեր",
-  "PortalOwnerCan": "DocSpace-ի տնօրինողը կարող է",
+  "PortalOwnerCan": "{{portalName}}-ի տնօրինողը կարող է",
   "SetAccessRights": "Սահմանել մուտքի իրավունքները"
 }

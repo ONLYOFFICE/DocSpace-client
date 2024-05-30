@@ -9,6 +9,6 @@
   "ManagePortal": "Gestionați configurarea spațiului {{portalName}}",
   "ManageUser": "Gestionați conturile de utilizator",
   "NewPortalOwner": "Proprietarul nou al {{portalName}}",
-  "PortalOwnerCan": "Proprietarul DocSpace poate:",
+  "PortalOwnerCan": "Proprietarul {{portalName}} poate:",
   "SetAccessRights": "Configurare drepturi de acces "
 }

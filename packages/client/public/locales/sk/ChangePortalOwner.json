@@ -9,6 +9,6 @@
   "ManagePortal": "Spravovať konfiguráciu {{portalName}}",
   "ManageUser": "Spravovať používateľské účty",
   "NewPortalOwner": "Nový vlastník {{portalName}}",
-  "PortalOwnerCan": "Vlastník DocSpace môže:",
+  "PortalOwnerCan": "Vlastník {{portalName}} môže:",
   "SetAccessRights": "Nastaviť prístupové práva"
 }

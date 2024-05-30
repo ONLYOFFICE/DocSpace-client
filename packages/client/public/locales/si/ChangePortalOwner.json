@@ -9,6 +9,6 @@
   "ManagePortal": "{{portalName}} වින්‍යාසය කළමනාකරණය",
   "ManageUser": "පරිශ්‍රීලක ගිණුම් කළමනාකරණය",
   "NewPortalOwner": "නව {{portalName}} හිමිකරු",
-  "PortalOwnerCan": "DocSpace හිමිකරුගේ වරප්‍රසාද:",
+  "PortalOwnerCan": "{{portalName}} හිමිකරුගේ වරප්‍රසාද:",
   "SetAccessRights": "ප්‍රවේශ අයිතීන් සකසන්න"
 }

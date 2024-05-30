@@ -9,6 +9,6 @@
   "ManagePortal": "إدارة تكوين {{portalName}}",
   "ManageUser": "إدارة حسابات المستخدمين",
   "NewPortalOwner": "مالك {{portalName}} جديد",
-  "PortalOwnerCan": "يمكن لمالك DocSpace:",
+  "PortalOwnerCan": "يمكن لمالك {{portalName}}:",
   "SetAccessRights": "تعيين امكانيات الوصول"
 }

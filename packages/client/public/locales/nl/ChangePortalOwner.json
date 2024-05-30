@@ -7,6 +7,6 @@
   "DoTheSame": "Doe hetzelfde als beheerders",
   "ManageUser": "Gebruikersaccounts beheren",
   "NewPortalOwner": "Nieuwe {{portalName}} eigenaar",
-  "PortalOwnerCan": "DocSpace eigenaar kan:",
+  "PortalOwnerCan": "{{portalName}} eigenaar kan:",
   "SetAccessRights": "Toegangsrechten instellen"
 }

@@ -9,6 +9,6 @@
   "ManagePortal": "Upravljajte konfiguracijo {{portalName}}",
   "ManageUser": "Upravljajte uporabniške račune",
   "NewPortalOwner": "Nov lastnik {{portalName}}",
-  "PortalOwnerCan": "DocSpace lastnik lahko:",
+  "PortalOwnerCan": "{{portalName}} lastnik lahko:",
   "SetAccessRights": "Nastavi pravice za dostop"
 }

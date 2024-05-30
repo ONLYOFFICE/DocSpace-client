@@ -353,7 +353,7 @@
   "SelectFile": "Select file",
   "SelectFiles": "Select files",
   "SelectFolder": "Select folder",
-  "SelectFromDocspace": "Select from DocSpace",
+  "SelectFromDocspace": "Select from {{portalName}}",
   "SelectorEmptyScreenHeader": "No files and folders here yet",
   "SelectPDFFormat": "Select .PDF file",
   "SelectRoom": "Select room",

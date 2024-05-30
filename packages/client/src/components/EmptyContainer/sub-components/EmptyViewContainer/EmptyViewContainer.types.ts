@@ -2,6 +2,7 @@ import type { TFolderSecurity } from "@docspace/shared/api/files/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type {
   FilesSelectorFilterTypes,
+  FolderType,
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
@@ -24,7 +25,9 @@ export interface EmptyViewContainerProps {
   folderId: number;
   access?: Nullable<ShareAccessRights>;
   security?: Nullable<TFolderSecurity | TRoomSecurity>;
-
+  parentRoomType: Nullable<FolderType>;
+  folderType: Nullable<FolderType>;
+  isFolder: boolean;
   onClickInviteUsers?: (folderId: string | number, roomType: RoomsType) => void;
   setSelectFileFormRoomDialogVisible?: TStore["dialogsStore"]["setSelectFileFormRoomDialogVisible"];
   onCreateAndCopySharedLink?: TStore["contextOptionsStore"]["onCreateAndCopySharedLink"];

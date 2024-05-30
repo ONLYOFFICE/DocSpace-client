@@ -3,6 +3,7 @@ import { P, match } from "ts-pattern";
 
 import {
   FilesSelectorFilterTypes,
+  FolderType,
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
@@ -38,6 +39,9 @@ import PresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.reac
 import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
 
+import FormDefaultFolderLight from "PUBLIC_DIR/images/emptyview/empty.form.default.folder.light.svg";
+import FormDefaultFolderDark from "PUBLIC_DIR/images/emptyview/empty.form.default.folder.dark.svg";
+
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
@@ -55,6 +59,9 @@ export const getDescription = (
   type: RoomsType,
   t: TTranslation,
   access: AccessType,
+  isFolder: boolean,
+  folderType: Nullable<FolderType>,
+  parentRoomType: Nullable<FolderType>,
 ): string => {
   const isCollaborator = access === ShareAccessRights.Collaborator;
 
@@ -62,6 +69,32 @@ export const getDescription = (
     access !== ShareAccessRights.None &&
     access !== ShareAccessRights.RoomManager &&
     !isCollaborator;
+
+  if (isFolder) {
+    return match([parentRoomType, folderType, access])
+      .with([P._, FolderType.Done, P._], () =>
+        t("Files:EmptyFormFolderDoneHeaderText"),
+      )
+
+      .with([P._, FolderType.InProgress, P._], () =>
+        t("Files:EmptyFormFolderProgressHeaderText"),
+      )
+      .with(
+        [
+          P._,
+          P.union(FolderType.SubFolderDone, FolderType.SubFolderInProgress),
+          P._,
+        ],
+        () => t("Files:EmptyFormSubFolderHeaderText"),
+      )
+      .with([FolderType.FormRoom, null, P.when(() => isNotAdmin)], () =>
+        t("EmptyView:FormFolderDefaultDescription"),
+      )
+      .with([FolderType.FormRoom, null, P._], () =>
+        t("EmptyView:FormFolderDefaultDescription"),
+      )
+      .otherwise(() => "");
+  }
 
   if (isNotAdmin) return t("EmptyView:UserEmptyDescription");
 
@@ -74,6 +107,9 @@ export const getTitle = (
   type: RoomsType,
   t: TTranslation,
   access: AccessType,
+  isFolder: boolean,
+  folderType: Nullable<FolderType>,
+  parentRoomType: Nullable<FolderType>,
 ): string => {
   const isCollaborator = access === ShareAccessRights.Collaborator;
 
@@ -81,6 +117,29 @@ export const getTitle = (
     access !== ShareAccessRights.None &&
     access !== ShareAccessRights.RoomManager &&
     !isCollaborator;
+
+  if (isFolder) {
+    return match([parentRoomType, folderType, access])
+      .with([P._, FolderType.Done, P._], () =>
+        t("Files:EmptyFormFolderDoneDescriptionText"),
+      )
+      .with([P._, FolderType.InProgress, P._], () =>
+        t("Files:EmptyFormFolderProgressDescriptionText"),
+      )
+      .with([P._, FolderType.SubFolderDone, P._], () =>
+        t("Files:EmptyFormSubFolderDoneDescriptionText"),
+      )
+      .with([P._, FolderType.SubFolderInProgress, P._], () =>
+        t("Files:EmptyFormSubFolderProgressDescriptionText"),
+      )
+      .with([FolderType.FormRoom, null, P.when(() => isNotAdmin)], () =>
+        t("EmptyView:FormFolderDefaultTitle"),
+      )
+      .with([FolderType.FormRoom, null, P._], () =>
+        t("EmptyView:FormFolderDefaultTitle"),
+      )
+      .otherwise(() => "");
+  }
 
   if (isCollaborator) return t("EmptyView:CollaboratorEmptyTitle");
 
@@ -100,11 +159,27 @@ export const getTitle = (
   }
 };
 
-export const getIcon = (
+export const getFolderIcon = (
+  type: Nullable<FolderType>,
+  isBaseTheme: boolean,
+  access: AccessType,
+  folderType: Nullable<FolderType>,
+) => {
+  return match([type, folderType, access])
+    .with([P._, FolderType.Done, P._], () =>
+      isBaseTheme ? <FormDefaultFolderLight /> : <FormDefaultFolderDark />,
+    )
+    .with([FolderType.FormRoom, null, P._], () =>
+      isBaseTheme ? <FormDefaultFolderLight /> : <FormDefaultFolderDark />,
+    )
+    .otherwise(() => <div />);
+};
+
+export const getRoomIcon = (
   type: RoomsType,
   isBaseTheme: boolean,
   access: AccessType,
-): JSX.Element => {
+) => {
   return (
     match([type, access])
       .with([RoomsType.FormRoom, ShareAccessRights.FormFilling], () =>
@@ -156,6 +231,19 @@ export const getIcon = (
       // eslint-disable-next-line react/jsx-no-useless-fragment
       .otherwise(() => <></>)
   );
+};
+
+export const getIcon = (
+  type: RoomsType,
+  isBaseTheme: boolean,
+  access: AccessType,
+  isFolder: boolean,
+  folderType: Nullable<FolderType>,
+  parentRoomType: Nullable<FolderType>,
+): JSX.Element => {
+  return isFolder
+    ? getFolderIcon(parentRoomType, isBaseTheme, access, folderType)
+    : getRoomIcon(type, isBaseTheme, access);
 };
 
 const helperOptions = (
@@ -226,6 +314,9 @@ export const getOptions = (
   security: Nullable<TFolderSecurity | TRoomSecurity>,
   t: (str: string) => string,
   access: AccessType,
+  isFolder: boolean,
+  folderType: Nullable<FolderType>,
+  parentRoomType: Nullable<FolderType>,
   actions: OptionActions,
 ): EmptyViewItemType[] => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
@@ -321,6 +412,29 @@ export const getOptions = (
       },
     ],
   };
+
+  if (isFolder) {
+    return match([parentRoomType, folderType, access])
+      .with(
+        [
+          P._,
+          P.union(
+            FolderType.Done,
+            FolderType.InProgress,
+            FolderType.SubFolderDone,
+            FolderType.SubFolderInProgress,
+          ),
+          P._,
+        ],
+        () => [],
+      )
+      .with([FolderType.FormRoom, null, P.when(() => isNotAdmin)], () => [])
+      .with([FolderType.FormRoom, null, P._], () => [
+        uploadPDFFromDocSpace,
+        uploadFromDevicePDF,
+      ])
+      .otherwise(() => []);
+  }
 
   switch (type) {
     case RoomsType.FormRoom:

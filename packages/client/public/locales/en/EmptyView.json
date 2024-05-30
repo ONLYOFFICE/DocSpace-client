@@ -21,5 +21,7 @@
   "UploadFromDocSpaceTitle": "Upload from DocSpace",
   "UploadPDFFormOptionDescription": "Select a ready PDF form available in DocSpace and upload it to the room.",
   "UserEmptyDescription": "Files and folders uploaded by admins will appeared here.",
-  "UserEmptyTitle": "No docs here yet"
+  "UserEmptyTitle": "No docs here yet",
+  "FormFolderDefaultTitle": "No forms here yet",
+  "FormFolderDefaultDescription": "Drop PDF forms here or upload from DocSpace or device."
 }

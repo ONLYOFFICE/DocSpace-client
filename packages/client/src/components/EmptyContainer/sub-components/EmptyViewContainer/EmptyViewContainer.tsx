@@ -25,13 +25,22 @@ const EmptyViewContainer = observer(
     type,
     access,
     folderId,
+    isFolder,
     security,
+    folderType,
     selectedFolder,
+    parentRoomType,
     onClickInviteUsers,
     onCreateAndCopySharedLink,
     setSelectFileFormRoomDialogVisible,
   }: EmptyViewContainerProps) => {
-    const { t } = useTranslation(["EmptyView", "Files", "Common"]);
+    const { t } = useTranslation([
+      "EmptyView",
+      "Files",
+      "Common",
+      "Translations",
+    ]);
+
     const theme = useTheme();
 
     const onUploadAction = useCallback((uploadType: UploadType) => {
@@ -79,27 +88,59 @@ const EmptyViewContainer = observer(
     }, [selectedFolder, onCreateAndCopySharedLink, t]);
 
     const emptyViewOptions = useMemo(() => {
-      const description = getDescription(type, t, access);
-      const title = getTitle(type, t, access);
-      const icon = getIcon(type, theme.isBase, access);
+      const description = getDescription(
+        type,
+        t,
+        access,
+        isFolder,
+        folderType,
+        parentRoomType,
+      );
+      const title = getTitle(
+        type,
+        t,
+        access,
+        isFolder,
+        folderType,
+        parentRoomType,
+      );
+      const icon = getIcon(
+        type,
+        theme.isBase,
+        access,
+        isFolder,
+        folderType,
+        parentRoomType,
+      );
 
       return { description, title, icon };
-    }, [type, t, theme.isBase, access]);
+    }, [type, t, theme.isBase, access, isFolder, folderType, parentRoomType]);
 
     const options = useMemo(
       () =>
-        getOptions(type, security!, t, access, {
-          inviteUser,
-          onCreate,
-          uploadFromDocspace,
-          onUploadAction,
-          createAndCopySharedLink,
-        }),
+        getOptions(
+          type,
+          security!,
+          t,
+          access,
+          isFolder,
+          folderType,
+          parentRoomType,
+          {
+            inviteUser,
+            onCreate,
+            uploadFromDocspace,
+            onUploadAction,
+            createAndCopySharedLink,
+          },
+        ),
       [
         type,
         access,
         security,
-
+        isFolder,
+        folderType,
+        parentRoomType,
         t,
         inviteUser,
         uploadFromDocspace,

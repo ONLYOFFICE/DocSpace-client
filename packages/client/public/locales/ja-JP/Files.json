@@ -8,7 +8,7 @@
   "AppointNewOwner": "新しい所有者を任命されました。",
   "ArchiveAction": "空のアーカイブ",
   "ArchivedRoomsAction": "ルームがアーカイブされました",
-  "ArchiveEmptyScreen": "使わないルームはアーカイブして、いつでもDocSpaceに復元したり、永久に削除することができます。そのルームはここに表示されます。",
+  "ArchiveEmptyScreen": "使わないルームはアーカイブして、いつでも{{portalName}}に復元したり、永久に削除することができます。そのルームはここに表示されます。",
   "ArchiveEmptyScreenHeader": "アーカイブ済みのルームがありません",
   "ArchiveEmptyScreenUser": "アーカイブされたルームはここに表示されます。",
   "Archives": "アーカイブ",

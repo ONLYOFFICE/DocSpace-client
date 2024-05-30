@@ -8,7 +8,7 @@
   "AppointNewOwner": "Jūs iecēlāt jaunu īpašnieku.",
   "ArchiveAction": "Vietne izņemta no arhīva",
   "ArchivedRoomsAction": "Telpas ir arhivētas",
-  "ArchiveEmptyScreen": "Jūs jebkurā brīdī varat arhivēt neizmantotās telpas un atjaunot tās savā DocSpace vai neatgriezeniski izdzēst. Šeit parādīsies šīs telpas.",
+  "ArchiveEmptyScreen": "Jūs jebkurā brīdī varat arhivēt neizmantotās telpas un atjaunot tās savā {{portalName}} vai neatgriezeniski izdzēst. Šeit parādīsies šīs telpas.",
   "ArchiveEmptyScreenHeader": "Šeit vēl nav nevienas arhivētas telpas",
   "ArchiveEmptyScreenUser": "Šeit tiks parādītas arhivētās telpas.",
   "Archives": "Arhīvi",

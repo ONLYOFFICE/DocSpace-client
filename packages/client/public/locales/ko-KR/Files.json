@@ -8,7 +8,7 @@
   "AppointNewOwner": "새로운 소유자를 지정하셨습니다.",
   "ArchiveAction": "아카이브 비우기",
   "ArchivedRoomsAction": "방이 아카이브되었습니다",
-  "ArchiveEmptyScreen": "사용하지 않는 방을 아카이브하고 DocSpace에서 언제든지 복원하거나 영구적으로 삭제할 수 있습니다. 이러한 방이 여기에 표시됩니다.",
+  "ArchiveEmptyScreen": "사용하지 않는 방을 아카이브하고 {{portalName}}에서 언제든지 복원하거나 영구적으로 삭제할 수 있습니다. 이러한 방이 여기에 표시됩니다.",
   "ArchiveEmptyScreenHeader": "아직 여기에 아카이브 방이 없습니다",
   "ArchiveEmptyScreenUser": "아카이브된 방이 여기에 표시됩니다.",
   "Archives": "아카이브",

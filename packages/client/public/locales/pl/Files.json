@@ -8,7 +8,7 @@
   "AppointNewOwner": "Wyznaczono nowego właściciela.",
   "ArchiveAction": "Opróżnij archiwum",
   "ArchivedRoomsAction": "Pokoje zostały zarchiwizowane",
-  "ArchiveEmptyScreen": "Możesz archiwizować pokoje, których nie używasz i przywracać je do DocSpace w dowolnej chwili lub usuwać na stałe. Pokoje te pojawią się tutaj.",
+  "ArchiveEmptyScreen": "Możesz archiwizować pokoje, których nie używasz i przywracać je do {{portalName}} w dowolnej chwili lub usuwać na stałe. Pokoje te pojawią się tutaj.",
   "ArchiveEmptyScreenHeader": "Brak zarchiwizowanych pokoi",
   "ArchiveEmptyScreenUser": "Tutaj pojawią się zarchiwizowane pokoje.",
   "Archives": "Archiwa",

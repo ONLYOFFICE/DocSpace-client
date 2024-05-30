@@ -8,7 +8,7 @@
   "AppointNewOwner": "لقد قمت بتعيين مالك جديد",
   "ArchiveAction": "أرشيف فارغ",
   "ArchivedRoomsAction": "تم أرشفة الغرف",
-  "ArchiveEmptyScreen": "يمكنك أرشفة الغرف التي لا تستخدمها واستعادتها في DocSpace في أي لحظة أو حذفها نهائيًا. ستظهر هذه الغرف هنا.",
+  "ArchiveEmptyScreen": "يمكنك أرشفة الغرف التي لا تستخدمها واستعادتها في {{portalName}} في أي لحظة أو حذفها نهائيًا. ستظهر هذه الغرف هنا.",
   "ArchiveEmptyScreenHeader": "لا توجد غرف مؤرشفة هنا حتى الآن",
   "ArchiveEmptyScreenUser": "ستظهر هنا الغرف التي تم أرشفتها.",
   "Archives": "أرشيف",

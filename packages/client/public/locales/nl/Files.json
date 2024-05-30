@@ -8,7 +8,7 @@
   "AppointNewOwner": "U heeft een nieuwe eigenaar aangesteld.",
   "ArchiveAction": "Archief leegmaken",
   "ArchivedRoomsAction": "De kamers zijn gearchiveerd",
-  "ArchiveEmptyScreen": "U kunt ruimtes die u niet gebruikt archiveren en op elk moment in uw DocSpace herstellen of definitief verwijderen. Deze kamers worden hier weergegeven.",
+  "ArchiveEmptyScreen": "U kunt ruimtes die u niet gebruikt archiveren en op elk moment in uw {{portalName}} herstellen of definitief verwijderen. Deze kamers worden hier weergegeven.",
   "ArchiveEmptyScreenHeader": "Er zijn hier nog geen gearchiveerde kamers",
   "ArchiveEmptyScreenUser": "Kamers die zijn gearchiveerd verschijnen hier.",
   "Archives": "Archieven",

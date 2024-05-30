@@ -8,7 +8,7 @@
   "AppointNewOwner": "Postavili ste novog vlasnika.",
   "ArchiveAction": "Prazna arhiva",
   "ArchivedRoomsAction": "Sobe su arhivirane",
-  "ArchiveEmptyScreen": "Možete da arhivirate sobe koje ne koristite i da ih povratite u svoj DocSpace u bilo kom trenutku ili da ih trajno obrišete. Ove sobe će se pojaviti ovde.",
+  "ArchiveEmptyScreen": "Možete da arhivirate sobe koje ne koristite i da ih povratite u svoj {{portalName}} u bilo kom trenutku ili da ih trajno obrišete. Ove sobe će se pojaviti ovde.",
   "ArchiveEmptyScreenHeader": "Nema arhiviranih soba ovde još",
   "ArchiveEmptyScreenUser": "Sobe koje su arhivirane će se pojaviti ovde.",
   "Archives": "Arhive",

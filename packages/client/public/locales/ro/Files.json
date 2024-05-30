@@ -8,7 +8,7 @@
   "AppointNewOwner": "Ați desemnat un nou proprietar.",
   "ArchiveAction": "Arhivă goală",
   "ArchivedRoomsAction": "Sălile sunt arhivate",
-  "ArchiveEmptyScreen": "Puteţi arhiva sălile pe care nu le folosiţi şi le restaurați în DocSpace în orice moment sau puteţi opta să le ştergeţi definitiv. Aceste săli vor apărea aici.",
+  "ArchiveEmptyScreen": "Puteţi arhiva sălile pe care nu le folosiţi şi le restaurați în {{portalName}} în orice moment sau puteţi opta să le ştergeţi definitiv. Aceste săli vor apărea aici.",
   "ArchiveEmptyScreenHeader": "Nicio sală arhivată deocamdată aici",
   "ArchiveEmptyScreenUser": "Sălile care au fost arhivate vor apărea aici.",
   "Archives": "Arhive",

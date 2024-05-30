@@ -8,7 +8,7 @@
   "AppointNewOwner": "Hai nominato un nuovo proprietario.",
   "ArchiveAction": "Archivio vuoto",
   "ArchivedRoomsAction": "Le stanza sono archiviate",
-  "ArchiveEmptyScreen": "Puoi archiviare le stanze che non usi e ripristinarle nel tuo DocSpace in qualsiasi momento o eliminarle definitivamente. Queste stanze appariranno qui.",
+  "ArchiveEmptyScreen": "Puoi archiviare le stanze che non usi e ripristinarle nel tuo {{portalName}} in qualsiasi momento o eliminarle definitivamente. Queste stanze appariranno qui.",
   "ArchiveEmptyScreenHeader": "Non ci sono ancora stanze archiviate qui",
   "ArchiveEmptyScreenUser": "Le stanze che sono state archiviate appariranno qui.",
   "Archives": "Archivi",

@@ -8,7 +8,7 @@
   "AppointNewOwner": "Você nomeou um novo proprietário.",
   "ArchiveAction": "Arquivo Vazio",
   "ArchivedRoomsAction": "As salas estão arquivadas",
-  "ArchiveEmptyScreen": "Pode arquivar salas que não utiliza e restaurá-las no seu DocSpace a qualquer momento ou apagá-las permanentemente. Estas salas aparecerão aqui.",
+  "ArchiveEmptyScreen": "Pode arquivar salas que não utiliza e restaurá-las no seu {{portalName}} a qualquer momento ou apagá-las permanentemente. Estas salas aparecerão aqui.",
   "ArchiveEmptyScreenHeader": "Ainda não tem qualquer sala arquivada",
   "ArchiveEmptyScreenUser": "As salas que foram arquivados, aparecerão aqui.",
   "Archives": "Arquivos",

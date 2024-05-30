@@ -8,7 +8,7 @@
   "AppointNewOwner": "Siz yeni sahib təyin etdiniz.",
   "ArchiveAction": "Boş arxiv",
   "ArchivedRoomsAction": "Otaqlar arxivləşdirildi",
-  "ArchiveEmptyScreen": "Siz DocSpace-də istifadə etmədiyiniz otaqları arxivləşdirə və bərpa edə və ya istənilən vaxt onları həmişəlik silə bilərsiniz. Bu otaqlar burada görünəcək.",
+  "ArchiveEmptyScreen": "Siz {{portalName}}-də istifadə etmədiyiniz otaqları arxivləşdirə və bərpa edə və ya istənilən vaxt onları həmişəlik silə bilərsiniz. Bu otaqlar burada görünəcək.",
   "ArchiveEmptyScreenHeader": "Burada hələ arxivləşdirilmiş otaqlar yoxdur",
   "ArchiveEmptyScreenUser": "Arxivlənmiş otaqlar burada görünəcək.",
   "Archives": "Arxivlər",

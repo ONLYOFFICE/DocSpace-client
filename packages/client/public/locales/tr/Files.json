@@ -8,7 +8,7 @@
   "AppointNewOwner": "Yeni bir sahip atadınız.",
   "ArchiveAction": "Arşivi boşalt",
   "ArchivedRoomsAction": "Odalar arşivlendi",
-  "ArchiveEmptyScreen": "Kullanmadığınız odaları dilediğiniz zaman arşivleyip DocSpace'inize geri yükleyebilir veya kalıcı olarak silebilirsiniz. Bu odalar burada görünecektir.",
+  "ArchiveEmptyScreen": "Kullanmadığınız odaları dilediğiniz zaman arşivleyip {{portalName}}'inize geri yükleyebilir veya kalıcı olarak silebilirsiniz. Bu odalar burada görünecektir.",
   "ArchiveEmptyScreenHeader": "Burada henüz arşivlenmiş oda yok",
   "ArchiveEmptyScreenUser": "Arşivlenen odalar burada görünecektir.",
   "Archives": "Arşivler",

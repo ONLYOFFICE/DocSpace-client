@@ -8,7 +8,7 @@
   "AppointNewOwner": "Sie haben einen neuen Besitzer ernannt.",
   "ArchiveAction": "Leeres Archiv",
   "ArchivedRoomsAction": "Die Räume sind archiviert",
-  "ArchiveEmptyScreen": "Sie können Räume, die Sie nicht benutzen, archivieren und jederzeit in Ihrem DocSpace wiederherstellen oder dauerhaft löschen. Diese Räume werden hier angezeigt.",
+  "ArchiveEmptyScreen": "Sie können Räume, die Sie nicht benutzen, archivieren und jederzeit in Ihrem {{portalName}} wiederherstellen oder dauerhaft löschen. Diese Räume werden hier angezeigt.",
   "ArchiveEmptyScreenHeader": "Noch keine archivierten Räume hier",
   "ArchiveEmptyScreenUser": "Räume, die archiviert wurden, erscheinen hier.",
   "Archives": "Archive",

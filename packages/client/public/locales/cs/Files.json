@@ -8,7 +8,7 @@
   "AppointNewOwner": "Jmenovali jste nového majitele.",
   "ArchiveAction": "Prázdný archiv",
   "ArchivedRoomsAction": "Místnosti jsou archivovány",
-  "ArchiveEmptyScreen": "Nepoužívané místnosti můžete archivovat a kdykoli je obnovit v prostoru DocSpace nebo je trvale odstranit. Tyto místnosti se zobrazí zde.",
+  "ArchiveEmptyScreen": "Nepoužívané místnosti můžete archivovat a kdykoli je obnovit v prostoru {{portalName}} nebo je trvale odstranit. Tyto místnosti se zobrazí zde.",
   "ArchiveEmptyScreenHeader": "Zatím zde nejsou žádné archivované místnosti",
   "ArchiveEmptyScreenUser": "Zde se zobrazí místnosti, které byly archivovány.",
   "Archives": "Archivy",

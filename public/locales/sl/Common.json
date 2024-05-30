@@ -146,7 +146,7 @@
   "Error401Text": "Žal vir trenutno ni dostopen.",
   "Error403Text": "Žal je dostop zavrnjen.",
   "Error404Text": "Žal vira ni mogoče najti.",
-  "ErrorDeactivatedText": "Ta DocSpace je deaktiviran",
+  "ErrorDeactivatedText": "Ta {{portalName}} je deaktiviran",
   "ErrorEmptyList": "Seznam entitet je spremenjen. Preverite vsebino in poskusite znova.",
   "ErrorInternalServer": "Notranja napaka strežnika. Ponovno poskusite kasneje.",
   "ErrorOfflineText": "Internetne povezave ni bilo mogoče najti",

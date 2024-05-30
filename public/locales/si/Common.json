@@ -146,7 +146,7 @@
   "Error401Text": "දැනට සම්පත වෙත ප්‍රවේශ වීමට නොහැකිය.",
   "Error403Text": "ප්‍රවේශය ප්‍රතික්‍ෂේපිතයි.",
   "Error404Text": "කණගාටුයි, සම්පත හමු නොවිණි.",
-  "ErrorDeactivatedText": "මෙම DocSpace අක්‍රිය කර ඇත",
+  "ErrorDeactivatedText": "මෙම {{portalName}} අක්‍රිය කර ඇත",
   "ErrorEmptyList": "ස්ථීති ලැයිස්තුව වෙනස් වී ඇත. අන්තර්ගතය පරීක්ෂා කර නැවත උත්සාහ කරන්න.",
   "ErrorInternalServer": "සේවාදායකයේ අභ්‍යන්තර දෝෂයකි",
   "ErrorOfflineText": "අන්තර්ජාලය නැත",

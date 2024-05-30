@@ -146,7 +146,7 @@
   "Error401Text": "Diemžēl resurss pašlaik nav pieejams.",
   "Error403Text": "Diemžēl piekļuve liegta",
   "Error404Text": "Diemžēl resursu nevar atrast.",
-  "ErrorDeactivatedText": "Šī DocSpace ir deaktivizēta",
+  "ErrorDeactivatedText": "Šī {{portalName}} ir deaktivizēta",
   "ErrorEmptyList": "Entītiju saraksts ir mainīts. Pārbaudiet saturu un mēģiniet vēlreiz.",
   "ErrorInternalServer": "Iekšējā servera kļūda. Mēģiniet vēlāk vēlreiz.",
   "ErrorOfflineText": "Interneta savienojums nav atrasts",

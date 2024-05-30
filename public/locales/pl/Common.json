@@ -146,7 +146,7 @@
   "Error401Text": "Przepraszamy, wybrany zasób jest w tej chwili niedostępny.",
   "Error403Text": "Przepraszamy, odmówiono dostępu.",
   "Error404Text": "Przepraszamy, nie znaleziono zasobu.",
-  "ErrorDeactivatedText": "Dane konto DocSpace zostało dezaktywowane",
+  "ErrorDeactivatedText": "Dane konto {{portalName}} zostało dezaktywowane",
   "ErrorEmptyList": "Lista podmiotów została zmieniona. Sprawdź zawartość i spróbuj ponownie.",
   "ErrorInternalServer": "Wewnętrzny błąd serwera. Spróbuj ponownie później.",
   "ErrorOfflineText": "Brak połączenia z Internetem",

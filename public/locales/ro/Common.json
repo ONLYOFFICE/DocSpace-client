@@ -146,7 +146,7 @@
   "Error401Text": "Ne pare rău, sursa nu este accesibilă.",
   "Error403Text": "Ne pare rău, accesul este refuzat.",
   "Error404Text": "Ne pare rău, sursa nu s-a găsit.",
-  "ErrorDeactivatedText": "Acest spațiu DocSpace este dezactivat",
+  "ErrorDeactivatedText": "Acest spațiu {{portalName}} este dezactivat",
   "ErrorEmptyList": "Lista de entități a fost modificată. Verificați conținutul și încercați din nou.",
   "ErrorInternalServer": "Eroare internă de server. Încercaţi din nou mai târziu.",
   "ErrorOfflineText": "Nu există nicio conexiune la Internet",

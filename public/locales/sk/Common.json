@@ -146,7 +146,7 @@
   "Error401Text": "Je nám ľúto, zdroj nie je momentálne dostupný.",
   "Error403Text": "Prepáčte, prístup odmietnutý.",
   "Error404Text": "Prepáčte, zdroj sa nedá nájsť.",
-  "ErrorDeactivatedText": "Tento DocSpace je deaktivovaný",
+  "ErrorDeactivatedText": "Tento {{portalName}} je deaktivovaný",
   "ErrorEmptyList": "Zoznam subjektov bol zmenený. Skontrolujte obsah a skúste znova.",
   "ErrorInternalServer": "Interná chyba servera. Skúste to znova neskôr.",
   "ErrorOfflineText": "Nenašlo sa žiadne internetové pripojenie",

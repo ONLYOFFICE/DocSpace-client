@@ -146,7 +146,6 @@
   "Error401Text": "抱歉，资源目前无法访问。",
   "Error403Text": "对不起，拒绝访问。",
   "Error404Text": "对不起，找不到资源。",
-  "ErrorDeactivatedText": "该协作空间已停用",
   "ErrorEmptyList": "实体列表已更改。请检查内容并重试。",
   "ErrorInternalServer": "内部服务器错误。稍后再试。",
   "ErrorOfflineText": "未找到网络连接。",

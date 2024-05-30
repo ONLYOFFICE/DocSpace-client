@@ -145,7 +145,7 @@
   "Error401Text": "Izvinjavamo se, resurs trenutno nije dostupan.",
   "Error403Text": "Izvinjavamo se, pristup odbijen.",
   "Error404Text": "Izvinjavamo se, resurs ne može biti pronađen.",
-  "ErrorDeactivatedText": "Ovaj DocSpace je deaktiviran",
+  "ErrorDeactivatedText": "Ovaj {{portalName}} je deaktiviran",
   "ErrorEmptyList": "Spisak entiteta je promenjen. Proverite sadržaj i pokušajte ponovo.",
   "ErrorInternalServer": "Interna greška servera. Pokušajte ponovo kasnije.",
   "ErrorOfflineText": "Bez internet konekcije",

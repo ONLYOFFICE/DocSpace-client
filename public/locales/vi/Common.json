@@ -146,7 +146,7 @@
   "Error401Text": " Xin lỗi, hiện không thể truy cập tài nguyên.",
   "Error403Text": " Xin lỗi, truy cập bị từ chối.",
   "Error404Text": " Xin lỗi, không thể tìm thấy tài nguyên.",
-  "ErrorDeactivatedText": "DocSpace này đã bị vô hiệu hóa",
+  "ErrorDeactivatedText": "{{portalName}} này đã bị vô hiệu hóa",
   "ErrorEmptyList": "Danh sách các thực thể đã được thay đổi. Vui lòng kiểm tra nội dung và thử lại.",
   "ErrorInternalServer": "Lỗi server nội bộ. Thử lại sau.",
   "ErrorOfflineText": "Không tìm thấy kết nối internet",

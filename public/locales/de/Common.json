@@ -146,7 +146,7 @@
   "Error401Text": "Die Ressource kann zurzeit nicht zugegriffen werden.",
   "Error403Text": "Zugriff verweigert.",
   "Error404Text": "Die Ressource kann nicht gefunden werden.",
-  "ErrorDeactivatedText": "Dieser DocSpace ist deaktiviert",
+  "ErrorDeactivatedText": "Dieser {{portalName}} ist deaktiviert",
   "ErrorEmptyList": "Die Liste der Entitäten wurde geändert. Bitte überprüfen Sie den Inhalt und versuchen Sie es erneut.",
   "ErrorInternalServer": "Interner Serverfehler. Versuchen Sie nochmals später.",
   "ErrorOfflineText": "Keine Internetverbindung gefunden",

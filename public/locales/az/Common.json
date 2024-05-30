@@ -146,7 +146,7 @@
   "Error401Text": "Təəssüf ki, resurs hal-hazırda əlçatan deyil.",
   "Error403Text": "Təəssüf ki, giriş rədd edilmişdir.",
   "Error404Text": "Təəssüf ki, resurs tapıla bilmir.",
-  "ErrorDeactivatedText": "Bu DocSpace deaktiv edilib",
+  "ErrorDeactivatedText": "Bu {{portalName}} deaktiv edilib",
   "ErrorEmptyList": "Aktivlərin siyahısı dəyişdirilib. Zəhmət olmasa, məzmunu yoxlayın və yenidən cəhd edin.",
   "ErrorInternalServer": "Daxili server xətası. Daha sonra yenidən cəhd edin.",
   "ErrorOfflineText": "İnternet bağlantısı tapılmadı",

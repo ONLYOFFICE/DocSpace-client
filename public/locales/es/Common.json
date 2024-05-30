@@ -146,7 +146,7 @@
   "Error401Text": "Perdón, el recurso no es accesible actualmente.",
   "Error403Text": "Perdón, acceso denegado.",
   "Error404Text": "Perdón, no se puede encontrar el recurso.",
-  "ErrorDeactivatedText": "Este DocSpace está desactivado",
+  "ErrorDeactivatedText": "Este {{portalName}} está desactivado",
   "ErrorEmptyList": "La lista de entidades se ha modificado. Por favor, compruebe el contenido e inténtelo de nuevo.",
   "ErrorInternalServer": "Error de servidor interno. Inténtelo de nuevo más tarde.",
   "ErrorOfflineText": "No se ha encontrado ninguna conexión a Internet",

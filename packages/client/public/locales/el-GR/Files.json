@@ -96,7 +96,7 @@
   "LinkDisabledSuccessfully": "Ο σύνδεσμος απενεργοποιήθηκε επιτυχώς",
   "LinkEditedSuccessfully": "Επιτυχής επεξεργασία και αντιγραφή συνδέσμου",
   "LinkEnabledSuccessfully": "Ο σύνδεσμος ενεργοποιήθηκε επιτυχώς",
-  "LinkForPortalUsers": "Σύνδεσμος για τους χρήστες της DocSpace",
+  "LinkForPortalUsers": "Σύνδεσμος για τους χρήστες της {{portalName}}",
   "LinkSettings": "Ρυθμίσεις συνδέσμου",
   "LinkSuccessfullyCreatedAndCopied": "Ο σύνδεσμος δημιουργήθηκε επιτυχώς και αντιγράφηκε στο πρόχειρο",
   "LinkValidUntil": "Αυτός ο σύνδεσμος θα ισχύει μέχρι",

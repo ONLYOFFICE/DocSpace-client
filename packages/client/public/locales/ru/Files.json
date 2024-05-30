@@ -96,7 +96,7 @@
   "LinkDisabledSuccessfully": "Ссылка успешно отключена",
   "LinkEditedSuccessfully": "Ссылка успешно отредактирована и скопирована.",
   "LinkEnabledSuccessfully": "Ссылка успешно активирована",
-  "LinkForPortalUsers": "Ссылка для пользователей портала",
+  "LinkForPortalUsers": "Ссылка для пользователей {{portalName}}",
   "LinkSettings": "Параметры ссылки",
   "LinkSuccessfullyCreatedAndCopied": "Ссылка успешно создана и скопирована в буфер обмена",
   "LinkValidUntil": "Эта ссылка действительна до",

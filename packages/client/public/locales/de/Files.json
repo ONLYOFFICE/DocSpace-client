@@ -96,7 +96,7 @@
   "LinkDisabledSuccessfully": "Link erfolgreich deaktiviert",
   "LinkEditedSuccessfully": "Link erfolgreich bearbeitet und kopiert",
   "LinkEnabledSuccessfully": "Link erfolgreich aktiviert",
-  "LinkForPortalUsers": "Link für DocSpace-Benutzer",
+  "LinkForPortalUsers": "Link für {{portalName}}-Benutzer",
   "LinkSettings": "Linkeinstellungen",
   "LinkSuccessfullyCreatedAndCopied": "Link erfolgreich erstellt und in die Zwischenablage kopiert",
   "LinkValidUntil": "Dieser Link ist gültig bis",

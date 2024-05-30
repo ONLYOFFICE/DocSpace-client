@@ -95,7 +95,7 @@
   "LinkDisabledSuccessfully": "සබැඳිය අබල කෙරිණි",
   "LinkEditedSuccessfully": "සබැඳිය සංස්කරණය වී පිටපත් විය",
   "LinkEnabledSuccessfully": "සබැඳිය සබල කෙරිණි",
-  "LinkForPortalUsers": "DocSpace පරිශ්‍රීලකයින් සඳහා සබැඳිය",
+  "LinkForPortalUsers": "{{portalName}} පරිශ්‍රීලකයින් සඳහා සබැඳිය",
   "LinkSettings": "සබැඳියේ සැකසුම්",
   "LinkSuccessfullyCreatedAndCopied": "සබැඳිය පසුරුපුවරුවට පිටපත් විය",
   "LinkValidUntil": "සබැඳිය වලංගු කාලය:",

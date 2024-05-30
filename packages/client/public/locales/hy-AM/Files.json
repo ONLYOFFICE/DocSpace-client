@@ -96,7 +96,7 @@
   "LinkDisabledSuccessfully": "Հղումը հաջողությամբ անջատվեց",
   "LinkEditedSuccessfully": "Հղումը հաջողությամբ խմբագրվել և պատճենվել է",
   "LinkEnabledSuccessfully": "Հղումը հաջողությամբ միացված է",
-  "LinkForPortalUsers": "Հղում DocSpace-ի օգտագործողների համար",
+  "LinkForPortalUsers": "Հղում {{portalName}}-ի օգտագործողների համար",
   "LinkSettings": "Հղման կարգավորումներ",
   "LinkSuccessfullyCreatedAndCopied": "Հղումը հաջողությամբ ստեղծվեց և պատճենվեց սեղմատախտակում",
   "LinkValidUntil": "Այս հղումը կգործի մինչև",

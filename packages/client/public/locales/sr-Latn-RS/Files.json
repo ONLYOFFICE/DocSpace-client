@@ -96,7 +96,7 @@
   "LinkDisabledSuccessfully": "Link onemogućen uspešno",
   "LinkEditedSuccessfully": "Link uspešno uređen i kopiran",
   "LinkEnabledSuccessfully": "Link omogućen uspešno",
-  "LinkForPortalUsers": "Link za DocSpace korisnike",
+  "LinkForPortalUsers": "Link za {{portalName}} korisnike",
   "LinkSettings": "Podešavanja Linka",
   "LinkSuccessfullyCreatedAndCopied": "Link uspešno kreiran i kopiran u privremenu memoriju",
   "LinkValidUntil": "Ovaj link će biti validan do",

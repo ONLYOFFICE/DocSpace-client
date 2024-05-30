@@ -96,7 +96,7 @@
   "LinkDisabledSuccessfully": "Bağlantı başarıyla devre dışı bırakıldı",
   "LinkEditedSuccessfully": "Bağlantı başarıyla düzenlendi ve kopyalandı",
   "LinkEnabledSuccessfully": "Bağlantı başarıyla etkinleştirildi",
-  "LinkForPortalUsers": "DocSpace kullanıcıları için bağlantı",
+  "LinkForPortalUsers": "{{portalName}} kullanıcıları için bağlantı",
   "LinkSettings": "Bağlantı ayarları",
   "LinkSuccessfullyCreatedAndCopied": "Bağlantı başarıyla oluşturuldu ve panoya kopyalandı",
   "LinkValidUntil": "Bu bağlantı şu tarihe kadar geçerli olacaktır:",

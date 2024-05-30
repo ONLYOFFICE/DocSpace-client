@@ -96,7 +96,7 @@
   "LinkDisabledSuccessfully": "تم تعطيل الرابط بنجاح",
   "LinkEditedSuccessfully": "تم تعديل ونسخ الرابط بنجاح",
   "LinkEnabledSuccessfully": "تم تفعيل الرابط بنجاح",
-  "LinkForPortalUsers": "رابط لمستخدمي DocSpace",
+  "LinkForPortalUsers": "رابط لمستخدمي {{portalName}}",
   "LinkSettings": "إعدادات الرابط",
   "LinkSuccessfullyCreatedAndCopied": "تم إنشاء ونسخ الرابط في الحافظة بنجاح",
   "LinkValidUntil": "سيكون الرابط صالح لغاية",

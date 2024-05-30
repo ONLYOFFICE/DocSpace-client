@@ -96,7 +96,7 @@
   "LinkDisabledSuccessfully": "Odkaz úspěšně zakázán",
   "LinkEditedSuccessfully": "Odkaz úspěšně upraven a zkopírován",
   "LinkEnabledSuccessfully": "Odkaz úspěšně povolen",
-  "LinkForPortalUsers": "Odkaz pro uživatele DocSpace",
+  "LinkForPortalUsers": "Odkaz pro uživatele {{portalName}}",
   "LinkSettings": "Nastavení odkazů",
   "LinkSuccessfullyCreatedAndCopied": "Odkaz úspěšně vytvořen a zkopírován do schránky",
   "LinkValidUntil": "Tento odkaz bude platný do",

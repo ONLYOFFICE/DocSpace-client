@@ -96,7 +96,7 @@
   "LinkDisabledSuccessfully": "リンクは正常に無効化されました",
   "LinkEditedSuccessfully": "リンクの編集とコピーに成功しました",
   "LinkEnabledSuccessfully": "リンクは正常に有効化されました",
-  "LinkForPortalUsers": "DocSpaceのユーザー用リンク",
+  "LinkForPortalUsers": "{{portalName}}のユーザー用リンク",
   "LinkSettings": "リンクの設定",
   "LinkSuccessfullyCreatedAndCopied": "リンクが正常に作成され、クリップボードにコピーされました",
   "LinkValidUntil": "このリンクは次の期間まで有効です：",

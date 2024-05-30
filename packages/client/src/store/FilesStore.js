@@ -2008,7 +2008,7 @@ class FilesStore {
         "view",
         "pdf-view",
         "make-form",
-        "edit-pdf",
+        // "edit-pdf",
         "separator0",
         "submit-to-gallery",
         "separator-SubmitToGallery",
@@ -2054,9 +2054,9 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["open-pdf"]);
       }
 
-      if (!item.security.EditForm || !item.startFilling) {
-        fileOptions = this.removeOptions(fileOptions, ["edit-pdf"]);
-      }
+      // if (!item.security.EditForm || !item.startFilling) {
+      //   fileOptions = this.removeOptions(fileOptions, ["edit-pdf"]);
+      // }
 
       if (!isPdf || !window.DocSpaceConfig?.pdfViewer || isRecycleBinFolder) {
         fileOptions = this.removeOptions(fileOptions, ["pdf-view"]);

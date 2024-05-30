@@ -4,7 +4,7 @@
   "ChangeInstruction": "{{portalName}} sahibini değiştirmek için lütfen aşağıdan yeni sahibin adını seçin.",
   "ChangeOwner": "{{portalName}} sahibini değiştir",
   "ChangeUser": "Kullanıcıyı değiştir",
-  "DeactivateOrDeletePortal": "DocSpace'i devre dışı bırak veya sil",
+  "DeactivateOrDeletePortal": "{{portalName}}'i devre dışı bırak veya sil",
   "DoTheSame": "Yöneticilerle aynı şeyi yap",
   "ManagePortal": "DocSpace yapılandırmasını yönet",
   "ManageUser": "Kullanıcı hesaplarını yönet",

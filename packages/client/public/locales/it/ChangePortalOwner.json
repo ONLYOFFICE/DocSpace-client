@@ -3,7 +3,7 @@
   "ChangeInstruction": "Per modificare il proprietario di {{portalName}}, scegli il nome del nuovo proprietario di seguito.",
   "ChangeOwner": "Cambia proprietario di {{portalName}}",
   "ChangeUser": "Cambia utente",
-  "DeactivateOrDeletePortal": "Disattiva o elimina DocSpace",
+  "DeactivateOrDeletePortal": "Disattiva o elimina {{portalName}}",
   "DoTheSame": "Fai lo stesso com gli amministratori",
   "ManagePortal": "Gestire la configurazione di DocSpace",
   "ManageUser": "Gestire gli account utente",

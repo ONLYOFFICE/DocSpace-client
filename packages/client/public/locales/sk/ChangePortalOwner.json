@@ -4,7 +4,7 @@
   "ChangeInstruction": "Ak chcete zmeniť vlastníka {{portalName}}, nižšie vyberte meno nového vlastníka.",
   "ChangeOwner": "Zmeniť vlastníka {{portalName}}",
   "ChangeUser": "Zmeniť používateľa",
-  "DeactivateOrDeletePortal": "Deaktivovať alebo vymazať DocSpace",
+  "DeactivateOrDeletePortal": "Deaktivovať alebo vymazať {{portalName}}",
   "DoTheSame": "Robte to, čo robia administrátori",
   "ManagePortal": "Spravovať konfiguráciu DocSpace",
   "ManageUser": "Spravovať používateľské účty",

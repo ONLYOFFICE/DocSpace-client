@@ -4,7 +4,7 @@
   "ChangeInstruction": "Pentru a schimba proprietarul {{portalName}}, alegeţi numele noului proprietar mai jos.",
   "ChangeOwner": "Modificare proprietar {{portalName}}",
   "ChangeUser": "Schimbare utilizator",
-  "DeactivateOrDeletePortal": "Dezactivare sau ştergere DocSpace ",
+  "DeactivateOrDeletePortal": "Dezactivare sau ştergere {{portalName}} ",
   "DoTheSame": "Faceţi aceleaşi lucruri ca și administratori",
   "ManagePortal": "Gestionați configurarea spațiului DocSpace",
   "ManageUser": "Gestionați conturile de utilizator",

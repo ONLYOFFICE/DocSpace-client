@@ -4,7 +4,7 @@
   "ChangeInstruction": "Lai mainītu {{portalName}} īpašnieku, lūdzu, zemāk izvēlieties jaunā īpašnieka vārdu.",
   "ChangeOwner": "Mainīt {{portalName}} īpašnieku",
   "ChangeUser": "Mainīt lietotāju",
-  "DeactivateOrDeletePortal": "Deaktivizēt vai izdzēst DocSpace",
+  "DeactivateOrDeletePortal": "Deaktivizēt vai izdzēst {{portalName}}",
   "DoTheSame": "Dariet to pašu, ko administratori",
   "ManagePortal": "Pārvaldīt DocSpace konfigurāciju",
   "ManageUser": "Pārvaldīt lietotāju kontus",

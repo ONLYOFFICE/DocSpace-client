@@ -4,7 +4,7 @@
   "ChangeInstruction": "Để thay đổi chủ sở hữu {{portalName}}, xin vui lòng chọn tên của chủ sở hữu mới bên dưới.",
   "ChangeOwner": "Thay đổi chủ sở hữu {{portalName}}",
   "ChangeUser": "Thay đổi người dùng",
-  "DeactivateOrDeletePortal": "Vô hiệu hóa hoặc xóa DocSpace",
+  "DeactivateOrDeletePortal": "Vô hiệu hóa hoặc xóa {{portalName}}",
   "DoTheSame": "Làm tương tự như quản trị viên",
   "ManagePortal": "Quản lý cấu hình DocSpace",
   "ManageUser": "Quản lý tài khoản người dùng",

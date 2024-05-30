@@ -4,7 +4,7 @@
   "ChangeInstruction": "ເພື່ອປ່ຽນ ເຈົ້າຂອງ {{portalName}} , ກະລຸນາເລືອກຊື່ເຈົ້າຂອງໃໝ່ຂ້າງລຸ່ມນີ້.",
   "ChangeOwner": "ປ່ຽນ ເຈົ້າຂອງ {{portalName}}",
   "ChangeUser": "ປ່ຽນຜູ້ໃຊ້",
-  "DeactivateOrDeletePortal": "ປິດໃຊ້ງານ ຫຼືລຶບ DocSpace",
+  "DeactivateOrDeletePortal": "ປິດໃຊ້ງານ ຫຼືລຶບ {{portalName}}",
   "DoTheSame": "ເຮັດເຊັ່ນດຽວກັນກັບຜູ້ບໍລິຫານ",
   "ManagePortal": "ຈັດການກຳນົດຄ່າ portal",
   "ManageUser": "ຈັດການບັນຊີຜູ້ໃຊ້ ",

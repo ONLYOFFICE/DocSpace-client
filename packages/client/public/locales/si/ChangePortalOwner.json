@@ -4,7 +4,7 @@
   "ChangeInstruction": "{{portalName}} හිමිකරු වෙනස් කිරීමට, කරුණාකර පහතින් නව හිමිකරුගේ නම තෝරන්න.",
   "ChangeOwner": "{{portalName}} හිමිකරු සංශෝධනය",
   "ChangeUser": "පරිශ්‍රීලක සංශෝධනය",
-  "DeactivateOrDeletePortal": "DocSpace අක්‍රිය කරන්න හෝ මකන්න",
+  "DeactivateOrDeletePortal": "{{portalName}} අක්‍රිය කරන්න හෝ මකන්න",
   "DoTheSame": "පරිපාලකයින් ලෙසම කරන්න",
   "ManagePortal": "DocSpace වින්‍යාසය කළමනාකරණය",
   "ManageUser": "පරිශ්‍රීලක ගිණුම් කළමනාකරණය",

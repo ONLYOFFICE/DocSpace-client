@@ -4,7 +4,7 @@
   "ChangeInstruction": "{{portalName}}-ի սեփականատիրոջը փոխելու համար խնդրում ենք ստորև ընտրել նոր սեփականատիրոջ անունը:",
   "ChangeOwner": "Փոխել {{portalName}}-ի տնօրինողին",
   "ChangeUser": "Փոխել օգտվողին",
-  "DeactivateOrDeletePortal": "Ապագործունացնել կամ ջնջել DocSpace-ը",
+  "DeactivateOrDeletePortal": "Ապագործունացնել կամ ջնջել {{portalName}}-ը",
   "DoTheSame": "Արեք նույնը, ինչ ադմինիստրատորները",
   "ManagePortal": "Կառավարել DocSpace-ի կազմաձևումը",
   "ManageUser": "Կառավարել օգտվողների հաշիվները",

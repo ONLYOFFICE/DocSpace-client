@@ -19,7 +19,7 @@
   "PassworResetTitle": "Tagad jūs varat izveidot jaunu paroli.",
   "PhoneSubtitle": "Ir iespējota divu faktoru autentifikācija, lai nodrošinātu papildu drošību. Ievadiet savu mobilā tālruņa numuru, lai turpinātu darbu pie {{portalName}}. Mobilā tālruņa numurs ir jāievada, izmantojot starptautisko formātu ar valsts kodu.",
   "PortalContinueTitle": "Lūdzu, apstipriniet, ka vēlaties atkārtoti aktivizēt savu {{portalName}}.",
-  "PortalDeactivateTitle": "Lūdzu, apstipriniet, ka vēlaties deaktivizēt savu DocSpace.",
+  "PortalDeactivateTitle": "Lūdzu, apstipriniet, ka vēlaties deaktivizēt savu {{portalName}}.",
   "PortalRemoveTitle": "Lūdzu, apstipriniet, ka vēlaties izdzēst savu DocSpace",
   "Reactivate": "Atkārtoti aktivizēt",
   "SetAppButton": "Savienot lietotni",

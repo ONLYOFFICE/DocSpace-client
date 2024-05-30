@@ -19,7 +19,7 @@
   "PassworResetTitle": "これで新しいパスワードが作成できます。",
   "PhoneSubtitle": "二要素認証が有効になっているため、セキュリティが強化されています。{{portalName}}で作業を続けるには、携帯電話番号を入力してください。携帯電話番号は、国番号を含む国際フォーマットを使用して入力する必要があります。",
   "PortalContinueTitle": "{{portalName}}の再度有効化をご確認ください。",
-  "PortalDeactivateTitle": "DocSpaceを停止することをご確認ください。",
+  "PortalDeactivateTitle": "{{portalName}}を停止することをご確認ください。",
   "PortalRemoveTitle": "DocSpaceを削除することをご確認ください。",
   "Reactivate": "再度有効化",
   "SetAppButton": "アプリを接続する",

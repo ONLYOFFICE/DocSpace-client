@@ -19,7 +19,7 @@
   "PassworResetTitle": "Ora puoi creare una nuova password.",
   "PhoneSubtitle": "L'autenticazione a due fattori è stata attivata per assicurare una sicurezza addizionale. Inserisci il tuo numero di cellulare per continuare a lavorare in {{portalName}}. Il numero di cellulare inserito deve essere nel formato internazionale con il codice di paese indicato.",
   "PortalContinueTitle": "Ti preghiamo di confermare che desideri riattivare il tuo {{portalName}}.",
-  "PortalDeactivateTitle": "Ti preghiamo di confermare che desideri disattivare il tuo DocSpace.",
+  "PortalDeactivateTitle": "Ti preghiamo di confermare che desideri disattivare il tuo {{portalName}}.",
   "PortalRemoveTitle": "Ti preghiamo di confermare che desideri eliminare il tuo DocSpace.",
   "Reactivate": "Riattiva",
   "SetAppButton": "Collegare l'app",

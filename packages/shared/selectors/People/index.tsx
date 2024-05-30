@@ -52,7 +52,7 @@ import { AvatarRole } from "../../components/avatar";
 import { Text } from "../../components/text";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
-import { PORTAL } from "constants";
+import { PORTAL } from "../../constants";
 
 const toListItem = (
   item: TUser,

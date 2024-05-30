@@ -1,7 +1,7 @@
 {
   "DisableGeneralDescription": "U kunt de uitgeschakelde gebruikers later verwijderen of inschakelen als dat nodig is. U kunt gebruikers zoals de Eigenaar en uzelf niet uitschakelen.",
   "DisableUser": "Gebruiker uitschakelen",
-  "DisableUserDescription": "Als u deze gebruiker uitschakelt, kan hij/zij zich niet meer aanmelden bij DocSpace, terwijl zijn/haar documenten en gegevens intact blijven.",
+  "DisableUserDescription": "Als u deze gebruiker uitschakelt, kan hij/zij zich niet meer aanmelden bij {{portalName}}, terwijl zijn/haar documenten en gegevens intact blijven.",
   "DisableUsers": "Gebruikers uitschakelen",
   "DisableUsersDescription": "Als u deze gebruikers uitschakelt, kunnen zij zich niet meer aanmelden bij DocSpace, terwijl hun documenten en gegevens intact blijven.",
   "EnableUser": "Gebruiker inschakelen",

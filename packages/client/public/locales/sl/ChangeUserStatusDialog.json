@@ -1,7 +1,7 @@
 {
   "DisableGeneralDescription": "Po potrebi lahko onemogočene uporabnike kasneje izbrišete ali omogočite. Upoštevajte, da ne morete onemogočiti uporabnikov, kot sta lastnik in vi.",
   "DisableUser": "Onemogoči uporabnika",
-  "DisableUserDescription": "Če onemogočite tega uporabnika, se ne bo mogel prijaviti v DocSpace, njegovi dokumenti in podatki pa bodo ostali nedotaknjeni.",
+  "DisableUserDescription": "Če onemogočite tega uporabnika, se ne bo mogel prijaviti v {{portalName}}, njegovi dokumenti in podatki pa bodo ostali nedotaknjeni.",
   "DisableUsers": "Onemogoči uporabnike",
   "DisableUsersDescription": "Če onemogočite te uporabnike, se ne bodo mogli prijaviti v DocSpace, njihovi dokumenti in podatki pa bodo ostali nedotaknjeni.",
   "EnableUser": "Omogoči uporabnika",

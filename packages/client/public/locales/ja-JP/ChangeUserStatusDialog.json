@@ -1,7 +1,7 @@
 {
   "DisableGeneralDescription": "必要に応じて、無効にしたユーザーを削除したり、有効にしたりすることができます。オーナーや自分自身などのユーザーを無効にすることはできません。",
   "DisableUser": "ユーザーを無効にする",
-  "DisableUserDescription": "このユーザーを無効にすると、DocSpaceにログインできなくなりますが、ドキュメントやデータはそのまま残ります。",
+  "DisableUserDescription": "このユーザーを無効にすると、{{portalName}}にログインできなくなりますが、ドキュメントやデータはそのまま残ります。",
   "DisableUsers": "ユーザーを無効にする",
   "DisableUsersDescription": "このユーザーを無効にすると、DocSpaceにログインできなくなりますが、ドキュメントやデータはそのまま残ります。",
   "EnableUser": "ユーザーを有効にするActivare utilizator",

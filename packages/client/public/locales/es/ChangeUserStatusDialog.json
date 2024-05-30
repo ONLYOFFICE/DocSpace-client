@@ -1,7 +1,7 @@
 {
   "DisableGeneralDescription": "Más tarde puede eliminar o activar a los usuarios desactivados si es necesario. Tenga en cuenta que no puede deshabilitar a usuarios como el Propietario y usted mismo.",
   "DisableUser": "Desactivar usuario",
-  "DisableUserDescription": "Si desactiva a este usuario, no podrá iniciar sesión en DocSpace, mientras que sus documentos y datos permanecerán intactos.",
+  "DisableUserDescription": "Si desactiva a este usuario, no podrá iniciar sesión en {{portalName}}, mientras que sus documentos y datos permanecerán intactos.",
   "DisableUsers": "Desactivar usuarios",
   "DisableUsersDescription": "Si desactiva a estes usuarios, no podrán iniciar sesión en DocSpace, mientras que sus documentos y datos permanecerán intactos.",
   "EnableUser": "Activar usuario",

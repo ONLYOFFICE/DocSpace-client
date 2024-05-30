@@ -1,7 +1,7 @@
 {
   "DisableGeneralDescription": "Daha sonra gerekirse devre dışı bırakılan kullanıcıları silebilir veya etkinleştirebilirsiniz. Kendiniz veya Sahip gibi kullanıcıları devre dışı bırakamayacağınızı unutmayın.",
   "DisableUser": "Kullanıcıyı devre dışı bırak",
-  "DisableUserDescription": "Bu kullanıcıyı Devre Dışı Bırakırsanız, DocSpace'te oturum açamayacak fakat belgeleri ve verileri bozulmadan kalacaktır.",
+  "DisableUserDescription": "Bu kullanıcıyı Devre Dışı Bırakırsanız, {{portalName}}'te oturum açamayacak fakat belgeleri ve verileri bozulmadan kalacaktır.",
   "DisableUsers": "Kullanıcıları devre dışı bırak",
   "DisableUsersDescription": "Bu kullanıcıları Devre Dışı Bırakırsanız, DocSpace'te oturum açamayacaklar fakat belgeleri ve verileri bozulmadan kalacaktır.",
   "EnableUser": "Kullanıcıyı etkinleştir",

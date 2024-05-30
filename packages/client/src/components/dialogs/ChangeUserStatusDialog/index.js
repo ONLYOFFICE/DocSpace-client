@@ -40,6 +40,7 @@ import { withTranslation } from "react-i18next";
 import { EmployeeStatus } from "@docspace/shared/enums";
 import ModalDialogContainer from "../ModalDialogContainer";
 import { inject, observer } from "mobx-react";
+import { PORTAL } from "@docspace/shared/constants";
 
 class ChangeUserStatusDialogComponent extends React.Component {
   constructor(props) {
@@ -131,7 +132,7 @@ class ChangeUserStatusDialogComponent extends React.Component {
       header = onlyOneUser ? t("DisableUser") : t("DisableUsers");
 
       bodyText = onlyOneUser
-        ? t("DisableUserDescription")
+        ? t("DisableUserDescription", { portalName: PORTAL })
         : t("DisableUsersDescription");
 
       bodyText = bodyText + t("DisableGeneralDescription");

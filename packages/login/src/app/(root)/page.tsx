@@ -24,15 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getSettings } from "@/utils/actions";
+import { INoAuthClientProps } from "@docspace/shared/utils/oauth/interfaces";
+
+import { getOAuthClient, getSettings } from "@/utils/actions";
 import Login from "@/components/Login";
 import LoginForm from "@/components/LoginForm";
 import ThirdParty from "@/components/ThirdParty";
 import RecoverAccess from "@/components/RecoverAccess";
 import Register from "@/components/Register";
 
-async function Page() {
-  const settings = await getSettings();
+async function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string };
+}) {
+  const clientId = searchParams.clientId;
+
+  const [settings, client] = await Promise.all([
+    getSettings(),
+    clientId ? getOAuthClient(clientId, false) : undefined,
+  ]);
 
   return (
     <Login>
@@ -41,10 +52,12 @@ async function Page() {
           <LoginForm
             hashSettings={settings?.passwordHash}
             cookieSettingsEnabled={settings?.cookieSettingsEnabled}
+            clientId={clientId}
+            client={client as INoAuthClientProps}
           />
-          <ThirdParty />
+          {!clientId && <ThirdParty />}
           {settings.enableAdmMess && <RecoverAccess />}
-          {settings.enabledJoin && (
+          {settings.enabledJoin && !clientId && (
             <Register
               id="login_register"
               enabledJoin

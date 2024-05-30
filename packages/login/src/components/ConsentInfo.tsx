@@ -1,6 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import styled from "styled-components";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
@@ -38,7 +39,6 @@ interface IOAuthClientInfo {
   websiteUrl: string;
 
   isConsentScreen?: boolean;
-  t: any;
 }
 
 const OAuthClientInfo = ({
@@ -47,25 +47,27 @@ const OAuthClientInfo = ({
   websiteUrl,
 
   isConsentScreen,
-
-  t,
 }: IOAuthClientInfo) => {
+  const { t } = useTranslation(["Consent", "Common"]);
+
   return (
     <StyledOAuthContainer>
-      <Text
-        className={"row"}
-        fontWeight={600}
-        fontSize={"16px"}
-        lineHeight={"22px"}
-      >
-        {isConsentScreen ? <>{t("Consent")}</> : <>{t("Common:LoginButton")}</>}
-      </Text>
+      {!isConsentScreen && (
+        <Text
+          className="row"
+          fontWeight={600}
+          fontSize="16px"
+          lineHeight="22px"
+        >
+          {t("Common:LoginButton")}
+        </Text>
+      )}
       <img src={logo} alt={"client-logo"} />
       <Text
-        className={"row"}
+        className="row"
         fontWeight={isConsentScreen ? 400 : 600}
-        fontSize={"16px"}
-        lineHeight={"22px"}
+        fontSize="16px"
+        lineHeight="22px"
       >
         {isConsentScreen ? (
           <Trans t={t} i18nKey={"ConsentSubHeader"} ns="Consent">
@@ -77,7 +79,7 @@ const OAuthClientInfo = ({
               target={LinkTarget.blank}
               noHover
               fontWeight={600}
-              fontSize={"16px"}
+              fontSize="16px"
             >
               {name}
             </Link>{" "}
@@ -95,7 +97,7 @@ const OAuthClientInfo = ({
               target={LinkTarget.blank}
               noHover
               fontWeight={600}
-              fontSize={"16px"}
+              fontSize="16px"
             >
               {name}
             </Link>

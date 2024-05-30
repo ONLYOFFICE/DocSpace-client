@@ -70,6 +70,8 @@ export const createRequest = (
 
   if (baseURL && process.env.API_HOST?.trim()) hdrs.set("origin", baseURL);
 
+  hdrs.set("x-docspace-address", baseURL);
+
   const urls = paths.map((path) => `${apiURL}${path}`);
 
   const requests = urls.map(

@@ -24,57 +24,29 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import { IClientProps } from "@docspace/shared/utils/oauth/interfaces";
 
-import React, { useState } from "react";
-import { useTheme } from "styled-components";
+import Consent from "@/components/Consent";
+import { getOAuthClient, getScopeList, getUser } from "@/utils/actions";
 
-import { classNames, getLogoUrl } from "@docspace/shared/utils";
-import { WhiteLabelLogoType } from "../../enums";
-import { size as deviceSize } from "../../utils";
-import { StyledWrapper } from "./DocspaceLogo.styled";
-import type { DocspaceLogoProps } from "./DocspaceLogo.types";
+async function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string };
+}) {
+  const clientId = searchParams.clientId ?? searchParams.client_id;
+  const [client, scopes, user] = await Promise.all([
+    getOAuthClient(clientId, true),
+    getScopeList(),
+    getUser(),
+  ]);
 
-const DocspaceLogo = ({
-  className,
-  isResizable = false,
-}: DocspaceLogoProps) => {
-  const theme = useTheme();
-
-  const [size, setSize] = useState(window.innerWidth);
-
-  const onResize = () => {
-    setSize(window.innerWidth);
-  };
-
-  React.useEffect(() => {
-    if (isResizable) window.addEventListener("resize", onResize);
-
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, [isResizable]);
-
-  const isMobile = size <= deviceSize.mobile;
-
-  const logoSize =
-    isResizable && isMobile
-      ? WhiteLabelLogoType.LightSmall
-      : WhiteLabelLogoType.LoginPage;
-
-  const logo = getLogoUrl(logoSize, !theme.isBase);
+  if (!client || (client && !("clientId" in client)) || !scopes || !user)
+    return "";
 
   return (
-    <StyledWrapper isMobile={isMobile} isResizable={isResizable}>
-      {logo && (
-        <img
-          src={logo}
-          className={classNames("logo-wrapper", className)}
-          alt=""
-        />
-      )}
-    </StyledWrapper>
+    <Consent client={client as IClientProps} scopes={scopes} user={user} />
   );
-};
+}
 
-export default DocspaceLogo;
+export default Page;

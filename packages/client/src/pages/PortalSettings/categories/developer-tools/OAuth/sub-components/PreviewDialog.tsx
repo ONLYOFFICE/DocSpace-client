@@ -1,26 +1,24 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import { IClientProps } from "@docspace/shared/utils/oauth/interfaces";
-
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { ModalDialogType } from "@docspace/shared/components/modal-dialog/ModalDialog.enums";
 import { SocialButton } from "@docspace/shared/components/social-button";
 import { Text } from "@docspace/shared/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
-
-import OnlyofficeLight from "PUBLIC_DIR/images/onlyoffice.light.react.svg";
-import OnlyofficeDark from "PUBLIC_DIR/images/onlyoffice.dark.react.svg";
-
-// @ts-ignore
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Base } from "@docspace/shared/themes";
 import { generatePKCEPair } from "@docspace/shared/utils/oauth";
 import { AuthenticationMethod } from "@docspace/shared/enums";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+
+import OnlyofficeLight from "PUBLIC_DIR/images/onlyoffice.light.react.svg";
+import OnlyofficeDark from "PUBLIC_DIR/images/onlyoffice.dark.react.svg";
+
+import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -152,17 +150,15 @@ interface PreviewDialogProps {
 
   setPreviewDialogVisible?: (value: boolean) => void;
   client?: IClientProps;
-
-  theme?: any;
 }
 
 const PreviewDialog = ({
   visible,
   setPreviewDialogVisible,
   client,
-  theme,
 }: PreviewDialogProps) => {
   const { t } = useTranslation(["OAuth", "Common", "Webhooks"]);
+  const theme = useTheme();
 
   const [codeVerifier, setCodeVerifier] = React.useState("");
   const [codeChallenge, setCodeChallenge] = React.useState("");
@@ -181,16 +177,16 @@ const PreviewDialog = ({
   const encodingScopes = encodeURI(scopesString || "");
 
   const getData = React.useCallback(() => {
-    const { verifier, challenge, state } = generatePKCEPair();
+    const { verifier, challenge, state: s } = generatePKCEPair();
 
     setCodeVerifier(verifier);
     setCodeChallenge(challenge);
-    setState(state);
+    setState(s);
   }, []);
 
   React.useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
 
   const getLink = () => {
     return `${

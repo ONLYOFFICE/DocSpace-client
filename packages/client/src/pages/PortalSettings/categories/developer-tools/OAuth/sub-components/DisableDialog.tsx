@@ -8,7 +8,6 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 
-// @ts-ignore
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 
 interface DisableClientDialogProps {
@@ -55,7 +54,7 @@ const DisableClientDialog = (props: DisableClientDialogProps) => {
           label={t("Common:OkButton")}
           size={ButtonSize.normal}
           scale
-          primary={true}
+          primary
           isLoading={isRequestRunning}
           onClick={onDisableClick}
         />
@@ -88,6 +87,8 @@ export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
   };
 
   const onDisable = async () => {
+    if (!bufferSelection) return;
+
     setActiveClient(bufferSelection.clientId);
     await changeClientStatus(bufferSelection.clientId, false);
     setActiveClient("");

@@ -34,6 +34,7 @@ import {
 } from "@docspace/shared/api/settings/types";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { ThemeKeys } from "@docspace/shared/enums";
+import { INoAuthClientProps } from "@docspace/shared/utils/oauth/interfaces";
 
 export type TDataContext = {
   settings?: TSettings;
@@ -85,6 +86,8 @@ export type LoginFormProps = {
   hashSettings?: TPasswordHash;
   reCaptchaPublicKey?: string;
   cookieSettingsEnabled: boolean;
+  clientId?: string;
+  client?: INoAuthClientProps;
 };
 
 export type ForgotPasswordModalDialogProps = {

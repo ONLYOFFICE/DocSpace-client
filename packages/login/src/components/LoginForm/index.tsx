@@ -58,11 +58,14 @@ import ForgotContainer from "./sub-components/ForgotContainer";
 
 import { StyledCaptcha } from "./LoginForm.styled";
 import { LoginDispatchContext, LoginValueContext } from "../Login";
+import OAuthClientInfo from "../ConsentInfo";
 
 const LoginForm = ({
   hashSettings,
   cookieSettingsEnabled,
   reCaptchaPublicKey,
+  clientId,
+  client,
 }: LoginFormProps) => {
   const { isLoading, isModalOpen } = useContext(LoginValueContext);
   const { setIsLoading } = useContext(LoginDispatchContext);
@@ -334,8 +337,18 @@ const LoginForm = ({
 
   const passwordErrorMessage = errorMessage();
 
+  console.log(client);
+
   return (
     <form className="auth-form-container">
+      {client && (
+        <OAuthClientInfo
+          name={client.name}
+          logo={client.logo}
+          websiteUrl={client.websiteUrl}
+        />
+      )}
+
       <EmailContainer
         emailFromInvitation={emailFromInvitation}
         isEmailErrorShow={isEmailErrorShow}
@@ -346,7 +359,6 @@ const LoginForm = ({
         onBlurEmail={onBlurEmail}
         onValidateEmail={onValidateEmail}
       />
-
       <PasswordContainer
         isLoading={isLoading}
         emailFromInvitation={emailFromInvitation}
@@ -355,14 +367,12 @@ const LoginForm = ({
         password={password}
         onChangePassword={onChangePassword}
       />
-
       <ForgotContainer
         cookieSettingsEnabled={cookieSettingsEnabled}
         isChecked={isChecked}
         identifier={identifier}
         onChangeCheckbox={onChangeCheckbox}
       />
-
       {reCaptchaPublicKey && isCaptcha && (
         <StyledCaptcha isCaptchaError={isCaptchaError}>
           <div className="captcha-wrapper">
@@ -378,7 +388,6 @@ const LoginForm = ({
           )}
         </StyledCaptcha>
       )}
-
       <Button
         id="login_submit"
         className="login-button"

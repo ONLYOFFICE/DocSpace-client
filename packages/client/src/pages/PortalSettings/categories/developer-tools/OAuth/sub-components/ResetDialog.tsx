@@ -7,10 +7,9 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { ModalDialogType } from "@docspace/shared/components/modal-dialog/ModalDialog.enums";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
-
-// @ts-ignore
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
+
+import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 
 interface ResetDialogProps {
   isVisible?: boolean;

@@ -21,11 +21,10 @@ export const getClient = async (
     const client = (await request({
       method: "get",
       url: `/clients/${clientId}/info`,
-    })) as IClientResDTO;
+    })) as INoAuthClientProps;
 
     return {
       ...client,
-      websiteUrl: client?.website_url || "",
     };
   }
 
@@ -127,9 +126,11 @@ export const getScopeList = async (): Promise<IScope[]> => {
 export const onOAuthLogin = (clientId: string) => {
   const formData = new FormData();
 
+  formData.set("client_id", clientId);
+
   return request({
     method: "post",
-    url: `/oauth2/login?client_id=${clientId}`,
+    url: `/oauth2/login?clientId=${clientId}`,
     data: formData,
     withRedirect: true,
     headers: {
@@ -147,6 +148,8 @@ export const onOAuthSubmit = (
 
   formData.append("client_id", clientId);
   formData.append("state", clientState);
+
+  // return;
 
   scope.forEach((s) => {
     formData.append("scope", s);

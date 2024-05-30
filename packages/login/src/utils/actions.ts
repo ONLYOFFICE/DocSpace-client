@@ -26,10 +26,10 @@
 
 "use server";
 
-import { cookies } from "next/headers";
+import { headers } from "next/headers";
 
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
-
+import { TUser } from "@docspace/shared/api/people/types";
 import {
   TCapabilities,
   TGetColorTheme,
@@ -38,7 +38,11 @@ import {
   TThirdPartyProvider,
   TVersionBuild,
 } from "@docspace/shared/api/settings/types";
-import { TenantStatus } from "@docspace/shared/enums";
+import {
+  INoAuthClientProps,
+  IScope,
+} from "@docspace/shared/utils/oauth/interfaces";
+import { transformToClientProps } from "@docspace/shared/utils/oauth";
 
 export const checkIsAuthenticated = async () => {
   const [request] = createRequest(["/authentication"], [["", ""]], "GET");
@@ -142,4 +146,68 @@ export async function getSSO() {
   const sso = await res.json();
 
   return sso.response as TGetSsoSettings;
+}
+
+export async function getUser() {
+  const hdrs = headers();
+  const cookie = hdrs.get("cookie");
+
+  const [getUser] = createRequest([`/people/@self`], [["", ""]], "GET");
+
+  if (!cookie?.includes("asc_auth_key")) return undefined;
+  const userRes = await fetch(getUser);
+
+  if (userRes.status === 401) return undefined;
+
+  if (!userRes.ok) return;
+
+  const user = await userRes.json();
+
+  return user.response as TUser;
+}
+
+export async function getScopeList() {
+  const [getScopeList] = createRequest([`/scopes`], [["", ""]], "GET");
+
+  const scopeList = await fetch(getScopeList);
+
+  if (!scopeList.ok) return;
+
+  const scopes = await scopeList.json();
+
+  return scopes as IScope[];
+}
+
+export async function getOAuthClient(clientId: string, isAuth = true) {
+  if (!isAuth) {
+    const [getOAuthClient] = createRequest(
+      [`/clients/${clientId}/info`],
+      [["", ""]],
+      "GET",
+    );
+
+    const oauthClient = await fetch(getOAuthClient);
+
+    console.log(oauthClient);
+
+    if (!oauthClient.ok) return;
+
+    const client = (await oauthClient.json()) as INoAuthClientProps;
+
+    return client;
+  }
+
+  const [getOAuthClient] = createRequest(
+    [`/clients/${clientId}`],
+    [["", ""]],
+    "GET",
+  );
+
+  const oauthClient = await fetch(getOAuthClient);
+
+  if (!oauthClient.ok) return;
+
+  const client = await oauthClient.json();
+
+  return transformToClientProps(client);
 }

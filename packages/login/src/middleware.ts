@@ -40,6 +40,24 @@ export function middleware(request: NextRequest) {
   }
 
   const isAuth = !!request.cookies.get("asc_auth_key")?.value;
+  const isOAuth = request.nextUrl.searchParams.get("type") === "oauth2";
+
+  if (isOAuth) {
+    const oauthClientId =
+      request.nextUrl.searchParams.get("client_id") ??
+      request.nextUrl.searchParams.get("clientId");
+
+    if (oauthClientId === "error")
+      return NextResponse.redirect(`${redirectUrl}/login/error`);
+
+    if (isAuth) {
+      if (request.nextUrl.pathname === "/consent") return;
+
+      return NextResponse.redirect(
+        `${redirectUrl}/login/consent${request.nextUrl.search}`,
+      );
+    }
+  }
 
   const url = request.nextUrl.clone();
   url.pathname = "/";
@@ -49,5 +67,5 @@ export function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/health", "/", "/not-found"],
+  matcher: ["/health", "/", "/not-found", "/consent"],
 };

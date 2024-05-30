@@ -187,12 +187,15 @@ class AxiosClient {
     skipRedirect = false,
   ) => {
     const onSuccess = (response: TRes) => {
+      console.log("suc");
       const error = this.getResponseError(response);
 
       if (error) throw new Error(error);
 
       if (response.headers["x-redirect-uri"] && options.withRedirect) {
         const redirectUri = response.headers["x-redirect-uri"];
+
+        console.log("call");
 
         if (typeof redirectUri === "string")
           return window.location.replace(redirectUri);

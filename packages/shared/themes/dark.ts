@@ -3324,7 +3324,7 @@ const Dark: TTheme = {
     infoDialog: {
       descLinkColor: "#adadad",
       blockHeaderColor: "#858585",
-      separatorColor: "#ffffff",
+      separatorColor: "#474747",
     },
     list: {
       descriptionColor: "#858585",

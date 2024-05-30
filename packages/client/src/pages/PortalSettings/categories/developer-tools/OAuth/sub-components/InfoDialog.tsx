@@ -5,11 +5,8 @@ import { useTranslation } from "react-i18next";
 
 import { IClientProps, IScope } from "@docspace/shared/utils/oauth/interfaces";
 import ScopeList from "@docspace/shared/utils/oauth/ScopeList";
-
 import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
-
 import { getCookie } from "@docspace/shared/utils/cookie";
-
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { ModalDialogType } from "@docspace/shared/components/modal-dialog/ModalDialog.enums";
 import { Text } from "@docspace/shared/components/text";
@@ -17,22 +14,17 @@ import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
 } from "@docspace/shared/components/context-menu-button";
-
-// @ts-ignore
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import {
-  LinkTarget,
-  LinkType,
-} from "@docspace/shared/components/link/Link.enums";
-import { Link } from "@docspace/shared/components/link";
+import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { Base } from "@docspace/shared/themes";
 import { TTranslation } from "@docspace/shared/types";
 import { ContextMenuModel } from "@docspace/shared/components/context-menu";
+
+import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 
 const StyledContainer = styled.div<{
   showDescription: boolean;
@@ -289,7 +281,7 @@ const InfoDialog = ({
                   fontWeight="600"
                   isHovered
                   onClick={() => setShowDescription((val) => !val)}
-                  type={"action"}
+                  type={LinkType.action}
                 >
                   {showDescription ? "Hide" : "Show more"}
                 </Link>
@@ -314,8 +306,8 @@ const InfoDialog = ({
             fontWeight="600"
             isHovered
             href={client?.websiteUrl}
-            type={"action"}
-            target={"_blank"}
+            type={LinkType.action}
+            target={LinkTarget.blank}
           >
             {client?.websiteUrl}
           </Link>
@@ -385,8 +377,8 @@ const InfoDialog = ({
               fontWeight="600"
               isHovered
               href={client?.policyUrl}
-              type={"action"}
-              target={"_blank"}
+              type={LinkType.action}
+              target={LinkTarget.blank}
             >
               {t("PrivacyPolicy")}
             </Link>
@@ -398,8 +390,8 @@ const InfoDialog = ({
               fontWeight="600"
               isHovered
               href={client?.termsUrl}
-              type={"action"}
-              target={"_blank"}
+              type={LinkType.action}
+              target={LinkTarget.blank}
             >
               {t("Terms of Service")}
             </Link>

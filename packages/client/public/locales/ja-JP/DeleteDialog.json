@@ -3,7 +3,7 @@
   "DeleteAllGroupsTitle": "グループの削除",
   "DeleteFile": "このファイルを削除しようとしています。",
   "DeleteFolder": "このフォルダを削除しようとしています。",
-  "DeleteGroupDescription": "{{groupName}} グループが削除されます。グループ内のユーザーはDocSpaceから削除されません。続けてよろしいですか？",
+  "DeleteGroupDescription": "{{groupName}} グループが削除されます。グループ内のユーザーは{{portalName}}から削除されません。続けてよろしいですか？",
   "DeleteGroupTitle": "グループの削除",
   "DeleteItems": "この項目を削除しようとしています。",
   "DeleteItemsSharedNote": "誰かと共有している場合は、利用できなくなりますのでご注意ください。",

@@ -3,7 +3,7 @@
   "DeleteAllGroupsTitle": "Supprimer les groupes",
   "DeleteFile": "Vous êtes sur le point de supprimer ce fichier.",
   "DeleteFolder": "Vous êtes sur le point de supprimer ce dossier. ",
-  "DeleteGroupDescription": "Le groupe {{groupName}} sera supprimé. Les utilisateurs du groupe ne seront pas supprimés de DocSpace. Souhaitez-vous vraiment continuer ?",
+  "DeleteGroupDescription": "Le groupe {{groupName}} sera supprimé. Les utilisateurs du groupe ne seront pas supprimés de {{portalName}}. Souhaitez-vous vraiment continuer ?",
   "DeleteGroupTitle": "Supprimer le groupe",
   "DeleteItems": "Vous êtes sur le point de supprimer ces éléments. ",
   "DeleteItemsSharedNote": "Veuillez noter que si vous les avez partagés avec quelqu'un, ils deviendront indisponibles.",

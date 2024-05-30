@@ -3,7 +3,7 @@
   "DeleteAllGroupsTitle": "Excluir grupos",
   "DeleteFile": "Este está prestes a apagar este ficheiro. ",
   "DeleteFolder": "Está prestes a eliminar esta pasta. ",
-  "DeleteGroupDescription": "O grupo {{groupName}} será excluído. Os usuários do grupo não serão removidos do DocSpace. Você tem certeza que quer continuar?",
+  "DeleteGroupDescription": "O grupo {{groupName}} será excluído. Os usuários do grupo não serão removidos do {{portalName}}. Você tem certeza que quer continuar?",
   "DeleteGroupTitle": "Excluir grupo",
   "DeleteItems": "Está prestes a eliminar estes itens. ",
   "DeleteItemsSharedNote": "Observe que se você os compartilhou com alguém, eles ficarão indisponíveis.",

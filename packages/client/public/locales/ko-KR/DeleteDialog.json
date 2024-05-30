@@ -3,7 +3,7 @@
   "DeleteAllGroupsTitle": "그룹 삭제",
   "DeleteFile": "이 파일을 삭제하려고 합니다. ",
   "DeleteFolder": "이 폴더를 삭제하려고 합니다. ",
-  "DeleteGroupDescription": "{{groupName}} 그룹이 삭제됩니다. 그룹의 사용자는 DocSpace에서 삭제되지 않습니다. 정말로 계속하시겠습니까?",
+  "DeleteGroupDescription": "{{groupName}} 그룹이 삭제됩니다. 그룹의 사용자는 {{portalName}}에서 삭제되지 않습니다. 정말로 계속하시겠습니까?",
   "DeleteGroupTitle": "그룹 삭제",
   "DeleteItems": "이 항목을 삭제하려고 합니다. ",
   "DeleteItemsSharedNote": "사용할 수 없게 되므로, 다른 사람과 공유한 경우 주의하시기 바랍니다.",

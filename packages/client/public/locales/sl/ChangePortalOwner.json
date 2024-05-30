@@ -8,7 +8,7 @@
   "DoTheSame": "Naredite enako kot skrbniki",
   "ManagePortal": "Upravljajte konfiguracijo {{portalName}}",
   "ManageUser": "Upravljajte uporabniške račune",
-  "NewPortalOwner": "Nov lastnik DocSpace",
+  "NewPortalOwner": "Nov lastnik {{portalName}}",
   "PortalOwnerCan": "DocSpace lastnik lahko:",
   "SetAccessRights": "Nastavi pravice za dostop"
 }

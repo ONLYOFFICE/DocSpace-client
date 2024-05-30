@@ -6,7 +6,7 @@
   "DeactivateOrDeletePortal": "{{portalName}} deactiveren of verwijderen",
   "DoTheSame": "Doe hetzelfde als beheerders",
   "ManageUser": "Gebruikersaccounts beheren",
-  "NewPortalOwner": "Nieuwe DocSpace eigenaar",
+  "NewPortalOwner": "Nieuwe {{portalName}} eigenaar",
   "PortalOwnerCan": "DocSpace eigenaar kan:",
   "SetAccessRights": "Toegangsrechten instellen"
 }

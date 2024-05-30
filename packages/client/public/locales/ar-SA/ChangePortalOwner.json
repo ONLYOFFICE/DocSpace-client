@@ -8,7 +8,7 @@
   "DoTheSame": "افعل نفس الشيء مثل المسؤولين",
   "ManagePortal": "إدارة تكوين {{portalName}}",
   "ManageUser": "إدارة حسابات المستخدمين",
-  "NewPortalOwner": "مالك DocSpace جديد",
+  "NewPortalOwner": "مالك {{portalName}} جديد",
   "PortalOwnerCan": "يمكن لمالك DocSpace:",
   "SetAccessRights": "تعيين امكانيات الوصول"
 }

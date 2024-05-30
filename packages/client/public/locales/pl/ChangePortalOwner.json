@@ -7,7 +7,7 @@
   "DeactivateOrDeletePortal": "Dezaktywuj lub usuń {{portalName}}",
   "DoTheSame": "Postępuj tak samo jak administratorzy",
   "ManageUser": "Zarządzaj kontami użytkowników",
-  "NewPortalOwner": "Nowy właściciel DocSpace",
+  "NewPortalOwner": "Nowy właściciel {{portalName}}",
   "PortalOwnerCan": "Właściciel DocSpace może:",
   "SetAccessRights": "Konfiguruj prawa dostępu"
 }

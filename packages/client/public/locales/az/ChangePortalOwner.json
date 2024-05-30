@@ -8,7 +8,7 @@
   "DoTheSame": "Administratorlarla da eyni şeyi edin",
   "ManagePortal": "{{portalName}} konfiqurasiyasını idarə edin",
   "ManageUser": "İstifadəçi hesablarını idarə edin",
-  "NewPortalOwner": "Yeni DocSpace sahibi",
+  "NewPortalOwner": "Yeni {{portalName}} sahibi",
   "PortalOwnerCan": "DocSpace sahibi edə bilər:",
   "SetAccessRights": "Giriş hüquqlarını təyin edin"
 }

@@ -8,7 +8,7 @@
   "DoTheSame": "Postupujte stejně jako správci",
   "ManagePortal": "Spravovat konfiguraci {{portalName}}",
   "ManageUser": "Spravovat uživatelské účty",
-  "NewPortalOwner": "Nový majitel DocSpace",
+  "NewPortalOwner": "Nový majitel {{portalName}}",
   "PortalOwnerCan": "Majitel DocSpace může:",
   "SetAccessRights": "Nastavení přístupových práv"
 }

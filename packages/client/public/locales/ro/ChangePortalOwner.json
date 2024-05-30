@@ -8,7 +8,7 @@
   "DoTheSame": "Faceţi aceleaşi lucruri ca și administratori",
   "ManagePortal": "Gestionați configurarea spațiului {{portalName}}",
   "ManageUser": "Gestionați conturile de utilizator",
-  "NewPortalOwner": "Proprietarul nou al DocSpace",
+  "NewPortalOwner": "Proprietarul nou al {{portalName}}",
   "PortalOwnerCan": "Proprietarul DocSpace poate:",
   "SetAccessRights": "Configurare drepturi de acces "
 }

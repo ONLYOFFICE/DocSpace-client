@@ -8,7 +8,7 @@
   "DoTheSame": "Արեք նույնը, ինչ ադմինիստրատորները",
   "ManagePortal": "Կառավարել {{portalName}}-ի կազմաձևումը",
   "ManageUser": "Կառավարել օգտվողների հաշիվները",
-  "NewPortalOwner": "DocSpace-ի նոր սեփականատեր",
+  "NewPortalOwner": "{{portalName}}-ի նոր սեփականատեր",
   "PortalOwnerCan": "DocSpace-ի տնօրինողը կարող է",
   "SetAccessRights": "Սահմանել մուտքի իրավունքները"
 }

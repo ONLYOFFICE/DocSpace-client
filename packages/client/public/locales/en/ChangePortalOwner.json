@@ -8,7 +8,7 @@
   "DoTheSame": "Do the same as administrators",
   "ManagePortal": "Manage {{portalName}} configuration",
   "ManageUser": "Manage user accounts",
-  "NewPortalOwner": "New DocSpace owner",
+  "NewPortalOwner": "New {{portalName}} owner",
   "PortalOwnerCan": "DocSpace owner can:",
   "SetAccessRights": "Set access rights"
 }

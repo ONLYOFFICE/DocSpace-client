@@ -8,7 +8,7 @@
   "DoTheSame": "පරිපාලකයින් ලෙසම කරන්න",
   "ManagePortal": "{{portalName}} වින්‍යාසය කළමනාකරණය",
   "ManageUser": "පරිශ්‍රීලක ගිණුම් කළමනාකරණය",
-  "NewPortalOwner": "නව DocSpace හිමිකරු",
+  "NewPortalOwner": "නව {{portalName}} හිමිකරු",
   "PortalOwnerCan": "DocSpace හිමිකරුගේ වරප්‍රසාද:",
   "SetAccessRights": "ප්‍රවේශ අයිතීන් සකසන්න"
 }

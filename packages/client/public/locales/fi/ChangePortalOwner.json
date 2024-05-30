@@ -8,7 +8,7 @@
   "DoTheSame": "Tee sama kuin järjestelmänvalvojat",
   "ManagePortal": "Hallitse {{portalName}} asetuksia",
   "ManageUser": " Hallitse käyttäjätilejä",
-  "NewPortalOwner": "Uusi DocSpace-omistaja",
+  "NewPortalOwner": "Uusi {{portalName}}-omistaja",
   "PortalOwnerCan": "DocSpace omistaja voi:",
   "SetAccessRights": "Aseta pääsyoikeudet"
 }

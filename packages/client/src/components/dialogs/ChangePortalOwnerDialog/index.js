@@ -173,7 +173,7 @@ const ChangePortalOwnerDialog = ({
 
         <StyledPeopleSelectorInfo>
           <Text className="new-owner" noSelect title={t("NewPortalOwner")}>
-            {t("NewPortalOwner")}
+            {t("NewPortalOwner", { portalName: PORTAL })}
           </Text>
           <Text className="description" noSelect title={t("ChangeInstruction")}>
             {t("ChangeInstruction", { portalName: PORTAL })}

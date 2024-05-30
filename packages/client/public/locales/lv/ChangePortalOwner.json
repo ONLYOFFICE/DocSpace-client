@@ -8,7 +8,7 @@
   "DoTheSame": "Dariet to pašu, ko administratori",
   "ManagePortal": "Pārvaldīt {{portalName}} konfigurāciju",
   "ManageUser": "Pārvaldīt lietotāju kontus",
-  "NewPortalOwner": "Jauns DocSpace īpašnieks",
+  "NewPortalOwner": "Jauns {{portalName}} īpašnieks",
   "PortalOwnerCan": "DocSpace īpašnieks var:",
   "SetAccessRights": "Iestatīt piekļuves tiesības"
 }

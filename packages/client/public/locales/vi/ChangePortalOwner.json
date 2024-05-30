@@ -8,7 +8,7 @@
   "DoTheSame": "Làm tương tự như quản trị viên",
   "ManagePortal": "Quản lý cấu hình {{portalName}}",
   "ManageUser": "Quản lý tài khoản người dùng",
-  "NewPortalOwner": "Chủ sở hữu DocSpace mới",
+  "NewPortalOwner": "Chủ sở hữu {{portalName}} mới",
   "PortalOwnerCan": "Chủ sở hữu DocSpace có thể:",
   "SetAccessRights": "Đặt quyền truy cập"
 }

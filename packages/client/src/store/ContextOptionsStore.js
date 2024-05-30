@@ -109,6 +109,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { getFileLink, getFolderLink } from "@docspace/shared/api/files";
 import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import { PORTAL } from "@docspace/shared/constants";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -2140,7 +2141,7 @@ class ContextOptionsStore {
         id: "accounts-add_administrator",
         className: "main-button_drop-down",
         icon: PersonAdminReactSvgUrl,
-        label: t("Common:DocspaceAdmin"),
+        label: t("Common:DocspaceAdmin", { portalName: PORTAL }),
         onClick: this.onInvite,
         "data-type": EmployeeType.Admin,
         key: "administrator",

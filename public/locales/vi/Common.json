@@ -111,7 +111,7 @@
   "DisableQuota": "Vô hiệu hóa hạn mức",
   "DisableStorageQuota": "Vô hiệu hóa hạn mức lưu trữ",
   "Disconnect": "Ngắt kết nối",
-  "DocspaceAdmin": "Quản trị viên DocSpace",
+  "DocspaceAdmin": "Quản trị viên {{portalName}}",
   "DocspaceOwner": "Chủ sở hữu DocSpace",
   "Documents": "Các tài liệu",
   "Domain": "Miền:",

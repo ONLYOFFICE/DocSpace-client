@@ -111,7 +111,7 @@
   "DisableQuota": "Quota uitschakelen",
   "DisableStorageQuota": "Opslagquota uitschakelen",
   "Disconnect": "Loskoppelen",
-  "DocspaceAdmin": "DocSpace beheerder",
+  "DocspaceAdmin": "{{portalName}} beheerder",
   "DocspaceOwner": "DocSpace eigenaar",
   "Documents": "Documenten",
   "Domain": "Domein:",

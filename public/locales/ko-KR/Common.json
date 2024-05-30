@@ -111,7 +111,7 @@
   "DisableQuota": "할당량 비활성화",
   "DisableStorageQuota": "스토리지 할당량 비활성화",
   "Disconnect": "연결 해제",
-  "DocspaceAdmin": "DocSpace 관리자",
+  "DocspaceAdmin": "{{portalName}} 관리자",
   "DocspaceOwner": "DocSpace 소유자",
   "Documents": "문서",
   "Domain": "도메인:",

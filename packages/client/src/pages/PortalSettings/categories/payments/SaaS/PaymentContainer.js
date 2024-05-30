@@ -40,6 +40,7 @@ import PriceCalculation from "./PriceCalculation";
 import BenefitsContainer from "./BenefitsContainer";
 import ContactContainer from "./ContactContainer";
 import PayerInformationContainer from "./PayerInformationContainer";
+import { PORTAL } from "@docspace/shared/constants";
 
 const StyledBody = styled.div`
   max-width: 660px;
@@ -146,7 +147,9 @@ const PaymentContainer = (props) => {
             <>
               <Text isBold>{t("ManagerTypesDescription")}</Text>
               <br />
-              <Text isBold>{t("Common:DocspaceAdmin")}</Text>
+              <Text isBold>
+                {t("Common:DocspaceAdmin", { portalName: PORTAL })}
+              </Text>
               <Text>{t("AdministratorDescription")}</Text>
               <br />
               <Text isBold>{t("Common:RoomAdmin")}</Text>

@@ -111,7 +111,7 @@
   "DisableQuota": "සලාකය අබල කරන්න",
   "DisableStorageQuota": "ආචයන සලාකය අබල කරන්න",
   "Disconnect": "විසන්ධි කරන්න",
-  "DocspaceAdmin": "DocSpace පරිපාලක",
+  "DocspaceAdmin": "{{portalName}} පරිපාලක",
   "DocspaceOwner": "DocSpace හිමිකරු",
   "Documents": "ලේඛන",
   "Domain": "වසම",

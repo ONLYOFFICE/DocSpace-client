@@ -111,7 +111,7 @@
   "DisableQuota": "Vypnúť kvótu",
   "DisableStorageQuota": "Vypnúť kvótu úložiska",
   "Disconnect": "Odpojiť",
-  "DocspaceAdmin": "Administrátor DocSpace",
+  "DocspaceAdmin": "Administrátor {{portalName}}",
   "DocspaceOwner": "Vlastník DocSpace",
   "Documents": "Dokumenty",
   "Domain": "Doména",

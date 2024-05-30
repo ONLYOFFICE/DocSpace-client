@@ -111,7 +111,7 @@
   "DisableQuota": "停用配额",
   "DisableStorageQuota": "停用存储配额",
   "Disconnect": "断开连接",
-  "DocspaceAdmin": "协作空间管理员",
+  "DocspaceAdmin": "{{portalName}}管理员",
   "DocspaceOwner": "协作空间所有者",
   "Documents": "文档",
   "Domain": "域：",

@@ -111,7 +111,7 @@
   "DisableQuota": "Απενεργοποίηση ποσόστωσης",
   "DisableStorageQuota": "Απενεργοποίηση ποσόστωσης αποθ. χώρου",
   "Disconnect": "Αποσύνδεση",
-  "DocspaceAdmin": "Διαχειριστής DocSpace",
+  "DocspaceAdmin": "Διαχειριστής {{portalName}}",
   "DocspaceOwner": "Ιδιοκτήτης DocSpace",
   "Documents": "Έγγραφα",
   "Domain": "Τομέας:",

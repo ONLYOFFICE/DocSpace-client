@@ -111,7 +111,7 @@
   "DisableQuota": "تعطيل الحصة",
   "DisableStorageQuota": "تعطيل حصة التخزين",
   "Disconnect": "قطع الاتصال",
-  "DocspaceAdmin": "مسئول DocSpace",
+  "DocspaceAdmin": "مسئول {{portalName}}",
   "DocspaceOwner": "مالك DocSpace",
   "Documents": "ملفات",
   "Domain": "النطاق",

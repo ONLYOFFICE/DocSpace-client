@@ -112,7 +112,7 @@
   "DisableQuota": "Disable quota",
   "DisableStorageQuota": "Disable storage quota",
   "Disconnect": "Disconnect",
-  "DocspaceAdmin": "DocSpace admin",
+  "DocspaceAdmin": "{{portalName}} admin",
   "DocspaceOwner": "DocSpace owner",
   "Documents": "Documents",
   "Domain": "Domain",

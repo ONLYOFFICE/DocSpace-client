@@ -111,7 +111,7 @@
   "DisableQuota": "Անջատել քվոտան",
   "DisableStorageQuota": "Անջատել պահեստի սահմանաչափը",
   "Disconnect": "Ապակապակցել",
-  "DocspaceAdmin": "DocSpace-ի ադմինիստրատոր",
+  "DocspaceAdmin": "{{portalName}}-ի ադմինիստրատոր",
   "DocspaceOwner": "DocSpace-ի տնօրինող",
   "Documents": "Փաստաթուղթ",
   "Domain": "Տիրույթ:",

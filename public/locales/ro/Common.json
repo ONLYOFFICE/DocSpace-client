@@ -111,7 +111,7 @@
   "DisableQuota": "Dezactivare cotă",
   "DisableStorageQuota": "Dezactivare cotă spațiu de stocare",
   "Disconnect": "Deconectare",
-  "DocspaceAdmin": "Administratorul DocSpace",
+  "DocspaceAdmin": "Administratorul {{portalName}}",
   "DocspaceOwner": "Proprietarul DocSpace",
   "Documents": "Documente",
   "Domain": "Domeniu:",

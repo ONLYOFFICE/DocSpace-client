@@ -111,7 +111,7 @@
   "DisableQuota": "Quote deaktivieren",
   "DisableStorageQuota": "Speicherquote deaktivieren",
   "Disconnect": "Trennen Sie die Verbindung",
-  "DocspaceAdmin": "DocSpace-Verwaltung",
+  "DocspaceAdmin": "{{portalName}}-Verwaltung",
   "DocspaceOwner": "DocSpace-Besitzer",
   "Documents": "Dokumente",
   "Domain": "Domain:",

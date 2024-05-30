@@ -111,7 +111,7 @@
   "DisableQuota": "Atspējot kvotu",
   "DisableStorageQuota": "Atspējot krātuves kvotu",
   "Disconnect": "Atvienot",
-  "DocspaceAdmin": "DocSpace administrators",
+  "DocspaceAdmin": "{{portalName}} administrators",
   "DocspaceOwner": "DocSpace īpašnieks",
   "Documents": "Dokumenti",
   "Domain": "Domēns:",

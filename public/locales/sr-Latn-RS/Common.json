@@ -110,7 +110,7 @@
   "DisableQuota": "Onemogući kvotu",
   "DisableStorageQuota": "Onemogući kvotu skladišta",
   "Disconnect": "Prekini vezu",
-  "DocspaceAdmin": "DocSpace admin",
+  "DocspaceAdmin": "{{portalName}} admin",
   "DocspaceOwner": "DocSpace vlasnik",
   "Documents": "Dokumenta",
   "Domain": "Domen",

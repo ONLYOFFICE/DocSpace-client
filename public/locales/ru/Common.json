@@ -111,7 +111,7 @@
   "DisableQuota": "Отключить квоту",
   "DisableStorageQuota": "Отключить квоту хранилища",
   "Disconnect": "Отключить",
-  "DocspaceAdmin": "Администратор DocSpace",
+  "DocspaceAdmin": "Администратор {{portalName}}",
   "DocspaceOwner": "Владелец DocSpace",
   "Documents": "Документы",
   "Domain": "Домен:",

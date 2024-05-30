@@ -111,7 +111,7 @@
   "DisableQuota": "Wyłącz limit",
   "DisableStorageQuota": "Wyłącz limit pamięci",
   "Disconnect": "Rozłącz",
-  "DocspaceAdmin": "Administrator DocSpace",
+  "DocspaceAdmin": "Administrator {{portalName}}",
   "DocspaceOwner": "Właściciel DocSpace",
   "Documents": "Dokumenty",
   "Domain": "Domena:",

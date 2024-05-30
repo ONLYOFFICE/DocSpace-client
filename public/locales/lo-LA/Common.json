@@ -92,7 +92,7 @@
   "DeveloperTools": "ເຄື່ອງມືພັດທະນາ",
   "Disabled": "ປິດສິດ",
   "Disconnect": "ຕັດການເຊື່ອມຕໍ່",
-  "DocspaceAdmin": "ຜູ້ເບິ່ງແຍງ DocSpace",
+  "DocspaceAdmin": "ຜູ້ເບິ່ງແຍງ {{portalName}}",
   "DocspaceOwner": "ເຈົ້າຂອງ DocSpace",
   "Documents": "ເອກະສານ",
   "Domain": "ໂດເມນ:",

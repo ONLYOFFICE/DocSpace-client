@@ -111,7 +111,7 @@
   "DisableQuota": "Kotayı devre dışı bırak",
   "DisableStorageQuota": "Depolama kotasını devre dışı bırak",
   "Disconnect": "Bağlantıyı kes",
-  "DocspaceAdmin": "DocSpace yöneticisi",
+  "DocspaceAdmin": "{{portalName}} yöneticisi",
   "DocspaceOwner": "DocSpace sahibi",
   "Documents": "Belgeler",
   "Domain": "Alan:",

@@ -111,7 +111,7 @@
   "DisableQuota": "Zakázat kvóty",
   "DisableStorageQuota": "Zakázat kvóty úložiště",
   "Disconnect": "Odpojit",
-  "DocspaceAdmin": "Správce prostoru DocSpace",
+  "DocspaceAdmin": "Správce prostoru {{portalName}}",
   "DocspaceOwner": "Majitel DocSpace",
   "Documents": "Dokumenty",
   "Domain": "Doména:",

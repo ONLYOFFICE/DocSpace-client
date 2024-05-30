@@ -111,7 +111,7 @@
   "DisableQuota": "Desactivar cuota",
   "DisableStorageQuota": "Desactivar cuota de almacenamiento",
   "Disconnect": "Desconectar",
-  "DocspaceAdmin": "Administrador de DocSpace",
+  "DocspaceAdmin": "Administrador de {{portalName}}",
   "DocspaceOwner": "Propietario de DocSpace",
   "Documents": "Documentos",
   "Domain": "Dominio:",

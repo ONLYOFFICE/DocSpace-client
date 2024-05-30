@@ -43,6 +43,7 @@ import { StyledUserTypeHeader } from "../../styles/members";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Link } from "@docspace/shared/components/link";
+import { PORTAL } from "@docspace/shared/constants";
 
 const User = ({
   t,
@@ -287,7 +288,9 @@ const User = ({
   const uniqueTooltipId = `userTooltip_${Math.random()}`;
 
   const tooltipContent = `${
-    user.isOwner ? t("Common:DocspaceOwner") : t("Common:DocspaceAdmin")
+    user.isOwner
+      ? t("Common:DocspaceOwner")
+      : t("Common:DocspaceAdmin", { portalName: PORTAL })
   }. ${t("Common:HasFullAccess")}`;
 
   return user.isTitle ? (

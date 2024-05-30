@@ -111,7 +111,7 @@
   "DisableQuota": "Poista kiintiö käytöstä",
   "DisableStorageQuota": "Poista muistikiintiö käytöstä",
   "Disconnect": "Katkaise",
-  "DocspaceAdmin": "DocSpace- järjestelmänvalvoja",
+  "DocspaceAdmin": "{{portalName}}- järjestelmänvalvoja",
   "DocspaceOwner": "DocSpace omistaja",
   "Documents": "Asiakirjat",
   "Domain": "Verkkotunnus:",

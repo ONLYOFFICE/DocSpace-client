@@ -173,7 +173,9 @@ const Panels = (props) => {
       const { file, isFill, isFirst } = event.detail;
 
       if (!isFirst) {
-        return toastr.success(t("PDFFormDialog:PDFFormIsReadyToast"));
+        return toastr.success(
+          t("PDFFormDialog:PDFFormIsReadyToast", { filename: file.title }),
+        );
       }
 
       setCreatePDFFormFile({

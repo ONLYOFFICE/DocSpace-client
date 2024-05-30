@@ -43,7 +43,7 @@ const TableView = ({
 
       setSelection && setSelection("");
     },
-    [setSelection]
+    [setSelection],
   );
 
   React.useEffect(() => {
@@ -60,7 +60,7 @@ const TableView = ({
     async ({ startIndex }: { startIndex: number; stopIndex: number }) => {
       await fetchNextClients?.(startIndex);
     },
-    []
+    [],
   );
 
   return (
@@ -74,6 +74,7 @@ const TableView = ({
         itemHeight={49}
         useReactWindow
         columnStorageName={columnStorageName}
+        columnInfoPanelStorageName=" "
         filesLength={items.length}
         fetchMoreFiles={fetchMoreFiles}
         hasMoreFiles={hasNextPage || false}
@@ -133,5 +134,5 @@ export default inject(
       itemCount,
       fetchNextClients,
     };
-  }
+  },
 )(observer(TableView));

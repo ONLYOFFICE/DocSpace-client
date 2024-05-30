@@ -1,6 +1,6 @@
 {
   "ErrorEmptyResponse": "Lege reactie",
-  "ErrorUnavailableText": "DocSpace niet beschikbaar",
+  "ErrorUnavailableText": "{{portalName}} niet beschikbaar",
   "LinkDoesNotExist": "De link die u probeert te openen bestaat niet.",
   "LinkHasExpired": "De link die u heeft gevolgd is verlopen."
 }

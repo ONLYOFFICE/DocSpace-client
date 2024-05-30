@@ -35,6 +35,7 @@ import { Button } from "@docspace/shared/components/button";
 import RecoverAccessModalDialog from "@docspace/shared/components/recover-access-modal-dialog/RecoverAccessModalDialog";
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { PORTAL } from "@docspace/shared/constants";
 
 const StyledBodyContent = styled.div`
   max-width: 480px;
@@ -86,7 +87,7 @@ const PortalUnavailable = ({ onLogoutClick }) => {
       />
       <ErrorContainer
         className="portal-unavailable_container"
-        headerText={t("ErrorUnavailableText")}
+        headerText={t("ErrorUnavailableText", { portalName: PORTAL })}
       >
         <StyledBodyContent>
           <Text textAlign="center" className="portal-unavailable_text">

@@ -1,6 +1,6 @@
 {
   "ErrorEmptyResponse": "Tyhjä vastaus",
-  "ErrorUnavailableText": "DocSpace ei ole saatavilla",
+  "ErrorUnavailableText": "{{portalName}} ei ole saatavilla",
   "LinkDoesNotExist": "Linkki, jota yrität avata ei ole olemassa.",
   "LinkHasExpired": "Linkki, jota seurasit on vanhentunut."
 }

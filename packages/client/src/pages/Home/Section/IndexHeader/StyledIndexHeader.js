@@ -57,6 +57,8 @@ const StyledTableIndexMenu = styled.div`
     height: 60px;
   }
   @media ${mobile} {
+    top: 0px;
+    position: fixed;
     height: 48px;
     padding: 0px 18px;
   }

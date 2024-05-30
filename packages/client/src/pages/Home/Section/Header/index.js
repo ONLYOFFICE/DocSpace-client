@@ -59,6 +59,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { tablet, mobile, Consumer, getLogoUrl } from "@docspace/shared/utils";
+import { isMobile } from "react-device-detect";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { TableGroupMenu } from "@docspace/shared/components/table";
@@ -951,9 +952,10 @@ const SectionHeaderContent = (props) => {
     <Consumer key="header">
       {(context) => (
         <StyledContainer isRecycleBinFolder={isRecycleBinFolder}>
+          {isMobile && isIndexEditingMode && <TableIndexHeader {...tableIndexHeaderProps} />}
           {tableGroupMenuVisible ? (
             <TableGroupMenu {...tableGroupMenuProps} withComboBox />
-          ) : isIndexEditingMode ? (
+          ) : isIndexEditingMode && !isMobile ? (
             <TableIndexHeader {...tableIndexHeaderProps} />
           ) : (
             <div className="header-container">

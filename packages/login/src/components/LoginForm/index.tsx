@@ -37,7 +37,7 @@ import React, {
 import { useTranslation } from "react-i18next";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useTheme } from "styled-components";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
@@ -60,7 +60,6 @@ import { StyledCaptcha } from "./LoginForm.styled";
 import { LoginDispatchContext, LoginValueContext } from "../Login";
 import OAuthClientInfo from "../ConsentInfo";
 import api from "@docspace/shared/api";
-import { useRouter } from "next/router";
 
 const LoginForm = ({
   hashSettings,
@@ -298,6 +297,7 @@ const LoginForm = ({
     isCaptchaSuccessful,
     clientId,
     referenceUrl,
+    router,
   ]);
 
   const onBlurEmail = () => {

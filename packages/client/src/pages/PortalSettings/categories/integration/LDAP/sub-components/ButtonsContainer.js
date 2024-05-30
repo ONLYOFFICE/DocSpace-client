@@ -22,14 +22,18 @@ const ButtonContainer = ({ saveLdapSettings, restoreToDefault }) => {
   return (
     <Box className="ldap_buttons-container">
       <SaveCancelButtons
+        className="save-cancel-buttons"
         onSaveClick={onSaveClick}
         onCancelClick={onResetClick}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Settings:DefaultSettings")}
-        displaySettings
-        className="save-cancel-buttons"
+        displaySettings={true}
+        hasScroll={true}
+        hideBorder={true}
         cancelEnable
         showReminder
+        additionalClassSaveButton="ldap-save"
+        additionalClassCancelButton="ldap-reset"
       />
     </Box>
   );

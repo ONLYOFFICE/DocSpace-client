@@ -118,14 +118,7 @@ const StyledLdapPage = styled(Box)`
       margin-right: 4px;
     }
   }
-  .ldap_buttons-container {
-    button:first-child {
-      margin-right: 8px;
-    }
-    .save-cancel-buttons {
-      bottom: ${(props) => (props.isMobileView ? "auto" : "0px")};
-    }
-  }
+
   .ldap_authentication {
     margin: 16px 0;
     display: grid;

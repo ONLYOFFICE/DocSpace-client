@@ -196,7 +196,7 @@
   "Info": "Info",
   "InfoPanel": "Informační panel",
   "InvalidLink": "Neplatný odkaz",
-  "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> vás zve do DocSpace <1>{{{spaceAddress}}</1> pro bezpečnou spolupráci na dokumentech.",
+  "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> vás zve do {{portalName}} <1>{{{spaceAddress}}</1> pro bezpečnou spolupráci na dokumentech.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> vás zve do místnosti <1>{{roomName}}</1>  pro bezpečnou spolupráci na dokumentech.",
   "Invite": "Pozvat",
   "Invited": "Pozvánka na",

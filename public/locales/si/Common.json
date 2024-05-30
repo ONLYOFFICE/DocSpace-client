@@ -196,7 +196,7 @@
   "Info": "තොරතුරු",
   "InfoPanel": "තොරතුරු මඬල",
   "InvalidLink": "සබැඳිය වලංගු නොවේ ",
-  "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> ඔබට ආරක්‍ෂිතව සහයෝගයෙන් ලේඛන වල වැඩ කිරීමට <1>{{spaceAddress}}</1> DocSpace වෙත ආරාධනා කර ඇත.",
+  "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> ඔබට ආරක්‍ෂිතව සහයෝගයෙන් ලේඛන වල වැඩ කිරීමට <1>{{spaceAddress}}</1> {{portalName}} වෙත ආරාධනා කර ඇත.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> ඔබට ආරක්‍ෂිතව සහයෝගයෙන් ලේඛන වල වැඩ කිරීමට <1>{{roomName}}</1> කාමරයට ආරාධනා කර ඇත.",
   "Invite": "ආරාධනය",
   "Invited": "ආරාධනා කළා",

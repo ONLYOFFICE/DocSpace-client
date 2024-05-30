@@ -196,7 +196,7 @@
   "Info": "Məlumat",
   "InfoPanel": "Məlumat paneli",
   "InvalidLink": "Etibarsız keçid",
-  "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> təhlükəsiz sənəd əməkdaşlığı üçün sizi DocSpace <1>{{spaceAddress}}</1>-ə qoşulmağa dəvət edir.",
+  "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> təhlükəsiz sənəd əməkdaşlığı üçün sizi {{portalName}} <1>{{spaceAddress}}</1>-ə qoşulmağa dəvət edir.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> təhlükəsiz sənəd əməkdaşlığı üçün sizi <1>{{roomName}}</1> otağına qoşulmağa dəvət edir.",
   "Invite": "Dəvət edin",
   "Invited": "Dəvət edildi",

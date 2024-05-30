@@ -196,7 +196,7 @@
   "Info": "情報",
   "InfoPanel": "インフォメーションパネル",
   "InvalidLink": "無効なリンク",
-  "InvitationToPortal": "<1> {{lastName}}{{firstName}}</1>さんは、安全なドキュメント共同作業をするように、あなたをDocSpace <1>{{spaceAddress}}</1>に招待しています。",
+  "InvitationToPortal": "<1> {{lastName}}{{firstName}}</1>さんは、安全なドキュメント共同作業をするように、あなたを{{portalName}} <1>{{spaceAddress}}</1>に招待しています。",
   "InvitationToRoom": "<1> {{lastName}}{{firstName}}</1>さんは、安全なドキュメント共同作業をするように、あなたをルーム <1>{{roomName}}</1>に招待しています。",
   "Invite": "招待する",
   "Invited": "招待済み",

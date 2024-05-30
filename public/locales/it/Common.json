@@ -196,7 +196,7 @@
   "Info": "Informazioni",
   "InfoPanel": "Pannello delle informazioni",
   "InvalidLink": "Link non valido",
-  "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> ti invita a unirti a DocSpace <1>{{spaceAddress}}</1> per una collaborazione sicura sui documenti.",
+  "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> ti invita a unirti a {{portalName}} <1>{{spaceAddress}}</1> per una collaborazione sicura sui documenti.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> ti invita a unirti alla stanza <1>{{roomName}}</1> per una collaborazione sicura sui documenti.",
   "Invite": "Invita",
   "Invited": "Invitato",

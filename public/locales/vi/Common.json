@@ -196,7 +196,7 @@
   "Info": "Thông tin",
   "InfoPanel": "Bảng thông tin",
   "InvalidLink": "Liên kết không hợp lệ",
-  "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> mời bạn tham gia DocSpace <1>{{spaceAddress}} </1> để cùng làm việc trên tài liệu một cách an toàn.",
+  "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> mời bạn tham gia {{portalName}} <1>{{spaceAddress}} </1> để cùng làm việc trên tài liệu một cách an toàn.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> mời bạn tham gia phòng <1>{{roomName}} </1> để cùng làm việc trên tài liệu một cách an toàn.",
   "Invite": "Mời",
   "Invited": "Đã mời",

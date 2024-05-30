@@ -36,6 +36,7 @@ import { Text } from "@docspace/shared/components/text";
 import { GreetingContainersProps } from "@/types";
 import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";
 import { getInvitationLinkData } from "@/utils";
+import { PORTAL } from "@docspace/shared/constants";
 
 const GreetingContainer = ({
   logoUrl,
@@ -95,6 +96,7 @@ const GreetingContainer = ({
               values={{
                 firstName,
                 lastName,
+                portalName: PORTAL,
                 ...(roomName
                   ? { roomName }
                   : { spaceAddress: window.location.host }),

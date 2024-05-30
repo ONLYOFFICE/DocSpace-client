@@ -196,7 +196,7 @@
   "Info": "Info",
   "InfoPanel": "Infopaneel",
   "InvalidLink": "Ongeldige link",
-  "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> nodigt u uit om lid te worden van DocSpace <1>{{spaceAddress}}</1> om veilig samen te werken aan documenten.",
+  "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> nodigt u uit om lid te worden van {{portalName}} <1>{{spaceAddress}}</1> om veilig samen te werken aan documenten.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> nodigt u uit om lid te worden van de kamer <1>{{roomName}}</1> om veilig samen te werken aan documenten.",
   "Invite": "Uitnodigen",
   "Invited": "Uitgenodigd",

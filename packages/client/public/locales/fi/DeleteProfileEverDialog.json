@@ -1,5 +1,4 @@
 {
-  "ActionCannotBeUndone": "Valitut käytöstä poistetut käyttäjät poistetaan DocSpacesta. Tätä toimintoa ei voi peruuttaa.",
   "CannotReassignFiles": "Jos poistat useita käyttäjiä kerralla, et voi siirtää heidän tiedostojaan muille käyttäjille.",
   "DeleteGroupUsersSuccessMessage": "Käyttäjät on poistettu.",
   "DeleteMyDocumentsUser": "Kaikki henkilökohtaiset tiedostot ja kansiot tämän käyttäjän Asiakirjani-osiossa poistetaan pysyvästi.",

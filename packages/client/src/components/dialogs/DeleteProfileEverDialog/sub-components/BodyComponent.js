@@ -30,6 +30,7 @@ import { Trans } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
+import { PORTAL } from "@docspace/shared/constants";
 
 const BodyComponent = (props) => {
   const {
@@ -71,7 +72,9 @@ const BodyComponent = (props) => {
   if (deleteWithoutReassign) {
     return (
       <>
-        <Text className="user-delete">{t("ActionCannotBeUndone")}</Text>
+        <Text className="user-delete">
+          {t("ActionCannotBeUndone", { portalName: PORTAL })}
+        </Text>
         <Text className="text-warning">{t("PleaseNote")}</Text>
         <Text className="text-delete-description">
           {t("CannotReassignFiles")}
@@ -86,7 +89,9 @@ const BodyComponent = (props) => {
   if (!onlyOneUser) {
     return (
       <>
-        <Text className="user-delete">{t("ActionCannotBeUndone")}</Text>
+        <Text className="user-delete">
+          {t("ActionCannotBeUndone", { portalName: PORTAL })}
+        </Text>
         <Text className="text-warning">{t("Common:Warning")}</Text>
         <Text className="text-delete-description">{warningMessage}</Text>
       </>

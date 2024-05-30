@@ -128,7 +128,7 @@
   "Editing": "Urejanje",
   "Editor": "Urejevalnik",
   "Email": "Email",
-  "EmptyDescription": "Tukaj se prikaže seznam uporabnikov, ki so bili predhodno povabljeni v DocSpace ali ločene sobe. Te uporabnike boste lahko kadar koli povabili k sodelovanju.",
+  "EmptyDescription": "Tukaj se prikaže seznam uporabnikov, ki so bili predhodno povabljeni v {{portalName}} ali ločene sobe. Te uporabnike boste lahko kadar koli povabili k sodelovanju.",
   "EmptyEmail": "Noben e-mail ni razčlenjen",
   "EmptyFieldError": "Prazno polje",
   "EmptyFilterDescriptionText": "Nobena datoteka ali mapa se ne ujema s tem filtrom. Poskusite z drugim filtrom ali počistite filter za ogled vseh datotek. ",

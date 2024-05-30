@@ -130,7 +130,7 @@
   "Editor": "Editor",
   "EditPDFForm": "Edit PDF form",
   "Email": "Email",
-  "EmptyDescription": "The list of users previously invited to DocSpace or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
+  "EmptyDescription": "The list of users previously invited to {{portalName}} or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
   "EmptyEmail": "No email address parsed",
   "EmptyFieldError": "Empty field",
   "EmptyFilterDescriptionText": "No files or folders match this filter. Try a different one or clear filter to view all files.",

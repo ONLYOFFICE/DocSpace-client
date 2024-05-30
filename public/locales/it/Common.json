@@ -128,7 +128,7 @@
   "Editing": "Modifica",
   "Editor": "Editor",
   "Email": "Email",
-  "EmptyDescription": "Qui apparirà l’elenco degli utenti precedentemente invitati a DocSpace oa stanze separate. Potrai invitare questi utenti a collaborare in qualsiasi momento.",
+  "EmptyDescription": "Qui apparirà l’elenco degli utenti precedentemente invitati a {{portalName}} oa stanze separate. Potrai invitare questi utenti a collaborare in qualsiasi momento.",
   "EmptyEmail": "Nessuna email analizzata",
   "EmptyFieldError": "Campo vuoto",
   "EmptyFilterDescriptionText": "Nessun file o cartella corrisponde a questo filtro. Provane uno diverso o cancella il filtro per visualizzare tutti i file.",

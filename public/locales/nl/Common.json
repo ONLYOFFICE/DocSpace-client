@@ -128,7 +128,7 @@
   "Editing": "Bewerken",
   "Editor": "Editor",
   "Email": "E-mail",
-  "EmptyDescription": "Hier verschijnt de lijst met gebruikers die eerder zijn uitgenodigd voor DocSpace of aparte kamers. U kunt deze gebruikers te allen tijde uitnodigen om samen te werken.",
+  "EmptyDescription": "Hier verschijnt de lijst met gebruikers die eerder zijn uitgenodigd voor {{portalName}} of aparte kamers. U kunt deze gebruikers te allen tijde uitnodigen om samen te werken.",
   "EmptyEmail": "Geen enkele e-mail verwerkt",
   "EmptyFieldError": "Leeg veld",
   "EmptyFilterDescriptionText": "Geen bestanden of mappen komen overeen met dit filter. Probeer een andere of verwijder de filter om alle bestanden te zien. ",

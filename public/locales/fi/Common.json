@@ -128,7 +128,7 @@
   "Editing": "Muokkaus",
   "Editor": "Editori",
   "Email": "Sähköposti",
-  "EmptyDescription": "Luettelo käyttäjistä, jotka on aiemmin kutsuttu DocSpaceen tai erillisiin huoneisiin, ilmestyy tähän. Voit kutsua näitä käyttäjiä yhteistyöhön milloin tahansa.",
+  "EmptyDescription": "Luettelo käyttäjistä, jotka on aiemmin kutsuttu {{portalName}} tai erillisiin huoneisiin, ilmestyy tähän. Voit kutsua näitä käyttäjiä yhteistyöhön milloin tahansa.",
   "EmptyEmail": "Yhtään sähköpostia ei ole jäsennelty",
   "EmptyFieldError": "Tyhjä kenttä",
   "EmptyFilterDescriptionText": "Yksikään tiedosto tai kansio ei vastaa tätä suodatinta. Kokeile toista suodatinta tai poista suodatin nähdäksesi kaikki tiedostot.",

@@ -128,7 +128,7 @@
   "Editing": "Editare",
   "Editor": "Editor",
   "Email": "e-mail",
-  "EmptyDescription": "Lista de utilizatori invitaţi anterior în DocSpace sau în săli separate va fi afişată aici. Puteţi invita aceşti utilizatori să colaboreze în orice moment.",
+  "EmptyDescription": "Lista de utilizatori invitaţi anterior în {{portalName}} sau în săli separate va fi afişată aici. Puteţi invita aceşti utilizatori să colaboreze în orice moment.",
   "EmptyEmail": "Niciun e-mail nu a fost parsat",
   "EmptyFieldError": "Câmpul gol",
   "EmptyFilterDescriptionText": "Niciun fișier sau dosar nu corespunde setărilor filtru. Aplicați un alt filtru sau îl eliminați ca să afișați toate fișiere.",

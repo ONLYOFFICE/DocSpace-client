@@ -128,7 +128,7 @@
   "Editing": "Edição",
   "Editor": "Editor",
   "Email": "Email",
-  "EmptyDescription": "A lista de usuários previamente convidados para o DocSpace ou salas separadas aparecerá aqui. Você poderá convidar esses usuários para colaboração a qualquer momento.",
+  "EmptyDescription": "A lista de usuários previamente convidados para o {{portalName}} ou salas separadas aparecerá aqui. Você poderá convidar esses usuários para colaboração a qualquer momento.",
   "EmptyEmail": "Ninguém analisou o e-mail",
   "EmptyFieldError": "Campo vazio",
   "EmptyFilterDescriptionText": "Nenhum arquivo ou pasta corresponde a este filtro. Tente um filtro diferente ou transparente para visualizar todos os arquivos. ",

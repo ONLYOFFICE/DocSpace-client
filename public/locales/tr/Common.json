@@ -128,7 +128,7 @@
   "Editing": "Düzenleme",
   "Editor": "Editör",
   "Email": "E-posta",
-  "EmptyDescription": "Daha önce DocSpace'e veya ayrı odalara davet edilen kullanıcıların listesi burada görünecektir. Bu kullanıcıları istediğiniz zaman iş birliği için davet edebileceksiniz.",
+  "EmptyDescription": "Daha önce {{portalName}}'e veya ayrı odalara davet edilen kullanıcıların listesi burada görünecektir. Bu kullanıcıları istediğiniz zaman iş birliği için davet edebileceksiniz.",
   "EmptyEmail": "Hiçbir e-posta ayrıştırılmadı",
   "EmptyFieldError": "Boş alan",
   "EmptyFilterDescriptionText": "Bu filtreyle eşleşen dosya veya klasör yok. Farklı bir filtre deneyin veya tüm dosyaları görüntülemek için filtreyi temizleyin.",

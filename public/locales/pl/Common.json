@@ -128,7 +128,7 @@
   "Editing": "Edytowanie",
   "Editor": "Edytor",
   "Email": "E-mail",
-  "EmptyDescription": "Tutaj pojawi się lista zaproszonych wcześniej do DocSpace użytkowników lub oddzielnych pokoi. Będziesz w stanie zaprosić tych użytkowników do współpracy kiedykolwiek zechcesz.",
+  "EmptyDescription": "Tutaj pojawi się lista zaproszonych wcześniej do {{portalName}} użytkowników lub oddzielnych pokoi. Będziesz w stanie zaprosić tych użytkowników do współpracy kiedykolwiek zechcesz.",
   "EmptyEmail": "Adres e-mail nie może być pusty",
   "EmptyFieldError": "Puste pole",
   "EmptyFilterDescriptionText": "Żaden plik ani folder nie pasują do wybranego filtra. Wypróbuj inny lub usuń go, aby zobaczyć wszystkie pliki. ",

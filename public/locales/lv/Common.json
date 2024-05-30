@@ -128,7 +128,7 @@
   "Editing": "Rediģēšana",
   "Editor": "Redaktors",
   "Email": "E-pasts",
-  "EmptyDescription": "Šeit tiks parādīts to lietotāju saraksts, kas iepriekš uzaicināti uz DocSpace vai atsevišķām telpām. Jūs varēsiet uzaicināt šos lietotājus sadarboties jebkurā laikā.",
+  "EmptyDescription": "Šeit tiks parādīts to lietotāju saraksts, kas iepriekš uzaicināti uz {{portalName}} vai atsevišķām telpām. Jūs varēsiet uzaicināt šos lietotājus sadarboties jebkurā laikā.",
   "EmptyEmail": "Neviens e-pasts nav parsēts",
   "EmptyFieldError": "Tukšs lauks",
   "EmptyFilterDescriptionText": "Šim filtram neatbilst neviens fails vai mape. Lai skatītu visus failus, izmēģiniet citu filtru vai notīriet filtru. ",

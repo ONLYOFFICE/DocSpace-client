@@ -128,7 +128,7 @@
   "Editing": "Đang chỉnh sửa",
   "Editor": "Trình chỉnh sửa",
   "Email": "Email",
-  "EmptyDescription": "Danh sách người dùng trước đây được mời đến DocSpace hoặc các phòng riêng biệt sẽ xuất hiện ở đây. Bạn sẽ có thể mời những người dùng này cộng tác bất cứ lúc nào.",
+  "EmptyDescription": "Danh sách người dùng trước đây được mời đến {{portalName}} hoặc các phòng riêng biệt sẽ xuất hiện ở đây. Bạn sẽ có thể mời những người dùng này cộng tác bất cứ lúc nào.",
   "EmptyEmail": "Không có email nào được phân tích",
   "EmptyFieldError": "Trường trống",
   "EmptyFilterDescriptionText": "Không có tệp hoặc thư mục nào phù hợp với bộ lọc này. Hãy thử bộ lọc khác hoặc xóa bộ lọc để xem tất cả các tệp. ",

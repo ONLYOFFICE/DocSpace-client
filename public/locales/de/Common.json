@@ -128,7 +128,7 @@
   "Editing": "Bearbeitung",
   "Editor": "Editor",
   "Email": "E-Mail",
-  "EmptyDescription": "Hier wird die Liste der Benutzer angezeigt, die zuvor zu DocSpace oder separaten Räumen eingeladen wurden. Sie können diese Benutzer jederzeit zur Zusammenarbeit einladen.",
+  "EmptyDescription": "Hier wird die Liste der Benutzer angezeigt, die zuvor zu {{portalName}} oder separaten Räumen eingeladen wurden. Sie können diese Benutzer jederzeit zur Zusammenarbeit einladen.",
   "EmptyEmail": "Kein E-Mail wurde eingegeben",
   "EmptyFieldError": "Leeres Feld",
   "EmptyFilterDescriptionText": "Keine Dateien oder Ordner entsprechen diesem Filter. Versuchen Sie einen anderen Filter oder entfernen Sie diesen, um alle Dateien zu sehen.",

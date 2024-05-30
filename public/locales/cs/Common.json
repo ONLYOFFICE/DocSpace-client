@@ -128,7 +128,7 @@
   "Editing": "Úpravy",
   "Editor": "Editor",
   "Email": "E-mail",
-  "EmptyDescription": "Zde se zobrazí seznam uživatelů, kteří byli dříve pozváni do prostoru DocSpace nebo do samostatných místností. Tyto uživatele budete moci kdykoli pozvat ke spolupráci.",
+  "EmptyDescription": "Zde se zobrazí seznam uživatelů, kteří byli dříve pozváni do prostoru {{portalName}} nebo do samostatných místností. Tyto uživatele budete moci kdykoli pozvat ke spolupráci.",
   "EmptyEmail": "Nebyl analyzován žádný e-mail",
   "EmptyFieldError": "Prázdné pole",
   "EmptyFilterDescriptionText": "Tomuto filtru neodpovídají žádné soubory ani složky. Vyzkoušejte jiný nebo vymažte filtr pro zobrazení všech souborů.",

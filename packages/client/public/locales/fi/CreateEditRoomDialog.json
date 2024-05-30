@@ -11,7 +11,7 @@
   "FillingFormsRoomTitle": "Lomakkeiden täyttöhuone",
   "Icon": "Kuvake",
   "MakeRoomPrivateDescription": "Kaikki tämän huoneen tiedostot salataan.",
-  "MakeRoomPrivateLimitationsWarningDescription": "Tällä toiminnolla, voit kutsua vai olemassa olevia DocSpace-käyttäjiä. Huoneen luomisen jälkeen et voi muuttaa käyttäjien listaa.",
+  "MakeRoomPrivateLimitationsWarningDescription": "Tällä toiminnolla, voit kutsua vai olemassa olevia {{portalName}}-käyttäjiä. Huoneen luomisen jälkeen et voi muuttaa käyttäjien listaa.",
   "MakeRoomPrivateTitle": "Tee huoneesta yksityinen",
   "PeopleSelectorInfo": "Vain huoneen pääkäyttäjä tai DocSpacen järjestelmänvalvoja voi olla huoneen omistaja",
   "PublicRoomBarDescription": "Tämä huone on linkin kautta avoin kaikille. Ulkoisilla käyttäjillä on ainoastaan tiedostojen katseluoikeudet.",

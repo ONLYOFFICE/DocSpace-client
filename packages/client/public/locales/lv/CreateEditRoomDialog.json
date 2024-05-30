@@ -11,7 +11,7 @@
   "FillingFormsRoomTitle": "Veidlapu telpas aizpildīšana",
   "Icon": "Ikona",
   "MakeRoomPrivateDescription": "Visi faili šajā telpā tiks šifrēti.",
-  "MakeRoomPrivateLimitationsWarningDescription": "Izmantojot šo funkciju, varat uzaicināt tikai esošos DocSpace lietotājus. Pēc telpas izveides jūs nevarēsiet mainīt lietotāju sarakstu.",
+  "MakeRoomPrivateLimitationsWarningDescription": "Izmantojot šo funkciju, varat uzaicināt tikai esošos {{portalName}} lietotājus. Pēc telpas izveides jūs nevarēsiet mainīt lietotāju sarakstu.",
   "MakeRoomPrivateTitle": "Padarīt telpu privātu",
   "PeopleSelectorInfo": "Par telpas īpašnieku var kļūt tikai telpas administrators vai DocSpace administrators",
   "PublicRoomBarDescription": "Šī telpa ir pieejama ikvienam, kam ir saite. Ārējiem lietotājiem būs tikai skatīšanas atļauja visiem failiem.",

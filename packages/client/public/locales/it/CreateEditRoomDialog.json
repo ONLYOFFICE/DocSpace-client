@@ -11,7 +11,7 @@
   "FillingFormsRoomTitle": "Stanza di compilazione di moduli",
   "Icon": "Icona",
   "MakeRoomPrivateDescription": "Tutti i file in questa stanza verranno crittografati.",
-  "MakeRoomPrivateLimitationsWarningDescription": "Con questa funzione, puoi invitare solo gli utenti esistenti di DocSpace. Dopo aver creato una stanza, non sarai in grado di modificare l’elenco degli utenti.",
+  "MakeRoomPrivateLimitationsWarningDescription": "Con questa funzione, puoi invitare solo gli utenti esistenti di {{portalName}}. Dopo aver creato una stanza, non sarai in grado di modificare l’elenco degli utenti.",
   "MakeRoomPrivateTitle": "Rendi la stanza privata",
   "PeopleSelectorInfo": "Solo un amministratore della stanza o un amministratore di DocSpace può diventare il proprietario della stanza",
   "PublicRoomBarDescription": "Questa stanza è disponibile per chiunque abbia il link. Gli utenti esterni avranno l'autorizzazione di sola visualizzazione per tutti i file.",

@@ -11,7 +11,7 @@
   "FillingFormsRoomTitle": "Miestnosť na vypĺňanie formulárov",
   "Icon": "Ikona",
   "MakeRoomPrivateDescription": "Všetky súbory v tejto miestnosti budú zašifrované.",
-  "MakeRoomPrivateLimitationsWarningDescription": "Pomocou tejto funkcie môžete pozývať iba existujúcich používateľov DocSpace. Po vytvorení miestnosti už nebudete môcť zmeniť zoznam používateľov.",
+  "MakeRoomPrivateLimitationsWarningDescription": "Pomocou tejto funkcie môžete pozývať iba existujúcich používateľov {{portalName}}. Po vytvorení miestnosti už nebudete môcť zmeniť zoznam používateľov.",
   "MakeRoomPrivateTitle": "Nastaviť miestnosť ako súkromnú",
   "PeopleSelectorInfo": "Vlastníkom miestnosti sa môže stať iba administrátor miestnosti alebo administrátor priestoru DocSpace.",
   "PublicRoomBarDescription": "Táto miestnosť je prístupná každému, kto má na ňu odkaz. Externí používatelia budú mať pre všetky súbory oprávnenie iba na ich zobrazenie.",

@@ -10,7 +10,7 @@
   "FillingFormsRoomTitle": "ການຕື່ມແບບຟອມ",
   "Icon": "ໄອຄອນ",
   "MakeRoomPrivateDescription": "ໄຟລ໌ທັງໝົດຢູ່ໃນຫ້ອງນີ້ຈະຖືກເຂົ້າລະຫັດ.",
-  "MakeRoomPrivateLimitationsWarningDescription": "ດ້ວຍຄຸນສົມບັດນີ້, ທ່ານສາມາດເຊີນ ຜູ້ໃຊ້ DocSpace ທີ່ມີຢູ່ແລ້ວເທົ່ານັ້ນ . ຫຼັງຈາກການສ້າງຫ້ອງ, ທ່ານຈະບໍ່ສາມາດປ່ຽນລາຍຊື່ຜູ້ໃຊ້ໄດ້.",
+  "MakeRoomPrivateLimitationsWarningDescription": "ດ້ວຍຄຸນສົມບັດນີ້, ທ່ານສາມາດເຊີນ ຜູ້ໃຊ້ {{portalName}} ທີ່ມີຢູ່ແລ້ວເທົ່ານັ້ນ . ຫຼັງຈາກການສ້າງຫ້ອງ, ທ່ານຈະບໍ່ສາມາດປ່ຽນລາຍຊື່ຜູ້ໃຊ້ໄດ້.",
   "MakeRoomPrivateTitle": "ເຮັດໃຫ້ຫ້ອງສ່ວນຕົວ",
   "ReviewRoomDescription": "ຮ້ອງຂໍໃຫ້ມີການທົບທວນຄືນຫຼືຄໍາເຫັນກ່ຽວກັບເອກະສານ",
   "ReviewRoomTitle": "ກວດກາຫ້ອງ",

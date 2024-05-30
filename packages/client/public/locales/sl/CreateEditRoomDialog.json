@@ -11,7 +11,7 @@
   "FillingFormsRoomTitle": "Soba za vnašanje obrazcev",
   "Icon": "Ikona",
   "MakeRoomPrivateDescription": "Vse datoteke v tej sobi bodo šifrirane.",
-  "MakeRoomPrivateLimitationsWarningDescription": "S to funkcijo lahko povabite samo obstoječe uporabnike DocSpace. Ko ustvarite sobo, ne boste mogli spremeniti seznama uporabnikov.",
+  "MakeRoomPrivateLimitationsWarningDescription": "S to funkcijo lahko povabite samo obstoječe uporabnike {{portalName}}. Ko ustvarite sobo, ne boste mogli spremeniti seznama uporabnikov.",
   "MakeRoomPrivateTitle": "Naredi sobo zasebno",
   "PeopleSelectorInfo": "Samo skrbnik sobe ali skrbnik DocSpace lahko postaneta lastnika sobe",
   "PublicRoomBarDescription": "Ta soba je na voljo vsem s povezavo. Zunanji uporabniki bodo imeli dovoljenje samo za ogled vseh datotek.",

@@ -11,7 +11,7 @@
   "FillingFormsRoomTitle": "Doldurma formları odası",
   "Icon": "Simge",
   "MakeRoomPrivateDescription": "Bu odadaki tüm dosyalar şifrelenecektir.",
-  "MakeRoomPrivateLimitationsWarningDescription": "Bu özellik ile sadece mevcut DocSpace kullanıcılarını davet edebilirsiniz. Bir oda oluşturduktan sonra kullanıcı listesini değiştiremezsiniz.",
+  "MakeRoomPrivateLimitationsWarningDescription": "Bu özellik ile sadece mevcut {{portalName}} kullanıcılarını davet edebilirsiniz. Bir oda oluşturduktan sonra kullanıcı listesini değiştiremezsiniz.",
   "MakeRoomPrivateTitle": "Odayı Özel Yap",
   "PeopleSelectorInfo": "Sadece bir oda yöneticisi veya bir DocSpace yöneticisi odanın sahibi olabilir",
   "PublicRoomBarDescription": "Bu oda, bağlantıya sahip olan herkesin kullanımına açıktır. Harici kullanıcılar tüm dosyalar için Salt Görüntüleme iznine sahip olacaktır.",

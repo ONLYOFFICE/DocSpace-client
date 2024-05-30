@@ -11,7 +11,7 @@
   "FillingFormsRoomTitle": "Salle de remplissage de formulaires",
   "Icon": "Icône",
   "MakeRoomPrivateDescription": "Tous les fichiers de cette salle seront chiffrés.",
-  "MakeRoomPrivateLimitationsWarningDescription": "Cette fonction vous permet d’inviter uniquement les utilisateurs existants de DocSpace. Après avoir créé une salle, vous ne pourrez pas modifier la liste des utilisateurs.",
+  "MakeRoomPrivateLimitationsWarningDescription": "Cette fonction vous permet d’inviter uniquement les utilisateurs existants de {{portalName}}. Après avoir créé une salle, vous ne pourrez pas modifier la liste des utilisateurs.",
   "MakeRoomPrivateTitle": "Rendre la salle privée",
   "PeopleSelectorInfo": "Seul l'administrateur d'une salle ou l'administrateur de DocSpace peut devenir le propriétaire d'une salle",
   "PublicRoomBarDescription": "Cette salle est accessible à toute personne disposant du lien. Les utilisateurs externes auront l'autorisation Lecture seule pour tous les fichiers.",

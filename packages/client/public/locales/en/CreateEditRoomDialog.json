@@ -14,7 +14,7 @@
   "FormFilingRoomTitle": "Form Filling Room",
   "Icon": "Icon",
   "MakeRoomPrivateDescription": "All files in this room will be encrypted.",
-  "MakeRoomPrivateLimitationsWarningDescription": "With this feature, you can invite only existing DocSpace users. After creating a room, you will not be able to change the list of users.",
+  "MakeRoomPrivateLimitationsWarningDescription": "With this feature, you can invite only existing {{portalName}} users. After creating a room, you will not be able to change the list of users.",
   "MakeRoomPrivateTitle": "Make the Room Private",
   "PeopleSelectorInfo": "Only a room admin or a DocSpace admin can become the owner of the room",
   "PublicRoomBarDescription": "This room is available to anyone with the link. External users will have View Only permission for all the files.",

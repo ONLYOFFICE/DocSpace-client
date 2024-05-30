@@ -11,7 +11,7 @@
   "FillingFormsRoomTitle": "Formaların doldurulması otağı",
   "Icon": "Simvol",
   "MakeRoomPrivateDescription": "Bu otaqdakı bütün fayllar şifrələnəcək.",
-  "MakeRoomPrivateLimitationsWarningDescription": "Bu funksiya ilə siz yalnız mövcud DocSpace istifadəçilərini dəvət edə bilərsiniz. Otaq yaratdıqdan sonra istifadəçi siyahısını dəyişə bilməzsiniz.",
+  "MakeRoomPrivateLimitationsWarningDescription": "Bu funksiya ilə siz yalnız mövcud {{portalName}} istifadəçilərini dəvət edə bilərsiniz. Otaq yaratdıqdan sonra istifadəçi siyahısını dəyişə bilməzsiniz.",
   "MakeRoomPrivateTitle": "Otağı Şəxsi edin",
   "PeopleSelectorInfo": "Yalnız otaq administratoru və ya DocSpace administratoru otağın sahibi ola bilər",
   "PublicRoomBarDescription": "Bu otaq keçid olan hər kəs üçün əlçatandır. Xarici istifadəçilərin bütün fayllar üçün Yalnız Baxış icazəsi olacaq.",

@@ -11,7 +11,7 @@
   "FillingFormsRoomTitle": "フォームへの記入用ルーム",
   "Icon": "アイコン",
   "MakeRoomPrivateDescription": "このルームにあるファイルはすべて暗号化されます。",
-  "MakeRoomPrivateLimitationsWarningDescription": "この機能では、既存のDocSpaceユーザーだけを招待することができます。ルームを作成した後、ユーザーリストを変更することはできません。",
+  "MakeRoomPrivateLimitationsWarningDescription": "この機能では、既存の{{portalName}}ユーザーだけを招待することができます。ルームを作成した後、ユーザーリストを変更することはできません。",
   "MakeRoomPrivateTitle": "このルームをプライベートルームにする",
   "PeopleSelectorInfo": "ルーム管理者またはDocSpace管理者のみがルーム所有者になることができます。",
   "PublicRoomBarDescription": "このルームはリンクがあれば誰でも利用できます。外部ユーザーは、すべてのファイルに対して閲覧のみの権限を持っています。",

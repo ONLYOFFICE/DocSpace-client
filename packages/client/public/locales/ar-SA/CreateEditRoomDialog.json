@@ -11,7 +11,7 @@
   "FillingFormsRoomTitle": "املأ نماذج الغرفة",
   "Icon": "أيقونة",
   "MakeRoomPrivateDescription": "سيتم تشفير جميع الملفات الموجودة في هذه الغرفة.",
-  "MakeRoomPrivateLimitationsWarningDescription": "باستخدام هذه الميزة، يمكنك دعوة مستخدمي DocSpace الحاليين فقط. بعد إنشاء غرفة، لن تتمكن من تغيير قائمة المستخدمين.",
+  "MakeRoomPrivateLimitationsWarningDescription": "باستخدام هذه الميزة، يمكنك دعوة مستخدمي {{portalName}} الحاليين فقط. بعد إنشاء غرفة، لن تتمكن من تغيير قائمة المستخدمين.",
   "MakeRoomPrivateTitle": "اجعل الغرفة خاصة",
   "PeopleSelectorInfo": "يمكن فقط لمسؤول الغرفة أو مسؤول DocSpace أن يصبح مالك الغرفة",
   "PublicRoomBarDescription": "هذه الغرفة متاحة لأي شخص لديه الرابط.",

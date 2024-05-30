@@ -3,6 +3,5 @@
   "DisableUser": "禁用用户",
   "DisableUsers": "禁用用户",
   "EnableUser": "启用用户",
-  "EnableUserDescription": "如果您启用此用户，该用户可以再次登录协作空间，并可访问其文档和数据。",
   "EnableUsers": "启用用户"
 }

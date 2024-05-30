@@ -5,7 +5,7 @@
   "DisableUsers": "Desactivar usuarios",
   "DisableUsersDescription": "Si desactiva a estes usuarios, no podrán iniciar sesión en {{portalName}}, mientras que sus documentos y datos permanecerán intactos.",
   "EnableUser": "Activar usuario",
-  "EnableUserDescription": "Si activa a este usuario, podrá volver a iniciar sesión en DocSpace y acceder a sus documentos y datos.",
+  "EnableUserDescription": "Si activa a este usuario, podrá volver a iniciar sesión en {{portalName}} y acceder a sus documentos y datos.",
   "EnableUsers": "Activar usuarios",
   "EnableUsersDescription": "Si activa a estes usuarios, podrán volver a iniciar sesión en {{portalName}} y acceder a sus documentos y datos."
 }

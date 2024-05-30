@@ -5,7 +5,7 @@
   "DisableUsers": "İstifadəçiləri deaktiv edin",
   "DisableUsersDescription": "Bu istifadəçiləri deaktiv etsəniz, onlar {{portalName}}-ə daxil ola bilməyəcək və onların sənədləri və məlumatları toxunulmaz qalacaq.",
   "EnableUser": "İstifadəçini aktivləşdirin",
-  "EnableUserDescription": "Bu istifadəçini aktiv etsəniz, onlar DocSpace-ə yenidən daxil ola və öz sənədlərinə və məlumatlarına giriş əldə edəcəklər.",
+  "EnableUserDescription": "Bu istifadəçini aktiv etsəniz, onlar {{portalName}}-ə yenidən daxil ola və öz sənədlərinə və məlumatlarına giriş əldə edəcəklər.",
   "EnableUsers": "İstifadəçiləri aktivləşdirin",
   "EnableUsersDescription": "Bu istifadəçiləri aktivləşdirsəniz, onlar {{portalName}}-ə yenidən daxil ola və öz sənədlərinə və məlumatlarına giriş əldə edəcəklər."
 }

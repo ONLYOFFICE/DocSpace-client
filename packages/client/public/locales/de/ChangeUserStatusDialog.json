@@ -5,7 +5,7 @@
   "DisableUsers": "Benutzer deaktivieren",
   "DisableUsersDescription": "Wenn Sie diese Benutzer deaktivieren, können sie sich nicht mehr bei {{portalName}} anmelden, während ihre Dokumente und Daten intakt bleiben.",
   "EnableUser": "Benutzer freigeben",
-  "EnableUserDescription": "Wenn Sie diesen Benutzer aktivieren, kann er sich wieder bei DocSpace anmelden und auf seine Dokumente und Daten zugreifen.",
+  "EnableUserDescription": "Wenn Sie diesen Benutzer aktivieren, kann er sich wieder bei {{portalName}} anmelden und auf seine Dokumente und Daten zugreifen.",
   "EnableUsers": "Benutzer freischalten",
   "EnableUsersDescription": "Wenn Sie diese Benutzer freigeben, können sie sich wieder in {{portalName}} einloggen und auf ihre Dokumente und Daten zugreifen."
 }

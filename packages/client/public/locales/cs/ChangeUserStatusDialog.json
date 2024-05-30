@@ -5,7 +5,7 @@
   "DisableUsers": "Zakázat uživatele",
   "DisableUsersDescription": "Pokud tyto uživatele zakážete, nebudou se moci přihlásit do služby {{portalName}}, zatímco jejich dokumenty a data zůstanou nedotčeny.",
   "EnableUser": "Povolit uživatele",
-  "EnableUserDescription": "Pokud tohoto uživatele povolíte, bude se moci znovu přihlásit do služby DocSpace a získat přístup ke svým dokumentům a datům.",
+  "EnableUserDescription": "Pokud tohoto uživatele povolíte, bude se moci znovu přihlásit do služby {{portalName}} a získat přístup ke svým dokumentům a datům.",
   "EnableUsers": "Povolit uživatele",
   "EnableUsersDescription": "Pokud tyto uživatele povolíte, budou se moci znovu přihlásit do služby {{portalName}} a získat přístup ke svým dokumentům a datům."
 }

@@ -5,7 +5,7 @@
   "DisableUsers": "Vô hiệu hóa người dùng",
   "DisableUsersDescription": "Nếu bạn Vô hiệu hóa những người dùng này, họ sẽ không thể đăng nhập vào  {{portalName}}, trong khi tài liệu và dữ liệu của họ sẽ vẫn còn nguyên vẹn.",
   "EnableUser": "Kích hoạt người dùng",
-  "EnableUserDescription": "Nếu bạn kích hoạt người dùng này, họ sẽ có thể đăng nhập lại vào DocSpace và truy cập tài liệu và dữ liệu của họ.",
+  "EnableUserDescription": "Nếu bạn kích hoạt người dùng này, họ sẽ có thể đăng nhập lại vào {{portalName}} và truy cập tài liệu và dữ liệu của họ.",
   "EnableUsers": "Kích hoạt người dùng",
   "EnableUsersDescription": "Nếu bạn kích hoạt những người dùng này, họ sẽ có thể đăng nhập lại vào {{portalName}} và truy cập tài liệu và dữ liệu của họ."
 }

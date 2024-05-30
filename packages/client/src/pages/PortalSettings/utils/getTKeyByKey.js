@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export const getTKeyByKey = (key, treeData, depth = 0) => {
+  if (!treeData) return;
   const keysCollection = key.split("-");
   let newKey = keysCollection.slice(0, depth + 1).join("-");
- 
+
   const item = treeData.find((item) => item.key === newKey);
   if (key === newKey) {
     return item.tKey;

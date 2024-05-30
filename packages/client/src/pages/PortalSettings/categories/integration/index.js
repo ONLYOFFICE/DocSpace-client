@@ -75,7 +75,7 @@ const IntegrationWrapper = (props) => {
       content: <ThirdParty />,
     },
     {
-      id: "single-sign-on",
+      id: "sso",
       name: t("SingleSignOn"),
       content: <SSO />,
     },

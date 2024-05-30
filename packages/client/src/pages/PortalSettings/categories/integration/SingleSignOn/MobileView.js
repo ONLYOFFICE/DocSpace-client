@@ -27,7 +27,6 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-
 import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
 
 const StyledWrapper = styled.div`
@@ -51,7 +50,7 @@ const MobileView = ({ isSSOAvailable }) => {
       <MobileCategoryWrapper
         title={t("ServiceProviderSettings")}
         subtitle={t("ServiceProviderSettingsDescription")}
-        url="/portal-settings/integration/single-sign-on/sp-settings"
+        url="/portal-settings/integration/sso/settings"
         withPaidBadge={!isSSOAvailable}
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
@@ -59,7 +58,7 @@ const MobileView = ({ isSSOAvailable }) => {
       <MobileCategoryWrapper
         title={t("SpMetadata")}
         subtitle={t("SpMetadataDescription")}
-        url="/portal-settings/integration/single-sign-on/sp-metadata"
+        url="/portal-settings/integration/sso/metadata"
         withPaidBadge={!isSSOAvailable}
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}

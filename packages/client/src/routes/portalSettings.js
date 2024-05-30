@@ -481,15 +481,15 @@ const PortalSettingsRoutes = {
       element: <Integration />,
     },
     {
-      path: "integration/single-sign-on",
+      path: "integration/sso",
       element: <Integration />,
     },
     {
-      path: "integration/single-sign-on/sp-settings",
+      path: "integration/sso/settings",
       element: <SPSettings />,
     },
     {
-      path: "integration/single-sign-on/sp-metadata",
+      path: "integration/sso/metadata",
       element: <SPMetadata />,
     },
     {

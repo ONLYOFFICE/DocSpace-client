@@ -47,8 +47,8 @@ const SPSettings = () => {
 
   const checkWidth = () => {
     window.innerWidth > size.mobile &&
-      location.pathname.includes("sp-settings") &&
-      navigate("/portal-settings/integration/single-sign-on");
+      location.pathname.includes("settings") &&
+      navigate("/portal-settings/integration/sso");
   };
 
   return (

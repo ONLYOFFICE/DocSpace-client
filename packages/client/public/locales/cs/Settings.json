@@ -71,7 +71,7 @@
   "ChooseBackupFiles": "Výběr záložních souborů",
   "ClearBackupList": "Odstranit všechny zálohy",
   "CloseMenu": "Zavřít nabídku",
-  "CommonFilesDescription": "Pro soubory ve společné části bude vytvořena samostatná místnost (Společná místnost). Do této místnosti budou mít přístup pouze správci DocSpace. Ve výchozím nastavení bude vlastníkem místnosti uživatel, který iniciuje import: Jan Novák (Vy).",
+  "CommonFilesDescription": "Pro soubory ve společné části bude vytvořena samostatná místnost (Společná místnost). Do této místnosti budou mít přístup pouze správci DocSpace. Ve výchozím nastavení bude vlastníkem místnosti uživatel, který iniciuje import: {{user}} (Vy).",
   "CompanyInfoSettings": "Nastavení informací o společnosti",
   "CompanyInfoSettingsDescription": "Tyto informace se zobrazí v okně <1>{{link}}</1>.",
   "ConfirmEmailSended": "Potvrzující e-mail byl odeslán{{ownerName}}",

@@ -37,16 +37,18 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import SimpleNav from "@/components/SimpleNav";
 import { LoginContent, LoginFormWrapper } from "@/components/Login";
 import GreetingContainer from "@/components/GreetingContainer";
-import { getColorTheme, getSettings } from "@/utils/actions";
+import { getColorTheme, getPortalCultures, getSettings } from "@/utils/actions";
+import LanguageComboboxWrapper from "@/components/LanguageCombobox";
 
 export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [settings, colorTheme] = await Promise.all([
+  const [settings, colorTheme, cultures] = await Promise.all([
     getSettings(),
     getColorTheme(),
+    getPortalCultures(),
   ]);
 
   const cookieStore = cookies();
@@ -70,6 +72,7 @@ export default async function Layout({
       <LoginFormWrapper id="login-page" bgPattern={bgPattern}>
         <div className="bg-cover" />
         <Scrollbar id="customScrollBar">
+          <LanguageComboboxWrapper cultures={cultures} />
           <LoginContent>
             <ColorTheme
               themeId={ThemeId.LinkForgotPassword}

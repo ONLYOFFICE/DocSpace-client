@@ -26,19 +26,19 @@
 
 import { observer, inject } from "mobx-react";
 import React, { useEffect, useMemo } from "react";
-import { withTranslation, I18nextProviderProps } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
-import { isBetaLanguage } from "@docspace/shared/utils";
-import { flagsIcons } from "@docspace/shared/utils/image-flags";
+import { getCookie, setCookie } from "@docspace/shared/utils/cookie";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
-
-type I18n = I18nextProviderProps["i18n"];
+import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
+import { mapCulturesToArray } from "@docspace/shared/utils/common";
+import i18n from "../i18n";
 
 interface ComponentWithCultureNamesProps {
   tReady: boolean;
   cultures: string[];
+  isAuthenticated: boolean;
   getPortalCultures: () => Promise<void>;
-  i18n: I18n;
 }
 
 interface WrappedComponentProps extends ComponentWithCultureNamesProps {
@@ -60,7 +60,7 @@ export default function withCultureNames<
     props: Omit<T, keyof WrappedComponentProps> &
       ComponentWithCultureNamesProps,
   ) => {
-    const { tReady, cultures, i18n, getPortalCultures } = props;
+    const { tReady, cultures, getPortalCultures, isAuthenticated } = props;
 
     useEffect(() => {
       if (cultures.length > 0) return;
@@ -69,21 +69,9 @@ export default function withCultureNames<
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const mapCulturesToArray = (culturesArg: string[], i18nArg: I18n) => {
-      const t = i18nArg.getFixedT(null, "Common");
-      return culturesArg.map((culture) => {
-        return {
-          key: culture,
-          label: t(`Culture_${culture}`),
-          icon: flagsIcons?.get(`${culture}.react.svg`),
-          isBeta: isBetaLanguage(culture),
-        };
-      });
-    };
-
     const cultureNames = useMemo(
-      () => mapCulturesToArray(cultures, i18n),
-      [cultures, i18n],
+      () => mapCulturesToArray(cultures, true, i18n),
+      [cultures, isAuthenticated],
     );
 
     return cultures.length > 0 && tReady ? (
@@ -93,11 +81,13 @@ export default function withCultureNames<
     );
   };
 
-  const Injected = inject<TStore>(({ settingsStore }) => {
+  const Injected = inject<TStore>(({ authStore, settingsStore }) => {
     const { cultures, getPortalCultures } = settingsStore;
+    const { isAuthenticated } = authStore;
     return {
       cultures,
       getPortalCultures,
+      isAuthenticated,
     };
   })(
     observer(withTranslation("Common")(ComponentWithCultureNames)),

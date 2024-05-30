@@ -55,6 +55,7 @@ export type LoginProps = {
   thirdPartyProvider?: TThirdPartyProvider[];
   ssoSettings?: TGetSsoSettings;
   systemTheme?: ThemeKeys;
+  cultures: string[];
 };
 
 export type RegisterProps = {

@@ -20,7 +20,7 @@
   "PhoneSubtitle": "Dvojfaktorové overenie je povolené na zabezpečenie dodatočnej bezpečnosti. Ak chcete pokračovať v práci v {{portalName}}, zadajte číslo svojho mobilného telefónu. Číslo mobilného telefónu musí byť zadané v medzinárodnom formáte s kódom krajiny.",
   "PortalContinueTitle": "Potvrďte, že chcete znova aktivovať svoj {{portalName}}.",
   "PortalDeactivateTitle": "Potvrďte, že chcete deaktivovať svoj {{portalName}}.",
-  "PortalRemoveTitle": "Potvrďte, že chcete vymazať svoj DocSpace.",
+  "PortalRemoveTitle": "Potvrďte, že chcete vymazať svoj {{portalName}}.",
   "Reactivate": "Znova aktivovať",
   "SetAppButton": "Pripojiť aplikáciu",
   "SetAppDescription": "Dvojfaktorové overenie je povolené. Nakonfigurujte si overovaciu aplikáciu, aby ste mohli pokračovať v práci v DocSpace. Môžete použiť Google Authenticator pre <1>Android</1> a <4>iOS</4> alebo Authenticator pre <8>Windows Phone</8>.",

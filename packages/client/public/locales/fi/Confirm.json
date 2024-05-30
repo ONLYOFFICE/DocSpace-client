@@ -17,7 +17,6 @@
   "GetCode": "Hanki koodi",
   "LoginRegistryButton": "Liity",
   "PassworResetTitle": "Nyt voit luoda uuden salasanan.",
-  "PortalRemoveTitle": "Ole hyvä ja vahvista, että haluat poistaa DocSpacesi.",
   "Reactivate": "Aktivoida uudelleen",
   "SetAppButton": "Yhdistä sovellus",
   "SetAppDescription": "Kaksivaiheinen todennus on käytössä. Määritä autentikointisovelluksesi jatkaaksesi työskentelyä DocSpacessa. Voit käyttää Google Authenticatoria <1> Android</1> ja <4> iOS</4>-järjestelmällä tai varmentajaa <8> Windows-puhelimella</8>.",

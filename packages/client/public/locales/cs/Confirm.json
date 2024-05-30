@@ -20,7 +20,7 @@
   "PhoneSubtitle": "Dvoufázové ověření je povoleno k zajištění ještě větší bezpečnosti. Zadejte Vaše telefonní číslo, abyste mohli pokračovat v práci na {{portalName}}. Číslo mobilního telefonu musí být zadáno v mezinárodním formátu včetně kódu země.",
   "PortalContinueTitle": "Potvrďte prosím, že chcete znovu aktivovat svůj prostor {{portalName}}.",
   "PortalDeactivateTitle": "Potvrďte prosím, že chcete deaktivovat svůj {{portalName}}.",
-  "PortalRemoveTitle": "Potvrďte, že chcete odstranit svůj prostor DocSpace.",
+  "PortalRemoveTitle": "Potvrďte, že chcete odstranit svůj prostor {{portalName}}.",
   "Reactivate": "Znovu aktivovat",
   "SetAppButton": "Připojit aplikaci",
   "SetAppDescription": "Dvoufázové ověřování je povoleno. Nakonfigurujte aplikaci autentizátoru, abyste mohli pokračovat v práci v DocSpace. Můžete použít aplikaci Google Authenticator pro <1>Android</1> a <4>iOS</4> nebo Authenticator pro <8>Windows Phone</8>.",

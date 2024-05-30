@@ -20,7 +20,7 @@
   "PhoneSubtitle": "L'autenticazione a due fattori è stata attivata per assicurare una sicurezza addizionale. Inserisci il tuo numero di cellulare per continuare a lavorare in {{portalName}}. Il numero di cellulare inserito deve essere nel formato internazionale con il codice di paese indicato.",
   "PortalContinueTitle": "Ti preghiamo di confermare che desideri riattivare il tuo {{portalName}}.",
   "PortalDeactivateTitle": "Ti preghiamo di confermare che desideri disattivare il tuo {{portalName}}.",
-  "PortalRemoveTitle": "Ti preghiamo di confermare che desideri eliminare il tuo DocSpace.",
+  "PortalRemoveTitle": "Ti preghiamo di confermare che desideri eliminare il tuo {{portalName}}.",
   "Reactivate": "Riattiva",
   "SetAppButton": "Collegare l'app",
   "SetAppDescription": "Autenticazione a due fattori è attivata. Configura l'app di autenticazione per continuare a lavorare in DocSpace. Puoi usare Google Authenticator per <1>Android</1> e <4>iOS</4> o Authenticator per <8>Windows Phone</8>.",

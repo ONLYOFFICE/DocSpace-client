@@ -20,7 +20,7 @@
   "PhoneSubtitle": "Xác thực hai yếu tố được kích hoạt để cung cấp bảo mật bổ sung. Hãy nhập số điện thoại di động của bạn để tiếp tục làm việc trong {{portalName}}. Phải nhập số điện thoại di động theo định dạng quốc tế có mã quốc gia.",
   "PortalContinueTitle": "Xin vui lòng xác nhận rằng bạn muốn kích hoạt lại {{portalName}} của mình.",
   "PortalDeactivateTitle": "Xin vui lòng xác nhận rằng bạn muốn vô hiệu hóa {{portalName}} của mình.",
-  "PortalRemoveTitle": "Xin vui  lòng xác nhận rằng bạn muốn xóa DocSpace của mình.",
+  "PortalRemoveTitle": "Xin vui  lòng xác nhận rằng bạn muốn xóa {{portalName}} của mình.",
   "Reactivate": "Kích hoạt lại",
   "SetAppButton": "Kết nối ứng dụng",
   "SetAppDescription": "Xác thực hai yếu tố đã được bật. Hãy thiết lập cấu hình ứng dụng trình xác thực của bạn để tiếp tục hoạt động trên DocSpace. Bạn có thể sử dụng Google Authenticator cho <1> Android </1>và<4> iOS </4>hoặc Authenticator cho <8>Điện thoại Windows</8>.",

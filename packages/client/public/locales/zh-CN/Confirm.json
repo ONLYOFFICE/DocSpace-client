@@ -17,7 +17,6 @@
   "GetCode": "获取代码",
   "LoginRegistryButton": "加入",
   "PassworResetTitle": "现在您可创建新密码。",
-  "PortalRemoveTitle": "请确认删除您的协作空间。",
   "Reactivate": "重新激活",
   "SetAppButton": "连接应用",
   "SetAppDescription": "双因素身份验证功能已启用。请配置您的身份验证应用，以便继续使用协作空间。如果您使用的是<1>Android</1>与<4>iOS</4>系统，则可使用Google Authenticator。<8>Windows Phone</8>可使用Authenticator。",

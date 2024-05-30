@@ -20,7 +20,7 @@
   "PhoneSubtitle": "Dvofaktorska avtentikacija je omogočena za zagotavljanje dodatne varnosti. Vnesite svojo telefonsko številko za nadaljevanje delo v {{portalName}}. Vnesena mora biti mobilna številka z mednarodnim formatom s kodo države.",
   "PortalContinueTitle": "Potrdi, če želiš znova aktivirati svoj {{portalName}}.",
   "PortalDeactivateTitle": "Potrdi, če želiš deaktivirati svoj {{portalName}}.",
-  "PortalRemoveTitle": "Potrdi, če želiš izbrisati svoj DocSpace.",
+  "PortalRemoveTitle": "Potrdi, če želiš izbrisati svoj {{portalName}}.",
   "Reactivate": "Ponovno aktiviraj",
   "SetAppButton": "Aplikacija za prijavo",
   "SetAppDescription": "Omogočena je dvofaktorska avtentikacija. Za nadaljevanje dela v DocSpace konfigurirajte aplikacijo za avtentikacijo. Google Authenticator lahko uporabite za <1>Android</1> in <4>iOS</4> ali Avtentikator za <8>Windows Telefon</8>.",

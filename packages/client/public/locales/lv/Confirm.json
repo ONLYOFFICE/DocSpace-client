@@ -20,7 +20,7 @@
   "PhoneSubtitle": "Ir iespējota divu faktoru autentifikācija, lai nodrošinātu papildu drošību. Ievadiet savu mobilā tālruņa numuru, lai turpinātu darbu pie {{portalName}}. Mobilā tālruņa numurs ir jāievada, izmantojot starptautisko formātu ar valsts kodu.",
   "PortalContinueTitle": "Lūdzu, apstipriniet, ka vēlaties atkārtoti aktivizēt savu {{portalName}}.",
   "PortalDeactivateTitle": "Lūdzu, apstipriniet, ka vēlaties deaktivizēt savu {{portalName}}.",
-  "PortalRemoveTitle": "Lūdzu, apstipriniet, ka vēlaties izdzēst savu DocSpace",
+  "PortalRemoveTitle": "Lūdzu, apstipriniet, ka vēlaties izdzēst savu {{portalName}}",
   "Reactivate": "Atkārtoti aktivizēt",
   "SetAppButton": "Savienot lietotni",
   "SetAppDescription": "Ir iespējota divu faktoru autentifikācija. Konfigurējiet savu autentifikatora lietotni, lai turpinātu darbu DocSpace. Varat izmantot Google autentifikatoru <1>Android</1> un <4>iOS</4> vai autentifikatoru <8>Windows Phone</8>.",

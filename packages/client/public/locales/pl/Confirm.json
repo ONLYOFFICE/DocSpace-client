@@ -20,7 +20,7 @@
   "PhoneSubtitle": "Uwierzytelnianie dwuskładnikowe umożliwia udostępnienie dodatkowego zabezpieczenia. Wpisz numer telefonu komórkowego, aby kontynuować pracę w {{portalName}}. Numer telefonu komórkowego należy wprowadzić przy użyciu międzynarodowego formatu z kodem kraju.",
   "PortalContinueTitle": "Potwierdź, że chcesz reaktywować {{portalName}}.",
   "PortalDeactivateTitle": "Potwierdź, że chcesz dezaktywować {{portalName}}.",
-  "PortalRemoveTitle": "Potwierdź, że chcesz usunąć DocSpace.",
+  "PortalRemoveTitle": "Potwierdź, że chcesz usunąć {{portalName}}.",
   "Reactivate": "Reaktywuj",
   "SetAppButton": "Podłącz aplikację",
   "SetAppDescription": "Weryfikacja dwuetapowa jest włączona. Skonfiguruj swoją aplikację uwierzytelniającą, aby kontynuować pracę w DocSpace. Możesz użyć aplikacji Google Authenticator dla systemów <1>Android</1> i <4>iOS</4> lub Authenticator dla <8>Windows Phone</8>.",

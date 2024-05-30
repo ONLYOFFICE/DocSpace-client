@@ -20,7 +20,7 @@
   "PhoneSubtitle": "Autentificarea cu doi factori este activată ca o măsură suplimentară de securitate. Introduceți numărul dvs de telefon pentru a continua lucrul în cadrul spațiului {{portalName}}. Numărul de telefon mobil trebuie introdus în format internațional cu prefixul de țară.",
   "PortalContinueTitle": "Confirmaţi că doriţi să reactivaţi spaţiul dvs {{portalName}}.",
   "PortalDeactivateTitle": "Confirmaţi că doriţi să dezactivați spaţiul dvs {{portalName}}.",
-  "PortalRemoveTitle": "Confirmaţi că doriţi să ştergeţi spaţiul dvs DocSpace.",
+  "PortalRemoveTitle": "Confirmaţi că doriţi să ştergeţi spaţiul dvs {{portalName}}.",
   "Reactivate": "Reactivare",
   "SetAppButton": "Conectarea aplicației",
   "SetAppDescription": "Autentificarea cu doi factori este activată. Configurați aplicația dvs de autentificare pentru a continua lucrul în DocSpace. Puteți folosi aplicația Google Authenticator pentru <1>Android</1> și <4>iOS</4> sau Authenticator pentru <8>Windows Phone</8>.",

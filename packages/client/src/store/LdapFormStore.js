@@ -115,6 +115,7 @@ class LdapFormStore {
       groupFilter,
       groupAttribute,
       groupNameAttribute,
+      login,
     } = data;
 
     const {
@@ -153,6 +154,8 @@ class LdapFormStore {
     this.groupFilter = groupFilter;
     this.groupAttribute = groupAttribute;
     this.groupNameAttribute = groupNameAttribute;
+
+    this.login = login;
   };
 
   mapCron = (cron) => {

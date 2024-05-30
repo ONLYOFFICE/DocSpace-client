@@ -113,7 +113,7 @@
   "DisableStorageQuota": "Disable storage quota",
   "Disconnect": "Disconnect",
   "DocspaceAdmin": "{{portalName}} admin",
-  "DocspaceOwner": "DocSpace owner",
+  "DocspaceOwner": "{{portalName}} owner",
   "Documents": "Documents",
   "Domain": "Domain",
   "DomainIpAddress": "Domains as IP addresses are not supported",

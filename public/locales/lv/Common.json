@@ -112,7 +112,7 @@
   "DisableStorageQuota": "Atspējot krātuves kvotu",
   "Disconnect": "Atvienot",
   "DocspaceAdmin": "{{portalName}} administrators",
-  "DocspaceOwner": "DocSpace īpašnieks",
+  "DocspaceOwner": "{{portalName}} īpašnieks",
   "Documents": "Dokumenti",
   "Domain": "Domēns:",
   "DomainIpAddress": "Domēni kā IP adrese netiek atbalstīti",

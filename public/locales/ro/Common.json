@@ -112,7 +112,7 @@
   "DisableStorageQuota": "Dezactivare cotă spațiu de stocare",
   "Disconnect": "Deconectare",
   "DocspaceAdmin": "Administratorul {{portalName}}",
-  "DocspaceOwner": "Proprietarul DocSpace",
+  "DocspaceOwner": "Proprietarul {{portalName}}",
   "Documents": "Documente",
   "Domain": "Domeniu:",
   "DomainIpAddress": "Domenii sub forma unei adrese IP nu sunt acceptate",

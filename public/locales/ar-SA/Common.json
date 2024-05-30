@@ -112,7 +112,7 @@
   "DisableStorageQuota": "تعطيل حصة التخزين",
   "Disconnect": "قطع الاتصال",
   "DocspaceAdmin": "مسئول {{portalName}}",
-  "DocspaceOwner": "مالك DocSpace",
+  "DocspaceOwner": "مالك {{portalName}}",
   "Documents": "ملفات",
   "Domain": "النطاق",
   "DomainIpAddress": "النطاقات كعناوين الأي بي غير مدعوم",

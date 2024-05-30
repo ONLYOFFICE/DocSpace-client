@@ -112,7 +112,7 @@
   "DisableStorageQuota": "Desabilitar cota de armazenamento",
   "Disconnect": "Desconectar",
   "DocspaceAdmin": "Administrador do {{portalName}}",
-  "DocspaceOwner": "Proprietário do DocSpace",
+  "DocspaceOwner": "Proprietário do {{portalName}}",
   "Documents": "Documentos",
   "Domain": "Domínio:",
   "DomainIpAddress": "Os domínios como endereço IP não são suportados",

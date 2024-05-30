@@ -112,7 +112,7 @@
   "DisableStorageQuota": "Desactivar cuota de almacenamiento",
   "Disconnect": "Desconectar",
   "DocspaceAdmin": "Administrador de {{portalName}}",
-  "DocspaceOwner": "Propietario de DocSpace",
+  "DocspaceOwner": "Propietario de {{portalName}}",
   "Documents": "Documentos",
   "Domain": "Dominio:",
   "DomainIpAddress": "No se admiten dominios como dirección IP",

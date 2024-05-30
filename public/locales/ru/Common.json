@@ -112,7 +112,7 @@
   "DisableStorageQuota": "Отключить квоту хранилища",
   "Disconnect": "Отключить",
   "DocspaceAdmin": "Администратор {{portalName}}",
-  "DocspaceOwner": "Владелец DocSpace",
+  "DocspaceOwner": "Владелец {{portalName}}",
   "Documents": "Документы",
   "Domain": "Домен:",
   "DomainIpAddress": "IP адрес в качестве домена не поддерживается",

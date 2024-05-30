@@ -112,7 +112,7 @@
   "DisableStorageQuota": "Деактивирай квота за съхранение",
   "Disconnect": "Прекъсни връзката",
   "DocspaceAdmin": "Администратор на {{portalName}}",
-  "DocspaceOwner": "DocSpace собственик",
+  "DocspaceOwner": "{{portalName}} собственик",
   "Documents": "Документи",
   "Domain": "Домейн:",
   "DomainIpAddress": "Домейни като IP адрес не се поддържат",

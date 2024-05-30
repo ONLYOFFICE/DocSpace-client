@@ -112,7 +112,7 @@
   "DisableStorageQuota": "Απενεργοποίηση ποσόστωσης αποθ. χώρου",
   "Disconnect": "Αποσύνδεση",
   "DocspaceAdmin": "Διαχειριστής {{portalName}}",
-  "DocspaceOwner": "Ιδιοκτήτης DocSpace",
+  "DocspaceOwner": "Ιδιοκτήτης {{portalName}}",
   "Documents": "Έγγραφα",
   "Domain": "Τομέας:",
   "DomainIpAddress": "Οι τομείς ως διεύθυνση IP δεν υποστηρίζονται",

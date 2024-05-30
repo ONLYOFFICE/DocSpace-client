@@ -112,7 +112,7 @@
   "DisableStorageQuota": "Vypnúť kvótu úložiska",
   "Disconnect": "Odpojiť",
   "DocspaceAdmin": "Administrátor {{portalName}}",
-  "DocspaceOwner": "Vlastník DocSpace",
+  "DocspaceOwner": "Vlastník {{portalName}}",
   "Documents": "Dokumenty",
   "Domain": "Doména",
   "DomainIpAddress": "Domény ako adresa IP nie sú podporované",

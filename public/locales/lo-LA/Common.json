@@ -93,7 +93,7 @@
   "Disabled": "ປິດສິດ",
   "Disconnect": "ຕັດການເຊື່ອມຕໍ່",
   "DocspaceAdmin": "ຜູ້ເບິ່ງແຍງ {{portalName}}",
-  "DocspaceOwner": "ເຈົ້າຂອງ DocSpace",
+  "DocspaceOwner": "ເຈົ້າຂອງ {{portalName}}",
   "Documents": "ເອກະສານ",
   "Domain": "ໂດເມນ:",
   "DomainIpAddress": "ທີ່ຢູ່ IP ໂດເມນຍັງບໍ່ຮອງຮັບ",

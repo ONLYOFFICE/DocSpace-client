@@ -111,7 +111,7 @@
   "DisableStorageQuota": "Onemogući kvotu skladišta",
   "Disconnect": "Prekini vezu",
   "DocspaceAdmin": "{{portalName}} admin",
-  "DocspaceOwner": "DocSpace vlasnik",
+  "DocspaceOwner": "{{portalName}} vlasnik",
   "Documents": "Dokumenta",
   "Domain": "Domen",
   "DomainIpAddress": "Domeni kao IP adrese nisu podržani",

@@ -112,7 +112,7 @@
   "DisableStorageQuota": "Speicherquote deaktivieren",
   "Disconnect": "Trennen Sie die Verbindung",
   "DocspaceAdmin": "{{portalName}}-Verwaltung",
-  "DocspaceOwner": "DocSpace-Besitzer",
+  "DocspaceOwner": "{{portalName}}-Besitzer",
   "Documents": "Dokumente",
   "Domain": "Domain:",
   "DomainIpAddress": "Domains als IP-Adressen werden nicht unterstützt",

@@ -112,7 +112,7 @@
   "DisableStorageQuota": "ストレージの容量制限を無効にする",
   "Disconnect": "接続解除",
   "DocspaceAdmin": "{{portalName}}の管理者",
-  "DocspaceOwner": "DocSpaceの所有者",
+  "DocspaceOwner": "{{portalName}}の所有者",
   "Documents": "ドキュメント",
   "Domain": "ドメイン:",
   "DomainIpAddress": "IPアドレスとしてのドメインには対応していません",

@@ -112,7 +112,7 @@
   "DisableStorageQuota": "Opslagquota uitschakelen",
   "Disconnect": "Loskoppelen",
   "DocspaceAdmin": "{{portalName}} beheerder",
-  "DocspaceOwner": "DocSpace eigenaar",
+  "DocspaceOwner": "{{portalName}} eigenaar",
   "Documents": "Documenten",
   "Domain": "Domein:",
   "DomainIpAddress": "Domeinen als IP-adres worden niet ondersteund",

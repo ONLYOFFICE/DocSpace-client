@@ -112,7 +112,7 @@
   "DisableStorageQuota": "Poista muistikiintiö käytöstä",
   "Disconnect": "Katkaise",
   "DocspaceAdmin": "{{portalName}}- järjestelmänvalvoja",
-  "DocspaceOwner": "DocSpace omistaja",
+  "DocspaceOwner": "{{portalName}} omistaja",
   "Documents": "Asiakirjat",
   "Domain": "Verkkotunnus:",
   "DomainIpAddress": "Verkkotunnuksia IP-osoitteina ei tueta",

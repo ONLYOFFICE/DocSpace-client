@@ -112,7 +112,7 @@
   "DisableStorageQuota": "Անջատել պահեստի սահմանաչափը",
   "Disconnect": "Ապակապակցել",
   "DocspaceAdmin": "{{portalName}}-ի ադմինիստրատոր",
-  "DocspaceOwner": "DocSpace-ի տնօրինող",
+  "DocspaceOwner": "{{portalName}}-ի տնօրինող",
   "Documents": "Փաստաթուղթ",
   "Domain": "Տիրույթ:",
   "DomainIpAddress": "Տիրույթները որպես IP հասցեներ չեն աջակցվում",

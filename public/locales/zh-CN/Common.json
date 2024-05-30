@@ -112,7 +112,7 @@
   "DisableStorageQuota": "停用存储配额",
   "Disconnect": "断开连接",
   "DocspaceAdmin": "{{portalName}}管理员",
-  "DocspaceOwner": "协作空间所有者",
+  "DocspaceOwner": "{{portalName}} 所有者",
   "Documents": "文档",
   "Domain": "域：",
   "DomainIpAddress": "不支持使用域作为IP地址",

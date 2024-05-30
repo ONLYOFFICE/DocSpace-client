@@ -289,7 +289,7 @@ const User = ({
 
   const tooltipContent = `${
     user.isOwner
-      ? t("Common:DocspaceOwner")
+      ? t("Common:DocspaceOwner", { portalName: PORTAL })
       : t("Common:DocspaceAdmin", { portalName: PORTAL })
   }. ${t("Common:HasFullAccess")}`;
 

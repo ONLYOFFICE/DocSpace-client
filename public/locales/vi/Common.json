@@ -112,7 +112,7 @@
   "DisableStorageQuota": "Vô hiệu hóa hạn mức lưu trữ",
   "Disconnect": "Ngắt kết nối",
   "DocspaceAdmin": "Quản trị viên {{portalName}}",
-  "DocspaceOwner": "Chủ sở hữu DocSpace",
+  "DocspaceOwner": "Chủ sở hữu {{portalName}}",
   "Documents": "Các tài liệu",
   "Domain": "Miền:",
   "DomainIpAddress": "Các tên miền dưới dạng địa chỉ IP không được hỗ trợ",

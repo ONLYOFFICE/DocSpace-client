@@ -112,7 +112,7 @@
   "DisableStorageQuota": "ආචයන සලාකය අබල කරන්න",
   "Disconnect": "විසන්ධි කරන්න",
   "DocspaceAdmin": "{{portalName}} පරිපාලක",
-  "DocspaceOwner": "DocSpace හිමිකරු",
+  "DocspaceOwner": "{{portalName}} හිමිකරු",
   "Documents": "ලේඛන",
   "Domain": "වසම",
   "DomainIpAddress": "අ.ජා.කෙ. ලිපින ලෙස වසම් සඳහා සහාය නොදක්වයි",

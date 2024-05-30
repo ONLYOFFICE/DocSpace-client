@@ -1,5 +1,5 @@
 {
-  "DeleteAllGroupDescription": "Označene skupine bodo izbrisane. Uporabniki v skupinah ne bodo odstranjeni iz DocSpace. Ste prepričani, da želite nadaljevati?",
+  "DeleteAllGroupDescription": "Označene skupine bodo izbrisane. Uporabniki v skupinah ne bodo odstranjeni iz {{portalName}}. Ste prepričani, da želite nadaljevati?",
   "DeleteAllGroupsTitle": "Izbriši skupine",
   "DeleteFile": "Izbrisali boste to datoteko. ",
   "DeleteFolder": "To mapo boste izbrisali. ",

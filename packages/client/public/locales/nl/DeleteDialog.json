@@ -1,5 +1,5 @@
 {
-  "DeleteAllGroupDescription": "De geselecteerde groepen worden verwijderd. Gebruikers in de groepen worden niet verwijderd uit DocSpace. Weet u zeker dat u door wilt gaan?",
+  "DeleteAllGroupDescription": "De geselecteerde groepen worden verwijderd. Gebruikers in de groepen worden niet verwijderd uit {{portalName}}. Weet u zeker dat u door wilt gaan?",
   "DeleteAllGroupsTitle": "Groepen verwijderen",
   "DeleteFile": "U staat op het punt dit bestand te verwijderen. ",
   "DeleteFolder": "U staat op het punt deze map te verwijderen. ",

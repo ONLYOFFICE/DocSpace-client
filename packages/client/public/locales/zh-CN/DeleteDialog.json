@@ -1,5 +1,5 @@
 {
-  "DeleteAllGroupDescription": "将删除选定的群组。群组中的用户不会从协作空间中删除。确定要继续吗？",
+  "DeleteAllGroupDescription": "将删除选定的群组。群组中的用户不会从 {{portalName}} 中删除。确定要继续吗？",
   "DeleteAllGroupsTitle": "删除群组",
   "DeleteFile": "您即将删除此文件。",
   "DeleteFolder": "您即将删除此文件夹。",

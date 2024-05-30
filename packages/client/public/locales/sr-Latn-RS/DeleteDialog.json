@@ -1,5 +1,5 @@
 {
-  "DeleteAllGroupDescription": "Odabrane grupe će biti obrisane. Korisnici u grupama neće biti uklonjeni sa DocSpace-a. Da li ste sigurni da želite da nastavite?",
+  "DeleteAllGroupDescription": "Odabrane grupe će biti obrisane. Korisnici u grupama neće biti uklonjeni sa {{portalName}}-a. Da li ste sigurni da želite da nastavite?",
   "DeleteAllGroupsTitle": "Obriši grupe",
   "DeleteFile": "Spremate se da obrišete ovu datoteku.",
   "DeleteFolder": "Spremate se da obrišete ovaj folder.",

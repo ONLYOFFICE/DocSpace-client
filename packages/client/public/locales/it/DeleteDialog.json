@@ -1,5 +1,5 @@
 {
-  "DeleteAllGroupDescription": "I gruppi selezionati verranno eliminati. Gli utenti dei gruppi non verranno rimossi da DocSpace. Sei sicuro di voler continuare?",
+  "DeleteAllGroupDescription": "I gruppi selezionati verranno eliminati. Gli utenti dei gruppi non verranno rimossi da {{portalName}}. Sei sicuro di voler continuare?",
   "DeleteAllGroupsTitle": "Elimina gruppi",
   "DeleteFile": "Stai per eliminare questo file.",
   "DeleteFolder": "Stai per eliminare questa cartella. ",

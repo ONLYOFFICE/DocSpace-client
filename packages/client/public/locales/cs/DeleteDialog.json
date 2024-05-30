@@ -1,5 +1,5 @@
 {
-  "DeleteAllGroupDescription": "Vybrané skupiny budou odstraněny. Uživatelé ve skupinách nebudou z DocSpace odstraněni. Opravdu chcete pokračovat?",
+  "DeleteAllGroupDescription": "Vybrané skupiny budou odstraněny. Uživatelé ve skupinách nebudou z {{portalName}} odstraněni. Opravdu chcete pokračovat?",
   "DeleteAllGroupsTitle": "Odstranit skupiny",
   "DeleteFile": "Chystáte se odstranit tento soubor.",
   "DeleteFolder": "Chystáte se odstranit tuto složku.",

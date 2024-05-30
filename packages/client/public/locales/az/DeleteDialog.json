@@ -1,5 +1,5 @@
 {
-  "DeleteAllGroupDescription": "Seçilmiş qruplar silinəcək. Qruplardakı istifadəçilər DocSpace-dən silinməyəcək. Davam etmək istədiyinizə əminsiniz?",
+  "DeleteAllGroupDescription": "Seçilmiş qruplar silinəcək. Qruplardakı istifadəçilər {{portalName}}-dən silinməyəcək. Davam etmək istədiyinizə əminsiniz?",
   "DeleteAllGroupsTitle": "Qrupları silin",
   "DeleteFile": "Bu faylı silmək üzrəsiniz.",
   "DeleteFolder": "Bu qovluğu silmək üzrəsiniz.",

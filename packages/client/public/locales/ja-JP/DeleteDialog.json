@@ -1,5 +1,5 @@
 {
-  "DeleteAllGroupDescription": "選択したグループは削除されます。グループのユーザーはDocSpaceから削除されません。続けてよろしいですか？",
+  "DeleteAllGroupDescription": "選択したグループは削除されます。グループのユーザーは{{portalName}}から削除されません。続けてよろしいですか？",
   "DeleteAllGroupsTitle": "グループの削除",
   "DeleteFile": "このファイルを削除しようとしています。",
   "DeleteFolder": "このフォルダを削除しようとしています。",

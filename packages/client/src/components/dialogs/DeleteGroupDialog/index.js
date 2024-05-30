@@ -89,7 +89,9 @@ const DeleteGroupDialog = (props) => {
       <ModalDialog.Body>
         <Text>
           {hasMoreGroups
-            ? t("DeleteDialog:DeleteAllGroupDescription")
+            ? t("DeleteDialog:DeleteAllGroupDescription", {
+                portalName: PORTAL,
+              })
             : t("DeleteDialog:DeleteGroupDescription", {
                 portalName: PORTAL,
                 groupName,

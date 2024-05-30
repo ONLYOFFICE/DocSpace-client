@@ -1,6 +1,6 @@
 {
   "AppointAdmin": "Nimeä ylläpitäjät",
-  "BackupPortal": "Varmuuskopioi DocSpacen tiedot",
+  "BackupPortal": "Varmuuskopioi {{portalName}} tiedot",
   "ChangeInstruction": "Ole hyvä ja valitse omistajan nimi alta vaihtaaksesi DocSpacen omistajan.",
   "ChangeOwner": "Vaihda DocSpace-omistaja",
   "ChangeUser": "Vaihda käyttäjä",

@@ -1,6 +1,6 @@
 {
   "AppointAdmin": "Назначить администраторов",
-  "BackupPortal": "Выполнять резервное копирование данных DocSpace",
+  "BackupPortal": "Выполнять резервное копирование данных {{portalName}}",
   "ChangeInstruction": "Чтобы изменить владельца DocSpace, выберите имя нового владельца ниже.",
   "ChangeOwner": "Сменить владельца DocSpace",
   "ChangeUser": "Сменить пользователя",

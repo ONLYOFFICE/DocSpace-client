@@ -1,6 +1,6 @@
 {
   "AppointAdmin": "Priraďte administrátorov",
-  "BackupPortal": "Zálohovať dáta DocSpace",
+  "BackupPortal": "Zálohovať dáta {{portalName}}",
   "ChangeInstruction": "Ak chcete zmeniť vlastníka DocSpace, nižšie vyberte meno nového vlastníka.",
   "ChangeOwner": "Zmeniť vlastníka DocSpace",
   "ChangeUser": "Zmeniť používateľa",

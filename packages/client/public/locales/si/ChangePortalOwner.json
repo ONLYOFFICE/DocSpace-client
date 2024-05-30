@@ -1,6 +1,6 @@
 {
   "AppointAdmin": "පරිපාලකයින් පත් කරන්න",
-  "BackupPortal": "DocSpace දත්ත උපස්ථය",
+  "BackupPortal": "{{portalName}} දත්ත උපස්ථය",
   "ChangeInstruction": "DocSpace හිමිකරු වෙනස් කිරීමට, කරුණාකර පහතින් නව හිමිකරුගේ නම තෝරන්න.",
   "ChangeOwner": "DocSpace හිමිකරු සංශෝධනය",
   "ChangeUser": "පරිශ්‍රීලක සංශෝධනය",

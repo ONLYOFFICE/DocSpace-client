@@ -1,6 +1,6 @@
 {
   "AppointAdmin": "관리자 지정",
-  "BackupPortal": "DocSpace 데이터 백업",
+  "BackupPortal": "{{portalName}} 데이터 백업",
   "ChangeInstruction": "DocSpace 소유자를 변경하려면 아래에서 새 소유자의 이름을 선택하세요.",
   "ChangeOwner": "DocSpace 소유자 변경",
   "ChangeUser": "사용자 변경",

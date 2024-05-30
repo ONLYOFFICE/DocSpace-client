@@ -1,6 +1,6 @@
 {
   "AppointAdmin": "Iecelt administratorus",
-  "BackupPortal": "Dublēt DocSpace datus",
+  "BackupPortal": "Dublēt {{portalName}} datus",
   "ChangeInstruction": "Lai mainītu DocSpace īpašnieku, lūdzu, zemāk izvēlieties jaunā īpašnieka vārdu.",
   "ChangeOwner": "Mainīt DocSpace īpašnieku",
   "ChangeUser": "Mainīt lietotāju",

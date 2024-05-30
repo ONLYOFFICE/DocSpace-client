@@ -51,6 +51,7 @@ import {
   StyledSelectedOwnerContainer,
   StyledSelectedOwner,
 } from "./StyledDialog";
+import { PORTAL } from "@docspace/shared/constants";
 
 const ChangePortalOwnerDialog = ({
   t,
@@ -117,7 +118,7 @@ const ChangePortalOwnerDialog = ({
     t("ManagePortal"),
     t("ManageUser"),
     t("ChangePortalOwner:ChangeOwner"),
-    t("BackupPortal"),
+    t("BackupPortal", { portalName: PORTAL }),
     t("DeactivateOrDeletePortal"),
   ];
 

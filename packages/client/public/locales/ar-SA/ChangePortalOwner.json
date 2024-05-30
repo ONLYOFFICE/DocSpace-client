@@ -1,6 +1,6 @@
 {
   "AppointAdmin": "تعيين المسؤولين",
-  "BackupPortal": "بيانات DocSpace الاحتياطية",
+  "BackupPortal": "بيانات {{portalName}} الاحتياطية",
   "ChangeInstruction": "لتغيير مالك DocSpace، يرجى اختيار اسم المالك الجديد أدناه.",
   "ChangeOwner": "تغيير مالك DocSpace",
   "ChangeUser": "تغيير المستخدم",

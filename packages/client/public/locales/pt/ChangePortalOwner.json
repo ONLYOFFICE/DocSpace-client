@@ -1,6 +1,6 @@
 {
   "AppointAdmin": "Definir administradores",
-  "BackupPortal": "Faça uma cópia de segurança dos dados do DocSpace",
+  "BackupPortal": "Faça uma cópia de segurança dos dados do {{portalName}}",
   "ChangeInstruction": "Para mudar o proprietário do DocSpace, por favor escolha abaixo o nome do novo proprietário.",
   "ChangeOwner": "Mudar o proprietário do DocSpace",
   "ChangeUser": "Mudar o utilizador",

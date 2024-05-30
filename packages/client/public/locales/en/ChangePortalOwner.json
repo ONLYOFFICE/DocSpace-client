@@ -1,6 +1,6 @@
 {
   "AppointAdmin": "Appoint administrators",
-  "BackupPortal": "Backup DocSpace data",
+  "BackupPortal": "Backup {{portalName}} data",
   "ChangeInstruction": "To change the DocSpace owner, please choose the name of the new owner below.",
   "ChangeOwner": "Change DocSpace owner",
   "ChangeUser": "Change user",

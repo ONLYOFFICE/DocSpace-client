@@ -1,0 +1,11 @@
+{
+  "ConversionMessage": "Сви документи које отпремите биц́е конвертовани у Office Open XML формат (docx, xlsx ili pptx) ради бржег уређивања.",
+  "ConvertedFileDestination": "Копија датотеке ц́е бити направљена у <strong>{{folderTitle}}</strong> фолдеру.",
+  "DocumentConversionTitle": "Конверзија документа",
+  "FailedToConvert": "Неуспешно конвертовање",
+  "FileUploadTitle": "Отпремање датотеке",
+  "HideMessage": "Не приказуј ову поруку поново",
+  "InfoCreateFileIn": "Нова '{{fileTitle}}' датотека је направљена у '{{folderTitle}}'",
+  "OpenFileMessage": "Датотека документа коју отворите биц́е конвертована у Office Open XML формат ради брзог прегледа и уређивања.",
+  "SaveOriginalFormatMessage": "Сачувај копију датотеке у оригиналном формату"
+}

@@ -26,23 +26,33 @@
 
 "use client";
 
+import { useCallback, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+
 import { setLanguageForUnauthorized } from "@docspace/shared/utils/common";
 import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
-import { TPortalCultures } from "@docspace/shared/api/settings/types";
 import { DeviceType } from "@docspace/shared/enums";
+import { Nullable } from "@docspace/shared/types";
+import { TPortalCultures } from "@docspace/shared/api/settings/types";
 
 import useDeviceType from "@/hooks/useDeviceType";
+import { getPortalCultures } from "@/utils/actions";
 
-export interface TLanguageCombobox {
-  cultures: TPortalCultures;
-}
-
-const LanguageComboboxWrapper = (props: TLanguageCombobox) => {
-  const { cultures } = props;
+const LanguageComboboxWrapper = () => {
   const { i18n } = useTranslation(["Login", "Common"]);
-
   const currentCulture = i18n.language;
+
+  const [cultures, setCultures] = useState<Nullable<TPortalCultures>>(null);
+
+  const getData = useCallback(async () => {
+    const [cultures] = await Promise.all([getPortalCultures()]);
+
+    if (cultures) setCultures(cultures);
+  }, []);
+
+  useEffect(() => {
+    getData();
+  }, [getData]);
 
   const onLanguageSelect = (culture: { key: string }) => {
     const { key } = culture;
@@ -52,6 +62,8 @@ const LanguageComboboxWrapper = (props: TLanguageCombobox) => {
 
   const { currentDeviceType } = useDeviceType();
   const isMobileView = currentDeviceType === DeviceType.mobile;
+
+  if (!cultures) return <></>;
 
   return (
     <LanguageCombobox

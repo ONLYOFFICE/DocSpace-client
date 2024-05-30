@@ -387,7 +387,7 @@
   "SpaceManagement": "Telpu pārvaldība",
   "Spaces": "Telpas",
   "SpacesInLocalPart": "Lokālajā daļā nedrīkst būt atstarpes",
-  "SpaceUsersOnly": "Tikai DoсSpace lietotājiem",
+  "SpaceUsersOnly": "Tikai {{portalName}} lietotājiem",
   "SSO": "SSO",
   "Standard": "Standarta",
   "Storage": "Uzglabāšana",

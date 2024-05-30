@@ -387,7 +387,7 @@
   "SpaceManagement": "Alan Yönetimi",
   "Spaces": "Alanlar",
   "SpacesInLocalPart": "Yerel kısım boşluk içeremez",
-  "SpaceUsersOnly": "Yalnızca DoсSpace kullanıcıları",
+  "SpaceUsersOnly": "Yalnızca {{portalName}} kullanıcıları",
   "SSO": "SSO",
   "Standard": "Standart",
   "Storage": "Depolama",

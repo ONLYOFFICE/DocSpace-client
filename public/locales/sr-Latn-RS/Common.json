@@ -386,7 +386,7 @@
   "SpaceManagement": "Upravljanje Prostorom",
   "Spaces": "Prostori",
   "SpacesInLocalPart": "Local part ne sme sadržati razmake",
-  "SpaceUsersOnly": "Samo DocSpace korisnici",
+  "SpaceUsersOnly": "Samo {{portalName}} korisnici",
   "SSO": "SSO",
   "Standard": "Standard",
   "Storage": "Skladište",

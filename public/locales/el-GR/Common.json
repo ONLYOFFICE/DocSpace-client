@@ -386,7 +386,7 @@
   "SpaceManagement": "Διαχείριση χώρου",
   "Spaces": "Χώροι",
   "SpacesInLocalPart": "Το τοπικό τμήμα δεν μπορεί να περιέχει κενά",
-  "SpaceUsersOnly": "Μόνο για χρήστες DoсSpace",
+  "SpaceUsersOnly": "Μόνο για χρήστες {{portalName}}",
   "SSO": "SSO",
   "Standard": "Τυπικό",
   "Storage": "Αποθ. χώρος",

@@ -387,7 +387,7 @@
   "SpaceManagement": "Zarządzanie obszarem",
   "Spaces": "Obszary",
   "SpacesInLocalPart": "Identyfikator użytkownika nie może zawierać spacji",
-  "SpaceUsersOnly": "Tylko użytkownicy DoсSpace",
+  "SpaceUsersOnly": "Tylko użytkownicy {{portalName}}",
   "SSO": "SSO",
   "Standard": "Standardowy",
   "Storage": "Pamięć",

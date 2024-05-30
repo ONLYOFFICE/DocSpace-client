@@ -387,7 +387,7 @@
   "SpaceManagement": "Управління простором",
   "Spaces": "Простори",
   "SpacesInLocalPart": "Локальна частина не може містити пробіли",
-  "SpaceUsersOnly": "Тільки для користувачів DoсSpace",
+  "SpaceUsersOnly": "Тільки для користувачів {{portalName}}",
   "SSO": "SSO",
   "Standard": "Стандартний",
   "Storage": "Сховище",

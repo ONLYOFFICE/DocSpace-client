@@ -387,7 +387,7 @@
   "SpaceManagement": "スペース管理",
   "Spaces": "スペース",
   "SpacesInLocalPart": "ローカルパートはスペースを含むことができません",
-  "SpaceUsersOnly": "DocSpaceユーザーのみ",
+  "SpaceUsersOnly": "{{portalName}}ユーザーのみ",
   "SSO": "SSO",
   "Standard": "標準",
   "Storage": "ストレージ",

@@ -387,7 +387,7 @@
   "SpaceManagement": "Tilan hallinta",
   "Spaces": "Tilat",
   "SpacesInLocalPart": "Paikallinen osa ei voi sisältää välilyöntejä",
-  "SpaceUsersOnly": "Vain DocSpace-käyttäjille",
+  "SpaceUsersOnly": "Vain {{portalName}}-käyttäjille",
   "SSO": "SSO",
   "Standard": "Vakio",
   "Storage": "Muisti",

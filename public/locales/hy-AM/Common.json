@@ -386,7 +386,7 @@
   "SpaceManagement": "Տարածության կառավարում",
   "Spaces": "Տարածքներ",
   "SpacesInLocalPart": "Տեղական մասը չի կարող բացատներ պարունակել",
-  "SpaceUsersOnly": "միայն DoсSpace-ի օգտվողների համար",
+  "SpaceUsersOnly": "միայն {{portalName}}-ի օգտվողների համար",
   "SSO": "SSO",
   "Standard": "Ստանդարտ",
   "Storage": "Պահեստ",

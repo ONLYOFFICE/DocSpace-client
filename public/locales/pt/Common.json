@@ -387,7 +387,7 @@
   "SpaceManagement": "Gestão de Espaço",
   "Spaces": "Espaços",
   "SpacesInLocalPart": "A parte local não pode conter espaços",
-  "SpaceUsersOnly": "Somente usuários do DoсSpace",
+  "SpaceUsersOnly": "Somente usuários do {{portalName}}",
   "SSO": "SSO",
   "Standard": "Padrão",
   "Storage": "Armazenar",

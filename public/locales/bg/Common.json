@@ -387,7 +387,7 @@
   "SpaceManagement": "Управление на пространството",
   "Spaces": "Пространства",
   "SpacesInLocalPart": "Местната част не може да съдържа интервали",
-  "SpaceUsersOnly": "Само за потребители на DoсSpace",
+  "SpaceUsersOnly": "Само за потребители на {{portalName}}",
   "SSO": "SSO",
   "Standard": "Стандарт",
   "Storage": "Съхранение",

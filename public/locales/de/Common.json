@@ -387,7 +387,7 @@
   "SpaceManagement": "Space-Verwaltung",
   "Spaces": "Spaces",
   "SpacesInLocalPart": "Lokaler Teil beinhaltet Leerzeichen",
-  "SpaceUsersOnly": "Nur DoсSpace-Benutzer",
+  "SpaceUsersOnly": "Nur {{portalName}}-Benutzer",
   "SSO": "SSO",
   "Standard": "Standard",
   "Storage": "Speicherplatz",

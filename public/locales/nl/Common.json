@@ -387,7 +387,7 @@
   "SpaceManagement": "Ruimtebeheer",
   "Spaces": "Ruimtes",
   "SpacesInLocalPart": "Lokaal deel kan geen spaties bevatten",
-  "SpaceUsersOnly": "Alleen voor gebruikers van DoсSpace",
+  "SpaceUsersOnly": "Alleen voor gebruikers van {{portalName}}",
   "SSO": "SSO",
   "Standard": "Standaard",
   "Storage": "Opslag",

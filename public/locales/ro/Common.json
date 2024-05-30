@@ -387,7 +387,7 @@
   "SpaceManagement": "Gestionare Spaţiu",
   "Spaces": "Spații",
   "SpacesInLocalPart": "Partea locală nu trebuie să conțină spații",
-  "SpaceUsersOnly": "Doar utilizatorii DoсSpace",
+  "SpaceUsersOnly": "Doar utilizatorii {{portalName}}",
   "SSO": "SSO",
   "Standard": "Standard",
   "Storage": "Stocare",

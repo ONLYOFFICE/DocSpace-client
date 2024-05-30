@@ -387,7 +387,7 @@
   "SpaceManagement": "Upravljanje prostora",
   "Spaces": "Prostori",
   "SpacesInLocalPart": "Lokalni del ne sme vsebovati presledkov",
-  "SpaceUsersOnly": "Samo DoсSpace uporabniki",
+  "SpaceUsersOnly": "Samo {{portalName}} uporabniki",
   "SSO": "SSO",
   "Standard": "Standardno",
   "Storage": "Shranjevanje",

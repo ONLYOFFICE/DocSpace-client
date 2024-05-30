@@ -385,7 +385,7 @@
   "SpaceManagement": "إدارة المساحة",
   "Spaces": "المساحات",
   "SpacesInLocalPart": "الجزء المحلي لا يمكن أن يحتوي على مسافات",
-  "SpaceUsersOnly": "خاص بمستخدمي DoсSpace فقط",
+  "SpaceUsersOnly": "خاص بمستخدمي {{portalName}} فقط",
   "SSO": "SSO",
   "Standard": "القياسي",
   "Storage": "تخزين",

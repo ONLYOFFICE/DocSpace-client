@@ -387,7 +387,7 @@
   "SpaceManagement": "Управление Пространством",
   "Spaces": "Пространства",
   "SpacesInLocalPart": "Имя почтового ящика содержит пробелы",
-  "SpaceUsersOnly": "Только для пользователей DoсSpace",
+  "SpaceUsersOnly": "Только для пользователей {{portalName}}",
   "SSO": "SSO",
   "Standard": "Стандарт",
   "Storage": "Хранилище",

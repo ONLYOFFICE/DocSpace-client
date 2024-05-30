@@ -398,7 +398,7 @@
   "SpaceManagement": "Space Management",
   "Spaces": "Spaces",
   "SpacesInLocalPart": "Local part can't contain spaces",
-  "SpaceUsersOnly": "DoсSpace users only",
+  "SpaceUsersOnly": "{{portalName}} users only",
   "SSO": "SSO",
   "Standard": "Standard",
   "Storage": "Storage",

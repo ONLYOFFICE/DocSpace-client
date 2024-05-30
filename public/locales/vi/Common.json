@@ -387,7 +387,7 @@
   "SpaceManagement": "Quản Lý Không Gian",
   "Spaces": "Không Gian",
   "SpacesInLocalPart": "Phần cục bộ không được chứa khoảng trắng",
-  "SpaceUsersOnly": "Chỉ người dùng DoсSpace",
+  "SpaceUsersOnly": "Chỉ người dùng {{portalName}}",
   "SSO": "SSO",
   "Standard": "Tiêu chuẩn",
   "Storage": "Lưu trữ",

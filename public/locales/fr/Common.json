@@ -387,7 +387,7 @@
   "SpaceManagement": "Gestion de l'espace",
   "Spaces": "Espaces",
   "SpacesInLocalPart": "Le local ne peux pas contenir d'espace",
-  "SpaceUsersOnly": "Utilisateurs de DocSpace uniquement",
+  "SpaceUsersOnly": "Utilisateurs de {{portalName}} uniquement",
   "SSO": "SSO",
   "Standard": "Standard",
   "Storage": "Stockage",

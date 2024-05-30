@@ -387,7 +387,7 @@
   "SpaceManagement": "Správa prostoru",
   "Spaces": "Prostory",
   "SpacesInLocalPart": "Místní část nemůže obsahovat mezery",
-  "SpaceUsersOnly": "Pouze uživatelé DoсSpace",
+  "SpaceUsersOnly": "Pouze uživatelé {{portalName}}",
   "SSO": "SSO",
   "Standard": "Standardní",
   "Storage": "Úložiště",

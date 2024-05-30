@@ -387,7 +387,7 @@
   "SpaceManagement": "Manažment priestoru",
   "Spaces": "Priestory",
   "SpacesInLocalPart": "Miestna časť nemôže obsahovať medzery",
-  "SpaceUsersOnly": "Len pre používateľov DocSpace",
+  "SpaceUsersOnly": "Len pre používateľov {{portalName}}",
   "SSO": "SSO",
   "Standard": "Štandard",
   "Storage": "Úložisko",

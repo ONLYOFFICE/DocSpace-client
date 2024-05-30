@@ -386,7 +386,7 @@
   "SpaceManagement": "අවකාශය කළමනාකරණය",
   "Spaces": "අවකාශ",
   "SpacesInLocalPart": "ස්ථානීය කොටසේ හිස්තැන් අඩංගු නොවිය යුතුය",
-  "SpaceUsersOnly": "Doсspace පරිශ්‍රීලකයින් පමණි",
+  "SpaceUsersOnly": "{{portalName}} පරිශ්‍රීලකයින් පමණි",
   "SSO": "SSO",
   "Standard": "සම්මත",
   "Storage": "ආචයනය",

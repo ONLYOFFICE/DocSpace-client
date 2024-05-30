@@ -387,7 +387,7 @@
   "SpaceManagement": "공간 관리",
   "Spaces": "공간",
   "SpacesInLocalPart": "로컬 파트는 공백을 포함할 수 없습니다",
-  "SpaceUsersOnly": "DoсSpace 사용자만",
+  "SpaceUsersOnly": "{{portalName}} 사용자만",
   "SSO": "SSO",
   "Standard": "기준",
   "Storage": "스토리지",

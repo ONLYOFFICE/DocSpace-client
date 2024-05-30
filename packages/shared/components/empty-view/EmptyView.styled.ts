@@ -32,7 +32,6 @@ export const EmptyViewHeader = styled.div`
   .ev-subheading {
     color: ${(props) => props.theme.emptyContent.description.color};
     text-align: center;
-    max-width: 300px;
   }
 
   @media ${mobile} {

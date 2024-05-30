@@ -24,7 +24,7 @@
   "Back": "Terug",
   "BarMaintenanceDescription": "Onze excuses voor eventuele kortstondige technische problemen in het functioneren van de dienst die kunnen optreden op {{targetDate}} tijdens de update van {{productName}}.",
   "BarMaintenanceDisclaimer": "Zorg ervoor dat alle wijzigingen deze dag succesvol worden opgeslagen.",
-  "BetaBadgeDescription": "Let op: u kunt RTL-talen inschakelen voor de DocSpace-interface in de bètamodus. RTL-ondersteuning voor de redactie komt binnenkort beschikbaar.",
+  "BetaBadgeDescription": "Let op: u kunt RTL-talen inschakelen voor de {{portalName}}-interface in de bètamodus. RTL-ondersteuning voor de redactie komt binnenkort beschikbaar.",
   "BetaBadgeFeedback": "Als u een bug heeft gevonden, kunt u deze indienen via het <1>forum</1> of contact met ons opnemen via <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "RTL-interface",
   "BetaLabel": "BETA",

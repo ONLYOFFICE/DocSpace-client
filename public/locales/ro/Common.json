@@ -24,7 +24,7 @@
   "Back": "Înapoi",
   "BarMaintenanceDescription": "Ne cerem scuze pentru orice problemă tehnică pe termen scurt care poate apărea în funcționarea serviciului la data de {{targetDate}} pe parcursul actualizării {{productName}}.",
   "BarMaintenanceDisclaimer": "Vă rugăm să vă asigurați că toate modificările sunt salvate cu success pe parcursul acestei zile.",
-  "BetaBadgeDescription": "Vă rugăm să rețineți: puteți activa limbile cu scriere/citire de la dreapta la stânga pentru interfața DocSpace în modul beta. Acceptarea ordnei de la dreapta la stânga va fi disponibilă pentru editori în curând.",
+  "BetaBadgeDescription": "Vă rugăm să rețineți: puteți activa limbile cu scriere/citire de la dreapta la stânga pentru interfața {{portalName}} în modul beta. Acceptarea ordnei de la dreapta la stânga va fi disponibilă pentru editori în curând.",
   "BetaBadgeFeedback": "Dacă ați găsit o eroare, vă rugăm să o trimiteți prin <1>forum</1> sau să ne contactați la <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "Interfață cu scriere/citire de la dreapta la stânga",
   "BetaLabel": "BETA",

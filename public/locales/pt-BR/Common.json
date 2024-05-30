@@ -24,7 +24,7 @@
   "Back": "Voltar",
   "BarMaintenanceDescription": "Pedimos desculpas por quaisquer problemas técnicos de curto prazo no funcionamento do serviço, que podem aparecer em {{targetDate}} durante a atualização do {{productName}}.",
   "BarMaintenanceDisclaimer": "Certifique-se de que todas as alterações tenham sido salvas com sucesso durante este dia.",
-  "BetaBadgeDescription": "Observação: você pode ativar idiomas RTL para a interface DocSpace no modo beta. O suporte RTL para os editores estará disponível em breve.",
+  "BetaBadgeDescription": "Observação: você pode ativar idiomas RTL para a interface {{portalName}} no modo beta. O suporte RTL para os editores estará disponível em breve.",
   "BetaBadgeFeedback": "Se você encontrou um bug, envie-o através do <1>fórum</1> ou entre em contato conosco em <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "nterface RTL",
   "BetaLabel": "BETA",

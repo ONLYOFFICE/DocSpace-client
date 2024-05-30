@@ -24,7 +24,7 @@
   "Back": "Nazad",
   "BarMaintenanceDescription": "Izvinjavamo se zbog eventualnih kratkotrajnih tehničkih problema u funkcionisanju usluge koji se mogu pojaviti {{targetDate}} tokom ažuriranja {{productName}}.",
   "BarMaintenanceDisclaimer": "Molimo vas, uverite se da su sve izmene uspešno sačuvane u toku ovog dana.",
-  "BetaBadgeDescription": "Napomena: Možete omogućiti RTL jezike za interfejs DocSpace-a u beta režimu. RTL podrška za uređivače će biti uskoro dostupna.",
+  "BetaBadgeDescription": "Napomena: Možete omogućiti RTL jezike za interfejs {{portalName}}-a u beta režimu. RTL podrška za uređivače će biti uskoro dostupna.",
   "BetaBadgeFeedback": "Ako ste pronašli grešku, molimo vas da je prijavite putem <1>forum</1> ili nas kontaktirate na <3>{{supportEmail}}</3>.",
   "BetaLabel": "BETA",
   "Bonus": "Bonus",

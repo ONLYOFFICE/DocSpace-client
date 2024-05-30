@@ -24,7 +24,7 @@
   "Back": "Takaisin",
   "BarMaintenanceDescription": "Pahoittelemme palvelun toiminnassa ilmenevien lyhyen aikavälin teknisiä ongelmia, jotka saattavat näkyä {{targetDate}}, {{productName}} päivityksen aikana.",
   "BarMaintenanceDisclaimer": "Varmista, että kaikki muutokset on tallennettu onnistuneesti tämän päivän aikana.",
-  "BetaBadgeDescription": "Huomaa: voit ottaa RTL-kielet käyttöön DocSpace-käyttöliittymässä beta-tilassa. RTL-tuki toimittajille on saatavilla pian.",
+  "BetaBadgeDescription": "Huomaa: voit ottaa RTL-kielet käyttöön {{portalName}}-käyttöliittymässä beta-tilassa. RTL-tuki toimittajille on saatavilla pian.",
   "BetaBadgeFeedback": "Jos olet löytänyt virheen, lähetä se <1>foorumin</1> kautta tai ota meihin yhteyttä osoitteessa <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "RTL-liitäntä",
   "BetaLabel": "BETA",

@@ -33,6 +33,7 @@ import { DeviceType } from "@docspace/shared/enums";
 
 import type BetaBadgeProps from "./BetaBadge.props";
 import { MobileOffset, OtherOffset } from "./BetaBadge.constants";
+import { PORTAL } from "../../constants";
 
 const BetaBadge = ({
   place,
@@ -47,7 +48,7 @@ const BetaBadge = ({
 
   const tooltipDescription = (
     <>
-      {t("Common:BetaBadgeDescription")}{" "}
+      {t("Common:BetaBadgeDescription", { portalName: PORTAL })}
       {!withOutFeedbackLink && (
         <Trans
           t={t}

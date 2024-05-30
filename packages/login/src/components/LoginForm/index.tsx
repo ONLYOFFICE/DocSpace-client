@@ -59,6 +59,8 @@ import ForgotContainer from "./sub-components/ForgotContainer";
 import { StyledCaptcha } from "./LoginForm.styled";
 import { LoginDispatchContext, LoginValueContext } from "../Login";
 import OAuthClientInfo from "../ConsentInfo";
+import api from "@docspace/shared/api";
+import { useRouter } from "next/router";
 
 const LoginForm = ({
   hashSettings,
@@ -71,6 +73,7 @@ const LoginForm = ({
   const { setIsLoading } = useContext(LoginDispatchContext);
 
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   const theme = useTheme();
 
@@ -236,7 +239,15 @@ const LoginForm = ({
     const session = !isChecked;
 
     login(user, hash, session, captchaToken)
-      .then((res: string | object) => {
+      .then(async (res: string | object) => {
+        if (clientId) {
+          await api.oauth.onOAuthLogin(clientId);
+
+          router.push(`/login/consent?clientId=${clientId}`);
+
+          return;
+        }
+
         const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath =
           referenceUrl || sessionStorage.getItem("referenceUrl");
@@ -275,16 +286,17 @@ const LoginForm = ({
         setIsLoading(false);
       });
   }, [
-    hashSettings,
-    identifier,
-    identifierValid,
-    isCaptcha,
-    isCaptchaSuccessful,
-    isChecked,
-    isDesktop,
-    password,
     reCaptchaPublicKey,
+    isCaptcha,
+    identifier,
+    password,
+    identifierValid,
     setIsLoading,
+    hashSettings,
+    isDesktop,
+    isChecked,
+    isCaptchaSuccessful,
+    clientId,
     referenceUrl,
   ]);
 
@@ -336,8 +348,6 @@ const LoginForm = ({
   }, [isModalOpen, onSubmit]);
 
   const passwordErrorMessage = errorMessage();
-
-  console.log(client);
 
   return (
     <form className="auth-form-container">

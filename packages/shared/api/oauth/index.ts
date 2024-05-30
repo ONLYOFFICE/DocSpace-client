@@ -130,7 +130,7 @@ export const onOAuthLogin = (clientId: string) => {
 
   return request({
     method: "post",
-    url: `/oauth2/login?clientId=${clientId}`,
+    url: `/oauth2/login?client_id=${clientId}`,
     data: formData,
     withRedirect: true,
     headers: {

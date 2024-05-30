@@ -415,7 +415,7 @@
   "TrialDaysLeft": "{{count}} gün deneme",
   "TrialExpired": "Deneme süresi sona erdi",
   "TryBusiness": "Business Deneyin",
-  "TurnOffDiskSpaceLimit": "Bu DocSpace için disk alanı sınırını kapatın.",
+  "TurnOffDiskSpaceLimit": "Bu {{portalName}} için disk alanı sınırını kapatın.",
   "Type": "Tür",
   "UnexpectedError": "Beklenmedik bir hata oluştu. Daha sonra tekrar deneyin veya destekle iletişime geçin.",
   "Unknown": "Bilinmeyen",

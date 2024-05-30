@@ -415,7 +415,7 @@
   "TrialDaysLeft": "Kokeilujakso {{count}} päivää",
   "TrialExpired": "Kokeilujakso vanhentunut",
   "TryBusiness": "Kokeile Businesstä",
-  "TurnOffDiskSpaceLimit": "Ota levytilaraja pois käytöstä tämän DocSpacen osalta.",
+  "TurnOffDiskSpaceLimit": "Ota levytilaraja pois käytöstä tämän {{portalName}} osalta.",
   "Type": "Tyyppi",
   "UnexpectedError": "Odottamaton virhe tapahtui. Yritä uudelleen myöhemmin tai ota yhteyttä tukeen.",
   "Unknown": "Tuntematon",

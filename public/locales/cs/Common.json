@@ -415,7 +415,7 @@
   "TrialDaysLeft": "Zkušební verze {{count}} dní",
   "TrialExpired": "Zkušební verze vypršela",
   "TryBusiness": "Zkuste podnikat",
-  "TurnOffDiskSpaceLimit": "Vypnutí limitu místa na disku pro tento prostor DocSpace.",
+  "TurnOffDiskSpaceLimit": "Vypnutí limitu místa na disku pro tento prostor {{portalName}}.",
   "Type": "Typ",
   "UnexpectedError": "Došlo k neočekávané chybě. Zkuste to později nebo kontaktujte podporu.",
   "Unknown": "Neznámý",

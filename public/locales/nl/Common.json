@@ -415,7 +415,7 @@
   "TrialDaysLeft": "Proefperiode {{count}} dagen",
   "TrialExpired": "Proefperiode verlopen",
   "TryBusiness": "Probeer Zakelijk",
-  "TurnOffDiskSpaceLimit": "Schakel de schijfruimtebeperking voor deze DocSpace uit.",
+  "TurnOffDiskSpaceLimit": "Schakel de schijfruimtebeperking voor deze {{portalName}} uit.",
   "Type": "Type",
   "UnexpectedError": "Er is een onverwachte fout opgetreden. Probeer het later nog eens of neem contact op met de ondersteuning.",
   "Unknown": "Onbekend",

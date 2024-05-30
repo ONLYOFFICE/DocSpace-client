@@ -415,7 +415,7 @@
   "TrialDaysLeft": "Teste {{count}} dias",
   "TrialExpired": "Trial expired",
   "TryBusiness": "Experimente Negócios",
-  "TurnOffDiskSpaceLimit": "Desative o limite de espaço em disco para este DocSpace.",
+  "TurnOffDiskSpaceLimit": "Desative o limite de espaço em disco para este {{portalName}}.",
   "Type": "Tipo",
   "UnexpectedError": "Um erro inesperado ocorreu. Tente novamente mais tarde ou entre em contato com o suporte.",
   "Unknown": "Desconhecido",

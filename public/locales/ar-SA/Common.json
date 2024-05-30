@@ -414,7 +414,7 @@
   "TrialDaysLeft": "تجربة لمدة {{count}} يومًا.",
   "TrialExpired": "انتهت فترة التجربة.",
   "TryBusiness": "جرب حساب الأعمال",
-  "TurnOffDiskSpaceLimit": "قم بإيقاف تشغيل حد مساحة القرص لـ DocSpace.",
+  "TurnOffDiskSpaceLimit": "قم بإيقاف تشغيل حد مساحة القرص لـ {{portalName}}.",
   "Type": "النوع",
   "UnexpectedError": "حدث خطأ غير متوقع. حاول مرة أخرى لاحقًا أو اتصل بالدعم.",
   "Unknown": "غير معروف.",

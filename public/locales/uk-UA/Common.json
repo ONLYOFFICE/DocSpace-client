@@ -415,7 +415,7 @@
   "TrialDaysLeft": "Пробна версія: {{count}} д.",
   "TrialExpired": "Термін дії пробної версії закінчився",
   "TryBusiness": "Спробуйте Business",
-  "TurnOffDiskSpaceLimit": "Вимкнути обмеження дискового простору для цього DocSpace.",
+  "TurnOffDiskSpaceLimit": "Вимкнути обмеження дискового простору для цього {{portalName}}.",
   "Type": "Тип",
   "UnexpectedError": "Сталася неочікувана помилка. Спробуйте пізніше або зверніться до служби підтримки.",
   "Unknown": "Невідомо",

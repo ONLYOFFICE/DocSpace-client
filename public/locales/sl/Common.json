@@ -415,7 +415,7 @@
   "TrialDaysLeft": "Preizkusnih {{count}} dni",
   "TrialExpired": "Preizkus je potekel",
   "TryBusiness": "Preizkusi Poslovno",
-  "TurnOffDiskSpaceLimit": "Izklopite omejitev prostora na disku za ta prostor DocSpace.",
+  "TurnOffDiskSpaceLimit": "Izklopite omejitev prostora na disku za ta prostor {{portalName}}.",
   "Type": "Tip",
   "UnexpectedError": "Prišlo je do nepričakovane napake. Poskusite znova pozneje ali se obrnite na podporo.",
   "Unknown": "Neznano",

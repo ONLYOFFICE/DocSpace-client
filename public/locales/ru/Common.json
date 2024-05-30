@@ -415,7 +415,7 @@
   "TrialDaysLeft": "{{count}} дней пробного периода",
   "TrialExpired": "Пробный период истек",
   "TryBusiness": "Попробуйте Business",
-  "TurnOffDiskSpaceLimit": "Отключить ограничение дискового пространства для этого DocSpace.",
+  "TurnOffDiskSpaceLimit": "Отключить ограничение дискового пространства для этого {{portalName}}.",
   "Type": "Тип",
   "UnexpectedError": "Произошла непредвиденная ошибка. Попробуйте еще раз позднее или обратитесь в поддержку.",
   "Unknown": "Неизвестный",

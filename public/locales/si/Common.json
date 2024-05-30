@@ -414,7 +414,7 @@
   "TrialDaysLeft": "නැහැසුම දවස් {{count}}",
   "TrialExpired": "නැහැසුම ඉකුත් වී ඇත",
   "TryBusiness": "ව්‍යාපාර සැලසුම බලන්න",
-  "TurnOffDiskSpaceLimit": "මෙම DocSpace සඳහා තැටියේ ඉඩ සීමාව අක්‍රිය කරන්න.",
+  "TurnOffDiskSpaceLimit": "මෙම {{portalName}} සඳහා තැටියේ ඉඩ සීමාව අක්‍රිය කරන්න.",
   "Type": "වර්ගය",
   "UnexpectedError": "අනපේක්‍ෂිත දෝෂයක් සිදු විය. නැවත උත්සාහ කරන්න හෝ සහාය අමතන්න.",
   "Unknown": "නොදන්නා",

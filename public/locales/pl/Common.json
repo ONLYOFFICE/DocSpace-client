@@ -415,7 +415,7 @@
   "TrialDaysLeft": "Pozostałe dni okresu próbnego: {{count}}",
   "TrialExpired": "Okres próbny wygasł",
   "TryBusiness": "Wypróbuj plan Biznes",
-  "TurnOffDiskSpaceLimit": "Wyłącz limit pamięci dla tego DocSpace.",
+  "TurnOffDiskSpaceLimit": "Wyłącz limit pamięci dla tego {{portalName}}.",
   "Type": "Rodzaj",
   "UnexpectedError": "Wystąpił nieoczekiwany błąd. Spróbuj ponownie później lub skontaktuj się z działem obsługi.",
   "Unknown": "Nieznany",

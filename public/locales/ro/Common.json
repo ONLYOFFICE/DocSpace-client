@@ -415,7 +415,7 @@
   "TrialDaysLeft": "Versiunea de încercare {{count}} zile",
   "TrialExpired": "Versiunea de încercare a expirat",
   "TryBusiness": "Încercați pachetul Business",
-  "TurnOffDiskSpaceLimit": "Dezactivare limita spatiul de stocare pentru acest spațiu DocSpace.",
+  "TurnOffDiskSpaceLimit": "Dezactivare limita spatiul de stocare pentru acest spațiu {{portalName}}.",
   "Type": "Tip",
   "UnexpectedError": "A intervenit o eroare neaşteptată. Încercaţi din nou mai târziu sau contactaţi serviciul de asistenţă.",
   "Unknown": "Necunoscut",

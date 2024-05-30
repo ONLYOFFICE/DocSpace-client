@@ -415,7 +415,7 @@
   "TrialDaysLeft": "{{count}} Ngày dùng thử",
   "TrialExpired": "Đã hết thời gian dùng thử",
   "TryBusiness": "Thử gói Doanh Nghiệp Business",
-  "TurnOffDiskSpaceLimit": "Tắt giới hạn dung lượng ổ đĩa cho DocSpace này.",
+  "TurnOffDiskSpaceLimit": "Tắt giới hạn dung lượng ổ đĩa cho {{portalName}} này.",
   "Type": "Kiểu",
   "UnexpectedError": "Gặp lỗi bất thường. Hãy thử lại sau hoặc liên hệ với bộ phận hỗ trợ.",
   "Unknown": "Không xác định",

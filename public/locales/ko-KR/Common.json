@@ -415,7 +415,7 @@
   "TrialDaysLeft": "{{count}}일 평가판",
   "TrialExpired": "평가판이 만료되었습니다",
   "TryBusiness": "비즈니스를 이용해 보세요",
-  "TurnOffDiskSpaceLimit": "이 DocSpace에 대한 디스크 공간 제한을 해제합니다.",
+  "TurnOffDiskSpaceLimit": "이 {{portalName}}에 대한 디스크 공간 제한을 해제합니다.",
   "Type": "유형",
   "UnexpectedError": "예상치 못한 오류가 발생했습니다. 나중에 다시 시도하거나 지원팀에 문의하세요.",
   "Unknown": "알 수 없음",

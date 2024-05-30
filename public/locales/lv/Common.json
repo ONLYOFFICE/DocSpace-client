@@ -415,7 +415,7 @@
   "TrialDaysLeft": "Izmēģinājuma periods: {{count}} diena (-s)",
   "TrialExpired": "Izmēģinājuma termiņš beidzās",
   "TryBusiness": "Izmēģināt uzņēmumumdarbību",
-  "TurnOffDiskSpaceLimit": "Izslēdziet diska vietas ierobežojumu šim DocSpace.",
+  "TurnOffDiskSpaceLimit": "Izslēdziet diska vietas ierobežojumu šim {{portalName}}.",
   "Type": "Tips",
   "UnexpectedError": "Radās neparedzēta kļūda. Vēlāk mēģiniet vēlreiz vai sazinieties ar atbalsta dienestu.",
   "Unknown": "Nezināms",

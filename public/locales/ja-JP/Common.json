@@ -415,7 +415,7 @@
   "TrialDaysLeft": "試用期間{{count}}日",
   "TrialExpired": "試用期間が終了しました",
   "TryBusiness": "BUSINESSを試す",
-  "TurnOffDiskSpaceLimit": "このDocSpaceのディスクスペース制限をオフにする",
+  "TurnOffDiskSpaceLimit": "この{{portalName}}のディスクスペース制限をオフにする",
   "Type": "タイプ",
   "UnexpectedError": "予期せぬエラーが発生しました。後でもう一度試してみるか、サポートに連絡してください。",
   "Unknown": "不明",

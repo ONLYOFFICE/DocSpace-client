@@ -415,7 +415,7 @@
   "TrialDaysLeft": "Testversion {{count}} Tage",
   "TrialExpired": "Testversion abgelaufen",
   "TryBusiness": "Mit Business testieren",
-  "TurnOffDiskSpaceLimit": "Die Speicherplatzbeschränkung für diesen DocSpace deaktivieren",
+  "TurnOffDiskSpaceLimit": "Die Speicherplatzbeschränkung für diesen {{portalName}} deaktivieren",
   "Type": "Typ",
   "UnexpectedError": "Es ist ein unerwarteter Fehler aufgetreten. Versuchen Sie es später noch einmal oder kontaktieren Sie den Support.",
   "Unknown": "Unbekannt",

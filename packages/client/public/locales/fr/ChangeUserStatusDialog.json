@@ -3,7 +3,7 @@
   "DisableUser": "Désactiver l'utilisateur",
   "DisableUserDescription": "Si vous désactivez cet utilisateur, il ne pourra plus se connecter à {{portalName}}, mais ses documents et ses données resteront intacts.",
   "DisableUsers": "Désactiver les utilisateurs",
-  "DisableUsersDescription": "Si vous désactivez ces utilisateurs, ils ne pourront plus se connecter à DocSpace, mais leurs documents et données resteront intacts.",
+  "DisableUsersDescription": "Si vous désactivez ces utilisateurs, ils ne pourront plus se connecter à  {{portalName}}, mais leurs documents et données resteront intacts.",
   "EnableUser": "Activer l'utilisateur",
   "EnableUserDescription": "Si vous activez cet utilisateur, il pourra à nouveau se connecter à DocSpace et accéder à ses documents et données.",
   "EnableUsers": "Activer les utilisateurs",

@@ -2,7 +2,6 @@
   "DisableGeneralDescription": "Voit tarvittaessa myöhemmin poistaa tai ottaa käyttöön käytöstä poistetut käyttäjät. Huomioi, että et voi poistaa käytöstä Omistajaa etkä itseäsi.",
   "DisableUser": "Poista käyttäjä käytöstä",
   "DisableUsers": "Ota käyttäjät pois käytöstä ",
-  "DisableUsersDescription": "Jos otat nämä käyttäjät pois käytöstä, he eivät pysty enää kirjautumaan DocSpaceen, mutta heidän asiakirjat ja tiedot säilyvät. ",
   "EnableUser": "Ota käyttäjä takaisin käyttöön",
   "EnableUserDescription": "Jos otat tämän käyttäjän takaisin käyttöön, hän pystyy kirjautumaan jälleen DocSpaceen ja pääsee käsiksi asiakirjoihin ja tietoihin.",
   "EnableUsers": "Ota käyttäjät takaisin käyttöön",

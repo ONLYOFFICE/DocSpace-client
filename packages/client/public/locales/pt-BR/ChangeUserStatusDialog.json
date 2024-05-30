@@ -3,7 +3,7 @@
   "DisableUser": "Desativar usuário",
   "DisableUserDescription": "Se você desabilitar este usuário, ele não conseguirá fazer login no {{portalName}}, enquanto seus documentos e dados permanecerão intactos.",
   "DisableUsers": "Desabilitar usuários",
-  "DisableUsersDescription": "Se você desabilitar esses usuários, eles não conseguirão fazer login no DocSpace, enquanto seus documentos e dados permanecerão intactos.",
+  "DisableUsersDescription": "Se você desabilitar esses usuários, eles não conseguirão fazer login no  {{portalName}}, enquanto seus documentos e dados permanecerão intactos.",
   "EnableUser": "Habilitar usuário",
   "EnableUserDescription": "Se você habilitar este usuário, ele poderá fazer login no DocSpace novamente e acessar seus documentos e dados.",
   "EnableUsers": "Habilitar usuários",

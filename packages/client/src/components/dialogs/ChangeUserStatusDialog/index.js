@@ -133,7 +133,7 @@ class ChangeUserStatusDialogComponent extends React.Component {
 
       bodyText = onlyOneUser
         ? t("DisableUserDescription", { portalName: PORTAL })
-        : t("DisableUsersDescription");
+        : t("DisableUsersDescription", { portalName: PORTAL });
 
       bodyText = bodyText + t("DisableGeneralDescription");
 

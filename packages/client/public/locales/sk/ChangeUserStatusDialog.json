@@ -3,7 +3,7 @@
   "DisableUser": "Deaktivovať používateľa",
   "DisableUserDescription": "Ak tohto používateľa deaktivujete, nebude sa môcť prihlásiť do {{portalName}}, pričom jeho dokumenty a údaje zostanú nezmenené.",
   "DisableUsers": "Deaktivovať používateľov",
-  "DisableUsersDescription": "Ak deaktivujete týchto používateľov, nebudú sa môcť prihlásiť do DocSpace, pričom ich dokumenty a údaje zostanú nezmenené.",
+  "DisableUsersDescription": "Ak deaktivujete týchto používateľov, nebudú sa môcť prihlásiť do  {{portalName}}, pričom ich dokumenty a údaje zostanú nezmenené.",
   "EnableUser": "Aktivovať používateľa",
   "EnableUserDescription": "Ak tohto používateľa aktivujete, bude sa môcť opäť prihlásiť do DocSpace a bude mať prístup k svojim dokumentom a údajom.",
   "EnableUsers": "Aktivovať používateľov",

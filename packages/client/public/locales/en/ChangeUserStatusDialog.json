@@ -3,7 +3,7 @@
   "DisableUser": "Disable user",
   "DisableUserDescription": "If you Disable this user, they won’t be able to log in to {{portalName}}, while their documents and data will remain intact.",
   "DisableUsers": "Disable users",
-  "DisableUsersDescription": "If you Disable these users, they won’t be able to log in to DocSpace, while their documents and data will remain intact.",
+  "DisableUsersDescription": "If you Disable these users, they won’t be able to log in to {{portalName}}, while their documents and data will remain intact.",
   "EnableUser": "Enable user",
   "EnableUserDescription": "If you enable this user, they will be able to log in to DocSpace again and access their documents and data.",
   "EnableUsers": "Enable users",

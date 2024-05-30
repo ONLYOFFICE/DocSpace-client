@@ -62,7 +62,7 @@
   "EmptyFormSubFolderHeaderText": "මෙම බහාලුමේ ගොනු නැත",
   "EmptyFormSubFolderProgressDescriptionText": "මෙහි ඔබට පුරවමින් පවතින ආකෘතිපත්‍ර හමු වනු ඇත. එනම්, පරිශ්‍රීලකයින් පිරවීමට පටන් ගෙන තවමත් සම්පූර්ණ නොකළ ආකෘතිපත්‍ර.",
   "EmptyRecycleBin": "කුණුකූඩය හිස් කරන්න",
-  "EmptyRootRoomHeader": "DocSpace වෙත පිළිගනිමු",
+  "EmptyRootRoomHeader": "{{portalName}} වෙත පිළිගනිමු",
   "EmptyScreenFolder": "මෙතැන ලේඛන නැත",
   "EnableLink": "සබැඳිය සබල කරන්න",
   "EnableNotifications": "දැනුම්දීම් සබල කරන්න",

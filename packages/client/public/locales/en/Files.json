@@ -63,7 +63,7 @@
   "EmptyFormSubFolderHeaderText": "No files in this folder yet",
   "EmptyFormSubFolderProgressDescriptionText": "Here you will find forms in progress, i.e., forms which users have started to fill out but haven't completed.",
   "EmptyRecycleBin": "Empty Trash",
-  "EmptyRootRoomHeader": "Welcome to DocSpace",
+  "EmptyRootRoomHeader": "Welcome to {{portalName}}",
   "EmptyScreenFolder": "No docs here yet",
   "EnableLink": "Enable link",
   "EnableNotifications": "Enable notifications",

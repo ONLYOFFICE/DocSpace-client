@@ -63,7 +63,7 @@
   "EmptyFormSubFolderHeaderText": "Այս պանակում դեռ ֆայլեր չկան",
   "EmptyFormSubFolderProgressDescriptionText": "Այստեղ դուք կգտնեք ընթացիկ ձևաթղթեր, այսինքն՝ ձևեր, որոնք օգտվողները սկսել են լրացնել, բայց չեն լրացրել:",
   "EmptyRecycleBin": "Դատարկել աղբը",
-  "EmptyRootRoomHeader": "Բարի գալուստ DocSpace",
+  "EmptyRootRoomHeader": "Բարի գալուստ {{portalName}}",
   "EmptyScreenFolder": "Այստեղ դեռ փաստաթղթեր չկան",
   "EnableLink": "Միացնել հղումը",
   "EnableNotifications": "Միացնել ծանուցումները",

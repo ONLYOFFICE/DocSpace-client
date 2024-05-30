@@ -63,7 +63,7 @@
   "EmptyFormSubFolderHeaderText": "Chưa có tập tin nào trong thư mục này",
   "EmptyFormSubFolderProgressDescriptionText": "Ở đây bạn sẽ tìm thấy các biểu mẫu đang được tiến hành, tức là các biểu mẫu mà người dùng đã bắt đầu điền nhưng chưa hoàn thành.",
   "EmptyRecycleBin": "Thùng rác trống",
-  "EmptyRootRoomHeader": "Chào mừng đến DocSpace!",
+  "EmptyRootRoomHeader": "Chào mừng đến {{portalName}}!",
   "EmptyScreenFolder": "Chưa có tài liệu nào ở đây",
   "EnableLink": "Kích hoạt liên kết:",
   "EnableNotifications": "Bật thông báo",

@@ -63,7 +63,7 @@
   "EmptyFormSubFolderHeaderText": "Ancora nessun file in questa cartella",
   "EmptyFormSubFolderProgressDescriptionText": "Qui troverai i moduli in elaborazione, ovvero i moduli che gli utenti hanno iniziato a compilare ma non hanno completato.",
   "EmptyRecycleBin": "Svuota cestino",
-  "EmptyRootRoomHeader": "Benvenuti in DocSpace",
+  "EmptyRootRoomHeader": "Benvenuti in {{portalName}}",
   "EmptyScreenFolder": "Nessun documento ancora qui",
   "EnableLink": "Abilita il link",
   "EnableNotifications": "Abilita le notifiche",

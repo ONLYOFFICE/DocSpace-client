@@ -130,7 +130,7 @@ const RootFolderContainer = (props) => {
     t("PrivateRoomDescriptionUnbreakable"),
   ];
 
-  const roomHeader = t("EmptyRootRoomHeader");
+  const roomHeader = t("EmptyRootRoomHeader", { portalName: PORTAL });
 
   const onGoToPersonal = () => {
     const newFilter = FilesFilter.getDefault();

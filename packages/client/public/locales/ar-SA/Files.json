@@ -63,7 +63,7 @@
   "EmptyFormSubFolderHeaderText": "لا توجد ملفات في هذا المجلد حتى الآن",
   "EmptyFormSubFolderProgressDescriptionText": "ستجد هنا نماذج قيد التقدم، أي النماذج التي بدأ المستخدمون في تعبئتها ولكنهم لم يكملوها.",
   "EmptyRecycleBin": "سلة مهملات فارغة",
-  "EmptyRootRoomHeader": "مرحبًا بك في DocSpace",
+  "EmptyRootRoomHeader": "مرحبًا بك في {{portalName}}",
   "EmptyScreenFolder": "لا توجد مستندات هنا حتى الآن",
   "EnableLink": "تفعيل الرابط",
   "EnableNotifications": "تفعيل الاشعارات",

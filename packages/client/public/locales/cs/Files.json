@@ -63,7 +63,7 @@
   "EmptyFormSubFolderHeaderText": "V této složce zatím nejsou žádné soubory",
   "EmptyFormSubFolderProgressDescriptionText": "Zde najdete rozpracované formuláře, tj. formuláře, které uživatelé začali vyplňovat, ale nedokončili je.",
   "EmptyRecycleBin": "Vysypat kos",
-  "EmptyRootRoomHeader": "Vítejte v DocSpace",
+  "EmptyRootRoomHeader": "Vítejte v {{portalName}}",
   "EmptyScreenFolder": "Zatím zde nejsou žádné dokumenty",
   "EnableLink": "Povolit odkaz",
   "EnableNotifications": "Povolení oznámení",

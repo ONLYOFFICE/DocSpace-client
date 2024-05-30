@@ -63,7 +63,7 @@
   "EmptyFormSubFolderHeaderText": "このフォルダにはまだファイルがありません",
   "EmptyFormSubFolderProgressDescriptionText": "ここには、ユーザーが記入を開始したが完了していない、記入中のフォームが表示されます。",
   "EmptyRecycleBin": "空きゴミ箱",
-  "EmptyRootRoomHeader": "DocSpaceへようこそ！",
+  "EmptyRootRoomHeader": "{{portalName}}へようこそ！",
   "EmptyScreenFolder": "ここにはドキュメントがまだありません",
   "EnableLink": "リンクを有効にする",
   "EnableNotifications": "通知をオンにする",

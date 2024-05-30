@@ -63,7 +63,7 @@
   "EmptyFormSubFolderHeaderText": "Niciun fișier în acest folder deocamdată",
   "EmptyFormSubFolderProgressDescriptionText": "Aici veți găsi formulare în curs de completare, adică formulare pe care utilizatorii au început să le completeze, dar nu le-au finalizat.",
   "EmptyRecycleBin": "Golire Coș de gunoi",
-  "EmptyRootRoomHeader": "Bun venit la DocSpace",
+  "EmptyRootRoomHeader": "Bun venit la {{portalName}}",
   "EmptyScreenFolder": "Niciun document încă nu există aici",
   "EnableLink": "Activare link",
   "EnableNotifications": "Activare notificări",

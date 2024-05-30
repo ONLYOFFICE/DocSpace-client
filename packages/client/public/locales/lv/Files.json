@@ -63,7 +63,7 @@
   "EmptyFormSubFolderHeaderText": "Šajā mapē nav failu",
   "EmptyFormSubFolderProgressDescriptionText": "Šeit jūs atradīsiet nepabeigtas veidlapas, t.i., veidlapas, kuras lietotāji ir sākuši aizpildīt, bet nav pabeiguši.",
   "EmptyRecycleBin": "Iztukšot atkritni",
-  "EmptyRootRoomHeader": "Laipni lūdzam DocSpace!",
+  "EmptyRootRoomHeader": "Laipni lūdzam {{portalName}}!",
   "EmptyScreenFolder": "Šeit vēl nav neviena dokumenta",
   "EnableLink": "Iespējot saiti",
   "EnableNotifications": "Aktivizēt paziņojumus",

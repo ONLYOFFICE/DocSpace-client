@@ -63,7 +63,7 @@
   "EmptyFormSubFolderHeaderText": "Все още няма файлове в тази папка",
   "EmptyFormSubFolderProgressDescriptionText": "Тук ще намерите формуляри в процес на изпълнение, т.е. формуляри, които потребителите са започнали да попълват, но не са завършили.",
   "EmptyRecycleBin": "Изпразни Кошчето",
-  "EmptyRootRoomHeader": "Добре дошли в DocSpace",
+  "EmptyRootRoomHeader": "Добре дошли в {{portalName}}",
   "EmptyScreenFolder": "Тук все още няма документи",
   "EnableLink": "Активирайте линк",
   "EnableNotifications": "Активирайте известията",

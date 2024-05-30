@@ -63,7 +63,7 @@
   "EmptyFormSubFolderHeaderText": "В этой папке пока нет файлов",
   "EmptyFormSubFolderProgressDescriptionText": "Здесь будут отображаться незавершенные формы, то есть формы, которые пользователи начали заполнять, но еще не закончили.",
   "EmptyRecycleBin": "Очистить корзину",
-  "EmptyRootRoomHeader": "Добро пожаловать в DocSpace!",
+  "EmptyRootRoomHeader": "Добро пожаловать в {{portalName}}!",
   "EmptyScreenFolder": "Здесь пока нет документов",
   "EnableLink": "Активировать ссылку",
   "EnableNotifications": "Включить уведомления",

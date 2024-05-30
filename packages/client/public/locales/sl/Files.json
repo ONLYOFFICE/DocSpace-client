@@ -63,7 +63,7 @@
   "EmptyFormSubFolderHeaderText": "V tej mapi še ni datotek",
   "EmptyFormSubFolderProgressDescriptionText": "Tukaj boste našli obrazce v teku, torej obrazce, ki so jih uporabniki začeli izpolnjevati, a jih niso dokončali.",
   "EmptyRecycleBin": "Izprazni koš",
-  "EmptyRootRoomHeader": "Dobrodošli na DocSpace!",
+  "EmptyRootRoomHeader": "Dobrodošli na {{portalName}}!",
   "EmptyScreenFolder": "Tu še ni dokumentov",
   "EnableLink": "Omogoči povezavo",
   "EnableNotifications": "Omogoči obvestila",

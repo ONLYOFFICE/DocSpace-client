@@ -63,7 +63,7 @@
   "EmptyFormSubFolderHeaderText": "Aucun fichier dans ce dossier pour l'instant",
   "EmptyFormSubFolderProgressDescriptionText": "Vous y trouverez les formulaires en cours d'élaboration, c'est-à-dire les formulaires que les utilisateurs ont commencé à remplir mais qu'ils n'ont pas encore terminés.",
   "EmptyRecycleBin": "Vider la corbeille",
-  "EmptyRootRoomHeader": "Bienvenue dans DocSpace !",
+  "EmptyRootRoomHeader": "Bienvenue dans {{portalName}} !",
   "EmptyScreenFolder": "Aucun document ici pour le moment",
   "EnableLink": "Activer le lien",
   "EnableNotifications": "Activer les notifications",

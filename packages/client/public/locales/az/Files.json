@@ -63,7 +63,7 @@
   "EmptyFormSubFolderHeaderText": "Bu qovluqda hələ heç bir fayl yoxdur",
   "EmptyFormSubFolderProgressDescriptionText": "Burada davam edən formaları, yəni istifadəçilərin doldurmağa başladığı, lakin hələ tamamlamamış formaları tapa bilərsiniz.",
   "EmptyRecycleBin": "Boş zibil qutusu",
-  "EmptyRootRoomHeader": "DocSpace xoş gəlmisiniz",
+  "EmptyRootRoomHeader": "{{portalName}} xoş gəlmisiniz",
   "EmptyScreenFolder": "Burada hələ ki, heç bir sənəd yoxdur",
   "EnableLink": "Linki aktivləşdirin",
   "EnableNotifications": "Bildirişləri aktivləşdirin",

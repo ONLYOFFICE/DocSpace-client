@@ -63,7 +63,7 @@
   "EmptyFormSubFolderHeaderText": "Ainda não há arquivos nesta pasta",
   "EmptyFormSubFolderProgressDescriptionText": "Aqui você encontrará formulários em andamento, ou seja, formulários que os usuários começaram a preencher, mas não concluíram.",
   "EmptyRecycleBin": "Esvaziar lixo",
-  "EmptyRootRoomHeader": "Bem-vindo ao DocSpace!",
+  "EmptyRootRoomHeader": "Bem-vindo ao {{portalName}}!",
   "EmptyScreenFolder": "Ainda não há documentos aqui",
   "EnableLink": "Ativar link",
   "EnableNotifications": "Permitir notificações",

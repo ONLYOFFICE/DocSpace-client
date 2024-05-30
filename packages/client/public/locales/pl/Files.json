@@ -63,7 +63,7 @@
   "EmptyFormSubFolderHeaderText": "Brak plików w tym katalogu",
   "EmptyFormSubFolderProgressDescriptionText": "Tutaj znajdziesz formularze w trakcie wypełniania, tzn. formularze, które użytkownicy zaczęli wypełniać, ale jeszcze nie skończyli.",
   "EmptyRecycleBin": "Opróżnij kosz",
-  "EmptyRootRoomHeader": "Witamy w DocSpace",
+  "EmptyRootRoomHeader": "Witamy w {{portalName}}",
   "EmptyScreenFolder": "Nie ma tu jeszcze dokumentów",
   "EnableLink": "Włącz link",
   "EnableNotifications": "Włącz powiadomienia",

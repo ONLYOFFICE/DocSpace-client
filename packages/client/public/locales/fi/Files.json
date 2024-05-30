@@ -62,7 +62,7 @@
   "EmptyFormSubFolderHeaderText": "Tässä kansiossa ei ole vielä tiedostoja",
   "EmptyFormSubFolderProgressDescriptionText": "Tästä löydät keskeneräiset lomakkeet. esim. lomakkeet, joita käyttäjät ovat aloittaneet täyttämään, mutta eivät ole saaneet valmiiksi.",
   "EmptyRecycleBin": "Tyhjennä roskakori",
-  "EmptyRootRoomHeader": "Tervetuloa DocSpace ohjelmiston käyttäjäksi!",
+  "EmptyRootRoomHeader": "Tervetuloa {{portalName}} ohjelmiston käyttäjäksi!",
   "EmptyScreenFolder": "Täällä ei ole vielä asiakirjoja",
   "EnableLink": "Ota linkki käyttöön",
   "EnableNotifications": "Salli ilmoitukset",

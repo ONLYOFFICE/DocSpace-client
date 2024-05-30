@@ -63,7 +63,7 @@
   "EmptyFormSubFolderHeaderText": "Još nema datoteka u ovom folderu",
   "EmptyFormSubFolderProgressDescriptionText": "Ovde ćete pronaći obrasce u toku, odnosno obrasce koje su korisnici počeli da popunjavaju, ali nisu završili.",
   "EmptyRecycleBin": "Prazan Otpad",
-  "EmptyRootRoomHeader": "Dobrodošli na DocSpace",
+  "EmptyRootRoomHeader": "Dobrodošli na {{portalName}}",
   "EmptyScreenFolder": "Nema dokumenata ovde još",
   "EnableLink": "Omogući link",
   "EnableNotifications": "Omogući notifikacije",

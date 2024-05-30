@@ -63,7 +63,7 @@
   "EmptyFormSubFolderHeaderText": "Δεν υπάρχουν ακόμα αρχεία σε αυτόν τον φάκελο",
   "EmptyFormSubFolderProgressDescriptionText": "Εδώ θα βρείτε φόρμες σε εξέλιξη, δηλαδή φόρμες τις οποίες οι χρήστες έχουν αρχίσει να συμπληρώνουν αλλά δεν έχουν ολοκληρώσει.",
   "EmptyRecycleBin": "Αδειάστε τον Κάδο απορριμμάτων",
-  "EmptyRootRoomHeader": "Καλώς ήλθατε στο DocSpace",
+  "EmptyRootRoomHeader": "Καλώς ήλθατε στο {{portalName}}",
   "EmptyScreenFolder": "Δεν υπάρχουν ακόμα έγγραφα εδώ",
   "EnableLink": "Ενεργοποίηση συνδέσμου",
   "EnableNotifications": "Ενεργοποίηση ειδοποιήσεων",

@@ -63,7 +63,7 @@
   "EmptyFormSubFolderHeaderText": "Bu klasörde henüz dosya yok",
   "EmptyFormSubFolderProgressDescriptionText": "Burada devam etmekte olan formları, yani kullanıcıların doldurmaya başladığı fakat henüz tamamlamadığı formları bulacaksınız.",
   "EmptyRecycleBin": "Çöp Kutusunu Boşalt",
-  "EmptyRootRoomHeader": "DocSpace'e Hoş Geldiniz!",
+  "EmptyRootRoomHeader": "{{portalName}}'e Hoş Geldiniz!",
   "EmptyScreenFolder": "Henüz burada döküman yok",
   "EnableLink": "Bağlantıyı etkinleştir",
   "EnableNotifications": "Bildirimleri etkinleştir",

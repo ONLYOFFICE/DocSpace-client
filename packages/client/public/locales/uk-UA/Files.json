@@ -63,7 +63,7 @@
   "EmptyFormSubFolderHeaderText": "У цій папці ще немає файлів.",
   "EmptyFormSubFolderProgressDescriptionText": "Тут ви знайдете форми в процесі заповнення, тобто такі, які користувачі почали й не закінчили заповнювати.",
   "EmptyRecycleBin": "Очистити кошик",
-  "EmptyRootRoomHeader": "Вітаємо в DocSpace!",
+  "EmptyRootRoomHeader": "Вітаємо в {{portalName}}!",
   "EmptyScreenFolder": "Тут ще немає документів",
   "EnableLink": "Увімкнути посилання",
   "EnableNotifications": "Увімкнути сповіщення",

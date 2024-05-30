@@ -2006,6 +2006,7 @@ class FilesStore {
         "separator-SubmitToGallery",
         "link-for-room-members",
         "sharing-settings",
+        "embedding-settings",
         // "external-link",
         "owner-change",
         // "link-for-portal-users",
@@ -2263,6 +2264,10 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, [
           "link-for-room-members",
         ]);
+      }
+
+      if (this.publicRoomStore.isPublicRoom) {
+        fileOptions = this.removeOptions(fileOptions, ["embedding-settings"]);
       }
 
       // if (isPrivacyFolder) {

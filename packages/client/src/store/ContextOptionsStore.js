@@ -80,6 +80,7 @@ import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
+import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 
 import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 
@@ -440,6 +441,41 @@ class ContextOptionsStore {
     copy(url);
 
     toastr.success(t("Translations:LinkCopySuccess"));
+  };
+
+  onOpenEmbeddingSettings = async (item) => {
+    const { shared, navigationPath, getSelectedFolder } =
+      this.selectedFolderStore;
+    const { setLinkParams, setEmbeddingPanelIsVisible } = this.dialogsStore;
+
+    if (item.canShare) {
+      setLinkParams({ fileId: item.id });
+      setEmbeddingPanelIsVisible(true);
+    } else {
+      const sharedItem = shared
+        ? getSelectedFolder()
+        : navigationPath.find((r) => r.shared);
+
+      if (!sharedItem) return;
+
+      const roomId = sharedItem?.id;
+
+      try {
+        const itemLink = await getFileLink(item.id);
+
+        const isPublicRoomType = sharedItem.roomType === RoomsType.PublicRoom;
+
+        setLinkParams({
+          link: itemLink,
+          roomId,
+          fileId: item.id,
+          isPublic: isPublicRoomType,
+        });
+        setEmbeddingPanelIsVisible(true);
+      } catch (error) {
+        toastr.error(error);
+      }
+    }
   };
 
   onCreateAndCopySharedLink = async (item, t) => {
@@ -1227,14 +1263,14 @@ class ContextOptionsStore {
       item.roomType === RoomsType.PublicRoom ||
       item.roomType === RoomsType.CustomRoom;
 
+    const { shared, navigationPath } = this.selectedFolderStore;
+
     if (item.isRoom && withOpen) {
-      withOpen =
-        this.selectedFolderStore.navigationPath.findIndex(
-          (f) => f.id === item.id,
-        ) === -1;
+      withOpen = navigationPath.findIndex((f) => f.id === item.id) === -1;
     }
 
     const isArchive = item.rootFolderType === FolderType.Archive;
+    const isShared = shared || navigationPath.findIndex((r) => r.shared) > -1;
 
     const optionsModel = [
       {
@@ -1440,6 +1476,14 @@ class ContextOptionsStore {
       //   icon: MailReactSvgUrl,
       //   disabled: emailSendIsDisabled,
       // },
+      {
+        id: "option_embedding-setting",
+        key: "embedding-settings",
+        label: t("Files:Embed"),
+        icon: CodeReactSvgUrl,
+        onClick: () => this.onOpenEmbeddingSettings(item),
+        disabled: (!item.canShare && !isShared) || isArchive,
+      },
       {
         id: "option_show-info",
         key: "show-info",

@@ -90,33 +90,33 @@ const LinkRow = (props) => {
 
   const onEditLink = () => {
     setEditLinkPanelIsVisible(true);
-    setLinkParams({ isEdit: true, link });
+    setLinkParams({ isEdit: true, link, roomId, isPublic: isPublicRoomType });
     onCloseContextMenu();
   };
 
-  const onDisableLink = () => {
-    if (isExpired) {
-      setEditLinkPanelIsVisible(true);
-      setLinkParams({ isEdit: true, link });
-      return;
-    }
+  // const onDisableLink = () => {
+  //   if (isExpired) {
+  //     setEditLinkPanelIsVisible(true);
+  //     setLinkParams({ isEdit: true, link, roomId, isPublic: isPublicRoomType });
+  //     return;
+  //   }
 
-    setIsLoading(true);
+  //   setIsLoading(true);
 
-    const newLink = JSON.parse(JSON.stringify(link));
-    newLink.sharedTo.disabled = !newLink.sharedTo.disabled;
+  //   const newLink = JSON.parse(JSON.stringify(link));
+  //   newLink.sharedTo.disabled = !newLink.sharedTo.disabled;
 
-    editExternalLink(roomId, newLink)
-      .then((link) => {
-        setExternalLink(link);
+  //   editExternalLink(roomId, newLink)
+  //     .then((link) => {
+  //       setExternalLink(link);
 
-        disabled
-          ? toastr.success(t("Files:LinkEnabledSuccessfully"))
-          : toastr.success(t("Files:LinkDisabledSuccessfully"));
-      })
-      .catch((err) => toastr.error(err?.message))
-      .finally(() => setIsLoading(false));
-  };
+  //       disabled
+  //         ? toastr.success(t("Files:LinkEnabledSuccessfully"))
+  //         : toastr.success(t("Files:LinkDisabledSuccessfully"));
+  //     })
+  //     .catch((err) => toastr.error(err?.message))
+  //     .finally(() => setIsLoading(false));
+  // };
 
   const onCopyPassword = () => {
     copy(password);
@@ -124,13 +124,13 @@ const LinkRow = (props) => {
   };
 
   const onEmbeddingClick = () => {
-    setLinkParams({ link, roomId });
+    setLinkParams({ link, roomId, isPublic: isPublicRoomType });
     setEmbeddingPanelIsVisible(true);
     onCloseContextMenu();
   };
 
   const onDeleteLink = () => {
-    setLinkParams({ link });
+    setLinkParams({ link, roomId, isPublic: isPublicRoomType });
     setDeleteLinkDialogVisible(true);
     onCloseContextMenu();
   };

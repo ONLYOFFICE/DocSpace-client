@@ -73,7 +73,7 @@ const StyledBody = styled.div`
     }
 
     .embedding-panel_bar {
-      margin: 23px 0px 21px 0px;
+      margin-bottom: 21px;
 
       .embedding-panel_bar-header {
         display: flex;

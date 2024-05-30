@@ -85,12 +85,13 @@ type LinkParamsLinkType = {
   canEditAccess: boolean;
   isLocked: boolean;
   isOwner: boolean;
-  sharedTo: LinkParamsLinkShareToType;
+  sharedTo?: LinkParamsLinkShareToType;
   subjectType: number;
 };
 
 type LinkParamsType = {
-  roomId?: number;
+  roomId?: number | string;
+  fileId?: number | string;
   isEdit?: boolean;
   link: LinkParamsLinkType;
 };
@@ -123,13 +124,14 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     setLinkParams,
   } = props;
 
-  const { roomId, link } = linkParams;
-  const {
-    requestToken,
-    title: linkTitle,
-    password: withPassword,
-    denyDownload,
-  } = link.sharedTo;
+  const { roomId, link, fileId } = linkParams;
+
+  const requestToken = link?.sharedTo?.requestToken;
+  const linkTitle = link?.sharedTo?.title;
+  const withPassword = link?.sharedTo?.password;
+  const denyDownload = link?.sharedTo?.denyDownload;
+
+  const withToken = !!requestToken;
 
   const dataDimensions = [
     { key: "percent", label: "%", default: true },
@@ -140,25 +142,32 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   const [widthDimension, setWidthDimension] = useState<TOption>(
     dataDimensions[0],
   );
-  const [heightValue, setHeightValue] = useState("820");
+  const [heightValue, setHeightValue] = useState("100");
   const [heightDimension, setHeightDimension] = useState<TOption>(
     dataDimensions[1],
   );
 
-  const [config, setConfig] = useState({
+  const fileConfig = {
+    mode: "manager",
+    width: "100%",
+    height: "100%",
+    frameId: "ds-frame",
+    init: true,
+    id: fileId,
+    requestToken: withToken ? requestToken : null,
+  };
+
+  const roomConfig = {
     width: `${widthValue}${dataDimensions[0].label}`,
-    height: `${heightValue}${dataDimensions[1].label}`,
+    height: `${heightValue}${dataDimensions[0].label}`,
     frameId: "ds-frame",
     showHeader: true,
     showTitle: true,
     showMenu: false,
     showFilter: true,
-    //
     mode: "manager",
     init: true,
     requestToken,
-    //
-
     rootPath: "/rooms/share",
     id: roomId,
     filter: {
@@ -169,7 +178,9 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
       search: "",
       withSubfolders: false,
     },
-  });
+  };
+
+  const [config, setConfig] = useState(fileId ? fileConfig : roomConfig);
 
   const scriptUrl = `${window.location.origin}/static/scripts/api.js`;
   const params = objectToGetParams(config);
@@ -230,8 +241,8 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   };
 
   const onEditLink = () => {
+    setLinkParams({ ...linkParams, isEdit: true });
     setEditLinkPanelIsVisible(true);
-    setLinkParams({ isEdit: true, link });
   };
 
   const onKeyPress = (e: KeyboardEvent) =>
@@ -239,13 +250,12 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 
   useEffect(() => {
     if (scrollRef.current) scrollRef.current?.contentElement?.focus();
+  }, []);
 
+  useEffect(() => {
     document.addEventListener("keyup", onKeyPress);
-
     return () => document.removeEventListener("keyup", onKeyPress);
   });
-
-  console.log("Embedding config", config);
 
   const barTitle = (
     <div className="embedding-panel_bar-header">
@@ -280,7 +290,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     barSubTitle = contentRestrictedTitle;
   }
 
-  const showLinkBar = withPassword || denyDownload;
+  const showLinkBar = (withPassword || denyDownload) && !fileId;
 
   const embeddingPanelComponent = (
     <StyledEmbeddingPanel>
@@ -299,9 +309,11 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
         <StyledScrollbar ref={scrollRef}>
           <StyledBody>
             <div className="embedding-panel_body">
-              <Text className="embedding-panel_description">
-                {t("EmbeddingPanel:EmbeddingDescription")}
-              </Text>
+              {!fileId && (
+                <Text className="embedding-panel_description">
+                  {t("EmbeddingPanel:EmbeddingDescription")}
+                </Text>
+              )}
 
               {showLinkBar && (
                 <PublicRoomBar
@@ -337,32 +349,38 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                 />
               </div>
 
-              <Text
-                className="embedding-panel_header-text"
-                fontSize="15px"
-                fontWeight={600}
-              >
-                {t("JavascriptSdk:InterfaceElements")}:
-              </Text>
+              {!fileId && (
+                <>
+                  <Text
+                    className="embedding-panel_header-text"
+                    fontSize="15px"
+                    fontWeight={600}
+                  >
+                    {t("JavascriptSdk:InterfaceElements")}:
+                  </Text>
 
-              <div className="embedding-panel_checkbox-container">
-                <CheckboxElement
-                  label={t("Common:Title")}
-                  onChange={onHeaderChange}
-                  isChecked={config.showHeader}
-                  img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
-                  title={t("JavascriptSdk:Header")}
-                  description={t("JavascriptSdk:HeaderDescription")}
-                />
-                <CheckboxElement
-                  label={t("JavascriptSdk:SearchFilterAndSort")}
-                  onChange={onTitleChange}
-                  isChecked={config.showTitle}
-                  img={theme.isBase ? SearchUrl : SearchDarkUrl}
-                  title={t("JavascriptSdk:SearchBlock")}
-                  description={t("JavascriptSdk:ManagerSearchBlockDescription")}
-                />
-              </div>
+                  <div className="embedding-panel_checkbox-container">
+                    <CheckboxElement
+                      label={t("Common:Title")}
+                      onChange={onHeaderChange}
+                      isChecked={config.showHeader}
+                      img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
+                      title={t("JavascriptSdk:Header")}
+                      description={t("JavascriptSdk:HeaderDescription")}
+                    />
+                    <CheckboxElement
+                      label={t("JavascriptSdk:SearchFilterAndSort")}
+                      onChange={onTitleChange}
+                      isChecked={config.showTitle}
+                      img={theme.isBase ? SearchUrl : SearchDarkUrl}
+                      title={t("JavascriptSdk:SearchBlock")}
+                      description={t(
+                        "JavascriptSdk:ManagerSearchBlockDescription",
+                      )}
+                    />
+                  </div>
+                </>
+              )}
 
               <div className="embedding-panel_code-container">
                 <Text
@@ -438,8 +456,6 @@ export default inject(
       setLinkParams,
     } = dialogsStore;
     const { theme, currentColorScheme, currentDeviceType } = settingsStore;
-
-    console.log("linkParams", linkParams);
 
     return {
       theme,

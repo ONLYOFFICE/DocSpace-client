@@ -184,5 +184,6 @@
   "WantToRestoreTheRooms": "All shared links in restored rooms will become active, and their contents will be available to everyone with the room links. Do you want to restore the rooms?",
   "WithSubfolders": "With subfolders",
   "YouLeftTheRoom": "You have left the room",
-  "Protected": "protected"
+  "Protected": "protected",
+  "Embed": "Embed"
 }

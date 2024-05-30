@@ -40,7 +40,6 @@ import LinkBlock from "./LinkBlock";
 import ToggleBlock from "./ToggleBlock";
 import PasswordAccessBlock from "./PasswordAccessBlock";
 import LimitTimeBlock from "./LimitTimeBlock";
-import { RoomsType } from "@docspace/shared/enums";
 import { DeviceType } from "@docspace/shared/enums";
 import moment from "moment";
 
@@ -130,7 +129,7 @@ const EditLinkPanel = (props) => {
     editExternalLink(roomId, newLink)
       .then((link) => {
         setExternalLink(link);
-        setLinkParams({ link, roomId });
+        setLinkParams({ link, roomId, isPublic });
 
         if (isEdit) {
           copy(linkValue);
@@ -299,14 +298,7 @@ const EditLinkPanel = (props) => {
 };
 
 export default inject(
-  ({
-    authStore,
-    settingsStore,
-    dialogsStore,
-    publicRoomStore,
-    infoPanelStore,
-  }) => {
-    const { infoPanelSelection } = infoPanelStore;
+  ({ authStore, settingsStore, dialogsStore, publicRoomStore }) => {
     const {
       editLinkPanelIsVisible,
       setEditLinkPanelIsVisible,
@@ -317,13 +309,12 @@ export default inject(
     } = dialogsStore;
     const { externalLinks, editExternalLink, setExternalLink } =
       publicRoomStore;
-    const { isEdit } = linkParams;
+    const { isEdit, roomId, isPublic } = linkParams;
 
     const linkId = linkParams?.link?.sharedTo?.id;
     const link = externalLinks.find((l) => l?.sharedTo?.id === linkId);
 
     const shareLink = link?.sharedTo?.shareLink;
-    const isPublic = infoPanelSelection?.roomType === RoomsType.PublicRoom;
 
     return {
       visible: editLinkPanelIsVisible,
@@ -331,7 +322,7 @@ export default inject(
       isEdit,
       linkId: link?.sharedTo?.id,
       editExternalLink,
-      roomId: infoPanelSelection.id,
+      roomId,
       setExternalLink,
       isLocked: !!link?.sharedTo?.password,
       password: link?.sharedTo?.password ?? "",

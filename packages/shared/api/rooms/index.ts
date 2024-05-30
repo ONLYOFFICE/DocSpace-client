@@ -477,3 +477,7 @@ export function resetRoomQuota(roomIds) {
 
   return request(options);
 }
+
+export function exportRoomIndex(roomId: number) {
+  return new Promise((resolve) => setTimeout(() => resolve(), 1000));
+}

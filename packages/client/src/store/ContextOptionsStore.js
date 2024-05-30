@@ -892,6 +892,15 @@ class ContextOptionsStore {
     this.filesActionsStore.setMuteAction(action, item, t);
   };
 
+  onClickExportRoomIndex = async (room) => {
+    try {
+      await api.rooms.exportRoomIndex(room.id);
+      return `${room.title}_index.xlsx`;
+    } catch (e) {
+      toastr.error(e);
+    }
+  };
+
   onClickRemoveFromRecent = (item) => {
     this.filesActionsStore.removeFilesFromRecent([item.id]);
   };

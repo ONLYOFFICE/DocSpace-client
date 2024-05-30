@@ -62,6 +62,8 @@ import { tablet, mobile, Consumer, getLogoUrl } from "@docspace/shared/utils";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { TableGroupMenu } from "@docspace/shared/components/table";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 import {
   Events,
   RoomsType,
@@ -290,6 +292,7 @@ const SectionHeaderContent = (props) => {
     startUpload,
     getFolderModel,
     onCreateRoom,
+    onClickExportRoomIndex,
   } = props;
 
   const navigate = useNavigate();
@@ -441,6 +444,26 @@ const SectionHeaderContent = (props) => {
     toastr.success(t("Translations:LinkCopySuccess"));
   };
 
+  const onExportRoomIndex = async () => {
+    const fileTitle = await onClickExportRoomIndex(selectedFolder);
+
+    if (!fileTitle) return;
+
+    const toastMessage = (
+      <>
+        <Link color="#5299E0" fontSize="12px">
+          {fileTitle}
+        </Link>
+        &nbsp;
+        <Text as="span" fontSize="12px">
+          {t("Files:FileExportedToMyDocuments")}
+        </Text>
+      </>
+    );
+
+    toastr.success(toastMessage);
+  };
+
   const onDeleteRoomInArchive = () => {
     setSelection([selectedFolder]);
     deleteRooms(t);
@@ -468,6 +491,7 @@ const SectionHeaderContent = (props) => {
       haveLinksRight,
       isPublicRoom,
       isFrame,
+      isVDRRoomType,
     } = props;
 
     const isArchive = selectedFolder.rootFolderType === FolderType.Archive;
@@ -627,6 +651,14 @@ const SectionHeaderContent = (props) => {
         icon: InfoOutlineReactSvgUrl,
         onClick: onToggleInfoPanel,
         disabled: !isRoom,
+      },
+      {
+        id: "header_option_export-room-index",
+        key: "export-room-index",
+        label: t("Files:ExportRoomIndex"),
+        icon: DownloadReactSvgUrl,
+        onClick: onExportRoomIndex,
+        disabled: !isVDRRoomType,
       },
       {
         id: "header_option_separator-2",
@@ -1166,6 +1198,7 @@ export default inject(
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
     const isCustomRoomType = roomType === RoomsType.CustomRoom;
     const isFormRoomType = roomType === RoomsType.FormRoom;
+    const isVDRRoomType = roomType === RoomsType.VirtualDataRoom;
 
     const {
       onClickEditRoom,
@@ -1177,6 +1210,7 @@ export default inject(
       onCreateAndCopySharedLink,
       getFolderModel,
       onCreateRoom,
+      onClickExportRoomIndex,
     } = contextOptionsStore;
 
     const canRestoreAll = isArchiveFolder && roomsForRestore.length > 0;
@@ -1304,6 +1338,7 @@ export default inject(
       onShowInfoPanel,
       onClickArchive,
       onCopyLink,
+      onClickExportRoomIndex,
 
       isEmptyArchive,
       canRestoreAll,
@@ -1315,6 +1350,7 @@ export default inject(
       isPublicRoomType,
       isCustomRoomType,
       isFormRoomType,
+      isVDRRoomType,
       isPublicRoom,
       primaryLink,
       getPrimaryLink,

@@ -285,7 +285,7 @@
   "Petabyte": "PB",
   "Phone": "Telefon",
   "Plugins": "Dodaci",
-  "PortalRestriction": "Vaša IP adresa nije uključena u listu dozvoljenih IP adresa da biste pristupili ovom DocSpace-u. Ako je VPN omogućen, isključite ga i osvežite stranicu, ili koristite drugu IP adresu da se ulogujete.",
+  "PortalRestriction": "Vaša IP adresa nije uključena u listu dozvoljenih IP adresa da biste pristupili ovom {{portalName}}-u. Ako je VPN omogućen, isključite ga i osvežite stranicu, ili koristite drugu IP adresu da se ulogujete.",
   "PowerUser": "Power korisnik",
   "PreparationPortalTitle": "Obnova portala je u toku",
   "Preview": "Pregled",

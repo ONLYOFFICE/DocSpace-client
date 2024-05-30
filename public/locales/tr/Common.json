@@ -286,7 +286,7 @@
   "Petabyte": "PB",
   "Phone": "Telefon",
   "Plugins": "Eklentiler",
-  "PortalRestriction": "IP adresiniz bu DocSpace'e erişimine izin verilen IP adresleri listesinde yer almıyor. Etkinleştirilmişse VPN'i kapatın ve sayfayı yeniden yükleyin veya oturum açmak için başka bir IP adresi kullanın.",
+  "PortalRestriction": "IP adresiniz bu {{portalName}}'e erişimine izin verilen IP adresleri listesinde yer almıyor. Etkinleştirilmişse VPN'i kapatın ve sayfayı yeniden yükleyin veya oturum açmak için başka bir IP adresi kullanın.",
   "PowerUser": "Uzman kullanıcı",
   "PreparationPortalTitle": "Portal geri yükleme yapılıyor.",
   "Preview": "Önizleme",

@@ -286,7 +286,7 @@
   "Petabyte": "PO",
   "Phone": "Telefon",
   "Plugins": "Pluginuri",
-  "PortalRestriction": "Adresa IP al dvs nu este inclusă în lista adreselor IP cu permisiuni de acces la acest spațiu DocSpace.  Dacă utilizați VPN, dezactivați VPN-ul  și reîncărcați pagina sau vă conectați cu o altă adresă IP.",
+  "PortalRestriction": "Adresa IP al dvs nu este inclusă în lista adreselor IP cu permisiuni de acces la acest spațiu {{portalName}}.  Dacă utilizați VPN, dezactivați VPN-ul  și reîncărcați pagina sau vă conectați cu o altă adresă IP.",
   "PowerUser": "Utilizator avansat",
   "PreparationPortalTitle": "Restaurarea portalului este în curs de desfășurare",
   "Preview": "Previzualizare",

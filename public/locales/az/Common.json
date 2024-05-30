@@ -286,7 +286,7 @@
   "Petabyte": "PB",
   "Phone": "Nömrə",
   "Plugins": "Pluginlər",
-  "PortalRestriction": "IP ünvanınız bu DocSpace-ə daxil olmağa icazə verilən IP ünvanlarının siyahısına daxil edilməyib. Aktivdirsə, VPN-i söndürün və səhifəni yenidən yükləyin və ya daxil olmaq üçün başqa IP ünvanından istifadə edin.",
+  "PortalRestriction": "IP ünvanınız bu {{portalName}}-ə daxil olmağa icazə verilən IP ünvanlarının siyahısına daxil edilməyib. Aktivdirsə, VPN-i söndürün və səhifəni yenidən yükləyin və ya daxil olmaq üçün başqa IP ünvanından istifadə edin.",
   "PowerUser": "Ekspert istifadəçi",
   "PreparationPortalTitle": "Portalın bərpası davam edir",
   "Preview": "Öncədən bax",

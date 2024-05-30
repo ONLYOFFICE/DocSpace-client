@@ -286,7 +286,7 @@
   "Petabyte": "PB",
   "Phone": "Telefono",
   "Plugins": "Plugin",
-  "PortalRestriction": " Il tuo indirizzo IP non è incluso nell'elenco degli indirizzi IP consentiti per accedere a questo DocSpace. Disattiva una VPN se è abilitata e ricarica la pagina oppure utilizza un altro indirizzo IP per accedere.",
+  "PortalRestriction": " Il tuo indirizzo IP non è incluso nell'elenco degli indirizzi IP consentiti per accedere a questo {{portalName}}. Disattiva una VPN se è abilitata e ricarica la pagina oppure utilizza un altro indirizzo IP per accedere.",
   "PowerUser": "Utente esperto",
   "PreparationPortalTitle": "Ripristino portale in corso.",
   "Preview": "Anteprima",

@@ -286,7 +286,7 @@
   "Petabyte": "PB",
   "Phone": "Puhelin",
   "Plugins": "Kytkennät",
-  "PortalRestriction": "IP-osoitteesi ei sisälly tähän DocsSpaceen sallittujen IP-osoitteiden luetteloon. Sulje VPN, jos se on käytössä ja lataa sivu uudelleen, tai käytä toista IP-osoitetta kirjautuaksesi sisään.",
+  "PortalRestriction": "IP-osoitteesi ei sisälly tähän {{portalName}} sallittujen IP-osoitteiden luetteloon. Sulje VPN, jos se on käytössä ja lataa sivu uudelleen, tai käytä toista IP-osoitetta kirjautuaksesi sisään.",
   "PowerUser": "Tehokäyttäjä",
   "PreparationPortalTitle": "Portaalin palautus on käynnissä.",
   "Preview": "Esikatselu",

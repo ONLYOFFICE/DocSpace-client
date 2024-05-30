@@ -286,7 +286,7 @@
   "Petabyte": "PB",
   "Phone": "電話",
   "Plugins": "プラグイン",
-  "PortalRestriction": "現在のIPアドレスは、このDocSpaceへのアクセスを許可するIPアドレスリストに含まれていません。VPNが有効になっている場合はオフにしてページを再読み込みするか、別のIPアドレスを使ってログインしてください。",
+  "PortalRestriction": "現在のIPアドレスは、この{{portalName}}へのアクセスを許可するIPアドレスリストに含まれていません。VPNが有効になっている場合はオフにしてページを再読み込みするか、別のIPアドレスを使ってログインしてください。",
   "PowerUser": "パワーユーザー",
   "PreparationPortalTitle": "ポータルの復元が実施中です。",
   "Preview": "プレビュー",

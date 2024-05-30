@@ -286,7 +286,7 @@
   "Petabyte": "PB",
   "Phone": "Telefón",
   "Plugins": "Pluginy",
-  "PortalRestriction": "Vaša IP adresa nie je uvedená v zozname povolených IP adries pre prístup do tohto priestoru DocSpace. Vypnite VPN, ak je zapnuté, a znovu načítajte stránku alebo na prihlásenie použite inú IP adresu.",
+  "PortalRestriction": "Vaša IP adresa nie je uvedená v zozname povolených IP adries pre prístup do tohto priestoru {{portalName}}. Vypnite VPN, ak je zapnuté, a znovu načítajte stránku alebo na prihlásenie použite inú IP adresu.",
   "PowerUser": "Pokročilý používateľ",
   "PreparationPortalTitle": "Prebieha obnova portálu.",
   "Preview": "Náhľad",

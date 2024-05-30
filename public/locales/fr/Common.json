@@ -286,7 +286,7 @@
   "Petabyte": "Po",
   "Phone": "Téléphone",
   "Plugins": "Modules complémentaires",
-  "PortalRestriction": " Votre adresse IP ne figure pas dans la liste des adresses IP autorisées à accéder à ce DocSpace. Désactivez un VPN s'il est activé et rechargez la page, ou utilisez une autre adresse IP pour vous connecter.",
+  "PortalRestriction": " Votre adresse IP ne figure pas dans la liste des adresses IP autorisées à accéder à ce {{portalName}}. Désactivez un VPN s'il est activé et rechargez la page, ou utilisez une autre adresse IP pour vous connecter.",
   "PowerUser": "Utilisateur avancé",
   "PreparationPortalTitle": "Restauration du portail est en cours.",
   "Preview": "Aperçu",

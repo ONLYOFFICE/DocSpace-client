@@ -286,7 +286,7 @@
   "Petabyte": "PB",
   "Phone": "Tālrunis",
   "Plugins": "Spraudņi",
-  "PortalRestriction": "Jūsu interneta protokola (IP) adrese nav iekļauta atļauto IP adrešu sarakstā, lai piekļūtu šai DocSpace. Izslēdziet virtuālo privāto tīklu (VPN), ja tas ir iespējots, un atkārtoti ielādējiet lapu vai izmantojiet citu IP adresi, lai pieteiktos.",
+  "PortalRestriction": "Jūsu interneta protokola (IP) adrese nav iekļauta atļauto IP adrešu sarakstā, lai piekļūtu šai {{portalName}}. Izslēdziet virtuālo privāto tīklu (VPN), ja tas ir iespējots, un atkārtoti ielādējiet lapu vai izmantojiet citu IP adresi, lai pieteiktos.",
   "PowerUser": "Prasmīgs lietotājs",
   "PreparationPortalTitle": "Notiek portāla atjaunošana.",
   "Preview": "Priekšskatīt",

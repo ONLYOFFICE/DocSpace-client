@@ -286,7 +286,7 @@
   "Petabyte": "PB",
   "Phone": "Telefon",
   "Plugins": "Vtičniki",
-  "PortalRestriction": "Vaš naslov IP ni vključen na seznam dovoljenih naslovov IP za dostop do tega prostora DocSpace. Izklopite VPN, če je omogočen, in znova naložite stran ali uporabite drug naslov IP za prijavo.",
+  "PortalRestriction": "Vaš naslov IP ni vključen na seznam dovoljenih naslovov IP za dostop do tega prostora {{portalName}}. Izklopite VPN, če je omogočen, in znova naložite stran ali uporabite drug naslov IP za prijavo.",
   "PowerUser": "Napredni uporabnik",
   "PreparationPortalTitle": "Obnavljanje portala je v teku",
   "Preview": "Predogled",

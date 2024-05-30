@@ -52,5 +52,13 @@
   "LdapUserDNTooltip": "Enter the distinguished name to the directory containing users you want to add.",
   "LdapUserFilter": "User Filter",
   "LdapUserFilterTooltip": "Use the search LDAP filter to select the users who must be imported.",
-  "LdapUserType": "User Type"
+  "LdapUserType": "User Type",
+  "LdapCertificateConfirm": "Confirm certificate",
+  "LdapAddCertificateToStoreConfirmation": "Do you want to add this certificate to certificate store and continue with user import?",
+  "LdapSettingsSerialNumber": "Serial number",
+  "LdapSettingsIssuerName": "Issuer name",
+  "LdapSettingsSubjectName": "Subject name",
+  "LdapSettingsValidFrom": "Valid from",
+  "LdapSettingsValidUntil": "Valid until",
+  "LdapSettingsUniqueHash": "Unique hash"
 }

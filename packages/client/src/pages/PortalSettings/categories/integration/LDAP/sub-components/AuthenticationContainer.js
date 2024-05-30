@@ -11,18 +11,17 @@ import { ToggleButton } from "@docspace/shared/components/toggle-button";
 const LOGIN = "login",
   PASSWORD = "password";
 
-const AuthenticationContainer = (props) => {
-  const {
-    login,
-    password,
-    authentication,
+const AuthenticationContainer = ({
+  login,
+  password,
+  authentication,
 
-    setLogin,
-    setPassword,
-    setIsAuthentication,
+  setLogin,
+  setPassword,
+  setIsAuthentication,
 
-    errors,
-  } = props;
+  errors,
+}) => {
   const { t } = useTranslation(["Ldap", "Common"]);
   const onChangeValue = (e) => {
     const { value, name } = e.target;
@@ -38,7 +37,7 @@ const AuthenticationContainer = (props) => {
   };
 
   return (
-    <form>
+    <>
       <div className="ldap_authentication-header">
         <ToggleButton
           label={t("Common:Authentication")}
@@ -90,7 +89,7 @@ const AuthenticationContainer = (props) => {
           />
         </FieldContainer>
       </Box>
-    </form>
+    </>
   );
 };
 

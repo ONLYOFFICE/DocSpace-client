@@ -63,6 +63,7 @@ class LdapFormStore {
   password = "";
   authentication = true;
   acceptCertificate = false;
+  acceptCertificateHash = null;
   isSendWelcomeEmail = false;
   errors = {};
 
@@ -86,6 +87,20 @@ class LdapFormStore {
     completed: false,
     error: "",
     source: "",
+  };
+
+  isCertificateDialogVisible = false;
+
+  cerficateIssue = {
+    approved: false,
+    requested: false,
+    serialNumber: "",
+    issuerName: "",
+    subjectName: "",
+    validFrom: "",
+    validUntil: "",
+    uniqueHash: "",
+    errors: [],
   };
 
   constructor() {
@@ -116,6 +131,7 @@ class LdapFormStore {
       groupAttribute,
       groupNameAttribute,
       login,
+      acceptCertificateHash,
     } = data;
 
     const {
@@ -146,6 +162,7 @@ class LdapFormStore {
 
     this.authentication = authentication;
     this.acceptCertificate = acceptCertificate;
+    this.acceptCertificateHash = acceptCertificateHash;
     this.isSendWelcomeEmail = sendWelcomeEmail;
 
     this.groupMembership = groupMembership;
@@ -345,6 +362,7 @@ class LdapFormStore {
     const settings = {
       EnableLdapAuthentication: this.isLdapEnabled,
       AcceptCertificate: this.acceptCertificate,
+      acceptCertificateHash: this.acceptCertificateHash,
       StartTls: this.isTlsEnabled,
       Ssl: this.isSslEnabled,
       SendWelcomeEmail: this.isSendWelcomeEmail,
@@ -406,14 +424,30 @@ class LdapFormStore {
     this.alreadyChecking = false;
     try {
       if (data?.error) {
-        if (
-          data.certificateConfirmRequest &&
-          data.certificateConfirmRequest.certificateErrors
-        ) {
-          var errors = data.certificateConfirmRequest.certificateErrors.map(
-            (item) => this.mapError(item),
+        if (data.certificateConfirmRequest) {
+          const certificateConfirmRequest = JSON.parse(
+            data.certificateConfirmRequest,
           );
-          data.certificateConfirmRequest.certificateErrors = errors;
+          data.certificateConfirmRequest = certificateConfirmRequest;
+
+          var errors = data.certificateConfirmRequest?.CertificateErrors.map(
+            (err) => this.mapError(err),
+          );
+          data.certificateConfirmRequest.CertificateErrors = errors;
+
+          this.cerficateIssue = {
+            approved: data.certificateConfirmRequest.Approved,
+            requested: data.certificateConfirmRequest.Requested,
+            serialNumber: data.certificateConfirmRequest.SerialNumber,
+            issuerName: data.certificateConfirmRequest.IssuerName,
+            subjectName: data.certificateConfirmRequest.SubjectName,
+            validFrom: data.certificateConfirmRequest.ValidFrom,
+            validUntil: data.certificateConfirmRequest.ValidUntil,
+            uniqueHash: data.certificateConfirmRequest.Hash,
+            errors: errors,
+          };
+
+          this.setCertificateDialogVisible(true);
         }
       }
 
@@ -455,6 +489,18 @@ class LdapFormStore {
       console.error(error);
       this.endProcess();
     }
+  };
+
+  setCertificateDialogVisible = (visible) => {
+    this.isCertificateDialogVisible = visible;
+  };
+
+  setAcceptCertificate = (accept) => {
+    this.acceptCertificate = accept;
+  };
+
+  setAcceptCertificateHash = (hash) => {
+    this.acceptCertificateHash = hash;
   };
 
   setProgress = (status) => {

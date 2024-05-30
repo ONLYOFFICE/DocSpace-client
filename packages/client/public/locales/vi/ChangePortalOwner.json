@@ -1,7 +1,7 @@
 {
   "AppointAdmin": "Chỉ định quản trị viên",
   "BackupPortal": "Sao lưu dữ liệu {{portalName}}",
-  "ChangeInstruction": "Để thay đổi chủ sở hữu DocSpace, xin vui lòng chọn tên của chủ sở hữu mới bên dưới.",
+  "ChangeInstruction": "Để thay đổi chủ sở hữu {{portalName}}, xin vui lòng chọn tên của chủ sở hữu mới bên dưới.",
   "ChangeOwner": "Thay đổi chủ sở hữu DocSpace",
   "ChangeUser": "Thay đổi người dùng",
   "DeactivateOrDeletePortal": "Vô hiệu hóa hoặc xóa DocSpace",

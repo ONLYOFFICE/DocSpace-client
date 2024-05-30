@@ -1,7 +1,7 @@
 {
   "AppointAdmin": "Administratorları təyin edin",
   "BackupPortal": "{{portalName}} məlumatlarını yedəkləyin",
-  "ChangeInstruction": "DocSpace sahibini dəyişmək üçün lütfən, aşağıda yeni sahibin adını seçin.",
+  "ChangeInstruction": "{{portalName}} sahibini dəyişmək üçün lütfən, aşağıda yeni sahibin adını seçin.",
   "ChangeOwner": "DocSpace sahibini dəyişdirin",
   "ChangeUser": "İstifadəçini dəyişdirin",
   "DeactivateOrDeletePortal": "DocSpace-i deaktiv edin və ya silin",

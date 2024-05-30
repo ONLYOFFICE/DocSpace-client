@@ -1,7 +1,7 @@
 {
   "AppointAdmin": "Jmenování administrátorů",
   "BackupPortal": "Zálohovat data {{portalName}}",
-  "ChangeInstruction": "Chcete-li změnit vlastníka prostoru DocSpace, vyberte níže jméno nového vlastníka.",
+  "ChangeInstruction": "Chcete-li změnit vlastníka prostoru {{portalName}}, vyberte níže jméno nového vlastníka.",
   "ChangeOwner": "Změna vlastníka prostoru DocSpace",
   "ChangeUser": "Změna uživatele",
   "DeactivateOrDeletePortal": "Deaktivace nebo odstranění DocSpace",

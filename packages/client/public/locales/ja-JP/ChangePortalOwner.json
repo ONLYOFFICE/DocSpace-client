@@ -1,7 +1,7 @@
 {
   "AppointAdmin": "管理者の選任",
   "BackupPortal": "{{portalName}}データをバックアップする",
-  "ChangeInstruction": "DocSpaceの所有者を変更する場合は、新しい所有者の名前を以下で選択してください。",
+  "ChangeInstruction": "{{portalName}}の所有者を変更する場合は、新しい所有者の名前を以下で選択してください。",
   "ChangeOwner": "DocSpaceの所有者を変更する",
   "ChangeUser": "ユーザーを変更する",
   "DeactivateOrDeletePortal": "DocSpaceを停止する、または解除する",

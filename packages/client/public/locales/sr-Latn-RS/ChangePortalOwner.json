@@ -1,7 +1,7 @@
 {
   "AppointAdmin": "Imenovanje administratora",
   "BackupPortal": "Rezervna kopija {{portalName}} podataka",
-  "ChangeInstruction": "Da biste promenili vlasnika DocSpace-a, izaberite ime novog vlasnika ispod.",
+  "ChangeInstruction": "Da biste promenili vlasnika {{portalName}}-a, izaberite ime novog vlasnika ispod.",
   "ChangeOwner": "Promeni DocSpace vlasnika",
   "ChangeUser": "Promeni korisnika",
   "DeactivateOrDeletePortal": "Deaktiviraj ili obriši DocSpace",

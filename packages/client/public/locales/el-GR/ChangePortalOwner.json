@@ -1,7 +1,7 @@
 {
   "AppointAdmin": "Ορισμός διαχειριστών",
   "BackupPortal": "Διαφυλάξτε τα δεδομένα {{portalName}}",
-  "ChangeInstruction": "Για να αλλάξετε τον ιδιοκτήτη του DocSpace, επιλέξτε το όνομα του νέου ιδιοκτήτη παρακάτω.",
+  "ChangeInstruction": "Για να αλλάξετε τον ιδιοκτήτη του {{portalName}}, επιλέξτε το όνομα του νέου ιδιοκτήτη παρακάτω.",
   "ChangeOwner": "Αλλαγή ιδιοκτήτη DocSpace",
   "ChangeUser": "Αλλαγή χρήστη",
   "DeactivateOrDeletePortal": "Απενεργοποίηση ή διαγραφή DocSpace",

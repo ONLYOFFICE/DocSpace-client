@@ -911,7 +911,7 @@ import { checkingForUnfixedSize, getSubstring } from "./Table.utils";
 const defaultMinColumnSize = 110;
 const settingsSize = 24;
 
-const minSizeFirstColumn = 110;
+const minSizeFirstColumn = 75;
 
 class TableHeader extends React.Component<
   TableHeaderProps,
@@ -1729,6 +1729,8 @@ class TableHeader extends React.Component<
     for (const col of columns) {
       if (col.default) {
         str += `${wideColumnSize} `;
+      } else if (col.shortColumn) {
+        str += `${col.minWidth}px `;
       } else
         str += col.enable
           ? col.defaultSize

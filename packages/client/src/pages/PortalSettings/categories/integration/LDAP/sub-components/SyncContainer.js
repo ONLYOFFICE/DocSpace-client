@@ -49,15 +49,17 @@ const SyncContainer = ({
 
   const renderBody = () => (
     <Box className="ldap_sync-container">
-      <Text
-        fontSize="16px"
-        fontWeight={700}
-        lineHeight="24px"
-        noSelect
-        className="settings_unavailable"
-      >
-        {t("LdapSyncTitle")}
-      </Text>
+      {!isMobileView && (
+        <Text
+          fontSize="16px"
+          fontWeight={700}
+          lineHeight="24px"
+          noSelect
+          className="settings_unavailable"
+        >
+          {t("LdapSyncTitle")}
+        </Text>
+      )}
       <Text
         fontSize="12px"
         fontWeight={400}

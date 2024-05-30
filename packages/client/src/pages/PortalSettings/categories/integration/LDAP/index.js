@@ -70,7 +70,10 @@ const LDAP = ({
       <ToggleLDAP isLDAPAvailable={isLdapAvailable} />
 
       {isMobileView ? (
-        <LdapMobileView isLdapEnabled={isLdapEnabled} />
+        <LdapMobileView
+          isLdapEnabled={isLdapEnabled}
+          isLDAPAvailable={isLdapAvailable}
+        />
       ) : (
         <>
           <SettingsContainer />

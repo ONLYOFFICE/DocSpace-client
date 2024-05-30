@@ -55,7 +55,7 @@ const SettingsContainer = ({
         />
       )}
 
-      {isSettingsShown && (
+      {(isMobileView || isSettingsShown) && (
         <>
           <Box>
             <Text>{t("LdapDisclaimer")}</Text>

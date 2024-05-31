@@ -26,7 +26,7 @@
 
 "use client";
 
-import { useCallback, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { setLanguageForUnauthorized } from "@docspace/shared/utils/common";
@@ -44,15 +44,14 @@ const LanguageComboboxWrapper = () => {
 
   const [cultures, setCultures] = useState<Nullable<TPortalCultures>>(null);
 
-  const getData = useCallback(async () => {
-    const [cultures] = await Promise.all([getPortalCultures()]);
-
-    if (cultures) setCultures(cultures);
-  }, []);
-
   useEffect(() => {
-    getData();
-  }, [getData]);
+    const fetchData = async () => {
+      const cultures = await getPortalCultures();
+      if (cultures) setCultures(cultures);
+    };
+
+    fetchData();
+  }, []);
 
   const onLanguageSelect = (culture: { key: string }) => {
     const { key } = culture;

@@ -30,7 +30,7 @@
   "AmazonSSE": "Serverseitige Verschlüsselung",
   "AmazonSSETip": "Der serverseitige Verschlüsselungsalgorithmus, der bei der Speicherung dieses Objekts in S3 verwendet wird.",
   "Api": "API",
-  "ApiPageDescription": "Erstellen Sie Ihre eigene Produktivitätsplattform auf Basis von ONLYOFFICE DocSpace und arbeiten Sie gemeinsam mit Teams, Kunden und Partnern an Dokumenten.",
+  "ApiPageDescription": "Erstellen Sie Ihre eigene Produktivitätsplattform auf Basis von ONLYOFFICE {{portalName}} und arbeiten Sie gemeinsam mit Teams, Kunden und Partnern an Dokumenten.",
   "ApiPageHeader": "Erstellen Sie Ihre eigene Plattform für die Zusammenarbeit",
   "Appearance": "Erscheinungsbild",
   "AuditSubheader": "Subsecțiunea vă permite să răsfoiți lista celor mai recente modificări (creare, modificare, ştergere etc.) efectuate de utilizatori asupra elementelor (săli, oportunităţi, fişiere etc.) din cadrul {{portalName}}.",

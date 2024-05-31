@@ -28,7 +28,6 @@
   "AmazonSSE": "Palvelinpuolen salaus",
   "AmazonSSETip": "Käytössä oleva palvelinpuolen salausalgoritmi tallennettaessa tätä kohdetta S3:ssa.",
   "Api": "API",
-  "ApiPageDescription": "Luo oma tuottavuusalustasi ONLYOFFICE DocSpacesta ja tee yhteistyötä tiimien, asiakkaiden ja yhteistyökumppaneiden kanssa.",
   "ApiPageHeader": "Rakenna oma yhteistyöalustasi",
   "Appearance": "Ulkomuoto",
   "AuditSubheader": "Tässä aliosiossa voit selata luetteloa viimeisimmistä muutoksista (luonti, muokkaus, poisto jne.), joita käyttäjät ovat tehneet DocSpacen entiteetehin (huoneet, mahdollisuudet, tiedostot jne).",

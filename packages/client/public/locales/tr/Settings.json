@@ -30,7 +30,7 @@
   "AmazonSSE": "Sunucu Taraflı Şifreleme",
   "AmazonSSETip": "Bu nesneyi S3'te depolarken kullanılan Sunucu tarafı şifreleme algoritması.",
   "Api": "API",
-  "ApiPageDescription": "ONLYOFFICE DocSpace tabanlı kendi üretkenlik platformunuzu oluşturun ve ekipler, müşteriler ve ortaklarla belgeler üzerinde iş birliği yapın.",
+  "ApiPageDescription": "ONLYOFFICE {{portalName}} tabanlı kendi üretkenlik platformunuzu oluşturun ve ekipler, müşteriler ve ortaklarla belgeler üzerinde iş birliği yapın.",
   "ApiPageHeader": "Kendi iş birliği platformunuzu oluşturun",
   "Appearance": "Görünüm",
   "AuditSubheader": "Alt bölüm, kullanıcılar tarafından {{portalName}}'inizdeki varlıklarda (odalar, fırsatlar, dosyalar vb.) yapılan en son değişikliklerin (oluşturma, değiştirme, silme vb.) listesine göz atmanıza olanak tanır.",

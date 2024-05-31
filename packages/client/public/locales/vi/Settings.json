@@ -30,7 +30,7 @@
   "AmazonSSE": "Mã hóa phía máy chủ",
   "AmazonSSETip": "Thuật toán mã hóa phía máy chủ được sử dụng khi lưu trữ đối tượng này trong S3.",
   "Api": "API",
-  "ApiPageDescription": "Tạo nền tảng làm việc hiệu suất của riêng bạn dựa trên ONLYOFFICE DocSpace và cộng tác trên các tài liệu với các nhóm, khách hàng và đối tác.",
+  "ApiPageDescription": "Tạo nền tảng làm việc hiệu suất của riêng bạn dựa trên ONLYOFFICE {{portalName}} và cộng tác trên các tài liệu với các nhóm, khách hàng và đối tác.",
   "ApiPageHeader": "Xây dựng nền tảng cộng tác của riêng bạn",
   "Appearance": "Hình thức",
   "AuditSubheader": "Phần phụ cho phép bạn duyệt qua danh sách các thay đổi mới nhất (tạo, sửa đổi, xóa, v.v.) do người dùng thực hiện đối với các thực thể (phòng, cơ hội, tập tin, v.v.) trong {{portalName}} của bạn.",

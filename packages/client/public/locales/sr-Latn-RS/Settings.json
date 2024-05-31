@@ -30,7 +30,7 @@
   "AmazonSSE": "Šifrovanje Na Serveru",
   "AmazonSSETip": "Algoritam šifrovanja na serveru koji se koristi prilikom čuvanja ovog objekta u S3.",
   "Api": "API",
-  "ApiPageDescription": "Kreirajte sopstvenu platformu za produktivnost zasnovanu na ONLYOFFICE DocSpace-u i sarađujte na dokumentima sa timovima, klijentima i partnerima.",
+  "ApiPageDescription": "Kreirajte sopstvenu platformu za produktivnost zasnovanu na ONLYOFFICE {{portalName}}-u i sarađujte na dokumentima sa timovima, klijentima i partnerima.",
   "ApiPageHeader": "Izgradi svoju sopstvenu platformu za saradnju",
   "Appearance": "Izgled",
   "AuditSubheader": "Ova podsekcija vam omogućava pregled liste poslednjih promena (kreacija, modifikacija, brisanje itd.) koje su korisnici izvršili na entitetima (sobama, prilikama, datotekama itd.) unutar vašeg {{portalName}}-a.",

@@ -30,7 +30,7 @@
   "AmazonSSE": "Šifrovanie na strane servera",
   "AmazonSSETip": "Algoritmus šifrovania na strane servera použitý pri ukladaní tohto objektu v S3.",
   "Api": "API",
-  "ApiPageDescription": "Vytvorte si vlastnú pracovnú platformu na základe riešenia ONLYOFFICE DocSpace a spolupracujte na dokumentoch s tímami, klientmi a partnermi.",
+  "ApiPageDescription": "Vytvorte si vlastnú pracovnú platformu na základe riešenia ONLYOFFICE {{portalName}} a spolupracujte na dokumentoch s tímami, klientmi a partnermi.",
   "ApiPageHeader": "Vytvorte si vlastnú platformu na spoluprácu",
   "Appearance": "Vzhľad",
   "AuditSubheader": "Podsekcia vám umožňuje prezerať zoznam posledných zmien (vytvorenie, úprava, odstránenie atď.), ktoré vykonali používatelia v objektoch (miestnosti, príležitosti, súbory atď.) vo vašom DocSpace.",

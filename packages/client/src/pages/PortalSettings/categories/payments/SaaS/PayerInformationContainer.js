@@ -127,7 +127,7 @@ const PayerInformationContainer = ({
       tooltipContent={
         <>
           <Text isBold>{t("Payer")}</Text>
-          <Text>{t("PayerDescription")}</Text>
+          <Text>{t("PayerDescription", { portalName: PORTAL })}</Text>
         </>
       }
     />
@@ -137,7 +137,7 @@ const PayerInformationContainer = ({
     const userNotFound = t("UserNotFoundMatchingEmail") + " ";
 
     let invalidEmailDescription = user.isOwner
-      ? t("InvalidEmailWithActiveSubscription")
+      ? t("InvalidEmailWithActiveSubscription", { portalName: PORTAL })
       : t("InvalidEmailWithActiveSubscriptionForAdmin", { portalName: PORTAL });
 
     if (isNotPaidPeriod || isFreeAfterPaidPeriod) {

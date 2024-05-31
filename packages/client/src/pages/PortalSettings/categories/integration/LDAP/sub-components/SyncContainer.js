@@ -108,19 +108,15 @@ const SyncContainer = ({
           <div className="ldap_cron-container">
             <Cron value={cron} setValue={onChangeCron} />
           </div>
-          {nextSyncDate && (
-            <Text
-              fontSize="12px"
-              fontWeight={600}
-              lineHeight="16px"
-              // color={"#A3A9AE"}
-              noSelect
-            >
-              {`${t("LdapNextSync")}: ${nextSyncDate
-                .toUTC()
-                .toFormat("DDDD tt")}`}
-            </Text>
-          )}
+          <Text
+            fontSize="12px"
+            fontWeight={600}
+            lineHeight="16px"
+            // color={"#A3A9AE"}
+            noSelect
+          >
+            {`${t("LdapNextSync")}: ${nextSyncDate.toFormat("DDDD tt")} UTC`}
+          </Text>
           <Button
             tabIndex={-1}
             className="auto-sync-button"

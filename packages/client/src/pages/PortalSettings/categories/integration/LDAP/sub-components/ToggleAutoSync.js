@@ -6,6 +6,7 @@ import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Badge } from "@docspace/shared/components/badge";
+import { toastr } from "@docspace/shared/components/toast";
 //import DisableSsoConfirmationModal from "./DisableSsoConfirmationModal";
 //import SSOLoader from "../../sub-components/ssoLoader";
 const borderProp = { radius: "6px" };
@@ -18,6 +19,7 @@ const ToggleAutoSync = (props) => {
     isLdapEnabled,
     isCronEnabled,
     isStatusEmpty,
+    saveCronLdap,
   } = props;
 
   const { t } = useTranslation(["Ldap", "Common"]);
@@ -25,6 +27,21 @@ const ToggleAutoSync = (props) => {
   // if (!tReady) {
   //   return <SSOLoader isToggleSSO={true} />;
   // }
+
+  const onChangeToggle = React.useCallback(
+    (e) => {
+      toggleCron();
+
+      if (!e.target.checked) {
+        saveCronLdap()
+          .then(() =>
+            toastr.success(t("Settings:SuccessfullySaveSettingsMessage")),
+          )
+          .catch((e) => toastr.error(e));
+      }
+    },
+    [toggleCron],
+  );
 
   return (
     <>
@@ -41,12 +58,11 @@ const ToggleAutoSync = (props) => {
         <ToggleButton
           className="toggle"
           isChecked={isCronEnabled}
-          onChange={
-            toggleCron
-            // isLdapEnabled && enableLdap
-            //   ? openConfirmationDisableModal
-            //   : ldapToggle
-          }
+          onChange={onChangeToggle}
+          // isLdapEnabled && enableLdap
+          //   ? openConfirmationDisableModal
+          //   : ldapToggle
+
           isDisabled={!isLDAPAvailable || !isLdapEnabled}
         />
 
@@ -94,6 +110,7 @@ export default inject(({ settingsStore, ldapStore }) => {
     toggleCron,
     isCronEnabled,
     isStatusEmpty,
+    saveCronLdap,
   } = ldapStore;
 
   console.log({
@@ -109,5 +126,6 @@ export default inject(({ settingsStore, ldapStore }) => {
     isLdapEnabled,
     isCronEnabled,
     isStatusEmpty,
+    saveCronLdap,
   };
 })(observer(ToggleAutoSync));

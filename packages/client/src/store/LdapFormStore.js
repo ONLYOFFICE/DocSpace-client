@@ -55,7 +55,6 @@ class LdapFormStore {
   groupNameAttribute = "cn";
 
   cron = null;
-  nextSyncDate = "";
 
   inProgress = false;
   progressBarIntervalId = null;
@@ -154,15 +153,13 @@ class LdapFormStore {
     this.groupNameAttribute = groupNameAttribute;
 
     this.login = login;
-    this.password = password;
+    this.password = password || "";
   };
 
   mapCron = (cron) => {
     const cronWithoutSeconds = cron ? cron.replace("0 ", "") : null;
 
     this.setCron(cronWithoutSeconds);
-
-    this.isCronEnabled && this.setNextSyncDate(cronWithoutSeconds);
   };
 
   load = async () => {
@@ -296,7 +293,7 @@ class LdapFormStore {
   };
 
   saveCronLdap = async () => {
-    const cronWithSeconds = `0 ${this.cron}`;
+    const cronWithSeconds = this.isCronEnabled ? `0 ${this.cron}` : null;
 
     const respose = await saveCronLdap(cronWithSeconds);
 
@@ -572,7 +569,6 @@ class LdapFormStore {
 
   onChangeCron = (cron) => {
     this.setCron(cron);
-    this.setNextSyncDate(cron);
   };
 
   toggleLdap = () => {
@@ -603,10 +599,9 @@ class LdapFormStore {
     this.cron = cron;
   };
 
-  setNextSyncDate = (cron) => {
-    const date = getNextSynchronization(cron);
-    this.nextSyncDate = date;
-  };
+  get nextSyncDate() {
+    return getNextSynchronization(this.cron ?? "* * * * *");
+  }
 
   setIsSslEnabled = (enabled) => {
     this.isSslEnabled = enabled;

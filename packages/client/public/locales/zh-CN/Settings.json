@@ -33,7 +33,6 @@
   "AuditTrailNav": "审计追踪",
   "AutoBackup": "自动备份",
   "AutoSavePeriod": "自动保存期间",
-  "AutoSavePeriodHelp": "下面显示的时间与门户中设置的时区一样。",
   "Backup": "备份",
   "BackupCreatedError": "遇到错误。请联系您的管理员。",
   "BackupCreatedSuccess": "备份副本已成功创建。",

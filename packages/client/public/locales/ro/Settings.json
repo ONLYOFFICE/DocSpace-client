@@ -38,7 +38,7 @@
   "AutoBackup": "Copiere de rezervă automată",
   "AutoBackupDescription": "Opțiunea Copiere de rezervă automată permite automatizarea procesului de copiere automată a datelor de pe spațiu {{portalName}} pentru a fi restaurate ulterior pe un server local.",
   "AutoSavePeriod": "Interval de timp pentru salvarea automată",
-  "AutoSavePeriodHelp": "Ora afișată mai jos va corespunde fusului orar în DocSpace.",
+  "AutoSavePeriodHelp": "Ora afișată mai jos va corespunde fusului orar în {{portalName}}.",
   "Backup": "Copie de siguranță",
   "BackupCreatedError": "S-a produs o eroare. Vă rugăm să contactați administratorul.",
   "BackupCreatedSuccess": "O copie de rezervă a fost creată cu succes.",

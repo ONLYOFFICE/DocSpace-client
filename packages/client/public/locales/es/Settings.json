@@ -38,7 +38,7 @@
   "AutoBackup": "Copia de seguridad automática",
   "AutoBackupDescription": "La opción Copia de seguridad automática se utiliza para automatizar el proceso de creación de copias de seguridad de los datos de {{portalName}} y poder restaurarlos posteriormente en un servidor local. ",
   "AutoSavePeriod": "Periodo de autoguardado",
-  "AutoSavePeriodHelp": "La hora que se muestra abajo corresponde a la zona horaria establecida en DocSpace.",
+  "AutoSavePeriodHelp": "La hora que se muestra abajo corresponde a la zona horaria establecida en {{portalName}}.",
   "Backup": "Copia de seguridad de datos",
   "BackupCreatedError": "Se ha producido un error. Por favor, póngase en contacto con su administrador.",
   "BackupCreatedSuccess": "La copia de seguridad se ha creado con éxito.",

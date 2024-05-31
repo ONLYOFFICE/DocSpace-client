@@ -39,7 +39,7 @@
   "AutoBackup": "Automatic backup",
   "AutoBackupDescription": "The Automatic backup option is used to automate the {{portalName}} data backup process to be able to restore it later to a local server.",
   "AutoSavePeriod": "Autosave period",
-  "AutoSavePeriodHelp": "The time shown below corresponds to the time zone set in the DocSpace.",
+  "AutoSavePeriodHelp": "The time shown below corresponds to the time zone set in the {{portalName}}.",
   "Backup": "Backup",
   "BackupCreatedError": "An error has been encountered. Please contact your administrator.",
   "BackupCreatedSuccess": "The backup copy has been successfully created.",

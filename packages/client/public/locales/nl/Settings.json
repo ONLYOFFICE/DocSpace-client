@@ -38,7 +38,7 @@
   "AutoBackup": "Automatische back-up",
   "AutoBackupDescription": "De optie Automatische back-up wordt gebruikt om het back-upproces van {{portalName}} gegevens te automatiseren, zodat u deze later op een lokale server kunt terugzetten.",
   "AutoSavePeriod": "Autosave periode",
-  "AutoSavePeriodHelp": "De hieronder aangegeven tijd komt overeen met de in de  DocSpace ingestelde tijdzone.",
+  "AutoSavePeriodHelp": "De hieronder aangegeven tijd komt overeen met de in de  {{portalName}} ingestelde tijdzone.",
   "Backup": "Back-up",
   "BackupCreatedError": "Er is een fout opgetreden. Neem contact op met de beheerder.",
   "BackupCreatedSuccess": "De back-up kopie is succesvol aangemaakt.",

@@ -38,7 +38,7 @@
   "AutoBackup": "Automātiskā rezerves kopēšana",
   "AutoBackupDescription": "Automātiskās dublēšanas opcija tiek izmantota, lai automatizētu {{portalName}} datu dublēšanas procesu, lai vēlāk to varētu atjaunot lokālajā serverī.",
   "AutoSavePeriod": "Automātiskās saglabāšanas periods",
-  "AutoSavePeriodHelp": "Zemāk redzamais laiks atbilst DocSpace iestatītajai laika joslai.",
+  "AutoSavePeriodHelp": "Zemāk redzamais laiks atbilst {{portalName}} iestatītajai laika joslai.",
   "Backup": "Dublēšana",
   "BackupCreatedError": "Radās kļūda. Lūdzu, sazinieties ar savu administratoru.",
   "BackupCreatedSuccess": "Rezerves kopija veiksmīgi izveidota.",

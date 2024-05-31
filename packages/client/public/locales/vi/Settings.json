@@ -38,7 +38,6 @@
   "AutoBackup": "Tự động sao lưu",
   "AutoBackupDescription": "Tùy chọn Sao lưu tự động được sử dụng để tự động hóa quá trình sao lưu dữ liệu {{portalName}} để có thể khôi phục dữ liệu sau này về máy chủ cục bộ.",
   "AutoSavePeriod": "Thời gian lưu tự động",
-  "AutoSavePeriodHelp": "Thời gian hiển thị bên dưới tương ứng với múi giờ được cài đặt trong cổng thông tin.",
   "Backup": "Sao lưu",
   "BackupCreatedError": "Xảy ra lỗi. Vui lòng liên hệ với quản trị viên của bạn.",
   "BackupCreatedSuccess": "Bản sao lưu đã được tạo thành công.",

@@ -38,7 +38,6 @@
   "AutoBackup": "자동 백업",
   "AutoBackupDescription": "자동 백업 옵션은 추후에 로컬 서버에 복원할 수 있도록 {{portalName}} 데이터 백업 프로세스를 자동화하는 데 사용됩니다.",
   "AutoSavePeriod": "자동 저장 기간",
-  "AutoSavePeriodHelp": "아래 표시된 시간은 포털에 설정된 시간대와 일치합니다.",
   "Backup": "백업",
   "BackupCreatedError": "오류가 발생했습니다. 관리자에게 문의하세요.",
   "BackupCreatedSuccess": "백업 복사본 생성에 성공했습니다.",

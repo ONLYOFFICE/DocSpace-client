@@ -38,7 +38,7 @@
   "AutoBackup": "Otomatik yedekleme",
   "AutoBackupDescription": "Otomatik yedekleme seçeneği, daha sonra yerel bir sunucuya geri yükleyebilmek amacıyla {{portalName}} veri yedekleme işlemini otomatikleştirmek için kullanılır.",
   "AutoSavePeriod": "Otomatik kaydetme süresi",
-  "AutoSavePeriodHelp": "Aşağıda gösterilen saat, DocSpace ayarlanan saat dilimine karşılık gelir.",
+  "AutoSavePeriodHelp": "Aşağıda gösterilen saat, {{portalName}} ayarlanan saat dilimine karşılık gelir.",
   "Backup": "Yedek",
   "BackupCreatedError": "Bir hata oluştu. Lütfen site yöneticisi ile görüşün.",
   "BackupCreatedSuccess": "Yedekleme kopyası başarıyla oluşturuldu.",

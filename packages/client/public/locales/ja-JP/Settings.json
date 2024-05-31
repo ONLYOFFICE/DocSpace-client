@@ -38,7 +38,6 @@
   "AutoBackup": "自動バックアップ",
   "AutoBackupDescription": "自動バックアップオプションは、{{portalName}}データのバックアッププロセスを自動化し、後でローカルサーバーに復元できるようにするためのオプションです。",
   "AutoSavePeriod": "自動保存期間",
-  "AutoSavePeriodHelp": "以下に示す時刻は、ポータルで設定されたタイムゾーンに対応しています。",
   "Backup": "バックアップ",
   "BackupCreatedError": "エラーが発生してしまいました。管理者を連絡ください。",
   "BackupCreatedSuccess": "バックアップ・コピーは正常に作成されました。",

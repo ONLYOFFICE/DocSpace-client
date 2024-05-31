@@ -38,7 +38,7 @@
   "AutoBackup": "Backup automático",
   "AutoBackupDescription": "A opção Backup automático é usada para automatizar o processo de backup de dados do {{portalName}} para poder restaurá-los posteriormente em um servidor local.",
   "AutoSavePeriod": "Período de salvamento automático",
-  "AutoSavePeriodHelp": "A hora exibida abaixo corresponde ao fuso horário definido no DocSpace.",
+  "AutoSavePeriodHelp": "A hora exibida abaixo corresponde ao fuso horário definido no {{portalName}}.",
   "Backup": "Backup",
   "BackupCreatedError": "Um erro foi encontrado. Entre em contato com o seu administrador.",
   "BackupCreatedSuccess": "A cópia de backup foi criada com sucesso.",

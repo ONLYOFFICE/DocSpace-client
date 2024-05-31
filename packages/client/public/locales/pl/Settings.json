@@ -38,7 +38,7 @@
   "AutoBackup": "Automatyczna kopia zapasowa",
   "AutoBackupDescription": "Opcja automatycznego tworzenia kopii zapasowych umożliwia automatyzację procesu generowania kopii zapasowych danych {{portalName}}, aby móc je później przywrócić na serwerze lokalnym.",
   "AutoSavePeriod": "Częstotliwość autozapisywania",
-  "AutoSavePeriodHelp": "Widoczny poniżej czas odpowiada strefie czasowej ustawionej w DocSpace.",
+  "AutoSavePeriodHelp": "Widoczny poniżej czas odpowiada strefie czasowej ustawionej w {{portalName}}.",
   "Backup": "Kopia zapasowa",
   "BackupCreatedError": "Napotkano błąd. Skontaktuj się ze swoim administratorem.",
   "BackupCreatedSuccess": "Kopia zapasowa została pomyślnie utworzona.",

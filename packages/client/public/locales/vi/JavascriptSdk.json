@@ -14,7 +14,7 @@
   "Code": "Mã để chèn",
   "CodeTitle": "mã",
   "CopyWindowCode": "Sao chép mã nhúng cửa sổ",
-  "CreateSampleDocspace": "Tạo mẫu nhúng DocSpace",
+  "CreateSampleDocspace": "Tạo mẫu nhúng {{portalName}}",
   "CreateSampleEditor": "Tạo mẫu nhúng Trình chỉnh sửa",
   "CreateSampleFileSelector": "Tạo mẫu nhúng bộ chọn Tập tin",
   "CreateSamplePublicRoom": "Tạo mẫu nhúng Phòng công cộng",

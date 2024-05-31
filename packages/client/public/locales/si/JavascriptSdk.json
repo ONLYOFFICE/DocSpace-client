@@ -13,7 +13,7 @@
   "Chat": "කතාබහ",
   "Code": "ඇතුළු කිරීමට කේතය",
   "CopyWindowCode": "කවුළුවට කාවද්දන කේතයේ පිටපතක්",
-  "CreateSampleDocspace": "කාවද්දන ආදර්ශ DocSpace සාදන්න",
+  "CreateSampleDocspace": "කාවද්දන ආදර්ශ {{portalName}} සාදන්න",
   "CreateSampleEditor": "කාවද්දන ආදර්ශ සංස්කරකය සාදන්න",
   "CreateSampleFileSelector": "කාවද්දන ආදර්ශ ගොනු තෝරනය සාදන්න",
   "CreateSamplePublicRoom": "කාවද්දන ආදර්ශ පොදු කාමරය සාදන්න",

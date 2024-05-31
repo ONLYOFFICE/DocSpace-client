@@ -14,7 +14,7 @@
   "Code": "Код за вмъкване",
   "CodeTitle": "код",
   "CopyWindowCode": "Копирайте кода за вграждане на прозореца",
-  "CreateSampleDocspace": "Създайте примерно вграждане в DocSpace",
+  "CreateSampleDocspace": "Създайте примерно вграждане в {{portalName}}",
   "CreateSampleEditor": "Създайте примерен вграден Редактор",
   "CreateSampleFileSelector": "Създаване на примерен вграден селектор на Файлове",
   "CreateSamplePublicRoom": "Създайте примерно вграждане на Обществена стая",

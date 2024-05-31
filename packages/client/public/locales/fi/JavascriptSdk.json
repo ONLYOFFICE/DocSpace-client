@@ -14,7 +14,7 @@
   "Code": "Lisättävä koodi",
   "CodeTitle": "koodi",
   "CopyWindowCode": "Kopioi ikkunan upotuskoodi",
-  "CreateSampleDocspace": "Luo esimerkki DocSpace-upotuksesta",
+  "CreateSampleDocspace": "Luo esimerkki {{portalName}}-upotuksesta",
   "CreateSampleEditor": "Luo esimerkki Editori-upotuksesta",
   "CreateSampleFileSelector": "Luo esimerkki Tiedoston valitsija-upotuksesta",
   "CreateSamplePublicRoom": "Luo esimerkki Julkinen huone-upotuksesta",

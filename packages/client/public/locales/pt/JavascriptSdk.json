@@ -14,7 +14,7 @@
   "Code": "Código a inserir",
   "CodeTitle": "código",
   "CopyWindowCode": "Copiar código de incorporação da janela",
-  "CreateSampleDocspace": "Criar exemplo de incorporação do DocSpace",
+  "CreateSampleDocspace": "Criar exemplo de incorporação do {{portalName}}",
   "CreateSampleEditor": "Criar incorporação de editor de amostra",
   "CreateSampleFileSelector": "Criar exemplo de incorporação do seletor de arquivos",
   "CreateSamplePublicRoom": "Criar amostra de incorporação de sala pública",

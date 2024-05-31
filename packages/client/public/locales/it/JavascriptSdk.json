@@ -14,7 +14,7 @@
   "Code": "Codice da inserire",
   "CodeTitle": "codice",
   "CopyWindowCode": "Copia il codice di incorporamento della finestra",
-  "CreateSampleDocspace": "Crea un campione di incorporamento di DocSpace",
+  "CreateSampleDocspace": "Crea un campione di incorporamento di {{portalName}}",
   "CreateSampleEditor": "Crea un campione di incorporamento dell'Editor",
   "CreateSampleFileSelector": "Crea un campione di incorporamento del Selettore file",
   "CreateSamplePublicRoom": "Crea un campione di incorporamento della Stanza pubblica",

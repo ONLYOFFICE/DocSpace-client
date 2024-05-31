@@ -14,7 +14,7 @@
   "Code": "Κώδικας για εισαγωγή",
   "CodeTitle": "kωδικός",
   "CopyWindowCode": "Αντιγραφή του κώδικα ενσωμάτωσης του παραθύρου",
-  "CreateSampleDocspace": "Δημιουργία δείγματος ενσωμάτωσης DocSpace",
+  "CreateSampleDocspace": "Δημιουργία δείγματος ενσωμάτωσης {{portalName}}",
   "CreateSampleEditor": "Δημιουργία δείγματος ενσωμάτωσης Προγράμματος επεξεργασίας",
   "CreateSampleFileSelector": "Δημιουργία δείγματος ενσωμάτωσης Επιλογέα αρχείων",
   "CreateSamplePublicRoom": "Δημιουργία δείγματος ενσωμάτωσης Δημόσιου δωματίου",

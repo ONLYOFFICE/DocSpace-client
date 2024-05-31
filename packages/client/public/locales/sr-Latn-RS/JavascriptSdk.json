@@ -14,7 +14,7 @@
   "Code": "Kod za ubacivanje",
   "CodeTitle": "kod",
   "CopyWindowCode": "Kopiraj kod za ugradnju prozora",
-  "CreateSampleDocspace": "Napravi primer ugradnje DocSpace-a",
+  "CreateSampleDocspace": "Napravi primer ugradnje {{portalName}}-a",
   "CreateSampleEditor": "Napravi primer ugradnje Uređivača",
   "CreateSampleFileSelector": "Napravi primer ugradnje Datoteka selektora",
   "CreateSamplePublicRoom": "Napravi primer ugradnje Javne sobe",

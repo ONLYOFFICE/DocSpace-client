@@ -14,7 +14,7 @@
   "Code": "رمز الإدخال",
   "CodeTitle": "الكود",
   "CopyWindowCode": "نسخ رمز متضمن في النافذة",
-  "CreateSampleDocspace": "قم بإنشاء نموذج تضمين DocSpace",
+  "CreateSampleDocspace": "قم بإنشاء نموذج تضمين {{portalName}}",
   "CreateSampleEditor": "قم بإنشاء نموذج تضمين للمحرر",
   "CreateSampleFileSelector": "قم بإنشاء نموذج تضمين محدد الملف",
   "CreateSamplePublicRoom": "قم بإنشاء نموذج لتضمين الغرفة العامة",

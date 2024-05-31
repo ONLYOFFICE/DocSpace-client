@@ -14,7 +14,7 @@
   "Code": "Código para insertar",
   "CodeTitle": "código",
   "CopyWindowCode": "Copiar el código de incrustación de la ventana",
-  "CreateSampleDocspace": "Crear ejemplo de la incrustación de DocSpace",
+  "CreateSampleDocspace": "Crear ejemplo de la incrustación de {{portalName}}",
   "CreateSampleEditor": "Crear ejemplo de la incrustación del editor",
   "CreateSampleFileSelector": "Crear ejemplo de la incrustación del selector de archivos",
   "CreateSamplePublicRoom": "Crear ejemplo de la incrustación de sala púplica",

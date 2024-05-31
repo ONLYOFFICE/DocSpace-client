@@ -14,7 +14,7 @@
   "Code": "Ievietojamais kods",
   "CodeTitle": "kods",
   "CopyWindowCode": "Kopējiet loga iegulšanas kodu",
-  "CreateSampleDocspace": "Izveidot iegultā DocSpace paraugu",
+  "CreateSampleDocspace": "Izveidot iegultā {{portalName}} paraugu",
   "CreateSampleEditor": "Izveidot parauga redaktora iegulšanu",
   "CreateSampleFileSelector": "Izveidot parauga faila atlasītāja iegulšanu",
   "CreateSamplePublicRoom": "Izveidot publiskās telpas iegulšanas paraugu",

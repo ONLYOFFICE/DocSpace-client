@@ -14,7 +14,7 @@
   "Code": "Kód pro vložení",
   "CodeTitle": "kód",
   "CopyWindowCode": "Kopírování kódu pro vložení okna",
-  "CreateSampleDocspace": "Vytvoření vzorového vložení DocSpace",
+  "CreateSampleDocspace": "Vytvoření vzorového vložení {{portalName}}",
   "CreateSampleEditor": "Vytvořit vzorové vložení editoru",
   "CreateSampleFileSelector": "Vytvořit vzorové vložení selektoru souborů",
   "CreateSamplePublicRoom": "Vytvořit vzorové vložení veřejné místnosti",

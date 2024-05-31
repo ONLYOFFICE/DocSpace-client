@@ -14,7 +14,7 @@
   "Code": "Код для вставки",
   "CodeTitle": "код",
   "CopyWindowCode": "Скопировать код встраивания окна",
-  "CreateSampleDocspace": "Создать образец встраивания DocSpace",
+  "CreateSampleDocspace": "Создать образец встраивания {{portalName}}",
   "CreateSampleEditor": "Создать образец встраивания Редактора",
   "CreateSampleFileSelector": "Создать образец встраивания Селектора файлов",
   "CreateSamplePublicRoom": "Создать образец встраивания Публичной комнаты",

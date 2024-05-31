@@ -14,7 +14,7 @@
   "Code": "Код для вставлення",
   "CodeTitle": "код",
   "CopyWindowCode": "Скопіювати код вбудовування вікна",
-  "CreateSampleDocspace": "Створити зразок вбудовування простору DocSpace",
+  "CreateSampleDocspace": "Створити зразок вбудовування простору {{portalName}}",
   "CreateSampleEditor": "Створити зразок вбудовування редактора",
   "CreateSampleFileSelector": "Створити зразок вбудовування засобу вибору файлів",
   "CreateSamplePublicRoom": "Створити зразок вбудовування загальнодоступної кімнати",

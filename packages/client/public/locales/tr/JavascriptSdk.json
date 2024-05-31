@@ -14,7 +14,7 @@
   "Code": "Girilecek kod",
   "CodeTitle": "kod",
   "CopyWindowCode": "Pencere gömülü kodunu kopyala",
-  "CreateSampleDocspace": "Örnek DocSpace yerleştirmesi oluştur",
+  "CreateSampleDocspace": "Örnek {{portalName}} yerleştirmesi oluştur",
   "CreateSampleEditor": "Örnek Editör yerleştirmesi oluştur",
   "CreateSampleFileSelector": "Örnek Dosya seçici yerleştirmesi oluştur",
   "CreateSamplePublicRoom": "Örnek Genel oda yerleştirmesi oluştur",

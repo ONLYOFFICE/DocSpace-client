@@ -14,7 +14,7 @@
   "Code": "Codul pentru inserare",
   "CodeTitle": "cod",
   "CopyWindowCode": "Copiere codul de încorporare al ferestrei",
-  "CreateSampleDocspace": "Creare exemplu DocSpace pentru încorporare",
+  "CreateSampleDocspace": "Creare exemplu {{portalName}} pentru încorporare",
   "CreateSampleEditor": "Creare exemplu Editor pentru încorporare",
   "CreateSampleFileSelector": "Creare exemplu Selector de fișiere pentru încorporare",
   "CreateSamplePublicRoom": "Creare exemplu Sală publică pentru încorporare",

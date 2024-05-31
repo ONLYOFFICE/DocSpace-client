@@ -14,7 +14,7 @@
   "Code": "Code om in te voegen",
   "CodeTitle": "code",
   "CopyWindowCode": "Kopieer venster insluitcode",
-  "CreateSampleDocspace": "Voorbeeld DocSpace insluiten maken",
+  "CreateSampleDocspace": "Voorbeeld {{portalName}} insluiten maken",
   "CreateSampleEditor": "Voorbeeld Editor insluiten maken",
   "CreateSampleFileSelector": "Maak voorbeeld Bestand selectie insluiten",
   "CreateSamplePublicRoom": "Maak voorbeeld Openbare ruimte insluiten",

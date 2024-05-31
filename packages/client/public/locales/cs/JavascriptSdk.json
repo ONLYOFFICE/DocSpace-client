@@ -20,7 +20,7 @@
   "CreateSamplePublicRoom": "Vytvořit vzorové vložení veřejné místnosti",
   "CreateSampleRoomSelector": "Vytvořit vzorové vložení selektoru místnosti",
   "CreateSampleViewer": "Vytvoření vzorku vložení prohlížeče",
-  "CSPDescription": "Chcete-li bezpečně vložit DocSpace jako iframe do webové stránky, přidejte její adresu URL do seznamu povolených adres.",
+  "CSPDescription": "Chcete-li bezpečně vložit {{portalName}} jako iframe do webové stránky, přidejte její adresu URL do seznamu povolených adres.",
   "CSPHeader": "Vložit DocSpace jako iframe",
   "CSPHelp": "Toto nastavení je bezpečnostní mechanismus, který lze použít k ochraně před útoky typu \"content injection\". CSP popisuje bezpečné zdroje pro stahování zdrojů. Stahování ze zdrojů, které nejsou uvedeny na `bílém seznamu`, je blokováno. Zadejte domény (spolu s protokolem), se kterými bude pracovat.",
   "CSPInfoBarDescription": "Povolte prosím protokol HTTPS pro váš DocSpace, abyste zajistili správnou funkci nastavení.",

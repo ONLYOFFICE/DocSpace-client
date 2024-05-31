@@ -20,7 +20,7 @@
   "CreateSamplePublicRoom": "Ustvari vzorec vdelave javne sobe",
   "CreateSampleRoomSelector": "Ustvari vzorec vdelave izbire sobe",
   "CreateSampleViewer": "Ustvari vzorec vdelave pregledovalnika",
-  "CSPDescription": "Če želite varno vdelati DocSpace kot iframe na spletno mesto, dodajte njegov URL na seznam dovoljenih.",
+  "CSPDescription": "Če želite varno vdelati {{portalName}} kot iframe na spletno mesto, dodajte njegov URL na seznam dovoljenih.",
   "CSPHeader": "Vdelajte DocSpace kot iframe",
   "CSPHelp": "Ta nastavitev je varnostni mehanizem, ki se lahko uporablja za zaščito pred napadi z vnašanjem vsebine. CSP opisuje varne vire za prenos prenos. Prenos iz virov, ki niso na `belem seznamu`, je blokiran. Določite domene (skupaj s protokolom), s katerimi bo delovalo.",
   "CSPInfoBarDescription": "Omogočite protokol HTTPS za vaš DocSpace, da zagotovite pravilno namestitev.",

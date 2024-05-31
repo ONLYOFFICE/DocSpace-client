@@ -20,7 +20,7 @@
   "CreateSamplePublicRoom": "Izveidot publiskās telpas iegulšanas paraugu",
   "CreateSampleRoomSelector": "Izveidot parauga telpas atlasītāja iegulšanu",
   "CreateSampleViewer": "Izveidot skatītāja iegulšanas paraugu",
-  "CSPDescription": "Lai tīmekļa vietnē DocSpace droši iegultu kā iframe, pievienojiet tā vietrādi URL savam atļauju sarakstam.",
+  "CSPDescription": "Lai tīmekļa vietnē {{portalName}} droši iegultu kā iframe, pievienojiet tā vietrādi URL savam atļauju sarakstam.",
   "CSPHeader": "Iegult DocSpace kā iframe",
   "CSPHelp": "Šis iestatījums ir drošības mehānisms, ko var izmantot, lai aizsargātu pret satura ievadīšanas uzbrukumiem. CSP apraksta drošus resursu lejupielādes avotus. Lejupielāde no resursiem, kas nav iekļauti “baltajā sarakstā”, ir bloķēta. Norādiet domēnus (kopā ar protokolu), ar kuriem tas darbosies.",
   "CSPInfoBarDescription": "Iespējojiet HTTPS protokolu savai DocSpace, lai nodrošinātu pareizu iestatījumu darbam.",

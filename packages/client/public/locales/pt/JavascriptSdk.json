@@ -20,7 +20,7 @@
   "CreateSamplePublicRoom": "Criar amostra de incorporação de sala pública",
   "CreateSampleRoomSelector": "Criar exemplo de incorporação do seletor de salas",
   "CreateSampleViewer": "Criar exemplo de incorporação do visualizador",
-  "CSPDescription": "Para incorporar com segurança o DocSpace como um iframe num Website, adicione o seu URL à sua lista de permissões.",
+  "CSPDescription": "Para incorporar com segurança o {{portalName}} como um iframe num Website, adicione o seu URL à sua lista de permissões.",
   "CSPHeader": "Incorporar o DocSpace como iframe",
   "CSPHelp": "Esta definição é um mecanismo de segurança que pode ser utilizado para proteger contra ataques de injeção de conteúdos. O CSP descreve fontes seguras de download de recursos. O download de recursos não incluídos na \"lista branca\" está bloqueado. Especifique os domínios (juntamente com o protocolo) com os quais irá trabalhar.",
   "CSPInfoBarDescription": "Ative o protocolo HTTPS para o seu DocSpace para garantir o funcionamento correto da configuração.",

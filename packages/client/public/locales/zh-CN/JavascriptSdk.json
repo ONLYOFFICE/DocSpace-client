@@ -19,7 +19,6 @@
   "CreateSamplePublicRoom": "创建示例公共房间嵌入",
   "CreateSampleRoomSelector": "创建示例房间选择器嵌入",
   "CreateSampleViewer": "创建示例查看器嵌入",
-  "CSPDescription": "要安全地将协作空间作为 iframe 嵌入网站，请将其链接（URL）添加到允许列表中。",
   "CSPHeader": "以 iframe 的形式嵌入协作空间",
   "CSPHelp": "该设置是一种安全措施，可用于防范内容注入攻击。CSP 描述了安全的资源下载源。从未列在\"白名单\"中的资源下载将被阻止。指定域和与之配合的协议。",
   "CSPInfoBarDescription": "为了正确的设置，请为协作空间启用HTTPS协议。",

@@ -22,7 +22,7 @@
   "CreateSamplePublicRoom": "Create sample Public room embed",
   "CreateSampleRoomSelector": "Create sample Room selector embed",
   "CreateSampleViewer": "Create sample Viewer embed",
-  "CSPDescription": "To start the embedding process, add the DocSpace URL to the allow list.",
+  "CSPDescription": "To start the embedding process, add the {{portalName}} URL to the allow list.",
   "CSPHeader": "Enter the address of DocSpace to embed",
   "CSPHelp": "This setting is a security mechanism that can be used to protect against content injection attacks. The CSP describes secure resource download sources. Downloading from resources not included in the `white list` is blocked. Specify the domains (together with the protocol) with which it will work.",
   "CSPInfoBarDescription": "Please enable the HTTPS protocol for your DocSpace to ensure the correct setup work.",

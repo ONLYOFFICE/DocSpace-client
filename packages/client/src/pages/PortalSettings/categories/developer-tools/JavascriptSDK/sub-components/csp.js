@@ -39,6 +39,7 @@ import { SelectorAddButton } from "@docspace/shared/components/selector-add-butt
 import { SelectedItem } from "@docspace/shared/components/selected-item";
 import { tablet } from "@docspace/shared/utils";
 import Base from "@docspace/shared/themes/base";
+import { PORTAL } from "@docspace/shared/constants";
 
 const CategoryHeader = styled.div`
   margin-top: 24px;
@@ -205,7 +206,7 @@ const CSP = ({
     <>
       <CategoryHeader>{t("CSPHeader")}</CategoryHeader>
       <Container className="description-holder">
-        {t("CSPDescription")}
+        {t("CSPDescription", { portalName: PORTAL })}
         <HelpButton
           className="csp-helpbutton"
           offsetRight={0}

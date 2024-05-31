@@ -20,7 +20,7 @@
   "CreateSamplePublicRoom": "Ümumi otaq yerləşdirmə nümunəsi yaradın",
   "CreateSampleRoomSelector": "Otaq seçici yerləşdirmə nümunəsi yaradın",
   "CreateSampleViewer": "İzləyici yerləşdirmə nümunəsi yaradın",
-  "CSPDescription": "DocSpace-i vebsaytda iframe kimi təhlükəsiz şəkildə yerləşdirmək üçün onun URL-ni icazələr siyahısına əlavə edin.",
+  "CSPDescription": "{{portalName}}-i vebsaytda iframe kimi təhlükəsiz şəkildə yerləşdirmək üçün onun URL-ni icazələr siyahısına əlavə edin.",
   "CSPHeader": "DocSpace-i iframe kimi yerləşdirin",
   "CSPHelp": "Bu parametr məzmun hücumlarından qorunmaq üçün istifadə edilə bilən təhlükəsizlik mexanizmidir. CSP təhlükəsiz mənbə yükləmə mənbələrini təsvir edir. \"Ağ siyahıya salınmayan\" mənbələrdən endrilmə bloklanıb. İstifadə olunacaq domenləri (protokollu) göstərin.",
   "CSPInfoBarDescription": "Quraşdırmanın düzgün işləməsini təmin etmək üçün DocSpace üçün HTTPS protokolunu aktiv edin.",

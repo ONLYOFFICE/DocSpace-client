@@ -20,7 +20,7 @@
   "CreateSamplePublicRoom": "Napravi primer ugradnje Javne sobe",
   "CreateSampleRoomSelector": "Napravi primer ugradnje selektora Sobe",
   "CreateSampleViewer": "Napravi primer ugradnje Pregledača",
-  "CSPDescription": "Da biste započeli proces ugrađivanja, dodajte DocSpace URL na listu dozvoljenih.",
+  "CSPDescription": "Da biste započeli proces ugrađivanja, dodajte {{portalName}} URL na listu dozvoljenih.",
   "CSPHeader": "Unesite adresu DocSpace-a za ugradnju",
   "CSPHelp": "Ovo podešavanje je sigurnosni mehanizam koji se može koristiti kako bi se zaštitili od napada ubacivanjem sadržaja. CSP (Content Security Policy) opisuje sigurne izvore za preuzimanje resursa. Preuzimanje sa izvora koji nije uključen u \"belu listu\" je blokirano. Navedite domene (zajedno sa protokolom) s kojima će raditi.",
   "CSPInfoBarDescription": "Molimo omogućite HTTPS protokol za vaš DocSpace kako bi se osiguralo da pravilno radi.",

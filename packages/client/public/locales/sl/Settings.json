@@ -183,7 +183,6 @@
   "PortalDeactivation": "Deaktiviraj {{portalName}}",
   "PortalDeactivationDescription": "S to možnostjo začasno deaktivirate svoj prostor.",
   "PortalDeactivationHelper": "Če želite deaktivirati ta prostor {{portalName}}, bo blokiran vaš prostor in vse informacije, povezane z njim, zato nihče ne bo imel dostopa do njih za določeno obdobje. Če želite to narediti, kliknite gumb Deaktiviraj. Povezava za potrditev operacije bo poslana na elektronski naslov lastnika prostora.\nČe se želite vrniti v prostor in ga še naprej uporabljati, boste morali uporabiti drugo povezavo v potrditvenem e-mail sporočilu. Zato vas prosimo, da ta e-mail shranite na varno mesto.",
-  "PortalDeletion": "Brisanje prostora",
   "PortalDeletionDescription": "S to možnostjo trajno izbrišete svoj prostor.",
   "PortalDeletionEmailSended": "Povezava za potrditev operacije je bila poslana na {{ownerEmail}} (elektronski naslov lastnika prostora).",
   "PortalDeletionHelper": "Če menite, da prostora ne boste uporabljali in bi radi svoj prostor trajno izbrisali, oddajte zahtevo z gumbom Izbriši. Upoštevajte, da ne boste mogli znova aktivirati svojega prostora ali obnoviti nobenih informacij, povezanih z njim.",

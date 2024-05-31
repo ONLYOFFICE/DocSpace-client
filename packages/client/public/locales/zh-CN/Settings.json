@@ -163,7 +163,6 @@
   "PersonalFilesDescription": "用户文件和文档会被导入至“文档” > “文档”。",
   "PortalCreatedDate": "门户创建日期：{{date}}",
   "PortalDeactivationDescription": "使用此选项以暂时停用您的空间。",
-  "PortalDeletion": "删除协作空间",
   "PortalDeletionDescription": "使用此选项以永久删除您的空间。",
   "PortalDeletionEmailSended": "操作确认链接已发送至 {{ownerEmail}}（空间所有者邮件地址）",
   "PortalDeletionHelper": "如果您认为自己不应该使用此空间且希望永久性删除空间，请使用删除按钮提交您的请求。在此提醒，您将无法重新激活空间，或恢复与之相关的任何信息。",

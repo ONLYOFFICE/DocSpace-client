@@ -184,7 +184,7 @@
   "PortalDeactivation": "{{portalName}}비활성화",
   "PortalDeactivationDescription": "스페이스를 일시적으로 비활성화하려면 이 옵션을 사용하세요.",
   "PortalDeactivationHelper": "이 {{portalName}}를 비활성화하려는 경우 특정 기간 동안 아무도 액세스할 수 없도록 귀하의 스페이스 및 그와 관련된 모든 정보가 차단되게 됩니다. 그렇게 하려면 비활성화 버튼을 클릭하세요. 작업을 확인하는 링크가 스페이스 소유자의 이메일 주소로 발송됩니다.\n스페이스로 돌아와 계속 스페이스를 사용하려면 확인 이메일에 첨부된 두 번째 링크를 사용해야 합니다. 따라서 확인 이메일을 안전한 곳에 보관하시기 바랍니다.",
-  "PortalDeletion": "DocSpace 삭제",
+  "PortalDeletion": "{{portalName}} 삭제",
   "PortalDeletionDescription": "스페이스를 영구적으로 삭제하려면 이 옵션을 사용하세요.",
   "PortalDeletionEmailSended": "작업을 확인하는 링크가 {{ownerEmail}}(스페이스 소유자의 이메일 주소)로 발송되었습니다.",
   "PortalDeletionHelper": "스페이스를 사용하지 않을 예정이라 스페이스를 영구적으로 삭제하려면 삭제 버튼을 사용하여 요청을 제출하세요. 단, 스페이스를 재활성화하거나 스페이스와 관련된 정보를 복구할 수 없음을 명심하시기 바랍니다.",

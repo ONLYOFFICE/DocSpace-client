@@ -185,7 +185,7 @@
   "PortalDeactivation": "Dezactivare {{portalName}}",
   "PortalDeactivationDescription": "Utilizaţi această opţiune pentru a dezactiva temporar spaţiul dvs.",
   "PortalDeactivationHelper": "Dacă doriţi să dezactivați acest {{portalName}}, spaţiul dvs şi toate informaţiile asociate cu acesta vor fi blocate, astfel încât nimeni nu-l va accesa pentru o anumită perioadă. Pentru a face acest lucru, apăsaţi butonul Dezactivare. Linkul de confirmare a operaţiei a fost trimis către adresa de email a proprietarului spaţiului.\nDacă doriţi să reveniţi la spaţiu şi să continuați să îl utilizaţi, trebuie să folosiţi cel al doilea link din email-ul de confirmare. Aşadar, vă rugăm să păstraţi acest email într-un loc sigur.",
-  "PortalDeletion": "Ștergere spațiu DocSpace",
+  "PortalDeletion": "Ștergere spațiu {{portalName}}",
   "PortalDeletionDescription": "Utilizaţi această opţiune pentru a şterge definitiv spaţiul dvs.",
   "PortalDeletionEmailSended": "Linkul de confirmare a operaţiei a fost trimis către {{ownerEmail}} (adresa email a spaţiului proprietarului).",
   "PortalDeletionHelper": "Dacă credeţi că nu veţi mai folosi spaţiul şi doriţi să îl ştergeţi definitiv, trimiteţi o solicitare folosind butonul Ștergere. Rețineți că nu veţi putea să vă reactivaţi spaţiul sau să recuperaţi informaţiile asociate cu acesta.",

@@ -183,7 +183,7 @@
   "PortalDeactivation": "Vô hiệu hóa {{portalName}}",
   "PortalDeactivationDescription": "Sử dụng tùy chọn này để tạm thời vô hiệu hóa không gian của bạn.",
   "PortalDeactivationHelper": "Nếu bạn muốn vô hiệu hóa {{portalName}} này, không gian của bạn và tất cả thông tin được liên kết với nó sẽ bị chặn để không ai có quyền truy cập vào nó trong một khoảng thời gian cụ thể. Để làm điều đó, hãy nhấp vào nút Vô hiệu hóa. Một liên kết xác nhận hành động sẽ được gửi đến địa chỉ email của chủ sở hữu không gian.\nTrong trường hợp bạn muốn quay lại không gian và tiếp tục sử dụng nó, bạn sẽ cần sử dụng liên kết thứ hai được cung cấp trong email xác nhận. Vì vậy, xin vui lòng giữ email này ở một nơi an toàn.",
-  "PortalDeletion": "Xóa DocSpace",
+  "PortalDeletion": "Xóa {{portalName}}",
   "PortalDeletionDescription": "Sử dụng tùy chọn này để xóa vĩnh viễn không gian của bạn.",
   "PortalDeletionEmailSended": "Một liên kết để xác nhận hoạt động đã được gửi đến {{ownerEmail}} (địa chỉ email của chủ sở hữu không gian).",
   "PortalDeletionHelper": "Nếu bạn không nghĩ rằng bạn sẽ sử dụng không gian này và muốn xóa vĩnh viễn không gian của mình, hãy gửi yêu cầu của bạn bằng cách dùng nút Xóa. Xin lưu ý rằng bạn sẽ không thể kích hoạt lại không gian của mình hoặc khôi phục bất kỳ thông tin nào liên quan đến nó.",

@@ -229,7 +229,7 @@ const ArticleBodyContent = (props) => {
       case "RestoreBackup":
         return t("RestoreBackup");
       case "PortalDeletion":
-        return t("PortalDeletion");
+        return t("PortalDeletion", { portalName: PORTAL });
       case "Common:DeveloperTools":
         return t("Common:DeveloperTools");
       case "Common:Bonus":

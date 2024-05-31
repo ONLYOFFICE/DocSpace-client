@@ -186,7 +186,7 @@
   "PortalDeactivation": "Desactivar {{portalName}}",
   "PortalDeactivationDescription": "Utilice esta opción para desactivar temporalmente su espacio.",
   "PortalDeactivationHelper": "Si desea desactivar este {{portalName}}, su espacio y toda la información asociada al mismo se bloquearán para que nadie tenga acceso durante un periodo determinado. Para ello, haga clic en el botón Desactivar. Se enviará un enlace para confirmar la operación a la dirección de correo electrónico del propietario del espacio.\nSi desea volver al espacio y seguir utilizándolo, deberá utilizar el segundo enlace que se le ha enviado en el correo electrónico de confirmación. Así que, por favor, guarde este correo electrónico en un lugar seguro.",
-  "PortalDeletion": "Eliminación de DocSpace",
+  "PortalDeletion": "Eliminación de {{portalName}}",
   "PortalDeletionDescription": "Utilice esta opción para eliminar su espacio de forma permanente.",
   "PortalDeletionEmailSended": "Se ha enviado un enlace para confirmar la operación a {{ownerEmail}} (la dirección de correo electrónico del propietario del espacio).",
   "PortalDeletionHelper": "Si cree que no va a utilizar el espacio y desea eliminarlo definitivamente, envíe su solicitud utilizando el botón Eliminar. Por favor, tenga en cuenta que no podrá reactivar su espacio ni recuperar ninguna información asociada al mismo.",

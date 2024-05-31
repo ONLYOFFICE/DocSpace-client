@@ -13,6 +13,6 @@
   "StorageQuotaExceeded": "Պահպանման սահմանաչափը գերազանցվել է",
   "StorageQuotaHeader": "Պահեստային տարածքի քանակը քիչ է մնում գերազանցվի՝ {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Դուք կարող եք հեռացնել ավելորդ ֆայլերը կամ փոխել սահմանաչափը <1>Պահպանման կառավարման կարգավորումներ:</1>",
-  "UserQuotaDescription": "<1>{{clickHere}}</1> ձեր DocSpace-ի համար ավելի լավ գնային փաթեթ գտնելու համար:",
+  "UserQuotaDescription": "<1>{{clickHere}}</1> ձեր {{portalName}}-ի համար ավելի լավ գնային փաթեթ գտնելու համար:",
   "UserQuotaHeader": "Ադմինիստրատորների/հզոր օգտատերերի թիվը պատրաստվում է գերազանցել՝ {{currentValue}} / {{maxValue}}:"
 }

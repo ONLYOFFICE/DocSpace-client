@@ -9,6 +9,5 @@
   "StorageAndUserHeader": "ບ່ອນຈັດເກັບຂໍ້ມູນ ແລະ ຜູ້ເບິ່ງແຍງລະບົບ/ຜູ້ໃຊ້ກຳລັງຈະເກີນຂີດຈຳກັດ.",
   "StorageQuotaDescription": "ທ່ານສາມາດລຶບໄຟລ໌ທີ່ບໍ່ຈໍາເປັນອອກ ຫຼື <1 >{{clickHere}}</1> ເພື່ອຊອກຫາແຜນລາຄາທີ່ເໝາະສົມກວ່າສໍາລັບ {{portalName}} ຂອງທ່ານ.",
   "StorageQuotaHeader": "ຈຳນວນພື້ນທີ່ຈັດເກັບກຳລັງຈະເກີນ: {{ currentValue }} / {{ maxValue }}",
-  "UserQuotaDescription": "<1 >{{ clickHere }}</1> ເພື່ອຊອກຫາແຜນລາຄາທີ່ດີກວ່າສໍາລັບແຜງບໍລິການຂອງທ່ານ.",
   "UserQuotaHeader": "ຈຳນວນຜູ້ເບິ່ງແຍງລະບົບ/ຜູ້ໃຊ້ກຳລັງຈະເກີນ: {{ currentValue }} / {{ maxValue }}."
 }

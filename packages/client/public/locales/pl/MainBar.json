@@ -13,6 +13,6 @@
   "StorageQuotaExceeded": "Przekroczono limit pamięci",
   "StorageQuotaHeader": "Ilość miejsca w pamięci zostanie wkrótce przekroczona: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Możesz usunąć niepotrzebne pliki lub zmienić limit w <1>ustawieniach zarządzania pamięcią.</1>",
-  "UserQuotaDescription": "<1>{{clickHere}}</1>, aby znaleźć lepszy plan cenowy dla swojego DocSpace.",
+  "UserQuotaDescription": "<1>{{clickHere}}</1>, aby znaleźć lepszy plan cenowy dla swojego {{portalName}}.",
   "UserQuotaHeader": "Liczba administratorów/użytkowników z większą liczbą uprawnień zostanie wkrótce przekroczona: {{currentValue}} / {{maxValue}}."
 }

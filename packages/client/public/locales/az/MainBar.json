@@ -13,6 +13,5 @@
   "StorageQuotaExceeded": "Yaddaş kvotası limiti keçib",
   "StorageQuotaHeader": "Yaddaş sahəsinin həcmi keçmək üzrədir : {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "<1>Yaddaş idarəetmə parametrlərində</1> lazımsız faylları silə və ya kvotanı dəyişə bilərsiniz.",
-  "UserQuotaDescription": "Sahəniz üçün daha yaxşı qiymət planı tapmaq üçün <1>{{clickHere}}</1>.",
   "UserQuotaHeader": "Admin/ekspert istifadəçilərin sayı keçmək üzrədir: {{currentValue}} / {{maxValue}}."
 }

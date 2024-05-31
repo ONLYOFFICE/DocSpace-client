@@ -14,6 +14,6 @@
   "StorageQuotaHeader": "Storage space amount is about to be exceeded: {{currentValue}} / {{maxValue}}",
   "StorageQuotaUserDescription": "You can remove the unnecessary files to free up disk space.",
   "TenantCustomQuotaDescription": "You can remove the unnecessary files or change quota in the <1>Storage management settings.</1>",
-  "UserQuotaDescription": "<1>{{clickHere}}</1> to find a better pricing plan for your DocSpace.",
+  "UserQuotaDescription": "<1>{{clickHere}}</1> to find a better pricing plan for your {{portalName}}.",
   "UserQuotaHeader": "The number of admins/power users is about to be exceeded: {{currentValue}} / {{maxValue}}."
 }

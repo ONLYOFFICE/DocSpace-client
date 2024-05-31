@@ -13,6 +13,6 @@
   "StorageQuotaExceeded": "Cotă de stocare a fost depășită",
   "StorageQuotaHeader": "Cota spaţiului de stocare este pe punctul de a fi depăşită: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Puteţi elimina fişierele inutile sau modifica cotă de stocare din secțiunea <1>Setările de gestionare a spațiului de stocare.</1>.",
-  "UserQuotaDescription": "<1>{{clickHere}}</1> pentru a găsi cea mai bună ofertă pentru spațiul dvs DocSpace.",
+  "UserQuotaDescription": "<1>{{clickHere}}</1> pentru a găsi cea mai bună ofertă pentru spațiul dvs {{portalName}}.",
   "UserQuotaHeader": "Numărul maxim de administratori/utilizatori avansați este pe punctul de a fi depăşit. {{currentValue}} / {{maxValue}}."
 }

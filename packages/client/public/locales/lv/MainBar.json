@@ -13,6 +13,6 @@
   "StorageQuotaExceeded": "Pārsniegta krātuves kvota",
   "StorageQuotaHeader": "Tūlīt tiks pārsniegts krātuves vietas apjoms: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Jūs varat noņemt nevajadzīgos failus vai mainīt kvotu <1>Krātuves pārvaldības iestatījumos.</1>",
-  "UserQuotaDescription": "<1>{{clickHere}}</1>, lai atrastu labāku cenu plānu savam DocSpace.",
+  "UserQuotaDescription": "<1>{{clickHere}}</1>, lai atrastu labāku cenu plānu savam {{portalName}}.",
   "UserQuotaHeader": "Tūlīt tiks pārsniegts administratoru/prasmīgo lietotāju skaits:{{currentValue}}/{{maxValue}}."
 }

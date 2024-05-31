@@ -13,6 +13,6 @@
   "StorageQuotaExceeded": "Speicherquote überschritten",
   "StorageQuotaHeader": "Das Speicherplatzlimit wird bald überschritten: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Sie können unnötige Dateien entfernen oder die Quote in den <1>Speicherverwaltungseinstellungen</1> ändern",
-  "UserQuotaDescription": "<1>{{clickHere}}</1>, um einen besseren Preisplan für Ihr DocSpace zu finden.",
+  "UserQuotaDescription": "<1>{{clickHere}}</1>, um einen besseren Preisplan für Ihr {{portalName}} zu finden.",
   "UserQuotaHeader": "Die Anzahl der Admins/Power-User wird bald überschritten sein: {{currentValue}} / {{maxValue}}."
 }

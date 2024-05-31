@@ -13,6 +13,6 @@
   "StorageQuotaExceeded": "Depolama kotası aşıldı",
   "StorageQuotaHeader": "Depolama alanı miktarı aşılmak üzere: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Gereksiz dosyaları kaldırabilir veya <1>Depolama yönetimi ayarlarından</1> kotayı değiştirebilirsiniz.",
-  "UserQuotaDescription": "DocSpace alanınız için daha iyi bir fiyatlandırma planı bulmak için <1>{{clickHere}}</1>.",
+  "UserQuotaDescription": "{{portalName}} alanınız için daha iyi bir fiyatlandırma planı bulmak için <1>{{clickHere}}</1>.",
   "UserQuotaHeader": "Yönetici/uzman kullanıcı sayısı aşılmak üzere: {{currentValue}} / {{maxValue}}."
 }

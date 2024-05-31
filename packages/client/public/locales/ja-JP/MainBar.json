@@ -13,6 +13,6 @@
   "StorageQuotaExceeded": "ストレージ容量制限を超えています",
   "StorageQuotaHeader": "ストレージのスペースは、もうすぐサイズ上限を超えます：{{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "不要ファイルを削除するか、<1>ストレージ管理設定</1>で容量制限の変更ができます。",
-  "UserQuotaDescription": "お使いのDocSpaceに適した料金プランを選択するには、<1>{{clickHere}}</1>。",
+  "UserQuotaDescription": "お使いの{{portalName}}に適した料金プランを選択するには、<1>{{clickHere}}</1>。",
   "UserQuotaHeader": "管理者/パワーユーザー数を超えそうです：{{currentValue}} / {{maxValue}}"
 }

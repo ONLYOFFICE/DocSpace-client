@@ -13,6 +13,6 @@
   "StorageQuotaExceeded": "Opslagquota overschreden",
   "StorageQuotaHeader": "De hoeveelheid opslagruimte staat op het punt overschreden te worden: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "U kunt de onnodige bestanden verwijderen of de quota wijzigen in de <1>Instellingen voor opslagbeheer.</1>",
-  "UserQuotaDescription": "<1>{{clickHere}}</1> om een beter prijsplan voor uw DocSpace te vinden.",
+  "UserQuotaDescription": "<1>{{clickHere}}</1> om een beter prijsplan voor uw {{portalName}} te vinden.",
   "UserQuotaHeader": "Het aantal beheerders/power users staan op het punt overschreden te worden: {{currentValue}} / {{maxValue}}."
 }

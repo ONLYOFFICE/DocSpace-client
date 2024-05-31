@@ -11,6 +11,5 @@
   "StorageQuotaExceeded": "Muistin kiintiö ylitetty",
   "StorageQuotaHeader": "Tallennustilan määrä on ylittymässä: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Voit poistaa tarpeettomat tiedostot tai muuttaa kiintiötä <1>Muistinhallinta-asetuksissa.</1>",
-  "UserQuotaDescription": "<1>{{clickHere}}</1> löytääksesi DocSpacellesi sopivamman hinnoitteluohjelman.",
   "UserQuotaHeader": "Ylläpitäjien/tehokäyttäjien määrän raja on ylittymässä: {{currentValue}} / {{maxValue}}"
 }

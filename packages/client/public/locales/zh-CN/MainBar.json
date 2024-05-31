@@ -10,6 +10,5 @@
   "StorageQuotaExceeded": "超出存储空间配额",
   "StorageQuotaHeader": "存储空间数量即将超出限制：{{currentValue}}/{{maxValue}}",
   "TenantCustomQuotaDescription": "您可以在<1>存储空间管理设置</1>中删除不必要的文件，或更改配额。",
-  "UserQuotaDescription": "<1>{{clickHere}}</1>，选择更合适的协作空间定价方案。",
   "UserQuotaHeader": "管理员/高级用户的数量限制即将被超过。 {{currentValue}} / {{maxValue}}"
 }

@@ -13,6 +13,6 @@
   "StorageQuotaExceeded": "Đã vượt quá hạn mức lưu trữ",
   "StorageQuotaHeader": "Dung lượng lưu trữ sắp vượt quá:{{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Bạn có thể xóa các tập tin không cần thiết hoặc thay đổi hạn mức trong cài đặt Quản lý lưu trữ <1>.</1>",
-  "UserQuotaDescription": "<1>{{clickHere}}</1> để tìm gói dịch vụ có giá tốt hơn cho DocSpace của bạn.",
+  "UserQuotaDescription": "<1>{{clickHere}}</1> để tìm gói dịch vụ có giá tốt hơn cho {{portalName}} của bạn.",
   "UserQuotaHeader": "Sắp vượt quá số lượng quản trị viên/người dùng cấp cao:{{currentValue}}/{{maxValue}}."
 }

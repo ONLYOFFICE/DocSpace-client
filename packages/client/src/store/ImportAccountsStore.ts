@@ -90,6 +90,12 @@ class ImportAccountsStore {
 
   searchValue = "";
 
+  step = 1;
+
+  workspace: TWorkspaceService | "" = "";
+
+  files: string[] = [];
+
   importOptions = {
     importGroups: true,
     importPersonalFiles: true,
@@ -130,6 +136,18 @@ class ImportAccountsStore {
         ),
     );
   }
+
+  setStep = (step: number) => {
+    this.step = step;
+  };
+
+  setWorkspace = (workspace: TWorkspaceService | "") => {
+    this.workspace = workspace;
+  };
+
+  setFiles = (files: string[]) => {
+    this.files = files;
+  };
 
   setResultUsers = () => {
     const checkedIds = this.checkedUsers.withoutEmail.map(

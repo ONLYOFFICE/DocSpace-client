@@ -24,7 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface ProvidersProps {
+export interface ProvidersProps {}
+
+export interface InjectedProvidersProps extends ProvidersProps {
   theme: TStore["settingsStore"]["theme"];
   services: TStore["importAccountsStore"]["services"];
   setServices: TStore["importAccountsStore"]["setServices"];
@@ -32,5 +34,35 @@ export interface ProvidersProps {
   getMigrationStatus: TStore["importAccountsStore"]["getMigrationStatus"];
   setDocumentTitle: TStore["authStore"]["setDocumentTitle"];
   isMigrationInit: TStore["importAccountsStore"]["isMigrationInit"];
+  setIsMigrationInit: TStore["importAccountsStore"]["setIsMigrationInit"];
+  setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
+}
+
+export interface SelectFileStepProps {
+  incrementStep: () => void;
+  cancelUploadDialogVisible: TStore["dialogsStore"]["cancelUploadDialogVisible"];
+  setCancelUploadDialogVisible: TStore["dialogsStore"]["setCancelUploadDialogVisible"];
+  initMigrationName: TStore["importAccountsStore"]["initMigrationName"];
+  singleFileUploading: TStore["importAccountsStore"]["singleFileUploading"];
+  getMigrationStatus: TStore["importAccountsStore"]["getMigrationStatus"];
+  setUsers: TStore["importAccountsStore"]["setUsers"];
+  isFileLoading: TStore["importAccountsStore"]["isFileLoading"];
+  setIsFileLoading: TStore["importAccountsStore"]["setIsFileLoading"];
+  cancelMigration: TStore["importAccountsStore"]["cancelMigration"];
+}
+
+export interface DataImportProps {}
+
+export interface InjectedDataImportProps {
+  setDocumentTitle: TStore["authStore"]["setDocumentTitle"];
+  getMigrationStatus: TStore["importAccountsStore"]["getMigrationStatus"];
+  viewAs: TStore["setup"]["viewAs"];
+  setViewAs: TStore["setup"]["setViewAs"];
+  currentDeviceType: TStore["settingsStore"]["currentDeviceType"];
+  isMigrationInit: TStore["importAccountsStore"]["isMigrationInit"];
+  setUsers: TStore["importAccountsStore"]["setUsers"];
+  workspace: TStore["importAccountsStore"]["workspace"];
+  setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
+  setFiles: TStore["importAccountsStore"]["setFiles"];
   setIsMigrationInit: TStore["importAccountsStore"]["setIsMigrationInit"];
 }

@@ -241,6 +241,7 @@ export type TPaymentSettings = {
 };
 
 export type TWorkspaceService = "Workspace" | "GoogleWorkspace" | "Nextcloud";
+export type MigrationOperation = "parse" | "migration";
 
 export type TMigrationGroup = {
   groupName: string;
@@ -273,7 +274,7 @@ export type TMigrationUser = {
 
 export type TMigrationStatusResult = {
   migratorName: TWorkspaceService;
-  operation: string;
+  operation: MigrationOperation;
   failedArchives: string[];
   users: TMigrationUser[];
   withoutEmailUsers: TMigrationUser[];

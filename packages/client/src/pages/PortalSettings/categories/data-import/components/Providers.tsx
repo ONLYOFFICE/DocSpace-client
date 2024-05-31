@@ -24,9 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
@@ -40,30 +39,19 @@ import OnlyofficeWorkspaceSvgUrl from "PUBLIC_DIR/images/workspace.onlyoffice.re
 import GoogleWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.google.react.svg?url";
 import NextcloudWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.nextcloud.react.svg?url";
 import OnlyofficeWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.onlyoffice.react.svg?url";
-import { TWorkspaceService } from "@docspace/shared/api/settings/types";
+
 import { LinkType } from "@docspace/shared/components/link/Link.enums";
 import DataImportLoader from "../sub-components/DataImportLoader";
 import { WorkspacesContainer } from "../StyledDataImport";
-import { ProvidersProps } from "../types";
+import { ProvidersProps, InjectedProvidersProps } from "../types";
 
-const Providers = ({
-  theme,
-  services,
-  setServices,
-  getMigrationList,
-  getMigrationStatus,
-  setDocumentTitle,
-  isMigrationInit,
-  setIsMigrationInit,
-}: ProvidersProps) => {
-  const navigate = useNavigate();
+const Providers = (props: ProvidersProps) => {
+  const { theme, services, setServices, getMigrationList, setWorkspace } =
+    props as InjectedProvidersProps;
+
+  const [areProvidersReady, setAreProvidersReady] = useState(false);
+
   const { t } = useTranslation(["Settings"]);
-
-  const workspacesMap = {
-    GoogleWorkspace: "google",
-    Nextcloud: "nextcloud",
-    Workspace: "onlyoffice",
-  };
 
   const workspaces = useMemo(() => {
     const logos = {
@@ -84,50 +72,17 @@ const Providers = ({
     }));
   }, [theme.isBase, services]);
 
-  const handleMigrationCheck = async () => {
-    const migrationStatus = await getMigrationStatus();
-
-    if (
-      migrationStatus &&
-      migrationStatus.parseResult?.failedArchives &&
-      migrationStatus.parseResult.failedArchives.length === 0 &&
-      !migrationStatus.error
-    ) {
-      const migratorName = migrationStatus.parseResult.migratorName;
-
-      navigate(`${workspacesMap[migratorName]}?service=${migratorName}`);
-
-      return;
-    }
-
+  const handleMigrationCheck = useCallback(async () => {
     const migrationList = await getMigrationList();
-    setIsMigrationInit(true);
+    setAreProvidersReady(true);
     setServices(migrationList);
-  };
+  }, [getMigrationList, setServices]);
 
   useEffect(() => {
-    setDocumentTitle(t("DataImport"));
     handleMigrationCheck();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [handleMigrationCheck]);
 
-  const redirectToWorkspace = (title: TWorkspaceService) => {
-    switch (title) {
-      case "GoogleWorkspace":
-        navigate(`google?service=${title}`);
-        break;
-      case "Nextcloud":
-        navigate(`nextcloud?service=${title}`);
-        break;
-      case "Workspace":
-        navigate(`onlyoffice?service=${title}`);
-        break;
-      default:
-        break;
-    }
-  };
-
-  if (!isMigrationInit) return <DataImportLoader />;
+  if (!areProvidersReady) return <DataImportLoader />;
   return (
     <WorkspacesContainer>
       <Text className="data-import-description">
@@ -140,7 +95,7 @@ const Providers = ({
           <Box
             key={workspace.title}
             className="workspace-item"
-            onClick={() => redirectToWorkspace(workspace.title)}
+            onClick={() => setWorkspace(workspace.title)}
           >
             <ReactSVG src={workspace.logo} className="workspace-logo" />
             <Link
@@ -158,28 +113,23 @@ const Providers = ({
     </WorkspacesContainer>
   );
 };
-export default inject<TStore>(
-  ({ authStore, settingsStore, importAccountsStore }) => {
-    const {
-      services,
-      setServices,
-      getMigrationList,
-      getMigrationStatus,
-      isMigrationInit,
-      setIsMigrationInit,
-    } = importAccountsStore;
+export default inject<TStore>(({ settingsStore, importAccountsStore }) => {
+  const {
+    services,
+    setServices,
+    getMigrationList,
+    isMigrationInit,
+    setIsMigrationInit,
+    setWorkspace,
+  } = importAccountsStore;
 
-    const { setDocumentTitle } = authStore;
-
-    return {
-      services,
-      setServices,
-      getMigrationList,
-      getMigrationStatus,
-      theme: settingsStore.theme,
-      setDocumentTitle,
-      isMigrationInit,
-      setIsMigrationInit,
-    };
-  },
-)(observer(Providers));
+  return {
+    services,
+    setServices,
+    getMigrationList,
+    theme: settingsStore.theme,
+    isMigrationInit,
+    setIsMigrationInit,
+    setWorkspace,
+  };
+})(observer(Providers));

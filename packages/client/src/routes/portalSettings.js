@@ -233,7 +233,7 @@ const DeveloperTools = loadable(() =>
 
 const DataImport = loadable(() =>
   componentLoader(
-    () => import("../pages/PortalSettings/categories/data-import/index.js"),
+    () => import("../pages/PortalSettings/categories/data-import/index.tsx"),
   ),
 );
 const GoogleDataImport = loadable(() =>

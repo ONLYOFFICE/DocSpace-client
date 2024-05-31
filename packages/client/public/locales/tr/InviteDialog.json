@@ -1,6 +1,6 @@
 {
   "AddManually": "Manuel olarak ekle",
-  "AddManuallyDescriptionAccounts": "DocSpace'e yeni kullanıcıları kişisel olarak e-posta yoluyla davet et",
+  "AddManuallyDescriptionAccounts": "{{portalName}}'e yeni kullanıcıları kişisel olarak e-posta yoluyla davet et",
   "AddManuallyDescriptionRoom": "Adları kullanarak mevcut DocSpace kullanıcılarını odaya ekleyin veya e-mail yoluyla kişisel olarak yeni kullanıcılar davet edin",
   "EmailErrorMessage": "E-posta adresi geçerli değil. E-postayı tıklayarak düzenleyebilirsiniz.",
   "GroupMaxAvailableRoleWarning": "Gruplar maksimum kullanılabilir role sahiptir - \"{{role}}\". Odaya bir grup ekledikten sonra haklarda bir artış yapabilirsiniz.",

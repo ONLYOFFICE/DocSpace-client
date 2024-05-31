@@ -1,6 +1,6 @@
 {
   "AddManually": "Ajouter manuellement",
-  "AddManuallyDescriptionAccounts": "Invitez personnellement de nouveaux utilisateurs à DocSpace par e-mail",
+  "AddManuallyDescriptionAccounts": "Invitez personnellement de nouveaux utilisateurs à {{portalName}} par e-mail",
   "AddManuallyDescriptionRoom": "Ajoutez des utilisateurs existants de DocSpace à la salle en utilisant les noms ou invitez de nouveaux utilisateurs personnellement par e-mail",
   "EmailErrorMessage": "L’adresse e-mail n’est pas valide. Vous pouvez modifier l’e-mail en cliquant dessus.",
   "GroupMaxAvailableRoleWarning": "Les groupes ont le rôle maximum disponible - \"{{role}}\". Vous pouvez augmenter les droits après avoir ajouté un groupe à la salle.",

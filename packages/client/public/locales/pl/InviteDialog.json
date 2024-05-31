@@ -1,6 +1,6 @@
 {
   "AddManually": "Dodaj ręcznie",
-  "AddManuallyDescriptionAccounts": "Zaproś nowych użytkowników do DocSpace osobiście poprzez wiadomość e-mail",
+  "AddManuallyDescriptionAccounts": "Zaproś nowych użytkowników do {{portalName}} osobiście poprzez wiadomość e-mail",
   "AddManuallyDescriptionRoom": "Dodaj istniejących użytkowników DocSpace do pokoju za pomocą nazw lub zaproś nowych użytkowników osobiście za pośrednictwem poczty elektronicznej",
   "EmailErrorMessage": "Niepoprawny adres e-mail Możesz poprawić adres e-mail klikając go.",
   "GroupMaxAvailableRoleWarning": "Grupy mają maksymalną dostępną rolę – “{{role}}”. Możesz przyznawać uprawnienia i zwiększać je po dodaniu grupy do pokoju.",

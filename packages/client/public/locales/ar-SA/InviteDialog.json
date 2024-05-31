@@ -1,6 +1,6 @@
 {
   "AddManually": "أضف يدوياً",
-  "AddManuallyDescriptionAccounts": "قم بدعوة المستخدمين الجدد إلى DocSpace شخصيًا عبر البريد الإلكتروني",
+  "AddManuallyDescriptionAccounts": "قم بدعوة المستخدمين الجدد إلى {{portalName}} شخصيًا عبر البريد الإلكتروني",
   "AddManuallyDescriptionRoom": "أضف مستخدمي DocSpace الحاليين إلى الغرفة باستخدام الأسماء أو قم بدعوة مستخدمين جدد شخصيًا عبر البريد الإلكتروني",
   "EmailErrorMessage": "عنوان البريد الإلكتروني غير صالح. يمكنك تحرير البريد الإلكتروني بالضغط عليه.",
   "GroupMaxAvailableRoleWarning": "تتمتع المجموعات بأقصى دور متاح - \"{{role}}\". يمكنك إصدار زيادة في الحقوق بعد إضافة مجموعة إلى الغرفة.",

@@ -1,6 +1,6 @@
 {
   "AddManually": "Dodaj ručno",
-  "AddManuallyDescriptionAccounts": "Pozovi nove korisnike na DocSpace lično putem email-a.",
+  "AddManuallyDescriptionAccounts": "Pozovi nove korisnike na {{portalName}} lično putem email-a.",
   "AddManuallyDescriptionRoom": "Dodajte postojeće korisnike DocSpace-a u sobu koristeći njihova imena ili pozovite nove korisnike lično putem email-a.",
   "EmailErrorMessage": "Email adresa nije važeća. Možete urediti email klikom na njega.",
   "GroupMaxAvailableRoleWarning": "Grupe imaju maksimalnu dostupnu ulogu - \"{{role}}\". Možete izdati povećanje prava nakon dodavanja grupe u sobu.",

@@ -68,6 +68,7 @@ import {
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
+import { PORTAL } from "@docspace/shared/constants";
 
 const minSearchValue = 2;
 
@@ -446,7 +447,7 @@ const InviteInput = ({
       </StyledSubHeader>
       <StyledDescription>
         {roomId === -1
-          ? t("AddManuallyDescriptionAccounts")
+          ? t("AddManuallyDescriptionAccounts", { portalName: PORTAL })
           : t("AddManuallyDescriptionRoom")}
       </StyledDescription>
       <StyledInviteLanguage>

@@ -1,6 +1,6 @@
 {
   "AddManually": "Əl ilə əlavə edin",
-  "AddManuallyDescriptionAccounts": "Yeni istifadəçiləri e-poçt vasitəsilə şəxsən DocSpace-ə dəvət edin",
+  "AddManuallyDescriptionAccounts": "Yeni istifadəçiləri e-poçt vasitəsilə şəxsən {{portalName}}-ə dəvət edin",
   "AddManuallyDescriptionRoom": "Mövcud DocSpace istifadəçilərini adlardan istifadə edərək otağa əlavə edin və ya yeni istifadəçiləri e-poçt vasitəsilə şəxsən dəvət edin",
   "EmailErrorMessage": "E-poçt ünvanı etibarlı deyil. Siz e-poçtu klikləməklə redaktə edə bilərsiniz.",
   "GroupMaxAvailableRoleWarning": "Qruplar maksimum mümkün rola malikdir: “{{role}}”. Otağa qrup əlavə etdikdən sonra hüquqları artıra bilərsiniz.",

@@ -34,7 +34,6 @@
   "AuditSubheader": "Tässä aliosiossa voit selata luetteloa viimeisimmistä muutoksista (luonti, muokkaus, poisto jne.), joita käyttäjät ovat tehneet DocSpacen entiteetehin (huoneet, mahdollisuudet, tiedostot jne).",
   "AuditTrailNav": "Tapahtumien seuranta",
   "AutoBackup": "Automaattinen varmuuskopiointi",
-  "AutoBackupDescription": "Automaattista varmuuskopiointia käytetään automatisoimaan DocSpacen tietojen varmuuskopiointiprosessi, jotta se voidaan palauttaa myöhemmin paikalliselle palvelimelle.",
   "AutoSavePeriod": "Automaattisen tallennuksen aika",
   "AutoSavePeriodHelp": "Alla näkyvä aika vastaa DocSpacessa asetettua aikavyöhykettä.",
   "Backup": "Varmuuskopio",

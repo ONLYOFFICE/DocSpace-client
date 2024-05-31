@@ -36,7 +36,7 @@
   "AuditSubheader": "A subseção permite navegar pela lista das últimas alterações (criação, modificação, exclusão etc.) feitas pelos usuários nas entidades (salas, oportunidades, arquivos etc.) em seu {{portalName}}.",
   "AuditTrailNav": "Trilha de auditoria",
   "AutoBackup": "Backup automático",
-  "AutoBackupDescription": "A opção Backup automático é usada para automatizar o processo de backup de dados do DocSpace para poder restaurá-los posteriormente em um servidor local.",
+  "AutoBackupDescription": "A opção Backup automático é usada para automatizar o processo de backup de dados do {{portalName}} para poder restaurá-los posteriormente em um servidor local.",
   "AutoSavePeriod": "Período de salvamento automático",
   "AutoSavePeriodHelp": "A hora exibida abaixo corresponde ao fuso horário definido no DocSpace.",
   "Backup": "Backup",

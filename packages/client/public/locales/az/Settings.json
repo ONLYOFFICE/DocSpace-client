@@ -36,7 +36,7 @@
   "AuditSubheader": "Alt bölmə sizə {{portalName}}-dəki (otaqlara, imkanlara, fayllara və s.) istifadəçilər tərəfindən edilən ən son dəyişikliklərin (yaradılması, dəyişdirilməsi, silinməsi və s.) siyahısını nəzərdən keçirməyə imkan verir.",
   "AuditTrailNav": "Audit izi",
   "AutoBackup": "Avtomatik ehtiyat nüsxəsi",
-  "AutoBackupDescription": "Avtomatik ehtiyat nüsxəsi seçimi DocSpace məlumatların ehtiyat nüsxələmə prosesini avtomatlaşdırmaq üçün istifadə olunur ki, sonra yerli serverə bərpa olunsun.",
+  "AutoBackupDescription": "Avtomatik ehtiyat nüsxəsi seçimi {{portalName}} məlumatların ehtiyat nüsxələmə prosesini avtomatlaşdırmaq üçün istifadə olunur ki, sonra yerli serverə bərpa olunsun.",
   "AutoSavePeriod": "Avtomatik yadda saxlama müddəti",
   "AutoSavePeriodHelp": "Aşağıda göstərilən vaxt DocSpace təyin olunmuş saat qurşağına uyğun gəlir.",
   "Backup": "Yedəkləmə",

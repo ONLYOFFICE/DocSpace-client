@@ -37,7 +37,7 @@
   "AuditSubheader": "The subsection allows you to browse through the list of the latest changes (creation, modification, deletion etc.) made by users to the entities (rooms, opportunities, files etc.) within your {{portalName}}.",
   "AuditTrailNav": "Audit Trail",
   "AutoBackup": "Automatic backup",
-  "AutoBackupDescription": "The Automatic backup option is used to automate the DocSpace data backup process to be able to restore it later to a local server.",
+  "AutoBackupDescription": "The Automatic backup option is used to automate the {{portalName}} data backup process to be able to restore it later to a local server.",
   "AutoSavePeriod": "Autosave period",
   "AutoSavePeriodHelp": "The time shown below corresponds to the time zone set in the DocSpace.",
   "Backup": "Backup",

@@ -32,7 +32,6 @@
   "Appearance": "外观",
   "AuditTrailNav": "审计追踪",
   "AutoBackup": "自动备份",
-  "AutoBackupDescription": "自动备份即自动执行协作空间的数据备份，以便之后能够将其恢复到本地服务器中。",
   "AutoSavePeriod": "自动保存期间",
   "AutoSavePeriodHelp": "下面显示的时间与门户中设置的时区一样。",
   "Backup": "备份",

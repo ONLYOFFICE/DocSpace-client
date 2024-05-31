@@ -28,7 +28,7 @@
   "ThirdPartyStorageDescription": "Trebuie să utilizaţi servicii terțe de stocare a datelor pentru această sală. Un nou dosar pentru stocarea datelor din această sală va fi creat în spaţiul de stocare conectat.",
   "ThirdPartyStorageNoStorageAlert": "Mai întâi, trebuie să vă conectați cu acest cont de stocare în secţiunea Integrare. Altfel, nu se va stabili o conexiune.",
   "ThirdPartyStoragePermanentSettingDescription": "Fişiere sunt stocate în spaţiul de stocare de la terțe{{thirdpartyTitle}} în folderul \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "Pentru a conecta un serviciu terț de stocare, trebuie să adăugaţi serviciul corespunzător în secţiunea Integrare din setările DocSpace. Contactaţi proprietarul sau administratorul DocSpace pentru a activa această integrare.",
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "Pentru a conecta un serviciu terț de stocare, trebuie să adăugaţi serviciul corespunzător în secţiunea Integrare din setările {{portalName}}. Contactaţi proprietarul sau administratorul {{portalName}} pentru a activa această integrare.",
   "ViewOnlyRoomDescription": "Partajați orice documente, rapoarte, documentaţie şi alte fişiere gata de folosire pentru vizualizare.",
   "ViewOnlyRoomTitle": "Sala doar în vizualizare"
 }

@@ -28,7 +28,7 @@
   "ThirdPartyStorageDescription": "Gebruik diensten van derden als gegevensopslag voor deze ruimte. Een nieuwe map voor het opslaan van de gegevens van deze kamer wordt aangemaakt in de aangesloten opslagruimte.",
   "ThirdPartyStorageNoStorageAlert": "Daarvoor moet u de betreffende dienst aansluiten in de sectie \"Integratie\". Anders is de verbinding niet mogelijk.",
   "ThirdPartyStoragePermanentSettingDescription": "Bestanden worden opgeslagen in een externe opslag {{thirdpartyTitle}} in de map \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "Om een externe opslag aan te sluiten, moet u de overeenkomstige dienst toevoegen in het gedeelte Integratie van de DocSpace instellingen. Neem contact op met de eigenaar of beheerder van DocSpace om de integratie in te schakelen.",
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "Om een externe opslag aan te sluiten, moet u de overeenkomstige dienst toevoegen in het gedeelte Integratie van de {{portalName}} instellingen. Neem contact op met de eigenaar of beheerder van {{portalName}} om de integratie in te schakelen.",
   "ViewOnlyRoomDescription": "Alle voorbereide documenten, rapporten, documentatie en andere bestanden ter inzage delen.",
   "ViewOnlyRoomTitle": "Alleen-kijken kamer"
 }

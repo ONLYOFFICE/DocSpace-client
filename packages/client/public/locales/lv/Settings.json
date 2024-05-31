@@ -207,7 +207,7 @@
   "RecoveryFileNotSelected": "Atkopšanas kļūda. Atkopšanas fails nav atlasīts.",
   "RestoreBackup": "Datu atjaunošana",
   "RestoreBackupDescription": "Izmantojiet šo iespēju, lai atjaunotu portālu no iepriekš noglabāta rezerves faila.",
-  "RestoreBackupResetInfoWarningText": "Visas pašreizējās paroles tiks atiestatītas. DocSpace lietotāji saņems e-pasta ziņojumu ar piekļuves atjaunošanas saiti.",
+  "RestoreBackupResetInfoWarningText": "Visas pašreizējās paroles tiks atiestatītas. {{portalName}} lietotāji saņems e-pasta ziņojumu ar piekļuves atjaunošanas saiti.",
   "RestoreBackupWarningText": "Atjaunošanas procesa laikā programma DocSpace kļūs nepieejama. Pēc atjaunošanas pabeigšanas visas izmaiņas, kas veiktas pēc atlasītā atjaunošanas punkta datuma, tiks zaudētas.",
   "RoomsModule": "Dublējuma telpa",
   "RoomsModuleDescription": "Jūs varat izveidot jaunu telpu tieši dublēšanai, izvēlēties vienu no esošajām telpām vai saglabāt kopiju savā {{roomName}} telpā.",

@@ -209,7 +209,7 @@
   "RecoveryFileNotSelected": "Oporavak greška. Datoteka za oporavak nije odabrana.",
   "RestoreBackup": "Povrati",
   "RestoreBackupDescription": "Koristi ovu opciju da povratiš svoj prostor od prethodno sačuvane rezervne kopije datoteke.",
-  "RestoreBackupResetInfoWarningText": "Sve trenutne lozinke će biti resetovane. DocSpace korisnici će dobiti email sa pristupom linku za obnovu.",
+  "RestoreBackupResetInfoWarningText": "Sve trenutne lozinke će biti resetovane. {{portalName}} korisnici će dobiti email sa pristupom linku za obnovu.",
   "RestoreBackupWarningText": "DocSpace će postati nedostupan tokom procesa obnavljanja. Nakon što je obnavljanje završeno, sve promene napravljene nakon datuma odabrane tačke obnavljanja će biti izgubljene.",
   "RoomsModule": "Soba za rezervne kopije",
   "RoomsModuleDescription": "Možete kreirati novu sobu posebno za rezervnu kopiju, izabrati jednu od postojećih soba ili sačuvati kopiju u njihovoj {{roomName}} sobi.",

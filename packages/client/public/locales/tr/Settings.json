@@ -208,7 +208,7 @@
   "RecoveryFileNotSelected": "Kurtarma hatası. Kurtarma dosyası seçilmedi.",
   "RestoreBackup": "Veri Geri Yükleme",
   "RestoreBackupDescription": "Alanda bulunan tüm verileri dosya olarak almak istiyorsanız bu seçeneği kullanın.",
-  "RestoreBackupResetInfoWarningText": "Mevcut tüm şifreler sıfırlanacaktır. DocSpace kullanıcıları erişimi geri yükleme bağlantısını içeren bir e-posta alacaktır.",
+  "RestoreBackupResetInfoWarningText": "Mevcut tüm şifreler sıfırlanacaktır. {{portalName}} kullanıcıları erişimi geri yükleme bağlantısını içeren bir e-posta alacaktır.",
   "RestoreBackupWarningText": "Geri yükleme işlemi sırasında DocSpace kullanılamaz hale gelecektir. Geri yükleme tamamlandıktan sonra, seçilen geri yükleme noktası tarihinden sonra yapılan tüm değişiklikler kaybolacaktır.",
   "RoomsModule": "Odayı yedekle",
   "RoomsModuleDescription": "Yedekleme için özel olarak yeni bir oda oluşturabilir, mevcut odalardan birini seçebilir veya kopyayı onların {{roomName}} odasına kaydedebilirsiniz.",

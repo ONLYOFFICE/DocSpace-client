@@ -207,7 +207,7 @@
   "RecoveryFileNotSelected": "Erreur de récupération. Fichier de récupération non sélectionné.",
   "RestoreBackup": "Restauration des données",
   "RestoreBackupDescription": "Utilisez cette option pour restaurer votre espace du fichier de sauvegarde enregistré précédemment.",
-  "RestoreBackupResetInfoWarningText": "Tous les mots de passe actuels seront réinitialisés. Les utilisateurs de DocSpace recevront un e-mail contenant le lien de restauration de l'accès.",
+  "RestoreBackupResetInfoWarningText": "Tous les mots de passe actuels seront réinitialisés. Les utilisateurs de {{portalName}} recevront un e-mail contenant le lien de restauration de l'accès.",
   "RestoreBackupWarningText": "DocSpace sera indisponible pendant le processus de restauration. Une fois la restauration terminée, toutes les modifications effectuées après la date du point de restauration sélectionné seront perdues.",
   "RoomsModule": "Salle de sauvegarde",
   "RoomsModuleDescription": "Vous pouvez créer une nouvelle salle spécialement pour la sauvegarde, choisir l’une des salles existantes ou enregistrer la copie dans la salle {{roomName}}.",

@@ -207,7 +207,7 @@
   "RecoveryFileNotSelected": "Bərpa xətası. Bərpa olunacaq fayl seçilməyib.",
   "RestoreBackup": "Məlumatların bərpası",
   "RestoreBackupDescription": "Sahənizi əvvəllər saxlanmış ehtiyat faylından bərpa etmək üçün bu seçimdən istifadə edin.",
-  "RestoreBackupResetInfoWarningText": "Bütün mövcud şifrələr sıfırlanacaq. DocSpace istifadəçiləri girişi bərpa etmək üçün keçidi olan e-məktub alacaqlar.",
+  "RestoreBackupResetInfoWarningText": "Bütün mövcud şifrələr sıfırlanacaq. {{portalName}} istifadəçiləri girişi bərpa etmək üçün keçidi olan e-məktub alacaqlar.",
   "RestoreBackupWarningText": "DocSpace bərpa prosesi zamanı yararsız olacaq. Bərpa tamamlandıqdan sonra seçilmiş bərpa nöqtəsinin tarixindən sonra edilən hər hansı dəyişikliklər itəcək.",
   "RoomsModule": "Ehtiyat otaq",
   "RoomsModuleDescription": "Yedəkləmə üçün xüsusi olaraq yeni otaq yarada, mövcud otaqlardan birini seçə və ya nüsxəni onların {{roomName}} otağında saxlaya bilərsiniz.",

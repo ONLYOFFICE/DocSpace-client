@@ -211,7 +211,7 @@
   "RecoveryFileNotSelected": "Recovery error. Recovery file not selected.",
   "RestoreBackup": "Restore",
   "RestoreBackupDescription": "Use this option to restore your space from the previously saved backup file.",
-  "RestoreBackupResetInfoWarningText": "All current passwords will be reset. DocSpace users will get an email with the access restoration link.",
+  "RestoreBackupResetInfoWarningText": "All current passwords will be reset. {{portalName}} users will get an email with the access restoration link.",
   "RestoreBackupWarningText": "DocSpace will become unavailable during the restore process. After the restore is complete all the changes made after the date of the selected restore point will be lost.",
   "RolesAreSet": "Roles already set for the selected users.",
   "RoomsModule": "Backup room",

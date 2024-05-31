@@ -205,7 +205,7 @@
   "RecoveryFileNotSelected": "Herstelfout. Herstelbestand niet geselecteerd.",
   "RestoreBackup": "Dataherstel",
   "RestoreBackupDescription": "Gebruik deze optie om uw ruimte te herstellen vanaf het voorgaande opgeslagen back-up bestand.",
-  "RestoreBackupResetInfoWarningText": "Alle huidige wachtwoorden worden gereset. DocSpace gebruikers ontvangen een e-mail met de link voor het herstellen van de toegang.",
+  "RestoreBackupResetInfoWarningText": "Alle huidige wachtwoorden worden gereset. {{portalName}} gebruikers ontvangen een e-mail met de link voor het herstellen van de toegang.",
   "RestoreBackupWarningText": "DocSpace zal tijdens het herstelproces onbeschikbaar worden. Nadat het herstel is afgerond, gaan alle wijzigingen verloren die na de datum van het geselecteerde herstelpunt zijn aangebracht.",
   "RoomsModule": "Backup kamer",
   "RoomsModuleDescription": "U kunt een nieuwe kamer aanmaken speciaal voor de back-up, een van de bestaande kamers kiezen, of de kopie opslaan in hun {{roomName}} kamer.",

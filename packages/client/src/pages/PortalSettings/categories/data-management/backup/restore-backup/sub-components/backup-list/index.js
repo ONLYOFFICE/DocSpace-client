@@ -50,6 +50,7 @@ import { StyledBackupList } from "../../../StyledBackup";
 import BackupListBody from "./BackupListBody";
 import { TenantStatus } from "@docspace/shared/enums";
 import styled from "styled-components";
+import { PORTAL } from "@docspace/shared/constants";
 
 const StyledModalDialog = styled(ModalDialog)`
   .restore_footer {
@@ -212,7 +213,7 @@ const BackupListModalDialog = (props) => {
         {t("RestoreBackupWarningText")}{" "}
         {!standalone && (
           <Text as="span" className="restore-backup_warning-link">
-            {t("RestoreBackupResetInfoWarningText")}
+            {t("RestoreBackupResetInfoWarningText", { portalName: PORTAL })}
           </Text>
         )}
       </Text>

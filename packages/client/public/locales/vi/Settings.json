@@ -207,7 +207,7 @@
   "RecoveryFileNotSelected": "Lỗi khôi phục. Tập tin khôi phục không được chọn.",
   "RestoreBackup": "Khôi phục dữ liệu",
   "RestoreBackupDescription": "Sử dụng tùy chọn này để khôi phục lại không gian của bạn từ tập tin đã sao lưu trước đó.",
-  "RestoreBackupResetInfoWarningText": "Tất cả mật khẩu hiện tại sẽ được đặt lại. Người dùng DocSpace sẽ nhận được một email có liên kết khôi phục quyền truy cập.",
+  "RestoreBackupResetInfoWarningText": "Tất cả mật khẩu hiện tại sẽ được đặt lại. Người dùng {{portalName}} sẽ nhận được một email có liên kết khôi phục quyền truy cập.",
   "RestoreBackupWarningText": "DocSpace sẽ không khả dụng trong quá trình khôi phục. Sau khi việc khôi phục hoàn tất, tất cả các thay đổi được thực hiện sau ngày của điểm khôi phục đã chọn sẽ bị mất.",
   "RoomsModule": "Phòng dự phòng",
   "RoomsModuleDescription": "Bạn có thể tạo một phòng mới chuyên dùng để sao lưu, chọn một trong các phòng hiện có hoặc lưu bản sao trong phòng {{roomName}} của họ.",

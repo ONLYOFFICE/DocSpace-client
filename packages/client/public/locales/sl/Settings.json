@@ -205,7 +205,7 @@
   "RecoveryFileNotSelected": "Napaka pri obnovitvi. Datoteka za obnovitev ni izbrana.",
   "RestoreBackup": "Obnovitev podatkov",
   "RestoreBackupDescription": "S to opcijo obnovite svoj prostor iz predhodno shranjene varnostne kopije.",
-  "RestoreBackupResetInfoWarningText": "Vsa trenutna gesla bodo ponastavljena. Uporabniki DocSpace bodo prejeli e-pošto s povezavo za obnovitev dostopa.",
+  "RestoreBackupResetInfoWarningText": "Vsa trenutna gesla bodo ponastavljena. Uporabniki {{portalName}} bodo prejeli e-pošto s povezavo za obnovitev dostopa.",
   "RestoreBackupWarningText": "DocSpace med postopkom obnovitve ne bo več na voljo. Ko bo obnovitev končana, bodo izgubljene vse spremembe po datumu izbrane obnovitvene točke.",
   "RoomsModule": "Varnostno kopiranje sobe",
   "RoomsModuleDescription": "Ustvarite lahko novo sobo posebej za varnostno kopijo, izberete eno od obstoječih sob ali shranite kopijo v njihovo {{roomName}} sobo.",

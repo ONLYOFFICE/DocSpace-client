@@ -208,7 +208,7 @@
   "RecoveryFileNotSelected": "Vyskytla sa chyba. Nie je vybratý zálohový súbor.",
   "RestoreBackup": "Obnova dát",
   "RestoreBackupDescription": "Túto možnosť použite na obnovenie Vášho priestoru z predtým uloženého záložného súboru.",
-  "RestoreBackupResetInfoWarningText": "Všetky aktuálne heslá sa resetujú. Používatelia DocSpace dostanú e-mail s odkazom na obnovenie prístupu.",
+  "RestoreBackupResetInfoWarningText": "Všetky aktuálne heslá sa resetujú. Používatelia {{portalName}} dostanú e-mail s odkazom na obnovenie prístupu.",
   "RestoreBackupWarningText": "DocSpace bude počas procesu obnovenia nedostupný. Po dokončení obnovenia budú všetky zmeny vykonané po dátume zvoleného bodu obnovenia stratené.",
   "RoomsModule": "Zálohovať miestnosť",
   "RoomsModuleDescription": "Môžete vytvoriť novú miestnosť špeciálne na zálohovanie, vybrať jednu z existujúcich miestností alebo uložiť kópiu do svojej miestnosti {{roomName}}.",

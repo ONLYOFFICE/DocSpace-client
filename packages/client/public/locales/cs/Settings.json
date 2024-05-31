@@ -208,7 +208,7 @@
   "RecoveryFileNotSelected": "Chyba při obnově. Soubor pro obnovení nebyl vybrán.",
   "RestoreBackup": "Obnova dat",
   "RestoreBackupDescription": "Použijte tuto možnost pro obnovu Vašeho prostoru z předchozího souboru obnovy.",
-  "RestoreBackupResetInfoWarningText": "Všechna stávající hesla budou resetována. Uživatelé DocSpace obdrží e-mail s odkazem na obnovení přístupu.",
+  "RestoreBackupResetInfoWarningText": "Všechna stávající hesla budou resetována. Uživatelé {{portalName}} obdrží e-mail s odkazem na obnovení přístupu.",
   "RestoreBackupWarningText": "Prostor DocSpace bude během procesu obnovy nedostupný. Po dokončení obnovy budou všechny změny provedené po datu vybraného bodu obnovy ztraceny.",
   "RoomsModule": "Záložní místnost",
   "RoomsModuleDescription": "Můžete vytvořit novou místnost speciálně pro zálohu, vybrat jednu z existujících místností nebo uložit kopii do jejich místnosti {{roomName}}.",

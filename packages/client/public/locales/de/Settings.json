@@ -208,7 +208,7 @@
   "RecoveryFileNotSelected": "Fehler bei der Wiederherstellung. Datei zur Wiederherstellung nicht ausgewählt.",
   "RestoreBackup": "Datenwiederherstellung",
   "RestoreBackupDescription": "Nutzen Sie diese Option, um Ihr Bereich aus der vorher gespeicherten Sicherungsdatei wiederherzustellen.",
-  "RestoreBackupResetInfoWarningText": "Alle aktuellen Passwörter werden zurückgesetzt. DocSpace-Benutzer erhalten eine E-Mail mit dem Link zur Wiederherstellung des Zugangs.",
+  "RestoreBackupResetInfoWarningText": "Alle aktuellen Passwörter werden zurückgesetzt. {{portalName}}-Benutzer erhalten eine E-Mail mit dem Link zur Wiederherstellung des Zugangs.",
   "RestoreBackupWarningText": "Während der Wiederherstellung wird DocSpace nicht verfügbar sein. Nach Abschluss der Wiederherstellung gehen alle Änderungen verloren, die nach dem Datum des ausgewählten Wiederherstellungspunktes vorgenommen wurden.",
   "RoomsModule": "Ersatzraum",
   "RoomsModuleDescription": "Sie können einen neuen Raum speziell für die Sicherung erstellen, einen der vorhandenen Räume wählen oder die Kopie in ihrem {{roomName}}-Raum speichern.",

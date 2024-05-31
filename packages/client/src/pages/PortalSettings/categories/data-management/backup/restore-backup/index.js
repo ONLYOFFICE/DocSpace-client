@@ -47,6 +47,7 @@ import RoomsModule from "./sub-components/RoomsModule";
 import ButtonContainer from "./sub-components/ButtonComponent";
 import { StyledRestoreBackup } from "../StyledBackup";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { PORTAL } from "@docspace/shared/constants";
 
 const LOCAL_FILE = "localFile",
   BACKUP_ROOM = "backupRoom",
@@ -222,7 +223,7 @@ const RestoreBackup = (props) => {
           className="restore-backup_warning-link settings_unavailable"
           noSelect
         >
-          {t("RestoreBackupResetInfoWarningText")}
+          {t("RestoreBackupResetInfoWarningText", { portalName: PORTAL })}
         </Text>
       )}
     </>

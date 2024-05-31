@@ -182,7 +182,6 @@
   "RecoveryFileNotSelected": "恢复错误。未选择恢复文件",
   "RestoreBackup": "数据恢复",
   "RestoreBackupDescription": "设置此选项，从之前保存的备份文件中恢复门户数据。",
-  "RestoreBackupResetInfoWarningText": "当前所有密码都会被重置。协作空间用户将收到一封包含访问还原链接的电子邮件。",
   "RestoreBackupWarningText": "协作空间在还原过程中不可用。还原完成后，在选定的还原点日期之后所做的所有更改都将丢失。",
   "RoomsModule": "备份房间",
   "RoomsModuleDescription": "您可以为备份专门创建一个房间、选择现有房间、或者将副本保存在{{roomName}}中。",

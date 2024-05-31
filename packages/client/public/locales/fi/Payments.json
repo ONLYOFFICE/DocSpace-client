@@ -1,6 +1,5 @@
 {
   "AccessingProblem": "Jos olet olemassaoleva käytttäjä ja sinulla on ongelmia tilaan pääsyn suhteen, ota yhteys järjestelmänvalvojaan.",
-  "AdministratorDescription": "{{portalName}}-kokoonpano, huoneen luominen ja hallinta, kyky kutsua ja hallita käyttäjiä DocSpacessa ja virtuaalisissa huoneissa, kyky hallita käyttöoikeuksia.",
   "Benefits": "Edut",
   "BusinessExpired": "{{planName}} on vanhentunut {{date}}",
   "BusinessFinalDateInfo": "Tilaus uusitaan automaattisesti {{finalDate}} päivitetyllä hinnalla ja teknisillä tiedoilla. Voit peruuttaa sen tai vaihtaa maksutietojasi Stripe-asiakasportaalissa.",

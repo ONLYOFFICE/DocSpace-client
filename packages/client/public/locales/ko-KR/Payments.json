@@ -1,6 +1,6 @@
 {
   "AccessingProblem": "기존 사용자인데 이 스페이스에 액세스하는 데 문제가 있는 경우 관리자에게 문의하시기 바랍니다.",
-  "AdministratorDescription": "DocSpace 구성, 방 생성 및 관리, {{portalName}} 및 가상 방에서 사용자를 초대하고 관리하는 기능, 액세스 권한을 관리하는 기능.",
+  "AdministratorDescription": "{{portalName}} 구성, 방 생성 및 관리, {{portalName}} 및 가상 방에서 사용자를 초대하고 관리하는 기능, 액세스 권한을 관리하는 기능.",
   "Benefits": "혜택",
   "BusinessExpired": "{{planName}} 요금제가 {{date}}에 만료됩니다",
   "BusinessFinalDateInfo": "구독이 {{finalDate}}에 업데이트된 요금 및 사양으로 자동 갱신됩니다. Stripe 고객 포털에서 취소하거나 청구 정보를 변경할 수 있습니다.",

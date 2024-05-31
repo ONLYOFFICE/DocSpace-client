@@ -19,7 +19,7 @@
   "GracePeriodActivatedInfo": "ໄລຍະເວລາຜ່ອນຜັນມີຜົນ <1>ຈາກ {{fromDate}} ຫາ {{byDate}}</1> (ມື້ທີ່ຍັງເຫຼືອ: {{delayDaysCount}}).",
   "InvalidEmailWithActiveSubscription": "ການສະໝັກໃຊ້ຂອງທ່ານຍັງຄົງມີຢູ່, ແຕ່ພວກເຮົາແນະນຳໃຫ້ເລືອກຜູ້ຈ່າຍເງິນໃໝ່ທີ່ເຂົ້າເຖິງການຕັ້ງຄ່າການສະໝັກໃຊ້ໃນ {{portalName}} .",
   "InvalidEmailWithActiveSubscriptionForAdmin": "ການສະໝັກໃຊ້ຂອງທ່ານຍັງຄົງມີຢູ່, ແຕ່ພວກເຮົາແນະນຳໃຫ້ຕິດຕໍ່ ເຈົ້າຂອງ {{portalName}} ເພື່ອເລືອກຜູ້ຈ່າຍເງິນໃໝ່.",
-  "InvalidEmailWithoutActiveSubscription": "ພວກເຮົາແນະນຳໃຫ້ເລືອກຜູ້ຈ່າຍເງິນໃໝ່ທີ່ເຂົ້າເຖິງການຕັ້ງຄ່າການສະໝັກໃຊ້ໃນ DocSpace.",
+  "InvalidEmailWithoutActiveSubscription": "ພວກເຮົາແນະນຳໃຫ້ເລືອກຜູ້ຈ່າຍເງິນໃໝ່ທີ່ເຂົ້າເຖິງການຕັ້ງຄ່າການສະໝັກໃຊ້ໃນ {{portalName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "ພວກເຮົາແນະນຳໃຫ້ຕິດຕໍ່ ເຈົ້າຂອງ {{portalName}} ເພື່ອເລືອກຜູ້ຈ່າຍເງິນໃໝ່.",
   "ManagerTypesDescription": "ປະເພດບັນຊີຜູ້ເບິ່ງແຍງລະບົບ ແລະສິດທິພິເສດຂອງເຂົາເຈົ້າ",
   "Pay": "ຈ່າຍ",

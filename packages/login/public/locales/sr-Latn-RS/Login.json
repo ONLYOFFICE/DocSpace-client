@@ -20,5 +20,5 @@
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "Podrazumevano trajanje sesije je 20 minuta. Označite ovu opciju da biste je postavili na 1 godinu. Da biste podesili sopstvenu vrednost, idite na Podešavanja.",
   "ResendCode": "Pošalji ponovo kod",
-  "UserIsAlreadyRegistered": "Korisnik <1>{{email}}</1> je već registrovan u ovom DocSpace-u, unesite svoju lozinku ili se vratite da biste nastavili sa drugim email-om."
+  "UserIsAlreadyRegistered": "Korisnik <1>{{email}}</1> je već registrovan u ovom {{portalName}}-u, unesite svoju lozinku ili se vratite da biste nastavili sa drugim email-om."
 }

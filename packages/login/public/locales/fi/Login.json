@@ -19,6 +19,5 @@
   "RegisterTitle": "Rekisteröintipyyntö",
   "RegistrationEmailWatermark": "sähköposti",
   "RememberHelper": "Istunnon oletuskesto on 20 minuuttia. Valitse tämä vaihtoehto, jos haluat asettaa sen 1 vuodeksi. Voit asettaa oman arvon Asetuksissa.",
-  "ResendCode": "Lähetä koodi uudelleen",
-  "UserIsAlreadyRegistered": "Käyttäjä <1>{{email}}</1> on jo rekisteröity tähän DocSpaceen, syötä salasanasi tai mene takaisin jatkaaksesi toisella sähköpostilla."
+  "ResendCode": "Lähetä koodi uudelleen"
 }

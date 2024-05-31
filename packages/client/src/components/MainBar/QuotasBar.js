@@ -79,7 +79,11 @@ const QuotasBar = ({
         return {
           header: t("RoomQuotaHeader", { currentValue, maxValue }),
           description: (
-            <Trans i18nKey="RoomQuotaDescription" t={t} portalName={PORTAL}>
+            <Trans
+              i18nKey="RoomQuotaDescription"
+              t={t}
+              values={{ portalName: PORTAL }}
+            >
               You can archived the unnecessary rooms or
               <Link
                 fontSize="12px"

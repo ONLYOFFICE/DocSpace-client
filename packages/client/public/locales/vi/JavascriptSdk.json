@@ -33,7 +33,7 @@
   "DefaultColumnsOption": "Mặc định (Số lượng phụ thuộc vào chiều rộng màn hình)",
   "Descending": "Giảm dần",
   "DisplayColumns": "Hiển thị các cột trong một hàng tập tin",
-  "DocspaceDescription": "Nhúng toàn bộ DocSpace để cho phép người dùng tương tác với tất cả các phòng, tập tin và cài đặt.",
+  "DocspaceDescription": "Nhúng toàn bộ {{portalName}} để cho phép người dùng tương tác với tất cả các phòng, tập tin và cài đặt.",
   "EditorDescription": "Nhúng trình chỉnh sửa để cho phép người dùng chỉnh sửa tập tin từ phòng tương ứng.",
   "ElementCalledAfterClicking": "Phần tử sẽ được gọi sau khi nhấp vào",
   "ElementItself": "Bản thân yếu tố",

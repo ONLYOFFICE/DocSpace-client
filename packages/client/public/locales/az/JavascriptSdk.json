@@ -33,7 +33,7 @@
   "DefaultColumnsOption": "Defolt (Say ekranın genişliyindən asılıdır)",
   "Descending": "Azalan",
   "DisplayColumns": "Fayl sətirində sütunların göstərilməsi",
-  "DocspaceDescription": "İstifadəçilərə bütün otaq, fayl və parametrlərlə qarşılıqlı əlaqə yaratmaq üçün bütün DocSpace-i daxil edin.",
+  "DocspaceDescription": "İstifadəçilərə bütün otaq, fayl və parametrlərlə qarşılıqlı əlaqə yaratmaq üçün bütün {{portalName}}-i daxil edin.",
   "EditorDescription": "İstifadəçilərə həmin otaqdan faylı redaktə etmək üçün redaktor əlavə edin.",
   "ElementCalledAfterClicking": "Element kliklədikdən sonra adlandırılacaq",
   "ElementItself": "Elementin özü",

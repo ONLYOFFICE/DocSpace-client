@@ -33,7 +33,7 @@
   "DefaultColumnsOption": "Noklusējums (daudzums ir atkarīgs no ekrāna platuma)",
   "Descending": "Dilstoši",
   "DisplayColumns": "Kolonnu parādīšana faila rindā",
-  "DocspaceDescription": "Ieguliet visu DocSpace, lai ļautu lietotājiem mijiedarboties ar visām telpām, failiem un iestatījumiem.",
+  "DocspaceDescription": "Ieguliet visu {{portalName}}, lai ļautu lietotājiem mijiedarboties ar visām telpām, failiem un iestatījumiem.",
   "EditorDescription": "Iegult redaktoru, lai ļautu lietotājiem rediģēt failu no attiecīgās telpas.",
   "ElementCalledAfterClicking": "Elements tiks izsaukts pēc noklikšķināšanas",
   "ElementItself": "Pats elements",

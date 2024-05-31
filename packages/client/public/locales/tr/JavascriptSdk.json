@@ -33,7 +33,7 @@
   "DefaultColumnsOption": "Varsayılan (Miktar ekran genişliğine bağlıdır)",
   "Descending": "Azalan",
   "DisplayColumns": "Bir dosya satırındaki sütunları görüntüleme",
-  "DocspaceDescription": "Kullanıcıların tüm odalar, dosyalar ve ayarlarla etkileşime girmesini sağlamak için tüm DocSpace’i gömün.",
+  "DocspaceDescription": "Kullanıcıların tüm odalar, dosyalar ve ayarlarla etkileşime girmesini sağlamak için tüm {{portalName}}’i gömün.",
   "EditorDescription": "Kullanıcıların ilgili odadan bir dosyayı düzenlemelerine izin vermek için bir düzenleyici yerleştirin.",
   "ElementCalledAfterClicking": "Öğe şu öğeye tıklandıktan sonra çağrılacaktır",
   "ElementItself": "Öğenin kendisi",

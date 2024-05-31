@@ -144,7 +144,7 @@ const PortalIntegration = (props) => {
   const presetsData = [
     {
       title: DOCSPACE,
-      description: t("DocspaceDescription"),
+      description: t("DocspaceDescription", { portalName: PORTAL }),
       image: theme.isBase ? DocspaceImg : DocspaceImgDark,
       handleOnClick: navigateToDocspace,
     },

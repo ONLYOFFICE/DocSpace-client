@@ -33,7 +33,7 @@
   "DefaultColumnsOption": "Standard (Anzahl hängt von der Bildschirmbreite ab)",
   "Descending": "Absteigend",
   "DisplayColumns": "Spalten in einer Dateizeile anzeigen",
-  "DocspaceDescription": "Betten Sie den gesamten DocSpace ein, um Benutzern die Interaktion mit allen Räumen, Dateien und Einstellungen zu ermöglichen.",
+  "DocspaceDescription": "Betten Sie den gesamten {{portalName}} ein, um Benutzern die Interaktion mit allen Räumen, Dateien und Einstellungen zu ermöglichen.",
   "EditorDescription": "Betten Sie einen Editor ein, damit Benutzer eine Datei im entsprechenden Raum bearbeiten können.",
   "ElementCalledAfterClicking": "Das Element wird nach dem Anklicken aufgerufen",
   "ElementItself": "Das Element selbst",

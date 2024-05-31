@@ -33,7 +33,7 @@
   "DefaultColumnsOption": "Par défaut (la quantité dépend de la largeur de l'écran)",
   "Descending": "Décroissant",
   "DisplayColumns": "Affichage des colonnes dans une ligne de fichier",
-  "DocspaceDescription": "Intégrez l'ensemble de DocSpace pour permettre aux utilisateurs d'interagir avec toutes les salles, tous les fichiers et tous les paramètres.",
+  "DocspaceDescription": "Intégrez l'ensemble de {{portalName}} pour permettre aux utilisateurs d'interagir avec toutes les salles, tous les fichiers et tous les paramètres.",
   "EditorDescription": "Intégrez l'éditeur pour permettre aux utilisateurs de modifier un fichier à partir d'une salle.",
   "ElementCalledAfterClicking": "Appel de l'élément est déclenché au clic",
   "ElementItself": "L'élément lui-même",

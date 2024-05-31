@@ -27,7 +27,6 @@
   "DefaultColumnsOption": "默认（数量取决于屏幕宽度）",
   "Descending": "降序",
   "DisplayColumns": "显示文件行中的列",
-  "DocspaceDescription": "嵌入整个协作空间，让用户能够与所有房间、文件和设置进行交互。",
   "EditorDescription": "嵌入编辑器，让用户能够从对应的房间编辑文件。",
   "ElementCalledAfterClicking": "点击后元素会被调用",
   "ElementItself": "元素本身",

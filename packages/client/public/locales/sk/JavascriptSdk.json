@@ -33,7 +33,7 @@
   "DefaultColumnsOption": "Predvolené (množstvo závisí od šírky obrazovky)",
   "Descending": "Zostupne",
   "DisplayColumns": "Zobrazenie stĺpcov v riadku súboru",
-  "DocspaceDescription": "Vložte celý priestor DocSpace, aby ste používateľom umožnili pracovať so všetkými miestnosťami, súbormi a nastaveniami.",
+  "DocspaceDescription": "Vložte celý priestor {{portalName}}, aby ste používateľom umožnili pracovať so všetkými miestnosťami, súbormi a nastaveniami.",
   "EditorDescription": "Vložte editor, aby ste používateľom umožnili upravovať súbor z príslušnej miestnosti.",
   "ElementCalledAfterClicking": "Prvok bude vyvolaný po kliknutí",
   "ElementItself": "Samotný prvok",

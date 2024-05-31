@@ -33,7 +33,7 @@
   "DefaultColumnsOption": "Výchozí (množství závisí na šířce obrazovky)",
   "Descending": "Sestupně",
   "DisplayColumns": "Zobrazení sloupců v řádku souboru",
-  "DocspaceDescription": "Vložte celý DocSpace, aby uživatelé mohli pracovat se všemi místnostmi, soubory a nastaveními.",
+  "DocspaceDescription": "Vložte celý {{portalName}}, aby uživatelé mohli pracovat se všemi místnostmi, soubory a nastaveními.",
   "EditorDescription": "Vložení editoru, který uživatelům umožní upravovat soubor z příslušné místnosti.",
   "ElementCalledAfterClicking": "Prvek bude vyvolán po kliknutí",
   "ElementItself": "Samotný prvek",

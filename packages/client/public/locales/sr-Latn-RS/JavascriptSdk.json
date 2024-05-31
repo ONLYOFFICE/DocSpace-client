@@ -33,7 +33,7 @@
   "DefaultColumnsOption": "Podrazumevano (količina zavisi od širine ekrana)",
   "Descending": "Silazno",
   "DisplayColumns": "Prikazivanje kolona u redu datoteke",
-  "DocspaceDescription": "Ugradite ceo DocSpace da biste omogućili korisnicima interakciju sa svim sobama, datotekama i podešavanjima.",
+  "DocspaceDescription": "Ugradite ceo {{portalName}} da biste omogućili korisnicima interakciju sa svim sobama, datotekama i podešavanjima.",
   "EditorDescription": "Ugradite uređivač da biste omogućili korisnicima da uređuju datoteku iz odgovarajuće sobe.",
   "ElementCalledAfterClicking": "Element će biti pozvan nakon klika",
   "ElementItself": "Sam element",

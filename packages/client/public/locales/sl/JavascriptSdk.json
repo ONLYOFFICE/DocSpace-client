@@ -33,7 +33,7 @@
   "DefaultColumnsOption": "Privzeto (količina je odvisna od širine zaslona)",
   "Descending": "Padajoče",
   "DisplayColumns": "Prikaz stolpcev v vrstici datoteke",
-  "DocspaceDescription": "Vdelajte celoten prostor DocSpace, da uporabnikom omogočite interakcijo z vsemi sobami, datotekami in nastavitvami.",
+  "DocspaceDescription": "Vdelajte celoten prostor {{portalName}}, da uporabnikom omogočite interakcijo z vsemi sobami, datotekami in nastavitvami.",
   "EditorDescription": "Vdelajte urejevalnik, da uporabnikom omogočite urejanje datoteke iz ustrezne sobe.",
   "ElementCalledAfterClicking": "Element bo priklican po kliku",
   "ElementItself": "Sam element",

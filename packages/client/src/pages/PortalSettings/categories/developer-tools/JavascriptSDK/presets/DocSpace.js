@@ -114,7 +114,7 @@ const DocSpace = (props) => {
 
   return (
     <PresetWrapper
-      description={t("DocspaceDescription")}
+      description={t("DocspaceDescription", { portalName: PORTAL })}
       header={t("CreateSampleDocspace", { portalName: PORTAL })}
     >
       <Container>

@@ -69,12 +69,21 @@ const InvalidError = ({ match }: InvalidErrorProps) => {
   return (
     <ErrorContainer headerText={errorTitle}>
       <Text fontSize="13px" fontWeight="600">
-        <Trans t={t} i18nKey="ErrorInvalidText" portalName={PORTAL}>
-          In 10 seconds you will be redirected to the
-          <Link className="error_description_link" href={proxyHomepageUrl}>
-            {{ portalName: PORTAL }}
-          </Link>
-        </Trans>
+        <Trans
+          t={t}
+          i18nKey="ErrorInvalidText"
+          values={{
+            portalName: PORTAL,
+          }}
+          components={{
+            1: (
+              <Link
+                className="error_description_link"
+                href={proxyHomepageUrl}
+              />
+            ),
+          }}
+        />
       </Text>
     </ErrorContainer>
   );

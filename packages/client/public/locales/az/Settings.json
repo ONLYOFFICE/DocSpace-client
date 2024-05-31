@@ -13,7 +13,7 @@
   "AddEmailsDescription": "ONLYOFFICE {{portalName}}-ə idxal etmək üçün idxal olunmayan istifadəçilərin siyahısını yoxlayın.",
   "AddEmailsWarning": "E-poçtu olan heç bir istifadəçiniz yoxdur. Onları əlavə etmək üçün növbəti addıma davam edin.",
   "AdditionalResources": "Əlavə resurslar",
-  "AdditionalResourcesDescription": "DocSpace menyusunda əlavə resurslara keçidlərin göstərilib-göstərilməməsini seçin.",
+  "AdditionalResourcesDescription": "{{portalName}} menyusunda əlavə resurslara keçidlərin göstərilib-göstərilməməsini seçin.",
   "AdditionalResourcesSubtitle": "İstifadəçiləriniz üçün faydalı resurslara keçidlərin görünüşünü konfiqurasiya edin.",
   "AddTrustedDomain": "İnanılmış domen əlavə et",
   "Admins": "Adminlər",

@@ -13,7 +13,7 @@
   "AddEmailsDescription": "Kiểm tra danh sách người dùng chưa nhập để nhập vào ONLYOFFICE {{portalName}}.",
   "AddEmailsWarning": "Bạn không có người dùng có email. Vui lòng chuyển sang bước tiếp theo để thêm chúng.",
   "AdditionalResources": "Nguồn Thông tin Bổ sung",
-  "AdditionalResourcesDescription": "Chọn xem bạn có muốn hiển thị liên kết đến các tài nguyên bổ sung trong menu DocSpace hay không.",
+  "AdditionalResourcesDescription": "Chọn xem bạn có muốn hiển thị liên kết đến các tài nguyên bổ sung trong menu {{portalName}} hay không.",
   "AdditionalResourcesSubtitle": "Định cấu hình hiển thị các liên kết đến các tài nguyên hữu ích cho người dùng của bạn.",
   "AddTrustedDomain": "Thêm tên miền được tin cậy",
   "Admins": "Quản trị viên",

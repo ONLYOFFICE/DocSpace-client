@@ -13,7 +13,7 @@
   "AddEmailsDescription": "Vérifier la liste des utilisateurs  non importés à importer vers  {{portalName}}.",
   "AddEmailsWarning": "Il n'y a aucun utilisateur avec l'adresse e-mail.  Veuillez passer à l'étape suivante pour les ajouter.",
   "AdditionalResources": "Ressources supplémentaires",
-  "AdditionalResourcesDescription": "Indiquez si vous souhaitez afficher des liens vers des ressources supplémentaires dans le menu de DocSpace.",
+  "AdditionalResourcesDescription": "Indiquez si vous souhaitez afficher des liens vers des ressources supplémentaires dans le menu de {{portalName}}.",
   "AdditionalResourcesSubtitle": "Configurez l'affichage de liens vers des ressources utiles pour vos utilisateurs.",
   "AddTrustedDomain": "Ajouter domaine autorisé",
   "Admins": "Administrateurs",

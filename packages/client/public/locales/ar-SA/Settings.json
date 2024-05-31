@@ -13,7 +13,7 @@
   "AddEmailsDescription": "تحقق من قائمة المستخدمين غير المستوردة لاستيرادها إلى ONLYOFFICE {{portalName}}.",
   "AddEmailsWarning": "ليس لديك مستخدمين لديهم بريد إلكتروني. يرجى المتابعة إلى الخطوة التالية لإضافتهم.",
   "AdditionalResources": "مصادر إضافية",
-  "AdditionalResourcesDescription": "اختر ما إذا كنت تريد عرض ارتباطات لمصادر إضافية في قائمة DocSpace.",
+  "AdditionalResourcesDescription": "اختر ما إذا كنت تريد عرض ارتباطات لمصادر إضافية في قائمة {{portalName}}.",
   "AdditionalResourcesSubtitle": "قم بتهيئة عرض الرابط للحصول على موارد أفضل للمستخدمين لديك.",
   "AddTrustedDomain": "إضافة مجال موثوق به",
   "Admins": "المشرفون",

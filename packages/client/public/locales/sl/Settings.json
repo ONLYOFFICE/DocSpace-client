@@ -13,7 +13,7 @@
   "AddEmailsDescription": "Preverite seznam neuvoženih uporabnikov za uvoz v ONLYOFFICE {{portalName}}.",
   "AddEmailsWarning": "Nimate uporabnikov z e-maili. Nadaljujte z naslednjim korakom, da jih dodate.",
   "AdditionalResources": "Dodatni viri",
-  "AdditionalResourcesDescription": "Izberi, če želiš prikazati povezave do dodatnih virov v meniju DocSpace.",
+  "AdditionalResourcesDescription": "Izberi, če želiš prikazati povezave do dodatnih virov v meniju {{portalName}}.",
   "AdditionalResourcesSubtitle": "Konfigurirajte prikaz povezav do koristnih virov za vaše uporabnike.",
   "AddTrustedDomain": "Dodaj zaupanja vredno domeno",
   "Admins": "Administratorji",

@@ -13,7 +13,7 @@
   "AddEmailsDescription": "Controleer de lijst met niet-geïmporteerde gebruikers om te importeren in ONLYOFFICE {{portalName}}.",
   "AddEmailsWarning": "U heeft geen gebruikers met e-mails. Ga door naar de volgende stap om ze toe te voegen.",
   "AdditionalResources": "Aanvullende bronnen",
-  "AdditionalResourcesDescription": "Kies of u links naar aanvullende bronnen wilt weergeven in het DocSpace menu.",
+  "AdditionalResourcesDescription": "Kies of u links naar aanvullende bronnen wilt weergeven in het {{portalName}} menu.",
   "AdditionalResourcesSubtitle": "Configureer de weergave van links naar nuttige bronnen voor uw gebruikers.",
   "AddTrustedDomain": "Voeg vertrouwd domein toe",
   "Admins": "Beheerders",

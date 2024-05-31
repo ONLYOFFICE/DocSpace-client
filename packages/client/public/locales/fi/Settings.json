@@ -12,7 +12,7 @@
   "AddEmails": "Lisää sähköpostit keskeneräisille tileille",
   "AddEmailsWarning": "Sinulla ei ole käyttäjiä, joilla on sähköpostit. Ole hyvä ja jatka seuraavaan vaiheeseen lisätäksesi ne.",
   "AdditionalResources": "Lisäresurssit",
-  "AdditionalResourcesDescription": "Valitse haluatko näyttää linkit lisäresursseihin DocSpace-menussa.",
+  "AdditionalResourcesDescription": "Valitse haluatko näyttää linkit lisäresursseihin {{portalName}}-menussa.",
   "AdditionalResourcesSubtitle": "Määritä käyttäjillesi lista linkeistä helpottaviin resursseihin. ",
   "AddTrustedDomain": "Lisää luotettu verkkotunnus",
   "Admins": "Järjestelmänvalvojat",

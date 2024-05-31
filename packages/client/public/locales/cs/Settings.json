@@ -13,7 +13,7 @@
   "AddEmailsDescription": "Zkontrolujte seznam neimportovaných uživatelů pro import do ONLYOFFICE {{portalName}}.",
   "AddEmailsWarning": "Nemáte uživatele s e-maily. Přejděte k dalšímu kroku a přidejte je.",
   "AdditionalResources": "Další zdroje",
-  "AdditionalResourcesDescription": "Vyberte, zda chcete v nabídce DocSpace zobrazovat odkazy na další zdroje.",
+  "AdditionalResourcesDescription": "Vyberte, zda chcete v nabídce {{portalName}} zobrazovat odkazy na další zdroje.",
   "AdditionalResourcesSubtitle": "Konfigurace zobrazení odkazů na užitečné zdroje pro uživatele.",
   "AddTrustedDomain": "Přidat důvěryhodné domény",
   "Admins": "Administrátoři",

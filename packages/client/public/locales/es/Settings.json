@@ -13,7 +13,7 @@
   "AddEmailsDescription": "Verifique la lista de usuarios no importados para importar a ONLYOFFICE {{portalName}}.",
   "AddEmailsWarning": "No tiene usuarios con correos electrónicos. Continúe con el siguiente paso para añadirlos.",
   "AdditionalResources": "Recursos adicionales",
-  "AdditionalResourcesDescription": "Elija si desea mostrar enlaces a recursos adicionales en el menú de DocSpace.",
+  "AdditionalResourcesDescription": "Elija si desea mostrar enlaces a recursos adicionales en el menú de {{portalName}}.",
   "AdditionalResourcesSubtitle": "Configure la visualización de enlaces a recursos útiles para sus usuarios.",
   "AddTrustedDomain": "Añadir dominio seguro",
   "Admins": "Administradores",

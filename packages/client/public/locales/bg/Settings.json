@@ -13,7 +13,7 @@
   "AddEmailsDescription": "Проверете списъка с невъведените потребители за импортиране в ONLYOFFICE {{portalName}}.",
   "AddEmailsWarning": "Нямате потребители с имейли. Моля, преминете към следващата стъпка, за да ги добавите.",
   "AdditionalResources": "Допълнителни ресурси",
-  "AdditionalResourcesDescription": "Изберете дали искате да показвате линкове към допълнителни ресурси в DocSpace менюто.",
+  "AdditionalResourcesDescription": "Изберете дали искате да показвате линкове към допълнителни ресурси в {{portalName}} менюто.",
   "AdditionalResourcesSubtitle": "Конфигурирайте показването на линкове към полезни за вашите потребители ресурси.",
   "AddTrustedDomain": "Добавете доверен домейн",
   "Admins": "Администратори",

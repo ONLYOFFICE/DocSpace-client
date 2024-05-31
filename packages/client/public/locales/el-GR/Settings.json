@@ -13,7 +13,7 @@
   "AddEmailsDescription": "Ελέγξτε τη λίστα εισαγωγής των χρηστών που δεν έχουν εισαχθεί στο {{portalName}} του ONLYOFFICE.",
   "AddEmailsWarning": "Δεν έχετε χρήστες με email. Προχωρήστε στο επόμενο βήμα για να τους προσθέσετε.",
   "AdditionalResources": "Πρόσθετοι πόροι",
-  "AdditionalResourcesDescription": "Επιλέξτε αν θέλετε να εμφανίσετε συνδέσμους προς πρόσθετους πόρους στο μενού DocSpace.",
+  "AdditionalResourcesDescription": "Επιλέξτε αν θέλετε να εμφανίσετε συνδέσμους προς πρόσθετους πόρους στο μενού {{portalName}}.",
   "AdditionalResourcesSubtitle": "Διαμορφώστε την εμφάνιση συνδέσμων προς χρήσιμους πόρους για τους χρήστες σας.",
   "AddTrustedDomain": "Προσθήκη αξιόπιστου domain",
   "Admins": "Διαχειριστές",

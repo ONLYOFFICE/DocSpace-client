@@ -7,7 +7,7 @@
   "AccessRightsUsersFromList": "{{users}} ຈາກລາຍການ",
   "AddAllowedIP": "ເພີ່ມທີ່ຢູ່ IP ທີ່ອະນຸຍາດ",
   "AdditionalResources": "ຊັບພະຍາກອນເພີ່ມເຕີມ",
-  "AdditionalResourcesDescription": "ເລືອກວ່າທ່ານຕ້ອງການສະແດງລິ້ງໄປຫາຊັບພະຍາກອນເພີ່ມເຕີມໃນ ເມນູ DocSpace.",
+  "AdditionalResourcesDescription": "ເລືອກວ່າທ່ານຕ້ອງການສະແດງລິ້ງໄປຫາຊັບພະຍາກອນເພີ່ມເຕີມໃນ ເມນູ {{portalName}}.",
   "AddTrustedDomain": "ຕື່ມ ເຊື່ອຖືໄດ້ ໂດ​ເມນ",
   "Admins": "ບໍລິຫານ",
   "AdminsMessage": "ການຕັ້ງຄ່າຂໍ້ຄວາມຂອງຜູ້ເບິ່ງແຍງລະບົບ",

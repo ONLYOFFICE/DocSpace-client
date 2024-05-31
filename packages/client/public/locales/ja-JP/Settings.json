@@ -13,7 +13,7 @@
   "AddEmailsDescription": "ONLYOFFICE {{portalName}}にインポートする未インポートユーザーのリストを確認します。",
   "AddEmailsWarning": "メールアドレスを持つユーザーがいません。次のステップに進んで追加してください。",
   "AdditionalResources": "追加リソース",
-  "AdditionalResourcesDescription": "DocSpaceのメニューに、追加リソースへのリンクを表示するかどうかを選択する",
+  "AdditionalResourcesDescription": "{{portalName}}のメニューに、追加リソースへのリンクを表示するかどうかを選択する",
   "AdditionalResourcesSubtitle": "ユーザーに役立つリソースへのリンクの表示を設定します。",
   "AddTrustedDomain": "信頼されたドメインを追加",
   "Admins": "管理者",

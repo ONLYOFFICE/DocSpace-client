@@ -13,7 +13,7 @@
   "AddEmailsDescription": "Pārbaudiet neimportēto lietotāju sarakstu, lai importētu ONLYOFFICE {{portalName}}.",
   "AddEmailsWarning": "Jums nav lietotāju ar e-pasta ziņojumiem. Pārejiet pie nākamās darbības, lai to pievienotu.",
   "AdditionalResources": "Papildu resursi",
-  "AdditionalResourcesDescription": "Izvēlieties, vai vēlaties parādīt saites uz papildu resursiem DocSpace izvēlnē.",
+  "AdditionalResourcesDescription": "Izvēlieties, vai vēlaties parādīt saites uz papildu resursiem {{portalName}} izvēlnē.",
   "AdditionalResourcesSubtitle": "Konfigurējiet lietotājiem noderīgu resursu saišu rādīšanu.",
   "AddTrustedDomain": "Pievienot uzticamu domēnu",
   "Admins": "Administratori",

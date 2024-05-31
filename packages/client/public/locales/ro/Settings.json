@@ -13,7 +13,7 @@
   "AddEmailsDescription": "Verificați lista de utilizatori neimportați pentru a le importa în ONLYOFFICE {{portalName}}.",
   "AddEmailsWarning": "Nu aveți utilizatori cu adrese de e-mail. Treceți la etapa următoare pentru a le adăuga.",
   "AdditionalResources": "Resurse suplimentare",
-  "AdditionalResourcesDescription": "Alegeţi dacă doriţi să afişaţi linkurile către resurse suplimentare în meniul DocSpace.",
+  "AdditionalResourcesDescription": "Alegeţi dacă doriţi să afişaţi linkurile către resurse suplimentare în meniul {{portalName}}.",
   "AdditionalResourcesSubtitle": "Configurați modul de afișare a linkurilor către resurse utile pentru utilizatorii dvs.",
   "AddTrustedDomain": "Adăugare domeniu de încredere",
   "Admins": "Administratori",

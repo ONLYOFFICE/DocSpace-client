@@ -13,7 +13,7 @@
   "AddEmailsDescription": "ONLYOFFICE{{portalName}}’e aktarılacak içe aktarılmamış kullanıcıların listesini kontrol edin.",
   "AddEmailsWarning": "E-postası olan kullanıcılarınız yok. Lütfen onları eklemek için bir sonraki adıma geçin.",
   "AdditionalResources": "Ek kaynaklar",
-  "AdditionalResourcesDescription": "DocSpace menüsünde ek kaynakların bağlantılarını görüntülemek isteyip istemediğinizi seçin.",
+  "AdditionalResourcesDescription": "{{portalName}} menüsünde ek kaynakların bağlantılarını görüntülemek isteyip istemediğinizi seçin.",
   "AdditionalResourcesSubtitle": "Kullanıcılarınız için yararlı kaynaklara yönelik bağlantıların görünümünü yapılandırın.",
   "AddTrustedDomain": "Güvenilen alan adı ekle",
   "Admins": "Yöneticiler",

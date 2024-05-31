@@ -13,7 +13,7 @@
   "AddEmailsDescription": "ඔන්ලිඔෆිස් {{portalName}} වෙත ආයාත කිරීමට ආයාත නොකළ පරිශ්‍රීලකයින්ගේ ලැයිස්තුව පරීක්ෂා කරන්න.",
   "AddEmailsWarning": "ඔබට වි-තැපෑලක් සහිත පරිශ්‍රීලකයින් නැත. කරුණාකර ඒවා එකතු කිරීමට ඊළඟ පියවරට යන්න.",
   "AdditionalResources": "අතිරේක සම්පත්",
-  "AdditionalResourcesDescription": "ඔබට DocSpace වට්ටෝරුවෙහි අතිරේක සම්පත් සඳහා සබැඳි පෙන්විය යුතු දැයි තෝරන්න.",
+  "AdditionalResourcesDescription": "ඔබට {{portalName}} වට්ටෝරුවෙහි අතිරේක සම්පත් සඳහා සබැඳි පෙන්විය යුතු දැයි තෝරන්න.",
   "AdditionalResourcesSubtitle": "ඔබගේ පරිශ්‍රීලකයින්ට ප්‍රයෝජනවත් සම්පත් වෙත සබැඳි පෙන්වීම වින්‍යාස කරන්න.",
   "AddTrustedDomain": "විශ්වසනීය වසමක් යොදන්න",
   "Admins": "පරිපාලකයින්",

@@ -106,7 +106,7 @@ import {
   FilesSelectorFilterTypes,
 } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { getFileLink } from "@docspace/shared/api/files";
+import { getFileLink, getFolderLink } from "@docspace/shared/api/files";
 import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
@@ -394,10 +394,17 @@ class ContextOptionsStore {
       (sharedItem && sharedItem.canCopyPublicLink) ||
       (shared && canCopyPublicLink);
 
-    if (isShared && !item.isFolder && !isArchive) {
-      const fileLinkData = await getFileLink(item.id);
-      copyShareLink(fileLinkData.sharedTo.shareLink);
-      return toastr.success(t("Translations:LinkCopySuccess"));
+    if (isShared && !isArchive) {
+      try {
+        const itemLink = item.isFolder
+          ? await getFolderLink(item.id)
+          : await getFileLink(item.id);
+        copyShareLink(itemLink.sharedTo.shareLink);
+        toastr.success(t("Translations:LinkCopySuccess"));
+      } catch (error) {
+        toastr.error(error);
+      }
+      return;
     }
 
     if (
@@ -2001,7 +2008,7 @@ class ContextOptionsStore {
           id: "personal_upload-from-docspace",
           className: "main-button_drop-down",
           icon: ActionsUploadReactSvgUrl,
-          label: t("Common:FromDocSpace"),
+          label: t("Common:FromDocspace"),
           key: "personal_upload-from-docspace",
           onClick: () =>
             this.onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.PDF),
@@ -2017,6 +2024,7 @@ class ContextOptionsStore {
       ],
     };
 
+    const showUploadFolder = !(isMobile || isTablet);
     const moreActions = {
       id: "personal_more-form",
       className: "main-button_drop-down",
@@ -2038,7 +2046,7 @@ class ContextOptionsStore {
           key: "personal_more-form__separator-2",
         },
         uploadFiles,
-        uploadFolder,
+        showUploadFolder ? uploadFolder : null,
       ],
     };
 
@@ -2105,7 +2113,7 @@ class ContextOptionsStore {
         id: "accounts-add_administrator",
         className: "main-button_drop-down",
         icon: PersonAdminReactSvgUrl,
-        label: t("Common:DocSpaceAdmin"),
+        label: t("Common:DocspaceAdmin"),
         onClick: this.onInvite,
         "data-type": EmployeeType.Admin,
         key: "administrator",
@@ -2287,6 +2295,7 @@ class ContextOptionsStore {
         ]
       : [createTemplateForm, createTemplateNewFormFile, templateOformsGallery];
 
+    const showUploadFolder = !(isMobile || isTablet);
     const options = isRoomsFolder
       ? [
           {
@@ -2304,7 +2313,7 @@ class ContextOptionsStore {
           createNewFolder,
           { key: "separator", isSeparator: true },
           uploadFiles,
-          uploadFolder,
+          showUploadFolder ? uploadFolder : null,
         ];
 
     if (mainButtonItemsList && enablePlugins) {

@@ -25,16 +25,42 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TRoom } from "../../api/rooms/types";
+import { TSelectorItem } from "../../components/selector";
 
 export const convertToItems = (folders: TRoom[]) => {
-  const items = folders.map((folder) => {
-    const { id, title, roomType, logo, shared } = folder;
+  const items: TSelectorItem[] = folders.map((folder) => {
+    const {
+      id,
+      title,
+      roomType,
+      logo,
+      shared,
+      parentId,
+      filesCount,
+      foldersCount,
+      rootFolderType,
+      security,
+    } = folder;
 
     const icon = logo.medium;
     const iconOriginal = logo.original;
     const color = logo.color;
 
-    return { id, label: title, icon, iconOriginal, color, roomType, shared };
+    return {
+      id,
+      label: title,
+      icon,
+      iconOriginal,
+      color,
+      roomType,
+      shared,
+      isFolder: true,
+      parentId,
+      filesCount,
+      foldersCount,
+      rootFolderType,
+      security,
+    };
   });
 
   return items;

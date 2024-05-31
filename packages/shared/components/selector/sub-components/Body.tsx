@@ -29,7 +29,7 @@ import React from "react";
 import InfiniteLoader from "react-window-infinite-loader";
 import { FixedSizeList as List } from "react-window";
 
-import { CustomScrollbarsVirtualList, Scrollbar } from "../../scrollbar";
+import { Scrollbar } from "../../scrollbar";
 import { Text } from "../../text";
 
 import { Search } from "./Search";
@@ -41,6 +41,7 @@ import { StyledBody, StyledTabs } from "../Selector.styled";
 import { BodyProps } from "../Selector.types";
 import { Item } from "./Item";
 import { Info } from "./Info";
+import { VirtualScroll } from "./VirtualScroll";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
@@ -101,13 +102,23 @@ const Body = ({
 
   withInfo,
   infoText,
+  setInputItemVisible,
 }: BodyProps) => {
   const [bodyHeight, setBodyHeight] = React.useState(0);
 
   const bodyRef = React.useRef<HTMLDivElement>(null);
   const listOptionsRef = React.useRef<null | InfiniteLoader>(null);
 
-  const itemsCount = hasNextPage ? items.length + 1 : items.length;
+  const isEmptyInput =
+    items.length === 2 && items[1].isInputItem && items[0].isCreateNewItem;
+
+  const itemsCount = hasNextPage
+    ? items.length + 1
+    : items.length === 1 && items[0].isCreateNewItem
+      ? 0
+      : isEmptyInput
+        ? 1
+        : items.length;
 
   const resetCache = React.useCallback(() => {
     if (listOptionsRef && listOptionsRef.current) {
@@ -128,6 +139,16 @@ const Body = ({
     [hasNextPage, itemsCount],
   );
 
+  const onLoadMoreItems = React.useCallback(
+    (startIndex: number) => {
+      // first page loads in selector's useEffect
+      if (startIndex === 1) return;
+
+      loadMoreItems(startIndex);
+    },
+    [loadMoreItems],
+  );
+
   React.useEffect(() => {
     window.addEventListener("resize", onBodyResize);
 
@@ -143,6 +164,16 @@ const Body = ({
   React.useEffect(() => {
     resetCache();
   }, [resetCache, hasNextPage]);
+
+  // scroll to top after changing tab
+  React.useEffect(() => {
+    if (!withTabs) return;
+    const scrollElement = document.querySelector(".selector-body-scroll");
+
+    if (scrollElement) {
+      scrollElement.scrollTo(0, 0);
+    }
+  }, [withTabs, activeTabId]);
 
   let listHeight = bodyHeight - CONTAINER_PADDING;
 
@@ -184,9 +215,11 @@ const Body = ({
           breadCrumbsLoader
         ) : (
           <BreadCrumbs
+            withBreadCrumbs
+            isBreadCrumbsLoading={isLoading}
             breadCrumbs={breadCrumbs}
+            breadCrumbsLoader={breadCrumbsLoader}
             onSelectBreadCrumb={onSelectBreadCrumb}
-            isLoading={isLoading}
           />
         )
       ) : null}
@@ -226,30 +259,34 @@ const Body = ({
           searchImage={searchEmptyScreenImage}
           searchHeader={searchEmptyScreenHeader}
           searchDescription={searchEmptyScreenDescription}
+          items={items}
         />
       ) : (
         <>
           {!!descriptionText && (
             <Text className="body-description-text">{descriptionText}</Text>
           )}
-          {isMultiSelect && withSelectAll && !isSearch && (
-            <SelectAll
-              label={selectAllLabel}
-              icon={selectAllIcon}
-              isChecked={isAllChecked || false}
-              isIndeterminate={isAllIndeterminate || false}
-              onSelectAll={onSelectAll}
-              isLoading={isLoading}
-              rowLoader={rowLoader}
-            />
-          )}
+          {isMultiSelect && withSelectAll && !isSearch ? (
+            isLoading ? (
+              rowLoader
+            ) : (
+              <SelectAll
+                withSelectAll
+                selectAllIcon={selectAllIcon}
+                selectAllLabel={selectAllLabel}
+                isAllChecked={isAllChecked}
+                isAllIndeterminate={isAllIndeterminate}
+                onSelectAll={onSelectAll}
+              />
+            )
+          ) : null}
 
           {bodyHeight && (
             <InfiniteLoader
               ref={listOptionsRef}
               isItemLoaded={isItemLoaded}
               itemCount={totalItems}
-              loadMoreItems={loadMoreItems}
+              loadMoreItems={onLoadMoreItems}
             >
               {({ onItemsRendered, ref }) => (
                 <List
@@ -258,17 +295,18 @@ const Body = ({
                   width="100%"
                   itemCount={itemsCount}
                   itemData={{
-                    items,
+                    items: isEmptyInput ? [items[1]] : items,
                     onSelect,
                     isMultiSelect: isMultiSelect || false,
                     rowLoader,
                     isItemLoaded,
                     renderCustomItem,
+                    setInputItemVisible,
                   }}
                   itemSize={48}
                   onItemsRendered={onItemsRendered}
                   ref={ref}
-                  outerElementType={CustomScrollbarsVirtualList}
+                  outerElementType={VirtualScroll}
                 >
                   {Item}
                 </List>

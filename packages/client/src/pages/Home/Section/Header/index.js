@@ -465,7 +465,6 @@ const SectionHeaderContent = (props) => {
 
       security,
       haveLinksRight,
-      isPublicRoomType,
       isPublicRoom,
       isFrame,
     } = props;
@@ -1148,6 +1147,7 @@ export default inject(
       rootFolderType,
       parentRoomType,
       isFolder,
+      shared,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -1164,6 +1164,7 @@ export default inject(
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
     const isCustomRoomType = roomType === RoomsType.CustomRoom;
+
     const isFormRoomType =
       roomType === RoomsType.FormRoom ||
       (parentRoomType === FolderType.FormRoom && isFolder);
@@ -1224,13 +1225,16 @@ export default inject(
 
     const isArchive = rootFolderType === FolderType.Archive;
 
+    const sharedItem = navigationPath.find((r) => r.shared);
+
     const showNavigationButton = isLoading
       ? false
-      : !isPublicRoom &&
-        !isArchive &&
-        canCopyPublicLink &&
-        (isPublicRoomType || isCustomRoomType) &&
-        primaryLink;
+      : (!isPublicRoom &&
+          !isArchive &&
+          canCopyPublicLink &&
+          (isPublicRoomType || isCustomRoomType) &&
+          shared) ||
+        (sharedItem && sharedItem.canCopyPublicLink);
 
     return {
       isGracePeriod,

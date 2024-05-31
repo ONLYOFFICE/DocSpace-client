@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { cookies } from "next/headers";
+import dynamic from "next/dynamic";
 
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
@@ -37,6 +38,13 @@ import SimpleNav from "@/components/SimpleNav";
 import { LoginContent, LoginFormWrapper } from "@/components/Login";
 import GreetingContainer from "@/components/GreetingContainer";
 import { getColorTheme, getSettings } from "@/utils/actions";
+
+const LanguageComboboxWrapper = dynamic(
+  () => import("@/components/LanguageCombobox"),
+  {
+    ssr: false,
+  },
+);
 
 export default async function Layout({
   children,
@@ -69,6 +77,7 @@ export default async function Layout({
       <LoginFormWrapper id="login-page" bgPattern={bgPattern}>
         <div className="bg-cover" />
         <Scrollbar id="customScrollBar">
+          <LanguageComboboxWrapper />
           <LoginContent>
             <ColorTheme
               themeId={ThemeId.LinkForgotPassword}

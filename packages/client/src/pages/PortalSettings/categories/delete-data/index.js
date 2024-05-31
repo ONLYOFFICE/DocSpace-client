@@ -46,7 +46,7 @@ const DeleteData = (props) => {
   const data = [
     {
       id: "deletion",
-      name: t("DeleteDocSpace"),
+      name: t("DeleteDocspace"),
       content: <PortalDeletionSection />,
     },
     {

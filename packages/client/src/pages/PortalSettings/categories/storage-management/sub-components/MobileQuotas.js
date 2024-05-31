@@ -47,7 +47,7 @@ const MobileQuotasComponent = ({ isDisabled }) => {
         title={t("QuotaPerRoom")}
         onClickLink={onClickLink}
         url="portal-settings/management/disk-space/quota-per-room"
-        subtitle={t("SetDefaultRoomQuota")}
+        subtitle={t("SetDefaultRoomQuota", { portalName: PORTAL })}
         isDisabled={isDisabled}
       />
       <MobileCategoryWrapper

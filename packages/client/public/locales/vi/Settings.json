@@ -230,7 +230,7 @@
   "SessionLifetime": "Thời gian tồn tại của phiên",
   "SessionLifetimeMobileDescription": "Thời gian tồn tại của phiên cho phép đặt thời gian (tính bằng phút) trước khi người dùng DocSpace cần nhập lại thông tin đăng nhập không gian để truy cập không gian. ",
   "SessionLifetimeSettingDescription": "Điều chỉnh Thời gian tồn tại của Phiên để xác định khoảng thời gian trước khi tự động đăng xuất. Sau khi lưu, việc đăng xuất sẽ được thực hiện cho tất cả người dùng.",
-  "SetDefaultRoomQuota": "Đặt hạn mức lưu trữ mặc định cho các phòng trong DocSpace này. Sau đó, quản trị viên phòng có thể điều chỉnh riêng cho từng phòng.",
+  "SetDefaultRoomQuota": "Đặt hạn mức lưu trữ mặc định cho các phòng trong {{portalName}} này. Sau đó, quản trị viên phòng có thể điều chỉnh riêng cho từng phòng.",
   "SetDefaultUserQuota": "Đặt hạn mức lưu trữ cho người dùng {{portalName}} này. Hạn mức người dùng ảnh hưởng đến giới hạn dung lượng lưu trữ cho thư mục Tài liệu của mỗi người dùng.",
   "SettingPasswordDescription": "Định cấu hình Thiết lập Độ mạnh của Mật khẩu để giữ cho mật khẩu an toàn hơn, chống lại việc phỏng đoán mật khẩu.",
   "SettingPasswordStrengthMobileDescription": "Thiết lập Độ mạnh của Mật khẩu là một cách để xác định hiệu quả của mật khẩu trong việc chống lại các cuộc tấn công phỏng đoán và tấn công brute-force.",

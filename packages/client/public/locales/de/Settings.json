@@ -232,7 +232,7 @@
   "SessionLifetime": "Lebensdauer der Sitzung",
   "SessionLifetimeMobileDescription": "Sitzungsdauer erlaubt es, die Zeit (in Minuten) festzulegen, bevor die DocSpace-Benutzer die Zugangsdaten erneut eingeben müssen, um auf den Bereich zugreifen zu können.",
   "SessionLifetimeSettingDescription": "Stellen Sie die Sitzungsdauer ein, um die Zeitspanne bis zur automatischen Abmeldung festzulegen. Nach dem Speichern wird die Abmeldung für alle Benutzer durchgeführt.",
-  "SetDefaultRoomQuota": "Legen Sie die Standardspeicherquote für Räume in diesem DocSpace fest. Es kann später für jeden Raum individuell vom Raumadministrator angepasst werden.",
+  "SetDefaultRoomQuota": "Legen Sie die Standardspeicherquote für Räume in diesem {{portalName}} fest. Es kann später für jeden Raum individuell vom Raumadministrator angepasst werden.",
   "SetDefaultUserQuota": " Legen Sie ie Speicherquote für Benutzer dieses {{portalName}} fest. Die Benutzerquote wirkt sich auf das Speicherlimit für den Ordner „Dokumente“ jedes Benutzers aus.",
   "SettingPasswordDescription": "Konfigurieren Sie die Einstellungen für die Passwortstärke, um sicherere, zuverlässige Passwörter zu stellen.",
   "SettingPasswordStrengthMobileDescription": "Mit den Einstellungen für die Kennwortstärke können Sie bestimmen, wie gut ein Kennwort gegen Erraten und Brute-Force-Angriffe geschützt ist.",

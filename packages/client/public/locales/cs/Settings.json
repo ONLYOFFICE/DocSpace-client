@@ -231,7 +231,7 @@
   "SessionLifetime": "Doba trvání relace",
   "SessionLifetimeMobileDescription": "Doba trvání relace umožňuje nastavit dobu (v minutách), po kterou budou muset uživatelé DocSpace znovu zadávat přihlašovací údaje k prostoru, aby do něj mohli přistupovat.",
   "SessionLifetimeSettingDescription": "Nastavte dobu trvání relace, abyste určili dobu před automatickým odhlášením. Po uložení se odhlášení provede pro všechny uživatele.",
-  "SetDefaultRoomQuota": "Nastavení výchozí kvóty úložiště pro místnosti v tomto prostoru DocSpace. Později ji může správce místnosti upravit pro každou místnost zvlášť.",
+  "SetDefaultRoomQuota": "Nastavení výchozí kvóty úložiště pro místnosti v tomto prostoru {{portalName}}. Později ji může správce místnosti upravit pro každou místnost zvlášť.",
   "SetDefaultUserQuota": "Nastavení kvóty úložiště pro uživatele tohoto prostoru {{portalName}}. Uživatelská kvóta ovlivňuje limit úložiště pro složku Dokumenty každého uživatele.",
   "SettingPasswordDescription": "Konfigurace nastavení síly hesla pro vynucení bezpečnějších hesel odolných vůči výpočtům.",
   "SettingPasswordStrengthMobileDescription": "Nastavení síly hesla je způsob, jak určit účinnost hesla při odolávání útokům hádáním a hrubou silou.",

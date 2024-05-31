@@ -231,7 +231,7 @@
   "SessionLifetime": "세션 수명",
   "SessionLifetimeMobileDescription": "세션 수명을 사용하면 DocSpace 사용자가 공간에 액세스하기 위해 공간 자격 증명을 다시 입력해야 하기까지의 시간(분)을 설정할 수 있습니다.",
   "SessionLifetimeSettingDescription": "자동 로그오프까지의 기간을 설정하려면 세션 수명을 조정하세요. 저장 후에는 모든 사용자에 대해 로그오프가 수행됩니다.",
-  "SetDefaultRoomQuota": "이 DocSpace의 방에 대한 기본 스토리지 할당량을 설정하세요. 나중에 방 관리자가 각 방에 대한 할당량을 개별적으로 조정할 수 있습니다.",
+  "SetDefaultRoomQuota": "이 {{portalName}}의 방에 대한 기본 스토리지 할당량을 설정하세요. 나중에 방 관리자가 각 방에 대한 할당량을 개별적으로 조정할 수 있습니다.",
   "SetDefaultUserQuota": "이 {{portalName}}의 사용자에 대한 스트로지 할당량을 설정하세요. 사용자 할당량은 각 사용자의 문서 폴더 저장 제한에 영향을 미칩니다.",
   "SettingPasswordDescription": "더욱 안전하고 도출하기 어려운 비밀번호를 적용하려면 비밀번호 강도 설정을 구성하세요.",
   "SettingPasswordStrengthMobileDescription": "비밀번호 강도를 설정하여 추측 및 무차별 대입 공격에 대한 비밀번호의 효율성을 확인할 수 있습니다.",

@@ -108,7 +108,7 @@ const QuotaPerItemComponent = (props) => {
         <Text className="toggle_label" fontSize="12px">
           {type === "user"
             ? t("SetDefaultUserQuota", { portalName: PORTAL })
-            : t("SetDefaultRoomQuota")}
+            : t("SetDefaultRoomQuota", { portalName: PORTAL })}
         </Text>
         {isToggleChecked && (
           <QuotaForm

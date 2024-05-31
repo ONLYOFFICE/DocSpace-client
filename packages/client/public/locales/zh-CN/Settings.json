@@ -210,7 +210,6 @@
   "SessionLifetime": "会话寿命",
   "SessionLifetimeMobileDescription": "通过会话生存期，可设置协作空间用户需要再输入凭据才能访问空间的时间（单位为分钟）。",
   "SessionLifetimeSettingDescription": "调整会话生命周期，可定义自动注销的时间段。保存后，会对所有用户执行注销。",
-  "SetDefaultRoomQuota": "设置此协作空间中，房间的默认储存空间额度。房间管理员后续可对每个房间进行单独调整。",
   "SettingPasswordDescription": "配置密码强度设置，强制使用更安全的强密码。",
   "SettingPasswordStrengthMobileDescription": "通过“密码强度设置”，确定密码阻止猜测和暴力攻击的有效性。",
   "SettingPasswordTittle": "密码强度设置",

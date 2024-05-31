@@ -1,7 +1,7 @@
 {
   "CodeSubtitle": "{{email}} ünvanına 6 rəqəmli kod göndərdik. Kodun etibarlılıq müddəti limitlidir, ona görə onu mümkün olduğu qədər tez daxil edin.",
   "CodeTitle": "Kod e-poçt vasitəsilə göndərilmişdir",
-  "ErrorInvalidText": "10 saniyədə <1>DocSpace</1> yönləndiriləcəksiniz",
+  "ErrorInvalidText": "10 saniyədə <1>{{portalName}}</1> yönləndiriləcəksiniz",
   "ExpiredCode": "Bu kod artıq etibarlı deyil. Yeni kod sorğusu göndərin və yenidən cəhd edin.",
   "ForgotPassword": "Parolunuzu unutmusunuz mu?",
   "InvalidCode": "Kod etibarsızdır. Yenidən cəhd edin.",

@@ -1,7 +1,7 @@
 {
   "CodeSubtitle": "Lähetimme 6-numeroisen koodin osoitteeseen {{email}}. Koodilla on rajoitettu voimassaoloaika, syötä se mahdollisimman pian.",
   "CodeTitle": "Koodi lähetettiin sinulle sähköpostitse",
-  "ErrorInvalidText": "10 sekunnin kuluttua sinut ohjataan <1>DocSpace</1>",
+  "ErrorInvalidText": "10 sekunnin kuluttua sinut ohjataan <1>{{portalName}}</1>",
   "ExpiredCode": "Tämä koodi ei ole enää voimassa. Pyydä uutta koodia ja yritä uudelleen.",
   "ForgotPassword": "Unohditko salasanasi?",
   "InvalidCode": "Tämä koodi ei kelpaa. Yritä uudelleen.",

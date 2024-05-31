@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "Delete plugin",
-  "DeletePluginDescription": "This plugin will no longer be available to DocSpace users. Are you sure you want to continue?",
+  "DeletePluginDescription": "This plugin will no longer be available to {{portalName}} users. Are you sure you want to continue?",
   "DeletePluginTitle": "Delete plugin?",
   "ExpandFunctionality": "Expand functionality using Plugin SDK",
   "GoToRepo": "Go to repository",

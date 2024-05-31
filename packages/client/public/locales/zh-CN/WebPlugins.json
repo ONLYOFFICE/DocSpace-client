@@ -1,6 +1,5 @@
 {
   "DeletePlugin": "移除插件",
-  "DeletePluginDescription": "协作空间用户将无法再使用此插件。您确定要继续使用吗？",
   "DeletePluginTitle": "移除插件？",
   "ExpandFunctionality": "使用插件SDK扩展功能",
   "GoToRepo": "转到仓库",

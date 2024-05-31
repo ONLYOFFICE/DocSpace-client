@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "Ștergere plugin",
-  "DeletePluginDescription": "Acest plugin nu va mai fi disponibil pentru utilizatorii spațiului DocSpace. Sigur doriți să continuați?",
+  "DeletePluginDescription": "Acest plugin nu va mai fi disponibil pentru utilizatorii spațiului {{portalName}}. Sigur doriți să continuați?",
   "DeletePluginTitle": "Doriți să ștergeți pluginul?",
   "ExpandFunctionality": "Extinderea funcționalității cu ajutorul kit-ului de dezvoltare a plugin-urilor",
   "GoToRepo": "Acces depozit",

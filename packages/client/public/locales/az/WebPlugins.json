@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "Plagini silin",
-  "DeletePluginDescription": "Bu plagin artıq DocSpace istifadəçiləri üçün əlçatan olmayacaq. Davam etmək istədiyinizə əminsiniz?",
+  "DeletePluginDescription": "Bu plagin artıq {{portalName}} istifadəçiləri üçün əlçatan olmayacaq. Davam etmək istədiyinizə əminsiniz?",
   "DeletePluginTitle": "Plagin silinsin?",
   "ExpandFunctionality": "SDK plaginindən istifadə edərək funksionallığı genişləndirin",
   "GoToRepo": "Anbara gedin",

@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "Izbriši vtičnik",
-  "DeletePluginDescription": "Ta vtičnik ne bo več na voljo uporabnikom DocSpace. Ste prepričani, da želite nadaljevati?",
+  "DeletePluginDescription": "Ta vtičnik ne bo več na voljo uporabnikom {{portalName}}. Ste prepričani, da želite nadaljevati?",
   "DeletePluginTitle": "Izbrišem vtičnik?",
   "ExpandFunctionality": "Razširite funkcionalnost z uporabo vtičnika SDK",
   "GoToRepo": "Pojdi v repozitorij",

@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "Odstranění zásuvného modulu",
-  "DeletePluginDescription": "Tento zásuvný modul již nebude uživatelům služby DocSpace k dispozici. Jste si jisti, že chcete pokračovat?",
+  "DeletePluginDescription": "Tento zásuvný modul již nebude uživatelům služby {{portalName}} k dispozici. Jste si jisti, že chcete pokračovat?",
   "DeletePluginTitle": "Smazat zásuvný modul?",
   "ExpandFunctionality": "Rozšíření funkcí pomocí sady zásuvných modulů SDK",
   "GoToRepo": "Přejít do úložiště",

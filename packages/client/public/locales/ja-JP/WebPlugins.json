@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "プラグインの削除",
-  "DeletePluginDescription": "このプラグインはDocSpaceユーザーには提供されません。このまま続けますか？",
+  "DeletePluginDescription": "このプラグインは{{portalName}}ユーザーには提供されません。このまま続けますか？",
   "DeletePluginTitle": "プラグインを削除しますか？",
   "ExpandFunctionality": "プラグインSDKを使用した機能拡張",
   "GoToRepo": "リポジトリへ",

@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "Obriši dodatak",
-  "DeletePluginDescription": "Ovaj dodatak više neće biti dostupan korisnicima DocSpace-a. Da li ste sigurni da želite da nastavite?",
+  "DeletePluginDescription": "Ovaj dodatak više neće biti dostupan korisnicima {{portalName}}-a. Da li ste sigurni da želite da nastavite?",
   "DeletePluginTitle": "Obriši dodatak?",
   "ExpandFunctionality": "Proširi fukcionalnost koristeći Plugin SDK (SDK za dodatke)",
   "GoToRepo": "Idi u repozitorijum",

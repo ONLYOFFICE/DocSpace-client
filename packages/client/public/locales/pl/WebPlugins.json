@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "Usuń wtyczkę",
-  "DeletePluginDescription": "Dana wtyczka nie będzie już dostępna dla użytkowników DocSpace. Czy na pewno chcesz kontynuować?",
+  "DeletePluginDescription": "Dana wtyczka nie będzie już dostępna dla użytkowników {{portalName}}. Czy na pewno chcesz kontynuować?",
   "DeletePluginTitle": "Usunąć wtyczkę?",
   "ExpandFunctionality": "Rozszerz funkcjonalność za pomocą zestawu SDK do tworzenia wtyczek",
   "GoToRepo": "Przejdź do repozytorium",

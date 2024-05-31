@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "Supprimer le module complémentaire",
-  "DeletePluginDescription": "Ce module complémentaire ne sera plus disponible pour les utilisateurs de DocSpace. Etes-vous sûr de vouloir continuer ?",
+  "DeletePluginDescription": "Ce module complémentaire ne sera plus disponible pour les utilisateurs de {{portalName}}. Etes-vous sûr de vouloir continuer ?",
   "DeletePluginTitle": "Supprimer le module complémentaire ?",
   "ExpandFunctionality": "Étendez les fonctionnalités à l'aide du plugin SDK",
   "GoToRepo": "Aller au dépôt",

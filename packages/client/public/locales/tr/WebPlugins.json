@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "Eklentiyi sil",
-  "DeletePluginDescription": "Bu eklenti artık DocSpace kullanıcıları tarafından kullanılamayacak. Devam etmek istediğinize emin misiniz?",
+  "DeletePluginDescription": "Bu eklenti artık {{portalName}} kullanıcıları tarafından kullanılamayacak. Devam etmek istediğinize emin misiniz?",
   "DeletePluginTitle": "Eklenti silinsin mi?",
   "ExpandFunctionality": "Eklenti SDK'sını kullanarak işlevselliği genişletin",
   "GoToRepo": "Depoya git",

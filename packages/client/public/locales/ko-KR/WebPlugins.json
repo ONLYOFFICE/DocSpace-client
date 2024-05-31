@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "플러그인 삭제",
-  "DeletePluginDescription": "DocSpace 사용자는 더 이상 이 플러그인을 사용할 수 없게 됩니다.",
+  "DeletePluginDescription": "{{portalName}} 사용자는 더 이상 이 플러그인을 사용할 수 없게 됩니다.",
   "DeletePluginTitle": "플러그인을 삭제하시겠습니까?",
   "ExpandFunctionality": "플러그인 SDK를 사용한 기능 확장",
   "GoToRepo": "저장소로 이동",

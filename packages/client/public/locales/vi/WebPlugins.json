@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "Xóa plugin",
-  "DeletePluginDescription": "Plugin này sẽ không còn khả dụng cho người dùng DocSpace. Bạn có chắc muốn tiếp tục?",
+  "DeletePluginDescription": "Plugin này sẽ không còn khả dụng cho người dùng {{portalName}}. Bạn có chắc muốn tiếp tục?",
   "DeletePluginTitle": "Bạn muốn xóa plugin?",
   "ExpandFunctionality": "Mở rộng chức năng bằng Plugin SDK",
   "GoToRepo": "Chuyển đến kho lưu trữ",

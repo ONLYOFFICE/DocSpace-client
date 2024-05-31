@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "Izdzēst spraudni",
-  "DeletePluginDescription": "Šis spraudnis vairs nebūs pieejams DocSpace lietotājiem. Vai tiešām vēlaties turpināt?",
+  "DeletePluginDescription": "Šis spraudnis vairs nebūs pieejams {{portalName}} lietotājiem. Vai tiešām vēlaties turpināt?",
   "DeletePluginTitle": "Vai izdzēst spraudni?",
   "ExpandFunctionality": "Izvērst funkcionalitāti, izmantojot spraudņa SDK",
   "GoToRepo": "Doties uz repozitoriju",

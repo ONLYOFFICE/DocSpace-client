@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "حذف المكون الإضافي ",
-  "DeletePluginDescription": "لن يكون هذا المكون الإضافي متاحًا لمستخدمي DocSpace بعد الآن. هل أنت متأكد أنك تريد الاستمرار؟",
+  "DeletePluginDescription": "لن يكون هذا المكون الإضافي متاحًا لمستخدمي {{portalName}} بعد الآن. هل أنت متأكد أنك تريد الاستمرار؟",
   "DeletePluginTitle": "هل تريد حذف هذا المكون الاضافي؟",
   "ExpandFunctionality": "قم بتوسيع الوظائف باستخدام اضافات SDK",
   "GoToRepo": "اذهب إلى المستودع",

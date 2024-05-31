@@ -1,6 +1,5 @@
 {
   "DeletePlugin": "Poista liitännäinen",
-  "DeletePluginDescription": "Tämä liitännäinen ei ole enää saatavilla DocSpacen käyttäjille. Haluako varmasti jatkaa?",
   "DeletePluginTitle": "Poistetaanko liitännäinen?",
   "ExpandFunctionality": "Laajenna toimintoja SDK-laajennuksen avulla",
   "GoToRepo": "Siirry arkistoon",

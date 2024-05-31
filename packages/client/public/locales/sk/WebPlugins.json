@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "Odstrániť plugin",
-  "DeletePluginDescription": "Tento plugin už nebude používateľom DocSpace k dispozícii. Ste si istí, že chcete pokračovať?",
+  "DeletePluginDescription": "Tento plugin už nebude používateľom {{portalName}} k dispozícii. Ste si istí, že chcete pokračovať?",
   "DeletePluginTitle": "Odstrániť plugin?",
   "ExpandFunctionality": "Rozšírte funkčnosť pomocou pluginu SDK",
   "GoToRepo": "Prejsť na úložisko",

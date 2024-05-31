@@ -26,7 +26,7 @@
   "CSPInfoBarDescription": "Увімкніть протокол HTTPS для вашого простору {{portalName}}, щоб забезпечити правильне налаштування.",
   "CSPInfoBarHeader": "Потрібен протокол HTTPS",
   "CSPInputPlaceholder": "Введіть URL-адресу в такому форматі: https://example.com",
-  "CSPUrlHelp": "Введіть доменне ім’я DocSpace без URL-шляхів або додаткових символів.",
+  "CSPUrlHelp": "Введіть доменне ім’я {{portalName}} без URL-шляхів або додаткових символів.",
   "CustomDescription": "Вручну налаштуйте параметри для вбудовування вашого простору DocSpace.",
   "CustomizingDisplay": "Настроювання показу",
   "DataDisplay": "Параметри відображення даних",

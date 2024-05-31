@@ -26,7 +26,7 @@
   "CSPInfoBarDescription": "Quraşdırmanın düzgün işləməsini təmin etmək üçün {{portalName}} üçün HTTPS protokolunu aktiv edin.",
   "CSPInfoBarHeader": "HTTPS tələb olunur",
   "CSPInputPlaceholder": "URL'yi bu cür daxil edin: https://example.com",
-  "CSPUrlHelp": "URL yolları və ya əlavə simvollar olmadan DocSpace domen adını daxil edin.",
+  "CSPUrlHelp": "URL yolları və ya əlavə simvollar olmadan {{portalName}} domen adını daxil edin.",
   "CustomDescription": "DocSpace-i daxil etmək üçün parametrləri əl ilə konfiqurasiya edin.",
   "CustomizingDisplay": "Ekranı fərdiləşdirin",
   "DataDisplay": "Məlumatların göstərilməsi parametrləri",

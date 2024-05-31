@@ -25,7 +25,7 @@
   "CSPInfoBarDescription": "Խնդրում ենք միացնել HTTPS արձանագրությունը ձեր {{portalName}}-ի համար՝ ապահովելու ճիշտ կարգավորումը:",
   "CSPInfoBarHeader": "Պահանջվում է HTTPS",
   "CSPInputPlaceholder": "Մուտքագրեք URL այսպես` https://example.com ",
-  "CSPUrlHelp": "Մուտքագրեք DocSpace տիրույթի անունը առանց URL ուղիների կամ լրացուցիչ նիշերի:",
+  "CSPUrlHelp": "Մուտքագրեք {{portalName}} տիրույթի անունը առանց URL ուղիների կամ լրացուցիչ նիշերի:",
   "CustomDescription": "Ձեռքով կարգավորեք ձեր Դոկսպեյսը ներկառուցելու պարամետրերը:",
   "CustomizingDisplay": "Ցուցադրման հարմարեցում",
   "DataDisplay": "Տվյալների ցուցադրման կարգավորումներ",

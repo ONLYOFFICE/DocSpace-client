@@ -22,7 +22,6 @@
   "CSPHelp": "该设置是一种安全措施，可用于防范内容注入攻击。CSP 描述了安全的资源下载源。从未列在\"白名单\"中的资源下载将被阻止。指定域和与之配合的协议。",
   "CSPInfoBarHeader": "需要 HTTPS",
   "CSPInputPlaceholder": "输入同类格式的链接 URL： https://example.com",
-  "CSPUrlHelp": "输入协作空间域名，不包含 URL 路径或其他字符。",
   "CustomDescription": "手动配置嵌入协作空间的参数。",
   "CustomizingDisplay": "自定义显示",
   "DataDisplay": "数据显示设置",

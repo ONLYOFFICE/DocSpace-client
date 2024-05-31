@@ -26,7 +26,7 @@
   "CSPInfoBarDescription": "Vui lòng bật giao thức HTTPS cho {{portalName}} của bạn để đảm bảo thiết lập hoạt động chính xác.",
   "CSPInfoBarHeader": "Yêu cầu HTTPS ",
   "CSPInputPlaceholder": "Nhập URL như thế này: https://example.com",
-  "CSPUrlHelp": "Nhập tên miền DocSpace không có đường dẫn URL hoặc ký tự bổ sung.",
+  "CSPUrlHelp": "Nhập tên miền {{portalName}} không có đường dẫn URL hoặc ký tự bổ sung.",
   "CustomDescription": "Định cấu hình thủ công các tham số để nhúng DocSpace của bạn.",
   "CustomizingDisplay": "Tùy chỉnh hiển thị",
   "DataDisplay": "Cài đặt hiển thị dữ liệu",

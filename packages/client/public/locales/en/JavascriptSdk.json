@@ -28,7 +28,7 @@
   "CSPInfoBarDescription": "Please enable the HTTPS protocol for your {{portalName}} to ensure the correct setup work.",
   "CSPInfoBarHeader": "HTTPS required",
   "CSPInputPlaceholder": "Enter URL like this: https://example.com",
-  "CSPUrlHelp": "Enter the DocSpace domain name without URL paths or additional characters.",
+  "CSPUrlHelp": "Enter the {{portalName}} domain name without URL paths or additional characters.",
   "CustomDescription": "Manually configure the parameters for embedding your DocSpace.",
   "CustomizingDisplay": "Customizing the display",
   "DataDisplay": "Data display settings",

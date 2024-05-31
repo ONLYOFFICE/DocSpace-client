@@ -24,7 +24,7 @@
   "CSPHelp": "Tämä asetus on suojausmekanismi, jota voidaan käyttää suojelemaan sisällön lisäyshyökkäyksiltä. CSP kuvaa suojatut resurssien latauslähteet. Lataaminen resursseista, jotka eivät sisälly \"valkoiseen listaan\", on estetty. Määritä toimialueet (yhdessä protokollan kanssa) joiden kanssa se toimii.",
   "CSPInfoBarHeader": "HTTPS vaaditaan",
   "CSPInputPlaceholder": "Syötä URL näin: https://example.com",
-  "CSPUrlHelp": "Syötä DocSpace verkkotunnus ilman URL-polkuja tai lisämerkkejä.",
+  "CSPUrlHelp": "Syötä {{portalName}} verkkotunnus ilman URL-polkuja tai lisämerkkejä.",
   "CustomDescription": "Määritä parametrit manuaalisesti DocSpacen upottamista varten.",
   "CustomizingDisplay": "Näytön mukauttaminen",
   "DataDisplay": "Tietojen näyttöasetukset",

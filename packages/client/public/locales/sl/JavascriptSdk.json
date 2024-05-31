@@ -26,7 +26,7 @@
   "CSPInfoBarDescription": "Omogočite protokol HTTPS za vaš {{portalName}}, da zagotovite pravilno namestitev.",
   "CSPInfoBarHeader": "Zahtevan je HTTPS",
   "CSPInputPlaceholder": "Vnesite URL kot v primeru: https://example.com",
-  "CSPUrlHelp": "Vnesite ime domene DocSpace brez URL ali dodatnih znakov.",
+  "CSPUrlHelp": "Vnesite ime domene {{portalName}} brez URL ali dodatnih znakov.",
   "CustomDescription": "Ročno konfigurirajte parametre za vdelavo vašega DocSpace.",
   "CustomizingDisplay": "Prilagajanje zaslona",
   "DataDisplay": "Nastavitve prikaza podatkov",

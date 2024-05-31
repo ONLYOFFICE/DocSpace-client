@@ -26,7 +26,7 @@
   "CSPInfoBarDescription": "Povolte prosím protokol HTTPS pro váš {{portalName}}, abyste zajistili správnou funkci nastavení.",
   "CSPInfoBarHeader": "HTTPS je vyžadován",
   "CSPInputPlaceholder": "Zadejte adresu URL takto: https://example.com",
-  "CSPUrlHelp": "Zadejte název domény DocSpace bez cest URL nebo dalších znaků.",
+  "CSPUrlHelp": "Zadejte název domény {{portalName}} bez cest URL nebo dalších znaků.",
   "CustomDescription": "Ručně nakonfigurujte parametry pro vložení prostoru DocSpace.",
   "CustomizingDisplay": "Přizpůsobení zobrazení",
   "DataDisplay": "Nastavení zobrazení dat",

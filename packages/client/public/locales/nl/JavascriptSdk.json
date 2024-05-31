@@ -26,7 +26,7 @@
   "CSPInfoBarDescription": "Activeer het HTTPS-protocol voor uw {{portalName}} om er zeker van te zijn dat de installatie naar behoren werkt.",
   "CSPInfoBarHeader": "HTTPS vereist",
   "CSPInputPlaceholder": "Voer de URL als volgt in: https://example.com",
-  "CSPUrlHelp": "Voer de DocSpace domeinnaam in zonder URL-paden of extra tekens.",
+  "CSPUrlHelp": "Voer de {{portalName}} domeinnaam in zonder URL-paden of extra tekens.",
   "CustomDescription": "Configureer de parameters voor het insluiten van uw DocSpace handmatig.",
   "CustomizingDisplay": "De weergave aanpassen",
   "DataDisplay": "Instellingen weergave gegevens",

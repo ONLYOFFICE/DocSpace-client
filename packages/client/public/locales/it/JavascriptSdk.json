@@ -26,7 +26,7 @@
   "CSPInfoBarDescription": "Abilita il protocollo HTTPS per {{portalName}} per garantire la corretta configurazione.",
   "CSPInfoBarHeader": "HTTPS richiesto",
   "CSPInputPlaceholder": "Inserisci l'URL come: https://example.com",
-  "CSPUrlHelp": "Inserisci il nome di dominio DocSpace senza percorsi URL o caratteri aggiuntivi.",
+  "CSPUrlHelp": "Inserisci il nome di dominio {{portalName}} senza percorsi URL o caratteri aggiuntivi.",
   "CustomDescription": "Configura manualmente i parametri per incorporare il tuo DocSpace.",
   "CustomizingDisplay": "Personalizzazione della visualizzazione",
   "DataDisplay": "Impostazioni di visualizzazione dei dati",

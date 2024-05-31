@@ -26,7 +26,7 @@
   "CSPInfoBarDescription": "Ενεργοποιήστε το πρωτόκολλο HTTPS για το {{portalName}} σας για να διασφαλίσετε τη σωστή λειτουργία της εγκατάστασης.",
   "CSPInfoBarHeader": "Απαιτείται HTTPS",
   "CSPInputPlaceholder": "Εισάγετε τη διεύθυνση URL ως εξής: https://example.com",
-  "CSPUrlHelp": "Εισαγάγετε το όνομα τομέα DocSpace χωρίς διαδρομές URL ή πρόσθετους χαρακτήρες.",
+  "CSPUrlHelp": "Εισαγάγετε το όνομα τομέα {{portalName}} χωρίς διαδρομές URL ή πρόσθετους χαρακτήρες.",
   "CustomDescription": "Ρυθμίστε μη αυτόματα τις παραμέτρους για την ενσωμάτωση του DocSpace σας.",
   "CustomizingDisplay": "Προσαρμογή της εμφάνισης",
   "DataDisplay": "Ρυθμίσεις εμφάνισης δεδομένων",

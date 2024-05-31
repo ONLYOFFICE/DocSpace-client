@@ -26,7 +26,7 @@
   "CSPInfoBarDescription": "{{portalName}}에 대해 HTTPS 프로토콜을 활성화하여 올바른 셋업을 보장하세요.",
   "CSPInfoBarHeader": "HTTPS 필요",
   "CSPInputPlaceholder": "다음과 같이 URL을 입력하세요: https://example.com",
-  "CSPUrlHelp": "URL 경로나 추가 문자를 제외한 DocSpace 도메인 이름을 입력하세요.",
+  "CSPUrlHelp": "URL 경로나 추가 문자를 제외한 {{portalName}} 도메인 이름을 입력하세요.",
   "CustomDescription": "DocSpace 임베딩을 위한 매개변수를 수동으로 구성하세요.",
   "CustomizingDisplay": "디스플레이 사용자 지정 중",
   "DataDisplay": "데이터 표시 설정",

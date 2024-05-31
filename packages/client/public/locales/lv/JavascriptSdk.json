@@ -26,7 +26,7 @@
   "CSPInfoBarDescription": "Iespējojiet HTTPS protokolu savai {{portalName}}, lai nodrošinātu pareizu iestatījumu darbam.",
   "CSPInfoBarHeader": "Nepieciešams HTTPS",
   "CSPInputPlaceholder": "Ievadiet vietrādi URL šādi: https://example.com",
-  "CSPUrlHelp": "Ievadiet DocSpace domēna nosaukumu bez vietrāža URL ceļiem vai papildu rakstzīmēm.",
+  "CSPUrlHelp": "Ievadiet {{portalName}} domēna nosaukumu bez vietrāža URL ceļiem vai papildu rakstzīmēm.",
   "CustomDescription": "Manuāli konfigurējiet DocSpace iegulšanas parametrus.",
   "CustomizingDisplay": "Displeja pielāgošana",
   "DataDisplay": "Datu displeja iestatījumi",

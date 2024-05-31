@@ -257,7 +257,7 @@ const CSP = ({
         lineHeight="20px"
         color={error ? theme?.input.focusErrorBorderColor : "#A3A9AE"}
       >
-        {error ? error : t("CSPUrlHelp")}
+        {error ? error : t("CSPUrlHelp", { portalName: PORTAL })}
       </Text>
       <ChipsContainer>{getChips(cspDomains)}</ChipsContainer>
     </>

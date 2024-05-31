@@ -1,4 +1,4 @@
 {
-  "PortalRestoring": "Възстановяване на DocSpace",
+  "PortalRestoring": "Възстановяване на {{portalName}}",
   "PreparationPortalDescription": "След като процесът на възстановяване приключи, ще бъдете автоматично пренасочени към вашия DocSpace."
 }

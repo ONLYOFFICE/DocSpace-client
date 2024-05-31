@@ -1,4 +1,4 @@
 {
-  "PortalRestoring": "Restaurarea spațiului DocSpace",
+  "PortalRestoring": "Restaurarea spațiului {{portalName}}",
   "PreparationPortalDescription": "După finalizarea procesului de restaurare, veți fi redirecționat automat către DocSpace."
 }

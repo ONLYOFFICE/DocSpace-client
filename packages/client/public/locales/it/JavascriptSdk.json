@@ -86,7 +86,7 @@
   "RoomTypeDisplay": "Visualizzazione del tipo di stanza",
   "Rotate": "Ruota",
   "Scale": "Scala",
-  "SDKDescription": "Utilizzando JavaScript SDK, puoi incorporare una stanza o una cartella da ONLYOFFICE DocSpace nella tua interfaccia web come iframe. Qui puoi trovare le impostazioni per la creazione di un iframe di esempio e la configurazione di CSP. Per utilizzare l'SDK completo, fai riferimento a",
+  "SDKDescription": "Utilizzando JavaScript SDK, puoi incorporare una stanza o una cartella da ONLYOFFICE {{portalName}} nella tua interfaccia web come iframe. Qui puoi trovare le impostazioni per la creazione di un iframe di esempio e la configurazione di CSP. Per utilizzare l'SDK completo, fai riferimento a",
   "SearchBlock": "Blocco di ricerca",
   "SearchFilterAndSort": "Cerca, filtra e ordina",
   "SearchTerm": "Termine di ricerca",

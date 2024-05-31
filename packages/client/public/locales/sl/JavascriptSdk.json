@@ -86,7 +86,7 @@
   "RoomTypeDisplay": "Prikaz vrste sobe",
   "Rotate": "Rotiraj",
   "Scale": "Spremeni merilo",
-  "SDKDescription": "Z uporabo JavaScript SDK lahko vdelate sobo ali mapo iz ONLYOFFICE DocSpace v svoj spletni vmesnik kot iframe. Tukaj lahko najdete nastavitve za ustvarjanje vzorca iframe in konfiguracijo CSP. Če želite uporabiti celoten SDK, si oglejte",
+  "SDKDescription": "Z uporabo JavaScript SDK lahko vdelate sobo ali mapo iz ONLYOFFICE {{portalName}} v svoj spletni vmesnik kot iframe. Tukaj lahko najdete nastavitve za ustvarjanje vzorca iframe in konfiguracijo CSP. Če želite uporabiti celoten SDK, si oglejte",
   "SearchBlock": "Išči blok",
   "SearchFilterAndSort": "Iskanje, filtriranje in razvrščanje",
   "SearchTerm": "Išči izraz",

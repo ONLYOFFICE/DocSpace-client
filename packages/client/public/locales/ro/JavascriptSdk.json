@@ -86,7 +86,7 @@
   "RoomTypeDisplay": "Afișare tip sală",
   "Rotate": "Rotire",
   "Scale": "Scalare",
-  "SDKDescription": "Cu ajutorul JavaScript SDK puteți încorpora o sală sau un folder din spațiu ONLYOFFICE DocSpace în interfața site-lui dvs prin codul iframe. Aici puteti gasi setările pentru crearea unui model iframe și configurarea Furnizorului de soluții cloud. Pentru a utiliza un SDK complet, consultați",
+  "SDKDescription": "Cu ajutorul JavaScript SDK puteți încorpora o sală sau un folder din spațiu ONLYOFFICE {{portalName}} în interfața site-lui dvs prin codul iframe. Aici puteti gasi setările pentru crearea unui model iframe și configurarea Furnizorului de soluții cloud. Pentru a utiliza un SDK complet, consultați",
   "SearchBlock": "Bloc căutare",
   "SearchFilterAndSort": "Căutare, filtrare și sortare",
   "SearchTerm": "Termen de căutare",

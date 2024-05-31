@@ -86,7 +86,7 @@
   "RoomTypeDisplay": "Zobrazení typu místnosti",
   "Rotate": "Rotace",
   "Scale": "Měřítko",
-  "SDKDescription": "Pomocí JavaScript SDK můžete místnost nebo složku z ONLYOFFICE DocSpace vložit do svého webového rozhraní jako iframe. Zde najdete nastavení pro vytvoření vzorového iframe a konfiguraci CSP. Chcete-li používat kompletní sadu SDK, podívejte se na",
+  "SDKDescription": "Pomocí JavaScript SDK můžete místnost nebo složku z ONLYOFFICE {{portalName}} vložit do svého webového rozhraní jako iframe. Zde najdete nastavení pro vytvoření vzorového iframe a konfiguraci CSP. Chcete-li používat kompletní sadu SDK, podívejte se na",
   "SearchBlock": "Vyhledávací blok",
   "SearchFilterAndSort": "Vyhledávání, filtrování a třídění",
   "SearchTerm": "Hledaný termín",

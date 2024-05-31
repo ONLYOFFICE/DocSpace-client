@@ -86,7 +86,7 @@
   "RoomTypeDisplay": "Anzeige des Raumtyps",
   "Rotate": "Drehen",
   "Scale": "Skalieren",
-  "SDKDescription": "Mit Hilfe des JavaScript SDK können Sie einen Raum oder einen Ordner aus ONLYOFFICE DocSpace als iframe in Ihr Webinterface einbetten. Hier finden Sie Einstellungen für die Erstellung eines iframe-Beispiels und die Konfiguration von CSP. Um das komplette SDK zu nutzen, schauen Sie bitte in die",
+  "SDKDescription": "Mit Hilfe des JavaScript SDK können Sie einen Raum oder einen Ordner aus ONLYOFFICE {{portalName}} als iframe in Ihr Webinterface einbetten. Hier finden Sie Einstellungen für die Erstellung eines iframe-Beispiels und die Konfiguration von CSP. Um das komplette SDK zu nutzen, schauen Sie bitte in die",
   "SearchBlock": "Suchblock",
   "SearchFilterAndSort": "Suchen, Filtern und Sortieren",
   "SearchTerm": "Suchbegriff",

@@ -86,7 +86,7 @@
   "RoomTypeDisplay": "Tip prikaza sobe",
   "Rotate": "Rotiraj",
   "Scale": "Skaliraj",
-  "SDKDescription": "JavaScript SDK vam omogućava da ugradite ceo DocSpace ili njegov deo u svoj veb interfejs. Izaberite režime spremne za upotrebu sa unapred definisanim parametrima ili prilagođeni da biste ga konfigurisali ručno. Da biste saznali više o SDK-u, pogledajte",
+  "SDKDescription": "JavaScript SDK vam omogućava da ugradite ceo {{portalName}} ili njegov deo u svoj veb interfejs. Izaberite režime spremne za upotrebu sa unapred definisanim parametrima ili prilagođeni da biste ga konfigurisali ručno. Da biste saznali više o SDK-u, pogledajte",
   "SearchBlock": "Blok za pretragu",
   "SearchFilterAndSort": "Pretražuj, Filtriraj i Sortiraj",
   "SearchTerm": "Pojmovi pretrage",

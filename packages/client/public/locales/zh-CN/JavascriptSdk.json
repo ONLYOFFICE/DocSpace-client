@@ -76,7 +76,6 @@
   "RoomTypeDisplay": "房间类型显示",
   "Rotate": "旋转",
   "Scale": "缩放",
-  "SDKDescription": "使用 JavaScript SDK，可将 ONLYOFFICE 协作空间中的房间或文件夹作为 iframe 嵌入到您的 Web 界面中。 在这里，您可以找到用于创建示例 iframe 和配置 CSP 的设置。 完整的SDK使用请参考",
   "SearchBlock": "搜索板块",
   "SearchFilterAndSort": "搜索、筛选和排序",
   "SearchTerm": "搜索词",

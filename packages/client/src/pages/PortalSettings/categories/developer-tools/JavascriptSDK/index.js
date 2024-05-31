@@ -206,7 +206,9 @@ const PortalIntegration = (props) => {
   return (
     <SDKContainer>
       <CategoryDescription>
-        <Text className="sdk-description">{t("SDKDescription")}</Text>
+        <Text className="sdk-description">
+          {t("SDKDescription", { portalName: PORTAL })}
+        </Text>
         <Link
           color={currentColorScheme?.main?.accent}
           fontSize="13px"

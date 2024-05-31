@@ -86,7 +86,7 @@
   "RoomTypeDisplay": "Telpas tipa displejs",
   "Rotate": "Pagriezt",
   "Scale": "Mērogot",
-  "SDKDescription": "Izmantojot JavaScript SDK, varat iegult telpu vai mapi no ONLYOFFICE DocSpace savā tīmekļa saskarnē kā iframe. Šeit varat atrast iestatījumus IFRAME parauga izveidei un CSP konfigurēšanai. Lai izmantotu pilnu SDK, skatiet",
+  "SDKDescription": "Izmantojot JavaScript SDK, varat iegult telpu vai mapi no ONLYOFFICE {{portalName}} savā tīmekļa saskarnē kā iframe. Šeit varat atrast iestatījumus IFRAME parauga izveidei un CSP konfigurēšanai. Lai izmantotu pilnu SDK, skatiet",
   "SearchBlock": "Meklēšanas bloks",
   "SearchFilterAndSort": "Meklēšana, filtrēšana un kārtošana",
   "SearchTerm": "Meklēšanas vienums",

@@ -90,7 +90,7 @@
   "RoomTypeDisplay": "Room type display",
   "Rotate": "Rotate",
   "Scale": "Scale",
-  "SDKDescription": "JavaScript SDK allows you to embed the whole DocSpace or its part into your web interface. Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually. To learn more about SDK, refer to the ",
+  "SDKDescription": "JavaScript SDK allows you to embed the whole {{portalName}} or its part into your web interface. Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually. To learn more about SDK, refer to the ",
   "SearchBlock": "Search block",
   "SearchByNameEmail": "Search by name or email",
   "SearchFilterAndSort": "Search, Filter and Sort",

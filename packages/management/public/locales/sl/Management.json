@@ -6,7 +6,7 @@
   "CreatingDocspace": "Ustvarjanje novega DocSpace",
   "CurrentSpace": "Trenutni prostor",
   "DeletePortalText": "Prosimo, upoštevajte: samo lastnik lahko izbriše izbrani prostor DocSpace. Lastnik <1>{{domain}}</1> je <1>{{displayName}}</1> (<5>{{email}}</5>). Če niste lastnik, s klikom na gumb IZBRIŠI ne boste mogli dostopati do nastavitev brisanja DocSpace in boste preusmerjeni v razdelek Sobe.",
-  "DocspaceName": "Ime DocSpace",
+  "DocspaceName": "Ime {{portalName}}",
   "DomainName": "Domena",
   "DomainNotFound": "Domena ni bila najdena, preverite v nastavitvah DNS",
   "DomainSettings": "Nastavitve domene",

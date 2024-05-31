@@ -167,7 +167,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
         </div>
         <div className="spaces-input-block">
           <Text fontSize="13px" fontWeight="600">
-            {t("DocspaceName")}
+            {t("DocspaceName", { portalName: PORTAL })}
           </Text>
           <TextInput
             hasError={!!(portalNameError || checkDomainError)}

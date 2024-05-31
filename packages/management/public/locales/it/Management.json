@@ -6,7 +6,7 @@
   "CreatingDocspace": "Creazione di un nuovo DocSpace",
   "CurrentSpace": "Spazio attuale",
   "DeletePortalText": "Ti preghiamo di notare: solo il proprietario può eliminare il DocSpace selezionato. Il proprietario di <1>{{domain}}</1> è <1>{{displayName}}</1> (<5>{{email}}</5>). Se non sei il proprietario, non potrai accedere alle impostazioni di eliminazione di DocSpace facendo clic sul pulsante ELIMINA e verrai reindirizzato alla sezione Stanze.",
-  "DocspaceName": "Nome di DocSpace",
+  "DocspaceName": "Nome di {{portalName}}",
   "DomainName": "Nome del dominio",
   "DomainNotFound": "Dominio non trovato, controlla le impostazioni DNS",
   "DomainSettings": "Impostazioni del dominio",

@@ -6,7 +6,7 @@
   "CreatingDocspace": "Een nieuwe DocSpace aanmaken",
   "CurrentSpace": "Huidige ruimte",
   "DeletePortalText": "Let op: alleen de eigenaar kan de geselecteerde DocSpace verwijderen. De eigenaar van <1>{{domain}}</1> is <1>{{displayName}}</1> (<5>{{email}}</5>). Als u niet de eigenaar bent, krijgt u geen toegang tot de DocSpace verwijderingsinstellingen door op de VERWIJDEREN knop te klikken en wordt u doorgestuurd naar het gedeelte Kamers.",
-  "DocspaceName": "DocSpace naam",
+  "DocspaceName": "{{portalName}} naam",
   "DomainName": "Domeinnaam",
   "DomainNotFound": "Domein niet gevonden, controleer DNS-instellingen",
   "DomainSettings": "Domein instellingen",

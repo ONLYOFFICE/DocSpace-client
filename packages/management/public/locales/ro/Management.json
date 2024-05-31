@@ -6,7 +6,7 @@
   "CreatingDocspace": "Crearea spațiului nou DocSpace",
   "CurrentSpace": "Spațiul actual",
   "DeletePortalText": "Rețineți: numai proprietarul poate șterge un spațiu DocSpace. Proprietarul domeniului <1>{{domain}}</1> este <1>{{displayName}}</1> (<5>{{email}}</5>). Dacă nu sunteți proprietarul, nu veți putea accesa setările pentru ștergerea spațiului DocSpace utilizând butonul ȘTERGERE și veți fi redirecționat către secțiunea Săli.",
-  "DocspaceName": "Nume DocSpace",
+  "DocspaceName": "Nume {{portalName}}",
   "DomainName": "Nume de domeniu",
   "DomainNotFound": "Domeniul nu a fost găsit, verificați setările DNS",
   "DomainSettings": "Setări domeniu",

@@ -6,7 +6,7 @@
   "CreatingDocspace": "Luodaan uutta DocSpacea",
   "CurrentSpace": "Nykyinen tila",
   "DeletePortalText": "Ole hyvä ja huomioi: vain omistaja voi poistaa valitun DocSpacen. <1>{{domain}}</1>:n omistaja on <1>{{displayName}}</1> (<5>{{email}}</5>). Jos et ole omistaja, et pääse DocSpace:n poistoasetuksiin klikkaamalla POISTA-painiketta ja sinut ohjataan Huoneet-osioon.",
-  "DocspaceName": "DocSpace-nimi",
+  "DocspaceName": "{{portalName}}-nimi",
   "DomainName": "Verkkotunnus",
   "DomainNotFound": "Verkkotunnusta ei löytynyt, ole hyvä ja tarkista DNS-asetukset.",
   "DomainSettings": "Verkkotunnuksen asetukset",

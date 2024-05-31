@@ -6,7 +6,7 @@
   "CreatingDocspace": "新しいDocSpaceの作成",
   "CurrentSpace": "現在のスペース",
   "DeletePortalText": "注意：選択したDocSpaceを削除できるのは所有者のみです。<1>{{domain}}</1>の所有者は <1>{{displayName}}</1>（<5>{{email}}</5>）です。所有者でない場合、「削除」ボタンをクリックしてもDocSpaceの削除設定にアクセスできず、ルームのセクションにリダイレクトされます。",
-  "DocspaceName": "DocSpace名",
+  "DocspaceName": "{{portalName}}名",
   "DomainName": "ドメイン名",
   "DomainNotFound": "ドメインが見つかりません。DNS設定を確認してください。",
   "DomainSettings": "ドメイン設定",

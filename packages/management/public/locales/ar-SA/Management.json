@@ -6,7 +6,7 @@
   "CreatingDocspace": "إنشاء DocSpace جديد",
   "CurrentSpace": "المساحة الحالية",
   "DeletePortalText": "يرجى ملاحظة: المالك فقط هو القادر على حذف DocSpace المحدد. صاحب الموقع <1>{{domain}}</1> هو <1>{{displayName}}</1> (<5>{{email}}</5>). إذا لم تكن المالك، فلن تتمكن من الوصول إلى إعدادات حذف DocSpace بالنقر على زر الحذف وسيتم توجيهك إلى قسم الغرف.",
-  "DocspaceName": "اسم DocSpace",
+  "DocspaceName": "اسم {{portalName}}",
   "DomainName": "اسم النطاق",
   "DomainNotFound": "لم يتم العثور على النطاق، يرجى التحقق من إعدادات DNS.",
   "DomainSettings": "إعدادات النطاق",

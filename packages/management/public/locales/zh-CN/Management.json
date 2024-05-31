@@ -5,7 +5,7 @@
   "CreatingDocspace": "创建新协作空间",
   "CurrentSpace": "当前协作空间",
   "DeletePortalText": "请注意：只有所有者能够删除所选的协作空间。<1>{{domain}}</1> 的所有者是<1>{{displayName}}</1> (<5>{{email}}</5>)。如果您不是所有者，点击“删除”按钮是无法访问协作空间删除设置的，而会切换至“房间”板块。",
-  "DocspaceName": "协作空间名称",
+  "DocspaceName": "{{portalName}} 名称",
   "DomainName": "域名",
   "DomainNotFound": "未找到域，请在 DNS 设置中进行查阅",
   "DomainSettings": "网域设置",

@@ -9,7 +9,7 @@
   "RoomQuotaHeader": "Kamers staat op het punt overschreden te worden: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Opslag- en kamerlimieten staan op het punt overschreden te worden.",
   "StorageAndUserHeader": "De beperkingen voor opslag en beheerders/power users worden binnenkort overschreden.",
-  "StorageQuotaDescription": "U kunt de overbodige bestanden verwijderen of <1>{{clickHere}}</1> om een meer geschikt prijsplan voor uw DocSpace te vinden.",
+  "StorageQuotaDescription": "U kunt de overbodige bestanden verwijderen of <1>{{clickHere}}</1> om een meer geschikt prijsplan voor uw {{portalName}} te vinden.",
   "StorageQuotaExceeded": "Opslagquota overschreden",
   "StorageQuotaHeader": "De hoeveelheid opslagruimte staat op het punt overschreden te worden: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "U kunt de onnodige bestanden verwijderen of de quota wijzigen in de <1>Instellingen voor opslagbeheer.</1>",

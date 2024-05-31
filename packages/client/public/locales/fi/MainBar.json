@@ -8,7 +8,6 @@
   "RoomQuotaHeader": "Huoneet täyttyvät pian {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Muisti ja huoneiden määrän raja on ylittymässä. ",
   "StorageAndUserHeader": "Muisti ja ylläpitäjien/tehokäyttäjien määrän raja on ylittymässä.",
-  "StorageQuotaDescription": "Voit poistaa tarpeettomat tiedostot tai <1>{{clickHere}}</1> löytääksesi sopivamman hintaohjelman DocSpacellesi.",
   "StorageQuotaExceeded": "Muistin kiintiö ylitetty",
   "StorageQuotaHeader": "Tallennustilan määrä on ylittymässä: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Voit poistaa tarpeettomat tiedostot tai muuttaa kiintiötä <1>Muistinhallinta-asetuksissa.</1>",

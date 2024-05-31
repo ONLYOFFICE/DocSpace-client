@@ -9,7 +9,7 @@
   "RoomQuotaHeader": "කාමර ගණන ඉක්මවීමට ආසන්නයි: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "ආචයනය සහ කාමර සීමා ඉක්මවා යාමට ආසන්නයි.",
   "StorageAndUserHeader": "ආචයනය සහ පරිපාලකයින්/බලවත් පරිශ්‍රීලකයින්ගේ සීමා ඉක්මවා යාමට ආසන්නයි.",
-  "StorageQuotaDescription": "ඔබට අනවශ්‍ය ගොනු ඉවත් කිරීමට හැකිය හෝ ඔබගේ DocSpace සඳහා වඩාත් සුදුසු මිලකරණ සැලසුමක් සොයා ගැනීමට <1>{{clickHere}}</1>.",
+  "StorageQuotaDescription": "ඔබට අනවශ්‍ය ගොනු ඉවත් කිරීමට හැකිය හෝ ඔබගේ {{portalName}} සඳහා වඩාත් සුදුසු මිලකරණ සැලසුමක් සොයා ගැනීමට <1>{{clickHere}}</1>.",
   "StorageQuotaExceeded": "ආචයන සලාකය ඉක්මවා ඇත",
   "StorageQuotaHeader": "ආචයනයේ ඉඩ ඉක්මවීමට ආසන්නයි: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "ඔබට <1>ආචයන කළමනාකරණ සැකසුම්</1> මගින් අනවශ්‍ය ගොනු ඉවත් කිරීමට හෝ සලාකය වෙනස් කිරීමට හැකිය.",

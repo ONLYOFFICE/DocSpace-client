@@ -58,7 +58,11 @@ const QuotasBar = ({
     if (!isAdmin) return t("StorageQuotaUserDescription");
 
     return (
-      <Trans i18nKey="StorageQuotaDescription" t={t}>
+      <Trans
+        i18nKey="StorageQuotaDescription"
+        t={t}
+        values={{ portalName: PORTAL }}
+      >
         You can remove the unnecessary files or
         <Link
           fontSize="12px"

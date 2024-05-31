@@ -9,7 +9,7 @@
   "RoomQuotaHeader": "Otaqlar keçmək üzrədir: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Yaddaş və otaq limitləri aşmaq üzrədir.",
   "StorageAndUserHeader": "Yaddaş və administratorlar/ekspert istifadəçilər limitləri aşmaq üzrədir.",
-  "StorageQuotaDescription": "Siz lazımsız faylları silə və ya DocSpace üçün daha uyğun qiymət planı tapmaq üçün <1>{{clickHere}}</1> edə bilərsiniz.",
+  "StorageQuotaDescription": "Siz lazımsız faylları silə və ya {{portalName}} üçün daha uyğun qiymət planı tapmaq üçün <1>{{clickHere}}</1> edə bilərsiniz.",
   "StorageQuotaExceeded": "Yaddaş kvotası limiti keçib",
   "StorageQuotaHeader": "Yaddaş sahəsinin həcmi keçmək üzrədir : {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "<1>Yaddaş idarəetmə parametrlərində</1> lazımsız faylları silə və ya kvotanı dəyişə bilərsiniz.",

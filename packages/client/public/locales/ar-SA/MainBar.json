@@ -9,7 +9,7 @@
   "RoomQuotaHeader": "عدد الغرف على وشك أن يتجاوز: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "حدود مساحة التخزين والغرف على وشك أن يتم تجاوزها.",
   "StorageAndUserHeader": "حدود مساحة التخزين والمشرفين / المستخدمين المتميزين على وشك أن يتم تجاوزها.",
-  "StorageQuotaDescription": "يمكنك إزالة الملفات غير الضرورية أو <1> {{clickHere}}</1> للعثور على خطة تسعير أكثر ملاءمة لـ DocSpace الخاص بك.",
+  "StorageQuotaDescription": "يمكنك إزالة الملفات غير الضرورية أو <1> {{clickHere}}</1> للعثور على خطة تسعير أكثر ملاءمة لـ {{portalName}} الخاص بك.",
   "StorageQuotaExceeded": "تم تجاوز حصة التخزين",
   "StorageQuotaHeader": "حجم مساحة التخزين على وشك أن يتم تجاوزها: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "يمكنك إزالة الملفات غير الضرورية أو تغيير الحصة النسبية في <1> إعدادات إدارة التخزين.</1>",

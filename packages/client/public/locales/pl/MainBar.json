@@ -9,7 +9,7 @@
   "RoomQuotaHeader": "Liczba pokoi zostanie niedługo przekroczona: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Limity pamięci i pokoi zostaną wkrótce przekroczone.",
   "StorageAndUserHeader": "Limity pamięci/użytkowników z większą liczbą uprawnień zostaną wkrótce przekroczone.",
-  "StorageQuotaDescription": "Możesz usunąć niepotrzebne pliki lub <1>{{clickHere}}</1>, aby znaleźć bardziej odpowiedni plan cenowy dla swojego konta DocSpace.",
+  "StorageQuotaDescription": "Możesz usunąć niepotrzebne pliki lub <1>{{clickHere}}</1>, aby znaleźć bardziej odpowiedni plan cenowy dla swojego konta {{portalName}}.",
   "StorageQuotaExceeded": "Przekroczono limit pamięci",
   "StorageQuotaHeader": "Ilość miejsca w pamięci zostanie wkrótce przekroczona: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Możesz usunąć niepotrzebne pliki lub zmienić limit w <1>ustawieniach zarządzania pamięcią.</1>",

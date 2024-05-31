@@ -30,7 +30,6 @@
   "ApiPageDescription": "使用 ONLYOFFICE 协作空间创建您自己的高效平台，并与团队、客户和合作伙伴进行文档协作。",
   "ApiPageHeader": "建立您自己的协作平台",
   "Appearance": "外观",
-  "AuditSubheader": "浏览用户在协作空间中对实体类（房间、机会、文件等）进行的最新操作（创建、修改、删除等）",
   "AuditTrailNav": "审计追踪",
   "AutoBackup": "自动备份",
   "AutoBackupDescription": "自动备份即自动执行协作空间的数据备份，以便之后能够将其恢复到本地服务器中。",

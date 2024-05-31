@@ -33,7 +33,7 @@
   "ApiPageDescription": "Crie a sua própria plataforma de produtividade com base no ONLYOFFICE DocSpace e colabore em documentos com equipas, clientes e parceiros.",
   "ApiPageHeader": "Construa a sua própria plataforma de colaboração",
   "Appearance": "Aparência",
-  "AuditSubheader": "A subsecção permite-lhe navegar através da lista das últimas alterações (criação, modificação, eliminação, etc.) feitas pelos utilizadores às entidades (salas, oportunidades, ficheiros, etc.) dentro do seu DocSpace.",
+  "AuditSubheader": "A subsecção permite-lhe navegar através da lista das últimas alterações (criação, modificação, eliminação, etc.) feitas pelos utilizadores às entidades (salas, oportunidades, ficheiros, etc.) dentro do seu {{portalName}}.",
   "AuditTrailNav": "Auditar o Rastro",
   "AutoBackup": "Cópia de segurança automática",
   "AutoBackupDescription": "A opção Backup automático é usada para automatizar o processo de backup de dados do DocSpace para poder restaurá-los posteriormente em um servidor local.",

@@ -33,7 +33,7 @@
   "ApiPageDescription": "Kreirajte sopstvenu platformu za produktivnost zasnovanu na ONLYOFFICE DocSpace-u i sarađujte na dokumentima sa timovima, klijentima i partnerima.",
   "ApiPageHeader": "Izgradi svoju sopstvenu platformu za saradnju",
   "Appearance": "Izgled",
-  "AuditSubheader": "Ova podsekcija vam omogućava pregled liste poslednjih promena (kreacija, modifikacija, brisanje itd.) koje su korisnici izvršili na entitetima (sobama, prilikama, datotekama itd.) unutar vašeg DocSpace-a.",
+  "AuditSubheader": "Ova podsekcija vam omogućava pregled liste poslednjih promena (kreacija, modifikacija, brisanje itd.) koje su korisnici izvršili na entitetima (sobama, prilikama, datotekama itd.) unutar vašeg {{portalName}}-a.",
   "AuditTrailNav": "Revizorska staza",
   "AutoBackup": "Automatka rezervna kopija",
   "AutoBackupDescription": "Opcija automatske sigurnosne kopije se koristi kako bi se automatizovao proces sigurnosne kopije podataka DocSpace-a kako bi se kasnije mogao povratiti na lokalni server.",

@@ -33,7 +33,7 @@
   "ApiPageDescription": "Vytvořte si vlastní platformu pro produktivitu založenou na ONLYOFFICE DocSpace a spolupracujte na dokumentech s týmy, klienty a partnery.",
   "ApiPageHeader": "Vytvořte si vlastní platformu pro spolupráci",
   "Appearance": "Vzhled",
-  "AuditSubheader": "Tato podsekce umožňuje procházet seznam nejnovějších změn (vytvoření, úpravy, odstranění atd.), které uživatelé provedli v entitách (místnostech, příležitostech, souborech atd.) v rámci vašeho prostoru DocSpace.",
+  "AuditSubheader": "Tato podsekce umožňuje procházet seznam nejnovějších změn (vytvoření, úpravy, odstranění atd.), které uživatelé provedli v entitách (místnostech, příležitostech, souborech atd.) v rámci vašeho prostoru {{portalName}}.",
   "AuditTrailNav": "Audit Trail",
   "AutoBackup": "Automatická záloha",
   "AutoBackupDescription": "Možnost Automatické zálohování slouží k automatizaci procesu zálohování dat DocSpace, aby bylo možné je později obnovit na místním serveru.",

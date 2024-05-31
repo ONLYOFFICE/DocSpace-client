@@ -33,7 +33,7 @@
   "ApiPageDescription": "Maak uw eigen productiviteitsplatform op basis van ONLYOFFICE DocSpace en werk samen aan documenten met teams, klanten en partners.",
   "ApiPageHeader": "Bouw uw eigen samenwerkingsplatform",
   "Appearance": "Uiterlijk",
-  "AuditSubheader": "Met deze subsectie kunt u bladeren door de lijst met de laatste wijzigingen (aanmaak, wijziging, verwijdering enz.) die gebruikers hebben aangebracht in de entiteiten (ruimtes, kansen, bestanden enz.) binnen uw DocSpace.",
+  "AuditSubheader": "Met deze subsectie kunt u bladeren door de lijst met de laatste wijzigingen (aanmaak, wijziging, verwijdering enz.) die gebruikers hebben aangebracht in de entiteiten (ruimtes, kansen, bestanden enz.) binnen uw {{portalName}}.",
   "AuditTrailNav": "Audit Trail",
   "AutoBackup": "Automatische back-up",
   "AutoBackupDescription": "De optie Automatische back-up wordt gebruikt om het back-upproces van DocSpace gegevens te automatiseren, zodat u deze later op een lokale server kunt terugzetten.",

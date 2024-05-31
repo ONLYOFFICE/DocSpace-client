@@ -34,7 +34,7 @@
   "ApiPageDescription": "Create your own productivity platform based on ONLYOFFICE DocSpace and collaborate on documents with teams, clients, and partners.",
   "ApiPageHeader": "Build your own collaboration platform",
   "Appearance": "Appearance",
-  "AuditSubheader": "The subsection allows you to browse through the list of the latest changes (creation, modification, deletion etc.) made by users to the entities (rooms, opportunities, files etc.) within your DocSpace.",
+  "AuditSubheader": "The subsection allows you to browse through the list of the latest changes (creation, modification, deletion etc.) made by users to the entities (rooms, opportunities, files etc.) within your {{portalName}}.",
   "AuditTrailNav": "Audit Trail",
   "AutoBackup": "Automatic backup",
   "AutoBackupDescription": "The Automatic backup option is used to automate the DocSpace data backup process to be able to restore it later to a local server.",

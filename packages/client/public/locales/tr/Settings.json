@@ -33,7 +33,7 @@
   "ApiPageDescription": "ONLYOFFICE DocSpace tabanlı kendi üretkenlik platformunuzu oluşturun ve ekipler, müşteriler ve ortaklarla belgeler üzerinde iş birliği yapın.",
   "ApiPageHeader": "Kendi iş birliği platformunuzu oluşturun",
   "Appearance": "Görünüm",
-  "AuditSubheader": "Alt bölüm, kullanıcılar tarafından DocSpace'inizdeki varlıklarda (odalar, fırsatlar, dosyalar vb.) yapılan en son değişikliklerin (oluşturma, değiştirme, silme vb.) listesine göz atmanıza olanak tanır.",
+  "AuditSubheader": "Alt bölüm, kullanıcılar tarafından {{portalName}}'inizdeki varlıklarda (odalar, fırsatlar, dosyalar vb.) yapılan en son değişikliklerin (oluşturma, değiştirme, silme vb.) listesine göz atmanıza olanak tanır.",
   "AuditTrailNav": "Denetim İzleme",
   "AutoBackup": "Otomatik yedekleme",
   "AutoBackupDescription": "Otomatik yedekleme seçeneği, daha sonra yerel bir sunucuya geri yükleyebilmek amacıyla DocSpace veri yedekleme işlemini otomatikleştirmek için kullanılır.",

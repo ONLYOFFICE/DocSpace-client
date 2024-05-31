@@ -71,7 +71,7 @@
   "ChooseBackupFiles": "バックアップファイルの選択",
   "ClearBackupList": "すべてのバックアップを削除",
   "CloseMenu": "メニューを閉じる",
-  "CommonFilesDescription": "共通セクションのファイルについては、別のルーム（共通ルーム）が作成されます。このルームには、DocSpaceの管理者のみがアクセスできます。デフォルトでは、ルームの所有者はインポートを開始したユーザーです： {{user}}（あなた）です。",
+  "CommonFilesDescription": "共通セクションのファイルについては、別のルーム（共通ルーム）が作成されます。このルームには、{{portalName}}の管理者のみがアクセスできます。デフォルトでは、ルームの所有者はインポートを開始したユーザーです： {{user}}（あなた）です。",
   "CompanyInfoSettings": "会社情報設定",
   "CompanyInfoSettingsDescription": "この情報は、<1>{{link}}</1>ウィンドウに表示されます。",
   "ConfirmEmailSended": "確認のメールが{{ownerName}}に送信されました。",

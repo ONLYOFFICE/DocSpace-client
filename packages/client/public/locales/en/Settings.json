@@ -73,7 +73,7 @@
   "ChooseBackupFiles": "Choose the backup files",
   "ClearBackupList": "Delete all backups",
   "CloseMenu": "Close menu",
-  "CommonFilesDescription": "For the files in the Common section, a separate room will be created (Common room). Only DocSpace admins will have access to this room. By default, the owner of the room will be the user initiating the import: {{user}} (You).",
+  "CommonFilesDescription": "For the files in the Common section, a separate room will be created (Common room). Only {{portalName}} admins will have access to this room. By default, the owner of the room will be the user initiating the import: {{user}} (You).",
   "CompanyInfoSettings": "Company info settings",
   "CompanyInfoSettingsDescription": "This information will be displayed in the <1>{{link}}</1> window.",
   "ConfirmEmailSended": "Confirmation e-mail has been sent to {{ownerName}}",

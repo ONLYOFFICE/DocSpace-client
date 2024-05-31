@@ -71,7 +71,7 @@
   "ChooseBackupFiles": "Ehtiyat faylları seçin",
   "ClearBackupList": "Bütün ehtiyat nüsxələri silin",
   "CloseMenu": "Menyunu bağlayın",
-  "CommonFilesDescription": "Ümumi bölmədəki fayllar üçün ayrıca otaq (Ümumi otaq) yaradılacaq. Bu otağa yalnız DocSpace administratorları daxil ola bilər. Defolt olaraq, otağın sahibi idxalı başladan istifadəçi olacaq: {{user}} (Siz).",
+  "CommonFilesDescription": "Ümumi bölmədəki fayllar üçün ayrıca otaq (Ümumi otaq) yaradılacaq. Bu otağa yalnız {{portalName}} administratorları daxil ola bilər. Defolt olaraq, otağın sahibi idxalı başladan istifadəçi olacaq: {{user}} (Siz).",
   "CompanyInfoSettings": "Şirkət məlumatları parametrləri",
   "CompanyInfoSettingsDescription": "Bu məlumat <1>{{link}}</1> pəncərəsində göstəriləcək.",
   "ConfirmEmailSended": "Təsdiqləmə e-məktubu {{ownerName}} göndərilmişdir",

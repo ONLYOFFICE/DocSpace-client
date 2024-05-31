@@ -72,7 +72,7 @@
   "ChooseBackupFiles": "Elija los archivos de copia de seguridad",
   "ClearBackupList": "Eliminar todas las copias de seguridad",
   "CloseMenu": "Cerrar menú",
-  "CommonFilesDescription": "Para los archivos de la sección Común, se creará una sala separada (Sala común). Solo los administradores de DocSpace tendrán acceso a esta sala. De forma predeterminada, el propietario de la sala será el usuario que inicie la importación: {{user}} (usted).",
+  "CommonFilesDescription": "Para los archivos de la sección Común, se creará una sala separada (Sala común). Solo los administradores de {{portalName}} tendrán acceso a esta sala. De forma predeterminada, el propietario de la sala será el usuario que inicie la importación: {{user}} (usted).",
   "CompanyInfoSettings": "Configuración de la información de la empresa",
   "CompanyInfoSettingsDescription": "Esta información se mostrará en la ventana <1>{{link}}</1>.",
   "ConfirmEmailSended": "El correo electrónico de confirmación ha sido enviado a {{ownerName}}",

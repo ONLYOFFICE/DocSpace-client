@@ -71,7 +71,7 @@
   "ChooseBackupFiles": "Kies de back-up bestanden",
   "ClearBackupList": "Verwijder alle back-ups",
   "CloseMenu": "Sluit menu",
-  "CommonFilesDescription": "Voor de bestanden in de Algemene sectie wordt een aparte ruimte gemaakt (Algemene kamer). Alleen DocSpace beheerders hebben toegang tot deze ruimte. Standaard is de eigenaar van de kamer de gebruiker die de import start: {{user}} (U).",
+  "CommonFilesDescription": "Voor de bestanden in de Algemene sectie wordt een aparte ruimte gemaakt (Algemene kamer). Alleen {{portalName}} beheerders hebben toegang tot deze ruimte. Standaard is de eigenaar van de kamer de gebruiker die de import start: {{user}} (U).",
   "CompanyInfoSettings": "Bedrijfsinformatie instellingen",
   "CompanyInfoSettingsDescription": "Deze informatie wordt weergegeven in het venster <1>{{link}}</1>.",
   "ConfirmEmailSended": "Bevestiging e-mail is gestuurd naar {{ownerName}}",

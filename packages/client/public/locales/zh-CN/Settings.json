@@ -64,7 +64,6 @@
   "ChooseBackupFiles": "选择备份文件",
   "ClearBackupList": "删除所有备份",
   "CloseMenu": "关闭菜单",
-  "CommonFilesDescription": "系统会为“公共”板块中的文件创建一个单独的房间（公共房间）。只有协作空间管理员可访问此房间。默认情况下，房间的所有者是发起导入的用户：{{user}}（您）。",
   "CompanyInfoSettings": "公司信息设置",
   "CompanyInfoSettingsDescription": "此信息将展示在 <1>{{link}}</1> 窗口中。",
   "ConfirmEmailSended": "确认邮件已发送至{{ownerName}}",

@@ -71,7 +71,7 @@
   "ChooseBackupFiles": "Scegli i file di backup",
   "ClearBackupList": "Elimina tutti i backup",
   "CloseMenu": "Chiudi menù",
-  "CommonFilesDescription": "Per i file presenti nella sezione Comune verrà creata una stanza separata (Stanza Comune). Solo gli amministratori di DocSpace avranno accesso a questa stanza. Per impostazione predefinita, il proprietario della stanza sarà l'utente che avvia l'importazione: {{user}} (Tu).",
+  "CommonFilesDescription": "Per i file presenti nella sezione Comune verrà creata una stanza separata (Stanza Comune). Solo gli amministratori di {{portalName}} avranno accesso a questa stanza. Per impostazione predefinita, il proprietario della stanza sarà l'utente che avvia l'importazione: {{user}} (Tu).",
   "CompanyInfoSettings": "Impostazioni delle informazioni aziendali",
   "CompanyInfoSettingsDescription": "Queste informazioni verranno visualizzate nella finestra <1>{{link}}</1>.",
   "ConfirmEmailSended": "Un messaggio e-mail di conferma è stato spedito a {{ownerName}}",

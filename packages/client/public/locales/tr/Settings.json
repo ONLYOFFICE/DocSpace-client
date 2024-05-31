@@ -71,7 +71,7 @@
   "ChooseBackupFiles": "Yedekleme dosyalarını seç",
   "ClearBackupList": "Tüm yedekleri sil",
   "CloseMenu": "Menüyü kapat",
-  "CommonFilesDescription": "Ortak bölümdeki dosyalar için ayrı bir oda oluşturulacaktır (Ortak oda). Bu odaya yalnızca DocSpace yöneticilerinin erişimi olacaktır. Varsayılan olarak, odanın sahibi içe aktarmayı başlatan kullanıcı olacaktır: {{user}} (Siz).",
+  "CommonFilesDescription": "Ortak bölümdeki dosyalar için ayrı bir oda oluşturulacaktır (Ortak oda). Bu odaya yalnızca {{portalName}} yöneticilerinin erişimi olacaktır. Varsayılan olarak, odanın sahibi içe aktarmayı başlatan kullanıcı olacaktır: {{user}} (Siz).",
   "CompanyInfoSettings": "Şirket bilgileri ayarları",
   "CompanyInfoSettingsDescription": "Bu bilgi <1>{{link}}</1> penceresinde görüntülenecektir.",
   "ConfirmEmailSended": "Onay e-postası şu kişiye gönderildi {{ownerName}}",

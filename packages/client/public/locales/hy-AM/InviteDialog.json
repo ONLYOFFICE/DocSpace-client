@@ -8,7 +8,7 @@
   "InviteAccountSearchPlaceholder": "Հրավիրեք մարդկանց էլ փոստով",
   "InviteRoomSearchPlaceholder": "Հրավիրեք մարդկանց անունով կամ էլ փոստով",
   "InviteViaLink": "Հրավիրեք հղման միջոցով",
-  "InviteViaLinkDescriptionAccounts": "Ստեղծեք ունիվերսալ հղում DocSpace-ում ինքնալիազորման համար",
+  "InviteViaLinkDescriptionAccounts": "Ստեղծեք ունիվերսալ հղում {{portalName}}-ում ինքնալիազորման համար",
   "InviteViaLinkDescriptionRoom": "Ստեղծեք համընդհանուր հղում սենյակում ինքնալիազորման համար",
   "LinkCopySuccess": "Հղումը պատճենվել է",
   "ResetChange": "Վերականգնել փոփոխությունը",

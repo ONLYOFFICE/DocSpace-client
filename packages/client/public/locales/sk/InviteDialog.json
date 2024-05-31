@@ -8,7 +8,7 @@
   "InviteAccountSearchPlaceholder": "Pozvať ľudí e-mailom",
   "InviteRoomSearchPlaceholder": "Pozvať ľudí podľa mena alebo e-mailu",
   "InviteViaLink": "Pozvať cez odkaz",
-  "InviteViaLinkDescriptionAccounts": "Vytvorte univerzálny odkaz na autorizáciu v DocSpace",
+  "InviteViaLinkDescriptionAccounts": "Vytvorte univerzálny odkaz na autorizáciu v {{portalName}}",
   "InviteViaLinkDescriptionRoom": "Vytvorte univerzálny odkaz na autorizáciu v miestnosti",
   "LinkCopySuccess": "Odkaz bol skopírovaný",
   "ResetChange": "Zrušiť zmenu",

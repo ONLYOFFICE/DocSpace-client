@@ -8,7 +8,7 @@
   "InviteAccountSearchPlaceholder": "İnsanları e-məktubla dəvət edin",
   "InviteRoomSearchPlaceholder": "İnsanları ad və ya e-məktubla dəvət edin",
   "InviteViaLink": "Keçidlə dəvət edin",
-  "InviteViaLinkDescriptionAccounts": "DocSpace-də avtorizasiya üçün universal keçid yaradın",
+  "InviteViaLinkDescriptionAccounts": "{{portalName}}-də avtorizasiya üçün universal keçid yaradın",
   "InviteViaLinkDescriptionRoom": "Otağın avtorizasiyası üçün universal keçid yaradın",
   "LinkCopySuccess": "Link köçürüldü",
   "ResetChange": "Dəyişikliyi sıfırlayın",

@@ -8,7 +8,7 @@
   "InviteAccountSearchPlaceholder": "Povabite ljudi po e-mailu",
   "InviteRoomSearchPlaceholder": "Povabite ljudi po imenu ali e-mailu",
   "InviteViaLink": "Povabite s povezavo",
-  "InviteViaLinkDescriptionAccounts": "Ustvari univerzalno povezavo za samodejno avtorizacijo v DocSpace",
+  "InviteViaLinkDescriptionAccounts": "Ustvari univerzalno povezavo za samodejno avtorizacijo v {{portalName}}",
   "InviteViaLinkDescriptionRoom": "Ustvari univerzalno povezavo za samoavtorizacijo v sobi",
   "LinkCopySuccess": "Povezava je bila kopirana",
   "ResetChange": "Ponastavi spremembe",

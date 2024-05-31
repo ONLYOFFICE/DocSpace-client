@@ -8,7 +8,7 @@
   "InviteAccountSearchPlaceholder": "Invita persone via e-mail",
   "InviteRoomSearchPlaceholder": "Invita persone per nome o e-mail",
   "InviteViaLink": "Invita tramite link",
-  "InviteViaLinkDescriptionAccounts": "Crea un link universale per l’auto-autorizzazione in DocSpace",
+  "InviteViaLinkDescriptionAccounts": "Crea un link universale per l’auto-autorizzazione in {{portalName}}",
   "InviteViaLinkDescriptionRoom": "Crea un link universale per l’auto-autorizzazione nella stanza",
   "LinkCopySuccess": "Il link di collegamento è stato copiato",
   "ResetChange": "Reimposta il cambiamento",

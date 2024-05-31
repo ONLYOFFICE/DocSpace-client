@@ -8,7 +8,7 @@
   "InviteAccountSearchPlaceholder": "Mời người dùng qua email",
   "InviteRoomSearchPlaceholder": "Mời người dùng theo tên hoặc email",
   "InviteViaLink": "Mời qua liên kết",
-  "InviteViaLinkDescriptionAccounts": "Tạo một liên kết universal link để tự ủy quyền trong DocSpace",
+  "InviteViaLinkDescriptionAccounts": "Tạo một liên kết universal link để tự ủy quyền trong {{portalName}}",
   "InviteViaLinkDescriptionRoom": "Tạo một liên kết universal link để tự ủy quyền trong phòng",
   "LinkCopySuccess": "Liên kết đã được sao chép",
   "ResetChange": "Đặt lại thay đổi",

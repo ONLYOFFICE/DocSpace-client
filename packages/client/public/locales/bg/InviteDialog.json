@@ -8,7 +8,7 @@
   "InviteAccountSearchPlaceholder": "Поканете хора по имейл",
   "InviteRoomSearchPlaceholder": "Поканете хора по име или имейл",
   "InviteViaLink": "Поканете чрез линк",
-  "InviteViaLinkDescriptionAccounts": "Създайте универсален линк за самоупълномощаване в DocSpace",
+  "InviteViaLinkDescriptionAccounts": "Създайте универсален линк за самоупълномощаване в {{portalName}}",
   "InviteViaLinkDescriptionRoom": "Създайте универсален линк за самоупълномощаване в стаята",
   "LinkCopySuccess": "Връзката беше копирана",
   "ResetChange": "Нулирай промяна",

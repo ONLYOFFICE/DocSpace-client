@@ -8,7 +8,7 @@
   "InviteAccountSearchPlaceholder": "Πρόσκληση ατόμων μέσω email",
   "InviteRoomSearchPlaceholder": "Πρόσκληση ατόμων με όνομα ή email",
   "InviteViaLink": "Πρόσκληση μέσω συνδέσμου",
-  "InviteViaLinkDescriptionAccounts": "Δημιουργήστε μια καθολική σύνδεση για αυτοεξουσιοδότηση στο DocSpace",
+  "InviteViaLinkDescriptionAccounts": "Δημιουργήστε μια καθολική σύνδεση για αυτοεξουσιοδότηση στο {{portalName}}",
   "InviteViaLinkDescriptionRoom": "Δημιουργήστε έναν καθολικό σύνδεσμο για αυτοεξουσιοδότηση στην αίθουσα",
   "LinkCopySuccess": "Ο σύνδεσμος έχει αντιγραφεί",
   "ResetChange": "Επαναφορά αλλαγής",

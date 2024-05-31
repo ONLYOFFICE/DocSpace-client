@@ -7,7 +7,7 @@
   "InviteAccountSearchPlaceholder": "ເຊີນຄົນທາງອີເມວ",
   "InviteRoomSearchPlaceholder": "ເຊີນຄົນດ້ວຍຊື່ ຫຼືອີເມລ໌",
   "InviteViaLink": "ເຊີນຜ່ານລິ້ງ",
-  "InviteViaLinkDescriptionAccounts": "ສ້າງການເຊື່ອມຕໍ່ທົ່ວໄປສໍາລັບການອະນຸຍາດຕົນເອງໃນ DocSpace",
+  "InviteViaLinkDescriptionAccounts": "ສ້າງການເຊື່ອມຕໍ່ທົ່ວໄປສໍາລັບການອະນຸຍາດຕົນເອງໃນ {{portalName}}",
   "InviteViaLinkDescriptionRoom": "ສ້າງການເຊື່ອມຕໍ່ທົ່ວໄປສໍາລັບການອະນຸຍາດຕົນເອງໃນຫ້ອງ",
   "LinkCopySuccess": "ລິ້ງຖືກຄັດລອກແລ້ວ",
   "ResetChange": "ຣີເຊັດການປ່ຽນແປງ",

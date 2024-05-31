@@ -8,7 +8,7 @@
   "InviteAccountSearchPlaceholder": "Запрошуйте людей за адресою електронної пошти",
   "InviteRoomSearchPlaceholder": "Запрошуйте людей за іменем або адресою електронної пошти",
   "InviteViaLink": "Запросити за допомогою посилання",
-  "InviteViaLinkDescriptionAccounts": "Створити універсальне посилання для самоавторизації в DocSpace",
+  "InviteViaLinkDescriptionAccounts": "Створити універсальне посилання для самоавторизації в {{portalName}}",
   "InviteViaLinkDescriptionRoom": "Створити універсальне посилання для самоавторизації в кімнаті",
   "LinkCopySuccess": "Посилання скопійовано",
   "ResetChange": "Скинути зміни",

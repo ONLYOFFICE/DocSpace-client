@@ -8,7 +8,7 @@
   "InviteAccountSearchPlaceholder": "이메일로 사람들 초대",
   "InviteRoomSearchPlaceholder": "이름 또는 이메일로 사람들 초대",
   "InviteViaLink": "링크를 통해 초대",
-  "InviteViaLinkDescriptionAccounts": "DocSpace에서 자체 인증을 위한 범용 링크 생성",
+  "InviteViaLinkDescriptionAccounts": "{{portalName}}에서 자체 인증을 위한 범용 링크 생성",
   "InviteViaLinkDescriptionRoom": "방에서 자체 승인을 위한 범용 링크 생성",
   "LinkCopySuccess": "링크가 복사되었습니다",
   "ResetChange": "변경 사항 재설정",

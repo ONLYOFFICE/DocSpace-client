@@ -8,7 +8,7 @@
   "InviteAccountSearchPlaceholder": "Invitaţi persoane după email",
   "InviteRoomSearchPlaceholder": "Invitaţi persoane după nume sau email",
   "InviteViaLink": "Invitaţi prin link",
-  "InviteViaLinkDescriptionAccounts": "Creaţi un link universal de auto-autentificare în DocSpace",
+  "InviteViaLinkDescriptionAccounts": "Creaţi un link universal de auto-autentificare în {{portalName}}",
   "InviteViaLinkDescriptionRoom": "Creaţi un link universal de auto-autentificare în sala",
   "LinkCopySuccess": "Link-ul a fost copiat",
   "ResetChange": "Resetarea modificării",

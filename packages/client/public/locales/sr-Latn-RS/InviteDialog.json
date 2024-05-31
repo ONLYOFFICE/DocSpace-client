@@ -8,7 +8,7 @@
   "InviteAccountSearchPlaceholder": "Pozovi ljude preko email-a",
   "InviteRoomSearchPlaceholder": "Pozovi ljude imenom ili email-om",
   "InviteViaLink": "Pozovi putem linka",
-  "InviteViaLinkDescriptionAccounts": "Stvorite univerzalni link za samopriznanje u DocSpace-u.",
+  "InviteViaLinkDescriptionAccounts": "Stvorite univerzalni link za samopriznanje u {{portalName}}-u.",
   "InviteViaLinkDescriptionRoom": "Stvorite univerzalni link za samopriznanje u sobi",
   "LinkCopySuccess": "Link je kopiran",
   "ResetChange": "Resetuj promene",

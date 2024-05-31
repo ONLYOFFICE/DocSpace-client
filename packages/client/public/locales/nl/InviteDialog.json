@@ -8,7 +8,7 @@
   "InviteAccountSearchPlaceholder": "Mensen per e-mail uitnodigen",
   "InviteRoomSearchPlaceholder": "Mensen per e-mail uitnodigen",
   "InviteViaLink": "Uitnodigen via link",
-  "InviteViaLinkDescriptionAccounts": "Maak een universele link voor zelfautorisatie in DocSpace",
+  "InviteViaLinkDescriptionAccounts": "Maak een universele link voor zelfautorisatie in {{portalName}}",
   "InviteViaLinkDescriptionRoom": "Maak een universele link voor zelfautorisatie in de kamer",
   "LinkCopySuccess": "Link is gekopieerd",
   "ResetChange": "Wijziging resetten",

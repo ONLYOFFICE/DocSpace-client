@@ -8,7 +8,7 @@
   "InviteAccountSearchPlaceholder": "වි-තැපෑලෙන් ආරාධනය",
   "InviteRoomSearchPlaceholder": "නමින් හෝ වි-තැපෑලෙන් ආරාධනා කරන්න",
   "InviteViaLink": "සබැඳියකින් ආරාධනය",
-  "InviteViaLinkDescriptionAccounts": "DocSpace වෙත ඉබේම පිවිසීමට විශ්ව සබැඳියක් සාදන්න",
+  "InviteViaLinkDescriptionAccounts": "{{portalName}} වෙත ඉබේම පිවිසීමට විශ්ව සබැඳියක් සාදන්න",
   "InviteViaLinkDescriptionRoom": "කාමරය වෙත ඉබේම පිවිසීමට විශ්ව සබැඳියක් සාදන්න",
   "LinkCopySuccess": "සබැඳිය පිටපත් විය",
   "ResetChange": "වෙනස්කම් යළි සකසන්න",

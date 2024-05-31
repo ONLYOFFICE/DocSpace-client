@@ -86,7 +86,7 @@
   "DataBackup": "Datu dublēšana",
   "DataImport": "Datu importēšana",
   "DataImportComplete": "Datu importēšana ir pabeigta",
-  "DataImportDescription": "Importējiet datus no trešās puses pakalpojuma ONLYOFFICE DocSpace. Datu importēšana ļauj pārsūtīt datus, piemēram, visus lietotājus, viņu personīgos un kopīgotos dokumentus.",
+  "DataImportDescription": "Importējiet datus no trešās puses pakalpojuma ONLYOFFICE {{portalName}}. Datu importēšana ļauj pārsūtīt datus, piemēram, visus lietotājus, viņu personīgos un kopīgotos dokumentus.",
   "DataImportProcessing": "Datu importēšanas apstrāde",
   "Deactivate": "Deaktivēt",
   "DeactivateOrDeletePortal": "Deaktivizēt vai dzēst portālu.",

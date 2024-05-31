@@ -85,7 +85,7 @@
   "DataBackup": "Data backup",
   "DataImport": "Gegevens importeren",
   "DataImportComplete": "Gegevens importeren voltooid",
-  "DataImportDescription": "Importeer gegevens van een externe service naar ONLYOFFICE DocSpace. Gegevensimport maakt het mogelijk om gegevens over te zetten, zoals alle gebruikers, hun persoonlijke en gedeelde documenten.",
+  "DataImportDescription": "Importeer gegevens van een externe service naar ONLYOFFICE {{portalName}}. Gegevensimport maakt het mogelijk om gegevens over te zetten, zoals alle gebruikers, hun persoonlijke en gedeelde documenten.",
   "DataImportProcessing": "Verwerking van geïmporteerde gegevens",
   "Deactivate": "Deactiveer",
   "DeactivateOrDeletePortal": "Ruimte deactiveren of verwijderen.",

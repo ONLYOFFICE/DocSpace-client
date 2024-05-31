@@ -82,7 +82,6 @@
   "DataBackup": "Tietojen varmuuskopiointi",
   "DataImport": "Tietojen tuonti",
   "DataImportComplete": "Tietojen tuonti suoritettu",
-  "DataImportDescription": "Tuo tiedot kolmannen osapuolen palvelusta ONLYOFFICE DocSpaceen. Tietojen tuonti mahdollistaa tietojen, kuten kaikkien käyttäjien, heidän henkilökohtaisten ja jaettujen asiakirjojen siirron.",
   "DataImportProcessing": "Tietojen tuonnin prosessointi",
   "Deactivate": "Poista käytöstä",
   "DeactivateOrDeletePortal": "Ota tila pois käytöstä tai poista se.",

@@ -86,7 +86,7 @@
   "DataBackup": "Backup de dados",
   "DataImport": "Importação de dados",
   "DataImportComplete": "Importação de dados concluída",
-  "DataImportDescription": "Importe dados de um serviço de terceiros para o ONLYOFFICE DocSpace. A importação de dados permite a transferência de dados como todos os usuários, seus documentos pessoais e compartilhados.",
+  "DataImportDescription": "Importe dados de um serviço de terceiros para o ONLYOFFICE {{portalName}}. A importação de dados permite a transferência de dados como todos os usuários, seus documentos pessoais e compartilhados.",
   "DataImportProcessing": "Processamento de importação de dados",
   "Deactivate": "Desativar",
   "DeactivateOrDeletePortal": "Desative ou exclua o espaço.",

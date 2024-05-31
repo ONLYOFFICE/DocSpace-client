@@ -85,7 +85,7 @@
   "DataBackup": "Məlumatların yedəklənməsi",
   "DataImport": "Məlumat idxalı",
   "DataImportComplete": "Məlumat idxalı tamamlandı",
-  "DataImportDescription": "Üçüncü tərəf xidmətindən ONLYOFFICE DocSpace-ə məlumatları idxal edin. Məlumatların idxalı bütün istifadəçilər, şəxsi və paylaşılan sənədlər kimi məlumatların ötürülməsinə imkan verir.",
+  "DataImportDescription": "Üçüncü tərəf xidmətindən ONLYOFFICE {{portalName}}-ə məlumatları idxal edin. Məlumatların idxalı bütün istifadəçilər, şəxsi və paylaşılan sənədlər kimi məlumatların ötürülməsinə imkan verir.",
   "DataImportProcessing": "Məlumatların idxalının emalı",
   "Deactivate": "Deaktiv edin",
   "DeactivateOrDeletePortal": "Sahəni deaktivləşdirin və ya silin",

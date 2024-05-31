@@ -85,7 +85,7 @@
   "DataBackup": "Zálohování dat",
   "DataImport": "Import dat",
   "DataImportComplete": "Import dat dokončen",
-  "DataImportDescription": "Import dat ze služby třetí strany do ONLYOFFICE DocSpace. Import dat umožňuje přenést data, jako jsou všichni uživatelé, jejich osobní a sdílené dokumenty.",
+  "DataImportDescription": "Import dat ze služby třetí strany do ONLYOFFICE {{portalName}}. Import dat umožňuje přenést data, jako jsou všichni uživatelé, jejich osobní a sdílené dokumenty.",
   "DataImportProcessing": "Zpracování importu dat",
   "Deactivate": "Deaktivace",
   "DeactivateOrDeletePortal": "Deaktivovat nebo odstranit prostor.",

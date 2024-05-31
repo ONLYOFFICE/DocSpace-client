@@ -86,7 +86,7 @@
   "DataBackup": "Copiere de rezervă a datelor",
   "DataImport": "Import date",
   "DataImportComplete": "Import date finalizat",
-  "DataImportDescription": "Importul datelor din serviciu terță parte în spațiu ONLYOFFICE DocSpace. Importul datelor permite de a transfera datele, precum toți utilizatori, documentele lor personale și partajate.",
+  "DataImportDescription": "Importul datelor din serviciu terță parte în spațiu ONLYOFFICE {{portalName}}. Importul datelor permite de a transfera datele, precum toți utilizatori, documentele lor personale și partajate.",
   "DataImportProcessing": "Procesare import date",
   "Deactivate": "Dezactivare",
   "DeactivateOrDeletePortal": "Dezactivarea sau ștergerea spațiului.",

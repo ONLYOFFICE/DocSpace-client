@@ -84,7 +84,7 @@
   "DataBackup": "Sao lưu dữ liệu",
   "DataImport": "Nhập dữ liệu",
   "DataImportComplete": "Nhập dữ liệu đã hoàn thành",
-  "DataImportDescription": "Nhập dữ liệu từ dịch vụ của bên thứ ba vào ONLYOFFICE DocSpace. Việc nhập dữ liệu cho phép chuyển dữ liệu như tất cả người dùng, tài liệu cá nhân và tài liệu dùng chung của họ.",
+  "DataImportDescription": "Nhập dữ liệu từ dịch vụ của bên thứ ba vào ONLYOFFICE {{portalName}}. Việc nhập dữ liệu cho phép chuyển dữ liệu như tất cả người dùng, tài liệu cá nhân và tài liệu dùng chung của họ.",
   "DataImportProcessing": "Đang xử lý nhập dữ liệu",
   "Deactivate": "Vô hiệu hóa",
   "DeactivateOrDeletePortal": "Vô hiệu hóa hoặc xóa không gian.",

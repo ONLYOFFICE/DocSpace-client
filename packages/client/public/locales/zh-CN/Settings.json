@@ -77,7 +77,6 @@
   "DataBackup": "数据备份",
   "DataImport": "数据导入",
   "DataImportComplete": "数据导入完成",
-  "DataImportDescription": "将第三方数据导入 ONLYOFFICE 协作空间。该功能可以转移数据，例如所有用户、他们的个人文件或与其共享的文件。",
   "DataImportProcessing": "数据导入处理",
   "Deactivate": "停用",
   "DeactivateOrDeletePortal": "停用或删除协作空间。",

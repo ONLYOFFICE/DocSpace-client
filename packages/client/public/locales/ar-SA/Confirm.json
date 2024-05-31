@@ -1,7 +1,7 @@
 {
   "AccountWillBeCreated": "سيتم إنشاء حساب {{portalName}} لـ <1>{{email}}</1> يرجى إكمال التسجيل:",
   "ChangePasswordSuccess": "تم تغيير كلمة المرور بنجاح",
-  "ConfirmOwnerPortalSuccessMessage": "تم تغيير مالك DocSpace بنجاح. ستتم إعادة توجيهك في غضون 10 ثوانٍ.",
+  "ConfirmOwnerPortalSuccessMessage": "تم تغيير مالك {{portalName}} بنجاح. ستتم إعادة توجيهك في غضون 10 ثوانٍ.",
   "ConfirmOwnerPortalTitle": "الرجاء تأكيد أنك تريد تغيير مالك DocSpace إلى {{newOwner}}.",
   "CurrentNumber": "رقم هاتفك المحمول الحالي",
   "DeleteProfileBtn": "احذف حسابي",

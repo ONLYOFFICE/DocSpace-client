@@ -1,7 +1,7 @@
 {
   "AccountWillBeCreated": "<1>{{email}}</1> için bir {{portalName}} hesabı oluşturulacaktır. Lütfen kaydınızı tamamlayın:",
   "ChangePasswordSuccess": "Şifre başarıyla değiştirildi",
-  "ConfirmOwnerPortalSuccessMessage": "DocSpace sahibi başarıyla değiştirildi. 10 saniye içinde yönlendirileceksiniz.",
+  "ConfirmOwnerPortalSuccessMessage": "{{portalName}} sahibi başarıyla değiştirildi. 10 saniye içinde yönlendirileceksiniz.",
   "ConfirmOwnerPortalTitle": "DocSpace sahibini {{newOwner}} olarak değiştirmek istediğinizi lütfen onaylayın.",
   "CurrentNumber": "Güncel mobil telefon numaranız",
   "DeleteProfileBtn": "Hesabımı sil",

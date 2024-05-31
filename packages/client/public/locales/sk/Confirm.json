@@ -1,7 +1,7 @@
 {
   "AccountWillBeCreated": "Účet {{portalName}} bude vytvorený pre <1>{{email}}</1>. Dokončite prosím svoju registráciu:",
   "ChangePasswordSuccess": "Heslo bolo úspešne zmenené",
-  "ConfirmOwnerPortalSuccessMessage": "Vlastník DocSpace bol úspešne zmenený. O 10 sekúnd budete presmerovaní.",
+  "ConfirmOwnerPortalSuccessMessage": "Vlastník {{portalName}} bol úspešne zmenený. O 10 sekúnd budete presmerovaní.",
   "ConfirmOwnerPortalTitle": "Potvrďte, že chcete zmeniť vlastníka DocSpace na {{newOwner}}.",
   "CurrentNumber": "Vaše aktuálne číslo mobilného telefónu",
   "DeleteProfileBtn": "Vymazať môj účet",

@@ -207,7 +207,7 @@
   "RestoreBackup": "Odzyskiwanie danych",
   "RestoreBackupDescription": "Użyj tej opcji do przywrócenia portalu z wcześniej zapisanego pliku kopii zapasowej.",
   "RestoreBackupResetInfoWarningText": "Wszystkie bieżące hasła zostaną zresetowane. Użytkownicy {{portalName}} otrzymają wiadomość e-mail z linkiem umożliwiającym odzyskanie dostępu.",
-  "RestoreBackupWarningText": "Obszar DocSpace będzie niedostępny podczas procesu przywracania. Po jego zakończeniu wszystkie zmiany dokonane po dacie wybranego puntu przywracania zostaną utracone.",
+  "RestoreBackupWarningText": "Obszar {{portalName}} będzie niedostępny podczas procesu przywracania. Po jego zakończeniu wszystkie zmiany dokonane po dacie wybranego puntu przywracania zostaną utracone.",
   "RoomsModule": "Stwórz kopię zapasową pokoju",
   "RoomsModuleDescription": "Możesz utworzyć nowy pokój specjalnie do kopii zapasowej, wybrać jeden z istniejących pokoi lub zapisać kopię w jej pokoju {{roomName}}.",
   "SaveToApply": "Aby zastosować wprowadzone zmiany, kliknij przycisk <strong>Zapisz</strong> u dołu sekcji.",

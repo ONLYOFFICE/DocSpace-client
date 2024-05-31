@@ -216,7 +216,7 @@ const RestoreBackup = (props) => {
         className="restore-backup_warning-description settings_unavailable"
         noSelect
       >
-        {t("RestoreBackupWarningText")}
+        {t("RestoreBackupWarningText", { portalName: PORTAL })}
       </Text>
       {!standalone && (
         <Text

@@ -210,7 +210,7 @@
   "RestoreBackup": "Restauración de datos",
   "RestoreBackupDescription": "Use esta opción para restaurar su espacio de la copia de seguridad guardada anteriormente.",
   "RestoreBackupResetInfoWarningText": "Se restablecerán todas las contraseñas actuales. Los usuarios de {{portalName}} recibirán un correo electrónico con el enlace para restablecer el acceso.",
-  "RestoreBackupWarningText": "DocSpace dejará de estar disponible durante el proceso de restauración. Una vez finalizada la restauración, se perderán todos los cambios realizados después de la fecha del punto de restauración seleccionado.",
+  "RestoreBackupWarningText": "{{portalName}} dejará de estar disponible durante el proceso de restauración. Una vez finalizada la restauración, se perderán todos los cambios realizados después de la fecha del punto de restauración seleccionado.",
   "RoomsModule": "Sala de copia de seguridad",
   "RoomsModuleDescription": "Puede crear una nueva sala específicamente para la copia de seguridad, elegir una de las salas existentes o guardar la copia en su sala {{roomName}}.",
   "SaveToApply": "Haga clic en el botón <strong>Guardar</strong> de la parte inferior para aplicar.",

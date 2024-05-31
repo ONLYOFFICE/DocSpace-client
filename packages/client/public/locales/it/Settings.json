@@ -209,7 +209,7 @@
   "RestoreBackup": "Ripristino dati",
   "RestoreBackupDescription": "Utilizza questa opzione per ripristinare il tuo spazio dal file di backup precedentemente salvato.",
   "RestoreBackupResetInfoWarningText": "Tutte le password attuali verranno reimpostate. Gli utenti di {{portalName}} riceveranno un'e-mail con il collegamento per il ripristino dell'accesso.",
-  "RestoreBackupWarningText": "DocSpace non sarà più disponibile durante il processo di ripristino. Una volta completato il ripristino, tutte le modifiche apportate dopo la data del punto di ripristino selezionato andranno perse.",
+  "RestoreBackupWarningText": "{{portalName}} non sarà più disponibile durante il processo di ripristino. Una volta completato il ripristino, tutte le modifiche apportate dopo la data del punto di ripristino selezionato andranno perse.",
   "RoomsModule": "Stanza di backup",
   "RoomsModuleDescription": "Puoi creare una nuova stanza appositamente per il backup, scegliere una delle stanze esistenti o salvare la copia nella loro stanza {{roomName}}.",
   "SaveToApply": "Fai clic sul pulsante <strong>Salva</strong> in basso per applicare",

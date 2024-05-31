@@ -192,7 +192,6 @@
   "RestoreBackup": "Tiedon Palautus",
   "RestoreBackupDescription": "Käytä tätä, jos haluat palauttaa sivuston sisällön aiemmin tehdyltä varmuuskopiolta.",
   "RestoreBackupResetInfoWarningText": "Kaikki nykyiset salasanat nollataan. {{portalName}}-käyttäjät saavat sähköpostin, jossa on palautuslinkki.",
-  "RestoreBackupWarningText": "DocSpaceen ei ole pääsyä palautusprosessin aikana. Palautuksen jälkeen kaikki muutokset, jotka on tehty valitun palautuspisteen jälkeen häviävät. ",
   "RoomsModule": "Varmuuskopioi huone",
   "RoomsModuleDescription": "Voit luoda uuden huoneen erityisesti varmuuskopiolle, valita yhden olemassa olevista huoneista, tai tallentaa kopioin heidän {{roomName}} huoneeseen.",
   "SaveToApply": "Klikkaa alaosan <strong>Tallenna</strong>-painiketta asettaaksesi.",

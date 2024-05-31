@@ -210,7 +210,7 @@
   "RestoreBackup": "Restaurarea datelor",
   "RestoreBackupDescription": "Utilizați această opțiune pentru a restaura spațiul dvs dintr-o copie de rezervă existentă.",
   "RestoreBackupResetInfoWarningText": "Toate parolele curente vor fi resetate. Utilizatorii spațiului {{portalName}} vor primi prin email un mesaj cu link-ul pentru restaurarea accesului.",
-  "RestoreBackupWarningText": "În timpul procesului de restaurare spațiul DocSpace va deveni indisponibil. Odată ce procesul de restaurare este finalizat, toate modificările efectuate după crearea unui punct de restaurare vor fi pierdute.",
+  "RestoreBackupWarningText": "În timpul procesului de restaurare spațiul {{portalName}} va deveni indisponibil. Odată ce procesul de restaurare este finalizat, toate modificările efectuate după crearea unui punct de restaurare vor fi pierdute.",
   "RoomsModule": "Copiere de rezervă a sălii",
   "RoomsModuleDescription": "Puteți crea o sală nouă destinată special pentru copiere de rezervă, alege una dintre sălile existente sau salva copia în sala {{roomName}}.",
   "SaveToApply": "Faceți un clic pe butonul <strong>Salvare</strong> în partea de jos pentru a aplica.",

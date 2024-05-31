@@ -210,7 +210,7 @@
   "RestoreBackup": "Restaurar Dados",
   "RestoreBackupDescription": "Utilize esta opção para restaurar o seu espaço através de uma cópia de segurança guardada anteriormente.",
   "RestoreBackupResetInfoWarningText": "Todas as senhas atuais serão redefinidas. Os usuários do {{portalName}} receberão um email com o link de restauração do acesso.",
-  "RestoreBackupWarningText": "O DocSpace ficará indisponível durante o processo de restauração. Após a conclusão da restauração, todas as alterações feitas após a data do ponto de restauração selecionado serão perdidas.",
+  "RestoreBackupWarningText": "O {{portalName}} ficará indisponível durante o processo de restauração. Após a conclusão da restauração, todas as alterações feitas após a data do ponto de restauração selecionado serão perdidas.",
   "RoomsModule": "Sala de Apoio",
   "RoomsModuleDescription": "Pode criar uma nova sala especificamente para a cópia de segurança, escolher uma das salas existentes, ou guardar a cópia na sua sala {{roomName}}.",
   "SaveToApply": "Clique no botão <strong>Salvar</strong> na parte inferior para aplicar.",

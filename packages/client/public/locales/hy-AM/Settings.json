@@ -131,7 +131,7 @@
   "Import": "Ներմուծում",
   "ImportCompleteDescriptionGoogle": "Google Workspace-ից տվյալների ներմուծումը ONLYOFFICE {{portalName}} ավարտված է:",
   "ImportCompleteDescriptionNextcloud": "Nextcloud-ից տվյալների ներմուծումը ONLYOFFICE {{portalName}} ավարտված է:",
-  "ImportCompleteDescriptionWorkspace": "Տվյալների ներմուծումը ONLYOFFICE Workspace-ից ONLYOFFICE DocSpace ավարտված է:",
+  "ImportCompleteDescriptionWorkspace": "Տվյալների ներմուծումը ONLYOFFICE Workspace-ից ONLYOFFICE {{portalName}} ավարտված է:",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} օգտվողները հաջողությամբ ներմուծվեցին:",
   "ImportFromGoogle": "Ներմուծում Google Workspace-ից",
   "ImportFromNextcloud": "Ներմուծում Nextcloud-ից",

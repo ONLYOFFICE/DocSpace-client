@@ -102,7 +102,9 @@ export const getWorkspaceStepDescription = (
     case 5:
       return t("Settings:ImportProcessingDescription");
     case 6:
-      return t("Settings:ImportCompleteDescriptionWorkspace");
+      return t("Settings:ImportCompleteDescriptionWorkspace", {
+        portalName: PORTAL,
+      });
     default:
       return;
   }

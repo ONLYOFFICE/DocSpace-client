@@ -131,7 +131,7 @@
   "Import": "가져오기",
   "ImportCompleteDescriptionGoogle": "Google Workspace에서 ONLYOFFICE {{portalName}}로 데이터 가져오기가 완료되었습니다!",
   "ImportCompleteDescriptionNextcloud": "Nextcloud에서 ONLYOFFICE {{portalName}}로 데이터 가져오기가 완료되었습니다!",
-  "ImportCompleteDescriptionWorkspace": "ONLYOFFICE Workspace에서 ONLYOFFICE DocSpace로 데이터 가져오기가 완료되었습니다!",
+  "ImportCompleteDescriptionWorkspace": "ONLYOFFICE Workspace에서 ONLYOFFICE {{portalName}}로 데이터 가져오기가 완료되었습니다!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} 사용자를 가져오기했습니다.",
   "ImportFromGoogle": "Google Workspace에서 가져오기",
   "ImportFromNextcloud": "Nextcloud에서 가져오기",

@@ -131,7 +131,7 @@
   "Import": "Входиране",
   "ImportCompleteDescriptionGoogle": "Входирането на данни от Google Workspace към ONLYOFFICE {{portalName}} приключи!",
   "ImportCompleteDescriptionNextcloud": "Входирането на данни от Nextcloud към ONLYOFFICE {{portalName}} приключи!",
-  "ImportCompleteDescriptionWorkspace": "Входирането на данни от ONLYOFFICE Workspace към ONLYOFFICE DocSpace е завършено!",
+  "ImportCompleteDescriptionWorkspace": "Входирането на данни от ONLYOFFICE Workspace към ONLYOFFICE {{portalName}} е завършено!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} потребители бяха входирани успешно.",
   "ImportFromGoogle": "Входирай от Google Workspace",
   "ImportFromNextcloud": "Входирай от Nextcloud",

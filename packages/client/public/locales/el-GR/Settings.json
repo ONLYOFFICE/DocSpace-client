@@ -132,7 +132,7 @@
   "Import": "Εισαγωγή",
   "ImportCompleteDescriptionGoogle": "Η εισαγωγή δεδομένων από το Google Workspace στο {{portalName}} του ONLYOFFICE ολοκληρώθηκε!",
   "ImportCompleteDescriptionNextcloud": "Η εισαγωγή δεδομένων από το Nextcloud στο {{portalName}} του ONLYOFFICE ολοκληρώθηκε!",
-  "ImportCompleteDescriptionWorkspace": "Η εισαγωγή δεδομένων από το Workspace του ONLYOFFICE στο DocSpace του ONLYOFFICE ολοκληρώθηκε!",
+  "ImportCompleteDescriptionWorkspace": "Η εισαγωγή δεδομένων από το Workspace του ONLYOFFICE στο {{portalName}} του ONLYOFFICE ολοκληρώθηκε!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} χρήστες εισήχθησαν με επιτυχία.",
   "ImportFromGoogle": "Εισαγωγή από το Google Workspace",
   "ImportFromNextcloud": "Εισαγωγή από το Nextcloud",

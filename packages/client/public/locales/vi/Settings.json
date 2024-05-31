@@ -130,7 +130,7 @@
   "Import": "Nhập",
   "ImportCompleteDescriptionGoogle": "Việc nhập dữ liệu từ Google Workspace sang ONLYOFFICE {{portalName}} đã hoàn tất!",
   "ImportCompleteDescriptionNextcloud": "Việc nhập dữ liệu từ Nextcloud sang ONLYOFFICE {{portalName}} đã hoàn tất!",
-  "ImportCompleteDescriptionWorkspace": "Việc nhập dữ liệu từ ONLYOFFICE Workspace sang ONLYOFFICE DocSpace đã hoàn tất!",
+  "ImportCompleteDescriptionWorkspace": "Việc nhập dữ liệu từ ONLYOFFICE Workspace sang ONLYOFFICE {{portalName}} đã hoàn tất!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} người dùng đã được nhập thành công.",
   "ImportFromGoogle": "Nhập từ Google Workspace",
   "ImportFromNextcloud": "Nhập từ Nextcloud",

@@ -130,8 +130,6 @@
   "GroupsDescription": "Les utilisateurs que vous avez sélectionnés à l'étape précédente seront importés vers les groupes qu'on a créé dans {{serviceName}}. Groupes apparaîtront dans la section Comptes.",
   "HexCode": "Code hexadécimal ",
   "Import": "Importer",
-  "ImportCompleteDescriptionGoogle": "L'importation des données depuis Google Workspace vers ONLYOFFICE {{portalName}} s'est terminée!",
-  "ImportCompleteDescriptionWorkspace": "L'importation des données depuis ONLYOFFICE Workspace vers ONLYOFFICE DocSpace s'est terminée!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} utilisateurs ont été importées avec succès.",
   "ImportFromGoogle": "Importation depuis Google Workspace",
   "ImportFromNextcloud": "Importation depuis Nextcloud",

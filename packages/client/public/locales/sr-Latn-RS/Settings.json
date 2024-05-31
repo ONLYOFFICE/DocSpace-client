@@ -132,7 +132,7 @@
   "Import": "Uvezi",
   "ImportCompleteDescriptionGoogle": "Uvoz podataka sa Google Workspace na ONLYOFFICE {{portalName}} je završen!",
   "ImportCompleteDescriptionNextcloud": "Uvoz podataka sa Nextcloud na ONLYOFFICE {{portalName}} je završen!",
-  "ImportCompleteDescriptionWorkspace": "Uvoz podataka sa ONLYOFFICE Workspace na ONLYOFFICE DocSpace je završen!",
+  "ImportCompleteDescriptionWorkspace": "Uvoz podataka sa ONLYOFFICE Workspace na ONLYOFFICE {{portalName}} je završen!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} korisnici su uvezeni uspešno.",
   "ImportFromGoogle": "Uvezi sa Google Workspace-a",
   "ImportFromNextcloud": "Uvezi sa Nextcloud-a",

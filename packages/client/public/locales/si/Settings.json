@@ -129,7 +129,7 @@
   "Import": "ආයාත කරන්න",
   "ImportCompleteDescriptionGoogle": "ගූගල් වැඩබිම වෙතින් ඔන්ලිඔෆිස් {{portalName}} වෙත දත්ත ආයාත කිරීම සම්පූර්ණයි!",
   "ImportCompleteDescriptionNextcloud": "නෙක්ස්ක්ලවුඩ් වෙතින් ඔන්ලිඔෆිස් {{portalName}} වෙත දත්ත ආයාතය සම්පූර්ණයි!",
-  "ImportCompleteDescriptionWorkspace": "ඔන්ලිඔෆිස් වැඩබිම වෙතින් ඔන්ලිඔෆිස් DocSpace වෙත දත්ත ආයාතය සම්පූර්ණයි!",
+  "ImportCompleteDescriptionWorkspace": "ඔන්ලිඔෆිස් වැඩබිම වෙතින් ඔන්ලිඔෆිස් {{portalName}} වෙත දත්ත ආයාතය සම්පූර්ණයි!",
   "ImportedUsers": "පරිශ්‍රීලකයින් {{selectedUsers}}/{{importedUsers}} ක්  සාර්ථකව ආයාත කෙරිණි.",
   "ImportFromGoogle": "ගූගල් වැඩබිමෙන් ආයාත කරන්න",
   "ImportFromNextcloud": "නෙක්ස්ක්ලවුඩ් වෙතින් ආයාත කරන්න",

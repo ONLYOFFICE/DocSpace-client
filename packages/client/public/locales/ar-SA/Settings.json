@@ -132,7 +132,7 @@
   "Import": "استيراد",
   "ImportCompleteDescriptionGoogle": "اكتمل استيراد البيانات من مساحة عمل Google إلى ONLYOFFICE {{portalName}}!",
   "ImportCompleteDescriptionNextcloud": "اكتمل استيراد البيانات من Nextcloud إلى ONLYOFFICE {{portalName}}!",
-  "ImportCompleteDescriptionWorkspace": "اكتمل استيراد البيانات من مساحة عمل ONLYOFFICE إلى DocSpace ONLYOFFICE!",
+  "ImportCompleteDescriptionWorkspace": "اكتمل استيراد البيانات من مساحة عمل ONLYOFFICE إلى {{portalName}} ONLYOFFICE!",
   "ImportedUsers": "تم استيراد مستخدمي {{selectedUsers}}/{{importedUsers}} بنجاح.",
   "ImportFromGoogle": "الاستيراد من مساحة عمل Google",
   "ImportFromNextcloud": "الاستيراد من Nextcloud",

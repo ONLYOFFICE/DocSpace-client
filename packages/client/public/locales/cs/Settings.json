@@ -131,7 +131,7 @@
   "Import": "Import",
   "ImportCompleteDescriptionGoogle": "Import dat z Google Workspace do ONLYOFFICE {{portalName}} je dokončen!",
   "ImportCompleteDescriptionNextcloud": "Import dat z Nextcloudu do ONLYOFFICE {{portalName}} je dokončen!",
-  "ImportCompleteDescriptionWorkspace": "Import dat z ONLYOFFICE Workspace do ONLYOFFICE DocSpace je dokončen!",
+  "ImportCompleteDescriptionWorkspace": "Import dat z ONLYOFFICE Workspace do ONLYOFFICE {{portalName}} je dokončen!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} uživatelů bylo úspěšně importováno.",
   "ImportFromGoogle": "Import z pracovního prostoru Google",
   "ImportFromNextcloud": "Import z Nextcloudu",

@@ -123,7 +123,6 @@
   "GroupsDescription": "Käyttäjät, jotka valitsit edellisessä vaiheessa tuodaan huoneisiin,  jotka on luotu {{serviceName}}ssa. Ryhmät ilmestyvät Tilit-osioon.",
   "HexCode": "Hex-koodi",
   "Import": "Tuonti",
-  "ImportCompleteDescriptionWorkspace": "Tietojen tuonti ONLYOFFICE Workspacesta ONLYOFFICE DocSpaceen on suoritettu!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} käyttäjät tuotiin onnistuneesti.",
   "ImportFromGoogle": "Tuo Google Workspacesta",
   "ImportFromNextcloud": "Tuo Nextcloudista",

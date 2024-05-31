@@ -192,7 +192,7 @@
   "PortalNameEmpty": "Denumirea contului este necompletată",
   "PortalNameIncorrect": "Denumirea contului incorectă",
   "PortalNameLength": "Denumirea contului trebuie să conțină de la {{minLength}} până la {{maxLength}} de caractere",
-  "PortalRenaming": "Redenumire spațiu DocSpace",
+  "PortalRenaming": "Redenumire spațiu {{portalName}}",
   "PortalRenamingDescriptionText": "Schimbați adresa spațiului afișată pe lângă de {{ domain }}.",
   "PortalRenamingLabelText": "O nouă denumire de spațiu",
   "PortalRenamingModalText": "Sunteți pe cale să redenumiți portalul dvs. Sigur doriți să continuați?",

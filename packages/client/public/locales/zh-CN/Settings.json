@@ -170,7 +170,6 @@
   "PortalNameEmpty": "账户名称为空",
   "PortalNameIncorrect": "账户名称不正确",
   "PortalNameLength": "账户名称的长度必须在{{minLength}}至{{maxLength}}个字符之间",
-  "PortalRenaming": "协作空间重命名",
   "PortalRenamingDescriptionText": "更改显示在 {{ domain }} 旁的空间的地址。",
   "PortalRenamingLabelText": "协作空间的新名称",
   "PortalRenamingModalText": "你将要重命名的门户。你真的要继续吗？",

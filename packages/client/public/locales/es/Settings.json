@@ -193,7 +193,7 @@
   "PortalNameEmpty": "Nombre de cuenta está vacío",
   "PortalNameIncorrect": "Nombre de cuenta incorrecto",
   "PortalNameLength": "El nombre de cuenta debe tener entre {{minLength}} y {{maxLength}} caracteres de longitud",
-  "PortalRenaming": "Cambio del nombre de DocSpace",
+  "PortalRenaming": "Cambio del nombre de {{portalName}}",
   "PortalRenamingDescriptionText": "Cambie la dirección del espacio que aparece junto a {{ domain }}.",
   "PortalRenamingLabelText": "Nuevo nombre del espacio",
   "PortalRenamingModalText": "Usted está apunto de renombrar su portal. ¿Está seguro que quiere continuar?",

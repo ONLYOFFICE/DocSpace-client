@@ -177,7 +177,6 @@
   "PortalNameEmpty": "Tilin nimi on tyhjä",
   "PortalNameIncorrect": "Virheellinen tilin nimi",
   "PortalNameLength": "Tilin nimen on oltava {{minLength}}-{{maxLength}} merkkiä pitkä",
-  "PortalRenaming": "DocSpacen uudelleennimeäminen",
   "PortalRenamingDescriptionText": "Muuta tilan osoite, joka näkyy {{ domain }} vieressä. ",
   "PortalRenamingLabelText": "Uusi tilan nimi",
   "PortalRenamingModalText": "Olet nimeämässä uudelleen sivustoasi. Oletko varma?",

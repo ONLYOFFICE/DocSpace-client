@@ -191,7 +191,6 @@
   "PortalNameEmpty": "Nazwa konta jest pusta",
   "PortalNameIncorrect": "Nieprawidłowa nazwa konta",
   "PortalNameLength": "Nazwa konta musi zawierać od {{minLength}} do {{maxLength}} znaków",
-  "PortalRenaming": "Zmiana nazwy portalu",
   "PortalRenamingDescriptionText": "Zmień adres obszaru widoczny obok {{ domain }}.",
   "PortalRenamingLabelText": "Nowa nazwa portalu",
   "PortalRenamingModalText": "Zamierzasz zmienić nazwę portalu. Czy na pewno chcesz kontynuować?",

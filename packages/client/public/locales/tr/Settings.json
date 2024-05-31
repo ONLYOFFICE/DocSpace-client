@@ -191,7 +191,7 @@
   "PortalNameEmpty": "Hesap adı boş",
   "PortalNameIncorrect": "Yanlış hesap adı",
   "PortalNameLength": "Hesap adı {{minLength}} ila {{maxLength}} karakter uzunluğunda olmalıdır",
-  "PortalRenaming": "DocSpace Yeniden Adlandırma",
+  "PortalRenaming": "{{portalName}} Yeniden Adlandırma",
   "PortalRenamingDescriptionText": "{{ domain }} yanında görünen alan adresini değiştirin.",
   "PortalRenamingLabelText": "Yeni alan adı",
   "PortalRenamingModalText": "Portalı yeniden adlandırmak üzeresiniz. Devam etmek istediğinize emin misiniz?",

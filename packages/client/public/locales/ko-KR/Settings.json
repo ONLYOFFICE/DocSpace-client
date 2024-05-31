@@ -191,7 +191,7 @@
   "PortalNameEmpty": "계정 이름이 비어 있습니다",
   "PortalNameIncorrect": "계정 이름이 잘못되었습니다",
   "PortalNameLength": "계정 이름은 {{minLength}}~{{maxLength}}글자여야 합니다",
-  "PortalRenaming": "DocSpace 이름 변경",
+  "PortalRenaming": "{{portalName}} 이름 변경",
   "PortalRenamingDescriptionText": "{{ domain }} 옆에 표시되는 공간 주소를 변경하세요.",
   "PortalRenamingLabelText": "새 스페이스 이름",
   "PortalRenamingModalText": "포털의 이름을 바꾸려고 합니다. 너 정말 계속하고 싶니?",

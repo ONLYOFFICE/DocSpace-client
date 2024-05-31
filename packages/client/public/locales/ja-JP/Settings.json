@@ -190,7 +190,7 @@
   "PortalNameEmpty": "アカウント名が空です。",
   "PortalNameIncorrect": "アカウント名が無効です。",
   "PortalNameLength": "アカウント名は{{minLength}}～{{maxLength}}文字がある必要です。",
-  "PortalRenaming": "DocSpaceの名前変更",
+  "PortalRenaming": "{{portalName}}の名前変更",
   "PortalRenamingDescriptionText": "{{ domain }}の隣に表示されるスペースアドレスを変更します。",
   "PortalRenamingLabelText": "スペースの新しい名前",
   "PortalRenamingModalText": "ポータル名を変更しようとしています 。操作を確認してください。",

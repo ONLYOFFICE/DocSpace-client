@@ -191,7 +191,7 @@
   "PortalNameEmpty": "Der Kontoname ist leer",
   "PortalNameIncorrect": "Inkorrekter Kontoname",
   "PortalNameLength": "Der Kontoname muss zwischen {{minLength}} und {{maxLength}} Zeichen lang sein",
-  "PortalRenaming": "Umbenennung von DocSpace",
+  "PortalRenaming": "Umbenennung von {{portalName}}",
   "PortalRenamingDescriptionText": "Ändern Sie die Raumadresse, die neben {{ domain }} erscheint.",
   "PortalRenamingLabelText": "Neuer Bereichsname",
   "PortalRenamingModalText": "Sie sind im Begriff Ihr Portal umzubenennen. Sind Sie sicher, dass Sie fortsetzen wollen?",

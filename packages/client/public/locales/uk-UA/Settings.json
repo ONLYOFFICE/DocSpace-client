@@ -191,7 +191,6 @@
   "PortalNameEmpty": "Ім'я облікового запису порожнє",
   "PortalNameIncorrect": "Неправильне ім'я облікового запису",
   "PortalNameLength": "Довжина імені облікового запису має бути від {{minLength}} до {{maxLength}} символів",
-  "PortalRenaming": "Перейменування порталу",
   "PortalRenamingDescriptionText": "Змініть адресу простору, яка відображається поруч із {{ domain }}.",
   "PortalRenamingLabelText": "Нове ім'я порталу",
   "PortalRenamingModalText": "Ви збираєтеся перейменувати свій портал. Ви впевнені, що хочете продовжити?",

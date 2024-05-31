@@ -192,7 +192,7 @@
   "PortalNameEmpty": "Το όνομα λογαριασμού είναι κενό",
   "PortalNameIncorrect": "Λανθασμένο όνομα λογαριασμού",
   "PortalNameLength": "Το όνομα του λογαριασμού πρέπει να έχει μήκος μεταξύ {{minLength}} και {{maxLength}} χαρακτήρων",
-  "PortalRenaming": "Μετονομασία DocSpace",
+  "PortalRenaming": "Μετονομασία {{portalName}}",
   "PortalRenamingDescriptionText": "Αλλαγή της διεύθυνσης χώρου που εμφανίζεται δίπλα στον τομέα {{ domain }}.",
   "PortalRenamingLabelText": "Νέο όνομα DocSpace",
   "PortalRenamingModalText": "Πρόκειται να μετονομάσετε την πύλη σας. Εισαι σιγουρος οτι θελεις να συνεχισεις?",

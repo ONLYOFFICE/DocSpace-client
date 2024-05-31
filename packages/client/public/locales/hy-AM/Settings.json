@@ -192,7 +192,7 @@
   "PortalNameEmpty": "Հաշվի անունը դատարկ է",
   "PortalNameIncorrect": "Հաշվի սխալ անուն",
   "PortalNameLength": "Հաշվի անունը պետք է լինի {{minLength}}-ից {{maxLength}} նիշ",
-  "PortalRenaming": "DocSpace-ի վերանվանում",
+  "PortalRenaming": "{{portalName}}-ի վերանվանում",
   "PortalRenamingDescriptionText": "Փոխեք տարածության հասցեն, որը հայտնվում է {{ domain }}-ի կողքին:",
   "PortalRenamingLabelText": "Նոր կայքէջի անուն",
   "PortalRenamingModalText": "Դուք պատրաստվում եք վերանվանել ձեր պորտալը: Վստա՞հ եք, որ ցանկանում եք շարունակել:",

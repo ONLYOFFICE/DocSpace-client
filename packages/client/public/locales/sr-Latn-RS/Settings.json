@@ -192,7 +192,7 @@
   "PortalNameEmpty": "Ime naloga je prazno",
   "PortalNameIncorrect": "Netačno ime naloga",
   "PortalNameLength": "Ime naloga mora biti između {{minLength}} i {{maxLength}} znakova dugačko",
-  "PortalRenaming": "Preimenovanje DocSpace-a",
+  "PortalRenaming": "Preimenovanje {{portalName}}-a",
   "PortalRenamingDescriptionText": "Promeni adresu prostora koje se nalazi pored {{ domain }}.",
   "PortalRenamingLabelText": "Novo ime prostora",
   "PortalRenamingModalText": "Spremate se da preimenujete vaš portal. Da li ste sigurni da želite da nastavite?",

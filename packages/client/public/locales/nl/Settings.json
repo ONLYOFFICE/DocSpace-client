@@ -190,7 +190,6 @@
   "PortalNameEmpty": "Accountnaam is leeg",
   "PortalNameIncorrect": "Onjuiste accountnaam",
   "PortalNameLength": "De naam van de account moet tussen {{minLength}} en {{maxLength}} tekens lang zijn",
-  "PortalRenaming": "Hernoemen Ruimte",
   "PortalRenamingDescriptionText": "Wijzig het adres van de ruimte die naast {{ domain }} verschijnt.",
   "PortalRenamingLabelText": "Nieuwe ruimtenaam",
   "PortalRenamingModalText": "U staat op het punt om uw portaal een andere naam te geven. Weet u zeker dat u wilt doorgaan?",

@@ -190,7 +190,7 @@
   "PortalNameEmpty": "Tên tài khoản trống",
   "PortalNameIncorrect": "Tên tài khoản không chính xác",
   "PortalNameLength": "Tên tài khoản phải dài từ {{minLength}} đến {{maxLength}} ký tự",
-  "PortalRenaming": "Đang đổi tên DocSpace",
+  "PortalRenaming": "Đang đổi tên {{portalName}}",
   "PortalRenamingDescriptionText": "Thay đổi địa chỉ không gian xuất hiện bên cạnh {{ domain }}.",
   "PortalRenamingLabelText": "Tên không gian mới",
   "PortalRenamingModalText": "Bạn sẽ đổi tên cổng thông tin của bạn. Bạn có chắc là muốn tiếp tục?",

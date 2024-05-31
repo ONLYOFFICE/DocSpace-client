@@ -190,7 +190,7 @@
   "PortalNameEmpty": "Konta nosaukums ir tukšs",
   "PortalNameIncorrect": "Nepareizs konta nosaukums",
   "PortalNameLength": "Konta nosaukumam ir jābūt no {{minLength}} līdz {{maxLength}} rakstzīmēm garam",
-  "PortalRenaming": "DocSpace pārdēvēšana",
+  "PortalRenaming": "{{portalName}} pārdēvēšana",
   "PortalRenamingDescriptionText": "Mainiet vietas adresi, kas parādās blakus {{ domain }}.",
   "PortalRenamingLabelText": "Jauns portāla nosaukums",
   "PortalRenamingModalText": "Jūs grasāties pārdēvēt savu portālu. Vai tiešām vēlaties turpināt?",

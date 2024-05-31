@@ -189,7 +189,7 @@
   "PortalNameEmpty": "ගිණුමේ නම හිස්ය",
   "PortalNameIncorrect": "ගිණුමේ නම වැරදිය",
   "PortalNameLength": "ගිණුමේ නම අකුරු {{minLength}} සහ {{maxLength}} අතර විය යුතුය",
-  "PortalRenaming": "DocSpace නම් කිරීම",
+  "PortalRenaming": "{{portalName}} නම් කිරීම",
   "PortalRenamingDescriptionText": "{{ domain }} අසලින් දිස්වන අවකාශයේ ලිපිනය වෙනස් කරන්න.",
   "PortalRenamingLabelText": "අවකාශයේ නව නම",
   "PortalRenamingModalText": "ඔබගේ ද්වාරය නැවත නම් කිරීමට සැරසෙමින් සිටියි. ඉදිරියට යාමට වුවමනා ද?",

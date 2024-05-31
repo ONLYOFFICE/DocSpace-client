@@ -191,7 +191,7 @@
   "PortalNameEmpty": "Název účtu je prázdný",
   "PortalNameIncorrect": "Nesprávný název účtu",
   "PortalNameLength": "Název účtu musí mít délku od {{minLength}} do {{maxLength}} znaků",
-  "PortalRenaming": "Přejmenování DocSpace",
+  "PortalRenaming": "Přejmenování {{portalName}}",
   "PortalRenamingDescriptionText": "Změňte adresu prostoru, která se zobrazí vedle {{ domain }}.",
   "PortalRenamingLabelText": "Nový název prostoru",
   "PortalRenamingModalText": "Chystáte se přejmenovat Váš portál. Jste si jistý, že chcete pokračovat?",

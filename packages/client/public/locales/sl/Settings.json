@@ -190,7 +190,6 @@
   "PortalNameEmpty": "Ime računa je prazno",
   "PortalNameIncorrect": "Napačno ime računa",
   "PortalNameLength": "Ime računa mora imeti dolžino od {{minLength}} do {{maxLength}} znakov",
-  "PortalRenaming": "Preimenovanje prostora",
   "PortalRenamingDescriptionText": "Spremenite naslov prostora, ki se pojavi poleg {{ domain }}.",
   "PortalRenamingLabelText": "Novo ime prostora",
   "PortalRenamingModalText": "Svoj portal boste preimenovali. Ste prepričani, da želite nadaljevati?",

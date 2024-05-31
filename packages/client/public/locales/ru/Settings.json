@@ -193,7 +193,7 @@
   "PortalNameEmpty": "Поле имя аккаунта не заполнено",
   "PortalNameIncorrect": "Неверное имя портала",
   "PortalNameLength": "Имя учетной записи должно быть от {{minLength}} до {{maxLength}} символов",
-  "PortalRenaming": "Изменение имени DocSpace",
+  "PortalRenaming": "Изменение имени {{portalName}}",
   "PortalRenamingDescriptionText": "Измените адрес рабочего пространства, который будет отображаться рядом с {{ domain }}.",
   "PortalRenamingLabelText": "Новое имя портала",
   "PortalRenamingModalText": "Вы собираетесь переименовать портал. Вы действительно хотите продолжить?",

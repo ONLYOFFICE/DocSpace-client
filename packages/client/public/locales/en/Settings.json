@@ -194,7 +194,7 @@
   "PortalNameEmpty": "Account name is empty",
   "PortalNameIncorrect": "Incorrect account name",
   "PortalNameLength": "The account name must be between {{minLength}} and {{maxLength}} characters long",
-  "PortalRenaming": "DocSpace Renaming",
+  "PortalRenaming": "{{portalName}} Renaming",
   "PortalRenamingDescriptionText": "Change the space address that appears next to {{ domain }}.",
   "PortalRenamingLabelText": "New space name",
   "PortalRenamingModalText": "You are about to rename your portal. Are you sure you want to continue?",

@@ -108,7 +108,7 @@
   "DocumentServiceLocationHeaderHelp": "Serviciu Documente este un serviciu de server care permite editarea documentelor și convertirea fișierelor în formatul OfficeOpen XML corespunzător. Locația serviciului de documente este adresa a serverului pe care sunt instalate servicii de documente.",
   "DocumentServiceLocationUrlApi": "Adresa serviciului de editare a documentelor",
   "DocumentServiceLocationUrlInternal": "Adresa Serviciului Documente pentru solicitări de la spațiu {{portalName}}",
-  "DocumentServiceLocationUrlPortal": "Adresa spațiului DocSpace pentru solicitări de la Serviciu Documente",
+  "DocumentServiceLocationUrlPortal": "Adresa spațiului {{portalName}} pentru solicitări de la Serviciu Documente",
   "DownloadCopy": "Descărcare copie",
   "DownloadLog": "Descărcare jurnal",
   "DownloadReportBtnText": "Descărcare raport",

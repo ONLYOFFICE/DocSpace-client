@@ -106,7 +106,7 @@
   "DocumentServiceLocationHeaderHelp": "Dịch vụ Tài liệu là dịch vụ máy chủ cho phép thực hiện chỉnh sửa tài liệu và cho phép chuyển đổi tập tin tài liệu sang định dạng OfficeOpen XML thích hợp. Vị trí dịch vụ tài liệu chỉ định địa chỉ của máy chủ có cài đặt dịch vụ tài liệu.",
   "DocumentServiceLocationUrlApi": "Địa chỉ Dịch vụ Chỉnh sửa Tài liệu",
   "DocumentServiceLocationUrlInternal": "Địa chỉ Dịch vụ Tài liệu cho các yêu cầu từ {{portalName}}",
-  "DocumentServiceLocationUrlPortal": "Địa chỉ DocSpace cho các yêu cầu từ Dịch vụ Tài liệu",
+  "DocumentServiceLocationUrlPortal": "Địa chỉ {{portalName}} cho các yêu cầu từ Dịch vụ Tài liệu",
   "DownloadCopy": "Tải xuống bản sao",
   "DownloadLog": "Tải log",
   "DownloadReportBtnText": "Tải báo cáo xuống",

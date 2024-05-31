@@ -107,7 +107,6 @@
   "DocumentService": "Dokumentu apkalpošana",
   "DocumentServiceLocationHeaderHelp": "Dokumentu pakalpojums ir servera pakalpojums, kas ļauj veikt dokumentu rediģēšanu un ļauj konvertēt dokumenta failu atbilstošā OfficeOpen XML formātā. Dokumentu pakalpojuma atrašanās vieta norāda tā servera adresi, kurā ir instalēti dokumentu pakalpojumi.",
   "DocumentServiceLocationUrlApi": "Dokumentu rediģēšanas servisa adrese",
-  "DocumentServiceLocationUrlPortal": "Kopienas servera adrese Document Service pieprasījumiem",
   "DownloadCopy": "Lejupielādēt kopiju",
   "DownloadLog": "Lejupielādēt žurnālu",
   "DownloadReportBtnText": "Lejupielādēt pārskatu",

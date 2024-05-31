@@ -102,7 +102,6 @@
   "DocumentService": "Asiakirja palvelu",
   "DocumentServiceLocationHeaderHelp": "Asiakirjapalvelu on palvelinpalvelu, joka mahdollistaa asiakirjan muokkaamisen ja asiakirjatiedoston muuntamisen oikeaan OfficeOpen XML-formaattiin. Asiakirjapalvelun sijainti asennettujen asiakirjapalveluiden kanssa määrittävät palvelimen osoitteen.",
   "DocumentServiceLocationUrlApi": "Asiakirjan muokkauspalvelun osoite",
-  "DocumentServiceLocationUrlPortal": "DocSpaceosoite pyynnöille, jotka tulevat Asiakirjapalvelusta",
   "DownloadCopy": "Lataa kopio",
   "DownloadLog": "Lataa loki",
   "DownloadReportBtnText": "Lataa raportti",

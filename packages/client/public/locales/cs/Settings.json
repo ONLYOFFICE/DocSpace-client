@@ -107,7 +107,7 @@
   "DocumentServiceLocationHeaderHelp": "Document Service je serverová služba, která umožňuje provádět úpravy dokumentů a umožňuje převést soubor dokumentu do příslušného formátu OfficeOpen XML. Umístění dokumentové služby určuje adresu serveru s nainstalovanými dokumentovými službami.",
   "DocumentServiceLocationUrlApi": "Adres editovací služby Dokumentu",
   "DocumentServiceLocationUrlInternal": "Adresa služby Document Service pro požadavky z {{portalName}}",
-  "DocumentServiceLocationUrlPortal": "Adresa DocSpace pro požadavky z Dokumentové služby",
+  "DocumentServiceLocationUrlPortal": "Adresa {{portalName}} pro požadavky z Dokumentové služby",
   "DownloadCopy": "Stáhnout kopii",
   "DownloadLog": "Stáhnout protokol",
   "DownloadReportBtnText": "Stáhnout zprávu",

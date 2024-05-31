@@ -107,7 +107,7 @@
   "DocumentServiceLocationHeaderHelp": "Belge Hizmeti, belge düzenleme işleminin gerçekleştirilmesine ve belge dosyasının uygun OfficeOpen XML formatına dönüştürülmesine olanak tanıyan sunucu hizmetidir. Belge hizmeti konumu, belge hizmetlerinin yüklü olduğu sunucunun adresini belirtir.",
   "DocumentServiceLocationUrlApi": "Belge Düzenleme Servisi Adresi",
   "DocumentServiceLocationUrlInternal": "{{portalName}}'den gelen talepler için Belge Hizmeti adresi",
-  "DocumentServiceLocationUrlPortal": "Belge Hizmetinden gelen talepler için DocSpace adresi",
+  "DocumentServiceLocationUrlPortal": "Belge Hizmetinden gelen talepler için {{portalName}} adresi",
   "DownloadCopy": "Kopyayı indir",
   "DownloadLog": "İndirme günlüğü",
   "DownloadReportBtnText": "Raporu indir",

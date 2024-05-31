@@ -108,7 +108,7 @@
   "DocumentServiceLocationHeaderHelp": "خدمة المستندات هي خدمة الخادم التي تسمح بإجراء تحرير المستندات وتسمح بتحويل ملف المستند إلى تنسيق OfficeOpen XML المناسب. يحدد موقع خدمة المستندات عنوان الخادم الذي تم تثبيت خدمات المستندات عليه.",
   "DocumentServiceLocationUrlApi": "عنوان خدمة تعديل الملف",
   "DocumentServiceLocationUrlInternal": "عنوان خدمة الملف للطلبات من {{portalName}}",
-  "DocumentServiceLocationUrlPortal": "عنوان DocSpace للطلبات من خدمات المستند",
+  "DocumentServiceLocationUrlPortal": "عنوان {{portalName}} للطلبات من خدمات المستند",
   "DownloadCopy": "تنزيل نسخة",
   "DownloadLog": "سجل التنزيل",
   "DownloadReportBtnText": "تنزيل التقرير",

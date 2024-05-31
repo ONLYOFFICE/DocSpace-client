@@ -243,7 +243,9 @@ const DocumentService = ({
           <div className="input-wrapper">
             <Label
               htmlFor="portalAdress"
-              text={t("Settings:DocumentServiceLocationUrlPortal")}
+              text={t("Settings:DocumentServiceLocationUrlPortal", {
+                portalName: PORTAL,
+              })}
             />
             <InputBlock
               id="portalAdress"

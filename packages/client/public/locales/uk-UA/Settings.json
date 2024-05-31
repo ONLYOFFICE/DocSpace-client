@@ -108,7 +108,7 @@
   "DocumentServiceLocationHeaderHelp": "Служба документів — це серверна служба, який дозволяє виконувати редагування документа та конвертувати файл документа у відповідний формат OfficeOpen XML. Місцезнаходження служби документів вказує адресу сервера, на якому встановлені служби документів.",
   "DocumentServiceLocationUrlApi": "Сервісна адреса редагування документів",
   "DocumentServiceLocationUrlInternal": "Адреса служби документів для запитів із {{portalName}}",
-  "DocumentServiceLocationUrlPortal": "Адреса DocSpace для запитів зі служби документів",
+  "DocumentServiceLocationUrlPortal": "Адреса {{portalName}} для запитів зі служби документів",
   "DownloadCopy": "Завантажити копію",
   "DownloadLog": "Завантажити журнал",
   "DownloadReportBtnText": "Завантажити звіт",

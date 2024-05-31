@@ -108,7 +108,7 @@
   "DocumentServiceLocationHeaderHelp": "Document servis je serverska usluga koja omogućava obavljanje uređivanja dokumenata i omogućava konvertovanje datoteka dokumenata u odgovarajući OfficeOpen XML format. Lokacija dokument servisa određuje adresu servera na kojem su instalirane usluge za dokumente.",
   "DocumentServiceLocationUrlApi": "Adresa Servisa Za Dokument Uređivanje",
   "DocumentServiceLocationUrlInternal": "Adresa Dokument Servisa za zahteve iz {{portalName}}-a",
-  "DocumentServiceLocationUrlPortal": "DocSpace adresa za zahteve iz Dokument Servisa",
+  "DocumentServiceLocationUrlPortal": "{{portalName}} adresa za zahteve iz Dokument Servisa",
   "DownloadCopy": "Preuzmi kopiju",
   "DownloadLog": "Preuzmi log",
   "DownloadReportBtnText": "Preuzmi izveštaj",

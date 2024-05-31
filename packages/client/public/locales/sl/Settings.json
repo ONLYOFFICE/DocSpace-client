@@ -107,7 +107,7 @@
   "DocumentServiceLocationHeaderHelp": "Storitve za dokumente je strežniška storitev, ki omogoča urejanje dokumentov in omogoča pretvorbo datoteke dokumenta v ustrezen format OfficeOpen XML. Lokacija storitve za dokumente določa naslov strežnika z nameščenimi storitvami za dokumente.",
   "DocumentServiceLocationUrlApi": "Naslov storitve za urejanje dokumentov",
   "DocumentServiceLocationUrlInternal": "Naslov storitve za dokumente za zahteve iz {{portalName}}",
-  "DocumentServiceLocationUrlPortal": "Naslov DocSpace za zahteve iz storitve za dokumente",
+  "DocumentServiceLocationUrlPortal": "Naslov {{portalName}} za zahteve iz storitve za dokumente",
   "DownloadCopy": "Prenesi kopijo",
   "DownloadLog": "Dnevnik prenosa",
   "DownloadReportBtnText": "Prenesi poročilo",

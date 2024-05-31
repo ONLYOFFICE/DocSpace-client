@@ -96,7 +96,6 @@
   "DocumentService": "文件服务",
   "DocumentServiceLocationHeaderHelp": "可通过文档服务支持执行文档编辑的服务器服务，支持将文档文件转换为合适的 OfficeOpen XML 格式。 文档服务位置明确了安装了文档服务的服务器地址。",
   "DocumentServiceLocationUrlApi": "文件编辑服务地址",
-  "DocumentServiceLocationUrlPortal": "用于“文档服务”提出请求的协作空间地址",
   "DownloadCopy": "下载副本",
   "DownloadLog": "下载日志",
   "DownloadReportBtnText": "下载报告",

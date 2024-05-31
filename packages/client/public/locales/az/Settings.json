@@ -107,7 +107,6 @@
   "DocumentServiceLocationHeaderHelp": "Sənəd Xidməti sənədin redaktə edilməsi və sənəd faylının müvafiq OfficeOpen XML formatına çevrilməsinə imkan verən server xidmətidir. Sənəd xidmətinin yeri sənəd xidmətlərinin quraşdırıldığı serverin ünvanını müəyyən edir.",
   "DocumentServiceLocationUrlApi": "Sənəd Redaktə Xidmətinin Ünvanı",
   "DocumentServiceLocationUrlInternal": "İcma Serverindən sorğular üçün {{portalName}} ünvanı",
-  "DocumentServiceLocationUrlPortal": "Sənəd Xidmətindən sorğular üçün İcma Server ünvanı",
   "DownloadCopy": "Nüsxəni endirin",
   "DownloadLog": "Gündəliyi endirin",
   "DownloadReportBtnText": "Hesabatı yükləyin",

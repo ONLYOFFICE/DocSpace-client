@@ -21,7 +21,7 @@
   "CreateSampleRoomSelector": "Örnek Oda seçici yerleştirmesi oluştur",
   "CreateSampleViewer": "Örnek Görüntüleyici yerleştirmesi oluştur",
   "CSPDescription": "{{portalName}}'i bir web sitesine iframe olarak güvenli bir şekilde gömmek için URL bağlantısını izin verilenler listenize ekleyin.",
-  "CSPHeader": "DocSpace'i iframe olarak gömün",
+  "CSPHeader": "{{portalName}}'i iframe olarak gömün",
   "CSPHelp": "Bu ayar, içerik yerleştirme saldırılarına karşı koruma sağlamak adına kullanılabilecek bir güvenlik mekanizmasıdır. CSP, güvenli kaynak indirme kaynaklarını niteler. 'Beyaz listede' yer almayan kaynaklardan indirme engellenmiştir. Çalışacağı etki alanlarını (protokol ile) belirtin.",
   "CSPInfoBarDescription": "Doğru kurulum çalışmasını sağlamak için lütfen DocSpace'iniz için HTTPS protokolünü etkinleştirin.",
   "CSPInfoBarHeader": "HTTPS gerekli",

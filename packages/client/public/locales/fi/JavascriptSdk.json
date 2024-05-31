@@ -20,7 +20,7 @@
   "CreateSamplePublicRoom": "Luo esimerkki Julkinen huone-upotuksesta",
   "CreateSampleRoomSelector": "Luo esimerkki Huoneen valitsija-upotuksesta",
   "CreateSampleViewer": "Luo esimerkki Katselija-upotuksesta",
-  "CSPHeader": "Upota DocSpace iframeksi",
+  "CSPHeader": "Upota {{portalName}} iframeksi",
   "CSPHelp": "Tämä asetus on suojausmekanismi, jota voidaan käyttää suojelemaan sisällön lisäyshyökkäyksiltä. CSP kuvaa suojatut resurssien latauslähteet. Lataaminen resursseista, jotka eivät sisälly \"valkoiseen listaan\", on estetty. Määritä toimialueet (yhdessä protokollan kanssa) joiden kanssa se toimii.",
   "CSPInfoBarDescription": "Ole hyvä ja ota DocSpacen HTTPS-protokolla käyttöön varmistaaksesi onnistuneen asennuksen.",
   "CSPInfoBarHeader": "HTTPS vaaditaan",

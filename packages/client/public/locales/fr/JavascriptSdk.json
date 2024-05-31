@@ -21,7 +21,7 @@
   "CreateSampleRoomSelector": "Créer un exemple de sélecteur de salle intégré",
   "CreateSampleViewer": "Créer un exemple de visualisation intégrée",
   "CSPDescription": "Pour intégrer {{portalName}} en toute sécurité sous la forme de cadre intégré dans un site web, ajoutez son URL à votre liste d'autorisations.",
-  "CSPHeader": "Intégrer DocSpace comme un cadre intégré",
+  "CSPHeader": "Intégrer {{portalName}} comme un cadre intégré",
   "CSPHelp": "Ce paramètre est un mécanisme de sécurité qui peut être utilisé pour se protéger contre les attaques par injection de contenu. Le CSP décrit des sources de téléchargement de ressources sécurisées. Le téléchargement de ressources non incluses dans la \"liste blanche\" est bloqué. Spécifiez les domaines (ainsi que le protocole) avec lesquels il fonctionnera.",
   "CSPInfoBarDescription": "Veuillez activer le protocole HTTPS pour votre DocSpace afin d’assurer le bon fonctionnement de la configuration.",
   "CSPInfoBarHeader": "HTTPS requis",

@@ -204,7 +204,7 @@ const CSP = ({
 
   return (
     <>
-      <CategoryHeader>{t("CSPHeader")}</CategoryHeader>
+      <CategoryHeader>{t("CSPHeader", { portalName: PORTAL })}</CategoryHeader>
       <Container className="description-holder">
         {t("CSPDescription", { portalName: PORTAL })}
         <HelpButton

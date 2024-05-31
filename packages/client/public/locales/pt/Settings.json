@@ -220,7 +220,7 @@
   "SelectFileDescriptionWorkspace": "Selecione o arquivo de backup do ONLYOFFICE Workspace para iniciar a importação de dados. Assim que o upload e a análise dos dados forem concluídos, a próxima etapa será iniciada automaticamente.",
   "SelectFileInGZFormat": "Selecione o ficheiro no formato .GZ",
   "SelectUsers": "Selecione usuários",
-  "SelectUsersDescriptionGoogle": "Verifique os usuários da lista para importar para o ONLYOFFICE DocSpace. Os usuários do Google Workspace serão importados sem Nome/Sobrenome, e seu nome de e-mail será usado em seu lugar. Os nomes dos usuários podem ser alterados após a importação. Os usuários já existentes no ONLYOFFICE DocSpace são destacados em verde e não são verificados por padrão.",
+  "SelectUsersDescriptionGoogle": "Verifique os usuários da lista para importar para o ONLYOFFICE {{portalName}}. Os usuários do Google Workspace serão importados sem Nome/Sobrenome, e seu nome de e-mail será usado em seu lugar. Os nomes dos usuários podem ser alterados após a importação. Os usuários já existentes no ONLYOFFICE {{portalName}} são destacados em verde e não são verificados por padrão.",
   "SelectUsersDescriptionNextcloud": "Verifique os usuários da lista para importar para o ONLYOFFICE DocSpace. Somente usuários com e-mails podem ser selecionados. Os usuários já existentes no ONLYOFFICE DocSpace são destacados em verde e não são verificados por padrão.",
   "SelectUsersDescriptionWorkspace": "Verifique os usuários da lista para importar para o ONLYOFFICE DocSpace. Os usuários já existentes no ONLYOFFICE DocSpace são destacados em verde e não são verificados por padrão.",
   "SelectUsersWithEmail": "Selecione usuários com e-mail",

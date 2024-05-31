@@ -196,7 +196,6 @@
   "SelectFileDescriptionWorkspace": "选择 ONLYOFFICE 工作区备份文件，开始数据导入。数据上传和分析完成后，系统会自动启动下一步。",
   "SelectFileInGZFormat": "选择 .GZ 格式的文件",
   "SelectUsers": "选择用户",
-  "SelectUsersDescriptionGoogle": "勾选列表中的用户，导入 ONLYOFFICE 协作空间。导入 Google Workspace 的用户时不包含名字/姓氏，而是使用他们的电子邮件名称。导入后可以更改用户的名称。ONLYOFFICE 协作空间中已有的用户会以绿色突出显示，默认情况下不被选中。",
   "SelectUsersDescriptionNextcloud": "勾选列表中的用户，导入 ONLYOFFICE 协作空间。您只能选择有电子邮件的用户。ONLYOFFICE 协作空间中已有的用户会以绿色突出显示，默认情况下不被选中。",
   "SelectUsersDescriptionWorkspace": "勾选列表中的用户，导入 ONLYOFFICE 协作空间。ONLYOFFICE 协作空间中已有的用户会以绿色突出显示，默认情况下不被选中。",
   "SelectUsersWithEmail": "选择有电子邮件的用户",

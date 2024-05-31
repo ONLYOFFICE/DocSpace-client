@@ -223,7 +223,7 @@
   "SelectFileDescriptionWorkspace": "Select the ONLYOFFICE Workspace backup file to start the data import. Once the data upload and analysis are complete, the next step will be initiated automatically.",
   "SelectFileInGZFormat": "Select the file in .GZ format",
   "SelectUsers": "Select users",
-  "SelectUsersDescriptionGoogle": "Check users from the list to import into ONLYOFFICE DocSpace. Users from Google Workspace will be imported without First Name / Last Name, and their email name will be used instead. Names of the users can be changed after the import. Users already existing in ONLYOFFICE DocSpace are highlighted with a green color and are not checked by default.",
+  "SelectUsersDescriptionGoogle": "Check users from the list to import into ONLYOFFICE {{portalName}}. Users from Google Workspace will be imported without First Name / Last Name, and their email name will be used instead. Names of the users can be changed after the import. Users already existing in ONLYOFFICE {{portalName}} are highlighted with a green color and are not checked by default.",
   "SelectUsersDescriptionNextcloud": "Check users from the list to import into ONLYOFFICE DocSpace. Only users with emails can be selected. Users already existing in ONLYOFFICE DocSpace are highlighted with a green color and are not checked by default.",
   "SelectUsersDescriptionWorkspace": "Check users from the list to import into ONLYOFFICE DocSpace. Users already existing in ONLYOFFICE DocSpace are highlighted with a green color and are not checked by default.",
   "SelectUsersWithEmail": "Select users with e-mail",

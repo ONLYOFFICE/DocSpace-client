@@ -37,7 +37,7 @@ export const getGoogleStepDescription = (
     case 1:
       return t("Settings:SelectFileDescriptionGoogle");
     case 2:
-      return t("Settings:SelectUsersDescriptionGoogle");
+      return t("Settings:SelectUsersDescriptionGoogle", { portalName: PORTAL });
     case 3:
       return isTypeSelectEmpty ? (
         <>

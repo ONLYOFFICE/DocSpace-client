@@ -218,7 +218,7 @@
   "SelectFileDescriptionWorkspace": "Atlasiet ONLYOFFICE Workspace dublējuma failu, lai sāktu datu importēšanu. Kad datu augšupielāde un analīze būs pabeigta, nākamā darbība tiks sākta automātiski.",
   "SelectFileInGZFormat": "Izvēlieties failu .GZ formātā",
   "SelectUsers": "Atlasiet lietotājus",
-  "SelectUsersDescriptionGoogle": "Pārbaudiet lietotājus no saraksta, lai importētu ONLYOFFICE DocSpace. Lietotāji no Google Workspace tiks importēti bez vārda / uzvārda, un tā vietā tiks izmantots viņu e-pasta vārds. Lietotāju vārdus var mainīt pēc importēšanas. Lietotāji, kas jau pastāv ONLYOFFICE DocSpace, ir iezīmēti ar zaļu krāsu un pēc noklusējuma nav atzīmēti.",
+  "SelectUsersDescriptionGoogle": "Pārbaudiet lietotājus no saraksta, lai importētu ONLYOFFICE {{portalName}}. Lietotāji no Google Workspace tiks importēti bez vārda / uzvārda, un tā vietā tiks izmantots viņu e-pasta vārds. Lietotāju vārdus var mainīt pēc importēšanas. Lietotāji, kas jau pastāv ONLYOFFICE {{portalName}}, ir iezīmēti ar zaļu krāsu un pēc noklusējuma nav atzīmēti.",
   "SelectUsersDescriptionNextcloud": "Pārbaudiet lietotājus no saraksta, lai importētu ONLYOFFICE DocSpace. Var atlasīt tikai lietotājus ar e-pasta ziņojumiem. Lietotāji, kas jau pastāv ONLYOFFICE DocSpace, ir iezīmēti ar zaļu krāsu un pēc noklusējuma nav atzīmēti.",
   "SelectUsersDescriptionWorkspace": "Pārbaudiet lietotājus no saraksta, lai importētu ONLYOFFICE DocSpace. Lietotāji, kas jau pastāv ONLYOFFICE DocSpace, ir iezīmēti ar zaļu krāsu un pēc noklusējuma nav atzīmēti.",
   "SelectUsersWithEmail": "Atlasīt lietotājus ar e-pastu",

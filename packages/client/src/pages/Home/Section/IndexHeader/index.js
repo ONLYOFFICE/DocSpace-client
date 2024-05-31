@@ -33,8 +33,7 @@ import { StyledTableIndexMenu } from "./StyledIndexHeader";
 const TableIndexHeader = ({
   setIsIndexEditingMode,
   t,
-  reorder,
-  selectedFolder,
+  setReorderDialogVisible,
 }) => {
   return (
     <StyledTableIndexMenu>
@@ -46,7 +45,7 @@ const TableIndexHeader = ({
         <div className="table-header_index-separator" />
         <div
           className="table-header_reorder-container"
-          onClick={() => reorder(selectedFolder?.id)}
+          onClick={() => setReorderDialogVisible(true)}
         >
           <IconButton
             className="table-header_reorder-icon"
@@ -57,7 +56,7 @@ const TableIndexHeader = ({
             isClickable={false}
           />
           <Text fontSize="12px" lineHeight="16px" fontWeight={600}>
-            {t("Common:Reorder")}
+            {t("Files:Reorder")}
           </Text>
         </div>
       </div>

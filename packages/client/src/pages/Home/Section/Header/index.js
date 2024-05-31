@@ -232,6 +232,7 @@ const SectionHeaderContent = (props) => {
     setRestoreAllPanelVisible,
     isGracePeriod,
     setInviteUsersWarningDialogVisible,
+    setReorderDialogVisible,
     setRestoreAllArchive,
     setRestoreRoomDialogVisible,
     onCopyLink,
@@ -854,8 +855,7 @@ const SectionHeaderContent = (props) => {
   const tableIndexHeaderProps = {
     setIsIndexEditingMode,
     t,
-    reorder,
-    selectedFolder,
+    setReorderDialogVisible,
   };
 
   if (isAccountsPage && !(isGroupsPage && isRoomAdmin)) {
@@ -952,7 +952,9 @@ const SectionHeaderContent = (props) => {
     <Consumer key="header">
       {(context) => (
         <StyledContainer isRecycleBinFolder={isRecycleBinFolder}>
-          {isMobile && isIndexEditingMode && <TableIndexHeader {...tableIndexHeaderProps} />}
+          {isMobile && isIndexEditingMode && (
+            <TableIndexHeader {...tableIndexHeaderProps} />
+          )}
           {tableGroupMenuVisible ? (
             <TableGroupMenu {...tableGroupMenuProps} withComboBox />
           ) : isIndexEditingMode && !isMobile ? (
@@ -1125,6 +1127,7 @@ export default inject(
       setLeaveRoomDialogVisible,
       setSelectFileFormRoomDialogVisible,
       setShareFolderDialogVisible,
+      setReorderDialogVisible,
     } = dialogsStore;
 
     const {
@@ -1295,6 +1298,7 @@ export default inject(
       setSharingPanelVisible,
       setMoveToPanelVisible,
       setCopyPanelVisible,
+      setReorderDialogVisible,
       setBufferSelection,
       setIsFolderActions,
       deleteAction,

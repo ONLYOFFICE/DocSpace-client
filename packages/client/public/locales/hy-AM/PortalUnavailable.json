@@ -1,4 +1,4 @@
 {
-  "AccessingProblem": "Եթե ​​այս DocSpace մուտք գործելու հետ կապված խնդիրներ ունեք, դիմեք ադմինիստրատորին:",
-  "ContactAdministrator": "Կապվեք DocSpace-ի ադմինիստրատորի հետ"
+  "AccessingProblem": "Եթե ​​այս {{portalName}} մուտք գործելու հետ կապված խնդիրներ ունեք, դիմեք ադմինիստրատորին:",
+  "ContactAdministrator": "Կապվեք {{portalName}}-ի ադմինիստրատորի հետ"
 }

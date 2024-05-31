@@ -11,5 +11,5 @@
   "LicenseLink": "licentieovereenkomsten",
   "PlaceholderLicense": "Uw licentiebestand",
   "Timezone": "Tijdzone:",
-  "WelcomeTitle": "Welkom bij uw DocSpace!"
+  "WelcomeTitle": "Welkom bij uw {{portalName}}!"
 }

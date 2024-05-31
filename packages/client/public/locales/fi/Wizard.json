@@ -1,5 +1,4 @@
 {
-  "Desc": "Määritä DocSpacen rekisteröintitiedot.",
   "ErrorEmail": "Epäkelpo sähköpostiosoite",
   "ErrorInitWizard": "Palvelu ei ole tällä hetkellä käytettävissä, yritä myöhemmin uudelleen.",
   "ErrorInitWizardButton": "Yritä uudelleen",
@@ -10,6 +9,5 @@
   "License": "Hyväksy ehdot ",
   "LicenseLink": "Lisenssisopimukset",
   "PlaceholderLicense": "Lisenssitiedosto",
-  "Timezone": "Aikavyöhyke:",
-  "WelcomeTitle": "Tervetuloa DocSpaceen!"
+  "Timezone": "Aikavyöhyke:"
 }

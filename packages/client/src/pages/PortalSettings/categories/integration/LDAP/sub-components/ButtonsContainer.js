@@ -1,4 +1,3 @@
-import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -10,14 +9,10 @@ const ButtonContainer = ({ saveLdapSettings, restoreToDefault }) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
   const onSaveClick = () => {
-    saveLdapSettings()
-      .then(() => toastr.success(t("Settings:SuccessfullySaveSettingsMessage")))
-      .catch((e) => toastr.error(e));
+    saveLdapSettings().catch((e) => toastr.error(e));
   };
   const onResetClick = () => {
-    restoreToDefault()
-      .then(() => toastr.success(t("Settings:SuccessfullySaveSettingsMessage")))
-      .catch((e) => toastr.error(e));
+    restoreToDefault().catch((e) => toastr.error(e));
   };
   return (
     <Box className="ldap_buttons-container">

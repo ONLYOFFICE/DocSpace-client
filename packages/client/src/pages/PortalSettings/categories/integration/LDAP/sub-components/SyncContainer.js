@@ -6,6 +6,7 @@ import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Cron } from "@docspace/shared/components/cron";
+import { toastr } from "@docspace/shared/components/toast";
 
 import ProgressContainer from "./ProgressContainer";
 import ToggleAutoSync from "./ToggleAutoSync";
@@ -27,7 +28,7 @@ const SyncContainer = ({
   nextSyncDate,
   theme,
 }) => {
-  const { t } = useTranslation(["Ldap", "Common"]);
+  const { t } = useTranslation(["Ldap", "Common", "Settings"]);
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -44,6 +45,12 @@ const SyncContainer = ({
       if (newUrl) navigate(newUrl);
     }
   };
+
+  const onSaveClick = React.useCallback(() => {
+    saveCronLdap()
+      .then(() => toastr.success(t("Settings:SuccessfullySaveSettingsMessage")))
+      .catch((e) => toastr.error(e));
+  }, []);
 
   const buttonSize = isDesktop() ? ButtonSize.small : ButtonSize.normal;
 
@@ -119,7 +126,7 @@ const SyncContainer = ({
             className="auto-sync-button"
             size="normal"
             primary
-            onClick={saveCronLdap}
+            onClick={onSaveClick}
             label={t("Common:SaveButton")}
             isDisabled={!isLdapAvailable || !isLdapEnabled}
           />

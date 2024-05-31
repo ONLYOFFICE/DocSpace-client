@@ -357,8 +357,6 @@ class LdapFormStore {
       if (isErrorExist) return;
     }
 
-    console.log("saving settings");
-
     const settings = {
       EnableLdapAuthentication: this.isLdapEnabled,
       AcceptCertificate: this.acceptCertificate,
@@ -391,11 +389,7 @@ class LdapFormStore {
       Password: this.password,
     };
 
-    console.log({ settings });
-
     const respose = await saveLdapSettings(settings);
-
-    console.log(respose);
 
     if (respose?.id) {
       this.inProgress = true;

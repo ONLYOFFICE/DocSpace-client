@@ -1482,7 +1482,10 @@ class ContextOptionsStore {
         label: t("Files:Embed"),
         icon: CodeReactSvgUrl,
         onClick: () => this.onOpenEmbeddingSettings(item),
-        disabled: (!item.canShare && !isShared) || isArchive,
+        disabled:
+          (!item.canShare &&
+            (!isShared || !this.publicRoomStore.primaryLink)) ||
+          isArchive,
       },
       {
         id: "option_show-info",

@@ -64,6 +64,19 @@ const StyledScrollbar = styled(Scrollbar)`
 `;
 
 const StyledBody = styled.div`
+  .embedding-panel_banner {
+    display: flex;
+    padding: 12px 16px;
+    gap: 16px;
+    background-color: ${(props) => props.theme.infoBlock.background};
+
+    .embedding-panel_banner-close-icon {
+      min-width: 12px;
+      min-height: 12px;
+      margin-left: auto;
+    }
+  }
+
   .embedding-panel_body {
     padding: 20px 16px 0 16px;
 

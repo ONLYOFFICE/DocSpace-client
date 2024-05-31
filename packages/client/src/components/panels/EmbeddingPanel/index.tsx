@@ -26,7 +26,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { withTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { withTranslation, Trans } from "react-i18next";
 import copy from "copy-to-clipboard";
 
 import { DeviceType } from "@docspace/shared/enums";
@@ -49,6 +50,7 @@ import { TTranslation } from "@docspace/shared/types";
 import { TColorScheme, TTheme } from "@docspace/shared/themes";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { UserStore } from "@docspace/shared/store/UserStore";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import HeaderUrl from "PUBLIC_DIR/images/sdk-presets_header.react.svg?url";
@@ -56,6 +58,7 @@ import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
 import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
+import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
 
 import {
   StyledEmbeddingPanel,
@@ -109,6 +112,7 @@ type EmbeddingPanelProps = {
   denyDownload: boolean;
   linkParams: LinkParamsType;
   setLinkParams: (linkParams: LinkParamsType) => void;
+  isAdmin: boolean;
 };
 
 const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
@@ -122,6 +126,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     currentColorScheme,
     linkParams,
     setLinkParams,
+    isAdmin,
   } = props;
 
   const { roomId, link, fileId } = linkParams;
@@ -132,6 +137,8 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   const denyDownload = link?.sharedTo?.denyDownload;
 
   const withToken = !!requestToken;
+
+  const [barIsVisible, setBarIsVisible] = useState(!!fileId);
 
   const dataDimensions = [
     { key: "percent", label: "%", default: true },
@@ -245,6 +252,16 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     setEditLinkPanelIsVisible(true);
   };
 
+  const onCloseBar = () => {
+    setBarIsVisible(false);
+  };
+
+  const navigate = useNavigate();
+  const onOpenDevTools = () => {
+    navigate("/portal-settings/developer-tools");
+    onClose();
+  };
+
   const onKeyPress = (e: KeyboardEvent) =>
     (e.key === "Esc" || e.key === "Escape") && onClose();
 
@@ -308,6 +325,38 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
         </div>
         <StyledScrollbar ref={scrollRef}>
           <StyledBody>
+            {barIsVisible && (
+              <div className="embedding-panel_banner">
+                <Text fontSize="12px" fontWeight={400}>
+                  {isAdmin ? (
+                    <Trans
+                      t={t}
+                      ns="EmbeddingPanel"
+                      i18nKey="EmbeddingBarAllowList"
+                      components={{
+                        1: (
+                          <Link
+                            onClick={onOpenDevTools}
+                            color={currentColorScheme?.main?.accent}
+                            isHovered
+                          />
+                        ),
+                      }}
+                    >
+                      {`"Add the website URL for embedding to the <1>allow list</1>."`}
+                    </Trans>
+                  ) : (
+                    t("EmbeddingPanel:EmbeddingBarDescription")
+                  )}
+                </Text>
+                <IconButton
+                  className="embedding-panel_banner-close-icon"
+                  size={12}
+                  iconName={CrossReactSvg}
+                  onClick={onCloseBar}
+                />
+              </div>
+            )}
             <div className="embedding-panel_body">
               {!fileId && (
                 <Text className="embedding-panel_description">
@@ -444,9 +493,11 @@ export default inject(
   ({
     dialogsStore,
     settingsStore,
+    userStore,
   }: {
     dialogsStore: DialogsStore;
     settingsStore: SettingsStore;
+    userStore: UserStore;
   }) => {
     const {
       embeddingPanelIsVisible,
@@ -457,6 +508,8 @@ export default inject(
     } = dialogsStore;
     const { theme, currentColorScheme, currentDeviceType } = settingsStore;
 
+    const { user } = userStore;
+
     return {
       theme,
       currentDeviceType,
@@ -466,6 +519,8 @@ export default inject(
       setEditLinkPanelIsVisible,
       linkParams,
       setLinkParams,
+
+      isAdmin: user?.isAdmin,
     };
   },
 )(

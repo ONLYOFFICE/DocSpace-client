@@ -226,7 +226,7 @@
   "ServerSideEncryptionMethod": "Server Side Encryptiemethode",
   "ServiceUrl": "Service Url",
   "SessionLifetime": "Duur van de sessie",
-  "SessionLifetimeMobileDescription": "Duur van de sessie hiermee kan de tijd (in minuten) worden ingesteld waarna de gebruikers van de DocSpace opnieuw de inloggegevens moeten invoeren om toegang te krijgen tot de ruimte..",
+  "SessionLifetimeMobileDescription": "Duur van de sessie hiermee kan de tijd (in minuten) worden ingesteld waarna de gebruikers van de {{portalName}} opnieuw de inloggegevens moeten invoeren om toegang te krijgen tot de ruimte..",
   "SessionLifetimeSettingDescription": "Pas Duur van de sessie aan om de periode vóór het automatisch afmelden te definiëren. Na het opslaan wordt het afmelden voor alle gebruikers uitgevoerd.",
   "SetDefaultRoomQuota": "Stel de standaard opslagquota in voor kamers in deze {{portalName}}. Dit kan later voor elke kamer afzonderlijk worden aangepast door de kamer beheerder.",
   "SetDefaultUserQuota": "Stel de opslagquota in voor gebruikers van deze {{portalName}}. Gebruikersquota hebben invloed op de opslaglimiet voor de map Documenten van elke gebruiker.",

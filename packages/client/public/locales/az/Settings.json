@@ -228,7 +228,7 @@
   "ServerSideEncryptionMethod": "Server Tərəfində Şifrələmə Metodu",
   "ServiceUrl": "Xidmət URL-si",
   "SessionLifetime": "Sessiya Müddəti",
-  "SessionLifetimeMobileDescription": "Sessiya Müddəti sizə DocSpace istifadəçilərinin sahəyə daxil olmaq üçün domen məlumatlarını yenidən daxil etməli olduğu vaxtın miqdarını (dəqiqələrlə) təyin etməyə imkan verir.",
+  "SessionLifetimeMobileDescription": "Sessiya Müddəti sizə {{portalName}} istifadəçilərinin sahəyə daxil olmaq üçün domen məlumatlarını yenidən daxil etməli olduğu vaxtın miqdarını (dəqiqələrlə) təyin etməyə imkan verir.",
   "SessionLifetimeSettingDescription": "Avtomatik çıxışdan əvvəl vaxtın miqdarını müəyyən etmək üçün Sessiya Müddəti təyin edin. Yadda saxladıqdan sonra bütün istifadəçilər üçün çıxış həyata keçiriləcək.",
   "SetDefaultRoomQuota": "Bu {{portalName}}-də otaqlar üçün defolt yaddaş kvotasını təyin edin. Daha sonra otaq administratorları tərəfindən hər otaq üçün fərdi olaraq təyin edilə bilər.",
   "SetDefaultUserQuota": "Bu {{portalName}} istifadəçiləri üçün yaddaş kvotasını təyin edin. İstifadəçi kvotası hər bir istifadəçinin Sənədlər qovluğunun yaddaş limitinə təsir edir.",

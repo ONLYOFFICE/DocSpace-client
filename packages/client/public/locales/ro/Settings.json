@@ -230,7 +230,7 @@
   "ServerSideEncryptionMethod": "Metoda de criptare pe partea de server",
   "ServiceUrl": "Url a serverului",
   "SessionLifetime": "Durata de expirare a sesiunii ",
-  "SessionLifetimeMobileDescription": "Durata de expirare a sesiunii permite stabilirea perioadei de timp (exprimată în minute) înainte ca utilizatorii spațiului DocSpace vor fi nevoiți să introducă din nou datele de autentificare pentru a accesa spaţiul.",
+  "SessionLifetimeMobileDescription": "Durata de expirare a sesiunii permite stabilirea perioadei de timp (exprimată în minute) înainte ca utilizatorii spațiului {{portalName}} vor fi nevoiți să introducă din nou datele de autentificare pentru a accesa spaţiul.",
   "SessionLifetimeSettingDescription": "Configurați durata de expirare a sesiunii pentru a stabili o perioadă de timp până la deconectarea automată. După salvare, toți utilizatorii vor fi deconectați.",
   "SetDefaultRoomQuota": "Stabilire cotă de stocare implicită pentru sălile în acest {{portalName}}. Administrator de sală poate configura cote de stocare mai târziu individual pentru fiecare sală.",
   "SetDefaultUserQuota": "Stabilire cotă de stocare pentru utilizatorii acestui {{portalName}}. Cotă de stocare pentru utilizator afectează limita de stocare pentru folderul Documentele a fiecărui utilizator.",

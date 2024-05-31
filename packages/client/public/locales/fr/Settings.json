@@ -228,7 +228,7 @@
   "ServerSideEncryptionMethod": "Méthode de chiffrement partie serveur",
   "ServiceUrl": "Lien de service",
   "SessionLifetime": "Durée de vie de la session",
-  "SessionLifetimeMobileDescription": "La durée de vie de la session permet de définir le temps (en minutes) avant que les utilisateurs du DocSpace ne doivent à nouveau entrer leurs informations d'identification pour accéder à l'espace.",
+  "SessionLifetimeMobileDescription": "La durée de vie de la session permet de définir le temps (en minutes) avant que les utilisateurs du {{portalName}} ne doivent à nouveau entrer leurs informations d'identification pour accéder à l'espace.",
   "SessionLifetimeSettingDescription": "Ajustez la durée de vie de la session pour définir la période de temps avant la déconnexion automatique. Après l'enregistrement, la déconnexion sera effectuée pour tous les utilisateurs.",
   "SetDefaultRoomQuota": "Définissez les quotas de stockage par défaut pour les salles {{portalName}}. L'administrateur de salle peut configurer les quotas de stockage spécifiquement pour chaque salle plus tard.",
   "SetDefaultUserQuota": "Définissez les quotas de stockage pour utilisateurs dans {{portalName}}. Le quota d'utilisateur affecte l'espace de stockage pour le dossier Documents de chaque utilisateur.",

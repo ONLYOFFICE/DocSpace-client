@@ -227,7 +227,7 @@
   "ServerSideEncryptionMethod": "Metoda szyfrowania po stronie serwera",
   "ServiceUrl": "URL usługi",
   "SessionLifetime": "Długość sesji",
-  "SessionLifetimeMobileDescription": "Długość sesji pozwala wybrać czas (w minutach), zanim użytkownicy DocSpace będą musieli ponownie wpisać swoje dane logowania do obszaru, aby uzyskać do niego dostęp.",
+  "SessionLifetimeMobileDescription": "Długość sesji pozwala wybrać czas (w minutach), zanim użytkownicy {{portalName}} będą musieli ponownie wpisać swoje dane logowania do obszaru, aby uzyskać do niego dostęp.",
   "SessionLifetimeSettingDescription": "Dostosuj czas trwania sesji, aby zdefiniować czas przed automatycznym wylogowaniem. Po zapisaniu wszyscy użytkownicy zostaną wylogowania z obszaru.",
   "SetDefaultRoomQuota": "Skonfiguruj domyślny limit pamięci dla pokoi w tym {{portalName}}. Limit dla poszczególnych pokoi może zostać zmieniony później przez ich administratorów.",
   "SetDefaultUserQuota": "Skonfiguruj limit pamięci dla użytkowników tego {{portalName}}. Limity użytkowników mają wpływ na limit pamięci dla katalogu Dokumenty każdego użytkownika.",

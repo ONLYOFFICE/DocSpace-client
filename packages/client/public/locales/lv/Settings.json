@@ -228,7 +228,7 @@
   "ServerSideEncryptionMethod": "Servera puses šifrēšanas metode",
   "ServiceUrl": "Pakalpojuma vietrādis URL",
   "SessionLifetime": "Sesijas ilgums",
-  "SessionLifetimeMobileDescription": "Sesijas ilgums ļauj iestatīt laiku (minūtēs), pirms DocSpace lietotājiem būs atkārtoti jāievada telpas akreditācijas dati, lai piekļūtu vietai.",
+  "SessionLifetimeMobileDescription": "Sesijas ilgums ļauj iestatīt laiku (minūtēs), pirms {{portalName}} lietotājiem būs atkārtoti jāievada telpas akreditācijas dati, lai piekļūtu vietai.",
   "SessionLifetimeSettingDescription": "Pielāgojiet sesijas ilgumu, lai noteiktu laika periodu pirms automātiskās atteikšanās. Pēc saglabāšanas visi lietotāji tiks izlogoti.",
   "SetDefaultRoomQuota": "Iestatiet noklusējuma krātuves kvotu telpām šajā {{portalName}}. Vēlāk telpas administrators to var pielāgot katrai telpai atsevišķi.",
   "SetDefaultUserQuota": "Iestatiet krātuves kvotu šīs {{portalName}} lietotājiem. Lietotāja kvota ietekmē katra lietotāja mapes Dokumenti krātuves ierobežojumu.",

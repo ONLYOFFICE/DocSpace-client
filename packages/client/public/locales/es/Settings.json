@@ -231,7 +231,7 @@
   "ServerSideEncryptionMethod": "Método de cifrado del lado del servidor",
   "ServiceUrl": "URL de servicio",
   "SessionLifetime": "Duración de la sesión",
-  "SessionLifetimeMobileDescription": "La duración de la sesión permite establecer el tiempo (en minutos) antes de que los usuarios de DocSpace tengan que volver a introducir las credenciales del espacio para acceder al mismo.",
+  "SessionLifetimeMobileDescription": "La duración de la sesión permite establecer el tiempo (en minutos) antes de que los usuarios de {{portalName}} tengan que volver a introducir las credenciales del espacio para acceder al mismo.",
   "SessionLifetimeSettingDescription": "Ajuste la duración de la sesión para definir el periodo de tiempo antes de la desconexión automática. Una vez guardado, se cerrará la sesión de todos los usuarios.",
   "SetDefaultRoomQuota": "Establezca la cuota de almacenamiento predeterminada para las salas de este {{portalName}}. Posteriormente, el administrador de la sala puede ajustarlo para cada sala individualmente.",
   "SetDefaultUserQuota": "Establezca la cuota de almacenamiento para los usuarios de este {{portalName}}. La cuota de usuario afecta el límite de almacenamiento de la carpeta Documentos de cada usuario.",

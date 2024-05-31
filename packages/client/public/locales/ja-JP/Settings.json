@@ -229,7 +229,7 @@
   "ServerSideEncryptionMethod": "サーバー側暗号化方法",
   "ServiceUrl": "サービスURL",
   "SessionLifetime": "セッションの有効期間",
-  "SessionLifetimeMobileDescription": "セッションライフタイムでは、DocSpaceユーザーがスペースにアクセスするために、再度スペース認証情報を入力するまでの時間（分）を設定できます。",
+  "SessionLifetimeMobileDescription": "セッションライフタイムでは、{{portalName}}ユーザーがスペースにアクセスするために、再度スペース認証情報を入力するまでの時間（分）を設定できます。",
   "SessionLifetimeSettingDescription": "自動ログオフまでの期間を定義するには、セッションの有効期間を調整します。保存後、すべてのユーザーに対してログオフが実行されます。",
   "SetDefaultRoomQuota": "この{{portalName}}ルームのデフォルトのストレージ容量制限を設定してください。容量制限は後でルーム管理者によって個別に調整することができます。",
   "SetDefaultUserQuota": "この{{portalName}}ユーザーのストレージ容量制限を設定してください。ユーザーの容量制限は、各ユーザーの「文書」フォルダのストレージ制限に影響します。",

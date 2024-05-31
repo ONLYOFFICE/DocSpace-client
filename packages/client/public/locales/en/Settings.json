@@ -234,7 +234,7 @@
   "ServerSideEncryptionMethod": "Server Side Encryption Method",
   "ServiceUrl": "Service URL",
   "SessionLifetime": "Session Lifetime",
-  "SessionLifetimeMobileDescription": "Session Lifetime allows to set time (in minutes) before the DocSpace users will need to enter the space credentials again in order to access the space.",
+  "SessionLifetimeMobileDescription": "Session Lifetime allows to set time (in minutes) before the {{portalName}} users will need to enter the space credentials again in order to access the space.",
   "SessionLifetimeSettingDescription": "Adjust Session Lifetime to define the time period before automatic logoff. After saving, logoff will be performed for all users.",
   "SetDefaultRoomQuota": "Set the default storage quota for rooms in this {{portalName}}. It can later be adjusted for each room individually by the room admin.",
   "SetDefaultUserQuota": "Set the storage quota for users of this {{portalName}}. User quota affects storage limit for the Documents folder of each user.",

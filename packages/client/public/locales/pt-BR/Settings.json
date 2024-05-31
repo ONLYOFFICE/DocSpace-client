@@ -232,7 +232,7 @@
   "ServerSideEncryptionMethod": "Método de Criptografia do Lado do Servidor",
   "ServiceUrl": "URL de serviço",
   "SessionLifetime": "Tempo da sessão",
-  "SessionLifetimeMobileDescription": "O Session Lifetime permite definir o tempo (em minutos) antes que os usuários do DocSpace precisem inserir as credenciais do espaço novamente para acessar o espaço.",
+  "SessionLifetimeMobileDescription": "O Session Lifetime permite definir o tempo (em minutos) antes que os usuários do {{portalName}} precisem inserir as credenciais do espaço novamente para acessar o espaço.",
   "SessionLifetimeSettingDescription": "Ajuste o tempo de vida da sessão para definir o período antes do logoff automático. Após salvar, o logoff será realizado para todos os usuários.",
   "SetDefaultRoomQuota": "Defina a cota de armazenamento padrão para salas neste {{portalName}}. Posteriormente, pode ser ajustado para cada sala individualmente pelo administrador da sala.",
   "SetDefaultUserQuota": "Defina a cota de armazenamento para usuários deste {{portalName}}. A cota do usuário afeta o limite de armazenamento da pasta Documentos de cada usuário.",

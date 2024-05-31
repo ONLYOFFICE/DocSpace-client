@@ -230,7 +230,7 @@
   "ServerSideEncryptionMethod": "Metod Šifrovanja na Serverskoj Strani",
   "ServiceUrl": "URL Servisa",
   "SessionLifetime": "Trajanje Sesije",
-  "SessionLifetimeMobileDescription": "Session Lifetime omogućava postavljanje vremena (u minutima) pre nego što će korisnicima DocSpace-a ponovo biti potrebno da unesu pristupne podatke kako bi pristupili prostoru.",
+  "SessionLifetimeMobileDescription": "Session Lifetime omogućava postavljanje vremena (u minutima) pre nego što će korisnicima {{portalName}}-a ponovo biti potrebno da unesu pristupne podatke kako bi pristupili prostoru.",
   "SessionLifetimeSettingDescription": "Podesite Session Lifetime kako biste definisali vremenski period pre automatskog odjavljivanja. Nakon čuvanja, odjavljivanje će biti izvršeno za sve korisnike.",
   "SetDefaultRoomQuota": "Postavite podrazumevanu skladišnu kvotu za sobe u ovom {{portalName}}-u. Kasnije može biti podešeno za svaku sobu individualno od strane admina sobe.",
   "SetDefaultUserQuota": "Postavite skladišnu kvotu za sobe u ovom {{portalName}}-u. Korisnička kvota utiče na ograničenje skladišta za Dokumenti folder svakog korisnika.",

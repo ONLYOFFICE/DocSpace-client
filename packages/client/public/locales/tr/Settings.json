@@ -229,7 +229,7 @@
   "ServerSideEncryptionMethod": "Sunucu Tarafı Şifreleme Yöntemi",
   "ServiceUrl": "Hizmet Url'si",
   "SessionLifetime": "Oturum Ömrü",
-  "SessionLifetimeMobileDescription": "Oturum Ömrü, DocSpace kullanıcılarının alana erişmek için alan kimlik bilgilerini tekrar girmeleri gerekmeden önce süreyi (dakika bazında) ayarlamanıza olanak sağlar.",
+  "SessionLifetimeMobileDescription": "Oturum Ömrü, {{portalName}} kullanıcılarının alana erişmek için alan kimlik bilgilerini tekrar girmeleri gerekmeden önce süreyi (dakika bazında) ayarlamanıza olanak sağlar.",
   "SessionLifetimeSettingDescription": "Otomatik oturum kapatmadan önceki süreyi tanımlamak için Oturum Ömrü ayarlayın. Kaydettikten sonra tüm kullanıcılar için oturum kapatma işlemi gerçekleştirilecektir.",
   "SetDefaultRoomQuota": "Bu {{portalName}}’teki odalar için varsayılan depolama kotasını ayarlayın. Bu, daha sonra oda yöneticisi tarafından her oda için ayrı ayrı ayarlanabilir.",
   "SetDefaultUserQuota": "Bu {{portalName}}’in kullanıcıları için depolama kotasını ayarlayın. Kullanıcı kotası, her kullanıcının Belgeler klasörü için depolama sınırını etkiler.",

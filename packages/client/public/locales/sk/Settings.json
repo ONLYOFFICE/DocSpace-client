@@ -229,7 +229,7 @@
   "ServerSideEncryptionMethod": "Metóda šifrovania na strane servera",
   "ServiceUrl": "URL adresa služby",
   "SessionLifetime": "Doba trvania relácie",
-  "SessionLifetimeMobileDescription": "Čas trvania relácie umožňuje nastaviť čas (v minútach), za ktorý budú musieť používatelia DocSpace znovu zadať prihlasovacie údaje do priestoru, aby získali prístup do priestoru.",
+  "SessionLifetimeMobileDescription": "Čas trvania relácie umožňuje nastaviť čas (v minútach), za ktorý budú musieť používatelia {{portalName}} znovu zadať prihlasovacie údaje do priestoru, aby získali prístup do priestoru.",
   "SessionLifetimeSettingDescription": "Nastavte Čas trvania relácie, aby ste definovali časový úsek pred automatickým odhlásením. Po uložení všetci používatelia budú odhlásení.",
   "SetDefaultRoomQuota": "Nastavte predvolenú kvótu úložiska pre miestnosti v tomto priestore {{portalName}}. Neskôr ju môže pre každú miestnosť individuálne upraviť administrátor miestnosti.",
   "SetDefaultUserQuota": "Nastavte kvótu úložiska pre používateľov tohto priestoru {{portalName}}. Kvóta používateľov ovplyvňuje limit úložiska pre priečinok Dokumenty každého používateľa.",

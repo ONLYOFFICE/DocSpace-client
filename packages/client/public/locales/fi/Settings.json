@@ -210,7 +210,6 @@
   "ServerSideEncryptionMethod": "Palvelinpuolen salausmenetelmä",
   "ServiceUrl": "Palvelun URL-osoite",
   "SessionLifetime": "Istunnon kesto",
-  "SessionLifetimeMobileDescription": "Istunnon kesto mahdollistaa ajan asetuksen (minuuteissa) ennen kuin DocSpacen käyttäjien tulee syöttää tilan kirjautumistiedot jälkeen päästäkseen tilaan.",
   "SessionLifetimeSettingDescription": "Säädä istunnon kestoa määrittääksesi ajan ennen automaattista uloskirjautumista. Tallentamisen jälkeen uloskirjautuminen suoritetaan kaikille käyttäjille. ",
   "SettingPasswordDescription": "Määritä salasanan vahvuus-asetukset varmistaaksesi turvallisempia, laskennan kestäviä salasanoja. ",
   "SettingPasswordStrengthMobileDescription": "Salasanan vahvuus-asetukset on tapa määritellä salasanan tehokkuus arvailuja ja väsytyshyökkäyksiä vastaan.",

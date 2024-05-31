@@ -2,7 +2,7 @@
   "ChangeDomainDescription": "Sprememba imena domene lahko povzroči sistemsko napako. Po spremembi imena domene boste morali znova konfigurirati naslednje nastavitve: pošta, račun, parametre klepeta.",
   "ConfigurationDescription": "Če želite spremeniti nastavitve naslova, morate svojo domeno povezati s trenutnim IP-jem. Prepričajte se, da imate dostop do nastavitev domene, da lahko to storite. Po povezavi domene ustvarite ime {{portalName}}. Ustvarjeno ime {{portalName}} lahko pozneje spremenite z nastavitvami prostora.",
   "ConfigurationHeader": "Trenutna konfiguracija prostora",
-  "CreateSpaceDescription": "Svojo domeno ste uspešno povezali z vašim IP naslovom. Če želite urediti nastavitve naslova prostora, morate nastaviti bodoče DocSpace ime",
+  "CreateSpaceDescription": "Svojo domeno ste uspešno povezali z vašim IP naslovom. Če želite urediti nastavitve naslova prostora, morate nastaviti bodoče {{portalName}} ime",
   "CreatingDocspace": "Ustvarjanje novega {{portalName}}",
   "CurrentSpace": "Trenutni prostor",
   "DeletePortalText": "Prosimo, upoštevajte: samo lastnik lahko izbriše izbrani prostor DocSpace. Lastnik <1>{{domain}}</1> je <1>{{displayName}}</1> (<5>{{email}}</5>). Če niste lastnik, s klikom na gumb IZBRIŠI ne boste mogli dostopati do nastavitev brisanja DocSpace in boste preusmerjeni v razdelek Sobe.",

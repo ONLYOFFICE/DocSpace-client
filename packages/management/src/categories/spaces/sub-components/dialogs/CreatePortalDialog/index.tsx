@@ -150,7 +150,9 @@ const CreatePortalDialog = () => {
         {t("CreatingDocspace", { portalName: PORTAL })}
       </ModalDialog.Header>
       <ModalDialog.Body className="create-docspace-body">
-        <Text noSelect={true}>{t("CreateSpaceDescription")}</Text>
+        <Text noSelect={true}>
+          {t("CreateSpaceDescription", { portalName: PORTAL })}
+        </Text>
         <div className="create-docspace-input-block">
           <Text
             fontSize="13px"

@@ -19,7 +19,7 @@
   "Admins": "管理者",
   "AdminsMessage": "管理者メッセージの設定",
   "AdminsMessageMobileDescription": "管理者メッセージ設定は、ポータル管理者に連絡する方法です。",
-  "AdminsMessageSettingDescription": "このオプションを有効にすると、サインインページにDocSpace管理者連絡フォームが表示されます。",
+  "AdminsMessageSettingDescription": "このオプションを有効にすると、サインインページに{{portalName}}管理者連絡フォームが表示されます。",
   "AllDomains": "任意のドメイン",
   "AmazonBucketTip": "バックアップを保存するAmazon S3バケットの固有名を入力してください。",
   "AmazonCSE": "クライアント側の暗号化",

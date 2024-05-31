@@ -19,7 +19,7 @@
   "Admins": "Administradores",
   "AdminsMessage": "Configuración del mensaje del administrador",
   "AdminsMessageMobileDescription": "La configuración del mensaje del administrador es una forma de ponerse en contacto con el administrador del portal.",
-  "AdminsMessageSettingDescription": "Active esta opción para mostrar el formulario de contacto del administrador de DocSpace en la página de inicio de sesión.",
+  "AdminsMessageSettingDescription": "Active esta opción para mostrar el formulario de contacto del administrador de {{portalName}} en la página de inicio de sesión.",
   "AllDomains": "Cualquier dominios",
   "AmazonBucketTip": "Introduzca el nombre único del bucket de Amazon S3 donde desea almacenar sus copias de seguridad.",
   "AmazonCSE": "Cifrado del lado del cliente",

@@ -19,7 +19,7 @@
   "Admins": "Administratorzy",
   "AdminsMessage": "Ustawienia wiadomości administratora",
   "AdminsMessageMobileDescription": "Ustawienia wiadomości administratora to sposób na skontaktowanie się z administratorem portalu.",
-  "AdminsMessageSettingDescription": "Włącz tę opcję, aby wyświetlać formularz kontaktowy administratora DocSpace na stronie logowania.",
+  "AdminsMessageSettingDescription": "Włącz tę opcję, aby wyświetlać formularz kontaktowy administratora {{portalName}} na stronie logowania.",
   "AllDomains": "Wszystkie domeny",
   "AmazonBucketTip": "Wpisz unikatową nazwę bucketu Amazon S3, w którym chcesz przechowywać swoje kopie zapasowe.",
   "AmazonCSE": "Szyfrowanie po stronie klienta",

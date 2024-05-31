@@ -19,7 +19,7 @@
   "Admins": "Yöneticiler",
   "AdminsMessage": "Yönetici Mesajı Ayarları",
   "AdminsMessageMobileDescription": "Yönetici Mesajı Ayarları, portal yöneticisiyle iletişim kurmanın bir yoludur.",
-  "AdminsMessageSettingDescription": "Oturum Açma sayfasında DocSpace yöneticisi iletişim formunu görüntülemek için bu seçeneği etkinleştirin.",
+  "AdminsMessageSettingDescription": "Oturum Açma sayfasında {{portalName}} yöneticisi iletişim formunu görüntülemek için bu seçeneği etkinleştirin.",
   "AllDomains": "Herhangi bir alan adı",
   "AmazonBucketTip": "Yedeklerinizi depolamak istediğiniz Amazon S3 klasörünün benzersiz adını girin.",
   "AmazonCSE": "İstemci Tarafında Şifreleme",

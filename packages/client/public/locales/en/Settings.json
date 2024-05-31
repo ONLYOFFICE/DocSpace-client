@@ -20,7 +20,7 @@
   "Admins": "Admins",
   "AdminsMessage": "Administrator Message Settings",
   "AdminsMessageMobileDescription": "Administrator Message Settings is a way to contact the portal administrator.",
-  "AdminsMessageSettingDescription": "Enable this option to display the DocSpace administrator contact form on the Sign In page.",
+  "AdminsMessageSettingDescription": "Enable this option to display the {{portalName}} administrator contact form on the Sign In page.",
   "AllDomains": "Any domains",
   "AmazonBucketTip": "Enter the unique name of the Amazon S3 bucket where you want to store your backups.",
   "AmazonCSE": "Client-Side Encryption",

@@ -17,7 +17,6 @@
   "Admins": "管理员",
   "AdminsMessage": "管理员消息设置",
   "AdminsMessageMobileDescription": "您可通过“管理员留言设置”联系门户管理员",
-  "AdminsMessageSettingDescription": "启用此选项，在登录页面显示协作空间管理员联系人表单。",
   "AllDomains": "任意域",
   "AmazonBucketTip": "输入您想存储备份的亚马逊 S3 存储桶唯一名称。",
   "AmazonCSE": "客户端加密",

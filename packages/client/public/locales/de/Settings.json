@@ -19,7 +19,7 @@
   "Admins": "Administratoren",
   "AdminsMessage": "Einstellungen von Nachrichten für Administrator",
   "AdminsMessageMobileDescription": "Über die Einstellungen für Administratormeldungen können Sie den Portaladministrator kontaktieren.",
-  "AdminsMessageSettingDescription": "Aktivieren Sie diese Option, um das Formular für die Kontaktaufnahme mit dem DocSpace-Administrator auf der Anmeldeseite anzuzeigen.",
+  "AdminsMessageSettingDescription": "Aktivieren Sie diese Option, um das Formular für die Kontaktaufnahme mit dem {{portalName}}-Administrator auf der Anmeldeseite anzuzeigen.",
   "AllDomains": "Alle Domains",
   "AmazonBucketTip": "Geben Sie den eindeutigen Namen des Amazon S3-Buckets ein, in dem Sie Ihre Backups speichern möchten.",
   "AmazonCSE": "Clientseitige Verschlüsselung",

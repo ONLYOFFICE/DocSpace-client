@@ -19,7 +19,7 @@
   "Admins": "Administrateurs",
   "AdminsMessage": "Paramètres des messages de l’administrateur",
   "AdminsMessageMobileDescription": "Les paramètres du message de l'administrateur permettent de contacter l'administrateur du portail.",
-  "AdminsMessageSettingDescription": "Activez cette option pour afficher le formulaire de contact de l'administrateur de DocSpace sur la page d'ouverture de session.",
+  "AdminsMessageSettingDescription": "Activez cette option pour afficher le formulaire de contact de l'administrateur de {{portalName}} sur la page d'ouverture de session.",
   "AllDomains": "Tous les domaines",
   "AmazonBucketTip": "Saisissez le nom unique de l’espace de stockage Amazon S3 dans lequel vous souhaitez stocker vos fichiers de sauvegarde.",
   "AmazonCSE": "Chiffrement côté client",

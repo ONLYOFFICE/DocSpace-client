@@ -19,7 +19,7 @@
   "Admins": "Beheerders",
   "AdminsMessage": "Beheerder Bericht Instellingen",
   "AdminsMessageMobileDescription": "Beheerder Bericht Instellingen is een manier om contact op te nemen met de portaal beheerder.",
-  "AdminsMessageSettingDescription": "Schakel deze optie in om het contactformulier van de DocSpace beheerder weer te geven op de Aanmelden pagina.",
+  "AdminsMessageSettingDescription": "Schakel deze optie in om het contactformulier van de {{portalName}} beheerder weer te geven op de Aanmelden pagina.",
   "AllDomains": "Alle domeinen",
   "AmazonBucketTip": "Voer de unieke naam in van de Amazon S3 bucket waar u uw back-ups wilt opslaan.",
   "AmazonCSE": "Versleuteling aan de klantzijde",

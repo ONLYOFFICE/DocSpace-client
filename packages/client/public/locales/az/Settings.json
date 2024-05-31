@@ -19,7 +19,7 @@
   "Admins": "Adminlər",
   "AdminsMessage": "Administrator Mesaj Parametrləri",
   "AdminsMessageMobileDescription": "Admin Mesaj Parametrləri portal administratoru ilə əlaqə qurmağın bir yoludur.",
-  "AdminsMessageSettingDescription": "Giriş səhifəsində DocSpace administratoru ilə əlaqə formasını göstərmək üçün bu seçimi aktivləşdirin.",
+  "AdminsMessageSettingDescription": "Giriş səhifəsində {{portalName}} administratoru ilə əlaqə formasını göstərmək üçün bu seçimi aktivləşdirin.",
   "AllDomains": "Hər hansı bir domen adı",
   "AmazonBucketTip": "Ehtiyat nüsxələrinizi saxlamaq istədiyiniz Amazon S3 səbətinin unikal adını daxil edin.",
   "AmazonCSE": "Müştəri tərəfinin şifrələməsi",

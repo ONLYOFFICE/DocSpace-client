@@ -19,7 +19,7 @@
   "Admins": "Administrátori",
   "AdminsMessage": "Nastavenia správ administrátora",
   "AdminsMessageMobileDescription": "Nastavenia sprav administrátorovi je spôsob ako kontaktovať administrátora portálu.",
-  "AdminsMessageSettingDescription": "Aktivujte túto možnosť, aby sa na stránke Prihlásenie zobrazil kontaktný formulár administrátora DocSpace.",
+  "AdminsMessageSettingDescription": "Aktivujte túto možnosť, aby sa na stránke Prihlásenie zobrazil kontaktný formulár administrátora {{portalName}}.",
   "AllDomains": "Všetky domény",
   "AmazonBucketTip": "Zadajte jedinečný názov košíka Amazon S3, do ktorého chcete ukladať svoje zálohy.",
   "AmazonCSE": "Šifrovanie na strane klienta",

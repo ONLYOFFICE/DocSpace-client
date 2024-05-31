@@ -18,7 +18,6 @@
   "Admins": "Järjestelmänvalvojat",
   "AdminsMessage": "Järjestelmänvalvojan viestiasetukset",
   "AdminsMessageMobileDescription": "Järjestelmänvalvojan Viestiasetukset on helppo tapa ottaa yhteyttä järjestelmänvalvojaan.",
-  "AdminsMessageSettingDescription": "Ota tämä vaihtoehto käyttöön näyttääksesi DocSpacen järjestelmälvalvojan yhteydenottolomake Kirjaudu sisään-sivulla.",
   "AllDomains": "Kaikki verkkotunnukset",
   "AmazonBucketTip": "Syötä sen Amazon S3- säiliön uniikki nimi, johon haluat säilöä varmuuskopiosi.",
   "AmazonCSE": "Asiakkaan puolen salaus",

@@ -19,7 +19,7 @@
   "Admins": "Administratori",
   "AdminsMessage": "Administratora ziņojumu iestatījumi",
   "AdminsMessageMobileDescription": "Administratora ziņojumu iestatījumi ir veids, kā sazināties ar portāla administratoru.",
-  "AdminsMessageSettingDescription": "Iespējojiet šo opciju, lai pierakstīšanās lapā parādītu DocSpace administratora saziņas veidlapu.",
+  "AdminsMessageSettingDescription": "Iespējojiet šo opciju, lai pierakstīšanās lapā parādītu {{portalName}} administratora saziņas veidlapu.",
   "AllDomains": "Jebkurš domēns",
   "AmazonBucketTip": "Ievadiet unikālo Amazon S3 kopnes nosaukumu, kurā vēlaties saglabāt dublējumus",
   "AmazonCSE": "Klienta puses šifrēšana",

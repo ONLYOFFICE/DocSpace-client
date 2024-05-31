@@ -19,7 +19,7 @@
   "Admins": "Quản trị viên",
   "AdminsMessage": "Cài đặt Tin nhắn Quản trị viên",
   "AdminsMessageMobileDescription": "Cài đặt Tin nhắn Quản trị viên là một cách để liên hệ với quản trị viên cổng thông tin.",
-  "AdminsMessageSettingDescription": "Bật tùy chọn này để hiển thị biểu mẫu liên hệ của quản trị viên DocSpace trên trang Đăng nhập.",
+  "AdminsMessageSettingDescription": "Bật tùy chọn này để hiển thị biểu mẫu liên hệ của quản trị viên {{portalName}} trên trang Đăng nhập.",
   "AllDomains": "Tên miền bất kỳ",
   "AmazonBucketTip": "Nhập tên riêng của Amazon bucket S3 nơi bạn muốn lưu trữ các bản sao lưu của mình.",
   "AmazonCSE": "Mã hóa phía máy khách",

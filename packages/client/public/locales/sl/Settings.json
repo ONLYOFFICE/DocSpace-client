@@ -19,7 +19,7 @@
   "Admins": "Administratorji",
   "AdminsMessage": "Nastavitve sporočil skrbnika",
   "AdminsMessageMobileDescription": "Nastavitve skrbniškega sporočila so način za stik s skrbnikom portala.",
-  "AdminsMessageSettingDescription": "Omogočite to možnost, če želite prikazati kontaktni obrazec skrbnika DocSpace na strani za prijavo.",
+  "AdminsMessageSettingDescription": "Omogočite to možnost, če želite prikazati kontaktni obrazec skrbnika {{portalName}} na strani za prijavo.",
   "AllDomains": "Kakršna koli domena",
   "AmazonBucketTip": "Vnesite edinstveno ime košarice Amazon S3, kamor želite shraniti svoje varnostne kopije.",
   "AmazonCSE": "Šifriranje na strani odjemalca",

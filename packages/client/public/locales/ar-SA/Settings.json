@@ -19,7 +19,7 @@
   "Admins": "المشرفون",
   "AdminsMessage": "إعدادات رسالة المسؤول",
   "AdminsMessageMobileDescription": "إعدادات رسالة المسئول هي طريقة للتواصل مع مسئول البوابة.",
-  "AdminsMessageSettingDescription": "قم بتفعيل هذا الخيار لعرض نموذج التواصل الخاص بمسئول DocSpace في صفحة تسجيل الدخول.",
+  "AdminsMessageSettingDescription": "قم بتفعيل هذا الخيار لعرض نموذج التواصل الخاص بمسئول {{portalName}} في صفحة تسجيل الدخول.",
   "AllDomains": "أي مجالات",
   "AmazonBucketTip": "أدخل الاسم الفريد لحاوية Amazon 3S حيث تريد تخزين النسخ الاحتياطية الخاصة بك.",
   "AmazonCSE": "تشفير من جانب العميل",

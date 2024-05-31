@@ -19,7 +19,7 @@
   "Admins": "Amministratori",
   "AdminsMessage": "Impostazioni dei Messaggi dell’Amministratore",
   "AdminsMessageMobileDescription": "Le impostazioni dei messaggi dell'amministratore rappresentano un modo per contattare l'amministratore del portale",
-  "AdminsMessageSettingDescription": "Abilita questa opzione per visualizzare il modulo di contatto dell'amministratore di DocSpace nella pagina di accesso.",
+  "AdminsMessageSettingDescription": "Abilita questa opzione per visualizzare il modulo di contatto dell'amministratore di {{portalName}} nella pagina di accesso.",
   "AllDomains": "Tutti i domini",
   "AmazonBucketTip": "Inserisci il nome univoco del bucket Amazon S3 dove desideri archiviare i backup.",
   "AmazonCSE": "Crittografia sul lato client",

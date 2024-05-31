@@ -19,7 +19,7 @@
   "Admins": "පරිපාලකයින්",
   "AdminsMessage": "පරිපාලක පණිවිඩ සැකසුම්",
   "AdminsMessageMobileDescription": "පරිපාලක පණිවිඩ සැකසුම් යනු DocSpace පරිපාලක ඇමතීමට තිබෙන ක්‍රමයකි.",
-  "AdminsMessageSettingDescription": "පිවිසෙන පිටුවේ DocSpace පරිපාලක සබඳතා ආකෘතිපත්‍රය පෙන්වීමට මෙම විකල්පය සබල කරන්න.",
+  "AdminsMessageSettingDescription": "පිවිසෙන පිටුවේ {{portalName}} පරිපාලක සබඳතා ආකෘතිපත්‍රය පෙන්වීමට මෙම විකල්පය සබල කරන්න.",
   "AllDomains": "ඕනෑම වසමක්",
   "AmazonBucketTip": "ඔබගේ උපස්ථ ගබඩා කිරීමට වුවමනා ඇමසන් S3 බකට් හි අනන්‍ය නම ඇතුල් කරන්න.",
   "AmazonCSE": "අනුග්‍රාහකයේ පස සංකේතනය",

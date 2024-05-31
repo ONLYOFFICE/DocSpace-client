@@ -19,7 +19,7 @@
   "Admins": "Administratori",
   "AdminsMessage": "Podešavanja Poruka Administratora",
   "AdminsMessageMobileDescription": "Podešavanja Poruka Administratora je način da kontaktirate administratora portala.",
-  "AdminsMessageSettingDescription": "Omogući ovu opciju da prikažeš DocSpace administrator kontakt obrazac u stranici za Prijavu.",
+  "AdminsMessageSettingDescription": "Omogući ovu opciju da prikažeš {{portalName}} administrator kontakt obrazac u stranici za Prijavu.",
   "AllDomains": "Bilo koji domeni",
   "AmazonBucketTip": "Unesite jedinstveno ime Amazon S3 korpe gde želite da čuvate svoje rezervne kopije.",
   "AmazonCSE": "Šifrovanje na strani klijenta",

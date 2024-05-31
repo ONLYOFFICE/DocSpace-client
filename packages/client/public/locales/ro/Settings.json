@@ -19,7 +19,7 @@
   "Admins": "Administratori",
   "AdminsMessage": "Setări mesagerie de administrator",
   "AdminsMessageMobileDescription": "Setări mesagerie de administrator este o modalitate de a contacta administratorul de portal.",
-  "AdminsMessageSettingDescription": "Activați această opțiune pentru a afișa formularul de contact al administratorului DocSpace pe pagina de conectare.",
+  "AdminsMessageSettingDescription": "Activați această opțiune pentru a afișa formularul de contact al administratorului {{portalName}} pe pagina de conectare.",
   "AllDomains": "Orice domeniu",
   "AmazonBucketTip": "Introduceţi numele unic de găleată Amazon S3 pentru stocarea copiilor dvs de rezervă.",
   "AmazonCSE": "Criptare executată la client",

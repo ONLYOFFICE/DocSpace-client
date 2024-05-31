@@ -94,7 +94,7 @@
   "DefaultSettings": "Default settings",
   "DefineQuotaPerRoom": "Define quota per room",
   "DefineQuotaPerUser": "Define quota per user",
-  "DeleteDocspace": "Delete DocSpace",
+  "DeleteDocspace": "Delete {{portalName}}",
   "DeleteDocspaceInfo": "Before you delete the space, please make sure that automatic billing is turned off. You may check the status of automatic billing in <1>your Stripe customer portal</1>.",
   "DeleteTheme": "Delete theme",
   "DeleteThemeForever": "Delete theme forever?",

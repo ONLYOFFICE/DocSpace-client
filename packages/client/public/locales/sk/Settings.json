@@ -92,7 +92,7 @@
   "DefaultSettings": "Predvolené nastavenia",
   "DefineQuotaPerRoom": "Definujte kvóty pre jednotlivé miestnosti",
   "DefineQuotaPerUser": "Definujte kvótu pre používateľa",
-  "DeleteDocspace": "Vymazať DocSpace",
+  "DeleteDocspace": "Vymazať {{portalName}}",
   "DeleteDocspaceInfo": "Pred vymazaním priestoru sa uistite, že je vypnutá automatická fakturácia. Stav automatickej fakturácie môžete skontrolovať na <1>zákazníckom portáli Stripe</1>.",
   "DeleteTheme": "Vymazať tému",
   "DeleteThemeForever": "Chcete natrvalo vymazať tému?",

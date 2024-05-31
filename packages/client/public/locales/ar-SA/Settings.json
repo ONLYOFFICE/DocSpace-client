@@ -93,7 +93,7 @@
   "DefaultSettings": "الإعدادات الافتراضية",
   "DefineQuotaPerRoom": "تحديد الحصة لكل غرفة",
   "DefineQuotaPerUser": "تحديد الحصة لكل مستخدم",
-  "DeleteDocspace": "احذف DocSpace",
+  "DeleteDocspace": "احذف {{portalName}}",
   "DeleteDocspaceInfo": "قبل حذف المساحة ، يرجى التأكد من إيقاف تشغيل الفوترة التلقائية. يمكنك التحقق من حالة الفوترة التلقائية في<1> بوابة عملاء Stripe الخاصة بك</ 1>.",
   "DeleteTheme": "حذف الموضوع",
   "DeleteThemeForever": "هل تريد حذف المظهر نهائيًا؟",

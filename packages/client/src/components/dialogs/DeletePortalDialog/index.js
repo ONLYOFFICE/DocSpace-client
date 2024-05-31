@@ -35,6 +35,7 @@ import { sendDeletePortalEmail } from "@docspace/shared/api/portal";
 
 import ModalDialogContainer from "../ModalDialogContainer";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { PORTAL } from "@docspace/shared/constants";
 
 const DeletePortalDialog = (props) => {
   const { t, ready } = useTranslation("Settings", "Common");
@@ -59,7 +60,9 @@ const DeletePortalDialog = (props) => {
       onClose={onClose}
       displayType="modal"
     >
-      <ModalDialog.Header>{t("DeleteDocspace")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {t("DeleteDocspace", { portalName: PORTAL })}
+      </ModalDialog.Header>
       <ModalDialog.Body>
         <Trans t={t} i18nKey="DeleteDocspaceInfo" ns="Settings">
           Before you delete the portal, please make sure that automatic billing

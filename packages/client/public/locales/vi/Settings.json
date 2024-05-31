@@ -91,7 +91,7 @@
   "DefaultSettings": "Cài đặt mặc định",
   "DefineQuotaPerRoom": "Xác định hạn mức cho mỗi phòng",
   "DefineQuotaPerUser": "Xác định hạn mức cho mỗi người dùng",
-  "DeleteDocspace": "Xóa DocSpace",
+  "DeleteDocspace": "Xóa {{portalName}}",
   "DeleteDocspaceInfo": "Trước khi bạn xóa không gian, xin vui lòng đảm bảo rằng thanh toán tự động đã được tắt. Bạn có thể kiểm tra trạng thái thanh toán tự động trong <1> cổng thông tin khách hàng Stripe của mình</1>.",
   "DeleteTheme": "Xóa theme",
   "DeleteThemeForever": "Xóa theme vĩnh viễn?",

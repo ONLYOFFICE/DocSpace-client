@@ -92,7 +92,7 @@
   "DefaultSettings": "Varsayılan Ayarlar",
   "DefineQuotaPerRoom": "Oda başına kota tanımla",
   "DefineQuotaPerUser": "Kullanıcı başına kota tanımla",
-  "DeleteDocspace": "DocSpace'i Sil",
+  "DeleteDocspace": "{{portalName}}'i Sil",
   "DeleteDocspaceInfo": "Alanı silmeden önce lütfen otomatik faturalandırmanın kapalı olduğundan emin olun. Otomatik faturalandırmanın durumunu <1>Stripe müşteri portalınızdan</1> kontrol edebilirsiniz.",
   "DeleteTheme": "Temayı sil",
   "DeleteThemeForever": "Tema sonsuza kadar silinsin mi?",

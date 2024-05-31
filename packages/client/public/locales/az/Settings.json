@@ -92,7 +92,7 @@
   "DefaultSettings": "Defolt parametrlər",
   "DefineQuotaPerRoom": "Otaq üçün kvota müəyyənləşdirin",
   "DefineQuotaPerUser": "İstifadəçi üçün kvota müəyyənləşdirin",
-  "DeleteDocspace": "DocSpace-i silin",
+  "DeleteDocspace": "{{portalName}}-i silin",
   "DeleteDocspaceInfo": "Domeni silməzdən əvvəl, lütfən, avtomatik ödənişin söndürüldüyünə əmin olun. Siz <1>Stripe müştəri portalınızda</1> avtomatik fakturanın statusunu yoxlaya bilərsiniz.",
   "DeleteTheme": "Temanı silin",
   "DeleteThemeForever": "Tema həmişəlik silinsin?",

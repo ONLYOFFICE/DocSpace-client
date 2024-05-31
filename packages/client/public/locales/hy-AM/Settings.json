@@ -92,7 +92,7 @@
   "DefaultSettings": "Կանխադրված կարգավորումներ",
   "DefineQuotaPerRoom": "Սահմանել քվոտա մեկ սենյակի համար",
   "DefineQuotaPerUser": "Սահմանել քվոտա մեկ օգտվողի համար",
-  "DeleteDocspace": "Ջնջել DocSpace-ը",
+  "DeleteDocspace": "Ջնջել {{portalName}}-ը",
   "DeleteDocspaceInfo": "Նախքան տարածքը ջնջելը, համոզվեք, որ ավտոմատ վճարումն անջատված է: Դուք կարող եք ստուգել ավտոմատ վճարումների կարգավիճակը <1>ձեր Stripe հաճախորդների պորտալում</1>:",
   "DeleteTheme": "Ջնջել ոճը",
   "DeleteThemeForever": "Ջնջե՞լ ոճը ընդմիշտ:",

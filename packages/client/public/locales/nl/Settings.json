@@ -92,7 +92,7 @@
   "DefaultSettings": "Standaardinstellingen",
   "DefineQuotaPerRoom": "Bepaal quota per kamer",
   "DefineQuotaPerUser": "Bepaal quota per gebruiker",
-  "DeleteDocspace": "DocSpace verwijderen",
+  "DeleteDocspace": "{{portalName}} verwijderen",
   "DeleteDocspaceInfo": "Voordat u de ruimte verwijdert, moet u ervoor zorgen dat automatische facturatie is uitgeschakeld. U kunt de status van automatische facturatie controleren in <1>uw Stripe klantenportaal</1>.",
   "DeleteTheme": "Thema verwijderen",
   "DeleteThemeForever": "Thema voorgoed verwijderen?",

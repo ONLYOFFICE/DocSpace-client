@@ -93,7 +93,7 @@
   "DefaultSettings": "Podrazumevana podešavanja",
   "DefineQuotaPerRoom": "Definiši kvotu po sobi",
   "DefineQuotaPerUser": "Definiši kvotu po korisniku",
-  "DeleteDocspace": "Obriši DocSpace",
+  "DeleteDocspace": "Obriši {{portalName}}",
   "DeleteDocspaceInfo": "Pre nego što izbrišete prostor, uverite se da je automatski obračun isključen. Status automatskog obračuna možete da proverite na <1>vašem Stripe korisničkom portalu</1>.",
   "DeleteTheme": "Obriši temu",
   "DeleteThemeForever": "Obriši temu zauvek?",

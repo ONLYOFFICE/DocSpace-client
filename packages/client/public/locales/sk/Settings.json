@@ -10,7 +10,7 @@
   "AccountsWithoutEmailsNextStep": "Našli sme <1>{{users}} používateľov</1>, kde nie je uvedený e-mail. V ďalšom kroku môžete do ich účtov doplniť potrebné údaje.",
   "AddAllowedIP": "Pridať povolenú IP adresu",
   "AddEmails": "Pridať e-maily do nekompletných účtov",
-  "AddEmailsDescription": "Skontrolujte zoznam používateľov, ktorí ešte neboli importovaní a ktorých chcete importovať do ONLYOFFICE DocSpace.",
+  "AddEmailsDescription": "Skontrolujte zoznam používateľov, ktorí ešte neboli importovaní a ktorých chcete importovať do ONLYOFFICE {{portalName}}.",
   "AddEmailsWarning": "Nemáte používateľov, ktorí majú uvedený e-mail. Prejdite na ďalší krok a pridajte ich.",
   "AdditionalResources": "Dodatočné zdroje",
   "AdditionalResourcesDescription": "Vyberte, či chcete zobraziť odkazy na ďalšie zdroje v menu DocSpace.",

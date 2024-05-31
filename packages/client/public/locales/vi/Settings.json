@@ -10,7 +10,7 @@
   "AccountsWithoutEmailsNextStep": "Chúng tôi đã tìm thấy <1>{{users}} người dùng</1> không có email. Bạn có thể thêm dữ liệu cần thiết vào tài khoản của họ ở bước tiếp theo.",
   "AddAllowedIP": "Thêm địa chỉ IP được phép",
   "AddEmails": "Thêm email vào tài khoản chưa đầy đủ",
-  "AddEmailsDescription": "Kiểm tra danh sách người dùng chưa nhập để nhập vào ONLYOFFICE DocSpace.",
+  "AddEmailsDescription": "Kiểm tra danh sách người dùng chưa nhập để nhập vào ONLYOFFICE {{portalName}}.",
   "AddEmailsWarning": "Bạn không có người dùng có email. Vui lòng chuyển sang bước tiếp theo để thêm chúng.",
   "AdditionalResources": "Nguồn Thông tin Bổ sung",
   "AdditionalResourcesDescription": "Chọn xem bạn có muốn hiển thị liên kết đến các tài nguyên bổ sung trong menu DocSpace hay không.",

@@ -10,7 +10,7 @@
   "AccountsWithoutEmailsNextStep": "Mēs atradām <1>{{users}} lietotājus</1> bez e-pasta ziņojumiem. Nākamajā darbībā varat pievienot nepieciešamos datus viņu kontiem.",
   "AddAllowedIP": "Pievienot atļauto interneta protokola (IP) adresi",
   "AddEmails": "E-pasta ziņojumu pievienošana nepilnīgiem kontiem",
-  "AddEmailsDescription": "Pārbaudiet neimportēto lietotāju sarakstu, lai importētu ONLYOFFICE DocSpace.",
+  "AddEmailsDescription": "Pārbaudiet neimportēto lietotāju sarakstu, lai importētu ONLYOFFICE {{portalName}}.",
   "AddEmailsWarning": "Jums nav lietotāju ar e-pasta ziņojumiem. Pārejiet pie nākamās darbības, lai to pievienotu.",
   "AdditionalResources": "Papildu resursi",
   "AdditionalResourcesDescription": "Izvēlieties, vai vēlaties parādīt saites uz papildu resursiem DocSpace izvēlnē.",

@@ -10,7 +10,6 @@
   "AccountsWithoutEmailsNextStep": "Löysimme <1>>{{users}} käyttäjää</1> ilman sähköposteja. Voit lisätä tarvittavat tiedot heidän tileilleen seuraavassa vaiheessa.",
   "AddAllowedIP": "Lisää sallittu IP-osoite",
   "AddEmails": "Lisää sähköpostit keskeneräisille tileille",
-  "AddEmailsDescription": "Tarkista lista tuomattomista käyttäjistä tuodaksesi heidät ONLYOFFICE DocSpaceen.",
   "AddEmailsWarning": "Sinulla ei ole käyttäjiä, joilla on sähköpostit. Ole hyvä ja jatka seuraavaan vaiheeseen lisätäksesi ne.",
   "AdditionalResources": "Lisäresurssit",
   "AdditionalResourcesDescription": "Valitse haluatko näyttää linkit lisäresursseihin DocSpace-menussa.",

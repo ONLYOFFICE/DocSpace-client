@@ -10,7 +10,7 @@
   "AccountsWithoutEmailsNextStep": "Pronašli smo <1>{{users}} users</1> bez email-ova. Možete dodati potrebne podatke njihovim nalozima u sledećem koraku.",
   "AddAllowedIP": "Dodaj dozvoljenu IP adresu",
   "AddEmails": "Dodaj email-ove nepotpunim nalozima",
-  "AddEmailsDescription": "Proverite listu neuvezenih korisnika za uvoz u ONLYOFFICE DocSpace.",
+  "AddEmailsDescription": "Proverite listu neuvezenih korisnika za uvoz u ONLYOFFICE {{portalName}}.",
   "AddEmailsWarning": "Nemate korisnike sa email-om. Molimo pređite na sledeći korak da ih dodate.",
   "AdditionalResources": "Dodatni resursi",
   "AdditionalResourcesDescription": "Odaberite da li želite da prikažete linkove ka dodatnim resursima u DocSpace meniju.",

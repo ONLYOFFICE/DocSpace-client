@@ -10,7 +10,7 @@
   "AccountsWithoutEmailsNextStep": "メールアドレスのない<1>{{users}}ユーザー</1>が見つかりました。次のステップで、そのアカウントに必要なデータを追加できます。",
   "AddAllowedIP": "許可されたIPアドレスの追加",
   "AddEmails": "未完成のアカウントにメールアドレスを追加する",
-  "AddEmailsDescription": "ONLYOFFICE DocSpaceにインポートする未インポートユーザーのリストを確認します。",
+  "AddEmailsDescription": "ONLYOFFICE {{portalName}}にインポートする未インポートユーザーのリストを確認します。",
   "AddEmailsWarning": "メールアドレスを持つユーザーがいません。次のステップに進んで追加してください。",
   "AdditionalResources": "追加リソース",
   "AdditionalResourcesDescription": "DocSpaceのメニューに、追加リソースへのリンクを表示するかどうかを選択する",

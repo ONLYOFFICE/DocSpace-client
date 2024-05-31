@@ -10,7 +10,7 @@
   "AccountsWithoutEmailsNextStep": "Abbiamo trovato <1>{{users}} utenti</1> senza email. Puoi aggiungere i dati necessari ai loro account nel passo successivo.",
   "AddAllowedIP": "Aggiungi indirizzo IP consentito",
   "AddEmails": "Aggiungi email agli account incompleti",
-  "AddEmailsDescription": "Controlla l'elenco degli utenti non importati da importare in ONLYOFFICE DocSpace.",
+  "AddEmailsDescription": "Controlla l'elenco degli utenti non importati da importare in ONLYOFFICE {{portalName}}.",
   "AddEmailsWarning": "Non hai utenti con email. Procedi al passo successivo per aggiungerli.",
   "AdditionalResources": "Risorse aggiuntive",
   "AdditionalResourcesDescription": "Scegli se vuoi visualizzare collegamenti a risorse aggiuntive nel menu di DocSpace.",

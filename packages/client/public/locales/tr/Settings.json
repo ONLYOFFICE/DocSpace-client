@@ -10,7 +10,7 @@
   "AccountsWithoutEmailsNextStep": "E-postaları olmayan <1>{{users}} kullanıcılar</1> bulduk. Bir sonraki adımda hesaplarına gerekli verileri ekleyebilirsiniz.",
   "AddAllowedIP": "İzin verilen IP adresini ekle",
   "AddEmails": "Tamamlanmamış hesaplara e-posta ekleyin",
-  "AddEmailsDescription": "ONLYOFFICE DocSpace’e aktarılacak içe aktarılmamış kullanıcıların listesini kontrol edin.",
+  "AddEmailsDescription": "ONLYOFFICE{{portalName}}’e aktarılacak içe aktarılmamış kullanıcıların listesini kontrol edin.",
   "AddEmailsWarning": "E-postası olan kullanıcılarınız yok. Lütfen onları eklemek için bir sonraki adıma geçin.",
   "AdditionalResources": "Ek kaynaklar",
   "AdditionalResourcesDescription": "DocSpace menüsünde ek kaynakların bağlantılarını görüntülemek isteyip istemediğinizi seçin.",

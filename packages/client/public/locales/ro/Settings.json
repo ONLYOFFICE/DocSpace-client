@@ -10,7 +10,7 @@
   "AccountsWithoutEmailsNextStep": "Au fost găsite <1>{{users}} de utilizatori </1> fără adrese de e-mail. Puteți adăuga datele necesare la etapa următoare.",
   "AddAllowedIP": "Adăugaţi o adresă IP permisă",
   "AddEmails": "Adăugați adrese de e-mail la conturi cu date de profil necompletate",
-  "AddEmailsDescription": "Verificați lista de utilizatori neimportați pentru a le importa în ONLYOFFICE DocSpace.",
+  "AddEmailsDescription": "Verificați lista de utilizatori neimportați pentru a le importa în ONLYOFFICE {{portalName}}.",
   "AddEmailsWarning": "Nu aveți utilizatori cu adrese de e-mail. Treceți la etapa următoare pentru a le adăuga.",
   "AdditionalResources": "Resurse suplimentare",
   "AdditionalResourcesDescription": "Alegeţi dacă doriţi să afişaţi linkurile către resurse suplimentare în meniul DocSpace.",

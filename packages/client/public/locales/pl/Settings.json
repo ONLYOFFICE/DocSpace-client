@@ -10,7 +10,7 @@
   "AccountsWithoutEmailsNextStep": "Znaleziono <1>{{users}} użytkowników</1> bez adresów e-mail. W kolejnym kroku możesz dodać do ich kont wszystkie niezbędne dane.",
   "AddAllowedIP": "Dodaj dozwolone adresy IP",
   "AddEmails": "Dodaj adresy e-mail do niekompletnych kont",
-  "AddEmailsDescription": "Sprawdź listę niezaimportowanych użytkowników do zaimportowania do ONLYOFFICE DocSpace.",
+  "AddEmailsDescription": "Sprawdź listę niezaimportowanych użytkowników do zaimportowania do ONLYOFFICE {{portalName}}.",
   "AddEmailsWarning": "Nie masz użytkowników z adresami e-mail. Przejdź do kolejnego kroku, aby je dodać.",
   "AdditionalResources": "Dodatkowe zasoby",
   "AdditionalResourcesDescription": "Wybierz, czy chcesz wyświetlać linki do dodatkowych zasobów w menu DocSpace.",

@@ -10,7 +10,7 @@
   "AccountsWithoutEmailsNextStep": "We hebben <1>{{users}} gebruikers</1> zonder e-mails gevonden. In de volgende stap kunt u de nodige gegevens aan hun accounts toevoegen.",
   "AddAllowedIP": "Toegestaan IP-adres toevoegen",
   "AddEmails": "E-mails toevoegen aan onvolledige accounts",
-  "AddEmailsDescription": "Controleer de lijst met niet-geïmporteerde gebruikers om te importeren in ONLYOFFICE DocSpace.",
+  "AddEmailsDescription": "Controleer de lijst met niet-geïmporteerde gebruikers om te importeren in ONLYOFFICE {{portalName}}.",
   "AddEmailsWarning": "U heeft geen gebruikers met e-mails. Ga door naar de volgende stap om ze toe te voegen.",
   "AdditionalResources": "Aanvullende bronnen",
   "AdditionalResourcesDescription": "Kies of u links naar aanvullende bronnen wilt weergeven in het DocSpace menu.",

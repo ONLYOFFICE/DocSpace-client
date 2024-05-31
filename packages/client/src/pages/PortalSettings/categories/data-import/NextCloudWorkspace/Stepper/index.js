@@ -36,6 +36,7 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
 
 import { Trans } from "react-i18next";
+import { PORTAL } from "@docspace/shared/constants";
 
 export const getStepsData = (
   t,
@@ -83,7 +84,7 @@ export const getStepsData = (
     },
     {
       title: t("Settings:AddEmails"),
-      description: t("Settings:AddEmailsDescription"),
+      description: t("Settings:AddEmailsDescription", { portalName: PORTAL }),
       component: (
         <AddEmailsStep
           t={t}

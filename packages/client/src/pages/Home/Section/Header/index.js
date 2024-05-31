@@ -827,7 +827,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const onNavigationButtonClick = () => {
-    onCreateAndCopySharedLink(props.roomItem, t);
+    onCreateAndCopySharedLink(selectedFolder, t);
   };
 
   const headerMenu = isAccountsPage
@@ -1236,11 +1236,6 @@ export default inject(
           shared) ||
         (sharedItem && sharedItem.canCopyPublicLink);
 
-    const roomItem =
-      navigationPath.length > 1
-        ? navigationPath[navigationPath.length - 2]
-        : selectedFolder;
-
     return {
       isGracePeriod,
       setInviteUsersWarningDialogVisible,
@@ -1366,8 +1361,6 @@ export default inject(
       onClickReconnectStorage,
       getFolderModel,
       onCreateRoom,
-
-      roomItem,
     };
   },
 )(

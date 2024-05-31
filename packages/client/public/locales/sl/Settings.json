@@ -230,7 +230,7 @@
   "SessionLifetimeMobileDescription": "Življenjska doba seje omogoča nastavitev časa (v minutah), preden bodo morali uporabniki DocSpace znova vnesti poverilnice prostora za dostop do prostora.",
   "SessionLifetimeSettingDescription": "Prilagodite življenjsko dobo seje, da določite časovno obdobje pred samodejno odjavo. Po shranjevanju bo izvedena odjava za vse uporabnike.",
   "SetDefaultRoomQuota": "Nastavite privzeto kvoto prostora za shranjevanje v tem prostoru DocSpace. Kasneje se lahko prilagodi za vsako sobo posebej s strani skrbnika. sobe.",
-  "SetDefaultUserQuota": "Nastavite kvoto prostora za shranjevanje za uporabnike tega prostora DocSpace. Uporabniška kvota vpliva na omejitev shranjevanja za mapo Dokumenti vsakega uporabnika.",
+  "SetDefaultUserQuota": "Nastavite kvoto prostora za shranjevanje za uporabnike tega prostora {{portalName}}. Uporabniška kvota vpliva na omejitev shranjevanja za mapo Dokumenti vsakega uporabnika.",
   "SettingPasswordDescription": "Konfigurirajte nastavitve moči gesla za uveljavljanje varnejših gesel, odpornih na vdore.",
   "SettingPasswordStrengthMobileDescription": "Nastavitve moči gesla so način za ugotavljanje učinkovitosti gesla pred ugibanjem in vdorom.",
   "SettingPasswordTittle": "Nastavitve moči gesla",

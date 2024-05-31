@@ -231,7 +231,7 @@
   "SessionLifetimeMobileDescription": "Długość sesji pozwala wybrać czas (w minutach), zanim użytkownicy DocSpace będą musieli ponownie wpisać swoje dane logowania do obszaru, aby uzyskać do niego dostęp.",
   "SessionLifetimeSettingDescription": "Dostosuj czas trwania sesji, aby zdefiniować czas przed automatycznym wylogowaniem. Po zapisaniu wszyscy użytkownicy zostaną wylogowania z obszaru.",
   "SetDefaultRoomQuota": "Skonfiguruj domyślny limit pamięci dla pokoi w tym DocSpace. Limit dla poszczególnych pokoi może zostać zmieniony później przez ich administratorów.",
-  "SetDefaultUserQuota": "Skonfiguruj limit pamięci dla użytkowników tego DocSpace. Limity użytkowników mają wpływ na limit pamięci dla katalogu Dokumenty każdego użytkownika.",
+  "SetDefaultUserQuota": "Skonfiguruj limit pamięci dla użytkowników tego {{portalName}}. Limity użytkowników mają wpływ na limit pamięci dla katalogu Dokumenty każdego użytkownika.",
   "SettingPasswordDescription": "Skonfiguruj ustawienia siły hasła, aby wyegzekwować bezpieczniejsze, odporne na złamanie hasła.",
   "SettingPasswordStrengthMobileDescription": "Ustawienia siły hasła to sposób, by określić skuteczność hasła w zakresie odporności na zgadywanie i ataki brute force.",
   "SettingPasswordTittle": "Ustawienia siły hasła",

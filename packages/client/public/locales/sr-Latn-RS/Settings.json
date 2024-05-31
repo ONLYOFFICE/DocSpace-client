@@ -233,7 +233,7 @@
   "SessionLifetimeMobileDescription": "Session Lifetime omogućava postavljanje vremena (u minutima) pre nego što će korisnicima DocSpace-a ponovo biti potrebno da unesu pristupne podatke kako bi pristupili prostoru.",
   "SessionLifetimeSettingDescription": "Podesite Session Lifetime kako biste definisali vremenski period pre automatskog odjavljivanja. Nakon čuvanja, odjavljivanje će biti izvršeno za sve korisnike.",
   "SetDefaultRoomQuota": "Postavite podrazumevanu skladišnu kvotu za sobe u ovom DocSpace-u. Kasnije može biti podešeno za svaku sobu individualno od strane admina sobe.",
-  "SetDefaultUserQuota": "Postavite skladišnu kvotu za sobe u ovom DocSpace-u. Korisnička kvota utiče na ograničenje skladišta za Dokumenti folder svakog korisnika.",
+  "SetDefaultUserQuota": "Postavite skladišnu kvotu za sobe u ovom {{portalName}}-u. Korisnička kvota utiče na ograničenje skladišta za Dokumenti folder svakog korisnika.",
   "SettingPasswordDescription": "Konfigurišite Podešavanja Jačine Lozinke kako biste primenili sigurnije, otpornije lozinke na računarske napade.",
   "SettingPasswordStrengthMobileDescription": "Podešavanja Jačine Lozinke su način da se odredi efektivnost lozinke u otpornosti na pogađanja i napade brute-force.",
   "SettingPasswordTittle": "Podešavanja Jačine Lozinke",

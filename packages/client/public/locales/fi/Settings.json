@@ -217,7 +217,6 @@
   "SessionLifetimeMobileDescription": "Istunnon kesto mahdollistaa ajan asetuksen (minuuteissa) ennen kuin DocSpacen käyttäjien tulee syöttää tilan kirjautumistiedot jälkeen päästäkseen tilaan.",
   "SessionLifetimeSettingDescription": "Säädä istunnon kestoa määrittääksesi ajan ennen automaattista uloskirjautumista. Tallentamisen jälkeen uloskirjautuminen suoritetaan kaikille käyttäjille. ",
   "SetDefaultRoomQuota": "Aseta oletustallennuskiintiö tämän DocSpacen huoneille. Huoneen pääkäyttäjä voi myöhemmin muokata sitä jokaisen huoneen osalta erikseen.",
-  "SetDefaultUserQuota": "Aseta tallennuskiintiö tämän DocSpacen käyttäjille. Käyttäjäkiintiö vaikuttaa jokaisen käyttäjän Asiakirjani-kansion tallennuskiintiöön.",
   "SettingPasswordDescription": "Määritä salasanan vahvuus-asetukset varmistaaksesi turvallisempia, laskennan kestäviä salasanoja. ",
   "SettingPasswordStrengthMobileDescription": "Salasanan vahvuus-asetukset on tapa määritellä salasanan tehokkuus arvailuja ja väsytyshyökkäyksiä vastaan.",
   "SettingPasswordTittle": "Salasanan vahvuus-asetukset.",

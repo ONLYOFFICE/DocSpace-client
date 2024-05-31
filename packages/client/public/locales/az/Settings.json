@@ -231,7 +231,7 @@
   "SessionLifetimeMobileDescription": "Sessiya Müddəti sizə DocSpace istifadəçilərinin sahəyə daxil olmaq üçün domen məlumatlarını yenidən daxil etməli olduğu vaxtın miqdarını (dəqiqələrlə) təyin etməyə imkan verir.",
   "SessionLifetimeSettingDescription": "Avtomatik çıxışdan əvvəl vaxtın miqdarını müəyyən etmək üçün Sessiya Müddəti təyin edin. Yadda saxladıqdan sonra bütün istifadəçilər üçün çıxış həyata keçiriləcək.",
   "SetDefaultRoomQuota": "Bu DocSpace-də otaqlar üçün defolt yaddaş kvotasını təyin edin. Daha sonra otaq administratorları tərəfindən hər otaq üçün fərdi olaraq təyin edilə bilər.",
-  "SetDefaultUserQuota": "Bu DocSpace istifadəçiləri üçün yaddaş kvotasını təyin edin. İstifadəçi kvotası hər bir istifadəçinin Sənədlər qovluğunun yaddaş limitinə təsir edir.",
+  "SetDefaultUserQuota": "Bu {{portalName}} istifadəçiləri üçün yaddaş kvotasını təyin edin. İstifadəçi kvotası hər bir istifadəçinin Sənədlər qovluğunun yaddaş limitinə təsir edir.",
   "SettingPasswordDescription": "Daha təhlükəsiz, hesablamaya davamlı şifrələri tətbiq etmək üçün Şifrə Gücü Parametrlərini konfiqurasiya edin.",
   "SettingPasswordStrengthMobileDescription": "Şifrə Gücü Parametrləri şifrənin təxmin və kobud güc hücumlarına qarşı müqavimətini təyin etmək üçün bir yoldur.",
   "SettingPasswordTittle": "Şifrə Gücü Parametrləri",

@@ -3,7 +3,7 @@
   "ConfigurationDescription": "Você precisa conectar seu domínio ao seu IP atual para alterar as configurações de endereço. Certifique-se de ter acesso às configurações do domínio para poder fazer isso. Após conectar o domínio, crie um nome {{portalName}}. Você pode alterar o nome do {{portalName}} criado posteriormente usando as configurações do espaço.",
   "ConfigurationHeader": "Configuração de espaço atual",
   "CreateSpaceDescription": "Você conectou com sucesso seu domínio ao seu endereço IP. Para editar as configurações de endereço do espaço, você precisa definir o nome futuro do DocSpace",
-  "CreatingDocspace": "Criando novo DocSpace",
+  "CreatingDocspace": "Criando novo {{portalName}}",
   "CurrentSpace": "Espaço atual",
   "DeletePortalText": "Atenção: somente o proprietário pode excluir o DocSpace selecionado. O proprietário de <1>{{domain}}</1> é <1>{{displayName}}</1> (<5>{{email}}</5>). Caso você não seja o proprietário, não poderá acessar as configurações de exclusão do DocSpace clicando no botão EXCLUIR e será redirecionado para a seção Salas.",
   "DocspaceName": "Nome do {{portalName}}",

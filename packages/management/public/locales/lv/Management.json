@@ -3,7 +3,7 @@
   "ConfigurationDescription": "Lai mainītu adreses iestatījumus, domēns ir jāsavieno ar pašreizējo IP adresi. Pārliecinieties, ka jums ir piekļuve domēna iestatījumiem, lai to varētu izdarīt. Pēc domēna savienošanas izveidojiet {{portalName}} nosaukumu. Vēlāk varat mainīt izveidoto {{portalName}} nosaukumu, izmantojot telpas iestatījumus.",
   "ConfigurationHeader": "Pašreizējā telpu konfigurācija",
   "CreateSpaceDescription": "Domēns ir veiksmīgi savienots ar IP adresi. Lai rediģētu telpas adreses iestatījumus, jums ir jāiestata turpmākais DocSpace nosaukums",
-  "CreatingDocspace": "Jauna DocSpace izveide",
+  "CreatingDocspace": "Jauna {{portalName}} izveide",
   "CurrentSpace": "Pašreizējā telpa",
   "DeletePortalText": "Ņemiet vērā: tikai īpašnieks var izdzēst atlasīto DocSpace. <1>{{domain}} </1> īpašnieks ir <1>{{displayName}} </1> (<5>{{email}} </5>). Ja neesat īpašnieks (-e), jūs nevarēsiet piekļūt DocSpace dzēšanas iestatījumiem, noklikšķinot uz pogas DZĒST, un tiksiet novirzīts uz sadaļu Telpas.",
   "DocspaceName": "{{portalName}} nosaukums",

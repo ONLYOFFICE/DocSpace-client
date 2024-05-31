@@ -3,7 +3,7 @@
   "ConfigurationDescription": "アドレス設定を変更するには、ドメインを現在のIPに接続する必要があります。ドメイン設定にアクセスできることを確認してください。ドメインを接続した後、{{portalName}}名を作成します。作成した{{portalName}}名は後でスペース設定で変更することができます。",
   "ConfigurationHeader": "現在のスペース設定 ",
   "CreateSpaceDescription": "ドメインとIPアドレスの接続が完了しました。スペースアドレスの設定を編集するには、将来のDocSpace名を設定する必要があります。",
-  "CreatingDocspace": "新しいDocSpaceの作成",
+  "CreatingDocspace": "新しい{{portalName}}の作成",
   "CurrentSpace": "現在のスペース",
   "DeletePortalText": "注意：選択したDocSpaceを削除できるのは所有者のみです。<1>{{domain}}</1>の所有者は <1>{{displayName}}</1>（<5>{{email}}</5>）です。所有者でない場合、「削除」ボタンをクリックしてもDocSpaceの削除設定にアクセスできず、ルームのセクションにリダイレクトされます。",
   "DocspaceName": "{{portalName}}名",

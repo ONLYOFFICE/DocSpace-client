@@ -3,7 +3,7 @@
   "ConfigurationDescription": "Musíte pripojiť svoju doménu k aktuálnej IP adrese, aby ste mohli zmeniť nastavenia adresy. Uistite sa, že máte prístup k nastaveniam domény, aby ste mali možnosť to urobiť. Po pripojení domény vytvorte názov {{portalName}}. Vytvorený názov {{portalName}} môžete neskôr zmeniť pomocou nastavení priestoru.",
   "ConfigurationHeader": "Aktuálna konfigurácia priestoru",
   "CreateSpaceDescription": "Úspešne ste pripojili doménu k vašej IP adrese. Ak chcete upraviť nastavenia adresy priestoru, musíte nastaviť budúce meno DocSpace",
-  "CreatingDocspace": "Vytvorenie nového priestoru DocSpace",
+  "CreatingDocspace": "Vytvorenie nového priestoru {{portalName}}",
   "CurrentSpace": "Aktuálny priestor",
   "DeletePortalText": "Upozornenie: vybraný priestor DocSpace môže vymazať iba vlastník. Vlastníkom <1>{{domain}}</1> je <1>{{displayName}}</1> (<5>{{email}}</5>). Ak nie ste vlastníkom, nedostanete sa k nastaveniam vymazania priestoru DocSpace po kliknutí na tlačidlo VYMAZAŤ ale budete presmerovaní do sekcie Miestnosti.",
   "DocspaceName": "Meno {{portalName}}",

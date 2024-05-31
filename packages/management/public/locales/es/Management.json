@@ -3,7 +3,7 @@
   "ConfigurationDescription": "Debe conectar su dominio a su IP actual para cambiar la configuración de la dirección. Asegúrese de tener acceso a la configuración del dominio para poder hacerlo. Después de conectar el dominio, cree un nombre de {{portalName}}. Puede cambiar el nombre del {{portalName}} creado más adelante utilizando la configuración del espacio.",
   "ConfigurationHeader": "Configuración del espacio actual",
   "CreateSpaceDescription": "Ha conectado correctamente su dominio a su dirección IP. Para editar la configuración de la dirección del espacio, debe establecer el nombre futuro de DocSpace",
-  "CreatingDocspace": "Creando un nuevo DocSpace",
+  "CreatingDocspace": "Creando un nuevo {{portalName}}",
   "CurrentSpace": "Espacio actual",
   "DeletePortalText": "Por favor, tenga en cuenta: solo el propietario puede eliminar el DocSpace seleccionado. El propietario de <1>{{domain}}</1> es <1>{{displayName}}</1> (<5>{{email}}</5>). Si no es el propietario, no podrá acceder a la configuración de eliminación de DocSpace haciendo clic en el botón ELIMINAR y será redirigido a la sección Salas.",
   "DocspaceName": "Nombre de {{portalName}}",

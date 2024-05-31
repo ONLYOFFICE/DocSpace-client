@@ -5,7 +5,7 @@
   "PersonalUserQuotaAdminsDescription": "Če želite naložiti in ustvariti nove datoteke in mape, sprostite prostor na disku ali upravljajte s kvoto na uporabnika v <1>nastavitvah upravljanja shrambe.</1>",
   "PersonalUserQuotaDescription": "Če želite naložiti in ustvariti nove datoteke in mape, sprostite prostor na disku ali se obrnite na skrbnika, da poveča kvoto za shranjevanje.",
   "RequestActivation": "Ponovno zahtevaj aktivacijo",
-  "RoomQuotaDescription": "Nepotrebne sobe lahko arhivirate ali <1>{{clickHere}}</1> poiščete primerjenši finančni paket za vaš DocSpace.",
+  "RoomQuotaDescription": "Nepotrebne sobe lahko arhivirate ali <1>{{clickHere}}</1> poiščete primerjenši finančni paket za vaš {{portalName}}.",
   "RoomQuotaHeader": "Sobe bodo kmalu presežene: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Omejitve prostora za shranjevanje in število sob bodo kmalu presežene.",
   "StorageAndUserHeader": "Omejitve prostora za shranjevanje in število skrbnikov/naprednih uporabnikov bodo kmalu presežene.",

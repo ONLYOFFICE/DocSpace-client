@@ -5,7 +5,7 @@
   "PersonalUserQuotaAdminsDescription": "Yeni dosya ve klasörler yüklemek ve oluşturmak için lütfen disk alanını boşaltın veya <1>Depolama yönetimi ayarlarında</1> kullanıcı başına kotayı yönetin.",
   "PersonalUserQuotaDescription": "Yeni dosya ve klasörler yüklemek ve oluşturmak için lütfen disk alanını boşaltın veya depolama kotasını artırmak için yöneticiyle iletişime geçin.",
   "RequestActivation": "Tekrar aktivasyon iste",
-  "RoomQuotaDescription": "Gereksiz odaları arşivleyebilirsiniz veya <1>{{clickHere}}</1> ile DocSpace'iniz için daha uygun bir fiyatlandırma planı bulabilirsiniz.",
+  "RoomQuotaDescription": "Gereksiz odaları arşivleyebilirsiniz veya <1>{{clickHere}}</1> ile {{portalName}}'iniz için daha uygun bir fiyatlandırma planı bulabilirsiniz.",
   "RoomQuotaHeader": "Odalar aşılmak üzere: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Depolama ve oda limitleri aşılmak üzere.",
   "StorageAndUserHeader": "Depolama ve yöneticiler/uzman kullanıcılar limitleri aşılmak üzere.",

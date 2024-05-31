@@ -5,7 +5,7 @@
   "PersonalUserQuotaAdminsDescription": "Pentru a încărca și a crea fișiere și dosare noi, eliberați spațiu de stocare sau gestionați cota de stocare pentru fiecare utilizator din secțiunea <1>Setările de gestionare a spațiului de stocare.</1>.",
   "PersonalUserQuotaDescription": "Pentru a încărca și a crea fișiere și dosare noi, eliberați spațiu de stocare sau contactați administratorul pentru a majora capacităţile de stocare.",
   "RequestActivation": "Solicitaţi activarea din nou",
-  "RoomQuotaDescription": "Puteţi arhiva sălile inutile sau <1>{{clickHere}}</1> pentru a găsi un abonament mai potrivit pentru spaţiul dvs DocSpace.",
+  "RoomQuotaDescription": "Puteţi arhiva sălile inutile sau <1>{{clickHere}}</1> pentru a găsi un abonament mai potrivit pentru spaţiul dvs {{portalName}}.",
   "RoomQuotaHeader": "Cota sălilor este pe punctul de a fi depăşită: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Limite de stocare și cota sălilor sunt pe punctul de a fi depăşiti.",
   "StorageAndUserHeader": "Limite de stocare pentru administratori/utilizatori avansați sunt pe punctul de a fi depăşiti.",

@@ -5,7 +5,7 @@
   "PersonalUserQuotaAdminsDescription": "Để tải lên và tạo các tập tin và thư mục mới, vui lòng giải phóng dung lượng đĩa hoặc quản lý hạn mức cho mỗi người dùng trong <1> cài đặt Quản lý lưu trữ.</1>",
   "PersonalUserQuotaDescription": "Để tải lên và tạo các tập tin và thư mục mới, vui lòng giải phóng dung lượng đĩa hoặc liên hệ với quản trị viên để tăng hạn mức lưu trữ.",
   "RequestActivation": "Yêu cầu kích hoạt lại",
-  "RoomQuotaDescription": "Bạn có thể sao lưu các phòng không cần thiết hoặc <1>{{clickHere}}</1> để tìm gói dịch vụ có giá phù hợp hơn cho DocSpace của mình.",
+  "RoomQuotaDescription": "Bạn có thể sao lưu các phòng không cần thiết hoặc <1>{{clickHere}}</1> để tìm gói dịch vụ có giá phù hợp hơn cho {{portalName}} của mình.",
   "RoomQuotaHeader": "Phòng sắp vượt quá:{{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Sắp vượt quá giới hạn lưu trữ và phòng.",
   "StorageAndUserHeader": "Sắp vượt quá giới hạn lưu trữ và quản trị viên/người dùng cấp cao.",

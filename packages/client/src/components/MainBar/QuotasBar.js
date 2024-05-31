@@ -32,6 +32,7 @@ import { SnackBar } from "@docspace/shared/components/snackbar";
 
 import { Link } from "@docspace/shared/components/link";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
+import { PORTAL } from "@docspace/shared/constants";
 
 const QuotasBar = ({
   t,
@@ -78,7 +79,7 @@ const QuotasBar = ({
         return {
           header: t("RoomQuotaHeader", { currentValue, maxValue }),
           description: (
-            <Trans i18nKey="RoomQuotaDescription" t={t}>
+            <Trans i18nKey="RoomQuotaDescription" t={t} portalName={PORTAL}>
               You can archived the unnecessary rooms or
               <Link
                 fontSize="12px"

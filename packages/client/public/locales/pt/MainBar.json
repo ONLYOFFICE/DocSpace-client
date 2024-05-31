@@ -5,7 +5,7 @@
   "PersonalUserQuotaAdminsDescription": "Para fazer upload e criar novos arquivos e pastas, libere espaço em disco ou gerencie a cota por usuário nas <1>Configurações de gerenciamento de armazenamento.</1>",
   "PersonalUserQuotaDescription": "Para fazer upload e criar novos arquivos e pastas, libere espaço em disco ou entre em contato com o administrador para aumentar a cota de armazenamento.",
   "RequestActivation": "Solicitar a ativação novamente",
-  "RoomQuotaDescription": "Pode arquivar as salas desnecessárias ou <1>{{clickHere}}</1> para encontrar um plano de preços mais adequado para o seu DocSpace.",
+  "RoomQuotaDescription": "Pode arquivar as salas desnecessárias ou <1>{{clickHere}}</1> para encontrar um plano de preços mais adequado para o seu {{portalName}}.",
   "RoomQuotaHeader": "Salas que estão prestes a ser excedidas: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Os limites de armazenamento e de salas estão prestes a ser excedidos.",
   "StorageAndUserHeader": "Os limites para o armazenamento e para o número de administradores/utilizadores com poder estão prestes a ser excedidos.",

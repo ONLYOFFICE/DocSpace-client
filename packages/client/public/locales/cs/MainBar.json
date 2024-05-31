@@ -5,7 +5,7 @@
   "PersonalUserQuotaAdminsDescription": "Chcete-li nahrávat a vytvářet nové soubory a složky, uvolněte místo na disku nebo spravujte kvótu pro uživatele v nastavení <1>Správa úložiště.</1>",
   "PersonalUserQuotaDescription": "Chcete-li nahrávat a vytvářet nové soubory a složky, uvolněte místo na disku nebo se obraťte na správce, aby zvýšil kvótu úložiště.",
   "RequestActivation": "Znovu požádat o o aktivaci",
-  "RoomQuotaDescription": "Nepotřebné místnosti můžete archivovat nebo <1>{{clickHere}}}</1> pro nalezení vhodnějšího cenového tarifu pro váš DocSpace.",
+  "RoomQuotaDescription": "Nepotřebné místnosti můžete archivovat nebo <1>{{clickHere}}}</1> pro nalezení vhodnějšího cenového tarifu pro váš {{portalName}}.",
   "RoomQuotaHeader": "Počet místností bude brzy překročen: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Limity úložiště a místností budou brzy překročeny.",
   "StorageAndUserHeader": "Limity pro úložiště a správce/oprávněné uživatele budou brzy překročeny.",

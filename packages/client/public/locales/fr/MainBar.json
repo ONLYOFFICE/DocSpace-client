@@ -5,7 +5,7 @@
   "PersonalUserQuotaAdminsDescription": "Pour télécharger et créer de nouveaux fichiers et dossiers, veuillez libérer l'espace de stockage ou gérez des quotas d'utilisateurs à partir de la section <1>Paramètres de gestion du stockage.</1>",
   "PersonalUserQuotaDescription": "Pour télécharger et créer de nouveaux fichiers  et dossiers, veuillez libérer l'espace de stockage ou contactez l'administrateur pour augmenter le quota de stockage.",
   "RequestActivation": "Demander à nouveau l’activation",
-  "RoomQuotaDescription": "Vous pouvez archiver les salles inutiles ou <1>{{clickHere}}</1> pour trouver un plan tarifaire plus adapté à votre DocSpace.",
+  "RoomQuotaDescription": "Vous pouvez archiver les salles inutiles ou <1>{{clickHere}}</1> pour trouver un plan tarifaire plus adapté à votre {{portalName}}.",
   "RoomQuotaHeader": "Salles est sur le point d’être dépassée : {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Les limites de stockage et de salles sont sur le point d’être dépassées.",
   "StorageAndUserHeader": "Les limites de stockage et d'administrateurs/utilisateurs avancés sont sur le point d'être dépassées.",

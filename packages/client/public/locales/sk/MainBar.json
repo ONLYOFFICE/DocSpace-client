@@ -5,7 +5,7 @@
   "PersonalUserQuotaAdminsDescription": "Ak chcete nahrávať a vytvárať nové súbory a priečinky, uvoľnite miesto na disku alebo spravujte používateľské kvóty v <1> Nastaveniach spravovania úložiska.</1>",
   "PersonalUserQuotaDescription": "Ak chcete nahrávať a vytvárať nové súbory a priečinky, uvoľnite miesto na disku alebo kontaktujte administrátora, aby zvýšil kvótu úložiska.",
   "RequestActivation": "Požiadať o aktiváciu ešte raz",
-  "RoomQuotaDescription": "Miestnosti, ktore nepotrebujete môžete archivovať alebo <1>{{clickHere}}</1> nájsť lepší plán pre svoj DocSpace.",
+  "RoomQuotaDescription": "Miestnosti, ktore nepotrebujete môžete archivovať alebo <1>{{clickHere}}</1> nájsť lepší plán pre svoj {{portalName}}.",
   "RoomQuotaHeader": "Počet miestností bude čoskoro prekročený: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Limity úložísk a miestností budú čoskoro prekročené.",
   "StorageAndUserHeader": "Objem úložísk a maximálny počet administrátorov/pokročilých používateľov budú čoskoro prekročené.",

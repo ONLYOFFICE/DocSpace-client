@@ -5,7 +5,7 @@
   "PersonalUserQuotaAdminsDescription": "Yeni fayl və qovluqları yükləmək və yaratmaq üçün zəhmət olmasa, diskdə yer boşaldın və ya <1>Yaddaş idarəetmə parametrlərində</1> hər istifadəçi kvotasını idarə edin.",
   "PersonalUserQuotaDescription": "Yeni fayl və qovluqları yükləmək və yaratmaq üçün diskdə yer boşaldın və ya yaddaş kvotasını artırmaq üçün administratorla əlaqə saxlayın.",
   "RequestActivation": "Yenidən aktivləşdirmə tələb edin",
-  "RoomQuotaDescription": "DocSpace üçün daha uyğun qiymət planı tapmaq üçün lazımsız otaqları arxivləşdirə və ya <1>{{clickHere}}</1> edə bilərsiniz.",
+  "RoomQuotaDescription": "{{portalName}} üçün daha uyğun qiymət planı tapmaq üçün lazımsız otaqları arxivləşdirə və ya <1>{{clickHere}}</1> edə bilərsiniz.",
   "RoomQuotaHeader": "Otaqlar keçmək üzrədir: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Yaddaş və otaq limitləri aşmaq üzrədir.",
   "StorageAndUserHeader": "Yaddaş və administratorlar/ekspert istifadəçilər limitləri aşmaq üzrədir.",

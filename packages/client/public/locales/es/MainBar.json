@@ -5,7 +5,7 @@
   "PersonalUserQuotaAdminsDescription": "Para cargar y crear nuevos archivos y carpetas, libere espacio en el disco o administre la cuota por usuario en la <1>Configuración de administración de almacenamiento</1>.",
   "PersonalUserQuotaDescription": "Para cargar y crear nuevos archivos y carpetas, libere espacio en el disco o contacte con el administrador para aumentar la cuota de almacenamiento.",
   "RequestActivation": "Volver a solicitar la activación",
-  "RoomQuotaDescription": "Puede archivar las salas innecesarias o <1>{{clickHere}}</1> para encontrar un plan de precios más adecuado para su DocSpace.",
+  "RoomQuotaDescription": "Puede archivar las salas innecesarias o <1>{{clickHere}}</1> para encontrar un plan de precios más adecuado para su {{portalName}}.",
   "RoomQuotaHeader": "Las salas están a punto de excederse: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Los límites de almacenamiento y de salas están a punto de excederse.",
   "StorageAndUserHeader": "Los límites de almacenamiento y de administradores/usuarios avanzados están a punto de excederse.",

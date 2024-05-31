@@ -5,7 +5,7 @@
   "PersonalUserQuotaAdminsDescription": "Om nieuwe bestanden en mappen te uploaden en aan te maken, moet u schijfruimte vrijmaken of quota per gebruiker beheren in de <1>Instellingen voor opslagbeheer.</1>",
   "PersonalUserQuotaDescription": "Om nieuwe bestanden en mappen te uploaden en aan te maken, moet u schijfruimte vrijmaken of contact opnemen met de beheerder om de opslagquota te verhogen.",
   "RequestActivation": "Activatie opnieuw aanvragen",
-  "RoomQuotaDescription": "U kunt de overbodige kamers archiveren of <1>{{clickHere}}</1> om een meer geschikt prijsplan voor uw DocSpace te vinden.",
+  "RoomQuotaDescription": "U kunt de overbodige kamers archiveren of <1>{{clickHere}}</1> om een meer geschikt prijsplan voor uw {{portalName}} te vinden.",
   "RoomQuotaHeader": "Kamers staat op het punt overschreden te worden: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Opslag- en kamerlimieten staan op het punt overschreden te worden.",
   "StorageAndUserHeader": "De beperkingen voor opslag en beheerders/power users worden binnenkort overschreden.",

@@ -71,7 +71,7 @@
   "ChooseBackupFiles": "Vyberte záložné súbory",
   "ClearBackupList": "Odstrániť všetky zálohované údaje",
   "CloseMenu": "Zatvoriť menu",
-  "CommonFilesDescription": "Pre súbory v Spoločnej časti bude vytvorená samostatná miestnosť (Spoločná miestnosť). Prístup do tejto miestnosti budú mať len administrátori DocSpace. V predvolenom nastavení bude vlastníkom miestnosti používateľ, ktorý iniciuje import: John Smith (Vy).",
+  "CommonFilesDescription": "Pre súbory v Spoločnej časti bude vytvorená samostatná miestnosť (Spoločná miestnosť). Prístup do tejto miestnosti budú mať len administrátori DocSpace. V predvolenom nastavení bude vlastníkom miestnosti používateľ, ktorý iniciuje import: {{user}} (Vy).",
   "CompanyInfoSettings": "Nastavenia informácií o spoločnosti",
   "CompanyInfoSettingsDescription": "Tieto informácie sa zobrazia v okne <1>{{link}}</1>.",
   "ConfirmEmailSended": "Potvrdzujúci mail bol odoslaný {{ownerName}}",

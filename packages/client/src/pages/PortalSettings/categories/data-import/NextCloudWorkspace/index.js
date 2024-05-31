@@ -37,6 +37,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { getStepsData } from "./Stepper";
 import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
 import SelectFileLoader from "../sub-components/SelectFileLoader";
+import { PORTAL } from "@docspace/shared/constants";
 
 const NextcloudWrapper = styled.div`
   max-width: 700px;
@@ -149,7 +150,7 @@ const NextcloudWorkspace = (props) => {
           lineHeight="20px"
           color={theme.isBase ? "#657077" : "#ADADAD"}
         >
-          {t("Settings:AboutDataImport")}
+          {t("Settings:AboutDataImport", { portalName: PORTAL })}
         </Text>
         <Text
           className="data-import-counter"

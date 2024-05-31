@@ -1,5 +1,5 @@
 {
-  "AboutDataImport": "Tietojen tuonti sisältää seuraavat vaiheet: tietojen lataus, jäsentäminen, tuonnin määrittäminen, ja tuonti. Varmuuskopiotiedostosi tallennetaan ONLYOFFICE DocSpace-palvelimille 24 tunnin ajaksi ja sen jälkeen se poistetaan automaattisesti.",
+  "AboutDataImport": "Tietojen tuonti sisältää seuraavat vaiheet: tietojen lataus, jäsentäminen, tuonnin määrittäminen, ja tuonti. Varmuuskopiotiedostosi tallennetaan ONLYOFFICE {{portalName}}-palvelimille 24 tunnin ajaksi ja sen jälkeen se poistetaan automaattisesti.",
   "AccentColor": "Aksentti",
   "AccessRightsAccessToProduct": "Pääsy moduuliin {{product}} on myönnetty",
   "AccessRightsAllUsers": "Kaikki {{users}}",

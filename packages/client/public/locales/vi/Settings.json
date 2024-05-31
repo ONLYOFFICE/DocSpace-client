@@ -1,5 +1,5 @@
 {
-  "AboutDataImport": "Việc nhập dữ liệu bao gồm một số bước: tải lên dữ liệu, phân tích cú pháp parsing, nhập cấu hình và nhập dữ liệu. Tập tin sao lưu của bạn sẽ được lưu trữ trong máy chủ ONLYOFFICE DocSpace trong 24 giờ và sau đó nó sẽ bị xóa tự động.",
+  "AboutDataImport": "Việc nhập dữ liệu bao gồm một số bước: tải lên dữ liệu, phân tích cú pháp parsing, nhập cấu hình và nhập dữ liệu. Tập tin sao lưu của bạn sẽ được lưu trữ trong máy chủ ONLYOFFICE {{portalName}} trong 24 giờ và sau đó nó sẽ bị xóa tự động.",
   "AccentColor": "Nhấn mạnh",
   "AccessRightsAccessToProduct": "Quyền truy cập vào mô-đun {{product}} được cấp cho",
   "AccessRightsAllUsers": "Tất cả {{users}}",

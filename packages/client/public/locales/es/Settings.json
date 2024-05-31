@@ -1,5 +1,4 @@
 {
-  "AboutDataImport": "La importación de datos incluye varios pasos: carga de datos, análisis, configuración de importación e importación. Su archivo de copia de seguridad se almacenará en los servidores de ONLYOFFICE DocSpace durante 24 horas y luego se eliminará automáticamente.",
   "AccentColor": "Acento",
   "AccessRightsAccessToProduct": "El acceso al módulo {{product}} se otorga a",
   "AccessRightsAllUsers": "Todos {{users}}",

@@ -1,5 +1,5 @@
 {
-  "AboutDataImport": "Import dat zahrnuje několik kroků: nahrání dat, syntaktickou analýzu, konfiguraci importu a import. Váš záložní soubor bude uložen na serverech ONLYOFFICE DocSpace po dobu 24 hodin a poté bude automaticky odstraněn.",
+  "AboutDataImport": "Import dat zahrnuje několik kroků: nahrání dat, syntaktickou analýzu, konfiguraci importu a import. Váš záložní soubor bude uložen na serverech ONLYOFFICE {{portalName}} po dobu 24 hodin a poté bude automaticky odstraněn.",
   "AccentColor": "Akcent",
   "AccessRightsAccessToProduct": "Přístup k modulu {{product}} je udělen",
   "AccessRightsAllUsers": "Všichni {{users}}",

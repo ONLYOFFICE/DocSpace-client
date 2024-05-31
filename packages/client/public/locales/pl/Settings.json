@@ -1,5 +1,5 @@
 {
-  "AboutDataImport": "Import danych obejmuje kilka kroków: wgranie danych, parsowanie, konfiguracja importu oraz import. Twój plik kopii zapasowej będzie przechowywany na serwerach ONLYOFFICE DocSpace przez 24 godziny, a następnie zostanie automatycznie usunięty.",
+  "AboutDataImport": "Import danych obejmuje kilka kroków: wgranie danych, parsowanie, konfiguracja importu oraz import. Twój plik kopii zapasowej będzie przechowywany na serwerach ONLYOFFICE {{portalName}} przez 24 godziny, a następnie zostanie automatycznie usunięty.",
   "AccentColor": "Akcent",
   "AccessRightsAccessToProduct": "Dostęp do modułu {{product}} został udzielony",
   "AccessRightsAllUsers": "Wszyscy {{users}}",

@@ -1,5 +1,5 @@
 {
-  "AboutDataImport": "Het importeren van gegevens bestaat uit verschillende stappen: gegevens uploaden, parseren, importconfiguratie en importeren. Uw back-up bestand wordt gedurende 24 uur opgeslagen op de ONLYOFFICE DocSpace servers, en daarna wordt het automatisch verwijderd.",
+  "AboutDataImport": "Het importeren van gegevens bestaat uit verschillende stappen: gegevens uploaden, parseren, importconfiguratie en importeren. Uw back-up bestand wordt gedurende 24 uur opgeslagen op de ONLYOFFICE {{portalName}} servers, en daarna wordt het automatisch verwijderd.",
   "AccentColor": "Accent",
   "AccessRightsAccessToProduct": "Toegang tot {{product}} module wordt gegeven aan",
   "AccessRightsAllUsers": "Alle {{users}}",

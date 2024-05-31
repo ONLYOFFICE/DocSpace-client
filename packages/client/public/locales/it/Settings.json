@@ -1,5 +1,5 @@
 {
-  "AboutDataImport": "L'importazione dei dati include diversi passaggi: caricamento dei dati, analisi, configurazione dell'importazione e importazione. Il tuo file di backup verrà archiviato nei server ONLYOFFICE DocSpace per 24 ore, e poi verrà automaticamente eliminato.",
+  "AboutDataImport": "L'importazione dei dati include diversi passaggi: caricamento dei dati, analisi, configurazione dell'importazione e importazione. Il tuo file di backup verrà archiviato nei server ONLYOFFICE {{portalName}} per 24 ore, e poi verrà automaticamente eliminato.",
   "AccentColor": "Accento",
   "AccessRightsAccessToProduct": "Viene concesso l'accesso al modulo {{product}}",
   "AccessRightsAllUsers": "Tutti {{users}}",

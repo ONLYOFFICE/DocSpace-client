@@ -1,5 +1,5 @@
 {
-  "AboutDataImport": "Məlumatların idxalı bir neçə addımdan ibarətdir: məlumatların yüklənməsi, təhlili, idxal konfiqurasiyası və idxalı. Ehtiyat faylınız ONLYOFFICE DocSpace serverlərində 24 saat saxlanılacaq və sonra avtomatik olaraq silinəcək.",
+  "AboutDataImport": "Məlumatların idxalı bir neçə addımdan ibarətdir: məlumatların yüklənməsi, təhlili, idxal konfiqurasiyası və idxalı. Ehtiyat faylınız ONLYOFFICE {{portalName}} serverlərində 24 saat saxlanılacaq və sonra avtomatik olaraq silinəcək.",
   "AccentColor": "Vurğu",
   "AccessRightsAccessToProduct": "{{product}} moduluna giriş hüququ verilmişdir",
   "AccessRightsAllUsers": "Bütün {{users}}",

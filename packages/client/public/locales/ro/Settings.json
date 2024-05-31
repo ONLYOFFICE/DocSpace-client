@@ -1,5 +1,5 @@
 {
-  "AboutDataImport": "Import de date include mai multe etape: încărcarea datelor, analizarea, configurarea importului și importul. Fișierul dvs. de rezervă va fi stocat pe serverele ONLYOFFICE DocSpace timp de 24 de ore, după ce va fi șters automat.",
+  "AboutDataImport": "Import de date include mai multe etape: încărcarea datelor, analizarea, configurarea importului și importul. Fișierul dvs. de rezervă va fi stocat pe serverele ONLYOFFICE {{portalName}} timp de 24 de ore, după ce va fi șters automat.",
   "AccentColor": "Accent",
   "AccessRightsAccessToProduct": "Accesul la modul {{product}} este acordat lui",
   "AccessRightsAllUsers": "Toți {{users}}",

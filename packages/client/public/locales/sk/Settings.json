@@ -1,5 +1,5 @@
 {
-  "AboutDataImport": "Import údajov zahŕňa niekoľko krokov: odosielanie údajov, parsovanie, konfiguráciu importu a import. Váš záložný súbor bude uložený na serveroch ONLYOFFICE DocSpace počas 24 hodín a potom sa automaticky vymaže.",
+  "AboutDataImport": "Import údajov zahŕňa niekoľko krokov: odosielanie údajov, parsovanie, konfiguráciu importu a import. Váš záložný súbor bude uložený na serveroch ONLYOFFICE {{portalName}} počas 24 hodín a potom sa automaticky vymaže.",
   "AccentColor": "Akcent",
   "AccessRightsAccessToProduct": "Prístup do modulu {{product}} má",
   "AccessRightsAllUsers": "Všetci {{users}}",

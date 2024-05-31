@@ -1,5 +1,5 @@
 {
-  "AboutDataImport": "Der Datenimport umfasst mehrere Schritte: Hochladen von Daten, Parsen, Importkonfiguration und Import. Ihre Sicherungsdatei wird 24 Stunden lang auf den DocSpace-Servern von ONLYOFFICE gespeichert und anschließend automatisch gelöscht.",
+  "AboutDataImport": "Der Datenimport umfasst mehrere Schritte: Hochladen von Daten, Parsen, Importkonfiguration und Import. Ihre Sicherungsdatei wird 24 Stunden lang auf den {{portalName}}-Servern von ONLYOFFICE gespeichert und anschließend automatisch gelöscht.",
   "AccentColor": "Akzent",
   "AccessRightsAccessToProduct": "Das Modul {{product}} ist zugreifbar für",
   "AccessRightsAllUsers": "Alle Mitglieder mit dem Status {{users}}",

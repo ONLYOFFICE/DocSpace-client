@@ -1,7 +1,7 @@
 {
   "ActionsWithFilesDescription": "Rozetler, dosya yükleme, oluşturma ve değişiklikler gibi işlemler ile ilgili sizi bilgilendirir.",
   "Badges": "Rozetler",
-  "DailyFeed": "Günlük DocSpace akışı",
+  "DailyFeed": "Günlük {{portalName}} akışı",
   "DailyFeedDescription": "DocSpace'inizdeki haberleri ve etkinlikleri günlük bir özet halinde okuyun.",
   "ManageNotifications": "Yönet",
   "Notifications": "Bildirimler",

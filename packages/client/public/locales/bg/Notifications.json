@@ -1,7 +1,7 @@
 {
   "ActionsWithFilesDescription": "Значките ще Ви уведомяват за действия като качване, създаване и промени на файлове.",
   "Badges": "Баджове",
-  "DailyFeed": "Ежедневен DocSpace фийд",
+  "DailyFeed": "Ежедневен {{portalName}} фийд",
   "DailyFeedDescription": "Четете новини и събития от вашия DocSpace в ежедневен бюлетин.",
   "ManageNotifications": "Управление",
   "Notifications": "Известия",

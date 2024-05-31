@@ -1,7 +1,7 @@
 {
   "ActionsWithFilesDescription": "Značke vas bodo obveščale o aktivnostih, kot so nalaganje, ustvarjanje in spreminjanje datotek.",
   "Badges": "Značke",
-  "DailyFeed": "Dnevni vir DocSpace",
+  "DailyFeed": "Dnevni vir {{portalName}}",
   "DailyFeedDescription": "Preberi novice in dogodke iz svojega prostora DocSpace v dnevnem povzetku.",
   "ManageNotifications": "Upravljanje",
   "Notifications": "Obvestila",

@@ -1,7 +1,7 @@
 {
   "ActionsWithFilesDescription": "Badges će vas obaveštavati o radnjama poput otpremanja, kreiranja i promena u datotekama.",
   "Badges": "Badges",
-  "DailyFeed": "Dnevni sadržaj DocSpace-a",
+  "DailyFeed": "Dnevni sadržaj {{portalName}}-a",
   "DailyFeedDescription": "Čitajte vesti i događaje iz vašeg DocSpace-a u dnevnom pregledu.",
   "ManageNotifications": "Upravljaj",
   "Notifications": "Obaveštenja",

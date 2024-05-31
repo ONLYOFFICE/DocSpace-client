@@ -1,7 +1,7 @@
 {
   "ActionsWithFilesDescription": "Ecusonul vă va notifica despre acțiunile efectuate asupra fișierelor, precum încărcare, creare și modificare.",
   "Badges": "Ecusoane",
-  "DailyFeed": "Fluxul zilnic DocSpace",
+  "DailyFeed": "Fluxul zilnic {{portalName}}",
   "DailyFeedDescription": "Citiţi ştirile şi evenimentele din spațiul dvs DocSpace într-un rezumat zilnic.",
   "ManageNotifications": "Gestionare",
   "Notifications": "Notificări",

@@ -1,7 +1,7 @@
 {
   "ActionsWithFilesDescription": "バッジは、ファイルのアップロード、作成、変更などのアクションを通知します。",
   "Badges": "バッジ",
-  "DailyFeed": "DocSpaceの毎日フィード",
+  "DailyFeed": "{{portalName}}の毎日フィード",
   "DailyFeedDescription": "DocSpaceのニュースやイベントのダイジェストを毎日お届けします。",
   "ManageNotifications": "管理",
   "Notifications": "通知",

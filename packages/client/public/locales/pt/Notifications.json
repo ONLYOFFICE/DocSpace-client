@@ -1,7 +1,7 @@
 {
   "ActionsWithFilesDescription": "Os crachás irão notificá-lo sobre ações tais como carregamentos, criações, e alterações aos ficheiros.",
   "Badges": "Distintivos",
-  "DailyFeed": "Feed diário do DocSpace ",
+  "DailyFeed": "Feed diário do {{portalName}} ",
   "DailyFeedDescription": "Leia notícias e eventos do seu DocSpace no resumo diário.",
   "ManageNotifications": "Gerir",
   "Notifications": "Notificações",

@@ -1,7 +1,7 @@
 {
   "ActionsWithFilesDescription": "سيقوم الشارات بإخطارك بالإجراءات مثل التحميل والإنشاء والتغييرات في الملفات.",
   "Badges": "شارات",
-  "DailyFeed": "تغذية يومية لـ DocSpace",
+  "DailyFeed": "تغذية يومية لـ {{portalName}}",
   "DailyFeedDescription": "اطلع على الأخبار والفعاليات من DocSpace الخاص بك في ملخص يومي.",
   "ManageNotifications": "إدارة",
   "Notifications": "الإشعارات",

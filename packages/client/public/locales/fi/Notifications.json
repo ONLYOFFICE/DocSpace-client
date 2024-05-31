@@ -1,7 +1,7 @@
 {
   "ActionsWithFilesDescription": "Merkit ilmoittavat sinulle toiminnoista, kuten latauksesta, luonnista ja muutoksista tiedostoissa.",
   "Badges": "Merkit",
-  "DailyFeed": "Päivittäinen DocSpace-syöte",
+  "DailyFeed": "Päivittäinen {{portalName}}-syöte",
   "DailyFeedDescription": "Lue uutiset ja tapahtumat DocSpacesi päivittäisistä uutisista.",
   "ManageNotifications": "Hallitse",
   "Notifications": "Ilmoitukset",

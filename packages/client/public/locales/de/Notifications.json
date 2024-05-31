@@ -1,7 +1,7 @@
 {
   "ActionsWithFilesDescription": "Badges informieren Sie über Aktionen wie das Hochladen, Erstellen und Ändern von Dateien.",
   "Badges": "Abzeichen",
-  "DailyFeed": "Täglicher DocSpace-Feed",
+  "DailyFeed": "Täglicher {{portalName}}-Feed",
   "DailyFeedDescription": "Lesen Sie Nachrichten und Ereignisse aus Ihrem DocSpace in einer täglichen Zusammenfassung.",
   "ManageNotifications": "Verwalten",
   "Notifications": "Benachrichtigungen",

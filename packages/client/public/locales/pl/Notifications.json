@@ -1,7 +1,7 @@
 {
   "ActionsWithFilesDescription": "Etykiety informują o działaniach, takich jak wgrywanie, tworzenie i zmiany w plikach.",
   "Badges": "Etykiety",
-  "DailyFeed": "Codzienne aktualności DocSpace",
+  "DailyFeed": "Codzienne aktualności {{portalName}}",
   "DailyFeedDescription": "Czytaj wiadomości i wydarzenia z DocSpace w codziennym przeglądzie.",
   "ManageNotifications": "Zarządzaj",
   "Notifications": "Powiadomienia",

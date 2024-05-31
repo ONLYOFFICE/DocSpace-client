@@ -1,7 +1,7 @@
 {
   "ActionsWithFilesDescription": "Los distintivos le notificarán sobre acciones como la carga, la creación y los cambios en los archivos.",
   "Badges": "Distintivos",
-  "DailyFeed": "Fuente diaria de DocSpace",
+  "DailyFeed": "Fuente diaria de {{portalName}}",
   "DailyFeedDescription": "Lea las noticias y eventos de su DocSpace en un resumen diario.",
   "ManageNotifications": "Gestionar",
   "Notifications": "Notificaciones",

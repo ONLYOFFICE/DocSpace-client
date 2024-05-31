@@ -1,7 +1,7 @@
 {
   "ActionsWithFilesDescription": "Žetonus informēs jūs par tādām darbībām kā augšupielāde, izveide un izmaiņas failos.",
   "Badges": "Žetoni",
-  "DailyFeed": "Ikdienas DocSpace plūsma",
+  "DailyFeed": "Ikdienas {{portalName}} plūsma",
   "DailyFeedDescription": "Lasiet DocSpace jaunumus un notikumus ikdienas īssavilkumā.",
   "ManageNotifications": "Pārvaldīt",
   "Notifications": "Paziņojumi",

@@ -10,7 +10,5 @@
   "NotNeedSettings": "无需输入设置",
   "PluginSamples": "插件示例",
   "PluginSDK": "插件SDK",
-  "PluginSDKDescription": "使用插件SDK，您可以扩展ONLYOFFICE协作空间的功能、连接第三方服务或优化现有的用户体验。您可以在此处查看插件示例以及GitHub上的代码源。 ",
-  "PluginSDKInstruction": "单击该按钮了解如何创建您自己的插件。",
-  "UploadDescription": "您可以添加插件，让协作空间的功能更丰富。单击上传插件或将文件放入 ZIP 存档中。"
+  "PluginSDKInstruction": "单击该按钮了解如何创建您自己的插件。"
 }

@@ -157,6 +157,8 @@
   "RoomsRemoved": "Rooms removed",
   "RoomsUnpinned": "Rooms unpinned: {{count}}",
   "RoomUnpinned": "Room unpinned",
+  "ReorderIndex": "The Reorder action will remove spaces in the indexes. The files will be re-indexed in order with offset to fill in missing indexes.",
+  "Reorder": "Reorder",
   "SearchByContent": "Search by file contents",
   "SendByEmail": "Send by email",
   "ShareFolder": "Share folder",

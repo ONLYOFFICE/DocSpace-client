@@ -2,7 +2,7 @@
   "AccountWillBeCreated": "Für <1>{{email}}</1> wird ein {{portalName}}-Konto erstellt. Bitte vervollständigen Sie Ihre Registrierung:",
   "ChangePasswordSuccess": "Passwort wurde erfolgreich geändert",
   "ConfirmOwnerPortalSuccessMessage": "Der {{portalName}}-Besitzer wurde erfolgreich geändert. In 10 Sekunden werden umgeleitet werden.",
-  "ConfirmOwnerPortalTitle": "Bitte bestätigen Sie, dass {{newOwner}} DocSpace-Besitzer werden soll.",
+  "ConfirmOwnerPortalTitle": "Bitte bestätigen Sie, dass {{newOwner}} {{portalName}}-Besitzer werden soll.",
   "CurrentNumber": "Ihre aktuelle Telefonnummer",
   "DeleteProfileBtn": "Mein Konto löschen",
   "DeleteProfileConfirmation": "Achtung! Dies wird Ihr Konto löschen.",

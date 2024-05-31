@@ -1,7 +1,7 @@
 {
   "ChangePasswordSuccess": "මුරපදය සාර්ථකව වෙනස් කර ඇත",
   "ConfirmOwnerPortalSuccessMessage": "{{portalName}} හිමිකරු සාර්ථකව වෙනස් කර ඇත. තත්පර 10 කින් ඔබව හරවා යවනු ලැබේ.",
-  "ConfirmOwnerPortalTitle": "ඔබට DocSpace හිමිකරු {{newOwner}} ලෙස වෙනස් කිරීමට වුවමනා බව තහවුරු කරන්න.",
+  "ConfirmOwnerPortalTitle": "ඔබට {{portalName}} හිමිකරු {{newOwner}} ලෙස වෙනස් කිරීමට වුවමනා බව තහවුරු කරන්න.",
   "CurrentNumber": "ඔබගේ වත්මන් ජංගම දු.ක. අංකය",
   "DeleteProfileBtn": "මාගේ ගිණුම මකන්න",
   "DeleteProfileConfirmation": "අවධානය! ඔබගේ ගිණුම මැකීමට සැරසෙමින් සිටියි. ",

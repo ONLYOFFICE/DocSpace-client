@@ -2,7 +2,7 @@
   "AccountWillBeCreated": "<1>{{email}}</1> üçün {{portalName}} hesabı yaradılacaq. Zəhmət olmasa, qeydiyyatınızı tamamlayın:",
   "ChangePasswordSuccess": "Şifrə uğurla dəyişdirildi",
   "ConfirmOwnerPortalSuccessMessage": "{{portalName}} sahibi uğurla dəyişdirildi. 10 saniyə ərzində yönləndiriləcəksiniz.",
-  "ConfirmOwnerPortalTitle": "Lütfən DocSpace sahibini {{newOwner}} olaraq dəyişdirmək istədiyinizi təsdiqləyin.",
+  "ConfirmOwnerPortalTitle": "Lütfən {{portalName}} sahibini {{newOwner}} olaraq dəyişdirmək istədiyinizi təsdiqləyin.",
   "CurrentNumber": "Cari mobil telefon nömrəniz",
   "DeleteProfileBtn": "Hesabımı silin",
   "DeleteProfileConfirmation": "Diqqət! Hesabınızı silmək üzrəsiniz.",

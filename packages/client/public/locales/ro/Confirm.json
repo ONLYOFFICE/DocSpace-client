@@ -2,7 +2,7 @@
   "AccountWillBeCreated": "Un cont {{portalName}} va fi creat pentru adresa <1>{{email}}</1>. Finalizați inregistrarea activă:",
   "ChangePasswordSuccess": "Parola a fost schimbată cu succes",
   "ConfirmOwnerPortalSuccessMessage": "Proprietarul {{portalName}} a fost schimbat cu succes. Veţi fi redirecționat automat după 10 secunde.",
-  "ConfirmOwnerPortalTitle": "Confirmați dacă doriți să schimbați proprietarul DocSpace în {{newOwner}}.",
+  "ConfirmOwnerPortalTitle": "Confirmați dacă doriți să schimbați proprietarul {{portalName}} în {{newOwner}}.",
   "CurrentNumber": "Numărul dvs. de telefon mobil curent",
   "DeleteProfileBtn": "Șterge contul meu",
   "DeleteProfileConfirmation": "Atenție! Dumneavoastră sunteți pe cale de a șterge contul dvs.",

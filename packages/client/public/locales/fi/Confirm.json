@@ -2,7 +2,7 @@
   "AccountWillBeCreated": "{{portalName}}-tili luodaan käyttäjälle <1>{{email}}</1>. Ole hyvä ja viimeistele rekisteröitymisesi:",
   "ChangePasswordSuccess": "Salasanan vaihtaminen onnistui",
   "ConfirmOwnerPortalSuccessMessage": "{{portalName}} omistajan vaihto onnistui. 10 sekunnin kuluttua sinut uudelleen ohjataan.",
-  "ConfirmOwnerPortalTitle": "Vahvista, että haluat vaihtaa DocSpace omistajaksi henkilön {{newOwner}}.",
+  "ConfirmOwnerPortalTitle": "Vahvista, että haluat vaihtaa {{portalName}} omistajaksi henkilön {{newOwner}}.",
   "CurrentNumber": "Nykyinen matkapuhelinnumerosi",
   "DeleteProfileBtn": "Poista tilini",
   "DeleteProfileConfirmation": "Huomio! Olet poistamassa tilisi.",

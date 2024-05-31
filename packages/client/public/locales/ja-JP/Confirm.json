@@ -2,7 +2,6 @@
   "AccountWillBeCreated": "{{portalName}}アカウントは<1>{{email}}</1>用に作成されます。登録を完了してください：",
   "ChangePasswordSuccess": "パスワードの変更に成功しました。",
   "ConfirmOwnerPortalSuccessMessage": "{{portalName}}の所有者が変更されました。10秒後にリダイレクトされます。",
-  "ConfirmOwnerPortalTitle": "ポータルのオーナーを{{newOwner}}に変更するかご確認ください。",
   "CurrentNumber": "現在お使いの電話番号",
   "DeleteProfileBtn": "アカウントの削除",
   "DeleteProfileConfirmation": "ご注意！アカウントを削除しようとしています。",

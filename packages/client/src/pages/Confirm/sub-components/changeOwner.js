@@ -94,7 +94,10 @@ const ChangeOwnerForm = (props) => {
             ) : (
               <>
                 <Text className="subtitle">
-                  {t("ConfirmOwnerPortalTitle", { newOwner: newOwner })}
+                  {t("ConfirmOwnerPortalTitle", {
+                    newOwner: newOwner,
+                    portalName: PORTAL,
+                  })}
                 </Text>
                 <ButtonsWrapper>
                   <Button

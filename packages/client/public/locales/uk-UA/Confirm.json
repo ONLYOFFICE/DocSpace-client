@@ -2,7 +2,7 @@
   "AccountWillBeCreated": "Для <1>{{email}}</1> буде створено обліковий запис {{portalName}}. Завершіть реєстрацію:",
   "ChangePasswordSuccess": "Пароль успішно змінено",
   "ConfirmOwnerPortalSuccessMessage": "Власника {{portalName}} успішно змінено. Через 10 секунд вас буде перенаправлено.",
-  "ConfirmOwnerPortalTitle": "Підтвердьте, що хочете змінити власника DocSpace на {{newOwner}}.",
+  "ConfirmOwnerPortalTitle": "Підтвердьте, що хочете змінити власника {{portalName}} на {{newOwner}}.",
   "CurrentNumber": "Ваш поточний номер мобільного телефону",
   "DeleteProfileBtn": "Видалити мій обліковий запис",
   "DeleteProfileConfirmation": "Увага! Ви збираєтеся видалити свій обліковий запис.",

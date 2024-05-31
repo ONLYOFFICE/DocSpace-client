@@ -7,7 +7,7 @@
   "ActivateRenewDescr": "Per ottenere i tuoi termini di rinnovo personali, contatta il tuo manager dedicato o scrivici a <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Rinnova abbonamento di Enterprise",
   "ActivateSwithToProHeader": "Passa alla versione completa di Enterprise",
-  "ActivateTariffDescr": "‎Stai usando‎ ONLYOFFICE DocSpace Enterprise.",
+  "ActivateTariffDescr": "‎Stai usando‎ ONLYOFFICE {{portalName}} Enterprise.",
   "ActivateTariffEnterpriseExpiration": "Il tuo abbonamento scade il {{date}}.",
   "ActivateTariffEnterpriseTrialExpiration": "La tua prova scade il {{date}}.",
   "ActivateToProBannerHeaderTrial": "Acquista la versione Enterprise completa per ottenere:",

@@ -7,7 +7,7 @@
   "ActivateRenewDescr": "特別な更新条件を得るには、専属マネージャーに連絡するか、<1>{{email}}</1>までご連絡ください。",
   "ActivateRenewSubscriptionHeader": "Enterprise版サブスクリプションを更新する",
   "ActivateSwithToProHeader": "Enterprise版への切り替え",
-  "ActivateTariffDescr": "現在、ONLYOFFICE DocSpace Enterprise版を使用しています。",
+  "ActivateTariffDescr": "現在、ONLYOFFICE {{portalName}} Enterprise版を使用しています。",
   "ActivateTariffEnterpriseExpiration": "サブスクリプションの有効期限は{{date}}です。",
   "ActivateTariffEnterpriseTrialExpiration": "試用版の有効期限は{{date}}です。",
   "ActivateToProBannerHeaderTrial": "エンタープライズ版のフルバージョンを購入すると次の項目が得られます：",

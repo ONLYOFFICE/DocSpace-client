@@ -7,7 +7,7 @@
   "ActivateRenewDescr": "Za vaše pogoje podaljšanja se obrnite na svojega skrbnika ali nam pišite na <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Obnovite naročnino za Enterprise",
   "ActivateSwithToProHeader": "Preklopite na polno verzijo Enterprise",
-  "ActivateTariffDescr": "Uporabljate ONLYOFFICE DocSpace Enterprise.",
+  "ActivateTariffDescr": "Uporabljate ONLYOFFICE {{portalName}} Enterprise.",
   "ActivateTariffEnterpriseExpiration": "Vaša naročnina poteče dne {{date}}.",
   "ActivateTariffEnterpriseTrialExpiration": "Vaš preizkus poteče dne {{date}}.",
   "ActivateToProBannerHeaderTrial": "Kupite polno verzijo Enterprise in dobite:",

@@ -7,7 +7,7 @@
   "ActivateRenewDescr": "Lai uzzinātu savus personīgos atjaunošanas noteikumus, sazinieties ar savu īpašo pārvaldnieku šajā jomā vai rakstiet mums uz <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Atjaunojiet Enterprise abonementu",
   "ActivateSwithToProHeader": "Pārslēgties uz pilno Enterprise versiju",
-  "ActivateTariffDescr": "Jūs izmantojat ONLYOFFICE DocSpace Enterprise.",
+  "ActivateTariffDescr": "Jūs izmantojat ONLYOFFICE {{portalName}} Enterprise.",
   "ActivateTariffEnterpriseExpiration": "Jūsu abonementa derīguma termiņš beidzas šajā datumā: {{date}}.",
   "ActivateTariffEnterpriseTrialExpiration": "Jūsu izmēģinājuma periods beidzas šajā datumā: {{date}}.",
   "ActivateToProBannerHeaderTrial": "Iegādājieties pilno uzņēmuma versiju, lai iegūtu:",

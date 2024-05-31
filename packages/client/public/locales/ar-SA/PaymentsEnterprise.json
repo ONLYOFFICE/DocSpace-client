@@ -7,7 +7,7 @@
   "ActivateRenewDescr": "للحصول على شروط التجديد الشخصية ، اتصل بمديرك المخصص أو راسلنا على <1> {{email}} </1>",
   "ActivateRenewSubscriptionHeader": "تجديد الاشتراك للمؤسسات",
   "ActivateSwithToProHeader": "قم بالتبديل إلى إصدار المؤسسي الكامل",
-  "ActivateTariffDescr": "أنت تستخدم ONLYOFFICE DocSpace للمؤسسات.",
+  "ActivateTariffDescr": "أنت تستخدم ONLYOFFICE {{portalName}} للمؤسسات.",
   "ActivateTariffEnterpriseExpiration": "ينتهي اشتراكك في {{date}}.",
   "ActivateTariffEnterpriseTrialExpiration": "تنتهي الفترة التجريبية الخاصة بك في {{date}}.",
   "ActivateToProBannerHeaderTrial": "قم بشراء إصدار المؤسسي الكامل للحصول على:",

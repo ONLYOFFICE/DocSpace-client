@@ -7,7 +7,7 @@
   "ActivateRenewDescr": "Chcete-li získat osobní podmínky obnovení, kontaktujte svého specializovaného manažera nebo nám napište na <1>{{email}}</1>.",
   "ActivateRenewSubscriptionHeader": "Obnovení firemního předplatného Enterprise",
   "ActivateSwithToProHeader": "Přechod na plnou verzi Enterprise",
-  "ActivateTariffDescr": "Používáte aplikaci ONLYOFFICE DocSpace Enterprise.",
+  "ActivateTariffDescr": "Používáte aplikaci ONLYOFFICE {{portalName}} Enterprise.",
   "ActivateTariffEnterpriseExpiration": "Vaše předplatné vyprší dne {{date}}.",
   "ActivateTariffEnterpriseTrialExpiration": "Platnost vaší zkušební verze končí dne {{date}}.",
   "ActivateToProBannerHeaderTrial": "Zakoupením plné verze Enterprise získáte:",

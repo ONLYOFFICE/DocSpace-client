@@ -7,7 +7,7 @@
   "ActivateRenewDescr": "개인 갱신 조건을 확인하려면 전담 관리자에게 문의하거나 <1>{{email}}</1>로 연락주세요",
   "ActivateRenewSubscriptionHeader": "엔터프라이즈 구독 갱신",
   "ActivateSwithToProHeader": "정식 엔터프라이즈 버전으로 전환",
-  "ActivateTariffDescr": "ONLYOFFICE DocSpace 엔터프라이즈를 사용하고 있습니다.",
+  "ActivateTariffDescr": "ONLYOFFICE {{portalName}} 엔터프라이즈를 사용하고 있습니다.",
   "ActivateTariffEnterpriseExpiration": "구독이 {{date}}에 만료됩니다.",
   "ActivateTariffEnterpriseTrialExpiration": "평가판이 {{date}}에 만료됩니다.",
   "ActivateToProBannerHeaderTrial": "정식 엔터프라이즈 버전 구입 시 혜택:",

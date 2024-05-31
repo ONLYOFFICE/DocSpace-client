@@ -38,6 +38,7 @@ const MyDocumentsSubmenu = ({
   setFilter,
   showBodyLoader,
   isRoot,
+  user,
 }) => {
   const { t } = useTranslation(["Common", "Files"]);
 
@@ -56,11 +57,38 @@ const MyDocumentsSubmenu = ({
     const filter = FilesFilter.getDefault();
     const url = window.DocSpace.location.pathname;
 
+    console.log("SUBMENU  e.id", e.id);
+
     if (e.id === "recent") {
+      const filterStorageItem =
+        user?.id && localStorage.getItem(`UserFilterRecent=${user.id}`);
+
+      console.log("SUBMENU UserFilterRecent", filterStorageItem);
+
+      if (filterStorageItem) {
+        const splitFilter = filterStorageItem.split(",");
+
+        filter.sortBy = splitFilter[0];
+        filter.sortOrder = splitFilter[2];
+      } else {
+        filter.sortBy = "LastOpened";
+      }
+
       filter.folder = e.id;
       filter.searchArea = 3;
-      filter.sortBy = "LastOpened";
     } else {
+      const filterStorageItem =
+        user?.id && localStorage.getItem(`UserFilter=${user.id}`);
+
+      console.log("SUBMENU UserFilter", filterStorageItem);
+
+      if (filterStorageItem) {
+        const splitFilter = filterStorageItem.split(",");
+
+        filter.sortBy = splitFilter[0];
+        filter.sortOrder = splitFilter[2];
+      }
+
       filter.searchArea = null;
     }
 
@@ -80,10 +108,11 @@ const MyDocumentsSubmenu = ({
 };
 
 export default inject(
-  ({ treeFoldersStore, filesStore, clientLoadingStore }) => {
+  ({ treeFoldersStore, filesStore, clientLoadingStore, userStore }) => {
     const { isPersonalRoom, isRecentTab, isRoot } = treeFoldersStore;
     const { setFilter } = filesStore;
     const { showBodyLoader } = clientLoadingStore;
+    const { user } = userStore;
 
     return {
       isPersonalRoom,
@@ -91,6 +120,7 @@ export default inject(
       setFilter,
       showBodyLoader,
       isRoot,
+      user,
     };
   },
 )(observer(MyDocumentsSubmenu));

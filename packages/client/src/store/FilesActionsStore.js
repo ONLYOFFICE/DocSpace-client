@@ -2337,6 +2337,13 @@ class FilesActionStore {
       const filter = FilesFilter.getDefault();
       filter.folder = id;
 
+      const filterObj = FilesFilter.getFilter(window.location);
+
+      filter.sortBy = filterObj.sortBy;
+      filter.sortOrder = filterObj.sortOrder;
+
+      console.log("openFileAction filter.toUrlParams()", filter.toUrlParams());
+
       const url = `${path}?${filter.toUrlParams()}`;
 
       if (openingNewTab(url, e)) return;
@@ -2413,6 +2420,8 @@ class FilesActionStore {
     const { clearFiles, setBufferSelection } = this.filesStore;
     const { clearInsideGroup, insideGroupBackUrl } =
       this.peopleStore.groupsStore;
+
+    console.log("onClickBack");
 
     setBufferSelection(null);
 
@@ -2548,6 +2557,13 @@ class FilesActionStore {
     const { navigationPath, rootFolderType } = this.selectedFolderStore;
 
     const filter = FilesFilter.getDefault();
+
+    const filterObj = FilesFilter.getFilter(window.location);
+
+    console.log("backToParentFolder  filterObj", filterObj);
+
+    filter.sortBy = filterObj.sortBy;
+    filter.sortOrder = filterObj.sortOrder;
 
     filter.folder = id;
 

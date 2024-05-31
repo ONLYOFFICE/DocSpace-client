@@ -105,9 +105,22 @@ const ArticleBodyContent = (props) => {
         case myFolderId:
           const myFilter = FilesFilter.getDefault();
           myFilter.folder = folderId;
+
+          const filterStorageItem =
+            userId && localStorage.getItem(`UserFilter=${userId}`);
+
+          console.log("Article filterStorageItem", filterStorageItem);
+
+          const splitFilter = filterStorageItem.split(",");
+
+          myFilter.sortBy = splitFilter[0];
+          myFilter.sortOrder = splitFilter[2];
+
           params = myFilter.toUrlParams();
 
           path = getCategoryUrl(CategoryType.Personal);
+
+          console.log("my path params", path, params);
 
           if (activeItemId === myFolderId && folderId === selectedFolderId)
             return;
@@ -169,6 +182,8 @@ const ArticleBodyContent = (props) => {
       setSelection && setSelection([]);
 
       setIsLoading(true, withTimer);
+
+      console.log("path", path);
       navigate(path, { state });
 
       if (currentDeviceType === DeviceType.mobile) {

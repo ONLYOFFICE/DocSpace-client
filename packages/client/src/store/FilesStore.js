@@ -1266,10 +1266,18 @@ class FilesStore {
   };
 
   //TODO: FILTER
-  setFilesFilter = (filter) => {
-    if (!this.publicRoomStore.isPublicRoom) {
+  setFilesFilter = (filter, folderId = null) => {
+    if (folderId === "recent") {
+      const key = `UserFilterRecent=${this.userStore.user?.id}`;
+      const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
+
+      console.log("setItem UserFilterRecent", value);
+      localStorage.setItem(key, value);
+    } else if (!this.publicRoomStore.isPublicRoom) {
       const key = `UserFilter=${this.userStore.user?.id}`;
       const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
+
+      console.log("setItem UserFilter", value);
       localStorage.setItem(key, value);
     }
 
@@ -1384,6 +1392,7 @@ class FilesStore {
   };
 
   refreshFiles = async () => {
+    console.log("call fetchFiles");
     const res = await this.fetchFiles(this.selectedFolderStore.id, this.filter);
     return res;
   };
@@ -1404,6 +1413,7 @@ class FilesStore {
     const filterData = filter ? filter.clone() : FilesFilter.getDefault();
     filterData.folder = folderId;
 
+    //check
     if (folderId === "@my" && this.userStore.user.isVisitor) {
       const url = getCategoryUrl(CategoryType.Shared);
       return window.DocSpace.navigate(
@@ -1418,6 +1428,12 @@ class FilesStore {
       this.userStore.user?.id &&
       localStorage.getItem(`UserFilter=${this.userStore.user.id}`);
 
+    console.log(
+      "folderId filterStorageItem filter",
+      folderId,
+      filterStorageItem,
+      filter,
+    );
     if (filterStorageItem && !filter) {
       const splitFilter = filterStorageItem.split(",");
 
@@ -1485,7 +1501,7 @@ class FilesStore {
           //save filter for after closing preview change url
           this.setTempFilter(filterData);
         } else {
-          this.setFilesFilter(filterData); //TODO: FILTER
+          this.setFilesFilter(filterData, folderId); //TODO: FILTER
         }
 
         const isPrivacyFolder =

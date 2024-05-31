@@ -92,7 +92,7 @@
   "SearchTerm": "Meklēšanas vienums",
   "SelectButtonText": "Atlasīt pogas tekstu",
   "SelectImage": "Atiestatīt attēlu",
-  "SelectModeEmbedding": "Atlasīt režīmu DocSpace iegulšanai",
+  "SelectModeEmbedding": "Atlasīt režīmu {{portalName}} iegulšanai",
   "SelectToDocspace": "Atlasīt uz DocSpace",
   "SelectTypes": "Atlasīt tipus",
   "SetItUp": "Iestatīt",

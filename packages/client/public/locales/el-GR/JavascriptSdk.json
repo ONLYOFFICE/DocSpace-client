@@ -92,7 +92,7 @@
   "SearchTerm": "Όρος αναζήτησης",
   "SelectButtonText": "Επιλέξτε κείμενο κουμπιού",
   "SelectImage": "Επιλέξτε εικόνα",
-  "SelectModeEmbedding": "Επιλέξτε μια λειτουργία για την ενσωμάτωση του DocSpace σας",
+  "SelectModeEmbedding": "Επιλέξτε μια λειτουργία για την ενσωμάτωση του {{portalName}} σας",
   "SelectToDocspace": "Επιλέξτε στο DocSpace",
   "SelectTypes": "Επιλέξτε τύπους",
   "SetItUp": "Ρύθμιση",

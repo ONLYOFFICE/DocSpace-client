@@ -92,7 +92,7 @@
   "SearchTerm": "Пошуковий запит",
   "SelectButtonText": "Текст кнопки вибору",
   "SelectImage": "Вибрати зображення",
-  "SelectModeEmbedding": "Виберіть режим для вбудовування вашого простору DocSpace",
+  "SelectModeEmbedding": "Виберіть режим для вбудовування вашого простору {{portalName}}",
   "SelectToDocspace": "Вибрати для DocSpace",
   "SelectTypes": "Вибрати типи",
   "SetItUp": "Налаштувати",

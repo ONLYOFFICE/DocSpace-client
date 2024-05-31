@@ -92,7 +92,7 @@
   "SearchTerm": "Wyszukaj frazę",
   "SelectButtonText": "Tekst przycisku wyboru",
   "SelectImage": "Wybierz obraz",
-  "SelectModeEmbedding": "Wybierz tryb osadzania DocSpace",
+  "SelectModeEmbedding": "Wybierz tryb osadzania {{portalName}}",
   "SelectToDocspace": "Wybierz do DocSpace",
   "SelectTypes": "Wybierz rodzaje",
   "SetItUp": "Skonfiguruj",

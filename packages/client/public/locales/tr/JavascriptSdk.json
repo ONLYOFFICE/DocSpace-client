@@ -92,7 +92,7 @@
   "SearchTerm": "Arama terimi",
   "SelectButtonText": "Buton metnini seç",
   "SelectImage": "Resim seç",
-  "SelectModeEmbedding": "DocSpace’inizi yerleştirmek için bir mod seç",
+  "SelectModeEmbedding": "{{portalName}}’inizi yerleştirmek için bir mod seç",
   "SelectToDocspace": "DocSpace için seç",
   "SelectTypes": "Türleri seç",
   "SetItUp": "Ayarla",

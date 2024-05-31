@@ -92,7 +92,7 @@
   "SearchTerm": "Zoekterm",
   "SelectButtonText": "Selecteer Knop tekst",
   "SelectImage": "Selecteer afbeelding",
-  "SelectModeEmbedding": "Selecteer een modus voor het insluiten van uw DocSpace",
+  "SelectModeEmbedding": "Selecteer een modus voor het insluiten van uw {{portalName}}",
   "SelectToDocspace": "Selecteer naar DocSpace",
   "SelectTypes": "Selecteer types",
   "SetItUp": "Instellen",

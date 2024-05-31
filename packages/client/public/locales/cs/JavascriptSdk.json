@@ -92,7 +92,7 @@
   "SearchTerm": "Hledaný termín",
   "SelectButtonText": "Vybrat text tlačítka",
   "SelectImage": "Vybrat obrázek",
-  "SelectModeEmbedding": "Zvolte režim pro vložení prostoru DocSpace",
+  "SelectModeEmbedding": "Zvolte režim pro vložení prostoru {{portalName}}",
   "SelectToDocspace": "Vybrat do DocSpace",
   "SelectTypes": "Vybrané typy",
   "SetItUp": "Nastavení",

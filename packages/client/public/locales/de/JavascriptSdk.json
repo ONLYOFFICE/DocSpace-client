@@ -92,7 +92,7 @@
   "SearchTerm": "Suchbegriff",
   "SelectButtonText": "Text der Auswahlschaltfläche",
   "SelectImage": "Bild auswählen",
-  "SelectModeEmbedding": "Modus zum Einbetten Ihres DocSpace wählen",
+  "SelectModeEmbedding": "Modus zum Einbetten Ihres {{portalName}} wählen",
   "SelectToDocspace": "DocSpace auswählen",
   "SelectTypes": "Typen auswählen",
   "SetItUp": "Einrichten",

@@ -92,7 +92,7 @@
   "SearchTerm": "Termen de căutare",
   "SelectButtonText": "Selectare text buton",
   "SelectImage": "Selectare imagine",
-  "SelectModeEmbedding": "Selectare mod de incorporare spațiului dvs DocSpace",
+  "SelectModeEmbedding": "Selectare mod de incorporare spațiului dvs {{portalName}}",
   "SelectToDocspace": "Selectare pentru DocSpace",
   "SelectTypes": "Selectare tip",
   "SetItUp": "Configurare",

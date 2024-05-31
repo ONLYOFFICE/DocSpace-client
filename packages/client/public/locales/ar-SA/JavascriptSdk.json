@@ -92,7 +92,7 @@
   "SearchTerm": "مصطلح البحث",
   "SelectButtonText": "حدد نص الزر",
   "SelectImage": "اختر صورة",
-  "SelectModeEmbedding": "حدد وضعا لتضمين DocSpace الخاص بك",
+  "SelectModeEmbedding": "حدد وضعا لتضمين {{portalName}} الخاص بك",
   "SelectToDocspace": "حدد لـ DocSpace",
   "SelectTypes": "حدد الأنواع",
   "SetItUp": "قم بإعداده",

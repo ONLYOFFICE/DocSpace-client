@@ -92,7 +92,7 @@
   "SearchTerm": "Cụm từ tìm kiếm",
   "SelectButtonText": "Chọn chữ cho Nút",
   "SelectImage": "Chọn ảnh",
-  "SelectModeEmbedding": "Chọn một chế độ để nhúng DocSpace của bạn",
+  "SelectModeEmbedding": "Chọn một chế độ để nhúng {{portalName}} của bạn",
   "SelectToDocspace": "Chọn đến DocSpace",
   "SelectTypes": "Chọn kiểu",
   "SetItUp": "Thiết lập nó",

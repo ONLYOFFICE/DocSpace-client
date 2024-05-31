@@ -92,7 +92,7 @@
   "SearchTerm": "Hľadať termín",
   "SelectButtonText": "Vybrať text Tlačidla",
   "SelectImage": "Vybrať obrázok",
-  "SelectModeEmbedding": "Vybrať režim na vloženie vášho priestoru DocSpace",
+  "SelectModeEmbedding": "Vybrať režim na vloženie vášho priestoru {{portalName}}",
   "SelectToDocspace": "Vybrať priestor DocSpace",
   "SelectTypes": "Vybrať typy",
   "SetItUp": "Nastaviť",

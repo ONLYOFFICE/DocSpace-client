@@ -92,7 +92,7 @@
   "SearchTerm": "Termin axtarın",
   "SelectButtonText": "Düymə mətnini seçin",
   "SelectImage": "Şəkli seçin",
-  "SelectModeEmbedding": "DocSpace-i yerləşdirmək üçün rejimi seçin",
+  "SelectModeEmbedding": "{{portalName}}-i yerləşdirmək üçün rejimi seçin",
   "SelectToDocspace": "DocSpace-ə seçin",
   "SelectTypes": "Növləri seçin",
   "SetItUp": "Quraşdırın",

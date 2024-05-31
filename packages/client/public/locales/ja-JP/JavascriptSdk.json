@@ -92,7 +92,7 @@
   "SearchTerm": "検索語句",
   "SelectButtonText": "ボタンテキストの選択",
   "SelectImage": "画像の選択",
-  "SelectModeEmbedding": "DocSpaceを埋め込むモードを選択する",
+  "SelectModeEmbedding": "{{portalName}}を埋め込むモードを選択する",
   "SelectToDocspace": "DocSpaceに選択",
   "SelectTypes": "タイプの選択",
   "SetItUp": "設定",

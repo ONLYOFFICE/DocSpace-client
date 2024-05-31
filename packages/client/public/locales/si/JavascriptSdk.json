@@ -87,7 +87,7 @@
   "SearchTerm": "සෙවුම් පද",
   "SelectButtonText": "තෝරන බොත්තමේ පෙළ",
   "SelectImage": "රූපයක් තෝරන්න",
-  "SelectModeEmbedding": "ඔබගේ DocSpace කාවැද්දීමට ප්‍රකාරයක් තෝරන්න",
+  "SelectModeEmbedding": "ඔබගේ {{portalName}} කාවැද්දීමට ප්‍රකාරයක් තෝරන්න",
   "SelectToDocspace": "DocSpace වෙත තෝරන්න",
   "SelectTypes": "වර්ග තෝරන්න",
   "SetItUp": "පිහිටුවන්න",

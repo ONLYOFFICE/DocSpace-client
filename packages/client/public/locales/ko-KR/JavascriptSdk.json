@@ -92,7 +92,7 @@
   "SearchTerm": "검색어",
   "SelectButtonText": "버튼 텍스트 선택",
   "SelectImage": "이미지 선택",
-  "SelectModeEmbedding": "DocSpace 임베딩 모드 선택",
+  "SelectModeEmbedding": "{{portalName}} 임베딩 모드 선택",
   "SelectToDocspace": "DocSpace로 선택",
   "SelectTypes": "타입 선택",
   "SetItUp": "설정하기",

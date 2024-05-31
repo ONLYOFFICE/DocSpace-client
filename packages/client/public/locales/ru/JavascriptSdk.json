@@ -92,7 +92,7 @@
   "SearchTerm": "Искать термин",
   "SelectButtonText": "Выберите текст кнопки",
   "SelectImage": "Выберите изображение",
-  "SelectModeEmbedding": "Выберите режим для встраивания вашего DocSpace",
+  "SelectModeEmbedding": "Выберите режим для встраивания вашего {{portalName}}",
   "SelectToDocspace": "Выберите для DocSpace",
   "SelectTypes": "Выберите типы",
   "SetItUp": "Настроить",

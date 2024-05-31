@@ -92,7 +92,7 @@
   "SearchTerm": "Išči izraz",
   "SelectButtonText": "Izberi besedilo gumba",
   "SelectImage": "Izberi sliko",
-  "SelectModeEmbedding": "Izberi način za vdelavo DocSpace",
+  "SelectModeEmbedding": "Izberi način za vdelavo {{portalName}}",
   "SelectToDocspace": "Izberi v DocSpace",
   "SelectTypes": "Izberi tipe",
   "SetItUp": "Nastavi",

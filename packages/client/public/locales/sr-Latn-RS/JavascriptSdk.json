@@ -92,7 +92,7 @@
   "SearchTerm": "Pojmovi pretrage",
   "SelectButtonText": "Tekst dugmeta za selektovanje",
   "SelectImage": "Izaberi sliku",
-  "SelectModeEmbedding": "Izaberite režim za ugrađivanje vašeg DocSpace-a",
+  "SelectModeEmbedding": "Izaberite režim za ugrađivanje vašeg {{portalName}}-a",
   "SelectToDocspace": "Izaberi za DocSpace",
   "SelectTypes": "Izaberi tipove",
   "SetItUp": "Postavi",

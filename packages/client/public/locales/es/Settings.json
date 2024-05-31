@@ -268,7 +268,7 @@
   "ThirdPartyResourceDescription": "La copia de seguridad puede guardarse en su cuenta de terceros (Dropbox, Box.com, OneDrive o Google Drive). Debe conectar su cuenta de terceros (Dropbox, Box.com, OneDrive o Google Drive) para poder guardar la copia de seguridad allí.",
   "ThirdPartyStorageDescription": "La copia de seguridad se puede guardar en un almacenamiento de terceros. Para ello, es necesario conectar el servicio correspondiente en la sección 'Integración'. En caso contrario, los siguientes ajustes estarán inactivos.",
   "ThirdPartyTitleDescription": "Con las claves de autorización, puede conectar servicios de terceros a su espacio. Inicie sesión fácilmente con Facebook, Google o LinkedIn; añada Dropbox, OneDrive, etc. para trabajar con los archivos almacenados allí desde el módulo Documentos.",
-  "TimeLanguageSettingsDescription": "Cambie la configuración de idioma y zona horaria para ajustar el idioma y la hora comunes de DocSpace.",
+  "TimeLanguageSettingsDescription": "Cambie la configuración de idioma y zona horaria para ajustar el idioma y la hora comunes de {{portalName}}.",
   "TimeLanguageSettingsSave": "Haga clic en el botón <strong>Guardar</strong> de la parte inferior para aplicar.",
   "TimeZone": "Zona horaria",
   "Top5rooms": "Las 5 principales salas por uso de almacenamiento:",

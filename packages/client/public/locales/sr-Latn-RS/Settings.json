@@ -267,7 +267,7 @@
   "ThirdPartyResourceDescription": "Rezervna kopija se može sačuvati na vaš nalog treće strane (Dropbox, Box.com, OneDrive ili Google Drive). Morate povezati svoj nalog treće strane (Dropbox, Box.com, OneDrive ili Google Drive) pre nego što budete mogli sačuvati svoju rezervnu kopiju tamo.",
   "ThirdPartyStorageDescription": "Rezervna kopija se može sačuvati na skladište treće strane. Pre toga, morate povezati odgovarajuću uslugu u odeljku 'Integracija'. U suprotnom, sledeća podešavanja će biti neaktivna.",
   "ThirdPartyTitleDescription": "Pomoću autorizacionih ključeva možete povezati treće strane servise sa vašim prostorom. Lako se prijavite putem Facebook-a, Google-a ili LinkedIn-a. Dodajte Dropbox, OneDrive i druge naloge kako biste radili sa datotekama koje su tamo smeštene.",
-  "TimeLanguageSettingsDescription": "Promenite Podešavanja Jezika i Vremenske Zone da podesite uobičajen DocSpace jezik i vreme.",
+  "TimeLanguageSettingsDescription": "Promenite Podešavanja Jezika i Vremenske Zone da podesite uobičajen {{portalName}} jezik i vreme.",
   "TimeLanguageSettingsSave": "Kliknite <strong>Save</strong> na dnu da primenite.",
   "TimeZone": "Vremenska zona",
   "Top5rooms": "Top 5 soba po upotrebi skladišta:",

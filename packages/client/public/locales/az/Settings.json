@@ -265,7 +265,7 @@
   "ThirdPartyResourceDescription": "Ehtiyat nüsxələr üçüncü tərəf hesablarda da (Dropbox, Box.com, OneDrive və ya Google Drive) saxlana bilər. Buna görə də, ehtiyat nüsxələrinizi yadda saxlaya bilmək üçün əvvəlcə öz üçüncü tərəf hesabınızı (Dropbox, Box.com, OneDrive və ya Google Drive) ilə əlaqələndirməlisiniz.",
   "ThirdPartyStorageDescription": "Ehtiyat nüsxələr üçüncü tərəf yaddaşlarında da saxlana bilər. Bunu etmək üçün əvvəlcə 'İnteqrasiya' bölməsində müvafiq xidmətə qoşulmalısınız. Əks halda, aşağıdakı ayarlar aktivləşdirilməyəcək.",
   "ThirdPartyTitleDescription": "Avtorizasiya açarları ilə öz sahənizə üçüncü tərəf xidmətlərini əlaqələndirə bilərsiniz. Facebook, Google və ya LinkedIn ilə asanlıqla giriş edin; Dropbox, OneDrive əlavə edərək Sənədlər modulundan olan fayllar üzərində oradan işləyin.",
-  "TimeLanguageSettingsDescription": "Ümumi DocSpace dilini və vaxtı təyin etmək üçün Dil və Saat Zonası Parametrlərini dəyişdirin.",
+  "TimeLanguageSettingsDescription": "Ümumi {{portalName}} dilini və vaxtı təyin etmək üçün Dil və Saat Zonası Parametrlərini dəyişdirin.",
   "TimeLanguageSettingsSave": "Müraciət etmək üçün aşağıdakı <strong>Saxla</strong> klikləyin.",
   "TimeZone": "Saat Qurşağı",
   "Top5rooms": "Yaddaş istifadəsinə görə ilk 5 otaq:",

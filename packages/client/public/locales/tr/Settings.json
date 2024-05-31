@@ -266,7 +266,7 @@
   "ThirdPartyResourceDescription": "Yedekleme, üçüncü taraf hesabınıza (Dropbox, Box.com, OneDrive veya Google Drive) kaydedilebilir. Üçüncü taraf hesabınızı öncelikle (Dropbox, Box.com, OneDrive veya Google Drive) bağlamanız gerekir, böylelikle yedeğinizi oraya kaydedebileceksiniz.",
   "ThirdPartyStorageDescription": "Yedekleme üçüncü taraf bir depolama alanına kaydedilebilir. Öncesinde, 'Entegrasyon' bölümünde ilgili hizmeti bağlamanız gerekir. Aksi halde aşağıdaki ayarlar etkin olmayacaktır.",
   "ThirdPartyTitleDescription": "Yetkilendirme anahtarları ile üçüncü taraf hizmetleri alanınıza bağlayabilirsiniz. Facebook, Google veya LinkedIn ile kolayca oturum açın; Belgeler modülünden orada depolanan dosyalarla çalışmak için Dropbox, OneDrive vb. ekleyin.",
-  "TimeLanguageSettingsDescription": "Ortak DocSpace dilini ve saatini ayarlamak için Dil ve Saat Dilimi Ayarlarını değiştirin.",
+  "TimeLanguageSettingsDescription": "Ortak {{portalName}} dilini ve saatini ayarlamak için Dil ve Saat Dilimi Ayarlarını değiştirin.",
   "TimeLanguageSettingsSave": "Uygulamak için alttaki <strong>Kaydet</strong>'e tıklayın.",
   "TimeZone": "Zaman Dilimi",
   "Top5rooms": "Depolama kullanımına göre ilk 5 oda:",

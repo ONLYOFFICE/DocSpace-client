@@ -231,7 +231,6 @@
   "ThirdPartyResourceDescription": "备份可以保存到您的第三方账户（Dropbox、Box.com、OneDrive或Google Drive）。您需要连接到您的第三方账户（Dropbox、Box.com、OneDrive或Google Drive），然后您才能将备份在第三方账户保存",
   "ThirdPartyStorageDescription": "备份文件可以保存在第三方存储中。保存之前，您需要在‘集成’板块连接相应的服务。否则该设置将无法激活。",
   "ThirdPartyTitleDescription": "您可使用授权密钥通过协作空间连接第三方服务。使用Fcebook、Google或领英轻松登录；添加Dropbox、OneDrive等服务以在文档模块中使用存储于其中的文件。",
-  "TimeLanguageSettingsDescription": "更改“语言和时区设置”，调整协作空间中常用的语言和时间。",
   "TimeLanguageSettingsSave": "点击底部的<strong>保存</strong>，使其生效。",
   "TimeZone": "时区",
   "Top5rooms": "存储空间用量排名前 5 位的房间：",

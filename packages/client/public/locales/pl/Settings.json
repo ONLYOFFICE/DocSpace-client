@@ -138,7 +138,7 @@
   "ImportFromNextcloud": "Importuj z Nextcloud",
   "ImportFromOnlyoffice": "Importuj z ONLYOFFICE Workspace",
   "ImportProcessingDescription": "Trwa migracja danych. Proszę czekać.",
-  "ImportSectionDescription": "Wybierz sekcje do zaimportowania. Pojawią się one w odpowiednich sekcjach DocSpace.",
+  "ImportSectionDescription": "Wybierz sekcje do zaimportowania. Pojawią się one w odpowiednich sekcjach {{portalName}}.",
   "IncludedInBusiness": "Stanowi część planu Biznes",
   "IntegrationRequest": "Brakuje Ci przydatnej integracji lub innego ważnego komponentu w ONLYOFFICE DocSpace? Zostaw nam wiadomość, a niezwłocznie przyjrzymy się sprawie.",
   "IPSecurity": "IP Security",

@@ -137,7 +137,7 @@
   "ImportFromNextcloud": "Uvoz iz Nextcloud",
   "ImportFromOnlyoffice": "Uvoz iz ONLYOFFICE Workspace",
   "ImportProcessingDescription": "Migracija podatkov v teku. Prosimo, počakajte.",
-  "ImportSectionDescription": "Izberite razdelke za uvoz. Prikazali se bodo v ustreznih razdelkih DocSpace.",
+  "ImportSectionDescription": "Izberite razdelke za uvoz. Prikazali se bodo v ustreznih razdelkih {{portalName}}.",
   "IncludedInBusiness": "Vključeno v poslovni načrt",
   "IntegrationRequest": "Pogrešate uporabno integracijo ali komponento v ONLYOFFICE DocSpace? Zaupajte zahtevo naši ekipi in preučili jo bomo.",
   "IPSecurity": "IP varnost",

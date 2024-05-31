@@ -145,7 +145,9 @@ export const getStepsData = (
     },
     {
       title: t("Settings:DataImport"),
-      description: t("Settings:ImportSectionDescription"),
+      description: t("Settings:ImportSectionDescription", {
+        portalName: PORTAL,
+      }),
       component: (
         <ImportStep
           t={t}

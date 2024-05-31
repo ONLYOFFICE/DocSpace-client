@@ -137,7 +137,7 @@
   "ImportFromNextcloud": "Importeren vanuit Nextcloud",
   "ImportFromOnlyoffice": "Importeren vanuit ONLYOFFICE Workspace",
   "ImportProcessingDescription": "Gegevensmigratie in uitvoering. Een moment geduld.",
-  "ImportSectionDescription": "Selecteer secties om te importeren. Ze verschijnen in de overeenkomstige secties van DocSpace.",
+  "ImportSectionDescription": "Selecteer secties om te importeren. Ze verschijnen in de overeenkomstige secties van {{portalName}}.",
   "IncludedInBusiness": "Inbegrepen in Business plan",
   "IntegrationRequest": "Mist u een handige integratie of component in ONLYOFFICE DocSpace? Laat een verzoek achter bij ons team en wij zullen ernaar kijken.",
   "IPSecurity": "IP Beveiliging",

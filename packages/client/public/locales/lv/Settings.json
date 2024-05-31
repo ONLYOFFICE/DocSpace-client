@@ -136,7 +136,7 @@
   "ImportFromNextcloud": "Importēt no Nextcloud",
   "ImportFromOnlyoffice": "Importēt no ONLYOFFICE darbvietas",
   "ImportProcessingDescription": "Notiek datu migrācija. Uzgaidiet.",
-  "ImportSectionDescription": "Atlasiet sadaļas importēšanai. Tās būs redzamas attiecīgajās DocSpace sadaļās.",
+  "ImportSectionDescription": "Atlasiet sadaļas importēšanai. Tās būs redzamas attiecīgajās {{portalName}} sadaļās.",
   "IncludedInBusiness": "Iekļauts Biznesa plānā",
   "IntegrationRequest": "Vai ONLYOFFICE DocSpace trūkst noderīgas integrācijas vai komponenta? Atstājiet pieprasījumu mūsu komandai, un mēs to izskatīsim.",
   "IPSecurity": "IP drošība",

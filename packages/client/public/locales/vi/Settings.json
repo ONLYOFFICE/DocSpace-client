@@ -136,7 +136,7 @@
   "ImportFromNextcloud": "Nhập từ Nextcloud",
   "ImportFromOnlyoffice": "Nhập từ ONLYOFFICE Workspace",
   "ImportProcessingDescription": "Đang di chuyển dữ liệu. Xin vui lòng chờ.",
-  "ImportSectionDescription": "Chọn các phần để nhập. Chúng sẽ xuất hiện trong các phần tương ứng của DocSpace.",
+  "ImportSectionDescription": "Chọn các phần để nhập. Chúng sẽ xuất hiện trong các phần tương ứng của {{portalName}}.",
   "IncludedInBusiness": "Đã bao gồm trong gói Business",
   "IntegrationRequest": "Bạn thấy thiếu một tích hợp hoặc thành phần hữu ích trong ONLYOFFICE DocSpace? Xin hãy gửi yêu cầu cho nhóm của chúng tôi và chúng tôi sẽ xem xét điều đó.",
   "IPSecurity": "Bảo mật IP",

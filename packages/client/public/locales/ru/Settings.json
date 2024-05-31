@@ -138,7 +138,7 @@
   "ImportFromNextcloud": "Импортировать из Nextcloud Workspace",
   "ImportFromOnlyoffice": "Импортировать из ONLYOFFICE Workspace",
   "ImportProcessingDescription": "Выполняется перенос данных. Пожалуйста, подождите.",
-  "ImportSectionDescription": "Выберите разделы для импорта. Они появятся в соответствующих разделах DocSpace.",
+  "ImportSectionDescription": "Выберите разделы для импорта. Они появятся в соответствующих разделах {{portalName}}.",
   "IncludedInBusiness": "Включено в тарифный план Business",
   "IntegrationRequest": "В ONLYOFFICE DocSpace отсутствует полезная интеграция или компонент? Отправьте запрос нашей команде, и мы его рассмотрим.",
   "InviteLetterTooltip": "Если этот флажок установлен, все новые пользователи получат письмо-приглашение с данными авторизации.",

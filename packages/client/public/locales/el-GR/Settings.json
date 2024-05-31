@@ -138,7 +138,7 @@
   "ImportFromNextcloud": "Εισαγωγή από το Nextcloud",
   "ImportFromOnlyoffice": "Εισαγωγή από το ONLYOFFICE Workspace",
   "ImportProcessingDescription": "Η μεταφορά δεδομένων βρίσκεται σε εξέλιξη. Περιμένετε.",
-  "ImportSectionDescription": "Επιλέξτε τμήματα για εισαγωγή. Θα εμφανιστούν στα αντίστοιχα τμήματα του DocSpace.",
+  "ImportSectionDescription": "Επιλέξτε τμήματα για εισαγωγή. Θα εμφανιστούν στα αντίστοιχα τμήματα του {{portalName}}.",
   "IncludedInBusiness": "Περιλαμβάνεται στο επιχειρηματικό σχέδιο",
   "IntegrationRequest": "Σας λείπει μια χρήσιμη ενσωμάτωση ή ένα στοιχείο στο DocSpace του ONLYOFFICE; Αφήστε ένα αίτημα στην ομάδα μας και θα το εξετάσουμε.",
   "IPSecurity": "Ασφάλεια IP",

@@ -137,7 +137,7 @@
   "ImportFromNextcloud": "Nextcloud’dan içe aktar",
   "ImportFromOnlyoffice": "ONLYOFFICE Çalışma Alanından içe aktar",
   "ImportProcessingDescription": "Veri migrasyonu devam ediyor. Lütfen bekleyin.",
-  "ImportSectionDescription": "İçe aktarma için bölümleri seçin. DocSpace’in ilgili bölümlerinde görüneceklerdir.",
+  "ImportSectionDescription": "İçe aktarma için bölümleri seçin. {{portalName}}’in ilgili bölümlerinde görüneceklerdir.",
   "IncludedInBusiness": "Business planına dahil",
   "IntegrationRequest": "ONLYOFFICE DocSpace'te yararlı bir entegrasyon veya bileşen mi eksik? Ekibimize bir talep bırakın, bununla ilgilenelim.",
   "IPSecurity": "IP Güvenliği",

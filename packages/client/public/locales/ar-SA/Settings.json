@@ -138,7 +138,7 @@
   "ImportFromNextcloud": "الاستيراد من Nextcloud",
   "ImportFromOnlyoffice": "الاستيراد من مساحة عمل ONLYOFFICE",
   "ImportProcessingDescription": "ترحيل البيانات قيد التقدم. الرجاء الانتظار.",
-  "ImportSectionDescription": "حدد أقساما للاستيراد. ستظهر في الأقسام المقابلة من DocSpace.",
+  "ImportSectionDescription": "حدد أقساما للاستيراد. ستظهر في الأقسام المقابلة من {{portalName}}.",
   "IncludedInBusiness": "تم إضافتها في خطة عمل",
   "IntegrationRequest": "هل تفتقد تكاملاً مفيداً أو مكوناً مفيداً في ONLYOFFICE (المجموعة المكتبية المتكاملة ل DocSpace)؟ اترك طلباً لفريقنا و سننظر في ذلك.",
   "IPSecurity": "أمان بروتوكول الانترنت",

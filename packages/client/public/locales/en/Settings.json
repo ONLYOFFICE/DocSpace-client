@@ -139,7 +139,7 @@
   "ImportFromNextcloud": "Import from Nextcloud",
   "ImportFromOnlyoffice": "Import from ONLYOFFICE Workspace",
   "ImportProcessingDescription": "Data migration in progress. Please wait.",
-  "ImportSectionDescription": "Select sections for import. They will appear in the corresponding sections of DocSpace.",
+  "ImportSectionDescription": "Select sections for import. They will appear in the corresponding sections of {{portalName}}.",
   "IncludedInBusiness": "Included in Business plan",
   "IntegrationRequest": "Missing a useful integration or component in ONLYOFFICE DocSpace? Leave a request to our team and we will look into that.",
   "InviteLetterTooltip": "If checked, all new users will receive a invite letter with authorization details.",

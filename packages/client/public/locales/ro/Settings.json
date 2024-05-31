@@ -138,7 +138,7 @@
   "ImportFromNextcloud": "Import din Nextcloud",
   "ImportFromOnlyoffice": "Import din ONLYOFFICE Workspace",
   "ImportProcessingDescription": "Migrare de date în desfășurare Vă rugăm așteptați.",
-  "ImportSectionDescription": "Selectați secțiuni pentru imoprt. Aceste secţiuni  vor apărea în secțiunile corespunzătoare ale spațiului DocSpace.",
+  "ImportSectionDescription": "Selectați secțiuni pentru imoprt. Aceste secţiuni  vor apărea în secțiunile corespunzătoare ale spațiului {{portalName}}.",
   "IncludedInBusiness": "Inclus în abonamentul Business",
   "IntegrationRequest": "Vă lipsește o soluție de integrare sau o componentă utilă în spațiul DocSpace? Trimiteți o solicitare către echipa noastră și vom analiza propunerea dvs.",
   "IPSecurity": "Securitate IP",

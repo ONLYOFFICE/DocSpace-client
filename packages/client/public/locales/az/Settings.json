@@ -136,7 +136,7 @@
   "ImportFromNextcloud": "Nextcloud-dan idxal edin",
   "ImportFromOnlyoffice": "ONLYOFFICE Workspace-dən idxal edin",
   "ImportProcessingDescription": "Məlumat köçürülməsi davam edir. Zəhmət olmasa, gözləyin.",
-  "ImportSectionDescription": "İdxal etmək üçün bölmələri seçin. Onlar DocSpace-in müvafiq bölmələrində görünəcək.",
+  "ImportSectionDescription": "İdxal etmək üçün bölmələri seçin. Onlar {{portalName}}-in müvafiq bölmələrində görünəcək.",
   "IncludedInBusiness": "Biznes plana daxildir",
   "IntegrationRequest": "ONLYOFFICE DocSpace-də faydalı inteqrasiya və ya komponent yoxdur? Komandamıza bir sorğu buraxın və biz buna baxacağıq.",
   "IPSecurity": "IP Təhlükəsizliyi",

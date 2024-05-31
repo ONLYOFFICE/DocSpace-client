@@ -56,7 +56,9 @@ export const getGoogleStepDescription = (
         </>
       );
     case 4:
-      return t("Settings:ImportSectionDescription");
+      return t("Settings:ImportSectionDescription", {
+        portalName: PORTAL,
+      });
     case 5:
       return t("Settings:ImportProcessingDescription");
     case 6:
@@ -98,7 +100,9 @@ export const getWorkspaceStepDescription = (
         </>
       );
     case 4:
-      return t("Settings:ImportSectionDescription");
+      return t("Settings:ImportSectionDescription", {
+        portalName: PORTAL,
+      });
     case 5:
       return t("Settings:ImportProcessingDescription");
     case 6:

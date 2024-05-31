@@ -1,4 +1,4 @@
 {
   "PortalRestoring": "{{portalName}} geri yükleme",
-  "PreparationPortalDescription": "Geri yükleme süreci tamamlandığında, otomatik olarak DocSpace'inize yönlendirileceksiniz."
+  "PreparationPortalDescription": "Geri yükleme süreci tamamlandığında, otomatik olarak {{portalName}}'inize yönlendirileceksiniz."
 }

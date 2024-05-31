@@ -107,7 +107,7 @@
   "DocumentService": "Usługi dokumentacyjne",
   "DocumentServiceLocationHeaderHelp": "Document Service to usługa serwerowa umożliwiająca edycję dokumentów oraz konwersję plików do odpowiedniego formatu OfficeOpen XML. Lokalizacja Document Servicu określa adres serwera z zainstalowanymi usługami dokumentów.",
   "DocumentServiceLocationUrlApi": "Adres usługi edycji dokumentu",
-  "DocumentServiceLocationUrlInternal": "Adres Document Service dla żądań z DocSpace",
+  "DocumentServiceLocationUrlInternal": "Adres Document Service dla żądań z {{portalName}}",
   "DocumentServiceLocationUrlPortal": "Adres DocSpace dla żądań z Document Service",
   "DownloadCopy": "Pobierz kopię",
   "DownloadLog": "Rejestr pobranych plików",

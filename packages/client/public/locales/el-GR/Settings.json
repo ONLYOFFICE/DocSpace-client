@@ -107,7 +107,7 @@
   "DocumentService": "Υπηρεσία εγγράφων",
   "DocumentServiceLocationHeaderHelp": "Η Υπηρεσία εγγράφων είναι η υπηρεσία διακομιστή που επιτρέπει την εκτέλεση της επεξεργασίας εγγράφων και επιτρέπει τη μετατροπή του αρχείου εγγράφου στην κατάλληλη μορφή OfficeOpen XML.",
   "DocumentServiceLocationUrlApi": "Διεύθυνση υπηρεσίας επεξεργασίας εγγράφων",
-  "DocumentServiceLocationUrlInternal": "Διεύθυνση υπηρεσίας εγγράφων για αιτήσεις από το DocSpace",
+  "DocumentServiceLocationUrlInternal": "Διεύθυνση υπηρεσίας εγγράφων για αιτήσεις από το {{portalName}}",
   "DocumentServiceLocationUrlPortal": "Διεύθυνση DocSpace για αιτήσεις από την υπηρεσία εγγράφων",
   "DownloadCopy": "Κατεβάστε το αντίγραφο",
   "DownloadLog": "Λήψη αρχείου καταγραφής",

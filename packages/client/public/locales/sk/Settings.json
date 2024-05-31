@@ -106,7 +106,7 @@
   "DocumentService": "Dokumentová služba",
   "DocumentServiceLocationHeaderHelp": "Služba dokumentu je služba servera, ktorá umožňuje vykonávať úpravy dokumentov a umožňuje konvertovanie súboru dokumentu do vhodného formátu OfficeOpen XML. Umiestnenie služby dokumentov určuje adresu servera s nainštalovanými službami dokumentov.",
   "DocumentServiceLocationUrlApi": "Adresa editovacej služby Dokumentu",
-  "DocumentServiceLocationUrlInternal": "Adresa Služby dokumentu pre požiadavky z DocSpace",
+  "DocumentServiceLocationUrlInternal": "Adresa Služby dokumentu pre požiadavky z {{portalName}}",
   "DocumentServiceLocationUrlPortal": "Adresa DocSpace pre požiadavky zo Služby dokumentu",
   "DownloadCopy": "Stiahnuť si kópiu",
   "DownloadLog": "Stiahnuť log",

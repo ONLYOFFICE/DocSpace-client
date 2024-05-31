@@ -108,7 +108,7 @@
   "DocumentService": "Document Service",
   "DocumentServiceLocationHeaderHelp": "Document Service is the server service which allows to perform the document editing and allows to convert the document file into the appropriate OfficeOpen XML format. Document service location specifies the address of the server with the document services installed.",
   "DocumentServiceLocationUrlApi": "Document Editing Service Address",
-  "DocumentServiceLocationUrlInternal": "Document Service address for requests from the DocSpace",
+  "DocumentServiceLocationUrlInternal": "Document Service address for requests from the {{portalName}}",
   "DocumentServiceLocationUrlPortal": "DocSpace address for requests from the Document Service",
   "DownloadCopy": "Download copy",
   "DownloadLog": "Download log",

@@ -106,7 +106,7 @@
   "DocumentService": "Փաստաթղթերի ծառայություն",
   "DocumentServiceLocationHeaderHelp": "Փաստաթղթերի ծառայությունը սերվերային ծառայություն է, որը թույլ է տալիս կատարել փաստաթղթերի խմբագրում և թույլ է տալիս փաստաթղթի ֆայլը փոխարկել համապատասխան OfficeOpen XML ձևաչափի:",
   "DocumentServiceLocationUrlApi": "Փաստաթղթերի խմբագրման ծառայության հասցեն",
-  "DocumentServiceLocationUrlInternal": "Փաստաթղթերի ծառայության հասցեն՝ հարցումների համար DocSpace-ից",
+  "DocumentServiceLocationUrlInternal": "Փաստաթղթերի ծառայության հասցեն՝ հարցումների համար {{portalName}}-ից",
   "DocumentServiceLocationUrlPortal": "DocSpace հասցեն Փաստաթղթերի ծառայության հարցումների համար",
   "DownloadCopy": "Ներբեռնել պատճենը",
   "DownloadLog": "Ներբեռնման մատյան",

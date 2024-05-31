@@ -105,7 +105,7 @@
   "DocumentService": "ලේඛන සේවාව",
   "DocumentServiceLocationHeaderHelp": "ලේඛන සේවාව යනු ලේඛන සංස්කරණයට පහසුකම් සලසන සේවාදායක සේවාව වන අතර ලේඛන ගොනුව සුදුසු ඔෆිස් ඕපන් XML ආකෘතියකට හැරවීමට ඉඩ සලසයි. ලේඛන සේවාවේ ස්ථානයේ සේවාදායකයේ ලිපිනය සමඟ ස්ථාපිත ලේඛන සේවා සඳහන් වේ.",
   "DocumentServiceLocationUrlApi": "ලේඛන සංස්කරණ සේවාවේ ලිපිනය",
-  "DocumentServiceLocationUrlInternal": "DocSpace වෙතින් ඉල්ලීම් සඳහා ලේඛන සේවාවේ ලිපිනය",
+  "DocumentServiceLocationUrlInternal": "{{portalName}} වෙතින් ඉල්ලීම් සඳහා ලේඛන සේවාවේ ලිපිනය",
   "DocumentServiceLocationUrlPortal": "ලේඛන සේවාවෙන් ඉල්ලීම් සඳහා DocSpace ලිපිනය",
   "DownloadCopy": "පිටපතක් බාගන්න",
   "DownloadLog": "සටහන බාගන්න",

@@ -106,7 +106,7 @@
   "DocumentService": "문서 서비스",
   "DocumentServiceLocationHeaderHelp": "문서 서비스는 문서를 편집하고 문서 파일을 적절한 OfficeOpen XML 형식으로 변환할 수 있는 서버 서비스입니다. 문서 서비스 위치는 문서 서비스가 설치된 서버의 주소를 지정합니다.",
   "DocumentServiceLocationUrlApi": "문서 편집 서비스 주소",
-  "DocumentServiceLocationUrlInternal": "DocSpace의 요청을 위한 문서 서비스 주소",
+  "DocumentServiceLocationUrlInternal": "{{portalName}}의 요청을 위한 문서 서비스 주소",
   "DocumentServiceLocationUrlPortal": "문서 서비스의 요청을 위한 DocSpace 주소",
   "DownloadCopy": "복사본 다운로드",
   "DownloadLog": "로그 다운로드",

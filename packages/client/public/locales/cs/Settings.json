@@ -139,7 +139,7 @@
   "ImportProcessingDescription": "Probíhá migrace dat. Vyčkejte prosím.",
   "ImportSectionDescription": "Vyberte oddíly pro import. Objeví se v odpovídajících sekcích {{portalName}}.",
   "IncludedInBusiness": "Zahrnuto v obchodním plánu",
-  "IntegrationRequest": "Chybí vám v ONLYOFFICE DocSpace užitečná integrace nebo komponenta? Zanechte požadavek našemu týmu a my se na něj podíváme.",
+  "IntegrationRequest": "Chybí vám v ONLYOFFICE {{portalName}} užitečná integrace nebo komponenta? Zanechte požadavek našemu týmu a my se na něj podíváme.",
   "IPSecurity": "Zabezpečení IP",
   "IPSecurityMobileDescription": "Zabezpečení IP slouží k omezení přihlašování k portálu ze všech IP adres s výjimkou určitých adres.",
   "IPSecuritySettingDescription": "Konfigurací funkce IP Security omezíte možnost přihlášení na vybrané IP adresy. Použijte buď přesné IP adresy ve formátu IPv4, rozsah IP nebo maskování CIDR. Zabezpečení IP nefunguje pro vlastníky prostoru, ti mohou do prostoru přistupovat z libovolné IP adresy.",

@@ -138,7 +138,7 @@
   "ImportProcessingDescription": "Notiek datu migrācija. Uzgaidiet.",
   "ImportSectionDescription": "Atlasiet sadaļas importēšanai. Tās būs redzamas attiecīgajās {{portalName}} sadaļās.",
   "IncludedInBusiness": "Iekļauts Biznesa plānā",
-  "IntegrationRequest": "Vai ONLYOFFICE DocSpace trūkst noderīgas integrācijas vai komponenta? Atstājiet pieprasījumu mūsu komandai, un mēs to izskatīsim.",
+  "IntegrationRequest": "Vai ONLYOFFICE {{portalName}} trūkst noderīgas integrācijas vai komponenta? Atstājiet pieprasījumu mūsu komandai, un mēs to izskatīsim.",
   "IPSecurity": "IP drošība",
   "IPSecurityMobileDescription": "IP drošība tiek izmantota, lai ierobežotu pieteikšanos portālā no visām IP adresēm, izņemot noteiktas adreses.",
   "IPSecuritySettingDescription": "Konfigurējiet IP drošību, lai ierobežotu pieteikšanās iespējas, izvēloties IP adreses. Izmantojiet precīzas IP adreses IPv4 formātā, IP diapazonu vai CIDR maskēšanu. IP drošība nedarbojas telpu īpašniekiem, viņi var piekļūt vietai no jebkuras IP adreses.",

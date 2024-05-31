@@ -140,7 +140,7 @@
   "ImportProcessingDescription": "Migracija podataka je u toku. Molimo sačekajte.",
   "ImportSectionDescription": "Izaberite sekcije za uvoz. One će se pojaviti u odgovarajućim sekcijama {{portalName}}-a.",
   "IncludedInBusiness": "Uključeno u Poslovni plan",
-  "IntegrationRequest": "Nedostaje vam korisna integracija ili komponenta u ONLYOFFICE DocSpace-u? Ostavite zahtev našem timu i istražićemo to.",
+  "IntegrationRequest": "Nedostaje vam korisna integracija ili komponenta u ONLYOFFICE {{portalName}}-u? Ostavite zahtev našem timu i istražićemo to.",
   "IPSecurity": "IP Bezbednost",
   "IPSecurityMobileDescription": "IP bezbednost se koristi kako bi se ograničio pristup portalu sa svih IP adresa osim određenih adresa.",
   "IPSecuritySettingDescription": "Konfigurišite IP bezbednost kako biste ograničili mogućnost prijave na odabrane IP adrese. Koristite tačne IP adrese u IPv4 formatu, opseg IP adresa ili CIDR maskiranje. IP bezbednost ne funkcioniše za vlasnike prostora, oni mogu pristupiti prostoru sa bilo koje IP adrese.",

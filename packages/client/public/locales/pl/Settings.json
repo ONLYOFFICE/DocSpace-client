@@ -140,7 +140,7 @@
   "ImportProcessingDescription": "Trwa migracja danych. Proszę czekać.",
   "ImportSectionDescription": "Wybierz sekcje do zaimportowania. Pojawią się one w odpowiednich sekcjach {{portalName}}.",
   "IncludedInBusiness": "Stanowi część planu Biznes",
-  "IntegrationRequest": "Brakuje Ci przydatnej integracji lub innego ważnego komponentu w ONLYOFFICE DocSpace? Zostaw nam wiadomość, a niezwłocznie przyjrzymy się sprawie.",
+  "IntegrationRequest": "Brakuje Ci przydatnej integracji lub innego ważnego komponentu w ONLYOFFICE {{portalName}}? Zostaw nam wiadomość, a niezwłocznie przyjrzymy się sprawie.",
   "IPSecurity": "IP Security",
   "IPSecurityMobileDescription": "IP Security służy do ograniczenia możliwości logowania w portalu ze wszystkich adresów IP, z wyjątkiem wybranych.",
   "IPSecuritySettingDescription": "Skonfiguruj IP Security, aby ograniczyć możliwość logowania do wybranych adresów IP. Użyj dokładnych adresów IP w formacie IPv4, zakresu IP lub maskowania CIDR. IP Security nie obejmuje właścicieli obszarów roboczych – mogą oni uzyskać dostęp do swojego obszaru z dowolnego adresu IP.",

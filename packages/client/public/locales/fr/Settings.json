@@ -137,7 +137,7 @@
   "ImportProcessingDescription": "Migration des données est en cours d'exécution Veuillez patienter.",
   "ImportSectionDescription": "Sélectionnez les sections à importer. Ces sections apparaîtront dans les sections appropriées de l'espace {{portalName}}.",
   "IncludedInBusiness": "Inclus dans le plan Business",
-  "IntegrationRequest": "Il manque une intégration ou un composant utile dans ONLYOFFICE DocSpace ? Laissez une demande à notre équipe et nous nous en occuperons.",
+  "IntegrationRequest": "Il manque une intégration ou un composant utile dans ONLYOFFICE {{portalName}} ? Laissez une demande à notre équipe et nous nous en occuperons.",
   "InviteLetterTooltip": "Si cette case est cochée, tous les nouveaux utilisateurs recevront une lettre d'invitation avec les détails d'autorisation.",
   "IPSecurity": "Sécurité IP",
   "IPSecurityMobileDescription": "La sécurité IP est utilisée pour restreindre la connexion au portail à partir de toutes les adresses IP, à l'exception de certaines adresses.",

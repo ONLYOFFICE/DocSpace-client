@@ -5,7 +5,7 @@
   "CreateSpaceDescription": "Ha conectado correctamente su dominio a su dirección IP. Para editar la configuración de la dirección del espacio, debe establecer el nombre futuro de {{portalName}}",
   "CreatingDocspace": "Creando un nuevo {{portalName}}",
   "CurrentSpace": "Espacio actual",
-  "DeletePortalText": "Por favor, tenga en cuenta: solo el propietario puede eliminar el DocSpace seleccionado. El propietario de <1>{{domain}}</1> es <1>{{displayName}}</1> (<5>{{email}}</5>). Si no es el propietario, no podrá acceder a la configuración de eliminación de DocSpace haciendo clic en el botón ELIMINAR y será redirigido a la sección Salas.",
+  "DeletePortalText": "Por favor, tenga en cuenta: solo el propietario puede eliminar el {{portalName}} seleccionado. El propietario de <1>{{domain}}</1> es <1>{{displayName}}</1> (<5>{{email}}</5>). Si no es el propietario, no podrá acceder a la configuración de eliminación de {{portalName}} haciendo clic en el botón ELIMINAR y será redirigido a la sección Salas.",
   "DocspaceName": "Nombre de {{portalName}}",
   "DomainName": "Nombre de dominio",
   "DomainNotFound": "No se ha encontrado el dominio, verifique la configuración de DNS",

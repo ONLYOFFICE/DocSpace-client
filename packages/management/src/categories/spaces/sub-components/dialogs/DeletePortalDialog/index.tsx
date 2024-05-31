@@ -34,6 +34,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
 import { useStore } from "SRC_DIR/store";
 import { Link } from "@docspace/shared/components/link";
+import { PORTAL } from "@docspace/shared/constants";
 
 const DeletePortalDialog = () => {
   const { spacesStore, settingsStore } = useStore();
@@ -74,10 +75,11 @@ const DeletePortalDialog = () => {
           domain={domain}
           displayName={displayName}
           email={email}
+          portalName={PORTAL}
         >
           Please note: only the owner is able to delete the selected DocSpace.
-          The owner of <strong>{{ domain }}</strong> is{" "}
-          <strong>{{ displayName }}</strong>{" "}
+          The owner of <strong>{{ domain }}</strong> is
+          <strong>{{ displayName }}</strong>
           <Link
             className="email-link"
             type="page"
@@ -86,11 +88,11 @@ const DeletePortalDialog = () => {
             color={currentColorScheme?.main?.accent}
             title={email}
           >
-            {{ email }}{" "}
+            {{ email }}
           </Link>
           . If you are not the owner, you will not be able to access the
-          DocSpace deletion settings by clicking the DELETE button and will be
-          redirected to the Rooms section.
+          {{ portalName: PORTAL }} deletion settings by clicking the DELETE
+          button and will be redirected to the Rooms section.
         </Trans>
       </ModalDialog.Body>
       <ModalDialog.Footer>

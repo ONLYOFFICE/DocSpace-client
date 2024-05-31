@@ -5,7 +5,7 @@
   "CreateSpaceDescription": "Uspešno ste povezali svoj domen na vašu IP adresu. Da biste uredili podešavanja adrese prostora, potrebno je da postavite buduće ime {{portalName}}-a",
   "CreatingDocspace": "Kreiranje novog {{portalName}}-a",
   "CurrentSpace": "Trenutni prostor",
-  "DeletePortalText": "Imajte na umu: samo vlasnik može da izbriše izabrani DocSpace. Vlasnik <1>{{domain}}</1> je <1>{{displayName}}</1> (<5>{{email}}</5>). Ako niste vlasnik, nećete moći da pristupite podešavanjima brisanja DocSpace-a klikom na dugme IZBRIŠI i bićete preusmereni na odeljak Sobe.",
+  "DeletePortalText": "Imajte na umu: samo vlasnik može da izbriše izabrani {{portalName}}. Vlasnik <1>{{domain}}</1> je <1>{{displayName}}</1> (<5>{{email}}</5>). Ako niste vlasnik, nećete moći da pristupite podešavanjima brisanja {{portalName}}-a klikom na dugme IZBRIŠI i bićete preusmereni na odeljak Sobe.",
   "DocspaceName": "{{portalName}} ime",
   "DomainName": "Domen ime",
   "DomainNotFound": "Domen nije pronađen, molimo vas proverite u DNS podešavanjima",

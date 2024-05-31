@@ -5,7 +5,7 @@
   "CreateSpaceDescription": "You have successfully connected your domain to your IP address. To edit the space address settings, you need to set the future {{portalName}} name",
   "CreatingDocspace": "Creating new {{portalName}}",
   "CurrentSpace": "Current space",
-  "DeletePortalText": "Please note: only the owner is able to delete the selected DocSpace. The owner of <1>{{domain}}</1> is <1>{{displayName}}</1> (<5>{{email}}</5>). If you are not the owner, you will not be able to access the DocSpace deletion settings by clicking the DELETE button and will be redirected to the Rooms section.",
+  "DeletePortalText": "Please note: only the owner is able to delete the selected {{portalName}}. The owner of <1>{{domain}}</1> is <1>{{displayName}}</1> (<5>{{email}}</5>). If you are not the owner, you will not be able to access the {{portalName}} deletion settings by clicking the DELETE button and will be redirected to the Rooms section.",
   "DocspaceName": "{{portalName}} name",
   "DomainName": "Domain name",
   "DomainNotFound": "Domain not found, please check in DNS settings",

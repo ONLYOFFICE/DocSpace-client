@@ -8,6 +8,6 @@
   "RoomsActions": "කාමරවල ගොනු සමඟ ක්‍රියාමාර්ග",
   "RoomsActivity": "කාමරයේ ක්‍රියාකාරකම්",
   "RoomsActivityDescription": "පැයින් පැය දැනුම්දීම්. ඔබගේ කාමරවල සියළුම ක්‍රියාකාරකම් ගැන යාවත්කාලීනව සිටින්න.",
-  "UsefulTips": "ප්‍රයෝජනවත් DocSpace ඉඟි",
-  "UsefulTipsDescription": "DocSpace ගැන ප්‍රයෝජනවත් මාර්ගෝපදේශ ලබා ගන්න"
+  "UsefulTips": "ප්‍රයෝජනවත් {{portalName}} ඉඟි",
+  "UsefulTipsDescription": "{{portalName}} ගැන ප්‍රයෝජනවත් මාර්ගෝපදේශ ලබා ගන්න"
 }

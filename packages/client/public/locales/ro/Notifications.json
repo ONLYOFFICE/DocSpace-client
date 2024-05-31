@@ -8,6 +8,6 @@
   "RoomsActions": "Acţiunile efectuate cu fişierele în Sale",
   "RoomsActivity": "Activitatea sălilor",
   "RoomsActivityDescription": "Notificări la fiecare oră. Rămâneți la curent cu activităţile în sălile dvs.",
-  "UsefulTips": "Sfaturi utile DocSpace",
-  "UsefulTipsDescription": "Obţineţi instrucţiuni utile privind DocSpace"
+  "UsefulTips": "Sfaturi utile {{portalName}}",
+  "UsefulTipsDescription": "Obţineţi instrucţiuni utile privind {{portalName}}"
 }

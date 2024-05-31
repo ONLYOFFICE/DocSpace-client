@@ -8,6 +8,6 @@
   "RoomsActions": "Գործողություններ ֆայլերի հետ Սենյակներում",
   "RoomsActivity": "Սենյակների գործունեություն",
   "RoomsActivityDescription": "Ժամային ծանուցումներ. Տեղեկացեք ձեր սենյակներում կատարվող բոլոր գործողությունների մասին:",
-  "UsefulTips": "Օգտակար DocSpace խորհուրդներ",
-  "UsefulTipsDescription": "Ստացեք օգտակար ուղեցույցներ DocSpace-ի մասին"
+  "UsefulTips": "Օգտակար {{portalName}} խորհուրդներ",
+  "UsefulTipsDescription": "Ստացեք օգտակար ուղեցույցներ {{portalName}}-ի մասին"
 }

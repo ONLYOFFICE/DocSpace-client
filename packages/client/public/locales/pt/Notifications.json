@@ -8,6 +8,6 @@
   "RoomsActions": "Ações com ficheiros em Salas",
   "RoomsActivity": "Atividade das Salas",
   "RoomsActivityDescription": "Notificações de hora em hora. Esteja sempre a par de todas as atividades nos seus quartos.",
-  "UsefulTips": "Dicas úteis para o DocSpace",
-  "UsefulTipsDescription": "Obtenha guias úteis sobre o DocSpace"
+  "UsefulTips": "Dicas úteis para o {{portalName}}",
+  "UsefulTipsDescription": "Obtenha guias úteis sobre o {{portalName}}"
 }

@@ -7,6 +7,5 @@
   "RoomsActions": "Huoneissa olevat toiminnot tiedostoineen",
   "RoomsActivity": "Huoneen toiminta",
   "RoomsActivityDescription": "Ilmoitukset tunneittain. Pysy ajan tasalla kaikesta toiminnasta huoneissasi.",
-  "UsefulTips": "Hyödylliset DocSpace-vinkit",
-  "UsefulTipsDescription": "Saa hyödyllisiä oppaita DocSpacesta"
+  "UsefulTips": "Hyödylliset {{portalName}}-vinkit"
 }

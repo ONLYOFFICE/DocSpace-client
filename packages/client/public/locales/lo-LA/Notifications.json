@@ -8,6 +8,6 @@
   "RoomsActions": "ຄຳສັ່ງກັບໄຟລ໌ຢູ່ໃນຫ້ອງ",
   "RoomsActivity": "ກິດ​ຈະ​ກໍາ​ຫ້ອງ​",
   "RoomsActivityDescription": "ການແຈ້ງເຕືອນທຸກຊົ່ວໂມງ. ຕິດຕາມການເຄື່ອນໄຫວທັງໝົດໃນຫ້ອງຂອງເຈົ້າ.",
-  "UsefulTips": "ຄໍາແນະນໍາ DocSpace ທີ່ເປັນປະໂຫຍດ",
-  "UsefulTipsDescription": "ຂໍຄຳແນະນຳທີ່ເປັນປະໂຫຍດກ່ຽວກັບ DocSpace"
+  "UsefulTips": "ຄໍາແນະນໍາ {{portalName}} ທີ່ເປັນປະໂຫຍດ",
+  "UsefulTipsDescription": "ຂໍຄຳແນະນຳທີ່ເປັນປະໂຫຍດກ່ຽວກັບ {{portalName}}"
 }

@@ -8,6 +8,6 @@
   "RoomsActions": "Akce se soubory v místnostech",
   "RoomsActivity": "Činnost v místnostech",
   "RoomsActivityDescription": "Hodinová oznámení. Dostávejte informace o všech aktivitách ve svých místnostech.",
-  "UsefulTips": "Užitečné tipy pro DocSpace",
-  "UsefulTipsDescription": "Získejte užitečné příručky o DocSpace"
+  "UsefulTips": "Užitečné tipy pro {{portalName}}",
+  "UsefulTipsDescription": "Získejte užitečné příručky o {{portalName}}"
 }

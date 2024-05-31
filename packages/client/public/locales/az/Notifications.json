@@ -8,6 +8,6 @@
   "RoomsActions": "Otaqlarda fayllarla əməliyyatlar",
   "RoomsActivity": "Otaqların fəaliyyəti",
   "RoomsActivityDescription": "Saatlıq bildirişlər. Otaqlarınızdakı bütün hərəkətlərdən xəbərdar olun",
-  "UsefulTips": "Faydalı DocSpace məsləhətləri",
-  "UsefulTipsDescription": "DocSpace-də faydalı təlimatlar əldə edin"
+  "UsefulTips": "Faydalı {{portalName}} məsləhətləri",
+  "UsefulTipsDescription": "{{portalName}}-də faydalı təlimatlar əldə edin"
 }

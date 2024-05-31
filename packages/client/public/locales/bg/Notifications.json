@@ -8,6 +8,6 @@
   "RoomsActions": "Действия с файлове в Стаи",
   "RoomsActivity": "Активност на стаите",
   "RoomsActivityDescription": "Ежечасни известия. Бъдете в течение за всички дейности във вашите стаи.",
-  "UsefulTips": "Полезни съвети за DocSpace",
-  "UsefulTipsDescription": "Поучавайте полезни напътствия за DocSpace"
+  "UsefulTips": "Полезни съвети за {{portalName}}",
+  "UsefulTipsDescription": "Поучавайте полезни напътствия за {{portalName}}"
 }

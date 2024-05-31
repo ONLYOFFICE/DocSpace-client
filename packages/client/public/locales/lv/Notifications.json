@@ -8,6 +8,6 @@
   "RoomsActions": "Darbības ar failiem telpās",
   "RoomsActivity": "Telpu aktivitāte",
   "RoomsActivityDescription": "Ik stundu paziņojumi. Esiet informēts par visām aktivitātēm savās telpās",
-  "UsefulTips": "Noderīgi DocSpace padomi",
-  "UsefulTipsDescription": "Iegūt noderīgus ceļvežus par DocSpace"
+  "UsefulTips": "Noderīgi {{portalName}} padomi",
+  "UsefulTipsDescription": "Iegūt noderīgus ceļvežus par {{portalName}}"
 }

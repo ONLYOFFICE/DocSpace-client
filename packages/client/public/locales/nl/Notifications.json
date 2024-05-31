@@ -8,6 +8,6 @@
   "RoomsActions": "Acties met bestanden in Kamers",
   "RoomsActivity": "Kamers activiteit",
   "RoomsActivityDescription": "Uurlijkse meldingen. Blijf op de hoogte van alle activiteiten in uw kamers.",
-  "UsefulTips": "Handige DocSpace tips",
-  "UsefulTipsDescription": "Ontvang handige gidsen over DocSpace"
+  "UsefulTips": "Handige {{portalName}} tips",
+  "UsefulTipsDescription": "Ontvang handige gidsen over {{portalName}}"
 }

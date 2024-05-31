@@ -8,6 +8,6 @@
   "RoomsActions": "ルームで行われたファイルのアクション",
   "RoomsActivity": "ルームのアクティビティ",
   "RoomsActivityDescription": "1時間ごとに通知：ルームの全アクティビティを知らせます。",
-  "UsefulTips": "DocSpaceの使い方やヒント",
-  "UsefulTipsDescription": "DocSpaceに関するお役立ちガイドをゲット"
+  "UsefulTips": "{{portalName}}の使い方やヒント",
+  "UsefulTipsDescription": "{{portalName}}に関するお役立ちガイドをゲット"
 }

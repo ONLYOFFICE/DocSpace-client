@@ -60,5 +60,12 @@
   "LdapSettingsSubjectName": "Subject name",
   "LdapSettingsValidFrom": "Valid from",
   "LdapSettingsValidUntil": "Valid until",
-  "LdapSettingsUniqueHash": "Unique hash"
+  "LdapSettingsUniqueHash": "Unique hash",
+  "LdapSettingsCertExpired": "Certificate is expired",
+  "LdapSettingsCertCnNoMatch": "Certificate name does not match hostname",
+  "LdapSettingsCertIssuerChaining": "No certificate  issuer chain was provided",
+  "LdapSettingsCertUntrustedCa": "Certificate Authority who issued the certificate is not trusted",
+  "LdapSettingsCertUntrustedRoot": "Root Certificate Authority who issued the certificate is not trusted",
+  "LdapSettingsCertMalformed": "Malformed certificate",
+  "LdapSettingsCertUnrecognizedError": "Unrecognized Error"
 }

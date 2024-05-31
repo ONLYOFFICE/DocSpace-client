@@ -23,10 +23,13 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Box } from "@docspace/shared/components/box";
+import { Base } from "@docspace/shared/themes";
 
 const StyledCertificateDialogBody = styled(Box)`
+  max-width: 520px;
+
   .ldap-settings-crt-confirmation {
     padding-bottom: 16px;
   }
@@ -35,11 +38,23 @@ const StyledCertificateDialogBody = styled(Box)`
     display: flex;
     flex-direction: column;
     gap: 4px;
-    background-color: #f8f9f9;
-    border: 1px solid ${(props) => (props.hasError ? "#F24724" : "#eceef1")};
+    background-color: ${(props) =>
+      props.theme.isBase ? "#f8f9f9" : "#474747"};
+    border: 1px solid
+      ${(props) =>
+        props.hasError
+          ? "#F24724"
+          : props.theme.isBase
+            ? "#eceef1"
+            : "#474747"};
     border-radius: 3px;
     padding: 4px;
+    margin-bottom: 8px;
   }
 `;
+
+StyledCertificateDialogBody.defaultProps = {
+  theme: Base,
+};
 
 export default StyledCertificateDialogBody;

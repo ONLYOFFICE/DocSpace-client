@@ -14,6 +14,7 @@ import ProgressContainer from "./ProgressContainer";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import StyledLdapPage from "../styled-components/StyledLdapPage";
+import CertificateDialog from "./CertificateDialog";
 
 import { useNavigate } from "react-router-dom";
 import { isMobile } from "@docspace/shared/utils/device";
@@ -26,6 +27,7 @@ const SettingsContainer = ({
   isSettingsShown,
   isLdapAvailable,
   isMobileView,
+  isCertificateDialogVisible,
 }) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
   const navigate = useNavigate();
@@ -70,6 +72,8 @@ const SettingsContainer = ({
           <ButtonsContainer />
 
           <ProgressContainer operation={LDAPOpeation.SaveAndSync} />
+
+          {isCertificateDialogVisible && <CertificateDialog />}
         </>
       )}
     </>
@@ -92,7 +96,7 @@ const SettingsContainer = ({
 export default inject(({ settingsStore, currentQuotaStore, ldapStore }) => {
   const { isLdapAvailable } = currentQuotaStore;
   const { currentDeviceType, theme } = settingsStore;
-  const { isSettingsShown } = ldapStore;
+  const { isSettingsShown, isCertificateDialogVisible } = ldapStore;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
@@ -101,5 +105,6 @@ export default inject(({ settingsStore, currentQuotaStore, ldapStore }) => {
     isSettingsShown,
     isMobileView,
     theme,
+    isCertificateDialogVisible,
   };
 })(observer(SettingsContainer));

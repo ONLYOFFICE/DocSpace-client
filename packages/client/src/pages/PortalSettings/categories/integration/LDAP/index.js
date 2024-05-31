@@ -17,7 +17,6 @@ import LdapMobileView from "./sub-components/LdapMobileView";
 import SettingsContainer from "./sub-components/SettingsContainer";
 import LdapLoader from "./sub-components/LdapLoader";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import CertificateDialog from "./sub-components/CertificateDialog";
 
 const LDAP = ({
   ldapSettingsUrl,
@@ -28,7 +27,6 @@ const LDAP = ({
   isMobileView,
   isLdapEnabled,
   isLoaded,
-  isCertificateDialogVisible,
 }) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
   const [isSmallWindow, setIsSmallWindow] = useState(false);
@@ -85,8 +83,6 @@ const LDAP = ({
           <SyncContainer />
         </>
       )}
-
-      {isCertificateDialogVisible && <CertificateDialog />}
     </StyledLdapPage>
   );
 };
@@ -95,8 +91,7 @@ export default inject(({ ldapStore, settingsStore, currentQuotaStore }) => {
   const { isLdapAvailable } = currentQuotaStore;
   const { ldapSettingsUrl, theme, currentColorScheme, currentDeviceType } =
     settingsStore;
-  const { load, isLdapEnabled, isLoaded, isCertificateDialogVisible } =
-    ldapStore;
+  const { load, isLdapEnabled, isLoaded } = ldapStore;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
@@ -109,6 +104,5 @@ export default inject(({ ldapStore, settingsStore, currentQuotaStore }) => {
     isMobileView,
     isLdapEnabled,
     isLoaded,
-    isCertificateDialogVisible,
   };
 })(observer(LDAP));

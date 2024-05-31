@@ -35,6 +35,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
 
 import StyledCertificateDialogBody from "../styled-components/StyledCerticateDialog";
+import { LDAPCertificateProblem } from "@docspace/shared/enums";
 
 const CertificateDialog = ({
   setCertificateDialogVisible,
@@ -61,6 +62,40 @@ const CertificateDialog = ({
     setCertificateDialogVisible(false);
   }, []);
 
+  const mapError = (error) => {
+    switch (error) {
+      case LDAPCertificateProblem.CertExpired:
+        return t("LdapSettingsCertExpired");
+      case LDAPCertificateProblem.CertCnNoMatch:
+        return t("LdapSettingsCertCnNoMatch");
+      case LDAPCertificateProblem.CertIssuerChaining:
+        return t("LdapSettingsCertIssuerChaining");
+      case LDAPCertificateProblem.CertUntrustedCa:
+        return t("LdapSettingsCertUntrustedCa");
+      case LDAPCertificateProblem.CertUntrustedRoot:
+        return t("LdapSettingsCertUntrustedRoot");
+      case LDAPCertificateProblem.CertMalformed:
+        return t("LdapSettingsCertMalformed");
+      case LDAPCertificateProblem.CertUnrecognizedError:
+        return t("LdapSettingsCertUnrecognizedError");
+      case LDAPCertificateProblem.CertValidityPeriodNesting:
+      case LDAPCertificateProblem.CertRole:
+      case LDAPCertificateProblem.CertPathLenConst:
+      case LDAPCertificateProblem.CertCritical:
+      case LDAPCertificateProblem.CertPurpose:
+      case LDAPCertificateProblem.CertChainnig:
+      case LDAPCertificateProblem.CertRevoked:
+      case LDAPCertificateProblem.CertUntrustedTestRoot:
+      case LDAPCertificateProblem.CertRevocationFailure:
+      case LDAPCertificateProblem.CertWrongUsage:
+        return "";
+    }
+
+    return "";
+  };
+
+  const hasError = cerficateIssue.errors?.length > 0;
+
   return (
     <ModalDialog
       autoMaxHeight
@@ -71,7 +106,7 @@ const CertificateDialog = ({
     >
       <ModalDialog.Header>{t("LdapCertificateConfirm")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledCertificateDialogBody>
+        <StyledCertificateDialogBody hasError={hasError}>
           <Box className="ldap-settings-crt-confirmation">
             <Text lineHeight="20px" fontSize="13px" fontWeight="400">
               {t("LdapAddCertificateToStoreConfirmation")}
@@ -102,6 +137,13 @@ const CertificateDialog = ({
               {t("LdapSettingsUniqueHash")}: {cerficateIssue.uniqueHash}
             </Text>
           </Box>
+          {hasError && (
+            <Box>
+              {cerficateIssue.errors.map((err) => (
+                <Text color="#F24724">{mapError(err)}</Text>
+              ))}
+            </Box>
+          )}
         </StyledCertificateDialogBody>
       </ModalDialog.Body>
       <ModalDialog.Footer>

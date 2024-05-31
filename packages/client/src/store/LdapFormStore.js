@@ -18,26 +18,6 @@ const constants = {
   GET_STATUS_TIMEOUT: 1000,
 };
 
-const ldapCertificateProblem = {
-  CertExpired: -2146762495,
-  CertValidityPeriodNesting: -2146762494,
-  CertRole: -2146762493,
-  CertPathLenConst: -2146762492,
-  CertCritical: -2146762491,
-  CertPurpose: -2146762490,
-  CertIssuerChaining: -2146762489,
-  CertMalformed: -2146762488,
-  CertUntrustedRoot: -2146762487,
-  CertChainnig: -2146762486,
-  CertRevoked: -2146762484,
-  CertUntrustedTestRoot: -2146762483,
-  CertRevocationFailure: -2146762482,
-  CertCnNoMatch: -2146762481,
-  CertWrongUsage: -2146762480,
-  CertUntrustedCa: -2146762478,
-  CertUnrecognizedError: -2146762477,
-};
-
 class LdapFormStore {
   isLoaded = false;
   isLdapEnabled = false;
@@ -426,11 +406,6 @@ class LdapFormStore {
           );
           data.certificateConfirmRequest = certificateConfirmRequest;
 
-          var errors = data.certificateConfirmRequest?.CertificateErrors.map(
-            (err) => this.mapError(err),
-          );
-          data.certificateConfirmRequest.CertificateErrors = errors;
-
           this.cerficateIssue = {
             approved: data.certificateConfirmRequest.Approved,
             requested: data.certificateConfirmRequest.Requested,
@@ -440,7 +415,7 @@ class LdapFormStore {
             validFrom: data.certificateConfirmRequest.ValidFrom,
             validUntil: data.certificateConfirmRequest.ValidUntil,
             uniqueHash: data.certificateConfirmRequest.Hash,
-            errors: errors,
+            errors: data.certificateConfirmRequest?.CertificateErrors || [],
           };
 
           this.setCertificateDialogVisible(true);
@@ -526,9 +501,6 @@ class LdapFormStore {
     ) {
       setCertificateDetails(status.certificateConfirmRequest);
       currentSettings = previousSettings;
-      /* popupId, width, height, marginLeft, marginTop */
-      //StudioBlockUIManager.blockUI("#ldapSettingsCertificateValidationDialog", 500);
-      console.log("SHOW Certificate dialog");
       return true;
     }
 
@@ -539,38 +511,6 @@ class LdapFormStore {
     console.log("SUCCESS");
     //toastr.success(ASC.Resources.Master.ResourceJS.LdapSettingsSuccess);
     return true;
-  };
-
-  mapError = (error) => {
-    switch (error) {
-      case ldapCertificateProblem.CertExpired:
-        return "ASC.Resources.Master.ResourceJS.LdapSettingsCertExpired";
-      case ldapCertificateProblem.CertCnNoMatch:
-        return "ASC.Resources.Master.ResourceJS.LdapSettingsCertCnNoMatch";
-      case ldapCertificateProblem.CertIssuerChaining:
-        return "ASC.Resources.Master.ResourceJS.LdapSettingsCertIssuerChaining";
-      case ldapCertificateProblem.CertUntrustedCa:
-        return "ASC.Resources.Master.ResourceJS.LdapSettingsCertUntrustedCa";
-      case ldapCertificateProblem.CertUntrustedRoot:
-        return "ASC.Resources.Master.ResourceJS.LdapSettingsCertUntrustedRoot";
-      case ldapCertificateProblem.CertMalformed:
-        return "ASC.Resources.Master.ResourceJS.LdapSettingsCertMalformed";
-      case ldapCertificateProblem.CertUnrecognizedError:
-        return "ASC.Resources.Master.ResourceJS.LdapSettingsCertUnrecognizedError";
-      case ldapCertificateProblem.CertValidityPeriodNesting:
-      case ldapCertificateProblem.CertRole:
-      case ldapCertificateProblem.CertPathLenConst:
-      case ldapCertificateProblem.CertCritical:
-      case ldapCertificateProblem.CertPurpose:
-      case ldapCertificateProblem.CertChainnig:
-      case ldapCertificateProblem.CertRevoked:
-      case ldapCertificateProblem.CertUntrustedTestRoot:
-      case ldapCertificateProblem.CertRevocationFailure:
-      case ldapCertificateProblem.CertWrongUsage:
-        return "";
-    }
-
-    return "";
   };
 
   showError = (error) => {

@@ -55,7 +55,7 @@
   "GetCode": "Obtenir le code d'insertion",
   "GoToRoom": "passer à la salle",
   "Header": "En-tête",
-  "HeaderDescription": "Vous pouvez désactiver l'en-tête dans la version mobile pour limiter l'accès aux sections de DocSpace (identique à la désactivation du menu de gauche dans la version de bureau).",
+  "HeaderDescription": "Vous pouvez désactiver l'en-tête dans la version mobile pour limiter l'accès aux sections de {{portalName}} (identique à la désactivation du menu de gauche dans la version de bureau).",
   "HtmlCodeDescription": "Intégrez DocSpace ou une partie de DocSpace en utilisant la balise <script>. Copiez le code HTML ci-dessous et insérez-le dans votre fichier HTML.",
   "InitializeSDK": "Sélectionnez l'une des suggestions de mode ou utilisez le mode Personnalisé afin de configurer manuellement tous les paramètres.",
   "InLeftPanel": "dans le panneau de gauche",

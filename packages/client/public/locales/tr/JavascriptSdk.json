@@ -55,7 +55,7 @@
   "GetCode": "Eklenecek kodu alın",
   "GoToRoom": "odaya git",
   "Header": "Üst Bilgi",
-  "HeaderDescription": "DocSpace bölümlerine erişimi sınırlamak için mobil sürümde başlığı devre dışı bırakabilirsiniz (masaüstü sürümünde sol menüyü devre dışı bırakmak gibi).",
+  "HeaderDescription": "{{portalName}} bölümlerine erişimi sınırlamak için mobil sürümde başlığı devre dışı bırakabilirsiniz (masaüstü sürümünde sol menüyü devre dışı bırakmak gibi).",
   "HtmlCodeDescription": "<script> etiketini kullanarak DocSpace'i veya bir parçasını gömme. Aşağıdaki HTML kodunu kopyalayın ve HTML dosyanıza ekleyin.",
   "InitializeSDK": "Önerilen modlardan birini seçin veya tüm parametreleri manuel olarak yapılandırmak için Özel seçeneğini kullanın.",
   "InLeftPanel": "sol panelde",

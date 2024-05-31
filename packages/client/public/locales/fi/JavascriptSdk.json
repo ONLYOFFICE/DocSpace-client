@@ -51,7 +51,7 @@
   "GetCode": "Hanki koodi lisättäväksi",
   "GoToRoom": "Mene huoneeseen",
   "Header": "Ylätunniste",
-  "HeaderDescription": "Voit poistaa ylätunnisteen käytöstä mobiiliversiossa rajoittaaksesi pääsyä DocSpace-osioihin (samoin kuin vasemman valikon poistaminen työpöytäversiossa).",
+  "HeaderDescription": "Voit poistaa ylätunnisteen käytöstä mobiiliversiossa rajoittaaksesi pääsyä {{portalName}}-osioihin (samoin kuin vasemman valikon poistaminen työpöytäversiossa).",
   "HtmlCodeDescription": "DocSpacen tai sen osan upotus käyttäen <script> tagia. Kopioi alla oleva HTML-koodi ja syötä se HTML-tiedostoosi.",
   "InitializeSDK": "Valitse yksi suositelluista tiloista tai käytä Mukautettu-tilaa määrittääksesi kaikki parametrit manuaalisesti.",
   "InLeftPanel": "vasemmassa paneelissa",

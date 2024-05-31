@@ -505,7 +505,9 @@ const Manager = (props) => {
                   tooltipContent={
                     <TooltipContent
                       title={t("Header")}
-                      description={t("HeaderDescription")}
+                      description={t("HeaderDescription", {
+                        portalName: PORTAL,
+                      })}
                       img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
                     />
                   }

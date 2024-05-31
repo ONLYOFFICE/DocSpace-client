@@ -55,7 +55,7 @@
   "GetCode": "Ottieni il codice da inserire",
   "GoToRoom": "vai nella stanza",
   "Header": "Intestazione",
-  "HeaderDescription": "Puoi disabilitare l'intestazione nella versione mobile per limitare l'accesso alle sezioni DocSpace (proprio come disabilitare il menu a sinistra nella versione desktop).",
+  "HeaderDescription": "Puoi disabilitare l'intestazione nella versione mobile per limitare l'accesso alle sezioni {{portalName}} (proprio come disabilitare il menu a sinistra nella versione desktop).",
   "HtmlCodeDescription": "Incorpora DocSpace o sue parti utilizzando il tag <script>. Copia il codice HTML qui sotto e inseriscilo nel tuo file HTML.",
   "InitializeSDK": "Seleziona una delle modalità suggerite o utilizza Personalizzato per configurare manualmente tutti i parametri.",
   "InLeftPanel": "nel pannello di sinistra",

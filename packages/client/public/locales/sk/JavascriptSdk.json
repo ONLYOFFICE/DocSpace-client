@@ -55,7 +55,7 @@
   "GetCode": "Získať kód na vloženie",
   "GoToRoom": "prejsť do miestnosti",
   "Header": "Hlavička",
-  "HeaderDescription": "V mobilnej verzii môžete vypnúť hlavičku a obmedziť tak prístup k sekciám DocSpace (rovnako ako keď vypnete ľavé menu v počítačovej verzii).",
+  "HeaderDescription": "V mobilnej verzii môžete vypnúť hlavičku a obmedziť tak prístup k sekciám {{portalName}} (rovnako ako keď vypnete ľavé menu v počítačovej verzii).",
   "HtmlCodeDescription": "Vloženie DocSpace alebo jeho časti pomocou tagu <script>. Skopírujte nižšie uvedený kód HTML a vložte ho do svojho súboru HTML.",
   "InitializeSDK": "Vyberte jeden z navrhovaných režimov alebo použite Vlastný, aby ste všetky parametre nakonfigurovali sami.",
   "InLeftPanel": "na ľavom paneli",

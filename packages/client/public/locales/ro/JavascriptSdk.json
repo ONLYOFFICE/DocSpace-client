@@ -55,7 +55,7 @@
   "GetCode": "Obține codul pentru inserare",
   "GoToRoom": "accesare sala",
   "Header": "Antet",
-  "HeaderDescription": "Puteți dezactiva antetul în versiunea mobilă pentru a limita accesul la secțiunile DocSpace (la fel ca dezactivarea meniului din stânga în versiunea desktop).",
+  "HeaderDescription": "Puteți dezactiva antetul în versiunea mobilă pentru a limita accesul la secțiunile {{portalName}} (la fel ca dezactivarea meniului din stânga în versiunea desktop).",
   "HtmlCodeDescription": "Incorporarea spațiului DocSpace sau a unei părți a acestuia cu ajutorul etichetei <script>. Copiați codul HTML de mai jos și inserați-l în fișierul dvs HTML.",
   "InitializeSDK": "Selectați unul dintre modurile sugerate sau utilizați modul Particularizat pentru a configura manual toți parametrii.",
   "InLeftPanel": "în panoul din stânga",

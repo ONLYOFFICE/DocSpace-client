@@ -48,7 +48,6 @@
   "GetCode": "获取要插入的代码",
   "GoToRoom": "前往房间",
   "Header": "页眉",
-  "HeaderDescription": "您可以在移动版本中关闭顶栏，以限制对协作空间部分的访问权限（与在桌面版中停用左侧菜单相同）。",
   "HtmlCodeDescription": "使用 <script> 标签嵌入协作空间或其组件。复制下面的 HTML 代码并将其插入您的 HTML 文件中。",
   "InitializeSDK": "在建议的模式中选择一项，或使用“自定义”手动配置所有参数。",
   "InLeftPanel": "在左侧面板中",

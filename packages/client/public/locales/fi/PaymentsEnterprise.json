@@ -19,7 +19,7 @@
   "UpgradeToProBannerInformationPurchase": "Esitä kysymyksiä ostoon liittyen <1>{{email}}</1>",
   "UpgradeToProBannerInformationSupport": "Hanki teknistä apua <1>{{helpUrl}}</1>",
   "UpgradeToProBannerInstructionDescr": "Käytä virallista dokumentaatiota päivittääksesi:",
-  "UpgradeToProBannerInstructionHeader": "Pääset käyttämään ammattilaisominaisuuksia, kun aloitat ilmaisen 30 päivän ONLYOFFICE DocSpace-yritysversion kokeilujakson.",
+  "UpgradeToProBannerInstructionHeader": "Pääset käyttämään ammattilaisominaisuuksia, kun aloitat ilmaisen 30 päivän ONLYOFFICE {{portalName}}-yritysversion kokeilujakson.",
   "UpgradeToProBannerInstructionItemDocker": "Dockerin ohje.",
   "UpgradeToProBannerInstructionItemLinux": "Linuxin ohje.",
   "UpgradeToProBannerInstructionItemWindows": "Windowsin ohje.",

@@ -26,10 +26,15 @@
 import { useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
+
+import StyledCertificateDialogBody from "../styled-components/StyledCerticateDialog";
 
 const CertificateDialog = ({
   setCertificateDialogVisible,
@@ -58,48 +63,46 @@ const CertificateDialog = ({
 
   return (
     <ModalDialog
-      //   withForm={withForm}
+      autoMaxHeight
+      autoMaxWidth
       visible={isCertificateDialogVisible}
-      displayType={"modal"}
-      scale={true}
+      displayType={ModalDialogType.modal}
       onClose={onCloseAction}
-      zIndex={405}
     >
       <ModalDialog.Header>{t("LdapCertificateConfirm")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Box>
-          <Text>{t("LdapAddCertificateToStoreConfirmation")}</Text>
-          <div class="ldap-settings-crt-details ldap-settings-crt-serial-number">
-            <Text>
+        <StyledCertificateDialogBody>
+          <Box className="ldap-settings-crt-confirmation">
+            <Text lineHeight="20px" fontSize="13px" fontWeight="400">
+              {t("LdapAddCertificateToStoreConfirmation")}
+            </Text>
+          </Box>
+          <Box className="ldap-settings-crt-details">
+            <Text as="p" color="#A3A9AE">
               {t("LdapSettingsSerialNumber")}: {cerficateIssue.serialNumber}
             </Text>
-          </div>
-          <div class="ldap-settings-crt-details">
-            <Text>
+
+            <Text as="p" color="#A3A9AE">
               {t("LdapSettingsIssuerName")}: {cerficateIssue.issuerName}
             </Text>
-          </div>
-          <div class="ldap-settings-crt-details">
-            <Text>
+
+            <Text as="p" color="#A3A9AE">
               {t("LdapSettingsSubjectName")}: {cerficateIssue.subjectName}
             </Text>
-          </div>
-          <div class="ldap-settings-crt-details">
-            <Text>
+
+            <Text as="p" color="#A3A9AE">
               {t("LdapSettingsValidFrom")}: {cerficateIssue.validFrom}
             </Text>
-          </div>
-          <div class="ldap-settings-crt-details">
-            <Text>
+
+            <Text as="p" color="#A3A9AE">
               {t("LdapSettingsValidUntil")}: {cerficateIssue.validUntil}
             </Text>
-          </div>
-          <div class="ldap-settings-crt-details ldap-settings-crt-details-last">
-            <Text>
+
+            <Text as="p" color="#A3A9AE">
               {t("LdapSettingsUniqueHash")}: {cerficateIssue.uniqueHash}
             </Text>
-          </div>
-        </Box>
+          </Box>
+        </StyledCertificateDialogBody>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -108,7 +111,6 @@ const CertificateDialog = ({
           label={t("Common:OKButton")}
           size="normal"
           type="submit"
-          scale
           primary
           onClick={onSaveAction}
         />
@@ -117,7 +119,6 @@ const CertificateDialog = ({
           key="LdapCertificateCloseBtn"
           label={t("Common:CancelButton")}
           size="normal"
-          scale
           onClick={onCancelAction}
         />
       </ModalDialog.Footer>

@@ -131,6 +131,7 @@ class LdapFormStore {
       groupAttribute,
       groupNameAttribute,
       login,
+      password,
       acceptCertificateHash,
     } = data;
 
@@ -173,6 +174,7 @@ class LdapFormStore {
     this.groupNameAttribute = groupNameAttribute;
 
     this.login = login;
+    this.password = password;
   };
 
   mapCron = (cron) => {

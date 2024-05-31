@@ -128,7 +128,7 @@
   "GroupsDescription": "Lietotāji, kurus atlasījāt iepriekšējā darbībā, tiks importēti grupās, kas izveidotas {{serviceName}}. Grupas tiks parādītas sadaļā Konti.",
   "HexCode": "Heksadecimālais kods",
   "Import": "Importēt",
-  "ImportCompleteDescriptionGoogle": "Datu importēšana no Google Workspace uz ONLYOFFICE DocSpace ir pabeigta!",
+  "ImportCompleteDescriptionGoogle": "Datu importēšana no Google Workspace uz ONLYOFFICE {{portalName}} ir pabeigta!",
   "ImportCompleteDescriptionNextcloud": "Datu importēšana no Nextcloud uz ONLYOFFICE DocSpace ir pabeigta!",
   "ImportCompleteDescriptionWorkspace": "Datu importēšana no ONLYOFFICE Workspace uz ONLYOFFICE DocSpace ir pabeigta!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} lietotāji tika veiksmīgi importēti.",

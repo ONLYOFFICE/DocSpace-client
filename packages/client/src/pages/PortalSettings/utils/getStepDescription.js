@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { PORTAL } from "@docspace/shared/constants";
+
 export const getGoogleStepDescription = (
   t,
   stepIndex,
@@ -58,7 +60,9 @@ export const getGoogleStepDescription = (
     case 5:
       return t("Settings:ImportProcessingDescription");
     case 6:
-      return t("Settings:ImportCompleteDescriptionGoogle");
+      return t("Settings:ImportCompleteDescriptionGoogle", {
+        portalName: PORTAL,
+      });
     default:
       return;
   }

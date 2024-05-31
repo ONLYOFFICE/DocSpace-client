@@ -130,7 +130,7 @@
   "GroupsDescription": "Користувачів, яких ви вибрали на попередньому кроці, буде імпортовано до груп, створених у {{serviceName}}. Групи з’являться в розділі «Облікові записи».",
   "HexCode": "Шістнадцятковий код",
   "Import": "Імпортувати",
-  "ImportCompleteDescriptionGoogle": "Імпорт даних із Google Workspace до ONLYOFFICE DocSpace завершено!",
+  "ImportCompleteDescriptionGoogle": "Імпорт даних із Google Workspace до ONLYOFFICE {{portalName}} завершено!",
   "ImportCompleteDescriptionNextcloud": "Імпорт даних із Nextcloud до ONLYOFFICE DocSpace завершено!",
   "ImportCompleteDescriptionWorkspace": "Імпорт даних з ONLYOFFICE Workspace до ONLYOFFICE DocSpace завершено!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} користувачів успішно імпортовано.",

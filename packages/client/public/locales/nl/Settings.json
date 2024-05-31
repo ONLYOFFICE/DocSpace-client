@@ -129,7 +129,7 @@
   "GroupsDescription": "Gebruikers die u in de vorige stap hebt geselecteerd, worden geïmporteerd in groepen die zijn aangemaakt in {{serviceName}}. Groepen verschijnen in het gedeelte Accounts.",
   "HexCode": "Hexcode",
   "Import": "Import",
-  "ImportCompleteDescriptionGoogle": "Het importeren van gegevens van Google Workspace naar ONLYOFFICE DocSpace is voltooid!",
+  "ImportCompleteDescriptionGoogle": "Het importeren van gegevens van Google Workspace naar ONLYOFFICE {{portalName}} is voltooid!",
   "ImportCompleteDescriptionNextcloud": "Het importeren van gegevens van Nextcloud naar ONLYOFFICE DocSpace is voltooid!",
   "ImportCompleteDescriptionWorkspace": "Het importeren van gegevens van ONLYOFFICE Workspace naar ONLYOFFICE DocSpace is voltooid!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} gebruikers werden met succes geïmporteerd.",

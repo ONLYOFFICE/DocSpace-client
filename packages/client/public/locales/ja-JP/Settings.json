@@ -127,7 +127,7 @@
   "GroupsDescription": "前のステップで選択したユーザーは、{{serviceName}}に作成されたグループにインポートされます。グループは「アカウント」セクションに表示されます。",
   "HexCode": "HEXコード",
   "Import": "インポート",
-  "ImportCompleteDescriptionGoogle": "Google WorkspaceからONLYOFFICE DocSpaceへのデータインポートが完了しました！",
+  "ImportCompleteDescriptionGoogle": "Google WorkspaceからONLYOFFICE {{portalName}}へのデータインポートが完了しました！",
   "ImportCompleteDescriptionNextcloud": "NextcloudからONLYOFFICE DocSpaceへのデータインポートが完了しました！",
   "ImportCompleteDescriptionWorkspace": "ONLYOFFICE WorkspaceからONLYOFFICE DocSpaceへのデータインポートが完了しました！",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} ユーザーは正常にインポートされました。",

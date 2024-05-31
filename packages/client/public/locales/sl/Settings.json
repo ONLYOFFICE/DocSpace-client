@@ -129,7 +129,7 @@
   "GroupsDescription": "Uporabniki, ki ste jih izbrali v prejšnjem koraku, bodo uvoženi v skupine, ustvarjene v {{serviceName}}. Skupine bodo prikazane v razdelku Računi.",
   "HexCode": "Hex koda",
   "Import": "Uvoz",
-  "ImportCompleteDescriptionGoogle": "Uvoz podatkov iz Google Workspace v ONLYOFFICE DocSpace je končan!",
+  "ImportCompleteDescriptionGoogle": "Uvoz podatkov iz Google Workspace v ONLYOFFICE {{portalName}} je končan!",
   "ImportCompleteDescriptionNextcloud": "Uvoz podatkov iz Nextcloud v ONLYOFFICE DocSpace je končan!",
   "ImportCompleteDescriptionWorkspace": "Uvoz podatkov iz ONLYOFFICE Workspace v ONLYOFFICE DocSpace je končan!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} uporabnikov je bilo uspešno uvoženih.",

@@ -130,7 +130,7 @@
   "GroupsDescription": "سيتم استيراد المستخدمين الذين حددتهم في الخطوة السابقة إلى مجموعات تم إنشاؤها في {{serviceName}}. ستظهر المجموعات في قسم الحسابات.",
   "HexCode": "رمز سداسي عشري",
   "Import": "استيراد",
-  "ImportCompleteDescriptionGoogle": "اكتمل استيراد البيانات من مساحة عمل Google إلى ONLYOFFICE DocSpace!",
+  "ImportCompleteDescriptionGoogle": "اكتمل استيراد البيانات من مساحة عمل Google إلى ONLYOFFICE {{portalName}}!",
   "ImportCompleteDescriptionNextcloud": "اكتمل استيراد البيانات من Nextcloud إلى ONLYOFFICE DocSpace!",
   "ImportCompleteDescriptionWorkspace": "اكتمل استيراد البيانات من مساحة عمل ONLYOFFICE إلى DocSpace ONLYOFFICE!",
   "ImportedUsers": "تم استيراد مستخدمي {{selectedUsers}}/{{importedUsers}} بنجاح.",

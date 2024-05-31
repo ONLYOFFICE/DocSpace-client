@@ -181,7 +181,7 @@
   "PersonalFiles": "Pliki prywatne",
   "PersonalFilesDescription": "Pliki oraz dokumenty użytkowników zostaną zaimportowane do sekcji Dokumenty > Dokumenty.",
   "PortalCreatedDate": "Data utworzenia portalu: {{date}}",
-  "PortalDeactivation": "Dezaktywuj DocSpace",
+  "PortalDeactivation": "Dezaktywuj {{portalName}}",
   "PortalDeactivationDescription": "Użyj tej opcji, aby tymczasowo dezaktywować swój obszar.",
   "PortalDeactivationHelper": "Jeśli chcesz dezaktywować DocSpace, Twój obszar roboczy i wszystkie powiązane z nim informacje zostaną zablokowane, aby nikt nie miał do nich dostępu przez określony czas. Aby to zrobić, kliknij przycisk Dezaktywuj. Link potwierdzający działanie zostanie wysłany na adres e-mail właściciela obszaru roboczego.\nJeśli zmienisz zdanie i zechcesz wrócić do pracy w tym obszarze, będziesz potrzebować drugiego linku udostępnionego we wiadomości e-mail z potwierdzeniem. W związku z tym zapisz niniejszą wiadomość w bezpiecznym miejscu.",
   "PortalDeletion": "Usunięcie portalu",

@@ -182,7 +182,7 @@
   "PersonalFilesDescription": "Korisničke datoteke i dokumenti će biti uvezeni u Dokumenti > Dokumenti.",
   "PortalAccess": "Pristup {{portalName}}-u",
   "PortalCreatedDate": "Portal Kreiran datum: {{date}}",
-  "PortalDeactivation": "Deaktiviraj DocSpace",
+  "PortalDeactivation": "Deaktiviraj {{portalName}}",
   "PortalDeactivationDescription": "Koristite ovu opciju da deaktivirate vaš prostor privremeno.",
   "PortalDeactivationHelper": "Ako želite deaktivirati ovaj DocSpace, vaš prostor i sve informacije povezane s njim će biti blokirani tako da niko nema pristup za određeni period. Da biste to uradili, kliknite na dugme Deaktiviraj. Link za potvrdu operacije će biti poslat na email adresu vlasnika prostora. U slučaju da se želite vratiti na prostor i nastaviti ga koristiti, moraćete koristiti drugi link obezbeđen u konfirmacionom email-u. Zato, molimo da čuvate ovaj email na sigurnom mestu.",
   "PortalDeletion": "Brisanje DocSpace-a",

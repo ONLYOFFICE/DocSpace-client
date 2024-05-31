@@ -181,7 +181,7 @@
   "PersonalFilesDescription": "I file e i documenti dell'utente verranno importati in Documenti > Documenti.",
   "PortalAccess": "Accesso a {{portalName}}",
   "PortalCreatedDate": "Data di creazione del portale: {{date}}",
-  "PortalDeactivation": "Disattiva DocSpace",
+  "PortalDeactivation": "Disattiva {{portalName}}",
   "PortalDeactivationDescription": "Usa questa opzione per disattivare temporaneamente il tuo spazio.",
   "PortalDeactivationHelper": "Se desideri disattivare questo DocSpace, il tuo spazio e tutte le informazioni ad esso associate verranno bloccati in modo che nessuno vi abbia accesso per un determinato periodo. Per farlo, fai clic sul pulsante Disattiva. Un link per confermare l’operazione verrà inviato all’indirizzo email del proprietario dello spazio.\nNel caso in cui desideri tornare allo spazio e continuare a utilizzarlo, dovrai utilizzare il secondo link fornito nell’email di conferma. Quindi, ti preghiamo di conservare questa e-mail in un posto sicuro.",
   "PortalDeletion": "Eliminazione di DocSpace",

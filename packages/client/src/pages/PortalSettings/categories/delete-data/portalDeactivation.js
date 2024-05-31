@@ -49,7 +49,7 @@ const PortalDeactivation = (props) => {
   };
 
   useEffect(() => {
-    setDocumentTitle(t("PortalDeactivation"));
+    setDocumentTitle(t("PortalDeactivation", { portalName: PORTAL }));
     fetchData();
     onCheckView();
     window.addEventListener("resize", onCheckView);

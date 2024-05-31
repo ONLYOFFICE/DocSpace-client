@@ -52,7 +52,7 @@ const DeleteData = (props) => {
     },
     {
       id: "deactivation",
-      name: t("PortalDeactivation"),
+      name: t("PortalDeactivation", { portalName: PORTAL }),
       content: <PortalDeactivationSection />,
     },
   ];

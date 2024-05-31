@@ -181,7 +181,7 @@
   "PersonalFilesDescription": "Súbory a dokumenty používateľov budú importované do Dokumenty > Dokumenty.",
   "PortalAccess": "Prístup k {{portalName}}",
   "PortalCreatedDate": "Dátum vytvorenia portálu: {{date}}",
-  "PortalDeactivation": "Deaktivovať DocSpace",
+  "PortalDeactivation": "Deaktivovať {{portalName}}",
   "PortalDeactivationDescription": "Túto možnosť použite na dočasnú deaktiváciu priestoru.",
   "PortalDeactivationHelper": "Ak chcete deaktivovať tento priestor DocSpace, váš priestor a všetky informácie s ním spojené budú zablokované, aby k ním na určitý čas nemal nikto prístup. Ak to chcete urobiť, kliknite na tlačidlo Deaktivovať. Na e-mailovú adresu vlastníka priestoru bude odoslaný odkaz na potvrdenie operácie.\nAk sa chcete vrátiť do priestoru a pokračovať v jeho používaní, budete musieť použiť druhý odkaz uvedený v potvrdzujúcom e-maile. Preto si tento list uschovajte na bezpečnom mieste.",
   "PortalDeletion": "Vymazanie DocSpace",

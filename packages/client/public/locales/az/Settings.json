@@ -180,7 +180,7 @@
   "PersonalFilesDescription": "İstifadəçi fayl və sənədləri Sənədlər > Sənədlər bölməsinə köçürüləcək.",
   "PortalAccess": "{{portalName}}-ə giriş",
   "PortalCreatedDate": "Portalın yaradılma tarixi: {{date}}",
-  "PortalDeactivation": "DocSpace-i deaktiv edin",
+  "PortalDeactivation": "{{portalName}}-i deaktiv edin",
   "PortalDeactivationDescription": "Domeninizi müvəqqəti olaraq deaktiv etmək üçün bu seçimdən istifadə edin.",
   "PortalDeactivationHelper": "Bu DocSpace-i söndürmək istəyirsinizsə, domeniniz və onunla əlaqəli bütün məlumat bloklanacaq ki, heç kim müəyyən müddət ərzində ona daxil ola bilməsin. Bunu etmək üçün Deaktiv edin düyməsini sıxın. Fəaliyyəti təsdiqləmək üçün domen sahibinin e-poçt ünvanına keçid göndəriləcək.\nDomenə qayıtmaq və ondan istifadə etməyə davam etmək istədiyiniz halda, təsdiq e-məktubunda verilmiş ikinci keçiddən istifadə etməlisiniz. Buna görə də, lütfən, bu e-məktubu təhlükəsiz yerdə saxlayın.",
   "PortalDeletion": "DocSpace-in silinməsi",

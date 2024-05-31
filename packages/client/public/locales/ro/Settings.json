@@ -182,7 +182,7 @@
   "PersonalFilesDescription": "Fișierele și documentele utilizatorului vor fi importate în Documente >  Documentele.",
   "PortalAccess": "Accesul la spațiu {{portalName}}",
   "PortalCreatedDate": "Portal a fost creat la data de: {{date}}",
-  "PortalDeactivation": "Dezactivare DocSpace",
+  "PortalDeactivation": "Dezactivare {{portalName}}",
   "PortalDeactivationDescription": "Utilizaţi această opţiune pentru a dezactiva temporar spaţiul dvs.",
   "PortalDeactivationHelper": "Dacă doriţi să dezactivați acest DocSpace, spaţiul dvs şi toate informaţiile asociate cu acesta vor fi blocate, astfel încât nimeni nu-l va accesa pentru o anumită perioadă. Pentru a face acest lucru, apăsaţi butonul Dezactivare. Linkul de confirmare a operaţiei a fost trimis către adresa de email a proprietarului spaţiului.\nDacă doriţi să reveniţi la spaţiu şi să continuați să îl utilizaţi, trebuie să folosiţi cel al doilea link din email-ul de confirmare. Aşadar, vă rugăm să păstraţi acest email într-un loc sigur.",
   "PortalDeletion": "Ștergere spațiu DocSpace",

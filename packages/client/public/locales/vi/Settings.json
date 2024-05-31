@@ -180,7 +180,7 @@
   "PersonalFilesDescription": "Tập tin và tài liệu người dùng sẽ được nhập vào Tài liệu > Tài liệu.",
   "PortalAccess": "Truy cập {{portalName}}",
   "PortalCreatedDate": "Ngày tạo cổng thông tin: {{date}}",
-  "PortalDeactivation": "Vô hiệu hóa DocSpace",
+  "PortalDeactivation": "Vô hiệu hóa {{portalName}}",
   "PortalDeactivationDescription": "Sử dụng tùy chọn này để tạm thời vô hiệu hóa không gian của bạn.",
   "PortalDeactivationHelper": "Nếu bạn muốn vô hiệu hóa DocSpace này, không gian của bạn và tất cả thông tin được liên kết với nó sẽ bị chặn để không ai có quyền truy cập vào nó trong một khoảng thời gian cụ thể. Để làm điều đó, hãy nhấp vào nút Vô hiệu hóa. Một liên kết xác nhận hành động sẽ được gửi đến địa chỉ email của chủ sở hữu không gian.\nTrong trường hợp bạn muốn quay lại không gian và tiếp tục sử dụng nó, bạn sẽ cần sử dụng liên kết thứ hai được cung cấp trong email xác nhận. Vì vậy, xin vui lòng giữ email này ở một nơi an toàn.",
   "PortalDeletion": "Xóa DocSpace",

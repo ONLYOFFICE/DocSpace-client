@@ -180,7 +180,7 @@
   "PersonalFiles": "Persoonlijke bestanden",
   "PersonalFilesDescription": "Gebruikersbestanden en documenten worden geïmporteerd in Documenten > Documenten.",
   "PortalCreatedDate": "Portal Aangemaakt datum: {{date}}",
-  "PortalDeactivation": "DocSpace deactiveren",
+  "PortalDeactivation": "{{portalName}} deactiveren",
   "PortalDeactivationDescription": "Gebruik deze optie om uw ruimte tijdelijk te deactiveren.",
   "PortalDeactivationHelper": "Als u deze DocSpace wilt deactiveren, wordt uw ruimte en alle informatie die ermee is verbonden geblokkeerd, zodat niemand er gedurende een bepaalde periode toegang toe heeft. Klik daarvoor op de knop Deactiveren. Een link om de actie te bevestigen wordt naar het e-mailadres van de eigenaar van de ruimte gestuurd.\nAls u wilt terugkeren naar de ruimte en deze verder wilt gebruiken, moet u de tweede link in de bevestigingsmail gebruiken. Bewaar deze e-mail dus zorgvuldig.",
   "PortalDeletion": "Ruimte Verwijdering",

@@ -291,7 +291,7 @@
   "UsedStorage": "사용: {{size}}",
   "UseHttp": "Http 사용",
   "UserAgreement": "확인하고 진행하겠습니다",
-  "UserLimitExceeded": "사용자 제한을 초과했습니다. 다음 단계를 진행하려면 사용자 수를 조정하거나 DocSpace 사용자 제한을 늘리세요.",
+  "UserLimitExceeded": "사용자 제한을 초과했습니다. 다음 단계를 진행하려면 사용자 수를 조정하거나 {{portalName}} 사용자 제한을 늘리세요.",
   "UsersSectionDescription": "\"사용자\" 섹션에는 이전 단계에서 선택한 사용자가 포함됩니다. 기본값으로써 항상 활성화되어 있으며 선택 취소할 수 없습니다.",
   "UseSpecialChar": "특수 문자를 사용하여",
   "UseUpperCase": "대문자를 사용",

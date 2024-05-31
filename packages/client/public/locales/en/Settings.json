@@ -296,7 +296,7 @@
   "UsedStorage": "Used: {{size}}",
   "UseHttp": "Use Http",
   "UserAgreement": "I confirm and want to proceed",
-  "UserLimitExceeded": "User limit exceeded. To proceed to the next step, please adjust the number of users or increase the DocSpace user limit.",
+  "UserLimitExceeded": "User limit exceeded. To proceed to the next step, please adjust the number of users or increase the {{portalName}} user limit.",
   "UsersAreRegistered": "You selected users registered in your DocSpace, with the roles already set. Please proceed to the next step or go back to select more users.",
   "UsersSectionDescription": "Section \"Users\" includes the users you selected in the previous step. By default, it is always enabled and can't be unselected.",
   "UseSpecialChar": "Use special characters",

@@ -289,7 +289,7 @@
   "UsedStorage": "Wykorzystano: {{size}}",
   "UseHttp": "Użyj Http",
   "UserAgreement": "Potwierdzam i chcę kontynuować",
-  "UserLimitExceeded": "Przekroczono limit użytkowników. Aby przejść do kolejnego kroku, dostosuj liczbę użytkowników lub zwiększ limit użytkowników DocSpace.",
+  "UserLimitExceeded": "Przekroczono limit użytkowników. Aby przejść do kolejnego kroku, dostosuj liczbę użytkowników lub zwiększ limit użytkowników {{portalName}}.",
   "UsersSectionDescription": "Sekcja „Użytkownicy” obejmuje użytkowników wybranych w poprzednim kroku. Domyślnie zawsze jest włączona i nie można jej odznaczyć.",
   "UseSpecialChar": "Użyj znaków specjalnych",
   "UseUpperCase": "Użyj wielkich liter",

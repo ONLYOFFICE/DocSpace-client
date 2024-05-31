@@ -288,7 +288,7 @@
   "UsedStorage": "Gebruikt: {{size}}",
   "UseHttp": "Gebruik Http",
   "UserAgreement": "Ik bevestig en wil doorgaan",
-  "UserLimitExceeded": "Gebruikerslimiet overschreden. Om door te gaan naar de volgende stap, moet u het aantal gebruikers aanpassen of de DocSpace gebruikerslimiet verhogen.",
+  "UserLimitExceeded": "Gebruikerslimiet overschreden. Om door te gaan naar de volgende stap, moet u het aantal gebruikers aanpassen of de {{portalName}} gebruikerslimiet verhogen.",
   "UsersSectionDescription": "In het gedeelte \"Gebruikers\" staan de gebruikers die u in de vorige stap hebt geselecteerd. Deze is standaard altijd ingeschakeld en kan niet worden uitgeschakeld.",
   "UseSpecialChar": "Gebruik speciale karakters",
   "UseUpperCase": "Hoofdletters gebruiken",

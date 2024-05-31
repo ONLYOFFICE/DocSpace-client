@@ -292,7 +292,7 @@
   "UsedStorage": "Korišćeno: {{size}}",
   "UseHttp": "Koristi Http",
   "UserAgreement": "Potvrđujem i želim da nastavim",
-  "UserLimitExceeded": "Korisnički limit prekoračen. Da biste prešli na sledeći korak, prilagodite broj korisnika ili povećajte ograničenje korisnika DocSpace-a.",
+  "UserLimitExceeded": "Korisnički limit prekoračen. Da biste prešli na sledeći korak, prilagodite broj korisnika ili povećajte ograničenje korisnika {{portalName}}-a.",
   "UsersSectionDescription": "Odeljak \"Korisnici\" obuhvata korisnike koje ste odabrali u prethodnom koraku. Podrazumevano je uvek omogućen i ne može se odznačiti.",
   "UseSpecialChar": "Koristi specijalne znakove",
   "UseUpperCase": "Koristi velika slova",

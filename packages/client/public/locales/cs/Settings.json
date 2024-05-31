@@ -291,7 +291,7 @@
   "UsedStorage": "Využito: {{size}}",
   "UseHttp": "Použijte Http",
   "UserAgreement": "Potvrzuji a chci pokračovat",
-  "UserLimitExceeded": "Překročení uživatelského limitu. Chcete-li přejít k dalšímu kroku, upravte počet uživatelů nebo zvyšte limit uživatelů DocSpace.",
+  "UserLimitExceeded": "Překročení uživatelského limitu. Chcete-li přejít k dalšímu kroku, upravte počet uživatelů nebo zvyšte limit uživatelů {{portalName}}.",
   "UsersSectionDescription": "Sekce „Uživatelé“ obsahuje uživatele, které jste vybrali v předchozím kroku. Ve výchozím nastavení je vždy povolena a nelze ji zrušit.",
   "UseSpecialChar": "Použijte speciální znaky",
   "UseUpperCase": "Použijte velká písmena",

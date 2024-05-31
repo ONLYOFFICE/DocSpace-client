@@ -266,7 +266,7 @@
   "UsedStorage": "Käytetty: {{size}}",
   "UseHttp": "Sisällettävä Http",
   "UserAgreement": "Vahvistan ja haluan jatkaa",
-  "UserLimitExceeded": "Käyttäjämääräraja ylitetty. Ole hyvä ja muokkaa käyttäjämäärää tai lisää DocSpace käyttäjämäärää jatkaaksesi seuraavaan vaiheeseen.",
+  "UserLimitExceeded": "Käyttäjämääräraja ylitetty. Ole hyvä ja muokkaa käyttäjämäärää tai lisää {{portalName}} käyttäjämäärää jatkaaksesi seuraavaan vaiheeseen.",
   "UsersSectionDescription": "\"Käyttäjät\"-osio sisältää käyttäjät, jotka valitsit edellisessä vaiheessa. Se on aina käytössä eikä valintaa voi poistaa.",
   "UseSpecialChar": "Sisällettävä erikoismerkkejä",
   "UseUpperCase": "Sisällettävä isoja kirjaimia",

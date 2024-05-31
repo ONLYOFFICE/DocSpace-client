@@ -290,7 +290,7 @@
   "UsedStorage": "Izmantots: {{size}}",
   "UseHttp": "Izmantojiet Http",
   "UserAgreement": "Es apstiprinu un vēlos turpināt",
-  "UserLimitExceeded": "Pārsniegts lietotāju skaita ierobežojums. Lai pārietu uz nākamo darbību, pielāgojiet lietotāju skaitu vai palieliniet DocSpace lietotāju ierobežojumu.",
+  "UserLimitExceeded": "Pārsniegts lietotāju skaita ierobežojums. Lai pārietu uz nākamo darbību, pielāgojiet lietotāju skaitu vai palieliniet {{portalName}} lietotāju ierobežojumu.",
   "UsersSectionDescription": "Sadaļā Lietotāji ir iekļauti lietotāji, kurus atlasījāt iepriekšējā darbībā. Pēc noklusējuma tas vienmēr ir iespējots, un to nevar noņemt.",
   "UseSpecialChar": "Izmantojiet speciālās rakstzīmes",
   "UseUpperCase": "Izmantojiet lielos burtus",

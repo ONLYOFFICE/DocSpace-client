@@ -289,7 +289,7 @@
   "UsedStorage": "İstifadə olunub: {{size}}",
   "UseHttp": "Http istifadə edin",
   "UserAgreement": "Təsdiqləyirəm və davam etmək istəyirəm",
-  "UserLimitExceeded": "İstifadəçi limiti keçildi. Növbəti addıma keçmək üçün istifadəçilərin sayını tənzimləyin və ya DocSpace istifadəçi limitini artırın.",
+  "UserLimitExceeded": "İstifadəçi limiti keçildi. Növbəti addıma keçmək üçün istifadəçilərin sayını tənzimləyin və ya {{portalName}} istifadəçi limitini artırın.",
   "UsersSectionDescription": "\"İstifadəçilər\" bölməsi əvvəlki addımda seçdiyiniz istifadəçiləri ehtiva edir. O, həmişə defolt olaraq aktivdir və seçimi ləğv etmək mümkün deyil.",
   "UseSpecialChar": "Xüsusi simvolları işlət",
   "UseUpperCase": "Böyük hərfləri işlət",

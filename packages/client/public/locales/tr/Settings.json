@@ -291,7 +291,7 @@
   "UsedStorage": "Kullanılan: {{size}}",
   "UseHttp": "Http kullan",
   "UserAgreement": "Onaylıyorum ve devam etmek istiyorum",
-  "UserLimitExceeded": "Kullanıcı sınırı aşıldı. Bir sonraki adıma geçmek için lütfen kullanıcı sayısını değiştirin veya DocSpace kullanıcı limitini artırın.",
+  "UserLimitExceeded": "Kullanıcı sınırı aşıldı. Bir sonraki adıma geçmek için lütfen kullanıcı sayısını değiştirin veya {{portalName}} kullanıcı limitini artırın.",
   "UsersSectionDescription": "\"Kullanıcılar\" bölümü bir önceki adımda seçtiğiniz kullanıcıları içerir. Varsayılan olarak, her zaman etkindir ve seçim kaldırılamaz.",
   "UseSpecialChar": "Özel karakterler kullan",
   "UseUpperCase": "Büyük harfleri kullan",

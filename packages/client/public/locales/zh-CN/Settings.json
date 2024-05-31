@@ -257,7 +257,6 @@
   "UsedStorage": "已使用：{{size}}",
   "UseHttp": "使用Http",
   "UserAgreement": "我确认并继续",
-  "UserLimitExceeded": "超出用户限制。如要继续到下一步，请调整用户数量或增加协作空间用户上限。",
   "UsersSectionDescription": "“用户”部分包括您在上一步中选择的用户。默认情况下，它始终处于启用状态，无法取消选择。",
   "UseSpecialChar": "必须包含特殊字符",
   "UseUpperCase": "必须包含大写字母",

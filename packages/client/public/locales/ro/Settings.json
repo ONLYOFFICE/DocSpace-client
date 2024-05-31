@@ -292,7 +292,7 @@
   "UsedStorage": "Ocupat: {{size}}",
   "UseHttp": "Utilizare Http",
   "UserAgreement": "Agreez și doresc să continui",
-  "UserLimitExceeded": "Limita de utilizatori a fost depășită. Pentru a trece la etapa următoare, definiți numărul de utilizatori sau creșteți limita de utilizatori  DocSpace.",
+  "UserLimitExceeded": "Limita de utilizatori a fost depășită. Pentru a trece la etapa următoare, definiți numărul de utilizatori sau creșteți limita de utilizatori  {{portalName}}.",
   "UsersSectionDescription": "Secțiunea \"Utilizatori\" include utilizatorii pe care i-ați selectat în etapa anterioară. În mod implicit, această opțiune este întotdeauna activată și nu poate fi deselectată.",
   "UseSpecialChar": "Utilizare caractere speciale",
   "UseUpperCase": "Utilizare majuscule",

@@ -290,7 +290,6 @@
   "UsedStorage": "Utilisé: {{size}}",
   "UseHttp": "Utiliser Http",
   "UserAgreement": "Je confirme et je veux continuer",
-  "UserLimitExceeded": "Le nombre d'utilisateurs est dépassé. Pour passer à l'étape suivante, veuillez régler le nombre d'utilisateurs ou augmentez le nombre limite d'utilisateurs.",
   "UsersSectionDescription": "La section Utilisateurs comprend les utilisateurs que vous avez sélectionné à l'étape précédente. Par défaut, cette option est toujours activée et impossible à désactiver.",
   "UseSpecialChar": "Utiliser symboles spéciaux",
   "UseUpperCase": "Utiliser majuscules",

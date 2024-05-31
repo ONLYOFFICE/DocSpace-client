@@ -288,7 +288,7 @@
   "UsedStorage": "Uporabljeno: {{size}}",
   "UseHttp": "Uporabi Http",
   "UserAgreement": "Potrjujem in želim nadaljevati",
-  "UserLimitExceeded": "Omejitev uporabnikov je presežena. Če želite nadaljevati na naslednji korak, prilagodite število uporabnikov ali povečajte omejitev uporabnikov DocSpace.",
+  "UserLimitExceeded": "Omejitev uporabnikov je presežena. Če želite nadaljevati na naslednji korak, prilagodite število uporabnikov ali povečajte omejitev uporabnikov {{portalName}}.",
   "UsersSectionDescription": "Razdelek \"Uporabniki\" vključuje uporabnike, ki ste jih izbrali v prejšnjem koraku. Privzeto je vedno omogočeno in ga ni mogoče preklicati.",
   "UseSpecialChar": "Uporabi posebne znake",
   "UseUpperCase": "Uporabi veliko začetnico",

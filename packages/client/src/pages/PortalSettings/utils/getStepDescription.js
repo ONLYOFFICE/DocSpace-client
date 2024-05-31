@@ -81,7 +81,9 @@ export const getWorkspaceStepDescription = (
     case 1:
       return t("Settings:SelectFileDescriptionWorkspace");
     case 2:
-      return t("Settings:SelectUsersDescriptionWorkspace");
+      return t("Settings:SelectUsersDescriptionWorkspace", {
+        portalName: PORTAL,
+      });
     case 3:
       return isTypeSelectEmpty ? (
         <>

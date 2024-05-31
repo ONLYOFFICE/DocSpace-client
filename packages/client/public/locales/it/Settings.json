@@ -221,7 +221,7 @@
   "SelectUsers": "Seleziona gli utenti",
   "SelectUsersDescriptionGoogle": "Seleziona gli utenti dall'elenco da importare in ONLYOFFICE {{portalName}}. Gli utenti di Google Workspace verranno importati senza nome/cognome e verrà utilizzato il loro nome email. I nomi degli utenti possono essere modificati dopo l'importazione. Gli utenti già esistenti in ONLYOFFICE {{portalName}} sono evidenziati con un colore verde e non sono selezionati per impostazione predefinita.",
   "SelectUsersDescriptionNextcloud": "Seleziona gli utenti dall'elenco da importare in ONLYOFFICE {{portalName}}. Possono essere selezionati solo gli utenti con email. Gli utenti già esistenti in ONLYOFFICE DocSpace sono evidenziati con un colore verde e non sono selezionati per impostazione predefinita.",
-  "SelectUsersDescriptionWorkspace": "Seleziona gli utenti dall'elenco da importare in ONLYOFFICE DocSpace. Gli utenti già esistenti in ONLYOFFICE DocSpace sono evidenziati con un colore verde e non sono selezionati per impostazione predefinita.",
+  "SelectUsersDescriptionWorkspace": "Seleziona gli utenti dall'elenco da importare in ONLYOFFICE {{portalName}}. Gli utenti già esistenti in ONLYOFFICE {{portalName}} sono evidenziati con un colore verde e non sono selezionati per impostazione predefinita.",
   "SelectUsersWithEmail": "Seleziona gli utenti con posta elettronica",
   "SelectUserTypes": "Seleziona i tipi di utenti",
   "SelectUserTypesDescription": "Seleziona i ruoli DocSpace per gli utenti importati: <1>Amministratore DocSpace</1>, <1>Amministratore stanza</1> o <1>Utente esperto</1>. Per impostazione predefinita, il ruolo Utente esperto è selezionato per ciascun utente. Puoi gestire i ruoli dopo l'importazione.",

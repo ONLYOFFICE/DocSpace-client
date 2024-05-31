@@ -221,7 +221,7 @@
   "SelectUsers": "Vybrat uživatele",
   "SelectUsersDescriptionGoogle": "Zaškrtněte uživatele ze seznamu pro import do aplikace ONLYOFFICE {{portalName}}. Uživatelé z Google Workspace budou importováni bez Křestního jména / Příjmení a místo nich bude použito jejich e-mailové jméno. Jména uživatelů lze po importu změnit. Uživatelé již existující v ONLYOFFICE {{portalName}} jsou zvýrazněni zelenou barvou a ve výchozím nastavení nejsou zaškrtnuti.",
   "SelectUsersDescriptionNextcloud": "Zaškrtněte uživatele ze seznamu pro import do aplikace ONLYOFFICE {{portalName}}. Lze vybrat pouze uživatele s e-maily. Uživatelé již existující v ONLYOFFICE {{portalName}} jsou zvýrazněni zelenou barvou a ve výchozím nastavení nejsou zaškrtnuti.",
-  "SelectUsersDescriptionWorkspace": "Zaškrtněte uživatele ze seznamu pro import do aplikace ONLYOFFICE DocSpace. Uživatelé již existující v ONLYOFFICE DocSpace jsou zvýrazněni zelenou barvou a ve výchozím nastavení nejsou zaškrtnuti.",
+  "SelectUsersDescriptionWorkspace": "Zaškrtněte uživatele ze seznamu pro import do aplikace ONLYOFFICE {{portalName}}. Uživatelé již existující v ONLYOFFICE {{portalName}} jsou zvýrazněni zelenou barvou a ve výchozím nastavení nejsou zaškrtnuti.",
   "SelectUsersWithEmail": "Vybrat uživatele s e-mailem",
   "SelectUserTypes": "Výběr typů uživatelů",
   "SelectUserTypesDescription": "Vyberte role DocSpace pro importované uživatele: <1>DocSpace admin</1>, <1>Room admin</1> nebo <1>Power user</1>. Ve výchozím nastavení je pro každého uživatele vybrána role Power user. Role můžete spravovat i po importu.",

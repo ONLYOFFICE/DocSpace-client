@@ -218,7 +218,7 @@
   "SelectUsers": "Izberi uporabnike",
   "SelectUsersDescriptionGoogle": "Preverite uporabnike s seznama za uvoz v ONLYOFFICE {{portalName}}. Uporabniki iz Google Workspace bodo uvoženi brez imena/priimka, namesto tega bo uporabljeno njihovo e-mail ime. Imena uporabnikov lahko po uvozu spremenite. Uporabniki, ki že obstajajo v ONLYOFFICE {{portalName}}, so označeni z zeleno barvo in privzeto niso označeni.",
   "SelectUsersDescriptionNextcloud": "Preverite uporabnike s seznama za uvoz v ONLYOFFICE {{portalName}}. Izbrani so lahko samo uporabniki z e-mail naslovi. Uporabniki, ki že obstajajo v ONLYOFFICE {{portalName}}, so označeni z zeleno barvo in privzeto niso označeni.",
-  "SelectUsersDescriptionWorkspace": "Preverite uporabnike s seznama za uvoz v ONLYOFFICE DocSpace. Uporabniki, ki že obstajajo v ONLYOFFICE DocSpace, so označeni z zeleno barvo in privzeto niso označeni.",
+  "SelectUsersDescriptionWorkspace": "Preverite uporabnike s seznama za uvoz v ONLYOFFICE {{portalName}}. Uporabniki, ki že obstajajo v ONLYOFFICE {{portalName}}, so označeni z zeleno barvo in privzeto niso označeni.",
   "SelectUsersWithEmail": "Izberite uporabnike z e-mail",
   "SelectUserTypes": "Izberite tipe uporabnikov",
   "SelectUserTypesDescription": "Izberite vloge DocSpace za uvožene uporabnike: <1>skrbnik DocSpace</1>, <1>skrbnik sobe</1> ali <1>izkušen uporabnik</1>. Privzeto je za vsakega uporabnika izbrana vloga naprednega uporabnika. Vloge lahko upravljate po uvozu.",

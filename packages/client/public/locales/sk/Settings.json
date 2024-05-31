@@ -221,7 +221,7 @@
   "SelectUsers": "Vyberte používateľov",
   "SelectUsersDescriptionGoogle": "Označte v zozname používateľov, ktorých chcete importovať do ONLYOFFICE {{portalName}}. Používatelia z Google Workspace budú importovaní bez údajov Meno / Priezvisko a namiesto nich sa použije ich e-mail. Mená používateľov je možné po importe údajov zmeniť. Používatelia, ktorí už existujú v ONLYOFFICE {{portalName}}, sú zvýraznení zelenou farbou a pôvodne nie sú označení.",
   "SelectUsersDescriptionNextcloud": "Označte v zozname používateľov, ktorých chcete importovať do ONLYOFFICE {{portalName}}. Vybrať môžete len používateľov, ktoré majú zadaný e-mail. Používatelia, ktorí už existujú v ONLYOFFICE {{portalName}} sú zvýraznení zelenou farbou a pôvodne nie sú označení.",
-  "SelectUsersDescriptionWorkspace": "Označte v zozname používateľov, ktorých chcete importovať do ONLYOFFICE DocSpace. Používatelia, ktorí už existujú v ONLYOFFICE DocSpace, sú zvýraznení zelenou farbou a pôvodne nie sú označení.",
+  "SelectUsersDescriptionWorkspace": "Označte v zozname používateľov, ktorých chcete importovať do ONLYOFFICE {{portalName}}. Používatelia, ktorí už existujú v ONLYOFFICE {{portalName}}, sú zvýraznení zelenou farbou a pôvodne nie sú označení.",
   "SelectUsersWithEmail": "Vyberte používateľov s e-mailom",
   "SelectUserTypes": "Vyberte typy používateľov",
   "SelectUserTypesDescription": "Vyberte roly DocSpace pre importovaných používateľov: <1>Administrátor DocSpace</1>, <1>Administrátor miestnosti</1> alebo <1>Pokročilý používateľ</1>. V predvolenom nastavení je pre každého používateľa vybraná rola Pokročilý používateľ. Roly môžete spravovať po importe údajov.",

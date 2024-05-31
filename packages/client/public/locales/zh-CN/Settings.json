@@ -196,7 +196,6 @@
   "SelectFileDescriptionWorkspace": "选择 ONLYOFFICE 工作区备份文件，开始数据导入。数据上传和分析完成后，系统会自动启动下一步。",
   "SelectFileInGZFormat": "选择 .GZ 格式的文件",
   "SelectUsers": "选择用户",
-  "SelectUsersDescriptionWorkspace": "勾选列表中的用户，导入 ONLYOFFICE 协作空间。ONLYOFFICE 协作空间中已有的用户会以绿色突出显示，默认情况下不被选中。",
   "SelectUsersWithEmail": "选择有电子邮件的用户",
   "SelectUserTypes": "选择用户类型",
   "SelectUserTypesDescription": "为导入的用户选择协作空间角色：<1>协作空间管理员</1>、<1>房间管理员</1>或<1>高级用户</1>。默认情况下，系统为每个用户选择高级用户角色。您可以在导入后对角色进行管理。",

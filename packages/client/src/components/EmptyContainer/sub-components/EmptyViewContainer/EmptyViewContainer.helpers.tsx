@@ -88,7 +88,7 @@ export const getDescription = (
         () => t("Files:EmptyFormSubFolderHeaderText"),
       )
       .with([FolderType.FormRoom, null, P.when(() => isNotAdmin)], () =>
-        t("EmptyView:FormFolderDefaultDescription"),
+        t("EmptyView:FormFolderDefaultUserDescription"),
       )
       .with([FolderType.FormRoom, null, P._], () =>
         t("EmptyView:FormFolderDefaultDescription"),
@@ -133,7 +133,7 @@ export const getTitle = (
         t("Files:EmptyFormSubFolderProgressDescriptionText"),
       )
       .with([FolderType.FormRoom, null, P.when(() => isNotAdmin)], () =>
-        t("EmptyView:FormFolderDefaultTitle"),
+        t("EmptyView:FormFolderDefaultUserTitle"),
       )
       .with([FolderType.FormRoom, null, P._], () =>
         t("EmptyView:FormFolderDefaultTitle"),
@@ -160,16 +160,13 @@ export const getTitle = (
 };
 
 export const getFolderIcon = (
-  type: Nullable<FolderType>,
+  roomType: Nullable<FolderType>,
   isBaseTheme: boolean,
   access: AccessType,
   folderType: Nullable<FolderType>,
 ) => {
-  return match([type, folderType, access])
-    .with([P._, FolderType.Done, P._], () =>
-      isBaseTheme ? <FormDefaultFolderLight /> : <FormDefaultFolderDark />,
-    )
-    .with([FolderType.FormRoom, null, P._], () =>
+  return match([roomType, folderType, access])
+    .with([FolderType.FormRoom, P._, P._], () =>
       isBaseTheme ? <FormDefaultFolderLight /> : <FormDefaultFolderDark />,
     )
     .otherwise(() => <div />);

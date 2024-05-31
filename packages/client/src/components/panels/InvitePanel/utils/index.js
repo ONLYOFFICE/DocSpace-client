@@ -45,7 +45,9 @@ export const getAccessOptions = (
     docSpaceAdmin: {
       key: "docSpaceAdmin",
       label: t("Common:DocspaceAdmin", { portalName: PORTAL }),
-      description: t("Translations:RoleDocspaceAdminDescription"),
+      description: t("Translations:RoleDocspaceAdminDescription", {
+        portalName: PORTAL,
+      }),
       ...(!standalone && { quota: t("Common:Paid") }),
       color: "#EDC409",
       access:

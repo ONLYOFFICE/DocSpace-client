@@ -34,6 +34,8 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
+import { PORTAL } from "@docspace/shared/constants";
+
 const StyledContainer = styled.div`
   display: flex;
   background: ${(props) => props.theme.client.settings.payment.backgroundColor};
@@ -136,12 +138,14 @@ const PayerInformationContainer = ({
 
     let invalidEmailDescription = user.isOwner
       ? t("InvalidEmailWithActiveSubscription")
-      : t("InvalidEmailWithActiveSubscriptionForAdmin");
+      : t("InvalidEmailWithActiveSubscriptionForAdmin", { portalName: PORTAL });
 
     if (isNotPaidPeriod || isFreeAfterPaidPeriod) {
       invalidEmailDescription = user.isOwner
-        ? t("InvalidEmailWithoutActiveSubscription")
-        : t("InvalidEmailWithoutActiveSubscriptionByAdmin");
+        ? t("InvalidEmailWithoutActiveSubscription", { portalName: PORTAL })
+        : t("InvalidEmailWithoutActiveSubscriptionByAdmin", {
+            portalName: PORTAL,
+          });
 
       return userNotFound + invalidEmailDescription;
     }

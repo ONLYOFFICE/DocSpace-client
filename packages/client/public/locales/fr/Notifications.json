@@ -2,7 +2,7 @@
   "ActionsWithFilesDescription": "Les badges vous informent des actions telles que le téléchargement, la création et les modifications de fichiers.",
   "Badges": "Badges",
   "DailyFeed": "Flux quotidien {{portalName}}",
-  "DailyFeedDescription": "Lisez les nouvelles et les événements de votre DocSpace dans un rapport quotidien.",
+  "DailyFeedDescription": "Lisez les nouvelles et les événements de votre {{portalName}} dans un rapport quotidien.",
   "ManageNotifications": "Gérer",
   "Notifications": "Notifications",
   "RoomsActions": "Actions avec des fichiers dans les Salles",

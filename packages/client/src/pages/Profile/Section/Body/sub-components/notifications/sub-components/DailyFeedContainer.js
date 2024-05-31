@@ -60,7 +60,9 @@ const DailyFeedContainer = ({
           isChecked={dailyFeedSubscriptions}
         />
       </div>
-      <Text {...textDescriptionsProps}>{t("DailyFeedDescription")}</Text>
+      <Text {...textDescriptionsProps}>
+        {t("DailyFeedDescription", { portalName: PORTAL })}
+      </Text>
     </div>
   );
 };

@@ -2,7 +2,7 @@
   "ActionsWithFilesDescription": "Os emblemas irão notificá-lo sobre ações como upload, criação e alterações em arquivos.",
   "Badges": "Distintivos",
   "DailyFeed": "Feed diário do {{portalName}}",
-  "DailyFeedDescription": "Leia notícias e eventos do seu DocSpace em um resumo diário.",
+  "DailyFeedDescription": "Leia notícias e eventos do seu {{portalName}} em um resumo diário.",
   "ManageNotifications": "Gerenciar",
   "Notifications": "Notificações",
   "RoomsActions": "Ações com arquivos em Rooms",

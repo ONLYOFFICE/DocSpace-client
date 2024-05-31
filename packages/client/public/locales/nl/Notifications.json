@@ -2,7 +2,7 @@
   "ActionsWithFilesDescription": "Badges informeren u over acties zoals het uploaden, aanmaken en wijzigen van bestanden.",
   "Badges": "Badges",
   "DailyFeed": "Daily {{portalName}} feed",
-  "DailyFeedDescription": "Lees nieuws en gebeurtenissen uit uw DocSpace in een dagelijkse samenvatting.",
+  "DailyFeedDescription": "Lees nieuws en gebeurtenissen uit uw {{portalName}} in een dagelijkse samenvatting.",
   "ManageNotifications": "Beheer",
   "Notifications": "Meldingen",
   "RoomsActions": "Acties met bestanden in Kamers",

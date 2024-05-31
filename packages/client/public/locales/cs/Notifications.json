@@ -2,7 +2,7 @@
   "ActionsWithFilesDescription": "Odznaky vás budou upozorňovat na akce, jako je nahrávání, vytváření a změny v souborech.",
   "Badges": "Odznaky",
   "DailyFeed": "Denní kanál {{portalName}}",
-  "DailyFeedDescription": "Přečtěte si novinky a události z vašeho DocSpace v denním přehledu.",
+  "DailyFeedDescription": "Přečtěte si novinky a události z vašeho {{portalName}} v denním přehledu.",
   "ManageNotifications": "Správa",
   "Notifications": "Oznámení",
   "RoomsActions": "Akce se soubory v místnostech",

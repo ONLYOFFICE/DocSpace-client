@@ -23,7 +23,7 @@
   "PortalRemoveTitle": "Por favor, confirme que quer eliminar o seu {{portalName}}.",
   "Reactivate": "Reativar",
   "SetAppButton": "Ligar à app",
-  "SetAppDescription": "A autenticação de dois-fatores está ativada. Configure a sua aplicação de autenticação para continuar a trabalhar no DocSpace. Pode utilizar a autenticação da Google para <1>Android</1> e <4>iOS</4> ou um autenticador para <8>Windows Phone</8>.",
+  "SetAppDescription": "A autenticação de dois-fatores está ativada. Configure a sua aplicação de autenticação para continuar a trabalhar no {{portalName}}. Pode utilizar a autenticação da Google para <1>Android</1> e <4>iOS</4> ou um autenticador para <8>Windows Phone</8>.",
   "SetAppInstallDescription": "Para ligar a app, faça scan ao código QR ou insira manualmente a sua chave secreta <1>{{ secretKey }}</1>, e depois insira o código de 6 dígitos fornecido pela sua app no campo abaixo.",
   "SetAppTitle": "Configure a sua aplicação de autenticação",
   "SignUp": "Inscrever-se",

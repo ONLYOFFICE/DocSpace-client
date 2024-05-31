@@ -23,7 +23,7 @@
   "PortalRemoveTitle": "Lūdzu, apstipriniet, ka vēlaties izdzēst savu {{portalName}}",
   "Reactivate": "Atkārtoti aktivizēt",
   "SetAppButton": "Savienot lietotni",
-  "SetAppDescription": "Ir iespējota divu faktoru autentifikācija. Konfigurējiet savu autentifikatora lietotni, lai turpinātu darbu DocSpace. Varat izmantot Google autentifikatoru <1>Android</1> un <4>iOS</4> vai autentifikatoru <8>Windows Phone</8>.",
+  "SetAppDescription": "Ir iespējota divu faktoru autentifikācija. Konfigurējiet savu autentifikatora lietotni, lai turpinātu darbu {{portalName}}. Varat izmantot Google autentifikatoru <1>Android</1> un <4>iOS</4> vai autentifikatoru <8>Windows Phone</8>.",
   "SetAppInstallDescription": "Lai izveidotu savienojumu ar lietotni, skenējiet QR kodu vai manuāli ievadiet savu slepeno atslēgu <1>{{ secretKey }}</1> un pēc tam zemāk esošajā laukā ievadiet sešu ciparu kodu no savas lietotnes.",
   "SetAppTitle": "Konfigurējiet savu autentifikācijas lietojumprogrammu",
   "SignUp": "Reģistrēties",

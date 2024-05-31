@@ -23,7 +23,7 @@
   "PortalRemoveTitle": "Підтвердьте, що ви хочете видалити свій {{portalName}}.",
   "Reactivate": "Активувати повторно",
   "SetAppButton": "Підключити програму",
-  "SetAppDescription": "Включено двофакторну автентифікацію. Налаштуйте програму автентифікації, щоб продовжити роботу в DocSpace. Можна використовувати Google Authenticator для <1>Android</1> та <4>iOS</4> або Authenticator для <8>Windows Phone</8>.",
+  "SetAppDescription": "Включено двофакторну автентифікацію. Налаштуйте програму автентифікації, щоб продовжити роботу в {{portalName}}. Можна використовувати Google Authenticator для <1>Android</1> та <4>iOS</4> або Authenticator для <8>Windows Phone</8>.",
   "SetAppInstallDescription": "Щоб підключити програму, відскануйте QR-код або вручну введіть свій секретний ключ <1>{{ secretKey }}</1>, а потім введіть 6-значний код із програми в поле нижче.",
   "SetAppTitle": "Налаштуйте програму автентифікації",
   "SignUp": "Реєстрація",

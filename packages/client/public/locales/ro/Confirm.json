@@ -23,7 +23,7 @@
   "PortalRemoveTitle": "Confirmaţi că doriţi să ştergeţi spaţiul dvs {{portalName}}.",
   "Reactivate": "Reactivare",
   "SetAppButton": "Conectarea aplicației",
-  "SetAppDescription": "Autentificarea cu doi factori este activată. Configurați aplicația dvs de autentificare pentru a continua lucrul în DocSpace. Puteți folosi aplicația Google Authenticator pentru <1>Android</1> și <4>iOS</4> sau Authenticator pentru <8>Windows Phone</8>.",
+  "SetAppDescription": "Autentificarea cu doi factori este activată. Configurați aplicația dvs de autentificare pentru a continua lucrul în {{portalName}}. Puteți folosi aplicația Google Authenticator pentru <1>Android</1> și <4>iOS</4> sau Authenticator pentru <8>Windows Phone</8>.",
   "SetAppInstallDescription": "Pentru a conecta aplicația, scanați codul QR sau introduceți manual cheia secretă <1>{{ secretKey }}</1>, și apoi introduceți codul din 6 cifre din aplicația în câmpul aflat dedesubt.",
   "SetAppTitle": "Configurarea aplicației de autentificare dvs.",
   "SignUp": "Conectare",

@@ -23,7 +23,7 @@
   "PortalRemoveTitle": "Potvrďte, že chcete vymazať svoj {{portalName}}.",
   "Reactivate": "Znova aktivovať",
   "SetAppButton": "Pripojiť aplikáciu",
-  "SetAppDescription": "Dvojfaktorové overenie je povolené. Nakonfigurujte si overovaciu aplikáciu, aby ste mohli pokračovať v práci v DocSpace. Môžete použiť Google Authenticator pre <1>Android</1> a <4>iOS</4> alebo Authenticator pre <8>Windows Phone</8>.",
+  "SetAppDescription": "Dvojfaktorové overenie je povolené. Nakonfigurujte si overovaciu aplikáciu, aby ste mohli pokračovať v práci v {{portalName}}. Môžete použiť Google Authenticator pre <1>Android</1> a <4>iOS</4> alebo Authenticator pre <8>Windows Phone</8>.",
   "SetAppInstallDescription": "Ak chcete pripojiť aplikáciu, naskenujte QR kód alebo ručne zadajte svoj tajný kľúč <1>{{ secretKey }}</1> a potom do poľa nižšie zadajte 6-miestny kód z vašej aplikácie.",
   "SetAppTitle": "Nakonfigurujte si aplikáciu autentifikátora",
   "SignUp": "Zaregistrujte sa",

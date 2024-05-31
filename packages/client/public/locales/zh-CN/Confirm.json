@@ -16,7 +16,6 @@
   "PassworResetTitle": "现在您可创建新密码。",
   "Reactivate": "重新激活",
   "SetAppButton": "连接应用",
-  "SetAppDescription": "双因素身份验证功能已启用。请配置您的身份验证应用，以便继续使用协作空间。如果您使用的是<1>Android</1>与<4>iOS</4>系统，则可使用Google Authenticator。<8>Windows Phone</8>可使用Authenticator。",
   "SetAppInstallDescription": "如需连接应用，请扫描二维码或手动输入您的密钥<1>{{ secretKey }}</1>，然后在下方的字段中输入应用中的6位数字码。",
   "SetAppTitle": "配置您的身份验证应用",
   "SignUp": "注册",

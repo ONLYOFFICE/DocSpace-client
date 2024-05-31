@@ -182,7 +182,7 @@
   "PortalCreatedDate": "Portail créé le {{date}}",
   "PortalDeactivation": "Désactiver {{portalName}}",
   "PortalDeactivationDescription": "Utilisez cette option pour désactiver temporairement votre espace.",
-  "PortalDeactivationHelper": "Si vous souhaitez désactiver ce DocSpace, votre espace et toutes les informations qui y sont associées seront bloqués afin que personne n’y ait accès pendant une période donnée. Pour ce faire, cliquez sur le bouton Désactiver. Un lien pour confirmer l’opération sera envoyé à l’adresse électronique du propriétaire de l’espace.\nSi vous souhaitez rejoindre l’espace et continuer à l’utiliser, vous devrez utiliser le second lien fourni dans l’e-mail de confirmation. Veuillez donc conserver cet e-mail en lieu sûr.",
+  "PortalDeactivationHelper": "Si vous souhaitez désactiver ce {{portalName}}, votre espace et toutes les informations qui y sont associées seront bloqués afin que personne n’y ait accès pendant une période donnée. Pour ce faire, cliquez sur le bouton Désactiver. Un lien pour confirmer l’opération sera envoyé à l’adresse électronique du propriétaire de l’espace.\nSi vous souhaitez rejoindre l’espace et continuer à l’utiliser, vous devrez utiliser le second lien fourni dans l’e-mail de confirmation. Veuillez donc conserver cet e-mail en lieu sûr.",
   "PortalDeletion": "Suppression de DocSpace",
   "PortalDeletionDescription": "Utilisez cette option pour supprimer définitivement votre espace.",
   "PortalDeletionEmailSended": "Le lien pour confirmer l’opération a été envoyé à {{ownerEmail}} (l’adresse e-mail du propriétaire de l’espace).",

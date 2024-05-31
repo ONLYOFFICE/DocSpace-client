@@ -170,7 +170,6 @@
   "PortalCreatedDate": "Portaalin luontipäivä: {{date}}",
   "PortalDeactivation": "Poista {{portalName}} käytöstä",
   "PortalDeactivationDescription": "Käytä tätä vaihtoehtoa deaktivoidaksesi tilasi väliaikaisesti.",
-  "PortalDeactivationHelper": "Jos haluat deaktivoida tämän DocSpacen, tilasi ja kaiken siihen liittyvän tiedon, siihen pääsy estetään kaikilta tietyksi ajaksi. Tehdäksesi sen, klikkaa Deaktivoi-painiketta. Vahvistuslinkki lähetetään tilan omistajan sähköpostiosoitteeseen.\nJos haluat tulla takaisin tilaan ja jatkaa sen käyttämistä, sinun täytyy käyttää vahvistussähköpostissa olevaa toista linkkiä. Joten, säilytä tämä sähköposti.",
   "PortalDeletion": "DocSpacen poisto",
   "PortalDeletionDescription": "Käytä tätä vaihtoehtoa poistaaksesi tilasi lopullisesti.",
   "PortalDeletionEmailSended": "Toiminnonvahvistuslinkki on lähetetty {{ownerEmail}} (tilan omistajan sähköpostiosoite.",

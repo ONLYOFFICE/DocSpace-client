@@ -182,7 +182,7 @@
   "PortalCreatedDate": "Portal Aangemaakt datum: {{date}}",
   "PortalDeactivation": "{{portalName}} deactiveren",
   "PortalDeactivationDescription": "Gebruik deze optie om uw ruimte tijdelijk te deactiveren.",
-  "PortalDeactivationHelper": "Als u deze DocSpace wilt deactiveren, wordt uw ruimte en alle informatie die ermee is verbonden geblokkeerd, zodat niemand er gedurende een bepaalde periode toegang toe heeft. Klik daarvoor op de knop Deactiveren. Een link om de actie te bevestigen wordt naar het e-mailadres van de eigenaar van de ruimte gestuurd.\nAls u wilt terugkeren naar de ruimte en deze verder wilt gebruiken, moet u de tweede link in de bevestigingsmail gebruiken. Bewaar deze e-mail dus zorgvuldig.",
+  "PortalDeactivationHelper": "Als u deze {{portalName}} wilt deactiveren, wordt uw ruimte en alle informatie die ermee is verbonden geblokkeerd, zodat niemand er gedurende een bepaalde periode toegang toe heeft. Klik daarvoor op de knop Deactiveren. Een link om de actie te bevestigen wordt naar het e-mailadres van de eigenaar van de ruimte gestuurd.\nAls u wilt terugkeren naar de ruimte en deze verder wilt gebruiken, moet u de tweede link in de bevestigingsmail gebruiken. Bewaar deze e-mail dus zorgvuldig.",
   "PortalDeletion": "Ruimte Verwijdering",
   "PortalDeletionDescription": "Gebruik deze optie om uw ruimte definitief te verwijderen.",
   "PortalDeletionEmailSended": "Een link om de actie te bevestigen is verzonden naar {{ownerEmail}} (het e-mailadres van de eigenaar van de ruimte).",

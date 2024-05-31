@@ -182,7 +182,7 @@
   "PortalCreatedDate": "Portāla izveides datums: {{date}}",
   "PortalDeactivation": "Deaktivizēt {{portalName}}",
   "PortalDeactivationDescription": "Izmantojiet šo opciju, lai īslaicīgi deaktivizētu savu telpu.",
-  "PortalDeactivationHelper": "Ja vēlaties deaktivizēt šo DocSpace, jūsu telpa un visa ar to saistītā informācija tiks bloķēta, lai nevienam nebūtu piekļuves tai noteiktu laika periodu. Lai to izdarītu, noklikšķiniet uz pogas Deaktivizēt. Saite darbības apstiprināšanai tiks nosūtīta uz telpas īpašnieka e-pasta adresi.\nJa vēlaties atgriezties telpā un turpināt to izmantot, jums būs jāizmanto otrā saite, kas norādīta apstiprinājuma e-pasta ziņojumā. Tāpēc, lūdzu, glabājiet šo e-pasta ziņojumu drošā vietā.",
+  "PortalDeactivationHelper": "Ja vēlaties deaktivizēt šo {{portalName}}, jūsu telpa un visa ar to saistītā informācija tiks bloķēta, lai nevienam nebūtu piekļuves tai noteiktu laika periodu. Lai to izdarītu, noklikšķiniet uz pogas Deaktivizēt. Saite darbības apstiprināšanai tiks nosūtīta uz telpas īpašnieka e-pasta adresi.\nJa vēlaties atgriezties telpā un turpināt to izmantot, jums būs jāizmanto otrā saite, kas norādīta apstiprinājuma e-pasta ziņojumā. Tāpēc, lūdzu, glabājiet šo e-pasta ziņojumu drošā vietā.",
   "PortalDeletion": "DocSpace dzēšana",
   "PortalDeletionDescription": "Izmantojiet šo opciju, lai neatgriezeniski izdzēstu savu telpu.",
   "PortalDeletionEmailSended": "Saite darbības apstiprināšanai ir nosūtīta uz {{ownerEmail}} (telpas īpašnieka e-pasta adresi).",

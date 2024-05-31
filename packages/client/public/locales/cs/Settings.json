@@ -183,7 +183,7 @@
   "PortalCreatedDate": "Datum vytvoření portálu: {{date}}",
   "PortalDeactivation": "Deaktivace {{portalName}}",
   "PortalDeactivationDescription": "Pomocí této možnosti můžete dočasně deaktivovat svůj prostor.",
-  "PortalDeactivationHelper": "Pokud si přejete tento prostor DocSpace deaktivovat, bude váš prostor a všechny informace s ním spojené zablokovány, aby k nim po určitou dobu neměl nikdo přístup. To provedete kliknutím na tlačítko Deaktivovat. Na e-mailovou adresu vlastníka prostoru bude zaslán odkaz pro potvrzení operace.\nV případě, že se chcete do prostoru vrátit a pokračovat v jeho používání, musíte použít druhý odkaz uvedený v potvrzovacím e-mailu. Tento e-mail si proto prosím uschovejte na bezpečném místě.",
+  "PortalDeactivationHelper": "Pokud si přejete tento prostor {{portalName}} deaktivovat, bude váš prostor a všechny informace s ním spojené zablokovány, aby k nim po určitou dobu neměl nikdo přístup. To provedete kliknutím na tlačítko Deaktivovat. Na e-mailovou adresu vlastníka prostoru bude zaslán odkaz pro potvrzení operace.\nV případě, že se chcete do prostoru vrátit a pokračovat v jeho používání, musíte použít druhý odkaz uvedený v potvrzovacím e-mailu. Tento e-mail si proto prosím uschovejte na bezpečném místě.",
   "PortalDeletion": "Odstranění DocSpace",
   "PortalDeletionDescription": "Tuto možnost použijte k trvalému odstranění místa.",
   "PortalDeletionEmailSended": "Na adresu {{ownerEmail}} byl odeslán odkaz pro potvrzení operace. (e-mailová adresa vlastníka prostoru).",

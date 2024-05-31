@@ -56,7 +56,7 @@
   "GoToRoom": "otağa keçid edin",
   "Header": "Başlıq",
   "HeaderDescription": "{{portalName}} bölmələrinə girişi məhdudlaşdırmaq üçün mobil versiyada başlığı deaktiv edə bilərsiniz (masaüstü versiyada sol menyunu söndürmək kimi).",
-  "HtmlCodeDescription": "<script> teqindən istifadə edərək DocSpace-in və ya onun bir hissəsinin yerləşdirilməsi. Aşağıdakı HTML kodunu kopyalayın və HTML faylınıza əlavə edin.",
+  "HtmlCodeDescription": "<script> teqindən istifadə edərək {{portalName}}-in və ya onun bir hissəsinin yerləşdirilməsi. Aşağıdakı HTML kodunu kopyalayın və HTML faylınıza əlavə edin.",
   "InitializeSDK": "Tövsiyə olunan rejimlərdən birini seçin və ya bütün parametrləri əl ilə konfiqurasiya etmək üçün Fərdi istifadə edin.",
   "InLeftPanel": "sol paneldə",
   "InterfaceElements": "İnterfeys elementləri",

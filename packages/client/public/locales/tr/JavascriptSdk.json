@@ -56,7 +56,7 @@
   "GoToRoom": "odaya git",
   "Header": "Üst Bilgi",
   "HeaderDescription": "{{portalName}} bölümlerine erişimi sınırlamak için mobil sürümde başlığı devre dışı bırakabilirsiniz (masaüstü sürümünde sol menüyü devre dışı bırakmak gibi).",
-  "HtmlCodeDescription": "<script> etiketini kullanarak DocSpace'i veya bir parçasını gömme. Aşağıdaki HTML kodunu kopyalayın ve HTML dosyanıza ekleyin.",
+  "HtmlCodeDescription": "<script> etiketini kullanarak {{portalName}}'i veya bir parçasını gömme. Aşağıdaki HTML kodunu kopyalayın ve HTML dosyanıza ekleyin.",
   "InitializeSDK": "Önerilen modlardan birini seçin veya tüm parametreleri manuel olarak yapılandırmak için Özel seçeneğini kullanın.",
   "InLeftPanel": "sol panelde",
   "InterfaceElements": "Arayüz öğeleri",

@@ -56,7 +56,7 @@
   "GoToRoom": "doties uz telpu",
   "Header": "Galvene",
   "HeaderDescription": "Varat atspējot galveni mobilajā versijā, lai ierobežotu piekļuvi {{portalName}} sadaļām (tāpat kā atspējojot kreiso izvēlni darbvirsmas versijā).",
-  "HtmlCodeDescription": "DocSpace vai tās daļas iegulšana, izmantojot tagu <script>. Nokopējiet zemāk esošo HTML kodu un ievietojiet to savā HTML failā.",
+  "HtmlCodeDescription": "{{portalName}} vai tās daļas iegulšana, izmantojot tagu <script>. Nokopējiet zemāk esošo HTML kodu un ievietojiet to savā HTML failā.",
   "InitializeSDK": "Altasiet vienu no ieteiktajiem režīmiem vai izmantojiet Pielāgots, lai manuāli konfigurētu visus parametrus.",
   "InLeftPanel": "kreisajā panelī",
   "InterfaceElements": "Saskarnes elementi",

@@ -56,7 +56,7 @@
   "GoToRoom": "Zum Raum gehen",
   "Header": "Kopfzeile",
   "HeaderDescription": "Sie können die Kopfzeile in der mobilen Version deaktivieren, um den Zugriff auf die {{portalName}}-Abschnitte einzuschränken (genau wie das Deaktivieren des linken Menüs in der Desktop-Version).",
-  "HtmlCodeDescription": "Einbetten von DocSpace oder einem Teil davon mithilfe des <script>-Tags. Kopieren Sie den folgenden HTML-Code und fügen Sie ihn in Ihre HTML-Datei ein.",
+  "HtmlCodeDescription": "Einbetten von {{portalName}} oder einem Teil davon mithilfe des <script>-Tags. Kopieren Sie den folgenden HTML-Code und fügen Sie ihn in Ihre HTML-Datei ein.",
   "InitializeSDK": "Wählen Sie einen der vorgeschlagenen Modi oder verwenden Sie „Benutzerdefiniert“, um alle Parameter manuell zu konfigurieren.",
   "InLeftPanel": "in der linken Leiste",
   "InterfaceElements": "Interface-Elemente",

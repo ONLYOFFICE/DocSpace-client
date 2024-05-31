@@ -56,7 +56,7 @@
   "GoToRoom": "방으로 이동",
   "Header": "머리글",
   "HeaderDescription": "모바일 버전에서 헤더를 비활성화하여 {{portalName}} 섹션에 대한 액세스를 제한할 수 있습니다(데스크톱 버전에서 왼쪽 메뉴를 비활성화하는 것과 비슷).",
-  "HtmlCodeDescription": "<script> 태그를 사용하여 DocSpace 또는 그 일부를 임베드하세요. 아래의 HTML 코드를 복사하여 HTML 파일에 삽입하세요. ",
+  "HtmlCodeDescription": "<script> 태그를 사용하여 {{portalName}} 또는 그 일부를 임베드하세요. 아래의 HTML 코드를 복사하여 HTML 파일에 삽입하세요. ",
   "InitializeSDK": "제안된 모드 중 하나를 선택하거나 맞춤화를 이용하여 모든 매개변수를 수동으로 구성하세요.",
   "InLeftPanel": "왼쪽 패널에서",
   "InterfaceElements": "인터페이스 요소",

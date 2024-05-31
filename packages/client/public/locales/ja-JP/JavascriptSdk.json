@@ -56,7 +56,7 @@
   "GoToRoom": "ルームへ移動する",
   "Header": "ヘッダー",
   "HeaderDescription": "モバイル版でヘッダーを無効にして、{{portalName}}セクションへのアクセスを制限することができます。デスクトップ版で左メニューを無効にするのと同じです。",
-  "HtmlCodeDescription": "<script>タグを使用して、DocSpaceまたはその一部を埋め込みます。以下のHTMLコードをコピーして、HTMLファイルに挿入してください。",
+  "HtmlCodeDescription": "<script>タグを使用して、{{portalName}}またはその一部を埋め込みます。以下のHTMLコードをコピーして、HTMLファイルに挿入してください。",
   "InitializeSDK": "推奨されるモードを1つ選択するか、「カスタム」を使用してすべてのパラメーターを手動で設定します。",
   "InLeftPanel": "左パネルで",
   "InterfaceElements": "インターフェイス要素",

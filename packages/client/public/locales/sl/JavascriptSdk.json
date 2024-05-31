@@ -56,7 +56,7 @@
   "GoToRoom": "pojdi na sobo",
   "Header": "Glava",
   "HeaderDescription": "V mobilni različici lahko onemogočite glavo, da omejite dostop do razdelkov {{portalName}} (tako kot onemogočite levi meni v namizni različici).",
-  "HtmlCodeDescription": "Vdelava DocSpace ali njegovega dela z oznako <script>. Kopirajte spodnjo kodo HTML in jo vstavite v svojo datoteko HTML.",
+  "HtmlCodeDescription": "Vdelava {{portalName}} ali njegovega dela z oznako <script>. Kopirajte spodnjo kodo HTML in jo vstavite v svojo datoteko HTML.",
   "InitializeSDK": "Izberite enega od predlaganih načinov ali uporabite Po meri, da ročno konfigurirate vse parametre.",
   "InLeftPanel": "na levem panelu",
   "InterfaceElements": "Elementi vmesnika",

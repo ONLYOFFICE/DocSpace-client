@@ -56,7 +56,7 @@
   "GoToRoom": "vá para o sala",
   "Header": "Cabeçalho",
   "HeaderDescription": "Você pode desabilitar o cabeçalho na versão móvel para limitar o acesso às seções do {{portalName}} (assim como desabilitar o menu esquerdo na versão desktop).",
-  "HtmlCodeDescription": "Incorporação do DocSpace ou parte dele usando a tag <script>. Copie o código HTML abaixo e insira-o em seu arquivo HTML.",
+  "HtmlCodeDescription": "Incorporação do {{portalName}} ou parte dele usando a tag <script>. Copie o código HTML abaixo e insira-o em seu arquivo HTML.",
   "InitializeSDK": "Selecione um dos modos sugeridos ou use Personalizado para configurar todos os parâmetros manualmente.",
   "InLeftPanel": "no painel esquerdo",
   "InterfaceElements": "Elementos de interface",

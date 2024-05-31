@@ -56,7 +56,7 @@
   "GoToRoom": "jít do pokoje",
   "Header": "Záhlaví",
   "HeaderDescription": "V mobilní verzi můžete zakázat záhlaví a omezit tak přístup k sekcím {{portalName}} (stejně jako při zakázání levého menu v desktopové verzi).",
-  "HtmlCodeDescription": "Vložení DocSpace nebo jeho části pomocí značky <script>. Zkopírujte níže uvedený kód HTML a vložte jej do svého souboru HTML.",
+  "HtmlCodeDescription": "Vložení {{portalName}} nebo jeho části pomocí značky <script>. Zkopírujte níže uvedený kód HTML a vložte jej do svého souboru HTML.",
   "InitializeSDK": "Zvolte jeden z navrhovaných režimů nebo použijte Vlastní pro ruční konfiguraci všech parametrů.",
   "InLeftPanel": "v levém panelu",
   "InterfaceElements": "Prvky rozhraní",

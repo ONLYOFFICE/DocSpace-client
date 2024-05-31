@@ -56,7 +56,7 @@
   "GoToRoom": "idi u sobu",
   "Header": "Zaglavlje",
   "HeaderDescription": "Možete da onemogućite zaglavlje u mobilnoj verziji da biste ograničili pristup odeljcima {{portalName}}-a (baš kao da onemogućite levi meni u verziji za desktop).",
-  "HtmlCodeDescription": "Ugrađivanje DocSpace-a ili njegovog dela pomoću <script> taga. Kopirajte HTML kod ispod i umetnite ga u svoju HTML datoteku.",
+  "HtmlCodeDescription": "Ugrađivanje {{portalName}}-a ili njegovog dela pomoću <script> taga. Kopirajte HTML kod ispod i umetnite ga u svoju HTML datoteku.",
   "InitializeSDK": "Izaberite jedan od predloženih režima ili koristite Custom da biste ručno konfigurisali sve parametre.",
   "InLeftPanel": "u levom panelu",
   "InterfaceElements": "Elementi interfejsa",

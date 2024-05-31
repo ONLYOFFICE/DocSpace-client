@@ -59,7 +59,7 @@
   "GoToRoom": "go to the room",
   "Header": "Header",
   "HeaderDescription": "You can disable header in the mobile version to limit access to the {{portalName}} sections (just like disabling the left menu in the desktop version).",
-  "HtmlCodeDescription": "Embedding DocSpace or its part using the <script> tag. Copy the HTML code below and insert it into your HTML file.",
+  "HtmlCodeDescription": "Embedding {{portalName}} or its part using the <script> tag. Copy the HTML code below and insert it into your HTML file.",
   "InitializeSDK": "Select one of the suggested modes, or use Custom to configure all the parameters manually.",
   "InLeftPanel": "in the left panel",
   "InterfaceElements": "Interface elements",

@@ -56,7 +56,7 @@
   "GoToRoom": "ga naar de kamer",
   "Header": "Koptekst",
   "HeaderDescription": "U kunt de koptekst uitschakelen in de mobiele versie om de toegang tot de {{portalName}} secties te beperken (net zoals u het linkermenu uitschakelt in de desktopversie).",
-  "HtmlCodeDescription": "DocSpace of een deel ervan insluiten met de <script> tag. Kopieer de onderstaande HTML code en voeg deze toe aan uw HTML bestand.",
+  "HtmlCodeDescription": "{{portalName}} of een deel ervan insluiten met de <script> tag. Kopieer de onderstaande HTML code en voeg deze toe aan uw HTML bestand.",
   "InitializeSDK": "Selecteer een van de voorgestelde modi of gebruik Aangepast om alle parameters handmatig te configureren.",
   "InLeftPanel": "in het linkerpaneel",
   "InterfaceElements": "Interface elementen",

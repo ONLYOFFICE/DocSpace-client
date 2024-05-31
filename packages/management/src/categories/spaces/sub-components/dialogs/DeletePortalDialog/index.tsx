@@ -77,8 +77,9 @@ const DeletePortalDialog = () => {
           email={email}
           portalName={PORTAL}
         >
-          Please note: only the owner is able to delete the selected DocSpace.
-          The owner of <strong>{{ domain }}</strong> is
+          Please note: only the owner is able to delete the selected
+          {{ portalName: PORTAL }}. The owner of <strong>{{ domain }}</strong>
+          is
           <strong>{{ displayName }}</strong>
           <Link
             className="email-link"

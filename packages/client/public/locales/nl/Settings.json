@@ -147,7 +147,7 @@
   "LanguageAndTimeZoneSettingsNavDescription": "Taal- en tijdzone-instellingen is een manier om de taal van de hele portaal te wijzigen voor alle portaalgebruikers en om de tijdzone te configureren, zodat alle gebeurtenissen van de portal met de juiste datum en tijd worden weergegeven.",
   "LastUpdate": "Laatst bijgewerkt: {{date}}",
   "LicenseLimitCounter": "Licentielimiet Beheerders/Power:",
-  "LicenseLimitDescription": "De licentielimiet teller bestaat uit: reeds bestaande accounts in DocSpace en nieuwe gebruikers die u wilt importeren. Als u gebruikers importeert die al een DocSpace-account hebben, zullen zij niet meer worden meegeteld in de teller. Met uw DocSpace-licentie kunt u maximaal 100 gebruikers hebben.",
+  "LicenseLimitDescription": "De licentielimiet teller bestaat uit: reeds bestaande accounts in {{portalName}} en nieuwe gebruikers die u wilt importeren. Als u gebruikers importeert die al een DocSpace-account hebben, zullen zij niet meer worden meegeteld in de teller. Met uw {{portalName}}-licentie kunt u maximaal 100 gebruikers hebben.",
   "Lifetime": "Levensduur (min)",
   "LimitThemesTooltip": "U kunt slechts 3 aangepaste thema's maken. Om een nieuwe aan te maken, moet u een van de vorige thema's verwijderen.",
   "LocalFile": "Lokaal bestand",

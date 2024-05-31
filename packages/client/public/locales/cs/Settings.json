@@ -147,7 +147,7 @@
   "LanguageAndTimeZoneSettingsNavDescription": "Nastavení jazyka a časového pásma umožňuje změnit jazyk celého portálu pro všechny uživatele portálu a nakonfigurovat časové pásmo tak, aby se všechny události portálu zobrazovaly se správným datem a časem.",
   "LastUpdate": "Poslední aktualizace: {{date}}",
   "LicenseLimitCounter": "Omezení licence Administrátoři/možnosti:",
-  "LicenseLimitDescription": "Počítadlo licenčních limitů se skládá z: již existujících účtů v DocSpace a nových uživatelů, které chcete importovat. Pokud importujete uživatele, kteří již účet v DocSpace mají, nebudou do počítadla znovu započítáni. Vaše licence DocSpace vám umožňuje mít maximálně 100 uživatelů.",
+  "LicenseLimitDescription": "Počítadlo licenčních limitů se skládá z: již existujících účtů v {{portalName}} a nových uživatelů, které chcete importovat. Pokud importujete uživatele, kteří již účet v {{portalName}} mají, nebudou do počítadla znovu započítáni. Vaše licence {{portalName}} vám umožňuje mít maximálně 100 uživatelů.",
   "Lifetime": "Životnost (min)",
   "LimitThemesTooltip": "Můžete vytvořit pouze 3 vlastní motivy. Chcete-li vytvořit nové, musíte odstranit jedno z předchozích témat.",
   "LocalFile": "Místní soubor",

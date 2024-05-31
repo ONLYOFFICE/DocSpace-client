@@ -148,7 +148,7 @@
   "LanguageAndTimeZoneSettingsNavDescription": "Ustawienia języka i strefy czasowej to sposób na zmianę języka całego portalu dla wszystkich jego użytkowników oraz konfigurację strefy czasowej w taki sposób, aby wszystkie zdarzenia w portalu były wyświetlane z prawidłową datą i godziną.",
   "LastUpdate": "Ostatnia aktualizacja: {{date}}",
   "LicenseLimitCounter": "Limit licencji Administratorzy/Użytkownicy z większą liczbą uprawnień:",
-  "LicenseLimitDescription": "Licznik limitu licencji składa się z: kont istniejących już w DocSpace oraz nowych użytkowników, których chcesz zaimportować. Jeśli zaimportujesz użytkowników, którzy mają już konto DocSpace, nie zostaną oni ponownie uwzględnieni na liczniku. Twoja licencja DocSpace pozwala Ci mieć maksymalnie 100 użytkowników.",
+  "LicenseLimitDescription": "Licznik limitu licencji składa się z: kont istniejących już w {{portalName}} oraz nowych użytkowników, których chcesz zaimportować. Jeśli zaimportujesz użytkowników, którzy mają już konto {{portalName}}, nie zostaną oni ponownie uwzględnieni na liczniku. Twoja licencja {{portalName}} pozwala Ci mieć maksymalnie 100 użytkowników.",
   "Lifetime": "Długość (min)",
   "LimitThemesTooltip": "Możesz utworzyć tylko 3 niestandardowe motywy. Aby utworzyć nowy, musisz usunąć jeden z poprzednich motywów.",
   "LocalFile": "Plik lokalny",

@@ -148,7 +148,7 @@
   "LanguageAndTimeZoneSettingsNavDescription": "Postavke Jezika i Vremenske Zone omogućavaju promenu jezika celog portala za sve korisnike portala i konfiguraciju vremenske zone tako da će svi događaji na portalu biti prikazani sa tačnim datumom i vremenom.",
   "LastUpdate": "Poslednje ažuriranje: {{date}}",
   "LicenseLimitCounter": "Ograničenje licence za Admine/Napredni korisnici",
-  "LicenseLimitDescription": "Brojač ograničenja licence sastoji se od: već postojećih naloga u DocSpace-u i novih korisnika koje želite da uvezete. Ako uvezete korisnike koji već imaju nalog u DocSpace-u, neće biti ponovo brojani u brojaču. Vaša DocSpace licenca vam dozvoljava da imate maksimalno 100 korisnika.",
+  "LicenseLimitDescription": "Brojač ograničenja licence sastoji se od: već postojećih naloga u {{portalName}}-u i novih korisnika koje želite da uvezete. Ako uvezete korisnike koji već imaju nalog u {{portalName}}-u, neće biti ponovo brojani u brojaču. Vaša {{portalName}} licenca vam dozvoljava da imate maksimalno 100 korisnika.",
   "Lifetime": "Vreme trajanja (min)",
   "LimitThemesTooltip": "Možete samo kreirati 3 prilagođene teme. Da biste kreitrali novu, morate obrisati jednu od prethodnih.",
   "LocalFile": "Lokalna datoteka",

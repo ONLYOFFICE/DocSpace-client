@@ -147,7 +147,7 @@
   "LanguageAndTimeZoneSettingsNavDescription": "Nastavenie jazyka a časového pásma slúži na zmenu jazyka celého portálu pre všetkých používateľov portálu a na konfiguráciu časového pásma, aby sa všetky udalosti portálu zobrazovali so správnym dátumom a časom.",
   "LastUpdate": "Posledná aktualizácia: {{date}}",
   "LicenseLimitCounter": "Obmedzenie licencie Administrátori/Pokročilí používatelia",
-  "LicenseLimitDescription": "Obmedzenie licencie sa počíta takto: už existujúce účty v DocSpace a nové používatelia, ktorých chcete importovať. Ak importujete používateľov, ktorí už majú účet v DocSpace, nebudú sa započítavať. Vaša licencia DocSpace vám umožňuje mať maximálne 100 používateľov.",
+  "LicenseLimitDescription": "Obmedzenie licencie sa počíta takto: už existujúce účty v {{portalName}} a nové používatelia, ktorých chcete importovať. Ak importujete používateľov, ktorí už majú účet v {{portalName}}, nebudú sa započítavať. Vaša licencia {{portalName}} vám umožňuje mať maximálne 100 používateľov.",
   "Lifetime": "Životnosť (min)",
   "LimitThemesTooltip": "Môžete vytvoriť iba 3 vlastné témy. Ak chcete vytvoriť novú, musíte vymazať jednu z predchádzajúcich tém.",
   "LocalFile": "Miestny súbor",

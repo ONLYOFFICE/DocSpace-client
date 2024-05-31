@@ -147,7 +147,7 @@
   "LanguageAndTimeZoneSettingsNavDescription": "Le impostazioni di lingua e fuso orario rappresentano un modo per cambiare la lingua dell'intero portale per tutti gli utenti del portale e per configurare il fuso orario in modo che tutti gli eventi del portale vengano visualizzati con la data e l'ora corrette.",
   "LastUpdate": "Ultimo aggiornamento: {{date}}",
   "LicenseLimitCounter": "Limite di licenza Amministratori/Utenti esperti:",
-  "LicenseLimitDescription": "Il contatore del limite di licenza è composto da: account già esistenti in DocSpace e nuovi utenti che si desidera importare. Se importi utenti che già dispongono di un account DocSpace, questi non verranno contati nuovamente nel contatore. La tua licenza DocSpace ti consente di avere un massimo di 100 utenti.",
+  "LicenseLimitDescription": "Il contatore del limite di licenza è composto da: account già esistenti in {{portalName}} e nuovi utenti che si desidera importare. Se importi utenti che già dispongono di un account {{portalName}}, questi non verranno contati nuovamente nel contatore. La tua licenza {{portalName}} ti consente di avere un massimo di 100 utenti.",
   "Lifetime": "Durata (min)",
   "LimitThemesTooltip": "Puoi creare solo 3 temi personalizzati. Per crearne uno nuovo, devi eliminare uno dei temi precedenti.",
   "LocalFile": "File locale",

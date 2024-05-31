@@ -130,7 +130,6 @@
   "LanguageAndTimeZoneSettingsNavDescription": "语言和时区设置用于更改整个门户的语言以及配置时区，适用于所有门户用户，让门户中所有事件以正确的日期和时间显示。",
   "LastUpdate": "上次更新时间：{{date}}",
   "LicenseLimitCounter": "许可限制管理员/高级用户：",
-  "LicenseLimitDescription": "许可限制计数器包括：协作空间中已有的账号和要导入的新用户。如果您导入的用户已经有协作空间账号，他们不会被重复计算。您的协作空间最多支持 100 位用户。",
   "Lifetime": "寿命（分钟）",
   "LimitThemesTooltip": "您只能创建 3 个自定义主题。如需创建新的主题，请删除一个之前的主题。",
   "LocalFile": "本地文件",

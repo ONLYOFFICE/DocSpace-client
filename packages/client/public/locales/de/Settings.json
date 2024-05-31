@@ -147,7 +147,7 @@
   "LanguageAndTimeZoneSettingsNavDescription": "Sprache- und Zeitzoneneinstellungen ist eine Möglichkeit, die Sprache des gesamten Portals für alle Portalbenutzer zu ändern und die Zeitzone so zu konfigurieren, dass alle Ereignisse des Portals mit dem richtigen Datum und der richtigen Zeit angezeigt werden.",
   "LastUpdate": "Letzte Aktualisierung: {{date}}",
   "LicenseLimitCounter": "Lizenzbeschränkung Administratoren/Powerusers:",
-  "LicenseLimitDescription": "Der Lizenzlimitzähler besteht aus: bereits vorhandenen Konten in DocSpace und neuen Benutzern, die Sie importieren möchten. Wenn Sie Benutzer importieren, die bereits über ein DocSpace-Konto verfügen, werden diese im Zähler nicht erneut gezählt. Mit Ihrer DocSpace-Lizenz können Sie maximal 100 Benutzer haben.",
+  "LicenseLimitDescription": "Der Lizenzlimitzähler besteht aus: bereits vorhandenen Konten in {{portalName}} und neuen Benutzern, die Sie importieren möchten. Wenn Sie Benutzer importieren, die bereits über ein {{portalName}}-Konto verfügen, werden diese im Zähler nicht erneut gezählt. Mit Ihrer {{portalName}}-Lizenz können Sie maximal 100 Benutzer haben.",
   "Lifetime": "Lebenszeit (min)",
   "LimitThemesTooltip": "Sie können nur 3 benutzerdefinierte Themen erstellen. Um ein neues Thema zu erstellen, müssen Sie eines der vorherigen Themen löschen.",
   "LocalFile": "Lokale Datei",

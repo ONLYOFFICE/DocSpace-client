@@ -147,7 +147,7 @@
   "LanguageAndTimeZoneSettingsNavDescription": "언어 및 시간대 설정을 통해 모든 포털 사용자에 대해 전체 포털의 언어를 변경하고 포털의 모든 이벤트가 올바른 날짜와 시간으로 표시되도록 시간대를 구성할 수 있습니다.",
   "LastUpdate": "마지막 업데이트: {{date}}",
   "LicenseLimitCounter": "라이센스 제한 관리자/권한:",
-  "LicenseLimitDescription": "라이센스 제한 카운터는 DocSpace의 기존 계정과 가져오기하려는 새 사용자로 구성됩니다. 이미 DocSpace 계정이 있는 사용자를 가져오기하면 해당 사용자는 카운터에 다시 계산되지 않습니다. DocSpace 라이센스를 사용하면 최대 100명의 사용자를 보유할 수 있습니다.",
+  "LicenseLimitDescription": "라이센스 제한 카운터는 {{portalName}}의 기존 계정과 가져오기하려는 새 사용자로 구성됩니다. 이미 {{portalName}} 계정이 있는 사용자를 가져오기하면 해당 사용자는 카운터에 다시 계산되지 않습니다.{{portalName}} 라이센스를 사용하면 최대 100명의 사용자를 보유할 수 있습니다.",
   "Lifetime": "수명(분)",
   "LimitThemesTooltip": "3개의 사용자 지정 테마만 생성할 수 있습니다. 새 테마를 생성하려면 이미 생성한 테마 중 하나를 삭제해야 합니다.",
   "LocalFile": "로컬 파일",

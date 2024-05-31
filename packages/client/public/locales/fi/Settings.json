@@ -136,7 +136,6 @@
   "LanguageAndTimeZoneSettingsNavDescription": "Kieli- ja aikavyöhyke-asetukset on tapa muuttaa koko portaalin kieli kaikille käyttäjille ja määrittää aikavyöhyke, jotta kaikki portaalin tapahtumat näytetään oikeana päivänä ja aikana.",
   "LastUpdate": "Viimeinen päivitys: {{date}}",
   "LicenseLimitCounter": "Lisenssiraja Järjestelmänvalvojat/Virta:",
-  "LicenseLimitDescription": "Lisenssirajalaskuri koostuu jo olemassa olevista DocSpacen tileistä ja uusistä käyttäjistä, jotka haluat tuoda. Jos tuot käyttäjiä, joilla on jo DocSpace-tili, heitä ei lasketa uudelleen laskuriin. DocSpace-lisenssilläsi voi olla enintaan 100 käyttäjää.",
   "Lifetime": "Elinikä (min)",
   "LimitThemesTooltip": "Voit luoda vain 3 räätälöityä teemaa. Luodaksesi uuden, sinun täytyy poistaa yksi edellisistä teemoista.",
   "LocalFile": "Paikallinen tiedosto",

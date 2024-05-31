@@ -220,7 +220,7 @@
   "SelectFileInGZFormat": ".GZ formatındaki dosyayı seçin",
   "SelectUsers": "Kullanıcıları seç",
   "SelectUsersDescriptionGoogle": "ONLYOFFICE {{portalName}}’e aktarmak için listeden kullanıcıları işaretleyin. Google Workspace’teki kullanıcıların Ad / Soyad bilgileri yerine e-posta adları kullanılacaktır. Kullanıcıların adları içe aktarma işleminden sonra değiştirilebilir. ONLYOFFICE {{portalName}}’de zaten mevcut olan kullanıcılar yeşil renkle vurgulanır ve varsayılan olarak işaretlenmezler.",
-  "SelectUsersDescriptionNextcloud": "ONLYOFFICE DocSpace’e aktarmak için listeden kullanıcıları işaretleyin. Sadece e-postası olan kullanıcılar seçilebilir. ONLYOFFICE DocSpace’de zaten mevcut olan kullanıcılar yeşil renkle vurgulanır ve varsayılan olarak işaretlenmezler.",
+  "SelectUsersDescriptionNextcloud": "ONLYOFFICE {{portalName}}’e aktarmak için listeden kullanıcıları işaretleyin. Sadece e-postası olan kullanıcılar seçilebilir. ONLYOFFICE {{portalName}}’de zaten mevcut olan kullanıcılar yeşil renkle vurgulanır ve varsayılan olarak işaretlenmezler.",
   "SelectUsersDescriptionWorkspace": "ONLYOFFICE DocSpace’e aktarmak için listeden kullanıcıları işaretleyin. ONLYOFFICE DocSpace’de zaten var olan kullanıcılar yeşil renkle vurgulanır ve varsayılan olarak işaretlenmezler.",
   "SelectUsersWithEmail": "E-posta ile kullanıcıları seçin",
   "SelectUserTypes": "Kullanıcı türlerini seçin",

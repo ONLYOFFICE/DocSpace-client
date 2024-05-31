@@ -73,7 +73,9 @@ export const getStepsData = (
     },
     {
       title: t("Settings:SelectUsersWithEmail"),
-      description: t("Settings:SelectUsersDescriptionNextcloud"),
+      description: t("Settings:SelectUsersDescriptionNextcloud", {
+        portalName: PORTAL,
+      }),
       component: (
         <SelectUsersStep
           t={t}

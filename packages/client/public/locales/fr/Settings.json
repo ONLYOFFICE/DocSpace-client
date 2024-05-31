@@ -219,7 +219,7 @@
   "SelectFileInGZFormat": "Sélectionnez le fichier au format .GZ",
   "SelectUsers": "Sélectionnez utilisateur",
   "SelectUsersDescriptionGoogle": "Cochez les cases des utilisateurs que vous souhaitez importer vers {{portalName}}. Lors de l'importation des utilisateurs depuis Google Workspace, le Nom / Prénom d'utilisateur est remplacé par son adresse e-mail. Il est possible de modifier les noms d'utilisateurs après l'importation. Les utilisateurs existants dans OLYOFFICE {{portalName}} sont mis en surbrillance en vert et ne sont pas cochés par défaut.",
-  "SelectUsersDescriptionNextcloud": "Cochez les cases des utilisateurs que vous souhaitez importer vers DocSpace. Il est possible de sélectionner uniquement les utilisateurs ayant une adresse e-mail. Les utilisateurs existants dans OLYOFFICE DocSpace sont mis en surbrillance en vert et ne sont pas cochés par défaut.",
+  "SelectUsersDescriptionNextcloud": "Cochez les cases des utilisateurs que vous souhaitez importer vers {{portalName}}. Il est possible de sélectionner uniquement les utilisateurs ayant une adresse e-mail. Les utilisateurs existants dans OLYOFFICE {{portalName}} sont mis en surbrillance en vert et ne sont pas cochés par défaut.",
   "SelectUsersDescriptionWorkspace": "Cochez les cases des utilisateurs que vous souhaitez importer vers DocSpace. Les utilisateurs existants dans OLYOFFICE DocSpace sont mis en surbrillance en vert et ne sont pas cochés par défaut.",
   "SelectUsersWithEmail": "Sélectionnez les utilisateurs ayant l'adresse e-mail",
   "SelectUserTypes": "Sélectionner le type d'utilisateur",

@@ -50,7 +50,7 @@
   "BackupListWarningText": "Ako izbrišete bilo koju stavku sa liste, njihove odgovarajuće datoteke će takođe biti izbrisane. Ova radnja se ne može opozvati. Za brisanje svih datoteka koristite link:",
   "BlockingTime": "Vreme blokiranja (sek)",
   "Branding": "Brendiranje",
-  "BrandingSectionDescription": "Navedite informacije o vašoj kompaniji, dodajte linkove ka spoljnim resursima i email adrese prikazane u okviru DocSpace interfejsa.",
+  "BrandingSectionDescription": "Navedite informacije o vašoj kompaniji, dodajte linkove ka spoljnim resursima i email adrese prikazane u okviru {{portalName}} interfejsa.",
   "BrandingSubtitle": "Koristite ovu opciju da biste korisnicima pružili iskustvo sa brendom.",
   "BreakpointMobileWarningText": "Ovaj odeljak je nedostupan u mobilnoj verziji",
   "BreakpointMobileWarningTextPrompt": "Molimo koristite desktop ili tablet da pristupite <1>{{sectionName}}</1>.",

@@ -49,7 +49,7 @@
   "BackupListWarningText": "Nếu bạn xóa bất kỳ mục nào trong danh sách, các file tương ứng của chúng cũng sẽ bị xóa. Tác vụ này không thể được hoàn tác. Để xóa tất cả các file này sử dụng liên kết:",
   "BlockingTime": "Thời gian chặn (giây)",
   "Branding": "Thương hiệu",
-  "BrandingSectionDescription": "Nêu rõ thông tin công ty của bạn, thêm liên kết đến tài nguyên bên ngoài và địa chỉ email được hiển thị trong giao diện DocSpace.",
+  "BrandingSectionDescription": "Nêu rõ thông tin công ty của bạn, thêm liên kết đến tài nguyên bên ngoài và địa chỉ email được hiển thị trong giao diện {{portalName}}.",
   "BrandingSubtitle": "Sử dụng tùy chọn này để cung cấp trải nghiệm thương hiệu cho người dùng.",
   "BreakpointMobileWarningTextPrompt": "Vui lòng sử dụng máy tính hoặc máy tính bảng để truy cập <1>{{sectionName}} </1>.",
   "BreakpointSmallText": "Cửa sổ của bạn quá nhỏ để hiển thị tất cả nội dung trang",

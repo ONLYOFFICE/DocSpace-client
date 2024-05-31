@@ -50,7 +50,7 @@
   "BackupListWarningText": "Ja jūs dzēsīsit jebkādus elementus no saraksta, tiem atbilstošie faili arī tiks dzēsti. Šo darbību nevar atsaukt. Lai dzēstu visus failus, izmantojiet saiti:",
   "BlockingTime": "Bloķēšanas laiks (s)",
   "Branding": "Zīmolrade",
-  "BrandingSectionDescription": "Norādiet sava uzņēmuma informāciju, pievienojiet saites uz ārējiem resursiem un e-pasta adresēm, kas tiek rādītas DocSpace interfeisā.",
+  "BrandingSectionDescription": "Norādiet sava uzņēmuma informāciju, pievienojiet saites uz ārējiem resursiem un e-pasta adresēm, kas tiek rādītas {{portalName}} interfeisā.",
   "BrandingSubtitle": "Izmantojiet šo opciju, lai lietotājiem nodrošinātu zīmola lietošanas pieredzi.",
   "BreakpointMobileWarningText": "Šī sadaļa nav pieejama mobilajā versijā",
   "BreakpointMobileWarningTextPrompt": "Izmantojiet datoru vai planšetdatoru, lai piekļūtu <1>{{sectionName}}</1>.",

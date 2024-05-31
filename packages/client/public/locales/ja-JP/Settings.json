@@ -49,7 +49,7 @@
   "BackupListWarningText": "リストからアイテムを削除すると、対応するファイルも削除されます。この操作を元に戻すことができません。すべてのファイルを削除するために次のリンクをクリックしてください：",
   "BlockingTime": "遮断時間（秒）",
   "Branding": "ブランディング",
-  "BrandingSectionDescription": "DocSpaceのインターフェイス内に表示される企業情報、外部リソースへのリンク、メールアドレスの追加を指定してください。",
+  "BrandingSectionDescription": "{{portalName}}のインターフェイス内に表示される企業情報、外部リソースへのリンク、メールアドレスの追加を指定してください。",
   "BrandingSubtitle": "このオプションを使用すると、ユーザーにオンブランドのエクスペリエンスを提供することができます。",
   "BreakpointMobileWarningText": "このセクションはモバイル版ではご利用いただけません",
   "BreakpointMobileWarningTextPrompt": "デスクトップまたはタブレットで<1>{{sectionName}}</1>にアクセスしてください。",

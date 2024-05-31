@@ -50,7 +50,7 @@
   "BackupListWarningText": "Als u items uit de lijst verwijdert, worden hun bijbehorende bestanden ook verwijderd. Deze actie kan niet ongedaan gemaakt worden. Om alle bestanden te verwijderen, gebruik de link:",
   "BlockingTime": "Blokkeertijd (sec)",
   "Branding": "Branding",
-  "BrandingSectionDescription": "Specificeer uw bedrijfsinformatie, voeg links toe naar externe bronnen en e-mailadressen die in de DocSpace interface worden weergegeven.",
+  "BrandingSectionDescription": "Specificeer uw bedrijfsinformatie, voeg links toe naar externe bronnen en e-mailadressen die in de {{portalName}} interface worden weergegeven.",
   "BrandingSubtitle": "Gebruik deze optie om gebruikers een on-brand ervaring te bieden.",
   "BreakpointMobileWarningTextPrompt": "Gebruik een desktop of tablet om toegang te krijgen tot de <1>{{sectionName}}</1>.",
   "BreakpointSmallText": "Uw venster is te klein om alle inhoud van de pagina weer te geven",

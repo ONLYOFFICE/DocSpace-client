@@ -50,7 +50,7 @@
   "BackupListWarningText": "Listeden herhangi bir öğe silerseniz bu öğe ile ilgili dosyalar da silinir. Bu işlem geri alınamaz. Tüm dosyaları silmek için linke tıklayın:",
   "BlockingTime": "Engelleme süresi (sn)",
   "Branding": "Markalaşma",
-  "BrandingSectionDescription": "Şirket bilgilerinizi belirtin, DocSpace arayüzünde görüntülenen harici kaynaklara ve e-posta adreslerine bağlantılar ekleyin.",
+  "BrandingSectionDescription": "Şirket bilgilerinizi belirtin, {{portalName}} arayüzünde görüntülenen harici kaynaklara ve e-posta adreslerine bağlantılar ekleyin.",
   "BrandingSubtitle": "Kullanıcılara markayla ilgili deneyim sağlamak için bu seçeneği kullanın.",
   "BreakpointMobileWarningTextPrompt": "<1>{{sectionName}}</1> bölümüne erişmek için lütfen masaüstü veya tablet kullanın.",
   "BreakpointSmallText": "Pencereniz tüm sayfa içeriğini görüntülemek için çok küçük",

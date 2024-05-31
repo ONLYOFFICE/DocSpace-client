@@ -50,7 +50,7 @@
   "BackupListWarningText": "Falls Sie einige Elemente aus der Liste löschen, werden die entsprechende Dateien auch gelöscht. Dieser Vorgang nicht rückgängig gemacht werden kann. Um alle Dateien zu löschen, verwenden Sie den Link:",
   "BlockingTime": "Blockierungszeit (Sek.)",
   "Branding": "Branding",
-  "BrandingSectionDescription": "Geben Sie Ihre Unternehmensinformationen an, fügen Sie Links zu externen Ressourcen und E-Mail-Adressen hinzu, die auf der DocSpace-Oberfläche angezeigt werden.",
+  "BrandingSectionDescription": "Geben Sie Ihre Unternehmensinformationen an, fügen Sie Links zu externen Ressourcen und E-Mail-Adressen hinzu, die auf der {{portalName}}-Oberfläche angezeigt werden.",
   "BrandingSubtitle": "Verwenden Sie diese Option, um den Nutzern ein markengerechtes Erlebnis zu bieten.",
   "BreakpointMobileWarningText": "Dieser Abschnitt ist in der mobilen Version nicht verfügbar",
   "BreakpointMobileWarningTextPrompt": "Bitte verwenden Sie den Desktop oder das Tablet, um auf <1>{{sectionName}}</1> zuzugreifen.",

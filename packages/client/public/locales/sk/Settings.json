@@ -50,7 +50,7 @@
   "BackupListWarningText": "Ak odstránite niektoré položky zo zoznamu, odstránia sa aj ich príslušné súbory. Táto akcia sa nedá vrátiť späť. Ak chcete odstrániť všetky súbory, použite odkaz:",
   "BlockingTime": "Čas blokovania (s.)",
   "Branding": "Branding",
-  "BrandingSectionDescription": "Zadajte informácie o vašej spoločnosti, pridajte odkazy na externé zdroje a e-mailové adresy zobrazené v rozhraní DocSpace.",
+  "BrandingSectionDescription": "Zadajte informácie o vašej spoločnosti, pridajte odkazy na externé zdroje a e-mailové adresy zobrazené v rozhraní {{portalName}}.",
   "BrandingSubtitle": "Toto nastavenie použite, ak chcete používateľom poskytnúť zážitok zo značky.",
   "BreakpointMobileWarningTextPrompt": "Na prístup k <1>{{sectionName}}</1> prosím použite počítač alebo tablet.",
   "BreakpointSmallText": "Vaše okno je príliš malé na zobrazenie celého obsahu stránky",

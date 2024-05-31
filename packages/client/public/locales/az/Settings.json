@@ -50,7 +50,7 @@
   "BackupListWarningText": "Siyahıdan müəyyən elementləri silsəniz, onların müvafiq faylları da silinəcək. Bu əməliyyat geri qaytarıla bilməz. Bütün faylları silmək üçün linkdən istifadə edin:",
   "BlockingTime": "Bloklama vaxtı (san)",
   "Branding": "Brendləşmə",
-  "BrandingSectionDescription": "Şirkət məlumatlarınızı göstərin, DocSpace interfeysində göstərilən xarici resurslara və e-poçt ünvanlarına keçidlər əlavə edin.",
+  "BrandingSectionDescription": "Şirkət məlumatlarınızı göstərin, {{portalName}} interfeysində göstərilən xarici resurslara və e-poçt ünvanlarına keçidlər əlavə edin.",
   "BrandingSubtitle": "İstifadəçilərə brendlə bağlı təcrübə təmin etmək üçün bu seçimdən istifadə edin.",
   "BreakpointMobileWarningTextPrompt": "<1>{{sectionName}}</1>-ə daxil olmaq üçün masaüstü və ya planşetdən istifadə edin.",
   "BreakpointSmallText": "Pəncərəniz bütün səhifə məzmununu göstərmək üçün çox kiçikdir",

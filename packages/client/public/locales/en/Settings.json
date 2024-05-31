@@ -51,7 +51,7 @@
   "BackupListWarningText": "If you delete any items from the list, their corresponding files will also be deleted. This action cannot be undone. To delete all the files use the link:",
   "BlockingTime": "Blocking time (sec)",
   "Branding": "Branding",
-  "BrandingSectionDescription": "Specify your company information, add links to external resources and email addresses displayed within the DocSpace interface.",
+  "BrandingSectionDescription": "Specify your company information, add links to external resources and email addresses displayed within the {{portalName}} interface.",
   "BrandingSubtitle": "Use this option to provide on-brand experience to users.",
   "BreakpointMobileWarningText": "This section is unavailable in mobile version",
   "BreakpointMobileWarningTextPrompt": "Please use the desktop or tablet to access the <1>{{sectionName}}</1>.",

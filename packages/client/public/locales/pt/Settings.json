@@ -50,7 +50,7 @@
   "BackupListWarningText": "Se eliminar qualquer item desta lista, os ficheiros que lhes correspondem serão também eliminados. Esta ação não pode ser anulada. Para eliminar todos os ficheiros utilize o link:",
   "BlockingTime": "Tempo de bloqueio (seg)",
   "Branding": "Imagem de Marca",
-  "BrandingSectionDescription": "Especifique a informação da sua empresa, adicione ligações a recursos externos e endereços de correio eletrónico exibidos dentro da interface do DocSpace.",
+  "BrandingSectionDescription": "Especifique a informação da sua empresa, adicione ligações a recursos externos e endereços de correio eletrónico exibidos dentro da interface do {{portalName}}.",
   "BrandingSubtitle": "Utilize esta opção para fornecer uma experiência de marca aos utilizadores.",
   "BreakpointMobileWarningText": "Esta seção não está disponível na versão móvel",
   "BreakpointMobileWarningTextPrompt": "Use o desktop ou tablet para acessar <1>{{sectionName}}</1>.",

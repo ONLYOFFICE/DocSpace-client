@@ -49,7 +49,7 @@
   "BackupListWarningText": "목록에서 항목을 삭제하면 그에 상응하는 파일도 삭제됩니다. 이 작업은 취소할 수 없습니다. 모든 파일을 삭제하려면 다음 링크를 사용하시기 바랍니다:",
   "BlockingTime": "차단 시간(초)",
   "Branding": "브랜딩",
-  "BrandingSectionDescription": "회사 정보를 지정하고 DocSpace 인터페이스 내에 표시되는 이메일 주소 및 외부 리소스에 대한 링크를 추가하세요.",
+  "BrandingSectionDescription": "회사 정보를 지정하고 {{portalName}} 인터페이스 내에 표시되는 이메일 주소 및 외부 리소스에 대한 링크를 추가하세요.",
   "BrandingSubtitle": "사용자에게 브랜드 경험을 제공하려면 이 옵션을 사용하세요.",
   "BreakpointMobileWarningText": "이 섹션은 모바일 버전에서 이용할 수 없습니다",
   "BreakpointMobileWarningTextPrompt": "<1>{{sectionName}}</1>에 액세스하려면 데스크톱이나 태블릿을 사용하세요.",

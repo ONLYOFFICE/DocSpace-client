@@ -50,7 +50,7 @@
   "BackupListWarningText": "Dacă ștergeți un element din lista, se șterg și toate fișierele respective. Această acțiune nu poate fi anulată. Pentru a șterge toate fișierele folosiți link-ul:",
   "BlockingTime": "Timp de blocare (s)",
   "Branding": "Branding",
-  "BrandingSectionDescription": "Specificaţi informaţiile despre compania dumneavoastră, adăugaţi linkuri către resurse externe şi adrese de email care trebuie afişate în interfaţa DocSpace.",
+  "BrandingSectionDescription": "Specificaţi informaţiile despre compania dumneavoastră, adăugaţi linkuri către resurse externe şi adrese de email care trebuie afişate în interfaţa {{portalName}}.",
   "BrandingSubtitle": "Utilizaţi această opţiune pentru a oferi utilizatorilor o experienţă de creştere a implicării şi de conştientizare a mărcii.",
   "BreakpointMobileWarningText": "Această secţiune nu este disponibilă în versiunea mobilă.",
   "BreakpointMobileWarningTextPrompt": "Utilizaţi desktopul sau tabletă pentru a accesa <1>{{sectionName}}</1>.",

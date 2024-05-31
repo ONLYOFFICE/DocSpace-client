@@ -50,7 +50,7 @@
   "BackupListWarningText": "Jeśli usuniesz wszystkie elementy z listy, odpowiadające im pliki zostaną również usunięte. Ta czynność nie może zostać cofnięta. Aby usunąć wszystkie pliki, użyj linku:",
   "BlockingTime": "Czas blokowania (sek.)",
   "Branding": "Branding",
-  "BrandingSectionDescription": "Dodaj informacje o firmie, linki do zasobów zewnętrznych i adresy e-mail widoczne w interfejsie DocSpace.",
+  "BrandingSectionDescription": "Dodaj informacje o firmie, linki do zasobów zewnętrznych i adresy e-mail widoczne w interfejsie {{portalName}}.",
   "BrandingSubtitle": "Użyj tej opcji, aby zapewnić użytkownikom doświadczenie marki.",
   "BreakpointMobileWarningText": "Dana sekcja jest niedostępna w wersji mobilnej",
   "BreakpointMobileWarningTextPrompt": "Użyj komputera lub tabletu, aby uzyskać dostęp do sekcji <1>{{sectionName}}</1>.",

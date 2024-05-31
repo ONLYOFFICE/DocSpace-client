@@ -281,7 +281,7 @@
   "TrustedMailMobileDescription": "Trusted Mail Domain Settings is a way to specify the mail servers used for user self-registration.",
   "TrustedMailSettingDescription": "Configure Trusted Mail Domain Settings to specify the allowed mail servers to use for self-registration.",
   "TwoFactorAuth": "Two-factor authentication",
-  "TwoFactorAuthEnableDescription": "Enable two-factor authentication for a more secure DocSpace access for users.",
+  "TwoFactorAuthEnableDescription": "Enable two-factor authentication for a more secure {{portalName}} access for users.",
   "TwoFactorAuthMobileDescription": "Two-factor authentication is a more secure way for the users to enter the portal. After the credentials are entered, the user will have to enter the code from the SMS received to the mobile phone with the number which was specified at the first portal login or the code from an authentication application.",
   "TwoFactorAuthSave": "Click the <strong>Save</strong> button below to apply.",
   "TypesAndPrivileges": "<1>Admin account types and their privileges</1> <br> <br> <2>DocSpace admin</2> <br> DocSpace configuration, room creation and administration, ability to invite and manage users in DocSpace and in virtual rooms, ability to manage access rights. <br> <br> <3>Room admin</3> <br> Room administration and archiving, user invitation and management. Several admins can be assigned to a room. <br> <br> <4>Power user</4> <br> Power users can create and edit files in the room, but can't create rooms, manage users, or access settings.",

@@ -96,7 +96,7 @@ const AccessPortal = (props) => {
 
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight="400">
-          {t("TwoFactorAuthEnableDescription")}
+          {t("TwoFactorAuthEnableDescription", { portalName: PORTAL })}
         </Text>
         <Text fontSize="13px" fontWeight="400">
           <Trans t={t} i18nKey="TwoFactorAuthSave" />

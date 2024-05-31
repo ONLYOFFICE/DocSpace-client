@@ -275,7 +275,7 @@
   "TrustedMailMobileDescription": "Uzticamā pasta domēna iestatījumi ir veids, kā norādīt pasta serverus, kas tiek izmantoti lietotāja pašreģistrācijai.",
   "TrustedMailSettingDescription": "Konfigurējiet uzticamā pasta domēna iestatījumus, lai norādītu atļautos pasta serverus, ko izmantot pašreģistrācijai.",
   "TwoFactorAuth": "Divu faktoru autentifikācija",
-  "TwoFactorAuthEnableDescription": "Iespējojiet divfaktoru autentifikāciju, lai lietotājiem nodrošinātu drošāku piekļuvi DocSpace.",
+  "TwoFactorAuthEnableDescription": "Iespējojiet divfaktoru autentifikāciju, lai lietotājiem nodrošinātu drošāku piekļuvi {{portalName}}.",
   "TwoFactorAuthMobileDescription": "Divfaktoru autentifikācija ir drošāks veids, kā lietotāji var iekļūt portālā. Pēc akreditācijas datu ievadīšanas lietotājam mobilajā tālrunī būs jāievada kods no saņemtās SMS ar numuru, kas tika norādīts pirmajā portāla pieteikšanās reizē, vai kods no autentifikācijas lietojumprogrammas.",
   "TwoFactorAuthSave": "Lai pieteiktos, noklikšķiniet uz tālāk esošās pogas <strong>Saglabāt</strong>.",
   "TypesAndPrivileges": "<1>Administratora kontu veidi un to privilēģijas</1> <br> <br> <2> DocSpace administrators</2> <br> > DocSpace konfigurācija, telpu izveide un administrēšana, iespēja uzaicināt un pārvaldīt lietotājus DocSpace un virtuālajās telpās, iespēja pārvaldīt piekļuves tiesības. <br> <br> <3>Telpu administrators</3> <br> Telpu administrēšana un arhivēšana, lietotāju uzaicināšana un pārvaldība. Telpai var piešķirt vairākus administratorus. <br> <br> <4>Galvenais lietotājs</4> <br> Galvenie lietotāji var izveidot un rediģēt failus telpā, bet nevar izveidot telpas, pārvaldīt lietotājus un piekļūt iestatījumiem.",

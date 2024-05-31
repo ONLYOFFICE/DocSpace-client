@@ -275,7 +275,7 @@
   "TrustedMailMobileDescription": "Ustawienia zaufanej domeny poczty to sposób, aby wybrać serwery poczty do samodzielnej rejestracji przez użytkowników.",
   "TrustedMailSettingDescription": "Skonfiguruj ustawienia zaufanej domeny poczty, aby wybrać dozwolone serwery poczty do samodzielnej rejestracji.",
   "TwoFactorAuth": "Weryfikacja dwuetapowa",
-  "TwoFactorAuthEnableDescription": "Włącz weryfikację dwuetapową, aby zapewnić użytkownikom bezpieczniejszy dostęp do DocSpace.",
+  "TwoFactorAuthEnableDescription": "Włącz weryfikację dwuetapową, aby zapewnić użytkownikom bezpieczniejszy dostęp do {{portalName}}.",
   "TwoFactorAuthMobileDescription": "Weryfikacja dwuetapowa to bezpieczniejszy sposób logowania dla użytkowników portalu. Po wpisaniu danych logowania użytkownik musi podać kod otrzymany we wiadomości SMS wysłanej na numer telefonu wskazany podczas pierwszego logowania w portalu lub kod z aplikacji uwierzytelniającej.",
   "TwoFactorAuthSave": "Aby zastosować wprowadzone zmiany, kliknij przycisk<strong>Zapisz</strong> u dołu sekcji.",
   "TypesAndPrivileges": "<1>Rodzaje kont administratora i ich uprawnienia</1> <br> <br> <2>Administrator DocSpace</2><br>  Konfiguracja DocSpace, tworzenie pokoi i administrowanie nimi, możliwość zapraszania użytkowników i zarządzania nimi w DocSpace oraz wirtualnych pokojach, a także możliwość zarządzania prawami dostępu. <br> <br> <3>Administrator pokoju</3> <br> Administrowanie pokojem i archiwizowanie, zapraszanie użytkowników i zarządzanie nimi. Do pokoju można przypisać kilku administratorów. <br> <br> <4>Użytkownik z większą liczbą uprawnień</4> <br> Taki użytkownik może tworzyć i edytować pliki w pokoju, ale nie może tworzyć pokoi oraz zarządzać użytkownikami. Nie ma również dostępu do ustawień.",

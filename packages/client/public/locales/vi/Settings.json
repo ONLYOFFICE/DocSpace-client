@@ -275,7 +275,7 @@
   "TrustedMailMobileDescription": "Cài đặt Tên miền Thư Tin cậy là một cách để chỉ định các máy chủ thư được sử dụng để người dùng tự đăng ký.",
   "TrustedMailSettingDescription": "Định cấu hình Cài đặt Tên miền Thư Tin cậy để chỉ định các máy chủ thư được phép sử dụng để tự đăng ký.",
   "TwoFactorAuth": "Xác thực hai yếu tố",
-  "TwoFactorAuthEnableDescription": "Bật xác thực hai yếu tố để truy cập DocSpace an toàn hơn cho người dùng.",
+  "TwoFactorAuthEnableDescription": "Bật xác thực hai yếu tố để truy cập {{portalName}} an toàn hơn cho người dùng.",
   "TwoFactorAuthMobileDescription": "Xác thực hai yếu tố là một cách an toàn hơn để người dùng truy cập cổng thông tin. Sau khi thông tin đăng nhập được nhập, người dùng sẽ phải nhập mã từ SMS nhận được trên điện thoại di động với số điện thoại được chỉ định tại lần đăng nhập cổng thông tin đầu tiên hoặc mã từ ứng dụng xác thực.",
   "TwoFactorAuthSave": "Nhấp vào nút <strong>Lưu</strong> bên dưới để áp dụng.",
   "TypesAndPrivileges": "<1>Các loại tài khoản quản trị và đặc quyền của họ </1> <br> <br> <2> Quản trị viên DocSpace </2> <br> Định cấu hình DocSpace, tạo và quản trị phòng, khả năng mời và quản lý người dùng trong DocSpace và trong các phòng ảo, khả năng quản lý quyền truy cập. <br> <br> <3> Quản trị viên phòng </3><br> Quản trị và lưu trữ phòng, mời và quản lý người dùng. Một số quản trị viên có thể được chỉ định vào phòng. <br> <br> <4> Người dùng cấp cao </4><br> Người  dùng cấp cao có thể tạo và chỉnh sửa tập tin trong phòng, nhưng không thể tạo phòng, quản lý người dùng hay truy cập cài đặt.",

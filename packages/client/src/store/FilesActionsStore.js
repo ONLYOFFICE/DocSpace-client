@@ -85,6 +85,8 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
+import { TableVersions } from "SRC_DIR/helpers/constants";
+import { SortByFieldName } from "SRC_DIR/helpers/constants";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
@@ -2335,12 +2337,33 @@ class FilesActionStore {
       );
 
       const filter = FilesFilter.getDefault();
-      filter.folder = id;
-
       const filterObj = FilesFilter.getFilter(window.location);
 
-      filter.sortBy = filterObj.sortBy;
-      filter.sortOrder = filterObj.sortOrder;
+      console.log("openFileAction isRoom", isRoom);
+      if (isRoom) {
+        const TABLE_COLUMNS = `filesTableColumns_ver-${TableVersions.Files}`;
+        const storageColumns = localStorage.getItem(
+          `${TABLE_COLUMNS}=${this.userStore.user.id}`,
+        );
+
+        Object.entries(SortByFieldName).map((item) => {
+          console.log("SortByFieldName", item);
+        });
+
+        console.log("openFileAction storageColumns", storageColumns);
+        console.log(
+          "openFileAction filterObj",
+          filterObj.sortBy,
+          filterObj.sortOrder,
+        );
+      } else {
+        filter.sortBy = filterObj.sortBy;
+        filter.sortOrder = filterObj.sortOrder;
+      }
+
+      filter.folder = id;
+
+      console.log("openFileAction getDefault", filter);
 
       console.log("openFileAction filter.toUrlParams()", filter.toUrlParams());
 

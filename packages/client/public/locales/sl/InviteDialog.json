@@ -1,7 +1,7 @@
 {
   "AddManually": "Dodaj ročno",
   "AddManuallyDescriptionAccounts": "Po e-mailu osebno povabite nove uporabnike v {{portalName}}",
-  "AddManuallyDescriptionRoom": "Dodaj obstoječe DocSpace uporabnike v sobo z uporabo imena ali povabite nove uporabnike osebno po e-mailu",
+  "AddManuallyDescriptionRoom": "Dodaj obstoječe {{portalName}} uporabnike v sobo z uporabo imena ali povabite nove uporabnike osebno po e-mailu",
   "EmailErrorMessage": "E-mail naslov ni veljaven. E-mail sporočilo lahko uredite tako, da nanj kliknete.",
   "GroupMaxAvailableRoleWarning": "Skupine imajo maksimalno možno vlogo - “{{role}}”. Po dodajanju skupine v sobo lahko povečate pravice.",
   "InvitationLanguage": "Jezik povabila",

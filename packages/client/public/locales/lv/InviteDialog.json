@@ -1,7 +1,7 @@
 {
   "AddManually": "Pievienot manuāli",
   "AddManuallyDescriptionAccounts": "Uzaicināt jaunus lietotājus uz {{portalName}} personīgi pa e-pastu",
-  "AddManuallyDescriptionRoom": "Pievienot telpā esošos DocSpace lietotājus, izmantojot vārdus, vai uzaicināt jaunus lietotājus personīgi pa e-pastu",
+  "AddManuallyDescriptionRoom": "Pievienot telpā esošos {{portalName}} lietotājus, izmantojot vārdus, vai uzaicināt jaunus lietotājus personīgi pa e-pastu",
   "EmailErrorMessage": "E- pasta adrese ir nederīga. Jūs varat rediģēt e-pastu, noklikšķinot uz tā.",
   "GroupMaxAvailableRoleWarning": "Grupām ir maksimālā pieejamā loma - “{{role}}”. Jūs varat palielināt tiesības pēc grupas pievienošanas telpai.",
   "InvitationLanguage": "Uzaicinājuma valoda",

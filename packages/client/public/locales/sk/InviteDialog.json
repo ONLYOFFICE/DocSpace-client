@@ -1,7 +1,7 @@
 {
   "AddManually": "Pridať ručne",
   "AddManuallyDescriptionAccounts": "Pozvite nových používateľov do {{portalName}} osobne prostredníctvom e-mailu",
-  "AddManuallyDescriptionRoom": "Pridajte existujúcich používateľov DocSpace do miestnosti tak, že použijete ich mena alebo osobne pozvite nových používateľov prostredníctvom e-mailu",
+  "AddManuallyDescriptionRoom": "Pridajte existujúcich používateľov {{portalName}} do miestnosti tak, že použijete ich mena alebo osobne pozvite nových používateľov prostredníctvom e-mailu",
   "EmailErrorMessage": "Emailová adresa nie je platná. E-mail môžete upraviť kliknutím naň.",
   "GroupMaxAvailableRoleWarning": "Skupiny majú maximálne dostupnú rolu - \"{{role}}\". Po pridaní skupiny do miestnosti môžete povoliť rozšírenie práv.",
   "InvitationLanguage": "Jazyk pozvánky",

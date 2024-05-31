@@ -179,7 +179,7 @@
   "Path": "Yol",
   "PersonalFiles": "Kişisel dosyalar",
   "PersonalFilesDescription": "Kullanıcı dosyaları ve belgeleri Belgeler > Belgeler bölümüne aktarılacaktır.",
-  "PortalAccess": "DocSpace erişimi",
+  "PortalAccess": "{{portalName}} erişimi",
   "PortalCreatedDate": "Portal Oluşturulma tarihi: {{date}}",
   "PortalDeactivation": "DocSpace'i devre dışı bırak",
   "PortalDeactivationDescription": "Alanınızı geçici olarak devre dışı bırakmak için bu seçeneği kullanın.",

@@ -58,7 +58,7 @@ const AccessPortal = (props) => {
   } = props;
 
   useEffect(() => {
-    setDocumentTitle(t("PortalAccess"));
+    setDocumentTitle(t("PortalAccess", { portalName: PORTAL }));
   }, []);
 
   if (isMobileView) return <MobileView />;

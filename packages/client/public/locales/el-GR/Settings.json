@@ -180,7 +180,7 @@
   "Path": "Μονοπάτι",
   "PersonalFiles": "Προσωπικά αρχεία",
   "PersonalFilesDescription": "Τα αρχεία και τα έγγραφα των χρηστών θα εισαχθούν στην ενότητα Έγγραφα > Έγγραφα.",
-  "PortalAccess": "Πρόσβαση στην DocSpace",
+  "PortalAccess": "Πρόσβαση στην {{portalName}}",
   "PortalCreatedDate": "Ημερομηνία δημιουργίας πύλης: {{date}}",
   "PortalDeactivation": "Απενεργοποίηση DocSpace",
   "PortalDeactivationDescription": "Χρησιμοποιήστε αυτήν την επιλογή για να απενεργοποιήσετε προσωρινά τον χώρο σας.",

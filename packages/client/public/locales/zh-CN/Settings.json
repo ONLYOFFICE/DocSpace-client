@@ -161,7 +161,6 @@
   "Path": "路径",
   "PersonalFiles": "个人文件",
   "PersonalFilesDescription": "用户文件和文档会被导入至“文档” > “文档”。",
-  "PortalAccess": "协作空间访问权限",
   "PortalCreatedDate": "门户创建日期：{{date}}",
   "PortalDeactivation": "停用协作空间",
   "PortalDeactivationDescription": "使用此选项以暂时停用您的空间。",

@@ -41,6 +41,7 @@ import AuditTrail from "./audit-trail/index.js";
 import { resetSessionStorage } from "../../utils";
 import { DeviceType } from "@docspace/shared/enums";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { PORTAL } from "@docspace/shared/constants/index.js";
 
 const SecurityWrapper = (props) => {
   const { t, loadBaseInfo, resetIsInit, currentDeviceType } = props;
@@ -51,7 +52,7 @@ const SecurityWrapper = (props) => {
   const data = [
     {
       id: "access-portal",
-      name: t("PortalAccess"),
+      name: t("PortalAccess", { portalName: PORTAL }),
       content: <AccessPortal />,
     },
     {

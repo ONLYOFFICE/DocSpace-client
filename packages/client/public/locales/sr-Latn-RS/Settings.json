@@ -180,7 +180,7 @@
   "Path": "Putanja",
   "PersonalFiles": "Lične datoteke",
   "PersonalFilesDescription": "Korisničke datoteke i dokumenti će biti uvezeni u Dokumenti > Dokumenti.",
-  "PortalAccess": "Pristup DocSpace-u",
+  "PortalAccess": "Pristup {{portalName}}-u",
   "PortalCreatedDate": "Portal Kreiran datum: {{date}}",
   "PortalDeactivation": "Deaktiviraj DocSpace",
   "PortalDeactivationDescription": "Koristite ovu opciju da deaktivirate vaš prostor privremeno.",

@@ -178,7 +178,7 @@
   "Path": "Đường dẫn",
   "PersonalFiles": "Tập tin cá nhân",
   "PersonalFilesDescription": "Tập tin và tài liệu người dùng sẽ được nhập vào Tài liệu > Tài liệu.",
-  "PortalAccess": "Truy cập DocSpace",
+  "PortalAccess": "Truy cập {{portalName}}",
   "PortalCreatedDate": "Ngày tạo cổng thông tin: {{date}}",
   "PortalDeactivation": "Vô hiệu hóa DocSpace",
   "PortalDeactivationDescription": "Sử dụng tùy chọn này để tạm thời vô hiệu hóa không gian của bạn.",

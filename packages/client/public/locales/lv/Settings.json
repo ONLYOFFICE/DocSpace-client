@@ -178,7 +178,7 @@
   "Path": "Ceļš",
   "PersonalFiles": "Personīgie faili",
   "PersonalFilesDescription": "Lietotāju faili un dokumenti tiks importēti sadaļā Dokumenti > Dokumenti.",
-  "PortalAccess": "Piekļuve DocSpace",
+  "PortalAccess": "Piekļuve {{portalName}}",
   "PortalCreatedDate": "Portāla izveides datums: {{date}}",
   "PortalDeactivation": "Deaktivizēt DocSpace",
   "PortalDeactivationDescription": "Izmantojiet šo opciju, lai īslaicīgi deaktivizētu savu telpu.",

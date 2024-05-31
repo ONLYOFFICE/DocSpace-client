@@ -181,7 +181,7 @@
   "Path": "Ruta",
   "PersonalFiles": "Archivos personales",
   "PersonalFilesDescription": "Los archivos y documentos del usuario se importarán a Documentos > Documentos.",
-  "PortalAccess": "Acceso a DocSpace",
+  "PortalAccess": "Acceso a {{portalName}}",
   "PortalCreatedDate": "Fecha de creación del portal: {{date}}",
   "PortalDeactivation": "Desactivar DocSpace",
   "PortalDeactivationDescription": "Utilice esta opción para desactivar temporalmente su espacio.",

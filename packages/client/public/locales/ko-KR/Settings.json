@@ -179,7 +179,7 @@
   "Path": "경로",
   "PersonalFiles": "개인 파일",
   "PersonalFilesDescription": "사용자 파일 및 문서를 문서 > 문서로 가져오기합니다.",
-  "PortalAccess": "DocSpace 액세스",
+  "PortalAccess": "{{portalName}} 액세스",
   "PortalCreatedDate": "포털 생성 날짜: {{date}}",
   "PortalDeactivation": "DocSpace비활성화",
   "PortalDeactivationDescription": "스페이스를 일시적으로 비활성화하려면 이 옵션을 사용하세요.",

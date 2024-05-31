@@ -178,7 +178,7 @@
   "Path": "Cığır",
   "PersonalFiles": "Şəxsi fayllar",
   "PersonalFilesDescription": "İstifadəçi fayl və sənədləri Sənədlər > Sənədlər bölməsinə köçürüləcək.",
-  "PortalAccess": "DocSpace-ə giriş",
+  "PortalAccess": "{{portalName}}-ə giriş",
   "PortalCreatedDate": "Portalın yaradılma tarixi: {{date}}",
   "PortalDeactivation": "DocSpace-i deaktiv edin",
   "PortalDeactivationDescription": "Domeninizi müvəqqəti olaraq deaktiv etmək üçün bu seçimdən istifadə edin.",

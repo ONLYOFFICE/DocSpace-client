@@ -177,7 +177,7 @@
   "Path": "මාර්ගය",
   "PersonalFiles": "පෞද්ගලික ගොනු",
   "PersonalFilesDescription": "ලේඛන > මාගේ ලේඛන වෙත පරිශ්‍රීලක ගොනු සහ ලේඛන ආයාත කෙරේ.",
-  "PortalAccess": "DocSpace ප්‍රවේශය",
+  "PortalAccess": "{{portalName}} ප්‍රවේශය",
   "PortalCreatedDate": "ද්වාරය සෑදූ දිනය: {{date}}",
   "PortalDeactivation": "DocSpace අක්‍රිය කරන්න",
   "PortalDeactivationDescription": "ඔබගේ අවකාශය තාවකාලිකව අක්‍රිය කිරීමට මෙම විකල්පය භාවිතා කරන්න.",

@@ -182,7 +182,7 @@
   "Path": "Path",
   "PersonalFiles": "Personal files",
   "PersonalFilesDescription": "User files and documents will be imported into Documents > Documents.",
-  "PortalAccess": "DocSpace access",
+  "PortalAccess": "{{portalName}} access",
   "PortalCreatedDate": "Portal Created date: {{date}}",
   "PortalDeactivation": "Deactivate DocSpace",
   "PortalDeactivationDescription": "Use this option to deactivate your space temporarily.",

@@ -181,7 +181,7 @@
   "Path": "Путь",
   "PersonalFiles": "Личные файлы",
   "PersonalFilesDescription": "Пользовательские файлы и документы будут импортированы в Документы > Документы.",
-  "PortalAccess": "Доступ к DocSpace",
+  "PortalAccess": "Доступ к {{portalName}}",
   "PortalCreatedDate": "Дата создания портала: {{date}}",
   "PortalDeactivation": "Деактивировать DocSpace",
   "PortalDeactivationDescription": "Используйте эту опцию для временной деактивации портала.",

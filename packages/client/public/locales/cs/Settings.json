@@ -179,7 +179,7 @@
   "Path": "Сesta",
   "PersonalFiles": "Osobní soubory",
   "PersonalFilesDescription": "Uživatelské soubory a dokumenty budou importovány do Dokumenty > Dokumenty.",
-  "PortalAccess": "Přístup k DocSpace",
+  "PortalAccess": "Přístup k {{portalName}}",
   "PortalCreatedDate": "Datum vytvoření portálu: {{date}}",
   "PortalDeactivation": "Deaktivace DocSpace",
   "PortalDeactivationDescription": "Pomocí této možnosti můžete dočasně deaktivovat svůj prostor.",

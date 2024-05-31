@@ -180,7 +180,6 @@
   "Path": "Шлях",
   "PersonalFiles": "Особисті файли",
   "PersonalFilesDescription": "Файли та документи користувачів буде імпортовано до розділу «Документи» > ««Документи»».",
-  "PortalAccess": "Доступ до порталу",
   "PortalCreatedDate": "Дата створення порталу: {{date}}",
   "PortalDeactivation": "Деактивувати DocSpace",
   "PortalDeactivationDescription": "Використовуйте цей параметр для тимчасової деактивації вашого простору.",

@@ -180,7 +180,7 @@
   "Path": "Cale",
   "PersonalFiles": "Fișiere personale",
   "PersonalFilesDescription": "Fișierele și documentele utilizatorului vor fi importate în Documente >  Documentele.",
-  "PortalAccess": "Accesul la spațiu DocSpace",
+  "PortalAccess": "Accesul la spațiu {{portalName}}",
   "PortalCreatedDate": "Portal a fost creat la data de: {{date}}",
   "PortalDeactivation": "Dezactivare DocSpace",
   "PortalDeactivationDescription": "Utilizaţi această opţiune pentru a dezactiva temporar spaţiul dvs.",

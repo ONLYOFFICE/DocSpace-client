@@ -178,7 +178,7 @@
   "Path": "パス",
   "PersonalFiles": "個人ファイル",
   "PersonalFilesDescription": "ユーザーのファイルやドキュメントは、「文書」→「文書」にインポートされます。",
-  "PortalAccess": "DocSpaceアクセス",
+  "PortalAccess": "{{portalName}}アクセス",
   "PortalCreatedDate": "ポータル作成日：{{date}}",
   "PortalDeactivation": "DocSpaceを停止する",
   "PortalDeactivationDescription": "このオプションを使用すると、スペースを一時的に停止することができます。",

@@ -180,7 +180,7 @@
   "Path": "Ուղի",
   "PersonalFiles": "Անձնական ֆայլեր",
   "PersonalFilesDescription": "Օգտատիրոջ ֆայլերը և փաստաթղթերը կներմուծվեն Փաստաթղթեր > Փաստաթղթերը բաժին։",
-  "PortalAccess": "DocSpace-ի մուտք",
+  "PortalAccess": "{{portalName}}-ի մուտք",
   "PortalCreatedDate": "Պորտալի ստեղծման ամսաթիվը՝ {{date}}",
   "PortalDeactivation": "Ապագործունացնել DocSpace-ը",
   "PortalDeactivationDescription": "Օգտագործեք այս տարբերակը՝ ձեր տարածքը ժամանակավորապես անջատելու համար:",

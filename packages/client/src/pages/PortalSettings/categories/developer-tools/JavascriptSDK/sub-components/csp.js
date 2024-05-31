@@ -230,7 +230,7 @@ const CSP = ({
               </Text>
             </div>
             <div className="body-container">
-              {t("CSPInfoBarDescription")}{" "}
+              {t("CSPInfoBarDescription", { portalName: PORTAL })}{" "}
               <Link
                 color={currentColorScheme?.main?.accent}
                 fontSize="13px"

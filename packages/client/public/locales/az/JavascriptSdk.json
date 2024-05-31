@@ -23,7 +23,7 @@
   "CSPDescription": "{{portalName}}-i vebsaytda iframe kimi təhlükəsiz şəkildə yerləşdirmək üçün onun URL-ni icazələr siyahısına əlavə edin.",
   "CSPHeader": "{{portalName}}-i iframe kimi yerləşdirin",
   "CSPHelp": "Bu parametr məzmun hücumlarından qorunmaq üçün istifadə edilə bilən təhlükəsizlik mexanizmidir. CSP təhlükəsiz mənbə yükləmə mənbələrini təsvir edir. \"Ağ siyahıya salınmayan\" mənbələrdən endrilmə bloklanıb. İstifadə olunacaq domenləri (protokollu) göstərin.",
-  "CSPInfoBarDescription": "Quraşdırmanın düzgün işləməsini təmin etmək üçün DocSpace üçün HTTPS protokolunu aktiv edin.",
+  "CSPInfoBarDescription": "Quraşdırmanın düzgün işləməsini təmin etmək üçün {{portalName}} üçün HTTPS protokolunu aktiv edin.",
   "CSPInfoBarHeader": "HTTPS tələb olunur",
   "CSPInputPlaceholder": "URL'yi bu cür daxil edin: https://example.com",
   "CSPUrlHelp": "URL yolları və ya əlavə simvollar olmadan DocSpace domen adını daxil edin.",

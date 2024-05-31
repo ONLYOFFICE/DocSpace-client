@@ -23,7 +23,7 @@
   "CSPDescription": "Pentru a încorpora spațiul {{portalName}} bazat pe iFrame într-o pagina web, adăugați adresa URL a spațiului la lista de permisiuni.",
   "CSPHeader": "Încorporare {{portalName}} bazat pe iframe",
   "CSPHelp": "Această setare reprezintă un mecanizm de securitate, care poate fi utilizat pentru a se proteja împortiva atacurilor prin injectare de conținut. CSP descrie sursele de descărcare securizată. Descărcare de la adresa care nu este inclusă în lista albă este blocată. Indicați domeniile (inclusiv protocolul) cu care va interacționa.",
-  "CSPInfoBarDescription": "Activați protocol  HTTPS pentru spațiul dvs DocSpace pentru a asigura functionarea corecta a configuratiei.",
+  "CSPInfoBarDescription": "Activați protocol  HTTPS pentru spațiul dvs {{portalName}} pentru a asigura functionarea corecta a configuratiei.",
   "CSPInfoBarHeader": "HTTPS obligatoriu",
   "CSPInputPlaceholder": "Introduceți URL-ul în felul următor  https://example.com",
   "CSPUrlHelp": "Introduceți numele de domeniu DocSpace fără adrese URL sau caractere suplimentare.",

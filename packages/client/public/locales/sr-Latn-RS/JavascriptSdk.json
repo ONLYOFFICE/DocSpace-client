@@ -23,7 +23,7 @@
   "CSPDescription": "Da biste započeli proces ugrađivanja, dodajte {{portalName}} URL na listu dozvoljenih.",
   "CSPHeader": "Unesite adresu {{portalName}}-a za ugradnju",
   "CSPHelp": "Ovo podešavanje je sigurnosni mehanizam koji se može koristiti kako bi se zaštitili od napada ubacivanjem sadržaja. CSP (Content Security Policy) opisuje sigurne izvore za preuzimanje resursa. Preuzimanje sa izvora koji nije uključen u \"belu listu\" je blokirano. Navedite domene (zajedno sa protokolom) s kojima će raditi.",
-  "CSPInfoBarDescription": "Molimo omogućite HTTPS protokol za vaš DocSpace kako bi se osiguralo da pravilno radi.",
+  "CSPInfoBarDescription": "Molimo omogućite HTTPS protokol za vaš {{portalName}} kako bi se osiguralo da pravilno radi.",
   "CSPInfoBarHeader": "HTTPS potreban",
   "CSPInputPlaceholder": "Unesi URL ovako: https://example.com",
   "CSPUrlHelp": "Unesi DocSpace domen ime bez URL staza ili dodatnih znakova.",

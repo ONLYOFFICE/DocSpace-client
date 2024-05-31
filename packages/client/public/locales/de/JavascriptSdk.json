@@ -23,7 +23,7 @@
   "CSPDescription": "Um {{portalName}} sicher als iFrame in eine Website einzubetten, fügen Sie die URL zu Ihrer Zulassungsliste hinzu.",
   "CSPHeader": "{{portalName}} als iFrame einbetten",
   "CSPHelp": "Diese Einstellung ist ein Sicherheitsmechanismus, der zum Schutz vor Content-Injection-Angriffen verwendet werden kann. CSP beschreibt sichere Quellen für das Herunterladen von Ressourcen. Das Herunterladen von Ressourcen, die nicht in der `Weißliste` enthalten sind, wird blockiert. Geben Sie die Domänen (zusammen mit dem Protokoll) an, mit denen es arbeiten soll.",
-  "CSPInfoBarDescription": "Bitte aktivieren Sie das HTTPS-Protokoll für Ihren DocSpace, um die korrekte Einrichtung zu gewährleisten.",
+  "CSPInfoBarDescription": "Bitte aktivieren Sie das HTTPS-Protokoll für Ihren {{portalName}}, um die korrekte Einrichtung zu gewährleisten.",
   "CSPInfoBarHeader": "HTTPS erforderlich",
   "CSPInputPlaceholder": "Geben Sie eine URL wie folgt ein: https://example.com",
   "CSPUrlHelp": "Geben Sie den DocSpace-Domainnamen ohne URL-Pfade oder zusätzliche Zeichen ein.",

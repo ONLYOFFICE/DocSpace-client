@@ -23,7 +23,7 @@
   "CSPDescription": "{{portalName}}をiframeとして安全にウェブサイトに埋め込むには、そのURLを許可リストに追加してください。",
   "CSPHeader": "{{portalName}}をiframeとして埋め込む",
   "CSPHelp": "この設定は、コンテンツ・インジェクション攻撃から保護するために使用できるセキュリティ・メカニズムです。CSP には安全なリソースのダウンロード・ソースが記述されています。ホワイトリストに含まれていないリソースからのダウンロードはブロックされます。動作するドメインを（プロトコルと共に）指定します。",
-  "CSPInfoBarDescription": "DocSpaceのHTTPSプロトコルを有効にしてください。",
+  "CSPInfoBarDescription": "{{portalName}}のHTTPSプロトコルを有効にしてください。",
   "CSPInfoBarHeader": "HTTPSが必要です",
   "CSPInputPlaceholder": "URLを次のように入力： https://example.com",
   "CSPUrlHelp": "DocSpaceのドメイン名をURLパスや付加文字を入れずに入力してください。",

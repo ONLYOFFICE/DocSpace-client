@@ -23,7 +23,7 @@
   "CSPDescription": "لتضمين {{portalName}} بشكل آمن كإطار iframe في موقع ويب، قم بإضافة عنوان URL الخاص به إلى قائمة السماح لديك.",
   "CSPHeader": "تضمين {{portalName}} كإطار iframe",
   "CSPHelp": "هذا الإعداد عبارة عن وسيلة أمان يمكن استخدامها للحماية من هجمات المحتوى. يصف CSP مصادر تنزيل الموارد الآمنة.  تم حظر التنزيل من الموارد غير المدرجة في \"القائمة البيضاء\".  حدد النطاق (مع البروتوكول) التي سيعمل به.",
-  "CSPInfoBarDescription": "الرجاء تمكين بروتوكول HTTPS لجهاز DocSpace الخاص بك لضمان عمل الإعداد الصحيح.",
+  "CSPInfoBarDescription": "الرجاء تمكين بروتوكول HTTPS لجهاز {{portalName}} الخاص بك لضمان عمل الإعداد الصحيح.",
   "CSPInfoBarHeader": "HTTPS مطلوب",
   "CSPInputPlaceholder": "قم بإدخال رابط مثل: https://example.com",
   "CSPUrlHelp": "أدخل اسم مجال DocSpace بدون مسارات URL أو أحرف إضافية.",

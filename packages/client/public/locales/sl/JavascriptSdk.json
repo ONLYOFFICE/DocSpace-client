@@ -23,7 +23,7 @@
   "CSPDescription": "Če želite varno vdelati {{portalName}} kot iframe na spletno mesto, dodajte njegov URL na seznam dovoljenih.",
   "CSPHeader": "Vdelajte {{portalName}} kot iframe",
   "CSPHelp": "Ta nastavitev je varnostni mehanizem, ki se lahko uporablja za zaščito pred napadi z vnašanjem vsebine. CSP opisuje varne vire za prenos prenos. Prenos iz virov, ki niso na `belem seznamu`, je blokiran. Določite domene (skupaj s protokolom), s katerimi bo delovalo.",
-  "CSPInfoBarDescription": "Omogočite protokol HTTPS za vaš DocSpace, da zagotovite pravilno namestitev.",
+  "CSPInfoBarDescription": "Omogočite protokol HTTPS za vaš {{portalName}}, da zagotovite pravilno namestitev.",
   "CSPInfoBarHeader": "Zahtevan je HTTPS",
   "CSPInputPlaceholder": "Vnesite URL kot v primeru: https://example.com",
   "CSPUrlHelp": "Vnesite ime domene DocSpace brez URL ali dodatnih znakov.",

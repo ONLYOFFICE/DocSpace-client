@@ -1,5 +1,4 @@
 {
-  "AccountWillBeCreated": "<1>{{email}}</1>-ի համար կստեղծվի ԴոկՍպեյս հաշիվ: Խնդրում ենք ավարտեք ձեր գրանցումը։",
   "ChangePasswordSuccess": "Գաղտնաբառը հաջողությամբ փոխվել է",
   "ConfirmOwnerPortalSuccessMessage": "DocSpace-ի տնօրինողը հաջողությամբ փոխվել է: 10 վայրկյանից դուք կվերաուղղորդվեք:",
   "ConfirmOwnerPortalTitle": "Խնդրում ենք հաստատել, որ ցանկանում եք փոխել կայքէջի տնօրինողին {{newOwner}}",

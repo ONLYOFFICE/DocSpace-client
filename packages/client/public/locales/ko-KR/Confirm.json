@@ -1,5 +1,5 @@
 {
-  "AccountWillBeCreated": "<1>{{email}}</1>에 대한 DocSpace 계정이 생성됩니다. 등록을 완료해 주세요:",
+  "AccountWillBeCreated": "<1>{{email}}</1>에 대한 {{portalName}} 계정이 생성됩니다. 등록을 완료해 주세요:",
   "ChangePasswordSuccess": "비밀번호가 성공적으로 변경되었습니다",
   "ConfirmOwnerPortalSuccessMessage": "DocSpace 소유자가 성공적으로 변경되었습니다. 10초 후에 리디렉션됩니다.",
   "ConfirmOwnerPortalTitle": "DocSpace 소유자를 {{newOwner}}님으로 변경할 것인지 확인해주세요.",

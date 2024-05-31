@@ -1,5 +1,5 @@
 {
-  "AccountWillBeCreated": "Для <1>{{email}}</1> буде створено обліковий запис DocSpace. Завершіть реєстрацію:",
+  "AccountWillBeCreated": "Для <1>{{email}}</1> буде створено обліковий запис {{portalName}}. Завершіть реєстрацію:",
   "ChangePasswordSuccess": "Пароль успішно змінено",
   "ConfirmOwnerPortalSuccessMessage": "Власника DocSpace успішно змінено. Через 10 секунд вас буде перенаправлено.",
   "ConfirmOwnerPortalTitle": "Підтвердьте, що хочете змінити власника DocSpace на {{newOwner}}.",

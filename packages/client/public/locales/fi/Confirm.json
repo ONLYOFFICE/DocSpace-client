@@ -1,5 +1,5 @@
 {
-  "AccountWillBeCreated": "DocSpace-tili luodaan käyttäjälle <1>{{email}}</1>. Ole hyvä ja viimeistele rekisteröitymisesi:",
+  "AccountWillBeCreated": "{{portalName}}-tili luodaan käyttäjälle <1>{{email}}</1>. Ole hyvä ja viimeistele rekisteröitymisesi:",
   "ChangePasswordSuccess": "Salasanan vaihtaminen onnistui",
   "ConfirmOwnerPortalSuccessMessage": "DocSpace omistajan vaihto onnistui. 10 sekunnin kuluttua sinut uudelleen ohjataan.",
   "ConfirmOwnerPortalTitle": "Vahvista, että haluat vaihtaa DocSpace omistajaksi henkilön {{newOwner}}.",

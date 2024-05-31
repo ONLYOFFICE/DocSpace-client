@@ -1,5 +1,4 @@
 {
-  "AccountWillBeCreated": "将为 <1>{{email}}</1> 创建协作空间账号。请完成您的注册：",
   "ChangePasswordSuccess": "密码已成功更改",
   "ConfirmOwnerPortalSuccessMessage": "协作空间所有者已更改成功。10秒内您将被重定向至。",
   "ConfirmOwnerPortalTitle": "请确认您是否想将门户所有者变更为{{newOwner}}。",

@@ -1,5 +1,5 @@
 {
-  "AccountWillBeCreated": "Một tài khoản DocSpace sẽ được tạo cho <1>{{email}} </1>. Xin vui lòng hoàn tất đăng ký của bạn:",
+  "AccountWillBeCreated": "Một tài khoản {{portalName}} sẽ được tạo cho <1>{{email}} </1>. Xin vui lòng hoàn tất đăng ký của bạn:",
   "ChangePasswordSuccess": "Mật khẩu đã được thay đổi thành công",
   "ConfirmOwnerPortalSuccessMessage": "Chủ sở hữu DocSpace đã được thay đổi thành công. Trong 10 giây nữa, bạn sẽ được chuyển hướng.",
   "ConfirmOwnerPortalTitle": "Vui lòng xác nhận rằng bạn muốn thay đổi chủ sở hữu cổng thông tin thành {{newOwner}}.",

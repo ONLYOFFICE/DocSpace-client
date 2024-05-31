@@ -1,5 +1,5 @@
 {
-  "AccountWillBeCreated": "<1>{{email}}</1> üçün DocSpace hesabı yaradılacaq. Zəhmət olmasa, qeydiyyatınızı tamamlayın:",
+  "AccountWillBeCreated": "<1>{{email}}</1> üçün {{portalName}} hesabı yaradılacaq. Zəhmət olmasa, qeydiyyatınızı tamamlayın:",
   "ChangePasswordSuccess": "Şifrə uğurla dəyişdirildi",
   "ConfirmOwnerPortalSuccessMessage": "DocSpace sahibi uğurla dəyişdirildi. 10 saniyə ərzində yönləndiriləcəksiniz.",
   "ConfirmOwnerPortalTitle": "Lütfən DocSpace sahibini {{newOwner}} olaraq dəyişdirmək istədiyinizi təsdiqləyin.",

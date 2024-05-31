@@ -131,7 +131,6 @@
   "HexCode": "Code hexadécimal ",
   "Import": "Importer",
   "ImportCompleteDescriptionGoogle": "L'importation des données depuis Google Workspace vers ONLYOFFICE {{portalName}} s'est terminée!",
-  "ImportCompleteDescriptionNextcloud": "L'importation des données depuis Nextcloud vers ONLYOFFICE DocSpace s'est terminée!",
   "ImportCompleteDescriptionWorkspace": "L'importation des données depuis ONLYOFFICE Workspace vers ONLYOFFICE DocSpace s'est terminée!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} utilisateurs ont été importées avec succès.",
   "ImportFromGoogle": "Importation depuis Google Workspace",

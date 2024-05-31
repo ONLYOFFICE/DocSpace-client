@@ -131,7 +131,7 @@
   "HexCode": "Cod hexa",
   "Import": "Import",
   "ImportCompleteDescriptionGoogle": "Import date din Google Workspace în ONLYOFFICE {{portalName}} este finalizat!",
-  "ImportCompleteDescriptionNextcloud": "Import date din Nextcloud în ONLYOFFICE DocSpace este finalizat!",
+  "ImportCompleteDescriptionNextcloud": "Import date din Nextcloud în ONLYOFFICE {{portalName}} este finalizat!",
   "ImportCompleteDescriptionWorkspace": "Import date din ONLYOFFICE Workspace în ONLYOFFICE DocSpace este finalizat!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} utilizatori au fost importate cu succes.",
   "ImportFromGoogle": "Import din Google Workspace",

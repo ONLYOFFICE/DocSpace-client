@@ -116,7 +116,6 @@
   "GroupsDescription": "您在上一步中选择的用户将被导入 {{serviceName}} 中创建的群组。群组会在“账号”板块显示。",
   "HexCode": "十六进制代码",
   "Import": "导入",
-  "ImportCompleteDescriptionNextcloud": "已成功将数据从 Nextcloud 导入至 ONLYOFFICE 协作空间！",
   "ImportCompleteDescriptionWorkspace": "已成功将数据从 ONLYOFFICE 工作区导入至 ONLYOFFICE 协作空间！",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} 用户已成功导入。",
   "ImportFromGoogle": "从Google Workspace 导入",

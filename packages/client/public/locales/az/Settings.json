@@ -129,7 +129,7 @@
   "HexCode": "Hex kodu",
   "Import": "İdxal edin",
   "ImportCompleteDescriptionGoogle": "Google Workspace-dən ONLYOFFICE {{portalName}}-ə məlumat idxalı tamamlandı!",
-  "ImportCompleteDescriptionNextcloud": "Nextcloud-dan ONLYOFFICE DocSpace-ə məlumat idxalı tamamlandı!",
+  "ImportCompleteDescriptionNextcloud": "Nextcloud-dan ONLYOFFICE {{portalName}}-ə məlumat idxalı tamamlandı!",
   "ImportCompleteDescriptionWorkspace": "ONLYOFFICE Workspace-dən ONLYOFFICE DocSpace-ə məlumat idxalı tamamlandı!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} istifadəçi uğurla idxal edildi.",
   "ImportFromGoogle": "Google Workspace-dən idxal edin",

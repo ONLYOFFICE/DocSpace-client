@@ -168,7 +168,9 @@ export const getStepsData = (
     },
     {
       title: t("Settings:DataImportComplete"),
-      description: t("Settings:ImportCompleteDescriptionNextcloud"),
+      description: t("Settings:ImportCompleteDescriptionNextcloud", {
+        portalName: PORTAL,
+      }),
       component: (
         <ImportCompleteStep
           t={t}

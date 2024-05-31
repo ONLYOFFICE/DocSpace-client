@@ -130,7 +130,7 @@
   "HexCode": "Hex kód",
   "Import": "Importovať",
   "ImportCompleteDescriptionGoogle": "Import údajov z Google Workspace do ONLYOFFICE {{portalName}} je dokončený!",
-  "ImportCompleteDescriptionNextcloud": "Import údajov z Nextcloud do ONLYOFFICE DocSpace je dokončený!",
+  "ImportCompleteDescriptionNextcloud": "Import údajov z Nextcloud do ONLYOFFICE {{portalName}} je dokončený!",
   "ImportCompleteDescriptionWorkspace": "Import údajov z ONLYOFFICE Workspace do ONLYOFFICE DocSpace je dokončený!",
   "ImportedUsers": "Používatelia {{selectedUsers}}/{{importedUsers}} boli úspešne importovaní.",
   "ImportFromGoogle": "Importovať z Google Workspace",

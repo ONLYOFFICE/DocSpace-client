@@ -128,6 +128,7 @@ const OnlyofficeWorkspace = ({
         i18nKey="TypesAndPrivileges"
         ns="Settings"
         t={t}
+        values={{ portalName: PORTAL }}
         components={{
           1: <strong></strong>,
           2: <strong></strong>,

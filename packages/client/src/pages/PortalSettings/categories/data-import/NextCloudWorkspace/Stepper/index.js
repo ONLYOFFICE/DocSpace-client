@@ -124,6 +124,7 @@ export const getStepsData = (
                   i18nKey="TypesAndPrivileges"
                   ns="Settings"
                   t={t}
+                  values={{ portalName: PORTAL }}
                   components={{
                     1: <b></b>,
                     2: <b></b>,

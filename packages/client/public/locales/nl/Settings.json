@@ -244,7 +244,7 @@
   "SingleSignOn": "Single Sign-On",
   "SMTPSettings": "SMTP Instellingen",
   "SMTPSettingsDescription": "De SMTP-instellingen zijn nodig om een e-mailaccount aan te maken dat wordt gebruikt om notificaties van het portaal te verzenden met behulp van uw eigen SMTP-server in plaats van die van {{organizationName}}. Vul alstublieft al de velden in en klik op de knop 'Opslaan'. U kunt de knop 'Verzenden Testmail' gebruiken om te controleren of alle instellingen die u hebt ingevoerd juist zijn en naar wens werken.",
-  "StatisticDescription": "Hier kunt u de gedetailleerde opslag gebruiksgegevens in deze DocSpace bekijken.",
+  "StatisticDescription": "Hier kunt u de gedetailleerde opslag gebruiksgegevens in deze {{portalName}} bekijken.",
   "Statistics": "Statistieken",
   "StorageManagement": "Opslagbeheer",
   "StoragePeriod": "Bewaarperiode",

@@ -251,7 +251,7 @@
   "SingleSignOn": "Single Sign-On",
   "SMTPSettings": "SMTP Settings",
   "SMTPSettingsDescription": "The SMTP settings are needed to set up an email account which will be used to send notifications from the portal using your own SMTP server instead of the one {{organizationName}} uses. Please fill in all the fields and click the 'Save' button. You can use the 'Send Test Mail' button to check if all the settings you entered are correct and work as supposed.",
-  "StatisticDescription": "Here, you can view the detailed storage usage data in this DocSpace.",
+  "StatisticDescription": "Here, you can view the detailed storage usage data in this {{portalName}}.",
   "Statistics": "Statistics",
   "StorageManagement": "Storage management",
   "StoragePeriod": "Storage period",

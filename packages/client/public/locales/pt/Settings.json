@@ -247,7 +247,7 @@
   "SingleSignOn": "Início de Sessão Único",
   "SMTPSettings": "Configurações SMTP",
   "SMTPSettingsDescription": "As definições de SMTP são necessárias para configurar uma conta de correio eletrónico que será utilizada para enviar notificações a partir do portal utilizando o seu próprio servidor SMTP em vez daquele que a {{organizationName}} utiliza. Preencha todos os campos e clique no botão \"Guardar\". Pode utilizar o botão \"Enviar email de teste\" para verificar se todas as definições introduzidas estão corretas e funcionam como previsto.",
-  "StatisticDescription": "Aqui, você pode visualizar os dados detalhados de uso de armazenamento neste DocSpace.",
+  "StatisticDescription": "Aqui, você pode visualizar os dados detalhados de uso de armazenamento neste {{portalName}}.",
   "Statistics": "Estatisticas",
   "StorageManagement": "Gerenciamento de armazenamento",
   "StoragePeriod": "Período do armazenamento",

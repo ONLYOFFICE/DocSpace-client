@@ -247,7 +247,7 @@
   "SingleSignOn": "Jednokratna Prijava",
   "SMTPSettings": "SMTP Podešavanja",
   "SMTPSettingsDescription": "SMTP podešavanja su potrebna kako biste postavili email nalog koji će se koristiti za slanje obaveštenja sa portala koristeći vaš SMTP server umesto onog koji koristi {{organizationName}}. Molimo vas da popunite sva polja i kliknete na dugme ‘Sačuvaj’. Možete koristiti dugme ‘Pošalji Test Poruku’ da proverite da li su sva podešavanja koja ste uneli ispravna i rade kako treba.",
-  "StatisticDescription": "Ovde možete videti detaljne podatke o korišćenju skladišta u ovom DocSpace-u.",
+  "StatisticDescription": "Ovde možete videti detaljne podatke o korišćenju skladišta u ovom {{portalName}}-u.",
   "Statistics": "Statistike",
   "StorageManagement": "Upravljanje Skladištem",
   "StoragePeriod": "Period Skladištenja",

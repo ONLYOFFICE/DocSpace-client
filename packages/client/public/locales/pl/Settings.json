@@ -245,7 +245,7 @@
   "SingleSignOn": "Logowanie jednokrotne (SSO)",
   "SMTPSettings": "Ustawienia SMTP",
   "SMTPSettingsDescription": "Ustawienia SMTP są konieczne, aby skonfigurować konto e-mail, które będzie używane do wysyłania powiadomień z portalu za pośrednictwem Twojego własnego serwera SMTP, zamiast tego, którego używa {{organizationName}}. Uzupełnij wszystkie pola i kliknij przycisk „Zapisz”. Możesz użyć przycisku „Wyślij wiadomość testową”, aby upewnić się, że wprowadzone dane są poprawne i wszystko działa, jak powinno.",
-  "StatisticDescription": "Tutaj możesz zobaczyć szczegółowe dane na temat wykorzystania pamięci w tym DocSpace.",
+  "StatisticDescription": "Tutaj możesz zobaczyć szczegółowe dane na temat wykorzystania pamięci w tym {{portalName}}.",
   "Statistics": "Statystyki",
   "StorageManagement": "Zarządzanie pamięcią",
   "StoragePeriod": "Okres przechowywania",

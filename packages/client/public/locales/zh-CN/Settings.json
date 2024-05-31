@@ -225,7 +225,6 @@
   "SingleSignOn": "单点登录",
   "SMTPSettings": "SMTP设置",
   "SMTPSettingsDescription": "需要SMTP设置，以设置一个电子邮件账户，用于使用您自己的SMTP服务器，而非{{organizationName}}使用的SMTP服务器，以从从门户发送通知。请填写所有字段，然后单击“保存”按钮。您可以使用“发送测试邮件”按钮，以检查您输入的所有设置是否正确，并照常工作。",
-  "StatisticDescription": "您可以在此处查看该协作空间详细的存储空间使用数据。",
   "Statistics": "数据统计",
   "StorageManagement": "存储空间管理",
   "StoragePeriod": "贮存期",

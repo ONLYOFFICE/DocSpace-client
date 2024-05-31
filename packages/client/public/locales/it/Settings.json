@@ -247,7 +247,7 @@
   "SingleSignOn": "Single Sign-On",
   "SMTPSettings": "Impostazioni SMTP",
   "SMTPSettingsDescription": "Le impostazioni SMTP ti permettono di configurare un account di posta elettronica che sarà usato per inviare le notifiche dal portale usando il proprio server SMTP invece di quello usato da {{organizationName}}. Compila tutti i campi e clicca sul pulsante 'Salva'. Puoi utilizzare il pulsante 'Invia messaggio di prova' per controllare le impostazioni inserite.",
-  "StatisticDescription": "Qui puoi visualizzare i dati dettagliati sull'utilizzo dello spazio di archiviazione in questo DocSpace.",
+  "StatisticDescription": "Qui puoi visualizzare i dati dettagliati sull'utilizzo dello spazio di archiviazione in questo {{portalName}}.",
   "Statistics": "Statistiche",
   "StorageManagement": "Gestione dell'archiviazione",
   "StoragePeriod": "Periodo di conservazione",

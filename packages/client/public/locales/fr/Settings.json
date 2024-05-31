@@ -245,7 +245,7 @@
   "SingleSignOn": "Authentification unique",
   "SMTPSettings": "Paramètres SMTP",
   "SMTPSettingsDescription": "Les paramètres SMTP sont nécessaires pour configurer le compte de messagerie qui sera utilisé pour envoyer des notifications du portail en utilisant votre propre serveur SMTP au lieu du serveur utilisé par {{organizationName}}. Remplissez tous les champs et cliquez sur le bouton 'Enregistrer'. Vous pouvez utiliser le bouton 'Envoyer le message de test' pour vérifier si tous les paramètres insérés sont bien corrects et fonctionnent comme prévu.",
-  "StatisticDescription": "Ici, vous pouvez consulter l'utilisation de l'espace de stockage dans DocSpace.",
+  "StatisticDescription": "Ici, vous pouvez consulter l'utilisation de l'espace de stockage dans {{portalName}}.",
   "Statistics": "Statistiques",
   "StorageManagement": "Gestion du stockage",
   "StoragePeriod": "La période de stockage ",

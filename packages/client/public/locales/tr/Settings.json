@@ -246,7 +246,7 @@
   "SingleSignOn": "Tek Seferlik Giriş",
   "SMTPSettings": "SMTP Ayarları",
   "SMTPSettingsDescription": "SMTP ayarları {{organizationName}}'in kullandığının yerine kendi SMTP sunucunuzu kullanarak portalınızdan bildirim göndermek için eposta hesabınızı ayarlarken gerekli olacaktır. Lütfen tüm alanları doldurun ve 'Kaydet' tuşuna başın. 'Test Postası Gönder' tuşunu kullanarak girdğiniz tüm ayarların doğru olduğunu ve çalıştığını deneyebilirsiniz.",
-  "StatisticDescription": "Burada, bu DocSpace’teki ayrıntılı depolama alanı kullanım verilerini görüntüleyebilirsiniz.",
+  "StatisticDescription": "Burada, bu {{portalName}}’teki ayrıntılı depolama alanı kullanım verilerini görüntüleyebilirsiniz.",
   "Statistics": "İstatistikler",
   "StorageManagement": "Depolama yönetimi",
   "StoragePeriod": "Depolama süresi",

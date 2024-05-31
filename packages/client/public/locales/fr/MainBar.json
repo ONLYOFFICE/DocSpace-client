@@ -1,7 +1,7 @@
 {
   "ClickHere": "Cliquer ici",
   "ConfirmEmailDescription": "Utilisez le lien fourni dans l’e-mail d’activation. Vous n’avez pas reçu d’e-mail contenant le lien d’activation ?",
-  "ConfirmEmailHeader": "Veuillez activer votre adresse e-mail ({{ email }}) pour accéder aux fonctionnalités de DocSpace.",
+  "ConfirmEmailHeader": "Veuillez activer votre adresse e-mail ({{ email }}) pour accéder aux fonctionnalités de {{portalName}}.",
   "PersonalUserQuotaAdminsDescription": "Pour télécharger et créer de nouveaux fichiers et dossiers, veuillez libérer l'espace de stockage ou gérez des quotas d'utilisateurs à partir de la section <1>Paramètres de gestion du stockage.</1>",
   "PersonalUserQuotaDescription": "Pour télécharger et créer de nouveaux fichiers  et dossiers, veuillez libérer l'espace de stockage ou contactez l'administrateur pour augmenter le quota de stockage.",
   "RequestActivation": "Demander à nouveau l’activation",

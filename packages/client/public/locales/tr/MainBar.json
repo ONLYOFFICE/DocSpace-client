@@ -1,7 +1,7 @@
 {
   "ClickHere": "Buraya tıklayın",
   "ConfirmEmailDescription": "Aktivasyon e-postasında verilen bağlantıyı kullanın. Etkinleştirme bağlantısını içeren bir e-posta almadınız mı?",
-  "ConfirmEmailHeader": "DocSpace özelliklerine erişmek için lütfen e-postanızı ({{ email }}) etkinleştirin.",
+  "ConfirmEmailHeader": "{{portalName}} özelliklerine erişmek için lütfen e-postanızı ({{ email }}) etkinleştirin.",
   "PersonalUserQuotaAdminsDescription": "Yeni dosya ve klasörler yüklemek ve oluşturmak için lütfen disk alanını boşaltın veya <1>Depolama yönetimi ayarlarında</1> kullanıcı başına kotayı yönetin.",
   "PersonalUserQuotaDescription": "Yeni dosya ve klasörler yüklemek ve oluşturmak için lütfen disk alanını boşaltın veya depolama kotasını artırmak için yöneticiyle iletişime geçin.",
   "RequestActivation": "Tekrar aktivasyon iste",

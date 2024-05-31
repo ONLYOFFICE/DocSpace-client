@@ -37,6 +37,7 @@ import { sendSuspendPortalEmail } from "@docspace/shared/api/portal";
 import { isDesktop } from "@docspace/shared/utils";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
+import { PORTAL } from "@docspace/shared/constants";
 
 const PortalDeactivation = (props) => {
   const { t, getPortalOwner, owner, currentColorScheme, sendActivationLink } =
@@ -95,7 +96,10 @@ const PortalDeactivation = (props) => {
         />
         {notActivatedEmail && (
           <Text fontSize="12px" fontWeight="600">
-            {t("MainBar:ConfirmEmailHeader", { email: owner.email })}
+            {t("MainBar:ConfirmEmailHeader", {
+              email: owner.email,
+              portalName: PORTAL,
+            })}
             <Link
               className="request-again-link"
               color={currentColorScheme?.main?.accent}

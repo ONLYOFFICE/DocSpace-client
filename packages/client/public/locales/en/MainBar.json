@@ -1,7 +1,7 @@
 {
   "ClickHere": "Click here",
   "ConfirmEmailDescription": "Use the link provided in the activation email. Haven't received an email with the activation link?",
-  "ConfirmEmailHeader": "Please activate your email ({{ email }}) to get access to the DocSpace features.",
+  "ConfirmEmailHeader": "Please activate your email ({{ email }}) to get access to the {{portalName}} features.",
   "PersonalUserQuotaAdminsDescription": "To upload and create new files and folders, please free up disk space, or manage quota per user in the <1>Storage management settings.</1>",
   "PersonalUserQuotaDescription": "To upload and create new files and folders, please free up disk space, or contact the administrator to increase the storage quota.",
   "RequestActivation": "Request activation once again",

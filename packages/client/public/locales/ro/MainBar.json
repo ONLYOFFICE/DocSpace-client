@@ -1,7 +1,7 @@
 {
   "ClickHere": "Apăsaţi aici",
   "ConfirmEmailDescription": "Utilizaţi linkul de activare din email. Nu aţi primit un email cu link-ul de activare?",
-  "ConfirmEmailHeader": "Activați adresa de email ({{ email }}) pentru a avea acces la funcţiile DocSpace.",
+  "ConfirmEmailHeader": "Activați adresa de email ({{ email }}) pentru a avea acces la funcţiile {{portalName}}.",
   "PersonalUserQuotaAdminsDescription": "Pentru a încărca și a crea fișiere și dosare noi, eliberați spațiu de stocare sau gestionați cota de stocare pentru fiecare utilizator din secțiunea <1>Setările de gestionare a spațiului de stocare.</1>.",
   "PersonalUserQuotaDescription": "Pentru a încărca și a crea fișiere și dosare noi, eliberați spațiu de stocare sau contactați administratorul pentru a majora capacităţile de stocare.",
   "RequestActivation": "Solicitaţi activarea din nou",

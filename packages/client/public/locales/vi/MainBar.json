@@ -1,7 +1,7 @@
 {
   "ClickHere": "Nhấp vào đây",
   "ConfirmEmailDescription": "Sử dụng liên kết được cung cấp trong email kích hoạt. Bạn chưa nhận được email chứa liên kết kích hoạt?",
-  "ConfirmEmailHeader": "Xin vui lòng kích hoạt email ({{ email }}) của bạn để có quyền truy cập vào các tính năng DocSpace.",
+  "ConfirmEmailHeader": "Xin vui lòng kích hoạt email ({{ email }}) của bạn để có quyền truy cập vào các tính năng {{portalName}}.",
   "PersonalUserQuotaAdminsDescription": "Để tải lên và tạo các tập tin và thư mục mới, vui lòng giải phóng dung lượng đĩa hoặc quản lý hạn mức cho mỗi người dùng trong <1> cài đặt Quản lý lưu trữ.</1>",
   "PersonalUserQuotaDescription": "Để tải lên và tạo các tập tin và thư mục mới, vui lòng giải phóng dung lượng đĩa hoặc liên hệ với quản trị viên để tăng hạn mức lưu trữ.",
   "RequestActivation": "Yêu cầu kích hoạt lại",

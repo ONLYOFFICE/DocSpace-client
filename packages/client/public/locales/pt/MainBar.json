@@ -1,7 +1,7 @@
 {
   "ClickHere": "Clique aqui",
   "ConfirmEmailDescription": "Utilizar a ligação fornecida no e-mail de ativação. Ainda não recebeu um e-mail com o link de ativação?",
-  "ConfirmEmailHeader": "Por favor, confirme o seu email ({{ email }}) para ter acesso às funcionalidades do DocSpace.",
+  "ConfirmEmailHeader": "Por favor, confirme o seu email ({{ email }}) para ter acesso às funcionalidades do {{portalName}}.",
   "PersonalUserQuotaAdminsDescription": "Para fazer upload e criar novos arquivos e pastas, libere espaço em disco ou gerencie a cota por usuário nas <1>Configurações de gerenciamento de armazenamento.</1>",
   "PersonalUserQuotaDescription": "Para fazer upload e criar novos arquivos e pastas, libere espaço em disco ou entre em contato com o administrador para aumentar a cota de armazenamento.",
   "RequestActivation": "Solicitar a ativação novamente",

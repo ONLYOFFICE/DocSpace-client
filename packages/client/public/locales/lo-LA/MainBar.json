@@ -1,7 +1,7 @@
 {
   "ClickHere": "ກົດ​ບ່ອນ​ນີ້",
   "ConfirmEmailDescription": "ໃຊ້ລິ້ງທີ່ລະບຸໄວ້ໃນອີເມວການເປີດໃຊ້ງານ. ຍັງບໍ່ໄດ້ຮັບອີເມວທີ່ມີລິ້ງເປີດໃຊ້ງານບໍ?",
-  "ConfirmEmailHeader": "ກະລຸນາເປີດໃຊ້ອີເມວ ({{ email }}) ຂອງທ່ານເພື່ອເຂົ້າເຖິງ ຄຸນສົມບັດ DocSpace.",
+  "ConfirmEmailHeader": "ກະລຸນາເປີດໃຊ້ອີເມວ ({{ email }}) ຂອງທ່ານເພື່ອເຂົ້າເຖິງ ຄຸນສົມບັດ {{portalName}}.",
   "RequestActivation": "ຮ້ອງຂໍການເປີດໃຊ້ອີກເທື່ອຫນຶ່ງ",
   "RoomQuotaDescription": "ທ່ານສາມາດຈັດເກັບຫ້ອງທີ່ບໍ່ຈໍາເປັນໄວ້ ຫຼື <1 >{{clickHere}}</1> ເພື່ອຊອກຫາແຜນລາຄາທີ່ເໝາະສົມກວ່າສໍາລັບ DocSpace ຂອງທ່ານ.",
   "RoomQuotaHeader": "ຫ້ອງກຳລັງຈະເກີນ: {{ currentValue }} / {{ maxValue }}",

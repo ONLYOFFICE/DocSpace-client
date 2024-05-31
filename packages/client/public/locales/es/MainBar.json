@@ -1,7 +1,7 @@
 {
   "ClickHere": "Haga clic aquí",
   "ConfirmEmailDescription": "Utilice el enlace proporcionado en el correo electrónico de activación. ¿No ha recibido el correo electrónico con el enlace de activación?",
-  "ConfirmEmailHeader": "Por favor, active su correo electrónico ({{ email }}) para obtener acceso a las características de DocSpace.",
+  "ConfirmEmailHeader": "Por favor, active su correo electrónico ({{ email }}) para obtener acceso a las características de {{portalName}}.",
   "PersonalUserQuotaAdminsDescription": "Para cargar y crear nuevos archivos y carpetas, libere espacio en el disco o administre la cuota por usuario en la <1>Configuración de administración de almacenamiento</1>.",
   "PersonalUserQuotaDescription": "Para cargar y crear nuevos archivos y carpetas, libere espacio en el disco o contacte con el administrador para aumentar la cuota de almacenamiento.",
   "RequestActivation": "Volver a solicitar la activación",

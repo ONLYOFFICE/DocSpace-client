@@ -1,7 +1,7 @@
 {
   "ClickHere": "여기를 클릭",
   "ConfirmEmailDescription": "활성화 이메일에 첨부된 링크를 사용하세요. 활성화 링크가 첨부된 이메일을 받지 못하셨나요?",
-  "ConfirmEmailHeader": "DocSpace 기능에 액세스하려면 ({{ email }})이메일을 활성화하세요.",
+  "ConfirmEmailHeader": "{{portalName}} 기능에 액세스하려면 ({{ email }})이메일을 활성화하세요.",
   "PersonalUserQuotaAdminsDescription": "새 파일 및 폴더를 업로드하거나 생성하려면 디스크 공간을 확보하거나 <1>스토리지 관리 설정</1>에서 사용자당 할당량을 관리하세요.",
   "PersonalUserQuotaDescription": "새 파일 및 폴더를 업로드하거나 생성하려면 디스크 공간을 확보하거나 스토리지 할당량을 늘리세요.",
   "RequestActivation": "다시 한 번 활성화 요청",

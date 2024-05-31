@@ -442,7 +442,6 @@ const useEditorEvents = ({
 
   const onSDKRequestUsers = React.useCallback(
     async (event: object) => {
-      console.log("====", event);
       try {
         const currEvent = event as TEvent;
         const c = currEvent?.data?.c;
@@ -454,8 +453,6 @@ const useEditorEvents = ({
         if (c !== "protect") {
           setUsersInRoom(users);
         }
-
-        console.log(users, c);
 
         docEditor?.setUsers?.({
           c: c ?? "",

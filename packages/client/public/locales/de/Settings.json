@@ -224,7 +224,7 @@
   "SelectUsersDescriptionWorkspace": "Wählen Sie Benutzer aus der Liste aus, die in ONLYOFFICE {{portalName}} importiert werden sollen. Benutzer, die bereits in ONLYOFFICE {{portalName}} vorhanden sind, werden grün hervorgehoben und standardmäßig nicht markiert.",
   "SelectUsersWithEmail": "Benutzer mit E-Mail-Adresse auswählen",
   "SelectUserTypes": "Benutzertypen auswählen",
-  "SelectUserTypesDescription": "Wählen Sie DocSpace-Rollen für die importierten Benutzer aus: <1>DocSpace-Administrator</1>, <1>Raumadministrator</1> oder <1>Poweruser</1>. Standardmäßig ist für jeden Benutzer die Rolle „Poweruser“ ausgewählt. Sie können die Rollen nach dem Import verwalten.",
+  "SelectUserTypesDescription": "Wählen Sie {{portalName}}-Rollen für die importierten Benutzer aus: <1>{{portalName}}-Administrator</1>, <1>Raumadministrator</1> oder <1>Poweruser</1>. Standardmäßig ist für jeden Benutzer die Rolle „Poweruser“ ausgewählt. Sie können die Rollen nach dem Import verwalten.",
   "SendInviteLetter": "Einladung senden",
   "SendNotificationAboutRestoring": "Benutzer über Wiederherstellung des Bereichs benachrichtigen",
   "ServerSideEncryptionMethod": "Methode der Server-seitigen Verschlüsselung",

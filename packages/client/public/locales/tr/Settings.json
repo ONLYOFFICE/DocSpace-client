@@ -224,7 +224,7 @@
   "SelectUsersDescriptionWorkspace": "ONLYOFFICE{{portalName}}’e aktarmak için listeden kullanıcıları işaretleyin. ONLYOFFICE{{portalName}}’de zaten var olan kullanıcılar yeşil renkle vurgulanır ve varsayılan olarak işaretlenmezler.",
   "SelectUsersWithEmail": "E-posta ile kullanıcıları seçin",
   "SelectUserTypes": "Kullanıcı türlerini seçin",
-  "SelectUserTypesDescription": "İçe aktarılan kullanıcılar için DocSpace rollerini seçin: <1>DocSpace yöneticisi</1>, <1>Oda yöneticisi</1> veya <1>Uzman kullanıcı</1>. Varsayılan olarak, her kullanıcı için Uzman kullanıcı rolü seçilir. İçe aktarma işleminden sonra rolleri yönetebilirsiniz.",
+  "SelectUserTypesDescription": "İçe aktarılan kullanıcılar için {{portalName}} rollerini seçin: <1>{{portalName}} yöneticisi</1>, <1>Oda yöneticisi</1> veya <1>Uzman kullanıcı</1>. Varsayılan olarak, her kullanıcı için Uzman kullanıcı rolü seçilir. İçe aktarma işleminden sonra rolleri yönetebilirsiniz.",
   "SendNotificationAboutRestoring": "Kullanıcılara alan geri yüklemesi hakkında bildirim gönder",
   "ServerSideEncryptionMethod": "Sunucu Tarafı Şifreleme Yöntemi",
   "ServiceUrl": "Hizmet Url'si",

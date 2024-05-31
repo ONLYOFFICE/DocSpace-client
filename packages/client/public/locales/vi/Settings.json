@@ -223,7 +223,7 @@
   "SelectUsersDescriptionWorkspace": "Kiểm tra người dùng từ danh sách để nhập vào ONLYOFFICE {{portalName}}. Người dùng đã tồn tại trong ONLYOFFICE {{portalName}} được tô sáng bằng màu xanh lá cây và không được chọn theo mặc định.",
   "SelectUsersWithEmail": "Chọn người dùng có email",
   "SelectUserTypes": "Chọn kiểu người dùng",
-  "SelectUserTypesDescription": "Chọn vai trò DocSpace cho người dùng đã nhập: <1> Quản trị viên DocSpace </1>, <1> Quản trị viên phòng </1> hoặc <1> Người dùng cấp cao </1>. Theo mặc định, vai trò Người dùng cấp cao được chọn cho mỗi người dùng. Bạn có thể quản lý các vai trò sau khi nhập.",
+  "SelectUserTypesDescription": "Chọn vai trò {{portalName}} cho người dùng đã nhập: <1> Quản trị viên {{portalName}} </1>, <1> Quản trị viên phòng </1> hoặc <1> Người dùng cấp cao </1>. Theo mặc định, vai trò Người dùng cấp cao được chọn cho mỗi người dùng. Bạn có thể quản lý các vai trò sau khi nhập.",
   "SendNotificationAboutRestoring": "Gửi thông báo về khôi phục không gian cho người dùng",
   "ServerSideEncryptionMethod": "Phương pháp mã hóa phía máy chủ",
   "ServiceUrl": "Url dịch vụ",

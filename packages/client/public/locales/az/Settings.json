@@ -223,7 +223,7 @@
   "SelectUsersDescriptionWorkspace": "ONLYOFFICE {{portalName}}-ə idxal ediləcək istifadəçiləri siyahıdan yoxlayın. ONLYOFFICE {{portalName}}-də artıq mövcud olan istifadəçilər yaşıl rənglə vurğulanır və defolt olaraq qeyd olunmur.",
   "SelectUsersWithEmail": "E-poçtu olan istifadəçiləri seçin",
   "SelectUserTypes": "İstifadəçi növlərini seçin",
-  "SelectUserTypesDescription": "İdxal edilmiş istifadəçilər üçün DocSpace rollarını seçin: <1>DocSpace admini</1>, <1>Otaq admini</1> və ya <1>Bacarıqlı istifadəçi</1>. Varsayılan olaraq, hər bir istifadəçi üçün Bacarıqlı istifadəçi rolu seçilir. Siz idxaldan sonra rolları idarə edə bilərsiniz.",
+  "SelectUserTypesDescription": "İdxal edilmiş istifadəçilər üçün {{portalName}} rollarını seçin: <1>{{portalName}} admini</1>, <1>Otaq admini</1> və ya <1>Bacarıqlı istifadəçi</1>. Varsayılan olaraq, hər bir istifadəçi üçün Bacarıqlı istifadəçi rolu seçilir. Siz idxaldan sonra rolları idarə edə bilərsiniz.",
   "SendNotificationAboutRestoring": "Sahənin bərpası ilə bağlı istifadəçilərə bildiriş göndərin",
   "ServerSideEncryptionMethod": "Server Tərəfində Şifrələmə Metodu",
   "ServiceUrl": "Xidmət URL-si",

@@ -223,7 +223,7 @@
   "SelectUsersDescriptionWorkspace": "Cochez les cases des utilisateurs que vous souhaitez importer vers {{portalName}}. Les utilisateurs existants dans OLYOFFICE {{portalName}} sont mis en surbrillance en vert et ne sont pas cochés par défaut.",
   "SelectUsersWithEmail": "Sélectionnez les utilisateurs ayant l'adresse e-mail",
   "SelectUserTypes": "Sélectionner le type d'utilisateur",
-  "SelectUserTypesDescription": "Sélectionnez les rôles dans DocSpace pour les utilisateurs importés: <1>Administrateur DocSpace</1>, <1>Administrateur de salle</1> ou <1>Utilisateur avancé</1>. Par défaut, chaque utilisateur est affecté à un rôle Utilisateur avancé. Vous pouvez attribuer les rôles après l'importation.",
+  "SelectUserTypesDescription": "Sélectionnez les rôles dans {{portalName}} pour les utilisateurs importés: <1>Administrateur {{portalName}}</1>, <1>Administrateur de salle</1> ou <1>Utilisateur avancé</1>. Par défaut, chaque utilisateur est affecté à un rôle Utilisateur avancé. Vous pouvez attribuer les rôles après l'importation.",
   "SendNotificationAboutRestoring": "Informer les utilisateurs sur la restauration de l’espace",
   "ServerSideEncryptionMethod": "Méthode de chiffrement partie serveur",
   "ServiceUrl": "Lien de service",

@@ -224,7 +224,7 @@
   "SelectUsersDescriptionWorkspace": "Zaškrtněte uživatele ze seznamu pro import do aplikace ONLYOFFICE {{portalName}}. Uživatelé již existující v ONLYOFFICE {{portalName}} jsou zvýrazněni zelenou barvou a ve výchozím nastavení nejsou zaškrtnuti.",
   "SelectUsersWithEmail": "Vybrat uživatele s e-mailem",
   "SelectUserTypes": "Výběr typů uživatelů",
-  "SelectUserTypesDescription": "Vyberte role DocSpace pro importované uživatele: <1>DocSpace admin</1>, <1>Room admin</1> nebo <1>Power user</1>. Ve výchozím nastavení je pro každého uživatele vybrána role Power user. Role můžete spravovat i po importu.",
+  "SelectUserTypesDescription": "Vyberte role {{portalName}} pro importované uživatele: <1>{{portalName}} admin</1>, <1>Room admin</1> nebo <1>Power user</1>. Ve výchozím nastavení je pro každého uživatele vybrána role Power user. Role můžete spravovat i po importu.",
   "SendNotificationAboutRestoring": "Odeslat oznámení uživatelům o obnovení prostoru",
   "ServerSideEncryptionMethod": "Metoda šifrování na straně serveru",
   "ServiceUrl": "URL adresa služby",

@@ -224,7 +224,7 @@
   "SelectUsersDescriptionWorkspace": "Označte v zozname používateľov, ktorých chcete importovať do ONLYOFFICE {{portalName}}. Používatelia, ktorí už existujú v ONLYOFFICE {{portalName}}, sú zvýraznení zelenou farbou a pôvodne nie sú označení.",
   "SelectUsersWithEmail": "Vyberte používateľov s e-mailom",
   "SelectUserTypes": "Vyberte typy používateľov",
-  "SelectUserTypesDescription": "Vyberte roly DocSpace pre importovaných používateľov: <1>Administrátor DocSpace</1>, <1>Administrátor miestnosti</1> alebo <1>Pokročilý používateľ</1>. V predvolenom nastavení je pre každého používateľa vybraná rola Pokročilý používateľ. Roly môžete spravovať po importe údajov.",
+  "SelectUserTypesDescription": "Vyberte roly {{portalName}} pre importovaných používateľov: <1>Administrátor {{portalName}}</1>, <1>Administrátor miestnosti</1> alebo <1>Pokročilý používateľ</1>. V predvolenom nastavení je pre každého používateľa vybraná rola Pokročilý používateľ. Roly môžete spravovať po importe údajov.",
   "SendNotificationAboutRestoring": "Odošlite používateľom upozornenie o obnovení priestoru",
   "ServerSideEncryptionMethod": "Metóda šifrovania na strane servera",
   "ServiceUrl": "URL adresa služby",

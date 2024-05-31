@@ -198,7 +198,6 @@
   "SelectUsers": "选择用户",
   "SelectUsersWithEmail": "选择有电子邮件的用户",
   "SelectUserTypes": "选择用户类型",
-  "SelectUserTypesDescription": "为导入的用户选择协作空间角色：<1>协作空间管理员</1>、<1>房间管理员</1>或<1>高级用户</1>。默认情况下，系统为每个用户选择高级用户角色。您可以在导入后对角色进行管理。",
   "SendInviteLetter": "发送邀请邮件",
   "SendNotificationAboutRestoring": "向用户发送关于协作空间恢复的通知",
   "ServerSideEncryptionMethod": "服务器端加密方法",

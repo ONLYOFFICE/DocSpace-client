@@ -223,7 +223,7 @@
   "SelectUsersDescriptionWorkspace": "リストからONLYOFFICE DocSpaceにインポートするユーザーをチェックしてください。すでにONLYOFFICE DocSpaceに存在するユーザは緑色でハイライトされ、デフォルトではチェックされていません。",
   "SelectUsersWithEmail": "メールアドレスがあるユーザーの選択",
   "SelectUserTypes": "ユーザータイプの選択",
-  "SelectUserTypesDescription": "インポートしたユーザーのDocSpace役割を選択してください： <1>DocSpace管理者</1>、<1>ルーム管理者</1>、または<1>パワーユーザー</1>。デフォルトでは、各ユーザーにパワーユーザーの役割が選択されています。役割はインポート後に管理できます。",
+  "SelectUserTypesDescription": "インポートしたユーザーの{{portalName}}役割を選択してください： <1>{{portalName}}管理者</1>、<1>ルーム管理者</1>、または<1>パワーユーザー</1>。デフォルトでは、各ユーザーにパワーユーザーの役割が選択されています。役割はインポート後に管理できます。",
   "SendInviteLetter": "招待状を送信する",
   "SendNotificationAboutRestoring": "ユーザーへスペース復元のお知らせを送信",
   "ServerSideEncryptionMethod": "サーバー側暗号化方法",

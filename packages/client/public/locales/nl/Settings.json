@@ -221,7 +221,7 @@
   "SelectUsersDescriptionWorkspace": "Vink gebruikers aan uit de lijst om te importeren in ONLYOFFICE {{portalName}}. Gebruikers die al bestaan in ONLYOFFICE {{portalName}} zijn aangegeven met een groene kleur en zijn niet standaard aangevinkt.",
   "SelectUsersWithEmail": "Selecteer gebruikers met e-mail",
   "SelectUserTypes": "Selecteer gebruikerstypes",
-  "SelectUserTypesDescription": "Selecteer DocSpace -rollen voor de geïmporteerde gebruikers: <1>DocSpace-admin</1>, <1>Kamer beheerders</1> of <1>Power users</1>. Standaard is de Power user rol geselecteerd voor elke gebruiker. U kunt de rollen na het importeren beheren.",
+  "SelectUserTypesDescription": "Selecteer {{portalName}} -rollen voor de geïmporteerde gebruikers: <1>{{portalName}}-admin</1>, <1>Kamer beheerders</1> of <1>Power users</1>. Standaard is de Power user rol geselecteerd voor elke gebruiker. U kunt de rollen na het importeren beheren.",
   "SendNotificationAboutRestoring": "Stuur notificatie over ruimte herstel aan gebruikers",
   "ServerSideEncryptionMethod": "Server Side Encryptiemethode",
   "ServiceUrl": "Service Url",

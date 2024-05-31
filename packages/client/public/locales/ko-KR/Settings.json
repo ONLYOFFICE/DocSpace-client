@@ -224,7 +224,7 @@
   "SelectUsersDescriptionWorkspace": "목록에서 ONLYOFFICE {{portalName}}로 가져오기할 사용자를 선택하세요. ONLYOFFICE {{portalName}}에 이미 존재하는 사용자는 초록색으로 하이라이트 표시되며 기본적으로 선택되어 있지 않습니다.",
   "SelectUsersWithEmail": "이메일이 있는 사용자 선택",
   "SelectUserTypes": "사용자 타입 선택",
-  "SelectUserTypesDescription": "가져오기한 사용자에 대한 DocSpace 역할(<1>DocSpace 관리자</1>, <1>방 관리자</1> 또는 <1>고급 사용자</1>)을 선택하세요. 기본적으로 각 사용자에 대해 고급 사용자 역할이 선택되어 있습니다. 가져오기한 후 역할을 관리할 수 있습니다.",
+  "SelectUserTypesDescription": "가져오기한 사용자에 대한 {{portalName}} 역할(<1>{{portalName}} 관리자</1>, <1>방 관리자</1> 또는 <1>고급 사용자</1>)을 선택하세요. 기본적으로 각 사용자에 대해 고급 사용자 역할이 선택되어 있습니다. 가져오기한 후 역할을 관리할 수 있습니다.",
   "SendNotificationAboutRestoring": "사용자에게 스페이스 복원에 대한 알림 전송",
   "ServerSideEncryptionMethod": "서버측 암호화 방법",
   "ServiceUrl": "서비스 Url",

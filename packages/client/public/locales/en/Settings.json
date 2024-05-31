@@ -228,7 +228,7 @@
   "SelectUsersDescriptionWorkspace": "Check users from the list to import into ONLYOFFICE {{portalName}}. Users already existing in ONLYOFFICE {{portalName}} are highlighted with a green color and are not checked by default.",
   "SelectUsersWithEmail": "Select users with e-mail",
   "SelectUserTypes": "Select user types",
-  "SelectUserTypesDescription": "Select DocSpace roles for the imported users: <1>DocSpace admin</1>, <1>Room admin</1> or <1>Power user</1>. By default, Power user role is selected for each user. You can manage the roles after the import.",
+  "SelectUserTypesDescription": "Select {{portalName}} roles for the imported users: <1>{{portalName}} admin</1>, <1>Room admin</1> or <1>Power user</1>. By default, Power user role is selected for each user. You can manage the roles after the import.",
   "SendInviteLetter": "Send invite letter",
   "SendNotificationAboutRestoring": "Send notification about space restoring to users",
   "ServerSideEncryptionMethod": "Server Side Encryption Method",

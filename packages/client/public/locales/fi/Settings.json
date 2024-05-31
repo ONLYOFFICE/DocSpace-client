@@ -205,7 +205,7 @@
   "SelectUsers": "Valitse käyttäjät",
   "SelectUsersWithEmail": "Valitse käyttäjät, joilla on sähköposti",
   "SelectUserTypes": "Valitse käyttäjätyypit",
-  "SelectUserTypesDescription": "Valitse DocSpace roolit tuoduille käyttäjille: <1>DocSpace järjestelmänvalvoja</1>, <1>Huoneen pääkäyttäjä</1> tai <1>Tehokäyttäjä</1>. Tehokäyttäjärooli on valittu jokaiselle käyttäjälle oletuksena. Voit hallita rooleja tuonnin jälkeen.",
+  "SelectUserTypesDescription": "Valitse {{portalName}} roolit tuoduille käyttäjille: <1>{{portalName}} järjestelmänvalvoja</1>, <1>Huoneen pääkäyttäjä</1> tai <1>Tehokäyttäjä</1>. Tehokäyttäjärooli on valittu jokaiselle käyttäjälle oletuksena. Voit hallita rooleja tuonnin jälkeen.",
   "SendNotificationAboutRestoring": "Lähetä ilmoitus sivuston käyttäjille",
   "ServerSideEncryptionMethod": "Palvelinpuolen salausmenetelmä",
   "ServiceUrl": "Palvelun URL-osoite",

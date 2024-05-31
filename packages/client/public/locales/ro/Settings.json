@@ -225,7 +225,7 @@
   "SelectUsersDescriptionWorkspace": "Bifați utilizatorii din lista pentru a le importa în ONLYOFFICE {{portalName}}. Utilizatorii deja exstenți în ONLYOFFICE {{portalName}} sunt evidențiate cu verde și nu sunt bifați în mod implicit.",
   "SelectUsersWithEmail": "Secectați utilizatorii cu adresa de e-mail.",
   "SelectUserTypes": "Selectare tip de utilizator",
-  "SelectUserTypesDescription": "Selectați roluri pentru utilizatorii importați în DocSpace: <1>Administrator DocSpace</1>, <1>Administrator sală</1> sau <1>Utilizator avansat</1>. În mod implicit, fiecărui utilizator îi este atribuit un rol de Utilizator avansat. Puteți gestona roluri după importul.",
+  "SelectUserTypesDescription": "Selectați roluri pentru utilizatorii importați în {{portalName}}: <1>Administrator {{portalName}}</1>, <1>Administrator sală</1> sau <1>Utilizator avansat</1>. În mod implicit, fiecărui utilizator îi este atribuit un rol de Utilizator avansat. Puteți gestona roluri după importul.",
   "SendNotificationAboutRestoring": "Trimite o notificare privind restaurarea spațiului către utilizatori",
   "ServerSideEncryptionMethod": "Metoda de criptare pe partea de server",
   "ServiceUrl": "Url a serverului",

@@ -27,7 +27,7 @@
   "CSPInfoBarHeader": "Zahtevan je HTTPS",
   "CSPInputPlaceholder": "Vnesite URL kot v primeru: https://example.com",
   "CSPUrlHelp": "Vnesite ime domene {{portalName}} brez URL ali dodatnih znakov.",
-  "CustomDescription": "Ročno konfigurirajte parametre za vdelavo vašega DocSpace.",
+  "CustomDescription": "Ročno konfigurirajte parametre za vdelavo vašega {{portalName}}.",
   "CustomizingDisplay": "Prilagajanje zaslona",
   "DataDisplay": "Nastavitve prikaza podatkov",
   "DefaultColumnsOption": "Privzeto (količina je odvisna od širine zaslona)",

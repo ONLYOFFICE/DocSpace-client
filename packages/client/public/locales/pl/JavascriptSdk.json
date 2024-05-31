@@ -27,7 +27,7 @@
   "CSPInfoBarHeader": "HTTPS jest wymagany",
   "CSPInputPlaceholder": "Wpisz URL w następujący sposób: https://example.com",
   "CSPUrlHelp": "Wpisz nazwę domeny {{portalName}} bez ścieżek URL i dodatkowych znaków.",
-  "CustomDescription": "Ręcznie skonfiguruj parametry osadzania DocSpace.",
+  "CustomDescription": "Ręcznie skonfiguruj parametry osadzania {{portalName}}.",
   "CustomizingDisplay": "Personalizacja wyświetlania",
   "DataDisplay": "Ustawienia wyświetlania danych",
   "DefaultColumnsOption": "Domyślnie (ilość zależy od szerokości ekranu)",

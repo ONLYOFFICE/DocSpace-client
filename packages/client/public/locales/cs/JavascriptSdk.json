@@ -27,7 +27,7 @@
   "CSPInfoBarHeader": "HTTPS je vyžadován",
   "CSPInputPlaceholder": "Zadejte adresu URL takto: https://example.com",
   "CSPUrlHelp": "Zadejte název domény {{portalName}} bez cest URL nebo dalších znaků.",
-  "CustomDescription": "Ručně nakonfigurujte parametry pro vložení prostoru DocSpace.",
+  "CustomDescription": "Ručně nakonfigurujte parametry pro vložení prostoru {{portalName}}.",
   "CustomizingDisplay": "Přizpůsobení zobrazení",
   "DataDisplay": "Nastavení zobrazení dat",
   "DefaultColumnsOption": "Výchozí (množství závisí na šířce obrazovky)",

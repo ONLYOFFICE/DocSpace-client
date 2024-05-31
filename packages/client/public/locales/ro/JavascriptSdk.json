@@ -27,7 +27,7 @@
   "CSPInfoBarHeader": "HTTPS obligatoriu",
   "CSPInputPlaceholder": "Introduceți URL-ul în felul următor  https://example.com",
   "CSPUrlHelp": "Introduceți numele de domeniu {{portalName}} fără adrese URL sau caractere suplimentare.",
-  "CustomDescription": "Configurați manual parametrii pentru încorporarea spațiului DocSpace.",
+  "CustomDescription": "Configurați manual parametrii pentru încorporarea spațiului {{portalName}}.",
   "CustomizingDisplay": "Particularizare afișaj",
   "DataDisplay": "Setări pentru afișare de date",
   "DefaultColumnsOption": "Implicit (Mărimea depinde de lățimea ecranului)",

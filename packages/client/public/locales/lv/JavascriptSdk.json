@@ -27,7 +27,7 @@
   "CSPInfoBarHeader": "Nepieciešams HTTPS",
   "CSPInputPlaceholder": "Ievadiet vietrādi URL šādi: https://example.com",
   "CSPUrlHelp": "Ievadiet {{portalName}} domēna nosaukumu bez vietrāža URL ceļiem vai papildu rakstzīmēm.",
-  "CustomDescription": "Manuāli konfigurējiet DocSpace iegulšanas parametrus.",
+  "CustomDescription": "Manuāli konfigurējiet {{portalName}} iegulšanas parametrus.",
   "CustomizingDisplay": "Displeja pielāgošana",
   "DataDisplay": "Datu displeja iestatījumi",
   "DefaultColumnsOption": "Noklusējums (daudzums ir atkarīgs no ekrāna platuma)",

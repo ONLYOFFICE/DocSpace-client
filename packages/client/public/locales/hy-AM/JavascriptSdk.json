@@ -26,7 +26,6 @@
   "CSPInfoBarHeader": "Պահանջվում է HTTPS",
   "CSPInputPlaceholder": "Մուտքագրեք URL այսպես` https://example.com ",
   "CSPUrlHelp": "Մուտքագրեք {{portalName}} տիրույթի անունը առանց URL ուղիների կամ լրացուցիչ նիշերի:",
-  "CustomDescription": "Ձեռքով կարգավորեք ձեր Դոկսպեյսը ներկառուցելու պարամետրերը:",
   "CustomizingDisplay": "Ցուցադրման հարմարեցում",
   "DataDisplay": "Տվյալների ցուցադրման կարգավորումներ",
   "DefaultColumnsOption": "Կանխադրված (Քանակը կախված է էկրանի լայնությունից)",

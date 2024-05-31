@@ -28,7 +28,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { DOCSPACE } from "@docspace/shared/constants";
+import { DOCSPACE, PORTAL } from "@docspace/shared/constants";
 import { inject, observer } from "mobx-react";
 
 import { mobile, tablet } from "@docspace/shared/utils/device";
@@ -180,7 +180,7 @@ const PortalIntegration = (props) => {
     },
     {
       title: t("Common:Custom"),
-      description: t("CustomDescription"),
+      description: t("CustomDescription", { portalName: PORTAL }),
       image: theme.isBase ? CustomImg : CustomImgDark,
       handleOnClick: navigateToCustom,
     },

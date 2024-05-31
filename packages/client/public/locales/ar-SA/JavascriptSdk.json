@@ -27,7 +27,7 @@
   "CSPInfoBarHeader": "HTTPS مطلوب",
   "CSPInputPlaceholder": "قم بإدخال رابط مثل: https://example.com",
   "CSPUrlHelp": "أدخل اسم مجال {{portalName}} بدون مسارات URL أو أحرف إضافية.",
-  "CustomDescription": "قم بتشكيل الإعدادات يدويا لتضمين DocSpace الخاص بك.",
+  "CustomDescription": "قم بتشكيل الإعدادات يدويا لتضمين {{portalName}} الخاص بك.",
   "CustomizingDisplay": "تخصيص العرض",
   "DataDisplay": "إعدادات عرض البيانات",
   "DefaultColumnsOption": "الافتراضي (الكمية تعتمد على عرض الشاشة)",

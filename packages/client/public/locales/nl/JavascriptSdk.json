@@ -27,7 +27,7 @@
   "CSPInfoBarHeader": "HTTPS vereist",
   "CSPInputPlaceholder": "Voer de URL als volgt in: https://example.com",
   "CSPUrlHelp": "Voer de {{portalName}} domeinnaam in zonder URL-paden of extra tekens.",
-  "CustomDescription": "Configureer de parameters voor het insluiten van uw DocSpace handmatig.",
+  "CustomDescription": "Configureer de parameters voor het insluiten van uw {{portalName}} handmatig.",
   "CustomizingDisplay": "De weergave aanpassen",
   "DataDisplay": "Instellingen weergave gegevens",
   "DefaultColumnsOption": "Standaard (Hoeveelheid is afhankelijk van de schermbreedte)",

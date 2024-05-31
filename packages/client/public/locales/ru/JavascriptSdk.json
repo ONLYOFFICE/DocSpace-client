@@ -27,7 +27,7 @@
   "CSPInfoBarHeader": "Требуется HTTPS",
   "CSPInputPlaceholder": "Введите URL-адрес в формате: https://example.com",
   "CSPUrlHelp": "Введите доменное имя {{portalName}} без URL-адресов и дополнительных символов.",
-  "CustomDescription": "Вручную настройте параметры для встраивания вашего DocSpace.",
+  "CustomDescription": "Вручную настройте параметры для встраивания вашего {{portalName}}.",
   "CustomizingDisplay": "Настройка отображения",
   "DataDisplay": "Настройки отображения данных",
   "DefaultColumnsOption": "По умолчанию (количество зависит от ширины экрана)",

@@ -29,7 +29,7 @@
   "CSPInfoBarHeader": "HTTPS required",
   "CSPInputPlaceholder": "Enter URL like this: https://example.com",
   "CSPUrlHelp": "Enter the {{portalName}} domain name without URL paths or additional characters.",
-  "CustomDescription": "Manually configure the parameters for embedding your DocSpace.",
+  "CustomDescription": "Manually configure the parameters for embedding your {{portalName}}.",
   "CustomizingDisplay": "Customizing the display",
   "DataDisplay": "Data display settings",
   "DefaultColumnsOption": "Default (Quantity depends on screen width)",

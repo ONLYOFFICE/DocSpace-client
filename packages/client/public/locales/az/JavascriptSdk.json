@@ -27,7 +27,7 @@
   "CSPInfoBarHeader": "HTTPS tələb olunur",
   "CSPInputPlaceholder": "URL'yi bu cür daxil edin: https://example.com",
   "CSPUrlHelp": "URL yolları və ya əlavə simvollar olmadan {{portalName}} domen adını daxil edin.",
-  "CustomDescription": "DocSpace-i daxil etmək üçün parametrləri əl ilə konfiqurasiya edin.",
+  "CustomDescription": "{{portalName}}-i daxil etmək üçün parametrləri əl ilə konfiqurasiya edin.",
   "CustomizingDisplay": "Ekranı fərdiləşdirin",
   "DataDisplay": "Məlumatların göstərilməsi parametrləri",
   "DefaultColumnsOption": "Defolt (Say ekranın genişliyindən asılıdır)",

@@ -27,7 +27,7 @@
   "CSPInfoBarHeader": "Απαιτείται HTTPS",
   "CSPInputPlaceholder": "Εισάγετε τη διεύθυνση URL ως εξής: https://example.com",
   "CSPUrlHelp": "Εισαγάγετε το όνομα τομέα {{portalName}} χωρίς διαδρομές URL ή πρόσθετους χαρακτήρες.",
-  "CustomDescription": "Ρυθμίστε μη αυτόματα τις παραμέτρους για την ενσωμάτωση του DocSpace σας.",
+  "CustomDescription": "Ρυθμίστε μη αυτόματα τις παραμέτρους για την ενσωμάτωση του {{portalName}} σας.",
   "CustomizingDisplay": "Προσαρμογή της εμφάνισης",
   "DataDisplay": "Ρυθμίσεις εμφάνισης δεδομένων",
   "DefaultColumnsOption": "Προεπιλογή (η ποσότητα εξαρτάται από το πλάτος της οθόνης)",

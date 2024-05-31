@@ -27,7 +27,7 @@
   "CSPInfoBarHeader": "HTTPS obrigatório",
   "CSPInputPlaceholder": "Insira o URL assim: https://exemplo.com",
   "CSPUrlHelp": "Insira o nome de domínio do {{portalName}} sem caminhos de URL ou caracteres adicionais.",
-  "CustomDescription": "Configure manualmente os parâmetros para incorporar seu DocSpace.",
+  "CustomDescription": "Configure manualmente os parâmetros para incorporar seu {{portalName}}.",
   "CustomizingDisplay": "Personalizando a exibição",
   "DataDisplay": "Configurações de exibição de dados",
   "DefaultColumnsOption": "Padrão (a quantidade depende da largura da tela)",

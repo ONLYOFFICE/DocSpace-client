@@ -27,7 +27,7 @@
   "CSPInfoBarHeader": "Vyžaduje sa protokol HTTPS",
   "CSPInputPlaceholder": "URL zadávajte nasledovne: https://example.com",
   "CSPUrlHelp": "Zadajte názov domény {{portalName}} bez určenia cesty URL alebo ďalších znakov.",
-  "CustomDescription": "Ručne nakonfigurujte parametre pre vloženie vášho DocSpace.",
+  "CustomDescription": "Ručne nakonfigurujte parametre pre vloženie vášho {{portalName}}.",
   "CustomizingDisplay": "Prispôsobenie zobrazovania",
   "DataDisplay": "Nastavenia zobrazovania údajov",
   "DefaultColumnsOption": "Predvolené (množstvo závisí od šírky obrazovky)",

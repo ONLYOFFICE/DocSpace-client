@@ -25,7 +25,6 @@
   "CSPInfoBarHeader": "HTTPS vaaditaan",
   "CSPInputPlaceholder": "Syötä URL näin: https://example.com",
   "CSPUrlHelp": "Syötä {{portalName}} verkkotunnus ilman URL-polkuja tai lisämerkkejä.",
-  "CustomDescription": "Määritä parametrit manuaalisesti DocSpacen upottamista varten.",
   "CustomizingDisplay": "Näytön mukauttaminen",
   "DataDisplay": "Tietojen näyttöasetukset",
   "DefaultColumnsOption": "Oletus (Määrä riippuu näytön leveydestä)",

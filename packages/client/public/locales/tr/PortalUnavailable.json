@@ -1,4 +1,4 @@
 {
   "AccessingProblem": "Bu {{portalName}}'e erişimde sorun yaşıyorsanız, lütfen yönetici ile iletişime geçin.",
-  "ContactAdministrator": "DocSpace yöneticisiyle iletişime geç"
+  "ContactAdministrator": "{{portalName}} yöneticisiyle iletişime geç"
 }

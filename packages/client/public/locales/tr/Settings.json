@@ -183,7 +183,7 @@
   "PortalCreatedDate": "Portal Oluşturulma tarihi: {{date}}",
   "PortalDeactivation": "{{portalName}}'i devre dışı bırak",
   "PortalDeactivationDescription": "Alanınızı geçici olarak devre dışı bırakmak için bu seçeneği kullanın.",
-  "PortalDeactivationHelper": "Bu DocSpace'i devre dışı bırakmak isterseniz, alanınız ve onunla ilişkili tüm bilgiler bloke edilecek ve böylece belirli bir süre boyunca hiç kimse ona erişemeyecek. Bunu yapmak için Devre Dışı Bırak butonuna tıklayın. Alan sahibinin e-posta adresine işlemi onaylamak için bir bağlantı gönderilecektir.\nAlana geri dönüp kullanmaya devam etmek istemeniz halinde onay e-postasında verilen ikinci bağlantıyı kullanmanız gerekecektir. Bu sebeple, lütfen bu e-postayı güvenli bir yerde saklayın.",
+  "PortalDeactivationHelper": "Bu {{portalName}}'i devre dışı bırakmak isterseniz, alanınız ve onunla ilişkili tüm bilgiler bloke edilecek ve böylece belirli bir süre boyunca hiç kimse ona erişemeyecek. Bunu yapmak için Devre Dışı Bırak butonuna tıklayın. Alan sahibinin e-posta adresine işlemi onaylamak için bir bağlantı gönderilecektir.\nAlana geri dönüp kullanmaya devam etmek istemeniz halinde onay e-postasında verilen ikinci bağlantıyı kullanmanız gerekecektir. Bu sebeple, lütfen bu e-postayı güvenli bir yerde saklayın.",
   "PortalDeletion": "{{portalName}} Silme",
   "PortalDeletionDescription": "Alanınızı kalıcı olarak silmek için bu seçeneği kullanın.",
   "PortalDeletionEmailSended": "{{ownerEmail}} adresine (alan sahibinin e-posta adresi) işlemi onaylamak için bir bağlantı gönderildi.",

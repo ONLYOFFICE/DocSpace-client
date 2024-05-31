@@ -33,7 +33,7 @@
   "ApiPageDescription": "Vytvorte si vlastnú pracovnú platformu na základe riešenia ONLYOFFICE {{portalName}} a spolupracujte na dokumentoch s tímami, klientmi a partnermi.",
   "ApiPageHeader": "Vytvorte si vlastnú platformu na spoluprácu",
   "Appearance": "Vzhľad",
-  "AuditSubheader": "Podsekcia vám umožňuje prezerať zoznam posledných zmien (vytvorenie, úprava, odstránenie atď.), ktoré vykonali používatelia v objektoch (miestnosti, príležitosti, súbory atď.) vo vašom DocSpace.",
+  "AuditSubheader": "Podsekcia vám umožňuje prezerať zoznam posledných zmien (vytvorenie, úprava, odstránenie atď.), ktoré vykonali používatelia v objektoch (miestnosti, príležitosti, súbory atď.) vo vašom {{portalName}}.",
   "AuditTrailNav": "Auditné záznamy",
   "AutoBackup": "Automatická záloha",
   "AutoBackupDescription": "Možnosť automatického zálohovania sa používa na automatizáciu procesu zálohovania údajov v priestore {{portalName}}, aby ste ich mohli neskôr obnoviť na lokálnom serveri.",

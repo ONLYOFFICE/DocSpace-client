@@ -15,7 +15,7 @@
   "DelayedPayment": "Zakasnelo plaćanje {{planName}} plana datiranog {{date}}",
   "DowngradeNow": "Smanji nivo sada",
   "ErrorNotification": "Ažuriranje tarifnog plana nije uspelo. Pokušajte ponovo kasnije ili kontaktirajte odeljenje prodaje.",
-  "GracePeriodActivatedDescription": "Tokom grejs perioda, administratori ne mogu da prave nove prostorije i dodaju nove korisnike. Nakon isteka grejs perioda, DocSpace će postati nedostupan dok se ne izvrši uplata.",
+  "GracePeriodActivatedDescription": "Tokom grejs perioda, administratori ne mogu da prave nove prostorije i dodaju nove korisnike. Nakon isteka grejs perioda, {{portalName}} će postati nedostupan dok se ne izvrši uplata.",
   "GracePeriodActivatedInfo": "Grejs period važi <1>from {{fromDate}} do {{byDate}}</1> (preostali dani: {{delayDaysCount}}).",
   "InvalidEmailWithActiveSubscription": "Vaša pretplata ostaje aktivna, ali preporučujemo da odaberete novog Platioca koji ima pristup podešavanjima pretplate u {{portalName}}-u.",
   "InvalidEmailWithActiveSubscriptionForAdmin": "Vaša pretplata ostaje aktivna, ali preporučujemo da kontaktirate {{portalName}} vlasnika da odaberete novog Platioca.",

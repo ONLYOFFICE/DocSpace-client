@@ -1,4 +1,4 @@
 {
   "AccessingProblem": "Якщо у вас виникли проблеми з доступом до цього {{portalName}}, зверніться до адміністратора.",
-  "ContactAdministrator": "Звернутися до адміністратора DocSpace"
+  "ContactAdministrator": "Звернутися до адміністратора {{portalName}}"
 }

@@ -11,7 +11,7 @@
   "FillingFormsRoomTitle": "Pokój do wypełniania formularzy",
   "Icon": "Ikona",
   "MakeRoomPrivateDescription": "Wszystkie pliki w tym pokoju zostaną zaszyfrowane.",
-  "MakeRoomPrivateLimitationsWarningDescription": "Dzięki tej funkcji możesz zapraszać tylko istniejących użytkowników DocSpace. Po utworzeniu pokoju nie będziesz w stanie zmienić listy użytkowników.",
+  "MakeRoomPrivateLimitationsWarningDescription": "Dzięki tej funkcji możesz zapraszać tylko istniejących użytkowników {{portalName}}. Po utworzeniu pokoju nie będziesz w stanie zmienić listy użytkowników.",
   "MakeRoomPrivateTitle": "Uczyń pokój prywatnym",
   "PeopleSelectorInfo": "Tylko administrator pokoju lub administrator {{portalName}} może zostać właścicielem pokoju",
   "PublicRoomBarDescription": "Ten pokój jest dostępny dla każdego, kto ma link. Użytkownicy zewnętrzni będą mieli uprawnienie tylko do odczytu dla wszystkich plików.",

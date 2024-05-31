@@ -20,7 +20,7 @@
   "PhoneSubtitle": "İki aşamalı doğrulama ekstra güvenliği sağlamak için etkinleştirilmiştir. {{portalName}}'te çalışmaya devam etmek için mobil telefon numaranızı giriniz. Mobil telefon numarası ülke koduyla girilmelidir.",
   "PortalContinueTitle": "Lütfen {{portalName}}'inizi yeniden etkinleştirmek istediğinizi onaylayın.",
   "PortalDeactivateTitle": "Lütfen {{portalName}}'inizi devre dışı bırakmak istediğinizi onaylayın.",
-  "PortalRemoveTitle": "Lütfen DocSpace'inizi silmek istediğinizi onaylayın.",
+  "PortalRemoveTitle": "Lütfen {{portalName}}'inizi silmek istediğinizi onaylayın.",
   "Reactivate": "Yeniden etkinleştir",
   "SetAppButton": "Uygulamaya bağlan",
   "SetAppDescription": "İki faktörlü kimlik doğrulama etkinleştirildi. {{portalName}} üzerinde çalışmaya devam etmek için kimlik doğrulama uygulamanızı yapılandırın. <1>Android</1> ve <4>iOS</4> için Google Authenticator'ı veya <8>Windows Phone</8> için Authenticator'ı kullanabilirsiniz.",

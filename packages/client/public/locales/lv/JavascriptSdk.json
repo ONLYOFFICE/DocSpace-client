@@ -62,7 +62,7 @@
   "InterfaceElements": "Saskarnes elementi",
   "ItemsCount": "Vienumu skaits vienā lapā",
   "ItemsCountDescription": "Jūs varat norādīt vienā lapā parādīto failu / mapju skaitu, kā arī norādīt, kuru lapu sākt rādīt",
-  "JavaScriptCodeDescription": "DocSpace vai tā daļas iegulšana, izmantojot JavaScript. Nokopējiet tālāk norādīto JavaScript kodu.",
+  "JavaScriptCodeDescription": "{{portalName}} vai tā daļas iegulšana, izmantojot JavaScript. Nokopējiet tālāk norādīto JavaScript kodu.",
   "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "Ierobežojums pēc laika perioda",
   "LinkSetDescription": "Šī saite ir aizsargāta ar {{parameter}}. Lai konfigurētu saiti,",

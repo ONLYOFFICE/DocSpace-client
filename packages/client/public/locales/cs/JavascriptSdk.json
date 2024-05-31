@@ -62,7 +62,7 @@
   "InterfaceElements": "Prvky rozhraní",
   "ItemsCount": "Počet položek na jedné stránce",
   "ItemsCountDescription": "Můžete určit počet souborů/složek zobrazených na jedné stránce a také určit, která stránka se má začít zobrazovat",
-  "JavaScriptCodeDescription": "Vložení DocSpace nebo jeho části pomocí JavaScriptu. Zkopírujte níže uvedený kód JavaScriptu.",
+  "JavaScriptCodeDescription": "Vložení {{portalName}} nebo jeho části pomocí JavaScriptu. Zkopírujte níže uvedený kód JavaScriptu.",
   "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "Omezení podle časového období",
   "LinkSetDescription": "Tento odkaz je chráněn pomocí {{parameter}}. Konfigurace odkazu,",

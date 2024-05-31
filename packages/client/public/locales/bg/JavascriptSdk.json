@@ -62,7 +62,7 @@
   "InterfaceElements": "Елементи на интерфейса",
   "ItemsCount": "Брой артикули в една страница",
   "ItemsCountDescription": "Можете да посочите броя факлове/папки, които ще се показват в една страница, както и коя страница да започне да се показва",
-  "JavaScriptCodeDescription": "Вграждане на DocSpace или негова част с помощта на JavaScript. Копирайте JavaScript кода по-долу.",
+  "JavaScriptCodeDescription": "Вграждане на {{portalName}} или негова част с помощта на JavaScript. Копирайте JavaScript кода по-долу.",
   "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "Ограничи по времеви период",
   "LinkSetDescription": "Този линк е защитен с {{parameter}}. За да конфигурирате линка,",

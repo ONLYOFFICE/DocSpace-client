@@ -62,7 +62,7 @@
   "InterfaceElements": "Interface-Elemente",
   "ItemsCount": "Anzahl der Artikel",
   "ItemsCountDescription": "Sie können die Anzahl der Dateien/Ordner festlegen, die auf einer Seite angezeigt werden sollen, sowie die Seite festlegen, die angezeigt werden soll",
-  "JavaScriptCodeDescription": "Einbetten von DocSpace oder einem Teil davon mithilfe von JavaScript. Kopieren Sie den folgenden JavaScript-Code.",
+  "JavaScriptCodeDescription": "Einbetten von {{portalName}} oder einem Teil davon mithilfe von JavaScript. Kopieren Sie den folgenden JavaScript-Code.",
   "JavascriptSdk": "JavaScript-SDK",
   "LimitByTime": "Nach Zeitraum begrenzen",
   "LinkSetDescription": "Dieser Link ist durch {{parameter}} geschützt. Um den Link zu konfigurieren,",

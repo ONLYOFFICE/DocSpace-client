@@ -28,10 +28,8 @@ import { Textarea } from "@docspace/shared/components/textarea";
 import { Text } from "@docspace/shared/components/text";
 import CodeBlock from "../sub-components/CodeBlock";
 
-import {
-  CategorySubHeader,
-  CodeWrapper,
-} from "../presets/StyledPresets";
+import { CategorySubHeader, CodeWrapper } from "../presets/StyledPresets";
+import { PORTAL } from "@docspace/shared/constants";
 
 export const CodeToInsert = ({ t, theme, codeBlock, config }) => (
   <CodeWrapper height="fit-content">
@@ -46,7 +44,7 @@ export const CodeToInsert = ({ t, theme, codeBlock, config }) => (
       {`JavaScript ${t("CodeTitle")}`}
     </CategorySubHeader>
     <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
-      {t("JavaScriptCodeDescription")}
+      {t("JavaScriptCodeDescription", { portalName: PORTAL })}
     </Text>
     <CodeBlock config={config} />
   </CodeWrapper>

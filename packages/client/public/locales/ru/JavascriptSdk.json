@@ -62,7 +62,7 @@
   "InterfaceElements": "Элементы интерфейса",
   "ItemsCount": "Количество элементов на странице",
   "ItemsCountDescription": "Вы можете указать количество файлов/папок, отображаемых на одной странице, а также указать, с какой страницы начать отображение",
-  "JavaScriptCodeDescription": "Встраивание DocSpace или его части с помощью JavaScript. Скопируйте приведенный ниже код JavaScript.",
+  "JavaScriptCodeDescription": "Встраивание {{portalName}} или его части с помощью JavaScript. Скопируйте приведенный ниже код JavaScript.",
   "JavascriptSdk": "Пакет SDK для Javascript",
   "LimitByTime": "Ограничение по времени",
   "LinkSetDescription": "Эта ссылка защищена при помощи {{parameter}}. Чтобы настроить ссылку,",

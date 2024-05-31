@@ -62,7 +62,7 @@
   "InterfaceElements": "İnterfeys elementləri",
   "ItemsCount": "Bəndlər bir səhifədə sayılır",
   "ItemsCountDescription": "Səhifədə göstərilən faylların/qovluqların sayını, həmçinin hansı səhifənin göstərilməyə başlayacağını təyin edə bilərsiniz.",
-  "JavaScriptCodeDescription": "JavaScript istifadə edərək DocSpace-in və ya onun bir hissəsinin yerləşdirilməsi. Aşağıdakı JavaScript kodunu kopyalayın.",
+  "JavaScriptCodeDescription": "JavaScript istifadə edərək {{portalName}}-in və ya onun bir hissəsinin yerləşdirilməsi. Aşağıdakı JavaScript kodunu kopyalayın.",
   "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "Vaxt dövrü ilə məhdudlaşdırın",
   "LinkSetDescription": "Bu link {{parameter}} ilə qorunur. Bağlantını konfiqurasiya etmək üçün,",

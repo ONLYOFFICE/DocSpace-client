@@ -59,7 +59,7 @@
   "InterfaceElements": "Ինտերֆեյսի տարրեր",
   "ItemsCount": "Միավորների քանակ",
   "ItemsCountDescription": "Կարող եք նշել մեկ էջում ցուցադրվող ֆայլերի/թղթապանակների քանակը, ինչպես նաև նշել, թե որ էջը սկսել ցուցադրել",
-  "JavaScriptCodeDescription": "DocSpace-ի կամ դրա մասի ներկառուցում JavaScript-ի միջոցով: Պատճենեք JavaScript կոդը ստորև:",
+  "JavaScriptCodeDescription": "{{portalName}}-ի կամ դրա մասի ներկառուցում JavaScript-ի միջոցով: Պատճենեք JavaScript կոդը ստորև:",
   "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "Սահմանափակում ըստ ժամանակաշրջանի",
   "LinkSetDescription": "Այս հղումը պաշտպանված է {{parameter}}-ով: Հղումը կարգավորելու համար՝",

@@ -62,7 +62,7 @@
   "InterfaceElements": "Στοιχεία διεπαφής",
   "ItemsCount": "Στοιχεία σε μία σελίδα",
   "ItemsCountDescription": "Μπορείτε να καθορίσετε τον αριθμό των αρχείων/φακέλων που εμφανίζονται σε μια σελίδα, καθώς και να καθορίσετε ποια σελίδα θα αρχίσει να εμφανίζεται",
-  "JavaScriptCodeDescription": "Ενσωμάτωση του DocSpace ή μέρους του χρησιμοποιώντας JavaScript. Αντιγράψτε τον παρακάτω κώδικα JavaScript.",
+  "JavaScriptCodeDescription": "Ενσωμάτωση του {{portalName}} ή μέρους του χρησιμοποιώντας JavaScript. Αντιγράψτε τον παρακάτω κώδικα JavaScript.",
   "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "Περιορισμός ανά χρονική περίοδο",
   "LinkSetDescription": "Αυτός ο σύνδεσμος προστατεύεται με μια παράμετρο {{parameter}}. Για να ρυθμίσετε τις παραμέτρους του συνδέσμου,",

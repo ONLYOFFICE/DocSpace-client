@@ -62,7 +62,7 @@
   "InterfaceElements": "Arayüz öğeleri",
   "ItemsCount": "Bir sayfadaki öğe sayısı",
   "ItemsCountDescription": "Bir sayfada görüntülenen dosya / klasör sayısını ve ayrıca hangi sayfanın görüntülenmeye başlayacağını belirleyebilirsiniz.",
-  "JavaScriptCodeDescription": "DocSpace'i veya bir bölümünü JavaScript kullanarak gömme. Aşağıdaki JavaScript kodunu kopyalayın.",
+  "JavaScriptCodeDescription": "{{portalName}}'i veya bir bölümünü JavaScript kullanarak gömme. Aşağıdaki JavaScript kodunu kopyalayın.",
   "JavascriptSdk": "Javascript SDK'sı",
   "LimitByTime": "Zaman dilimine göre sınırlama",
   "LinkSetDescription": "Bu bağlantı bir {{parameter}} ile korunmaktadır. Bağlantıyı yapılandırmak için,",

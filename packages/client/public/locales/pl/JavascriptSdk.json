@@ -62,7 +62,7 @@
   "InterfaceElements": "Elementy interfejsu",
   "ItemsCount": "Liczba pozycji na jednej stronie",
   "ItemsCountDescription": "Możesz wybrać liczbę plików/katalogów wyświetlanych na stronie oraz zdecydować, od której strony rozpocząć wyświetlanie",
-  "JavaScriptCodeDescription": "Osadzanie DocSpace lub jego części za pomocą JavaScript. Skopiuj poniższy kod JavaScript.",
+  "JavaScriptCodeDescription": "Osadzanie {{portalName}} lub jego części za pomocą JavaScript. Skopiuj poniższy kod JavaScript.",
   "JavascriptSdk": "SDK Javascript",
   "LimitByTime": "Ograniczenie czasowe",
   "LinkSetDescription": "Ten link jest chroniony przez parametr {{parameter}}. Aby skonfigurować link,",

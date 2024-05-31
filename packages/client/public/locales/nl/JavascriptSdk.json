@@ -62,7 +62,7 @@
   "InterfaceElements": "Interface elementen",
   "ItemsCount": "Items tellen op één pagina",
   "ItemsCountDescription": "U kunt het aantal bestanden/mappen opgeven dat op één pagina wordt weergegeven, en ook opgeven op welke pagina de weergave moet beginnen.",
-  "JavaScriptCodeDescription": "DocSpace of een deel ervan insluiten met JavaScript. Kopieer de onderstaande JavaScript code.",
+  "JavaScriptCodeDescription": "{{portalName}} of een deel ervan insluiten met JavaScript. Kopieer de onderstaande JavaScript code.",
   "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "Beperken op tijdsperiode",
   "LinkSetDescription": "Deze link is beveiligd met een {{parameter}}. Om de link te configureren,",

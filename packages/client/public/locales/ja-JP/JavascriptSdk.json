@@ -62,7 +62,7 @@
   "InterfaceElements": "インターフェイス要素",
   "ItemsCount": "1ページの項目数",
   "ItemsCountDescription": "1ページに表示するファイル/フォルダの数を指定したり、表示を開始するページを指定することもできます。",
-  "JavaScriptCodeDescription": "JavaScriptを使用してDocSpaceまたはその一部を埋め込みます。以下のJavaScriptコードをコピーしてください。",
+  "JavaScriptCodeDescription": "JavaScriptを使用して{{portalName}}またはその一部を埋め込みます。以下のJavaScriptコードをコピーしてください。",
   "JavascriptSdk": "JavaScript SDK",
   "LimitByTime": "期間による制限",
   "LinkSetDescription": "このリンクは{{parameter}}で保護されています。リンクを設定するには、",

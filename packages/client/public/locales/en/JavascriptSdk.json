@@ -65,7 +65,7 @@
   "InterfaceElements": "Interface elements",
   "ItemsCount": "Items count on one page",
   "ItemsCountDescription": "You can specify the number of files / folders displayed on one page, as well as specify which page to start displaying",
-  "JavaScriptCodeDescription": "Embedding DocSpace or its part using JavaScript. Copy the JavaScript code below.",
+  "JavaScriptCodeDescription": "Embedding {{portalName}} or its part using JavaScript. Copy the JavaScript code below.",
   "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "Limit by time period",
   "LinkSetDescription": "This link is protected with a {{parameter}}. To configure the link,",

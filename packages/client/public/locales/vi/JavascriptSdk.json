@@ -62,7 +62,7 @@
   "InterfaceElements": "Các thành phần giao diện người dùng",
   "ItemsCount": "Số mục trên một trang",
   "ItemsCountDescription": "Bạn có thể chỉ định số lượng tập tin / thư mục được hiển thị trên một trang, cũng như chỉ định trang nào sẽ bắt đầu hiển thị",
-  "JavaScriptCodeDescription": "Nhúng DocSpace hoặc một phần của nó bằng JavaScript. Hãy sao chép mã JavaScript bên dưới.",
+  "JavaScriptCodeDescription": "Nhúng {{portalName}} hoặc một phần của nó bằng JavaScript. Hãy sao chép mã JavaScript bên dưới.",
   "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "Giới hạn theo khoảng thời gian",
   "LinkSetDescription": "Liên kết này được bảo vệ bằng một {{parameter}}. Để định cấu hình liên kết,",

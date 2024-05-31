@@ -53,7 +53,6 @@
   "InterfaceElements": "界面元素",
   "ItemsCount": "一页上的项目数",
   "ItemsCountDescription": "可指定一页上显示的文件/文件夹的数量，以及指定从哪一页开始显示",
-  "JavaScriptCodeDescription": "使用 JavaScript 嵌入协作空间或其组件。复制下面的 JavaScript 代码。",
   "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "受时间段限制",
   "LinkSetDescription": "此链接受 {{parameter}} 保护。如要配置链接，",

@@ -62,7 +62,7 @@
   "InterfaceElements": "Elementos de interface",
   "ItemsCount": "Contagem de itens numa página",
   "ItemsCountDescription": "Pode especificar o número de ficheiros / pastas apresentados numa página, bem como especificar a página que deve começar a ser apresentada",
-  "JavaScriptCodeDescription": "Incorporação do DocSpace ou de sua parte usando JavaScript. Copie o código JavaScript abaixo.",
+  "JavaScriptCodeDescription": "Incorporação do {{portalName}} ou de sua parte usando JavaScript. Copie o código JavaScript abaixo.",
   "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "Limite por período de tempo",
   "LinkSetDescription": "Este link é protegido com um {{parameter}}. Para configurar o link,",

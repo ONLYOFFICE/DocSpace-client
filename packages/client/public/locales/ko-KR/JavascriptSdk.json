@@ -62,7 +62,7 @@
   "InterfaceElements": "인터페이스 요소",
   "ItemsCount": "한 페이지의 항목 수",
   "ItemsCountDescription": "한 페이지에 디스플레이 되는 파일 / 폴더 수와 디스플레이를 시작할 페이지를 지정할 수 있습니다",
-  "JavaScriptCodeDescription": "JavaScript를 사용하여 DocSpace 또는 그 일부를 임베드하세요. 아래의 JavaScript 코드를 복사하세요.",
+  "JavaScriptCodeDescription": "JavaScript를 사용하여 {{portalName}} 또는 그 일부를 임베드하세요. 아래의 JavaScript 코드를 복사하세요.",
   "JavascriptSdk": "자바스크립트 SDK",
   "LimitByTime": "기간별 제한",
   "LinkSetDescription": "이 링크는 {{parameter}}로 보호되어 있습니다. 링크를 구성하려면,",

@@ -62,7 +62,7 @@
   "InterfaceElements": "Elementi vmesnika",
   "ItemsCount": "Število predmetov na eno stran",
   "ItemsCountDescription": "Specificirate lahko število datotek / map, prikazanih na eni strani, kot tudi to, katera stran naj se začne prikazovati",
-  "JavaScriptCodeDescription": "Vdelava DocSpace ali njegovega dela z uporabo JavaScripta. Kopirajte spodnjo JavaScript kodo.",
+  "JavaScriptCodeDescription": "Vdelava {{portalName}} ali njegovega dela z uporabo JavaScripta. Kopirajte spodnjo JavaScript kodo.",
   "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "Omejitev na časovno obdobje",
   "LinkSetDescription": "Ta povezava je zaščitena s parametrom {{parameter}}. Če želite konfigurirati povezavo,",

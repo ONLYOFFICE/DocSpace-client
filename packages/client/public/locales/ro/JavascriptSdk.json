@@ -62,7 +62,7 @@
   "InterfaceElements": "Elemente de interfață",
   "ItemsCount": "Număr de elemente",
   "ItemsCountDescription": "Puteți indica numărul fișierelor / folderelor pe o pagină, precum și număr de pagină de început afișaj.",
-  "JavaScriptCodeDescription": "Incorporarea spațiului DocSpace sau a unei părți a acestuia cu ajutorul JavaScript. Copiați codul JavaScript de mai jos.",
+  "JavaScriptCodeDescription": "Incorporarea spațiului {{portalName}} sau a unei părți a acestuia cu ajutorul JavaScript. Copiați codul JavaScript de mai jos.",
   "JavascriptSdk": "SDK Javascript",
   "LimitByTime": "Setare limită de timp",
   "LinkSetDescription": "Acest link este protejat prin {{parameter}}. Pentru a configura link-ul,",

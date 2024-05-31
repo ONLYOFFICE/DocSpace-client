@@ -62,7 +62,7 @@
   "InterfaceElements": "عناصر الواجهة",
   "ItemsCount": "عدد العناصر في صفحة واحدة",
   "ItemsCountDescription": "يمكنك تحديد عدد الملفات / المجلدات المعروضة على صفحة واحدة، بالإضافة إلى تحديد الصفحة التي تبدأ منها العرض",
-  "JavaScriptCodeDescription": "تضمين DocSpace أو جزء منه باستخدام JavaScript. انسخ كود جافا سكريبت أدناه.",
+  "JavaScriptCodeDescription": "تضمين {{portalName}} أو جزء منه باستخدام JavaScript. انسخ كود جافا سكريبت أدناه.",
   "JavascriptSdk": "مجموعة أدوات تطوير البرمجيات بلغة جافا سكربت",
   "LimitByTime": "الحد حسب الفترة الزمنية",
   "LinkSetDescription": "هذا الرابط محمي بواسطة {{parameter}}. لتكوين الارتباط،",

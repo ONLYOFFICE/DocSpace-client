@@ -62,7 +62,7 @@
   "InterfaceElements": "Elementi interfejsa",
   "ItemsCount": "Broj stavki na jednoj stranici",
   "ItemsCountDescription": "Možete da odredite broj datoteka / foldera prikazanih na jednoj stranici, kao i da odredite koja stranica će početi da se prikazuje",
-  "JavaScriptCodeDescription": "Ugrađivanje DocSpace-a ili njegovog dela pomoću JavaScript. Kopirajte JavaScript kod ispod.",
+  "JavaScriptCodeDescription": "Ugrađivanje {{portalName}}-a ili njegovog dela pomoću JavaScript. Kopirajte JavaScript kod ispod.",
   "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "Ograničenje vremenskim periodom",
   "LinkSetDescription": "Ovaj link je zaštićen sa {{parameter}}. Da biste konfigurisali ovaj link,",

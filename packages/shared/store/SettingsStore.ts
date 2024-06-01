@@ -874,22 +874,11 @@ class SettingsStore {
     this.publicRoomKey = key;
   };
 
-  socketFilesClient: SocketIOHelper | null = null;
-
   get socketHelper() {
-    const socketUrl = isPublicRoom() && !this.publicRoomKey ? "" : "/socket.io"; // this.socketUrl;
+    const socketUrl =
+      isPublicRoom() && !this.publicRoomKey ? "" : this.socketUrl;
 
-    if (!this.socketFilesClient) {
-      this.socketFilesClient = new SocketIOHelper(
-        socketUrl,
-        this.publicRoomKey,
-      );
-
-      // TODO: comment this line
-      window.socketFilesClient = this.socketFilesClient;
-    }
-
-    return this.socketFilesClient;
+    return new SocketIOHelper(socketUrl, this.publicRoomKey);
   }
 
   getBuildVersionInfo = async () => {

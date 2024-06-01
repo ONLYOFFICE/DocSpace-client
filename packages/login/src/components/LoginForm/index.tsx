@@ -73,7 +73,7 @@ const LoginForm = ({
 
   const { t, ready, i18n } = useTranslation(["Login", "Common"]);
   const currentCulture = i18n.language;
-  
+
   const message = searchParams.get("message");
   const confirmedEmail = searchParams.get("confirmedEmail");
   const authError = searchParams.get("authError");
@@ -163,7 +163,7 @@ const LoginForm = ({
 
   useEffect(() => {
     window.authCallback = authCallback;
-  }, [currentCulture]);
+  }, [authCallback]);
 
   useEffect(() => {
     message && setErrorText(message);

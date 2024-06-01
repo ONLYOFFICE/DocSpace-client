@@ -10,6 +10,7 @@ import {
 import { getNextSynchronization } from "@docspace/shared/components/cron";
 import { EmployeeType, LDAPOpeation } from "@docspace/shared/enums";
 import { makeAutoObservable } from "mobx";
+import isEqual from "lodash/isEqual";
 
 const constants = {
   NULL_PERCENT: 0,
@@ -81,6 +82,8 @@ class LdapFormStore {
     uniqueHash: "",
     errors: [],
   };
+
+  defaultSettings = {};
 
   constructor() {
     makeAutoObservable(this);
@@ -154,6 +157,8 @@ class LdapFormStore {
 
     this.login = login;
     this.password = password || "";
+
+    this.setDefaultSettings();
   };
 
   mapCron = (cron) => {
@@ -336,39 +341,9 @@ class LdapFormStore {
       if (isErrorExist) return;
     }
 
-    const settings = {
-      EnableLdapAuthentication: this.isLdapEnabled,
-      AcceptCertificate: this.acceptCertificate,
-      acceptCertificateHash: this.acceptCertificateHash,
-      StartTls: this.isTlsEnabled,
-      Ssl: this.isSslEnabled,
-      SendWelcomeEmail: this.isSendWelcomeEmail,
-      Server: this.requiredSettings.server,
-      UserDN: this.requiredSettings.userDN,
-      PortNumber: this.requiredSettings.portNumber,
-      UserFilter: this.requiredSettings.userFilter,
-      LoginAttribute: this.requiredSettings.loginAttribute,
-      LdapMapping: {
-        firstNameAttribute: this.requiredSettings.firstName,
-        secondNameAttribute: this.requiredSettings.secondName,
-        mailAttribute: this.requiredSettings.mail,
-        avatarAttribute: this.requiredSettings.avatarAttribute,
-        userQuotaLimit: this.requiredSettings.userQuotaLimit,
-      },
-      UsersType: this.requiredSettings.userType,
-      AccessRights: {},
-      GroupMembership: this.groupMembership,
-      GroupDN: this.groupDN,
-      UserAttribute: this.userAttribute,
-      GroupFilter: this.groupFilter,
-      GroupAttribute: this.groupAttribute,
-      GroupNameAttribute: this.groupNameAttribute,
-      Authentication: this.authentication,
-      Login: this.login,
-      Password: this.password,
-    };
-
+    const settings = this.getSettings();
     const respose = await saveLdapSettings(settings);
+    this.defaultSettings = settings;
 
     if (respose?.id) {
       this.inProgress = true;
@@ -613,6 +588,50 @@ class LdapFormStore {
 
   get isStatusEmpty() {
     return !this.progressStatus.source;
+  }
+
+  setDefaultSettings = () => {
+    const settings = this.getSettings();
+    this.defaultSettings = settings;
+  };
+
+  getSettings = () => {
+    return {
+      EnableLdapAuthentication: this.isLdapEnabled,
+      AcceptCertificate: this.acceptCertificate,
+      acceptCertificateHash: this.acceptCertificateHash,
+      StartTls: this.isTlsEnabled,
+      Ssl: this.isSslEnabled,
+      SendWelcomeEmail: this.isSendWelcomeEmail,
+      Server: this.requiredSettings.server,
+      UserDN: this.requiredSettings.userDN,
+      PortNumber: this.requiredSettings.portNumber,
+      UserFilter: this.requiredSettings.userFilter,
+      LoginAttribute: this.requiredSettings.loginAttribute,
+      LdapMapping: {
+        firstNameAttribute: this.requiredSettings.firstName,
+        secondNameAttribute: this.requiredSettings.secondName,
+        mailAttribute: this.requiredSettings.mail,
+        avatarAttribute: this.requiredSettings.avatarAttribute,
+        userQuotaLimit: this.requiredSettings.userQuotaLimit,
+      },
+      UsersType: this.requiredSettings.userType,
+      AccessRights: {},
+      GroupMembership: this.groupMembership,
+      GroupDN: this.groupDN,
+      UserAttribute: this.userAttribute,
+      GroupFilter: this.groupFilter,
+      GroupAttribute: this.groupAttribute,
+      GroupNameAttribute: this.groupNameAttribute,
+      Authentication: this.authentication,
+      Login: this.login,
+      Password: this.password,
+    };
+  };
+
+  get hasChanges() {
+    const settings = this.getSettings();
+    return !isEqual(settings, this.defaultSettings);
   }
 }
 

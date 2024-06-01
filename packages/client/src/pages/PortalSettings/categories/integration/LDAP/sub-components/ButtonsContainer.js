@@ -5,7 +5,13 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Box } from "@docspace/shared/components/box";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
-const ButtonContainer = ({ saveLdapSettings, restoreToDefault }) => {
+const ButtonContainer = ({
+  saveLdapSettings,
+  restoreToDefault,
+  isLdapEnabled,
+  isLdapAvailable,
+  hasChanges,
+}) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
   const onSaveClick = () => {
@@ -14,6 +20,7 @@ const ButtonContainer = ({ saveLdapSettings, restoreToDefault }) => {
   const onResetClick = () => {
     restoreToDefault().catch((e) => toastr.error(e));
   };
+
   return (
     <Box className="ldap_buttons-container">
       <SaveCancelButtons
@@ -25,6 +32,7 @@ const ButtonContainer = ({ saveLdapSettings, restoreToDefault }) => {
         displaySettings={true}
         hasScroll={true}
         hideBorder={true}
+        saveButtonDisabled={!isLdapAvailable || !isLdapEnabled || !hasChanges}
         cancelEnable
         showReminder
         additionalClassSaveButton="ldap-save"
@@ -34,11 +42,15 @@ const ButtonContainer = ({ saveLdapSettings, restoreToDefault }) => {
   );
 };
 
-export default inject(({ ldapStore }) => {
-  const { save, restoreToDefault } = ldapStore;
+export default inject(({ currentQuotaStore, ldapStore }) => {
+  const { save, restoreToDefault, isLdapEnabled, hasChanges } = ldapStore;
+  const { isLdapAvailable } = currentQuotaStore;
 
   return {
     saveLdapSettings: save,
     restoreToDefault,
+    isLdapEnabled,
+    isLdapAvailable,
+    hasChanges,
   };
 })(observer(ButtonContainer));

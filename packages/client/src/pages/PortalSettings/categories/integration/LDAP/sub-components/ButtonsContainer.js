@@ -1,3 +1,4 @@
+import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -8,19 +9,19 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 const ButtonContainer = ({
   saveLdapSettings,
   restoreToDefault,
-  isLdapEnabled,
-  isLdapAvailable,
   hasChanges,
   isDefaultSettings,
+  isUIDisabled,
 }) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
-  const onSaveClick = () => {
-    saveLdapSettings().catch((e) => toastr.error(e));
-  };
-  const onResetClick = () => {
-    restoreToDefault().catch((e) => toastr.error(e));
-  };
+  const onSaveClick = React.useCallback(() => {
+    saveLdapSettings(t).catch((e) => toastr.error(e));
+  }, [saveLdapSettings, t]);
+
+  const onResetClick = React.useCallback(() => {
+    restoreToDefault(t).catch((e) => toastr.error(e));
+  }, [restoreToDefault, t]);
 
   return (
     <Box className="ldap_buttons-container">
@@ -33,8 +34,8 @@ const ButtonContainer = ({
         displaySettings={true}
         hasScroll={true}
         hideBorder={true}
-        saveButtonDisabled={!isLdapAvailable || !isLdapEnabled || !hasChanges}
-        disableRestoreToDefault={isDefaultSettings}
+        saveButtonDisabled={isUIDisabled || !hasChanges}
+        disableRestoreToDefault={isUIDisabled || isDefaultSettings}
         showReminder
         additionalClassSaveButton="ldap-save"
         additionalClassCancelButton="ldap-reset"
@@ -47,18 +48,17 @@ export default inject(({ currentQuotaStore, ldapStore }) => {
   const {
     save,
     restoreToDefault,
-    isLdapEnabled,
     hasChanges,
     isDefaultSettings,
+    isUIDisabled,
   } = ldapStore;
   const { isLdapAvailable } = currentQuotaStore;
 
   return {
     saveLdapSettings: save,
     restoreToDefault,
-    isLdapEnabled,
-    isLdapAvailable,
     hasChanges,
     isDefaultSettings,
+    isUIDisabled,
   };
 })(observer(ButtonContainer));

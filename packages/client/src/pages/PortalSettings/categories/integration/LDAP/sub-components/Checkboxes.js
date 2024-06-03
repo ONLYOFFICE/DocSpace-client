@@ -1,4 +1,3 @@
-import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -6,11 +5,11 @@ import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
 const Checkboxes = ({
-  isLdapAvailable,
   isTlsEnabled,
   isSslEnabled,
   setIsTlsEnabled,
   setIsSslEnabled,
+  isUIDisabled,
 }) => {
   const { t } = useTranslation("Ldap");
 
@@ -32,7 +31,7 @@ const Checkboxes = ({
         <Checkbox
           tabIndex={1}
           className="ldap_checkbox-starttls"
-          isDisabled={!isLdapAvailable}
+          isDisabled={isUIDisabled}
           label={t("LdapEnableStartTls")}
           isChecked={isTlsEnabled}
           onChange={onChangeTls}
@@ -43,7 +42,7 @@ const Checkboxes = ({
         <Checkbox
           tabIndex={2}
           className="ldap_checkbox-ssl"
-          isDisabled={!isLdapAvailable}
+          isDisabled={isUIDisabled}
           label={t("LdapEnableSSL")}
           isChecked={isSslEnabled}
           onChange={onChangeSsl}
@@ -54,15 +53,19 @@ const Checkboxes = ({
   );
 };
 
-export default inject(({ currentQuotaStore, ldapStore }) => {
-  const { isLdapAvailable } = currentQuotaStore;
-  const { isTlsEnabled, isSslEnabled, setIsTlsEnabled, setIsSslEnabled } =
-    ldapStore;
-  return {
-    isLdapAvailable,
+export default inject(({ ldapStore }) => {
+  const {
     isTlsEnabled,
     isSslEnabled,
     setIsTlsEnabled,
     setIsSslEnabled,
+    isUIDisabled,
+  } = ldapStore;
+  return {
+    isTlsEnabled,
+    isSslEnabled,
+    setIsTlsEnabled,
+    setIsSslEnabled,
+    isUIDisabled,
   };
 })(observer(Checkboxes));

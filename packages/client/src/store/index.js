@@ -107,7 +107,7 @@ const backupStore = new BackupStore();
 const commonStore = new CommonStore(settingsStore);
 
 const ssoStore = new SsoFormStore();
-const ldapStore = new LdapFormStore();
+const ldapStore = new LdapFormStore(currentQuotaStore);
 
 const tagsStore = new TagsStore();
 

@@ -11,6 +11,8 @@ import { getNextSynchronization } from "@docspace/shared/components/cron";
 import { EmployeeType, LDAPOpeation } from "@docspace/shared/enums";
 import { makeAutoObservable } from "mobx";
 import isEqual from "lodash/isEqual";
+import delay from "lodash/delay";
+import { toastr } from "@docspace/shared/components/toast";
 
 const constants = {
   NULL_PERCENT: 0,
@@ -87,8 +89,12 @@ class LdapFormStore {
   serverData = {};
   serverSettings = {};
 
-  constructor() {
+  currentQuotaStore = null;
+
+  constructor(currentQuotaStore) {
     makeAutoObservable(this);
+
+    this.currentQuotaStore = currentQuotaStore;
   }
 
   mapSettings = (data) => {
@@ -282,14 +288,14 @@ class LdapFormStore {
     this.groupNameAttribute = groupNameAttribute;
   };
 
-  restoreToDefault = async () => {
+  restoreToDefault = async (t) => {
     const settingsRes = await getLdapDefaultSettings();
     this.mapSettings(settingsRes);
 
-    this.save(true);
+    this.save(t, true);
   };
 
-  syncLdap = async () => {
+  syncLdap = async (t) => {
     this.inProgress = false;
     this.progressStatus = {
       percents: 0,
@@ -301,12 +307,12 @@ class LdapFormStore {
 
     const respose = await syncLdap();
 
-    console.log(respose);
+    // console.log(respose);
 
     if (respose?.id) {
       this.inProgress = true;
       this.progressBarIntervalId = setInterval(
-        this.checkStatus,
+        () => this.checkStatus(t),
         constants.GET_STATUS_TIMEOUT,
       );
     }
@@ -320,7 +326,7 @@ class LdapFormStore {
     return respose;
   };
 
-  save = async (toDefault = false) => {
+  save = async (t, toDefault = false, turnOff = false) => {
     this.inProgress = false;
     this.progressStatus = {
       percents: 0,
@@ -333,7 +339,7 @@ class LdapFormStore {
     let isErrorExist = false;
     this.errors = {};
 
-    if (!toDefault) {
+    if (!toDefault && !turnOff) {
       if (this.authentication) {
         this.errors.login = this.login.trim() === "";
         this.errors.password = this.password.trim() === "";
@@ -363,13 +369,13 @@ class LdapFormStore {
     if (respose?.id) {
       this.inProgress = true;
       this.progressBarIntervalId = setInterval(
-        () => this.checkStatus(toDefault),
+        () => this.checkStatus(t, toDefault),
         constants.GET_STATUS_TIMEOUT,
       );
     }
   };
 
-  checkStatus = (toDefault = false) => {
+  checkStatus = (t, toDefault = false) => {
     if (this.alreadyChecking) {
       return;
     }
@@ -377,13 +383,13 @@ class LdapFormStore {
     this.inProgress = true;
 
     getLdapStatus()
-      .then((data) => this.onGetStatus(data, toDefault))
+      .then((data) => this.onGetStatus(t, data, toDefault))
       .catch((e) => {
         this.alreadyChecking = false;
       });
   };
 
-  onGetStatus = async (data, toDefault) => {
+  onGetStatus = async (t, data, toDefault) => {
     this.alreadyChecking = false;
     try {
       if (data?.error) {
@@ -427,7 +433,7 @@ class LdapFormStore {
       if (status.warning && this.lastWarning !== status.warning) {
         this.lastWarning = status.warning;
         console.warn(status.warning);
-        //TODO: replace to toastr.warning(status.warning, "", { timeOut: 0, extendedTimeOut: 0 });
+        toastr.warning(status.warning, null, 0, true);
       }
 
       if (this.isCompleted(status)) {
@@ -441,10 +447,12 @@ class LdapFormStore {
           const response = await getCronLdap();
           this.mapCron(response?.cron);
         }
+
+        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       }
     } catch (error) {
-      //showError(error);
       console.error(error);
+      toastr.error(error);
       this.endProcess();
     }
   };
@@ -470,11 +478,10 @@ class LdapFormStore {
     if (this.progressBarIntervalId) {
       clearInterval(this.progressBarIntervalId);
     }
-    //already = false;
-    //enableInterface(false);
-    // if (isRestoreDefault) {
-    //     enableRestoreDefault(false);
-    // }
+
+    delay(() => {
+      this.inProgress = false;
+    }, 1000);
   };
 
   isCompleted = (status) => {
@@ -495,66 +502,7 @@ class LdapFormStore {
       return true;
     }
 
-    console.log("SUCCESS");
-    //toastr.success(ASC.Resources.Master.ResourceJS.LdapSettingsSuccess);
     return true;
-  };
-
-  showError = (error) => {
-    var errorMessage;
-
-    if (typeof error === "string") {
-      errorMessage = error;
-    } else if (error.message) {
-      errorMessage = error.message;
-    } else if (error.responseText) {
-      try {
-        var json = JSON.parse(error.responseText);
-
-        if (typeof json === "object") {
-          if (json.ExceptionMessage) {
-            errorMessage = json.ExceptionMessage;
-          } else if (json.Message) {
-            errorMessage = json.Message;
-          }
-        } else if (typeof json === "string") {
-          errorMessage = error.responseText.replace(/(^")|("$)/g, "");
-
-          if (!errorMessage.length && error.statusText) {
-            errorMessage = error.statusText;
-          }
-        }
-      } catch (e) {
-        errorMessage = error.responseText;
-      }
-    } else if (error.statusText) {
-      errorMessage = error.statusText;
-    } else if (error.error) {
-      errorMessage = error.error;
-    }
-
-    errorMessage =
-      !errorMessage || typeof errorMessage !== "string" || !errorMessage.length
-        ? "ASC.Resources.Master.ResourceJS.OperationFailedError"
-        : errorMessage.replace(/(^")|("$)/g, "");
-
-    if (!errorMessage.length) {
-      console.error("showError failed with ", error);
-      return;
-    }
-
-    // if (syncInProgress) {
-    //     $ldapSettingsSyncError.text(errorMessage);
-    //     $ldapSettingsSyncError.show();
-    // } else {
-    //     $ldapSettingsError.text(errorMessage);
-    //     $ldapSettingsError.show();
-    // }
-    //setStatus("");
-    //setSource("");
-    //setPercents(constants.NULL_PERCENT);
-    //toastr.error(errorMessage);
-    console.error(errorMessage);
   };
 
   onChangeCron = (cron) => {
@@ -644,6 +592,15 @@ class LdapFormStore {
     };
   };
 
+  reset = () => {
+    this.progressStatus = {
+      percents: 0,
+      completed: false,
+      error: "",
+      source: "",
+    };
+  };
+
   get hasChanges() {
     const settings = this.getSettings();
     return !isEqual(settings, this.serverSettings);
@@ -651,6 +608,14 @@ class LdapFormStore {
 
   get isDefaultSettings() {
     return isEqual(this.serverData, this.defaultSettings);
+  }
+
+  get isUIDisabled() {
+    return (
+      !this.isLdapEnabled ||
+      this.inProgress ||
+      !this.currentQuotaStore.isLdapAvailable
+    );
   }
 }
 

@@ -35,7 +35,7 @@ export default inject(({ ldapStore }, { operation }) => {
   } = progressStatus;
 
   return {
-    inProgress: inProgress && operation == operationType,
+    inProgress: (inProgress || error) && operation == operationType,
     percents,
     completed,
     error,

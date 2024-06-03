@@ -52,6 +52,10 @@ const SyncContainer = ({
       .catch((e) => toastr.error(e));
   }, []);
 
+  const onSync = React.useCallback(() => {
+    syncLdap(t).catch((e) => toastr.error(e));
+  }, []);
+
   const buttonSize = isDesktop() ? ButtonSize.small : ButtonSize.normal;
 
   const renderBody = () => (
@@ -82,7 +86,7 @@ const SyncContainer = ({
         className="manual-sync-button"
         size={buttonSize}
         primary
-        onClick={syncLdap}
+        onClick={onSync}
         label={t("LdapSyncButton")}
         //minwidth={displaySettings && "auto"}
         //isLoading={isSaving}

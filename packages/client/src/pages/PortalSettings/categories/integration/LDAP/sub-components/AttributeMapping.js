@@ -35,6 +35,7 @@ const AttributeMapping = (props) => {
     setUserType,
 
     errors,
+    isUIDisabled,
   } = props;
 
   const { t } = useTranslation("Ldap");
@@ -107,6 +108,7 @@ const AttributeMapping = (props) => {
               onChange={onChangeValue}
               value={firstName}
               scale
+              isDisabled={isUIDisabled}
             />
           </FieldContainer>
 
@@ -125,6 +127,7 @@ const AttributeMapping = (props) => {
               onChange={onChangeValue}
               value={mail}
               scale
+              isDisabled={isUIDisabled}
             />
           </FieldContainer>
 
@@ -141,6 +144,7 @@ const AttributeMapping = (props) => {
               onChange={onChangeValue}
               value={userQuotaLimit}
               scale
+              isDisabled={isUIDisabled}
             />
           </FieldContainer>
         </div>
@@ -160,6 +164,7 @@ const AttributeMapping = (props) => {
               onChange={onChangeValue}
               value={secondName}
               scale
+              isDisabled={isUIDisabled}
             />
           </FieldContainer>
 
@@ -176,6 +181,7 @@ const AttributeMapping = (props) => {
               onChange={onChangeValue}
               value={avatarAttribute}
               scale
+              isDisabled={isUIDisabled}
             />
           </FieldContainer>
 
@@ -194,6 +200,7 @@ const AttributeMapping = (props) => {
               displaySelectedOption
               directionY="bottom"
               withoutPadding
+              isDisabled={isUIDisabled}
             />
           </FieldContainer>
         </div>
@@ -213,6 +220,7 @@ export default inject(({ ldapStore }) => {
 
     requiredSettings,
     errors,
+    isUIDisabled,
   } = ldapStore;
 
   const {
@@ -240,5 +248,6 @@ export default inject(({ ldapStore }) => {
     userType,
 
     errors,
+    isUIDisabled,
   };
 })(observer(AttributeMapping));

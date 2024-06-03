@@ -31,6 +31,8 @@ const ConnectionSettings = (props) => {
     setUserFilter,
 
     errors,
+
+    isUIDisabled,
   } = props;
   const { t } = useTranslation(["Ldap", "Common"]);
   const onChangeValue = (e) => {
@@ -75,6 +77,7 @@ const ConnectionSettings = (props) => {
             onChange={onChangeValue}
             value={server}
             scale
+            isDisabled={isUIDisabled}
           />
         </FieldContainer>
         <FieldContainer
@@ -94,6 +97,7 @@ const ConnectionSettings = (props) => {
             onChange={onChangeValue}
             value={userDN}
             scale
+            isDisabled={isUIDisabled}
           />
         </FieldContainer>
         <FieldContainer
@@ -113,6 +117,7 @@ const ConnectionSettings = (props) => {
             onChange={onChangeValue}
             value={loginAttribute}
             scale
+            isDisabled={isUIDisabled}
           />
         </FieldContainer>
       </div>
@@ -135,6 +140,7 @@ const ConnectionSettings = (props) => {
             onChange={onChangeValue}
             value={portNumber}
             scale
+            isDisabled={isUIDisabled}
           />
         </FieldContainer>
 
@@ -155,6 +161,7 @@ const ConnectionSettings = (props) => {
             onChange={onChangeValue}
             value={userFilter}
             heightTextArea={100}
+            isDisabled={isUIDisabled}
           />
         </FieldContainer>
       </div>
@@ -172,6 +179,7 @@ export default inject(({ ldapStore }) => {
 
     requiredSettings,
     errors,
+    isUIDisabled,
   } = ldapStore;
 
   const { portNumber, userFilter, userDN, server, loginAttribute } =
@@ -190,5 +198,6 @@ export default inject(({ ldapStore }) => {
     userFilter,
 
     errors,
+    isUIDisabled,
   };
 })(observer(ConnectionSettings));

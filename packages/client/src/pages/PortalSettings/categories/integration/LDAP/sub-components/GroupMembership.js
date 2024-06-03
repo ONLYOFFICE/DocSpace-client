@@ -31,6 +31,7 @@ const GroupMembership = (props) => {
     setGroupFilter,
     setGroupAttribute,
     setGroupNameAttribute,
+    isUIDisabled,
   } = props;
   const { t } = useTranslation(["Ldap", "Common"]);
 
@@ -64,6 +65,7 @@ const GroupMembership = (props) => {
           isChecked={groupMembership}
           onChange={setIsGroupMembership}
           label={t("LdapGroupMembership")}
+          isDisabled={isUIDisabled}
         />
         <HelpButton tooltipContent={t("LdapGroupMembershipTooltip")} />
       </div>
@@ -82,7 +84,7 @@ const GroupMembership = (props) => {
             onChange={onChange}
             name={GROUP_DN}
             value={groupDN}
-            isDisabled={!groupMembership}
+            isDisabled={isUIDisabled || !groupMembership}
             scale
           />
         </FieldContainer>
@@ -100,7 +102,7 @@ const GroupMembership = (props) => {
             onChange={onChange}
             name={USER_ATTRIBUTE}
             value={userAttribute}
-            isDisabled={!groupMembership}
+            isDisabled={isUIDisabled || !groupMembership}
             scale
           />
         </FieldContainer>
@@ -119,7 +121,7 @@ const GroupMembership = (props) => {
             value={groupFilter}
             onChange={onChange}
             name={GROUP_FILTER}
-            isDisabled={!groupMembership}
+            isDisabled={isUIDisabled || !groupMembership}
             heightTextArea={100}
           />
         </FieldContainer>
@@ -136,7 +138,7 @@ const GroupMembership = (props) => {
             className="field-input"
             onChange={onChange}
             name={GROUP_NAME_ATTRIBUTE}
-            isDisabled={!groupMembership}
+            isDisabled={isUIDisabled || !groupMembership}
             value={groupNameAttribute}
             scale
           />
@@ -153,7 +155,7 @@ const GroupMembership = (props) => {
             className="field-input"
             onChange={onChange}
             name={GROUP_ATTRIBUTE}
-            isDisabled={!groupMembership}
+            isDisabled={isUIDisabled || !groupMembership}
             value={groupAttribute}
             scale
           />
@@ -177,6 +179,7 @@ export default inject(({ ldapStore }) => {
     setGroupFilter,
     setGroupAttribute,
     setGroupNameAttribute,
+    isUIDisabled,
   } = ldapStore;
 
   return {
@@ -192,5 +195,6 @@ export default inject(({ ldapStore }) => {
     setGroupFilter,
     setGroupAttribute,
     setGroupNameAttribute,
+    isUIDisabled,
   };
 })(observer(GroupMembership));

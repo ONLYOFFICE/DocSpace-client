@@ -2,28 +2,27 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { Box } from "@docspace/shared/components/box";
-//import FormStore from "@docspace/studio/src/store/SsoFormStore";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Badge } from "@docspace/shared/components/badge";
-//import DisableSsoConfirmationModal from "./DisableSsoConfirmationModal";
-//import SSOLoader from "../../sub-components/ssoLoader";
+
 const borderProp = { radius: "6px" };
 
 const ToggleLDAP = (props) => {
-  const {
-    theme,
-    //enableLdap,
-    isLdapEnabled,
-    toggleLdap,
-    isLDAPAvailable,
-  } = props;
+  const { theme, isLdapEnabled, toggleLdap, isLDAPAvailable, save } = props;
 
   const { t } = useTranslation(["Ldap", "Common"]);
 
-  // if (!tReady) {
-  //   return <SSOLoader isToggleSSO={true} />;
-  // }
+  const onChangeToggle = React.useCallback(
+    (e) => {
+      toggleLdap();
+
+      if (!e.target.checked) {
+        save(t, false, true).catch((e) => toastr.error(e));
+      }
+    },
+    [toggleLdap, t, save],
+  );
 
   return (
     <>
@@ -39,12 +38,7 @@ const ToggleLDAP = (props) => {
         <ToggleButton
           className="toggle"
           isChecked={isLdapEnabled}
-          onChange={
-            toggleLdap
-            // isLdapEnabled && enableLdap
-            //   ? openConfirmationDisableModal
-            //   : ldapToggle
-          }
+          onChange={onChangeToggle}
           isDisabled={!isLDAPAvailable}
         />
 
@@ -86,7 +80,7 @@ const ToggleLDAP = (props) => {
 
 export default inject(({ settingsStore, ldapStore }) => {
   const { theme } = settingsStore;
-  const { enableLdap, isLdapEnabled, toggleLdap } = ldapStore;
+  const { enableLdap, isLdapEnabled, toggleLdap, save } = ldapStore;
 
   console.log({
     theme,
@@ -99,5 +93,6 @@ export default inject(({ settingsStore, ldapStore }) => {
     enableLdap,
     toggleLdap,
     isLdapEnabled,
+    save,
   };
 })(observer(ToggleLDAP));

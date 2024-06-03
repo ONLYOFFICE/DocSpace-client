@@ -168,7 +168,7 @@ const LoginForm = ({
 
   useEffect(() => {
     window.authCallback = authCallback;
-  }, [currentCulture]);
+  }, [authCallback]);
 
   useEffect(() => {
     message && setErrorText(message);

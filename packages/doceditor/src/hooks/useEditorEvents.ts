@@ -42,8 +42,8 @@ import {
 import {
   TEditHistory,
   TGetReferenceData,
+  TSharedUsers,
 } from "@docspace/shared/api/files/types";
-import { TUser } from "@docspace/shared/api/people/types";
 import { EDITOR_ID } from "@docspace/shared/constants";
 import {
   assign,
@@ -67,7 +67,6 @@ import {
   THistoryData,
   UseEventsProps,
 } from "@/types";
-import { useTranslation } from "react-i18next";
 
 type IConfigEvents = Pick<IConfig, "events">;
 
@@ -87,7 +86,7 @@ const useEditorEvents = ({
   const [events, setEvents] = React.useState<IConfigEvents>({});
   const [documentReady, setDocumentReady] = React.useState(false);
   const [createUrl, setCreateUrl] = React.useState<Nullable<string>>(null);
-  const [usersInRoom, setUsersInRoom] = React.useState<TUser[]>([]);
+  const [usersInRoom, setUsersInRoom] = React.useState<TSharedUsers[]>([]);
   const [docTitle, setDocTitle] = React.useState("");
   const [docSaved, setDocSaved] = React.useState(false);
 
@@ -452,14 +451,7 @@ const useEditorEvents = ({
           : getSharedUsers(fileInfo.id));
 
         if (c !== "protect") {
-          const usersArray = users.map(
-            (item) =>
-              ({
-                email: item.email,
-                name: item.name,
-              }) as unknown as TUser,
-          );
-          setUsersInRoom(usersArray);
+          setUsersInRoom(users);
         }
 
         docEditor?.setUsers?.({

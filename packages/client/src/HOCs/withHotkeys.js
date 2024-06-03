@@ -89,6 +89,8 @@ const withHotkeys = (Component) => {
       security,
       copyToClipboard,
       uploadClipboardFiles,
+
+      isGroupMenuBlocked,
     } = props;
 
     const navigate = useNavigate();
@@ -158,7 +160,7 @@ const withHotkeys = (Component) => {
       document.addEventListener("paste", onPaste);
 
       return () => {
-        window.removeEventListener("keypress", throttledKeyDownEvent);
+        window.removeEventListener("keydown", throttledKeyDownEvent);
         document.removeEventListener("paste", onPaste);
       };
     });
@@ -317,7 +319,7 @@ const withHotkeys = (Component) => {
           return;
         }
 
-        if (isAvailableOption("delete")) {
+        if (isAvailableOption("delete") && !isGroupMenuBlocked) {
           if (isRecentFolder) return;
 
           if (isFavoritesFolder) {
@@ -460,6 +462,7 @@ const withHotkeys = (Component) => {
         setFavoriteAction,
         deleteRooms,
         archiveRooms,
+        isGroupMenuBlocked,
       } = filesActionsStore;
 
       const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
@@ -533,6 +536,8 @@ const withHotkeys = (Component) => {
         copyToClipboard,
 
         uploadClipboardFiles,
+
+        isGroupMenuBlocked,
       };
     },
   )(observer(WithHotkeys));

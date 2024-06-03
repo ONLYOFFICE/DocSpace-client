@@ -504,7 +504,7 @@ class SettingsSetupStore {
     this.integration.selectedConsumer = consumer || {};
     this.setConsumers(res);
 
-    return !!consumer
+    return !!consumer;
   };
 
   updateConsumerProps = async (newProps) => {
@@ -552,6 +552,10 @@ class SettingsSetupStore {
 
   getAllSessions = () => {
     return api.settings.getAllActiveSessions();
+  };
+
+  getUserSessionsById = (userId) => {
+    return api.settings.getUserSessionsById(userId);
   };
 
   removeAllSessions = () => {

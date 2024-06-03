@@ -162,17 +162,17 @@ const TableView = ({ t, sectionWidth, userId, sessionsData }) => {
         {sessionsData.map((item) => (
           <SessionsTableRow
             t={t}
-            key={item.userId}
+            key={item.id}
             userId={userId}
             item={item}
             hideColumns={hideColumns}
             displayName={item.displayName}
-            status={item.status}
-            browser={item.browser}
-            platform={item.platform}
-            country={item.country}
-            city={item.city}
-            ip={item.ip}
+            // status={item.status}
+            // browser={item.browser}
+            // platform={item.platform}
+            // country={item.country}
+            // city={item.city}
+            // ip={item.ip}
           />
         ))}
       </TableBody>

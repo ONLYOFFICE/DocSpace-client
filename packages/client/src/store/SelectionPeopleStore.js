@@ -31,6 +31,7 @@ import { getUserStatus } from "../helpers/people-helpers";
 class SelectionStore {
   peopleStore = null;
   allSessions = [];
+  allConnections = [];
   selection = [];
   selectionUsersRights = {
     isVisitor: 0,
@@ -270,7 +271,6 @@ class SelectionStore {
     this.peopleStore.accountsHotkeysStore.setHotkeyCaret(null);
     isSessionsPage
       ? this.setSelection(this.getUsersBySelected(sessions, selected))
-
       : this.setSelection(this.getUsersBySelected(list, selected));
 
     return selected;
@@ -437,6 +437,10 @@ class SelectionStore {
 
   setAllSessions = (sessions) => {
     this.allSessions = sessions;
+  };
+
+  setAllConnections = (connections) => {
+    this.allConnections = connections;
   };
 }
 

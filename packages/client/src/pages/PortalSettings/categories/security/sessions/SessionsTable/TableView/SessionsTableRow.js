@@ -113,6 +113,7 @@ const StyledTableRow = styled(TableRow)`
   }
 
   .session-info {
+    text-transform: capitalize;
     font-weight: 600;
     color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
   }
@@ -127,6 +128,7 @@ const StyledTableRow = styled(TableRow)`
   }
 
   .online {
+    text-transform: capitalize;
     font-weight: 600;
     color: ${(props) => props.theme.profile.activeSessions.textOnlineColor};
   }
@@ -145,18 +147,16 @@ const SessionsTableRow = (props) => {
     isActive,
     hideColumns,
     displayName,
-    status,
-    browser,
-    platform,
-    country,
-    city,
-    ip,
+    // status,
+    // browser,
+    // platform,
+    // country,
+    // city,
+    // ip,
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
     setSessionModalData,
     setUserSessionPanelVisible,
-    socketHelper,
-    socketUsersHelper,
   } = props;
 
   const onClickSessions = () => {
@@ -198,26 +198,8 @@ const SessionsTableRow = (props) => {
     },
   ];
 
-  useEffect(() => {
-    const userIds = item.userId;
-
-    socketHelper.emit({
-      command: "subscribe",
-      data: { roomParts: "statuses-in-room" },
-    });
-
-    socketHelper.emit({
-      command: "getSessionsInPortal",
-      data: { userIds },
-    });
-
-    socketHelper.on("statuses-in-room", (data) => {
-      console.log(data);
-    });
-  }, [item.userId, socketHelper]);
-
   const isChecked = checkedProps.checked;
-  const isOnline = status === "Online";
+  const isOnline = status.includes("online");
 
   const onChange = (e) => {
     onContentRowSelect && onContentRowSelect(e.target.checked, item);
@@ -278,30 +260,30 @@ const SessionsTableRow = (props) => {
 
         <TableCell>
           <Text className={isOnline ? "online" : "session-info"} truncate>
-            {status}
+            {/* {status} */}
           </Text>
         </TableCell>
 
         <TableCell>
           <Text className="session-info" truncate>
-            {platform},&nbsp;
+            {/* {platform},&nbsp; */}
           </Text>
           <Text className="session-info" truncate>
-            {browser}
+            {/* {browser} */}
           </Text>
         </TableCell>
 
         <TableCell>
           <Text className="session-info" truncate>
-            {(country || city) && (
+            {/* {(country || city) && (
               <>
                 {country}
                 {country && city && ", "}
                 {city}
                 <span className="divider"></span>
               </>
-            )}
-            {ip}
+            )} */}
+            {/* {ip} */}
           </Text>
         </TableCell>
       </StyledTableRow>
@@ -309,7 +291,7 @@ const SessionsTableRow = (props) => {
   );
 };
 
-export default inject(({ setup, dialogsStore, settingsStore }) => {
+export default inject(({ setup, dialogsStore }) => {
   const { setUserSessionPanelVisible } = dialogsStore;
   const {
     setLogoutAllDialogVisible,
@@ -317,14 +299,10 @@ export default inject(({ setup, dialogsStore, settingsStore }) => {
     setSessionModalData,
   } = setup;
 
-  const { socketHelper, socketUsersHelper } = settingsStore;
-
   return {
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
     setSessionModalData,
     setUserSessionPanelVisible,
-    socketHelper,
-    socketUsersHelper,
   };
 })(withContent(observer(SessionsTableRow)));

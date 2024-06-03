@@ -896,6 +896,13 @@ export function getAllActiveSessions() {
   });
 }
 
+export function getUserSessionsById(userId) {
+  return request({
+    method: "get",
+    url: `/security/activeconnections/user/${userId}`,
+  });
+}
+
 export function removeAllActiveSessions() {
   return request({
     method: "put",

@@ -11,7 +11,7 @@ import { Button } from "@docspace/shared/components/button";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import SessionsTable from "./SessionsTable";
-import mockData from "./mockData";
+// import mockData from "./mockData";
 
 import {
   LogoutSessionDialog,
@@ -90,11 +90,46 @@ const Sessions = ({
   setLogoutAllDialogVisible,
   sessionModalData,
   platformModalData,
+  getUsersList,
+  // socketHelper,
+  setAllConnections,
+  getUserSessionsById,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
 
+  // useEffect(() => {
+  //   socketHelper.emit({
+  //     command: "subscribe",
+  //     data: { roomParts: "statuses-in-portal" },
+  //   });
+
+  //   socketHelper.emit({
+  //     command: "getSessionsInPortal",
+  //   });
+
+  //   socketHelper.on("statuses-in-portal", (data) => {
+  //     const onlineUsers = data.map((user) => user);
+  //     console.log("onlineUsers", onlineUsers);
+  //   });
+  // }, [socketHelper]);
+
+  const fetchData = async () => {
+    try {
+      const users = await getUsersList();
+      const sessionsPromises = users.map((user) =>
+        getUserSessionsById(user.id),
+      );
+      const sessions = await Promise.all(sessionsPromises);
+      const connections = sessions.map((session) => session.connections || []);
+      setAllConnections(connections);
+      setAllSessions(sessions.flat());
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    setAllSessions(mockData);
+    fetchData();
     return () => {
       clearSelection();
     };
@@ -198,8 +233,9 @@ const Sessions = ({
 };
 
 export default inject(({ settingsStore, setup, peopleStore }) => {
-  const { currentDeviceType } = settingsStore;
-  const { clearSelection, allSessions, setAllSessions } =
+  const { socketHelper, currentDeviceType } = settingsStore;
+  const { getUsersList } = peopleStore.usersStore;
+  const { clearSelection, allSessions, setAllSessions, setAllConnections } =
     peopleStore.selectionStore;
 
   const {
@@ -213,6 +249,7 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     setLogoutAllDialogVisible,
     sessionModalData,
     platformModalData,
+    getUserSessionsById,
   } = setup;
 
   return {
@@ -230,6 +267,10 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     setLogoutAllDialogVisible,
     sessionModalData,
     platformModalData,
+    socketHelper,
+    getUsersList,
+    setAllConnections,
+    getUserSessionsById,
   };
 })(
   withTranslation(["Settings", "Profile", "Common", "ChangeUserStatusDialog"])(

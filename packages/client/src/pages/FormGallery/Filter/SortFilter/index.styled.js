@@ -31,7 +31,15 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 
 export const SortButton = styled.div`
   .combo-button {
-    padding-right: 4px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 4px;
+          `
+        : css`
+            padding-right: 4px;
+          `}
+
     background: ${(props) =>
       props.theme.filterInput.sort.background} !important;
 

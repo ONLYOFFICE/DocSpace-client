@@ -37,6 +37,7 @@ interface AccountsHotkeysProps {
   selectUpper: () => void;
   activateHotkeys: (e: KeyboardEvent) => void;
   setSelected: (value: string) => void;
+  selectAll: () => void;
 }
 
 const useAccountsHotkeys = ({
@@ -46,6 +47,7 @@ const useAccountsHotkeys = ({
   selectUpper,
   activateHotkeys,
   setSelected,
+  selectAll,
 }: AccountsHotkeysProps) => {
   const [isEnabled, setIsEnabled] = useState(true);
 
@@ -106,6 +108,9 @@ const useAccountsHotkeys = ({
     },
     hotkeysFilter,
   );
+
+  // Select all accounts
+  useHotkeys("shift+a, ctrl+a", selectAll, hotkeysFilter);
 
   // Deselect all accounts
   useHotkeys("shift+n, ESC", () => setSelected("none"), hotkeysFilter);

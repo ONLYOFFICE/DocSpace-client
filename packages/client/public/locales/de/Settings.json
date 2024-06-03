@@ -59,8 +59,6 @@
   "BreakpointWarningText": "Dieser Bereich ist nur in der Desktop-Version verfügbar",
   "BreakpointWarningTextPrompt": "Bitte verwenden Sie die Desktop-Seite, um auf die <1>{{sectionName}}</1>-Einstellungen zuzugreifen.",
   "BruteForceProtection": "Schutz vor Brute-Force-Angriffen",
-  "BruteForceProtectionDescription": "Legen Sie ein Limit für erfolglose Anmeldeversuche des Benutzers fest, um DocSpace vor Brute-Force-Angriffen zu schützen. Wenn das Limit erreicht ist, werden die Versuche von der zugehörigen IP-Adresse für einen bestimmten Zeitraum gesperrt, oder es wird ein Captcha angefordert, falls aktiviert.",
-  "BruteForceProtectionDescriptionMobile": "Um DocSpace vor Brute-Force-Angriffen zu schützen, können Sie die Anzahl der erfolglosen Anmeldeversuche des Benutzers begrenzen.",
   "ButtonsColor": "Schaltflächen",
   "ByApp": "Über die Authentifizierungs-App",
   "BySms": "Per SMS",

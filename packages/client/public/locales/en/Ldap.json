@@ -67,5 +67,6 @@
   "LdapSettingsCertUntrustedCa": "Certificate Authority who issued the certificate is not trusted",
   "LdapSettingsCertUntrustedRoot": "Root Certificate Authority who issued the certificate is not trusted",
   "LdapSettingsCertMalformed": "Malformed certificate",
-  "LdapSettingsCertUnrecognizedError": "Unrecognized Error"
+  "LdapSettingsCertUnrecognizedError": "Unrecognized Error",
+  "LdapUserTypeTooltip": "All users will be added to Dockspace with the selected type."
 }

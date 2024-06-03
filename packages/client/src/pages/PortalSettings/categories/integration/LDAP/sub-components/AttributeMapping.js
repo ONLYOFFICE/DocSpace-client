@@ -191,6 +191,8 @@ const AttributeMapping = (props) => {
             labelVisible={true}
             hasError={errors.avatarAttribute}
             labelText={t("LdapUserType")}
+            tooltipContent={t("LdapUserTypeTooltip")}
+            inlineHelpButton
           >
             <ComboBox
               scaled

@@ -104,17 +104,18 @@ export const getStepsData = (
         </>
       ) : (
         <>
-          <Trans t={t} ns="Settings" i18nKey="SelectUserTypesDescription">
-            Select DocSpace roles for the imported users:{" "}
-            <b>
-              {{
-                portalName: PORTAL,
-              }}
-            </b>
-            ,<b>Room admin</b>
-            or <b>Power user</b>. By default, Power user role is selected for
-            each user. You can manage the roles after the import.
-          </Trans>
+          <Trans
+            t={t}
+            ns="Settings"
+            i18nKey="SelectUserTypesDescription"
+            values={{
+              portalName: PORTAL,
+            }}
+            components={{
+              1: <b />,
+            }}
+          />
+
           <HelpButton
             place="bottom"
             offsetRight={0}

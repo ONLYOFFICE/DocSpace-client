@@ -24,6 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useTranslation } from "react-i18next";
+
+export type TFunciton = ReturnType<typeof useTranslation>["t"];
+
 export interface ProvidersProps {}
 
 export interface InjectedProvidersProps extends ProvidersProps {
@@ -39,6 +43,7 @@ export interface InjectedProvidersProps extends ProvidersProps {
 }
 
 export interface SelectFileStepProps {
+  t: TFunciton;
   incrementStep: () => void;
   cancelUploadDialogVisible: TStore["dialogsStore"]["cancelUploadDialogVisible"];
   setCancelUploadDialogVisible: TStore["dialogsStore"]["setCancelUploadDialogVisible"];
@@ -53,7 +58,7 @@ export interface SelectFileStepProps {
 
 export interface DataImportProps {}
 
-export interface InjectedDataImportProps {
+export interface InjectedDataImportProps extends DataImportProps {
   setDocumentTitle: TStore["authStore"]["setDocumentTitle"];
   getMigrationStatus: TStore["importAccountsStore"]["getMigrationStatus"];
   viewAs: TStore["setup"]["viewAs"];
@@ -65,4 +70,14 @@ export interface InjectedDataImportProps {
   setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
   setFiles: TStore["importAccountsStore"]["setFiles"];
   setIsMigrationInit: TStore["importAccountsStore"]["setIsMigrationInit"];
+}
+
+export interface NextcloudProps {}
+
+export interface InjectedNextcloudProps extends NextcloudProps {
+  theme: TStore["settingsStore"]["theme"];
+  filteredUsers: TStore["importAccountsStore"]["filteredUsers"];
+  step: TStore["importAccountsStore"]["step"];
+  incrementStep: TStore["importAccountsStore"]["incrementStep"];
+  decrementStep: TStore["importAccountsStore"]["decrementStep"];
 }

@@ -34,6 +34,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { DataImportProps, InjectedDataImportProps } from "./types";
 
 import Providers from "./components/Providers";
+import NextcloudWorkspace from "./NextcloudWorkspace";
 
 const DataImport = (props: DataImportProps) => {
   const {
@@ -95,7 +96,7 @@ const DataImport = (props: DataImportProps) => {
   }, [isMigrationInit, updateStatus]);
 
   return workspace === "Nextcloud" ? (
-    <div>next</div>
+    <NextcloudWorkspace />
   ) : workspace === "GoogleWorkspace" ? (
     <div>google</div>
   ) : workspace === "Workspace" ? (

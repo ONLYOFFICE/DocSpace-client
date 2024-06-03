@@ -24,7 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import SelectFileStep from "./SelectFileStep";
+import { Trans } from "react-i18next";
+
+import { Text } from "@docspace/shared/components/text";
+import { HelpButton } from "@docspace/shared/components/help-button";
+
+import SelectFileStep from "../../components/SelectFileStep";
 import SelectUsersStep from "./SelectUsersStep";
 import AddEmailsStep from "./AddEmailsStep";
 import SelectUsersTypeStep from "./SelectUsersTypeStep";
@@ -32,43 +37,22 @@ import ImportStep from "./ImportStep";
 import ImportProcessingStep from "./ImportProcessingStep";
 import ImportCompleteStep from "./ImportCompleteStep";
 
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { Text } from "@docspace/shared/components/text";
-
-import { Trans } from "react-i18next";
+import { TFunciton } from "../../types";
 
 export const getStepsData = (
-  t,
-  currentStep,
-  setCurrentStep,
-  isTypeSelectEmpty,
+  t: TFunciton,
+  currentStep: number,
+  incrementStep: () => void,
+  decrementStep: () => void,
+  isTypeSelectEmpty: boolean,
 ) => {
   const isSixthStep = currentStep === 6;
-
-  const incrementStep = () => {
-    setCurrentStep((prev) => {
-      const nextStep = prev < 7 ? prev + 1 : 7;
-      return nextStep;
-    });
-  };
-
-  const decrementStep = () => {
-    if (currentStep !== 1) {
-      setCurrentStep((prev) => prev - 1);
-    }
-  };
 
   return [
     {
       title: t("Common:SelectFile"),
       description: t("Settings:SelectFileDescriptionNextcloud"),
-      component: (
-        <SelectFileStep
-          t={t}
-          incrementStep={incrementStep}
-          decrementStep={decrementStep}
-        />
-      ),
+      component: <SelectFileStep t={t} incrementStep={incrementStep} />,
     },
     {
       title: t("Settings:SelectUsersWithEmail"),
@@ -117,10 +101,10 @@ export const getStepsData = (
                   ns="Settings"
                   t={t}
                   components={{
-                    1: <b></b>,
-                    2: <b></b>,
-                    3: <b></b>,
-                    4: <b></b>,
+                    1: <b />,
+                    2: <b />,
+                    3: <b />,
+                    4: <b />,
                   }}
                 />
               </Text>
@@ -160,7 +144,6 @@ export const getStepsData = (
         <ImportProcessingStep
           t={t}
           incrementStep={incrementStep}
-          decrementStep={decrementStep}
           isSixthStep={isSixthStep}
         />
       ),
@@ -168,13 +151,7 @@ export const getStepsData = (
     {
       title: t("Settings:DataImportComplete"),
       description: t("Settings:ImportCompleteDescriptionNextcloud"),
-      component: (
-        <ImportCompleteStep
-          t={t}
-          incrementStep={incrementStep}
-          decrementStep={decrementStep}
-        />
-      ),
+      component: <ImportCompleteStep t={t} />,
     },
   ];
 };

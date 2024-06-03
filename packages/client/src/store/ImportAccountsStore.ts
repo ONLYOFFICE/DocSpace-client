@@ -141,6 +141,14 @@ class ImportAccountsStore {
     this.step = step;
   };
 
+  incrementStep = () => {
+    this.step += 1;
+  };
+
+  decrementStep = () => {
+    this.step -= 1;
+  };
+
   setWorkspace = (workspace: TWorkspaceService | "") => {
     this.workspace = workspace;
   };

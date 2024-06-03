@@ -58,7 +58,7 @@ const IntegrationWrapper = (props) => {
   useEffect(() => {
     return () => {
       isSSOAvailable &&
-        !window.location.pathname.includes("single-sign-on") &&
+        !window.location.pathname.includes("sso") &&
         toDefault();
     };
   }, []);

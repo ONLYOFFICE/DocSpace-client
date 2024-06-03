@@ -84,6 +84,8 @@ class LdapFormStore {
   };
 
   defaultSettings = {};
+  serverData = {};
+  serverSettings = {};
 
   constructor() {
     makeAutoObservable(this);
@@ -91,6 +93,7 @@ class LdapFormStore {
 
   mapSettings = (data) => {
     console.log("LDAP settings data", data);
+    this.serverData = data;
 
     const {
       enableLdapAuthentication,
@@ -158,7 +161,7 @@ class LdapFormStore {
     this.login = login;
     this.password = password || "";
 
-    this.setDefaultSettings();
+    this.setServerSettings();
   };
 
   mapCron = (cron) => {
@@ -167,16 +170,28 @@ class LdapFormStore {
     this.setCron(cronWithoutSeconds);
   };
 
+  mapDefaultSettings = (data) => {
+    delete data.ldapMapping.LocationAttribute;
+    delete data.ldapMapping.MobilePhoneAttribute;
+    delete data.ldapMapping.TitleAttribute;
+    this.defaultSettings = data;
+  };
+
   load = async () => {
-    const [settingsRes, cronRes] = await Promise.allSettled([
+    const [settingsRes, cronRes, defaultRes] = await Promise.allSettled([
       getLdapSettings(),
       getCronLdap(),
+      getLdapDefaultSettings(),
     ]);
 
     if (settingsRes.status == "fulfilled") this.mapSettings(settingsRes.value);
 
     if (cronRes.status == "fulfilled") {
       this.mapCron(cronRes.value?.cron);
+    }
+
+    if (defaultRes.status == "fulfilled") {
+      this.mapDefaultSettings(defaultRes.value);
     }
 
     this.isLoaded = true;
@@ -343,7 +358,7 @@ class LdapFormStore {
 
     const settings = this.getSettings();
     const respose = await saveLdapSettings(settings);
-    this.defaultSettings = settings;
+    this.setServerSettings();
 
     if (respose?.id) {
       this.inProgress = true;
@@ -472,7 +487,7 @@ class LdapFormStore {
       status.certificateConfirmRequest.requested
     ) {
       setCertificateDetails(status.certificateConfirmRequest);
-      currentSettings = previousSettings;
+      // currentSettings = previousSettings;
       return true;
     }
 
@@ -590,9 +605,9 @@ class LdapFormStore {
     return !this.progressStatus.source;
   }
 
-  setDefaultSettings = () => {
+  setServerSettings = () => {
     const settings = this.getSettings();
-    this.defaultSettings = settings;
+    this.serverSettings = settings;
   };
 
   getSettings = () => {
@@ -631,7 +646,11 @@ class LdapFormStore {
 
   get hasChanges() {
     const settings = this.getSettings();
-    return !isEqual(settings, this.defaultSettings);
+    return !isEqual(settings, this.serverSettings);
+  }
+
+  get isDefaultSettings() {
+    return isEqual(this.serverData, this.defaultSettings);
   }
 }
 

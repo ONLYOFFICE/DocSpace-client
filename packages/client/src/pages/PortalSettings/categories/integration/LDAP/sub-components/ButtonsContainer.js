@@ -11,6 +11,7 @@ const ButtonContainer = ({
   isLdapEnabled,
   isLdapAvailable,
   hasChanges,
+  isDefaultSettings,
 }) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
@@ -33,7 +34,7 @@ const ButtonContainer = ({
         hasScroll={true}
         hideBorder={true}
         saveButtonDisabled={!isLdapAvailable || !isLdapEnabled || !hasChanges}
-        cancelEnable
+        disableRestoreToDefault={isDefaultSettings}
         showReminder
         additionalClassSaveButton="ldap-save"
         additionalClassCancelButton="ldap-reset"
@@ -43,7 +44,13 @@ const ButtonContainer = ({
 };
 
 export default inject(({ currentQuotaStore, ldapStore }) => {
-  const { save, restoreToDefault, isLdapEnabled, hasChanges } = ldapStore;
+  const {
+    save,
+    restoreToDefault,
+    isLdapEnabled,
+    hasChanges,
+    isDefaultSettings,
+  } = ldapStore;
   const { isLdapAvailable } = currentQuotaStore;
 
   return {
@@ -52,5 +59,6 @@ export default inject(({ currentQuotaStore, ldapStore }) => {
     isLdapEnabled,
     isLdapAvailable,
     hasChanges,
+    isDefaultSettings,
   };
 })(observer(ButtonContainer));

@@ -1,7 +1,6 @@
 {
   "ClickHere": "Klikkaa tästä",
   "ConfirmEmailDescription": "Käytä aktivointisähköpostissa annettua linkkiä. Etkö ole saanut aktivointilinkkiä sähköpostilla?",
-  "ConfirmEmailHeader": "Ole hyvä ja aktivoi sähköpostiosoitteesi ({{ email }}) päästäksesi käyttämään DocSpacen ominaisuuksia.",
   "PersonalUserQuotaAdminsDescription": "Ole hyvä ja vapauta levytilaa ladataksesi ja luodaksesi uusia tiedostoja ja kansioita, tai hallitaksesi kiintiötä per käyttäjä <1>Muistinhallinta-asetuksissa. </1>",
   "PersonalUserQuotaDescription": "Ole hyvä ja vapauta levytilaa ladataksesi ja luodaksesi tiedostoja ja kansioita tai ota yhteyttä järjestelmänvalvojaan lisätäksesi muistin kiintiötä.",
   "RequestActivation": "Pyydä aktivointia vielä kerran",

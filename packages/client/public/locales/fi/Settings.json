@@ -30,7 +30,6 @@
   "Api": "API",
   "ApiPageHeader": "Rakenna oma yhteistyöalustasi",
   "Appearance": "Ulkomuoto",
-  "AuditSubheader": "Tässä aliosiossa voit selata luetteloa viimeisimmistä muutoksista (luonti, muokkaus, poisto jne.), joita käyttäjät ovat tehneet DocSpacen entiteetehin (huoneet, mahdollisuudet, tiedostot jne).",
   "AuditTrailNav": "Tapahtumien seuranta",
   "AutoBackup": "Automaattinen varmuuskopiointi",
   "AutoSavePeriod": "Automaattisen tallennuksen aika",

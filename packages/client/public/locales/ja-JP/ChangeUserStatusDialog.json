@@ -5,7 +5,7 @@
   "DisableUsers": "ユーザーを無効にする",
   "DisableUsersDescription": "このユーザーを無効にすると、 {{portalName}}にログインできなくなりますが、ドキュメントやデータはそのまま残ります。",
   "EnableUser": "ユーザーを有効にするActivare utilizator",
-  "EnableUserDescription": "このユーザーを有効にすると、再度DocSpaceにログインし、文書やデータにアクセスできるようになります。",
+  "EnableUserDescription": "このユーザーを有効にすると、再度{{portalName}}にログインし、文書やデータにアクセスできるようになります。",
   "EnableUsers": "ユーザーを有効にする",
   "EnableUsersDescription": "このユーザーを有効にすると、再度{{portalName}}にログインし、文書やデータにアクセスできるようになります。"
 }

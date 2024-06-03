@@ -29,7 +29,6 @@
   "PriceCalculation": "価格を計算する",
   "RenewSubscription": "{{planName}}プランの契約を更新する",
   "RoomManagerDescription": "ルームの管理・アーカイブ、ユーザーの招待・管理。ルームに複数の管理者を割り当てることができます。",
-  "StartupSuggestion": "{{planName}}プランに切り替えて、DocSpaceをもっと便利に活用",
   "StartupTitle": "無料の {{planName}}プランをご利用いただいています。",
   "StripeCustomerPortal": "Stripeカスタマーポータルにアクセスする",
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/月</3>",

@@ -5,7 +5,7 @@
   "PersonalUserQuotaAdminsDescription": "新しいファイルやフォルダをアップロードしたり作成したりするには、<1>ストレージ管理設定</1>でディスク領域を解放するか、ユーザーごとに容量制限を管理してください。",
   "PersonalUserQuotaDescription": "新しいファイルやフォルダをアップロードしたり作成したりするには、ディスクの空き容量を確保するか、管理者に連絡してストレージの容量制限を増やしてください。",
   "RequestActivation": "もう一度アクティベーションを要求する",
-  "RoomQuotaDescription": "不要なルームをアーカイブしたり、<1>{{clickHere}}</1>して、DocSpaceにもっと適した料金プランを見つけることができます。",
+  "RoomQuotaDescription": "不要なルームをアーカイブしたり、<1>{{clickHere}}</1>して、{{portalName}}にもっと適した料金プランを見つけることができます。",
   "RoomQuotaHeader": "このルームは、もうすぐ制限を超えます：{{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "ストレージやルームの制限を超えそうです。",
   "StorageAndUserHeader": "ストレージと管理者/パワーユーザーの制限を超えそうです。",

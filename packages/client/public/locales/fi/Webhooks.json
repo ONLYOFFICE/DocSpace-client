@@ -53,6 +53,5 @@
   "WebhookRedilivered": "Webhook toimitettu uudelleen",
   "WebhookRemoved": "Webhook poistettu",
   "Webhooks": "Webhookit",
-  "WebhooksGuide": "Webhooks-opas",
-  "WebhooksInfo": "Käytä webhookeja mukautettujen toimintojen suorittamiseen minkä tahansa käyttämäsi sovelluksen tai verkkosivuston ohella eri ONLYOFFICE DocSpacen tapahtumien perusteella. Tässä voit luoda ja hallita kaikkia webhookeja, konfiguroida niitä ja selata jokaisen webhookin historiaa tarkastaaksesi niiden suorituskykyä."
+  "WebhooksGuide": "Webhooks-opas"
 }

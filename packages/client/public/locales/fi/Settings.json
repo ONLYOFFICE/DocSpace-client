@@ -34,7 +34,6 @@
   "AuditTrailNav": "Tapahtumien seuranta",
   "AutoBackup": "Automaattinen varmuuskopiointi",
   "AutoSavePeriod": "Automaattisen tallennuksen aika",
-  "AutoSavePeriodHelp": ".",
   "Backup": "Varmuuskopio",
   "BackupCreatedError": "On tapahtunut jokin outo virhe. Tosi outo. Ota yhteys järjestelmänvalvojaan.",
   "BackupCreatedSuccess": "Turvatallenteen kopio on luotu onnistuneesti.",

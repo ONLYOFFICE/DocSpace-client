@@ -16,6 +16,8 @@ const StyledLdapPage = styled(Box)`
     .toggle-button-text {
       font-size: 14px;
       font-weight: 600;
+      position: relative;
+      bottom: 2px;
     }
   }
 
@@ -46,7 +48,9 @@ const StyledLdapPage = styled(Box)`
       display: flex;
       align-items: baseline;
       .help-icon {
-        padding-left: 8px;
+        padding-left: 6px;
+        position: relative;
+        bottom: 4px;
       }
     }
   }
@@ -74,6 +78,9 @@ const StyledLdapPage = styled(Box)`
     align-items: baseline;
     .help-icon {
       padding-left: 8px;
+      padding-left: 6px;
+      position: relative;
+      bottom: 4px;
     }
   }
 

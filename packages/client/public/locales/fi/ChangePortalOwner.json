@@ -1,7 +1,14 @@
 {
   "AppointAdmin": "Nimeä ylläpitäjät",
+  "BackupPortal": "Varmuuskopioi {{portalName}}-n tiedot",
+  "ChangeInstruction": "Ole hyvä ja valitse omistajan nimi alta vaihtaaksesi {{portalName}}-n omistajan.",
+  "ChangeOwner": "Vaihda {{portalName}}-omistaja",
   "ChangeUser": "Vaihda käyttäjä",
+  "DeactivateOrDeletePortal": "Poista {{portalName}} käytöstä tai poista se kokonaan",
   "DoTheSame": "Tee sama kuin järjestelmänvalvojat",
+  "ManagePortal": "Hallitse {{portalName}}-n asetuksia",
   "ManageUser": " Hallitse käyttäjätilejä",
+  "NewPortalOwner": "Uusi {{portalName}}-omistaja",
+  "PortalOwnerCan": "{{portalName}} omistaja voi:",
   "SetAccessRights": "Aseta pääsyoikeudet"
 }

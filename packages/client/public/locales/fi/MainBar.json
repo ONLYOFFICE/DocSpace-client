@@ -4,11 +4,14 @@
   "PersonalUserQuotaAdminsDescription": "Ole hyvä ja vapauta levytilaa ladataksesi ja luodaksesi uusia tiedostoja ja kansioita, tai hallitaksesi kiintiötä per käyttäjä <1>Muistinhallinta-asetuksissa. </1>",
   "PersonalUserQuotaDescription": "Ole hyvä ja vapauta levytilaa ladataksesi ja luodaksesi tiedostoja ja kansioita tai ota yhteyttä järjestelmänvalvojaan lisätäksesi muistin kiintiötä.",
   "RequestActivation": "Pyydä aktivointia vielä kerran",
+  "RoomQuotaDescription": "Voit arkistoida huoneita, joita et käytä tai <1>{{clickHere}}</1> löytääksesi sopivamman hinnoitteluohjelman {{portalName}}-llesi.",
   "RoomQuotaHeader": "Huoneet täyttyvät pian {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Muisti ja huoneiden määrän raja on ylittymässä. ",
   "StorageAndUserHeader": "Muisti ja ylläpitäjien/tehokäyttäjien määrän raja on ylittymässä.",
+  "StorageQuotaDescription": "Voit poistaa tarpeettomat tiedostot tai <1>{{clickHere}}</1> löytääksesi sopivamman hintaohjelman {{portalName}}-llesi.",
   "StorageQuotaExceeded": "Muistin kiintiö ylitetty",
   "StorageQuotaHeader": "Tallennustilan määrä on ylittymässä: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Voit poistaa tarpeettomat tiedostot tai muuttaa kiintiötä <1>Muistinhallinta-asetuksissa.</1>",
+  "UserQuotaDescription": "<1>{{clickHere}}</1> löytääksesi {{portalName}}-llesi sopivamman hinnoitteluohjelman.",
   "UserQuotaHeader": "Ylläpitäjien/tehokäyttäjien määrän raja on ylittymässä: {{currentValue}} / {{maxValue}}"
 }

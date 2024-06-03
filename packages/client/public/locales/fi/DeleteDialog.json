@@ -1,7 +1,9 @@
 {
+  "DeleteAllGroupDescription": "Valitut ryhmät poistetaan. Ryhmien käyttäjiä ei poisteta {{portalName}}-sta. Haluatko varmasti jatkaa?",
   "DeleteAllGroupsTitle": "Poista ryhmiä",
   "DeleteFile": "Olet poistamassa tätä tiedostoa.",
   "DeleteFolder": "Olet poistamassa tätä kansiota. ",
+  "DeleteGroupDescription": "Ryhmä {{groupName}} poistetaan. Ryhmän käyttäjiä ei poisteta {{portalName}}-sta. Haluatko varmasti jatkaa?",
   "DeleteGroupTitle": "Poista ryhmä",
   "DeleteItems": "Olet poistamassa nämä kohteet. ",
   "DeleteItemsSharedNote": "Ole hyvä ja huomioi, että jos olet jakanut tiedot jonkun kanssa, ne tiedot eivät ole enää saatavilla.",

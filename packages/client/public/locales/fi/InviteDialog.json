@@ -1,5 +1,6 @@
 {
   "AddManually": "Lisää manuaalisesti",
+  "AddManuallyDescriptionAccounts": "Kutsu uusia käyttäjiä {{portalName}}-en henkilökohtaisesti sähköpostilla",
   "AddManuallyDescriptionRoom": "Lisää olemassa olevat {{portalName}}-käyttäjät huoneeseen käyttämällä nimiä tai kutsu uudet käyttäjät henkilökohtaisesti sähköpostin kautta",
   "EmailErrorMessage": "Sähköpostiosoite ei ole olemassa. Voit muokata sähköpostia klikkaamalla sitä.",
   "GroupMaxAvailableRoleWarning": "Ryhmillä on maksimi saatavilla-rooli -“{{role}}”. Voit antaa korotuksen oikeuksiin, kun olet lisännyt ryhmän huoneeseen.",

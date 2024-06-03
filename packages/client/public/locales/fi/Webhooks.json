@@ -46,6 +46,7 @@
   "URL": "URL",
   "ViewRawPayload": "Näytä raaka tietosisältö",
   "WebhookCreated": "Webhook luotu",
+  "WebhookCreationHint": "Tämä webhook liitetään kaikkin {{portalName}}-n tapahtumiin",
   "WebhookDetails": "Webhookin yksityiskohdat",
   "WebhookEditedSuccessfully": "Webhook-konfiguraatio muokattu onnistuneesti",
   "WebhookHistory": "Webhookin historia",

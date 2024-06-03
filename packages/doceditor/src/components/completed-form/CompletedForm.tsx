@@ -42,7 +42,7 @@ import {
   TextWrapper,
 } from "./CompletedForm.styled";
 import type { CompletedFormProps } from "./CompletedForm.types";
-import { Button } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import Link from "next/link";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import Image from "next/image";
@@ -87,8 +87,17 @@ export const CompletedForm = ({}: CompletedFormProps) => {
         <Text as="p">{t("CompletedForm:Description")}</Text>
       </TextWrapper>
       <ButtonWrapper>
-        <Button scale label={t("CompletedForm:BackToRoom")} primary />
-        <Button scale label={t("CompletedForm:FillItOutAgain")} />
+        <Button
+          scale
+          primary
+          size={ButtonSize.medium}
+          label={t("CompletedForm:BackToRoom")}
+        />
+        <Button
+          scale
+          size={ButtonSize.medium}
+          label={t("CompletedForm:FillItOutAgain")}
+        />
       </ButtonWrapper>
       <Link className="link" href="#">
         {t("CompletedForm:GoToCompleteFolder")}

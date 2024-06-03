@@ -40,13 +40,12 @@ export const CompletedFormLayout = styled.section<CompletedFormLayoutProps>`
 
   width: 100%;
   height: 100%;
+  padding: 100px 16px 0px;
 
   background-image: ${(props) => props.bgPattern};
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-
-  padding-top: 100px;
 
   picture {
     margin-bottom: 125px;
@@ -58,9 +57,9 @@ export const CompletedFormLayout = styled.section<CompletedFormLayoutProps>`
   }
 
   @media ${mobile} {
-    padding: 0 16px;
-
     background-image: none;
+
+    padding-top: 0px;
 
     .completed-form__icon {
       width: 343px;
@@ -97,6 +96,9 @@ export const ButtonWrapper = styled.footer`
 
   @media ${mobile} {
     flex-wrap: wrap;
+    gap: 16px;
+
+    margin-bottom: 20px;
   }
 `;
 

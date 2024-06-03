@@ -25,8 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 "use client";
 
-import React, { useMemo } from "react";
-import { ReactSVG } from "react-svg";
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
@@ -43,39 +44,29 @@ import {
 } from "./CompletedForm.styled";
 import type { CompletedFormProps } from "./CompletedForm.types";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import Link from "next/link";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
-import Image from "next/image";
+import { mobile, mobileMore } from "@docspace/shared/utils";
 
 export const CompletedForm = ({}: CompletedFormProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["CompletedForm"]);
 
-  const { logoUrl, smallLogoUrl } = useMemo(() => {
-    const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
-    const smallLogoUrl = getLogoUrl(
-      WhiteLabelLogoType.LightSmall,
-      !theme.isBase,
-    );
+  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
+  const smallLogoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
 
-    return { logoUrl, smallLogoUrl };
-  }, [theme.isBase]);
-
-  const bgPattern = useMemo(
-    () => getBgPattern(theme.currentColorScheme?.id),
-    [theme.currentColorScheme?.id],
-  );
+  const bgPattern = getBgPattern(theme.currentColorScheme?.id);
 
   const iconUrl = theme.isBase ? CompletedFormLightIcon : CompletedFormDarkIcon;
 
   return (
     <CompletedFormLayout bgPattern={bgPattern}>
       <picture className="completed-form__logo">
-        <source media="(max-width: 600px)" srcSet={smallLogoUrl} />
-        <source media="(min-width: 601px)" srcSet={logoUrl} />
+        <source media={mobile} srcSet={smallLogoUrl} />
+        <source media={mobileMore} srcSet={logoUrl} />
         <img src={logoUrl} alt="logo" />
       </picture>
       <Image
+        priority
         src={iconUrl}
         className="completed-form__icon"
         alt="icon"

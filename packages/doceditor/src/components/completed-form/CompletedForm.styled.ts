@@ -63,6 +63,7 @@ export const CompletedFormLayout = styled.section<CompletedFormLayoutProps>`
 
     .completed-form__icon {
       width: 343px;
+      height: auto;
     }
 
     picture {
@@ -114,6 +115,7 @@ export const TextWrapper = styled.section`
     line-height: 28px;
     font-size: 23px;
     font-weight: 700;
+    text-align: center;
   }
 
   p {

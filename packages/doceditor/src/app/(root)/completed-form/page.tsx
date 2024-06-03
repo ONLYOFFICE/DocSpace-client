@@ -23,12 +23,6 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { cookies } from "next/headers";
-
-import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
-import { getLogoUrl } from "@docspace/shared/utils/common";
-import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
-
 import { CompletedForm } from "@/components/completed-form";
 
 async function Page() {

@@ -78,6 +78,7 @@ const ConnectionSettings = (props) => {
             value={server}
             scale
             isDisabled={isUIDisabled}
+            tabIndex={3}
           />
         </FieldContainer>
         <FieldContainer
@@ -98,6 +99,7 @@ const ConnectionSettings = (props) => {
             value={userDN}
             scale
             isDisabled={isUIDisabled}
+            tabIndex={5}
           />
         </FieldContainer>
         <FieldContainer
@@ -118,6 +120,7 @@ const ConnectionSettings = (props) => {
             value={loginAttribute}
             scale
             isDisabled={isUIDisabled}
+            tabIndex={7}
           />
         </FieldContainer>
       </div>
@@ -141,6 +144,7 @@ const ConnectionSettings = (props) => {
             value={portNumber}
             scale
             isDisabled={isUIDisabled}
+            tabIndex={4}
           />
         </FieldContainer>
 
@@ -162,6 +166,7 @@ const ConnectionSettings = (props) => {
             value={userFilter}
             heightTextArea={100}
             isDisabled={isUIDisabled}
+            tabIndex={6}
           />
         </FieldContainer>
       </div>

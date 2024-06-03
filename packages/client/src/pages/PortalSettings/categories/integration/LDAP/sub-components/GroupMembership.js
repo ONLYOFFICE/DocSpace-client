@@ -86,6 +86,7 @@ const GroupMembership = (props) => {
             value={groupDN}
             isDisabled={isUIDisabled || !groupMembership}
             scale
+            tabIndex={13}
           />
         </FieldContainer>
         <FieldContainer
@@ -104,6 +105,7 @@ const GroupMembership = (props) => {
             value={userAttribute}
             isDisabled={isUIDisabled || !groupMembership}
             scale
+            tabIndex={14}
           />
         </FieldContainer>
         <FieldContainer
@@ -123,6 +125,7 @@ const GroupMembership = (props) => {
             name={GROUP_FILTER}
             isDisabled={isUIDisabled || !groupMembership}
             heightTextArea={100}
+            tabIndex={15}
           />
         </FieldContainer>
         <FieldContainer
@@ -141,6 +144,7 @@ const GroupMembership = (props) => {
             isDisabled={isUIDisabled || !groupMembership}
             value={groupNameAttribute}
             scale
+            tabIndex={16}
           />
         </FieldContainer>
         <FieldContainer
@@ -158,6 +162,7 @@ const GroupMembership = (props) => {
             isDisabled={isUIDisabled || !groupMembership}
             value={groupAttribute}
             scale
+            tabIndex={17}
           />
         </FieldContainer>
       </Box>

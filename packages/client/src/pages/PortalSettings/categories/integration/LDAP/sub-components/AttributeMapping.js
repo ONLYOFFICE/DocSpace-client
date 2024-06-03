@@ -109,6 +109,7 @@ const AttributeMapping = (props) => {
               value={firstName}
               scale
               isDisabled={isUIDisabled}
+              tabIndex={7}
             />
           </FieldContainer>
 
@@ -128,6 +129,7 @@ const AttributeMapping = (props) => {
               value={mail}
               scale
               isDisabled={isUIDisabled}
+              tabIndex={9}
             />
           </FieldContainer>
 
@@ -145,6 +147,7 @@ const AttributeMapping = (props) => {
               value={userQuotaLimit}
               scale
               isDisabled={isUIDisabled}
+              tabIndex={11}
             />
           </FieldContainer>
         </div>
@@ -165,6 +168,7 @@ const AttributeMapping = (props) => {
               value={secondName}
               scale
               isDisabled={isUIDisabled}
+              tabIndex={8}
             />
           </FieldContainer>
 
@@ -182,6 +186,7 @@ const AttributeMapping = (props) => {
               value={avatarAttribute}
               scale
               isDisabled={isUIDisabled}
+              tabIndex={10}
             />
           </FieldContainer>
 
@@ -203,6 +208,7 @@ const AttributeMapping = (props) => {
               directionY="bottom"
               withoutPadding
               isDisabled={isUIDisabled}
+              tabIndex={12}
             />
           </FieldContainer>
         </div>

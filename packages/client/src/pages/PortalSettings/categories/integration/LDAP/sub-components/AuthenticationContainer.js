@@ -68,6 +68,7 @@ const AuthenticationContainer = ({
             value={login}
             isDisabled={isUIDisabled || !authentication}
             scale
+            tabIndex={18}
           />
         </FieldContainer>
 
@@ -89,6 +90,7 @@ const AuthenticationContainer = ({
             value={password}
             isDisabled={isUIDisabled || !authentication}
             scale
+            tabIndex={19}
           />
         </FieldContainer>
       </Box>

@@ -63,6 +63,7 @@ const withHotkeys = (Component) => {
       moveCaretRight,
       openItem,
       selectAll,
+      deselectAll,
       activateHotkeys,
       onClickBack,
 
@@ -229,7 +230,7 @@ const withHotkeys = (Component) => {
     useHotkeys("shift+a, ctrl+a", selectAll, hotkeysFilter);
 
     //Deselect all files and folders
-    useHotkeys("shift+n, ESC", () => setSelected("none"), hotkeysFilter);
+    useHotkeys("shift+n, ESC", deselectAll, hotkeysFilter);
 
     //Move down without changing selection
     useHotkeys("ctrl+DOWN, command+DOWN", moveCaretBottom, hotkeysFilter);
@@ -442,6 +443,7 @@ const withHotkeys = (Component) => {
         moveCaretRight,
         openItem,
         selectAll,
+        deselectAll,
         activateHotkeys,
         uploadFile,
         copyToClipboard,
@@ -505,6 +507,7 @@ const withHotkeys = (Component) => {
         moveCaretRight,
         openItem,
         selectAll,
+        deselectAll,
         activateHotkeys,
         onClickBack,
 

@@ -229,7 +229,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
 
           const widthMaxContent = Math.max(...optionsWidth);
 
-          width = width || widthMaxContent;
+          width = widthMaxContent;
         }
       }
 

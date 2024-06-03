@@ -1690,12 +1690,7 @@ class FilesActionStore {
       case "delete":
         const canDelete = selection.every((s) => s.security?.Delete);
 
-        return (
-          !allFilesIsEditing &&
-          !this.isGroupMenuBlocked &&
-          canDelete &&
-          hasSelection
-        );
+        return !allFilesIsEditing && canDelete && hasSelection;
       case "create-room":
         const canCreateRoom = selection.some((s) => s.security?.CreateRoomFrom);
         return canCreateRoom;

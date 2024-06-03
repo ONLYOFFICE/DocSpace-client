@@ -30,17 +30,16 @@
 import { LANGUAGE } from "../constants";
 
 export function getCookie(name: string) {
-  if (name === LANGUAGE) {
+  if (typeof window !== "undefined" && name === LANGUAGE) {
     const url = new URL(window.location.href);
     const culture = url.searchParams.get("culture");
 
     if (url.pathname === "/confirm/LinkInvite" && culture) {
       return culture;
     }
-    if (url.pathname === "/login/" && culture) {
-      return culture;
-    }
   }
+
+  if (typeof document === "undefined") return undefined;
 
   const matches = document.cookie.match(
     new RegExp(

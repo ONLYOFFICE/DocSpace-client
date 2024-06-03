@@ -26,6 +26,7 @@
 
 import React from "react";
 import { cookies } from "next/headers";
+import dynamic from "next/dynamic";
 
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
@@ -37,18 +38,23 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import SimpleNav from "@/components/SimpleNav";
 import { LoginContent, LoginFormWrapper } from "@/components/Login";
 import GreetingContainer from "@/components/GreetingContainer";
-import { getColorTheme, getPortalCultures, getSettings } from "@/utils/actions";
-import LanguageComboboxWrapper from "@/components/LanguageCombobox";
+import { getColorTheme, getSettings } from "@/utils/actions";
+
+const LanguageComboboxWrapper = dynamic(
+  () => import("@/components/LanguageCombobox"),
+  {
+    ssr: false,
+  },
+);
 
 export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [settings, colorTheme, cultures] = await Promise.all([
+  const [settings, colorTheme] = await Promise.all([
     getSettings(),
     getColorTheme(),
-    getPortalCultures(),
   ]);
 
   const cookieStore = cookies();
@@ -72,7 +78,7 @@ export default async function Layout({
       <LoginFormWrapper id="login-page" bgPattern={bgPattern}>
         <div className="bg-cover" />
         <Scrollbar id="customScrollBar">
-          <LanguageComboboxWrapper cultures={cultures} />
+          <LanguageComboboxWrapper />
           <LoginContent>
             <ColorTheme
               themeId={ThemeId.LinkForgotPassword}

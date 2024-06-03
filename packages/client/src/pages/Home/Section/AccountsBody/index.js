@@ -56,6 +56,7 @@ const SectionBodyContent = (props) => {
     setHotkeyCaretStart,
     setHotkeyCaret,
     setSelected,
+    selectAll,
   } = props;
 
   const location = useLocation();
@@ -68,6 +69,7 @@ const SectionBodyContent = (props) => {
     selectUpper,
     activateHotkeys,
     setSelected,
+    selectAll,
   });
 
   useEffect(() => {
@@ -143,6 +145,7 @@ export default inject(({ peopleStore }) => {
     setBufferSelection: setPeopleBufferSelection,
     selectUser,
     setSelected,
+    selectAll,
   } = peopleStore.selectionStore;
 
   const {
@@ -180,6 +183,7 @@ export default inject(({ peopleStore }) => {
     setHotkeyCaretStart,
     setHotkeyCaret,
     setSelected,
+    selectAll,
   };
 })(
   withTranslation(["People", "Common", "PeopleTranslations"])(

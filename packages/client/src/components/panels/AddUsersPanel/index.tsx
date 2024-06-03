@@ -321,8 +321,11 @@ const AddUsersPanel = ({
   const onClearSearch = useCallback(
     (callback?: Function) => {
       isFirstLoad.current = true;
-      setIsLoading(true);
-      setSearchValue(() => {
+      setSearchValue((prevValue: string) => {
+        if (prevValue !== "") {
+          setIsLoading(true);
+        }
+
         return "";
       });
       callback?.();

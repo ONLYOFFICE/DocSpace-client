@@ -40,13 +40,13 @@ import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
 import { IconButton } from "../../icon-button";
 import { toastr } from "../../toast";
 import { Loader, LoaderTypes } from "../../loader";
+import { Text } from "../../text";
 
 import { StyledLinkRow, StyledSquare } from "../Share.styled";
 import { getShareOptions, getAccessOptions } from "../Share.helpers";
 import { LinkRowProps } from "../Share.types";
 
 import ExpiredComboBox from "./ExpiredComboBox";
-import { Text } from "@docspace/shared/components/text";
 
 const LinkRow = ({
   onAddClick,
@@ -149,7 +149,7 @@ const LinkRow = ({
               scaledOptions={false}
               showDisabledItems
               size={ComboBoxSize.content}
-              fillIcon={true}
+              fillIcon
               modernView
               type="onlyIcon"
               isDisabled={isExpiredLink || isLoaded}

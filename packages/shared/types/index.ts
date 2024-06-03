@@ -55,6 +55,8 @@ export type NonFunctionProperties<T, ExcludeTypes> = Pick<
   NonFunctionPropertyNames<T, ExcludeTypes>
 >;
 
+export type MergeTypes<T, MergedType> = Omit<T, keyof MergedType> & MergedType;
+
 export type TPathParts = {
   id: number;
   title: string;

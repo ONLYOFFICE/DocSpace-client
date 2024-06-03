@@ -63,7 +63,7 @@ const DocspaceLogo = ({
   const logo = getLogoUrl(logoSize, !theme.isBase);
 
   return (
-    <StyledWrapper isMobile={isMobile} isResizable={isResizable} logo={!!logo}>
+    <StyledWrapper isMobile={isMobile} isResizable={isResizable}>
       {logo && (
         <img
           src={logo}

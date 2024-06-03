@@ -337,7 +337,10 @@ export async function getTrashFolderList() {
 //   return request(options);
 // }
 
-export async function createFolder(parentFolderId: number, title: string) {
+export async function createFolder(
+  parentFolderId: number | string,
+  title: string,
+) {
   const data = { title };
   const options: AxiosRequestConfig = {
     method: "post",

@@ -38,7 +38,10 @@ const Row = memo(({ data, index, style }: RowProps) => {
   const separator = option?.props?.isSeparator
     ? { width: `calc(100% - 32px)`, height: `1px` }
     : {};
-  const newStyle = { ...style, ...separator };
+
+  const optionStyle = option?.props.style ?? {};
+
+  const newStyle = { ...style, ...separator, ...optionStyle };
 
   return (
     <DropDownItem

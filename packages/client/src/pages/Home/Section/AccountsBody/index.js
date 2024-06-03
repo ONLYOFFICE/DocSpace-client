@@ -55,6 +55,7 @@ const SectionBodyContent = (props) => {
     activateHotkeys,
     setHotkeyCaretStart,
     setHotkeyCaret,
+    selectAll,
     deselectAll,
   } = props;
 
@@ -67,6 +68,7 @@ const SectionBodyContent = (props) => {
     selectBottom,
     selectUpper,
     activateHotkeys,
+    selectAll,
     deselectAll,
   });
 
@@ -142,6 +144,7 @@ export default inject(({ peopleStore }) => {
     setSelection: setPeopleSelection,
     setBufferSelection: setPeopleBufferSelection,
     selectUser,
+    selectAll,
   } = peopleStore.selectionStore;
 
   const {
@@ -179,6 +182,7 @@ export default inject(({ peopleStore }) => {
     setEnabledHotkeys,
     setHotkeyCaretStart,
     setHotkeyCaret,
+    selectAll,
     deselectAll,
   };
 })(

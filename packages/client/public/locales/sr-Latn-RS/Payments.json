@@ -32,7 +32,7 @@
   "StartupSuggestion": "Uradite više sa {{planName}} planom",
   "StartupTitle": "Koristite besplatni {{planName}} plan",
   "StripeCustomerPortal": "idite na Stripe portal za kupce",
-  "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/month</3>",
+  "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/mesec</3>",
   "UpgradeNow": "Nadogradi sada",
   "UpgradePlan": "Plan nadogradnje",
   "UpgradePlanInfo": "Dodajući nove korisnike prekoračićete maksimalni broj dozvoljenih članova sobe po vašem trenutnom cenovnom planu.",

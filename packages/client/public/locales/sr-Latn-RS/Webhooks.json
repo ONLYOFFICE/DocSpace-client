@@ -3,7 +3,7 @@
   "CreateWebhook": "Kreiraj webhook",
   "DeleteHint": "Webhook će biti trajno obrisan.\nNećete moći da poništite ovu akciju.",
   "DeleteWebhook": "Obriši webhook",
-  "DeleteWebhookForeverQuestion": "Obriši Webhook zauvek?",
+  "DeleteWebhookForeverQuestion": "Obriši webhook zauvek?",
   "Delivery": "Dostava",
   "DeliveryDate": "Datum dostave",
   "DisableSSL": "Onemogući (nije preporučljivo)",
@@ -12,7 +12,7 @@
   "EnterUrl": "Unesi URL",
   "EnterWebhookName": "Unesi webhook ime",
   "EventHint": "Dostave su automatski obrisane nakon 15 dana",
-  "EventID": "ID Događaja",
+  "EventID": "ID događaja",
   "FailedToConnect": "Nismo mogli dostaviti ovaj paket: nije uspelo povezivanje sa serverom",
   "From": "Od",
   "Generate": "Generiši",
@@ -54,6 +54,6 @@
   "WebhookRedilivered": "Webhook ponovo isporučen",
   "WebhookRemoved": "Webhook uklonjen",
   "Webhooks": "Webhooks",
-  "WebhooksGuide": "Webhooks Vodič",
+  "WebhooksGuide": "Webhooks vodič",
   "WebhooksInfo": "Koristite webhooks da biste izvršili prilagođene akcije na strani bilo koje aplikacije ili web stranice koju koristite na osnovu različitih događaja u ONLYOFFICE DocSpace-u. Ovde možete kreirati i upravljati svim svojim webhook-ovima, konfigurisati ih i pregledati istoriju svakog webhook-a kako biste proverili njihovu izvedbu."
 }

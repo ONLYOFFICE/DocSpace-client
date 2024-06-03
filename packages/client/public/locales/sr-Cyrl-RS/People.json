@@ -1,1 +1,5 @@
-{}
+{
+  "LblInviteAgain": "Позови поново",
+  "MessageEmailActivationInstuctionsSentOnEmail": "Инструкције о емаил активацији су постулате на <1>{{email}}</1> емаил адресу.",
+  "UserStatus": "Статус"
+}

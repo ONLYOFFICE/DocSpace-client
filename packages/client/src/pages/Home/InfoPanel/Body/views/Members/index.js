@@ -65,7 +65,7 @@ const Members = ({
   isPublicRoomType,
   membersFilter,
   infoPanelMembers,
-  setInfoPanelMembers,
+  updateInfoPanelMembers,
   primaryLink,
   isArchiveFolder,
   isPublicRoom,
@@ -76,38 +76,24 @@ const Members = ({
   getPrimaryLink,
   setExternalLink,
   withPublicRoomBlock,
-  fetchMembers,
   fetchMoreMembers,
   membersIsLoading,
   searchValue,
-  searchResultIsLoading,
+  isMembersPanelUpdating,
 }) => {
   const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
 
   const scrollContext = useContext(ScrollbarContext);
 
-  const updateInfoPanelMembers = async () => {
-    if (
-      !infoPanelSelection ||
-      !infoPanelSelection.isRoom ||
-      !infoPanelSelection.id
-    ) {
-      return;
-    }
-
-    const fetchedMembers = await fetchMembers(t, true, withoutTitlesAndLinks);
-    setInfoPanelMembers(fetchedMembers);
-  };
-
   useEffect(() => {
-    updateInfoPanelMembers();
+    updateInfoPanelMembers(t);
   }, [infoPanelSelection, searchValue]);
 
   useEffect(() => {
-    if (searchResultIsLoading) return;
+    if (isMembersPanelUpdating) return;
     scrollContext?.parentScrollbar?.scrollToTop();
-  }, [searchResultIsLoading]);
+  }, [isMembersPanelUpdating]);
 
   const loadNextPage = async () => {
     await fetchMoreMembers(t, withoutTitlesAndLinks);
@@ -268,8 +254,8 @@ const Members = ({
       <MembersList
         loadNextPage={loadNextPage}
         hasNextPage={
-          membersList.length - headersCount < membersFilter.total &&
-          !searchResultIsLoading
+          !isMembersPanelUpdating &&
+          membersList.length - headersCount < membersFilter.total
         }
         itemCount={membersFilter.total + headersCount + publicRoomItemsLength}
         showPublicRoomBar={showPublicRoomBar}
@@ -288,6 +274,7 @@ const Members = ({
               membersHelper={membersHelper}
               currentMember={currentMember}
               hasNextPage={
+                !isMembersPanelUpdating &&
                 membersList.length - headersCount < membersFilter.total
               }
             />
@@ -312,13 +299,12 @@ export default inject(
       infoPanelSelection,
       setIsScrollLocked,
       infoPanelMembers,
-      setInfoPanelMembers,
-      fetchMembers,
+      updateInfoPanelMembers,
       fetchMoreMembers,
       membersIsLoading,
       withPublicRoomBlock,
       searchValue,
-      searchResultIsLoading,
+      isMembersPanelUpdating,
     } = infoPanelStore;
     const { membersFilter } = filesStore;
     const { id: selfId, isAdmin } = userStore.user;
@@ -351,7 +337,7 @@ export default inject(
       isFormRoom,
       membersFilter,
       infoPanelMembers,
-      setInfoPanelMembers,
+      updateInfoPanelMembers,
       roomType,
       primaryLink,
       isArchiveFolder: isArchiveFolderRoot,
@@ -362,11 +348,10 @@ export default inject(
       getPrimaryLink: filesStore.getPrimaryLink,
       setExternalLink,
       withPublicRoomBlock,
-      fetchMembers,
       fetchMoreMembers,
       membersIsLoading,
       searchValue,
-      searchResultIsLoading,
+      isMembersPanelUpdating,
     };
   },
 )(

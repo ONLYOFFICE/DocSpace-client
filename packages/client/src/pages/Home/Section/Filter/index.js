@@ -1588,14 +1588,14 @@ const SectionFilterContent = ({
                   id: "filter_type-filling-form",
                   key: RoomsType.FillingFormsRoom,
                   group: FilterGroups.roomFilterType,
-                  label: t("FillingFormRooms"),
+                  label: t("Common:FillingFormRooms"),
                 };
               case RoomsType.EditingRoom:
                 return {
                   id: "filter_type-collaboration",
                   key: RoomsType.EditingRoom,
                   group: FilterGroups.roomFilterType,
-                  label: t("CollaborationRooms"),
+                  label: t("Common:CollaborationRooms"),
                 };
               case RoomsType.ReviewRoom:
                 return {
@@ -1609,21 +1609,21 @@ const SectionFilterContent = ({
                   id: "filter_type-view-only",
                   key: RoomsType.ReadOnlyRoom,
                   group: FilterGroups.roomFilterType,
-                  label: t("ViewOnlyRooms"),
+                  label: t("Common:ViewOnlyRooms"),
                 };
               case RoomsType.FormRoom:
                 return {
                   id: "filter_type-form",
                   key: RoomsType.FormRoom,
                   group: FilterGroups.roomFilterType,
-                  label: t("FormRoom"),
+                  label: t("Common:FormRoom"),
                 };
               case RoomsType.PublicRoom:
                 return {
                   id: "filter_type-public",
                   key: RoomsType.PublicRoom,
                   group: FilterGroups.roomFilterType,
-                  label: t("PublicRoom"),
+                  label: t("Common:PublicRoom"),
                 };
               case RoomsType.CustomRoom:
               default:
@@ -1631,7 +1631,7 @@ const SectionFilterContent = ({
                   id: "filter_type-custom",
                   key: RoomsType.CustomRoom,
                   group: FilterGroups.roomFilterType,
-                  label: t("CustomRooms"),
+                  label: t("Common:CustomRooms"),
                 };
             }
           }),

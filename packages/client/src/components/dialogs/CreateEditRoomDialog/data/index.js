@@ -29,56 +29,56 @@ import { RoomsType } from "@docspace/shared/enums";
 export const getRoomTypeTitleTranslation = (roomType = 1, t) => {
   switch (roomType) {
     case RoomsType.FillingFormsRoom:
-      return t("CreateEditRoomDialog:FillingFormsRoomTitle");
+      return t("Common:FillingFormsRoomTitle");
     case RoomsType.EditingRoom:
-      return t("CreateEditRoomDialog:CollaborationRoomTitle");
+      return t("Common:CollaborationRoomTitle");
     case RoomsType.ReviewRoom:
-      return t("CreateEditRoomDialog:ReviewRoomTitle");
+      return t("Common:ReviewRoomTitle");
     case RoomsType.ReadOnlyRoom:
-      return t("CreateEditRoomDialog:ViewOnlyRoomTitle");
+      return t("Common:ViewOnlyRoomTitle");
     case RoomsType.CustomRoom:
-      return t("CreateEditRoomDialog:CustomRoomTitle");
+      return t("Common:CustomRoomTitle");
     case RoomsType.PublicRoom:
-      return t("Files:PublicRoom");
+      return t("Common:PublicRoom");
     case RoomsType.FormRoom:
-      return t("CreateEditRoomDialog:FormFilingRoomTitle");
+      return t("Common:FormFilingRoomTitle");
   }
 };
 
 export const getRoomTypeDescriptionTranslation = (roomType = 1, t) => {
   switch (roomType) {
     case RoomsType.FillingFormsRoom:
-      return t("CreateEditRoomDialog:FillingFormsRoomDescription");
+      return t("Common:FillingFormsRoomDescription");
     case RoomsType.EditingRoom:
-      return t("CreateEditRoomDialog:CollaborationRoomDescription");
+      return t("Common:CollaborationRoomDescription");
     case RoomsType.ReviewRoom:
-      return t("CreateEditRoomDialog:ReviewRoomDescription");
+      return t("Common:ReviewRoomDescription");
     case RoomsType.ReadOnlyRoom:
-      return t("CreateEditRoomDialog:ViewOnlyRoomDescription");
+      return t("Common:ViewOnlyRoomDescription");
     case RoomsType.CustomRoom:
-      return t("CreateEditRoomDialog:CustomRoomDescription");
+      return t("Common:CustomRoomDescription");
     case RoomsType.PublicRoom:
-      return t("CreateEditRoomDialog:PublicRoomDescription");
+      return t("Common:PublicRoomDescription");
     case RoomsType.FormRoom:
-      return t("CreateEditRoomDialog:FormFilingRoomDescription");
+      return t("Common:FormFilingRoomDescription");
   }
 };
 
 export const getRoomTypeDefaultTagTranslation = (roomType = 1, t) => {
   switch (roomType) {
     case RoomsType.FillingFormsRoom:
-      return t("Files:FillingFormRooms");
+      return t("Common:FillingFormRooms");
     case RoomsType.EditingRoom:
-      return t("Files:CollaborationRooms");
+      return t("Common:CollaborationRooms");
     case RoomsType.ReviewRoom:
       return t("Common:Review");
     case RoomsType.ReadOnlyRoom:
-      return t("Files:ViewOnlyRooms");
+      return t("Common:ViewOnlyRooms");
     case RoomsType.CustomRoom:
-      return t("Files:CustomRooms");
+      return t("Common:CustomRooms");
     case RoomsType.PublicRoom:
-      return t("Files:PublicRoom");
+      return t("Common:PublicRoom");
     case RoomsType.FormRoom:
-      return t("Files:FormRoom");
+      return t("Common:FormRoom");
   }
 };

@@ -892,10 +892,49 @@ class ContextOptionsStore {
     this.filesActionsStore.setMuteAction(action, item, t);
   };
 
+  checkExportRoomIndexProgress = async () => {
+    return await new Promise((resolve, reject) => {
+      setTimeout(async () => {
+        try {
+          const res = await api.rooms.getExportRoomIndexProgress();
+
+          resolve(res);
+        } catch (e) {
+          reject(e);
+        }
+      }, 1000);
+    });
+  };
+
+  loopExportRoomIndexStatusChecking = async () => {
+    let isCompleted = false;
+    let res;
+
+    while (!isCompleted) {
+      res = await this.checkExportRoomIndexProgress();
+
+      console.log("res", res);
+
+      if (res?.isCompleted) {
+        isCompleted = true;
+      }
+    }
+
+    return res;
+  };
+
   onClickExportRoomIndex = async (room) => {
     try {
-      await api.rooms.exportRoomIndex(room.id);
-      return `${room.title}_index.xlsx`;
+      let res = await api.rooms.exportRoomIndex(room.id);
+
+      if (!res.isCompleted) {
+        res = await this.loopExportRoomIndexStatusChecking();
+      }
+
+      return {
+        fileName: res.resultFileName,
+        fileUrl: res.resultFileUrl,
+      };
     } catch (e) {
       toastr.error(e);
     }

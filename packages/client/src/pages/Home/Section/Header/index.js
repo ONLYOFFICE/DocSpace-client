@@ -75,6 +75,8 @@ import {
 } from "@docspace/shared/enums";
 
 import { copyShareLink } from "@docspace/shared/utils/copy";
+import { hideLoader, showLoader } from "@docspace/shared/utils/common";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import {
@@ -445,23 +447,40 @@ const SectionHeaderContent = (props) => {
   };
 
   const onExportRoomIndex = async () => {
-    const fileTitle = await onClickExportRoomIndex(selectedFolder);
+    try {
+      showLoader();
 
-    if (!fileTitle) return;
+      const { fileName, fileUrl } =
+        await onClickExportRoomIndex(selectedFolder);
 
-    const toastMessage = (
-      <>
-        <Link color="#5299E0" fontSize="12px">
-          {fileTitle}
-        </Link>
-        &nbsp;
-        <Text as="span" fontSize="12px">
-          {t("Files:FileExportedToMyDocuments")}
-        </Text>
-      </>
-    );
+      const urlWithProxy = combineUrl(
+        window.DocSpaceConfig?.proxy?.url,
+        fileUrl,
+      );
 
-    toastr.success(toastMessage);
+      if (!fileName) return;
+
+      const toastMessage = (
+        <>
+          <Link
+            color="#5299E0"
+            fontSize="12px"
+            target="_blank"
+            href={urlWithProxy}
+          >
+            {fileName}
+          </Link>
+          &nbsp;
+          <Text as="span" fontSize="12px">
+            {t("Files:FileExportedToMyDocuments")}
+          </Text>
+        </>
+      );
+
+      toastr.success(toastMessage);
+    } finally {
+      hideLoader();
+    }
   };
 
   const onDeleteRoomInArchive = () => {
@@ -658,7 +677,7 @@ const SectionHeaderContent = (props) => {
         label: t("Files:ExportRoomIndex"),
         icon: DownloadReactSvgUrl,
         onClick: onExportRoomIndex,
-        disabled: !isVDRRoomType,
+        disabled: !isVDRRoomType || !selectedFolder.indexing,
       },
       {
         id: "header_option_separator-2",

@@ -479,5 +479,15 @@ export function resetRoomQuota(roomIds) {
 }
 
 export function exportRoomIndex(roomId: number) {
-  return new Promise((resolve) => setTimeout(() => resolve(), 1000));
+  return request({
+    method: "post",
+    url: `files/rooms/${roomId}/indexexport`,
+  });
+}
+
+export function getExportRoomIndexProgress() {
+  return request({
+    method: "get",
+    url: `files/rooms/indexexport`,
+  });
 }

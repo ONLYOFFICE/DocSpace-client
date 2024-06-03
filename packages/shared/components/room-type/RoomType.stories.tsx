@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -24,23 +25,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RoomsType } from "@docspace/shared/enums";
+import { Meta, StoryObj } from "@storybook/react";
+import { RoomsType } from "../../enums";
 
-export const getRoomTypeDefaultTagTranslation = (roomType = 1, t) => {
-  switch (roomType) {
-    case RoomsType.FillingFormsRoom:
-      return t("Common:FillingFormRooms");
-    case RoomsType.EditingRoom:
-      return t("Common:CollaborationRooms");
-    case RoomsType.ReviewRoom:
-      return t("Common:Review");
-    case RoomsType.ReadOnlyRoom:
-      return t("Common:ViewOnlyRooms");
-    case RoomsType.CustomRoom:
-      return t("Common:CustomRooms");
-    case RoomsType.PublicRoom:
-      return t("Common:PublicRoom");
-    case RoomsType.FormRoom:
-      return t("Common:FormRoom");
-  }
+import RoomType from ".";
+
+const meta = {
+  title: "Components/RoomType",
+  component: RoomType,
+  parameters: {},
+  // argTypes: {
+  //   type: {
+  //     options: ["Editing Room", "Custom Room"],
+  //     control: { type: "select" },
+  //   },
+  // },
+} satisfies Meta<typeof RoomType>;
+type Story = StoryObj<typeof meta>;
+
+export default meta;
+
+export const Default: Story = {
+  args: {
+    roomType: RoomsType.CustomRoom,
+    isOpen: false,
+    selectedId: "",
+    onClick: (e: React.MouseEvent<HTMLDivElement>) => {
+      console.log(e);
+    },
+  },
 };

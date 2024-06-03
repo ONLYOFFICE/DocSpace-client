@@ -77,10 +77,10 @@ const useAccountsHotkeys = ({
   useEffect(() => {
     const throttledKeyDownEvent = throttle(onKeyDown, 300);
 
-    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("keydown", throttledKeyDownEvent);
 
     return () => {
-      window.removeEventListener("keypress", throttledKeyDownEvent);
+      window.removeEventListener("keydown", throttledKeyDownEvent);
     };
   }, [onKeyDown]);
 

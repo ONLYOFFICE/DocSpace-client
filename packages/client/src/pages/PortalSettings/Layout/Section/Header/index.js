@@ -361,7 +361,9 @@ const SectionHeaderContent = (props) => {
     isSeveralSelection,
     peopleSelection,
     setSessionModalData,
+    setUserModalData,
     setUserSessionPanelVisible,
+    setDisplayName,
   } = props;
   const { header, isCategoryOrHeader, isNeedPaidIcon } = state;
   const arrayOfParams = getArrayOfParams();
@@ -400,12 +402,13 @@ const SectionHeaderContent = (props) => {
   );
 
   const onClickSessions = () => {
-    setSessionModalData({ ...peopleSelection[0] });
+    setUserModalData(peopleSelection[0]);
+    setSessionModalData(peopleSelection[0].connections);
     setUserSessionPanelVisible(true);
   };
 
   const onClickLogout = () => {
-    setSessionModalData({ displayName: peopleSelection[0].displayName });
+    setDisplayName(peopleSelection[0].displayName);
     setLogoutAllDialogVisible(true);
   };
 
@@ -557,6 +560,8 @@ export default inject(
       setLogoutDialogVisible,
       setLogoutAllDialogVisible,
       setSessionModalData,
+      setUserModalData,
+      setDisplayName,
     } = setup;
     const {
       selected,
@@ -611,6 +616,8 @@ export default inject(
       setLogoutAllDialogVisible,
       setSessionModalData,
       setUserSessionPanelVisible,
+      setUserModalData,
+      setDisplayName,
     };
   },
 )(

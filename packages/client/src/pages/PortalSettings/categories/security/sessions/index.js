@@ -91,26 +91,25 @@ const Sessions = ({
   sessionModalData,
   platformModalData,
   getUsersList,
-  // socketHelper,
+  socketHelper,
   getUserSessionsById,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  // useEffect(() => {
-  //   socketHelper.emit({
-  //     command: "subscribe",
-  //     data: { roomParts: "statuses-in-portal" },
-  //   });
+  useEffect(() => {
+    socketHelper.emit({
+      command: "subscribe",
+      data: { roomParts: "statuses-in-portal" },
+    });
 
-  //   socketHelper.emit({
-  //     command: "getSessionsInPortal",
-  //   });
+    socketHelper.emit({
+      command: "getSessionsInPortal",
+    });
 
-  //   socketHelper.on("statuses-in-portal", (data) => {
-  //     const onlineUsers = data.map((user) => user);
-  //     console.log(onlineUsers);
-  //   });
-  // }, [socketHelper]);
+    socketHelper.on("statuses-in-portal", (data) => {
+      console.log(data);
+    });
+  }, [socketHelper]);
 
   const fetchData = async () => {
     try {

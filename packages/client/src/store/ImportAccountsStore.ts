@@ -60,6 +60,8 @@ type TCheckedUsers = {
 
 type CheckedAccountTypes = "withEmail" | "withoutEmail" | "result";
 
+type LoadingState = "none" | "upload" | "proceed" | "done";
+
 class ImportAccountsStore {
   services: TWorkspaceService[] = [];
 
@@ -82,7 +84,7 @@ class ImportAccountsStore {
     User: "Collaborator",
   };
 
-  isFileLoading = false;
+  fileLoadingStatus: LoadingState = "none";
 
   isLoading = false;
 
@@ -194,8 +196,8 @@ class ImportAccountsStore {
     });
   };
 
-  setIsFileLoading = (isLoading: boolean) => {
-    this.isFileLoading = isLoading;
+  setLoadingStatus = (status: LoadingState) => {
+    this.fileLoadingStatus = status;
   };
 
   setIsLoading = (isLoading: boolean) => {
@@ -339,7 +341,11 @@ class ImportAccountsStore {
 
       let chunk = 0;
 
-      while (chunk < chunksNumber && this.isFileLoading) {
+      while (
+        chunk < chunksNumber &&
+        (this.fileLoadingStatus === "upload" ||
+          this.fileLoadingStatus === "proceed")
+      ) {
         if (isAbort.current) return;
         // eslint-disable-next-line no-await-in-loop
         await uploadFile(
@@ -387,7 +393,11 @@ class ImportAccountsStore {
       }
 
       chunk = 0;
-      while (chunk < chunks && this.isFileLoading) {
+      while (
+        chunk < chunks &&
+        (this.fileLoadingStatus === "upload" ||
+          this.fileLoadingStatus === "proceed")
+      ) {
         if (isAbort.current) return;
         // eslint-disable-next-line no-await-in-loop
         await uploadFile(
@@ -400,8 +410,6 @@ class ImportAccountsStore {
       }
     } catch (e) {
       console.error(e);
-    } finally {
-      isAbort.current = false;
     }
   };
 

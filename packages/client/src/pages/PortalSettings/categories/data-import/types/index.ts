@@ -44,16 +44,23 @@ export interface InjectedProvidersProps extends ProvidersProps {
 
 export interface SelectFileStepProps {
   t: TFunciton;
-  incrementStep: () => void;
+}
+
+export interface InjectedSelectFileStepProps extends SelectFileStepProps {
+  t: TFunciton;
+  incrementStep: TStore["importAccountsStore"]["incrementStep"];
+  setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
   cancelUploadDialogVisible: TStore["dialogsStore"]["cancelUploadDialogVisible"];
   setCancelUploadDialogVisible: TStore["dialogsStore"]["setCancelUploadDialogVisible"];
   initMigrationName: TStore["importAccountsStore"]["initMigrationName"];
   singleFileUploading: TStore["importAccountsStore"]["singleFileUploading"];
   getMigrationStatus: TStore["importAccountsStore"]["getMigrationStatus"];
   setUsers: TStore["importAccountsStore"]["setUsers"];
-  isFileLoading: TStore["importAccountsStore"]["isFileLoading"];
-  setIsFileLoading: TStore["importAccountsStore"]["setIsFileLoading"];
+  fileLoadingStatus: TStore["importAccountsStore"]["fileLoadingStatus"];
+  setLoadingStatus: TStore["importAccountsStore"]["setLoadingStatus"];
   cancelMigration: TStore["importAccountsStore"]["cancelMigration"];
+  files: TStore["importAccountsStore"]["files"];
+  setFiles: TStore["importAccountsStore"]["setFiles"];
 }
 
 export interface DataImportProps {}
@@ -70,6 +77,7 @@ export interface InjectedDataImportProps extends DataImportProps {
   setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
   setFiles: TStore["importAccountsStore"]["setFiles"];
   setIsMigrationInit: TStore["importAccountsStore"]["setIsMigrationInit"];
+  setLoadingStatus: TStore["importAccountsStore"]["setLoadingStatus"];
 }
 
 export interface NextcloudProps {}

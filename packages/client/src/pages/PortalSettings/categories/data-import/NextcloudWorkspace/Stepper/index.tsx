@@ -52,7 +52,7 @@ export const getStepsData = (
     {
       title: t("Common:SelectFile"),
       description: t("Settings:SelectFileDescriptionNextcloud"),
-      component: <SelectFileStep t={t} incrementStep={incrementStep} />,
+      component: <SelectFileStep t={t} />,
     },
     {
       title: t("Settings:SelectUsersWithEmail"),

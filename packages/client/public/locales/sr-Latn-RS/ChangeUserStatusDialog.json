@@ -1,7 +1,7 @@
 {
-  "DisableGeneralDescription": "Kasnije možete izbrisati ili omogućiti onemogućene korisnike ako je potrebno. Imajte na umu da ne možete onemogućiti korisnike kao što su vlasnik i vi.",
+  "DisableGeneralDescription": "Kasnije možete izbrisati ili omogućiti onemogućene korisnike ako je potrebno. Imajte na umu da ne možete onemogućiti korisnike kao što su Vlasnik i vi.",
   "DisableUser": "Onemogući korisnika",
-  "DisableUserDescription": "Ako Onemogućite ovog korisnika, on/ona neće moći da se prijavi na DocSpace, dok će njegovi/njeni dokumenti i podaci ostati netaknuti.",
+  "DisableUserDescription": "Ako onemogućite ovog korisnika, on/ona neće moći da se prijavi na DocSpace, dok će njegovi/njeni dokumenti i podaci ostati netaknuti.",
   "DisableUsers": "Onemogući korisnike",
   "DisableUsersDescription": "Ako onemogućite ove korisnike, oni neće moći da se prijave na DocSpace, dok će njihovi dokumenti i podaci ostati netaknuti.",
   "EnableUser": "Omogući korisnika",

@@ -14,7 +14,7 @@
   "NameChangeButton": "Промени име",
   "PasswordChangeButton": "Промени лозинку",
   "PendingTitle": "На чекању",
-  "PeopleCount": "Људи : {{count}}",
+  "PeopleCount": "Људи: {{count}}",
   "RemoveData": "Обриши личне податке",
   "ResetAuth": "Ресетуј аутентификацију",
   "SearchByGroupMembers": "Претражуј по члановима групе",

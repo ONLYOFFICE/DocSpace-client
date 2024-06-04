@@ -1,5 +1,5 @@
 {
-  "ConversionMessage": "Сви документи које отпремите биц́е конвертовани у Office Open XML формат (docx, xlsx ili pptx) ради бржег уређивања.",
+  "ConversionMessage": "Сви документи које отпремите биц́е конвертовани у Office Open XML формат (docx, xlsx или pptx) ради бржег уређивања.",
   "ConvertedFileDestination": "Копија датотеке ц́е бити направљена у <strong>{{folderTitle}}</strong> фолдеру.",
   "DocumentConversionTitle": "Конверзија документа",
   "FailedToConvert": "Неуспешно конвертовање",

@@ -88,17 +88,17 @@ export default inject(({ setup, dialogsStore }) => {
     setDisableDialogVisible,
     userModalData,
     sessionModalData,
-    setSessionModalData,
+    setDisplayName,
   } = setup;
 
   return {
     userData: userModalData,
     sessionData: sessionModalData,
-    setSessionModalData,
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
     visible: userSessionsPanelVisible,
     setVisible: setUserSessionPanelVisible,
+    setDisplayName,
   };
 })(
   withTranslation(["Settings", "Profile", "Common"])(

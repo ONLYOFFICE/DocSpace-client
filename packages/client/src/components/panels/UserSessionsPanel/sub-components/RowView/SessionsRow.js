@@ -45,11 +45,9 @@ const SessionsRow = (props) => {
 };
 
 export default inject(({ setup }) => {
-  const { setSessionModalData, setLogoutDialogVisible, setPlatformModalData } =
-    setup;
+  const { setLogoutDialogVisible, setPlatformModalData } = setup;
 
   return {
-    setSessionModalData,
     setLogoutDialogVisible,
     setPlatformModalData,
   };

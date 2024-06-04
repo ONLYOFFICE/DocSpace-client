@@ -88,11 +88,11 @@ const Sessions = ({
   setDisableDialogVisible,
   setLogoutDialogVisible,
   setLogoutAllDialogVisible,
-  sessionModalData,
   platformModalData,
   getUsersList,
   socketHelper,
   getUserSessionsById,
+  displayName,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -218,7 +218,7 @@ const Sessions = ({
           t={t}
           visible={logoutAllDialogVisible}
           isLoading={isLoading}
-          data={sessionModalData}
+          displayName={displayName}
           onClose={() => setLogoutAllDialogVisible(false)}
           onRemoveAllSessions={onClickRemoveAllSessions}
           onRemoveAllExceptThis={onClickRemoveAllExceptThis}
@@ -243,9 +243,9 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     setDisableDialogVisible,
     setLogoutDialogVisible,
     setLogoutAllDialogVisible,
-    sessionModalData,
     platformModalData,
     getUserSessionsById,
+    displayName,
   } = setup;
 
   return {
@@ -261,12 +261,12 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     setDisableDialogVisible,
     setLogoutDialogVisible,
     setLogoutAllDialogVisible,
-    sessionModalData,
     platformModalData,
     socketHelper,
     getUsersList,
     setAllConnections,
     getUserSessionsById,
+    displayName,
   };
 })(
   withTranslation(["Settings", "Profile", "Common", "ChangeUserStatusDialog"])(

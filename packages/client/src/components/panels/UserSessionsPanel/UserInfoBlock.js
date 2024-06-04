@@ -42,7 +42,7 @@ const UserInfoBlock = (props) => {
     userData,
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
-    setSessionModalData,
+    setDisplayName,
   } = props;
 
   const { avatar, displayName, isAdmin, isOwner } = userData;
@@ -58,7 +58,7 @@ const UserInfoBlock = (props) => {
 
   const onClickLogout = () => {
     setLogoutAllDialogVisible(true);
-    setSessionModalData({ displayName });
+    setDisplayName(displayName);
   };
 
   const onClickDisable = () => {

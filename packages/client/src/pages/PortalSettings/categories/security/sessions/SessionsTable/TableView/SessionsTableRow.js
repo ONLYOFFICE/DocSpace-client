@@ -158,6 +158,7 @@ const SessionsTableRow = (props) => {
     setUserModalData,
     setSessionModalData,
     setUserSessionPanelVisible,
+    setDisplayName,
   } = props;
 
   const role = item.isOwner ? "owner" : item.isAdmin ? "admin" : null;
@@ -170,7 +171,7 @@ const SessionsTableRow = (props) => {
 
   const onClickLogout = () => {
     setLogoutAllDialogVisible(true);
-    setSessionModalData({ displayName });
+    setDisplayName(displayName);
   };
 
   const onClickDisable = () => {
@@ -309,6 +310,7 @@ export default inject(({ setup, dialogsStore }) => {
     setDisableDialogVisible,
     setUserModalData,
     setSessionModalData,
+    setDisplayName,
   } = setup;
 
   return {
@@ -317,5 +319,6 @@ export default inject(({ setup, dialogsStore }) => {
     setUserModalData,
     setSessionModalData,
     setUserSessionPanelVisible,
+    setDisplayName,
   };
 })(withContent(observer(SessionsTableRow)));

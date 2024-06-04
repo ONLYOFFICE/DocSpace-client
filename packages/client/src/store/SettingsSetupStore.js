@@ -107,6 +107,7 @@ class SettingsSetupStore {
 
   securityLifetime = [];
 
+  displayName = "";
   sessionsIsInit = false;
   sessions = [];
   currentSession = [];
@@ -610,6 +611,10 @@ class SettingsSetupStore {
       platform: data.platform,
       browser: data.browser,
     };
+  };
+
+  setDisplayName = (name) => {
+    this.displayName = name;
   };
 }
 

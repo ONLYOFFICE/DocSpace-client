@@ -35,7 +35,7 @@ import ModalDialogContainer from "../ModalDialogContainer";
 
 const LogoutAllSessionDialog = ({
   t,
-  data,
+  displayName,
   visible,
   isLoading,
   onClose,
@@ -58,9 +58,7 @@ const LogoutAllSessionDialog = ({
   const bodySubtitle =
     isSeveralSelection || isProfile
       ? t("Profile:LogoutDescription")
-      : t("Profile:LogoutCurrentUserDescription", {
-          displayName: data?.displayName,
-        });
+      : t("Profile:LogoutCurrentUserDescription", { displayName });
 
   const bodyText = !isSeveralSelection && (
     <>

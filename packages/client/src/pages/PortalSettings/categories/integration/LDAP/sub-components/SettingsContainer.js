@@ -33,11 +33,14 @@ const SettingsContainer = ({
   isLdapAvailable,
   isMobileView,
   isCertificateDialogVisible,
+  isLoaded,
+  load,
 }) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
   const navigate = useNavigate();
 
   useEffect(() => {
+    isLdapAvailable && isMobileView && !isLoaded && load();
     setDocumentTitle(t("Ldap:LdapSettings"));
     onCheckView();
     window.addEventListener("resize", onCheckView);
@@ -102,7 +105,8 @@ const SettingsContainer = ({
 export default inject(({ settingsStore, currentQuotaStore, ldapStore }) => {
   const { isLdapAvailable } = currentQuotaStore;
   const { currentDeviceType, theme } = settingsStore;
-  const { isSettingsShown, isCertificateDialogVisible } = ldapStore;
+  const { isSettingsShown, isCertificateDialogVisible, isLoaded, load } =
+    ldapStore;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
@@ -112,5 +116,7 @@ export default inject(({ settingsStore, currentQuotaStore, ldapStore }) => {
     isMobileView,
     theme,
     isCertificateDialogVisible,
+    isLoaded,
+    load,
   };
 })(observer(SettingsContainer));

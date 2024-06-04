@@ -49,7 +49,7 @@ import { mobile, mobileMore } from "@docspace/shared/utils";
 
 export const CompletedForm = ({}: CompletedFormProps) => {
   const theme = useTheme();
-  const { t } = useTranslation(["CompletedForm"]);
+  const { t } = useTranslation(["CompletedForm", "Common"]);
 
   const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
   const smallLogoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
@@ -57,6 +57,10 @@ export const CompletedForm = ({}: CompletedFormProps) => {
   const bgPattern = getBgPattern(theme.currentColorScheme?.id);
 
   const iconUrl = theme.isBase ? CompletedFormLightIcon : CompletedFormDarkIcon;
+
+  const onClose = () => {
+    window.close();
+  };
 
   return (
     <CompletedFormLayout bgPattern={bgPattern}>
@@ -82,17 +86,18 @@ export const CompletedForm = ({}: CompletedFormProps) => {
           scale
           primary
           size={ButtonSize.medium}
-          label={t("CompletedForm:BackToRoom")}
+          label={t("Common:Close")}
+          onClick={onClose}
         />
-        <Button
-          scale
-          size={ButtonSize.medium}
-          label={t("CompletedForm:FillItOutAgain")}
-        />
+        {/* <Button
+        scale
+        size={ButtonSize.medium}
+        label={t("CompletedForm:FillItOutAgain")}
+      /> */}
       </ButtonWrapper>
-      <Link className="link" href="#">
+      {/* <Link className="link" href="#">
         {t("CompletedForm:GoToCompleteFolder")}
-      </Link>
+      </Link> */}
     </CompletedFormLayout>
   );
 };

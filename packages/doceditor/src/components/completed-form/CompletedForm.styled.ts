@@ -88,11 +88,13 @@ export const CompletedFormLayout = styled.section<CompletedFormLayoutProps>`
 
 export const ButtonWrapper = styled.footer`
   display: flex;
+  justify-content: center;
+  align-items: center;
 
   gap: 8px;
 
   margin-bottom: 24px;
-  max-width: 648px;
+  max-width: 480px;
   width: 100%;
 
   @media ${mobile} {

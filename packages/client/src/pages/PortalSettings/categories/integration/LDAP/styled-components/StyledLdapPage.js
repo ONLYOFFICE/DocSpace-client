@@ -80,7 +80,7 @@ const StyledLdapPage = styled(Box)`
       padding-left: 8px;
       padding-left: 6px;
       position: relative;
-      bottom: 4px;
+      bottom: 2px;
     }
   }
 
@@ -155,6 +155,14 @@ const StyledLdapPage = styled(Box)`
   .manual-sync-button,
   .auto-sync-button {
     margin-top: 16px;
+  }
+
+  .field-label {
+    .help-icon {
+      padding-left: 2px;
+      position: relative;
+      bottom: 0px;
+    }
   }
 
   ${(props) => !props.isSettingPaid && UnavailableStyles}

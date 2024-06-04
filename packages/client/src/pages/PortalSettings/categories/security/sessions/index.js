@@ -92,7 +92,6 @@ const Sessions = ({
   platformModalData,
   getUsersList,
   // socketHelper,
-  setAllConnections,
   getUserSessionsById,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -109,7 +108,7 @@ const Sessions = ({
 
   //   socketHelper.on("statuses-in-portal", (data) => {
   //     const onlineUsers = data.map((user) => user);
-  //     console.log("onlineUsers", onlineUsers);
+  //     console.log(onlineUsers);
   //   });
   // }, [socketHelper]);
 
@@ -120,9 +119,7 @@ const Sessions = ({
         getUserSessionsById(user.id),
       );
       const sessions = await Promise.all(sessionsPromises);
-      const connections = sessions.map((session) => session.connections || []);
-      setAllConnections(connections);
-      setAllSessions(sessions.flat());
+      setAllSessions([...sessions]);
     } catch (error) {
       console.error(error);
     }

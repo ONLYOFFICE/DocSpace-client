@@ -81,19 +81,19 @@ const UserSessionsPanel = (props) => {
   );
 };
 
-export default inject(({ setup, peopleStore, dialogsStore }) => {
-  const { allSessions } = peopleStore.selectionStore;
+export default inject(({ setup, dialogsStore }) => {
   const { userSessionsPanelVisible, setUserSessionPanelVisible } = dialogsStore;
   const {
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
+    userModalData,
     sessionModalData,
     setSessionModalData,
   } = setup;
 
   return {
-    allSessions,
-    data: sessionModalData,
+    userData: userModalData,
+    sessionData: sessionModalData,
     setSessionModalData,
     setLogoutAllDialogVisible,
     setDisableDialogVisible,

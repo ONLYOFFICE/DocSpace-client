@@ -110,7 +110,8 @@ class SettingsSetupStore {
   sessionsIsInit = false;
   sessions = [];
   currentSession = [];
-  sessionModalData = {};
+  sessionModalData = [];
+  userModalData = [];
   platformModalData = {};
 
   constructor(tfaStore, authStore, settingsStore, thirdPartyStore) {
@@ -596,9 +597,11 @@ class SettingsSetupStore {
   };
 
   setSessionModalData = (data) => {
-    this.sessionModalData = {
-      ...data,
-    };
+    this.sessionModalData = data;
+  };
+
+  setUserModalData = (data) => {
+    this.userModalData = data;
   };
 
   setPlatformModalData = (data) => {

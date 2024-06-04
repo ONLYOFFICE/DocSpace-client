@@ -1,9 +1,10 @@
 import { inject, observer } from "mobx-react";
-import { useEffect, useCallback } from "react";
+import { useCallback } from "react";
 import { Base } from "@docspace/shared/themes";
 import styled, { css } from "styled-components";
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
+import { Avatar } from "@docspace/shared/components/avatar";
 import { TableRow } from "@docspace/shared/components/table";
 import { TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
@@ -140,7 +141,6 @@ const SessionsTableRow = (props) => {
   const {
     t,
     item,
-    element,
     checkedProps,
     onContentRowSelect,
     onContentRowClick,
@@ -155,12 +155,16 @@ const SessionsTableRow = (props) => {
     // ip,
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
+    setUserModalData,
     setSessionModalData,
     setUserSessionPanelVisible,
   } = props;
 
+  const role = item.isOwner ? "owner" : item.isAdmin ? "admin" : null;
+
   const onClickSessions = () => {
-    setSessionModalData({ ...item });
+    setUserModalData(item);
+    setSessionModalData(item.connections);
     setUserSessionPanelVisible(true);
   };
 
@@ -246,7 +250,14 @@ const SessionsTableRow = (props) => {
             className="table-container_row-checkbox-wrapper"
             checked={isChecked}
           >
-            <div className="table-container_element">{element}</div>
+            <div className="table-container_element">
+              <Avatar
+                className="avatar"
+                role={role}
+                size={"min"}
+                userName={displayName}
+              />
+            </div>
             <Checkbox
               className="table-container_row-checkbox"
               isChecked={isChecked}
@@ -296,12 +307,14 @@ export default inject(({ setup, dialogsStore }) => {
   const {
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
+    setUserModalData,
     setSessionModalData,
   } = setup;
 
   return {
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
+    setUserModalData,
     setSessionModalData,
     setUserSessionPanelVisible,
   };

@@ -59,8 +59,8 @@ const StyledLastSessionBlock = styled.div`
 `;
 
 const LastSessionBlock = (props) => {
-  const { t, data } = props;
-  const { status, platform, browser, ip, country, city } = data;
+  const { t, sessionData } = props;
+  const { status, platform, browser, ip, country, city } = sessionData;
 
   const isOnline = status === "Online";
 

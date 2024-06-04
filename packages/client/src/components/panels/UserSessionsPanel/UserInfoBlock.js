@@ -39,17 +39,26 @@ const StyledUserInfoBlock = styled.div`
 const UserInfoBlock = (props) => {
   const {
     t,
-    data,
+    userData,
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
     setSessionModalData,
   } = props;
 
-  const { avatar, role, displayName, userType } = data;
+  const { avatar, displayName, isAdmin, isOwner } = userData;
+  const role = isOwner ? "owner" : isAdmin ? "admin" : null;
+
+  const getUserType = () => {
+    if (userData.isOwner) return t("Common:Owner");
+    if (userData.isAdmin) return t("Common:DocspaceAdmin");
+    if (userData.isRoomAdmin) return t("Common:RoomAdmin");
+    if (userData.isCollaborator) return t("Common:PowerUser");
+    return t("Common:User");
+  };
 
   const onClickLogout = () => {
     setLogoutAllDialogVisible(true);
-    setSessionModalData({ ...data, displayName });
+    setSessionModalData({ displayName });
   };
 
   const onClickDisable = () => {
@@ -89,7 +98,7 @@ const UserInfoBlock = (props) => {
         />
         <Box displayProp="flex" flexDirection="column">
           <Text className="username">{displayName}</Text>
-          <span>{userType}</span>
+          <span>{getUserType()}</span>
         </Box>
       </Box>
 

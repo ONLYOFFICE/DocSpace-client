@@ -19,19 +19,11 @@ const Wrapper = styled.div`
 `;
 
 const AllSessionsBlock = (props) => {
-  const { t, allSessions, data } = props;
+  const { t, sessionData } = props;
 
   const onLogoutClick = () => {
     console.log("Logout all sessions");
   };
-
-  const foundSession = allSessions.find(
-    (session) => session?.userId === data?.userId,
-  );
-
-  const sessionsData = foundSession
-    ? foundSession.sessions.map((data) => data)
-    : [];
 
   return (
     <>
@@ -47,7 +39,7 @@ const AllSessionsBlock = (props) => {
         />
       </Wrapper>
 
-      <RowWrapper t={t} sessionsData={sessionsData} />
+      <RowWrapper t={t} sessionsData={sessionData} />
     </>
   );
 };

@@ -8,9 +8,13 @@ import { Badge } from "@docspace/shared/components/badge";
 
 const borderProp = { radius: "6px" };
 
-const ToggleLDAP = (props) => {
-  const { theme, isLdapEnabled, toggleLdap, isLDAPAvailable, save } = props;
-
+const ToggleLDAP = ({
+  theme,
+  isLdapEnabled,
+  toggleLdap,
+  isLdapAvailable,
+  save,
+}) => {
   const { t } = useTranslation(["Ldap", "Common"]);
 
   const onChangeToggle = React.useCallback(
@@ -39,7 +43,7 @@ const ToggleLDAP = (props) => {
           className="toggle"
           isChecked={isLdapEnabled}
           onChange={onChangeToggle}
-          isDisabled={!isLDAPAvailable}
+          isDisabled={!isLdapAvailable}
         />
 
         <div className="toggle-caption">
@@ -52,7 +56,7 @@ const ToggleLDAP = (props) => {
             >
               {t("LdapToggle")}
             </Text>
-            {!isLDAPAvailable && (
+            {!isLdapAvailable && (
               <Badge
                 backgroundColor="#EDC409"
                 label={t("Common:Paid")}
@@ -78,15 +82,10 @@ const ToggleLDAP = (props) => {
   );
 };
 
-export default inject(({ settingsStore, ldapStore }) => {
+export default inject(({ settingsStore, ldapStore, currentQuotaStore }) => {
   const { theme } = settingsStore;
   const { enableLdap, isLdapEnabled, toggleLdap, save } = ldapStore;
-
-  console.log({
-    theme,
-    toggleContentBackground:
-      theme.client.settings.integration.sso.toggleContentBackground,
-  });
+  const { isLdapAvailable } = currentQuotaStore;
 
   return {
     theme,
@@ -94,5 +93,6 @@ export default inject(({ settingsStore, ldapStore }) => {
     toggleLdap,
     isLdapEnabled,
     save,
+    isLdapAvailable,
   };
 })(observer(ToggleLDAP));

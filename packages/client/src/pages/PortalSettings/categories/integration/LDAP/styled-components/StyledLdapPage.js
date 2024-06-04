@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
-import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 import { Box } from "@docspace/shared/components/box";
+import { mobile } from "@docspace/shared/utils";
+import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
 const StyledLdapPage = styled(Box)`
   max-width: ${(props) => (props.isSmallWindow ? "100%" : "700px")};
@@ -163,6 +164,12 @@ const StyledLdapPage = styled(Box)`
       padding-left: 2px;
       position: relative;
       bottom: 0px;
+    }
+  }
+
+  @media ${mobile} {
+    .ldap-disclaimer {
+      margin-top: 24px;
     }
   }
 

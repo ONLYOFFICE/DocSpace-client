@@ -1,8 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { useNavigate } from "react-router-dom";
+import { isMobile } from "@docspace/shared/utils/device";
+
 import { DeviceType, LDAPOpeation } from "@docspace/shared/enums";
+import { Box } from "@docspace/shared/components/box";
+import { Text } from "@docspace/shared/components/text";
+
 import HideButton from "./HideButton";
 import Checkboxes from "./Checkboxes";
 import ConnectionSettings from "./ConnectionSettings";
@@ -11,17 +17,16 @@ import ButtonsContainer from "./ButtonsContainer";
 import AuthenticationContainer from "./AuthenticationContainer";
 import AdvancedSettings from "./AdvancedSettings";
 import ProgressContainer from "./ProgressContainer";
-import { Box } from "@docspace/shared/components/box";
-import { Text } from "@docspace/shared/components/text";
-import StyledLdapPage from "../styled-components/StyledLdapPage";
-import CertificateDialog from "./CertificateDialog";
-
-import { useNavigate } from "react-router-dom";
-import { isMobile } from "@docspace/shared/utils/device";
-
 import GroupMembership from "./GroupMembership";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+
+import CertificateDialog from "./CertificateDialog";
+import ToggleLDAP from "./ToggleLDAP";
+
+import StyledLdapPage from "../styled-components/StyledLdapPage";
+
 import { onChangeUrl } from "../utils";
+
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const SettingsContainer = ({
   isSettingsShown,
@@ -60,7 +65,7 @@ const SettingsContainer = ({
       {(isMobileView || isSettingsShown) && (
         <>
           <Box>
-            <Text>{t("LdapDisclaimer")}</Text>
+            <Text className="ldap-disclaimer">{t("LdapDisclaimer")}</Text>
             <Checkboxes />
           </Box>
 
@@ -86,6 +91,7 @@ const SettingsContainer = ({
         theme={theme}
         isSettingPaid={isLdapAvailable}
       >
+        <ToggleLDAP />
         {renderBody()}
       </StyledLdapPage>
     );

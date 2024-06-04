@@ -67,8 +67,6 @@ const LDAP = ({
         </Link>
       </Box>
 
-      <ToggleLDAP isLDAPAvailable={isLdapAvailable} />
-
       {isMobileView ? (
         <LdapMobileView
           isLdapEnabled={isLdapEnabled}
@@ -76,6 +74,8 @@ const LDAP = ({
         />
       ) : (
         <>
+          <ToggleLDAP />
+
           <SettingsContainer />
 
           <StyledSettingsSeparator />

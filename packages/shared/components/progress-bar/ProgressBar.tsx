@@ -67,21 +67,20 @@ const ProgressBar = ({
           <div className="progress-bar_percent" />
         )}
       </StyledProgressBar>
-      {status ||
-        (error && (
-          <Text
-            className={
-              error ? "progress-bar_status-error" : "progress-bar_status-text"
-            }
-            fontSize="12px"
-            fontWeight="400"
-            lineHeight="16px"
-            style={{ marginTop: "4px" }}
-            title={error || status}
-          >
-            {error || status}
-          </Text>
-        ))}
+      {(status || error) && (
+        <Text
+          className={
+            error ? "progress-bar_status-error" : "progress-bar_status-text"
+          }
+          fontSize="12px"
+          fontWeight="400"
+          lineHeight="16px"
+          as="p"
+          title={error || status}
+        >
+          {error || `${percent}% ${status}`}
+        </Text>
+      )}
     </StyledProgressBarContainer>
   );
 };

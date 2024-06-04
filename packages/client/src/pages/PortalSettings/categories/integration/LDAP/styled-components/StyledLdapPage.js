@@ -144,7 +144,8 @@ const StyledLdapPage = styled(Box)`
   }
 
   .ldap_progress-container {
-    margin: 16px 0;
+    margin-top: 16px;
+    height: 32px;
     width: 350px;
   }
 

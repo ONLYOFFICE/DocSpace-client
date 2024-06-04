@@ -52,7 +52,7 @@ const ToggleAutoSync = (props) => {
         borderProp={borderProp}
         displayProp="flex"
         flexDirection="row"
-        marginProp={isStatusEmpty ? "20px 0 0 0" : "40px 0 0 0"}
+        marginProp={"20px 0 0 0"}
         paddingProp="12px"
       >
         <ToggleButton

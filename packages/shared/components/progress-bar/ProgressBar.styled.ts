@@ -65,6 +65,7 @@ const StyledProgressBar = styled.div<{ percent: number }>`
   height: 4px;
   overflow: hidden;
   border-radius: 3px;
+  margin-bottom: 8px;
   background-color: ${(props) => props.theme.progressBar.backgroundColor};
 
   .progress-bar_percent {

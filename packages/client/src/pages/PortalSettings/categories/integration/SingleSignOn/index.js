@@ -29,6 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Box } from "@docspace/shared/components/box";
+import { Text } from "@docspace/shared/components/text";
 
 import HideButton from "./sub-components/HideButton";
 import SPSettings from "./SPSettings";
@@ -70,11 +71,16 @@ const SingleSignOn = (props) => {
       hideMetadata={spMetadata}
       isSettingPaid={isSSOAvailable}
     >
-      <ToggleSSO isSSOAvailable={isSSOAvailable} />
+      <Text className="intro-text settings_unavailable" noSelect>
+        {t("SsoIntro")}
+      </Text>
+
       {isMobileView ? (
         <MobileView isSSOAvailable={isSSOAvailable} />
       ) : (
         <>
+          <ToggleSSO />
+
           <HideButton
             id="sp-settings-hide-button"
             text={t("ServiceProviderSettings")}

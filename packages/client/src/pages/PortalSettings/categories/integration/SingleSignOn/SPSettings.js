@@ -26,18 +26,23 @@
 
 import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { inject, observer } from "mobx-react";
 
 import { Box } from "@docspace/shared/components/box";
 import { size } from "@docspace/shared/utils";
 
+import ToggleSSO from "./sub-components/ToggleSSO";
 import IdpSettings from "./IdpSettings";
 import Certificates from "./Certificates";
 import FieldMapping from "./FieldMapping";
 import SubmitResetButtons from "./SubmitButton";
 
-const SPSettings = () => {
+import { DeviceType } from "@docspace/shared/enums";
+
+const SPSettings = ({ currentDeviceType }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const isMobileView = currentDeviceType === DeviceType.mobile;
 
   useEffect(() => {
     checkWidth();
@@ -53,6 +58,7 @@ const SPSettings = () => {
 
   return (
     <Box className="service-provider-settings">
+      {isMobileView && <ToggleSSO />}
       <IdpSettings />
       <Certificates provider="IdentityProvider" />
       <Certificates provider="ServiceProvider" />
@@ -62,4 +68,10 @@ const SPSettings = () => {
   );
 };
 
-export default SPSettings;
+export default inject(({ settingsStore }) => {
+  const { currentDeviceType } = settingsStore;
+
+  return {
+    currentDeviceType,
+  };
+})(observer(SPSettings));

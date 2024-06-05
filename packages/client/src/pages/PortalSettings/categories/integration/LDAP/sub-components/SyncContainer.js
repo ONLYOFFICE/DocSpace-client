@@ -29,6 +29,7 @@ const SyncContainer = ({
 
   isLdapEnabled,
   isUIDisabled,
+  isLdapAvailable,
 }) => {
   const { t } = useTranslation(["Ldap", "Common", "Settings"]);
   const navigate = useNavigate();
@@ -156,7 +157,8 @@ const SyncContainer = ({
   return <>{renderBody()}</>;
 };
 
-export default inject(({ settingsStore, ldapStore }) => {
+export default inject(({ currentQuotaStore, settingsStore, ldapStore }) => {
+  const { isLdapAvailable } = currentQuotaStore;
   const { currentDeviceType, theme } = settingsStore;
   const {
     syncLdap,
@@ -184,5 +186,6 @@ export default inject(({ settingsStore, ldapStore }) => {
 
     isLdapEnabled,
     isUIDisabled,
+    isLdapAvailable,
   };
 })(observer(SyncContainer));

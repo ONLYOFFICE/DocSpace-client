@@ -251,7 +251,7 @@ const SetRoomParams = ({
           Preview={
             <PreviewTile
               t={t}
-              title={roomParams.title || t("Files:NewRoom")}
+              title={roomParams.title || t("Common:NewRoom")}
               previewIcon={previewIcon}
               tags={roomParams.tags.map((tag) => tag.name)}
               isDisabled={isDisabled}
@@ -280,7 +280,7 @@ export default inject(({ settingsStore, dialogsStore, currentQuotaStore }) => {
   };
 })(
   observer(
-    withTranslation(["CreateEditRoomDialog", "Translations"])(
+    withTranslation(["CreateEditRoomDialog", "Translations", "Common"])(
       withLoader(SetRoomParams)(<SetRoomParamsLoader />),
     ),
   ),

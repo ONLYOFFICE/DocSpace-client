@@ -451,5 +451,6 @@
   "CollaborationRooms": "Yhteistyö",
   "ViewOnlyRooms": "Vain katselu",
   "CustomRooms": "Mukautettu",
-  "FormRoom": "Lomakehuone"
+  "FormRoom": "Lomakehuone",
+  "NewRoom": "Uusi huone"
 }

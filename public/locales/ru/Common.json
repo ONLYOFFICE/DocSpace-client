@@ -451,5 +451,6 @@
   "CollaborationRooms": "Совместное редактирование",
   "ViewOnlyRooms": "Просмотр",
   "CustomRooms": "Пользовательская",
-  "FormRoom": "Комната форм"
+  "FormRoom": "Комната форм",
+  "NewRoom": "Новая комната"
 }

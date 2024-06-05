@@ -450,5 +450,6 @@
   "CollaborationRooms": "Saradnja",
   "ViewOnlyRooms": "Samo-za-pregled",
   "CustomRooms": "Prilagođeno",
-  "FormRoom": "Obrazac soba"
+  "FormRoom": "Obrazac soba",
+  "NewRoom": "Nova soba"
 }

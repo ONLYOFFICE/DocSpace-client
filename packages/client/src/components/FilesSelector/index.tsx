@@ -386,9 +386,7 @@ const FilesSelectorWrapper = ({
         isMove || isCopy || isRestore ? "select-file-modal-cancel" : ""
       }
       getFilesArchiveError={getFilesArchiveError}
-      withCreateFolder={
-        (isMove || isCopy || isRestore || isRestoreAll) ?? false
-      }
+      withCreate={(isMove || isCopy || isRestore || isRestoreAll) ?? false}
     />
   );
 };

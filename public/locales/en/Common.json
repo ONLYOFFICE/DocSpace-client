@@ -465,5 +465,6 @@
   "CollaborationRooms": "Collaboration",
   "ViewOnlyRooms": "View-only",
   "CustomRooms": "Custom",
-  "FormRoom": "Form room"
+  "FormRoom": "Form room",
+  "NewRoom": "New room"
 }

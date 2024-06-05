@@ -451,5 +451,6 @@
   "CollaborationRooms": "协作",
   "ViewOnlyRooms": "仅查看",
   "CustomRooms": "自定义",
-  "FormRoom": "表单房间"
+  "FormRoom": "表单房间",
+  "NewRoom": "新建房间"
 }

@@ -451,5 +451,6 @@
   "CollaborationRooms": "Zusammenarbeit",
   "ViewOnlyRooms": "Schreibgeschützt",
   "CustomRooms": "Benutzerdefiniert",
-  "FormRoom": "Formularraum"
+  "FormRoom": "Formularraum",
+  "NewRoom": "Neuer Raum"
 }

@@ -451,5 +451,6 @@
   "CollaborationRooms": "コラボレーション",
   "ViewOnlyRooms": "読み取り専用",
   "CustomRooms": "カスタム",
-  "FormRoom": "フォームルーム"
+  "FormRoom": "フォームルーム",
+  "NewRoom": "新しいルーム"
 }

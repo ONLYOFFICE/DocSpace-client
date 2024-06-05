@@ -451,5 +451,6 @@
   "CollaborationRooms": "공동 작업",
   "ViewOnlyRooms": "보기 전용",
   "CustomRooms": "사용자 지정",
-  "FormRoom": "양식 방"
+  "FormRoom": "양식 방",
+  "NewRoom": "새로운 방"
 }

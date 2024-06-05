@@ -451,5 +451,6 @@
   "CollaborationRooms": "Collaboration",
   "ViewOnlyRooms": "Lecture seule",
   "CustomRooms": "Pesonnalisée",
-  "FormRoom": "Salle de formulaires"
+  "FormRoom": "Salle de formulaires",
+  "NewRoom": "Nouvelle salle"
 }

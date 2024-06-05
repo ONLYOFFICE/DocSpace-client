@@ -89,7 +89,7 @@ const AddEmailsStep = (props) => {
 
   useEffect(() => {
     setQuota(parseQuota(quotaCharacteristics[1]));
-  });
+  }, []);
 
   const totalUsedUsers =
     quota.used +

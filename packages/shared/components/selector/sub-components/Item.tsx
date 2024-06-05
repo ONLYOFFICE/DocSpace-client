@@ -93,6 +93,8 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       onCancelInput,
       avatar,
       icon,
+      roomType,
+      placeholder,
       role,
       isSelected,
       isDisabled,
@@ -100,6 +102,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       email,
       isGroup,
       disabledText,
+      dropDownItems,
     } = item;
 
     if (isInputItem) {
@@ -110,8 +113,10 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           onCancelInput={onCancelInput}
           style={style}
           color={color}
+          roomType={roomType}
           icon={icon}
           setInputItemVisible={setInputItemVisible}
+          placeholder={placeholder}
         />
       );
     }
@@ -121,7 +126,12 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       (items.length > 2 || (items.length === 2 && !items[1].isInputItem))
     ) {
       return (
-        <NewItem label={label} onCreateClick={onCreateClick} style={style} />
+        <NewItem
+          label={label}
+          onCreateClick={onCreateClick}
+          dropDownItems={dropDownItems}
+          style={style}
+        />
       );
     }
     if (isCreateNewItem) {

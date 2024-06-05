@@ -88,7 +88,7 @@ const RoomType = ({
         className={arrowClassName}
         iconName={ArrowReactSvgUrl}
         size={16}
-        onClick={() => {}}
+        onClick={onClick}
       />
     </>
   );

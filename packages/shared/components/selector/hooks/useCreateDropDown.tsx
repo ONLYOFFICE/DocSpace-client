@@ -26,62 +26,30 @@
 
 import React from "react";
 
-import { Text } from "../../text";
-import { SelectorAddButton } from "../../selector-add-button";
+import { DROPDOWN_CLASS_NAME } from "../sub-components/NewItemDropDown";
 
-import { StyledItem } from "../Selector.styled";
-import NewItemDropDown from "./NewItemDropDown";
-import useCreateDropDown from "../hooks/useCreateDropDown";
+const useCreateDropDown = () => {
+  const [isOpenDropDown, setIsOpenDropDown] = React.useState(false);
 
-const NewItem = ({
-  label,
-  style,
-  dropDownItems,
-  onCreateClick,
-}: {
-  label: string;
-  style: React.CSSProperties;
-  dropDownItems?: React.ReactElement[];
-  onCreateClick?: VoidFunction;
-}) => {
-  const { isOpenDropDown, onCloseDropDown, setIsOpenDropDown } =
-    useCreateDropDown();
+  const onCloseDropDown = React.useCallback((e?: MouseEvent) => {
+    if (e) {
+      const target = e.target as HTMLElement;
 
-  const onCreateClickAction = () => {
-    if (dropDownItems) return setIsOpenDropDown(true);
+      if (
+        target &&
+        target.className &&
+        typeof target.className === "string" &&
+        target.className.includes(DROPDOWN_CLASS_NAME)
+      )
+        return;
+    }
 
-    onCreateClick?.();
-  };
+    setTimeout(() => {
+      setIsOpenDropDown(false);
+    }, 0);
+  }, []);
 
-  return (
-    <StyledItem
-      key="create-new-item"
-      style={style}
-      isSelected={false}
-      isMultiSelect={false}
-      noHover
-    >
-      <SelectorAddButton onClick={onCreateClickAction} isAction />
-      <Text
-        className="label label-disabled clicked-label"
-        fontWeight={600}
-        fontSize="14px"
-        noSelect
-        truncate
-        dir="auto"
-        onClick={onCreateClickAction}
-        title={label}
-      >
-        {label}
-      </Text>
-      {isOpenDropDown && dropDownItems && dropDownItems.length > 0 && (
-        <NewItemDropDown
-          dropDownItems={dropDownItems}
-          onCloseDropDown={onCloseDropDown}
-        />
-      )}
-    </StyledItem>
-  );
+  return { isOpenDropDown, onCloseDropDown, setIsOpenDropDown };
 };
 
-export default NewItem;
+export default useCreateDropDown;

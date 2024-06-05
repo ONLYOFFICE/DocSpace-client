@@ -417,10 +417,12 @@ type TSelectorItemEmpty = {
   isCreateNewItem?: undefined;
   onCreateClick?: undefined;
   onBackClick?: undefined;
+  dropDownItems?: undefined;
   isInputItem?: undefined;
   defaultInputValue?: undefined;
   onAcceptInput?: undefined;
   onCancelInput?: undefined;
+  placeholder?: undefined;
 };
 
 export type TSelectorItemUser = MergeTypes<
@@ -494,7 +496,10 @@ export type TSelectorItemNew = MergeTypes<
   TSelectorItemEmpty,
   {
     isCreateNewItem: boolean;
-    onCreateClick: VoidFunction;
+
+    dropDownItems?: React.ReactElement[];
+    onCreateClick?: VoidFunction;
+
     onBackClick: VoidFunction;
   }
 >;
@@ -506,6 +511,8 @@ export type TSelectorItemInput = MergeTypes<
     defaultInputValue: string;
     icon?: string;
     color?: string;
+    roomType?: RoomsType;
+    placeholder?: string;
 
     onAcceptInput: (value: string) => void;
     onCancelInput: VoidFunction;

@@ -184,12 +184,16 @@ const CreateEvent = ({
         searchParams.append("formId", gallerySelected.id);
       }
 
+      searchParams.append("hash", new Date().getTime());
+
       const url = combineUrl(
         window.location.origin,
         window.DocSpaceConfig?.proxy?.url,
         config.homepage,
         `/doceditor/create?${searchParams.toString()}`,
       );
+
+      console.log(url);
 
       window.open(url, openOnNewPage ? "_blank" : "_self");
 

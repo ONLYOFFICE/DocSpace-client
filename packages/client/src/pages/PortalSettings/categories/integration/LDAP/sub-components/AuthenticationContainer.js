@@ -22,6 +22,7 @@ const AuthenticationContainer = ({
 
   errors,
 
+  isLdapEnabled,
   isUIDisabled,
 }) => {
   const { t } = useTranslation(["Ldap", "Common"]);
@@ -46,7 +47,7 @@ const AuthenticationContainer = ({
           className="toggle"
           isChecked={authentication}
           onChange={setIsAuthentication}
-          isDisabled={isUIDisabled}
+          isDisabled={!isLdapEnabled || isUIDisabled}
         />
         <HelpButton tooltipContent={t("LdapAuthenticationTooltip")} />
       </div>
@@ -66,7 +67,7 @@ const AuthenticationContainer = ({
             hasError={errors.login}
             onChange={onChangeValue}
             value={login}
-            isDisabled={isUIDisabled || !authentication}
+            isDisabled={!isLdapEnabled || isUIDisabled || !authentication}
             scale
             tabIndex={18}
           />
@@ -88,7 +89,7 @@ const AuthenticationContainer = ({
             hasError={errors.password}
             onChange={onChangeValue}
             value={password}
-            isDisabled={isUIDisabled || !authentication}
+            isDisabled={!isLdapEnabled || isUIDisabled || !authentication}
             scale
             tabIndex={19}
           />
@@ -108,6 +109,8 @@ export default inject(({ ldapStore }) => {
     login,
     password,
     errors,
+
+    isLdapEnabled,
     isUIDisabled,
   } = ldapStore;
 
@@ -121,6 +124,8 @@ export default inject(({ ldapStore }) => {
     authentication,
 
     errors,
+
+    isLdapEnabled,
     isUIDisabled,
   };
 })(observer(AuthenticationContainer));

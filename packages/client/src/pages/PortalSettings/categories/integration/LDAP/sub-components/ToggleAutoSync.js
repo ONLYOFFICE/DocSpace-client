@@ -2,31 +2,23 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { Box } from "@docspace/shared/components/box";
-//import FormStore from "@docspace/studio/src/store/SsoFormStore";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { toastr } from "@docspace/shared/components/toast";
-//import DisableSsoConfirmationModal from "./DisableSsoConfirmationModal";
-//import SSOLoader from "../../sub-components/ssoLoader";
+
 const borderProp = { radius: "6px" };
 
-const ToggleAutoSync = (props) => {
-  const {
-    theme,
-    toggleCron,
-    isLDAPAvailable,
-    isLdapEnabled,
-    isCronEnabled,
-    isStatusEmpty,
-    saveCronLdap,
-  } = props;
-
+const ToggleAutoSync = ({
+  theme,
+  toggleCron,
+  isLdapAvailable,
+  isLdapEnabled,
+  isCronEnabled,
+  saveCronLdap,
+  isUIDisabled,
+}) => {
   const { t } = useTranslation(["Ldap", "Common"]);
-
-  // if (!tReady) {
-  //   return <SSOLoader isToggleSSO={true} />;
-  // }
 
   const onChangeToggle = React.useCallback(
     (e) => {
@@ -42,6 +34,8 @@ const ToggleAutoSync = (props) => {
     },
     [toggleCron],
   );
+
+  console.log("ToggleAutoSync", { isLdapAvailable });
 
   return (
     <>
@@ -59,11 +53,7 @@ const ToggleAutoSync = (props) => {
           className="toggle"
           isChecked={isCronEnabled}
           onChange={onChangeToggle}
-          // isLdapEnabled && enableLdap
-          //   ? openConfirmationDisableModal
-          //   : ldapToggle
-
-          isDisabled={!isLDAPAvailable || !isLdapEnabled}
+          isDisabled={!isLdapEnabled || isUIDisabled}
         />
 
         <div className="toggle-caption">
@@ -76,7 +66,7 @@ const ToggleAutoSync = (props) => {
             >
               {t("LdapAutoSyncToggle")}
             </Text>
-            {!isLDAPAvailable && (
+            {!isLdapAvailable && (
               <Badge
                 backgroundColor="#EDC409"
                 label={t("Common:Paid")}
@@ -96,13 +86,11 @@ const ToggleAutoSync = (props) => {
           </Text>
         </div>
       </Box>
-
-      {/* {confirmationDisableModal && <DisableSsoConfirmationModal />} */}
     </>
   );
 };
 
-export default inject(({ settingsStore, ldapStore }) => {
+export default inject(({ currentQuotaStore, settingsStore, ldapStore }) => {
   const { theme } = settingsStore;
   const {
     enableLdap,
@@ -111,7 +99,10 @@ export default inject(({ settingsStore, ldapStore }) => {
     isCronEnabled,
     isStatusEmpty,
     saveCronLdap,
+    isUIDisabled,
   } = ldapStore;
+
+  const { isLdapAvailable } = currentQuotaStore;
 
   console.log({
     theme,
@@ -123,9 +114,11 @@ export default inject(({ settingsStore, ldapStore }) => {
     theme,
     enableLdap,
     toggleCron,
+    isLdapAvailable,
     isLdapEnabled,
     isCronEnabled,
     isStatusEmpty,
     saveCronLdap,
+    isUIDisabled,
   };
 })(observer(ToggleAutoSync));

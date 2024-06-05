@@ -9,6 +9,8 @@ const Checkboxes = ({
   isSslEnabled,
   setIsTlsEnabled,
   setIsSslEnabled,
+
+  isLdapEnabled,
   isUIDisabled,
 }) => {
   const { t } = useTranslation("Ldap");
@@ -31,7 +33,7 @@ const Checkboxes = ({
         <Checkbox
           tabIndex={1}
           className="ldap_checkbox-starttls"
-          isDisabled={isUIDisabled}
+          isDisabled={!isLdapEnabled || isUIDisabled}
           label={t("LdapEnableStartTls")}
           isChecked={isTlsEnabled}
           onChange={onChangeTls}
@@ -42,7 +44,7 @@ const Checkboxes = ({
         <Checkbox
           tabIndex={2}
           className="ldap_checkbox-ssl"
-          isDisabled={isUIDisabled}
+          isDisabled={!isLdapEnabled || isUIDisabled}
           label={t("LdapEnableSSL")}
           isChecked={isSslEnabled}
           onChange={onChangeSsl}
@@ -59,6 +61,7 @@ export default inject(({ ldapStore }) => {
     isSslEnabled,
     setIsTlsEnabled,
     setIsSslEnabled,
+    isLdapEnabled,
     isUIDisabled,
   } = ldapStore;
   return {
@@ -66,6 +69,7 @@ export default inject(({ ldapStore }) => {
     isSslEnabled,
     setIsTlsEnabled,
     setIsSslEnabled,
+    isLdapEnabled,
     isUIDisabled,
   };
 })(observer(Checkboxes));

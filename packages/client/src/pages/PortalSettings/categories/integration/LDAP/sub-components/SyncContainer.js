@@ -18,8 +18,6 @@ import { useNavigate } from "react-router-dom";
 import { isMobile, isDesktop } from "@docspace/shared/utils/device";
 
 const SyncContainer = ({
-  isLdapAvailable,
-  isLdapEnabled,
   isMobileView,
   syncLdap,
   saveCronLdap,
@@ -27,6 +25,9 @@ const SyncContainer = ({
   cron,
   nextSyncDate,
   theme,
+
+  isLdapEnabled,
+  isUIDisabled,
 }) => {
   const { t } = useTranslation(["Ldap", "Common", "Settings"]);
   const navigate = useNavigate();
@@ -90,12 +91,12 @@ const SyncContainer = ({
         label={t("LdapSyncButton")}
         //minwidth={displaySettings && "auto"}
         //isLoading={isSaving}
-        isDisabled={!isLdapAvailable || !isLdapEnabled}
+        isDisabled={!isLdapEnabled || isUIDisabled}
       />
 
       <ProgressContainer operation={LDAPOpeation.Sync} />
 
-      <ToggleAutoSync isLDAPAvailable={isLdapAvailable} />
+      <ToggleAutoSync />
 
       {cron && (
         <>
@@ -110,7 +111,11 @@ const SyncContainer = ({
             {t("LdapSyncCronTitle")}
           </Text>
           <div className="ldap_cron-container">
-            <Cron value={cron} setValue={onChangeCron} />
+            <Cron
+              value={cron}
+              setValue={onChangeCron}
+              isDisabled={!isLdapEnabled || isUIDisabled}
+            />
           </div>
           <Text
             fontSize="12px"
@@ -128,7 +133,7 @@ const SyncContainer = ({
             primary
             onClick={onSaveClick}
             label={t("Common:SaveButton")}
-            isDisabled={!isLdapAvailable || !isLdapEnabled}
+            isDisabled={!isLdapEnabled || isUIDisabled}
           />
         </>
       )}
@@ -150,23 +155,22 @@ const SyncContainer = ({
   return <>{renderBody()}</>;
 };
 
-export default inject(({ currentQuotaStore, settingsStore, ldapStore }) => {
+export default inject(({ settingsStore, ldapStore }) => {
   const { currentDeviceType, theme } = settingsStore;
-  const { isLdapAvailable } = currentQuotaStore;
   const {
-    isLdapEnabled,
     syncLdap,
     saveCronLdap,
     onChangeCron,
     cron,
     nextSyncDate,
+
+    isLdapEnabled,
+    isUIDisabled,
   } = ldapStore;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
   return {
-    isLdapAvailable,
-    isLdapEnabled,
     isMobileView,
     syncLdap,
     saveCronLdap,
@@ -174,5 +178,8 @@ export default inject(({ currentQuotaStore, settingsStore, ldapStore }) => {
     cron,
     nextSyncDate,
     theme,
+
+    isLdapEnabled,
+    isUIDisabled,
   };
 })(observer(SyncContainer));

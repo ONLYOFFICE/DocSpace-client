@@ -32,6 +32,7 @@ const ConnectionSettings = (props) => {
 
     errors,
 
+    isLdapEnabled,
     isUIDisabled,
   } = props;
   const { t } = useTranslation(["Ldap", "Common"]);
@@ -77,7 +78,7 @@ const ConnectionSettings = (props) => {
             onChange={onChangeValue}
             value={server}
             scale
-            isDisabled={isUIDisabled}
+            isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={3}
           />
         </FieldContainer>
@@ -98,7 +99,7 @@ const ConnectionSettings = (props) => {
             onChange={onChangeValue}
             value={userDN}
             scale
-            isDisabled={isUIDisabled}
+            isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={5}
           />
         </FieldContainer>
@@ -119,7 +120,7 @@ const ConnectionSettings = (props) => {
             onChange={onChangeValue}
             value={loginAttribute}
             scale
-            isDisabled={isUIDisabled}
+            isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={7}
           />
         </FieldContainer>
@@ -143,7 +144,7 @@ const ConnectionSettings = (props) => {
             onChange={onChangeValue}
             value={portNumber}
             scale
-            isDisabled={isUIDisabled}
+            isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={4}
           />
         </FieldContainer>
@@ -165,7 +166,7 @@ const ConnectionSettings = (props) => {
             onChange={onChangeValue}
             value={userFilter}
             heightTextArea={100}
-            isDisabled={isUIDisabled}
+            isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={6}
           />
         </FieldContainer>
@@ -184,6 +185,8 @@ export default inject(({ ldapStore }) => {
 
     requiredSettings,
     errors,
+
+    isLdapEnabled,
     isUIDisabled,
   } = ldapStore;
 
@@ -203,6 +206,8 @@ export default inject(({ ldapStore }) => {
     userFilter,
 
     errors,
+
+    isLdapEnabled,
     isUIDisabled,
   };
 })(observer(ConnectionSettings));

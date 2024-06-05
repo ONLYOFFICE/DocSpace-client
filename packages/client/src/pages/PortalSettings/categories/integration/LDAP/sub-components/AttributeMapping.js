@@ -35,6 +35,8 @@ const AttributeMapping = (props) => {
     setUserType,
 
     errors,
+
+    isLdapEnabled,
     isUIDisabled,
   } = props;
 
@@ -108,7 +110,7 @@ const AttributeMapping = (props) => {
               onChange={onChangeValue}
               value={firstName}
               scale
-              isDisabled={isUIDisabled}
+              isDisabled={!isLdapEnabled || isUIDisabled}
               tabIndex={7}
             />
           </FieldContainer>
@@ -128,7 +130,7 @@ const AttributeMapping = (props) => {
               onChange={onChangeValue}
               value={mail}
               scale
-              isDisabled={isUIDisabled}
+              isDisabled={!isLdapEnabled || isUIDisabled}
               tabIndex={9}
             />
           </FieldContainer>
@@ -146,7 +148,7 @@ const AttributeMapping = (props) => {
               onChange={onChangeValue}
               value={userQuotaLimit}
               scale
-              isDisabled={isUIDisabled}
+              isDisabled={!isLdapEnabled || isUIDisabled}
               tabIndex={11}
             />
           </FieldContainer>
@@ -167,7 +169,7 @@ const AttributeMapping = (props) => {
               onChange={onChangeValue}
               value={secondName}
               scale
-              isDisabled={isUIDisabled}
+              isDisabled={!isLdapEnabled || isUIDisabled}
               tabIndex={8}
             />
           </FieldContainer>
@@ -185,7 +187,7 @@ const AttributeMapping = (props) => {
               onChange={onChangeValue}
               value={avatarAttribute}
               scale
-              isDisabled={isUIDisabled}
+              isDisabled={!isLdapEnabled || isUIDisabled}
               tabIndex={10}
             />
           </FieldContainer>
@@ -207,7 +209,7 @@ const AttributeMapping = (props) => {
               displaySelectedOption
               directionY="bottom"
               withoutPadding
-              isDisabled={isUIDisabled}
+              isDisabled={!isLdapEnabled || isUIDisabled}
               tabIndex={12}
             />
           </FieldContainer>
@@ -228,6 +230,7 @@ export default inject(({ ldapStore }) => {
 
     requiredSettings,
     errors,
+    isLdapEnabled,
     isUIDisabled,
   } = ldapStore;
 
@@ -256,6 +259,7 @@ export default inject(({ ldapStore }) => {
     userType,
 
     errors,
+    isLdapEnabled,
     isUIDisabled,
   };
 })(observer(AttributeMapping));

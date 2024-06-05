@@ -31,6 +31,8 @@ const GroupMembership = (props) => {
     setGroupFilter,
     setGroupAttribute,
     setGroupNameAttribute,
+
+    isLdapEnabled,
     isUIDisabled,
   } = props;
   const { t } = useTranslation(["Ldap", "Common"]);
@@ -65,7 +67,7 @@ const GroupMembership = (props) => {
           isChecked={groupMembership}
           onChange={setIsGroupMembership}
           label={t("LdapGroupMembership")}
-          isDisabled={isUIDisabled}
+          isDisabled={!isLdapEnabled || isUIDisabled}
         />
         <HelpButton tooltipContent={t("LdapGroupMembershipTooltip")} />
       </div>
@@ -84,7 +86,7 @@ const GroupMembership = (props) => {
             onChange={onChange}
             name={GROUP_DN}
             value={groupDN}
-            isDisabled={isUIDisabled || !groupMembership}
+            isDisabled={!isLdapEnabled || isUIDisabled || !groupMembership}
             scale
             tabIndex={13}
           />
@@ -103,7 +105,7 @@ const GroupMembership = (props) => {
             onChange={onChange}
             name={USER_ATTRIBUTE}
             value={userAttribute}
-            isDisabled={isUIDisabled || !groupMembership}
+            isDisabled={!isLdapEnabled || isUIDisabled || !groupMembership}
             scale
             tabIndex={14}
           />
@@ -123,7 +125,7 @@ const GroupMembership = (props) => {
             value={groupFilter}
             onChange={onChange}
             name={GROUP_FILTER}
-            isDisabled={isUIDisabled || !groupMembership}
+            isDisabled={!isLdapEnabled || isUIDisabled || !groupMembership}
             heightTextArea={100}
             tabIndex={15}
           />
@@ -141,7 +143,7 @@ const GroupMembership = (props) => {
             className="field-input"
             onChange={onChange}
             name={GROUP_NAME_ATTRIBUTE}
-            isDisabled={isUIDisabled || !groupMembership}
+            isDisabled={!isLdapEnabled || isUIDisabled || !groupMembership}
             value={groupNameAttribute}
             scale
             tabIndex={16}
@@ -159,7 +161,7 @@ const GroupMembership = (props) => {
             className="field-input"
             onChange={onChange}
             name={GROUP_ATTRIBUTE}
-            isDisabled={isUIDisabled || !groupMembership}
+            isDisabled={!isLdapEnabled || isUIDisabled || !groupMembership}
             value={groupAttribute}
             scale
             tabIndex={17}
@@ -184,6 +186,8 @@ export default inject(({ ldapStore }) => {
     setGroupFilter,
     setGroupAttribute,
     setGroupNameAttribute,
+
+    isLdapEnabled,
     isUIDisabled,
   } = ldapStore;
 
@@ -200,6 +204,8 @@ export default inject(({ ldapStore }) => {
     setGroupFilter,
     setGroupAttribute,
     setGroupNameAttribute,
+
+    isLdapEnabled,
     isUIDisabled,
   };
 })(observer(GroupMembership));

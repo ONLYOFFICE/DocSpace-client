@@ -13,6 +13,7 @@ const ToggleLDAP = ({
   isLdapEnabled,
   toggleLdap,
   isLdapAvailable,
+  isUIDisabled,
   save,
 }) => {
   const { t } = useTranslation(["Ldap", "Common"]);
@@ -43,7 +44,7 @@ const ToggleLDAP = ({
           className="toggle"
           isChecked={isLdapEnabled}
           onChange={onChangeToggle}
-          isDisabled={!isLdapAvailable}
+          isDisabled={isUIDisabled}
         />
 
         <div className="toggle-caption">
@@ -84,7 +85,8 @@ const ToggleLDAP = ({
 
 export default inject(({ settingsStore, ldapStore, currentQuotaStore }) => {
   const { theme } = settingsStore;
-  const { enableLdap, isLdapEnabled, toggleLdap, save } = ldapStore;
+  const { enableLdap, isLdapEnabled, toggleLdap, save, isUIDisabled } =
+    ldapStore;
   const { isLdapAvailable } = currentQuotaStore;
 
   return {
@@ -94,5 +96,6 @@ export default inject(({ settingsStore, ldapStore, currentQuotaStore }) => {
     isLdapEnabled,
     save,
     isLdapAvailable,
+    isUIDisabled,
   };
 })(observer(ToggleLDAP));

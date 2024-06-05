@@ -614,11 +614,7 @@ class LdapFormStore {
   }
 
   get isUIDisabled() {
-    return (
-      !this.isLdapEnabled ||
-      this.inProgress ||
-      !this.currentQuotaStore.isLdapAvailable
-    );
+    return this.inProgress || !this.currentQuotaStore.isLdapAvailable;
   }
 }
 

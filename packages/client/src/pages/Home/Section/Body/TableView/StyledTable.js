@@ -148,7 +148,7 @@ const StyledTableRow = styled(TableRow)`
       !props.isThirdPartyFolder &&
       (props.checked || props.isActive) &&
       props.canDrag &&
-      `url(${CursorPalmSvgUrl}), auto !important`};
+      `url(${CursorPalmSvgUrl}) 8 0, auto !important`};
 
     ${(props) =>
       props.inProgress &&

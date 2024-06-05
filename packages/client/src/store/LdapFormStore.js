@@ -8,7 +8,7 @@ import {
   getCronLdap,
 } from "@docspace/shared/api/settings";
 import { getNextSynchronization } from "@docspace/shared/components/cron";
-import { EmployeeType, LDAPOpeation } from "@docspace/shared/enums";
+import { EmployeeType, LDAPOperation } from "@docspace/shared/enums";
 import { makeAutoObservable } from "mobx";
 import isEqual from "lodash/isEqual";
 import delay from "lodash/delay";
@@ -304,7 +304,7 @@ class LdapFormStore {
       error: "",
       source: "",
       status: "",
-      operationType: LDAPOpeation.Sync,
+      operationType: LDAPOperation.Sync,
     };
 
     const respose = await syncLdap();
@@ -336,7 +336,7 @@ class LdapFormStore {
       error: "",
       source: "",
       status: "",
-      operationType: LDAPOpeation.SaveAndSync,
+      operationType: LDAPOperation.SaveAndSync,
     };
 
     let isErrorExist = false;

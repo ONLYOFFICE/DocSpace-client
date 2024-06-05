@@ -10,7 +10,7 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import ProgressContainer from "./ProgressContainer";
 import ToggleAutoSync from "./ToggleAutoSync";
-import { DeviceType, LDAPOpeation } from "@docspace/shared/enums";
+import { DeviceType, LDAPOperation } from "@docspace/shared/enums";
 import StyledLdapPage from "../styled-components/StyledLdapPage";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { onChangeUrl } from "../utils";
@@ -93,7 +93,7 @@ const SyncContainer = ({
         isDisabled={!isLdapAvailable || !isLdapEnabled}
       />
 
-      <ProgressContainer operation={LDAPOpeation.Sync} />
+      <ProgressContainer operation={LDAPOperation.Sync} />
 
       <ToggleAutoSync isLDAPAvailable={isLdapAvailable} />
 

@@ -1,8 +1,10 @@
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useCallback } from "react";
 import { Base } from "@docspace/shared/themes";
 import styled, { css } from "styled-components";
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
+import moment from "moment-timezone";
 
 import { Avatar } from "@docspace/shared/components/avatar";
 import { TableRow } from "@docspace/shared/components/table";
@@ -114,7 +116,6 @@ const StyledTableRow = styled(TableRow)`
   }
 
   .session-info {
-    text-transform: capitalize;
     font-weight: 600;
     color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
   }
@@ -129,9 +130,11 @@ const StyledTableRow = styled(TableRow)`
   }
 
   .online {
-    text-transform: capitalize;
     font-weight: 600;
     color: ${(props) => props.theme.profile.activeSessions.textOnlineColor};
+    ::first-letter {
+      text-transform: uppercase;
+    }
   }
 `;
 
@@ -141,31 +144,63 @@ const SessionsTableRow = (props) => {
   const {
     t,
     item,
+    locale,
     checkedProps,
     onContentRowSelect,
     onContentRowClick,
     isActive,
     hideColumns,
     displayName,
-    // status,
-    // browser,
-    // platform,
-    // country,
-    // city,
-    // ip,
+    sessionStatus,
+    connections,
+    sessions,
+    isOwner,
+    isAdmin,
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
     setUserModalData,
     setSessionModalData,
     setUserSessionPanelVisible,
     setDisplayName,
+    setSessionStatus,
   } = props;
 
-  const role = item.isOwner ? "owner" : item.isAdmin ? "admin" : null;
+  const [fromDateAgo, setFromDateAgo] = useState("");
+  const { platform, browser, ip, city, country, status, date } = sessions;
+  const role = isOwner ? "owner" : isAdmin ? "admin" : null;
+  const isChecked = checkedProps?.checked;
+  const isOnline = sessionStatus === "online";
+  const isOffline = status === "offline";
+
+  useEffect(() => {
+    const updateStatus = () => {
+      const showOnline = isOnline && sessionStatus;
+      const showOffline = isOffline ? convertDate(date, locale) : null;
+      setFromDateAgo(isOnline ? showOnline : showOffline);
+    };
+
+    updateStatus();
+    const intervalId = setInterval(updateStatus, 60000);
+
+    return () => clearInterval(intervalId);
+  }, [date, sessionStatus, status, locale]);
+
+  const convertDate = (dateString, locale) => {
+    const parsedDate = moment(new Date(dateString).toISOString());
+    const now = moment();
+    const daysDiff = now.diff(parsedDate, "days");
+    moment.locale(locale);
+
+    if (daysDiff < 1) return parsedDate.fromNow();
+    if (daysDiff === 1) return t("Common:Yesterday");
+    if (daysDiff < 7) return parsedDate.fromNow();
+    return parsedDate.format(locale);
+  };
 
   const onClickSessions = () => {
+    setSessionStatus(fromDateAgo);
     setUserModalData(item);
-    setSessionModalData(item.connections);
+    setSessionModalData(connections);
     setUserSessionPanelVisible(true);
   };
 
@@ -202,9 +237,6 @@ const SessionsTableRow = (props) => {
       onClick: onClickDisable,
     },
   ];
-
-  const isChecked = checkedProps.checked;
-  const isOnline = status.includes("online");
 
   const onChange = (e) => {
     onContentRowSelect && onContentRowSelect(e.target.checked, item);
@@ -272,30 +304,30 @@ const SessionsTableRow = (props) => {
 
         <TableCell>
           <Text className={isOnline ? "online" : "session-info"} truncate>
-            {/* {status} */}
+            {fromDateAgo}
           </Text>
         </TableCell>
 
         <TableCell>
           <Text className="session-info" truncate>
-            {/* {platform},&nbsp; */}
+            {platform},&nbsp;
           </Text>
           <Text className="session-info" truncate>
-            {/* {browser} */}
+            {browser?.split(".")[0] ?? ""}
           </Text>
         </TableCell>
 
         <TableCell>
           <Text className="session-info" truncate>
-            {/* {(country || city) && (
+            {(country || city) && (
               <>
                 {country}
                 {country && city && ", "}
                 {city}
                 <span className="divider"></span>
               </>
-            )} */}
-            {/* {ip} */}
+            )}
+            {ip}
           </Text>
         </TableCell>
       </StyledTableRow>
@@ -303,22 +335,29 @@ const SessionsTableRow = (props) => {
   );
 };
 
-export default inject(({ setup, dialogsStore }) => {
+export default inject(({ setup, dialogsStore, settingsStore, userStore }) => {
   const { setUserSessionPanelVisible } = dialogsStore;
+  const { culture } = settingsStore;
+  const { user } = userStore;
+  const locale = (user && user.cultureName) || culture || "en";
+
   const {
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
     setUserModalData,
     setSessionModalData,
     setDisplayName,
+    setSessionStatus,
   } = setup;
 
   return {
+    locale,
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
     setUserModalData,
     setSessionModalData,
     setUserSessionPanelVisible,
     setDisplayName,
+    setSessionStatus,
   };
 })(withContent(observer(SessionsTableRow)));

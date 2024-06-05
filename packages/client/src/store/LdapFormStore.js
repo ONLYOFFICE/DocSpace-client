@@ -58,6 +58,7 @@ class LdapFormStore {
   groupNameAttribute = "cn";
 
   cron = null;
+  serverCron = null;
 
   inProgress = false;
   progressBarIntervalId = null;
@@ -173,6 +174,8 @@ class LdapFormStore {
     const cronWithoutSeconds = cron ? cron.replace("0 ", "") : null;
 
     this.setCron(cronWithoutSeconds);
+
+    this.serverCron = cronWithoutSeconds;
   };
 
   mapDefaultSettings = (data) => {
@@ -322,11 +325,18 @@ class LdapFormStore {
   };
 
   saveCronLdap = async () => {
-    const cronWithSeconds = this.isCronEnabled ? `0 ${this.cron}` : null;
+    this.inProgress = true;
+    try {
+      const cronWithSeconds = this.isCronEnabled ? `0 ${this.cron}` : null;
 
-    const respose = await saveCronLdap(cronWithSeconds);
+      const respose = await saveCronLdap(cronWithSeconds);
 
-    return respose;
+      this.serverCron = this.cron;
+
+      return respose;
+    } finally {
+      this.inProgress = false;
+    }
   };
 
   save = async (t, toDefault = false, turnOff = false) => {

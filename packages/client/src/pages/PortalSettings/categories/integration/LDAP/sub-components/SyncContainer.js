@@ -23,6 +23,7 @@ const SyncContainer = ({
   saveCronLdap,
   onChangeCron,
   cron,
+  serverCron,
   nextSyncDate,
   theme,
 
@@ -133,7 +134,7 @@ const SyncContainer = ({
             primary
             onClick={onSaveClick}
             label={t("Common:SaveButton")}
-            isDisabled={!isLdapEnabled || isUIDisabled}
+            isDisabled={!isLdapEnabled || isUIDisabled || cron === serverCron}
           />
         </>
       )}
@@ -162,6 +163,7 @@ export default inject(({ settingsStore, ldapStore }) => {
     saveCronLdap,
     onChangeCron,
     cron,
+    serverCron,
     nextSyncDate,
 
     isLdapEnabled,
@@ -176,6 +178,7 @@ export default inject(({ settingsStore, ldapStore }) => {
     saveCronLdap,
     onChangeCron,
     cron,
+    serverCron,
     nextSyncDate,
     theme,
 

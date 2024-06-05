@@ -224,6 +224,7 @@
   "LoadingProcessing": "Lataaminen...",
   "LocalDomain": "Paikallisia verkkotunnuksia ei tueta",
   "Location": "Sijainti",
+  "Logout": "Kirjaudu ulos",
   "LoginButton": "Kirjaudu sisään",
   "LogoutButton": "Kirjaudu ulos",
   "MainHeaderSelectAll": "Valitse kaikki",

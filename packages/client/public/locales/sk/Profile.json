@@ -16,7 +16,6 @@
   "LogoutActiveConnection": "Odhlásiť sa z aktívneho pripojenia",
   "LogoutAllActiveConnections": "Odhlásiť sa zo všetkých aktívnych pripojení",
   "LogoutAllActiveSessionsDescription": "Budú odhlásené všetky aktívne pripojenia okrem tohto pripojenia, keďže sa práve používa.",
-  "LogoutBtn": "Odhlásiť sa",
   "LogoutDescription": "Poznámka. Budú odhlásené všetky aktívne pripojenia okrem tohto pripojenia, keďže sa práve používa.",
   "LogoutFrom": "Odhlásiť sa z {{platform}} {{browser}}?",
   "MyProfile": "Môj profil",

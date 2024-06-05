@@ -16,7 +16,6 @@
   "LogoutActiveConnection": "Aktiv bağlantıdan çıxın",
   "LogoutAllActiveConnections": "Bütün aktiv bağlantılardan çıxın",
   "LogoutAllActiveSessionsDescription": "Bundan başqa bütün aktiv bağlantılar hazırda istifadə edildiyi üçün sistemdən çıxacaq.",
-  "LogoutBtn": "Çıxış",
   "LogoutDescription": "Qeyd. Bundan başqa bütün aktiv bağlantılar hazırda istifadə edildiyi üçün sistemdən çıxacaq.",
   "LogoutFrom": "{{platform}} {{browser}} çıxılsın?",
   "MyProfile": "Mənim profilim",

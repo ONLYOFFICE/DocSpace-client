@@ -16,7 +16,6 @@
   "LogoutActiveConnection": "Uitloggen van actieve verbinding",
   "LogoutAllActiveConnections": "Uitloggen bij alle actieve verbindingen",
   "LogoutAllActiveSessionsDescription": "Alle actieve verbindingen behalve deze verbinding worden uitgelogd, omdat deze momenteel in gebruik is.",
-  "LogoutBtn": "Uitloggen",
   "LogoutDescription": "Opmerking. Alle actieve verbindingen behalve deze verbinding worden uitgelogd, omdat deze momenteel in gebruik is.",
   "LogoutFrom": "Uitloggen van {{platform}} {{browser}}?",
   "MyProfile": "Mijn profiel",

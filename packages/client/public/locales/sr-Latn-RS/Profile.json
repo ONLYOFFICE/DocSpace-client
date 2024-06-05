@@ -16,7 +16,6 @@
   "LogoutActiveConnection": "Odjavi se sa aktivnih konekcija",
   "LogoutAllActiveConnections": "Odjavi se sa svih aktivnih konekcija",
   "LogoutAllActiveSessionsDescription": "Sve aktivne konekcije osim ove konekcije će biti odjavljene, zato što je trenutno u upotrebi.",
-  "LogoutBtn": "Odjavi se",
   "LogoutDescription": "Obratite pažnju. Sve aktivne konekcije osim ove konekcije će biti odjavljene, zato što je trenutno u upotrebi.",
   "LogoutFrom": "Odjavite se sa {{platform}} {{browser}}?",
   "MyProfile": "Moj profil",

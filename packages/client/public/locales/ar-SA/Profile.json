@@ -16,7 +16,6 @@
   "LogoutActiveConnection": "تسجيل الخروج من الاتصال النشط",
   "LogoutAllActiveConnections": "تسجيل الخروج من جميع الاتصالات النشطة",
   "LogoutAllActiveSessionsDescription": "سيتم تسجيل الخروج من جميع الاتصالات النشطة باستثناء هذا الاتصال، حيث أنه قيد الاستخدام حاليًا.",
-  "LogoutBtn": "تسجيل الخروج",
   "LogoutDescription": "ملحوظة. سيتم تسجيل خروج جميع الاتصالات النشطة باستثناء هذا الاتصال ، حيث إنه قيد الاستخدام حاليًا.",
   "LogoutFrom": "هل تريد الخروج من {{platform}} {{browser}}؟",
   "MyProfile": "ملفي الشخصي",

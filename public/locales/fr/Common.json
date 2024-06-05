@@ -224,6 +224,7 @@
   "LoadingProcessing": "Chargement...",
   "LocalDomain": "Les domaines local ne sont pas supportés",
   "Location": "Emplacement",
+  "Logout": "Se déconnecter",
   "LoginButton": "Se connecter",
   "LogoutButton": "Déconnexion",
   "MainHeaderSelectAll": "Sélectionner tout",

@@ -16,7 +16,6 @@
   "LogoutActiveConnection": "Terminar a sessão na conexão ativa",
   "LogoutAllActiveConnections": "Terminar a sessão em todas as conexões ativas",
   "LogoutAllActiveSessionsDescription": "Todas as ligações ativas exceto esta ligação terão a sua sessão terminada, tal como está configurado atualmente.",
-  "LogoutBtn": "Terminar sessão",
   "LogoutDescription": "Nota. Todas as ligações ativas exceto esta ligação terão a sua sessão terminada, tal como está configurado atualmente.",
   "LogoutFrom": "Terminar a sessão na {{platform}} {{browser}}?",
   "MyProfile": "O meu perfil",

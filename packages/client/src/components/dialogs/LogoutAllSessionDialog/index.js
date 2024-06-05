@@ -90,8 +90,8 @@ const LogoutAllSessionDialog = ({
       <ModalDialog.Footer>
         <Button
           className="logout"
-          key="LogoutBtn"
-          label={t("Profile:LogoutBtn")}
+          key="Logout"
+          label={t("Common:Logout")}
           size="normal"
           scale
           primary={true}

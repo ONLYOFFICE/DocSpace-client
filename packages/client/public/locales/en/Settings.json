@@ -233,7 +233,6 @@
   "SendNotificationAboutRestoring": "Send notification about space restoring to users",
   "ServerSideEncryptionMethod": "Server Side Encryption Method",
   "ServiceUrl": "Service URL",
-  "Sessions": "Sessions",
   "SessionLifetime": "Session Lifetime",
   "SessionsSubtitle": "Check the latest active sessions of all users for the last 3 days. If necessary, disconnect individual user sessions or disable a user. If you need to get the full report, download it clicking the corresponding button below.",
   "SessionLifetimeMobileDescription": "Session Lifetime allows to set time (in minutes) before the DocSpace users will need to enter the space credentials again in order to access the space.",

@@ -216,9 +216,25 @@ const Row = (props: RowProps) => {
         {renderContentElement && (
           <StyledContentElement>{contentElement}</StyledContentElement>
         )}
-        {!isIndexEditingMode && (
+        {isIndexEditingMode ? (
           <>
-            {" "}
+            <ColorTheme
+              themeId={ThemeId.IndexIconButton}
+              iconName={ArrowReactSvgUrl}
+              className="index-up-icon"
+              size="small"
+              // onClick={onClickShare}
+            />
+            <ColorTheme
+              themeId={ThemeId.IndexIconButton}
+              iconName={ArrowReactSvgUrl}
+              className="index-down-icon"
+              size="small"
+              // onClick={onClickShare}
+            />
+          </>
+        ) : (
+          <>
             {renderContext ? (
               <ContextMenuButton
                 isFill

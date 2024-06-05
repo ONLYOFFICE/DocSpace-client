@@ -65,6 +65,8 @@ const SettingsContainer = ({
         />
       )}
 
+      {isMobileView && <ToggleLDAP />}
+
       {(isMobileView || isSettingsShown) && (
         <>
           <Box>
@@ -94,7 +96,6 @@ const SettingsContainer = ({
         theme={theme}
         isSettingPaid={isLdapAvailable}
       >
-        <ToggleLDAP />
         {renderBody()}
       </StyledLdapPage>
     );

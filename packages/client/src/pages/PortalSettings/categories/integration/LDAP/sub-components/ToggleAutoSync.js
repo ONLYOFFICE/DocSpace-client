@@ -102,12 +102,6 @@ export default inject(({ currentQuotaStore, settingsStore, ldapStore }) => {
 
   const { isLdapAvailable } = currentQuotaStore;
 
-  console.log({
-    theme,
-    toggleContentBackground:
-      theme.client.settings.integration.sso.toggleContentBackground,
-  });
-
   return {
     theme,
     enableLdap,

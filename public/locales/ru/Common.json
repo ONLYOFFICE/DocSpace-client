@@ -359,6 +359,7 @@
   "SendRequest": "Отправить запрос",
   "SetDiskSpaceQuota": "Установите квоту хранилища, чтобы определить максимальное дисковое пространство для этого DocSpace.",
   "SetQuotaStorageLimit": "Установите квоту, чтобы определить лимит хранилища.",
+  "Sessions": "Сессии",
   "Settings": "Настройки",
   "SettingsGeneral": "Общие",
   "SettingsPersonal": "Персональные",

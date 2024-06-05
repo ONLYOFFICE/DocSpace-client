@@ -67,7 +67,7 @@ const SecurityWrapper = (props) => {
     },
     {
       id: "sessions",
-      name: t("Sessions"),
+      name: t("Common:Sessions"),
       content: <Sessions />,
     },
   ];

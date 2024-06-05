@@ -434,7 +434,7 @@ const SectionHeaderContent = (props) => {
           iconUrl: LogoutReactSvgUrl,
         },
         {
-          id: "Disable",
+          id: "disable",
           key: "Disable",
           label: t("Common:DisableUserButton"),
           onClick: onClickDisable,

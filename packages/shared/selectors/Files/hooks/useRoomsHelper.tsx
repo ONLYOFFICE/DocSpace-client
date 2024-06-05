@@ -141,6 +141,7 @@ const useRoomsHelper = ({
             label: t("NewRoom"),
             id: "create-room-item",
             key: "create-room-item",
+            hotkey: "r",
             dropDownItems: createDropDownItems,
             onBackClick: () => {
               setIsRoot(true);

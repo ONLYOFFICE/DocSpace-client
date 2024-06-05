@@ -332,6 +332,7 @@ const useFilesHelper = ({
               label: t("NewFolder"),
               id: "create-folder-item",
               key: "create-folder-item",
+              hotkey: "f",
               onCreateClick: () => addInputItem(t("NewFolder"), FolderSvgUrl),
               onBackClick: () => {
                 setSelectedItemId(current.parentId);

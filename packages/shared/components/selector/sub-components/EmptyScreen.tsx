@@ -57,6 +57,7 @@ const EmptyScreen = ({
   searchDescription,
   withSearch,
   items,
+  inputItemVisible,
 }: EmptyScreenProps) => {
   const { t } = useTranslation(["Common"]);
   const { isOpenDropDown, setIsOpenDropDown, onCloseDropDown } =
@@ -69,7 +70,12 @@ const EmptyScreen = ({
   const createItem = items.length > 0 ? items[0] : null;
 
   const onCreateClickAction = () => {
-    if (!createItem || (!createItem.onCreateClick && !createItem.dropDownItems))
+    if (
+      !createItem ||
+      (!createItem.onCreateClick && !createItem.dropDownItems) ||
+      isOpenDropDown ||
+      inputItemVisible
+    )
       return;
 
     if (createItem.dropDownItems) return setIsOpenDropDown(true);

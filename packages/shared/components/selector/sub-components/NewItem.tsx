@@ -38,20 +38,54 @@ const NewItem = ({
   style,
   dropDownItems,
   onCreateClick,
+  hotkey,
+  inputItemVisible,
 }: {
   label: string;
   style: React.CSSProperties;
   dropDownItems?: React.ReactElement[];
   onCreateClick?: VoidFunction;
+  hotkey?: string;
+  inputItemVisible?: boolean;
 }) => {
   const { isOpenDropDown, onCloseDropDown, setIsOpenDropDown } =
     useCreateDropDown();
 
-  const onCreateClickAction = () => {
+  const onCreateClickAction = React.useCallback(() => {
+    if (isOpenDropDown || inputItemVisible) return;
     if (dropDownItems) return setIsOpenDropDown(true);
 
     onCreateClick?.();
-  };
+  }, [
+    dropDownItems,
+    inputItemVisible,
+    isOpenDropDown,
+    onCreateClick,
+    setIsOpenDropDown,
+  ]);
+
+  React.useEffect(() => {
+    if (isOpenDropDown && inputItemVisible) setIsOpenDropDown(false);
+  }, [inputItemVisible, isOpenDropDown, setIsOpenDropDown]);
+
+  const onKeyDown = React.useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key.toLowerCase() === hotkey && e.shiftKey) {
+        onCreateClickAction();
+      }
+    },
+    [hotkey, onCreateClickAction],
+  );
+
+  React.useEffect(() => {
+    if (!hotkey) return;
+    window.removeEventListener("keypress", onKeyDown);
+    window.addEventListener("keypress", onKeyDown);
+
+    return () => {
+      window.removeEventListener("keypress", onKeyDown);
+    };
+  }, [hotkey, onCreateClickAction, onKeyDown]);
 
   return (
     <StyledItem

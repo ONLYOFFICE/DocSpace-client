@@ -450,15 +450,13 @@ const SectionHeaderContent = (props) => {
     try {
       showLoader();
 
-      const { fileName, fileUrl } =
-        await onClickExportRoomIndex(selectedFolder);
+      const result = await onClickExportRoomIndex(selectedFolder?.id);
+      if (!result) return;
 
       const urlWithProxy = combineUrl(
         window.DocSpaceConfig?.proxy?.url,
-        fileUrl,
+        result.fileUrl,
       );
-
-      if (!fileName) return;
 
       const toastMessage = (
         <>
@@ -468,7 +466,7 @@ const SectionHeaderContent = (props) => {
             target="_blank"
             href={urlWithProxy}
           >
-            {fileName}
+            {result.fileName}
           </Link>
           &nbsp;
           <Text as="span" fontSize="12px">

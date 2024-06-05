@@ -104,6 +104,7 @@ import {
   UrlActionType,
   EmployeeType,
   FilesSelectorFilterTypes,
+  ExportRoomIndexTaskStatus,
 } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { getFileLink, getFolderLink } from "@docspace/shared/api/files";
@@ -913,8 +914,6 @@ class ContextOptionsStore {
     while (!isCompleted) {
       res = await this.checkExportRoomIndexProgress();
 
-      console.log("res", res);
-
       if (res?.isCompleted) {
         isCompleted = true;
       }
@@ -923,18 +922,25 @@ class ContextOptionsStore {
     return res;
   };
 
-  onClickExportRoomIndex = async (room) => {
+  onClickExportRoomIndex = async (roomId) => {
     try {
-      let res = await api.rooms.exportRoomIndex(room.id);
+      let res = await api.rooms.exportRoomIndex(roomId);
 
       if (!res.isCompleted) {
         res = await this.loopExportRoomIndexStatusChecking();
       }
 
-      return {
-        fileName: res.resultFileName,
-        fileUrl: res.resultFileUrl,
-      };
+      if (res.status === ExportRoomIndexTaskStatus.Failed) {
+        toastr.error(res.error);
+        return;
+      }
+
+      if (res.status === ExportRoomIndexTaskStatus.Completed) {
+        return {
+          fileName: res.resultFileName,
+          fileUrl: res.resultFileUrl,
+        };
+      }
     } catch (e) {
       toastr.error(e);
     }

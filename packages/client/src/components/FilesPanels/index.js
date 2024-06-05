@@ -26,7 +26,7 @@
 
 import React, { useMemo, useState, useCallback, useEffect } from "react";
 
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { toastr } from "@docspace/shared/components/toast";
@@ -174,7 +174,12 @@ const Panels = (props) => {
 
       if (!isFirst) {
         return toastr.success(
-          t("PDFFormDialog:PDFFormIsReadyToast", { filename: file.title }),
+          <Trans
+            ns="PDFFormDialog"
+            i18nKey="PDFFormIsReadyToast"
+            components={{ 1: <strong /> }}
+            values={{ filename: file.title }}
+          />,
         );
       }
 

@@ -218,6 +218,14 @@ class AccountsHotkeysStore {
     setSelected("none");
   };
 
+  selectAll = () => {
+    const { selectAll } = this.isAccountsPage
+      ? this.peopleStore.selectionStore
+      : this.peopleStore.groupsStore;
+
+    selectAll();
+  };
+
   activateHotkeys = (e: KeyboardEvent) => {
     const infiniteLoaderComponent = document.getElementsByClassName(
       "ReactVirtualized__List",

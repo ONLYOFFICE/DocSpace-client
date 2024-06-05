@@ -144,7 +144,6 @@ export default inject(({ peopleStore }) => {
     setSelection: setPeopleSelection,
     setBufferSelection: setPeopleBufferSelection,
     selectUser,
-    selectAll,
   } = peopleStore.selectionStore;
 
   const {
@@ -161,6 +160,8 @@ export default inject(({ peopleStore }) => {
     activateHotkeys,
     setHotkeyCaretStart,
     setHotkeyCaret,
+
+    selectAll,
     deselectAll,
   } = peopleStore.accountsHotkeysStore;
 

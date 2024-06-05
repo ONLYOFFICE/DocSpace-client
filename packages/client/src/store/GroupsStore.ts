@@ -365,6 +365,12 @@ class GroupsStore {
     return selected;
   };
 
+  selectAll = () => {
+    this.bufferSelection = null;
+
+    if (this.groups?.length) this.setSelection(this.groups);
+  };
+
   getGroupsBySelected = (selected: "all" | "none") => {
     if (selected === "all" && this.groups) return [...this.groups];
     return [];

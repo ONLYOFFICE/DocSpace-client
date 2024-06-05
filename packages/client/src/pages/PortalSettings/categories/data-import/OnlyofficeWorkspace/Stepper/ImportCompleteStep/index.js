@@ -107,7 +107,7 @@ const ImportCompleteStep = ({
     setIsSaving(true);
     setTimeout(() => {
       setIsSaving(false);
-      setTimeout(() => navigate("/portal-settings/data-import/migration"), 100);
+      navigate("/portal-settings/data-import/migration")
     }, 1000);
   };
 

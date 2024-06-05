@@ -55,6 +55,7 @@ const SelectUsersStep = (props) => {
 
   const [dataPortion, setDataPortion] = useState(withEmailUsers.slice(0, 25));
   const [quota, setQuota] = useState({ used: 0, max: 0 });
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     setSearchValue("");
@@ -82,7 +83,11 @@ const SelectUsersStep = (props) => {
 
   const goBack = () => {
     cancelMigration();
-    setTimeout(decrementStep, 100);
+    setIsSaving(true);
+    setTimeout(() => {
+      setIsSaving(false);
+      decrementStep();
+    }, 1000);
   };
 
   const numberOfSelectedUsers =
@@ -105,6 +110,7 @@ const SelectUsersStep = (props) => {
             cancelButtonLabel={t("Common:Back")}
             showReminder
             displaySettings
+            isSaving={isSaving}
           />
 
           {quota.max && (
@@ -151,6 +157,7 @@ const SelectUsersStep = (props) => {
           cancelButtonLabel={t("Common:Back")}
           showReminder
           displaySettings
+          isSaving={isSaving}
         />
       )}
     </Wrapper>

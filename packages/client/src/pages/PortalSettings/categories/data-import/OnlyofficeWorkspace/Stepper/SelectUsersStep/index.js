@@ -51,6 +51,7 @@ const SelectUsersStep = ({
 }) => {
   const [dataPortion, setDataPortion] = useState(withEmailUsers.slice(0, 25));
   const [quota, setQuota] = useState({ used: 0, max: 0 });
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     setSearchValue("");
@@ -83,7 +84,11 @@ const SelectUsersStep = ({
 
   const goBack = () => {
     cancelMigration();
-    setTimeout(onPrevStep, 100);
+    setIsSaving(true);
+    setTimeout(() => {
+      setIsSaving(false);
+      onPrevStep();
+    }, 1000);
   };
 
   const totalUsedUsers =
@@ -103,6 +108,7 @@ const SelectUsersStep = ({
         saveButtonDisabled={
           areCheckedUsersEmpty || (quota.max && totalUsedUsers > quota.max)
         }
+        isSaving={isSaving}
       />
 
       {quota.max && (
@@ -147,6 +153,7 @@ const SelectUsersStep = ({
           saveButtonDisabled={
             areCheckedUsersEmpty || (quota.max && totalUsedUsers > quota.max)
           }
+          isSaving={isSaving}
         />
       )}
     </>

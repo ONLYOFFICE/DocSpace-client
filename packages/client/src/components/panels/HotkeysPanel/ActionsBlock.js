@@ -34,7 +34,7 @@ const ActionsBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {
       <Row className="hotkeys_row">
         <>
           <Text {...textStyles}>{t("HotkeysOpen")}</Text>
-          <Text {...keyTextStyles}>{t("HotkeysEnterKey")}</Text>
+          <Text {...keyTextStyles}>Enter</Text>
         </>
       </Row>
       <Row className="hotkeys_row">

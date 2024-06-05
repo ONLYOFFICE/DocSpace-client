@@ -545,7 +545,7 @@ export const enum RoomsStorageFilter {
   thirdparty = 2,
 }
 
-export const enum LDAPOpeation {
+export const enum LDAPOperation {
   SaveAndSync = "Save",
   Sync = "Sync",
 }

@@ -5,7 +5,7 @@ import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { isMobile } from "@docspace/shared/utils/device";
 
-import { DeviceType, LDAPOpeation } from "@docspace/shared/enums";
+import { DeviceType, LDAPOperation } from "@docspace/shared/enums";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 
@@ -79,7 +79,7 @@ const SettingsContainer = ({
           <AdvancedSettings />
           <ButtonsContainer />
 
-          <ProgressContainer operation={LDAPOpeation.SaveAndSync} />
+          <ProgressContainer operation={LDAPOperation.SaveAndSync} />
 
           {isCertificateDialogVisible && <CertificateDialog />}
         </>

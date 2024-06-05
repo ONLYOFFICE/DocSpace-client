@@ -193,8 +193,6 @@ const CreateEvent = ({
         `/doceditor/create?${searchParams.toString()}`,
       );
 
-      console.log(url);
-
       window.open(url, openOnNewPage ? "_blank" : "_self");
 
       setIsLoading(false);

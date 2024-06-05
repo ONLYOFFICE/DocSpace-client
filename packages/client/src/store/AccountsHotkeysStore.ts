@@ -231,12 +231,6 @@ class AccountsHotkeysStore {
       "ReactVirtualized__List",
     )[0] as HTMLElement;
 
-    const isAccountsPage =
-      window.location.pathname.includes("/accounts") ||
-      window.location.pathname.includes("accounts/people");
-
-    if (!isAccountsPage) return e;
-
     if (infiniteLoaderComponent) {
       infiniteLoaderComponent.tabIndex = -1;
     }

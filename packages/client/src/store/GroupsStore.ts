@@ -362,6 +362,8 @@ class GroupsStore {
     this.bufferSelection = null;
     this.selected = selected;
     this.setSelection(this.getGroupsBySelected(selected));
+
+    this.peopleStore.accountsHotkeysStore.setHotkeyCaret(null);
     return selected;
   };
 

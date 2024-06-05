@@ -15,6 +15,7 @@ const ToggleLDAP = ({
   isLdapAvailable,
   isUIDisabled,
   save,
+  isLdapEnabledOnServer,
 }) => {
   const { t } = useTranslation(["Ldap", "Common"]);
 
@@ -22,11 +23,11 @@ const ToggleLDAP = ({
     (e) => {
       toggleLdap();
 
-      if (!e.target.checked) {
+      if (!e.target.checked && isLdapEnabledOnServer) {
         save(t, false, true).catch((e) => toastr.error(e));
       }
     },
-    [toggleLdap, t, save],
+    [toggleLdap, t, save, isLdapEnabledOnServer],
   );
 
   return (
@@ -85,8 +86,14 @@ const ToggleLDAP = ({
 
 export default inject(({ settingsStore, ldapStore, currentQuotaStore }) => {
   const { theme } = settingsStore;
-  const { enableLdap, isLdapEnabled, toggleLdap, save, isUIDisabled } =
-    ldapStore;
+  const {
+    enableLdap,
+    isLdapEnabled,
+    toggleLdap,
+    save,
+    isUIDisabled,
+    serverSettings,
+  } = ldapStore;
   const { isLdapAvailable } = currentQuotaStore;
 
   return {
@@ -97,5 +104,6 @@ export default inject(({ settingsStore, ldapStore, currentQuotaStore }) => {
     save,
     isLdapAvailable,
     isUIDisabled,
+    isLdapEnabledOnServer: serverSettings.EnableLdapAuthentication,
   };
 })(observer(ToggleLDAP));

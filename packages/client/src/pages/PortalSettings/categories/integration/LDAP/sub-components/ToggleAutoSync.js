@@ -35,8 +35,6 @@ const ToggleAutoSync = ({
     [toggleCron],
   );
 
-  console.log("ToggleAutoSync", { isLdapAvailable });
-
   return (
     <>
       <Box

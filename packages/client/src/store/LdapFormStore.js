@@ -99,7 +99,7 @@ class LdapFormStore {
   }
 
   mapSettings = (data) => {
-    console.log("LDAP settings data", data);
+    // console.log("LDAP settings data", data);
     this.serverData = data;
 
     const {
@@ -167,8 +167,6 @@ class LdapFormStore {
 
     this.login = login;
     this.password = password || "";
-
-    this.setServerSettings();
   };
 
   mapCron = (cron) => {
@@ -191,7 +189,10 @@ class LdapFormStore {
       getLdapDefaultSettings(),
     ]);
 
-    if (settingsRes.status == "fulfilled") this.mapSettings(settingsRes.value);
+    if (settingsRes.status == "fulfilled") {
+      this.mapSettings(settingsRes.value);
+      this.setServerSettings();
+    }
 
     if (cronRes.status == "fulfilled") {
       this.mapCron(cronRes.value?.cron);
@@ -351,7 +352,7 @@ class LdapFormStore {
       }
 
       for (var key in this.requiredSettings) {
-        console.log({ key });
+        // console.log({ key });
         if (
           this.requiredSettings[key] &&
           typeof this.requiredSettings[key] == "string" &&
@@ -473,7 +474,6 @@ class LdapFormStore {
   };
 
   setProgress = (status) => {
-    console.log(status);
     this.progressStatus = status;
   };
 

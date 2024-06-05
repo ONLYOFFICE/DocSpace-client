@@ -43,7 +43,7 @@ const useSocketHelper = ({
   socketSubscribers,
   disabledItems,
   filterParam,
-  withCreateFolder,
+  withCreate,
   setItems,
   setBreadCrumbs,
   setTotal,
@@ -123,7 +123,7 @@ const useSocketHelper = ({
         if (opt.type === "folder") {
           setTotal((v) => v + 1);
 
-          if (withCreateFolder) {
+          if (withCreate) {
             const newValue = [...value];
 
             let idx = 1;
@@ -164,7 +164,7 @@ const useSocketHelper = ({
         return value;
       });
     },
-    [disabledItems, filterParam, getIcon, setItems, setTotal, withCreateFolder],
+    [disabledItems, filterParam, getIcon, setItems, setTotal, withCreate],
   );
 
   const updateItem = React.useCallback(

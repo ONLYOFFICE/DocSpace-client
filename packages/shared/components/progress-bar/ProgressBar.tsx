@@ -78,7 +78,7 @@ const ProgressBar = ({
           as="p"
           title={error || status}
         >
-          {error || `${percent}% ${status}`}
+          {error || status}
         </Text>
       )}
     </StyledProgressBarContainer>

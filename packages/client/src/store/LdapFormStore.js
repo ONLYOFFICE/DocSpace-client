@@ -69,6 +69,7 @@ class LdapFormStore {
     completed: false,
     error: "",
     source: "",
+    status: "",
   };
 
   isCertificateDialogVisible = false;
@@ -302,6 +303,7 @@ class LdapFormStore {
       completed: false,
       error: "",
       source: "",
+      status: "",
       operationType: LDAPOpeation.Sync,
     };
 
@@ -333,6 +335,7 @@ class LdapFormStore {
       completed: false,
       error: "",
       source: "",
+      status: "",
       operationType: LDAPOpeation.SaveAndSync,
     };
 

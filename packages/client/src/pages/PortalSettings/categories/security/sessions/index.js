@@ -79,8 +79,7 @@ const Sessions = ({
   viewAs,
   setViewAs,
   currentDeviceType,
-  allSessions,
-  setAllSessions,
+  setSessions,
   clearSelection,
   disableDialogVisible,
   logoutDialogVisible,
@@ -93,6 +92,9 @@ const Sessions = ({
   socketHelper,
   getUserSessionsById,
   displayName,
+  allSessions,
+  setAllSessions,
+  setSessionsFromSocket,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -107,7 +109,7 @@ const Sessions = ({
     });
 
     socketHelper.on("statuses-in-portal", (data) => {
-      console.log(data);
+      setSessionsFromSocket(data);
     });
   }, [socketHelper]);
 
@@ -118,7 +120,8 @@ const Sessions = ({
         getUserSessionsById(user.id),
       );
       const sessions = await Promise.all(sessionsPromises);
-      setAllSessions([...sessions]);
+      setSessions(sessions);
+      setAllSessions();
     } catch (error) {
       console.error(error);
     }
@@ -136,6 +139,8 @@ const Sessions = ({
     setView: setViewAs,
     currentDeviceType,
   });
+
+  console.log(JSON.parse(JSON.stringify(allSessions)));
 
   const onClickRemoveAllSessions = () => {
     try {
@@ -231,8 +236,13 @@ const Sessions = ({
 export default inject(({ settingsStore, setup, peopleStore }) => {
   const { socketHelper, currentDeviceType } = settingsStore;
   const { getUsersList } = peopleStore.usersStore;
-  const { clearSelection, allSessions, setAllSessions, setAllConnections } =
-    peopleStore.selectionStore;
+  const {
+    clearSelection,
+    allSessions,
+    setSessions,
+    setAllSessions,
+    setSessionsFromSocket,
+  } = peopleStore.selectionStore;
 
   const {
     viewAs,
@@ -253,7 +263,7 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     viewAs,
     setViewAs,
     allSessions,
-    setAllSessions,
+    setSessions,
     clearSelection,
     disableDialogVisible,
     logoutDialogVisible,
@@ -264,9 +274,10 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     platformModalData,
     socketHelper,
     getUsersList,
-    setAllConnections,
     getUserSessionsById,
     displayName,
+    setAllSessions,
+    setSessionsFromSocket,
   };
 })(
   withTranslation(["Settings", "Profile", "Common", "ChangeUserStatusDialog"])(

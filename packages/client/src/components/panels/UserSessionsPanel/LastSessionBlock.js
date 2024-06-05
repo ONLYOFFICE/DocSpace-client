@@ -11,74 +11,85 @@ const StyledLastSessionBlock = styled.div`
     margin-bottom: 12px;
   }
 
-  .online {
-    color: ${(props) => props.theme.profile.activeSessions.textOnlineColor};
+  .session-info-wrapper {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px 0px;
   }
 
-  .session-info-wrapper {
-    display: flex;
-    align-items: center;
+  .session-info-row {
+    display: contents;
+  }
 
-    .session-info-left-container {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 24px;
-            `
-          : css`
-              margin-right: 24px;
-            `}
-      p {
-        padding: 8px;
-        font-size: 13px;
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                padding-right: 0px;
-              `
-            : css`
-                padding-left: 0px;
-              `}
-      }
+  .session-info-label {
+    padding: 4px;
+    font-size: 13px;
+
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 24px;
+            padding-right: 0px;
+          `
+        : css`
+            margin-right: 24px;
+            padding-left: 0px;
+          `}
+  }
+
+  .session-info-value {
+    justify-self: start;
+    font-weight: 600;
+    padding: 4px;
+    font-size: 13px;
+    width: 100%;
+    ::first-letter {
+      text-transform: uppercase;
     }
+  }
 
-    .session-info-right-container {
-      width: 100%;
-      overflow: hidden;
-      p {
-        font-weight: 600;
-        padding: 8px;
-        font-size: 13px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 100%;
-      }
+  .online {
+    font-weight: 600;
+    padding: 4px;
+    font-size: 13px;
+    width: 100%;
+    color: ${(props) => props.theme.profile.activeSessions.textOnlineColor};
+    ::first-letter {
+      text-transform: uppercase;
     }
   }
 `;
 
 const LastSessionBlock = (props) => {
-  const { t, sessionData } = props;
-  const { status, platform, browser, ip, country, city } = sessionData;
+  const { t, sessionStatus, userData } = props;
+  const { sessions } = userData;
+  const { platform, browser, ip, city, country } = sessions;
 
-  const isOnline = status === "Online";
+  const isOnline = sessionStatus === "online";
 
   return (
     <StyledLastSessionBlock>
       <Text className="subtitle">{t("Profile:LastSession")}</Text>
       <Box className="session-info-wrapper">
-        <div className="session-info-left-container">
-          <Text>{t("Common:Active")}</Text>
-          <Text>{t("Common:Platform")}</Text>
-          <Text>{t("Common:Browser")}</Text>
-          <Text>{t("Common:Location")}</Text>
+        <div className="session-info-row">
+          <Text className="session-info-label">{t("Common:Active")}</Text>
+          <Text className={isOnline ? "online" : "session-info-value"}>
+            {sessionStatus}
+          </Text>
         </div>
-        <div className="session-info-right-container">
-          <Text className={isOnline && "online"}>{status}</Text>
-          <Text>{platform}</Text>
-          <Text>{browser}</Text>
-          <Text>
+        <div className="session-info-row">
+          <Text className="session-info-label">{t("Common:Platform")}</Text>
+          <Text className="session-info-value">{platform}</Text>
+        </div>
+        <div className="session-info-row">
+          <Text className="session-info-label">{t("Common:Browser")}</Text>
+          <Text className="session-info-value">
+            {browser?.split(".")[0] ?? ""}
+          </Text>
+        </div>
+        <div className="session-info-row">
+          <Text className="session-info-label">{t("Common:Location")}</Text>
+          <Text className="session-info-value" truncate>
             {(country || city) && (
               <>
                 {country}

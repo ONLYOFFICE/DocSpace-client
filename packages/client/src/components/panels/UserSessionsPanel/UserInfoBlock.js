@@ -45,16 +45,18 @@ const UserInfoBlock = (props) => {
     setDisplayName,
   } = props;
 
-  const { avatar, displayName, isAdmin, isOwner } = userData;
-  const role = isOwner ? "owner" : isAdmin ? "admin" : null;
+  const { avatar, displayName, isAdmin, isOwner, isRoomAdmin, isCollaborator } =
+    userData;
 
   const getUserType = () => {
-    if (userData.isOwner) return t("Common:Owner");
-    if (userData.isAdmin) return t("Common:DocspaceAdmin");
-    if (userData.isRoomAdmin) return t("Common:RoomAdmin");
-    if (userData.isCollaborator) return t("Common:PowerUser");
+    if (isOwner) return t("Common:Owner");
+    if (isAdmin) return t("Common:DocspaceAdmin");
+    if (isRoomAdmin) return t("Common:RoomAdmin");
+    if (isCollaborator) return t("Common:PowerUser");
     return t("Common:User");
   };
+
+  const role = isOwner ? "owner" : isAdmin ? "admin" : null;
 
   const onClickLogout = () => {
     setLogoutAllDialogVisible(true);

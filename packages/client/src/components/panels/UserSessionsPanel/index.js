@@ -83,12 +83,14 @@ const UserSessionsPanel = (props) => {
 
 export default inject(({ setup, dialogsStore }) => {
   const { userSessionsPanelVisible, setUserSessionPanelVisible } = dialogsStore;
+
   const {
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
     userModalData,
     sessionModalData,
     setDisplayName,
+    sessionStatus,
   } = setup;
 
   return {
@@ -99,6 +101,7 @@ export default inject(({ setup, dialogsStore }) => {
     visible: userSessionsPanelVisible,
     setVisible: setUserSessionPanelVisible,
     setDisplayName,
+    sessionStatus,
   };
 })(
   withTranslation(["Settings", "Profile", "Common"])(

@@ -167,12 +167,11 @@ const TableView = ({ t, sectionWidth, userId, sessionsData }) => {
             item={item}
             hideColumns={hideColumns}
             displayName={item.displayName}
-            // status={item.status}
-            // browser={item.browser}
-            // platform={item.platform}
-            // country={item.country}
-            // city={item.city}
-            // ip={item.ip}
+            sessionStatus={item.status}
+            connections={item.connections}
+            sessions={item.sessions}
+            isOwner={item.isOwner}
+            isAdmin={item.isAdmin}
           />
         ))}
       </TableBody>

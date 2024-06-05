@@ -31,7 +31,8 @@ import { getUserStatus } from "../helpers/people-helpers";
 class SelectionStore {
   peopleStore = null;
   allSessions = [];
-  allConnections = [];
+  sessions = [];
+  sessionsFromSocket = [];
   selection = [];
   selectionUsersRights = {
     isVisitor: 0,
@@ -260,7 +261,7 @@ class SelectionStore {
   setSelected = (selected, isSessionsPage) => {
     this.bufferSelection = null;
     this.selected = selected;
-    const sessions = this.allSessions;
+    const sessions = this.sessions;
     const list = this.peopleStore.usersStore.peopleList;
 
     if (selected !== "none" && selected !== "close") {
@@ -425,22 +426,35 @@ class SelectionStore {
 
   get isHeaderIndeterminate() {
     return (
-      this.isHeaderVisible && this.selection.length !== this.allSessions.length
+      this.isHeaderVisible && this.selection.length !== this.sessions.length
     );
   }
 
   get isHeaderChecked() {
     return (
-      this.isHeaderVisible && this.selection.length === this.allSessions.length
+      this.isHeaderVisible && this.selection.length === this.sessions.length
     );
   }
 
-  setAllSessions = (sessions) => {
-    this.allSessions = sessions;
+  setSessions = (sessions) => {
+    this.sessions = sessions;
   };
 
-  setAllConnections = (connections) => {
-    this.allConnections = connections;
+  setSessionsFromSocket = (data) => {
+    this.sessionsFromSocket = data;
+  };
+
+  setAllSessions = () => {
+    this.allSessions = this.sessions.map((session) => {
+      const socketData = this.sessionsFromSocket.find(
+        (user) => user.id === session.id,
+      );
+      return {
+        ...session,
+        status: socketData ? socketData.status : "offline",
+        sessions: socketData ? socketData.sessions.slice(-1)[0] : [],
+      };
+    });
   };
 }
 

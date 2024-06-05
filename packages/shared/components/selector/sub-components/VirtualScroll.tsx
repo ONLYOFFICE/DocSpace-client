@@ -43,6 +43,7 @@ export const VirtualScroll = forwardRef((props, ref) => {
   return (
     <CustomScrollbarsVirtualList
       {...props}
+      scrollClass="selector-body-scroll"
       ref={ref}
       contentRef={scrollContentRef}
     />

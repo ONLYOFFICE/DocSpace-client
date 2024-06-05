@@ -40,6 +40,7 @@ const BodyComponent = (props) => {
     userPerformedDeletion,
     users,
     onlyOneUser,
+    areUsersOnly,
   } = props;
 
   const warningMessageMyDocuments = t("DeleteMyDocumentsUser");
@@ -87,8 +88,12 @@ const BodyComponent = (props) => {
     return (
       <>
         <Text className="user-delete">{t("ActionCannotBeUndone")}</Text>
-        <Text className="text-warning">{t("Common:Warning")}</Text>
-        <Text className="text-delete-description">{warningMessage}</Text>
+        {!areUsersOnly && (
+          <>
+            <Text className="text-warning">{t("Common:Warning")}</Text>
+            <Text className="text-delete-description">{warningMessage}</Text>
+          </>
+        )}
       </>
     );
   }
@@ -96,8 +101,12 @@ const BodyComponent = (props) => {
   return (
     <>
       <Text className="user-delete">{deleteMessage}</Text>
-      <Text className="text-warning">{t("Common:Warning")}</Text>
-      <Text className="text-delete-description">{warningMessage}</Text>
+      {!areUsersOnly && (
+        <>
+          <Text className="text-warning">{t("Common:Warning")}</Text>
+          <Text className="text-delete-description">{warningMessage}</Text>
+        </>
+      )}
 
       {needReassignData && (
         <Link

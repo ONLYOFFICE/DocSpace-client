@@ -74,7 +74,7 @@ const LastSessionBlock = (props) => {
         <div className="session-info-row">
           <Text className="session-info-label">{t("Common:Active")}</Text>
           <Text className={isOnline ? "online" : "session-info-value"}>
-            {sessionStatus}
+            {t(`Common:${sessionStatus}`)}
           </Text>
         </div>
         <div className="session-info-row">

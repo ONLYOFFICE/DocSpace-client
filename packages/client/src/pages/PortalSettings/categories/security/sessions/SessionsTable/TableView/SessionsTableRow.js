@@ -304,7 +304,7 @@ const SessionsTableRow = (props) => {
 
         <TableCell>
           <Text className={isOnline ? "online" : "session-info"} truncate>
-            {fromDateAgo}
+            {t(`Common:${fromDateAgo}`)}
           </Text>
         </TableCell>
 

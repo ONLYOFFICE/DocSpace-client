@@ -2134,7 +2134,10 @@ class FilesStore {
       }
 
       if (!canViewFile || isRecycleBinFolder) {
-        fileOptions = this.removeOptions(fileOptions, ["preview"]);
+        fileOptions = this.removeOptions(fileOptions, [
+          "preview",
+          "embedding-settings",
+        ]);
       }
 
       if (!canOpenPlayer || isRecycleBinFolder) {

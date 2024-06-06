@@ -184,8 +184,6 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   const params = objectToGetParams(config);
   const codeBlock = `<div id="${config.frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
 
-  const scrollRef = useRef<Scrollbar | null>(null);
-
   const onClose = () => {
     setEmbeddingPanelIsVisible(false);
   };
@@ -223,13 +221,13 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 
   const onHeaderChange = () => {
     setConfig((config) => {
-      return { ...config, showHeader: !config.showHeader };
+      return { ...config, showTitle: !config.showTitle };
     });
   };
 
   const onTitleChange = () => {
     setConfig((config) => {
-      return { ...config, showTitle: !config.showTitle };
+      return { ...config, showFilter: !config.showFilter };
     });
   };
 
@@ -255,10 +253,6 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 
   const onKeyPress = (e: KeyboardEvent) =>
     (e.key === "Esc" || e.key === "Escape") && onClose();
-
-  useEffect(() => {
-    if (scrollRef.current) scrollRef.current?.contentElement?.focus();
-  }, []);
 
   useEffect(() => {
     document.addEventListener("keyup", onKeyPress);
@@ -298,7 +292,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     barSubTitle = contentRestrictedTitle;
   }
 
-  const showLinkBar = (withPassword || denyDownload) && !fileId;
+  const showLinkBar = (withPassword || denyDownload) && roomId;
 
   return (
     <StyledModalDialog
@@ -343,7 +337,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
           )}
           <div className="embedding-panel_body">
             {!fileId && (
-              <Text className="embedding-panel_description">
+              <Text fontSize="12px" className="embedding-panel_description">
                 {t("EmbeddingPanel:EmbeddingDescription")}
               </Text>
             )}
@@ -362,7 +356,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
               fontSize="15px"
               fontWeight={600}
             >
-              {t("JavascriptSdk:CustomizingDisplay")}:
+              {t("JavascriptSdk:CustomizingDisplay")}
             </Text>
 
             <div className="embedding-panel_inputs-container">
@@ -389,14 +383,14 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                   fontSize="15px"
                   fontWeight={600}
                 >
-                  {t("JavascriptSdk:InterfaceElements")}:
+                  {t("JavascriptSdk:InterfaceElements")}
                 </Text>
 
                 <div className="embedding-panel_checkbox-container">
                   <CheckboxElement
                     label={t("Common:Title")}
                     onChange={onHeaderChange}
-                    isChecked={config.showHeader}
+                    isChecked={config.showTitle}
                     img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
                     title={t("JavascriptSdk:Header")}
                     description={t("JavascriptSdk:HeaderDescription")}
@@ -404,7 +398,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                   <CheckboxElement
                     label={t("JavascriptSdk:SearchFilterAndSort")}
                     onChange={onTitleChange}
-                    isChecked={config.showTitle}
+                    isChecked={config.showFilter}
                     img={theme.isBase ? SearchUrl : SearchDarkUrl}
                     title={t("JavascriptSdk:SearchBlock")}
                     description={t(

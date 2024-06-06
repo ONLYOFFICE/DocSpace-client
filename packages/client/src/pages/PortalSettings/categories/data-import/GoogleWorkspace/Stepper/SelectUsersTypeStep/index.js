@@ -92,16 +92,14 @@ const SelectUsersTypeStep = ({
 
       {filteredUsers.length > 0 && (
         <>
-          {!checkedUsers.result.length > 0 && (
-            <StyledSearchInput
-              id="search-users-type-input"
-              placeholder={t("Common:Search")}
-              value={searchValue}
-              onChange={onChangeInput}
-              refreshTimeout={100}
-              onClearSearch={onClearSearchInput}
-            />
-          )}
+          <StyledSearchInput
+            id="search-users-type-input"
+            placeholder={t("Common:Search")}
+            value={searchValue}
+            onChange={onChangeInput}
+            refreshTimeout={100}
+            onClearSearch={onClearSearchInput}
+          />
 
           <AccountsTable t={t} accountsData={filteredAccounts} />
 

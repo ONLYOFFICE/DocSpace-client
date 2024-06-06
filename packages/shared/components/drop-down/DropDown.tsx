@@ -37,7 +37,6 @@ import { Row } from "./sub-components/Row";
 
 import { DropDownProps } from "./DropDown.types";
 import { DEFAULT_PARENT_HEIGHT } from "./DropDown.constants";
-import { Backdrop } from "../backdrop";
 
 const DropDown = ({
   directionY = "bottom",
@@ -68,11 +67,6 @@ const DropDown = ({
   manualY,
   className,
   style,
-  withoutBackground,
-  withBackground,
-  withBackdrop,
-  isAside,
-  withBlur,
 }: DropDownProps) => {
   const theme = useTheme();
 
@@ -381,23 +375,19 @@ const DropDown = ({
       ? { height: `${calculatedHeight}px` }
       : {};
 
-    const toggleDropDown = () => {
-      clickOutsideAction?.({} as Event, !open);
-    };
-
     return (
       <>
-        {withBackdrop ? (
+        {/* {withBackdrop ? ( //TODO: consider a solution when there will be a structure of correct z index for components
           <Backdrop
             visible={open || false}
-            zIndex={310}
+            zIndex={199} // TODO: zIndex should almost be equal to the dropdown index
             onClick={toggleDropDown}
             withoutBlur={!withBlur}
             isAside={isAside}
             withBackground={withBackground}
             withoutBackground={withoutBackground}
           />
-        ) : null}
+        ) : null} */}
         <StyledDropdown
           ref={dropDownRef}
           style={style}

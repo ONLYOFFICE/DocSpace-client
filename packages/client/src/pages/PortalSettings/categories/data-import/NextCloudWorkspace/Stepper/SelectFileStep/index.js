@@ -39,7 +39,6 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 import { Box } from "@docspace/shared/components/box";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
-// import { mockRes } from "./tempMock";
 
 const Wrapper = styled.div`
   max-width: 700px;
@@ -101,6 +100,8 @@ const ErrorBlock = styled.div`
   }
 `;
 
+const FAILS_TRIES = 1;
+
 const SelectFileStep = ({
   t,
   incrementStep,
@@ -125,9 +126,10 @@ const SelectFileStep = ({
   const uploadInterval = useRef(null);
   const navigate = useNavigate();
 
+  const [failTries, setFailsTries] = useState(FAILS_TRIES);
+
   const goBack = () => {
-    cancelMigration();
-    setTimeout(() => navigate(-1), 100);
+    navigate("/portal-settings/data-import/migration");
   };
 
   const checkMigrationStatusAndUpdate = async () => {
@@ -188,15 +190,41 @@ const SelectFileStep = ({
   };
 
   const onUploadFile = async (file) => {
-    setProgress(0);
     setIsVisible(true);
     try {
+      if (Array.isArray(file)) throw new Error(t("Common:SomethingWentWrong"));
+
       await singleFileUploading(file, setProgress, isAbort);
+
+      if (isAbort.current) return;
+
       await initMigrationName(searchParams.get("service"));
 
       uploadInterval.current = setInterval(async () => {
         try {
           const res = await getMigrationStatus();
+
+          if (!res && failTries) {
+            setFailsTries((tries) => tries - 1);
+            return;
+          }
+
+          if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
+            clearInterval(uploadInterval.current);
+            setIsFileError(true);
+            setIsFileLoading(false);
+            toastr.error(res.error);
+            return;
+          }
+
+          if (res.isCompleted || res.parseResult.progress === 100) {
+            clearInterval(uploadInterval.current);
+            setIsFileLoading(false);
+            setIsVisible(false);
+            setUsers(res.parseResult);
+            setIsSaveDisabled(true);
+          }
+
           setProgress(res.progress);
 
           if (res.progress > 10) {
@@ -204,26 +232,14 @@ const SelectFileStep = ({
           } else {
             setIsVisible(true);
           }
-
-          if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
-            toastr.error(res.error);
-            setIsFileError(true);
-            setIsFileLoading(false);
-            clearInterval(uploadInterval.current);
-          } else if (res.isCompleted || res.parseResult.progress === 100) {
-            clearInterval(uploadInterval.current);
-            setIsFileLoading(false);
-            setIsVisible(false);
-            setProgress(100);
-            setUsers(res.parseResult);
-            setIsSaveDisabled(true);
-          }
         } catch (error) {
           toastr.error(error || error.message);
           setIsFileError(true);
           setIsFileLoading(false);
           setIsError(true);
           clearInterval(uploadInterval.current);
+        } finally {
+          isAbort.current = false;
         }
       }, 1000);
     } catch (error) {
@@ -238,6 +254,7 @@ const SelectFileStep = ({
     setIsFileError(false);
     setIsSaveDisabled(false);
     setIsFileLoading(true);
+    setFailsTries(FAILS_TRIES);
     try {
       onUploadFile(file);
     } catch (error) {
@@ -264,7 +281,6 @@ const SelectFileStep = ({
           window.URL.revokeObjectURL(url);
         });
     } catch (error) {
-      console.log(error);
       toastr.error(error);
     }
   };

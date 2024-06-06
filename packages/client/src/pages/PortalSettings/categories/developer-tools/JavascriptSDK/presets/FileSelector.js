@@ -385,7 +385,7 @@ const FileSelector = (props) => {
                     size={12}
                     tooltipContent={
                       <Text fontSize="12px">
-                        {t("CreateEditRoomDialog:PublicRoomDescription")}
+                        {t("Common:PublicRoomDescription")}
                       </Text>
                     }
                   />

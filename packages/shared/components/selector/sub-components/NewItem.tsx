@@ -30,16 +30,63 @@ import { Text } from "../../text";
 import { SelectorAddButton } from "../../selector-add-button";
 
 import { StyledItem } from "../Selector.styled";
+import NewItemDropDown from "./NewItemDropDown";
+import useCreateDropDown from "../hooks/useCreateDropDown";
 
 const NewItem = ({
   label,
   style,
+  dropDownItems,
   onCreateClick,
+  hotkey,
+  inputItemVisible,
 }: {
   label: string;
   style: React.CSSProperties;
-  onCreateClick: VoidFunction;
+  dropDownItems?: React.ReactElement[];
+  onCreateClick?: VoidFunction;
+  hotkey?: string;
+  inputItemVisible?: boolean;
 }) => {
+  const { isOpenDropDown, onCloseDropDown, setIsOpenDropDown } =
+    useCreateDropDown();
+
+  const onCreateClickAction = React.useCallback(() => {
+    if (isOpenDropDown || inputItemVisible) return;
+    if (dropDownItems) return setIsOpenDropDown(true);
+
+    onCreateClick?.();
+  }, [
+    dropDownItems,
+    inputItemVisible,
+    isOpenDropDown,
+    onCreateClick,
+    setIsOpenDropDown,
+  ]);
+
+  React.useEffect(() => {
+    if (isOpenDropDown && inputItemVisible) setIsOpenDropDown(false);
+  }, [inputItemVisible, isOpenDropDown, setIsOpenDropDown]);
+
+  const onKeyDown = React.useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key.toLowerCase() === hotkey && e.shiftKey) {
+        onCreateClickAction();
+      }
+    },
+    [hotkey, onCreateClickAction],
+  );
+
+  React.useEffect(() => {
+    if (!hotkey) return;
+    window.removeEventListener("keypress", onKeyDown);
+    window.addEventListener("keypress", onKeyDown);
+
+    return () => {
+      window.removeEventListener("keypress", onKeyDown);
+    };
+  }, [hotkey, onCreateClickAction, onKeyDown]);
+
   return (
     <StyledItem
       key="create-new-item"
@@ -48,7 +95,7 @@ const NewItem = ({
       isMultiSelect={false}
       noHover
     >
-      <SelectorAddButton onClick={onCreateClick} isAction />
+      <SelectorAddButton onClick={onCreateClickAction} isAction />
       <Text
         className="label label-disabled clicked-label"
         fontWeight={600}
@@ -56,11 +103,17 @@ const NewItem = ({
         noSelect
         truncate
         dir="auto"
-        onClick={onCreateClick}
+        onClick={onCreateClickAction}
         title={label}
       >
         {label}
       </Text>
+      {isOpenDropDown && dropDownItems && dropDownItems.length > 0 && (
+        <NewItemDropDown
+          dropDownItems={dropDownItems}
+          onCloseDropDown={onCloseDropDown}
+        />
+      )}
     </StyledItem>
   );
 };

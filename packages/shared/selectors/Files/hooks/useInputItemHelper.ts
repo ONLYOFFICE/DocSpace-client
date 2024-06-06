@@ -60,14 +60,12 @@ const useInputItemHelper = ({
     async (value: string, roomType?: RoomsType) => {
       if (!withCreate || (!selectedItemId && !roomType)) return;
 
-      if (selectedItemId) await createFolder(selectedItemId, value);
+      if (selectedItemId) createFolder(selectedItemId, value);
       else if (roomType) {
-        await createRoom({ roomType, title: value });
+        createRoom({ roomType, title: value });
       }
-
-      onCancelInput();
     },
-    [withCreate, selectedItemId, onCancelInput],
+    [withCreate, selectedItemId],
   );
 
   const addInputItem = React.useCallback(

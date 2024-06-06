@@ -128,9 +128,9 @@ const useSocketHelper = ({
 
             let idx = 1;
 
-            if (value[1]?.isInputItem) idx = 2;
+            if (value[0]?.isInputItem) idx = 0;
 
-            newValue.splice(idx, 0, item);
+            newValue.splice(idx, 1, item);
 
             return newValue;
           }

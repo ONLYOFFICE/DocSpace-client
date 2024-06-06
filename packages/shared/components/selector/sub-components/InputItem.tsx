@@ -72,6 +72,7 @@ const InputItem = ({
 
   const onAcceptInputAction = React.useCallback(async () => {
     if (requestRunning.current || !value) return;
+
     requestRunning.current = true;
     await onAcceptInput(value);
 

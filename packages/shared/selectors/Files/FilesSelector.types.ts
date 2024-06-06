@@ -33,8 +33,13 @@ import {
   TFolderSecurity,
 } from "../../api/files/types";
 import SocketIOHelper from "../../utils/socket";
-import { DeviceType, FolderType } from "../../enums";
+import { DeviceType, FolderType, RoomsType } from "../../enums";
 import { TRoomSecurity } from "../../api/rooms/types";
+
+export type TCreateDefineRoom = {
+  label: string;
+  type: RoomsType;
+};
 
 export interface UseRootHelperProps {
   setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
@@ -83,6 +88,8 @@ export type UseRoomsHelperProps = {
   setIsInit: (value: boolean) => void;
   setIsFirstLoad: (value: boolean) => void;
   withCreate: boolean;
+  createDefineRoomLabel?: string;
+  createDefineRoomType?: RoomsType;
   getRootData?: () => Promise<void>;
   setSelectedItemType: React.Dispatch<
     React.SetStateAction<"rooms" | "files" | undefined>
@@ -215,4 +222,6 @@ export type FilesSelectorProps = (
   getFilesArchiveError: (name: string) => string;
 
   withCreate: boolean;
+  createDefineRoomLabel?: string;
+  createDefineRoomType?: RoomsType;
 };

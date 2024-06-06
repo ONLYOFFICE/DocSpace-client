@@ -57,6 +57,8 @@ const useRoomsHelper = ({
   setIsInit,
   setIsFirstLoad,
   withCreate,
+  createDefineRoomLabel,
+  createDefineRoomType,
   getRootData,
   setSelectedItemType,
 }: UseRoomsHelperProps) => {
@@ -142,13 +144,17 @@ const useRoomsHelper = ({
       if (firstLoadRef.current || startIndex === 0) {
         if (withCreate) {
           setTotal(total + 1);
-          itemList.unshift({
+          const createItem: TSelectorItem = {
             isCreateNewItem: true,
-            label: t("NewRoom"),
+            label: createDefineRoomLabel ?? t("NewRoom"),
             id: "create-room-item",
             key: "create-room-item",
             hotkey: "r",
-            dropDownItems: createDropDownItems,
+
+            dropDownItems: createDefineRoomType
+              ? undefined
+              : createDropDownItems,
+
             onBackClick: () => {
               setIsRoot(true);
               setSelectedItemType(undefined);
@@ -161,7 +167,14 @@ const useRoomsHelper = ({
               });
               getRootData?.();
             },
-          });
+          };
+
+          if (createDefineRoomType) {
+            createItem.onCreateClick = () =>
+              addInputItem("", "", createDefineRoomType, createDefineRoomLabel);
+          }
+
+          itemList.unshift(createItem);
         } else {
           setTotal(total);
         }
@@ -181,6 +194,7 @@ const useRoomsHelper = ({
     },
     [
       setIsNextPageLoading,
+      withCreate,
       searchValue,
       setHasNextPage,
       setIsRoot,
@@ -190,11 +204,13 @@ const useRoomsHelper = ({
       onSetBaseFolderPath,
       setBreadCrumbs,
       setIsBreadCrumbsLoading,
-      withCreate,
       setItems,
       setTotal,
+      createDefineRoomLabel,
       t,
+      createDefineRoomType,
       createDropDownItems,
+      addInputItem,
       setSelectedItemType,
       getRootData,
     ],

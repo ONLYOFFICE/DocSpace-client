@@ -108,7 +108,10 @@ const FilesSelector = ({
   withBreadCrumbs: withBreadCrumbsProp,
   filesSettings,
   cancelButtonLabel,
+
   withCreate,
+  createDefineRoomLabel,
+  createDefineRoomType,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -198,6 +201,9 @@ const FilesSelector = ({
     setIsFirstLoad,
 
     withCreate,
+    createDefineRoomLabel,
+    createDefineRoomType,
+
     getRootData,
     setSelectedItemType,
   });

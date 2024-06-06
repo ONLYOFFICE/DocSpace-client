@@ -75,10 +75,12 @@ const Item = ({
   iconBadge,
   folderId,
   currentColorScheme,
+  isIndexEditingMode,
 }) => {
   const [isDragActive, setIsDragActive] = useState(false);
 
-  const isDragging = dragging ? showDragItems(item) : false;
+  const isDragging =
+    dragging && !isIndexEditingMode ? showDragItems(item) : false;
 
   let value = "";
   if (isDragging) value = `${item.id} dragging`;
@@ -222,6 +224,7 @@ const Items = ({
   currentDeviceType,
   folderAccess,
   currentColorScheme,
+  isIndexEditingMode,
 }) => {
   const getEndOfBlock = React.useCallback(
     (item) => {
@@ -347,6 +350,7 @@ const Items = ({
             iconBadge={iconBadge}
             folderId={`document_catalog-${FOLDER_NAMES[item.rootFolderType]}`}
             currentColorScheme={currentColorScheme}
+            isIndexEditingMode={isIndexEditingMode}
           />
         );
       });
@@ -399,6 +403,7 @@ const Items = ({
       firstLoad,
       activeItemId,
       emptyTrashInProgress,
+      isIndexEditingMode,
     ],
   );
 
@@ -425,6 +430,7 @@ export default inject(
     clientLoadingStore,
     userStore,
     settingsStore,
+    indexingStore,
   }) => {
     const { isCommunity, isPaymentPageAvailable, currentDeviceType } =
       authStore;
@@ -440,6 +446,8 @@ export default inject(
 
       startDrag,
     } = filesStore;
+
+    const { isIndexEditingMode } = indexingStore;
 
     const { firstLoad } = clientLoadingStore;
 
@@ -493,6 +501,7 @@ export default inject(
       currentDeviceType,
       folderAccess,
       currentColorScheme,
+      isIndexEditingMode,
     };
   },
 )(withTranslation(["Files", "Common", "Translations"])(observer(Items)));

@@ -95,6 +95,7 @@ const TableRow = (props: TableRowProps) => {
   return (
     <StyledTableRow
       onContextMenu={onContextMenu}
+      isIndexEditingMode={isIndexEditingMode}
       className={`${className} table-container_row`}
       {...rest}
     >

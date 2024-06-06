@@ -102,7 +102,7 @@ const FilesTableRow = (props) => {
   const dragStyles = {
     style: {
       background:
-        dragging && isDragging
+        dragging && isDragging && !isIndexEditingMode
           ? isDragActive
             ? acceptBackground
             : background

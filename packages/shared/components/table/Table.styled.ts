@@ -106,6 +106,13 @@ const StyledTableContainer = styled.div<{ useReactWindow?: boolean }>`
     }
   }
 
+  .droppable-index {
+    width: 100vw;
+    height: 3px;
+    background-color: rgb(71, 129, 209);
+    position: absolute;
+  }
+
   .lengthen-header {
     border-image-slice: 1;
     border-image-source: ${(props) =>
@@ -443,7 +450,10 @@ const StyledTableBody = styled.div<{
   }
 `;
 
-const StyledTableRow = styled.div<{ dragging?: boolean }>`
+const StyledTableRow = styled.div<{
+  dragging?: boolean;
+  isIndexEditingMode?: boolean;
+}>`
   display: contents;
 
   .table-container_header-checkbox {
@@ -458,7 +468,7 @@ const StyledTableRow = styled.div<{ dragging?: boolean }>`
 
   .droppable-hover {
     background: ${(props) =>
-      props.dragging
+      props.dragging && !props.isIndexEditingMode
         ? `${props.theme.dragAndDrop.acceptBackground} !important`
         : "none"};
   }

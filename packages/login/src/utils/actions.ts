@@ -34,6 +34,7 @@ import {
   TCapabilities,
   TGetColorTheme,
   TGetSsoSettings,
+  TPortalCultures,
   TSettings,
   TThirdPartyProvider,
   TVersionBuild,
@@ -142,4 +143,19 @@ export async function getSSO() {
   const sso = await res.json();
 
   return sso.response as TGetSsoSettings;
+}
+export async function getPortalCultures() {
+  const [getPortalCultures] = createRequest(
+    [`/settings/cultures`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getPortalCultures);
+
+  if (!res.ok) return;
+
+  const cultures = await res.json();
+
+  return cultures.response as TPortalCultures;
 }

@@ -301,3 +301,5 @@ export type TMigrationData = {
 } & TImportOptions;
 
 export type TSendWelcomeEmailData = { isSendWelcomeEmail: boolean };
+
+export type TPortalCultures = string[];

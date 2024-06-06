@@ -92,6 +92,7 @@ const SelectFolderDialog = ({
       getFilesArchiveError={() => ""}
       parentId={0}
       getIsDisabled={getIsDisabled}
+      withCreateFolder
     />
   );
 };

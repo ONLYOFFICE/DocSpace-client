@@ -24,22 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import * as Styled from "./index.styled";
-
 import { withTranslation } from "react-i18next";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
-import { flagsIcons } from "@docspace/shared/utils/image-flags";
-import { convertToCulture } from "@docspace/shared/utils/common";
-import { isMobile } from "@docspace/shared/utils";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
+import { DeviceType } from "@docspace/shared/enums";
 
+const keyedCollections = {
+  ar: "ar-SA",
+  en: "en-US",
+  el: "el-GR",
+  hy: "hy-AM",
+  ko: "ko-KR",
+  lo: "lo-LA",
+  pt: "pt-BR",
+  uk: "uk-UA",
+  ja: "ja-JP",
+  zh: "zh-CN",
+};
+
+const convertToCulture = (key) => {
+  return keyedCollections[key] ?? key;
+};
+
+const getOformLocaleByIndex = (index, array) => {
+  return array[index];
+};
 const LanguageFilter = ({
-  t,
-  oformsFilter,
-  defaultOformLocale,
   oformLocales,
   filterOformsByLocale,
   filterOformsByLocaleIsLoading,
@@ -47,14 +61,15 @@ const LanguageFilter = ({
   categoryFilterLoaded,
   languageFilterLoaded,
   oformFilesLoaded,
+  oformsLocal,
+  isMobileView,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const onToggleDropdownIsOpen = () => setIsOpen(!isOpen);
-  const onCloseDropdown = () => setIsOpen(false);
+  const convertedLocales = oformLocales.map((item) => convertToCulture(item));
 
   const onFilterByLocale = async (newLocale) => {
-    await filterOformsByLocale(newLocale);
-    onCloseDropdown();
+    const key = getOformLocaleByIndex(newLocale.index, oformLocales);
+
+    await filterOformsByLocale(key);
 
     const [sectionScroll] = document.getElementsByClassName("section-scroll");
     sectionScroll.scrollTop = 0;
@@ -71,72 +86,43 @@ const LanguageFilter = ({
     return <RectangleSkeleton width="41px" height="32px" />;
 
   return (
-    <Styled.LanguageFilter>
-      <Styled.LanguangeComboBox
-        id="comboBoxLanguage"
-        tabIndex={1}
-        className={"combobox"}
-        opened={isOpen}
-        onClick={onToggleDropdownIsOpen}
-        onSelect={onCloseDropdown}
-        isDisabled={false}
-        showDisabledItems={true}
-        directionX={"right"}
-        directionY={"both"}
-        scaled={true}
-        size={"base"}
-        manualWidth={"41px"}
-        disableIconClick={false}
-        disableItemClick={false}
-        isDefaultMode={false}
-        fixedDirection={true}
-        advancedOptionsCount={5}
-        fillIcon={false}
-        withBlur={isMobile()}
-        options={[]}
-        selectedOption={{}}
-        advancedOptions={
-          <>
-            {oformLocales?.map((locale) => (
-              <Styled.LanguageFilterItem
-                className={"language-item"}
-                key={locale}
-                isSelected={locale === oformsFilter.locale}
-                icon={flagsIcons?.get(`${convertToCulture(locale)}.react.svg`)}
-                label={
-                  isMobile()
-                    ? t(`Common:Culture_${convertToCulture(locale)}`)
-                    : undefined
-                }
-                onClick={() => onFilterByLocale(locale)}
-                fillIcon={false}
-              />
-            ))}
-          </>
-        }
-      >
-        <Styled.LanguageFilterSelectedItem
-          key={oformsFilter.locale}
-          icon={flagsIcons?.get(
-            `${convertToCulture(
-              oformsFilter.locale || defaultOformLocale,
-            )}.react.svg`,
-          )}
-          fillIcon={false}
-        />
-      </Styled.LanguangeComboBox>
-    </Styled.LanguageFilter>
+    <LanguageCombobox
+      cultures={convertedLocales}
+      isAuthenticated
+      onSelectLanguage={onFilterByLocale}
+      selectedCulture={convertToCulture(oformsLocal)}
+      id="comboBoxLanguage"
+      isMobileView={isMobileView}
+    />
   );
 };
 
-export default inject(({ oformsStore }) => ({
-  oformsFilter: oformsStore.oformsFilter,
-  defaultOformLocale: oformsStore.defaultOformLocale,
-  oformLocales: oformsStore.oformLocales,
-  filterOformsByLocale: oformsStore.filterOformsByLocale,
-  filterOformsByLocaleIsLoading: oformsStore.filterOformsByLocaleIsLoading,
-  setLanguageFilterLoaded: oformsStore.setLanguageFilterLoaded,
-  categoryFilterLoaded: oformsStore.categoryFilterLoaded,
-  languageFilterLoaded: oformsStore.languageFilterLoaded,
-  oformFilesLoaded: oformsStore.oformFilesLoaded,
-}))(withTranslation(["Common"])(observer(LanguageFilter)));
+export default inject(({ oformsStore, settingsStore }) => {
+  const {
+    oformLocales,
+    filterOformsByLocale,
+    filterOformsByLocaleIsLoading,
+    setLanguageFilterLoaded,
+    languageFilterLoaded,
+    oformFilesLoaded,
+    categoryFilterLoaded,
+    oformsFilter,
+  } = oformsStore;
+
+  const { currentDeviceType } = settingsStore;
+
+  const isMobileView = currentDeviceType === DeviceType.mobile;
+
+  return {
+    oformLocales,
+    filterOformsByLocale,
+    filterOformsByLocaleIsLoading,
+    setLanguageFilterLoaded,
+    categoryFilterLoaded,
+    languageFilterLoaded,
+    oformFilesLoaded,
+    oformsLocal: oformsFilter.locale,
+
+    isMobileView,
+  };
+})(withTranslation(["Common"])(observer(LanguageFilter)));

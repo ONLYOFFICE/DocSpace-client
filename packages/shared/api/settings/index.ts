@@ -50,6 +50,7 @@ import {
   TWorkspaceStatusResponse,
   TMigrationData,
   TSendWelcomeEmailData,
+  TPortalCultures,
 } from "./types";
 
 export async function getSettings(withPassword = false, headers = null) {
@@ -71,7 +72,7 @@ export async function getPortalCultures() {
   const res = (await request({
     method: "get",
     url: "/settings/cultures",
-  })) as string[];
+  })) as TPortalCultures;
 
   return res;
 }

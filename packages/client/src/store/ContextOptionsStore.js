@@ -880,6 +880,10 @@ class ContextOptionsStore {
     toastr.error(t("Files:DocumentEdited"));
   };
 
+  onShowWaitOperationToast = (t) => {
+    toastr.warning(t("Files:WaitOperation"));
+  };
+
   onClickMute = (e, item, t) => {
     const data = (e.currentTarget && e.currentTarget.dataset) || e;
     const { action } = data;
@@ -1061,6 +1065,8 @@ class ContextOptionsStore {
     //const emailSendIsDisabled = true;
     const showSeparator0 =
       (hasInfoPanel || !isMedia) && !this.publicRoomStore.isPublicRoom; // || !emailSendIsDisabled;
+
+    const { isGroupMenuBlocked } = this.filesActionsStore;
 
     const separator0 = showSeparator0
       ? {
@@ -1594,7 +1600,11 @@ class ContextOptionsStore {
           : t("Common:Delete"),
         icon: TrashReactSvgUrl,
         onClick: () =>
-          isEditing ? this.onShowEditingToast(t) : this.onClickDelete(item, t),
+          isEditing
+            ? this.onShowEditingToast(t)
+            : isGroupMenuBlocked
+              ? this.onShowWaitOperationToast(t)
+              : this.onClickDelete(item, t),
         disabled: false,
       },
       {
@@ -2051,6 +2061,7 @@ class ContextOptionsStore {
       ],
     };
 
+    const showUploadFolder = !(isMobile || isTablet);
     const moreActions = {
       id: "personal_more-form",
       className: "main-button_drop-down",
@@ -2072,7 +2083,7 @@ class ContextOptionsStore {
           key: "personal_more-form__separator-2",
         },
         uploadFiles,
-        uploadFolder,
+        showUploadFolder ? uploadFolder : null,
       ],
     };
 
@@ -2321,6 +2332,7 @@ class ContextOptionsStore {
         ]
       : [createTemplateForm, createTemplateNewFormFile, templateOformsGallery];
 
+    const showUploadFolder = !(isMobile || isTablet);
     const options = isRoomsFolder
       ? [
           {
@@ -2338,7 +2350,7 @@ class ContextOptionsStore {
           createNewFolder,
           { key: "separator", isSeparator: true },
           uploadFiles,
-          uploadFolder,
+          showUploadFolder ? uploadFolder : null,
         ];
 
     if (mainButtonItemsList && enablePlugins) {

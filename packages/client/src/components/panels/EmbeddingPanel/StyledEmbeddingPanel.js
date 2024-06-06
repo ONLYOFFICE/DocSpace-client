@@ -25,43 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
-import { Base } from "@docspace/shared/themes";
-import { Box } from "@docspace/shared/components/box";
-
-const StyledEmbeddingPanel = styled.div`
-  .embedding-panel {
-    .scroll-body {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding-left: 0 !important;
-            `
-          : css`
-              padding-right: 0 !important;
-            `}
-    }
-  }
-
-  .embedding_header {
-    padding: 0 16px;
-    border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
-
-    .embedding_heading {
-      font-weight: 700;
-      font-size: 21px;
-      margin: 12px 0;
-    }
-  }
-`;
-
-StyledEmbeddingPanel.defaultProps = { theme: Base };
-
-const StyledScrollbar = styled(Scrollbar)`
-  position: relative;
-  padding: 16px 0;
-  height: calc(100vh - 87px) !important;
-`;
 
 const StyledBody = styled.div`
   .embedding-panel_banner {
@@ -78,8 +41,6 @@ const StyledBody = styled.div`
   }
 
   .embedding-panel_body {
-    padding: 20px 16px 0 16px;
-
     .embedding-panel_description {
       color: ${({ theme }) => theme.embeddingPanel.descriptionTextColor};
       margin-bottom: 18px;
@@ -174,17 +135,4 @@ const StyledBody = styled.div`
   }
 `;
 
-const StyledButtons = styled(Box)`
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
-  background: ${({ theme }) => theme.filesPanels.sharing.backgroundButtons};
-  border-top: ${({ theme }) => theme.filesPanels.sharing.borderTop};
-`;
-
-export { StyledEmbeddingPanel, StyledScrollbar, StyledBody, StyledButtons };
+export { StyledBody };

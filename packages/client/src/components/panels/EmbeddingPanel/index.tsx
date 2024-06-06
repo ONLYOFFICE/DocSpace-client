@@ -52,6 +52,11 @@ import DialogsStore from "SRC_DIR/store/DialogsStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { UserStore } from "@docspace/shared/store/UserStore";
 
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import HeaderUrl from "PUBLIC_DIR/images/sdk-presets_header.react.svg?url";
 import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
@@ -60,12 +65,7 @@ import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
 
-import {
-  StyledEmbeddingPanel,
-  StyledScrollbar,
-  StyledButtons,
-  StyledBody,
-} from "./StyledEmbeddingPanel";
+import { StyledBody } from "./StyledEmbeddingPanel";
 
 import { DisplayBlock } from "./sub-components/DisplayBlock";
 import { CheckboxElement } from "./sub-components/CheckboxElement";
@@ -310,166 +310,157 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   const showLinkBar = (withPassword || denyDownload) && !fileId;
 
   const embeddingPanelComponent = (
-    <StyledEmbeddingPanel>
-      <Backdrop onClick={onClose} visible={visible} isAside zIndex={310} />
-      <Aside
-        className="embedding-panel"
-        visible={visible}
-        onClose={onClose}
-        withoutBodyScroll
-      >
-        <div className="embedding_header">
-          <Heading className="embedding_heading">
-            {t("Files:EmbeddingSettings")}
-          </Heading>
-        </div>
-        <StyledScrollbar ref={scrollRef}>
-          <StyledBody>
-            {barIsVisible && (
-              <div className="embedding-panel_banner">
-                <Text fontSize="12px" fontWeight={400}>
-                  {isAdmin ? (
-                    <Trans
-                      t={t}
-                      ns="EmbeddingPanel"
-                      i18nKey="EmbeddingBarAllowList"
-                      components={{
-                        1: (
-                          <Link
-                            onClick={onOpenDevTools}
-                            color={currentColorScheme?.main?.accent}
-                            isHovered
-                          />
-                        ),
-                      }}
-                    >
-                      {`"Add the website URL for embedding to the <1>allow list</1>."`}
-                    </Trans>
-                  ) : (
-                    t("EmbeddingPanel:EmbeddingBarDescription")
-                  )}
-                </Text>
-                <IconButton
-                  className="embedding-panel_banner-close-icon"
-                  size={12}
-                  iconName={CrossReactSvg}
-                  onClick={onCloseBar}
-                />
-              </div>
-            )}
-            <div className="embedding-panel_body">
-              {!fileId && (
-                <Text className="embedding-panel_description">
-                  {t("EmbeddingPanel:EmbeddingDescription")}
-                </Text>
-              )}
-
-              {showLinkBar && (
-                <PublicRoomBar
-                  className="embedding-panel_bar"
-                  headerText={barTitle}
-                  bodyText={barSubTitle}
-                  iconName={TabletLinkReactSvgUrl}
-                />
-              )}
-
-              <Text
-                className="embedding-panel_header-text"
-                fontSize="15px"
-                fontWeight={600}
-              >
-                {t("JavascriptSdk:CustomizingDisplay")}:
-              </Text>
-
-              <div className="embedding-panel_inputs-container">
-                <DisplayBlock
-                  label={t("EmbeddingPanel:Width")}
-                  inputValue={widthValue}
-                  onInputChange={onChangeWidth}
-                  selectedOption={widthDimension}
-                  onSelectDimension={onChangeWidthDimension}
-                />
-                <DisplayBlock
-                  label={t("EmbeddingPanel:Height")}
-                  inputValue={heightValue}
-                  onInputChange={onChangeHeight}
-                  selectedOption={heightDimension}
-                  onSelectDimension={onChangeHeightDimension}
-                />
-              </div>
-
-              {!fileId && (
-                <>
-                  <Text
-                    className="embedding-panel_header-text"
-                    fontSize="15px"
-                    fontWeight={600}
+    <ModalDialog
+      visible={visible}
+      onClose={onClose}
+      displayType={ModalDialogType.aside}
+    >
+      <ModalDialog.Header>{t("Files:EmbeddingSettings")}</ModalDialog.Header>
+      <ModalDialog.Body>
+        <StyledBody>
+          {barIsVisible && (
+            <div className="embedding-panel_banner">
+              <Text fontSize="12px" fontWeight={400}>
+                {isAdmin ? (
+                  <Trans
+                    t={t}
+                    ns="EmbeddingPanel"
+                    i18nKey="EmbeddingBarAllowList"
+                    components={{
+                      1: (
+                        <Link
+                          onClick={onOpenDevTools}
+                          color={currentColorScheme?.main?.accent}
+                          isHovered
+                        />
+                      ),
+                    }}
                   >
-                    {t("JavascriptSdk:InterfaceElements")}:
-                  </Text>
+                    {`"Add the website URL for embedding to the <1>allow list</1>."`}
+                  </Trans>
+                ) : (
+                  t("EmbeddingPanel:EmbeddingBarDescription")
+                )}
+              </Text>
+              <IconButton
+                className="embedding-panel_banner-close-icon"
+                size={12}
+                iconName={CrossReactSvg}
+                onClick={onCloseBar}
+              />
+            </div>
+          )}
+          <div className="embedding-panel_body">
+            {!fileId && (
+              <Text className="embedding-panel_description">
+                {t("EmbeddingPanel:EmbeddingDescription")}
+              </Text>
+            )}
 
-                  <div className="embedding-panel_checkbox-container">
-                    <CheckboxElement
-                      label={t("Common:Title")}
-                      onChange={onHeaderChange}
-                      isChecked={config.showHeader}
-                      img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
-                      title={t("JavascriptSdk:Header")}
-                      description={t("JavascriptSdk:HeaderDescription")}
-                    />
-                    <CheckboxElement
-                      label={t("JavascriptSdk:SearchFilterAndSort")}
-                      onChange={onTitleChange}
-                      isChecked={config.showTitle}
-                      img={theme.isBase ? SearchUrl : SearchDarkUrl}
-                      title={t("JavascriptSdk:SearchBlock")}
-                      description={t(
-                        "JavascriptSdk:ManagerSearchBlockDescription",
-                      )}
-                    />
-                  </div>
-                </>
-              )}
+            {showLinkBar && (
+              <PublicRoomBar
+                className="embedding-panel_bar"
+                headerText={barTitle}
+                bodyText={barSubTitle}
+                iconName={TabletLinkReactSvgUrl}
+              />
+            )}
 
-              <div className="embedding-panel_code-container">
+            <Text
+              className="embedding-panel_header-text"
+              fontSize="15px"
+              fontWeight={600}
+            >
+              {t("JavascriptSdk:CustomizingDisplay")}:
+            </Text>
+
+            <div className="embedding-panel_inputs-container">
+              <DisplayBlock
+                label={t("EmbeddingPanel:Width")}
+                inputValue={widthValue}
+                onInputChange={onChangeWidth}
+                selectedOption={widthDimension}
+                onSelectDimension={onChangeWidthDimension}
+              />
+              <DisplayBlock
+                label={t("EmbeddingPanel:Height")}
+                inputValue={heightValue}
+                onInputChange={onChangeHeight}
+                selectedOption={heightDimension}
+                onSelectDimension={onChangeHeightDimension}
+              />
+            </div>
+
+            {!fileId && (
+              <>
                 <Text
                   className="embedding-panel_header-text"
                   fontSize="15px"
                   fontWeight={600}
                 >
-                  {t("JavascriptSdk:Code")}
+                  {t("JavascriptSdk:InterfaceElements")}:
                 </Text>
-                <IconButton
-                  className="embedding-panel_copy-icon"
-                  size={16}
-                  iconName={CopyReactSvgUrl}
-                  onClick={onCopyLink}
-                />
-                <Textarea isReadOnly value={codeBlock} heightTextArea="150px" />
-              </div>
-            </div>
-          </StyledBody>
-        </StyledScrollbar>
 
-        <StyledButtons>
-          <Button
-            className="send-invitation"
-            scale
-            size={ButtonSize.normal}
-            primary
-            onClick={onCopyAndClose}
-            label={t("Common:Copy")}
-          />
-          <Button
-            className="cancel-button"
-            scale
-            size={ButtonSize.normal}
-            onClick={onClose}
-            label={t("Common:CancelButton")}
-          />
-        </StyledButtons>
-      </Aside>
-    </StyledEmbeddingPanel>
+                <div className="embedding-panel_checkbox-container">
+                  <CheckboxElement
+                    label={t("Common:Title")}
+                    onChange={onHeaderChange}
+                    isChecked={config.showHeader}
+                    img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
+                    title={t("JavascriptSdk:Header")}
+                    description={t("JavascriptSdk:HeaderDescription")}
+                  />
+                  <CheckboxElement
+                    label={t("JavascriptSdk:SearchFilterAndSort")}
+                    onChange={onTitleChange}
+                    isChecked={config.showTitle}
+                    img={theme.isBase ? SearchUrl : SearchDarkUrl}
+                    title={t("JavascriptSdk:SearchBlock")}
+                    description={t(
+                      "JavascriptSdk:ManagerSearchBlockDescription",
+                    )}
+                  />
+                </div>
+              </>
+            )}
+
+            <div className="embedding-panel_code-container">
+              <Text
+                className="embedding-panel_header-text"
+                fontSize="15px"
+                fontWeight={600}
+              >
+                {t("JavascriptSdk:Code")}
+              </Text>
+              <IconButton
+                className="embedding-panel_copy-icon"
+                size={16}
+                iconName={CopyReactSvgUrl}
+                onClick={onCopyLink}
+              />
+              <Textarea isReadOnly value={codeBlock} heightTextArea="150px" />
+            </div>
+          </div>
+        </StyledBody>
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          className="send-invitation"
+          scale
+          size={ButtonSize.normal}
+          primary
+          onClick={onCopyAndClose}
+          label={t("Common:Copy")}
+        />
+        <Button
+          className="cancel-button"
+          scale
+          size={ButtonSize.normal}
+          onClick={onClose}
+          label={t("Common:CancelButton")}
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
   );
 
   const renderPortal = () => {

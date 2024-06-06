@@ -117,8 +117,6 @@ const SyncContainer = ({
         primary
         onClick={onSync}
         label={t("LdapSyncButton")}
-        //minwidth={displaySettings && "auto"}
-        //isLoading={isSaving}
         isDisabled={!isLdapEnabled || isUIDisabled}
       />
 
@@ -145,13 +143,7 @@ const SyncContainer = ({
               isDisabled={!isLdapEnabled || isUIDisabled}
             />
           </div>
-          <Text
-            fontSize="12px"
-            fontWeight={600}
-            lineHeight="16px"
-            // color={"#A3A9AE"}
-            noSelect
-          >
+          <Text fontSize="12px" fontWeight={600} lineHeight="16px" noSelect>
             {`${t("LdapNextSync")}: ${nextSyncDate.toFormat("DDDD tt")} UTC`}
           </Text>
           <Button

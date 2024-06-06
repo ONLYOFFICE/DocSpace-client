@@ -26,7 +26,6 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useHotkeys, Options } from "react-hotkeys-hook";
-import throttle from "lodash/throttle";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 interface AccountsHotkeysProps {
@@ -75,12 +74,10 @@ const useAccountsHotkeys = ({
   );
 
   useEffect(() => {
-    const throttledKeyDownEvent = throttle(onKeyDown, 300);
-
-    window.addEventListener("keydown", throttledKeyDownEvent);
+    window.addEventListener("keydown", onKeyDown);
 
     return () => {
-      window.removeEventListener("keydown", throttledKeyDownEvent);
+      window.removeEventListener("keydown", onKeyDown);
     };
   }, [onKeyDown]);
 

@@ -63,8 +63,9 @@ import useLoadersHelper from "./hooks/useLoadersHelper";
 import useRoomsHelper from "./hooks/useRoomsHelper";
 import useRootHelper from "./hooks/useRootHelper";
 import useSocketHelper from "./hooks/useSocketHelper";
-import { FilesSelectorProps } from "./FilesSelector.types";
 import useFilesSettings from "./hooks/useFilesSettings";
+
+import { FilesSelectorProps } from "./FilesSelector.types";
 
 const FilesSelector = ({
   socketHelper,
@@ -107,7 +108,10 @@ const FilesSelector = ({
   withBreadCrumbs: withBreadCrumbsProp,
   filesSettings,
   cancelButtonLabel,
-  withCreateFolder,
+
+  withCreate,
+  createDefineRoomLabel,
+  createDefineRoomType,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -149,7 +153,7 @@ const FilesSelector = ({
     socketSubscribers,
     disabledItems,
     filterParam,
-    withCreateFolder,
+    withCreate,
     getIcon,
     setItems,
     setBreadCrumbs,
@@ -195,6 +199,46 @@ const FilesSelector = ({
     isInit,
     setIsInit,
     setIsFirstLoad,
+
+    withCreate,
+    createDefineRoomLabel,
+    createDefineRoomType,
+
+    getRootData,
+    setSelectedItemType,
+  });
+
+  const { getFileList } = useFilesHelper({
+    setIsBreadCrumbsLoading,
+    setBreadCrumbs,
+    setIsNextPageLoading,
+    setHasNextPage,
+    setTotal,
+    setItems,
+    selectedItemId,
+    isFirstLoad,
+    setIsRoot,
+    searchValue,
+    disabledItems,
+    setSelectedItemSecurity,
+    isThirdParty,
+    setSelectedTreeNode,
+    filterParam,
+    getRootData,
+    onSetBaseFolderPath,
+    isRoomsOnly,
+    isUserOnly,
+    rootThirdPartyId,
+    getRoomList,
+    getIcon,
+    setIsFirstLoad,
+    setIsSelectedParentFolder,
+    roomsFolderId,
+    getFilesArchiveError,
+    isInit,
+    setIsInit,
+    withCreate,
+    setSelectedItemId,
   });
 
   const onClickBreadCrumb = React.useCallback(
@@ -262,39 +306,6 @@ const FilesSelector = ({
       setIsFirstLoad,
     ],
   );
-
-  const { getFileList } = useFilesHelper({
-    setIsBreadCrumbsLoading,
-    setBreadCrumbs,
-    setIsNextPageLoading,
-    setHasNextPage,
-    setTotal,
-    setItems,
-    selectedItemId,
-    isFirstLoad,
-    setIsRoot,
-    searchValue,
-    disabledItems,
-    setSelectedItemSecurity,
-    isThirdParty,
-    setSelectedTreeNode,
-    filterParam,
-    getRootData,
-    onSetBaseFolderPath,
-    isRoomsOnly,
-    isUserOnly,
-    rootThirdPartyId,
-    getRoomList,
-    getIcon,
-    setIsFirstLoad,
-    setIsSelectedParentFolder,
-    roomsFolderId,
-    getFilesArchiveError,
-    isInit,
-    setIsInit,
-    withCreateFolder,
-    setSelectedItemId,
-  });
 
   const onSelectAction = React.useCallback(
     (

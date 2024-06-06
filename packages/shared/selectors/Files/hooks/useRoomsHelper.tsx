@@ -95,11 +95,17 @@ const useRoomsHelper = ({
   }, [addInputItem, t]);
 
   const getRoomList = React.useCallback(
-    async (startIndex: number) => {
+    async (sIndex: number) => {
       if (requestRunning.current) return;
 
       requestRunning.current = true;
       setIsNextPageLoading(true);
+
+      let startIndex = sIndex;
+
+      if (withCreate) {
+        startIndex -= startIndex % 100;
+      }
 
       const filterValue = searchValue || "";
 

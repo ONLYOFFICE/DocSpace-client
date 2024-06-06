@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -24,58 +23,28 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { PortalFeaturesLimitations } from "@docspace/shared/enums";
+import { getConvertedSize } from "@docspace/shared/utils/common";
 
-"use client";
+export const parseQuota = (quotaCharacteristics) => {
+  const maxValue = quotaCharacteristics.value;
+  const usedValue = quotaCharacteristics.used.value;
 
-import React from "react";
-import styled from "styled-components";
+  if (maxValue === PortalFeaturesLimitations.Unavailable) return;
 
-import { mobile } from "@docspace/shared/utils/device";
-import { getLogoUrl } from "@docspace/shared/utils/common";
-import { Base, Dark } from "@docspace/shared/themes";
-import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
-import LanguageComboboxWrapper from "./LanguageCombobox";
+  const isExistsMaxValue = maxValue !== PortalFeaturesLimitations.Limitless;
 
-const StyledSimpleNav = styled.div`
-  display: none;
-  height: 48px;
-  align-items: center;
-  justify-content: center;
-  background-color: ${(props) => props.theme?.login?.navBackground};
+  const resultingMaxValue =
+    quotaCharacteristics.type === "size" && isExistsMaxValue
+      ? getConvertedSize(t, maxValue)
+      : isExistsMaxValue
+        ? maxValue
+        : null;
 
-  svg {
-    path:last-child {
-      fill: ${(props) => props.theme.client?.home?.logoColor};
-    }
-  }
+  const resultingUsedValue =
+    quotaCharacteristics.type === "size"
+      ? getConvertedSize(t, usedValue)
+      : usedValue;
 
-  @media ${mobile} {
-    display: flex;
-
-    .language-combo-box {
-      position: absolute;
-      top: 7px;
-      right: 8px;
-    }
-  }
-`;
-
-StyledSimpleNav.defaultProps = { theme: Base };
-
-interface SimpleNavProps {
-  systemTheme: ThemeKeys;
-}
-
-const SimpleNav = ({ systemTheme }: SimpleNavProps) => {
-  const isDark = systemTheme === ThemeKeys.DarkStr;
-  const logoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, isDark);
-
-  return (
-    <StyledSimpleNav id="login-header" theme={isDark ? Dark : Base}>
-      <img src={logoUrl} alt="logo-url" />
-      <LanguageComboboxWrapper />
-    </StyledSimpleNav>
-  );
+  return { used: resultingUsedValue, max: resultingMaxValue };
 };
-
-export default SimpleNav;

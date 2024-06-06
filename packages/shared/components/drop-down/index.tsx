@@ -33,11 +33,23 @@ import { DropDownProps } from "./DropDown.types";
 import { EnhancedComponent } from "./DropDown";
 
 const DropDown = (props: DropDownProps) => {
-  const { eventTypes, forceCloseClickOutside } = props;
+  const {
+    clickOutsideAction,
+    open,
+    withBackdrop = true,
 
-  // const toggleDropDown = () => {
-  //   clickOutsideAction?.({} as Event, !open);
-  // };
+    withBlur = false,
+
+    isAside,
+    withBackground,
+    eventTypes,
+    forceCloseClickOutside,
+    withoutBackground,
+  } = props;
+
+  const toggleDropDown = () => {
+    clickOutsideAction?.({} as Event, !open);
+  };
 
   const eventTypesProp = forceCloseClickOutside
     ? {}
@@ -49,7 +61,7 @@ const DropDown = (props: DropDownProps) => {
 
   return (
     <>
-      {/* {withBackdrop ? (
+      {withBackdrop ? (
         <Backdrop
           visible={open || false}
           zIndex={199}
@@ -59,12 +71,11 @@ const DropDown = (props: DropDownProps) => {
           withBackground={withBackground}
           withoutBackground={withoutBackground}
         />
-      ) : null} */}
+      ) : null}
       <EnhancedComponent {...eventTypesProp} {...props} />
     </>
   );
 };
-
 DropDown.defaultProps = {
   withBackdrop: true,
   showDisabledItems: false,

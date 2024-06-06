@@ -445,10 +445,20 @@ class SelectionStore {
   };
 
   setAllSessions = () => {
-    this.allSessions = this.sessions.map((session) => {
-      const socketData = this.sessionsFromSocket.find(
-        (user) => user.id === session.id,
+    const socketDataMap = new Map(
+      this.sessionsFromSocket.map((user) => [user.id, user]),
+    );
+
+    const filteredSessions = this.sessions.filter((session) => {
+      const socketData = socketDataMap.get(session.id);
+      return (
+        socketData && socketData.sessions && socketData.sessions.length > 0
       );
+    });
+
+    this.allSessions = filteredSessions.map((session) => {
+      const socketData = socketDataMap.get(session.id);
+      console.log("allSessions", this.sessions);
       return {
         ...session,
         status: socketData ? socketData.status : "offline",

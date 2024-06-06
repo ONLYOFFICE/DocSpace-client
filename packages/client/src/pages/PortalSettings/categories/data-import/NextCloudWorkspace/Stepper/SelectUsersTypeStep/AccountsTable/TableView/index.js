@@ -49,11 +49,11 @@ const UserSelectTableContainer = styled(StyledTableContainer)`
     position: sticky;
     z-index: 201;
     width: calc(100% + 40px);
-    margin-top: 20px;
+    margin-top: -33px;
     margin-left: -20px;
     top: 0;
 
-    margin-bottom: -37.5px;
+    margin-bottom: -36px;
 
     .table-container_group-menu {
       border-image-slice: 0;

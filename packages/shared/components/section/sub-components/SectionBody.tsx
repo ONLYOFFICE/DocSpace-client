@@ -61,6 +61,8 @@ const SectionBody = React.memo(
     }>(null);
     const location = useLocation();
 
+    const [isOpen, setIsOpen] = React.useState(false);
+
     const onContextMenu = React.useCallback(
       (e: MouseEvent | React.MouseEvent<Element, MouseEvent>) => {
         const bodyElem = document.getElementsByClassName(
@@ -80,10 +82,19 @@ const SectionBody = React.memo(
         e.stopPropagation();
         e.preventDefault();
 
-        if (cmRef.current) cmRef.current.toggle(e);
+        // if (cmRef.current) cmRef.current.toggle(e);
+        if (cmRef.current) {
+          if (!isOpen) cmRef?.current?.show(e);
+          else cmRef?.current?.hide(e);
+          setIsOpen(!isOpen);
+        }
       },
-      [getContextModel],
+      [getContextModel, isOpen],
     );
+
+    const onHide = () => {
+      setIsOpen(false);
+    };
 
     const focusSectionBody = React.useCallback(() => {
       if (focusRef.current) focusRef.current.focus({ preventScroll: true });
@@ -137,6 +148,7 @@ const SectionBody = React.memo(
     const contextBlock = (
       <ContextMenu
         ref={cmRef}
+        onHide={onHide}
         getContextModel={getContextModel}
         withBackdrop
         model={[]}

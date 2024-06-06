@@ -1030,18 +1030,22 @@ export const getBaseTheme = () => {
       },
 
       label: {
-        height: " 32px",
+        height: " 30px",
+        border: "1px solid #ECEEF1",
         borderRadius: "16px",
         minWidth: "fit-content",
         marginRight: "8px",
         width: "fit-content",
 
         backgroundColor: blueLightMid,
-        hoverBackgroundColor: grayLight,
+        hoverBackgroundColor: "#F3F4F4",
         disableBackgroundColor: grayLightMid,
+        activeBackgroundColor: "#ECEEF1",
+        activeSelectedBackgroundColor:
+          "linear-gradient(0deg, #265a8f, #265a8f), linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1))",
 
         title: {
-          margin: "7px 15px 7px 15px",
+          padding: "4px 16px",
           overflow: "hidden",
           color: white,
           hoverColor: black,
@@ -2391,10 +2395,17 @@ export const getBaseTheme = () => {
       item: {
         hoverBackground: grayLight,
         selectedBackground: lightHover,
+
+        inputButtonBorder: "#D0D5DA",
+        inputButtonBorderHover: grayMain,
       },
 
       emptyScreen: {
         descriptionColor: cyanBlueDarkShade,
+
+        buttonColor: "#657077",
+        hoverButtonColor: "#333333",
+        pressedButtonColor: "#555F65",
       },
     },
 

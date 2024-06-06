@@ -184,6 +184,8 @@ const CreateEvent = ({
         searchParams.append("formId", gallerySelected.id);
       }
 
+      searchParams.append("hash", new Date().getTime());
+
       const url = combineUrl(
         window.location.origin,
         window.DocSpaceConfig?.proxy?.url,

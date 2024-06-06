@@ -1000,18 +1000,21 @@ const Dark: TTheme = {
     },
 
     label: {
-      height: " 32px",
+      height: " 30px",
+      border: "1px solid #474747",
       borderRadius: "16px",
       minWidth: "fit-content",
       marginRight: "8px",
       width: "fit-content",
 
-      backgroundColor: "#d6d6d6",
-      hoverBackgroundColor: "#3D3D3D",
-      disableBackgroundColor: "#292929",
+      backgroundColor: "#FFFFFF",
+      hoverBackgroundColor: "#474747",
+      disableBackgroundColor: "#282828",
+      activeBackgroundColor: "#282828",
+      activeSelectedBackgroundColor: "linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(0deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18))",
 
       title: {
-        margin: "7px 15px 7px 15px",
+        padding: "4px 16px",
         overflow: "hidden",
         color: black,
         hoverColor: "#a4a4a4",
@@ -2370,10 +2373,16 @@ const Dark: TTheme = {
     item: {
       hoverBackground: "#3d3d3d",
       selectedBackground: "#3d3d3d",
+
+      inputButtonBorder: "#474747",
+      inputButtonBorderHover: grayMaxLight,
     },
 
     emptyScreen: {
       descriptionColor: "#ADADAD",
+      buttonColor: "#ADADAD",
+      hoverButtonColor: "#FFFFFF",
+      pressedButtonColor: "#CCCCCC",
     },
   },
 

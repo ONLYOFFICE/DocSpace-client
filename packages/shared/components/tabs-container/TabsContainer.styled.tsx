@@ -41,7 +41,9 @@ const NavItem = styled.div`
   position: relative;
   white-space: nowrap;
   display: flex;
+  gap: 8px;
 `;
+
 NavItem.defaultProps = { theme: Base };
 
 const Label = styled.div<{ isDisabled?: boolean; selected?: boolean }>`
@@ -49,10 +51,12 @@ const Label = styled.div<{ isDisabled?: boolean; selected?: boolean }>`
   border-radius: ${(props) => props.theme.tabsContainer.label.borderRadius};
   min-width: ${(props) => props.theme.tabsContainer.label.minWidth};
   width: ${(props) => props.theme.tabsContainer.label.width};
+  display: flex;
+  align-items: center;
 
   .title_style {
     text-align: center;
-    margin: ${(props) => props.theme.tabsContainer.label.title.margin};
+    padding: ${(props) => props.theme.tabsContainer.label.title.padding};
     overflow: ${(props) =>
       props.theme.interfaceDirection === "rtl" ? "visible" : "hidden"};
     ${NoUserSelect};
@@ -67,13 +71,25 @@ const Label = styled.div<{ isDisabled?: boolean; selected?: boolean }>`
   ${(props) =>
     props.selected
       ? css`
+          border: 1px solid transparent;
           cursor: default;
           background-color: ${props.theme.tabsContainer.label.backgroundColor};
           .title_style {
             color: ${props.theme.tabsContainer.label.title.color};
           }
+
+          &:hover {
+            cursor: pointer;
+            opacity: 0.85;
+          }
+
+          &:active {
+            background: ${props.theme.tabsContainer.label
+              .activeSelectedBackgroundColor};
+          }
         `
       : css`
+          border: ${props.theme.tabsContainer.label.border};
           &:hover {
             cursor: pointer;
             background-color: ${props.theme.tabsContainer.label
@@ -82,14 +98,17 @@ const Label = styled.div<{ isDisabled?: boolean; selected?: boolean }>`
               color: ${props.theme.tabsContainer.label.title.hoverColor};
             }
           }
+
+          &:active {
+            background-color: ${props.theme.tabsContainer.label
+              .activeBackgroundColor};
+          }
         `}
 
 ${(props) =>
     props.isDisabled &&
-    props.selected &&
     css`
-      background-color: ${props.theme.tabsContainer.label
-        .disableBackgroundColor};
+      ${props.selected && `opacity: 0.6;`}
       .title_style {
         color: ${props.theme.tabsContainer.label.title.disableColor};
       }

@@ -40,7 +40,7 @@ const PreviewActionsBlock = ({ t, textStyles, keyTextStyles }) => {
       <Row className="hotkeys_row">
         <>
           <Text {...textStyles}>{t("HotkeysPlayPause")}</Text>
-          <Text {...keyTextStyles}>{t("HotkeysSpaceKey")}</Text>
+          <Text {...keyTextStyles}>Space</Text>
         </>
       </Row>
       <Row className="hotkeys_row">

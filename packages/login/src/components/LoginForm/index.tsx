@@ -71,7 +71,8 @@ const LoginForm = ({
 
   const theme = useTheme();
 
-  const { t, ready } = useTranslation(["Login", "Common"]);
+  const { t, ready, i18n } = useTranslation(["Login", "Common"]);
+  const currentCulture = i18n.language;
 
   const message = searchParams.get("message");
   const confirmedEmail = searchParams.get("confirmedEmail");
@@ -110,14 +111,13 @@ const LoginForm = ({
     setIdentifier(email);
     setEmailFromInvitation(email);
   }, [loginData]);
-
   const authCallback = useCallback(
     async (profile: string) => {
       localStorage.removeItem("profile");
       localStorage.removeItem("code");
 
       try {
-        const response = (await thirdPartyLogin(profile)) as {
+        const response = (await thirdPartyLogin(profile, currentCulture)) as {
           confirmUrl: string;
           token: unknown;
         };
@@ -151,7 +151,7 @@ const LoginForm = ({
         );
       }
     },
-    [t, referenceUrl],
+    [t, referenceUrl, currentCulture],
   );
 
   useEffect(() => {
@@ -162,8 +162,12 @@ const LoginForm = ({
   }, [authCallback]);
 
   useEffect(() => {
-    if (message) setErrorText(message);
-    if (confirmedEmail) setIdentifier(confirmedEmail);
+    window.authCallback = authCallback;
+  }, [authCallback]);
+
+  useEffect(() => {
+    message && setErrorText(message);
+    confirmedEmail && setIdentifier(confirmedEmail);
 
     const messageEmailConfirmed = t("MessageEmailConfirmed");
     const messageAuthorize = t("MessageAuthorize");
@@ -172,8 +176,6 @@ const LoginForm = ({
 
     if (confirmedEmail && ready) toastr.success(text);
     if (authError && ready) toastr.error(t("Common:ProviderLoginError"));
-
-    window.authCallback = authCallback;
   }, [message, confirmedEmail, t, ready, authError, authCallback]);
 
   const onChangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -232,7 +234,7 @@ const LoginForm = ({
     isDesktop && checkPwd();
     const session = !isChecked;
 
-    login(user, hash, session, captchaToken)
+    login(user, hash, session, captchaToken, currentCulture)
       .then((res: string | object) => {
         const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath =
@@ -283,6 +285,7 @@ const LoginForm = ({
     reCaptchaPublicKey,
     setIsLoading,
     referenceUrl,
+    currentCulture,
   ]);
 
   const onBlurEmail = () => {

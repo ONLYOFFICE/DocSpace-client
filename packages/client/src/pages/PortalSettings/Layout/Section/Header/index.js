@@ -100,6 +100,8 @@ const HeaderContainer = styled.div`
   }
 
   .arrow-button {
+    flex-shrink: 0;
+
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`

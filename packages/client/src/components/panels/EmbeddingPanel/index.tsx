@@ -199,7 +199,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   const onChangeHeight = (e: React.ChangeEvent<HTMLInputElement>) => {
     setHeightValue(e.target.value);
     setConfig((config) => {
-      return { ...config, width: `${e.target.value}${heightDimension.label}` };
+      return { ...config, height: `${e.target.value}${heightDimension.label}` };
     });
   };
 

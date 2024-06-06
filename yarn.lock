@@ -2036,6 +2036,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.17.9":
+  version: 7.24.7
+  resolution: "@babel/runtime@npm:7.24.7"
+  dependencies:
+    regenerator-runtime: "npm:^0.14.0"
+  checksum: 7b77f566165dee62db3db0296e71d08cafda3f34e1b0dcefcd68427272e17c1704f4e4369bff76651b07b6e49d3ea5a0ce344818af9116e9292e4381e0918c76
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.22.15, @babel/template@npm:^7.24.0, @babel/template@npm:^7.3.3, @babel/template@npm:^7.8.6":
   version: 7.24.0
   resolution: "@babel/template@npm:7.24.0"
@@ -2655,6 +2664,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@docspace/login@workspace:packages/login"
   dependencies:
+    "@hcaptcha/react-hcaptcha": "npm:^1.10.1"
     "@svgr/webpack": "npm:^8.1.0"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
@@ -2669,6 +2679,7 @@ __metadata:
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     react-google-recaptcha: "npm:^3.1.0"
+    react-hcaptcha: "npm:^0.1.1"
     react-i18next: "npm:^13.2.1"
     sass: "npm:^1.59.3"
     shx: "npm:^0.3.4"
@@ -3927,6 +3938,26 @@ __metadata:
   bin:
     proto-loader-gen-types: build/bin/proto-loader-gen-types.js
   checksum: 1fdc0b10480614cecc4bf52578756cbf59ec75f1bea37452947125eff81cd3ceabba04606247ed8361f97bcd00d147ca4118abc22b046cc0541cb749671b97d9
+  languageName: node
+  linkType: hard
+
+"@hcaptcha/loader@npm:^1.2.1":
+  version: 1.2.4
+  resolution: "@hcaptcha/loader@npm:1.2.4"
+  checksum: bf794dc9e76bcfee352e4ef63a1e2c3a826380a26524b8caa950b0d4529f21dc7ddac34a61b726713abd7da8cfb6cdffd95acdbb5703a7a91b3a7eb9544ebcd5
+  languageName: node
+  linkType: hard
+
+"@hcaptcha/react-hcaptcha@npm:^1.10.1":
+  version: 1.10.1
+  resolution: "@hcaptcha/react-hcaptcha@npm:1.10.1"
+  dependencies:
+    "@babel/runtime": "npm:^7.17.9"
+    "@hcaptcha/loader": "npm:^1.2.1"
+  peerDependencies:
+    react: ">= 16.3.0"
+    react-dom: ">= 16.3.0"
+  checksum: eb7d1123a0b1d8a83bd59493f43c94f88d6912208f92d47e74d5148c47d0c861f7f844015549d2a13f849ab1ccb7874fd7278521ccda4b4baf453f096021f357
   languageName: node
   linkType: hard
 
@@ -23336,6 +23367,16 @@ __metadata:
   peerDependencies:
     react: ^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0
   checksum: d2ddac8e1635dd706204e7c49f2b7590c5d7939186040e364abc513bc92d9bfe31ef550d004e8381db8a2c65778251938d22896e0f04a0497514b9af33e00229
+  languageName: node
+  linkType: hard
+
+"react-hcaptcha@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "react-hcaptcha@npm:0.1.1"
+  peerDependencies:
+    react: ^16.4.1
+    react-dom: ^16.4.1
+  checksum: 5137314385e007b0d44c6b526ea4d7040798e2f315e0a7d70f2a2b15c50427f9372996c76d67b28ea932270252ac5377e586ae5ec0c3a50045a4d59b93f6d491
   languageName: node
   linkType: hard
 

@@ -33,7 +33,7 @@ import {
   TThirdPartyProvider,
 } from "@docspace/shared/api/settings/types";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
-import { ThemeKeys } from "@docspace/shared/enums";
+import { RecaptchaType, ThemeKeys } from "@docspace/shared/enums";
 
 export type TDataContext = {
   settings?: TSettings;
@@ -85,6 +85,7 @@ export type RegisterModalDialogProps = {
 export type LoginFormProps = {
   hashSettings?: TPasswordHash;
   reCaptchaPublicKey?: string;
+  reCaptchaType?: RecaptchaType;
   cookieSettingsEnabled: boolean;
 };
 

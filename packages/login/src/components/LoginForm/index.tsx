@@ -36,6 +36,7 @@ import React, {
 } from "react";
 import { useTranslation } from "react-i18next";
 import ReCAPTCHA from "react-google-recaptcha";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useTheme } from "styled-components";
 import { useSearchParams } from "next/navigation";
 
@@ -63,11 +64,14 @@ const LoginForm = ({
   hashSettings,
   cookieSettingsEnabled,
   reCaptchaPublicKey,
+  reCaptchaType,
 }: LoginFormProps) => {
   const { isLoading, isModalOpen } = useContext(LoginValueContext);
   const { setIsLoading } = useContext(LoginDispatchContext);
 
   const searchParams = useSearchParams();
+
+  console.log(reCaptchaPublicKey, reCaptchaType);
 
   const theme = useTheme();
 
@@ -111,6 +115,7 @@ const LoginForm = ({
     setIdentifier(email);
     setEmailFromInvitation(email);
   }, [loginData]);
+
   const authCallback = useCallback(
     async (profile: string) => {
       localStorage.removeItem("profile");
@@ -337,6 +342,8 @@ const LoginForm = ({
 
   const passwordErrorMessage = errorMessage();
 
+  console.log(reCaptchaPublicKey);
+
   return (
     <form className="auth-form-container">
       <EmailContainer
@@ -366,13 +373,17 @@ const LoginForm = ({
         onChangeCheckbox={onChangeCheckbox}
       />
 
-      {reCaptchaPublicKey && isCaptcha && (
+      {reCaptchaPublicKey && (
         <StyledCaptcha isCaptchaError={isCaptchaError}>
           <div className="captcha-wrapper">
-            <ReCAPTCHA
+            {/* <ReCAPTCHA
               sitekey={reCaptchaPublicKey}
               ref={captchaRef}
-              theme={theme.isBase ? "light" : "dark"}
+              // theme={theme.isBase ? "light" : "dark"}
+              onChange={onSuccessfullyComplete}
+            /> */}
+            <HCaptcha
+              sitekey={reCaptchaPublicKey}
               onChange={onSuccessfullyComplete}
             />
           </div>

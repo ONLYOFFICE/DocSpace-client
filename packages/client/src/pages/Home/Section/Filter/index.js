@@ -1439,7 +1439,6 @@ const SectionFilterContent = ({
           group: "filter-login-type",
           label: t("Common:SSO"),
         },
-        //TODO: uncomment after ldap be ready
         {
           key: AccountLoginType.LDAP,
           group: "filter-login-type",

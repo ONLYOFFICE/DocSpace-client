@@ -141,17 +141,21 @@ const StyledLdapPage = styled(Box)`
   }
 
   .ldap_sync-container {
-    margin: 16px 0;
+    ${(props) =>
+      !props.isMobileView &&
+      css`
+        margin: 16px 0;
+
+        .sync-description {
+          margin-top: 8px;
+        }
+      `}
   }
 
   .ldap_progress-container {
     margin-top: 16px;
     height: 32px;
     width: 350px;
-  }
-
-  .sync-description {
-    margin-top: 8px;
   }
 
   .manual-sync-button,

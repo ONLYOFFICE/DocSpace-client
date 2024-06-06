@@ -185,7 +185,7 @@ class LdapFormStore {
     this.defaultSettings = data;
   };
 
-  load = async () => {
+  load = async (t) => {
     const [settingsRes, cronRes, defaultRes] = await Promise.allSettled([
       getLdapSettings(),
       getCronLdap(),
@@ -206,7 +206,20 @@ class LdapFormStore {
     }
 
     this.isLoaded = true;
-    //TDOD: handle error
+
+    if (
+      settingsRes.status == "rejected" ||
+      cronRes.status == "rejected" ||
+      defaultRes.status == "rejected"
+    ) {
+      console.error(
+        "Error while loading LDAP settings",
+        settingsRes?.reason,
+        cronRes?.reason,
+        defaultRes?.reason,
+      );
+      toastr.error(t("Common:SomethingWentWrong"));
+    }
   };
 
   setServer = (server) => {

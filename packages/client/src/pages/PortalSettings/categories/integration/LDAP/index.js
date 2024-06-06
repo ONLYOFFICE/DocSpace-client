@@ -58,13 +58,13 @@ const LDAP = ({
   const [isSmallWindow, setIsSmallWindow] = useState(false);
 
   useEffect(() => {
-    isLdapAvailable && load();
+    isLdapAvailable && load(t);
     onCheckView();
     setDocumentTitle(t("Settings:ManagementCategoryIntegration"));
     window.addEventListener("resize", onCheckView);
 
     return () => window.removeEventListener("resize", onCheckView);
-  }, []);
+  }, [isLdapAvailable, load, t]);
 
   const onCheckView = () => {
     if (isDesktop && window.innerWidth < 795) {

@@ -25,12 +25,20 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+
+const StyledModalDialog = styled(ModalDialog)`
+  .modal-header {
+    margin: 0;
+  }
+`;
 
 const StyledBody = styled.div`
   .embedding-panel_banner {
     display: flex;
     padding: 12px 16px;
     gap: 16px;
+    margin: 0px -16px 12px;
     background-color: ${(props) => props.theme.infoBlock.background};
 
     .embedding-panel_banner-close-icon {
@@ -43,12 +51,10 @@ const StyledBody = styled.div`
   .embedding-panel_body {
     .embedding-panel_description {
       color: ${({ theme }) => theme.embeddingPanel.descriptionTextColor};
-      margin-bottom: 18px;
+      margin: 18px 0;
     }
 
     .embedding-panel_bar {
-      margin-bottom: 21px;
-
       .embedding-panel_bar-header {
         display: flex;
         align-items: center;
@@ -63,7 +69,7 @@ const StyledBody = styled.div`
     }
 
     .embedding-panel_header-text {
-      margin-bottom: 16px;
+      margin: 16px 0;
     }
 
     .embedding-panel_checkbox-container {
@@ -135,4 +141,4 @@ const StyledBody = styled.div`
   }
 `;
 
-export { StyledBody };
+export { StyledModalDialog, StyledBody };

@@ -29,14 +29,8 @@ import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { withTranslation, Trans } from "react-i18next";
 import copy from "copy-to-clipboard";
-
-import { DeviceType } from "@docspace/shared/enums";
 import { objectToGetParams } from "@docspace/shared/utils/common";
 
-import { Portal } from "@docspace/shared/components/portal";
-import { Backdrop } from "@docspace/shared/components/backdrop";
-import { Heading } from "@docspace/shared/components/heading";
-import { Aside } from "@docspace/shared/components/aside";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import { Textarea } from "@docspace/shared/components/textarea";
@@ -51,7 +45,6 @@ import { TColorScheme, TTheme } from "@docspace/shared/themes";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { UserStore } from "@docspace/shared/store/UserStore";
-
 import {
   ModalDialog,
   ModalDialogType,
@@ -65,7 +58,7 @@ import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
 
-import { StyledBody } from "./StyledEmbeddingPanel";
+import { StyledModalDialog, StyledBody } from "./StyledEmbeddingPanel";
 
 import { DisplayBlock } from "./sub-components/DisplayBlock";
 import { CheckboxElement } from "./sub-components/CheckboxElement";
@@ -107,7 +100,6 @@ type EmbeddingPanelProps = {
   visible: boolean;
   setEmbeddingPanelIsVisible: (value: boolean) => void;
   setEditLinkPanelIsVisible: (value: boolean) => void;
-  currentDeviceType: DeviceType;
   currentColorScheme: TColorScheme;
   denyDownload: boolean;
   linkParams: LinkParamsType;
@@ -122,7 +114,6 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     visible,
     setEmbeddingPanelIsVisible,
     setEditLinkPanelIsVisible,
-    currentDeviceType,
     currentColorScheme,
     linkParams,
     setLinkParams,
@@ -309,8 +300,8 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 
   const showLinkBar = (withPassword || denyDownload) && !fileId;
 
-  const embeddingPanelComponent = (
-    <ModalDialog
+  return (
+    <StyledModalDialog
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.aside}
@@ -460,24 +451,8 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
           label={t("Common:CancelButton")}
         />
       </ModalDialog.Footer>
-    </ModalDialog>
+    </StyledModalDialog>
   );
-
-  const renderPortal = () => {
-    const rootElement = document.getElementById("root");
-
-    return (
-      <Portal
-        element={embeddingPanelComponent}
-        appendTo={rootElement}
-        visible={visible}
-      />
-    );
-  };
-
-  return currentDeviceType === DeviceType.mobile
-    ? renderPortal()
-    : embeddingPanelComponent;
 };
 
 export default inject(
@@ -497,13 +472,12 @@ export default inject(
       setEditLinkPanelIsVisible,
       setLinkParams,
     } = dialogsStore;
-    const { theme, currentColorScheme, currentDeviceType } = settingsStore;
+    const { theme, currentColorScheme } = settingsStore;
 
     const { user } = userStore;
 
     return {
       theme,
-      currentDeviceType,
       currentColorScheme,
       visible: embeddingPanelIsVisible,
       setEmbeddingPanelIsVisible,

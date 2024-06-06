@@ -81,7 +81,7 @@ export const CompletedForm = ({}: CompletedFormProps) => {
         <Text as="h1">{t("CompletedForm:Title")}</Text>
         <Text as="p">{t("CompletedForm:Description")}</Text>
       </TextWrapper>
-      <ButtonWrapper>
+      {/* <ButtonWrapper>
         <Button
           scale
           primary
@@ -89,13 +89,13 @@ export const CompletedForm = ({}: CompletedFormProps) => {
           label={t("Common:Close")}
           onClick={onClose}
         />
-        {/* <Button
-        scale
-        size={ButtonSize.medium}
-        label={t("CompletedForm:FillItOutAgain")}
-      /> */}
+        <Button
+          scale
+          size={ButtonSize.medium}
+          label={t("CompletedForm:FillItOutAgain")}
+        />
       </ButtonWrapper>
-      {/* <Link className="link" href="#">
+      <Link className="link" href="#">
         {t("CompletedForm:GoToCompleteFolder")}
       </Link> */}
     </CompletedFormLayout>

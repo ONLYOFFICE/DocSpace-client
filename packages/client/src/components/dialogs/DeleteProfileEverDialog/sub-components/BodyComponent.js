@@ -75,10 +75,16 @@ const BodyComponent = (props) => {
         <Text className="user-delete">{t("ActionCannotBeUndone")}</Text>
         <Text className="text-warning">{t("PleaseNote")}</Text>
         <Text className="text-delete-description">
+          {t("DeletePersonalData")}
+        </Text>
+        <Text className="text-delete-description">
           {t("CannotReassignFiles")}
         </Text>
         <Text className="text-delete-description">
           {t("ToBeAbleToReassignData")}
+        </Text>
+        <Text className="text-delete-description">
+          {t("DeletePersonalDataApplicable")}
         </Text>
       </>
     );

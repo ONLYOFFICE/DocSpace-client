@@ -2682,8 +2682,8 @@ class FilesStore {
     return api.rooms.updateRoomMemberRole(id, data);
   }
 
-  getHistory(module, id, signal = null, requestToken) {
-    return api.rooms.getHistory(module, id, signal, requestToken);
+  getHistory(selectionType, id, signal = null, requestToken) {
+    return api.rooms.getHistory(selectionType, id, signal, requestToken);
   }
 
   getRoomHistory(id) {

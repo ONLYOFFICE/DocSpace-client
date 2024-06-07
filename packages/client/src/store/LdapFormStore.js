@@ -470,12 +470,14 @@ class LdapFormStore {
 
         this.endProcess();
 
+        this.progressStatus.status = t("Common:SuccessfullyCompletedOperation");
+
         if (toDefault) {
           const response = await getCronLdap();
           this.mapCron(response?.cron);
         }
 
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+        toastr.success(t("Common:SuccessfullyCompletedOperation"));
       }
     } catch (error) {
       console.error(error);
@@ -507,7 +509,7 @@ class LdapFormStore {
 
     delay(() => {
       this.inProgress = false;
-    }, 1000);
+    }, 3000);
   };
 
   isCompleted = (status) => {

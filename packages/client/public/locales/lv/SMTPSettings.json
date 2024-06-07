@@ -1,4 +1,4 @@
-{
+﻿{
   "AuthViaNTLM": "Autentificēšana, izmantojot NTLM",
   "EnableSSL": "Izmantot SSL",
   "EnterDomain": "Ievadiet domēnu",
@@ -11,6 +11,5 @@
   "Port": "Ports",
   "SenderDisplayName": "Sūtītāja parādāmais vārds",
   "SenderEmailAddress": "Sūtītāja e-pasta adrese",
-  "SendTestMail": "Nosūtiet testa pastu",
-  "SuccessfullyCompletedOperation": "Darbība veiksmīgi pabeigta."
+  "SendTestMail": "Nosūtiet testa pastu"
 }

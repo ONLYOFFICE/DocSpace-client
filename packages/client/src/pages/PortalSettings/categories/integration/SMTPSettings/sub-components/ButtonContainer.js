@@ -149,7 +149,7 @@ const ButtonContainer = (props) => {
       if (completed) {
         error?.length > 0
           ? toastr.error(error)
-          : toastr.success(t("SuccessfullyCompletedOperation"));
+          : toastr.success(t("Common:SuccessfullyCompletedOperation"));
 
         clearInterval(intervalId);
         intervalId = null;

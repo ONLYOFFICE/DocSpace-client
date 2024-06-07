@@ -1,4 +1,4 @@
-{
+﻿{
   "AuthViaNTLM": "NTLM හරහා තහවුරුව",
   "EnableSSL": "SSL සක්‍රිය කරන්න",
   "EnterDomain": "වසම යොදන්න",
@@ -11,6 +11,5 @@
   "Port": "තොට",
   "SenderDisplayName": "යවන්නාගේ ප්‍රදර්ශන නාමය",
   "SenderEmailAddress": "යවන්නාගේ වි-තැපැල් ලිපිනය",
-  "SendTestMail": "අත්හදා බැලීමේ තැපෑලක් යවන්න",
-  "SuccessfullyCompletedOperation": "මෙහෙයුම සාර්ථකව නිමා විය"
+  "SendTestMail": "අත්හදා බැලීමේ තැපෑලක් යවන්න"
 }

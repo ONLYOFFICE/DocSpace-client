@@ -1,4 +1,4 @@
-{
+﻿{
   "AuthViaNTLM": "Autenticazione tramite NTLM",
   "EnableSSL": "Attiva SSL",
   "EnterDomain": "Inserisci il dominio",
@@ -11,6 +11,5 @@
   "Port": "Porta",
   "SenderDisplayName": "Nome mittente da visualizzare",
   "SenderEmailAddress": "Indirizzo email mittente",
-  "SendTestMail": "Inivia messaggio di prova",
-  "SuccessfullyCompletedOperation": "L'operazione è stata completata con successo."
+  "SendTestMail": "Inivia messaggio di prova"
 }

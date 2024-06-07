@@ -418,7 +418,7 @@ const Dark: TTheme = {
 
     iconColor: grayDark,
     iconColorHover: white,
-    iconColorActive: "#CCCCCC",
+    iconColorActive: silver,
 
     border: `none`,
     boxSizing: "border-box",
@@ -2382,7 +2382,7 @@ const Dark: TTheme = {
       descriptionColor: "#ADADAD",
       buttonColor: "#ADADAD",
       hoverButtonColor: white,
-      pressedButtonColor: "#CCCCCC",
+      pressedButtonColor: silver,
     },
   },
 

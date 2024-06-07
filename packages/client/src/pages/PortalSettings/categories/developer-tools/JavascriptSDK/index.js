@@ -149,7 +149,7 @@ const PortalIntegration = (props) => {
       handleOnClick: navigateToDocspace,
     },
     {
-      title: t("Files:PublicRoom"),
+      title: t("Common:PublicRoom"),
       description: t("PublicRoomDescription"),
       image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,
       handleOnClick: navigateToPublicRoom,

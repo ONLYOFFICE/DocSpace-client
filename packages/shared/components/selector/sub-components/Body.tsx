@@ -103,6 +103,7 @@ const Body = ({
   withInfo,
   infoText,
   setInputItemVisible,
+  inputItemVisible,
 }: BodyProps) => {
   const [bodyHeight, setBodyHeight] = React.useState(0);
 
@@ -260,6 +261,7 @@ const Body = ({
           searchHeader={searchEmptyScreenHeader}
           searchDescription={searchEmptyScreenDescription}
           items={items}
+          inputItemVisible={inputItemVisible}
         />
       ) : (
         <>
@@ -302,6 +304,7 @@ const Body = ({
                     isItemLoaded,
                     renderCustomItem,
                     setInputItemVisible,
+                    inputItemVisible,
                   }}
                   itemSize={48}
                   onItemsRendered={onItemsRendered}

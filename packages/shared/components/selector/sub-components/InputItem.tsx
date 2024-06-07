@@ -29,9 +29,12 @@ import React from "react";
 import AcceptIconSvgUrl from "PUBLIC_DIR/images/selector.input.accept.svg?url";
 import CancelIconSvgUrl from "PUBLIC_DIR/images/selector.input.cancel.svg?url";
 
+import { RoomsType } from "../../../enums";
+
 import { InputSize, InputType, TextInput } from "../../text-input";
 import { IconButton } from "../../icon-button";
 import { RoomIcon } from "../../room-icon";
+import { RoomLogo } from "../../room-logo";
 
 import { StyledInputWrapper, StyledItem } from "../Selector.styled";
 
@@ -43,6 +46,9 @@ const InputItem = ({
 
   color,
   icon,
+  roomType,
+
+  placeholder,
 
   setInputItemVisible,
 }: {
@@ -51,8 +57,11 @@ const InputItem = ({
   onCancelInput: VoidFunction;
   style: React.CSSProperties;
 
+  placeholder?: string;
+
   color?: string;
   icon?: string;
+  roomType?: RoomsType;
 
   setInputItemVisible: (value: boolean) => void;
 }) => {
@@ -62,7 +71,8 @@ const InputItem = ({
   const inputRef = React.useRef<HTMLInputElement | null>(null);
 
   const onAcceptInputAction = React.useCallback(async () => {
-    if (requestRunning.current) return;
+    if (requestRunning.current || !value) return;
+
     requestRunning.current = true;
     await onAcceptInput(value);
 
@@ -119,6 +129,8 @@ const InputItem = ({
           showDefault
           className="item-logo"
         />
+      ) : roomType ? (
+        <RoomLogo className="room-logo__container" type={roomType} />
       ) : icon ? (
         <RoomIcon
           title={value}
@@ -134,6 +146,7 @@ const InputItem = ({
         type={InputType.text}
         onChange={onChange}
         forwardedRef={inputRef}
+        placeholder={placeholder}
       />
       <StyledInputWrapper onClick={onAcceptInputAction}>
         <IconButton iconName={AcceptIconSvgUrl} size={16} />

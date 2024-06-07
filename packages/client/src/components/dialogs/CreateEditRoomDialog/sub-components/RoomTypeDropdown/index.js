@@ -27,7 +27,7 @@
 import { isMobile } from "@docspace/shared/utils";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import RoomType from "../RoomType";
+import RoomType from "@docspace/shared/components/room-type";
 import DropdownDesktop from "./DropdownDesktop";
 import DropdownMobile from "./DropdownMobile";
 

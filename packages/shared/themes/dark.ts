@@ -164,8 +164,8 @@ const Dark: TTheme = {
     },
 
     backgroundColor: {
-      base: "#333333",
-      baseHover: "#333333",
+      base: black,
+      baseHover: black,
       baseActive: "#282828",
       baseDisabled: "#282828",
 
@@ -222,7 +222,7 @@ const Dark: TTheme = {
     },
 
     buttonWrapper: {
-      background: "#333333",
+      background: black,
       uploadingBackground: "#242424",
     },
 
@@ -1011,7 +1011,8 @@ const Dark: TTheme = {
       hoverBackgroundColor: "#474747",
       disableBackgroundColor: "#282828",
       activeBackgroundColor: "#282828",
-      activeSelectedBackgroundColor: "linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(0deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18))",
+      activeSelectedBackgroundColor:
+        "linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(0deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18))",
 
       title: {
         padding: "4px 16px",
@@ -1412,7 +1413,7 @@ const Dark: TTheme = {
     fontWeight: "600",
     fontSize: "13px",
     zIndex: "400",
-    background: "#333333",
+    background: black,
     borderRadius: "6px",
     boxShadow: "0px 8px 16px 0px #040F1B29",
     // boxShadowMobile: "0px -4px 60px rgba(0, 0, 0, 0.25)",
@@ -1557,19 +1558,19 @@ const Dark: TTheme = {
   },
   rombsLoader: {
     blue: {
-      colorStep_1: "#333",
-      colorStep_2: "#333",
+      colorStep_1: black,
+      colorStep_2: black,
       colorStep_3: "#323032",
       colorStep_4: "#323032",
     },
     red: {
-      colorStep_1: "#333",
-      colorStep_2: "#333",
+      colorStep_1: black,
+      colorStep_2: black,
       colorStep_3: "#323032",
     },
     green: {
-      colorStep_1: "#333",
-      colorStep_2: "#333",
+      colorStep_1: black,
+      colorStep_2: black,
       colorStep_3: "#323032",
       colorStep_4: "#323032",
     },
@@ -2040,7 +2041,7 @@ const Dark: TTheme = {
     pinBorderColor: "#474747",
     catalogItemHeader: "#858585",
     catalogItemText: "rgba(255, 255, 255, 0.6)",
-    catalogItemActiveBackground: "#333333",
+    catalogItemActiveBackground: black,
     catalogShowText: "#adadad",
   },
 
@@ -2174,7 +2175,7 @@ const Dark: TTheme = {
     },
 
     filter: {
-      background: "#333333",
+      background: black,
       border: "1px solid #474747",
       color: "#a3a9ae",
 
@@ -2184,12 +2185,12 @@ const Dark: TTheme = {
       selectedItem: {
         background: "#eeeeee",
         border: "#eeeeee",
-        color: "#333333",
+        color: black,
       },
     },
 
     sort: {
-      background: "#333333",
+      background: black,
       hoverBackground: "#292929",
       selectedViewIcon: "rgba(255, 255, 255, 0.88)",
       viewIcon: "#858585",
@@ -2467,7 +2468,7 @@ const Dark: TTheme = {
         descriptionText: "#A3A9AE",
       },
       dropdownItem: {
-        background: "#333333",
+        background: black,
         hoverBackground: "#282828",
         descriptionText: "#A3A9AE",
       },
@@ -2480,11 +2481,11 @@ const Dark: TTheme = {
 
     roomTypeDropdown: {
       desktop: {
-        background: "#333333",
+        background: black,
         borderColor: "#474747",
       },
       mobile: {
-        background: "#333333",
+        background: black,
       },
     },
 
@@ -2500,7 +2501,7 @@ const Dark: TTheme = {
     },
 
     dropdown: {
-      background: "#333333",
+      background: black,
       borderColor: "#474747",
       item: {
         hoverBackground: "#282828",
@@ -2536,10 +2537,10 @@ const Dark: TTheme = {
     },
 
     iconCropper: {
-      gridColor: "#333333",
+      gridColor: black,
       deleteButton: {
         background: "#292929",
-        hoverBackground: "#333333",
+        hoverBackground: black,
         borderColor: "#292929",
         hoverBorderColor: "#fafafa",
         color: "#858585",
@@ -2705,7 +2706,7 @@ const Dark: TTheme = {
 
       itemOwnerColor: "#858585",
 
-      backgroundButtons: "#333333",
+      backgroundButtons: black,
 
       dropdownColor: grayMaxLight,
 
@@ -3064,7 +3065,7 @@ const Dark: TTheme = {
         sso: {
           toggleContentBackground: "#474747",
           iconButton: white,
-          iconButtonDisabled: "#333",
+          iconButtonDisabled: black,
           border: "1px solid #474747",
         },
 
@@ -3116,7 +3117,7 @@ const Dark: TTheme = {
       migration: {
         descriptionColor: "#ADADAD",
         subtitleColor: "#FFFFFF",
-        workspaceBackground: "#333333",
+        workspaceBackground: black,
         workspaceBorder: "1px solid #474747",
         stepDescriptionColor: "#FFFFFF",
         fileInputIconColor: "#5c5c5c",
@@ -3130,13 +3131,13 @@ const Dark: TTheme = {
         comboBoxLabelColor: "#FFFFFF",
         importSectionBackground: "#282828",
         importSectionTextColor: "#858585",
-        importItemBackground: "#333333",
+        importItemBackground: black,
         importItemDisableBackground: "#3D3D3D",
         importItemTextColor: "#ADADAD",
         importItemDisableTextColor: "#5C5C5C",
         importItemDescription: "#A3A9AE",
         importIconColor: "#a9a9a9",
-        groupMenuBackground: "#333333",
+        groupMenuBackground: black,
         groupMenuBorder: "1px solid #474747",
         groupMenuBoxShadow: "rgba(0, 0, 0, 0.16) 0px 5px 5px 0px",
       },
@@ -3178,7 +3179,7 @@ const Dark: TTheme = {
 
   submenu: {
     lineColor: "#474747",
-    backgroundColor: "#333",
+    backgroundColor: black,
     activeTextColor: "#FFFFFF",
     textColor: "#ADADAD",
     bottomLineColor: "#E06A1B",
@@ -3196,7 +3197,7 @@ const Dark: TTheme = {
     hoverBackground: "#282828",
     disabledBackground: "#858585",
     defaultTagColor: white,
-    newTagBackground: "#333333",
+    newTagBackground: black,
   },
 
   profile: {
@@ -3235,7 +3236,7 @@ const Dark: TTheme = {
   preparationPortalProgress: {
     backgroundColor: "#282828",
     colorPercentSmall: "#FFFFFF",
-    colorPercentBig: "#333333",
+    colorPercentBig: black,
     errorTextColor: "#E06451",
     descriptionTextColor: "#858585",
   },

@@ -359,7 +359,7 @@ export const getBaseTheme = () => {
       activeConnectBackground: "#265A8F",
 
       color: "rgba(0, 0, 0, 0.54)",
-      disableColor: "#333333",
+      disableColor: black,
       disabledSvgColor: "none",
 
       text: {
@@ -976,8 +976,8 @@ export const getBaseTheme = () => {
       color: {
         default: "#A3A9AE",
         hover: "#555F65",
-        active: "#333333",
-        focus: "#333333",
+        active: black,
+        focus: black,
       },
 
       background: {
@@ -1791,7 +1791,7 @@ export const getBaseTheme = () => {
     },
 
     calendar: {
-      color: "#333333",
+      color: black,
       disabledColor: "#DFE2E3",
       pastColor: "#A3A9AE",
       onHoverBackground: "#f3f4f4",
@@ -2135,7 +2135,7 @@ export const getBaseTheme = () => {
 
       details: {
         customLogoBorderColor: grayLightMid,
-        commentEditorIconColor: "#333",
+        commentEditorIconColor: black,
         tagBackground: "#ECEEF1",
       },
 
@@ -2404,7 +2404,7 @@ export const getBaseTheme = () => {
         descriptionColor: cyanBlueDarkShade,
 
         buttonColor: "#657077",
-        hoverButtonColor: "#333333",
+        hoverButtonColor: black,
         pressedButtonColor: "#555F65",
       },
     },
@@ -2559,7 +2559,7 @@ export const getBaseTheme = () => {
       },
 
       iconCropper: {
-        gridColor: "#333333",
+        gridColor: black,
         deleteButton: {
           background: "#f8f9f9",
           hoverBackground: "#f3f4f4",
@@ -2579,7 +2579,7 @@ export const getBaseTheme = () => {
       dropzone: {
         borderColor: "#eceef1",
         linkMainColor: "#316daa",
-        linkSecondaryColor: "#333333",
+        linkSecondaryColor: black,
         exstsColor: "#a3a9ae",
       },
     },
@@ -2613,7 +2613,7 @@ export const getBaseTheme = () => {
 
     emptyContent: {
       header: {
-        color: "#333333",
+        color: black,
       },
 
       description: {
@@ -2719,7 +2719,7 @@ export const getBaseTheme = () => {
         borderBottom: "1px solid #eceef1",
         borderTop: "1px solid #eceef1",
         externalLinkBackground: "#f8f9f9",
-        externalLinkSvg: "#333333",
+        externalLinkSvg: black,
 
         internalLinkBorder: "1px dashed #333333",
 
@@ -3008,7 +3008,7 @@ export const getBaseTheme = () => {
 
       settings: {
         iconFill: black,
-        headerTitleColor: "#333333",
+        headerTitleColor: black,
         trashIcon: "#A3A9AE",
         article: {
           titleColor: grayMain,
@@ -3047,12 +3047,12 @@ export const getBaseTheme = () => {
           },
           auditTrail: {
             sideColor: "#A3A9AE",
-            nameColor: "#333333",
+            nameColor: black,
             downloadReportDescriptionColor: gray,
           },
           loginHistory: {
             sideColor: "#A3A9AE",
-            nameColor: "#333333",
+            nameColor: black,
           },
         },
 
@@ -3140,10 +3140,10 @@ export const getBaseTheme = () => {
 
         migration: {
           descriptionColor: grayMain,
-          subtitleColor: "#333333",
+          subtitleColor: black,
           workspaceBackground: "#FFFFFF",
           workspaceBorder: "1px solid #d0d5da",
-          stepDescriptionColor: "#333333",
+          stepDescriptionColor: black,
           fileInputIconColor: "#A3A9AE",
           infoBlockBackground: "#f8f9f9",
           infoBlockTextColor: "#555F65",
@@ -3152,14 +3152,14 @@ export const getBaseTheme = () => {
           tableHeaderText: "#A3A9AE",
           tableRowHoverColor: "#F3F4F4",
           tableRowTextColor: "#A3A9AE",
-          comboBoxLabelColor: "#333333",
+          comboBoxLabelColor: black,
           importSectionBackground: "#F8F9F9",
           importSectionTextColor: "#A3A9AE",
           importItemBackground: "#eceef1",
           importItemDisableBackground: "#F3F4F4",
           importItemTextColor: "#555f65",
           importItemDisableTextColor: "#A3A9AE",
-          importItemDescription: "#333333",
+          importItemDescription: black,
           importIconColor: "#657077",
           groupMenuBackground: "#fff",
           groupMenuBorder: "1px solid #fff",
@@ -3242,7 +3242,7 @@ export const getBaseTheme = () => {
         textDescriptionColor: "#A3A9AE",
       },
       activeSessions: {
-        color: "#333",
+        color: black,
         borderColor: "#eceef1",
         tickIconColor: "#35AD17",
         removeIconColor: "#A3A9AE",
@@ -3259,7 +3259,7 @@ export const getBaseTheme = () => {
 
     preparationPortalProgress: {
       backgroundColor: "#F3F4F4",
-      colorPercentSmall: "#333333",
+      colorPercentSmall: black,
       colorPercentBig: "#FFFFFF",
       errorTextColor: "#F21C0E",
       descriptionTextColor: "#A3A9AE",
@@ -3324,7 +3324,7 @@ export const getBaseTheme = () => {
 
     infoBlock: {
       background: "#F8F9F9",
-      headerColor: "#333",
+      headerColor: black,
       descriptionColor: "#555F65",
     },
 

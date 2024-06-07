@@ -106,10 +106,17 @@ const Badges = ({
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
-  const onClickSSO = () => {
+  const onSSOClick = () => {
     if (filter.accountLoginType === AccountLoginType.SSO) return;
     const newFilter = filter.clone();
     newFilter.accountLoginType = AccountLoginType.SSO;
+    navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
+  };
+
+  const onLDAPClick = () => {
+    if (filter.accountLoginType === AccountLoginType.LDAP) return;
+    const newFilter = filter.clone();
+    newFilter.accountLoginType = AccountLoginType.LDAP;
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
@@ -128,7 +135,7 @@ const Badges = ({
           fontWeight={800}
           noHover
           lineHeight={"13px"}
-          onClick={onClickSSO}
+          onClick={onLDAPClick}
         />
       )}
       {isSSO && (
@@ -141,7 +148,7 @@ const Badges = ({
           fontWeight={800}
           noHover
           lineHeight={"13px"}
-          onClick={onClickSSO}
+          onClick={onSSOClick}
         />
       )}
       {!withoutPaid && isPaid && (

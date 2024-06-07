@@ -294,7 +294,7 @@ const SectionHeaderContent = (props) => {
     startUpload,
     getFolderModel,
     onCreateRoom,
-    onClickExportRoomIndex,
+    onExportRoomIndex,
   } = props;
 
   const navigate = useNavigate();
@@ -444,41 +444,6 @@ const SectionHeaderContent = (props) => {
   const onShareRoom = () => {
     copy(window.location.href);
     toastr.success(t("Translations:LinkCopySuccess"));
-  };
-
-  const onExportRoomIndex = async () => {
-    try {
-      showLoader();
-
-      const result = await onClickExportRoomIndex(selectedFolder?.id);
-      if (!result) return;
-
-      const urlWithProxy = combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
-        result.fileUrl,
-      );
-
-      const toastMessage = (
-        <>
-          <Link
-            color="#5299E0"
-            fontSize="12px"
-            target="_blank"
-            href={urlWithProxy}
-          >
-            {result.fileName}
-          </Link>
-          &nbsp;
-          <Text as="span" fontSize="12px">
-            {t("Files:FileExportedToMyDocuments")}
-          </Text>
-        </>
-      );
-
-      toastr.success(toastMessage);
-    } finally {
-      hideLoader();
-    }
   };
 
   const onDeleteRoomInArchive = () => {
@@ -674,7 +639,7 @@ const SectionHeaderContent = (props) => {
         key: "export-room-index",
         label: t("Files:ExportRoomIndex"),
         icon: DownloadReactSvgUrl,
-        onClick: onExportRoomIndex,
+        onClick: () => onExportRoomIndex(t, selectedFolder?.id),
         disabled: !isVDRRoomType || !selectedFolder.indexing,
       },
       {
@@ -1227,7 +1192,7 @@ export default inject(
       onCreateAndCopySharedLink,
       getFolderModel,
       onCreateRoom,
-      onClickExportRoomIndex,
+      onExportRoomIndex,
     } = contextOptionsStore;
 
     const canRestoreAll = isArchiveFolder && roomsForRestore.length > 0;
@@ -1355,7 +1320,7 @@ export default inject(
       onShowInfoPanel,
       onClickArchive,
       onCopyLink,
-      onClickExportRoomIndex,
+      onExportRoomIndex,
 
       isEmptyArchive,
       canRestoreAll,

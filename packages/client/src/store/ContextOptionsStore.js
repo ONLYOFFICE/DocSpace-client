@@ -89,13 +89,19 @@ import saveAs from "file-saver";
 import { isMobile, isIOS, isTablet } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { toastr } from "@docspace/shared/components/toast";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isDesktop } from "@docspace/shared/utils";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
-import { getOAuthToken } from "@docspace/shared/utils/common";
+import {
+  getOAuthToken,
+  hideLoader,
+  showLoader,
+} from "@docspace/shared/utils/common";
 import api from "@docspace/shared/api";
 import {
   RoomsType,
@@ -922,8 +928,26 @@ class ContextOptionsStore {
     return res;
   };
 
-  onClickExportRoomIndex = async (roomId) => {
+  showSuccessExportRoomIndexToast = (t, fileName, fileUrl) => {
+    const toastMessage = (
+      <>
+        <Link color="#5299E0" fontSize="12px" target="_blank" href={fileUrl}>
+          {fileName}
+        </Link>
+        &nbsp;
+        <Text as="span" fontSize="12px">
+          {t("Files:FileExportedToMyDocuments")}
+        </Text>
+      </>
+    );
+
+    toastr.success(toastMessage);
+  };
+
+  onExportRoomIndex = async (t, roomId) => {
     try {
+      showLoader();
+
       let res = await api.rooms.exportRoomIndex(roomId);
 
       if (!res.isCompleted) {
@@ -936,13 +960,21 @@ class ContextOptionsStore {
       }
 
       if (res.status === ExportRoomIndexTaskStatus.Completed) {
-        return {
-          fileName: res.resultFileName,
-          fileUrl: res.resultFileUrl,
-        };
+        const urlWithProxy = combineUrl(
+          window.DocSpaceConfig?.proxy?.url,
+          res.resultFileUrl,
+        );
+
+        this.showSuccessExportRoomIndexToast(
+          t,
+          res.resultFileName,
+          urlWithProxy,
+        );
       }
     } catch (e) {
       toastr.error(e);
+    } finally {
+      hideLoader();
     }
   };
 
@@ -1288,6 +1320,7 @@ class ContextOptionsStore {
       item.roomType === RoomsType.PublicRoom ||
       item.roomType === RoomsType.FormRoom ||
       item.roomType === RoomsType.CustomRoom;
+    const isVDRRoomType = item.roomType === RoomsType.VirtualDataRoom;
 
     if (item.isRoom && withOpen) {
       withOpen =
@@ -1480,6 +1513,14 @@ class ContextOptionsStore {
       },
       ...pinOptions,
       ...muteOptions,
+      {
+        id: "option_export-room-index",
+        key: "export-room-index",
+        label: t("Files:ExportRoomIndex"),
+        icon: DownloadReactSvgUrl,
+        onClick: () => this.onExportRoomIndex(t, item.id),
+        disabled: !isVDRRoomType || !item.indexing,
+      },
       {
         id: "option_owner-change",
         key: "owner-change",

@@ -54,6 +54,7 @@ export const LoginFormWrapper = styled.div<{ bgPattern: string }>`
 
     @media ${mobile} {
       background-image: none;
+      height: 0;
     }
   }
 
@@ -82,8 +83,7 @@ export const LoginFormWrapper = styled.div<{ bgPattern: string }>`
     top: 28px;
 
     @media ${mobile} {
-      top: 7px;
-      right: 8px;
+      display: none;
     }
   }
   .invitation-info-container {

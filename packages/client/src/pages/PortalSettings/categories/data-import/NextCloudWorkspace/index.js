@@ -27,6 +27,7 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { isMobile as isMobileBreakpoint } from "@docspace/shared/utils/device";
 import { isMobile } from "react-device-detect";
 import { useNavigate } from "react-router-dom";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
@@ -132,7 +133,7 @@ const NextcloudWorkspace = (props) => {
     return clearCheckedAccounts;
   }, []);
 
-  if (isMobile)
+  if (isMobile || isMobileBreakpoint())
     return (
       <BreakpointWarning
         isMobileUnavailableOnly

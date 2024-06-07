@@ -141,6 +141,8 @@ const useEditorEvents = ({
   const onSDKAppReady = React.useCallback(() => {
     docEditor = window.DocEditor.instances[EDITOR_ID];
 
+    frameCallCommand("setIsLoaded");
+
     if (errorMessage || isSkipError)
       return docEditor?.showMessage?.(errorMessage || t("Common:InvalidLink"));
 
@@ -166,8 +168,6 @@ const useEditorEvents = ({
   const onDocumentReady = React.useCallback(() => {
     // console.log("onDocumentReady", { docEditor });
     setDocumentReady(true);
-
-    frameCallCommand("setIsLoaded");
 
     if (config?.errorMessage) docEditor?.showMessage?.(config.errorMessage);
 

@@ -980,7 +980,7 @@ const SectionHeaderContent = (props) => {
                   trash: t("EmptyRecycleBin"),
                   trashWarning: t("TrashErasureWarning"),
                   actions: isRoomsFolder
-                    ? t("Files:NewRoom")
+                    ? t("Common:NewRoom")
                     : t("Common:Actions"),
                   contextMenu: t("Translations:TitleShowFolderActions"),
                   infoPanel: t("Common:InfoPanel"),

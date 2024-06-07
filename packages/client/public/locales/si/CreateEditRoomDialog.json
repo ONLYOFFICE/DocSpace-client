@@ -1,24 +1,15 @@
 {
   "ChooseRoomType": "කාමරයේ වර්ගය තෝරන්න",
-  "CollaborationRoomDescription": "ඔබගේ කණ්ඩායම සමඟ ලේඛනයක හෝ කිහිපයක සහයෝගයෙන් වැඩ කරන්න",
-  "CollaborationRoomTitle": "සහයෝගිත්‍ව කාමරය",
   "CreateRoomConfirmation": "ආචයනය සම්බන්ධ නොකර ඉදිරියට යනවා ද?\nඔබ තවමත් සම්බන්ධ කර නැති තෙවන පාර්ශ්ව ආචයන විකල්පයක් තෝරාගෙන ඇත. ඔබ සේවාව සම්බන්ධ නොකර ඉදිරියට ගියහොත්, මෙම විකල්පය එකතු නොවේ.",
   "CreateTagOption": "අනන්‍යනය සාදන්න",
-  "CustomRoomDescription": "ඕනෑම අභිරුචි අරමුණකට මෙම කාමරය භාවිතයට ඔබගේම සැකසුම් යොදන්න.",
-  "CustomRoomTitle": "අභිරුචි කාමරය ",
   "DisableRoomQuota": "මෙම කාමරයට සලාකය අබල කරන්න",
-  "FillingFormsRoomDescription": "ලේඛන අච්චු තනන්න, බෙදාගන්න සහ පුරවන්න හෝ නිර්මිත කට්ටල සමඟ ඕනෑම වර්ගයක ලේඛනයක් ඉක්මනින් සාදාගන්න",
-  "FillingFormsRoomTitle": "පුරවන ආකෘතිපත්‍ර කාමරය",
   "Icon": "නිරූපකය",
   "MakeRoomPrivateDescription": "කාමරයේ තිබෙන සියළුම ගොනු සංකේතනය වේ.",
   "MakeRoomPrivateLimitationsWarningDescription": "මෙම විශේෂාංගයෙන් ඔබට දැනට සිටින {{portalName}} පරිශ්‍රීලකයින්ට පමණක් ආරාධනා කිරීමට හැකිය. කාමරයක් සෑදීමෙන් පසුව, පරිශ්‍රීලක ලැයිස්තුව වෙනස් කිරීමට නොහැකි වනු ඇත.",
   "MakeRoomPrivateTitle": "කාමරය පෞද්ගලික කරන්න",
   "PublicRoomBarDescription": "මෙම කාමරයේ සබැඳිය සතු ඕනෑම අයෙකුට විවෘතයි. බාහිර පරිශ්‍රීලකයින්ට සියලුම ගොනු දැකීමට පමණක් අවසර ඇත.",
-  "PublicRoomDescription": "ලියාපදිංචියකින් තොරව ලේඛන පෙන්වීමට බාහිර සබැඳියකින් අන් අයට ආරාධනා කරන්න. ඔබට මෙම කාමරය ඕනෑම වියමන අතුරු මුහුණතකට කාවැද්දීමට ද හැකිය.",
   "PublicRoomSystemFoldersDescription": "සම්පූර්ණ කරන විවිධ අදියර වල දී ආකෘතිපත්‍ර පිටපත් පද්ධති බහාලුම් වල ගබඩා වේ. පුරවමින් පවතින ආකෘතිපත්‍ර ප්‍රගති බහාලුමේ ගබඩා වන අතර සම්පුර්ණ කරන ලද ආකෘතිපත්‍ර සම්පූර්ණ බහාලුමේ ගබඩා වේ.",
   "PublicRoomSystemFoldersTitle": "පද්ධති බහාලුම්",
-  "ReviewRoomDescription": "ලේඛන සමාලෝචනයට හෝ ඒවා ගැන අදහස් දැක්වීමට අසන්න",
-  "ReviewRoomTitle": "කාමරය සමාලෝචනය",
   "RoomEditing": "කාමරය සංස්කරණය",
   "StorageDescription": "කාමරයකට ලැබෙන ආචයන සලාකය. ඔබට මෙම අගය සංශෝධනයට හෝ ආචයන සීමාව අක්‍රිය කිරීමට හැකිය.",
   "TagsPlaceholder": "අනන්‍යනයක් යොදන්න",
@@ -26,7 +17,5 @@
   "ThirdPartyStorageDescription": "මෙම කාමරයේ දත්ත ආචයනය සඳහා තෙවන පාර්ශ්ව සේවා භාවිතා කරන්න. මෙම කාමරයේ දත්ත ගබඩා කිරීමට නව බහාලුමක් සම්බන්ධිත ආචයනයේ සාදනු ඇත.",
   "ThirdPartyStorageNoStorageAlert": "පළමුව, ඔබ \"අනුකලනය\" කොටසට අදාළ සේවාව සම්බන්ධ කළ යුතුය. නොඑසේ නම්, සම්බන්ධ වීමට නොහැකි වනු ඇත.",
   "ThirdPartyStoragePermanentSettingDescription": "තෙවන පාර්ශ්ව {{thirdpartyTitle}} ආචයනයේ \"{{thirdpartyFolderName}}\" බහාලුම තුළ ගොනු රඳවා ඇත.\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "තෙවන පාර්ශ්ව ආචයනයක් සම්බන්ධ කිරීමට, ඔබ {{portalName}} සැකසුම්වල අනුකලනය කොටසට අදාළ සේවාව එක් කළ යුතුය. අනුකලනය සබල කිරීමට {{portalName}} හිමිකරු හෝ පරිපාලක අමතන්න.",
-  "ViewOnlyRoomDescription": "නැරඹීම සඳහා ඕනෑම සූදානම් ලේඛන, වාර්තා, ලේඛන, සහ අනෙකුත් ගොනු බෙදා ගන්න.",
-  "ViewOnlyRoomTitle": "කාමරය දැකීමට පමණි"
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "තෙවන පාර්ශ්ව ආචයනයක් සම්බන්ධ කිරීමට, ඔබ {{portalName}} සැකසුම්වල අනුකලනය කොටසට අදාළ සේවාව එක් කළ යුතුය. අනුකලනය සබල කිරීමට {{portalName}} හිමිකරු හෝ පරිපාලක අමතන්න."
 }

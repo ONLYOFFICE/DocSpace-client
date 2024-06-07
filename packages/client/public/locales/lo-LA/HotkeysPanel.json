@@ -12,7 +12,6 @@
   "HotkeysCreatePresentation": "ສ້າງການນໍາສະເຫນີ",
   "HotkeysCreateSpreadsheet": "ສ້າງຕາຕະລາງ",
   "HotkeysCreatingObjects": "ການສ້າງລາຍການ",
-  "HotkeysEnterKey": "ເຂົ້າ",
   "HotkeysExtendSelectionDown": "ຂະຫຍາຍການເລືອກລົງ",
   "HotkeysExtendSelectionLeft": "ຂະຫຍາຍການເລືອກຊ້າຍ",
   "HotkeysExtendSelectionRight": "ຂະຫຍາຍການເລືອກທີ່ຖືກຕ້ອງ",
@@ -36,7 +35,6 @@
   "HotkeysSelectRight": "ເລືອກລາຍການຕໍ່ໄປໄປທາງຂວາ",
   "HotkeysSelectUp": "ເລືອກລາຍການຕໍ່ໄປ",
   "HotkeysShortcuts": "ສະແດງລາຍການຄີບອດແປ້ນພິມ",
-  "HotkeysSpaceKey": "ຍະຫວ່າງ",
   "HotkeysUndoLastAction": "ຍົກເລີກການກະ ທຳ ສຸດທ້າຍ",
   "HotkeysUploadFile": "ອັບໂຫລດໄຟລ໌",
   "HotkeysUploadingObjects": "ການອັບໂຫລດລາຍການ"

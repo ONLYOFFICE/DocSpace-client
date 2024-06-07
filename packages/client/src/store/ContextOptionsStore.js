@@ -881,6 +881,10 @@ class ContextOptionsStore {
     toastr.error(t("Files:DocumentEdited"));
   };
 
+  onShowWaitOperationToast = (t) => {
+    toastr.warning(t("Files:WaitOperation"));
+  };
+
   onClickMute = (e, item, t) => {
     const data = (e.currentTarget && e.currentTarget.dataset) || e;
     const { action } = data;
@@ -1062,6 +1066,8 @@ class ContextOptionsStore {
     //const emailSendIsDisabled = true;
     const showSeparator0 =
       (hasInfoPanel || !isMedia) && !this.publicRoomStore.isPublicRoom; // || !emailSendIsDisabled;
+
+    const { isGroupMenuBlocked } = this.filesActionsStore;
 
     const separator0 = showSeparator0
       ? {
@@ -1595,7 +1601,11 @@ class ContextOptionsStore {
           : t("Common:Delete"),
         icon: TrashReactSvgUrl,
         onClick: () =>
-          isEditing ? this.onShowEditingToast(t) : this.onClickDelete(item, t),
+          isEditing
+            ? this.onShowEditingToast(t)
+            : isGroupMenuBlocked
+              ? this.onShowWaitOperationToast(t)
+              : this.onClickDelete(item, t),
         disabled: false,
       },
       {
@@ -2328,7 +2338,7 @@ class ContextOptionsStore {
       ? [
           {
             key: "new-room",
-            label: t("NewRoom"),
+            label: t("Common:NewRoom"),
             onClick: this.onCreateRoom,
             icon: CatalogRoomsReactSvgUrl,
           },

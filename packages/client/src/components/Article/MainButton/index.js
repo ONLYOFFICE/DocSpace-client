@@ -798,14 +798,14 @@ const ArticleMainButtonContent = (props) => {
         <StyledButton
           className="create-room-button"
           id="rooms-shared_create-room-button"
-          label={t("Files:NewRoom")}
+          label={t("Common:NewRoom")}
           onClick={onCreateRoom}
           $currentColorScheme={currentColorScheme}
           isDisabled={isDisabled}
           size="small"
           primary
           scale
-          title={t("Files:NewRoom")}
+          title={t("Common:NewRoom")}
         />
       ) : (
         <MainButton

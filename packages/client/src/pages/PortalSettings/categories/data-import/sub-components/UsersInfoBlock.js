@@ -88,6 +88,7 @@ const UsersInfoBlock = ({
   t,
   selectedUsers,
   totalUsers,
+  totalUsedUsers,
   totalLicenceLimit,
 }) => {
   return (
@@ -99,7 +100,7 @@ const UsersInfoBlock = ({
       )}
 
       <UsersInfoWrapper
-        selectedUsers={selectedUsers}
+        selectedUsers={totalUsedUsers}
         totalLicenceLimit={totalLicenceLimit}
       >
         <Text className="selected-users-count" truncate>
@@ -108,7 +109,7 @@ const UsersInfoBlock = ({
         <Text as="div" className="selected-admins-count" truncate>
           {t("Settings:LicenseLimitCounter")}
           <Text as="span">
-            {selectedUsers}/{totalLicenceLimit}
+            {totalUsedUsers}/{totalLicenceLimit}
           </Text>
         </Text>
         <HelpButton

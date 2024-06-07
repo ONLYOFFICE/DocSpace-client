@@ -38,9 +38,12 @@ import withHotkeys from "../../../../HOCs/withHotkeys";
 import { Consumer, isMobile, isTablet } from "@docspace/shared/utils";
 import { isElementInViewport } from "@docspace/shared/utils/common";
 
-import { DeviceType } from "@docspace/shared/enums";
+import { DeviceType, VDRIndexingAction } from "@docspace/shared/enums";
+
+const separatorStyles = `width: 100vw;  background-color: rgb(71, 129, 209); position: absolute; height: 3px; z-index: 1;`;
 
 let currentDroppable = null;
+let droppableSeparator = null;
 let isDragActive = false;
 
 const SectionBodyContent = (props) => {
@@ -71,6 +74,8 @@ const SectionBodyContent = (props) => {
     isEmptyPage,
     movingInProgress,
     currentDeviceType,
+    isIndexEditingMode,
+    changeIndex,
   } = props;
 
   useEffect(() => {
@@ -194,7 +199,22 @@ const SectionBodyContent = (props) => {
       return;
     }
 
+    droppableSeparator && droppableSeparator.remove();
+
     const droppable = wrapperElement.closest(".droppable");
+    const tableItem = wrapperElement.closest(".table-list-item");
+    const styles = tableItem && window.getComputedStyle(tableItem);
+    const newChildNode = document.createElement("div");
+
+    const parent = document.querySelector(
+      ".ReactVirtualized__Grid__innerScrollContainer",
+    );
+
+    if (styles) {
+      newChildNode.setAttribute("style", separatorStyles);
+      newChildNode.style.top = styles.top;
+    }
+
     if (currentDroppable !== droppable) {
       if (currentDroppable) {
         if (viewAs === "table") {
@@ -204,12 +224,15 @@ const SectionBodyContent = (props) => {
           for (let cl of classElements) {
             cl.classList.remove("droppable-hover");
           }
+          if (isIndexEditingMode) {
+            droppableSeparator.remove();
+          }
         } else {
           currentDroppable.classList.remove("droppable-hover");
         }
       }
       currentDroppable = droppable;
-
+      droppableSeparator = newChildNode;
       if (currentDroppable) {
         if (viewAs === "table") {
           const value = currentDroppable.getAttribute("value");
@@ -222,16 +245,34 @@ const SectionBodyContent = (props) => {
               cl.classList.add("droppable-hover");
             }
           }
+          if (isIndexEditingMode) {
+            parent.insertBefore(newChildNode, tableItem);
+          }
         } else {
           currentDroppable.classList.add("droppable-hover");
           currentDroppable = droppable;
+          droppableSeparator = newChildNode;
         }
       }
+    } else if (isIndexEditingMode) {
+      droppableSeparator && droppableSeparator.remove();
+
+      const wrappedClass = wrapperElement && wrapperElement.className;
+      droppableSeparator = newChildNode;
+
+      if (wrappedClass === "section-wrapper-content") {
+        newChildNode.setAttribute("style", separatorStyles + "bottom: 0px;");
+        return parent.append(newChildNode);
+      }
+
+      parent.insertBefore(newChildNode, tableItem);
     }
   };
 
   const onMouseUp = (e) => {
     setStartDrag(false);
+
+    droppableSeparator && droppableSeparator.remove();
 
     setTimeout(() => {
       isDragActive = false;
@@ -245,7 +286,9 @@ const SectionBodyContent = (props) => {
     const isDragging = splitValue && splitValue.includes("dragging");
     const treeValue = isDragging ? splitValue[0] : null;
 
-    const elem = e.target.closest(".droppable");
+    const elem = isIndexEditingMode
+      ? e.target.closest(".files-item")
+      : e.target.closest(".droppable");
     const title = elem && elem.dataset.title;
     const value = elem && elem.getAttribute("value");
     if ((!value && !treeValue) || isRecycleBinFolder || !isDragActive) {
@@ -255,7 +298,21 @@ const SectionBodyContent = (props) => {
     const folderId = value
       ? value.split("_").slice(1, -3).join("_")
       : treeValue;
-    onMoveTo(folderId, title);
+
+    if (!isIndexEditingMode) return onMoveTo(folderId, title);
+
+    const replaceableItemId = isNaN(+folderId) ? folderId : +folderId;
+    const replaceableItemType = value && value.split("_").slice(0, 1).join("_");
+
+    const replaceableItem = filesList.find((i) =>
+      replaceableItemType === "file"
+        ? i.id === replaceableItemId && i.fileExst
+        : i.id === replaceableItemId,
+    );
+
+    if (!replaceableItem) return;
+
+    changeIndex(VDRIndexingAction.MoveIndex, replaceableItem);
     return;
   };
 
@@ -331,6 +388,7 @@ export default inject(
     treeFoldersStore,
     filesActionsStore,
     uploadDataStore,
+    indexingStore,
   }) => {
     const {
       isEmptyFilesList,
@@ -363,6 +421,7 @@ export default inject(
       setTooltipPosition,
       isRecycleBinFolder: treeFoldersStore.isRecycleBinFolder,
       moveDragItems: filesActionsStore.moveDragItems,
+      changeIndex: filesActionsStore.changeIndex,
       viewAs,
       setSelection,
       setBufferSelection,
@@ -378,6 +437,7 @@ export default inject(
       movingInProgress,
       currentDeviceType: settingsStore.currentDeviceType,
       isEmptyPage,
+      isIndexEditingMode: indexingStore.isIndexEditingMode,
     };
   },
 )(

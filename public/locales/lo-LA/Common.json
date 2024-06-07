@@ -317,5 +317,20 @@
   "WantToContinue": "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການສືບຕໍ່?",
   "Warning": "ແຈ້ງເຕືອນ",
   "Website": "ເວັບໄຊທ໌",
-  "Yesterday": "ມື້ວານນີ້"
+  "Yesterday": "ມື້ວານນີ້",
+  "FillingFormsRoomTitle": "ການຕື່ມແບບຟອມ",
+  "CollaborationRoomTitle": "ຫ້ອງການຮ່ວມມື",
+  "CustomRoomDescription": "ນຳໃຊ້ການຕັ້ງຄ່າຂອງທ່ານເອງເພື່ອໃຊ້ຫ້ອງນີ້ເພື່ອຈຸດປະສົງທີ່ກຳນົດເອງ.",
+  "ReviewRoomTitle": "ກວດກາຫ້ອງ",
+  "ViewOnlyRoomDescription": "ແບ່ງປັນເອກະສານທີ່ກຽມພ້ອມ, ບົດລາຍງານ, ເອກະສານ, ແລະໄຟລ໌ອື່ນໆສໍາລັບການເບິ່ງ.",
+  "ViewOnlyRoomTitle": "ຫ້ອງເບິ່ງເທົ່ານັ້ນ",
+  "ReviewRoomDescription": "ຮ້ອງຂໍໃຫ້ມີການທົບທວນຄືນຫຼືຄໍາເຫັນກ່ຽວກັບເອກະສານ",
+  "CustomRoomTitle": "ຫ້ອງກຳນົດເອງ",
+  "CollaborationRoomDescription": "ຮ່ວມມືໃນເອກະສານໜຶ່ງ ຫຼືຫຼາຍເອກະສານກັບທີມງານຂອງທ່ານ",
+  "FillingFormsRoomDescription": "ສ້າງ, ແບ່ງປັນ ແລະຕື່ມຂໍ້ມູນໃສ່ແມ່ແບບເອກະສານ ຫຼືເຮັດວຽກກັບ presets ທີ່ພ້ອມແລ້ວເພື່ອສ້າງເອກະສານທຸກປະເພດໄດ້ໄວ.",
+  "FillingFormRooms": "ການຕື່ມແບບຟອມ",
+  "CollaborationRooms": "ການຮ່ວມມື",
+  "ViewOnlyRooms": "ເບິ່ງເທົ່ານັ້ນ",
+  "CustomRooms": "ກຳນົດເອງ",
+  "NewRoom": "ຫ້ອງໃຫມ່"
 }

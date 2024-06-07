@@ -2337,7 +2337,7 @@ class ContextOptionsStore {
       ? [
           {
             key: "new-room",
-            label: t("NewRoom"),
+            label: t("Common:NewRoom"),
             onClick: this.onCreateRoom,
             icon: CatalogRoomsReactSvgUrl,
           },

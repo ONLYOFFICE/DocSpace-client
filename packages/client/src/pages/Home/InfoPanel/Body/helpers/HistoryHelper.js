@@ -66,40 +66,30 @@ export const getDateTime = (date) => {
 //   to [{ day: "", feeds: [ groupedFeeds: [{ json: {} }], json: {} ]}]
 
 export const parseHistory = (t, fetchedHistory) => {
-  let feeds = fetchedHistory.feeds;
+  console.log(fetchedHistory);
+  let feeds = fetchedHistory.items;
   let parsedFeeds = [];
 
   for (let i = 0; i < feeds.length; i++) {
-    const feedsJSON = JSON.parse(feeds[i].json);
-    const feedDay = getRelativeDateDay(t, feeds[i].modifiedDate);
+    const feedDay = getRelativeDateDay(t, feeds[i].date);
 
-    let newGroupedFeeds = [];
-    if (feeds[i].groupedFeeds) {
-      let groupFeeds = feeds[i].groupedFeeds;
-      for (let j = 0; j < groupFeeds.length; j++)
-        newGroupedFeeds.push(
-          !!groupFeeds[j].target
-            ? groupFeeds[j].target
-            : JSON.parse(groupFeeds[j].json),
-        );
-    }
+    // let newGroupedFeeds = [];
+    // if (feeds[i].groupedFeeds) {
+    //   let groupFeeds = feeds[i].groupedFeeds;
+    //   for (let j = 0; j < groupFeeds.length; j++)
+    //     newGroupedFeeds.push(
+    //       !!groupFeeds[j].target
+    //         ? groupFeeds[j].target
+    //         : JSON.parse(groupFeeds[j].json),
+    //     );
+    // }
 
     if (parsedFeeds.length && parsedFeeds.at(-1).day === feedDay)
-      parsedFeeds.at(-1).feeds.push({
-        ...feeds[i],
-        json: feedsJSON,
-        groupedFeeds: newGroupedFeeds,
-      });
+      parsedFeeds.at(-1).feeds.push({ ...feeds[i] });
     else
       parsedFeeds.push({
         day: feedDay,
-        feeds: [
-          {
-            ...feeds[i],
-            json: feedsJSON,
-            groupedFeeds: newGroupedFeeds,
-          },
-        ],
+        feeds: [{ ...feeds[i] }],
       });
   }
 

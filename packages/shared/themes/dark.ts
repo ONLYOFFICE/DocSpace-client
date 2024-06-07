@@ -65,6 +65,7 @@ const {
   darkErrorStatus,
   charlestonGreen,
   outerSpace,
+  veryDarkGrey,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -1345,7 +1346,7 @@ const Dark: TTheme = {
   },
 
   treeNode: {
-    background: "#3D3D3D",
+    background: veryDarkGrey,
     disableColor: grayDark,
 
     icon: {
@@ -1423,7 +1424,7 @@ const Dark: TTheme = {
     color: grayMaxLight,
     disableColor: gray,
     backgroundColor: black,
-    hoverBackgroundColor: "#3D3D3D",
+    hoverBackgroundColor: veryDarkGrey,
     hoverDisabledBackgroundColor: black,
     selectedBackgroundColor: charlestonGreen,
     fontWeight: "600",
@@ -1737,7 +1738,7 @@ const Dark: TTheme = {
   toggleButton: {
     fillColorDefault: "#4781D1",
     fillColorOff: "#292929",
-    hoverFillColorOff: "#3D3D3D",
+    hoverFillColorOff: veryDarkGrey,
 
     fillCircleColor: white,
     fillCircleColorOff: white,
@@ -1767,7 +1768,7 @@ const Dark: TTheme = {
     color: white,
     disabledColor: "#474747",
     pastColor: grayDark,
-    onHoverBackground: "#3D3D3D",
+    onHoverBackground: veryDarkGrey,
     titleColor: "#ADADAD",
     outlineColor: "#474747",
     arrowColor: "#F6F9FC",
@@ -1896,7 +1897,7 @@ const Dark: TTheme = {
 
     profile: {
       borderTop: "1px solid #474747",
-      background: "#3D3D3D",
+      background: veryDarkGrey,
     },
 
     paymentAlert: {
@@ -2031,7 +2032,7 @@ const Dark: TTheme = {
   },
 
   menuContainer: {
-    background: "#3d3d3d",
+    background: veryDarkGrey,
     color: "rgba(255, 255, 255, 0.92)",
   },
 
@@ -2201,7 +2202,7 @@ const Dark: TTheme = {
 
     selectedItems: {
       background: grayDarkMid,
-      hoverBackground: "#3d3d3d",
+      hoverBackground: veryDarkGrey,
     },
   },
 
@@ -2256,7 +2257,7 @@ const Dark: TTheme = {
   },
   filesSection: {
     rowView: {
-      checkedBackground: "#3D3D3D",
+      checkedBackground: veryDarkGrey,
 
       draggingBackground: "rgba(230, 211, 138, 0.12)",
       draggingHoverBackground: "rgba(204, 184, 102, 0.2)2",
@@ -2294,7 +2295,7 @@ const Dark: TTheme = {
         contextMenuWrapperDraggingHover:
           "linear-gradient(to left,rgba(204, 184, 102, 0.2) 24px, #474747 24px)",
 
-        backgroundActive: "#3D3D3D",
+        backgroundActive: veryDarkGrey,
 
         borderImageCheckbox:
           "linear-gradient(to right, #474747 24px, #474747 24px)",
@@ -2319,7 +2320,7 @@ const Dark: TTheme = {
       tile: {
         draggingColor: "rgba(230, 211, 138, 0.12)",
         draggingHoverColor: "rgba(204, 184, 102, 0.2)",
-        checkedColor: "#3d3d3d",
+        checkedColor: veryDarkGrey,
         roomsCheckedColor: black,
         border: "1px solid #474747",
         backgroundBadgeColor: black,
@@ -2371,8 +2372,8 @@ const Dark: TTheme = {
     bodyDescriptionText: grayDark,
 
     item: {
-      hoverBackground: "#3d3d3d",
-      selectedBackground: "#3d3d3d",
+      hoverBackground: veryDarkGrey,
+      selectedBackground: veryDarkGrey,
 
       inputButtonBorder: "#474747",
       inputButtonBorderHover: grayMaxLight,
@@ -2496,7 +2497,7 @@ const Dark: TTheme = {
 
     tagInput: {
       tagBackground: grayDarkMid,
-      tagHoverBackground: "#3D3D3D",
+      tagHoverBackground: veryDarkGrey,
     },
 
     dropdown: {
@@ -3074,11 +3075,11 @@ const Dark: TTheme = {
       },
 
       backup: {
-        rectangleBackgroundColor: "#3D3D3D",
+        rectangleBackgroundColor: veryDarkGrey,
         separatorBorder: "1px solid #474747",
         warningColor: "#E06451",
         textColor: "#ADADAD",
-        backupCheckedListItemBackground: "#3D3D3D",
+        backupCheckedListItemBackground: veryDarkGrey,
       },
 
       payment: {
@@ -3090,10 +3091,10 @@ const Dark: TTheme = {
         tariffText: grayDark,
         border: "1px solid #474747",
         backgroundBenefitsColor: "#3333",
-        rectangleColor: "#3D3D3D",
+        rectangleColor: veryDarkGrey,
 
         priceContainer: {
-          backgroundText: "#3D3D3D",
+          backgroundText: veryDarkGrey,
           background: charlestonGreen,
           border: "1px solid #282828",
           featureTextColor: grayDark,
@@ -3125,13 +3126,13 @@ const Dark: TTheme = {
         errorTextColor: "#E06451",
         existingTextColor: "#3BA420",
         tableHeaderText: grayDark,
-        tableRowHoverColor: "#3D3D3D",
+        tableRowHoverColor: veryDarkGrey,
         tableRowTextColor: grayDark,
         comboBoxLabelColor: white,
         importSectionBackground: charlestonGreen,
         importSectionTextColor: grayDark,
         importItemBackground: black,
-        importItemDisableBackground: "#3D3D3D",
+        importItemDisableBackground: veryDarkGrey,
         importItemTextColor: "#ADADAD",
         importItemDisableTextColor: "#5C5C5C",
         importItemDescription: gray,
@@ -3201,13 +3202,13 @@ const Dark: TTheme = {
 
   profile: {
     main: {
-      background: "#3D3D3D",
+      background: veryDarkGrey,
       textColor: white,
 
       descriptionTextColor: grayDark,
       pendingEmailTextColor: grayDark,
 
-      mobileRowBackground: "#3D3D3D",
+      mobileRowBackground: veryDarkGrey,
     },
     themePreview: {
       descriptionColor: "#ADADAD",
@@ -3268,7 +3269,7 @@ const Dark: TTheme = {
 
   deepLink: {
     navBackground: charlestonGreen,
-    fileTileBackground: "#3D3D3D",
+    fileTileBackground: veryDarkGrey,
   },
 
   emailChips: {
@@ -3323,7 +3324,7 @@ const Dark: TTheme = {
   sdkPresets: {
     borderColor: "#474747",
     secondaryColor: "#ADADAD",
-    previewBackgroundColor: "#3D3D3D",
+    previewBackgroundColor: veryDarkGrey,
   },
 
   sideBarRow: {

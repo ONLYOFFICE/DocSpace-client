@@ -13,7 +13,7 @@
   "ActivateToProBannerHeaderTrial": "ຊື້ສະບັບເຕັມຂອງ ວິສະຫະກິດ ເພື່ອຮັບ:",
   "ActivateUploadDescr": "ເພື່ອເປີດໃຊ້ໃບອະນຸຍາດຂອງທ່ານ, ອັບໂຫຼດມັນຢູ່ລຸ່ມນີ້ ແລະຄລິກທີ່ເປີດໃຊ້ງານ.",
   "FreeDaysLeft": "ໄລຍະໃຊ້ຟຣີຍັງເຫຼືອ {{count}} ມື້",
-  "UpgradeToProBannerInformationAboutShort": "ສຶກສາເພີ່ມເຕີມກ່ຽວກັບ Enterprise Edition <1>ຢູ່ໃນເວັບໄຊທ໌ທາງການ</1>",
+  "UpgradeToProBannerInformationAboutShort": "ສຶກສາເພີ່ມເຕີມກ່ຽວກັບ Enterprise Edition ຢູ່<1>ໃນເວັບໄຊທ໌ທາງການ</1>",
   "UpgradeToProBannerInformationDemo": "ຮ້ອງຂໍການສາທິດ <1>ທີ່ນີ້</1>",
   "UpgradeToProBannerInformationPurchase": "ຖາມຄຳຖາມຊື້ຢູ່ <1>{{email}}</1>",
   "UpgradeToProBannerInformationSupport": "ຂໍຄວາມຊ່ວຍເຫຼືອດ້ານເທັກໂນໂລຍີ <1>{{ helpUrl }}</1>",

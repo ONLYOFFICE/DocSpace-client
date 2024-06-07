@@ -14,7 +14,7 @@
   "ActivateUploadDescr": "To activate your license, upload it below and click the Activate.",
   "FreeDaysLeft": "{{count}} Free days left",
   "UpgradeToProBannerHeader": "Get free access to enterprise-ready office suite for 30 days",
-  "UpgradeToProBannerInformationAboutShort": "Learn more about Enterprise Edition <1>on the official website</1>",
+  "UpgradeToProBannerInformationAboutShort": "Learn more about Enterprise Edition on the <1>official website</1>",
   "UpgradeToProBannerInformationDemo": "Request demonstration <1>here</1>",
   "UpgradeToProBannerInformationPurchase": "Ask purchase questions at <1>{{email}}</1>",
   "UpgradeToProBannerInformationSupport": "Get tech assistance <1>{{helpUrl}}</1>",

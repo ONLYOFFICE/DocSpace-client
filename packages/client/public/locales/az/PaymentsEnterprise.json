@@ -13,7 +13,7 @@
   "ActivateToProBannerHeaderTrial": "Aşağıdakıları əldə etmək üçün tam Müəssisə versiyasını alın:",
   "ActivateUploadDescr": "Lisenziyanızı aktivləşdirmək üçün onu aşağıda yükləyib aktivləşdirmə düyməsinə klikləyin.",
   "FreeDaysLeft": "{{count}} pulsuz gün qalıb",
-  "UpgradeToProBannerInformationAboutShort": "Rəsmi vebsaytda <1>Enterprise Edition</1> haqqında ətraflı məlumat əldə edin",
+  "UpgradeToProBannerInformationAboutShort": "<1>Rəsmi vebsaytda</1> Enterprise Edition haqqında ətraflı məlumat əldə edin",
   "UpgradeToProBannerInformationDemo": "Demonu <1>buradan</1> tələb edin",
   "UpgradeToProBannerInformationPurchase": "Satınalma ilə bağlı hər hansı sualınız olarsa, bizimlə<1>{{email}}</1> əlaqə saxlayın",
   "UpgradeToProBannerInformationSupport": "Texniki yardım alın <1>{{helpUrl}}</1>",

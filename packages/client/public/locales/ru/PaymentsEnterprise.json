@@ -13,7 +13,7 @@
   "ActivateToProBannerHeaderTrial": "Купите полную версию Enterprise, чтобы получить:",
   "ActivateUploadDescr": "Чтобы активировать лицензию, загрузите ее ниже и нажмите кнопку Активировать.",
   "FreeDaysLeft": "Осталось {{count}} бесплатных дней",
-  "UpgradeToProBannerInformationAboutShort": "Узнайте больше об Enterprise Edition <1>на официальном сайте</1>",
+  "UpgradeToProBannerInformationAboutShort": "Узнайте больше об Enterprise Edition на <1>официальном сайте</1>",
   "UpgradeToProBannerInformationDemo": "Запросить демонстрацию <1>здесь</1>",
   "UpgradeToProBannerInformationPurchase": "Задать вопросы по покупке <1>{{email}}</1>",
   "UpgradeToProBannerInformationSupport": "Получить техническую помощь <1>{{helpUrl}}</1>",

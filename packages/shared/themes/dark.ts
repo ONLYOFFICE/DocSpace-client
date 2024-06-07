@@ -162,7 +162,7 @@ const Dark: TTheme = {
       base: white,
       baseHover: white,
       baseActive: white,
-      baseDisabled: "#474747",
+      baseDisabled: outerSpace,
 
       primary: white,
       primaryHover: white,
@@ -343,7 +343,7 @@ const Dark: TTheme = {
 
     color: "rgba(0, 0, 0, 0.54)",
     disableColor: "rgba(0, 0, 0, 0.4)",
-    disabledSvgColor: "#474747",
+    disabledSvgColor: outerSpace,
 
     text: {
       width: "100%",
@@ -375,7 +375,7 @@ const Dark: TTheme = {
     fontSize: "14px",
     lineHeight: "19px",
     color: grayDark,
-    disableColor: "#474747",
+    disableColor: outerSpace,
     float: "left",
     height: "19px",
     overflow: "hidden",
@@ -461,7 +461,7 @@ const Dark: TTheme = {
 
     text: {
       color: grayMaxLight,
-      disabledColor: "#474747",
+      disabledColor: outerSpace,
     },
 
     closeButton: {
@@ -475,19 +475,19 @@ const Dark: TTheme = {
 
   checkbox: {
     fillColor: charlestonGreen,
-    borderColor: "#474747",
+    borderColor: outerSpace,
     arrowColor: white,
     indeterminateColor: white,
 
-    disableArrowColor: "#474747",
+    disableArrowColor: outerSpace,
     disableBorderColor: "#545454",
     disableFillColor: "#545454",
-    disableIndeterminateColor: "#474747",
+    disableIndeterminateColor: outerSpace,
 
     hoverBorderColor: grayDark,
     hoverIndeterminateColor: white,
 
-    pressedBorderColor: "#474747",
+    pressedBorderColor: outerSpace,
     pressedFillColor: black,
 
     focusColor: grayDark,
@@ -523,7 +523,7 @@ const Dark: TTheme = {
     disabledFillColor: grayLightMid,
     disabledFillColorInner: grayMid,
     hoverBorderColor: grayDark,
-    borderColor: "#474747",
+    borderColor: outerSpace,
   },
 
   radioButton: {
@@ -536,7 +536,7 @@ const Dark: TTheme = {
     disableBackground: "#545454",
 
     fillColor: grayMaxLight,
-    disableFillColor: "#474747",
+    disableFillColor: outerSpace,
 
     borderColor: "#646464",
     disableBorderColor: "none",
@@ -560,7 +560,7 @@ const Dark: TTheme = {
   row: {
     minHeight: "47px",
     width: "100%",
-    borderBottom: "#474747",
+    borderBottom: outerSpace,
     backgroundColor: globalColors.veryDarkGrey,
     minWidth: "160px",
     overflow: "hidden",
@@ -604,7 +604,7 @@ const Dark: TTheme = {
   },
 
   rowContainer: {
-    borderColor: "#474747",
+    borderColor: outerSpace,
   },
 
   badge: {
@@ -628,8 +628,8 @@ const Dark: TTheme = {
   modalDialog: {
     backgroundColor: black,
     textColor: white,
-    headerBorderColor: "#474747",
-    footerBorderColor: "#474747",
+    headerBorderColor: outerSpace,
+    footerBorderColor: outerSpace,
     width: "auto",
     maxwidth: "560px",
     margin: " 0 auto",
@@ -697,7 +697,7 @@ const Dark: TTheme = {
     disableColor: "#6c6c6c",
 
     backgroundColor: "#292929",
-    disableBackgroundColor: "#474747",
+    disableBackgroundColor: outerSpace,
 
     width: {
       base: "173px",
@@ -712,20 +712,20 @@ const Dark: TTheme = {
     boxSizing: "border-box",
     border: "solid 1px",
 
-    borderColor: "#474747",
+    borderColor: outerSpace,
     errorBorderColor: darkErrorStatus,
     warningBorderColor: warningColor,
-    disabledBorderColor: "#474747",
+    disabledBorderColor: outerSpace,
 
     hoverBorderColor: grayDark,
     hoverErrorBorderColor: darkErrorStatus,
     hoverWarningBorderColor: warningColor,
-    hoverDisabledBorderColor: "#474747",
+    hoverDisabledBorderColor: outerSpace,
 
     focusBorderColor: grayMaxLight,
     focusErrorBorderColor: darkErrorStatus,
     focusWarningBorderColor: warningColor,
-    focusDisabledBorderColor: "#474747",
+    focusDisabledBorderColor: outerSpace,
   },
 
   fileInput: {
@@ -839,7 +839,7 @@ const Dark: TTheme = {
 
   inputPhone: {
     activeBorderColor: blueMain,
-    inactiveBorderColor: "#474747",
+    inactiveBorderColor: outerSpace,
     errorBorderColor: "#f21c0e",
     backgroundColor: "#33333",
     color: white,
@@ -904,7 +904,7 @@ const Dark: TTheme = {
   },
 
   textArea: {
-    disabledColor: "#474747",
+    disabledColor: outerSpace,
 
     focusBorderColor: grayMaxLight,
     focusErrorBorderColor: darkErrorStatus,
@@ -960,7 +960,7 @@ const Dark: TTheme = {
 
     background: {
       default: "transparent",
-      hover: "#474747",
+      hover: outerSpace,
       active: charlestonGreen,
       focus: grayDarkMid,
     },
@@ -1015,7 +1015,7 @@ const Dark: TTheme = {
       width: "fit-content",
 
       backgroundColor: white,
-      hoverBackgroundColor: "#474747",
+      hoverBackgroundColor: outerSpace,
       disableBackgroundColor: charlestonGreen,
       activeBackgroundColor: charlestonGreen,
       activeSelectedBackgroundColor:
@@ -1026,7 +1026,7 @@ const Dark: TTheme = {
         overflow: "hidden",
         color: black,
         hoverColor: "#a4a4a4",
-        disableColor: "#474747",
+        disableColor: outerSpace,
       },
     },
   },
@@ -1218,7 +1218,7 @@ const Dark: TTheme = {
     maxWidth: "400px",
 
     selectLink: {
-      color: "#474747",
+      color: outerSpace,
       linkColor: "#E06A1B",
     },
 
@@ -1677,17 +1677,17 @@ const Dark: TTheme = {
       border: `1px solid #474747`,
       borderRadius: "3px",
 
-      borderColor: "#474747",
+      borderColor: outerSpace,
       openBorderColor: grayMaxLight,
 
-      disabledBorderColor: "#474747",
-      disabledBackground: "#474747",
+      disabledBorderColor: outerSpace,
+      disabledBackground: outerSpace,
 
       hoverBorderColor: grayDark,
       hoverBorderColorOpen: grayMaxLight,
-      hoverDisabledBorderColor: "#474747",
+      hoverDisabledBorderColor: outerSpace,
 
-      hoverBackgroundModernView: "#474747",
+      hoverBackgroundModernView: outerSpace,
       activeBackgroundModernView: charlestonGreen,
       focusBackgroundModernView: grayDarkMid,
     },
@@ -1772,13 +1772,13 @@ const Dark: TTheme = {
 
   calendar: {
     color: white,
-    disabledColor: "#474747",
+    disabledColor: outerSpace,
     pastColor: grayDark,
     onHoverBackground: veryDarkGrey,
     titleColor: "#ADADAD",
-    outlineColor: "#474747",
+    outlineColor: outerSpace,
     arrowColor: "#F6F9FC",
-    disabledArrow: "#474747",
+    disabledArrow: outerSpace,
     weekdayColor: grayDark,
     accent: "#4781d1",
     boxShadow: "0px 12px 40px 0px rgba(0, 0, 0, 0.40)",
@@ -2011,7 +2011,7 @@ const Dark: TTheme = {
 
     icon: {
       fill: "#E06A1B",
-      stroke: "#474747",
+      stroke: outerSpace,
     },
   },
 
@@ -2022,10 +2022,10 @@ const Dark: TTheme = {
   navItem: {
     baseColor: "#a9a9a9",
     activeColor: white,
-    separatorColor: "#474747",
+    separatorColor: outerSpace,
 
     wrapper: {
-      hoverBackground: "#474747",
+      hoverBackground: outerSpace,
     },
   },
 
@@ -2044,7 +2044,7 @@ const Dark: TTheme = {
 
   article: {
     background: "#292929",
-    pinBorderColor: "#474747",
+    pinBorderColor: outerSpace,
     catalogItemHeader: grayDark,
     catalogItemText: "rgba(255, 255, 255, 0.6)",
     catalogItemActiveBackground: black,
@@ -2074,7 +2074,7 @@ const Dark: TTheme = {
 
     backgroundColor: black,
     blurColor: "rgba(20, 20, 20, 0.8)",
-    borderColor: "#474747",
+    borderColor: outerSpace,
     thumbnailBorderColor: grayLightMid,
     textColor: white,
     errorColor: darkErrorStatus,
@@ -2113,7 +2113,7 @@ const Dark: TTheme = {
     },
 
     details: {
-      customLogoBorderColor: "#474747",
+      customLogoBorderColor: outerSpace,
       commentEditorIconColor: grayMaxLight,
       tagBackground: grayDarkMid,
     },
@@ -2130,7 +2130,7 @@ const Dark: TTheme = {
 
   filesArticleBody: {
     background: black,
-    panelBackground: "#474747",
+    panelBackground: outerSpace,
 
     fill: "#C4C4C4",
     expanderColor: "#C4C4C4",
@@ -2185,7 +2185,7 @@ const Dark: TTheme = {
       border: "1px solid #474747",
       color: gray,
 
-      separatorColor: "#474747",
+      separatorColor: outerSpace,
       indicatorColor: "#F58D31",
 
       selectedItem: {
@@ -2228,7 +2228,7 @@ const Dark: TTheme = {
 
   tableContainer: {
     borderRight: "2px solid #474747",
-    hoverBorderColor: "#474747",
+    hoverBorderColor: outerSpace,
     tableCellBorder: "1px solid #474747",
 
     groupMenu: {
@@ -2254,7 +2254,7 @@ const Dark: TTheme = {
       lengthenBorderImageSource: `linear-gradient(to right, #474747, #474747)`,
       hotkeyBorderBottom: `1px solid ${globalColors.blueMain}`,
 
-      settingsIconDisableColor: "#474747",
+      settingsIconDisableColor: outerSpace,
     },
 
     tableCell: {
@@ -2308,7 +2308,7 @@ const Dark: TTheme = {
         borderImageContextMenu:
           "linear-gradient(to left, #474747 24px, #474747 24px)",
 
-        borderHover: "#474747",
+        borderHover: outerSpace,
         sideColor: gray,
 
         shareHoverColor: grayMaxLight,
@@ -2317,8 +2317,8 @@ const Dark: TTheme = {
           "linear-gradient(to right, #333333 25px, #474747 24px)",
         borderImageLeft: "linear-gradient(to left, #333333 20px, #474747 24px)",
 
-        borderColor: "#474747",
-        borderColorTransition: "#474747",
+        borderColor: outerSpace,
+        borderColorTransition: outerSpace,
       },
     },
 
@@ -2351,14 +2351,14 @@ const Dark: TTheme = {
   advancedSelector: {
     footerBorder: "1px solid #474747",
 
-    hoverBackgroundColor: "#474747",
-    selectedBackgroundColor: "#474747",
+    hoverBackgroundColor: outerSpace,
+    selectedBackgroundColor: outerSpace,
     borderLeft: "1px solid #474747",
 
     searcher: {
       hoverBorderColor: grayDark,
       focusBorderColor: grayMaxLight,
-      placeholderColor: "#474747",
+      placeholderColor: outerSpace,
     },
   },
 
@@ -2381,7 +2381,7 @@ const Dark: TTheme = {
       hoverBackground: veryDarkGrey,
       selectedBackground: veryDarkGrey,
 
-      inputButtonBorder: "#474747",
+      inputButtonBorder: outerSpace,
       inputButtonBorderHover: grayMaxLight,
     },
 
@@ -2450,7 +2450,7 @@ const Dark: TTheme = {
     connectBtnTextBg: "none",
     connectBtnIconBg: "#none",
     connectBtnTextBorder: silver,
-    connectBtnIconBorder: "#474747",
+    connectBtnIconBorder: outerSpace,
   },
 
   createEditRoomDialog: {
@@ -2463,13 +2463,13 @@ const Dark: TTheme = {
       listItem: {
         background: "none",
         hoverBackground: charlestonGreen,
-        borderColor: "#474747",
+        borderColor: outerSpace,
         descriptionText: gray,
       },
       dropdownButton: {
         background: "none",
         hoverBackground: charlestonGreen,
-        borderColor: "#474747",
+        borderColor: outerSpace,
         isOpenBorderColor: "#F97A0B",
         descriptionText: gray,
       },
@@ -2488,7 +2488,7 @@ const Dark: TTheme = {
     roomTypeDropdown: {
       desktop: {
         background: black,
-        borderColor: "#474747",
+        borderColor: outerSpace,
       },
       mobile: {
         background: black,
@@ -2496,7 +2496,7 @@ const Dark: TTheme = {
     },
 
     permanentSettings: {
-      background: "#474747",
+      background: outerSpace,
       isPrivateIcon: "#35ad17",
       descriptionColor: gray,
     },
@@ -2508,7 +2508,7 @@ const Dark: TTheme = {
 
     dropdown: {
       background: black,
-      borderColor: "#474747",
+      borderColor: outerSpace,
       item: {
         hoverBackground: charlestonGreen,
       },
@@ -2516,7 +2516,7 @@ const Dark: TTheme = {
 
     isPrivate: {
       limitations: {
-        background: "#474747",
+        background: outerSpace,
         iconColor: orangeMain,
         titleColor: orangeMain,
         descriptionColor: gray,
@@ -2527,14 +2527,14 @@ const Dark: TTheme = {
     thirdpartyStorage: {
       combobox: {
         background: "#292929",
-        dropdownBorderColor: "#474747",
+        dropdownBorderColor: outerSpace,
         hoverDropdownBorderColor: grayDark,
         isOpenDropdownBorderColor: "#e8e8e9",
-        arrowFill: "#474747",
+        arrowFill: outerSpace,
       },
       folderInput: {
         background: "#292929",
-        borderColor: "#474747",
+        borderColor: outerSpace,
         hoverBorderColor: grayDark,
         focusBorderColor: "#e8e8e9",
         rootLabelColor: gray,
@@ -2556,12 +2556,12 @@ const Dark: TTheme = {
 
     previewTile: {
       background: "#292929",
-      borderColor: "#474747",
+      borderColor: outerSpace,
       iconBorderColor: grayLightMid,
     },
 
     dropzone: {
-      borderColor: "#474747",
+      borderColor: outerSpace,
       linkMainColor: "#F97A0B",
       linkSecondaryColor: white,
       exstsColor: gray,
@@ -2888,7 +2888,7 @@ const Dark: TTheme = {
     navBackground: charlestonGreen,
     headerColor: white,
     helpButton: graySilver,
-    orLineColor: "#474747",
+    orLineColor: outerSpace,
     orTextColor: grayDark,
     titleColor: white,
 
@@ -2898,7 +2898,7 @@ const Dark: TTheme = {
     },
 
     container: {
-      backgroundColor: "#474747",
+      backgroundColor: outerSpace,
     },
 
     captcha: {
@@ -2923,7 +2923,7 @@ const Dark: TTheme = {
 
   peopleWithContent: {
     color: grayDark,
-    pendingColor: "#474747",
+    pendingColor: outerSpace,
   },
 
   peopleDialogs: {
@@ -3069,7 +3069,7 @@ const Dark: TTheme = {
         linkColor: "#E06A1B",
 
         sso: {
-          toggleContentBackground: "#474747",
+          toggleContentBackground: outerSpace,
           iconButton: white,
           iconButtonDisabled: black,
           border: "1px solid #474747",
@@ -3184,7 +3184,7 @@ const Dark: TTheme = {
   },
 
   submenu: {
-    lineColor: "#474747",
+    lineColor: outerSpace,
     backgroundColor: black,
     activeTextColor: white,
     textColor: "#ADADAD",
@@ -3199,7 +3199,7 @@ const Dark: TTheme = {
 
   tag: {
     color: white,
-    background: "#474747",
+    background: outerSpace,
     hoverBackground: charlestonGreen,
     disabledBackground: grayDark,
     defaultTagColor: white,
@@ -3225,12 +3225,12 @@ const Dark: TTheme = {
     },
     activeSessions: {
       color: grayMaxLight,
-      borderColor: "#474747",
+      borderColor: outerSpace,
       tickIconColor: "#3BA420",
       removeIconColor: gray,
-      sortHeaderColor: "#474747",
+      sortHeaderColor: outerSpace,
       tableCellColor: grayDark,
-      dividerColor: "#474747",
+      dividerColor: outerSpace,
     },
   },
 
@@ -3252,7 +3252,7 @@ const Dark: TTheme = {
     border: "1px solid #474747",
     color: white,
     lineColor: grayDark,
-    disabledBackground: "#474747",
+    disabledBackground: outerSpace,
     disabledBorder: "1px solid #474747",
     disabledColor: grayDark,
   },
@@ -3262,11 +3262,11 @@ const Dark: TTheme = {
   },
 
   itemIcon: {
-    borderColor: "#474747",
+    borderColor: outerSpace,
   },
 
   invitePage: {
-    borderColor: "#474747",
+    borderColor: outerSpace,
   },
 
   portalUnavailable: {
@@ -3322,13 +3322,13 @@ const Dark: TTheme = {
   },
 
   plugins: {
-    borderColor: "#474747",
+    borderColor: outerSpace,
     pluginName: gray,
     descriptionColor: "#ADADAD",
   },
 
   sdkPresets: {
-    borderColor: "#474747",
+    borderColor: outerSpace,
     secondaryColor: "#ADADAD",
     previewBackgroundColor: veryDarkGrey,
   },

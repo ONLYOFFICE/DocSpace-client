@@ -107,7 +107,7 @@ export const getBaseTheme = () => {
     text: {
       color: black,
       disableColor: gray,
-      emailColor: "#a3a9ae",
+      emailColor: gray,
       fontWeight: "normal",
       fontWeightBold: "bold",
     },
@@ -246,7 +246,7 @@ export const getBaseTheme = () => {
       bar: {
         errorBackground: orangePressed,
 
-        icon: "#A3A9AE",
+        icon: gray,
       },
 
       buttonWrapper: {
@@ -374,7 +374,7 @@ export const getBaseTheme = () => {
         overflow: "hidden",
         textOverflow: "ellipsis",
         whiteSpace: "nowrap",
-        color: "#A3A9AE",
+        color: gray,
         hoverColor: black,
         connectColor: white,
       },
@@ -636,7 +636,7 @@ export const getBaseTheme = () => {
       overflow: "hidden",
       color: white,
       backgroundColor: orangeMain,
-      disableBackgroundColor: "#A3A9AE",
+      disableBackgroundColor: gray,
     },
 
     scrollbar: {
@@ -864,9 +864,9 @@ export const getBaseTheme = () => {
       errorBorderColor: "#f21c0e",
       backgroundColor: white,
       color: "#33333",
-      scrollBackground: "#a3a9ae",
-      placeholderColor: "#a3a9ae",
-      dialCodeColor: "#a3a9ae",
+      scrollBackground: gray,
+      placeholderColor: gray,
+      dialCodeColor: gray,
       width: "320px",
       height: "44px",
     },
@@ -935,7 +935,7 @@ export const getBaseTheme = () => {
       scrollWidth: "100%",
       scrollHeight: "91px",
 
-      numerationColor: "#A3A9AE",
+      numerationColor: gray,
 
       copyIconFilter:
         "invert(71%) sepia(1%) saturate(1597%) hue-rotate(166deg) brightness(100%) contrast(73%)",
@@ -975,7 +975,7 @@ export const getBaseTheme = () => {
       },
 
       color: {
-        default: "#A3A9AE",
+        default: gray,
         hover: "#555F65",
         active: black,
         focus: black,
@@ -1210,7 +1210,7 @@ export const getBaseTheme = () => {
 
       icon: {
         background: grayLightMid,
-        color: "#A3A9AE",
+        color: gray,
       },
 
       width: {
@@ -1310,7 +1310,7 @@ export const getBaseTheme = () => {
         },
 
         trackNumber: {
-          color: "#A3A9AE",
+          color: gray,
         },
 
         fillLower: {
@@ -1378,7 +1378,7 @@ export const getBaseTheme = () => {
 
     treeNode: {
       background: "#f3f4f4",
-      disableColor: "#A3A9AE",
+      disableColor: gray,
 
       dragging: {
         draggable: {
@@ -1766,7 +1766,7 @@ export const getBaseTheme = () => {
     toggleButton: {
       fillColorDefault: "#4781D1",
       fillColorOff: grayMid,
-      hoverFillColorOff: "#A3A9AE",
+      hoverFillColorOff: gray,
       fillCircleColor: white,
       fillCircleColorOff: white,
     },
@@ -1794,13 +1794,13 @@ export const getBaseTheme = () => {
     calendar: {
       color: black,
       disabledColor: "#DFE2E3",
-      pastColor: "#A3A9AE",
+      pastColor: gray,
       onHoverBackground: "#f3f4f4",
       titleColor: "#555F65",
       outlineColor: grayLightMid,
       arrowColor: "#555f65",
-      disabledArrow: "#A3A9AE",
-      weekdayColor: "#A3A9AE",
+      disabledArrow: gray,
+      weekdayColor: gray,
       accent: "#4781d1",
       boxShadow: "0px 12px 40px rgba(4, 15, 27, 0.12)",
     },
@@ -2022,13 +2022,13 @@ export const getBaseTheme = () => {
         size: "8px",
         position: "-4px",
       },
-      trashIconFill: "#A3A9AE",
+      trashIconFill: gray,
     },
 
     navigation: {
       expanderColor: black,
       background: white,
-      rootFolderTitleColor: "#A3A9AE",
+      rootFolderTitleColor: gray,
       boxShadow: "0px 8px 16px 0px #040F1B14",
 
       icon: {
@@ -2067,7 +2067,7 @@ export const getBaseTheme = () => {
     article: {
       background: grayLight,
       pinBorderColor: grayLightMid,
-      catalogItemHeader: "#A3A9AE",
+      catalogItemHeader: gray,
       catalogItemText: "#555F65",
       catalogItemActiveBackground: "#DFE2E3",
       catalogShowText: "#657077",
@@ -2113,25 +2113,25 @@ export const getBaseTheme = () => {
       },
 
       members: {
-        iconColor: "#A3A9AE",
+        iconColor: gray,
         iconHoverColor: "#657077",
-        isExpectName: "#A3A9AE",
-        subtitleColor: "#a3a9ae",
-        meLabelColor: "#a3a9ae",
-        roleSelectorColor: "#a3a9ae",
-        disabledRoleSelectorColor: "#a3a9ae",
-        roleSelectorArrowColor: "#a3a9ae",
-        createLink: "#a3a9ae",
-        linkAccessComboboxExpired: "#a3a9ae",
+        isExpectName: gray,
+        subtitleColor: gray,
+        meLabelColor: gray,
+        roleSelectorColor: gray,
+        disabledRoleSelectorColor: gray,
+        roleSelectorArrowColor: gray,
+        createLink: gray,
+        linkAccessComboboxExpired: gray,
       },
 
       history: {
-        subtitleColor: "#a3a9ae",
+        subtitleColor: gray,
         fileBlockBg: grayLight,
-        dateColor: "#A3A9AE",
-        fileExstColor: "#A3A9AE",
-        locationIconColor: "#A3A9AE",
-        folderLabelColor: "#A3A9AE",
+        dateColor: gray,
+        fileExstColor: gray,
+        locationIconColor: gray,
+        folderLabelColor: gray,
       },
 
       details: {
@@ -2157,7 +2157,7 @@ export const getBaseTheme = () => {
       fill: grayMain,
       expanderColor: "dimgray",
       downloadAppList: {
-        textColor: "#A3A9AE",
+        textColor: gray,
         color: "#CDCFD1",
         winHoverColor: "#3785D3",
         macHoverColor: darkBlack,
@@ -2171,7 +2171,7 @@ export const getBaseTheme = () => {
       },
       devTools: {
         border: "1px solid #DFE2E3",
-        color: "#A3A9AE",
+        color: gray,
       },
     },
 
@@ -2195,7 +2195,7 @@ export const getBaseTheme = () => {
         border: "1px solid #d0d5da",
         hoverBorder: "1px solid #a3a9ae",
 
-        openBackground: "#a3a9ae",
+        openBackground: gray,
 
         openFill: white,
       },
@@ -2203,7 +2203,7 @@ export const getBaseTheme = () => {
       filter: {
         background: white,
         border: "1px solid #eceef1",
-        color: "#a3a9ae",
+        color: gray,
 
         separatorColor: grayLightMid,
         indicatorColor: "#ED7309",
@@ -2219,7 +2219,7 @@ export const getBaseTheme = () => {
         background: white,
         hoverBackground: grayLight,
         selectedViewIcon: "#dfe2e3",
-        viewIcon: "#a3a9ae",
+        viewIcon: gray,
         sortFill: "#657077",
 
         tileSortFill: black,
@@ -2391,7 +2391,7 @@ export const getBaseTheme = () => {
         color: "#555f65",
       },
 
-      bodyDescriptionText: "#A3A9AE",
+      bodyDescriptionText: gray,
 
       item: {
         hoverBackground: grayLight,
@@ -2472,7 +2472,7 @@ export const getBaseTheme = () => {
 
     createEditRoomDialog: {
       commonParam: {
-        descriptionColor: "#a3a9ae",
+        descriptionColor: gray,
         textColor: "#657077",
       },
 
@@ -2481,19 +2481,19 @@ export const getBaseTheme = () => {
           background: "none",
           hoverBackground: grayLight,
           borderColor: grayLightMid,
-          descriptionText: "#A3A9AE",
+          descriptionText: gray,
         },
         dropdownButton: {
           background: "none",
           hoverBackground: grayLight,
           borderColor: grayLightMid,
           isOpenBorderColor: "#2DA7DB",
-          descriptionText: "#A3A9AE",
+          descriptionText: gray,
         },
         dropdownItem: {
           background: white,
           hoverBackground: grayLight,
-          descriptionText: "#A3A9AE",
+          descriptionText: gray,
         },
         displayItem: {
           background: "#f8f8f8",
@@ -2545,16 +2545,16 @@ export const getBaseTheme = () => {
         combobox: {
           background: white,
           dropdownBorderColor: grayMid,
-          hoverDropdownBorderColor: "#a3a9ae",
+          hoverDropdownBorderColor: gray,
           isOpenDropdownBorderColor: "#2DA7DB",
-          arrowFill: "#a3a9ae",
+          arrowFill: gray,
         },
         folderInput: {
           background: white,
           borderColor: grayMid,
-          hoverBorderColor: "#a3a9ae",
+          hoverBorderColor: gray,
           focusBorderColor: "#35abd8",
-          rootLabelColor: "#a3a9ae",
+          rootLabelColor: gray,
           iconFill: "#657177",
         },
       },
@@ -2581,7 +2581,7 @@ export const getBaseTheme = () => {
         borderColor: grayLightMid,
         linkMainColor: "#316daa",
         linkSecondaryColor: black,
-        exstsColor: "#a3a9ae",
+        exstsColor: gray,
       },
     },
 
@@ -2903,9 +2903,9 @@ export const getBaseTheme = () => {
       textColor: gray,
       navBackground: grayLight,
       headerColor: black,
-      helpButton: "#A3A9AE",
+      helpButton: gray,
       orLineColor: grayLightMid,
-      orTextColor: "#A3A9AE",
+      orTextColor: gray,
       titleColor: black,
 
       register: {
@@ -2923,7 +2923,7 @@ export const getBaseTheme = () => {
       },
 
       backTitle: {
-        color: "#A3A9AE",
+        color: gray,
       },
     },
 
@@ -3010,7 +3010,7 @@ export const getBaseTheme = () => {
       settings: {
         iconFill: black,
         headerTitleColor: black,
-        trashIcon: "#A3A9AE",
+        trashIcon: gray,
         article: {
           titleColor: grayMain,
           fillIcon: "dimgray",
@@ -3047,12 +3047,12 @@ export const getBaseTheme = () => {
             tooltipColor: lightCumulus,
           },
           auditTrail: {
-            sideColor: "#A3A9AE",
+            sideColor: gray,
             nameColor: black,
             downloadReportDescriptionColor: gray,
           },
           loginHistory: {
-            sideColor: "#A3A9AE",
+            sideColor: gray,
             nameColor: black,
           },
         },
@@ -3100,13 +3100,13 @@ export const getBaseTheme = () => {
           rectangleBackgroundColor: grayLight,
           separatorBorder: "1px solid #eceef1",
           warningColor: "#f21c0e",
-          textColor: "#A3A9AE",
+          textColor: gray,
           backupCheckedListItemBackground: "#F3F4F4",
         },
 
         payment: {
           priceColor: "#555F65",
-          storageSizeTitle: "#A3A9AE",
+          storageSizeTitle: gray,
 
           backgroundColor: grayLight,
           linkColor: "#316DAA",
@@ -3119,11 +3119,11 @@ export const getBaseTheme = () => {
             backgroundText: "#f3f4f4",
             background: "transparent",
             border: "1px solid #d0d5da",
-            featureTextColor: "#A3A9AE",
+            featureTextColor: gray,
 
-            disableColor: "#A3A9AE",
-            trackNumberColor: "#A3A9AE",
-            disablePriceColor: "#A3A9AE",
+            disableColor: gray,
+            trackNumberColor: gray,
+            disablePriceColor: gray,
           },
 
           benefitsContainer: {
@@ -3131,7 +3131,7 @@ export const getBaseTheme = () => {
           },
 
           contactContainer: {
-            textColor: "#A3A9AE",
+            textColor: gray,
             linkColor: "#657077",
           },
 
@@ -3145,21 +3145,21 @@ export const getBaseTheme = () => {
           workspaceBackground: white,
           workspaceBorder: "1px solid #d0d5da",
           stepDescriptionColor: black,
-          fileInputIconColor: "#A3A9AE",
+          fileInputIconColor: gray,
           infoBlockBackground: grayLight,
           infoBlockTextColor: "#555F65",
           errorTextColor: "#F21C0E",
           existingTextColor: "#2db482",
-          tableHeaderText: "#A3A9AE",
+          tableHeaderText: gray,
           tableRowHoverColor: "#F3F4F4",
-          tableRowTextColor: "#A3A9AE",
+          tableRowTextColor: gray,
           comboBoxLabelColor: black,
           importSectionBackground: grayLight,
-          importSectionTextColor: "#A3A9AE",
+          importSectionTextColor: gray,
           importItemBackground: grayLightMid,
           importItemDisableBackground: "#F3F4F4",
           importItemTextColor: "#555f65",
-          importItemDisableTextColor: "#A3A9AE",
+          importItemDisableTextColor: gray,
           importItemDescription: black,
           importIconColor: "#657077",
           groupMenuBackground: white,
@@ -3194,7 +3194,7 @@ export const getBaseTheme = () => {
 
     errorContainer: {
       background: white,
-      bodyText: "#A3A9AE",
+      bodyText: gray,
     },
 
     editor: {
@@ -3230,25 +3230,25 @@ export const getBaseTheme = () => {
         background: grayLight,
         textColor: black,
 
-        descriptionTextColor: "#A3A9AE",
-        pendingEmailTextColor: "#A3A9AE",
+        descriptionTextColor: gray,
+        pendingEmailTextColor: gray,
 
         mobileRowBackground: grayLight,
       },
       themePreview: {
-        descriptionColor: "#A3A9AE",
+        descriptionColor: gray,
         border: "1px solid #eceef1",
       },
       notifications: {
-        textDescriptionColor: "#A3A9AE",
+        textDescriptionColor: gray,
       },
       activeSessions: {
         color: black,
         borderColor: grayLightMid,
         tickIconColor: "#35AD17",
-        removeIconColor: "#A3A9AE",
+        removeIconColor: gray,
         sortHeaderColor: grayMid,
-        tableCellColor: "#a3a9ae",
+        tableCellColor: gray,
         dividerColor: grayMid,
       },
     },
@@ -3263,7 +3263,7 @@ export const getBaseTheme = () => {
       colorPercentSmall: black,
       colorPercentBig: white,
       errorTextColor: "#F21C0E",
-      descriptionTextColor: "#A3A9AE",
+      descriptionTextColor: gray,
     },
 
     codeInput: {
@@ -3273,7 +3273,7 @@ export const getBaseTheme = () => {
       lineColor: "#C4C4C4",
       disabledBackground: grayLight,
       disabledBorder: "1px solid #ECEEF1",
-      disabledColor: "#A3A9AE",
+      disabledColor: gray,
     },
 
     accessRightSelect: {
@@ -3289,7 +3289,7 @@ export const getBaseTheme = () => {
     },
 
     portalUnavailable: {
-      textDescriptionColor: "#A3A9AE",
+      textDescriptionColor: gray,
     },
 
     deepLink: {
@@ -3298,17 +3298,17 @@ export const getBaseTheme = () => {
     },
 
     emailChips: {
-      borderColor: "#A3A9AE",
+      borderColor: gray,
       dashedBorder: "1px dashed #5299E0",
     },
 
     dialogs: {
-      disableText: "#A3A9AE",
+      disableText: gray,
     },
 
     editLink: {
       text: {
-        color: "#A3A9AE",
+        color: gray,
         errorColor: "#F21C0E",
       },
     },
@@ -3336,7 +3336,7 @@ export const getBaseTheme = () => {
     },
 
     roomIcon: {
-      backgroundArchive: "#A3A9AE",
+      backgroundArchive: gray,
       opacityBackground: "1",
     },
 

@@ -78,7 +78,7 @@ const Dark: TTheme = {
   text: {
     color: grayMaxLight,
     disableColor: "#5c5c5c",
-    emailColor: "#a3a9ae",
+    emailColor: gray,
     fontWeight: "normal",
     fontWeightBold: "bold",
   },
@@ -1279,7 +1279,7 @@ const Dark: TTheme = {
       },
 
       trackNumber: {
-        color: "#A3A9AE",
+        color: gray,
       },
 
       fillLower: {
@@ -2086,23 +2086,23 @@ const Dark: TTheme = {
     members: {
       iconColor: grayDark,
       iconHoverColor: white,
-      isExpectName: "#A3A9AE",
-      subtitleColor: "#a3a9ae",
-      meLabelColor: "#a3a9ae",
-      roleSelectorColor: "#a3a9ae",
-      disabledRoleSelectorColor: "#a3a9ae",
-      roleSelectorArrowColor: "#a3a9ae",
+      isExpectName: gray,
+      subtitleColor: gray,
+      meLabelColor: gray,
+      roleSelectorColor: gray,
+      disabledRoleSelectorColor: gray,
+      roleSelectorArrowColor: gray,
       createLink: grayDark,
-      linkAccessComboboxExpired: "#a3a9ae",
+      linkAccessComboboxExpired: gray,
     },
 
     history: {
-      subtitleColor: "#A3A9AE",
+      subtitleColor: gray,
       fileBlockBg: "#292929",
-      dateColor: "#A3A9AE",
-      fileExstColor: "#A3A9AE",
-      locationIconColor: "#A3A9AE",
-      folderLabelColor: "#A3A9AE",
+      dateColor: gray,
+      fileExstColor: gray,
+      locationIconColor: gray,
+      folderLabelColor: gray,
     },
 
     details: {
@@ -2168,7 +2168,7 @@ const Dark: TTheme = {
       border: "1px solid #474747",
       hoverBorder: "1px solid #858585",
 
-      openBackground: "#a3a9ae",
+      openBackground: gray,
 
       openFill: grayMaxLight,
     },
@@ -2176,7 +2176,7 @@ const Dark: TTheme = {
     filter: {
       background: black,
       border: "1px solid #474747",
-      color: "#a3a9ae",
+      color: gray,
 
       separatorColor: "#474747",
       indicatorColor: "#F58D31",
@@ -2448,7 +2448,7 @@ const Dark: TTheme = {
 
   createEditRoomDialog: {
     commonParam: {
-      descriptionColor: "#a3a9ae",
+      descriptionColor: gray,
       textColor: grayDark,
     },
 
@@ -2457,24 +2457,24 @@ const Dark: TTheme = {
         background: "none",
         hoverBackground: charlestonGreen,
         borderColor: "#474747",
-        descriptionText: "#A3A9AE",
+        descriptionText: gray,
       },
       dropdownButton: {
         background: "none",
         hoverBackground: charlestonGreen,
         borderColor: "#474747",
         isOpenBorderColor: "#F97A0B",
-        descriptionText: "#A3A9AE",
+        descriptionText: gray,
       },
       dropdownItem: {
         background: black,
         hoverBackground: charlestonGreen,
-        descriptionText: "#A3A9AE",
+        descriptionText: gray,
       },
       displayItem: {
         background: charlestonGreen,
         borderColor: charlestonGreen,
-        descriptionText: "#a3a9ae",
+        descriptionText: gray,
       },
     },
 
@@ -2491,7 +2491,7 @@ const Dark: TTheme = {
     permanentSettings: {
       background: "#474747",
       isPrivateIcon: "#35ad17",
-      descriptionColor: "#a3a9ae",
+      descriptionColor: gray,
     },
 
     tagInput: {
@@ -2512,7 +2512,7 @@ const Dark: TTheme = {
         background: "#474747",
         iconColor: "#ed7309",
         titleColor: "#ed7309",
-        descriptionColor: "#a3a9ae",
+        descriptionColor: gray,
         linkColor: "#e8e8e9",
       },
     },
@@ -2530,7 +2530,7 @@ const Dark: TTheme = {
         borderColor: "#474747",
         hoverBorderColor: grayDark,
         focusBorderColor: "#e8e8e9",
-        rootLabelColor: "#a3a9ae",
+        rootLabelColor: gray,
         iconFill: "#657177",
       },
     },
@@ -2557,7 +2557,7 @@ const Dark: TTheme = {
       borderColor: "#474747",
       linkMainColor: "#F97A0B",
       linkSecondaryColor: white,
-      exstsColor: "#a3a9ae",
+      exstsColor: gray,
     },
   },
 
@@ -2900,7 +2900,7 @@ const Dark: TTheme = {
     },
 
     backTitle: {
-      color: "#A3A9AE",
+      color: gray,
     },
   },
 
@@ -3083,7 +3083,7 @@ const Dark: TTheme = {
 
       payment: {
         priceColor: "#ADADAD",
-        storageSizeTitle: "#A3A9AE",
+        storageSizeTitle: gray,
 
         backgroundColor: charlestonGreen,
         linkColor: "#316DAA",
@@ -3134,7 +3134,7 @@ const Dark: TTheme = {
         importItemDisableBackground: "#3D3D3D",
         importItemTextColor: "#ADADAD",
         importItemDisableTextColor: "#5C5C5C",
-        importItemDescription: "#A3A9AE",
+        importItemDescription: gray,
         importIconColor: "#a9a9a9",
         groupMenuBackground: black,
         groupMenuBorder: "1px solid #474747",
@@ -3220,7 +3220,7 @@ const Dark: TTheme = {
       color: grayMaxLight,
       borderColor: "#474747",
       tickIconColor: "#3BA420",
-      removeIconColor: "#A3A9AE",
+      removeIconColor: gray,
       sortHeaderColor: "#474747",
       tableCellColor: grayDark,
       dividerColor: "#474747",
@@ -3282,7 +3282,7 @@ const Dark: TTheme = {
 
   editLink: {
     text: {
-      color: "#A3A9AE",
+      color: gray,
       errorColor: "#F21C0E",
     },
   },
@@ -3316,7 +3316,7 @@ const Dark: TTheme = {
 
   plugins: {
     borderColor: "#474747",
-    pluginName: "#A3A9AE",
+    pluginName: gray,
     descriptionColor: "#ADADAD",
   },
 

@@ -135,7 +135,7 @@ class HotkeyStore {
 
     if (!hotkeyCaret) {
       const scroll = document.getElementsByClassName("section-scroll");
-      scroll && scroll[0] && scroll[0].focus();
+      scroll && scroll[0] && scroll[0]?.firstChild.focus();
     }
 
     if (!hotkeyCaret && selection.length) {
@@ -539,6 +539,13 @@ class HotkeyStore {
       this.setCaret(filesList[0]);
       setHotkeyCaretStart(filesList[0]);
     }
+  };
+
+  deselectAll = () => {
+    const { setSelected } = this.filesStore;
+
+    this.elemOffset = 0;
+    setSelected("none");
   };
 
   goToHomePage = (navigate) => {

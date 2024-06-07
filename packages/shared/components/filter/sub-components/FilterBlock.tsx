@@ -555,7 +555,7 @@ const FilterBlock = ({
                 isInsideGroup={isInsideGroup}
               />
             ) : (
-              <Scrollbar className="filter-body__scrollbar">
+              <Scrollbar className="filter-body__scrollbar" autoFocus>
                 {filterData.map((item: TItem, index) => {
                   return (
                     <FilterBlockItem

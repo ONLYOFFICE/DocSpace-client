@@ -3432,17 +3432,17 @@ class FilesStore {
       case FilterType.FilesOnly:
         return t("AllFiles");
       case `room-${RoomsType.FillingFormsRoom}`:
-        return t("FillingFormRooms");
+        return t("Common:FillingFormRooms");
       case `room-${RoomsType.CustomRoom}`:
-        return t("CustomRooms");
+        return t("Common:CustomRooms");
       case `room-${RoomsType.EditingRoom}`:
-        return t("CollaborationRooms");
+        return t("Common:CollaborationRooms");
       case `room-${RoomsType.ReviewRoom}`:
         return t("Common:Review");
       case `room-${RoomsType.FormRoom}`:
-        return t("FormRoom");
+        return t("Common:FormRoom");
       case `room-${RoomsType.ReadOnlyRoom}`:
-        return t("ViewOnlyRooms");
+        return t("Common:ViewOnlyRooms");
       case `room-${RoomsType.PublicRoom}`:
         return t("Common:PublicRoomLabel");
 
@@ -3821,6 +3821,7 @@ class FilesStore {
   };
 
   openDocEditor = (id, preview = false, shareKey = null, editForm = false) => {
+    const { openOnNewPage } = this.filesSettingsStore;
     const foundIndex = this.files.findIndex((x) => x.id === id);
     const file = foundIndex !== -1 ? this.files[foundIndex] : undefined;
     if (
@@ -3850,10 +3851,7 @@ class FilesStore {
       `/doceditor?${searchParams.toString()}`,
     );
 
-    window.open(
-      url,
-      window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
-    );
+    window.open(url, openOnNewPage ? "_blank" : "_self");
   };
 
   createThumbnails = async (files = null) => {

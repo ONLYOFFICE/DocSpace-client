@@ -29,6 +29,7 @@ import styled, { css } from "styled-components";
 import ArrowRightSvg from "PUBLIC_DIR/images/arrow.right.react.svg";
 
 import { Base } from "../../themes";
+import { mobile } from "../../utils/device";
 
 import { ComboBox } from "../combobox";
 import { Text } from "../text";
@@ -156,8 +157,8 @@ const StyledSelectAll = styled.div`
   }
 
   .label {
-    width: 100%;
-    max-width: 100%;
+    // width: 100%;
+    // max-width: 100%;
 
     line-height: 16px;
 
@@ -186,6 +187,7 @@ const StyledItem = styled.div<{
   isSelected: boolean | undefined;
   isDisabled?: boolean;
   isMultiSelect: boolean;
+  noHover?: boolean;
 }>`
   display: flex;
   align-items: center;
@@ -193,6 +195,10 @@ const StyledItem = styled.div<{
   padding: 0 16px;
 
   box-sizing: border-box;
+
+  .room-logo__container {
+    margin: 0;
+  }
 
   .room-logo,
   .user-avatar {
@@ -206,8 +212,8 @@ const StyledItem = styled.div<{
   }
 
   .label {
-    width: 100%;
-    max-width: 100%;
+    // width: 100%;
+    // max-width: 100%;
 
     line-height: ${({ theme }) =>
       theme.interfaceDirection === "rtl" ? `20px` : `18px`};
@@ -219,6 +225,15 @@ const StyledItem = styled.div<{
         margin-left: 0;
         margin-right: 8px;
       `}
+  }
+
+  .clicked-label {
+    width: fit-content;
+    cursor: pointer;
+  }
+
+  .input-component {
+    margin-inline-start: 8px;
   }
 
   .checkbox {
@@ -245,12 +260,13 @@ const StyledItem = styled.div<{
         `
       : css`
           ${props.isSelected && !props.isMultiSelect && selectedCss}
-          @media (hover: hover) {
+          ${!props.noHover &&
+          ` @media (hover: hover) {
             &:hover {
               cursor: pointer;
               background: ${props.theme.selector.item.hoverBackground};
             }
-          }
+          }`}
         `}
 `;
 
@@ -265,6 +281,40 @@ const StyledEmptyScreen = styled.div<{ withSearch: boolean }>`
   padding: 0 28px;
 
   box-sizing: border-box;
+
+  .buttons {
+    position: relative;
+
+    width: 100%;
+
+    margin-top: 32px;
+
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+
+    .empty-folder_container-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .empty-folder_link {
+        color: ${(props) => props.theme.selector.emptyScreen.buttonColor};
+      }
+
+      &:hover {
+        .empty-folder_link {
+          color: ${(props) =>
+            props.theme.selector.emptyScreen.hoverButtonColor};
+        }
+
+        svg path {
+          fill: ${(props) => props.theme.selector.emptyScreen.hoverButtonColor};
+        }
+      }
+    }
+  }
 
   .empty-image {
     max-width: 72px;
@@ -325,7 +375,10 @@ const StyledBreadCrumbs = styled.div<{
 
 StyledBreadCrumbs.defaultProps = { theme: Base };
 
-const StyledItemText = styled(Text)<{ isCurrent: boolean; isLoading: boolean }>`
+const StyledItemText = styled(Text)<{
+  isCurrent: boolean;
+  isLoading?: boolean;
+}>`
   ${(props) =>
     !props.isCurrent &&
     css`
@@ -440,6 +493,78 @@ const StyledInfo = styled.div`
   }
 `;
 
+const StyledInputWrapper = styled.div`
+  width: 32px;
+  height: 32px;
+
+  margin-inline-start: 8px;
+
+  border: 1px solid ${(props) => props.theme.selector.item.inputButtonBorder};
+  border-radius: 3px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  :hover {
+    div {
+      cursor: pointer;
+    }
+    cursor: pointer;
+
+    border-color: ${(props) =>
+      props.theme.selector.item.inputButtonBorderHover};
+
+    path {
+      fill: ${(props) => props.theme.selector.item.inputButtonBorderHover};
+    }
+  }
+`;
+
+// fix empty container padding with calc +24px
+const StyledCreateDropDown = styled.div<{ isEmpty: boolean }>`
+  width: ${(props) =>
+    props.isEmpty ? `calc(100% + 24px)` : `calc(100% - 32px)`};
+  height: fit-content;
+
+  position: absolute;
+
+  top: ${(props) => (props.isEmpty ? "32px" : "48px")};
+  left: ${(props) => (props.isEmpty ? "-12px" : "16px")};
+  z-index: 453;
+
+  padding-top: 8px;
+
+  background-color: ${(props) => props.theme.backgroundColor};
+
+  display: flex;
+  flex-direction: column;
+
+  box-sizing: border-box;
+
+  border: 1px solid;
+  border-color: ${(props) => props.theme.selector.item.inputButtonBorder};
+  border-radius: 6px;
+
+  box-shadow: ${(props) => props.theme.dropDown.boxShadow};
+
+  overflow: hidden;
+
+  @media ${mobile} {
+    width: 100%;
+
+    position: fixed;
+    top: unset;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    border-radius: 6px 6px 0 0;
+  }
+`;
+
 StyledSelector.defaultProps = { theme: Base };
 StyledHeader.defaultProps = { theme: Base };
 StyledBody.defaultProps = { theme: Base };
@@ -449,6 +574,8 @@ StyledEmptyScreen.defaultProps = { theme: Base };
 StyledArrowRightSvg.defaultProps = { theme: Base };
 StyledComboBox.defaultProps = { theme: Base };
 StyledInfo.defaultProps = { theme: Base };
+StyledInputWrapper.defaultProps = { theme: Base };
+StyledCreateDropDown.defaultProps = { theme: Base };
 
 export {
   StyledSelector,
@@ -468,4 +595,6 @@ export {
   StyledTabs,
   StyledInfo,
   StyledAccessSelector,
+  StyledInputWrapper,
+  StyledCreateDropDown,
 };

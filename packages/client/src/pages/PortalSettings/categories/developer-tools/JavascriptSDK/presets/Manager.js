@@ -348,7 +348,7 @@ const Manager = (props) => {
   return (
     <PresetWrapper
       description={t("CustomDescription")}
-      header={t("CreateSampleDocSpace")}
+      header={t("CreateSampleDocspace")}
     >
       <Container>
         <PreviewBlock
@@ -544,7 +544,7 @@ const Manager = (props) => {
                     size={12}
                     tooltipContent={
                       <Text fontSize="12px">
-                        {t("CreateEditRoomDialog:PublicRoomDescription")}
+                        {t("Common:PublicRoomDescription")}
                       </Text>
                     }
                   />

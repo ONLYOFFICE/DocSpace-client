@@ -70,6 +70,7 @@ const CreateEvent = ({
   preview,
   publicRoomKey,
   actionEdit,
+  openOnNewPage,
 }) => {
   const [headerTitle, setHeaderTitle] = React.useState(null);
   const [startValue, setStartValue] = React.useState("");
@@ -183,6 +184,8 @@ const CreateEvent = ({
         searchParams.append("formId", gallerySelected.id);
       }
 
+      searchParams.append("hash", new Date().getTime());
+
       const url = combineUrl(
         window.location.origin,
         window.DocSpaceConfig?.proxy?.url,
@@ -190,10 +193,7 @@ const CreateEvent = ({
         `/doceditor/create?${searchParams.toString()}`,
       );
 
-      window.open(
-        url,
-        window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
-      );
+      window.open(url, openOnNewPage ? "_blank" : "_self");
 
       setIsLoading(false);
       onCloseAction();
@@ -269,7 +269,7 @@ export default inject(
       eventDialogVisible,
     } = dialogsStore;
 
-    const { keepNewFileName } = filesSettingsStore;
+    const { keepNewFileName, openOnNewPage } = filesSettingsStore;
 
     return {
       setPortalTariff,
@@ -300,6 +300,7 @@ export default inject(
 
       keepNewFileName,
       publicRoomKey,
+      openOnNewPage,
     };
   },
 )(observer(CreateEvent));

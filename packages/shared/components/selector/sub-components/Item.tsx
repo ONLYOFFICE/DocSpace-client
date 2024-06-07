@@ -36,6 +36,8 @@ import { RoomIcon } from "../../room-icon";
 import { StyledItem } from "../Selector.styled";
 import { ItemProps, Data, TSelectorItem } from "../Selector.types";
 import { RoomsType } from "../../../enums";
+import NewItem from "./NewItem";
+import InputItem from "./InputItem";
 
 const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
   const prevData = prevProps.data;
@@ -52,7 +54,8 @@ const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
   return (
     prevItem?.id === nextItem?.id &&
     prevItem?.label === nextItem?.label &&
-    prevItem?.isSelected === nextItem?.isSelected
+    prevItem?.isSelected === nextItem?.isSelected &&
+    nextData?.inputItemVisible === prevData?.inputItemVisible
   );
 };
 
@@ -64,6 +67,8 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     isItemLoaded,
     rowLoader,
     renderCustomItem,
+    setInputItemVisible,
+    inputItemVisible,
   }: Data = data;
   const { t } = useTranslation(["Common"]);
 
@@ -81,8 +86,18 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
 
     const {
       label,
+      isCreateNewItem,
+      onCreateClick,
+      hotkey,
+
+      isInputItem,
+      defaultInputValue,
+      onAcceptInput,
+      onCancelInput,
       avatar,
       icon,
+      roomType,
+      placeholder,
       role,
       isSelected,
       isDisabled,
@@ -90,7 +105,43 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       email,
       isGroup,
       disabledText,
+      dropDownItems,
     } = item;
+
+    if (isInputItem) {
+      return (
+        <InputItem
+          defaultInputValue={defaultInputValue}
+          onAcceptInput={onAcceptInput}
+          onCancelInput={onCancelInput}
+          style={style}
+          color={color}
+          roomType={roomType}
+          icon={icon}
+          setInputItemVisible={setInputItemVisible}
+          placeholder={placeholder}
+        />
+      );
+    }
+
+    if (
+      isCreateNewItem &&
+      (items.length > 2 || (items.length === 2 && !items[1].isInputItem))
+    ) {
+      return (
+        <NewItem
+          label={label}
+          onCreateClick={onCreateClick}
+          dropDownItems={dropDownItems}
+          style={style}
+          hotkey={hotkey}
+          inputItemVisible={inputItemVisible}
+        />
+      );
+    }
+    if (isCreateNewItem) {
+      return null;
+    }
 
     const showPlanetIcon =
       (item.roomType === RoomsType.PublicRoom ||
@@ -101,7 +152,10 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
 
     const currentRole = role || AvatarRole.user;
 
-    const typeLabel = getUserTypeLabel(role, t);
+    const typeLabel = getUserTypeLabel(
+      role as "owner" | "admin" | "user" | "collaborator" | "manager",
+      t,
+    );
 
     const onChangeAction = () => {
       onSelect?.(item, false);

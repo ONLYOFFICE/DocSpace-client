@@ -37,6 +37,7 @@ describe("<CampaignsBanner />", () => {
     render(
       <CampaignsBanner
         campaignBackground="" // TODO: add url on image
+        campaignIcon=""
         campaignTranslate={translates}
         campaignConfig={config}
         onClose={() => null}

@@ -44,7 +44,9 @@ const useI18N = ({ settings }: UseI18NProps) => {
     window.timezone = settings.timezone;
   }, [settings?.timezone]);
 
-  return { i18n: getI18NInstance(settings?.culture ?? "en") };
+  return {
+    i18n: getI18NInstance(getCookie(LANGUAGE) ?? settings?.culture ?? "en"),
+  };
 };
 
 export default useI18N;

@@ -424,6 +424,7 @@ class FilesTableHeader extends React.Component {
       columnInfoPanelStorageName,
       isRecentTab,
       isArchiveFolder,
+      showStorageInfo,
     } = this.props;
 
     if (
@@ -432,7 +433,8 @@ class FilesTableHeader extends React.Component {
       isTrashFolder !== prevProps.isTrashFolder ||
       columnStorageName !== prevProps.columnStorageName ||
       columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
-      isRecentTab !== prevProps.isRecentTab
+      isRecentTab !== prevProps.isRecentTab ||
+      showStorageInfo !== prevProps.showStorageInfo
     ) {
       return this.getTableColumns(true);
     }

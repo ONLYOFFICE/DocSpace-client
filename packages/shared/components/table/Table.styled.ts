@@ -106,13 +106,6 @@ const StyledTableContainer = styled.div<{ useReactWindow?: boolean }>`
     }
   }
 
-  .droppable-index {
-    width: 100vw;
-    height: 3px;
-    background-color: rgb(71, 129, 209);
-    position: absolute;
-  }
-
   .lengthen-header {
     border-image-slice: 1;
     border-image-source: ${(props) =>

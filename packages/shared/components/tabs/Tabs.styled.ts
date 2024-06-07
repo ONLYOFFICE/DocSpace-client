@@ -114,6 +114,9 @@ export const Tab = styled.div<{
       !props.isActive &&
       props.theme.tabs.hoverTextColorPrimary};
 
+    opacity: ${(props) =>
+      props.$theme === ThemeTabs.Primary && props.isActive && 0.85};
+
     background-color: ${(props) =>
       props.$theme === ThemeTabs.Secondary &&
       !props.isActive &&
@@ -125,6 +128,9 @@ export const Tab = styled.div<{
       props.$theme === ThemeTabs.Primary &&
       !props.isActive &&
       props.theme.tabs.pressedTextColorPrimary};
+
+    opacity: ${(props) =>
+      props.$theme === ThemeTabs.Primary && props.isActive && 1};
 
     background-color: ${(props) =>
       props.$theme === ThemeTabs.Secondary &&

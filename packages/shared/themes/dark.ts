@@ -492,7 +492,7 @@ const Dark: TTheme = {
 
     focusColor: grayDark,
 
-    errorColor: "#E06451",
+    errorColor: darkErrorStatus,
   },
 
   // slider: {
@@ -713,17 +713,17 @@ const Dark: TTheme = {
     border: "solid 1px",
 
     borderColor: "#474747",
-    errorBorderColor: "#E06451",
+    errorBorderColor: darkErrorStatus,
     warningBorderColor: warningColor,
     disabledBorderColor: "#474747",
 
     hoverBorderColor: grayDark,
-    hoverErrorBorderColor: "#E06451",
+    hoverErrorBorderColor: darkErrorStatus,
     hoverWarningBorderColor: warningColor,
     hoverDisabledBorderColor: "#474747",
 
     focusBorderColor: grayMaxLight,
-    focusErrorBorderColor: "#E06451",
+    focusErrorBorderColor: darkErrorStatus,
     focusWarningBorderColor: warningColor,
     focusDisabledBorderColor: "#474747",
   },
@@ -907,7 +907,7 @@ const Dark: TTheme = {
     disabledColor: "#474747",
 
     focusBorderColor: grayMaxLight,
-    focusErrorBorderColor: "#E06451",
+    focusErrorBorderColor: darkErrorStatus,
     focusOutline: "none",
 
     scrollWidth: "100%",
@@ -1076,7 +1076,7 @@ const Dark: TTheme = {
     },
 
     errorLabel: {
-      color: "#E06451",
+      color: darkErrorStatus,
     },
   },
 
@@ -1908,7 +1908,7 @@ const Dark: TTheme = {
 
     paymentAlert: {
       color: orangeMain,
-      warningColor: "#E06451",
+      warningColor: darkErrorStatus,
     },
 
     teamTrainingAlert: {
@@ -2077,7 +2077,7 @@ const Dark: TTheme = {
     borderColor: "#474747",
     thumbnailBorderColor: grayLightMid,
     textColor: white,
-    errorColor: "#E06451",
+    errorColor: darkErrorStatus,
 
     closeButtonWrapperPadding: "6px",
     closeButtonIcon: black,
@@ -2086,7 +2086,7 @@ const Dark: TTheme = {
 
     links: {
       iconColor: grayDark,
-      iconErrorColor: "#E06451",
+      iconErrorColor: darkErrorStatus,
       primaryColor: "#ADADAD",
     },
 
@@ -3076,14 +3076,14 @@ const Dark: TTheme = {
         },
 
         smtp: {
-          requirementColor: "#E06451",
+          requirementColor: darkErrorStatus,
         },
       },
 
       backup: {
         rectangleBackgroundColor: veryDarkGrey,
         separatorBorder: "1px solid #474747",
-        warningColor: "#E06451",
+        warningColor: darkErrorStatus,
         textColor: "#ADADAD",
         backupCheckedListItemBackground: veryDarkGrey,
       },
@@ -3116,7 +3116,7 @@ const Dark: TTheme = {
           textColor: "#ADADAD",
           linkColor: grayDark,
         },
-        warningColor: "#E06451",
+        warningColor: darkErrorStatus,
         color: "#E17415",
       },
 
@@ -3129,7 +3129,7 @@ const Dark: TTheme = {
         fileInputIconColor: grayBackgroundTextDark,
         infoBlockBackground: charlestonGreen,
         infoBlockTextColor: grayDark,
-        errorTextColor: "#E06451",
+        errorTextColor: darkErrorStatus,
         existingTextColor: "#3BA420",
         tableHeaderText: grayDark,
         tableRowHoverColor: veryDarkGrey,
@@ -3243,7 +3243,7 @@ const Dark: TTheme = {
     backgroundColor: charlestonGreen,
     colorPercentSmall: white,
     colorPercentBig: black,
-    errorTextColor: "#E06451",
+    errorTextColor: darkErrorStatus,
     descriptionTextColor: grayDark,
   },
 

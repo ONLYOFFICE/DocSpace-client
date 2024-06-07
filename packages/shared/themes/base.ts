@@ -2110,7 +2110,7 @@ export const getBaseTheme = () => {
 
       links: {
         iconColor: "#3B72A7",
-        iconErrorColor: "#F24724",
+        iconErrorColor: lightErrorStatus,
         primaryColor: cyanBlueDarkShade,
       },
 

@@ -63,12 +63,12 @@ const History = ({
       abortControllerRef.current = new AbortController();
     } else setIsLoading(true);
 
-    let module = "files";
-    if (infoPanelSelection.isRoom) module = "rooms";
-    else if (infoPanelSelection.isFolder) module = "folders";
+    let selectionType = "file";
+    if (infoPanelSelection.isRoom || infoPanelSelection.isFolder)
+      selectionType = "folder";
 
     getHistory(
-      module,
+      selectionType,
       item.id,
       abortControllerRef.current?.signal,
       item?.requestToken,
@@ -76,8 +76,8 @@ const History = ({
       .then((data) => {
         if (isMount.current)
           startTransition(() => {
-            const parsedHistory = parseHistory(t, data);
-            setSelectionHistory(parsedHistory);
+            const parsedSelectionHistory = parseHistory(t, data);
+            setSelectionHistory(parsedSelectionHistory);
           });
       })
       .catch((err) => {
@@ -114,7 +114,7 @@ const History = ({
         <StyledHistorySubtitle key={day}>{day}</StyledHistorySubtitle>,
         ...feeds.map((feed, i) => (
           <HistoryBlock
-            key={feed.json.Id}
+            key={`${feed.action.id}_${feed.date}`}
             t={t}
             feed={feed}
             selectedFolder={selectedFolder}

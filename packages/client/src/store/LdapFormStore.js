@@ -24,7 +24,7 @@ const constants = {
 class LdapFormStore {
   isLoaded = false;
   isLdapEnabled = false;
-  enableLdap = false;
+
   isSettingsShown = false;
   isTlsEnabled = false;
   isSslEnabled = false;

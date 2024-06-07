@@ -53,7 +53,7 @@ const SyncContainer = ({
   nextSyncDate,
   theme,
 
-  isLdapEnabled,
+  isLdapEnabledOnServer,
   isUIDisabled,
   isLdapAvailable,
 }) => {
@@ -117,7 +117,7 @@ const SyncContainer = ({
         primary
         onClick={onSync}
         label={t("LdapSyncButton")}
-        isDisabled={!isLdapEnabled || isUIDisabled}
+        isDisabled={!isLdapEnabledOnServer || isUIDisabled}
       />
 
       <ProgressContainer operation={LDAPOperation.Sync} />
@@ -140,7 +140,7 @@ const SyncContainer = ({
             <Cron
               value={cron}
               setValue={onChangeCron}
-              isDisabled={!isLdapEnabled || isUIDisabled}
+              isDisabled={!isLdapEnabledOnServer || isUIDisabled}
             />
           </div>
           <Text fontSize="12px" fontWeight={600} lineHeight="16px" noSelect>
@@ -153,7 +153,9 @@ const SyncContainer = ({
             primary
             onClick={onSaveClick}
             label={t("Common:SaveButton")}
-            isDisabled={!isLdapEnabled || isUIDisabled || cron === serverCron}
+            isDisabled={
+              !isLdapEnabledOnServer || isUIDisabled || cron === serverCron
+            }
           />
         </>
       )}
@@ -186,8 +188,9 @@ export default inject(({ currentQuotaStore, settingsStore, ldapStore }) => {
     serverCron,
     nextSyncDate,
 
-    isLdapEnabled,
     isUIDisabled,
+
+    serverSettings,
   } = ldapStore;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
@@ -202,7 +205,7 @@ export default inject(({ currentQuotaStore, settingsStore, ldapStore }) => {
     nextSyncDate,
     theme,
 
-    isLdapEnabled,
+    isLdapEnabledOnServer: serverSettings.EnableLdapAuthentication,
     isUIDisabled,
     isLdapAvailable,
   };

@@ -39,7 +39,7 @@ const ToggleAutoSync = ({
   theme,
   toggleCron,
   isLdapAvailable,
-  isLdapEnabled,
+  isLdapEnabledOnServer,
   isCronEnabled,
   saveCronLdap,
   isUIDisabled,
@@ -77,7 +77,7 @@ const ToggleAutoSync = ({
           className="toggle"
           isChecked={isCronEnabled}
           onChange={onChangeToggle}
-          isDisabled={!isLdapEnabled || isUIDisabled}
+          isDisabled={!isLdapEnabledOnServer || isUIDisabled}
         />
 
         <div className="toggle-caption">
@@ -117,26 +117,24 @@ const ToggleAutoSync = ({
 export default inject(({ currentQuotaStore, settingsStore, ldapStore }) => {
   const { theme } = settingsStore;
   const {
-    enableLdap,
-    isLdapEnabled,
     toggleCron,
     isCronEnabled,
     isStatusEmpty,
     saveCronLdap,
     isUIDisabled,
+    serverSettings,
   } = ldapStore;
 
   const { isLdapAvailable } = currentQuotaStore;
 
   return {
     theme,
-    enableLdap,
     toggleCron,
     isLdapAvailable,
-    isLdapEnabled,
     isCronEnabled,
     isStatusEmpty,
     saveCronLdap,
     isUIDisabled,
+    isLdapEnabledOnServer: serverSettings.EnableLdapAuthentication,
   };
 })(observer(ToggleAutoSync));

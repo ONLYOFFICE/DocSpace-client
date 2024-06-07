@@ -112,19 +112,12 @@ const ToggleLDAP = ({
 
 export default inject(({ settingsStore, ldapStore, currentQuotaStore }) => {
   const { theme } = settingsStore;
-  const {
-    enableLdap,
-    isLdapEnabled,
-    toggleLdap,
-    save,
-    isUIDisabled,
-    serverSettings,
-  } = ldapStore;
+  const { isLdapEnabled, toggleLdap, save, isUIDisabled, serverSettings } =
+    ldapStore;
   const { isLdapAvailable } = currentQuotaStore;
 
   return {
     theme,
-    enableLdap,
     toggleLdap,
     isLdapEnabled,
     save,

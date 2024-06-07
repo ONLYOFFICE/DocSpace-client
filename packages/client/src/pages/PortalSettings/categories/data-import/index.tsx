@@ -36,6 +36,7 @@ import { DataImportProps, InjectedDataImportProps } from "./types";
 import Providers from "./components/Providers";
 import NextcloudWorkspace from "./NextcloudWorkspace";
 import GoogleWorkspace from "./GoogleWorkspace";
+import OnlyofficeWorkspace from "./OnlyofficeWorkspace";
 
 const DataImport = (props: DataImportProps) => {
   const {
@@ -104,7 +105,7 @@ const DataImport = (props: DataImportProps) => {
   ) : workspace === "GoogleWorkspace" ? (
     <GoogleWorkspace />
   ) : workspace === "Workspace" ? (
-    <div>onlyoffice</div>
+    <OnlyofficeWorkspace />
   ) : (
     <Providers />
   );

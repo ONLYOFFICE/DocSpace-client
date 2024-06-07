@@ -310,7 +310,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           scale
           onInput={onSelectFile}
           className="upload-backup-input"
-          placeholder={files.join(",") || t("Settings:BackupFile")}
+          placeholder={(files && files.join(",")) || t("Settings:BackupFile")}
           isDisabled={
             fileLoadingStatus === "upload" || fileLoadingStatus === "proceed"
           }

@@ -85,9 +85,9 @@ export interface InjectedDataImportProps extends DataImportProps {
   setLoadingStatus: TStore["importAccountsStore"]["setLoadingStatus"];
 }
 
-export interface NextcloudProps {}
+export interface WorkspaceProps {}
 
-export interface InjectedNextcloudProps extends NextcloudProps {
+export interface InjectedWorkspaceProps extends WorkspaceProps {
   theme: TStore["settingsStore"]["theme"];
   filteredUsers: TStore["importAccountsStore"]["filteredUsers"];
   step: TStore["importAccountsStore"]["step"];

@@ -34,7 +34,7 @@ import StepLayout from "../sub-components/StepLayout";
 
 import { InjectedWorkspaceProps, WorkspaceProps, TFunciton } from "../types";
 
-const GoogleWorkspace = (props: WorkspaceProps) => {
+const OnlyofficeWorkspace = (props: WorkspaceProps) => {
   const { theme, filteredUsers, step, incrementStep, decrementStep } =
     props as InjectedWorkspaceProps;
 
@@ -84,4 +84,4 @@ export default inject<TStore>(({ settingsStore, importAccountsStore }) => {
     decrementStep,
     setWorkspace,
   };
-})(observer(GoogleWorkspace));
+})(observer(OnlyofficeWorkspace));

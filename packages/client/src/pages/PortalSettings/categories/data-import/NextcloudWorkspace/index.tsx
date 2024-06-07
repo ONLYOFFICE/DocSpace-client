@@ -32,11 +32,11 @@ import { getStepsData } from "./Stepper";
 import SelectFileLoader from "../sub-components/SelectFileLoader";
 import StepLayout from "../sub-components/StepLayout";
 
-import { InjectedNextcloudProps, NextcloudProps, TFunciton } from "../types";
+import { InjectedWorkspaceProps, WorkspaceProps, TFunciton } from "../types";
 
-const NextcloudWorkspace = (props: NextcloudProps) => {
+const NextcloudWorkspace = (props: WorkspaceProps) => {
   const { theme, filteredUsers, step, incrementStep, decrementStep } =
-    props as InjectedNextcloudProps;
+    props as InjectedWorkspaceProps;
 
   const { t, ready }: { t: TFunciton; ready: boolean } = useTranslation([
     "Common, SMTPSettings, Settings",

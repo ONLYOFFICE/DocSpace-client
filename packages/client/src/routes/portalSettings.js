@@ -256,7 +256,7 @@ const OnlyofficeDataImport = loadable(() =>
   componentLoader(
     () =>
       import(
-        "../pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/index.js"
+        "../pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/index.tsx"
       ),
   ),
 );

@@ -89,8 +89,6 @@ import saveAs from "file-saver";
 import { isMobile, isIOS, isTablet } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { toastr } from "@docspace/shared/components/toast";
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isDesktop } from "@docspace/shared/utils";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
@@ -117,6 +115,7 @@ import { getFileLink, getFolderLink } from "@docspace/shared/api/files";
 import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -928,20 +927,11 @@ class ContextOptionsStore {
     return res;
   };
 
-  showSuccessExportRoomIndexToast = (t, fileName, fileUrl) => {
-    const toastMessage = (
-      <>
-        <Link color="#5299E0" fontSize="12px" target="_blank" href={fileUrl}>
-          {fileName}
-        </Link>
-        &nbsp;
-        <Text as="span" fontSize="12px">
-          {t("Files:FileExportedToMyDocuments")}
-        </Text>
-      </>
-    );
+  onSuccessExportRoomIndex = (t, fileName, fileUrl) => {
+    const { openOnNewPage } = this.filesSettingsStore;
+    const urlWithProxy = combineUrl(window.DocSpaceConfig?.proxy?.url, fileUrl);
 
-    toastr.success(toastMessage);
+    showSuccessExportRoomIndexToast(t, fileName, urlWithProxy, openOnNewPage);
   };
 
   onExportRoomIndex = async (t, roomId) => {
@@ -960,16 +950,7 @@ class ContextOptionsStore {
       }
 
       if (res.status === ExportRoomIndexTaskStatus.Completed) {
-        const urlWithProxy = combineUrl(
-          window.DocSpaceConfig?.proxy?.url,
-          res.resultFileUrl,
-        );
-
-        this.showSuccessExportRoomIndexToast(
-          t,
-          res.resultFileName,
-          urlWithProxy,
-        );
+        this.onSuccessExportRoomIndex(t, res.resultFileName, res.resultFileUrl);
       }
     } catch (e) {
       toastr.error(e);

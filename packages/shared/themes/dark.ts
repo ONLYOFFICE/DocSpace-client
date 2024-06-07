@@ -152,15 +152,15 @@ const Dark: TTheme = {
     },
 
     color: {
-      base: "#FFFFFF",
-      baseHover: "#FFFFFF",
-      baseActive: "#FFFFFF",
+      base: white,
+      baseHover: white,
+      baseActive: white,
       baseDisabled: "#474747",
 
-      primary: "#FFFFFF",
-      primaryHover: "#FFFFFF",
-      primaryActive: "#FFFFFF",
-      primaryDisabled: "#FFFFFF",
+      primary: white,
+      primaryHover: white,
+      primaryActive: white,
+      primaryDisabled: white,
     },
 
     backgroundColor: {
@@ -326,7 +326,7 @@ const Dark: TTheme = {
 
     hoverBackground: black,
     hoverBorder: "1px solid #858585",
-    hoverConnectBackground: "#FFFFFF",
+    hoverConnectBackground: white,
     hoverConnectBorder: "none",
 
     activeBackground: charlestonGreen,
@@ -417,7 +417,7 @@ const Dark: TTheme = {
     activeBackground: "#242424",
 
     iconColor: "#858585",
-    iconColorHover: "#FFFFFF",
+    iconColorHover: white,
     iconColorActive: "#CCCCCC",
 
     border: `none`,
@@ -835,7 +835,7 @@ const Dark: TTheme = {
     inactiveBorderColor: "#474747",
     errorBorderColor: "#f21c0e",
     backgroundColor: "#33333",
-    color: "#fff",
+    color: white,
     scrollBackground: "#858585",
     placeholderColor: "#858585",
     dialCodeColor: "#858585",
@@ -893,7 +893,7 @@ const Dark: TTheme = {
     borderColor: grayMaxLight,
 
     iconColor: "#858585",
-    hoverIconColor: "#FFFFFF",
+    hoverIconColor: white,
   },
 
   textArea: {
@@ -947,8 +947,8 @@ const Dark: TTheme = {
     color: {
       default: "#858585",
       hover: "#ADADAD",
-      active: "#FFFFFF",
-      focus: "#FFFFFF",
+      active: white,
+      focus: white,
     },
 
     background: {
@@ -1007,7 +1007,7 @@ const Dark: TTheme = {
       marginRight: "8px",
       width: "fit-content",
 
-      backgroundColor: "#FFFFFF",
+      backgroundColor: white,
       hoverBackgroundColor: "#474747",
       disableBackgroundColor: charlestonGreen,
       activeBackgroundColor: charlestonGreen,
@@ -1404,7 +1404,7 @@ const Dark: TTheme = {
     backgroundColor: "#858585",
 
     percent: {
-      background: "#FFFFFF",
+      background: white,
     },
   },
 
@@ -1739,8 +1739,8 @@ const Dark: TTheme = {
     fillColorOff: "#292929",
     hoverFillColorOff: "#3D3D3D",
 
-    fillCircleColor: "#FFFFFF",
-    fillCircleColorOff: "#FFFFFF",
+    fillCircleColor: white,
+    fillCircleColorOff: white,
   },
 
   contextMenuButton: {
@@ -1764,7 +1764,7 @@ const Dark: TTheme = {
   },
 
   calendar: {
-    color: "#FFFFFF",
+    color: white,
     disabledColor: "#474747",
     pastColor: "#858585",
     onHoverBackground: "#3D3D3D",
@@ -1887,7 +1887,7 @@ const Dark: TTheme = {
     },
     control: {
       background: "#a3a3a3",
-      fill: "#ffffff",
+      fill: white,
     },
 
     headerBurgerColor: "#606060",
@@ -1905,7 +1905,7 @@ const Dark: TTheme = {
     },
 
     teamTrainingAlert: {
-      titleColor: "#FFFFFF",
+      titleColor: white,
       borderColor: "#388BDE",
       linkColor: "#5299E0",
     },
@@ -1943,7 +1943,7 @@ const Dark: TTheme = {
         height: "16px",
 
         fill: "#a9a9a9",
-        isActiveFill: "#FFFFFF",
+        isActiveFill: white,
         tablet: {
           width: "20px",
           height: "20px",
@@ -1955,7 +1955,7 @@ const Dark: TTheme = {
       marginLeft: "8px",
       lineHeight: "20px",
       color: "#a9a9a9",
-      isActiveColor: "#FFFFFF",
+      isActiveColor: white,
       fontSize: "13px",
       fontWeight: 600,
       tablet: {
@@ -2085,7 +2085,7 @@ const Dark: TTheme = {
 
     members: {
       iconColor: "#858585",
-      iconHoverColor: "#ffffff",
+      iconHoverColor: white,
       isExpectName: "#A3A9AE",
       subtitleColor: "#a3a9ae",
       meLabelColor: "#a3a9ae",
@@ -2132,10 +2132,10 @@ const Dark: TTheme = {
       textColor: "#858585",
       color: "#5C5C5C",
       winHoverColor: "#3785D3",
-      macHoverColor: "#fff",
+      macHoverColor: white,
       linuxHoverColor: "#FFB800",
       androidHoverColor: "#9BD71C",
-      iosHoverColor: "#fff",
+      iosHoverColor: white,
     },
 
     thirdPartyList: {
@@ -2272,7 +2272,7 @@ const Dark: TTheme = {
 
       editingIconColor: "#eeeeee",
       shareHoverColor: "#eeeeee",
-      pinColor: "#FFFFFF",
+      pinColor: white,
     },
 
     tableView: {
@@ -2381,7 +2381,7 @@ const Dark: TTheme = {
     emptyScreen: {
       descriptionColor: "#ADADAD",
       buttonColor: "#ADADAD",
-      hoverButtonColor: "#FFFFFF",
+      hoverButtonColor: white,
       pressedButtonColor: "#CCCCCC",
     },
   },
@@ -2556,7 +2556,7 @@ const Dark: TTheme = {
     dropzone: {
       borderColor: "#474747",
       linkMainColor: "#F97A0B",
-      linkSecondaryColor: "#ffffff",
+      linkSecondaryColor: white,
       exstsColor: "#a3a9ae",
     },
   },
@@ -2583,7 +2583,7 @@ const Dark: TTheme = {
 
   emptyContent: {
     header: {
-      color: "#FFFFFF",
+      color: white,
     },
 
     description: {
@@ -2986,7 +2986,7 @@ const Dark: TTheme = {
 
     settings: {
       iconFill: white,
-      headerTitleColor: "#FFFFFF",
+      headerTitleColor: white,
       trashIcon: "#858585",
       article: {
         titleColor: "#c4c4c4",
@@ -3115,10 +3115,10 @@ const Dark: TTheme = {
 
       migration: {
         descriptionColor: "#ADADAD",
-        subtitleColor: "#FFFFFF",
+        subtitleColor: white,
         workspaceBackground: black,
         workspaceBorder: "1px solid #474747",
-        stepDescriptionColor: "#FFFFFF",
+        stepDescriptionColor: white,
         fileInputIconColor: "#5c5c5c",
         infoBlockBackground: charlestonGreen,
         infoBlockTextColor: "#858585",
@@ -3127,7 +3127,7 @@ const Dark: TTheme = {
         tableHeaderText: "#858585",
         tableRowHoverColor: "#3D3D3D",
         tableRowTextColor: "#858585",
-        comboBoxLabelColor: "#FFFFFF",
+        comboBoxLabelColor: white,
         importSectionBackground: charlestonGreen,
         importSectionTextColor: "#858585",
         importItemBackground: black,
@@ -3179,7 +3179,7 @@ const Dark: TTheme = {
   submenu: {
     lineColor: "#474747",
     backgroundColor: black,
-    activeTextColor: "#FFFFFF",
+    activeTextColor: white,
     textColor: "#ADADAD",
     bottomLineColor: "#E06A1B",
   },
@@ -3234,7 +3234,7 @@ const Dark: TTheme = {
 
   preparationPortalProgress: {
     backgroundColor: charlestonGreen,
-    colorPercentSmall: "#FFFFFF",
+    colorPercentSmall: white,
     colorPercentBig: black,
     errorTextColor: "#E06451",
     descriptionTextColor: "#858585",
@@ -3299,7 +3299,7 @@ const Dark: TTheme = {
 
   infoBlock: {
     background: charlestonGreen,
-    headerColor: "#FFF",
+    headerColor: white,
     descriptionColor: "#ADADAD",
   },
 
@@ -3310,7 +3310,7 @@ const Dark: TTheme = {
   },
 
   roomIcon: {
-    backgroundArchive: "#FFFFFF",
+    backgroundArchive: white,
     opacityBackground: "0.1",
   },
 

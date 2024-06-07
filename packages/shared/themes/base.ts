@@ -862,7 +862,7 @@ export const getBaseTheme = () => {
       activeBorderColor: "#2da7db",
       inactiveBorderColor: "#d0d5da",
       errorBorderColor: "#f21c0e",
-      backgroundColor: "#fff",
+      backgroundColor: white,
       color: "#33333",
       scrollBackground: "#a3a9ae",
       placeholderColor: "#a3a9ae",
@@ -1589,18 +1589,18 @@ export const getBaseTheme = () => {
     rombsLoader: {
       blue: {
         colorStep_1: "#F2CBBF",
-        colorStep_2: "#fff",
+        colorStep_2: white,
         colorStep_3: "#E6E4E4",
         colorStep_4: "#D2D2D2",
       },
       red: {
         colorStep_1: "#BFE8F8",
-        colorStep_2: "#fff",
+        colorStep_2: white,
         colorStep_3: "#EFEFEF",
       },
       green: {
         colorStep_1: "#CBE0AC",
-        colorStep_2: "#fff",
+        colorStep_2: white,
         colorStep_3: "#EFEFEF",
         colorStep_4: "#E6E4E4",
       },
@@ -1916,7 +1916,7 @@ export const getBaseTheme = () => {
       },
       control: {
         background: "#9a9ea3",
-        fill: "#ffffff",
+        fill: white,
       },
 
       headerBurgerColor: "#657077",
@@ -1951,7 +1951,7 @@ export const getBaseTheme = () => {
         height: "36px",
         padding: "0 12px",
         marginBottom: "16px",
-        background: "#fff",
+        background: white,
         tablet: {
           height: "44px",
           padding: "0 12px",
@@ -2197,11 +2197,11 @@ export const getBaseTheme = () => {
 
         openBackground: "#a3a9ae",
 
-        openFill: "#ffffff",
+        openFill: white,
       },
 
       filter: {
-        background: "#ffffff",
+        background: white,
         border: "1px solid #eceef1",
         color: "#a3a9ae",
 
@@ -2211,12 +2211,12 @@ export const getBaseTheme = () => {
         selectedItem: {
           background: "#265a8f",
           border: "#265a8f",
-          color: "#ffffff",
+          color: white,
         },
       },
 
       sort: {
-        background: "#ffffff",
+        background: white,
         hoverBackground: "#f8f9f9",
         selectedViewIcon: "#dfe2e3",
         viewIcon: "#a3a9ae",
@@ -2491,7 +2491,7 @@ export const getBaseTheme = () => {
           descriptionText: "#A3A9AE",
         },
         dropdownItem: {
-          background: "#ffffff",
+          background: white,
           hoverBackground: "#F8F9F9",
           descriptionText: "#A3A9AE",
         },
@@ -2504,11 +2504,11 @@ export const getBaseTheme = () => {
 
       roomTypeDropdown: {
         desktop: {
-          background: "#ffffff",
+          background: white,
           borderColor: "#d0d5da",
         },
         mobile: {
-          background: "#ffffff",
+          background: white,
         },
       },
 
@@ -2524,7 +2524,7 @@ export const getBaseTheme = () => {
       },
 
       dropdown: {
-        background: "#ffffff",
+        background: white,
         borderColor: "#d0d5da",
         item: {
           hoverBackground: "#f3f4f4",
@@ -2543,14 +2543,14 @@ export const getBaseTheme = () => {
 
       thirdpartyStorage: {
         combobox: {
-          background: "#ffffff",
+          background: white,
           dropdownBorderColor: "#d0d5da",
           hoverDropdownBorderColor: "#a3a9ae",
           isOpenDropdownBorderColor: "#2DA7DB",
           arrowFill: "#a3a9ae",
         },
         folderInput: {
-          background: "#ffffff",
+          background: white,
           borderColor: "#d0d5da",
           hoverBorderColor: "#a3a9ae",
           focusBorderColor: "#35abd8",
@@ -2572,7 +2572,7 @@ export const getBaseTheme = () => {
       },
 
       previewTile: {
-        background: "#ffffff",
+        background: white,
         borderColor: "#d0d5da",
         iconBorderColor: "#eceef1",
       },
@@ -2728,7 +2728,7 @@ export const getBaseTheme = () => {
 
         itemOwnerColor: "rgb(163, 169, 174)",
 
-        backgroundButtons: "#FFFFFF",
+        backgroundButtons: white,
 
         dropdownColor: black,
 
@@ -3142,7 +3142,7 @@ export const getBaseTheme = () => {
         migration: {
           descriptionColor: grayMain,
           subtitleColor: black,
-          workspaceBackground: "#FFFFFF",
+          workspaceBackground: white,
           workspaceBorder: "1px solid #d0d5da",
           stepDescriptionColor: black,
           fileInputIconColor: "#A3A9AE",
@@ -3162,7 +3162,7 @@ export const getBaseTheme = () => {
           importItemDisableTextColor: "#A3A9AE",
           importItemDescription: black,
           importIconColor: "#657077",
-          groupMenuBackground: "#fff",
+          groupMenuBackground: white,
           groupMenuBorder: "1px solid #fff",
           groupMenuBoxShadow: "rgba(4, 15, 27, 0.07) 0px 5px 5px 0px",
         },
@@ -3261,7 +3261,7 @@ export const getBaseTheme = () => {
     preparationPortalProgress: {
       backgroundColor: "#F3F4F4",
       colorPercentSmall: black,
-      colorPercentBig: "#FFFFFF",
+      colorPercentBig: white,
       errorTextColor: "#F21C0E",
       descriptionTextColor: "#A3A9AE",
     },

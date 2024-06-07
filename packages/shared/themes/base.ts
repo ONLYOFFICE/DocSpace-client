@@ -1931,7 +1931,7 @@ export const getBaseTheme = () => {
       },
 
       paymentAlert: {
-        color: "#ed7309",
+        color: orangeMain,
         warningColor: "#F21C0E",
       },
 
@@ -2208,7 +2208,7 @@ export const getBaseTheme = () => {
         color: gray,
 
         separatorColor: grayLightMid,
-        indicatorColor: "#ED7309",
+        indicatorColor: orangeMain,
 
         selectedItem: {
           background: blueLightMid,
@@ -2240,7 +2240,7 @@ export const getBaseTheme = () => {
       linkColor: gray,
 
       tooltipLinkColor: black,
-      iconColor: "#C96C27",
+      iconColor: orangePressed,
     },
 
     updateUserForm: {
@@ -2536,8 +2536,8 @@ export const getBaseTheme = () => {
       isPrivate: {
         limitations: {
           background: grayLight,
-          iconColor: "#ed7309",
-          titleColor: "#ed7309",
+          iconColor: orangeMain,
+          titleColor: orangeMain,
           descriptionColor: cyanBlueDarkShade,
           linkColor: cyanBlueDarkShade,
         },

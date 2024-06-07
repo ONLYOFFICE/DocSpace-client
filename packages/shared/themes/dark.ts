@@ -62,6 +62,8 @@ const {
   silver,
   strongBlue,
 
+  orangeMain,
+
   darkRed,
 
   darkErrorStatus,
@@ -1904,7 +1906,7 @@ const Dark: TTheme = {
     },
 
     paymentAlert: {
-      color: "#ed7309",
+      color: orangeMain,
       warningColor: "#E06451",
     },
 
@@ -2215,7 +2217,7 @@ const Dark: TTheme = {
     linkColor: grayMaxLight,
 
     tooltipLinkColor: "#e06a1b",
-    iconColor: "#C96C27",
+    iconColor: orangePressed,
   },
 
   updateUserForm: {
@@ -2514,8 +2516,8 @@ const Dark: TTheme = {
     isPrivate: {
       limitations: {
         background: "#474747",
-        iconColor: "#ed7309",
-        titleColor: "#ed7309",
+        iconColor: orangeMain,
+        titleColor: orangeMain,
         descriptionColor: gray,
         linkColor: "#e8e8e9",
       },

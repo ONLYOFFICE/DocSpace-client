@@ -860,7 +860,7 @@ export const getBaseTheme = () => {
 
     inputPhone: {
       activeBorderColor: "#2da7db",
-      inactiveBorderColor: "#d0d5da",
+      inactiveBorderColor: grayMid,
       errorBorderColor: "#f21c0e",
       backgroundColor: white,
       color: "#33333",
@@ -984,7 +984,7 @@ export const getBaseTheme = () => {
       background: {
         default: "transparent",
         hover: grayLightMid,
-        active: "#D0D5DA",
+        active: grayMid,
         focus: "#DFE2E3",
       },
 
@@ -1711,7 +1711,7 @@ export const getBaseTheme = () => {
         hoverDisabledBorderColor: grayLightMid,
 
         hoverBackgroundModernView: grayLightMid,
-        activeBackgroundModernView: "#D0D5DA",
+        activeBackgroundModernView: grayMid,
         focusBackgroundModernView: "#DFE2E3",
       },
 
@@ -1765,7 +1765,7 @@ export const getBaseTheme = () => {
 
     toggleButton: {
       fillColorDefault: "#4781D1",
-      fillColorOff: "#D0D5DA",
+      fillColorOff: grayMid,
       hoverFillColorOff: "#A3A9AE",
       fillCircleColor: white,
       fillCircleColorOff: white,
@@ -2141,7 +2141,7 @@ export const getBaseTheme = () => {
       },
 
       gallery: {
-        borderColor: "#d0d5da",
+        borderColor: grayMid,
         descriptionColor: "#657077",
       },
 
@@ -2275,7 +2275,7 @@ export const getBaseTheme = () => {
         lengthenBorderImageSource: `linear-gradient(to right, ${grayLightMid}, ${grayLightMid})`,
         hotkeyBorderBottom: `1px solid ${globalColors.blueMain}`,
 
-        settingsIconDisableColor: "#D0D5DA",
+        settingsIconDisableColor: grayMid,
       },
 
       tableCell: {
@@ -2397,7 +2397,7 @@ export const getBaseTheme = () => {
         hoverBackground: grayLight,
         selectedBackground: lightHover,
 
-        inputButtonBorder: "#D0D5DA",
+        inputButtonBorder: grayMid,
         inputButtonBorderHover: grayMain,
       },
 
@@ -2505,7 +2505,7 @@ export const getBaseTheme = () => {
       roomTypeDropdown: {
         desktop: {
           background: white,
-          borderColor: "#d0d5da",
+          borderColor: grayMid,
         },
         mobile: {
           background: white,
@@ -2525,7 +2525,7 @@ export const getBaseTheme = () => {
 
       dropdown: {
         background: white,
-        borderColor: "#d0d5da",
+        borderColor: grayMid,
         item: {
           hoverBackground: "#f3f4f4",
         },
@@ -2544,14 +2544,14 @@ export const getBaseTheme = () => {
       thirdpartyStorage: {
         combobox: {
           background: white,
-          dropdownBorderColor: "#d0d5da",
+          dropdownBorderColor: grayMid,
           hoverDropdownBorderColor: "#a3a9ae",
           isOpenDropdownBorderColor: "#2DA7DB",
           arrowFill: "#a3a9ae",
         },
         folderInput: {
           background: white,
-          borderColor: "#d0d5da",
+          borderColor: grayMid,
           hoverBorderColor: "#a3a9ae",
           focusBorderColor: "#35abd8",
           rootLabelColor: "#a3a9ae",
@@ -2573,7 +2573,7 @@ export const getBaseTheme = () => {
 
       previewTile: {
         background: white,
-        borderColor: "#d0d5da",
+        borderColor: grayMid,
         iconBorderColor: grayLightMid,
       },
 
@@ -3247,9 +3247,9 @@ export const getBaseTheme = () => {
         borderColor: grayLightMid,
         tickIconColor: "#35AD17",
         removeIconColor: "#A3A9AE",
-        sortHeaderColor: "#d0d5da",
+        sortHeaderColor: grayMid,
         tableCellColor: "#a3a9ae",
-        dividerColor: "#D0D5DA",
+        dividerColor: grayMid,
       },
     },
 
@@ -3341,13 +3341,13 @@ export const getBaseTheme = () => {
     },
 
     plugins: {
-      borderColor: "#D0D5DA",
+      borderColor: grayMid,
       pluginName: "#5C5C5C",
       descriptionColor: "#657077",
     },
 
     sdkPresets: {
-      borderColor: "#d0d5da",
+      borderColor: grayMid,
       secondaryColor: "#657077",
       previewBackgroundColor: "#F3F4F4",
     },

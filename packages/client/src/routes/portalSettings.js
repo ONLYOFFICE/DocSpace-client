@@ -240,7 +240,7 @@ const GoogleDataImport = loadable(() =>
   componentLoader(
     () =>
       import(
-        "../pages/PortalSettings/categories/data-import/GoogleWorkspace/index.js"
+        "../pages/PortalSettings/categories/data-import/GoogleWorkspace/index.tsx"
       ),
   ),
 );
@@ -248,7 +248,7 @@ const NextcloudDataImport = loadable(() =>
   componentLoader(
     () =>
       import(
-        "../pages/PortalSettings/categories/data-import/NextCloudWorkspace/index.js"
+        "../pages/PortalSettings/categories/data-import/NextcloudWorkspace/index.tsx"
       ),
   ),
 );
@@ -527,15 +527,15 @@ const PortalSettingsRoutes = {
     },
     {
       path: "data-import/migration/google",
-      element: <GoogleDataImport />,
+      element: <DataImport />,
     },
     {
       path: "data-import/migration/nextcloud",
-      element: <NextcloudDataImport />,
+      element: <DataImport />,
     },
     {
       path: "data-import/migration/onlyoffice",
-      element: <OnlyofficeDataImport />,
+      element: <DataImport />,
     },
     {
       path: "developer-tools/javascript-sdk/docspace",

@@ -105,6 +105,10 @@ const FAIL_TRIES = 2;
 
 const SelectFileStep = (props: SelectFileStepProps) => {
   const {
+    isMultipleUpload,
+    migratorName,
+    acceptedExtensions,
+
     t,
     incrementStep,
     setWorkspace,
@@ -121,6 +125,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
     setLoadingStatus,
     files,
     setFiles,
+    multipleFileUploading,
   } = props as InjectedSelectFileStepProps;
 
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
@@ -129,6 +134,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
 
   const [isError, setIsError] = useState(false);
   const [isFileError, setIsFileError] = useState(false);
+  const [isBackupEmpty, setIsBackupEmpty] = useState(false);
   const isAbort = useRef(false);
 
   const [failTries, setFailTries] = useState(FAIL_TRIES);
@@ -165,9 +171,22 @@ const SelectFileStep = (props: SelectFileStepProps) => {
 
       if (res.isCompleted || res.progress === 100) {
         clearInterval(uploadInterval.current);
+        if (
+          res.parseResult.users.length +
+            res.parseResult.existUsers.length +
+            res.parseResult.withoutEmailUsers.length >
+          0
+        ) {
+          setUsers(res.parseResult);
+          setIsBackupEmpty(false);
+          setLoadingStatus("done");
+        } else {
+          setLoadingStatus("none");
+          setIsBackupEmpty(true);
+          cancelMigration();
+        }
         setUsers(res.parseResult);
 
-        setLoadingStatus("done");
         setIsInfiniteProgress(false);
         setIsSaveDisabled(false);
       }
@@ -178,6 +197,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
         setIsInfiniteProgress(false);
       }
     } catch (error) {
+      cancelMigration();
       toastr.error(error || t("Common:SomethingWentWrong"));
       setIsFileError(true);
       setLoadingStatus("none");
@@ -185,6 +205,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
       clearInterval(uploadInterval.current);
     }
   }, [
+    cancelMigration,
     failTries,
     getMigrationStatus,
     isInfiniteProgress,
@@ -193,13 +214,19 @@ const SelectFileStep = (props: SelectFileStepProps) => {
     t,
   ]);
 
-  const onUploadFile = async (file: File) => {
+  const onUploadFile = async (file: File | File[]) => {
     try {
-      await singleFileUploading(file, setProgress, isAbort);
+      if (file instanceof Array) {
+        setFiles(file.map((item) => item.name));
+        await multipleFileUploading(file, setProgress, isAbort);
+      } else {
+        setFiles([file.name]);
+        await singleFileUploading(file, setProgress, isAbort);
+      }
 
       if (isAbort.current) return;
 
-      await initMigrationName("Nextcloud");
+      await initMigrationName(migratorName);
       setLoadingStatus("proceed");
     } catch (error) {
       toastr.error(error || t("Common:SomethingWentWrong"));
@@ -211,7 +238,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
   };
 
   const onSelectFile = (file: File | File[]) => {
-    if (file instanceof Array) {
+    if (!isMultipleUpload && file instanceof Array) {
       toastr.error(t("Common:SomethingWentWrong"));
       return;
     }
@@ -222,7 +249,6 @@ const SelectFileStep = (props: SelectFileStepProps) => {
     setLoadingStatus("upload");
     setFailTries(FAIL_TRIES);
     setIsInfiniteProgress(true);
-    setFiles([file.name]);
 
     onUploadFile(file);
   };
@@ -288,7 +314,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           isDisabled={
             fileLoadingStatus === "upload" || fileLoadingStatus === "proceed"
           }
-          accept={[".zip"]}
+          accept={acceptedExtensions}
           size={InputSize.base}
         />
       </FileUploadContainer>
@@ -326,6 +352,19 @@ const SelectFileStep = (props: SelectFileStepProps) => {
               >
                 {t("Settings:CheckUnsupportedFiles")}
               </Link>
+            </Box>
+          )}
+
+          {isBackupEmpty && (
+            <Box>
+              <ProgressBar
+                percent={100}
+                className="complete-progress-bar"
+                label={t("Common:LoadingIsComplete")}
+              />
+              <Text className="error-text">
+                {t("Settings:NoUsersInBackup")}
+              </Text>
             </Box>
           )}
 
@@ -382,6 +421,7 @@ export default inject<TStore>(({ dialogsStore, importAccountsStore }) => {
     incrementStep,
     files,
     setFiles,
+    multipleFileUploading,
   } = importAccountsStore;
   const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
     dialogsStore;
@@ -400,5 +440,6 @@ export default inject<TStore>(({ dialogsStore, importAccountsStore }) => {
     incrementStep,
     files,
     setFiles,
+    multipleFileUploading,
   };
 })(observer(SelectFileStep));

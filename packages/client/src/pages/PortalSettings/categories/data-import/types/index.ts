@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
+import { TWorkspaceService } from "@docspace/shared/api/settings/types";
 
 export type TFunciton = ReturnType<typeof useTranslation>["t"];
 
@@ -44,6 +45,9 @@ export interface InjectedProvidersProps extends ProvidersProps {
 
 export interface SelectFileStepProps {
   t: TFunciton;
+  isMultipleUpload?: boolean;
+  acceptedExtensions: string[];
+  migratorName: TWorkspaceService;
 }
 
 export interface InjectedSelectFileStepProps extends SelectFileStepProps {
@@ -61,6 +65,7 @@ export interface InjectedSelectFileStepProps extends SelectFileStepProps {
   cancelMigration: TStore["importAccountsStore"]["cancelMigration"];
   files: TStore["importAccountsStore"]["files"];
   setFiles: TStore["importAccountsStore"]["setFiles"];
+  multipleFileUploading: TStore["importAccountsStore"]["multipleFileUploading"];
 }
 
 export interface DataImportProps {}
@@ -88,4 +93,14 @@ export interface InjectedNextcloudProps extends NextcloudProps {
   step: TStore["importAccountsStore"]["step"];
   incrementStep: TStore["importAccountsStore"]["incrementStep"];
   decrementStep: TStore["importAccountsStore"]["decrementStep"];
+}
+
+export interface LayoutProps {
+  t: TFunciton;
+  theme: TStore["settingsStore"]["theme"];
+  step: number;
+  totalSteps: number;
+  title: string;
+  description: string;
+  component: JSX.Element;
 }

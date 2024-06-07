@@ -34,7 +34,7 @@ import StepLayout from "../sub-components/StepLayout";
 
 import { InjectedNextcloudProps, NextcloudProps, TFunciton } from "../types";
 
-const NextcloudWorkspace = (props: NextcloudProps) => {
+const GoogleWorkspace = (props: NextcloudProps) => {
   const { theme, filteredUsers, step, incrementStep, decrementStep } =
     props as InjectedNextcloudProps;
 
@@ -84,4 +84,4 @@ export default inject<TStore>(({ settingsStore, importAccountsStore }) => {
     decrementStep,
     setWorkspace,
   };
-})(observer(NextcloudWorkspace));
+})(observer(GoogleWorkspace));

@@ -30,8 +30,8 @@ import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
 import SelectFileStep from "../../components/SelectFileStep";
+
 import SelectUsersStep from "./SelectUsersStep";
-import AddEmailsStep from "./AddEmailsStep";
 import SelectUsersTypeStep from "./SelectUsersTypeStep";
 import ImportStep from "./ImportStep";
 import ImportProcessingStep from "./ImportProcessingStep";
@@ -47,36 +47,25 @@ export const getStepsData = (
 ) => {
   return [
     {
-      title: t("Common:SelectFile"),
-      description: t("Settings:SelectFileDescriptionNextcloud"),
+      title: t("Common:SelectFiles"),
+      description: t("Settings:SelectFileDescriptionGoogle"),
       component: (
         <SelectFileStep
           t={t}
-          isMultipleUpload={false}
-          migratorName="Nextcloud"
+          isMultipleUpload
+          migratorName="GoogleWorkspace"
           acceptedExtensions={[".zip"]}
         />
       ),
     },
     {
-      title: t("Settings:SelectUsersWithEmail"),
-      description: t("Settings:SelectUsersDescriptionNextcloud"),
+      title: t("Settings:SelectUsers"),
+      description: t("Settings:SelectUsersDescriptionGoogle"),
       component: (
         <SelectUsersStep
           t={t}
-          incrementStep={incrementStep}
-          decrementStep={decrementStep}
-        />
-      ),
-    },
-    {
-      title: t("Settings:AddEmails"),
-      description: t("Settings:AddEmailsDescription"),
-      component: (
-        <AddEmailsStep
-          t={t}
-          incrementStep={incrementStep}
-          decrementStep={decrementStep}
+          onNextStep={incrementStep}
+          onPrevStep={decrementStep}
         />
       ),
     },
@@ -125,8 +114,9 @@ export const getStepsData = (
       component: (
         <SelectUsersTypeStep
           t={t}
-          incrementStep={incrementStep}
-          decrementStep={decrementStep}
+          onNextStep={incrementStep}
+          onPrevStep={decrementStep}
+          showReminder
         />
       ),
     },
@@ -136,20 +126,23 @@ export const getStepsData = (
       component: (
         <ImportStep
           t={t}
-          incrementStep={incrementStep}
-          decrementStep={decrementStep}
+          onNextStep={incrementStep}
+          onPrevStep={decrementStep}
+          showReminder
         />
       ),
     },
     {
       title: t("Settings:DataImportProcessing"),
       description: t("Settings:ImportProcessingDescription"),
-      component: <ImportProcessingStep t={t} incrementStep={incrementStep} />,
+      component: <ImportProcessingStep t={t} onNextStep={incrementStep} />,
     },
     {
       title: t("Settings:DataImportComplete"),
-      description: t("Settings:ImportCompleteDescriptionNextcloud"),
-      component: <ImportCompleteStep t={t} />,
+      description: t("Settings:ImportCompleteDescriptionGoogle"),
+      component: (
+        <ImportCompleteStep t={t} onPrevStep={decrementStep} showReminder />
+      ),
     },
   ];
 };

@@ -24,64 +24,51 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 
-import { getStepsData } from "./Stepper";
+import { Text } from "@docspace/shared/components/text";
+import { LayoutProps } from "../types";
 
-import SelectFileLoader from "../sub-components/SelectFileLoader";
-import StepLayout from "../sub-components/StepLayout";
+const DescriptionWrapper = styled.div`
+  max-width: 700px;
 
-import { InjectedNextcloudProps, NextcloudProps, TFunciton } from "../types";
+  .data-import-counter {
+    margin-top: 19px;
+    margin-bottom: 9px;
+  }
 
-const NextcloudWorkspace = (props: NextcloudProps) => {
-  const { theme, filteredUsers, step, incrementStep, decrementStep } =
-    props as InjectedNextcloudProps;
+  .data-import-section-description {
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+`;
 
-  const { t, ready }: { t: TFunciton; ready: boolean } = useTranslation([
-    "Common, SMTPSettings, Settings",
-  ]);
-
-  const StepsData = getStepsData(
-    t,
-    incrementStep,
-    decrementStep,
-    filteredUsers.length === 0,
-  );
-
-  if (!ready) return <SelectFileLoader />;
+const StepLayout = (props: LayoutProps) => {
+  const { t, theme, step, totalSteps, title, description, component } = props;
 
   return (
-    <StepLayout
-      t={t}
-      theme={theme}
-      step={step}
-      totalSteps={StepsData.length}
-      title={StepsData[step - 1].title}
-      description={StepsData[step - 1].description}
-      component={StepsData[step - 1].component}
-    />
+    <>
+      <DescriptionWrapper>
+        <Text
+          className="data-import-description"
+          lineHeight="20px"
+          color={theme.isBase ? "#657077" : "#ADADAD"}
+        >
+          {t("Settings:AboutDataImport")}
+        </Text>
+        <Text
+          className="data-import-counter"
+          fontSize="16px"
+          fontWeight={700}
+          lineHeight="22px"
+        >
+          {step}/{totalSteps}. {title}
+        </Text>
+        <div className="data-import-section-description">{description}</div>
+      </DescriptionWrapper>
+      {component}
+    </>
   );
 };
 
-export default inject<TStore>(({ settingsStore, importAccountsStore }) => {
-  const {
-    filteredUsers,
-    step,
-    setStep,
-    incrementStep,
-    decrementStep,
-    setWorkspace,
-  } = importAccountsStore;
-  const { theme } = settingsStore;
-
-  return {
-    theme,
-    filteredUsers,
-    step,
-    setStep,
-    incrementStep,
-    decrementStep,
-    setWorkspace,
-  };
-})(observer(NextcloudWorkspace));
+export default StepLayout;

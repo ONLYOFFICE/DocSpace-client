@@ -56,6 +56,7 @@ const {
   shuttleGrey,
 
   blueMain,
+  blueDisabled,
 
   blueDenim,
   blueDenimTransparent,
@@ -357,7 +358,7 @@ export const getBaseTheme = () => {
       activeBorder: "1px solid #D0D5DA",
       activeBackground: grayLightMid,
       activeConnectBorder: "none",
-      activeConnectBackground: "#265A8F",
+      activeConnectBackground: blueLightMid,
 
       color: "rgba(0, 0, 0, 0.54)",
       disableColor: black,
@@ -859,7 +860,7 @@ export const getBaseTheme = () => {
     },
 
     inputPhone: {
-      activeBorderColor: "#2da7db",
+      activeBorderColor: blueMain,
       inactiveBorderColor: grayMid,
       errorBorderColor: "#f21c0e",
       backgroundColor: white,
@@ -1265,7 +1266,7 @@ export const getBaseTheme = () => {
           width: "24px",
           height: "24px",
           background: blueMain,
-          disabledBackground: "#A6DCF2",
+          disabledBackground: blueDisabled,
           borderWidth: "6px",
           borderStyle: "solid",
           borderColor: `${white}`,
@@ -1936,7 +1937,7 @@ export const getBaseTheme = () => {
       teamTrainingAlert: {
         titleColor: "#388BDE",
         borderColor: "#388BDE",
-        linkColor: "#5299E0",
+        linkColor: blueDenim,
       },
     },
 
@@ -2209,8 +2210,8 @@ export const getBaseTheme = () => {
         indicatorColor: "#ED7309",
 
         selectedItem: {
-          background: "#265a8f",
-          border: "#265a8f",
+          background: blueLightMid,
+          border: blueLightMid,
           color: white,
         },
       },
@@ -2487,7 +2488,7 @@ export const getBaseTheme = () => {
           background: "none",
           hoverBackground: grayLight,
           borderColor: grayLightMid,
-          isOpenBorderColor: "#2DA7DB",
+          isOpenBorderColor: blueMain,
           descriptionText: gray,
         },
         dropdownItem: {
@@ -2546,7 +2547,7 @@ export const getBaseTheme = () => {
           background: white,
           dropdownBorderColor: grayMid,
           hoverDropdownBorderColor: gray,
-          isOpenDropdownBorderColor: "#2DA7DB",
+          isOpenDropdownBorderColor: blueMain,
           arrowFill: gray,
         },
         folderInput: {

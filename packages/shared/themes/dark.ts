@@ -47,6 +47,8 @@ const {
   shuttleGrey,
 
   blueMain,
+  blueDisabled,
+  blueDenim,
 
   orangePressed,
 
@@ -170,7 +172,7 @@ const Dark: TTheme = {
       baseActive: charlestonGreen,
       baseDisabled: charlestonGreen,
 
-      primary: "#5299E0",
+      primary: blueDenim,
       primaryHover: "#4D8AC7",
       primaryActive: "#427CB7",
       primaryDisabled: "#45709B",
@@ -832,7 +834,7 @@ const Dark: TTheme = {
   },
 
   inputPhone: {
-    activeBorderColor: "#2da7db",
+    activeBorderColor: blueMain,
     inactiveBorderColor: "#474747",
     errorBorderColor: "#f21c0e",
     backgroundColor: "#33333",
@@ -1235,7 +1237,7 @@ const Dark: TTheme = {
         width: "24px",
         height: "24px",
         background: grayMaxLight,
-        disabledBackground: "#A6DCF2",
+        disabledBackground: blueDisabled,
         borderWidth: "6px",
         borderStyle: "solid",
         borderColor: `${black}`,
@@ -1908,7 +1910,7 @@ const Dark: TTheme = {
     teamTrainingAlert: {
       titleColor: white,
       borderColor: "#388BDE",
-      linkColor: "#5299E0",
+      linkColor: blueDenim,
     },
   },
 

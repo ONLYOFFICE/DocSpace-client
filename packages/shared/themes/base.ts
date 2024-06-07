@@ -2131,6 +2131,7 @@ export const getBaseTheme = () => {
         fileExstColor: "#A3A9AE",
         locationIconColor: "#A3A9AE",
         folderLabelColor: "#A3A9AE",
+        renamedItemColor: "#A3A9AE",
       },
 
       details: {
@@ -3217,9 +3218,11 @@ export const getBaseTheme = () => {
 
     tag: {
       color: black,
+      deletedColor: "#A3A9AE",
       background: "#f3f4f4",
       hoverBackground: "#eceef1",
       disabledBackground: "#f8f9f9",
+      deletedBackground: "#F8F9F9",
       defaultTagColor: black,
       newTagBackground: "#eceef1",
     },

@@ -46,6 +46,9 @@ import {
   SeparatorType,
 } from "../ContextMenu.types";
 
+const submenuListMargin = 4; // Indentation of the second level menu from the first level
+const sectionPadding = 16; // Screen margin
+
 const SubMenu = (props: {
   model: ContextMenuModel[];
   root?: boolean;
@@ -185,8 +188,6 @@ const SubMenu = (props: {
       const freeSpaceRight =
         viewport.width - containerOffsetLeft - itemOuterWidth;
       const freeSpaceLeft = containerOffsetLeft;
-      const submenuListMargin = 4;
-      const sectionPadding = 16;
 
       if (isRtl) {
         if (

@@ -3046,7 +3046,7 @@ const Dark: TTheme = {
           borderImg: "1px solid #474747",
 
           backgroundColorWhite: white,
-          backgroundColorLight: "#F8F9F9",
+          backgroundColorLight: grayLight,
           backgroundColorDark: charlestonGreen,
           greenBackgroundColor: "#40865C",
           blueBackgroundColor: "#446995",

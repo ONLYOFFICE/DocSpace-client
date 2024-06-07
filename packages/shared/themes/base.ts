@@ -125,7 +125,7 @@ export const getBaseTheme = () => {
       color: black,
     },
 
-    backgroundAndSubstrateColor: "#F8F9F9",
+    backgroundAndSubstrateColor: grayLight,
 
     betaBadgeTooltip: {
       boxShadowColor: "rgba(4, 15, 27, 0.12)",
@@ -347,7 +347,7 @@ export const getBaseTheme = () => {
       borderConnect: "none",
       connectBackground: "#3B72A7",
 
-      disableBackgroundColor: "#F8F9F9",
+      disableBackgroundColor: grayLight,
 
       hoverBackground: white,
       hoverBorder: "1px solid #5299E0",
@@ -1014,7 +1014,7 @@ export const getBaseTheme = () => {
       maxWidth: "340px",
       color: white,
       textColor: black,
-      backgroundColor: "#F8F9F9",
+      backgroundColor: grayLight,
 
       before: {
         border: "none",
@@ -1908,7 +1908,7 @@ export const getBaseTheme = () => {
     // },
 
     catalog: {
-      background: "#f8f9f9",
+      background: grayLight,
 
       header: {
         borderBottom: "1px solid #eceef1",
@@ -2052,7 +2052,7 @@ export const getBaseTheme = () => {
     },
 
     header: {
-      backgroundColor: "#F8F9F9",
+      backgroundColor: grayLight,
       recoveryColor: "#657077",
       linkColor: "#657077",
       productColor: white,
@@ -2083,7 +2083,7 @@ export const getBaseTheme = () => {
       header: {
         backgroundColor: white,
         background: `linear-gradient(180deg,#ffffff 2.81%,rgba(255, 255, 255, 0.91) 63.03%,rgba(255, 255, 255, 0) 100%)`,
-        trashErasureLabelBackground: "#f8f9f9",
+        trashErasureLabelBackground: grayLight,
         trashErasureLabelText: "#555f65",
       },
     },
@@ -2127,7 +2127,7 @@ export const getBaseTheme = () => {
 
       history: {
         subtitleColor: "#a3a9ae",
-        fileBlockBg: "#f8f9f9",
+        fileBlockBg: grayLight,
         dateColor: "#A3A9AE",
         fileExstColor: "#A3A9AE",
         locationIconColor: "#A3A9AE",
@@ -2217,7 +2217,7 @@ export const getBaseTheme = () => {
 
       sort: {
         background: white,
-        hoverBackground: "#f8f9f9",
+        hoverBackground: grayLight,
         selectedViewIcon: "#dfe2e3",
         viewIcon: "#a3a9ae",
         sortFill: "#657077",
@@ -2387,7 +2387,7 @@ export const getBaseTheme = () => {
       },
 
       info: {
-        backgroundColor: "#f8f9f9",
+        backgroundColor: grayLight,
         color: "#555f65",
       },
 
@@ -2479,20 +2479,20 @@ export const getBaseTheme = () => {
       roomType: {
         listItem: {
           background: "none",
-          hoverBackground: "#F8F9F9",
+          hoverBackground: grayLight,
           borderColor: "#ECEEF1",
           descriptionText: "#A3A9AE",
         },
         dropdownButton: {
           background: "none",
-          hoverBackground: "#F8F9F9",
+          hoverBackground: grayLight,
           borderColor: "#ECEEF1",
           isOpenBorderColor: "#2DA7DB",
           descriptionText: "#A3A9AE",
         },
         dropdownItem: {
           background: white,
-          hoverBackground: "#F8F9F9",
+          hoverBackground: grayLight,
           descriptionText: "#A3A9AE",
         },
         displayItem: {
@@ -2513,7 +2513,7 @@ export const getBaseTheme = () => {
       },
 
       permanentSettings: {
-        background: "#f8f9f9",
+        background: grayLight,
         isPrivateIcon: "#35ad17",
         descriptionColor: "#555f65",
       },
@@ -2533,7 +2533,7 @@ export const getBaseTheme = () => {
 
       isPrivate: {
         limitations: {
-          background: "#f8f9f9",
+          background: grayLight,
           iconColor: "#ed7309",
           titleColor: "#ed7309",
           descriptionColor: "#555f65",
@@ -2562,9 +2562,9 @@ export const getBaseTheme = () => {
       iconCropper: {
         gridColor: black,
         deleteButton: {
-          background: "#f8f9f9",
+          background: grayLight,
           hoverBackground: "#f3f4f4",
-          borderColor: "#f8f9f9",
+          borderColor: grayLight,
           hoverBorderColor: "#f3f4f4",
           color: "#555f65",
           iconColor: "#657077",
@@ -2719,7 +2719,7 @@ export const getBaseTheme = () => {
 
         borderBottom: "1px solid #eceef1",
         borderTop: "1px solid #eceef1",
-        externalLinkBackground: "#f8f9f9",
+        externalLinkBackground: grayLight,
         externalLinkSvg: black,
 
         internalLinkBorder: "1px dashed #333333",
@@ -2901,7 +2901,7 @@ export const getBaseTheme = () => {
     login: {
       linkColor: link,
       textColor: gray,
-      navBackground: "#F8F9F9",
+      navBackground: grayLight,
       headerColor: black,
       helpButton: "#A3A9AE",
       orLineColor: "#ECEEF1",
@@ -2961,7 +2961,7 @@ export const getBaseTheme = () => {
     },
 
     downloadDialog: {
-      background: "#f8f9f9",
+      background: grayLight,
     },
 
     client: {
@@ -3069,7 +3069,7 @@ export const getBaseTheme = () => {
             borderImg: "1px solid #d1d1d1",
 
             backgroundColorWhite: white,
-            backgroundColorLight: "#F8F9F9",
+            backgroundColorLight: grayLight,
             backgroundColorDark: charlestonGreen,
             greenBackgroundColor: "#40865C",
             blueBackgroundColor: "#446995",
@@ -3097,7 +3097,7 @@ export const getBaseTheme = () => {
         },
 
         backup: {
-          rectangleBackgroundColor: "#f8f9f9",
+          rectangleBackgroundColor: grayLight,
           separatorBorder: "1px solid #eceef1",
           warningColor: "#f21c0e",
           textColor: "#A3A9AE",
@@ -3108,11 +3108,11 @@ export const getBaseTheme = () => {
           priceColor: "#555F65",
           storageSizeTitle: "#A3A9AE",
 
-          backgroundColor: "#f8f9f9",
+          backgroundColor: grayLight,
           linkColor: "#316DAA",
           tariffText: "#555F65",
           border: "1px solid #f8f9f9",
-          backgroundBenefitsColor: "#f8f9f9",
+          backgroundBenefitsColor: grayLight,
           rectangleColor: "#f3f4f4",
 
           priceContainer: {
@@ -3146,7 +3146,7 @@ export const getBaseTheme = () => {
           workspaceBorder: "1px solid #d0d5da",
           stepDescriptionColor: black,
           fileInputIconColor: "#A3A9AE",
-          infoBlockBackground: "#f8f9f9",
+          infoBlockBackground: grayLight,
           infoBlockTextColor: "#555F65",
           errorTextColor: "#F21C0E",
           existingTextColor: "#2db482",
@@ -3154,7 +3154,7 @@ export const getBaseTheme = () => {
           tableRowHoverColor: "#F3F4F4",
           tableRowTextColor: "#A3A9AE",
           comboBoxLabelColor: black,
-          importSectionBackground: "#F8F9F9",
+          importSectionBackground: grayLight,
           importSectionTextColor: "#A3A9AE",
           importItemBackground: "#eceef1",
           importItemDisableBackground: "#F3F4F4",
@@ -3220,20 +3220,20 @@ export const getBaseTheme = () => {
       color: black,
       background: "#f3f4f4",
       hoverBackground: "#eceef1",
-      disabledBackground: "#f8f9f9",
+      disabledBackground: grayLight,
       defaultTagColor: black,
       newTagBackground: "#eceef1",
     },
 
     profile: {
       main: {
-        background: "#F8F9F9",
+        background: grayLight,
         textColor: black,
 
         descriptionTextColor: "#A3A9AE",
         pendingEmailTextColor: "#A3A9AE",
 
-        mobileRowBackground: "#F8F9F9",
+        mobileRowBackground: grayLight,
       },
       themePreview: {
         descriptionColor: "#A3A9AE",
@@ -3271,7 +3271,7 @@ export const getBaseTheme = () => {
       border: "1px solid #d0d5da",
       color: black,
       lineColor: "#C4C4C4",
-      disabledBackground: "#F8F9F9",
+      disabledBackground: grayLight,
       disabledBorder: "1px solid #ECEEF1",
       disabledColor: "#A3A9AE",
     },
@@ -3293,7 +3293,7 @@ export const getBaseTheme = () => {
     },
 
     deepLink: {
-      navBackground: "#f8f9f9",
+      navBackground: grayLight,
       fileTileBackground: "#f3f4f4",
     },
 
@@ -3324,13 +3324,13 @@ export const getBaseTheme = () => {
     },
 
     infoBlock: {
-      background: "#F8F9F9",
+      background: grayLight,
       headerColor: black,
       descriptionColor: "#555F65",
     },
 
     infoBar: {
-      background: "#f8f9f9",
+      background: grayLight,
       title: black,
       description: cyanBlueDarkShade,
     },

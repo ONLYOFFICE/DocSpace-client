@@ -145,11 +145,9 @@ const NewFilesPanel = (props) => {
 
     const item = newFiles.find((file) => file.id.toString() === id);
 
-    const blankWindow = window.open();
-
     markAsRead(folderIds, fileIds, item)
       .then(() => {
-        onFileClick(item, blankWindow);
+        onFileClick(item);
 
         const newListFiles = listFiles.filter(
           (file) => file.id.toString() !== id,
@@ -167,7 +165,7 @@ const NewFilesPanel = (props) => {
       });
   };
 
-  const onFileClick = (item, blankWindow) => {
+  const onFileClick = (item) => {
     const {
       id,
       fileExst,
@@ -264,11 +262,7 @@ const NewFilesPanel = (props) => {
         }
       }
 
-      if (openOnNewPage) {
-        blankWindow.location.href = webUrl;
-      } else {
-        window.open(webUrl, "_self");
-      }
+      return window.open(webUrl, "_blank");
     }
   };
 

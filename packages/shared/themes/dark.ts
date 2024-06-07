@@ -2880,7 +2880,7 @@ const Dark: TTheme = {
     textColor: "#858585",
     navBackground: charlestonGreen,
     headerColor: white,
-    helpButton: "#D8D8D8",
+    helpButton: graySilver,
     orLineColor: "#474747",
     orTextColor: "#858585",
     titleColor: white,

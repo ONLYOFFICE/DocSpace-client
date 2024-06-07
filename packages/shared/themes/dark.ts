@@ -1011,7 +1011,8 @@ const Dark: TTheme = {
       hoverBackgroundColor: "#474747",
       disableBackgroundColor: "#282828",
       activeBackgroundColor: "#282828",
-      activeSelectedBackgroundColor: "linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(0deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18))",
+      activeSelectedBackgroundColor:
+        "linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(0deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18))",
 
       title: {
         padding: "4px 16px",
@@ -3182,6 +3183,23 @@ const Dark: TTheme = {
     activeTextColor: "#FFFFFF",
     textColor: "#ADADAD",
     bottomLineColor: "#E06A1B",
+  },
+
+  tabs: {
+    lineColor: "#474747",
+
+    textColorPrimary: "#657077",
+    hoverTextColorPrimary: white,
+    pressedTextColorPrimary: "#CCCCCC",
+    backgroundColorPrimary: "#333",
+
+    textColorSecondary: "#FFFFFF",
+    activeTextColorSecondary: "#333333",
+
+    backgroundColorSecondary: "#333",
+    hoverBackgroundColorSecondary: "#474747",
+    pressedBackgroundColorSecondary: "#282828",
+    activeBackgroundColorSecondary: "#FFFFFF",
   },
 
   hotkeys: {

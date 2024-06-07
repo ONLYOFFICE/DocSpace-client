@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Tabs } from "./Tabs";
-import { ThemeTabs } from "./Tabs.enums";
-
-export { Tabs };
-export { ThemeTabs };
+export enum ThemeTabs {
+  Primary = "primary",
+  Secondary = "secondary",
+}

@@ -24,8 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Tabs } from "./Tabs";
 import { ThemeTabs } from "./Tabs.enums";
 
-export { Tabs };
-export { ThemeTabs };
+export type TTabItem = {
+  id: string;
+  name: string;
+  content: React.ReactNode;
+  onClick?: () => void;
+};
+
+export interface TabsProps {
+  /** Child elements */
+  items: TTabItem[];
+  /** Disables the TabContainer  */
+  isDisabled: boolean;
+  /** Sets a callback function that is triggered when the title is selected */
+  onSelect: (element: TTabItem) => void;
+  /** Selected title of tabs container */
+  selectedItem: number;
+  /** Theme for displaying tabs. */
+  theme?: ThemeTabs;
+}

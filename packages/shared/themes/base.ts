@@ -3209,6 +3209,23 @@ export const getBaseTheme = () => {
       bottomLineColor: "#316DAA",
     },
 
+    tabs: {
+      lineColor: "#eceef1",
+
+      textColorPrimary: "#657077",
+      hoverTextColorPrimary: "#A3A9AE",
+      pressedTextColorPrimary: "#555F65",
+      backgroundColorPrimary: white,
+
+      textColorSecondary: "#333333",
+      activeTextColorSecondary: white,
+
+      backgroundColorSecondary: white,
+      hoverBackgroundColorSecondary: "#F3F4F4",
+      pressedBackgroundColorSecondary: "#ECEEF1",
+      activeBackgroundColorSecondary: "#265A8F",
+    },
+
     hotkeys: {
       key: {
         color: grayMain,

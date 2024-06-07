@@ -24,8 +24,54 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { Meta, StoryObj } from "@storybook/react";
 import { Tabs } from "./Tabs";
+
+import { tabsItems } from "./data";
+import { TabsProps } from "./Tabs.types";
 import { ThemeTabs } from "./Tabs.enums";
 
-export { Tabs };
-export { ThemeTabs };
+const meta = {
+  title: "Components/Tabs",
+  component: Tabs,
+} satisfies Meta<typeof Tabs>;
+type Story = StoryObj<typeof meta>;
+
+export default meta;
+
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
+  <div
+    style={{
+      height: "170px",
+    }}
+  >
+    {children}
+  </div>
+);
+
+const Template = (args: TabsProps) => (
+  <Wrapper>
+    <Tabs {...args} />
+  </Wrapper>
+);
+
+export const Default: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    items: tabsItems,
+    isDisabled: false,
+    selectedItem: 0,
+    onSelect: () => {},
+  },
+};
+
+export const Secondary: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    items: tabsItems,
+    theme: ThemeTabs.Secondary,
+    isDisabled: false,
+    selectedItem: 0,
+    onSelect: () => {},
+  },
+};

@@ -977,7 +977,7 @@ export const getBaseTheme = () => {
 
       color: {
         default: gray,
-        hover: "#555F65",
+        hover: cyanBlueDarkShade,
         active: black,
         focus: black,
       },
@@ -1797,9 +1797,9 @@ export const getBaseTheme = () => {
       disabledColor: lightGrayishStrongBlue,
       pastColor: gray,
       onHoverBackground: lightHover,
-      titleColor: "#555F65",
+      titleColor: cyanBlueDarkShade,
       outlineColor: grayLightMid,
-      arrowColor: "#555f65",
+      arrowColor: cyanBlueDarkShade,
       disabledArrow: gray,
       weekdayColor: gray,
       accent: "#4781d1",
@@ -1942,7 +1942,7 @@ export const getBaseTheme = () => {
     },
 
     alertComponent: {
-      descriptionColor: "#555F65",
+      descriptionColor: cyanBlueDarkShade,
       iconColor: grayMain,
     },
 
@@ -2069,7 +2069,7 @@ export const getBaseTheme = () => {
       background: grayLight,
       pinBorderColor: grayLightMid,
       catalogItemHeader: gray,
-      catalogItemText: "#555F65",
+      catalogItemText: cyanBlueDarkShade,
       catalogItemActiveBackground: lightGrayishStrongBlue,
       catalogShowText: grayMain,
     },
@@ -2085,7 +2085,7 @@ export const getBaseTheme = () => {
         backgroundColor: white,
         background: `linear-gradient(180deg,#ffffff 2.81%,rgba(255, 255, 255, 0.91) 63.03%,rgba(255, 255, 255, 0) 100%)`,
         trashErasureLabelBackground: grayLight,
-        trashErasureLabelText: "#555f65",
+        trashErasureLabelText: cyanBlueDarkShade,
       },
     },
 
@@ -2110,7 +2110,7 @@ export const getBaseTheme = () => {
       links: {
         iconColor: "#3B72A7",
         iconErrorColor: "#F24724",
-        primaryColor: "#555F65",
+        primaryColor: cyanBlueDarkShade,
       },
 
       members: {
@@ -2389,7 +2389,7 @@ export const getBaseTheme = () => {
 
       info: {
         backgroundColor: grayLight,
-        color: "#555f65",
+        color: cyanBlueDarkShade,
       },
 
       bodyDescriptionText: gray,
@@ -2407,7 +2407,7 @@ export const getBaseTheme = () => {
 
         buttonColor: grayMain,
         hoverButtonColor: black,
-        pressedButtonColor: "#555F65",
+        pressedButtonColor: cyanBlueDarkShade,
       },
     },
 
@@ -2499,7 +2499,7 @@ export const getBaseTheme = () => {
         displayItem: {
           background: "#f8f8f8",
           borderColor: "#f8f8f8",
-          descriptionText: "#555F65",
+          descriptionText: cyanBlueDarkShade,
         },
       },
 
@@ -2516,7 +2516,7 @@ export const getBaseTheme = () => {
       permanentSettings: {
         background: grayLight,
         isPrivateIcon: "#35ad17",
-        descriptionColor: "#555f65",
+        descriptionColor: cyanBlueDarkShade,
       },
 
       tagInput: {
@@ -2537,8 +2537,8 @@ export const getBaseTheme = () => {
           background: grayLight,
           iconColor: "#ed7309",
           titleColor: "#ed7309",
-          descriptionColor: "#555f65",
-          linkColor: "#555f65",
+          descriptionColor: cyanBlueDarkShade,
+          linkColor: cyanBlueDarkShade,
         },
       },
 
@@ -2567,7 +2567,7 @@ export const getBaseTheme = () => {
           hoverBackground: lightHover,
           borderColor: grayLight,
           hoverBorderColor: lightHover,
-          color: "#555f65",
+          color: cyanBlueDarkShade,
           iconColor: grayMain,
         },
       },
@@ -2623,7 +2623,7 @@ export const getBaseTheme = () => {
       },
       button: {
         colorLink: grayMain,
-        colorText: "#555F65",
+        colorText: cyanBlueDarkShade,
       },
     },
 
@@ -3106,12 +3106,12 @@ export const getBaseTheme = () => {
         },
 
         payment: {
-          priceColor: "#555F65",
+          priceColor: cyanBlueDarkShade,
           storageSizeTitle: gray,
 
           backgroundColor: grayLight,
           linkColor: "#316DAA",
-          tariffText: "#555F65",
+          tariffText: cyanBlueDarkShade,
           border: "1px solid #f8f9f9",
           backgroundBenefitsColor: grayLight,
           rectangleColor: lightHover,
@@ -3148,7 +3148,7 @@ export const getBaseTheme = () => {
           stepDescriptionColor: black,
           fileInputIconColor: gray,
           infoBlockBackground: grayLight,
-          infoBlockTextColor: "#555F65",
+          infoBlockTextColor: cyanBlueDarkShade,
           errorTextColor: "#F21C0E",
           existingTextColor: "#2db482",
           tableHeaderText: gray,
@@ -3159,7 +3159,7 @@ export const getBaseTheme = () => {
           importSectionTextColor: gray,
           importItemBackground: grayLightMid,
           importItemDisableBackground: lightHover,
-          importItemTextColor: "#555f65",
+          importItemTextColor: cyanBlueDarkShade,
           importItemDisableTextColor: gray,
           importItemDescription: black,
           importIconColor: grayMain,
@@ -3168,7 +3168,7 @@ export const getBaseTheme = () => {
           groupMenuBoxShadow: "rgba(4, 15, 27, 0.07) 0px 5px 5px 0px",
         },
         storageManagement: {
-          grayBackgroundText: "#555F65",
+          grayBackgroundText: cyanBlueDarkShade,
           descriptionColor: grayMain,
         },
       },
@@ -3199,7 +3199,7 @@ export const getBaseTheme = () => {
     },
 
     editor: {
-      color: "#555f65",
+      color: cyanBlueDarkShade,
       background: white,
     },
 
@@ -3316,10 +3316,10 @@ export const getBaseTheme = () => {
 
     oformGallery: {
       errorView: {
-        subHeaderTextColor: "#555F65",
+        subHeaderTextColor: cyanBlueDarkShade,
       },
       submitToGalleryTile: {
-        bodyText: "#555F65",
+        bodyText: cyanBlueDarkShade,
         closeIconFill: grayMain,
       },
     },
@@ -3327,7 +3327,7 @@ export const getBaseTheme = () => {
     infoBlock: {
       background: grayLight,
       headerColor: black,
-      descriptionColor: "#555F65",
+      descriptionColor: cyanBlueDarkShade,
     },
 
     infoBar: {

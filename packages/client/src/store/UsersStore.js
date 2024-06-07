@@ -321,8 +321,10 @@ class UsersStore {
 
             options.push("reset-auth");
 
-            options.push("separator-2");
-            options.push("disable");
+            if (!isUserLDAP) {
+              options.push("separator-2");
+              options.push("disable");
+            }
           }
         }
 

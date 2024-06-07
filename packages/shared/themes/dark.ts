@@ -1361,7 +1361,6 @@ const Dark: TTheme = {
 
       title: {
         width: "85%",
-        // color: "#000",
       },
     },
 

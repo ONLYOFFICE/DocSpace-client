@@ -71,6 +71,7 @@ const {
   outerSpace,
   veryDarkGrey,
   grayBackgroundTextDark,
+  link,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -3092,7 +3093,7 @@ const Dark: TTheme = {
         storageSizeTitle: gray,
 
         backgroundColor: charlestonGreen,
-        linkColor: "#316DAA",
+        linkColor: link,
         tariffText: grayDark,
         border: "1px solid #474747",
         backgroundBenefitsColor: "#3333",

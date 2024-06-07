@@ -353,7 +353,7 @@ export const getBaseTheme = () => {
 
       hoverBackground: white,
       hoverBorder: "1px solid #5299E0",
-      hoverConnectBackground: "#316DAA",
+      hoverConnectBackground: link,
       hoverConnectBorder: "none",
 
       activeBorder: "1px solid #D0D5DA",
@@ -2034,7 +2034,7 @@ export const getBaseTheme = () => {
       boxShadow: "0px 8px 16px 0px #040F1B14",
 
       icon: {
-        fill: "#316DAA",
+        fill: link,
         stroke: lightGrayishStrongBlue,
       },
     },
@@ -2581,7 +2581,7 @@ export const getBaseTheme = () => {
 
       dropzone: {
         borderColor: grayLightMid,
-        linkMainColor: "#316daa",
+        linkMainColor: link,
         linkSecondaryColor: black,
         exstsColor: gray,
       },
@@ -3111,7 +3111,7 @@ export const getBaseTheme = () => {
           storageSizeTitle: gray,
 
           backgroundColor: grayLight,
-          linkColor: "#316DAA",
+          linkColor: link,
           tariffText: cyanBlueDarkShade,
           border: "1px solid #f8f9f9",
           backgroundBenefitsColor: grayLight,
@@ -3208,8 +3208,8 @@ export const getBaseTheme = () => {
       lineColor: grayLightMid,
       backgroundColor: white,
       textColor: grayMain,
-      activeTextColor: "#316DAA",
-      bottomLineColor: "#316DAA",
+      activeTextColor: link,
+      bottomLineColor: link,
     },
 
     hotkeys: {

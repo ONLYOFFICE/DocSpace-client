@@ -53,7 +53,7 @@ import { MobileSubMenu } from "./sub-components/MobileSubMenu";
 
 import { ContextMenuModel, ContextMenuProps } from "./ContextMenu.types";
 
-const marginTop = 16; // Indentation from the top border of the screen
+const marginBorder = 16; // Indentation from the border of the screen
 
 const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
   const [visible, setVisible] = React.useState(false);
@@ -281,7 +281,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
 
       // fit
       if (top < document.body.scrollTop) {
-        if (document.body.scrollTop === 0) top = marginTop;
+        if (document.body.scrollTop === 0) top = marginBorder;
         else top = document.body.scrollTop;
       }
 
@@ -296,7 +296,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
         }
       }
       if (menuRef.current) {
-        menuRef.current.style.left = `${left || 16}px`;
+        menuRef.current.style.left = `${left || marginBorder}px`;
         menuRef.current.style.top = `${top}px`;
 
         if (!mobileView) menuRef.current.style.width = `${width}px`;

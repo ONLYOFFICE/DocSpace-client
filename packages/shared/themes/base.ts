@@ -657,7 +657,7 @@ export const getBaseTheme = () => {
       margin: " 0 auto",
       minHeight: "100%",
 
-      colorDisabledFileIcons: "#f3f4f4",
+      colorDisabledFileIcons: lightHover,
 
       backdrop: {
         backgroundRGBA: {
@@ -1039,7 +1039,7 @@ export const getBaseTheme = () => {
         width: "fit-content",
 
         backgroundColor: blueLightMid,
-        hoverBackgroundColor: "#F3F4F4",
+        hoverBackgroundColor: lightHover,
         disableBackgroundColor: grayLightMid,
         activeBackgroundColor: grayLightMid,
         activeSelectedBackgroundColor:
@@ -1377,7 +1377,7 @@ export const getBaseTheme = () => {
     },
 
     treeNode: {
-      background: "#f3f4f4",
+      background: lightHover,
       disableColor: gray,
 
       dragging: {
@@ -1432,7 +1432,7 @@ export const getBaseTheme = () => {
     },
 
     progressBar: {
-      backgroundColor: "#F3F4F4",
+      backgroundColor: lightHover,
 
       percent: {
         background: "#4781D1",
@@ -1795,7 +1795,7 @@ export const getBaseTheme = () => {
       color: black,
       disabledColor: "#DFE2E3",
       pastColor: gray,
-      onHoverBackground: "#f3f4f4",
+      onHoverBackground: lightHover,
       titleColor: "#555F65",
       outlineColor: grayLightMid,
       arrowColor: "#555f65",
@@ -1925,7 +1925,7 @@ export const getBaseTheme = () => {
 
       profile: {
         borderTop: "1px solid #eceef1",
-        background: "#f3f4f4",
+        background: lightHover,
       },
 
       paymentAlert: {
@@ -2060,7 +2060,7 @@ export const getBaseTheme = () => {
     },
 
     menuContainer: {
-      background: "#F3F4F4",
+      background: lightHover,
       color: black,
     },
 
@@ -2228,7 +2228,7 @@ export const getBaseTheme = () => {
 
       selectedItems: {
         background: grayLightMid,
-        hoverBackground: "#F3F4F4",
+        hoverBackground: lightHover,
       },
     },
 
@@ -2285,7 +2285,7 @@ export const getBaseTheme = () => {
 
     filesSection: {
       rowView: {
-        checkedBackground: "#f3f4f4",
+        checkedBackground: lightHover,
 
         draggingBackground: lightCumulus,
         draggingHoverBackground: lightMediumGoldenrod,
@@ -2334,7 +2334,7 @@ export const getBaseTheme = () => {
             "linear-gradient(to left, #ffffff 24px,#eceef1 24px)",
 
           borderColor: grayLightMid,
-          borderColorTransition: "#f3f4f4",
+          borderColorTransition: lightHover,
         },
       },
 
@@ -2342,8 +2342,8 @@ export const getBaseTheme = () => {
         tile: {
           draggingColor: lightCumulus,
           draggingHoverColor: lightMediumGoldenrod,
-          checkedColor: "#f3f4f4",
-          roomsCheckedColor: "#f3f4f4",
+          checkedColor: lightHover,
+          roomsCheckedColor: lightHover,
           border: `1px solid ${grayMid}`,
           backgroundBadgeColor: white,
           backgroundColor: white,
@@ -2520,14 +2520,14 @@ export const getBaseTheme = () => {
 
       tagInput: {
         tagBackground: grayLightMid,
-        tagHoverBackground: "#F3F4F4",
+        tagHoverBackground: lightHover,
       },
 
       dropdown: {
         background: white,
         borderColor: grayMid,
         item: {
-          hoverBackground: "#f3f4f4",
+          hoverBackground: lightHover,
         },
       },
 
@@ -2563,9 +2563,9 @@ export const getBaseTheme = () => {
         gridColor: black,
         deleteButton: {
           background: grayLight,
-          hoverBackground: "#f3f4f4",
+          hoverBackground: lightHover,
           borderColor: grayLight,
-          hoverBorderColor: "#f3f4f4",
+          hoverBorderColor: lightHover,
           color: "#555f65",
           iconColor: grayMain,
         },
@@ -3101,7 +3101,7 @@ export const getBaseTheme = () => {
           separatorBorder: "1px solid #eceef1",
           warningColor: "#f21c0e",
           textColor: gray,
-          backupCheckedListItemBackground: "#F3F4F4",
+          backupCheckedListItemBackground: lightHover,
         },
 
         payment: {
@@ -3113,10 +3113,10 @@ export const getBaseTheme = () => {
           tariffText: "#555F65",
           border: "1px solid #f8f9f9",
           backgroundBenefitsColor: grayLight,
-          rectangleColor: "#f3f4f4",
+          rectangleColor: lightHover,
 
           priceContainer: {
-            backgroundText: "#f3f4f4",
+            backgroundText: lightHover,
             background: "transparent",
             border: "1px solid #d0d5da",
             featureTextColor: gray,
@@ -3151,13 +3151,13 @@ export const getBaseTheme = () => {
           errorTextColor: "#F21C0E",
           existingTextColor: "#2db482",
           tableHeaderText: gray,
-          tableRowHoverColor: "#F3F4F4",
+          tableRowHoverColor: lightHover,
           tableRowTextColor: gray,
           comboBoxLabelColor: black,
           importSectionBackground: grayLight,
           importSectionTextColor: gray,
           importItemBackground: grayLightMid,
-          importItemDisableBackground: "#F3F4F4",
+          importItemDisableBackground: lightHover,
           importItemTextColor: "#555f65",
           importItemDisableTextColor: gray,
           importItemDescription: black,
@@ -3218,7 +3218,7 @@ export const getBaseTheme = () => {
 
     tag: {
       color: black,
-      background: "#f3f4f4",
+      background: lightHover,
       hoverBackground: grayLightMid,
       disabledBackground: grayLight,
       defaultTagColor: black,
@@ -3259,7 +3259,7 @@ export const getBaseTheme = () => {
     },
 
     preparationPortalProgress: {
-      backgroundColor: "#F3F4F4",
+      backgroundColor: lightHover,
       colorPercentSmall: black,
       colorPercentBig: white,
       errorTextColor: "#F21C0E",
@@ -3294,7 +3294,7 @@ export const getBaseTheme = () => {
 
     deepLink: {
       navBackground: grayLight,
-      fileTileBackground: "#f3f4f4",
+      fileTileBackground: lightHover,
     },
 
     emailChips: {
@@ -3349,7 +3349,7 @@ export const getBaseTheme = () => {
     sdkPresets: {
       borderColor: grayMid,
       secondaryColor: grayMain,
-      previewBackgroundColor: "#F3F4F4",
+      previewBackgroundColor: lightHover,
     },
     sideBarRow: {
       titleColor: black,

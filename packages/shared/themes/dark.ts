@@ -1997,7 +1997,7 @@ const Dark: TTheme = {
   },
 
   navigation: {
-    expanderColor: "#eeeeee",
+    expanderColor: grayMaxLight,
     background: black,
     rootFolderTitleColor: "#ADADAD",
     boxShadow: "0px 8px 16px 0px #040F1B29",
@@ -2026,7 +2026,7 @@ const Dark: TTheme = {
     backgroundColor: "#282828 ",
     recoveryColor: "#4C4C4C",
     linkColor: "#606060",
-    productColor: "#eeeeee",
+    productColor: grayMaxLight,
     height: "48px",
   },
 
@@ -2107,13 +2107,13 @@ const Dark: TTheme = {
 
     details: {
       customLogoBorderColor: "#474747",
-      commentEditorIconColor: "#eee",
+      commentEditorIconColor: grayMaxLight,
       tagBackground: "#242424",
     },
 
     gallery: {
       borderColor: "#292929",
-      descriptionColor: "#eeeeee",
+      descriptionColor: grayMaxLight,
     },
 
     search: {
@@ -2170,7 +2170,7 @@ const Dark: TTheme = {
 
       openBackground: "#a3a9ae",
 
-      openFill: "#eeeeee",
+      openFill: grayMaxLight,
     },
 
     filter: {
@@ -2182,8 +2182,8 @@ const Dark: TTheme = {
       indicatorColor: "#F58D31",
 
       selectedItem: {
-        background: "#eeeeee",
-        border: "#eeeeee",
+        background: grayMaxLight,
+        border: grayMaxLight,
         color: black,
       },
     },
@@ -2195,8 +2195,8 @@ const Dark: TTheme = {
       viewIcon: "#858585",
       sortFill: "rgba(255, 255, 255, 0.6)",
 
-      tileSortFill: "#eeeeee",
-      tileSortColor: "#eeeeee",
+      tileSortFill: grayMaxLight,
+      tileSortColor: grayMaxLight,
     },
 
     selectedItems: {
@@ -2270,8 +2270,8 @@ const Dark: TTheme = {
       linkColor: grayMaxLight,
       textColor: "#858585",
 
-      editingIconColor: "#eeeeee",
-      shareHoverColor: "#eeeeee",
+      editingIconColor: grayMaxLight,
+      shareHoverColor: grayMaxLight,
       pinColor: white,
     },
 
@@ -2304,7 +2304,7 @@ const Dark: TTheme = {
         borderHover: "#474747",
         sideColor: gray,
 
-        shareHoverColor: "#eeeeee",
+        shareHoverColor: grayMaxLight,
 
         borderImageRight:
           "linear-gradient(to right, #333333 25px, #474747 24px)",
@@ -2566,7 +2566,7 @@ const Dark: TTheme = {
   },
 
   connectedClouds: {
-    color: "#eeeeee",
+    color: grayMaxLight,
     borderBottom: `1px solid #474747`,
     borderRight: `1px solid #474747`,
   },
@@ -2697,7 +2697,7 @@ const Dark: TTheme = {
       borderBottom: "1px solid #474747",
       borderTop: "1px solid #474747",
       externalLinkBackground: "#292929",
-      externalLinkSvg: "#eeeeee",
+      externalLinkSvg: grayMaxLight,
 
       internalLinkBorder: "1px dashed #eeeeee",
 
@@ -2725,7 +2725,7 @@ const Dark: TTheme = {
       },
 
       loadingButton: {
-        color: "#eeeeee",
+        color: grayMaxLight,
         background: black,
       },
     },
@@ -2759,11 +2759,11 @@ const Dark: TTheme = {
       lineHeight: "30px",
       fontWeight: "600",
       margin: "0 0 0 8px",
-      color: "#eeeeee",
+      color: grayMaxLight,
     },
     hover: black,
     background: "none",
-    svgFill: "#eeeeee",
+    svgFill: grayMaxLight,
     header: {
       height: "49px",
       borderBottom: `1px solid #474747`,
@@ -2821,7 +2821,7 @@ const Dark: TTheme = {
       background: globalColors.black,
       itemBackground: "#242424",
       itemBorder: gray,
-      itemActiveBorder: "#eeeeee",
+      itemActiveBorder: grayMaxLight,
     },
 
     row: {
@@ -2829,23 +2829,23 @@ const Dark: TTheme = {
     },
 
     fill: "#858585",
-    hoverFill: "#eeeeee",
+    hoverFill: grayMaxLight,
   },
 
   filesIcons: {
     fill: "#858585",
-    hoverFill: "#eeeeee",
+    hoverFill: grayMaxLight,
   },
 
   filesQuickButtons: {
     color: "#858585",
-    sharedColor: "#eeeeee",
-    hoverColor: "#eeeeee",
+    sharedColor: grayMaxLight,
+    hoverColor: grayMaxLight,
   },
 
   filesSharedButton: {
     color: "#858585",
-    sharedColor: "#eeeeee",
+    sharedColor: grayMaxLight,
   },
 
   filesPrivateRoom: {
@@ -3025,12 +3025,12 @@ const Dark: TTheme = {
         },
         auditTrail: {
           sideColor: "#858585",
-          nameColor: "#eeeeee",
+          nameColor: grayMaxLight,
           downloadReportDescriptionColor: "#858585",
         },
         loginHistory: {
           sideColor: "#858585",
-          nameColor: "#eeeeee",
+          nameColor: grayMaxLight,
         },
       },
 
@@ -3172,7 +3172,7 @@ const Dark: TTheme = {
   },
 
   editor: {
-    color: "#eeeeee",
+    color: grayMaxLight,
     background: black,
   },
 
@@ -3217,7 +3217,7 @@ const Dark: TTheme = {
       textDescriptionColor: "#858585",
     },
     activeSessions: {
-      color: "#eeeeee",
+      color: grayMaxLight,
       borderColor: "#474747",
       tickIconColor: "#3BA420",
       removeIconColor: "#A3A9AE",

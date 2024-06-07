@@ -2550,7 +2550,7 @@ const Dark: TTheme = {
     previewTile: {
       background: "#292929",
       borderColor: "#474747",
-      iconBorderColor: "#eceef1",
+      iconBorderColor: grayLightMid,
     },
 
     dropzone: {

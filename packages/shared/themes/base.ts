@@ -355,7 +355,7 @@ export const getBaseTheme = () => {
       hoverConnectBorder: "none",
 
       activeBorder: "1px solid #D0D5DA",
-      activeBackground: "#ECEEF1",
+      activeBackground: grayLightMid,
       activeConnectBorder: "none",
       activeConnectBackground: "#265A8F",
 
@@ -983,7 +983,7 @@ export const getBaseTheme = () => {
 
       background: {
         default: "transparent",
-        hover: "#ECEEF1",
+        hover: grayLightMid,
         active: "#D0D5DA",
         focus: "#DFE2E3",
       },
@@ -1041,7 +1041,7 @@ export const getBaseTheme = () => {
         backgroundColor: blueLightMid,
         hoverBackgroundColor: "#F3F4F4",
         disableBackgroundColor: grayLightMid,
-        activeBackgroundColor: "#ECEEF1",
+        activeBackgroundColor: grayLightMid,
         activeSelectedBackgroundColor:
           "linear-gradient(0deg, #265a8f, #265a8f), linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1))",
 
@@ -1209,7 +1209,7 @@ export const getBaseTheme = () => {
       },
 
       icon: {
-        background: "#ECEEF1",
+        background: grayLightMid,
         color: "#A3A9AE",
       },
 
@@ -1710,7 +1710,7 @@ export const getBaseTheme = () => {
         hoverBorderColorOpen: blueMain,
         hoverDisabledBorderColor: grayLightMid,
 
-        hoverBackgroundModernView: "#ECEEF1",
+        hoverBackgroundModernView: grayLightMid,
         activeBackgroundModernView: "#D0D5DA",
         focusBackgroundModernView: "#DFE2E3",
       },
@@ -1797,7 +1797,7 @@ export const getBaseTheme = () => {
       pastColor: "#A3A9AE",
       onHoverBackground: "#f3f4f4",
       titleColor: "#555F65",
-      outlineColor: "#eceef1",
+      outlineColor: grayLightMid,
       arrowColor: "#555f65",
       disabledArrow: "#A3A9AE",
       weekdayColor: "#A3A9AE",
@@ -2137,7 +2137,7 @@ export const getBaseTheme = () => {
       details: {
         customLogoBorderColor: grayLightMid,
         commentEditorIconColor: black,
-        tagBackground: "#ECEEF1",
+        tagBackground: grayLightMid,
       },
 
       gallery: {
@@ -2205,7 +2205,7 @@ export const getBaseTheme = () => {
         border: "1px solid #eceef1",
         color: "#a3a9ae",
 
-        separatorColor: "#eceef1",
+        separatorColor: grayLightMid,
         indicatorColor: "#ED7309",
 
         selectedItem: {
@@ -2227,7 +2227,7 @@ export const getBaseTheme = () => {
       },
 
       selectedItems: {
-        background: "#eceef1",
+        background: grayLightMid,
         hoverBackground: "#F3F4F4",
       },
     },
@@ -2333,7 +2333,7 @@ export const getBaseTheme = () => {
           borderImageLeft:
             "linear-gradient(to left, #ffffff 24px,#eceef1 24px)",
 
-          borderColor: "#ECEEf1",
+          borderColor: grayLightMid,
           borderColorTransition: "#f3f4f4",
         },
       },
@@ -2480,13 +2480,13 @@ export const getBaseTheme = () => {
         listItem: {
           background: "none",
           hoverBackground: grayLight,
-          borderColor: "#ECEEF1",
+          borderColor: grayLightMid,
           descriptionText: "#A3A9AE",
         },
         dropdownButton: {
           background: "none",
           hoverBackground: grayLight,
-          borderColor: "#ECEEF1",
+          borderColor: grayLightMid,
           isOpenBorderColor: "#2DA7DB",
           descriptionText: "#A3A9AE",
         },
@@ -2519,7 +2519,7 @@ export const getBaseTheme = () => {
       },
 
       tagInput: {
-        tagBackground: "#ECEEF1",
+        tagBackground: grayLightMid,
         tagHoverBackground: "#F3F4F4",
       },
 
@@ -2574,11 +2574,11 @@ export const getBaseTheme = () => {
       previewTile: {
         background: white,
         borderColor: "#d0d5da",
-        iconBorderColor: "#eceef1",
+        iconBorderColor: grayLightMid,
       },
 
       dropzone: {
-        borderColor: "#eceef1",
+        borderColor: grayLightMid,
         linkMainColor: "#316daa",
         linkSecondaryColor: black,
         exstsColor: "#a3a9ae",
@@ -2904,7 +2904,7 @@ export const getBaseTheme = () => {
       navBackground: grayLight,
       headerColor: black,
       helpButton: "#A3A9AE",
-      orLineColor: "#ECEEF1",
+      orLineColor: grayLightMid,
       orTextColor: "#A3A9AE",
       titleColor: black,
 
@@ -3156,7 +3156,7 @@ export const getBaseTheme = () => {
           comboBoxLabelColor: black,
           importSectionBackground: grayLight,
           importSectionTextColor: "#A3A9AE",
-          importItemBackground: "#eceef1",
+          importItemBackground: grayLightMid,
           importItemDisableBackground: "#F3F4F4",
           importItemTextColor: "#555f65",
           importItemDisableTextColor: "#A3A9AE",
@@ -3203,7 +3203,7 @@ export const getBaseTheme = () => {
     },
 
     submenu: {
-      lineColor: "#eceef1",
+      lineColor: grayLightMid,
       backgroundColor: white,
       textColor: "#657077",
       activeTextColor: "#316DAA",
@@ -3219,10 +3219,10 @@ export const getBaseTheme = () => {
     tag: {
       color: black,
       background: "#f3f4f4",
-      hoverBackground: "#eceef1",
+      hoverBackground: grayLightMid,
       disabledBackground: grayLight,
       defaultTagColor: black,
-      newTagBackground: "#eceef1",
+      newTagBackground: grayLightMid,
     },
 
     profile: {
@@ -3244,7 +3244,7 @@ export const getBaseTheme = () => {
       },
       activeSessions: {
         color: black,
-        borderColor: "#eceef1",
+        borderColor: grayLightMid,
         tickIconColor: "#35AD17",
         removeIconColor: "#A3A9AE",
         sortHeaderColor: "#d0d5da",
@@ -3285,7 +3285,7 @@ export const getBaseTheme = () => {
     },
 
     invitePage: {
-      borderColor: "#eceef1",
+      borderColor: grayLightMid,
     },
 
     portalUnavailable: {

@@ -67,6 +67,7 @@ const SubMenu = (props: {
   const [model, setModel] = useState(props?.model);
   const [isLoading, setIsLoading] = useState(false);
   const [activeItem, setActiveItem] = useState<ContextMenuType | null>(null);
+  const [widthSubMenu, setWidthSubMenu] = useState<null | number>(null);
 
   const subMenuRef = useRef<HTMLUListElement>(null);
 
@@ -185,25 +186,33 @@ const SubMenu = (props: {
         viewport.width - containerOffsetLeft - itemOuterWidth;
       const freeSpaceLeft = containerOffsetLeft;
       const submenuListMargin = 4;
-      const sectionPadding = 17;
+      const sectionPadding = 16;
 
       if (isRtl) {
-        if (
-          !root &&
-          freeSpaceLeft > freeSpaceRight &&
-          subListWidth > containerOffsetLeft
-        ) {
-          // If the menu extends beyond the screen
-          subMenuRef.current.style.width = `${containerOffsetLeft - submenuListMargin - sectionPadding}px`;
-        }
-
         if (
           subListWidth < containerOffsetLeft ||
           (!root && freeSpaceLeft > freeSpaceRight)
         ) {
           subMenuRef.current.style.left = `${-1 * subListWidth}px`;
+
+          if (!root && subListWidth > containerOffsetLeft) {
+            // If the menu extends beyond the screen
+            const newWidth =
+              containerOffsetLeft - submenuListMargin - sectionPadding;
+
+            subMenuRef.current.style.width = `${newWidth}px`;
+            setWidthSubMenu(newWidth);
+          }
         } else {
           subMenuRef.current.style.left = `${itemOuterWidth}px`;
+
+          if (!root && subListWidth > freeSpaceRight) {
+            // If the menu extends beyond the screen
+            const newWidth = freeSpaceRight - 3 * submenuListMargin;
+
+            subMenuRef.current.style.width = `${newWidth}px`;
+            setWidthSubMenu(newWidth);
+          }
         }
       }
 
@@ -212,8 +221,20 @@ const SubMenu = (props: {
         viewport.width - DomHelpers.calculateScrollbarWidth();
 
       if (!isRtl) {
-        if (notEnoughWidthRight && containerOffsetLeft > subListWidth) {
+        if (notEnoughWidthRight && freeSpaceLeft > freeSpaceRight) {
           subMenuRef.current.style.left = `${-1 * subListWidth}px`;
+
+          if (
+            notEnoughWidthRight &&
+            !root &&
+            subListWidth > containerOffsetLeft
+          ) {
+            // If the menu extends beyond the screen
+            const newWidth = containerOffsetLeft - 12;
+
+            subMenuRef.current.style.width = `${newWidth}px`;
+            setWidthSubMenu(newWidth);
+          }
         } else {
           subMenuRef.current.style.left = `${itemOuterWidth}px`;
 
@@ -227,6 +248,7 @@ const SubMenu = (props: {
               sectionPadding;
 
             subMenuRef.current.style.width = `${newWidth}px`;
+            setWidthSubMenu(newWidth);
           }
         }
       }
@@ -504,6 +526,7 @@ const SubMenu = (props: {
           ref={subMenuRef}
           className={`${className} not-selectable`}
           listHeight={height + paddingList}
+          widthSubMenu={widthSubMenu}
         >
           <Scrollbar style={{ height: listHeight }}>{submenu}</Scrollbar>
           {submenuLower}

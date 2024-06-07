@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { Base, TTheme } from "../../themes";
-import { tablet, mobile, getCorrectFourValuesStyle } from "../../utils";
+import { mobile, isMobile, getCorrectFourValuesStyle } from "../../utils";
 
 const styledTabletView = css<{ articleWidth: number }>`
   position: fixed;
@@ -116,11 +116,22 @@ const StyledContextMenu = styled.div<{
       ${(props) => props.changeView && styledMobileView}
     }
 
+    @media ${mobile} {
+      ${(props) => props.changeView && styledMobileView}
+    }
+
     .scroll-body {
       display: flex;
       flex-direction: column;
       justify-content: center;
+
+      padding-inline-end: 0 !important;
     }
+
+    ${!isMobile() &&
+    css`
+      max-width: calc(100vw - 32px);
+    `}
   }
 
   .contextmenu-header {
@@ -212,6 +223,11 @@ const StyledContextMenu = styled.div<{
     margin: 0;
     padding: 0;
     list-style: none;
+
+    ${!isMobile() &&
+    css`
+      max-width: calc(100vw - 32px);
+    `}
   }
 
   .p-contextmenu .p-submenu-list {
@@ -291,14 +307,9 @@ const StyledContextMenu = styled.div<{
     cursor: default !important;
     margin: ${(props) => props.theme.menuItem.separator.margin};
     height: ${(props) => props.theme.menuItem.separator.height};
-    width: ${(props) => props.theme.menuItem.separator.width};
+
     &:hover {
       cursor: default !important;
-    }
-
-    @media ${mobile} {
-      margin-right: 8px !important;
-      width: calc(100% - 24px) !important;
     }
   }
 
@@ -306,7 +317,13 @@ const StyledContextMenu = styled.div<{
     position: relative;
     margin: ${(props) => props.theme.dropDownItem.margin};
 
-    min-width: max-content;
+    max-width: calc(-32px + 100vw);
+    width: fit-content;
+    min-width: inherit;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .p-contextmenu .scroll-body .p-menuitem {
@@ -399,11 +416,22 @@ StyledContextMenu.defaultProps = {
 
 export const StyledList = styled.ul<{
   listHeight: number;
+  widthSubMenu: null | number;
 }>`
   & > :first-child {
     .scroll-body {
       height: ${(props) => `${props.listHeight}px`};
     }
+  }
+
+  & > :nth-child(1) {
+    ${(props) =>
+      props.widthSubMenu &&
+      css`
+        .p-menuitem {
+          max-width: ${`${props.widthSubMenu}px`};
+        }
+      `}
   }
 `;
 

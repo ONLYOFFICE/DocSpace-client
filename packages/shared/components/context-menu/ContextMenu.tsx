@@ -296,7 +296,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
         }
       }
       if (menuRef.current) {
-        menuRef.current.style.left = `${left}px`;
+        menuRef.current.style.left = `${left || 16}px`;
         menuRef.current.style.top = `${top}px`;
 
         if (!mobileView) menuRef.current.style.width = `${width}px`;

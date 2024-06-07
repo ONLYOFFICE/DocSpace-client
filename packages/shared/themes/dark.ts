@@ -2739,9 +2739,8 @@ const Dark: TTheme = {
     },
     separator: {
       borderBottom: `1px solid #474747 !important`,
-      margin: "6px 0px 6px 16px !important",
+      margin: "6px 16px !important",
       height: "1px !important",
-      width: "calc(100% - 16px) !important",
     },
     text: {
       header: {

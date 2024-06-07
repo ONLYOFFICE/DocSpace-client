@@ -2760,9 +2760,8 @@ export const getBaseTheme = () => {
       },
       separator: {
         borderBottom: `1px solid ${grayLightMid} !important`,
-        margin: "6px 0px 6px 16px !important",
+        margin: "6px 16px !important",
         height: "1px !important",
-        width: "calc(100% - 16px) !important",
       },
       text: {
         header: {

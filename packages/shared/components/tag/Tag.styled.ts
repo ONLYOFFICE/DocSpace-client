@@ -34,6 +34,7 @@ const StyledTag = styled.div<{
   tagMaxWidth?: string;
   isLast?: boolean;
   isDisabled?: boolean;
+  isDeleted?: boolean;
   isNewTag?: boolean;
   isDefault?: boolean;
   isClickable?: boolean;
@@ -76,6 +77,16 @@ const StyledTag = styled.div<{
     pointer-events: none;
   }
 
+  ${({ isDeleted, theme }) =>
+    isDeleted &&
+    css`
+      background: ${theme.tag.deletedBackground};
+      .tag-text {
+        text-decoration: line-through;
+        color: ${theme.tag.deletedColor};
+      }
+    `}
+
   .tag-icon {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
@@ -98,6 +109,7 @@ const StyledTag = styled.div<{
   ${(props) =>
     props.isClickable &&
     !props.isDisabled &&
+    !props.isDeleted &&
     css`
       cursor: pointer;
       &:hover {

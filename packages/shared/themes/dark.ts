@@ -218,7 +218,7 @@ const Dark: TTheme = {
     bar: {
       errorBackground: orangePressed,
 
-      icon: "#858585",
+      icon: grayDark,
     },
 
     buttonWrapper: {
@@ -367,7 +367,7 @@ const Dark: TTheme = {
   groupButton: {
     fontSize: "14px",
     lineHeight: "19px",
-    color: "#858585",
+    color: grayDark,
     disableColor: "#474747",
     float: "left",
     height: "19px",
@@ -406,17 +406,17 @@ const Dark: TTheme = {
       height: "20px",
       padding: "8px",
       hoverBackgroundColor: grayMaxLight,
-      backgroundColor: "#858585",
+      backgroundColor: grayDark,
     },
   },
 
-  iconButton: { color: "#858585", hoverColor: grayMaxLight },
+  iconButton: { color: grayDark, hoverColor: grayMaxLight },
   selectorAddButton: {
     background: grayDarkMid,
     hoverBackground: charlestonGreen,
     activeBackground: grayDarkMid,
 
-    iconColor: "#858585",
+    iconColor: grayDark,
     iconColorHover: white,
     iconColorActive: "#CCCCCC",
 
@@ -426,7 +426,7 @@ const Dark: TTheme = {
     height: " 32px",
     width: "32px",
     padding: "10px",
-    color: "#858585",
+    color: grayDark,
     hoverColor: grayMaxLight,
   },
 
@@ -477,13 +477,13 @@ const Dark: TTheme = {
     disableFillColor: "#545454",
     disableIndeterminateColor: "#474747",
 
-    hoverBorderColor: "#858585",
+    hoverBorderColor: grayDark,
     hoverIndeterminateColor: white,
 
     pressedBorderColor: "#474747",
     pressedFillColor: black,
 
-    focusColor: "#858585",
+    focusColor: grayDark,
 
     errorColor: "#E06451",
   },
@@ -511,11 +511,11 @@ const Dark: TTheme = {
 
   viewSelector: {
     fillColor: black,
-    checkedFillColor: "#858585",
+    checkedFillColor: grayDark,
     fillColorDisabled: grayLight,
     disabledFillColor: grayLightMid,
     disabledFillColorInner: grayMid,
-    hoverBorderColor: "#858585",
+    hoverBorderColor: grayDark,
     borderColor: "#474747",
   },
 
@@ -607,7 +607,7 @@ const Dark: TTheme = {
     overflow: "hidden",
     color: black,
     backgroundColor: "#F59931",
-    disableBackgroundColor: "#858585",
+    disableBackgroundColor: grayDark,
   },
 
   scrollbar: {
@@ -710,7 +710,7 @@ const Dark: TTheme = {
     warningBorderColor: warningColor,
     disabledBorderColor: "#474747",
 
-    hoverBorderColor: "#858585",
+    hoverBorderColor: grayDark,
     hoverErrorBorderColor: "#E06451",
     hoverWarningBorderColor: warningColor,
     hoverDisabledBorderColor: "#474747",
@@ -780,13 +780,13 @@ const Dark: TTheme = {
   },
 
   passwordInput: {
-    color: "#858585",
-    disableColor: "#858585",
+    color: grayDark,
+    disableColor: grayDark,
 
     tooltipTextColor: black,
 
     iconColor: "#646464",
-    hoverIconColor: "#858585",
+    hoverIconColor: grayDark,
 
     hoverColor: gray,
 
@@ -827,7 +827,7 @@ const Dark: TTheme = {
     fontWeight: "600",
 
     iconColor: "#646464",
-    hoverIconColor: "#858585",
+    hoverIconColor: grayDark,
   },
 
   inputPhone: {
@@ -836,9 +836,9 @@ const Dark: TTheme = {
     errorBorderColor: "#f21c0e",
     backgroundColor: "#33333",
     color: white,
-    scrollBackground: "#858585",
-    placeholderColor: "#858585",
-    dialCodeColor: "#858585",
+    scrollBackground: grayDark,
+    placeholderColor: grayDark,
+    dialCodeColor: grayDark,
     width: "320px",
     height: "44px",
   },
@@ -892,7 +892,7 @@ const Dark: TTheme = {
 
     borderColor: grayMaxLight,
 
-    iconColor: "#858585",
+    iconColor: grayDark,
     hoverIconColor: white,
   },
 
@@ -906,7 +906,7 @@ const Dark: TTheme = {
     scrollWidth: "100%",
     scrollHeight: "91px",
 
-    numerationColor: "#858585",
+    numerationColor: grayDark,
 
     copyIconFilter:
       "invert(62%) sepia(0%) saturate(0%) hue-rotate(119deg) brightness(85%) contrast(87%)",
@@ -945,7 +945,7 @@ const Dark: TTheme = {
       iconColor: white,
     },
     color: {
-      default: "#858585",
+      default: grayDark,
       hover: "#ADADAD",
       active: white,
       focus: white,
@@ -1139,7 +1139,7 @@ const Dark: TTheme = {
         width: "50%",
         height: "100%",
         margin: "auto",
-        fill: "#858585",
+        fill: grayDark,
       },
     },
 
@@ -1319,7 +1319,7 @@ const Dark: TTheme = {
 
       button: {
         background: "#b6b6b6",
-        fill: "#858585",
+        fill: grayDark,
         hoverFill: grayMaxLight,
         padding: "0 12px",
         height: "40px",
@@ -1346,7 +1346,7 @@ const Dark: TTheme = {
 
   treeNode: {
     background: "#3D3D3D",
-    disableColor: "#858585",
+    disableColor: grayDark,
 
     icon: {
       color: "#ADADAD",
@@ -1401,7 +1401,7 @@ const Dark: TTheme = {
   },
 
   progressBar: {
-    backgroundColor: "#858585",
+    backgroundColor: grayDark,
 
     percent: {
       background: white,
@@ -1661,8 +1661,8 @@ const Dark: TTheme = {
       selectPaddingRightNoArrow: "14px",
       selectPaddingRight: "8px",
 
-      color: "#858585",
-      disabledColor: "#858585",
+      color: grayDark,
+      disabledColor: grayDark,
       background: "#292929",
       backgroundWithBorder: "none",
       backgroundModernView: "none",
@@ -1676,7 +1676,7 @@ const Dark: TTheme = {
       disabledBorderColor: "#474747",
       disabledBackground: "#474747",
 
-      hoverBorderColor: "#858585",
+      hoverBorderColor: grayDark,
       hoverBorderColorOpen: grayMaxLight,
       hoverDisabledBorderColor: "#474747",
 
@@ -1689,8 +1689,8 @@ const Dark: TTheme = {
       marginRightWithBorder: "13px",
       marginRight: "4px",
 
-      disabledColor: "#858585",
-      color: "#858585",
+      disabledColor: grayDark,
+      color: grayDark,
       alternativeColor: grayDark,
       selectedColor: white,
 
@@ -1705,9 +1705,9 @@ const Dark: TTheme = {
       width: "16px",
       height: "16px",
 
-      defaultDisabledColor: "#858585",
+      defaultDisabledColor: grayDark,
       defaultColor: white,
-      disabledColor: "#858585",
+      disabledColor: grayDark,
       color: white,
       selectedColor: white,
     },
@@ -1766,13 +1766,13 @@ const Dark: TTheme = {
   calendar: {
     color: white,
     disabledColor: "#474747",
-    pastColor: "#858585",
+    pastColor: grayDark,
     onHoverBackground: "#3D3D3D",
     titleColor: "#ADADAD",
     outlineColor: "#474747",
     arrowColor: "#F6F9FC",
     disabledArrow: "#474747",
-    weekdayColor: "#858585",
+    weekdayColor: grayDark,
     accent: "#4781d1",
     boxShadow: "0px 12px 40px 0px rgba(0, 0, 0, 0.40)",
   },
@@ -1993,7 +1993,7 @@ const Dark: TTheme = {
       size: "8px",
       position: "-4px",
     },
-    trashIconFill: "#858585",
+    trashIconFill: grayDark,
   },
 
   navigation: {
@@ -2038,7 +2038,7 @@ const Dark: TTheme = {
   article: {
     background: "#292929",
     pinBorderColor: "#474747",
-    catalogItemHeader: "#858585",
+    catalogItemHeader: grayDark,
     catalogItemText: "rgba(255, 255, 255, 0.6)",
     catalogItemActiveBackground: black,
     catalogShowText: "#adadad",
@@ -2060,7 +2060,7 @@ const Dark: TTheme = {
   },
 
   infoPanel: {
-    sectionHeaderToggleIcon: "#858585",
+    sectionHeaderToggleIcon: grayDark,
     sectionHeaderToggleIconActive: "#c4c4c4",
     sectionHeaderToggleBg: "transparent",
     sectionHeaderToggleBgActive: "#292929",
@@ -2078,13 +2078,13 @@ const Dark: TTheme = {
     closeButtonBg: "#a2a2a2",
 
     links: {
-      iconColor: "#858585",
+      iconColor: grayDark,
       iconErrorColor: "#E06451",
       primaryColor: "#ADADAD",
     },
 
     members: {
-      iconColor: "#858585",
+      iconColor: grayDark,
       iconHoverColor: white,
       isExpectName: "#A3A9AE",
       subtitleColor: "#a3a9ae",
@@ -2092,7 +2092,7 @@ const Dark: TTheme = {
       roleSelectorColor: "#a3a9ae",
       disabledRoleSelectorColor: "#a3a9ae",
       roleSelectorArrowColor: "#a3a9ae",
-      createLink: "#858585",
+      createLink: grayDark,
       linkAccessComboboxExpired: "#a3a9ae",
     },
 
@@ -2129,7 +2129,7 @@ const Dark: TTheme = {
     expanderColor: "#C4C4C4",
 
     downloadAppList: {
-      textColor: "#858585",
+      textColor: grayDark,
       color: "#5C5C5C",
       winHoverColor: "#3785D3",
       macHoverColor: white,
@@ -2144,7 +2144,7 @@ const Dark: TTheme = {
     },
     devTools: {
       border: "1px solid #474747",
-      color: "#858585",
+      color: grayDark,
     },
   },
 
@@ -2159,7 +2159,7 @@ const Dark: TTheme = {
     nameColor: grayMaxLight,
     pendingNameColor: "#6f6f6f",
 
-    sideInfoColor: "#858585",
+    sideInfoColor: grayDark,
     pendingSideInfoColor: "#5a5a5a",
   },
 
@@ -2192,7 +2192,7 @@ const Dark: TTheme = {
       background: black,
       hoverBackground: "#292929",
       selectedViewIcon: "rgba(255, 255, 255, 0.88)",
-      viewIcon: "#858585",
+      viewIcon: grayDark,
       sortFill: "rgba(255, 255, 255, 0.6)",
 
       tileSortFill: grayMaxLight,
@@ -2206,7 +2206,7 @@ const Dark: TTheme = {
   },
 
   profileInfo: {
-    color: "#858585",
+    color: grayDark,
     iconButtonColor: grayMaxLight,
     linkColor: grayMaxLight,
 
@@ -2234,12 +2234,12 @@ const Dark: TTheme = {
     header: {
       background: black,
       borderBottom: "1px solid #474747",
-      textColor: "#858585",
-      activeTextColor: "#858585",
+      textColor: grayDark,
+      activeTextColor: grayDark,
       hoverTextColor: grayMaxLight,
 
-      iconColor: "#858585",
-      activeIconColor: "#858585",
+      iconColor: grayDark,
+      activeIconColor: grayDark,
       hoverIconColor: grayMaxLight,
 
       borderImageSource: `linear-gradient(to right,${black} 21px,#474747 21px,#474747 calc(100% - 20px),${black} calc(100% - 20px))`,
@@ -2262,13 +2262,13 @@ const Dark: TTheme = {
       draggingHoverBackground: "rgba(204, 184, 102, 0.2)2",
 
       shareButton: {
-        color: "#858585",
-        fill: "#858585",
+        color: grayDark,
+        fill: grayDark,
       },
 
-      sideColor: "#858585",
+      sideColor: grayDark,
       linkColor: grayMaxLight,
-      textColor: "#858585",
+      textColor: grayDark,
 
       editingIconColor: grayMaxLight,
       shareHoverColor: grayMaxLight,
@@ -2278,7 +2278,7 @@ const Dark: TTheme = {
     tableView: {
       fileName: {
         linkColor: grayMaxLight,
-        textColor: "#858585",
+        textColor: grayDark,
       },
 
       row: {
@@ -2335,7 +2335,7 @@ const Dark: TTheme = {
 
       sideColor: grayMaxLight,
       color: grayMaxLight,
-      textColor: "#858585",
+      textColor: grayDark,
     },
 
     animationColor: "rgba(82, 153, 224, 0.16)",
@@ -2349,7 +2349,7 @@ const Dark: TTheme = {
     borderLeft: "1px solid #474747",
 
     searcher: {
-      hoverBorderColor: "#858585",
+      hoverBorderColor: grayDark,
       focusBorderColor: grayMaxLight,
       placeholderColor: "#474747",
     },
@@ -2368,7 +2368,7 @@ const Dark: TTheme = {
       color: "#ADADAD",
     },
 
-    bodyDescriptionText: "#858585",
+    bodyDescriptionText: grayDark,
 
     item: {
       hoverBackground: "#3d3d3d",
@@ -2449,7 +2449,7 @@ const Dark: TTheme = {
   createEditRoomDialog: {
     commonParam: {
       descriptionColor: "#a3a9ae",
-      textColor: "#858585",
+      textColor: grayDark,
     },
 
     roomType: {
@@ -2521,14 +2521,14 @@ const Dark: TTheme = {
       combobox: {
         background: "#292929",
         dropdownBorderColor: "#474747",
-        hoverDropdownBorderColor: "#858585",
+        hoverDropdownBorderColor: grayDark,
         isOpenDropdownBorderColor: "#e8e8e9",
         arrowFill: "#474747",
       },
       folderInput: {
         background: "#292929",
         borderColor: "#474747",
-        hoverBorderColor: "#858585",
+        hoverBorderColor: grayDark,
         focusBorderColor: "#e8e8e9",
         rootLabelColor: "#a3a9ae",
         iconFill: "#657177",
@@ -2542,7 +2542,7 @@ const Dark: TTheme = {
         hoverBackground: black,
         borderColor: "#292929",
         hoverBorderColor: "#fafafa",
-        color: "#858585",
+        color: grayDark,
         iconColor: "#e8e8e9",
       },
     },
@@ -2632,7 +2632,7 @@ const Dark: TTheme = {
     },
 
     embedding: {
-      textAreaColor: "#858585",
+      textAreaColor: grayDark,
       iconColor: grayMaxLight,
       color: gray,
     },
@@ -2703,7 +2703,7 @@ const Dark: TTheme = {
 
       itemBorder: "1px dashed #333333",
 
-      itemOwnerColor: "#858585",
+      itemOwnerColor: grayDark,
 
       backgroundButtons: black,
 
@@ -2802,14 +2802,14 @@ const Dark: TTheme = {
   },
 
   filesBadges: {
-    iconColor: "#858585",
+    iconColor: grayDark,
     hoverIconColor: grayMaxLight,
 
     color: white,
     backgroundColor: black,
 
     badgeColor: black,
-    badgeBackgroundColor: "#858585",
+    badgeBackgroundColor: grayDark,
   },
 
   filesEditingWrapper: {
@@ -2828,23 +2828,23 @@ const Dark: TTheme = {
       itemBackground: globalColors.black,
     },
 
-    fill: "#858585",
+    fill: grayDark,
     hoverFill: grayMaxLight,
   },
 
   filesIcons: {
-    fill: "#858585",
+    fill: grayDark,
     hoverFill: grayMaxLight,
   },
 
   filesQuickButtons: {
-    color: "#858585",
+    color: grayDark,
     sharedColor: grayMaxLight,
     hoverColor: grayMaxLight,
   },
 
   filesSharedButton: {
-    color: "#858585",
+    color: grayDark,
     sharedColor: grayMaxLight,
   },
 
@@ -2877,12 +2877,12 @@ const Dark: TTheme = {
 
   login: {
     linkColor: "#E06A1B",
-    textColor: "#858585",
+    textColor: grayDark,
     navBackground: charlestonGreen,
     headerColor: white,
     helpButton: graySilver,
     orLineColor: "#474747",
-    orTextColor: "#858585",
+    orTextColor: grayDark,
     titleColor: white,
 
     register: {
@@ -2915,7 +2915,7 @@ const Dark: TTheme = {
   },
 
   peopleWithContent: {
-    color: "#858585",
+    color: grayDark,
     pendingColor: "#474747",
   },
 
@@ -2949,7 +2949,7 @@ const Dark: TTheme = {
     },
 
     comingSoon: {
-      linkColor: "#858585",
+      linkColor: grayDark,
       linkIconColor: black,
       backgroundColor: black,
       foregroundColor: black,
@@ -2987,7 +2987,7 @@ const Dark: TTheme = {
     settings: {
       iconFill: white,
       headerTitleColor: white,
-      trashIcon: "#858585",
+      trashIcon: grayDark,
       article: {
         titleColor: "#c4c4c4",
         fillIcon: "#c4c4c4",
@@ -2998,7 +2998,7 @@ const Dark: TTheme = {
 
       security: {
         arrowFill: white,
-        descriptionColor: "#858585",
+        descriptionColor: grayDark,
 
         admins: {
           backgroundColor: black,
@@ -3006,12 +3006,12 @@ const Dark: TTheme = {
           roleColor: grayMid,
 
           color: "#E06A1B",
-          departmentColor: "#858585",
+          departmentColor: grayDark,
 
           tooltipColor: "#F5E9BA",
 
           nameColor: grayMaxLight,
-          pendingNameColor: "#858585",
+          pendingNameColor: grayDark,
 
           textColor: black,
           iconColor: blueMain,
@@ -3020,27 +3020,27 @@ const Dark: TTheme = {
         owner: {
           backgroundColor: black,
           linkColor: "#E06A1B",
-          departmentColor: "#858585",
+          departmentColor: grayDark,
           tooltipColor: "#F5E9BA",
         },
         auditTrail: {
-          sideColor: "#858585",
+          sideColor: grayDark,
           nameColor: grayMaxLight,
-          downloadReportDescriptionColor: "#858585",
+          downloadReportDescriptionColor: grayDark,
         },
         loginHistory: {
-          sideColor: "#858585",
+          sideColor: grayDark,
           nameColor: grayMaxLight,
         },
       },
 
       common: {
-        linkColor: "#858585",
+        linkColor: grayDark,
         linkColorHelp: "#E06A1B",
         tooltipLinkColor: "#e06a1b",
         arrowColor: white,
-        descriptionColor: "#858585",
-        brandingDescriptionColor: "#858585",
+        descriptionColor: grayDark,
+        brandingDescriptionColor: grayDark,
 
         whiteLabel: {
           borderImg: "1px solid #474747",
@@ -3087,7 +3087,7 @@ const Dark: TTheme = {
 
         backgroundColor: charlestonGreen,
         linkColor: "#316DAA",
-        tariffText: "#858585",
+        tariffText: grayDark,
         border: "1px solid #474747",
         backgroundBenefitsColor: "#3333",
         rectangleColor: "#3D3D3D",
@@ -3096,18 +3096,18 @@ const Dark: TTheme = {
           backgroundText: "#3D3D3D",
           background: charlestonGreen,
           border: "1px solid #282828",
-          featureTextColor: "#858585",
-          disableColor: "#858585",
-          trackNumberColor: "#858585",
+          featureTextColor: grayDark,
+          disableColor: grayDark,
+          trackNumberColor: grayDark,
           disablePriceColor: "#5C5C5C",
         },
 
         benefitsContainer: {
-          iconsColor: "#858585",
+          iconsColor: grayDark,
         },
         contactContainer: {
           textColor: "#ADADAD",
-          linkColor: "#858585",
+          linkColor: grayDark,
         },
         warningColor: "#E06451",
         color: "#E17415",
@@ -3121,15 +3121,15 @@ const Dark: TTheme = {
         stepDescriptionColor: white,
         fileInputIconColor: "#5c5c5c",
         infoBlockBackground: charlestonGreen,
-        infoBlockTextColor: "#858585",
+        infoBlockTextColor: grayDark,
         errorTextColor: "#E06451",
         existingTextColor: "#3BA420",
-        tableHeaderText: "#858585",
+        tableHeaderText: grayDark,
         tableRowHoverColor: "#3D3D3D",
-        tableRowTextColor: "#858585",
+        tableRowTextColor: grayDark,
         comboBoxLabelColor: white,
         importSectionBackground: charlestonGreen,
-        importSectionTextColor: "#858585",
+        importSectionTextColor: grayDark,
         importItemBackground: black,
         importItemDisableBackground: "#3D3D3D",
         importItemTextColor: "#ADADAD",
@@ -3141,7 +3141,7 @@ const Dark: TTheme = {
         groupMenuBoxShadow: "rgba(0, 0, 0, 0.16) 0px 5px 5px 0px",
       },
       storageManagement: {
-        grayBackgroundText: "#858585",
+        grayBackgroundText: grayDark,
         descriptionColor: "#ADADAD",
       },
     },
@@ -3168,7 +3168,7 @@ const Dark: TTheme = {
 
   errorContainer: {
     background: black,
-    bodyText: "#858585",
+    bodyText: grayDark,
   },
 
   editor: {
@@ -3194,7 +3194,7 @@ const Dark: TTheme = {
     color: white,
     background: "#474747",
     hoverBackground: charlestonGreen,
-    disabledBackground: "#858585",
+    disabledBackground: grayDark,
     defaultTagColor: white,
     newTagBackground: black,
   },
@@ -3204,8 +3204,8 @@ const Dark: TTheme = {
       background: "#3D3D3D",
       textColor: white,
 
-      descriptionTextColor: "#858585",
-      pendingEmailTextColor: "#858585",
+      descriptionTextColor: grayDark,
+      pendingEmailTextColor: grayDark,
 
       mobileRowBackground: "#3D3D3D",
     },
@@ -3214,7 +3214,7 @@ const Dark: TTheme = {
       border: "1px solid #474747",
     },
     notifications: {
-      textDescriptionColor: "#858585",
+      textDescriptionColor: grayDark,
     },
     activeSessions: {
       color: grayMaxLight,
@@ -3222,7 +3222,7 @@ const Dark: TTheme = {
       tickIconColor: "#3BA420",
       removeIconColor: "#A3A9AE",
       sortHeaderColor: "#474747",
-      tableCellColor: "#858585",
+      tableCellColor: grayDark,
       dividerColor: "#474747",
     },
   },
@@ -3237,21 +3237,21 @@ const Dark: TTheme = {
     colorPercentSmall: white,
     colorPercentBig: black,
     errorTextColor: "#E06451",
-    descriptionTextColor: "#858585",
+    descriptionTextColor: grayDark,
   },
 
   codeInput: {
     background: charlestonGreen,
     border: "1px solid #474747",
     color: white,
-    lineColor: "#858585",
+    lineColor: grayDark,
     disabledBackground: "#474747",
     disabledBorder: "1px solid #474747",
-    disabledColor: "#858585",
+    disabledColor: grayDark,
   },
 
   accessRightSelect: {
-    descriptionColor: "#858585",
+    descriptionColor: grayDark,
   },
 
   itemIcon: {
@@ -3263,7 +3263,7 @@ const Dark: TTheme = {
   },
 
   portalUnavailable: {
-    textDescriptionColor: "#858585",
+    textDescriptionColor: grayDark,
   },
 
   deepLink: {
@@ -3272,12 +3272,12 @@ const Dark: TTheme = {
   },
 
   emailChips: {
-    borderColor: "#858585",
+    borderColor: grayDark,
     dashedBorder: "1px dashed #fff",
   },
 
   dialogs: {
-    disableText: "#858585",
+    disableText: grayDark,
   },
 
   editLink: {

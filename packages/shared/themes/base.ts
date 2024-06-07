@@ -91,6 +91,7 @@ const {
   darkRed,
 
   lightErrorStatus,
+  charlestonGreen,
 } = globalColors;
 
 export const getBaseTheme = () => {
@@ -3069,7 +3070,7 @@ export const getBaseTheme = () => {
 
             backgroundColorWhite: white,
             backgroundColorLight: "#F8F9F9",
-            backgroundColorDark: "#282828",
+            backgroundColorDark: charlestonGreen,
             greenBackgroundColor: "#40865C",
             blueBackgroundColor: "#446995",
             orangeBackgroundColor: "#AA5252",

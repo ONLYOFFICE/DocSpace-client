@@ -96,7 +96,7 @@ const Dark: TTheme = {
     color: grayMaxLight,
   },
 
-  backgroundAndSubstrateColor: "#282828",
+  backgroundAndSubstrateColor: charlestonGreen,
 
   betaBadgeTooltip: {
     boxShadowColor: "rgba(0, 0, 0, 0.40)",
@@ -166,8 +166,8 @@ const Dark: TTheme = {
     backgroundColor: {
       base: black,
       baseHover: black,
-      baseActive: "#282828",
-      baseDisabled: "#282828",
+      baseActive: charlestonGreen,
+      baseDisabled: charlestonGreen,
 
       primary: "#5299E0",
       primaryHover: "#4D8AC7",
@@ -329,7 +329,7 @@ const Dark: TTheme = {
     hoverConnectBackground: "#FFFFFF",
     hoverConnectBorder: "none",
 
-    activeBackground: "#282828",
+    activeBackground: charlestonGreen,
     activeBorder: "1px solid #CCCCCC",
     activeConnectBackground: "rgba(255, 255, 255, 0.64)",
     activeConnectBorder: "none",
@@ -413,7 +413,7 @@ const Dark: TTheme = {
   iconButton: { color: "#858585", hoverColor: grayMaxLight },
   selectorAddButton: {
     background: "#242424",
-    hoverBackground: "#282828",
+    hoverBackground: charlestonGreen,
     activeBackground: "#242424",
 
     iconColor: "#858585",
@@ -467,7 +467,7 @@ const Dark: TTheme = {
   },
 
   checkbox: {
-    fillColor: "#282828",
+    fillColor: charlestonGreen,
     borderColor: "#474747",
     arrowColor: white,
     indeterminateColor: white,
@@ -954,7 +954,7 @@ const Dark: TTheme = {
     background: {
       default: "transparent",
       hover: "#474747",
-      active: "#282828",
+      active: charlestonGreen,
       focus: "#242424",
     },
     caret: {
@@ -983,7 +983,7 @@ const Dark: TTheme = {
     maxWidth: "340px",
     color: "#242424",
     textColor: white,
-    backgroundColor: "#282828",
+    backgroundColor: charlestonGreen,
 
     before: {
       border: "none",
@@ -1009,8 +1009,8 @@ const Dark: TTheme = {
 
       backgroundColor: "#FFFFFF",
       hoverBackgroundColor: "#474747",
-      disableBackgroundColor: "#282828",
-      activeBackgroundColor: "#282828",
+      disableBackgroundColor: charlestonGreen,
+      activeBackgroundColor: charlestonGreen,
       activeSelectedBackgroundColor:
         "linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(0deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18))",
 
@@ -1426,7 +1426,7 @@ const Dark: TTheme = {
     backgroundColor: black,
     hoverBackgroundColor: "#3D3D3D",
     hoverDisabledBackgroundColor: black,
-    selectedBackgroundColor: "#282828",
+    selectedBackgroundColor: charlestonGreen,
     fontWeight: "600",
     fontSize: "13px",
     width: "100%",
@@ -1682,7 +1682,7 @@ const Dark: TTheme = {
       hoverDisabledBorderColor: "#474747",
 
       hoverBackgroundModernView: "#474747",
-      activeBackgroundModernView: "#282828",
+      activeBackgroundModernView: charlestonGreen,
       focusBackgroundModernView: "#242424",
     },
 
@@ -2324,7 +2324,7 @@ const Dark: TTheme = {
         roomsCheckedColor: black,
         border: "1px solid #474747",
         backgroundBadgeColor: black,
-        backgroundColor: "#282828",
+        backgroundColor: charlestonGreen,
         borderRadius: "6px",
         roomsBorderRadius: "12px",
         bottomBorderRadius: "0 0 6px 6px",
@@ -2365,7 +2365,7 @@ const Dark: TTheme = {
     },
 
     info: {
-      backgroundColor: "#282828",
+      backgroundColor: charlestonGreen,
       color: "#ADADAD",
     },
 
@@ -2456,25 +2456,25 @@ const Dark: TTheme = {
     roomType: {
       listItem: {
         background: "none",
-        hoverBackground: "#282828",
+        hoverBackground: charlestonGreen,
         borderColor: "#474747",
         descriptionText: "#A3A9AE",
       },
       dropdownButton: {
         background: "none",
-        hoverBackground: "#282828",
+        hoverBackground: charlestonGreen,
         borderColor: "#474747",
         isOpenBorderColor: "#F97A0B",
         descriptionText: "#A3A9AE",
       },
       dropdownItem: {
         background: black,
-        hoverBackground: "#282828",
+        hoverBackground: charlestonGreen,
         descriptionText: "#A3A9AE",
       },
       displayItem: {
-        background: "#282828",
-        borderColor: "#282828",
+        background: charlestonGreen,
+        borderColor: charlestonGreen,
         descriptionText: "#a3a9ae",
       },
     },
@@ -2504,7 +2504,7 @@ const Dark: TTheme = {
       background: black,
       borderColor: "#474747",
       item: {
-        hoverBackground: "#282828",
+        hoverBackground: charlestonGreen,
       },
     },
 
@@ -2879,7 +2879,7 @@ const Dark: TTheme = {
   login: {
     linkColor: "#E06A1B",
     textColor: "#858585",
-    navBackground: "#282828",
+    navBackground: charlestonGreen,
     headerColor: white,
     helpButton: "#D8D8D8",
     orLineColor: "#474747",
@@ -2939,7 +2939,7 @@ const Dark: TTheme = {
   },
 
   downloadDialog: {
-    background: "#282828",
+    background: charlestonGreen,
   },
 
   client: {
@@ -3048,7 +3048,7 @@ const Dark: TTheme = {
 
           backgroundColorWhite: white,
           backgroundColorLight: "#F8F9F9",
-          backgroundColorDark: "#282828",
+          backgroundColorDark: charlestonGreen,
           greenBackgroundColor: "#40865C",
           blueBackgroundColor: "#446995",
           orangeBackgroundColor: "#AA5252",
@@ -3086,7 +3086,7 @@ const Dark: TTheme = {
         priceColor: "#ADADAD",
         storageSizeTitle: "#A3A9AE",
 
-        backgroundColor: "#282828",
+        backgroundColor: charlestonGreen,
         linkColor: "#316DAA",
         tariffText: "#858585",
         border: "1px solid #474747",
@@ -3095,7 +3095,7 @@ const Dark: TTheme = {
 
         priceContainer: {
           backgroundText: "#3D3D3D",
-          background: "#282828",
+          background: charlestonGreen,
           border: "1px solid #282828",
           featureTextColor: "#858585",
           disableColor: "#858585",
@@ -3121,7 +3121,7 @@ const Dark: TTheme = {
         workspaceBorder: "1px solid #474747",
         stepDescriptionColor: "#FFFFFF",
         fileInputIconColor: "#5c5c5c",
-        infoBlockBackground: "#282828",
+        infoBlockBackground: charlestonGreen,
         infoBlockTextColor: "#858585",
         errorTextColor: "#E06451",
         existingTextColor: "#3BA420",
@@ -3129,7 +3129,7 @@ const Dark: TTheme = {
         tableRowHoverColor: "#3D3D3D",
         tableRowTextColor: "#858585",
         comboBoxLabelColor: "#FFFFFF",
-        importSectionBackground: "#282828",
+        importSectionBackground: charlestonGreen,
         importSectionTextColor: "#858585",
         importItemBackground: black,
         importItemDisableBackground: "#3D3D3D",
@@ -3194,7 +3194,7 @@ const Dark: TTheme = {
   tag: {
     color: white,
     background: "#474747",
-    hoverBackground: "#282828",
+    hoverBackground: charlestonGreen,
     disabledBackground: "#858585",
     defaultTagColor: white,
     newTagBackground: black,
@@ -3234,7 +3234,7 @@ const Dark: TTheme = {
   },
 
   preparationPortalProgress: {
-    backgroundColor: "#282828",
+    backgroundColor: charlestonGreen,
     colorPercentSmall: "#FFFFFF",
     colorPercentBig: black,
     errorTextColor: "#E06451",
@@ -3242,7 +3242,7 @@ const Dark: TTheme = {
   },
 
   codeInput: {
-    background: "#282828",
+    background: charlestonGreen,
     border: "1px solid #474747",
     color: white,
     lineColor: "#858585",
@@ -3268,7 +3268,7 @@ const Dark: TTheme = {
   },
 
   deepLink: {
-    navBackground: "#282828",
+    navBackground: charlestonGreen,
     fileTileBackground: "#3D3D3D",
   },
 
@@ -3299,13 +3299,13 @@ const Dark: TTheme = {
   },
 
   infoBlock: {
-    background: "#282828",
+    background: charlestonGreen,
     headerColor: "#FFF",
     descriptionColor: "#ADADAD",
   },
 
   infoBar: {
-    background: "#282828",
+    background: charlestonGreen,
     title: white,
     description: "#ADADAD",
   },

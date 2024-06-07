@@ -30,7 +30,6 @@ import { observer, inject } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { Events } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
-import throttle from "lodash/throttle";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 const withHotkeys = (Component) => {
@@ -63,6 +62,7 @@ const withHotkeys = (Component) => {
       moveCaretRight,
       openItem,
       selectAll,
+      deselectAll,
       activateHotkeys,
       onClickBack,
 
@@ -154,13 +154,11 @@ const withHotkeys = (Component) => {
     };
 
     useEffect(() => {
-      const throttledKeyDownEvent = throttle(onKeyDown, 300);
-
-      window.addEventListener("keydown", throttledKeyDownEvent);
+      window.addEventListener("keydown", onKeyDown);
       document.addEventListener("paste", onPaste);
 
       return () => {
-        window.removeEventListener("keydown", throttledKeyDownEvent);
+        window.removeEventListener("keydown", onKeyDown);
         document.removeEventListener("paste", onPaste);
       };
     });
@@ -231,7 +229,7 @@ const withHotkeys = (Component) => {
     useHotkeys("shift+a, ctrl+a", selectAll, hotkeysFilter);
 
     //Deselect all files and folders
-    useHotkeys("shift+n, ESC", () => setSelected("none"), hotkeysFilter);
+    useHotkeys("shift+n, ESC", deselectAll, hotkeysFilter);
 
     //Move down without changing selection
     useHotkeys("ctrl+DOWN, command+DOWN", moveCaretBottom, hotkeysFilter);
@@ -444,6 +442,7 @@ const withHotkeys = (Component) => {
         moveCaretRight,
         openItem,
         selectAll,
+        deselectAll,
         activateHotkeys,
         uploadFile,
         copyToClipboard,
@@ -508,6 +507,7 @@ const withHotkeys = (Component) => {
         moveCaretRight,
         openItem,
         selectAll,
+        deselectAll,
         activateHotkeys,
         onClickBack,
 

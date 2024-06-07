@@ -25,15 +25,21 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import { getRooms } from "../../../api/rooms";
 import RoomsFilter from "../../../api/rooms/filter";
+import { RoomsType } from "../../../enums";
+import { RoomsTypeValues } from "../../../utils";
+import RoomType from "../../../components/room-type";
 import { TSelectorItem } from "../../../components/selector";
 import { TBreadCrumb } from "../../../components/selector/Selector.types";
 
 import { PAGE_COUNT, DEFAULT_BREAD_CRUMB } from "../FilesSelector.constants";
 import { UseRoomsHelperProps } from "../FilesSelector.types";
 import { convertRoomsToItems } from "../FilesSelector.utils";
+
+import useInputItemHelper from "./useInputItemHelper";
 
 const useRoomsHelper = ({
   setIsNextPageLoading,
@@ -50,7 +56,15 @@ const useRoomsHelper = ({
   isInit,
   setIsInit,
   setIsFirstLoad,
+  withCreate,
+  createDefineRoomLabel,
+  createDefineRoomType,
+  getRootData,
+  setSelectedItemType,
 }: UseRoomsHelperProps) => {
+  const { t } = useTranslation(["Common"]);
+  const { addInputItem } = useInputItemHelper({ withCreate, setItems });
+
   const requestRunning = React.useRef(false);
   const initRef = React.useRef(isInit);
   const firstLoadRef = React.useRef(isFirstLoad);
@@ -63,12 +77,37 @@ const useRoomsHelper = ({
     initRef.current = isInit;
   }, [isInit]);
 
+  const createDropDownItems = React.useMemo(() => {
+    return RoomsTypeValues.map((value) => {
+      const onClick = () => {
+        addInputItem("", "", value as RoomsType, t("EnterName"));
+      };
+
+      return (
+        <RoomType
+          key={value}
+          roomType={value}
+          selectedId={value}
+          type="dropdownItem"
+          isOpen={false}
+          onClick={onClick}
+        />
+      );
+    });
+  }, [addInputItem, t]);
+
   const getRoomList = React.useCallback(
-    async (startIndex: number) => {
+    async (sIndex: number) => {
       if (requestRunning.current) return;
 
       requestRunning.current = true;
       setIsNextPageLoading(true);
+
+      let startIndex = sIndex;
+
+      if (withCreate) {
+        startIndex -= startIndex % 100;
+      }
 
       const filterValue = searchValue || "";
 
@@ -103,7 +142,42 @@ const useRoomsHelper = ({
       setHasNextPage(count === PAGE_COUNT);
 
       if (firstLoadRef.current || startIndex === 0) {
-        setTotal(total);
+        if (withCreate) {
+          setTotal(total + 1);
+          const createItem: TSelectorItem = {
+            isCreateNewItem: true,
+            label: createDefineRoomLabel ?? t("NewRoom"),
+            id: "create-room-item",
+            key: "create-room-item",
+            hotkey: "r",
+
+            dropDownItems: createDefineRoomType
+              ? undefined
+              : createDropDownItems,
+
+            onBackClick: () => {
+              setIsRoot(true);
+              setSelectedItemType(undefined);
+              setBreadCrumbs((val) => {
+                const newVal = [...val];
+
+                newVal.pop();
+
+                return newVal;
+              });
+              getRootData?.();
+            },
+          };
+
+          if (createDefineRoomType) {
+            createItem.onCreateClick = () =>
+              addInputItem("", "", createDefineRoomType, createDefineRoomLabel);
+          }
+
+          itemList.unshift(createItem);
+        } else {
+          setTotal(total);
+        }
         setItems(itemList);
       } else {
         setItems((prevState) => {
@@ -120,6 +194,7 @@ const useRoomsHelper = ({
     },
     [
       setIsNextPageLoading,
+      withCreate,
       searchValue,
       setHasNextPage,
       setIsRoot,
@@ -129,8 +204,15 @@ const useRoomsHelper = ({
       onSetBaseFolderPath,
       setBreadCrumbs,
       setIsBreadCrumbsLoading,
-      setTotal,
       setItems,
+      setTotal,
+      createDefineRoomLabel,
+      t,
+      createDefineRoomType,
+      createDropDownItems,
+      addInputItem,
+      setSelectedItemType,
+      getRootData,
     ],
   );
   return { getRoomList };

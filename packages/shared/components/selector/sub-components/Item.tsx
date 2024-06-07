@@ -54,7 +54,8 @@ const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
   return (
     prevItem?.id === nextItem?.id &&
     prevItem?.label === nextItem?.label &&
-    prevItem?.isSelected === nextItem?.isSelected
+    prevItem?.isSelected === nextItem?.isSelected &&
+    nextData?.inputItemVisible === prevData?.inputItemVisible
   );
 };
 
@@ -67,6 +68,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     rowLoader,
     renderCustomItem,
     setInputItemVisible,
+    inputItemVisible,
   }: Data = data;
   const { t } = useTranslation(["Common"]);
 
@@ -86,6 +88,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       label,
       isCreateNewItem,
       onCreateClick,
+      hotkey,
 
       isInputItem,
       defaultInputValue,
@@ -93,6 +96,8 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       onCancelInput,
       avatar,
       icon,
+      roomType,
+      placeholder,
       role,
       isSelected,
       isDisabled,
@@ -100,6 +105,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       email,
       isGroup,
       disabledText,
+      dropDownItems,
     } = item;
 
     if (isInputItem) {
@@ -110,8 +116,10 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           onCancelInput={onCancelInput}
           style={style}
           color={color}
+          roomType={roomType}
           icon={icon}
           setInputItemVisible={setInputItemVisible}
+          placeholder={placeholder}
         />
       );
     }
@@ -121,7 +129,14 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       (items.length > 2 || (items.length === 2 && !items[1].isInputItem))
     ) {
       return (
-        <NewItem label={label} onCreateClick={onCreateClick} style={style} />
+        <NewItem
+          label={label}
+          onCreateClick={onCreateClick}
+          dropDownItems={dropDownItems}
+          style={style}
+          hotkey={hotkey}
+          inputItemVisible={inputItemVisible}
+        />
       );
     }
     if (isCreateNewItem) {

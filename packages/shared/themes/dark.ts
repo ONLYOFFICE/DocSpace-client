@@ -183,10 +183,10 @@ const Dark: TTheme = {
     },
 
     border: {
-      base: `1px solid #474747`,
+      base: `1px solid ${outerSpace}`,
       baseHover: `1px solid #858585`,
       baseActive: `1px solid #CCCCCC`,
-      baseDisabled: `1px solid #474747`,
+      baseDisabled: `1px solid ${outerSpace}`,
 
       primary: `1px solid #5299E0`,
       primaryHover: `1px solid #4D8AC7`,
@@ -322,7 +322,7 @@ const Dark: TTheme = {
     outline: "none",
     width: "100%",
 
-    border: "1px solid #474747",
+    border: `1px solid ${outerSpace}`,
     background: black,
 
     borderConnect: "none",
@@ -382,7 +382,7 @@ const Dark: TTheme = {
     padding: "0px",
 
     separator: {
-      border: `1px solid #474747`,
+      border: `1px solid ${outerSpace}`,
       width: "0px",
       height: "24px",
       margin: "16px 12px 0 12px",
@@ -665,7 +665,7 @@ const Dark: TTheme = {
     },
 
     header: {
-      borderBottom: `1px solid #474747`,
+      borderBottom: `1px solid ${outerSpace}`,
     },
 
     closeButton: {
@@ -1008,7 +1008,7 @@ const Dark: TTheme = {
 
     label: {
       height: " 30px",
-      border: "1px solid #474747",
+      border: `1px solid ${outerSpace}`,
       borderRadius: "16px",
       minWidth: "fit-content",
       marginRight: "8px",
@@ -1305,7 +1305,7 @@ const Dark: TTheme = {
     },
 
     dropZone: {
-      border: `1px dashed #474747`,
+      border: `1px dashed ${outerSpace}`,
     },
 
     container: {
@@ -1423,7 +1423,7 @@ const Dark: TTheme = {
     borderRadius: "6px",
     boxShadow: "0px 8px 16px 0px #040F1B29",
     // boxShadowMobile: "0px -4px 60px rgba(0, 0, 0, 0.25)",
-    border: "1px solid #474747",
+    border: `1px solid ${outerSpace}`,
   },
 
   dropDownItem: {
@@ -1455,7 +1455,7 @@ const Dark: TTheme = {
 
     separator: {
       padding: "0px 16px",
-      borderBottom: `1px solid #474747`,
+      borderBottom: `1px solid ${outerSpace}`,
       margin: " 4px 16px 4px",
       lineHeight: "1px",
       height: "1px",
@@ -1674,7 +1674,7 @@ const Dark: TTheme = {
       backgroundWithBorder: "none",
       backgroundModernView: "none",
 
-      border: `1px solid #474747`,
+      border: `1px solid ${outerSpace}`,
       borderRadius: "3px",
 
       borderColor: outerSpace,
@@ -1762,7 +1762,7 @@ const Dark: TTheme = {
       margin: "0",
       lineHeight: "56px",
       fontWeight: "700",
-      borderBottom: `1px solid #474747`,
+      borderBottom: `1px solid ${outerSpace}`,
     },
 
     bodyContent: {
@@ -1889,7 +1889,7 @@ const Dark: TTheme = {
     background: "#292929",
 
     header: {
-      borderBottom: "1px solid #474747",
+      borderBottom: `1px solid ${outerSpace}`,
       iconFill: "#a9a9a9",
     },
     control: {
@@ -1899,10 +1899,10 @@ const Dark: TTheme = {
 
     headerBurgerColor: "#606060",
 
-    verticalLine: "1px solid #474747",
+    verticalLine: `1px solid ${outerSpace}`,
 
     profile: {
-      borderTop: "1px solid #474747",
+      borderTop: `1px solid ${outerSpace}`,
       background: veryDarkGrey,
     },
 
@@ -2150,7 +2150,7 @@ const Dark: TTheme = {
       linkColor: "#DDDDDD",
     },
     devTools: {
-      border: "1px solid #474747",
+      border: `1px solid ${outerSpace}`,
       color: grayDark,
     },
   },
@@ -2172,7 +2172,7 @@ const Dark: TTheme = {
 
   filterInput: {
     button: {
-      border: "1px solid #474747",
+      border: `1px solid ${outerSpace}`,
       hoverBorder: "1px solid #858585",
 
       openBackground: gray,
@@ -2182,7 +2182,7 @@ const Dark: TTheme = {
 
     filter: {
       background: black,
-      border: "1px solid #474747",
+      border: `1px solid ${outerSpace}`,
       color: gray,
 
       separatorColor: outerSpace,
@@ -2227,20 +2227,20 @@ const Dark: TTheme = {
   },
 
   tableContainer: {
-    borderRight: "2px solid #474747",
+    borderRight: `2px solid ${outerSpace}`,
     hoverBorderColor: outerSpace,
-    tableCellBorder: "1px solid #474747",
+    tableCellBorder: `1px solid ${outerSpace}`,
 
     groupMenu: {
       background: black,
-      borderBottom: "1px solid #474747",
-      borderRight: "1px solid #474747",
+      borderBottom: `1px solid ${outerSpace}`,
+      borderRight: `1px solid ${outerSpace}`,
       boxShadow: "0px 40px 60px rgba(0, 0, 0, 0.12)",
     },
 
     header: {
       background: black,
-      borderBottom: "1px solid #474747",
+      borderBottom: `1px solid ${outerSpace}`,
       textColor: grayDark,
       activeTextColor: grayDark,
       hoverTextColor: grayMaxLight,
@@ -2249,16 +2249,16 @@ const Dark: TTheme = {
       activeIconColor: grayDark,
       hoverIconColor: grayMaxLight,
 
-      borderImageSource: `linear-gradient(to right,${black} 21px,#474747 21px,#474747 calc(100% - 20px),${black} calc(100% - 20px))`,
-      borderHoverImageSource: `linear-gradient(to right,${black} 0px,#474747 0px,#474747 100% ,${black} 100%)`,
-      lengthenBorderImageSource: `linear-gradient(to right, #474747, #474747)`,
+      borderImageSource: `linear-gradient(to right,${black} 21px,${outerSpace} 21px,${outerSpace} calc(100% - 20px),${black} calc(100% - 20px))`,
+      borderHoverImageSource: `linear-gradient(to right,${black} 0px,${outerSpace} 0px,${outerSpace} 100% ,${black} 100%)`,
+      lengthenBorderImageSource: `linear-gradient(to right, ${outerSpace}, ${outerSpace})`,
       hotkeyBorderBottom: `1px solid ${globalColors.blueMain}`,
 
       settingsIconDisableColor: outerSpace,
     },
 
     tableCell: {
-      border: "1px solid #474747",
+      border: `1px solid ${outerSpace}`,
     },
   },
   filesSection: {
@@ -2289,33 +2289,26 @@ const Dark: TTheme = {
       },
 
       row: {
-        checkboxChecked: `linear-gradient(to right, ${black} 24px, #474747 24px)`,
-        checkboxDragging:
-          "linear-gradient(to right, rgba(230, 211, 138, 0.12) 24px, #474747 24px)",
-        checkboxDraggingHover:
-          "inear-gradient(to right,rgba(204, 184, 102, 0.2) 24px, #474747 24px)",
+        checkboxChecked: `linear-gradient(to right, ${black} 24px, ${outerSpace} 24px)`,
+        checkboxDragging: `linear-gradient(to right, rgba(230, 211, 138, 0.12) 24px, ${outerSpace} 24px)`,
+        checkboxDraggingHover: `inear-gradient(to right,rgba(204, 184, 102, 0.2) 24px, ${outerSpace} 24px)`,
 
-        contextMenuWrapperChecked: `linear-gradient(to left, ${black} 24px, #474747 24px)`,
-        contextMenuWrapperDragging:
-          "border-image-source: linear-gradient(to left, rgba(230, 211, 138, 0.12) 24px, #474747 24px)",
-        contextMenuWrapperDraggingHover:
-          "linear-gradient(to left,rgba(204, 184, 102, 0.2) 24px, #474747 24px)",
+        contextMenuWrapperChecked: `linear-gradient(to left, ${black} 24px, ${outerSpace} 24px)`,
+        contextMenuWrapperDragging: `border-image-source: linear-gradient(to left, rgba(230, 211, 138, 0.12) 24px, ${outerSpace} 24px)`,
+        contextMenuWrapperDraggingHover: `linear-gradient(to left,rgba(204, 184, 102, 0.2) 24px, ${outerSpace} 24px)`,
 
         backgroundActive: veryDarkGrey,
 
-        borderImageCheckbox:
-          "linear-gradient(to right, #474747 24px, #474747 24px)",
-        borderImageContextMenu:
-          "linear-gradient(to left, #474747 24px, #474747 24px)",
+        borderImageCheckbox: `linear-gradient(to right, ${outerSpace} 24px, ${outerSpace} 24px)`,
+        borderImageContextMenu: `linear-gradient(to left, ${outerSpace} 24px, ${outerSpace} 24px)`,
 
         borderHover: outerSpace,
         sideColor: gray,
 
         shareHoverColor: grayMaxLight,
 
-        borderImageRight:
-          "linear-gradient(to right, #333333 25px, #474747 24px)",
-        borderImageLeft: "linear-gradient(to left, #333333 20px, #474747 24px)",
+        borderImageRight: `linear-gradient(to right, #333333 25px, ${outerSpace} 24px)`,
+        borderImageLeft: `linear-gradient(to left, #333333 20px, ${outerSpace} 24px)`,
 
         borderColor: outerSpace,
         borderColorTransition: outerSpace,
@@ -2328,7 +2321,7 @@ const Dark: TTheme = {
         draggingHoverColor: "rgba(204, 184, 102, 0.2)",
         checkedColor: veryDarkGrey,
         roomsCheckedColor: black,
-        border: "1px solid #474747",
+        border: `1px solid ${outerSpace}`,
         backgroundBadgeColor: black,
         backgroundColor: charlestonGreen,
         borderRadius: "6px",
@@ -2349,11 +2342,11 @@ const Dark: TTheme = {
   },
 
   advancedSelector: {
-    footerBorder: "1px solid #474747",
+    footerBorder: `1px solid ${outerSpace}`,
 
     hoverBackgroundColor: outerSpace,
     selectedBackgroundColor: outerSpace,
-    borderLeft: "1px solid #474747",
+    borderLeft: `1px solid ${outerSpace}`,
 
     searcher: {
       hoverBorderColor: grayDark,
@@ -2363,7 +2356,7 @@ const Dark: TTheme = {
   },
 
   selector: {
-    border: `1px solid #474747`,
+    border: `1px solid ${outerSpace}`,
 
     breadCrumbs: {
       prevItemColor: "#ADADAD",
@@ -2569,17 +2562,17 @@ const Dark: TTheme = {
   },
 
   filesThirdPartyDialog: {
-    border: "1px solid #474747",
+    border: `1px solid ${outerSpace}`,
   },
 
   connectedClouds: {
     color: grayMaxLight,
-    borderBottom: `1px solid #474747`,
-    borderRight: `1px solid #474747`,
+    borderBottom: `1px solid ${outerSpace}`,
+    borderRight: `1px solid ${outerSpace}`,
   },
 
   filesModalDialog: {
-    border: `1px solid #474747`,
+    border: `1px solid ${outerSpace}`,
   },
 
   filesDragTooltip: {
@@ -2645,7 +2638,7 @@ const Dark: TTheme = {
     },
 
     versionHistory: {
-      borderTop: "1px solid #474747",
+      borderTop: `1px solid ${outerSpace}`,
     },
 
     content: {
@@ -2661,7 +2654,7 @@ const Dark: TTheme = {
 
     footer: {
       backgroundColor: black,
-      borderTop: "1px solid #474747",
+      borderTop: `1px solid ${outerSpace}`,
     },
 
     linkRow: {
@@ -2677,8 +2670,8 @@ const Dark: TTheme = {
     selectFile: {
       color: gray,
       background: black,
-      borderBottom: "1px solid #474747",
-      borderRight: "1px solid #474747",
+      borderBottom: `1px solid ${outerSpace}`,
+      borderRight: `1px solid ${outerSpace}`,
 
       buttonsBackground: black,
     },
@@ -2686,7 +2679,7 @@ const Dark: TTheme = {
     filesList: {
       color: grayMaxLight,
       backgroundColor: black,
-      borderBottom: "1px solid #474747",
+      borderBottom: `1px solid ${outerSpace}`,
     },
 
     modalRow: {
@@ -2701,8 +2694,8 @@ const Dark: TTheme = {
       fill: grayMaxLight,
       loadingFill: grayMaxLight,
 
-      borderBottom: "1px solid #474747",
-      borderTop: "1px solid #474747",
+      borderBottom: `1px solid ${outerSpace}`,
+      borderTop: `1px solid ${outerSpace}`,
       externalLinkBackground: "#292929",
       externalLinkSvg: grayMaxLight,
 
@@ -2748,7 +2741,7 @@ const Dark: TTheme = {
       },
     },
     separator: {
-      borderBottom: `1px solid #474747 !important`,
+      borderBottom: `1px solid ${outerSpace} !important`,
       margin: "6px 16px 6px 16px !important",
       height: "1px !important",
       width: "calc(100% - 32px) !important",
@@ -2773,7 +2766,7 @@ const Dark: TTheme = {
     svgFill: grayMaxLight,
     header: {
       height: "49px",
-      borderBottom: `1px solid #474747`,
+      borderBottom: `1px solid ${outerSpace}`,
       marginBottom: "6px",
     },
     height: "30px",
@@ -2791,7 +2784,7 @@ const Dark: TTheme = {
     mobileBorderRadius: "6px 6px 0 0",
     boxShadow: "0px 8px 16px 0px #040F1B29",
     padding: "6px 0px",
-    border: "1px solid #474747",
+    border: `1px solid ${outerSpace}`,
     devices: {
       maxHeight: "calc(100vh - 64px)",
       tabletWidth: "375px",
@@ -2821,8 +2814,8 @@ const Dark: TTheme = {
 
   filesEditingWrapper: {
     color: grayMaxLight,
-    border: "1px solid #474747",
-    borderBottom: "1px solid #474747",
+    border: `1px solid ${outerSpace}`,
+    borderBottom: `1px solid ${outerSpace}`,
 
     tile: {
       background: globalColors.black,
@@ -2913,7 +2906,7 @@ const Dark: TTheme = {
 
   facebookButton: {
     background: black,
-    border: "1px solid #474747",
+    border: `1px solid ${outerSpace}`,
     color: grayMaxLight,
   },
 
@@ -2928,7 +2921,7 @@ const Dark: TTheme = {
 
   peopleDialogs: {
     modal: {
-      border: "1px solid #474747",
+      border: `1px solid ${outerSpace}`,
     },
 
     deleteUser: {
@@ -2951,7 +2944,7 @@ const Dark: TTheme = {
   client: {
     about: {
       linkColor: "#E06A1B",
-      border: "1px solid #474747",
+      border: `1px solid ${outerSpace}`,
       logoColor: white,
     },
 
@@ -3001,7 +2994,7 @@ const Dark: TTheme = {
         expanderColor: "#c4c4c4",
       },
 
-      separatorBorder: "1px solid #474747",
+      separatorBorder: `1px solid ${outerSpace}`,
 
       security: {
         arrowFill: white,
@@ -3050,7 +3043,7 @@ const Dark: TTheme = {
         brandingDescriptionColor: grayDark,
 
         whiteLabel: {
-          borderImg: "1px solid #474747",
+          borderImg: `1px solid ${outerSpace}`,
 
           backgroundColorWhite: white,
           backgroundColorLight: grayLight,
@@ -3065,14 +3058,14 @@ const Dark: TTheme = {
       },
 
       integration: {
-        separatorBorder: "1px solid #474747",
+        separatorBorder: `1px solid ${outerSpace}`,
         linkColor: "#E06A1B",
 
         sso: {
           toggleContentBackground: outerSpace,
           iconButton: white,
           iconButtonDisabled: black,
-          border: "1px solid #474747",
+          border: `1px solid ${outerSpace}`,
         },
 
         smtp: {
@@ -3082,7 +3075,7 @@ const Dark: TTheme = {
 
       backup: {
         rectangleBackgroundColor: veryDarkGrey,
-        separatorBorder: "1px solid #474747",
+        separatorBorder: `1px solid ${outerSpace}`,
         warningColor: darkErrorStatus,
         textColor: "#ADADAD",
         backupCheckedListItemBackground: veryDarkGrey,
@@ -3095,7 +3088,7 @@ const Dark: TTheme = {
         backgroundColor: charlestonGreen,
         linkColor: link,
         tariffText: grayDark,
-        border: "1px solid #474747",
+        border: `1px solid ${outerSpace}`,
         backgroundBenefitsColor: "#3333",
         rectangleColor: veryDarkGrey,
 
@@ -3124,7 +3117,7 @@ const Dark: TTheme = {
         descriptionColor: "#ADADAD",
         subtitleColor: white,
         workspaceBackground: black,
-        workspaceBorder: "1px solid #474747",
+        workspaceBorder: `1px solid ${outerSpace}`,
         stepDescriptionColor: white,
         fileInputIconColor: grayBackgroundTextDark,
         infoBlockBackground: charlestonGreen,
@@ -3144,7 +3137,7 @@ const Dark: TTheme = {
         importItemDescription: gray,
         importIconColor: "#a9a9a9",
         groupMenuBackground: black,
-        groupMenuBorder: "1px solid #474747",
+        groupMenuBorder: `1px solid ${outerSpace}`,
         groupMenuBoxShadow: "rgba(0, 0, 0, 0.16) 0px 5px 5px 0px",
       },
       storageManagement: {
@@ -3218,7 +3211,7 @@ const Dark: TTheme = {
     },
     themePreview: {
       descriptionColor: "#ADADAD",
-      border: "1px solid #474747",
+      border: `1px solid ${outerSpace}`,
     },
     notifications: {
       textDescriptionColor: grayDark,
@@ -3249,11 +3242,11 @@ const Dark: TTheme = {
 
   codeInput: {
     background: charlestonGreen,
-    border: "1px solid #474747",
+    border: `1px solid ${outerSpace}`,
     color: white,
     lineColor: grayDark,
     disabledBackground: outerSpace,
-    disabledBorder: "1px solid #474747",
+    disabledBorder: `1px solid ${outerSpace}`,
     disabledColor: grayDark,
   },
 

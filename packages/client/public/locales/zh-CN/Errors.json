@@ -1,6 +1,5 @@
 {
   "ErrorEmptyResponse": "空响应",
-  "ErrorUnavailableText": "{{portalName}} 不可用",
   "LinkDoesNotExist": "链接不存在。",
   "LinkHasExpired": "您关注的链接已过期。"
 }

@@ -1,9 +1,7 @@
 {
   "AppointAdmin": "预约管理员",
   "ChangeUser": "变更用户",
-  "DeactivateOrDeletePortal": "停用或删除 {{portalName}}",
   "DoTheSame": "与管理员进行相同操作",
-  "ManagePortal": "管理 {{portalName}} 配置",
   "ManageUser": "管理用户账户",
   "SetAccessRights": "设置访问权限"
 }

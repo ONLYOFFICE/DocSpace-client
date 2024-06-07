@@ -1912,14 +1912,14 @@ export const getBaseTheme = () => {
 
       header: {
         borderBottom: "1px solid #eceef1",
-        iconFill: "#657077",
+        iconFill: grayMain,
       },
       control: {
         background: "#9a9ea3",
         fill: white,
       },
 
-      headerBurgerColor: "#657077",
+      headerBurgerColor: grayMain,
 
       verticalLine: "1px solid #eceef1",
 
@@ -1942,7 +1942,7 @@ export const getBaseTheme = () => {
 
     alertComponent: {
       descriptionColor: "#555F65",
-      iconColor: "#657077",
+      iconColor: grayMain,
     },
 
     catalogItem: {
@@ -1971,7 +1971,7 @@ export const getBaseTheme = () => {
           width: "16px",
           height: "16px",
 
-          fill: "#657077",
+          fill: grayMain,
           isActiveFill: "#4781D1",
           tablet: {
             width: "20px",
@@ -2053,8 +2053,8 @@ export const getBaseTheme = () => {
 
     header: {
       backgroundColor: grayLight,
-      recoveryColor: "#657077",
-      linkColor: "#657077",
+      recoveryColor: grayMain,
+      linkColor: grayMain,
       productColor: white,
       height: "48px",
     },
@@ -2070,7 +2070,7 @@ export const getBaseTheme = () => {
       catalogItemHeader: gray,
       catalogItemText: "#555F65",
       catalogItemActiveBackground: "#DFE2E3",
-      catalogShowText: "#657077",
+      catalogShowText: grayMain,
     },
 
     section: {
@@ -2114,7 +2114,7 @@ export const getBaseTheme = () => {
 
       members: {
         iconColor: gray,
-        iconHoverColor: "#657077",
+        iconHoverColor: grayMain,
         isExpectName: gray,
         subtitleColor: gray,
         meLabelColor: gray,
@@ -2142,7 +2142,7 @@ export const getBaseTheme = () => {
 
       gallery: {
         borderColor: grayMid,
-        descriptionColor: "#657077",
+        descriptionColor: grayMain,
       },
 
       search: {
@@ -2220,7 +2220,7 @@ export const getBaseTheme = () => {
         hoverBackground: grayLight,
         selectedViewIcon: "#dfe2e3",
         viewIcon: gray,
-        sortFill: "#657077",
+        sortFill: grayMain,
 
         tileSortFill: black,
         tileSortColor: black,
@@ -2382,8 +2382,8 @@ export const getBaseTheme = () => {
       border: `1px solid ${grayLightMid}`,
 
       breadCrumbs: {
-        prevItemColor: "#657077",
-        arrowRightColor: "#657077",
+        prevItemColor: grayMain,
+        arrowRightColor: grayMain,
       },
 
       info: {
@@ -2404,7 +2404,7 @@ export const getBaseTheme = () => {
       emptyScreen: {
         descriptionColor: cyanBlueDarkShade,
 
-        buttonColor: "#657077",
+        buttonColor: grayMain,
         hoverButtonColor: black,
         pressedButtonColor: "#555F65",
       },
@@ -2473,7 +2473,7 @@ export const getBaseTheme = () => {
     createEditRoomDialog: {
       commonParam: {
         descriptionColor: gray,
-        textColor: "#657077",
+        textColor: grayMain,
       },
 
       roomType: {
@@ -2567,7 +2567,7 @@ export const getBaseTheme = () => {
           borderColor: grayLight,
           hoverBorderColor: "#f3f4f4",
           color: "#555f65",
-          iconColor: "#657077",
+          iconColor: grayMain,
         },
       },
 
@@ -2590,7 +2590,7 @@ export const getBaseTheme = () => {
     },
 
     connectedClouds: {
-      color: "#657077",
+      color: grayMain,
       borderBottom: `1px solid #eceef1`,
       borderRight: `1px solid #d0d5da`,
     },
@@ -2621,7 +2621,7 @@ export const getBaseTheme = () => {
         color: cyanBlueDarkShade,
       },
       button: {
-        colorLink: "#657077",
+        colorLink: grayMain,
         colorText: "#555F65",
       },
     },
@@ -3063,7 +3063,7 @@ export const getBaseTheme = () => {
           tooltipLinkColor: black,
           arrowColor: black,
           descriptionColor: grayMain,
-          brandingDescriptionColor: "#657077",
+          brandingDescriptionColor: grayMain,
 
           whiteLabel: {
             borderImg: "1px solid #d1d1d1",
@@ -3127,12 +3127,12 @@ export const getBaseTheme = () => {
           },
 
           benefitsContainer: {
-            iconsColor: "#657077",
+            iconsColor: grayMain,
           },
 
           contactContainer: {
             textColor: gray,
-            linkColor: "#657077",
+            linkColor: grayMain,
           },
 
           warningColor: "#F21C0E",
@@ -3161,20 +3161,20 @@ export const getBaseTheme = () => {
           importItemTextColor: "#555f65",
           importItemDisableTextColor: gray,
           importItemDescription: black,
-          importIconColor: "#657077",
+          importIconColor: grayMain,
           groupMenuBackground: white,
           groupMenuBorder: "1px solid #fff",
           groupMenuBoxShadow: "rgba(4, 15, 27, 0.07) 0px 5px 5px 0px",
         },
         storageManagement: {
           grayBackgroundText: "#555F65",
-          descriptionColor: "#657077",
+          descriptionColor: grayMain,
         },
       },
 
       wizard: {
         linkColor: "#116d9d",
-        generatePasswordColor: "#657077",
+        generatePasswordColor: grayMain,
       },
     },
 
@@ -3205,7 +3205,7 @@ export const getBaseTheme = () => {
     submenu: {
       lineColor: grayLightMid,
       backgroundColor: white,
-      textColor: "#657077",
+      textColor: grayMain,
       activeTextColor: "#316DAA",
       bottomLineColor: "#316DAA",
     },
@@ -3319,7 +3319,7 @@ export const getBaseTheme = () => {
       },
       submitToGalleryTile: {
         bodyText: "#555F65",
-        closeIconFill: "#657077",
+        closeIconFill: grayMain,
       },
     },
 
@@ -3343,12 +3343,12 @@ export const getBaseTheme = () => {
     plugins: {
       borderColor: grayMid,
       pluginName: "#5C5C5C",
-      descriptionColor: "#657077",
+      descriptionColor: grayMain,
     },
 
     sdkPresets: {
       borderColor: grayMid,
-      secondaryColor: "#657077",
+      secondaryColor: grayMain,
       previewBackgroundColor: "#F3F4F4",
     },
     sideBarRow: {
@@ -3357,7 +3357,7 @@ export const getBaseTheme = () => {
     },
 
     dateTimePicker: {
-      colorClockIcon: "#657077",
+      colorClockIcon: grayMain,
     },
   };
 };

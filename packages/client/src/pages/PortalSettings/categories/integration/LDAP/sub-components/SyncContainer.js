@@ -149,7 +149,7 @@ const SyncContainer = ({
           <Button
             tabIndex={-1}
             className="auto-sync-button"
-            size="normal"
+            size={buttonSize}
             primary
             onClick={onSaveClick}
             label={t("Common:SaveButton")}

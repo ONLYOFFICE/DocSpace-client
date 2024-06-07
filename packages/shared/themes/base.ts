@@ -986,7 +986,7 @@ export const getBaseTheme = () => {
         default: "transparent",
         hover: grayLightMid,
         active: grayMid,
-        focus: "#DFE2E3",
+        focus: lightGrayishStrongBlue,
       },
 
       caret: {
@@ -1713,7 +1713,7 @@ export const getBaseTheme = () => {
 
         hoverBackgroundModernView: grayLightMid,
         activeBackgroundModernView: grayMid,
-        focusBackgroundModernView: "#DFE2E3",
+        focusBackgroundModernView: lightGrayishStrongBlue,
       },
 
       label: {
@@ -1794,7 +1794,7 @@ export const getBaseTheme = () => {
 
     calendar: {
       color: black,
-      disabledColor: "#DFE2E3",
+      disabledColor: lightGrayishStrongBlue,
       pastColor: gray,
       onHoverBackground: lightHover,
       titleColor: "#555F65",
@@ -2034,7 +2034,7 @@ export const getBaseTheme = () => {
 
       icon: {
         fill: "#316DAA",
-        stroke: "#DFE2E3",
+        stroke: lightGrayishStrongBlue,
       },
     },
 
@@ -2070,7 +2070,7 @@ export const getBaseTheme = () => {
       pinBorderColor: grayLightMid,
       catalogItemHeader: gray,
       catalogItemText: "#555F65",
-      catalogItemActiveBackground: "#DFE2E3",
+      catalogItemActiveBackground: lightGrayishStrongBlue,
       catalogShowText: grayMain,
     },
 
@@ -2219,7 +2219,7 @@ export const getBaseTheme = () => {
       sort: {
         background: white,
         hoverBackground: grayLight,
-        selectedViewIcon: "#dfe2e3",
+        selectedViewIcon: lightGrayishStrongBlue,
         viewIcon: gray,
         sortFill: grayMain,
 

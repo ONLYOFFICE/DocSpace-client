@@ -223,11 +223,11 @@ const Dark: TTheme = {
 
     buttonWrapper: {
       background: black,
-      uploadingBackground: "#242424",
+      uploadingBackground: grayDarkMid,
     },
 
     buttonOptions: {
-      backgroundColor: "#242424",
+      backgroundColor: grayDarkMid,
       color: "#ff0000",
     },
 
@@ -412,9 +412,9 @@ const Dark: TTheme = {
 
   iconButton: { color: "#858585", hoverColor: grayMaxLight },
   selectorAddButton: {
-    background: "#242424",
+    background: grayDarkMid,
     hoverBackground: charlestonGreen,
-    activeBackground: "#242424",
+    activeBackground: grayDarkMid,
 
     iconColor: "#858585",
     iconColorHover: white,
@@ -441,7 +441,7 @@ const Dark: TTheme = {
   },
 
   selectedItem: {
-    background: "#242424",
+    background: grayDarkMid,
     border: `1px solid #242424`,
     borderRadius: "3px",
 
@@ -462,7 +462,7 @@ const Dark: TTheme = {
       padding: "0 8px",
       color: grayMaxLight,
       colorHover: grayMaxLight,
-      backgroundColor: "#242424",
+      backgroundColor: grayDarkMid,
     },
   },
 
@@ -955,7 +955,7 @@ const Dark: TTheme = {
       default: "transparent",
       hover: "#474747",
       active: charlestonGreen,
-      focus: "#242424",
+      focus: grayDarkMid,
     },
     caret: {
       width: "5px",
@@ -981,7 +981,7 @@ const Dark: TTheme = {
     padding: "8px 12px",
     pointerEvents: "auto",
     maxWidth: "340px",
-    color: "#242424",
+    color: grayDarkMid,
     textColor: white,
     backgroundColor: charlestonGreen,
 
@@ -1178,7 +1178,7 @@ const Dark: TTheme = {
     },
 
     icon: {
-      background: "#242424",
+      background: grayDarkMid,
       color: "#ADADAD",
     },
 
@@ -1221,8 +1221,8 @@ const Dark: TTheme = {
       backgroundColor: "transparent",
 
       runnableTrack: {
-        background: "#242424",
-        focusBackground: "#242424",
+        background: grayDarkMid,
+        focusBackground: grayDarkMid,
         border: `1.4px solid #242424`,
         borderRadius: "5.6px",
         width: "100%",
@@ -1253,7 +1253,7 @@ const Dark: TTheme = {
       },
 
       rangeTrack: {
-        background: "#242424",
+        background: grayDarkMid,
         border: `1.4px solid #242424`,
         borderRadius: "5.6px",
         width: "100%",
@@ -1283,15 +1283,15 @@ const Dark: TTheme = {
       },
 
       fillLower: {
-        background: "#242424",
-        focusBackground: "#242424",
+        background: grayDarkMid,
+        focusBackground: grayDarkMid,
         border: `1.4px solid #242424`,
         borderRadius: "11.2px",
       },
 
       fillUpper: {
-        background: "#242424",
-        focusBackground: "#242424",
+        background: grayDarkMid,
+        focusBackground: grayDarkMid,
         border: `1.4px solid #242424`,
         borderRadius: "11.2px",
       },
@@ -1682,7 +1682,7 @@ const Dark: TTheme = {
 
       hoverBackgroundModernView: "#474747",
       activeBackgroundModernView: charlestonGreen,
-      focusBackgroundModernView: "#242424",
+      focusBackgroundModernView: grayDarkMid,
     },
 
     label: {
@@ -2108,7 +2108,7 @@ const Dark: TTheme = {
     details: {
       customLogoBorderColor: "#474747",
       commentEditorIconColor: grayMaxLight,
-      tagBackground: "#242424",
+      tagBackground: grayDarkMid,
     },
 
     gallery: {
@@ -2200,7 +2200,7 @@ const Dark: TTheme = {
     },
 
     selectedItems: {
-      background: "#242424",
+      background: grayDarkMid,
       hoverBackground: "#3d3d3d",
     },
   },
@@ -2495,7 +2495,7 @@ const Dark: TTheme = {
     },
 
     tagInput: {
-      tagBackground: "#242424",
+      tagBackground: grayDarkMid,
       tagHoverBackground: "#3D3D3D",
     },
 
@@ -2819,7 +2819,7 @@ const Dark: TTheme = {
 
     tile: {
       background: globalColors.black,
-      itemBackground: "#242424",
+      itemBackground: grayDarkMid,
       itemBorder: gray,
       itemActiveBorder: grayMaxLight,
     },

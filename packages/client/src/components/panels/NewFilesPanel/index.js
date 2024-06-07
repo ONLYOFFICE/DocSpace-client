@@ -145,10 +145,9 @@ const NewFilesPanel = (props) => {
 
     const item = newFiles.find((file) => file.id.toString() === id);
 
+    onFileClick(item);
     markAsRead(folderIds, fileIds, item)
       .then(() => {
-        onFileClick(item);
-
         const newListFiles = listFiles.filter(
           (file) => file.id.toString() !== id,
         );
@@ -262,7 +261,7 @@ const NewFilesPanel = (props) => {
         }
       }
 
-      return window.open(webUrl, "_blank");
+      return window.open(webUrl, openOnNewPage ? "_blank" : "_self");
     }
   };
 

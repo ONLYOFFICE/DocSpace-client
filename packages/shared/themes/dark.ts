@@ -68,6 +68,7 @@ const {
   charlestonGreen,
   outerSpace,
   veryDarkGrey,
+  grayBackgroundTextDark,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -80,7 +81,7 @@ const Dark: TTheme = {
 
   text: {
     color: grayMaxLight,
-    disableColor: "#5c5c5c",
+    disableColor: grayBackgroundTextDark,
     emailColor: gray,
     fontWeight: "normal",
     fontWeightBold: "bold",
@@ -524,7 +525,7 @@ const Dark: TTheme = {
 
   radioButton: {
     textColor: grayMaxLight,
-    textDisableColor: "#5c5c5c",
+    textDisableColor: grayBackgroundTextDark,
 
     marginBeforeLabel: "8px",
 
@@ -631,7 +632,7 @@ const Dark: TTheme = {
     margin: " 0 auto",
     minHeight: "100%",
 
-    colorDisabledFileIcons: "#5c5c5c",
+    colorDisabledFileIcons: grayBackgroundTextDark,
 
     backdrop: {
       backgroundRGBA: {
@@ -933,7 +934,7 @@ const Dark: TTheme = {
     paddingRight: "20px",
     semiTransparentOpacity: "0.5",
     textDecoration: "none",
-    disableColor: "#5c5c5c",
+    disableColor: grayBackgroundTextDark,
 
     svg: {
       opacity: "1",
@@ -1344,7 +1345,7 @@ const Dark: TTheme = {
   },
 
   treeMenu: {
-    disabledColor: "#5c5c5c",
+    disabledColor: grayBackgroundTextDark,
   },
 
   treeNode: {
@@ -2133,7 +2134,7 @@ const Dark: TTheme = {
 
     downloadAppList: {
       textColor: grayDark,
-      color: "#5C5C5C",
+      color: grayBackgroundTextDark,
       winHoverColor: "#3785D3",
       macHoverColor: white,
       linuxHoverColor: "#FFB800",
@@ -2647,7 +2648,7 @@ const Dark: TTheme = {
     content: {
       backgroundColor: black,
       fill: grayMaxLight,
-      disabledFill: "#5c5c5c",
+      disabledFill: grayBackgroundTextDark,
     },
 
     body: {
@@ -2663,7 +2664,7 @@ const Dark: TTheme = {
     linkRow: {
       backgroundColor: black,
       fill: grayMaxLight,
-      disabledFill: "#5c5c5c",
+      disabledFill: grayBackgroundTextDark,
     },
 
     selectFolder: {
@@ -2688,7 +2689,7 @@ const Dark: TTheme = {
     modalRow: {
       backgroundColor: black,
       fill: gray,
-      disabledFill: "#5c5c5c",
+      disabledFill: grayBackgroundTextDark,
     },
 
     sharing: {
@@ -3102,7 +3103,7 @@ const Dark: TTheme = {
           featureTextColor: grayDark,
           disableColor: grayDark,
           trackNumberColor: grayDark,
-          disablePriceColor: "#5C5C5C",
+          disablePriceColor: grayBackgroundTextDark,
         },
 
         benefitsContainer: {
@@ -3122,7 +3123,7 @@ const Dark: TTheme = {
         workspaceBackground: black,
         workspaceBorder: "1px solid #474747",
         stepDescriptionColor: white,
-        fileInputIconColor: "#5c5c5c",
+        fileInputIconColor: grayBackgroundTextDark,
         infoBlockBackground: charlestonGreen,
         infoBlockTextColor: grayDark,
         errorTextColor: "#E06451",
@@ -3136,7 +3137,7 @@ const Dark: TTheme = {
         importItemBackground: black,
         importItemDisableBackground: veryDarkGrey,
         importItemTextColor: "#ADADAD",
-        importItemDisableTextColor: "#5C5C5C",
+        importItemDisableTextColor: grayBackgroundTextDark,
         importItemDescription: gray,
         importIconColor: "#a9a9a9",
         groupMenuBackground: black,

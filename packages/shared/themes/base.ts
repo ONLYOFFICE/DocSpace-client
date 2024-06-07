@@ -93,6 +93,7 @@ const {
 
   lightErrorStatus,
   charlestonGreen,
+  grayBackgroundTextDark,
 } = globalColors;
 
 export const getBaseTheme = () => {
@@ -3343,7 +3344,7 @@ export const getBaseTheme = () => {
 
     plugins: {
       borderColor: grayMid,
-      pluginName: "#5C5C5C",
+      pluginName: grayBackgroundTextDark,
       descriptionColor: grayMain,
     },
 

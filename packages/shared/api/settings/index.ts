@@ -904,6 +904,14 @@ export function getUserSessionsById(userId) {
   });
 }
 
+export function removeAllActiveSessionsById(userId) {
+  return request({
+    method: "put",
+    url: `/security/activeconnections/logoutall/${userId}`,
+    data: { userId },
+  });
+}
+
 export function removeAllActiveSessions() {
   return request({
     method: "put",

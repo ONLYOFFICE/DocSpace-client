@@ -1,5 +1,6 @@
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
 import styled from "styled-components";
 import RowWrapper from "./sub-components";
 
@@ -19,10 +20,25 @@ const Wrapper = styled.div`
 `;
 
 const AllSessionsBlock = (props) => {
-  const { t, sessionData } = props;
+  const {
+    t,
+    sessionData,
+    removeAllActiveSessionsById,
+    setSessionModalData,
+    fetchData,
+  } = props;
 
-  const onLogoutClick = () => {
-    console.log("Logout all sessions");
+  const isDisabled = sessionData.length > 0;
+
+  const onLogoutClick = async () => {
+    try {
+      await removeAllActiveSessionsById(sessionData[0]?.userId);
+      await fetchData();
+      setSessionModalData([]);
+      toastr.success("Successfully logout all sessions");
+    } catch (error) {
+      toastr.error(error);
+    }
   };
 
   return (
@@ -36,6 +52,7 @@ const AllSessionsBlock = (props) => {
           onClick={onLogoutClick}
           scale={true}
           isLoading={false}
+          isDisabled={!isDisabled}
         />
       </Wrapper>
 

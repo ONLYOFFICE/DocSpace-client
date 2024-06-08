@@ -30,6 +30,7 @@ import { StyledTabs, Tab, TabList, TabPanel, TabSubLine } from "./Tabs.styled";
 import { TabsProps, TTabItem } from "./Tabs.types";
 import { ThemeTabs } from "./Tabs.enums";
 import { OFFSET_RIGHT, OFFSET_LEFT } from "./Tabs.constants";
+import { useViewTab } from "./hooks/useViewTab";
 
 const Tabs = (props: TabsProps) => {
   const {
@@ -44,6 +45,9 @@ const Tabs = (props: TabsProps) => {
   const tabsRef = useRef() as MutableRefObject<HTMLDivElement>;
 
   const [currentItem, setCurrentItem] = useState<TTabItem>(items[selectedItem]);
+
+  const isViewFirstTab = useViewTab(tabsRef, 0);
+  const isViewLastTab = useViewTab(tabsRef, items.length - 1);
 
   const scrollToTab = (index: number) => {
     const tabElement = tabsRef.current.children[index] as HTMLElement;
@@ -75,6 +79,7 @@ const Tabs = (props: TabsProps) => {
 
   return (
     <StyledTabs>
+      {!isViewFirstTab && <div className="blur-ahead" />}
       <TabList $theme={theme} ref={tabsRef}>
         {items.map((item, index) => {
           const isActive = item.id === currentItem.id;
@@ -99,6 +104,7 @@ const Tabs = (props: TabsProps) => {
           );
         })}
       </TabList>
+      {!isViewLastTab && <div className="blur-back" />}
       <div className="sticky-indent" />
 
       <TabPanel>{currentItem?.content}</TabPanel>

@@ -3186,6 +3186,7 @@ const Dark: TTheme = {
   },
 
   tabs: {
+    gradientColor: black,
     lineColor: "#474747",
 
     textColorPrimary: "#657077",

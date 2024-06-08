@@ -35,6 +35,34 @@ export const StyledTabs = styled.div`
   .sticky-indent {
     height: 20px;
   }
+
+  .blur-ahead {
+    position: absolute;
+    height: 32px;
+    width: 60px;
+    pointer-events: none;
+
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 20.48%,
+      ${(props) => props.theme.tabs.gradientColor} 100%
+    );
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+  }
+
+  .blur-back {
+    position: absolute;
+    height: 32px;
+    width: 60px;
+    right: 0;
+    pointer-events: none;
+
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 20.48%,
+      ${(props) => props.theme.tabs.gradientColor} 100%
+    );
+  }
 `;
 
 StyledTabs.defaultProps = { theme: Base };

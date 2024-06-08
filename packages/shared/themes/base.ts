@@ -3210,6 +3210,7 @@ export const getBaseTheme = () => {
     },
 
     tabs: {
+      gradientColor: white,
       lineColor: "#eceef1",
 
       textColorPrimary: "#657077",

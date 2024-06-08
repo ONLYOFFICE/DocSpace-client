@@ -27,20 +27,24 @@
 import { ThemeTabs } from "./Tabs.enums";
 
 export type TTabItem = {
+  /** Element id. */
   id: string;
+  /** Tab text. */
   name: string;
+  /** State of tab inclusion. State only works for tabs with a secondary theme. */
+  isDisabled?: boolean;
+  /** Content that is shown when you click on the tab.  */
   content: React.ReactNode;
+  /** Sets a callback function that is triggered when the tab is selected */
   onClick?: () => void;
 };
 
 export interface TabsProps {
-  /** Child elements */
+  /** Child elements. */
   items: TTabItem[];
-  /** Disables the TabContainer  */
-  isDisabled: boolean;
-  /** Sets a callback function that is triggered when the title is selected */
+  /** Sets a callback function that is triggered when the tab is selected. */
   onSelect: (element: TTabItem) => void;
-  /** Selected title of tabs container */
+  /** Selected title of tabs container. */
   selectedItem: number;
   /** Theme for displaying tabs. */
   theme?: ThemeTabs;

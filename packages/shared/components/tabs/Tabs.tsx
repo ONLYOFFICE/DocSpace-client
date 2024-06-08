@@ -36,7 +36,6 @@ const Tabs = (props: TabsProps) => {
   const {
     items,
     theme = ThemeTabs.Primary,
-    isDisabled,
     onSelect,
     selectedItem = 0,
   } = props;
@@ -87,6 +86,7 @@ const Tabs = (props: TabsProps) => {
             <Tab
               key={item.id}
               isActive={isActive}
+              isDisabled={item?.isDisabled}
               $currentColorScheme={globalTheme.currentColorScheme}
               $theme={theme}
               onClick={() => {

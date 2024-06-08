@@ -91,6 +91,7 @@ TabList.defaultProps = { theme: Base };
 
 export const Tab = styled.div<{
   isActive: boolean;
+  isDisabled?: boolean;
   $currentColorScheme?: TColorScheme;
   $theme?: ThemeTabs;
 }>`
@@ -102,8 +103,8 @@ export const Tab = styled.div<{
   width: max-content;
   font-weight: 600;
   cursor: pointer;
-
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  opacity: ${(props) => (props.isDisabled && props.$theme === ThemeTabs.Secondary ? 0.6 : 1)};
+  pointer-events: ${(props) => props.isDisabled && props.$theme === ThemeTabs.Secondary && "none"};
 
   padding: ${(props) =>
     props.$theme === ThemeTabs.Primary ? "4px 0 0 0" : "4px 16px"};

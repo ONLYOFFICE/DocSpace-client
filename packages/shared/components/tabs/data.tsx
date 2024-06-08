@@ -24,10 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const tabsItems = [
+import { TTabItem } from "./Tabs.types";
+
+export const tabsItems: TTabItem[] = [
   {
     id: "tab0",
     name: "name00000000",
+    isDisabled: true,
     content: (
       <>
         <label>Tab_0 Tab_0 Tab_0</label>
@@ -54,6 +57,7 @@ export const tabsItems = [
   {
     id: "tab2",
     name: "02",
+    isDisabled: true,
     content: (
       <>
         <label>Tab_2 Tab_2 Tab_2</label>
@@ -67,6 +71,7 @@ export const tabsItems = [
   {
     id: "tab3",
     name: "na003",
+    isDisabled: true,
     content: (
       <>
         <label>Tab_3 Tab_3 Tab_3</label>

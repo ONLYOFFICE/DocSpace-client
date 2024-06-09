@@ -31,10 +31,10 @@ export type TTabItem = {
   id: string;
   /** Tab text. */
   name: string;
-  /** State of tab inclusion. State only works for tabs with a secondary theme. */
-  isDisabled?: boolean;
   /** Content that is shown when you click on the tab.  */
   content: React.ReactNode;
+  /** State of tab inclusion. State only works for tabs with a secondary theme. */
+  isDisabled?: boolean;
   /** Sets a callback function that is triggered when the tab is selected */
   onClick?: () => void;
 };
@@ -42,10 +42,10 @@ export type TTabItem = {
 export interface TabsProps {
   /** Child elements. */
   items: TTabItem[];
-  /** Sets a callback function that is triggered when the tab is selected. */
-  onSelect: (element: TTabItem) => void;
-  /** Selected title of tabs container. */
-  selectedItem: number;
+  /** Selected item of tabs. */
+  selectedItemIndex?: number;
   /** Theme for displaying tabs. */
   theme?: ThemeTabs;
+  /** Sets a callback function that is triggered when the tab is selected. */
+  onSelect?: (element: TTabItem) => void;
 }

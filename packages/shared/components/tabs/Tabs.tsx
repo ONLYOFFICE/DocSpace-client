@@ -35,15 +35,17 @@ import { useViewTab } from "./hooks/useViewTab";
 const Tabs = (props: TabsProps) => {
   const {
     items,
+    selectedItemIndex = 0,
     theme = ThemeTabs.Primary,
     onSelect,
-    selectedItem = 0,
   } = props;
 
   const globalTheme = useTheme();
   const tabsRef = useRef() as MutableRefObject<HTMLDivElement>;
 
-  const [currentItem, setCurrentItem] = useState<TTabItem>(items[selectedItem]);
+  const [currentItem, setCurrentItem] = useState<TTabItem>(
+    items[selectedItemIndex],
+  );
 
   const isViewFirstTab = useViewTab(tabsRef, 0);
   const isViewLastTab = useViewTab(tabsRef, items.length - 1);

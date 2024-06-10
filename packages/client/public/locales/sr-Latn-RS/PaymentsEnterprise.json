@@ -7,7 +7,7 @@
   "ActivateRenewDescr": "Da biste dobili vaše lične uslove obnove, kontaktirajte vašeg posvećenog menadžera ili nam pišite na <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Obnovite pretplatu za Enterprise",
   "ActivateSwithToProHeader": "Prebacite se na punu Enterprise verziju",
-  "ActivateTariffDescr": "Koristite ONLYOFFICE {{portalName}} Enterprise.",
+  "ActivateTariffDescr": "Koristite {{organizationName}} {{portalName}} Enterprise.",
   "ActivateTariffEnterpriseExpiration": "Vaša pretplata ističe {{date}}.",
   "ActivateTariffEnterpriseTrialExpiration": "Vaš probni period ističe {{date}}.",
   "ActivateToProBannerHeaderTrial": "Kupite punu Enterprise verziju da dobijete:",

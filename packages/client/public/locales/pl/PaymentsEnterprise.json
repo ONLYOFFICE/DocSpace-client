@@ -7,7 +7,7 @@
   "ActivateRenewDescr": "Aby uzyskać indywidualne warunki odnowienia, skontaktuj się z osobistym menedżerem lub napisz do nas na adres <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Odnów subskrypcję Enterprise",
   "ActivateSwithToProHeader": "Przełącz się na pełną wersję Enterprise",
-  "ActivateTariffDescr": "Korzystasz z ONLYOFFICE {{portalName}} Enterprise.",
+  "ActivateTariffDescr": "Korzystasz z {{organizationName}} {{portalName}} Enterprise.",
   "ActivateTariffEnterpriseExpiration": "Twoja subskrypcja wygaśnie {{date}}.",
   "ActivateTariffEnterpriseTrialExpiration": "Twój okres próbny wygaśnie {{date}}.",
   "ActivateToProBannerHeaderTrial": "Kup pełną wersję Enterprise, aby uzyskać:",

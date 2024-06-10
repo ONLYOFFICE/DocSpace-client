@@ -7,7 +7,7 @@
   "ActivateRenewDescr": "Pentru termeni și condiții de reînnoire personale, contactați managerul dvs personal sau trimiteți un mesaj email la <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Reînnoire abonamentul Enterprise",
   "ActivateSwithToProHeader": "Comutare la versiunea completă Enterprise",
-  "ActivateTariffDescr": "Utilizați ONLYOFFICE {{portalName}} Enterprise.",
+  "ActivateTariffDescr": "Utilizați {{organizationName}} {{portalName}} Enterprise.",
   "ActivateTariffEnterpriseExpiration": "Abonamentul dvs expiră pe {{date}}.",
   "ActivateTariffEnterpriseTrialExpiration": "Versiunea dvs de încercare expiră pe {{date}}.",
   "ActivateToProBannerHeaderTrial": "Cumpărați versiunea completă Enterprise și obțineți:",

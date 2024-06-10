@@ -1,5 +1,5 @@
 {
-  "ActionCannotBeUndone": "Os usuários desabilitados selecionados serão removidos do DocSpace. Essa ação não pode ser desfeita.",
+  "ActionCannotBeUndone": "Os usuários desabilitados selecionados serão removidos do {{portalName}}. Essa ação não pode ser desfeita.",
   "CannotReassignFiles": "Se você excluir vários usuários de uma vez, não poderá reatribuir seus arquivos a outros usuários.",
   "DeleteGroupUsersSuccessMessage": "Os usuários foram excluídos com sucesso.",
   "DeleteMyDocumentsUser": "Todos os arquivos e pastas pessoais na seção Meus documentos deste usuário serão excluídos permanentemente.",

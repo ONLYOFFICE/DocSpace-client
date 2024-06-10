@@ -1,6 +1,6 @@
 {
   "ErrorEmptyResponse": "Không có hồi đáp",
-  "ErrorUnavailableText": "DocSpace không khả dụng",
+  "ErrorUnavailableText": "{{portalName}} không khả dụng",
   "LinkDoesNotExist": "Liên kết bạn đang cố gắng mở không tồn tại.",
   "LinkHasExpired": "Liên kết bạn theo dõi đã hết hạn."
 }

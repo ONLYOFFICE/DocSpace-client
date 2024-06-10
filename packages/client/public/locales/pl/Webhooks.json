@@ -46,7 +46,7 @@
   "URL": "URL",
   "ViewRawPayload": "Zobacz nieprzetworzone dane właściwe",
   "WebhookCreated": "Webhook został utworzony",
-  "WebhookCreationHint": "Dany webhook zostanie przypisany do wszystkich zdarzeń w DocSpace",
+  "WebhookCreationHint": "Dany webhook zostanie przypisany do wszystkich zdarzeń w {{portalName}}",
   "WebhookDetails": "Szczegóły webhooka",
   "WebhookEditedSuccessfully": "Konfiguracja webhooka została pomyślnie zmieniona",
   "WebhookHistory": "Historia webhooka",
@@ -55,5 +55,5 @@
   "WebhookRemoved": "Webhook został usunięty",
   "Webhooks": "Webhooki",
   "WebhooksGuide": "Przewodnik po webhookach",
-  "WebhooksInfo": "Używaj webhooków do wykonywania niestandardowych działań po stronie dowolnej aplikacji lub witryny internetowej, z której korzystasz na podstawie różnych zdarzeń w ONLYOFFICE DocSpace.\nTutaj możesz tworzyć webhooki, zarządzać nimi, konfigurować je, a także przeglądać historię wszystkich webhooków, by zweryfikować ich wydajność."
+  "WebhooksInfo": "Używaj webhooków do wykonywania niestandardowych działań po stronie dowolnej aplikacji lub witryny internetowej, z której korzystasz na podstawie różnych zdarzeń w ONLYOFFICE {{portalName}}.\nTutaj możesz tworzyć webhooki, zarządzać nimi, konfigurować je, a także przeglądać historię wszystkich webhooków, by zweryfikować ich wydajność."
 }

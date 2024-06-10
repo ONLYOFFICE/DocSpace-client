@@ -46,7 +46,7 @@
   "URL": "URL",
   "ViewRawPayload": "Ruwe payload bekijken",
   "WebhookCreated": "Webhook gemaakt",
-  "WebhookCreationHint": "Deze webhook wordt toegewezen aan alle gebeurtenissen in DocSpace",
+  "WebhookCreationHint": "Deze webhook wordt toegewezen aan alle gebeurtenissen in {{portalName}}",
   "WebhookDetails": "Webhook details",
   "WebhookEditedSuccessfully": "Webhook configuratie succesvol bewerkt",
   "WebhookHistory": "Webhook geschiedenis",
@@ -55,5 +55,5 @@
   "WebhookRemoved": "Webhook verwijderd",
   "Webhooks": "Webhooks",
   "WebhooksGuide": "Webhooks Gids",
-  "WebhooksInfo": "Gebruik webhooks om aangepaste acties uit te voeren aan de kant van elke toepassing of website die u gebruikt op basis van verschillende gebeurtenissen in ONLYOFFICE DocSpace.\nHier kunt u al uw webhooks aanmaken en beheren, ze configureren en door de geschiedenis van elke webhook bladeren om hun prestaties te controleren."
+  "WebhooksInfo": "Gebruik webhooks om aangepaste acties uit te voeren aan de kant van elke toepassing of website die u gebruikt op basis van verschillende gebeurtenissen in ONLYOFFICE {{portalName}}.\nHier kunt u al uw webhooks aanmaken en beheren, ze configureren en door de geschiedenis van elke webhook bladeren om hun prestaties te controleren."
 }

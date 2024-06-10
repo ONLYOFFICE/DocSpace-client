@@ -36,6 +36,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 
 import { getMessageFromKey, getMessageKeyTranslate } from "@/utils";
+import { PORTAL } from "@docspace/shared/constants";
 
 const homepage = "/";
 
@@ -68,12 +69,21 @@ const InvalidError = ({ match }: InvalidErrorProps) => {
   return (
     <ErrorContainer headerText={errorTitle}>
       <Text fontSize="13px" fontWeight="600">
-        <Trans t={t} i18nKey="ErrorInvalidText">
-          In 10 seconds you will be redirected to the
-          <Link className="error_description_link" href={proxyHomepageUrl}>
-            DocSpace
-          </Link>
-        </Trans>
+        <Trans
+          t={t}
+          i18nKey="ErrorInvalidText"
+          values={{
+            portalName: PORTAL,
+          }}
+          components={{
+            1: (
+              <Link
+                className="error_description_link"
+                href={proxyHomepageUrl}
+              />
+            ),
+          }}
+        />
       </Text>
     </ErrorContainer>
   );

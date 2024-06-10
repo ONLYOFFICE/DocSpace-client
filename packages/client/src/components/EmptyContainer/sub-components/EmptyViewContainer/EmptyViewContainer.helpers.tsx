@@ -46,6 +46,7 @@ import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
 import type { EmptyViewItemType } from "@docspace/shared/components/empty-view";
+import { PORTAL } from "@docspace/shared/constants";
 
 import type {
   ExtensiontionType,
@@ -91,7 +92,9 @@ export const getDescription = (
         t("EmptyView:FormFolderDefaultUserDescription"),
       )
       .with([FolderType.FormRoom, null, P._], () =>
-        t("EmptyView:FormFolderDefaultDescription"),
+        t("EmptyView:FormFolderDefaultDescription", {
+          portalName: PORTAL,
+        }),
       )
       .otherwise(() => "");
   }
@@ -309,7 +312,7 @@ const helperOptions = (
 export const getOptions = (
   type: RoomsType,
   security: Nullable<TFolderSecurity | TRoomSecurity>,
-  t: (str: string) => string,
+  t: TTranslation,
   access: AccessType,
   isFolder: boolean,
   folderType: Nullable<FolderType>,
@@ -332,14 +335,18 @@ export const getOptions = (
   } = helperOptions(actions, security);
 
   const uploadPDFFromDocSpace = createUploadFromDocSpace(
-    t("EmptyView:UploadFromDocSpaceTitle"),
+    t("EmptyView:UploadFromDocSpaceTitle", {
+      portalName: PORTAL,
+    }),
     t("EmptyView:UploadPDFFormOptionDescription"),
     FilesSelectorFilterTypes.PDF,
   );
 
   const uploadAllFromDocSpace = createUploadFromDocSpace(
-    t("EmptyView:UploadFromDocSpaceTitle"),
-    t("EmptyView:UploadFromDocSpaceDescription"),
+    t("EmptyView:UploadFromPortalTitle", {
+      portalName: PORTAL,
+    }),
+    t("EmptyView:UploadFromPortalDescription"),
     // TODO: need fix selector
     FilesSelectorFilterTypes.ALL,
   );

@@ -28,7 +28,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { DOCSPACE } from "@docspace/shared/constants";
+import { DOCSPACE, PORTAL } from "@docspace/shared/constants";
 import { inject, observer } from "mobx-react";
 
 import { mobile, tablet } from "@docspace/shared/utils/device";
@@ -144,7 +144,7 @@ const PortalIntegration = (props) => {
   const presetsData = [
     {
       title: DOCSPACE,
-      description: t("DocspaceDescription"),
+      description: t("DocspaceDescription", { portalName: PORTAL }),
       image: theme.isBase ? DocspaceImg : DocspaceImgDark,
       handleOnClick: navigateToDocspace,
     },
@@ -180,7 +180,7 @@ const PortalIntegration = (props) => {
     },
     {
       title: t("Common:Custom"),
-      description: t("CustomDescription"),
+      description: t("CustomDescription", { portalName: PORTAL }),
       image: theme.isBase ? CustomImg : CustomImgDark,
       handleOnClick: navigateToCustom,
     },
@@ -206,7 +206,9 @@ const PortalIntegration = (props) => {
   return (
     <SDKContainer>
       <CategoryDescription>
-        <Text className="sdk-description">{t("SDKDescription")}</Text>
+        <Text className="sdk-description">
+          {t("SDKDescription", { portalName: PORTAL })}
+        </Text>
         <Link
           color={currentColorScheme?.main?.accent}
           fontSize="13px"
@@ -218,7 +220,9 @@ const PortalIntegration = (props) => {
         </Link>
         <CSP t={t} />
       </CategoryDescription>
-      <CategoryHeader>{t("SelectModeEmbedding")}</CategoryHeader>
+      <CategoryHeader>
+        {t("SelectModeEmbedding", { portalName: PORTAL })}
+      </CategoryHeader>
       <Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
         {t("InitializeSDK")}
       </Text>

@@ -31,7 +31,7 @@
   "GalleryEmptyScreenText": "Detalii despre formular șablon aici",
   "GroupsEmptyScreenText": "Detaliile grupei aici",
   "HistoryEmptyScreenText": "Istoricul activităților va fi afișat aici",
-  "InfoBanner": "Lista de invitați cuprinde proprietarul și/sau administratorii acestui spațiu DocSpace acces complet la toate sălile. Proprietarului și/sau administratorului nu li se poate acorda alte drepturi de acces. Odată adăugate în sala, vor primi notificări despre toate modificări.",
+  "InfoBanner": "Lista de invitați cuprinde proprietarul și/sau administratorii acestui spațiu {{portalName}} acces complet la toate sălile. Proprietarului și/sau administratorului nu li se poate acorda alte drepturi de acces. Odată adăugate în sala, vor primi notificări despre toate modificări.",
   "ItemsSelected": "Elemente selectate",
   "LastModifiedBy": "Modificat ultima dată de către",
   "Properties": "Proprietăţi",

@@ -7,7 +7,7 @@
   "CreateNewFileTitle": "Create a new file",
   "CustomRoomEmptyTitle": "Welcome to the Custom room",
   "EmptyDescription": "Get started with quick actions:",
-  "FormFolderDefaultDescription": "Drop PDF forms here or upload from DocSpace or device.",
+  "FormFolderDefaultDescription": "Drop PDF forms here or upload from {{portalName}} or device.",
   "FormFolderDefaultTitle": "No forms here yet",
   "FormFolderDefaultUserDescription": "The forms uploaded by the administrators will be appeared here.",
   "FormFolderDefaultUserTitle": "No forms in this folder yet",
@@ -21,9 +21,9 @@
   "UploadDeviceOptionTitle": "Upload from your Device",
   "UploadDevicePDFFormOptionDescription": "Upload a ready PDF form to the room from your device.",
   "UploadDevicePDFFormOptionTitle": "Upload from device",
-  "UploadFromDocSpaceDescription": "Upload any type files from Documents or Rooms",
-  "UploadFromDocSpaceTitle": "Upload from DocSpace",
-  "UploadPDFFormOptionDescription": "Select a ready PDF form available in DocSpace and upload it to the room.",
+  "UploadFromPortalDescription": "Upload any type files from Documents or Rooms",
+  "UploadFromPortalTitle": "Upload from {{portalName}}",
+  "UploadPDFFormOptionDescription": "Select a ready PDF form available in {{portalName}} and upload it to the room.",
   "UserEmptyDescription": "Files and folders uploaded by admins will appeared here.",
   "UserEmptyTitle": "No docs here yet"
 }

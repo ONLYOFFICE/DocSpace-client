@@ -1,6 +1,6 @@
 {
   "ErrorEmptyResponse": "Դատարկ պատասխան",
-  "ErrorUnavailableText": "DocSpace-ը առկա չէ",
+  "ErrorUnavailableText": "{{portalName}}-ը առկա չէ",
   "LinkDoesNotExist": "Հղումը, որը փորձում եք բացել, գոյություն չունի:",
   "LinkHasExpired": "Ձեր հետևած հղումը ժամկետանց է:"
 }

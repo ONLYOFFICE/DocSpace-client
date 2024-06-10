@@ -45,6 +45,7 @@ import { DropDown } from "@docspace/shared/components/drop-down";
 import { useNavigate } from "react-router-dom";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
+import { PORTAL } from "@docspace/shared/constants";
 
 const StyledWrapper = styled.div`
   display: contents;
@@ -263,8 +264,8 @@ const PeopleTableRow = (props) => {
 
     const adminOption = {
       key: "admin",
-      title: t("Common:DocspaceAdmin"),
-      label: t("Common:DocspaceAdmin"),
+      title: t("Common:DocspaceAdmin", { portalName: PORTAL }),
+      label: t("Common:DocspaceAdmin", { portalName: PORTAL }),
       action: "admin",
     };
     const managerOption = {
@@ -342,7 +343,7 @@ const PeopleTableRow = (props) => {
       case "owner":
         return t("Common:Owner");
       case "admin":
-        return t("Common:DocspaceAdmin");
+        return t("Common:DocspaceAdmin", { portalName: PORTAL });
       case "manager":
         return t("Common:RoomAdmin");
       case "collaborator":
@@ -585,7 +586,6 @@ const PeopleTableRow = (props) => {
               color={sideInfoColor}
               onClick={onEmailClick}
               isTextOverflow
-              enableUserSelect
               dir="auto"
             >
               {email}

@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "Numire administratori ",
-  "BackupPortal": "Creați o copie de rezervă a datelor din spațiul DocSpace",
-  "ChangeInstruction": "Pentru a schimba proprietarul DocSpace, alegeţi numele noului proprietar mai jos.",
-  "ChangeOwner": "Modificare proprietar DocSpace",
+  "BackupPortal": "Creați o copie de rezervă a datelor din spațiul {{portalName}}",
+  "ChangeInstruction": "Pentru a schimba proprietarul {{portalName}}, alegeţi numele noului proprietar mai jos.",
+  "ChangeOwner": "Modificare proprietar {{portalName}}",
   "ChangeUser": "Schimbare utilizator",
-  "DeactivateOrDeletePortal": "Dezactivare sau ştergere DocSpace ",
+  "DeactivateOrDeletePortal": "Dezactivare sau ştergere {{portalName}} ",
   "DoTheSame": "Faceţi aceleaşi lucruri ca și administratori",
-  "ManagePortal": "Gestionați configurarea spațiului DocSpace",
+  "ManagePortal": "Gestionați configurarea spațiului {{portalName}}",
   "ManageUser": "Gestionați conturile de utilizator",
-  "NewPortalOwner": "Proprietarul nou al DocSpace",
-  "PortalOwnerCan": "Proprietarul DocSpace poate:",
+  "NewPortalOwner": "Proprietarul nou al {{portalName}}",
+  "PortalOwnerCan": "Proprietarul {{portalName}} poate:",
   "SetAccessRights": "Configurare drepturi de acces "
 }

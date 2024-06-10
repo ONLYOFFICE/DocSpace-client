@@ -48,7 +48,7 @@
   "SPEntityId": "SP Entity Id (liên kết đến siêu dữ liệu XML)",
   "SPEntityIdTooltip": "Địa chỉ URL XML của nhà cung cấp dịch vụ có thể được tải xuống và sử dụng bởi nhà cung cấp danh tính để xác định rõ ràng SP",
   "SpMetadata": "Siêu dữ liệu ONLYOFFICE SP",
-  "SpMetadataDescription": "Truy cập siêu dữ liệu của Nhà cung cấp Dịch vụ để thêm ONLYOFFICE DocSpace làm Nhà cung cấp Dịch vụ đáng tin cậy trong tài khoản IdP của bạn.",
+  "SpMetadataDescription": "Truy cập siêu dữ liệu của Nhà cung cấp Dịch vụ để thêm ONLYOFFICE {{portalName}} làm Nhà cung cấp Dịch vụ đáng tin cậy trong tài khoản IdP của bạn.",
   "spSignExitRequest": "Yêu cầu Đăng xuất Ký tên",
   "spSigningAlgorithm": "Thuật toán ký tên",
   "spSignResponseRequest": "Phản hồi Đăng xuất Ký tên",

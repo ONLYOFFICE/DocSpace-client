@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "Նշանակեք ադմինիստրատորներ",
-  "BackupPortal": "Պահուստային DocSpace-ի տվյալները",
-  "ChangeInstruction": "DocSpace-ի սեփականատիրոջը փոխելու համար խնդրում ենք ստորև ընտրել նոր սեփականատիրոջ անունը:",
-  "ChangeOwner": "Փոխել DocSpace-ի տնօրինողին",
+  "BackupPortal": "Պահուստային {{portalName}}-ի տվյալները",
+  "ChangeInstruction": "{{portalName}}-ի սեփականատիրոջը փոխելու համար խնդրում ենք ստորև ընտրել նոր սեփականատիրոջ անունը:",
+  "ChangeOwner": "Փոխել {{portalName}}-ի տնօրինողին",
   "ChangeUser": "Փոխել օգտվողին",
-  "DeactivateOrDeletePortal": "Ապագործունացնել կամ ջնջել DocSpace-ը",
+  "DeactivateOrDeletePortal": "Ապագործունացնել կամ ջնջել {{portalName}}-ը",
   "DoTheSame": "Արեք նույնը, ինչ ադմինիստրատորները",
-  "ManagePortal": "Կառավարել DocSpace-ի կազմաձևումը",
+  "ManagePortal": "Կառավարել {{portalName}}-ի կազմաձևումը",
   "ManageUser": "Կառավարել օգտվողների հաշիվները",
-  "NewPortalOwner": "DocSpace-ի նոր սեփականատեր",
-  "PortalOwnerCan": "DocSpace-ի տնօրինողը կարող է",
+  "NewPortalOwner": "{{portalName}}-ի նոր սեփականատեր",
+  "PortalOwnerCan": "{{portalName}}-ի տնօրինողը կարող է",
   "SetAccessRights": "Սահմանել մուտքի իրավունքները"
 }

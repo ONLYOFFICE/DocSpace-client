@@ -48,7 +48,7 @@
   "SPEntityId": "ID da Entidade PS (ligar ao XML com os metadados)",
   "SPEntityIdTooltip": "O endereço URL XML do fornecedor de serviços que pode ser descarregado e utilizado pelo fornecedor de Identidade para identificar inequivocamente o PS",
   "SpMetadata": "Metadados ONLYOFFICE SP",
-  "SpMetadataDescription": "Acesse os metadados do provedor de serviços para adicionar o ONLYOFFICE DocSpace como um provedor de serviços confiável em sua conta IdP.",
+  "SpMetadataDescription": "Acesse os metadados do provedor de serviços para adicionar o ONLYOFFICE {{portalName}} como um provedor de serviços confiável em sua conta IdP.",
   "spSignExitRequest": "Assinar Pedidos de Término de Sessão",
   "spSigningAlgorithm": "Algoritmo de Assinatura",
   "spSignResponseRequest": "Assinar Respostas aos Términos de Sessão",

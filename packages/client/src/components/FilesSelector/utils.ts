@@ -29,6 +29,7 @@ import {
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
+import { PORTAL } from "@docspace/shared/constants";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 
@@ -55,7 +56,7 @@ export const getHeaderLabel = (
   }
 
   if (isFormRoom) {
-    return t("Common:SelectFromDocspace");
+    return t("Common:SelectFromDocspace", { portalName: PORTAL });
   }
 
   if (filterParam === FilesSelectorFilterTypes.DOCX)

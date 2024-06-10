@@ -31,7 +31,7 @@
   "PublicRoomLinkValidTime": "Questo link è valido fino al {{date}}. Una volta scaduto sarà impossibile accedere alla stanza tramite questo link.",
   "RoleCommentator": "Commentatore",
   "RoleCommentatorDescription": "Operazioni con file esistenti: visualizzazione, commenti.",
-  "RoleDocspaceAdminDescription": "Gli amministratori di DocSpace possono accedere alle impostazioni di DocSpace, gestire e archiviare stanze, invitare nuovi utenti e assegnare ruoli al di sotto del loro livello. Tutti gli amministratori hanno accesso alla sezione Personale.",
+  "RoleDocspaceAdminDescription": "Gli amministratori di {{portalName}} possono accedere alle impostazioni di {{portalName}}, gestire e archiviare stanze, invitare nuovi utenti e assegnare ruoli al di sotto del loro livello. Tutti gli amministratori hanno accesso alla sezione Personale.",
   "RoleEditorDescription": "Operazioni con file esistenti: visualizzazione, modifica, compilazione moduli, revisione, commenti.",
   "RoleFormFiller": "Compilatore di moduli",
   "RoleFormFillerDescription": "Operazioni con file esistenti: visualizzazione, compilazione moduli, revisione, commenti.",

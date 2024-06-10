@@ -55,7 +55,7 @@ import {
   RoomsProviderType,
   RoomsType,
 } from "@docspace/shared/enums";
-import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
+import { PORTAL, ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
 
 import { getDefaultRoomName } from "SRC_DIR/helpers/filesUtils";
 
@@ -812,7 +812,7 @@ const SectionFilterContent = ({
 
           switch (+filter.role) {
             case EmployeeType.Admin:
-              label = t("Common:DocspaceAdmin");
+              label = t("Common:DocspaceAdmin", { portalName: PORTAL });
               break;
             case EmployeeType.User:
               label = t("Common:RoomAdmin");
@@ -1352,7 +1352,7 @@ const SectionFilterContent = ({
           id: "filter_type-docspace-admin",
           key: EmployeeType.Admin,
           group: "filter-type",
-          label: t("Common:DocspaceAdmin"),
+          label: t("Common:DocspaceAdmin", { portalName: PORTAL }),
         },
         {
           id: "filter_type-room-admin",

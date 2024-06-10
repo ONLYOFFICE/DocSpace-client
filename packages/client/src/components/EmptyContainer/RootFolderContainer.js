@@ -61,6 +61,7 @@ import EmptyScreenArchiveUrl from "PUBLIC_DIR/images/empty_screen_archive.svg?ur
 import EmptyScreenArchiveDarkUrl from "PUBLIC_DIR/images/empty_screen_archive_dark.svg?url";
 
 import CommonButtons from "./sub-components/CommonButtons";
+import { PORTAL } from "@docspace/shared/constants";
 
 const RootFolderContainer = (props) => {
   const {
@@ -118,7 +119,7 @@ const RootFolderContainer = (props) => {
   const archiveRoomsDescription =
     isVisitor || isCollaborator
       ? t("ArchiveEmptyScreenUser")
-      : t("ArchiveEmptyScreen");
+      : t("ArchiveEmptyScreen", { portalName: PORTAL });
 
   const privateRoomHeader = t("PrivateRoomHeader");
   const privacyIcon = <img alt="" src={PrivacySvgUrl} />;
@@ -129,7 +130,7 @@ const RootFolderContainer = (props) => {
     t("PrivateRoomDescriptionUnbreakable"),
   ];
 
-  const roomHeader = t("EmptyRootRoomHeader");
+  const roomHeader = t("EmptyRootRoomHeader", { portalName: PORTAL });
 
   const onGoToPersonal = () => {
     const newFilter = FilesFilter.getDefault();

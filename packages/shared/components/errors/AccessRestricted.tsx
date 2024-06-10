@@ -29,6 +29,7 @@ import { useTranslation } from "react-i18next";
 
 import ErrorContainer from "../error-container/ErrorContainer";
 import { AccessRestrictedWrapper } from "./Errors.styled";
+import { PORTAL } from "../../constants";
 
 const AccessRestricted = () => {
   const { t, ready } = useTranslation("Common");
@@ -42,7 +43,7 @@ const AccessRestricted = () => {
       <AccessRestrictedWrapper>
         <ErrorContainer
           headerText={t("AccessDenied")}
-          bodyText={t("PortalRestriction")}
+          bodyText={t("PortalRestriction", { portalName: PORTAL })}
         />
       </AccessRestrictedWrapper>
     )

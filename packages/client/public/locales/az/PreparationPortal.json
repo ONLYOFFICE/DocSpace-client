@@ -1,4 +1,4 @@
 {
-  "PortalRestoring": "DocSpace bərpa edilir",
-  "PreparationPortalDescription": "Bərpa prosesi başa çatdıqdan sonra siz avtomatik olaraq DocSpace-ə yönləndiriləcəksiniz."
+  "PortalRestoring": "{{portalName}} bərpa edilir",
+  "PreparationPortalDescription": "Bərpa prosesi başa çatdıqdan sonra siz avtomatik olaraq {{portalName}}-ə yönləndiriləcəksiniz."
 }

@@ -1,5 +1,5 @@
 {
-  "Desc": "Por favor, preencha os dados de registo do DocSpace.",
+  "Desc": "Por favor, preencha os dados de registo do {{portalName}}.",
   "ErrorEmail": "Endereço de email inválido",
   "ErrorInitWizard": "O serviço está atualmente indisponível, por favor tente de novo mais tarde.",
   "ErrorInitWizardButton": "Tentar de novo",
@@ -11,5 +11,5 @@
   "LicenseLink": "Contratos de licença",
   "PlaceholderLicense": "O seu ficheiro com a licença",
   "Timezone": "Fuso horário:",
-  "WelcomeTitle": "Seja bem-vindo ao seu DocSpace!"
+  "WelcomeTitle": "Seja bem-vindo ao seu {{portalName}}!"
 }

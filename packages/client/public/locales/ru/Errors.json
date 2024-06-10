@@ -1,6 +1,6 @@
 {
   "ErrorEmptyResponse": "Пустой ответ",
-  "ErrorUnavailableText": "DocSpace недоступен",
+  "ErrorUnavailableText": "{{portalName}} недоступен",
   "LinkDoesNotExist": "Ссылки, которую вы пытаетесь открыть, не существует.",
   "LinkHasExpired": "Ссылка, по которой вы перешли, просрочена."
 }

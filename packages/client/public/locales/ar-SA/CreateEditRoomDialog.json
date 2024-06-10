@@ -5,9 +5,9 @@
   "DisableRoomQuota": "تعطيل الحصة لهذه الغرفة",
   "Icon": "أيقونة",
   "MakeRoomPrivateDescription": "سيتم تشفير جميع الملفات الموجودة في هذه الغرفة.",
-  "MakeRoomPrivateLimitationsWarningDescription": "باستخدام هذه الميزة، يمكنك دعوة مستخدمي DocSpace الحاليين فقط. بعد إنشاء غرفة، لن تتمكن من تغيير قائمة المستخدمين.",
+  "MakeRoomPrivateLimitationsWarningDescription": "باستخدام هذه الميزة، يمكنك دعوة مستخدمي {{portalName}} الحاليين فقط. بعد إنشاء غرفة، لن تتمكن من تغيير قائمة المستخدمين.",
   "MakeRoomPrivateTitle": "اجعل الغرفة خاصة",
-  "PeopleSelectorInfo": "يمكن فقط لمسؤول الغرفة أو مسؤول DocSpace أن يصبح مالك الغرفة",
+  "PeopleSelectorInfo": "يمكن فقط لمسؤول الغرفة أو مسؤول {{portalName}} أن يصبح مالك الغرفة",
   "PublicRoomBarDescription": "هذه الغرفة متاحة لأي شخص لديه الرابط.",
   "PublicRoomSystemFoldersDescription": "تقوم مجلدات النظام بتخزين نسخ النماذج في مراحل مختلفة من الاكتمال. يتم تخزين النماذج التي يتم ملؤها في مجلد قيد التقدم، ويتم تخزين النماذج المكتملة  في المجلد المكتمل.",
   "PublicRoomSystemFoldersTitle": "مجلدات النظام",
@@ -19,5 +19,5 @@
   "ThirdPartyStorageDescription": "استخدام خدمات الجهات الخارجية كتخزين بيانات لهذه الغرفة. سيتم إنشاء مجلد جديد لتخزين بيانات هذه الغرفة في التخزين المتصل.",
   "ThirdPartyStorageNoStorageAlert": "قبل ذلك ، تحتاج إلى توصيل الخدمة المقابلة في قسم \"التكامل\". خلاف ذلك ، لن يكون الاتصال ممكنًا.",
   "ThirdPartyStoragePermanentSettingDescription": "يتم تخزين الملفات في وحدة تخزين تابعة لجهة خارجية {{thirdpartyTitle}} \\\"{{thirdpartyFolderName}}\\\" مجلد.\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "لتوصيل وحدة تخزين تابعة لجهة خارجية ، تحتاج إلى إضافة الخدمة المقابلة في قسم التكامل من إعدادات DocSpace. اتصل بمالك DocSpace أو المسئول لتمكين التكامل."
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "لتوصيل وحدة تخزين تابعة لجهة خارجية ، تحتاج إلى إضافة الخدمة المقابلة في قسم التكامل من إعدادات {{portalName}}. اتصل بمالك {{portalName}} أو المسئول لتمكين التكامل."
 }

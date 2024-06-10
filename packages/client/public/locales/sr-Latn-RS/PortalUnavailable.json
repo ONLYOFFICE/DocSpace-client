@@ -1,4 +1,4 @@
 {
-  "AccessingProblem": "Ako imate problema sa pristupom ovom DocSpace-u, molimo kontaktirajte administratora.",
-  "ContactAdministrator": "Kontaktirajte DocSpace administratora."
+  "AccessingProblem": "Ako imate problema sa pristupom ovom {{portalName}}-u, molimo kontaktirajte administratora.",
+  "ContactAdministrator": "Kontaktirajte {{portalName}} administratora."
 }

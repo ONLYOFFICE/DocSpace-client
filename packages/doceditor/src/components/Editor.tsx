@@ -77,6 +77,7 @@ const Editor = ({
   onSDKRequestSelectSpreadsheet,
   onSDKRequestSelectDocument,
   onSDKRequestReferenceSource,
+  onSDKRequestStartFilling,
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
 
@@ -101,7 +102,7 @@ const Editor = ({
     onDocumentStateChange,
     onMetaChange,
     onMakeActionLink,
-    onRequestStartFilling,
+    // onRequestStartFilling,
     documentReady,
 
     setDocTitle,
@@ -293,7 +294,7 @@ const Editor = ({
   }
 
   if (config?.startFilling) {
-    newConfig.events.onRequestStartFilling = onRequestStartFilling;
+    newConfig.events.onRequestStartFilling = onSDKRequestStartFilling;
   }
 
   newConfig.events.onSubmit = () => {

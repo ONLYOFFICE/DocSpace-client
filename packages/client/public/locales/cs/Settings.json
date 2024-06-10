@@ -220,7 +220,7 @@
   "SelectFileInGZFormat": "Vyberte soubor ve formátu .GZ",
   "SelectUsers": "Vybrat uživatele",
   "SelectUsersDescriptionGoogle": "Zaškrtněte uživatele ze seznamu pro import do aplikace {{organizationName}} {{portalName}}. Uživatelé z Google Workspace budou importováni bez Křestního jména / Příjmení a místo nich bude použito jejich e-mailové jméno. Jména uživatelů lze po importu změnit. Uživatelé již existující v {{organizationName}} {{portalName}} jsou zvýrazněni zelenou barvou a ve výchozím nastavení nejsou zaškrtnuti.",
-  "SelectUsersDescriptionNextcloud": "Zaškrtněte uživatele ze seznamu pro import do aplikace ONLYOFFICE {{portalName}}. Lze vybrat pouze uživatele s e-maily. Uživatelé již existující v ONLYOFFICE {{portalName}} jsou zvýrazněni zelenou barvou a ve výchozím nastavení nejsou zaškrtnuti.",
+  "SelectUsersDescriptionNextcloud": "Zaškrtněte uživatele ze seznamu pro import do aplikace {{organizationName}} {{portalName}}. Lze vybrat pouze uživatele s e-maily. Uživatelé již existující v {{organizationName}} {{portalName}} jsou zvýrazněni zelenou barvou a ve výchozím nastavení nejsou zaškrtnuti.",
   "SelectUsersDescriptionWorkspace": "Zaškrtněte uživatele ze seznamu pro import do aplikace ONLYOFFICE {{portalName}}. Uživatelé již existující v ONLYOFFICE {{portalName}} jsou zvýrazněni zelenou barvou a ve výchozím nastavení nejsou zaškrtnuti.",
   "SelectUsersWithEmail": "Vybrat uživatele s e-mailem",
   "SelectUserTypes": "Výběr typů uživatelů",

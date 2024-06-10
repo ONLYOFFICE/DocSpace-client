@@ -219,7 +219,7 @@
   "SelectFileInGZFormat": "「.GZ」形式ファイルを選択してください。",
   "SelectUsers": "ユーザーの選択",
   "SelectUsersDescriptionGoogle": "リストから{{organizationName}} {{portalName}}にインポートするユーザーをチェックしてください。Google Workspaceからのユーザは姓名なしでインポートされ、代わりにメール名が使用されます。ユーザーの名前はインポート後に変更することができます。すでに{{organizationName}} {{portalName}}に存在するユーザは緑色でハイライトされ、デフォルトではチェックされていません。",
-  "SelectUsersDescriptionNextcloud": "リストからONLYOFFICE {{portalName}}にインポートするユーザーをチェックしてください。選択できるのはメールアドレスを持つユーザーのみです。すでにONLYOFFICE {{portalName}}に存在するユーザは緑色でハイライトされ、デフォルトではチェックされていません。",
+  "SelectUsersDescriptionNextcloud": "リストから{{organizationName}} {{portalName}}にインポートするユーザーをチェックしてください。選択できるのはメールアドレスを持つユーザーのみです。すでに{{organizationName}} {{portalName}}に存在するユーザは緑色でハイライトされ、デフォルトではチェックされていません。",
   "SelectUsersDescriptionWorkspace": "リストからONLYOFFICE {{portalName}}にインポートするユーザーをチェックしてください。すでにONLYOFFICE {{portalName}}に存在するユーザは緑色でハイライトされ、デフォルトではチェックされていません。",
   "SelectUsersWithEmail": "メールアドレスがあるユーザーの選択",
   "SelectUserTypes": "ユーザータイプの選択",

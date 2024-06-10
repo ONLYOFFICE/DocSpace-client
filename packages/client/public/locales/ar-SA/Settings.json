@@ -219,7 +219,7 @@
   "SelectFileInGZFormat": "حدد الملف بتنسيق ملف مضغوط",
   "SelectUsers": "حدد المستخدمين",
   "SelectUsersDescriptionGoogle": "تحقق من المستخدمين من القائمة لاستيرادها إلى {{organizationName}} {{portalName}}. سيتم استيراد المستخدمين من مساحة عمل Google بدون الاسم الأول/اسم العائلة، وسيتم استخدام اسم بريدهم الإلكتروني بدلا من ذلك. يمكن تغيير أسماء المستخدمين بعد الاستيراد. يتم تمييز المستخدمين الموجودين بالفعل في {{organizationName}} {{portalName}} بلون أخضر ولا يتم التحقق منهم بشكل افتراضي.",
-  "SelectUsersDescriptionNextcloud": "تحقق من المستخدمين من القائمة لاستيرادها إلى ONLYOFFICE {{portalName}}. يمكن تحديد المستخدمين الذين لديهم بريد إلكتروني فقط. يتم تمييز المستخدمين الموجودين بالفعل في ONLYOFFICE {{portalName}} بلون أخضر ولا يتم التحقق منهم بشكل افتراضي.",
+  "SelectUsersDescriptionNextcloud": "تحقق من المستخدمين من القائمة لاستيرادها إلى {{organizationName}} {{portalName}}. يمكن تحديد المستخدمين الذين لديهم بريد إلكتروني فقط. يتم تمييز المستخدمين الموجودين بالفعل في {{organizationName}} {{portalName}} بلون أخضر ولا يتم التحقق منهم بشكل افتراضي.",
   "SelectUsersDescriptionWorkspace": "تحقق من المستخدمين من القائمة لاستيرادها إلى ONLYOFFICE {{portalName}}. يتم تمييز المستخدمين الموجودين بالفعل في ONLYOFFICE {{portalName}} بلون أخضر ولا يتم التحقق منهم بشكل افتراضي.",
   "SelectUsersWithEmail": "تحديد المستخدمين باستخدام البريد الإلكتروني",
   "SelectUserTypes": "حدد أنواع المستخدمين",

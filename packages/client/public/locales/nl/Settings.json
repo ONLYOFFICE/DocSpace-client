@@ -217,7 +217,7 @@
   "SelectFileInGZFormat": "Selecteer het bestand in .GZ formaat",
   "SelectUsers": "Selecteer gebruikers",
   "SelectUsersDescriptionGoogle": "Vink gebruikers aan uit de lijst om te importeren in {{organizationName}} {{portalName}}. Gebruikers van Google Workspace worden geïmporteerd zonder Voornaam / Achternaam, en in plaats daarvan wordt hun e-mailadres gebruikt. Namen van gebruikers kunnen na het importeren worden gewijzigd. Gebruikers die al bestaan in {{organizationName}} {{portalName}} zijn aangegeven met een groene kleur en zijn niet standaard aangevinkt.",
-  "SelectUsersDescriptionNextcloud": "Vink gebruikers aan uit de lijst om te importeren in ONLYOFFICE {{portalName}}. Alleen gebruikers met e-mail kunnen worden geselecteerd. Gebruikers die al bestaan in ONLYOFFICE {{portalName}} zijn aangegeven met een groene kleur en zijn niet standaard aangevinkt.",
+  "SelectUsersDescriptionNextcloud": "Vink gebruikers aan uit de lijst om te importeren in {{organizationName}} {{portalName}}. Alleen gebruikers met e-mail kunnen worden geselecteerd. Gebruikers die al bestaan in {{organizationName}} {{portalName}} zijn aangegeven met een groene kleur en zijn niet standaard aangevinkt.",
   "SelectUsersDescriptionWorkspace": "Vink gebruikers aan uit de lijst om te importeren in ONLYOFFICE {{portalName}}. Gebruikers die al bestaan in ONLYOFFICE {{portalName}} zijn aangegeven met een groene kleur en zijn niet standaard aangevinkt.",
   "SelectUsersWithEmail": "Selecteer gebruikers met e-mail",
   "SelectUserTypes": "Selecteer gebruikerstypes",

@@ -220,7 +220,7 @@
   "SelectFileInGZFormat": ".GZ 형식의 파일을 선택해주세요",
   "SelectUsers": "사용자 선택",
   "SelectUsersDescriptionGoogle": "목록에서 {{organizationName}} {{portalName}}로 가져오기할 사용자를 선택하세요. Google Workspace의 사용자는 이름/성 없이 가져오기되며 대신 이메일 이름이 사용됩니다. 가져오기한 후 사용자 이름을 변경할 수 있습니다. {{organizationName}} {{portalName}}에 이미 존재하는 사용자는 초록색으로 하이라이트 표시되며 기본적으로 선택되어 있지 않습니다.",
-  "SelectUsersDescriptionNextcloud": "목록에서 ONLYOFFICE {{portalName}}로 가져오기할 사용자를 선택하세요. 이메일이 있는 사용자만 선택할 수 있습니다. ONLYOFFICE{{portalName}}에 이미 존재하는 사용자는 초록색으로 하이라이트 표시되며 기본적으로 선택되어 있지 않습니다.",
+  "SelectUsersDescriptionNextcloud": "목록에서 {{organizationName}} {{portalName}}로 가져오기할 사용자를 선택하세요. 이메일이 있는 사용자만 선택할 수 있습니다. {{organizationName}}{{portalName}}에 이미 존재하는 사용자는 초록색으로 하이라이트 표시되며 기본적으로 선택되어 있지 않습니다.",
   "SelectUsersDescriptionWorkspace": "목록에서 ONLYOFFICE {{portalName}}로 가져오기할 사용자를 선택하세요. ONLYOFFICE {{portalName}}에 이미 존재하는 사용자는 초록색으로 하이라이트 표시되며 기본적으로 선택되어 있지 않습니다.",
   "SelectUsersWithEmail": "이메일이 있는 사용자 선택",
   "SelectUserTypes": "사용자 타입 선택",

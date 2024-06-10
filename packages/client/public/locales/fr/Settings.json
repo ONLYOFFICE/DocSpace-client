@@ -217,7 +217,6 @@
   "SelectFileDescriptionWorkspace": "Sélectionnez les fichier de sauvegarde d'{{organizationName}} Workspace pour lancer l'importation. Une fois le téléchargement et l'analyse de données terminés, l'étape suivante est lancé automatiquement.",
   "SelectFileInGZFormat": "Sélectionnez le fichier au format .GZ",
   "SelectUsers": "Sélectionnez utilisateur",
-  "SelectUsersDescriptionNextcloud": "Cochez les cases des utilisateurs que vous souhaitez importer vers {{portalName}}. Il est possible de sélectionner uniquement les utilisateurs ayant une adresse e-mail. Les utilisateurs existants dans OLYOFFICE {{portalName}} sont mis en surbrillance en vert et ne sont pas cochés par défaut.",
   "SelectUsersDescriptionWorkspace": "Cochez les cases des utilisateurs que vous souhaitez importer vers {{portalName}}. Les utilisateurs existants dans OLYOFFICE {{portalName}} sont mis en surbrillance en vert et ne sont pas cochés par défaut.",
   "SelectUsersWithEmail": "Sélectionnez les utilisateurs ayant l'adresse e-mail",
   "SelectUserTypes": "Sélectionner le type d'utilisateur",

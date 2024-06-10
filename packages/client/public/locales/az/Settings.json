@@ -219,7 +219,7 @@
   "SelectFileInGZFormat": ".GZ formatında qovluq seçin",
   "SelectUsers": "İstifadəçiləri seçin",
   "SelectUsersDescriptionGoogle": "{{organizationName}} {{portalName}}-ə idxal ediləcək istifadəçiləri siyahıdan yoxlayın. Google Workspace istifadəçiləri Ad/Soyad olmadan idxal ediləcək və əvəzinə onların e-poçt adları istifadə ediləcək. İstifadəçi adları idxaldan sonra dəyişdirilə bilər. {{organizationName}} {{portalName}}-də artıq mövcud olan istifadəçilər yaşıl rənglə vurğulanır və defolt olaraq qeyd olunmur.",
-  "SelectUsersDescriptionNextcloud": "ONLYOFFICE {{portalName}}-ə idxal ediləcək istifadəçiləri siyahıdan yoxlayın. Yalnız e-poçt ünvanları olan istifadəçilər seçilə bilər. ONLYOFFICE {{portalName}}-də artıq mövcud olan istifadəçilər yaşıl rənglə vurğulanır və defolt olaraq qeyd olunmur.",
+  "SelectUsersDescriptionNextcloud": "{{organizationName}} {{portalName}}-ə idxal ediləcək istifadəçiləri siyahıdan yoxlayın. Yalnız e-poçt ünvanları olan istifadəçilər seçilə bilər. {{organizationName}} {{portalName}}-də artıq mövcud olan istifadəçilər yaşıl rənglə vurğulanır və defolt olaraq qeyd olunmur.",
   "SelectUsersDescriptionWorkspace": "ONLYOFFICE {{portalName}}-ə idxal ediləcək istifadəçiləri siyahıdan yoxlayın. ONLYOFFICE {{portalName}}-də artıq mövcud olan istifadəçilər yaşıl rənglə vurğulanır və defolt olaraq qeyd olunmur.",
   "SelectUsersWithEmail": "E-poçtu olan istifadəçiləri seçin",
   "SelectUserTypes": "İstifadəçi növlərini seçin",

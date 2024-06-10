@@ -221,7 +221,7 @@
   "SelectFileInGZFormat": "Izaberi datoteku u .GZ formatu",
   "SelectUsers": "Izaberi korisnike",
   "SelectUsersDescriptionGoogle": "Proverite korisnike sa liste koje želite da uvezete u {{organizationName}} {{portalName}}. Korisnici iz Google Workspace će biti uvezeni bez imena i prezimena, umesto toga koristiće se njihovo email ime. Imena korisnika mogu biti promenjena nakon uvoza. Korisnici koji već postoje u {{organizationName}} {{portalName}}-u su označeni zelenom bojom i podrazumevano nisu označeni.",
-  "SelectUsersDescriptionNextcloud": "Proverite korisnike sa liste koje želite da uvezete u ONLYOFFICE {{portalName}}. Samo korisnici sa email-ovima će biti odabrani. Korisnici koji već postoje u ONLYOFFICE {{portalName}}-u su označeni zelenom bojom i podrazumevano nisu označeni.",
+  "SelectUsersDescriptionNextcloud": "Proverite korisnike sa liste koje želite da uvezete u {{organizationName}} {{portalName}}. Samo korisnici sa email-ovima će biti odabrani. Korisnici koji već postoje u {{organizationName}} {{portalName}}-u su označeni zelenom bojom i podrazumevano nisu označeni.",
   "SelectUsersDescriptionWorkspace": "Proverite korisnike sa liste koje želite da uvezete u ONLYOFFICE {{portalName}}. Korisnici koji već postoje u ONLYOFFICE {{portalName}}-u su označeni zelenom bojom i podrazumevano nisu označeni.",
   "SelectUsersWithEmail": "Izaberi korisnike sa email-om",
   "SelectUserTypes": "Izaberi tipove korisnika",

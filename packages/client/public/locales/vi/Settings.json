@@ -219,7 +219,7 @@
   "SelectFileInGZFormat": "Chọn tập tin có định dạng GZ",
   "SelectUsers": "Chọn người dùng",
   "SelectUsersDescriptionGoogle": "Kiểm tra người dùng từ danh sách để nhập vào {{organizationName}} {{portalName}}. Người dùng từ Google Workspace sẽ được nhập mà không có Tên / Họ, và tên email của họ sẽ được sử dụng thay thế. Tên của người dùng có thể được thay đổi sau khi nhập. Người dùng đã tồn tại trong {{organizationName}} {{portalName}} được tô sáng bằng màu xanh lá cây và không được chọn theo mặc định.",
-  "SelectUsersDescriptionNextcloud": "Kiểm tra người dùng từ danh sách để nhập vào ONLYOFFICE {{portalName}}. Chỉ những người dùng có email mới có thể được chọn. Người dùng đã tồn tại trong ONLYOFFICE {{portalName}} được tô sáng bằng màu xanh lá cây và không được chọn theo mặc định.",
+  "SelectUsersDescriptionNextcloud": "Kiểm tra người dùng từ danh sách để nhập vào {{organizationName}} {{portalName}}. Chỉ những người dùng có email mới có thể được chọn. Người dùng đã tồn tại trong {{organizationName}} {{portalName}} được tô sáng bằng màu xanh lá cây và không được chọn theo mặc định.",
   "SelectUsersDescriptionWorkspace": "Kiểm tra người dùng từ danh sách để nhập vào ONLYOFFICE {{portalName}}. Người dùng đã tồn tại trong ONLYOFFICE {{portalName}} được tô sáng bằng màu xanh lá cây và không được chọn theo mặc định.",
   "SelectUsersWithEmail": "Chọn người dùng có email",
   "SelectUserTypes": "Chọn kiểu người dùng",

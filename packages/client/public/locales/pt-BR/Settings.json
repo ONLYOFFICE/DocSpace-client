@@ -222,7 +222,7 @@
   "SelectFileInGZFormat": "Selecione o arquivo no formato .GZ",
   "SelectUsers": "Selecione usuários",
   "SelectUsersDescriptionGoogle": "Verifique os usuários da lista para importar para o {{organizationName}} {{portalName}}. Os usuários do Google Workspace serão importados sem Nome/Sobrenome, e seu nome de e-mail será usado em seu lugar. Os nomes dos usuários podem ser alterados após a importação. Os usuários já existentes no {{organizationName}} {{portalName}} são destacados em verde e não são verificados por padrão.",
-  "SelectUsersDescriptionNextcloud": "Verifique os usuários da lista para importar para o ONLYOFFICE {{portalName}}. Somente usuários com e-mails podem ser selecionados. Os usuários já existentes no ONLYOFFICE {{portalName}} são destacados em verde e não são verificados por padrão.",
+  "SelectUsersDescriptionNextcloud": "Verifique os usuários da lista para importar para o {{organizationName}} {{portalName}}. Somente usuários com e-mails podem ser selecionados. Os usuários já existentes no {{organizationName}} {{portalName}} são destacados em verde e não são verificados por padrão.",
   "SelectUsersDescriptionWorkspace": "Verifique os usuários da lista para importar para o ONLYOFFICE {{portalName}}. Os usuários já existentes no ONLYOFFICE {{portalName}} são destacados em verde e não são verificados por padrão.",
   "SelectUsersWithEmail": "Selecione usuários com e-mail",
   "SelectUserTypes": "Selecione os tipos de usuário",

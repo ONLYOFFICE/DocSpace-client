@@ -218,7 +218,7 @@
   "SelectFileInGZFormat": "Wybierz plik w formacie .GZ",
   "SelectUsers": "Wybierz użytkowników",
   "SelectUsersDescriptionGoogle": "Wybierz z listy użytkowników, których chcesz zaimportować do {{organizationName}} {{portalName}}. Użytkownicy z Google Workspace zostaną zaimportowani bez imienia / nazwiska. Zamiast tego zostanie użyta ich nazwa e-mail. Nazwy użytkowników mogą zostać zmienione po zaimportowaniu. Użytkownicy, którzy istnieją już w {{organizationName}} {{portalName}}, są podświetleni na zielono i nie są domyślnie zaznaczeni.",
-  "SelectUsersDescriptionNextcloud": "Wybierz z listy użytkowników, których chcesz zaimportować do ONLYOFFICE {{portalName}}. Możesz wybrać tylko użytkowników z adresem e-mail. Użytkownicy, którzy istnieją już w ONLYOFFICE {{portalName}}, są podświetleni na zielono i nie są domyślnie zaznaczeni.",
+  "SelectUsersDescriptionNextcloud": "Wybierz z listy użytkowników, których chcesz zaimportować do {{organizationName}} {{portalName}}. Możesz wybrać tylko użytkowników z adresem e-mail. Użytkownicy, którzy istnieją już w {{organizationName}} {{portalName}}, są podświetleni na zielono i nie są domyślnie zaznaczeni.",
   "SelectUsersDescriptionWorkspace": "Wybierz z listy użytkowników, których chcesz zaimportować do ONLYOFFICE {{portalName}}. Użytkownicy, którzy istnieją już w ONLYOFFICE {{portalName}}, są podświetleni na zielono i nie są domyślnie zaznaczeni.",
   "SelectUsersWithEmail": "Wybierz użytkowników z adresem e-mail",
   "SelectUserTypes": "Wybierz rodzaje użytkowników",

@@ -1,4 +1,4 @@
 {
-  "PortalRestoring": "DocSpacen palauttaminen",
-  "PreparationPortalDescription": "Siinä vaiheessa kun palautuksen prosessi on ohi, sinut siirretään automaattisesti DocSpace."
+  "PortalRestoring": "{{portalName}}-n palauttaminen",
+  "PreparationPortalDescription": "Siinä vaiheessa kun palautuksen prosessi on ohi, sinut siirretään automaattisesti {{portalName}}."
 }

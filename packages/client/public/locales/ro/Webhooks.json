@@ -46,7 +46,7 @@
   "URL": "Adresa URL",
   "ViewRawPayload": "Vizualizare sarcina neprelucrată",
   "WebhookCreated": "Webhook creat",
-  "WebhookCreationHint": "Acest webhook va fi atribuit tuturor evenimentelor din DocSpace",
+  "WebhookCreationHint": "Acest webhook va fi atribuit tuturor evenimentelor din {{portalName}}",
   "WebhookDetails": "Detalii Webhook",
   "WebhookEditedSuccessfully": "Configurația Webhook a fost modificată cu succes",
   "WebhookHistory": "Istoricul Webhook",
@@ -55,5 +55,5 @@
   "WebhookRemoved": "Eliminare Webhook",
   "Webhooks": "Webhook-uri",
   "WebhooksGuide": "Ghid Webhooks",
-  "WebhooksInfo": "Utilizați webhook-uri pentru a efectua acțiuni personalizate pe partea aplicației sau paginii web pe care utilizați pentru diferite evenimente din spațiu ONLYOFFICE DocSpace.\nAici puteți să creați și să gestionați toate webhook-urile, să le configurați și să parcurgeți istoricul fiecărui webhook pentru a verifica performanța acestora."
+  "WebhooksInfo": "Utilizați webhook-uri pentru a efectua acțiuni personalizate pe partea aplicației sau paginii web pe care utilizați pentru diferite evenimente din spațiu ONLYOFFICE {{portalName}}.\nAici puteți să creați și să gestionați toate webhook-urile, să le configurați și să parcurgeți istoricul fiecărui webhook pentru a verifica performanța acestora."
 }

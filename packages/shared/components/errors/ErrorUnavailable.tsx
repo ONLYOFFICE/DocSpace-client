@@ -29,6 +29,7 @@ import { useTranslation } from "react-i18next";
 
 import ErrorContainer from "../error-container/ErrorContainer";
 import { ErrorUnavailableWrapper } from "./Errors.styled";
+import { PORTAL } from "../../constants";
 
 const ErrorUnavailable = () => {
   const { t, ready } = useTranslation("Common");
@@ -36,7 +37,9 @@ const ErrorUnavailable = () => {
   return (
     ready && (
       <ErrorUnavailableWrapper>
-        <ErrorContainer headerText={t("ErrorDeactivatedText")} />
+        <ErrorContainer
+          headerText={t("ErrorDeactivatedText", { portalName: PORTAL })}
+        />
       </ErrorUnavailableWrapper>
     )
   );

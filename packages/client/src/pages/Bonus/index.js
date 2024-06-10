@@ -35,6 +35,7 @@ import BenefitsContainer from "SRC_DIR/components/StandaloneComponents/BenefitsC
 import StyledComponent from "./StyledComponent";
 import OfficialDocumentation from "./sub-components/OfficialDocumentation";
 import ContactContainer from "SRC_DIR/components/StandaloneComponents/ContactContainer";
+import { PORTAL } from "@docspace/shared/constants";
 
 const Bonus = ({ standaloneInit, isInitPaymentPage }) => {
   const { t, ready } = useTranslation("PaymentsEnterprise");
@@ -48,7 +49,9 @@ const Bonus = ({ standaloneInit, isInitPaymentPage }) => {
   return (
     <StyledComponent>
       <BenefitsContainer />
-      <Text fontWeight={600}>{t("UpgradeToProBannerInstructionHeader")}</Text>
+      <Text fontWeight={600}>
+        {t("UpgradeToProBannerInstructionHeader", { portalName: PORTAL })}
+      </Text>
       <Text>{t("UpgradeToProBannerInstructionDescr")}</Text>
 
       <OfficialDocumentation />

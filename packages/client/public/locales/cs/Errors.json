@@ -1,6 +1,6 @@
 {
   "ErrorEmptyResponse": "Prázdná reakce",
-  "ErrorUnavailableText": "DocSpace není k dispozici",
+  "ErrorUnavailableText": "{{portalName}} není k dispozici",
   "LinkDoesNotExist": "Odkaz, který se snažíte otevřít, neexistuje.",
   "LinkHasExpired": "Platnost odkazu, který jste použili, vypršela."
 }

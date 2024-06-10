@@ -44,6 +44,7 @@ import withLoader from "../withLoader";
 
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import { PORTAL } from "@docspace/shared/constants";
 
 const ContinuePortal = (props) => {
   const { t, greetingTitle, linkData } = props;
@@ -87,7 +88,9 @@ const ContinuePortal = (props) => {
               </Text>
             ) : (
               <>
-                <Text className="subtitle">{t("PortalContinueTitle")}</Text>
+                <Text className="subtitle">
+                  {t("PortalContinueTitle", { portalName: PORTAL })}
+                </Text>
                 <ButtonsWrapper>
                   <Button
                     primary

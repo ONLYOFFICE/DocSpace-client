@@ -1,5 +1,5 @@
 {
-  "ActionCannotBeUndone": "The selected disabled users will be removed from DocSpace. This action cannot be undone.",
+  "ActionCannotBeUndone": "The selected disabled users will be removed from {{portalName}}. This action cannot be undone.",
   "CannotReassignFiles": "If you delete multiple users at once, you cannot reassign their files to other users.",
   "DeleteGroupUsersSuccessMessage": "Users have been successfully deleted.",
   "DeleteMyDocumentsUser": "All personal files and folders in My documents section of this user will be permanently deleted.",

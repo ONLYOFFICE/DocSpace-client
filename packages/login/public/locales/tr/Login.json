@@ -1,7 +1,7 @@
 {
   "CodeSubtitle": "{{email}} adresine 6 haneli bir kod gönderdik. Kodun sınırlı bir geçerlilik süresi vardır, kodu en kısa sürede girin.",
   "CodeTitle": "Kod tarafınıza e-posta olarak gönderildi",
-  "ErrorInvalidText": "10 saniye içinde <1>DocSpace</1> yönlendirileceksiniz",
+  "ErrorInvalidText": "10 saniye içinde <1>{{portalName}}</1> yönlendirileceksiniz",
   "ExpiredCode": "Bu kod artık geçerli değil. Yeni bir kod isteyip tekrar deneyin.",
   "ForgotPassword": "Şifrenizi mi unuttunuz?",
   "InvalidCode": "Bu kod geçersizdir. Tekrar deneyin.",
@@ -20,5 +20,5 @@
   "RegistrationEmailWatermark": "E-posta",
   "RememberHelper": "Varsayılan oturum ömrü 20 dakikadır. 1 yıla ayarlamak için bu seçeneği işaretleyin. Kendi sürenizi ayarlamak için Ayarlar'a gidin.",
   "ResendCode": "Kodu yeniden gönder",
-  "UserIsAlreadyRegistered": "Kullanıcı <1>{{email}}</1> bu DocSpace'e zaten kayıtlı, şifrenizi girin veya başka bir e-posta ile devam etmek için geri dönün."
+  "UserIsAlreadyRegistered": "Kullanıcı <1>{{email}}</1> bu {{portalName}}'e zaten kayıtlı, şifrenizi girin veya başka bir e-posta ile devam etmek için geri dönün."
 }

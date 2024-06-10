@@ -5,9 +5,9 @@
   "DisableRoomQuota": "Wyłącz limit dla tego pokoju",
   "Icon": "Ikona",
   "MakeRoomPrivateDescription": "Wszystkie pliki w tym pokoju zostaną zaszyfrowane.",
-  "MakeRoomPrivateLimitationsWarningDescription": "Dzięki tej funkcji możesz zapraszać tylko istniejących użytkowników DocSpace. Po utworzeniu pokoju nie będziesz w stanie zmienić listy użytkowników.",
+  "MakeRoomPrivateLimitationsWarningDescription": "Dzięki tej funkcji możesz zapraszać tylko istniejących użytkowników {{portalName}}. Po utworzeniu pokoju nie będziesz w stanie zmienić listy użytkowników.",
   "MakeRoomPrivateTitle": "Uczyń pokój prywatnym",
-  "PeopleSelectorInfo": "Tylko administrator pokoju lub administrator DocSpace może zostać właścicielem pokoju",
+  "PeopleSelectorInfo": "Tylko administrator pokoju lub administrator {{portalName}} może zostać właścicielem pokoju",
   "PublicRoomBarDescription": "Ten pokój jest dostępny dla każdego, kto ma link. Użytkownicy zewnętrzni będą mieli uprawnienie tylko do odczytu dla wszystkich plików.",
   "PublicRoomSystemFoldersDescription": "Katalogi systemowe przechowują kopie formularzy na różnych etapach ukończenia. Wypełniane formularze są przechowywane w katalogu W toku, a wypełnione w katalogu Gotowe.",
   "PublicRoomSystemFoldersTitle": "Katalogi systemowe",
@@ -19,5 +19,5 @@
   "ThirdPartyStorageDescription": "Użyj usług podmiotów trzecich jako pamięci dla tego pokoju. Nowy katalog do przechowywania danych z tego pokoju zostanie utworzony w podłączonej pamięci.",
   "ThirdPartyStorageNoStorageAlert": "Najpierw jednak musisz podłączyć odpowiednią usługę w sekcji „Integracja”. W przeciwnym razie połączenie będzie niemożliwe.",
   "ThirdPartyStoragePermanentSettingDescription": "Pliki są przechowywane w pamięci zewnętrznej {{thirdpartyTitle}}, w katalogu \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "Aby podłączyć pamięć podmiotu trzeciego, musisz dodać odpowiednią usługę w sekcji Integracja, w ustawieniach DosSpace. Skontaktuj się z właścicielem DocSpace lub administratorem, aby włączyć integrację."
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "Aby podłączyć pamięć podmiotu trzeciego, musisz dodać odpowiednią usługę w sekcji Integracja, w ustawieniach {{portalName}}. Skontaktuj się z właścicielem {{portalName}} lub administratorem, aby włączyć integrację."
 }

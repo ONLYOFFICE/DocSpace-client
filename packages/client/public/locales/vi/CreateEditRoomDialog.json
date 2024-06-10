@@ -5,9 +5,9 @@
   "DisableRoomQuota": "Tắt hạn mức cho phòng này",
   "Icon": "Biểu tượng",
   "MakeRoomPrivateDescription": "Tất cả các tập tin trong phòng này sẽ được mã hóa.",
-  "MakeRoomPrivateLimitationsWarningDescription": "Với tính năng này, bạn chỉ có thể mời người dùng DocSpace hiện có. Sau khi tạo một phòng, bạn sẽ không thể thay đổi danh sách người dùng.",
+  "MakeRoomPrivateLimitationsWarningDescription": "Với tính năng này, bạn chỉ có thể mời người dùng {{portalName}} hiện có. Sau khi tạo một phòng, bạn sẽ không thể thay đổi danh sách người dùng.",
   "MakeRoomPrivateTitle": "Đặt phòng ở Chế độ Riêng tư",
-  "PeopleSelectorInfo": "Chỉ quản trị viên phòng hoặc quản trị viên DocSpace mới có thể trở thành chủ sở hữu của phòng",
+  "PeopleSelectorInfo": "Chỉ quản trị viên phòng hoặc quản trị viên {{portalName}} mới có thể trở thành chủ sở hữu của phòng",
   "PublicRoomBarDescription": "Phòng này khả dụng cho bất kỳ ai có liên kết. Người dùng bên ngoài sẽ có quyền Chỉ Xem cho tất cả các tập tin.",
   "PublicRoomSystemFoldersDescription": "Các thư mục hệ thống lưu trữ các bản sao của biểu mẫu ở các giai đoạn hoàn thành khác nhau. Các biểu mẫu đang được điền được lưu trữ trong thư mục Đang được tiến hành và các biểu mẫu đã hoàn thành được lưu trữ trong thư mục Hoàn thành.",
   "PublicRoomSystemFoldersTitle": "Thư mục Hệ thống",
@@ -19,5 +19,5 @@
   "ThirdPartyStorageDescription": "Sử dụng dịch vụ của bên thứ ba làm nơi lưu trữ dữ liệu cho phòng này. Một thư mục mới để lưu trữ dữ liệu của phòng này sẽ được tạo trong bộ nhớ được kết nối.",
   "ThirdPartyStorageNoStorageAlert": "Trước tiên, bạn cần kết nối dịch vụ tương ứng trong phần 'Tích hợp'. Nếu không, kết nối sẽ không thể thực hiện được.",
   "ThirdPartyStoragePermanentSettingDescription": "Các tập tin được lưu trữ trong bộ nhớ của bên thứ ba {{thirdpartyTitle}} trong thư mục \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "Để kết nối bộ nhớ của bên thứ ba, bạn cần thêm dịch vụ tương ứng trong phần Tích hợp của cài đặt DocSpace. Liên hệ với chủ sở hữu hoặc quản trị viên DocSpace để kích hoạt tích hợp."
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "Để kết nối bộ nhớ của bên thứ ba, bạn cần thêm dịch vụ tương ứng trong phần Tích hợp của cài đặt {{portalName}}. Liên hệ với chủ sở hữu hoặc quản trị viên {{portalName}} để kích hoạt tích hợp."
 }

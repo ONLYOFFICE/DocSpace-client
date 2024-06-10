@@ -36,6 +36,7 @@ import RoomsIcon from "PUBLIC_DIR/images/catalog.rooms.react.svg";
 import PortfolioIcon from "PUBLIC_DIR/images/catalog.portfolio.react.svg";
 import ProjectsIcon from "PUBLIC_DIR/images/catalog.projects.react.svg";
 import DocumentsIcon from "PUBLIC_DIR/images/catalog.documents.react.svg";
+import { PORTAL } from "@docspace/shared/constants";
 
 const Wrapper = styled.div`
   display: flex;
@@ -152,6 +153,7 @@ const ImportStep = ({
         sectionName={t("Common:CommonFiles")}
         description={t("Settings:CommonFilesDescription", {
           user: user.displayName,
+          portalName: PORTAL,
         })}
         exportSection={{
           sectionName: t("Common:Common"),

@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "Chỉ định quản trị viên",
-  "BackupPortal": "Sao lưu dữ liệu DocSpace",
-  "ChangeInstruction": "Để thay đổi chủ sở hữu DocSpace, xin vui lòng chọn tên của chủ sở hữu mới bên dưới.",
-  "ChangeOwner": "Thay đổi chủ sở hữu DocSpace",
+  "BackupPortal": "Sao lưu dữ liệu {{portalName}}",
+  "ChangeInstruction": "Để thay đổi chủ sở hữu {{portalName}}, xin vui lòng chọn tên của chủ sở hữu mới bên dưới.",
+  "ChangeOwner": "Thay đổi chủ sở hữu {{portalName}}",
   "ChangeUser": "Thay đổi người dùng",
-  "DeactivateOrDeletePortal": "Vô hiệu hóa hoặc xóa DocSpace",
+  "DeactivateOrDeletePortal": "Vô hiệu hóa hoặc xóa {{portalName}}",
   "DoTheSame": "Làm tương tự như quản trị viên",
-  "ManagePortal": "Quản lý cấu hình DocSpace",
+  "ManagePortal": "Quản lý cấu hình {{portalName}}",
   "ManageUser": "Quản lý tài khoản người dùng",
-  "NewPortalOwner": "Chủ sở hữu DocSpace mới",
-  "PortalOwnerCan": "Chủ sở hữu DocSpace có thể:",
+  "NewPortalOwner": "Chủ sở hữu {{portalName}} mới",
+  "PortalOwnerCan": "Chủ sở hữu {{portalName}} có thể:",
   "SetAccessRights": "Đặt quyền truy cập"
 }

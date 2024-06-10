@@ -1,5 +1,5 @@
 {
-  "Desc": "Налаштуйте реєстраційні дані DocSpace.",
+  "Desc": "Налаштуйте реєстраційні дані {{portalName}}.",
   "ErrorEmail": "Неприпустима адреса ел. пошти",
   "ErrorInitWizard": "Служба наразі недоступна. Повторіть спробу пізніше.",
   "ErrorInitWizardButton": "Повторити спробу",
@@ -11,5 +11,5 @@
   "LicenseLink": "Ліцензійні угоди",
   "PlaceholderLicense": "Ваш файл ліцензії",
   "Timezone": "Часовий пояс:",
-  "WelcomeTitle": "Вітаємо на вашому DocSpace!"
+  "WelcomeTitle": "Вітаємо на вашому {{portalName}}!"
 }

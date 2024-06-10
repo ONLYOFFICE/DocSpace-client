@@ -41,6 +41,7 @@ import isEqual from "lodash/isEqual";
 
 import AdmMsgLoader from "../sub-components/loaders/admmsg-loader";
 import { DeviceType } from "@docspace/shared/enums";
+import { PORTAL } from "@docspace/shared/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -174,7 +175,9 @@ const AdminMessage = (props) => {
   return (
     <MainContainer>
       <LearnMoreWrapper>
-        <Text>{t("AdminsMessageSettingDescription")}</Text>
+        <Text>
+          {t("AdminsMessageSettingDescription", { portalName: PORTAL })}
+        </Text>
         <Text fontSize="13px" fontWeight="400" className="learn-subtitle">
           <Trans t={t} i18nKey="SaveToApply" />
         </Text>

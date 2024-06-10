@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "Ορισμός διαχειριστών",
-  "BackupPortal": "Διαφυλάξτε τα δεδομένα DocSpace",
-  "ChangeInstruction": "Για να αλλάξετε τον ιδιοκτήτη του DocSpace, επιλέξτε το όνομα του νέου ιδιοκτήτη παρακάτω.",
-  "ChangeOwner": "Αλλαγή ιδιοκτήτη DocSpace",
+  "BackupPortal": "Διαφυλάξτε τα δεδομένα {{portalName}}",
+  "ChangeInstruction": "Για να αλλάξετε τον ιδιοκτήτη του {{portalName}}, επιλέξτε το όνομα του νέου ιδιοκτήτη παρακάτω.",
+  "ChangeOwner": "Αλλαγή ιδιοκτήτη {{portalName}}",
   "ChangeUser": "Αλλαγή χρήστη",
-  "DeactivateOrDeletePortal": "Απενεργοποίηση ή διαγραφή DocSpace",
+  "DeactivateOrDeletePortal": "Απενεργοποίηση ή διαγραφή {{portalName}}",
   "DoTheSame": "Κάντε το ίδιο με τους διαχειριστές",
-  "ManagePortal": "Διαχειριστείτε ρυθμίσεις DocSpace",
+  "ManagePortal": "Διαχειριστείτε ρυθμίσεις {{portalName}}",
   "ManageUser": "Διαχειριστείτε λογαριασμούς χρηστών",
-  "NewPortalOwner": "Νέος ιδιοκτήτης DocSpace",
-  "PortalOwnerCan": "Ο ιδιοκτήτης DocSpace μπορεί:",
+  "NewPortalOwner": "Νέος ιδιοκτήτης {{portalName}}",
+  "PortalOwnerCan": "Ο ιδιοκτήτης {{portalName}} μπορεί:",
   "SetAccessRights": "Ορισμός δικαιωμάτων πρόσβασης"
 }

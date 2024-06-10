@@ -1,5 +1,5 @@
 {
-  "Desc": "කරුණාකර DocSpace ලියාපදිංචි දත්ත පිහිටුවන්න.",
+  "Desc": "කරුණාකර {{portalName}} ලියාපදිංචි දත්ත පිහිටුවන්න.",
   "ErrorEmail": "වලංගු නොවන වි-තැපෑලකි",
   "ErrorInitWizard": "සේවාව දැනට නොතිබේ, කරුණාකර පසුව නැවත උත්සාහ කරන්න.",
   "ErrorInitWizardButton": "නැවත",
@@ -11,5 +11,5 @@
   "LicenseLink": "බලපත්‍ර ගිවිසුම්",
   "PlaceholderLicense": "ඔබගේ බලපත්‍රයේ ගොනුව",
   "Timezone": "වේලා කලාපය",
-  "WelcomeTitle": "DocSpace වෙත පිළිගනිමු!"
+  "WelcomeTitle": "{{portalName}} වෙත පිළිගනිමු!"
 }

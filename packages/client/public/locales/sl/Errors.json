@@ -1,6 +1,6 @@
 {
   "ErrorEmptyResponse": "Prazen odziv",
-  "ErrorUnavailableText": "DocSpace ni na voljo",
+  "ErrorUnavailableText": "{{portalName}} ni na voljo",
   "LinkDoesNotExist": "Povezava, ki jo poskušate odpreti, ne obstaja.",
   "LinkHasExpired": "Povezava, ki ste ji sledili, je potekla."
 }

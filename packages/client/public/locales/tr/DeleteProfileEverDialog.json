@@ -1,5 +1,5 @@
 {
-  "ActionCannotBeUndone": "Seçilen devre dışı kullanıcılar DocSpace'den kaldırılacak. Bu eylem geri alınamaz.",
+  "ActionCannotBeUndone": "Seçilen devre dışı kullanıcılar {{portalName}}'den kaldırılacak. Bu eylem geri alınamaz.",
   "CannotReassignFiles": "Birden fazla kullanıcıyı aynı anda silerseniz, onların dosyalarını diğer kullanıcılara yeniden atayamazsınız.",
   "DeleteGroupUsersSuccessMessage": "Kullanıcılar başarıyla silindi.",
   "DeleteMyDocumentsUser": "Bu kullanıcının Belgelerim bölümündeki tüm kişisel dosya ve klasörler kalıcı olarak silinecektir.",

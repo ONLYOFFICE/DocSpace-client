@@ -46,7 +46,7 @@
   "URL": "Vietrādis URL",
   "ViewRawPayload": "Skatīt neapstrādātu lietderīgo slodzi",
   "WebhookCreated": "Tīmekļa aizķere ir izveidota",
-  "WebhookCreationHint": "Šī tīmekļa aizķere tiks piešķirta visiem DocSpace pasākumiem",
+  "WebhookCreationHint": "Šī tīmekļa aizķere tiks piešķirta visiem {{portalName}} pasākumiem",
   "WebhookDetails": "Sīkāka informācija par tīmekļa aizķeri",
   "WebhookEditedSuccessfully": "Tīmekļa aizķeres konfigurācija ir veiksmīgi rediģēta",
   "WebhookHistory": "Tīmekļa aizķeres vēsture",
@@ -55,5 +55,5 @@
   "WebhookRemoved": "Tīmekļa aizķere ir noņemta",
   "Webhooks": "Tīmekļa aizķeres",
   "WebhooksGuide": "Tīmekļa aizķeru rokasgrāmata",
-  "WebhooksInfo": "Izmantojiet tīmekļa aizķeres, lai veiktu pielāgotas darbības jebkurā izmantotajā lietojumprogrammā vai tīmekļa vietnē, pamatojoties uz dažādiem notikumiem ONLYOFFICE DocSpace.\nŠeit varat izveidot un pārvaldīt visus savus tīmekļa aizķeres, konfigurēt tās un pārlūkot katra tīmekļa aizķeres vēsturi, lai pārbaudītu to veiktspēju."
+  "WebhooksInfo": "Izmantojiet tīmekļa aizķeres, lai veiktu pielāgotas darbības jebkurā izmantotajā lietojumprogrammā vai tīmekļa vietnē, pamatojoties uz dažādiem notikumiem ONLYOFFICE {{portalName}}.\nŠeit varat izveidot un pārvaldīt visus savus tīmekļa aizķeres, konfigurēt tās un pārlūkot katra tīmekļa aizķeres vēsturi, lai pārbaudītu to veiktspēju."
 }

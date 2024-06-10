@@ -90,6 +90,7 @@ import {
   SelectedItemsContainer,
   CheckboxGroup,
 } from "./StyledPresets";
+import { PORTAL } from "@docspace/shared/constants";
 
 const Manager = (props) => {
   const { t, setDocumentTitle, fetchExternalLinks, theme, currentColorScheme } =
@@ -347,8 +348,8 @@ const Manager = (props) => {
 
   return (
     <PresetWrapper
-      description={t("CustomDescription")}
-      header={t("CreateSampleDocspace")}
+      description={t("CustomDescription", { portalName: PORTAL })}
+      header={t("CreateSampleDocspace", { portalName: PORTAL })}
     >
       <Container>
         <PreviewBlock
@@ -504,7 +505,9 @@ const Manager = (props) => {
                   tooltipContent={
                     <TooltipContent
                       title={t("Header")}
-                      description={t("HeaderDescription")}
+                      description={t("HeaderDescription", {
+                        portalName: PORTAL,
+                      })}
                       img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
                     />
                   }

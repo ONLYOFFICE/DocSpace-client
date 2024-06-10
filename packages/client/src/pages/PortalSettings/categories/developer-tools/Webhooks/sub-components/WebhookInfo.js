@@ -32,6 +32,7 @@ import { Base } from "@docspace/shared/themes";
 
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
+import { PORTAL } from "@docspace/shared/constants";
 
 import { useTranslation } from "react-i18next";
 
@@ -64,7 +65,7 @@ const WebhookInfo = (props) => {
 
   return (
     <InfoWrapper>
-      <InfoText as="p">{t("WebhooksInfo")}</InfoText>
+      <InfoText as="p">{t("WebhooksInfo", { portalName: PORTAL })}</InfoText>
       <StyledGuideLink
         id="webhooks-info-link"
         fontWeight={600}

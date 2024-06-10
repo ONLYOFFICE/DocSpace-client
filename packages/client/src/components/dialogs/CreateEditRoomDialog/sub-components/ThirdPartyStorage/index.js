@@ -37,6 +37,7 @@ import ThirdPartyComboBox from "./ThirdPartyComboBox";
 import FolderInput from "./FolderInput";
 import { getOAuthToken } from "@docspace/shared/utils/common";
 import { Checkbox } from "@docspace/shared/components/checkbox";
+import { PORTAL } from "@docspace/shared/constants";
 
 const StyledThirdPartyStorage = styled(StyledParam)`
   flex-direction: column;
@@ -86,7 +87,11 @@ const ThirdPartyStorage = ({
 
     if (!connectItems.length) {
       const data = isRoomAdmin ? (
-        <Text as="p">{t("ThirdPartyStorageRoomAdminNoStorageAlert")}</Text>
+        <Text as="p">
+          {t("ThirdPartyStorageRoomAdminNoStorageAlert", {
+            portalName: PORTAL,
+          })}
+        </Text>
       ) : (
         <Text as="p">
           {t("ThirdPartyStorageNoStorageAlert")}{" "}

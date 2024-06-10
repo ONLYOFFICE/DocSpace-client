@@ -30,6 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { StyledTitleComponent } from "../StyledComponent";
+import { PORTAL } from "@docspace/shared/constants";
 
 const TariffTitleContainer = ({
   isLicenseDateExpired,
@@ -87,7 +88,7 @@ const TariffTitleContainer = ({
       <div className="payments_subscription">
         <div className="title">
           <Text fontWeight={600} fontSize="14px" as="span">
-            {t("ActivateTariffDescr")}{" "}
+            {t("ActivateTariffDescr", { portalName: PORTAL })}
           </Text>
           {!isLicenseDateExpired && (
             <Text fontSize="14px" as="span">

@@ -31,7 +31,7 @@
   "GalleryEmptyScreenText": "Sehen Sie die Details der Formularvorlage hier",
   "GroupsEmptyScreenText": "Gruppendetails finden Sie hier",
   "HistoryEmptyScreenText": "Aktivitätsverlauf wird hier angezeigt",
-  "InfoBanner": "Die Liste der eingeladenen Benutzer enthält den Besitzer und/oder den Administrator dieses DocSpace mit vollem Zugang zu allen Räumen. Besitzer und/oder Administrator können keine weiteren Zugriffsrechte zugewiesen werden. Sobald sie dem Raum hinzugefügt wurden, werden sie über alle Änderungen informiert.",
+  "InfoBanner": "Die Liste der eingeladenen Benutzer enthält den Besitzer und/oder den Administrator dieses {{portalName}} mit vollem Zugang zu allen Räumen. Besitzer und/oder Administrator können keine weiteren Zugriffsrechte zugewiesen werden. Sobald sie dem Raum hinzugefügt wurden, werden sie über alle Änderungen informiert.",
   "ItemsSelected": "Ausgewählte Elemente",
   "LastModifiedBy": "Zuletzt geändert von",
   "Properties": "Eigenschaften",

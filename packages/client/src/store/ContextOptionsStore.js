@@ -2151,7 +2151,7 @@ class ContextOptionsStore {
         id: "accounts-add_administrator",
         className: "main-button_drop-down",
         icon: PersonAdminReactSvgUrl,
-        label: t("Common:DocspaceAdmin", { portalName: PORTAL }),
+        label: t("Common:PortalAdmin", { portalName: PORTAL }),
         onClick: this.onInvite,
         "data-type": EmployeeType.Admin,
         key: "administrator",

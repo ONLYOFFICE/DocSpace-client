@@ -316,8 +316,8 @@ class PeopleStore {
     const adminOption = {
       id: "menu_change-user_administrator",
       className: "group-menu_drop-down",
-      label: t("Common:DocspaceAdmin", { portalName: PORTAL }),
-      title: t("Common:DocspaceAdmin", { portalName: PORTAL }),
+      label: t("Common:PortalAdmin", { portalName: PORTAL }),
+      title: t("Common:PortalAdmin", { portalName: PORTAL }),
       onClick: (e) => this.onChangeType(e),
       "data-action": "admin",
       key: "administrator",

@@ -596,7 +596,7 @@ const ArticleMainButtonContent = (props) => {
               id: "invite_doc-space-administrator",
               className: "main-button_drop-down",
               icon: PersonAdminReactSvgUrl,
-              label: t("Common:DocspaceAdmin", { portalName: PORTAL }),
+              label: t("Common:PortalAdmin", { portalName: PORTAL }),
               onClick: onInvite,
               action: EmployeeType.Admin,
               key: "administrator",

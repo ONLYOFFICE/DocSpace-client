@@ -264,8 +264,8 @@ const PeopleTableRow = (props) => {
 
     const adminOption = {
       key: "admin",
-      title: t("Common:DocspaceAdmin", { portalName: PORTAL }),
-      label: t("Common:DocspaceAdmin", { portalName: PORTAL }),
+      title: t("Common:PortalAdmin", { portalName: PORTAL }),
+      label: t("Common:PortalAdmin", { portalName: PORTAL }),
       action: "admin",
     };
     const managerOption = {
@@ -343,7 +343,7 @@ const PeopleTableRow = (props) => {
       case "owner":
         return t("Common:Owner");
       case "admin":
-        return t("Common:DocspaceAdmin", { portalName: PORTAL });
+        return t("Common:PortalAdmin", { portalName: PORTAL });
       case "manager":
         return t("Common:RoomAdmin");
       case "collaborator":

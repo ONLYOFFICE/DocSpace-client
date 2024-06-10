@@ -230,8 +230,8 @@ class AccountsContextOptionsStore {
     const adminOption = {
       id: "context-menu_administrator",
       className: "context-menu_drop-down",
-      label: t("Common:DocspaceAdmin", { portalName: PORTAL }),
-      title: t("Common:DocspaceAdmin", { portalName: PORTAL }),
+      label: t("Common:PortalAdmin", { portalName: PORTAL }),
+      title: t("Common:PortalAdmin", { portalName: PORTAL }),
       onClick: (e) => onChangeType(e, t),
       action: "admin",
       key: "cm-administrator",

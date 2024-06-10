@@ -812,7 +812,7 @@ const SectionFilterContent = ({
 
           switch (+filter.role) {
             case EmployeeType.Admin:
-              label = t("Common:DocspaceAdmin", { portalName: PORTAL });
+              label = t("Common:PortalAdmin", { portalName: PORTAL });
               break;
             case EmployeeType.User:
               label = t("Common:RoomAdmin");
@@ -1352,7 +1352,7 @@ const SectionFilterContent = ({
           id: "filter_type-docspace-admin",
           key: EmployeeType.Admin,
           group: "filter-type",
-          label: t("Common:DocspaceAdmin", { portalName: PORTAL }),
+          label: t("Common:PortalAdmin", { portalName: PORTAL }),
         },
         {
           id: "filter_type-room-admin",

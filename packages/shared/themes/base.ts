@@ -61,7 +61,7 @@ const {
   lightSecondMain,
   lightSecondMainHover,
   blueMaya,
-  blueSky,
+  lightSecondMainDisabled,
 
   lightStatusWarning,
 
@@ -80,11 +80,8 @@ const {
   lightToastWarning,
   lightToastAlert,
   darkBlack,
-  silver,
   lightGrayHover,
-  strongBlue,
   lightGraySelected,
-  darkRed,
 
   lightErrorStatus,
   darkGrayLight,
@@ -200,7 +197,7 @@ export const getBaseTheme = () => {
         primary: lightSecondMain,
         primaryHover: lightSecondMainHover,
         primaryActive: blueMaya,
-        primaryDisabled: blueSky,
+        primaryDisabled: lightSecondMainDisabled,
       },
 
       border: {
@@ -212,7 +209,7 @@ export const getBaseTheme = () => {
         primary: `1px solid ${lightSecondMain}`,
         primaryHover: `1px solid ${lightSecondMainHover}`,
         primaryActive: `1px solid ${blueMaya}`,
-        primaryDisabled: `1px solid ${blueSky}`,
+        primaryDisabled: `1px solid ${lightSecondMainDisabled}`,
       },
 
       loader: {
@@ -1329,10 +1326,6 @@ export const getBaseTheme = () => {
         },
       },
 
-      dropZone: {
-        border: `1px dashed ${silver}`,
-      },
-
       container: {
         miniPreview: {
           width: "160px",
@@ -1375,61 +1368,6 @@ export const getBaseTheme = () => {
 
     treeMenu: {
       disabledColor: "#767676",
-    },
-
-    treeNode: {
-      background: lightGrayHover,
-      disableColor: gray,
-
-      dragging: {
-        draggable: {
-          background: lightToastInfo,
-          hoverBackgroundColor: lightMediumGoldenrod,
-          borderRadius: "3px",
-        },
-
-        title: {
-          width: "85%",
-        },
-      },
-      icon: {
-        color: lightGrayDark,
-      },
-
-      draggable: {
-        color: grayText,
-        dragOverBackgroundColor: strongBlue,
-        border: `1px ${strongBlue} solid`,
-        dragOverColor: white,
-
-        gapTop: {
-          borderTop: `2px blue solid`,
-        },
-
-        gapBottom: {
-          borderBottom: `2px blue solid`,
-        },
-      },
-
-      contentWrapper: {
-        color: darkRed,
-      },
-
-      title: {
-        color: grayText,
-      },
-
-      selected: {
-        background: lightGraySelected,
-        hoverBackgroundColor: lightGraySelected,
-        borderRadius: "3px",
-      },
-
-      checkbox: {
-        border: `2px solid ${white}`,
-        borderTop: 0,
-        borderLeft: 0,
-      },
     },
 
     progressBar: {
@@ -1837,7 +1775,6 @@ export const getBaseTheme = () => {
 
     dragAndDrop: {
       height: "100%",
-      border: `1px solid ${globalColors.darkSilver}`,
       transparentBorder: "1px solid transparent",
       acceptBackground: lightMediumGoldenrod,
       background: lightToastInfo,
@@ -1874,7 +1811,6 @@ export const getBaseTheme = () => {
     //     border: `1px solid ${grayLightMid}`,
     //   },
     //   crossShape: {
-    //     color: graySilver,
     //     disable: {
     //       color: gray,
     //     },
@@ -2459,14 +2395,6 @@ export const getBaseTheme = () => {
         backgroundColor: "rgba(11, 11, 11, 0.7)",
         background: "rgba(200, 200, 200, 0.2)",
       },
-    },
-
-    connectCloud: {
-      connectBtnContent: black,
-      connectBtnTextBg: white,
-      connectBtnIconBg: white,
-      connectBtnTextBorder: grayStrong,
-      connectBtnIconBorder: grayStrong,
     },
 
     createEditRoomDialog: {

@@ -40,7 +40,6 @@ const {
   grayLightMid,
   grayStrong,
   grayDarkMid,
-  graySilver,
   gray,
   lightGrayDark,
   grayDark,
@@ -59,12 +58,8 @@ const {
   grayText,
 
   darkBlack,
-  silver,
-  strongBlue,
 
   lightStatusWarning,
-
-  darkRed,
 
   darkErrorStatus,
   darkGrayLight,
@@ -78,6 +73,7 @@ const {
   darkToastWarning,
   lightBlueMainDisabled,
   lightBlueMainHover,
+  darkGrayDark,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -430,7 +426,7 @@ const Dark: TTheme = {
 
     iconColor: grayDark,
     iconColorHover: white,
-    iconColorActive: silver,
+    iconColorActive: darkGrayDark,
 
     border: `none`,
     boxSizing: "border-box",
@@ -1355,62 +1351,6 @@ const Dark: TTheme = {
     disabledColor: grayDarkText,
   },
 
-  treeNode: {
-    background: lightDarkGrayHover,
-    disableColor: grayDark,
-
-    icon: {
-      color: "#ADADAD",
-    },
-
-    dragging: {
-      draggable: {
-        background: "rgba(230, 211, 138, 0.12)",
-        hoverBackgroundColor: "rgba(204, 184, 102, 0.2)",
-        borderRadius: "3px",
-      },
-
-      title: {
-        width: "85%",
-      },
-    },
-
-    draggable: {
-      color: grayText,
-      dragOverBackgroundColor: strongBlue,
-      border: `1px ${strongBlue} solid`,
-      dragOverColor: white,
-
-      gapTop: {
-        borderTop: `2px blue solid`,
-      },
-
-      gapBottom: {
-        borderBottom: `2px blue solid`,
-      },
-    },
-
-    contentWrapper: {
-      color: darkRed,
-    },
-
-    title: {
-      color: "#a9a9a9",
-    },
-
-    selected: {
-      background: black,
-      hoverBackgroundColor: black,
-      borderRadius: "3px",
-    },
-
-    checkbox: {
-      border: `2px solid ${white}`,
-      borderTop: 0,
-      borderLeft: 0,
-    },
-  },
-
   progressBar: {
     backgroundColor: grayDark,
 
@@ -1819,7 +1759,6 @@ const Dark: TTheme = {
 
   dragAndDrop: {
     height: "100%",
-    border: `1px solid ${globalColors.darkSilver}`,
     transparentBorder: "1px solid transparent",
     acceptBackground: "rgba(204, 184, 102, 0.2)",
     background: "rgba(230, 211, 138, 0.12)",
@@ -1856,7 +1795,6 @@ const Dark: TTheme = {
   //     border: `1px solid ${grayLightMid}`,
   //   },
   //   crossShape: {
-  //     color: graySilver,
   //     disable: {
   //       color: gray,
   //     },
@@ -2165,8 +2103,6 @@ const Dark: TTheme = {
   },
 
   peopleTableRow: {
-    fill: graySilver,
-
     nameColor: grayMaxLight,
     pendingNameColor: "#6f6f6f",
 
@@ -2386,7 +2322,6 @@ const Dark: TTheme = {
       descriptionColor: "#ADADAD",
       buttonColor: "#ADADAD",
       hoverButtonColor: white,
-      pressedButtonColor: silver,
     },
   },
 
@@ -2440,14 +2375,6 @@ const Dark: TTheme = {
       backgroundColor: "rgba(11, 11, 11, 0.7)",
       background: "rgba(200, 200, 200, 0.2)",
     },
-  },
-
-  connectCloud: {
-    connectBtnContent: silver,
-    connectBtnTextBg: "none",
-    connectBtnIconBg: "#none",
-    connectBtnTextBorder: silver,
-    connectBtnIconBorder: grayDarkStrong,
   },
 
   createEditRoomDialog: {
@@ -2884,7 +2811,7 @@ const Dark: TTheme = {
     textColor: grayDark,
     navBackground: darkGrayLight,
     headerColor: white,
-    helpButton: graySilver,
+    helpButton: grayDark,
     orLineColor: grayDarkStrong,
     orTextColor: grayDark,
     titleColor: white,

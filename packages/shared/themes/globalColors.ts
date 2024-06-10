@@ -79,34 +79,20 @@ export const globalColors = {
   darkToastWarning: "#E07751",
   //
 
-  whiteSolitude: "#E4E7EB",
   grayMaxLight: "#eeeeee",
-  graySilver: "#D8D8D8",
 
   shuttleGrey: "#63686A",
   veryLightGrey: "#CACACA",
-  darkSilver: "#bbb",
-  silver: "#CCCCCC",
 
   blueMain: "#2DA7DB",
-  blueHover: "#3DB8EC",
-  blueActive: "#1F97CA",
   blueDisabled: "#A6DCF2",
-  blueCharcoal: "#1F2933",
-  strongBlue: "#316AC5",
   blueMaya: "#4A8ACA",
-  blueSky: "#96C1EC",
 
   lightGrayishBlue: "#DEE2E6",
 
-  orangeHover: "#FF8932",
   orangePressed: "#C96C27",
-  orangeDisabled: "#FFCCA6",
   lightMediumGoldenrod: "#EFEFB2",
-
-  errorColor: "#C96C27",
 
   warningColor: "#f1ca92",
   red: "#c30",
-  darkRed: "#A60000",
 };

@@ -3,7 +3,7 @@
   "ConfigurationDescription": "Devi connettere il tuo dominio al tuo IP attuale per modificare le impostazioni dell'indirizzo. Assicurati di avere accesso alle impostazioni del dominio per poterlo fare. Dopo aver connesso il dominio, crea un nome {{portalName}}. È possibile modificare il nome {{portalName}} creato successivamente utilizzando le impostazioni dello spazio.",
   "ConfigurationHeader": "Configurazione dello spazio attuale",
   "CreateSpaceDescription": "Hai collegato con successo il tuo dominio al tuo indirizzo IP. Per modificare le impostazioni dell'indirizzo dello spazio è necessario impostare il futuro nome di {{portalName}}",
-  "CreatingDocspace": "Creazione di un nuovo {{portalName}}",
+  "CreatingPortal": "Creazione di un nuovo {{portalName}}",
   "CurrentSpace": "Spazio attuale",
   "DeletePortalText": "Ti preghiamo di notare: solo il proprietario può eliminare il {{portalName}} selezionato. Il proprietario di <1>{{domain}}</1> è <1>{{displayName}}</1> (<5>{{email}}</5>). Se non sei il proprietario, non potrai accedere alle impostazioni di eliminazione di {{portalName}} facendo clic sul pulsante ELIMINA e verrai reindirizzato alla sezione Stanze.",
   "DocspaceName": "Nome di {{portalName}}",

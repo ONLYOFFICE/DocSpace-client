@@ -3,7 +3,7 @@
   "ConfigurationDescription": "Il vous faut connecter votre domaine à votre IP actuelle pour modifier les paramètres de l'adresse. Assurez-vous d'avoir accès aux paramètres du domaine pour pouvoir le faire. Après avoir connecté le domaine, créez un nom {{portalName}}. Vous pouvez modifier le nom {{portalName}} créé ultérieurement à l'aide des paramètres de l'espace.",
   "ConfigurationHeader": "Configuration actuelle de l'espace",
   "CreateSpaceDescription": "Vous avez réussi à connecter votre domaine à votre adresse IP. Pour modifier les paramètres de l'adresse de l'espace, il faut définir le nom du futur {{portalName}}.",
-  "CreatingDocspace": "Création d'un nouveau {{portalName}}",
+  "CreatingPortal": "Création d'un nouveau {{portalName}}",
   "CurrentSpace": "Espace actuel",
   "DeletePortalText": "Remarque : seul le propriétaire peut supprimer le {{portalName}} sélectionné. Le propriétaire de <1>{{domain}}</1> est <1>{{displayName}}</1> (<5>{{email}}</5>). Si vous n'êtes pas le propriétaire, vous ne pourrez pas accéder aux paramètres de suppression du {{portalName}} en cliquant sur le bouton SUPPRIMER et serez redirigé vers la section Salles.",
   "DocspaceName": "Nom de {{portalName}}",

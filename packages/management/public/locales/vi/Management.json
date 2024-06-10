@@ -3,7 +3,7 @@
   "ConfigurationDescription": "Bạn cần kết nối tên miền của mình với IP hiện tại để thay đổi cài đặt địa chỉ. Xin hãy đảm bảo bạn có quyền truy cập vào cài đặt tên miền để có thể thực hiện điều đó. Sau khi kết nối tên miền, hãy tạo tên {{portalName}}. Bạn có thể thay đổi tên {{portalName}} đã tạo sau này bằng cách sử dụng cài đặt không gian.",
   "ConfigurationHeader": "Cấu hình không gian hiện tại",
   "CreateSpaceDescription": "Bạn đã kết nối thành công tên miền với địa chỉ IP của mình. Để chỉnh sửa cài đặt địa chỉ không gian, bạn cần đặt tên {{portalName}} trong tương lai",
-  "CreatingDocspace": "Tạo {{portalName}} mới",
+  "CreatingPortal": "Tạo {{portalName}} mới",
   "CurrentSpace": "Không gian hiện tại",
   "DeletePortalText": "Xin lưu ý: chỉ chủ sở hữu mới có thể xóa {{portalName}} đã chọn. Chủ sở hữu của <1>{{domain}} </1> là <1>{{displayName}} </1> (<5>{{email}} </5>). Nếu bạn không phải là chủ sở hữu, bạn sẽ không thể truy cập cài đặt xóa {{portalName}} bằng cách nhấp vào nút XÓA và sẽ được chuyển hướng đến phần Phòng.",
   "DocspaceName": "Tên {{portalName}}",

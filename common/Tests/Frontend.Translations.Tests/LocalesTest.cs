@@ -80,7 +80,7 @@ public class LocalesTest
     public List<ParseJsonError> ParseJsonErrors { get; set; }
     public static string ConvertPathToOS { get; private set; }
 
-  
+
     public List<string> ForbiddenElements { get { return new List<string>() { "ONLYOFFICE", "DOCSPACE" }; } }
     //public List<JsonEncodingError> WrongEncodingJsonErrors { get; set; }
 
@@ -627,7 +627,7 @@ public class LocalesTest
             {
                 Language = g.Key,
                 TranslationsWithVariables = g.ToList()
-                    .SelectMany(t => t.Translations)
+                    .SelectMany(t => t.Translations.Select(k => new TranslationItem($"{t.FileName}:{k.Key}", k.Value)))
                     //.Where(k => k.Value.IndexOf("{{") != -1)
                     .Select(t => new
                     {
@@ -884,7 +884,7 @@ public class LocalesTest
             foreach (var lng in module.AvailableLanguages)
             {
                 var translationItems = lng.Translations.Where(f => ForbiddenElements.Any(elem => f.Key.ToUpper().Contains(elem))).ToList();
-         
+
 
                 if (!translationItems.Any())
                     continue;

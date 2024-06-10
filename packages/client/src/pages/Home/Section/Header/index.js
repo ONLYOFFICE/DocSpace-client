@@ -35,6 +35,7 @@ import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
+import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export.room.index.svg?url";
 
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
@@ -638,7 +639,7 @@ const SectionHeaderContent = (props) => {
         id: "header_option_export-room-index",
         key: "export-room-index",
         label: t("Files:ExportRoomIndex"),
-        icon: DownloadReactSvgUrl,
+        icon: ExportRoomIndexSvgUrl,
         onClick: () => onExportRoomIndex(t, selectedFolder?.id),
         disabled: !isVDRRoomType || !selectedFolder.indexing,
       },

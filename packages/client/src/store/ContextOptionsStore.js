@@ -80,6 +80,7 @@ import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
+import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export.room.index.svg?url";
 
 import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 
@@ -1498,7 +1499,7 @@ class ContextOptionsStore {
         id: "option_export-room-index",
         key: "export-room-index",
         label: t("Files:ExportRoomIndex"),
-        icon: DownloadReactSvgUrl,
+        icon: ExportRoomIndexSvgUrl,
         onClick: () => this.onExportRoomIndex(t, item.id),
         disabled: !isVDRRoomType || !item.indexing,
       },

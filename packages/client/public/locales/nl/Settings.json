@@ -139,7 +139,7 @@
   "ImportProcessingDescription": "Gegevensmigratie in uitvoering. Een moment geduld.",
   "ImportSectionDescription": "Selecteer secties om te importeren. Ze verschijnen in de overeenkomstige secties van {{portalName}}.",
   "IncludedInBusiness": "Inbegrepen in Business plan",
-  "IntegrationRequest": "Mist u een handige integratie of component in ONLYOFFICE {{portalName}}? Laat een verzoek achter bij ons team en wij zullen ernaar kijken.",
+  "IntegrationRequest": "Mist u een handige integratie of component in {{organizationName}} {{portalName}}? Laat een verzoek achter bij ons team en wij zullen ernaar kijken.",
   "IPSecurity": "IP Beveiliging",
   "IPSecurityMobileDescription": "IP Beveiliging wordt gebruikt om het inloggen op het portaal te beperken vanaf alle IP-adressen behalve bepaalde adressen.",
   "IPSecuritySettingDescription": "Configureer IP Beveiliging om de aanmeldingsmogelijkheid te beperken tot bepaalde IP-adressen. Gebruik exacte IP-adressen in IPv4-formaat, IP-bereik of CIDR-maskering. De IP-beveiliging werkt niet voor ruimte eigenaren, zij kunnen vanaf elk IP-adres toegang krijgen tot de ruimte.",

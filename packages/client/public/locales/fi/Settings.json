@@ -135,7 +135,7 @@
   "ImportProcessingDescription": "Tietojen siirto on käynnissä. Ole hyvä ja odota.",
   "ImportSectionDescription": "Valitse osiot tuontia varten. Ne ilmestyvät vastaaviin {{portalName}}-n osioihin.",
   "IncludedInBusiness": "Sisältyy Business-tilaukseen",
-  "IntegrationRequest": "Puuttuuko ONLYOFFICE {{portalName}}-sta käytännöllinen integraatio tai komponentti? Jätä pyyntö tiimillemme, niin tutkimme asiaa.",
+  "IntegrationRequest": "Puuttuuko {{organizationName}} {{portalName}}-sta käytännöllinen integraatio tai komponentti? Jätä pyyntö tiimillemme, niin tutkimme asiaa.",
   "IPSecurity": "IP-suojaus",
   "IPSecurityMobileDescription": "IP-suojausta käytetään rajoittamaan portaaliin kirjautumista kaikista IP-osoitteista paitsi tietyistä osoitteista.",
   "IPSecuritySettingDescription": "Määritä IP-suojaus rajoittamaan sisäänkirjautumismahdollisuutta IP-osoitteiden valinnassa. Käytä joko tarkkoja IP-osoitteita IPv4-muodossa, IP-alueella tai luokatonta reititystä. IP-suojaus ei toimi tilan omistajille, heillä on pääsy tilaan mistä tahansa IP-osoitteesta.",

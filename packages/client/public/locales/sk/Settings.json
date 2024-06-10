@@ -139,7 +139,7 @@
   "ImportProcessingDescription": "Prebieha migrácia údajov. Počkajte, prosím.",
   "ImportSectionDescription": "Vyberte sekcie na import. Zobrazia sa v príslušných sekciách {{portalName}}.",
   "IncludedInBusiness": "Zahrnuté v Obchodnom pláne",
-  "IntegrationRequest": "Chýba vám v ONLYOFFICE {{portalName}} užitočná integrácia alebo komponent? Napíšte nášmu tímu svoju požiadavku a my sa na ňu pozrieme.",
+  "IntegrationRequest": "Chýba vám v {{organizationName}} {{portalName}} užitočná integrácia alebo komponent? Napíšte nášmu tímu svoju požiadavku a my sa na ňu pozrieme.",
   "IPSecurity": "IP Bezpečnosť",
   "IPSecurityMobileDescription": "IP bezpečnosť sa používa na obmedzenie prihlasovania do portálu zo všetkých IP adries okrem určitých adries.",
   "IPSecuritySettingDescription": "Nakonfigurujte IP bezpečnosť, aby ste obmedzili možnosť prihlásenia na vybrané IP adresy. Použite buď presné IP adresy vo formáte IPv4, rozsah IP alebo maskovanie CIDR. IP bezpečnosť nefunguje pre vlastníkov priestoru, tí môžu do priestoru pristupovať z ľubovoľnej IP adresy.",

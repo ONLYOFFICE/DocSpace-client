@@ -141,7 +141,7 @@
   "ImportProcessingDescription": "Data migration in progress. Please wait.",
   "ImportSectionDescription": "Select sections for import. They will appear in the corresponding sections of {{portalName}}.",
   "IncludedInBusiness": "Included in Business plan",
-  "IntegrationRequest": "Missing a useful integration or component in ONLYOFFICE {{portalName}}? Leave a request to our team and we will look into that.",
+  "IntegrationRequest": "Missing a useful integration or component in {{organizationName}} {{portalName}}? Leave a request to our team and we will look into that.",
   "InviteLetterTooltip": "If checked, all new users will receive a invite letter with authorization details.",
   "IPSecurity": "IP Security",
   "IPSecurityMobileDescription": "IP Security is used to restrict login to the portal from all IP addresses except certain addresses.",

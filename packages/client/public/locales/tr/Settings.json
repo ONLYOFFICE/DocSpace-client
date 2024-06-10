@@ -139,7 +139,7 @@
   "ImportProcessingDescription": "Veri migrasyonu devam ediyor. Lütfen bekleyin.",
   "ImportSectionDescription": "İçe aktarma için bölümleri seçin. {{portalName}}’in ilgili bölümlerinde görüneceklerdir.",
   "IncludedInBusiness": "Business planına dahil",
-  "IntegrationRequest": "ONLYOFFICE {{portalName}}'te yararlı bir entegrasyon veya bileşen mi eksik? Ekibimize bir talep bırakın, bununla ilgilenelim.",
+  "IntegrationRequest": "{{organizationName}} {{portalName}}'te yararlı bir entegrasyon veya bileşen mi eksik? Ekibimize bir talep bırakın, bununla ilgilenelim.",
   "IPSecurity": "IP Güvenliği",
   "IPSecurityMobileDescription": "IP Güvenliği, belirli adresler dışındaki tüm IP adreslerinden portala giriş yapılmasını kısıtlamak için kullanılır.",
   "IPSecuritySettingDescription": "IP adreslerini seçmek üzere oturum açma olanağını kısıtlamak için IP Güvenliğini yapılandırın. IPv4 biçimindeki tam IP adreslerini, IP aralığını veya CIDR maskelemesini kullanın. Alan sahipleri için IP güvenliği çalışmaz, alana herhangi bir IP adresinden erişebilirler.",

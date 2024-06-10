@@ -137,7 +137,7 @@
   "ImportProcessingDescription": "データ移行中です。しばらくお待ちください。",
   "ImportSectionDescription": "インポートするセクションを選択してください。このセクションは、{{portalName}}の対応するセクションに表示されます。",
   "IncludedInBusiness": "BUSINESSプランに含まれています",
-  "IntegrationRequest": "ONLYOFFICE {{portalName}}の便利な統合やコンポーネントをお探しですか？私たちのチームにリクエストをしてください。",
+  "IntegrationRequest": "{{organizationName}} {{portalName}}の便利な統合やコンポーネントをお探しですか？私たちのチームにリクエストをしてください。",
   "InviteLetterTooltip": "チェックした場合、すべての新規ユーザーに認証の詳細が記載された招待状が送信されます。",
   "IPSecurity": "IPセキュリティ",
   "IPSecurityMobileDescription": "IPセキュリティは、特定のアドレスを除くすべてのIPアドレスからのポータルへのログインを制限するために使用します。",

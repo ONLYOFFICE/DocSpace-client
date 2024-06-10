@@ -92,7 +92,7 @@
   "LinkDisabledSuccessfully": "Keçid uğurla deaktiv edildi",
   "LinkEditedSuccessfully": "Link uğurla redaktə edildi və kopyalandı",
   "LinkEnabledSuccessfully": "Keçid uğurla aktivləşdirildi",
-  "LinkForPortalUsers": "{{portalName} istifadəçiləri üçün keçid",
+  "LinkForPortalUsers": " {{portalName}} istifadəçiləri üçün keçid",
   "LinkSettings": "Link parametrləri",
   "LinkSuccessfullyCreatedAndCopied": "Link uğurla yaradıldı və mübadilə buferə kopyalandı",
   "LinkValidUntil": "Bu keçid vaxta qədər etibarlı olacaq",

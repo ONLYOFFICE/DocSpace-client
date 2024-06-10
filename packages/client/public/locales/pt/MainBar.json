@@ -13,6 +13,6 @@
   "StorageQuotaExceeded": "Cota de armazenamento excedida",
   "StorageQuotaHeader": "A capacidade de armazenamento do espaço está prestes a ser excedida: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Você pode remover os arquivos desnecessários ou alterar a cota nas <1>Configurações de gerenciamento de armazenamento.</1>",
-  "UserQuotaDescription": "<1>{{clickHere}}</1> para encontrar um plano de preços melhor para o seu {portalName}}.",
+  "UserQuotaDescription": "<1>{{clickHere}}</1> para encontrar um plano de preços melhor para o seu {{portalName}}.",
   "UserQuotaHeader": "O número de administradores/utilizadores com poder está prestes a ser excedido: {{currentValue}} / {{maxValue}}."
 }

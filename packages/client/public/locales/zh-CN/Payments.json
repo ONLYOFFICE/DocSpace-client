@@ -1,5 +1,4 @@
 {
-  "AccessingProblem": "如果您已是用户且在访问此空间时遇到问题，请与管理员联系。",
   "Benefits": "优势",
   "BusinessExpired": "您的{{planName}}版本已于{{date}}过期",
   "BusinessFinalDateInfo": "订阅将于 {{finalDate}} 自动按照更新后的定价和规格续期。您可在 Stripe 客户门户中取消或更改计费信息。",

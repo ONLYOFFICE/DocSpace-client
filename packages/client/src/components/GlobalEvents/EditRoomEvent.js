@@ -156,7 +156,6 @@ const EditRoomEvent = ({
         isTitleChanged || isQuotaChanged
           ? await editRoom(item.id, editRoomParams)
           : item;
-
       room.isLogoLoading = true;
 
       const createTagActions = [];
@@ -177,7 +176,7 @@ const EditRoomEvent = ({
         };
       }
       if (tags.length) {
-        actions.push(addTagsToRoom(room.id, tags));
+        actions.push(addTagsToRoom(room.id, newTags));
         room.tags = tags;
       }
       if (removedTags.length)

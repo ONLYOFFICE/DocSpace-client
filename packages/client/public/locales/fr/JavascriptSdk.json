@@ -91,7 +91,7 @@
   "SelectButtonText": "Sélectionner le texte du bouton",
   "SelectImage": "Sélectionner l'image",
   "SelectModeEmbedding": "Sélectionner le mode d'intégration de votre espace {{portalName}}",
-  "SelectToDocspace": "Sélectionner pour {{portalName}}",
+  "SelectToPortal": "Sélectionner pour {{portalName}}",
   "SelectTypes": "Sélectionner types",
   "SetItUp": "Réglage",
   "SettingUpColumns": "Régler Colonnes",

@@ -90,7 +90,7 @@
   "SearchTerm": "Hakusana",
   "SelectButtonText": "Valitse painikkeen teksti",
   "SelectImage": "Valitse kuva",
-  "SelectToDocspace": "Valitse {{portalName}}-en",
+  "SelectToPortal": "Valitse {{portalName}}-en",
   "SelectTypes": "Valitse tyypit",
   "SetItUp": "Aseta se",
   "SettingUpColumns": "Sarakkeiden asettaminen",

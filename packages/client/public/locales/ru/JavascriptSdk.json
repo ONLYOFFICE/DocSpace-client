@@ -93,7 +93,7 @@
   "SelectButtonText": "Выберите текст кнопки",
   "SelectImage": "Выберите изображение",
   "SelectModeEmbedding": "Выберите режим для встраивания вашего {{portalName}}",
-  "SelectToDocspace": "Выберите для {{portalName}}",
+  "SelectToPortal": "Выберите для {{portalName}}",
   "SelectTypes": "Выберите типы",
   "SetItUp": "Настроить",
   "SettingUpColumns": "Настройка столбцов",

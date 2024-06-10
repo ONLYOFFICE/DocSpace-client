@@ -93,7 +93,7 @@
   "SelectButtonText": "Tekst przycisku wyboru",
   "SelectImage": "Wybierz obraz",
   "SelectModeEmbedding": "Wybierz tryb osadzania {{portalName}}",
-  "SelectToDocspace": "Wybierz do {{portalName}}",
+  "SelectToPortal": "Wybierz do {{portalName}}",
   "SelectTypes": "Wybierz rodzaje",
   "SetItUp": "Skonfiguruj",
   "SettingUpColumns": "Konfigurowanie kolumn",

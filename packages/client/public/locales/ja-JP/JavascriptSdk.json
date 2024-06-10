@@ -93,7 +93,7 @@
   "SelectButtonText": "ボタンテキストの選択",
   "SelectImage": "画像の選択",
   "SelectModeEmbedding": "{{portalName}}を埋め込むモードを選択する",
-  "SelectToDocspace": "{{portalName}}に選択",
+  "SelectToPortal": "{{portalName}}に選択",
   "SelectTypes": "タイプの選択",
   "SetItUp": "設定",
   "SettingUpColumns": "カラムの設定",

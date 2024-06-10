@@ -93,7 +93,7 @@
   "SelectButtonText": "Text der Auswahlschaltfläche",
   "SelectImage": "Bild auswählen",
   "SelectModeEmbedding": "Modus zum Einbetten Ihres {{portalName}} wählen",
-  "SelectToDocspace": "{{portalName}} auswählen",
+  "SelectToPortal": "{{portalName}} auswählen",
   "SelectTypes": "Typen auswählen",
   "SetItUp": "Einrichten",
   "SettingUpColumns": "Spalten einrichten",

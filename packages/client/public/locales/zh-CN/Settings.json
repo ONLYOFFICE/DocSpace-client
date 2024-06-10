@@ -115,7 +115,7 @@
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} 用户已成功导入。",
   "ImportFromGoogle": "从Google Workspace 导入",
   "ImportFromNextcloud": "从Nextcloud 导入",
-  "ImportFromOnlyoffice": "从ONLYOFFICE 工作区导入",
+  "ImportFromOnlyoffice": "从{{organizationName}} 工作区导入",
   "ImportProcessingDescription": "正在进行数据迁移。请稍候。",
   "IncludedInBusiness": "专业版方案中包括",
   "InviteLetterTooltip": "如果开启，所有新用户都将收到包含授权详细信息的邀请邮件。",

@@ -134,7 +134,7 @@
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} lietotāji tika veiksmīgi importēti.",
   "ImportFromGoogle": "Importēt no Google Workspace",
   "ImportFromNextcloud": "Importēt no Nextcloud",
-  "ImportFromOnlyoffice": "Importēt no ONLYOFFICE darbvietas",
+  "ImportFromOnlyoffice": "Importēt no {{organizationName}} darbvietas",
   "ImportProcessingDescription": "Notiek datu migrācija. Uzgaidiet.",
   "ImportSectionDescription": "Atlasiet sadaļas importēšanai. Tās būs redzamas attiecīgajās {{portalName}} sadaļās.",
   "IncludedInBusiness": "Iekļauts Biznesa plānā",

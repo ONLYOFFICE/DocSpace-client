@@ -133,7 +133,7 @@
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} ユーザーは正常にインポートされました。",
   "ImportFromGoogle": "Google Workspaceからのインポート",
   "ImportFromNextcloud": "Nextcloudからのインポート",
-  "ImportFromOnlyoffice": "ONLYOFFICE Workspaceからのインポート",
+  "ImportFromOnlyoffice": "{{organizationName}} Workspaceからのインポート",
   "ImportProcessingDescription": "データ移行中です。しばらくお待ちください。",
   "ImportSectionDescription": "インポートするセクションを選択してください。このセクションは、{{portalName}}の対応するセクションに表示されます。",
   "IncludedInBusiness": "BUSINESSプランに含まれています",

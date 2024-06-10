@@ -136,7 +136,7 @@
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} utilizatori au fost importate cu succes.",
   "ImportFromGoogle": "Import din Google Workspace",
   "ImportFromNextcloud": "Import din Nextcloud",
-  "ImportFromOnlyoffice": "Import din ONLYOFFICE Workspace",
+  "ImportFromOnlyoffice": "Import din {{organizationName}} Workspace",
   "ImportProcessingDescription": "Migrare de date în desfășurare Vă rugăm așteptați.",
   "ImportSectionDescription": "Selectați secțiuni pentru imoprt. Aceste secţiuni  vor apărea în secțiunile corespunzătoare ale spațiului {{portalName}}.",
   "IncludedInBusiness": "Inclus în abonamentul Business",

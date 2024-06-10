@@ -125,7 +125,6 @@
   "ImportedUsers": "පරිශ්‍රීලකයින් {{selectedUsers}}/{{importedUsers}} ක්  සාර්ථකව ආයාත කෙරිණි.",
   "ImportFromGoogle": "ගූගල් වැඩබිමෙන් ආයාත කරන්න",
   "ImportFromNextcloud": "නෙක්ස්ක්ලවුඩ් වෙතින් ආයාත කරන්න",
-  "ImportFromOnlyoffice": "ඔන්ලිඔෆිස් වැඩබිමෙන් ආයාත කරන්න",
   "ImportProcessingDescription": "දත්ත සංක්‍රමණය සිදු වෙමින් පවතී. කරුණාකර රැඳී සිටින්න.",
   "ImportSectionDescription": "ආයාත කිරීමට කොටස් තෝරන්න. ඒවා {{portalName}} හි උචිත කොටස්වල දිස් වනු ඇත.",
   "IncludedInBusiness": "ව්‍යාපාර සැලසුමේ ඇත",

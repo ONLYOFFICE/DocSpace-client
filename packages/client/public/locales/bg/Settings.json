@@ -135,7 +135,7 @@
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} потребители бяха входирани успешно.",
   "ImportFromGoogle": "Входирай от Google Workspace",
   "ImportFromNextcloud": "Входирай от Nextcloud",
-  "ImportFromOnlyoffice": "Входирай от ONLYOFFICE Workspace",
+  "ImportFromOnlyoffice": "Входирай от {{organizationName}} Workspace",
   "ImportProcessingDescription": "Извършва се миграция на данни. Моля, изчакайте.",
   "ImportSectionDescription": "Изберете секции за входиране. Те ще се появят в съответните секции на {{portalName}}.",
   "IncludedInBusiness": "Включен в Бизнес план",

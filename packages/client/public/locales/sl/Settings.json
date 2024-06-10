@@ -135,7 +135,7 @@
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} uporabnikov je bilo uspešno uvoženih.",
   "ImportFromGoogle": "Uvoz iz Google Workspace",
   "ImportFromNextcloud": "Uvoz iz Nextcloud",
-  "ImportFromOnlyoffice": "Uvoz iz ONLYOFFICE Workspace",
+  "ImportFromOnlyoffice": "Uvoz iz {{organizationName}} Workspace",
   "ImportProcessingDescription": "Migracija podatkov v teku. Prosimo, počakajte.",
   "ImportSectionDescription": "Izberite razdelke za uvoz. Prikazali se bodo v ustreznih razdelkih {{portalName}}.",
   "IncludedInBusiness": "Vključeno v poslovni načrt",

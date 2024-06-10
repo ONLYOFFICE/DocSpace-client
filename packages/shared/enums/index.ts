@@ -549,4 +549,5 @@ export const enum RoomsStorageFilter {
 export const enum VDRIndexingAction {
   HigherIndex = "HigherIndex",
   LowerIndex = "LowerIndex",
+  MoveIndex = "MoveIndex",
 }

@@ -127,7 +127,7 @@
   "Import": "Tuonti",
   "ImportCompleteDescriptionGoogle": "Tietojen tuonti Google Workspacesta {{organizationName}} {{portalName}}-en on suoritettu!",
   "ImportCompleteDescriptionNextcloud": "Tietojen tuonti Nextcloudista {{organizationName}} {{portalName}}-en on suoritettu!",
-  "ImportCompleteDescriptionWorkspace": "Tietojen tuonti ONLYOFFICE Workspacesta ONLYOFFICE {{portalName}}-en on suoritettu!",
+  "ImportCompleteDescriptionWorkspace": "Tietojen tuonti {{organizationName}} Workspacesta {{organizationName}} {{portalName}}-en on suoritettu!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} käyttäjät tuotiin onnistuneesti.",
   "ImportFromGoogle": "Tuo Google Workspacesta",
   "ImportFromNextcloud": "Tuo Nextcloudista",

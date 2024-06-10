@@ -131,7 +131,7 @@
   "Import": "Uvoz",
   "ImportCompleteDescriptionGoogle": "Uvoz podatkov iz Google Workspace v {{organizationName}} {{portalName}} je končan!",
   "ImportCompleteDescriptionNextcloud": "Uvoz podatkov iz Nextcloud v {{organizationName}} {{portalName}} je končan!",
-  "ImportCompleteDescriptionWorkspace": "Uvoz podatkov iz ONLYOFFICE Workspace v ONLYOFFICE {{portalName}} je končan!",
+  "ImportCompleteDescriptionWorkspace": "Uvoz podatkov iz {{organizationName}} Workspace v {{organizationName}} {{portalName}} je končan!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} uporabnikov je bilo uspešno uvoženih.",
   "ImportFromGoogle": "Uvoz iz Google Workspace",
   "ImportFromNextcloud": "Uvoz iz Nextcloud",

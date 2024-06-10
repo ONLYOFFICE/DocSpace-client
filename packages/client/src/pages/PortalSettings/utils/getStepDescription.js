@@ -83,6 +83,7 @@ export const getWorkspaceStepDescription = (
   renderTooltip,
   Trans,
   isTypeSelectEmpty,
+  organizationName,
 ) => {
   switch (stepIndex) {
     case 1:
@@ -122,6 +123,7 @@ export const getWorkspaceStepDescription = (
     case 6:
       return t("Settings:ImportCompleteDescriptionWorkspace", {
         portalName: PORTAL,
+        organizationName,
       });
     default:
       return;

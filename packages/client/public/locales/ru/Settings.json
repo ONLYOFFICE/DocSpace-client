@@ -132,7 +132,7 @@
   "Import": "Импортировать",
   "ImportCompleteDescriptionGoogle": "Импорт данных из Google Workspace в {{organizationName}} {{portalName}} завершен!",
   "ImportCompleteDescriptionNextcloud": "Импорт данных из Nextcloud в {{organizationName}} {{portalName}} завершен!",
-  "ImportCompleteDescriptionWorkspace": "Импорт данных из ONLYOFFICE Workspace в ONLYOFFICE {{portalName}} завершен!",
+  "ImportCompleteDescriptionWorkspace": "Импорт данных из {{organizationName}} Workspace в {{organizationName}} {{portalName}} завершен!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} пользователи были успешно импортированы.",
   "ImportFromGoogle": "Импортировать из Google Workspace",
   "ImportFromNextcloud": "Импортировать из Nextcloud Workspace",

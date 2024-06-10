@@ -132,7 +132,7 @@
   "Import": "Import",
   "ImportCompleteDescriptionGoogle": "Import date din Google Workspace în {{organizationName}} {{portalName}} este finalizat!",
   "ImportCompleteDescriptionNextcloud": "Import date din Nextcloud în {{organizationName}} {{portalName}} este finalizat!",
-  "ImportCompleteDescriptionWorkspace": "Import date din ONLYOFFICE Workspace în ONLYOFFICE {{portalName}} este finalizat!",
+  "ImportCompleteDescriptionWorkspace": "Import date din {{organizationName}} Workspace în {{organizationName}} {{portalName}} este finalizat!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} utilizatori au fost importate cu succes.",
   "ImportFromGoogle": "Import din Google Workspace",
   "ImportFromNextcloud": "Import din Nextcloud",

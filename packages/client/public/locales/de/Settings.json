@@ -128,7 +128,7 @@
   "Import": "Importieren",
   "ImportCompleteDescriptionGoogle": "Der Datenimport von Google Workspace nach {{organizationName}} {{portalName}} ist abgeschlossen!",
   "ImportCompleteDescriptionNextcloud": "Der Datenimport von Nextcloud nach {{organizationName}} {{portalName}} ist abgeschlossen!",
-  "ImportCompleteDescriptionWorkspace": "Der Datenimport von ONLYOFFICE Workspace nach ONLYOFFICE {{portalName}} ist abgeschlossen!",
+  "ImportCompleteDescriptionWorkspace": "Der Datenimport von {{organizationName}} Workspace nach {{organizationName}} {{portalName}} ist abgeschlossen!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} Benutzer wurden erfolgreich importiert.",
   "ImportFromGoogle": "Von Google Workspace importieren",
   "ImportFromNextcloud": "Von Nextcloud importieren",

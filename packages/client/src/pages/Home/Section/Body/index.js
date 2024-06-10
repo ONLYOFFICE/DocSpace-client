@@ -315,7 +315,8 @@ const SectionBodyContent = (props) => {
     const replaceableItemType = value && value.split("_").slice(0, 1).join("_");
     const isSectionTarget = elem && elem.className === sectionClass;
 
-    const replaceableItem = isSectionTarget
+    let replaceable;
+    const item = isSectionTarget
       ? filesList[filesList.length - 1]
       : filesList.find((i) =>
           replaceableItemType === "file"
@@ -323,9 +324,14 @@ const SectionBodyContent = (props) => {
             : i.id === replaceableItemId,
         );
 
-    if (!replaceableItem) return;
+    replaceable = item;
+    if (item === filesList[filesList.length - 1] && !isSectionTarget) {
+      replaceable = filesList[filesList.length - 2];
+    }
 
-    changeIndex(VDRIndexingAction.MoveIndex, replaceableItem);
+    if (!replaceable) return;
+
+    changeIndex(VDRIndexingAction.MoveIndex, replaceable);
     return;
   };
 

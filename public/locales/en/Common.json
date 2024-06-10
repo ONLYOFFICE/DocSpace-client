@@ -469,5 +469,7 @@
   "ViewOnlyRooms": "View-only",
   "CustomRooms": "Custom",
   "FormRoom": "Form room",
-  "NewRoom": "New room"
+  "NewRoom": "New room",
+  "StartFilling": "Start filling",
+  "NewFillingFormRoom": "New Filling form room"
 }

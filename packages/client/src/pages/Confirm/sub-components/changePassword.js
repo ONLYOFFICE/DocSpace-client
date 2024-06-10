@@ -39,7 +39,7 @@ import { createPasswordHash } from "@docspace/shared/utils/common";
 import { login } from "@docspace/shared/utils/loginUtils";
 import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordErrorMessage";
 
-import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import withLoader from "../withLoader";
 import { StyledPage, StyledBody, StyledContent } from "./StyledConfirm";
 
@@ -140,7 +140,7 @@ const ChangePasswordForm = (props) => {
     <StyledPage>
       <StyledContent>
         <StyledBody>
-          <DocspaceLogo className="docspace-logo" />
+          <PortalLogo className="docspace-logo" />
           <Text fontSize="23px" fontWeight="700" className="title">
             {greetingTitle}
           </Text>

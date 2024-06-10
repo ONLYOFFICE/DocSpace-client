@@ -35,7 +35,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { getBgPattern } from "@docspace/shared/utils/common";
-import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import { getDeepLink } from "./DeepLink.helper";
@@ -50,7 +50,6 @@ import {
   StyledBody,
 } from "./DeepLink.styled";
 import { DeepLinkProps } from "./DeepLink.types";
-
 
 const DeepLink = ({
   fileInfo,
@@ -103,7 +102,7 @@ const DeepLink = ({
       <Scrollbar>
         <StyledBody>
           <LogoWrapper>
-            <DocspaceLogo className="docspace-logo" isResizable />
+            <PortalLogo className="docspace-logo" isResizable />
           </LogoWrapper>
           <FormWrapper>
             <StyledDeepLink>

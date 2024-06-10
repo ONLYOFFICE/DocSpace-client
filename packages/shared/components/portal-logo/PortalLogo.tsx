@@ -24,7 +24,52 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface DocspaceLogoProps {
-  className?: string;
-  isResizable?: boolean;
-}
+import React, { useState } from "react";
+import { useTheme } from "styled-components";
+
+import { classNames, getLogoUrl } from "@docspace/shared/utils";
+import { WhiteLabelLogoType } from "../../enums";
+import { size as deviceSize } from "../../utils";
+import { StyledWrapper } from "./PortalLogo.styled";
+import type { PortalLogoProps } from "./PortalLogo.types";
+
+const PortalLogo = ({ className, isResizable = false }: PortalLogoProps) => {
+  const theme = useTheme();
+
+  const [size, setSize] = useState(window.innerWidth);
+
+  const onResize = () => {
+    setSize(window.innerWidth);
+  };
+
+  React.useEffect(() => {
+    if (isResizable) window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
+  }, [isResizable]);
+
+  const isMobile = size <= deviceSize.mobile;
+
+  const logoSize =
+    isResizable && isMobile
+      ? WhiteLabelLogoType.LightSmall
+      : WhiteLabelLogoType.LoginPage;
+
+  const logo = getLogoUrl(logoSize, !theme.isBase);
+
+  return (
+    <StyledWrapper isMobile={isMobile} isResizable={isResizable}>
+      {logo && (
+        <img
+          src={logo}
+          className={classNames("logo-wrapper", className)}
+          alt=""
+        />
+      )}
+    </StyledWrapper>
+  );
+};
+
+export default PortalLogo;

@@ -68,7 +68,7 @@ import {
   StyledContent,
 } from "./StyledWizard";
 import { getUserTimezone, getSelectZone } from "./timezonesHelper";
-import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import {
   DEFAULT_SELECT_TIMEZONE,
@@ -318,7 +318,7 @@ const Wizard = (props) => {
       <Scrollbar id="customScrollBar">
         <StyledContent>
           <WizardContainer>
-            <DocspaceLogo className="docspace-logo" />
+            <PortalLogo className="docspace-logo" />
             <Text
               as="div"
               fontWeight={700}

@@ -41,7 +41,7 @@ import ErrorContainer from "@docspace/shared/components/error-container/ErrorCon
 import { mobile, tablet } from "@docspace/shared/utils";
 import { Link } from "@docspace/shared/components/link";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import { StyledPage, StyledContent } from "./StyledConfirm";
 import {
   getTfaSecretKeyAndQR,
@@ -195,7 +195,7 @@ const TfaActivationForm = withLoader((props) => {
       <StyledContent>
         <StyledForm className="set-app-container">
           <Box className="set-app-description" marginProp="0 0 32px 0">
-            <DocspaceLogo className="docspace-logo" />
+            <PortalLogo className="docspace-logo" />
             <Text isBold fontSize="14px" className="set-app-title">
               {t("SetAppTitle")}
             </Text>

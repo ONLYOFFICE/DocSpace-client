@@ -4,7 +4,7 @@
   "PrivacyDescriptionConnect": "ທ່ານສາມາດເປີດໄຟລ໌ນີ້ໄດ້ຈາກໂປຣແກຣມ desktop ເພື່ອເຊື່ອມຕໍ່ກັບ cloud ຂອງທ່ານ ",
   "PrivacyDescriptionEditors": "ຖ້າວ່າຕິດຕັ້ງ {{organizationName}} Desktop Editors ແລ້ວບໍ່ສາມາດເປີດໄດ້ browser ຂອງທ່ານອາດກຳລັງຖືກ block ຢູ່.",
   "PrivacyDialog": "ຖ້າຫາກທ່ານບໍ່ເຫັນກ່ອງເປີດ, ໃຫ້ກົດປຸ່ມດ້ານລຸ່ມ",
-  "PrivacyEditors": "ທ່ານຍັງບໍ່ໄດ້ຕິດຕັ້ງ ONLYOFFICE Desktop Editors ແມ່ນບໍ່?",
+  "PrivacyEditors": "ທ່ານຍັງບໍ່ໄດ້ຕິດຕັ້ງ {{organizationName}} Desktop Editors ແມ່ນບໍ່?",
   "PrivacyHeader": "ເອກະສານນີ້ຖືກເຂົ້າລະຫັດ",
   "PrivacyInstall": "ຕິດຕັ້ງດຽວນີ້"
 }

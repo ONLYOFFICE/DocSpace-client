@@ -4,7 +4,7 @@
   "PrivacyDescriptionConnect": "连接云后，您可从桌面应用界面中打开此文件。",
   "PrivacyDescriptionEditors": "如果您已安装{{organizationName}}桌面编辑器但无法从此页将其打开，则可能是其已被浏览器阻止。",
   "PrivacyDialog": "如果您没有看到对话框，请点击下方的按钮",
-  "PrivacyEditors": "没有ONLYOFFICE桌面编辑器？",
+  "PrivacyEditors": "没有{{organizationName}}桌面编辑器？",
   "PrivacyHeader": "文档已加密",
   "PrivacyInstall": "立即安装"
 }

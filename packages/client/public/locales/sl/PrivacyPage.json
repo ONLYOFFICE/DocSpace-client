@@ -4,7 +4,7 @@
   "PrivacyDescriptionConnect": "To datoteko lahko odprete z vmesnikom namizne aplikacije, ko ste povezani v oblaku",
   "PrivacyDescriptionEditors": "Če imate nameščene {{organizationName}} namizne urejevalnike, vendar jih ne morete odpreti iz te strani, jih morda blokira vaš brskalnik.",
   "PrivacyDialog": "Če ne vidite pogovornega okna, kliknite spodnji gumb",
-  "PrivacyEditors": "Nimate ONLYOFFICE namiznih urejevalnikov?",
+  "PrivacyEditors": "Nimate {{organizationName}} namiznih urejevalnikov?",
   "PrivacyHeader": "Ta dokument je šifriran",
   "PrivacyInstall": "Namesti zdaj"
 }

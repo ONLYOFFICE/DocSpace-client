@@ -4,7 +4,7 @@
   "PrivacyDescriptionConnect": "Можете да отворите този файл от интерфейса на настолното приложение, щом облакът Ви е свързан",
   "PrivacyDescriptionEditors": "Ако имате {{organizationName}} Настолен Редактор инсталиран, но не можете да го отворите от тази страница, браузърът Ви може да го блокира.",
   "PrivacyDialog": "Ако не виждате диалог, кликнете върху бутона долу",
-  "PrivacyEditors": "Нямате ONLYOFFICE Настолни Редактори?",
+  "PrivacyEditors": "Нямате {{organizationName}} Настолни Редактори?",
   "PrivacyHeader": "Този документ е криптиран",
   "PrivacyInstall": "Инсталирай сега"
 }

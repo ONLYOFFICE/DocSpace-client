@@ -4,7 +4,7 @@
   "PrivacyDescriptionConnect": "Bạn có thể mở tệp này từ giao diện của ứng dụng dành cho máy tính khi đám mây của bạn được kết nối.",
   "PrivacyDescriptionEditors": "Nếu bạn đã cài đặt Trình chỉnh sửa {{organizationName}} cho Máy tính tính nhưng không thể mở nó từ trang này thì có thể trình duyệt của bạn đang chặn nó.",
   "PrivacyDialog": "Nếu bạn không thấy hộp thoại, hãy nhấp vào nút bên dưới",
-  "PrivacyEditors": "Bạn không có Trình chỉnh sửa ONLYOFFICE cho Máy tính?",
+  "PrivacyEditors": "Bạn không có Trình chỉnh sửa {{organizationName}} cho Máy tính?",
   "PrivacyHeader": "Tài liệu này được mã hóa",
   "PrivacyInstall": "Cài đặt ngay"
 }

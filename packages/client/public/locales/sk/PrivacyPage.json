@@ -4,7 +4,7 @@
   "PrivacyDescriptionConnect": "Tento súbor môžete otvoriť z rozhrania aplikácie pre počítače vtedy, keď je váš cloud pripojený",
   "PrivacyDescriptionEditors": "Ak máte nainštalované {{organizationName}} Desktop Editory, ale nemôžete ich z tejto stránky otvoriť, je možné že ich váš prehliadač blokuje.",
   "PrivacyDialog": "Ak sa vám nezobrazí dialógové okno, kliknite na tlačidlo nižšie",
-  "PrivacyEditors": "Nemáte ONLYOFFICE Desktop Editory?",
+  "PrivacyEditors": "Nemáte {{organizationName}} Desktop Editory?",
   "PrivacyHeader": "Tento dokument je šifrovaný",
   "PrivacyInstall": "Nainštalovať teraz"
 }

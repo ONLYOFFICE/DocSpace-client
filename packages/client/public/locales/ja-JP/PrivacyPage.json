@@ -4,7 +4,7 @@
   "PrivacyDescriptionConnect": "クラウドが接続されていれば、デスクトップアプリのインターフェースからこのファイルを開けます。",
   "PrivacyDescriptionEditors": "{{organizationName}}デスクトップエディターがインストールされているにもかかわらず、このページから開けない場合は、お使いのブラウザがブロックしている可能性があります。",
   "PrivacyDialog": "ダイアログが表示されない場合は、以下のボタンをクリックしてください。",
-  "PrivacyEditors": "ONLYOFFICEデスクトップエディターを持っていない場合?",
+  "PrivacyEditors": "{{organizationName}}デスクトップエディターを持っていない場合?",
   "PrivacyHeader": "この文書は暗号化されています。",
   "PrivacyInstall": "今すぐインストール"
 }

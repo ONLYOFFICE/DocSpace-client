@@ -4,7 +4,7 @@
   "PrivacyDescriptionConnect": "Buludunuz bağlandıqdan sonra bu faylı masaüstü tətbiqinin interfeysindən aça bilərsiniz",
   "PrivacyDescriptionEditors": "Əgər sizdə {{organizationName}} Desktop Editors proqramı mövcuddursa və açılmırsa, çox güman brauzer tərəfindən bloklanılır.",
   "PrivacyDialog": "Dialoq pəncərəsi görsənmirsə, aşağıdakı düyməyə klikəyin",
-  "PrivacyEditors": "ONLYOFFICE Desktop Editors yoxdurmu?",
+  "PrivacyEditors": "{{organizationName}} Desktop Editors yoxdurmu?",
   "PrivacyHeader": "Bu sənəd şifrələnmişdir ",
   "PrivacyInstall": "İndi quraşdır"
 }

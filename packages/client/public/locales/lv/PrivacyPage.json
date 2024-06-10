@@ -4,7 +4,7 @@
   "PrivacyDescriptionConnect": "Kad mākonis ir savienots, varat atvērt šo failu no darbvirsmas lietotnes saskarnes",
   "PrivacyDescriptionEditors": "Ja jums ir instalēts {{organizationName}} darbvirsmas redaktors, bet nevarat to atvērt no šīs lapas, iespējams, to bloķē jūsu pārlūkprogramma.",
   "PrivacyDialog": "Ja neredzat dialoglodziņu, noklikšķiniet uz tālāk esošās pogas",
-  "PrivacyEditors": "Vai jums nav ONLYOFFICE darbvirsmas redaktoru?",
+  "PrivacyEditors": "Vai jums nav {{organizationName}} darbvirsmas redaktoru?",
   "PrivacyHeader": "Šis dokuments ir šifrēts",
   "PrivacyInstall": "Instalēt tagad"
 }

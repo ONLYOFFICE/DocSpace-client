@@ -224,7 +224,7 @@ const PrivacyPageComponent = ({ t, tReady, organizationName }) => {
             fontSize="16px"
             fontWeight={300}
           >
-            {t("PrivacyEditors")}?
+            {t("PrivacyEditors", { organizationName })}?
           </Text>
           <Link
             className="privacy-rooms-link privacy-rooms-install-text"
@@ -242,7 +242,7 @@ const PrivacyPageComponent = ({ t, tReady, organizationName }) => {
           textAlign="center"
           className="privacy-rooms-text-description"
         >
-          <p>{(t("PrivacyDescriptionEditors"), { organizationName })}.</p>
+          <p>{t("PrivacyDescriptionEditors", { organizationName })}.</p>
           <p>{t("PrivacyDescriptionConnect")}.</p>
         </Text>
       </div>

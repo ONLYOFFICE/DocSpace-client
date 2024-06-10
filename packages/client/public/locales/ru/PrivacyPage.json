@@ -4,7 +4,7 @@
   "PrivacyDescriptionConnect": "Вы можете открыть этот файл из интерфейса десктопного приложения после подключения облака",
   "PrivacyDescriptionEditors": "Если у вас установлены {{organizationName}} Desktop Editors, но не открываются с этой страницы, возможно, это блокируется браузером.",
   "PrivacyDialog": "Если вы не видите диалоговое окно, нажмите кнопку ниже",
-  "PrivacyEditors": "Нет ONLYOFFICE Desktop Editors?",
+  "PrivacyEditors": "Нет {{organizationName}} Desktop Editors?",
   "PrivacyHeader": "Этот документ зашифрован",
   "PrivacyInstall": "Установить сейчас"
 }

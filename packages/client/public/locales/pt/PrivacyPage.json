@@ -4,7 +4,7 @@
   "PrivacyDescriptionConnect": "Pode abrir este ficheiro a partir da interface de aplicações de desktop, uma vez que a sua nuvem está ligada",
   "PrivacyDescriptionEditors": "Se tiver instalado o {{organizationName}} Desktop Editors mas não o conseguir abrir a partir desta página, o seu navegador pode estar a bloqueá-lo.",
   "PrivacyDialog": "Se não vir uma caixa de diálogo, clique no botão abaixo",
-  "PrivacyEditors": "Não tem editores de desktop ONLYOFFICE?",
+  "PrivacyEditors": "Não tem editores de desktop {{organizationName}}?",
   "PrivacyHeader": "Este documento está encriptado",
   "PrivacyInstall": "Instalar agora"
 }

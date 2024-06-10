@@ -14,6 +14,8 @@ export const getRoomTypeTitleTranslation = (
     //   return t("Common:ReviewRoomTitle");
     // case RoomsType.ReadOnlyRoom:
     //   return t("Common:ViewOnlyRoomTitle");
+    case RoomsType.VirtualDataRoom:
+      return t("Common:VirtualDataRoom");
     case RoomsType.CustomRoom:
       return t("Common:CustomRoomTitle");
     case RoomsType.PublicRoom:
@@ -38,6 +40,8 @@ export const getRoomTypeDescriptionTranslation = (
     //   return t("Common:ReviewRoomDescription");
     // case RoomsType.ReadOnlyRoom:
     //   return t("Common:ViewOnlyRoomDescription");
+    case RoomsType.VirtualDataRoom:
+      return t("Common:VirtualDataRoomDescription");
     case RoomsType.CustomRoom:
       return t("Common:CustomRoomDescription");
     case RoomsType.PublicRoom:

@@ -469,5 +469,7 @@
   "ViewOnlyRooms": "View-only",
   "CustomRooms": "Custom",
   "FormRoom": "Form room",
-  "NewRoom": "New room"
+  "NewRoom": "New room",
+  "VirtualDataRoomDescription": "Use VDR for advanced file security and transparency while filling and signing documents step-by-step. Set watermarks, automatically index and track all content, restrict downloading and copying.",
+  "VirtualDataRoom": "Virtual Data Room"
 }

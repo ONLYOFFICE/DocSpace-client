@@ -104,3 +104,11 @@ export interface LayoutProps {
   description: string;
   component: JSX.Element;
 }
+
+export type TQuota = {
+  id: string;
+  priceTitle: string;
+  type: string;
+  used: { title: string; value: number };
+  value: number;
+};

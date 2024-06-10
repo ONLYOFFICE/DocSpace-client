@@ -25,8 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { PortalFeaturesLimitations } from "@docspace/shared/enums";
 import { getConvertedSize } from "@docspace/shared/utils/common";
+import { TFunciton, TQuota } from "../types";
 
-export const parseQuota = (quotaCharacteristics) => {
+export const parseQuota = (t: TFunciton, quotaCharacteristics: TQuota) => {
   const maxValue = quotaCharacteristics.value;
   const usedValue = quotaCharacteristics.used.value;
 

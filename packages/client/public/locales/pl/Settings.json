@@ -131,7 +131,7 @@
   "HexCode": "Kod szesnastkowy",
   "Import": "Importuj",
   "ImportCompleteDescriptionGoogle": "Import danych z Google Workspace do {{organizationName}} {{portalName}} został zakończony!",
-  "ImportCompleteDescriptionNextcloud": "Import danych z Nextcloud do ONLYOFFICE {{portalName}} został zakończony!",
+  "ImportCompleteDescriptionNextcloud": "Import danych z Nextcloud do {{organizationName}} {{portalName}} został zakończony!",
   "ImportCompleteDescriptionWorkspace": "Import danych z ONLYOFFICE Worskpace do ONLYOFFICE {{portalName}} został zakończony!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} użytkowników zostało pomyślnie zaimportowanych.",
   "ImportFromGoogle": "Importuj z Google Workspace",

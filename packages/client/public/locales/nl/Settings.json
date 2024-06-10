@@ -130,7 +130,7 @@
   "HexCode": "Hexcode",
   "Import": "Import",
   "ImportCompleteDescriptionGoogle": "Het importeren van gegevens van Google Workspace naar {{organizationName}} {{portalName}} is voltooid!",
-  "ImportCompleteDescriptionNextcloud": "Het importeren van gegevens van Nextcloud naar ONLYOFFICE {{portalName}} is voltooid!",
+  "ImportCompleteDescriptionNextcloud": "Het importeren van gegevens van Nextcloud naar {{organizationName}} {{portalName}} is voltooid!",
   "ImportCompleteDescriptionWorkspace": "Het importeren van gegevens van ONLYOFFICE Workspace naar ONLYOFFICE {{portalName}} is voltooid!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} gebruikers werden met succes geïmporteerd.",
   "ImportFromGoogle": "Importeren vanuit Google Workspace",

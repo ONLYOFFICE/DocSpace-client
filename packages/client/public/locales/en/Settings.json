@@ -132,7 +132,7 @@
   "HexCode": "Hex code",
   "Import": "Import",
   "ImportCompleteDescriptionGoogle": "Data import from Google Workspace to {{organizationName}} {{portalName}} is complete!",
-  "ImportCompleteDescriptionNextcloud": "Data import from Nextcloud to ONLYOFFICE {{portalName}} is complete!",
+  "ImportCompleteDescriptionNextcloud": "Data import from Nextcloud to {{organizationName}} {{portalName}} is complete!",
   "ImportCompleteDescriptionWorkspace": "Data import from ONLYOFFICE Workspace to ONLYOFFICE {{portalName}} is complete!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} users were imported successfully.",
   "ImportFromGoogle": "Import from Google Workspace",

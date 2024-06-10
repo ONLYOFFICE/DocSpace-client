@@ -128,7 +128,7 @@
   "HexCode": "HEXコード",
   "Import": "インポート",
   "ImportCompleteDescriptionGoogle": "Google Workspaceから{{organizationName}} {{portalName}}へのデータインポートが完了しました！",
-  "ImportCompleteDescriptionNextcloud": "NextcloudからONLYOFFICE {{portalName}}へのデータインポートが完了しました！",
+  "ImportCompleteDescriptionNextcloud": "Nextcloudから{{organizationName}} {{portalName}}へのデータインポートが完了しました！",
   "ImportCompleteDescriptionWorkspace": "ONLYOFFICE WorkspaceからONLYOFFICE {{portalName}}へのデータインポートが完了しました！",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} ユーザーは正常にインポートされました。",
   "ImportFromGoogle": "Google Workspaceからのインポート",

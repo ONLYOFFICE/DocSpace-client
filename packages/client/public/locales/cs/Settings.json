@@ -130,7 +130,7 @@
   "HexCode": "Hexadecimální kód",
   "Import": "Import",
   "ImportCompleteDescriptionGoogle": "Import dat z Google Workspace do {{organizationName}} {{portalName}} je dokončen!",
-  "ImportCompleteDescriptionNextcloud": "Import dat z Nextcloudu do ONLYOFFICE {{portalName}} je dokončen!",
+  "ImportCompleteDescriptionNextcloud": "Import dat z Nextcloudu do {{organizationName}} {{portalName}} je dokončen!",
   "ImportCompleteDescriptionWorkspace": "Import dat z ONLYOFFICE Workspace do ONLYOFFICE {{portalName}} je dokončen!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} uživatelů bylo úspěšně importováno.",
   "ImportFromGoogle": "Import z pracovního prostoru Google",

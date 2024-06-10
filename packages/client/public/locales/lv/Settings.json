@@ -129,7 +129,7 @@
   "HexCode": "Heksadecimālais kods",
   "Import": "Importēt",
   "ImportCompleteDescriptionGoogle": "Datu importēšana no Google Workspace uz {{organizationName}} {{portalName}} ir pabeigta!",
-  "ImportCompleteDescriptionNextcloud": "Datu importēšana no Nextcloud uz ONLYOFFICE {{portalName}} ir pabeigta!",
+  "ImportCompleteDescriptionNextcloud": "Datu importēšana no Nextcloud uz {{organizationName}} {{portalName}} ir pabeigta!",
   "ImportCompleteDescriptionWorkspace": "Datu importēšana no ONLYOFFICE Workspace uz ONLYOFFICE {{portalName}} ir pabeigta!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} lietotāji tika veiksmīgi importēti.",
   "ImportFromGoogle": "Importēt no Google Workspace",

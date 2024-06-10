@@ -131,7 +131,7 @@
   "HexCode": "Шестнадцатеричный код",
   "Import": "Импортировать",
   "ImportCompleteDescriptionGoogle": "Импорт данных из Google Workspace в {{organizationName}} {{portalName}} завершен!",
-  "ImportCompleteDescriptionNextcloud": "Импорт данных из Nextcloud в ONLYOFFICE {{portalName}} завершен!",
+  "ImportCompleteDescriptionNextcloud": "Импорт данных из Nextcloud в {{organizationName}} {{portalName}} завершен!",
   "ImportCompleteDescriptionWorkspace": "Импорт данных из ONLYOFFICE Workspace в ONLYOFFICE {{portalName}} завершен!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} пользователи были успешно импортированы.",
   "ImportFromGoogle": "Импортировать из Google Workspace",

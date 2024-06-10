@@ -59,8 +59,7 @@ export const Default: Story = {
   render: (args) => <Template {...args} />,
   args: {
     items: tabsItems,
-    isDisabled: false,
-    selectedItem: 0,
+    selectedItemId: "tab1",
     onSelect: () => {},
   },
 };
@@ -70,8 +69,7 @@ export const Secondary: Story = {
   args: {
     items: tabsItems,
     theme: ThemeTabs.Secondary,
-    isDisabled: false,
-    selectedItem: 0,
+    selectedItemId: "tab1",
     onSelect: () => {},
   },
 };

@@ -43,7 +43,7 @@ export interface TabsProps {
   /** Child elements. */
   items: TTabItem[];
   /** Selected item of tabs. */
-  selectedItemIndex?: number;
+  selectedItemId?: number | string;
   /** Theme for displaying tabs. */
   theme?: ThemeTabs;
   /** Sets a callback function that is triggered when the tab is selected. */

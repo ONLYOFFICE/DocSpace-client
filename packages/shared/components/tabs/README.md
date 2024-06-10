@@ -69,12 +69,12 @@ const array_items = [
 
 ### Tabs Properties
 
-| Props               |          Type          | Required | Values |  Default  | Description                                                         |
-| ------------------- | :--------------------: | :------: | :----: | :-------: | ------------------------------------------------------------------- |
-| `items`             |        `array`         |    ✅    |   -    |     -     | Child elements                                                      |
-| `selectedItemIndex` |         `func`         |    -     |   -    |    `0`    | Selected item of tabs                                               |
-| `theme`             | `primary`, `secondary` |    -     |   -    | `primary` | Theme for displaying tabs                                           |
-| `onSelect`          |         `func`         |    -     |   -    |     -     | Sets a callback function that is triggered when the tab is selected |
+| Props            |          Type          | Required | Values |  Default  | Description                                                         |
+| ---------------- | :--------------------: | :------: | :----: | :-------: | ------------------------------------------------------------------- |
+| `items`          |        `array`         |    ✅    |   -    |     -     | Child elements                                                      |
+| `selectedItemId` |   `number`, `string`   |    -     |   -    |     -     | Selected item id of tabs                                            |
+| `theme`          | `primary`, `secondary` |    -     |   -    | `primary` | Theme for displaying tabs                                           |
+| `onSelect`       |         `func`         |    -     |   -    |     -     | Sets a callback function that is triggered when the tab is selected |
 
 ### Array Items Properties
 

@@ -29,16 +29,22 @@ import { useTheme } from "styled-components";
 import { StyledTabs, Tab, TabList, TabPanel, TabSubLine } from "./Tabs.styled";
 import { TabsProps, TTabItem } from "./Tabs.types";
 import { ThemeTabs } from "./Tabs.enums";
-import { OFFSET_RIGHT, OFFSET_LEFT } from "./Tabs.constants";
+import { OFFSET_RIGHT, OFFSET_LEFT, INDEX_NOT_FOUND } from "./Tabs.constants";
 import { useViewTab } from "./hooks/useViewTab";
 
 const Tabs = (props: TabsProps) => {
   const {
     items,
-    selectedItemIndex = 0,
+    selectedItemId,
     theme = ThemeTabs.Primary,
     onSelect,
+    ...rest
   } = props;
+
+  let selectedItemIndex = items.findIndex((item) => item.id === selectedItemId);
+  if (selectedItemIndex === INDEX_NOT_FOUND) {
+    selectedItemIndex = 0;
+  }
 
   const globalTheme = useTheme();
   const tabsRef = useRef() as MutableRefObject<HTMLDivElement>;
@@ -79,7 +85,7 @@ const Tabs = (props: TabsProps) => {
   };
 
   return (
-    <StyledTabs>
+    <StyledTabs {...rest}>
       {!isViewFirstTab && <div className="blur-ahead" />}
       <TabList $theme={theme} ref={tabsRef}>
         {items.map((item, index) => {
@@ -107,6 +113,7 @@ const Tabs = (props: TabsProps) => {
         })}
       </TabList>
       {!isViewLastTab && <div className="blur-back" />}
+
       <div className="sticky-indent" />
 
       <TabPanel>{currentItem?.content}</TabPanel>

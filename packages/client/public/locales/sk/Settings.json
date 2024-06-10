@@ -219,7 +219,7 @@
   "SelectFileDescriptionWorkspace": "Vyberte záložný súbor služby {{organizationName}} Workspace a spustite import údajov. Po dokončení nahrávania údajov a analýzy sa automaticky spustí ďalší krok.",
   "SelectFileInGZFormat": "Vyberte súbor vo formáte .GZ",
   "SelectUsers": "Vyberte používateľov",
-  "SelectUsersDescriptionGoogle": "Označte v zozname používateľov, ktorých chcete importovať do ONLYOFFICE {{portalName}}. Používatelia z Google Workspace budú importovaní bez údajov Meno / Priezvisko a namiesto nich sa použije ich e-mail. Mená používateľov je možné po importe údajov zmeniť. Používatelia, ktorí už existujú v ONLYOFFICE {{portalName}}, sú zvýraznení zelenou farbou a pôvodne nie sú označení.",
+  "SelectUsersDescriptionGoogle": "Označte v zozname používateľov, ktorých chcete importovať do {{organizationName}} {{portalName}}. Používatelia z Google Workspace budú importovaní bez údajov Meno / Priezvisko a namiesto nich sa použije ich e-mail. Mená používateľov je možné po importe údajov zmeniť. Používatelia, ktorí už existujú v {{organizationName}} {{portalName}}, sú zvýraznení zelenou farbou a pôvodne nie sú označení.",
   "SelectUsersDescriptionNextcloud": "Označte v zozname používateľov, ktorých chcete importovať do ONLYOFFICE {{portalName}}. Vybrať môžete len používateľov, ktoré majú zadaný e-mail. Používatelia, ktorí už existujú v ONLYOFFICE {{portalName}} sú zvýraznení zelenou farbou a pôvodne nie sú označení.",
   "SelectUsersDescriptionWorkspace": "Označte v zozname používateľov, ktorých chcete importovať do ONLYOFFICE {{portalName}}. Používatelia, ktorí už existujú v ONLYOFFICE {{portalName}}, sú zvýraznení zelenou farbou a pôvodne nie sú označení.",
   "SelectUsersWithEmail": "Vyberte používateľov s e-mailom",

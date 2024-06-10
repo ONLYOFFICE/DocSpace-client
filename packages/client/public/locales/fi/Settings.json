@@ -215,7 +215,7 @@
   "SelectFileDescriptionWorkspace": "Valitse {{organizationName}} Workspace-varmuuskopiotiedosto aloittaaksesi tietojen siirto. Vain yksi tiedosto voidaan valita. Seuraava vaihe aloitetaan automaattisesti, kun tietojen lataus ja analysointi on tehty.",
   "SelectFileInGZFormat": "Valitse tiedosto .GZ-muodossa",
   "SelectUsers": "Valitse käyttäjät",
-  "SelectUsersDescriptionGoogle": "Valitse ONLYOFFICE {{portalName}}-en tuotavat käyttäjät listalta. Google Workspacesta tuotavat käyttäjät tuodaan ilman etunimeä/sukunimeä ja sen sijaan käytetään heidän sähköpostinimeään. Käyttäjien nimet voidaan vaihtaa tuonnin jälkeen. Jo ONLYOFFICE {{portalName}}-ssa olemassaolevat käyttäjät on korostettu virheällä värillä ja niitä ei ole oletuksena valittu.",
+  "SelectUsersDescriptionGoogle": "Valitse {{organizationName}} {{portalName}}-en tuotavat käyttäjät listalta. Google Workspacesta tuotavat käyttäjät tuodaan ilman etunimeä/sukunimeä ja sen sijaan käytetään heidän sähköpostinimeään. Käyttäjien nimet voidaan vaihtaa tuonnin jälkeen. Jo {{organizationName}} {{portalName}}-ssa olemassaolevat käyttäjät on korostettu virheällä värillä ja niitä ei ole oletuksena valittu.",
   "SelectUsersDescriptionNextcloud": "Valitse ONLYOFFICE {{portalName}}-en tuotavat käyttäjät listalta. Vain käyttäjät, joilla on sähköposti, voidaan valita. Jo ONLYOFFICE {{portalName}}-ssa olemassaolevat käyttäjät on korostettu virheällä värillä ja niitä ei ole oletuksena valittu.",
   "SelectUsersDescriptionWorkspace": "Valitse ONLYOFFICE {{portalName}}-en tuotavat käyttäjät listalta. Jo ONLYOFFICE {{portalName}}-ssa olemassaolevat käyttäjät on korostettu virheällä värillä ja niitä ei ole oletuksena valittu.",
   "SelectUsersWithEmail": "Valitse käyttäjät, joilla on sähköposti",

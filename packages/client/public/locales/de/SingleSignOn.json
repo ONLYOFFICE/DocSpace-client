@@ -47,7 +47,7 @@
   "spDecryptStatements": "Behauptungen entschlüsseln",
   "SPEntityId": "SP Entity Id (Link zu XML-Metadaten)",
   "SPEntityIdTooltip": "Die XML-URL-Adresse des Dienstanbieters, die heruntergeladen und vom Identitätsanbieter zur eindeutigen Identifizierung des SP verwendet werden kann",
-  "SpMetadata": "ONLYOFFICE-SP Metadaten",
+  "SpMetadata": "{{organizationName}}-SP Metadaten",
   "SpMetadataDescription": "Greifen Sie auf die Metadaten des Service Providers zu, um ONLYOFFICE {{portalName}} als vertrauenswürdigen Service Provider in Ihrem IdP-Konto hinzuzufügen.",
   "spSignExitRequest": "Logout-Anforderungen unterschreiben",
   "spSigningAlgorithm": "Unterzeichnungsalgorithmus",

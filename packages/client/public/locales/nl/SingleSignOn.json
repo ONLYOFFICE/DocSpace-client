@@ -47,7 +47,7 @@
   "spDecryptStatements": "Asserties Ontsleutelen",
   "SPEntityId": "SP Entity Id (link naar metadata XML)",
   "SPEntityIdTooltip": "Het XML URL-adres van de dienstverlener dat kan worden gedownload en gebruikt door de Identity provider om de SP eenduidig te identificeren",
-  "SpMetadata": "ONLYOFFICE SP Metadata",
+  "SpMetadata": "{{organizationName}} SP Metadata",
   "SpMetadataDescription": "Ga naar de Service Provider metadata om ONLYOFFICE {{portalName}} toe te voegen als vertrouwde Service Provider in uw IdP-account.",
   "spSignExitRequest": "Sign Logout Verzoeken",
   "spSigningAlgorithm": "Ondertekening Algoritme",

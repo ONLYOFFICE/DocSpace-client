@@ -47,7 +47,7 @@
   "spDecryptStatements": "Odszyfruj asercje",
   "SPEntityId": "ID podmiotu usługodawcy (link do XML z metadanymi)",
   "SPEntityIdTooltip": "Adres URL XML usługodawcy, który może być pobrany i wykorzystany przez dostawcę tożsamości do jednoznacznej identyfikacji usługodawcy",
-  "SpMetadata": "Metadane usługodawcy ONLYOFFICE",
+  "SpMetadata": "Metadane usługodawcy {{organizationName}}",
   "SpMetadataDescription": "Uzyskaj dostęp do metadanych usługodawcy, aby dodać ONLYOFFICE {{portalName}} jako zaufanego usługodawcę na swoim koncie dostawcy tożsamości.",
   "spSignExitRequest": "Podpisz żądania wylogowania",
   "spSigningAlgorithm": "Algorytm podpisywania",

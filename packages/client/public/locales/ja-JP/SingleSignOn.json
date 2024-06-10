@@ -47,7 +47,7 @@
   "spDecryptStatements": "アサーションの復号化",
   "SPEntityId": "SP Entity Id (メタデータXMLへのリンク)",
   "SPEntityIdTooltip": "ID プロバイダがダウンロードし、SP を明確に識別するために使用できるサービスプロバイダ XML の URL アドレス",
-  "SpMetadata": "ONLYOFFICEのSPメタデータ",
+  "SpMetadata": "{{organizationName}}のSPメタデータ",
   "SpMetadataDescription": "サービスプロバイダのメタデータにアクセスし、ONLYOFFICE {{portalName}}を信頼できるサービスプロバイダとしてIdPアカウントに追加します。",
   "spSignExitRequest": "ログアウトリクエストに署名する",
   "spSigningAlgorithm": "署名アルゴリズム",

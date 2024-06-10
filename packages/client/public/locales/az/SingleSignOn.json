@@ -47,7 +47,7 @@
   "spDecryptStatements": "İddiaların Şifrəsini Açın",
   "SPEntityId": "SP Müəssisə identifikatoru (metada XML üçün keçid)",
   "SPEntityIdTooltip": "Xidmət təminatçısı XML URL ünvanı, SP-ni aydın şəkildə müəyyən etmək üçün şəxsiyyət provayderi tərəfindən endirilə və istifadə edilə bilər",
-  "SpMetadata": "ONLYOFFICE SP Metadata",
+  "SpMetadata": "{{organizationName}} SP Metadata",
   "SpMetadataDescription": "IdP hesabınıza etibarlı Xidmət Provayderi kimi ONLYOFFICE {{portalName}} əlavə etmək üçün Xidmət Provayderi metadatasına daxil olun.",
   "spSignExitRequest": "Çıxış Sorğularını imzalayın",
   "spSigningAlgorithm": "Alqoritmin imzalanması",

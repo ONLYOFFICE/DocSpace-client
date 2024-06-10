@@ -47,7 +47,7 @@
   "spDecryptStatements": "Decriptare aserţiuni",
   "SPEntityId": "ID entitate furnizor de servicii (linkul spre fișerul de metadate XML)",
   "SPEntityIdTooltip": "Adresa URL a fişierului XML al furnizorului de servicii care poate fi descărcat şi utilizat de către furnizorul de identitate pentru a identifica fără echivoc furnizorul de servicii",
-  "SpMetadata": "Metadate furnizor de servicii ONLYOFFICE",
+  "SpMetadata": "Metadate furnizor de servicii {{organizationName}}",
   "SpMetadataDescription": "Accesați metadatele ale furnizorului de servicii pentru a adăuga ONLYOFFICE {{portalName}} ca un furnizor de servicii de încredere în contul dvs al furnizorului de identitate (IdP).",
   "spSignExitRequest": "Semnează solicitarea de deconectare",
   "spSigningAlgorithm": "Algoritmul de semnare",

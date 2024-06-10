@@ -47,7 +47,7 @@
   "spDecryptStatements": "Déchiffrer les assertions",
   "SPEntityId": "Id entité SP (lien vers les métadonnées XML)",
   "SPEntityIdTooltip": "L’adresse URL XML du fournisseur de services qui peut être téléchargée et utilisée par le fournisseur d’identité pour identifier sans équivoque le fournisseur de services",
-  "SpMetadata": "Métadonnées ONLYOFFICE SP",
+  "SpMetadata": "Métadonnées {{organizationName}} SP",
   "SpMetadataDescription": "Accédez aux métadonnées du fournisseur de services pour ajouter ONLYOFFICE {{portalName}} en tant que fournisseur de services de confiance dans votre compte IdP.",
   "spSignExitRequest": "Signer des demandes de déconnexion",
   "spSigningAlgorithm": "Algorithme de signature",

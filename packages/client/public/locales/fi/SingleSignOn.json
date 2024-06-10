@@ -47,7 +47,7 @@
   "spDecryptStatements": "Pura väitteiden salaus",
   "SPEntityId": "SP Entity Id (linkki metadata XML:ään)",
   "SPEntityIdTooltip": "Palveluntarjoajan XML URL-osoite, joka voidaan ladata ja käyttää identiteetin tarjoajan toimesta tunnistaakseen SP:n yksiselitteisesti",
-  "SpMetadata": "ONLYOFFICE SP Metadata",
+  "SpMetadata": "{{organizationName}} SP Metadata",
   "SpMetadataDescription": "Käytä palveluntarjoajan metatietoja lisätäksesi ONLYOFFICE {{portalName}} luotetuksi palveluntarjoajaksi IdP-tiliisi.",
   "spSignExitRequest": "Allekirjoita uloskirjauspyynnöt",
   "spSigningAlgorithm": "Allekirjoitusalgoritmi",

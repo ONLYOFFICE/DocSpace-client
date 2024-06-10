@@ -92,7 +92,7 @@ const SingleSignOn = (props) => {
 
           <HideButton
             id="sp-metadata-hide-button"
-            text={t("SpMetadata")}
+            text={t("SpMetadata", { organizationName })}
             label={SP_METADATA}
             value={spMetadata}
             isDisabled={!isSSOAvailable}

@@ -47,7 +47,7 @@
   "spDecryptStatements": "Descifrar aserciones",
   "SPEntityId": "Id. de entidad SP (enlace al XML de metadatos)",
   "SPEntityIdTooltip": "La dirección URL del XML del proveedor de servicios que el proveedor de identidades puede descargar y utilizar para identificar inequívocamente al proveedor de servicios",
-  "SpMetadata": "Metadatos de ONLYOFFICE SP",
+  "SpMetadata": "Metadatos de {{organizationName}} SP",
   "SpMetadataDescription": "Acceda a los metadatos del proveedor de servicios para añadir ONLYOFFICE {{portalName}} como proveedor de servicios de confianza en su cuenta de IdP.",
   "spSignExitRequest": "Firmar solicitudes de cierre de sesión",
   "spSigningAlgorithm": "Algoritmo de firma",

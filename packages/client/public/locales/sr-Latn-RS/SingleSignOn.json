@@ -47,7 +47,7 @@
   "spDecryptStatements": "Dekripcija Tvrdnji",
   "SPEntityId": "SP Entitet ID (link ka metapodacima XML)",
   "SPEntityIdTooltip": "Adresa URL XML-a pružaoca usluga koja može biti preuzeta i korišćena od strane identitetskog pružaoca kako bi nedvosmisleno identifikovao SP.",
-  "SpMetadata": "ONLYOFFICE SP Metadata",
+  "SpMetadata": "{{organizationName}} SP Metadata",
   "SpMetadataDescription": "Pristup metapodacima Pružaoca Usluga kako biste dodali ONLYOFFICE {{portalName}} kao pouzdanog Pružaoca Usluga u vašem IdP nalogu.",
   "spSignExitRequest": "Potpiši Zahteve za Odjavljivanje",
   "spSigningAlgorithm": "Algoritam Prijavljivanja",

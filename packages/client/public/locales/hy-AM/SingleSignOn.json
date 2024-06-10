@@ -47,7 +47,7 @@
   "spDecryptStatements": "Վերծանել պնդումները",
   "SPEntityId": "SP անձի ID (հղում դեպի մետատվյալներ XML)",
   "SPEntityIdTooltip": "Ծառայությունների մատակարարի XML URL հասցեն, որը կարող է ներբեռնվել և օգտագործվել նույնականացման մատակարարի կողմից՝ SP-ն միանշանակ նույնականացնելու համար",
-  "SpMetadata": "ONLYOFFICE SP Մետատվյալներ",
+  "SpMetadata": "{{organizationName}} SP Մետատվյալներ",
   "SpMetadataDescription": "Մուտք գործեք Ծառայությունների Մատակարարի մետատվյալներ՝ ձեր IdP հաշվում ONLYOFFICE {{portalName}}-ը որպես վստահելի Ծառայությունների Մատակարար ավելացնելու համար:",
   "spSignExitRequest": "Ստորագրեք Դուրս գալու հայտերը",
   "spSigningAlgorithm": "Ստորագրման ալգորիթմ",

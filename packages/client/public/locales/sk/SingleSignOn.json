@@ -47,7 +47,7 @@
   "spDecryptStatements": "Dešifrovať vyhlásenia",
   "SPEntityId": "SP entity ID (odkaz na metadáta XML)",
   "SPEntityIdTooltip": "Adresa URL poskytovateľa služby vo formáte XML, ktorú môže poskytovateľ identity načítať a použiť na jednoznačnú identifikáciu SP",
-  "SpMetadata": "Metadáta ONLYOFFICE SP",
+  "SpMetadata": "Metadáta {{organizationName}} SP",
   "SpMetadataDescription": "Prejdite k metadátam poskytovateľa služieb a pridajte ONLYOFFICE {{portalName}} ako dôveryhodného poskytovateľa služieb do svojho účtu IdP.",
   "spSignExitRequest": "Podpísať žiadosti o odhlásenie",
   "spSigningAlgorithm": "Algoritmus podpisovania",

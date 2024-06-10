@@ -625,7 +625,7 @@ public class LocalesTest
             {
                 Language = g.Key,
                 TranslationsWithVariables = g.ToList()
-                    .SelectMany(t => t.Translations)
+                    .SelectMany(t => t.Translations.Select(k => new TranslationItem($"{t.FileName}:{k.Key}", k.Value)))
                     //.Where(k => k.Value.IndexOf("{{") != -1)
                     .Select(t => new
                     {

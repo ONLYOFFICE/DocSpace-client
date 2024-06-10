@@ -325,7 +325,7 @@ class SettingsStore {
     this.tenantStatus = tenantStatus;
   };
 
-  get docspaceSettingsUrl() {
+  get portalSettingsUrl() {
     return `${this.helpLink}/administration/docspace-settings.aspx`;
   }
 

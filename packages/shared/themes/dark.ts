@@ -184,7 +184,7 @@ const Dark: TTheme = {
 
     border: {
       base: `1px solid ${outerSpace}`,
-      baseHover: `1px solid #858585`,
+      baseHover: `1px solid ${grayDark}`,
       baseActive: `1px solid #CCCCCC`,
       baseDisabled: `1px solid ${outerSpace}`,
 
@@ -326,13 +326,12 @@ const Dark: TTheme = {
     background: black,
 
     borderConnect: "none",
-    connectBackground:
-      "linear-gradient(0deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), #333333",
+    connectBackground: `linear-gradient(0deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), ${black}`,
 
     disableBackgroundColor: "rgba(0, 0, 0, 0.08)",
 
     hoverBackground: black,
-    hoverBorder: "1px solid #858585",
+    hoverBorder: `1px solid ${grayDark}`,
     hoverConnectBackground: white,
     hoverConnectBorder: "none",
 
@@ -449,14 +448,14 @@ const Dark: TTheme = {
 
   selectedItem: {
     background: grayDarkMid,
-    border: `1px solid #242424`,
+    border: `1px solid ${grayDarkMid}`,
     borderRadius: "3px",
 
     textBox: {
       padding: "0 8px",
       height: "32px",
       alignItems: "center",
-      borderRight: `1px solid #242424`,
+      borderRight: `1px solid ${grayDarkMid}`,
     },
 
     text: {
@@ -841,7 +840,7 @@ const Dark: TTheme = {
     activeBorderColor: blueMain,
     inactiveBorderColor: outerSpace,
     errorBorderColor: "#f21c0e",
-    backgroundColor: "#33333",
+    backgroundColor: black,
     color: white,
     scrollBackground: grayDark,
     placeholderColor: grayDark,
@@ -1018,8 +1017,7 @@ const Dark: TTheme = {
       hoverBackgroundColor: outerSpace,
       disableBackgroundColor: charlestonGreen,
       activeBackgroundColor: charlestonGreen,
-      activeSelectedBackgroundColor:
-        "linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(0deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18))",
+      activeSelectedBackgroundColor: `linear-gradient(0deg, ${white}, ${white}), linear-gradient(0deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18))`,
 
       title: {
         padding: "4px 16px",
@@ -1230,7 +1228,7 @@ const Dark: TTheme = {
       runnableTrack: {
         background: grayDarkMid,
         focusBackground: grayDarkMid,
-        border: `1.4px solid #242424`,
+        border: `1.4px solid ${grayDarkMid}`,
         borderRadius: "5.6px",
         width: "100%",
         height: "8px",
@@ -1261,7 +1259,7 @@ const Dark: TTheme = {
 
       rangeTrack: {
         background: grayDarkMid,
-        border: `1.4px solid #242424`,
+        border: `1.4px solid ${grayDarkMid}`,
         borderRadius: "5.6px",
         width: "100%",
         height: "8px",
@@ -1292,14 +1290,14 @@ const Dark: TTheme = {
       fillLower: {
         background: grayDarkMid,
         focusBackground: grayDarkMid,
-        border: `1.4px solid #242424`,
+        border: `1.4px solid ${grayDarkMid}`,
         borderRadius: "11.2px",
       },
 
       fillUpper: {
         background: grayDarkMid,
         focusBackground: grayDarkMid,
-        border: `1.4px solid #242424`,
+        border: `1.4px solid ${grayDarkMid}`,
         borderRadius: "11.2px",
       },
     },
@@ -1311,7 +1309,7 @@ const Dark: TTheme = {
     container: {
       miniPreview: {
         width: "160px",
-        border: `1px solid #242424`,
+        border: `1px solid ${grayDarkMid}`,
         borderRadius: "6px",
         padding: "8px",
       },
@@ -2030,7 +2028,7 @@ const Dark: TTheme = {
   },
 
   header: {
-    backgroundColor: "#282828 ",
+    backgroundColor: charlestonGreen,
     recoveryColor: "#4C4C4C",
     linkColor: "#606060",
     productColor: grayMaxLight,
@@ -2060,7 +2058,7 @@ const Dark: TTheme = {
 
     header: {
       backgroundColor: black,
-      background: `linear-gradient(180deg, #333333 2.81%, rgba(51, 51, 51, 0.9) 63.03%, rgba(51, 51, 51, 0) 100%);`,
+      background: `linear-gradient(180deg, ${black} 2.81%, rgba(51, 51, 51, 0.9) 63.03%, rgba(51, 51, 51, 0) 100%);`,
       trashErasureLabelBackground: "#292929",
       trashErasureLabelText: "#ADADAD",
     },
@@ -2173,7 +2171,7 @@ const Dark: TTheme = {
   filterInput: {
     button: {
       border: `1px solid ${outerSpace}`,
-      hoverBorder: "1px solid #858585",
+      hoverBorder: `1px solid ${grayDark}`,
 
       openBackground: gray,
 
@@ -2307,8 +2305,8 @@ const Dark: TTheme = {
 
         shareHoverColor: grayMaxLight,
 
-        borderImageRight: `linear-gradient(to right, #333333 25px, ${outerSpace} 24px)`,
-        borderImageLeft: `linear-gradient(to left, #333333 20px, ${outerSpace} 24px)`,
+        borderImageRight: `linear-gradient(to right, ${black} 25px, ${outerSpace} 24px)`,
+        borderImageLeft: `linear-gradient(to left, ${black} 20px, ${outerSpace} 24px)`,
 
         borderColor: outerSpace,
         borderColorTransition: outerSpace,
@@ -2699,9 +2697,9 @@ const Dark: TTheme = {
       externalLinkBackground: "#292929",
       externalLinkSvg: grayMaxLight,
 
-      internalLinkBorder: "1px dashed #eeeeee",
+      internalLinkBorder: `1px dashed ${grayMaxLight}`,
 
-      itemBorder: "1px dashed #333333",
+      itemBorder: `1px dashed ${black}`,
 
       itemOwnerColor: grayDark,
 
@@ -3089,13 +3087,13 @@ const Dark: TTheme = {
         linkColor: link,
         tariffText: grayDark,
         border: `1px solid ${outerSpace}`,
-        backgroundBenefitsColor: "#3333",
+        backgroundBenefitsColor: black,
         rectangleColor: veryDarkGrey,
 
         priceContainer: {
           backgroundText: veryDarkGrey,
           background: charlestonGreen,
-          border: "1px solid #282828",
+          border: `1px solid ${charlestonGreen}`,
           featureTextColor: grayDark,
           disableColor: grayDark,
           trackNumberColor: grayDark,
@@ -3273,7 +3271,7 @@ const Dark: TTheme = {
 
   emailChips: {
     borderColor: grayDark,
-    dashedBorder: "1px dashed #fff",
+    dashedBorder: `1px dashed ${white}`,
   },
 
   dialogs: {

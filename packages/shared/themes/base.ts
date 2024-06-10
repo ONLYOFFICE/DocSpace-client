@@ -343,7 +343,7 @@ export const getBaseTheme = () => {
       outline: "none",
       width: "100%",
 
-      border: "1px solid #D0D5DA",
+      border: `1px solid ${grayMid}`,
       background: white,
 
       borderConnect: "none",
@@ -356,7 +356,7 @@ export const getBaseTheme = () => {
       hoverConnectBackground: link,
       hoverConnectBorder: "none",
 
-      activeBorder: "1px solid #D0D5DA",
+      activeBorder: `1px solid ${grayMid}`,
       activeBackground: grayLightMid,
       activeConnectBorder: "none",
       activeConnectBackground: blueLightMid,
@@ -865,7 +865,7 @@ export const getBaseTheme = () => {
       inactiveBorderColor: grayMid,
       errorBorderColor: "#f21c0e",
       backgroundColor: white,
-      color: "#33333",
+      color: black,
       scrollBackground: gray,
       placeholderColor: gray,
       dialCodeColor: gray,
@@ -1033,8 +1033,8 @@ export const getBaseTheme = () => {
       },
 
       label: {
-        height: " 30px",
-        border: "1px solid #ECEEF1",
+        height: "30px",
+        border: `1px solid ${grayLightMid}`,
         borderRadius: "16px",
         minWidth: "fit-content",
         marginRight: "8px",
@@ -1913,7 +1913,7 @@ export const getBaseTheme = () => {
       background: grayLight,
 
       header: {
-        borderBottom: "1px solid #eceef1",
+        borderBottom: `1px solid ${grayLightMid}`,
         iconFill: grayMain,
       },
       control: {
@@ -1923,10 +1923,10 @@ export const getBaseTheme = () => {
 
       headerBurgerColor: grayMain,
 
-      verticalLine: "1px solid #eceef1",
+      verticalLine: `1px solid ${grayLightMid}`,
 
       profile: {
-        borderTop: "1px solid #eceef1",
+        borderTop: `1px solid ${grayLightMid}`,
         background: lightHover,
       },
 
@@ -2084,7 +2084,7 @@ export const getBaseTheme = () => {
 
       header: {
         backgroundColor: white,
-        background: `linear-gradient(180deg,#ffffff 2.81%,rgba(255, 255, 255, 0.91) 63.03%,rgba(255, 255, 255, 0) 100%)`,
+        background: `linear-gradient(180deg, ${white} 2.81%,rgba(255, 255, 255, 0.91) 63.03%,rgba(255, 255, 255, 0) 100%)`,
         trashErasureLabelBackground: grayLight,
         trashErasureLabelText: cyanBlueDarkShade,
       },
@@ -2194,8 +2194,8 @@ export const getBaseTheme = () => {
 
     filterInput: {
       button: {
-        border: "1px solid #d0d5da",
-        hoverBorder: "1px solid #a3a9ae",
+        border: `1px solid ${grayMid}`,
+        hoverBorder: `1px solid ${gray}`,
 
         openBackground: gray,
 
@@ -2204,7 +2204,7 @@ export const getBaseTheme = () => {
 
       filter: {
         background: white,
-        border: "1px solid #eceef1",
+        border: `1px solid ${grayLightMid}`,
         color: gray,
 
         separatorColor: grayLightMid,
@@ -2245,7 +2245,7 @@ export const getBaseTheme = () => {
 
     updateUserForm: {
       tooltipTextColor: black,
-      borderTop: "1px solid #eceef1",
+      borderTop: `1px solid ${grayLightMid}`,
     },
 
     tableContainer: {
@@ -2330,10 +2330,8 @@ export const getBaseTheme = () => {
           sideColor: gray,
           shareHoverColor: "#3b72a7",
 
-          borderImageRight:
-            "linear-gradient(to right, #ffffff 25px,#eceef1 24px)",
-          borderImageLeft:
-            "linear-gradient(to left, #ffffff 24px,#eceef1 24px)",
+          borderImageRight: `linear-gradient(to right, ${white} 25px, ${grayLightMid} 24px)`,
+          borderImageLeft: `linear-gradient(to left, ${white} 24px, ${grayLightMid} 24px)`,
 
           borderColor: grayLightMid,
           borderColorTransition: lightHover,
@@ -2593,8 +2591,8 @@ export const getBaseTheme = () => {
 
     connectedClouds: {
       color: grayMain,
-      borderBottom: `1px solid #eceef1`,
-      borderRight: `1px solid #d0d5da`,
+      borderBottom: `1px solid ${grayLightMid}`,
+      borderRight: `1px solid ${grayMid}`,
     },
 
     filesModalDialog: {
@@ -2719,14 +2717,14 @@ export const getBaseTheme = () => {
         fill: gray,
         loadingFill: grayMid,
 
-        borderBottom: "1px solid #eceef1",
-        borderTop: "1px solid #eceef1",
+        borderBottom: `1px solid ${grayLightMid}`,
+        borderTop: `1px solid ${grayLightMid}`,
         externalLinkBackground: grayLight,
         externalLinkSvg: black,
 
-        internalLinkBorder: "1px dashed #333333",
+        internalLinkBorder: `1px dashed ${black}`,
 
-        itemBorder: "1px dashed #333333",
+        itemBorder: `1px dashed ${black}`,
 
         itemOwnerColor: "rgb(163, 169, 174)",
 
@@ -3090,7 +3088,7 @@ export const getBaseTheme = () => {
             toggleContentBackground: grayLight,
             iconButton: black,
             iconButtonDisabled: gray,
-            border: "1px solid #eceef1",
+            border: `1px solid ${grayLightMid}`,
           },
 
           smtp: {
@@ -3100,7 +3098,7 @@ export const getBaseTheme = () => {
 
         backup: {
           rectangleBackgroundColor: grayLight,
-          separatorBorder: "1px solid #eceef1",
+          separatorBorder: `1px solid ${grayLightMid}`,
           warningColor: "#f21c0e",
           textColor: gray,
           backupCheckedListItemBackground: lightHover,
@@ -3113,14 +3111,14 @@ export const getBaseTheme = () => {
           backgroundColor: grayLight,
           linkColor: link,
           tariffText: cyanBlueDarkShade,
-          border: "1px solid #f8f9f9",
+          border: `1px solid ${grayLight}`,
           backgroundBenefitsColor: grayLight,
           rectangleColor: lightHover,
 
           priceContainer: {
             backgroundText: lightHover,
             background: "transparent",
-            border: "1px solid #d0d5da",
+            border: `1px solid ${grayMid}`,
             featureTextColor: gray,
 
             disableColor: gray,
@@ -3145,7 +3143,7 @@ export const getBaseTheme = () => {
           descriptionColor: grayMain,
           subtitleColor: black,
           workspaceBackground: white,
-          workspaceBorder: "1px solid #d0d5da",
+          workspaceBorder: `1px solid ${grayMid}`,
           stepDescriptionColor: black,
           fileInputIconColor: gray,
           infoBlockBackground: grayLight,
@@ -3165,7 +3163,7 @@ export const getBaseTheme = () => {
           importItemDescription: black,
           importIconColor: grayMain,
           groupMenuBackground: white,
-          groupMenuBorder: "1px solid #fff",
+          groupMenuBorder: `1px solid ${white}`,
           groupMenuBoxShadow: "rgba(4, 15, 27, 0.07) 0px 5px 5px 0px",
         },
         storageManagement: {
@@ -3239,7 +3237,7 @@ export const getBaseTheme = () => {
       },
       themePreview: {
         descriptionColor: gray,
-        border: "1px solid #eceef1",
+        border: `1px solid ${grayLightMid}`,
       },
       notifications: {
         textDescriptionColor: gray,
@@ -3270,11 +3268,11 @@ export const getBaseTheme = () => {
 
     codeInput: {
       background: white,
-      border: "1px solid #d0d5da",
+      border: `1px solid ${grayMid}`,
       color: black,
       lineColor: "#C4C4C4",
       disabledBackground: grayLight,
-      disabledBorder: "1px solid #ECEEF1",
+      disabledBorder: `1px solid ${grayLightMid}`,
       disabledColor: gray,
     },
 

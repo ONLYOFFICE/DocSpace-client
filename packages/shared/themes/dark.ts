@@ -33,47 +33,66 @@ import { TTheme } from "./base";
 import { DEFAULT_FONT_FAMILY } from "../constants";
 
 const {
-  black,
   white,
-
-  grayLight,
-  grayLightMid,
-  grayStrong,
-  grayDarkMid,
-  gray,
-  lightGrayDark,
-  grayDark,
-  shuttleGrey,
-
-  blueMain,
-  blueDisabled,
-  lightSecondMain,
-
-  orangePressed,
-
-  warningColor,
-  red,
-
-  grayMaxLight,
-  grayText,
-
+  black,
   darkBlack,
 
-  lightStatusWarning,
-
-  darkErrorStatus,
+  lightGrayBlackout,
+  darkGrayBlackout,
+  grayLight,
   darkGrayLight,
-  grayDarkStrong,
+  lightGrayHover,
   lightDarkGrayHover,
-  grayDarkText,
-  link,
-  darkToastDone,
-  darkToastInfo,
-  darkToastAlert,
-  darkToastWarning,
-  lightBlueMainDisabled,
-  lightBlueMainHover,
+  grayLightMid,
+  grayDarkMid,
+  lightGraySelected,
+  grayStrong,
+  grayDarkStrong,
+  gray,
+  grayDark,
+  lightGrayDark,
   darkGrayDark,
+  grayText,
+  grayDarkText,
+  lightBlueMain,
+  lightBlueMainHover,
+  lightBlueMainDisabled,
+  lightSecondMain,
+  lightSecondMainHover,
+  lightSecondMainDisabled,
+
+  lightErrorStatus,
+  darkErrorStatus,
+  favoritesStatus,
+  lightStatusWarning,
+  darkStatusWarning,
+  lightStatusPositive,
+  darkStatusPositive,
+
+  lightIcons,
+  darkIcon,
+  link,
+  darkLink,
+  blueLightMid,
+
+  lightToastDone,
+  darkToastDone,
+  lightToastInfo,
+  darkToastInfo,
+  lightToastAlert,
+  darkToastAlert,
+  lightToastWarning,
+  darkToastWarning,
+
+  dndColor,
+  dndDarkColor,
+  dndHoverColor,
+  dndDarkHover,
+
+  grayMaxLight,
+  shuttleGrey,
+  blueMain,
+  red,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -209,7 +228,6 @@ const Dark: TTheme = {
     margin: "0",
     lineHeight: "56px",
     fontWeight: "700",
-    borderBottom: `1px solid ${globalColors.lightGrayishBlue}`,
     padding: "0 16px 16px",
     bodyPadding: "16px 0",
   },
@@ -225,8 +243,6 @@ const Dark: TTheme = {
     mobileProgressBarBackground: "#606060",
 
     bar: {
-      errorBackground: orangePressed,
-
       icon: grayDark,
     },
 
@@ -544,20 +560,6 @@ const Dark: TTheme = {
     hoverBorderColor: grayMaxLight,
   },
 
-  requestLoader: {
-    backgroundColor: white,
-    border: `1px solid ${globalColors.veryLightGrey}`,
-    overflow: "hidden",
-    padding: "5px 10px",
-    lineHeight: "16px",
-    borderRadius: "5px",
-    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.3)",
-
-    marginRight: "10px",
-    top: "10px",
-    width: "100%",
-  },
-
   row: {
     minHeight: "47px",
     width: "100%",
@@ -665,13 +667,7 @@ const Dark: TTheme = {
       },
     },
 
-    header: {
-      borderBottom: `1px solid ${grayDarkStrong}`,
-    },
-
     closeButton: {
-      // backgroundColor: "#9A9EA3",
-
       fillColor: "#9A9EA3",
     },
   },
@@ -715,17 +711,17 @@ const Dark: TTheme = {
 
     borderColor: grayDarkStrong,
     errorBorderColor: darkErrorStatus,
-    warningBorderColor: warningColor,
+    warningBorderColor: darkErrorStatus,
     disabledBorderColor: grayDarkStrong,
 
     hoverBorderColor: grayDark,
     hoverErrorBorderColor: darkErrorStatus,
-    hoverWarningBorderColor: warningColor,
+    hoverWarningBorderColor: darkErrorStatus,
     hoverDisabledBorderColor: grayDarkStrong,
 
     focusBorderColor: grayMaxLight,
     focusErrorBorderColor: darkErrorStatus,
-    focusWarningBorderColor: warningColor,
+    focusWarningBorderColor: darkErrorStatus,
     focusDisabledBorderColor: grayDarkStrong,
   },
 
@@ -1163,7 +1159,7 @@ const Dark: TTheme = {
     },
 
     owner: {
-      fill: "#EDC409",
+      fill: favoritesStatus,
       stroke: darkBlack,
       color: black,
     },
@@ -1219,7 +1215,7 @@ const Dark: TTheme = {
 
     selectLink: {
       color: grayDarkStrong,
-      linkColor: "#E06A1B",
+      linkColor: darkLink,
     },
 
     slider: {
@@ -1241,7 +1237,7 @@ const Dark: TTheme = {
         width: "24px",
         height: "24px",
         background: grayMaxLight,
-        disabledBackground: blueDisabled,
+        disabledBackground: darkGrayDark,
         borderWidth: "6px",
         borderStyle: "solid",
         borderColor: `${black}`,
@@ -1741,7 +1737,7 @@ const Dark: TTheme = {
     contentLineHeight: "56px",
     contentFontWeight: "700",
 
-    borderBottom: `1px solid ${globalColors.lightGrayishBlue}`,
+    borderBottom: `1px solid ${grayDarkStrong}`,
   },
 
   aside: {
@@ -1760,8 +1756,8 @@ const Dark: TTheme = {
   dragAndDrop: {
     height: "100%",
     transparentBorder: "1px solid transparent",
-    acceptBackground: "rgba(204, 184, 102, 0.2)",
-    background: "rgba(230, 211, 138, 0.12)",
+    acceptBackground: dndDarkHover,
+    background: dndDarkColor,
   },
 
   // phoneInput: {
@@ -1952,7 +1948,7 @@ const Dark: TTheme = {
     boxShadow: "0px 8px 16px 0px #040F1B29",
 
     icon: {
-      fill: "#E06A1B",
+      fill: darkLink,
       stroke: grayDarkStrong,
     },
   },
@@ -2152,15 +2148,6 @@ const Dark: TTheme = {
     },
   },
 
-  profileInfo: {
-    color: grayDark,
-    iconButtonColor: grayMaxLight,
-    linkColor: grayMaxLight,
-
-    tooltipLinkColor: "#e06a1b",
-    iconColor: orangePressed,
-  },
-
   updateUserForm: {
     tooltipTextColor: black,
     borderTop: "none",
@@ -2205,8 +2192,8 @@ const Dark: TTheme = {
     rowView: {
       checkedBackground: lightDarkGrayHover,
 
-      draggingBackground: "rgba(230, 211, 138, 0.12)",
-      draggingHoverBackground: "rgba(204, 184, 102, 0.2)2",
+      draggingBackground: dndColor,
+      draggingHoverBackground: dndHoverColor,
 
       shareButton: {
         color: grayDark,
@@ -2230,12 +2217,12 @@ const Dark: TTheme = {
 
       row: {
         checkboxChecked: `linear-gradient(to right, ${black} 24px, ${grayDarkStrong} 24px)`,
-        checkboxDragging: `linear-gradient(to right, rgba(230, 211, 138, 0.12) 24px, ${grayDarkStrong} 24px)`,
-        checkboxDraggingHover: `inear-gradient(to right,rgba(204, 184, 102, 0.2) 24px, ${grayDarkStrong} 24px)`,
+        checkboxDragging: `linear-gradient(to right, ${dndDarkColor} 24px, ${grayDarkStrong} 24px)`,
+        checkboxDraggingHover: `inear-gradient(to right, ${dndDarkHover} 24px, ${grayDarkStrong} 24px)`,
 
         contextMenuWrapperChecked: `linear-gradient(to left, ${black} 24px, ${grayDarkStrong} 24px)`,
-        contextMenuWrapperDragging: `border-image-source: linear-gradient(to left, rgba(230, 211, 138, 0.12) 24px, ${grayDarkStrong} 24px)`,
-        contextMenuWrapperDraggingHover: `linear-gradient(to left,rgba(204, 184, 102, 0.2) 24px, ${grayDarkStrong} 24px)`,
+        contextMenuWrapperDragging: `border-image-source: linear-gradient(to left, ${dndDarkColor} 24px, ${grayDarkStrong} 24px)`,
+        contextMenuWrapperDraggingHover: `linear-gradient(to left, ${dndDarkHover} 24px, ${grayDarkStrong} 24px)`,
 
         backgroundActive: lightDarkGrayHover,
 
@@ -2257,8 +2244,8 @@ const Dark: TTheme = {
 
     tilesView: {
       tile: {
-        draggingColor: "rgba(230, 211, 138, 0.12)",
-        draggingHoverColor: "rgba(204, 184, 102, 0.2)",
+        draggingColor: dndDarkColor,
+        draggingHoverColor: dndDarkHover,
         checkedColor: lightDarkGrayHover,
         roomsCheckedColor: black,
         border: `1px solid ${grayDarkStrong}`,
@@ -2536,7 +2523,7 @@ const Dark: TTheme = {
   filesEmptyContainer: {
     linkColor: "#adadad",
     privateRoom: {
-      linkColor: "#E06A1B",
+      linkColor: darkLink,
     },
   },
 
@@ -2596,15 +2583,6 @@ const Dark: TTheme = {
 
     selectFolder: {
       color: gray,
-    },
-
-    selectFile: {
-      color: gray,
-      background: black,
-      borderBottom: `1px solid ${grayDarkStrong}`,
-      borderRight: `1px solid ${grayDarkStrong}`,
-
-      buttonsBackground: black,
     },
 
     filesList: {
@@ -2781,7 +2759,7 @@ const Dark: TTheme = {
 
   filesPrivateRoom: {
     borderBottom: "1px solid #d3d3d3",
-    linkColor: "#E06A1B",
+    linkColor: darkLink,
     textColor: "#83888D",
   },
 
@@ -2807,7 +2785,7 @@ const Dark: TTheme = {
   },
 
   login: {
-    linkColor: "#E06A1B",
+    linkColor: darkLink,
     textColor: grayDark,
     navBackground: darkGrayLight,
     headerColor: white,
@@ -2818,7 +2796,7 @@ const Dark: TTheme = {
 
     register: {
       backgroundColor: "#292929",
-      textColor: "#E06A1B",
+      textColor: darkLink,
     },
 
     container: {
@@ -2860,11 +2838,11 @@ const Dark: TTheme = {
     },
 
     deleteSelf: {
-      linkColor: "#e06a1b",
+      linkColor: darkLink,
     },
 
     changePassword: {
-      linkColor: "#e06a1b",
+      linkColor: darkLink,
     },
   },
 
@@ -2874,7 +2852,7 @@ const Dark: TTheme = {
 
   client: {
     about: {
-      linkColor: "#E06A1B",
+      linkColor: darkLink,
       border: `1px solid ${grayDarkStrong}`,
       logoColor: white,
     },
@@ -2888,11 +2866,11 @@ const Dark: TTheme = {
 
     confirm: {
       activateUser: {
-        textColor: "#E06A1B",
+        textColor: darkLink,
         textColorError: red,
       },
       change: {
-        titleColor: "#E06A1B",
+        titleColor: darkLink,
       },
     },
 
@@ -2902,17 +2880,8 @@ const Dark: TTheme = {
     },
 
     payments: {
-      linkColor: "#E06A1B",
+      linkColor: darkLink,
       delayColor: "#F21C0E",
-    },
-
-    paymentsEnterprise: {
-      background: black,
-
-      buttonBackground: "#292929",
-
-      linkColor: "#E06A1B",
-      headerColor: orangePressed,
     },
 
     settings: {
@@ -2936,7 +2905,7 @@ const Dark: TTheme = {
           backgroundColorWrapper: blueMain,
           roleColor: grayStrong,
 
-          color: "#E06A1B",
+          color: darkLink,
           departmentColor: grayDark,
 
           tooltipColor: "#F5E9BA",
@@ -2950,7 +2919,7 @@ const Dark: TTheme = {
 
         owner: {
           backgroundColor: black,
-          linkColor: "#E06A1B",
+          linkColor: darkLink,
           departmentColor: grayDark,
           tooltipColor: "#F5E9BA",
         },
@@ -2967,8 +2936,8 @@ const Dark: TTheme = {
 
       common: {
         linkColor: grayDark,
-        linkColorHelp: "#E06A1B",
-        tooltipLinkColor: "#e06a1b",
+        linkColorHelp: darkLink,
+        tooltipLinkColor: darkLink,
         arrowColor: white,
         descriptionColor: grayDark,
         brandingDescriptionColor: grayDark,
@@ -2990,7 +2959,7 @@ const Dark: TTheme = {
 
       integration: {
         separatorBorder: `1px solid ${grayDarkStrong}`,
-        linkColor: "#E06A1B",
+        linkColor: darkLink,
 
         sso: {
           toggleContentBackground: grayDarkStrong,
@@ -3078,7 +3047,7 @@ const Dark: TTheme = {
     },
 
     wizard: {
-      linkColor: "#E06A1B",
+      linkColor: darkLink,
       generatePasswordColor: "#a9a9a9",
     },
   },
@@ -3112,7 +3081,7 @@ const Dark: TTheme = {
     backgroundColor: black,
     activeTextColor: white,
     textColor: "#ADADAD",
-    bottomLineColor: "#E06A1B",
+    bottomLineColor: darkLink,
   },
 
   hotkeys: {

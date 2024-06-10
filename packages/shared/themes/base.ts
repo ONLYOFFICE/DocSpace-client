@@ -44,51 +44,66 @@ export type TColorScheme = {
 };
 
 const {
-  black,
   white,
-
-  grayLight,
-  grayLightMid,
-  grayStrong,
-
-  gray,
-  lightGrayDark,
-  shuttleGrey,
-
-  blueMain,
-  blueDisabled,
-
-  lightSecondMain,
-  lightSecondMainHover,
-  blueMaya,
-  lightSecondMainDisabled,
-
-  lightStatusWarning,
-
-  orangePressed,
-
-  link,
-
-  warningColor,
-  red,
-  blueLightMid,
-
-  grayText,
-  lightToastInfo,
-  lightMediumGoldenrod,
-  lightToastDone,
-  lightToastWarning,
-  lightToastAlert,
+  black,
   darkBlack,
-  lightGrayHover,
-  lightGraySelected,
 
-  lightErrorStatus,
+  lightGrayBlackout,
+  darkGrayBlackout,
+  grayLight,
   darkGrayLight,
+  lightGrayHover,
+  lightDarkGrayHover,
+  grayLightMid,
+  grayDarkMid,
+  lightGraySelected,
+  grayStrong,
+  grayDarkStrong,
+  gray,
+  grayDark,
+  lightGrayDark,
+  darkGrayDark,
+  grayText,
   grayDarkText,
+  lightBlueMain,
   lightBlueMainHover,
   lightBlueMainDisabled,
-  lightGrayBlackout,
+  lightSecondMain,
+  lightSecondMainHover,
+  lightSecondMainDisabled,
+
+  lightErrorStatus,
+  darkErrorStatus,
+  favoritesStatus,
+  lightStatusWarning,
+  darkStatusWarning,
+  lightStatusPositive,
+  darkStatusPositive,
+
+  lightIcons,
+  darkIcon,
+  link,
+  darkLink,
+  blueLightMid,
+
+  lightToastDone,
+  darkToastDone,
+  lightToastInfo,
+  darkToastInfo,
+  lightToastAlert,
+  darkToastAlert,
+  lightToastWarning,
+  darkToastWarning,
+
+  dndColor,
+  dndDarkColor,
+  dndHoverColor,
+  dndDarkHover,
+
+  grayMaxLight,
+  shuttleGrey,
+  blueMain,
+  red,
 } = globalColors;
 
 export const getBaseTheme = () => {
@@ -196,7 +211,7 @@ export const getBaseTheme = () => {
 
         primary: lightSecondMain,
         primaryHover: lightSecondMainHover,
-        primaryActive: blueMaya,
+        primaryActive: `linear-gradient(0deg, ${lightSecondMain}, ${lightSecondMain}),linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1))`,
         primaryDisabled: lightSecondMainDisabled,
       },
 
@@ -208,7 +223,7 @@ export const getBaseTheme = () => {
 
         primary: `1px solid ${lightSecondMain}`,
         primaryHover: `1px solid ${lightSecondMainHover}`,
-        primaryActive: `1px solid ${blueMaya}`,
+        primaryActive: `1px solid linear-gradient(0deg, ${lightSecondMain}, ${lightSecondMain}),linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1))`,
         primaryDisabled: `1px solid ${lightSecondMainDisabled}`,
       },
 
@@ -225,7 +240,6 @@ export const getBaseTheme = () => {
       margin: "0",
       lineHeight: "56px",
       fontWeight: "700",
-      borderBottom: `1px solid ${globalColors.lightGrayishBlue}`,
       padding: "0 16px 16px",
       bodyPadding: "16px 0",
     },
@@ -241,8 +255,6 @@ export const getBaseTheme = () => {
       mobileProgressBarBackground: "rgb(48%, 58%, 69%, 0.4)",
 
       bar: {
-        errorBackground: orangePressed,
-
         icon: gray,
       },
 
@@ -342,7 +354,7 @@ export const getBaseTheme = () => {
       background: white,
 
       borderConnect: "none",
-      connectBackground: "#3B72A7",
+      connectBackground: lightIcons,
 
       disableBackgroundColor: grayLight,
 
@@ -562,20 +574,6 @@ export const getBaseTheme = () => {
       hoverBorderColor: gray,
     },
 
-    requestLoader: {
-      backgroundColor: white,
-      border: `1px solid ${globalColors.veryLightGrey}`,
-      overflow: "hidden",
-      padding: "5px 10px",
-      lineHeight: "16px",
-      borderRadius: "5px",
-      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.3)",
-
-      marginRight: "10px",
-      top: "10px",
-      width: "100%",
-    },
-
     row: {
       minHeight: "47px",
       width: "100%",
@@ -682,12 +680,7 @@ export const getBaseTheme = () => {
         },
       },
 
-      header: {
-        borderBottom: `1px solid ${globalColors.lightGrayishBlue}`,
-      },
-
       closeButton: {
-        // backgroundColor: "#9a9ea3",
         fillColor: white,
       },
     },
@@ -731,18 +724,18 @@ export const getBaseTheme = () => {
 
       borderColor: grayStrong,
       errorBorderColor: "#F21C0E",
-      warningBorderColor: warningColor,
+      warningBorderColor: lightErrorStatus,
       disabledBorderColor: grayLightMid,
 
       hoverBorderColor: gray,
       hoverErrorBorderColor: red,
-      hoverWarningBorderColor: warningColor,
-      lightToastWarningBorderColor: warningColor,
+      hoverWarningBorderColor: lightErrorStatus,
+      lightToastWarningBorderColor: lightErrorStatus,
       hoverDisabledBorderColor: grayLightMid,
 
       focusBorderColor: blueMain,
       focusErrorBorderColor: red,
-      focusWarningBorderColor: warningColor,
+      focusWarningBorderColor: lightErrorStatus,
       focusDisabledBorderColor: grayLightMid,
     },
 
@@ -1040,8 +1033,7 @@ export const getBaseTheme = () => {
         hoverBackgroundColor: lightGrayHover,
         disableBackgroundColor: grayLightMid,
         activeBackgroundColor: grayLightMid,
-        activeSelectedBackgroundColor:
-          "linear-gradient(0deg, #265a8f, #265a8f), linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1))",
+        activeSelectedBackgroundColor: `linear-gradient(0deg, ${blueLightMid}, ${blueLightMid}), linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1))`,
 
         title: {
           padding: "4px 16px",
@@ -1179,13 +1171,13 @@ export const getBaseTheme = () => {
       },
 
       guest: {
-        fill: "#3B72A7",
+        fill: lightIcons,
         stroke: darkBlack,
         color: white,
       },
 
       owner: {
-        fill: "#EDC409",
+        fill: favoritesStatus,
         stroke: darkBlack,
         color: white,
       },
@@ -1262,8 +1254,8 @@ export const getBaseTheme = () => {
           marginTop: "-9.4px",
           width: "24px",
           height: "24px",
-          background: blueMain,
-          disabledBackground: blueDisabled,
+          background: lightSecondMain,
+          disabledBackground: lightSecondMainDisabled,
           borderWidth: "6px",
           borderStyle: "solid",
           borderColor: `${white}`,
@@ -1274,7 +1266,7 @@ export const getBaseTheme = () => {
         thumb: {
           width: "24px",
           height: "24px",
-          background: blueMain,
+          background: lightSecondMain,
           border: `6px solid ${white}`,
           borderRadius: "30px",
           marginTop: "0px",
@@ -1292,7 +1284,7 @@ export const getBaseTheme = () => {
         rangeThumb: {
           width: "14px",
           height: "14px",
-          background: blueMain,
+          background: lightSecondMain,
           border: `6px solid ${white}`,
           borderRadius: "30px",
           boxShadow: "0px 5px 20px rgba(4, 15, 27, 0.13)",
@@ -1722,7 +1714,7 @@ export const getBaseTheme = () => {
         margin: "0",
         lineHeight: "56px",
         fontWeight: "700",
-        borderBottom: `1px solid ${globalColors.lightGrayishBlue}`,
+        borderBottom: `1px solid ${grayStrong}`,
       },
 
       bodyContent: {
@@ -1757,7 +1749,7 @@ export const getBaseTheme = () => {
       contentLineHeight: "56px",
       contentFontWeight: "700",
 
-      borderBottom: `1px solid ${globalColors.lightGrayishBlue}`,
+      borderBottom: `1px solid ${grayStrong}`,
     },
 
     aside: {
@@ -1776,8 +1768,8 @@ export const getBaseTheme = () => {
     dragAndDrop: {
       height: "100%",
       transparentBorder: "1px solid transparent",
-      acceptBackground: lightMediumGoldenrod,
-      background: lightToastInfo,
+      acceptBackground: dndHoverColor,
+      background: dndColor,
     },
 
     // phoneInput: {
@@ -2027,7 +2019,7 @@ export const getBaseTheme = () => {
 
     infoPanel: {
       sectionHeaderToggleIcon: gray,
-      sectionHeaderToggleIconActive: "#3B72A7",
+      sectionHeaderToggleIconActive: lightIcons,
       sectionHeaderToggleBg: "transparent",
       sectionHeaderToggleBgActive: grayLight,
 
@@ -2044,7 +2036,7 @@ export const getBaseTheme = () => {
       closeButtonBg: "transparent",
 
       links: {
-        iconColor: "#3B72A7",
+        iconColor: lightIcons,
         iconErrorColor: lightErrorStatus,
         primaryColor: grayText,
       },
@@ -2118,7 +2110,7 @@ export const getBaseTheme = () => {
     },
 
     peopleTableRow: {
-      fill: "#3b72a7",
+      fill: lightIcons,
 
       nameColor: black,
       pendingNameColor: gray,
@@ -2169,15 +2161,6 @@ export const getBaseTheme = () => {
       },
     },
 
-    profileInfo: {
-      color: "#83888d",
-      iconButtonColor: black,
-      linkColor: gray,
-
-      tooltipLinkColor: black,
-      iconColor: orangePressed,
-    },
-
     updateUserForm: {
       tooltipTextColor: black,
       borderTop: `1px solid ${grayLightMid}`,
@@ -2224,8 +2207,8 @@ export const getBaseTheme = () => {
       rowView: {
         checkedBackground: lightGrayHover,
 
-        draggingBackground: lightToastInfo,
-        draggingHoverBackground: lightMediumGoldenrod,
+        draggingBackground: dndColor,
+        draggingHoverBackground: dndHoverColor,
 
         shareButton: {
           color: lightGrayDark,
@@ -2236,9 +2219,9 @@ export const getBaseTheme = () => {
         linkColor: black,
         textColor: gray,
 
-        editingIconColor: "#3b72a7",
-        shareHoverColor: "#3b72a7",
-        pinColor: "#3b72a7",
+        editingIconColor: lightIcons,
+        shareHoverColor: lightIcons,
+        pinColor: lightIcons,
       },
 
       tableView: {
@@ -2249,12 +2232,12 @@ export const getBaseTheme = () => {
 
         row: {
           checkboxChecked: `linear-gradient(to right, #f3f4f4 24px, ${grayLightMid} 24px)`,
-          checkboxDragging: `linear-gradient(to right, ${lightToastInfo} 24px, ${grayLightMid} 24px)`,
-          checkboxDraggingHover: `linear-gradient(to right,rgb(239, 239, 178) 24px, ${grayLightMid} 24px)`,
+          checkboxDragging: `linear-gradient(to right, ${dndColor} 24px, ${grayLightMid} 24px)`,
+          checkboxDraggingHover: `linear-gradient(to right, ${dndHoverColor} 24px, ${grayLightMid} 24px)`,
 
           contextMenuWrapperChecked: `linear-gradient(to left, #f3f4f4 24px, ${grayLightMid} 24px)`,
-          contextMenuWrapperDragging: `border-image-source: linear-gradient(to left, ${lightToastInfo} 24px, ${grayLightMid} 24px)`,
-          contextMenuWrapperDraggingHover: `linear-gradient(to left,rgb(239, 239, 178) 24px,${grayLightMid} 24px)`,
+          contextMenuWrapperDragging: `border-image-source: linear-gradient(to left, ${dndColor} 24px, ${grayLightMid} 24px)`,
+          contextMenuWrapperDraggingHover: `linear-gradient(to left, ${dndHoverColor} 24px,${grayLightMid} 24px)`,
 
           backgroundActive: `#F3F4F4`,
 
@@ -2263,7 +2246,7 @@ export const getBaseTheme = () => {
 
           borderHover: gray,
           sideColor: gray,
-          shareHoverColor: "#3b72a7",
+          shareHoverColor: lightIcons,
 
           borderImageRight: `linear-gradient(to right, ${white} 25px, ${grayLightMid} 24px)`,
           borderImageLeft: `linear-gradient(to left, ${white} 24px, ${grayLightMid} 24px)`,
@@ -2275,8 +2258,8 @@ export const getBaseTheme = () => {
 
       tilesView: {
         tile: {
-          draggingColor: lightToastInfo,
-          draggingHoverColor: lightMediumGoldenrod,
+          draggingColor: dndColor,
+          draggingHoverColor: dndHoverColor,
           checkedColor: lightGrayHover,
           roomsCheckedColor: lightGrayHover,
           border: `1px solid ${grayStrong}`,
@@ -2346,7 +2329,7 @@ export const getBaseTheme = () => {
     },
 
     floatingButton: {
-      backgroundColor: "#3B72A7",
+      backgroundColor: lightIcons,
       color: white,
       boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.13)",
       fill: white,
@@ -2618,15 +2601,6 @@ export const getBaseTheme = () => {
         color: gray,
       },
 
-      selectFile: {
-        color: gray,
-        background: grayLight,
-        borderBottom: `1px solid ${grayLightMid}`,
-        borderRight: `1px solid ${globalColors.lightGrayishBlue}`,
-
-        buttonsBackground: white,
-      },
-
       filesList: {
         color: gray,
         backgroundColor: grayLightMid,
@@ -2753,7 +2727,7 @@ export const getBaseTheme = () => {
 
     filesBadges: {
       iconColor: gray,
-      hoverIconColor: "#3B72A7",
+      hoverIconColor: lightIcons,
 
       color: white,
       backgroundColor: white,
@@ -2783,14 +2757,14 @@ export const getBaseTheme = () => {
     },
 
     filesIcons: {
-      fill: "#3b72a7",
-      hoverFill: "#3b72a7",
+      fill: lightIcons,
+      hoverFill: lightIcons,
     },
 
     filesQuickButtons: {
       color: gray,
-      sharedColor: "#3b72a7",
-      hoverColor: "#3b72a7",
+      sharedColor: lightIcons,
+      hoverColor: lightIcons,
     },
 
     filesSharedButton: {
@@ -2923,15 +2897,6 @@ export const getBaseTheme = () => {
       payments: {
         linkColor: link,
         delayColor: "#F21C0E",
-      },
-
-      paymentsEnterprise: {
-        background: grayLight,
-
-        buttonBackground: "#edf2f7",
-
-        linkColor: link,
-        headerColor: orangePressed,
       },
 
       settings: {

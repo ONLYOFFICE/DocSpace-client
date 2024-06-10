@@ -77,22 +77,16 @@ export const globalColors = {
   darkToastAlert: "#E0B151",
   lightToastWarning: "#F7CDBE",
   darkToastWarning: "#E07751",
+
+  loader: "rgba(0, 0, 0, 0.05)",
+  dndColor: "rgba(229, 228, 138, 0.5)",
+  dndDarkColor: "rgba(229, 228, 138, 0.12)",
+  dndHoverColor: "rgba(204, 202, 102, 0.5)",
+  dndDarkHover: "rgba(204, 184, 102, 0.2)",
   //
 
   grayMaxLight: "#eeeeee",
-
   shuttleGrey: "#63686A",
-  veryLightGrey: "#CACACA",
-
   blueMain: "#2DA7DB",
-  blueDisabled: "#A6DCF2",
-  blueMaya: "#4A8ACA",
-
-  lightGrayishBlue: "#DEE2E6",
-
-  orangePressed: "#C96C27",
-  lightMediumGoldenrod: "#EFEFB2",
-
-  warningColor: "#f1ca92",
   red: "#c30",
 };

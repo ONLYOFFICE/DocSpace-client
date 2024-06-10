@@ -86,34 +86,35 @@ const Tabs = (props: TabsProps) => {
 
   return (
     <StyledTabs {...rest}>
-      {!isViewFirstTab && <div className="blur-ahead" />}
-      <TabList $theme={theme} ref={tabsRef}>
-        {items.map((item, index) => {
-          const isActive = item.id === currentItem.id;
-          return (
-            <Tab
-              key={item.id}
-              isActive={isActive}
-              isDisabled={item?.isDisabled}
-              $currentColorScheme={globalTheme.currentColorScheme}
-              $theme={theme}
-              onClick={() => {
-                item.onClick?.();
-                setSelectedItem(item, index);
-              }}
-            >
-              {item.name}
-              <TabSubLine
+      <div className="sticky">
+        {!isViewFirstTab && <div className="blur-ahead" />}
+        <TabList $theme={theme} ref={tabsRef}>
+          {items.map((item, index) => {
+            const isActive = item.id === currentItem.id;
+            return (
+              <Tab
+                key={item.id}
                 isActive={isActive}
+                isDisabled={item?.isDisabled}
                 $currentColorScheme={globalTheme.currentColorScheme}
                 $theme={theme}
-              />
-            </Tab>
-          );
-        })}
-      </TabList>
-      {!isViewLastTab && <div className="blur-back" />}
-
+                onClick={() => {
+                  item.onClick?.();
+                  setSelectedItem(item, index);
+                }}
+              >
+                {item.name}
+                <TabSubLine
+                  isActive={isActive}
+                  $currentColorScheme={globalTheme.currentColorScheme}
+                  $theme={theme}
+                />
+              </Tab>
+            );
+          })}
+        </TabList>
+        {!isViewLastTab && <div className="blur-back" />}
+      </div>
       <div className="sticky-indent" />
 
       <TabPanel>{currentItem?.content}</TabPanel>

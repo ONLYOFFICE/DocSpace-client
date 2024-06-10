@@ -32,6 +32,15 @@ export const StyledTabs = styled.div`
   display: flex;
   flex-direction: column;
 
+  .sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: row;
+  }
+
   .sticky-indent {
     height: 20px;
   }
@@ -71,6 +80,10 @@ export const TabList = styled.div<{
   $theme?: ThemeTabs;
 }>`
   display: flex;
+  align-items: center;
+  justify-content: inherit;
+
+  width: 100%;
   max-height: 32px;
 
   overflow-x: auto;

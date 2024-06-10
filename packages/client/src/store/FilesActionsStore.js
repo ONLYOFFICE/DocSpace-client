@@ -2721,29 +2721,51 @@ class FilesActionStore {
   };
   changeIndex = async (action, item) => {
     const { filesList } = this.filesStore;
-    const { id } = this.selectedFolderStore;
-    const { setUpdateItems } = this.indexingStore;
+
     const index = filesList.findIndex((elem) => elem.id === item?.id);
 
-    const operationId = uniqueid("operation_");
-    const isUpperIndex = action === VDRIndexingAction.HigherIndex;
-    const isLowerIndex = action === VDRIndexingAction.LowerIndex;
+    if (
+      (action === VDRIndexingAction.HigherIndex && index === 0) ||
+      (action === VDRIndexingAction.LowerIndex &&
+        index === filesList.length - 1)
+    )
+      return;
+
+    const { bufferSelection } = this.filesStore;
+
+    let selection = this.filesStore.selection.length
+      ? this.filesStore.selection
+      : [bufferSelection];
+
+    const { id } = this.selectedFolderStore;
+    const { setUpdateItems } = this.indexingStore;
 
     let replaceable;
-    if (isUpperIndex && index !== 0) {
-      replaceable = filesList[index - 1];
+    let current = item;
+
+    switch (action) {
+      case VDRIndexingAction.HigherIndex:
+        replaceable = filesList[index - 1];
+        break;
+
+      case VDRIndexingAction.LowerIndex:
+        replaceable = filesList[index + 1];
+        break;
+
+      default:
+        current = selection[0];
+        replaceable = item;
+        break;
     }
 
-    if (isLowerIndex && index !== filesList.length - 1) {
-      replaceable = filesList[index + 1];
-    }
     if (!replaceable) return;
 
-    await changeIndex(item?.id, replaceable.order, item?.isFolder);
+    await changeIndex(current?.id, replaceable.order, current?.isFolder);
 
-    const items = [item, replaceable];
-
+    const items = [current, replaceable];
     setUpdateItems(items);
+
+    const operationId = uniqueid("operation_");
     this.updateCurrentFolder(null, [id], true, operationId);
   };
 

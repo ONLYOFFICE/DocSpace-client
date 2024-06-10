@@ -80,7 +80,6 @@
   "DataBackup": "දත්ත උපස්ථය",
   "DataImport": "දත්ත ආයාතය",
   "DataImportComplete": "දත්ත ආයාතය සම්පූර්ණයි",
-  "DataImportDescription": "තෙවන පාර්ශ්ව සේවාවකින් දත්ත ඔන්ලිඔෆිස් {{portalName}} වෙත ආයාත කරන්න. දත්ත ආයාත කිරීමට සියලුම පරිශ්‍රීලකයින්, ඔවුන්ගේ පෞද්ගලික සහ බෙදාගත් ලේඛන වැනි දෑ අදාළ වේ.",
   "DataImportProcessing": "දත්ත ආයාතය සැකසීම",
   "Deactivate": "අක්‍රිය කරන්න",
   "DeactivateOrDeletePortal": "අවකාශය අක්‍රිය කරන්න හෝ මකන්න",

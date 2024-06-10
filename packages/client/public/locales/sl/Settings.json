@@ -85,7 +85,7 @@
   "DataBackup": "Varnostno kopiranje podatkov",
   "DataImport": "Uvoz podatkov",
   "DataImportComplete": "Uvoz podatkov zaključen",
-  "DataImportDescription": "Uvozite podatke iz storitve tretjih oseb v ONLYOFFICE {{portalName}}. Uvoz podatkov omogoča prenos podatkov, kot so vsi uporabniki, njihovi osebni in skupni dokumenti.",
+  "DataImportDescription": "Uvozite podatke iz storitve tretjih oseb v {{organizationName}} {{portalName}}. Uvoz podatkov omogoča prenos podatkov, kot so vsi uporabniki, njihovi osebni in skupni dokumenti.",
   "DataImportProcessing": "Obdelava uvoza podatkov",
   "Deactivate": "Deaktiviraj",
   "DeactivateOrDeletePortal": "Deaktivirajte ali izbrišite prostor.",

@@ -2,7 +2,7 @@
   "PrivacyButton": "Otvori {{organizationName}} Desktop Editors",
   "PrivacyClick": "Kliknite na Otvori <1>{{organizationName}} Desktop</1> u dijalogu pregledača da biste radili sa šifrovanim dokumentima.",
   "PrivacyDescriptionConnect": "Možete otvoriti ovu datoteku sa interfejsa desktop aplikacije kada se vaš oblak poveže",
-  "PrivacyDescriptionEditors": "Ako imate ONLYOFFICE Desktop Editors instaliran ali ne možete da ga otvorite sa ove stranice, vaš pregledač ga možda blokira.",
+  "PrivacyDescriptionEditors": "Ako imate {{organizationName}} Desktop Editors instaliran ali ne možete da ga otvorite sa ove stranice, vaš pregledač ga možda blokira.",
   "PrivacyDialog": "Ako ne vidite dijalog, kliknite na dugme ispod",
   "PrivacyEditors": "Nemate ONLYOFFICE Desktop Editors?",
   "PrivacyHeader": "Ovaj dokument je šifrovan",

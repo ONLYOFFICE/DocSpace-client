@@ -242,7 +242,7 @@ const PrivacyPageComponent = ({ t, tReady, organizationName }) => {
           textAlign="center"
           className="privacy-rooms-text-description"
         >
-          <p>{t("PrivacyDescriptionEditors")}.</p>
+          <p>{(t("PrivacyDescriptionEditors"), { organizationName })}.</p>
           <p>{t("PrivacyDescriptionConnect")}.</p>
         </Text>
       </div>

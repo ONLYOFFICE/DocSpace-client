@@ -220,7 +220,7 @@
   "SelectUsers": "Atlasiet lietotājus",
   "SelectUsersDescriptionGoogle": "Pārbaudiet lietotājus no saraksta, lai importētu {{organizationName}} {{portalName}}. Lietotāji no Google Workspace tiks importēti bez vārda / uzvārda, un tā vietā tiks izmantots viņu e-pasta vārds. Lietotāju vārdus var mainīt pēc importēšanas. Lietotāji, kas jau pastāv {{organizationName}} {{portalName}}, ir iezīmēti ar zaļu krāsu un pēc noklusējuma nav atzīmēti.",
   "SelectUsersDescriptionNextcloud": "Pārbaudiet lietotājus no saraksta, lai importētu {{organizationName}} {{portalName}}. Var atlasīt tikai lietotājus ar e-pasta ziņojumiem. Lietotāji, kas jau pastāv {{organizationName}} {{portalName}}, ir iezīmēti ar zaļu krāsu un pēc noklusējuma nav atzīmēti.",
-  "SelectUsersDescriptionWorkspace": "Pārbaudiet lietotājus no saraksta, lai importētu ONLYOFFICE {{portalName}}. Lietotāji, kas jau pastāv ONLYOFFICE {{portalName}}, ir iezīmēti ar zaļu krāsu un pēc noklusējuma nav atzīmēti.",
+  "SelectUsersDescriptionWorkspace": "Pārbaudiet lietotājus no saraksta, lai importētu {{organizationName}} {{portalName}}. Lietotāji, kas jau pastāv {{organizationName}} {{portalName}}, ir iezīmēti ar zaļu krāsu un pēc noklusējuma nav atzīmēti.",
   "SelectUsersWithEmail": "Atlasīt lietotājus ar e-pastu",
   "SelectUserTypes": "Atlasīt lietotāju tipus",
   "SelectUserTypesDescription": "Atlasiet importēto lietotāju {{portalName}} lomas: <1> {{portalName}} administrators</1>, <1>Telpas administrators</1> vai <1>Galvenais lietotājs</1>. Pēc noklusējuma katram lietotājam ir atlasīta Galvenā lietotāja loma. Jūs varat pārvaldīt lomas pēc importēšanas.",

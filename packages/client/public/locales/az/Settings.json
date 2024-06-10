@@ -220,7 +220,7 @@
   "SelectUsers": "İstifadəçiləri seçin",
   "SelectUsersDescriptionGoogle": "{{organizationName}} {{portalName}}-ə idxal ediləcək istifadəçiləri siyahıdan yoxlayın. Google Workspace istifadəçiləri Ad/Soyad olmadan idxal ediləcək və əvəzinə onların e-poçt adları istifadə ediləcək. İstifadəçi adları idxaldan sonra dəyişdirilə bilər. {{organizationName}} {{portalName}}-də artıq mövcud olan istifadəçilər yaşıl rənglə vurğulanır və defolt olaraq qeyd olunmur.",
   "SelectUsersDescriptionNextcloud": "{{organizationName}} {{portalName}}-ə idxal ediləcək istifadəçiləri siyahıdan yoxlayın. Yalnız e-poçt ünvanları olan istifadəçilər seçilə bilər. {{organizationName}} {{portalName}}-də artıq mövcud olan istifadəçilər yaşıl rənglə vurğulanır və defolt olaraq qeyd olunmur.",
-  "SelectUsersDescriptionWorkspace": "ONLYOFFICE {{portalName}}-ə idxal ediləcək istifadəçiləri siyahıdan yoxlayın. ONLYOFFICE {{portalName}}-də artıq mövcud olan istifadəçilər yaşıl rənglə vurğulanır və defolt olaraq qeyd olunmur.",
+  "SelectUsersDescriptionWorkspace": "{{organizationName}} {{portalName}}-ə idxal ediləcək istifadəçiləri siyahıdan yoxlayın. {{organizationName}} {{portalName}}-də artıq mövcud olan istifadəçilər yaşıl rənglə vurğulanır və defolt olaraq qeyd olunmur.",
   "SelectUsersWithEmail": "E-poçtu olan istifadəçiləri seçin",
   "SelectUserTypes": "İstifadəçi növlərini seçin",
   "SelectUserTypesDescription": "İdxal edilmiş istifadəçilər üçün {{portalName}} rollarını seçin: <1>{{portalName}} admini</1>, <1>Otaq admini</1> və ya <1>Bacarıqlı istifadəçi</1>. Varsayılan olaraq, hər bir istifadəçi üçün Bacarıqlı istifadəçi rolu seçilir. Siz idxaldan sonra rolları idarə edə bilərsiniz.",

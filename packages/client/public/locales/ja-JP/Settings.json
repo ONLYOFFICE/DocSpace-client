@@ -220,7 +220,7 @@
   "SelectUsers": "ユーザーの選択",
   "SelectUsersDescriptionGoogle": "リストから{{organizationName}} {{portalName}}にインポートするユーザーをチェックしてください。Google Workspaceからのユーザは姓名なしでインポートされ、代わりにメール名が使用されます。ユーザーの名前はインポート後に変更することができます。すでに{{organizationName}} {{portalName}}に存在するユーザは緑色でハイライトされ、デフォルトではチェックされていません。",
   "SelectUsersDescriptionNextcloud": "リストから{{organizationName}} {{portalName}}にインポートするユーザーをチェックしてください。選択できるのはメールアドレスを持つユーザーのみです。すでに{{organizationName}} {{portalName}}に存在するユーザは緑色でハイライトされ、デフォルトではチェックされていません。",
-  "SelectUsersDescriptionWorkspace": "リストからONLYOFFICE {{portalName}}にインポートするユーザーをチェックしてください。すでにONLYOFFICE {{portalName}}に存在するユーザは緑色でハイライトされ、デフォルトではチェックされていません。",
+  "SelectUsersDescriptionWorkspace": "リストから{{organizationName}} {{portalName}}にインポートするユーザーをチェックしてください。すでに{{organizationName}} {{portalName}}に存在するユーザは緑色でハイライトされ、デフォルトではチェックされていません。",
   "SelectUsersWithEmail": "メールアドレスがあるユーザーの選択",
   "SelectUserTypes": "ユーザータイプの選択",
   "SelectUserTypesDescription": "インポートしたユーザーの{{portalName}}役割を選択してください： <1>{{portalName}}管理者</1>、<1>ルーム管理者</1>、または<1>パワーユーザー</1>。デフォルトでは、各ユーザーにパワーユーザーの役割が選択されています。役割はインポート後に管理できます。",

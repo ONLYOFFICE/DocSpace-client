@@ -25,16 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+
 import { useTranslation } from "react-i18next";
 
 import FolderSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
 
-import {
-  createFolder,
-  getFolder,
-  getFolderInfo,
-  getSettingsFiles,
-} from "../../../api/files";
+import { getFolder, getFolderInfo, getSettingsFiles } from "../../../api/files";
 import FilesFilter from "../../../api/files/filter";
 import {
   ApplyFilterOption,
@@ -53,6 +49,7 @@ import {
   convertFilesToItems,
   convertFoldersToItems,
 } from "../FilesSelector.utils";
+import useInputItemHelper from "./useInputItemHelper";
 
 const useFilesHelper = ({
   setIsNextPageLoading,
@@ -83,10 +80,16 @@ const useFilesHelper = ({
   isInit,
   setIsInit,
   setIsFirstLoad,
-  withCreateFolder,
+  withCreate,
   setSelectedItemId,
 }: UseFilesHelpersProps) => {
   const { t } = useTranslation(["Common"]);
+
+  const { addInputItem } = useInputItemHelper({
+    withCreate,
+    selectedItemId,
+    setItems,
+  });
 
   const requestRunning = React.useRef(false);
   const initRef = React.useRef(isInit);
@@ -105,71 +108,18 @@ const useFilesHelper = ({
     initRef.current = isInit;
   }, [isInit]);
 
-  const onCancelInput = React.useCallback(() => {
-    if (!withCreateFolder) return;
-
-    setItems((value) => {
-      if (!value[1]?.isInputItem && !value[0]?.isInputItem) return value;
-
-      let idx = 1;
-
-      if (value[0].isInputItem) idx = 0;
-
-      const newValue = [...value];
-
-      newValue.splice(idx, 1);
-
-      return newValue;
-    });
-  }, [setItems, withCreateFolder]);
-
-  const onAcceptInput = React.useCallback(
-    async (value: string) => {
-      if (!withCreateFolder || !selectedItemId) return;
-
-      await createFolder(selectedItemId, value);
-
-      onCancelInput();
-
-      // setBreadCrumbs((val) => {
-      //   return [...val, { id: folder.id, label: folder.title }];
-      // });
-
-      // setSelectedItemId(folder.id);
-    },
-    [withCreateFolder, selectedItemId, onCancelInput],
-  );
-
-  const addInputItem = React.useCallback(() => {
-    if (!withCreateFolder) return;
-
-    const inputItem: TSelectorItem = {
-      label: "",
-      id: "new-folder-input",
-      isInputItem: true,
-      onAcceptInput,
-      onCancelInput,
-      defaultInputValue: t("NewFolder"),
-      icon: FolderSvgUrl,
-    };
-
-    setItems((value) => {
-      if (value[1]?.isInputItem || value[0]?.isInputItem) return value;
-
-      const newValue = [...value];
-
-      newValue.splice(1, 0, inputItem);
-
-      return newValue;
-    });
-  }, [onAcceptInput, onCancelInput, setItems, t, withCreateFolder]);
-
   const getFileList = React.useCallback(
-    async (startIndex: number) => {
+    async (sIndex: number) => {
       if (requestRunning.current) return;
 
       requestRunning.current = true;
       setIsNextPageLoading(true);
+
+      let startIndex = sIndex;
+
+      if (withCreate) {
+        startIndex -= startIndex % 100;
+      }
 
       const currentSearch = searchValue || "";
 
@@ -381,14 +331,15 @@ const useFilesHelper = ({
         }
 
         if (firstLoadRef.current || startIndex === 0) {
-          if (withCreateFolder) {
+          if (withCreate) {
             setTotal(total + 1);
             itemList.unshift({
               isCreateNewItem: true,
-              label: "New folder",
+              label: t("NewFolder"),
               id: "create-folder-item",
               key: "create-folder-item",
-              onCreateClick: addInputItem,
+              hotkey: "f",
+              onCreateClick: () => addInputItem(t("NewFolder"), FolderSvgUrl),
               onBackClick: () => {
                 setSelectedItemId(current.parentId);
                 setBreadCrumbs((val) => {
@@ -472,10 +423,11 @@ const useFilesHelper = ({
       setIsBreadCrumbsLoading,
       roomsFolderId,
       setIsSelectedParentFolder,
-      withCreateFolder,
+      withCreate,
       setItems,
       setTotal,
       addInputItem,
+      t,
       setSelectedItemId,
       rootThirdPartyId,
     ],

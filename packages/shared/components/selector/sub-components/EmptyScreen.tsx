@@ -37,6 +37,8 @@ import { Link, LinkType } from "../../link";
 
 import { StyledEmptyScreen } from "../Selector.styled";
 import { EmptyScreenProps } from "../Selector.types";
+import useCreateDropDown from "../hooks/useCreateDropDown";
+import NewItemDropDown from "./NewItemDropDown";
 
 const linkStyles = {
   isHovered: true,
@@ -55,14 +57,31 @@ const EmptyScreen = ({
   searchDescription,
   withSearch,
   items,
+  inputItemVisible,
 }: EmptyScreenProps) => {
   const { t } = useTranslation(["Common"]);
+  const { isOpenDropDown, setIsOpenDropDown, onCloseDropDown } =
+    useCreateDropDown();
 
   const currentImage = withSearch ? searchImage : image;
   const currentHeader = withSearch ? searchHeader : header;
   const currentDescription = withSearch ? searchDescription : description;
 
   const createItem = items.length > 0 ? items[0] : null;
+
+  const onCreateClickAction = () => {
+    if (
+      !createItem ||
+      (!createItem.onCreateClick && !createItem.dropDownItems) ||
+      isOpenDropDown ||
+      inputItemVisible
+    )
+      return;
+
+    if (createItem.dropDownItems) return setIsOpenDropDown(true);
+
+    createItem.onCreateClick?.();
+  };
 
   return (
     <StyledEmptyScreen withSearch={withSearch}>
@@ -81,13 +100,20 @@ const EmptyScreen = ({
             <IconButton
               className="empty-folder_container-icon"
               size={12}
-              onClick={createItem.onCreateClick}
+              onClick={onCreateClickAction}
               iconName={PlusSvgUrl}
               isFill
             />
-            <Link {...linkStyles} onClick={createItem.onCreateClick}>
+            <Link {...linkStyles} onClick={onCreateClickAction}>
               {items[0].label}
             </Link>
+            {isOpenDropDown && createItem && createItem.dropDownItems && (
+              <NewItemDropDown
+                dropDownItems={createItem.dropDownItems}
+                isEmpty
+                onCloseDropDown={onCloseDropDown}
+              />
+            )}
           </div>
           <div className="empty-folder_container-links">
             <IconButton

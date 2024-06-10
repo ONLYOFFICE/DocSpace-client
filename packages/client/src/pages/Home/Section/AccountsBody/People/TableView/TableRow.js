@@ -585,7 +585,6 @@ const PeopleTableRow = (props) => {
               color={sideInfoColor}
               onClick={onEmailClick}
               isTextOverflow
-              enableUserSelect
               dir="auto"
             >
               {email}

@@ -80,8 +80,8 @@ const InvitePanel = ({
   defaultAccess,
   inviteUsers,
   setInfoPanelIsMobileHidden,
-  updateInfoPanelSelection,
-  addInfoPanelMembers,
+  updateInfoPanelMembers,
+  isRoomMembersPanelOpen,
   setInviteLanguage,
   getUsersList,
   filter,
@@ -291,28 +291,6 @@ const InvitePanel = ({
 
       setIsLoading(false);
 
-      const invitedViaEmail = data.invitations
-        .filter((inv) => inv.email && !inv.id)
-        .map((invitation) => ({
-          access: invitation.access,
-          sharedTo: {
-            name: invitation.email,
-            userName: invitation.email,
-            email: invitation.email,
-            displayName: invitation.email,
-            status: 1,
-            activationStatus: 2,
-            usedSpace: 0,
-            hasAvatar: false,
-          },
-          canEditAccess: false,
-        }));
-
-      if (isRooms) {
-        const newInfoPanelMembers = [...result.members, ...invitedViaEmail];
-        addInfoPanelMembers(t, newInfoPanelMembers);
-      }
-
       onClose();
       toastr.success(t("Common:UsersInvited"));
 
@@ -320,7 +298,9 @@ const InvitePanel = ({
         toastr.warning(result?.warning);
       }
 
-      updateInfoPanelSelection();
+      if (isRoomMembersPanelOpen) {
+        updateInfoPanelMembers(t);
+      }
     } catch (err) {
       toastr.error(err);
       setIsLoading(false);
@@ -503,8 +483,8 @@ export default inject(
     const { filter } = peopleStore.filterStore;
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
-      updateInfoPanelSelection,
-      addInfoPanelMembers,
+      updateInfoPanelMembers,
+      isRoomMembersPanelOpen,
     } = infoPanelStore;
 
     const {
@@ -547,8 +527,8 @@ export default inject(
       collaboratorLink,
       inviteUsers,
       setInfoPanelIsMobileHidden,
-      updateInfoPanelSelection,
-      addInfoPanelMembers,
+      updateInfoPanelMembers,
+      isRoomMembersPanelOpen,
       getUsersList,
       filter,
       currentDeviceType,

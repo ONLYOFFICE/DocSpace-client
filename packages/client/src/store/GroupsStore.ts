@@ -362,7 +362,15 @@ class GroupsStore {
     this.bufferSelection = null;
     this.selected = selected;
     this.setSelection(this.getGroupsBySelected(selected));
+
+    this.peopleStore.accountsHotkeysStore.setHotkeyCaret(null);
     return selected;
+  };
+
+  selectAll = () => {
+    this.bufferSelection = null;
+
+    if (this.groups?.length) this.setSelection(this.groups);
   };
 
   getGroupsBySelected = (selected: "all" | "none") => {

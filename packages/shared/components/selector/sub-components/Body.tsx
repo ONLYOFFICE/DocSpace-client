@@ -103,6 +103,7 @@ const Body = ({
   withInfo,
   infoText,
   setInputItemVisible,
+  inputItemVisible,
 }: BodyProps) => {
   const [bodyHeight, setBodyHeight] = React.useState(0);
 
@@ -139,6 +140,16 @@ const Body = ({
     [hasNextPage, itemsCount],
   );
 
+  const onLoadMoreItems = React.useCallback(
+    (startIndex: number) => {
+      // first page loads in selector's useEffect
+      if (startIndex === 1) return;
+
+      loadMoreItems(startIndex);
+    },
+    [loadMoreItems],
+  );
+
   React.useEffect(() => {
     window.addEventListener("resize", onBodyResize);
 
@@ -154,6 +165,16 @@ const Body = ({
   React.useEffect(() => {
     resetCache();
   }, [resetCache, hasNextPage]);
+
+  // scroll to top after changing tab
+  React.useEffect(() => {
+    if (!withTabs) return;
+    const scrollElement = document.querySelector(".selector-body-scroll");
+
+    if (scrollElement) {
+      scrollElement.scrollTo(0, 0);
+    }
+  }, [withTabs, activeTabId]);
 
   let listHeight = bodyHeight - CONTAINER_PADDING;
 
@@ -240,6 +261,7 @@ const Body = ({
           searchHeader={searchEmptyScreenHeader}
           searchDescription={searchEmptyScreenDescription}
           items={items}
+          inputItemVisible={inputItemVisible}
         />
       ) : (
         <>
@@ -266,7 +288,7 @@ const Body = ({
               ref={listOptionsRef}
               isItemLoaded={isItemLoaded}
               itemCount={totalItems}
-              loadMoreItems={loadMoreItems}
+              loadMoreItems={onLoadMoreItems}
             >
               {({ onItemsRendered, ref }) => (
                 <List
@@ -282,6 +304,7 @@ const Body = ({
                     isItemLoaded,
                     renderCustomItem,
                     setInputItemVisible,
+                    inputItemVisible,
                   }}
                   itemSize={48}
                   onItemsRendered={onItemsRendered}

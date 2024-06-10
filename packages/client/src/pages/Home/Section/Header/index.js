@@ -832,7 +832,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const onNavigationButtonClick = () => {
-    onCreateAndCopySharedLink(props.roomItem, t);
+    onCreateAndCopySharedLink(selectedFolder, t);
   };
 
   const headerMenu = isAccountsPage
@@ -992,7 +992,7 @@ const SectionHeaderContent = (props) => {
                   trash: t("EmptyRecycleBin"),
                   trashWarning: t("TrashErasureWarning"),
                   actions: isRoomsFolder
-                    ? t("Files:NewRoom")
+                    ? t("Common:NewRoom")
                     : t("Common:Actions"),
                   contextMenu: t("Translations:TitleShowFolderActions"),
                   infoPanel: t("Common:InfoPanel"),
@@ -1253,11 +1253,6 @@ export default inject(
           shared) ||
         (sharedItem && sharedItem.canCopyPublicLink);
 
-    const roomItem =
-      navigationPath.length > 1
-        ? navigationPath[navigationPath.length - 2]
-        : selectedFolder;
-
     return {
       isGracePeriod,
       setInviteUsersWarningDialogVisible,
@@ -1387,8 +1382,6 @@ export default inject(
       onClickReconnectStorage,
       getFolderModel,
       onCreateRoom,
-
-      roomItem,
     };
   },
 )(

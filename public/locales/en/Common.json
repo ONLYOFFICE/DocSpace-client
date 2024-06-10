@@ -184,7 +184,7 @@
   "Free": "Free",
   "FreeProFeatures": "Free access to pro features",
   "FromDevice": "From device",
-  "FromDocspace": "From {{portalName}}",
+  "FromPortal": "From {{portalName}}",
   "FullAccess": "Full access",
   "GeneralAccessLinkCopied": "General link successfully copied to clipboard",
   "GeneralAccessLinkRemove": "General access link remove",

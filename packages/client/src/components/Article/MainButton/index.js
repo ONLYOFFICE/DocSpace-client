@@ -363,7 +363,7 @@ const ArticleMainButtonContent = (props) => {
             id: "actions_upload-from-docspace",
             className: "main-button_drop-down",
             icon: ActionsUploadReactSvgUrl,
-            label: t("Common:FromDocspace", { portalName: PORTAL }),
+            label: t("Common:FromPortal", { portalName: PORTAL }),
             key: "actions_upload-from-docspace",
             onClick: () =>
               onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.PDF),

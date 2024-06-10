@@ -2046,7 +2046,7 @@ class ContextOptionsStore {
           id: "personal_upload-from-docspace",
           className: "main-button_drop-down",
           icon: ActionsUploadReactSvgUrl,
-          label: t("Common:FromDocspace", { portalName: PORTAL }),
+          label: t("Common:FromPortal", { portalName: PORTAL }),
           key: "personal_upload-from-docspace",
           onClick: () =>
             this.onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.PDF),

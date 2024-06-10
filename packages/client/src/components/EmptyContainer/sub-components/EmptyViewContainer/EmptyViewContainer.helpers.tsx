@@ -335,7 +335,7 @@ export const getOptions = (
   } = helperOptions(actions, security);
 
   const uploadPDFFromDocSpace = createUploadFromDocSpace(
-    t("EmptyView:UploadFromDocSpaceTitle", {
+    t("EmptyView:UploadFromPortalTitle", {
       portalName: PORTAL,
     }),
     t("EmptyView:UploadPDFFormOptionDescription"),

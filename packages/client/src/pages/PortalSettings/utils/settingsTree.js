@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { PageType } from "@docspace/shared/enums";
-import { DOCSPACE } from "@docspace/shared/constants";
+import { PORTAL } from "@docspace/shared/constants";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/settings.react.svg?url";
 /**
  * Array for generation current settings tree.
@@ -487,7 +487,7 @@ export const settingsTree = [
             key: "7-1-6",
             icon: "",
             link: "docspace",
-            tKey: DOCSPACE,
+            tKey: PORTAL,
           },
         ],
       },

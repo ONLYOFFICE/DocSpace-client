@@ -104,12 +104,13 @@ const TariffTitleContainer = ({
 };
 
 export default inject(
-  ({ settings, currentQuotaStore, currentTariffStatusStore }) => {
+  ({ settingsStore, currentQuotaStore, currentTariffStatusStore }) => {
     const { trialDaysLeft, paymentDate, isLicenseDateExpired } =
       currentTariffStatusStore;
     const { isTrial } = currentQuotaStore;
 
-    const { organizationName } = settings;
+    const { organizationName } = settingsStore;
+
     return {
       isTrial,
       trialDaysLeft,

@@ -215,7 +215,7 @@
   "SelectedUsersCounter": "選択済み：{{selectedUsers}}/{{totalUsers}} ユーザー",
   "SelectFileDescriptionGoogle": "Google Workspaceのバックアップ ファイルを選択し、データのインポートを開始してください。複数のファイルを選択することもできます。データのアップロードと分析が完了すると、次のステップが自動的に開始されます。",
   "SelectFileDescriptionNextcloud": "Nextcloudのバックアップ ファイルを選択し、データのインポートを開始してください。選択できるファイルは1つだけです。データのアップロードと分析が完了すると、次のステップが自動的に開始されます。",
-  "SelectFileDescriptionWorkspace": "ONLYOFFICE Workspaceのバックアップ ファイルを選択し、データのインポートを開始してください。データのアップロードと分析が完了すると、次のステップが自動的に開始されます。",
+  "SelectFileDescriptionWorkspace": "{{organizationName}} Workspaceのバックアップ ファイルを選択し、データのインポートを開始してください。データのアップロードと分析が完了すると、次のステップが自動的に開始されます。",
   "SelectFileInGZFormat": "「.GZ」形式ファイルを選択してください。",
   "SelectUsers": "ユーザーの選択",
   "SelectUsersDescriptionGoogle": "リストからONLYOFFICE {{portalName}}にインポートするユーザーをチェックしてください。Google Workspaceからのユーザは姓名なしでインポートされ、代わりにメール名が使用されます。ユーザーの名前はインポート後に変更することができます。すでにONLYOFFICE {{portalName}}に存在するユーザは緑色でハイライトされ、デフォルトではチェックされていません。",

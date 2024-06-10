@@ -215,7 +215,7 @@
   "SelectedUsersCounter": "Đã chọn:{{selectedUsers}}/{{totalUsers}}người dùng",
   "SelectFileDescriptionGoogle": "Chọn các tập tin sao lưu Google Workspace để bắt đầu nhập dữ liệu. Có thể chọn nhiều tập tin. Sau khi quá trình tải lên và phân tích dữ liệu hoàn tất, bước tiếp theo sẽ được bắt đầu tự động.",
   "SelectFileDescriptionNextcloud": "Chọn tập tin sao lưu Nextcloud để bắt đầu nhập dữ liệu. Chỉ có thể chọn một tập tin. Sau khi quá trình tải lên và phân tích dữ liệu hoàn tất, bước tiếp theo sẽ được bắt đầu tự động.",
-  "SelectFileDescriptionWorkspace": "Chọn tập tin sao lưu ONLYOFFICE Workspace để bắt đầu nhập dữ liệu. Sau khi quá trình tải lên và phân tích dữ liệu hoàn tất, bước tiếp theo sẽ được bắt đầu tự động.",
+  "SelectFileDescriptionWorkspace": "Chọn tập tin sao lưu {{organizationName}} Workspace để bắt đầu nhập dữ liệu. Sau khi quá trình tải lên và phân tích dữ liệu hoàn tất, bước tiếp theo sẽ được bắt đầu tự động.",
   "SelectFileInGZFormat": "Chọn tập tin có định dạng GZ",
   "SelectUsers": "Chọn người dùng",
   "SelectUsersDescriptionGoogle": "Kiểm tra người dùng từ danh sách để nhập vào ONLYOFFICE {{portalName}}. Người dùng từ Google Workspace sẽ được nhập mà không có Tên / Họ, và tên email của họ sẽ được sử dụng thay thế. Tên của người dùng có thể được thay đổi sau khi nhập. Người dùng đã tồn tại trong ONLYOFFICE {{portalName}} được tô sáng bằng màu xanh lá cây và không được chọn theo mặc định.",

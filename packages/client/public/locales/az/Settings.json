@@ -215,7 +215,7 @@
   "SelectedUsersCounter": "Seçildi: {{selectedUsers}}/{{totalUsers}} istifadəçi",
   "SelectFileDescriptionGoogle": "Məlumat idxalına başlamaq üçün Google Workspace ehtiyat fayllarını seçin. Birdən çox fayl seçilə bilər. Məlumatların yüklənməsi və təhlili tamamlandıqdan sonra növbəti addım avtomatik olaraq başlayacaq.",
   "SelectFileDescriptionNextcloud": "Məlumat idxalına başlamaq üçün Nextcloud ehtiyat faylını seçin. Yalnız bir fayl seçilə bilər. Məlumatların yüklənməsi və təhlili tamamlandıqdan sonra növbəti addım avtomatik olaraq başlayacaq.",
-  "SelectFileDescriptionWorkspace": "Məlumatların idxalına başlamaq üçün ONLYOFFICE Workspace ehtiyat nüsxə faylını seçin. Məlumatların yüklənməsi və təhlili tamamlandıqdan sonra növbəti addım avtomatik olaraq başlayacaq.",
+  "SelectFileDescriptionWorkspace": "Məlumatların idxalına başlamaq üçün {{organizationName}} Workspace ehtiyat nüsxə faylını seçin. Məlumatların yüklənməsi və təhlili tamamlandıqdan sonra növbəti addım avtomatik olaraq başlayacaq.",
   "SelectFileInGZFormat": ".GZ formatında qovluq seçin",
   "SelectUsers": "İstifadəçiləri seçin",
   "SelectUsersDescriptionGoogle": "ONLYOFFICE {{portalName}}-ə idxal ediləcək istifadəçiləri siyahıdan yoxlayın. Google Workspace istifadəçiləri Ad/Soyad olmadan idxal ediləcək və əvəzinə onların e-poçt adları istifadə ediləcək. İstifadəçi adları idxaldan sonra dəyişdirilə bilər. ONLYOFFICE {{portalName}}-də artıq mövcud olan istifadəçilər yaşıl rənglə vurğulanır və defolt olaraq qeyd olunmur.",

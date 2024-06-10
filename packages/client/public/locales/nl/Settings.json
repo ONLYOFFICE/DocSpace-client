@@ -213,7 +213,7 @@
   "SelectedUsersCounter": "Geselecteerd: {{selectedUsers}}/{{totalUsers}} gebruikers",
   "SelectFileDescriptionGoogle": "Selecteer de Google Workspace back-up bestanden om het importeren van gegevens te starten. U kunt meerdere bestanden selecteren. Zodra het uploaden en analyseren van de gegevens voltooid is, wordt de volgende stap automatisch gestart.",
   "SelectFileDescriptionNextcloud": "Selecteer het Nextcloud back-up bestand om het importeren van gegevens te starten. Er kan slechts één bestand worden geselecteerd. Zodra het uploaden en analyseren van de gegevens voltooid is, wordt de volgende stap automatisch gestart.",
-  "SelectFileDescriptionWorkspace": "Selecteer het ONLYOFFICE back-up bestand om het importeren van gegevens te starten. Zodra het uploaden en analyseren van de gegevens voltooid is, wordt de volgende stap automatisch gestart.",
+  "SelectFileDescriptionWorkspace": "Selecteer het {{organizationName}} back-up bestand om het importeren van gegevens te starten. Zodra het uploaden en analyseren van de gegevens voltooid is, wordt de volgende stap automatisch gestart.",
   "SelectFileInGZFormat": "Selecteer het bestand in .GZ formaat",
   "SelectUsers": "Selecteer gebruikers",
   "SelectUsersDescriptionGoogle": "Vink gebruikers aan uit de lijst om te importeren in ONLYOFFICE {{portalName}}. Gebruikers van Google Workspace worden geïmporteerd zonder Voornaam / Achternaam, en in plaats daarvan wordt hun e-mailadres gebruikt. Namen van gebruikers kunnen na het importeren worden gewijzigd. Gebruikers die al bestaan in ONLYOFFICE {{portalName}} zijn aangegeven met een groene kleur en zijn niet standaard aangevinkt.",

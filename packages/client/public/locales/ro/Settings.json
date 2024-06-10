@@ -216,7 +216,7 @@
   "SelectedUsersCounter": "Selecționare: {{selectedUsers}}/{{totalUsers}} de utilizatori",
   "SelectFileDescriptionGoogle": "Selectați fișierele de rezervă Google Workspace pentru a demara importul de date. Puteți selecta mai multe fișiere. Odată ce încărcarea și analiza datelor sunt finalizate, următoarea etapă va fi inițiată automat.",
   "SelectFileDescriptionNextcloud": "Selectați fișierele de rezervă Nextcloud pentru a demara importul de date. Puteți selecta doar un fișier. Odată ce încărcarea și analiza datelor sunt finalizate, următoarea etapă va fi inițiată automat.",
-  "SelectFileDescriptionWorkspace": "Selectați fișierele de rezervă ONLYOFFICE Workspace pentru a demara importul de date. Odată ce încărcarea și analiza datelor sunt finalizate, următoarea etapă va fi inițiată automat.",
+  "SelectFileDescriptionWorkspace": "Selectați fișierele de rezervă {{organizationName}} Workspace pentru a demara importul de date. Odată ce încărcarea și analiza datelor sunt finalizate, următoarea etapă va fi inițiată automat.",
   "SelectFileInGZFormat": "Alegeți format de fișier .GZ",
   "SelectUsers": "Selectare utilizatori",
   "SelectUsersDescriptionGoogle": "Bifați utilizatorii din lista pentru a le importa în ONLYOFFICE {{portalName}}. Utilizatorii vor fi importați din Google Workspace cu adresa de e-mail indicată în loc de Numele/Prenumele. Puteți modifica numele utilizatorilor după importul. Utilizatorii deja exstenți în ONLYOFFICE {{portalName}} sunt evidențiate cu verde și nu sunt bifați în mod implicit.",

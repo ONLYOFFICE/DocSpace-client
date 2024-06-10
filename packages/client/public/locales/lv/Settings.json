@@ -215,7 +215,7 @@
   "SelectedUsersCounter": "Atlasīti: {{selectedUsers}}/{{totalUsers}} lietotāji",
   "SelectFileDescriptionGoogle": "Atlasiet Google Workspace dublējuma failus, lai sāktu importēt datus. Var atlasīt vairākus failus. Kad datu augšupielāde un analīze būs pabeigta, nākamā darbība tiks sākta automātiski.",
   "SelectFileDescriptionNextcloud": "Atlasiet Nextcloud dublējuma failu, lai sāktu datu importēšanu. Var atlasīt tikai vienu failu. Kad datu augšupielāde un analīze būs pabeigta, nākamā darbība tiks sākta automātiski.",
-  "SelectFileDescriptionWorkspace": "Atlasiet ONLYOFFICE Workspace dublējuma failu, lai sāktu datu importēšanu. Kad datu augšupielāde un analīze būs pabeigta, nākamā darbība tiks sākta automātiski.",
+  "SelectFileDescriptionWorkspace": "Atlasiet {{organizationName}} Workspace dublējuma failu, lai sāktu datu importēšanu. Kad datu augšupielāde un analīze būs pabeigta, nākamā darbība tiks sākta automātiski.",
   "SelectFileInGZFormat": "Izvēlieties failu .GZ formātā",
   "SelectUsers": "Atlasiet lietotājus",
   "SelectUsersDescriptionGoogle": "Pārbaudiet lietotājus no saraksta, lai importētu ONLYOFFICE {{portalName}}. Lietotāji no Google Workspace tiks importēti bez vārda / uzvārda, un tā vietā tiks izmantots viņu e-pasta vārds. Lietotāju vārdus var mainīt pēc importēšanas. Lietotāji, kas jau pastāv ONLYOFFICE {{portalName}}, ir iezīmēti ar zaļu krāsu un pēc noklusējuma nav atzīmēti.",

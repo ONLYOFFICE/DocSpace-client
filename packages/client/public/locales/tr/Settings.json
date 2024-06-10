@@ -216,7 +216,7 @@
   "SelectedUsersCounter": "Seçilenler: {{selectedUsers}}/{{totalUsers}} kullanıcı",
   "SelectFileDescriptionGoogle": "Veri içe aktarma işlemini başlatmak için Google Workspace yedekleme dosyalarını seçin. Birden fazla dosya seçilebilir. Veri yükleme ve analiz tamamlandığında, bir sonraki adım otomatik olarak başlatılacaktır.",
   "SelectFileDescriptionNextcloud": "Veri içe aktarmayı başlatmak için Nextcloud yedekleme dosyasını seçin. Sadece bir dosya seçilebilir. Veri yükleme ve analiz tamamlandığında, bir sonraki adım otomatik olarak başlatılacaktır.",
-  "SelectFileDescriptionWorkspace": "Veri içe aktarımını başlatmak için ONLYOFFICE Workspace yedek dosyasını seçin. Veri yükleme ve analiz tamamlandıktan sonra bir sonraki adım otomatik olarak başlatılacaktır.",
+  "SelectFileDescriptionWorkspace": "Veri içe aktarımını başlatmak için {{organizationName}} Workspace yedek dosyasını seçin. Veri yükleme ve analiz tamamlandıktan sonra bir sonraki adım otomatik olarak başlatılacaktır.",
   "SelectFileInGZFormat": ".GZ formatındaki dosyayı seçin",
   "SelectUsers": "Kullanıcıları seç",
   "SelectUsersDescriptionGoogle": "ONLYOFFICE {{portalName}}’e aktarmak için listeden kullanıcıları işaretleyin. Google Workspace’teki kullanıcıların Ad / Soyad bilgileri yerine e-posta adları kullanılacaktır. Kullanıcıların adları içe aktarma işleminden sonra değiştirilebilir. ONLYOFFICE {{portalName}}’de zaten mevcut olan kullanıcılar yeşil renkle vurgulanır ve varsayılan olarak işaretlenmezler.",

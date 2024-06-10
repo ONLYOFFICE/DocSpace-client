@@ -87,7 +87,7 @@ export const getWorkspaceStepDescription = (
 ) => {
   switch (stepIndex) {
     case 1:
-      return t("Settings:SelectFileDescriptionWorkspace");
+      return t("Settings:SelectFileDescriptionWorkspace", organizationName);
     case 2:
       return t("Settings:SelectUsersDescriptionWorkspace", {
         portalName: PORTAL,

@@ -216,7 +216,7 @@
   "SelectedUsersCounter": "Vybráno: {{selectedUsers}}/{{totalUsers}} uživatelů",
   "SelectFileDescriptionGoogle": "Vyberte záložní soubory Google Workspace a spusťte import dat. Lze vybrat více souborů. Po dokončení nahrávání a analýzy dat se automaticky spustí další krok.",
   "SelectFileDescriptionNextcloud": "Výběrem záložního souboru Nextcloud zahájíte import dat. Lze vybrat pouze jeden soubor. Po dokončení nahrávání a analýzy dat se automaticky spustí další krok.",
-  "SelectFileDescriptionWorkspace": "Vyberte soubor zálohy pracovního prostoru ONLYOFFICE a spusťte import dat. Po dokončení nahrávání a analýzy dat se automaticky spustí další krok.",
+  "SelectFileDescriptionWorkspace": "Vyberte soubor zálohy pracovního prostoru {{organizationName}} a spusťte import dat. Po dokončení nahrávání a analýzy dat se automaticky spustí další krok.",
   "SelectFileInGZFormat": "Vyberte soubor ve formátu .GZ",
   "SelectUsers": "Vybrat uživatele",
   "SelectUsersDescriptionGoogle": "Zaškrtněte uživatele ze seznamu pro import do aplikace ONLYOFFICE {{portalName}}. Uživatelé z Google Workspace budou importováni bez Křestního jména / Příjmení a místo nich bude použito jejich e-mailové jméno. Jména uživatelů lze po importu změnit. Uživatelé již existující v ONLYOFFICE {{portalName}} jsou zvýrazněni zelenou barvou a ve výchozím nastavení nejsou zaškrtnuti.",

@@ -213,7 +213,7 @@
   "SelectedUsersCounter": "Izbranih: {{selectedUsers}}/{{totalUsers}} uporabnikov",
   "SelectFileDescriptionGoogle": "Izberite datoteke varnostne kopije Google Workspace, da začnete uvoz podatkov. Izberete lahko več datotek. Ko sta nalaganje in analiza podatkov končana, se bo samodejno začel naslednji korak.",
   "SelectFileDescriptionNextcloud": "Izberite varnostno kopijo Nextcloud, da začnete uvoz podatkov. Izberete lahko samo eno datoteko. Ko sta nalaganje in analiza podatkov končana, se bo samodejno začel naslednji korak.",
-  "SelectFileDescriptionWorkspace": "Izberite datoteko varnostne kopije ONLYOFFICE Workspace, da začnete uvoz podatkov. Ko bosta nalaganje in analiza podatkov končana, se bo samodejno začel naslednji korak.",
+  "SelectFileDescriptionWorkspace": "Izberite datoteko varnostne kopije {{organizationName}} Workspace, da začnete uvoz podatkov. Ko bosta nalaganje in analiza podatkov končana, se bo samodejno začel naslednji korak.",
   "SelectFileInGZFormat": "Izberite datoteko v .GZ formatu",
   "SelectUsers": "Izberi uporabnike",
   "SelectUsersDescriptionGoogle": "Preverite uporabnike s seznama za uvoz v ONLYOFFICE {{portalName}}. Uporabniki iz Google Workspace bodo uvoženi brez imena/priimka, namesto tega bo uporabljeno njihovo e-mail ime. Imena uporabnikov lahko po uvozu spremenite. Uporabniki, ki že obstajajo v ONLYOFFICE {{portalName}}, so označeni z zeleno barvo in privzeto niso označeni.",

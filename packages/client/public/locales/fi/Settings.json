@@ -212,7 +212,7 @@
   "SelectedUsersCounter": "Valitut: {{selectedUsers}}/{{totalUsers}} käyttäjää",
   "SelectFileDescriptionGoogle": "Valitse ONLYOFFICE Workspace-varmuuskopiotiedostot aloittaaksesi tietojen siirto. Useita tiedostoja voidaan valita. Seuraava vaihe aloitetaan automaattisesti, kun tietojen lataus ja analysointi on tehty.",
   "SelectFileDescriptionNextcloud": "Valitse Nextcloud-varmuuskopiotiedostoa aloittaaksesi tietojen siirto. Seuraava vaihe aloitetaan automaattisesti, kun tietojen lataus ja analysointi on tehty.",
-  "SelectFileDescriptionWorkspace": "Valitse ONLYOFFICE Workspace-varmuuskopiotiedosto aloittaaksesi tietojen siirto. Vain yksi tiedosto voidaan valita. Seuraava vaihe aloitetaan automaattisesti, kun tietojen lataus ja analysointi on tehty.",
+  "SelectFileDescriptionWorkspace": "Valitse {{organizationName}} Workspace-varmuuskopiotiedosto aloittaaksesi tietojen siirto. Vain yksi tiedosto voidaan valita. Seuraava vaihe aloitetaan automaattisesti, kun tietojen lataus ja analysointi on tehty.",
   "SelectFileInGZFormat": "Valitse tiedosto .GZ-muodossa",
   "SelectUsers": "Valitse käyttäjät",
   "SelectUsersDescriptionGoogle": "Valitse ONLYOFFICE {{portalName}}-en tuotavat käyttäjät listalta. Google Workspacesta tuotavat käyttäjät tuodaan ilman etunimeä/sukunimeä ja sen sijaan käytetään heidän sähköpostinimeään. Käyttäjien nimet voidaan vaihtaa tuonnin jälkeen. Jo ONLYOFFICE {{portalName}}-ssa olemassaolevat käyttäjät on korostettu virheällä värillä ja niitä ei ole oletuksena valittu.",

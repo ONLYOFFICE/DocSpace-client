@@ -214,7 +214,7 @@
   "SelectedUsersCounter": "Sélection: {{selectedUsers}}/{{totalUsers}} utilisateurs",
   "SelectFileDescriptionGoogle": "Sélectionnez les fichier de sauvegarde de Google Workspace pour lancer l'importation. Il est possible de sélectionner plusieurs fichiers. Une fois le téléchargement et l'analyse de données terminés, l'étape suivante est lancé automatiquement.",
   "SelectFileDescriptionNextcloud": "Sélectionnez les fichier de sauvegarde de Nextcloud pour lancer l'importation. Il est possible de sélectionner un seul fichier. Une fois le téléchargement et l'analyse de données terminés, l'étape suivante est lancé automatiquement.",
-  "SelectFileDescriptionWorkspace": "Sélectionnez les fichier de sauvegarde d'ONLYOFFICE Workspace pour lancer l'importation. Une fois le téléchargement et l'analyse de données terminés, l'étape suivante est lancé automatiquement.",
+  "SelectFileDescriptionWorkspace": "Sélectionnez les fichier de sauvegarde d'{{organizationName}} Workspace pour lancer l'importation. Une fois le téléchargement et l'analyse de données terminés, l'étape suivante est lancé automatiquement.",
   "SelectFileInGZFormat": "Sélectionnez le fichier au format .GZ",
   "SelectUsers": "Sélectionnez utilisateur",
   "SelectUsersDescriptionGoogle": "Cochez les cases des utilisateurs que vous souhaitez importer vers {{portalName}}. Lors de l'importation des utilisateurs depuis Google Workspace, le Nom / Prénom d'utilisateur est remplacé par son adresse e-mail. Il est possible de modifier les noms d'utilisateurs après l'importation. Les utilisateurs existants dans OLYOFFICE {{portalName}} sont mis en surbrillance en vert et ne sont pas cochés par défaut.",

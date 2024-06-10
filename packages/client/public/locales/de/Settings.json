@@ -212,7 +212,7 @@
   "SelectedUsersCounter": "Ausgewählt: {{selectedUsers}}/{{totalUsers}} Benutzer",
   "SelectFileDescriptionGoogle": "Wählen Sie die Google Workspace-Sicherungsdateien aus, um den Datenimport zu starten. Es können mehrere Dateien ausgewählt werden. Sobald der Daten-Upload und die Analyse abgeschlossen sind, wird der nächste Schritt automatisch eingeleitet.",
   "SelectFileDescriptionNextcloud": "Wählen Sie die Nextcloud-Sicherungsdatei aus, um den Datenimport zu starten. Es kann nur eine Datei ausgewählt werden. Sobald der Daten-Upload und die Analyse abgeschlossen sind, wird der nächste Schritt automatisch eingeleitet.",
-  "SelectFileDescriptionWorkspace": "Wählen Sie die ONLYOFFICE Workspace-Sicherungsdatei aus, um den Datenimport zu starten. Sobald der Daten-Upload und die Analyse abgeschlossen sind, wird der nächste Schritt automatisch eingeleitet.",
+  "SelectFileDescriptionWorkspace": "Wählen Sie die {{organizationName}} Workspace-Sicherungsdatei aus, um den Datenimport zu starten. Sobald der Daten-Upload und die Analyse abgeschlossen sind, wird der nächste Schritt automatisch eingeleitet.",
   "SelectFileInGZFormat": "Die Datei im GZ-Format auswählen",
   "SelectUsers": "Benutzer auswählen",
   "SelectUsersDescriptionGoogle": "Wählen Sie Benutzer aus der Liste aus, die in ONLYOFFICE {{portalName}} importiert werden sollen. Benutzer aus Google Workspace werden ohne Vorname/Nachname importiert. Stattdessen wird ihr E-Mail-Name verwendet. Namen der Benutzer können nach dem Import geändert werden. Benutzer, die bereits in ONLYOFFICE {{portalName}} vorhanden sind, werden grün hervorgehoben und standardmäßig nicht markiert.",

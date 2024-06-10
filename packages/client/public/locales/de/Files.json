@@ -126,7 +126,7 @@
   "PrivateRoomDescriptionSafest": "Der sicherste Speicher für DOCX-, XLSX- und PPTX-Dateien.",
   "PrivateRoomDescriptionSecure": "Sichere Freigabe für Teammitglieder.",
   "PrivateRoomDescriptionUnbreakable": "Unzerbrechlicher AES-256-Algorithmus",
-  "PrivateRoomHeader": "Willkommen im Privatraum von ONLYOFFICE, wo jedes von Ihnen eingegebene Zeichen verschlüsselt wird",
+  "PrivateRoomHeader": "Willkommen im Privatraum von {{organizationName}}, wo jedes von Ihnen eingegebene Zeichen verschlüsselt wird",
   "PrivateRoomSupport": "Privaträume sind über {{organizationName}}-App für Desktop verfügbar. <3>Informationen</3>",
   "RecentlyAccessible": "Kürzlich per Link zugänglich",
   "RecentViaLinkEmptyContainerDescription": "Hier finden Sie eine Liste der zuletzt geöffneten Dateien, die über einen externen Link für Sie freigegeben wurden.",

@@ -86,7 +86,7 @@
   "RoomTypeDisplay": "Zobrazenie typu miestnosti",
   "Rotate": "Otočiť",
   "Scale": "Zmeniť rozmer",
-  "SDKDescription": "Pomocou JavaScript SDK môžete vložiť miestnosť alebo priečinok z ONLYOFFICE {{portalName}} do svojho webového rozhrania ako iframe. Tu nájdete nastavenia na vytvorenie vzoru iframe a konfiguráciu CSP. Ak chcete používať kompletnú sadu SDK, pozrite si",
+  "SDKDescription": "Pomocou JavaScript SDK môžete vložiť miestnosť alebo priečinok z {{portalName}} do svojho webového rozhrania ako iframe. Tu nájdete nastavenia na vytvorenie vzoru iframe a konfiguráciu CSP. Ak chcete používať kompletnú sadu SDK, pozrite si",
   "SearchBlock": "Blok na vyhľadávanie",
   "SearchFilterAndSort": "Hľadať, filtrovať a triediť",
   "SearchTerm": "Hľadať termín",

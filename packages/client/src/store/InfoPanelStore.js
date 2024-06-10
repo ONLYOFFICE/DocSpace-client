@@ -45,6 +45,7 @@ import {
   addExternalLink,
 } from "@docspace/shared/api/files";
 import isEqual from "lodash/isEqual";
+import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 
 const observedKeys = [
   "id",
@@ -412,12 +413,11 @@ class InfoPanelStore {
   };
 
   fetchUser = async (userId) => {
-    const { getStatusType, getUserContextOptions } =
-      this.peopleStore.usersStore;
+    const { getUserContextOptions } = this.peopleStore.usersStore;
 
     const fetchedUser = await getUserById(userId);
     fetchedUser.role = getUserRole(fetchedUser);
-    fetchedUser.statusType = getStatusType(fetchedUser);
+    fetchedUser.statusType = getUserStatus(fetchedUser);
     fetchedUser.options = getUserContextOptions(
       false,
       fetchedUser.isOwner,

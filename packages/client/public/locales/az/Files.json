@@ -126,7 +126,7 @@
   "PrivateRoomDescriptionSafest": "Docx, xlsx və pptx üçün ən təhlükəsiz saxlama.",
   "PrivateRoomDescriptionSecure": "Güvənilən üzvlər üçün təhlükəsiz paylaşım",
   "PrivateRoomDescriptionUnbreakable": "Sındırılmamış AES-256 alqoritmi.",
-  "PrivateRoomHeader": "Yazdığınız hər bir simvolun şifrələndiyi ONLYOFFICE şəxsi otağına xoş gəldiniz",
+  "PrivateRoomHeader": "Yazdığınız hər bir simvolun şifrələndiyi {{organizationName}} şəxsi otağına xoş gəldiniz",
   "PrivateRoomSupport": "Şəxsi Otaqda işləmək {{organizationName}} masa üstü tətbiqi ilə mümkündür. <3> Təlimatlar </3> ",
   "RecentlyAccessible": "Bu yaxınlarda link vasitəsilə əlçatan ola bilər",
   "RecentViaLinkEmptyContainerDescription": "Burada xarici keçid vasitəsilə sizinlə paylaşılan son açılmış faylların siyahısını tapa bilərsiniz.",

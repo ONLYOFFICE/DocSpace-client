@@ -126,7 +126,7 @@
   "PrivateRoomDescriptionSafest": "가장 안전한 docx, xlsx, pptx 스토리지.",
   "PrivateRoomDescriptionSecure": "신뢰할 수 있는 팀원과의 안전한 공유.",
   "PrivateRoomDescriptionUnbreakable": "풀 수 없는 AES-256 알고리즘.",
-  "PrivateRoomHeader": "입력한 모든 문자가 암호화되는 ONLYOFFICE Private Room에 오신 것을 환영합니다",
+  "PrivateRoomHeader": "입력한 모든 문자가 암호화되는 {{organizationName}} Private Room에 오신 것을 환영합니다",
   "PrivateRoomSupport": "{{organizationName}} 데스크탑 앱을 통해 Private Room에서 작업할 수 있습니다. <3>설명</3>",
   "RecentlyAccessible": "링크를 통해 최근에 액세스한 파일",
   "RecentViaLinkEmptyContainerDescription": "여기에서는 외부 링크를 통해 공유된 최근에 열었던 파일 목록을 찾을 수 있습니다.",

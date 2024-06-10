@@ -54,6 +54,7 @@ const SingleSignOn = (props) => {
     setDocumentTitle,
     isInit,
     currentDeviceType,
+    organizationName,
   } = props;
   const { t } = useTranslation(["SingleSignOn", "Settings"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
@@ -76,14 +77,17 @@ const SingleSignOn = (props) => {
       </Text>
 
       {isMobileView ? (
-        <MobileView isSSOAvailable={isSSOAvailable} />
+        <MobileView
+          isSSOAvailable={isSSOAvailable}
+          organizationName={organizationName}
+        />
       ) : (
         <>
           <ToggleSSO />
 
           <HideButton
             id="sp-settings-hide-button"
-            text={t("ServiceProviderSettings")}
+            text={t("ServiceProviderSettings", { organizationName })}
             label={SERVICE_PROVIDER_SETTINGS}
             value={serviceProviderSettings}
             isDisabled={!isSSOAvailable}
@@ -94,7 +98,7 @@ const SingleSignOn = (props) => {
 
           <HideButton
             id="sp-metadata-hide-button"
-            text={t("SpMetadata")}
+            text={t("SpMetadata", { organizationName })}
             label={SP_METADATA}
             value={spMetadata}
             isDisabled={!isSSOAvailable}
@@ -113,7 +117,7 @@ export default inject(
   ({ authStore, settingsStore, ssoStore, currentQuotaStore }) => {
     const { setDocumentTitle } = authStore;
     const { isSSOAvailable } = currentQuotaStore;
-    const { currentDeviceType } = settingsStore;
+    const { currentDeviceType, organizationName } = settingsStore;
 
     const { init, serviceProviderSettings, spMetadata, isInit } = ssoStore;
 
@@ -125,6 +129,7 @@ export default inject(
       setDocumentTitle,
       isInit,
       currentDeviceType,
+      organizationName,
     };
   },
 )(observer(SingleSignOn));

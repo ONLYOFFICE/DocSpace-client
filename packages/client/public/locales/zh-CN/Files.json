@@ -123,7 +123,7 @@
   "PrivateRoomDescriptionSafest": "最安全的docx、xlsx与pptx存储方式。",
   "PrivateRoomDescriptionSecure": "与有权限的团队成员安全共享。",
   "PrivateRoomDescriptionUnbreakable": "牢不可破的AES-256算法。",
-  "PrivateRoomHeader": "欢迎来到ONLYOFFICE私密房间，在这里您所输入的每一个字符都将被加密",
+  "PrivateRoomHeader": "欢迎来到{{organizationName}}私密房间，在这里您所输入的每一个字符都将被加密",
   "PrivateRoomSupport": "您可在{{organizationName}}桌面应用中使用私密房间。<3>操作指南</3>",
   "RecentlyAccessible": "最近可通过链接访问的",
   "RecentViaLinkEmptyContainerDescription": "您可以在此处查看近期打开的、通过外部链接与您共享的文件的列表。",

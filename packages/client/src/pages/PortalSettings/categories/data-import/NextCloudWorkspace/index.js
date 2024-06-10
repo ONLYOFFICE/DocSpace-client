@@ -66,6 +66,7 @@ const NextcloudWorkspace = (props) => {
     getMigrationStatus,
     setUsers,
     filteredUsers,
+    organizationName,
   } = props;
   const [currentStep, setCurrentStep] = useState(1);
   const [shouldRender, setShouldRender] = useState(false);
@@ -74,6 +75,7 @@ const NextcloudWorkspace = (props) => {
     currentStep,
     setCurrentStep,
     filteredUsers.length === 0,
+    organizationName,
   );
   const navigate = useNavigate();
 
@@ -151,7 +153,10 @@ const NextcloudWorkspace = (props) => {
           lineHeight="20px"
           color={theme.isBase ? "#657077" : "#ADADAD"}
         >
-          {t("Settings:AboutDataImport", { portalName: PORTAL })}
+          {t("Settings:AboutDataImport", {
+            portalName: PORTAL,
+            organizationName,
+          })}
         </Text>
         <Text
           className="data-import-counter"
@@ -174,7 +179,7 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
   const { clearCheckedAccounts, getMigrationStatus, setUsers, filteredUsers } =
     importAccountsStore;
   const { initSettings, viewAs, setViewAs } = setup;
-  const { currentDeviceType } = settingsStore;
+  const { currentDeviceType, organizationName } = settingsStore;
 
   return {
     initSettings,
@@ -186,6 +191,7 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
     getMigrationStatus,
     setUsers,
     filteredUsers,
+    organizationName,
   };
 })(
   withTranslation(["Common, SMTPSettings, Settings"])(

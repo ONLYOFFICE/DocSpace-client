@@ -39,6 +39,7 @@ import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import { StyledAccountContent } from "../../styles/accounts";
 import { getUserTypeLabel } from "@docspace/shared/utils/common";
 import { PORTAL } from "@docspace/shared/constants";
+import { EmployeeStatus } from "@docspace/shared/enums";
 
 const Accounts = (props) => {
   const {
@@ -69,14 +70,13 @@ const Accounts = (props) => {
   }, [infoPanelSelection, getStatusLabel]);
 
   const getStatusLabel = React.useCallback(() => {
-    const status = getUserStatus(infoPanelSelection);
-    switch (status) {
-      case "active":
+    switch (infoPanelSelection?.status) {
+      case EmployeeStatus.Active:
         return setStatusLabel(t("Common:Active"));
-      case "pending":
+      case EmployeeStatus.Pending:
         return setStatusLabel(t("PeopleTranslations:PendingTitle"));
-      case "disabled":
-        return setStatusLabel(t("Settings:Disabled"));
+      case EmployeeStatus.Disabled:
+        return setStatusLabel(t("PeopleTranslations:DisabledEmployeeStatus"));
       default:
         return setStatusLabel(t("Common:Active"));
     }
@@ -158,10 +158,10 @@ const Accounts = (props) => {
     setPeopleBufferSelection(null);
   };
 
-  const typeLabel = React.useCallback(() => getUserTypeLabel(role, t), [])();
-
   const renderTypeData = () => {
     const typesOptions = getTypesOptions();
+
+    const typeLabel = getUserTypeLabel(role, t);
 
     const combobox = (
       <ComboBox

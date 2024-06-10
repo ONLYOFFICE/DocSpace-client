@@ -32,6 +32,7 @@ import {
   EmployeeType,
   EmployeeActivationStatus,
 } from "@docspace/shared/enums";
+import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 const { Filter } = api;
 
 const fullAccessId = "00000000-0000-0000-0000-000000000000";
@@ -240,24 +241,6 @@ class UsersStore {
     this.setUsers(updatedUsers);
   };
 
-  getStatusType = (user) => {
-    if (
-      user.status === EmployeeStatus.Active &&
-      user.activationStatus === EmployeeActivationStatus.Activated
-    ) {
-      return "normal";
-    } else if (
-      user.status === EmployeeStatus.Active &&
-      user.activationStatus === EmployeeActivationStatus.Pending
-    ) {
-      return "pending";
-    } else if (user.status === EmployeeStatus.Disabled) {
-      return "disabled";
-    } else {
-      return "unknown";
-    }
-  };
-
   getUserRole = (user) => {
     if (user.isOwner) return "owner";
     else if (user.isAdmin) return "admin";
@@ -280,7 +263,7 @@ class UsersStore {
     const options = [];
 
     switch (statusType) {
-      case "normal":
+      case "active":
       case "unknown":
         if (isMySelf) {
           options.push("profile");
@@ -474,7 +457,7 @@ class UsersStore {
       usedSpace,
       isCustomQuota,
     } = user;
-    const statusType = this.getStatusType(user);
+    const statusType = getUserStatus(user);
     const role = this.getUserRole(user);
     const isMySelf =
       this.userStore.user && user.userName === this.userStore.user.userName;

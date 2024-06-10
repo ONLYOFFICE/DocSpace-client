@@ -126,7 +126,7 @@
   "PrivateRoomDescriptionSafest": "التخزين الأكثر أمانًا لـ docx و xlsx و pptx.",
   "PrivateRoomDescriptionSecure": "مشاركة آمنة مع أفراد الفريق الموثوق بهم",
   "PrivateRoomDescriptionUnbreakable": "خوارزمية AES-256 غير قابلة للكسر.",
-  "PrivateRoomHeader": "مرحبًا بكم في غرفة ONLYOFFICE الخاصة حيث يتم تشفير كل رمز تكتبه",
+  "PrivateRoomHeader": "مرحبًا بكم في غرفة {{organizationName}} الخاصة حيث يتم تشفير كل رمز تكتبه",
   "PrivateRoomSupport": "العمل في الغرفة الخاصة متاح عبر تطبيق سطح المكتب {{organizationName}}. <3> تعليمات </ 3>",
   "RecentlyAccessible": "يمكن الوصول إليها مؤخرًا عبر الرابط",
   "RecentViaLinkEmptyContainerDescription": "ستجد هنا قائمة بالملفات المفتوحة مؤخرًا والتي تمت مشاركتها معك عبر رابط خارجي.",

@@ -39,7 +39,7 @@ function ConflictResolveDialog({
   fileName,
   folderName,
 }: ConflictResolveProps) {
-  const { t } = useTranslation();
+  const { t } = useTranslation(["Common"]);
 
   return (
     <ConflictResolve
@@ -52,7 +52,7 @@ function ConflictResolveDialog({
       messageText={
         <Trans
           t={t}
-          ns="ConflictResolveDialog"
+          ns="Common"
           i18nKey="ConflictResolveDescription"
           values={{ file: fileName, folder: folderName }}
           components={{ 1: <strong className="bold" /> }}

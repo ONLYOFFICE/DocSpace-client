@@ -8,7 +8,7 @@
   "DeleteProfileConfirmation": "Attention! You are about to disable your account.",
   "DeleteProfileConfirmationInfo": "By clicking \"Disable my account\" you agree with our <1>Privacy policy.</1>",
   "DeleteProfileSuccessMessage": "Your account is disabled",
-  "DeleteProfileSuccessMessageInfo": "Your DocSpace account is successfully disabled. The DocSpace owner or admin can permanently delete your disabled account. Please check our <1>Privacy policy</1> to learn more about deleting your account and associated data.",
+  "DeleteProfileSuccessMessageInfo": "Your DocSpace account is successfully disabled. The DocSpace owner or admin can permanently delete your disabled account.  \n\nPlease check our <1>Privacy policy</1> to learn more about deleting your account and associated data.",
   "EmailAndPasswordCopiedToClipboard": "Email and password copied to clipboard",
   "EnterAppCodeDescription": "Enter 6-digit generated code from your app. If you don't have access to your phone, use the backup codes.",
   "EnterAppCodeTitle": "Enter code from authentication app",

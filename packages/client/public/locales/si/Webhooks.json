@@ -54,6 +54,5 @@
   "WebhookRedilivered": "Webhook යළි බාරදුණි",
   "WebhookRemoved": "Webhook ඉවත් කෙරිණි",
   "Webhooks": "Webhooks",
-  "WebhooksGuide": "Webhooks මාර්ගෝපදේශය",
-  "WebhooksInfo": "ඔන්ලිඔෆිස් {{portalName}} හි විවිධ සිදුවීම් මත පදනම්ව ඔබ භාවිතා කරන ඕනෑම යෙදුමක හෝ අඩවියක පසකින් අභිරුචි ක්‍රියා සිදු කිරීමට webhooks භාවිතා කරන්න.\nමෙහි ඔබට සියලුම webhooks සාදා කළමනාකරණයට, වින්‍යාස කිරීමට සහ webhook වල ඉතිහාසය පිරික්සීමෙන් ඒවායේ කාර්ය සාධනය විගණනය කිරීමට හැකිය. "
+  "WebhooksGuide": "Webhooks මාර්ගෝපදේශය"
 }

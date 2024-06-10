@@ -80,6 +80,7 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
+import { PORTAL } from "@docspace/shared/constants";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -529,7 +530,7 @@ const SectionHeaderContent = (props) => {
       {
         id: "header_option_link-portal-users",
         key: "link-portal-users",
-        label: t("LinkForPortalUsers"),
+        label: t("LinkForPortalUsers", { portalName: PORTAL }),
         onClick: createLinkForPortalUsers,
         disabled: true,
         icon: InvitationLinkReactSvgUrl,

@@ -1,5 +1,5 @@
 {
-  "Desc": "DocSpace登録データの設定をお願いします。",
+  "Desc": "{{portalName}}登録データの設定をお願いします。",
   "ErrorEmail": "無効なEメールアドレス",
   "ErrorInitWizard": "サービスは現在利用できません、後でもう一度お試しください。",
   "ErrorInitWizardButton": "もう一度お試しください。",
@@ -11,5 +11,5 @@
   "LicenseLink": "ライセンス契約",
   "PlaceholderLicense": "ライセンスファイル",
   "Timezone": "タイムゾーン:",
-  "WelcomeTitle": "DocSpaceへようこそ!"
+  "WelcomeTitle": "{{portalName}}へようこそ!"
 }

@@ -1,9 +1,9 @@
 {
-  "DeleteAllGroupDescription": "Die ausgewählten Gruppen werden gelöscht. Benutzer in den Gruppen werden nicht aus DocSpace entfernt. Sind Sie sicher, dass Sie fortfahren möchten?",
+  "DeleteAllGroupDescription": "Die ausgewählten Gruppen werden gelöscht. Benutzer in den Gruppen werden nicht aus {{portalName}} entfernt. Sind Sie sicher, dass Sie fortfahren möchten?",
   "DeleteAllGroupsTitle": "Gruppen löschen",
   "DeleteFile": "Sie möchten diese Datei löschen.",
   "DeleteFolder": "Sie möchten diesen Ordner löschen. ",
-  "DeleteGroupDescription": "Die Gruppe {{groupName}} wird gelöscht. Benutzer in der Gruppe werden nicht aus DocSpace entfernt. Sind Sie sicher, dass Sie fortfahren möchten?",
+  "DeleteGroupDescription": "Die Gruppe {{groupName}} wird gelöscht. Benutzer in der Gruppe werden nicht aus {{portalName}} entfernt. Sind Sie sicher, dass Sie fortfahren möchten?",
   "DeleteGroupTitle": "Gruppe löschen",
   "DeleteItems": "Sie löschen diese Objekte. ",
   "DeleteItemsSharedNote": "Bitte beachten Sie, dass die Daten nicht mehr verfügbar sind, wenn Sie diese mit jemandem geteilt haben.",

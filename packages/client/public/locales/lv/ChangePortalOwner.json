@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "Iecelt administratorus",
-  "BackupPortal": "Dublēt DocSpace datus",
-  "ChangeInstruction": "Lai mainītu DocSpace īpašnieku, lūdzu, zemāk izvēlieties jaunā īpašnieka vārdu.",
-  "ChangeOwner": "Mainīt DocSpace īpašnieku",
+  "BackupPortal": "Dublēt {{portalName}} datus",
+  "ChangeInstruction": "Lai mainītu {{portalName}} īpašnieku, lūdzu, zemāk izvēlieties jaunā īpašnieka vārdu.",
+  "ChangeOwner": "Mainīt {{portalName}} īpašnieku",
   "ChangeUser": "Mainīt lietotāju",
-  "DeactivateOrDeletePortal": "Deaktivizēt vai izdzēst DocSpace",
+  "DeactivateOrDeletePortal": "Deaktivizēt vai izdzēst {{portalName}}",
   "DoTheSame": "Dariet to pašu, ko administratori",
-  "ManagePortal": "Pārvaldīt DocSpace konfigurāciju",
+  "ManagePortal": "Pārvaldīt {{portalName}} konfigurāciju",
   "ManageUser": "Pārvaldīt lietotāju kontus",
-  "NewPortalOwner": "Jauns DocSpace īpašnieks",
-  "PortalOwnerCan": "DocSpace īpašnieks var:",
+  "NewPortalOwner": "Jauns {{portalName}} īpašnieks",
+  "PortalOwnerCan": "{{portalName}} īpašnieks var:",
   "SetAccessRights": "Iestatīt piekļuves tiesības"
 }

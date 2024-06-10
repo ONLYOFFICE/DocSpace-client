@@ -44,6 +44,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { toastr } from "@docspace/shared/components/toast";
+import { PORTAL } from "@docspace/shared/constants";
 
 const STEP_LENGTH = 6;
 
@@ -130,6 +131,7 @@ const OnlyofficeWorkspace = ({
         i18nKey="TypesAndPrivileges"
         ns="Settings"
         t={t}
+        values={{ portalName: PORTAL }}
         components={{
           1: <strong></strong>,
           2: <strong></strong>,
@@ -229,7 +231,7 @@ const OnlyofficeWorkspace = ({
   return (
     <WorkspaceWrapper>
       <Text className="workspace-subtitle">
-        {t("Settings:AboutDataImport")}
+        {t("Settings:AboutDataImport", { portalName: PORTAL })}
       </Text>
       <div className="step-container">
         <Box displayProp="flex" marginProp="0 0 8px">

@@ -1,14 +1,12 @@
 {
   "AppointAdmin": "Beheerders benoemen",
-  "BackupPortal": "Back-up ruimte gegevens",
-  "ChangeInstruction": "Om de DocSpace eigenaar te wijzigen, kiest u hieronder de naam van de nieuwe eigenaar.",
-  "ChangeOwner": "DocSpace eigenaar wijzigen",
+  "ChangeInstruction": "Om de {{portalName}} eigenaar te wijzigen, kiest u hieronder de naam van de nieuwe eigenaar.",
+  "ChangeOwner": "{{portalName}} eigenaar wijzigen",
   "ChangeUser": "Gebruiker wijzigen",
-  "DeactivateOrDeletePortal": "DocSpace deactiveren of verwijderen",
+  "DeactivateOrDeletePortal": "{{portalName}} deactiveren of verwijderen",
   "DoTheSame": "Doe hetzelfde als beheerders",
-  "ManagePortal": "Ruimteconfiguratie beheren",
   "ManageUser": "Gebruikersaccounts beheren",
-  "NewPortalOwner": "Nieuwe DocSpace eigenaar",
-  "PortalOwnerCan": "DocSpace eigenaar kan:",
+  "NewPortalOwner": "Nieuwe {{portalName}} eigenaar",
+  "PortalOwnerCan": "{{portalName}} eigenaar kan:",
   "SetAccessRights": "Toegangsrechten instellen"
 }

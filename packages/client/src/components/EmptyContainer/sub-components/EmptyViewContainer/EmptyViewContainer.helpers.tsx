@@ -14,6 +14,7 @@ import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
 import type { EmptyViewItemType } from "@docspace/shared/components/empty-view";
+import { PORTAL } from "@docspace/shared/constants";
 
 import type { OptionActions } from "./EmptyViewContainer.types";
 
@@ -83,7 +84,7 @@ export const getIcon = (type: RoomsType, isBaseTheme: boolean) => {
 export const getOptions = (
   type: RoomsType,
   security: Nullable<TFolderSecurity | TRoomSecurity>,
-  t: (str: string) => string,
+  t: TTranslation,
   access: Nullable<ShareAccessRights> | undefined,
   actions: OptionActions,
 ): EmptyViewItemType[] => {
@@ -101,7 +102,9 @@ export const getOptions = (
 
   const uploadFromDocSpace = {
     title: t("EmptyView:UploadPDFFormOptionTitle"),
-    description: t("EmptyView:UploadPDFFormOptionDescription"),
+    description: t("EmptyView:UploadPDFFormOptionDescription", {
+      portalName: PORTAL,
+    }),
     icon: <UploadPDFFormIcon />,
     key: "upload-pdf-form",
     onClick: actions.uploadPDFForm,

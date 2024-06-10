@@ -5,9 +5,9 @@
   "DisableRoomQuota": "Desactivar cuota para esta sala",
   "Icon": "Icono",
   "MakeRoomPrivateDescription": "Todos los archivos de esta sala se cifrarán.",
-  "MakeRoomPrivateLimitationsWarningDescription": "Con esta característica, solo puede invitar a los usuarios existentes de DocSpace. Después de crear una sala, no podrá cambiar la lista de usuarios.",
+  "MakeRoomPrivateLimitationsWarningDescription": "Con esta característica, solo puede invitar a los usuarios existentes de {{portalName}}. Después de crear una sala, no podrá cambiar la lista de usuarios.",
   "MakeRoomPrivateTitle": "Hacer que la sala sea privada",
-  "PeopleSelectorInfo": "Sólo un administrador de sala o un administrador de DocSpace puede convertirse en el propietario de la sala",
+  "PeopleSelectorInfo": "Sólo un administrador de sala o un administrador de {{portalName}} puede convertirse en el propietario de la sala",
   "PublicRoomBarDescription": "Esta sala está disponible para cualquiera que tenga el enlace. Los usuarios externos tendrán permiso de Solo visualización para todos los archivos.",
   "PublicRoomSystemFoldersDescription": "Las carpetas del sistema almacenan copias de formularios en diferentes etapas de finalización. Los formularios que se están completando se almacenan en la carpeta En progreso y los formularios completados se almacenan en la carpeta Completado.",
   "PublicRoomSystemFoldersTitle": "Carpetas del sistema",
@@ -19,5 +19,5 @@
   "ThirdPartyStorageDescription": "Utilice servicios de terceros como almacenamiento de datos para esta sala. Se creará una nueva carpeta para almacenar los datos de esta sala en el almacenamiento conectado.",
   "ThirdPartyStorageNoStorageAlert": "Sobre todo, debe conectar el servicio correspondiente en la sección \"Integración\". En caso contrario, la conexión no será posible.",
   "ThirdPartyStoragePermanentSettingDescription": "Los archivos se guardan en el almacenamiento de terceros {{thirdpartyTitle}} en la carpeta \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "Para conectar un almacenamiento de terceros, debe añadir el servicio correspondiente en la sección Integración de la configuración de DocSpace. Póngase en contacto con el propietario o administrador de DocSpace para habilitar la integración."
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "Para conectar un almacenamiento de terceros, debe añadir el servicio correspondiente en la sección Integración de la configuración de {{portalName}}. Póngase en contacto con el propietario o administrador de {{portalName}} para habilitar la integración."
 }

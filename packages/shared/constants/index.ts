@@ -180,3 +180,5 @@ export const SYSTEM_FONT_FAMILY =
 export const HTML_EXST = [".htm", ".mht", ".html"];
 
 export const SYSTEM_THEME_KEY = "system_theme";
+
+export const PORTAL = "DocSpace";

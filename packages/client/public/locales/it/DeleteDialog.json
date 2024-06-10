@@ -1,9 +1,9 @@
 {
-  "DeleteAllGroupDescription": "I gruppi selezionati verranno eliminati. Gli utenti dei gruppi non verranno rimossi da DocSpace. Sei sicuro di voler continuare?",
+  "DeleteAllGroupDescription": "I gruppi selezionati verranno eliminati. Gli utenti dei gruppi non verranno rimossi da {{portalName}}. Sei sicuro di voler continuare?",
   "DeleteAllGroupsTitle": "Elimina gruppi",
   "DeleteFile": "Stai per eliminare questo file.",
   "DeleteFolder": "Stai per eliminare questa cartella. ",
-  "DeleteGroupDescription": "Il gruppo {{groupName}} verrà eliminato. Gli utenti del gruppo non verranno rimossi da DocSpace. Sei sicuro di voler continuare?",
+  "DeleteGroupDescription": "Il gruppo {{groupName}} verrà eliminato. Gli utenti del gruppo non verranno rimossi da {{portalName}}. Sei sicuro di voler continuare?",
   "DeleteGroupTitle": "Elimina gruppo",
   "DeleteItems": "Stai per eliminare questi elementi. ",
   "DeleteItemsSharedNote": "Tieni presente che se li hai condivisi con qualcuno, non saranno più disponibili.",

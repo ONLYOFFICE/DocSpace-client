@@ -1,4 +1,4 @@
 {
-  "PortalRestoring": "Obnavljanje DocSpace",
-  "PreparationPortalDescription": "Ko bo postopek obnavljanja končan, boste samodejno preusmerjeni na DocSpace."
+  "PortalRestoring": "Obnavljanje {{portalName}}",
+  "PreparationPortalDescription": "Ko bo postopek obnavljanja končan, boste samodejno preusmerjeni na {{portalName}}."
 }

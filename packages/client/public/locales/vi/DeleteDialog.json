@@ -1,9 +1,9 @@
 {
-  "DeleteAllGroupDescription": "Các nhóm đã được chọn sẽ bị xóa. Người dùng trong các nhóm sẽ không bị xóa khỏi DocSpace. Bạn có chắc muốn tiếp tục?",
+  "DeleteAllGroupDescription": "Các nhóm đã được chọn sẽ bị xóa. Người dùng trong các nhóm sẽ không bị xóa khỏi {{portalName}}. Bạn có chắc muốn tiếp tục?",
   "DeleteAllGroupsTitle": "Xóa các nhóm",
   "DeleteFile": "Bạn sắp xóa tập tin này. ",
   "DeleteFolder": "Bạn sắp xóa thư mục này. ",
-  "DeleteGroupDescription": "Nhóm {{groupName}} sẽ bị xóa. Người dùng trong nhóm sẽ không bị xóa khỏi DocSpace. Bạn có chắc muốn tiếp tục?",
+  "DeleteGroupDescription": "Nhóm {{groupName}} sẽ bị xóa. Người dùng trong nhóm sẽ không bị xóa khỏi {{portalName}}. Bạn có chắc muốn tiếp tục?",
   "DeleteGroupTitle": "Xoá nhóm",
   "DeleteItems": "Bạn sắp xóa các mục này. ",
   "DeleteItemsSharedNote": "Xin lưu ý rằng nếu bạn đã chia sẻ chúng với ai đó, chúng sẽ không khả dụng. ",

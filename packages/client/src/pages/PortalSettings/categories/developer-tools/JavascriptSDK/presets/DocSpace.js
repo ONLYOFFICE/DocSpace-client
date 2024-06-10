@@ -53,6 +53,7 @@ import {
   Container,
   ControlsSection,
 } from "./StyledPresets";
+import { PORTAL } from "@docspace/shared/constants";
 
 const DocSpace = (props) => {
   const { t, setDocumentTitle, theme } = props;
@@ -113,8 +114,8 @@ const DocSpace = (props) => {
 
   return (
     <PresetWrapper
-      description={t("DocspaceDescription")}
-      header={t("CreateSampleDocspace")}
+      description={t("DocspaceDescription", { portalName: PORTAL })}
+      header={t("CreateSampleDocspace", { portalName: PORTAL })}
     >
       <Container>
         <PreviewBlock

@@ -36,6 +36,7 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
 
 import { Trans } from "react-i18next";
+import { PORTAL } from "@docspace/shared/constants";
 
 export const getStepsData = (
   t,
@@ -72,7 +73,9 @@ export const getStepsData = (
     },
     {
       title: t("Settings:SelectUsersWithEmail"),
-      description: t("Settings:SelectUsersDescriptionNextcloud"),
+      description: t("Settings:SelectUsersDescriptionNextcloud", {
+        portalName: PORTAL,
+      }),
       component: (
         <SelectUsersStep
           t={t}
@@ -83,7 +86,7 @@ export const getStepsData = (
     },
     {
       title: t("Settings:AddEmails"),
-      description: t("Settings:AddEmailsDescription"),
+      description: t("Settings:AddEmailsDescription", { portalName: PORTAL }),
       component: (
         <AddEmailsStep
           t={t}
@@ -101,12 +104,18 @@ export const getStepsData = (
         </>
       ) : (
         <>
-          <Trans t={t} ns="Settings" i18nKey="SelectUserTypesDescription">
-            Select DocSpace roles for the imported users: <b>DocSpace admin</b>,{" "}
-            <b>Room admin</b>
-            or <b>Power user</b>. By default, Power user role is selected for
-            each user. You can manage the roles after the import.
-          </Trans>
+          <Trans
+            t={t}
+            ns="Settings"
+            i18nKey="SelectUserTypesDescription"
+            values={{
+              portalName: PORTAL,
+            }}
+            components={{
+              1: <b />,
+            }}
+          />
+
           <HelpButton
             place="bottom"
             offsetRight={0}
@@ -116,6 +125,7 @@ export const getStepsData = (
                   i18nKey="TypesAndPrivileges"
                   ns="Settings"
                   t={t}
+                  values={{ portalName: PORTAL }}
                   components={{
                     1: <b></b>,
                     2: <b></b>,
@@ -144,7 +154,9 @@ export const getStepsData = (
     },
     {
       title: t("Settings:DataImport"),
-      description: t("Settings:ImportSectionDescription"),
+      description: t("Settings:ImportSectionDescription", {
+        portalName: PORTAL,
+      }),
       component: (
         <ImportStep
           t={t}
@@ -167,7 +179,9 @@ export const getStepsData = (
     },
     {
       title: t("Settings:DataImportComplete"),
-      description: t("Settings:ImportCompleteDescriptionNextcloud"),
+      description: t("Settings:ImportCompleteDescriptionNextcloud", {
+        portalName: PORTAL,
+      }),
       component: (
         <ImportCompleteStep
           t={t}

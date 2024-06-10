@@ -49,6 +49,7 @@ import {
   StyledToggleButton,
   StyledDescription,
 } from "../StyledInvitePanel";
+import { PORTAL } from "@docspace/shared/constants";
 
 const ExternalLinks = ({
   t,
@@ -220,7 +221,7 @@ const ExternalLinks = ({
       </StyledSubHeader>
       <StyledDescription>
         {roomId === -1
-          ? t("InviteViaLinkDescriptionAccounts")
+          ? t("InviteViaLinkDescriptionAccounts", { portalName: PORTAL })
           : t("InviteViaLinkDescriptionRoom")}
       </StyledDescription>
       {externalLinksVisible && (

@@ -1,9 +1,9 @@
 {
-  "DeleteAllGroupDescription": "The selected groups will be deleted. Users in the groups will not be removed from DocSpace. Are you sure you want to continue?",
+  "DeleteAllGroupDescription": "The selected groups will be deleted. Users in the groups will not be removed from {{portalName}}. Are you sure you want to continue?",
   "DeleteAllGroupsTitle": "Delete groups",
   "DeleteFile": "You are about to delete this file.",
   "DeleteFolder": "You are about to delete this folder.",
-  "DeleteGroupDescription": "Group {{groupName}} will be deleted. Users in the group will not be removed from DocSpace. Are you sure you want to continue?",
+  "DeleteGroupDescription": "Group {{groupName}} will be deleted. Users in the group will not be removed from {{portalName}}. Are you sure you want to continue?",
   "DeleteGroupTitle": "Delete group",
   "DeleteItems": "You are about to delete these items.",
   "DeleteItemsSharedNote": "Please note that if you have shared them with someone, they will become unavailable.",

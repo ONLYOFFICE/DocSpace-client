@@ -30,6 +30,7 @@ import { Trans, withTranslation } from "react-i18next";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { MainContainer } from "../StyledSecurity";
 import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
+import { PORTAL } from "@docspace/shared/constants";
 
 const MobileView = (props) => {
   const { t } = props;
@@ -37,7 +38,7 @@ const MobileView = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setDocumentTitle(t("PortalAccess"));
+    setDocumentTitle(t("PortalAccess", { portalName: PORTAL }));
   }, []);
 
   const onClickLink = (e) => {
@@ -99,13 +100,7 @@ const MobileView = (props) => {
       />
       <MobileCategoryWrapper
         title={t("SessionLifetime")}
-        subtitle={
-          <Trans
-            i18nKey="SessionLifetimeMobileDescription"
-            ns="Settings"
-            t={t}
-          />
-        }
+        subtitle={t("SessionLifetimeMobileDescription", { portalName: PORTAL })}
         url="/portal-settings/security/access-portal/lifetime"
         onClickLink={onClickLink}
       />

@@ -42,6 +42,7 @@ import withLoading from "SRC_DIR/HOCs/withLoading";
 import { PortalRenamingDialog } from "SRC_DIR/components/dialogs";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
+import { PORTAL } from "@docspace/shared/constants";
 
 const PortalRenaming = (props) => {
   const {
@@ -103,7 +104,7 @@ const PortalRenaming = (props) => {
   const [isShowModal, setIsShowModal] = useState(false);
 
   useEffect(() => {
-    setDocumentTitle(t("PortalRenaming"));
+    setDocumentTitle(t("PortalRenaming", { portalName: PORTAL }));
     setPortalName(portalNameInitially);
     const page = isMobileView ? "language-and-time-zone" : "general";
     if (!isLoaded) initSettings(page).then(() => setIsLoaded(true));
@@ -323,7 +324,9 @@ const PortalRenaming = (props) => {
     >
       {isCustomizationView && !isMobileView && (
         <div className="category-item-heading">
-          <div className="category-item-title">{t("PortalRenaming")}</div>
+          <div className="category-item-title">
+            {t("PortalRenaming", { portalName: PORTAL })}
+          </div>
         </div>
       )}
       <div className="category-item-description">

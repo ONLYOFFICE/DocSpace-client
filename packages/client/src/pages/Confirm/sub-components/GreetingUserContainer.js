@@ -31,9 +31,10 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { Text } from "@docspace/shared/components/text";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.left.react.svg?url";
+import { PORTAL } from "@docspace/shared/constants";
 
 const DEFAULT_CREATION_TEXT =
-  "A DocSpace account will be created for {{email}}. Please, complete your registration:";
+  "A {{portalName}} account will be created for {{email}}. Please, complete your registration:";
 
 const GreetingUserContainer = ({
   email,
@@ -69,6 +70,7 @@ const GreetingUserContainer = ({
           values={{
             email,
           }}
+          portalName={PORTAL}
           components={{
             1: <ColorTheme tag="a" themeId={ThemeId.Link} isHovered={false} />,
           }}

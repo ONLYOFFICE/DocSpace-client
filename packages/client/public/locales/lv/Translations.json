@@ -31,7 +31,7 @@
   "PublicRoomLinkValidTime": "Šī saite ir derīga līdz {{date}}. Kad tas beigsies, telpai nebūs iespējams piekļūt, izmantojot šo saiti.",
   "RoleCommentator": "Komentētājs",
   "RoleCommentatorDescription": "Darbības ar esošajiem failiem: skatīšana, komentēšana.",
-  "RoleDocspaceAdminDescription": "DocSpace administratori var piekļūt DocSpace iestatījumiem, pārvaldīt un arhivēt telpas, uzaicināt jaunus lietotājus un piešķirt lomas zem viņu līmeņa. Visiem administratoriem ir piekļuve sadaļai Personisks (Personal).",
+  "RoleDocspaceAdminDescription": "{{portalName}} administratori var piekļūt {{portalName}} iestatījumiem, pārvaldīt un arhivēt telpas, uzaicināt jaunus lietotājus un piešķirt lomas zem viņu līmeņa. Visiem administratoriem ir piekļuve sadaļai Personisks (Personal).",
   "RoleEditorDescription": "Darbības ar esošajiem failiem: skatīšana, rediģēšana, veidlapu aizpildīšana, pārskatīšana, komentēšana.",
   "RoleFormFiller": "Veidlapas aizpildītājs",
   "RoleFormFillerDescription": "Darbības ar esošajiem failiem: skatīšana, veidlapu aizpildīšana, pārskatīšana, komentēšana.",

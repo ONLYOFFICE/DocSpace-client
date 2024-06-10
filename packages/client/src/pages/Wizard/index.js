@@ -54,7 +54,7 @@ import {
 } from "@docspace/shared/utils/common";
 import { setCookie } from "@docspace/shared/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
+import { COOKIE_EXPIRATION_YEAR, PORTAL } from "@docspace/shared/constants";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { EmailSettings } from "@docspace/shared/utils";
 import BetaBadge from "../../components/BetaBadgeWrapper";
@@ -325,11 +325,11 @@ const Wizard = (props) => {
               fontSize="23px"
               className="welcome-text"
             >
-              {t("WelcomeTitle")}
+              {t("WelcomeTitle", { portalName: PORTAL })}
             </Text>
             <FormWrapper>
               <Text fontWeight={600} fontSize="16px" className="form-header">
-                {t("Desc")}
+                {t("Desc", { portalName: PORTAL })}
               </Text>
               <FieldContainer
                 className="wizard-field"

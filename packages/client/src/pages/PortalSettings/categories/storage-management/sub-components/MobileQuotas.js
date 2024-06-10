@@ -30,6 +30,7 @@ import { useNavigate } from "react-router-dom";
 
 import { StyledBaseQuotaComponent } from "../StyledComponent";
 import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
+import { PORTAL } from "@docspace/shared/constants";
 
 const MobileQuotasComponent = ({ isDisabled }) => {
   const { t } = useTranslation("Settings");
@@ -46,14 +47,14 @@ const MobileQuotasComponent = ({ isDisabled }) => {
         title={t("QuotaPerRoom")}
         onClickLink={onClickLink}
         url="portal-settings/management/disk-space/quota-per-room"
-        subtitle={t("SetDefaultRoomQuota")}
+        subtitle={t("SetDefaultRoomQuota", { portalName: PORTAL })}
         isDisabled={isDisabled}
       />
       <MobileCategoryWrapper
         title={t("QuotaPerUser")}
         onClickLink={onClickLink}
         url="/portal-settings/management/disk-space/quota-per-user"
-        subtitle={t("SetDefaultUserQuota")}
+        subtitle={t("SetDefaultUserQuota", { portalName: PORTAL })}
         isDisabled={isDisabled}
       />
     </StyledBaseQuotaComponent>

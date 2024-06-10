@@ -31,7 +31,7 @@
   "PublicRoomLinkValidTime": "Bu keçid {{date}} tarixinə qədər etibarlıdır. Müddəti bitdikdə bu keçid vasitəsilə otağa daxil olmaq mümkün olmayacaq.",
   "RoleCommentator": "Şərhçi",
   "RoleCommentatorDescription": "Mövcud fayllarla əməliyyatlar: baxış, şərh.",
-  "RoleDocspaceAdminDescription": "DocSpace adminləri DocSpace parametrlərinə daxil ola, otaqları idarə edə və arxivləşdirə, yeni istifadəçiləri dəvət edə və öz səviyyələrindən aşağı rollar təyin edə bilərlər. Bütün idarəçilərin Şəxsi bölməyə girişi var.",
+  "RoleDocspaceAdminDescription": "{{portalName}} adminləri {{portalName}} parametrlərinə daxil ola, otaqları idarə edə və arxivləşdirə, yeni istifadəçiləri dəvət edə və öz səviyyələrindən aşağı rollar təyin edə bilərlər. Bütün idarəçilərin Şəxsi bölməyə girişi var.",
   "RoleEditorDescription": "Mövcud fayllarla əməliyyatlar: baxmaq, redaktə etmək, formaları doldurmaq, nəzərdən keçirmək, şərh etmək.",
   "RoleFormFiller": "Forma doldurucu",
   "RoleFormFillerDescription": "Mövcud fayllarla əməliyyatlar: baxmaq, formaları doldurmaq, nəzərdən keçirmək, şərh etmək.",

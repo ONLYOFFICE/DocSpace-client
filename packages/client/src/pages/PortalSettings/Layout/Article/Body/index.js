@@ -47,6 +47,7 @@ import {
 
 import { ArticleItem } from "@docspace/shared/components/article-item";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
+import { PORTAL } from "@docspace/shared/constants";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -210,7 +211,7 @@ const ArticleBodyContent = (props) => {
       case "ManagementCategorySecurity":
         return t("ManagementCategorySecurity");
       case "PortalAccess":
-        return t("PortalAccess");
+        return t("PortalAccess", { portalName: PORTAL });
       case "TwoFactorAuth":
         return t("TwoFactorAuth");
       case "ManagementCategoryIntegration":
@@ -232,7 +233,7 @@ const ArticleBodyContent = (props) => {
       case "RestoreBackup":
         return t("RestoreBackup");
       case "PortalDeletion":
-        return t("PortalDeletion");
+        return t("PortalDeletion", { portalName: PORTAL });
       case "Common:DeveloperTools":
         return t("Common:DeveloperTools");
       case "Common:Bonus":

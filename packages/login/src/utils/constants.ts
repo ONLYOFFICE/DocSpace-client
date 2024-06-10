@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export const DEFAULT_EMAIL_TEXT =
-  "User <1>{{email}}</1> is already registered in this DocSpace, enter your password or go back to continue with another email.";
+  "User <1>{{email}}</1> is already registered in this {{portalName}}, enter your password or go back to continue with another email.";
 export const DEFAULT_ROOM_TEXT =
   "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
 export const DEFAULT_PORTAL_TEXT =

@@ -1,7 +1,7 @@
 {
   "CodeSubtitle": "We sent a 6-digit code to {{email}}. The code has a limited validity period, so enter it as soon as possible.",
   "CodeTitle": "The code was emailed to you",
-  "ErrorInvalidText": "In 10 seconds you will be redirected to the <1>DocSpace</1>",
+  "ErrorInvalidText": "In 10 seconds you will be redirected to the <1>{{portalName}}</1>",
   "ExpiredCode": "This code is no longer valid. Request a new code and try again.",
   "ForgotPassword": "Forgot your password?",
   "InvalidCode": "This code is invalid. Try again.",
@@ -23,5 +23,5 @@
   "ResendCode": "Resend code",
   "SignInLDAP": "Sign in to: {{ldap_domain}}",
   "SignInLdapHelper": "Use credentials for the corporate domain",
-  "UserIsAlreadyRegistered": "User <1>{{email}}</1> is already registered in this DocSpace, enter your password or go back to continue with another email."
+  "UserIsAlreadyRegistered": "User <1>{{email}}</1> is already registered in this {{portalName}}, enter your password or go back to continue with another email."
 }

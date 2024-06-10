@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "Jmenování administrátorů",
-  "BackupPortal": "Zálohovat data DocSpace",
-  "ChangeInstruction": "Chcete-li změnit vlastníka prostoru DocSpace, vyberte níže jméno nového vlastníka.",
-  "ChangeOwner": "Změna vlastníka prostoru DocSpace",
+  "BackupPortal": "Zálohovat data {{portalName}}",
+  "ChangeInstruction": "Chcete-li změnit vlastníka prostoru {{portalName}}, vyberte níže jméno nového vlastníka.",
+  "ChangeOwner": "Změna vlastníka prostoru {{portalName}}",
   "ChangeUser": "Změna uživatele",
-  "DeactivateOrDeletePortal": "Deaktivace nebo odstranění DocSpace",
+  "DeactivateOrDeletePortal": "Deaktivace nebo odstranění {{portalName}}",
   "DoTheSame": "Postupujte stejně jako správci",
-  "ManagePortal": "Spravovat konfiguraci DocSpace",
+  "ManagePortal": "Spravovat konfiguraci {{portalName}}",
   "ManageUser": "Spravovat uživatelské účty",
-  "NewPortalOwner": "Nový majitel DocSpace",
-  "PortalOwnerCan": "Majitel DocSpace může:",
+  "NewPortalOwner": "Nový majitel {{portalName}}",
+  "PortalOwnerCan": "Majitel {{portalName}} může:",
   "SetAccessRights": "Nastavení přístupových práv"
 }

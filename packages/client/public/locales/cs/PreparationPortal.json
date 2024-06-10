@@ -1,4 +1,4 @@
 {
-  "PortalRestoring": "Obnovení DocSpace",
-  "PreparationPortalDescription": "Po ukončení procesu obnovy, budete automaticky přesměrováni na Váš DocSpace."
+  "PortalRestoring": "Obnovení {{portalName}}",
+  "PreparationPortalDescription": "Po ukončení procesu obnovy, budete automaticky přesměrováni na Váš {{portalName}}."
 }

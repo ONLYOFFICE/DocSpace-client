@@ -1,5 +1,5 @@
 {
-  "Desc": "Prosimo, nastavite podatke za registracijo DocSpace.",
+  "Desc": "Prosimo, nastavite podatke za registracijo {{portalName}}.",
   "ErrorEmail": "Napačen email naslov",
   "ErrorInitWizard": "Storitev trenutno ni na voljo, poskusite znova kasneje.",
   "ErrorInitWizardButton": "Poskusi znova",
@@ -11,5 +11,5 @@
   "LicenseLink": "Licenčne pogodbe",
   "PlaceholderLicense": "Vaša licenčna datoteka",
   "Timezone": "Časovni pas:",
-  "WelcomeTitle": "Dobrodošli v vašem DocSpace!"
+  "WelcomeTitle": "Dobrodošli v vašem {{portalName}}!"
 }

@@ -1,6 +1,6 @@
 {
   "ErrorEmptyResponse": "Κενή απάντηση",
-  "ErrorUnavailableText": "DocSpace μη διαθέσιμο",
+  "ErrorUnavailableText": "{{portalName}} μη διαθέσιμο",
   "LinkDoesNotExist": "Ο σύνδεσμος που προσπαθείτε να ανοίξετε δεν υπάρχει.",
   "LinkHasExpired": "Ο σύνδεσμος που ακολουθήσατε έχει λήξει."
 }

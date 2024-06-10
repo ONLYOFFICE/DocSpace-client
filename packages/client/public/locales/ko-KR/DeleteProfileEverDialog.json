@@ -1,5 +1,5 @@
 {
-  "ActionCannotBeUndone": "선택한 비활성 사용자가 DocSpace에서 삭제됩니다. 이 작업은 취소할 수 없습니다.",
+  "ActionCannotBeUndone": "선택한 비활성 사용자가 {{portalName}}에서 삭제됩니다. 이 작업은 취소할 수 없습니다.",
   "CannotReassignFiles": "여러 사용자를 한 번에 삭제할 경우 해당 사용자의 파일을 다른 사용자에게 다시 할당할 수 없습니다.",
   "DeleteGroupUsersSuccessMessage": "사용자가 성공적으로 삭제되었습니다.",
   "DeleteMyDocumentsUser": "이 사용자의 내 문서 섹션에 있는 모든 개인 파일 및 폴더가 영구적으로 삭제됩니다.",

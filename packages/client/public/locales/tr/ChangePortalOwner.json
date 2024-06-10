@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "Yöneticiler atayın",
-  "BackupPortal": "DocSpace verisini yedekle",
-  "ChangeInstruction": "DocSpace sahibini değiştirmek için lütfen aşağıdan yeni sahibin adını seçin.",
-  "ChangeOwner": "DocSpace sahibini değiştir",
+  "BackupPortal": "{{portalName}} verisini yedekle",
+  "ChangeInstruction": "{{portalName}} sahibini değiştirmek için lütfen aşağıdan yeni sahibin adını seçin.",
+  "ChangeOwner": "{{portalName}} sahibini değiştir",
   "ChangeUser": "Kullanıcıyı değiştir",
-  "DeactivateOrDeletePortal": "DocSpace'i devre dışı bırak veya sil",
+  "DeactivateOrDeletePortal": "{{portalName}}'i devre dışı bırak veya sil",
   "DoTheSame": "Yöneticilerle aynı şeyi yap",
-  "ManagePortal": "DocSpace yapılandırmasını yönet",
+  "ManagePortal": "{{portalName}} yapılandırmasını yönet",
   "ManageUser": "Kullanıcı hesaplarını yönet",
-  "NewPortalOwner": "Yeni DocSpace sahibi",
-  "PortalOwnerCan": "DocSpace sahibi şunları yapabilir:",
+  "NewPortalOwner": "Yeni {{portalName}} sahibi",
+  "PortalOwnerCan": "{{portalName}} sahibi şunları yapabilir:",
   "SetAccessRights": "Erişim haklarını ayarla"
 }

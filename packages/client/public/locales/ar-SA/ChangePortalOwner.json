@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "تعيين المسؤولين",
-  "BackupPortal": "بيانات DocSpace الاحتياطية",
-  "ChangeInstruction": "لتغيير مالك DocSpace، يرجى اختيار اسم المالك الجديد أدناه.",
-  "ChangeOwner": "تغيير مالك DocSpace",
+  "BackupPortal": "بيانات {{portalName}} الاحتياطية",
+  "ChangeInstruction": "لتغيير مالك {{portalName}}، يرجى اختيار اسم المالك الجديد أدناه.",
+  "ChangeOwner": "تغيير مالك {{portalName}}",
   "ChangeUser": "تغيير المستخدم",
-  "DeactivateOrDeletePortal": "قم بإلغاء تنشيط DocSpace أو حذفه",
+  "DeactivateOrDeletePortal": "قم بإلغاء تنشيط {{portalName}} أو حذفه",
   "DoTheSame": "افعل نفس الشيء مثل المسؤولين",
-  "ManagePortal": "إدارة تكوين DocSpace",
+  "ManagePortal": "إدارة تكوين {{portalName}}",
   "ManageUser": "إدارة حسابات المستخدمين",
-  "NewPortalOwner": "مالك DocSpace جديد",
-  "PortalOwnerCan": "يمكن لمالك DocSpace:",
+  "NewPortalOwner": "مالك {{portalName}} جديد",
+  "PortalOwnerCan": "يمكن لمالك {{portalName}}:",
   "SetAccessRights": "تعيين امكانيات الوصول"
 }

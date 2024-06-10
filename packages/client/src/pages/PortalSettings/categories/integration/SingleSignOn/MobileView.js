@@ -27,6 +27,9 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+
+import { PORTAL } from "@docspace/shared/constants";
+
 import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
 
 const StyledWrapper = styled.div`
@@ -57,7 +60,7 @@ const MobileView = ({ isSSOAvailable }) => {
       />
       <MobileCategoryWrapper
         title={t("SpMetadata")}
-        subtitle={t("SpMetadataDescription")}
+        subtitle={t("SpMetadataDescription", { portalName: PORTAL })}
         url="/portal-settings/integration/sso/metadata"
         withPaidBadge={!isSSOAvailable}
         badgeLabel={t("Common:Paid")}

@@ -1,4 +1,4 @@
 {
-  "PortalRestoring": "استعادة DocSpace",
-  "PreparationPortalDescription": "بمجرد انتهاء عملية الاستعادة ، ستتم إعادة توجيهك تلقائيًا إلى DocSpace الخاص بك.\""
+  "PortalRestoring": "استعادة {{portalName}}",
+  "PreparationPortalDescription": "بمجرد انتهاء عملية الاستعادة ، ستتم إعادة توجيهك تلقائيًا إلى {{portalName}} الخاص بك.\""
 }

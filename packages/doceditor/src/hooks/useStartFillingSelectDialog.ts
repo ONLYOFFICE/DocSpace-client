@@ -28,7 +28,7 @@ import { useCallback, useRef, useState } from "react";
 
 import { ConflictResolveType } from "@docspace/shared/enums";
 import { checkFileConflicts, copyToFolder } from "@docspace/shared/api/files";
-import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
+// import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 
 import type {
   TFile,
@@ -95,30 +95,6 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
     }
   };
 
-  const loopFilesOperations = async (operations: TOperation[]) => {
-    if (!operations || operations.length === 0) return Promise.resolve();
-
-    const data = operations.at(-1) ?? operations[operations.length - 1];
-
-    if (!data) return Promise.resolve();
-
-    if (data.error) {
-      return Promise.reject(data);
-    }
-
-    let finished = data.finished;
-
-    while (!finished) {
-      const item = (await getOperationProgress(
-        data.id,
-        t("Common:UnexpectedError"),
-      )) as TOperation;
-
-      finished = item.finished;
-    }
-    return Promise.resolve();
-  };
-
   const onSubmit = async (
     selectedItemId: string | number | undefined,
     folderTitle: string,
@@ -154,7 +130,10 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
       }
     }
 
-    const operations = await copyToFolder(
+    const url = new URL(`${window.location.origin}/rooms/shared/filter`);
+    url.searchParams.set("folder", selectedItemId.toString());
+    window.open(url.toString());
+    copyToFolder(
       Number(selectedItemId),
       [],
       [fileInfo.id],
@@ -162,14 +141,9 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
       false,
     );
 
-    await loopFilesOperations(operations);
-
     requestRunning.current = false;
-    const url = new URL(`${window.location.origin}/rooms/shared/filter`);
-    url.searchParams.set("folder", selectedItemId.toString());
 
     onClose();
-    window.open(url.toString());
   };
 
   const getIsDisabled = (

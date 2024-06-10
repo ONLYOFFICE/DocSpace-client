@@ -299,7 +299,7 @@ export const getBaseTheme = () => {
     },
 
     mainButton: {
-      backgroundColor: "#4781D1",
+      backgroundColor: lightBlueMain,
       disableBackgroundColor: lightBlueMainDisabled,
       hoverBackgroundColor: lightBlueMainHover,
       clickBackgroundColor: "#4074BC",
@@ -359,7 +359,7 @@ export const getBaseTheme = () => {
       disableBackgroundColor: grayLight,
 
       hoverBackground: white,
-      hoverBorder: "1px solid #5299E0",
+      hoverBorder: `1px solid ${lightSecondMain}`,
       hoverConnectBackground: link,
       hoverConnectBorder: "none",
 
@@ -475,32 +475,6 @@ export const getBaseTheme = () => {
       marginRight: "8px",
 
       unsavedColor: gray,
-    },
-
-    selectedItem: {
-      background: grayLight,
-      border: `1px solid ${globalColors.grayLightMid}`,
-      borderRadius: "3px",
-
-      textBox: {
-        padding: "0 8px",
-        height: "32px",
-        alignItems: "center",
-        borderRight: `1px solid ${globalColors.grayLightMid}`,
-      },
-
-      text: {
-        color: grayText,
-        disabledColor: grayStrong,
-      },
-
-      closeButton: {
-        alignItems: "center",
-        padding: "0 8px",
-        color: "#979797",
-        colorHover: grayText,
-        backgroundColor: grayLightMid,
-      },
     },
 
     checkbox: {
@@ -1358,15 +1332,11 @@ export const getBaseTheme = () => {
       unsetBackgroundColor: "unset",
     },
 
-    treeMenu: {
-      disabledColor: "#767676",
-    },
-
     progressBar: {
       backgroundColor: lightGrayHover,
 
       percent: {
-        background: "#4781D1",
+        background: lightBlueMain,
       },
     },
 
@@ -1695,7 +1665,7 @@ export const getBaseTheme = () => {
     },
 
     toggleButton: {
-      fillColorDefault: "#4781D1",
+      fillColorDefault: lightBlueMain,
       fillColorOff: grayStrong,
       hoverFillColorOff: gray,
       fillCircleColor: white,
@@ -1732,7 +1702,7 @@ export const getBaseTheme = () => {
       arrowColor: grayText,
       disabledArrow: gray,
       weekdayColor: gray,
-      accent: "#4781d1",
+      accent: lightBlueMain,
       boxShadow: "0px 12px 40px rgba(4, 15, 27, 0.12)",
     },
 
@@ -1844,7 +1814,6 @@ export const getBaseTheme = () => {
         iconFill: lightGrayDark,
       },
       control: {
-        background: "#9a9ea3",
         fill: white,
       },
 
@@ -1901,7 +1870,7 @@ export const getBaseTheme = () => {
           height: "16px",
 
           fill: lightGrayDark,
-          isActiveFill: "#4781D1",
+          isActiveFill: lightBlueMain,
           tablet: {
             width: "20px",
             height: "20px",
@@ -1913,7 +1882,7 @@ export const getBaseTheme = () => {
         marginLeft: "8px",
         lineHeight: "20px",
         color: grayText,
-        isActiveColor: "#4781D1",
+        isActiveColor: lightBlueMain,
         fontSize: "13px",
         fontWeight: 600,
         tablet: {
@@ -3191,7 +3160,7 @@ export const getBaseTheme = () => {
 
     emailChips: {
       borderColor: gray,
-      dashedBorder: "1px dashed #5299E0",
+      dashedBorder: `1px dashed ${lightSecondMain}`,
     },
 
     dialogs: {

@@ -41,6 +41,7 @@ import { isElementInViewport } from "@docspace/shared/utils/common";
 import { DeviceType, VDRIndexingAction } from "@docspace/shared/enums";
 
 const separatorStyles = `width: 100vw;  background-color: rgb(71, 129, 209); position: absolute; height: 3px; z-index: 1;`;
+const sectionClass = "section-wrapper-content";
 
 let currentDroppable = null;
 let droppableSeparator = null;
@@ -204,15 +205,15 @@ const SectionBodyContent = (props) => {
     const droppable = wrapperElement.closest(".droppable");
     const tableItem = wrapperElement.closest(".table-list-item");
     const styles = tableItem && window.getComputedStyle(tableItem);
-    const newChildNode = document.createElement("div");
+    const indexSeparatorNode = document.createElement("div");
 
     const parent = document.querySelector(
       ".ReactVirtualized__Grid__innerScrollContainer",
     );
 
     if (styles) {
-      newChildNode.setAttribute("style", separatorStyles);
-      newChildNode.style.top = styles.top;
+      indexSeparatorNode.setAttribute("style", separatorStyles);
+      indexSeparatorNode.style.top = styles.top;
     }
 
     if (currentDroppable !== droppable) {
@@ -232,7 +233,7 @@ const SectionBodyContent = (props) => {
         }
       }
       currentDroppable = droppable;
-      droppableSeparator = newChildNode;
+      droppableSeparator = indexSeparatorNode;
       if (currentDroppable) {
         if (viewAs === "table") {
           const value = currentDroppable.getAttribute("value");
@@ -246,26 +247,29 @@ const SectionBodyContent = (props) => {
             }
           }
           if (isIndexEditingMode) {
-            parent.insertBefore(newChildNode, tableItem);
+            parent.insertBefore(indexSeparatorNode, tableItem);
           }
         } else {
           currentDroppable.classList.add("droppable-hover");
           currentDroppable = droppable;
-          droppableSeparator = newChildNode;
+          droppableSeparator = indexSeparatorNode;
         }
       }
     } else if (isIndexEditingMode) {
       droppableSeparator && droppableSeparator.remove();
 
       const wrappedClass = wrapperElement && wrapperElement.className;
-      droppableSeparator = newChildNode;
+      droppableSeparator = indexSeparatorNode;
 
-      if (wrappedClass === "section-wrapper-content") {
-        newChildNode.setAttribute("style", separatorStyles + "bottom: 0px;");
-        return parent.append(newChildNode);
+      if (wrappedClass === sectionClass) {
+        indexSeparatorNode.setAttribute(
+          "style",
+          separatorStyles + "bottom: 0px;",
+        );
+        return parent.append(indexSeparatorNode);
       }
 
-      parent.insertBefore(newChildNode, tableItem);
+      parent.insertBefore(indexSeparatorNode, tableItem);
     }
   };
 
@@ -287,11 +291,15 @@ const SectionBodyContent = (props) => {
     const treeValue = isDragging ? splitValue[0] : null;
 
     const elem = isIndexEditingMode
-      ? e.target.closest(".files-item")
+      ? e.target.closest(".files-item") || e.target.closest(`.${sectionClass}`)
       : e.target.closest(".droppable");
+
     const title = elem && elem.dataset.title;
     const value = elem && elem.getAttribute("value");
-    if ((!value && !treeValue) || isRecycleBinFolder || !isDragActive) {
+    if (
+      ((!value && !treeValue) || isRecycleBinFolder || !isDragActive) &&
+      !isIndexEditingMode
+    ) {
       return;
     }
 
@@ -300,15 +308,20 @@ const SectionBodyContent = (props) => {
       : treeValue;
 
     if (!isIndexEditingMode) return onMoveTo(folderId, title);
+    if (filesList.length === 1) return;
 
     const replaceableItemId = isNaN(+folderId) ? folderId : +folderId;
-    const replaceableItemType = value && value.split("_").slice(0, 1).join("_");
 
-    const replaceableItem = filesList.find((i) =>
-      replaceableItemType === "file"
-        ? i.id === replaceableItemId && i.fileExst
-        : i.id === replaceableItemId,
-    );
+    const replaceableItemType = value && value.split("_").slice(0, 1).join("_");
+    const isSectionTarget = elem && elem.className === sectionClass;
+
+    const replaceableItem = isSectionTarget
+      ? filesList[filesList.length - 1]
+      : filesList.find((i) =>
+          replaceableItemType === "file"
+            ? i.id === replaceableItemId && i.fileExst
+            : i.id === replaceableItemId,
+        );
 
     if (!replaceableItem) return;
 

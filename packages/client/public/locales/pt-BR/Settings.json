@@ -30,7 +30,7 @@
   "AmazonSSE": "Criptografia do lado do servidor",
   "AmazonSSETip": "O algoritmo de criptografia do lado do servidor usado ao armazenar este objeto no S3.",
   "Api": "API",
-  "ApiPageDescription": "Crie sua própria plataforma de produtividade com base no ONLYOFFICE {{portalName}} e colabore em documentos com equipes, clientes e parceiros.",
+  "ApiPageDescription": "Crie sua própria plataforma de produtividade com base no {{organizationName}} {{portalName}} e colabore em documentos com equipes, clientes e parceiros.",
   "ApiPageHeader": "Crie sua própria plataforma de colaboração",
   "Appearance": "Aparência",
   "AuditSubheader": "A subseção permite navegar pela lista das últimas alterações (criação, modificação, exclusão etc.) feitas pelos usuários nas entidades (salas, oportunidades, arquivos etc.) em seu {{portalName}}.",

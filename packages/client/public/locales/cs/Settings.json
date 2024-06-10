@@ -30,7 +30,7 @@
   "AmazonSSE": "Šifrování na straně serveru",
   "AmazonSSETip": "Šifrovací algoritmus na straně serveru použitý při ukládání tohoto objektu do S3.",
   "Api": "API",
-  "ApiPageDescription": "Vytvořte si vlastní platformu pro produktivitu založenou na ONLYOFFICE {{portalName}} a spolupracujte na dokumentech s týmy, klienty a partnery.",
+  "ApiPageDescription": "Vytvořte si vlastní platformu pro produktivitu založenou na {{organizationName}} {{portalName}} a spolupracujte na dokumentech s týmy, klienty a partnery.",
   "ApiPageHeader": "Vytvořte si vlastní platformu pro spolupráci",
   "Appearance": "Vzhled",
   "AuditSubheader": "Tato podsekce umožňuje procházet seznam nejnovějších změn (vytvoření, úpravy, odstranění atd.), které uživatelé provedli v entitách (místnostech, příležitostech, souborech atd.) v rámci vašeho prostoru {{portalName}}.",

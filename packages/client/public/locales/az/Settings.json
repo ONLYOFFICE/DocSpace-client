@@ -30,7 +30,7 @@
   "AmazonSSE": "Server tərəfində şifrələmə",
   "AmazonSSETip": "Bu obyekti S3-də saxlayarkən istifadə edilən server tərəfi şifrələmə alqoritmi.",
   "Api": "API",
-  "ApiPageDescription": "ONLYOFFICE {{portalName}} əsasında öz məhsuldarlıq platformanızı qurun və komanda, müştəri və tərəfdaşlarla sənədlər üzərində əməkdaşlıq edin.",
+  "ApiPageDescription": "{{organizationName}} {{portalName}} əsasında öz məhsuldarlıq platformanızı qurun və komanda, müştəri və tərəfdaşlarla sənədlər üzərində əməkdaşlıq edin.",
   "ApiPageHeader": "Öz əməkdaşlıq platformanızı yaradın",
   "Appearance": "Xarici görünüş",
   "AuditSubheader": "Alt bölmə sizə {{portalName}}-dəki (otaqlara, imkanlara, fayllara və s.) istifadəçilər tərəfindən edilən ən son dəyişikliklərin (yaradılması, dəyişdirilməsi, silinməsi və s.) siyahısını nəzərdən keçirməyə imkan verir.",

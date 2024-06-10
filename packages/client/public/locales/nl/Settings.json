@@ -30,7 +30,7 @@
   "AmazonSSE": "Versleuteling aan de serverzijde",
   "AmazonSSETip": "Het versleutelingsalgoritme aan de serverzijde dat wordt gebruikt bij het opslaan van dit object in S3.",
   "Api": "API",
-  "ApiPageDescription": "Maak uw eigen productiviteitsplatform op basis van ONLYOFFICE {{portalName}} en werk samen aan documenten met teams, klanten en partners.",
+  "ApiPageDescription": "Maak uw eigen productiviteitsplatform op basis van {{organizationName}} {{portalName}} en werk samen aan documenten met teams, klanten en partners.",
   "ApiPageHeader": "Bouw uw eigen samenwerkingsplatform",
   "Appearance": "Uiterlijk",
   "AuditSubheader": "Met deze subsectie kunt u bladeren door de lijst met de laatste wijzigingen (aanmaak, wijziging, verwijdering enz.) die gebruikers hebben aangebracht in de entiteiten (ruimtes, kansen, bestanden enz.) binnen uw {{portalName}}.",

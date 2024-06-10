@@ -30,7 +30,7 @@
   "AmazonSSE": "Criptarea pe partea de server",
   "AmazonSSETip": "Algoritmul de criptare pe partea de server utilizat pentru stocarea acestui obiect în S3.",
   "Api": "API",
-  "ApiPageDescription": "Creați propria soluție de productivitate bazată pe ONLYOFFICE {{portalName}} și colaborați la documente cu echipe, clienți și parteneri.",
+  "ApiPageDescription": "Creați propria soluție de productivitate bazată pe {{organizationName}} {{portalName}} și colaborați la documente cu echipe, clienți și parteneri.",
   "ApiPageHeader": "Creați propria platformă de colaborare",
   "Appearance": "Aspect",
   "AuditSubheader": "Subsecțiunea vă permite să răsfoiți lista celor mai recente modificări (creare, modificare, ştergere etc.) efectuate de utilizatori asupra elementelor (săli, oportunităţi, fişiere etc.) din cadrul {{portalName}}.",

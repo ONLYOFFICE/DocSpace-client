@@ -30,7 +30,7 @@
   "AmazonSSE": "Szyfrowanie po stronie serwera",
   "AmazonSSETip": "Algorytm szyfrowania po stronie serwera używany podczas przechowywania danego obiektu w S3.",
   "Api": "API",
-  "ApiPageDescription": "Utwórz własną platformę zwiększającą produktywność na bazie ONLYOFFICE {{portalName}} i współpracuj nad dokumentami z zespołami, klientami oraz partnerami.",
+  "ApiPageDescription": "Utwórz własną platformę zwiększającą produktywność na bazie {{organizationName}} {{portalName}} i współpracuj nad dokumentami z zespołami, klientami oraz partnerami.",
   "ApiPageHeader": "Zbuduj własną platformę do współpracy",
   "Appearance": "Wygląd",
   "AuditSubheader": "Podsekcja umożliwia przeglądanie listy najnowszych zmian (utworzeń, modyfikacji, usunięć itp.) wprowadzonych przez użytkowników w poszczególnych elementach (pokojach, możliwościach, plikach itp.) w {{portalName}}.",

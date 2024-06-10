@@ -30,7 +30,7 @@
   "AmazonSSE": "サーバー側の暗号化",
   "AmazonSSETip": "このオブジェクトをS3に保存する際に使用されるサーバー側の暗号化アルゴリズム。",
   "Api": "API",
-  "ApiPageDescription": "ONLYOFFICE {{portalName}}をベースに独自の生産性プラットフォームを構築し、チーム、クライアント、パートナーとのドキュメントコラボレーションを実現しましょう。",
+  "ApiPageDescription": "{{organizationName}} {{portalName}}をベースに独自の生産性プラットフォームを構築し、チーム、クライアント、パートナーとのドキュメントコラボレーションを実現しましょう。",
   "ApiPageHeader": "独自のコラボレーションプラットフォームを構築",
   "Appearance": "表示",
   "AuditSubheader": "サブセクションでは、{{portalName}}内のエンティティ（ルーム、機会、ファイルなど）に対してユーザーが行った最新の変更（作成、変更、削除など）のリストを閲覧することができます。",

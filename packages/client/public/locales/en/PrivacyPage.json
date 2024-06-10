@@ -1,5 +1,5 @@
 {
-  "PrivacyButton": "Open ONLYOFFICE Desktop Editors",
+  "PrivacyButton": "Open {{organizationName}} Desktop Editors",
   "PrivacyClick": "Click Open <1>ONLYOFFICE Desktop</1> in the browser dialog to work with the encrypted documents.",
   "PrivacyDescriptionConnect": "You can open this file from the desktop app's interface once your cloud is connected",
   "PrivacyDescriptionEditors": "If you have ONLYOFFICE Desktop Editors installed but can't open it from this page, your browser might be blocking it.",

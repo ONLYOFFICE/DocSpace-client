@@ -26,6 +26,7 @@
 
 import DarkGeneralPngUrl from "PUBLIC_DIR/images/dark_general.png";
 import React, { useState } from "react";
+import { observer, inject } from "mobx-react";
 import styled, { css } from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
@@ -141,7 +142,7 @@ const StyledPrivacyPage = styled.div`
 
 StyledPrivacyPage.defaultProps = { theme: Base };
 
-const PrivacyPageComponent = ({ t, tReady }) => {
+const PrivacyPageComponent = ({ t, tReady, organizationName }) => {
   //   useEffect(() => {
   //     setDocumentTitle(t("Common:About"));
   //   }, [t]);
@@ -206,7 +207,7 @@ const PrivacyPageComponent = ({ t, tReady }) => {
           size="medium"
           primary
           isDisabled={isDisabled}
-          label={t("PrivacyButton")}
+          label={t("PrivacyButton", { organizationName })}
         />
 
         <label className="privacy-rooms-text-separator" />
@@ -257,4 +258,9 @@ const PrivacyPage = (props) => {
   );
 };
 
-export default PrivacyPage;
+export default inject(({ settingsStore }) => {
+  const { organizationName } = settingsStore;
+  return {
+    organizationName,
+  };
+})(observer(PrivacyPage));

@@ -1,5 +1,5 @@
 {
-  "PrivacyButton": "Odpri ONLYOFFICE namizne urejevalnike",
+  "PrivacyButton": "Odpri {{organizationName}} namizne urejevalnike",
   "PrivacyClick": "Klikni za odprtje <1>ONLYOFFICE namizja</1> v pogovornem oknu brskalnika za delo s šifriranimi dokumenti.",
   "PrivacyDescriptionConnect": "To datoteko lahko odprete z vmesnikom namizne aplikacije, ko ste povezani v oblaku",
   "PrivacyDescriptionEditors": "Če imate nameščene ONLYOFFICE namizne urejevalnike, vendar jih ne morete odpreti iz te strani, jih morda blokira vaš brskalnik.",

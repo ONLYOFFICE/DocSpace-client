@@ -1,5 +1,5 @@
 {
-  "PrivacyButton": "Apri ONLYOFFICE Desktop Editor",
+  "PrivacyButton": "Apri {{organizationName}} Desktop Editor",
   "PrivacyClick": "Clicca su Aprire <1>ONLYOFFICE Desktop</1> nel browser per lavorare con i documenti crittografati.",
   "PrivacyDescriptionConnect": "Puoi aprire questo file dall'interfaccia dell'app desktop una volta aver collegato il tuo cloud",
   "PrivacyDescriptionEditors": "Se hai installato ONLYOFFICE Desktop Editor ma non riesci ad aprirlo da questa pagina, può essere che il tuo browser lo sta bloccando.",

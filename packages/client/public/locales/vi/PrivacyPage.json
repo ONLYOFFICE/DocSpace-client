@@ -1,5 +1,5 @@
 {
-  "PrivacyButton": "Mở Trình chỉnh sửa ONLYOFFICE cho Máy tính",
+  "PrivacyButton": "Mở Trình chỉnh sửa {{organizationName}} cho Máy tính",
   "PrivacyClick": "Nhấp mở <1>ONLYOFFICE cho Máy tính</1> trong hộp thoại trình duyệt để làm việc với các tài liệu được mã hóa.",
   "PrivacyDescriptionConnect": "Bạn có thể mở tệp này từ giao diện của ứng dụng dành cho máy tính khi đám mây của bạn được kết nối.",
   "PrivacyDescriptionEditors": "Nếu bạn đã cài đặt Trình chỉnh sửa ONLYOFFICE cho Máy tính tính nhưng không thể mở nó từ trang này thì có thể trình duyệt của bạn đang chặn nó.",

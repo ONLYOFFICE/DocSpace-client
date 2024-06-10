@@ -1,5 +1,5 @@
 {
-  "PrivacyButton": "ONLYOFFICE Desktop Editors tətbiqini açmaq",
+  "PrivacyButton": "{{organizationName}} Desktop Editors tətbiqini açmaq",
   "PrivacyClick": "Şifrələnmiş sənədlərlə işləmək üçün brauzer dialoqunda <1> ONLYOFFICE Desktop </1> düyməsini klikləyin .",
   "PrivacyDescriptionConnect": "Buludunuz bağlandıqdan sonra bu faylı masaüstü tətbiqinin interfeysindən aça bilərsiniz",
   "PrivacyDescriptionEditors": "Əgər sizdə ONLYOFFICE Desktop Editors proqramı mövcuddursa və açılmırsa, çox güman brauzer tərəfindən bloklanılır.",

@@ -159,7 +159,7 @@ const CreatePortalDialog = () => {
             fontWeight="600"
             style={{ paddingBottom: "5px" }}
           >
-            {t("DocspaceName")}
+            {t("PortalName")}
           </Text>
           <TextInput
             onChange={onHandleName}

@@ -4,7 +4,7 @@
   "AddWatermarks": "Add watermarks to documents",
   "AdvancedDisplay": "Advanced display settings",
   "AllTypes": "All types",
-  "AllTypesAvailableForEditing": "all file types available for editing in ONLYOFFICE",
+  "AllTypesAvailableForEditing": "all file types available for editing in {{organizationName}}",
   "AllTypesSupportedByEditor": "All types supported by ONLYOFFICE editors",
   "APILink": "API library",
   "Ascending": "Ascending",

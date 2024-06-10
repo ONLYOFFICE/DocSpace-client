@@ -5,7 +5,7 @@
   "AdvancedDisplay": "Advanced display settings",
   "AllTypes": "All types",
   "AllTypesAvailableForEditing": "all file types available for editing in {{organizationName}}",
-  "AllTypesSupportedByEditor": "All types supported by ONLYOFFICE editors",
+  "AllTypesSupportedByEditor": "All types supported by {{organizationName}} editors",
   "APILink": "API library",
   "Ascending": "Ascending",
   "ButtonColor": "Button color",

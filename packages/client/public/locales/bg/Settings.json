@@ -129,7 +129,7 @@
   "GroupsDescription": "Потребителите, които сте избрали в предишната стъпка, ще бъдат входирани в групи, създадени в {{serviceName}}. Групите ще се появят в секцията Профили.",
   "HexCode": "Шестнадесетичен код",
   "Import": "Входиране",
-  "ImportCompleteDescriptionGoogle": "Входирането на данни от Google Workspace към ONLYOFFICE {{portalName}} приключи!",
+  "ImportCompleteDescriptionGoogle": "Входирането на данни от Google Workspace към {{organizationName}} {{portalName}} приключи!",
   "ImportCompleteDescriptionNextcloud": "Входирането на данни от Nextcloud към ONLYOFFICE {{portalName}} приключи!",
   "ImportCompleteDescriptionWorkspace": "Входирането на данни от ONLYOFFICE Workspace към ONLYOFFICE {{portalName}} е завършено!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} потребители бяха входирани успешно.",

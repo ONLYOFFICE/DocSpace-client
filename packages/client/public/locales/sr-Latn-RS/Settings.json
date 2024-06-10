@@ -130,7 +130,7 @@
   "GroupsDescription": "Korisnici koje ste odabrali u prethodnom koraku biće uvezeni u grupe kreirane u {{serviceName}}. Grupe će se pojaviti u odeljku Računi.",
   "HexCode": "Hex kod",
   "Import": "Uvezi",
-  "ImportCompleteDescriptionGoogle": "Uvoz podataka sa Google Workspace na ONLYOFFICE {{portalName}} je završen!",
+  "ImportCompleteDescriptionGoogle": "Uvoz podataka sa Google Workspace na {{organizationName}} {{portalName}} je završen!",
   "ImportCompleteDescriptionNextcloud": "Uvoz podataka sa Nextcloud na ONLYOFFICE {{portalName}} je završen!",
   "ImportCompleteDescriptionWorkspace": "Uvoz podataka sa ONLYOFFICE Workspace na ONLYOFFICE {{portalName}} je završen!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} korisnici su uvezeni uspešno.",

@@ -127,7 +127,7 @@
   "GroupsDescription": "Οι χρήστες που επιλέξατε στο προηγούμενο βήμα θα εισαχθούν στις ομάδες που δημιουργήθηκαν στο {{serviceName}}. Οι ομάδες θα εμφανιστούν στην ενότητα «Λογαριασμοί».",
   "HexCode": "Κωδικός Hex",
   "Import": "Εισαγωγή",
-  "ImportCompleteDescriptionGoogle": "Η εισαγωγή δεδομένων από το Google Workspace στο {{portalName}} του ONLYOFFICE ολοκληρώθηκε!",
+  "ImportCompleteDescriptionGoogle": "Η εισαγωγή δεδομένων από το Google Workspace στο {{portalName}} του {{organizationName}} ολοκληρώθηκε!",
   "ImportCompleteDescriptionNextcloud": "Η εισαγωγή δεδομένων από το Nextcloud στο {{portalName}} του ONLYOFFICE ολοκληρώθηκε!",
   "ImportCompleteDescriptionWorkspace": "Η εισαγωγή δεδομένων από το Workspace του ONLYOFFICE στο {{portalName}} του ONLYOFFICE ολοκληρώθηκε!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} χρήστες εισήχθησαν με επιτυχία.",

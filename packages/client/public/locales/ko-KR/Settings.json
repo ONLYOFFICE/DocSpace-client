@@ -129,7 +129,7 @@
   "GroupsDescription": "이전 단계에서 선택한 사용자가 {{serviceName}}에서 생성된 그룹으로 가져오기됩니다. 그룹은 계정 섹션에 표시됩니다.",
   "HexCode": "헥스 코드",
   "Import": "가져오기",
-  "ImportCompleteDescriptionGoogle": "Google Workspace에서 ONLYOFFICE {{portalName}}로 데이터 가져오기가 완료되었습니다!",
+  "ImportCompleteDescriptionGoogle": "Google Workspace에서 {{organizationName}} {{portalName}}로 데이터 가져오기가 완료되었습니다!",
   "ImportCompleteDescriptionNextcloud": "Nextcloud에서 ONLYOFFICE {{portalName}}로 데이터 가져오기가 완료되었습니다!",
   "ImportCompleteDescriptionWorkspace": "ONLYOFFICE Workspace에서 ONLYOFFICE {{portalName}}로 데이터 가져오기가 완료되었습니다!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} 사용자를 가져오기했습니다.",

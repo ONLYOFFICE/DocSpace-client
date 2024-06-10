@@ -128,7 +128,7 @@
   "GroupsDescription": "Əvvəlki addımda seçdiyiniz istifadəçilər {{serviceName}} daxilində yaradılmış qruplara köçürüləcək. Qruplar Hesablar bölməsində görünəcək.",
   "HexCode": "Hex kodu",
   "Import": "İdxal edin",
-  "ImportCompleteDescriptionGoogle": "Google Workspace-dən ONLYOFFICE {{portalName}}-ə məlumat idxalı tamamlandı!",
+  "ImportCompleteDescriptionGoogle": "Google Workspace-dən {{organizationName}} {{portalName}}-ə məlumat idxalı tamamlandı!",
   "ImportCompleteDescriptionNextcloud": "Nextcloud-dan ONLYOFFICE {{portalName}}-ə məlumat idxalı tamamlandı!",
   "ImportCompleteDescriptionWorkspace": "ONLYOFFICE Workspace-dən ONLYOFFICE {{portalName}}-ə məlumat idxalı tamamlandı!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} istifadəçi uğurla idxal edildi.",

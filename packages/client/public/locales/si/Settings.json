@@ -122,7 +122,6 @@
   "GroupsDescription": "ඔබ කලින් පියවරේ දී තෝරාගත් පරිශ්‍රීලකයින් {{serviceName}} තුළ සාදන ලද සමූහ වලට ආයාත කරනු ලැබේ. ගිණුම් කොටසේ සමූහ දිස්වනු ඇත.",
   "HexCode": "Hex කේතය",
   "Import": "ආයාත කරන්න",
-  "ImportCompleteDescriptionGoogle": "ගූගල් වැඩබිම වෙතින් ඔන්ලිඔෆිස් {{portalName}} වෙත දත්ත ආයාත කිරීම සම්පූර්ණයි!",
   "ImportCompleteDescriptionNextcloud": "නෙක්ස්ක්ලවුඩ් වෙතින් ඔන්ලිඔෆිස් {{portalName}} වෙත දත්ත ආයාතය සම්පූර්ණයි!",
   "ImportCompleteDescriptionWorkspace": "ඔන්ලිඔෆිස් වැඩබිම වෙතින් ඔන්ලිඔෆිස් {{portalName}} වෙත දත්ත ආයාතය සම්පූර්ණයි!",
   "ImportedUsers": "පරිශ්‍රීලකයින් {{selectedUsers}}/{{importedUsers}} ක්  සාර්ථකව ආයාත කෙරිණි.",

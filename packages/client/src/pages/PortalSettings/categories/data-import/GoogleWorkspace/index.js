@@ -253,6 +253,7 @@ const GoogleWorkspace = ({
             renderTooltip,
             Trans,
             filteredUsers.length === 0,
+            organizationName,
           )}
         </Box>
         <StepContent

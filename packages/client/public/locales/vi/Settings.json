@@ -128,7 +128,7 @@
   "GroupsDescription": "Người dùng mà bạn đã chọn ở bước trước sẽ được nhập vào các nhóm được tạo trong {{serviceName}}. Các nhóm sẽ xuất hiện trong phần Tài khoản.",
   "HexCode": "Mã Hex",
   "Import": "Nhập",
-  "ImportCompleteDescriptionGoogle": "Việc nhập dữ liệu từ Google Workspace sang ONLYOFFICE {{portalName}} đã hoàn tất!",
+  "ImportCompleteDescriptionGoogle": "Việc nhập dữ liệu từ Google Workspace sang {{organizationName}} {{portalName}} đã hoàn tất!",
   "ImportCompleteDescriptionNextcloud": "Việc nhập dữ liệu từ Nextcloud sang ONLYOFFICE {{portalName}} đã hoàn tất!",
   "ImportCompleteDescriptionWorkspace": "Việc nhập dữ liệu từ ONLYOFFICE Workspace sang ONLYOFFICE {{portalName}} đã hoàn tất!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} người dùng đã được nhập thành công.",

@@ -130,7 +130,7 @@
   "GroupsDescription": "Utilizatorii pe care i-ați selectat  în etapa anterioară vor fi importați în grupurile create în {{serviceName}}. Grupurile vor fi afișate în secțiunea Conturi.",
   "HexCode": "Cod hexa",
   "Import": "Import",
-  "ImportCompleteDescriptionGoogle": "Import date din Google Workspace în ONLYOFFICE {{portalName}} este finalizat!",
+  "ImportCompleteDescriptionGoogle": "Import date din Google Workspace în {{organizationName}} {{portalName}} este finalizat!",
   "ImportCompleteDescriptionNextcloud": "Import date din Nextcloud în ONLYOFFICE {{portalName}} este finalizat!",
   "ImportCompleteDescriptionWorkspace": "Import date din ONLYOFFICE Workspace în ONLYOFFICE {{portalName}} este finalizat!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} utilizatori au fost importate cu succes.",

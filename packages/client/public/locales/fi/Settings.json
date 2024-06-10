@@ -125,7 +125,7 @@
   "GroupsDescription": "Käyttäjät, jotka valitsit edellisessä vaiheessa tuodaan huoneisiin,  jotka on luotu {{serviceName}}ssa. Ryhmät ilmestyvät Tilit-osioon.",
   "HexCode": "Hex-koodi",
   "Import": "Tuonti",
-  "ImportCompleteDescriptionGoogle": "Tietojen tuonti Google Workspacesta ONLYOFFICE {{portalName}}-en on suoritettu!",
+  "ImportCompleteDescriptionGoogle": "Tietojen tuonti Google Workspacesta {{organizationName}} {{portalName}}-en on suoritettu!",
   "ImportCompleteDescriptionNextcloud": "Tietojen tuonti Nextcloudista ONLYOFFICE {{portalName}}-en on suoritettu!",
   "ImportCompleteDescriptionWorkspace": "Tietojen tuonti ONLYOFFICE Workspacesta ONLYOFFICE {{portalName}}-en on suoritettu!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} käyttäjät tuotiin onnistuneesti.",

@@ -128,7 +128,7 @@
   "GroupsDescription": "Նախորդ քայլում ձեր ընտրած օգտատերերը կներմուծվեն {{serviceName}}-ում ստեղծված խմբերում: Խմբերը կհայտնվեն «Հաշիվներ» բաժնում:",
   "HexCode": "Հեքս կոդը",
   "Import": "Ներմուծում",
-  "ImportCompleteDescriptionGoogle": "Google Workspace-ից տվյալների ներմուծումը ONLYOFFICE {{portalName}} ավարտված է:",
+  "ImportCompleteDescriptionGoogle": "Google Workspace-ից տվյալների ներմուծումը {{organizationName}} {{portalName}} ավարտված է:",
   "ImportCompleteDescriptionNextcloud": "Nextcloud-ից տվյալների ներմուծումը ONLYOFFICE {{portalName}} ավարտված է:",
   "ImportCompleteDescriptionWorkspace": "Տվյալների ներմուծումը ONLYOFFICE Workspace-ից ONLYOFFICE {{portalName}} ավարտված է:",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} օգտվողները հաջողությամբ ներմուծվեցին:",

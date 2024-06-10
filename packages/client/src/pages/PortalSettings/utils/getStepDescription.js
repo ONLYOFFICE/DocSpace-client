@@ -32,6 +32,7 @@ export const getGoogleStepDescription = (
   renderTooltip,
   Trans,
   isTypeSelectEmpty,
+  organizationName,
 ) => {
   switch (stepIndex) {
     case 1:
@@ -69,6 +70,7 @@ export const getGoogleStepDescription = (
     case 6:
       return t("Settings:ImportCompleteDescriptionGoogle", {
         portalName: PORTAL,
+        organizationName,
       });
     default:
       return;

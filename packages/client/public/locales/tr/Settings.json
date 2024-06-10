@@ -129,7 +129,7 @@
   "GroupsDescription": "Önceki adımda seçtiğiniz kullanıcılar {{serviceName}} içinde oluşturulan gruplara aktarılacaktır. Gruplar Hesaplar bölümünde görünecektir.",
   "HexCode": "Onaltılık kod",
   "Import": "İçe aktar",
-  "ImportCompleteDescriptionGoogle": "Google Workspace’ten ONLYOFFICE {{portalName}}’e veri aktarımı tamamlandı!",
+  "ImportCompleteDescriptionGoogle": "Google Workspace’ten {{organizationName}} {{portalName}}’e veri aktarımı tamamlandı!",
   "ImportCompleteDescriptionNextcloud": "Nextcloud’dan ONLYOFFICE {{portalName}}’e veri aktarımı tamamlandı!",
   "ImportCompleteDescriptionWorkspace": "ONLYOFFICE Workspace’ten ONLYOFFICE {{portalName}}’e veri aktarımı tamamlandı!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} kullanıcıları başarıyla içe aktarıldı.",

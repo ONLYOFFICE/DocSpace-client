@@ -129,7 +129,7 @@
   "GroupsDescription": "Uživatelé, které jste vybrali v předchozím kroku, budou importováni do skupin vytvořených v {{serviceName}}. Skupiny se zobrazí v sekci Účty.",
   "HexCode": "Hexadecimální kód",
   "Import": "Import",
-  "ImportCompleteDescriptionGoogle": "Import dat z Google Workspace do ONLYOFFICE {{portalName}} je dokončen!",
+  "ImportCompleteDescriptionGoogle": "Import dat z Google Workspace do {{organizationName}} {{portalName}} je dokončen!",
   "ImportCompleteDescriptionNextcloud": "Import dat z Nextcloudu do ONLYOFFICE {{portalName}} je dokončen!",
   "ImportCompleteDescriptionWorkspace": "Import dat z ONLYOFFICE Workspace do ONLYOFFICE {{portalName}} je dokončen!",
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} uživatelů bylo úspěšně importováno.",

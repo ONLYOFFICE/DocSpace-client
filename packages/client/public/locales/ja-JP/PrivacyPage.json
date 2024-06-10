@@ -1,6 +1,6 @@
 {
   "PrivacyButton": "{{organizationName}}デスクトップエディターを開く",
-  "PrivacyClick": "暗号化されたドキュメントを操作するために、ブラウザのダイアログで<1>ONLYOFFICE デスクトップ</1>の開くをクリックします。",
+  "PrivacyClick": "暗号化されたドキュメントを操作するために、ブラウザのダイアログで<1>{{organizationName}} デスクトップ</1>の開くをクリックします。",
   "PrivacyDescriptionConnect": "クラウドが接続されていれば、デスクトップアプリのインターフェースからこのファイルを開けます。",
   "PrivacyDescriptionEditors": "ONLYOFFICEデスクトップエディターがインストールされているにもかかわらず、このページから開けない場合は、お使いのブラウザがブロックしている可能性があります。",
   "PrivacyDialog": "ダイアログが表示されない場合は、以下のボタンをクリックしてください。",

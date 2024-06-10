@@ -187,11 +187,17 @@ const PrivacyPageComponent = ({ t, tReady, organizationName }) => {
         </Text>
 
         <Text as="div" textAlign="center" fontSize="20px" fontWeight={300}>
-          <Trans t={t} i18nKey="PrivacyClick" ns="PrivacyPage">
-            Click Open <strong>ONLYOFFICE Desktop</strong> in the browser dialog
-            to work with the encrypted documents
-          </Trans>
-          .
+          <Trans
+            t={t}
+            i18nKey="PrivacyClick"
+            ns="PrivacyPage"
+            values={{
+              organizationName,
+            }}
+            components={{
+              1: <strong></strong>,
+            }}
+          />
         </Text>
 
         <Text

@@ -1,6 +1,6 @@
 {
   "PrivacyButton": "Open {{organizationName}} Desktop Editors",
-  "PrivacyClick": "Klik Open <1>ONLYOFFICE Desktop</1> in het browservenster om met de versleutelde documenten te werken.",
+  "PrivacyClick": "Klik Open <1>{{organizationName}} Desktop</1> in het browservenster om met de versleutelde documenten te werken.",
   "PrivacyDescriptionConnect": "U kunt dit bestand openen vanuit de interface van de desktop-app zodra uw cloud is verbonden",
   "PrivacyDescriptionEditors": "Als u ONLYOFFICE Desktop Editors heeft geïnstalleerd maar het niet kunt openen vanaf deze pagina, dan blokkeert uw browser het misschien.",
   "PrivacyDialog": "Als u geen dialoogvenster ziet, klik dan op de knop hieronder",

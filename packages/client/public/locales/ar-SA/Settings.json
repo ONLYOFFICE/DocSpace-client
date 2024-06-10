@@ -10,7 +10,7 @@
   "AccountsWithoutEmailsNextStep": "وجدنا <1>{{users}}مستخدمين</1> بدون بريد الكتروني. يمكنك إضافة البيانات اللازمة إلى حساباتهم في الخطوة التالية.",
   "AddAllowedIP": "أضف عنوان IP المسموح به",
   "AddEmails": "إضافة بريد إلكتروني إلى الحسابات غير المكتملة",
-  "AddEmailsDescription": "تحقق من قائمة المستخدمين غير المستوردة لاستيرادها إلى ONLYOFFICE {{portalName}}.",
+  "AddEmailsDescription": "تحقق من قائمة المستخدمين غير المستوردة لاستيرادها إلى {{organizationName}} {{portalName}}.",
   "AddEmailsWarning": "ليس لديك مستخدمين لديهم بريد إلكتروني. يرجى المتابعة إلى الخطوة التالية لإضافتهم.",
   "AdditionalResources": "مصادر إضافية",
   "AdditionalResourcesDescription": "اختر ما إذا كنت تريد عرض ارتباطات لمصادر إضافية في قائمة {{portalName}}.",

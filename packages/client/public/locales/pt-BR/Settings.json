@@ -10,7 +10,7 @@
   "AccountsWithoutEmailsNextStep": "Encontramos <1>{{users}} usuários</1> sem e-mails. Você pode adicionar os dados necessários às suas contas na próxima etapa.",
   "AddAllowedIP": "Adicionar endereço IP permitido",
   "AddEmails": "Adicione e-mails a contas incompletas",
-  "AddEmailsDescription": "Verifique a lista de usuários não importados para importar para o ONLYOFFICE {{portalName}}.",
+  "AddEmailsDescription": "Verifique a lista de usuários não importados para importar para o {{organizationName}} {{portalName}}.",
   "AddEmailsWarning": "Você não tem usuários com e-mails. Prossiga para a próxima etapa para adicioná-los.",
   "AdditionalResources": "Recursos adicionais",
   "AdditionalResourcesDescription": "Escolha se deseja exibir links para recursos adicionais no menu {{portalName}}.",

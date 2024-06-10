@@ -43,6 +43,7 @@ export const getStepsData = (
   currentStep,
   setCurrentStep,
   isTypeSelectEmpty,
+  organizationName,
 ) => {
   const isSixthStep = currentStep === 6;
 
@@ -86,7 +87,10 @@ export const getStepsData = (
     },
     {
       title: t("Settings:AddEmails"),
-      description: t("Settings:AddEmailsDescription", { portalName: PORTAL }),
+      description: t("Settings:AddEmailsDescription", {
+        portalName: PORTAL,
+        organizationName,
+      }),
       component: (
         <AddEmailsStep
           t={t}

@@ -10,7 +10,7 @@
   "AccountsWithoutEmailsNextStep": "E-poçt ünvanı olmayan <1>{{users}} istifadəçi</1> tapdıq. Növbəti addımda onların hesabına lazımi məlumatları əlavə edə bilərsiniz.",
   "AddAllowedIP": "İcazə verilən IP ünvanı əlavə edin",
   "AddEmails": "Natamam hesablara e-poçt əlavə edin",
-  "AddEmailsDescription": "ONLYOFFICE {{portalName}}-ə idxal etmək üçün idxal olunmayan istifadəçilərin siyahısını yoxlayın.",
+  "AddEmailsDescription": "{{organizationName}} {{portalName}}-ə idxal etmək üçün idxal olunmayan istifadəçilərin siyahısını yoxlayın.",
   "AddEmailsWarning": "E-poçtu olan heç bir istifadəçiniz yoxdur. Onları əlavə etmək üçün növbəti addıma davam edin.",
   "AdditionalResources": "Əlavə resurslar",
   "AdditionalResourcesDescription": "{{portalName}} menyusunda əlavə resurslara keçidlərin göstərilib-göstərilməməsini seçin.",

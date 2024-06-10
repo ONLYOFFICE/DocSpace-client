@@ -10,7 +10,7 @@
   "AccountsWithoutEmailsNextStep": "Našli smo <1>{{users}} uporabnikov</1> brez e-maila. V naslednjem koraku lahko njihovim računom dodate potrebne podatke.",
   "AddAllowedIP": "Dodaj dovoljen IP naslov",
   "AddEmails": "Dodajte e-mail nepopolnim računom",
-  "AddEmailsDescription": "Preverite seznam neuvoženih uporabnikov za uvoz v ONLYOFFICE {{portalName}}.",
+  "AddEmailsDescription": "Preverite seznam neuvoženih uporabnikov za uvoz v {{organizationName}} {{portalName}}.",
   "AddEmailsWarning": "Nimate uporabnikov z e-maili. Nadaljujte z naslednjim korakom, da jih dodate.",
   "AdditionalResources": "Dodatni viri",
   "AdditionalResourcesDescription": "Izberi, če želiš prikazati povezave do dodatnih virov v meniju {{portalName}}.",

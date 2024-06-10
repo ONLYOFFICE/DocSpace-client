@@ -75,6 +75,7 @@ const NextcloudWorkspace = (props) => {
     currentStep,
     setCurrentStep,
     filteredUsers.length === 0,
+    organizationName,
   );
   const navigate = useNavigate();
 

@@ -11,7 +11,7 @@
   "AccountsWithoutEmailsNextStep": "We found <1>{{users}} users</1> without emails. You can add necessary data to their accounts on the next step.",
   "AddAllowedIP": "Add allowed IP address",
   "AddEmails": "Add emails to incomplete accounts",
-  "AddEmailsDescription": "Check list of unimported users to import into ONLYOFFICE {{portalName}}.",
+  "AddEmailsDescription": "Check list of unimported users to import into {{organizationName}} {{portalName}}.",
   "AddEmailsWarning": "You don't have users with emails. Please proceed to the next step to add them.",
   "AdditionalResources": "Additional resources",
   "AdditionalResourcesDescription": "Choose whether you want to display links to additional resources in {{portalName}} menu.",

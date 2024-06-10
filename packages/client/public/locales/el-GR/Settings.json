@@ -9,7 +9,7 @@
   "AccountsWithoutEmailsNextStep": "Βρήκαμε <1>{{users}} χρήστες</1> χωρίς email. Μπορείτε να προσθέσετε τα απαραίτητα στοιχεία στους λογαριασμούς τους στο επόμενο βήμα.",
   "AddAllowedIP": "Προσθήκη επιτρεπόμενης διεύθυνσης IP",
   "AddEmails": "Προσθήκη email σε μη ολοκληρωμένους λογαριασμούς",
-  "AddEmailsDescription": "Ελέγξτε τη λίστα εισαγωγής των χρηστών που δεν έχουν εισαχθεί στο {{portalName}} του ONLYOFFICE.",
+  "AddEmailsDescription": "Ελέγξτε τη λίστα εισαγωγής των χρηστών που δεν έχουν εισαχθεί στο {{portalName}} του {{organizationName}}.",
   "AddEmailsWarning": "Δεν έχετε χρήστες με email. Προχωρήστε στο επόμενο βήμα για να τους προσθέσετε.",
   "AdditionalResources": "Πρόσθετοι πόροι",
   "AdditionalResourcesDescription": "Επιλέξτε αν θέλετε να εμφανίσετε συνδέσμους προς πρόσθετους πόρους στο μενού {{portalName}}.",

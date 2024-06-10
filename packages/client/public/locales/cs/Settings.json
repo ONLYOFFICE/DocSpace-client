@@ -10,7 +10,7 @@
   "AccountsWithoutEmailsNextStep": "Našli jsme <1>{{users}} uživatelů</1> bez e-mailů. V dalším kroku můžete k jejich účtům přidat potřebné údaje.",
   "AddAllowedIP": "Přidat povolenou IP adresy",
   "AddEmails": "Přidávání e-mailů do neúplných účtů",
-  "AddEmailsDescription": "Zkontrolujte seznam neimportovaných uživatelů pro import do ONLYOFFICE {{portalName}}.",
+  "AddEmailsDescription": "Zkontrolujte seznam neimportovaných uživatelů pro import do {{organizationName}} {{portalName}}.",
   "AddEmailsWarning": "Nemáte uživatele s e-maily. Přejděte k dalšímu kroku a přidejte je.",
   "AdditionalResources": "Další zdroje",
   "AdditionalResourcesDescription": "Vyberte, zda chcete v nabídce {{portalName}} zobrazovat odkazy na další zdroje.",

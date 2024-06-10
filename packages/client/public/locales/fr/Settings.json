@@ -10,7 +10,6 @@
   "AccountsWithoutEmailsNextStep": "Nous avons trouvé <1>{{users}} utilisateurs </1> sans adresse e-mail. Vous pouvez ajouter des renseignements supplémentaires aux profils d'utilisateurs à l'étape suivante.",
   "AddAllowedIP": "Ajouter une adresse IP autorisée",
   "AddEmails": "Ajouter les adresses e-mail aux profils incomplets ",
-  "AddEmailsDescription": "Vérifier la liste des utilisateurs  non importés à importer vers  {{portalName}}.",
   "AddEmailsWarning": "Il n'y a aucun utilisateur avec l'adresse e-mail.  Veuillez passer à l'étape suivante pour les ajouter.",
   "AdditionalResources": "Ressources supplémentaires",
   "AdditionalResourcesDescription": "Indiquez si vous souhaitez afficher des liens vers des ressources supplémentaires dans le menu de {{portalName}}.",

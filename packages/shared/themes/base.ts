@@ -89,6 +89,9 @@ const {
   lightErrorStatus,
   darkGrayLight,
   grayDarkText,
+  lightBlueMainHover,
+  lightBlueMainDisabled,
+  lightGrayBlackout,
 } = globalColors;
 
 export const getBaseTheme = () => {
@@ -288,8 +291,8 @@ export const getBaseTheme = () => {
 
     mainButton: {
       backgroundColor: "#4781D1",
-      disableBackgroundColor: "rgba(71, 129, 209, 0.6)",
-      hoverBackgroundColor: "rgba(71, 129, 209, .85)",
+      disableBackgroundColor: lightBlueMainDisabled,
+      hoverBackgroundColor: lightBlueMainHover,
       clickBackgroundColor: "#4074BC",
 
       padding: "5px 14px 5px 12px",
@@ -736,6 +739,7 @@ export const getBaseTheme = () => {
 
       hoverBorderColor: gray,
       hoverErrorBorderColor: red,
+      hoverWarningBorderColor: warningColor,
       lightToastWarningBorderColor: warningColor,
       hoverDisabledBorderColor: grayLightMid,
 
@@ -1365,7 +1369,7 @@ export const getBaseTheme = () => {
     },
 
     backdrop: {
-      backgroundColor: "rgba(6, 22, 38, 0.2)",
+      backgroundColor: lightGrayBlackout,
       unsetBackgroundColor: "unset",
     },
 
@@ -2092,7 +2096,7 @@ export const getBaseTheme = () => {
       sectionHeaderToggleBgActive: grayLight,
 
       backgroundColor: white,
-      blurColor: "rgba(6, 22, 38, 0.2)",
+      blurColor: lightGrayBlackout,
       borderColor: grayLightMid,
       thumbnailBorderColor: grayLightMid,
       textColor: black,

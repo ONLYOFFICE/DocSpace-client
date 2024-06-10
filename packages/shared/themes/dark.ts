@@ -72,6 +72,12 @@ const {
   lightDarkGrayHover,
   grayDarkText,
   link,
+  darkToastDone,
+  darkToastInfo,
+  darkToastAlert,
+  darkToastWarning,
+  lightBlueMainDisabled,
+  lightBlueMainHover,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -272,8 +278,8 @@ const Dark: TTheme = {
 
   mainButton: {
     backgroundColor: "#4781D1",
-    disableBackgroundColor: "rgba(71, 129, 209, 0.6)",
-    hoverBackgroundColor: "rgba(71, 129, 209, .85)",
+    disableBackgroundColor: lightBlueMainDisabled,
+    hoverBackgroundColor: lightBlueMainHover,
     clickBackgroundColor: "#4074BC",
 
     padding: "5px 14px 5px 12px",
@@ -1524,10 +1530,10 @@ const Dark: TTheme = {
       height: "16px",
       minHeight: "16px",
       color: {
-        success: "#9DE051",
-        error: "#E0B151",
-        info: "#E0D751",
-        warning: "#E07751",
+        success: darkToastDone,
+        error: darkToastAlert,
+        info: darkToastInfo,
+        warning: darkToastWarning,
       },
     },
 
@@ -1543,10 +1549,10 @@ const Dark: TTheme = {
       marginBottom: "5px",
       lineHeight: "16px",
       color: {
-        success: "#9DE051",
-        error: "#E0B151",
-        info: "#E0D751",
-        warning: "#E07751",
+        success: darkToastDone,
+        error: darkToastAlert,
+        info: darkToastInfo,
+        warning: darkToastWarning,
       },
       fontSize: "12px",
     },

@@ -31,7 +31,7 @@
   "PrivateKey": "Անձնական բանալի",
   "ProviderURL": "IdP թողարկողի Id",
   "ProviderURLTooltip": "Ինքնության տրամադրող միավորների Id (Թողարկողի URL)",
-  "ServiceProviderSettings": "ONLYOFFICE SP Կարգավորումներ",
+  "ServiceProviderSettings": "{{organizationName}} SP Կարգավորումներ",
   "ServiceProviderSettingsDescription": "Կարգավորեք Ծառայությունների Մատակարարի կարգավորումները և ավելացրեք SP սերտիֆիկատներ Միակ Մուտք սիստեմի համար:",
   "Show": "Ցույց տալ",
   "ShowAdditionalParameters": "Ցույց տալ առաջադեմ կարգավորումները",

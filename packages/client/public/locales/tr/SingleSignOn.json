@@ -31,7 +31,7 @@
   "PrivateKey": "Özel Anahtar",
   "ProviderURL": "IdP Varlık Kimliği",
   "ProviderURLTooltip": "Kimlik Sağlayıcı Varlık Kimliği (Sağlayıcı URL)",
-  "ServiceProviderSettings": "ONLYOFFICE SP Ayarları",
+  "ServiceProviderSettings": "{{organizationName}} SP Ayarları",
   "ServiceProviderSettingsDescription": "Tek Oturum Açma için Servis Sağlayıcı ayarlarını yapılandırın ve SS sertifikaları ekleyin.",
   "Show": "Göster",
   "ShowAdditionalParameters": "Gelişmiş ayarları göster",

@@ -31,7 +31,7 @@
   "PrivateKey": "Soukromý klíč",
   "ProviderURL": "IdP Id subjektu",
   "ProviderURLTooltip": "Identita subjektu poskytovatele identit (adresa URL vydavatele)",
-  "ServiceProviderSettings": "Nastavení ONLYOFFICE SP",
+  "ServiceProviderSettings": "Nastavení {{organizationName}} SP",
   "ServiceProviderSettingsDescription": "Konfigurace nastavení poskytovatele služeb a přidání certifikátů SP pro jednotné přihlášení.",
   "Show": "Zobrazit",
   "ShowAdditionalParameters": "Zobrazit pokročilá nastavení",

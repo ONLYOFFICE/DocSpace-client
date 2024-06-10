@@ -31,7 +31,7 @@
   "PrivateKey": "Privatni Ključ",
   "ProviderURL": "IdP Entity Id",
   "ProviderURLTooltip": "Entitet IdP-a (URL izdavaoca)",
-  "ServiceProviderSettings": "Podešavanja SP-a za ONLYOFFICE",
+  "ServiceProviderSettings": "Podešavanja SP-a za {{organizationName}}",
   "ServiceProviderSettingsDescription": "Konfigurišite podešavanja pružaoca usluga i dodajte sertifikate SP-a za Single Sign-On.",
   "Show": "Prikaži",
   "ShowAdditionalParameters": "Prikaži napredna podešavanja",

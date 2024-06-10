@@ -31,7 +31,7 @@
   "PrivateKey": "Súkromný kľúč",
   "ProviderURL": "IdP Entity Id",
   "ProviderURLTooltip": "Identifikátor entity poskytovateľa identity (URL vydavateľa)",
-  "ServiceProviderSettings": "Nastavenia ONLYOFFICE SP",
+  "ServiceProviderSettings": "Nastavenia {{organizationName}} SP",
   "ServiceProviderSettingsDescription": "Nakonfigurujte nastavenia poskytovateľa služieb a pridajte certifikáty SP pre jednotné prihlásenie.",
   "Show": "Zobraziť",
   "ShowAdditionalParameters": "Zobraziť rozšírené nastavenia",

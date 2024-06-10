@@ -31,7 +31,7 @@
   "PrivateKey": "Şəxsi açar",
   "ProviderURL": "IdP Müəssisə ID",
   "ProviderURLTooltip": "İdentifikasiya Provayderi Müəssisə ID-si (URL verən)",
-  "ServiceProviderSettings": "ONLYOFFICE SP Parametrləri",
+  "ServiceProviderSettings": "{{organizationName}} SP Parametrləri",
   "ServiceProviderSettingsDescription": "Tək Giriş üçün Xidmət Provayderi parametrlərini konfiqurasiya edin və SP sertifikatları əlavə edin.",
   "Show": "Göstərin",
   "ShowAdditionalParameters": "Qabaqcıl parametrləri göstərin",

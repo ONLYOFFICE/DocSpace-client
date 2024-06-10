@@ -31,7 +31,7 @@
   "PrivateKey": "Закрытый ключ:",
   "ProviderURL": "Идентификатор сущности поставщика учетных записей:",
   "ProviderURLTooltip": "Идентификатор сущности поставщика учетных записей (URL-адрес поставщика)",
-  "ServiceProviderSettings": "Настройки поставщика сервиса",
+  "ServiceProviderSettings": "Настройки поставщика сервиса {{organizationName}}",
   "ServiceProviderSettingsDescription": "Настройте параметры поставщика сервиса и добавьте сертификаты поставщика сервиса для единого входа.",
   "Show": "Раскрыть",
   "ShowAdditionalParameters": "Показать дополнительные параметры",

@@ -31,7 +31,7 @@
   "PrivateKey": "Privātā atslēga",
   "ProviderURL": "IdP entītijas ID",
   "ProviderURLTooltip": "Identitātes nodrošinātāja entītijas ID (izdevēja vietrādis URL)",
-  "ServiceProviderSettings": "ONLYOFFICE SP iestatījumi",
+  "ServiceProviderSettings": "{{organizationName}} SP iestatījumi",
   "ServiceProviderSettingsDescription": "Konfigurējiet pakalpojumu sniedzēja iestatījumus un pievienojiet SP sertifikātus vienreizējai pierakstīšanai.",
   "Show": "Rādīt",
   "ShowAdditionalParameters": "Papildu iestatījumi",

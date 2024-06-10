@@ -31,7 +31,7 @@
   "PrivateKey": "Private Key",
   "ProviderURL": "IdP Entity Id",
   "ProviderURLTooltip": "Identity Provider Entity Id (Issuer URL)",
-  "ServiceProviderSettings": "ONLYOFFICE SP Settings",
+  "ServiceProviderSettings": "{{organizationName}} SP Settings",
   "ServiceProviderSettingsDescription": "Configure Service Provider settings and add SP certificates for Single Sign-On.",
   "Show": "Show",
   "ShowAdditionalParameters": "Show advanced settings",

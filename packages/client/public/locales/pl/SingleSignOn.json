@@ -31,7 +31,7 @@
   "PrivateKey": "Klucz prywatny",
   "ProviderURL": "ID podmiotu IdP",
   "ProviderURLTooltip": "ID podmiotu dostawcy tożsamości (adres URL wystawcy)",
-  "ServiceProviderSettings": "Ustawienia usługodawcy ONLYOFFICE",
+  "ServiceProviderSettings": "Ustawienia usługodawcy {{organizationName}}",
   "ServiceProviderSettingsDescription": "Skonfiguruj ustawienia usługodawcy i dodaj jego certyfikaty dla pojedynczego logowania.",
   "Show": "Pokaż",
   "ShowAdditionalParameters": "Pokaż ustawienia zaawansowane",

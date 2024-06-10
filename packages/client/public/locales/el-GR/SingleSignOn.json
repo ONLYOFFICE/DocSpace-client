@@ -31,7 +31,7 @@
   "PrivateKey": "Ιδιωτικό κλειδί",
   "ProviderURL": "Αναγνωριστικό οντότητας παρόχου ταυτότητας",
   "ProviderURLTooltip": "Αναγνωριστικό οντότητας παρόχου ταυτότητας (URL εκδότη)",
-  "ServiceProviderSettings": "Ρυθμίσεις παρόχου υπηρεσιών ONLYOFFICE",
+  "ServiceProviderSettings": "Ρυθμίσεις παρόχου υπηρεσιών {{organizationName}}",
   "ServiceProviderSettingsDescription": "Διαμορφώστε τις ρυθμίσεις του παρόχου υπηρεσιών και προσθέστε πιστοποιητικά SP για την ενιαία σύνδεση.",
   "Show": "Εμφάνιση",
   "ShowAdditionalParameters": "Εμφάνιση προηγμένων ρυθμίσεων",

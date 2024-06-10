@@ -31,7 +31,7 @@
   "PrivateKey": "Личен ключ",
   "ProviderURL": "Идентификация на обекта на доставчика на самоличност",
   "ProviderURLTooltip": "Идентификация на обекта на доставчика на самоличност (URL адрес на издателя)",
-  "ServiceProviderSettings": "ONLYOFFICE SP настройки",
+  "ServiceProviderSettings": "{{organizationName}} SP настройки",
   "ServiceProviderSettingsDescription": "Конфигурирайте настройките на Доставчика на Услуги и добавете SP сертификати за Единично Вписване.",
   "Show": "Показване",
   "ShowAdditionalParameters": "Показване на разширени настройки",

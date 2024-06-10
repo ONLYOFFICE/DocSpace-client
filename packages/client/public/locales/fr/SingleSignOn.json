@@ -31,7 +31,7 @@
   "PrivateKey": "Clé privée",
   "ProviderURL": "ID de l’entité IdP",
   "ProviderURLTooltip": "ID de l’entité du fournisseur (URL de l’émetteur)",
-  "ServiceProviderSettings": "Paramètres ONLYOFFICE SP",
+  "ServiceProviderSettings": "Paramètres {{organizationName}} SP",
   "ServiceProviderSettingsDescription": "Configurez les paramètres du fournisseur de services et ajouter des certificats SP pour l'authentification unique.",
   "Show": "Afficher",
   "ShowAdditionalParameters": "Afficher les paramètres avancés",

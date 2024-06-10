@@ -31,7 +31,7 @@
   "PrivateKey": "私钥",
   "ProviderURL": "IdP 实体 ID",
   "ProviderURLTooltip": "身份供应商实体 ID（发布者 URL）",
-  "ServiceProviderSettings": "ONLYOFFICE SP 设置",
+  "ServiceProviderSettings": "{{organizationName}} SP 设置",
   "ServiceProviderSettingsDescription": "配置服务提供方设置，添加用于单一登录的 SP 证书。",
   "Show": "显示",
   "ShowAdditionalParameters": "显示高级设置",

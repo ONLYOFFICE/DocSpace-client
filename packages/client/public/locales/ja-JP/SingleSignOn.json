@@ -31,7 +31,7 @@
   "PrivateKey": "プライベートキー",
   "ProviderURL": "IdPエンティティ ID",
   "ProviderURLTooltip": "ID プロバイダのエンティティID (発行者 URL)",
-  "ServiceProviderSettings": "ONLYOFFICEのSP設定",
+  "ServiceProviderSettings": "{{organizationName}}のSP設定",
   "ServiceProviderSettingsDescription": "サービスプロバイダ設定を構成し、シングルサインオン用のSP証明書を追加します。",
   "Show": "表示",
   "ShowAdditionalParameters": "詳細設定を表示する",

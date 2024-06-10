@@ -31,7 +31,7 @@
   "PrivateKey": "Yksityinen Avain",
   "ProviderURL": "IdP Entiteetti Id",
   "ProviderURLTooltip": "Identiteetin tarjoajan entiteetti Id (Myöntäjän URL)",
-  "ServiceProviderSettings": "ONLYOFFICE SP Asetukset",
+  "ServiceProviderSettings": "{{organizationName}} SP Asetukset",
   "ServiceProviderSettingsDescription": "Määritä Palveluntarjoajan asetukset ja lisää SP-sertifikaatit kertakirjautumista varten.",
   "Show": "Näytä",
   "ShowAdditionalParameters": "Näytä lisäasetukset",

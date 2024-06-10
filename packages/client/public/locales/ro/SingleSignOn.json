@@ -31,7 +31,7 @@
   "PrivateKey": "Cheie privată",
   "ProviderURL": "ID-ul de entitate al furnizorului de identitate (IdP)",
   "ProviderURLTooltip": "ID-ul de entitate al furnizorului de identitate (Adresa URL a emitentului)",
-  "ServiceProviderSettings": "Setări furnizor de servicii ONLYOFFICE",
+  "ServiceProviderSettings": "Setări furnizor de servicii {{organizationName}}",
   "ServiceProviderSettingsDescription": "Configurați setări Furnizor de serviciu și adăugați certificate de furnizor de servicii pentru autentificarea unică.",
   "Show": "Afişare",
   "ShowAdditionalParameters": "Afişare setări avansate",

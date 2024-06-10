@@ -31,7 +31,7 @@
   "PrivateKey": "Закритий ключ",
   "ProviderURL": "Ідентифікатор сутності постачальника посвідчень",
   "ProviderURLTooltip": "Ідентифікатор сутності постачальника посвідчень (URL-адреса видавця)",
-  "ServiceProviderSettings": "Параметри постачальника сервісу ONLYOFFICE",
+  "ServiceProviderSettings": "Параметри постачальника сервісу {{organizationName}}",
   "ServiceProviderSettingsDescription": "Налаштуйте параметри постачальника послуг та додайте його сертифікати для єдиного входу.",
   "Show": "Показати",
   "ShowAdditionalParameters": "Показати додаткові параметри",

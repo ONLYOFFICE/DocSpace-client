@@ -31,7 +31,7 @@
   "PrivateKey": "Privé Sleute",
   "ProviderURL": "IdP Entiteit Id",
   "ProviderURLTooltip": "Identity Provider Entity Id (Uitgever URL)",
-  "ServiceProviderSettings": "ONLYOFFICE SP Instellingen",
+  "ServiceProviderSettings": "{{organizationName}} SP Instellingen",
   "ServiceProviderSettingsDescription": "Configureer Service Provider instellingen en voeg SP certificaten toe voor Single Sign-On.",
   "Show": "Toon",
   "ShowAdditionalParameters": "Geavanceerde instellingen weergeven",

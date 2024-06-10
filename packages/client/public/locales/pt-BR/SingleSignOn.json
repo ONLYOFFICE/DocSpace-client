@@ -31,7 +31,7 @@
   "PrivateKey": "Chave privada",
   "ProviderURL": "ID da entidade IdP",
   "ProviderURLTooltip": "Id da entidade do provedor de identidade (URL do emissor)",
-  "ServiceProviderSettings": "Configurações do ONLYOFFICE SP",
+  "ServiceProviderSettings": "Configurações do {{organizationName}} SP",
   "ServiceProviderSettingsDescription": "Defina as configurações do provedor de serviços e adicione certificados SP para logon único.",
   "Show": "Mostrar",
   "ShowAdditionalParameters": "Mostrar configurações avançadas",

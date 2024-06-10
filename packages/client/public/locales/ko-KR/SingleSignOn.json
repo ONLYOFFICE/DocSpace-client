@@ -31,7 +31,7 @@
   "PrivateKey": "개인 키",
   "ProviderURL": "IdP 엔터티 Id",
   "ProviderURLTooltip": "ID 제공자 엔터티 ID(발급자 URL)",
-  "ServiceProviderSettings": "ONLYOFFICE SP 설정",
+  "ServiceProviderSettings": "{{organizationName}} SP 설정",
   "ServiceProviderSettingsDescription": "서비스 공급자 설정을 구성하고 싱글 사인온을 위한 SP 인증서를 추가하세요.",
   "Show": "표시",
   "ShowAdditionalParameters": "고급 설정 표시",

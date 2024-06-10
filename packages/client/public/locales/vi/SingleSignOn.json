@@ -31,7 +31,7 @@
   "PrivateKey": "Mã bí mật",
   "ProviderURL": "Id thực thể IdP",
   "ProviderURLTooltip": "Id nhà cung cấp thực thể (IdP) (URL nhà phát hành)",
-  "ServiceProviderSettings": "Cài đặt ONLYOFFICE SP",
+  "ServiceProviderSettings": "Cài đặt {{organizationName}} SP",
   "ServiceProviderSettingsDescription": "Định cấu hình cài đặt Nhà cung cấp Dịch vụ và thêm chứng chỉ SP cho Đăng Nhập Một Lần.",
   "Show": "Hiển thị",
   "ShowAdditionalParameters": "Hiển thị cài đặt nâng cao",

@@ -31,7 +31,7 @@
   "PrivateKey": "ກະແຈສ່ວນຕົວ",
   "ProviderURL": "IdP Entity ID",
   "ProviderURLTooltip": "Identity Provider Entity Id (Issuer URL)",
-  "ServiceProviderSettings": "ONLYOFFICE SP ການຕັ້ງຄ່າ",
+  "ServiceProviderSettings": "{{organizationName}} SP ການຕັ້ງຄ່າ",
   "Show": "ສະແດງ",
   "ShowAdditionalParameters": "ສະແດງການຕັ້ງຄ່າຂັ້ນສູງ",
   "Signing": "ເຊັນຊື່",

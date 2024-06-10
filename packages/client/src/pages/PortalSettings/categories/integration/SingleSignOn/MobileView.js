@@ -39,7 +39,7 @@ const StyledWrapper = styled.div`
   gap: 20px;
 `;
 
-const MobileView = ({ isSSOAvailable }) => {
+const MobileView = ({ isSSOAvailable, organizationName }) => {
   const { t } = useTranslation(["SingleSignOn", "Settings"]);
   const navigate = useNavigate();
 
@@ -51,7 +51,7 @@ const MobileView = ({ isSSOAvailable }) => {
   return (
     <StyledWrapper>
       <MobileCategoryWrapper
-        title={t("ServiceProviderSettings")}
+        title={t("ServiceProviderSettings", { organizationName })}
         subtitle={t("ServiceProviderSettingsDescription")}
         url="/portal-settings/integration/single-sign-on/sp-settings"
         withPaidBadge={!isSSOAvailable}

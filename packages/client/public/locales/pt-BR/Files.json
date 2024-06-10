@@ -126,7 +126,7 @@
   "PrivateRoomDescriptionSafest": "O armazenamento mais seguro para docx, xlsx e pptx.",
   "PrivateRoomDescriptionSecure": "Compartilhamento seguro com colegas de equipe de confiança.",
   "PrivateRoomDescriptionUnbreakable": "Algoritmo inquebrável AES-256.",
-  "PrivateRoomHeader": "Bem-vindo à sala privada ONLYOFFICE onde cada símbolo que você digita é criptografado",
+  "PrivateRoomHeader": "Bem-vindo à sala privada {{organizationName}} onde cada símbolo que você digita é criptografado",
   "PrivateRoomSupport": "O trabalho na Sala Privada está disponível através do aplicativo desktop {{organizationName}}. <3>Instruções</3>",
   "RecentlyAccessible": "Recentemente acessível via link",
   "RecentViaLinkEmptyContainerDescription": "Aqui você encontrará uma lista dos arquivos abertos recentemente compartilhados com você por meio de um link externo.",

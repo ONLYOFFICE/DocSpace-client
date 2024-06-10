@@ -125,7 +125,7 @@
   "PrivateRoomDescriptionSafest": "Найбезпечніше сховище для файлів docx, xlsx та pptx.",
   "PrivateRoomDescriptionSecure": "Безпечне надання спільного доступу довіреним членам команди.",
   "PrivateRoomDescriptionUnbreakable": "Нерозкривний алгоритм AES-256.",
-  "PrivateRoomHeader": "Ласкаво просимо до приватної кімнати ONLYOFFICE, де шифрується кожен введений вами символ",
+  "PrivateRoomHeader": "Ласкаво просимо до приватної кімнати {{organizationName}}, де шифрується кожен введений вами символ",
   "PrivateRoomSupport": "Робота у приватній кімнаті доступна через настільну програму {{organizationName}}. <3>Інструкції</3>",
   "RecentlyAccessible": "Нещодавно доступні за посиланням",
   "RecentViaLinkEmptyContainerDescription": "Тут ви знайдете список нещодавно відкритих файлів, до яких вам надано доступ через зовнішнє посилання.",

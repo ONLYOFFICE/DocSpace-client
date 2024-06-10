@@ -126,7 +126,7 @@
   "PrivateRoomDescriptionSafest": "Η ασφαλέστερη αποθήκευση για docx, xlsx και pptx.",
   "PrivateRoomDescriptionSecure": "Ασφαλής κοινή χρήση με έμπιστους συναδέλφους.",
   "PrivateRoomDescriptionUnbreakable": "Απαραβίαστος αλγόριθμος AES-256.",
-  "PrivateRoomHeader": "Καλώς ήρθατε στο ιδιωτικό δωμάτιο ONLYOFFICE. Εδώ, κάθε σύμβολο που πληκτρολογείτε είναι κρυπτογραφημένο",
+  "PrivateRoomHeader": "Καλώς ήρθατε στο ιδιωτικό δωμάτιο {{organizationName}}. Εδώ, κάθε σύμβολο που πληκτρολογείτε είναι κρυπτογραφημένο",
   "PrivateRoomSupport": "Η εργασία σε ιδιωτικό δωμάτιο είναι διαθέσιμη μέσω της εφαρμογής Desktop {{organizationName}}. <3>Οδηγίες</3>",
   "RecentlyAccessible": "Πρόσφατα προσβάσιμες μέσω συνδέσμου",
   "RecentViaLinkEmptyContainerDescription": "Εδώ θα βρείτε μια λίστα με τα πρόσφατα ανοιχτά αρχεία που κοινοποιήθηκαν σε σας μέσω εξωτερικού συνδέσμου.",

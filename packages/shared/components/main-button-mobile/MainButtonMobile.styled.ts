@@ -406,15 +406,12 @@ export {
 const getDefaultProgressStyles = ({
   $currentColorScheme,
   theme,
-  error,
 }: ProgressBarMobileDefaultStyles) =>
   $currentColorScheme &&
   css`
-    background: ${error
-      ? theme.mainButtonMobile.bar.errorBackground
-      : theme.isBase
-        ? $currentColorScheme?.main?.accent
-        : "#FFFFFF"};
+    background: ${
+      theme.isBase ? $currentColorScheme?.main?.accent : "#FFFFFF"
+    }};
   `;
 
 const StyledProgressBarTheme = styled(StyledBar)(getDefaultProgressStyles);

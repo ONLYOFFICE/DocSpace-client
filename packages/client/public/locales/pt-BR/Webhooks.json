@@ -55,5 +55,5 @@
   "WebhookRemoved": "Webhook removido",
   "Webhooks": "Webhooks",
   "WebhooksGuide": "Guia de webhooks",
-  "WebhooksInfo": "Use webhooks para executar ações personalizadas em qualquer aplicativo ou site que você esteja usando com base em vários eventos no ONLYOFFICE {{portalName}}.\nAqui, você pode criar e gerenciar todos os seus webhooks, configurá-los e navegar no histórico de cada webhook para auditar seu desempenho."
+  "WebhooksInfo": "Use webhooks para executar ações personalizadas em qualquer aplicativo ou site que você esteja usando com base em vários eventos no {{organizationName}} {{portalName}}.\nAqui, você pode criar e gerenciar todos os seus webhooks, configurá-los e navegar no histórico de cada webhook para auditar seu desempenho."
 }

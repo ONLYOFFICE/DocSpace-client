@@ -108,6 +108,7 @@ const GoogleWorkspace = ({
   getMigrationStatus,
   setUsers,
   filteredUsers,
+  organizationName,
 }) => {
   const [showReminder, setShowReminder] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
@@ -233,7 +234,10 @@ const GoogleWorkspace = ({
   return (
     <GoogleWrapper>
       <Text className="workspace-subtitle">
-        {t("Settings:AboutDataImport", { portalName: PORTAL })}
+        {t("Settings:AboutDataImport", {
+          portalName: PORTAL,
+          organizationName,
+        })}
       </Text>
       <div className="step-container">
         <Box displayProp="flex" marginProp="0 0 8px">
@@ -268,7 +272,7 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
   const { clearCheckedAccounts, getMigrationStatus, setUsers, filteredUsers } =
     importAccountsStore;
   const { viewAs, setViewAs } = setup;
-  const { currentDeviceType } = settingsStore;
+  const { currentDeviceType, organizationName } = settingsStore;
 
   return {
     clearCheckedAccounts,
@@ -278,5 +282,6 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
     getMigrationStatus,
     setUsers,
     filteredUsers,
+    organizationName,
   };
 })(withTranslation(["Common, Settings"])(observer(GoogleWorkspace)));

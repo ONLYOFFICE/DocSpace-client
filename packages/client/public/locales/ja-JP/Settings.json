@@ -1,5 +1,5 @@
 {
-  "AboutDataImport": "データのインポートにはいくつかのステップがあります：データのアップロード、解析、インポート設定、インポート。バックアップファイルはONLYOFFICE{{portalName}}サーバーに24時間保存され、その後自動的に削除されます。",
+  "AboutDataImport": "データのインポートにはいくつかのステップがあります：データのアップロード、解析、インポート設定、インポート。バックアップファイルは{{organizationName}}{{portalName}}サーバーに24時間保存され、その後自動的に削除されます。",
   "AccentColor": "アクセント",
   "AccessRightsAccessToProduct": "{{product}} モジュールへのアクセス権は",
   "AccessRightsAllUsers": "すべて {{users}}",

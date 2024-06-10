@@ -1,5 +1,5 @@
 {
-  "AboutDataImport": "Datu importēšana ietver vairākas darbības: datu augšupielādi, parsēšanu, importēšanas konfigurāciju un importēšanu. Jūsu dublējuma fails tiks glabāts ONLYOFFICE {{portalName}} serveros 24 stundas, un pēc tam tas tiks automātiski izdzēsts.",
+  "AboutDataImport": "Datu importēšana ietver vairākas darbības: datu augšupielādi, parsēšanu, importēšanas konfigurāciju un importēšanu. Jūsu dublējuma fails tiks glabāts {{organizationName}} {{portalName}} serveros 24 stundas, un pēc tam tas tiks automātiski izdzēsts.",
   "AccentColor": "Akcents",
   "AccessRightsAccessToProduct": "{{product}} piekļuves tiesību modulis ir piešķirts",
   "AccessRightsAllUsers": "Visi {{users}}",

@@ -1,5 +1,5 @@
 {
-  "AboutDataImport": "Veri içe aktarma birkaç adım içerir: veri yükleme, ayrıştırma, içe aktarma yapılandırması ve içe aktarma. Yedek dosyanız 24 saat boyunca ONLYOFFICE {{portalName}} sunucularında saklanacak ve daha sonrasında otomatik olarak silinecektir.",
+  "AboutDataImport": "Veri içe aktarma birkaç adım içerir: veri yükleme, ayrıştırma, içe aktarma yapılandırması ve içe aktarma. Yedek dosyanız 24 saat boyunca {{organizationName}} {{portalName}} sunucularında saklanacak ve daha sonrasında otomatik olarak silinecektir.",
   "AccentColor": "Ara değer",
   "AccessRightsAccessToProduct": "{{product}} modülüne erişim şu kişilere verildi:",
   "AccessRightsAllUsers": "Tüm {{users}}",

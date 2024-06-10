@@ -1,5 +1,5 @@
 {
-  "AboutDataImport": "Data import includes several steps: data upload, parsing, import configuration, and import. Your backup file will be stored in ONLYOFFICE {{portalName}} servers for 24 hours, and then it will be automatically deleted.",
+  "AboutDataImport": "Data import includes several steps: data upload, parsing, import configuration, and import. Your backup file will be stored in {{organizationName}} {{portalName}} servers for 24 hours, and then it will be automatically deleted.",
   "AccentColor": "Accent",
   "AccessRightsAccessToProduct": "Access to {{product}} module is given to",
   "AccessRightsAllUsers": "All {{users}}",

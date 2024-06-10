@@ -1,5 +1,5 @@
 {
-  "AboutDataImport": "L'importation de données comprend plusieurs étapes: téléchargement des données, analyse, configuration de l'importation et importation. Votre fichier de sauvegarde sera stocké sur les serveurs de ONLYOFFICE {{portalName}} pendant 24 heures et ensuite celui-ci sera automatiquement supprimé.",
+  "AboutDataImport": "L'importation de données comprend plusieurs étapes: téléchargement des données, analyse, configuration de l'importation et importation. Votre fichier de sauvegarde sera stocké sur les serveurs de {{organizationName}} {{portalName}} pendant 24 heures et ensuite celui-ci sera automatiquement supprimé.",
   "AccentColor": "Accent",
   "AccessRightsAccessToProduct": "Accès au module {{product}} est accordé à",
   "AccessRightsAllUsers": "Tous {{users}}",

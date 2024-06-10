@@ -1,5 +1,5 @@
 {
-  "AboutDataImport": "Uvoz podatkov vključuje več korakov: nalaganje podatkov, razčlenjevanje, konfiguracijo uvoza in uvoz. Vaša varnostna kopija bo 24 ur shranjena v strežnikih ONLYOFFICE {{portalName}}, nato pa bo samodejno izbrisana.",
+  "AboutDataImport": "Uvoz podatkov vključuje več korakov: nalaganje podatkov, razčlenjevanje, konfiguracijo uvoza in uvoz. Vaša varnostna kopija bo 24 ur shranjena v strežnikih {{organizationName}} {{portalName}}, nato pa bo samodejno izbrisana.",
   "AccentColor": "Naglas",
   "AccessRightsAccessToProduct": "Dostop do {{product}} modula je omogočen za",
   "AccessRightsAllUsers": "Vsi {{users}}",

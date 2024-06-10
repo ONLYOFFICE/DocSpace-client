@@ -1,5 +1,5 @@
 {
-  "AboutDataImport": "Uvoz podataka obuhvata nekoliko koraka: otpremanje podataka, parsiranje, konfiguracija uvoza i uvoz. Vaš rezervni fajl će biti sačuvan na ONLYOFFICE {{portalName}} serverima tokom 24 sata, nakon čega će automatski biti obrisan.",
+  "AboutDataImport": "Uvoz podataka obuhvata nekoliko koraka: otpremanje podataka, parsiranje, konfiguracija uvoza i uvoz. Vaš rezervni fajl će biti sačuvan na {{organizationName}} {{portalName}} serverima tokom 24 sata, nakon čega će automatski biti obrisan.",
   "AccentColor": "Istaknutost",
   "AccessRightsAccessToProduct": "Pristup {{product}} modulu je dat",
   "AccessRightsAllUsers": "Svi {{users}}",

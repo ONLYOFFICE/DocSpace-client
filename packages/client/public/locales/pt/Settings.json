@@ -1,5 +1,5 @@
 {
-  "AboutDataImport": "A importação de dados inclui várias etapas: upload de dados, análise, configuração de importação e importação. Seu arquivo de backup será armazenado nos servidores ONLYOFFICE {{portalName}} por 24 horas e, em seguida, será excluído automaticamente.",
+  "AboutDataImport": "A importação de dados inclui várias etapas: upload de dados, análise, configuração de importação e importação. Seu arquivo de backup será armazenado nos servidores {{organizationName}} {{portalName}} por 24 horas e, em seguida, será excluído automaticamente.",
   "AccentColor": "Destacar",
   "AccessRightsAccessToProduct": "Acesso ao módulo {{product}} dado a",
   "AccessRightsAllUsers": "Todos {{users}}",

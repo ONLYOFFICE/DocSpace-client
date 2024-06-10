@@ -131,7 +131,7 @@
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} käyttäjät tuotiin onnistuneesti.",
   "ImportFromGoogle": "Tuo Google Workspacesta",
   "ImportFromNextcloud": "Tuo Nextcloudista",
-  "ImportFromOnlyoffice": "Tuo {{organizationName}} Workspacesta",
+  "ImportFromPortal": "Tuo {{organizationName}} Workspacesta",
   "ImportProcessingDescription": "Tietojen siirto on käynnissä. Ole hyvä ja odota.",
   "ImportSectionDescription": "Valitse osiot tuontia varten. Ne ilmestyvät vastaaviin {{portalName}}-n osioihin.",
   "IncludedInBusiness": "Sisältyy Business-tilaukseen",

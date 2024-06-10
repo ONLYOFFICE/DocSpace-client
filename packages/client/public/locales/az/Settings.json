@@ -134,7 +134,7 @@
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} istifadəçi uğurla idxal edildi.",
   "ImportFromGoogle": "Google Workspace-dən idxal edin",
   "ImportFromNextcloud": "Nextcloud-dan idxal edin",
-  "ImportFromOnlyoffice": "{{organizationName}} Workspace-dən idxal edin",
+  "ImportFromPortal": "{{organizationName}} Workspace-dən idxal edin",
   "ImportProcessingDescription": "Məlumat köçürülməsi davam edir. Zəhmət olmasa, gözləyin.",
   "ImportSectionDescription": "İdxal etmək üçün bölmələri seçin. Onlar {{portalName}}-in müvafiq bölmələrində görünəcək.",
   "IncludedInBusiness": "Biznes plana daxildir",

@@ -135,7 +135,7 @@
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} uživatelů bylo úspěšně importováno.",
   "ImportFromGoogle": "Import z pracovního prostoru Google",
   "ImportFromNextcloud": "Import z Nextcloudu",
-  "ImportFromOnlyoffice": "Import z pracovního prostoru {{organizationName}}",
+  "ImportFromPortal": "Import z pracovního prostoru {{organizationName}}",
   "ImportProcessingDescription": "Probíhá migrace dat. Vyčkejte prosím.",
   "ImportSectionDescription": "Vyberte oddíly pro import. Objeví se v odpovídajících sekcích {{portalName}}.",
   "IncludedInBusiness": "Zahrnuto v obchodním plánu",

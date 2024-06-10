@@ -135,7 +135,7 @@
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} gebruikers werden met succes geïmporteerd.",
   "ImportFromGoogle": "Importeren vanuit Google Workspace",
   "ImportFromNextcloud": "Importeren vanuit Nextcloud",
-  "ImportFromOnlyoffice": "Importeren vanuit {{organizationName}} Workspace",
+  "ImportFromPortal": "Importeren vanuit {{organizationName}} Workspace",
   "ImportProcessingDescription": "Gegevensmigratie in uitvoering. Een moment geduld.",
   "ImportSectionDescription": "Selecteer secties om te importeren. Ze verschijnen in de overeenkomstige secties van {{portalName}}.",
   "IncludedInBusiness": "Inbegrepen in Business plan",

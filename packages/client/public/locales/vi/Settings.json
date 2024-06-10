@@ -134,7 +134,7 @@
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} người dùng đã được nhập thành công.",
   "ImportFromGoogle": "Nhập từ Google Workspace",
   "ImportFromNextcloud": "Nhập từ Nextcloud",
-  "ImportFromOnlyoffice": "Nhập từ {{organizationName}} Workspace",
+  "ImportFromPortal": "Nhập từ {{organizationName}} Workspace",
   "ImportProcessingDescription": "Đang di chuyển dữ liệu. Xin vui lòng chờ.",
   "ImportSectionDescription": "Chọn các phần để nhập. Chúng sẽ xuất hiện trong các phần tương ứng của {{portalName}}.",
   "IncludedInBusiness": "Đã bao gồm trong gói Business",

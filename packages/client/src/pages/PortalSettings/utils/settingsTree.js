@@ -375,7 +375,7 @@ export const settingsTree = [
             key: "5-0-2",
             icon: "",
             link: "onlyoffice",
-            tKey: "ImportFromOnlyoffice",
+            tKey: "ImportFromPortal",
             isCategory: true,
           },
         ],

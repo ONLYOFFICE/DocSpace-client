@@ -136,7 +136,7 @@
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} пользователи были успешно импортированы.",
   "ImportFromGoogle": "Импортировать из Google Workspace",
   "ImportFromNextcloud": "Импортировать из Nextcloud Workspace",
-  "ImportFromOnlyoffice": "Импортировать из {{organizationName}} Workspace",
+  "ImportFromPortal": "Импортировать из {{organizationName}} Workspace",
   "ImportProcessingDescription": "Выполняется перенос данных. Пожалуйста, подождите.",
   "ImportSectionDescription": "Выберите разделы для импорта. Они появятся в соответствующих разделах {{portalName}}.",
   "IncludedInBusiness": "Включено в тарифный план Business",

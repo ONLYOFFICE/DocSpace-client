@@ -133,7 +133,7 @@
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} utenti sono stati importati correttamente.",
   "ImportFromGoogle": "Importa da Google Workspace",
   "ImportFromNextcloud": "Importa da Nextcloud",
-  "ImportFromOnlyoffice": "Importa da {{organizationName}} Workspace",
+  "ImportFromPortal": "Importa da {{organizationName}} Workspace",
   "ImportProcessingDescription": "Migrazione dei dati in corso. Attendere prego.",
   "ImportSectionDescription": "Seleziona le sezioni per l'importazione. Appariranno nelle sezioni corrispondenti di {{portalName}}.",
   "IncludedInBusiness": "Incluso nel piano Business",

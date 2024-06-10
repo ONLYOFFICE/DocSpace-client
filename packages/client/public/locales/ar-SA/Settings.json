@@ -134,7 +134,7 @@
   "ImportedUsers": "تم استيراد مستخدمي {{selectedUsers}}/{{importedUsers}} بنجاح.",
   "ImportFromGoogle": "الاستيراد من مساحة عمل Google",
   "ImportFromNextcloud": "الاستيراد من Nextcloud",
-  "ImportFromOnlyoffice": "الاستيراد من مساحة عمل {{organizationName}}",
+  "ImportFromPortal": "الاستيراد من مساحة عمل {{organizationName}}",
   "ImportProcessingDescription": "ترحيل البيانات قيد التقدم. الرجاء الانتظار.",
   "ImportSectionDescription": "حدد أقساما للاستيراد. ستظهر في الأقسام المقابلة من {{portalName}}.",
   "IncludedInBusiness": "تم إضافتها في خطة عمل",

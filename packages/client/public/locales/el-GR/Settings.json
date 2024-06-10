@@ -133,7 +133,7 @@
   "ImportedUsers": "{{selectedUsers}}/{{importedUsers}} χρήστες εισήχθησαν με επιτυχία.",
   "ImportFromGoogle": "Εισαγωγή από το Google Workspace",
   "ImportFromNextcloud": "Εισαγωγή από το Nextcloud",
-  "ImportFromOnlyoffice": "Εισαγωγή από το {{organizationName}} Workspace",
+  "ImportFromPortal": "Εισαγωγή από το {{organizationName}} Workspace",
   "ImportProcessingDescription": "Η μεταφορά δεδομένων βρίσκεται σε εξέλιξη. Περιμένετε.",
   "ImportSectionDescription": "Επιλέξτε τμήματα για εισαγωγή. Θα εμφανιστούν στα αντίστοιχα τμήματα του {{portalName}}.",
   "IncludedInBusiness": "Περιλαμβάνεται στο επιχειρηματικό σχέδιο",

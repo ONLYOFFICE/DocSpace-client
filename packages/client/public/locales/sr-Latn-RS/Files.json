@@ -126,7 +126,7 @@
   "PrivateRoomDescriptionSafest": "Najsigurnije skladište za docx, xlsx i pptx.",
   "PrivateRoomDescriptionSecure": "Bezbedno deljenje sa pouzdanim članovima tima.",
   "PrivateRoomDescriptionUnbreakable": "Nesalomiv AES-256 algoritam.",
-  "PrivateRoomHeader": "Dobro došli u ONLYOFFICE privatnu sobu gde je svaki simbol koji kucate šifrovan",
+  "PrivateRoomHeader": "Dobro došli u {{organizationName}} privatnu sobu gde je svaki simbol koji kucate šifrovan",
   "PrivateRoomSupport": "Rad u Privatnoj Sobi je dostupan putem {{organizationName}} desktop aplikacije. <3>Instructions</3>",
   "RecentlyAccessible": "Nedavno pristupno putem linka",
   "RecentViaLinkEmptyContainerDescription": "Ovde ćete pronaći listu nedavno otvorenih datoteka deljenih sa vama putem spoljnog linka.",

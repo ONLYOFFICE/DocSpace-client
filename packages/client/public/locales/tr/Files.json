@@ -126,7 +126,7 @@
   "PrivateRoomDescriptionSafest": "docx, xlsx ve pptx için en güvenli depolama.",
   "PrivateRoomDescriptionSecure": "Güvenilen ekip arkadaşlarıyla güvenli paylaşım.",
   "PrivateRoomDescriptionUnbreakable": "Kırılmaz AES-256 algoritması.",
-  "PrivateRoomHeader": "Yazdığınız her sembolün şifrelendiği ONLYOFFICE özel odasına hoş geldiniz",
+  "PrivateRoomHeader": "Yazdığınız her sembolün şifrelendiği {{organizationName}} özel odasına hoş geldiniz",
   "PrivateRoomSupport": "Özel Odada Çalışma, {{organizationName}} masaüstü uygulaması aracılığıyla kullanılabilir. <3>Kullanma Talimatları</3>",
   "RecentlyAccessible": "Bağlantı yoluyla erişilebilen Yakın Zamanda",
   "RecentViaLinkEmptyContainerDescription": "Burada, harici bir bağlantı aracılığıyla sizinle paylaşılan son açılan dosyaların bir listesini bulacaksınız.",

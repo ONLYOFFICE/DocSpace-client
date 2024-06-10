@@ -121,7 +121,7 @@ const RootFolderContainer = (props) => {
       ? t("ArchiveEmptyScreenUser")
       : t("ArchiveEmptyScreen", { portalName: PORTAL });
 
-  const privateRoomHeader = t("PrivateRoomHeader");
+  const privateRoomHeader = t("PrivateRoomHeader", { organizationName });
   const privacyIcon = <img alt="" src={PrivacySvgUrl} />;
   const privateRoomDescTranslations = [
     t("PrivateRoomDescriptionSafest"),

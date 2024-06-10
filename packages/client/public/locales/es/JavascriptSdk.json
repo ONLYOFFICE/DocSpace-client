@@ -86,7 +86,7 @@
   "RoomTypeDisplay": "Visualización del tipo de sala",
   "Rotate": "Girar",
   "Scale": "Escala",
-  "SDKDescription": "Usando el SDK de JavaScript, puede insertar una sala o una carpeta de ONLYOFFICE {{portalName}} en su interfaz web como un iframe. Aquí puede encontrar los ajustes para crear un iframe de ejemplo y configurar CSP. Para utilizar el SDK completo, por favor, consulte el",
+  "SDKDescription": "Usando el SDK de JavaScript, puede insertar una sala o una carpeta de {{portalName}} en su interfaz web como un iframe. Aquí puede encontrar los ajustes para crear un iframe de ejemplo y configurar CSP. Para utilizar el SDK completo, por favor, consulte el",
   "SearchBlock": "Bloque de búsqueda",
   "SearchFilterAndSort": "Buscar, filtrar y ordenar",
   "SearchTerm": "Término de búsqueda",

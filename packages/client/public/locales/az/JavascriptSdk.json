@@ -86,7 +86,7 @@
   "RoomTypeDisplay": "Otaq növü görüntüsü",
   "Rotate": "Döndürün",
   "Scale": "Ölçü",
-  "SDKDescription": "ONLYOFFICE {{portalName}}-dən otaq və ya qovluğu JavaScript SDK-dan istifadə edərək iframe kimi veb interfeysinizə yerləşdirə bilərsiniz. Burada nümunə iframe yaratmaq və CSP-ni konfiqurasiya etmək üçün parametrləri tapa bilərsiniz. Tam SDK-dan istifadə etmək üçün baxın",
+  "SDKDescription": "{{portalName}}-dən otaq və ya qovluğu JavaScript SDK-dan istifadə edərək iframe kimi veb interfeysinizə yerləşdirə bilərsiniz. Burada nümunə iframe yaratmaq və CSP-ni konfiqurasiya etmək üçün parametrləri tapa bilərsiniz. Tam SDK-dan istifadə etmək üçün baxın",
   "SearchBlock": "Bloku axtarın",
   "SearchFilterAndSort": "Axtarın, Filtrləyin və Çeşidləyin",
   "SearchTerm": "Termin axtarın",

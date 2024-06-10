@@ -126,7 +126,7 @@
   "PrivateRoomDescriptionSafest": "Najbezpečnejšie úložisko pre docx, xlsx a pptx .",
   "PrivateRoomDescriptionSecure": "Bezpečné zdieľanie s dôveryhodnými kolegami.",
   "PrivateRoomDescriptionUnbreakable": "Neprelomiteľný algoritmus AES-256.",
-  "PrivateRoomHeader": "Vitajte v súkromnej miestnosti ONLYOFFICE, kde je každý vami zadaný symbol šifrovaný",
+  "PrivateRoomHeader": "Vitajte v súkromnej miestnosti {{organizationName}}, kde je každý vami zadaný symbol šifrovaný",
   "PrivateRoomSupport": "Práca v súkromnej miestnosti je k dispozícii prostredníctvom počítačovej aplikácie {{organizationName}}. <3>Pokyny</3>",
   "RecentlyAccessible": "Nedávno prístupné cez odkaz",
   "RecentViaLinkEmptyContainerDescription": "Tu nájdete zoznam nedávno otvorených súborov zdieľaných cez externý odkaz.",

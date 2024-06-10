@@ -54,6 +54,7 @@ const DataImport = ({
   setDocumentTitle,
   isMigrationInit,
   setIsMigrationInit,
+  organizationName,
 }) => {
   const navigate = useNavigate();
 
@@ -133,7 +134,7 @@ const DataImport = ({
   return (
     <WorkspacesContainer>
       <Text className="data-import-description">
-        {t("DataImportDescription", { portalName: PORTAL })}
+        {t("DataImportDescription", { portalName: PORTAL, organizationName })}
       </Text>
       <Text className="data-import-subtitle">{t("UploadBackupData")}</Text>
 
@@ -172,14 +173,17 @@ export default inject(({ authStore, settingsStore, importAccountsStore }) => {
 
   const { setDocumentTitle } = authStore;
 
+  const { organizationName, theme } = settingsStore;
+
   return {
     services,
     setServices,
     getMigrationList,
     getMigrationStatus,
-    theme: settingsStore.theme,
+    theme,
     setDocumentTitle,
     isMigrationInit,
     setIsMigrationInit,
+    organizationName,
   };
 })(withTranslation(["Settings"])(observer(DataImport)));

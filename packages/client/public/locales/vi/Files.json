@@ -126,7 +126,7 @@
   "PrivateRoomDescriptionSafest": "Bộ nhớ an toàn nhất cho docx, xlsx và pptx.",
   "PrivateRoomDescriptionSecure": "Chia sẻ an toàn với đồng đội đáng tin cậy.",
   "PrivateRoomDescriptionUnbreakable": "Thuật toán AES-256 không thể phá vỡ.",
-  "PrivateRoomHeader": "Chào mừng bạn đến với phòng riêng ONLYOFFICE, nơi mọi ký hiệu bạn nhập đều được mã hóa",
+  "PrivateRoomHeader": "Chào mừng bạn đến với phòng riêng {{organizationName}}, nơi mọi ký hiệu bạn nhập đều được mã hóa",
   "PrivateRoomSupport": "Làm việc trong Phòng Riêng có sẵn qua ứng dụng máy tính{{organizationName}} . <3>Hướng dẫn</3>",
   "RecentlyAccessible": "Truy cập gần đây qua liên kết",
   "RecentViaLinkEmptyContainerDescription": "Tại đây, bạn sẽ tìm thấy danh sách các tập tin đã được mở gần đây được chia sẻ với bạn thông qua liên kết bên ngoài.",

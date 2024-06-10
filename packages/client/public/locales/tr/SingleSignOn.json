@@ -48,7 +48,7 @@
   "SPEntityId": "SP Varlık Kimliği (meta veri XML bağlantısı)",
   "SPEntityIdTooltip": "Kimlik sağlayıcı tarafından SP'yi kesin bir surette tanımlamak için indirilebilen ve kullanılabilen Hizmet sağlayıcı XML URL adresi",
   "SpMetadata": "{{organizationName}} SP Meta Verileri",
-  "SpMetadataDescription": "ONLYOFFICE {{portalName}}'i IdP hesabınıza güvenilir bir Servis Sağlayıcı olarak eklemek için Servis Sağlayıcı meta verilerine erişin.",
+  "SpMetadataDescription": "{{organizationName}} {{portalName}}'i IdP hesabınıza güvenilir bir Servis Sağlayıcı olarak eklemek için Servis Sağlayıcı meta verilerine erişin.",
   "spSignExitRequest": "Çıkış İsteklerini İmzala",
   "spSigningAlgorithm": "İmzalama Algoritması",
   "spSignResponseRequest": "Çıkış Yanıtlarını İmzala",

@@ -60,7 +60,10 @@ const MobileView = ({ isSSOAvailable, organizationName }) => {
       />
       <MobileCategoryWrapper
         title={t("SpMetadata", { organizationName })}
-        subtitle={t("SpMetadataDescription", { portalName: PORTAL })}
+        subtitle={t("SpMetadataDescription", {
+          portalName: PORTAL,
+          organizationName,
+        })}
         url="/portal-settings/integration/single-sign-on/sp-metadata"
         withPaidBadge={!isSSOAvailable}
         badgeLabel={t("Common:Paid")}

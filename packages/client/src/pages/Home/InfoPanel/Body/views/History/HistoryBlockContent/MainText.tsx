@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { withTranslation } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { TTranslation } from "@docspace/shared/types";
 import { StyledHistoryBlockMessage } from "../../../styles/history";
@@ -37,7 +37,16 @@ interface HistoryMainTextProps {
 const HistoryMainText = ({ t, feed }: HistoryMainTextProps) => {
   return (
     <StyledHistoryBlockMessage className="message">
-      <span className="main-message">{t(feed.action.key)} </span>{" "}
+      {/* <span className="main-message">{t(feed.action.key)} */}
+      <span className="main-message">
+        <Trans
+          t={t}
+          ns="InfoPanel"
+          i18nKey={feed.action.key}
+          values={{ roomName: feed.data.title }}
+          components={{ bold: <strong /> }}
+        />
+      </span>{" "}
     </StyledHistoryBlockMessage>
   );
 };

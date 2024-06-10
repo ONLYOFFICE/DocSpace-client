@@ -63,7 +63,7 @@ const ProfileRemoveForm = (props) => {
     return (
       <StyledPage>
         <StyledContent>
-          <StyledBody>
+          <StyledBody style={{ whiteSpace: "pre-wrap" }}>
             <DocspaceLogo className="docspace-logo" />
             <Text fontSize="23px" fontWeight="700" className="title">
               {t("DeleteProfileSuccessMessage")}
@@ -76,7 +76,7 @@ const ProfileRemoveForm = (props) => {
               >
                 Your DocSpace account is successfully disabled. The DocSpace
                 owner or admin can permanently delete your disabled account.
-                Please check our
+                \n\nPlease check our
                 <Link
                   fontSize="16px"
                   fontWeight="600"

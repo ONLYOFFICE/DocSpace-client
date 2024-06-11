@@ -107,16 +107,22 @@ const AccountsItemTitle = ({
           </Text>
         )}
         {isSSO && (
-          <Badge
-            className="sso-badge"
-            label={t("Common:SSO")}
-            color={"#FFFFFF"}
-            backgroundColor="#22C386"
-            fontSize={"9px"}
-            fontWeight={800}
-            noHover
-            lineHeight={"13px"}
-          />
+          <>
+            <Badge
+              id="sso-badge-info-panel"
+              className="sso-badge"
+              label={t("Common:SSO")}
+              color={"#FFFFFF"}
+              backgroundColor="#22C386"
+              fontSize={"9px"}
+              fontWeight={800}
+              noHover
+              lineHeight={"13px"}
+            />
+            <Tooltip anchorSelect={`div[id='sso-badge-info-panel'] div`}>
+              {t("PeopleTranslations:SSOAccountTooltip")}
+            </Tooltip>
+          </>
         )}
 
         {isLDAP && (

@@ -261,16 +261,22 @@ const MainProfile = (props) => {
                 {profile.displayName}
               </Text>
               {profile.isSSO && (
-                <Badge
-                  className="sso-badge"
-                  label={t("Common:SSO")}
-                  color={"#FFFFFF"}
-                  backgroundColor="#22C386"
-                  fontSize={"9px"}
-                  fontWeight={800}
-                  noHover
-                  lineHeight={"13px"}
-                />
+                <>
+                  <Badge
+                    id="sso-badge-profile"
+                    className="sso-badge"
+                    label={t("Common:SSO")}
+                    color={"#FFFFFF"}
+                    backgroundColor="#22C386"
+                    fontSize={"9px"}
+                    fontWeight={800}
+                    noHover
+                    lineHeight={"13px"}
+                  />
+                  <Tooltip anchorSelect={`div[id='sso-badge-profile'] div`}>
+                    {t("PeopleTranslations:SSOAccountTooltip")}
+                  </Tooltip>
+                </>
               )}
 
               {profile.isLDAP && (

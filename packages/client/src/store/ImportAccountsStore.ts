@@ -41,21 +41,21 @@ import {
 import {
   TWorkspaceService,
   TSendWelcomeEmailData,
-  TMigrationUser,
+  TEnhancedMigrationUser,
   TMigrationStatusResult,
 } from "@docspace/shared/api/settings/types";
 
 type TUsers = {
-  new: TMigrationUser[];
-  existing: TMigrationUser[];
-  withoutEmail: TMigrationUser[];
-  result: TMigrationUser[];
+  new: TEnhancedMigrationUser[];
+  existing: TEnhancedMigrationUser[];
+  withoutEmail: TEnhancedMigrationUser[];
+  result: TEnhancedMigrationUser[];
 };
 
 type TCheckedUsers = {
-  withEmail: TMigrationUser[];
-  withoutEmail: TMigrationUser[];
-  result: TMigrationUser[];
+  withEmail: TEnhancedMigrationUser[];
+  withoutEmail: TEnhancedMigrationUser[];
+  result: TEnhancedMigrationUser[];
 };
 
 type CheckedAccountTypes = "withEmail" | "withoutEmail" | "result";
@@ -112,10 +112,7 @@ class ImportAccountsStore {
   }
 
   get withEmailUsers() {
-    return [
-      ...this.users.existing.map((user) => ({ ...user, isDuplicate: true })),
-      ...this.users.new.map((user) => ({ ...user, isDuplicate: false })),
-    ];
+    return [...this.users.existing, ...this.users.new];
   }
 
   get finalUsers() {
@@ -181,15 +178,30 @@ class ImportAccountsStore {
   };
 
   setUsers = (data: TMigrationStatusResult) => {
+    const newUsers = data.users.map((user) => ({
+      ...user,
+      isDuplicate: false,
+    }));
+
+    const existingUsers = data.existUsers.map((user) => ({
+      ...user,
+      isDuplicate: true,
+    }));
+
+    const withoutEmailUsers = data.withoutEmailUsers.map((user) => ({
+      ...user,
+      isDuplicate: false,
+    }));
+
     runInAction(() => {
       this.users = {
-        new: data.users,
-        existing: data.existUsers,
-        withoutEmail: data.withoutEmailUsers,
+        new: newUsers,
+        existing: existingUsers,
+        withoutEmail: withoutEmailUsers,
         result: [],
       };
       this.checkedUsers = {
-        withEmail: [...data.users],
+        withEmail: newUsers,
         withoutEmail: [],
         result: [],
       };
@@ -222,7 +234,7 @@ class ImportAccountsStore {
   };
 
   toggleAccount = (
-    account: TMigrationUser,
+    account: TEnhancedMigrationUser,
     checkedAccountType: CheckedAccountTypes,
   ) => {
     this.checkedUsers = this.checkedUsers[checkedAccountType].some(
@@ -245,7 +257,7 @@ class ImportAccountsStore {
 
   toggleAllAccounts = (
     isChecked: boolean,
-    accounts: TMigrationUser[],
+    accounts: TEnhancedMigrationUser[],
     checkedAccountType: CheckedAccountTypes,
   ) => {
     this.checkedUsers = isChecked

@@ -30,7 +30,7 @@ import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
 import SelectFileStep from "../../components/SelectFileStep";
-import SelectUsersStep from "./SelectUsersStep";
+import SelectUsersStep from "../../components/SelectUsersStep";
 import AddEmailsStep from "./AddEmailsStep";
 import SelectUsersTypeStep from "./SelectUsersTypeStep";
 import ImportStep from "./ImportStep";
@@ -61,13 +61,7 @@ export const getStepsData = (
     {
       title: t("Settings:SelectUsersWithEmail"),
       description: t("Settings:SelectUsersDescriptionNextcloud"),
-      component: (
-        <SelectUsersStep
-          t={t}
-          incrementStep={incrementStep}
-          decrementStep={decrementStep}
-        />
-      ),
+      component: <SelectUsersStep t={t} />,
     },
     {
       title: t("Settings:AddEmails"),

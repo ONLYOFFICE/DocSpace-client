@@ -272,6 +272,8 @@ export type TMigrationUser = {
   shouldImport: boolean;
 };
 
+export type TEnhancedMigrationUser = TMigrationUser & { isDuplicate: boolean };
+
 export type TMigrationStatusResult = {
   migratorName: TWorkspaceService;
   operation: MigrationOperation;

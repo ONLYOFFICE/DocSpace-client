@@ -35,7 +35,6 @@ import BenefitsContainer from "SRC_DIR/components/StandaloneComponents/BenefitsC
 import StyledComponent from "./StyledComponent";
 import OfficialDocumentation from "./sub-components/OfficialDocumentation";
 import ContactContainer from "SRC_DIR/components/StandaloneComponents/ContactContainer";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const Bonus = ({ standaloneInit, isInitPaymentPage, organizationName }) => {
   const { t, ready } = useTranslation("PaymentsEnterprise");
@@ -51,7 +50,6 @@ const Bonus = ({ standaloneInit, isInitPaymentPage, organizationName }) => {
       <BenefitsContainer />
       <Text fontWeight={600}>
         {t("UpgradeToProBannerInstructionHeader", {
-          productName: PRODUCT_NAME,
           organizationName,
         })}
       </Text>

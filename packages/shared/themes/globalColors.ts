@@ -87,6 +87,4 @@ export const globalColors = {
 
   grayMaxLight: "#eeeeee",
   shuttleGrey: "#63686A",
-  blueMain: "#2DA7DB",
-  red: "#c30",
 };

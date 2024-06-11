@@ -102,8 +102,6 @@ const {
 
   grayMaxLight,
   shuttleGrey,
-  blueMain,
-  red,
 } = globalColors;
 
 export const getBaseTheme = () => {
@@ -496,29 +494,8 @@ export const getBaseTheme = () => {
 
       focusColor: gray,
 
-      errorColor: "#F21C0E",
+      errorColor: lightErrorStatus,
     },
-
-    // slider: {
-    //   sliderBarColorProgress: blueMain,
-    //   sliderBarColorProgressDisabled: grayStrong,
-    //   sliderBarColor: grayLightMid,
-    //   sliderBarDisableColor: grayLightMid,
-
-    //   sliderBarBorderActive: `1px solid ${globalColors.grayStrong}`,
-    //   sliderBarBorderDisable: `1px solid ${globalColors.grayStrong}`,
-
-    //   thumbFillDisable: grayLightMid,
-    //   thumbFillActive: grayLightMid,
-
-    //   thumbBorderColorActive: `1px solid ${globalColors.gray}`,
-    //   thumbBorderColorDisable: `1px solid ${globalColors.grayStrong}`,
-
-    //   sliderWidth: "202px",
-
-    //   arrowHover: blueMain,
-    //   arrowColor: grayStrong,
-    // },
 
     viewSelector: {
       fillColor: white,
@@ -697,19 +674,19 @@ export const getBaseTheme = () => {
       border: "solid 1px",
 
       borderColor: grayStrong,
-      errorBorderColor: "#F21C0E",
-      warningBorderColor: lightErrorStatus,
+      errorBorderColor: lightErrorStatus,
+      warningBorderColor: lightStatusWarning,
       disabledBorderColor: grayLightMid,
 
       hoverBorderColor: gray,
-      hoverErrorBorderColor: red,
-      hoverWarningBorderColor: lightErrorStatus,
-      lightToastWarningBorderColor: lightErrorStatus,
+      hoverErrorBorderColor: lightErrorStatus,
+      hoverWarningBorderColor: lightStatusWarning,
+      lightToastWarningBorderColor: lightStatusWarning,
       hoverDisabledBorderColor: grayLightMid,
 
-      focusBorderColor: blueMain,
-      focusErrorBorderColor: red,
-      focusWarningBorderColor: lightErrorStatus,
+      focusBorderColor: lightSecondMain,
+      focusErrorBorderColor: lightErrorStatus,
+      focusWarningBorderColor: lightStatusWarning,
       focusDisabledBorderColor: grayLightMid,
     },
 
@@ -824,9 +801,9 @@ export const getBaseTheme = () => {
     },
 
     inputPhone: {
-      activeBorderColor: blueMain,
+      activeBorderColor: lightSecondMain,
       inactiveBorderColor: grayStrong,
-      errorBorderColor: "#f21c0e",
+      errorBorderColor: lightErrorStatus,
       backgroundColor: white,
       color: black,
       scrollBackground: gray,
@@ -884,7 +861,7 @@ export const getBaseTheme = () => {
       padding: "2px 0px 2px 2px",
       margin: "0",
 
-      borderColor: blueMain,
+      borderColor: lightSecondMain,
 
       iconColor: gray,
       hoverIconColor: lightGrayDark,
@@ -893,8 +870,8 @@ export const getBaseTheme = () => {
     textArea: {
       disabledColor: grayLight,
 
-      focusBorderColor: blueMain,
-      focusErrorBorderColor: red,
+      focusBorderColor: lightSecondMain,
+      focusErrorBorderColor: lightErrorStatus,
       focusOutline: "none",
 
       scrollWidth: "100%",
@@ -1064,7 +1041,7 @@ export const getBaseTheme = () => {
       },
 
       errorLabel: {
-        color: "#F21C0E",
+        color: lightErrorStatus,
       },
     },
 
@@ -1123,7 +1100,7 @@ export const getBaseTheme = () => {
       },
 
       imageContainer: {
-        backgroundImage: blueMain,
+        backgroundImage: lightSecondMain,
         background: grayStrong,
         groupBackground: grayLightMid,
         borderRadius: "50%",
@@ -1602,13 +1579,13 @@ export const getBaseTheme = () => {
 
         border: `1px solid ${grayStrong}`,
         borderRadius: "3px",
-        borderColor: blueMain,
-        openBorderColor: blueMain,
+        borderColor: lightSecondMain,
+        openBorderColor: lightSecondMain,
         disabledBorderColor: grayLightMid,
         disabledBackground: grayLight,
 
         hoverBorderColor: gray,
-        hoverBorderColorOpen: blueMain,
+        hoverBorderColorOpen: lightSecondMain,
         hoverDisabledBorderColor: grayLightMid,
 
         hoverBackgroundModernView: grayLightMid,
@@ -1712,7 +1689,7 @@ export const getBaseTheme = () => {
       contentPadding: "0 16px 16px",
       bodyPadding: "16px 0",
       backgroundColor: white,
-      inputBorder: blueMain,
+      inputBorder: lightSecondMain,
       iconPadding: "8px 8px 7px 0px",
 
       contentMaxWidth: "500px",
@@ -1828,7 +1805,7 @@ export const getBaseTheme = () => {
 
       paymentAlert: {
         color: lightStatusWarning,
-        warningColor: "#F21C0E",
+        warningColor: lightErrorStatus,
       },
 
       teamTrainingAlert: {
@@ -1997,7 +1974,7 @@ export const getBaseTheme = () => {
       borderColor: grayLightMid,
       thumbnailBorderColor: grayLightMid,
       textColor: black,
-      errorColor: "#F21C0E",
+      errorColor: lightErrorStatus,
 
       closeButtonWrapperPadding: "0px",
       closeButtonIcon: white,
@@ -2063,12 +2040,8 @@ export const getBaseTheme = () => {
         androidHoverColor: "#9BD71C",
         iosHoverColor: darkBlack,
       },
-      thirdPartyList: {
-        color: "#818b91",
-        linkColor: grayText,
-      },
       devTools: {
-        border: "1px solid #DFE2E3",
+        border: `1px solid ${lightGraySelected}`,
         color: gray,
       },
     },
@@ -2162,7 +2135,7 @@ export const getBaseTheme = () => {
         borderHoverImageSource: `linear-gradient(to right,${white} 0px,${grayLightMid} 0px,${grayLightMid} 100% ,${white} 100%)`,
 
         lengthenBorderImageSource: `linear-gradient(to right, ${grayLightMid}, ${grayLightMid})`,
-        hotkeyBorderBottom: `1px solid ${globalColors.blueMain}`,
+        hotkeyBorderBottom: `1px solid ${lightSecondMain}`,
 
         settingsIconDisableColor: grayStrong,
       },
@@ -2200,15 +2173,15 @@ export const getBaseTheme = () => {
         },
 
         row: {
-          checkboxChecked: `linear-gradient(to right, #f3f4f4 24px, ${grayLightMid} 24px)`,
+          checkboxChecked: `linear-gradient(to right, ${lightGrayHover} 24px, ${grayLightMid} 24px)`,
           checkboxDragging: `linear-gradient(to right, ${dndColor} 24px, ${grayLightMid} 24px)`,
           checkboxDraggingHover: `linear-gradient(to right, ${dndHoverColor} 24px, ${grayLightMid} 24px)`,
 
-          contextMenuWrapperChecked: `linear-gradient(to left, #f3f4f4 24px, ${grayLightMid} 24px)`,
+          contextMenuWrapperChecked: `linear-gradient(to left, ${lightGrayHover} 24px, ${grayLightMid} 24px)`,
           contextMenuWrapperDragging: `border-image-source: linear-gradient(to left, ${dndColor} 24px, ${grayLightMid} 24px)`,
           contextMenuWrapperDraggingHover: `linear-gradient(to left, ${dndHoverColor} 24px,${grayLightMid} 24px)`,
 
-          backgroundActive: `#F3F4F4`,
+          backgroundActive: lightGrayHover,
 
           borderImageCheckbox: `linear-gradient(to right, ${white} 24px, ${grayLightMid} 24px)`,
           borderImageContextMenu: `linear-gradient(to left, ${white} 24px, ${grayLightMid} 24px)`,
@@ -2260,7 +2233,7 @@ export const getBaseTheme = () => {
 
       searcher: {
         hoverBorderColor: grayStrong,
-        focusBorderColor: blueMain,
+        focusBorderColor: lightSecondMain,
         placeholderColor: gray,
       },
     },
@@ -2366,7 +2339,7 @@ export const getBaseTheme = () => {
           background: "none",
           hoverBackground: grayLight,
           borderColor: grayLightMid,
-          isOpenBorderColor: blueMain,
+          isOpenBorderColor: lightSecondMain,
           descriptionText: gray,
         },
         dropdownItem: {
@@ -2425,7 +2398,7 @@ export const getBaseTheme = () => {
           background: white,
           dropdownBorderColor: grayStrong,
           hoverDropdownBorderColor: gray,
-          isOpenDropdownBorderColor: blueMain,
+          isOpenDropdownBorderColor: lightSecondMain,
           arrowFill: gray,
         },
         folderInput: {
@@ -2618,7 +2591,7 @@ export const getBaseTheme = () => {
         },
 
         loadingButton: {
-          color: blueMain,
+          color: lightSecondMain,
           background: white,
         },
       },
@@ -2714,7 +2687,7 @@ export const getBaseTheme = () => {
         background: globalColors.lightGrayHover,
         itemBackground: white,
         itemBorder: grayStrong,
-        itemActiveBorder: blueMain,
+        itemActiveBorder: lightSecondMain,
       },
 
       row: {
@@ -2818,7 +2791,7 @@ export const getBaseTheme = () => {
       },
 
       deleteUser: {
-        textColor: red,
+        textColor: lightErrorStatus,
       },
 
       deleteSelf: {
@@ -2836,8 +2809,8 @@ export const getBaseTheme = () => {
 
     client: {
       about: {
-        linkColor: blueMain,
-        border: "1px solid lightgray",
+        linkColor: lightSecondMain,
+        border: `1px solid ${gray}`,
         logoColor: black,
       },
 
@@ -2851,7 +2824,7 @@ export const getBaseTheme = () => {
       confirm: {
         activateUser: {
           textColor: "#116d9d",
-          textColorError: red,
+          textColorError: lightErrorStatus,
         },
         change: {
           titleColor: "#116d9d",
@@ -2860,12 +2833,12 @@ export const getBaseTheme = () => {
 
       home: {
         logoColor: black,
-        textColorError: red,
+        textColorError: lightErrorStatus,
       },
 
       payments: {
         linkColor: link,
-        delayColor: "#F21C0E",
+        delayColor: lightErrorStatus,
       },
 
       settings: {
@@ -2886,7 +2859,7 @@ export const getBaseTheme = () => {
 
           admins: {
             backgroundColor: black,
-            backgroundColorWrapper: blueMain,
+            backgroundColorWrapper: lightSecondMain,
             roleColor: grayStrong,
 
             color: link,
@@ -2898,7 +2871,7 @@ export const getBaseTheme = () => {
             pendingNameColor: gray,
 
             textColor: white,
-            iconColor: blueMain,
+            iconColor: lightSecondMain,
           },
 
           owner: {
@@ -2953,14 +2926,14 @@ export const getBaseTheme = () => {
           },
 
           smtp: {
-            requirementColor: "#F21C0E",
+            requirementColor: lightErrorStatus,
           },
         },
 
         backup: {
           rectangleBackgroundColor: grayLight,
           separatorBorder: `1px solid ${grayLightMid}`,
-          warningColor: "#f21c0e",
+          warningColor: lightErrorStatus,
           textColor: gray,
           backupCheckedListItemBackground: lightGrayHover,
         },
@@ -2996,7 +2969,7 @@ export const getBaseTheme = () => {
             linkColor: lightGrayDark,
           },
 
-          warningColor: "#F21C0E",
+          warningColor: lightErrorStatus,
           color: "#F97A0B",
         },
 
@@ -3009,7 +2982,7 @@ export const getBaseTheme = () => {
           fileInputIconColor: gray,
           infoBlockBackground: grayLight,
           infoBlockTextColor: grayText,
-          errorTextColor: "#F21C0E",
+          errorTextColor: lightErrorStatus,
           existingTextColor: "#2db482",
           tableHeaderText: gray,
           tableRowHoverColor: lightGrayHover,
@@ -3044,7 +3017,7 @@ export const getBaseTheme = () => {
       color: darkBlack,
 
       btnColor: white,
-      btnBackgroundActive: blueMain,
+      btnBackgroundActive: lightSecondMain,
     },
 
     tileLoader: {
@@ -3123,7 +3096,7 @@ export const getBaseTheme = () => {
       backgroundColor: lightGrayHover,
       colorPercentSmall: black,
       colorPercentBig: white,
-      errorTextColor: "#F21C0E",
+      errorTextColor: lightErrorStatus,
       descriptionTextColor: gray,
     },
 
@@ -3170,7 +3143,7 @@ export const getBaseTheme = () => {
     editLink: {
       text: {
         color: gray,
-        errorColor: "#F21C0E",
+        errorColor: lightErrorStatus,
       },
     },
 

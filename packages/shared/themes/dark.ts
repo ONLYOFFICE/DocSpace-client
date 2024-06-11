@@ -91,8 +91,6 @@ const {
 
   grayMaxLight,
   shuttleGrey,
-  blueMain,
-  red,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -486,27 +484,6 @@ const Dark: TTheme = {
     errorColor: darkErrorStatus,
   },
 
-  // slider: {
-  //   sliderBarColorProgress: blueMain,
-  //   sliderBarColorProgressDisabled: grayStrong,
-  //   sliderBarColor: grayLightMid,
-  //   sliderBarDisableColor: grayLightMid,
-
-  //   sliderBarBorderActive: `1px solid ${globalColors.grayStrong}`,
-  //   sliderBarBorderDisable: `1px solid ${globalColors.grayStrong}`,
-
-  //   thumbFillDisable: grayLightMid,
-  //   thumbFillActive: grayLightMid,
-
-  //   thumbBorderColorActive: `1px solid ${globalColors.gray}`,
-  //   thumbBorderColorDisable: `1px solid ${globalColors.grayStrong}`,
-
-  //   sliderWidth: "202px",
-
-  //   arrowHover: blueMain,
-  //   arrowColor: grayStrong,
-  // },
-
   viewSelector: {
     fillColor: black,
     checkedFillColor: grayDark,
@@ -685,17 +662,17 @@ const Dark: TTheme = {
 
     borderColor: grayDarkStrong,
     errorBorderColor: darkErrorStatus,
-    warningBorderColor: darkErrorStatus,
+    warningBorderColor: darkStatusWarning,
     disabledBorderColor: grayDarkStrong,
 
     hoverBorderColor: grayDark,
     hoverErrorBorderColor: darkErrorStatus,
-    hoverWarningBorderColor: darkErrorStatus,
+    hoverWarningBorderColor: darkStatusWarning,
     hoverDisabledBorderColor: grayDarkStrong,
 
     focusBorderColor: grayMaxLight,
     focusErrorBorderColor: darkErrorStatus,
-    focusWarningBorderColor: darkErrorStatus,
+    focusWarningBorderColor: darkStatusWarning,
     focusDisabledBorderColor: grayDarkStrong,
   },
 
@@ -809,9 +786,9 @@ const Dark: TTheme = {
   },
 
   inputPhone: {
-    activeBorderColor: blueMain,
+    activeBorderColor: lightSecondMain,
     inactiveBorderColor: grayDarkStrong,
-    errorBorderColor: "#f21c0e",
+    errorBorderColor: darkErrorStatus,
     backgroundColor: black,
     color: white,
     scrollBackground: grayDark,
@@ -1387,10 +1364,10 @@ const Dark: TTheme = {
       warning: "#292929",
     },
     border: {
-      success: "2px solid #9de051",
-      error: "2px solid #e0b051",
-      info: "2px solid #e0d751",
-      warning: "2px solid #e07751",
+      success: `2px solid ${darkToastDone}`,
+      error: `2px solid ${darkToastAlert}`,
+      info: `2px solid ${darkToastInfo}`,
+      warning: `2px solid ${darkToastWarning}`,
     },
 
     zIndex: "9999",
@@ -1700,7 +1677,7 @@ const Dark: TTheme = {
     contentPadding: "0 16px 16px",
     bodyPadding: "16px 0",
     backgroundColor: black,
-    inputBorder: blueMain,
+    inputBorder: lightSecondMain,
     iconPadding: "8px 8px 7px 0px",
 
     contentMaxWidth: "500px",
@@ -2051,11 +2028,6 @@ const Dark: TTheme = {
       androidHoverColor: "#9BD71C",
       iosHoverColor: white,
     },
-
-    thirdPartyList: {
-      color: "#818b91",
-      linkColor: "#DDDDDD",
-    },
     devTools: {
       border: `1px solid ${grayDarkStrong}`,
       color: grayDark,
@@ -2148,7 +2120,7 @@ const Dark: TTheme = {
       borderImageSource: `linear-gradient(to right,${black} 21px,${grayDarkStrong} 21px,${grayDarkStrong} calc(100% - 20px),${black} calc(100% - 20px))`,
       borderHoverImageSource: `linear-gradient(to right,${black} 0px,${grayDarkStrong} 0px,${grayDarkStrong} 100% ,${black} 100%)`,
       lengthenBorderImageSource: `linear-gradient(to right, ${grayDarkStrong}, ${grayDarkStrong})`,
-      hotkeyBorderBottom: `1px solid ${globalColors.blueMain}`,
+      hotkeyBorderBottom: `1px solid ${lightSecondMain}`,
 
       settingsIconDisableColor: grayDarkStrong,
     },
@@ -2803,7 +2775,7 @@ const Dark: TTheme = {
     },
 
     deleteUser: {
-      textColor: red,
+      textColor: darkErrorStatus,
     },
 
     deleteSelf: {
@@ -2836,7 +2808,7 @@ const Dark: TTheme = {
     confirm: {
       activateUser: {
         textColor: darkLink,
-        textColorError: red,
+        textColorError: darkErrorStatus,
       },
       change: {
         titleColor: darkLink,
@@ -2845,12 +2817,12 @@ const Dark: TTheme = {
 
     home: {
       logoColor: "rgba(255, 255, 255, 0.92)",
-      textColorError: red,
+      textColorError: darkErrorStatus,
     },
 
     payments: {
       linkColor: darkLink,
-      delayColor: "#F21C0E",
+      delayColor: darkErrorStatus,
     },
 
     settings: {
@@ -2871,7 +2843,7 @@ const Dark: TTheme = {
 
         admins: {
           backgroundColor: black,
-          backgroundColorWrapper: blueMain,
+          backgroundColorWrapper: lightSecondMain,
           roleColor: grayStrong,
 
           color: darkLink,
@@ -2883,7 +2855,7 @@ const Dark: TTheme = {
           pendingNameColor: grayDark,
 
           textColor: black,
-          iconColor: blueMain,
+          iconColor: lightSecondMain,
         },
 
         owner: {
@@ -3026,7 +2998,7 @@ const Dark: TTheme = {
     color: darkBlack,
 
     btnColor: black,
-    btnBackgroundActive: blueMain,
+    btnBackgroundActive: lightSecondMain,
   },
 
   tileLoader: {
@@ -3152,7 +3124,7 @@ const Dark: TTheme = {
   editLink: {
     text: {
       color: gray,
-      errorColor: "#F21C0E",
+      errorColor: darkErrorStatus,
     },
   },
 

@@ -1,9 +1,9 @@
 {
-  "DeleteAllGroupDescription": "Seçilen gruplar silinecektir. Gruplardaki kullanıcılar {{portalName}}'den kaldırılmayacaktır. Devam etmek istediğinizden emin misiniz?",
+  "DeleteAllGroupDescription": "Seçilen gruplar silinecektir. Gruplardaki kullanıcılar {{productName}}'den kaldırılmayacaktır. Devam etmek istediğinizden emin misiniz?",
   "DeleteAllGroupsTitle": "Grupları sil",
   "DeleteFile": "Bu dosyayı silmek üzeresiniz. ",
   "DeleteFolder": "Bu klasörü silmek üzeresiniz. ",
-  "DeleteGroupDescription": "Grup {{groupName}} silinecektir. Gruptaki kullanıcılar {{portalName}}'den kaldırılmayacaktır. Devam etmek istediğinizden emin misiniz?",
+  "DeleteGroupDescription": "Grup {{groupName}} silinecektir. Gruptaki kullanıcılar {{productName}}'den kaldırılmayacaktır. Devam etmek istediğinizden emin misiniz?",
   "DeleteGroupTitle": "Grubu sil",
   "DeleteItems": "Bu öğeleri silmek üzeresiniz. ",
   "DeleteItemsSharedNote": "Bunları birisiyle paylaştıysanız kullanılamayacaklarını lütfen unutmayın.",

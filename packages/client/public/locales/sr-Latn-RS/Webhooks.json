@@ -46,7 +46,7 @@
   "URL": "URL",
   "ViewRawPayload": "Pogledaj sirovi payload",
   "WebhookCreated": "Webhook kreiran",
-  "WebhookCreationHint": "Ovaj Webhook će biti dodeljen svim događajima u {{portalName}}-u",
+  "WebhookCreationHint": "Ovaj Webhook će biti dodeljen svim događajima u {{productName}}-u",
   "WebhookDetails": "Webhook detalji",
   "WebhookEditedSuccessfully": "Webhook konfiguracija uspešno uređena",
   "WebhookHistory": "Webhook istorija",
@@ -55,5 +55,5 @@
   "WebhookRemoved": "Webhook uklonjen",
   "Webhooks": "Webhooks",
   "WebhooksGuide": "Webhooks Vodič",
-  "WebhooksInfo": "Koristite webhooks da biste izvršili prilagođene akcije na strani bilo koje aplikacije ili web stranice koju koristite na osnovu različitih događaja u ONLYOFFICE {{portalName}}-u. Ovde možete kreirati i upravljati svim svojim webhook-ovima, konfigurisati ih i pregledati istoriju svakog webhook-a kako biste proverili njihovu izvedbu."
+  "WebhooksInfo": "Koristite webhooks da biste izvršili prilagođene akcije na strani bilo koje aplikacije ili web stranice koju koristite na osnovu različitih događaja u {{organizationName}} {{productName}}-u. Ovde možete kreirati i upravljati svim svojim webhook-ovima, konfigurisati ih i pregledati istoriju svakog webhook-a kako biste proverili njihovu izvedbu."
 }

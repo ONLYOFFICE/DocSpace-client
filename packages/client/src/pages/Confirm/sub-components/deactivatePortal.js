@@ -44,7 +44,7 @@ import withLoader from "../withLoader";
 
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const DeactivatePortal = (props) => {
   const { t, greetingTitle, linkData, companyInfoSettingsData } = props;
@@ -93,7 +93,7 @@ const DeactivatePortal = (props) => {
             ) : (
               <>
                 <Text className="subtitle">
-                  {t("PortalDeactivateTitle", { portalName: PORTAL })}
+                  {t("PortalDeactivateTitle", { productName: PRODUCT_NAME })}
                 </Text>
                 <ButtonsWrapper>
                   <Button

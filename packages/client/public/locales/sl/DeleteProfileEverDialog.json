@@ -1,5 +1,5 @@
 {
-  "ActionCannotBeUndone": "Izbrani onemogočeni uporabniki bodo odstranjeni iz {{portalName}}. Tega dejanja ni mogoče razveljaviti.",
+  "ActionCannotBeUndone": "Izbrani onemogočeni uporabniki bodo odstranjeni iz {{productName}}. Tega dejanja ni mogoče razveljaviti.",
   "CannotReassignFiles": "Če izbrišete več uporabnikov hkrati, ne morete dodeliti njihovih datotek drugim uporabnikom.",
   "DeleteGroupUsersSuccessMessage": "Uporabniki so bili uspešno izbrisani.",
   "DeleteMyDocumentsUser": "Vse osebne datoteke in mape v razdelku Moji dokumenti tega uporabnika bodo trajno izbrisane.",

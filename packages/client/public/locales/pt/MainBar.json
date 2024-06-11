@@ -1,18 +1,18 @@
 {
   "ClickHere": "Clique aqui",
   "ConfirmEmailDescription": "Utilizar a ligação fornecida no e-mail de ativação. Ainda não recebeu um e-mail com o link de ativação?",
-  "ConfirmEmailHeader": "Por favor, confirme o seu email ({{ email }}) para ter acesso às funcionalidades do {{portalName}}.",
+  "ConfirmEmailHeader": "Por favor, confirme o seu email ({{ email }}) para ter acesso às funcionalidades do {{productName}}.",
   "PersonalUserQuotaAdminsDescription": "Para fazer upload e criar novos arquivos e pastas, libere espaço em disco ou gerencie a cota por usuário nas <1>Configurações de gerenciamento de armazenamento.</1>",
   "PersonalUserQuotaDescription": "Para fazer upload e criar novos arquivos e pastas, libere espaço em disco ou entre em contato com o administrador para aumentar a cota de armazenamento.",
   "RequestActivation": "Solicitar a ativação novamente",
-  "RoomQuotaDescription": "Pode arquivar as salas desnecessárias ou <1>{{clickHere}}</1> para encontrar um plano de preços mais adequado para o seu {{portalName}}.",
+  "RoomQuotaDescription": "Pode arquivar as salas desnecessárias ou <1>{{clickHere}}</1> para encontrar um plano de preços mais adequado para o seu {{productName}}.",
   "RoomQuotaHeader": "Salas que estão prestes a ser excedidas: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Os limites de armazenamento e de salas estão prestes a ser excedidos.",
   "StorageAndUserHeader": "Os limites para o armazenamento e para o número de administradores/utilizadores com poder estão prestes a ser excedidos.",
-  "StorageQuotaDescription": "Pode remover os ficheiros desnecessários ou <1>{{clickHere}}</1> para encontrar um plano de preços mais adequado para o seu {{portalName}}.",
+  "StorageQuotaDescription": "Pode remover os ficheiros desnecessários ou <1>{{clickHere}}</1> para encontrar um plano de preços mais adequado para o seu {{productName}}.",
   "StorageQuotaExceeded": "Cota de armazenamento excedida",
   "StorageQuotaHeader": "A capacidade de armazenamento do espaço está prestes a ser excedida: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Você pode remover os arquivos desnecessários ou alterar a cota nas <1>Configurações de gerenciamento de armazenamento.</1>",
-  "UserQuotaDescription": "<1>{{clickHere}}</1> para encontrar um plano de preços melhor para o seu {{portalName}}.",
+  "UserQuotaDescription": "<1>{{clickHere}}</1> para encontrar um plano de preços melhor para o seu {{productName}}.",
   "UserQuotaHeader": "O número de administradores/utilizadores com poder está prestes a ser excedido: {{currentValue}} / {{maxValue}}."
 }

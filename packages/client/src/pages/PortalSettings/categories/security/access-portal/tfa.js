@@ -41,7 +41,7 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 
 import TfaLoader from "../sub-components/loaders/tfa-loader";
 import { DeviceType } from "@docspace/shared/enums";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -175,7 +175,7 @@ const TwoFactorAuth = (props) => {
     <MainContainer>
       <LearnMoreWrapper>
         <Text fontSize="13px" fontWeight="400">
-          {t("TwoFactorAuthEnableDescription", { portalName: PORTAL })}
+          {t("TwoFactorAuthEnableDescription", { productName: PRODUCT_NAME })}
         </Text>
         <Link
           className="link-learn-more"

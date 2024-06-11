@@ -1,5 +1,5 @@
 {
-  "Desc": "Veuillez configurer les données d'enregistrement de {{portalName}}.",
+  "Desc": "Veuillez configurer les données d'enregistrement de {{productName}}.",
   "ErrorEmail": "Adresse mail invalide",
   "ErrorInitWizard": "Le service est actuellement indisponible, merci de réessayer ultérieurement.",
   "ErrorInitWizardButton": "Réessayer",
@@ -11,5 +11,5 @@
   "LicenseLink": "Accords de licence",
   "PlaceholderLicense": "Votre fichier de licence",
   "Timezone": "Fuseau horaire :",
-  "WelcomeTitle": "Bienvenue dans votre {{portalName}} !"
+  "WelcomeTitle": "Bienvenue dans votre {{productName}} !"
 }

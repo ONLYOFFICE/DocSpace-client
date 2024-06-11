@@ -34,6 +34,7 @@ import { FolderType } from "@docspace/shared/enums";
 import type { IInitialConfig } from "@/types";
 
 import { IS_VIEW } from "./constants";
+import { BRAND_NAME } from "@docspace/shared/constants";
 
 export const getBackUrl = (
   rootFolderType: FolderType,
@@ -160,7 +161,7 @@ export const setDocumentTitle = (
   successAuth: boolean,
   callback?: (value: string) => void,
 ) => {
-  const organizationName = "ONLYOFFICE"; //TODO: Replace to API variant
+  const organizationName = BRAND_NAME; //TODO: Replace to API variant
   const moduleTitle = "Documents"; //TODO: Replace to API variant
 
   let newSubTitle = subTitle;

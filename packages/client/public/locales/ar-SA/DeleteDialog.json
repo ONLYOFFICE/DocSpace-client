@@ -1,9 +1,9 @@
 {
-  "DeleteAllGroupDescription": "سيتم حذف المجموعات المحددة. لن تتم إزالة المستخدمين في المجموعات من {{portalName}}. هل أنت متأكد أنك تريد المتابعة؟",
+  "DeleteAllGroupDescription": "سيتم حذف المجموعات المحددة. لن تتم إزالة المستخدمين في المجموعات من {{productName}}. هل أنت متأكد أنك تريد المتابعة؟",
   "DeleteAllGroupsTitle": "حذف المجموعات",
   "DeleteFile": "أنت على وشك حذف هذا الملف.",
   "DeleteFolder": "أنت على وشك حذف هذا المجلد.",
-  "DeleteGroupDescription": "سيتم حذف المجموعة {{groupName}}. لن تتم إزالة المستخدمين في المجموعة من {{portalName}}. هل أنت متأكد أنك تريد المتابعة؟",
+  "DeleteGroupDescription": "سيتم حذف المجموعة {{groupName}}. لن تتم إزالة المستخدمين في المجموعة من {{productName}}. هل أنت متأكد أنك تريد المتابعة؟",
   "DeleteGroupTitle": "حذف المجموعة",
   "DeleteItems": "أنت على وشك حذف هذه العناصر. ",
   "DeleteItemsSharedNote": "يرجى العلم أنه إذا قمت بمشاركتهم مع أحدهم؛ فسيصبحوا غير متاحين.",

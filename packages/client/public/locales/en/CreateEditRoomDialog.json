@@ -7,9 +7,9 @@
   "FormRoomBarDescription": "This room is available to anyone with the link. External users will have Form Filler permission for all the files.",
   "Icon": "Icon",
   "MakeRoomPrivateDescription": "All files in this room will be encrypted.",
-  "MakeRoomPrivateLimitationsWarningDescription": "With this feature, you can invite only existing {{portalName}} users. After creating a room, you will not be able to change the list of users.",
+  "MakeRoomPrivateLimitationsWarningDescription": "With this feature, you can invite only existing {{productName}} users. After creating a room, you will not be able to change the list of users.",
   "MakeRoomPrivateTitle": "Make the Room Private",
-  "PeopleSelectorInfo": "Only a room admin or a {{portalName}} admin can become the owner of the room",
+  "PeopleSelectorInfo": "Only a room admin or a {{productName}} admin can become the owner of the room",
   "PublicRoomBarDescription": "This room is available to anyone with the link. External users will have View Only permission for all the files.",
   "PublicRoomSystemFoldersDescription": "System folders store copies of forms at different stages of completion. Forms that are being filled are stored in the In progress folder, and completed forms are stored in the Complete folder.",
   "PublicRoomSystemFoldersTitle": "System Folders",
@@ -21,5 +21,5 @@
   "ThirdPartyStorageDescription": "Use third-party services as data storage for this room. You can create a new folder or select the existing one in the connected storage.",
   "ThirdPartyStorageNoStorageAlert": "Before, you need to connect the corresponding service in the “Integration” section. Otherwise, the connection will not be possible.",
   "ThirdPartyStoragePermanentSettingDescription": "Files are stored in a third-party {{thirdpartyTitle}} storage in the \"{{thirdpartyFolderName}}\" folder.\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "To connect a third-party storage, you need to add the corresponding service in the Integration section of {{portalName}} settings. Contact {{portalName}} owner or administrator to enable the integration."
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "To connect a third-party storage, you need to add the corresponding service in the Integration section of {{productName}} settings. Contact {{productName}} owner or administrator to enable the integration."
 }

@@ -1,12 +1,12 @@
 {
   "AppointAdmin": "Beheerders benoemen",
-  "ChangeInstruction": "Om de {{portalName}} eigenaar te wijzigen, kiest u hieronder de naam van de nieuwe eigenaar.",
-  "ChangeOwner": "{{portalName}} eigenaar wijzigen",
+  "ChangeInstruction": "Om de {{productName}} eigenaar te wijzigen, kiest u hieronder de naam van de nieuwe eigenaar.",
+  "ChangeOwner": "{{productName}} eigenaar wijzigen",
   "ChangeUser": "Gebruiker wijzigen",
-  "DeactivateOrDeletePortal": "{{portalName}} deactiveren of verwijderen",
+  "DeactivateOrDeletePortal": "{{productName}} deactiveren of verwijderen",
   "DoTheSame": "Doe hetzelfde als beheerders",
   "ManageUser": "Gebruikersaccounts beheren",
-  "NewPortalOwner": "Nieuwe {{portalName}} eigenaar",
-  "PortalOwnerCan": "{{portalName}} eigenaar kan:",
+  "NewPortalOwner": "Nieuwe {{productName}} eigenaar",
+  "PortalOwnerCan": "{{productName}} eigenaar kan:",
   "SetAccessRights": "Toegangsrechten instellen"
 }

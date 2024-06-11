@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "Նշանակեք ադմինիստրատորներ",
-  "BackupPortal": "Պահուստային {{portalName}}-ի տվյալները",
-  "ChangeInstruction": "{{portalName}}-ի սեփականատիրոջը փոխելու համար խնդրում ենք ստորև ընտրել նոր սեփականատիրոջ անունը:",
-  "ChangeOwner": "Փոխել {{portalName}}-ի տնօրինողին",
+  "BackupPortal": "Պահուստային {{productName}}-ի տվյալները",
+  "ChangeInstruction": "{{productName}}-ի սեփականատիրոջը փոխելու համար խնդրում ենք ստորև ընտրել նոր սեփականատիրոջ անունը:",
+  "ChangeOwner": "Փոխել {{productName}}-ի տնօրինողին",
   "ChangeUser": "Փոխել օգտվողին",
-  "DeactivateOrDeletePortal": "Ապագործունացնել կամ ջնջել {{portalName}}-ը",
+  "DeactivateOrDeletePortal": "Ապագործունացնել կամ ջնջել {{productName}}-ը",
   "DoTheSame": "Արեք նույնը, ինչ ադմինիստրատորները",
-  "ManagePortal": "Կառավարել {{portalName}}-ի կազմաձևումը",
+  "ManagePortal": "Կառավարել {{productName}}-ի կազմաձևումը",
   "ManageUser": "Կառավարել օգտվողների հաշիվները",
-  "NewPortalOwner": "{{portalName}}-ի նոր սեփականատեր",
-  "PortalOwnerCan": "{{portalName}}-ի տնօրինողը կարող է",
+  "NewPortalOwner": "{{productName}}-ի նոր սեփականատեր",
+  "PortalOwnerCan": "{{productName}}-ի տնօրինողը կարող է",
   "SetAccessRights": "Սահմանել մուտքի իրավունքները"
 }

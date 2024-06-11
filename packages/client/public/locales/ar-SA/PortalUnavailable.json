@@ -1,4 +1,4 @@
 {
-  "AccessingProblem": "إذا كنت تواجه مشكلات في الوصول إلى {{portalName}} هذا، فيرجى الاتصال بالمسؤول.",
-  "ContactAdministrator": "اتصل بمسؤول {{portalName}}"
+  "AccessingProblem": "إذا كنت تواجه مشكلات في الوصول إلى {{productName}} هذا، فيرجى الاتصال بالمسؤول.",
+  "ContactAdministrator": "اتصل بمسؤول {{productName}}"
 }

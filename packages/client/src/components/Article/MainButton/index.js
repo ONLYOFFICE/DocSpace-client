@@ -69,7 +69,7 @@ import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { getCorrectFourValuesStyle } from "@docspace/shared/utils";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledButton = styled(Button)`
   font-weight: 700;
@@ -375,7 +375,7 @@ const ArticleMainButtonContent = (props) => {
         id: "actions_upload-from-docspace",
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
-        label: t("Common:FromDocSpace"),
+        label: t("Common:FromPortal", { productName: PRODUCT_NAME }),
         key: "actions_upload-from-docspace",
         disabled: false,
         onClick: () =>
@@ -386,7 +386,7 @@ const ArticleMainButtonContent = (props) => {
         id: "actions_upload-from-device",
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
-        label: t("Common:FromDocspace", { portalName: PORTAL }),
+        label: t("Common:FromDevice"),
         key: "actions_upload-from-device",
         onClick: onUploadPDFFilesClick,
         disabled: false,
@@ -624,7 +624,7 @@ const ArticleMainButtonContent = (props) => {
               id: "invite_doc-space-administrator",
               className: "main-button_drop-down",
               icon: PersonAdminReactSvgUrl,
-              label: t("Common:DocspaceAdmin", { portalName: PORTAL }),
+              label: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
               onClick: onInvite,
               action: EmployeeType.Admin,
               key: "administrator",

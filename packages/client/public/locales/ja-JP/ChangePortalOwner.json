@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "管理者の選任",
-  "BackupPortal": "{{portalName}}データをバックアップする",
-  "ChangeInstruction": "{{portalName}}の所有者を変更する場合は、新しい所有者の名前を以下で選択してください。",
-  "ChangeOwner": "{{portalName}}の所有者を変更する",
+  "BackupPortal": "{{productName}}データをバックアップする",
+  "ChangeInstruction": "{{productName}}の所有者を変更する場合は、新しい所有者の名前を以下で選択してください。",
+  "ChangeOwner": "{{productName}}の所有者を変更する",
   "ChangeUser": "ユーザーを変更する",
-  "DeactivateOrDeletePortal": "{{portalName}}を停止する、または解除する",
+  "DeactivateOrDeletePortal": "{{productName}}を停止する、または解除する",
   "DoTheSame": "管理者と同じように行う",
-  "ManagePortal": "{{portalName}}構成を管理する",
+  "ManagePortal": "{{productName}}構成を管理する",
   "ManageUser": "ユーザーアカウントを管理する",
-  "NewPortalOwner": "新しい{{portalName}}の所有者",
-  "PortalOwnerCan": "{{portalName}}の所有者のアクセス権：",
+  "NewPortalOwner": "新しい{{productName}}の所有者",
+  "PortalOwnerCan": "{{productName}}の所有者のアクセス権：",
   "SetAccessRights": "アクセス権を設定する"
 }

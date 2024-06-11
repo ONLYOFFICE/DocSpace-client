@@ -1,13 +1,13 @@
 {
   "ActionsWithFilesDescription": "سيقوم الشارات بإخطارك بالإجراءات مثل التحميل والإنشاء والتغييرات في الملفات.",
   "Badges": "شارات",
-  "DailyFeed": "تغذية يومية لـ {{portalName}}",
-  "DailyFeedDescription": "اطلع على الأخبار والفعاليات من {{portalName}} الخاص بك في ملخص يومي.",
+  "DailyFeed": "تغذية يومية لـ {{productName}}",
+  "DailyFeedDescription": "اطلع على الأخبار والفعاليات من {{productName}} الخاص بك في ملخص يومي.",
   "ManageNotifications": "إدارة",
   "Notifications": "الإشعارات",
   "RoomsActions": "الإجراءات المتعلقة بالملفات في الغرف",
   "RoomsActivity": "نشاط الغرف.",
   "RoomsActivityDescription": "اشعارات كل ساعة. ابقَ على اطلاع بجميع الأنشطة في غرفك.",
-  "UsefulTips": "نصائح مفيدة حول  {{portalName}}",
-  "UsefulTipsDescription": "احصل على دليل مفيد حول {{portalName}}"
+  "UsefulTips": "نصائح مفيدة حول  {{productName}}",
+  "UsefulTipsDescription": "احصل على دليل مفيد حول {{productName}}"
 }

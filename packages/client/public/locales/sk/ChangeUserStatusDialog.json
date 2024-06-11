@@ -1,11 +1,11 @@
 {
   "DisableGeneralDescription": "Deaktivovaných používateľov môžete neskôr v prípade potreby odstrániť alebo znovu aktivovať. Pozor, nemôžete deaktivovať používateľov, ako je Vlastník a vy sami.",
   "DisableUser": "Deaktivovať používateľa",
-  "DisableUserDescription": "Ak tohto používateľa deaktivujete, nebude sa môcť prihlásiť do {{portalName}}, pričom jeho dokumenty a údaje zostanú nezmenené.",
+  "DisableUserDescription": "Ak tohto používateľa deaktivujete, nebude sa môcť prihlásiť do {{productName}}, pričom jeho dokumenty a údaje zostanú nezmenené.",
   "DisableUsers": "Deaktivovať používateľov",
-  "DisableUsersDescription": "Ak deaktivujete týchto používateľov, nebudú sa môcť prihlásiť do  {{portalName}}, pričom ich dokumenty a údaje zostanú nezmenené.",
+  "DisableUsersDescription": "Ak deaktivujete týchto používateľov, nebudú sa môcť prihlásiť do  {{productName}}, pričom ich dokumenty a údaje zostanú nezmenené.",
   "EnableUser": "Aktivovať používateľa",
-  "EnableUserDescription": "Ak tohto používateľa aktivujete, bude sa môcť opäť prihlásiť do {{portalName}} a bude mať prístup k svojim dokumentom a údajom.",
+  "EnableUserDescription": "Ak tohto používateľa aktivujete, bude sa môcť opäť prihlásiť do {{productName}} a bude mať prístup k svojim dokumentom a údajom.",
   "EnableUsers": "Aktivovať používateľov",
-  "EnableUsersDescription": "Ak aktivujete týchto používateľov, budú sa môcť opäť prihlásiť do {{portalName}} a získajú prístup k svojim dokumentom a údajom."
+  "EnableUsersDescription": "Ak aktivujete týchto používateľov, budú sa môcť opäť prihlásiť do {{productName}} a získajú prístup k svojim dokumentom a údajom."
 }

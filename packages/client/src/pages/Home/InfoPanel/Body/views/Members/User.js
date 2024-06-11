@@ -43,7 +43,7 @@ import { StyledUserTypeHeader } from "../../styles/members";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Link } from "@docspace/shared/components/link";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const User = ({
   t,
@@ -249,7 +249,7 @@ const User = ({
 
   const typeLabel =
     (type === "user" && userRole?.type !== type) ||
-    (userRole?.type === "manager" && type !== "admin")
+    (userRole?.type === "manager" && type !== "admin" && type !== "owner")
       ? getUserTypeLabel(userRole?.type, t)
       : getUserTypeLabel(type, t);
 
@@ -289,8 +289,8 @@ const User = ({
 
   const tooltipContent = `${
     user.isOwner
-      ? t("Common:DocspaceOwner", { portalName: PORTAL })
-      : t("Common:DocspaceAdmin", { portalName: PORTAL })
+      ? t("Common:DocspaceOwner", { productName: PRODUCT_NAME })
+      : t("Common:DocspaceAdmin", { productName: PRODUCT_NAME })
   }. ${t("Common:HasFullAccess")}`;
 
   return user.isTitle ? (

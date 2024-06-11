@@ -1,18 +1,18 @@
 {
   "ClickHere": "Kliknij tutaj",
   "ConfirmEmailDescription": "Użyj linku otrzymanego w e-mailu aktywacyjnym. E-mail z linkiem aktywacyjnym nie dotarł?",
-  "ConfirmEmailHeader": "Aktywuj swój adres e-mail ({{ email }}), aby uzyskać dostęp do funkcji {{portalName}}.",
+  "ConfirmEmailHeader": "Aktywuj swój adres e-mail ({{ email }}), aby uzyskać dostęp do funkcji {{productName}}.",
   "PersonalUserQuotaAdminsDescription": "Aby móc przesyłać i tworzyć nowe pliki oraz katalogi, zwolnij miejsce na dysku lub zmień limit pamięci na użytkownika w <1>ustawieniach zarządzania pamięcią.</1>",
   "PersonalUserQuotaDescription": "Aby móc przesyłać i tworzyć nowe pliki oraz katalogi, zwolnij miejsce na dysku lub skontaktuj się z administratorem, aby zwiększyć limit pamięci.",
   "RequestActivation": "Poproś o aktywację jeszcze raz",
-  "RoomQuotaDescription": "Możesz zarchiwizować niepotrzebne pokoje lub <1>{{clickHere}}</1>, aby znaleźć bardziej odpowiedni plan cenowy dla swojego konta {{portalName}}.",
+  "RoomQuotaDescription": "Możesz zarchiwizować niepotrzebne pokoje lub <1>{{clickHere}}</1>, aby znaleźć bardziej odpowiedni plan cenowy dla swojego konta {{productName}}.",
   "RoomQuotaHeader": "Liczba pokoi zostanie niedługo przekroczona: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Limity pamięci i pokoi zostaną wkrótce przekroczone.",
   "StorageAndUserHeader": "Limity pamięci/użytkowników z większą liczbą uprawnień zostaną wkrótce przekroczone.",
-  "StorageQuotaDescription": "Możesz usunąć niepotrzebne pliki lub <1>{{clickHere}}</1>, aby znaleźć bardziej odpowiedni plan cenowy dla swojego konta {{portalName}}.",
+  "StorageQuotaDescription": "Możesz usunąć niepotrzebne pliki lub <1>{{clickHere}}</1>, aby znaleźć bardziej odpowiedni plan cenowy dla swojego konta {{productName}}.",
   "StorageQuotaExceeded": "Przekroczono limit pamięci",
   "StorageQuotaHeader": "Ilość miejsca w pamięci zostanie wkrótce przekroczona: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Możesz usunąć niepotrzebne pliki lub zmienić limit w <1>ustawieniach zarządzania pamięcią.</1>",
-  "UserQuotaDescription": "<1>{{clickHere}}</1>, aby znaleźć lepszy plan cenowy dla swojego {{portalName}}.",
+  "UserQuotaDescription": "<1>{{clickHere}}</1>, aby znaleźć lepszy plan cenowy dla swojego {{productName}}.",
   "UserQuotaHeader": "Liczba administratorów/użytkowników z większą liczbą uprawnień zostanie wkrótce przekroczona: {{currentValue}} / {{maxValue}}."
 }

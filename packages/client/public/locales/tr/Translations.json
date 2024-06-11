@@ -34,7 +34,7 @@
   "RoleEditorDescription": "Mevcut dosyalarla işlemler: görüntüleme, düzenleme, form doldurma, gözden geçirme, yorum yapma.",
   "RoleFormFiller": "Form doldurucu",
   "RoleFormFillerDescription": "Mevcut dosyalarla işlemler: görüntüleme, form doldurma, gözden geçirme, yorum yapma.",
-  "RolePortalAdminDescription": "{{portalName}} yöneticileri, {{portalName}} ayarlarına erişebilir, odaları yönetebilir ve arşivleyebilir, yeni kullanıcılar davet edebilir ve kendi seviyelerinin altında roller atayabilir. Tüm yöneticilerin Kişisel bölümüne erişimi vardır.",
+  "RolePortalAdminDescription": "{{productName}} yöneticileri, {{productName}} ayarlarına erişebilir, odaları yönetebilir ve arşivleyebilir, yeni kullanıcılar davet edebilir ve kendi seviyelerinin altında roller atayabilir. Tüm yöneticilerin Kişisel bölümüne erişimi vardır.",
   "RolePowerUserDescription": "Uzman kullanıcılar odada dosya oluşturabilir ve düzenleyebilirler fakat oda oluşturamaz, kullanıcıları yönetemez veya ayarlara erişemezler.",
   "RoleReviewer": "İnceleyen",
   "RoleReviewerDescription": "Mevcut dosyalarla işlemler: görüntüleme, gözden geçirme, yorum yapma.",

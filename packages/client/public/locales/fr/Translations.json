@@ -34,7 +34,7 @@
   "RoleEditorDescription": "Opérations sur les fichiers existants : affichage, édition, remplissage de formulaires, révision, commentaires.",
   "RoleFormFiller": "Remplisseur de formulaires",
   "RoleFormFillerDescription": "Opérations sur les fichiers existants : affichage, remplissage de formulaires, révision, commentaires.",
-  "RolePortalAdminDescription": "Les administrateurs de {{portalName}} peuvent accéder aux paramètres de {{portalName}}, gérer et archiver les salles, inviter de nouveaux utilisateurs et attribuer des rôles inférieurs à leur niveau. Tous les administrateurs ont accès à la section Personnes.",
+  "RolePortalAdminDescription": "Les administrateurs de {{productName}} peuvent accéder aux paramètres de {{productName}}, gérer et archiver les salles, inviter de nouveaux utilisateurs et attribuer des rôles inférieurs à leur niveau. Tous les administrateurs ont accès à la section Personnes.",
   "RolePowerUserDescription": "Les utilisateurs avancés peuvent créer et modifier des fichiers dans la salle, mais ne peuvent pas créer de salles, gérer les utilisateurs ou accéder aux paramètres.",
   "RoleReviewer": "Réviseur",
   "RoleReviewerDescription": "Opérations sur les fichiers existants : affichage, révision, commentaires.",

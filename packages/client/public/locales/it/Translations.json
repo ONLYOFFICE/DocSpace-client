@@ -34,7 +34,7 @@
   "RoleEditorDescription": "Operazioni con file esistenti: visualizzazione, modifica, compilazione moduli, revisione, commenti.",
   "RoleFormFiller": "Compilatore di moduli",
   "RoleFormFillerDescription": "Operazioni con file esistenti: visualizzazione, compilazione moduli, revisione, commenti.",
-  "RolePortalAdminDescription": "Gli amministratori di {{portalName}} possono accedere alle impostazioni di {{portalName}}, gestire e archiviare stanze, invitare nuovi utenti e assegnare ruoli al di sotto del loro livello. Tutti gli amministratori hanno accesso alla sezione Personale.",
+  "RolePortalAdminDescription": "Gli amministratori di {{productName}} possono accedere alle impostazioni di {{productName}}, gestire e archiviare stanze, invitare nuovi utenti e assegnare ruoli al di sotto del loro livello. Tutti gli amministratori hanno accesso alla sezione Personale.",
   "RolePowerUserDescription": "Gli utenti esperti possono creare e modificare file nella stanza, ma non possono creare stanze, gestire utenti o accedere alle impostazioni.",
   "RoleReviewer": "Recensore",
   "RoleReviewerDescription": "Operazioni con file esistenti: visualizzazione, revisione, commenti.",

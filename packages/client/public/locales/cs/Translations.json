@@ -34,7 +34,7 @@
   "RoleEditorDescription": "Operace s existujícími soubory: prohlížení, editace, vyplňování formulářů, prohlížení, komentování.",
   "RoleFormFiller": "Výplň formuláře",
   "RoleFormFillerDescription": "Operace s existujícími soubory: prohlížení, vyplňování formulářů, prohlížení, komentování.",
-  "RolePortalAdminDescription": "Správci {{portalName}} mají přístup k nastavení {{portalName}}, mohou spravovat a archivovat místnosti, zvát nové uživatele a přidělovat role pod svou úrovní. Všichni správci mají přístup do sekce Osobní.",
+  "RolePortalAdminDescription": "Správci {{productName}} mají přístup k nastavení {{productName}}, mohou spravovat a archivovat místnosti, zvát nové uživatele a přidělovat role pod svou úrovní. Všichni správci mají přístup do sekce Osobní.",
   "RolePowerUserDescription": "Výkonní uživatelé mohou vytvářet a upravovat soubory v místnosti, ale nemohou vytvářet místnosti, spravovat uživatele ani přistupovat k nastavením.",
   "RoleReviewer": "Recenzent",
   "RoleReviewerDescription": "Operace s existujícími soubory: prohlížení, prohlížení, komentování.",

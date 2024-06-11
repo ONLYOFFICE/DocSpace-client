@@ -234,8 +234,8 @@ const ArticleBodyContent = (props) => {
         return t("Common:DeveloperTools");
       case "Common:Bonus":
         return t("Common:Bonus");
-      case "Common:FreeProFeatures":
-        return "Common:FreeProFeatures";
+      case "Common:FreeAccessToLicensedVersion":
+        return "Common:FreeAccessToLicensedVersion";
       case "DataImport":
         return t("DataImport");
       case "ImportFromGoogle":

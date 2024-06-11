@@ -1,5 +1,5 @@
 {
-  "ActionCannotBeUndone": "Vybraní zakázaní uživatelé budou zprostoru {{portalName}} odstraněni. Tuto akci nelze vrátit zpět.",
+  "ActionCannotBeUndone": "Vybraní zakázaní uživatelé budou zprostoru {{productName}} odstraněni. Tuto akci nelze vrátit zpět.",
   "CannotReassignFiles": "Pokud odstraníte více uživatelů najednou, nelze jejich soubory znovu přiřadit jiným uživatelům.",
   "DeleteGroupUsersSuccessMessage": "Uživatelé byli úspěšně odstraněni.",
   "DeleteMyDocumentsUser": "Všechny osobní soubory a složky v sekci Moje dokumenty tohoto uživatele budou trvale odstraněny.",

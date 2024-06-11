@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "Назначить администраторов",
-  "BackupPortal": "Выполнять резервное копирование данных {{portalName}}",
-  "ChangeInstruction": "Чтобы изменить владельца {{portalName}}, выберите имя нового владельца ниже.",
-  "ChangeOwner": "Сменить владельца {{portalName}}",
+  "BackupPortal": "Выполнять резервное копирование данных {{productName}}",
+  "ChangeInstruction": "Чтобы изменить владельца {{productName}}, выберите имя нового владельца ниже.",
+  "ChangeOwner": "Сменить владельца {{productName}}",
   "ChangeUser": "Сменить пользователя",
-  "DeactivateOrDeletePortal": "Отключить или удалить {{portalName}}",
+  "DeactivateOrDeletePortal": "Отключить или удалить {{productName}}",
   "DoTheSame": "Делайте то же, что и администраторы",
-  "ManagePortal": "Управлять настройками {{portalName}}",
+  "ManagePortal": "Управлять настройками {{productName}}",
   "ManageUser": "Управлять учетными записями пользователей",
-  "NewPortalOwner": "Новый владелец {{portalName}}",
-  "PortalOwnerCan": "Владелец {{portalName}} может:",
+  "NewPortalOwner": "Новый владелец {{productName}}",
+  "PortalOwnerCan": "Владелец {{productName}} может:",
   "SetAccessRights": "Установить права доступа"
 }

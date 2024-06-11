@@ -34,7 +34,7 @@ import ArrowIcon from "PUBLIC_DIR/images/arrow.left.react.svg?url";
 import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const DEFAULT_CREATION_TEXT =
-  "A {{portalName}} account will be created for {{email}}. Please, complete your registration:";
+  "A {{productName}} account will be created for {{email}}. Please, complete your registration:";
 
 const GreetingUserContainer = ({
   email,

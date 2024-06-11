@@ -1,5 +1,5 @@
 {
-  "Desc": "Lütfen {{portalName}} kayıt verilerini ayarlayın.",
+  "Desc": "Lütfen {{productName}} kayıt verilerini ayarlayın.",
   "ErrorEmail": "Geçersiz e-posta adresi",
   "ErrorInitWizard": "Bu hizmet şu anda kullanılamamaktadır, lütfen daha sonra tekrar deneyin.",
   "ErrorInitWizardButton": "Tekrar dene",
@@ -11,5 +11,5 @@
   "LicenseLink": "Lisans anlaşması",
   "PlaceholderLicense": "Lisans dosyanız",
   "Timezone": "Saat Dilimi:",
-  "WelcomeTitle": "{{portalName}}’inize hoş geldiniz!"
+  "WelcomeTitle": "{{productName}}’inize hoş geldiniz!"
 }

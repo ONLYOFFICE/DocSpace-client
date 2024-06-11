@@ -46,7 +46,7 @@
   "URL": "URL",
   "ViewRawPayload": "Rohen Nutzlast anzeigen",
   "WebhookCreated": "Webhook erstellt",
-  "WebhookCreationHint": "Dieser Webhook wird allen Ereignissen in {{portalName}} zugewiesen",
+  "WebhookCreationHint": "Dieser Webhook wird allen Ereignissen in {{productName}} zugewiesen",
   "WebhookDetails": "Webhook-Details",
   "WebhookEditedSuccessfully": "Webhook-Konfiguration erfolgreich bearbeitet",
   "WebhookHistory": "Webhook-Verlauf",
@@ -55,5 +55,5 @@
   "WebhookRemoved": "Webhook entfernt",
   "Webhooks": "Webhooks",
   "WebhooksGuide": "Anleitung für Webhooks",
-  "WebhooksInfo": "Verwenden Sie Webhooks, um benutzerdefinierte Aktionen auf der Seite jeder von Ihnen verwendeten Anwendung oder Website basierend auf verschiedenen Events in {{organizationName}} {{portalName}} durchzuführen.\nHier können Sie alle Ihre Webhooks erstellen und verwalten, diese konfigurieren und den Verlauf jedes Webhooks durchsuchen, um seine Leistung zu überprüfen."
+  "WebhooksInfo": "Verwenden Sie Webhooks, um benutzerdefinierte Aktionen auf der Seite jeder von Ihnen verwendeten Anwendung oder Website basierend auf verschiedenen Events in {{organizationName}} {{productName}} durchzuführen.\nHier können Sie alle Ihre Webhooks erstellen und verwalten, diese konfigurieren und den Verlauf jedes Webhooks durchsuchen, um seine Leistung zu überprüfen."
 }

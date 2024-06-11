@@ -48,7 +48,7 @@
   "SPEntityId": "SP엔티티 ID(메타데이터 XML 링크)",
   "SPEntityIdTooltip": "SP를 명확하게 식별하기 위해 ID 공급자가 다운로드하고 사용할 수 있는 서비스 공급자 XML URL 주소",
   "SpMetadata": "{{organizationName}} SP 메타메이터",
-  "SpMetadataDescription": "서비스 공급자 메타데이터에 액세스하여 {{organizationName}} {{portalName}}를 IdP 계정에 신뢰할 수 있는 서비스 공급자로 추가하세요.",
+  "SpMetadataDescription": "서비스 공급자 메타데이터에 액세스하여 {{organizationName}} {{productName}}를 IdP 계정에 신뢰할 수 있는 서비스 공급자로 추가하세요.",
   "spSignExitRequest": "로그아웃 요청에 서명",
   "spSigningAlgorithm": "서명 알고리즘",
   "spSignResponseRequest": "로그아웃 응답 서명",

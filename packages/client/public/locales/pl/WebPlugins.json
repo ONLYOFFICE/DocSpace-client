@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "Usuń wtyczkę",
-  "DeletePluginDescription": "Dana wtyczka nie będzie już dostępna dla użytkowników {{portalName}}. Czy na pewno chcesz kontynuować?",
+  "DeletePluginDescription": "Dana wtyczka nie będzie już dostępna dla użytkowników {{productName}}. Czy na pewno chcesz kontynuować?",
   "DeletePluginTitle": "Usunąć wtyczkę?",
   "ExpandFunctionality": "Rozszerz funkcjonalność za pomocą zestawu SDK do tworzenia wtyczek",
   "GoToRepo": "Przejdź do repozytorium",
@@ -10,7 +10,7 @@
   "NotNeedSettings": "Nie trzeba wchodzić w ustawienia",
   "PluginSamples": "Próbki wtyczek",
   "PluginSDK": "Zestaw SDK do tworzenia wtyczek",
-  "PluginSDKDescription": "Dzięki zestawowi SDK do tworzenia wtyczek możesz rozszerzyć funkcjonalność swojego obszaru {{portalName}}, podłączyć usługi podmiotów trzecich lub poprawić komfort obsługi dla swoich bieżących użytkowników. Tutaj znajdziesz próbki wtyczek z kodem źródłowym dostępnym na GitHub.",
+  "PluginSDKDescription": "Dzięki zestawowi SDK do tworzenia wtyczek możesz rozszerzyć funkcjonalność swojego obszaru {{productName}}, podłączyć usługi podmiotów trzecich lub poprawić komfort obsługi dla swoich bieżących użytkowników. Tutaj znajdziesz próbki wtyczek z kodem źródłowym dostępnym na GitHub.",
   "PluginSDKInstruction": "Kliknij przycisk, aby uzyskać szczegółowe instrukcje na temat tworzenia własnych wtyczek.",
-  "UploadDescription": "Możesz dodawać wtyczki, aby poszerzyć funkcjonalność {{portalName}} o dodatkowe funkcje. Kliknij Prześlij wtyczkę lub upuść plik w archiwum ZIP."
+  "UploadDescription": "Możesz dodawać wtyczki, aby poszerzyć funkcjonalność {{productName}} o dodatkowe funkcje. Kliknij Prześlij wtyczkę lub upuść plik w archiwum ZIP."
 }

@@ -31,7 +31,7 @@
   "PublicRoomLinkValidTime": "Ta povezava velja do {{date}}. Ko poteče, ne bo več mogoče dostopati do sobe prek te povezave.",
   "RoleCommentator": "Komentator",
   "RoleCommentatorDescription": "Operacije z obstoječimi datotekami: ogledovanje, komentiranje.",
-  "RoleDocspaceAdminDescription": "Skrbniki {{portalName}} lahko dostopajo do nastavitev {{portalName}}, upravljajo in arhivirajo sobe, vabijo nove uporabnike in dodeljujejo vloge tistim pod njihovim nivojem. Vsi skrbniki imajo dostop do razdelka Osebno.",
+  "RoleDocspaceAdminDescription": "Skrbniki {{productName}} lahko dostopajo do nastavitev {{productName}}, upravljajo in arhivirajo sobe, vabijo nove uporabnike in dodeljujejo vloge tistim pod njihovim nivojem. Vsi skrbniki imajo dostop do razdelka Osebno.",
   "RoleEditorDescription": "Delovanje z obstoječimi datotekami: ogledovanje, urejanje, izpolnjevanje obrazcev, pregledovanje, komentiranje.",
   "RoleFormFiller": "Polnjenje obrazca",
   "RoleFormFillerDescription": "Delovanje z obstoječimi datotekami: ogledovanje, izpolnjevanje obrazcev, pregledovanje, komentiranje.",

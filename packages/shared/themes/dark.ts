@@ -2874,14 +2874,6 @@ const Dark: TTheme = {
     },
   },
 
-  campaignsBanner: {
-    border: "1px solid #CCCCCC",
-    color: darkBlack,
-
-    btnColor: black,
-    btnBackgroundActive: lightSecondMain,
-  },
-
   tileLoader: {
     border: `none`,
 

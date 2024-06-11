@@ -2894,14 +2894,6 @@ export const getBaseTheme = () => {
       },
     },
 
-    campaignsBanner: {
-      border: `1px solid ${grayStrong}`,
-      color: darkBlack,
-
-      btnColor: white,
-      btnBackgroundActive: lightSecondMain,
-    },
-
     tileLoader: {
       border: `1px solid ${grayStrong}`,
 

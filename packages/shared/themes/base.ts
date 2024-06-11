@@ -3214,6 +3214,7 @@ export const getBaseTheme = () => {
       lineColor: "#eceef1",
 
       textColorPrimary: "#657077",
+      activeTextColorPrimary: "",
       hoverTextColorPrimary: "#A3A9AE",
       pressedTextColorPrimary: "#555F65",
       backgroundColorPrimary: white,

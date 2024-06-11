@@ -139,7 +139,8 @@ export const Tab = styled.div<{
     props.$theme === ThemeTabs.Primary
       ? css`
           ${props.isActive
-            ? props.$currentColorScheme?.main?.accent
+            ? props.theme.tabs.activeTextColorPrimary ||
+              props.$currentColorScheme?.main?.accent
             : props.theme.tabs.textColorPrimary}
         `
       : css`

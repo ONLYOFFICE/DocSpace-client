@@ -3190,6 +3190,7 @@ const Dark: TTheme = {
     lineColor: "#474747",
 
     textColorPrimary: "#657077",
+    activeTextColorPrimary: white,
     hoverTextColorPrimary: white,
     pressedTextColorPrimary: "#CCCCCC",
     backgroundColorPrimary: "#333",

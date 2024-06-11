@@ -54,6 +54,8 @@ export const globalColors = {
   lightSecondMainHover: "rgba(82, 153, 224, 0.85)",
   lightSecondMainDisabled: "rgba(82, 153, 224, 0.6)",
 
+  mainGreen: "#2DB482",
+
   lightErrorStatus: "#F24724",
   darkErrorStatus: "#E06451",
   favoritesStatus: "#EDC409",
@@ -83,6 +85,15 @@ export const globalColors = {
   dndDarkColor: "rgba(229, 228, 138, 0.12)",
   dndHoverColor: "rgba(204, 202, 102, 0.5)",
   dndDarkHover: "rgba(204, 184, 102, 0.2)",
+
+  onWhiteColor: "rgba(0, 0, 0, 0.1)",
+
+  editorGreenColor: "#40865C",
+  editorBlueColor: "#446995",
+  editorOrangeColor: "#AA5252",
+  windowsColor: "#4C83CD",
+  linuxColor: "#F4BB40",
+  androidColor: "#A8D548",
   //
 
   grayMaxLight: "#eeeeee",

@@ -89,6 +89,13 @@ const {
   dndHoverColor,
   dndDarkHover,
 
+  editorGreenColor,
+  editorBlueColor,
+  editorOrangeColor,
+  windowsColor,
+  linuxColor,
+  androidColor,
+
   grayMaxLight,
   shuttleGrey,
 } = globalColors;
@@ -1309,7 +1316,6 @@ const Dark: TTheme = {
     background: black,
     borderRadius: "6px",
     boxShadow: "0px 8px 16px 0px #040F1B29",
-    // boxShadowMobile: "0px -4px 60px rgba(0, 0, 0, 0.25)",
     border: `1px solid ${grayDarkStrong}`,
   },
 
@@ -1471,56 +1477,6 @@ const Dark: TTheme = {
   dialogLoader: {
     borderBottom: `1px solid ${black}`,
   },
-
-  // dropDownItem: {
-  //   width: "100%",
-  //   maxWidth: "240px",
-  //   border: "none",
-  //   cursor: "pointer",
-  //   padding: "0px 16px",
-  //   lineHeight: "32px",
-  //   textAlign: "left",
-  //   background: "none",
-  //   textDecoration: "none",
-  //   fontStyle: "normal",
-  //   fontWeight: "600",
-  //   fontSize: "13px",
-
-  //   whiteSpace: "nowrap",
-  //   overflow: "hidden",
-  //   textOverflow: "ellipsis",
-
-  //   outline: "none",
-  //   color: black,
-  //   textTransform: "none",
-
-  //   hoverBackgroundColor: grayLight,
-  //   noHoverBackgroundColor: white,
-
-  //   header: {
-  //     color: gray,
-  //     hoverCursor: "default",
-  //     hoverBackgroundColor: "white",
-  //     textTransform: "uppercase",
-  //   },
-
-  //   disabled: {
-  //     color: gray,
-  //     hoverCursor: "default",
-  //     hoverBackgroundColor: "white",
-  //   },
-
-  //   separator: {
-  //     padding: "0px 16px",
-  //     border: `0.5px solid ${grayLightMid}`,
-  //     cursor: "default",
-  //     margin: "6px 16px 6px",
-  //     lineHeight: "1px",
-  //     height: "1px",
-  //     width: "calc(100% - 32px)",
-  //   },
-
-  //   tablet: { lineHeight: "36px" },
 
   comboBox: {
     padding: "6px 0px",
@@ -1707,69 +1663,6 @@ const Dark: TTheme = {
     background: dndDarkColor,
   },
 
-  // phoneInput: {
-  //   width: "304px",
-  //   height: "44px",
-  //   itemTextColor: black,
-  //   itemBackgroundColor: white,
-  //   itemHoverColor: grayLightMid,
-  //   scrollBackground: "rgba(0, 0, 0, 0.1)",
-  //   placeholderColor: gray,
-  // },
-
-  // squareButton: {
-  //   height: "32px",
-  //   width: "32px",
-  //   color: gray,
-  //   backgroundColor: white,
-  //   border: `1px solid ${grayStrong}`,
-  //   borderRadius: "3px",
-  //   outline: "none",
-  //   hover: {
-  //     backgroundColor: white,
-  //     border: `1px solid ${gray}`,
-  //   },
-  //   click: {
-  //     backgroundColor: grayLightMid,
-  //     border: `1px solid ${gray}`,
-  //   },
-  //   disable: {
-  //     backgroundColor: grayLight,
-  //     border: `1px solid ${grayLightMid}`,
-  //   },
-  //   crossShape: {
-  //     disable: {
-  //       color: gray,
-  //     },
-  //   },
-  // },
-
-  // roundButton: {
-  //   height: "40px",
-  //   width: "40px",
-  //   backgroundColor: grayLight,
-  //   borderRadius: {
-  //     plus: "112px",
-  //     minus: "81px",
-  //   },
-  //   borderStyle: "none",
-  //   outline: "none",
-  //   hover: {
-  //     backgroundColor: grayLightMid,
-  //   },
-  //   click: {
-  //     backgroundColor: grayStrong,
-  //   },
-  //   disable: {
-  //     backgroundColor: grayLight,
-  //   },
-  //   plus: {
-  //     color: grayStrong,
-  //     disable: {
-  //       color: black,
-  //     },
-  //   },
-  // },
   catalog: {
     background: black,
 
@@ -1946,7 +1839,7 @@ const Dark: TTheme = {
 
   infoPanel: {
     sectionHeaderToggleIcon: grayDark,
-    sectionHeaderToggleIconActive: "#c4c4c4",
+    sectionHeaderToggleIconActive: grayStrong,
     sectionHeaderToggleBg: "transparent",
     sectionHeaderToggleBgActive: black,
 
@@ -2010,16 +1903,16 @@ const Dark: TTheme = {
     background: black,
     panelBackground: grayDarkStrong,
 
-    fill: "#C4C4C4",
-    expanderColor: "#C4C4C4",
+    fill: grayStrong,
+    expanderColor: grayStrong,
 
     downloadAppList: {
       textColor: grayDark,
       color: grayDarkText,
-      winHoverColor: "#3785D3",
+      winHoverColor: windowsColor,
       macHoverColor: white,
-      linuxHoverColor: "#FFB800",
-      androidHoverColor: "#9BD71C",
+      linuxHoverColor: linuxColor,
+      androidHoverColor: androidColor,
       iosHoverColor: white,
     },
     devTools: {
@@ -2029,8 +1922,8 @@ const Dark: TTheme = {
   },
 
   peopleArticleBody: {
-    iconColor: "#C4C4C4",
-    expanderColor: "#C4C4C4",
+    iconColor: grayStrong,
+    expanderColor: grayStrong,
   },
 
   peopleTableRow: {
@@ -2693,9 +2586,9 @@ const Dark: TTheme = {
   },
 
   filesPrivateRoom: {
-    borderBottom: "1px solid #d3d3d3",
+    borderBottom: `1px solid ${grayDarkMid}`,
     linkColor: darkLink,
-    textColor: "#83888D",
+    textColor: grayDarkText,
   },
 
   filesVersionHistory: {
@@ -2746,12 +2639,6 @@ const Dark: TTheme = {
     backTitle: {
       color: gray,
     },
-  },
-
-  facebookButton: {
-    background: black,
-    border: `1px solid ${grayDarkStrong}`,
-    color: grayMaxLight,
   },
 
   peopleSelector: {
@@ -2824,9 +2711,9 @@ const Dark: TTheme = {
       headerTitleColor: white,
       trashIcon: grayDark,
       article: {
-        titleColor: "#c4c4c4",
-        fillIcon: "#c4c4c4",
-        expanderColor: "#c4c4c4",
+        titleColor: grayStrong,
+        fillIcon: grayStrong,
+        expanderColor: grayStrong,
       },
 
       separatorBorder: `1px solid ${grayDarkStrong}`,
@@ -2883,9 +2770,9 @@ const Dark: TTheme = {
           backgroundColorWhite: white,
           backgroundColorLight: grayLight,
           backgroundColorDark: darkGrayLight,
-          greenBackgroundColor: "#40865C",
-          blueBackgroundColor: "#446995",
-          orangeBackgroundColor: "#AA5252",
+          greenBackgroundColor: editorGreenColor,
+          blueBackgroundColor: editorBlueColor,
+          orangeBackgroundColor: editorOrangeColor,
 
           dataFontColor: white,
           dataFontColorBlack: white,
@@ -3021,7 +2908,7 @@ const Dark: TTheme = {
 
   hotkeys: {
     key: {
-      color: "#C4C4C4",
+      color: grayStrong,
     },
   },
 

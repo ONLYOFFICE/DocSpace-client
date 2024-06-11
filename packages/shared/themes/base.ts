@@ -72,6 +72,8 @@ const {
   lightSecondMainHover,
   lightSecondMainDisabled,
 
+  mainGreen,
+
   lightErrorStatus,
   darkErrorStatus,
   favoritesStatus,
@@ -99,6 +101,15 @@ const {
   dndDarkColor,
   dndHoverColor,
   dndDarkHover,
+
+  onWhiteColor,
+
+  editorGreenColor,
+  editorBlueColor,
+  editorOrangeColor,
+  windowsColor,
+  linuxColor,
+  androidColor,
 
   grayMaxLight,
   shuttleGrey,
@@ -209,7 +220,7 @@ export const getBaseTheme = () => {
 
         primary: lightSecondMain,
         primaryHover: lightSecondMainHover,
-        primaryActive: `linear-gradient(0deg, ${lightSecondMain}, ${lightSecondMain}),linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1))`,
+        primaryActive: `linear-gradient(0deg, ${lightSecondMain}, ${lightSecondMain}),linear-gradient(0deg, ${onWhiteColor}, ${onWhiteColor})`,
         primaryDisabled: lightSecondMainDisabled,
       },
 
@@ -221,7 +232,7 @@ export const getBaseTheme = () => {
 
         primary: `1px solid ${lightSecondMain}`,
         primaryHover: `1px solid ${lightSecondMainHover}`,
-        primaryActive: `1px solid linear-gradient(0deg, ${lightSecondMain}, ${lightSecondMain}),linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1))`,
+        primaryActive: `1px solid linear-gradient(0deg, ${lightSecondMain}, ${lightSecondMain}),linear-gradient(0deg, ${onWhiteColor}, ${onWhiteColor})`,
         primaryDisabled: `1px solid ${lightSecondMainDisabled}`,
       },
 
@@ -983,7 +994,7 @@ export const getBaseTheme = () => {
         hoverBackgroundColor: lightGrayHover,
         disableBackgroundColor: grayLightMid,
         activeBackgroundColor: grayLightMid,
-        activeSelectedBackgroundColor: `linear-gradient(0deg, ${blueLightMid}, ${blueLightMid}), linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1))`,
+        activeSelectedBackgroundColor: `linear-gradient(0deg, ${blueLightMid}, ${blueLightMid}), linear-gradient(0deg, ${onWhiteColor}, ${onWhiteColor})`,
 
         title: {
           padding: "4px 16px",
@@ -1487,56 +1498,6 @@ export const getBaseTheme = () => {
       borderBottom: "1px solid rgb(222, 226, 230)",
     },
 
-    // dropDownItem: {
-    //   width: "100%",
-    //   maxWidth: "240px",
-    //   border: "none",
-    //   cursor: "pointer",
-    //   padding: "0px 16px",
-    //   lineHeight: "32px",
-    //   textAlign: "left",
-    //   background: "none",
-    //   textDecoration: "none",
-    //   fontStyle: "normal",
-    //   fontWeight: "600",
-    //   fontSize: "13px",
-
-    //   whiteSpace: "nowrap",
-    //   overflow: "hidden",
-    //   textOverflow: "ellipsis",
-
-    //   outline: "none",
-    //   color: black,
-    //   textTransform: "none",
-
-    //   hoverBackgroundColor: grayLight,
-    //   noHoverBackgroundColor: white,
-
-    //   header: {
-    //     color: gray,
-    //     hoverCursor: "default",
-    //     hoverBackgroundColor: "white",
-    //     textTransform: "uppercase",
-    //   },
-
-    //   disabled: {
-    //     color: gray,
-    //     hoverCursor: "default",
-    //     hoverBackgroundColor: "white",
-    //   },
-
-    //   separator: {
-    //     padding: "0px 16px",
-    //     border: `0.5px solid ${grayLightMid}`,
-    //     cursor: "default",
-    //     margin: "6px 16px 6px",
-    //     lineHeight: "1px",
-    //     height: "1px",
-    //     width: "calc(100% - 32px)",
-    //   },
-
-    //   tablet: { lineHeight: "36px" },
-
     comboBox: {
       padding: "6px 0px",
       background: lightGraySelected,
@@ -1717,70 +1678,6 @@ export const getBaseTheme = () => {
       acceptBackground: dndHoverColor,
       background: dndColor,
     },
-
-    // phoneInput: {
-    //   width: "304px",
-    //   height: "44px",
-    //   itemTextColor: black,
-    //   itemBackgroundColor: white,
-    //   itemHoverColor: grayLightMid,
-    //   scrollBackground: "rgba(0, 0, 0, 0.1)",
-    //   placeholderColor: gray,
-    // },
-
-    // squareButton: {
-    //   height: "32px",
-    //   width: "32px",
-    //   color: gray,
-    //   backgroundColor: white,
-    //   border: `1px solid ${grayStrong}`,
-    //   borderRadius: "3px",
-    //   outline: "none",
-    //   hover: {
-    //     backgroundColor: white,
-    //     border: `1px solid ${gray}`,
-    //   },
-    //   click: {
-    //     backgroundColor: grayLightMid,
-    //     border: `1px solid ${gray}`,
-    //   },
-    //   disable: {
-    //     backgroundColor: grayLight,
-    //     border: `1px solid ${grayLightMid}`,
-    //   },
-    //   crossShape: {
-    //     disable: {
-    //       color: gray,
-    //     },
-    //   },
-    // },
-
-    // roundButton: {
-    //   height: "40px",
-    //   width: "40px",
-    //   backgroundColor: grayLight,
-    //   borderRadius: {
-    //     plus: "112px",
-    //     minus: "81px",
-    //   },
-    //   borderStyle: "none",
-    //   outline: "none",
-    //   hover: {
-    //     backgroundColor: grayLightMid,
-    //   },
-    //   click: {
-    //     backgroundColor: grayStrong,
-    //   },
-    //   disable: {
-    //     backgroundColor: grayLight,
-    //   },
-    //   plus: {
-    //     color: grayStrong,
-    //     disable: {
-    //       color: black,
-    //     },
-    //   },
-    // },
 
     catalog: {
       background: grayLight,
@@ -2026,11 +1923,11 @@ export const getBaseTheme = () => {
       expanderColor: "dimgray",
       downloadAppList: {
         textColor: gray,
-        color: "#CDCFD1",
-        winHoverColor: "#3785D3",
+        color: gray,
+        winHoverColor: windowsColor,
         macHoverColor: darkBlack,
-        linuxHoverColor: "#FFB800",
-        androidHoverColor: "#9BD71C",
+        linuxHoverColor: linuxColor,
+        androidHoverColor: androidColor,
         iosHoverColor: darkBlack,
       },
       devTools: {
@@ -2045,8 +1942,6 @@ export const getBaseTheme = () => {
     },
 
     peopleTableRow: {
-      fill: lightIcons,
-
       nameColor: black,
       pendingNameColor: gray,
 
@@ -2341,8 +2236,8 @@ export const getBaseTheme = () => {
           descriptionText: gray,
         },
         displayItem: {
-          background: "#f8f8f8",
-          borderColor: "#f8f8f8",
+          background: grayLight,
+          borderColor: grayLight,
           descriptionText: grayText,
         },
       },
@@ -2453,7 +2348,7 @@ export const getBaseTheme = () => {
     filesEmptyContainer: {
       linkColor: grayText,
       privateRoom: {
-        linkColor: "#116d9d",
+        linkColor: link,
       },
     },
 
@@ -2501,7 +2396,7 @@ export const getBaseTheme = () => {
       },
 
       embedding: {
-        textAreaColor: "#AEAEAE",
+        textAreaColor: gray,
         iconColor: black,
         color: gray,
       },
@@ -2708,9 +2603,9 @@ export const getBaseTheme = () => {
     },
 
     filesPrivateRoom: {
-      borderBottom: "1px solid #d3d3d3",
-      linkColor: "#116d9d",
-      textColor: "#83888D",
+      borderBottom: `1px solid ${grayLightMid}`,
+      linkColor: link,
+      textColor: grayText,
     },
 
     filesVersionHistory: {
@@ -2763,12 +2658,6 @@ export const getBaseTheme = () => {
       },
     },
 
-    facebookButton: {
-      background: white,
-      border: "1px solid #1877f2",
-      color: "#1877f2",
-    },
-
     peopleSelector: {
       textColor: gray,
     },
@@ -2816,11 +2705,11 @@ export const getBaseTheme = () => {
 
       confirm: {
         activateUser: {
-          textColor: "#116d9d",
+          textColor: link,
           textColorError: lightErrorStatus,
         },
         change: {
-          titleColor: "#116d9d",
+          titleColor: link,
         },
       },
 
@@ -2898,9 +2787,9 @@ export const getBaseTheme = () => {
             backgroundColorWhite: white,
             backgroundColorLight: grayLight,
             backgroundColorDark: darkGrayLight,
-            greenBackgroundColor: "#40865C",
-            blueBackgroundColor: "#446995",
-            orangeBackgroundColor: "#AA5252",
+            greenBackgroundColor: editorGreenColor,
+            blueBackgroundColor: editorBlueColor,
+            orangeBackgroundColor: editorOrangeColor,
 
             dataFontColor: white,
             dataFontColorBlack: black,
@@ -2963,7 +2852,7 @@ export const getBaseTheme = () => {
           },
 
           warningColor: lightErrorStatus,
-          color: "#F97A0B",
+          color: lightStatusWarning,
         },
 
         migration: {
@@ -2976,7 +2865,7 @@ export const getBaseTheme = () => {
           infoBlockBackground: grayLight,
           infoBlockTextColor: grayText,
           errorTextColor: lightErrorStatus,
-          existingTextColor: "#2db482",
+          existingTextColor: mainGreen,
           tableHeaderText: gray,
           tableRowHoverColor: lightGrayHover,
           tableRowTextColor: gray,
@@ -3000,7 +2889,7 @@ export const getBaseTheme = () => {
       },
 
       wizard: {
-        linkColor: "#116d9d",
+        linkColor: link,
         generatePasswordColor: lightGrayDark,
       },
     },
@@ -3097,7 +2986,7 @@ export const getBaseTheme = () => {
       background: white,
       border: `1px solid ${grayStrong}`,
       color: black,
-      lineColor: "#C4C4C4",
+      lineColor: grayStrong,
       disabledBackground: grayLight,
       disabledBorder: `1px solid ${grayLightMid}`,
       disabledColor: gray,

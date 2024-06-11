@@ -27,7 +27,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Tabs } from "./Tabs";
 
-import { tabsItems } from "./data";
+import { data } from "./data";
 import { TabsProps } from "./Tabs.types";
 import { ThemeTabs } from "./Tabs.enums";
 
@@ -58,8 +58,8 @@ const Template = (args: TabsProps) => (
 export const Default: Story = {
   render: (args) => <Template {...args} />,
   args: {
-    items: tabsItems,
-    selectedItemId: "tab1",
+    items: data,
+    selectedItemId: data[0].id,
     onSelect: () => {},
   },
 };
@@ -67,9 +67,9 @@ export const Default: Story = {
 export const Secondary: Story = {
   render: (args) => <Template {...args} />,
   args: {
-    items: tabsItems,
+    items: data,
     theme: ThemeTabs.Secondary,
-    selectedItemId: "tab1",
+    selectedItemId: data[0].id,
     onSelect: () => {},
   },
 };

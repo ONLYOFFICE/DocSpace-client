@@ -25,139 +25,79 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TTabItem } from "./Tabs.types";
+import { FileInput } from "../file-input";
+import { Row } from "../row";
+import { Text } from "../text";
+import { InputSize } from "../text-input";
 
-export const tabsItems: TTabItem[] = [
+export const data: TTabItem[] = [
   {
-    id: "tab0",
-    name: "name00000000",
+    id: "Overview",
+    name: "Overview",
+    content: (
+      <FileInput
+        accept={[".doc", ".docx"]}
+        id="file-input-id"
+        name="demoFileInputName"
+        onInput={() => {}}
+        placeholder="Input file"
+        size={InputSize.base}
+      />
+    ),
+  },
+  {
+    id: "Documents",
+    name: "Documents",
+    content: <p>Documents</p>,
+  },
+  {
+    id: "Milestones",
+    name: "Milestones",
+    content: (
+      <Row
+        key="1"
+        checked
+        contextOptions={[
+          {
+            key: "key1",
+            label: "Edit",
+            onClick: () => {},
+          },
+          {
+            key: "key2",
+            label: "Delete",
+            onClick: () => {},
+          },
+        ]}
+        onRowClick={() => {}}
+        onSelect={() => {}}
+      >
+        <div
+          style={{
+            alignItems: "center",
+            justifyContent: "space-between",
+            display: "flex",
+          }}
+        >
+          <Text truncate>Sample text</Text>
+        </div>
+      </Row>
+    ),
+  },
+  {
+    id: "Time",
+    name: "Time",
+    content: <p>Time tracking</p>,
+  },
+  {
+    id: "Contacts",
+    name: "Contacts",
     isDisabled: true,
-    content: (
-      <>
-        <label>Tab_0 Tab_0 Tab_0</label>
-        <br />
-        <label>Tab_0 Tab_0 Tab_0</label>
-        <br />
-        <label>Tab_0 Tab_0 Tab_0</label>
-      </>
-    ),
+    content: <p>Contacts</p>,
   },
   {
-    id: "tab1",
-    name: "name01",
-    content: (
-      <>
-        <label>Tab_1 Tab_1 Tab_1</label>
-        <br />
-        <label>Tab_1 Tab_1 Tab_1</label>
-        <br />
-        <label>Tab_1 Tab_1 Tab_1</label>
-      </>
-    ),
-  },
-  {
-    id: "tab2",
-    name: "02",
-    isDisabled: true,
-    content: (
-      <>
-        <label>Tab_2 Tab_2 Tab_2</label>
-        <br />
-        <label>Tab_2 Tab_2 Tab_2</label>
-        <br />
-        <label>Tab_2 Tab_2 Tab_2</label>
-      </>
-    ),
-  },
-  {
-    id: "tab3",
-    name: "na003",
-    isDisabled: true,
-    content: (
-      <>
-        <label>Tab_3 Tab_3 Tab_3</label>
-        <br />
-        <label>Tab_3 Tab_3 Tab_3</label>
-        <br />
-        <label>Tab_3 Tab_3 Tab_3</label>
-      </>
-    ),
-  },
-  {
-    id: "tab4",
-    name: "name0004",
-    content: (
-      <>
-        <label>Tab_4 Tab_4 Tab_4</label>
-        <br />
-        <label>Tab_4 Tab_4 Tab_4</label>
-        <br />
-        <label>Tab_4 Tab_4 Tab_4</label>
-      </>
-    ),
-  },
-  {
-    id: "tab5",
-    name: "name00005",
-    content: (
-      <>
-        <label>Tab_5 Tab_5 Tab_5</label>
-        <br />
-        <label>Tab_5 Tab_5 Tab_5</label>
-        <br />
-        <label>Tab_5 Tab_5 Tab_5</label>
-      </>
-    ),
-  },
-  {
-    id: "tab6",
-    name: "name00000006",
-    content: (
-      <>
-        <label>Tab_6 Tab_6 Tab_6</label>
-        <br />
-        <label>Tab_6 Tab_6 Tab_6</label>
-        <br />
-        <label>Tab_6 Tab_6 Tab_6</label>
-      </>
-    ),
-  },
-  {
-    id: "tab7",
-    name: "name00000007",
-    content: (
-      <>
-        <label>Tab_7 Tab_7 Tab_7</label>
-        <br />
-        <label>Tab_7 Tab_7 Tab_7</label>
-        <br />
-        <label>Tab_7 Tab_7 Tab_7</label>
-      </>
-    ),
-  },
-  {
-    id: "tab8",
-    name: "name0008",
-    content: (
-      <>
-        <label>Tab_8 Tab_8 Tab_8</label>
-        <br />
-        <label>Tab_8 Tab_8 Tab_8</label>
-        <br />
-        <label>Tab_8 Tab_8 Tab_8</label>
-      </>
-    ),
-  },
-  {
-    id: "tab9",
-    name: "ne09",
-    content: (
-      <>
-        <label>Tab_9 Tab_9 Tab_9</label>
-        <br />
-        <label>Tab_9 Tab_9 Tab_9</label>
-        <br />
-        <label>Tab_9 Tab_9 Tab_9</label>
-      </>
-    ),
+    id: "Team",
+    name: "Team",
+    content: <p>Team</p>,
   },
 ];

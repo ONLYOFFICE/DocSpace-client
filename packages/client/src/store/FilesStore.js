@@ -1334,7 +1334,7 @@ class FilesStore {
 
     const currentUrl = window.location.href.replace(window.location.origin, "");
     const newUrl = combineUrl(
-      window.DocSpaceConfig?.proxy?.url,
+      window.ClientConfig?.proxy?.url,
       config.homepage,
       pathname,
     );
@@ -2050,7 +2050,7 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["edit-pdf"]);
       }
 
-      if (!isPdf || !window.DocSpaceConfig?.pdfViewer || isRecycleBinFolder) {
+      if (!isPdf || !window.ClientConfig?.pdfViewer || isRecycleBinFolder) {
         fileOptions = this.removeOptions(fileOptions, ["pdf-view"]);
       }
 
@@ -3059,8 +3059,7 @@ class FilesStore {
   }
 
   getItemUrl = (id, isFolder, needConvert, canOpenPlayer) => {
-    const proxyURL =
-      window.DocSpaceConfig?.proxy?.url || window.location.origin;
+    const proxyURL = window.ClientConfig?.proxy?.url || window.location.origin;
 
     const url = getCategoryUrl(this.categoryType, id);
 
@@ -3844,7 +3843,7 @@ class FilesStore {
     if (editForm) searchParams.append("action", "edit");
 
     const url = combineUrl(
-      window.DocSpaceConfig?.proxy?.url,
+      window.ClientConfig?.proxy?.url,
       config.homepage,
       `/doceditor?${searchParams.toString()}`,
     );

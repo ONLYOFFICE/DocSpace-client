@@ -271,7 +271,7 @@ const useEditorEvents = ({
     createFile(fileInfo.folderId, defaultFileName ?? "")
       ?.then((newFile) => {
         const newUrl = combineUrl(
-          window.DocSpaceConfig?.proxy?.url,
+          window.ClientConfig?.proxy?.url,
           `/doceditor?fileId=${encodeURIComponent(newFile.id)}`,
         );
         window.open(newUrl, openOnNewPage ? "_blank" : "_self");
@@ -605,7 +605,7 @@ const useEditorEvents = ({
   };
 
   React.useEffect(() => {
-    // console.log("render docspace config", { ...window.DocSpaceConfig });
+    // console.log("render docspace config", { ...window.ClientConfig });
     if (IS_DESKTOP_EDITOR || (typeof window !== "undefined" && !openOnNewPage))
       return;
 
@@ -615,7 +615,7 @@ const useEditorEvents = ({
     const url = new URL(
       combineUrl(
         window.location.origin,
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         "/filehandler.ashx",
       ),
     );

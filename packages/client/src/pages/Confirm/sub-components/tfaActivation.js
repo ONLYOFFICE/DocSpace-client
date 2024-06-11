@@ -125,10 +125,7 @@ const StyledForm = styled(Box)`
     margin-top: 8px;
   }
 `;
-const PROXY_BASE_URL = combineUrl(
-  window.DocSpaceConfig?.proxy?.url,
-  "/profile",
-);
+const PROXY_BASE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/profile");
 
 const TfaActivationForm = withLoader((props) => {
   const {

@@ -948,7 +948,7 @@ class ContextOptionsStore {
 
     navigate(
       combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         config.homepage,
         `${url}?${filterUrlParams}`,
       ),

@@ -60,8 +60,8 @@ const ConfirmRoute = ({
   React.useEffect(() => {
     if (location.search.includes("culture")) return;
     const lng = getCookie(LANGUAGE);
- 
-    storeIsLoaded && i18n.changeLanguage(lng); 
+
+    storeIsLoaded && i18n.changeLanguage(lng);
   }, [storeIsLoaded]);
 
   const location = useLocation();
@@ -131,7 +131,7 @@ const ConfirmRoute = ({
           case ValidationResult.Invalid:
             console.error("invlid link", { confirmLinkData, validationResult });
             window.location.href = combineUrl(
-              window.DocSpaceConfig?.proxy?.url,
+              window.ClientConfig?.proxy?.url,
               path,
               "/error",
             );
@@ -142,7 +142,7 @@ const ConfirmRoute = ({
               validationResult,
             });
             window.location.href = combineUrl(
-              window.DocSpaceConfig?.proxy?.url,
+              window.ClientConfig?.proxy?.url,
               path,
               "/error",
             );
@@ -153,7 +153,7 @@ const ConfirmRoute = ({
               validationResult,
             });
             window.location.href = combineUrl(
-              window.DocSpaceConfig?.proxy?.url,
+              window.ClientConfig?.proxy?.url,
               path,
               "/error?messageKey=20",
             );
@@ -164,7 +164,7 @@ const ConfirmRoute = ({
               validationResult,
             });
             window.location.href = combineUrl(
-              window.DocSpaceConfig?.proxy?.url,
+              window.ClientConfig?.proxy?.url,
               path,
               "/error",
             );
@@ -183,7 +183,7 @@ const ConfirmRoute = ({
 
         console.error("FAILED checkConfirmLink", { error, confirmLinkData });
         window.location.href = combineUrl(
-          window.DocSpaceConfig?.proxy?.url,
+          window.ClientConfig?.proxy?.url,
           path,
           "/error",
         );

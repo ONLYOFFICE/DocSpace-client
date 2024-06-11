@@ -35,7 +35,7 @@ import GiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 const PROXY_BASE_URL = combineUrl(
-  window.DocSpaceConfig?.proxy?.url,
+  window.ClientConfig?.proxy?.url,
   "/portal-settings",
 );
 
@@ -44,7 +44,7 @@ const BonusItem = ({ showText, toggleArticleOpen, currentColorScheme }) => {
   const { t } = useTranslation("Common");
 
   const navigate = useNavigate();
-
+  console.log(" window.ClientConfig", window.ClientConfig);
   const onClick = React.useCallback((e) => {
     if (openingNewTab(bonusUrl, e)) return;
 

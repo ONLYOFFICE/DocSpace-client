@@ -567,7 +567,7 @@ export function getOAuthToken(
 
 export function getLoginLink(token: string, code: string) {
   return combineUrl(
-    window.DocSpaceConfig?.proxy?.url,
+    window.ClientConfig?.proxy?.url,
     `/login.ashx?p=${token}&code=${code}`,
   );
 }

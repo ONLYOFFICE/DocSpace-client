@@ -218,7 +218,7 @@ const CreateUserForm = (props) => {
       });
 
       window.location.href = combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         "/login",
         `?loginData=${loginData}`,
       );

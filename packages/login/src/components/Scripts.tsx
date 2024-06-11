@@ -49,7 +49,7 @@ const Scripts = () => {
             })
             .then((config) => {
               console.log(config)
-              window.DocSpaceConfig = {
+              window.ClientConfig = {
                 ...config,
               };
     
@@ -57,16 +57,16 @@ const Scripts = () => {
                 window.navigator.userAgent.includes("ZoomWebKit") ||
                 window.navigator.userAgent.includes("ZoomApps")
               ) {
-                window.DocSpaceConfig.editor = {
+                window.ClientConfig.editor = {
                   requestClose: true,
                 };
               }
     
-              //console.log({ DocSpaceConfig: window.DocSpaceConfig });
+              //console.log({ DocSpaceConfig: window.ClientConfig });
             })
             .catch((e) => {
               console.error(e);
-              window.DocSpaceConfig = {
+              window.ClientConfig = {
                 errorOnLoad: e,
               };
             });

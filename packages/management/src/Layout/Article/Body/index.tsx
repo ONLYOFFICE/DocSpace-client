@@ -42,7 +42,7 @@ import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const PROXY_BASE_URL = combineUrl(
-  window.DocSpaceConfig?.proxy?.url,
+  window.ClientConfig?.proxy?.url,
   "/management"
 );
 

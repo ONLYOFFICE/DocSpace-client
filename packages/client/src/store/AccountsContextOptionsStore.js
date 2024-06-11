@@ -54,7 +54,7 @@ import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import { PORTAL } from "@docspace/shared/constants";
 
-const PROXY_HOMEPAGE_URL = combineUrl(window.DocSpaceConfig?.proxy?.url, "/");
+const PROXY_HOMEPAGE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/");
 
 const PROFILE_SELF_URL = "/profile";
 

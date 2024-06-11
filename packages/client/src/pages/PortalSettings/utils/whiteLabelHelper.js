@@ -98,7 +98,7 @@ export const uploadLogo = async (file, type) => {
 
     return await axios.post(
       `${combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         config.homepage,
       )}/logoUploader.ashx`,
       data,

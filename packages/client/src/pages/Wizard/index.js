@@ -187,7 +187,7 @@ const Wizard = (props) => {
 
   useEffect(() => {
     if (!wizardToken)
-      navigate(combineUrl(window.DocSpaceConfig?.proxy?.url, "/"));
+      navigate(combineUrl(window.ClientConfig?.proxy?.url, "/"));
     else fetchData();
   }, []);
 

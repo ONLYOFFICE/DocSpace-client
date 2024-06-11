@@ -167,13 +167,13 @@ const Editor = ({
       goBack = {
         requestClose:
           typeof window !== "undefined"
-            ? window.DocSpaceConfig?.editor?.requestClose ?? false
+            ? window.ClientConfig?.editor?.requestClose ?? false
             : false,
         text: openFileLocationText,
       };
       if (
         typeof window !== "undefined" &&
-        !window.DocSpaceConfig?.editor?.requestClose
+        !window.ClientConfig?.editor?.requestClose
       ) {
         goBack.blank = openOnNewPage ? true : false;
         goBack.url = getBackUrl(fileInfo.rootFolderType, fileInfo.folderId);
@@ -281,7 +281,7 @@ const Editor = ({
 
   if (
     (typeof window !== "undefined" &&
-      window.DocSpaceConfig?.editor?.requestClose) ||
+      window.ClientConfig?.editor?.requestClose) ||
     showClose ||
     IS_ZOOM
   ) {

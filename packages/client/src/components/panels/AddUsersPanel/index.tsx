@@ -548,7 +548,7 @@ const AddUsersPanel = ({
           }
           emptyScreenDescription={
             activeTabId === PEOPLE_TAB_ID
-              ? t("Common:EmptyDescription", { portalName: PRODUCT_NAME })
+              ? t("Common:EmptyDescription", { productName: PRODUCT_NAME })
               : t("Common:GroupsNotFoundDescription")
           }
           searchEmptyScreenImage={emptyScreenImage}

@@ -1435,7 +1435,7 @@ class ContextOptionsStore {
       {
         id: "option_link-for-portal-users",
         key: "link-for-portal-users",
-        label: t("LinkForPortalUsers", { portalName: PRODUCT_NAME }),
+        label: t("LinkForPortalUsers", { productName: PRODUCT_NAME }),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onClickLinkForPortal(item, t),
         disabled: false,
@@ -2046,7 +2046,7 @@ class ContextOptionsStore {
           id: "personal_upload-from-docspace",
           className: "main-button_drop-down",
           icon: ActionsUploadReactSvgUrl,
-          label: t("Common:FromDocspace", { portalName: PRODUCT_NAME }),
+          label: t("Common:FromDocspace", { productName: PRODUCT_NAME }),
           key: "personal_upload-from-docspace",
           onClick: () =>
             this.onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.PDF),
@@ -2151,7 +2151,7 @@ class ContextOptionsStore {
         id: "accounts-add_administrator",
         className: "main-button_drop-down",
         icon: PersonAdminReactSvgUrl,
-        label: t("Common:DocspaceAdmin", { portalName: PRODUCT_NAME }),
+        label: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
         onClick: this.onInvite,
         "data-type": EmployeeType.Admin,
         key: "administrator",

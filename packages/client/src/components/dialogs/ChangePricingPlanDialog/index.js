@@ -73,7 +73,7 @@ const ChangePricingPlanDialog = ({
         You wish to downgrade the team to
         <strong>{{ usersCount: managersCount }}</strong>
         admins/power users, and current number of such users in your
-        {{ portalName: PRODUCT_NAME }} is
+        {{ productName: PRODUCT_NAME }} is
         <strong>{{ currentUsersCount: addedManagersCount }}</strong>
       </Trans>
     </Text>

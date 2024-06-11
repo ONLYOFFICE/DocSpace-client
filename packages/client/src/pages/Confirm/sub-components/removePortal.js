@@ -93,7 +93,7 @@ const RemovePortal = (props) => {
             ) : (
               <>
                 <Text className="subtitle">
-                  {t("PortalRemoveTitle", { portalName: PRODUCT_NAME })}
+                  {t("PortalRemoveTitle", { productName: PRODUCT_NAME })}
                 </Text>
                 <ButtonsWrapper>
                   <Button

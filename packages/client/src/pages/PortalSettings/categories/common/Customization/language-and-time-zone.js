@@ -524,7 +524,7 @@ const LanguageAndTimeZone = (props) => {
       )}
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight={400}>
-          {t("TimeLanguageSettingsDescription", { portalName: PRODUCT_NAME })}
+          {t("TimeLanguageSettingsDescription", { productName: PRODUCT_NAME })}
         </Text>
         <Text>
           <Trans t={t} i18nKey="TimeLanguageSettingsSave" />

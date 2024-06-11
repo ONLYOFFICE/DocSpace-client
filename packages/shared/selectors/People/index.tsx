@@ -398,7 +398,7 @@ const PeopleSelector = ({
       emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyHeader")}
       emptyScreenDescription={
         emptyScreenDescription ??
-        t("Common:EmptyDescription", { portalName: PRODUCT_NAME })
+        t("Common:EmptyDescription", { productName: PRODUCT_NAME })
       }
       searchEmptyScreenImage={emptyScreenImage}
       searchEmptyScreenHeader={t("Common:NotFoundUsers")}

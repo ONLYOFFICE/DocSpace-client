@@ -89,7 +89,7 @@ const PortalUnavailable = ({ onLogoutClick }) => {
       />
       <ErrorContainer
         className="portal-unavailable_container"
-        headerText={t("ErrorUnavailableText", { portalName: PRODUCT_NAME })}
+        headerText={t("ErrorUnavailableText", { productName: PRODUCT_NAME })}
       >
         <StyledBodyContent>
           <Text textAlign="center" className="portal-unavailable_text">

@@ -37,14 +37,14 @@ export const CodeToInsert = ({ t, theme, codeBlock, config }) => (
       {`HTML ${t("CodeTitle")}`}
     </CategorySubHeader>
     <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
-      {t("HtmlCodeDescription", { portalName: PRODUCT_NAME })}
+      {t("HtmlCodeDescription", { productName: PRODUCT_NAME })}
     </Text>
     <Textarea value={codeBlock} heightTextArea={153} />
     <CategorySubHeader className="copy-window-code">
       {`JavaScript ${t("CodeTitle")}`}
     </CategorySubHeader>
     <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
-      {t("JavaScriptCodeDescription", { portalName: PRODUCT_NAME })}
+      {t("JavaScriptCodeDescription", { productName: PRODUCT_NAME })}
     </Text>
     <CodeBlock config={config} />
   </CodeWrapper>

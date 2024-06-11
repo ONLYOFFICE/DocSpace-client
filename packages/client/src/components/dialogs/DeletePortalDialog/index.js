@@ -61,7 +61,7 @@ const DeletePortalDialog = (props) => {
       displayType="modal"
     >
       <ModalDialog.Header>
-        {t("DeleteDocspace", { portalName: PRODUCT_NAME })}
+        {t("DeleteDocspace", { productName: PRODUCT_NAME })}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <Trans t={t} i18nKey="DeleteDocspaceInfo" ns="Settings">

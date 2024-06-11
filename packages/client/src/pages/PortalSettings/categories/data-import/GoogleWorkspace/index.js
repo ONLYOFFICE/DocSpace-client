@@ -134,7 +134,7 @@ const GoogleWorkspace = ({
         i18nKey="TypesAndPrivileges"
         ns="Settings"
         t={t}
-        values={{ portalName: PRODUCT_NAME }}
+        values={{ productName: PRODUCT_NAME }}
         components={{
           1: <strong></strong>,
           2: <strong></strong>,

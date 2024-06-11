@@ -89,7 +89,7 @@ const ContinuePortal = (props) => {
             ) : (
               <>
                 <Text className="subtitle">
-                  {t("PortalContinueTitle", { portalName: PRODUCT_NAME })}
+                  {t("PortalContinueTitle", { productName: PRODUCT_NAME })}
                 </Text>
                 <ButtonsWrapper>
                   <Button

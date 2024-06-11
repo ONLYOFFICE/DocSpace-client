@@ -145,7 +145,7 @@ export const getUserTypeLabel = (
     case "owner":
       return t("Common:Owner");
     case "admin":
-      return t("Common:DocspaceAdmin", { portalName: PRODUCT_NAME });
+      return t("Common:DocspaceAdmin", { productName: PRODUCT_NAME });
     case "manager":
       return t("Common:RoomAdmin");
     case "collaborator":

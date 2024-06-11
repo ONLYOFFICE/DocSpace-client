@@ -97,7 +97,7 @@ const StatisticsComponent = (props) => {
         )}
       </div>
       <Text className="statistics-description">
-        {t("StatisticDescription", { portalName: PRODUCT_NAME })}
+        {t("StatisticDescription", { productName: PRODUCT_NAME })}
       </Text>
       {isStatisticsAvailable && (
         <>

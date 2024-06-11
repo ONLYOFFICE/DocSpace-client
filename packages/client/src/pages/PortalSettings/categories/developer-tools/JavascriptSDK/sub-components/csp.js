@@ -205,10 +205,10 @@ const CSP = ({
   return (
     <>
       <CategoryHeader>
-        {t("CSPHeader", { portalName: PRODUCT_NAME })}
+        {t("CSPHeader", { productName: PRODUCT_NAME })}
       </CategoryHeader>
       <Container className="description-holder">
-        {t("CSPDescription", { portalName: PRODUCT_NAME })}
+        {t("CSPDescription", { productName: PRODUCT_NAME })}
         <HelpButton
           className="csp-helpbutton"
           offsetRight={0}
@@ -232,7 +232,7 @@ const CSP = ({
               </Text>
             </div>
             <div className="body-container">
-              {t("CSPInfoBarDescription", { portalName: PRODUCT_NAME })}{" "}
+              {t("CSPInfoBarDescription", { productName: PRODUCT_NAME })}{" "}
               <Link
                 color={currentColorScheme?.main?.accent}
                 fontSize="13px"
@@ -259,7 +259,7 @@ const CSP = ({
         lineHeight="20px"
         color={error ? theme?.input.focusErrorBorderColor : "#A3A9AE"}
       >
-        {error ? error : t("CSPUrlHelp", { portalName: PRODUCT_NAME })}
+        {error ? error : t("CSPUrlHelp", { productName: PRODUCT_NAME })}
       </Text>
       <ChipsContainer>{getChips(cspDomains)}</ChipsContainer>
     </>

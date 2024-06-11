@@ -93,7 +93,7 @@ const DeactivatePortal = (props) => {
             ) : (
               <>
                 <Text className="subtitle">
-                  {t("PortalDeactivateTitle", { portalName: PRODUCT_NAME })}
+                  {t("PortalDeactivateTitle", { productName: PRODUCT_NAME })}
                 </Text>
                 <ButtonsWrapper>
                   <Button

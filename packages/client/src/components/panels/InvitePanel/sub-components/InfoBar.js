@@ -96,7 +96,7 @@ const InfoBar = (props) => {
           </Text>
         </div>
         <div className="body-container">
-          {t("InfoPanel:InfoBanner", { portalName: PRODUCT_NAME })}
+          {t("InfoPanel:InfoBanner", { productName: PRODUCT_NAME })}
         </div>
       </div>
 

@@ -63,7 +63,7 @@ const DeletePluginDialog = (props) => {
     >
       <ModalDialog.Header>{t("DeletePluginTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
-        {t("DeletePluginDescription", { portalName: PRODUCT_NAME })}
+        {t("DeletePluginDescription", { productName: PRODUCT_NAME })}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

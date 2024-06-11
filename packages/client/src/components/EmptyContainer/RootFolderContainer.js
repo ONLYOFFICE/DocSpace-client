@@ -119,7 +119,7 @@ const RootFolderContainer = (props) => {
   const archiveRoomsDescription =
     isVisitor || isCollaborator
       ? t("ArchiveEmptyScreenUser")
-      : t("ArchiveEmptyScreen", { portalName: PRODUCT_NAME });
+      : t("ArchiveEmptyScreen", { productName: PRODUCT_NAME });
 
   const privateRoomHeader = t("PrivateRoomHeader", { organizationName });
   const privacyIcon = <img alt="" src={PrivacySvgUrl} />;
@@ -130,7 +130,7 @@ const RootFolderContainer = (props) => {
     t("PrivateRoomDescriptionUnbreakable"),
   ];
 
-  const roomHeader = t("EmptyRootRoomHeader", { portalName: PRODUCT_NAME });
+  const roomHeader = t("EmptyRootRoomHeader", { productName: PRODUCT_NAME });
 
   const onGoToPersonal = () => {
     const newFilter = FilesFilter.getDefault();

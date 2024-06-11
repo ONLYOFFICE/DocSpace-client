@@ -38,7 +38,7 @@ const MobileView = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setDocumentTitle(t("PortalAccess", { portalName: PRODUCT_NAME }));
+    setDocumentTitle(t("PortalAccess", { productName: PRODUCT_NAME }));
   }, []);
 
   const onClickLink = (e) => {

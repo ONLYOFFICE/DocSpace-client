@@ -148,10 +148,10 @@ const PaymentContainer = (props) => {
               <Text isBold>{t("ManagerTypesDescription")}</Text>
               <br />
               <Text isBold>
-                {t("Common:DocspaceAdmin", { portalName: PRODUCT_NAME })}
+                {t("Common:DocspaceAdmin", { productName: PRODUCT_NAME })}
               </Text>
               <Text>
-                {t("AdministratorDescription", { portalName: PRODUCT_NAME })}
+                {t("AdministratorDescription", { productName: PRODUCT_NAME })}
               </Text>
               <br />
               <Text isBold>{t("Common:RoomAdmin")}</Text>
@@ -285,7 +285,9 @@ const PaymentContainer = (props) => {
             (days remaining: {{ delayDaysCount }})
           </Trans>{" "}
           <Text as="span" fontSize="14px" lineHeight="16px">
-            {t("GracePeriodActivatedDescription", { portalName: PRODUCT_NAME })}
+            {t("GracePeriodActivatedDescription", {
+              productName: PRODUCT_NAME,
+            })}
           </Text>
         </Text>
       );

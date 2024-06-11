@@ -38,7 +38,7 @@ const ErrorUnavailable = () => {
     ready && (
       <ErrorUnavailableWrapper>
         <ErrorContainer
-          headerText={t("ErrorDeactivatedText", { portalName: PRODUCT_NAME })}
+          headerText={t("ErrorDeactivatedText", { productName: PRODUCT_NAME })}
         />
       </ErrorUnavailableWrapper>
     )

@@ -470,7 +470,7 @@ class AutomaticBackup extends React.PureComponent {
       <StyledAutoBackup isEnableAuto={isEnableAuto}>
         <div className="backup_modules-header_wrapper">
           <Text className="backup_modules-description settings_unavailable">
-            {t("AutoBackupDescription", { portalName: PRODUCT_NAME })}
+            {t("AutoBackupDescription", { productName: PRODUCT_NAME })}
           </Text>
           <Link
             className="link-learn-more"

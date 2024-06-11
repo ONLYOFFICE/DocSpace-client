@@ -175,7 +175,7 @@ const TwoFactorAuth = (props) => {
     <MainContainer>
       <LearnMoreWrapper>
         <Text fontSize="13px" fontWeight="400">
-          {t("TwoFactorAuthEnableDescription", { portalName: PRODUCT_NAME })}
+          {t("TwoFactorAuthEnableDescription", { productName: PRODUCT_NAME })}
         </Text>
         <Link
           className="link-learn-more"

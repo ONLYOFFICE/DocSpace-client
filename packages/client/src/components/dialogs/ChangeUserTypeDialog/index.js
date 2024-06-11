@@ -70,7 +70,7 @@ const ChangeUserTypeDialog = ({
               type.
             </Trans>
           )}{" "}
-          {t("ChangeUserTypeMessageWarning", { portalName: PRODUCT_NAME })}
+          {t("ChangeUserTypeMessageWarning", { productName: PRODUCT_NAME })}
         </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>

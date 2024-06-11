@@ -95,7 +95,7 @@ const UsersInfoBlock = ({
     <Wrapper>
       {selectedUsers > totalLicenceLimit && (
         <Text className="license-limit-warning">
-          {t("Settings:UserLimitExceeded", { portalName: PRODUCT_NAME })}
+          {t("Settings:UserLimitExceeded", { productName: PRODUCT_NAME })}
         </Text>
       )}
 

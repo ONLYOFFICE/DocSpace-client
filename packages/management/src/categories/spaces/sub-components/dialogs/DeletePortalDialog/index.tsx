@@ -71,7 +71,7 @@ const DeletePortalDialog = () => {
       <ModalDialog.Body className="">
         <Trans
           i18nKey="DeletePortalText"
-          values={{ portalName: PRODUCT_NAME, displayName, email, domain }}
+          values={{ productName: PRODUCT_NAME, displayName, email, domain }}
           components={{
             1: <strong />,
             5: (

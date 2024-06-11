@@ -58,7 +58,7 @@ const ChangePhoneForm = (props) => {
               <Text>
                 {t("CurrentNumber")}: {currentNumber}
               </Text>
-              <Text>{t("PhoneSubtitle", { portalName: PRODUCT_NAME })}</Text>
+              <Text>{t("PhoneSubtitle", { productName: PRODUCT_NAME })}</Text>
             </div>
 
             <TextInput

@@ -54,7 +54,7 @@ const EmptyScreen = ({ t, theme, withUpload, onDrop }: PluginsEmptyScreen) => {
       headerText={t("NoPlugins")}
       descriptionText={
         <Text>
-          {withUpload && t("UploadDescription", { portalName: PRODUCT_NAME })}
+          {withUpload && t("UploadDescription", { productName: PRODUCT_NAME })}
         </Text>
       }
       style={{ gridColumnGap: "39px" }}

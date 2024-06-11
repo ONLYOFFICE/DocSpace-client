@@ -59,7 +59,7 @@ class DeleteOwnerProfileDialogComponent extends React.Component {
         <ModalDialog.Header>{t("DeleteProfileTitle")}</ModalDialog.Header>
         <ModalDialog.Body>
           <Text fontSize="13px">
-            {t("DeleteOwnerRestrictionText", { portalName: PRODUCT_NAME })}
+            {t("DeleteOwnerRestrictionText", { productName: PRODUCT_NAME })}
           </Text>
         </ModalDialog.Body>
         <ModalDialog.Footer>

@@ -211,7 +211,7 @@ const ArticleBodyContent = (props) => {
       case "ManagementCategorySecurity":
         return t("ManagementCategorySecurity");
       case "PortalAccess":
-        return t("PortalAccess", { portalName: PRODUCT_NAME });
+        return t("PortalAccess", { productName: PRODUCT_NAME });
       case "TwoFactorAuth":
         return t("TwoFactorAuth");
       case "ManagementCategoryIntegration":
@@ -229,7 +229,7 @@ const ArticleBodyContent = (props) => {
       case "RestoreBackup":
         return t("RestoreBackup");
       case "PortalDeletion":
-        return t("PortalDeletion", { portalName: PRODUCT_NAME });
+        return t("PortalDeletion", { productName: PRODUCT_NAME });
       case "Common:DeveloperTools":
         return t("Common:DeveloperTools");
       case "Common:Bonus":

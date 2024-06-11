@@ -44,7 +44,7 @@ export const getAccessOptions = (
   const accesses = {
     docSpaceAdmin: {
       key: "docSpaceAdmin",
-      label: t("Common:DocspaceAdmin", { portalName: PRODUCT_NAME }),
+      label: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
       description: t("Translations:RoleDocspaceAdminDescription", {
         portalName: PRODUCT_NAME,
       }),

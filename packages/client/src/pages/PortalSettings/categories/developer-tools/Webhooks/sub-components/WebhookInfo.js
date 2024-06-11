@@ -66,7 +66,7 @@ const WebhookInfo = (props) => {
   return (
     <InfoWrapper>
       <InfoText as="p">
-        {t("WebhooksInfo", { portalName: PRODUCT_NAME, organizationName })}
+        {t("WebhooksInfo", { productName: PRODUCT_NAME, organizationName })}
       </InfoText>
       <StyledGuideLink
         id="webhooks-info-link"

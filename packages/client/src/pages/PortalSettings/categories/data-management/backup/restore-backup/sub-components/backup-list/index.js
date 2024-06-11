@@ -210,7 +210,7 @@ const BackupListModalDialog = (props) => {
   const helpContent = () => (
     <>
       <Text className="restore-backup_warning-description">
-        {t("RestoreBackupWarningText", { portalName: PRODUCT_NAME })}{" "}
+        {t("RestoreBackupWarningText", { productName: PRODUCT_NAME })}{" "}
         {!standalone && (
           <Text as="span" className="restore-backup_warning-link">
             {t("RestoreBackupResetInfoWarningText", {

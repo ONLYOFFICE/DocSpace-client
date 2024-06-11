@@ -52,7 +52,7 @@ const SecurityWrapper = (props) => {
   const data = [
     {
       id: "access-portal",
-      name: t("PortalAccess", { portalName: PRODUCT_NAME }),
+      name: t("PortalAccess", { productName: PRODUCT_NAME }),
       content: <AccessPortal />,
     },
     {

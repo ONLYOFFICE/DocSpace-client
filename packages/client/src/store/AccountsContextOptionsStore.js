@@ -230,8 +230,8 @@ class AccountsContextOptionsStore {
     const adminOption = {
       id: "context-menu_administrator",
       className: "context-menu_drop-down",
-      label: t("Common:DocspaceAdmin", { portalName: PRODUCT_NAME }),
-      title: t("Common:DocspaceAdmin", { portalName: PRODUCT_NAME }),
+      label: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
+      title: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
       onClick: (e) => onChangeType(e, t),
       action: "admin",
       key: "cm-administrator",

@@ -125,7 +125,7 @@ const PluginSDK = ({
         fontWeight={400}
         lineHeight={"20px"}
       >
-        {t("PluginSDKInstruction", { portalName: PRODUCT_NAME })}
+        {t("PluginSDKInstruction", { productName: PRODUCT_NAME })}
       </Text>
       <Button
         className={"read-instructions-button"}

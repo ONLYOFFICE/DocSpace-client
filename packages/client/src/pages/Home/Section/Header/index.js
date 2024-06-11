@@ -530,7 +530,7 @@ const SectionHeaderContent = (props) => {
       {
         id: "header_option_link-portal-users",
         key: "link-portal-users",
-        label: t("LinkForPortalUsers", { portalName: PRODUCT_NAME }),
+        label: t("LinkForPortalUsers", { productName: PRODUCT_NAME }),
         onClick: createLinkForPortalUsers,
         disabled: true,
         icon: InvitationLinkReactSvgUrl,

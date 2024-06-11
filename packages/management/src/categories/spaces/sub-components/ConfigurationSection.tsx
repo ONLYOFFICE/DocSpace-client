@@ -127,7 +127,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
           </Text>
         </div>
         <Text fontSize="12px" lineHeight="16px" fontWeight={400}>
-          {t("ConfigurationDescription", { portalName: PRODUCT_NAME })}
+          {t("ConfigurationDescription", { productName: PRODUCT_NAME })}
         </Text>
       </div>
       <div className="spaces-input-wrapper">
@@ -167,7 +167,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
         </div>
         <div className="spaces-input-block">
           <Text fontSize="13px" fontWeight="600">
-            {t("DocspaceName", { portalName: PRODUCT_NAME })}
+            {t("DocspaceName", { productName: PRODUCT_NAME })}
           </Text>
           <TextInput
             hasError={!!(portalNameError || checkDomainError)}

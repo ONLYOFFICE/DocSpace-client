@@ -176,7 +176,7 @@ const AdminMessage = (props) => {
     <MainContainer>
       <LearnMoreWrapper>
         <Text>
-          {t("AdminsMessageSettingDescription", { portalName: PRODUCT_NAME })}
+          {t("AdminsMessageSettingDescription", { productName: PRODUCT_NAME })}
         </Text>
         <Text fontSize="13px" fontWeight="400" className="learn-subtitle">
           <Trans t={t} i18nKey="SaveToApply" />

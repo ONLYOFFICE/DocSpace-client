@@ -115,11 +115,11 @@ const ChangePortalOwnerDialog = ({
     t("DoTheSame"),
     t("AppointAdmin"),
     t("SetAccessRights"),
-    t("ManagePortal", { portalName: PRODUCT_NAME }),
+    t("ManagePortal", { productName: PRODUCT_NAME }),
     t("ManageUser"),
-    t("ChangePortalOwner:ChangeOwner", { portalName: PRODUCT_NAME }),
-    t("BackupPortal", { portalName: PRODUCT_NAME }),
-    t("DeactivateOrDeletePortal", { portalName: PRODUCT_NAME }),
+    t("ChangePortalOwner:ChangeOwner", { productName: PRODUCT_NAME }),
+    t("BackupPortal", { productName: PRODUCT_NAME }),
+    t("DeactivateOrDeletePortal", { productName: PRODUCT_NAME }),
   ];
 
   return (
@@ -173,10 +173,10 @@ const ChangePortalOwnerDialog = ({
 
         <StyledPeopleSelectorInfo>
           <Text className="new-owner" noSelect title={t("NewPortalOwner")}>
-            {t("NewPortalOwner", { portalName: PRODUCT_NAME })}
+            {t("NewPortalOwner", { productName: PRODUCT_NAME })}
           </Text>
           <Text className="description" noSelect title={t("ChangeInstruction")}>
-            {t("ChangeInstruction", { portalName: PRODUCT_NAME })}
+            {t("ChangeInstruction", { productName: PRODUCT_NAME })}
           </Text>
         </StyledPeopleSelectorInfo>
 
@@ -218,7 +218,7 @@ const ChangePortalOwnerDialog = ({
 
         <StyledAvailableList>
           <Text className="list-header" noSelect title={t("PortalOwnerCan")}>
-            {t("PortalOwnerCan", { portalName: PRODUCT_NAME })}
+            {t("PortalOwnerCan", { productName: PRODUCT_NAME })}
           </Text>
 
           {ownerRights?.map((item) => (

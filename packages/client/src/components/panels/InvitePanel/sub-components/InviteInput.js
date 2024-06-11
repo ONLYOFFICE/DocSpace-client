@@ -447,8 +447,8 @@ const InviteInput = ({
       </StyledSubHeader>
       <StyledDescription>
         {roomId === -1
-          ? t("AddManuallyDescriptionAccounts", { portalName: PRODUCT_NAME })
-          : t("AddManuallyDescriptionRoom", { portalName: PRODUCT_NAME })}
+          ? t("AddManuallyDescriptionAccounts", { productName: PRODUCT_NAME })
+          : t("AddManuallyDescriptionRoom", { productName: PRODUCT_NAME })}
       </StyledDescription>
       <StyledInviteLanguage>
         <Text className="invitation-language">{t("InvitationLanguage")}:</Text>

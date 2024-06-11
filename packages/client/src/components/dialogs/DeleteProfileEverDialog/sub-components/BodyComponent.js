@@ -74,7 +74,7 @@ const BodyComponent = (props) => {
     return (
       <>
         <Text className="user-delete">
-          {t("ActionCannotBeUndone", { portalName: PRODUCT_NAME })}
+          {t("ActionCannotBeUndone", { productName: PRODUCT_NAME })}
         </Text>
         <Text className="text-warning">{t("PleaseNote")}</Text>
         <Text className="text-delete-description">
@@ -91,7 +91,7 @@ const BodyComponent = (props) => {
     return (
       <>
         <Text className="user-delete">
-          {t("ActionCannotBeUndone", { portalName: PRODUCT_NAME })}
+          {t("ActionCannotBeUndone", { productName: PRODUCT_NAME })}
         </Text>
         {!areUsersOnly && (
           <>

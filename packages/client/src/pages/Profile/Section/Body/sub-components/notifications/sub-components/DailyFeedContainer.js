@@ -52,7 +52,7 @@ const DailyFeedContainer = ({
     <div className="notification-container">
       <div className="row">
         <Text {...textProps} className="subscription-title">
-          {t("DailyFeed", { portalName: PRODUCT_NAME })}
+          {t("DailyFeed", { productName: PRODUCT_NAME })}
         </Text>
         <ToggleButton
           className="daily-feed"
@@ -61,7 +61,7 @@ const DailyFeedContainer = ({
         />
       </div>
       <Text {...textDescriptionsProps}>
-        {t("DailyFeedDescription", { portalName: PRODUCT_NAME })}
+        {t("DailyFeedDescription", { productName: PRODUCT_NAME })}
       </Text>
     </div>
   );

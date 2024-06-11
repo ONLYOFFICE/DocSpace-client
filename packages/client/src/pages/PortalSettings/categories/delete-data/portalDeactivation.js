@@ -49,7 +49,7 @@ const PortalDeactivation = (props) => {
   };
 
   useEffect(() => {
-    setDocumentTitle(t("PortalDeactivation", { portalName: PRODUCT_NAME }));
+    setDocumentTitle(t("PortalDeactivation", { productName: PRODUCT_NAME }));
     fetchData();
     onCheckView();
     window.addEventListener("resize", onCheckView);
@@ -85,7 +85,7 @@ const PortalDeactivation = (props) => {
         {t("PortalDeactivationDescription")}
       </Text>
       <Text className="helper">
-        {t("PortalDeactivationHelper", { portalName: PRODUCT_NAME })}
+        {t("PortalDeactivationHelper", { productName: PRODUCT_NAME })}
       </Text>
       <ButtonWrapper>
         <Button

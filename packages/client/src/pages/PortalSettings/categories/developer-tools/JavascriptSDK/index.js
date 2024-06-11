@@ -144,7 +144,7 @@ const PortalIntegration = (props) => {
   const presetsData = [
     {
       title: DOCSPACE,
-      description: t("DocspaceDescription", { portalName: PRODUCT_NAME }),
+      description: t("DocspaceDescription", { productName: PRODUCT_NAME }),
       image: theme.isBase ? DocspaceImg : DocspaceImgDark,
       handleOnClick: navigateToDocspace,
     },
@@ -180,7 +180,7 @@ const PortalIntegration = (props) => {
     },
     {
       title: t("Common:Custom"),
-      description: t("CustomDescription", { portalName: PRODUCT_NAME }),
+      description: t("CustomDescription", { productName: PRODUCT_NAME }),
       image: theme.isBase ? CustomImg : CustomImgDark,
       handleOnClick: navigateToCustom,
     },
@@ -207,7 +207,7 @@ const PortalIntegration = (props) => {
     <SDKContainer>
       <CategoryDescription>
         <Text className="sdk-description">
-          {t("SDKDescription", { portalName: PRODUCT_NAME })}
+          {t("SDKDescription", { productName: PRODUCT_NAME })}
         </Text>
         <Link
           color={currentColorScheme?.main?.accent}
@@ -221,7 +221,7 @@ const PortalIntegration = (props) => {
         <CSP t={t} />
       </CategoryDescription>
       <CategoryHeader>
-        {t("SelectModeEmbedding", { portalName: PRODUCT_NAME })}
+        {t("SelectModeEmbedding", { productName: PRODUCT_NAME })}
       </CategoryHeader>
       <Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
         {t("InitializeSDK")}

@@ -61,7 +61,7 @@ const QuotasBar = ({
       <Trans
         i18nKey="StorageQuotaDescription"
         t={t}
-        values={{ portalName: PRODUCT_NAME }}
+        values={{ productName: PRODUCT_NAME }}
       >
         You can remove the unnecessary files or
         <Link
@@ -109,7 +109,7 @@ const QuotasBar = ({
             <Trans
               i18nKey="RoomQuotaDescription"
               t={t}
-              values={{ portalName: PRODUCT_NAME }}
+              values={{ productName: PRODUCT_NAME }}
             >
               You can archived the unnecessary rooms or
               <Link

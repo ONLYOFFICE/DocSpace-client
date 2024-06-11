@@ -328,11 +328,11 @@ const Wizard = (props) => {
               fontSize="23px"
               className="welcome-text"
             >
-              {t("WelcomeTitle", { portalName: PRODUCT_NAME })}
+              {t("WelcomeTitle", { productName: PRODUCT_NAME })}
             </Text>
             <FormWrapper>
               <Text fontWeight={600} fontSize="16px" className="form-header">
-                {t("Desc", { portalName: PRODUCT_NAME })}
+                {t("Desc", { productName: PRODUCT_NAME })}
               </Text>
               <FieldContainer
                 className="wizard-field"

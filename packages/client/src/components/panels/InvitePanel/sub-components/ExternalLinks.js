@@ -221,7 +221,7 @@ const ExternalLinks = ({
       </StyledSubHeader>
       <StyledDescription>
         {roomId === -1
-          ? t("InviteViaLinkDescriptionAccounts", { portalName: PRODUCT_NAME })
+          ? t("InviteViaLinkDescriptionAccounts", { productName: PRODUCT_NAME })
           : t("InviteViaLinkDescriptionRoom")}
       </StyledDescription>
       {externalLinksVisible && (

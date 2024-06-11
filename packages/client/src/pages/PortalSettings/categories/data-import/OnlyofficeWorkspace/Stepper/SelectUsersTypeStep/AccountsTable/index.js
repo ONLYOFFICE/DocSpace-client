@@ -45,7 +45,7 @@ const AccountsTable = ({
   const typeOptions = [
     {
       key: UserTypes.DocSpaceAdmin,
-      label: t("Common:DocspaceAdmin", { portalName: PRODUCT_NAME }),
+      label: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
       onClick: () => {
         changeGroupType(UserTypes.DocSpaceAdmin);
         toggleAllAccounts(false, [], checkedAccountType);

@@ -137,7 +137,7 @@ const ChangeUserTypeEvent = ({
   const getType = (type) => {
     switch (type) {
       case "admin":
-        return t("Common:DocspaceAdmin", { portalName: PRODUCT_NAME });
+        return t("Common:DocspaceAdmin", { productName: PRODUCT_NAME });
       case "manager":
         return t("Common:RoomAdmin");
       case "collaborator":

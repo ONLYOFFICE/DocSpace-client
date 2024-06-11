@@ -207,7 +207,7 @@ const WebhookDialog = (props) => {
         <StyledWebhookForm onSubmit={onFormSubmit}>
           {!isSettingsModal && (
             <Hint>
-              {t("WebhookCreationHint", { portalName: PRODUCT_NAME })}
+              {t("WebhookCreationHint", { productName: PRODUCT_NAME })}
             </Hint>
           )}
           <LabledInput

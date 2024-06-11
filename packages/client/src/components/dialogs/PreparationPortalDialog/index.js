@@ -47,7 +47,7 @@ const PreparationPortalDialog = (props) => {
       isLarge
     >
       <ModalDialog.Header>
-        {t("PortalRestoring", { portalName: PRODUCT_NAME })}
+        {t("PortalRestoring", { productName: PRODUCT_NAME })}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <StyledPreparationPortalDialog>

@@ -24,28 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { PortalFeaturesLimitations } from "@docspace/shared/enums";
-import { getConvertedSize } from "@docspace/shared/utils/common";
-import { TFunciton, TQuota } from "../types";
+import { TQuota } from "../types";
 
-export const parseQuota = (t: TFunciton, quotaCharacteristics: TQuota) => {
+export const parseQuota = (quotaCharacteristics: TQuota) => {
   const maxValue = quotaCharacteristics.value;
-  const usedValue = quotaCharacteristics.used.value;
+  const usedValue = quotaCharacteristics.used!.value;
 
-  if (maxValue === PortalFeaturesLimitations.Unavailable) return;
+  if (maxValue === PortalFeaturesLimitations.Unavailable)
+    return { used: 0, max: null };
 
   const isExistsMaxValue = maxValue !== PortalFeaturesLimitations.Limitless;
 
-  const resultingMaxValue =
-    quotaCharacteristics.type === "size" && isExistsMaxValue
-      ? getConvertedSize(t, maxValue)
-      : isExistsMaxValue
-        ? maxValue
-        : null;
+  const resultingMaxValue = isExistsMaxValue ? maxValue : null;
 
-  const resultingUsedValue =
-    quotaCharacteristics.type === "size"
-      ? getConvertedSize(t, usedValue)
-      : usedValue;
+  const resultingUsedValue = usedValue;
 
   return { used: resultingUsedValue, max: resultingMaxValue };
 };

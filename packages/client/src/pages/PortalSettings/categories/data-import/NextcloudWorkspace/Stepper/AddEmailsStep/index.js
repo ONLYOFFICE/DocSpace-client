@@ -88,7 +88,7 @@ const AddEmailsStep = (props) => {
     checkedUsers.withEmail.length + checkedUsers.withoutEmail.length;
 
   useEffect(() => {
-    setQuota(parseQuota(t, quotaCharacteristics[1]));
+    setQuota(parseQuota(quotaCharacteristics[1]));
   }, []);
 
   const totalUsedUsers =

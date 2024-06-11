@@ -55,7 +55,7 @@ const SelectUsersStep = ({
 
   useEffect(() => {
     setSearchValue("");
-    setQuota(parseQuota(t, quotaCharacteristics[1]));
+    setQuota(parseQuota(quotaCharacteristics[1]));
   }, []);
 
   const handleDataChange = (leftBoundary, rightBoundary) => {

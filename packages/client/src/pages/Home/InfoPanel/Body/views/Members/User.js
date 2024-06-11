@@ -249,7 +249,7 @@ const User = ({
 
   const typeLabel =
     (type === "user" && userRole?.type !== type) ||
-    (userRole?.type === "manager" && type !== "admin")
+    (userRole?.type === "manager" && type !== "admin" && type !== "owner")
       ? getUserTypeLabel(userRole?.type, t)
       : getUserTypeLabel(type, t);
 

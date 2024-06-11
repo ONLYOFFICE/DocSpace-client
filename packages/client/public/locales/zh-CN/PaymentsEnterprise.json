@@ -12,7 +12,7 @@
   "ActivateToProBannerHeaderTrial": "购买完整的企业版后可以获得：",
   "ActivateUploadDescr": "要激活您的许可证，请在下方上传许可证并单击“激活”。",
   "FreeDaysLeft": "剩余{{count}}天可免费使用",
-  "UpgradeToProBannerInformationAboutShort": "<1>在官方网站上</1>了解更多有关企业版的信息",
+  "UpgradeToProBannerInformationAboutShort": "在<1>官方网站</1>上了解更多有关企业版的信息",
   "UpgradeToProBannerInformationDemo": "<1>点击这里</1>申请演示",
   "UpgradeToProBannerInformationPurchase": "通过邮箱 <1>{{email}}</1> 获得销售团队的咨询",
   "UpgradeToProBannerInformationSupport": "获取技术帮助 <1>{{helpUrl}}</1>",

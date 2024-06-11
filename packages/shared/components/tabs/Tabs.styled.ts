@@ -28,13 +28,17 @@ import styled, { css } from "styled-components";
 import { Base, TColorScheme } from "../../themes";
 import { ThemeTabs } from "./Tabs.enums";
 
-export const StyledTabs = styled.div`
+export const StyledTabs = styled.div<{
+  stickyTop?: string;
+}>`
   display: flex;
   flex-direction: column;
 
   .sticky {
     position: sticky;
-    top: 0;
+    position: -webkit-sticky;
+    top: ${(props) => (props.stickyTop ? props.stickyTop : 0)};
+    background: ${(props) => props.theme.tabs.backgroundColorPrimary};
     z-index: 1;
 
     display: flex;
@@ -71,6 +75,12 @@ export const StyledTabs = styled.div`
       rgba(255, 255, 255, 0) 20.48%,
       ${(props) => props.theme.tabs.gradientColor} 100%
     );
+  }
+
+  .tabs-body {
+    width: 100%;
+    display: flex;
+    align-items: center;
   }
 `;
 
@@ -109,12 +119,14 @@ export const Tab = styled.div<{
   $theme?: ThemeTabs;
 }>`
   display: flex;
+  white-space: nowrap;
   flex-direction: column;
-
   gap: 4px;
-  line-height: 20px;
+
   width: max-content;
+  height: inhert;
   font-weight: 600;
+  line-height: 20px;
   cursor: pointer;
   opacity: ${(props) => (props.isDisabled && props.$theme === ThemeTabs.Secondary ? 0.6 : 1)};
   pointer-events: ${(props) => props.isDisabled && props.$theme === ThemeTabs.Secondary && "none"};
@@ -202,5 +214,3 @@ export const TabSubLine = styled.div<{
       ? props.$currentColorScheme?.main?.accent
       : "transparent"};
 `;
-
-export const TabPanel = styled.div``;

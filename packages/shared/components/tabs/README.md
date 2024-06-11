@@ -74,6 +74,7 @@ const array_items = [
 | `items`          |        `array`         |    ✅    |   -    |     -     | Child elements                                                      |
 | `selectedItemId` |   `number`, `string`   |    -     |   -    |     -     | Selected item id of tabs                                            |
 | `theme`          | `primary`, `secondary` |    -     |   -    | `primary` | Theme for displaying tabs                                           |
+| `stickyTop`      |        `string`        |    -     |   -    |     -     | Tab indentation for sticky positioning                              |
 | `onSelect`       |         `func`         |    -     |   -    |     -     | Sets a callback function that is triggered when the tab is selected |
 
 ### Array Items Properties

@@ -46,6 +46,8 @@ export interface TabsProps {
   selectedItemId?: number | string;
   /** Theme for displaying tabs. */
   theme?: ThemeTabs;
+  /** Tab indentation for sticky positioning. */
+  stickyTop?: string;
   /** Sets a callback function that is triggered when the tab is selected. */
   onSelect?: (element: TTabItem) => void;
 }

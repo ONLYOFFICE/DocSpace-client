@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useRef, MutableRefObject } from "react";
+import { useState, useRef, MutableRefObject, useEffect } from "react";
 import { useTheme } from "styled-components";
-import { StyledTabs, Tab, TabList, TabPanel, TabSubLine } from "./Tabs.styled";
+import { StyledTabs, Tab, TabList, TabSubLine } from "./Tabs.styled";
 import { TabsProps, TTabItem } from "./Tabs.types";
 import { ThemeTabs } from "./Tabs.enums";
 import { OFFSET_RIGHT, OFFSET_LEFT, INDEX_NOT_FOUND } from "./Tabs.constants";
@@ -37,6 +37,7 @@ const Tabs = (props: TabsProps) => {
     items,
     selectedItemId,
     theme = ThemeTabs.Primary,
+    stickyTop,
     onSelect,
     ...rest
   } = props;
@@ -56,7 +57,11 @@ const Tabs = (props: TabsProps) => {
   const isViewFirstTab = useViewTab(tabsRef, 0);
   const isViewLastTab = useViewTab(tabsRef, items.length - 1);
 
-  const scrollToTab = (index: number) => {
+  useEffect(() => {
+    setCurrentItem(items[selectedItemIndex]);
+  }, [selectedItemIndex, items]);
+
+  const scrollToTab = (index: number): void => {
     const tabElement = tabsRef.current.children[index] as HTMLElement;
     const containerWidth = tabsRef.current.offsetWidth;
     const tabWidth = tabElement.offsetWidth;
@@ -78,14 +83,14 @@ const Tabs = (props: TabsProps) => {
     }
   };
 
-  const setSelectedItem = (selectedTabItem: TTabItem, index: number) => {
+  const setSelectedItem = (selectedTabItem: TTabItem, index: number): void => {
     setCurrentItem(selectedTabItem);
     scrollToTab(index);
     onSelect?.(selectedTabItem);
   };
 
   return (
-    <StyledTabs {...rest}>
+    <StyledTabs {...rest} stickyTop={stickyTop}>
       <div className="sticky">
         {!isViewFirstTab && <div className="blur-ahead" />}
         <TabList $theme={theme} ref={tabsRef}>
@@ -117,7 +122,7 @@ const Tabs = (props: TabsProps) => {
       </div>
       <div className="sticky-indent" />
 
-      <TabPanel>{currentItem?.content}</TabPanel>
+      <div className="tabs-body">{currentItem?.content}</div>
     </StyledTabs>
   );
 };

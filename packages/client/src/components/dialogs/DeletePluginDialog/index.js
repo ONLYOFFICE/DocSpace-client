@@ -33,7 +33,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 
 import ModalDialogContainer from "../ModalDialogContainer";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const DeletePluginDialog = (props) => {
   const { t, ready } = useTranslation(["WebPlugins", "Common"]);
@@ -63,7 +63,7 @@ const DeletePluginDialog = (props) => {
     >
       <ModalDialog.Header>{t("DeletePluginTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
-        {t("DeletePluginDescription", { portalName: PORTAL })}
+        {t("DeletePluginDescription", { productName: PRODUCT_NAME })}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

@@ -34,7 +34,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const ChangeUserTypeEvent = ({
   setVisible,
@@ -137,7 +137,7 @@ const ChangeUserTypeEvent = ({
   const getType = (type) => {
     switch (type) {
       case "admin":
-        return t("Common:DocspaceAdmin", { portalName: PORTAL });
+        return t("Common:DocspaceAdmin", { productName: PRODUCT_NAME });
       case "manager":
         return t("Common:RoomAdmin");
       case "collaborator":

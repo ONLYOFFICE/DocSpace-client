@@ -1,4 +1,4 @@
 {
-  "AccessingProblem": "Если у вас возникли проблемы с доступом к {{portalName}}, пожалуйста, свяжитесь с администратором.",
-  "ContactAdministrator": "Обратитесь к администратору {{portalName}}"
+  "AccessingProblem": "Если у вас возникли проблемы с доступом к {{productName}}, пожалуйста, свяжитесь с администратором.",
+  "ContactAdministrator": "Обратитесь к администратору {{productName}}"
 }

@@ -5,9 +5,9 @@
   "DisableRoomQuota": "Dezactivare cotă de stocare pentru această sală",
   "Icon": "Pictogramă",
   "MakeRoomPrivateDescription": "Toate fişierele din această sală vor fi criptate.",
-  "MakeRoomPrivateLimitationsWarningDescription": "Această funcţie vă permite să invitaţi doar utilizatorii {{portalName}} existenți. După crearea unei săli, nu veţi putea modifica lista de utilizatori.",
+  "MakeRoomPrivateLimitationsWarningDescription": "Această funcţie vă permite să invitaţi doar utilizatorii {{productName}} existenți. După crearea unei săli, nu veţi putea modifica lista de utilizatori.",
   "MakeRoomPrivateTitle": "Marcare sala ca privată",
-  "PeopleSelectorInfo": "Numai administratorul sălii sau administratorul spaţiului {{portalName}} poate deveni proprietar al sălii",
+  "PeopleSelectorInfo": "Numai administratorul sălii sau administratorul spaţiului {{productName}} poate deveni proprietar al sălii",
   "PublicRoomBarDescription": "Această sală este disponibilă tuturor la link-ul. Utilizatorii externi vor fi acordați permisiunea Doar vizualizare pentru toate fișierele.",
   "PublicRoomSystemFoldersDescription": "Copiile formularelor la diferite etape de completare sunt stocate în foldere de sistem. Formularele în curs de completare sunt stocate în folderul În curs de completare, iar cele completate sunt stocate în folderul Formulare competate.",
   "PublicRoomSystemFoldersTitle": "Foldere de sistem",
@@ -19,5 +19,5 @@
   "ThirdPartyStorageDescription": "Trebuie să utilizaţi servicii terțe de stocare a datelor pentru această sală. Un nou dosar pentru stocarea datelor din această sală va fi creat în spaţiul de stocare conectat.",
   "ThirdPartyStorageNoStorageAlert": "Mai întâi, trebuie să vă conectați cu acest cont de stocare în secţiunea Integrare. Altfel, nu se va stabili o conexiune.",
   "ThirdPartyStoragePermanentSettingDescription": "Fişiere sunt stocate în spaţiul de stocare de la terțe{{thirdpartyTitle}} în folderul \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "Pentru a conecta un serviciu terț de stocare, trebuie să adăugaţi serviciul corespunzător în secţiunea Integrare din setările {{portalName}}. Contactaţi proprietarul sau administratorul {{portalName}} pentru a activa această integrare."
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "Pentru a conecta un serviciu terț de stocare, trebuie să adăugaţi serviciul corespunzător în secţiunea Integrare din setările {{productName}}. Contactaţi proprietarul sau administratorul {{productName}} pentru a activa această integrare."
 }

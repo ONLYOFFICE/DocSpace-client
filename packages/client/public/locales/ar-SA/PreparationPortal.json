@@ -1,4 +1,4 @@
 {
-  "PortalRestoring": "استعادة {{portalName}}",
-  "PreparationPortalDescription": "بمجرد انتهاء عملية الاستعادة ، ستتم إعادة توجيهك تلقائيًا إلى {{portalName}} الخاص بك.\""
+  "PortalRestoring": "استعادة {{productName}}",
+  "PreparationPortalDescription": "بمجرد انتهاء عملية الاستعادة ، ستتم إعادة توجيهك تلقائيًا إلى {{productName}} الخاص بك.\""
 }

@@ -1,5 +1,5 @@
 {
-  "ActionCannotBeUndone": "Izabrani onemogućeni korisnici će biti uklonjeni iz {{portalName}}-a. Ova radnja se ne može opozvati.",
+  "ActionCannotBeUndone": "Izabrani onemogućeni korisnici će biti uklonjeni iz {{productName}}-a. Ova radnja se ne može opozvati.",
   "CannotReassignFiles": "Ako obrišete više korisnika odjednom, ne možete da dodelite njihove datoteke drugim korisnicima.",
   "DeleteGroupUsersSuccessMessage": "Korisnici su uspešno obrisani.",
   "DeleteMyDocumentsUser": "Sve lične datoteke i folderi u odeljku Moji dokumenti ovog korisnika biće trajno izbrisani.",

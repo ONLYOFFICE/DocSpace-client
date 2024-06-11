@@ -34,7 +34,7 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -127,7 +127,7 @@ const PayerInformationContainer = ({
       tooltipContent={
         <>
           <Text isBold>{t("Payer")}</Text>
-          <Text>{t("PayerDescription", { portalName: PORTAL })}</Text>
+          <Text>{t("PayerDescription", { productName: PRODUCT_NAME })}</Text>
         </>
       }
     />
@@ -137,14 +137,18 @@ const PayerInformationContainer = ({
     const userNotFound = t("UserNotFoundMatchingEmail") + " ";
 
     let invalidEmailDescription = user.isOwner
-      ? t("InvalidEmailWithActiveSubscription", { portalName: PORTAL })
-      : t("InvalidEmailWithActiveSubscriptionForAdmin", { portalName: PORTAL });
+      ? t("InvalidEmailWithActiveSubscription", { productName: PRODUCT_NAME })
+      : t("InvalidEmailWithActiveSubscriptionForAdmin", {
+          productName: PRODUCT_NAME,
+        });
 
     if (isNotPaidPeriod || isFreeAfterPaidPeriod) {
       invalidEmailDescription = user.isOwner
-        ? t("InvalidEmailWithoutActiveSubscription", { portalName: PORTAL })
+        ? t("InvalidEmailWithoutActiveSubscription", {
+            productName: PRODUCT_NAME,
+          })
         : t("InvalidEmailWithoutActiveSubscriptionByAdmin", {
-            portalName: PORTAL,
+            productName: PRODUCT_NAME,
           });
 
       return userNotFound + invalidEmailDescription;

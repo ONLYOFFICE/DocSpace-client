@@ -30,7 +30,7 @@ import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
 import { NotificationsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const DailyFeedContainer = ({
   t,
@@ -52,7 +52,7 @@ const DailyFeedContainer = ({
     <div className="notification-container">
       <div className="row">
         <Text {...textProps} className="subscription-title">
-          {t("DailyFeed", { portalName: PORTAL })}
+          {t("DailyFeed", { productName: PRODUCT_NAME })}
         </Text>
         <ToggleButton
           className="daily-feed"
@@ -61,7 +61,7 @@ const DailyFeedContainer = ({
         />
       </div>
       <Text {...textDescriptionsProps}>
-        {t("DailyFeedDescription", { portalName: PORTAL })}
+        {t("DailyFeedDescription", { productName: PRODUCT_NAME })}
       </Text>
     </div>
   );

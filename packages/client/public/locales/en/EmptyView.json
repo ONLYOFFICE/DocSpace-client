@@ -11,6 +11,6 @@
   "InviteUsersOptionTitle": "Invite users",
   "UploadDevicePDFFormOptionDescription": "Download a PDF form from your device, and the system will automatically convert it into a form that can be filled out.",
   "UploadDevicePDFFormOptionTitle": "Download the complete PDF form",
-  "UploadPDFFormOptionDescription": "Move a ready-to-fill-out PDF form to this room from your {{portalName}}.",
+  "UploadPDFFormOptionDescription": "Move a ready-to-fill-out PDF form to this room from your {{productName}}.",
   "UploadPDFFormOptionTitle": "Upload a PDF form"
 }

@@ -32,7 +32,7 @@ import { SnackBar } from "@docspace/shared/components/snackbar";
 
 import { Link } from "@docspace/shared/components/link";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const QuotasBar = ({
   t,
@@ -61,7 +61,7 @@ const QuotasBar = ({
       <Trans
         i18nKey="StorageQuotaDescription"
         t={t}
-        values={{ portalName: PORTAL }}
+        values={{ productName: PRODUCT_NAME }}
       >
         You can remove the unnecessary files or
         <Link
@@ -83,7 +83,7 @@ const QuotasBar = ({
         t={t}
         i18nKey="UserQuotaDescription"
         values={{
-          portalName: PORTAL,
+          productName: PRODUCT_NAME,
           clickHere: t("ClickHere"),
         }}
         components={{
@@ -109,7 +109,7 @@ const QuotasBar = ({
             <Trans
               i18nKey="RoomQuotaDescription"
               t={t}
-              values={{ portalName: PORTAL }}
+              values={{ productName: PRODUCT_NAME }}
             >
               You can archived the unnecessary rooms or
               <Link

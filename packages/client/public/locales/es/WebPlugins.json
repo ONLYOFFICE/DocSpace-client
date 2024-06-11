@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "Eliminar plugin",
-  "DeletePluginDescription": "Este plugin ya no estará disponible para los usuarios de {{portalName}}. ¿Está seguro de que desea continuar?",
+  "DeletePluginDescription": "Este plugin ya no estará disponible para los usuarios de {{productName}}. ¿Está seguro de que desea continuar?",
   "DeletePluginTitle": "¿Eliminar el plugin?",
   "ExpandFunctionality": "Amplíe la funcionalidad mediante el SDK de plugins ",
   "GoToRepo": "Ir al repositorio",
@@ -10,7 +10,7 @@
   "NotNeedSettings": "No es necesario introducir ajustes",
   "PluginSamples": "Ejemplos de plugins ",
   "PluginSDK": "SDK de plugins",
-  "PluginSDKDescription": "Utilizando el SDK de plugins puede ampliar la funcionalidad de {{portalName}}, conectar servicios de terceros o mejorar la experiencia de usuario existente. Aquí puede encontrar ejemplos de plugins con código fuente disponible en GitHub. ",
+  "PluginSDKDescription": "Utilizando el SDK de plugins puede ampliar la funcionalidad de {{productName}}, conectar servicios de terceros o mejorar la experiencia de usuario existente. Aquí puede encontrar ejemplos de plugins con código fuente disponible en GitHub. ",
   "PluginSDKInstruction": "Haga clic en el botón para obtener instrucciones detalladas sobre cómo crear sus propios plugins. ",
-  "UploadDescription": "Puede añadir plugins para ampliar la funcionalidad de {{portalName}} con características adicionales. Haga clic en Cargar plugin o coloque un archivo en formato ZIP."
+  "UploadDescription": "Puede añadir plugins para ampliar la funcionalidad de {{productName}} con características adicionales. Haga clic en Cargar plugin o coloque un archivo en formato ZIP."
 }

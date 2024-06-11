@@ -1,6 +1,6 @@
 {
   "ErrorEmptyResponse": "Respuesta vacía",
-  "ErrorUnavailableText": "{{portalName}} no está disponible",
+  "ErrorUnavailableText": "{{productName}} no está disponible",
   "LinkDoesNotExist": "El enlace que usted intenta abrir no existe.",
   "LinkHasExpired": "El enlace que usted ha seguido ha expirado."
 }

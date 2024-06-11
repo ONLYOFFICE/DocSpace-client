@@ -42,7 +42,7 @@ import { DeviceType } from "@docspace/shared/enums";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderAdditionalResources from "../sub-components/loaderAdditionalResources";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const mobileCSS = css`
   margin-top: 0px;
@@ -277,7 +277,9 @@ const AdditionalResources = (props) => {
           </div>
         </div>
         <div className="settings_unavailable additional-description">
-          {t("Settings:AdditionalResourcesDescription", { portalName: PORTAL })}
+          {t("Settings:AdditionalResourcesDescription", {
+            productName: PRODUCT_NAME,
+          })}
         </div>
         <div className="branding-checkbox">
           <Checkbox

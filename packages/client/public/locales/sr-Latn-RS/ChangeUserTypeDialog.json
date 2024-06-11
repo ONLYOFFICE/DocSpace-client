@@ -3,6 +3,6 @@
   "ChangeUserTypeHeader": "Promeni tip korisnika",
   "ChangeUserTypeMessage": "Korisnici sa tipom '{{ firstType }}' biće premešteni u tip '{{ secondType }}'.",
   "ChangeUserTypeMessageMulti": "Odabrani korisnici će biti premešteni u '{{ secondType }}' tip.",
-  "ChangeUserTypeMessageWarning": "Ne možete promeniti tip za {{portalName}} administratore i za sebe.",
+  "ChangeUserTypeMessageWarning": "Ne možete promeniti tip za {{productName}} administratore i za sebe.",
   "SuccessChangeUserType": "Korisnički tip je uspešno promenjen"
 }

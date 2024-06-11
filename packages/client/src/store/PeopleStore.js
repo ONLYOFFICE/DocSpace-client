@@ -58,7 +58,7 @@ import {
 } from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
 import { deleteGroup } from "@docspace/shared/api/groups";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 class PeopleStore {
   contextOptionsStore = null;
@@ -316,8 +316,8 @@ class PeopleStore {
     const adminOption = {
       id: "menu_change-user_administrator",
       className: "group-menu_drop-down",
-      label: t("Common:DocspaceAdmin", { portalName: PORTAL }),
-      title: t("Common:DocspaceAdmin", { portalName: PORTAL }),
+      label: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
+      title: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
       onClick: (e) => this.onChangeType(e),
       "data-action": "admin",
       key: "administrator",

@@ -68,5 +68,6 @@
   "LdapSettingsCertUntrustedRoot": "Root Certificate Authority who issued the certificate is not trusted",
   "LdapSettingsCertMalformed": "Malformed certificate",
   "LdapSettingsCertUnrecognizedError": "Unrecognized Error",
-  "LdapUserTypeTooltip": "All users will be added to Dockspace with the selected type."
+  "LdapUserTypeTooltip": "All users will be added to Dockspace with the selected type.",
+  "LdapUserQuotaTooltip": "To set a storage quota for this user, enter an integer value for this attribute in the LDAP directory. It will display the quota value in bytes. This attribute will be applied only during the first setup and can be changed manually in the Accounts section."
 }

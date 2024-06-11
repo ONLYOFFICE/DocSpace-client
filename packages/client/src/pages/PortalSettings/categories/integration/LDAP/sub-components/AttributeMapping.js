@@ -167,6 +167,8 @@ const AttributeMapping = (props) => {
             labelVisible={true}
             hasError={errors.userQuotaLimit}
             labelText={t("LdapQuota")}
+            tooltipContent={t("LdapUserQuotaTooltip")}
+            inlineHelpButton
           >
             <TextInput
               name={QUOTA}

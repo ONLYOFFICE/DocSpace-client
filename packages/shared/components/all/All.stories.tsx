@@ -56,26 +56,26 @@ import { Link, LinkType } from "../link";
 import { Loader, LoaderTypes } from "../loader";
 import { Row } from "../row";
 import { Scrollbar } from "../scrollbar";
-import { TabsContainer } from "../tabs-container";
+import { Tabs, ThemeTabs } from "../tabs";
 import { Text } from "../text";
 import { Toast, toastr } from "../toast";
 import { ToggleContent } from "../toggle-content";
 import { Tooltip } from "../tooltip";
 
-const ArrayItems = [
+const arrayItems = [
   {
-    key: "0",
-    title: "Tab 1",
+    id: "0",
+    name: "Tab 1",
     content: <div>Tab 1 content</div>,
   },
   {
-    key: "1",
-    title: "Tab 2",
+    id: "1",
+    name: "Tab 2",
     content: <div>Tab 2 content</div>,
   },
   {
-    key: "2",
-    title: "Tab 3",
+    id: "2",
+    name: "Tab 3",
     content: <div>Tab 3 content</div>,
   },
 ];
@@ -570,11 +570,11 @@ const Template = () => (
     </div>
     <div>
       <div style={{ padding: "8px 0" }}>
-        <TabsContainer
-          elements={ArrayItems}
-          isDisabled={false}
+        <Tabs
+          items={arrayItems}
+          theme={ThemeTabs.Secondary}
           onSelect={() => {}}
-          selectedItem={0}
+          selectedItemId={arrayItems[0].id}
         />
       </div>
       <div style={{ padding: "16px 0" }}>

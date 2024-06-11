@@ -487,7 +487,7 @@ const CreateUserForm = (props) => {
 
       <StyledCreateUserContent>
         <GreetingContainer>
-          <PortalLogo className="docspace-logo" />
+          <PortalLogo className="portal-logo" />
           {linkData.type === "LinkInvite" && (
             <div className="tooltip">
               <Text fontSize="16px">

@@ -118,7 +118,7 @@ const RoomPassword = (props) => {
     <StyledPage>
       <StyledContent className="public-room-content">
         <StyledBody>
-          <PortalLogo className="docspace-logo" />
+          <PortalLogo className="portal-logo" />
 
           <FormWrapper>
             <div className="password-form">

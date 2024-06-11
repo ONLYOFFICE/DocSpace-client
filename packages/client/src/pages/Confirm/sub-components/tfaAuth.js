@@ -54,7 +54,7 @@ const StyledForm = styled(Box)`
     width: 100%;
   }
 
-  .docspace-logo {
+  .portal-logo {
     width: 100%;
     display: flex;
     align-items: center;
@@ -130,7 +130,7 @@ const TfaAuthForm = withLoader((props) => {
     <StyledPage>
       <StyledContent>
         <StyledForm className="app-code-container">
-          <PortalLogo className="docspace-logo" />
+          <PortalLogo className="portal-logo" />
           <FormWrapper>
             <Box className="app-code-description" marginProp="0 0 32px 0">
               <Text isBold fontSize="14px" className="app-code-text">

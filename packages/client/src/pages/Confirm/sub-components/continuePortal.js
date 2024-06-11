@@ -70,7 +70,7 @@ const ContinuePortal = (props) => {
     <StyledPage>
       <StyledContent>
         <StyledBody>
-          <PortalLogo className="docspace-logo" />
+          <PortalLogo className="portal-logo" />
           <Text fontSize="23px" fontWeight="700" className="title">
             {greetingTitle}
           </Text>

@@ -102,14 +102,14 @@ const DeepLink = ({
       <Scrollbar>
         <StyledBody>
           <LogoWrapper>
-            <PortalLogo className="docspace-logo" isResizable />
+            <PortalLogo className="portal-logo" isResizable />
           </LogoWrapper>
           <FormWrapper>
             <StyledDeepLink>
               <StyledBodyWrapper>
                 <Text className="title">{t("DeepLink:OpeningDocument")}</Text>
                 <StyledFileTile>
-                  <img src={getFileIcon()} alt="docspace-logo" />
+                  <img src={getFileIcon()} alt="portal-logo" />
                   <Text fontSize="14px" fontWeight="600" truncate>
                     {getFileTitle()}
                   </Text>

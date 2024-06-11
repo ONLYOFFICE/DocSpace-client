@@ -44,7 +44,7 @@ const StyledModal = styled(ModalDialogContainer)`
     min-height: 326px;
   }
 
-  .create-docspace-input-block {
+  .create-portal-input-block {
     padding: 16px 0;
   }
 
@@ -56,11 +56,11 @@ const StyledModal = styled(ModalDialogContainer)`
         : `margin-left: 8px;`}
   }
 
-  .create-docspace-checkbox {
+  .create-portal-checkbox {
     margin-bottom: 10px;
   }
 
-  .create-docspace-input {
+  .create-portal-input {
     width: 100%;
   }
 `;
@@ -153,7 +153,7 @@ const CreatePortalDialog = () => {
         <Text noSelect={true}>
           {t("CreateSpaceDescription", { portalName: PORTAL })}
         </Text>
-        <div className="create-docspace-input-block">
+        <div className="create-portal-input-block">
           <Text
             fontSize="13px"
             fontWeight="600"
@@ -166,7 +166,7 @@ const CreatePortalDialog = () => {
             value={name}
             hasError={!!registerError}
             placeholder={t("EnterName")}
-            className="create-docspace-input"
+            className="create-portal-input"
           />
           <div>
             <Text fontSize="12px" fontWeight="400" color="#F24724">
@@ -183,7 +183,7 @@ const CreatePortalDialog = () => {
         </div>
         <div>
           <Checkbox
-            className="create-docspace-checkbox"
+            className="create-portal-checkbox"
             label={t("VisitSpace")}
             onChange={() => setVisit((visit) => !visit)}
             isChecked={visit}

@@ -165,7 +165,7 @@ const ActivateUserForm = (props) => {
       <StyledCreateUserContent>
         <StyledHeader>
           <GreetingContainer>
-            <PortalLogo className="docspace-logo" />
+            <PortalLogo className="portal-logo" />
           </GreetingContainer>
         </StyledHeader>
 

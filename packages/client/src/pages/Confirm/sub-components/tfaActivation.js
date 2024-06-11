@@ -85,7 +85,7 @@ const StyledForm = styled(Box)`
     }
   }
 
-  .docspace-logo {
+  .portal-logo {
     padding-bottom: 40px;
 
     @media ${tablet} {
@@ -195,7 +195,7 @@ const TfaActivationForm = withLoader((props) => {
       <StyledContent>
         <StyledForm className="set-app-container">
           <Box className="set-app-description" marginProp="0 0 32px 0">
-            <PortalLogo className="docspace-logo" />
+            <PortalLogo className="portal-logo" />
             <Text isBold fontSize="14px" className="set-app-title">
               {t("SetAppTitle")}
             </Text>

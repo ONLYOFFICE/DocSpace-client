@@ -318,7 +318,7 @@ const Wizard = (props) => {
       <Scrollbar id="customScrollBar">
         <StyledContent>
           <WizardContainer>
-            <PortalLogo className="docspace-logo" />
+            <PortalLogo className="portal-logo" />
             <Text
               as="div"
               fontWeight={700}

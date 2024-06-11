@@ -501,7 +501,7 @@ const PeopleTableRow = (props) => {
             />
           </TableCell>
 
-          <Link
+          <Text
             type="page"
             title={displayName}
             fontWeight="600"
@@ -517,7 +517,7 @@ const PeopleTableRow = (props) => {
               : displayName?.trim()
                 ? displayName
                 : email}
-          </Link>
+          </Text>
           <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
         </TableCell>
 

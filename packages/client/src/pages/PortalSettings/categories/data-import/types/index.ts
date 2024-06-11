@@ -25,7 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import { TWorkspaceService } from "@docspace/shared/api/settings/types";
+import {
+  TEnhancedMigrationUser,
+  TWorkspaceService,
+} from "@docspace/shared/api/settings/types";
+import { TPaymentFeature } from "@docspace/shared/api/portal/types";
 
 export type TFunciton = ReturnType<typeof useTranslation>["t"];
 
@@ -51,7 +55,6 @@ export interface SelectFileStepProps {
 }
 
 export interface InjectedSelectFileStepProps extends SelectFileStepProps {
-  t: TFunciton;
   incrementStep: TStore["importAccountsStore"]["incrementStep"];
   setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
   cancelUploadDialogVisible: TStore["dialogsStore"]["cancelUploadDialogVisible"];
@@ -105,10 +108,101 @@ export interface LayoutProps {
   component: JSX.Element;
 }
 
-export type TQuota = {
-  id: string;
-  priceTitle: string;
-  type: string;
-  used: { title: string; value: number };
-  value: number;
-};
+export type TQuota = TPaymentFeature;
+
+export interface SelectUsersStepProps {
+  t: TFunciton;
+}
+
+export interface InjectedSelectUsersStepProps extends SelectUsersStepProps {
+  incrementStep: TStore["importAccountsStore"]["incrementStep"];
+  decrementStep: TStore["importAccountsStore"]["decrementStep"];
+  withEmailUsers: TStore["importAccountsStore"]["withEmailUsers"];
+  searchValue: TStore["importAccountsStore"]["searchValue"];
+  setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
+  cancelMigration: TStore["importAccountsStore"]["cancelMigration"];
+  checkedUsers: TStore["importAccountsStore"]["checkedUsers"];
+  users: TStore["importAccountsStore"]["users"];
+
+  quotaCharacteristics: TStore["currentQuotaStore"]["quotaCharacteristics"];
+}
+
+export interface AccountsTableProps {
+  t: TFunciton;
+  accountsData: TStore["importAccountsStore"]["withEmailUsers"];
+}
+
+export interface InjectedAccountsTableProps extends AccountsTableProps {
+  viewAs: TStore["setup"]["viewAs"];
+}
+
+export interface TableViewProps {
+  t: TFunciton;
+  sectionWidth?: number;
+  accountsData: TStore["importAccountsStore"]["withEmailUsers"];
+}
+
+export interface InjectedTableViewProps extends TableViewProps {
+  userId?: string;
+  checkedUsers: TStore["importAccountsStore"]["checkedUsers"];
+  withEmailUsers: TStore["importAccountsStore"]["withEmailUsers"];
+  toggleAccount: TStore["importAccountsStore"]["toggleAccount"];
+  toggleAllAccounts: TStore["importAccountsStore"]["toggleAllAccounts"];
+  isAccountChecked: TStore["importAccountsStore"]["isAccountChecked"];
+  setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
+}
+
+export interface UsersTableHeaderProps {
+  t: TFunciton;
+  sectionWidth: number;
+
+  userId?: string;
+  tableRef: React.RefObject<HTMLDivElement>;
+  columnStorageName: string;
+  columnInfoPanelStorageName: string;
+  isIndeterminate: boolean;
+  isChecked: boolean;
+  toggleAll: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface UsersTableRowProps {
+  t: TFunciton;
+  displayName: string;
+  email: string;
+  isDuplicate: boolean;
+  isChecked: boolean;
+  toggleAccount: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface RowViewProps {
+  t: TFunciton;
+  sectionWidth?: number;
+  accountsData: TStore["importAccountsStore"]["withEmailUsers"];
+}
+
+export interface InjectedRowViewProps extends RowViewProps {
+  userId?: string;
+  checkedUsers: TStore["importAccountsStore"]["checkedUsers"];
+  withEmailUsers: TStore["importAccountsStore"]["withEmailUsers"];
+  toggleAccount: TStore["importAccountsStore"]["toggleAccount"];
+  toggleAllAccounts: TStore["importAccountsStore"]["toggleAllAccounts"];
+  isAccountChecked: TStore["importAccountsStore"]["isAccountChecked"];
+  setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
+}
+
+export interface UsersRowProps {
+  t: TFunciton;
+  data: TEnhancedMigrationUser;
+  sectionWidth?: number;
+  isChecked: boolean;
+  toggleAccount: () => void;
+}
+
+export interface UsersRowContentProps {
+  t: TFunciton;
+  data: TEnhancedMigrationUser;
+  sectionWidth?: number;
+  displayName: string;
+  email: string;
+  isDuplicate: boolean;
+}

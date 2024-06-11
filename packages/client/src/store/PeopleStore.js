@@ -511,24 +511,6 @@ class PeopleStore {
     this.isLoadedProfileSectionBody = isLoadedProfileSectionBody;
   };
 
-  getStatusType = (user) => {
-    if (
-      user.status === EmployeeStatus.Active &&
-      user.activationStatus === EmployeeActivationStatus.Activated
-    ) {
-      return "normal";
-    } else if (
-      user.status === EmployeeStatus.Active &&
-      user.activationStatus === EmployeeActivationStatus.Pending
-    ) {
-      return "pending";
-    } else if (user.status === EmployeeStatus.Disabled) {
-      return "disabled";
-    } else {
-      return "unknown";
-    }
-  };
-
   getUserRole = (user) => {
     if (user.isOwner) return "owner";
     else if (user.isAdmin) return "admin";

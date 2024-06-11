@@ -500,7 +500,7 @@ const Dark: TTheme = {
 
     marginBeforeLabel: "8px",
 
-    background: "#292929",
+    background: black,
     disableBackground: "#545454",
 
     fillColor: grayMaxLight,
@@ -644,7 +644,7 @@ const Dark: TTheme = {
     color: grayMaxLight,
     disableColor: "#6c6c6c",
 
-    backgroundColor: "#292929",
+    backgroundColor: black,
     disableBackgroundColor: grayDarkStrong,
 
     width: {
@@ -702,7 +702,7 @@ const Dark: TTheme = {
     },
 
     icon: {
-      background: "#292929",
+      background: black,
 
       border: "1px solid",
       borderRadius: "0 3px 3px 0",
@@ -1265,7 +1265,7 @@ const Dark: TTheme = {
 
       buttons: {
         height: "32px",
-        background: "#292929",
+        background: black,
         mobileWidth: "40px",
         mobileHeight: "100%",
         mobileBackground: "none",
@@ -1352,16 +1352,16 @@ const Dark: TTheme = {
 
   toast: {
     active: {
-      success: "#292929",
-      error: "#292929",
-      info: "#292929",
-      warning: "#292929",
+      success: black,
+      error: black,
+      info: black,
+      warning: black,
     },
     hover: {
-      success: "#292929",
-      error: "#292929",
-      info: "#292929",
-      warning: "#292929",
+      success: black,
+      error: black,
+      info: black,
+      warning: black,
     },
     border: {
       success: `2px solid ${darkToastDone}`,
@@ -1469,7 +1469,7 @@ const Dark: TTheme = {
     },
   },
   dialogLoader: {
-    borderBottom: "1px solid #292929",
+    borderBottom: `1px solid ${black}`,
   },
 
   // dropDownItem: {
@@ -1557,7 +1557,7 @@ const Dark: TTheme = {
 
       color: grayDark,
       disabledColor: grayDark,
-      background: "#292929",
+      background: black,
       backgroundWithBorder: "none",
       backgroundModernView: "none",
 
@@ -1630,7 +1630,7 @@ const Dark: TTheme = {
 
   toggleButton: {
     fillColorDefault: lightBlueMain,
-    fillColorOff: "#292929",
+    fillColorOff: black,
     hoverFillColorOff: lightDarkGrayHover,
 
     fillCircleColor: white,
@@ -1771,7 +1771,7 @@ const Dark: TTheme = {
   //   },
   // },
   catalog: {
-    background: "#292929",
+    background: black,
 
     header: {
       borderBottom: `1px solid ${grayDarkStrong}`,
@@ -1793,12 +1793,6 @@ const Dark: TTheme = {
     paymentAlert: {
       color: lightStatusWarning,
       warningColor: darkErrorStatus,
-    },
-
-    teamTrainingAlert: {
-      titleColor: white,
-      borderColor: "#388BDE",
-      linkColor: lightSecondMain,
     },
   },
 
@@ -1900,7 +1894,7 @@ const Dark: TTheme = {
   },
 
   nav: {
-    backgroundColor: "#292929",
+    backgroundColor: black,
   },
 
   navItem: {
@@ -1927,7 +1921,7 @@ const Dark: TTheme = {
   },
 
   article: {
-    background: "#292929",
+    background: black,
     pinBorderColor: grayDarkStrong,
     catalogItemHeader: grayDark,
     catalogItemText: "rgba(255, 255, 255, 0.6)",
@@ -1945,7 +1939,7 @@ const Dark: TTheme = {
     header: {
       backgroundColor: black,
       background: `linear-gradient(180deg, ${black} 2.81%, rgba(51, 51, 51, 0.9) 63.03%, rgba(51, 51, 51, 0) 100%);`,
-      trashErasureLabelBackground: "#292929",
+      trashErasureLabelBackground: black,
       trashErasureLabelText: darkGrayDark,
     },
   },
@@ -1954,7 +1948,7 @@ const Dark: TTheme = {
     sectionHeaderToggleIcon: grayDark,
     sectionHeaderToggleIconActive: "#c4c4c4",
     sectionHeaderToggleBg: "transparent",
-    sectionHeaderToggleBgActive: "#292929",
+    sectionHeaderToggleBgActive: black,
 
     backgroundColor: black,
     blurColor: "rgba(20, 20, 20, 0.8)",
@@ -1989,7 +1983,7 @@ const Dark: TTheme = {
 
     history: {
       subtitleColor: gray,
-      fileBlockBg: "#292929",
+      fileBlockBg: black,
       dateColor: gray,
       fileExstColor: gray,
       locationIconColor: gray,
@@ -2003,7 +1997,7 @@ const Dark: TTheme = {
     },
 
     gallery: {
-      borderColor: "#292929",
+      borderColor: black,
       descriptionColor: grayMaxLight,
     },
 
@@ -2074,7 +2068,7 @@ const Dark: TTheme = {
 
     sort: {
       background: black,
-      hoverBackground: "#292929",
+      hoverBackground: black,
       selectedViewIcon: "rgba(255, 255, 255, 0.88)",
       viewIcon: grayDark,
       sortFill: "rgba(255, 255, 255, 0.6)",
@@ -2198,7 +2192,7 @@ const Dark: TTheme = {
         roomsBottomBorderRadius: "0 0 12px 12px",
         upperBorderRadius: "6px 6px 0 0",
         roomsUpperBorderRadius: "12px 12px 0 0",
-        backgroundColorTop: "#292929",
+        backgroundColorTop: black,
       },
 
       sideColor: grayMaxLight,
@@ -2266,7 +2260,7 @@ const Dark: TTheme = {
   },
 
   mediaViewer: {
-    color: "#d1d1d1",
+    color: grayDarkStrong,
     background: "rgba(17, 17, 17, 0.867)",
     backgroundColor: "rgba(11, 11, 11, 0.7)",
     fill: white,
@@ -2284,7 +2278,7 @@ const Dark: TTheme = {
     },
 
     progressBar: {
-      background: "#d1d1d1",
+      background: grayDarkStrong,
       backgroundColor: "rgba(200, 200, 200, 0.2)",
     },
 
@@ -2297,7 +2291,7 @@ const Dark: TTheme = {
     videoViewer: {
       fill: white,
       stroke: white,
-      color: "#d1d1d1",
+      color: grayDarkStrong,
       colorError: white,
       backgroundColorError: darkBlack,
       backgroundColor: "rgba(11, 11, 11, 0.7)",
@@ -2378,14 +2372,14 @@ const Dark: TTheme = {
 
     thirdpartyStorage: {
       combobox: {
-        background: "#292929",
+        background: black,
         dropdownBorderColor: grayDarkStrong,
         hoverDropdownBorderColor: grayDark,
         isOpenDropdownBorderColor: "#e8e8e9",
         arrowFill: grayDarkStrong,
       },
       folderInput: {
-        background: "#292929",
+        background: black,
         borderColor: grayDarkStrong,
         hoverBorderColor: grayDark,
         focusBorderColor: "#e8e8e9",
@@ -2397,9 +2391,9 @@ const Dark: TTheme = {
     iconCropper: {
       gridColor: black,
       deleteButton: {
-        background: "#292929",
+        background: black,
         hoverBackground: black,
-        borderColor: "#292929",
+        borderColor: black,
         hoverBorderColor: "#fafafa",
         color: grayDark,
         iconColor: "#e8e8e9",
@@ -2407,7 +2401,7 @@ const Dark: TTheme = {
     },
 
     previewTile: {
-      background: "#292929",
+      background: black,
       borderColor: grayDarkStrong,
       iconBorderColor: grayLightMid,
     },
@@ -2546,7 +2540,7 @@ const Dark: TTheme = {
 
       borderBottom: `1px solid ${grayDarkStrong}`,
       borderTop: `1px solid ${grayDarkStrong}`,
-      externalLinkBackground: "#292929",
+      externalLinkBackground: black,
       externalLinkSvg: grayMaxLight,
 
       internalLinkBorder: `1px dashed ${grayMaxLight}`,
@@ -2736,7 +2730,7 @@ const Dark: TTheme = {
     titleColor: white,
 
     register: {
-      backgroundColor: "#292929",
+      backgroundColor: black,
       textColor: darkLink,
     },
 
@@ -2951,7 +2945,7 @@ const Dark: TTheme = {
           linkColor: grayDark,
         },
         warningColor: darkErrorStatus,
-        color: "#E17415",
+        color: darkStatusWarning,
       },
 
       migration: {
@@ -2964,7 +2958,7 @@ const Dark: TTheme = {
         infoBlockBackground: darkGrayLight,
         infoBlockTextColor: grayDark,
         errorTextColor: darkErrorStatus,
-        existingTextColor: "#3BA420",
+        existingTextColor: darkStatusPositive,
         tableHeaderText: grayDark,
         tableRowHoverColor: lightDarkGrayHover,
         tableRowTextColor: grayDark,
@@ -3060,7 +3054,7 @@ const Dark: TTheme = {
     activeSessions: {
       color: grayMaxLight,
       borderColor: grayDarkStrong,
-      tickIconColor: "#3BA420",
+      tickIconColor: darkStatusPositive,
       removeIconColor: gray,
       sortHeaderColor: grayDarkStrong,
       tableCellColor: grayDark,

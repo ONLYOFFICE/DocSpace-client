@@ -681,7 +681,6 @@ export const getBaseTheme = () => {
       hoverBorderColor: gray,
       hoverErrorBorderColor: lightErrorStatus,
       hoverWarningBorderColor: lightStatusWarning,
-      lightToastWarningBorderColor: lightStatusWarning,
       hoverDisabledBorderColor: grayLightMid,
 
       focusBorderColor: lightSecondMain,
@@ -1807,12 +1806,6 @@ export const getBaseTheme = () => {
         color: lightStatusWarning,
         warningColor: lightErrorStatus,
       },
-
-      teamTrainingAlert: {
-        titleColor: "#388BDE",
-        borderColor: "#388BDE",
-        linkColor: lightSecondMain,
-      },
     },
 
     alertComponent: {
@@ -2283,7 +2276,7 @@ export const getBaseTheme = () => {
     },
 
     mediaViewer: {
-      color: "#d1d1d1",
+      color: grayStrong,
       background: "rgba(17, 17, 17, 0.867)",
       backgroundColor: "rgba(11, 11, 11, 0.7)",
       fill: white,
@@ -2301,7 +2294,7 @@ export const getBaseTheme = () => {
       },
 
       progressBar: {
-        background: "#d1d1d1",
+        background: grayStrong,
         backgroundColor: "rgba(200, 200, 200, 0.2)",
       },
 
@@ -2314,7 +2307,7 @@ export const getBaseTheme = () => {
       videoViewer: {
         fill: white,
         stroke: white,
-        color: "#d1d1d1",
+        color: grayStrong,
         colorError: white,
         backgroundColorError: darkBlack,
         backgroundColor: "rgba(11, 11, 11, 0.7)",
@@ -2366,7 +2359,7 @@ export const getBaseTheme = () => {
 
       permanentSettings: {
         background: grayLight,
-        isPrivateIcon: "#35ad17",
+        isPrivateIcon: lightStatusPositive,
         descriptionColor: grayText,
       },
 
@@ -2438,7 +2431,7 @@ export const getBaseTheme = () => {
     },
 
     filesThirdPartyDialog: {
-      border: "1px solid #d1d1d1",
+      border: `1px solid ${grayStrong}`,
     },
 
     connectedClouds: {
@@ -2900,7 +2893,7 @@ export const getBaseTheme = () => {
           brandingDescriptionColor: lightGrayDark,
 
           whiteLabel: {
-            borderImg: "1px solid #d1d1d1",
+            borderImg: `1px solid ${grayStrong}`,
 
             backgroundColorWhite: white,
             backgroundColorLight: grayLight,
@@ -3013,7 +3006,7 @@ export const getBaseTheme = () => {
     },
 
     campaignsBanner: {
-      border: "1px solid #d1d1d1",
+      border: `1px solid ${grayStrong}`,
       color: darkBlack,
 
       btnColor: white,
@@ -3079,7 +3072,7 @@ export const getBaseTheme = () => {
       activeSessions: {
         color: black,
         borderColor: grayLightMid,
-        tickIconColor: "#35AD17",
+        tickIconColor: lightStatusPositive,
         removeIconColor: gray,
         sortHeaderColor: grayStrong,
         tableCellColor: gray,

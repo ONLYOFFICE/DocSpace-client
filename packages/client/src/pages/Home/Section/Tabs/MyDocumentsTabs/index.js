@@ -27,12 +27,12 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Submenu } from "@docspace/shared/components/submenu";
+import { Tabs } from "@docspace/shared/components/tabs";
 import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
 
-const MyDocumentsSubmenu = ({
+const MyDocumentsTabs = ({
   isPersonalRoom,
   isRecentTab,
   setFilter,
@@ -41,7 +41,7 @@ const MyDocumentsSubmenu = ({
 }) => {
   const { t } = useTranslation(["Common", "Files"]);
 
-  const submenu = [
+  const tabs = [
     {
       id: "my",
       name: t("Common:MyDocuments"),
@@ -68,14 +68,16 @@ const MyDocumentsSubmenu = ({
     window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`);
   };
 
-  const showSubmenu = (isPersonalRoom || isRecentTab) && isRoot;
-  const startSelect =
-    getObjectByLocation(window.DocSpace.location)?.folder === "recent" ? 1 : 0;
+  const showTabs = (isPersonalRoom || isRecentTab) && isRoot;
+  const startSelectId =
+    getObjectByLocation(window.DocSpace.location)?.folder === "recent"
+      ? tabs[1].id
+      : tabs[0].id;
 
-  if (showSubmenu && showBodyLoader) return <SectionSubmenuSkeleton />;
+  if (showTabs && showBodyLoader) return <SectionSubmenuSkeleton />;
 
-  return showSubmenu ? (
-    <Submenu data={submenu} startSelect={startSelect} onSelect={onSelect} />
+  return showTabs ? (
+    <Tabs items={tabs} selectedItemId={startSelectId} onSelect={onSelect} />
   ) : null;
 };
 
@@ -93,4 +95,4 @@ export default inject(
       isRoot,
     };
   },
-)(observer(MyDocumentsSubmenu));
+)(observer(MyDocumentsTabs));

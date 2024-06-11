@@ -24,16 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Submenu } from "@docspace/shared/components/submenu";
-import { tablet } from "@docspace/shared/utils/device";
-import styled from "styled-components";
+import AccountsTabs from "./AccountsTabs";
+import MyDocumentsTabs from "./MyDocumentsTabs";
+import { inject, observer } from "mobx-react";
+import { useLocation } from "react-router-dom";
 
-export const AccountsSubmenu = styled(Submenu)`
-  /* width: 100%;
+const SectionSubmenuContent = ({ isPersonalRoom, isRecentTab }) => {
+  const location = useLocation();
+  const isAccounts = location.pathname.includes("/accounts");
 
-  @media ${tablet} {
-    .sticky {
-      margin-top: 8px;
-    }
-  } */
-`;
+  if (isPersonalRoom || isRecentTab) return <MyDocumentsTabs />;
+  if (isAccounts) return <AccountsTabs />;
+  return null;
+};
+
+export default inject(({ treeFoldersStore }) => ({
+  isPersonalRoom: treeFoldersStore.isPersonalRoom,
+  isRecentTab: treeFoldersStore.isRecentTab,
+}))(observer(SectionSubmenuContent));

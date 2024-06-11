@@ -188,7 +188,7 @@ const EditRoomEvent = ({
         room = await removeLogoFromRoom(room.id);
       }
 
-      if (roomParams.icon.uploadedFile) {
+      if (roomParams.iconWasUpdated && roomParams.icon.uploadedFile) {
         updateRoom(item, {
           ...room,
           logo: { big: item.logo.original },

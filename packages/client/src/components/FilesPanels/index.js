@@ -158,7 +158,7 @@ const Panels = (props) => {
   const descriptionTextFileFormRoomDialog = useMemo(() => {
     const text = {
       [FilesSelectorFilterTypes.DOCX]: t("Common:SelectDOCXFormat"),
-      [FilesSelectorFilterTypes.DOCXF]: t("Common:SelectDOCXFFormat"),
+      // [FilesSelectorFilterTypes.DOCXF]: t("Common:SelectDOCXFFormat"),
       [FilesSelectorFilterTypes.PDF]: t("Common:SelectPDFFormat"),
     };
 

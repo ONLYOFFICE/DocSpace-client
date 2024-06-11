@@ -1,8 +1,6 @@
 {
   "CollaboratorEmptyDesciprtion": "Get started with quick actions:",
   "CollaboratorEmptyTitle": "The room is empty.",
-  "CreateFormFromTextDocOptionDescription": "Simply add fields to create PDF forms from ready made documents",
-  "CreateFormFromTextDocOptionTitle": "Create a form from a prepared document",
   "CreateNewFileDescription": "Start working in the room by creating files or folders",
   "CreateNewFileTitle": "Create a new file",
   "CustomRoomEmptyTitle": "Welcome to the Custom room",
@@ -13,7 +11,6 @@
   "FormFolderDefaultUserTitle": "No forms in this folder yet",
   "FormRoomEmptyTitle": "Welcome to the Form filling room",
   "InviteUsersOptionDescription": "Add portal members for joint editing in the room",
-  "InviteUsersOptionFormRoomDescription": "Don't forget to add participants who will fill out the form All added PDF forms are available for you to fill out",
   "InviteUsersOptionTitle": "Inviting Attendees",
   "ShareOptionDescription": "Copy a public access link or invite other users to the room to start the form filling process.",
   "ShareOptionTitle": "Share a room",

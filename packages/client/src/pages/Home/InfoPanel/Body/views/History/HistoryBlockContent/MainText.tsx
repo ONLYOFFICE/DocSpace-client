@@ -37,13 +37,12 @@ interface HistoryMainTextProps {
 const HistoryMainText = ({ t, feed }: HistoryMainTextProps) => {
   return (
     <StyledHistoryBlockMessage className="message">
-      {/* <span className="main-message">{t(feed.action.key)} */}
       <span className="main-message">
         <Trans
           t={t}
           ns="InfoPanel"
           i18nKey={feed.action.key}
-          values={{ roomName: feed.data.title }}
+          values={{ roomName: feed.data?.title }}
           components={{ bold: <strong /> }}
         />
       </span>{" "}

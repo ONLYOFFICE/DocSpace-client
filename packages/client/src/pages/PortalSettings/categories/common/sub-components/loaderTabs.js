@@ -47,7 +47,7 @@ const StyledLoader = styled.div`
   }
 `;
 
-const LoaderSubmenu = () => {
+const LoaderTabs = () => {
   return (
     <StyledLoader>
       <RectangleSkeleton width="100px" height="28px" className="loader" />
@@ -56,4 +56,4 @@ const LoaderSubmenu = () => {
   );
 };
 
-export default LoaderSubmenu;
+export default LoaderTabs;

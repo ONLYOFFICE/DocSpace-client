@@ -26,14 +26,14 @@
 
 import React, { useEffect, useState, useTransition, Suspense } from "react";
 import styled, { css } from "styled-components";
-import { Submenu } from "@docspace/shared/components/submenu";
+import { Tabs } from "@docspace/shared/components/tabs";
 
 import { Box } from "@docspace/shared/components/box";
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import JavascriptSDK from "./JavascriptSDK";
 import Webhooks from "./Webhooks";
 
@@ -48,17 +48,13 @@ import PluginSDK from "./PluginSDK";
 import { Badge } from "@docspace/shared/components/badge";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
-const StyledSubmenu = styled(Submenu)`
-  .sticky {
-    z-index: 201;
-  }
-`;
-
 const DeveloperToolsWrapper = (props) => {
   const { loadBaseInfo, currentDeviceType } = props;
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [currentTabId, setCurrentTabId] = useState();
 
   const { t, ready } = useTranslation([
     "JavascriptSdk",
@@ -113,21 +109,19 @@ const DeveloperToolsWrapper = (props) => {
     },
   ];
 
-  const [currentTab, setCurrentTab] = useState(
-    data.findIndex((item) => location.pathname.includes(item.id)),
-  );
-
   const load = async () => {
     //await loadBaseInfo();
   };
 
   useEffect(() => {
     const path = location.pathname;
-    const currentTab = data.findIndex((item) => path.includes(item.id));
+    const currentTab = data.find((item) => path.includes(item.id));
     if (currentTab !== -1) {
-      setCurrentTab(currentTab);
+      setCurrentTabId(currentTab.id);
     }
-  }, []);
+
+    setIsLoading(true);
+  }, [location]);
 
   useEffect(() => {
     ready && startTransition(load);
@@ -141,19 +135,18 @@ const DeveloperToolsWrapper = (props) => {
         `/portal-settings/developer-tools/${e.id}`,
       ),
     );
+    setCurrentTabId(e.id);
   };
 
-  const loaders = [<SSOLoader />, <AppLoader />];
+  if (!isLoading) return <SSOLoader />;
 
   return (
-    <Suspense fallback={loaders[currentTab] || <AppLoader />}>
-      <StyledSubmenu
-        data={data}
-        startSelect={currentTab}
-        onSelect={onSelect}
-        topProps={SECTION_HEADER_HEIGHT[currentDeviceType]}
-      />
-    </Suspense>
+    <Tabs
+      items={data}
+      selectedItemId={currentTabId}
+      onSelect={onSelect}
+      stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+    />
   );
 };
 

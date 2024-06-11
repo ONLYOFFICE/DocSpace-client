@@ -26,7 +26,7 @@
 
 import { useState, useEffect } from "react";
 import { objectToGetParams } from "@docspace/shared/utils/common";
-import { TabsContainer } from "@docspace/shared/components/tabs-container";
+import { Tabs, ThemeTabs } from "@docspace/shared/components/tabs";
 
 import { CodeToInsert } from "./CodeToInsert";
 import { GetCodeBlock } from "./GetCodeBlock";
@@ -56,13 +56,13 @@ export const PreviewBlock = ({
   );
   const dataTabs = [
     {
-      key: "preview",
-      title: t("Common:Preview"),
+      id: "preview",
+      name: t("Common:Preview"),
       content: preview,
     },
     {
-      key: "code",
-      title: t("Code"),
+      id: "code",
+      name: t("Code"),
       content: code,
     },
   ];
@@ -82,9 +82,10 @@ export const PreviewBlock = ({
 
   return showPreview ? (
     <Preview>
-      <TabsContainer
+      <Tabs
+        theme={ThemeTabs.Secondary}
         onSelect={loadCurrentFrame}
-        elements={dataTabs}
+        items={dataTabs}
         isDisabled={isDisabled}
       />
     </Preview>

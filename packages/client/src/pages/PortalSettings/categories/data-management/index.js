@@ -25,14 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useTheme } from "styled-components";
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 
-import { Submenu } from "@docspace/shared/components/submenu";
+import { Tabs } from "@docspace/shared/components/tabs";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
@@ -58,8 +58,9 @@ const DataManagementWrapper = (props) => {
   } = props;
 
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const [currentTab, setCurrentTab] = useState(0);
+  const [currentTabId, setCurrentTabId] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   const { interfaceDirection } = useTheme();
@@ -120,12 +121,11 @@ const DataManagementWrapper = (props) => {
 
   useEffect(() => {
     const path = location.pathname;
-
-    const currentTab = data.findIndex((item) => path.includes(item.id));
-    if (currentTab !== -1) setCurrentTab(currentTab);
+    const currentTab = data.find((item) => path.includes(item.id));
+    if (currentTab !== -1) setCurrentTabId(currentTab.id);
 
     setIsLoading(true);
-  }, []);
+  }, [location]);
 
   const onSelect = (e) => {
     const url = isManagement()
@@ -134,6 +134,7 @@ const DataManagementWrapper = (props) => {
     navigate(
       combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
     );
+    setCurrentTabId(e.id);
   };
 
   if (!isLoading) return <AppLoader />;
@@ -141,11 +142,11 @@ const DataManagementWrapper = (props) => {
   return isNotPaidPeriod ? (
     <ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
   ) : (
-    <Submenu
-      data={data}
-      startSelect={currentTab}
+    <Tabs
+      items={data}
+      selectedItemId={currentTabId}
       onSelect={(e) => onSelect(e)}
-      topProps={SECTION_HEADER_HEIGHT[currentDeviceType]}
+      stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
     />
   );
 };

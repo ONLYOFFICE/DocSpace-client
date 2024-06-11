@@ -206,6 +206,7 @@ const FilesSelector = ({
 
     getRootData,
     setSelectedItemType,
+    subscribe,
   });
 
   const { getFileList } = useFilesHelper({

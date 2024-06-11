@@ -173,7 +173,6 @@ const Header = (props) => {
       <div>
         <Headline className="header-headline" type="content">
           {t("Profile:MyProfile")}
-          {profile?.isLDAP && ` (${t("Common:LDAP")})`}
         </Headline>
       </div>
       <div className="action-button">

@@ -24,17 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { withTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 import { Badge } from "@docspace/shared/components/badge";
 import Badges from "@docspace/client/src/pages/Home/Section/AccountsBody/Badges";
 import { StyledAccountsItemTitle } from "../../styles/accounts";
-import { StyledTitle } from "../../styles/common";
 
 import { decode } from "he";
 
@@ -120,16 +120,22 @@ const AccountsItemTitle = ({
         )}
 
         {isLDAP && (
-          <Badge
-            className="ldap-badge"
-            label={t("Common:LDAP")}
-            color={"#FFFFFF"}
-            backgroundColor="#8570BD"
-            fontSize={"9px"}
-            fontWeight={800}
-            noHover
-            lineHeight={"13px"}
-          />
+          <>
+            <Badge
+              id="ldap-badge-info-panel"
+              className="ldap-badge"
+              label={t("Common:LDAP")}
+              color={"#FFFFFF"}
+              backgroundColor="#8570BD"
+              fontSize={"9px"}
+              fontWeight={800}
+              noHover
+              lineHeight={"13px"}
+            />
+            <Tooltip anchorSelect={`div[id='ldap-badge-info-panel'] div`}>
+              {t("PeopleTranslations:LDAPAccountTooltip")}
+            </Tooltip>
+          </>
         )}
       </div>
       {!!contextOptions.length && (

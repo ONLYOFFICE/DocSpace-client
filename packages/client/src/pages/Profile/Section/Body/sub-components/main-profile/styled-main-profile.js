@@ -123,10 +123,10 @@ export const StyledInfo = styled.div`
         ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
-                margin-right: 18px;
+                margin-right: 4px;
               `
             : css`
-                margin-left: 18px;
+                margin-left: 4px;
               `}
       }
 

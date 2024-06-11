@@ -25,5 +25,6 @@
   "SuccessDeletePersonalData": "Personal data has been successfully deleted",
   "SuccessSentInvitation": "The invitation was successfully sent",
   "SuccessSentMultipleInvitatios": "Invitations were successfully sent",
-  "WithoutGroup": "Without group"
+  "WithoutGroup": "Without group",
+  "LDAPAccountTooltip": "This user account is loaded from LDAP. If you need to change the user name and email address, or disable a user, refer to the LDAP directory."
 }

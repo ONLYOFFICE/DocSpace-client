@@ -274,16 +274,22 @@ const MainProfile = (props) => {
               )}
 
               {profile.isLDAP && (
-                <Badge
-                  className="ldap-badge"
-                  label={t("Common:LDAP")}
-                  color={"#FFFFFF"}
-                  backgroundColor="#8570BD"
-                  fontSize={"9px"}
-                  fontWeight={800}
-                  noHover
-                  lineHeight={"13px"}
-                />
+                <>
+                  <Badge
+                    id="ldap-badge-profile"
+                    className="ldap-badge"
+                    label={t("Common:LDAP")}
+                    color={"#FFFFFF"}
+                    backgroundColor="#8570BD"
+                    fontSize={"9px"}
+                    fontWeight={800}
+                    noHover
+                    lineHeight={"13px"}
+                  />
+                  <Tooltip anchorSelect={`div[id='ldap-badge-profile'] div`}>
+                    {t("PeopleTranslations:LDAPAccountTooltip")}
+                  </Tooltip>
+                </>
               )}
 
               {!profile.isSSO && !profile.isLDAP && (

@@ -31,7 +31,7 @@
   "GalleryEmptyScreenText": "Oglejte si podrobnosti predloge obrazca tukaj",
   "GroupsEmptyScreenText": "Tukaj si oglejte podrobnosti o skupini",
   "HistoryEmptyScreenText": "Tukaj bo prikazana zgodovina aktivnosti",
-  "InfoBanner": "Seznam povabljenih uporabnikov vključuje lastnika in/ali skrbnike tega prostora DocSpace s polnim dostopom do vseh sob. Lastniku in/ali skrbniku ni mogoče dodeliti drugih pravic dostopa. Ko bodo dodani v sobo, bodo obveščeni o vseh spremembah.",
+  "InfoBanner": "Seznam povabljenih uporabnikov vključuje lastnika in/ali skrbnike tega prostora {{productName}} s polnim dostopom do vseh sob. Lastniku in/ali skrbniku ni mogoče dodeliti drugih pravic dostopa. Ko bodo dodani v sobo, bodo obveščeni o vseh spremembah.",
   "ItemsSelected": "Predmeti izbrani",
   "LastModifiedBy": "Nazadnje spremenjeno",
   "Properties": "Lastnosti",

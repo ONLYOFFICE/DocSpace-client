@@ -206,6 +206,8 @@ class StorageManagement {
 
         isWaitRequest = false;
       } catch (e) {
+        toastr.error(e);
+
         this.clearIntervalCheckRecalculate();
 
         this.setIsRecalculating(false);

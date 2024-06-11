@@ -31,7 +31,7 @@
   "GalleryEmptyScreenText": "Vea aquí los detalles de la plantilla del formulario ",
   "GroupsEmptyScreenText": "Ver detalles del grupo aquí",
   "HistoryEmptyScreenText": "El historial de actividad se mostrará aquí",
-  "InfoBanner": "La lista de usuarios invitados incluye al propietario y/o administrador de este DocSpace con acceso completo a todas las salas. Al propietario y/o administrador no se le pueden asignar otros permisos de acceso. Una vez añadidos a la sala, se les notificarán todos los cambios.",
+  "InfoBanner": "La lista de usuarios invitados incluye al propietario y/o administrador de este {{productName}} con acceso completo a todas las salas. Al propietario y/o administrador no se le pueden asignar otros permisos de acceso. Una vez añadidos a la sala, se les notificarán todos los cambios.",
   "ItemsSelected": "Elementos seleccionados",
   "LastModifiedBy": "Ultima modificación por",
   "Properties": "Propiedades",

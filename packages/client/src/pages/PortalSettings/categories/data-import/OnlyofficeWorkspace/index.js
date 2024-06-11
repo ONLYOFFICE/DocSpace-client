@@ -44,6 +44,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { toastr } from "@docspace/shared/components/toast";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const STEP_LENGTH = 6;
 
@@ -105,6 +106,7 @@ const OnlyofficeWorkspace = ({
   getMigrationStatus,
   setUsers,
   filteredUsers,
+  organizationName,
 }) => {
   const [showReminder, setShowReminder] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
@@ -130,6 +132,7 @@ const OnlyofficeWorkspace = ({
         i18nKey="TypesAndPrivileges"
         ns="Settings"
         t={t}
+        values={{ productName: PRODUCT_NAME }}
         components={{
           1: <strong></strong>,
           2: <strong></strong>,
@@ -229,7 +232,10 @@ const OnlyofficeWorkspace = ({
   return (
     <WorkspaceWrapper>
       <Text className="workspace-subtitle">
-        {t("Settings:AboutDataImport")}
+        {t("Settings:AboutDataImport", {
+          productName: PRODUCT_NAME,
+          organizationName,
+        })}
       </Text>
       <div className="step-container">
         <Box displayProp="flex" marginProp="0 0 8px">
@@ -245,6 +251,7 @@ const OnlyofficeWorkspace = ({
             renderTooltip,
             Trans,
             filteredUsers.length === 0,
+            organizationName,
           )}
         </Box>
         <StepContent
@@ -264,7 +271,7 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
   const { clearCheckedAccounts, getMigrationStatus, setUsers, filteredUsers } =
     importAccountsStore;
   const { viewAs, setViewAs } = setup;
-  const { currentDeviceType } = settingsStore;
+  const { currentDeviceType, organizationName } = settingsStore;
 
   return {
     clearCheckedAccounts,
@@ -274,5 +281,6 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
     getMigrationStatus,
     setUsers,
     filteredUsers,
+    organizationName,
   };
 })(withTranslation(["Common, Settings"])(observer(OnlyofficeWorkspace)));

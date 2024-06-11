@@ -55,7 +55,10 @@ import {
   RoomsProviderType,
   RoomsType,
 } from "@docspace/shared/enums";
-import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
+import {
+  PRODUCT_NAME,
+  ROOMS_PROVIDER_TYPE_NAME,
+} from "@docspace/shared/constants";
 
 import { getDefaultRoomName } from "SRC_DIR/helpers/filesUtils";
 
@@ -374,16 +377,7 @@ const SectionFilterContent = ({
           ? insideGroupFilter.clone()
           : accountsFilter.clone();
 
-        if (status === 3) {
-          newFilter.employeeStatus = EmployeeStatus.Disabled;
-          newFilter.activationStatus = null;
-        } else if (status === 2) {
-          newFilter.employeeStatus = EmployeeStatus.Active;
-          newFilter.activationStatus = status;
-        } else {
-          newFilter.employeeStatus = null;
-          newFilter.activationStatus = status;
-        }
+        newFilter.employeeStatus = status;
 
         if (quota) {
           newFilter.quotaFilter = quota;
@@ -784,18 +778,18 @@ const SectionFilterContent = ({
     if (isAccountsPage) {
       if (isPeopleAccounts || isInsideGroup) {
         const filter = isInsideGroup ? insideGroupFilter : accountsFilter;
-        if (filter.employeeStatus || filter.activationStatus) {
-          const key = filter.employeeStatus === 2 ? 3 : filter.activationStatus;
+        if (filter.employeeStatus) {
           let label = "";
+          const key = filter.employeeStatus;
 
           switch (key) {
-            case 1:
+            case EmployeeStatus.Active:
               label = t("Common:Active");
               break;
-            case 2:
+            case EmployeeStatus.Pending:
               label = t("PeopleTranslations:PendingTitle");
               break;
-            case 3:
+            case EmployeeStatus.Disabled:
               label = t("PeopleTranslations:DisabledEmployeeStatus");
               break;
           }
@@ -812,7 +806,7 @@ const SectionFilterContent = ({
 
           switch (+filter.role) {
             case EmployeeType.Admin:
-              label = t("Common:DocspaceAdmin");
+              label = t("Common:DocspaceAdmin", { productName: PRODUCT_NAME });
               break;
             case EmployeeType.User:
               label = t("Common:RoomAdmin");
@@ -1321,13 +1315,13 @@ const SectionFilterContent = ({
         },
         {
           id: "filter_status-active",
-          key: 1,
+          key: EmployeeStatus.Active,
           group: "filter-status",
           label: t("Common:Active"),
         },
         {
           id: "filter_status-pending",
-          key: 2,
+          key: EmployeeStatus.Pending,
           group: "filter-status",
           label: t("PeopleTranslations:PendingTitle"),
         },
@@ -1336,7 +1330,7 @@ const SectionFilterContent = ({
       if (!isRoomAdmin)
         statusItems.push({
           id: "filter_status-disabled",
-          key: 3,
+          key: EmployeeStatus.Disabled,
           group: "filter-status",
           label: t("PeopleTranslations:DisabledEmployeeStatus"),
         });
@@ -1352,7 +1346,7 @@ const SectionFilterContent = ({
           id: "filter_type-docspace-admin",
           key: EmployeeType.Admin,
           group: "filter-type",
-          label: t("Common:DocspaceAdmin"),
+          label: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
         },
         {
           id: "filter_type-room-admin",

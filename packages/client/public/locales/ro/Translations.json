@@ -31,7 +31,7 @@
   "PublicRoomLinkValidTime": "Acest link este valabil până la {{date}}. Odată ce link-ul expiră, nu va mai fi nu va fi posibil să-l utilizați pentru a accesa sala.",
   "RoleCommentator": "Comentator",
   "RoleCommentatorDescription": "Operaţii cu fişiere existente: vizualizare, comentare.",
-  "RoleDocspaceAdminDescription": "Administratorii DocSpace pot accesa setările DocSpace, gestiona și arhiva săli, invita noi utilizatori și atribui roluri în funcţie de nivelul lor. Toţi administratorii pot accesa secţiunea Personal.",
+  "RoleDocspaceAdminDescription": "Administratorii {{productName}} pot accesa setările {{productName}}, gestiona și arhiva săli, invita noi utilizatori și atribui roluri în funcţie de nivelul lor. Toţi administratorii pot accesa secţiunea Personal.",
   "RoleEditorDescription": "Operaţii cu fişiere existente: vizualizare, editare, completare formulare, revizuire, comentare.",
   "RoleFormFiller": "Form filler",
   "RoleFormFillerDescription": "Operaţii cu fişiere existente: vizualizare, completare formulare, revizuire, comentare.",

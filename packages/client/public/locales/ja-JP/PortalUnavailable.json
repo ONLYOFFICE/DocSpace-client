@@ -1,4 +1,4 @@
 {
-  "AccessingProblem": "このDocSpaceにアクセスできない場合は、管理者までご連絡ください。",
-  "ContactAdministrator": "DocSpaceの管理者までご連絡ください"
+  "AccessingProblem": "この{{productName}}にアクセスできない場合は、管理者までご連絡ください。",
+  "ContactAdministrator": "{{productName}}の管理者までご連絡ください"
 }

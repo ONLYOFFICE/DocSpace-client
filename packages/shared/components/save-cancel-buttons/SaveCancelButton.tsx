@@ -54,6 +54,7 @@ const SaveCancelButtons = ({
   additionalClassSaveButton,
   additionalClassCancelButton,
   saveButtonDisabled,
+  getTopComponent,
 }: SaveCancelButtonProps) => {
   const onKeydown = React.useCallback(
     (e: KeyboardEvent) => {
@@ -110,6 +111,7 @@ const SaveCancelButtons = ({
       hideBorder={hideBorder}
       data-testid="save-cancel-buttons"
     >
+      {getTopComponent?.()}
       <div className="buttons-flex">
         <Button
           tabIndex={tabIndexSaveButton}

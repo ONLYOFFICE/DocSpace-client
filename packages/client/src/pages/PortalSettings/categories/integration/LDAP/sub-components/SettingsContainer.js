@@ -106,7 +106,9 @@ const SettingsContainer = ({
           <AdvancedSettings />
           <ButtonsContainer />
 
-          <ProgressContainer operation={LDAPOperation.SaveAndSync} />
+          {!isMobileView && (
+            <ProgressContainer operation={LDAPOperation.SaveAndSync} />
+          )}
 
           {isCertificateDialogVisible && <CertificateDialog />}
         </>

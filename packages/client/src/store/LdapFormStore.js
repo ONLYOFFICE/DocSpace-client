@@ -9,7 +9,7 @@ import {
 } from "@docspace/shared/api/settings";
 import { getNextSynchronization } from "@docspace/shared/components/cron";
 import { EmployeeType, LDAPOperation } from "@docspace/shared/enums";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import isEqual from "lodash/isEqual";
 import delay from "lodash/delay";
 import { toastr } from "@docspace/shared/components/toast";
@@ -205,7 +205,9 @@ class LdapFormStore {
       this.mapDefaultSettings(defaultRes.value);
     }
 
-    this.isLoaded = true;
+    runInAction(() => {
+      this.isLoaded = true;
+    });
 
     if (
       settingsRes.status == "rejected" ||

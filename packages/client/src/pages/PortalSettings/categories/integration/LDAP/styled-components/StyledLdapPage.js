@@ -163,7 +163,7 @@ const StyledLdapPage = styled(Box)`
       margin-bottom: 16px;
     }
 
-    margin-bottom: 28px;
+    margin-bottom: ${(props) => (props.isMobileView ? "40" : "28")}px;
   }
 
   .ldap_sync-container {
@@ -182,6 +182,12 @@ const StyledLdapPage = styled(Box)`
     margin-top: 16px;
     height: 32px;
     width: 350px;
+
+    ${(props) =>
+      props.isMobileView &&
+      css`
+        padding-left: 16px;
+      `}
   }
 
   .manual-sync-button,

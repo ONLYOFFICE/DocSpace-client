@@ -32,6 +32,10 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Box } from "@docspace/shared/components/box";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
+import ProgressContainer from "./ProgressContainer";
+
+import { DeviceType, LDAPOperation } from "@docspace/shared/enums";
+
 const ButtonContainer = ({
   saveLdapSettings,
   restoreToDefault,
@@ -40,6 +44,8 @@ const ButtonContainer = ({
 
   isLdapEnabled,
   isUIDisabled,
+
+  isMobileView,
 }) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
@@ -50,6 +56,27 @@ const ButtonContainer = ({
   const onResetClick = React.useCallback(() => {
     restoreToDefault(t).catch((e) => toastr.error(e));
   }, [restoreToDefault, t]);
+
+  const getTopComponent = React.useCallback(() => {
+    return (
+      isMobileView && (
+        <ProgressContainer operation={LDAPOperation.SaveAndSync} />
+      )
+    );
+  }, [isMobileView]);
+
+  const saveDisabled = !isLdapEnabled || isUIDisabled || !hasChanges;
+  const resetDisabled = !isLdapEnabled || isUIDisabled || isDefaultSettings;
+
+  console.log("ButtonContainer", {
+    isLdapEnabled,
+    isUIDisabled,
+    hasChanges,
+    isDefaultSettings,
+
+    saveDisabled,
+    resetDisabled,
+  });
 
   return (
     <Box className="ldap_buttons-container">
@@ -62,19 +89,18 @@ const ButtonContainer = ({
         displaySettings={true}
         hasScroll={true}
         hideBorder={true}
-        saveButtonDisabled={!isLdapEnabled || isUIDisabled || !hasChanges}
-        disableRestoreToDefault={
-          !isLdapEnabled || isUIDisabled || isDefaultSettings
-        }
-        showReminder
+        saveButtonDisabled={saveDisabled}
+        disableRestoreToDefault={resetDisabled}
         additionalClassSaveButton="ldap-save"
         additionalClassCancelButton="ldap-reset"
+        showReminder={false}
+        getTopComponent={getTopComponent}
       />
     </Box>
   );
 };
 
-export default inject(({ currentQuotaStore, ldapStore }) => {
+export default inject(({ settingsStore, ldapStore }) => {
   const {
     save,
     restoreToDefault,
@@ -84,7 +110,10 @@ export default inject(({ currentQuotaStore, ldapStore }) => {
     isLdapEnabled,
     isUIDisabled,
   } = ldapStore;
-  const { isLdapAvailable } = currentQuotaStore;
+
+  const { currentDeviceType } = settingsStore;
+
+  const isMobileView = currentDeviceType === DeviceType.mobile;
 
   return {
     saveLdapSettings: save,
@@ -94,5 +123,7 @@ export default inject(({ currentQuotaStore, ldapStore }) => {
 
     isLdapEnabled,
     isUIDisabled,
+
+    isMobileView,
   };
 })(observer(ButtonContainer));

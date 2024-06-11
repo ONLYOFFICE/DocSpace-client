@@ -90,10 +90,10 @@ const DeleteGroupDialog = (props) => {
         <Text>
           {hasMoreGroups
             ? t("DeleteDialog:DeleteAllGroupDescription", {
-                portalName: PRODUCT_NAME,
+                productName: PRODUCT_NAME,
               })
             : t("DeleteDialog:DeleteGroupDescription", {
-                portalName: PRODUCT_NAME,
+                productName: PRODUCT_NAME,
                 groupName,
               })}
         </Text>

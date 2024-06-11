@@ -117,7 +117,7 @@ const PreparationPortal = (props: IPreparationPortal) => {
               </div>
               <Text className="preparation-portal_text">
                 {t("PreparationPortalDescription", {
-                  portalName: PRODUCT_NAME,
+                  productName: PRODUCT_NAME,
                 })}
               </Text>
             </ColorTheme>

@@ -154,7 +154,7 @@ const NextcloudWorkspace = (props) => {
           color={theme.isBase ? "#657077" : "#ADADAD"}
         >
           {t("Settings:AboutDataImport", {
-            portalName: PRODUCT_NAME,
+            productName: PRODUCT_NAME,
             organizationName,
           })}
         </Text>

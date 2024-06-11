@@ -90,7 +90,7 @@ const ChangeOwnerForm = (props) => {
             {isOwnerChanged ? (
               <Text>
                 {t("ConfirmOwnerPortalSuccessMessage", {
-                  portalName: PRODUCT_NAME,
+                  productName: PRODUCT_NAME,
                 })}
               </Text>
             ) : (
@@ -98,7 +98,7 @@ const ChangeOwnerForm = (props) => {
                 <Text className="subtitle">
                   {t("ConfirmOwnerPortalTitle", {
                     newOwner: newOwner,
-                    portalName: PRODUCT_NAME,
+                    productName: PRODUCT_NAME,
                   })}
                 </Text>
                 <ButtonsWrapper>

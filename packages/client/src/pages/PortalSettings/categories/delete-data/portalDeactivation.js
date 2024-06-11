@@ -100,7 +100,7 @@ const PortalDeactivation = (props) => {
           <Text fontSize="12px" fontWeight="600">
             {t("MainBar:ConfirmEmailHeader", {
               email: owner.email,
-              portalName: PRODUCT_NAME,
+              productName: PRODUCT_NAME,
             })}
             <Link
               className="request-again-link"

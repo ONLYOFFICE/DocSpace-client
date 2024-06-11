@@ -83,7 +83,7 @@ const PortalUnavailable = ({ onLogoutClick }) => {
         t={t}
         emailPlaceholderText={t("Common:RegistrationEmail")}
         textBody={t("PortalUnavailable:AccessingProblem", {
-          portalName: PRODUCT_NAME,
+          productName: PRODUCT_NAME,
         })}
         onClose={onCloseDialog}
       />
@@ -94,7 +94,7 @@ const PortalUnavailable = ({ onLogoutClick }) => {
         <StyledBodyContent>
           <Text textAlign="center" className="portal-unavailable_text">
             {t("PortalUnavailable:AccessingProblem", {
-              portalName: PRODUCT_NAME,
+              productName: PRODUCT_NAME,
             })}
           </Text>
           {!window.navigator.userAgent.includes("ZoomWebKit") &&
@@ -114,7 +114,7 @@ const PortalUnavailable = ({ onLogoutClick }) => {
             onClick={onClickToContact}
           >
             {t("PortalUnavailable:ContactAdministrator", {
-              portalName: PRODUCT_NAME,
+              productName: PRODUCT_NAME,
             })}
           </ColorTheme>
         </StyledBodyContent>

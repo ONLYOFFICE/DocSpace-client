@@ -218,7 +218,7 @@ const DocumentService = ({
             <Label
               htmlFor="internalAdress"
               text={t("Settings:DocumentServiceLocationUrlInternal", {
-                portalName: PRODUCT_NAME,
+                productName: PRODUCT_NAME,
               })}
             />
             <InputBlock
@@ -244,7 +244,7 @@ const DocumentService = ({
             <Label
               htmlFor="portalAdress"
               text={t("Settings:DocumentServiceLocationUrlPortal", {
-                portalName: PRODUCT_NAME,
+                productName: PRODUCT_NAME,
               })}
             />
             <InputBlock

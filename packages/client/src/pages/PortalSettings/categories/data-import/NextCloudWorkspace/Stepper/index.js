@@ -75,7 +75,7 @@ export const getStepsData = (
     {
       title: t("Settings:SelectUsersWithEmail"),
       description: t("Settings:SelectUsersDescriptionNextcloud", {
-        portalName: PRODUCT_NAME,
+        productName: PRODUCT_NAME,
         organizationName,
       }),
       component: (
@@ -89,7 +89,7 @@ export const getStepsData = (
     {
       title: t("Settings:AddEmails"),
       description: t("Settings:AddEmailsDescription", {
-        portalName: PRODUCT_NAME,
+        productName: PRODUCT_NAME,
         organizationName,
       }),
       component: (
@@ -114,7 +114,7 @@ export const getStepsData = (
             ns="Settings"
             i18nKey="SelectUserTypesDescription"
             values={{
-              portalName: PRODUCT_NAME,
+              productName: PRODUCT_NAME,
             }}
             components={{
               1: <b />,
@@ -160,7 +160,7 @@ export const getStepsData = (
     {
       title: t("Settings:DataImport"),
       description: t("Settings:ImportSectionDescription", {
-        portalName: PRODUCT_NAME,
+        productName: PRODUCT_NAME,
       }),
       component: (
         <ImportStep
@@ -185,7 +185,7 @@ export const getStepsData = (
     {
       title: t("Settings:DataImportComplete"),
       description: t("Settings:ImportCompleteDescriptionNextcloud", {
-        portalName: PRODUCT_NAME,
+        productName: PRODUCT_NAME,
         organizationName,
       }),
       component: (

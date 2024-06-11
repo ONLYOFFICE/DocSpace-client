@@ -235,7 +235,7 @@ const GoogleWorkspace = ({
     <GoogleWrapper>
       <Text className="workspace-subtitle">
         {t("Settings:AboutDataImport", {
-          portalName: PRODUCT_NAME,
+          productName: PRODUCT_NAME,
           organizationName,
         })}
       </Text>

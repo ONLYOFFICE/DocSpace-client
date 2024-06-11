@@ -254,7 +254,7 @@ class ThirdPartyServices extends React.Component {
             />
             <Text>
               {t("IntegrationRequest", {
-                portalName: PRODUCT_NAME,
+                productName: PRODUCT_NAME,
                 organizationName,
               })}
             </Text>

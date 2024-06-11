@@ -61,7 +61,7 @@ const MobileView = ({ isSSOAvailable, organizationName }) => {
       <MobileCategoryWrapper
         title={t("SpMetadata", { organizationName })}
         subtitle={t("SpMetadataDescription", {
-          portalName: PRODUCT_NAME,
+          productName: PRODUCT_NAME,
           organizationName,
         })}
         url="/portal-settings/integration/single-sign-on/sp-metadata"

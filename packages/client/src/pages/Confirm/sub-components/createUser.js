@@ -517,7 +517,7 @@ const CreateUserForm = (props) => {
                     values={{
                       firstName: user.firstName,
                       lastName: user.lastName,
-                      portalName: PRODUCT_NAME,
+                      productName: PRODUCT_NAME,
                       ...(roomName
                         ? { roomName }
                         : { spaceAddress: window.location.host }),

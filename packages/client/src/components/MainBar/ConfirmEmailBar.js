@@ -47,7 +47,7 @@ const ConfirmEmailBar = ({
       <SnackBar
         headerText={t("ConfirmEmailHeader", {
           email: userEmail,
-          portalName: PRODUCT_NAME,
+          productName: PRODUCT_NAME,
         })}
         text={
           <>

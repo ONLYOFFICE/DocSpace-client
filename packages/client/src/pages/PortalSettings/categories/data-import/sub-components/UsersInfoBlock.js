@@ -118,7 +118,7 @@ const UsersInfoBlock = ({
           tooltipContent={
             <Text fontSize="12px">
               {t("Settings:LicenseLimitDescription", {
-                portalName: PRODUCT_NAME,
+                productName: PRODUCT_NAME,
               })}
             </Text>
           }

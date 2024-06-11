@@ -90,7 +90,7 @@ const TariffTitleContainer = ({
         <div className="title">
           <Text fontWeight={600} fontSize="14px" as="span">
             {t("ActivateTariffDescr", {
-              portalName: PRODUCT_NAME,
+              productName: PRODUCT_NAME,
               organizationName,
             })}
           </Text>

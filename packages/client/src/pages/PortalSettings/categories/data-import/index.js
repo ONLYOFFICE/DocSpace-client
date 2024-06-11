@@ -135,7 +135,7 @@ const DataImport = ({
     <WorkspacesContainer>
       <Text className="data-import-description">
         {t("DataImportDescription", {
-          portalName: PRODUCT_NAME,
+          productName: PRODUCT_NAME,
           organizationName,
         })}
       </Text>

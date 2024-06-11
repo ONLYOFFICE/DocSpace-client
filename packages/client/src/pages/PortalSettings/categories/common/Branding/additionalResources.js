@@ -278,7 +278,7 @@ const AdditionalResources = (props) => {
         </div>
         <div className="settings_unavailable additional-description">
           {t("Settings:AdditionalResourcesDescription", {
-            portalName: PRODUCT_NAME,
+            productName: PRODUCT_NAME,
           })}
         </div>
         <div className="branding-checkbox">

@@ -88,7 +88,7 @@ const Api = (props) => {
           />
         }
         descriptionText={t("ApiPageDescription", {
-          portalName: PRODUCT_NAME,
+          productName: PRODUCT_NAME,
           organizationName,
         })}
         headerText={t("ApiPageHeader")}

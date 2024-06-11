@@ -126,7 +126,7 @@ const Branding = ({
           {isLoadedCompanyInfoSettingsData ? (
             <div className="section-description settings_unavailable">
               {t("Settings:BrandingSectionDescription", {
-                portalName: PRODUCT_NAME,
+                productName: PRODUCT_NAME,
               })}
             </div>
           ) : (

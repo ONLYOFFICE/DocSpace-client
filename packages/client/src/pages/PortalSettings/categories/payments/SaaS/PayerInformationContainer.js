@@ -139,16 +139,16 @@ const PayerInformationContainer = ({
     let invalidEmailDescription = user.isOwner
       ? t("InvalidEmailWithActiveSubscription", { productName: PRODUCT_NAME })
       : t("InvalidEmailWithActiveSubscriptionForAdmin", {
-          portalName: PRODUCT_NAME,
+          productName: PRODUCT_NAME,
         });
 
     if (isNotPaidPeriod || isFreeAfterPaidPeriod) {
       invalidEmailDescription = user.isOwner
         ? t("InvalidEmailWithoutActiveSubscription", {
-            portalName: PRODUCT_NAME,
+            productName: PRODUCT_NAME,
           })
         : t("InvalidEmailWithoutActiveSubscriptionByAdmin", {
-            portalName: PRODUCT_NAME,
+            productName: PRODUCT_NAME,
           });
 
       return userNotFound + invalidEmailDescription;

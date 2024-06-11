@@ -153,7 +153,7 @@ const ImportStep = ({
         sectionName={t("Common:CommonFiles")}
         description={t("Settings:CommonFilesDescription", {
           user: user.displayName,
-          portalName: PRODUCT_NAME,
+          productName: PRODUCT_NAME,
         })}
         exportSection={{
           sectionName: t("Common:Common"),

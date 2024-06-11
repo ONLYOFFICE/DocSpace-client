@@ -158,11 +158,11 @@ const ChangeRoomOwner = (props) => {
           disableDisabledUsers
           withInfo
           infoText={t("CreateEditRoomDialog:PeopleSelectorInfo", {
-            portalName: PRODUCT_NAME,
+            productName: PRODUCT_NAME,
           })}
           emptyScreenHeader={t("Common:NotFoundUsers")}
           emptyScreenDescription={t("CreateEditRoomDialog:PeopleSelectorInfo", {
-            portalName: PRODUCT_NAME,
+            productName: PRODUCT_NAME,
           })}
         />
       </Aside>

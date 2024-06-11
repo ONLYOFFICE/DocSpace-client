@@ -51,7 +51,7 @@ const Bonus = ({ standaloneInit, isInitPaymentPage, organizationName }) => {
       <BenefitsContainer />
       <Text fontWeight={600}>
         {t("UpgradeToProBannerInstructionHeader", {
-          portalName: PRODUCT_NAME,
+          productName: PRODUCT_NAME,
           organizationName,
         })}
       </Text>

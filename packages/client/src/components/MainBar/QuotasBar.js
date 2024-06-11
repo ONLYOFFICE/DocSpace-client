@@ -83,7 +83,7 @@ const QuotasBar = ({
         t={t}
         i18nKey="UserQuotaDescription"
         values={{
-          portalName: PRODUCT_NAME,
+          productName: PRODUCT_NAME,
           clickHere: t("ClickHere"),
         }}
         components={{

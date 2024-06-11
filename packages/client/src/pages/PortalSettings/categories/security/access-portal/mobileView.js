@@ -101,7 +101,7 @@ const MobileView = (props) => {
       <MobileCategoryWrapper
         title={t("SessionLifetime")}
         subtitle={t("SessionLifetimeMobileDescription", {
-          portalName: PRODUCT_NAME,
+          productName: PRODUCT_NAME,
         })}
         url="/portal-settings/security/access-portal/lifetime"
         onClickLink={onClickLink}

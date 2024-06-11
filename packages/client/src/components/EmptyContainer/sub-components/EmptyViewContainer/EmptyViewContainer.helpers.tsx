@@ -103,7 +103,7 @@ export const getOptions = (
   const uploadFromDocSpace = {
     title: t("EmptyView:UploadPDFFormOptionTitle"),
     description: t("EmptyView:UploadPDFFormOptionDescription", {
-      portalName: PRODUCT_NAME,
+      productName: PRODUCT_NAME,
     }),
     icon: <UploadPDFFormIcon />,
     key: "upload-pdf-form",

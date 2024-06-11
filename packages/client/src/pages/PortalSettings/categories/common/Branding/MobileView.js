@@ -61,7 +61,7 @@ const MobileView = ({ isSettingPaid, showSettings }) => {
           <MobileCategoryWrapper
             title={t("CompanyInfoSettings")}
             subtitle={t("BrandingSectionDescription", {
-              portalName: PRODUCT_NAME,
+              productName: PRODUCT_NAME,
             })}
             url={`${baseUrl}/branding/company-info-settings`}
             withPaidBadge={!isSettingPaid}

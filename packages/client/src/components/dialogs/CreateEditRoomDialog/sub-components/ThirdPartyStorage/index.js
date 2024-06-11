@@ -89,7 +89,7 @@ const ThirdPartyStorage = ({
       const data = isRoomAdmin ? (
         <Text as="p">
           {t("ThirdPartyStorageRoomAdminNoStorageAlert", {
-            portalName: PRODUCT_NAME,
+            productName: PRODUCT_NAME,
           })}
         </Text>
       ) : (

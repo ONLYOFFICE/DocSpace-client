@@ -61,7 +61,7 @@ const AccountsTable = (props) => {
     {
       key: UserTypes.DocSpaceAdmin,
       label: t(`Common:${UserTypes.DocSpaceAdmin}`, {
-        portalName: PRODUCT_NAME,
+        productName: PRODUCT_NAME,
       }),
       onClick: setTypeDocspaceAdmin,
     },

@@ -106,7 +106,7 @@ const PrivacyLimitationsWarning = ({ t }) => {
       </div>
       <div className="warning-description">
         {t("MakeRoomPrivateLimitationsWarningDescription", {
-          portalName: PRODUCT_NAME,
+          productName: PRODUCT_NAME,
         })}
       </div>
       <div className="warning-link">{t("Common:LearnMore")}</div>

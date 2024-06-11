@@ -31,7 +31,7 @@
   "GalleryEmptyScreenText": "Zobacz szczegóły szablonu formularza tutaj",
   "GroupsEmptyScreenText": "Skonfiguruj szczegóły grupy tutaj",
   "HistoryEmptyScreenText": "Historia aktywności będzie widoczna tutaj",
-  "InfoBanner": "Lista zaproszonych użytkowników obejmuje właściciela i/lub administratorów tego konta {{portalName}} z pełnym dostępem do wszystkich pokoi. Właścicielowi i/lub administratorowi nie można przypisać innych praw dostępu. Po dodaniu do pokoju zostaną powiadomieni o wszystkich zmianach.",
+  "InfoBanner": "Lista zaproszonych użytkowników obejmuje właściciela i/lub administratorów tego konta {{productName}} z pełnym dostępem do wszystkich pokoi. Właścicielowi i/lub administratorowi nie można przypisać innych praw dostępu. Po dodaniu do pokoju zostaną powiadomieni o wszystkich zmianach.",
   "ItemsSelected": "Wybrano elementy",
   "LastModifiedBy": "Ostatnio zmodyfikowany przez",
   "Properties": "Właściwości",

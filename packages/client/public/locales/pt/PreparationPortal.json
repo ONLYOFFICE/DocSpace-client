@@ -1,4 +1,4 @@
 {
-  "PortalRestoring": "Restauração de {{portalName}}",
-  "PreparationPortalDescription": "Uma vez que o processo de restauração tenha terminado, será automaticamente redirecionado para o {{portalName}}."
+  "PortalRestoring": "Restauração de {{productName}}",
+  "PreparationPortalDescription": "Uma vez que o processo de restauração tenha terminado, será automaticamente redirecionado para o {{productName}}."
 }

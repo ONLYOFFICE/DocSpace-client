@@ -1,9 +1,9 @@
 {
-  "DeleteAllGroupDescription": "Vybrané skupiny budú vymazané. Používatelia v skupinách nebudú z priestoru {{portalName}} odstránení. Ste si istí, že chcete pokračovať?",
+  "DeleteAllGroupDescription": "Vybrané skupiny budú vymazané. Používatelia v skupinách nebudú z priestoru {{productName}} odstránení. Ste si istí, že chcete pokračovať?",
   "DeleteAllGroupsTitle": "Vymazať skupiny",
   "DeleteFile": "Chystáte sa vymazať tento súbor. ",
   "DeleteFolder": "Chystáte sa vymazať tento priečinok. ",
-  "DeleteGroupDescription": "Skupina {{groupName}} bude vymazaná. Používatelia v skupine nebudú z {{portalName}} odstránení. Ste si istí, že chcete pokračovať?",
+  "DeleteGroupDescription": "Skupina {{groupName}} bude vymazaná. Používatelia v skupine nebudú z {{productName}} odstránení. Ste si istí, že chcete pokračovať?",
   "DeleteGroupTitle": "Vymazať skupinu",
   "DeleteItems": "Chystáte sa vymazať tieto položky. ",
   "DeleteItemsSharedNote": "Upozorňujeme, že ak ste ich s niekým zdieľali, stanú sa nedostupnými.",

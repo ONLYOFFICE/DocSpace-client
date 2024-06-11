@@ -14,7 +14,7 @@ import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
 import type { EmptyViewItemType } from "@docspace/shared/components/empty-view";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 import type { OptionActions } from "./EmptyViewContainer.types";
 
@@ -103,7 +103,7 @@ export const getOptions = (
   const uploadFromDocSpace = {
     title: t("EmptyView:UploadPDFFormOptionTitle"),
     description: t("EmptyView:UploadPDFFormOptionDescription", {
-      portalName: PORTAL,
+      productName: PRODUCT_NAME,
     }),
     icon: <UploadPDFFormIcon />,
     key: "upload-pdf-form",

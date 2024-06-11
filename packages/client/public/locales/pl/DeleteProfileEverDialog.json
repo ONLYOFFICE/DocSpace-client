@@ -1,5 +1,5 @@
 {
-  "ActionCannotBeUndone": "Wybrani wyłączeni użytkownicy zostaną usunięci z {{portalName}}. Nie będziesz w stanie cofnąć tego działania.",
+  "ActionCannotBeUndone": "Wybrani wyłączeni użytkownicy zostaną usunięci z {{productName}}. Nie będziesz w stanie cofnąć tego działania.",
   "CannotReassignFiles": "Jeśli usuniesz kilku użytkowników jednocześnie, nie będziesz w stanie przypisać ich plików innym użytkownikom.",
   "DeleteGroupUsersSuccessMessage": "Użytkownicy zostali pomyślnie usunięci.",
   "DeleteMyDocumentsUser": "Wszystkie osobiste pliki i katalogi w sekcji Moje dokumenty tego użytkownika zostaną trwale usunięte.",

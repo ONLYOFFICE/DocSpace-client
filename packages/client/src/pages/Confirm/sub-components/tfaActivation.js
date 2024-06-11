@@ -49,7 +49,7 @@ import {
 } from "@docspace/shared/api/settings";
 import { loginWithTfaCode } from "@docspace/shared/api/user";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledForm = styled(Box)`
   margin: 56px auto;
@@ -204,7 +204,7 @@ const TfaActivationForm = withLoader((props) => {
               t={t}
               i18nKey="SetAppDescription"
               ns="Confirm"
-              portalName={PORTAL}
+              portalName={PRODUCT_NAME}
             >
               The two-factor authentication is enabled to provide additional
               portal security. Configure your authenticator application to

@@ -1,5 +1,5 @@
 {
-  "ActionCannotBeUndone": "選択された無効なユーザーは{{portalName}}から削除されます。この操作は取り消すことができません。",
+  "ActionCannotBeUndone": "選択された無効なユーザーは{{productName}}から削除されます。この操作は取り消すことができません。",
   "CannotReassignFiles": "複数のユーザーを一度に削除した場合、そのユーザーのファイルを他のユーザーに再割り当てすることはできません。",
   "DeleteGroupUsersSuccessMessage": "ユーザーが正常に削除されました。",
   "DeleteMyDocumentsUser": "このユーザーの「私の文書」セクションにあるすべての個人ファイルおよびフォルダは永久に削除されます。",

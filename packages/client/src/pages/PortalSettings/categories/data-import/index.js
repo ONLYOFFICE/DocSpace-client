@@ -42,7 +42,7 @@ import GoogleWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.google.r
 import NextcloudWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.nextcloud.react.svg?url";
 import OnlyofficeWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.onlyoffice.react.svg?url";
 import DataImportLoader from "./sub-components/DataImportLoader";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const DataImport = ({
   t,
@@ -134,7 +134,10 @@ const DataImport = ({
   return (
     <WorkspacesContainer>
       <Text className="data-import-description">
-        {t("DataImportDescription", { portalName: PORTAL, organizationName })}
+        {t("DataImportDescription", {
+          productName: PRODUCT_NAME,
+          organizationName,
+        })}
       </Text>
       <Text className="data-import-subtitle">{t("UploadBackupData")}</Text>
 

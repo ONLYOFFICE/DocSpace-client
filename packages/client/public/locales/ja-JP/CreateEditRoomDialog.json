@@ -5,9 +5,9 @@
   "DisableRoomQuota": "このルームの容量制限を無効にする",
   "Icon": "アイコン",
   "MakeRoomPrivateDescription": "このルームにあるファイルはすべて暗号化されます。",
-  "MakeRoomPrivateLimitationsWarningDescription": "この機能では、既存の{{portalName}}ユーザーだけを招待することができます。ルームを作成した後、ユーザーリストを変更することはできません。",
+  "MakeRoomPrivateLimitationsWarningDescription": "この機能では、既存の{{productName}}ユーザーだけを招待することができます。ルームを作成した後、ユーザーリストを変更することはできません。",
   "MakeRoomPrivateTitle": "このルームをプライベートルームにする",
-  "PeopleSelectorInfo": "ルーム管理者または{{portalName}}管理者のみがルーム所有者になることができます。",
+  "PeopleSelectorInfo": "ルーム管理者または{{productName}}管理者のみがルーム所有者になることができます。",
   "PublicRoomBarDescription": "このルームはリンクがあれば誰でも利用できます。外部ユーザーは、すべてのファイルに対して閲覧のみの権限を持っています。",
   "PublicRoomSystemFoldersDescription": "システムフォルダには、さまざまな完成段階にあるフォームのコピーが保存されます。入力中のフォームは「入力中」フォルダーに、完成したフォームは「記入済み」フォルダーに保存されます。",
   "PublicRoomSystemFoldersTitle": "システムフォルダ",
@@ -19,5 +19,5 @@
   "ThirdPartyStorageDescription": "このルームのデータ保存先として、サードパーティーのサービスを利用します。接続されたストレージに、このルームのデータを保存するための新しいフォルダが作成されます。",
   "ThirdPartyStorageNoStorageAlert": "事前に、「統合」で対応するサービスを接続しておく必要があります。そうでない場合は、接続ができません。",
   "ThirdPartyStoragePermanentSettingDescription": "ファイルは、{{thirdpartyTitle}} サードパーティのストレージの「\"{{thirdpartyFolderName}}\"」フォルダーに保存されています。\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "サードパーティーのストレージを接続するには、{{portalName}}設定の「統合」セクションに対応するサービスを追加する必要があります。統合を有効にするには、{{portalName}}の所有者または管理者にご連絡ください。"
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "サードパーティーのストレージを接続するには、{{productName}}設定の「統合」セクションに対応するサービスを追加する必要があります。統合を有効にするには、{{productName}}の所有者または管理者にご連絡ください。"
 }

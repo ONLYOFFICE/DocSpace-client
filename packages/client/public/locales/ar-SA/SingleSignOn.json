@@ -48,7 +48,7 @@
   "SPEntityId": "معرف كيان SP (ارتباط إلى بيانات التعريف لغة التوصيف الموسعة)",
   "SPEntityIdTooltip": "عنوان رابط موفر خدمة لغة التوصيف الموسعة والذي يمكن تنزيله واستخدامه بواسطة موفر الهوية لتعريف مقدم الخدمة بشكل لا لبس فيه",
   "SpMetadata": "البيانات الوصفية {{organizationName}} SP",
-  "SpMetadataDescription": "قم بالوصول إلى البيانات التعريفية لموفر الخدمة لإضافة {{organizationName}} {{portalName}} كمقدم خدمة موثوق به في حساب IdP الخاص بك.",
+  "SpMetadataDescription": "قم بالوصول إلى البيانات التعريفية لموفر الخدمة لإضافة {{organizationName}} {{productName}} كمقدم خدمة موثوق به في حساب IdP الخاص بك.",
   "spSignExitRequest": "طلبات تسجيل الخروج",
   "spSigningAlgorithm": "خوارزمية التوقيع",
   "spSignResponseRequest": "استجابات تسجيل الخروج",

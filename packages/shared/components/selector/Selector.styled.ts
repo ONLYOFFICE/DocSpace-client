@@ -28,11 +28,12 @@ import styled, { css } from "styled-components";
 
 import ArrowRightSvg from "PUBLIC_DIR/images/arrow.right.react.svg";
 
+import { Tabs } from "../tabs";
 import { Base } from "../../themes";
 
 import { ComboBox } from "../combobox";
 import { Text } from "../text";
-import { Submenu } from "../submenu";
+
 import { AccessRightSelect } from "../access-right-select";
 
 const accessComboboxStyles = css`
@@ -459,7 +460,7 @@ const StyledAccessSelector = styled(AccessRightSelect)`
   ${accessComboboxStyles}
 `;
 
-const StyledTabs = styled(Submenu)`
+const StyledTabs = styled(Tabs)`
   padding: 0 16px;
   margin-bottom: 16px;
 

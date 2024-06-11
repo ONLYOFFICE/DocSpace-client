@@ -26,11 +26,13 @@
 
 import { useState, useRef, MutableRefObject, useEffect } from "react";
 import { useTheme } from "styled-components";
+
+import { useViewTab } from "./hooks/useViewTab";
+
 import { StyledTabs, Tab, TabList, TabSubLine } from "./Tabs.styled";
 import { TabsProps, TTabItem } from "./Tabs.types";
 import { ThemeTabs } from "./Tabs.enums";
 import { OFFSET_RIGHT, OFFSET_LEFT, INDEX_NOT_FOUND } from "./Tabs.constants";
-import { useViewTab } from "./hooks/useViewTab";
 
 const Tabs = (props: TabsProps) => {
   const {

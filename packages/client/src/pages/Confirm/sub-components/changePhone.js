@@ -35,7 +35,7 @@ import { StyledPage, StyledBody, StyledContent } from "./StyledConfirm";
 import withLoader from "../withLoader";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const ChangePhoneForm = (props) => {
   const { t, greetingTitle } = props;
@@ -58,7 +58,7 @@ const ChangePhoneForm = (props) => {
               <Text>
                 {t("CurrentNumber")}: {currentNumber}
               </Text>
-              <Text>{t("PhoneSubtitle", { portalName: PORTAL })}</Text>
+              <Text>{t("PhoneSubtitle", { portalName: PRODUCT_NAME })}</Text>
             </div>
 
             <TextInput

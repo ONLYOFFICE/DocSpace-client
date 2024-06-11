@@ -27,7 +27,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 import { Text } from "@docspace/shared/components/text";
 
 import EmptyScreenPluginsUrl from "PUBLIC_DIR/images/empty_screen_plugins.svg?url";
@@ -54,7 +54,7 @@ const EmptyScreen = ({ t, theme, withUpload, onDrop }: PluginsEmptyScreen) => {
       headerText={t("NoPlugins")}
       descriptionText={
         <Text>
-          {withUpload && t("UploadDescription", { portalName: PORTAL })}
+          {withUpload && t("UploadDescription", { portalName: PRODUCT_NAME })}
         </Text>
       }
       style={{ gridColumnGap: "39px" }}

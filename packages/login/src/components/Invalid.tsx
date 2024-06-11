@@ -36,7 +36,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 
 import { getMessageFromKey, getMessageKeyTranslate } from "@/utils";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const homepage = "/";
 
@@ -73,7 +73,7 @@ const InvalidError = ({ match }: InvalidErrorProps) => {
           t={t}
           i18nKey="ErrorInvalidText"
           values={{
-            portalName: PORTAL,
+            portalName: PRODUCT_NAME,
           }}
           components={{
             1: (

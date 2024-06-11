@@ -47,7 +47,7 @@ import ConsumerItem from "./sub-components/consumerItem";
 import ConsumerModalDialog from "./sub-components/consumerModalDialog";
 
 import ThirdPartyLoader from "./sub-components/thirdPartyLoader";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const RootContainer = styled(Box)`
   max-width: 700px;
@@ -254,7 +254,7 @@ class ThirdPartyServices extends React.Component {
             />
             <Text>
               {t("IntegrationRequest", {
-                portalName: PORTAL,
+                portalName: PRODUCT_NAME,
                 organizationName,
               })}
             </Text>

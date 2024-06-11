@@ -37,7 +37,7 @@ import ConfirmWrapper from "../../../../Confirm/ConfirmWrapper";
 import ApiSvgUrl from "PUBLIC_DIR/images/settings.api.svg?url";
 import ApiDarkSvgUrl from "PUBLIC_DIR/images/settings.api.dark.svg?url";
 import { DeviceType } from "@docspace/shared/enums";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const EmptyContainer = styled(EmptyScreenContainer)`
   .ec-header {
@@ -88,7 +88,7 @@ const Api = (props) => {
           />
         }
         descriptionText={t("ApiPageDescription", {
-          portalName: PORTAL,
+          portalName: PRODUCT_NAME,
           organizationName,
         })}
         headerText={t("ApiPageHeader")}

@@ -30,7 +30,7 @@ import { Consumer } from "@docspace/shared/utils/context";
 
 import TableView from "./TableView";
 import RowView from "./RowView";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const checkedAccountType = "result";
 
@@ -45,7 +45,7 @@ const AccountsTable = ({
   const typeOptions = [
     {
       key: UserTypes.DocSpaceAdmin,
-      label: t("Common:DocspaceAdmin", { portalName: PORTAL }),
+      label: t("Common:DocspaceAdmin", { portalName: PRODUCT_NAME }),
       onClick: () => {
         changeGroupType(UserTypes.DocSpaceAdmin);
         toggleAllAccounts(false, [], checkedAccountType);

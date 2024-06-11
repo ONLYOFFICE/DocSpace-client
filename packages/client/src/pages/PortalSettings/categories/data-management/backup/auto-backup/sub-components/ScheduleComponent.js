@@ -34,7 +34,7 @@ import { StyledScheduleComponent } from "../../StyledBackup";
 import { AutoBackupPeriod } from "@docspace/shared/enums";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const { EveryWeekType, EveryMonthType } = AutoBackupPeriod;
 const ScheduleComponent = ({
@@ -60,7 +60,7 @@ const ScheduleComponent = ({
   const { t } = useTranslation("Settings");
   const renderHelpContent = () => (
     <Text className="schedule_description" fontSize="12px">
-      {t("AutoSavePeriodHelp", { portalName: PORTAL })}
+      {t("AutoSavePeriodHelp", { portalName: PRODUCT_NAME })}
     </Text>
   );
 

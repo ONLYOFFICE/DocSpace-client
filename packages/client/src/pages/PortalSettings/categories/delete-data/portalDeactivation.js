@@ -37,7 +37,7 @@ import { sendSuspendPortalEmail } from "@docspace/shared/api/portal";
 import { isDesktop } from "@docspace/shared/utils";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const PortalDeactivation = (props) => {
   const { t, getPortalOwner, owner, currentColorScheme, sendActivationLink } =
@@ -49,7 +49,7 @@ const PortalDeactivation = (props) => {
   };
 
   useEffect(() => {
-    setDocumentTitle(t("PortalDeactivation", { portalName: PORTAL }));
+    setDocumentTitle(t("PortalDeactivation", { portalName: PRODUCT_NAME }));
     fetchData();
     onCheckView();
     window.addEventListener("resize", onCheckView);
@@ -85,7 +85,7 @@ const PortalDeactivation = (props) => {
         {t("PortalDeactivationDescription")}
       </Text>
       <Text className="helper">
-        {t("PortalDeactivationHelper", { portalName: PORTAL })}
+        {t("PortalDeactivationHelper", { portalName: PRODUCT_NAME })}
       </Text>
       <ButtonWrapper>
         <Button
@@ -100,7 +100,7 @@ const PortalDeactivation = (props) => {
           <Text fontSize="12px" fontWeight="600">
             {t("MainBar:ConfirmEmailHeader", {
               email: owner.email,
-              portalName: PORTAL,
+              portalName: PRODUCT_NAME,
             })}
             <Link
               className="request-again-link"

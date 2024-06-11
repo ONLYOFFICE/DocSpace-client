@@ -35,7 +35,7 @@ import { setTenantQuotaSettings } from "@docspace/shared/api/settings";
 
 import QuotaForm from "../../../components/QuotaForm";
 import StyledModalDialog from "./StyledComponent";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const ChangeStorageQuotaDialog = (props) => {
   const {
@@ -125,8 +125,8 @@ const ChangeStorageQuotaDialog = (props) => {
       <ModalDialog.Body>
         <Text noSelect>
           {isDisableQuota
-            ? t("Common:TurnOffDiskSpaceLimit", { portalName: PORTAL })
-            : t("Common:SetDiskSpaceQuota", { portalName: PORTAL })}
+            ? t("Common:TurnOffDiskSpaceLimit", { portalName: PRODUCT_NAME })
+            : t("Common:SetDiskSpaceQuota", { portalName: PRODUCT_NAME })}
         </Text>
         {!isDisableQuota && (
           <QuotaForm

@@ -34,7 +34,7 @@ import { withTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
 import { EmployeeType, DeviceType } from "@docspace/shared/enums";
 import { Portal } from "@docspace/shared/components/portal";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledChangeRoomOwner = styled.div`
   display: contents;
@@ -158,11 +158,11 @@ const ChangeRoomOwner = (props) => {
           disableDisabledUsers
           withInfo
           infoText={t("CreateEditRoomDialog:PeopleSelectorInfo", {
-            portalName: PORTAL,
+            portalName: PRODUCT_NAME,
           })}
           emptyScreenHeader={t("Common:NotFoundUsers")}
           emptyScreenDescription={t("CreateEditRoomDialog:PeopleSelectorInfo", {
-            portalName: PORTAL,
+            portalName: PRODUCT_NAME,
           })}
         />
       </Aside>

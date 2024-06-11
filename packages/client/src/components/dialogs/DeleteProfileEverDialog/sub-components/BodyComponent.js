@@ -30,7 +30,7 @@ import { Trans } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const BodyComponent = (props) => {
   const {
@@ -74,7 +74,7 @@ const BodyComponent = (props) => {
     return (
       <>
         <Text className="user-delete">
-          {t("ActionCannotBeUndone", { portalName: PORTAL })}
+          {t("ActionCannotBeUndone", { portalName: PRODUCT_NAME })}
         </Text>
         <Text className="text-warning">{t("PleaseNote")}</Text>
         <Text className="text-delete-description">
@@ -91,13 +91,13 @@ const BodyComponent = (props) => {
     return (
       <>
         <Text className="user-delete">
-          {t("ActionCannotBeUndone", { portalName: PORTAL })}
+          {t("ActionCannotBeUndone", { portalName: PRODUCT_NAME })}
         </Text>
         {!areUsersOnly && (
           <>
-        <Text className="text-warning">{t("Common:Warning")}</Text>
-        <Text className="text-delete-description">{warningMessage}</Text>
-      </>
+            <Text className="text-warning">{t("Common:Warning")}</Text>
+            <Text className="text-delete-description">{warningMessage}</Text>
+          </>
         )}
       </>
     );
@@ -108,8 +108,8 @@ const BodyComponent = (props) => {
       <Text className="user-delete">{deleteMessage}</Text>
       {!areUsersOnly && (
         <>
-      <Text className="text-warning">{t("Common:Warning")}</Text>
-      <Text className="text-delete-description">{warningMessage}</Text>
+          <Text className="text-warning">{t("Common:Warning")}</Text>
+          <Text className="text-delete-description">{warningMessage}</Text>
         </>
       )}
 

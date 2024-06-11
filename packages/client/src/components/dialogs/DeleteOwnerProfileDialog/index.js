@@ -33,7 +33,7 @@ import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { withTranslation } from "react-i18next";
 import ModalDialogContainer from "../ModalDialogContainer";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 class DeleteOwnerProfileDialogComponent extends React.Component {
   constructor(props) {
@@ -59,7 +59,7 @@ class DeleteOwnerProfileDialogComponent extends React.Component {
         <ModalDialog.Header>{t("DeleteProfileTitle")}</ModalDialog.Header>
         <ModalDialog.Body>
           <Text fontSize="13px">
-            {t("DeleteOwnerRestrictionText", { portalName: PORTAL })}
+            {t("DeleteOwnerRestrictionText", { portalName: PRODUCT_NAME })}
           </Text>
         </ModalDialog.Body>
         <ModalDialog.Footer>

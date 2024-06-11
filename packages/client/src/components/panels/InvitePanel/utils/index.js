@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 import {
   ShareAccessRights,
   RoomsType,
@@ -44,9 +44,9 @@ export const getAccessOptions = (
   const accesses = {
     docSpaceAdmin: {
       key: "docSpaceAdmin",
-      label: t("Common:DocspaceAdmin", { portalName: PORTAL }),
+      label: t("Common:DocspaceAdmin", { portalName: PRODUCT_NAME }),
       description: t("Translations:RoleDocspaceAdminDescription", {
-        portalName: PORTAL,
+        portalName: PRODUCT_NAME,
       }),
       ...(!standalone && { quota: t("Common:Paid") }),
       color: "#EDC409",

@@ -37,7 +37,7 @@ import { StyledStatistics, StyledMainTitle } from "./StyledComponent";
 
 import RoomsList from "./sub-components/RoomsList";
 import UsersList from "./sub-components/UsersList";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const buttonProps = {
   className: "button-element",
@@ -97,7 +97,7 @@ const StatisticsComponent = (props) => {
         )}
       </div>
       <Text className="statistics-description">
-        {t("StatisticDescription", { portalName: PORTAL })}
+        {t("StatisticDescription", { portalName: PRODUCT_NAME })}
       </Text>
       {isStatisticsAvailable && (
         <>

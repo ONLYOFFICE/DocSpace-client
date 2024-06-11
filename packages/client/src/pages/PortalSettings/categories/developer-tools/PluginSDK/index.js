@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 import GithubLight from "PUBLIC_DIR/images/github.light.react.svg";
 import GithubDark from "PUBLIC_DIR/images/github.dark.react.svg";
@@ -125,7 +125,7 @@ const PluginSDK = ({
         fontWeight={400}
         lineHeight={"20px"}
       >
-        {t("PluginSDKInstruction", { portalName: PORTAL })}
+        {t("PluginSDKInstruction", { portalName: PRODUCT_NAME })}
       </Text>
       <Button
         className={"read-instructions-button"}

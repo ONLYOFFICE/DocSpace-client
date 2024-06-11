@@ -32,7 +32,7 @@ import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import ModalDialogContainer from "../ModalDialogContainer";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const DeleteGroupDialog = (props) => {
   const {
@@ -90,10 +90,10 @@ const DeleteGroupDialog = (props) => {
         <Text>
           {hasMoreGroups
             ? t("DeleteDialog:DeleteAllGroupDescription", {
-                portalName: PORTAL,
+                portalName: PRODUCT_NAME,
               })
             : t("DeleteDialog:DeleteGroupDescription", {
-                portalName: PORTAL,
+                portalName: PRODUCT_NAME,
                 groupName,
               })}
         </Text>

@@ -34,7 +34,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
 import { useStore } from "SRC_DIR/store";
 import { Link } from "@docspace/shared/components/link";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const DeletePortalDialog = () => {
   const { spacesStore, settingsStore } = useStore();
@@ -71,7 +71,7 @@ const DeletePortalDialog = () => {
       <ModalDialog.Body className="">
         <Trans
           i18nKey="DeletePortalText"
-          values={{ portalName: PORTAL, displayName, email, domain }}
+          values={{ portalName: PRODUCT_NAME, displayName, email, domain }}
           components={{
             1: <strong />,
             5: (

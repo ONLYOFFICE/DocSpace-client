@@ -61,7 +61,7 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { TGroup } from "@docspace/shared/api/groups/types";
 import { MIN_LOADER_TIMER } from "@docspace/shared/selectors/Files/FilesSelector.constants";
 import { TTranslation } from "@docspace/shared/types";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const PEOPLE_TAB_ID = "0";
 const GROUP_TAB_ID = "1";
@@ -548,7 +548,7 @@ const AddUsersPanel = ({
           }
           emptyScreenDescription={
             activeTabId === PEOPLE_TAB_ID
-              ? t("Common:EmptyDescription", { portalName: PORTAL })
+              ? t("Common:EmptyDescription", { portalName: PRODUCT_NAME })
               : t("Common:GroupsNotFoundDescription")
           }
           searchEmptyScreenImage={emptyScreenImage}

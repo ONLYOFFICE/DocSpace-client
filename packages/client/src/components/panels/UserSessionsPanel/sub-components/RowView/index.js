@@ -7,18 +7,18 @@ const StyledRowContainer = styled(RowContainer)`
 `;
 
 const RowView = (props) => {
-  const { t, sectionWidth, sessionsData } = props;
+  const { t, sectionWidth, connections } = props;
 
   return (
     <StyledRowContainer
       useReactWindow={false}
       hasMoreFiles={false}
       itemHeight={58}
-      itemCount={sessionsData.length}
-      filesLength={sessionsData.length}
+      itemCount={connections.length}
+      filesLength={connections.length}
       fetchMoreFiles={() => {}}
     >
-      {sessionsData.map((item) => (
+      {connections.map((item) => (
         <SessionsRow
           t={t}
           key={item.id}

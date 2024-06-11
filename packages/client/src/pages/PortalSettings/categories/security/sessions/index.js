@@ -11,7 +11,6 @@ import { Button } from "@docspace/shared/components/button";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import SessionsTable from "./SessionsTable";
-// import mockData from "./mockData";
 
 import {
   LogoutSessionDialog,
@@ -76,25 +75,28 @@ const DownLoadWrapper = styled.div`
 
 const Sessions = ({
   t,
+  allSessions,
+  sessionsData,
+  dataFromSocket,
+  displayName,
+  clearSelection,
+  setDataFromSocket,
+  connections,
+  setConnections,
+  updateAllSessions,
+  platformData,
+  fetchData,
   viewAs,
   setViewAs,
+  socketHelper,
   currentDeviceType,
-  setSessions,
-  clearSelection,
   disableDialogVisible,
   logoutDialogVisible,
   logoutAllDialogVisible,
   setDisableDialogVisible,
   setLogoutDialogVisible,
   setLogoutAllDialogVisible,
-  platformModalData,
-  getUsersList,
-  socketHelper,
-  getUserSessionsById,
-  displayName,
-  allSessions,
-  setAllSessions,
-  setSessionsFromSocket,
+  removeSession,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -109,38 +111,25 @@ const Sessions = ({
     });
 
     socketHelper.on("statuses-in-portal", (data) => {
-      setSessionsFromSocket(data);
+      setDataFromSocket(data);
     });
-  }, [socketHelper]);
 
-  const fetchData = async () => {
-    try {
-      const users = await getUsersList();
-      const sessionsPromises = users.map((user) =>
-        getUserSessionsById(user.id),
-      );
-      const sessions = await Promise.all(sessionsPromises);
-      setSessions(sessions);
-      setAllSessions();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
     fetchData();
+
     return () => {
       clearSelection();
     };
   }, []);
+
+  useEffect(() => {
+    updateAllSessions(sessionsData, dataFromSocket);
+  }, [sessionsData, dataFromSocket]);
 
   useViewEffect({
     view: viewAs,
     setView: setViewAs,
     currentDeviceType,
   });
-
-  console.log(JSON.parse(JSON.stringify(allSessions)));
 
   const onClickRemoveAllSessions = () => {
     try {
@@ -166,10 +155,27 @@ const Sessions = ({
     }
   };
 
-  const onClickRemoveSession = () => {
+  const onClickRemoveSession = async (id) => {
+    const foundConnection = connections.find(
+      (connection) => connection.id === id,
+    );
+
+    if (!foundConnection) return;
+
     try {
       setIsLoading(true);
-      console.log("onClickRemoveSession");
+      await removeSession(foundConnection.id);
+      const filteredConnections = connections.filter(
+        (connection) => connection.id !== id,
+      );
+      setConnections(filteredConnections);
+      fetchData();
+      toastr.success(
+        t("Profile:SuccessLogout", {
+          platform: foundConnection.platform,
+          browser: foundConnection.browser,
+        }),
+      );
     } catch (error) {
       toastr.error(error);
     } finally {
@@ -177,6 +183,10 @@ const Sessions = ({
       setLogoutDialogVisible(false);
     }
   };
+
+  // console.log("allSessions", JSON.parse(JSON.stringify(allSessions)));
+  // console.log("sessionsData", JSON.parse(JSON.stringify(sessionsData)));
+  // console.log("connections", JSON.parse(JSON.stringify(connections)));
 
   return (
     <MainContainer>
@@ -211,7 +221,7 @@ const Sessions = ({
         <LogoutSessionDialog
           t={t}
           visible={logoutDialogVisible}
-          data={platformModalData}
+          data={platformData}
           isLoading={isLoading}
           onClose={() => setLogoutDialogVisible(false)}
           onRemoveSession={onClickRemoveSession}
@@ -235,13 +245,18 @@ const Sessions = ({
 
 export default inject(({ settingsStore, setup, peopleStore }) => {
   const { socketHelper, currentDeviceType } = settingsStore;
-  const { getUsersList } = peopleStore.usersStore;
   const {
-    clearSelection,
     allSessions,
-    setSessions,
-    setAllSessions,
-    setSessionsFromSocket,
+    sessionsData,
+    dataFromSocket,
+    displayName,
+    clearSelection,
+    setDataFromSocket,
+    connections,
+    setConnections,
+    updateAllSessions,
+    platformData,
+    fetchData,
   } = peopleStore.selectionStore;
 
   const {
@@ -253,31 +268,32 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     setDisableDialogVisible,
     setLogoutDialogVisible,
     setLogoutAllDialogVisible,
-    platformModalData,
-    getUserSessionsById,
-    displayName,
+    removeSession,
   } = setup;
 
   return {
-    currentDeviceType,
+    allSessions,
+    sessionsData,
+    dataFromSocket,
+    displayName,
+    clearSelection,
+    setDataFromSocket,
+    connections,
+    setConnections,
+    updateAllSessions,
+    platformData,
+    fetchData,
     viewAs,
     setViewAs,
-    allSessions,
-    setSessions,
-    clearSelection,
+    socketHelper,
+    currentDeviceType,
     disableDialogVisible,
     logoutDialogVisible,
     logoutAllDialogVisible,
     setDisableDialogVisible,
     setLogoutDialogVisible,
     setLogoutAllDialogVisible,
-    platformModalData,
-    socketHelper,
-    getUsersList,
-    getUserSessionsById,
-    displayName,
-    setAllSessions,
-    setSessionsFromSocket,
+    removeSession,
   };
 })(
   withTranslation(["Settings", "Profile", "Common", "ChangeUserStatusDialog"])(

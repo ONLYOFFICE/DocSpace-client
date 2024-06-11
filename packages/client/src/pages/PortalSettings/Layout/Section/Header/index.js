@@ -362,8 +362,8 @@ const SectionHeaderContent = (props) => {
     setLogoutAllDialogVisible,
     isSeveralSelection,
     peopleSelection,
-    setSessionModalData,
-    setUserModalData,
+    setConnections,
+    setUserLastSession,
     setUserSessionPanelVisible,
     setDisplayName,
   } = props;
@@ -404,8 +404,8 @@ const SectionHeaderContent = (props) => {
   );
 
   const onClickSessions = () => {
-    setUserModalData(peopleSelection[0]);
-    setSessionModalData(peopleSelection[0].connections);
+    setUserLastSession(peopleSelection[0]);
+    setConnections(peopleSelection[0].connections);
     setUserSessionPanelVisible(true);
   };
 
@@ -561,9 +561,6 @@ export default inject(
       setDisableDialogVisible,
       setLogoutDialogVisible,
       setLogoutAllDialogVisible,
-      setSessionModalData,
-      setUserModalData,
-      setDisplayName,
     } = setup;
     const {
       selected,
@@ -583,6 +580,9 @@ export default inject(
       setSelected: peopleSetSelected,
       isSeveralSelection,
       selection: peopleSelection,
+      setConnections,
+      setUserLastSession,
+      setDisplayName,
     } = peopleStore.selectionStore;
 
     const { admins, selectorIsOpen } = setup.security.accessRight;
@@ -616,9 +616,9 @@ export default inject(
       setDisableDialogVisible,
       setLogoutDialogVisible,
       setLogoutAllDialogVisible,
-      setSessionModalData,
+      setConnections,
       setUserSessionPanelVisible,
-      setUserModalData,
+      setUserLastSession,
       setDisplayName,
     };
   },

@@ -170,8 +170,6 @@ const TableView = ({ t, sectionWidth, userId, sessionsData }) => {
             sessionStatus={item.status}
             connections={item.connections}
             sessions={item.sessions}
-            isOwner={item.isOwner}
-            isAdmin={item.isAdmin}
           />
         ))}
       </TableBody>

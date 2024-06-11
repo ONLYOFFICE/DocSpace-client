@@ -11,16 +11,11 @@ const StyledRow = styled(Row)`
 `;
 
 const SessionsRow = (props) => {
-  const { item, sectionWidth, setLogoutDialogVisible, setPlatformModalData } =
-    props;
+  const { item, sectionWidth, setLogoutDialogVisible, setPlatformData } = props;
 
   const onClickDisable = () => {
     setLogoutDialogVisible(true);
-    setPlatformModalData({
-      id: item.id,
-      platform: item.platform,
-      browser: item.browser,
-    });
+    setPlatformData(item);
   };
 
   const contentElement = (
@@ -44,11 +39,14 @@ const SessionsRow = (props) => {
   );
 };
 
-export default inject(({ setup }) => {
+export default inject(({ setup, peopleStore }) => {
+  const { platformData, setPlatformData } = peopleStore.selectionStore;
   const { setLogoutDialogVisible, setPlatformModalData } = setup;
 
   return {
     setLogoutDialogVisible,
     setPlatformModalData,
+    platformData,
+    setPlatformData,
   };
 })(observer(SessionsRow));

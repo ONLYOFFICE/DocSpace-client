@@ -24,15 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
+import api from "@docspace/shared/api";
 import { EmployeeStatus } from "@docspace/shared/enums";
 import { getUserStatus } from "../helpers/people-helpers";
 
 class SelectionStore {
   peopleStore = null;
   allSessions = [];
-  sessions = [];
-  sessionsFromSocket = [];
+  sessionsData = [];
+  dataFromSocket = [];
+  displayName = "";
+  status = "";
+  connections = [];
+  platformData = [];
+  userLastSession = [];
   selection = [];
   selectionUsersRights = {
     isVisitor: 0,
@@ -261,7 +267,7 @@ class SelectionStore {
   setSelected = (selected, isSessionsPage) => {
     this.bufferSelection = null;
     this.selected = selected;
-    const sessions = this.sessions;
+    const sessions = this.sessionsData;
     const list = this.peopleStore.usersStore.peopleList;
 
     if (selected !== "none" && selected !== "close") {
@@ -426,45 +432,90 @@ class SelectionStore {
 
   get isHeaderIndeterminate() {
     return (
-      this.isHeaderVisible && this.selection.length !== this.sessions.length
+      this.isHeaderVisible && this.selection.length !== this.sessionsData.length
     );
   }
 
   get isHeaderChecked() {
     return (
-      this.isHeaderVisible && this.selection.length === this.sessions.length
+      this.isHeaderVisible && this.selection.length === this.sessionsData.length
     );
   }
 
-  setSessions = (sessions) => {
-    this.sessions = sessions;
+  setAllSessions = (allSessions) => {
+    this.allSessions = allSessions;
   };
 
-  setSessionsFromSocket = (data) => {
-    this.sessionsFromSocket = data;
+  setSessionsData = (data) => {
+    this.sessionsData = data;
   };
 
-  setAllSessions = () => {
+  setDataFromSocket = (data) => {
+    this.dataFromSocket = data;
+  };
+
+  setDisplayName = (displayName) => {
+    this.displayName = displayName;
+  };
+
+  setStatus = (status) => {
+    this.status = status;
+  };
+
+  setConnections = (connections) => {
+    this.connections = connections;
+  };
+
+  setUserLastSession = (userLastSession) => {
+    this.userLastSession = userLastSession;
+  };
+
+  setPlatformData = (data) => {
+    this.platformData = data;
+  };
+
+  updateAllSessions = (sessions, dataFromSocket) => {
     const socketDataMap = new Map(
-      this.sessionsFromSocket.map((user) => [user.id, user]),
+      dataFromSocket.map((user) => [user.id, user]),
     );
-
-    const filteredSessions = this.sessions.filter((session) => {
+    const filteredSessions = sessions.filter((session) => {
       const socketData = socketDataMap.get(session.id);
       return (
         socketData && socketData.sessions && socketData.sessions.length > 0
       );
     });
 
-    this.allSessions = filteredSessions.map((session) => {
+    const newAllSessions = filteredSessions.map((session) => {
       const socketData = socketDataMap.get(session.id);
-      console.log("allSessions", this.sessions);
       return {
         ...session,
         status: socketData ? socketData.status : "offline",
         sessions: socketData ? socketData.sessions.slice(-1)[0] : [],
       };
     });
+
+    runInAction(() => {
+      this.setAllSessions(newAllSessions);
+    });
+  };
+
+  getUserSessionsById = (userId) => {
+    return api.settings.getUserSessionsById(userId);
+  };
+
+  fetchData = async () => {
+    const { getUsersList } = this.peopleStore.usersStore;
+    try {
+      const users = await getUsersList();
+      const sessionsPromises = users.map((user) =>
+        this.getUserSessionsById(user.id),
+      );
+      const sessions = await Promise.all(sessionsPromises);
+      this.setSessionsData(sessions);
+      this.updateAllSessions(sessions, this.dataFromSocket);
+    } catch (error) {
+      console.error(error);
+    }
   };
 }
 

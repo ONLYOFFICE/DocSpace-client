@@ -107,13 +107,9 @@ class SettingsSetupStore {
 
   securityLifetime = [];
 
-  sessionStatus = "";
-  displayName = "";
   sessionsIsInit = false;
   sessions = [];
   currentSession = [];
-  sessionModalData = [];
-  userModalData = [];
   platformModalData = {};
 
   constructor(tfaStore, authStore, settingsStore, thirdPartyStore) {
@@ -557,10 +553,6 @@ class SettingsSetupStore {
     return api.settings.getAllActiveSessions();
   };
 
-  getUserSessionsById = (userId) => {
-    return api.settings.getUserSessionsById(userId);
-  };
-
   removeAllActiveSessionsById = (userId) => {
     return api.settings.removeAllActiveSessionsById(userId);
   };
@@ -602,28 +594,12 @@ class SettingsSetupStore {
     this.sessions = sessions;
   };
 
-  setSessionModalData = (data) => {
-    this.sessionModalData = data;
-  };
-
-  setUserModalData = (data) => {
-    this.userModalData = data;
-  };
-
   setPlatformModalData = (data) => {
     this.platformModalData = {
       id: data.id,
       platform: data.platform,
       browser: data.browser,
     };
-  };
-
-  setDisplayName = (name) => {
-    this.displayName = name;
-  };
-
-  setSessionStatus = (status) => {
-    this.sessionStatus = status;
   };
 }
 

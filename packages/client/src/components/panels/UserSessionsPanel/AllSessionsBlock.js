@@ -1,3 +1,4 @@
+import { observer, inject } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
@@ -22,19 +23,19 @@ const Wrapper = styled.div`
 const AllSessionsBlock = (props) => {
   const {
     t,
-    sessionData,
-    removeAllActiveSessionsById,
-    setSessionModalData,
+    connections,
+    setConnections,
     fetchData,
+    removeAllActiveSessionsById,
   } = props;
 
-  const isDisabled = sessionData.length > 0;
+  const isDisabled = connections.length > 0;
 
   const onLogoutClick = async () => {
     try {
-      await removeAllActiveSessionsById(sessionData[0]?.userId);
-      await fetchData();
-      setSessionModalData([]);
+      await removeAllActiveSessionsById(connections[0]?.userId);
+      fetchData();
+      setConnections([]);
       toastr.success("Successfully logout all sessions");
     } catch (error) {
       toastr.error(error);
@@ -56,9 +57,19 @@ const AllSessionsBlock = (props) => {
         />
       </Wrapper>
 
-      <RowWrapper t={t} sessionsData={sessionData} />
+      <RowWrapper t={t} connections={connections} />
     </>
   );
 };
 
-export default AllSessionsBlock;
+export default inject(({ setup, peopleStore }) => {
+  const { removeAllActiveSessionsById } = setup;
+  const { connections, setConnections, fetchData } = peopleStore.selectionStore;
+
+  return {
+    connections,
+    setConnections,
+    fetchData,
+    removeAllActiveSessionsById,
+  };
+})(observer(AllSessionsBlock));

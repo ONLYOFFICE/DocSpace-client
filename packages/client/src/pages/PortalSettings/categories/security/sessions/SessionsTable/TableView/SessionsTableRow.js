@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import { useCallback } from "react";
 import { Base } from "@docspace/shared/themes";
 import styled, { css } from "styled-components";
-import withContent from "SRC_DIR/HOCs/withPeopleContent";
 import moment from "moment-timezone";
+import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
 import { Avatar } from "@docspace/shared/components/avatar";
 import { TableRow } from "@docspace/shared/components/table";
@@ -118,6 +117,9 @@ const StyledTableRow = styled(TableRow)`
   .session-info {
     font-weight: 600;
     color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
+    ::first-letter {
+      text-transform: uppercase;
+    }
   }
 
   .divider {
@@ -144,8 +146,7 @@ const SessionsTableRow = (props) => {
   const {
     t,
     item,
-    locale,
-    checkedProps,
+    element,
     onContentRowSelect,
     onContentRowClick,
     isActive,
@@ -154,20 +155,21 @@ const SessionsTableRow = (props) => {
     sessionStatus,
     connections,
     sessions,
-    isOwner,
-    isAdmin,
+    locale,
+    checkedProps,
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
-    setUserModalData,
-    setSessionModalData,
+    setUserLastSession,
+    setConnections,
     setUserSessionPanelVisible,
     setDisplayName,
-    setSessionStatus,
+    setStatus,
   } = props;
 
   const [fromDateAgo, setFromDateAgo] = useState("");
+
   const { platform, browser, ip, city, country, status, date } = sessions;
-  const role = isOwner ? "owner" : isAdmin ? "admin" : null;
+
   const isChecked = checkedProps?.checked;
   const isOnline = sessionStatus === "online";
   const isOffline = status === "offline";
@@ -198,9 +200,9 @@ const SessionsTableRow = (props) => {
   };
 
   const onClickSessions = () => {
-    setSessionStatus(fromDateAgo);
-    setUserModalData(item);
-    setSessionModalData(connections);
+    setStatus(fromDateAgo);
+    setUserLastSession(item);
+    setConnections(connections);
     setUserSessionPanelVisible(true);
   };
 
@@ -283,14 +285,7 @@ const SessionsTableRow = (props) => {
             className="table-container_row-checkbox-wrapper"
             checked={isChecked}
           >
-            <div className="table-container_element">
-              <Avatar
-                className="avatar"
-                role={role}
-                size={"min"}
-                userName={displayName}
-              />
-            </div>
+            <div className="table-container_element">{element}</div>
             <Checkbox
               className="table-container_row-checkbox"
               isChecked={isChecked}
@@ -335,29 +330,26 @@ const SessionsTableRow = (props) => {
   );
 };
 
-export default inject(({ setup, dialogsStore, settingsStore, userStore }) => {
-  const { setUserSessionPanelVisible } = dialogsStore;
-  const { culture } = settingsStore;
-  const { user } = userStore;
-  const locale = (user && user.cultureName) || culture || "en";
+export default inject(
+  ({ setup, dialogsStore, settingsStore, userStore, peopleStore }) => {
+    const { setUserSessionPanelVisible } = dialogsStore;
+    const { setLogoutAllDialogVisible, setDisableDialogVisible } = setup;
+    const { culture } = settingsStore;
+    const { user } = userStore;
+    const locale = (user && user.cultureName) || culture || "en";
 
-  const {
-    setLogoutAllDialogVisible,
-    setDisableDialogVisible,
-    setUserModalData,
-    setSessionModalData,
-    setDisplayName,
-    setSessionStatus,
-  } = setup;
+    const { setUserLastSession, setConnections, setDisplayName, setStatus } =
+      peopleStore.selectionStore;
 
-  return {
-    locale,
-    setLogoutAllDialogVisible,
-    setDisableDialogVisible,
-    setUserModalData,
-    setSessionModalData,
-    setUserSessionPanelVisible,
-    setDisplayName,
-    setSessionStatus,
-  };
-})(withContent(observer(SessionsTableRow)));
+    return {
+      locale,
+      setLogoutAllDialogVisible,
+      setDisableDialogVisible,
+      setUserLastSession,
+      setConnections,
+      setUserSessionPanelVisible,
+      setDisplayName,
+      setStatus,
+    };
+  },
+)(withContent(observer(SessionsTableRow)));

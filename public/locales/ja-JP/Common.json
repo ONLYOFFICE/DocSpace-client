@@ -451,5 +451,14 @@
   "ViewOnlyRooms": "読み取り専用",
   "CustomRooms": "カスタム",
   "FormRoom": "フォームルーム",
-  "NewRoom": "新しいルーム"
+  "NewRoom": "新しいルーム",
+  "ConflictResolveDescription": "フォルダ<1>{{folder}}</1>内に<1>{{file}}</1>という名前のファイルがすでに存在しています。",
+  "ConflictResolveDescriptionFiles": "{{filesCount}}フォルダ<1>{{folder}}</1>に同名のドキュメントがすでに存在しています。",
+  "ConflictResolveSelectAction": "アクションをお選びください：",
+  "ConflictResolveTitle": "上書き確認",
+  "CreateDescription": "フォルダ内には2種類のファイルが存在します。",
+  "OverwriteDescription": "このファイルは、同名のファイルにバージョンが追加されます。",
+  "OverwriteTitle": "バージョンアップによる上書き",
+  "SkipDescription": "ファイルはコピーされません。元のファイルはコピー先のフォルダーに保持されます。",
+  "SkipTitle": "スキップ"
 }

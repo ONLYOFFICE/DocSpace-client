@@ -111,28 +111,29 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
     let conflictResolve: ConflictResolveType | void =
       ConflictResolveType.Duplicate;
 
-    const hasConfictFiles = await checkFileConflicts(
-      selectedItemId,
-      [],
-      [fileInfo.id],
-    );
-
-    if (hasConfictFiles.length > 0) {
-      conflictResolve = await showConflictResolveDialog(
-        folderTitle,
-        fileInfo.title,
-      );
-
-      if (!conflictResolve) {
-        requestRunning.current = false;
-
-        return Promise.resolve();
-      }
-    }
-
     const url = new URL(`${window.location.origin}/rooms/shared/filter`);
     url.searchParams.set("folder", selectedItemId.toString());
-    window.open(url.toString());
+    window.location.replace(url.toString());
+
+    // const hasConfictFiles = await checkFileConflicts(
+    //   selectedItemId,
+    //   [],
+    //   [fileInfo.id],
+    // );
+
+    // if (hasConfictFiles.length > 0) {
+    //   conflictResolve = await showConflictResolveDialog(
+    //     folderTitle,
+    //     fileInfo.title,
+    //   );
+
+    //   if (!conflictResolve) {
+    //     requestRunning.current = false;
+
+    //     return Promise.resolve();
+    //   }
+    // }
+
     copyToFolder(
       Number(selectedItemId),
       [],

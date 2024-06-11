@@ -86,7 +86,7 @@
   "RoomTypeDisplay": "ルームタイプの表示",
   "Rotate": "回転",
   "Scale": "スケール",
-  "SDKDescription": "JavaScript SDKを使用すると、ONLYOFFICE {{portalName}}のルームやフォルダをiframeとしてWebインターフェイスに埋め込むことができます。ここでは、サンプルのiframeを作成するための設定と、CSPを設定するための設定を見つけることができます。完全なSDKを使用するには、をご参照ください",
+  "SDKDescription": "JavaScript SDKを使用すると、{{portalName}}のルームやフォルダをiframeとしてWebインターフェイスに埋め込むことができます。ここでは、サンプルのiframeを作成するための設定と、CSPを設定するための設定を見つけることができます。完全なSDKを使用するには、をご参照ください",
   "SearchBlock": "検索ブロック",
   "SearchFilterAndSort": "検索、フィルタ、並び替え",
   "SearchTerm": "検索語句",

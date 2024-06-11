@@ -84,7 +84,7 @@
   "RoomTypeDisplay": "Huoneen tyypin näyttäminen",
   "Rotate": "Kierrä",
   "Scale": "Mittakaavassa",
-  "SDKDescription": "Käyttäen JavaScript SDK:ta voit upottaa huoneen tai kansion ONLYOFFICE {{portalName}}:sta oman käyttöliittymäsi iframe:ksi. Tästä löydät asetukset iframe:n mallin luomiseen ja CSP:n määrittämiseen. Käyttääksesi koko SDK:ta, katso",
+  "SDKDescription": "Käyttäen JavaScript SDK:ta voit upottaa huoneen tai kansion {{portalName}}:sta oman käyttöliittymäsi iframe:ksi. Tästä löydät asetukset iframe:n mallin luomiseen ja CSP:n määrittämiseen. Käyttääksesi koko SDK:ta, katso",
   "SearchBlock": "Etsi lohko",
   "SearchFilterAndSort": "Etsi, suodata ja järjestä",
   "SearchTerm": "Hakusana",

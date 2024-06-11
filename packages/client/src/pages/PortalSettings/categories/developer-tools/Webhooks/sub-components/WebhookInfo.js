@@ -61,11 +61,13 @@ StyledGuideLink.defaultProps = { theme: Base };
 
 const WebhookInfo = (props) => {
   const { t } = useTranslation(["Webhooks"]);
-  const { webhooksGuideUrl } = props;
+  const { webhooksGuideUrl, organizationName } = props;
 
   return (
     <InfoWrapper>
-      <InfoText as="p">{t("WebhooksInfo", { portalName: PORTAL })}</InfoText>
+      <InfoText as="p">
+        {t("WebhooksInfo", { portalName: PORTAL, organizationName })}
+      </InfoText>
       <StyledGuideLink
         id="webhooks-info-link"
         fontWeight={600}
@@ -81,9 +83,10 @@ const WebhookInfo = (props) => {
 };
 
 export default inject(({ settingsStore }) => {
-  const { webhooksGuideUrl } = settingsStore;
+  const { webhooksGuideUrl, organizationName } = settingsStore;
 
   return {
     webhooksGuideUrl,
+    organizationName,
   };
 })(observer(WebhookInfo));

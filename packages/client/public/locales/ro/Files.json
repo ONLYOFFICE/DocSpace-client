@@ -125,7 +125,7 @@
   "PrivateRoomDescriptionSafest": "Stocarea cea mai sigură pentru docx, xlsx și pptx.",
   "PrivateRoomDescriptionSecure": "Partajare securizată cu membrii de echipă de încredere.",
   "PrivateRoomDescriptionUnbreakable": "Algoritm stabil AES-256.",
-  "PrivateRoomHeader": "Bune ați venit la Sala Privată ONLYOFFICE unde fiecare simbol introdus este criptat.",
+  "PrivateRoomHeader": "Bune ați venit la Sala Privată {{organizationName}} unde fiecare simbol introdus este criptat.",
   "PrivateRoomSupport": "Sala Privată este disponibilă prin intermediu aplicației de birou {{organizationName}}. <3>Instrucțiuni</3>",
   "RecentlyAccessible": "A fost accesibil recent prin link",
   "RecentViaLinkEmptyContainerDescription": "Aici veți găsi lista fişierelor deschise recent, care au fost partajate cu dvs prin un link extern.",

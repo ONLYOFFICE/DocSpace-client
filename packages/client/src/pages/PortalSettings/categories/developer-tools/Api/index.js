@@ -61,7 +61,14 @@ const EmptyContainer = styled(EmptyScreenContainer)`
 `;
 
 const Api = (props) => {
-  const { t, setDocumentTitle, theme, apiBasicLink, currentDeviceType } = props;
+  const {
+    t,
+    setDocumentTitle,
+    theme,
+    apiBasicLink,
+    currentDeviceType,
+    organizationName,
+  } = props;
 
   const imgSrc = theme.isBase ? ApiSvgUrl : ApiDarkSvgUrl;
 
@@ -80,7 +87,10 @@ const Api = (props) => {
             scale={currentDeviceType === DeviceType.mobile}
           />
         }
-        descriptionText={t("ApiPageDescription", { portalName: PORTAL })}
+        descriptionText={t("ApiPageDescription", {
+          portalName: PORTAL,
+          organizationName,
+        })}
         headerText={t("ApiPageHeader")}
         imageAlt={t("ApiPageHeader")}
         imageSrc={imgSrc}
@@ -91,12 +101,14 @@ const Api = (props) => {
 
 export default inject(({ authStore, settingsStore }) => {
   const { setDocumentTitle } = authStore;
-  const { theme, apiBasicLink, currentDeviceType } = settingsStore;
+  const { theme, apiBasicLink, currentDeviceType, organizationName } =
+    settingsStore;
 
   return {
     theme,
     setDocumentTitle,
     apiBasicLink,
     currentDeviceType,
+    organizationName,
   };
 })(withTranslation(["Settings", "Common"])(observer(Api)));

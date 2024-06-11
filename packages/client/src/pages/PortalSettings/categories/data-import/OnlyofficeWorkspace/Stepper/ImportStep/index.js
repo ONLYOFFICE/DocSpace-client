@@ -79,7 +79,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Accounts"),
-          workspace: "DocSpace",
+          workspace: PORTAL,
           SectionIcon: AccountsIcon,
         }}
         isDisabled
@@ -95,7 +95,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Accounts"),
-          workspace: "DocSpace",
+          workspace: PORTAL,
           SectionIcon: AccountsIcon,
         }}
       />
@@ -111,7 +111,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Documents"),
-          workspace: "DocSpace",
+          workspace: PORTAL,
           SectionIcon: DocumentsIcon,
         }}
       />
@@ -127,7 +127,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Documents"),
-          workspace: "DocSpace",
+          workspace: PORTAL,
           SectionIcon: DocumentsIcon,
         }}
       />
@@ -143,7 +143,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Rooms"),
-          workspace: "DocSpace",
+          workspace: PORTAL,
           SectionIcon: RoomsIcon,
         }}
       />
@@ -162,7 +162,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Rooms"),
-          workspace: "DocSpace",
+          workspace: PORTAL,
           SectionIcon: RoomsIcon,
         }}
       />
@@ -178,7 +178,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Rooms"),
-          workspace: "DocSpace",
+          workspace: PORTAL,
           SectionIcon: RoomsIcon,
         }}
       />

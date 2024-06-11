@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "Numire administratori ",
-  "BackupPortal": "Creați o copie de rezervă a datelor din spațiul {{portalName}}",
-  "ChangeInstruction": "Pentru a schimba proprietarul {{portalName}}, alegeţi numele noului proprietar mai jos.",
-  "ChangeOwner": "Modificare proprietar {{portalName}}",
+  "BackupPortal": "Creați o copie de rezervă a datelor din spațiul {{productName}}",
+  "ChangeInstruction": "Pentru a schimba proprietarul {{productName}}, alegeţi numele noului proprietar mai jos.",
+  "ChangeOwner": "Modificare proprietar {{productName}}",
   "ChangeUser": "Schimbare utilizator",
-  "DeactivateOrDeletePortal": "Dezactivare sau ştergere {{portalName}} ",
+  "DeactivateOrDeletePortal": "Dezactivare sau ştergere {{productName}} ",
   "DoTheSame": "Faceţi aceleaşi lucruri ca și administratori",
-  "ManagePortal": "Gestionați configurarea spațiului {{portalName}}",
+  "ManagePortal": "Gestionați configurarea spațiului {{productName}}",
   "ManageUser": "Gestionați conturile de utilizator",
-  "NewPortalOwner": "Proprietarul nou al {{portalName}}",
-  "PortalOwnerCan": "Proprietarul {{portalName}} poate:",
+  "NewPortalOwner": "Proprietarul nou al {{productName}}",
+  "PortalOwnerCan": "Proprietarul {{productName}} poate:",
   "SetAccessRights": "Configurare drepturi de acces "
 }

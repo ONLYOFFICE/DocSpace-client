@@ -28,7 +28,7 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
 
@@ -61,7 +61,7 @@ const MobileView = ({ isSSOAvailable, organizationName }) => {
       <MobileCategoryWrapper
         title={t("SpMetadata", { organizationName })}
         subtitle={t("SpMetadataDescription", {
-          portalName: PORTAL,
+          productName: PRODUCT_NAME,
           organizationName,
         })}
         url="/portal-settings/integration/single-sign-on/sp-metadata"

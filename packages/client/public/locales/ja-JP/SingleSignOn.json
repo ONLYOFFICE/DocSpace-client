@@ -48,7 +48,7 @@
   "SPEntityId": "SP Entity Id (メタデータXMLへのリンク)",
   "SPEntityIdTooltip": "ID プロバイダがダウンロードし、SP を明確に識別するために使用できるサービスプロバイダ XML の URL アドレス",
   "SpMetadata": "{{organizationName}}のSPメタデータ",
-  "SpMetadataDescription": "サービスプロバイダのメタデータにアクセスし、{{organizationName}} {{portalName}}を信頼できるサービスプロバイダとしてIdPアカウントに追加します。",
+  "SpMetadataDescription": "サービスプロバイダのメタデータにアクセスし、{{organizationName}} {{productName}}を信頼できるサービスプロバイダとしてIdPアカウントに追加します。",
   "spSignExitRequest": "ログアウトリクエストに署名する",
   "spSigningAlgorithm": "署名アルゴリズム",
   "spSignResponseRequest": "ログアウトレスポンスに署名する",

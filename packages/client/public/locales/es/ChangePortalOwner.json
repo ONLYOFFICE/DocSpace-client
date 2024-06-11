@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "Designar administradores",
-  "BackupPortal": "Hacer copias de seguridad de los datos de {{portalName}}",
-  "ChangeInstruction": "Para cambiar el propietario de {{portalName}}, elija a continuación el nombre del nuevo propietario.",
-  "ChangeOwner": "Cambiar el propietario de {{portalName}}",
+  "BackupPortal": "Hacer copias de seguridad de los datos de {{productName}}",
+  "ChangeInstruction": "Para cambiar el propietario de {{productName}}, elija a continuación el nombre del nuevo propietario.",
+  "ChangeOwner": "Cambiar el propietario de {{productName}}",
   "ChangeUser": "Cambiar usuario",
-  "DeactivateOrDeletePortal": "Desactivar o eliminar {{portalName}}",
+  "DeactivateOrDeletePortal": "Desactivar o eliminar {{productName}}",
   "DoTheSame": "Hacer lo mismo que los administradores",
-  "ManagePortal": "Gestionar la configuración de {{portalName}}",
+  "ManagePortal": "Gestionar la configuración de {{productName}}",
   "ManageUser": "Gestionar las cuentas de usuarios",
-  "NewPortalOwner": "Nuevo propietario de {{portalName}}",
-  "PortalOwnerCan": "El propietario de {{portalName}} puede:",
+  "NewPortalOwner": "Nuevo propietario de {{productName}}",
+  "PortalOwnerCan": "El propietario de {{productName}} puede:",
   "SetAccessRights": "Establecer permisos de acceso"
 }

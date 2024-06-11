@@ -1,13 +1,13 @@
 {
   "ActionsWithFilesDescription": "Badges informeren u over acties zoals het uploaden, aanmaken en wijzigen van bestanden.",
   "Badges": "Badges",
-  "DailyFeed": "Daily {{portalName}} feed",
-  "DailyFeedDescription": "Lees nieuws en gebeurtenissen uit uw {{portalName}} in een dagelijkse samenvatting.",
+  "DailyFeed": "Daily {{productName}} feed",
+  "DailyFeedDescription": "Lees nieuws en gebeurtenissen uit uw {{productName}} in een dagelijkse samenvatting.",
   "ManageNotifications": "Beheer",
   "Notifications": "Meldingen",
   "RoomsActions": "Acties met bestanden in Kamers",
   "RoomsActivity": "Kamers activiteit",
   "RoomsActivityDescription": "Uurlijkse meldingen. Blijf op de hoogte van alle activiteiten in uw kamers.",
-  "UsefulTips": "Handige {{portalName}} tips",
-  "UsefulTipsDescription": "Ontvang handige gidsen over {{portalName}}"
+  "UsefulTips": "Handige {{productName}} tips",
+  "UsefulTipsDescription": "Ontvang handige gidsen over {{productName}}"
 }

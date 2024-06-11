@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "Iecelt administratorus",
-  "BackupPortal": "Dublēt {{portalName}} datus",
-  "ChangeInstruction": "Lai mainītu {{portalName}} īpašnieku, lūdzu, zemāk izvēlieties jaunā īpašnieka vārdu.",
-  "ChangeOwner": "Mainīt {{portalName}} īpašnieku",
+  "BackupPortal": "Dublēt {{productName}} datus",
+  "ChangeInstruction": "Lai mainītu {{productName}} īpašnieku, lūdzu, zemāk izvēlieties jaunā īpašnieka vārdu.",
+  "ChangeOwner": "Mainīt {{productName}} īpašnieku",
   "ChangeUser": "Mainīt lietotāju",
-  "DeactivateOrDeletePortal": "Deaktivizēt vai izdzēst {{portalName}}",
+  "DeactivateOrDeletePortal": "Deaktivizēt vai izdzēst {{productName}}",
   "DoTheSame": "Dariet to pašu, ko administratori",
-  "ManagePortal": "Pārvaldīt {{portalName}} konfigurāciju",
+  "ManagePortal": "Pārvaldīt {{productName}} konfigurāciju",
   "ManageUser": "Pārvaldīt lietotāju kontus",
-  "NewPortalOwner": "Jauns {{portalName}} īpašnieks",
-  "PortalOwnerCan": "{{portalName}} īpašnieks var:",
+  "NewPortalOwner": "Jauns {{productName}} īpašnieks",
+  "PortalOwnerCan": "{{productName}} īpašnieks var:",
   "SetAccessRights": "Iestatīt piekļuves tiesības"
 }

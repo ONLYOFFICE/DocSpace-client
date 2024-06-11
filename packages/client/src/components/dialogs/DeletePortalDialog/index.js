@@ -35,7 +35,7 @@ import { sendDeletePortalEmail } from "@docspace/shared/api/portal";
 
 import ModalDialogContainer from "../ModalDialogContainer";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const DeletePortalDialog = (props) => {
   const { t, ready } = useTranslation("Settings", "Common");
@@ -61,7 +61,7 @@ const DeletePortalDialog = (props) => {
       displayType="modal"
     >
       <ModalDialog.Header>
-        {t("DeletePortal", { portalName: PORTAL })}
+        {t("DeletePortal", { productName: PRODUCT_NAME })}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <Trans t={t} i18nKey="DeletePortalInfo" ns="Settings">

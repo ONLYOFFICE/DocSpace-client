@@ -65,7 +65,7 @@ import {
 import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
-  PORTAL,
+  PRODUCT_NAME,
   PUBLIC_MEDIA_VIEW_URL,
   RTL_LANGUAGES,
 } from "../constants";
@@ -145,7 +145,7 @@ export const getUserTypeLabel = (
     case "owner":
       return t("Common:Owner");
     case "admin":
-      return t("Common:PortalAdmin", { portalName: PORTAL });
+      return t("Common:PortalAdmin", { productName: PRODUCT_NAME });
     case "manager":
       return t("Common:RoomAdmin");
     case "collaborator":

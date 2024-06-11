@@ -179,5 +179,5 @@ export const HTML_EXST = [".htm", ".mht", ".html"];
 
 export const SYSTEM_THEME_KEY = "system_theme";
 
-export const PORTAL = "DocSpace";
+export const PRODUCT_NAME = "DocSpace";
 export const BRAND_NAME = "ONLYOFFICE";

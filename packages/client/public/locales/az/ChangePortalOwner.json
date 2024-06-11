@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "Administratorları təyin edin",
-  "BackupPortal": "{{portalName}} məlumatlarını yedəkləyin",
-  "ChangeInstruction": "{{portalName}} sahibini dəyişmək üçün lütfən, aşağıda yeni sahibin adını seçin.",
-  "ChangeOwner": "{{portalName}} sahibini dəyişdirin",
+  "BackupPortal": "{{productName}} məlumatlarını yedəkləyin",
+  "ChangeInstruction": "{{productName}} sahibini dəyişmək üçün lütfən, aşağıda yeni sahibin adını seçin.",
+  "ChangeOwner": "{{productName}} sahibini dəyişdirin",
   "ChangeUser": "İstifadəçini dəyişdirin",
-  "DeactivateOrDeletePortal": "{{portalName}}-i deaktiv edin və ya silin",
+  "DeactivateOrDeletePortal": "{{productName}}-i deaktiv edin və ya silin",
   "DoTheSame": "Administratorlarla da eyni şeyi edin",
-  "ManagePortal": "{{portalName}} konfiqurasiyasını idarə edin",
+  "ManagePortal": "{{productName}} konfiqurasiyasını idarə edin",
   "ManageUser": "İstifadəçi hesablarını idarə edin",
-  "NewPortalOwner": "Yeni {{portalName}} sahibi",
-  "PortalOwnerCan": "{{portalName}} sahibi edə bilər:",
+  "NewPortalOwner": "Yeni {{productName}} sahibi",
+  "PortalOwnerCan": "{{productName}} sahibi edə bilər:",
   "SetAccessRights": "Giriş hüquqlarını təyin edin"
 }

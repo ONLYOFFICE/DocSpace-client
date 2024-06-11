@@ -48,7 +48,7 @@
   "SPEntityId": "ID podmiotu usługodawcy (link do XML z metadanymi)",
   "SPEntityIdTooltip": "Adres URL XML usługodawcy, który może być pobrany i wykorzystany przez dostawcę tożsamości do jednoznacznej identyfikacji usługodawcy",
   "SpMetadata": "Metadane usługodawcy {{organizationName}}",
-  "SpMetadataDescription": "Uzyskaj dostęp do metadanych usługodawcy, aby dodać {{organizationName}} {{portalName}} jako zaufanego usługodawcę na swoim koncie dostawcy tożsamości.",
+  "SpMetadataDescription": "Uzyskaj dostęp do metadanych usługodawcy, aby dodać {{organizationName}} {{productName}} jako zaufanego usługodawcę na swoim koncie dostawcy tożsamości.",
   "spSignExitRequest": "Podpisz żądania wylogowania",
   "spSigningAlgorithm": "Algorytm podpisywania",
   "spSignResponseRequest": "Podpisz odpowiedzi wylogowania",

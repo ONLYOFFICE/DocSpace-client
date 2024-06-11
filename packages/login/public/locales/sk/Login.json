@@ -1,7 +1,7 @@
 {
   "CodeSubtitle": "Na adresu {{email}} sme poslali 6-miestny kód. Kód má obmedzenú dobu platnosti, zadajte ho čo najskôr.",
   "CodeTitle": "Kód vám bol zaslaný na e-mail",
-  "ErrorInvalidText": "O 10 sekúnd budete presmerovaní na <1>{{portalName}}</1>",
+  "ErrorInvalidText": "O 10 sekúnd budete presmerovaní na <1>{{productName}}</1>",
   "ExpiredCode": "Tento kód už nie je platný. Požiadajte o nový kód a skúste to znova.",
   "ForgotPassword": "Zabudli ste heslo?",
   "InvalidCode": "Tento kód je neplatný. Skúste to znova.",
@@ -20,5 +20,5 @@
   "RegistrationEmailWatermark": "E-mail",
   "RememberHelper": "Predvolená doba trvania relácie je 20 minút. Začiarknutím tejto možnosti ju nastavíte na 1 rok. Ak chcete nastaviť vlastnú hodnotu, prejdite do časti Nastavenia.",
   "ResendCode": "Poslať kód ešte raz",
-  "UserIsAlreadyRegistered": "Používateľ <1>{{email}}</1> je už zaregistrovaný v tomto priestore {{portalName}}, zadajte svoje heslo alebo sa vráťte späť a pokračujte s iným e-mailom."
+  "UserIsAlreadyRegistered": "Používateľ <1>{{email}}</1> je už zaregistrovaný v tomto priestore {{productName}}, zadajte svoje heslo alebo sa vráťte späť a pokračujte s iným e-mailom."
 }

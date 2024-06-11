@@ -1,11 +1,11 @@
 {
   "DisableGeneralDescription": "Daha sonra gerekirse devre dışı bırakılan kullanıcıları silebilir veya etkinleştirebilirsiniz. Kendiniz veya Sahip gibi kullanıcıları devre dışı bırakamayacağınızı unutmayın.",
   "DisableUser": "Kullanıcıyı devre dışı bırak",
-  "DisableUserDescription": "Bu kullanıcıyı Devre Dışı Bırakırsanız, {{portalName}}'te oturum açamayacak fakat belgeleri ve verileri bozulmadan kalacaktır.",
+  "DisableUserDescription": "Bu kullanıcıyı Devre Dışı Bırakırsanız, {{productName}}'te oturum açamayacak fakat belgeleri ve verileri bozulmadan kalacaktır.",
   "DisableUsers": "Kullanıcıları devre dışı bırak",
-  "DisableUsersDescription": "Bu kullanıcıları Devre Dışı Bırakırsanız,  {{portalName}}'te oturum açamayacaklar fakat belgeleri ve verileri bozulmadan kalacaktır.",
+  "DisableUsersDescription": "Bu kullanıcıları Devre Dışı Bırakırsanız,  {{productName}}'te oturum açamayacaklar fakat belgeleri ve verileri bozulmadan kalacaktır.",
   "EnableUser": "Kullanıcıyı etkinleştir",
-  "EnableUserDescription": "Bu kullanıcıyı etkinleştirirseniz {{portalName}}'te tekrar oturum açabilecek ve kendi belgelerine ve verilerine erişebilecektir.",
+  "EnableUserDescription": "Bu kullanıcıyı etkinleştirirseniz {{productName}}'te tekrar oturum açabilecek ve kendi belgelerine ve verilerine erişebilecektir.",
   "EnableUsers": "Kullanıcıları etkinleştir",
-  "EnableUsersDescription": "Bu kullanıcıları etkinleştirirseniz {{portalName}}'te tekrar oturum açabilecek ve kendi belgelerine ve verilerine erişebileceklerdir."
+  "EnableUsersDescription": "Bu kullanıcıları etkinleştirirseniz {{productName}}'te tekrar oturum açabilecek ve kendi belgelerine ve verilerine erişebileceklerdir."
 }

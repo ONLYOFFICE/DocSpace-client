@@ -5,9 +5,9 @@
   "DisableRoomQuota": "Desativar cota para esta sala",
   "Icon": "Ícone",
   "MakeRoomPrivateDescription": "Todos os arquivos nesta sala serão criptografados.",
-  "MakeRoomPrivateLimitationsWarningDescription": "Com esse recurso, você pode convidar apenas usuários existentes do {{portalName}}. Depois de criar uma sala, você não poderá alterar a lista de usuários.",
+  "MakeRoomPrivateLimitationsWarningDescription": "Com esse recurso, você pode convidar apenas usuários existentes do {{productName}}. Depois de criar uma sala, você não poderá alterar a lista de usuários.",
   "MakeRoomPrivateTitle": "Tornar o quarto privado",
-  "PeopleSelectorInfo": "Somente um administrador da sala ou administrador do {{portalName}} pode se tornar o proprietário da sala",
+  "PeopleSelectorInfo": "Somente um administrador da sala ou administrador do {{productName}} pode se tornar o proprietário da sala",
   "PublicRoomBarDescription": "Esta sala está disponível para qualquer pessoa com o link. Os usuários externos terão permissão Somente visualização para todos os arquivos.",
   "PublicRoomSystemFoldersDescription": "As pastas do sistema armazenam cópias de formulários em diferentes estágios de preenchimento. Os formulários que estão sendo preenchidos são armazenados na pasta Em andamento e os formulários preenchidos são armazenados na pasta Concluído.",
   "PublicRoomSystemFoldersTitle": "Pastas do sistema",
@@ -19,5 +19,5 @@
   "ThirdPartyStorageDescription": "Use serviços de terceiros como armazenamento de dados para esta sala. Uma nova pasta para armazenar os dados desta sala será criada no armazenamento conectado.",
   "ThirdPartyStorageNoStorageAlert": "Antes, você precisa conectar o serviço correspondente na seção “Integração”. Caso contrário, a conexão não será possível.",
   "ThirdPartyStoragePermanentSettingDescription": "Os arquivos são armazenados em um armazenamento {{thirdpartyTitle}} de terceiros na pasta \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "Para conectar um armazenamento de terceiros, você precisa adicionar o serviço correspondente na seção Integração das configurações do {{portalName}}. Entre em contato com o proprietário ou administrador do {{portalName}} para ativar a integração."
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "Para conectar um armazenamento de terceiros, você precisa adicionar o serviço correspondente na seção Integração das configurações do {{productName}}. Entre em contato com o proprietário ou administrador do {{productName}} para ativar a integração."
 }

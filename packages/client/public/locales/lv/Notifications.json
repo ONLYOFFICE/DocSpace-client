@@ -1,13 +1,13 @@
 {
   "ActionsWithFilesDescription": "Žetonus informēs jūs par tādām darbībām kā augšupielāde, izveide un izmaiņas failos.",
   "Badges": "Žetoni",
-  "DailyFeed": "Ikdienas {{portalName}} plūsma",
-  "DailyFeedDescription": "Lasiet {{portalName}} jaunumus un notikumus ikdienas īssavilkumā.",
+  "DailyFeed": "Ikdienas {{productName}} plūsma",
+  "DailyFeedDescription": "Lasiet {{productName}} jaunumus un notikumus ikdienas īssavilkumā.",
   "ManageNotifications": "Pārvaldīt",
   "Notifications": "Paziņojumi",
   "RoomsActions": "Darbības ar failiem telpās",
   "RoomsActivity": "Telpu aktivitāte",
   "RoomsActivityDescription": "Ik stundu paziņojumi. Esiet informēts par visām aktivitātēm savās telpās",
-  "UsefulTips": "Noderīgi {{portalName}} padomi",
-  "UsefulTipsDescription": "Iegūt noderīgus ceļvežus par {{portalName}}"
+  "UsefulTips": "Noderīgi {{productName}} padomi",
+  "UsefulTipsDescription": "Iegūt noderīgus ceļvežus par {{productName}}"
 }

@@ -32,7 +32,7 @@ import { Consumer } from "@docspace/shared/utils";
 import { Table } from "./TableView/TableView";
 import AuditRowContainer from "./RowView/AuditRowContainer";
 import HistoryMainContent from "../sub-components/HistoryMainContent";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const AuditTrail = (props) => {
   const {
@@ -89,7 +89,7 @@ const AuditTrail = (props) => {
       {securityLifetime && securityLifetime.auditTrailLifeTime && (
         <HistoryMainContent
           t={t}
-          subHeader={t("AuditSubheader", { portalName: PORTAL })}
+          subHeader={t("AuditSubheader", { productName: PRODUCT_NAME })}
           latestText={t("LoginLatestText")}
           storagePeriod={t("StoragePeriod")}
           saveButtonLabel={t("Common:SaveButton")}

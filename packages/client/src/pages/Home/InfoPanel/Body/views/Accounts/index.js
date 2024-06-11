@@ -38,7 +38,7 @@ import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import { StyledAccountContent } from "../../styles/accounts";
 import { getUserTypeLabel } from "@docspace/shared/utils/common";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 import { EmployeeStatus } from "@docspace/shared/enums";
 
 const Accounts = (props) => {
@@ -88,8 +88,8 @@ const Accounts = (props) => {
     const adminOption = {
       id: "info-account-type_docspace-admin",
       key: "admin",
-      title: t("Common:PortalAdmin", { portalName: PORTAL }),
-      label: t("Common:PortalAdmin", { portalName: PORTAL }),
+      title: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+      label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
       action: "admin",
     };
     const managerOption = {

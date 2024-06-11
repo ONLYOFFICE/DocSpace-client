@@ -69,7 +69,7 @@ import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { getCorrectFourValuesStyle } from "@docspace/shared/utils";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledButton = styled(Button)`
   font-weight: 700;
@@ -363,7 +363,7 @@ const ArticleMainButtonContent = (props) => {
             id: "actions_upload-from-docspace",
             className: "main-button_drop-down",
             icon: ActionsUploadReactSvgUrl,
-            label: t("Common:FromPortal", { portalName: PORTAL }),
+            label: t("Common:FromPortal", { productName: PRODUCT_NAME }),
             key: "actions_upload-from-docspace",
             onClick: () =>
               onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.PDF),
@@ -596,7 +596,7 @@ const ArticleMainButtonContent = (props) => {
               id: "invite_doc-space-administrator",
               className: "main-button_drop-down",
               icon: PersonAdminReactSvgUrl,
-              label: t("Common:PortalAdmin", { portalName: PORTAL }),
+              label: t("Common:FromPortal", { productName: PRODUCT_NAME }),
               onClick: onInvite,
               action: EmployeeType.Admin,
               key: "administrator",

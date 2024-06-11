@@ -52,7 +52,7 @@ import { AvatarRole } from "../../components/avatar";
 import { Text } from "../../components/text";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
-import { PORTAL } from "../../constants";
+import { PRODUCT_NAME } from "../../constants";
 
 const toListItem = (
   item: TUser,
@@ -398,7 +398,7 @@ const PeopleSelector = ({
       emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyHeader")}
       emptyScreenDescription={
         emptyScreenDescription ??
-        t("Common:EmptyDescription", { portalName: PORTAL })
+        t("Common:EmptyDescription", { productName: PRODUCT_NAME })
       }
       searchEmptyScreenImage={emptyScreenImage}
       searchEmptyScreenHeader={t("Common:NotFoundUsers")}

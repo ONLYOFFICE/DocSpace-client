@@ -1,5 +1,5 @@
 {
-  "ActionCannotBeUndone": "Los usuarios desactivados seleccionados se eliminarán de {{portalName}}. Esta acción no se puede deshacer.",
+  "ActionCannotBeUndone": "Los usuarios desactivados seleccionados se eliminarán de {{productName}}. Esta acción no se puede deshacer.",
   "CannotReassignFiles": "Si elimina varios usuarios a la vez, no podrá reasignar sus archivos a otros usuarios.",
   "DeleteGroupUsersSuccessMessage": "Los usuarios se han eliminado correctamente.",
   "DeleteMyDocumentsUser": "Todos los archivos y carpetas personales de la sección Mis documentos de este usuario se eliminarán de forma permanente.",

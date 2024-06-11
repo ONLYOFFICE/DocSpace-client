@@ -46,7 +46,7 @@
   "URL": "URL",
   "ViewRawPayload": "Visualizza il carico utile iniziale",
   "WebhookCreated": "Webhook creato",
-  "WebhookCreationHint": "Questo webhook verrà assegnato a tutti gli eventi in {{portalName}}",
+  "WebhookCreationHint": "Questo webhook verrà assegnato a tutti gli eventi in {{productName}}",
   "WebhookDetails": "Dettagli del webhook",
   "WebhookEditedSuccessfully": "La configurazione del webhook è stata modificata con successo",
   "WebhookHistory": "Cronologia del webhook",
@@ -55,5 +55,5 @@
   "WebhookRemoved": "Webhook rimosso",
   "Webhooks": "Webhook",
   "WebhooksGuide": "Guida ai webhook",
-  "WebhooksInfo": "Utilizza i webhook per eseguire azioni personalizzate su qualsiasi applicazione o sito Web che stai utilizzando in base a vari eventi in {{organizationName}} {{portalName}}.\nQui puoi creare e gestire tutti i tuoi webhook, configurarli e sfogliare la cronologia di ogni webhook per controllarne le prestazioni."
+  "WebhooksInfo": "Utilizza i webhook per eseguire azioni personalizzate su qualsiasi applicazione o sito Web che stai utilizzando in base a vari eventi in {{organizationName}} {{productName}}.\nQui puoi creare e gestire tutti i tuoi webhook, configurarli e sfogliare la cronologia di ogni webhook per controllarne le prestazioni."
 }

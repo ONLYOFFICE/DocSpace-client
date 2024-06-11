@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "Priraďte administrátorov",
-  "BackupPortal": "Zálohovať dáta {{portalName}}",
-  "ChangeInstruction": "Ak chcete zmeniť vlastníka {{portalName}}, nižšie vyberte meno nového vlastníka.",
-  "ChangeOwner": "Zmeniť vlastníka {{portalName}}",
+  "BackupPortal": "Zálohovať dáta {{productName}}",
+  "ChangeInstruction": "Ak chcete zmeniť vlastníka {{productName}}, nižšie vyberte meno nového vlastníka.",
+  "ChangeOwner": "Zmeniť vlastníka {{productName}}",
   "ChangeUser": "Zmeniť používateľa",
-  "DeactivateOrDeletePortal": "Deaktivovať alebo vymazať {{portalName}}",
+  "DeactivateOrDeletePortal": "Deaktivovať alebo vymazať {{productName}}",
   "DoTheSame": "Robte to, čo robia administrátori",
-  "ManagePortal": "Spravovať konfiguráciu {{portalName}}",
+  "ManagePortal": "Spravovať konfiguráciu {{productName}}",
   "ManageUser": "Spravovať používateľské účty",
-  "NewPortalOwner": "Nový vlastník {{portalName}}",
-  "PortalOwnerCan": "Vlastník {{portalName}} môže:",
+  "NewPortalOwner": "Nový vlastník {{productName}}",
+  "PortalOwnerCan": "Vlastník {{productName}} môže:",
   "SetAccessRights": "Nastaviť prístupové práva"
 }

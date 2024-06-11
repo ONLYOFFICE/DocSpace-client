@@ -86,7 +86,7 @@ export const CompletedForm = ({}: CompletedFormProps) => {
           scale
           primary
           size={ButtonSize.medium}
-          label={t("Common:Close")}
+          label={t("Common:CloseButton")}
           onClick={onClose}
         />
         <Button

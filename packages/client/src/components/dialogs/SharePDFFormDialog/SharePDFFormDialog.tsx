@@ -101,7 +101,7 @@ export const SharePDFFormDialog = inject<TStore>(
               tabIndex={0}
               onClick={handleOnClose}
               size={ButtonSize.normal}
-              label={t("Common:Cancel")}
+              label={t("Common:CancelButton")}
             />
           </ModalDialog.Footer>
         </ModalDialog>

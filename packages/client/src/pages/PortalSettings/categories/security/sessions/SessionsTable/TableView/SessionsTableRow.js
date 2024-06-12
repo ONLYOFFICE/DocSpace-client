@@ -5,7 +5,6 @@ import styled, { css } from "styled-components";
 import moment from "moment-timezone";
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
-import { Avatar } from "@docspace/shared/components/avatar";
 import { TableRow } from "@docspace/shared/components/table";
 import { TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";

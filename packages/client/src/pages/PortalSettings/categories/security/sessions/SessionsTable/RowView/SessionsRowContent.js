@@ -8,6 +8,9 @@ const StyledRowContent = styled(RowContent)`
     color: ${(props) => props.theme.profile.activeSessions.textOnlineColor};
     margin-left: 4px;
     font-size: 14px;
+    ::first-letter {
+      text-transform: uppercase;
+    }
   }
 
   .offline {
@@ -15,34 +18,30 @@ const StyledRowContent = styled(RowContent)`
     color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
     font-size: 14px;
     margin-left: 4px;
+    ::first-letter {
+      text-transform: uppercase;
+    }
   }
 `;
 
-const SessionsRowContent = ({ sectionWidth, item }) => {
-  const {
-    displayName,
+const SessionsRowContent = ({ t, item, fromDateAgo, sectionWidth }) => {
+  const { id, displayName, status, sessions } = item;
 
-    status,
-    platform,
-    browser,
-    country,
-    city,
-    ip,
-    userId,
-  } = item;
+  const { platform, browser, country, city, ip } = sessions;
 
-  const isOnline = status === "Online";
-  const className = isOnline ? "online" : "offline";
+  const isOnline = status === "online";
 
   return (
     <StyledRowContent
-      key={userId}
+      key={id}
       sectionWidth={sectionWidth}
       sideColor={theme.profile.activeSessions.tableCellColor}
     >
       <Text fontSize="14px" fontWeight="600">
         {displayName}
-        <span className={className}>{status}</span>
+        <span className={isOnline ? "online" : "offline"}>
+          {t(`Common:${fromDateAgo}`)}
+        </span>
       </Text>
       <></>
       <Text fontSize="12px" fontWeight="600">

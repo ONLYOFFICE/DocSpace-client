@@ -1,10 +1,11 @@
+import { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import { useCallback } from "react";
 import { isMobile } from "react-device-detect";
 import { Base } from "@docspace/shared/themes";
 import { tablet } from "@docspace/shared/utils";
 import { Row } from "@docspace/shared/components/row";
 import styled, { css } from "styled-components";
+import moment from "moment-timezone";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 import SessionsRowContent from "./SessionsRowContent";
@@ -100,20 +101,59 @@ const StyledRow = styled(Row)`
 const SessionsRow = (props) => {
   const {
     t,
-    sectionWidth,
     item,
-    checkedProps,
+    element,
+    sectionWidth,
     onContentRowSelect,
     onContentRowClick,
-    element,
     isActive,
+    checkedProps,
+    displayName,
+    sessionStatus,
+    connections,
+    sessions,
+    locale,
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
-    setSessionModalData,
     setUserSessionPanelVisible,
+    setUserLastSession,
+    setConnections,
+    setDisplayName,
+    setStatus,
   } = props;
 
-  const isChecked = checkedProps.checked;
+  const [fromDateAgo, setFromDateAgo] = useState("");
+
+  const { status, date } = sessions;
+
+  const isChecked = checkedProps?.checked;
+  const isOnline = sessionStatus === "online";
+  const isOffline = status === "offline";
+
+  useEffect(() => {
+    const updateStatus = () => {
+      const showOnline = isOnline && sessionStatus;
+      const showOffline = isOffline ? convertDate(date, locale) : null;
+      setFromDateAgo(isOnline ? showOnline : showOffline);
+    };
+
+    updateStatus();
+    const intervalId = setInterval(updateStatus, 60000);
+
+    return () => clearInterval(intervalId);
+  }, [date, sessionStatus, status, locale]);
+
+  const convertDate = (dateString, locale) => {
+    const parsedDate = moment(new Date(dateString).toISOString());
+    const now = moment();
+    const daysDiff = now.diff(parsedDate, "days");
+    moment.locale(locale);
+
+    if (daysDiff < 1) return parsedDate.fromNow();
+    if (daysDiff === 1) return t("Common:Yesterday");
+    if (daysDiff < 7) return parsedDate.fromNow();
+    return parsedDate.format(locale);
+  };
 
   const onRowClick = useCallback(() => {
     onContentRowClick && onContentRowClick(!isChecked, item);
@@ -124,13 +164,15 @@ const SessionsRow = (props) => {
   }, [isChecked, item, onContentRowClick]);
 
   const onClickSessions = () => {
-    setSessionModalData({ ...item });
+    setStatus(fromDateAgo);
+    setUserLastSession(item);
+    setConnections(connections);
     setUserSessionPanelVisible(true);
   };
 
   const onClickLogout = () => {
     setLogoutAllDialogVisible(true);
-    setSessionModalData({ displayName: item.displayName });
+    setDisplayName(displayName);
   };
 
   const onClickDisable = () => {
@@ -183,25 +225,33 @@ const SessionsRow = (props) => {
           onRowClick={onRowClick}
           onContextClick={onRowContextClick}
         >
-          <SessionsRowContent {...props} />
+          <SessionsRowContent {...props} fromDateAgo={fromDateAgo} />
         </StyledRow>
       </div>
     </Wrapper>
   );
 };
 
-export default inject(({ setup, dialogsStore }) => {
-  const { setUserSessionPanelVisible } = dialogsStore;
-  const {
-    setLogoutAllDialogVisible,
-    setDisableDialogVisible,
-    setSessionModalData,
-  } = setup;
+export default inject(
+  ({ setup, dialogsStore, settingsStore, userStore, peopleStore }) => {
+    const { setUserSessionPanelVisible } = dialogsStore;
+    const { setLogoutAllDialogVisible, setDisableDialogVisible } = setup;
+    const { culture } = settingsStore;
+    const { user } = userStore;
+    const locale = (user && user.cultureName) || culture || "en";
 
-  return {
-    setLogoutAllDialogVisible,
-    setDisableDialogVisible,
-    setSessionModalData,
-    setUserSessionPanelVisible,
-  };
-})(withContent(observer(SessionsRow)));
+    const { setUserLastSession, setConnections, setDisplayName, setStatus } =
+      peopleStore.selectionStore;
+
+    return {
+      locale,
+      setLogoutAllDialogVisible,
+      setDisableDialogVisible,
+      setUserLastSession,
+      setConnections,
+      setUserSessionPanelVisible,
+      setDisplayName,
+      setStatus,
+    };
+  },
+)(withContent(observer(SessionsRow)));

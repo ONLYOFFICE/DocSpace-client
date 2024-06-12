@@ -26,20 +26,26 @@ const AllSessionsBlock = (props) => {
     t,
     connections,
     setConnections,
+    userLastSession,
     fetchData,
-    removeAllActiveSessionsById,
+    removeAllExceptThisEventId,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
   const isDisabled = connections.length > 0;
 
   const onLogoutClick = async () => {
+    const exceptId = userLastSession.connections[0]?.id;
     try {
       setIsLoading(true);
-      await removeAllActiveSessionsById(connections[0]?.userId);
-      fetchData();
-      setConnections([]);
-      toastr.success("Successfully logout all sessions");
+      await removeAllExceptThisEventId(connections[0]?.id);
+
+      const filteredConnections = connections.filter(
+        (connection) => connection.id === exceptId,
+      );
+      setConnections(filteredConnections);
+      await fetchData();
+      toastr.success("Successfully logout except this");
     } catch (error) {
       toastr.error(error);
     } finally {
@@ -68,13 +74,15 @@ const AllSessionsBlock = (props) => {
 };
 
 export default inject(({ setup, peopleStore }) => {
-  const { removeAllActiveSessionsById } = setup;
-  const { connections, setConnections, fetchData } = peopleStore.selectionStore;
+  const { removeAllExceptThisEventId } = setup;
+  const { connections, setConnections, fetchData, userLastSession } =
+    peopleStore.selectionStore;
 
   return {
     connections,
     setConnections,
+    userLastSession,
     fetchData,
-    removeAllActiveSessionsById,
+    removeAllExceptThisEventId,
   };
 })(observer(AllSessionsBlock));

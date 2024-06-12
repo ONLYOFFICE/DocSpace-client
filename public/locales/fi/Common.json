@@ -169,7 +169,6 @@
   "Finish": "Lopeta",
   "FirstName": "Etunimi",
   "Free": "Ilmainen",
-  "FreeProFeatures": "Ilmainen pääsy ammattilaistoimintoihin",
   "FullAccess": "Täysi pääsy",
   "GeneralAccessLinkCopied": "Yleinen linkki onnistuneesti kopioitu leikepöydälle.",
   "GeneralAccessLinkRemove": "Yleinen pääsylinkki poistetaan",
@@ -452,5 +451,14 @@
   "ViewOnlyRooms": "Vain katselu",
   "CustomRooms": "Mukautettu",
   "FormRoom": "Lomakehuone",
-  "NewRoom": "Uusi huone"
+  "NewRoom": "Uusi huone",
+  "ConflictResolveDescription": "Tiedosto, jonka nimi on <1>{{file}}</1>, on jo kansiossa <1>{{folder}}</1>.",
+  "ConflictResolveDescriptionFiles": "{{filesCount}} samannimistä asiakirjaa on jo olemassa kansiossa <1>{{folder}}</1>.",
+  "ConflictResolveSelectAction": "Valitse toiminto:",
+  "ConflictResolveTitle": "Korvaamisen vahvistus",
+  "CreateDescription": "Kansiossa tulee olemaan kaksi eri tiedostoa.",
+  "OverwriteDescription": "Tiedosto lisätään tiedostoon samalla nimellä versiona.",
+  "OverwriteTitle": "Korvaa versiopäivityksellä",
+  "SkipDescription": "Mitään tiedostoa ei kopioida. Alkuperäinen tiedosto säilytetään kohdekansiossa.",
+  "SkipTitle": "Ohita"
 }

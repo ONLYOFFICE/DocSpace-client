@@ -168,7 +168,6 @@
   "Finish": "انهاء",
   "FirstName": "الاسم الأول",
   "Free": "مجانًا",
-  "FreeProFeatures": "الوصول المجاني إلى الميزات المتطورة",
   "FullAccess": "الوصول الكامل",
   "GeneralAccessLinkCopied": "تم نسخ الرابط العام إلى الحافظة بنجاح",
   "GeneralAccessLinkRemove": "إزالة رابط الوصول العام",
@@ -450,5 +449,14 @@
   "ViewOnlyRooms": "للمشاهدة فقط",
   "CustomRooms": "تخصيص",
   "FormRoom": "غرفة النموذج",
-  "NewRoom": "غرفة جديدة"
+  "NewRoom": "غرفة جديدة",
+  "ConflictResolveDescription": "الملف الذي يحمل الاسم <1>{{file}}</1> موجود بالفعل في المجلد <1>{{folder}}</1>.",
+  "ConflictResolveDescriptionFiles": "{{filesCount}} المستندات التي تحمل الاسم نفسه موجودة بالفعل في المجلد <1> {{folder}} </1>.",
+  "ConflictResolveSelectAction": "الرجاء تحديد الإجراء:",
+  "ConflictResolveTitle": "تأكيد الكتابة",
+  "CreateDescription": "سيكون هناك ملفان مختلفان في المجلد.",
+  "OverwriteDescription": "سيحل الملف الجديد محل الملف الحالي كإصدار جديد.",
+  "OverwriteTitle": "استبدال محتوى النسخة بالتحديث الجديد",
+  "SkipDescription": "لن يتم نسخ أي ملف. سيتم الاحتفاظ بالملف الأصلي في المجلد الوجهة.",
+  "SkipTitle": "تخطى"
 }

@@ -145,6 +145,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
 
     const showPlanetIcon =
       (item.roomType === RoomsType.PublicRoom ||
+        item.roomType === RoomsType.FormRoom ||
         item.roomType === RoomsType.CustomRoom) &&
       item.shared;
 

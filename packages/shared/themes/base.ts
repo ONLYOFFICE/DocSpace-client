@@ -3067,6 +3067,11 @@ export const getBaseTheme = () => {
     dateTimePicker: {
       colorClockIcon: lightGrayDark,
     },
+
+    completedForm: {
+      linkColor: "#4781D1",
+      descriptionColor: gray,
+    },
   };
 };
 

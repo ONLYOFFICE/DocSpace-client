@@ -169,7 +169,6 @@
   "Finish": "Ավարտել",
   "FirstName": "Անուն",
   "Free": "Անվճար",
-  "FreeProFeatures": "Անվճար մուտք դեպի պրոֆեսիոնալ հատկություններ",
   "FullAccess": "Լրիվ մատչում",
   "GeneralAccessLinkCopied": "Ընդհանուր հղումը հաջողությամբ պատճենվել է սեղմատախտակին",
   "GeneralAccessLinkRemove": "Ընդհանուր մուտքի հղումը հեռացնել",
@@ -451,5 +450,14 @@
   "ViewOnlyRooms": "Միայն դիտելու համար",
   "CustomRooms": "Հարմարեցնել",
   "FormRoom": "Ձևի սենյակ",
-  "NewRoom": "Նոր սենյակ"
+  "NewRoom": "Նոր սենյակ",
+  "ConflictResolveDescription": "Այց անունով ֆայլը՝ <1>{{file}}</1> արդեն առկա է պանակում <1>{{folder}}</1>.",
+  "ConflictResolveDescriptionFiles": "{{filesCount}} նույն անունով  փաստաթղթեր արդեն կան պանակում <1>{{folder}}</1>:",
+  "ConflictResolveSelectAction": "Խնդրում ենք ընտրել գործողությունը:",
+  "ConflictResolveTitle": "Վերագրել հաստատումը",
+  "CreateDescription": "Պանակում կլինեն երկու տարբեր ֆայլեր:",
+  "OverwriteDescription": "Նոր ֆայլը որպես նոր տարբերակ կփոխարինի գոյություն ունեցողին։",
+  "OverwriteTitle": "Վերագրել տարբերակի արդիացումով",
+  "SkipDescription": "Ոչ մի ֆայլ չի պատճենվի:Բնօրինակ ֆայլը կպահվի նպատակակետի պանակում ",
+  "SkipTitle": "Բաց թողնել"
 }

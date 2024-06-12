@@ -169,7 +169,6 @@
   "Finish": "종료",
   "FirstName": "이름",
   "Free": "무료",
-  "FreeProFeatures": "프로 기능에 대한 무료 액세스",
   "FullAccess": "전체 액세스",
   "GeneralAccessLinkCopied": "일반 링크가 클립보드에 복사되었습니다",
   "GeneralAccessLinkRemove": "일반 액세스 링크 삭제",
@@ -452,5 +451,14 @@
   "ViewOnlyRooms": "보기 전용",
   "CustomRooms": "사용자 지정",
   "FormRoom": "양식 방",
-  "NewRoom": "새로운 방"
+  "NewRoom": "새로운 방",
+  "ConflictResolveDescription": "<1>{{file}}</1> 이름의 파일이 <1>{{folder}}</1> 폴더에 이미 존재합니다.",
+  "ConflictResolveDescriptionFiles": "같은 이름의 문서 {{filesCount}}개가 <1>{{folder}}</1> 폴더에 이미 존재합니다.",
+  "ConflictResolveSelectAction": "작업 선택:",
+  "ConflictResolveTitle": "덮어쓰기",
+  "CreateDescription": "폴더에 두 개의 다른 파일이 저장됩니다.",
+  "OverwriteDescription": "파일이 같은 이름의 파일에 추가됩니다.",
+  "OverwriteTitle": "버전 업데이트로 덮어쓰기",
+  "SkipDescription": "파일이 복사되지 않습니다. 원본 파일이 대상 폴더에 유지됩니다.",
+  "SkipTitle": "건너뛰기"
 }

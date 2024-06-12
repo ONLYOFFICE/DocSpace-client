@@ -94,6 +94,7 @@ export type UseRoomsHelperProps = {
   setSelectedItemType: React.Dispatch<
     React.SetStateAction<"rooms" | "files" | undefined>
   >;
+  subscribe: (id: number) => string | number | undefined;
 };
 
 export type UseFilesHelpersProps = {

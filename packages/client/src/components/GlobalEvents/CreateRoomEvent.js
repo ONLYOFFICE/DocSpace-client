@@ -50,6 +50,7 @@ const CreateRoomEvent = ({
   fetchThirdPartyProviders,
   enableThirdParty,
   deleteThirdParty,
+  startRoomType,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
   const [fetchedTags, setFetchedTags] = useState([]);
@@ -94,6 +95,7 @@ const CreateRoomEvent = ({
       }
       onClose={onClose}
       onCreate={onCreate}
+      startRoomType={startRoomType}
       fetchedTags={fetchedTags}
       isLoading={isLoading}
       setIsLoading={setIsLoading}

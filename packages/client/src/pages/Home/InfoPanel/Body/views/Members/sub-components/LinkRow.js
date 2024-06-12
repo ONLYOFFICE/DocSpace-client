@@ -317,7 +317,9 @@ export default inject(
       setEmbeddingPanelIsVisible,
       isArchiveFolder: isArchiveFolderRoot,
       theme,
-      isPublicRoomType: infoPanelSelection.roomType === RoomsType.PublicRoom,
+      isPublicRoomType:
+        infoPanelSelection.roomType === RoomsType.PublicRoom ||
+        infoPanelSelection.roomType === RoomsType.FormRoom,
     };
   },
 )(

@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable, runInAction } from "mobx";
-import api from "@docspace/shared/api";
 import { EmployeeStatus } from "@docspace/shared/enums";
 import { getUserStatus } from "../helpers/people-helpers";
+import { toastr } from "@docspace/shared/components/toast";
+import SettingsSetupStore from "./SettingsSetupStore";
 
 class SelectionStore {
   peopleStore = null;
@@ -39,6 +40,7 @@ class SelectionStore {
   connections = [];
   platformData = [];
   userLastSession = [];
+  isLoading = false;
   selection = [];
   selectionUsersRights = {
     isVisitor: 0,
@@ -51,6 +53,7 @@ class SelectionStore {
 
   constructor(peopleStore) {
     this.peopleStore = peopleStore;
+    this.settingsSetupStore = new SettingsSetupStore(this);
 
     makeAutoObservable(this);
   }
@@ -474,6 +477,10 @@ class SelectionStore {
     this.platformData = data;
   };
 
+  setIsLoading = (isLoading) => {
+    this.isLoading = isLoading;
+  };
+
   updateAllSessions = (sessions, dataFromSocket) => {
     const socketDataMap = new Map(
       dataFromSocket.map((user) => [user.id, user]),
@@ -499,22 +506,91 @@ class SelectionStore {
     });
   };
 
-  getUserSessionsById = (userId) => {
-    return api.settings.getUserSessionsById(userId);
-  };
-
   fetchData = async () => {
+    const { getUserSessionsById } = this.settingsSetupStore;
     const { getUsersList } = this.peopleStore.usersStore;
     try {
       const users = await getUsersList();
       const sessionsPromises = users.map((user) =>
-        this.getUserSessionsById(user.id),
+        getUserSessionsById(user.id),
       );
       const sessions = await Promise.all(sessionsPromises);
       this.setSessionsData(sessions);
       this.updateAllSessions(sessions, this.dataFromSocket);
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  onClickLogoutAllSessions = async (t) => {
+    const { removeAllActiveSessionsById } = this.settingsSetupStore;
+    const userId = this.connections[0]?.userId;
+
+    if (!userId) return toastr.error(t("The user is already logged out"));
+
+    try {
+      this.setIsLoading(true);
+      await removeAllActiveSessionsById(userId);
+      this.setConnections([]);
+      await this.fetchData();
+      toastr.success(t("Successfully logout all sessions"));
+    } catch (error) {
+      toastr.error(error);
+    } finally {
+      this.setIsLoading(false);
+    }
+  };
+
+  onClickLogoutAllExceptThis = async (t, id) => {
+    const { removeAllExceptThisEventId } = this.settingsSetupStore;
+    const exceptId = this.connections[0]?.id;
+
+    if (!exceptId) return toastr.error(t("The user is already logged out"));
+
+    try {
+      this.setIsLoading(true);
+      await removeAllExceptThisEventId(exceptId);
+
+      const filteredConnections = this.connections.filter(
+        (connection) => connection.id === id,
+      );
+      this.setConnections(filteredConnections);
+      await this.fetchData();
+      toastr.success(t("Successfully logout all sessions"));
+    } catch (error) {
+      toastr.error(error);
+    } finally {
+      this.setIsLoading(false);
+    }
+  };
+
+  onClickRemoveSession = async (t, id) => {
+    const { removeSession } = this.settingsSetupStore;
+
+    const foundConnection = this.connections.find(
+      (connection) => connection.id === id,
+    );
+
+    if (!foundConnection) return;
+
+    try {
+      this.setIsLoading(true);
+      await removeSession(foundConnection.id);
+      const filteredConnections = this.connections.filter(
+        (connection) => connection.id !== id,
+      );
+      this.setConnections(filteredConnections);
+      await this.fetchData();
+      toastr.success(
+        t("Profile:SuccessLogout", {
+          platform: foundConnection.platform,
+          browser: foundConnection.browser,
+        }),
+      );
+    } catch (error) {
+      toastr.error(error);
+    } finally {
+      this.setIsLoading(false);
     }
   };
 }

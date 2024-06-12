@@ -132,7 +132,7 @@ const ActiveSessions = ({
     }
   };
 
-  const onClickRemoveSession = async (id) => {
+  const onClickRemoveSession = async (t, id) => {
     const foundSession = sessions.find((s) => s.id === id);
     try {
       setIsLoading(true);

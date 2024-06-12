@@ -55,13 +55,22 @@ const LogoutAllSessionDialog = ({
   };
 
   const onClickLogout = () => {
-    !isChecked
-      ? onLogoutAllSessions()
-      : onLogoutAllExceptThis(connections[0]?.id);
+    const exceptId = connections[0]?.id;
+    if (!isChecked) {
+      onLogoutAllSessions(t);
+      onClose();
+    } else {
+      onLogoutAllExceptThis(t, exceptId);
+      onClose();
+    }
   };
 
   const onClickRemove = () => {
-    isChecked ? onRemoveAllSessions() : onRemoveAllExceptThis();
+    if (isChecked) {
+      onRemoveAllSessions();
+    } else {
+      onRemoveAllExceptThis();
+    }
   };
 
   const bodySubtitle =

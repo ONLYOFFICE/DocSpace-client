@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { mobile, tablet } from "@docspace/shared/utils";
-import { toastr } from "@docspace/shared/components/toast";
 import styled from "styled-components";
 
 import { MainContainer } from "../StyledSecurity";
@@ -82,10 +81,10 @@ const Sessions = ({
   clearSelection,
   setDataFromSocket,
   connections,
-  setConnections,
   updateAllSessions,
   platformData,
   fetchData,
+  isLoading,
   viewAs,
   setViewAs,
   socketHelper,
@@ -96,12 +95,10 @@ const Sessions = ({
   setDisableDialogVisible,
   setLogoutDialogVisible,
   setLogoutAllDialogVisible,
-  removeSession,
-  removeAllActiveSessionsById,
-  removeAllExceptThisEventId,
+  onClickLogoutAllSessions,
+  onClickLogoutAllExceptThis,
+  onClickRemoveSession,
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
-
   useEffect(() => {
     socketHelper.emit({
       command: "subscribe",
@@ -132,69 +129,6 @@ const Sessions = ({
     setView: setViewAs,
     currentDeviceType,
   });
-
-  const onClickLogoutAllSessions = async () => {
-    try {
-      setIsLoading(true);
-      await removeAllActiveSessionsById(connections[0]?.userId);
-      setConnections([]);
-      await fetchData();
-      toastr.success("Successfully logout all sessions");
-    } catch (error) {
-      toastr.error("The user is already logged out");
-    } finally {
-      setIsLoading(false);
-      setLogoutAllDialogVisible(false);
-    }
-  };
-
-  const onClickLogoutAllExceptThis = async (id) => {
-    try {
-      setIsLoading(true);
-      await removeAllExceptThisEventId(connections[0]?.id);
-
-      const filteredConnections = connections.filter(
-        (connection) => connection.id === id,
-      );
-      setConnections(filteredConnections);
-      await fetchData();
-      toastr.success("Successfully logout except this");
-    } catch (error) {
-      toastr.error("The user is already logged out");
-    } finally {
-      setIsLoading(false);
-      setLogoutAllDialogVisible(false);
-    }
-  };
-
-  const onClickRemoveSession = async (id) => {
-    const foundConnection = connections.find(
-      (connection) => connection.id === id,
-    );
-
-    if (!foundConnection) return;
-
-    try {
-      setIsLoading(true);
-      await removeSession(foundConnection.id);
-      const filteredConnections = connections.filter(
-        (connection) => connection.id !== id,
-      );
-      setConnections(filteredConnections);
-      await fetchData();
-      toastr.success(
-        t("Profile:SuccessLogout", {
-          platform: foundConnection.platform,
-          browser: foundConnection.browser,
-        }),
-      );
-    } catch (error) {
-      toastr.error(error);
-    } finally {
-      setIsLoading(false);
-      setLogoutDialogVisible(false);
-    }
-  };
 
   // console.log("allSessions", JSON.parse(JSON.stringify(allSessions)));
   // console.log("sessionsData", JSON.parse(JSON.stringify(sessionsData)));
@@ -267,10 +201,13 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     clearSelection,
     setDataFromSocket,
     connections,
-    setConnections,
     updateAllSessions,
     platformData,
     fetchData,
+    isLoading,
+    onClickLogoutAllSessions,
+    onClickLogoutAllExceptThis,
+    onClickRemoveSession,
   } = peopleStore.selectionStore;
 
   const {
@@ -282,9 +219,6 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     setDisableDialogVisible,
     setLogoutDialogVisible,
     setLogoutAllDialogVisible,
-    removeSession,
-    removeAllActiveSessionsById,
-    removeAllExceptThisEventId,
   } = setup;
 
   return {
@@ -295,7 +229,6 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     clearSelection,
     setDataFromSocket,
     connections,
-    setConnections,
     updateAllSessions,
     platformData,
     fetchData,
@@ -309,9 +242,10 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     setDisableDialogVisible,
     setLogoutDialogVisible,
     setLogoutAllDialogVisible,
-    removeSession,
-    removeAllActiveSessionsById,
-    removeAllExceptThisEventId,
+    isLoading,
+    onClickLogoutAllSessions,
+    onClickLogoutAllExceptThis,
+    onClickRemoveSession,
   };
 })(
   withTranslation(["Settings", "Profile", "Common", "ChangeUserStatusDialog"])(

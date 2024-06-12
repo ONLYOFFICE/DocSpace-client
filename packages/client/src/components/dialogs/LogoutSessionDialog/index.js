@@ -37,8 +37,9 @@ const LogoutSessionDialog = ({
   onRemoveSession,
   isLoading,
 }) => {
-  const onClick = () => {
-    onRemoveSession(data.id);
+  const onRemoveClick = () => {
+    onRemoveSession(t, data.id);
+    onClose();
   };
 
   return (
@@ -63,7 +64,7 @@ const LogoutSessionDialog = ({
           size="normal"
           scale
           primary={true}
-          onClick={onClick}
+          onClick={onRemoveClick}
           isLoading={isLoading}
         />
         <Button

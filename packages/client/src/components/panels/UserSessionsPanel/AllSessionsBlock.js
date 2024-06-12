@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { observer, inject } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
@@ -29,16 +30,20 @@ const AllSessionsBlock = (props) => {
     removeAllActiveSessionsById,
   } = props;
 
+  const [isLoading, setIsLoading] = useState(false);
   const isDisabled = connections.length > 0;
 
   const onLogoutClick = async () => {
     try {
+      setIsLoading(true);
       await removeAllActiveSessionsById(connections[0]?.userId);
       fetchData();
       setConnections([]);
       toastr.success("Successfully logout all sessions");
     } catch (error) {
       toastr.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -52,7 +57,7 @@ const AllSessionsBlock = (props) => {
           size="small"
           onClick={onLogoutClick}
           scale={true}
-          isLoading={false}
+          isLoading={isLoading}
           isDisabled={!isDisabled}
         />
       </Wrapper>

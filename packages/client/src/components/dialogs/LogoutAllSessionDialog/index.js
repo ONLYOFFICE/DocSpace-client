@@ -35,6 +35,7 @@ import ModalDialogContainer from "../ModalDialogContainer";
 
 const LogoutAllSessionDialog = ({
   t,
+  connections,
   displayName,
   visible,
   isLoading,
@@ -42,18 +43,26 @@ const LogoutAllSessionDialog = ({
   onRemoveAllSessions,
   onRemoveAllExceptThis,
   isSeveralSelection,
+  onLogoutAllSessions,
+  onLogoutAllExceptThis,
 }) => {
   const [isChecked, setIsChecked] = useState(false);
+
+  const isProfile = location.pathname.includes("/profile");
 
   const onChangeCheckbox = () => {
     setIsChecked((prev) => !prev);
   };
 
   const onClickLogout = () => {
-    isChecked ? onRemoveAllSessions() : onRemoveAllExceptThis();
+    !isChecked
+      ? onLogoutAllSessions()
+      : onLogoutAllExceptThis(connections[0]?.id);
   };
 
-  const isProfile = location.pathname.includes("/profile");
+  const onClickRemove = () => {
+    isChecked ? onRemoveAllSessions() : onRemoveAllExceptThis();
+  };
 
   const bodySubtitle =
     isSeveralSelection || isProfile
@@ -95,7 +104,7 @@ const LogoutAllSessionDialog = ({
           size="normal"
           scale
           primary={true}
-          onClick={onClickLogout}
+          onClick={isProfile ? onClickRemove : onClickLogout}
           isLoading={isLoading}
         />
         <Button

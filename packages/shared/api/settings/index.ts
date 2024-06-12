@@ -912,6 +912,14 @@ export function removeAllActiveSessionsById(userId) {
   });
 }
 
+export function removeAllExceptThisEventId(eventId) {
+  return request({
+    method: "put",
+    url: `/security/activeconnections/logoutallexceptthis/${eventId}`,
+    data: { eventId },
+  });
+}
+
 export function removeAllActiveSessions() {
   return request({
     method: "put",

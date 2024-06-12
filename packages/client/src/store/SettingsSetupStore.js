@@ -557,6 +557,10 @@ class SettingsSetupStore {
     return api.settings.removeAllActiveSessionsById(userId);
   };
 
+  removeAllExceptThisEventId = (userId) => {
+    return api.settings.removeAllExceptThisEventId(userId);
+  };
+
   removeAllSessions = () => {
     return api.settings.removeAllActiveSessions();
   };

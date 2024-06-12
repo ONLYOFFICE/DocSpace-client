@@ -97,6 +97,8 @@ const Sessions = ({
   setLogoutDialogVisible,
   setLogoutAllDialogVisible,
   removeSession,
+  removeAllActiveSessionsById,
+  removeAllExceptThisEventId,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -131,24 +133,34 @@ const Sessions = ({
     currentDeviceType,
   });
 
-  const onClickRemoveAllSessions = () => {
+  const onClickLogoutAllSessions = async () => {
     try {
       setIsLoading(true);
-      console.log("onClickRemoveAllSessions");
+      await removeAllActiveSessionsById(connections[0]?.userId);
+      setConnections([]);
+      await fetchData();
+      toastr.success("Successfully logout all sessions");
     } catch (error) {
-      toastr.error(error);
+      toastr.error("The user is already logged out");
     } finally {
       setIsLoading(false);
       setLogoutAllDialogVisible(false);
     }
   };
 
-  const onClickRemoveAllExceptThis = () => {
+  const onClickLogoutAllExceptThis = async (id) => {
     try {
       setIsLoading(true);
-      console.log("onClickRemoveAllExceptThis");
+      await removeAllExceptThisEventId(connections[0]?.id);
+
+      const filteredConnections = connections.filter(
+        (connection) => connection.id === id,
+      );
+      setConnections(filteredConnections);
+      await fetchData();
+      toastr.success("Successfully logout except this");
     } catch (error) {
-      toastr.error(error);
+      toastr.error("The user is already logged out");
     } finally {
       setIsLoading(false);
       setLogoutAllDialogVisible(false);
@@ -169,7 +181,7 @@ const Sessions = ({
         (connection) => connection.id !== id,
       );
       setConnections(filteredConnections);
-      fetchData();
+      await fetchData();
       toastr.success(
         t("Profile:SuccessLogout", {
           platform: foundConnection.platform,
@@ -187,6 +199,7 @@ const Sessions = ({
   // console.log("allSessions", JSON.parse(JSON.stringify(allSessions)));
   // console.log("sessionsData", JSON.parse(JSON.stringify(sessionsData)));
   // console.log("connections", JSON.parse(JSON.stringify(connections)));
+  // console.log("userLastSession", JSON.parse(JSON.stringify(userLastSession)));
 
   return (
     <MainContainer>
@@ -233,10 +246,11 @@ const Sessions = ({
           t={t}
           visible={logoutAllDialogVisible}
           isLoading={isLoading}
+          connections={connections}
           displayName={displayName}
           onClose={() => setLogoutAllDialogVisible(false)}
-          onRemoveAllSessions={onClickRemoveAllSessions}
-          onRemoveAllExceptThis={onClickRemoveAllExceptThis}
+          onLogoutAllSessions={onClickLogoutAllSessions}
+          onLogoutAllExceptThis={onClickLogoutAllExceptThis}
         />
       )}
     </MainContainer>
@@ -269,6 +283,8 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     setLogoutDialogVisible,
     setLogoutAllDialogVisible,
     removeSession,
+    removeAllActiveSessionsById,
+    removeAllExceptThisEventId,
   } = setup;
 
   return {
@@ -294,6 +310,8 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     setLogoutDialogVisible,
     setLogoutAllDialogVisible,
     removeSession,
+    removeAllActiveSessionsById,
+    removeAllExceptThisEventId,
   };
 })(
   withTranslation(["Settings", "Profile", "Common", "ChangeUserStatusDialog"])(

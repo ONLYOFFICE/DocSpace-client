@@ -61,6 +61,8 @@ const {
   lightSecondMainHover,
   lightSecondMainDisabled,
 
+  mainOrange,
+
   lightErrorStatus,
   darkErrorStatus,
   favoritesStatus,
@@ -240,7 +242,7 @@ const Dark: TTheme = {
   mainButtonMobile: {
     textColor: "rgba(255, 255, 255, 0.6)",
 
-    buttonColor: "#F58D31",
+    buttonColor: mainOrange,
     iconFill: black,
 
     circleBackground: black,
@@ -1766,7 +1768,7 @@ const Dark: TTheme = {
       },
     },
     badgeWithoutText: {
-      backgroundColor: "#F58D31",
+      backgroundColor: mainOrange,
 
       size: "8px",
       position: "-4px",
@@ -1950,7 +1952,7 @@ const Dark: TTheme = {
       color: gray,
 
       separatorColor: grayDarkStrong,
-      indicatorColor: "#F58D31",
+      indicatorColor: mainOrange,
 
       selectedItem: {
         background: grayMaxLight,
@@ -2147,7 +2149,7 @@ const Dark: TTheme = {
     fill: black,
 
     alert: {
-      fill: "#F58D31",
+      fill: mainOrange,
       path: black,
     },
   },
@@ -2602,7 +2604,7 @@ const Dark: TTheme = {
       stroke: darkGrayDark,
       fill: darkGrayDark,
       defaultFill: black,
-      badgeFill: "#F58D31",
+      badgeFill: mainOrange,
     },
 
     versionList: {

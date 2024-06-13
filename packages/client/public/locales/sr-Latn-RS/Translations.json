@@ -31,7 +31,7 @@
   "PublicRoomLinkValidTime": "Link je validan do {{date}}. Kada istekne, biće nemoguće pristupiti sobi putem ovog linka.",
   "RoleCommentator": "Komentator",
   "RoleCommentatorDescription": "Operacije sa postojećim datotekama: pregledanje, komentarisanje.",
-  "RoleDocspaceAdminDescription": "Administratori DocSpace-a mogu pristupiti podešavanjima DocSpace-a, upravljati i arhivirati sobe, pozivati nove korisnike i dodeljivati uloge ispod njihovih nivoa. Svi administratori imaju pristup Ličnom odeljku.",
+  "RoleDocspaceAdminDescription": "Administratori {{productName}}-a mogu pristupiti podešavanjima {{productName}}-a, upravljati i arhivirati sobe, pozivati nove korisnike i dodeljivati uloge ispod njihovih nivoa. Svi administratori imaju pristup Ličnom odeljku.",
   "RoleEditorDescription": "Operacije sa postojećim datotekama: pregledanje, uređivanje, popunjavanje obrazaca, recenziranje, komentarisanje.",
   "RoleFormFiller": "Popunjivač obrazaca",
   "RoleFormFillerDescription": "Operacije sa postojećim datotekama: pregledanje, popunjavanje obrazaca, recenziranje, komentarisanje.",

@@ -80,6 +80,7 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -529,7 +530,7 @@ const SectionHeaderContent = (props) => {
       {
         id: "header_option_link-portal-users",
         key: "link-portal-users",
-        label: t("LinkForPortalUsers"),
+        label: t("LinkForPortalUsers", { productName: PRODUCT_NAME }),
         onClick: createLinkForPortalUsers,
         disabled: true,
         icon: InvitationLinkReactSvgUrl,
@@ -542,7 +543,7 @@ const SectionHeaderContent = (props) => {
         disabled:
           isRecycleBinFolder ||
           isPersonalRoom ||
-          ((isPublicRoomType || isCustomRoomType) &&
+          ((isPublicRoomType || isCustomRoomType || isFormRoomType) &&
             haveLinksRight &&
             !isArchive),
         icon: InvitationLinkReactSvgUrl,
@@ -606,7 +607,7 @@ const SectionHeaderContent = (props) => {
           }
         },
         disabled:
-          (!isPublicRoomType && !isCustomRoomType) ||
+          (!isPublicRoomType && !isCustomRoomType && !isFormRoomType) ||
           !haveLinksRight ||
           isArchive,
       },
@@ -979,7 +980,7 @@ const SectionHeaderContent = (props) => {
                   trash: t("EmptyRecycleBin"),
                   trashWarning: t("TrashErasureWarning"),
                   actions: isRoomsFolder
-                    ? t("Files:NewRoom")
+                    ? t("Common:NewRoom")
                     : t("Common:Actions"),
                   contextMenu: t("Translations:TitleShowFolderActions"),
                   infoPanel: t("Common:InfoPanel"),
@@ -1164,10 +1165,7 @@ export default inject(
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
     const isCustomRoomType = roomType === RoomsType.CustomRoom;
-
-    const isFormRoomType =
-      roomType === RoomsType.FormRoom ||
-      (parentRoomType === FolderType.FormRoom && isFolder);
+    const isFormRoomType = roomType === RoomsType.FormRoom;
 
     const {
       onClickEditRoom,
@@ -1232,7 +1230,7 @@ export default inject(
       : (!isPublicRoom &&
           !isArchive &&
           canCopyPublicLink &&
-          (isPublicRoomType || isCustomRoomType) &&
+          (isPublicRoomType || isCustomRoomType || isFormRoomType) &&
           shared) ||
         (sharedItem && sharedItem.canCopyPublicLink);
 

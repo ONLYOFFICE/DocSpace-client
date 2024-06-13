@@ -1,18 +1,18 @@
 {
   "ClickHere": "Nhấp vào đây",
   "ConfirmEmailDescription": "Sử dụng liên kết được cung cấp trong email kích hoạt. Bạn chưa nhận được email chứa liên kết kích hoạt?",
-  "ConfirmEmailHeader": "Xin vui lòng kích hoạt email ({{ email }}) của bạn để có quyền truy cập vào các tính năng DocSpace.",
+  "ConfirmEmailHeader": "Xin vui lòng kích hoạt email ({{ email }}) của bạn để có quyền truy cập vào các tính năng {{productName}}.",
   "PersonalUserQuotaAdminsDescription": "Để tải lên và tạo các tập tin và thư mục mới, vui lòng giải phóng dung lượng đĩa hoặc quản lý hạn mức cho mỗi người dùng trong <1> cài đặt Quản lý lưu trữ.</1>",
   "PersonalUserQuotaDescription": "Để tải lên và tạo các tập tin và thư mục mới, vui lòng giải phóng dung lượng đĩa hoặc liên hệ với quản trị viên để tăng hạn mức lưu trữ.",
   "RequestActivation": "Yêu cầu kích hoạt lại",
-  "RoomQuotaDescription": "Bạn có thể sao lưu các phòng không cần thiết hoặc <1>{{clickHere}}</1> để tìm gói dịch vụ có giá phù hợp hơn cho DocSpace của mình.",
+  "RoomQuotaDescription": "Bạn có thể sao lưu các phòng không cần thiết hoặc <1>{{clickHere}}</1> để tìm gói dịch vụ có giá phù hợp hơn cho {{productName}} của mình.",
   "RoomQuotaHeader": "Phòng sắp vượt quá:{{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Sắp vượt quá giới hạn lưu trữ và phòng.",
   "StorageAndUserHeader": "Sắp vượt quá giới hạn lưu trữ và quản trị viên/người dùng cấp cao.",
-  "StorageQuotaDescription": "Bạn có thể xóa các tập tin không cần thiết hoặc <1>{{clickHere}}</1> để tìm gói dịch vụ có giá phù hợp hơn cho DocSpace của mình.",
+  "StorageQuotaDescription": "Bạn có thể xóa các tập tin không cần thiết hoặc <1>{{clickHere}}</1> để tìm gói dịch vụ có giá phù hợp hơn cho {{productName}} của mình.",
   "StorageQuotaExceeded": "Đã vượt quá hạn mức lưu trữ",
   "StorageQuotaHeader": "Dung lượng lưu trữ sắp vượt quá:{{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Bạn có thể xóa các tập tin không cần thiết hoặc thay đổi hạn mức trong cài đặt Quản lý lưu trữ <1>.</1>",
-  "UserQuotaDescription": "<1>{{clickHere}}</1> để tìm gói dịch vụ có giá tốt hơn cho DocSpace của bạn.",
+  "UserQuotaDescription": "<1>{{clickHere}}</1> để tìm gói dịch vụ có giá tốt hơn cho {{productName}} của bạn.",
   "UserQuotaHeader": "Sắp vượt quá số lượng quản trị viên/người dùng cấp cao:{{currentValue}}/{{maxValue}}."
 }

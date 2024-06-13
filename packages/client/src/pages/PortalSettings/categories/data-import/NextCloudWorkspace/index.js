@@ -27,6 +27,7 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { isMobile as isMobileBreakpoint } from "@docspace/shared/utils/device";
 import { isMobile } from "react-device-detect";
 import { useNavigate } from "react-router-dom";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
@@ -37,6 +38,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { getStepsData } from "./Stepper";
 import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
 import SelectFileLoader from "../sub-components/SelectFileLoader";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const NextcloudWrapper = styled.div`
   max-width: 700px;
@@ -64,6 +66,7 @@ const NextcloudWorkspace = (props) => {
     getMigrationStatus,
     setUsers,
     filteredUsers,
+    organizationName,
   } = props;
   const [currentStep, setCurrentStep] = useState(1);
   const [shouldRender, setShouldRender] = useState(false);
@@ -72,6 +75,7 @@ const NextcloudWorkspace = (props) => {
     currentStep,
     setCurrentStep,
     filteredUsers.length === 0,
+    organizationName,
   );
   const navigate = useNavigate();
 
@@ -131,7 +135,7 @@ const NextcloudWorkspace = (props) => {
     return clearCheckedAccounts;
   }, []);
 
-  if (isMobile)
+  if (isMobile || isMobileBreakpoint())
     return (
       <BreakpointWarning
         isMobileUnavailableOnly
@@ -149,7 +153,10 @@ const NextcloudWorkspace = (props) => {
           lineHeight="20px"
           color={theme.isBase ? "#657077" : "#ADADAD"}
         >
-          {t("Settings:AboutDataImport")}
+          {t("Settings:AboutDataImport", {
+            productName: PRODUCT_NAME,
+            organizationName,
+          })}
         </Text>
         <Text
           className="data-import-counter"
@@ -172,7 +179,7 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
   const { clearCheckedAccounts, getMigrationStatus, setUsers, filteredUsers } =
     importAccountsStore;
   const { initSettings, viewAs, setViewAs } = setup;
-  const { currentDeviceType } = settingsStore;
+  const { currentDeviceType, organizationName } = settingsStore;
 
   return {
     initSettings,
@@ -184,6 +191,7 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
     getMigrationStatus,
     setUsers,
     filteredUsers,
+    organizationName,
   };
 })(
   withTranslation(["Common, SMTPSettings, Settings"])(

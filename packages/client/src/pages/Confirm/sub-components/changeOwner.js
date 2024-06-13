@@ -42,6 +42,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
 import { ownerChange } from "@docspace/shared/api/settings";
 import { getUserFromConfirm } from "@docspace/shared/api/people";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const ChangeOwnerForm = (props) => {
   const { t, greetingTitle, linkData, history } = props;
@@ -87,11 +88,18 @@ const ChangeOwnerForm = (props) => {
 
           <FormWrapper>
             {isOwnerChanged ? (
-              <Text>{t("ConfirmOwnerPortalSuccessMessage")}</Text>
+              <Text>
+                {t("ConfirmOwnerPortalSuccessMessage", {
+                  productName: PRODUCT_NAME,
+                })}
+              </Text>
             ) : (
               <>
                 <Text className="subtitle">
-                  {t("ConfirmOwnerPortalTitle", { newOwner: newOwner })}
+                  {t("ConfirmOwnerPortalTitle", {
+                    newOwner: newOwner,
+                    productName: PRODUCT_NAME,
+                  })}
                 </Text>
                 <ButtonsWrapper>
                   <Button

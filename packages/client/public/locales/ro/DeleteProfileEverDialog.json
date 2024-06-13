@@ -1,5 +1,5 @@
 {
-  "ActionCannotBeUndone": "Utilizatorii dezactivați pe care i-ați selectat vor fi șterși din DocSpace. Această acțiune nu poate fi anulată.",
+  "ActionCannotBeUndone": "Utilizatorii dezactivați pe care i-ați selectat vor fi șterși din {{productName}}. Această acțiune nu poate fi anulată.",
   "CannotReassignFiles": "Dacă ștergeți mai mulți utilizatori deodată, nu puteți reafecta fișierele lor altor utilizatori.",
   "DeleteGroupUsersSuccessMessage": "Utilizatorii au fost șterse cu succes.",
   "DeleteMyDocumentsUser": "Toate fișierele și dosarele personale din secțiunea Documentele mele a utilizatorului vor fi șterse definitiv.",

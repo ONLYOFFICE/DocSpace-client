@@ -30,6 +30,7 @@ import { Consumer } from "@docspace/shared/utils/context";
 
 import TableView from "./TableView";
 import RowView from "./RowView";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const checkedAccountType = "result";
 
@@ -59,7 +60,9 @@ const AccountsTable = (props) => {
   const typeOptions = [
     {
       key: UserTypes.DocSpaceAdmin,
-      label: t(`Common:${UserTypes.DocSpaceAdmin}`),
+      label: t(`Common:${UserTypes.DocSpaceAdmin}`, {
+        productName: PRODUCT_NAME,
+      }),
       onClick: setTypeDocspaceAdmin,
     },
     {

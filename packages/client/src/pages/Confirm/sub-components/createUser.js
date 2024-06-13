@@ -54,6 +54,7 @@ import { login } from "@docspace/shared/utils/loginUtils";
 import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
+  PRODUCT_NAME,
   PROVIDERS_DATA,
 } from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -516,6 +517,7 @@ const CreateUserForm = (props) => {
                     values={{
                       firstName: user.firstName,
                       lastName: user.lastName,
+                      productName: PRODUCT_NAME,
                       ...(roomName
                         ? { roomName }
                         : { spaceAddress: window.location.host }),

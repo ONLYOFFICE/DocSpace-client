@@ -34,6 +34,7 @@ import PortalDeletionSection from "./portalDeletion";
 import DeleteDataLoader from "./DeleteDataLoader";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "../../../../../package.json";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const DeleteData = (props) => {
   const { t, isNotPaidPeriod, tReady } = props;
@@ -47,12 +48,12 @@ const DeleteData = (props) => {
   const data = [
     {
       id: "deletion",
-      name: t("DeleteDocspace"),
+      name: t("DeleteDocspace", { productName: PRODUCT_NAME }),
       content: <PortalDeletionSection />,
     },
     {
       id: "deactivation",
-      name: t("PortalDeactivation"),
+      name: t("PortalDeactivation", { productName: PRODUCT_NAME }),
       content: <PortalDeactivationSection />,
     },
   ];

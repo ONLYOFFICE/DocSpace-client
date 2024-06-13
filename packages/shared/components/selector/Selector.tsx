@@ -599,6 +599,7 @@ const Selector = ({
         withFooterInput={withFooterInput}
         withFooterCheckbox={withFooterCheckbox}
         descriptionText={descriptionText}
+        inputItemVisible={inputItemVisible}
         setInputItemVisible={setInputItemVisible}
         // bread crumbs
         {...breadCrumbsProps}

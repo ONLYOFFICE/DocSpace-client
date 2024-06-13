@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "Nimeä ylläpitäjät",
-  "BackupPortal": "Varmuuskopioi DocSpacen tiedot",
-  "ChangeInstruction": "Ole hyvä ja valitse omistajan nimi alta vaihtaaksesi DocSpacen omistajan.",
-  "ChangeOwner": "Vaihda DocSpace-omistaja",
+  "BackupPortal": "Varmuuskopioi {{productName}}-n tiedot",
+  "ChangeInstruction": "Ole hyvä ja valitse omistajan nimi alta vaihtaaksesi {{productName}}-n omistajan.",
+  "ChangeOwner": "Vaihda {{productName}}-omistaja",
   "ChangeUser": "Vaihda käyttäjä",
-  "DeactivateOrDeletePortal": "Poista DocSpace käytöstä tai poista se kokonaan",
+  "DeactivateOrDeletePortal": "Poista {{productName}} käytöstä tai poista se kokonaan",
   "DoTheSame": "Tee sama kuin järjestelmänvalvojat",
-  "ManagePortal": "Hallitse DocSpacen asetuksia",
+  "ManagePortal": "Hallitse {{productName}}-n asetuksia",
   "ManageUser": " Hallitse käyttäjätilejä",
-  "NewPortalOwner": "Uusi DocSpace-omistaja",
-  "PortalOwnerCan": "DocSpace omistaja voi:",
+  "NewPortalOwner": "Uusi {{productName}}-omistaja",
+  "PortalOwnerCan": "{{productName}} omistaja voi:",
   "SetAccessRights": "Aseta pääsyoikeudet"
 }

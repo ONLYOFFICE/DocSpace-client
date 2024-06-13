@@ -37,6 +37,7 @@ import ThirdPartyComboBox from "./ThirdPartyComboBox";
 import FolderInput from "./FolderInput";
 import { getOAuthToken } from "@docspace/shared/utils/common";
 import { Checkbox } from "@docspace/shared/components/checkbox";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledThirdPartyStorage = styled(StyledParam)`
   flex-direction: column;
@@ -78,7 +79,7 @@ const ThirdPartyStorage = ({
 }) => {
   const channel = useRef(new BroadcastChannel("thirdpartyActivation"));
   channel.current.onmessage = (shouldRender) => {
-    shouldRender && fetchConnectingStorages()
+    shouldRender && fetchConnectingStorages();
   };
 
   const onChangeIsThirdparty = () => {
@@ -86,7 +87,11 @@ const ThirdPartyStorage = ({
 
     if (!connectItems.length) {
       const data = isRoomAdmin ? (
-        <Text as="p">{t("ThirdPartyStorageRoomAdminNoStorageAlert")}</Text>
+        <Text as="p">
+          {t("ThirdPartyStorageRoomAdminNoStorageAlert", {
+            productName: PRODUCT_NAME,
+          })}
+        </Text>
       ) : (
         <Text as="p">
           {t("ThirdPartyStorageNoStorageAlert")}{" "}

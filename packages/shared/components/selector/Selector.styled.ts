@@ -30,6 +30,7 @@ import ArrowRightSvg from "PUBLIC_DIR/images/arrow.right.react.svg";
 
 import { Tabs } from "../tabs";
 import { Base } from "../../themes";
+import { mobile } from "../../utils/device";
 
 import { ComboBox } from "../combobox";
 import { Text } from "../text";
@@ -157,8 +158,8 @@ const StyledSelectAll = styled.div`
   }
 
   .label {
-    width: 100%;
-    max-width: 100%;
+    // width: 100%;
+    // max-width: 100%;
 
     line-height: 16px;
 
@@ -196,6 +197,10 @@ const StyledItem = styled.div<{
 
   box-sizing: border-box;
 
+  .room-logo__container {
+    margin: 0;
+  }
+
   .room-logo,
   .user-avatar {
     min-width: 32px;
@@ -208,8 +213,8 @@ const StyledItem = styled.div<{
   }
 
   .label {
-    width: 100%;
-    max-width: 100%;
+    // width: 100%;
+    // max-width: 100%;
 
     line-height: ${({ theme }) =>
       theme.interfaceDirection === "rtl" ? `20px` : `18px`};
@@ -279,6 +284,10 @@ const StyledEmptyScreen = styled.div<{ withSearch: boolean }>`
   box-sizing: border-box;
 
   .buttons {
+    position: relative;
+
+    width: 100%;
+
     margin-top: 32px;
 
     display: flex;
@@ -515,6 +524,48 @@ const StyledInputWrapper = styled.div`
   }
 `;
 
+// fix empty container padding with calc +24px
+const StyledCreateDropDown = styled.div<{ isEmpty: boolean }>`
+  width: ${(props) =>
+    props.isEmpty ? `calc(100% + 24px)` : `calc(100% - 32px)`};
+  height: fit-content;
+
+  position: absolute;
+
+  top: ${(props) => (props.isEmpty ? "32px" : "48px")};
+  left: ${(props) => (props.isEmpty ? "-12px" : "16px")};
+  z-index: 453;
+
+  padding-top: 8px;
+
+  background-color: ${(props) => props.theme.backgroundColor};
+
+  display: flex;
+  flex-direction: column;
+
+  box-sizing: border-box;
+
+  border: 1px solid;
+  border-color: ${(props) => props.theme.selector.item.inputButtonBorder};
+  border-radius: 6px;
+
+  box-shadow: ${(props) => props.theme.dropDown.boxShadow};
+
+  overflow: hidden;
+
+  @media ${mobile} {
+    width: 100%;
+
+    position: fixed;
+    top: unset;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    border-radius: 6px 6px 0 0;
+  }
+`;
+
 StyledSelector.defaultProps = { theme: Base };
 StyledHeader.defaultProps = { theme: Base };
 StyledBody.defaultProps = { theme: Base };
@@ -525,6 +576,7 @@ StyledArrowRightSvg.defaultProps = { theme: Base };
 StyledComboBox.defaultProps = { theme: Base };
 StyledInfo.defaultProps = { theme: Base };
 StyledInputWrapper.defaultProps = { theme: Base };
+StyledCreateDropDown.defaultProps = { theme: Base };
 
 export {
   StyledSelector,
@@ -545,4 +597,5 @@ export {
   StyledInfo,
   StyledAccessSelector,
   StyledInputWrapper,
+  StyledCreateDropDown,
 };

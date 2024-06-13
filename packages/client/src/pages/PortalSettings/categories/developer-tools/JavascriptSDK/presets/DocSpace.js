@@ -53,6 +53,7 @@ import {
   Container,
   ControlsSection,
 } from "./StyledPresets";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const DocSpace = (props) => {
   const { t, setDocumentTitle, theme } = props;
@@ -113,8 +114,8 @@ const DocSpace = (props) => {
 
   return (
     <PresetWrapper
-      description={t("DocspaceDescription")}
-      header={t("CreateSampleDocspace")}
+      description={t("DocspaceDescription", { productName: PRODUCT_NAME })}
+      header={t("CreateSampleDocspace", { productName: PRODUCT_NAME })}
     >
       <Container>
         <PreviewBlock

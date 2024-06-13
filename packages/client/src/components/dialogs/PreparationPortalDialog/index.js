@@ -30,6 +30,7 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import PreparationPortal from "@docspace/shared/pages/PreparationPortal";
 import StyledPreparationPortalDialog from "./StyledPreparationPortalDialog";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const PreparationPortalDialog = (props) => {
   const { t, tReady, preparationPortalVisible, setVisible } = props;
@@ -45,7 +46,9 @@ const PreparationPortalDialog = (props) => {
       isCloseable={false}
       isLarge
     >
-      <ModalDialog.Header>{t("PortalRestoring")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {t("PortalRestoring", { productName: PRODUCT_NAME })}
+      </ModalDialog.Header>
       <ModalDialog.Body>
         <StyledPreparationPortalDialog>
           <PreparationPortal withoutHeader style={{ padding: "0" }} isDialog />

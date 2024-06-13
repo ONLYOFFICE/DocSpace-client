@@ -203,6 +203,7 @@ const Badges = ({
 
   const isPublicRoomType =
     item.roomType === RoomsType.PublicRoom ||
+    item.roomType === RoomsType.FormRoom ||
     item.roomType === RoomsType.CustomRoom;
 
   const haveLinksRight =

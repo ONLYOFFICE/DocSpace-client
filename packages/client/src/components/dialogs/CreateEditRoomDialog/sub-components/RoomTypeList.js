@@ -28,8 +28,7 @@ import React from "react";
 import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 
-import RoomType from "./RoomType";
-
+import RoomType from "@docspace/shared/components/room-type";
 import withLoader from "@docspace/client/src/HOCs/withLoader";
 import RoomTypeListLoader from "@docspace/shared/skeletons/create-edit-room/RoomTypeList";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";

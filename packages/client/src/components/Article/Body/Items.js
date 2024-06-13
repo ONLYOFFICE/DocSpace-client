@@ -204,8 +204,6 @@ const Items = ({
 
   moveDragItems,
 
-  docSpace,
-
   setEmptyTrashDialogVisible,
   trashIsEmpty,
 
@@ -223,19 +221,16 @@ const Items = ({
   folderAccess,
   currentColorScheme,
 }) => {
-  const getEndOfBlock = React.useCallback(
-    (item) => {
-      switch (item.key) {
-        case "0-3":
-        case "0-5":
-        case "0-6":
-          return true;
-        default:
-          return false;
-      }
-    },
-    [docSpace],
-  );
+  const getEndOfBlock = React.useCallback((item) => {
+    switch (item.key) {
+      case "0-3":
+      case "0-5":
+      case "0-6":
+        return true;
+      default:
+        return false;
+    }
+  }, []);
 
   const getFolderIcon = React.useCallback((item) => {
     return getCatalogIconUrlByType(item.rootFolderType);
@@ -428,7 +423,7 @@ export default inject(
   }) => {
     const { isCommunity, isPaymentPageAvailable, currentDeviceType } =
       authStore;
-    const { showText, docSpace, currentColorScheme } = settingsStore;
+    const { showText, currentColorScheme } = settingsStore;
 
     const {
       selection,
@@ -466,7 +461,6 @@ export default inject(
       isPrivacy: isPrivacyFolder,
       currentId: id,
       showText,
-      docSpace,
 
       data: treeFolders,
 

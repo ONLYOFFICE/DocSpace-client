@@ -189,8 +189,6 @@ class SettingsStore {
 
   encryptionKeys: { [key: string]: string | boolean } = {};
 
-  docSpace = true;
-
   roomsMode = false;
 
   isHeaderVisible = false;

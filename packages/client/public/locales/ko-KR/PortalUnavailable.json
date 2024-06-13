@@ -1,4 +1,4 @@
 {
-  "AccessingProblem": "이 {{portalName}}에 액세스하는 데 문제가 있는 경우 관리자에게 문의하시기 바랍니다.",
-  "ContactAdministrator": "{{portalName}}관리자에게 문의"
+  "AccessingProblem": "이 {{productName}}에 액세스하는 데 문제가 있는 경우 관리자에게 문의하시기 바랍니다.",
+  "ContactAdministrator": "{{productName}}관리자에게 문의"
 }

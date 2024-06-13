@@ -38,7 +38,7 @@ import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import { StyledAccountContent } from "../../styles/accounts";
 import { getUserTypeLabel } from "@docspace/shared/utils/common";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 import { EmployeeStatus } from "@docspace/shared/enums";
 
 const Accounts = (props) => {
@@ -74,7 +74,7 @@ const Accounts = (props) => {
       case EmployeeStatus.Active:
         return setStatusLabel(t("Common:Active"));
       case EmployeeStatus.Pending:
-        return setStatusLabel(t("PeopleTranslations:PendingTitle"));
+        return setStatusLabel(t("PeopleTranslations:PendingInviteTitle"));
       case EmployeeStatus.Disabled:
         return setStatusLabel(t("PeopleTranslations:DisabledEmployeeStatus"));
       default:
@@ -88,8 +88,8 @@ const Accounts = (props) => {
     const adminOption = {
       id: "info-account-type_docspace-admin",
       key: "admin",
-      title: t("Common:DocspaceAdmin", { portalName: PORTAL }),
-      label: t("Common:DocspaceAdmin", { portalName: PORTAL }),
+      title: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
+      label: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
       action: "admin",
     };
     const managerOption = {

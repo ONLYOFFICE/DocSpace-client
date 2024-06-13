@@ -1,13 +1,13 @@
 {
   "AppointAdmin": "Nomina amministratori",
-  "ChangeInstruction": "Per modificare il proprietario di {{portalName}}, scegli il nome del nuovo proprietario di seguito.",
-  "ChangeOwner": "Cambia proprietario di {{portalName}}",
+  "ChangeInstruction": "Per modificare il proprietario di {{productName}}, scegli il nome del nuovo proprietario di seguito.",
+  "ChangeOwner": "Cambia proprietario di {{productName}}",
   "ChangeUser": "Cambia utente",
-  "DeactivateOrDeletePortal": "Disattiva o elimina {{portalName}}",
+  "DeactivateOrDeletePortal": "Disattiva o elimina {{productName}}",
   "DoTheSame": "Fai lo stesso com gli amministratori",
-  "ManagePortal": "Gestire la configurazione di {{portalName}}",
+  "ManagePortal": "Gestire la configurazione di {{productName}}",
   "ManageUser": "Gestire gli account utente",
-  "NewPortalOwner": "Nuovo proprietario di {{portalName}}",
-  "PortalOwnerCan": "Il proprietario di {{portalName}} può:",
+  "NewPortalOwner": "Nuovo proprietario di {{productName}}",
+  "PortalOwnerCan": "Il proprietario di {{productName}} può:",
   "SetAccessRights": "Imposta i diritti di accesso"
 }

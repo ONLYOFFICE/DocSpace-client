@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 export const getGoogleStepDescription = (
   t,
@@ -39,7 +39,7 @@ export const getGoogleStepDescription = (
       return t("Settings:SelectFileDescriptionGoogle");
     case 2:
       return t("Settings:SelectUsersDescriptionGoogle", {
-        portalName: PORTAL,
+        productName: PRODUCT_NAME,
         organizationName,
       });
     case 3:
@@ -55,7 +55,7 @@ export const getGoogleStepDescription = (
             ns="Settings"
             i18nKey="SelectUserTypesDescription"
             values={{
-              portalName: PORTAL,
+              productName: PRODUCT_NAME,
             }}
             components={{
               1: <b />,
@@ -66,13 +66,13 @@ export const getGoogleStepDescription = (
       );
     case 4:
       return t("Settings:ImportSectionDescription", {
-        portalName: PORTAL,
+        productName: PRODUCT_NAME,
       });
     case 5:
       return t("Settings:ImportProcessingDescription");
     case 6:
       return t("Settings:ImportCompleteDescriptionGoogle", {
-        portalName: PORTAL,
+        productName: PRODUCT_NAME,
         organizationName,
       });
     default:
@@ -93,7 +93,7 @@ export const getWorkspaceStepDescription = (
       return t("Settings:SelectFileDescriptionWorkspace", organizationName);
     case 2:
       return t("Settings:SelectUsersDescriptionWorkspace", {
-        portalName: PORTAL,
+        productName: PRODUCT_NAME,
         organizationName,
       });
     case 3:
@@ -109,7 +109,7 @@ export const getWorkspaceStepDescription = (
             ns="Settings"
             i18nKey="SelectUserTypesDescription"
             values={{
-              portalName: PORTAL,
+              productName: PRODUCT_NAME,
             }}
             components={{
               1: <b />,
@@ -120,13 +120,13 @@ export const getWorkspaceStepDescription = (
       );
     case 4:
       return t("Settings:ImportSectionDescription", {
-        portalName: PORTAL,
+        productName: PRODUCT_NAME,
       });
     case 5:
       return t("Settings:ImportProcessingDescription");
     case 6:
       return t("Settings:ImportCompleteDescriptionWorkspace", {
-        portalName: PORTAL,
+        productName: PRODUCT_NAME,
         organizationName,
       });
     default:

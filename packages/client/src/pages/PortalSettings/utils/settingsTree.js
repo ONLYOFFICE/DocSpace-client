@@ -588,7 +588,7 @@ export const settingsTree = [
         key: "10-0",
         icon: "",
         link: "",
-        tKey: "Common:FreeProFeatures",
+        tKey: "Common:FreeAccessToLicensedVersion",
         isCategory: true,
       },
     ],

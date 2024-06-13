@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "Imenovanje administratora",
-  "BackupPortal": "Rezervna kopija {{portalName}} podataka",
-  "ChangeInstruction": "Da biste promenili vlasnika {{portalName}}-a, izaberite ime novog vlasnika ispod.",
-  "ChangeOwner": "Promeni {{portalName}} vlasnika",
+  "BackupPortal": "Rezervna kopija {{productName}} podataka",
+  "ChangeInstruction": "Da biste promenili vlasnika {{productName}}-a, izaberite ime novog vlasnika ispod.",
+  "ChangeOwner": "Promeni {{productName}} vlasnika",
   "ChangeUser": "Promeni korisnika",
-  "DeactivateOrDeletePortal": "Deaktiviraj ili obriši {{portalName}}",
+  "DeactivateOrDeletePortal": "Deaktiviraj ili obriši {{productName}}",
   "DoTheSame": "Učini isto kao administratori",
-  "ManagePortal": "Upravljaj {{portalName}} konfiguracijom",
+  "ManagePortal": "Upravljaj {{productName}} konfiguracijom",
   "ManageUser": "Upravljaj korisničkim nalozima",
-  "NewPortalOwner": "Novi {{portalName}} vlasnik",
-  "PortalOwnerCan": "{{portalName}} vlasnik može:",
+  "NewPortalOwner": "Novi {{productName}} vlasnik",
+  "PortalOwnerCan": "{{productName}} vlasnik može:",
   "SetAccessRights": "Postavi prava pristupa"
 }

@@ -84,6 +84,8 @@ class AuthStore {
 
   clientError = false;
 
+  isPortalInfoLoaded = false;
+
   constructor(
     userStoreConst: UserStore,
     currentTariffStatusStoreConst: CurrentTariffStatusStore,
@@ -255,6 +257,8 @@ class AuthStore {
 
     this.currentQuotaStore?.setPortalQuotaValue(quota);
     this.currentTariffStatusStore?.setPortalTariffValue(tariff);
+
+    this.isPortalInfoLoaded = true;
   };
 
   setLanguage() {
@@ -274,7 +278,10 @@ class AuthStore {
     let success = false;
     if (this.isAuthenticated) {
       success =
-        (this.userStore?.isLoaded && this.settingsStore?.isLoaded) ?? false;
+        (this.userStore?.isLoaded &&
+          this.settingsStore?.isLoaded &&
+          this.isPortalInfoLoaded) ??
+        false;
 
       if (success) this.setLanguage();
     } else {

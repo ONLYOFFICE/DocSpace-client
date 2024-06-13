@@ -1,5 +1,5 @@
 {
-  "Desc": "Configurați datele de înregistrare în spațiul {{portalName}}.",
+  "Desc": "Configurați datele de înregistrare în spațiul {{productName}}.",
   "ErrorEmail": "Adresa e-mail invalidă",
   "ErrorInitWizard": "Serviciul nu este disponibil în acest moment, vă rugăm să încercați din nou mai târziu.",
   "ErrorInitWizardButton": "Încearcă din nou",
@@ -11,5 +11,5 @@
   "LicenseLink": "Acord de licență",
   "PlaceholderLicense": "Fișierul de licență dvs",
   "Timezone": "Fus orar:",
-  "WelcomeTitle": "Bine ați venit în spațiul dvs {{portalName}}!"
+  "WelcomeTitle": "Bine ați venit în spațiul dvs {{productName}}!"
 }

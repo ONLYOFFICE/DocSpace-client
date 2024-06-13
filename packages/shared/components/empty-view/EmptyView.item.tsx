@@ -2,6 +2,7 @@ import React from "react";
 import ArrowIcon from "PUBLIC_DIR/images/icons/12/arrow.right.svg";
 
 import { Text } from "../text";
+import { ContextMenu, ContextMenuRefType } from "../context-menu";
 
 import { EmptyViewItemBody, EmptyViewItemWrapper } from "./EmptyView.styled";
 import type { EmptyViewItemProps } from "./EmptyView.types";
@@ -12,11 +13,25 @@ export const EmptyViewItem = ({
   title,
   onClick,
   disabled,
+  model,
 }: EmptyViewItemProps) => {
+  const contexRef = React.useRef<ContextMenuRefType>(null);
+
   if (disabled) return;
 
+  const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (!model) return onClick?.(event);
+
+    contexRef.current?.show(event);
+  };
+
   return (
-    <EmptyViewItemWrapper onClick={onClick} role="button" aria-label={title}>
+    <EmptyViewItemWrapper
+      onClick={handleClick}
+      role="button"
+      aria-label={title}
+    >
+      <ContextMenu ref={contexRef} model={model ?? []} />
       {React.cloneElement(icon, { className: "ev-item__icon" })}
       <EmptyViewItemBody>
         <Text

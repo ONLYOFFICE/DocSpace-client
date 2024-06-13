@@ -46,7 +46,7 @@
   "URL": "ඒ.ස.නි.",
   "ViewRawPayload": "අමු payload බලන්න",
   "WebhookCreated": "Webhook සෑදිණි",
-  "WebhookCreationHint": "{{portalName}} හි සියලුම සිදුවීම් මෙම webhook වෙත පවරනු ලැබේ",
+  "WebhookCreationHint": "{{productName}} හි සියලුම සිදුවීම් මෙම webhook වෙත පවරනු ලැබේ",
   "WebhookDetails": "Webhook විස්තර",
   "WebhookEditedSuccessfully": "Webhook වින්‍යාසය සංශෝධනය කෙරිණි",
   "WebhookHistory": "Webhook ඉතිහාසය",

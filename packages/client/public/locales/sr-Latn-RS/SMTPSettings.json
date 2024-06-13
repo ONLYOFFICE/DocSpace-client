@@ -9,7 +9,8 @@
   "HostLogin": "Host prijava",
   "HostPassword": "Host lozinka",
   "Port": "Port",
-  "SenderDisplayName": "Display Ime Posiljaoca",
-  "SenderEmailAddress": "Email Adresa Pošaljioca",
-  "SendTestMail": "Pošalji Test Mail"
+  "SenderDisplayName": "Display ime posiljaoca",
+  "SenderEmailAddress": "Email adresa pošaljioca",
+  "SendTestMail": "Pošaljite probnu poštu",
+  "SuccessfullyCompletedOperation": "Operacija je uspešno završena."
 }

@@ -40,7 +40,7 @@ import PriceCalculation from "./PriceCalculation";
 import BenefitsContainer from "./BenefitsContainer";
 import ContactContainer from "./ContactContainer";
 import PayerInformationContainer from "./PayerInformationContainer";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledBody = styled.div`
   max-width: 660px;
@@ -148,10 +148,10 @@ const PaymentContainer = (props) => {
               <Text isBold>{t("ManagerTypesDescription")}</Text>
               <br />
               <Text isBold>
-                {t("Common:DocspaceAdmin", { portalName: PORTAL })}
+                {t("Common:DocspaceAdmin", { productName: PRODUCT_NAME })}
               </Text>
               <Text>
-                {t("AdministratorDescription", { portalName: PORTAL })}
+                {t("AdministratorDescription", { productName: PRODUCT_NAME })}
               </Text>
               <br />
               <Text isBold>{t("Common:RoomAdmin")}</Text>
@@ -285,7 +285,9 @@ const PaymentContainer = (props) => {
             (days remaining: {{ delayDaysCount }})
           </Trans>{" "}
           <Text as="span" fontSize="14px" lineHeight="16px">
-            {t("GracePeriodActivatedDescription", { portalName: PORTAL })}
+            {t("GracePeriodActivatedDescription", {
+              productName: PRODUCT_NAME,
+            })}
           </Text>
         </Text>
       );

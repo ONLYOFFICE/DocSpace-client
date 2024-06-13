@@ -1,13 +1,13 @@
 {
   "ActionsWithFilesDescription": "Los distintivos le notificarán sobre acciones como la carga, la creación y los cambios en los archivos.",
   "Badges": "Distintivos",
-  "DailyFeed": "Fuente diaria de {{portalName}}",
-  "DailyFeedDescription": "Lea las noticias y eventos de su {{portalName}} en un resumen diario.",
+  "DailyFeed": "Fuente diaria de {{productName}}",
+  "DailyFeedDescription": "Lea las noticias y eventos de su {{productName}} en un resumen diario.",
   "ManageNotifications": "Gestionar",
   "Notifications": "Notificaciones",
   "RoomsActions": "Acciones con archivos en Salas",
   "RoomsActivity": "Actividad en las salas",
   "RoomsActivityDescription": "Notificaciones cada hora. Manténgase informado de todas las actividades en sus salas.",
-  "UsefulTips": "Consejos útiles sobre {{portalName}}",
-  "UsefulTipsDescription": "Obtenga guías útiles sobre {{portalName}}"
+  "UsefulTips": "Consejos útiles sobre {{productName}}",
+  "UsefulTipsDescription": "Obtenga guías útiles sobre {{productName}}"
 }

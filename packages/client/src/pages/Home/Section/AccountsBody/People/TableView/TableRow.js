@@ -45,7 +45,7 @@ import { DropDown } from "@docspace/shared/components/drop-down";
 import { useNavigate } from "react-router-dom";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledWrapper = styled.div`
   display: contents;
@@ -265,8 +265,8 @@ const PeopleTableRow = (props) => {
 
     const adminOption = {
       key: "admin",
-      title: t("Common:DocspaceAdmin", { portalName: PORTAL }),
-      label: t("Common:DocspaceAdmin", { portalName: PORTAL }),
+      title: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
+      label: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
       action: "admin",
     };
     const managerOption = {
@@ -344,7 +344,7 @@ const PeopleTableRow = (props) => {
       case "owner":
         return t("Common:Owner");
       case "admin":
-        return t("Common:DocspaceAdmin", { portalName: PORTAL });
+        return t("Common:DocspaceAdmin", { productName: PRODUCT_NAME });
       case "manager":
         return t("Common:RoomAdmin");
       case "collaborator":

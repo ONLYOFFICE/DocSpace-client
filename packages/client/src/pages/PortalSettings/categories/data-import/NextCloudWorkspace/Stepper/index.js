@@ -36,7 +36,7 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
 
 import { Trans } from "react-i18next";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 export const getStepsData = (
   t,
@@ -75,7 +75,7 @@ export const getStepsData = (
     {
       title: t("Settings:SelectUsersWithEmail"),
       description: t("Settings:SelectUsersDescriptionNextcloud", {
-        portalName: PORTAL,
+        productName: PRODUCT_NAME,
         organizationName,
       }),
       component: (
@@ -89,7 +89,7 @@ export const getStepsData = (
     {
       title: t("Settings:AddEmails"),
       description: t("Settings:AddEmailsDescription", {
-        portalName: PORTAL,
+        productName: PRODUCT_NAME,
         organizationName,
       }),
       component: (
@@ -114,7 +114,7 @@ export const getStepsData = (
             ns="Settings"
             i18nKey="SelectUserTypesDescription"
             values={{
-              portalName: PORTAL,
+              productName: PRODUCT_NAME,
             }}
             components={{
               1: <b />,
@@ -130,7 +130,7 @@ export const getStepsData = (
                   i18nKey="TypesAndPrivileges"
                   ns="Settings"
                   t={t}
-                  values={{ portalName: PORTAL }}
+                  values={{ productName: PRODUCT_NAME }}
                   components={{
                     1: <b></b>,
                     2: <b></b>,
@@ -160,7 +160,7 @@ export const getStepsData = (
     {
       title: t("Settings:DataImport"),
       description: t("Settings:ImportSectionDescription", {
-        portalName: PORTAL,
+        productName: PRODUCT_NAME,
       }),
       component: (
         <ImportStep
@@ -185,7 +185,7 @@ export const getStepsData = (
     {
       title: t("Settings:DataImportComplete"),
       description: t("Settings:ImportCompleteDescriptionNextcloud", {
-        portalName: PORTAL,
+        productName: PRODUCT_NAME,
         organizationName,
       }),
       component: (

@@ -1,6 +1,6 @@
 {
   "ErrorEmptyResponse": "Boş yanıt",
-  "ErrorUnavailableText": "{{portalName}} kullanılamıyor",
+  "ErrorUnavailableText": "{{productName}} kullanılamıyor",
   "LinkDoesNotExist": "Açmaya çalıştığınız bağlantı mevcut değil.",
   "LinkHasExpired": "Takip ettiğiniz bağlantının süresi doldu."
 }

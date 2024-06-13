@@ -1,5 +1,5 @@
 {
-  "DeleteOwnerRestrictionText": "Pošto ste vlasnik ovog {{portalName}}-a, morate preneti vlasništvo na drugog korisnika da biste mogli da obrišete svoj nalog. Izaberite novog vlasnika da biste nastavili.",
+  "DeleteOwnerRestrictionText": "Pošto ste vlasnik ovog {{productName}}-a, morate preneti vlasništvo na drugog korisnika da biste mogli da obrišete svoj nalog. Izaberite novog vlasnika da biste nastavili.",
   "DeleteProfileInfo": "Pošaljite instrukcije za brisanje profila na email adresu",
   "DeleteProfileTitle": "Obriši profil"
 }

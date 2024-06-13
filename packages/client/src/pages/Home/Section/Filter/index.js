@@ -55,7 +55,10 @@ import {
   RoomsProviderType,
   RoomsType,
 } from "@docspace/shared/enums";
-import { PORTAL, ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
+import {
+  PRODUCT_NAME,
+  ROOMS_PROVIDER_TYPE_NAME,
+} from "@docspace/shared/constants";
 
 import { getDefaultRoomName } from "SRC_DIR/helpers/filesUtils";
 
@@ -784,7 +787,7 @@ const SectionFilterContent = ({
               label = t("Common:Active");
               break;
             case EmployeeStatus.Pending:
-              label = t("PeopleTranslations:PendingTitle");
+              label = t("PeopleTranslations:PendingInviteTitle");
               break;
             case EmployeeStatus.Disabled:
               label = t("PeopleTranslations:DisabledEmployeeStatus");
@@ -803,7 +806,7 @@ const SectionFilterContent = ({
 
           switch (+filter.role) {
             case EmployeeType.Admin:
-              label = t("Common:DocspaceAdmin", { portalName: PORTAL });
+              label = t("Common:DocspaceAdmin", { productName: PRODUCT_NAME });
               break;
             case EmployeeType.User:
               label = t("Common:RoomAdmin");
@@ -1320,7 +1323,7 @@ const SectionFilterContent = ({
           id: "filter_status-pending",
           key: EmployeeStatus.Pending,
           group: "filter-status",
-          label: t("PeopleTranslations:PendingTitle"),
+          label: t("PeopleTranslations:PendingInviteTitle"),
         },
       ];
 
@@ -1343,7 +1346,7 @@ const SectionFilterContent = ({
           id: "filter_type-docspace-admin",
           key: EmployeeType.Admin,
           group: "filter-type",
-          label: t("Common:DocspaceAdmin", { portalName: PORTAL }),
+          label: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
         },
         {
           id: "filter_type-room-admin",

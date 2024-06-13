@@ -29,7 +29,7 @@ import { Tabs } from "./Tabs";
 
 import { data } from "./data";
 import { TabsProps } from "./Tabs.types";
-import { ThemeTabs } from "./Tabs.enums";
+import { TabsTypes } from "./Tabs.enums";
 
 const meta = {
   title: "Components/Tabs",
@@ -68,7 +68,7 @@ export const Secondary: Story = {
   render: (args) => <Template {...args} />,
   args: {
     items: data,
-    theme: ThemeTabs.Secondary,
+    type: TabsTypes.Secondary,
     selectedItemId: data[0].id,
     onSelect: () => {},
   },

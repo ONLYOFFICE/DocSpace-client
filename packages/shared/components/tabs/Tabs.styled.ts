@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, TColorScheme } from "../../themes";
-import { ThemeTabs } from "./Tabs.enums";
+import { Base } from "../../themes";
+import { TabsTypes } from "./Tabs.enums";
 
 export const StyledTabs = styled.div<{
   stickyTop?: string;
@@ -87,7 +87,7 @@ export const StyledTabs = styled.div<{
 StyledTabs.defaultProps = { theme: Base };
 
 export const TabList = styled.div<{
-  $theme?: ThemeTabs;
+  $type?: TabsTypes;
 }>`
   display: flex;
   align-items: center;
@@ -103,10 +103,10 @@ export const TabList = styled.div<{
     display: none;
   }
 
-  gap: ${(props) => (props.$theme === ThemeTabs.Primary ? "20px" : "8px")};
+  gap: ${(props) => (props.$type === TabsTypes.Primary ? "20px" : "8px")};
 
   border-bottom: ${(props) =>
-    props.$theme === ThemeTabs.Primary &&
+    props.$type === TabsTypes.Primary &&
     css`1px solid ${props.theme.tabs.lineColor}`};
 `;
 
@@ -115,8 +115,7 @@ TabList.defaultProps = { theme: Base };
 export const Tab = styled.div<{
   isActive: boolean;
   isDisabled?: boolean;
-  $currentColorScheme?: TColorScheme;
-  $theme?: ThemeTabs;
+  $type?: TabsTypes;
 }>`
   display: flex;
   white-space: nowrap;
@@ -128,19 +127,19 @@ export const Tab = styled.div<{
   font-weight: 600;
   line-height: 20px;
   cursor: pointer;
-  opacity: ${(props) => (props.isDisabled && props.$theme === ThemeTabs.Secondary ? 0.6 : 1)};
-  pointer-events: ${(props) => props.isDisabled && props.$theme === ThemeTabs.Secondary && "none"};
+  opacity: ${(props) => (props.isDisabled && props.$type === TabsTypes.Secondary ? 0.6 : 1)};
+  pointer-events: ${(props) => props.isDisabled && props.$type === TabsTypes.Secondary && "none"};
 
   padding: ${(props) =>
-    props.$theme === ThemeTabs.Primary ? "4px 0 0 0" : "4px 16px"};
+    props.$type === TabsTypes.Primary ? "4px 0 0 0" : "4px 16px"};
 
 
   color: ${(props) =>
-    props.$theme === ThemeTabs.Primary
+    props.$type === TabsTypes.Primary
       ? css`
           ${props.isActive
             ? props.theme.tabs.activeTextColorPrimary ||
-              props.$currentColorScheme?.main?.accent
+              props.theme.currentColorScheme?.main?.accent
             : props.theme.tabs.textColorPrimary}
         `
       : css`
@@ -150,7 +149,7 @@ export const Tab = styled.div<{
         `};
 
   background-color: ${(props) =>
-    props.$theme === ThemeTabs.Secondary &&
+    props.$type === TabsTypes.Secondary &&
     css`
       ${props.isActive
         ? props.theme.tabs.activeBackgroundColorSecondary
@@ -158,37 +157,37 @@ export const Tab = styled.div<{
     `};
 
   border: ${(props) =>
-    props.$theme === ThemeTabs.Secondary &&
+    props.$type === TabsTypes.Secondary &&
     css`1px solid ${props.theme.tabs.lineColor}`};}
 
-  border-radius: ${(props) => props.$theme === ThemeTabs.Secondary && "16px"};
+  border-radius: ${(props) => props.$type === TabsTypes.Secondary && "16px"};
 
   &:hover {
     color: ${(props) =>
-      props.$theme === ThemeTabs.Primary &&
+      props.$type === TabsTypes.Primary &&
       !props.isActive &&
       props.theme.tabs.hoverTextColorPrimary};
 
     opacity: ${(props) =>
-      props.$theme === ThemeTabs.Primary && props.isActive && 0.85};
+      props.$type === TabsTypes.Primary && props.isActive && 0.85};
 
     background-color: ${(props) =>
-      props.$theme === ThemeTabs.Secondary &&
+      props.$type === TabsTypes.Secondary &&
       !props.isActive &&
       props.theme.tabs.hoverBackgroundColorSecondary};
   };
 
   &:active {
     color: ${(props) =>
-      props.$theme === ThemeTabs.Primary &&
+      props.$type === TabsTypes.Primary &&
       !props.isActive &&
       props.theme.tabs.pressedTextColorPrimary};
 
     opacity: ${(props) =>
-      props.$theme === ThemeTabs.Primary && props.isActive && 1};
+      props.$type === TabsTypes.Primary && props.isActive && 1};
 
     background-color: ${(props) =>
-      props.$theme === ThemeTabs.Secondary &&
+      props.$type === TabsTypes.Secondary &&
       !props.isActive &&
       props.theme.tabs.pressedBackgroundColorSecondary};
   };
@@ -198,20 +197,20 @@ Tab.defaultProps = { theme: Base };
 
 export const TabSubLine = styled.div<{
   isActive?: boolean;
-  $currentColorScheme?: TColorScheme;
-  $theme?: ThemeTabs;
+  $type?: TabsTypes;
 }>`
   z-index: 1;
   width: 100%;
   height: 4px;
   bottom: 0px;
   border-radius: 4px 4px 0 0;
+  border-radius: 4px 4px 0 0;
   transition: transform 0.3s ease;
 
-  display: ${(props) => props.$theme === ThemeTabs.Secondary && "none"};
+  display: ${(props) => props.$type === TabsTypes.Secondary && "none"};
 
   background-color: ${(props) =>
-    props.$theme === ThemeTabs.Primary && props.isActive
-      ? props.$currentColorScheme?.main?.accent
+    props.$type === TabsTypes.Primary && props.isActive
+      ? props.theme.currentColorScheme?.main?.accent
       : "transparent"};
 `;

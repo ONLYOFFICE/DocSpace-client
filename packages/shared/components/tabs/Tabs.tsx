@@ -25,20 +25,19 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useRef, useEffect } from "react";
-import { useTheme } from "styled-components";
 
 import { useViewTab } from "./hooks/useViewTab";
 
 import { StyledTabs, Tab, TabList, TabSubLine } from "./Tabs.styled";
 import { TabsProps, TTabItem } from "./Tabs.types";
-import { ThemeTabs } from "./Tabs.enums";
+import { TabsTypes } from "./Tabs.enums";
 import { OFFSET_RIGHT, OFFSET_LEFT, INDEX_NOT_FOUND } from "./Tabs.constants";
 
 const Tabs = (props: TabsProps) => {
   const {
     items,
     selectedItemId,
-    theme = ThemeTabs.Primary,
+    type = TabsTypes.Primary,
     stickyTop,
     onSelect,
     ...rest
@@ -49,13 +48,11 @@ const Tabs = (props: TabsProps) => {
     selectedItemIndex = 0;
   }
 
-  const globalTheme = useTheme();
-  const tabsRef = useRef<HTMLDivElement>(null);
-
   const [currentItem, setCurrentItem] = useState<TTabItem>(
     items[selectedItemIndex],
   );
 
+  const tabsRef = useRef<HTMLDivElement>(null);
   const isViewFirstTab = useViewTab(tabsRef, 0);
   const isViewLastTab = useViewTab(tabsRef, items.length - 1);
 
@@ -97,7 +94,7 @@ const Tabs = (props: TabsProps) => {
     <StyledTabs {...rest} stickyTop={stickyTop}>
       <div className="sticky">
         {!isViewFirstTab && <div className="blur-ahead" />}
-        <TabList $theme={theme} ref={tabsRef}>
+        <TabList $type={type} ref={tabsRef}>
           {items.map((item, index) => {
             const isActive = item.id === currentItem.id;
             return (
@@ -105,19 +102,14 @@ const Tabs = (props: TabsProps) => {
                 key={item.id}
                 isActive={isActive}
                 isDisabled={item?.isDisabled}
-                $currentColorScheme={globalTheme.currentColorScheme}
-                $theme={theme}
+                $type={type}
                 onClick={() => {
                   item.onClick?.();
                   setSelectedItem(item, index);
                 }}
               >
                 {item.name}
-                <TabSubLine
-                  isActive={isActive}
-                  $currentColorScheme={globalTheme.currentColorScheme}
-                  $theme={theme}
-                />
+                <TabSubLine isActive={isActive} $type={type} />
               </Tab>
             );
           })}

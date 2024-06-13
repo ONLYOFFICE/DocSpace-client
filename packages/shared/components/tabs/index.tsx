@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Tabs } from "./Tabs";
-import { ThemeTabs } from "./Tabs.enums";
+import { TabsTypes } from "./Tabs.enums";
 import { TTabItem, TabsProps } from "./Tabs.types";
 
 export { Tabs };
-export { ThemeTabs };
+export { TabsTypes };
 export { TTabItem, TabsProps };

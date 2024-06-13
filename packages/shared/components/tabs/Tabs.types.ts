@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ThemeTabs } from "./Tabs.enums";
+import { TabsTypes } from "./Tabs.enums";
 
 export type TTabItem = {
   /** Element id. */
@@ -45,7 +45,7 @@ export interface TabsProps {
   /** Selected item of tabs. */
   selectedItemId?: number | string;
   /** Theme for displaying tabs. */
-  theme?: ThemeTabs;
+  type?: TabsTypes;
   /** Tab indentation for sticky positioning. */
   stickyTop?: string;
   /** Sets a callback function that is triggered when the tab is selected. */

@@ -79,11 +79,7 @@ import { CategoryType } from "SRC_DIR/helpers/constants";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import AccountsFilter from "@docspace/shared/api/people/filter";
 import { RoomSearchArea, UrlActionType } from "@docspace/shared/enums";
-import {
-  getObjectByLocation,
-  hideLoader,
-  showLoader,
-} from "@docspace/shared/utils/common";
+import { getObjectByLocation } from "@docspace/shared/utils/common";
 import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import {
@@ -2768,7 +2764,10 @@ class FilesActionStore {
     });
   };
 
-  loopExportRoomIndexStatusChecking = async () => {
+  loopExportRoomIndexStatusChecking = async (pbData) => {
+    const { setSecondaryProgressBarData } =
+      this.uploadDataStore.secondaryProgressDataStore;
+
     let isCompleted = false;
     let res;
 
@@ -2778,19 +2777,34 @@ class FilesActionStore {
       if (res?.isCompleted) {
         isCompleted = true;
       }
+
+      if (res?.percentage) {
+        setSecondaryProgressBarData({
+          icon: pbData.icon,
+          visible: true,
+          percent: res.percentage,
+          label: "",
+          alert: false,
+          operationId: pbData.operationId,
+        });
+      }
     }
 
     return res;
   };
 
   checkPreviousExportRoomIndexInProgress = async () => {
-    if (this.alreadyExportingRoomIndex) {
-      return true;
+    try {
+      if (this.alreadyExportingRoomIndex) {
+        return true;
+      }
+
+      const previousExport = await api.rooms.getExportRoomIndexProgress();
+
+      return previousExport && !previousExport.isCompleted;
+    } catch (e) {
+      toastr.error(e);
     }
-
-    const previousExport = await api.rooms.getExportRoomIndexProgress();
-
-    return previousExport && !previousExport.isCompleted;
   };
 
   onSuccessExportRoomIndex = (t, fileName, fileUrl) => {
@@ -2801,22 +2815,34 @@ class FilesActionStore {
   };
 
   exportRoomIndex = async (t, roomId) => {
+    const previousExportInProgress =
+      await this.checkPreviousExportRoomIndexInProgress();
+
+    if (previousExportInProgress) {
+      return toastr.error(t("Files:ExportRoomIndexAlreadyInProgressError"));
+    }
+
+    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
+      this.uploadDataStore.secondaryProgressDataStore;
+
+    const pbData = { icon: "exportIndex", operationId: uniqueid("operation_") };
+
+    setSecondaryProgressBarData({
+      icon: pbData.icon,
+      visible: true,
+      percent: 0,
+      label: "",
+      alert: false,
+      operationId: pbData.operationId,
+    });
+
+    this.alreadyExportingRoomIndex = true;
+
     try {
-      showLoader();
-
-      const previousExportInProgress =
-        await this.checkPreviousExportRoomIndexInProgress();
-
-      if (previousExportInProgress) {
-        return toastr.error(t("Files:ExportRoomIndexAlreadyInProgressError"));
-      }
-
-      this.alreadyExportingRoomIndex = true;
-
       let res = await api.rooms.exportRoomIndex(roomId);
 
       if (!res.isCompleted) {
-        res = await this.loopExportRoomIndexStatusChecking();
+        res = await this.loopExportRoomIndexStatusChecking(pbData);
       }
 
       if (res.status === ExportRoomIndexTaskStatus.Failed) {
@@ -2831,7 +2857,8 @@ class FilesActionStore {
       toastr.error(e);
     } finally {
       this.alreadyExportingRoomIndex = false;
-      hideLoader();
+
+      setTimeout(() => clearSecondaryProgressData(pbData.operationId), TIMEOUT);
     }
   };
 }

@@ -3050,6 +3050,13 @@ const Dark: TTheme = {
     linkColor: white,
     descriptionColor: darkGrayDark,
   },
+
+  management: {
+    textColor: grayDark,
+    errorColor: darkErrorStatus,
+    sideColor: grayDark,
+    nameColor: grayDarkStrong,
+  },
 };
 
 export default Dark;

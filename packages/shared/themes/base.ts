@@ -3069,6 +3069,13 @@ export const getBaseTheme = () => {
       linkColor: lightBlueMain,
       descriptionColor: gray,
     },
+
+    management: {
+      textColor: gray,
+      errorColor: lightErrorStatus,
+      sideColor: gray,
+      nameColor: grayStrong,
+    },
   };
 };
 

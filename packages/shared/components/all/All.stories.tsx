@@ -56,7 +56,7 @@ import { Link, LinkType } from "../link";
 import { Loader, LoaderTypes } from "../loader";
 import { Row } from "../row";
 import { Scrollbar } from "../scrollbar";
-import { Tabs, ThemeTabs } from "../tabs";
+import { Tabs, TabsTypes } from "../tabs";
 import { Text } from "../text";
 import { Toast, toastr } from "../toast";
 import { ToggleContent } from "../toggle-content";
@@ -572,7 +572,7 @@ const Template = () => (
       <div style={{ padding: "8px 0" }}>
         <Tabs
           items={arrayItems}
-          theme={ThemeTabs.Secondary}
+          type={TabsTypes.Secondary}
           onSelect={() => {}}
           selectedItemId={arrayItems[0].id}
         />

@@ -61,7 +61,9 @@ export const getStepsData = (
     {
       title: t("Settings:SelectUsersWithEmail"),
       description: t("Settings:SelectUsersDescriptionNextcloud"),
-      component: <SelectUsersStep t={t} />,
+      component: (
+        <SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />
+      ),
     },
     {
       title: t("Settings:AddEmails"),

@@ -31,7 +31,7 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 
 import SelectFileStep from "../../components/SelectFileStep";
 
-import SelectUsersStep from "./SelectUsersStep";
+import SelectUsersStep from "../../components/SelectUsersStep";
 import SelectUsersTypeStep from "./SelectUsersTypeStep";
 import ImportStep from "./ImportStep";
 import ImportProcessingStep from "./ImportProcessingStep";
@@ -61,13 +61,7 @@ export const getStepsData = (
     {
       title: t("Settings:SelectUsers"),
       description: t("Settings:SelectUsersDescriptionGoogle"),
-      component: (
-        <SelectUsersStep
-          t={t}
-          onNextStep={incrementStep}
-          onPrevStep={decrementStep}
-        />
-      ),
+      component: <SelectUsersStep t={t} canDisable shouldSetUsers />,
     },
     {
       title: t("Settings:SelectUserTypes"),

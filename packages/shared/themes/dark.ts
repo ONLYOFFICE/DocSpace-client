@@ -1665,7 +1665,7 @@ const Dark: TTheme = {
   },
 
   catalog: {
-    background: black,
+    background: darkGrayLight,
 
     header: {
       borderBottom: `1px solid ${grayDarkStrong}`,

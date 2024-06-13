@@ -299,14 +299,16 @@ const ArticleBodyContent = (props) => {
 
       const patternSearching = selectedKeys[0].split("-");
       const selectedKey = patternSearching[0];
+      const title = mapKeys(item.tKey);
 
       items.push(
         <ArticleItem
           key={item.key}
           id={item.key}
+          title={title}
           icon={icon}
           showText={showText}
-          text={mapKeys(item.tKey)}
+          text={title}
           value={item.link}
           isActive={item.key === selectedKey}
           onClick={(e) => onSelect(item.key, e)}

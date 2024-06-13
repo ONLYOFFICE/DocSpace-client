@@ -31,6 +31,7 @@ export function login(
   passwordHash,
   session,
   recaptchaResponse,
+  recaptchaType,
   culture,
 ) {
   const data = {
@@ -38,6 +39,7 @@ export function login(
     passwordHash,
     session,
     recaptchaResponse,
+    recaptchaType,
     culture,
   };
 

@@ -163,6 +163,7 @@ const SessionsTableRow = (props) => {
     setUserSessionPanelVisible,
     setDisplayName,
     setStatus,
+    isOneUserSelection,
   } = props;
 
   const [fromDateAgo, setFromDateAgo] = useState("");
@@ -244,6 +245,7 @@ const SessionsTableRow = (props) => {
   };
 
   const onRowContextClick = useCallback(() => {
+    if (isOneUserSelection) return; // only one row must be selected
     onContentRowClick && onContentRowClick(!isChecked, item, false);
   }, [isChecked, item, onContentRowClick]);
 
@@ -337,8 +339,13 @@ export default inject(
     const { user } = userStore;
     const locale = (user && user.cultureName) || culture || "en";
 
-    const { setUserLastSession, setConnections, setDisplayName, setStatus } =
-      peopleStore.selectionStore;
+    const {
+      setUserLastSession,
+      setConnections,
+      setDisplayName,
+      setStatus,
+      isOneUserSelection,
+    } = peopleStore.selectionStore;
 
     return {
       locale,
@@ -349,6 +356,7 @@ export default inject(
       setUserSessionPanelVisible,
       setDisplayName,
       setStatus,
+      isOneUserSelection,
     };
   },
 )(withContent(observer(SessionsTableRow)));

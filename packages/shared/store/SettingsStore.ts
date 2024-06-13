@@ -78,6 +78,7 @@ import {
   COOKIE_EXPIRATION_YEAR,
   MEDIA_VIEW_URL,
   WRONG_PORTAL_NAME_URL,
+  BRAND_NAME,
 } from "../constants";
 import { Dark, Base, TColorScheme } from "../themes";
 import { toastr } from "../components/toast";
@@ -156,7 +157,7 @@ class SettingsStore {
     timePattern: "h:mm tt",
   };
 
-  organizationName = "ONLYOFFICE";
+  organizationName = BRAND_NAME;
 
   greetingSettings = "Web Office Applications";
 

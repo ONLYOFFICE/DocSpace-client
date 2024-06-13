@@ -445,7 +445,7 @@ export const settingsTree = [
             key: "7-1-0",
             icon: "",
             link: "public-room",
-            tKey: "Files:PublicRoom",
+            tKey: "Common:PublicRoom",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_custom",
@@ -564,7 +564,7 @@ export const settingsTree = [
         key: "10-0",
         icon: "",
         link: "",
-        tKey: "Common:FreeProFeatures",
+        tKey: "Common:FreeAccessToLicensedVersion",
         isCategory: true,
       },
     ],

@@ -32,6 +32,9 @@ import ArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import FolderSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
 import EmptyScreenFilter from "PUBLIC_DIR/images/empty_screen_filter.png";
 
+import { RoomsTypeValues } from "../../utils";
+
+import RoomType from "../room-type";
 import { AvatarRole } from "../avatar";
 
 import { Selector } from "./Selector";
@@ -91,12 +94,25 @@ function makeName() {
 const getItems = (count: number) => {
   const items: TSelectorItem[] = [];
 
+  // const items = <RoomType />;
+
   items.push({
     key: "create_new",
     id: "create_new_item",
     label: "New folder",
     isCreateNewItem: true,
+    dropDownItems: RoomsTypeValues.map((value) => (
+      <RoomType
+        key={value}
+        roomType={value}
+        selectedId={value}
+        type="dropdownItem"
+        isOpen={false}
+        onClick={() => {}}
+      />
+    )),
     onCreateClick: () => {},
+    onBackClick: () => {},
   });
 
   items.push({

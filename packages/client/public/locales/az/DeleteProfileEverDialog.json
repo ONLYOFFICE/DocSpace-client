@@ -1,5 +1,5 @@
 {
-  "ActionCannotBeUndone": "Seçilmiş deaktiv istifadəçilər DocSpace-dən silinəcək. Bu əməliyyat geri qaytarıla bilməz.",
+  "ActionCannotBeUndone": "Seçilmiş deaktiv istifadəçilər {{productName}}-dən silinəcək. Bu əməliyyat geri qaytarıla bilməz.",
   "CannotReassignFiles": "Eyni anda birdən çox istifadəçini silsəniz, onların fayllarını başqa istifadəçilərə təyin edə bilməzsiniz.",
   "DeleteGroupUsersSuccessMessage": "İstifadəçilər müvəffəqiyyətlə silinmişdir.",
   "DeleteMyDocumentsUser": "Bu istifadəçinin Sənədlərimdəki bütün şəxsi faylları və qovluqları həmişəlik silinəcək.",

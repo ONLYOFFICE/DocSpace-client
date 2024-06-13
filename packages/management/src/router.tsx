@@ -37,7 +37,7 @@ import AdditionalResPage from "client/AdditionalResPage";
 import Backup from "./categories/backup";
 import Restore from "./categories/restore";
 import Payments from "./categories/payments";
-
+import Bonus from "./categories/bonus";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 
 import Error404 from "@docspace/shared/components/errors/Error404";
@@ -94,6 +94,10 @@ const routes = [
       {
         path: "payments",
         element: <Payments />,
+      },
+      {
+        path: "bonus",
+        element: <Bonus />,
       },
       {
         path: "preparation-portal",

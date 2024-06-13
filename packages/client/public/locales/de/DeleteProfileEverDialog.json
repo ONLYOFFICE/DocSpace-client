@@ -1,5 +1,5 @@
 {
-  "ActionCannotBeUndone": "Die ausgewählten deaktivierten Benutzer werden aus DocSpace entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
+  "ActionCannotBeUndone": "Die ausgewählten deaktivierten Benutzer werden aus {{productName}} entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
   "CannotReassignFiles": "Wenn Sie mehrere Benutzer gleichzeitig löschen, können Sie deren Dateien nicht anderen Benutzern neu zuweisen.",
   "DeleteGroupUsersSuccessMessage": "Benutzer wurden erfolgreich gelöscht.",
   "DeleteMyDocumentsUser": "Alle persönlichen Dateien und Ordner im Bereich Meine Dokumente dieses Benutzers werden endgültig gelöscht.",

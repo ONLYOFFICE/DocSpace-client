@@ -78,6 +78,16 @@ const StyledWrapper = styled.div`
     `};
 
   ${(props) =>
+    props.isIndexUpdated &&
+    css`
+      background: ${(props) =>
+        props.isIndexEditingMode
+          ? `${props.theme.filesSection.tableView.row.indexActive} !important`
+          : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+      ${marginStyles}
+    `}
+
+  ${(props) =>
     !isMobile &&
     !props.isDragging &&
     css`
@@ -369,6 +379,8 @@ const SimpleFilesRow = (props) => {
     badgeUrl,
     canDrag,
     isIndexEditingMode,
+    changeIndex,
+    isIndexUpdated,
   } = props;
 
   const isMobileDevice = isMobileUtile();
@@ -377,6 +389,10 @@ const SimpleFilesRow = (props) => {
 
   const withAccess = item.security?.Lock;
   const isSmallContainer = sectionWidth <= 500;
+
+  const onChangeIndex = (action) => {
+    return changeIndex(action, item);
+  };
 
   const element = (
     <ItemIcon
@@ -434,6 +450,8 @@ const SimpleFilesRow = (props) => {
       checked={checkedProps}
       isActive={isActive}
       showHotkeyBorder={showHotkeyBorder}
+      isIndexEditingMode={isIndexEditingMode}
+      isIndexUpdated={isIndexUpdated}
       isFirstElem={itemIndex === 0}
       isHighlight={isHighlight}
     >
@@ -470,6 +488,7 @@ const SimpleFilesRow = (props) => {
           dragging={dragging && isDragging}
           isDragging={dragging}
           isIndexEditingMode={isIndexEditingMode}
+          onChangeIndex={onChangeIndex}
           isActive={isActive}
           inProgress={inProgress}
           isThirdPartyFolder={item.isThirdPartyFolder}

@@ -26,8 +26,8 @@
 
 import React, { useRef } from "react";
 import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
-
 import { isMobile } from "react-device-detect"; // TODO: isDesktop=true for IOS(Firefox & Safari)
+import { VDRIndexingAction } from "../../enums";
 import { isMobile as isMobileUtils } from "../../utils/device";
 
 import { Checkbox } from "../checkbox";
@@ -60,6 +60,7 @@ const Row = (props: RowProps) => {
     onSelect,
     onRowClick,
     onContextClick,
+    onChangeIndex,
 
     getContextModel,
     isRoom,
@@ -146,6 +147,11 @@ const Row = (props: RowProps) => {
     onSelect?.(true, data);
   };
 
+  const changeIndex = (e, action) => {
+    e.stopPropagation();
+    onChangeIndex(action);
+  };
+
   return (
     <StyledRow
       ref={row}
@@ -223,14 +229,14 @@ const Row = (props: RowProps) => {
               iconName={ArrowReactSvgUrl}
               className="index-up-icon"
               size="small"
-              // onClick={onClickShare}
+              onClick={(e) => changeIndex(e, VDRIndexingAction.HigherIndex)}
             />
             <ColorTheme
               themeId={ThemeId.IndexIconButton}
               iconName={ArrowReactSvgUrl}
               className="index-down-icon"
               size="small"
-              // onClick={onClickShare}
+              onClick={(e) => changeIndex(e, VDRIndexingAction.LowerIndex)}
             />
           </>
         ) : (

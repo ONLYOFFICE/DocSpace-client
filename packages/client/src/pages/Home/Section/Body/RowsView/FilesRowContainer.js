@@ -75,6 +75,7 @@ const FilesRowContainer = ({
   highlightFile,
   currentDeviceType,
   isIndexEditingMode,
+  changeIndex,
 }) => {
   useViewEffect({
     view: viewAs,
@@ -94,6 +95,7 @@ const FilesRowContainer = ({
         sectionWidth={sectionWidth}
         isRooms={isRooms}
         isTrashFolder={isTrashFolder}
+        changeIndex={changeIndex}
         isHighlight={
           highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
         }
@@ -132,6 +134,7 @@ export default inject(
     infoPanelStore,
     treeFoldersStore,
     indexingStore,
+    filesActionsStore,
   }) => {
     const {
       filesList,
@@ -164,6 +167,7 @@ export default inject(
       highlightFile,
       currentDeviceType,
       isIndexEditingMode,
+      changeIndex: filesActionsStore.changeIndex,
     };
   },
 )(observer(FilesRowContainer));

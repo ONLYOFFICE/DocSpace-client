@@ -26,6 +26,8 @@
 
 import { Tabs } from "./Tabs";
 import { ThemeTabs } from "./Tabs.enums";
+import { TTabItem, TabsProps } from "./Tabs.types";
 
 export { Tabs };
 export { ThemeTabs };
+export { TTabItem, TabsProps };

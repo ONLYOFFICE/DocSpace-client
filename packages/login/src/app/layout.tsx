@@ -104,8 +104,6 @@ export default async function RootLayout({
     settings.culture = cookieLng.value;
   }
 
-  console.log(settings);
-
   return (
     <html lang="en" translate="no">
       <head>

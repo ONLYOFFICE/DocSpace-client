@@ -72,8 +72,6 @@ const LoginForm = ({
 
   const searchParams = useSearchParams();
 
-  console.log(reCaptchaPublicKey, reCaptchaType);
-
   const theme = useTheme();
 
   const { t, ready, i18n } = useTranslation(["Login", "Common"]);
@@ -199,8 +197,6 @@ const LoginForm = ({
   const onSubmit = useCallback(() => {
     //errorText && setErrorText("");
     let captchaToken: string | undefined | null = "";
-
-    console.log(reCaptchaPublicKey, isCaptcha);
 
     if (reCaptchaPublicKey) {
       if (!isCaptchaSuccessful) {

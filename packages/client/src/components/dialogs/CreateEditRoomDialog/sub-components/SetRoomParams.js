@@ -129,8 +129,6 @@ const SetRoomParams = ({
     if (!icon.uploadedFile !== disableImageRescaling)
       setDisableImageRescaling(!icon.uploadedFile);
 
-    console.log(icon);
-
     setRoomParams({ ...roomParams, icon: icon });
   };
 

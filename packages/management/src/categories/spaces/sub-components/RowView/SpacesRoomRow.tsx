@@ -68,7 +68,7 @@ type TRow = {
 const SpacesRoomRow = ({ item }: TRow) => {
   const { spacesStore, settingsStore } = useStore();
   const { setDeletePortalDialogVisible, setCurrentPortal } = spacesStore;
-  const { tenantAlias, getAllPortals } = settingsStore;
+  const { tenantAlias, getAllPortals, theme } = settingsStore;
 
   const [isVisibleDialog, setIsVisibleDialog] = useState(false);
   const [isDisableQuota, setIsDisableQuota] = useState(false);
@@ -152,6 +152,7 @@ const SpacesRoomRow = ({ item }: TRow) => {
         element={logoElement}
         key={item.id}
         data={item}
+        theme={theme}
       >
         <RoomContent item={item} isCurrentPortal={isCurrentPortal} />
       </StyledRoomRow>

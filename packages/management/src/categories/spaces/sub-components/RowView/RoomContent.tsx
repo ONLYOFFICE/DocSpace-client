@@ -26,11 +26,15 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { RowContent } from "@docspace/shared/components/row-content";
-import { Text } from "@docspace/shared/components/text";
 import styled, { css } from "styled-components";
 import { isMobileOnly } from "react-device-detect";
+
+import { RowContent } from "@docspace/shared/components/row-content";
+import { Text } from "@docspace/shared/components/text";
+
 import { getConvertedSize } from "@docspace/shared/utils/common";
+import { TTheme } from "@docspace/shared/themes";
+
 import { TPortals } from "SRC_DIR/types/spaces";
 
 const StyledRowContent = styled(RowContent)`
@@ -52,9 +56,10 @@ const StyledRowContent = styled(RowContent)`
 type TRoomContent = {
   item: TPortals;
   isCurrentPortal: boolean;
+  theme: TTheme;
 };
 
-export const RoomContent = ({ item, isCurrentPortal }: TRoomContent) => {
+export const RoomContent = ({ item, isCurrentPortal, theme }: TRoomContent) => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
 
   const { roomAdminCount, usersCount, roomsCount, usedSize } =
@@ -71,11 +76,14 @@ export const RoomContent = ({ item, isCurrentPortal }: TRoomContent) => {
   const storageSpace =
     customQuota >= 0 ? `${usedStorage}/${maxStorage}` : `${usedStorage}`;
 
+  const sideColor = theme?.management?.sideColor;
+  const nameColor = theme?.management?.nameColor;
+
   return (
     <StyledRowContent
       sectionWidth={"620px"}
-      sideColor="#A3A9AE"
-      nameColor="#D0D5DA"
+      sideColor={sideColor}
+      nameColor={nameColor}
       className="spaces_row-content"
     >
       <div className="user-container-wrapper">

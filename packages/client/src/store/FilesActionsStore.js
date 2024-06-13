@@ -2722,7 +2722,9 @@ class FilesActionStore {
   changeIndex = async (action, item) => {
     const { filesList } = this.filesStore;
 
-    const index = filesList.findIndex((elem) => elem.id === item?.id);
+    const index = filesList.findIndex(
+      (elem) => elem.id === item?.id && elem.fileExst === item?.fileExst,
+    );
 
     if (
       (action === VDRIndexingAction.HigherIndex && index === 0) ||

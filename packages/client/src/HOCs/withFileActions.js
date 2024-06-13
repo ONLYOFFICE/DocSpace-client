@@ -412,7 +412,9 @@ export default function withFileActions(WrappedFileItem) {
         (x) => x.id === item.id && x.fileExst === item.fileExst,
       );
 
-      const isIndexUpdated = !!updateSelection.find((x) => x.id === item.id);
+      const isIndexUpdated = !!updateSelection.find(
+        (x) => x.id === item.id && x.fileExst === item?.fileExst,
+      );
 
       const isDisabledDropItem = item.security?.Create === false;
 

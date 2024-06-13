@@ -59,6 +59,7 @@ import ForgotContainer from "./sub-components/ForgotContainer";
 
 import { StyledCaptcha } from "./LoginForm.styled";
 import { LoginDispatchContext, LoginValueContext } from "../Login";
+import { RecaptchaType } from "@docspace/shared/enums";
 
 const LoginForm = ({
   hashSettings,
@@ -108,6 +109,7 @@ const LoginForm = ({
   const [isCaptchaError, setIsCaptchaError] = useState(false);
 
   const captchaRef = useRef<ReCAPTCHA>(null);
+  const hCaptchaRef = useRef<HCaptcha>(null);
 
   useLayoutEffect(() => {
     const email = getEmailFromInvitation(loginData);
@@ -198,13 +200,16 @@ const LoginForm = ({
     //errorText && setErrorText("");
     let captchaToken: string | undefined | null = "";
 
-    if (reCaptchaPublicKey && isCaptcha) {
+    console.log(reCaptchaPublicKey, isCaptcha);
+
+    if (reCaptchaPublicKey) {
       if (!isCaptchaSuccessful) {
         setIsCaptchaError(true);
         return;
       }
 
       captchaToken = captchaRef.current?.getValue();
+      if (captchaToken) setIsCaptchaError(false);
     }
 
     let hasError = false;
@@ -239,7 +244,7 @@ const LoginForm = ({
     isDesktop && checkPwd();
     const session = !isChecked;
 
-    login(user, hash, session, captchaToken, currentCulture)
+    login(user, hash, session, captchaToken, currentCulture, reCaptchaType)
       .then((res: string | object) => {
         const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath =
@@ -279,18 +284,19 @@ const LoginForm = ({
         setIsLoading(false);
       });
   }, [
-    hashSettings,
-    identifier,
-    identifierValid,
-    isCaptcha,
-    isCaptchaSuccessful,
-    isChecked,
-    isDesktop,
-    password,
     reCaptchaPublicKey,
+    isCaptcha,
+    identifier,
+    password,
+    identifierValid,
     setIsLoading,
-    referenceUrl,
+    hashSettings,
+    isDesktop,
+    isChecked,
     currentCulture,
+    reCaptchaType,
+    isCaptchaSuccessful,
+    referenceUrl,
   ]);
 
   const onBlurEmail = () => {
@@ -313,6 +319,7 @@ const LoginForm = ({
 
   const onSuccessfullyComplete = () => {
     setIsCaptchaSuccess(true);
+    setIsCaptchaError(false);
   };
 
   const errorMessage = () => {
@@ -341,8 +348,6 @@ const LoginForm = ({
   }, [isModalOpen, onSubmit]);
 
   const passwordErrorMessage = errorMessage();
-
-  console.log(reCaptchaPublicKey);
 
   return (
     <form className="auth-form-container">
@@ -376,16 +381,22 @@ const LoginForm = ({
       {reCaptchaPublicKey && (
         <StyledCaptcha isCaptchaError={isCaptchaError}>
           <div className="captcha-wrapper">
-            {/* <ReCAPTCHA
-              sitekey={reCaptchaPublicKey}
-              ref={captchaRef}
-              // theme={theme.isBase ? "light" : "dark"}
-              onChange={onSuccessfullyComplete}
-            /> */}
-            <HCaptcha
-              sitekey={reCaptchaPublicKey}
-              onChange={onSuccessfullyComplete}
-            />
+            {reCaptchaType === RecaptchaType.hCaptcha ? (
+              <HCaptcha
+                sitekey={reCaptchaPublicKey}
+                ref={hCaptchaRef}
+                onVerify={onSuccessfullyComplete}
+                theme={theme.isBase ? "light" : "dark"}
+                // onChange={onSuccessfullyComplete}
+              />
+            ) : (
+              <ReCAPTCHA
+                sitekey={reCaptchaPublicKey}
+                ref={captchaRef}
+                theme={theme.isBase ? "light" : "dark"}
+                onChange={onSuccessfullyComplete}
+              />
+            )}
           </div>
           {isCaptchaError && (
             <Text>{t("Errors:LoginWithBruteForceCaptcha")}</Text>

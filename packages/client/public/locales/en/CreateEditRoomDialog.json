@@ -4,6 +4,7 @@
   "CreateRoomConfirmation": "Continue without connecting the storage?\nYou have selected a third-party storage option that is not connected yet. If you proceed without connecting the service, this option will not be added.",
   "CreateTagOption": "Create tag",
   "DisableRoomQuota": "Disable quota for this room",
+  "FormRoomBarDescription": "This room is available to anyone with the link. External users will have Form Filler permission for all the files.",
   "Icon": "Icon",
   "MakeRoomPrivateDescription": "All files in this room will be encrypted.",
   "MakeRoomPrivateLimitationsWarningDescription": "With this feature, you can invite only existing {{productName}} users. After creating a room, you will not be able to change the list of users.",

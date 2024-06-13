@@ -32,7 +32,10 @@ import { getUserRole } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   EmployeeActivationStatus,
+  Events,
+  FileType,
   FolderType,
+  RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
@@ -43,6 +46,7 @@ import {
   getExternalLinks,
   editExternalLink,
   addExternalLink,
+  checkIsPDFForm,
 } from "@docspace/shared/api/files";
 import isEqual from "lodash/isEqual";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
@@ -717,6 +721,28 @@ class InfoPanelStore {
   };
 
   getPrimaryFileLink = async (fileId) => {
+    const file = this.filesStore.files.find((item) => item.id === fileId);
+
+    if (file && !file.shared && file.fileType === FileType.PDF) {
+      try {
+        this.filesStore.addActiveItems([file.id], null);
+        const result = await checkIsPDFForm(fileId);
+
+        if (result) {
+          const event = new CustomEvent(Events.Share_PDF_Form, {
+            detail: { file },
+          });
+
+          window.dispatchEvent(event);
+          return;
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.filesStore.removeActiveItem(file);
+      }
+    }
+
     const { getFileInfo } = this.filesStore;
 
     const res = await getPrimaryLink(fileId);

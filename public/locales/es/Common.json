@@ -177,7 +177,6 @@
   "FirstName": "Nombre",
   "FormRoom": "Sala de formularios",
   "Free": "Gratis",
-  "FreeProFeatures": "Acceso gratuito a funciones profesionales",
   "FullAccess": "Acceso total",
   "GeneralAccessLinkCopied": "El enlace general se ha copiado correctamente al portapapeles",
   "GeneralAccessLinkRemove": "Eliminar enlace de acceso general",
@@ -452,5 +451,14 @@
   "Website": "Sitio web",
   "Yes": "Sí",
   "Yesterday": "Ayer",
-  "You": "Usted"
+  "You": "Usted",
+  "ConflictResolveDescription": "El archivo con el nombre <1>{{file}}</1> ya existe en la carpeta <1>{{folder}}</1>.",
+  "ConflictResolveDescriptionFiles": "{{filesCount}} documentos con el mismo nombre ya existen en la carpeta <1>{{folder}}</1>.",
+  "ConflictResolveSelectAction": "Por favor, seleccione la acción:",
+  "ConflictResolveTitle": "Confirmación de sobrescritura",
+  "CreateDescription": "Habrá dos archivos diferentes en la carpeta.",
+  "OverwriteDescription": "El nuevo archivo sustituirá al existente como una nueva versión.",
+  "OverwriteTitle": "Sobrescribir con la actualización de la versión",
+  "SkipDescription": "No se copiará ningún archivo. El archivo original se conservará en la carpeta de destino.",
+  "SkipTitle": "Omitir"
 }

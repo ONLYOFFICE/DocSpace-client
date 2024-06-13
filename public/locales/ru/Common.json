@@ -177,7 +177,7 @@
   "FirstName": "Имя",
   "FormRoom": "Комната форм",
   "Free": "Бесплатно",
-  "FreeProFeatures": "Бесплатный доступ к профессиональным функциональным возможностям",
+  "FreeAccessToLicensedVersion": "Бесплатный доступ к Enterprise решению",
   "FullAccess": "Полный доступ",
   "GeneralAccessLinkCopied": "Общая ссылка успешно скопирована в буфер обмена.",
   "GeneralAccessLinkRemove": "Удалить общую ссылку",
@@ -453,4 +453,13 @@
   "Yes": "Да",
   "Yesterday": "Вчера",
   "You": "Вы"
+  "ConflictResolveDescription": "Файл с именем <1>{{file}}</1> уже существует в папке <1>{{folder}}</1>.",
+  "ConflictResolveDescriptionFiles": "{{filesCount}} документов с одинаковыми именами уже существуют в папке <1>{{folder}}</1>.",
+  "ConflictResolveSelectAction": "Пожалуйста, выберите действие:",
+  "ConflictResolveTitle": "Подтверждение перезаписи",
+  "CreateDescription": "В папке будет два разных файла.",
+  "OverwriteDescription": "Новый файл заменит существующий файл как новая версия.",
+  "OverwriteTitle": "Перезаписать с обновлением версии",
+  "SkipDescription": "Файл не будет скопирован. В папке назначения останется исходный файл.",
+  "SkipTitle": "Пропустить"
 }

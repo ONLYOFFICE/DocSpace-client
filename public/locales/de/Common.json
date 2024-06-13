@@ -177,7 +177,6 @@
   "FirstName": "Vorname",
   "FormRoom": "Formularraum",
   "Free": "Kostenlos",
-  "FreeProFeatures": "Kostenloser Zugang zu den Profi-Funktionen",
   "FullAccess": "Voller Zugriff",
   "GeneralAccessLinkCopied": "Der allgemeine Link wurde erfolgreich in die Zwischenablage kopiert",
   "GeneralAccessLinkRemove": "Allgemeiner Zugangslink entfernen",
@@ -451,5 +450,14 @@
   "Website": "Webseite",
   "Yes": "Ja",
   "Yesterday": "Gestern",
-  "You": "Sie"
+  "You": "Sie",
+  "ConflictResolveDescription": "Die Datei <1>{{file}}</1> existiert bereits im Ordner <1>{{folder}}</1>",
+  "ConflictResolveDescriptionFiles": "im Ordner <1>{{folder}}</1> sind bereits {{filesCount}} Dokumente mit dem gleichen Namen vorhanden.",
+  "ConflictResolveSelectAction": "Bitte wählen Sie die Aktion aus:",
+  "ConflictResolveTitle": "Bestätigung überschreiben",
+  "CreateDescription": "Es werden zwei verschiedene Dateien in dem Ordner vorhanden sein.",
+  "OverwriteDescription": "Die Datei wird mit einer neuen Version ersetzt.",
+  "OverwriteTitle": "Überschreiben mit Versions-Update",
+  "SkipDescription": "Es wird keine Datei kopiert. Die Originaldatei wird im Zielordner beibehalten.",
+  "SkipTitle": "Überspringen"
 }

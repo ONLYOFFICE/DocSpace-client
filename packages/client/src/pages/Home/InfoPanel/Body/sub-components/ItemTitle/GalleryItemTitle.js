@@ -70,7 +70,7 @@ const GalleryItemTitle = ({
 
   return (
     <StyledTitle ref={itemTitleRef}>
-      <ReactSVG className="icon" src={getIcon(32, ".docxf")} />
+      <ReactSVG className="icon" src={getIcon(32, ".pdf")} />
       <Text className="text">{gallerySelected?.attributes?.name_form}</Text>
 
       <Text color={currentColorScheme.main?.accent} className="free-label">

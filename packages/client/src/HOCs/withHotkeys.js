@@ -28,7 +28,7 @@ import { useEffect, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { observer, inject } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-import { Events } from "@docspace/shared/enums";
+import { Events, FolderType, RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
@@ -91,6 +91,8 @@ const withHotkeys = (Component) => {
       uploadClipboardFiles,
 
       isGroupMenuBlocked,
+      isFormRoom,
+      isParentFolderFormRoom,
     } = props;
 
     const navigate = useNavigate();
@@ -124,7 +126,12 @@ const withHotkeys = (Component) => {
       !security?.Create;
 
     const onCreate = (extension) => {
-      if (folderWithNoAction) return;
+      if (
+        folderWithNoAction ||
+        (Boolean(extension) && (isFormRoom || isParentFolderFormRoom))
+      )
+        return;
+
       const event = new Event(Events.CREATE);
 
       const payload = {
@@ -275,7 +282,7 @@ const withHotkeys = (Component) => {
     });
 
     //Crete form template
-    useHotkeys("Shift+o", () => onCreate("docxf"), {
+    useHotkeys("Shift+o", () => onCreate("pdf"), {
       ...hotkeysFilter,
       ...{ keyup: true },
     });
@@ -284,7 +291,7 @@ const withHotkeys = (Component) => {
     useHotkeys(
       "Alt+Shift+o",
       () => {
-        if (folderWithNoAction) return;
+        if (folderWithNoAction || isFormRoom || isParentFolderFormRoom) return;
         setSelectFileDialogVisible(true);
       },
 
@@ -479,6 +486,9 @@ const withHotkeys = (Component) => {
       } = treeFoldersStore;
 
       const security = selectedFolderStore.security;
+      const isFormRoom = selectedFolderStore.roomType === RoomsType.FormRoom;
+      const isParentFolderFormRoom =
+        selectedFolderStore.parentRoomType === FolderType.FormRoom;
 
       return {
         setSelected,
@@ -538,6 +548,8 @@ const withHotkeys = (Component) => {
         uploadClipboardFiles,
 
         isGroupMenuBlocked,
+        isFormRoom,
+        isParentFolderFormRoom,
       };
     },
   )(observer(WithHotkeys));

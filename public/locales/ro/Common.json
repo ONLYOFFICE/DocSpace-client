@@ -177,7 +177,6 @@
   "FirstName": "Prenume",
   "FormRoom": "Sală Formulare",
   "Free": "Gratuit",
-  "FreeProFeatures": "Acces gratuit la caracteristicile Pro",
   "FullAccess": "Acces complet",
   "GeneralAccessLinkCopied": "Link-ul general a fost copiat cu succes în clipboard",
   "GeneralAccessLinkRemove": "Ștergere link general de acces",
@@ -453,4 +452,13 @@
   "Yes": "Da",
   "Yesterday": "Ieri",
   "You": "Dvs"
+  "ConflictResolveDescription": "Fișierul cu numele <1>{{file}}</1> există deja în dosarul <1>{{folder}}</1>.",
+  "ConflictResolveDescriptionFiles": "{{filesCount}} fișiere cu același nume exista deja în folderul<1>{{folder}}</1>.",
+  "ConflictResolveSelectAction": "Selectați acțiune:",
+  "ConflictResolveTitle": "Confirmarea suprascrierii",
+  "CreateDescription": "Două fișiere diferite vor fi salvate în dosarul.",
+  "OverwriteDescription": "Fișierul va fi ajutat ca o versiune a fișierului cu același nume.",
+  "OverwriteTitle": "Suprascriere la o versiune actualizată",
+  "SkipDescription": "Niciun fișier n-o să fie copiat. Fișierul de origine rămâne în dosarul de destinație.",
+  "SkipTitle": "Treci mai departe"
 }

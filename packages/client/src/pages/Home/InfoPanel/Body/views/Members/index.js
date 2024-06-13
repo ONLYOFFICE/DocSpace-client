@@ -69,6 +69,7 @@ const Members = ({
   primaryLink,
   isArchiveFolder,
   isPublicRoom,
+  isFormRoom,
   additionalLinks,
   setLinkParams,
   setEditLinkPanelIsVisible,
@@ -141,10 +142,10 @@ const Members = ({
       publicRoomItems.push(
         <LinksBlock key="general-link_header">
           <Text fontSize="14px" fontWeight={600}>
-            {t("Common:SharedLinks")}
+            {isFormRoom ? t("Common:PublicLink") : t("Common:SharedLinks")}
           </Text>
 
-          {!isArchiveFolder && (
+          {!isArchiveFolder && !isFormRoom && (
             <div
               data-tooltip-id="emailTooltip"
               data-tooltip-content={t(
@@ -236,8 +237,16 @@ const Members = ({
       {showPublicRoomBar && (
         <StyledPublicRoomBarContainer>
           <PublicRoomBar
-            headerText={t("Files:RoomAvailableViaExternalLink")}
-            bodyText={t("CreateEditRoomDialog:PublicRoomBarDescription")}
+            headerText={
+              isFormRoom
+                ? t("Files:RoomAvailableViaSharedLink")
+                : t("Files:RoomAvailableViaExternalLink")
+            }
+            bodyText={
+              isFormRoom
+                ? t("CreateEditRoomDialog:FormRoomBarDescription")
+                : t("CreateEditRoomDialog:PublicRoomBarDescription")
+            }
           />
         </StyledPublicRoomBarContainer>
       )}
@@ -307,8 +316,12 @@ export default inject(
     const roomType =
       selectedFolderStore.roomType ?? infoPanelSelection?.roomType;
 
+    const isFormRoom = roomType === RoomsType.FormRoom;
+
     const isPublicRoomType =
-      roomType === RoomsType.PublicRoom || roomType === RoomsType.CustomRoom;
+      roomType === RoomsType.PublicRoom ||
+      roomType === RoomsType.CustomRoom ||
+      isFormRoom;
 
     const isPublicRoom = roomType === RoomsType.PublicRoom;
 
@@ -321,6 +334,7 @@ export default inject(
       selfId,
       isAdmin,
       isPublicRoomType,
+      isFormRoom,
       membersFilter,
       infoPanelMembers,
       updateInfoPanelMembers,

@@ -177,7 +177,7 @@
   "FirstName": "Křestní jméno",
   "FormRoom": "Místnost s formuláři",
   "Free": "Volno",
-  "FreeProFeatures": "Bezplatný přístup k profesionálním funkcím",
+
   "FullAccess": "Plný přístup",
   "GeneralAccessLinkCopied": "Obecný odkaz úspěšně zkopírován do schránky",
   "GeneralAccessLinkRemove": "Odstranění odkazu pro obecný přístup",
@@ -452,5 +452,15 @@
   "Website": "Webová stránka",
   "Yes": "Ano",
   "Yesterday": "Včera",
+  "You": "Vy",
   "You": "Vy"
+  "ConflictResolveDescription": "Soubor s názvem <1>{{file}}</1> již existuje ve složce <1>{{folder}}</1>.",
+  "ConflictResolveDescriptionFiles": "Ve složce <1>{{folder}}</1> již existuje {{filesCount}} dokumentů se stejným názvem.",
+  "ConflictResolveSelectAction": "Prosím, vyberte akci:",
+  "ConflictResolveTitle": "Potvrzení o přepsání",
+  "CreateDescription": "Ve složce budou dva různé soubory.",
+  "OverwriteDescription": "Soubor bude přidán do souboru se stejným názvem jako verze.",
+  "OverwriteTitle": "Přepsat aktualizací verze",
+  "SkipDescription": "Žádný soubor nebude zkopírován. Původní soubor bude zachován v cílové složce.",
+  "SkipTitle": "Přeskočit"
 }

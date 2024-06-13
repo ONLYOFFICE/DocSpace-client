@@ -96,11 +96,7 @@ import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUse
 import { copyShareLink } from "@docspace/shared/utils/copy";
 
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
-import {
-  getOAuthToken,
-  hideLoader,
-  showLoader,
-} from "@docspace/shared/utils/common";
+import { getOAuthToken } from "@docspace/shared/utils/common";
 import api from "@docspace/shared/api";
 import {
   RoomsType,
@@ -109,14 +105,12 @@ import {
   UrlActionType,
   EmployeeType,
   FilesSelectorFilterTypes,
-  ExportRoomIndexTaskStatus,
 } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { getFileLink, getFolderLink } from "@docspace/shared/api/files";
 import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { PRODUCT_NAME } from "@docspace/shared/constants";
-import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -899,65 +893,8 @@ class ContextOptionsStore {
     this.filesActionsStore.setMuteAction(action, item, t);
   };
 
-  checkExportRoomIndexProgress = async () => {
-    return await new Promise((resolve, reject) => {
-      setTimeout(async () => {
-        try {
-          const res = await api.rooms.getExportRoomIndexProgress();
-
-          resolve(res);
-        } catch (e) {
-          reject(e);
-        }
-      }, 1000);
-    });
-  };
-
-  loopExportRoomIndexStatusChecking = async () => {
-    let isCompleted = false;
-    let res;
-
-    while (!isCompleted) {
-      res = await this.checkExportRoomIndexProgress();
-
-      if (res?.isCompleted) {
-        isCompleted = true;
-      }
-    }
-
-    return res;
-  };
-
-  onSuccessExportRoomIndex = (t, fileName, fileUrl) => {
-    const { openOnNewPage } = this.filesSettingsStore;
-    const urlWithProxy = combineUrl(window.DocSpaceConfig?.proxy?.url, fileUrl);
-
-    showSuccessExportRoomIndexToast(t, fileName, urlWithProxy, openOnNewPage);
-  };
-
-  onExportRoomIndex = async (t, roomId) => {
-    try {
-      showLoader();
-
-      let res = await api.rooms.exportRoomIndex(roomId);
-
-      if (!res.isCompleted) {
-        res = await this.loopExportRoomIndexStatusChecking();
-      }
-
-      if (res.status === ExportRoomIndexTaskStatus.Failed) {
-        toastr.error(res.error);
-        return;
-      }
-
-      if (res.status === ExportRoomIndexTaskStatus.Completed) {
-        this.onSuccessExportRoomIndex(t, res.resultFileName, res.resultFileUrl);
-      }
-    } catch (e) {
-      toastr.error(e);
-    } finally {
-      hideLoader();
-    }
+  onExportRoomIndex = (t, roomId) => {
+    this.filesActionsStore.exportRoomIndex(t, roomId);
   };
 
   onClickRemoveFromRecent = (item) => {

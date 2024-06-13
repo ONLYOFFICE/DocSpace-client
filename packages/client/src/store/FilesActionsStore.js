@@ -58,6 +58,7 @@ import {
 import {
   ConflictResolveType,
   Events,
+  ExportRoomIndexTaskStatus,
   FileAction,
   FileStatus,
   FolderType,
@@ -78,7 +79,11 @@ import { CategoryType } from "SRC_DIR/helpers/constants";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import AccountsFilter from "@docspace/shared/api/people/filter";
 import { RoomSearchArea, UrlActionType } from "@docspace/shared/enums";
-import { getObjectByLocation } from "@docspace/shared/utils/common";
+import {
+  getObjectByLocation,
+  hideLoader,
+  showLoader,
+} from "@docspace/shared/utils/common";
 import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import {
@@ -87,6 +92,8 @@ import {
 } from "SRC_DIR/helpers/utils";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
+import api from "@docspace/shared/api";
+import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 
 class FilesActionStore {
   settingsStore;
@@ -110,6 +117,7 @@ class FilesActionStore {
   isGroupMenuBlocked = false;
   emptyTrashInProgress = false;
   processCreatingRoomFromData = false;
+  alreadyExportingRoomIndex = false;
 
   constructor(
     settingsStore,
@@ -2744,6 +2752,87 @@ class FilesActionStore {
     this.uploadDataStore
       .itemOperationToFolder(operationData)
       .catch((error) => toastr.error(error));
+  };
+
+  checkExportRoomIndexProgress = async () => {
+    return await new Promise((resolve, reject) => {
+      setTimeout(async () => {
+        try {
+          const res = await api.rooms.getExportRoomIndexProgress();
+
+          resolve(res);
+        } catch (e) {
+          reject(e);
+        }
+      }, 1000);
+    });
+  };
+
+  loopExportRoomIndexStatusChecking = async () => {
+    let isCompleted = false;
+    let res;
+
+    while (!isCompleted) {
+      res = await this.checkExportRoomIndexProgress();
+
+      if (res?.isCompleted) {
+        isCompleted = true;
+      }
+    }
+
+    return res;
+  };
+
+  checkPreviousExportRoomIndexInProgress = async () => {
+    if (this.alreadyExportingRoomIndex) {
+      return true;
+    }
+
+    const previousExport = await api.rooms.getExportRoomIndexProgress();
+
+    return previousExport && !previousExport.isCompleted;
+  };
+
+  onSuccessExportRoomIndex = (t, fileName, fileUrl) => {
+    const { openOnNewPage } = this.filesSettingsStore;
+    const urlWithProxy = combineUrl(window.DocSpaceConfig?.proxy?.url, fileUrl);
+
+    showSuccessExportRoomIndexToast(t, fileName, urlWithProxy, openOnNewPage);
+  };
+
+  exportRoomIndex = async (t, roomId) => {
+    try {
+      showLoader();
+
+      const previousExportInProgress =
+        await this.checkPreviousExportRoomIndexInProgress();
+
+      if (previousExportInProgress) {
+        return toastr.error(t("Files:ExportRoomIndexAlreadyInProgressError"));
+      }
+
+      this.alreadyExportingRoomIndex = true;
+
+      let res = await api.rooms.exportRoomIndex(roomId);
+
+      if (!res.isCompleted) {
+        res = await this.loopExportRoomIndexStatusChecking();
+      }
+
+      if (res.status === ExportRoomIndexTaskStatus.Failed) {
+        toastr.error(res.error);
+        return;
+      }
+
+      if (res.status === ExportRoomIndexTaskStatus.Completed) {
+        this.onSuccessExportRoomIndex(t, res.resultFileName, res.resultFileUrl);
+      }
+    } catch (e) {
+      toastr.error(e);
+    } finally {
+      this.alreadyExportingRoomIndex = false;
+      hideLoader();
+    }
   };
 }
 

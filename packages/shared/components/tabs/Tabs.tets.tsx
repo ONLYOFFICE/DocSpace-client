@@ -24,11 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { screen, render } from "@testing-library/react";
+/* import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { Tabs } from "./Tabs";
-import { TTabItem } from "./Tabs.types";
+import { TTabItem } from "./Tabs.types"; */
 
 // const arrayItems: TTabItem[] = [
 //   {

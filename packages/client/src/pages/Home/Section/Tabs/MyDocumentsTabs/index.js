@@ -70,6 +70,7 @@ const MyDocumentsTabs = ({
 
   const showTabs = (isPersonalRoom || isRecentTab) && isRoot;
   const startSelectId =
+    tabs.length &&
     getObjectByLocation(window.DocSpace.location)?.folder === "recent"
       ? tabs[1].id
       : tabs[0].id;

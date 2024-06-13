@@ -621,7 +621,7 @@ const ArticleMainButtonContent = (props) => {
       ...(isOwner
         ? [
             {
-              id: "invite_doc-space-administrator",
+              id: "invite_portal-administrator",
               className: "main-button_drop-down",
               icon: PersonAdminReactSvgUrl,
               label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),

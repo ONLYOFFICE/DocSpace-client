@@ -45,7 +45,7 @@ const AccountsTable = (props) => {
   } = props;
 
   const setTypePortalAdmin = () => {
-    changeGroupType(UserTypes.DocSpaceAdmin);
+    changeGroupType(UserTypes.PortalAdmin);
     toggleAllAccounts(false, [], checkedAccountType);
   };
   const setTypeRoomAdmin = () => {

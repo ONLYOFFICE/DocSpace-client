@@ -42,8 +42,8 @@ export const getAccessOptions = (
 ) => {
   let options = [];
   const accesses = {
-    docSpaceAdmin: {
-      key: "docSpaceAdmin",
+    portalAdmin: {
+      key: "portalAdmin",
       label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
       description: t("Translations:RolePortalAdminDescription", {
         productName: PRODUCT_NAME,
@@ -182,7 +182,7 @@ export const getAccessOptions = (
       ];
       break;
     case -1:
-      if (isOwner) options.push(accesses.docSpaceAdmin);
+      if (isOwner) options.push(accesses.portalAdmin);
 
       options = [
         ...options,

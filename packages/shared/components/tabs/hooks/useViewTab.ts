@@ -18,7 +18,7 @@
 //
 // Pursuant to Section 7(b) of the License you must retain the original Product logo when
 // distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
+// trademark law for use of our trademarks.s
 //
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
@@ -27,7 +27,7 @@
 import { useEffect, useState, useRef, RefObject } from "react";
 
 export const useViewTab = (
-  containerRef: RefObject<HTMLElement>,
+  containerRef: RefObject<HTMLDivElement>,
   index: number,
 ) => {
   const [isViewTab, setIsViewTab] = useState<boolean>(true);

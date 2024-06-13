@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useRef, MutableRefObject, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useTheme } from "styled-components";
 
 import { useViewTab } from "./hooks/useViewTab";
@@ -50,7 +50,7 @@ const Tabs = (props: TabsProps) => {
   }
 
   const globalTheme = useTheme();
-  const tabsRef = useRef() as MutableRefObject<HTMLDivElement>;
+  const tabsRef = useRef<HTMLDivElement>(null);
 
   const [currentItem, setCurrentItem] = useState<TTabItem>(
     items[selectedItemIndex],
@@ -64,6 +64,8 @@ const Tabs = (props: TabsProps) => {
   }, [selectedItemIndex, items]);
 
   const scrollToTab = (index: number): void => {
+    if (!tabsRef.current) return;
+
     const tabElement = tabsRef.current.children[index] as HTMLElement;
     const containerWidth = tabsRef.current.offsetWidth;
     const tabWidth = tabElement.offsetWidth;

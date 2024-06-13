@@ -79,6 +79,13 @@ const ConfigurationWrapper = styled.div`
     &-configuration-title {
       padding-bottom: 8px;
     }
+    &-input-subheader {
+      color: ${({ theme }) => theme.management.textColor};
+    }
+  }
+
+  .error-text {
+    color: ${({ theme }) => theme.management.errorColor};
   }
 `;
 

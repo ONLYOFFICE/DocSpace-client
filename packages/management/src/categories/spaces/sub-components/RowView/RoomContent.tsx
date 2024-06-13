@@ -51,6 +51,10 @@ const StyledRowContent = styled(RowContent)`
   .mainIcons {
     height: 20px;
   }
+
+  .spaces_row-current {
+    color: ${({ theme }) => theme.management.textColor};
+  }
 `;
 
 type TRoomContent = {
@@ -97,7 +101,6 @@ export const RoomContent = ({ item, isCurrentPortal, theme }: TRoomContent) => {
         fontSize="14px"
         fontWeight={600}
         truncate={true}
-        color="#A3A9AE"
         className="spaces_row-current"
       >
         {isCurrentPortal && t("CurrentSpace")}

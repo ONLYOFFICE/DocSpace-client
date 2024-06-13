@@ -32,7 +32,7 @@ import { inject, observer } from "mobx-react";
 import { Button } from "@docspace/shared/components/button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Text } from "@docspace/shared/components/text";
-import { Tabs, ThemeTabs } from "@docspace/shared/components/tabs";
+import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
 import Preview from "./Appearance/preview";
 import { saveToSessionStorage, getFromSessionStorage } from "../../utils";
 import ColorSchemeDialog from "./sub-components/colorSchemeDialog";
@@ -797,7 +797,7 @@ const Appearance = (props) => {
           onSaveColorSchemeDialog={onSaveColorSchemeDialog}
         />
         <div className="header preview-header">{t("Common:Preview")}</div>
-        <Tabs items={arrayItems} theme={ThemeTabs.Secondary} />
+        <Tabs items={arrayItems} type={TabsTypes.Secondary} />
 
         <div className="buttons-container">
           <Button

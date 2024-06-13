@@ -993,37 +993,6 @@ const Dark: TTheme = {
     },
   },
 
-  tabsContainer: {
-    scrollbar: {
-      width: "100%",
-      height: "44px",
-    },
-
-    label: {
-      height: " 30px",
-      border: "1px solid #474747",
-      borderRadius: "16px",
-      minWidth: "fit-content",
-      marginRight: "8px",
-      width: "fit-content",
-
-      backgroundColor: "#FFFFFF",
-      hoverBackgroundColor: "#474747",
-      disableBackgroundColor: "#282828",
-      activeBackgroundColor: "#282828",
-      activeSelectedBackgroundColor:
-        "linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(0deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18))",
-
-      title: {
-        padding: "4px 16px",
-        overflow: "hidden",
-        color: black,
-        hoverColor: "#a4a4a4",
-        disableColor: "#474747",
-      },
-    },
-  },
-
   fieldContainer: {
     horizontal: {
       margin: "0 0 16px 0",

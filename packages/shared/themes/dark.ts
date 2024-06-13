@@ -98,20 +98,19 @@ const {
   linuxColor,
   androidColor,
 
-  grayMaxLight,
   shuttleGrey,
 } = globalColors;
 
 const Dark: TTheme = {
   ...CommonTheme,
   isBase: false,
-  color: grayMaxLight,
+  color: white,
   backgroundColor: black,
   fontFamily: DEFAULT_FONT_FAMILY,
   fontSize: "13px",
 
   text: {
-    color: grayMaxLight,
+    color: white,
     disableColor: grayDarkText,
     emailColor: gray,
     fontWeight: "normal",
@@ -128,7 +127,7 @@ const Dark: TTheme = {
     },
 
     fontWeight: 600,
-    color: grayMaxLight,
+    color: white,
   },
 
   backgroundAndSubstrateColor: darkGrayLight,
@@ -283,7 +282,7 @@ const Dark: TTheme = {
 
       separatorBackground: white,
 
-      buttonColor: grayMaxLight,
+      buttonColor: white,
 
       hoverButtonColor: black,
 
@@ -380,8 +379,8 @@ const Dark: TTheme = {
       overflow: "hidden",
       textOverflow: "ellipsis",
       whiteSpace: "nowrap",
-      color: grayMaxLight,
-      hoverColor: grayMaxLight,
+      color: white,
+      hoverColor: white,
       connectColor: darkBlack,
     },
 
@@ -436,12 +435,12 @@ const Dark: TTheme = {
       width: "20px",
       height: "20px",
       padding: "8px",
-      hoverBackgroundColor: grayMaxLight,
+      hoverBackgroundColor: white,
       backgroundColor: grayDark,
     },
   },
 
-  iconButton: { color: grayDark, hoverColor: grayMaxLight },
+  iconButton: { color: grayDark, hoverColor: white },
   selectorAddButton: {
     background: grayDarkMid,
     hoverBackground: darkGrayLight,
@@ -458,7 +457,7 @@ const Dark: TTheme = {
     width: "32px",
     padding: "10px",
     color: grayDark,
-    hoverColor: grayMaxLight,
+    hoverColor: white,
   },
 
   saveCancelButtons: {
@@ -504,7 +503,7 @@ const Dark: TTheme = {
   },
 
   radioButton: {
-    textColor: grayMaxLight,
+    textColor: white,
     textDisableColor: grayDarkText,
 
     marginBeforeLabel: "8px",
@@ -512,12 +511,12 @@ const Dark: TTheme = {
     background: black,
     disableBackground: "#545454",
 
-    fillColor: grayMaxLight,
+    fillColor: white,
     disableFillColor: grayDarkStrong,
 
     borderColor: "#646464",
     disableBorderColor: "none",
-    hoverBorderColor: grayMaxLight,
+    hoverBorderColor: white,
   },
 
   row: {
@@ -650,7 +649,7 @@ const Dark: TTheme = {
   },
 
   input: {
-    color: grayMaxLight,
+    color: white,
     disableColor: "#6c6c6c",
 
     backgroundColor: black,
@@ -679,7 +678,7 @@ const Dark: TTheme = {
     hoverWarningBorderColor: darkStatusWarning,
     hoverDisabledBorderColor: grayDarkStrong,
 
-    focusBorderColor: grayMaxLight,
+    focusBorderColor: white,
     focusErrorBorderColor: darkErrorStatus,
     focusWarningBorderColor: darkStatusWarning,
     focusDisabledBorderColor: grayDarkStrong,
@@ -854,7 +853,7 @@ const Dark: TTheme = {
     padding: "2px 0px 2px 2px",
     margin: "0",
 
-    borderColor: grayMaxLight,
+    borderColor: white,
 
     iconColor: grayDark,
     hoverIconColor: white,
@@ -863,7 +862,7 @@ const Dark: TTheme = {
   textArea: {
     disabledColor: grayDarkStrong,
 
-    focusBorderColor: grayMaxLight,
+    focusBorderColor: white,
     focusErrorBorderColor: darkErrorStatus,
     focusOutline: "none",
 
@@ -877,7 +876,7 @@ const Dark: TTheme = {
   },
 
   link: {
-    color: grayMaxLight,
+    color: white,
     lineHeight: "calc(100% + 6px)",
     opacity: "0.5",
     textDecoration: "none",
@@ -1196,7 +1195,7 @@ const Dark: TTheme = {
         marginTop: "-9.4px",
         width: "24px",
         height: "24px",
-        background: grayMaxLight,
+        background: white,
         disabledBackground: darkGrayDark,
         borderWidth: "6px",
         borderStyle: "solid",
@@ -1208,7 +1207,7 @@ const Dark: TTheme = {
       thumb: {
         width: "24px",
         height: "24px",
-        background: grayMaxLight,
+        background: white,
         border: `6px solid ${black}`,
         borderRadius: "30px",
         marginTop: "0px",
@@ -1226,7 +1225,7 @@ const Dark: TTheme = {
       rangeThumb: {
         width: "14px",
         height: "14px",
-        background: grayMaxLight,
+        background: white,
         border: `6px solid ${black}`,
         borderRadius: "30px",
         boxShadow: "0px 5px 20px rgba(4, 15, 27, 0.13)",
@@ -1283,7 +1282,7 @@ const Dark: TTheme = {
       button: {
         background: "#b6b6b6",
         fill: grayDark,
-        hoverFill: grayMaxLight,
+        hoverFill: white,
         padding: "0 12px",
         height: "40px",
         borderRadius: "6px",
@@ -1322,7 +1321,7 @@ const Dark: TTheme = {
   },
 
   dropDownItem: {
-    color: grayMaxLight,
+    color: white,
     disableColor: gray,
     backgroundColor: black,
     hoverBackgroundColor: lightDarkGrayHover,
@@ -1344,8 +1343,8 @@ const Dark: TTheme = {
       marginRight: "8px",
       lineHeight: "10px",
 
-      color: grayMaxLight,
-      disableColor: grayMaxLight,
+      color: white,
+      disableColor: white,
     },
 
     separator: {
@@ -1382,13 +1381,13 @@ const Dark: TTheme = {
     position: "fixed",
     padding: "4px",
     width: "320px",
-    color: grayMaxLight,
+    color: white,
     top: "16px",
     right: "24px",
     marginTop: "0px",
 
     closeButton: {
-      color: grayMaxLight,
+      color: white,
       fontWeight: "700",
       fontSize: "14px",
       background: "transparent",
@@ -1404,7 +1403,7 @@ const Dark: TTheme = {
       maxHeight: "800px",
       overflow: "hidden",
       borderRadius: "6px",
-      color: grayMaxLight,
+      color: white,
       margin: "0 0 12px",
       padding: "12px",
       minHeight: "32px",
@@ -1431,7 +1430,7 @@ const Dark: TTheme = {
     text: {
       lineHeight: " 1.3",
       fontSize: "12px",
-      color: grayMaxLight,
+      color: white,
     },
 
     title: {
@@ -1448,7 +1447,7 @@ const Dark: TTheme = {
       fontSize: "12px",
     },
 
-    closeButtonColor: grayMaxLight,
+    closeButtonColor: white,
   },
 
   loader: {
@@ -1523,13 +1522,13 @@ const Dark: TTheme = {
       borderRadius: "3px",
 
       borderColor: grayDarkStrong,
-      openBorderColor: grayMaxLight,
+      openBorderColor: white,
 
       disabledBorderColor: grayDarkStrong,
       disabledBackground: grayDarkStrong,
 
       hoverBorderColor: grayDark,
-      hoverBorderColorOpen: grayMaxLight,
+      hoverBorderColorOpen: white,
       hoverDisabledBorderColor: grayDarkStrong,
 
       hoverBackgroundModernView: grayDarkStrong,
@@ -1777,7 +1776,7 @@ const Dark: TTheme = {
   },
 
   navigation: {
-    expanderColor: grayMaxLight,
+    expanderColor: white,
     background: black,
     rootFolderTitleColor: darkGrayDark,
     boxShadow: "0px 8px 16px 0px #040F1B29",
@@ -1806,7 +1805,7 @@ const Dark: TTheme = {
     backgroundColor: darkGrayLight,
     recoveryColor: "#4C4C4C",
     linkColor: "#606060",
-    productColor: grayMaxLight,
+    productColor: white,
     height: "48px",
   },
 
@@ -1887,13 +1886,13 @@ const Dark: TTheme = {
 
     details: {
       customLogoBorderColor: grayDarkStrong,
-      commentEditorIconColor: grayMaxLight,
+      commentEditorIconColor: white,
       tagBackground: grayDarkMid,
     },
 
     gallery: {
       borderColor: black,
-      descriptionColor: grayMaxLight,
+      descriptionColor: white,
     },
 
     search: {
@@ -1929,7 +1928,7 @@ const Dark: TTheme = {
   },
 
   peopleTableRow: {
-    nameColor: grayMaxLight,
+    nameColor: white,
     pendingNameColor: "#6f6f6f",
 
     sideInfoColor: grayDark,
@@ -1943,7 +1942,7 @@ const Dark: TTheme = {
 
       openBackground: gray,
 
-      openFill: grayMaxLight,
+      openFill: white,
     },
 
     filter: {
@@ -1955,8 +1954,8 @@ const Dark: TTheme = {
       indicatorColor: mainOrange,
 
       selectedItem: {
-        background: grayMaxLight,
-        border: grayMaxLight,
+        background: white,
+        border: white,
         color: black,
       },
     },
@@ -1968,8 +1967,8 @@ const Dark: TTheme = {
       viewIcon: grayDark,
       sortFill: "rgba(255, 255, 255, 0.6)",
 
-      tileSortFill: grayMaxLight,
-      tileSortColor: grayMaxLight,
+      tileSortFill: white,
+      tileSortColor: white,
     },
 
     selectedItems: {
@@ -2000,11 +1999,11 @@ const Dark: TTheme = {
       borderBottom: `1px solid ${grayDarkStrong}`,
       textColor: grayDark,
       activeTextColor: grayDark,
-      hoverTextColor: grayMaxLight,
+      hoverTextColor: white,
 
       iconColor: grayDark,
       activeIconColor: grayDark,
-      hoverIconColor: grayMaxLight,
+      hoverIconColor: white,
 
       borderImageSource: `linear-gradient(to right,${black} 21px,${grayDarkStrong} 21px,${grayDarkStrong} calc(100% - 20px),${black} calc(100% - 20px))`,
       borderHoverImageSource: `linear-gradient(to right,${black} 0px,${grayDarkStrong} 0px,${grayDarkStrong} 100% ,${black} 100%)`,
@@ -2031,17 +2030,17 @@ const Dark: TTheme = {
       },
 
       sideColor: grayDark,
-      linkColor: grayMaxLight,
+      linkColor: white,
       textColor: grayDark,
 
-      editingIconColor: grayMaxLight,
-      shareHoverColor: grayMaxLight,
+      editingIconColor: white,
+      shareHoverColor: white,
       pinColor: white,
     },
 
     tableView: {
       fileName: {
-        linkColor: grayMaxLight,
+        linkColor: white,
         textColor: grayDark,
       },
 
@@ -2062,7 +2061,7 @@ const Dark: TTheme = {
         borderHover: grayDarkStrong,
         sideColor: gray,
 
-        shareHoverColor: grayMaxLight,
+        shareHoverColor: white,
 
         borderImageRight: `linear-gradient(to right, ${black} 25px, ${grayDarkStrong} 24px)`,
         borderImageLeft: `linear-gradient(to left, ${black} 20px, ${grayDarkStrong} 24px)`,
@@ -2090,8 +2089,8 @@ const Dark: TTheme = {
         backgroundColorTop: black,
       },
 
-      sideColor: grayMaxLight,
-      color: grayMaxLight,
+      sideColor: white,
+      color: white,
       textColor: grayDark,
     },
 
@@ -2107,7 +2106,7 @@ const Dark: TTheme = {
 
     searcher: {
       hoverBorderColor: grayDark,
-      focusBorderColor: grayMaxLight,
+      focusBorderColor: white,
       placeholderColor: grayDarkStrong,
     },
   },
@@ -2132,7 +2131,7 @@ const Dark: TTheme = {
       selectedBackground: lightDarkGrayHover,
 
       inputButtonBorder: grayDarkStrong,
-      inputButtonBorderHover: grayMaxLight,
+      inputButtonBorderHover: white,
     },
 
     emptyScreen: {
@@ -2314,7 +2313,7 @@ const Dark: TTheme = {
   },
 
   connectedClouds: {
-    color: grayMaxLight,
+    color: white,
     borderBottom: `1px solid ${grayDarkStrong}`,
     borderRight: `1px solid ${grayDarkStrong}`,
   },
@@ -2326,7 +2325,7 @@ const Dark: TTheme = {
   filesDragTooltip: {
     background: black,
     boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.13)",
-    color: grayMaxLight,
+    color: white,
   },
 
   emptyContent: {
@@ -2358,7 +2357,7 @@ const Dark: TTheme = {
   },
 
   filesPanels: {
-    color: grayMaxLight,
+    color: white,
 
     aside: {
       backgroundColor: black,
@@ -2381,7 +2380,7 @@ const Dark: TTheme = {
 
     embedding: {
       textAreaColor: grayDark,
-      iconColor: grayMaxLight,
+      iconColor: white,
       color: gray,
     },
 
@@ -2391,13 +2390,13 @@ const Dark: TTheme = {
 
     content: {
       backgroundColor: black,
-      fill: grayMaxLight,
+      fill: white,
       disabledFill: grayDarkText,
     },
 
     body: {
       backgroundColor: black,
-      fill: grayMaxLight,
+      fill: white,
     },
 
     footer: {
@@ -2407,7 +2406,7 @@ const Dark: TTheme = {
 
     linkRow: {
       backgroundColor: black,
-      fill: grayMaxLight,
+      fill: white,
       disabledFill: grayDarkText,
     },
 
@@ -2416,7 +2415,7 @@ const Dark: TTheme = {
     },
 
     filesList: {
-      color: grayMaxLight,
+      color: white,
       backgroundColor: black,
       borderBottom: `1px solid ${grayDarkStrong}`,
     },
@@ -2428,17 +2427,17 @@ const Dark: TTheme = {
     },
 
     sharing: {
-      color: grayMaxLight,
+      color: white,
 
-      fill: grayMaxLight,
-      loadingFill: grayMaxLight,
+      fill: white,
+      loadingFill: white,
 
       borderBottom: `1px solid ${grayDarkStrong}`,
       borderTop: `1px solid ${grayDarkStrong}`,
       externalLinkBackground: black,
-      externalLinkSvg: grayMaxLight,
+      externalLinkSvg: white,
 
-      internalLinkBorder: `1px dashed ${grayMaxLight}`,
+      internalLinkBorder: `1px dashed ${white}`,
 
       itemBorder: `1px dashed ${black}`,
 
@@ -2446,7 +2445,7 @@ const Dark: TTheme = {
 
       backgroundButtons: black,
 
-      dropdownColor: grayMaxLight,
+      dropdownColor: white,
 
       loader: {
         foregroundColor: black,
@@ -2464,7 +2463,7 @@ const Dark: TTheme = {
       },
 
       loadingButton: {
-        color: grayMaxLight,
+        color: white,
         background: black,
       },
     },
@@ -2498,11 +2497,11 @@ const Dark: TTheme = {
       lineHeight: "30px",
       fontWeight: "600",
       margin: "0 0 0 8px",
-      color: grayMaxLight,
+      color: white,
     },
     hover: black,
     background: "none",
-    svgFill: grayMaxLight,
+    svgFill: white,
     header: {
       height: "49px",
       borderBottom: `1px solid ${grayDarkStrong}`,
@@ -2537,12 +2536,12 @@ const Dark: TTheme = {
   filesSettings: {
     color: grayText,
 
-    linkColor: grayMaxLight,
+    linkColor: white,
   },
 
   filesBadges: {
     iconColor: grayDark,
-    hoverIconColor: grayMaxLight,
+    hoverIconColor: white,
 
     color: white,
     backgroundColor: black,
@@ -2552,7 +2551,7 @@ const Dark: TTheme = {
   },
 
   filesEditingWrapper: {
-    color: grayMaxLight,
+    color: white,
     border: `1px solid ${grayDarkStrong}`,
     borderBottom: `1px solid ${grayDarkStrong}`,
 
@@ -2560,7 +2559,7 @@ const Dark: TTheme = {
       background: globalColors.black,
       itemBackground: grayDarkMid,
       itemBorder: gray,
-      itemActiveBorder: grayMaxLight,
+      itemActiveBorder: white,
     },
 
     row: {
@@ -2568,23 +2567,23 @@ const Dark: TTheme = {
     },
 
     fill: grayDark,
-    hoverFill: grayMaxLight,
+    hoverFill: white,
   },
 
   filesIcons: {
     fill: grayDark,
-    hoverFill: grayMaxLight,
+    hoverFill: white,
   },
 
   filesQuickButtons: {
     color: grayDark,
-    sharedColor: grayMaxLight,
-    hoverColor: grayMaxLight,
+    sharedColor: white,
+    hoverColor: white,
   },
 
   filesSharedButton: {
     color: grayDark,
-    sharedColor: grayMaxLight,
+    sharedColor: white,
   },
 
   filesPrivateRoom: {
@@ -2595,8 +2594,8 @@ const Dark: TTheme = {
 
   filesVersionHistory: {
     row: {
-      color: grayMaxLight,
-      fill: grayMaxLight,
+      color: white,
+      fill: white,
     },
 
     badge: {
@@ -2608,9 +2607,9 @@ const Dark: TTheme = {
     },
 
     versionList: {
-      fill: grayMaxLight,
-      stroke: grayMaxLight,
-      color: grayMaxLight,
+      fill: white,
+      stroke: white,
+      color: white,
     },
   },
 
@@ -2644,7 +2643,7 @@ const Dark: TTheme = {
   },
 
   peopleSelector: {
-    textColor: grayMaxLight,
+    textColor: white,
   },
 
   peopleWithContent: {
@@ -2734,7 +2733,7 @@ const Dark: TTheme = {
 
           tooltipColor: "#F5E9BA",
 
-          nameColor: grayMaxLight,
+          nameColor: white,
           pendingNameColor: grayDark,
 
           textColor: black,
@@ -2749,12 +2748,12 @@ const Dark: TTheme = {
         },
         auditTrail: {
           sideColor: grayDark,
-          nameColor: grayMaxLight,
+          nameColor: white,
           downloadReportDescriptionColor: grayDark,
         },
         loginHistory: {
           sideColor: grayDark,
-          nameColor: grayMaxLight,
+          nameColor: white,
         },
       },
 
@@ -2888,7 +2887,7 @@ const Dark: TTheme = {
   },
 
   editor: {
-    color: grayMaxLight,
+    color: white,
     background: black,
   },
 
@@ -2933,7 +2932,7 @@ const Dark: TTheme = {
       textDescriptionColor: grayDark,
     },
     activeSessions: {
-      color: grayMaxLight,
+      color: white,
       borderColor: grayDarkStrong,
       tickIconColor: darkStatusPositive,
       removeIconColor: gray,

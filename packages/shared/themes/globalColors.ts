@@ -97,6 +97,5 @@ export const globalColors = {
   androidColor: "#A8D548",
   //
 
-  grayMaxLight: "#eeeeee",
   shuttleGrey: "#63686A",
 };

@@ -111,7 +111,6 @@ const {
   linuxColor,
   androidColor,
 
-  grayMaxLight,
   shuttleGrey,
 } = globalColors;
 

@@ -2,7 +2,7 @@
   "ActionCannotBeUndone": "Những người dùng bị vô hiệu hóa đã được chọn sẽ bị xóa khỏi {{productName}}. Hành động này không thể được hoàn tác.",
   "CannotReassignFiles": "Nếu bạn xóa nhiều người dùng cùng một lúc, bạn không thể chuyển giao tập tin của họ lại cho người dùng khác.",
   "DeleteGroupUsersSuccessMessage": "Người dùng đã được xóa thành công.",
-  "DeleteMyDocumentsUser": "Tất cả các tập tin và thư mục cá nhân trong phần Tài liệu của tôi của người dùng này sẽ bị xóa vĩnh viễn.",
+  "DeleteMyDocumentsUser": "Tất cả các tập tin và thư mục cá nhân trong phần Tài liệu của người dùng này sẽ bị xóa vĩnh viễn.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Các phòng được tạo bởi người dùng này và các tài liệu được lưu trữ trong các phòng này sẽ tự động được chuyển giao lại cho quản trị viên thực hiện việc xóa: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Chuyển giao lại dữ liệu theo cách thủ công để chọn người dùng đích khác để chuyển giao lại.",
   "DeleteUser": "Xoá người dùng",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> sẽ bị xóa. Hành động này không thể được hoàn tác.",

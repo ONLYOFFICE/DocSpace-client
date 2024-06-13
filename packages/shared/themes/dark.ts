@@ -76,6 +76,7 @@ const {
   link,
   darkLink,
   blueLightMid,
+  bigGrayDarkMid,
 
   lightToastDone,
   darkToastDone,
@@ -90,6 +91,9 @@ const {
   dndDarkColor,
   dndHoverColor,
   dndDarkHover,
+
+  onWhiteColor,
+  boxShadowDarkColor,
 
   editorGreenColor,
   editorBlueColor,
@@ -204,21 +208,21 @@ const Dark: TTheme = {
       baseDisabled: darkGrayLight,
 
       primary: lightSecondMain,
-      primaryHover: "#4D8AC7",
-      primaryActive: "#427CB7",
-      primaryDisabled: "#45709B",
+      primaryHover: lightSecondMainHover,
+      primaryActive: `linear-gradient(0deg, ${lightSecondMain}, ${lightSecondMain}),linear-gradient(0deg, ${onWhiteColor}, ${onWhiteColor})`,
+      primaryDisabled: lightSecondMainDisabled,
     },
 
     border: {
       base: `1px solid ${grayDarkStrong}`,
       baseHover: `1px solid ${grayDark}`,
-      baseActive: `1px solid #CCCCCC`,
+      baseActive: `1px solid ${grayDarkStrong}`,
       baseDisabled: `1px solid ${grayDarkStrong}`,
 
       primary: `1px solid ${lightSecondMain}`,
-      primaryHover: `1px solid #4D8AC7`,
-      primaryActive: `1px solid #427CB7`,
-      primaryDisabled: `1px solid #45709B`,
+      primaryHover: `1px solid ${lightSecondMainHover}`,
+      primaryActive: `1px solid linear-gradient(0deg, ${lightSecondMain}, ${lightSecondMain}),linear-gradient(0deg, ${onWhiteColor}, ${onWhiteColor})`,
+      primaryDisabled: `1px solid ${lightSecondMainDisabled}`,
     },
 
     loader: {
@@ -246,7 +250,7 @@ const Dark: TTheme = {
 
     circleBackground: black,
 
-    mobileProgressBarBackground: "#606060",
+    mobileProgressBarBackground: grayDarkStrong,
 
     bar: {
       icon: grayDark,
@@ -259,7 +263,7 @@ const Dark: TTheme = {
 
     buttonOptions: {
       backgroundColor: grayDarkMid,
-      color: "#ff0000",
+      color: black,
     },
 
     dropDown: {
@@ -360,7 +364,7 @@ const Dark: TTheme = {
     hoverConnectBorder: "none",
 
     activeBackground: darkGrayLight,
-    activeBorder: "1px solid #CCCCCC",
+    activeBorder: `1px solid ${grayDarkStrong}`,
     activeConnectBackground: "rgba(255, 255, 255, 0.64)",
     activeConnectBorder: "none",
 
@@ -477,8 +481,8 @@ const Dark: TTheme = {
     indeterminateColor: white,
 
     disableArrowColor: grayDarkStrong,
-    disableBorderColor: "#545454",
-    disableFillColor: "#545454",
+    disableBorderColor: grayDarkMid,
+    disableFillColor: darkGrayLight,
     disableIndeterminateColor: grayDarkStrong,
 
     hoverBorderColor: grayDark,
@@ -509,12 +513,12 @@ const Dark: TTheme = {
     marginBeforeLabel: "8px",
 
     background: black,
-    disableBackground: "#545454",
+    disableBackground: darkGrayLight,
 
     fillColor: white,
     disableFillColor: grayDarkStrong,
 
-    borderColor: "#646464",
+    borderColor: grayDarkStrong,
     disableBorderColor: "none",
     hoverBorderColor: white,
   },
@@ -575,7 +579,7 @@ const Dark: TTheme = {
     lineHeight: "0.8",
     overflow: "hidden",
     color: black,
-    backgroundColor: "#F59931",
+    backgroundColor: darkStatusWarning,
     disableBackgroundColor: grayDark,
   },
 
@@ -627,7 +631,7 @@ const Dark: TTheme = {
     },
 
     closeButton: {
-      fillColor: "#9A9EA3",
+      fillColor: darkGrayDark,
     },
   },
 
@@ -650,7 +654,7 @@ const Dark: TTheme = {
 
   input: {
     color: white,
-    disableColor: "#6c6c6c",
+    disableColor: grayDarkStrong,
 
     backgroundColor: black,
     disableBackgroundColor: grayDarkStrong,
@@ -748,7 +752,7 @@ const Dark: TTheme = {
 
     tooltipTextColor: black,
 
-    iconColor: "#646464",
+    iconColor: grayDarkStrong,
     hoverIconColor: grayDark,
 
     hoverColor: gray,
@@ -789,7 +793,7 @@ const Dark: TTheme = {
     fontSize: "14px",
     fontWeight: "600",
 
-    iconColor: "#646464",
+    iconColor: grayDarkStrong,
     hoverIconColor: grayDark,
   },
 
@@ -808,7 +812,7 @@ const Dark: TTheme = {
   textInput: {
     fontWeight: "normal",
     placeholderColor: "rgba(255, 255, 255, 0.2)",
-    disablePlaceholderColor: "#6c6c6c",
+    disablePlaceholderColor: grayDarkStrong,
 
     transition: "all 0.2s ease 0s",
     appearance: "none",
@@ -980,7 +984,7 @@ const Dark: TTheme = {
         padding: "4px 16px",
         overflow: "hidden",
         color: black,
-        hoverColor: "#a4a4a4",
+        hoverColor: white,
         disableColor: grayDarkStrong,
       },
     },
@@ -1090,8 +1094,8 @@ const Dark: TTheme = {
     },
 
     imageContainer: {
-      backgroundImage: "#606060",
-      background: "#606060",
+      backgroundImage: grayDarkStrong,
+      background: grayDarkStrong,
       groupBackground: grayDarkMid,
       borderRadius: "50%",
       height: "100%",
@@ -1106,13 +1110,13 @@ const Dark: TTheme = {
     },
 
     administrator: {
-      fill: "#F59931",
+      fill: darkStatusWarning,
       stroke: darkBlack,
       color: black,
     },
 
     guest: {
-      fill: "#575757",
+      fill: darkIcon,
       stroke: darkBlack,
       color: black,
     },
@@ -1127,7 +1131,7 @@ const Dark: TTheme = {
       right: "0px",
       bottom: "0px",
       fill: black,
-      backgroundColor: "#b2b2b2",
+      backgroundColor: bigGrayDarkMid,
       borderRadius: "50%",
       height: "32px",
       width: "32px",
@@ -1259,10 +1263,6 @@ const Dark: TTheme = {
       },
     },
 
-    dropZone: {
-      border: `1px dashed ${grayDarkStrong}`,
-    },
-
     container: {
       miniPreview: {
         width: "160px",
@@ -1280,7 +1280,7 @@ const Dark: TTheme = {
       },
 
       button: {
-        background: "#b6b6b6",
+        background: grayDark,
         fill: grayDark,
         hoverFill: white,
         padding: "0 12px",
@@ -1316,7 +1316,7 @@ const Dark: TTheme = {
     zIndex: "400",
     background: black,
     borderRadius: "6px",
-    boxShadow: "0px 8px 16px 0px #040F1B29",
+    boxShadow: `0px 8px 16px 0px ${boxShadowDarkColor}`,
     border: `1px solid ${grayDarkStrong}`,
   },
 
@@ -1621,7 +1621,7 @@ const Dark: TTheme = {
     onHoverBackground: lightDarkGrayHover,
     titleColor: darkGrayDark,
     outlineColor: grayDarkStrong,
-    arrowColor: "#F6F9FC",
+    arrowColor: grayDarkText,
     disabledArrow: grayDarkStrong,
     weekdayColor: grayDark,
     accent: lightBlueMain,
@@ -1675,7 +1675,7 @@ const Dark: TTheme = {
       fill: white,
     },
 
-    headerBurgerColor: "#606060",
+    headerBurgerColor: darkGrayDark,
 
     verticalLine: `1px solid ${grayDarkStrong}`,
 
@@ -1700,7 +1700,7 @@ const Dark: TTheme = {
       width: "100%",
       height: "36px",
       padding: "0 12px",
-      background: "#1b1c1d",
+      background: black,
       marginBottom: "16px",
       tablet: {
         height: "44px",
@@ -1779,7 +1779,7 @@ const Dark: TTheme = {
     expanderColor: white,
     background: black,
     rootFolderTitleColor: darkGrayDark,
-    boxShadow: "0px 8px 16px 0px #040F1B29",
+    boxShadow: `0px 8px 16px 0px ${boxShadowDarkColor}`,
 
     icon: {
       fill: darkLink,
@@ -1803,8 +1803,8 @@ const Dark: TTheme = {
 
   header: {
     backgroundColor: darkGrayLight,
-    recoveryColor: "#4C4C4C",
-    linkColor: "#606060",
+    recoveryColor: darkGrayDark,
+    linkColor: darkGrayDark,
     productColor: white,
     height: "48px",
   },
@@ -1854,7 +1854,6 @@ const Dark: TTheme = {
     closeButtonWrapperPadding: "6px",
     closeButtonIcon: black,
     closeButtonSize: "12px",
-    closeButtonBg: "#a2a2a2",
 
     links: {
       iconColor: grayDark,
@@ -1929,10 +1928,10 @@ const Dark: TTheme = {
 
   peopleTableRow: {
     nameColor: white,
-    pendingNameColor: "#6f6f6f",
+    pendingNameColor: grayDark,
 
     sideInfoColor: grayDark,
-    pendingSideInfoColor: "#5a5a5a",
+    pendingSideInfoColor: grayDarkStrong,
   },
 
   filterInput: {
@@ -2210,7 +2209,6 @@ const Dark: TTheme = {
         background: "none",
         hoverBackground: darkGrayLight,
         borderColor: grayDarkStrong,
-        isOpenBorderColor: "#F97A0B",
         descriptionText: gray,
       },
       dropdownItem: {
@@ -2237,7 +2235,7 @@ const Dark: TTheme = {
 
     permanentSettings: {
       background: grayDarkStrong,
-      isPrivateIcon: "#35ad17",
+      isPrivateIcon: darkStatusPositive,
       descriptionColor: gray,
     },
 
@@ -2260,7 +2258,7 @@ const Dark: TTheme = {
         iconColor: lightStatusWarning,
         titleColor: lightStatusWarning,
         descriptionColor: gray,
-        linkColor: "#e8e8e9",
+        linkColor: grayDarkText,
       },
     },
 
@@ -2269,16 +2267,15 @@ const Dark: TTheme = {
         background: black,
         dropdownBorderColor: grayDarkStrong,
         hoverDropdownBorderColor: grayDark,
-        isOpenDropdownBorderColor: "#e8e8e9",
+        isOpenDropdownBorderColor: grayDarkText,
         arrowFill: grayDarkStrong,
       },
       folderInput: {
         background: black,
         borderColor: grayDarkStrong,
         hoverBorderColor: grayDark,
-        focusBorderColor: "#e8e8e9",
         rootLabelColor: gray,
-        iconFill: "#657177",
+        iconFill: darkGrayDark,
       },
     },
 
@@ -2287,10 +2284,10 @@ const Dark: TTheme = {
       deleteButton: {
         background: black,
         hoverBackground: black,
-        borderColor: black,
-        hoverBorderColor: "#fafafa",
+        borderColor: gray,
+        hoverBorderColor: lightDarkGrayHover,
         color: grayDark,
-        iconColor: "#e8e8e9",
+        iconColor: darkGrayDark,
       },
     },
 
@@ -2302,7 +2299,7 @@ const Dark: TTheme = {
 
     dropzone: {
       borderColor: grayDarkStrong,
-      linkMainColor: "#F97A0B",
+      linkMainColor: link,
       linkSecondaryColor: white,
       exstsColor: gray,
     },
@@ -2455,7 +2452,7 @@ const Dark: TTheme = {
 
     upload: {
       color: black,
-      tooltipColor: "#F5E9BA",
+      tooltipColor: darkToastInfo,
 
       shareButton: {
         color: gray,
@@ -2520,7 +2517,7 @@ const Dark: TTheme = {
     background: black,
     borderRadius: "6px",
     mobileBorderRadius: "6px 6px 0 0",
-    boxShadow: "0px 8px 16px 0px #040F1B29",
+    boxShadow: `0px 8px 16px 0px ${boxShadowDarkColor}`,
     padding: "6px 0px",
     border: `1px solid ${grayDarkStrong}`,
     devices: {
@@ -2731,7 +2728,7 @@ const Dark: TTheme = {
           color: darkLink,
           departmentColor: grayDark,
 
-          tooltipColor: "#F5E9BA",
+          tooltipColor: darkToastInfo,
 
           nameColor: white,
           pendingNameColor: grayDark,
@@ -2744,7 +2741,7 @@ const Dark: TTheme = {
           backgroundColor: black,
           linkColor: darkLink,
           departmentColor: grayDark,
-          tooltipColor: "#F5E9BA",
+          tooltipColor: darkToastInfo,
         },
         auditTrail: {
           sideColor: grayDark,
@@ -3051,7 +3048,7 @@ const Dark: TTheme = {
   },
   completedForm: {
     linkColor: white,
-    descriptionColor: "#ADADAD",
+    descriptionColor: darkGrayDark,
   },
 };
 

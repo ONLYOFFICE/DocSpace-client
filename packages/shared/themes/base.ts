@@ -103,6 +103,7 @@ const {
   dndDarkHover,
 
   onWhiteColor,
+  boxShadowColor,
 
   editorGreenColor,
   editorBlueColor,
@@ -1332,7 +1333,7 @@ export const getBaseTheme = () => {
       zIndex: "400",
       background: white,
       borderRadius: "6px",
-      boxShadow: "0px 8px 16px 0px #040F1B14",
+      boxShadow: `0px 8px 16px 0px ${boxShadowColor}`,
       border: "none",
     },
 
@@ -1793,7 +1794,7 @@ export const getBaseTheme = () => {
       expanderColor: black,
       background: white,
       rootFolderTitleColor: gray,
-      boxShadow: "0px 8px 16px 0px #040F1B14",
+      boxShadow: `0px 8px 16px 0px ${boxShadowColor}`,
 
       icon: {
         fill: link,
@@ -1802,16 +1803,16 @@ export const getBaseTheme = () => {
     },
 
     nav: {
-      backgroundColor: "#0F4071",
+      backgroundColor: lightBlueMain,
     },
 
     navItem: {
-      baseColor: "#7A95B0",
+      baseColor: lightSecondMain,
       activeColor: white,
-      separatorColor: "#3E668D",
+      separatorColor: lightSecondMainHover,
 
       wrapper: {
-        hoverBackground: "#0d3760",
+        hoverBackground: lightBlueMainHover,
       },
     },
 
@@ -1868,7 +1869,6 @@ export const getBaseTheme = () => {
       closeButtonWrapperPadding: "0px",
       closeButtonIcon: white,
       closeButtonSize: "17px",
-      closeButtonBg: "transparent",
 
       links: {
         iconColor: lightIcons,
@@ -2226,7 +2226,6 @@ export const getBaseTheme = () => {
           background: "none",
           hoverBackground: grayLight,
           borderColor: grayLightMid,
-          isOpenBorderColor: lightSecondMain,
           descriptionText: gray,
         },
         dropdownItem: {
@@ -2292,9 +2291,8 @@ export const getBaseTheme = () => {
           background: white,
           borderColor: grayStrong,
           hoverBorderColor: gray,
-          focusBorderColor: "#35abd8",
           rootLabelColor: gray,
-          iconFill: "#657177",
+          iconFill: lightGrayDark,
         },
       },
 
@@ -2535,7 +2533,7 @@ export const getBaseTheme = () => {
       background: white,
       borderRadius: "6px",
       mobileBorderRadius: "6px 6px 0 0",
-      boxShadow: "0px 8px 16px 0px #040F1B14",
+      boxShadow: `0px 8px 16px 0px ${boxShadowColor}`,
       padding: "6px 0px",
       border: "none",
       devices: {
@@ -3068,7 +3066,7 @@ export const getBaseTheme = () => {
     },
 
     completedForm: {
-      linkColor: "#4781D1",
+      linkColor: lightBlueMain,
       descriptionColor: gray,
     },
   };

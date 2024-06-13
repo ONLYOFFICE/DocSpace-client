@@ -70,7 +70,7 @@ export const globalColors = {
   link: "#316DAA",
   darkLink: "#E06A1B",
   blueLightMid: "#265A8F",
-  // grayDarkMid: "#B5B5B5",
+  bigGrayDarkMid: "#B5B5B5",
 
   lightToastDone: "#E3F7BE",
   darkToastDone: "#9DE051",
@@ -88,6 +88,8 @@ export const globalColors = {
   dndDarkHover: "rgba(204, 184, 102, 0.2)",
 
   onWhiteColor: "rgba(0, 0, 0, 0.1)",
+  boxShadowColor: "#040F1B14",
+  boxShadowDarkColor: "#040F1B29",
 
   editorGreenColor: "#40865C",
   editorBlueColor: "#446995",

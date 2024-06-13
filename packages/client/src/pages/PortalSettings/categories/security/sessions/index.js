@@ -80,9 +80,9 @@ const Sessions = ({
   displayName,
   clearSelection,
   setDataFromSocket,
-  connections,
   updateAllSessions,
   platformData,
+  selection,
   fetchData,
   isLoading,
   viewAs,
@@ -180,7 +180,7 @@ const Sessions = ({
           t={t}
           visible={logoutAllDialogVisible}
           isLoading={isLoading}
-          connections={connections}
+          selection={selection}
           displayName={displayName}
           onClose={() => setLogoutAllDialogVisible(false)}
           onLogoutAllSessions={onClickLogoutAllSessions}
@@ -200,10 +200,10 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     displayName,
     clearSelection,
     setDataFromSocket,
-    connections,
     updateAllSessions,
     platformData,
     fetchData,
+    selection,
     isLoading,
     onClickLogoutAllSessions,
     onClickLogoutAllExceptThis,
@@ -228,9 +228,9 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     displayName,
     clearSelection,
     setDataFromSocket,
-    connections,
     updateAllSessions,
     platformData,
+    selection,
     fetchData,
     viewAs,
     setViewAs,

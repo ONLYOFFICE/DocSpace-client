@@ -451,7 +451,7 @@
   "Website": "Pagină web",
   "Yes": "Da",
   "Yesterday": "Ieri",
-  "You": "Dvs"
+  "You": "Dvs",
   "ConflictResolveDescription": "Fișierul cu numele <1>{{file}}</1> există deja în dosarul <1>{{folder}}</1>.",
   "ConflictResolveDescriptionFiles": "{{filesCount}} fișiere cu același nume exista deja în folderul<1>{{folder}}</1>.",
   "ConflictResolveSelectAction": "Selectați acțiune:",

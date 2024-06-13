@@ -443,7 +443,7 @@
   "Website": "අඩවිය",
   "Yes": "ඔව්",
   "Yesterday": "ඊයේ",
-  "You": "ඔබ"
+  "You": "ඔබ",
   "ConflictResolveDescription": "<1>{{file}}</1> නම සහිත ගොනුවක් දැනටමත් <1>{{folder}}</1> බහාලුමේ පවතී.",
   "ConflictResolveDescriptionFiles": "සමාන නම සහිත ලේඛන {{filesCount}} ක් දැනටමත් <1>{{folder}}</1> බහාලුමේ පවතී.",
   "ConflictResolveSelectAction": "ක්‍රියාමාර්ගය තෝරන්න:",

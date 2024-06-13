@@ -451,7 +451,7 @@
   "Website": "İnternet Sitesi",
   "Yes": "Evet",
   "Yesterday": "Dün",
-  "You": "Siz"
+  "You": "Siz",
   "ConflictResolveDescription": "<1>{{file}}</1> isimli dosya <1>{{folder}}</1> klasöründe zaten mevcut.",
   "ConflictResolveDescriptionFiles": "{{filesCount}} belgeleri, <1>{{folder}}</1> klasöründe aynı isimle zaten mevcut.",
   "ConflictResolveSelectAction": "Lütfen işlemi seçin:",

@@ -451,7 +451,7 @@
   "Website": "Веб-сайт",
   "Yes": "Так",
   "Yesterday": "Вчора",
-  "You": "Ви"
+  "You": "Ви",
   "ConflictResolveDescription": "Файл із іменем <1>{{file}}</1> уже існує в папці <1>{{folder}}</1>.",
   "ConflictResolveDescriptionFiles": "Документи ({{filesCount}}) з таким ім'ям вже існують у папці <1>{{folder}}</1>.",
   "ConflictResolveSelectAction": "Оберіть дію:",

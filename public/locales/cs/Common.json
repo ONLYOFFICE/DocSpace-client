@@ -453,7 +453,6 @@
   "Yes": "Ano",
   "Yesterday": "Včera",
   "You": "Vy",
-  "You": "Vy"
   "ConflictResolveDescription": "Soubor s názvem <1>{{file}}</1> již existuje ve složce <1>{{folder}}</1>.",
   "ConflictResolveDescriptionFiles": "Ve složce <1>{{folder}}</1> již existuje {{filesCount}} dokumentů se stejným názvem.",
   "ConflictResolveSelectAction": "Prosím, vyberte akci:",

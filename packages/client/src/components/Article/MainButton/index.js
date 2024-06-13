@@ -372,23 +372,23 @@ const ArticleMainButtonContent = (props) => {
       // };
 
       const uploadFromDocSpace = {
-            id: "actions_upload-from-docspace",
-            className: "main-button_drop-down",
-            icon: ActionsUploadReactSvgUrl,
+        id: "actions_upload-from-docspace",
+        className: "main-button_drop-down",
+        icon: ActionsUploadReactSvgUrl,
         label: t("Common:FromPortal", { productName: PRODUCT_NAME }),
-            key: "actions_upload-from-docspace",
+        key: "actions_upload-from-docspace",
         disabled: false,
-            onClick: () =>
-              onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.PDF),
+        onClick: () =>
+          onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.PDF),
       };
 
       const uploadFormDevice = {
-            id: "actions_upload-from-device",
-            className: "main-button_drop-down",
-            icon: ActionsUploadReactSvgUrl,
-            label: t("Common:FromDevice"),
-            key: "actions_upload-from-device",
-            onClick: onUploadPDFFilesClick,
+        id: "actions_upload-from-device",
+        className: "main-button_drop-down",
+        icon: ActionsUploadReactSvgUrl,
+        label: t("Common:FromDevice"),
+        key: "actions_upload-from-device",
+        onClick: onUploadPDFFilesClick,
         disabled: false,
       };
 
@@ -624,7 +624,7 @@ const ArticleMainButtonContent = (props) => {
               id: "invite_doc-space-administrator",
               className: "main-button_drop-down",
               icon: PersonAdminReactSvgUrl,
-              label: t("Common:FromPortal", { productName: PRODUCT_NAME }),
+              label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
               onClick: onInvite,
               action: EmployeeType.Admin,
               key: "administrator",

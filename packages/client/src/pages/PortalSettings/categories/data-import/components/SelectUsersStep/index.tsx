@@ -45,8 +45,14 @@ import {
   InjectedSelectUsersStepProps,
 } from "../../types";
 
+const REFRESH_TIMEOUT = 100;
+const PAGING_BREAKPOINT = 25;
+
 const SelectUsersStep = (props: SelectUsersStepProps) => {
   const {
+    canDisable,
+    shouldSetUsers,
+
     t,
     incrementStep,
     decrementStep,
@@ -55,6 +61,8 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
     setSearchValue,
     checkedUsers,
     users,
+    areCheckedUsersEmpty,
+    setResultUsers,
 
     quotaCharacteristics,
   } = props as InjectedSelectUsersStepProps;
@@ -100,19 +108,35 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
     checkedUsers.withEmail.filter((user) => !user.isDuplicate).length +
     checkedUsers.withoutEmail.length;
 
+  const handleStepIncrement = shouldSetUsers
+    ? () => {
+        setResultUsers();
+        incrementStep();
+      }
+    : incrementStep;
+
+  const Buttons = (
+    <SaveCancelButtons
+      className="save-cancel-buttons"
+      onSaveClick={handleStepIncrement}
+      onCancelClick={decrementStep}
+      saveButtonLabel={t("Settings:NextStep")}
+      cancelButtonLabel={t("Common:Back")}
+      showReminder
+      displaySettings
+      saveButtonDisabled={
+        canDisable &&
+        (areCheckedUsersEmpty ||
+          (quota.max ? totalUsedUsers > quota.max : false))
+      }
+    />
+  );
+
   return (
     <Wrapper>
       {withEmailUsers.length > 0 ? (
         <>
-          <SaveCancelButtons
-            className="save-cancel-buttons"
-            onSaveClick={incrementStep}
-            onCancelClick={decrementStep}
-            saveButtonLabel={t("Settings:NextStep")}
-            cancelButtonLabel={t("Common:Back")}
-            showReminder
-            displaySettings
-          />
+          {Buttons}
 
           {quota.max && (
             <UsersInfoBlock
@@ -129,20 +153,21 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
             placeholder={t("Common:Search")}
             value={searchValue}
             onChange={onChangeInput}
-            refreshTimeout={100}
+            refreshTimeout={REFRESH_TIMEOUT}
             onClearSearch={onClearSearchInput}
             size={InputSize.base}
           />
 
           <AccountsTable t={t} accountsData={filteredAccounts} />
 
-          {withEmailUsers.length > 25 && filteredAccounts.length > 0 && (
-            <AccountsPaging
-              t={t}
-              numberOfItems={withEmailUsers.length}
-              setDataPortion={handleDataChange}
-            />
-          )}
+          {withEmailUsers.length > PAGING_BREAKPOINT &&
+            filteredAccounts.length > 0 && (
+              <AccountsPaging
+                t={t}
+                numberOfItems={withEmailUsers.length}
+                setDataPortion={handleDataChange}
+              />
+            )}
         </>
       ) : (
         <Text fontWeight={600} lineHeight="20px" className="mb-17">
@@ -150,17 +175,7 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
         </Text>
       )}
 
-      {filteredAccounts.length > 0 && (
-        <SaveCancelButtons
-          className="save-cancel-buttons"
-          onSaveClick={incrementStep}
-          onCancelClick={decrementStep}
-          saveButtonLabel={t("Settings:NextStep")}
-          cancelButtonLabel={t("Common:Back")}
-          showReminder
-          displaySettings
-        />
-      )}
+      {filteredAccounts.length > 0 && Buttons}
     </Wrapper>
   );
 };
@@ -175,6 +190,8 @@ export default inject<TStore>(({ importAccountsStore, currentQuotaStore }) => {
     setSearchValue,
     cancelMigration,
     checkedUsers,
+    areCheckedUsersEmpty,
+    setResultUsers,
   } = importAccountsStore;
 
   const { quotaCharacteristics } = currentQuotaStore;
@@ -188,6 +205,8 @@ export default inject<TStore>(({ importAccountsStore, currentQuotaStore }) => {
     setSearchValue,
     cancelMigration,
     checkedUsers,
+    areCheckedUsersEmpty,
+    setResultUsers,
 
     quotaCharacteristics,
   };

@@ -112,6 +112,8 @@ export type TQuota = TPaymentFeature;
 
 export interface SelectUsersStepProps {
   t: TFunciton;
+  canDisable: boolean;
+  shouldSetUsers: boolean;
 }
 
 export interface InjectedSelectUsersStepProps extends SelectUsersStepProps {
@@ -123,6 +125,8 @@ export interface InjectedSelectUsersStepProps extends SelectUsersStepProps {
   cancelMigration: TStore["importAccountsStore"]["cancelMigration"];
   checkedUsers: TStore["importAccountsStore"]["checkedUsers"];
   users: TStore["importAccountsStore"]["users"];
+  areCheckedUsersEmpty: TStore["importAccountsStore"]["areCheckedUsersEmpty"];
+  setResultUsers: TStore["importAccountsStore"]["setResultUsers"];
 
   quotaCharacteristics: TStore["currentQuotaStore"]["quotaCharacteristics"];
 }

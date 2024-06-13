@@ -3146,14 +3146,6 @@ const Dark: TTheme = {
     background: black,
   },
 
-  submenu: {
-    lineColor: "#474747",
-    backgroundColor: "#333",
-    activeTextColor: "#FFFFFF",
-    textColor: "#ADADAD",
-    bottomLineColor: "#E06A1B",
-  },
-
   tabs: {
     gradientColor: black,
     lineColor: "#474747",

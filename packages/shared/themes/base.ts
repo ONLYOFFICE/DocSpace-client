@@ -3170,14 +3170,6 @@ export const getBaseTheme = () => {
       background: white,
     },
 
-    submenu: {
-      lineColor: "#eceef1",
-      backgroundColor: white,
-      textColor: "#657077",
-      activeTextColor: "#316DAA",
-      bottomLineColor: "#316DAA",
-    },
-
     tabs: {
       gradientColor: white,
       lineColor: "#eceef1",

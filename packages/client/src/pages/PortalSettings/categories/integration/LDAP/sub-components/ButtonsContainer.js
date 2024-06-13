@@ -46,6 +46,8 @@ const ButtonContainer = ({
   isUIDisabled,
 
   isMobileView,
+
+  hasProgressError,
 }) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
@@ -65,7 +67,8 @@ const ButtonContainer = ({
     );
   }, [isMobileView]);
 
-  const saveDisabled = !isLdapEnabled || isUIDisabled || !hasChanges;
+  const saveDisabled =
+    (!isLdapEnabled || isUIDisabled || !hasChanges) && !hasProgressError;
   const resetDisabled = !isLdapEnabled || isUIDisabled || isDefaultSettings;
 
   console.log("ButtonContainer", {
@@ -93,7 +96,7 @@ const ButtonContainer = ({
         disableRestoreToDefault={resetDisabled}
         additionalClassSaveButton="ldap-save"
         additionalClassCancelButton="ldap-reset"
-        showReminder={false}
+        showReminder={null}
         getTopComponent={getTopComponent}
       />
     </Box>
@@ -109,11 +112,15 @@ export default inject(({ settingsStore, ldapStore }) => {
 
     isLdapEnabled,
     isUIDisabled,
+
+    progressStatus,
   } = ldapStore;
 
   const { currentDeviceType } = settingsStore;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
+
+  const { error } = progressStatus;
 
   return {
     saveLdapSettings: save,
@@ -125,5 +132,6 @@ export default inject(({ settingsStore, ldapStore }) => {
     isUIDisabled,
 
     isMobileView,
+    hasProgressError: !!error,
   };
 })(observer(ButtonContainer));

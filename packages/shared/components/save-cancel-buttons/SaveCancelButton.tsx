@@ -117,7 +117,7 @@ const SaveCancelButtons = ({
           tabIndex={tabIndexSaveButton}
           className={classNameSave}
           size={buttonSize}
-          isDisabled={!showReminder || saveButtonDisabled}
+          isDisabled={saveButtonDisabled || showReminder === false}
           primary
           onClick={onSaveClick}
           label={saveButtonLabel}

@@ -69,4 +69,5 @@ export interface ArticleItemProps {
   folderId?: string;
   badgeTitle?: string;
   $currentColorScheme?: TColorScheme;
+  title?: string;
 }

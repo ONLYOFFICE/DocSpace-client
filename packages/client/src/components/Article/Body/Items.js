@@ -174,7 +174,7 @@ const Item = ({
         labelBadge={labelBadge}
         onClickBadge={onBadgeClick}
         iconBadge={iconBadge}
-        badgeTitle={labelBadge ? "" : t("RecycleBinAction")}
+        badgeTitle={labelBadge ? "" : t("EmptyRecycleBin")}
         $currentColorScheme={currentColorScheme}
       />
     </StyledDragAndDrop>

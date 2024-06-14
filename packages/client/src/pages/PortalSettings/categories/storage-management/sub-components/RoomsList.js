@@ -53,6 +53,7 @@ const RoomsListComponent = (props) => {
   const onClickRooms = () => {
     const defaultFilter = RoomsFilter.getDefault();
     roomFilterData.pageCount = defaultFilter.pageCount;
+    roomFilterData.provider = defaultFilter.provider;
 
     const urlFilter = roomFilterData.toUrlParams();
 

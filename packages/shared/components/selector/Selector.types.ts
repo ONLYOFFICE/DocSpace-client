@@ -173,6 +173,8 @@ export interface EmptyScreenProps {
   withSearch: boolean;
 
   items: TSelectorItem[];
+
+  inputItemVisible: boolean;
 }
 
 type TSelectorEmptyScreen = {
@@ -356,6 +358,7 @@ export type BodyProps = TSelectorBreadCrumbs &
 
     isMultiSelect: boolean;
 
+    inputItemVisible: boolean;
     setInputItemVisible: (value: boolean) => void;
 
     items: TSelectorItem[];
@@ -416,11 +419,14 @@ type TSelectorItemEmpty = {
   name?: undefined;
   isCreateNewItem?: undefined;
   onCreateClick?: undefined;
+  hotkey?: undefined;
   onBackClick?: undefined;
+  dropDownItems?: undefined;
   isInputItem?: undefined;
   defaultInputValue?: undefined;
   onAcceptInput?: undefined;
   onCancelInput?: undefined;
+  placeholder?: undefined;
 };
 
 export type TSelectorItemUser = MergeTypes<
@@ -494,7 +500,10 @@ export type TSelectorItemNew = MergeTypes<
   TSelectorItemEmpty,
   {
     isCreateNewItem: boolean;
-    onCreateClick: VoidFunction;
+    hotkey?: string;
+    dropDownItems?: React.ReactElement[];
+    onCreateClick?: VoidFunction;
+
     onBackClick: VoidFunction;
   }
 >;
@@ -506,6 +515,8 @@ export type TSelectorItemInput = MergeTypes<
     defaultInputValue: string;
     icon?: string;
     color?: string;
+    roomType?: RoomsType;
+    placeholder?: string;
 
     onAcceptInput: (value: string) => void;
     onCancelInput: VoidFunction;
@@ -545,6 +556,7 @@ export type Data = {
     isGroup?: boolean,
   ) => React.ReactNode | null;
   setInputItemVisible: (value: boolean) => void;
+  inputItemVisible: boolean;
 };
 
 export interface ItemProps {

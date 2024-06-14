@@ -80,6 +80,8 @@ public class LocalesTest
     public List<ParseJsonError> ParseJsonErrors { get; set; }
     public static string ConvertPathToOS { get; private set; }
 
+
+    public List<string> ForbiddenElements { get { return new List<string>() { "ONLYOFFICE", "DOCSPACE" }; } }
     //public List<JsonEncodingError> WrongEncodingJsonErrors { get; set; }
 
     private static readonly string _md5ExcludesPath = Path.GetFullPath(Utils.ConvertPathToOS("../../../md5-excludes.json"));
@@ -625,7 +627,7 @@ public class LocalesTest
             {
                 Language = g.Key,
                 TranslationsWithVariables = g.ToList()
-                    .SelectMany(t => t.Translations)
+                    .SelectMany(t => t.Translations.Select(k => new TranslationItem($"{t.FileName}:{k.Key}", k.Value)))
                     //.Where(k => k.Value.IndexOf("{{") != -1)
                     .Select(t => new
                     {
@@ -811,6 +813,116 @@ public class LocalesTest
 
     [Test, Order(13)]
     [Category("Locales")]
+    public void ForbiddenValueElementsTest()
+    {
+        var message = $"Next keys have forbidden values `{string.Join(",", ForbiddenElements)}`:\r\n\r\n";
+
+
+        var exists = false;
+
+        var i = 0;
+
+        foreach (var module in ModuleFolders)
+        {
+            if (module.AvailableLanguages == null)
+                continue;
+
+            foreach (var lng in module.AvailableLanguages)
+            {
+                var translationItems = lng.Translations.Where(f => ForbiddenElements.Any(elem => f.Value.ToUpper().Contains(elem))).ToList();
+
+                if (!translationItems.Any())
+                    continue;
+
+                exists = true;
+
+                message += $"{++i}. Language '{lng.Language}' (Count: {translationItems.Count}). Path '{lng.Path}' " +
+                    $"Keys:\r\n\r\n";
+
+                var keys = translationItems.Select(t => t.Key).ToList();
+
+                message += string.Join("\r\n", keys) + "\r\n\r\n";
+
+            }
+        }
+        foreach (var lng in CommonTranslations)
+        {
+            var translationItems = lng.Translations.Where(f => ForbiddenElements.Any(elem => f.Value.ToUpper().Contains(elem))).ToList();
+
+            if (!translationItems.Any())
+                continue;
+
+            exists = true;
+
+            message += $"{++i}. Language '{lng.Language}' (Count: {translationItems.Count}). Path '{lng.Path}' " +
+                $"Keys:\r\n\r\n";
+
+            var keys = translationItems.Select(t => t.Key).ToList();
+
+            message += string.Join("\r\n", keys) + "\r\n\r\n";
+        }
+
+        Assert.AreEqual(false, exists, message);
+    }
+
+    [Test, Order(14)]
+    [Category("Locales")]
+    public void ForbiddenKeysElementsTest()
+    {
+        var message = $"Next keys have forbidden elements in names `{string.Join(",", ForbiddenElements)}`:\r\n\r\n";
+
+
+        var exists = false;
+
+        var i = 0;
+
+        foreach (var module in ModuleFolders)
+        {
+            if (module.AvailableLanguages == null)
+                continue;
+
+            foreach (var lng in module.AvailableLanguages)
+            {
+                var translationItems = lng.Translations.Where(f => ForbiddenElements.Any(elem => f.Key.ToUpper().Contains(elem))).ToList();
+
+
+                if (!translationItems.Any())
+                    continue;
+
+                exists = true;
+
+                message += $"{++i}. Language '{lng.Language}' (Count: {translationItems.Count}). Path '{lng.Path}' " +
+                    $"Keys:\r\n\r\n";
+
+                var keys = translationItems.Select(t => t.Key).ToList();
+
+                message += string.Join("\r\n", keys) + "\r\n\r\n";
+
+            }
+        }
+
+        foreach (var lng in CommonTranslations)
+        {
+            var translationItems = lng.Translations.Where(f => ForbiddenElements.Any(elem => f.Key.ToUpper().Contains(elem))).ToList();
+
+            if (!translationItems.Any())
+                continue;
+
+            exists = true;
+
+            message += $"{++i}. Language '{lng.Language}' (Count: {translationItems.Count}). Path '{lng.Path}' " +
+                $"Keys:\r\n\r\n";
+
+            var keys = translationItems.Select(t => t.Key).ToList();
+
+            message += string.Join("\r\n", keys) + "\r\n\r\n";
+        }
+
+        Assert.AreEqual(false, exists, message);
+    }
+
+    [Test, Order(15)]
+    [Category("Locales")]
     public void EmptyValueKeysTest()
     {
         // Uncomment if new keys are available
@@ -913,7 +1025,7 @@ public class LocalesTest
         Assert.AreEqual(false, exists, message);
     }
 
-    [Test, Order(14)]
+    [Test, Order(16)]
     [Category("Locales")]
     public void NotTranslatedKeysTest()
     {
@@ -960,7 +1072,7 @@ public class LocalesTest
         Assert.AreEqual(false, exists, message);
     }
 
-    [Test, Order(15)]
+    [Test, Order(17)]
     [Category("Locales")]
     public void NotTranslatedCommonKeysTest()
     {
@@ -998,7 +1110,7 @@ public class LocalesTest
         Assert.AreEqual(false, exists, message);
     }
 
-    [Test, Order(16)]
+    [Test, Order(18)]
     [Category("Locales")]
     public void NotAllLanguageTranslatedTest()
     {
@@ -1055,7 +1167,7 @@ public class LocalesTest
         Assert.AreEqual(0, incompleteList.Count, message);
     }
 
-    [Test, Order(17)]
+    [Test, Order(19)]
     [Category("SpellCheck")]
     public void SpellCheckTest()
     {

@@ -28,7 +28,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { DOCSPACE } from "@docspace/shared/constants";
+import { DOCSPACE, PRODUCT_NAME } from "@docspace/shared/constants";
 import { inject, observer } from "mobx-react";
 
 import { mobile, tablet } from "@docspace/shared/utils/device";
@@ -144,12 +144,12 @@ const PortalIntegration = (props) => {
   const presetsData = [
     {
       title: DOCSPACE,
-      description: t("DocspaceDescription"),
+      description: t("DocspaceDescription", { productName: PRODUCT_NAME }),
       image: theme.isBase ? DocspaceImg : DocspaceImgDark,
       handleOnClick: navigateToDocspace,
     },
     {
-      title: t("Files:PublicRoom"),
+      title: t("Common:PublicRoom"),
       description: t("PublicRoomDescription"),
       image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,
       handleOnClick: navigateToPublicRoom,
@@ -180,7 +180,7 @@ const PortalIntegration = (props) => {
     },
     {
       title: t("Common:Custom"),
-      description: t("CustomDescription"),
+      description: t("CustomDescription", { productName: PRODUCT_NAME }),
       image: theme.isBase ? CustomImg : CustomImgDark,
       handleOnClick: navigateToCustom,
     },
@@ -206,7 +206,9 @@ const PortalIntegration = (props) => {
   return (
     <SDKContainer>
       <CategoryDescription>
-        <Text className="sdk-description">{t("SDKDescription")}</Text>
+        <Text className="sdk-description">
+          {t("SDKDescription", { productName: PRODUCT_NAME })}
+        </Text>
         <Link
           color={currentColorScheme?.main?.accent}
           fontSize="13px"
@@ -218,9 +220,9 @@ const PortalIntegration = (props) => {
         </Link>
         <CSP t={t} />
       </CategoryDescription>
-      {/* <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
-      <Text lineHeight="20px" color={theme.sdkPresets?.secondaryColor}> */}
-      <CategoryHeader>{t("SelectModeEmbedding")}</CategoryHeader>
+      <CategoryHeader>
+        {t("SelectModeEmbedding", { productName: PRODUCT_NAME })}
+      </CategoryHeader>
       <Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
         {t("InitializeSDK")}
       </Text>

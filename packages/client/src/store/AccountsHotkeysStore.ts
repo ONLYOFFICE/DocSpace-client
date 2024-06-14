@@ -209,16 +209,27 @@ class AccountsHotkeysStore {
     }
   };
 
+  deselectAll = () => {
+    const { setSelected } = this.isAccountsPage
+      ? this.peopleStore.selectionStore
+      : this.peopleStore.groupsStore;
+
+    this.elemOffset = 0;
+    setSelected("none");
+  };
+
+  selectAll = () => {
+    const { selectAll } = this.isAccountsPage
+      ? this.peopleStore.selectionStore
+      : this.peopleStore.groupsStore;
+
+    selectAll();
+  };
+
   activateHotkeys = (e: KeyboardEvent) => {
     const infiniteLoaderComponent = document.getElementsByClassName(
       "ReactVirtualized__List",
     )[0] as HTMLElement;
-
-    const isAccountsPage =
-      window.location.pathname.includes("/accounts") ||
-      window.location.pathname.includes("accounts/people");
-
-    if (!isAccountsPage) return e;
 
     if (infiniteLoaderComponent) {
       infiniteLoaderComponent.tabIndex = -1;

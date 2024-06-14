@@ -28,7 +28,7 @@
 "use client";
 
 import React from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 import { mobile } from "@docspace/shared/utils/device";
 import { getLogoUrl } from "@docspace/shared/utils/common";
@@ -67,11 +67,12 @@ interface SimpleNavProps {
 }
 
 const SimpleNav = ({ systemTheme }: SimpleNavProps) => {
-  const isDark = systemTheme === ThemeKeys.DarkStr;
+  const theme = useTheme();
+  const isDark = !theme.isBase;
   const logoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, isDark);
 
   return (
-    <StyledSimpleNav id="login-header" theme={isDark ? Dark : Base}>
+    <StyledSimpleNav id="login-header">
       <img src={logoUrl} alt="logo-url" />
       <LanguageComboboxWrapper />
     </StyledSimpleNav>

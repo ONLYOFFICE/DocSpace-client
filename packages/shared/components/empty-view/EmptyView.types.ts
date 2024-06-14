@@ -5,6 +5,7 @@ export type EmptyViewItemType = {
   icon: React.ReactElement;
   onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   disabled?: boolean;
+  model?: ContextMenuModel[];
 };
 
 export interface EmptyViewItemProps extends Omit<EmptyViewItemType, "key"> {}

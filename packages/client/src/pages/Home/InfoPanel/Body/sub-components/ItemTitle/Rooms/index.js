@@ -68,6 +68,7 @@ const RoomsItemHeader = ({
   const canInviteUserInRoomAbility = security?.EditAccess;
   const showPlanetIcon =
     (selection.roomType === RoomsType.PublicRoom ||
+      selection.roomType === RoomsType.FormRoom ||
       selection.roomType === RoomsType.CustomRoom) &&
     hasLinks;
 

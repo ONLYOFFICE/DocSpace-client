@@ -26,17 +26,12 @@
 
 import React from "react";
 import { withTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { TableRow, TableCell } from "@docspace/shared/components/table";
+import { TableCell } from "@docspace/shared/components/table";
 import { Link } from "@docspace/shared/components/link";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { inject, observer } from "mobx-react";
 
-import withContent from "SRC_DIR/HOCs/withPeopleContent";
 import * as Styled from "./index.styled";
-import Badges from "../../Badges";
-import { Base } from "@docspace/shared/themes";
-import { Events } from "@docspace/shared/enums";
 import { Text } from "@docspace/shared/components/text";
 import { Avatar } from "@docspace/shared/components/avatar";
 
@@ -46,7 +41,6 @@ const GroupsTableItem = ({
   itemIndex,
   theme,
   hideColumns,
-  selection,
   bufferSelection,
   getGroupContextOptions,
   openGroupAction,
@@ -55,8 +49,8 @@ const GroupsTableItem = ({
   changeGroupSelection,
   changeGroupContextSelection,
   selectRow,
+  isChecked,
 }) => {
-  const isChecked = selection.includes(item);
   const isActive = bufferSelection?.id === item.id;
 
   const onChange = () => {
@@ -162,7 +156,6 @@ const GroupsTableItem = ({
 };
 
 export default inject(({ peopleStore }) => ({
-  selection: peopleStore.groupsStore.selection,
   bufferSelection: peopleStore.groupsStore.bufferSelection,
   getGroupContextOptions: peopleStore.groupsStore.getGroupContextOptions,
   openGroupAction: peopleStore.groupsStore.openGroupAction,

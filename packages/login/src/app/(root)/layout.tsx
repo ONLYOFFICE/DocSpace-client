@@ -67,10 +67,6 @@ export default async function Layout({
 
   const isRegisterContainerVisible = objectSettings?.enabledJoin;
 
-  const isDark = systemTheme === ThemeKeys.DarkStr;
-
-  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, isDark);
-
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <SimpleNav systemTheme={systemTheme} />
@@ -85,7 +81,6 @@ export default async function Layout({
               isRegisterContainerVisible={isRegisterContainerVisible}
             >
               <GreetingContainer
-                logoUrl={logoUrl}
                 greetingSettings={objectSettings?.greetingSettings}
               />
               <FormWrapper id="login-form">{children}</FormWrapper>

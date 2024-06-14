@@ -29,7 +29,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import FilesSelector from "@docspace/shared/selectors/Files";
 import { toastr } from "@docspace/shared/components/toast";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -386,9 +386,9 @@ const FilesSelectorWrapper = ({
         isMove || isCopy || isRestore ? "select-file-modal-cancel" : ""
       }
       getFilesArchiveError={getFilesArchiveError}
-      withCreateFolder={
-        (isMove || isCopy || isRestore || isRestoreAll) ?? false
-      }
+      withCreate={(isMove || isCopy || isRestore || isRestoreAll) ?? false}
+      // createDefineRoomLabel="New filling from room"
+      // createDefineRoomType={RoomsType.FormRoom}
     />
   );
 };

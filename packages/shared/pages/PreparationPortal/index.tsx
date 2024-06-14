@@ -38,6 +38,7 @@ import {
   reachingSecondBoundary,
   reachingThirdBoundary,
 } from "./PreparationPortal.utils";
+import { PRODUCT_NAME } from "../../constants";
 
 const firstBound = 10;
 const secondBound = 63;
@@ -115,7 +116,9 @@ const PreparationPortal = (props: IPreparationPortal) => {
                 <Text className="preparation-portal_percent">{`${percent} %`}</Text>
               </div>
               <Text className="preparation-portal_text">
-                {t("PreparationPortalDescription")}
+                {t("PreparationPortalDescription", {
+                  productName: PRODUCT_NAME,
+                })}
               </Text>
             </ColorTheme>
           )}

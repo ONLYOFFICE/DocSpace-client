@@ -1,4 +1,4 @@
 {
-  "PortalRestoring": "Restauración de DocSpace",
-  "PreparationPortalDescription": "Una vez terminado el proceso de restauración, usted será redirigido a su DocSpace."
+  "PortalRestoring": "Restauración de {{productName}}",
+  "PreparationPortalDescription": "Una vez terminado el proceso de restauración, usted será redirigido a su {{productName}}."
 }

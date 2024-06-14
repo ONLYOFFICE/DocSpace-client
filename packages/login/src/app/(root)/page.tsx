@@ -54,6 +54,8 @@ async function Page({
             cookieSettingsEnabled={settings?.cookieSettingsEnabled}
             clientId={clientId}
             client={client as INoAuthClientProps}
+            reCaptchaPublicKey={settings?.recaptchaPublicKey}
+            reCaptchaType={settings?.recaptchaType}
           />
           {!clientId && <ThirdParty />}
           {settings.enableAdmMess && <RecoverAccess />}

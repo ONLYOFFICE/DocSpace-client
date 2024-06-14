@@ -36,6 +36,7 @@ import React, {
 } from "react";
 import { useTranslation } from "react-i18next";
 import ReCAPTCHA from "react-google-recaptcha";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useTheme } from "styled-components";
 import { useSearchParams, useRouter } from "next/navigation";
 
@@ -49,6 +50,7 @@ import { thirdPartyLogin } from "@docspace/shared/api/user";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import api from "@docspace/shared/api";
+import { RecaptchaType } from "@docspace/shared/enums";
 
 import { LoginFormProps } from "@/types";
 import { getEmailFromInvitation } from "@/utils";
@@ -67,6 +69,7 @@ const LoginForm = ({
   reCaptchaPublicKey,
   clientId,
   client,
+  reCaptchaType,
 }: LoginFormProps) => {
   const { isLoading, isModalOpen } = useContext(LoginValueContext);
   const { setIsLoading } = useContext(LoginDispatchContext);
@@ -109,6 +112,7 @@ const LoginForm = ({
   const [isCaptchaError, setIsCaptchaError] = useState(false);
 
   const captchaRef = useRef<ReCAPTCHA>(null);
+  const hCaptchaRef = useRef<HCaptcha>(null);
 
   useLayoutEffect(() => {
     const email = getEmailFromInvitation(loginData);
@@ -116,6 +120,7 @@ const LoginForm = ({
     setIdentifier(email);
     setEmailFromInvitation(email);
   }, [loginData]);
+
   const authCallback = useCallback(
     async (profile: string) => {
       localStorage.removeItem("profile");
@@ -205,6 +210,7 @@ const LoginForm = ({
       }
 
       captchaToken = captchaRef.current?.getValue();
+      if (captchaToken) setIsCaptchaError(false);
     }
 
     let hasError = false;
@@ -239,8 +245,8 @@ const LoginForm = ({
     isDesktop && checkPwd();
     const session = !isChecked;
 
-    login(user, hash, session, captchaToken, currentCulture)
-      .then(async (res: string | object) => {
+    login(user, hash, session, captchaToken, currentCulture, reCaptchaType)
+      .then((res: string | object) => {
         if (clientId) {
           await api.oauth.onOAuthLogin(clientId);
 
@@ -248,7 +254,6 @@ const LoginForm = ({
 
           return;
         }
-
         const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath =
           referenceUrl || sessionStorage.getItem("referenceUrl");
@@ -301,6 +306,7 @@ const LoginForm = ({
     referenceUrl,
     currentCulture,
     router,
+    reCaptchaType,
   ]);
 
   const onBlurEmail = () => {
@@ -323,6 +329,7 @@ const LoginForm = ({
 
   const onSuccessfullyComplete = () => {
     setIsCaptchaSuccess(true);
+    setIsCaptchaError(false);
   };
 
   const errorMessage = () => {
@@ -389,12 +396,22 @@ const LoginForm = ({
       {reCaptchaPublicKey && isCaptcha && (
         <StyledCaptcha isCaptchaError={isCaptchaError}>
           <div className="captcha-wrapper">
-            <ReCAPTCHA
-              sitekey={reCaptchaPublicKey}
-              ref={captchaRef}
-              theme={theme.isBase ? "light" : "dark"}
-              onChange={onSuccessfullyComplete}
-            />
+            {reCaptchaType === RecaptchaType.hCaptcha ? (
+              <HCaptcha
+                sitekey={reCaptchaPublicKey}
+                ref={hCaptchaRef}
+                onVerify={onSuccessfullyComplete}
+                theme={theme.isBase ? "light" : "dark"}
+                // onChange={onSuccessfullyComplete}
+              />
+            ) : (
+              <ReCAPTCHA
+                sitekey={reCaptchaPublicKey}
+                ref={captchaRef}
+                theme={theme.isBase ? "light" : "dark"}
+                onChange={onSuccessfullyComplete}
+              />
+            )}
           </div>
           {isCaptchaError && (
             <Text>{t("Errors:LoginWithBruteForceCaptcha")}</Text>

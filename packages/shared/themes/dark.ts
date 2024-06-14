@@ -3352,6 +3352,10 @@ const Dark: TTheme = {
   dateTimePicker: {
     colorClockIcon: "#ADADAD",
   },
+  completedForm: {
+    linkColor: white,
+    descriptionColor: "#ADADAD",
+  },
 };
 
 export default Dark;

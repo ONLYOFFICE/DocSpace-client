@@ -61,6 +61,7 @@
     "react-smartbanner": "^5.1.4",
     "react-string-format": "^0.1.4",
     "remark-gfm": "^4.0.0",
+    "ts-pattern": "^5.1.1",
     "windows-iana": "^5.1.0"
   },
   "devDependencies": {

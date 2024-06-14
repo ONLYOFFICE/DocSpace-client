@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export type TFunc = (key: string) => string;
+import { TTranslation } from "../../types";
+
 export type TImage = {
   uploadedFile?: string | File;
   zoom: number;
@@ -35,7 +36,7 @@ export type TChangeImage = (image: TImage) => void;
 export type TSetPreview = (preview: string) => void;
 
 export interface ImageEditorProps {
-  t: TFunc;
+  t: TTranslation;
   image: TImage;
   onChangeImage: TChangeImage;
   Preview: React.ReactNode;
@@ -44,10 +45,11 @@ export interface ImageEditorProps {
   classNameWrapperImageCropper?: string;
   className?: string;
   disableImageRescaling?: boolean;
+  maxImageSize?: number;
 }
 
 export interface ImageCropperProps {
-  t: TFunc;
+  t: TTranslation;
   image: TImage;
   onChangeImage: TChangeImage;
   uploadedFile: File | string;

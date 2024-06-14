@@ -31,6 +31,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import ModalDialogContainer from "../ModalDialogContainer";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const PortalRenamingDialog = (props) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
@@ -43,7 +44,9 @@ const PortalRenamingDialog = (props) => {
       onClose={onClose}
       displayType="modal"
     >
-      <ModalDialog.Header>{t("Settings:PortalRenaming")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {t("Settings:PortalRenaming", { productName: PRODUCT_NAME })}
+      </ModalDialog.Header>
       <ModalDialog.Body>
         <Text fontSize="13px" fontWeight={400} noSelect>
           {t("Settings:PortalRenamingModalText")}

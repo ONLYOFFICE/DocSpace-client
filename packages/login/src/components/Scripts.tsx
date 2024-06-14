@@ -62,7 +62,7 @@ const Scripts = () => {
                 };
               }
     
-              //console.log({ DocSpaceConfig: window.ClientConfig });
+              //console.log({ ClientConfig: window.ClientConfig });
             })
             .catch((e) => {
               console.error(e);

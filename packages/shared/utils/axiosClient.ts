@@ -122,7 +122,7 @@ class AxiosClient {
     console.log("initCSR", {
       defaultConfig,
       apxiosConfig,
-      DocSpaceConfig: window.ClientConfig,
+      ClientConfig: window.ClientConfig,
       paymentsURL,
     });
 
@@ -244,7 +244,7 @@ class AxiosClient {
             break;
           case 403: {
             const pathname = window.location.pathname;
-            const isFrame = window?.DocSpaceConfig?.isFrame;
+            const isFrame = window?.ClientConfig?.isFrame;
 
             const isArchived = pathname.indexOf("/rooms/archived") !== -1;
 

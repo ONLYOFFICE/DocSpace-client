@@ -101,7 +101,7 @@ declare global {
     DocSpace: {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
     };
-    DocSpaceConfig?: {
+    ClientConfig?: {
       pdfViewerUrl: string;
       wrongPortalNameUrl?: string;
       api: {

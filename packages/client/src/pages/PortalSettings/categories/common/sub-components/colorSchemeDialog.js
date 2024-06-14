@@ -57,10 +57,12 @@ const StyledComponent = styled(ModalDialog)`
       padding-bottom: 20px;
     }
 
-    ${!isMobile() &&
-    css`
-      max-width: 448px;
-    `}
+    ${
+      !isMobile() &&
+      css`
+        max-width: 448px;
+      `
+    }
   }
 
   .name-color {
@@ -77,19 +79,13 @@ const StyledComponent = styled(ModalDialog)`
     background: ${(props) =>
       props.currentColorAccent
         ? props.currentColorAccent
-        : props.theme.isBase
-          ? `#eceef1 url(${PlusThemeSvgUrl}) no-repeat center`
-          : `#474747 url(${PlusThemeSvgUrl}) no-repeat center`};
-  }
+        : `${props.theme.client.settings.common.appearance.accentBoxBackground} url(${PlusThemeSvgUrl}) no-repeat center`}
 
   .buttons-box {
     background: ${(props) =>
       props.currentColorButtons
         ? props.currentColorButtons
-        : props.theme.isBase
-          ? `#eceef1 url(${PlusThemeSvgUrl}) no-repeat center`
-          : `#474747 url(${PlusThemeSvgUrl}) no-repeat center`};
-  }
+        : `${props.theme.client.settings.common.appearance.buttonBoxBackground} url(${PlusThemeSvgUrl}) no-repeat center`}
 
   .modal-add-theme {
     width: 46px;
@@ -99,34 +95,40 @@ const StyledComponent = styled(ModalDialog)`
   }
 
   .drop-down-container-hex {
-    ${isMobileOnly &&
-    css`
-      width: 100%;
-    `}
+    ${
+      isMobileOnly &&
+      css`
+        width: 100%;
+      `
+    }
   }
 
   .drop-down-item-hex {
-    ${isMobileOnly &&
-    css`
-      width: calc(100vw - 32px);
-    `}
+    ${
+      isMobileOnly &&
+      css`
+        width: calc(100vw - 32px);
+      `
+    }
 
     :hover {
       background-color: unset;
     }
 
-    ${!isMobile() &&
-    css`
-      max-width: 227px;
+    ${
+      !isMobile() &&
+      css`
+        max-width: 227px;
 
-      .hex-color-picker {
-        max-width: 195px;
-      }
+        .hex-color-picker {
+          max-width: 195px;
+        }
 
-      .react-colorful__interactive {
-        max-width: 183px;
-      }
-    `}
+        .react-colorful__interactive {
+          max-width: 183px;
+        }
+      `
+    }
   }
 `;
 

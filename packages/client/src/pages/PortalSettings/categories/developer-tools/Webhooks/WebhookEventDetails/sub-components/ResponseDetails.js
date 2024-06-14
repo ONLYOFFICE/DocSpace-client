@@ -68,7 +68,7 @@ const LargePayloadStub = styled.div`
   margin-top: 4px;
 
   background: #f8f9f9;
-  border: 1px solid #eceef1;
+  border: ${(props) => props.theme.client.settings.webhooks.border};
   border-radius: 3px;
 
   ${isMobile() &&

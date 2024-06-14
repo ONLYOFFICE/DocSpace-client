@@ -103,6 +103,8 @@ const ConvertPasswordDialogComponent = (props) => {
       searchParams.append("password", password);
       searchParams.append("fromFile", true);
 
+      searchParams.append("hash", new Date().getTime());
+
       const url = combineUrl(
         window.location.origin,
         window.DocSpaceConfig?.proxy?.url,

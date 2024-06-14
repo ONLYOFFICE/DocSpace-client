@@ -67,12 +67,18 @@ import FirebaseHelper from "../utils/firebase";
 import SocketIOHelper from "../utils/socket";
 import { TWhiteLabel } from "../utils/whiteLabelHelper";
 
-import { ThemeKeys, TenantStatus, UrlActionType } from "../enums";
+import {
+  ThemeKeys,
+  TenantStatus,
+  UrlActionType,
+  RecaptchaType,
+} from "../enums";
 import {
   LANGUAGE,
   COOKIE_EXPIRATION_YEAR,
   MEDIA_VIEW_URL,
   WRONG_PORTAL_NAME_URL,
+  BRAND_NAME,
 } from "../constants";
 import { Dark, Base, TColorScheme } from "../themes";
 import { toastr } from "../components/toast";
@@ -151,7 +157,7 @@ class SettingsStore {
     timePattern: "h:mm tt",
   };
 
-  organizationName = "ONLYOFFICE";
+  organizationName = BRAND_NAME;
 
   greetingSettings = "Web Office Applications";
 
@@ -312,9 +318,15 @@ class SettingsStore {
 
   userNameRegex = "";
 
+  maxImageUploadSize: number | null = null;
+
   windowWidth = window.innerWidth;
 
   windowAngle = window.screen?.orientation?.angle ?? window.orientation ?? 0;
+
+  recaptchaPublicKey: string | null = null;
+
+  recaptchaType: RecaptchaType | null = null;
 
   constructor() {
     makeAutoObservable(this);

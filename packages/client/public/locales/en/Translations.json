@@ -31,7 +31,7 @@
   "PublicRoomLinkValidTime": "This link is valid until {{date}}. Once it expires, it will be impossible to access the room via this link.",
   "RoleCommentator": "Commenter",
   "RoleCommentatorDescription": "Operations with existing files: viewing, commenting.",
-  "RoleDocspaceAdminDescription": "DocSpace admins can access DocSpace settings, manage and archive rooms, invite new users and assign roles below their level. All admins have access to the Personal section.",
+  "RoleDocspaceAdminDescription": "{{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. All admins have access to the Personal section.",
   "RoleEditorDescription": "Operations with existing files: viewing, editing, form filling, reviewing, commenting.",
   "RoleFormFiller": "Form filler",
   "RoleFormFillerDescription": "Operations with existing files: viewing, form filling, reviewing, commenting.",

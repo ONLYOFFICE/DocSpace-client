@@ -28,12 +28,13 @@
 "use client";
 
 import React from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 import { mobile } from "@docspace/shared/utils/device";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 import { Base, Dark } from "@docspace/shared/themes";
 import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
+import LanguageComboboxWrapper from "./LanguageCombobox";
 
 const StyledSimpleNav = styled.div`
   display: none;
@@ -50,6 +51,12 @@ const StyledSimpleNav = styled.div`
 
   @media ${mobile} {
     display: flex;
+
+    .language-combo-box {
+      position: absolute;
+      top: 7px;
+      right: 8px;
+    }
   }
 `;
 
@@ -60,12 +67,14 @@ interface SimpleNavProps {
 }
 
 const SimpleNav = ({ systemTheme }: SimpleNavProps) => {
-  const isDark = systemTheme === ThemeKeys.DarkStr;
+  const theme = useTheme();
+  const isDark = !theme.isBase;
   const logoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, isDark);
 
   return (
-    <StyledSimpleNav id="login-header" theme={isDark ? Dark : Base}>
+    <StyledSimpleNav id="login-header">
       <img src={logoUrl} alt="logo-url" />
+      <LanguageComboboxWrapper />
     </StyledSimpleNav>
   );
 };

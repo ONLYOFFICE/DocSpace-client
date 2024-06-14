@@ -14,6 +14,7 @@
   "NameChangeButton": "Change name",
   "PasswordChangeButton": "Change password",
   "PendingTitle": "Pending",
+  "PendingInviteTitle": "Pending invite",
   "PeopleCount": "people: {{count}}",
   "RemoveData": "Delete personal data",
   "ResetAuth": "Reset authentication",

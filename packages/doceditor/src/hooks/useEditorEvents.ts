@@ -141,6 +141,8 @@ const useEditorEvents = ({
   const onSDKAppReady = React.useCallback(() => {
     docEditor = window.DocEditor.instances[EDITOR_ID];
 
+    frameCallCommand("setIsLoaded");
+
     if (errorMessage || isSkipError)
       return docEditor?.showMessage?.(errorMessage || t("Common:InvalidLink"));
 
@@ -166,8 +168,6 @@ const useEditorEvents = ({
   const onDocumentReady = React.useCallback(() => {
     // console.log("onDocumentReady", { docEditor });
     setDocumentReady(true);
-
-    frameCallCommand("setIsLoaded");
 
     if (config?.errorMessage) docEditor?.showMessage?.(config.errorMessage);
 
@@ -588,17 +588,17 @@ const useEditorEvents = ({
     docEditor?.setActionLink?.(linkFormation);
   }, []);
 
-  const onRequestStartFilling = React.useCallback(
-    (event: object) => {
-      console.log("onRequestStartFilling", { event });
+  // const onRequestStartFilling = React.useCallback(
+  //   (event: object) => {
+  //     console.log("onRequestStartFilling", { event });
 
-      if (!fileInfo?.id) return;
+  //     if (!fileInfo?.id) return;
 
-      docEditor?.startFilling?.();
-      startFilling(fileInfo?.id);
-    },
-    [fileInfo?.id],
-  );
+  //     docEditor?.startFilling?.();
+  //     startFilling(fileInfo?.id);
+  //   },
+  //   [fileInfo?.id],
+  // );
 
   const generateLink = (actionData: {}) => {
     return encodeURIComponent(JSON.stringify(actionData));
@@ -645,7 +645,7 @@ const useEditorEvents = ({
     onDocumentStateChange,
     onMetaChange,
     onMakeActionLink,
-    onRequestStartFilling,
+    // onRequestStartFilling,
     setDocTitle,
   };
 };

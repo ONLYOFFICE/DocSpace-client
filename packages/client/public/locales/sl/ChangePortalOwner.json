@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "Imenovanje skrbnikov",
-  "BackupPortal": "Varnostno kopirajte podatke DocSpace",
-  "ChangeInstruction": "Če želite spremeniti lastnika DocSpace, spodaj izberite ime novega lastnika.",
-  "ChangeOwner": "Zamenjaj lastnika DocSpace",
+  "BackupPortal": "Varnostno kopirajte podatke {{productName}}",
+  "ChangeInstruction": "Če želite spremeniti lastnika {{productName}}, spodaj izberite ime novega lastnika.",
+  "ChangeOwner": "Zamenjaj lastnika {{productName}}",
   "ChangeUser": "Zamenjaj uporabnika",
-  "DeactivateOrDeletePortal": "Deaktiviraj ali izbriši DocSpace",
+  "DeactivateOrDeletePortal": "Deaktiviraj ali izbriši {{productName}}",
   "DoTheSame": "Naredite enako kot skrbniki",
-  "ManagePortal": "Upravljajte konfiguracijo DocSpace",
+  "ManagePortal": "Upravljajte konfiguracijo {{productName}}",
   "ManageUser": "Upravljajte uporabniške račune",
-  "NewPortalOwner": "Nov lastnik DocSpace",
-  "PortalOwnerCan": "DocSpace lastnik lahko:",
+  "NewPortalOwner": "Nov lastnik {{productName}}",
+  "PortalOwnerCan": "{{productName}} lastnik lahko:",
   "SetAccessRights": "Nastavi pravice za dostop"
 }

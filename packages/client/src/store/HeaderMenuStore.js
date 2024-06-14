@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { EmployeeStatus } from "@docspace/shared/enums";
 import { computed, makeObservable } from "mobx";
-import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 
 class HeaderMenuStore {
   constructor(peopleStore) {
@@ -43,16 +43,15 @@ class HeaderMenuStore {
     let cbMenu = ["all"];
 
     for (let user of users) {
-      const status = getUserStatus(user);
-      switch (status) {
-        case "active":
-          cbMenu.push(status);
+      switch (user.status) {
+        case EmployeeStatus.Active:
+          cbMenu.push("active");
           break;
-        case "pending":
-          cbMenu.push(status);
+        case EmployeeStatus.Pending:
+          cbMenu.push("pending");
           break;
-        case "disabled":
-          cbMenu.push(status);
+        case EmployeeStatus.Disabled:
+          cbMenu.push("disabled");
           break;
       }
     }
@@ -78,7 +77,7 @@ class HeaderMenuStore {
       case "active":
         return t("Common:Active");
       case "pending":
-        return t("PeopleTranslations:PendingTitle");
+        return t("PeopleTranslations:PendingInviteTitle");
       case "disabled":
         return t("PeopleTranslations:DisabledEmployeeStatus");
       case "all":

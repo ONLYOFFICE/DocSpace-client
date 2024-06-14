@@ -55,7 +55,8 @@ const SectionBodyContent = (props) => {
     activateHotkeys,
     setHotkeyCaretStart,
     setHotkeyCaret,
-    setSelected,
+    selectAll,
+    deselectAll,
   } = props;
 
   const location = useLocation();
@@ -67,7 +68,8 @@ const SectionBodyContent = (props) => {
     selectBottom,
     selectUpper,
     activateHotkeys,
-    setSelected,
+    selectAll,
+    deselectAll,
   });
 
   useEffect(() => {
@@ -142,7 +144,6 @@ export default inject(({ peopleStore }) => {
     setSelection: setPeopleSelection,
     setBufferSelection: setPeopleBufferSelection,
     selectUser,
-    setSelected,
   } = peopleStore.selectionStore;
 
   const {
@@ -159,6 +160,9 @@ export default inject(({ peopleStore }) => {
     activateHotkeys,
     setHotkeyCaretStart,
     setHotkeyCaret,
+
+    selectAll,
+    deselectAll,
   } = peopleStore.accountsHotkeysStore;
 
   return {
@@ -179,7 +183,8 @@ export default inject(({ peopleStore }) => {
     setEnabledHotkeys,
     setHotkeyCaretStart,
     setHotkeyCaret,
-    setSelected,
+    selectAll,
+    deselectAll,
   };
 })(
   withTranslation(["People", "Common", "PeopleTranslations"])(

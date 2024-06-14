@@ -31,7 +31,7 @@
   "PublicRoomLinkValidTime": "Ce lien est valable jusqu'à {{date}}. Une fois qu'il aura expiré, il sera impossible d'accéder à la salle via ce lien.",
   "RoleCommentator": "Commentateur",
   "RoleCommentatorDescription": "Opérations sur les fichiers existants : affichage, commentaires.",
-  "RoleDocspaceAdminDescription": "Les administrateurs de DocSpace peuvent accéder aux paramètres de DocSpace, gérer et archiver les salles, inviter de nouveaux utilisateurs et attribuer des rôles inférieurs à leur niveau. Tous les administrateurs ont accès à la section Personnes.",
+  "RoleDocspaceAdminDescription": "Les administrateurs de {{productName}} peuvent accéder aux paramètres de {{productName}}, gérer et archiver les salles, inviter de nouveaux utilisateurs et attribuer des rôles inférieurs à leur niveau. Tous les administrateurs ont accès à la section Personnes.",
   "RoleEditorDescription": "Opérations sur les fichiers existants : affichage, édition, remplissage de formulaires, révision, commentaires.",
   "RoleFormFiller": "Remplisseur de formulaires",
   "RoleFormFillerDescription": "Opérations sur les fichiers existants : affichage, remplissage de formulaires, révision, commentaires.",

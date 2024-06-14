@@ -59,7 +59,7 @@ const AccountsTable = (props) => {
 
   const typeOptions = [
     {
-      key: UserTypes.DocSpaceAdmin,
+      key: UserTypes.PortalAdmin,
       label: t(`Common:PortalAdmin`, {
         productName: PRODUCT_NAME,
       }),

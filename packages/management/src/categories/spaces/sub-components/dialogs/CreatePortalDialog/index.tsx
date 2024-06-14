@@ -147,7 +147,7 @@ const CreatePortalDialog = () => {
       displayType="modal"
     >
       <ModalDialog.Header>
-        {t("PortalName", { productName: PRODUCT_NAME })}
+        {t("CreatingPortal", { productName: PRODUCT_NAME })}
       </ModalDialog.Header>
       <ModalDialog.Body className="create-docspace-body">
         <Text noSelect={true}>

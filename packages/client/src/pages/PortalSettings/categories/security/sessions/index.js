@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { mobile, tablet } from "@docspace/shared/utils";
+import SessionsLoader from "@docspace/shared/skeletons/sessions";
+
 import styled from "styled-components";
 
 import { MainContainer } from "../StyledSecurity";
@@ -100,6 +102,7 @@ const Sessions = ({
   onClickLogoutAllExceptThis,
   onClickRemoveSession,
   updateUserStatus,
+  isSessionsLoaded,
 }) => {
   useEffect(() => {
     socketHelper.emit({
@@ -155,6 +158,8 @@ const Sessions = ({
   // console.log("sessionsData", JSON.parse(JSON.stringify(sessionsData)));
   // console.log("connections", JSON.parse(JSON.stringify(connections)));
   // console.log("userLastSession", JSON.parse(JSON.stringify(userLastSession)));
+
+  if (!isSessionsLoaded) return <SessionsLoader viewAs={viewAs} />;
 
   return (
     <MainContainer>
@@ -274,6 +279,7 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     onClickLogoutAllExceptThis,
     onClickRemoveSession,
     updateUserStatus,
+    isSessionsLoaded: allSessions.length > 0,
   };
 })(
   withTranslation(["Settings", "Profile", "Common", "ChangeUserStatusDialog"])(

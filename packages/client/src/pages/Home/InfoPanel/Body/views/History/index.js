@@ -38,6 +38,7 @@ import {
 } from "./../../helpers/HistoryHelper";
 import HistoryBlock from "./HistoryBlock";
 import NoHistory from "../NoItem/NoHistory";
+import { RoomsType } from "@docspace/shared/enums";
 
 const History = ({
   t,
@@ -72,6 +73,12 @@ const History = ({
     if (infoPanelSelection.isRoom || infoPanelSelection.isFolder)
       selectionType = "folder";
 
+    const withLinks =
+      infoPanelSelection.isRoom &&
+      [RoomsType.FormRoom, RoomsType.CustomRoom, RoomsType.PublicRoom].includes(
+        infoPanelSelection.roomType,
+      );
+
     getHistory(
       selectionType,
       item.id,
@@ -79,7 +86,7 @@ const History = ({
       item?.requestToken,
     )
       .then(async (data) => {
-        if (isMount.current && infoPanelSelection.isRoom) {
+        if (isMount.current && withLinks) {
           const links = await getRoomLinks(infoPanelSelection.id);
           const historyWithLinks = addLinksToHistory(data, links);
           return historyWithLinks;

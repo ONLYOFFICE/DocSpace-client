@@ -196,9 +196,11 @@ const Bar = (props) => {
     setMaintenanceExist(false);
   };
 
-  const onClickQuota = (type) => {
-    type === QuotaBarTypes.StorageQuota && onPaymentsClick && onPaymentsClick();
-    type === QuotaBarTypes.TenantCustomQuota && onClickTenantCustomQuota();
+  const onClickQuota = (type, e) => {
+    type === QuotaBarTypes.TenantCustomQuota ||
+    type === QuotaBarTypes.PersonalUserQuota
+      ? onClickTenantCustomQuota()
+      : onPaymentsClick(e);
 
     onCloseQuota(type);
   };

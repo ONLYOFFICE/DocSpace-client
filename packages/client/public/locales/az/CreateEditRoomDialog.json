@@ -5,9 +5,9 @@
   "DisableRoomQuota": "Bu otaq üçün kvotanı deaktiv edin",
   "Icon": "Simvol",
   "MakeRoomPrivateDescription": "Bu otaqdakı bütün fayllar şifrələnəcək.",
-  "MakeRoomPrivateLimitationsWarningDescription": "Bu funksiya ilə siz yalnız mövcud DocSpace istifadəçilərini dəvət edə bilərsiniz. Otaq yaratdıqdan sonra istifadəçi siyahısını dəyişə bilməzsiniz.",
+  "MakeRoomPrivateLimitationsWarningDescription": "Bu funksiya ilə siz yalnız mövcud {{productName}} istifadəçilərini dəvət edə bilərsiniz. Otaq yaratdıqdan sonra istifadəçi siyahısını dəyişə bilməzsiniz.",
   "MakeRoomPrivateTitle": "Otağı Şəxsi edin",
-  "PeopleSelectorInfo": "Yalnız otaq administratoru və ya DocSpace administratoru otağın sahibi ola bilər",
+  "PeopleSelectorInfo": "Yalnız otaq administratoru və ya {{productName}} administratoru otağın sahibi ola bilər",
   "PublicRoomBarDescription": "Bu otaq keçid olan hər kəs üçün əlçatandır. Xarici istifadəçilərin bütün fayllar üçün Yalnız Baxış icazəsi olacaq.",
   "PublicRoomSystemFoldersDescription": "Sistem qovluqları formaların surətlərini tamamlamanın müxtəlif mərhələlərində saxlayır. Doldurulan formalar Davam edir qovluğunda, doldurulmuş formalar isə Tamamlanmış qovluğunda saxlanılır.",
   "PublicRoomSystemFoldersTitle": "Sistem Qovluqları",
@@ -19,5 +19,5 @@
   "ThirdPartyStorageDescription": "Bu otaq üçün məlumat yaddaşı kimi üçüncü tərəf xidmətlərindən istifadə edin. Bu otağın məlumatlarını  saxlamaq üçün əlaqələndirilmiş yaddaşda yeni qovluq yaradılacaq.",
   "ThirdPartyStorageNoStorageAlert": "Əvvəllər \"İnteqrasiya\" bölməsində müvafiq xidməti birləşdirməlisiniz. Əks halda bağlantı mümkün olmayacaq.",
   "ThirdPartyStoragePermanentSettingDescription": "Fayllar {{thirdpartyTitle}} qovluğunda üçüncü tərəf \"{{thirdpartyFolderName}}\" deposunda saxlanılır.\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "Üçüncü tərəfin yaddaşına qoşulmaq üçün DocSpace parametrlərinin İnteqrasiya bölməsində müvafiq xidməti əlavə etməlisiniz. İnteqrasiyanı aktivləşdirmək üçün DocSpace sahibi və ya administratorla əlaqə saxlayın."
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "Üçüncü tərəfin yaddaşına qoşulmaq üçün {{productName}} parametrlərinin İnteqrasiya bölməsində müvafiq xidməti əlavə etməlisiniz. İnteqrasiyanı aktivləşdirmək üçün {{productName}} sahibi və ya administratorla əlaqə saxlayın."
 }

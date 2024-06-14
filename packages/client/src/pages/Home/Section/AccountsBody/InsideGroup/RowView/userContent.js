@@ -35,6 +35,7 @@ import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 
 import Badges from "../../Badges";
 import { tablet, mobile } from "@docspace/shared/utils";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledRowContent = styled(RowContent)`
   @media ${tablet} {
@@ -108,7 +109,7 @@ const UserContent = ({
     role === "owner"
       ? t("Common:Owner")
       : role === "admin"
-        ? t("Common:DocspaceAdmin")
+        ? t("Common:PortalAdmin", { productName: PRODUCT_NAME })
         : isCollaborator
           ? t("Common:PowerUser")
           : isVisitor

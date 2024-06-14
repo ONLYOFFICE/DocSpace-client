@@ -26,7 +26,6 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useHotkeys, Options } from "react-hotkeys-hook";
-import throttle from "lodash/throttle";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 interface AccountsHotkeysProps {
@@ -36,8 +35,8 @@ interface AccountsHotkeysProps {
   selectBottom: () => void;
   selectUpper: () => void;
   activateHotkeys: (e: KeyboardEvent) => void;
-  setSelected: (value: string) => void;
   selectAll: () => void;
+  deselectAll: () => void;
 }
 
 const useAccountsHotkeys = ({
@@ -46,8 +45,8 @@ const useAccountsHotkeys = ({
   selectBottom,
   selectUpper,
   activateHotkeys,
-  setSelected,
   selectAll,
+  deselectAll,
 }: AccountsHotkeysProps) => {
   const [isEnabled, setIsEnabled] = useState(true);
 
@@ -75,12 +74,10 @@ const useAccountsHotkeys = ({
   );
 
   useEffect(() => {
-    const throttledKeyDownEvent = throttle(onKeyDown, 300);
-
-    window.addEventListener("keydown", throttledKeyDownEvent);
+    window.addEventListener("keydown", onKeyDown);
 
     return () => {
-      window.removeEventListener("keydown", throttledKeyDownEvent);
+      window.removeEventListener("keydown", onKeyDown);
     };
   }, [onKeyDown]);
 
@@ -113,7 +110,7 @@ const useAccountsHotkeys = ({
   useHotkeys("shift+a, ctrl+a", selectAll, hotkeysFilter);
 
   // Deselect all accounts
-  useHotkeys("shift+n, ESC", () => setSelected("none"), hotkeysFilter);
+  useHotkeys("shift+n, ESC", deselectAll, hotkeysFilter);
 };
 
 export default useAccountsHotkeys;

@@ -3339,6 +3339,10 @@ const Dark: TTheme = {
     descriptionTextColor: "#ADADAD",
     iconColor: "#ADADAD",
   },
+  completedForm: {
+    linkColor: white,
+    descriptionColor: "#ADADAD",
+  },
 };
 
 export default Dark;

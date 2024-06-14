@@ -154,8 +154,13 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     setCreateRoomDialogProps({
       title: e?.title,
       visible: true,
+      startRoomType: e?.payload?.startRoomType,
       onClose: () =>
-        setCreateRoomDialogProps({ visible: false, onClose: null }),
+        setCreateRoomDialogProps({
+          visible: false,
+          onClose: null,
+          startRoomType: undefined,
+        }),
     });
   }, []);
 

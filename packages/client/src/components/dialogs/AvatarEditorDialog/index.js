@@ -66,8 +66,14 @@ const AvatarEditorDialog = (props) => {
     "CreateEditRoomDialog",
   ]);
 
-  const { visible, onClose, profile, updateCreatedAvatar, setHasAvatar } =
-    props;
+  const {
+    visible,
+    onClose,
+    profile,
+    updateCreatedAvatar,
+    setHasAvatar,
+    maxImageUploadSize,
+  } = props;
   const [avatar, setAvatar] = useState({
     uploadedFile: profile.hasAvatar
       ? profile.avatarOriginal
@@ -141,6 +147,7 @@ const AvatarEditorDialog = (props) => {
           Preview={
             <AvatarPreview avatar={preview} userName={profile.displayName} />
           }
+          maxImageSize={maxImageUploadSize}
         />
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -167,8 +174,9 @@ const AvatarEditorDialog = (props) => {
   );
 };
 
-export default inject(({ peopleStore }) => {
+export default inject(({ peopleStore, settingsStore }) => {
   const { targetUserStore } = peopleStore;
+  const { maxImageUploadSize } = settingsStore;
 
   const {
     targetUser: profile,
@@ -180,5 +188,6 @@ export default inject(({ peopleStore }) => {
     profile,
     setHasAvatar,
     updateCreatedAvatar,
+    maxImageUploadSize,
   };
 })(observer(AvatarEditorDialog));

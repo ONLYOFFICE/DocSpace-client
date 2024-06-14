@@ -42,7 +42,11 @@ const generalRoutes = [
       {
         index: true,
         Component: () => (
-          <Navigate to="login" state={window.DocSpace?.location?.state} />
+          <Navigate
+            to="login"
+            state={window.DocSpace?.location?.state}
+            replace
+          />
         ),
       },
       {

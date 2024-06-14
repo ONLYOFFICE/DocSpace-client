@@ -39,7 +39,6 @@ import { mobileMore } from "@docspace/shared/utils";
 import BodyComponent from "./sub-components/BodyComponent";
 
 const { deleteUser } = api.people;
-const { Filter } = api;
 
 const StyledModalDialogContainer = styled(ModalDialogContainer)`
   #modal-dialog {
@@ -125,7 +124,6 @@ const DeleteProfileEverDialogComponent = (props) => {
   const areUsersOnly = usersToDelete.every((user) => user.isVisitor);
 
   const onDeleteUser = (id) => {
-    const filter = Filter.getDefault();
     setIsRequestRunning(true);
 
     deleteUser(id)

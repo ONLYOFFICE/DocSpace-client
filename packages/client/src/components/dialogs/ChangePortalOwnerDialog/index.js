@@ -51,6 +51,7 @@ import {
   StyledSelectedOwnerContainer,
   StyledSelectedOwner,
 } from "./StyledDialog";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const ChangePortalOwnerDialog = ({
   t,
@@ -114,11 +115,11 @@ const ChangePortalOwnerDialog = ({
     t("DoTheSame"),
     t("AppointAdmin"),
     t("SetAccessRights"),
-    t("ManagePortal"),
+    t("ManagePortal", { productName: PRODUCT_NAME }),
     t("ManageUser"),
-    t("ChangePortalOwner:ChangeOwner"),
-    t("BackupPortal"),
-    t("DeactivateOrDeletePortal"),
+    t("ChangePortalOwner:ChangeOwner", { productName: PRODUCT_NAME }),
+    t("BackupPortal", { productName: PRODUCT_NAME }),
+    t("DeactivateOrDeletePortal", { productName: PRODUCT_NAME }),
   ];
 
   return (
@@ -172,10 +173,10 @@ const ChangePortalOwnerDialog = ({
 
         <StyledPeopleSelectorInfo>
           <Text className="new-owner" noSelect title={t("NewPortalOwner")}>
-            {t("NewPortalOwner")}
+            {t("NewPortalOwner", { productName: PRODUCT_NAME })}
           </Text>
           <Text className="description" noSelect title={t("ChangeInstruction")}>
-            {t("ChangeInstruction")}
+            {t("ChangeInstruction", { productName: PRODUCT_NAME })}
           </Text>
         </StyledPeopleSelectorInfo>
 
@@ -217,7 +218,7 @@ const ChangePortalOwnerDialog = ({
 
         <StyledAvailableList>
           <Text className="list-header" noSelect title={t("PortalOwnerCan")}>
-            {t("PortalOwnerCan")}
+            {t("PortalOwnerCan", { productName: PRODUCT_NAME })}
           </Text>
 
           {ownerRights?.map((item) => (

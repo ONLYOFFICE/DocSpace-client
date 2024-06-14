@@ -218,7 +218,11 @@ const LinkRow = (props) => {
   const textColor = disabled ? theme.text.disableColor : theme.text.color;
 
   return (
-    <StyledLinkRow {...rest} isExpired={isExpired}>
+    <StyledLinkRow
+      {...rest}
+      isArchiveFolder={isArchiveFolder}
+      isExpired={isExpired}
+    >
       <Avatar
         size="min"
         source={LinkReactSvgUrl}
@@ -319,7 +323,9 @@ export default inject(
       setEmbeddingPanelIsVisible,
       isArchiveFolder: isArchiveFolderRoot,
       theme,
-      isPublicRoomType: infoPanelSelection.roomType === RoomsType.PublicRoom,
+      isPublicRoomType:
+        infoPanelSelection.roomType === RoomsType.PublicRoom ||
+        infoPanelSelection.roomType === RoomsType.FormRoom,
     };
   },
 )(

@@ -62,6 +62,7 @@ const EditLinkPanel = (props) => {
     date,
     language,
     isPublic,
+    isFormRoom,
     currentDeviceType,
     setLinkParams,
   } = props;
@@ -239,13 +240,16 @@ const EditLinkPanel = (props) => {
             setIsPasswordValid={setIsPasswordValid}
             onChange={onPasswordAccessChange}
           />
-          <ToggleBlock
-            isLoading={isLoading}
-            headerText={t("Files:DisableDownload")}
-            bodyText={t("Files:PreventDownloadFilesAndFolders")}
-            isChecked={denyDownload}
-            onChange={onDenyDownloadChange}
-          />
+          {!isFormRoom && (
+            <ToggleBlock
+              isLoading={isLoading}
+              headerText={t("Files:DisableDownload")}
+              bodyText={t("Files:PreventDownloadFilesAndFolders")}
+              isChecked={denyDownload}
+              onChange={onDenyDownloadChange}
+            />
+          )}
+
           {!isPrimary && (
             <LimitTimeBlock
               isExpired={isExpired}
@@ -315,6 +319,7 @@ export default inject(
     const link = externalLinks.find((l) => l?.sharedTo?.id === linkId);
 
     const shareLink = link?.sharedTo?.shareLink;
+    const isFormRoom = infoPanelSelection?.roomType === RoomsType.FormRoom;
 
     return {
       visible: editLinkPanelIsVisible,
@@ -335,6 +340,7 @@ export default inject(
       link,
       language: authStore.language,
       isPublic,
+      isFormRoom,
       currentDeviceType: settingsStore.currentDeviceType,
       setLinkParams,
     };

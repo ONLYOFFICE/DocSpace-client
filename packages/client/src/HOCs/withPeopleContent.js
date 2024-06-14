@@ -24,12 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Link } from "@docspace/shared/components/link";
-import { LinkWithDropdown } from "@docspace/shared/components/link-with-dropdown";
 import { Avatar } from "@docspace/shared/components/avatar";
 
 export default function withContent(WrappedContent) {
@@ -53,35 +51,44 @@ export default function withContent(WrappedContent) {
 
     const { mobilePhone, email, role, displayName, avatar } = item;
 
-    const onContentRowSelect = (checked, user) => {
-      setBufferSelection(null);
-      checked ? selectUser(user) : deselectUser(user);
-    };
+    const onContentRowSelect = useCallback(
+      (checked, user) => {
+        setBufferSelection(null);
+        checked ? selectUser(user) : deselectUser(user);
+      },
+      [setBufferSelection, selectUser, deselectUser],
+    );
 
-    const onContextClick = (item, isSingleMenu) => {
-      isSingleMenu
-        ? singleContextMenuAction(item)
-        : multipleContextMenuAction(item);
-    };
+    const onContextClick = useCallback(
+      (item, isSingleMenu) => {
+        isSingleMenu
+          ? singleContextMenuAction(item)
+          : multipleContextMenuAction(item);
+      },
+      [singleContextMenuAction, multipleContextMenuAction],
+    );
 
-    const onContentRowClick = (e, user) => {
-      if (
-        e.target?.tagName === "A" ||
-        e.target.closest(".checkbox") ||
-        e.target.closest(".table-container_row-checkbox") ||
-        e.target.closest(".type-combobox") ||
-        e.target.closest(".groups-combobox") ||
-        e.target.closest(".paid-badge") ||
-        e.target.closest(".pending-badge") ||
-        e.target.closest(".disabled-badge") ||
-        e.target.closest(".dropdown-container") ||
-        e.detail === 0
-      ) {
-        return;
-      }
+    const onContentRowClick = useCallback(
+      (e, user) => {
+        if (
+          e.target?.tagName === "A" ||
+          e.target.closest(".checkbox") ||
+          e.target.closest(".table-container_row-checkbox") ||
+          e.target.closest(".type-combobox") ||
+          e.target.closest(".groups-combobox") ||
+          e.target.closest(".paid-badge") ||
+          e.target.closest(".pending-badge") ||
+          e.target.closest(".disabled-badge") ||
+          e.target.closest(".dropdown-container") ||
+          e.detail === 0
+        ) {
+          return;
+        }
 
-      selectRow(user);
-    };
+        selectRow(user);
+      },
+      [selectRow],
+    );
 
     const onOpenGroup = useCallback(
       (groupId, withBackURL, tempTitle) => {
@@ -91,14 +98,23 @@ export default function withContent(WrappedContent) {
       [resetSelections, openGroupAction],
     );
 
-    const checkedProps = { checked };
+    const checkedProps = useMemo(() => ({ checked }), [checked]);
 
-    const element = (
-      <Avatar size="min" role={role} userName={displayName} source={avatar} />
+    const element = useMemo(
+      () => (
+        <Avatar size="min" role={role} userName={displayName} source={avatar} />
+      ),
+      [role, displayName, avatar],
     );
 
-    const onPhoneClick = () => window.open(`sms:${mobilePhone}`);
-    const onEmailClick = () => window.open(`mailto:${email}`);
+    const onPhoneClick = useCallback(
+      () => window.open(`sms:${mobilePhone}`),
+      [mobilePhone],
+    );
+    const onEmailClick = useCallback(
+      () => window.open(`mailto:${email}`),
+      [email],
+    );
 
     const { t } = useTranslation([
       "People",
@@ -111,9 +127,12 @@ export default function withContent(WrappedContent) {
       "DataReassignmentDialog",
     ]);
 
-    const contextOptionsProps = {
-      contextOptions: getModel(item, t),
-    };
+    const contextOptionsProps = useMemo(
+      () => ({
+        contextOptions: getModel(item, t),
+      }),
+      [getModel, item, t],
+    );
 
     let value = `folder_${item.id}`;
     value += "_false";
@@ -126,7 +145,6 @@ export default function withContent(WrappedContent) {
         onUserContextClick={onContextClick}
         onPhoneClick={onPhoneClick}
         onEmailClick={onEmailClick}
-        groups={[]}
         checkedProps={checkedProps}
         element={element}
         contextOptionsProps={contextOptionsProps}

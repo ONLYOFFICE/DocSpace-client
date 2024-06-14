@@ -68,7 +68,7 @@ export default function withLoader(WrappedComponent) {
           );
 
           window.location.href = combineUrl(
-            window.DocSpaceConfig?.proxy?.url,
+            window.ClientConfig?.proxy?.url,
             "/login",
             `?loginData=${loginData}`,
           );
@@ -94,7 +94,7 @@ export default function withLoader(WrappedComponent) {
         console.error(errorMessage);
         navigate(
           combineUrl(
-            window.DocSpaceConfig?.proxy?.url,
+            window.ClientConfig?.proxy?.url,
             `/login/error?message=${errorMessage}`,
           ),
         );
@@ -129,7 +129,7 @@ export default function withLoader(WrappedComponent) {
           console.error(errorMessage);
           navigate(
             combineUrl(
-              window.DocSpaceConfig?.proxy?.url,
+              window.ClientConfig?.proxy?.url,
               `/login/error?message=${errorMessage}`,
             ),
           );

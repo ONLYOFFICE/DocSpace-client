@@ -80,13 +80,17 @@ import {
 } from "./StyledPresets";
 
 const FileSelector = (props) => {
-  const { t, setDocumentTitle, fetchExternalLinks, theme } = props;
+  const { t, setDocumentTitle, fetchExternalLinks, theme, organizationName } =
+    props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
   const fileTypeDisplay = [
     { value: FilesSelectorFilterTypes.ALL, label: t("AllTypes") },
-    { value: "EditorSupportedTypes", label: t("AllTypesSupportedByEditor") },
+    {
+      value: "EditorSupportedTypes",
+      label: t("AllTypesSupportedByEditor", { organizationName }),
+    },
     { value: "SelectorTypes", label: t("SelectTypes") },
   ];
 
@@ -438,13 +442,14 @@ const FileSelector = (props) => {
 
 export default inject(({ authStore, settingsStore, publicRoomStore }) => {
   const { setDocumentTitle } = authStore;
-  const { theme } = settingsStore;
+  const { theme, organizationName } = settingsStore;
   const { fetchExternalLinks } = publicRoomStore;
 
   return {
     theme,
     setDocumentTitle,
     fetchExternalLinks,
+    organizationName,
   };
 })(
   withTranslation([

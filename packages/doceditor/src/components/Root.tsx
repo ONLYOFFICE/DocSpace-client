@@ -43,6 +43,7 @@ import useSocketHelper from "@/hooks/useSocketHelper";
 import useShareDialog from "@/hooks/useShareDialog";
 import useFilesSettings from "@/hooks/useFilesSettings";
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
+import useStartFillingSelectDialog from "@/hooks/useStartFillingSelectDialog";
 
 import DeepLink from "./deep-link";
 import Editor from "./Editor";
@@ -50,6 +51,8 @@ import SelectFileDialog from "./SelectFileDialog";
 import SelectFolderDialog from "./SelectFolderDialog";
 import SharingDialog from "./ShareDialog";
 import { calculateAsideHeight } from "@/utils";
+import StartFillingSelectorDialog from "./StartFillingSelectDialog";
+import ConflictResolveDialog from "./ConflictResolveDialog";
 
 const Root = ({
   settings,
@@ -129,6 +132,15 @@ const Root = ({
     onSDKRequestSharingSettings,
   } = useShareDialog();
 
+  const {
+    getIsDisabledStartFillingSelectDialog,
+    isVisibleStartFillingSelectDialog,
+    onCloseStartFillingSelectDialog,
+    onSubmitStartFillingSelectDialog,
+    onSDKRequestStartFilling,
+    conflictDataDialog,
+  } = useStartFillingSelectDialog(fileInfo);
+
   useUpdateSearchParamId(fileId, hash);
 
   React.useEffect(() => {
@@ -202,6 +214,7 @@ const Root = ({
           onSDKRequestReferenceSource={onSDKRequestReferenceSource}
           onSDKRequestSelectDocument={onSDKRequestSelectDocument}
           onSDKRequestSelectSpreadsheet={onSDKRequestSelectSpreadsheet}
+          onSDKRequestStartFilling={onSDKRequestStartFilling}
         />
       )}
 
@@ -236,6 +249,20 @@ const Root = ({
           fileInfo={fileInfo}
           onCancel={onCloseSharingDialog}
         />
+      )}
+      {isVisibleStartFillingSelectDialog && !!socketHelper && fileInfo && (
+        <StartFillingSelectorDialog
+          fileInfo={fileInfo}
+          socketHelper={socketHelper}
+          isVisible={isVisibleStartFillingSelectDialog}
+          onClose={onCloseStartFillingSelectDialog}
+          onSubmit={onSubmitStartFillingSelectDialog}
+          getIsDisabled={getIsDisabledStartFillingSelectDialog}
+          filesSettings={filesSettings}
+        />
+      )}
+      {conflictDataDialog.visible && (
+        <ConflictResolveDialog {...conflictDataDialog} />
       )}
     </div>
   );

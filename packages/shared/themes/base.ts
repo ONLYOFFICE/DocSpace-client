@@ -2518,11 +2518,6 @@ export const getBaseTheme = () => {
         descriptionColor: "#555f65",
       },
 
-      tagInput: {
-        tagBackground: "#ECEEF1",
-        tagHoverBackground: "#F3F4F4",
-      },
-
       dropdown: {
         background: "#ffffff",
         borderColor: "#d0d5da",
@@ -3225,6 +3220,7 @@ export const getBaseTheme = () => {
       deletedBackground: "#F8F9F9",
       defaultTagColor: black,
       newTagBackground: "#eceef1",
+      newTagHoverBackground: "#F3F4F4",
     },
 
     profile: {

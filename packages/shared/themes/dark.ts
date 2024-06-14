@@ -1011,7 +1011,8 @@ const Dark: TTheme = {
       hoverBackgroundColor: "#474747",
       disableBackgroundColor: "#282828",
       activeBackgroundColor: "#282828",
-      activeSelectedBackgroundColor: "linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(0deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18))",
+      activeSelectedBackgroundColor:
+        "linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(0deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18))",
 
       title: {
         padding: "4px 16px",
@@ -2103,6 +2104,7 @@ const Dark: TTheme = {
       fileExstColor: "#A3A9AE",
       locationIconColor: "#A3A9AE",
       folderLabelColor: "#A3A9AE",
+      renamedItemColor: "#A3A9AE",
     },
 
     details: {
@@ -2492,11 +2494,6 @@ const Dark: TTheme = {
       background: "#474747",
       isPrivateIcon: "#35ad17",
       descriptionColor: "#a3a9ae",
-    },
-
-    tagInput: {
-      tagBackground: "#242424",
-      tagHoverBackground: "#3D3D3D",
     },
 
     dropdown: {
@@ -3192,11 +3189,14 @@ const Dark: TTheme = {
 
   tag: {
     color: white,
+    deletedColor: "#A3A9AE",
     background: "#474747",
     hoverBackground: "#282828",
     disabledBackground: "#858585",
+    deletedBackground: "#282828",
     defaultTagColor: white,
-    newTagBackground: "#333333",
+    newTagBackground: "#242424",
+    newTagHoverBackground: "#3D3D3D",
   },
 
   profile: {

@@ -25,17 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import {
-  StyledHistoryBlockTagList,
-  StyledHistoryLink,
-} from "../../../styles/history";
-import { ActionByTarget, AnyFeedInfo, getFeedInfo } from "../FeedInfo";
-import { Tag } from "@docspace/shared/components/tag";
-
+import { StyledHistoryLink } from "../../../styles/history";
+import { ActionByTarget } from "../FeedInfo";
 import { decode } from "he";
 import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
+import { withTranslation } from "react-i18next";
 
 interface HistoryRoomExternalLinkProps {
   feed: any;
@@ -43,6 +38,7 @@ interface HistoryRoomExternalLinkProps {
 }
 
 const HistoryRoomExternalLink = ({
+  t,
   feed,
   actionType,
   setEditLinkPanelIsVisible,
@@ -50,7 +46,7 @@ const HistoryRoomExternalLink = ({
 }: HistoryRoomExternalLinkProps) => {
   const onEditLink = () => {
     if (!feed.data.sharedTo) {
-      toastr.error("Link was deleted");
+      toastr.error(t("FeedLinkWasDeleted"));
       return;
     }
 
@@ -71,7 +67,7 @@ const HistoryRoomExternalLink = ({
     );
 };
 
-export default inject(({ publicRoomStore, dialogsStore }) => ({
+export default inject(({ dialogsStore }) => ({
   setEditLinkPanelIsVisible: dialogsStore.setEditLinkPanelIsVisible,
   setLinkParams: dialogsStore.setLinkParams,
-}))(observer(HistoryRoomExternalLink));
+}))(withTranslation(["InfoPanel"])(observer(HistoryRoomExternalLink)));

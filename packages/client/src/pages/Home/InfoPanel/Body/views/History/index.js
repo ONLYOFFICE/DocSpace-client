@@ -91,6 +91,7 @@ const History = ({
           const historyWithLinks = addLinksToHistory(data, links);
           return historyWithLinks;
         }
+        return data;
       })
       .then((data) => {
         if (isMount.current)

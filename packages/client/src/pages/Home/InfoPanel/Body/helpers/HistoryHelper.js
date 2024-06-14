@@ -64,7 +64,10 @@ export const getDateTime = (date) => {
 };
 
 export const addLinksToHistory = (fetchedHistory, links) => {
-  const res = fetchedHistory.items.map((feed) => {
+  if (!fetchedHistory) return null;
+  if (!links) return fetchedHistory;
+
+  const historyWithLinks = fetchedHistory?.items.map((feed) => {
     const { targetType } = getFeedInfo(feed);
     if (targetType !== "roomExternalLink") return feed;
 
@@ -74,11 +77,13 @@ export const addLinksToHistory = (fetchedHistory, links) => {
     return { ...feed, data: link };
   });
 
-  return { ...fetchedHistory, items: res };
+  return { ...fetchedHistory, items: historyWithLinks };
 };
 
 export const parseHistory = (fetchedHistory) => {
-  let feeds = fetchedHistory.items;
+  if (!fetchedHistory) return null;
+
+  let feeds = fetchedHistory?.items;
   let parsedFeeds = [];
 
   for (let i = 0; i < feeds.length; i++) {

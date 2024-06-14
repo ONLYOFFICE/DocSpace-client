@@ -54,7 +54,7 @@ export const enum EmployeeType {
   Collaborator = 4,
   UserString = "user",
   RoomAdmin = "manager",
-  DocSpaceAdmin = "admin",
+  PortalAdmin = "admin",
   Owner = "Owner",
   CollaboratorString = "collaborator",
 }

@@ -24,18 +24,52 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { PRODUCT_NAME } from "../../constants";
-import { TBreadCrumb } from "../../components/selector/Selector.types";
+import React, { useState } from "react";
+import { useTheme } from "styled-components";
 
-export const DEFAULT_BREAD_CRUMB: TBreadCrumb = {
-  label: PRODUCT_NAME,
-  id: 0,
-  isRoom: false,
+import { classNames, getLogoUrl } from "@docspace/shared/utils";
+import { WhiteLabelLogoType } from "../../enums";
+import { size as deviceSize } from "../../utils";
+import { StyledWrapper } from "./PortalLogo.styled";
+import type { PortalLogoProps } from "./PortalLogo.types";
+
+const PortalLogo = ({ className, isResizable = false }: PortalLogoProps) => {
+  const theme = useTheme();
+
+  const [size, setSize] = useState(window.innerWidth);
+
+  const onResize = () => {
+    setSize(window.innerWidth);
+  };
+
+  React.useEffect(() => {
+    if (isResizable) window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
+  }, [isResizable]);
+
+  const isMobile = size <= deviceSize.mobile;
+
+  const logoSize =
+    isResizable && isMobile
+      ? WhiteLabelLogoType.LightSmall
+      : WhiteLabelLogoType.LoginPage;
+
+  const logo = getLogoUrl(logoSize, !theme.isBase);
+
+  return (
+    <StyledWrapper isMobile={isMobile} isResizable={isResizable}>
+      {logo && (
+        <img
+          src={logo}
+          className={classNames("logo-wrapper", className)}
+          alt=""
+        />
+      )}
+    </StyledWrapper>
+  );
 };
 
-export const SHOW_LOADER_TIMER = 200;
-export const MIN_LOADER_TIMER = 500;
-
-export const DEFAULT_FILE_EXTS = "file";
-
-export const PAGE_COUNT = 100;
+export default PortalLogo;

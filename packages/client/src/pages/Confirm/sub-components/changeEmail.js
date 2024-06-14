@@ -42,7 +42,7 @@ class ChangeEmail extends React.PureComponent {
           console.log("change client email success", res);
           tryRedirectTo(
             combineUrl(
-              window.DocSpaceConfig?.proxy?.url,
+              window.ClientConfig?.proxy?.url,
               `/profile?email_change=success`,
             ),
           );
@@ -62,7 +62,7 @@ class ChangeEmail extends React.PureComponent {
           console.log("change client email error", e);
           tryRedirectTo(
             combineUrl(
-              window.DocSpaceConfig?.proxy?.url,
+              window.ClientConfig?.proxy?.url,
               `/error=${errorMessage}`,
             ),
           );
@@ -79,7 +79,7 @@ class ChangeEmail extends React.PureComponent {
           console.log("change client email success", res);
           tryRedirectTo(
             combineUrl(
-              window.DocSpaceConfig?.proxy?.url,
+              window.ClientConfig?.proxy?.url,
               `/profile?email_change=success`,
             ),
           );

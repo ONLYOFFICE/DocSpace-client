@@ -746,7 +746,7 @@ class BackupStore {
 
     for (let index = 0; index < length; index++) {
       res = await uploadBackup(
-        combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
+        combineUrl(window.ClientConfig?.proxy?.url, config.homepage, url),
         requestsDataArray[index],
       );
 
@@ -772,7 +772,7 @@ class BackupStore {
 
       const res = await uploadBackup(
         combineUrl(
-          window.DocSpaceConfig?.proxy?.url,
+          window.ClientConfig?.proxy?.url,
           config.homepage,
           `${url}?init=true&totalSize=${this.restoreResource.size}&extension=${extension}`,
         ),

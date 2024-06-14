@@ -109,7 +109,7 @@ class GroupsStore {
     window.history.replaceState(
       "",
       "",
-      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath),
+      combineUrl(window.ClientConfig?.proxy?.url, config.homepage, newPath),
     );
   };
 
@@ -174,7 +174,7 @@ class GroupsStore {
     window.history.replaceState(
       "",
       "",
-      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath),
+      combineUrl(window.ClientConfig?.proxy?.url, config.homepage, newPath),
     );
   };
 

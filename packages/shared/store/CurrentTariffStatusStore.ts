@@ -121,6 +121,7 @@ class CurrentTariffStatusStore {
   get paymentDate() {
     moment.locale(this.language);
     if (this.dueDate === null) return "";
+
     return moment(this.dueDate).tz(window.timezone).format("LL");
   }
 

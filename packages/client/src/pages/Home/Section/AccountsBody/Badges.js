@@ -75,13 +75,13 @@ const StyledPaidBadge = styled(Badge)`
 const StyledSendClockIcon = styled(SendClockIcon)`
   ${commonIconsStyles}
   path {
-    fill: #a3a9ae;
+    fill: ${(props) => props.theme.accountsBadges.pendingColor};
   }
 `;
 const StyledCatalogSpamIcon = styled(CatalogSpamIcon)`
   ${commonIconsStyles}
   path {
-    fill: #f21c0e;
+    fill: ${(props) => props.theme.accountsBadges.disabledColor};
   }
 `;
 

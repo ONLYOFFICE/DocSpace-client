@@ -713,9 +713,7 @@ const CreateUserForm = (props) => {
             {!emailFromLink && (oauthDataExists() || ssoExists()) && (
               <>
                 <div className="line">
-                  <Text color="#A3A9AE" className="or-label">
-                    {t("Common:orContinueWith")}
-                  </Text>
+                  <Text className="or-label">{t("Common:orContinueWith")}</Text>
                 </div>
                 <SocialButtonsGroup
                   providers={providers}

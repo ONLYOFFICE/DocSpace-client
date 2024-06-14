@@ -127,7 +127,7 @@ const StyledDownloadContent = styled.div`
       }
       .download-dialog-other-text {
         text-align: end;
-        color: #a3a9ae;
+        color: ${(props) => props.theme.downloadDialog.textColor};
       }
     }
   }

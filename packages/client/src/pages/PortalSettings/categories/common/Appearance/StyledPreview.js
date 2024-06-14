@@ -665,7 +665,8 @@ const StyledMobilePreview = styled.div`
   .icon-button_svg {
     svg {
       path {
-        fill: #a3a9ae;
+        fill: ${(props) =>
+          props.theme.client.settings.common.appearance.iconFill};
       }
     }
   }

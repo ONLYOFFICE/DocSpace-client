@@ -1,6 +1,6 @@
 {
   "ErrorEmptyResponse": "Tukša atbilde",
-  "ErrorUnavailableText": "DocSpace nav pieejams",
+  "ErrorUnavailableText": "{{productName}} nav pieejams",
   "LinkDoesNotExist": "Saite, kuru mēģināt atvērt, neeksistē.",
   "LinkHasExpired": "Saitei, kurai sekojāt, ir beidzies derīguma termiņš."
 }

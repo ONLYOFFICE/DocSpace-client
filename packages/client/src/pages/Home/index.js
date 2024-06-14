@@ -158,6 +158,7 @@ const PureHome = (props) => {
     setSelectedFolder,
     userId,
     getFolderModel,
+    scrollToTop,
   } = props;
 
   const location = useLocation();
@@ -198,6 +199,8 @@ const PureHome = (props) => {
     gallerySelected,
     folderSecurity,
     userId,
+
+    scrollToTop,
   });
 
   const { showUploadPanel } = useOperations({
@@ -227,6 +230,8 @@ const PureHome = (props) => {
     setSelectedNode,
     fetchPeople,
     setPortalTariff,
+
+    scrollToTop,
   });
 
   useGroups({
@@ -239,6 +244,8 @@ const PureHome = (props) => {
 
     setSelectedNode,
     fetchGroups,
+
+    scrollToTop,
   });
 
   useInsideGroup({
@@ -248,6 +255,8 @@ const PureHome = (props) => {
     setIsLoading,
     setPortalTariff,
     fetchGroup,
+
+    scrollToTop,
   });
 
   useSettings({
@@ -483,6 +492,7 @@ export default inject(
       addTagsToRoom,
       removeTagsFromRoom,
       getRooms,
+      scrollToTop,
     } = filesStore;
 
     const { updateProfileCulture } = peopleStore.targetUserStore;
@@ -659,6 +669,7 @@ export default inject(
       getRooms,
       setSelectedFolder,
       getFolderModel,
+      scrollToTop,
     };
   },
 )(observer(Home));

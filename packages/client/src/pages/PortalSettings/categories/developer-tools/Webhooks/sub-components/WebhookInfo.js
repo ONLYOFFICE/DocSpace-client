@@ -32,6 +32,7 @@ import { Base } from "@docspace/shared/themes";
 
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 import { useTranslation } from "react-i18next";
 
@@ -60,11 +61,13 @@ StyledGuideLink.defaultProps = { theme: Base };
 
 const WebhookInfo = (props) => {
   const { t } = useTranslation(["Webhooks"]);
-  const { webhooksGuideUrl } = props;
+  const { webhooksGuideUrl, organizationName } = props;
 
   return (
     <InfoWrapper>
-      <InfoText as="p">{t("WebhooksInfo")}</InfoText>
+      <InfoText as="p">
+        {t("WebhooksInfo", { productName: PRODUCT_NAME, organizationName })}
+      </InfoText>
       <StyledGuideLink
         id="webhooks-info-link"
         fontWeight={600}
@@ -80,9 +83,10 @@ const WebhookInfo = (props) => {
 };
 
 export default inject(({ settingsStore }) => {
-  const { webhooksGuideUrl } = settingsStore;
+  const { webhooksGuideUrl, organizationName } = settingsStore;
 
   return {
     webhooksGuideUrl,
+    organizationName,
   };
 })(observer(WebhookInfo));

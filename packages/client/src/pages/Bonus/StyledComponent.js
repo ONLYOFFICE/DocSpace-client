@@ -29,8 +29,10 @@ import styled from "styled-components";
 const StyledComponent = styled.div`
   max-width: 660px;
   .official-documentation {
-    margin: 12px 0;
+    margin: 15px 0 12px 0;
+
     display: grid;
+    row-gap: 6px;
     grid-template-columns: 20px 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     a {
@@ -38,7 +40,11 @@ const StyledComponent = styled.div`
     }
   }
   .upgrade-info {
-    margin-bottom: 24px;
+    margin-bottom: 21px;
+  }
+
+  .benefits-container {
+    margin: 0 0 19px 0;
   }
 `;
 

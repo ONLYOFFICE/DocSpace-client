@@ -38,10 +38,12 @@ const Dropzone = ({
   t,
   setUploadedFile,
   isDisabled,
+  maxImageSize = ONE_MEGABYTE,
 }: {
   t: (key: string) => string;
   setUploadedFile: (f: File) => void;
   isDisabled?: boolean;
+  maxImageSize?: number;
 }) => {
   const [loadingFile, setLoadingFile] = useState(false);
   const mount = useRef(false);
@@ -84,7 +86,7 @@ const Dropzone = ({
 
     // console.log(`${stepMessage} ${sizeMessage} ${compressionRatioMessage}`);
 
-    if (file.size < ONE_MEGABYTE) {
+    if (file.size < maxImageSize) {
       return file;
     }
 
@@ -117,7 +119,7 @@ const Dropzone = ({
       resizeRecursiveAsync(
         { width, height },
         canvas,
-        file.size > ONE_MEGABYTE ? COMPRESSION_RATIO : NO_COMPRESSION_RATIO,
+        file.size > maxImageSize ? COMPRESSION_RATIO : NO_COMPRESSION_RATIO,
       )
         .then((f) => {
           if (mount.current) {

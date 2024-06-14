@@ -28,6 +28,7 @@ import styled from "styled-components";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const Wrapper = styled.div`
   margin: 16px 0;
@@ -87,18 +88,19 @@ const UsersInfoBlock = ({
   t,
   selectedUsers,
   totalUsers,
+  totalUsedUsers,
   totalLicenceLimit,
 }) => {
   return (
     <Wrapper>
       {selectedUsers > totalLicenceLimit && (
         <Text className="license-limit-warning">
-          {t("Settings:UserLimitExceeded")}
+          {t("Settings:UserLimitExceeded", { productName: PRODUCT_NAME })}
         </Text>
       )}
 
       <UsersInfoWrapper
-        selectedUsers={selectedUsers}
+        selectedUsers={totalUsedUsers}
         totalLicenceLimit={totalLicenceLimit}
       >
         <Text className="selected-users-count" truncate>
@@ -107,14 +109,18 @@ const UsersInfoBlock = ({
         <Text as="div" className="selected-admins-count" truncate>
           {t("Settings:LicenseLimitCounter")}
           <Text as="span">
-            {selectedUsers}/{totalLicenceLimit}
+            {totalUsedUsers}/{totalLicenceLimit}
           </Text>
         </Text>
         <HelpButton
           place="right"
           offsetRight={0}
           tooltipContent={
-            <Text fontSize="12px">{t("Settings:LicenseLimitDescription")}</Text>
+            <Text fontSize="12px">
+              {t("Settings:LicenseLimitDescription", {
+                productName: PRODUCT_NAME,
+              })}
+            </Text>
           }
         />
       </UsersInfoWrapper>

@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "Xóa plugin",
-  "DeletePluginDescription": "Plugin này sẽ không còn khả dụng cho người dùng DocSpace. Bạn có chắc muốn tiếp tục?",
+  "DeletePluginDescription": "Plugin này sẽ không còn khả dụng cho người dùng {{productName}}. Bạn có chắc muốn tiếp tục?",
   "DeletePluginTitle": "Bạn muốn xóa plugin?",
   "ExpandFunctionality": "Mở rộng chức năng bằng Plugin SDK",
   "GoToRepo": "Chuyển đến kho lưu trữ",
@@ -10,7 +10,7 @@
   "NotNeedSettings": "Không cần vào cài đặt",
   "PluginSamples": "Mẫu plugin",
   "PluginSDK": "Plugin SDK",
-  "PluginSDKDescription": "Sử dụng Plugin SDK, bạn có thể mở rộng chức năng DocSpace, kết nối các dịch vụ của bên thứ ba hay nâng cao trải nghiệm người dùng hiện có. Tại đây bạn có thể tìm thấy các mẫu plugin với mã nguồn có sẵn trên GitHub.",
+  "PluginSDKDescription": "Sử dụng Plugin SDK, bạn có thể mở rộng chức năng {{productName}}, kết nối các dịch vụ của bên thứ ba hay nâng cao trải nghiệm người dùng hiện có. Tại đây bạn có thể tìm thấy các mẫu plugin với mã nguồn có sẵn trên GitHub.",
   "PluginSDKInstruction": "Nhấp vào nút để xem hướng dẫn chi tiết về cách tạo plugin của riêng bạn.",
-  "UploadDescription": "Bạn có thể thêm các plugin để mở rộng chức năng của DocSpace với các tính năng bổ sung. Hãy nhấp vào Tải plugin lên hoặc kéo thả tập tin vào kho lưu trữ ZIP."
+  "UploadDescription": "Bạn có thể thêm các plugin để mở rộng chức năng của {{productName}} với các tính năng bổ sung. Hãy nhấp vào Tải plugin lên hoặc kéo thả tập tin vào kho lưu trữ ZIP."
 }

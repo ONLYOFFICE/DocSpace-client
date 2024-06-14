@@ -178,7 +178,7 @@ const UsersTableRow = ({
         {isEmailOpen ? (
           <EmailInputWrapper ref={emailInputRef}>
             <EmailInput
-              placeholder={t("Settings:NoEmail")}
+              placeholder={t("EnterEmail")}
               className="import-email-input"
               value={tempEmail}
               onChange={handleEmailChange}
@@ -197,7 +197,7 @@ const UsersTableRow = ({
           <span onClick={openEmail} className="user-email" ref={emailTextRef}>
             <EditSvg />
             <Text fontWeight={600} color="#A3A9AE" className="textOverflow">
-              {prevEmail !== "" ? prevEmail : t("EnterEmail")}
+              {prevEmail !== "" ? prevEmail : t("Settings:NoEmail")}
             </Text>
           </span>
         )}

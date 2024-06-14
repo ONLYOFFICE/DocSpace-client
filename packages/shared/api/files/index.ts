@@ -1434,3 +1434,10 @@ export async function startFilling(fileId: string | number): Promise<void> {
 
   await request(options);
 }
+
+export async function checkIsPDFForm(fileId: string | number) {
+  return request({
+    method: "get",
+    url: `/files/file/${fileId}/isformpdf`,
+  }) as Promise<boolean>;
+}

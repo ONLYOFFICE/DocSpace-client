@@ -70,24 +70,24 @@ export const getFileTypeName = (fileType) => {
 export const getDefaultRoomName = (room, t) => {
   switch (room) {
     case RoomsType.CustomRoom:
-      return t("Files:CustomRooms");
+      return t("Common:CustomRooms");
 
     case RoomsType.FillingFormsRoom:
-      return t("Files:FillingFormRooms");
+      return t("Common:FillingFormRooms");
 
     case RoomsType.EditingRoom:
-      return t("Files:CollaborationRooms");
+      return t("Common:CollaborationRooms");
 
     case RoomsType.ReviewRoom:
       return t("Common:Review");
 
     case RoomsType.ReadOnlyRoom:
-      return t("Files:ViewOnlyRooms");
+      return t("Common:ViewOnlyRooms");
 
     case RoomsType.PublicRoom:
-      return t("Files:PublicRoom");
+      return t("Common:PublicRoom");
     case RoomsType.FormRoom:
-      return t("Files:FormRoom");
+      return t("Common:FormRoom");
   }
 };
 

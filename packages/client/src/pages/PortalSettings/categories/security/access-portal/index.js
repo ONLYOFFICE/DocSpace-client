@@ -42,6 +42,7 @@ import { size } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
 import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const AccessPortal = (props) => {
   const {
@@ -57,7 +58,7 @@ const AccessPortal = (props) => {
   } = props;
 
   useEffect(() => {
-    setDocumentTitle(t("PortalAccess"));
+    setDocumentTitle(t("PortalAccess", { productName: PRODUCT_NAME }));
   }, []);
 
   if (isMobileView) return <MobileView />;
@@ -95,7 +96,7 @@ const AccessPortal = (props) => {
 
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight="400">
-          {t("TwoFactorAuthEnableDescription")}
+          {t("TwoFactorAuthEnableDescription", { productName: PRODUCT_NAME })}
         </Text>
         <Text fontSize="13px" fontWeight="400">
           <Trans t={t} i18nKey="TwoFactorAuthSave" />
@@ -173,7 +174,7 @@ const AccessPortal = (props) => {
       </Text>
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight="400">
-          {t("AdminsMessageSettingDescription")}
+          {t("AdminsMessageSettingDescription", { productName: PRODUCT_NAME })}
         </Text>
         <Text fontSize="13px" fontWeight="400">
           <Trans t={t} i18nKey="SaveToApply" />

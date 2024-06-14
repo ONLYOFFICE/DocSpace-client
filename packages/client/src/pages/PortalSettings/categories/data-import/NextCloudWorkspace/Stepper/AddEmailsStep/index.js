@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
@@ -36,10 +36,10 @@ import { Text } from "@docspace/shared/components/text";
 
 import { Wrapper } from "../StyledStepper";
 
-// import UsersInfoBlock from "../../../sub-components/UsersInfoBlock";
+import UsersInfoBlock from "../../../sub-components/UsersInfoBlock";
 import { NoEmailUsersBlock } from "../../../sub-components/NoEmailUsersBlock";
 
-// const LICENSE_LIMIT = 100;
+import { parseQuota } from "../../../utils";
 
 const AddEmailsStep = (props) => {
   const {
@@ -51,11 +51,15 @@ const AddEmailsStep = (props) => {
     setSearchValue,
     setResultUsers,
     areCheckedUsersEmpty,
+    checkedUsers,
+    quotaCharacteristics,
+    withEmailUsers,
   } = props;
 
   const [dataPortion, setDataPortion] = useState(
     users.withoutEmail.slice(0, 25),
   );
+  const [quota, setQuota] = useState({ used: 0, max: 0 });
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
     setDataPortion(users.withoutEmail.slice(leftBoundary, rightBoundary));
@@ -80,6 +84,18 @@ const AddEmailsStep = (props) => {
     incrementStep();
   };
 
+  const numberOfSelectedUsers =
+    checkedUsers.withEmail.length + checkedUsers.withoutEmail.length;
+
+  useEffect(() => {
+    setQuota(parseQuota(quotaCharacteristics[1]));
+  }, []);
+
+  const totalUsedUsers =
+    quota.used +
+    checkedUsers.withEmail.filter((user) => !user.isDuplicate).length +
+    checkedUsers.withoutEmail.length;
+
   return (
     <Wrapper>
       {users.withoutEmail.length > 0 && (
@@ -100,15 +116,20 @@ const AddEmailsStep = (props) => {
             cancelButtonLabel={t("Common:Back")}
             showReminder
             displaySettings
-            saveButtonDisabled={areCheckedUsersEmpty}
+            saveButtonDisabled={
+              areCheckedUsersEmpty || (quota.max && totalUsedUsers > quota.max)
+            }
           />
 
-          {/* <UsersInfoBlock
-            t={t}
-            selectedUsers={numberOfCheckedAccounts}
-            totalUsers={users.withoutEmail.length}
-            totalLicenceLimit={LICENSE_LIMIT}
-          /> */}
+          {quota.max && (
+            <UsersInfoBlock
+              t={t}
+              totalUsedUsers={totalUsedUsers}
+              selectedUsers={numberOfSelectedUsers}
+              totalUsers={withEmailUsers.length + users.withoutEmail.length}
+              totalLicenceLimit={quota.max}
+            />
+          )}
 
           <SearchInput
             id="search-users-input"
@@ -143,13 +164,15 @@ const AddEmailsStep = (props) => {
         cancelButtonLabel={t("Common:Back")}
         showReminder
         displaySettings
-        saveButtonDisabled={areCheckedUsersEmpty}
+        saveButtonDisabled={
+          areCheckedUsersEmpty || (quota.max && totalUsedUsers > quota.max)
+        }
       />
     </Wrapper>
   );
 };
 
-export default inject(({ setup, importAccountsStore }) => {
+export default inject(({ setup, importAccountsStore, currentQuotaStore }) => {
   const { viewAs } = setup;
   const {
     searchValue,
@@ -157,7 +180,10 @@ export default inject(({ setup, importAccountsStore }) => {
     users,
     setResultUsers,
     areCheckedUsersEmpty,
+    checkedUsers,
+    withEmailUsers,
   } = importAccountsStore;
+  const { quotaCharacteristics } = currentQuotaStore;
 
   return {
     viewAs,
@@ -166,5 +192,8 @@ export default inject(({ setup, importAccountsStore }) => {
     users,
     setResultUsers,
     areCheckedUsersEmpty,
+    checkedUsers,
+    quotaCharacteristics,
+    withEmailUsers,
   };
 })(observer(AddEmailsStep));

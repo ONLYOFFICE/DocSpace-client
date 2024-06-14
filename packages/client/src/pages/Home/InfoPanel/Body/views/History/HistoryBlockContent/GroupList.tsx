@@ -118,7 +118,7 @@ const HistoryGroupList = ({
             ns="InfoPanel"
             i18nKey="AndMoreLabel"
             values={{ count: groupsData.length - EXPANSION_THRESHOLD }}
-            components={{ bold: <strong /> }}
+            components={{ 1: <strong /> }}
           />
         </StyledHistoryBlockExpandLink>
       )}

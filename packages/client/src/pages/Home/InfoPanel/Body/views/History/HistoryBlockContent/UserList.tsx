@@ -103,7 +103,7 @@ const HistoryUserList = ({
             ns="InfoPanel"
             i18nKey="AndMoreLabel"
             values={{ count: usersData.length - EXPANSION_THRESHOLD }}
-            components={{ bold: <strong /> }}
+            components={{ 1: <strong /> }}
           />
         </StyledHistoryBlockExpandLink>
       )}

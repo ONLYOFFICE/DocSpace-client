@@ -161,7 +161,7 @@ export const HistoryItemList = ({
             ns="InfoPanel"
             i18nKey="AndMoreLabel"
             values={{ count: items.length - EXPANSION_THRESHOLD }}
-            components={{ bold: <strong /> }}
+            components={{ 1: <strong /> }}
           />
         </StyledHistoryBlockExpandLink>
       )}

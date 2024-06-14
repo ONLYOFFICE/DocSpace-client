@@ -44,7 +44,7 @@ const BonusItem = ({ showText, toggleArticleOpen, currentColorScheme }) => {
   const { t } = useTranslation("Common");
 
   const navigate = useNavigate();
-  console.log(" window.ClientConfig", window.ClientConfig);
+
   const onClick = React.useCallback((e) => {
     if (openingNewTab(bonusUrl, e)) return;
 

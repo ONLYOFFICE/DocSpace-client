@@ -81,6 +81,7 @@ export const StyledTabs = styled.div<{
     width: 100%;
     display: flex;
     align-items: center;
+    user-select: none;
   }
 `;
 
@@ -129,6 +130,7 @@ export const Tab = styled.div<{
   cursor: pointer;
   opacity: ${(props) => (props.isDisabled && props.$type === TabsTypes.Secondary ? 0.6 : 1)};
   pointer-events: ${(props) => props.isDisabled && props.$type === TabsTypes.Secondary && "none"};
+  user-select: none;
 
   padding: ${(props) =>
     props.$type === TabsTypes.Primary ? "4px 0 0 0" : "4px 16px"};

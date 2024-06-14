@@ -56,8 +56,6 @@ export const TagPure = ({
   roomType,
   providerType,
 }: TagProps) => {
-  console.log(isDeleted, "isDeleted");
-
   const [openDropdown, setOpenDropdown] = React.useState(false);
 
   const tagRef = React.useRef<HTMLDivElement | null>(null);

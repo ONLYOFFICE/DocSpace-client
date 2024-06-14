@@ -86,7 +86,7 @@ const SecurityWrapper = (props) => {
     if (currentTab !== -1 && data.length) setCurrentTabId(currentTab.id);
 
     load();
-  }, [location]);
+  }, [location.pathname]);
 
   const onSelect = (e) => {
     navigate(

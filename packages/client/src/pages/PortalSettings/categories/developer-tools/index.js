@@ -121,7 +121,7 @@ const DeveloperToolsWrapper = (props) => {
     }
 
     setIsLoading(true);
-  }, [location]);
+  }, [location.pathname]);
 
   useEffect(() => {
     ready && startTransition(load);

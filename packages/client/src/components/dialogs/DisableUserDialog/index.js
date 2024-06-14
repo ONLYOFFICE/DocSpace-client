@@ -1,22 +1,50 @@
-import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
+import { EmployeeStatus } from "@docspace/shared/enums";
 
 import ModalDialogContainer from "../ModalDialogContainer";
 
-const DisableUserDialog = ({ t, visible, onClose, isLoading }) => {
+const DisableUserDialog = ({
+  t,
+  visible,
+  onClose,
+  isLoading,
+  fetchData,
+  selection,
+  updateUserStatus,
+}) => {
+  const userIds = selection.map((user) => user.id);
+  const onlyOneUser = userIds.length === 1;
+
+  let headerText = "";
+  let bodyText = "";
+
+  headerText = onlyOneUser
+    ? t("ChangeUserStatusDialog:DisableUser")
+    : t("ChangeUserStatusDialog:DisableUsers");
+
+  bodyText = onlyOneUser
+    ? t("ChangeUserStatusDialog:DisableUserDescription")
+    : t("ChangeUserStatusDialog:DisableUsersDescription");
+
+  bodyText = bodyText + t("ChangeUserStatusDialog:DisableGeneralDescription");
+
+  const onClickDisableUser = async () => {
+    await updateUserStatus(EmployeeStatus.Disabled, userIds);
+    toastr.success(t("PeopleTranslations:SuccessChangeUserStatus"));
+    await fetchData();
+    onClose();
+  };
+
   return (
     <ModalDialogContainer
       visible={visible}
       onClose={onClose}
       displayType="modal"
     >
-      <ModalDialog.Header>
-        {t("ChangeUserStatusDialog:DisableUser")}
-      </ModalDialog.Header>
-      <ModalDialog.Body>
-        {t("ChangeUserStatusDialog:DisableUserDescription")}&nbsp;
-        {t("ChangeUserStatusDialog:DisableGeneralDescription")}
-      </ModalDialog.Body>
+      <ModalDialog.Header>{headerText}</ModalDialog.Header>
+      <ModalDialog.Body>{bodyText}</ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           key="DisableBtn"
@@ -24,7 +52,7 @@ const DisableUserDialog = ({ t, visible, onClose, isLoading }) => {
           size="normal"
           scale
           primary={true}
-          onClick={() => console.log("disable")}
+          onClick={onClickDisableUser}
           isLoading={isLoading}
         />
         <Button

@@ -511,9 +511,10 @@ class SelectionStore {
     const { getUsersList } = this.peopleStore.usersStore;
     try {
       const users = await getUsersList();
-      const sessionsPromises = users.map((user) =>
-        getUserSessionsById(user.id),
-      );
+      const sessionsPromises = users
+        .filter((user) => user.status !== EmployeeStatus.Disabled)
+        .map((user) => getUserSessionsById(user.id));
+
       const sessions = await Promise.all(sessionsPromises);
       this.setSessionsData(sessions);
       this.updateAllSessions(sessions, this.dataFromSocket);

@@ -98,6 +98,7 @@ const Sessions = ({
   onClickLogoutAllSessions,
   onClickLogoutAllExceptThis,
   onClickRemoveSession,
+  updateUserStatus,
 }) => {
   useEffect(() => {
     socketHelper.emit({
@@ -161,6 +162,9 @@ const Sessions = ({
           t={t}
           visible={disableDialogVisible}
           onClose={() => setDisableDialogVisible(false)}
+          fetchData={fetchData}
+          selection={selection}
+          updateUserStatus={updateUserStatus}
         />
       )}
 
@@ -192,6 +196,7 @@ const Sessions = ({
 };
 
 export default inject(({ settingsStore, setup, peopleStore }) => {
+  const { updateUserStatus } = peopleStore.usersStore;
   const { socketHelper, currentDeviceType } = settingsStore;
   const {
     allSessions,
@@ -246,6 +251,7 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     onClickLogoutAllSessions,
     onClickLogoutAllExceptThis,
     onClickRemoveSession,
+    updateUserStatus,
   };
 })(
   withTranslation(["Settings", "Profile", "Common", "ChangeUserStatusDialog"])(

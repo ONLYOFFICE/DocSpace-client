@@ -125,6 +125,7 @@ export type TSettings = {
   defaultPage?: string;
   tagManagerId?: string;
   enabledJoin?: boolean;
+  maxImageUploadSize: number;
 };
 
 export type TCustomSchema = {

@@ -311,6 +311,8 @@ class SettingsStore {
 
   userNameRegex = "";
 
+  maxImageUploadSize: number | null = null;
+
   windowWidth = window.innerWidth;
 
   windowAngle = window.screen?.orientation?.angle ?? window.orientation ?? 0;

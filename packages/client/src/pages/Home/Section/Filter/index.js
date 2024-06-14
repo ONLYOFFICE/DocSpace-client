@@ -787,7 +787,7 @@ const SectionFilterContent = ({
               label = t("Common:Active");
               break;
             case EmployeeStatus.Pending:
-              label = t("PeopleTranslations:PendingTitle");
+              label = t("PeopleTranslations:PendingInviteTitle");
               break;
             case EmployeeStatus.Disabled:
               label = t("PeopleTranslations:DisabledEmployeeStatus");
@@ -1323,7 +1323,7 @@ const SectionFilterContent = ({
           id: "filter_status-pending",
           key: EmployeeStatus.Pending,
           group: "filter-status",
-          label: t("PeopleTranslations:PendingTitle"),
+          label: t("PeopleTranslations:PendingInviteTitle"),
         },
       ];
 

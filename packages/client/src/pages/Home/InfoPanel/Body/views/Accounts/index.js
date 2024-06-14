@@ -74,7 +74,7 @@ const Accounts = (props) => {
       case EmployeeStatus.Active:
         return setStatusLabel(t("Common:Active"));
       case EmployeeStatus.Pending:
-        return setStatusLabel(t("PeopleTranslations:PendingTitle"));
+        return setStatusLabel(t("PeopleTranslations:PendingInviteTitle"));
       case EmployeeStatus.Disabled:
         return setStatusLabel(t("PeopleTranslations:DisabledEmployeeStatus"));
       default:

@@ -854,7 +854,7 @@ const StyledModalRowContainer = styled.div`
               margin-right: 8px;
             `}
 
-      border: 1px solid #eceef1;
+      border: ${(props) => props.theme.filesPanels.embedding.border};
       border-radius: 16px;
       line-height: 30px;
       padding: 4px 15px;

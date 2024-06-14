@@ -174,7 +174,9 @@ const EditingWrapper = styled.div`
         }
       `};
 
-    ${({ isDisabled }) => isDisabled && "background-color: #fff"}
+    ${({ isDisabled }) =>
+      isDisabled &&
+      `background-color: ${(props) => props.theme.filesEditingWrapper.disabledBackground}`}
   }
 
   .edit-button {

@@ -75,7 +75,8 @@ const StyledComponent = styled.div`
           `}
     border-radius: 8px;
     cursor: pointer;
-    background: ${(props) => (props.theme.isBase ? "#eceef1" : "#474747")}
+    background: ${(props) =>
+        props.theme.client.settings.common.appearance.themeAddBackground}
       url(${PlusThemeSvgUrl}) no-repeat center;
   }
 

@@ -80,7 +80,7 @@ const StyledBody = styled.div`
               margin-right: 8px;
             `}
 
-      border: 1px solid #eceef1;
+      border: ${(props) => props.theme.filesPanels.embedding.border};
       border-radius: 16px;
       line-height: 20px;
       padding: 3px 15px;

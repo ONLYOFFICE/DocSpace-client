@@ -302,7 +302,6 @@ const Badges = ({
       {/* {isForm  && ( 
         <BadgeWrapper isTile={isTile}>
           <HelpButton
-            color="#F2675A"
             place="bottom"
             size={isViewTable ? 12 : 16}
             className="bagde_alert icons-group"

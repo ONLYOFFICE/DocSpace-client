@@ -1443,7 +1443,7 @@ class FilesActionStore {
     };
 
     const { title, fileExst } = item;
-    const parentId = item.parentId || item.toFolderId;
+    const parentId = item.parentId || item.toFolderId || recycleBinFolderId;
     const parentTitle = item.parentTitle || item.toFolderTitle;
 
     const isRoot = [
@@ -1451,7 +1451,7 @@ class FilesActionStore {
       myFolderId,
       archiveRoomsId,
       recycleBinFolderId,
-    ].includes(parentId || toFolderId);
+    ].includes(parentId);
 
     const state = {
       title: parentTitle,

@@ -127,8 +127,6 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   const withPassword = link?.sharedTo?.password;
   const denyDownload = link?.sharedTo?.denyDownload;
 
-  const withToken = !!requestToken;
-
   const [barIsVisible, setBarIsVisible] = useState(!!fileId);
 
   const dataDimensions = [
@@ -146,13 +144,13 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   );
 
   const fileConfig = {
-    mode: "manager",
+    mode: "viewer",
     width: "100%",
     height: "100%",
     frameId: "ds-frame",
     init: true,
     id: fileId,
-    requestToken: withToken ? requestToken : null,
+    requestToken,
   };
 
   const roomConfig = {

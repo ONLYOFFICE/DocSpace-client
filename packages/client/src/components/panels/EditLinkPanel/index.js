@@ -130,7 +130,7 @@ const EditLinkPanel = (props) => {
     editExternalLink(roomId, newLink)
       .then((link) => {
         setExternalLink(link);
-        setLinkParams({ link, roomId, isPublic });
+        setLinkParams({ link, roomId, isPublic, isFormRoom });
 
         if (isEdit) {
           copy(linkValue);
@@ -313,13 +313,12 @@ export default inject(
     } = dialogsStore;
     const { externalLinks, editExternalLink, setExternalLink } =
       publicRoomStore;
-    const { isEdit, roomId, isPublic } = linkParams;
+    const { isEdit, roomId, isPublic, isFormRoom } = linkParams;
 
     const linkId = linkParams?.link?.sharedTo?.id;
     const link = externalLinks.find((l) => l?.sharedTo?.id === linkId);
 
     const shareLink = link?.sharedTo?.shareLink;
-    const isFormRoom = infoPanelSelection?.roomType === RoomsType.FormRoom;
 
     return {
       visible: editLinkPanelIsVisible,

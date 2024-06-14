@@ -65,6 +65,7 @@ const LinkRow = (props) => {
     theme,
     setIsScrollLocked,
     isPublicRoomType,
+    isFormRoom,
     ...rest
   } = props;
 
@@ -90,14 +91,20 @@ const LinkRow = (props) => {
 
   const onEditLink = () => {
     setEditLinkPanelIsVisible(true);
-    setLinkParams({ isEdit: true, link, roomId, isPublic: isPublicRoomType });
+    setLinkParams({
+      isEdit: true,
+      link,
+      roomId,
+      isPublic: isPublicRoomType,
+      isFormRoom,
+    });
     onCloseContextMenu();
   };
 
   // const onDisableLink = () => {
   //   if (isExpired) {
   //     setEditLinkPanelIsVisible(true);
-  //     setLinkParams({ isEdit: true, link, roomId, isPublic: isPublicRoomType });
+  //     setLinkParams({ isEdit: true, link, roomId, isPublic: isPublicRoomType, isFormRoom });
   //     return;
   //   }
 
@@ -124,13 +131,13 @@ const LinkRow = (props) => {
   };
 
   const onEmbeddingClick = () => {
-    setLinkParams({ link, roomId, isPublic: isPublicRoomType });
+    setLinkParams({ link, roomId, isPublic: isPublicRoomType, isFormRoom });
     setEmbeddingPanelIsVisible(true);
     onCloseContextMenu();
   };
 
   const onDeleteLink = () => {
-    setLinkParams({ link, roomId, isPublic: isPublicRoomType });
+    setLinkParams({ link, roomId, isPublic: isPublicRoomType, isFormRoom });
     setDeleteLinkDialogVisible(true);
     onCloseContextMenu();
   };
@@ -326,6 +333,7 @@ export default inject(
       isPublicRoomType:
         infoPanelSelection.roomType === RoomsType.PublicRoom ||
         infoPanelSelection.roomType === RoomsType.FormRoom,
+      isFormRoom: infoPanelSelection?.roomType === RoomsType.FormRoom,
     };
   },
 )(

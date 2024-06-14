@@ -459,12 +459,14 @@ class ContextOptionsStore {
       const itemLink = await getFileLink(item.id);
 
       const isPublicRoomType = sharedItem.roomType === RoomsType.PublicRoom;
+      const isFormRoom = sharedItem.roomType === RoomsType.FormRoom;
 
       setLinkParams({
         link: itemLink,
         roomId: sharedItem?.id,
         fileId: item.id,
         isPublic: isPublicRoomType,
+        isFormRoom,
       });
       setEmbeddingPanelIsVisible(true);
     } catch (error) {

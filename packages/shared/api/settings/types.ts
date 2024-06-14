@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TenantStatus } from "../../enums";
+import { RecaptchaType, TenantStatus } from "../../enums";
 import { TColorScheme } from "../../themes";
 
 export type TTfaType = "sms" | "app" | "none";
@@ -125,6 +125,8 @@ export type TSettings = {
   defaultPage?: string;
   tagManagerId?: string;
   enabledJoin?: boolean;
+  recaptchaPublicKey?: string;
+  recaptchaType?: RecaptchaType;
   maxImageUploadSize: number;
 };
 

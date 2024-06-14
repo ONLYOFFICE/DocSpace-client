@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 /* eslint-disable @typescript-eslint/no-throw-literal */
+import { RecaptchaType } from "../enums";
 import api from "../api";
 import { setWithCredentialsStatus } from "../api/client";
 
@@ -34,6 +35,7 @@ export async function login(
   session = true,
   captchaToken: null | undefined | string = "",
   currentCultureName: string = "",
+  captchaType?: RecaptchaType,
 ): Promise<string | object> {
   try {
     const response = (await api.user.login(
@@ -41,6 +43,7 @@ export async function login(
       hash,
       session,
       captchaToken,
+      captchaType,
       currentCultureName,
     )) as {
       token?: string;

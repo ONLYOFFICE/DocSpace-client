@@ -52,10 +52,13 @@ const BonusItem = ({ showText, toggleArticleOpen, currentColorScheme }) => {
     toggleArticleOpen();
   }, []);
 
+  const title = t("Common:Bonus");
+
   return (
     <ArticleItem
       key="bonus"
-      text={t("Common:Bonus")}
+      text={title}
+      title={title}
       icon={GiftReactSvgUrl}
       showText={showText}
       onClick={onClick}

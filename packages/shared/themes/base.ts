@@ -2396,6 +2396,7 @@ export const getBaseTheme = () => {
         textAreaColor: gray,
         iconColor: black,
         color: gray,
+        border: `1px solid ${grayDarkMid}`,
       },
 
       versionHistory: {
@@ -2581,6 +2582,7 @@ export const getBaseTheme = () => {
 
       fill: gray,
       hoverFill: lightGrayDark,
+      disabledBackground: white,
     },
 
     filesIcons: {
@@ -2777,6 +2779,10 @@ export const getBaseTheme = () => {
           arrowColor: black,
           descriptionColor: lightGrayDark,
           brandingDescriptionColor: lightGrayDark,
+
+          appearance: {
+            themeAddBackground: grayLightMid,
+          },
 
           whiteLabel: {
             borderImg: `1px solid ${grayStrong}`,

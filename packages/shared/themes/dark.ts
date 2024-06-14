@@ -2379,6 +2379,7 @@ const Dark: TTheme = {
       textAreaColor: grayDark,
       iconColor: white,
       color: gray,
+      border: `1px solid ${grayDarkMid}`,
     },
 
     versionHistory: {
@@ -2565,6 +2566,7 @@ const Dark: TTheme = {
 
     fill: grayDark,
     hoverFill: white,
+    disabledBackground: white,
   },
 
   filesIcons: {
@@ -2761,6 +2763,10 @@ const Dark: TTheme = {
         arrowColor: white,
         descriptionColor: grayDark,
         brandingDescriptionColor: grayDark,
+
+        appearance: {
+          themeAddBackground: grayDarkStrong,
+        },
 
         whiteLabel: {
           borderImg: `1px solid ${grayDarkStrong}`,

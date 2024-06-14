@@ -449,7 +449,7 @@ const AddUsersPanel = ({
               fontSize="12px"
               noSelect
               truncate
-              color="#A3A9AE"
+              color={theme.filesPanels.addUsers.textColor}
               dir="auto"
             >
               {`${userType} | ${email}`}

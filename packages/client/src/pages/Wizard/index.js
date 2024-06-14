@@ -419,7 +419,7 @@ const Wizard = (props) => {
                 </FieldContainer>
               )}
               <StyledInfo>
-                <Text color="#A3A9AE" fontWeight={400}>
+                <Text className="text" fontWeight={400}>
                   {t("Common:Domain")}
                 </Text>
                 <Text fontWeight={600} className="machine-name">
@@ -427,7 +427,7 @@ const Wizard = (props) => {
                 </Text>
               </StyledInfo>
               <StyledInfo>
-                <Text color="#A3A9AE" fontWeight={400}>
+                <Text className="text" fontWeight={400}>
                   {t("Common:Language")}
                 </Text>
                 <div className="wrapper__language-selector">
@@ -455,7 +455,7 @@ const Wizard = (props) => {
                 </div>
               </StyledInfo>
               <StyledInfo>
-                <Text color="#A3A9AE" fontWeight={400}>
+                <Text className="text" fontWeight={400}>
                   {t("Timezone")}
                 </Text>
                 <ComboBox

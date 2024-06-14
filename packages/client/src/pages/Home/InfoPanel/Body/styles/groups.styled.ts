@@ -65,7 +65,7 @@ export const GroupsContent = styled.div<{}>`
 
       .email {
         max-width: 180px;
-        color: #a3a9ae;
+        color: ${(props) => props.theme.infoPanel.groups.textColor};
         font-size: 12px;
         line-height: 16px;
         font-style: normal;

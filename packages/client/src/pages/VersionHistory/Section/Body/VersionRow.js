@@ -316,7 +316,7 @@ const VersionRow = (props) => {
               </>
             )}
 
-            <Text className="version_text" color="#A3A9AE" truncate={true}>
+            <Text className="version_text" truncate={true}>
               {info.comment}
             </Text>
           </>

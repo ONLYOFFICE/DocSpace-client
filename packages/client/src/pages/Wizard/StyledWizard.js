@@ -162,6 +162,10 @@ export const StyledInfo = styled.div`
 
   margin-bottom: 4px;
 
+  .text {
+    color: ${(props) => props.theme.client.wizard.textColor};
+  }
+
   .machine-name {
     padding-bottom: 4px;
     padding-top: 4px;

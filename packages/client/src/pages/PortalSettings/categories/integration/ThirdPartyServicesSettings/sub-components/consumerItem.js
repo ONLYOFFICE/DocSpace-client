@@ -40,7 +40,7 @@ const StyledItem = styled.div`
       !props.isThirdPartyAvailable &&
       !props.isSet &&
       css`
-        color: #a3a9ae;
+        color: ${(props) => props.theme.client.settings.integration.textColor};
       `}
   }
 `;

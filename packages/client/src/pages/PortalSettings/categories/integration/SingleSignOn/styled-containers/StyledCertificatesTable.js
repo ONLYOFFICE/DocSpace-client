@@ -67,6 +67,11 @@ const StyledCertificatesTable = styled.div`
 
       .column-row {
         display: flex;
+
+        .description {
+          color: ${(props) =>
+            props.theme.client.settings.integration.sso.textColor};
+        }
       }
     }
 

@@ -160,13 +160,6 @@ class UploadPanelComponent extends React.Component {
                     />
                   )}
                 </div>
-                {/*<div className="upload_panel-vertical-dots-icon">
-                  <IconButton
-                    size="20"
-                    iconName={VerticalDotsReactSvgUrl}
-                    color="#A3A9AE"
-                  />
-                  </div>*/}
               </div>
             </StyledHeaderContent>
             <StyledBody className="upload-panel_body">

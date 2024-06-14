@@ -137,6 +137,10 @@ const StyledInviteUserBody = styled.div`
   display: flex;
   flex-direction: column;
   overflow: auto;
+
+  .about-label {
+    color: ${(props) => props.theme.filesPanels.invite.textColor};
+  }
 `;
 
 const StyledHeading = styled(Heading)`
@@ -425,7 +429,7 @@ const StyledCrossIcon = styled(CrossIcon)`
 StyledCrossIcon.defaultProps = { theme: Base };
 
 const StyledDeleteIcon = styled(DeleteIcon)`
-cursor: pointer;
+  cursor: pointer;
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`

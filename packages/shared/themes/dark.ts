@@ -2303,6 +2303,15 @@ const Dark: TTheme = {
       linkSecondaryColor: white,
       exstsColor: gray,
     },
+    helpButton: {
+      background: grayDark,
+      fill: white,
+    },
+  },
+
+  createEditGroupDialog: {
+    textColor: grayDark,
+    iconFill: grayDark,
   },
 
   filesThirdPartyDialog: {
@@ -2548,6 +2557,11 @@ const Dark: TTheme = {
     badgeBackgroundColor: grayDark,
   },
 
+  accountsBadges: {
+    pendingColor: grayDark,
+    disabledColor: darkErrorStatus,
+  },
+
   filesEditingWrapper: {
     color: white,
     border: `1px solid ${grayDarkStrong}`,
@@ -2670,6 +2684,7 @@ const Dark: TTheme = {
 
   downloadDialog: {
     background: darkGrayLight,
+    textColor: grayDark,
   },
 
   client: {
@@ -2722,6 +2737,10 @@ const Dark: TTheme = {
         arrowFill: white,
         descriptionColor: grayDark,
 
+        tfa: {
+          textColor: grayDark,
+        },
+
         admins: {
           backgroundColor: black,
           backgroundColorWrapper: lightSecondMain,
@@ -2768,6 +2787,7 @@ const Dark: TTheme = {
           themeAddBackground: grayDarkStrong,
           accentBoxBackground: grayDarkStrong,
           buttonBoxBackground: grayDarkStrong,
+          iconFill: grayDark,
         },
 
         whiteLabel: {
@@ -2990,6 +3010,7 @@ const Dark: TTheme = {
 
   invitePage: {
     borderColor: grayDarkStrong,
+    textColor: grayDark,
   },
 
   portalUnavailable: {

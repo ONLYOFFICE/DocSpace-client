@@ -2320,6 +2320,15 @@ export const getBaseTheme = () => {
         linkSecondaryColor: black,
         exstsColor: gray,
       },
+      helpButton: {
+        background: gray,
+        fill: white,
+      },
+    },
+
+    createEditGroupDialog: {
+      textColor: gray,
+      iconFill: gray,
     },
 
     filesThirdPartyDialog: {
@@ -2564,6 +2573,11 @@ export const getBaseTheme = () => {
       badgeBackgroundColor: gray,
     },
 
+    accountsBadges: {
+      pendingColor: gray,
+      disabledColor: lightErrorStatus,
+    },
+
     filesEditingWrapper: {
       color: black,
       border: `1px solid ${grayStrong}`,
@@ -2686,6 +2700,7 @@ export const getBaseTheme = () => {
 
     downloadDialog: {
       background: grayLight,
+      textColor: gray,
     },
 
     client: {
@@ -2738,6 +2753,10 @@ export const getBaseTheme = () => {
           arrowFill: black,
           descriptionColor: grayText,
 
+          tfa: {
+            textColor: gray,
+          },
+
           admins: {
             backgroundColor: black,
             backgroundColorWrapper: lightSecondMain,
@@ -2784,6 +2803,7 @@ export const getBaseTheme = () => {
             themeAddBackground: grayLightMid,
             accentBoxBackground: grayLightMid,
             buttonBoxBackground: grayLightMid,
+            iconFill: gray,
           },
 
           whiteLabel: {
@@ -3009,6 +3029,7 @@ export const getBaseTheme = () => {
 
     invitePage: {
       borderColor: grayLightMid,
+      textColor: gray,
     },
 
     portalUnavailable: {

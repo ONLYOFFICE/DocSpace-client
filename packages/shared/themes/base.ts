@@ -2132,6 +2132,7 @@ export const getBaseTheme = () => {
         locationIconColor: "#A3A9AE",
         folderLabelColor: "#A3A9AE",
         renamedItemColor: "#A3A9AE",
+        oldRoleColor: "#657077",
       },
 
       details: {

@@ -24,34 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
 import { StyledHistoryBlockMessage } from "../../../styles/history";
-import { getFeedInfo } from "../FeedInfo";
 
 interface HistoryUserRoleChangeProps {
   feed: any;
 }
 
-const HistoryUserRoleChange = ({ feed }: HistoryUserRoleChangeProps) => {
+const HistoryUserGroupRoleChange = ({ feed }: HistoryUserRoleChangeProps) => {
   return (
     <StyledHistoryBlockMessage className="message">
       <span className="main-message">
         <strong>«{feed.data.access}»</strong>
       </span>{" "}
-      <span
-        className="old-role"
-        style={{
-          color: "#657077",
-          fontWeight: 600,
-          textDecoration: "line-through",
-        }}
-      >
-        «{feed.data.oldAccess}»
-      </span>
+      <span className="old-role">«{feed.data.oldAccess}»</span>
     </StyledHistoryBlockMessage>
   );
 };
 
-export default inject(({ infoPanelStore, userStore }) => {
-  return {};
-})(observer(HistoryUserRoleChange));
+export default HistoryUserGroupRoleChange;

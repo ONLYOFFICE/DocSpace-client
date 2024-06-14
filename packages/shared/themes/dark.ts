@@ -2105,6 +2105,7 @@ const Dark: TTheme = {
       locationIconColor: "#A3A9AE",
       folderLabelColor: "#A3A9AE",
       renamedItemColor: "#A3A9AE",
+      oldRoleColor: "#A3A9AE",
     },
 
     details: {

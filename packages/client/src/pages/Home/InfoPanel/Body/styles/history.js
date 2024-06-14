@@ -130,6 +130,12 @@ const StyledHistoryBlockMessage = styled.div`
     white-space: nowrap;
     overflow: hidden;
   }
+
+  .old-role {
+    color: ${(props) => props.theme.infoPanel.history.oldRoleColor};
+    font-weight: 600;
+    text-decoration: line-through;
+  }
 `;
 
 const StyledHistoryLink = styled.span`

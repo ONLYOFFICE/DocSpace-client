@@ -198,7 +198,7 @@ const LoginForm = ({
     //errorText && setErrorText("");
     let captchaToken: string | undefined | null = "";
 
-    if (reCaptchaPublicKey) {
+    if (reCaptchaPublicKey && isCaptcha) {
       if (!isCaptchaSuccessful) {
         setIsCaptchaError(true);
         return;
@@ -374,7 +374,7 @@ const LoginForm = ({
         onChangeCheckbox={onChangeCheckbox}
       />
 
-      {reCaptchaPublicKey && (
+      {reCaptchaPublicKey && isCaptcha && (
         <StyledCaptcha isCaptchaError={isCaptchaError}>
           <div className="captcha-wrapper">
             {reCaptchaType === RecaptchaType.hCaptcha ? (

@@ -128,6 +128,7 @@ export type TSettings = {
   enabledJoin?: boolean;
   recaptchaPublicKey?: string;
   recaptchaType?: RecaptchaType;
+  maxImageUploadSize: number;
 };
 
 export type TCustomSchema = {

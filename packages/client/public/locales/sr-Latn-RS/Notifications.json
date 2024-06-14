@@ -1,8 +1,8 @@
 {
-  "ActionsWithFilesDescription": "Badges će vas obaveštavati o radnjama poput otpremanja, kreiranja i promena u datotekama.",
-  "Badges": "Badges",
   "DailyFeed": "Dnevni sadržaj {{productName}}-a",
   "DailyFeedDescription": "Čitajte vesti i događaje iz vašeg {{productName}}-a u dnevnom pregledu.",
+  "ActionsWithFilesDescription": "Značke će vas obaveštavati o radnjama poput otpremanja, kreiranja i promena u datotekama.",
+  "Badges": "Značke",
   "ManageNotifications": "Upravljaj",
   "Notifications": "Obaveštenja",
   "RoomsActions": "Radnje sa datotekama u sobi",

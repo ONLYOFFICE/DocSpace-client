@@ -129,6 +129,10 @@
 										<approved>false</approved>
 									</translation>
 									<translation>
+										<language>sr-Cyrl-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
 										<language>sr-Latn-RS</language>
 										<approved>false</approved>
 									</translation>
@@ -254,6 +258,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Cyrl-RS</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -385,6 +393,10 @@
 										<approved>false</approved>
 									</translation>
 									<translation>
+										<language>sr-Cyrl-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
 										<language>sr-Latn-RS</language>
 										<approved>false</approved>
 									</translation>
@@ -510,6 +522,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Cyrl-RS</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -646,6 +662,10 @@
 										<approved>false</approved>
 									</translation>
 									<translation>
+										<language>sr-Cyrl-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
 										<language>sr-Latn-RS</language>
 										<approved>false</approved>
 									</translation>
@@ -771,6 +791,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Cyrl-RS</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -902,6 +926,10 @@
 										<approved>false</approved>
 									</translation>
 									<translation>
+										<language>sr-Cyrl-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
 										<language>sr-Latn-RS</language>
 										<approved>false</approved>
 									</translation>
@@ -1027,6 +1055,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Cyrl-RS</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -1158,6 +1190,10 @@
 										<approved>false</approved>
 									</translation>
 									<translation>
+										<language>sr-Cyrl-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
 										<language>sr-Latn-RS</language>
 										<approved>false</approved>
 									</translation>
@@ -1283,6 +1319,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Cyrl-RS</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -1414,6 +1454,10 @@
 										<approved>false</approved>
 									</translation>
 									<translation>
+										<language>sr-Cyrl-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
 										<language>sr-Latn-RS</language>
 										<approved>false</approved>
 									</translation>
@@ -1539,6 +1583,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Cyrl-RS</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -1670,6 +1718,10 @@
 										<approved>false</approved>
 									</translation>
 									<translation>
+										<language>sr-Cyrl-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
 										<language>sr-Latn-RS</language>
 										<approved>false</approved>
 									</translation>
@@ -1773,6 +1825,9 @@
 		</language>
 		<language>
 			<code>sl-SI</code>
+		</language>
+		<language>
+			<code>sr-Cyrl-RS</code>
 		</language>
 		<language>
 			<code>sr-Latn-RS</code>
@@ -1893,6 +1948,10 @@
 				<translation_url>
 					<path>../packages/doceditor/public/locales/sl</path>
 					<language>sl-SI</language>
+				</translation_url>
+				<translation_url>
+					<path>../packages/doceditor/public/locales/sr-Cyrl-RS</path>
+					<language>sr-Cyrl-RS</language>
 				</translation_url>
 				<translation_url>
 					<path>../packages/doceditor/public/locales/sr-Latn-RS</path>

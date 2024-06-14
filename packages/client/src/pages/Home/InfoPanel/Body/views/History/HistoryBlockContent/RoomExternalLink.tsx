@@ -35,6 +35,7 @@ import { Tag } from "@docspace/shared/components/tag";
 import { decode } from "he";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
 
 interface HistoryRoomExternalLinkProps {
   feed: any;
@@ -49,6 +50,11 @@ const HistoryRoomExternalLink = ({
   setLinkParams,
 }: HistoryRoomExternalLinkProps) => {
   const onEditLink = () => {
+    if (!feed.data.sharedTo) {
+      toastr.error("Link was deleted");
+      return;
+    }
+
     setEditLinkPanelIsVisible(true);
     setLinkParams({
       isEdit: true,

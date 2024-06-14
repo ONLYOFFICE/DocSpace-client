@@ -449,33 +449,26 @@ class ContextOptionsStore {
       this.selectedFolderStore;
     const { setLinkParams, setEmbeddingPanelIsVisible } = this.dialogsStore;
 
-    if (item.canShare) {
-      setLinkParams({ fileId: item.id });
+    const sharedItem = shared
+      ? getSelectedFolder()
+      : navigationPath.find((r) => r.shared);
+
+    if (!sharedItem) return;
+
+    try {
+      const itemLink = await getFileLink(item.id);
+
+      const isPublicRoomType = sharedItem.roomType === RoomsType.PublicRoom;
+
+      setLinkParams({
+        link: itemLink,
+        roomId: sharedItem?.id,
+        fileId: item.id,
+        isPublic: isPublicRoomType,
+      });
       setEmbeddingPanelIsVisible(true);
-    } else {
-      const sharedItem = shared
-        ? getSelectedFolder()
-        : navigationPath.find((r) => r.shared);
-
-      if (!sharedItem) return;
-
-      const roomId = sharedItem?.id;
-
-      try {
-        const itemLink = await getFileLink(item.id);
-
-        const isPublicRoomType = sharedItem.roomType === RoomsType.PublicRoom;
-
-        setLinkParams({
-          link: itemLink,
-          roomId,
-          fileId: item.id,
-          isPublic: isPublicRoomType,
-        });
-        setEmbeddingPanelIsVisible(true);
-      } catch (error) {
-        toastr.error(error);
-      }
+    } catch (error) {
+      toastr.error(error);
     }
   };
 
@@ -1490,10 +1483,7 @@ class ContextOptionsStore {
         label: t("Files:Embed"),
         icon: CodeReactSvgUrl,
         onClick: () => this.onOpenEmbeddingSettings(item),
-        disabled:
-          (!item.canShare &&
-            (!isShared || !this.publicRoomStore.primaryLink)) ||
-          isArchive,
+        disabled: !item.security?.Embed,
       },
       {
         id: "option_show-info",

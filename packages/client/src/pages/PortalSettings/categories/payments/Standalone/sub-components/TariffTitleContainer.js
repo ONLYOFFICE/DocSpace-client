@@ -31,6 +31,7 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { StyledTitleComponent } from "../StyledComponent";
 import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { getTwoDotsReplacing } from "../../utils";
 
 const TariffTitleContainer = ({
   isLicenseDateExpired,
@@ -72,13 +73,18 @@ const TariffTitleContainer = ({
 
   const expiresDate = () => {
     if (isTrial) {
-      return t("ActivateTariffEnterpriseTrialExpiration", {
-        date: paymentDate,
-      });
+      return getTwoDotsReplacing(
+        t("ActivateTariffEnterpriseTrialExpiration", {
+          date: paymentDate,
+        }),
+      );
     }
-    return t("ActivateTariffEnterpriseExpiration", {
-      date: paymentDate,
-    });
+
+    return getTwoDotsReplacing(
+      t("ActivateTariffEnterpriseExpiration", {
+        date: paymentDate,
+      }),
+    );
   };
 
   return (

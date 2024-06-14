@@ -122,13 +122,7 @@ class CurrentTariffStatusStore {
     moment.locale(this.language);
     if (this.dueDate === null) return "";
 
-    let date = moment(this.dueDate).tz(window.timezone).format("LL");
-
-    if (!date) return "";
-
-    if (date[date.length - 1] === ".") date = date.slice(0, -1);
-
-    return date;
+    return moment(this.dueDate).tz(window.timezone).format("LL");
   }
 
   get isPaymentDateValid() {

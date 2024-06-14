@@ -86,6 +86,10 @@ const StyledSettingsComponent = styled.div`
     ${(props) => props.standalone && "margin-top: 14px"};
   }
 
+  .dns-error-text {
+    color: ${(props) => props.theme.client.settings.common.dns.errorColor};
+  }
+
   .combo-button-label {
     max-width: 100%;
     font-weight: 400;

@@ -210,10 +210,10 @@ const DNSSettings = (props) => {
             {errorText &&
               errorText.map((err, index) => (
                 <Text
+                  className="dns-error-text"
                   key={index}
                   fontSize="12px"
                   fontWeight="400"
-                  color="#F24724"
                 >
                   {err}
                 </Text>

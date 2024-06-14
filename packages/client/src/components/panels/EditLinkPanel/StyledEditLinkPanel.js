@@ -64,6 +64,8 @@ const StyledEditLinkPanel = styled(ModalDialog)`
 
       .edit-link_required-icon {
         display: inline-flex;
+        color: ${(props) => props.theme.editLink.requiredColor};
+
         ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
@@ -71,7 +73,7 @@ const StyledEditLinkPanel = styled(ModalDialog)`
               `
             : css`
                 margin-left: 2px;
-              `}
+              `};
       }
 
       .edit-link_link-input {

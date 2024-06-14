@@ -70,6 +70,8 @@ const useFiles = ({
   gallerySelected,
   folderSecurity,
   userId,
+
+  scrollToTop,
 }) => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -309,6 +311,7 @@ const useFiles = ({
         }
       })
       .finally(() => {
+        scrollToTop();
         setIsLoading(false);
       });
   }, [isAccountsPage, isSettingsPage, location.pathname, location.search]);

@@ -41,7 +41,7 @@ export const enum EmployeeActivationStatus {
 export const enum EmployeeStatus {
   Active = 1,
   Disabled = 2,
-  Pending = 3, // NEW STATUS from server
+  Pending = 4, // NEW STATUS from server
 }
 /**
  * Enum for employee type.
@@ -481,6 +481,13 @@ export enum RoomsType {
   // ReadOnlyRoom: 4, //TODO: Restore when certs will be done
   PublicRoom = 6,
   CustomRoom = 5,
+}
+
+export const enum RecaptchaType {
+  Default = 0,
+  AndroidV2 = 1,
+  iOSV2 = 2,
+  hCaptcha = 3,
 }
 
 export enum AccountsSearchArea {

@@ -77,7 +77,7 @@ class HeaderMenuStore {
       case "active":
         return t("Common:Active");
       case "pending":
-        return t("PeopleTranslations:PendingTitle");
+        return t("PeopleTranslations:PendingInviteTitle");
       case "disabled":
         return t("PeopleTranslations:DisabledEmployeeStatus");
       case "all":

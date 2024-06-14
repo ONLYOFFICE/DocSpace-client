@@ -158,6 +158,7 @@ const Item = ({
       <ArticleItem
         key={item.id}
         id={item.id}
+        title={item.title}
         folderId={folderId}
         className={`tree-drag ${item.folderClassName} document-catalog`}
         icon={getFolderIcon(item)}
@@ -174,7 +175,7 @@ const Item = ({
         labelBadge={labelBadge}
         onClickBadge={onBadgeClick}
         iconBadge={iconBadge}
-        badgeTitle={labelBadge ? "" : t("RecycleBinAction")}
+        badgeTitle={labelBadge ? "" : t("EmptyRecycleBin")}
         $currentColorScheme={currentColorScheme}
       />
     </StyledDragAndDrop>

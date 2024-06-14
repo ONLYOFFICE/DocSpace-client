@@ -73,11 +73,16 @@ const StyledLinkRow = styled.div`
   gap: 12px;
   height: 100%;
   background: ${(props) => props.theme.backgroundColor};
-  cursor: pointer;
 
-  .icon-button_svg {
-    cursor: pointer;
-  }
+  ${(props) =>
+    !props.isArchiveFolder &&
+    css`
+      cursor: pointer;
+
+      .icon-button_svg {
+        cursor: pointer;
+      }
+    `};
 
   .create-link-icon {
     display: flex;

@@ -1,4 +1,4 @@
 {
-  "PortalRestoring": "Відновлення {{portalName}}",
-  "PreparationPortalDescription": "Після завершення процесу відновлення ви автоматично перейдете в {{portalName}}."
+  "PortalRestoring": "Відновлення {{productName}}",
+  "PreparationPortalDescription": "Після завершення процесу відновлення ви автоматично перейдете в {{productName}}."
 }

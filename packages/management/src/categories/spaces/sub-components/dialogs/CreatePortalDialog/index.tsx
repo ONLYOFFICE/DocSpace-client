@@ -37,7 +37,7 @@ import { Checkbox } from "@docspace/shared/components/checkbox";
 import toLower from "lodash/toLower";
 import { useStore } from "SRC_DIR/store";
 import { validatePortalName } from "@docspace/shared/utils/common";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledModal = styled(ModalDialogContainer)`
   #modal-dialog {
@@ -147,11 +147,11 @@ const CreatePortalDialog = () => {
       displayType="modal"
     >
       <ModalDialog.Header>
-        {t("CreatingDocspace", { portalName: PORTAL })}
+        {t("CreatingDocspace", { productName: PRODUCT_NAME })}
       </ModalDialog.Header>
       <ModalDialog.Body className="create-docspace-body">
         <Text noSelect={true}>
-          {t("CreateSpaceDescription", { portalName: PORTAL })}
+          {t("CreateSpaceDescription", { productName: PRODUCT_NAME })}
         </Text>
         <div className="create-docspace-input-block">
           <Text

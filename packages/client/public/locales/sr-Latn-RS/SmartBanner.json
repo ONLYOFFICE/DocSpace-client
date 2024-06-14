@@ -1,5 +1,5 @@
 {
-  "AppName": "ONLYOFFICE Dokumenti",
+  "AppName": "{{organizationName}} Dokumenti",
   "AppStore": "Na App Store-u",
   "GooglePlay": "U Google Play-u"
 }

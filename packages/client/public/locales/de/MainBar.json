@@ -1,18 +1,18 @@
 {
   "ClickHere": "Hier klicken",
   "ConfirmEmailDescription": "Verwenden Sie den in der Aktivierungs-E-Mail angegebenen Link. Haben Sie keine E-Mail mit dem Aktivierungslink erhalten?",
-  "ConfirmEmailHeader": "Bitte aktivieren Sie Ihre E-Mail ({{ email }}), um Zugang zu den {{portalName}}-Funktionen zu erhalten.",
+  "ConfirmEmailHeader": "Bitte aktivieren Sie Ihre E-Mail ({{ email }}), um Zugang zu den {{productName}}-Funktionen zu erhalten.",
   "PersonalUserQuotaAdminsDescription": "Um neue Dateien und Ordner hochzuladen und zu erstellen, geben Sie bitte Speicherplatz frei oder verwalten Sie die Quote pro Benutzer in den <1>Speicherverwaltungseinstellungen</1>",
   "PersonalUserQuotaDescription": "Um neue Dateien und Ordner hochzuladen und zu erstellen, geben Sie bitte Speicherplatz frei oder wenden Sie sich an den Administrator, um die Speicherquote zu erhöhen.",
   "RequestActivation": "Erneute Aktivierung anfordern",
-  "RoomQuotaDescription": "Sie können die überflüssigen Räume archivieren oder <1>{{clickHere}}</1> einen passenderen Preisplan für Ihren {{portalName}} finden.",
+  "RoomQuotaDescription": "Sie können die überflüssigen Räume archivieren oder <1>{{clickHere}}</1> einen passenderen Preisplan für Ihren {{productName}} finden.",
   "RoomQuotaHeader": "Die Anzahl von Räumen wird bald überschritten sein: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Die Speicher- und Raumlimits werden bald überschritten sein.",
   "StorageAndUserHeader": "Limits für Speicherplatz und Admins/Power-User werden bald überschritten sein.",
-  "StorageQuotaDescription": "Sie können die unerwünschten Dateien entfernen oder <1>{{{clickHere}}</1> einen geeigneteren Preisplan für Ihren {{portalName}} finden.",
+  "StorageQuotaDescription": "Sie können die unerwünschten Dateien entfernen oder <1>{{{clickHere}}</1> einen geeigneteren Preisplan für Ihren {{productName}} finden.",
   "StorageQuotaExceeded": "Speicherquote überschritten",
   "StorageQuotaHeader": "Das Speicherplatzlimit wird bald überschritten: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Sie können unnötige Dateien entfernen oder die Quote in den <1>Speicherverwaltungseinstellungen</1> ändern",
-  "UserQuotaDescription": "<1>{{clickHere}}</1>, um einen besseren Preisplan für Ihr {{portalName}} zu finden.",
+  "UserQuotaDescription": "<1>{{clickHere}}</1>, um einen besseren Preisplan für Ihr {{productName}} zu finden.",
   "UserQuotaHeader": "Die Anzahl der Admins/Power-User wird bald überschritten sein: {{currentValue}} / {{maxValue}}."
 }

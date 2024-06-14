@@ -1,0 +1,14 @@
+{
+  "ActionCannotBeUndone": "Изабрани онемогућени корисници ће бити уклоњени из DocSpace-а. Ова радња се не може опозвати.",
+  "CannotReassignFiles": "Ако обришете више корисника одједном, не можете да доделите њихове датотеке другим корисницима.",
+  "DeleteGroupUsersSuccessMessage": "Корисници су успешно обрисани.",
+  "DeleteMyDocumentsUser": "Све личне датотеке и фолдери у одељку Документи овог корисника биц́е трајно избрисани.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Собе које је направио овај корисник и документи ускладиштени у овим собама биц́е аутоматски поново додељени администратору који врши брисање: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Поново доделите податке ручно да бисте изабрали другог одредишног корисника за доделу.",
+  "DeleteUser": "Обриши корисника",
+  "DeleteUserMessage": "{{userCaption}} <strong> {{user}}</strong> ц́е бити обрисан. Ова радња се не може опозвати.",
+  "DeletingUsers": "Брисање корисника",
+  "PleaseNote": "Молим обратите пажњу:",
+  "ReassignDataToAnotherUser": "Поново додели податке другом кориснику",
+  "SuccessfullyDeleteUserInfoMessage": "Корисник је успешно обрисан",
+  "ToBeAbleToReassignData": "Да бисте могли поново да доделите податке, бришите једног по једног корисника."
+}

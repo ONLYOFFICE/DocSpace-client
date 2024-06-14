@@ -588,17 +588,17 @@ const useEditorEvents = ({
     docEditor?.setActionLink?.(linkFormation);
   }, []);
 
-  const onRequestStartFilling = React.useCallback(
-    (event: object) => {
-      console.log("onRequestStartFilling", { event });
+  // const onRequestStartFilling = React.useCallback(
+  //   (event: object) => {
+  //     console.log("onRequestStartFilling", { event });
 
-      if (!fileInfo?.id) return;
+  //     if (!fileInfo?.id) return;
 
-      docEditor?.startFilling?.();
-      startFilling(fileInfo?.id);
-    },
-    [fileInfo?.id],
-  );
+  //     docEditor?.startFilling?.();
+  //     startFilling(fileInfo?.id);
+  //   },
+  //   [fileInfo?.id],
+  // );
 
   const generateLink = (actionData: {}) => {
     return encodeURIComponent(JSON.stringify(actionData));
@@ -645,7 +645,7 @@ const useEditorEvents = ({
     onDocumentStateChange,
     onMetaChange,
     onMakeActionLink,
-    onRequestStartFilling,
+    // onRequestStartFilling,
     setDocTitle,
   };
 };

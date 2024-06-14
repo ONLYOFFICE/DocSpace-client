@@ -46,7 +46,7 @@
   "URL": "URL",
   "ViewRawPayload": "Xam mübadilə yükünə baxın",
   "WebhookCreated": "Webhook yaradılmışdır",
-  "WebhookCreationHint": "Bu webhook {{portalName}}-də bütün tədbirlərə təyin ediləcək",
+  "WebhookCreationHint": "Bu webhook {{productName}}-də bütün tədbirlərə təyin ediləcək",
   "WebhookDetails": "Webhook təfərrüatları",
   "WebhookEditedSuccessfully": "Webhook konfiqurasiyası uğurla redaktə edildi",
   "WebhookHistory": "Webhook tarixçəsi",
@@ -55,5 +55,5 @@
   "WebhookRemoved": "Webhook silindi",
   "Webhooks": "Webhook-lar",
   "WebhooksGuide": "Webhook-ların Bələdçisi",
-  "WebhooksInfo": "ONLYOFFICE {{portalName}}-də müxtəlif hadisələr əsasında istifadə etdiyiniz hər hansı proqram və ya veb-saytla yanaşı fərdi hərəkətləri yerinə yetirmək üçün webhook-lardan istifadə edin.\nBurada siz bütün webhook-larınızı yarada, idarə və konfiqurasiya edə, performansını yoxlamaq üçün hər bir webhook-un tarixçəsinə baxa bilərsiniz."
+  "WebhooksInfo": "{{organizationName}} {{productName}}-də müxtəlif hadisələr əsasında istifadə etdiyiniz hər hansı proqram və ya veb-saytla yanaşı fərdi hərəkətləri yerinə yetirmək üçün webhook-lardan istifadə edin.\nBurada siz bütün webhook-larınızı yarada, idarə və konfiqurasiya edə, performansını yoxlamaq üçün hər bir webhook-un tarixçəsinə baxa bilərsiniz."
 }

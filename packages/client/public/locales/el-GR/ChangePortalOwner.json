@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "Ορισμός διαχειριστών",
-  "BackupPortal": "Διαφυλάξτε τα δεδομένα {{portalName}}",
-  "ChangeInstruction": "Για να αλλάξετε τον ιδιοκτήτη του {{portalName}}, επιλέξτε το όνομα του νέου ιδιοκτήτη παρακάτω.",
-  "ChangeOwner": "Αλλαγή ιδιοκτήτη {{portalName}}",
+  "BackupPortal": "Διαφυλάξτε τα δεδομένα {{productName}}",
+  "ChangeInstruction": "Για να αλλάξετε τον ιδιοκτήτη του {{productName}}, επιλέξτε το όνομα του νέου ιδιοκτήτη παρακάτω.",
+  "ChangeOwner": "Αλλαγή ιδιοκτήτη {{productName}}",
   "ChangeUser": "Αλλαγή χρήστη",
-  "DeactivateOrDeletePortal": "Απενεργοποίηση ή διαγραφή {{portalName}}",
+  "DeactivateOrDeletePortal": "Απενεργοποίηση ή διαγραφή {{productName}}",
   "DoTheSame": "Κάντε το ίδιο με τους διαχειριστές",
-  "ManagePortal": "Διαχειριστείτε ρυθμίσεις {{portalName}}",
+  "ManagePortal": "Διαχειριστείτε ρυθμίσεις {{productName}}",
   "ManageUser": "Διαχειριστείτε λογαριασμούς χρηστών",
-  "NewPortalOwner": "Νέος ιδιοκτήτης {{portalName}}",
-  "PortalOwnerCan": "Ο ιδιοκτήτης {{portalName}} μπορεί:",
+  "NewPortalOwner": "Νέος ιδιοκτήτης {{productName}}",
+  "PortalOwnerCan": "Ο ιδιοκτήτης {{productName}} μπορεί:",
   "SetAccessRights": "Ορισμός δικαιωμάτων πρόσβασης"
 }

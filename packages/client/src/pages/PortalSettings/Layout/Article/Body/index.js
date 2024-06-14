@@ -242,8 +242,8 @@ const ArticleBodyContent = (props) => {
         return t("ImportFromGoogle");
       case "ImportFromNextcloud":
         return t("ImportFromNextcloud");
-      case "ImportFromOnlyoffice":
-        return t("ImportFromOnlyoffice");
+      case "ImportFromPortal":
+        return t("ImportFromPortal");
       case "StorageManagement":
         return t("StorageManagement");
       default:

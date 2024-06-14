@@ -102,7 +102,6 @@ const Article = ({
   standalone,
   currentTariffPlanTitle,
   trialDaysLeft,
-  paymentDate,
 
   languageBaseName,
   zendeskEmail,

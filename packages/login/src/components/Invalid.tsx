@@ -53,7 +53,7 @@ const InvalidError = ({ match }: InvalidErrorProps) => {
   const { t } = useTranslation(["Login", "Errors", "Common"]);
 
   React.useEffect(() => {
-    const url = combineUrl(window.DocSpaceConfig?.proxy?.url, homepage);
+    const url = combineUrl(window.ClientConfig?.proxy?.url, homepage);
     setProxyHomepageUrl(url);
     const timeout = setTimeout(() => {
       router.push("/");

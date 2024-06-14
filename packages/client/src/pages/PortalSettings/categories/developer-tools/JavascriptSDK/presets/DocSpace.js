@@ -114,8 +114,8 @@ const DocSpace = (props) => {
 
   return (
     <PresetWrapper
-      description={t("DocspaceDescription", { productName: PRODUCT_NAME })}
-      header={t("CreateSampleDocspace", { productName: PRODUCT_NAME })}
+      description={t("PortalDescription", { productName: PRODUCT_NAME })}
+      header={t("CreateSamplePortal", { productName: PRODUCT_NAME })}
     >
       <Container>
         <PreviewBlock

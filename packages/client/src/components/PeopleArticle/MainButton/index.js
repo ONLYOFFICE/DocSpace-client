@@ -69,7 +69,7 @@ const ArticleMainButtonContent = (props) => {
 
   const goToEmployeeCreate = () => {
     navigate(
-      combineUrl(window.DocSpaceConfig?.proxy?.url, homepage, "/create/user"),
+      combineUrl(window.ClientConfig?.proxy?.url, homepage, "/create/user"),
     );
     if (isMobile || isMobileUtils()) toggleShowText();
   };
@@ -85,7 +85,7 @@ const ArticleMainButtonContent = (props) => {
     {
       key: "create-user",
       icon: combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         homepage,
         AddEmployeeReactSvgUrl,
       ),
@@ -98,7 +98,7 @@ const ArticleMainButtonContent = (props) => {
     {
       key: "invite-link",
       icon: combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         InvitationLinkReactSvgUrl,
       ),
       label: t("PeopleTranslations:InviteLinkTitle"),

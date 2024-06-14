@@ -349,7 +349,7 @@ const Manager = (props) => {
   return (
     <PresetWrapper
       description={t("CustomDescription", { productName: PRODUCT_NAME })}
-      header={t("CreateSampleDocspace", { productName: PRODUCT_NAME })}
+      header={t("CreateSamplePortal", { productName: PRODUCT_NAME })}
     >
       <Container>
         <PreviewBlock

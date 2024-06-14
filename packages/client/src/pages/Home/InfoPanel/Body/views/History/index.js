@@ -57,7 +57,7 @@ const History = ({
   const isMount = useRef(true);
   const abortControllerRef = useRef(new AbortController());
 
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
   const [isLoading, setIsLoading] = useState(false);
   const [isShowLoader, setIsShowLoader] = useState(false);
 

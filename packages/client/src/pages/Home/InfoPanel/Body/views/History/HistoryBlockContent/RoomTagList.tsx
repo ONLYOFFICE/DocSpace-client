@@ -24,9 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
 import { StyledHistoryBlockTagList } from "../../../styles/history";
-import { ActionByTarget, AnyFeedInfo, getFeedInfo } from "../FeedInfo";
+import { ActionByTarget } from "../FeedInfo";
 import { Tag } from "@docspace/shared/components/tag";
 
 interface HistoryRoomTagListProps {
@@ -67,6 +66,4 @@ const HistoryRoomTagList = ({ feed, actionType }: HistoryRoomTagListProps) => {
   }
 };
 
-export default inject(({ infoPanelStore, userStore }) => {
-  return {};
-})(observer(HistoryRoomTagList));
+export default HistoryRoomTagList;

@@ -34,7 +34,6 @@ import {
   StyledHistoryBlockExpandLink,
   StyledHistoryLink,
 } from "../../../styles/history";
-import { getFeedInfo } from "../FeedInfo";
 import { Trans, withTranslation } from "react-i18next";
 
 const EXPANSION_THRESHOLD = 8;

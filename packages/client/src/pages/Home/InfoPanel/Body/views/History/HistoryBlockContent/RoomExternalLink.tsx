@@ -45,7 +45,6 @@ interface HistoryRoomExternalLinkProps {
 const HistoryRoomExternalLink = ({
   feed,
   actionType,
-  additionalLinks,
   setEditLinkPanelIsVisible,
   setLinkParams,
 }: HistoryRoomExternalLinkProps) => {
@@ -73,7 +72,6 @@ const HistoryRoomExternalLink = ({
 };
 
 export default inject(({ publicRoomStore, dialogsStore }) => ({
-  additionalLinks: publicRoomStore.additionalLinks,
   setEditLinkPanelIsVisible: dialogsStore.setEditLinkPanelIsVisible,
   setLinkParams: dialogsStore.setLinkParams,
 }))(observer(HistoryRoomExternalLink));

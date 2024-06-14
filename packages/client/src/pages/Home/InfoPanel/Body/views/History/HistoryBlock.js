@@ -24,11 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
-import { FeedItemTypes } from "@docspace/shared/enums";
 import DefaultUserAvatarSmall from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 import { StyledHistoryBlock } from "../../styles/history";
 import { getDateTime } from "../../helpers/HistoryHelper";
@@ -36,13 +34,7 @@ import { decode } from "he";
 
 import HistoryBlockContent from "./HistoryBlockContent";
 
-const HistoryBlock = ({
-  t,
-  feed,
-  selectedFolder,
-  withFileList,
-  isLastEntity,
-}) => {
+const HistoryBlock = ({ t, feed, isLastEntity }) => {
   const { action, initiator, date } = feed;
 
   const isUserAction =

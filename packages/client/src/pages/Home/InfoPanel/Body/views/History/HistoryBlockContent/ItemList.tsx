@@ -29,7 +29,6 @@ import { useState } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { ReactSVG } from "react-svg";
 import { TTranslation } from "@docspace/shared/types";

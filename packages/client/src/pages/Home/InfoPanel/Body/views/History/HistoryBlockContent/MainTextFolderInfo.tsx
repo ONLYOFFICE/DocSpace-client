@@ -28,23 +28,12 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { TTranslation } from "@docspace/shared/types";
 import { StyledHistoryBlockMessage } from "../../../styles/history";
-import { ActionByTarget } from "../FeedInfo";
 
 type HistoryMainTextFolderInfoProps = {
   t: TTranslation;
   feed: any;
   selectedFolderId?: number;
 };
-// & (
-//   | {
-//       actionType: ActionByTarget<"file">;
-//       targetType: "file";
-//     }
-//   | {
-//       actionType: ActionByTarget<"folder">;
-//       targetType: "folder";
-//     }
-// );
 
 const HistoryMainTextFolderInfo = ({
   t,

@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { withTranslation } from "react-i18next";
 
 import HistoryUserList from "./UserList";
 import HistoryMainText from "./MainText";
@@ -42,7 +41,6 @@ interface HistoryBlockContentProps {
 }
 
 const HistoryBlockContent = ({
-  t,
   feed,
   historyWithFileList,
 }: HistoryBlockContentProps) => {
@@ -97,8 +95,4 @@ const HistoryBlockContent = ({
 export default inject(({ infoPanelStore }) => {
   const { historyWithFileList } = infoPanelStore;
   return { historyWithFileList };
-})(
-  withTranslation(["InfoPanel", "Common", "Translations"])(
-    observer(HistoryBlockContent),
-  ),
-);
+})(observer(HistoryBlockContent));

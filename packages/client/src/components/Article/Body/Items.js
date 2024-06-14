@@ -158,6 +158,7 @@ const Item = ({
       <ArticleItem
         key={item.id}
         id={item.id}
+        title={item.title}
         folderId={folderId}
         className={`tree-drag ${item.folderClassName} document-catalog`}
         icon={getFolderIcon(item)}

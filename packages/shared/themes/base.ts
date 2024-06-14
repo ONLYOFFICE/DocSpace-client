@@ -1912,6 +1912,10 @@ export const getBaseTheme = () => {
       search: {
         boxShadow: "0px 5px 20px 0px rgba(4, 15, 27, 0.07)",
       },
+
+      groups: {
+        textColor: gray,
+      },
     },
 
     filesArticleBody: {
@@ -2394,6 +2398,7 @@ export const getBaseTheme = () => {
       addUsers: {
         iconColor: gray,
         arrowColor: darkBlack,
+        textColor: gray,
       },
 
       changeOwner: {
@@ -2479,6 +2484,8 @@ export const getBaseTheme = () => {
       upload: {
         color: gray,
         tooltipColor: lightToastInfo,
+        iconFill: gray,
+        textColor: gray,
 
         shareButton: {
           color: gray,
@@ -2489,6 +2496,9 @@ export const getBaseTheme = () => {
           color: lightSecondMain,
           background: white,
         },
+      },
+      invite: {
+        textColor: gray,
       },
     },
 
@@ -2640,6 +2650,7 @@ export const getBaseTheme = () => {
         stroke: grayStrong,
         color: grayStrong,
       },
+      commentColor: gray,
     },
 
     login: {
@@ -2788,6 +2799,7 @@ export const getBaseTheme = () => {
           loginHistory: {
             sideColor: gray,
             nameColor: black,
+            textColor: gray,
           },
         },
 
@@ -2828,8 +2840,9 @@ export const getBaseTheme = () => {
         integration: {
           separatorBorder: `1px solid ${grayStrong}`,
           linkColor: link,
-
+          textColor: gray,
           sso: {
+            textColor: gray,
             toggleContentBackground: grayLight,
             iconButton: black,
             iconButtonDisabled: gray,
@@ -2926,6 +2939,7 @@ export const getBaseTheme = () => {
       wizard: {
         linkColor: link,
         generatePasswordColor: lightGrayDark,
+        textColor: gray,
       },
     },
 
@@ -2977,6 +2991,9 @@ export const getBaseTheme = () => {
         pendingEmailTextColor: gray,
 
         mobileRowBackground: grayLight,
+      },
+      login: {
+        textColor: gray,
       },
       themePreview: {
         descriptionColor: gray,

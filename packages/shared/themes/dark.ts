@@ -1897,6 +1897,10 @@ const Dark: TTheme = {
     search: {
       boxShadow: "0px 5px 20px 0px rgba(0, 0, 0, 0.16)",
     },
+
+    groups: {
+      textColor: grayDark,
+    },
   },
 
   filesArticleBody: {
@@ -2377,6 +2381,7 @@ const Dark: TTheme = {
     addUsers: {
       iconColor: gray,
       arrowColor: darkBlack,
+      textColor: grayDark,
     },
 
     changeOwner: {
@@ -2463,6 +2468,8 @@ const Dark: TTheme = {
     upload: {
       color: black,
       tooltipColor: darkToastInfo,
+      iconFill: grayDark,
+      textColor: grayDark,
 
       shareButton: {
         color: gray,
@@ -2473,6 +2480,9 @@ const Dark: TTheme = {
         color: white,
         background: black,
       },
+    },
+    invite: {
+      textColor: grayDark,
     },
   },
 
@@ -2624,6 +2634,7 @@ const Dark: TTheme = {
       stroke: white,
       color: white,
     },
+    commentColor: grayDark,
   },
 
   login: {
@@ -2772,6 +2783,7 @@ const Dark: TTheme = {
         loginHistory: {
           sideColor: grayDark,
           nameColor: white,
+          textColor: grayDark,
         },
       },
 
@@ -2812,8 +2824,9 @@ const Dark: TTheme = {
       integration: {
         separatorBorder: `1px solid ${grayDarkStrong}`,
         linkColor: darkLink,
-
+        textColor: grayDark,
         sso: {
+          textColor: grayDark,
           toggleContentBackground: grayDarkStrong,
           iconButton: white,
           iconButtonDisabled: black,
@@ -2907,6 +2920,7 @@ const Dark: TTheme = {
     wizard: {
       linkColor: darkLink,
       generatePasswordColor: darkGrayDark,
+      textColor: grayDark,
     },
   },
 
@@ -2958,6 +2972,9 @@ const Dark: TTheme = {
       pendingEmailTextColor: grayDark,
 
       mobileRowBackground: lightDarkGrayHover,
+    },
+    login: {
+      textColor: grayDark,
     },
     themePreview: {
       descriptionColor: darkGrayDark,

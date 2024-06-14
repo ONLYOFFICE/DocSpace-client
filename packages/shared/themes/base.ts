@@ -2782,6 +2782,8 @@ export const getBaseTheme = () => {
 
           appearance: {
             themeAddBackground: grayLightMid,
+            accentBoxBackground: grayLightMid,
+            buttonBoxBackground: grayLightMid,
           },
 
           whiteLabel: {
@@ -2888,6 +2890,12 @@ export const getBaseTheme = () => {
         storageManagement: {
           grayBackgroundText: grayText,
           descriptionColor: lightGrayDark,
+        },
+        deleteData: {
+          borderTop: `1px solid ${grayLightMid}`,
+        },
+        webhooks: {
+          border: `1px solid ${grayLightMid}`,
         },
       },
 

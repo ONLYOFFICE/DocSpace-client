@@ -2766,6 +2766,8 @@ const Dark: TTheme = {
 
         appearance: {
           themeAddBackground: grayDarkStrong,
+          accentBoxBackground: grayDarkStrong,
+          buttonBoxBackground: grayDarkStrong,
         },
 
         whiteLabel: {
@@ -2869,6 +2871,12 @@ const Dark: TTheme = {
       storageManagement: {
         grayBackgroundText: grayDark,
         descriptionColor: darkGrayDark,
+      },
+      deleteData: {
+        borderTop: `1px solid ${grayDarkMid}`,
+      },
+      webhooks: {
+        border: `1px solid ${grayDarkMid}`,
       },
     },
 

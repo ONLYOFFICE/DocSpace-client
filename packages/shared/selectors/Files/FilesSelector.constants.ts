@@ -24,11 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { PORTAL } from "../../constants";
+import { PRODUCT_NAME } from "../../constants";
 import { TBreadCrumb } from "../../components/selector/Selector.types";
 
 export const DEFAULT_BREAD_CRUMB: TBreadCrumb = {
-  label: PORTAL,
+  label: PRODUCT_NAME,
   id: 0,
   isRoom: false,
 };

@@ -33,7 +33,7 @@ import PeopleIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg";
 import AccountsIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg";
 import DocumentsIcon from "PUBLIC_DIR/images/catalog.documents.react.svg";
 import RoomsIcon from "PUBLIC_DIR/images/catalog.rooms.react.svg";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const SectionsWrapper = styled.div`
   display: flex;
@@ -72,7 +72,7 @@ const ImportStep = ({
         exportSection={{ sectionName: users, workspace: serviceName }}
         importSection={{
           sectionName: t("Common:Accounts"),
-          workspace: PORTAL,
+          workspace: PRODUCT_NAME,
           SectionIcon: PeopleIcon,
         }}
         isDisabled
@@ -88,7 +88,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Accounts"),
-          workspace: PORTAL,
+          workspace: PRODUCT_NAME,
           SectionIcon: AccountsIcon,
         }}
       />
@@ -103,7 +103,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Documents"),
-          workspace: PORTAL,
+          workspace: PRODUCT_NAME,
           SectionIcon: DocumentsIcon,
         }}
       />
@@ -118,7 +118,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Documents"),
-          workspace: PORTAL,
+          workspace: PRODUCT_NAME,
           SectionIcon: DocumentsIcon,
         }}
       />
@@ -133,7 +133,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Rooms"),
-          workspace: PORTAL,
+          workspace: PRODUCT_NAME,
           SectionIcon: RoomsIcon,
         }}
       />

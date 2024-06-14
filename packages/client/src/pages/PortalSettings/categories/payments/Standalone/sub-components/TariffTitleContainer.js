@@ -93,7 +93,7 @@ const TariffTitleContainer = ({
               productName: PRODUCT_NAME,
               organizationName,
             })}
-          </Text>
+          </Text>{" "}
           {!isLicenseDateExpired && (
             <Text fontSize="14px" as="span">
               {expiresDate()}

@@ -8,7 +8,7 @@
   "ActivateRenewSubscriptionHeader": "Продлить подписку на Enterprise",
   "ActivateSwithToProHeader": "Перейдите на полную версию Enterprise",
   "ActivateTariffDescr": "Вы используете {{organizationName}} {{productName}} Enterprise.",
-  "ActivateTariffEnterpriseExpiration": "Подписка истекает {{date}}.",
+  "ActivateTariffEnterpriseExpiration": "Подписка истекает {{date}}",
   "ActivateTariffEnterpriseTrialExpiration": "Пробный период истекает {{date}}.",
   "ActivateToProBannerHeaderTrial": "Купите полную версию Enterprise, чтобы получить:",
   "ActivateUploadDescr": "Чтобы активировать лицензию, загрузите ее ниже и нажмите кнопку Активировать.",

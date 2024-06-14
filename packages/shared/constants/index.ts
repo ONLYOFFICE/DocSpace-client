@@ -145,7 +145,7 @@ export const PROVIDERS_DATA = Object.freeze({
 
 export const PASSWORD_LIMIT_SPECIAL_CHARACTERS = "!@#$%^&*";
 
-export const EDITOR_ID = "docspace_editor";
+export const EDITOR_ID = "portal_editor";
 
 export const WRONG_PORTAL_NAME_URL =
   (typeof window !== "undefined" && window.ClientConfig?.wrongPortalNameUrl) ||

@@ -51,6 +51,7 @@ import {
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
 import useFilesSettings from "@/hooks/useFilesSettings";
+import { EDITOR_ID } from "@docspace/shared/constants";
 
 type IConfigType = IConfig & {
   events?: {
@@ -303,7 +304,7 @@ const Editor = ({
 
   return (
     <DocumentEditor
-      id={"docspace_editor"}
+      id={EDITOR_ID}
       documentServerUrl={documentserverUrl}
       config={
         errorMessage || isSkipError

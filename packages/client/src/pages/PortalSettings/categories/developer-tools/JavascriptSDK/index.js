@@ -41,7 +41,7 @@ import { Text } from "@docspace/shared/components/text";
 import CSP from "./sub-components/csp";
 import PresetTile from "./sub-components/PresetTile";
 
-import PortalImg from "PUBLIC_DIR/images/sdk-presets_docspace.react.svg?url";
+import PortalImg from "PUBLIC_DIR/images/sdk-presets_portal.react.svg?url";
 import PublicRoomImg from "PUBLIC_DIR/images/sdk-presets_public-room.react.svg?url";
 import RoomSelectorImg from "PUBLIC_DIR/images/sdk-presets_room-selector.react.svg?url";
 import FileSelectorImg from "PUBLIC_DIR/images/sdk-presets_file-selector.react.svg?url";
@@ -49,7 +49,7 @@ import EditorImg from "PUBLIC_DIR/images/sdk-presets_editor.react.svg?url";
 import ViewerImg from "PUBLIC_DIR/images/sdk-presets_viewer.react.svg?url";
 import CustomImg from "PUBLIC_DIR/images/sdk-presets_custom.react.svg?url";
 
-import PortalImgDark from "PUBLIC_DIR/images/sdk-presets_docspace_dark.react.svg?url";
+import PortalImgDark from "PUBLIC_DIR/images/sdk-presets_portal_dark.react.svg?url";
 import PublicRoomImgDark from "PUBLIC_DIR/images/sdk-presets_public-room_dark.react.svg?url";
 import RoomSelectorImgDark from "PUBLIC_DIR/images/sdk-presets_room-selector_dark.react.svg?url";
 import FileSelectorImgDark from "PUBLIC_DIR/images/sdk-presets_file-selector_dark.react.svg?url";

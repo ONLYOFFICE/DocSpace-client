@@ -113,7 +113,9 @@ const StyledTag = styled.div<{
     css`
       cursor: pointer;
       &:hover {
-        background: ${props.theme.tag.hoverBackground};
+        background: ${!props.isNewTag
+          ? props.theme.tag.hoverBackground
+          : props.theme.tag.newTagHoverBackground};
       }
     `}
 `;

@@ -44,7 +44,6 @@ const HistoryRoomTagList = ({ feed, actionType }: HistoryRoomTagListProps) => {
             key={tag}
             label={tag}
             tag={tag}
-            onClick={() => {}}
             isNewTag
           />
         ))}
@@ -60,7 +59,6 @@ const HistoryRoomTagList = ({ feed, actionType }: HistoryRoomTagListProps) => {
             key={tag}
             label={tag}
             tag={tag}
-            onClick={() => {}}
             isDeleted
           />
         ))}

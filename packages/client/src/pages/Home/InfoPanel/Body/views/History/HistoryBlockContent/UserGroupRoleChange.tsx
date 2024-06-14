@@ -37,6 +37,16 @@ const HistoryUserRoleChange = ({ feed }: HistoryUserRoleChangeProps) => {
     <StyledHistoryBlockMessage className="message">
       <span className="main-message">
         <strong>«{feed.data.access}»</strong>
+      </span>{" "}
+      <span
+        className="old-role"
+        style={{
+          color: "#657077",
+          fontWeight: 600,
+          textDecoration: "line-through",
+        }}
+      >
+        «{feed.data.oldAccess}»
       </span>
     </StyledHistoryBlockMessage>
   );

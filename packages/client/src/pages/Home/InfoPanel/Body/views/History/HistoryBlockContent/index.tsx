@@ -31,7 +31,7 @@ import HistoryUserList from "./UserList";
 import HistoryMainText from "./MainText";
 import HistoryItemList from "./ItemList";
 import HistoryMainTextFolderInfo from "./MainTextFolderInfo";
-
+import HistoryRoomExternalLink from "./RoomExternalLink";
 import HistoryGroupList from "./GroupList";
 import HistoryUserGroupRoleChange from "./UserGroupRoleChange";
 import HistoryRoomTagList from "./RoomTagList";
@@ -74,6 +74,10 @@ const HistoryBlockContent = ({
 
       {targetType === "roomTag" && (
         <HistoryRoomTagList feed={feed} actionType={actionType} />
+      )}
+
+      {targetType === "roomExternalLink" && actionType === "create" && (
+        <HistoryRoomExternalLink feed={feed} actionType={actionType} />
       )}
 
       {targetType === "user" && actionType !== "update" && (

@@ -24,44 +24,52 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { TTranslation } from "@docspace/shared/types";
-import { StyledHistoryBlockMessage } from "../../../styles/history";
+import {
+  StyledHistoryBlockTagList,
+  StyledHistoryLink,
+} from "../../../styles/history";
+import { ActionByTarget, AnyFeedInfo, getFeedInfo } from "../FeedInfo";
+import { Tag } from "@docspace/shared/components/tag";
 
-interface HistoryMainTextProps {
-  t: TTranslation;
+import { decode } from "he";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+
+interface HistoryRoomExternalLinkProps {
   feed: any;
+  actionType: ActionByTarget<"roomTag">;
 }
 
-const HistoryMainText = ({ t, feed }: HistoryMainTextProps) => {
-  return (
-    <StyledHistoryBlockMessage className="message">
-      <span className="main-message">
-        <Trans
-          t={t}
-          ns="InfoPanel"
-          i18nKey={feed.action.key}
-          values={{
-            roomTitle: feed.data?.title || feed.data?.newTitle,
-            oldRoomTitle: feed.data?.oldTitle,
-            linkTitle: feed.data?.title,
-            oldLinkTitle: feed.data?.oldTitle,
-          }}
-          components={{ bold: <strong /> }}
-        />
-      </span>{" "}
-    </StyledHistoryBlockMessage>
-  );
+const HistoryRoomExternalLink = ({
+  feed,
+  actionType,
+  additionalLinks,
+  setEditLinkPanelIsVisible,
+  setLinkParams,
+}: HistoryRoomExternalLinkProps) => {
+  console.log(additionalLinks);
+
+  const onEditLink = () => {
+    setEditLinkPanelIsVisible(true);
+    setLinkParams({
+      isEdit: true,
+      link: { ...feed.data },
+    });
+  };
+
+  if (actionType === "create")
+    return (
+      <StyledHistoryLink>
+        <Link className="text link" onClick={onEditLink}>
+          {decode(feed.data.title)}
+        </Link>
+      </StyledHistoryLink>
+    );
 };
 
-export default inject(({ infoPanelStore }) => {
-  const { infoPanelSelection } = infoPanelStore;
-  return {
-    infoPanelSelection,
-  };
-})(
-  withTranslation(["InfoPanel", "Common", "Translations"])(
-    observer(HistoryMainText),
-  ),
-);
+export default inject(({ publicRoomStore, dialogsStore }) => ({
+  additionalLinks: publicRoomStore.additionalLinks,
+  setEditLinkPanelIsVisible: dialogsStore.setEditLinkPanelIsVisible,
+  setLinkParams: dialogsStore.setLinkParams,
+}))(observer(HistoryRoomExternalLink));

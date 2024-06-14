@@ -132,6 +132,11 @@ export const feedInfo = [
     actionType: `${FeedAction.Create}`,
   },
   {
+    key: "RoomExternalLinkRenamed",
+    targetType: `${FeedTarget.RoomExternalLink}`,
+    actionType: `${FeedAction.Rename}`,
+  },
+  {
     key: "RoomExternalLinkDeleted",
     targetType: `${FeedTarget.RoomExternalLink}`,
     actionType: `${FeedAction.Delete}`,

@@ -79,6 +79,7 @@ const Members = ({
   membersIsLoading,
   searchValue,
   isMembersPanelUpdating,
+  getExternalLinks,
 }) => {
   const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
@@ -87,6 +88,7 @@ const Members = ({
 
   useEffect(() => {
     updateInfoPanelMembers(t);
+    getExternalLinks();
   }, [infoPanelSelection, searchValue]);
 
   useEffect(() => {
@@ -316,6 +318,7 @@ export default inject(
       infoPanelSelection?.length > 1 ? null : infoPanelSelection;
 
     return {
+      getExternalLinks: publicRoomStore.getExternalLinks,
       infoPanelSelection: infoSelection,
       setIsScrollLocked,
       selfId,

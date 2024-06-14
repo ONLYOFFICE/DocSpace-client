@@ -363,9 +363,9 @@ class FilesTableHeader extends React.Component {
         key: "Index",
         title: "#",
         enable: this.props.indexColumnIsEnabled,
-        minWidth: 75,
+        minWidth: 60,
         resizable: false,
-        shortColumn: true,
+        isShort: true,
         onChange: this.onColumnChange,
       });
     }
@@ -583,6 +583,7 @@ class FilesTableHeader extends React.Component {
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         sectionWidth={sectionWidth}
         resetColumnsSize={resetColumnsSize}
+        isIndexing={isIndexing}
         sortingVisible={isIndexing ? false : sortingVisible}
         isIndexEditingMode={isIndexEditingMode}
         infoPanelVisible={infoPanelVisible}

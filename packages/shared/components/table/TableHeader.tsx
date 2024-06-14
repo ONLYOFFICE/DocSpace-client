@@ -1329,13 +1329,31 @@ class TableHeader extends React.Component<
       }
 
       if (hideColumnsConst) {
+        const shortColumnSize =
+          columns.find((col) => col.isShort && col.enable)?.minWidth || 0;
+
         tableInfoPanelContainer.forEach((item, index) => {
           const column = document.getElementById(`column_${index}`);
 
+          const isSettingColumn =
+            Number(index) === tableInfoPanelContainer.length - 1;
+          const isQuickButtonColumn =
+            Number(index) === tableInfoPanelContainer.length - 2;
+
+          if (isIndexEditingMode && isSettingColumn) {
+            gridTemplateColumns.push("75px");
+          }
+
+          if (isIndexEditingMode && isQuickButtonColumn) {
+            gridTemplateColumns.push("24px");
+          }
+
           if (column?.dataset?.minWidth && column?.dataset?.default) {
             gridTemplateColumns.push(
-              `${containerWidth - defaultSize - settingsSize}px`,
+              `${containerWidth - defaultSize - shortColumnSize - settingsSize}px`,
             );
+          } else if (column?.dataset?.minWidth && column?.dataset?.shortColum) {
+            gridTemplateColumns.push(`${column?.dataset?.minWidth}px`);
           } else if (
             item === `${defaultSize}px` ||
             item === `${settingsSize}px`
@@ -1501,6 +1519,8 @@ class TableHeader extends React.Component<
               (column ? column.dataset.enable === "true" : item !== "0px");
             const defaultColumnSize = column && column.dataset.defaultSize;
             const isSettingColumn = Number(index) === tableContainer.length - 1;
+            const isQuickButtonColumn =
+              Number(index) === tableContainer.length - 2;
 
             const isActiveNow = item === "0px" && enable;
             if (isActiveNow && column) activeColumnIndex = index;
@@ -1525,6 +1545,8 @@ class TableHeader extends React.Component<
             } else if (item !== `${settingsSize}px` || isIndexEditingMode) {
               const percent = (getSubstring(item) / oldWidth) * 100;
 
+              let newSettingsSize = isIndexEditingMode ? 0 : settingsSize;
+
               if (percent === 100) {
                 const enableColumnsLength = columns.filter(
                   (column) => !column.defaultSize && column.enable,
@@ -1543,7 +1565,7 @@ class TableHeader extends React.Component<
                 : percent === 0
                   ? `${defaultMinColumnSize}px`
                   : `${
-                      ((containerWidth - defaultSize - settingsSize) *
+                      ((containerWidth - defaultSize - newSettingsSize) *
                         percent) /
                       100
                     }px`;
@@ -1565,6 +1587,14 @@ class TableHeader extends React.Component<
               ) {
                 overWidth += defaultMinColumnSize - getSubstring(newItemWidth);
                 newItemWidth = `${defaultMinColumnSize}px`;
+              }
+
+              if (isIndexEditingMode && isSettingColumn) {
+                newItemWidth = "75px";
+              }
+
+              if (isIndexEditingMode && isQuickButtonColumn) {
+                newItemWidth = `24px`;
               }
 
               gridTemplateColumns.push(newItemWidth);
@@ -1729,7 +1759,7 @@ class TableHeader extends React.Component<
     for (const col of columns) {
       if (col.default) {
         str += `${wideColumnSize} `;
-      } else if (col.shortColumn) {
+      } else if (col.isShort) {
         str += `${col.minWidth}px `;
       } else
         str += col.enable

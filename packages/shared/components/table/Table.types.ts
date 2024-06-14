@@ -50,7 +50,7 @@ export type TTableColumn = {
   defaultSize?: number;
   default?: boolean;
   resizable?: boolean;
-  shortColumn?: boolean;
+  isShort?: boolean;
   checkbox?: {
     value: boolean;
     isIndeterminate: boolean;

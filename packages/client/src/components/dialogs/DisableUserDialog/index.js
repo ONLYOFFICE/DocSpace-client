@@ -9,12 +9,11 @@ const DisableUserDialog = ({
   t,
   visible,
   onClose,
+  userIds,
   isLoading,
   fetchData,
-  selection,
   updateUserStatus,
 }) => {
-  const userIds = selection.map((user) => user.id);
   const onlyOneUser = userIds.length === 1;
 
   let headerText = "";

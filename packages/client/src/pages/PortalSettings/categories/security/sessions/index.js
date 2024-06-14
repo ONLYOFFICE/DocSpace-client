@@ -83,6 +83,7 @@ const Sessions = ({
   updateAllSessions,
   platformData,
   selection,
+  bufferSelection,
   fetchData,
   isLoading,
   viewAs,
@@ -131,6 +132,25 @@ const Sessions = ({
     currentDeviceType,
   });
 
+  const getIdFromConnections = (connections) => connections?.[0]?.id;
+
+  const idFromSelection =
+    selection.length > 0
+      ? getIdFromConnections(selection[0].connections)
+      : undefined;
+
+  const idFromBufferSelection = bufferSelection
+    ? getIdFromConnections(bufferSelection.connections)
+    : undefined;
+
+  const exceptId = idFromSelection || idFromBufferSelection;
+  const userIdsFromSelection = selection.map((user) => user.id);
+
+  const userIds =
+    bufferSelection?.id !== undefined
+      ? [bufferSelection.id, ...userIdsFromSelection]
+      : [...userIdsFromSelection];
+
   // console.log("allSessions", JSON.parse(JSON.stringify(allSessions)));
   // console.log("sessionsData", JSON.parse(JSON.stringify(sessionsData)));
   // console.log("connections", JSON.parse(JSON.stringify(connections)));
@@ -163,7 +183,7 @@ const Sessions = ({
           visible={disableDialogVisible}
           onClose={() => setDisableDialogVisible(false)}
           fetchData={fetchData}
-          selection={selection}
+          userIds={userIds}
           updateUserStatus={updateUserStatus}
         />
       )}
@@ -184,7 +204,7 @@ const Sessions = ({
           t={t}
           visible={logoutAllDialogVisible}
           isLoading={isLoading}
-          selection={selection}
+          exceptId={exceptId}
           displayName={displayName}
           onClose={() => setLogoutAllDialogVisible(false)}
           onLogoutAllSessions={onClickLogoutAllSessions}
@@ -209,6 +229,7 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     platformData,
     fetchData,
     selection,
+    bufferSelection,
     isLoading,
     onClickLogoutAllSessions,
     onClickLogoutAllExceptThis,
@@ -236,6 +257,7 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     updateAllSessions,
     platformData,
     selection,
+    bufferSelection,
     fetchData,
     viewAs,
     setViewAs,

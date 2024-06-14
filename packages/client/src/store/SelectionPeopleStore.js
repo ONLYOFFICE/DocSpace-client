@@ -529,7 +529,18 @@ class SelectionStore {
 
   onClickLogoutAllSessions = async (t) => {
     const { removeAllActiveSessionsById } = this.settingsSetupStore;
-    const userId = this.selection[0]?.connections[0]?.userId;
+
+    const userIdFromBufferSelection =
+      this.selection.length > 0 && this.selection[0].connections.length > 0
+        ? this.selection[0].connections[0].userId
+        : undefined;
+
+    const userIdFromSelection =
+      this.bufferSelection && this.bufferSelection.connections.length > 0
+        ? this.bufferSelection.connections[0].userId
+        : undefined;
+
+    const userId = userIdFromSelection || userIdFromBufferSelection;
 
     if (!userId) return toastr.error(t("The user is already logged out"));
 
@@ -549,7 +560,17 @@ class SelectionStore {
   onClickLogoutAllExceptThis = async (t, id) => {
     const { removeAllExceptThisEventId } = this.settingsSetupStore;
 
-    const exceptId = this.selection[0]?.connections[0]?.id;
+    const idFromBufferSelection =
+      this.selection.length > 0 && this.selection[0].connections.length > 0
+        ? this.selection[0].connections[0].id
+        : undefined;
+
+    const idFromSelection =
+      this.bufferSelection && this.bufferSelection.connections.length > 0
+        ? this.bufferSelection.connections[0].id
+        : undefined;
+
+    const exceptId = idFromSelection || idFromBufferSelection;
 
     if (!exceptId) return toastr.error(t("The user is already logged out"));
 

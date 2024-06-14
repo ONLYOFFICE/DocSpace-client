@@ -28,6 +28,7 @@ import moment from "moment-timezone";
 
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie } from "@docspace/shared/utils";
+import { getFeedInfo } from "../views/History/FeedInfo";
 
 export const getRelativeDateDay = (t, date) => {
   moment.locale(getCookie(LANGUAGE));
@@ -60,6 +61,20 @@ export const getDateTime = (date) => {
 
   const given = moment(date);
   return given.format("LT");
+};
+
+export const addLinksToHistory = (fetchedHistory, links) => {
+  const res = fetchedHistory.items.map((feed) => {
+    const { targetType } = getFeedInfo(feed);
+    if (targetType !== "roomExternalLink") return feed;
+
+    const link = links.find((link) => link.sharedTo.id === feed.data.id);
+    if (!link) return feed;
+
+    return { ...feed, data: link };
+  });
+
+  return { ...fetchedHistory, items: res };
 };
 
 export const parseHistory = (fetchedHistory) => {

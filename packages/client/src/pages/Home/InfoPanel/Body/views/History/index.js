@@ -34,6 +34,7 @@ import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import {
   getRelativeDateDay,
   parseHistory,
+  addLinksToHistory,
 } from "./../../helpers/HistoryHelper";
 import HistoryBlock from "./HistoryBlock";
 import NoHistory from "../NoItem/NoHistory";
@@ -51,6 +52,7 @@ const History = ({
   openUser,
   isVisitor,
   isCollaborator,
+  getRoomLinks,
 }) => {
   const isMount = useRef(true);
   const abortControllerRef = useRef(new AbortController());
@@ -76,11 +78,19 @@ const History = ({
       abortControllerRef.current?.signal,
       item?.requestToken,
     )
+      .then(async (data) => {
+        if (isMount.current && infoPanelSelection.isRoom) {
+          const links = await getRoomLinks(infoPanelSelection.id);
+          const historyWithLinks = addLinksToHistory(data, links);
+          return historyWithLinks;
+        }
+      })
       .then((data) => {
         if (isMount.current)
           startTransition(() => {
             const parsedSelectionHistory = parseHistory(data);
             setSelectionHistory(parsedSelectionHistory);
+            return parsedSelectionHistory;
           });
       })
       .catch((err) => {
@@ -156,7 +166,7 @@ export default inject(
     } = infoPanelStore;
     const { culture } = settingsStore;
 
-    const { getHistory } = filesStore;
+    const { getHistory, getRoomLinks } = filesStore;
     const { checkAndOpenLocationAction } = filesActionsStore;
 
     const { user } = userStore;
@@ -175,6 +185,7 @@ export default inject(
       openUser,
       isVisitor,
       isCollaborator,
+      getRoomLinks,
     };
   },
 )(withTranslation(["InfoPanel", "Common", "Translations"])(observer(History)));

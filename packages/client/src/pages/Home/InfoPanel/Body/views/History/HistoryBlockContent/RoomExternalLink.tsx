@@ -48,8 +48,6 @@ const HistoryRoomExternalLink = ({
   setEditLinkPanelIsVisible,
   setLinkParams,
 }: HistoryRoomExternalLinkProps) => {
-  console.log(additionalLinks);
-
   const onEditLink = () => {
     setEditLinkPanelIsVisible(true);
     setLinkParams({
@@ -62,7 +60,7 @@ const HistoryRoomExternalLink = ({
     return (
       <StyledHistoryLink>
         <Link className="text link" onClick={onEditLink}>
-          {decode(feed.data.title)}
+          {decode(feed.data.title || feed.data.sharedTo?.title)}
         </Link>
       </StyledHistoryLink>
     );

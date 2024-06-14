@@ -62,6 +62,10 @@ export const getUserStatus = (user) => {
     return "pending";
   } else if (user.status === EmployeeStatus.Disabled) {
     return "disabled";
+  } else if (user.status === EmployeeStatus.Online) {
+    return "online";
+  } else if (user.status === EmployeeStatus.Offline) {
+    return "offline";
   } else {
     return "unknown";
   }

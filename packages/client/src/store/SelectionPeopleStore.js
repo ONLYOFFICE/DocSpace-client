@@ -251,6 +251,10 @@ class SelectionStore {
         return status === "pending";
       case "disabled":
         return status === "disabled";
+      case "online":
+        return status === "online";
+      case "offline":
+        return status === "offline";
       default:
         return false;
     }
@@ -270,7 +274,7 @@ class SelectionStore {
   setSelected = (selected, isSessionsPage) => {
     this.bufferSelection = null;
     this.selected = selected;
-    const sessions = this.sessionsData;
+    const sessions = this.allSessions;
     const list = this.peopleStore.usersStore.peopleList;
 
     if (selected !== "none" && selected !== "close") {

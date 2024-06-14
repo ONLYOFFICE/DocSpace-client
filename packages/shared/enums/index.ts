@@ -41,6 +41,8 @@ export const enum EmployeeActivationStatus {
 export const enum EmployeeStatus {
   Active = 1,
   Disabled = 2,
+  Online = "online",
+  Offline = "offline",
 }
 /**
  * Enum for employee type.

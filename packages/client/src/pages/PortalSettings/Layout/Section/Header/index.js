@@ -340,6 +340,16 @@ const SectionHeaderContent = (props) => {
       : setupSetSelected("all");
   };
 
+  const onSelectOnline = () => {
+    const { peopleSetSelected } = props;
+    peopleSetSelected("online", isSessionsPage);
+  };
+
+  const onSelectOffline = () => {
+    const { peopleSetSelected } = props;
+    peopleSetSelected("offline", isSessionsPage);
+  };
+
   const removeAdmins = () => {
     const { removeAdmins } = props;
     if (!removeAdmins) return;
@@ -382,13 +392,13 @@ const SectionHeaderContent = (props) => {
         key="online"
         label={t("Common:Online")}
         data-index={2}
-        onClick={() => console.log("online")}
+        onClick={onSelectOnline}
       />
       <DropDownItem
         key="offline"
         label={t("Common:Offline")}
         data-index={3}
-        onClick={() => console.log("offline")}
+        onClick={onSelectOffline}
       />
     </>
   ) : (
@@ -583,6 +593,7 @@ export default inject(
       setConnections,
       setUserLastSession,
       setDisplayName,
+      allSessions,
     } = peopleStore.selectionStore;
 
     const { admins, selectorIsOpen } = setup.security.accessRight;
@@ -620,6 +631,7 @@ export default inject(
       setUserSessionPanelVisible,
       setUserLastSession,
       setDisplayName,
+      allSessions,
     };
   },
 )(

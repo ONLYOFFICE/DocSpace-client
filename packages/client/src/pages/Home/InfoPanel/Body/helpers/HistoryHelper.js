@@ -62,27 +62,12 @@ export const getDateTime = (date) => {
   return given.format("LT");
 };
 
-// from { response: { feeds: groupedFeeds: [{ json: "" }], json: "" }}
-//   to [{ day: "", feeds: [ groupedFeeds: [{ json: {} }], json: {} ]}]
-
-export const parseHistory = (t, fetchedHistory) => {
-  console.log(fetchedHistory);
+export const parseHistory = (fetchedHistory) => {
   let feeds = fetchedHistory.items;
   let parsedFeeds = [];
 
   for (let i = 0; i < feeds.length; i++) {
-    const feedDay = getRelativeDateDay(t, feeds[i].date);
-
-    // let newGroupedFeeds = [];
-    // if (feeds[i].groupedFeeds) {
-    //   let groupFeeds = feeds[i].groupedFeeds;
-    //   for (let j = 0; j < groupFeeds.length; j++)
-    //     newGroupedFeeds.push(
-    //       !!groupFeeds[j].target
-    //         ? groupFeeds[j].target
-    //         : JSON.parse(groupFeeds[j].json),
-    //     );
-    // }
+    const feedDay = moment(feeds[i].date).format("YYYY-MM-DD");
 
     if (parsedFeeds.length && parsedFeeds.at(-1).day === feedDay)
       parsedFeeds.at(-1).feeds.push({ ...feeds[i] });

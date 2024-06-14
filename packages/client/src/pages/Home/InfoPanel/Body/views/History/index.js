@@ -31,7 +31,10 @@ import { withTranslation } from "react-i18next";
 import { StyledHistoryList, StyledHistorySubtitle } from "../../styles/history";
 
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
-import { parseHistory } from "./../../helpers/HistoryHelper";
+import {
+  getRelativeDateDay,
+  parseHistory,
+} from "./../../helpers/HistoryHelper";
 import HistoryBlock from "./HistoryBlock";
 import NoHistory from "../NoItem/NoHistory";
 
@@ -76,7 +79,7 @@ const History = ({
       .then((data) => {
         if (isMount.current)
           startTransition(() => {
-            const parsedSelectionHistory = parseHistory(t, data);
+            const parsedSelectionHistory = parseHistory(data);
             setSelectionHistory(parsedSelectionHistory);
           });
       })
@@ -111,7 +114,9 @@ const History = ({
   return (
     <StyledHistoryList>
       {selectionHistory.map(({ day, feeds }) => [
-        <StyledHistorySubtitle key={day}>{day}</StyledHistorySubtitle>,
+        <StyledHistorySubtitle key={day}>
+          {getRelativeDateDay(t, feeds[0].date)}
+        </StyledHistorySubtitle>,
         ...feeds.map((feed, i) => (
           <HistoryBlock
             key={`${feed.action.id}_${feed.date}`}

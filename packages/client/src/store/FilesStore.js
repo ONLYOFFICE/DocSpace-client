@@ -65,6 +65,7 @@ import { CategoryType } from "SRC_DIR/helpers/constants";
 import debounce from "lodash.debounce";
 import clone from "lodash/clone";
 import Queue from "queue-promise";
+import { parseHistory } from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
@@ -270,6 +271,18 @@ class FilesStore {
       }
 
       this.treeFoldersStore.updateTreeFoldersItem(opt);
+    });
+
+    socketHelper.on("s:update-history", ({ id, type }) => {
+      const { infoPanelSelection, setSelectionHistory } = this.infoPanelStore;
+
+      if (id === infoPanelSelection?.id) {
+        console.log("[WS] s:update-history", id);
+        this.getHistory(type, id).then((data) => {
+          const parsedSelectionHistory = parseHistory(data);
+          setSelectionHistory(parsedSelectionHistory);
+        });
+      }
     });
 
     socketHelper.on("refresh-folder", (id) => {

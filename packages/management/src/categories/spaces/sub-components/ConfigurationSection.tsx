@@ -66,7 +66,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
   } = spacesStore;
 
   const onConfigurationPortal = async () => {
-    if (window?.DocSpaceConfig?.management?.checkDomain) {
+    if (window?.ClientConfig?.management?.checkDomain) {
       setIsLoading(true);
       const checkDomainResult = await checkDomain(`${name}.${domain}`).finally(
         () => setIsLoading(false)
@@ -167,7 +167,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
         </div>
         <div className="spaces-input-block">
           <Text fontSize="13px" fontWeight="600">
-            {t("DocspaceName", { productName: PRODUCT_NAME })}
+            {t("PortalName", { productName: PRODUCT_NAME })}
           </Text>
           <TextInput
             hasError={!!(portalNameError || checkDomainError)}

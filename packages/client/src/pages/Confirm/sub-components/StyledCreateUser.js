@@ -63,7 +63,7 @@ export const GreetingContainer = styled.div`
     }
   }
 
-  .docspace-logo {
+  .portal-logo {
     width: 100%;
     padding-bottom: 16px;
     height: 26.56px;

@@ -97,7 +97,7 @@ export const WizardContainer = styled.div`
     margin: 32px auto;
   }
 
-  .docspace-logo {
+  .portal-logo {
     display: flex;
     align-items: center;
     justify-content: center;

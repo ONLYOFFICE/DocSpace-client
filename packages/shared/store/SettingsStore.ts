@@ -67,7 +67,12 @@ import FirebaseHelper from "../utils/firebase";
 import SocketIOHelper from "../utils/socket";
 import { TWhiteLabel } from "../utils/whiteLabelHelper";
 
-import { ThemeKeys, TenantStatus, UrlActionType } from "../enums";
+import {
+  ThemeKeys,
+  TenantStatus,
+  UrlActionType,
+  RecaptchaType,
+} from "../enums";
 import {
   LANGUAGE,
   COOKIE_EXPIRATION_YEAR,
@@ -188,8 +193,6 @@ class SettingsStore {
   isEncryptionSupport = false;
 
   encryptionKeys: { [key: string]: string | boolean } = {};
-
-  docSpace = true;
 
   roomsMode = false;
 
@@ -319,6 +322,10 @@ class SettingsStore {
 
   windowAngle = window.screen?.orientation?.angle ?? window.orientation ?? 0;
 
+  recaptchaPublicKey: string | null = null;
+
+  recaptchaType: RecaptchaType | null = null;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -327,7 +334,7 @@ class SettingsStore {
     this.tenantStatus = tenantStatus;
   };
 
-  get docspaceSettingsUrl() {
+  get portalSettingsUrl() {
     return `${this.helpLink}/administration/docspace-settings.aspx`;
   }
 
@@ -545,7 +552,7 @@ class SettingsStore {
     else newSettings = await api.settings.getSettings(true);
 
     if (window.AscDesktopEditor !== undefined) {
-      const dp = combineUrl(window.DocSpaceConfig?.proxy?.url, MEDIA_VIEW_URL);
+      const dp = combineUrl(window.ClientConfig?.proxy?.url, MEDIA_VIEW_URL);
       this.setDefaultPage(dp);
     }
 
@@ -557,7 +564,7 @@ class SettingsStore {
         this.setValue(
           key as keyof SettingsStore,
           key === "defaultPage"
-            ? combineUrl(window.DocSpaceConfig?.proxy?.url, newSettings[key])
+            ? combineUrl(window.ClientConfig?.proxy?.url, newSettings[key])
             : newSettings[key],
         );
         if (key === "culture") {
@@ -1025,7 +1032,7 @@ class SettingsStore {
       ? window.name.includes(this.frameConfig?.name)
       : false;
 
-    if (window.DocSpaceConfig) window.DocSpaceConfig.isFrame = isFrame;
+    if (window.ClientConfig) window.ClientConfig.isFrame = isFrame;
 
     return isFrame;
   }

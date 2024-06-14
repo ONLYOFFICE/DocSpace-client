@@ -177,7 +177,7 @@ class ConsumerModalDialog extends React.Component {
       case "vk":
         return this.props.vkUrl;
       default:
-        return this.props.docspaceSettingsUrl;
+        return this.props.portalSettingsUrl;
     }
   };
 
@@ -330,7 +330,7 @@ export default inject(({ setup, settingsStore }) => {
   const {
     theme,
     urlSupport,
-    docspaceSettingsUrl,
+    portalSettingsUrl,
     docuSignUrl,
     dropboxUrl,
     boxUrl,
@@ -360,7 +360,7 @@ export default inject(({ setup, settingsStore }) => {
     theme,
     selectedConsumer,
     urlSupport,
-    docspaceSettingsUrl,
+    portalSettingsUrl,
     docuSignUrl,
     dropboxUrl,
     boxUrl,

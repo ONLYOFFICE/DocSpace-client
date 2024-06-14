@@ -38,10 +38,10 @@ import { toastr } from "@docspace/shared/components/toast";
 import { parseDomain } from "@docspace/shared/utils/common";
 
 const StyledModal = styled(ModalDialogContainer)`
-  .create-docspace-input-block {
+  .create-portal-input-block {
     padding-top: 16px;
   }
-  .create-docspace-input {
+  .create-portal-input {
     width: 100%;
   }
 
@@ -106,7 +106,7 @@ const ChangeDomainDialogComponent = () => {
         <Text noSelect={true} fontSize="13px">
           {t("ChangeDomainDescription")}
         </Text>
-        <div className="create-docspace-input-block">
+        <div className="create-portal-input-block">
           <Text
             fontSize="13px"
             fontWeight="600"
@@ -119,7 +119,7 @@ const ChangeDomainDialogComponent = () => {
             onChange={onHandleDomain}
             value={domain}
             placeholder={t("EnterDomain")}
-            className="create-docspace-input"
+            className="create-portal-input"
           />
           <div>
             {domainNameError &&

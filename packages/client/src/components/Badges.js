@@ -127,7 +127,7 @@ const Badges = ({
     rootFolderId,
     new: newCount,
     hasDraft,
-    startFilling,
+    // startFilling,
   } = item;
 
   const showEditBadge = !locked || item.access === 0;
@@ -219,7 +219,7 @@ const Badges = ({
 
   return fileExst ? (
     <div className="badges additional-badges file__badges">
-      {startFilling && (
+      {/* {startFilling && (
         <ColorTheme
           isEditing
           size={sizeBadge}
@@ -230,7 +230,7 @@ const Badges = ({
           hoverColor={theme.filesBadges.hoverIconColor}
           className="badge icons-group is-editing tablet-badge tablet-edit"
         />
-      )}
+      )} */}
 
       {hasDraft && (
         <BadgeWrapper isTile={isTile}>

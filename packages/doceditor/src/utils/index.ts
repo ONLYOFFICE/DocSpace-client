@@ -91,7 +91,7 @@ export const convertDocumentUrl = async (fileId: number | string) => {
 export const getDataSaveAs = async (params: string) => {
   try {
     const data = await request({
-      baseURL: combineUrl(window.DocSpaceConfig?.proxy?.url),
+      baseURL: combineUrl(window.ClientConfig?.proxy?.url),
       method: "get",
       url: `/filehandler.ashx?${params}`,
       responseType: "text",
@@ -122,7 +122,7 @@ export const saveAs = (
     return getDataSaveAs(params);
   } else {
     const handlerUrl = combineUrl(
-      window.DocSpaceConfig?.proxy?.url,
+      window.ClientConfig?.proxy?.url,
 
       window["AscDesktopEditor"] !== undefined //FIX Save as with open new tab on DesktopEditors
         ? "/Products/Files/HttpHandlers/"

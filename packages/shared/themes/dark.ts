@@ -2783,6 +2783,10 @@ const Dark: TTheme = {
           dataFontColor: white,
           dataFontColorBlack: white,
         },
+
+        dns: {
+          errorColor: darkErrorStatus,
+        },
       },
 
       integration: {
@@ -3011,6 +3015,7 @@ const Dark: TTheme = {
       color: gray,
       errorColor: darkErrorStatus,
     },
+    requiredColor: darkErrorStatus,
   },
 
   oformGallery: {

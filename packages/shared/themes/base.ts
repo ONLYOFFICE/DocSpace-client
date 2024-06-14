@@ -2799,6 +2799,10 @@ export const getBaseTheme = () => {
             dataFontColor: white,
             dataFontColorBlack: black,
           },
+
+          dns: {
+            errorColor: lightErrorStatus,
+          },
         },
 
         integration: {
@@ -3030,6 +3034,7 @@ export const getBaseTheme = () => {
         color: gray,
         errorColor: lightErrorStatus,
       },
+      requiredColor: lightErrorStatus,
     },
 
     oformGallery: {

@@ -148,6 +148,7 @@ const SessionsTableRow = (props) => {
     element,
     onContentRowSelect,
     onContentRowClick,
+    onUserContextClick,
     isActive,
     hideColumns,
     displayName,
@@ -244,25 +245,14 @@ const SessionsTableRow = (props) => {
     onContentRowSelect && onContentRowSelect(e.target.checked, item);
   };
 
-  const onRowContextClick = useCallback(() => {
-    if (isOneUserSelection) return; // only one row must be selected
-    onContentRowClick && onContentRowClick(!isChecked, item, false);
-  }, [isChecked, item, onContentRowClick]);
+  const onRowContextClick = useCallback(
+    (rightMouseButtonClick) => {
+      onUserContextClick?.(item, !rightMouseButtonClick);
+    },
+    [item, onUserContextClick],
+  );
 
-  const onRowClick = (e) => {
-    if (
-      e.target.closest(".checkbox") ||
-      e.target.closest(".table-container_row-checkbox") ||
-      e.target.closest(".paid-badge") ||
-      e.target.closest(".pending-badge") ||
-      e.target.closest(".disabled-badge") ||
-      e.detail === 0
-    ) {
-      return;
-    }
-
-    onContentRowClick && onContentRowClick(!isChecked, item);
-  };
+  const onRowClick = (e) => onContentRowClick?.(e, item);
 
   return (
     <Wrapper

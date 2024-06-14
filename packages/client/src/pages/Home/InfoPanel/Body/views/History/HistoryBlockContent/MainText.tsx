@@ -24,10 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { withTranslation, Trans } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { TTranslation } from "@docspace/shared/types";
 import { StyledHistoryBlockMessage } from "../../../styles/history";
+import { useFeedTranslation } from "../useFeedTranslation";
 
 interface HistoryMainTextProps {
   t: TTranslation;
@@ -37,20 +38,7 @@ interface HistoryMainTextProps {
 const HistoryMainText = ({ t, feed }: HistoryMainTextProps) => {
   return (
     <StyledHistoryBlockMessage className="message">
-      <span className="main-message">
-        <Trans
-          t={t}
-          ns="InfoPanel"
-          i18nKey={feed.action.key}
-          values={{
-            roomTitle: feed.data?.title || feed.data?.newTitle,
-            oldRoomTitle: feed.data?.oldTitle,
-            linkTitle: feed.data?.title,
-            oldLinkTitle: feed.data?.oldTitle,
-          }}
-          components={{ bold: <strong /> }}
-        />
-      </span>{" "}
+      <span className="main-message">{useFeedTranslation(t, feed)}</span>{" "}
     </StyledHistoryBlockMessage>
   );
 };
@@ -60,8 +48,4 @@ export default inject(({ infoPanelStore }) => {
   return {
     infoPanelSelection,
   };
-})(
-  withTranslation(["InfoPanel", "Common", "Translations"])(
-    observer(HistoryMainText),
-  ),
-);
+})(withTranslation(["InfoPanel"])(observer(HistoryMainText)));

@@ -1011,7 +1011,8 @@ const Dark: TTheme = {
       hoverBackgroundColor: "#474747",
       disableBackgroundColor: "#282828",
       activeBackgroundColor: "#282828",
-      activeSelectedBackgroundColor: "linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(0deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18))",
+      activeSelectedBackgroundColor:
+        "linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(0deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18))",
 
       title: {
         padding: "4px 16px",
@@ -2224,6 +2225,8 @@ const Dark: TTheme = {
     hoverBorderColor: "#474747",
     tableCellBorder: "1px solid #474747",
 
+    indexingSeparator: "#FFFFFF",
+
     groupMenu: {
       background: black,
       borderBottom: "1px solid #474747",
@@ -2295,6 +2298,8 @@ const Dark: TTheme = {
           "linear-gradient(to left,rgba(204, 184, 102, 0.2) 24px, #474747 24px)",
 
         backgroundActive: "#3D3D3D",
+        indexUpdate: `#414141`,
+        indexActive: `#515151`,
 
         borderImageCheckbox:
           "linear-gradient(to right, #474747 24px, #474747 24px)",

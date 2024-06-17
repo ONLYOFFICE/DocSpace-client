@@ -161,7 +161,7 @@ const StyledTableRow = styled(TableRow)`
         cursor: pointer;
         background: ${(props) =>
           props.isIndexEditingMode
-            ? `${props.theme.filesSection.tableView.row.indexActive} !important`
+            ? `${props.theme.filesSection.tableView.row.indexUpdate} !important`
             : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
       }
       .table-container_file-name-cell,

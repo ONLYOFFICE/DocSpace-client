@@ -2250,6 +2250,8 @@ export const getBaseTheme = () => {
       hoverBorderColor: grayMain,
       tableCellBorder: `1px solid ${grayLightMid}`,
 
+      indexingSeparator: "#4781D1",
+
       groupMenu: {
         background: white,
         borderBottom: "1px solid transparent",
@@ -2319,9 +2321,8 @@ export const getBaseTheme = () => {
           contextMenuWrapperDraggingHover: `linear-gradient(to left,rgb(239, 239, 178) 24px,${grayLightMid} 24px)`,
 
           backgroundActive: `#F3F4F4`,
-          indexUpdate: `#ebf1f7`,
-          indexActive: `#dce9f7`,
-          indexFixed: `rgba(71, 129, 209, 0.00)`,
+          indexUpdate: `#F2F6FC`,
+          indexActive: `#E4ECF8`,
 
           borderImageCheckbox: `linear-gradient(to right, ${white} 24px, ${grayLightMid} 24px)`,
           borderImageContextMenu: `linear-gradient(to left, ${white} 24px, ${grayLightMid} 24px)`,

@@ -40,7 +40,7 @@ import { isElementInViewport } from "@docspace/shared/utils/common";
 
 import { DeviceType, VDRIndexingAction } from "@docspace/shared/enums";
 
-const separatorStyles = `width: 100vw;  background-color: rgb(71, 129, 209); position: absolute; height: 3px; z-index: 1;`;
+const separatorStyles = `width: 100vw;  position: absolute; height: 3px; z-index: 1;`;
 const sectionClass = "section-wrapper-content";
 
 let currentDroppable = null;
@@ -206,6 +206,7 @@ const SectionBodyContent = (props) => {
     const tableItem = wrapperElement.closest(".table-list-item");
     const styles = tableItem && window.getComputedStyle(tableItem);
     const indexSeparatorNode = document.createElement("div");
+    indexSeparatorNode.classList.add("indexing-separator");
 
     const parent = document.querySelector(
       ".ReactVirtualized__Grid__innerScrollContainer",

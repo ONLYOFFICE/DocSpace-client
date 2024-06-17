@@ -59,6 +59,11 @@ const StyledTableContainer = styled.div<{ useReactWindow?: boolean }>`
     min-width: 10%;
   }
 
+  .indexing-separator {
+    background-color: ${(props) =>
+      props.theme.tableContainer.indexingSeparator};
+  }
+
   .resize-handle {
     display: block;
     cursor: ew-resize;

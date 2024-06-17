@@ -68,7 +68,10 @@ const StyledWrapper = styled.div`
     `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
   margin-top: -1px;
 
-  ${(props) => (props.checked || props.isActive) && checkedStyle};
+  ${(props) =>
+    (props.checked || props.isActive) &&
+    !props.isIndexEditingMode &&
+    checkedStyle};
   ${(props) =>
     (props.checked || props.isActive) &&
     props.isFirstElem &&
@@ -82,7 +85,7 @@ const StyledWrapper = styled.div`
     css`
       background: ${(props) =>
         props.isIndexEditingMode
-          ? `${props.theme.filesSection.tableView.row.indexActive} !important`
+          ? `${props.theme.filesSection.tableView.row.indexUpdate} !important`
           : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
       ${marginStyles}
     `}
@@ -90,10 +93,23 @@ const StyledWrapper = styled.div`
   ${(props) =>
     !isMobile &&
     !props.isDragging &&
+    !props.isIndexEditingMode &&
     css`
       :hover {
         cursor: pointer;
         ${checkedStyle}
+      }
+    `};
+
+  ${(props) =>
+    !isMobile &&
+    props.isIndexEditingMode &&
+    css`
+      :hover {
+        cursor: pointer;
+        background: ${(props) =>
+          props.theme.filesSection.tableView.row.indexActive};
+        ${marginStyles}
       }
     `};
 

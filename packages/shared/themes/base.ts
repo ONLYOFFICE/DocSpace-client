@@ -2324,6 +2324,9 @@ export const getBaseTheme = () => {
           indexUpdate: `#F2F6FC`,
           indexActive: `#E4ECF8`,
 
+          indexBackgroundButtonHover: `#BED3EF`,
+          indexArrowButtonHover: `#4781D1`,
+
           borderImageCheckbox: `linear-gradient(to right, ${white} 24px, ${grayLightMid} 24px)`,
           borderImageContextMenu: `linear-gradient(to left, ${white} 24px, ${grayLightMid} 24px)`,
 

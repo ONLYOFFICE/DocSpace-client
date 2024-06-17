@@ -2301,6 +2301,9 @@ const Dark: TTheme = {
         indexUpdate: `#414141`,
         indexActive: `#515151`,
 
+        indexBackgroundButtonHover: `#7B7B7B`,
+        indexArrowButtonHover: `#FFFFFF`,
+
         borderImageCheckbox:
           "linear-gradient(to right, #474747 24px, #474747 24px)",
         borderImageContextMenu:

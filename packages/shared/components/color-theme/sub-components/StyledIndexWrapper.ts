@@ -23,18 +23,9 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import hexRgb from "hex-rgb";
 import styled from "styled-components";
 
 import { Base, TColorScheme } from "../../../themes";
-
-const indexWrapperBackground = (props: {
-  $currentColorScheme: TColorScheme;
-}) => {
-  const { red, green, blue } = hexRgb(props.$currentColorScheme?.main?.accent);
-
-  return `rgba(${red}, ${green}, ${blue}, 0.25)`;
-};
 
 const StyledIndexWrapper = styled.div<{
   $currentColorScheme: TColorScheme | undefined;
@@ -56,18 +47,22 @@ const StyledIndexWrapper = styled.div<{
 
   &:hover {
     cursor: pointer;
-    background: ${(props) => indexWrapperBackground(props)};
+    background: ${(props) =>
+      props.theme.filesSection.tableView.row.indexBackgroundButtonHover};
 
     svg {
       cursor: pointer;
 
       path {
-        fill: ${(props) => props.$currentColorScheme?.main?.accent} !important;
+        fill: ${(props) =>
+          props.theme.filesSection.tableView.row
+            .indexArrowButtonHover} !important;
       }
 
       circle {
         stroke: ${(props) =>
-          props.$currentColorScheme?.main?.accent} !important;
+          props.theme.filesSection.tableView.row
+            .indexArrowButtonHover} !important;
       }
     }
   }

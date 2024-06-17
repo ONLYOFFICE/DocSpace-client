@@ -19,7 +19,7 @@ export const getRoomTypeTitleTranslation = (
     case RoomsType.PublicRoom:
       return t("Common:PublicRoom");
     case RoomsType.VirtualDataRoom:
-      return t("Files:VirtualDataRoom");
+      return t("Common:VirtualDataRoom");
     case RoomsType.FormRoom:
       return t("Common:FormFilingRoomTitle");
     default:
@@ -44,6 +44,8 @@ export const getRoomTypeDescriptionTranslation = (
       return t("Common:CustomRoomDescription");
     case RoomsType.PublicRoom:
       return t("Common:PublicRoomDescription");
+    case RoomsType.VirtualDataRoom:
+      return t("Common:VirtualDataRoomDescription");
     case RoomsType.FormRoom:
       return t("Common:FormFilingRoomDescription");
     default:

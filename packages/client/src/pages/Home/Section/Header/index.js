@@ -80,7 +80,7 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
-import TableIndexHeader from "../IndexHeader";
+import IndexMenu from "../IndexHeader";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -851,7 +851,7 @@ const SectionHeaderContent = (props) => {
     isMobileView: currentDeviceType === DeviceType.mobile,
   };
 
-  const tableIndexHeaderProps = {
+  const indexMenuProps = {
     setIsIndexEditingMode,
     t,
     setReorderDialogVisible,
@@ -954,7 +954,7 @@ const SectionHeaderContent = (props) => {
           {tableGroupMenuVisible ? (
             <TableGroupMenu {...tableGroupMenuProps} withComboBox />
           ) : isIndexEditingMode ? (
-            <TableIndexHeader {...tableIndexHeaderProps} />
+            <IndexMenu {...indexMenuProps} />
           ) : (
             <div className="header-container">
               <Navigation

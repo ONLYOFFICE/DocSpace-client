@@ -25,20 +25,23 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
+import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
 class IndexingStore {
   infoPanelStore;
 
-  isIndexEditingMode = false;
-  isIndexing = false;
-  updateSelection = [];
+  isIndexEditingMode: boolean = false;
 
-  constructor(infoPanelStore) {
+  isIndexing: boolean = false;
+
+  updateSelection: any[] = [];
+
+  constructor(infoPanelStore: InfoPanelStore) {
     this.infoPanelStore = infoPanelStore;
     makeAutoObservable(this);
   }
 
-  setIsIndexing = (indexing) => {
+  setIsIndexing = (indexing: boolean) => {
     // turn off the mode if we are no longer in indexed folders
     const { setIsVisible } = this.infoPanelStore;
     if (!indexing && this.isIndexEditingMode) this.setIsIndexEditingMode(false);
@@ -47,13 +50,14 @@ class IndexingStore {
     this.isIndexing = indexing;
   };
 
-  setUpdateSelection = (selection) => {
+  setUpdateSelection = (selection: any[]) => {
     this.updateSelection = selection;
   };
 
-  setUpdateItems = (items) => {
+  setUpdateItems = (items: any) => {
     const newSelection = [...this.updateSelection];
 
+    // eslint-disable-next-line no-restricted-syntax
     for (const item of items) {
       const exist = this.updateSelection.find(
         (selectionItem) =>
@@ -61,13 +65,14 @@ class IndexingStore {
           selectionItem.fileExst === item.fileExst,
       );
 
+      // eslint-disable-next-line no-continue
       if (exist) continue;
       newSelection.push(item);
     }
     this.setUpdateSelection(newSelection);
   };
 
-  setIsIndexEditingMode = (mode) => {
+  setIsIndexEditingMode = (mode: boolean) => {
     if (!mode) {
       this.setUpdateSelection([]);
     }

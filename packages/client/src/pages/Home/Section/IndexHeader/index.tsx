@@ -25,16 +25,23 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Text } from "@docspace/shared/components/text";
+import { TTranslation } from "@docspace/shared/types";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
 import CrossIconSvgUrl from "PUBLIC_DIR/images/cross.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { StyledTableIndexMenu } from "./StyledIndexHeader";
 
-const TableIndexHeader = ({
+export interface IndexMenuProps {
+  setIsIndexEditingMode: (mode: boolean) => void;
+  setReorderDialogVisible: (visible: boolean) => void;
+  t: TTranslation;
+}
+
+const IndexMenu = ({
   setIsIndexEditingMode,
   t,
   setReorderDialogVisible,
-}) => {
+}: IndexMenuProps) => {
   return (
     <StyledTableIndexMenu>
       <div className="table-header_index-container">
@@ -49,10 +56,10 @@ const TableIndexHeader = ({
         >
           <IconButton
             className="table-header_reorder-icon"
-            size="16"
+            size={16}
             onClick={() => {}}
             iconName={RoundedArrowSvgUrl}
-            isFill={true}
+            isFill
             isClickable={false}
           />
           <Text fontSize="12px" lineHeight="16px" fontWeight={600}>
@@ -62,7 +69,7 @@ const TableIndexHeader = ({
       </div>
       <IconButton
         className="table-header_cross-icon"
-        size="16"
+        size={16}
         onClick={() => setIsIndexEditingMode(false)}
         iconName={CrossIconSvgUrl}
         isFill
@@ -72,4 +79,4 @@ const TableIndexHeader = ({
   );
 };
 
-export default TableIndexHeader;
+export default IndexMenu;

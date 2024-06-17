@@ -28,17 +28,32 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
-import { Button } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { isMobile } from "react-device-detect";
+
+import DialogsStore from "SRC_DIR/store/DialogsStore";
+import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
+import FilesActionsStore from "SRC_DIR/store/FilesActionsStore";
+import { TSelectedFolder } from "@docspace/client/src/store/SelectedFolderStore";
+
+export interface ReorderIndexDialogProps {
+  reorder: (id: number | string | null) => void;
+  setIsVisible: (visible: boolean) => void;
+  visible: boolean;
+  selectedFolder: TSelectedFolder;
+}
 
 const ReorderIndexDialog = ({
   visible,
   setIsVisible,
   reorder,
   selectedFolder,
-}) => {
+}: ReorderIndexDialogProps) => {
   const { t, ready } = useTranslation(["Files", "Common"]);
 
   const onClose = () => {
@@ -51,7 +66,13 @@ const ReorderIndexDialog = ({
   };
 
   return (
-    <ModalDialog isLarge isLoading={!ready} visible={visible} onClose={onClose}>
+    <ModalDialog
+      displayType={ModalDialogType.modal}
+      isLarge
+      isLoading={!ready}
+      visible={visible}
+      onClose={onClose}
+    >
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text fontSize="13px" fontWeight={400} noSelect>
@@ -63,7 +84,7 @@ const ReorderIndexDialog = ({
           id="create-room"
           key="OkButton"
           label={t("Files:Reorder")}
-          size="normal"
+          size={ButtonSize.normal}
           primary
           onClick={onReorder}
           scale={isMobile}
@@ -72,7 +93,7 @@ const ReorderIndexDialog = ({
           id="cancel-share-folder"
           key="CancelButton"
           label={t("Common:CancelButton")}
-          size="normal"
+          size={ButtonSize.normal}
           onClick={onClose}
           scale={isMobile}
         />
@@ -82,7 +103,15 @@ const ReorderIndexDialog = ({
 };
 
 export default inject(
-  ({ dialogsStore, filesActionsStore, selectedFolderStore }) => {
+  ({
+    dialogsStore,
+    filesActionsStore,
+    selectedFolderStore,
+  }: {
+    dialogsStore: DialogsStore;
+    filesActionsStore: FilesActionsStore;
+    selectedFolderStore: SelectedFolderStore;
+  }) => {
     const { reorderDialogVisible, setReorderDialogVisible } = dialogsStore;
     const selectedFolder = selectedFolderStore.getSelectedFolder();
     const { reorder } = filesActionsStore;

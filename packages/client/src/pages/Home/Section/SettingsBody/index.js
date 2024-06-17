@@ -75,7 +75,7 @@ const SectionBodyContent = ({ isErrorSettings, user }) => {
 
   //     navigate(
   //       combineUrl(
-  //         window.DocSpaceConfig?.proxy?.url,
+  //         window.ClientConfig?.proxy?.url,
   //         config.homepage,
   //         `/settings/${id}`
   //       )

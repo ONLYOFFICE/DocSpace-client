@@ -48,7 +48,7 @@ const DeleteData = (props) => {
   const data = [
     {
       id: "deletion",
-      name: t("DeleteDocspace", { productName: PRODUCT_NAME }),
+      name: t("DeletePortal", { productName: PRODUCT_NAME }),
       content: <PortalDeletionSection />,
     },
     {
@@ -69,7 +69,7 @@ const DeleteData = (props) => {
   const onSelect = (e) => {
     navigate(
       combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         config.homepage,
         `/portal-settings/delete-data/${e.id}`,
       ),

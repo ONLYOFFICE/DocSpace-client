@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -25,58 +24,52 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import React, { useState } from "react";
+import { useTheme } from "styled-components";
 
-import React from "react";
-import styled, { useTheme } from "styled-components";
+import { classNames, getLogoUrl } from "@docspace/shared/utils";
+import { WhiteLabelLogoType } from "../../enums";
+import { size as deviceSize } from "../../utils";
+import { StyledWrapper } from "./PortalLogo.styled";
+import type { PortalLogoProps } from "./PortalLogo.types";
 
-import { mobile } from "@docspace/shared/utils/device";
-import { getLogoUrl } from "@docspace/shared/utils/common";
-import { Base, Dark } from "@docspace/shared/themes";
-import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
-import LanguageComboboxWrapper from "./LanguageCombobox";
-
-const StyledSimpleNav = styled.div`
-  display: none;
-  height: 48px;
-  align-items: center;
-  justify-content: center;
-  background-color: ${(props) => props.theme?.login?.navBackground};
-
-  svg {
-    path:last-child {
-      fill: ${(props) => props.theme.client?.home?.logoColor};
-    }
-  }
-
-  @media ${mobile} {
-    display: flex;
-
-    .language-combo-box {
-      position: absolute;
-      top: 7px;
-      right: 8px;
-    }
-  }
-`;
-
-StyledSimpleNav.defaultProps = { theme: Base };
-
-interface SimpleNavProps {
-  systemTheme: ThemeKeys;
-}
-
-const SimpleNav = ({ systemTheme }: SimpleNavProps) => {
+const PortalLogo = ({ className, isResizable = false }: PortalLogoProps) => {
   const theme = useTheme();
-  const isDark = !theme.isBase;
-  const logoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, isDark);
+
+  const [size, setSize] = useState(window.innerWidth);
+
+  const onResize = () => {
+    setSize(window.innerWidth);
+  };
+
+  React.useEffect(() => {
+    if (isResizable) window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
+  }, [isResizable]);
+
+  const isMobile = size <= deviceSize.mobile;
+
+  const logoSize =
+    isResizable && isMobile
+      ? WhiteLabelLogoType.LightSmall
+      : WhiteLabelLogoType.LoginPage;
+
+  const logo = getLogoUrl(logoSize, !theme.isBase);
 
   return (
-    <StyledSimpleNav id="login-header">
-      <img src={logoUrl} alt="logo-url" />
-      <LanguageComboboxWrapper />
-    </StyledSimpleNav>
+    <StyledWrapper isMobile={isMobile} isResizable={isResizable}>
+      {logo && (
+        <img
+          src={logo}
+          className={classNames("logo-wrapper", className)}
+          alt=""
+        />
+      )}
+    </StyledWrapper>
   );
 };
 
-export default SimpleNav;
+export default PortalLogo;

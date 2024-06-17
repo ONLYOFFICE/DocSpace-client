@@ -130,7 +130,7 @@ const DeveloperToolsWrapper = (props) => {
   const onSelect = (e) => {
     navigate(
       combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         config.homepage,
         `/portal-settings/developer-tools/${e.id}`,
       ),

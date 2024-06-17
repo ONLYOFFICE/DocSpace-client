@@ -948,7 +948,7 @@ class ContextOptionsStore {
 
     navigate(
       combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         config.homepage,
         `${url}?${filterUrlParams}`,
       ),
@@ -2173,7 +2173,7 @@ class ContextOptionsStore {
         id: "accounts-add_administrator",
         className: "main-button_drop-down",
         icon: PersonAdminReactSvgUrl,
-        label: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
+        label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
         onClick: this.onInvite,
         "data-type": EmployeeType.Admin,
         key: "administrator",

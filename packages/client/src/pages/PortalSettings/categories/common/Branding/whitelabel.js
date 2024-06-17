@@ -38,7 +38,7 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 import { size } from "@docspace/shared/utils";
-
+import { globalColors } from "@docspace/shared/themes";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import WhiteLabelWrapper from "./StyledWhitelabel";
 import LoaderWhiteLabel from "../sub-components/loaderWhiteLabel";
@@ -272,7 +272,7 @@ const WhiteLabel = (props) => {
           <Badge
             className="paid-badge"
             fontWeight="700"
-            backgroundColor="#EDC409"
+            backgroundColor={globalColors.favoritesStatus}
             label={t("Common:Paid")}
             isPaidBadge={true}
           />

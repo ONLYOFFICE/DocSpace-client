@@ -103,7 +103,7 @@ const StyledSettingsComponent = styled.div`
   .errorText {
     position: absolute;
     font-size: 10px;
-    color: #f21c0e;
+    color: ${(props) => props.theme.client.settings.common.dns.errorColor};
   }
 
   .settings-block__wrapper-language {

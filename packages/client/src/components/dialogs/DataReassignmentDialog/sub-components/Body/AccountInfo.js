@@ -36,7 +36,7 @@ import { capitalize } from "lodash";
 const StyledCatalogSpamIcon = styled(CatalogSpamIcon)`
   ${commonIconsStyles}
   path {
-    fill: #f21c0e;
+    fill: ${(props) => props.theme.dialogs.errorText};
   }
   padding-left: 8px;
 `;

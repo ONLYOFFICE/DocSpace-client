@@ -37,6 +37,7 @@ import { StyledAccountsItemTitle } from "../../styles/accounts";
 import { StyledTitle } from "../../styles/common";
 
 import { decode } from "he";
+import { globalColors } from "@docspace/shared/themes";
 
 const AccountsItemTitle = ({
   t,
@@ -108,8 +109,8 @@ const AccountsItemTitle = ({
           <Badge
             className="sso-badge"
             label={t("Common:SSO")}
-            color={"#FFFFFF"}
-            backgroundColor="#22C386"
+            color={globalColors.white}
+            backgroundColor={globalColors.mainGreen}
             fontSize={"9px"}
             fontWeight={800}
             noHover

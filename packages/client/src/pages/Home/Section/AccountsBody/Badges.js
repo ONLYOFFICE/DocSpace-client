@@ -31,7 +31,7 @@ import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import { PaymentsType, AccountLoginType } from "@docspace/shared/enums";
-
+import { globalColors } from "@docspace/shared/themes";
 import { Badge } from "@docspace/shared/components/badge";
 import { commonIconsStyles } from "@docspace/shared/utils";
 
@@ -121,8 +121,8 @@ const Badges = ({
         <Badge
           className="accounts-badge"
           label={t("SSO")}
-          color={"#FFFFFF"}
-          backgroundColor="#22C386"
+          color={globalColors.white}
+          backgroundColor={globalColors.mainGreen}
           fontSize={"9px"}
           fontWeight={800}
           noHover
@@ -134,7 +134,7 @@ const Badges = ({
         <StyledPaidBadge
           className="paid-badge accounts-badge"
           label={t("Paid")}
-          backgroundColor={"#EDC409"}
+          backgroundColor={globalColors.favoritesStatus}
           fontSize={"9px"}
           fontWeight={800}
           lineHeight={"13px"}

@@ -47,6 +47,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
 import { parseDomain } from "@docspace/shared/utils/common";
+import { globalColors } from "@docspace/shared/themes";
 
 const toggleStyle = {
   position: "static",
@@ -287,7 +288,7 @@ const DNSSettings = (props) => {
             <Badge
               className="paid-badge"
               fontWeight="700"
-              backgroundColor="#EDC409"
+              backgroundColor={globalColors.favoritesStatus}
               label={t("Common:Paid")}
               isPaidBadge={true}
             />

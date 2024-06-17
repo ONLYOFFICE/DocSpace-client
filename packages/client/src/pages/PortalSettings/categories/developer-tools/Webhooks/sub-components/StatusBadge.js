@@ -26,11 +26,11 @@
 
 import React from "react";
 import styled from "styled-components";
-import { Badge } from "@docspace/shared/components/badge";
-
 import { useTranslation } from "react-i18next";
-
 import { inject, observer } from "mobx-react";
+
+import { Badge } from "@docspace/shared/components/badge";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledBadge = styled(Badge)`
   p {
@@ -46,20 +46,20 @@ const StatusBadge = (props) => {
       ? theme.isBase
         ? {
             backgroundColor: "rgba(53, 173, 23, 0.1)",
-            color: "#35AD17",
+            color: globalColors.lightStatusPositive,
           }
         : {
             backgroundColor: "rgba(59, 164, 32, 0.1)",
-            color: "#3BA420",
+            color: globalColors.darkStatusPositive,
           }
       : theme.isBase
         ? {
             backgroundColor: "rgba(242, 28, 14, 0.1)",
-            color: "#F21C0E",
+            color: globalColors.lightErrorStatus,
           }
         : {
             backgroundColor: "rgba(224, 100, 81, 0.1)",
-            color: "#E06451",
+            color: globalColors.darkErrorStatus,
           };
   const { t } = useTranslation(["Webhooks"]);
 

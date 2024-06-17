@@ -62,6 +62,7 @@ import { Tooltip } from "@docspace/shared/components/tooltip";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { isMobile } from "@docspace/shared/utils";
 import { useTheme } from "styled-components";
+import { globalColors } from "@docspace/shared/themes";
 
 const MainProfile = (props) => {
   const { t } = useTranslation(["Profile", "Common"]);
@@ -197,8 +198,8 @@ const MainProfile = (props) => {
             <Badge
               className="sso-badge"
               label={t("Common:SSO")}
-              color={"#FFFFFF"}
-              backgroundColor="#22C386"
+              color={globalColors.white}
+              backgroundColor={globalColors.mainGreen}
               fontSize={"9px"}
               fontWeight={800}
               noHover
@@ -250,8 +251,8 @@ const MainProfile = (props) => {
                 <Badge
                   className="sso-badge"
                   label={t("Common:SSO")}
-                  color={"#FFFFFF"}
-                  backgroundColor="#22C386"
+                  color={globalColors.white}
+                  backgroundColor={globalColors.mainGreen}
                   fontSize={"9px"}
                   fontWeight={800}
                   noHover

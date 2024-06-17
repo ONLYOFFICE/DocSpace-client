@@ -36,7 +36,7 @@ import { TextInput } from "@docspace/shared/components/text-input";
 import { Button } from "@docspace/shared/components/button";
 import { Badge } from "@docspace/shared/components/badge";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-
+import { globalColors } from "@docspace/shared/themes";
 import WhiteLabelWrapper from "./StyledWhitelabel";
 import Logo from "./sub-components/logo";
 
@@ -66,7 +66,7 @@ const CommonWhiteLabel = ({
         {!isSettingPaid && (
           <Badge
             className="paid-badge"
-            backgroundColor="#EDC409"
+            backgroundColor={globalColors.favoritesStatus}
             label={t("Common:Paid")}
             isPaidBadge={true}
           />

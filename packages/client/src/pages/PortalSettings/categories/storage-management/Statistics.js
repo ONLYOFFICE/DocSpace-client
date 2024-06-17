@@ -29,6 +29,7 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { Badge } from "@docspace/shared/components/badge";
+import { globalColors } from "@docspace/shared/themes";
 
 import ItemIcon from "SRC_DIR/components/ItemIcon";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
@@ -89,7 +90,7 @@ const StatisticsComponent = (props) => {
         </StyledMainTitle>
         {!isStatisticsAvailable && (
           <Badge
-            backgroundColor="#EDC409"
+            backgroundColor={globalColors.favoritesStatus}
             label={t("Common:Paid")}
             className="paid-badge"
             isPaidBadge

@@ -35,6 +35,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
 import { mobile, tablet } from "@docspace/shared/utils";
 import { Badge } from "@docspace/shared/components/badge";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledTextInput = styled(TextInput)`
   margin-top: 4px;
@@ -315,7 +316,7 @@ const HistoryMainContent = (props) => {
         <Badge
           className="paid-badge"
           fontWeight="700"
-          backgroundColor="#EDC409"
+          backgroundColor={globalColors.favoritesStatus}
           label={t("Common:Paid")}
           isPaidBadge={true}
         />

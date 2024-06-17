@@ -29,6 +29,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { Text } from "@docspace/shared/components/text";
+import { globalColors } from "@docspace/shared/themes";
 
 import PluginSettingsIconUrl from "PUBLIC_DIR/images/plugin.settings.react.svg?url";
 import PluginDefaultLogoUrl from "PUBLIC_DIR/images/plugin.default-logo.png";
@@ -96,7 +97,7 @@ const PluginItem = ({
           fontSize="12px"
           fontWeight={700}
           noHover
-          backgroundColor="#22C386"
+          backgroundColor={globalColors.mainGreen}
         />
 
         {imgSrc && description && (

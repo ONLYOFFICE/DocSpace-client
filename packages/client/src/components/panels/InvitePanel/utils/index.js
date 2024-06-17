@@ -30,6 +30,7 @@ import {
   RoomsType,
   EmployeeType,
 } from "@docspace/shared/enums";
+import { globalColors } from "@docspace/shared/themes";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 export const getAccessOptions = (
@@ -49,7 +50,7 @@ export const getAccessOptions = (
         productName: PRODUCT_NAME,
       }),
       ...(!standalone && { quota: t("Common:Paid") }),
-      color: "#EDC409",
+      color: globalColors.favoritesStatus,
       access:
         roomType === -1 ? EmployeeType.Admin : ShareAccessRights.FullAccess,
       type: "admin",
@@ -59,7 +60,7 @@ export const getAccessOptions = (
       label: t("Common:RoomAdmin"),
       description: t("Translations:RoleRoomAdminDescription"),
       ...(!standalone && { quota: t("Common:Paid") }),
-      color: "#EDC409",
+      color: globalColors.favoritesStatus,
       access:
         roomType === -1 ? EmployeeType.User : ShareAccessRights.RoomManager,
       type: "manager",
@@ -69,7 +70,7 @@ export const getAccessOptions = (
       label: t("Common:PowerUser"),
       description: t("Translations:RolePowerUserDescription"),
       ...(!standalone && { quota: t("Common:Paid") }),
-      color: "#EDC409",
+      color: globalColors.favoritesStatus,
       access:
         roomType === -1
           ? EmployeeType.Collaborator

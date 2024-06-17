@@ -32,6 +32,7 @@ import { isMobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import { Badge } from "@docspace/shared/components/badge";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { globalColors } from "@docspace/shared/themes";
 
 import { StyledBaseQuotaComponent, StyledMainTitle } from "./StyledComponent";
 import QuotaPerRoomComponent from "./sub-components/QuotaPerRoom";
@@ -66,7 +67,7 @@ const QuotasComponent = (props) => {
 
         {!isStatisticsAvailable && (
           <Badge
-            backgroundColor="#EDC409"
+            backgroundColor={globalColors.favoritesStatus}
             label={t("Common:Paid")}
             className="paid-badge"
             isPaidBadge

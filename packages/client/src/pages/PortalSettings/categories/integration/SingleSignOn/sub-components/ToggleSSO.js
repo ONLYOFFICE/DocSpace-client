@@ -32,6 +32,7 @@ import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Badge } from "@docspace/shared/components/badge";
+import { globalColors } from "@docspace/shared/themes";
 
 const borderProp = { radius: "6px" };
 
@@ -72,7 +73,7 @@ const ToggleSSO = (props) => {
             </Text>
             {!isSSOAvailable && (
               <Badge
-                backgroundColor="#EDC409"
+                backgroundColor={globalColors.favoritesStatus}
                 label={t("Common:Paid")}
                 fontWeight="700"
                 className="toggle-caption_title_badge"

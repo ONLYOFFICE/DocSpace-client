@@ -40,6 +40,7 @@ import LoaderSectionHeader from "../loaderSectionHeader";
 import { mobile, tablet, desktop, isMobile } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Badge } from "@docspace/shared/components/badge";
+import { globalColors } from "@docspace/shared/themes";
 import {
   getKeyByLink,
   settingsTree,
@@ -390,7 +391,7 @@ const SectionHeaderContent = (props) => {
               </div>
               {isNeedPaidIcon ? (
                 <Badge
-                  backgroundColor="#EDC409"
+                  backgroundColor={globalColors.favoritesStatus}
                   label={t("Common:Paid")}
                   fontWeight="700"
                   className="settings-section_badge"

@@ -371,11 +371,11 @@ const StyledDropDown = styled(DropDown)`
       gap: 4px;
 
       p {
-        color: #4781d1;
+        color: ${(props) => props.theme.filesPanels.invite.addButtonColor};
       }
 
       svg path {
-        fill: #4781d1;
+        fill: ${(props) => props.theme.filesPanels.invite.addButtonColor};
       }
     }
   }

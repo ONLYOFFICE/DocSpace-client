@@ -363,7 +363,7 @@ class FilesTableHeader extends React.Component {
         key: "Index",
         title: "#",
         enable: this.props.indexColumnIsEnabled,
-        minWidth: 60,
+        minWidth: 70,
         resizable: false,
         isShort: true,
         onChange: this.onColumnChange,

@@ -302,7 +302,11 @@ const Editor = ({
   }
 
   newConfig.events.onSubmit = () => {
-    router.push(`/completed-form?${searchParams.toString()}`);
+    const origin = window.location.origin;
+
+    window.location.replace(
+      `${origin}/doceditor/completed-form?${searchParams.toString()}`,
+    );
   };
 
   return (

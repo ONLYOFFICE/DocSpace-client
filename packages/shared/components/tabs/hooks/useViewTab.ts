@@ -26,16 +26,20 @@
 
 import { useEffect, useState, useRef, RefObject } from "react";
 
+import { Scrollbar as ScrollbarType } from "../../scrollbar/custom-scrollbar";
+
 export const useViewTab = (
-  containerRef: RefObject<HTMLDivElement>,
+  containerRef: RefObject<ScrollbarType>,
+  tabRef: RefObject<HTMLDivElement>,
   index: number,
 ) => {
   const [isViewTab, setIsViewTab] = useState<boolean>(true);
   const observerRef = useRef<IntersectionObserver>();
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+    const container = containerRef.current?.scrollerElement;
+    const trackedElement = tabRef.current?.children[index];
+    if (!container || !trackedElement) return;
 
     const observerCallback: IntersectionObserverCallback = ([entry]) => {
       setIsViewTab(entry.isIntersecting);
@@ -47,16 +51,14 @@ export const useViewTab = (
       threshold: 1,
     });
 
-    if (container.children[index]) {
-      observerRef.current.observe(container.children[index]);
-    }
+    observerRef.current.observe(trackedElement);
 
     return () => {
-      if (observerRef.current && container.children[index]) {
-        observerRef.current.unobserve(container.children[index]);
+      if (observerRef.current) {
+        observerRef.current.unobserve(trackedElement);
       }
     };
-  }, [containerRef, index]);
+  }, [containerRef, index, tabRef]);
 
   return isViewTab;
 };

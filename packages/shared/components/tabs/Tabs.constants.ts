@@ -27,4 +27,4 @@
 export const INDEX_NOT_FOUND = -1;
 
 export const OFFSET_RIGHT = 48;
-export const OFFSET_LEFT = 58;
+export const OFFSET_LEFT = 48;

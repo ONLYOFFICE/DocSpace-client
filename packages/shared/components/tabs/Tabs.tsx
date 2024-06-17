@@ -26,9 +26,17 @@
 
 import React, { useState, useRef, useEffect } from "react";
 
+import { Scrollbar as ScrollbarType } from "../scrollbar/custom-scrollbar";
+
 import { useViewTab } from "./hooks/useViewTab";
 
-import { StyledTabs, Tab, TabList, TabSubLine } from "./Tabs.styled";
+import {
+  ScrollbarTabs,
+  StyledTabs,
+  Tab,
+  TabList,
+  TabSubLine,
+} from "./Tabs.styled";
 import { TabsProps, TTabItem } from "./Tabs.types";
 import { TabsTypes } from "./Tabs.enums";
 import { OFFSET_RIGHT, OFFSET_LEFT, INDEX_NOT_FOUND } from "./Tabs.constants";
@@ -53,34 +61,36 @@ const Tabs = (props: TabsProps) => {
   );
 
   const tabsRef = useRef<HTMLDivElement>(null);
-  const isViewFirstTab = useViewTab(tabsRef, 0);
-  const isViewLastTab = useViewTab(tabsRef, items.length - 1);
+  const scrollRef = useRef<ScrollbarType>(null);
+
+  const isViewFirstTab = useViewTab(scrollRef, tabsRef, 0);
+  const isViewLastTab = useViewTab(scrollRef, tabsRef, items.length - 1);
 
   useEffect(() => {
     setCurrentItem(items[selectedItemIndex]);
   }, [selectedItemIndex, items]);
 
   const scrollToTab = (index: number): void => {
-    if (!tabsRef.current) return;
+    if (!scrollRef.current || !tabsRef.current) return;
 
-    const tabElement = tabsRef.current.children[index] as HTMLElement;
-    const containerWidth = tabsRef.current.offsetWidth;
-    const tabWidth = tabElement.offsetWidth;
+    const containerElement = scrollRef.current.scrollerElement;
+    const tabElement = tabsRef.current.children[index] as HTMLDivElement;
+
+    if (!containerElement || !tabElement) return;
+
+    const containerWidth = containerElement.offsetWidth;
+    const tabWidth = tabElement?.offsetWidth;
     const tabOffsetLeft = tabElement.offsetLeft;
 
-    if (tabOffsetLeft - OFFSET_LEFT < tabsRef.current.scrollLeft) {
-      tabsRef.current.scrollTo({
-        left: tabOffsetLeft - OFFSET_LEFT,
-        behavior: "smooth",
-      });
+    if (tabOffsetLeft - OFFSET_LEFT < containerElement.scrollLeft) {
+      scrollRef.current.scrollTo(tabOffsetLeft - OFFSET_LEFT);
     } else if (
       tabOffsetLeft + tabWidth >
-      tabsRef.current.scrollLeft + containerWidth
+      containerElement.scrollLeft + containerWidth
     ) {
-      tabsRef.current.scrollTo({
-        left: tabOffsetLeft - containerWidth + tabWidth + OFFSET_RIGHT,
-        behavior: "smooth",
-      });
+      scrollRef.current.scrollTo(
+        tabOffsetLeft - containerWidth + tabWidth + OFFSET_RIGHT,
+      );
     }
   };
 
@@ -94,28 +104,31 @@ const Tabs = (props: TabsProps) => {
     <StyledTabs {...rest} stickyTop={stickyTop}>
       <div className="sticky">
         {!isViewFirstTab && <div className="blur-ahead" />}
-        <TabList $type={type} ref={tabsRef}>
-          {items.map((item, index) => {
-            const isActive = item.id === currentItem.id;
-            return (
-              <Tab
-                key={item.id}
-                isActive={isActive}
-                isDisabled={item?.isDisabled}
-                $type={type}
-                onClick={() => {
-                  item.onClick?.();
-                  setSelectedItem(item, index);
-                }}
-              >
-                {item.name}
-                <TabSubLine isActive={isActive} $type={type} />
-              </Tab>
-            );
-          })}
-        </TabList>
+        <ScrollbarTabs ref={scrollRef} autoHide={false} noScrollY $type={type}>
+          <TabList ref={tabsRef} $type={type}>
+            {items.map((item, index) => {
+              const isActive = item.id === currentItem.id;
+              return (
+                <Tab
+                  key={item.id}
+                  isActive={isActive}
+                  isDisabled={item?.isDisabled}
+                  $type={type}
+                  onClick={() => {
+                    item.onClick?.();
+                    setSelectedItem(item, index);
+                  }}
+                >
+                  {item.name}
+                  <TabSubLine isActive={isActive} $type={type} />
+                </Tab>
+              );
+            })}
+          </TabList>
+        </ScrollbarTabs>
         {!isViewLastTab && <div className="blur-back" />}
       </div>
+
       <div className="sticky-indent" />
 
       <div className="tabs-body">{currentItem?.content}</div>

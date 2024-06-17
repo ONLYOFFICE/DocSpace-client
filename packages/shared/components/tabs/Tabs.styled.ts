@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
+import { Scrollbar } from "../scrollbar";
 import { Base } from "../../themes";
 import { TabsTypes } from "./Tabs.enums";
 
@@ -35,6 +36,7 @@ export const StyledTabs = styled.div<{
   flex-direction: column;
 
   .sticky {
+    height: 33px;
     position: sticky;
     position: -webkit-sticky;
     top: ${(props) => (props.stickyTop ? props.stickyTop : 0)};
@@ -61,6 +63,8 @@ export const StyledTabs = styled.div<{
       ${(props) => props.theme.tabs.gradientColor} 100%
     );
     transform: matrix(-1, 0, 0, 1, 0, 0);
+
+    z-index: 1;
   }
 
   .blur-back {
@@ -75,6 +79,8 @@ export const StyledTabs = styled.div<{
       rgba(255, 255, 255, 0) 20.48%,
       ${(props) => props.theme.tabs.gradientColor} 100%
     );
+
+    z-index: 1;
   }
 
   .tabs-body {
@@ -87,6 +93,38 @@ export const StyledTabs = styled.div<{
 
 StyledTabs.defaultProps = { theme: Base };
 
+export const ScrollbarTabs = styled(Scrollbar)<{
+  $type?: TabsTypes;
+}>`
+  .scroller {
+    scroll-behavior: smooth;
+  }
+
+  .scroll-body {
+    position: absolute;
+  }
+
+  .track {
+    z-index: 0;
+    padding: 0;
+  }
+
+  .track > .thumb-horizontal {
+    height: 1px !important;
+  }
+
+  .thumb {
+    display: ${(props) =>
+      props.$type === TabsTypes.Primary ? "block" : "none"};
+    background-color: rgba(100, 104, 112, 0.2) !important;
+  }
+
+  .thumb:active,
+  .thumb.dragging {
+    background-color: rgba(6, 22, 38, 0.3) !important;
+  }
+`;
+
 export const TabList = styled.div<{
   $type?: TabsTypes;
 }>`
@@ -95,14 +133,7 @@ export const TabList = styled.div<{
   justify-content: inherit;
 
   width: 100%;
-  max-height: 32px;
-
-  overflow-x: auto;
-  overflox-y: hidden;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  height: 32px;
 
   gap: ${(props) => (props.$type === TabsTypes.Primary ? "20px" : "8px")};
 

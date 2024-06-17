@@ -35,6 +35,7 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { EmployeeType } from "@docspace/shared/enums";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const FIRST_NAME = "firstName",
   SECOND_NAME = "secondName",
@@ -101,7 +102,10 @@ const AttributeMapping = (props) => {
         label: t("Common:PowerUser"),
       },
       { key: EmployeeType.User, label: t("Common:RoomAdmin") },
-      { key: EmployeeType.Admin, label: t("Common:DocspaceAdmin") },
+      {
+        key: EmployeeType.Admin,
+        label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+      },
     ];
     return options;
   }, [t]);

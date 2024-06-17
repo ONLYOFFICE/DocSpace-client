@@ -1397,6 +1397,13 @@ class FilesStore {
     return res;
   };
 
+  abortAllFetch = () => {
+    this.filesController.abort();
+    this.roomsController.abort();
+    this.filesController = new AbortController();
+    this.roomsController = new AbortController();
+  };
+
   fetchFiles = (
     folderId,
     filter,
@@ -1405,9 +1412,9 @@ class FilesStore {
     clearSelection = true,
   ) => {
     const { setSelectedNode } = this.treeFoldersStore;
+
     if (this.clientLoadingStore.isLoading) {
-      this.roomsController.abort();
-      this.roomsController = new AbortController();
+      this.abortAllFetch();
     }
 
     const filterData = filter ? filter.clone() : FilesFilter.getDefault();
@@ -1728,8 +1735,7 @@ class FilesStore {
     const { setSelectedNode, roomsFolderId } = this.treeFoldersStore;
 
     if (this.clientLoadingStore.isLoading) {
-      this.filesController.abort();
-      this.filesController = new AbortController();
+      this.abortAllFetch();
     }
 
     const filterData = !!filter

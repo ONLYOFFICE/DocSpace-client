@@ -912,6 +912,7 @@ const defaultMinColumnSize = 110;
 const settingsSize = 24;
 
 const minSizeFirstColumn = 210;
+const handleOffset = 8;
 
 class TableHeader extends React.Component<
   TableHeaderProps,
@@ -991,7 +992,7 @@ class TableHeader extends React.Component<
         ? leftColumn.dataset.minWidth
         : defaultMinColumnSize;
 
-      if (leftColumn.clientWidth <= +minSize) {
+      if (leftColumn.getBoundingClientRect().width <= +minSize) {
         if (colIndex < 0) return false;
         this.moveToLeft(widths, newWidth, colIndex - 1);
         return;
@@ -1037,11 +1038,20 @@ class TableHeader extends React.Component<
     const defaultColumn = document.getElementById(`column_${colIndex}`);
     if (!defaultColumn || defaultColumn.dataset.defaultSize) return;
 
-    const handleOffset = 8;
-
     if (column2Width + offset - handleOffset >= defaultMinColumnSize) {
       widths[+columnIndex] = `${newWidth + handleOffset}px`;
       widths[colIndex] = `${column2Width + offset - handleOffset}px`;
+    } else if (column2Width !== defaultMinColumnSize) {
+      const widthTableNumber: number[] = [];
+      widths.forEach((item) => widthTableNumber.push(+item.slice(0, -2)));
+
+      const width =
+        widthTableNumber[+columnIndex] +
+        widthTableNumber[+colIndex] -
+        defaultMinColumnSize;
+
+      widths[+columnIndex] = `${width}px`;
+      widths[colIndex] = `${defaultMinColumnSize}px`;
     } else {
       if (colIndex === columns.length) return false;
       this.moveToRight(widths, newWidth, colIndex + 1);
@@ -1115,7 +1125,7 @@ class TableHeader extends React.Component<
     if (!column) return;
 
     const columnSize = column.getBoundingClientRect();
-    const newWidth = isRtl
+    let newWidth = isRtl
       ? columnSize.right - e.clientX
       : e.clientX - columnSize.left;
 
@@ -1126,11 +1136,19 @@ class TableHeader extends React.Component<
       ? column.dataset.minWidth
       : defaultMinColumnSize;
 
-    if (newWidth <= +minSize) {
-      const columnChanged = this.moveToLeft(widths, newWidth);
+    if (newWidth <= +minSize - handleOffset) {
+      const currentWidth = +widths[+columnIndex].slice(0, -2);
 
-      if (!columnChanged) {
-        widths[+columnIndex] = widths[+columnIndex];
+      // Move left
+      if (currentWidth !== +minSize) {
+        newWidth = +minSize - handleOffset;
+        this.moveToRight(widths, newWidth);
+      } else {
+        const columnChanged = this.moveToLeft(widths, newWidth);
+
+        if (!columnChanged) {
+          widths[+columnIndex] = widths[+columnIndex];
+        }
       }
     } else {
       this.moveToRight(widths, newWidth);

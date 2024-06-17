@@ -30,7 +30,7 @@ import { inject, observer } from "mobx-react";
 import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
 import { useTranslation } from "react-i18next";
 
-const AccountsSubmenu = ({
+const AccountsTabs = ({
   showBodyLoader,
   setPeopleSelection,
   setGroupsSelection,
@@ -62,10 +62,10 @@ const AccountsSubmenu = ({
   if (showBodyLoader) return <SectionSubmenuSkeleton />;
 
   return (
-    <Styled.AccountsSubmenu
+    <Styled.AccountsTabs
       className="accounts-tabs"
-      forsedActiveItemId={isPeople ? "people" : "groups"}
-      data={[
+      selectedItemId={isPeople ? "people" : "groups"}
+      items={[
         {
           id: "people",
           name: t("Common:People"),
@@ -89,4 +89,4 @@ export default inject(({ peopleStore, clientLoadingStore }) => ({
   setPeopleBufferSelection: peopleStore.selectionStore.setBufferSelection,
   setGroupsSelection: peopleStore.groupsStore.setSelection,
   setGroupsBufferSelection: peopleStore.groupsStore.setBufferSelection,
-}))(observer(AccountsSubmenu));
+}))(observer(AccountsTabs));

@@ -551,7 +551,7 @@ const SectionHeaderContent = (props) => {
       {
         id: "header_option_empty-trash",
         key: "empty-trash",
-        label: t("RecycleBinAction"),
+        label: t("Files:EmptyRecycleBin"),
         onClick: onEmptyTrashAction,
         disabled: !isRecycleBinFolder,
         icon: ClearTrashReactSvgUrl,

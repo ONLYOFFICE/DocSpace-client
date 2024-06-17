@@ -398,7 +398,7 @@ class InfoPanelStore {
 
   openAccountsWithSelectedUser = async (user, navigate) => {
     const path = [
-      window.DocSpaceConfig?.proxy?.url,
+      window.ClientConfig?.proxy?.url,
       config.homepage,
       "/accounts/people",
     ];

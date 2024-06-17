@@ -54,7 +54,7 @@ export const enum EmployeeType {
   Collaborator = 4,
   UserString = "user",
   RoomAdmin = "manager",
-  DocSpaceAdmin = "admin",
+  PortalAdmin = "admin",
   Owner = "Owner",
   CollaboratorString = "collaborator",
 }
@@ -481,6 +481,13 @@ export enum RoomsType {
   // ReadOnlyRoom: 4, //TODO: Restore when certs will be done
   PublicRoom = 6,
   CustomRoom = 5,
+}
+
+export const enum RecaptchaType {
+  Default = 0,
+  AndroidV2 = 1,
+  iOSV2 = 2,
+  hCaptcha = 3,
 }
 
 export enum AccountsSearchArea {

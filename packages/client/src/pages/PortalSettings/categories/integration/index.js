@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useState } from "react";
-import { Submenu } from "@docspace/shared/components/submenu";
+import { Tabs } from "@docspace/shared/components/tabs";
 import { useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -119,18 +119,18 @@ const IntegrationWrapper = (props) => {
     });
   }
 
-  const getCurrentTab = () => {
+  const getCurrentTabId = () => {
     const path = location.pathname;
-    const currentTab = data.findIndex((item) => path.includes(item.id));
-    return currentTab !== -1 ? currentTab : 0;
+    const currentTab = data.find((item) => path.includes(item.id));
+    return currentTab !== -1 && data.length ? currentTab.id : data[0].id;
   };
 
-  const currentTab = getCurrentTab();
+  const currentTabId = getCurrentTabId();
 
   const onSelect = (e) => {
     navigate(
       combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         config.homepage,
         `/portal-settings/integration/${e.id}`,
       ),
@@ -138,9 +138,9 @@ const IntegrationWrapper = (props) => {
   };
 
   return (
-    <Submenu
-      data={data}
-      startSelect={currentTab}
+    <Tabs
+      items={data}
+      selectedItemId={currentTabId}
       onSelect={onSelect}
       topProps={SECTION_HEADER_HEIGHT[currentDeviceType]}
     />

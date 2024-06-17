@@ -24,55 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
-import { useTheme } from "styled-components";
+import { TabsTypes } from "./Tabs.enums";
 
-import { classNames, getLogoUrl } from "@docspace/shared/utils";
-import { WhiteLabelLogoType } from "../../enums";
-import { size as deviceSize } from "../../utils";
-import { StyledWrapper } from "./DocspaceLogo.styled";
-import type { DocspaceLogoProps } from "./DocspaceLogo.types";
-
-const DocspaceLogo = ({
-  className,
-  isResizable = false,
-}: DocspaceLogoProps) => {
-  const theme = useTheme();
-
-  const [size, setSize] = useState(window.innerWidth);
-
-  const onResize = () => {
-    setSize(window.innerWidth);
-  };
-
-  React.useEffect(() => {
-    if (isResizable) window.addEventListener("resize", onResize);
-
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, [isResizable]);
-
-  const isMobile = size <= deviceSize.mobile;
-
-  const logoSize =
-    isResizable && isMobile
-      ? WhiteLabelLogoType.LightSmall
-      : WhiteLabelLogoType.LoginPage;
-
-  const logo = getLogoUrl(logoSize, !theme.isBase);
-
-  return (
-    <StyledWrapper isMobile={isMobile} isResizable={isResizable}>
-      {logo && (
-        <img
-          src={logo}
-          className={classNames("logo-wrapper", className)}
-          alt=""
-        />
-      )}
-    </StyledWrapper>
-  );
+export type TTabItem = {
+  /** Element id. */
+  id: string;
+  /** Tab text. */
+  name: string;
+  /** Content that is shown when you click on the tab.  */
+  content: React.ReactNode;
+  /** State of tab inclusion. State only works for tabs with a secondary theme. */
+  isDisabled?: boolean;
+  /** Sets a callback function that is triggered when the tab is selected */
+  onClick?: () => void;
 };
 
-export default DocspaceLogo;
+export interface TabsProps {
+  /** Child elements. */
+  items: TTabItem[];
+  /** Selected item of tabs. */
+  selectedItemId?: number | string;
+  /** Theme for displaying tabs. */
+  type?: TabsTypes;
+  /** Tab indentation for sticky positioning. */
+  stickyTop?: string;
+  /** Sets a callback function that is triggered when the tab is selected. */
+  onSelect?: (element: TTabItem) => void;
+}

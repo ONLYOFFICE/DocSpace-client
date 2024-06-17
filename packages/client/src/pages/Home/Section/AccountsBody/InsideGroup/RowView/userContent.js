@@ -110,7 +110,7 @@ const UserContent = ({
     role === "owner"
       ? t("Common:Owner")
       : role === "admin"
-        ? t("Common:DocspaceAdmin", { productName: PRODUCT_NAME })
+        ? t("Common:PortalAdmin", { productName: PRODUCT_NAME })
         : isCollaborator
           ? t("Common:PowerUser")
           : isVisitor

@@ -261,8 +261,8 @@ const InsideGroupTableRow = (props) => {
 
     const adminOption = {
       key: "admin",
-      title: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
-      label: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
+      title: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+      label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
       action: "admin",
     };
     const managerOption = {
@@ -340,7 +340,7 @@ const InsideGroupTableRow = (props) => {
       case "owner":
         return t("Common:Owner");
       case "admin":
-        return t("Common:DocspaceAdmin", { productName: PRODUCT_NAME });
+        return t("Common:PortalAdmin", { productName: PRODUCT_NAME });
       case "manager":
         return t("Common:RoomAdmin");
       case "collaborator":
@@ -499,7 +499,7 @@ const InsideGroupTableRow = (props) => {
             />
           </TableCell>
 
-          <Link
+          <Text
             type="page"
             title={displayName}
             fontWeight="600"
@@ -515,7 +515,7 @@ const InsideGroupTableRow = (props) => {
               : displayName?.trim()
                 ? displayName
                 : email}
-          </Link>
+          </Text>
           <Badges
             statusType={statusType}
             isPaid={isPaidUser}

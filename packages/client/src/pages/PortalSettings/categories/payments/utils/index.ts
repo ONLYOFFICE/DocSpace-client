@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { TabsContainer } from "./TabsContainer";
+export function getTwoDotsReplacing(translation: string) {
+  const newTranslation = translation;
 
-export type { TElement } from "./TabsContainer.types";
+  return newTranslation.replace(/\..$/, ".");
+}

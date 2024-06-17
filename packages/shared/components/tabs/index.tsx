@@ -24,36 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { mobileMore } from "@docspace/shared/utils";
+import { Tabs } from "./Tabs";
+import { TabsTypes } from "./Tabs.enums";
+import { type TTabItem, type TabsProps } from "./Tabs.types";
 
-const StyledLoader = styled.div`
-  margin-top: -4px;
-
-  .loader {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 4px;
-          `
-        : css`
-            padding-right: 4px;
-          `}
-  }
-
-  @media ${mobileMore} {
-    margin-top: -9px;
-  }
-`;
-
-const LoaderSubmenu = () => {
-  return (
-    <StyledLoader>
-      <RectangleSkeleton width="100px" height="28px" className="loader" />
-      <RectangleSkeleton width="100px" height="28px" />
-    </StyledLoader>
-  );
-};
-
-export default LoaderSubmenu;
+export { Tabs };
+export { TabsTypes };
+export { TTabItem, TabsProps };

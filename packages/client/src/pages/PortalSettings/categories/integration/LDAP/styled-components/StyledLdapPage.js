@@ -62,7 +62,10 @@ const StyledLdapPage = styled(Box)`
   }
 
   .hide-button {
-    margin-left: 12px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? `margin-right: 12px`
+        : `margin-left: 12px`};
   }
 
   .ldap_checkbox-container {
@@ -75,7 +78,10 @@ const StyledLdapPage = styled(Box)`
       display: flex;
       align-items: baseline;
       .help-icon {
-        padding-left: 6px;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? `padding-right: 6px`
+            : `padding-left: 6px`};
         position: relative;
         bottom: 4px;
       }
@@ -104,8 +110,10 @@ const StyledLdapPage = styled(Box)`
     display: flex;
     align-items: baseline;
     .help-icon {
-      padding-left: 8px;
-      padding-left: 6px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? `padding-right: 6px`
+          : `padding-left: 6px`};
       position: relative;
       bottom: 2px;
     }
@@ -197,7 +205,10 @@ const StyledLdapPage = styled(Box)`
 
   .field-label {
     .help-icon {
-      padding-left: 2px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? `padding-right: 2px`
+          : `padding-left: 2px`};
       position: relative;
       bottom: 0px;
     }

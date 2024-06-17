@@ -24,14 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-
+import { TTabItem } from "./Tabs.types";
 import { FileInput } from "../file-input";
 import { Row } from "../row";
 import { Text } from "../text";
 import { InputSize } from "../text-input";
 
-export const data = [
+export const data: TTabItem[] = [
   {
     id: "Overview",
     name: "Overview",
@@ -86,13 +85,14 @@ export const data = [
     ),
   },
   {
-    id: "Time tracking",
-    name: "Time tracking",
+    id: "Time",
+    name: "Time",
     content: <p>Time tracking</p>,
   },
   {
     id: "Contacts",
     name: "Contacts",
+    isDisabled: true,
     content: <p>Contacts</p>,
   },
   {
@@ -101,20 +101,3 @@ export const data = [
     content: <p>Team</p>,
   },
 ];
-
-export const startSelect = data[2];
-
-export const testData = [
-  {
-    id: "Tab1",
-    name: "Tab1",
-    content: <p>1</p>,
-  },
-  {
-    id: "Tab2",
-    name: "Tab2",
-    content: <p>2</p>,
-  },
-];
-
-export const testStartSelect = testData[1];

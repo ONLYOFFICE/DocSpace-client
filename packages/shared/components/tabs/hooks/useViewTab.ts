@@ -18,46 +18,47 @@
 //
 // Pursuant to Section 7(b) of the License you must retain the original Product logo when
 // distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
+// trademark law for use of our trademarks.s
 //
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Meta, StoryObj } from "@storybook/react";
-import { Submenu } from "./Submenu";
+import { useEffect, useState, useRef, RefObject } from "react";
 
-import { data, startSelect } from "./data";
-import { SubmenuProps } from "./Submenu.types";
+import { Scrollbar as ScrollbarType } from "../../scrollbar/custom-scrollbar";
 
-const meta = {
-  title: "Components/Submenu",
-  component: Submenu,
-} satisfies Meta<typeof Submenu>;
-type Story = StoryObj<typeof meta>;
+export const useViewTab = (
+  containerRef: RefObject<ScrollbarType>,
+  tabRef: RefObject<HTMLDivElement>,
+  index: number,
+) => {
+  const [isViewTab, setIsViewTab] = useState<boolean>(true);
+  const observerRef = useRef<IntersectionObserver>();
 
-export default meta;
+  useEffect(() => {
+    const container = containerRef.current?.scrollerElement;
+    const trackedElement = tabRef.current?.children[index];
+    if (!container || !trackedElement) return;
 
-const Wrapper = ({ children }: { children: React.ReactNode }) => (
-  <div
-    style={{
-      height: "170px",
-    }}
-  >
-    {children}
-  </div>
-);
+    const observerCallback: IntersectionObserverCallback = ([entry]) => {
+      setIsViewTab(entry.isIntersecting);
+    };
 
-const Template = (args: SubmenuProps) => (
-  <Wrapper>
-    <Submenu {...args} />
-  </Wrapper>
-);
+    observerRef.current = new IntersectionObserver(observerCallback, {
+      root: container,
+      rootMargin: "4px",
+      threshold: 1,
+    });
 
-export const Default: Story = {
-  render: (args) => <Template {...args} />,
-  args: {
-    data,
-    startSelect,
-  },
+    observerRef.current.observe(trackedElement);
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.unobserve(trackedElement);
+      }
+    };
+  }, [containerRef, index, tabRef]);
+
+  return isViewTab;
 };

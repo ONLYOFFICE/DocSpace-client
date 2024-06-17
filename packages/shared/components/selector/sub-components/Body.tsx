@@ -226,11 +226,7 @@ const Body = ({
       ) : null}
 
       {withTabs && tabsData && (
-        <StyledTabs
-          startSelect={0}
-          data={tabsData}
-          forsedActiveItemId={activeTabId}
-        />
+        <StyledTabs items={tabsData} selectedItemId={activeTabId} />
       )}
 
       {isSearchLoading || isBreadCrumbsLoading ? (

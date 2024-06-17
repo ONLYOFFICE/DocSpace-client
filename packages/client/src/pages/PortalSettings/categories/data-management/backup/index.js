@@ -31,7 +31,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { DeviceType } from "@docspace/shared/enums";
 import ManualBackup from "./manual-backup";
 import AutoBackup from "./auto-backup";
-import { Submenu } from "@docspace/shared/components/submenu";
+import { Tabs } from "@docspace/shared/components/tabs";
 import config from "PACKAGE_FILE";
 
 const Backup = ({ t, buttonSize, isNotPaidPeriod }) => {
@@ -63,7 +63,11 @@ const Backup = ({ t, buttonSize, isNotPaidPeriod }) => {
   return isNotPaidPeriod ? (
     <ManualBackup buttonSize={buttonSize} />
   ) : (
-    <Submenu data={data} startSelect={data[0]} onSelect={(e) => onSelect(e)} />
+    <Tabs
+      items={data}
+      selectedItemId={data[0].id}
+      onSelect={(e) => onSelect(e)}
+    />
   );
 };
 

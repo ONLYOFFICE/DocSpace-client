@@ -24,17 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// import React from "react";
+/* import { screen, render } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
-// import { screen, render } from "@testing-library/react";
-// import "@testing-library/jest-dom";
+import { Tabs } from "./Tabs";
+import { TTabItem } from "./Tabs.types"; */
 
-// import { TabsContainer } from "./TabsContainer";
-
-// const ArrayItems = [
+// const arrayItems: TTabItem[] = [
 //   {
-//     key: "tab0",
-//     title: "Title1",
+//     id: "tab0",
+//     name: "Title1",
 //     content: (
 //       <div>
 //         <button>BUTTON</button>
@@ -44,8 +43,8 @@
 //     ),
 //   },
 //   {
-//     key: "tab1",
-//     title: "Title2",
+//     id: "tab1",
+//     name: "Title2",
 //     content: (
 //       <div>
 //         <label>LABEL</label>
@@ -55,19 +54,20 @@
 //     ),
 //   },
 //   {
-//     key: "tab2",
-//     title: "Title3",
+//     id: "tab2",
+//     name: "Title3",
 //     content: (
 //       <div>
-//         <input></input>
-//         <input></input>
-//         <input></input>
+//         <input />
+//         <input />
+//         <input />
 //       </div>
 //     ),
 //   },
 //   {
-//     key: "tab3",
-//     title: "Title4",
+//     id: "tab3",
+//     name: "Title4",
+//     isDisabled: true,
 //     content: (
 //       <div>
 //         <button>BUTTON</button>
@@ -77,8 +77,8 @@
 //     ),
 //   },
 //   {
-//     key: "tab4",
-//     title: "Title5",
+//     id: "tab4",
+//     name: "Title5",
 //     content: (
 //       <div>
 //         <label>LABEL</label>
@@ -89,49 +89,28 @@
 //   },
 // ];
 
-describe("<TabContainer />", () => {
+describe("<Tabs />", () => {
   it("renders without error", () => {
-    // render(
-    //   <TabContainer
-    //     elements={[
-    //       {
-    //         key: "0",
-    //         title: "Title1",
-    //         content: (
-    //           <div>
-    //             <button>BUTTON</button>
-    //             <button>BUTTON</button>
-    //             <button>BUTTON</button>
-    //           </div>
-    //         ),
-    //       },
-    //     ]}
-    //   />,
-    // );
+    // render(<Tabs items={arrayItems} />);
     // expect(wrapper).toExist();
   });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("TabsContainer not re-render test", () => {
-  //   // @ts-expect-error TS(2322): Type '{ elements: { key: string; title: string; co... Remove this comment to see the full error message
-  //   const wrapper = mount(<TabContainer elements={array_items} />).instance();
-  //   const shouldUpdate = wrapper.shouldComponentUpdate(
-  //     wrapper.props,
-  //     wrapper.state,
-  //   );
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(shouldUpdate).toBe(false);
-  // });
+  //   it("Tabs not re-render test", () => {
+  //     const wrapper = mount(<Tabs items={arrayItems} />).instance();
+  //     const shouldUpdate = wrapper.shouldComponentUpdate(
+  //       wrapper.props,
+  //       wrapper.state,
+  //     );
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("TabsContainer not re-render test", () => {
-  //   // @ts-expect-error TS(2322): Type '{ elements: { key: string; title: string; co... Remove this comment to see the full error message
-  //   const wrapper = mount(<TabContainer elements={array_items} />).instance();
-  //   const shouldUpdate = wrapper.shouldComponentUpdate(wrapper.props, {
-  //     ...wrapper.state,
-  //     activeTab: 3,
+  //     expect(shouldUpdate).toBe(false);
   //   });
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(shouldUpdate).toBe(true);
-  // });
+
+  //   it("Tabs not re-render test", () => {
+  //     const wrapper = mount(<Tabs items={arrayItems} />).instance();
+  //     const shouldUpdate = wrapper.shouldComponentUpdate(wrapper.props, {
+  //       ...wrapper.state,
+  //       activeTab: 3,
+  //     });
+  //     expect(shouldUpdate).toBe(true);
+  //   });
 });

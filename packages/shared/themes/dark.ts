@@ -1842,6 +1842,7 @@ const Dark: TTheme = {
       roleSelectorArrowColor: gray,
       createLink: grayDark,
       linkAccessComboboxExpired: gray,
+      crossFill: lightGrayDark,
     },
 
     history: {
@@ -2671,6 +2672,7 @@ const Dark: TTheme = {
   downloadDialog: {
     background: darkGrayLight,
     textColor: grayDark,
+    iconFill: black,
   },
 
   client: {
@@ -2792,6 +2794,11 @@ const Dark: TTheme = {
 
           dataFontColor: white,
           dataFontColorBlack: white,
+        },
+
+        companyInfo: {
+          border: `1px dashed ${white}`,
+          color: grayDark,
         },
 
         dns: {
@@ -3066,7 +3073,7 @@ const Dark: TTheme = {
     background: darkGrayLight,
     title: white,
     description: darkGrayDark,
-    textColor: black,
+    textColor: white,
     iconFill: darkStatusWarning,
   },
 
@@ -3085,6 +3092,7 @@ const Dark: TTheme = {
     borderColor: grayDarkStrong,
     secondaryColor: darkGrayDark,
     previewBackgroundColor: lightDarkGrayHover,
+    linkHelpColor: darkGrayDark,
   },
 
   sideBarRow: {

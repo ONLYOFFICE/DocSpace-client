@@ -1857,6 +1857,7 @@ export const getBaseTheme = () => {
         roleSelectorArrowColor: gray,
         createLink: gray,
         linkAccessComboboxExpired: gray,
+        crossFill: lightGrayDark,
       },
 
       history: {
@@ -2686,6 +2687,7 @@ export const getBaseTheme = () => {
     downloadDialog: {
       background: grayLight,
       textColor: gray,
+      iconFill: black,
     },
 
     client: {
@@ -2807,6 +2809,11 @@ export const getBaseTheme = () => {
 
             dataFontColor: white,
             dataFontColorBlack: black,
+          },
+
+          companyInfo: {
+            border: `1px dashed ${black}`,
+            color: gray,
           },
 
           dns: {
@@ -3103,6 +3110,7 @@ export const getBaseTheme = () => {
       borderColor: grayStrong,
       secondaryColor: lightGrayDark,
       previewBackgroundColor: lightGrayHover,
+      linkHelpColor: lightGrayDark,
     },
     sideBarRow: {
       titleColor: black,

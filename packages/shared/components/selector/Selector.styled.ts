@@ -252,7 +252,7 @@ const StyledItem = styled.div<{
           }
 
           .label {
-            color: #a3a9ae;
+            color: ${props.theme.selector.item.disableTextColor};
           }
 
           .disabled-text {

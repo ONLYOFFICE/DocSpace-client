@@ -2329,7 +2329,7 @@ const Dark: TTheme = {
     border: `1px solid #474747`,
 
     breadCrumbs: {
-      prevItemColor: "#ADADAD",
+      prevItemColor: "#CCCCCC",
       arrowRightColor: "#ADADAD",
     },
 
@@ -2346,6 +2346,8 @@ const Dark: TTheme = {
 
       inputButtonBorder: "#474747",
       inputButtonBorderHover: grayMaxLight,
+
+      disableTextColor: "#858585",
     },
 
     emptyScreen: {

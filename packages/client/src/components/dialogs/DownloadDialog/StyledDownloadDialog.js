@@ -67,7 +67,7 @@ const StyledDownloadContent = styled.div`
         isOpen ? "rotate(270deg)" : "rotate(90deg)"};
       svg {
         path {
-          fill: #333;
+          fill: ${(props) => props.theme.downloadDialog.iconFill};
         }
       }
     }

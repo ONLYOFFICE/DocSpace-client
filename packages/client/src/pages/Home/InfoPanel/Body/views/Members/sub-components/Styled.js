@@ -36,7 +36,7 @@ const StyledCrossIcon = styled(CrossReactSvg)`
 
   g {
     path {
-      fill: #657077;
+      fill: ${({ theme }) => theme.infoPanel.members.crossFill};
     }
   }
 

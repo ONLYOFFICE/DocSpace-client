@@ -148,11 +148,7 @@ const NextcloudWorkspace = (props) => {
   return (
     <>
       <NextcloudWrapper>
-        <Text
-          className="data-import-description"
-          lineHeight="20px"
-          color={theme.isBase ? "#657077" : "#ADADAD"}
-        >
+        <Text className="data-import-description" lineHeight="20px">
           {t("Settings:AboutDataImport", {
             productName: PRODUCT_NAME,
             organizationName,

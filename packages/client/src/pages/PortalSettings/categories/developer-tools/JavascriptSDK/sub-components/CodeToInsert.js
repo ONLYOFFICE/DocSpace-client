@@ -31,19 +31,19 @@ import CodeBlock from "../sub-components/CodeBlock";
 import { CategorySubHeader, CodeWrapper } from "../presets/StyledPresets";
 import { PRODUCT_NAME } from "@docspace/shared/constants";
 
-export const CodeToInsert = ({ t, theme, codeBlock, config }) => (
+export const CodeToInsert = ({ t, codeBlock, config }) => (
   <CodeWrapper height="fit-content">
     <CategorySubHeader className="copy-window-code">
       {`HTML ${t("CodeTitle")}`}
     </CategorySubHeader>
-    <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
+    <Text lineHeight="20px" className="preview-description">
       {t("HtmlCodeDescription", { productName: PRODUCT_NAME })}
     </Text>
     <Textarea value={codeBlock} heightTextArea={153} />
     <CategorySubHeader className="copy-window-code">
       {`JavaScript ${t("CodeTitle")}`}
     </CategorySubHeader>
-    <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
+    <Text lineHeight="20px" className="preview-description">
       {t("JavaScriptCodeDescription", { productName: PRODUCT_NAME })}
     </Text>
     <CodeBlock config={config} />

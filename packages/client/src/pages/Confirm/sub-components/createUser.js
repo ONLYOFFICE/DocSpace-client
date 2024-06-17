@@ -29,7 +29,6 @@ import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
 import React, { useEffect, useState, useCallback } from "react";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useSearchParams } from "react-router-dom";
 import { Button } from "@docspace/shared/components/button";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
@@ -52,13 +51,16 @@ import {
   getLoginLink,
 } from "@docspace/shared/utils/common";
 import { login } from "@docspace/shared/utils/loginUtils";
-import { PROVIDERS_DATA } from "@docspace/shared/constants";
+import {
+  COOKIE_EXPIRATION_YEAR,
+  LANGUAGE,
+  PRODUCT_NAME,
+  PROVIDERS_DATA,
+} from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordErrorMessage";
-import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import withLoader from "../withLoader";
 
 import { StyledPage } from "./StyledConfirm";
@@ -68,6 +70,10 @@ import {
   StyledCreateUserContent,
 } from "./StyledCreateUser";
 import GreetingUserContainer from "./GreetingUserContainer";
+import LanguageComboboxWrapper from "./LanguageCombobox";
+import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
+
+import { setCookie } from "@docspace/shared/utils/cookie";
 
 const DEFAULT_ROOM_TEXT =
   "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
@@ -105,7 +111,12 @@ const CreateUserForm = (props) => {
     currentColorScheme,
     userNameRegex,
     defaultPage,
+    cultures,
+    i18n,
   } = props;
+
+  const currentCultureName = i18n.language;
+
   const inputRef = React.useRef(null);
 
   const emailFromLink = linkData?.email ? linkData.email : "";
@@ -131,8 +142,6 @@ const CreateUserForm = (props) => {
 
   const [isEmailErrorShow, setIsEmailErrorShow] = useState(false);
   const [isPasswordErrorShow, setIsPasswordErrorShow] = useState(false);
-
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const [registrationForm, setRegistrationForm] = useState(emailFromLink);
 
@@ -204,8 +213,12 @@ const CreateUserForm = (props) => {
 
       await getUserByEmail(email, headerKey);
 
+      setCookie(LANGUAGE, currentCultureName, {
+        "max-age": COOKIE_EXPIRATION_YEAR,
+      });
+
       window.location.href = combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         "/login",
         `?loginData=${loginData}`,
       );
@@ -225,7 +238,7 @@ const CreateUserForm = (props) => {
   const onSubmit = () => {
     const { linkData, hashSettings } = props;
     const type = parseInt(linkData.emplType);
-    const culture = searchParams.get("culture");
+
     setIsLoading(true);
 
     setErrorText("");
@@ -272,7 +285,7 @@ const CreateUserForm = (props) => {
       firstname: fname.trim(),
       lastname: sname.trim(),
       email: email,
-      cultureName: culture,
+      cultureName: currentCultureName,
     };
 
     if (!!type) {
@@ -311,6 +324,7 @@ const CreateUserForm = (props) => {
       Email: linkData.email,
       Key: linkData.key,
       SerializedProfile: profile,
+      culture: currentCultureName,
     };
 
     signupOAuth(signupAccount)
@@ -466,9 +480,14 @@ const CreateUserForm = (props) => {
 
   return (
     <StyledPage>
+      <LanguageComboboxWrapper
+        cultures={cultures}
+        currentCultureName={currentCultureName}
+      />
+
       <StyledCreateUserContent>
         <GreetingContainer>
-          <DocspaceLogo className="docspace-logo" />
+          <PortalLogo className="portal-logo" />
           {linkData.type === "LinkInvite" && (
             <div className="tooltip">
               <Text fontSize="16px">
@@ -498,6 +517,7 @@ const CreateUserForm = (props) => {
                     values={{
                       firstName: user.firstName,
                       lastName: user.lastName,
+                      productName: PRODUCT_NAME,
                       ...(roomName
                         ? { roomName }
                         : { spaceAddress: window.location.host }),
@@ -723,6 +743,7 @@ export default inject(({ settingsStore, authStore }) => {
     getPortalPasswordSettings,
     currentColorScheme,
     userNameRegex,
+    cultures,
   } = settingsStore;
   return {
     settings: passwordSettings,
@@ -736,9 +757,12 @@ export default inject(({ settingsStore, authStore }) => {
     capabilities,
     currentColorScheme,
     userNameRegex,
+    cultures,
   };
 })(
-  withTranslation(["Confirm", "Common", "Wizard"])(
-    withLoader(observer(CreateUserForm)),
+  withCultureNames(
+    withTranslation(["Confirm", "Common", "Wizard"])(
+      withLoader(observer(CreateUserForm)),
+    ),
   ),
 );

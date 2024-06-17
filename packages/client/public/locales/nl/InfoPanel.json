@@ -31,7 +31,7 @@
   "GalleryEmptyScreenText": "Bekijk hier de details van het formulier sjabloon",
   "GroupsEmptyScreenText": "Bekijk hier de details van de groep",
   "HistoryEmptyScreenText": "De activiteitsgeschiedenis wordt hier getoond",
-  "InfoBanner": "De lijst met uitgenodigde gebruikers bevat de eigenaar en/of beheerders van deze DocSpace met volledige toegang tot alle ruimtes. Aan de eigenaar en/of beheerder kunnen geen andere toegangsrechten worden toegewezen. Zodra ze aan de kamer zijn toegevoegd, worden ze op de hoogte gebracht van alle wijzigingen.",
+  "InfoBanner": "De lijst met uitgenodigde gebruikers bevat de eigenaar en/of beheerders van deze {{productName}} met volledige toegang tot alle ruimtes. Aan de eigenaar en/of beheerder kunnen geen andere toegangsrechten worden toegewezen. Zodra ze aan de kamer zijn toegevoegd, worden ze op de hoogte gebracht van alle wijzigingen.",
   "ItemsSelected": "Geselecteerde items",
   "LastModifiedBy": "Laatst aangepast door",
   "Properties": "Eigenschappen",

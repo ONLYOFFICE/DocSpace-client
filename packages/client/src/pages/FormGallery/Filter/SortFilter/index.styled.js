@@ -31,6 +31,7 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 
 export const SortButton = styled.div`
   .combo-button {
+    padding-inline-end: 3px;
     background: ${(props) =>
       props.theme.filterInput.sort.background} !important;
 
@@ -67,6 +68,7 @@ export const SortButton = styled.div`
       align-items: center;
       justify-content: center;
       margin: 0;
+      padding: 0 16px;
     }
 
     .combo-buttons_arrow-icon {

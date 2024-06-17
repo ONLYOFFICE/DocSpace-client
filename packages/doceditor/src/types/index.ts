@@ -39,7 +39,10 @@ import { TSettings } from "@docspace/shared/api/settings/types";
 import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import SocketIOHelper from "@docspace/shared/utils/socket";
-import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import {
+  ConflictResolveType,
+  FilesSelectorFilterTypes,
+} from "@docspace/shared/enums";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TTranslation } from "@docspace/shared/types";
 
@@ -230,6 +233,7 @@ export type EditorProps = {
   onSDKRequestSelectSpreadsheet?: (event: object) => void;
   onSDKRequestSelectDocument?: (event: object) => void;
   onSDKRequestReferenceSource?: (event: object) => void;
+  onSDKRequestStartFilling?: (event: object) => void;
 };
 
 export type TEventData = {
@@ -336,6 +340,7 @@ export interface UseEventsProps {
   doc?: string;
   errorMessage?: string;
   isSkipError?: boolean;
+  openOnNewPage: boolean;
   t: TTranslation;
 }
 
@@ -394,3 +399,47 @@ export type TCatchError =
   | { statusText: string }
   | { message: string }
   | string;
+
+export type StartFillingSelectorDialogPprops = {
+  socketHelper: SocketIOHelper;
+  fileInfo: TFile;
+  isVisible: boolean;
+  onClose: VoidFunction;
+
+  getIsDisabled: (
+    isFirstLoad: boolean,
+    isSelectedParentFolder: boolean,
+    selectedItemId: string | number | undefined,
+    selectedItemType: "rooms" | "files" | undefined,
+    isRoot: boolean,
+    selectedItemSecurity:
+      | TFileSecurity
+      | TFolderSecurity
+      | TRoomSecurity
+      | undefined,
+    selectedFileInfo: TSelectedFileInfo,
+  ) => boolean;
+
+  onSubmit: (
+    selectedItemId: string | number | undefined,
+    folderTitle: string,
+    isPublic: boolean,
+    breadCrumbs: TBreadCrumb[],
+    fileName: string,
+    isChecked: boolean,
+    selectedTreeNode: TFolder,
+    selectedFileInfo: TSelectedFileInfo,
+  ) => Promise<void>;
+
+  filesSettings: TFilesSettings;
+};
+
+export type ConflictStateType = {
+  visible: boolean;
+  resolve: (
+    value: ConflictResolveType | PromiseLike<ConflictResolveType>,
+  ) => void;
+  reject: (reason?: any) => void;
+  fileName: string;
+  folderName: string;
+};

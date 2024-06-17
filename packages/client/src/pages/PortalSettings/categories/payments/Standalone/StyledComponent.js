@@ -120,44 +120,10 @@ const StyledTitleComponent = styled.div`
   }
 `;
 
-const StyledBenefitsBody = styled.div`
-  margin: 20px 0;
-  border-radius: 12px;
-  border: ${(props) => props.theme.client.settings.payment.border};
-  max-width: 660px;
-
-  padding: 23px;
-
-  background: ${(props) =>
-    props.theme.client.settings.payment.backgroundBenefitsColor};
-
-  .benefits-title {
-    margin-bottom: 20px;
-  }
-  .payments-benefits {
-    display: grid;
-    grid-template-columns: 24px 1fr;
-    gap: 10px;
-    .benefits-svg {
-      display: flex;
-      align-items: flex-start;
-      padding-top: 4px;
-    }
-    .benefits-description {
-      p:first-child {
-        margin-bottom: 2px;
-      }
-    }
-  }
-  .payments-benefits ~ .payments-benefits {
-    margin-top: 12px;
-  }
-`;
 export {
   StyledComponent,
   StyledContactComponent,
   StyledEnterpriseComponent,
   StyledButtonComponent,
-  StyledBenefitsBody,
   StyledTitleComponent,
 };

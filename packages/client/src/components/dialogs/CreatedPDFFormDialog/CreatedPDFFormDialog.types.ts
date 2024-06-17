@@ -33,7 +33,7 @@ export interface CreatedPDFFormDialogProps
     Partial<
       Pick<
         TStore["contextOptionsStore"],
-        "onClickInviteUsers" | "onClickLinkFillForm"
+        "onCreateAndCopySharedLink" | "onClickLinkFillForm"
       >
     > {
   data: {

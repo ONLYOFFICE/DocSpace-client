@@ -37,6 +37,8 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import { AuthenticatedAction, ValidationResult } from "SRC_DIR/helpers/enums";
+import { getCookie } from "@docspace/shared/utils";
+import { LANGUAGE } from "@docspace/shared/constants";
 
 const ConfirmRoute = ({
   doAuthenticated,
@@ -57,8 +59,9 @@ const ConfirmRoute = ({
 
   React.useEffect(() => {
     if (location.search.includes("culture")) return;
+    const lng = getCookie(LANGUAGE);
 
-    storeIsLoaded && i18n.changeLanguage(culture);
+    storeIsLoaded && i18n.changeLanguage(lng);
   }, [storeIsLoaded]);
 
   const location = useLocation();
@@ -128,7 +131,7 @@ const ConfirmRoute = ({
           case ValidationResult.Invalid:
             console.error("invlid link", { confirmLinkData, validationResult });
             window.location.href = combineUrl(
-              window.DocSpaceConfig?.proxy?.url,
+              window.ClientConfig?.proxy?.url,
               path,
               "/error",
             );
@@ -139,7 +142,7 @@ const ConfirmRoute = ({
               validationResult,
             });
             window.location.href = combineUrl(
-              window.DocSpaceConfig?.proxy?.url,
+              window.ClientConfig?.proxy?.url,
               path,
               "/error",
             );
@@ -150,7 +153,7 @@ const ConfirmRoute = ({
               validationResult,
             });
             window.location.href = combineUrl(
-              window.DocSpaceConfig?.proxy?.url,
+              window.ClientConfig?.proxy?.url,
               path,
               "/error?messageKey=20",
             );
@@ -161,7 +164,7 @@ const ConfirmRoute = ({
               validationResult,
             });
             window.location.href = combineUrl(
-              window.DocSpaceConfig?.proxy?.url,
+              window.ClientConfig?.proxy?.url,
               path,
               "/error",
             );
@@ -180,7 +183,7 @@ const ConfirmRoute = ({
 
         console.error("FAILED checkConfirmLink", { error, confirmLinkData });
         window.location.href = combineUrl(
-          window.DocSpaceConfig?.proxy?.url,
+          window.ClientConfig?.proxy?.url,
           path,
           "/error",
         );

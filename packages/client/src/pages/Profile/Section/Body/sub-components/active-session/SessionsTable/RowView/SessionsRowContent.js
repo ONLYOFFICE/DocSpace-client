@@ -70,10 +70,9 @@ const SessionsRowContent = ({
       )}
       <Text truncate>{convertTime(date)}</Text>
       {(country || city) && (
-        <Text truncate>
+        <Text fontSize="12px" fontWeight="600">
           {country}
-          {country && city && ", "}
-          {city}
+          {country && city && ` ${city}`}
         </Text>
       )}
       <Text truncate containerWidth="160px">

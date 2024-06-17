@@ -76,7 +76,6 @@ const DropDown = (props: DropDownProps) => {
     </>
   );
 };
-
 DropDown.defaultProps = {
   withBackdrop: true,
   showDisabledItems: false,

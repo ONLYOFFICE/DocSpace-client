@@ -317,7 +317,7 @@ class SettingsSetupStore {
       "",
       "",
       combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         `${config.homepage}/portal-settings/security/access-rights/admins`,
         `/filter?page=${filter.page}`, //TODO: Change url by category
       ),
@@ -502,7 +502,7 @@ class SettingsSetupStore {
     this.integration.selectedConsumer = consumer || {};
     this.setConsumers(res);
 
-    return !!consumer
+    return !!consumer;
   };
 
   updateConsumerProps = async (newProps) => {

@@ -27,7 +27,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import RoomType from "../RoomType";
+import RoomType from "@docspace/shared/components/room-type";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 

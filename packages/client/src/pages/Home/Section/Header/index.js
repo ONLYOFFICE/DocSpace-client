@@ -81,6 +81,7 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -482,7 +483,6 @@ const SectionHeaderContent = (props) => {
 
       security,
       haveLinksRight,
-      isPublicRoomType,
       isPublicRoom,
       isFrame,
     } = props;
@@ -547,7 +547,7 @@ const SectionHeaderContent = (props) => {
       {
         id: "header_option_link-portal-users",
         key: "link-portal-users",
-        label: t("LinkForPortalUsers"),
+        label: t("LinkForPortalUsers", { productName: PRODUCT_NAME }),
         onClick: createLinkForPortalUsers,
         disabled: true,
         icon: InvitationLinkReactSvgUrl,
@@ -560,7 +560,7 @@ const SectionHeaderContent = (props) => {
         disabled:
           isRecycleBinFolder ||
           isPersonalRoom ||
-          ((isPublicRoomType || isCustomRoomType) &&
+          ((isPublicRoomType || isCustomRoomType || isFormRoomType) &&
             haveLinksRight &&
             !isArchive),
         icon: InvitationLinkReactSvgUrl,
@@ -568,7 +568,7 @@ const SectionHeaderContent = (props) => {
       {
         id: "header_option_empty-trash",
         key: "empty-trash",
-        label: t("RecycleBinAction"),
+        label: t("Files:EmptyRecycleBin"),
         onClick: onEmptyTrashAction,
         disabled: !isRecycleBinFolder,
         icon: ClearTrashReactSvgUrl,
@@ -624,7 +624,7 @@ const SectionHeaderContent = (props) => {
           }
         },
         disabled:
-          (!isPublicRoomType && !isCustomRoomType) ||
+          (!isPublicRoomType && !isCustomRoomType && !isFormRoomType) ||
           !haveLinksRight ||
           isArchive,
       },
@@ -1006,7 +1006,7 @@ const SectionHeaderContent = (props) => {
                   trash: t("EmptyRecycleBin"),
                   trashWarning: t("TrashErasureWarning"),
                   actions: isRoomsFolder
-                    ? t("Files:NewRoom")
+                    ? t("Common:NewRoom")
                     : t("Common:Actions"),
                   contextMenu: t("Translations:TitleShowFolderActions"),
                   infoPanel: t("Common:InfoPanel"),
@@ -1173,6 +1173,7 @@ export default inject(
       rootFolderType,
       parentRoomType,
       isFolder,
+      shared,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -1190,9 +1191,7 @@ export default inject(
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
     const isVirtualDataRoomType = roomType === RoomsType.VirtualDataRoom;
     const isCustomRoomType = roomType === RoomsType.CustomRoom;
-    const isFormRoomType =
-      roomType === RoomsType.FormRoom ||
-      (parentRoomType === FolderType.FormRoom && isFolder);
+    const isFormRoomType = roomType === RoomsType.FormRoom;
 
     const {
       onClickEditRoom,
@@ -1250,13 +1249,16 @@ export default inject(
 
     const isArchive = rootFolderType === FolderType.Archive;
 
+    const sharedItem = navigationPath.find((r) => r.shared);
+
     const showNavigationButton = isLoading
       ? false
-      : !isPublicRoom &&
-        !isArchive &&
-        canCopyPublicLink &&
-        (isPublicRoomType || isCustomRoomType) &&
-        primaryLink;
+      : (!isPublicRoom &&
+          !isArchive &&
+          canCopyPublicLink &&
+          (isPublicRoomType || isCustomRoomType || isFormRoomType) &&
+          shared) ||
+        (sharedItem && sharedItem.canCopyPublicLink);
 
     return {
       isGracePeriod,

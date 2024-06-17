@@ -1,5 +1,4 @@
 {
-  "Desc": "Bitte Registrierungsdaten eingeben.",
   "ErrorEmail": "Ungültige E-Mail-Adresse",
   "ErrorInitWizard": "Der Dienst ist momentan nicht verfügbar, versuchen Sie es später erneut.",
   "ErrorInitWizardButton": "Erneut versuchen",
@@ -11,5 +10,5 @@
   "LicenseLink": "Lizenzvereinbarung ",
   "PlaceholderLicense": "Ihre Lizenzdatei",
   "Timezone": "Zeitzone:",
-  "WelcomeTitle": "Willkommen auf Ihrem DocSpace!"
+  "WelcomeTitle": "Willkommen auf Ihrem {{productName}}!"
 }

@@ -78,7 +78,7 @@ const Tile = ({
   const getContextModel = () => getFormGalleryContextOptions(item, t, navigate);
 
   const contextMenuHeader = {
-    icon: getIcon(32, ".docxf"),
+    icon: getIcon(32, ".pdf"),
     title: item?.attributes?.name_form,
   };
 
@@ -129,7 +129,7 @@ const Tile = ({
       <StyledFileTileBottom isSelected={isSelected} isActive={isActive}>
         <div className="file-icon_container">
           <div className="file-icon">
-            <img className="react-svg-icon" src={getIcon(32, ".docxf")} />
+            <img className="react-svg-icon" src={getIcon(32, ".pdf")} />
           </div>
         </div>
 

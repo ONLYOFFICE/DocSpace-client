@@ -180,7 +180,7 @@ class Filter {
       sortBy,
       sortOrder,
       employeeStatus,
-      activationStatus,
+      // activationStatus,
       role,
       search,
       group,
@@ -204,7 +204,7 @@ class Filter {
       sortby: sortBy,
       sortorder: sortOrder,
       employeestatus: employeeStatus,
-      activationstatus: activationStatus,
+      // activationstatus: activationStatus,
       filtervalue: (search ?? "").trim(),
       groupId: group,
       fields,
@@ -226,7 +226,7 @@ class Filter {
       sortBy,
       sortOrder,
       employeeStatus,
-      activationStatus,
+      // activationStatus,
       role,
       search,
       group,
@@ -243,9 +243,9 @@ class Filter {
       dtoFilter[EMPLOYEE_STATUS] = employeeStatus;
     }
 
-    if (activationStatus) {
-      dtoFilter[ACTIVATION_STATUS] = activationStatus;
-    }
+    // if (activationStatus) {
+    //   dtoFilter[ACTIVATION_STATUS] = activationStatus;
+    // }
 
     if (role) {
       dtoFilter[ROLE] = role;

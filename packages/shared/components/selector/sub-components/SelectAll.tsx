@@ -31,18 +31,22 @@ import { Text } from "../../text";
 import { Checkbox } from "../../checkbox";
 
 import { StyledSelectAll } from "../Selector.styled";
-import { SelectAllProps } from "../Selector.types";
+import { TSelectorSelectAll } from "../Selector.types";
 
 const SelectAll = React.memo(
   ({
-    label,
-    icon,
+    withSelectAll,
+
+    selectAllLabel,
+    selectAllIcon,
+
+    isAllChecked,
+    isAllIndeterminate,
+
     onSelectAll,
-    isChecked,
-    isIndeterminate,
-    isLoading,
-    rowLoader,
-  }: SelectAllProps) => {
+  }: TSelectorSelectAll) => {
+    if (!withSelectAll) return;
+
     const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
       if (e.target instanceof HTMLElement && e.target.closest(".checkbox"))
         return;
@@ -52,35 +56,28 @@ const SelectAll = React.memo(
 
     return (
       <StyledSelectAll onClick={onClick}>
-        {isLoading ? (
-          rowLoader
-        ) : (
-          <>
-            <Avatar
-              className="select-all_avatar"
-              source={icon}
-              role={AvatarRole.user}
-              size={AvatarSize.min}
-            />
+        <Avatar
+          className="select-all_avatar"
+          source={selectAllIcon}
+          role={AvatarRole.user}
+          size={AvatarSize.min}
+        />
 
-            <Text
-              className="label"
-              fontWeight={600}
-              fontSize="14px"
-              noSelect
-              truncate
-            >
-              {label}
-            </Text>
+        <Text
+          className="label"
+          fontWeight={600}
+          fontSize="14px"
+          noSelect
+          truncate
+        >
+          {selectAllLabel}
+        </Text>
 
-            <Checkbox
-              className="checkbox"
-              isChecked={isChecked}
-              isIndeterminate={isIndeterminate}
-              // onChange={onSelectAll}
-            />
-          </>
-        )}
+        <Checkbox
+          className="checkbox"
+          isChecked={isAllChecked}
+          isIndeterminate={isAllIndeterminate}
+        />
       </StyledSelectAll>
     );
   },

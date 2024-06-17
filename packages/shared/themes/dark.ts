@@ -1000,18 +1000,21 @@ const Dark: TTheme = {
     },
 
     label: {
-      height: " 32px",
+      height: " 30px",
+      border: "1px solid #474747",
       borderRadius: "16px",
       minWidth: "fit-content",
       marginRight: "8px",
       width: "fit-content",
 
-      backgroundColor: "#d6d6d6",
-      hoverBackgroundColor: "#3D3D3D",
-      disableBackgroundColor: "#292929",
+      backgroundColor: "#FFFFFF",
+      hoverBackgroundColor: "#474747",
+      disableBackgroundColor: "#282828",
+      activeBackgroundColor: "#282828",
+      activeSelectedBackgroundColor: "linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(0deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18))",
 
       title: {
-        margin: "7px 15px 7px 15px",
+        padding: "4px 16px",
         overflow: "hidden",
         color: black,
         hoverColor: "#a4a4a4",
@@ -2372,10 +2375,16 @@ const Dark: TTheme = {
     item: {
       hoverBackground: "#3d3d3d",
       selectedBackground: "#3d3d3d",
+
+      inputButtonBorder: "#474747",
+      inputButtonBorderHover: grayMaxLight,
     },
 
     emptyScreen: {
       descriptionColor: "#ADADAD",
+      buttonColor: "#ADADAD",
+      hoverButtonColor: "#FFFFFF",
+      pressedButtonColor: "#CCCCCC",
     },
   },
 
@@ -2448,23 +2457,25 @@ const Dark: TTheme = {
     roomType: {
       listItem: {
         background: "none",
+        hoverBackground: "#282828",
         borderColor: "#474747",
         descriptionText: "#A3A9AE",
       },
       dropdownButton: {
         background: "none",
+        hoverBackground: "#282828",
         borderColor: "#474747",
         isOpenBorderColor: "#F97A0B",
         descriptionText: "#A3A9AE",
       },
       dropdownItem: {
         background: "#333333",
-        hoverBackground: "#474747",
+        hoverBackground: "#282828",
         descriptionText: "#A3A9AE",
       },
       displayItem: {
-        background: "#474747",
-        borderColor: "#474747",
+        background: "#282828",
+        borderColor: "#282828",
         descriptionText: "#a3a9ae",
       },
     },
@@ -2494,7 +2505,7 @@ const Dark: TTheme = {
       background: "#333333",
       borderColor: "#474747",
       item: {
-        hoverBackground: "#474747",
+        hoverBackground: "#282828",
       },
     },
 
@@ -3324,6 +3335,10 @@ const Dark: TTheme = {
 
   dateTimePicker: {
     colorClockIcon: "#ADADAD",
+  },
+  completedForm: {
+    linkColor: white,
+    descriptionColor: "#ADADAD",
   },
 };
 

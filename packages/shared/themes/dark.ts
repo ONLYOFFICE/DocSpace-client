@@ -1011,7 +1011,8 @@ const Dark: TTheme = {
       hoverBackgroundColor: "#474747",
       disableBackgroundColor: "#282828",
       activeBackgroundColor: "#282828",
-      activeSelectedBackgroundColor: "linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(0deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18))",
+      activeSelectedBackgroundColor:
+        "linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(0deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18))",
 
       title: {
         padding: "4px 16px",
@@ -2359,7 +2360,7 @@ const Dark: TTheme = {
     border: `1px solid #474747`,
 
     breadCrumbs: {
-      prevItemColor: "#ADADAD",
+      prevItemColor: "#CCCCCC",
       arrowRightColor: "#ADADAD",
     },
 
@@ -2376,6 +2377,8 @@ const Dark: TTheme = {
 
       inputButtonBorder: "#474747",
       inputButtonBorderHover: grayMaxLight,
+
+      disableTextColor: "#858585",
     },
 
     emptyScreen: {

@@ -31,6 +31,7 @@ import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Badge } from "@docspace/shared/components/badge";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const borderProp = { radius: "6px" };
 
@@ -100,7 +101,7 @@ const ToggleLDAP = ({
             className="settings_unavailable"
             noSelect
           >
-            {t("LdapToggleDescription")}
+            {t("LdapToggleDescription", { productName: PRODUCT_NAME })}
           </Text>
         </div>
       </Box>

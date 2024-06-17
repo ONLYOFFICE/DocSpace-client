@@ -33,6 +33,7 @@ import { Box } from "@docspace/shared/components/box";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Textarea } from "@docspace/shared/components/textarea";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const FIELD_STYLE = { marginBottom: "0px" };
 
@@ -94,7 +95,11 @@ const GroupMembership = (props) => {
           label={t("LdapGroupMembership")}
           isDisabled={!isLdapEnabled || isUIDisabled}
         />
-        <HelpButton tooltipContent={t("LdapGroupMembershipTooltip")} />
+        <HelpButton
+          tooltipContent={t("LdapGroupMembershipTooltip", {
+            productName: PRODUCT_NAME,
+          })}
+        />
       </div>
       <Box className="group_membership-container">
         <FieldContainer

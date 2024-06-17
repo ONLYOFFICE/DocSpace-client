@@ -474,12 +474,12 @@ export const enum ErrorKeys {
 }
 
 export enum RoomsType {
+  PublicRoom = 6,
   FormRoom = 1,
   // FillingFormsRoom= 1, //TODO: Restore when certs will be done
   EditingRoom = 2,
   // ReviewRoom: 3, //TODO: Restore when certs will be done
   // ReadOnlyRoom: 4, //TODO: Restore when certs will be done
-  PublicRoom = 6,
   CustomRoom = 5,
 }
 

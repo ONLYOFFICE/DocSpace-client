@@ -32,7 +32,10 @@ import { getUserRole } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   EmployeeActivationStatus,
+  Events,
+  FileType,
   FolderType,
+  RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
@@ -43,8 +46,10 @@ import {
   getExternalLinks,
   editExternalLink,
   addExternalLink,
+  checkIsPDFForm,
 } from "@docspace/shared/api/files";
 import isEqual from "lodash/isEqual";
+import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 
 const observedKeys = [
   "id",
@@ -394,7 +399,7 @@ class InfoPanelStore {
 
   openAccountsWithSelectedUser = async (user, navigate) => {
     const path = [
-      window.DocSpaceConfig?.proxy?.url,
+      window.ClientConfig?.proxy?.url,
       config.homepage,
       "/accounts/people",
     ];
@@ -413,12 +418,11 @@ class InfoPanelStore {
   };
 
   fetchUser = async (userId) => {
-    const { getStatusType, getUserContextOptions } =
-      this.peopleStore.usersStore;
+    const { getUserContextOptions } = this.peopleStore.usersStore;
 
     const fetchedUser = await getUserById(userId);
     fetchedUser.role = getUserRole(fetchedUser);
-    fetchedUser.statusType = getStatusType(fetchedUser);
+    fetchedUser.statusType = getUserStatus(fetchedUser);
     fetchedUser.options = getUserContextOptions(
       false,
       fetchedUser.isOwner,
@@ -718,6 +722,28 @@ class InfoPanelStore {
   };
 
   getPrimaryFileLink = async (fileId) => {
+    const file = this.filesStore.files.find((item) => item.id === fileId);
+
+    if (file && !file.shared && file.fileType === FileType.PDF) {
+      try {
+        this.filesStore.addActiveItems([file.id], null);
+        const result = await checkIsPDFForm(fileId);
+
+        if (result) {
+          const event = new CustomEvent(Events.Share_PDF_Form, {
+            detail: { file },
+          });
+
+          window.dispatchEvent(event);
+          return;
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.filesStore.removeActiveItem(file);
+      }
+    }
+
     const { getFileInfo } = this.filesStore;
 
     const res = await getPrimaryLink(fileId);

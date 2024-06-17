@@ -41,6 +41,8 @@ const useAccounts = ({
   setSelectedNode,
   fetchPeople,
   setPortalTariff,
+
+  scrollToTop,
 }) => {
   React.useEffect(() => {
     if (!isAccountsPage || !isPeopleAccounts) return;
@@ -56,6 +58,7 @@ const useAccounts = ({
         if (err?.response?.status === 402) setPortalTariff();
       })
       .finally(() => {
+        scrollToTop();
         setIsLoading(false);
       });
   }, [isAccountsPage, isPeopleAccounts, location.pathname, location.search]);

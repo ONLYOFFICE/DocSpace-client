@@ -31,7 +31,7 @@
   "GalleryEmptyScreenText": "Form şablonu ayrıntılarına buradan bakın",
   "GroupsEmptyScreenText": "Grup ayrıntılarını buradan görebilirsiniz",
   "HistoryEmptyScreenText": "Etkinlik geçmişi burada gösterilecek",
-  "InfoBanner": "Davet edilen kullanıcıların listesi, tüm odalara tam erişime sahip bu DocSpace'in sahibini ve/veya yöneticilerini içerir. Sahibine ve/veya yöneticiye başka erişim hakları atanamaz. Odaya eklendiklerinde tüm değişikliklerden haberdar edileceklerdir.",
+  "InfoBanner": "Davet edilen kullanıcıların listesi, tüm odalara tam erişime sahip bu {{productName}}'in sahibini ve/veya yöneticilerini içerir. Sahibine ve/veya yöneticiye başka erişim hakları atanamaz. Odaya eklendiklerinde tüm değişikliklerden haberdar edileceklerdir.",
   "ItemsSelected": "Seçili öğeler",
   "LastModifiedBy": "Son Düzenleyen",
   "Properties": "Özellikler",

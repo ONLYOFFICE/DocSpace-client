@@ -27,6 +27,7 @@
 "use client";
 
 import React from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { isMobile } from "react-device-detect";
 import { useTranslation } from "react-i18next";
 
@@ -35,9 +36,10 @@ import IConfig from "@onlyoffice/document-editor-react/dist/esm/types/model/conf
 
 import { FolderType, ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
+import { EDITOR_ID } from "@docspace/shared/constants";
 
 import { getBackUrl } from "@/utils";
-import { IS_DESKTOP_EDITOR, IS_ZOOM } from "@/utils/constants";
+import { IS_DESKTOP_EDITOR, IS_ZOOM, SHOW_CLOSE } from "@/utils/constants";
 import { EditorProps, TGoBack } from "@/types";
 import {
   onSDKRequestHistoryClose,
@@ -54,6 +56,7 @@ import useFilesSettings from "@/hooks/useFilesSettings";
 type IConfigType = IConfig & {
   events?: {
     onRequestStartFilling?: (event: object) => void;
+    onSubmit?: (event: object) => void;
   };
 };
 
@@ -75,9 +78,12 @@ const Editor = ({
   onSDKRequestSelectSpreadsheet,
   onSDKRequestSelectDocument,
   onSDKRequestReferenceSource,
+  onSDKRequestStartFilling,
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
 
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const { filesSettings } = useFilesSettings({});
 
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
@@ -97,7 +103,7 @@ const Editor = ({
     onDocumentStateChange,
     onMetaChange,
     onMakeActionLink,
-    onRequestStartFilling,
+    // onRequestStartFilling,
     documentReady,
 
     setDocTitle,
@@ -167,13 +173,13 @@ const Editor = ({
       goBack = {
         requestClose:
           typeof window !== "undefined"
-            ? window.DocSpaceConfig?.editor?.requestClose ?? false
+            ? window.ClientConfig?.editor?.requestClose ?? false
             : false,
         text: openFileLocationText,
       };
       if (
         typeof window !== "undefined" &&
-        !window.DocSpaceConfig?.editor?.requestClose
+        !window.ClientConfig?.editor?.requestClose
       ) {
         goBack.blank = openOnNewPage ? true : false;
         goBack.url = getBackUrl(fileInfo.rootFolderType, fileInfo.folderId);
@@ -187,14 +193,13 @@ const Editor = ({
   >["customization"] = JSON.parse(customization || "{}");
 
   const theme = sdkCustomization?.uiTheme || user?.theme;
-  const showClose = document.referrer !== "" && window.history.length > 1;
 
   if (newConfig.editorConfig)
     newConfig.editorConfig.customization = {
       ...newConfig.editorConfig.customization,
       ...sdkCustomization,
       goback: { ...goBack },
-      close: { visible: showClose, text: t("Common:CloseButton") },
+      close: { visible: SHOW_CLOSE, text: t("Common:CloseButton") },
       uiTheme: getEditorTheme(theme as ThemeKeys),
     };
 
@@ -281,20 +286,28 @@ const Editor = ({
 
   if (
     (typeof window !== "undefined" &&
-      window.DocSpaceConfig?.editor?.requestClose) ||
-    showClose ||
+      window.ClientConfig?.editor?.requestClose) ||
+    SHOW_CLOSE ||
     IS_ZOOM
   ) {
     newConfig.events.onRequestClose = onSDKRequestClose;
   }
 
   if (config?.startFilling) {
-    newConfig.events.onRequestStartFilling = onRequestStartFilling;
+    newConfig.events.onRequestStartFilling = onSDKRequestStartFilling;
   }
+
+  newConfig.events.onSubmit = () => {
+    const origin = window.location.origin;
+
+    window.location.replace(
+      `${origin}/doceditor/completed-form?${searchParams.toString()}`,
+    );
+  };
 
   return (
     <DocumentEditor
-      id={"docspace_editor"}
+      id={EDITOR_ID}
       documentServerUrl={documentserverUrl}
       config={
         errorMessage || isSkipError

@@ -315,7 +315,7 @@ const HeaderComponent = ({
             </Text>
             <StyledLink>
               <LinkWithoutRedirect
-                to={combineUrl(window.DocSpaceConfig?.proxy?.url, "/about")}
+                to={combineUrl(window.ClientConfig?.proxy?.url, "/about")}
                 className="nav-menu-header_link"
               >
                 {t("Common:About")}

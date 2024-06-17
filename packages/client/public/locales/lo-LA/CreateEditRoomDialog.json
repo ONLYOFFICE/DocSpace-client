@@ -4,7 +4,7 @@
   "CreateTagOption": "ສ້າງແທັກ",
   "Icon": "ໄອຄອນ",
   "MakeRoomPrivateDescription": "ໄຟລ໌ທັງໝົດຢູ່ໃນຫ້ອງນີ້ຈະຖືກເຂົ້າລະຫັດ.",
-  "MakeRoomPrivateLimitationsWarningDescription": "ດ້ວຍຄຸນສົມບັດນີ້, ທ່ານສາມາດເຊີນ ຜູ້ໃຊ້ DocSpace ທີ່ມີຢູ່ແລ້ວເທົ່ານັ້ນ . ຫຼັງຈາກການສ້າງຫ້ອງ, ທ່ານຈະບໍ່ສາມາດປ່ຽນລາຍຊື່ຜູ້ໃຊ້ໄດ້.",
+  "MakeRoomPrivateLimitationsWarningDescription": "ດ້ວຍຄຸນສົມບັດນີ້, ທ່ານສາມາດເຊີນ ຜູ້ໃຊ້ {{productName}} ທີ່ມີຢູ່ແລ້ວເທົ່ານັ້ນ . ຫຼັງຈາກການສ້າງຫ້ອງ, ທ່ານຈະບໍ່ສາມາດປ່ຽນລາຍຊື່ຜູ້ໃຊ້ໄດ້.",
   "MakeRoomPrivateTitle": "ເຮັດໃຫ້ຫ້ອງສ່ວນຕົວ",
   "RoomEditing": "ການແກ້ໄຂຫ້ອງ",
   "TagsPlaceholder": "ເພີ່ມແທັກ",
@@ -12,5 +12,5 @@
   "ThirdPartyStorageDescription": "ໃຊ້ການບໍລິການພາກສ່ວນທີສາມເປັນບ່ອນເກັບຂໍ້ມູນສໍາລັບຫ້ອງນີ້. ໂຟນເດີໃໝ່ສຳລັບການຈັດເກັບຂໍ້ມູນຂອງຫ້ອງນີ້ຈະຖືກສ້າງຢູ່ໃນບ່ອນເກັບຂໍ້ມູນທີ່ເຊື່ອມຕໍ່.",
   "ThirdPartyStorageNoStorageAlert": "ເມື່ອກ່ອນ, ທ່ານຈໍາເປັນຕ້ອງເຊື່ອມຕໍ່ການບໍລິການທີ່ສອດຄ້ອງກັນໃນສ່ວນ \"ການເຊື່ອມໂຍງ\".",
   "ThirdPartyStoragePermanentSettingDescription": "ໄຟລ໌ຖືກເກັບໄວ້ໃນ ບ່ອນເກັບຂໍ້ມູນຂອງພາກສ່ວນ ທີສາມ {{thirdpartyTitle}} ໃນໂຟນເດີ \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "ເພື່ອເຊື່ອມຕໍ່ ບ່ອນເກັບຂໍ້ມູນພາກສ່ວນ ທີສາມ , ທ່ານຈໍາເປັນຕ້ອງເພີ່ມການບໍລິການທີ່ສອດຄ້ອງກັນໃນສ່ວນການເຊື່ອມໂຍງຂອງ ການຕັ້ງຄ່າ DocSpace . ຕິດຕໍ່ ເຈົ້າຂອງ DocSpace ຫຼືຜູ້ເບິ່ງແຍງລະບົບເພື່ອເປີດໃຊ້ການເຊື່ອມໂຍງ."
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "ເພື່ອເຊື່ອມຕໍ່ ບ່ອນເກັບຂໍ້ມູນພາກສ່ວນ ທີສາມ , ທ່ານຈໍາເປັນຕ້ອງເພີ່ມການບໍລິການທີ່ສອດຄ້ອງກັນໃນສ່ວນການເຊື່ອມໂຍງຂອງ ການຕັ້ງຄ່າ {{productName}} . ຕິດຕໍ່ ເຈົ້າຂອງ {{productName}} ຫຼືຜູ້ເບິ່ງແຍງລະບົບເພື່ອເປີດໃຊ້ການເຊື່ອມໂຍງ."
 }

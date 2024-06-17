@@ -39,6 +39,7 @@ const useInsideGroup = ({
   setIsLoading,
   fetchGroup,
   setPortalTariff,
+  scrollToTop,
 }) => {
   const isInsideGroup = matchPath(
     "/accounts/groups/:groupId/filter",
@@ -58,6 +59,7 @@ const useInsideGroup = ({
         if (err?.response?.status === 402) setPortalTariff();
       })
       .finally(() => {
+        scrollToTop();
         setIsLoading(false);
       });
   }, [groupId, location.pathname, location.search]);

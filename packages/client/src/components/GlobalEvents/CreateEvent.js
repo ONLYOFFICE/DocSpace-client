@@ -188,7 +188,7 @@ const CreateEvent = ({
 
       const url = combineUrl(
         window.location.origin,
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         config.homepage,
         `/doceditor/create?${searchParams.toString()}`,
       );

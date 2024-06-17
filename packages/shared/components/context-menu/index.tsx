@@ -31,6 +31,7 @@ import {
   TGetContextMenuModel,
   TContextMenuRef,
   ContextMenuTypeOnClick,
+  ContextMenuRefType,
 } from "./ContextMenu.types";
 
 export type {
@@ -40,6 +41,7 @@ export type {
   ContextMenuType,
   SeparatorType,
   ContextMenuTypeOnClick,
+  ContextMenuRefType,
 };
 
 export { ContextMenu } from "./ContextMenu";

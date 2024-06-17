@@ -68,6 +68,7 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
     folderId,
     badgeTitle,
     $currentColorScheme,
+    title,
   } = props;
 
   const onClickAction = (e: React.MouseEvent) => {
@@ -100,6 +101,8 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
     );
   };
 
+  const tooltipTitle = !showText ? title : undefined;
+
   const renderItem = () => {
     return (
       <StyledArticleItemTheme
@@ -110,6 +113,7 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
         isActive={isActive}
         data-testid="article-item"
         $currentColorScheme={$currentColorScheme}
+        title={tooltipTitle}
       >
         <StyledArticleItemSibling
           id={folderId}

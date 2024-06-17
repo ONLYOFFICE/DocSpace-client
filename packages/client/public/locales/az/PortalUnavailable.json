@@ -1,4 +1,4 @@
 {
-  "AccessingProblem": "Bu DocSpace-ə daxil olmaqda probleminiz varsa, lütfən, administratorla əlaqə saxlayın.",
-  "ContactAdministrator": "DocSpace administratoru ilə əlaqə saxlayın"
+  "AccessingProblem": "Bu {{productName}}-ə daxil olmaqda probleminiz varsa, lütfən, administratorla əlaqə saxlayın.",
+  "ContactAdministrator": "{{productName}} administratoru ilə əlaqə saxlayın"
 }

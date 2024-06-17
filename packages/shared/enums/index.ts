@@ -41,6 +41,7 @@ export const enum EmployeeActivationStatus {
 export const enum EmployeeStatus {
   Active = 1,
   Disabled = 2,
+  Pending = 4, // NEW STATUS from server
 }
 /**
  * Enum for employee type.
@@ -53,7 +54,7 @@ export const enum EmployeeType {
   Collaborator = 4,
   UserString = "user",
   RoomAdmin = "manager",
-  DocSpaceAdmin = "admin",
+  PortalAdmin = "admin",
   Owner = "Owner",
   CollaboratorString = "collaborator",
 }
@@ -339,6 +340,7 @@ export const enum Events {
   CHANGE_QUOTA = "change_quota",
   CREATE_PLUGIN_FILE = "create_plugin_file",
   CREATE_PDF_FORM_FILE = "create_pdf_form_file",
+  Share_PDF_Form = "share_pdf_form",
 }
 
 /**
@@ -480,6 +482,13 @@ export enum RoomsType {
   PublicRoom = 6,
   VirtualDataRoom = 8,
   CustomRoom = 5,
+}
+
+export const enum RecaptchaType {
+  Default = 0,
+  AndroidV2 = 1,
+  iOSV2 = 2,
+  hCaptcha = 3,
 }
 
 export enum AccountsSearchArea {

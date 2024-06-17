@@ -47,6 +47,7 @@ import {
 
 import { ArticleItem } from "@docspace/shared/components/article-item";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -210,7 +211,7 @@ const ArticleBodyContent = (props) => {
       case "ManagementCategorySecurity":
         return t("ManagementCategorySecurity");
       case "PortalAccess":
-        return t("PortalAccess");
+        return t("PortalAccess", { productName: PRODUCT_NAME });
       case "TwoFactorAuth":
         return t("TwoFactorAuth");
       case "ManagementCategoryIntegration":
@@ -228,21 +229,21 @@ const ArticleBodyContent = (props) => {
       case "RestoreBackup":
         return t("RestoreBackup");
       case "PortalDeletion":
-        return t("PortalDeletion");
+        return t("PortalDeletion", { productName: PRODUCT_NAME });
       case "Common:DeveloperTools":
         return t("Common:DeveloperTools");
       case "Common:Bonus":
         return t("Common:Bonus");
-      case "Common:FreeProFeatures":
-        return "Common:FreeProFeatures";
+      case "Common:FreeAccessToLicensedVersion":
+        return "Common:FreeAccessToLicensedVersion";
       case "DataImport":
         return t("DataImport");
       case "ImportFromGoogle":
         return t("ImportFromGoogle");
       case "ImportFromNextcloud":
         return t("ImportFromNextcloud");
-      case "ImportFromOnlyoffice":
-        return t("ImportFromOnlyoffice");
+      case "ImportFromPortal":
+        return t("ImportFromPortal");
       case "StorageManagement":
         return t("StorageManagement");
       default:
@@ -298,14 +299,16 @@ const ArticleBodyContent = (props) => {
 
       const patternSearching = selectedKeys[0].split("-");
       const selectedKey = patternSearching[0];
+      const title = mapKeys(item.tKey);
 
       items.push(
         <ArticleItem
           key={item.key}
           id={item.key}
+          title={title}
           icon={icon}
           showText={showText}
-          text={mapKeys(item.tKey)}
+          text={title}
           value={item.link}
           isActive={item.key === selectedKey}
           onClick={(e) => onSelect(item.key, e)}

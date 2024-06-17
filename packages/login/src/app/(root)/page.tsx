@@ -41,6 +41,8 @@ async function Page() {
           <LoginForm
             hashSettings={settings?.passwordHash}
             cookieSettingsEnabled={settings?.cookieSettingsEnabled}
+            reCaptchaPublicKey={settings?.recaptchaPublicKey}
+            reCaptchaType={settings?.recaptchaType}
           />
           <ThirdParty />
           {settings.enableAdmMess && <RecoverAccess />}

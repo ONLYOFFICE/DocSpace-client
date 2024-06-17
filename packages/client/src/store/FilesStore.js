@@ -761,6 +761,13 @@ class FilesStore {
     }
   };
 
+  removeActiveItem = (file) => {
+    console.log(this.activeFiles);
+
+    this.activeFiles =
+      this.activeFiles?.filter((item) => item.id !== file.id) ?? [];
+  };
+
   addActiveItems = (files, folders, destFolderId) => {
     if (folders && folders.length) {
       if (!this.activeFolders.length) {
@@ -1334,7 +1341,7 @@ class FilesStore {
 
     const currentUrl = window.location.href.replace(window.location.origin, "");
     const newUrl = combineUrl(
-      window.DocSpaceConfig?.proxy?.url,
+      window.ClientConfig?.proxy?.url,
       config.homepage,
       pathname,
     );
@@ -1451,6 +1458,7 @@ class FilesStore {
 
         if (
           (data.current.roomType === RoomsType.PublicRoom ||
+            data.current.roomType === RoomsType.FormRoom ||
             data.current.roomType === RoomsType.CustomRoom) &&
           !this.publicRoomStore.isPublicRoom
         ) {
@@ -2000,7 +2008,7 @@ class FilesStore {
         "view",
         "pdf-view",
         "make-form",
-        "edit-pdf",
+        // "edit-pdf",
         "separator0",
         "submit-to-gallery",
         "separator-SubmitToGallery",
@@ -2046,11 +2054,11 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["open-pdf"]);
       }
 
-      if (!item.security.EditForm || !item.startFilling) {
-        fileOptions = this.removeOptions(fileOptions, ["edit-pdf"]);
-      }
+      // if (!item.security.EditForm || !item.startFilling) {
+      //   fileOptions = this.removeOptions(fileOptions, ["edit-pdf"]);
+      // }
 
-      if (!isPdf || !window.DocSpaceConfig?.pdfViewer || isRecycleBinFolder) {
+      if (!isPdf || !window.ClientConfig?.pdfViewer || isRecycleBinFolder) {
         fileOptions = this.removeOptions(fileOptions, ["pdf-view"]);
       }
 
@@ -2295,6 +2303,7 @@ class FilesStore {
 
       const isPublicRoomType =
         item.roomType === RoomsType.PublicRoom ||
+        item.roomType === RoomsType.FormRoom ||
         item.roomType === RoomsType.CustomRoom;
       const isCustomRoomType = item.roomType === RoomsType.CustomRoom;
 
@@ -3059,8 +3068,7 @@ class FilesStore {
   }
 
   getItemUrl = (id, isFolder, needConvert, canOpenPlayer) => {
-    const proxyURL =
-      window.DocSpaceConfig?.proxy?.url || window.location.origin;
+    const proxyURL = window.ClientConfig?.proxy?.url || window.location.origin;
 
     const url = getCategoryUrl(this.categoryType, id);
 
@@ -3846,7 +3854,7 @@ class FilesStore {
     if (editForm) searchParams.append("action", "edit");
 
     const url = combineUrl(
-      window.DocSpaceConfig?.proxy?.url,
+      window.ClientConfig?.proxy?.url,
       config.homepage,
       `/doceditor?${searchParams.toString()}`,
     );

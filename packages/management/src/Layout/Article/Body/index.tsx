@@ -42,7 +42,7 @@ import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const PROXY_BASE_URL = combineUrl(
-  window.DocSpaceConfig?.proxy?.url,
+  window.ClientConfig?.proxy?.url,
   "/management"
 );
 
@@ -52,8 +52,9 @@ const ArticleBodyContent = () => {
 
   const { t } = useTranslation(["Settings", "Common"]);
 
-  const { settingsStore } = useStore();
+  const { settingsStore, authStore } = useStore();
 
+  const { isCommunity } = authStore;
   const { toggleArticleOpen, setIsBurgerLoading, currentColorScheme } =
     settingsStore;
 
@@ -85,6 +86,14 @@ const ArticleBodyContent = () => {
     const items: Array<React.ReactNode> = [];
 
     let resultTree = settingsTree.filter((item) => item?.isHeader);
+
+    const deletionTKey = isCommunity ? "Common:PaymentsTitle" : "Common:Bonus";
+
+    const index = resultTree.findIndex((el) => el.tKey === deletionTKey);
+
+    if (index !== -1) {
+      resultTree.splice(index, 1);
+    }
 
     resultTree.map((item) => {
       items.push(

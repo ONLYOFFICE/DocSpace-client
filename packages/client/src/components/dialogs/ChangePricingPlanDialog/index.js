@@ -35,6 +35,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 import { inject, observer } from "mobx-react";
 import { getConvertedSize } from "@docspace/shared/utils/common";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const ModalDialogContainer = styled(ModalDialog)`
   .cannot-downgrade-plan {
@@ -71,7 +72,8 @@ const ChangePricingPlanDialog = ({
       <Trans t={t} i18nKey="PlanUsersLimit" ns="DowngradePlanDialog">
         You wish to downgrade the team to
         <strong>{{ usersCount: managersCount }}</strong>
-        admins/power users, and current number of such users in your DocSpace is
+        admins/power users, and current number of such users in your
+        {{ productName: PRODUCT_NAME }} is
         <strong>{{ currentUsersCount: addedManagersCount }}</strong>
       </Trans>
     </Text>

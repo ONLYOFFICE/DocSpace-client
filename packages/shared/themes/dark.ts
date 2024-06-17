@@ -2141,6 +2141,7 @@ const Dark: TTheme = {
       descriptionColor: darkGrayDark,
       buttonColor: darkGrayDark,
       hoverButtonColor: white,
+      pressedButtonColor: grayDarkText,
     },
   },
 
@@ -2364,6 +2365,7 @@ const Dark: TTheme = {
     privateRoom: {
       linkColor: darkLink,
     },
+    descriptionColor: darkGrayDark,
   },
 
   filesPanels: {
@@ -2483,6 +2485,7 @@ const Dark: TTheme = {
     },
     invite: {
       textColor: grayDark,
+      addButtonColor: lightBlueMain,
     },
   },
 
@@ -2785,6 +2788,9 @@ const Dark: TTheme = {
           nameColor: white,
           textColor: grayDark,
         },
+        ip: {
+          errorColor: darkErrorStatus,
+        },
       },
 
       common: {
@@ -3046,6 +3052,7 @@ const Dark: TTheme = {
 
   dialogs: {
     disableText: grayDark,
+    errorText: darkErrorStatus,
   },
 
   editLink: {
@@ -3076,6 +3083,8 @@ const Dark: TTheme = {
     background: darkGrayLight,
     title: white,
     description: darkGrayDark,
+    textColor: black,
+    iconFill: darkStatusWarning,
   },
 
   roomIcon: {

@@ -2360,6 +2360,7 @@ export const getBaseTheme = () => {
       privateRoom: {
         linkColor: link,
       },
+      descriptionColor: lightGrayDark,
     },
 
     emptyContent: {
@@ -2499,6 +2500,7 @@ export const getBaseTheme = () => {
       },
       invite: {
         textColor: gray,
+        addButtonColor: lightBlueMain,
       },
     },
 
@@ -2801,6 +2803,9 @@ export const getBaseTheme = () => {
             nameColor: black,
             textColor: gray,
           },
+          ip: {
+            errorColor: lightErrorStatus,
+          },
         },
 
         common: {
@@ -3065,6 +3070,7 @@ export const getBaseTheme = () => {
 
     dialogs: {
       disableText: gray,
+      errorText: lightErrorStatus,
     },
 
     editLink: {
@@ -3095,6 +3101,8 @@ export const getBaseTheme = () => {
       background: grayLight,
       title: black,
       description: grayText,
+      textColor: black,
+      iconFill: lightStatusWarning,
     },
 
     roomIcon: {

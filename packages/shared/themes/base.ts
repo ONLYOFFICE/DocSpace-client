@@ -2398,6 +2398,8 @@ export const getBaseTheme = () => {
 
         inputButtonBorder: "#D0D5DA",
         inputButtonBorderHover: grayMain,
+
+        disableTextColor: "#A3A9AE",
       },
 
       emptyScreen: {

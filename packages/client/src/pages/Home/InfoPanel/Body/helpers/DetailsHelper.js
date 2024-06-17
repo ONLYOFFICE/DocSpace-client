@@ -278,12 +278,16 @@ class DetailsHelper {
   getAuthorDecoration = (byField = "createdBy") => {
     const onClick = () => this.openUser(this.item[byField], this.navigate);
 
+    const isAnonim = this.item[byField]?.isAnonim;
     const displayName = this.item[byField]?.displayName;
-    const name = displayName ? decode(displayName) : "";
+
+    let name = displayName ? decode(displayName) : "";
+
+    if (isAnonim) name = this.t("Common:Unknown");
 
     //console.log("getAuthorDecoration", { name, displayName });
 
-    return this.isVisitor || this.isCollaborator
+    return this.isVisitor || this.isCollaborator || isAnonim
       ? text(name)
       : link(name, onClick);
   };

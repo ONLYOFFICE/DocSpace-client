@@ -30,7 +30,6 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
-import AppLoader from "@docspace/shared/components/app-loader";
 
 import { TResponse } from "@/types";
 import useError from "@/hooks/useError";
@@ -83,7 +82,8 @@ const Root = ({
 
   useEffect(() => {
     console.log("editor timer: ", timer);
-  }, [timer]);
+    console.log("openEdit timer: ", config?.timer);
+  }, [config?.timer, timer]);
 
   useRootInit({
     documentType: config?.documentType,

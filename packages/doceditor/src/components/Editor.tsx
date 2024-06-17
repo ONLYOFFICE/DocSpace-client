@@ -193,7 +193,10 @@ const Editor = ({
   >["customization"] = JSON.parse(customization || "{}");
 
   const theme = sdkCustomization?.uiTheme || user?.theme;
-  const showClose = document.referrer !== "" && window.history.length > 1;
+  const showClose =
+    typeof document !== "undefined" &&
+    document.referrer !== "" &&
+    window.history.length > 1;
 
   if (newConfig.editorConfig)
     newConfig.editorConfig.customization = {

@@ -1,4 +1,4 @@
 {
-  "AccessingProblem": "Če imate težave z dostopom do tega prostora {{portalName}}, se obrnite na skrbnika.",
-  "ContactAdministrator": "Kontaktiraj skrbnika {{portalName}}"
+  "AccessingProblem": "Če imate težave z dostopom do tega prostora {{productName}}, se obrnite na skrbnika.",
+  "ContactAdministrator": "Kontaktiraj skrbnika {{productName}}"
 }

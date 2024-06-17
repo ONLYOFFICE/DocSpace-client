@@ -36,7 +36,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import toLower from "lodash/toLower";
 import { TranslationType } from "SRC_DIR/types/spaces";
 import { parseDomain, validatePortalName } from "@docspace/shared/utils/common";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 type TConfigurationSection = {
   t: TranslationType;
@@ -66,7 +66,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
   } = spacesStore;
 
   const onConfigurationPortal = async () => {
-    if (window?.DocSpaceConfig?.management?.checkDomain) {
+    if (window?.ClientConfig?.management?.checkDomain) {
       setIsLoading(true);
       const checkDomainResult = await checkDomain(`${name}.${domain}`).finally(
         () => setIsLoading(false)
@@ -127,7 +127,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
           </Text>
         </div>
         <Text fontSize="12px" lineHeight="16px" fontWeight={400}>
-          {t("ConfigurationDescription", { portalName: PORTAL })}
+          {t("ConfigurationDescription", { productName: PRODUCT_NAME })}
         </Text>
       </div>
       <div className="spaces-input-wrapper">
@@ -167,7 +167,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
         </div>
         <div className="spaces-input-block">
           <Text fontSize="13px" fontWeight="600">
-            {t("DocspaceName", { portalName: PORTAL })}
+            {t("PortalName", { productName: PRODUCT_NAME })}
           </Text>
           <TextInput
             hasError={!!(portalNameError || checkDomainError)}

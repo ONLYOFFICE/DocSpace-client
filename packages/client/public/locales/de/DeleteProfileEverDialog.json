@@ -1,8 +1,8 @@
 {
-  "ActionCannotBeUndone": "Die ausgewählten deaktivierten Benutzer werden aus {{portalName}} entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
+  "ActionCannotBeUndone": "Die ausgewählten deaktivierten Benutzer werden aus {{productName}} entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
   "CannotReassignFiles": "Wenn Sie mehrere Benutzer gleichzeitig löschen, können Sie deren Dateien nicht anderen Benutzern neu zuweisen.",
   "DeleteGroupUsersSuccessMessage": "Benutzer wurden erfolgreich gelöscht.",
-  "DeleteMyDocumentsUser": "Alle persönlichen Dateien und Ordner im Bereich Meine Dokumente dieses Benutzers werden endgültig gelöscht.",
+  "DeleteMyDocumentsUser": "Alle persönlichen Dateien und Ordner im Bereich Dokumente dieses Benutzers werden endgültig gelöscht.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Räume, die von diesem Benutzer erstellt wurden, und Dokumente, die in diesen Räumen gespeichert sind, werden automatisch einem Administrator, der die Löschung durchführt, neu zugewiesen: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Weisen Sie Daten manuell neu zu, um einen anderen Benutzer als Empfänger auszuwählen.",
   "DeleteUser": "Benutzer löschen",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> wird gelöscht. Dieser Vorgang kann nicht rückgängig gemacht werden.",

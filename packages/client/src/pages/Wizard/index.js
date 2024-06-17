@@ -54,7 +54,10 @@ import {
 } from "@docspace/shared/utils/common";
 import { setCookie } from "@docspace/shared/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { COOKIE_EXPIRATION_YEAR, PORTAL } from "@docspace/shared/constants";
+import {
+  COOKIE_EXPIRATION_YEAR,
+  PRODUCT_NAME,
+} from "@docspace/shared/constants";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { EmailSettings } from "@docspace/shared/utils";
 import BetaBadge from "../../components/BetaBadgeWrapper";
@@ -68,7 +71,7 @@ import {
   StyledContent,
 } from "./StyledWizard";
 import { getUserTimezone, getSelectZone } from "./timezonesHelper";
-import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import {
   DEFAULT_SELECT_TIMEZONE,
@@ -187,7 +190,7 @@ const Wizard = (props) => {
 
   useEffect(() => {
     if (!wizardToken)
-      navigate(combineUrl(window.DocSpaceConfig?.proxy?.url, "/"));
+      navigate(combineUrl(window.ClientConfig?.proxy?.url, "/"));
     else fetchData();
   }, []);
 
@@ -318,18 +321,18 @@ const Wizard = (props) => {
       <Scrollbar id="customScrollBar">
         <StyledContent>
           <WizardContainer>
-            <DocspaceLogo className="docspace-logo" />
+            <PortalLogo className="portal-logo" />
             <Text
               as="div"
               fontWeight={700}
               fontSize="23px"
               className="welcome-text"
             >
-              {t("WelcomeTitle", { portalName: PORTAL })}
+              {t("WelcomeTitle", { productName: PRODUCT_NAME })}
             </Text>
             <FormWrapper>
               <Text fontWeight={600} fontSize="16px" className="form-header">
-                {t("Desc", { portalName: PORTAL })}
+                {t("Desc", { productName: PRODUCT_NAME })}
               </Text>
               <FieldContainer
                 className="wizard-field"

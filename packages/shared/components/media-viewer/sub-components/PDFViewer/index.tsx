@@ -154,7 +154,7 @@ export const PDFViewer = ({
   };
 
   const loadViewerScript = useCallback(async () => {
-    const path = window.DocSpaceConfig?.pdfViewerUrl;
+    const path = window.ClientConfig?.pdfViewerUrl;
     const { docServiceUrl } = await getDocumentServiceLocation();
 
     setIsLoadingScript(true);

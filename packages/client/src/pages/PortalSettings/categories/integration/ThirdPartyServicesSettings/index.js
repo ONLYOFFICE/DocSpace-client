@@ -47,7 +47,7 @@ import ConsumerItem from "./sub-components/consumerItem";
 import ConsumerModalDialog from "./sub-components/consumerModalDialog";
 
 import ThirdPartyLoader from "./sub-components/thirdPartyLoader";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const RootContainer = styled(Box)`
   max-width: 700px;
@@ -202,6 +202,7 @@ class ThirdPartyServices extends React.Component {
       theme,
       currentColorScheme,
       isThirdPartyAvailable,
+      organizationName,
     } = this.props;
     const { dialogVisible, isLoading } = this.state;
     const { onModalClose, onModalOpen, setConsumer, onChangeLoading } = this;
@@ -253,7 +254,8 @@ class ThirdPartyServices extends React.Component {
             />
             <Text>
               {t("IntegrationRequest", {
-                portalName: PORTAL,
+                productName: PRODUCT_NAME,
+                organizationName,
               })}
             </Text>
             <Button
@@ -352,6 +354,7 @@ export default inject(
       theme,
       currentColorScheme,
       companyInfoSettingsData,
+      organizationName,
     } = settingsStore;
     const {
       getConsumers,
@@ -375,6 +378,7 @@ export default inject(
       currentColorScheme,
       isThirdPartyAvailable,
       supportEmail: companyInfoSettingsData?.email,
+      organizationName,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(ThirdPartyServices)));

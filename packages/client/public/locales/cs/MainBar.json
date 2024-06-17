@@ -1,18 +1,18 @@
 {
   "ClickHere": "Klikněte zde",
   "ConfirmEmailDescription": "Použijte odkaz uvedený v aktivačním e-mailu. Neobdrželi jste e-mail s aktivačním odkazem?",
-  "ConfirmEmailHeader": "Pro získání přístupu k funkcím {{portalName}} aktivujte svůj e-mail ({{ email }}).",
+  "ConfirmEmailHeader": "Pro získání přístupu k funkcím {{productName}} aktivujte svůj e-mail ({{ email }}).",
   "PersonalUserQuotaAdminsDescription": "Chcete-li nahrávat a vytvářet nové soubory a složky, uvolněte místo na disku nebo spravujte kvótu pro uživatele v nastavení <1>Správa úložiště.</1>",
   "PersonalUserQuotaDescription": "Chcete-li nahrávat a vytvářet nové soubory a složky, uvolněte místo na disku nebo se obraťte na správce, aby zvýšil kvótu úložiště.",
   "RequestActivation": "Znovu požádat o o aktivaci",
-  "RoomQuotaDescription": "Nepotřebné místnosti můžete archivovat nebo <1>{{clickHere}}}</1> pro nalezení vhodnějšího cenového tarifu pro váš {{portalName}}.",
+  "RoomQuotaDescription": "Nepotřebné místnosti můžete archivovat nebo <1>{{clickHere}}}</1> pro nalezení vhodnějšího cenového tarifu pro váš {{productName}}.",
   "RoomQuotaHeader": "Počet místností bude brzy překročen: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Limity úložiště a místností budou brzy překročeny.",
   "StorageAndUserHeader": "Limity pro úložiště a správce/oprávněné uživatele budou brzy překročeny.",
-  "StorageQuotaDescription": "Nepotřebné soubory můžete odstranit nebo <1>{{clickHere}}}</1> pro nalezení vhodnějšího cenového tarifu pro váš {{portalName}}.",
+  "StorageQuotaDescription": "Nepotřebné soubory můžete odstranit nebo <1>{{clickHere}}}</1> pro nalezení vhodnějšího cenového tarifu pro váš {{productName}}.",
   "StorageQuotaExceeded": "Překročení kvóty úložiště",
   "StorageQuotaHeader": "Množství úložného prostoru bude brzy překročeno: {{currentValue}} / {{maxValue}}.",
   "TenantCustomQuotaDescription": "Nepotřebné soubory můžete odstranit nebo změnit kvótu v <1>Nastavení správy úložiště.</1>",
-  "UserQuotaDescription": "<1>{{clickHere}}</1> a najděte lepší cenový tarif pro svůj {{portalName}}.",
+  "UserQuotaDescription": "<1>{{clickHere}}</1> a najděte lepší cenový tarif pro svůj {{productName}}.",
   "UserQuotaHeader": "Počet administrátorů/přístupných uživatelů bude brzy překročen: {{currentValue}} / {{maxValue}}."
 }

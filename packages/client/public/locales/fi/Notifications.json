@@ -1,13 +1,13 @@
 {
   "ActionsWithFilesDescription": "Merkit ilmoittavat sinulle toiminnoista, kuten latauksesta, luonnista ja muutoksista tiedostoissa.",
   "Badges": "Merkit",
-  "DailyFeed": "Päivittäinen {{portalName}}-syöte",
-  "DailyFeedDescription": "Lue uutiset ja tapahtumat {{portalName}}-si päivittäisistä uutisista.",
+  "DailyFeed": "Päivittäinen {{productName}}-syöte",
+  "DailyFeedDescription": "Lue uutiset ja tapahtumat {{productName}}-si päivittäisistä uutisista.",
   "ManageNotifications": "Hallitse",
   "Notifications": "Ilmoitukset",
   "RoomsActions": "Huoneissa olevat toiminnot tiedostoineen",
   "RoomsActivity": "Huoneen toiminta",
   "RoomsActivityDescription": "Ilmoitukset tunneittain. Pysy ajan tasalla kaikesta toiminnasta huoneissasi.",
-  "UsefulTips": "Hyödylliset {{portalName}}-vinkit",
-  "UsefulTipsDescription": "Saa hyödyllisiä oppaita {{portalName}}-sta"
+  "UsefulTips": "Hyödylliset {{productName}}-vinkit",
+  "UsefulTipsDescription": "Saa hyödyllisiä oppaita {{productName}}-sta"
 }

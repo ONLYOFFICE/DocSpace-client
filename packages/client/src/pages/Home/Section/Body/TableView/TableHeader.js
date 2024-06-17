@@ -541,6 +541,7 @@ class FilesTableHeader extends React.Component {
       setHideColumns,
       isFrame,
       showSettings,
+      tableStorageName,
     } = this.props;
 
     const {
@@ -572,6 +573,7 @@ class FilesTableHeader extends React.Component {
         setHideColumns={setHideColumns}
         settingsTitle={t("Files:TableSettingsTitle")}
         showSettings={isFrame ? showSettings : true}
+        tableStorageName={tableStorageName}
       />
     );
   }

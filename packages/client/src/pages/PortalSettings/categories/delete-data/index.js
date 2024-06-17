@@ -34,7 +34,7 @@ import PortalDeletionSection from "./portalDeletion";
 import DeleteDataLoader from "./DeleteDataLoader";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "../../../../../package.json";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const DeleteData = (props) => {
   const { t, isNotPaidPeriod, tReady } = props;
@@ -47,12 +47,12 @@ const DeleteData = (props) => {
   const data = [
     {
       id: "deletion",
-      name: t("DeleteDocspace", { portalName: PORTAL }),
+      name: t("DeletePortal", { productName: PRODUCT_NAME }),
       content: <PortalDeletionSection />,
     },
     {
       id: "deactivation",
-      name: t("PortalDeactivation", { portalName: PORTAL }),
+      name: t("PortalDeactivation", { productName: PRODUCT_NAME }),
       content: <PortalDeactivationSection />,
     },
   ];
@@ -67,7 +67,7 @@ const DeleteData = (props) => {
   const onSelect = (e) => {
     navigate(
       combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         config.homepage,
         `/portal-settings/delete-data/${e.id}`,
       ),

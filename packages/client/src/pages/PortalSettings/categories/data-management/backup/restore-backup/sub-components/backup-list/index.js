@@ -50,7 +50,7 @@ import { StyledBackupList } from "../../../StyledBackup";
 import BackupListBody from "./BackupListBody";
 import { TenantStatus } from "@docspace/shared/enums";
 import styled from "styled-components";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledModalDialog = styled(ModalDialog)`
   .restore_footer {
@@ -176,7 +176,7 @@ const BackupListModalDialog = (props) => {
       .then(() =>
         navigate(
           combineUrl(
-            window.DocSpaceConfig?.proxy?.url,
+            window.ClientConfig?.proxy?.url,
             config.homepage,
             "/preparation-portal",
           ),
@@ -210,10 +210,12 @@ const BackupListModalDialog = (props) => {
   const helpContent = () => (
     <>
       <Text className="restore-backup_warning-description">
-        {t("RestoreBackupWarningText", { portalName: PORTAL })}{" "}
+        {t("RestoreBackupWarningText", { productName: PRODUCT_NAME })}{" "}
         {!standalone && (
           <Text as="span" className="restore-backup_warning-link">
-            {t("RestoreBackupResetInfoWarningText", { portalName: PORTAL })}
+            {t("RestoreBackupResetInfoWarningText", {
+              productName: PRODUCT_NAME,
+            })}
           </Text>
         )}
       </Text>

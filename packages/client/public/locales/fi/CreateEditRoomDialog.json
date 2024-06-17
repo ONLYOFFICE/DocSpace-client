@@ -5,7 +5,7 @@
   "DisableRoomQuota": "Ota tämän huoneen kiintiö pois käytöstä",
   "Icon": "Kuvake",
   "MakeRoomPrivateDescription": "Kaikki tämän huoneen tiedostot salataan.",
-  "MakeRoomPrivateLimitationsWarningDescription": "Tällä toiminnolla, voit kutsua vai olemassa olevia {{portalName}}-käyttäjiä. Huoneen luomisen jälkeen et voi muuttaa käyttäjien listaa.",
+  "MakeRoomPrivateLimitationsWarningDescription": "Tällä toiminnolla, voit kutsua vai olemassa olevia {{productName}}-käyttäjiä. Huoneen luomisen jälkeen et voi muuttaa käyttäjien listaa.",
   "MakeRoomPrivateTitle": "Tee huoneesta yksityinen",
   "PublicRoomBarDescription": "Tämä huone on linkin kautta avoin kaikille. Ulkoisilla käyttäjillä on ainoastaan tiedostojen katseluoikeudet.",
   "PublicRoomSystemFoldersDescription": "Järjestelmäkansiot säilyttävät lomakkeiden kopioita niiden eri täyttövaiheissa. Lomakkeita, joita täytetään, säilytetään Keskeneräiset-kansiossa, ja valmiita lomakkeita säilytetään Valmiit-kansiossa.",
@@ -18,5 +18,5 @@
   "ThirdPartyStorageDescription": "Käytä kolmannen osapuolen palveluita tallennustilana tälle huoneelle. Yhdistettyyn tallennustilaan luodaan uusi kansio tämän huoneen tietojen tallentamista varten.",
   "ThirdPartyStorageNoStorageAlert": "Sitä ennen, sinun tulee yhdistää vastaavaan palveluun \"Liittäminen\"-osiossa. Muuten, yhteys ei ole mahdollinen.",
   "ThirdPartyStoragePermanentSettingDescription": "Tiedostot on säilötty kolmannen osapuolen {{thirdpartyTitle}} muistiin \"{{thirdpartyFolderName}}\" -kansioon.\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "Yhdistääksesi kolmannen osapuolen tallennustilan, sinun täytyy lisätä vastaava palvelu {{portalName}}-n asetusten Ingtegraatio-osiossa. Ota yhteyttä {{portalName}}-n omistajaan tai järjestelmänvalvojaan ottaaksesi integraation käyttöön."
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "Yhdistääksesi kolmannen osapuolen tallennustilan, sinun täytyy lisätä vastaava palvelu {{productName}}-n asetusten Ingtegraatio-osiossa. Ota yhteyttä {{productName}}-n omistajaan tai järjestelmänvalvojaan ottaaksesi integraation käyttöön."
 }

@@ -52,9 +52,9 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
-const PROXY_HOMEPAGE_URL = combineUrl(window.DocSpaceConfig?.proxy?.url, "/");
+const PROXY_HOMEPAGE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/");
 
 const PROFILE_SELF_URL = "/profile";
 
@@ -230,8 +230,8 @@ class AccountsContextOptionsStore {
     const adminOption = {
       id: "context-menu_administrator",
       className: "context-menu_drop-down",
-      label: t("Common:DocspaceAdmin", { portalName: PORTAL }),
-      title: t("Common:DocspaceAdmin", { portalName: PORTAL }),
+      label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+      title: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
       onClick: (e) => onChangeType(e, t),
       action: "admin",
       key: "cm-administrator",

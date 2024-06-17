@@ -37,7 +37,7 @@ import ConfirmWrapper from "../../../../Confirm/ConfirmWrapper";
 import ApiSvgUrl from "PUBLIC_DIR/images/settings.api.svg?url";
 import ApiDarkSvgUrl from "PUBLIC_DIR/images/settings.api.dark.svg?url";
 import { DeviceType } from "@docspace/shared/enums";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const EmptyContainer = styled(EmptyScreenContainer)`
   .ec-header {
@@ -61,7 +61,14 @@ const EmptyContainer = styled(EmptyScreenContainer)`
 `;
 
 const Api = (props) => {
-  const { t, setDocumentTitle, theme, apiBasicLink, currentDeviceType } = props;
+  const {
+    t,
+    setDocumentTitle,
+    theme,
+    apiBasicLink,
+    currentDeviceType,
+    organizationName,
+  } = props;
 
   const imgSrc = theme.isBase ? ApiSvgUrl : ApiDarkSvgUrl;
 
@@ -80,7 +87,10 @@ const Api = (props) => {
             scale={currentDeviceType === DeviceType.mobile}
           />
         }
-        descriptionText={t("ApiPageDescription", { portalName: PORTAL })}
+        descriptionText={t("ApiPageDescription", {
+          productName: PRODUCT_NAME,
+          organizationName,
+        })}
         headerText={t("ApiPageHeader")}
         imageAlt={t("ApiPageHeader")}
         imageSrc={imgSrc}
@@ -91,12 +101,14 @@ const Api = (props) => {
 
 export default inject(({ authStore, settingsStore }) => {
   const { setDocumentTitle } = authStore;
-  const { theme, apiBasicLink, currentDeviceType } = settingsStore;
+  const { theme, apiBasicLink, currentDeviceType, organizationName } =
+    settingsStore;
 
   return {
     theme,
     setDocumentTitle,
     apiBasicLink,
     currentDeviceType,
+    organizationName,
   };
 })(withTranslation(["Settings", "Common"])(observer(Api)));

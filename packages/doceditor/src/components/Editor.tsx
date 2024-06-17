@@ -27,6 +27,7 @@
 "use client";
 
 import React from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { isMobile } from "react-device-detect";
 import { useTranslation } from "react-i18next";
 
@@ -50,10 +51,12 @@ import {
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
 import useFilesSettings from "@/hooks/useFilesSettings";
+import { EDITOR_ID } from "@docspace/shared/constants";
 
 type IConfigType = IConfig & {
   events?: {
     onRequestStartFilling?: (event: object) => void;
+    onSubmit?: (event: object) => void;
   };
 };
 
@@ -75,9 +78,12 @@ const Editor = ({
   onSDKRequestSelectSpreadsheet,
   onSDKRequestSelectDocument,
   onSDKRequestReferenceSource,
+  onSDKRequestStartFilling,
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
 
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const { filesSettings } = useFilesSettings({});
 
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
@@ -97,7 +103,7 @@ const Editor = ({
     onDocumentStateChange,
     onMetaChange,
     onMakeActionLink,
-    onRequestStartFilling,
+    // onRequestStartFilling,
     documentReady,
 
     setDocTitle,
@@ -167,13 +173,13 @@ const Editor = ({
       goBack = {
         requestClose:
           typeof window !== "undefined"
-            ? window.DocSpaceConfig?.editor?.requestClose ?? false
+            ? window.ClientConfig?.editor?.requestClose ?? false
             : false,
         text: openFileLocationText,
       };
       if (
         typeof window !== "undefined" &&
-        !window.DocSpaceConfig?.editor?.requestClose
+        !window.ClientConfig?.editor?.requestClose
       ) {
         goBack.blank = openOnNewPage ? true : false;
         goBack.url = getBackUrl(fileInfo.rootFolderType, fileInfo.folderId);
@@ -281,7 +287,7 @@ const Editor = ({
 
   if (
     (typeof window !== "undefined" &&
-      window.DocSpaceConfig?.editor?.requestClose) ||
+      window.ClientConfig?.editor?.requestClose) ||
     showClose ||
     IS_ZOOM
   ) {
@@ -289,12 +295,20 @@ const Editor = ({
   }
 
   if (config?.startFilling) {
-    newConfig.events.onRequestStartFilling = onRequestStartFilling;
+    newConfig.events.onRequestStartFilling = onSDKRequestStartFilling;
   }
+
+  newConfig.events.onSubmit = () => {
+    const origin = window.location.origin;
+
+    window.location.replace(
+      `${origin}/doceditor/completed-form?${searchParams.toString()}`,
+    );
+  };
 
   return (
     <DocumentEditor
-      id={"docspace_editor"}
+      id={EDITOR_ID}
       documentServerUrl={documentserverUrl}
       config={
         errorMessage || isSkipError

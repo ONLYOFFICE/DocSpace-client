@@ -28,7 +28,7 @@ import React from "react";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
-import DocspaceLogo from "../docspace-logo/DocspaceLogo";
+import PortalLogo from "../portal-logo/PortalLogo";
 import Headline from "../headline/Headline";
 
 import StyledErrorContainer from "./ErrorContainer.styled";
@@ -53,7 +53,7 @@ const ErrorContainer = (props: ErrorContainerProps) => {
       isEditor={isEditor}
       data-testid="ErrorContainer"
     >
-      <DocspaceLogo isResizable />
+      <PortalLogo isResizable />
       <div id="container">
         <svg
           id="background"

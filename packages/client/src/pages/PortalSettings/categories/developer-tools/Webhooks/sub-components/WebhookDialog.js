@@ -34,7 +34,7 @@ import { SSLVerification } from "./SSLVerification";
 import SecretKeyInput from "./SecretKeyInput";
 import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const ModalDialogContainer = styled(ModalDialog)`
   .modal-body {
@@ -206,7 +206,9 @@ const WebhookDialog = (props) => {
       <ModalDialog.Body>
         <StyledWebhookForm onSubmit={onFormSubmit}>
           {!isSettingsModal && (
-            <Hint>{t("WebhookCreationHint", { portalName: PORTAL })}</Hint>
+            <Hint>
+              {t("WebhookCreationHint", { productName: PRODUCT_NAME })}
+            </Hint>
           )}
           <LabledInput
             id={additionalId + "-name-input"}

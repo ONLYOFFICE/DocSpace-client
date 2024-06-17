@@ -46,7 +46,7 @@
   "URL": "URL",
   "ViewRawPayload": "Προβολή ακατέργαστου φορτίου",
   "WebhookCreated": "Webhook δημιουργήθηκε",
-  "WebhookCreationHint": "Αυτό το webhook θα εκχωρηθεί σε όλα τα συμβάντα στο {{portalName}}",
+  "WebhookCreationHint": "Αυτό το webhook θα εκχωρηθεί σε όλα τα συμβάντα στο {{productName}}",
   "WebhookDetails": "Λεπτομέρειες Webhook",
   "WebhookEditedSuccessfully": "Η επεξεργασία της διαμόρφωσης Webhook έγινε επιτυχώς",
   "WebhookHistory": "Ιστορικό Webhook",
@@ -55,5 +55,5 @@
   "WebhookRemoved": "Το Webhook αφαιρέθηκε",
   "Webhooks": "Webhooks",
   "WebhooksGuide": "Οδηγός Webhooks",
-  "WebhooksInfo": "Χρησιμοποιήστε webhooks για να εκτελέσετε προσαρμοσμένες ενέργειες στην πλευρά οποιασδήποτε εφαρμογής ή ιστότοπου που χρησιμοποιείτε με βάση διάφορα συμβάντα στο {{portalName}} του ONLYOFFICE.\nΕδώ, μπορείτε να δημιουργήσετε και να διαχειριστείτε όλα τα webhooks σας, να τα ρυθμίσετε και να περιηγηθείτε στο ιστορικό κάθε webhook για να ελέγξετε την απόδοσή τους."
+  "WebhooksInfo": "Χρησιμοποιήστε webhooks για να εκτελέσετε προσαρμοσμένες ενέργειες στην πλευρά οποιασδήποτε εφαρμογής ή ιστότοπου που χρησιμοποιείτε με βάση διάφορα συμβάντα στο {{productName}} του {{organizationName}}.\nΕδώ, μπορείτε να δημιουργήσετε και να διαχειριστείτε όλα τα webhooks σας, να τα ρυθμίσετε και να περιηγηθείτε στο ιστορικό κάθε webhook για να ελέγξετε την απόδοσή τους."
 }

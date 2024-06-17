@@ -30,7 +30,7 @@ import { Consumer } from "@docspace/shared/utils/context";
 
 import TableView from "./TableView";
 import RowView from "./RowView";
-import { PORTAL } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const checkedAccountType = "result";
 
@@ -44,8 +44,8 @@ const AccountsTable = (props) => {
     toggleAllAccounts,
   } = props;
 
-  const setTypeDocspaceAdmin = () => {
-    changeGroupType(UserTypes.DocSpaceAdmin);
+  const setTypePortalAdmin = () => {
+    changeGroupType(UserTypes.PortalAdmin);
     toggleAllAccounts(false, [], checkedAccountType);
   };
   const setTypeRoomAdmin = () => {
@@ -59,9 +59,11 @@ const AccountsTable = (props) => {
 
   const typeOptions = [
     {
-      key: UserTypes.DocSpaceAdmin,
-      label: t(`Common:${UserTypes.DocSpaceAdmin}`, { portalName: PORTAL }),
-      onClick: setTypeDocspaceAdmin,
+      key: UserTypes.PortalAdmin,
+      label: t(`Common:PortalAdmin`, {
+        productName: PRODUCT_NAME,
+      }),
+      onClick: setTypePortalAdmin,
     },
     {
       key: UserTypes.RoomAdmin,

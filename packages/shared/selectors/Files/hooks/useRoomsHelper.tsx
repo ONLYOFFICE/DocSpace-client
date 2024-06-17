@@ -61,6 +61,7 @@ const useRoomsHelper = ({
   createDefineRoomType,
   getRootData,
   setSelectedItemType,
+  subscribe,
 }: UseRoomsHelperProps) => {
   const { t } = useTranslation(["Common"]);
   const { addInputItem } = useInputItemHelper({ withCreate, setItems });
@@ -119,6 +120,7 @@ const useRoomsHelper = ({
       filter.pageCount = PAGE_COUNT;
 
       filter.filterValue = filterValue;
+      filter.type = createDefineRoomType;
 
       const rooms = await getRooms(filter);
 
@@ -126,6 +128,9 @@ const useRoomsHelper = ({
 
       if (initRef.current) {
         const { title, id } = current;
+
+        // TODO: need unsubcribe
+        if (isRoomsOnly) subscribe(id);
 
         const breadCrumbs: TBreadCrumb[] = [{ label: title, id, isRoom: true }];
 
@@ -213,6 +218,7 @@ const useRoomsHelper = ({
       addInputItem,
       setSelectedItemType,
       getRootData,
+      subscribe,
     ],
   );
   return { getRoomList };

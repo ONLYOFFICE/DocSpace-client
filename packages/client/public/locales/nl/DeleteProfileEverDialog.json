@@ -1,5 +1,5 @@
 {
-  "ActionCannotBeUndone": "De geselecteerde uitgeschakelde gebruikers worden verwijderd uit {{portalName}}. Deze actie kan niet ongedaan worden gemaakt.",
+  "ActionCannotBeUndone": "De geselecteerde uitgeschakelde gebruikers worden verwijderd uit {{productName}}. Deze actie kan niet ongedaan worden gemaakt.",
   "CannotReassignFiles": "Als u meerdere gebruikers tegelijk verwijdert, kunt u hun bestanden niet opnieuw toewijzen aan andere gebruikers.",
   "DeleteGroupUsersSuccessMessage": "Gebruikers zijn met succes verwijderd.",
   "DeleteMyDocumentsUser": "Alle persoonlijke bestanden en mappen in Mijn documenten van deze gebruiker worden definitief verwijderd.",

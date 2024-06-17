@@ -40,7 +40,11 @@ import type {
   TPathParts,
 } from "@docspace/shared/types";
 import { TFolder, TFolderSecurity } from "@docspace/shared/api/files/types";
-import { TLogo, TRoomSecurity } from "@docspace/shared/api/rooms/types";
+import {
+  TLogo,
+  TRoomLifetime,
+  TRoomSecurity,
+} from "@docspace/shared/api/rooms/types";
 
 import { setDocumentTitle } from "../helpers/utils";
 
@@ -141,6 +145,8 @@ class SelectedFolderStore {
 
   parentRoomType: Nullable<FolderType> = null;
 
+  lifetime: TRoomLifetime | null = null;
+
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -185,6 +191,7 @@ class SelectedFolderStore {
       type: this.type,
       isRootFolder: this.isRootFolder,
       parentRoomType: this.parentRoomType,
+      lifetime: this.lifetime,
     };
   };
 

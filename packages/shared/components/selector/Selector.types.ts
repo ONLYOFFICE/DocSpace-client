@@ -342,7 +342,6 @@ export type SelectorProps = TSelectorHeader &
 
     alwaysShowFooter?: boolean;
     descriptionText?: string;
-    titleIconTooltip?: string;
   };
 
 export type BodyProps = TSelectorBreadCrumbs &
@@ -381,7 +380,6 @@ export type BodyProps = TSelectorBreadCrumbs &
     withFooterInput?: boolean;
     withFooterCheckbox?: boolean;
     descriptionText?: string;
-    titleIconTooltip?: string;
   };
 
 export type FooterProps = TSelectorFooterSubmitButton &
@@ -543,6 +541,7 @@ export type TSelectorItem = TSelectorItemType & {
   isSelected?: boolean;
   isDisabled?: boolean;
   disabledText?: string;
+  lifetimeTooltip?: string;
 };
 
 export type Data = {
@@ -551,7 +550,6 @@ export type Data = {
   isMultiSelect: boolean;
   isItemLoaded: (index: number) => boolean;
   rowLoader: React.ReactNode;
-  titleIconTooltip?: string;
   renderCustomItem?: (
     label: string,
     role?: string,

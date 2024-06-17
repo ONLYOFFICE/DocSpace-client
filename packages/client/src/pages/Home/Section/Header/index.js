@@ -82,6 +82,7 @@ import {
 } from "SRC_DIR/helpers/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -954,7 +955,12 @@ const SectionHeaderContent = (props) => {
     (isPublicRoomType && !isPublicRoom && PublicRoomIconUrl) ||
     (isVirtualDataRoomType && LifetimeRoomIconUrl);
 
-  const titleIconTooltip = t("Files:RoomFilesLifetime", { days: 12 }); // TODO: days
+  const titleIconTooltip = selectedFolder.lifetime
+    ? t("Files:RoomFilesLifetime", {
+        days: selectedFolder.lifetime.value,
+        period: getLifetimePeriodTranslation(selectedFolder.lifetime.period, t),
+      })
+    : null;
 
   const navigationButtonLabel = showNavigationButton
     ? t("Files:ShareRoom")

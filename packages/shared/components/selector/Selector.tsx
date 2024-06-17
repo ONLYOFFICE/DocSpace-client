@@ -134,7 +134,6 @@ const Selector = ({
 
   withInfo,
   infoText,
-  titleIconTooltip,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
   const [isSearch, setIsSearch] = React.useState<boolean>(false);
@@ -600,7 +599,6 @@ const Selector = ({
         withFooterInput={withFooterInput}
         withFooterCheckbox={withFooterCheckbox}
         descriptionText={descriptionText}
-        titleIconTooltip={titleIconTooltip}
         inputItemVisible={inputItemVisible}
         setInputItemVisible={setInputItemVisible}
         // bread crumbs

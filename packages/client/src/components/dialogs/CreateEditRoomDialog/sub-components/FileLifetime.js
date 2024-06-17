@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { TextInput } from "@docspace/shared/components/text-input";
@@ -44,22 +44,28 @@ const StyledFileLifetime = styled.div`
   }
 `;
 
-const FileLifetime = ({ t }) => {
+const FileLifetime = ({ t, roomParams, setRoomParams }) => {
+  const lifetime = roomParams.lifetime ?? {
+    value: "12",
+    deletePermanently: false,
+    period: 0,
+  };
+
   const dateOptions = [
     {
       key: 1,
       label: t("Common:Days")[0].toUpperCase() + t("Common:Days").slice(1),
-      "data-type": 1,
+      value: 0,
     },
     {
       key: 2,
       label: t("Common:Months"),
-      "data-type": 2,
+      value: 1,
     },
     {
       key: 3,
       label: t("Common:Years"),
-      "data-type": 3,
+      value: 2,
     },
   ];
 
@@ -67,36 +73,57 @@ const FileLifetime = ({ t }) => {
     {
       key: 1,
       label: t("Common:MoveToTrash"),
-      "data-type": 1,
+      value: false,
     },
     {
       key: 2,
       label: t("Common:DeletePermanently"),
-      "data-type": 2,
+      value: true,
     },
   ];
 
-  const [inputValue, setInputValue] = useState("");
-  const [selectedDate, setSelectedDate] = useState(dateOptions[0]);
-  const [selectedDelete, setSelectedDelete] = useState(deleteOptions[0]);
+  const selectedInputValue = lifetime.value + "";
+  const selectedDateOption = dateOptions.find(
+    (o) => o.value === lifetime.period,
+  );
+  const selectedDeleteOptions = lifetime.deletePermanently
+    ? deleteOptions[1]
+    : deleteOptions[0];
+
+  const [inputValue, setInputValue] = useState(selectedInputValue);
+  const [selectedDate, setSelectedDate] = useState(selectedDateOption);
+  const [selectedDelete, setSelectedDelete] = useState(selectedDeleteOptions);
 
   const onChange = (e) => {
     // /^(?:[1-9][0-9]*|0)$/
     if (e.target.value && !/^(?:[1-9][0-9]*)$/.test(e.target.value)) return;
 
     setInputValue(e.target.value);
+
+    setRoomParams({
+      ...roomParams,
+      lifetime: { ...lifetime, value: +e.target.value },
+    });
   };
 
   const isLoading = false;
 
   const onSelectDate = (option) => {
     setSelectedDate(option);
-    console.log("onDateSelect", option);
+
+    setRoomParams({
+      ...roomParams,
+      lifetime: { ...lifetime, period: option.value },
+    });
   };
 
   const onSelectDelete = (option) => {
     setSelectedDelete(option);
-    console.log("onSelectDelete", option);
+
+    setRoomParams({
+      ...roomParams,
+      lifetime: { ...lifetime, deletePermanently: option.value },
+    });
   };
 
   return (

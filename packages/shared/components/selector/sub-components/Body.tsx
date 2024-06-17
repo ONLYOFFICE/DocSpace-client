@@ -102,7 +102,6 @@ const Body = ({
 
   withInfo,
   infoText,
-  titleIconTooltip,
   setInputItemVisible,
   inputItemVisible,
 }: BodyProps) => {
@@ -304,7 +303,6 @@ const Body = ({
                     rowLoader,
                     isItemLoaded,
                     renderCustomItem,
-                    titleIconTooltip,
                     setInputItemVisible,
                     inputItemVisible,
                   }}

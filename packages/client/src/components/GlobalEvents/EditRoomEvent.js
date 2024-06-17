@@ -106,6 +106,7 @@ const EditRoomEvent = ({
     },
     roomOwner: item.createdBy,
     indexing: item.indexing,
+    lifetime: item.lifetime,
 
     ...(isDefaultRoomsQuotaSet && {
       quota: item.quotaLimit,

@@ -108,7 +108,6 @@ const FilesSelector = ({
   withBreadCrumbs: withBreadCrumbsProp,
   filesSettings,
   cancelButtonLabel,
-  titleIconTooltip,
 
   withCreate,
   createDefineRoomLabel,
@@ -602,7 +601,6 @@ const FilesSelector = ({
             : getFileList
       }
       descriptionText={descriptionText}
-      titleIconTooltip={titleIconTooltip}
       disableFirstFetch
     />
   );

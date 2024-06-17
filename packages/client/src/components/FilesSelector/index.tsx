@@ -336,8 +336,6 @@ const FilesSelectorWrapper = ({
     );
   };
 
-  const titleIconTooltip = t("Files:RoomFilesLifetime", { days: 12 }); // TODO: days
-
   return (
     <FilesSelector
       openRoot={openRoot}
@@ -387,7 +385,6 @@ const FilesSelectorWrapper = ({
       cancelButtonId={
         isMove || isCopy || isRestore ? "select-file-modal-cancel" : ""
       }
-      titleIconTooltip={titleIconTooltip}
       getFilesArchiveError={getFilesArchiveError}
       withCreate={(isMove || isCopy || isRestore || isRestoreAll) ?? false}
       // createDefineRoomLabel="New filling from room"

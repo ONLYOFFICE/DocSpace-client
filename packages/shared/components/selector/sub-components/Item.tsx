@@ -70,7 +70,6 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     isItemLoaded,
     rowLoader,
     renderCustomItem,
-    titleIconTooltip,
     setInputItemVisible,
     inputItemVisible,
   }: Data = data;
@@ -110,6 +109,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       isGroup,
       disabledText,
       dropDownItems,
+      lifetimeTooltip,
     } = item;
 
     if (isInputItem) {
@@ -181,7 +181,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
 
     const getContent = () => (
       <Text fontSize="12px" fontWeight={400} noSelect>
-        {titleIconTooltip}
+        {lifetimeTooltip}
       </Text>
     );
 
@@ -237,7 +237,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
               {label}
             </Text>
 
-            {titleIconTooltip && (
+            {lifetimeTooltip && (
               <>
                 <ReactSVG
                   data-tooltip-id="iconTooltip"

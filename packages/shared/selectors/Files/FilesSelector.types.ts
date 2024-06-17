@@ -221,7 +221,6 @@ export type FilesSelectorProps = (
   isPanelVisible: boolean;
   currentDeviceType: DeviceType;
   getFilesArchiveError: (name: string) => string;
-  titleIconTooltip?: string;
 
   withCreate: boolean;
   createDefineRoomLabel?: string;

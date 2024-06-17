@@ -102,6 +102,7 @@ export const ScrollbarTabs = styled(Scrollbar)<{
 
   .scroll-body {
     position: absolute;
+    padding-inline-end: 0 !important;
   }
 
   .track {

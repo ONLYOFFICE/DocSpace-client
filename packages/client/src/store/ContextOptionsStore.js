@@ -1513,6 +1513,14 @@ class ContextOptionsStore {
         disabled: !item.security?.CreateRoomFrom,
       },
       {
+        id: "option_create-copy-room",
+        key: "copy-room",
+        label: t("Common:Duplicate"),
+        icon: DuplicateReactSvgUrl,
+        onClick: () => {},
+        disabled: false,
+      },
+      {
         id: "option_download",
         key: "download",
         label: t("Common:Download"),

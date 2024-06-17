@@ -59,7 +59,7 @@ const StyledThirdParty = styled.div<{ isVisible: boolean }>`
 
 const ThirdParty = () => {
   const { isLoading } = useContext(LoginValueContext);
-  const { setIsModalOpen } = useContext(LoginDispatchContext);
+  const { setIsModalOpen, setLdapDomain } = useContext(LoginDispatchContext);
 
   const searchParams = useSearchParams();
 
@@ -91,6 +91,10 @@ const ThirdParty = () => {
   useEffect(() => {
     const ssoUrl = capabilities ? capabilities.ssoUrl : "";
     const hideAuthPage = ssoSettings ? ssoSettings.hideAuthPage : false;
+
+    if (capabilities?.ldapEnabled && capabilities.ldapDomain)
+      setLdapDomain(capabilities.ldapDomain);
+
     if (
       ssoUrl &&
       hideAuthPage &&
@@ -98,7 +102,7 @@ const ThirdParty = () => {
     ) {
       window.location.replace(ssoUrl);
     }
-  }, [capabilities, searchParams, ssoSettings]);
+  }, [capabilities, searchParams, ssoSettings, setLdapDomain]);
 
   const ssoExists = () => {
     if (capabilities?.ssoUrl) return true;

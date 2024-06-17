@@ -108,7 +108,7 @@ const CustomSettings = (props) => {
         className="smtp-settings_toggle"
         isChecked={settings[AUTHENTICATION]}
         onChange={onChangeToggle}
-        label={t("Authentication")}
+        label={t("Common:Authentication")}
         isDisabled={isLoading}
       />
 

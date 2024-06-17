@@ -29,6 +29,7 @@ import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
 import { DEFAULT_FONT_FAMILY } from "../constants";
+import { color } from "storybook-static/sb-manager/chunk-INSKDKQB";
 
 export type TColorScheme = {
   id: number;
@@ -1404,6 +1405,11 @@ export const getBaseTheme = () => {
 
       percent: {
         background: "#4781D1",
+      },
+
+      color: {
+        error: lightErrorStatus,
+        status: black,
       },
     },
 

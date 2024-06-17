@@ -129,7 +129,7 @@ export const ImageViewer = ({
 
   // const changeSource = React.useCallback(
   //   (imageUrl: Blob | MediaSource) => {
-  //     if (!window.DocSpaceConfig?.imageThumbnails) return;
+  //     if (!window.ClientConfig?.imageThumbnails) return;
   //     changeSourceTimeoutRef.current = setTimeout(() => {
   //       if (imgRef.current && !unmountRef.current) {
   //         if (!src) return;
@@ -148,7 +148,7 @@ export const ImageViewer = ({
   // );
 
   // const loadImage = React.useCallback(async () => {
-  //   if (!src || !window.DocSpaceConfig?.imageThumbnails) return;
+  //   if (!src || !window.ClientConfig?.imageThumbnails) return;
 
   //   try {
   //     const res = await fetch(src);
@@ -856,7 +856,7 @@ export const ImageViewer = ({
 
   const onError = useCallback(
     (e: SyntheticEvent<HTMLImageElement, Event>) => {
-      if (window.DocSpaceConfig?.imageThumbnails && thumbnailSrc && src) {
+      if (window.ClientConfig?.imageThumbnails && thumbnailSrc && src) {
         // if thumbnailSrc is unavailable, try to load original image
         e.currentTarget.src = src;
         return;
@@ -911,7 +911,7 @@ export const ImageViewer = ({
   }, [src, isTiff]);
 
   // useEffect(() => {
-  //   if (!window.DocSpaceConfig?.imageThumbnails) return;
+  //   if (!window.ClientConfig?.imageThumbnails) return;
 
   //   if (!thumbnailSrc) setIsLoading(true);
   // }, [thumbnailSrc]);
@@ -922,7 +922,7 @@ export const ImageViewer = ({
   // }, [src, version]);
 
   // useEffect(() => {
-  //   if (!imageId || thumbnailSrc || !window.DocSpaceConfig?.imageThumbnails)
+  //   if (!imageId || thumbnailSrc || !window.ClientConfig?.imageThumbnails)
   //     return;
 
   //   indexedDBHelper
@@ -973,7 +973,7 @@ export const ImageViewer = ({
           <Image
             draggable="false"
             src={
-              window.DocSpaceConfig?.imageThumbnails && thumbnailSrc
+              window.ClientConfig?.imageThumbnails && thumbnailSrc
                 ? `${thumbnailSrc}&size=3840x2160`
                 : src
             }

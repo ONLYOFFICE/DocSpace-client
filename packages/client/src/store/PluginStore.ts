@@ -70,9 +70,9 @@ const { origin: apiOrigin, prefix: apiPrefix } = apiConf;
 const { url: proxyURL } = proxyConf;
 
 const origin =
-  window.DocSpaceConfig?.api?.origin || apiOrigin || window.location.origin;
-const proxy = window.DocSpaceConfig?.proxy?.url || proxyURL;
-const prefix = window.DocSpaceConfig?.api?.prefix || apiPrefix;
+  window.ClientConfig?.api?.origin || apiOrigin || window.location.origin;
+const proxy = window.ClientConfig?.proxy?.url || proxyURL;
+const prefix = window.ClientConfig?.api?.prefix || apiPrefix;
 
 class PluginStore {
   private settingsStore: SettingsStore = {} as SettingsStore;

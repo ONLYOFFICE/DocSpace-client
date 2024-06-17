@@ -176,7 +176,7 @@ const BackupListModalDialog = (props) => {
       .then(() =>
         navigate(
           combineUrl(
-            window.DocSpaceConfig?.proxy?.url,
+            window.ClientConfig?.proxy?.url,
             config.homepage,
             "/preparation-portal",
           ),

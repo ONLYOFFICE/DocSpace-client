@@ -57,7 +57,7 @@ const PortalDeletion = (props) => {
   };
 
   useEffect(() => {
-    setDocumentTitle(t("DeleteDocspace", { productName: PRODUCT_NAME }));
+    setDocumentTitle(t("DeletePortal", { productName: PRODUCT_NAME }));
     fetchData();
     onCheckView();
     window.addEventListener("resize", onCheckView);

@@ -201,7 +201,7 @@ const NewFilesPanel = (props) => {
       if (canEdit && providerKey) {
         return window.open(
           combineUrl(
-            window.DocSpaceConfig?.proxy?.url,
+            window.ClientConfig?.proxy?.url,
             config.homepage,
             `/doceditor?fileId=${id}`,
           ),

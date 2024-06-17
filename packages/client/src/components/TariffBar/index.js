@@ -52,7 +52,7 @@ const StyledWrapper = styled.div`
 `;
 
 const PROXY_BASE_URL = combineUrl(
-  window.DocSpaceConfig?.proxy?.url,
+  window.ClientConfig?.proxy?.url,
   "/portal-settings",
 );
 

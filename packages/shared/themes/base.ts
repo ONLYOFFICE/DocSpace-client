@@ -2118,10 +2118,10 @@ export const getBaseTheme = () => {
         hoverBackground: grayLight,
         selectedBackground: lightGrayHover,
 
-        inputButtonBorder: "#D0D5DA",
-        inputButtonBorderHover: grayMain,
+        inputButtonBorder: grayStrong,
+        inputButtonBorderHover: lightGrayDark,
 
-        disableTextColor: "#A3A9AE",
+        disableTextColor: gray,
       },
 
       emptyScreen: {
@@ -2938,21 +2938,21 @@ export const getBaseTheme = () => {
 
     tabs: {
       gradientColor: white,
-      lineColor: "#eceef1",
+      lineColor: grayLightMid,
 
-      textColorPrimary: "#657077",
+      textColorPrimary: lightGrayDark,
       activeTextColorPrimary: "",
-      hoverTextColorPrimary: "#A3A9AE",
-      pressedTextColorPrimary: "#555F65",
+      hoverTextColorPrimary: gray,
+      pressedTextColorPrimary: grayText,
       backgroundColorPrimary: white,
 
-      textColorSecondary: "#333333",
+      textColorSecondary: black,
       activeTextColorSecondary: white,
 
       backgroundColorSecondary: white,
-      hoverBackgroundColorSecondary: "#F3F4F4",
-      pressedBackgroundColorSecondary: "#ECEEF1",
-      activeBackgroundColorSecondary: "#265A8F",
+      hoverBackgroundColorSecondary: lightGrayHover,
+      pressedBackgroundColorSecondary: grayLightMid,
+      activeBackgroundColorSecondary: blueLightMid,
     },
 
     hotkeys: {

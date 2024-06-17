@@ -2088,8 +2088,8 @@ const Dark: TTheme = {
     border: `1px solid ${grayDarkStrong}`,
 
     breadCrumbs: {
-      prevItemColor: "#CCCCCC",
-      arrowRightColor: "#ADADAD",
+      prevItemColor: darkGrayDark,
+      arrowRightColor: darkGrayDark,
     },
 
     info: {
@@ -2103,10 +2103,10 @@ const Dark: TTheme = {
       hoverBackground: lightDarkGrayHover,
       selectedBackground: lightDarkGrayHover,
 
-      inputButtonBorder: "#474747",
-      inputButtonBorderHover: grayMaxLight,
+      inputButtonBorder: grayDarkStrong,
+      inputButtonBorderHover: white,
 
-      disableTextColor: "#858585",
+      disableTextColor: grayDark,
     },
 
     emptyScreen: {
@@ -2920,21 +2920,21 @@ const Dark: TTheme = {
 
   tabs: {
     gradientColor: black,
-    lineColor: "#474747",
+    lineColor: grayDarkStrong,
 
-    textColorPrimary: "#657077",
+    textColorPrimary: lightGrayDark,
     activeTextColorPrimary: white,
     hoverTextColorPrimary: white,
-    pressedTextColorPrimary: "#CCCCCC",
-    backgroundColorPrimary: "#333",
+    pressedTextColorPrimary: grayDarkText,
+    backgroundColorPrimary: black,
 
-    textColorSecondary: "#FFFFFF",
-    activeTextColorSecondary: "#333333",
+    textColorSecondary: white,
+    activeTextColorSecondary: black,
 
-    backgroundColorSecondary: "#333",
-    hoverBackgroundColorSecondary: "#474747",
-    pressedBackgroundColorSecondary: "#282828",
-    activeBackgroundColorSecondary: "#FFFFFF",
+    backgroundColorSecondary: black,
+    hoverBackgroundColorSecondary: grayDarkStrong,
+    pressedBackgroundColorSecondary: darkGrayLight,
+    activeBackgroundColorSecondary: white,
   },
 
   hotkeys: {

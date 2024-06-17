@@ -1440,6 +1440,19 @@ class FilesStore {
       filterData.pageCount = 100;
     }
 
+    const defaultFilter = FilesFilter.getDefault();
+
+    const { filterType, searchInContent } = filterData;
+
+    if (typeof filterData.withSubfolders !== "boolean")
+      filterData.withSubfolders = defaultFilter.withSubfolders;
+
+    if (typeof searchInContent !== "boolean")
+      filterData.searchInContent = defaultFilter.searchInContent;
+
+    if (!Object.keys(FilterType).find((key) => FilterType[key] === filterType))
+      filterData.filterType = defaultFilter.filterType;
+
     setSelectedNode([folderId + ""]);
 
     return api.files

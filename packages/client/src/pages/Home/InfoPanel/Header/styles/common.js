@@ -94,13 +94,8 @@ const StyledInfoPanelHeader = styled.div`
     width: 100%;
     justify-content: center;
     .sticky {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      .bottom-line {
-        background-color: ${(props) => props.theme.infoPanel.borderColor};
+      .scroll-body > div {
+        justify-content: center;
       }
     }
   }

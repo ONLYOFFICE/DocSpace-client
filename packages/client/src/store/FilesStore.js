@@ -2322,6 +2322,7 @@ class FilesStore {
         "mute-room",
         "unmute-room",
         "separator1",
+        "copy-room",
         "download",
         "archive-room",
         "unarchive-room",

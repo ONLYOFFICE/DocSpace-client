@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { Metadata } from "next";
+import { BRAND_NAME } from "@docspace/shared/constants";
 
 import { getData } from "@/utils/actions";
 import { RootPageProps } from "@/types";
@@ -41,7 +42,7 @@ const initialSearchParams: RootPageProps["searchParams"] = {
 };
 
 export const metadata: Metadata = {
-  title: "ONLYOFFICE DocEditor page",
+  title: `${BRAND_NAME} DocEditor page`,
 
   description: "",
 };

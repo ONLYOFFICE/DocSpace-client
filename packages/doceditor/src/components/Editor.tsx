@@ -287,7 +287,7 @@ const Editor = ({
   if (
     (typeof window !== "undefined" &&
       window.ClientConfig?.editor?.requestClose) ||
-    showClose ||
+    SHOW_CLOSE ||
     IS_ZOOM
   ) {
     newConfig.events.onRequestClose = onSDKRequestClose;

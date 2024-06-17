@@ -24,20 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export type TElement = {
-  id?: string;
-  key: string;
-  title: string;
-  content: React.ReactNode;
-};
+export const INDEX_NOT_FOUND = -1;
 
-export interface TabsContainerProps {
-  /** Child elements */
-  elements: TElement[];
-  /** Disables the TabContainer  */
-  isDisabled: boolean;
-  /** Sets a callback function that is triggered when the title is selected */
-  onSelect: (element: TElement) => void;
-  /** Selected title of tabs container */
-  selectedItem: number;
-}
+export const OFFSET_RIGHT = 48;
+export const OFFSET_LEFT = 48;

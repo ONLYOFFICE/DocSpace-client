@@ -960,36 +960,6 @@ const Dark: TTheme = {
     },
   },
 
-  tabsContainer: {
-    scrollbar: {
-      width: "100%",
-      height: "44px",
-    },
-
-    label: {
-      height: " 30px",
-      border: `1px solid ${grayDarkStrong}`,
-      borderRadius: "16px",
-      minWidth: "fit-content",
-      marginRight: "8px",
-      width: "fit-content",
-
-      backgroundColor: white,
-      hoverBackgroundColor: grayDarkStrong,
-      disableBackgroundColor: darkGrayLight,
-      activeBackgroundColor: darkGrayLight,
-      activeSelectedBackgroundColor: `linear-gradient(0deg, ${white}, ${white}), linear-gradient(0deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18))`,
-
-      title: {
-        padding: "4px 16px",
-        overflow: "hidden",
-        color: black,
-        hoverColor: white,
-        disableColor: grayDarkStrong,
-      },
-    },
-  },
-
   fieldContainer: {
     horizontal: {
       margin: "0 0 16px 0",
@@ -2118,8 +2088,8 @@ const Dark: TTheme = {
     border: `1px solid ${grayDarkStrong}`,
 
     breadCrumbs: {
-      prevItemColor: darkGrayDark,
-      arrowRightColor: darkGrayDark,
+      prevItemColor: "#CCCCCC",
+      arrowRightColor: "#ADADAD",
     },
 
     info: {
@@ -2133,8 +2103,10 @@ const Dark: TTheme = {
       hoverBackground: lightDarkGrayHover,
       selectedBackground: lightDarkGrayHover,
 
-      inputButtonBorder: grayDarkStrong,
-      inputButtonBorderHover: white,
+      inputButtonBorder: "#474747",
+      inputButtonBorderHover: grayMaxLight,
+
+      disableTextColor: "#858585",
     },
 
     emptyScreen: {
@@ -2946,12 +2918,23 @@ const Dark: TTheme = {
     background: black,
   },
 
-  submenu: {
-    lineColor: grayDarkStrong,
-    backgroundColor: black,
-    activeTextColor: white,
-    textColor: darkGrayDark,
-    bottomLineColor: darkLink,
+  tabs: {
+    gradientColor: black,
+    lineColor: "#474747",
+
+    textColorPrimary: "#657077",
+    activeTextColorPrimary: white,
+    hoverTextColorPrimary: white,
+    pressedTextColorPrimary: "#CCCCCC",
+    backgroundColorPrimary: "#333",
+
+    textColorSecondary: "#FFFFFF",
+    activeTextColorSecondary: "#333333",
+
+    backgroundColorSecondary: "#333",
+    hoverBackgroundColorSecondary: "#474747",
+    pressedBackgroundColorSecondary: "#282828",
+    activeBackgroundColorSecondary: "#FFFFFF",
   },
 
   hotkeys: {

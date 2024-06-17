@@ -976,36 +976,6 @@ export const getBaseTheme = () => {
       },
     },
 
-    tabsContainer: {
-      scrollbar: {
-        width: "100%",
-        height: "44px",
-      },
-
-      label: {
-        height: "30px",
-        border: `1px solid ${grayLightMid}`,
-        borderRadius: "16px",
-        minWidth: "fit-content",
-        marginRight: "8px",
-        width: "fit-content",
-
-        backgroundColor: blueLightMid,
-        hoverBackgroundColor: lightGrayHover,
-        disableBackgroundColor: grayLightMid,
-        activeBackgroundColor: grayLightMid,
-        activeSelectedBackgroundColor: `linear-gradient(0deg, ${blueLightMid}, ${blueLightMid}), linear-gradient(0deg, ${onWhiteColor}, ${onWhiteColor})`,
-
-        title: {
-          padding: "4px 16px",
-          overflow: "hidden",
-          color: white,
-          hoverColor: black,
-          disableColor: grayStrong,
-        },
-      },
-    },
-
     fieldContainer: {
       horizontal: {
         margin: "0 0 16px 0",
@@ -2148,8 +2118,10 @@ export const getBaseTheme = () => {
         hoverBackground: grayLight,
         selectedBackground: lightGrayHover,
 
-        inputButtonBorder: grayStrong,
-        inputButtonBorderHover: lightGrayDark,
+        inputButtonBorder: "#D0D5DA",
+        inputButtonBorderHover: grayMain,
+
+        disableTextColor: "#A3A9AE",
       },
 
       emptyScreen: {
@@ -2964,12 +2936,23 @@ export const getBaseTheme = () => {
       background: white,
     },
 
-    submenu: {
-      lineColor: grayLightMid,
-      backgroundColor: white,
-      textColor: lightGrayDark,
-      activeTextColor: link,
-      bottomLineColor: link,
+    tabs: {
+      gradientColor: white,
+      lineColor: "#eceef1",
+
+      textColorPrimary: "#657077",
+      activeTextColorPrimary: "",
+      hoverTextColorPrimary: "#A3A9AE",
+      pressedTextColorPrimary: "#555F65",
+      backgroundColorPrimary: white,
+
+      textColorSecondary: "#333333",
+      activeTextColorSecondary: white,
+
+      backgroundColorSecondary: white,
+      hoverBackgroundColorSecondary: "#F3F4F4",
+      pressedBackgroundColorSecondary: "#ECEEF1",
+      activeBackgroundColorSecondary: "#265A8F",
     },
 
     hotkeys: {

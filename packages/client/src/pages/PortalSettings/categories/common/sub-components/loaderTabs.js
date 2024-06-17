@@ -24,11 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { default as SectionHeaderContent } from "./Header";
-export { default as SectionBodyContent } from "./Body";
-export { default as AccountsSectionBodyContent } from "./AccountsBody";
-export { default as SettingsSectionBodyContent } from "./SettingsBody";
-export { default as SectionFilterContent } from "./Filter";
-export { default as SectionPagingContent } from "./Paging";
-export { default as SectionWarningContent } from "./Warning";
-export { default as SectionSubmenuContent } from "./Tabs";
+import styled, { css } from "styled-components";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { mobileMore } from "@docspace/shared/utils";
+
+const StyledLoader = styled.div`
+  margin-top: -4px;
+
+  .loader {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 4px;
+          `
+        : css`
+            padding-right: 4px;
+          `}
+  }
+
+  @media ${mobileMore} {
+    margin-top: -9px;
+  }
+`;
+
+const LoaderTabs = () => {
+  return (
+    <StyledLoader>
+      <RectangleSkeleton width="100px" height="28px" className="loader" />
+      <RectangleSkeleton width="100px" height="28px" />
+    </StyledLoader>
+  );
+};
+
+export default LoaderTabs;

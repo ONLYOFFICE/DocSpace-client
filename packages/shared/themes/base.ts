@@ -1023,37 +1023,6 @@ export const getBaseTheme = () => {
       },
     },
 
-    tabsContainer: {
-      scrollbar: {
-        width: "100%",
-        height: "44px",
-      },
-
-      label: {
-        height: " 30px",
-        border: "1px solid #ECEEF1",
-        borderRadius: "16px",
-        minWidth: "fit-content",
-        marginRight: "8px",
-        width: "fit-content",
-
-        backgroundColor: blueLightMid,
-        hoverBackgroundColor: "#F3F4F4",
-        disableBackgroundColor: grayLightMid,
-        activeBackgroundColor: "#ECEEF1",
-        activeSelectedBackgroundColor:
-          "linear-gradient(0deg, #265a8f, #265a8f), linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1))",
-
-        title: {
-          padding: "4px 16px",
-          overflow: "hidden",
-          color: white,
-          hoverColor: black,
-          disableColor: grayMid,
-        },
-      },
-    },
-
     fieldContainer: {
       horizontal: {
         margin: "0 0 16px 0",
@@ -3203,12 +3172,23 @@ export const getBaseTheme = () => {
       background: white,
     },
 
-    submenu: {
+    tabs: {
+      gradientColor: white,
       lineColor: "#eceef1",
-      backgroundColor: white,
-      textColor: "#657077",
-      activeTextColor: "#316DAA",
-      bottomLineColor: "#316DAA",
+
+      textColorPrimary: "#657077",
+      activeTextColorPrimary: "",
+      hoverTextColorPrimary: "#A3A9AE",
+      pressedTextColorPrimary: "#555F65",
+      backgroundColorPrimary: white,
+
+      textColorSecondary: "#333333",
+      activeTextColorSecondary: white,
+
+      backgroundColorSecondary: white,
+      hoverBackgroundColorSecondary: "#F3F4F4",
+      pressedBackgroundColorSecondary: "#ECEEF1",
+      activeBackgroundColorSecondary: "#265A8F",
     },
 
     hotkeys: {

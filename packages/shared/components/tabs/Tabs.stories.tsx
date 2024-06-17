@@ -24,21 +24,52 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export type TSubmenuItem = {
-  id: string;
-  name: string;
-  content: React.ReactNode;
-  onClick?: () => void;
+import { Meta, StoryObj } from "@storybook/react";
+import { Tabs } from "./Tabs";
+
+import { data } from "./data";
+import { TabsProps } from "./Tabs.types";
+import { TabsTypes } from "./Tabs.enums";
+
+const meta = {
+  title: "Components/Tabs",
+  component: Tabs,
+} satisfies Meta<typeof Tabs>;
+type Story = StoryObj<typeof meta>;
+
+export default meta;
+
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
+  <div
+    style={{
+      height: "170px",
+    }}
+  >
+    {children}
+  </div>
+);
+
+const Template = (args: TabsProps) => (
+  <Wrapper>
+    <Tabs {...args} />
+  </Wrapper>
+);
+
+export const Default: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    items: data,
+    selectedItemId: data[0].id,
+    onSelect: () => {},
+  },
 };
 
-export interface SubmenuProps {
-  /** List of the elements */
-  data: TSubmenuItem[];
-  /** Specifies the first item or the item's index to be displayed in the submenu. */
-  startSelect: number | TSubmenuItem;
-  /** Property that allows explicitly selecting content passed through an external operation  */
-  forsedActiveItemId?: number | string;
-  /** Sets a callback function that is triggered when the submenu item is selected */
-  onSelect?: (item: TSubmenuItem) => void;
-  topProps?: string;
-}
+export const Secondary: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    items: data,
+    type: TabsTypes.Secondary,
+    selectedItemId: data[0].id,
+    onSelect: () => {},
+  },
+};

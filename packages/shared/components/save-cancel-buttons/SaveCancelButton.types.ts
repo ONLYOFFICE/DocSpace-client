@@ -60,4 +60,5 @@ export interface SaveCancelButtonProps {
   additionalClassSaveButton?: string;
   additionalClassCancelButton?: string;
   saveButtonDisabled?: boolean;
+  getTopComponent?: () => React.ReactNode;
 }

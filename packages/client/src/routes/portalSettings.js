@@ -35,6 +35,9 @@ import PrivateRoute from "../components/PrivateRouteWrapper";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
 import { generalRoutes } from "./general";
+import SettingsContainer from "../pages/PortalSettings/categories/integration/LDAP/sub-components/SettingsContainer";
+import SyncContainer from "../pages/PortalSettings/categories/integration/LDAP/sub-components/SyncContainer";
+import StyledLdapPage from "../pages/PortalSettings/categories/integration/LDAP/styled-components/StyledLdapPage";
 
 const PortalSettings = loadable(() =>
   componentLoader(() => import("../pages/PortalSettings")),
@@ -480,19 +483,31 @@ const PortalSettingsRoutes = {
       element: <Navigate to="integration/third-party-services" replace />,
     },
     {
+      path: "integration/ldap",
+      element: <Integration />,
+    },
+    {
+      path: "integration/ldap/settings",
+      element: <SettingsContainer />,
+    },
+    {
+      path: "integration/ldap/sync-data",
+      element: <SyncContainer />,
+    },
+    {
       path: "integration/third-party-services",
       element: <Integration />,
     },
     {
-      path: "integration/single-sign-on",
+      path: "integration/sso",
       element: <Integration />,
     },
     {
-      path: "integration/single-sign-on/sp-settings",
+      path: "integration/sso/settings",
       element: <SPSettings />,
     },
     {
-      path: "integration/single-sign-on/sp-metadata",
+      path: "integration/sso/metadata",
       element: <SPMetadata />,
     },
     {

@@ -25,14 +25,25 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useState, useTransition, Suspense } from "react";
+
+import { Tabs } from "@docspace/shared/components/tabs";
+
+import { Box } from "@docspace/shared/components/box";
+import { inject, observer } from "mobx-react";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import config from "PACKAGE_FILE";
+
+import { useNavigate, useLocation } from "react-router-dom";
+import JavascriptSDK from "./JavascriptSDK";
+import Webhooks from "./Webhooks";
+
+import Api from "./Api";
+
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import { Submenu } from "@docspace/shared/components/submenu";
 import { Box } from "@docspace/shared/components/box";
-import AppLoader from "@docspace/shared/components/app-loader";
 import { Badge } from "@docspace/shared/components/badge";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -47,17 +58,13 @@ import OAuth from "./OAuth";
 
 import SSOLoader from "./sub-components/ssoLoader";
 
-const StyledSubmenu = styled(Submenu)`
-  .sticky {
-    z-index: 201;
-  }
-`;
-
 const DeveloperToolsWrapper = (props) => {
   const { loadBaseInfo, currentDeviceType } = props;
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [currentTabId, setCurrentTabId] = useState();
 
   const { t, ready } = useTranslation([
     "JavascriptSdk",
@@ -118,21 +125,19 @@ const DeveloperToolsWrapper = (props) => {
     },
   ];
 
-  const [currentTab, setCurrentTab] = useState(
-    data.findIndex((item) => location.pathname.includes(item.id)),
-  );
-
   const load = async () => {
     //await loadBaseInfo();
   };
 
   useEffect(() => {
     const path = location.pathname;
-    const currentTab = data.findIndex((item) => path.includes(item.id));
-    if (currentTab !== -1) {
-      setCurrentTab(currentTab);
+    const currentTab = data.find((item) => path.includes(item.id));
+    if (currentTab !== -1 && data.length) {
+      setCurrentTabId(currentTab.id);
     }
-  }, []);
+
+    setIsLoading(true);
+  }, [location.pathname]);
 
   useEffect(() => {
     ready && startTransition(load);
@@ -141,24 +146,23 @@ const DeveloperToolsWrapper = (props) => {
   const onSelect = (e) => {
     navigate(
       combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         config.homepage,
         `/portal-settings/developer-tools/${e.id}`,
       ),
     );
+    setCurrentTabId(e.id);
   };
 
-  const loaders = [<SSOLoader />, <AppLoader />];
+  if (!isLoading) return <SSOLoader />;
 
   return (
-    <Suspense fallback={loaders[currentTab] || <AppLoader />}>
-      <StyledSubmenu
-        data={data}
-        startSelect={currentTab}
-        onSelect={onSelect}
-        topProps={SECTION_HEADER_HEIGHT[currentDeviceType]}
-      />
-    </Suspense>
+    <Tabs
+      items={data}
+      selectedItemId={currentTabId}
+      onSelect={onSelect}
+      stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+    />
   );
 };
 

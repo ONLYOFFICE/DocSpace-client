@@ -93,6 +93,7 @@ const Badges = ({
   filter,
   infoPanelVisible,
   isSSO = false,
+  isLDAP = false,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -105,10 +106,17 @@ const Badges = ({
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
-  const onClickSSO = () => {
+  const onSSOClick = () => {
     if (filter.accountLoginType === AccountLoginType.SSO) return;
     const newFilter = filter.clone();
     newFilter.accountLoginType = AccountLoginType.SSO;
+    navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
+  };
+
+  const onLDAPClick = () => {
+    if (filter.accountLoginType === AccountLoginType.LDAP) return;
+    const newFilter = filter.clone();
+    newFilter.accountLoginType = AccountLoginType.LDAP;
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
@@ -117,6 +125,19 @@ const Badges = ({
       className="badges additional-badges"
       infoPanelVisible={infoPanelVisible}
     >
+      {isLDAP && (
+        <Badge
+          className="accounts-badge"
+          label={t("Common:LDAP")}
+          color={"#FFFFFF"}
+          backgroundColor="#8570BD"
+          fontSize={"9px"}
+          fontWeight={800}
+          noHover
+          lineHeight={"13px"}
+          onClick={onLDAPClick}
+        />
+      )}
       {isSSO && (
         <Badge
           className="accounts-badge"
@@ -127,7 +148,7 @@ const Badges = ({
           fontWeight={800}
           noHover
           lineHeight={"13px"}
-          onClick={onClickSSO}
+          onClick={onSSOClick}
         />
       )}
       {!withoutPaid && isPaid && (

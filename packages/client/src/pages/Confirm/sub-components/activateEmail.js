@@ -46,7 +46,7 @@ const ActivateEmail = ({ updateEmailActivationStatus, linkData }) => {
       .then((res) => {
         tryRedirectTo(
           combineUrl(
-            window.DocSpaceConfig?.proxy?.url,
+            window.ClientConfig?.proxy?.url,
             `/login?confirmedEmail=${email}`,
           ),
         );
@@ -66,7 +66,7 @@ const ActivateEmail = ({ updateEmailActivationStatus, linkData }) => {
 
         tryRedirectTo(
           combineUrl(
-            window.DocSpaceConfig?.proxy?.url,
+            window.ClientConfig?.proxy?.url,
             `/login/error?message=${errorMessage}`,
           ),
         );

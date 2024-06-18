@@ -101,7 +101,7 @@ export const StyledHeader = styled.div`
     margin-bottom: 32px;
   }
 
-  .docspace-logo {
+  .portal-logo {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -133,7 +133,7 @@ export const StyledBody = styled.div`
     margin-bottom: 32px;
   }
 
-  .docspace-logo {
+  .portal-logo {
     display: flex;
     align-items: center;
     justify-content: center;

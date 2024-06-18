@@ -29,6 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Box } from "@docspace/shared/components/box";
+import { Text } from "@docspace/shared/components/text";
 
 import HideButton from "./sub-components/HideButton";
 import SPSettings from "./SPSettings";
@@ -59,7 +60,7 @@ const SingleSignOn = (props) => {
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
   useEffect(() => {
-    isSSOAvailable && init();
+    isSSOAvailable && !isInit && init();
     setDocumentTitle(t("Settings:SingleSignOn"));
   }, []);
 
@@ -71,7 +72,10 @@ const SingleSignOn = (props) => {
       hideMetadata={spMetadata}
       isSettingPaid={isSSOAvailable}
     >
-      <ToggleSSO isSSOAvailable={isSSOAvailable} />
+      <Text className="intro-text settings_unavailable" noSelect>
+        {t("SsoIntro")}
+      </Text>
+
       {isMobileView ? (
         <MobileView
           isSSOAvailable={isSSOAvailable}
@@ -79,6 +83,8 @@ const SingleSignOn = (props) => {
         />
       ) : (
         <>
+          <ToggleSSO />
+
           <HideButton
             id="sp-settings-hide-button"
             text={t("ServiceProviderSettings", { organizationName })}

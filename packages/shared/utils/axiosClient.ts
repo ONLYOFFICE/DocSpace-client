@@ -82,9 +82,9 @@ class AxiosClient {
   initCSR = () => {
     this.isSSR = false;
     const origin =
-      window.DocSpaceConfig?.api?.origin || apiOrigin || window.location.origin;
-    const proxy = window.DocSpaceConfig?.proxy?.url || proxyURL;
-    const prefix = window.DocSpaceConfig?.api?.prefix || apiPrefix;
+      window.ClientConfig?.api?.origin || apiOrigin || window.location.origin;
+    const proxy = window.ClientConfig?.proxy?.url || proxyURL;
+    const prefix = window.ClientConfig?.api?.prefix || apiPrefix;
 
     let headers = null;
 
@@ -124,7 +124,7 @@ class AxiosClient {
     console.log("initCSR", {
       defaultConfig,
       apxiosConfig,
-      DocSpaceConfig: window.DocSpaceConfig,
+      ClientConfig: window.ClientConfig,
       paymentsURL,
     });
 
@@ -263,7 +263,7 @@ class AxiosClient {
             break;
           case 403: {
             const pathname = window.location.pathname;
-            const isFrame = window?.DocSpaceConfig?.isFrame;
+            const isFrame = window?.ClientConfig?.isFrame;
 
             const isArchived = pathname.indexOf("/rooms/archived") !== -1;
 

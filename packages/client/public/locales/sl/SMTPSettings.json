@@ -1,5 +1,4 @@
-{
-  "Authentication": "Preverjanje pristnosti",
+﻿{
   "AuthViaNTLM": "Avtentikacija preko NTLM",
   "EnableSSL": "Omogoči SSL",
   "EnterDomain": "Vnesi domeno",
@@ -12,6 +11,5 @@
   "Port": "Port",
   "SenderDisplayName": "Pošiljateljevo prikazno ime",
   "SenderEmailAddress": "Pošiljateljev e-naslov",
-  "SendTestMail": "Pošlji poskusno e-pošto",
-  "SuccessfullyCompletedOperation": "Operacija je bila uspešno zaključena."
+  "SendTestMail": "Pošlji poskusno e-pošto"
 }

@@ -1,5 +1,4 @@
-{
-  "Authentication": "Tunnistus",
+﻿{
   "AuthViaNTLM": "Todennus NTLM:n kautta",
   "EnableSSL": "Ota käyttöön SSL",
   "EnterDomain": "Syötä verkkotunnus",
@@ -12,6 +11,5 @@
   "Port": "Portti",
   "SenderDisplayName": "Lähettäjän nimi",
   "SenderEmailAddress": "Lähettäjän sähköpostiosoite",
-  "SendTestMail": "Lähetä testiviesti",
-  "SuccessfullyCompletedOperation": "Toiminto on valmis."
+  "SendTestMail": "Lähetä testiviesti"
 }

@@ -1295,6 +1295,9 @@ export async function getDocumentServiceLocation(version?: number | string) {
 
 export async function changeDocumentServiceLocation(
   docServiceUrl: string,
+  jwtSecret: string,
+  isDisabledCertificat: boolean,
+  jwtHeader: string,
   internalUrl: string,
   portalUrl: string,
 ) {

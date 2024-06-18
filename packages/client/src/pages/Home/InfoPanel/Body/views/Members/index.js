@@ -83,8 +83,6 @@ const Members = ({
   const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
 
-  console.log("Members -> membersIsLoading", { useContext, ScrollbarContext });
-
   const scrollContext = useContext(ScrollbarContext);
 
   useEffect(() => {

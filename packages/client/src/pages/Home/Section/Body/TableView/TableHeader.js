@@ -366,7 +366,6 @@ class FilesTableHeader extends React.Component {
         minWidth: 70,
         resizable: false,
         isShort: true,
-        onChange: this.onColumnChange,
       });
     }
 

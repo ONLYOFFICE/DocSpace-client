@@ -953,7 +953,7 @@ const SectionHeaderContent = (props) => {
 
   const titleIcon =
     (isPublicRoomType && !isPublicRoom && PublicRoomIconUrl) ||
-    (isVirtualDataRoomType && LifetimeRoomIconUrl);
+    (isVirtualDataRoomType && selectedFolder.lifetime && LifetimeRoomIconUrl);
 
   const titleIconTooltip = selectedFolder.lifetime
     ? t("Files:RoomFilesLifetime", {

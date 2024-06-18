@@ -237,6 +237,7 @@ class SelectedFolderStore {
     this.type = null;
     this.inRoom = false;
     this.parentRoomType = null;
+    this.lifetime = null;
   };
 
   setParentId = (parentId: number) => {
@@ -259,9 +260,14 @@ class SelectedFolderStore {
     this.shared = shared;
   };
 
-  updateEditedSelectedRoom = (title = this.title, tags = this.tags) => {
+  updateEditedSelectedRoom = (
+    title = this.title,
+    tags = this.tags,
+    lifetime = this.lifetime,
+  ) => {
     this.title = title;
     this.tags = tags;
+    this.lifetime = lifetime;
   };
 
   setInRoom = (inRoom: boolean) => {

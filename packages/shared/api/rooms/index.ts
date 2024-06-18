@@ -480,14 +480,13 @@ export function resetRoomQuota(roomIds) {
 
 export function changeRoomLifetime(
   roomId: string | number,
-  lifetime: TRoomLifetime,
+  lifetime: TRoomLifetime | null,
 ) {
+  const data = lifetime ? { ...lifetime } : null;
   const options = {
     method: "put",
     url: `files/rooms/${roomId}/lifetime`,
-    data: {
-      ...lifetime,
-    },
+    data,
   };
 
   return request(options);

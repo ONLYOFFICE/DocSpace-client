@@ -541,7 +541,7 @@ export type TSelectorItem = TSelectorItemType & {
   isSelected?: boolean;
   isDisabled?: boolean;
   disabledText?: string;
-  lifetimeTooltip?: string;
+  lifetimeTooltip?: string | null;
 };
 
 export type Data = {

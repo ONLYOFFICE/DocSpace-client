@@ -249,7 +249,11 @@ const EditRoomEvent = ({
       if (withPaging) await updateCurrentFolder(null, currentFolderId);
 
       if (item.id === currentFolderId) {
-        updateEditedSelectedRoom(editRoomParams.title, tags);
+        updateEditedSelectedRoom(
+          editRoomParams.title,
+          tags,
+          roomParams.lifetime,
+        );
         if (item.logo.original && !roomParams.icon.uploadedFile) {
           removeLogoPaths();
           // updateInfoPanelSelection();

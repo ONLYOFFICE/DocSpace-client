@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { TextInput } from "@docspace/shared/components/text-input";
@@ -46,7 +46,7 @@ const StyledFileLifetime = styled.div`
 
 const FileLifetime = ({ t, roomParams, setRoomParams }) => {
   const lifetime = roomParams.lifetime ?? {
-    value: "12",
+    value: 12,
     deletePermanently: false,
     period: 0,
   };
@@ -93,6 +93,15 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
   const [inputValue, setInputValue] = useState(selectedInputValue);
   const [selectedDate, setSelectedDate] = useState(selectedDateOption);
   const [selectedDelete, setSelectedDelete] = useState(selectedDeleteOptions);
+
+  useEffect(() => {
+    if (!roomParams.lifetime) {
+      setRoomParams({
+        ...roomParams,
+        lifetime,
+      });
+    }
+  }, [roomParams.lifetime]);
 
   const onChange = (e) => {
     // /^(?:[1-9][0-9]*|0)$/

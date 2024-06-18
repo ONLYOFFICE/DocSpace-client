@@ -87,6 +87,7 @@ import {
 } from "SRC_DIR/helpers/utils";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
+import { changeRoomLifetime } from "@docspace/shared/api/rooms";
 
 class FilesActionStore {
   settingsStore;
@@ -2712,6 +2713,10 @@ class FilesActionStore {
 
     await deleteFilesFromRecent(fileIds);
     await refreshFiles();
+  };
+
+  changeRoomLifetime = (roomId, lifetime) => {
+    return changeRoomLifetime(roomId, lifetime);
   };
 }
 

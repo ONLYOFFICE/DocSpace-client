@@ -78,6 +78,7 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams }) => {
   };
 
   const onChangeFileLifetime = () => {
+    if (fileLifetimeChecked) setRoomParams({ ...roomParams, lifetime: null });
     setFileLifetimeChecked(!fileLifetimeChecked);
   };
 

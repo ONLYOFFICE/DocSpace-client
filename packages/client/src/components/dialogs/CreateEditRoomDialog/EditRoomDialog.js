@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
-
+import isEqual from "lodash/isEqual";
 import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import DialogHeader from "./sub-components/DialogHeader";
@@ -77,7 +77,7 @@ const EditRoomDialog = ({
         prevParams.icon.uploadedFile === currentParams.icon.uploadedFile) &&
       prevParams.quota === currentParams.quota &&
       prevParams.indexing === currentParams.indexing &&
-      prevParams.lifetime === currentParams.lifetime
+      isEqual(prevParams.lifetime, currentParams.lifetime)
     );
   };
 

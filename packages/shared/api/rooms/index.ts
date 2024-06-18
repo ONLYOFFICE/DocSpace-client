@@ -35,7 +35,7 @@ import {
   toUrlParams,
 } from "../../utils/common";
 import RoomsFilter from "./filter";
-import { TGetRooms } from "./types";
+import { TGetRooms, TRoomLifetime } from "./types";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
   let params;
@@ -473,6 +473,21 @@ export function resetRoomQuota(roomIds) {
     method: "put",
     url: "files/rooms/resetquota",
     data,
+  };
+
+  return request(options);
+}
+
+export function changeRoomLifetime(
+  roomId: string | number,
+  lifetime: TRoomLifetime,
+) {
+  const options = {
+    method: "put",
+    url: `files/rooms/${roomId}/lifetime`,
+    data: {
+      ...lifetime,
+    },
   };
 
   return request(options);

@@ -44,7 +44,8 @@ const StyledCertificatesTable = styled.div`
       display: flex;
       align-items: center;
 
-      border-left: 1px solid #d0d5da;
+      border-left: ${(props) =>
+        props.theme.client.settings.integration.sso.border};
       height: 13px;
       padding-left: 8px;
     }

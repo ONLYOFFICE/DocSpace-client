@@ -58,6 +58,10 @@ const WorkspacesContainer = styled.div`
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 20px;
+
+    .link {
+      color: ${(props) => props.theme.client.settings.migration.linkColor};
+    }
   }
 
   .workspace-item {
@@ -75,7 +79,8 @@ const WorkspacesContainer = styled.div`
     cursor: pointer;
 
     &:hover {
-      border-color: #4781d1;
+      border-color: ${(props) =>
+        props.theme.client.settings.migration.workspaceHover};
     }
 
     &:active {

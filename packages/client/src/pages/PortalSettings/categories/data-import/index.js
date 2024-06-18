@@ -150,9 +150,9 @@ const DataImport = ({
           >
             <ReactSVG src={workspace.logo} className="workspace-logo" />
             <Link
+              className="link"
               type="page"
               fontWeight="600"
-              color="#4781D1"
               isHovered
               isTextOverflow
             >

@@ -53,7 +53,7 @@ const StyledModalDialog = styled(ModalDialog)`
     }
 
     a {
-      color: #4781d1;
+      color: ${(props) => props.theme.dialogs.linkColor};
     }
 
     .debug-info-body,

@@ -50,6 +50,17 @@ export const LocationHeader = styled.div`
   }
 `;
 
+export const LocationSubheader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22px;
+`;
+
 export const LocationForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -77,8 +88,26 @@ export const LocationForm = styled.form`
       }
     }
 
+    .checkbox {
+      margin-top: 4px;
+    }
+
+    .password-field-wrapper {
+      width: 100%;
+    }
+
+    .group-label {
+      display: flex;
+      gap: 4px;
+    }
+
+    .label-subtitle {
+      color: ${(props) => props.theme.client.settings.common.descriptionColor};
+    }
+
     .subtitle {
       color: ${(props) => props.theme.client.settings.common.descriptionColor};
+      font-size: 12px;
     }
   }
 `;

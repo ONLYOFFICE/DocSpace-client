@@ -34,6 +34,8 @@ import { Button } from "@docspace/shared/components/button";
 import { InputBlock } from "@docspace/shared/components/input-block";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { PasswordInput } from "@docspace/shared/components/password-input";
 import { toastr } from "@docspace/shared/components/toast";
 import { SettingsDSConnectSkeleton } from "@docspace/shared/skeletons/settings";
 import { DeviceType } from "@docspace/shared/enums";
@@ -43,6 +45,7 @@ import { PRODUCT_NAME } from "@docspace/shared/constants";
 const URL_REGEX = /^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
 const DNS_PLACEHOLDER = `${window.location.protocol}//<docspace-dns-name>/`;
 const EDITOR_URL_PLACEHOLDER = `${window.location.protocol}//<editors-dns-name>/`;
+const AUTHORIZATION_HEADER_INITIAL_STATE = "AuthorizationJwt";
 
 const DocumentService = ({
   getDocumentServiceLocation,
@@ -62,6 +65,17 @@ const DocumentService = ({
   const [portalUrlIsValid, setPortalUrlIsValid] = useState(true);
   const [docServiceUrl, setDocServiceUrl] = useState("");
   const [docServiceUrlIsValid, setDocServiceUrlIsValid] = useState(true);
+
+  const [secretKey, setSecretKey] = useState("");
+
+  const [isDisabledCertificat, setIsDisabledCertificat] = useState(false);
+
+  const [isShowAdvancedSettings, setIsShowAdvancedSettings] = useState(false);
+
+  const [authorizationHeader, setAuthorizationHeader] = useState(
+    AUTHORIZATION_HEADER_INITIAL_STATE,
+  );
+
   const [internalUrl, setInternalUrl] = useState("");
   const [internalUrlIsValid, setInternalUrlIsValid] = useState(true);
 
@@ -91,6 +105,22 @@ const DocumentService = ({
     setDocServiceUrl(e.target.value);
     if (!e.target.value) setDocServiceUrlIsValid(true);
     else setDocServiceUrlIsValid(URL_REGEX.test(e.target.value));
+  };
+
+  const onChangeIsDisabledCertificat = () => {
+    setIsDisabledCertificat((prevState) => !prevState);
+  };
+
+  const onChangeSecretKey = (e) => {
+    setSecretKey(e.target.value);
+  };
+
+  const onChangeIsShowAdvancedSettings = () => {
+    setIsShowAdvancedSettings((prevState) => !prevState);
+  };
+
+  const onChangeAuthorizationHeader = (e) => {
+    setAuthorizationHeader(e.target.value);
   };
 
   const onChangeInternalUrl = (e) => {
@@ -213,66 +243,138 @@ const DocumentService = ({
                 example: EDITOR_URL_PLACEHOLDER,
               })}
             </Text>
+            <Checkbox
+              id={"isDisabledCertificat"}
+              label={t("Settings:DocumentServiceDisableCertificat")}
+              className="checkbox"
+              isChecked={isDisabledCertificat}
+              onChange={onChangeIsDisabledCertificat}
+              isDisabled={isSaveLoading || isResetLoading}
+            />
           </div>
           <div className="input-wrapper">
-            <Label
-              htmlFor="internalAdress"
-              text={t("Settings:DocumentServiceLocationUrlInternal", {
-                productName: PRODUCT_NAME,
-              })}
-            />
-            <InputBlock
-              id="internalAdress"
-              type="text"
-              autoComplete="off"
+            <div className="group-label">
+              <Label
+                htmlFor="secretKey"
+                text={t("Settings:DocumentServiceSecretKey")}
+              />
+              <Text className="label-subtitle">
+                {`(${t("Settings:DocumentServiceSecretKeySubtitle")})`}
+              </Text>
+            </div>
+            <PasswordInput
+              id="secretKey"
+              type="password"
+              simpleView
               tabIndex={2}
               scale
-              iconButtonClassName={"icon-button"}
-              value={internalUrl}
-              onChange={onChangeInternalUrl}
-              placeholder={EDITOR_URL_PLACEHOLDER}
-              hasError={!internalUrlIsValid}
+              inputValue={secretKey}
+              onChange={onChangeSecretKey}
               isDisabled={isSaveLoading || isResetLoading}
             />
             <Text className="subtitle">
-              {t("Common:Example", {
-                example: EDITOR_URL_PLACEHOLDER,
-              })}
+              {t("Settings:DocumentServiceSecretKeySubtitle")}
             </Text>
           </div>
-          <div className="input-wrapper">
-            <Label
-              htmlFor="portalAdress"
-              text={t("Settings:DocumentServiceLocationUrlPortal", {
-                productName: PRODUCT_NAME,
-              })}
-            />
-            <InputBlock
-              id="portalAdress"
-              type="text"
-              autoComplete="off"
-              tabIndex={3}
-              scale
-              iconButtonClassName={"icon-button"}
-              value={portalUrl}
-              onChange={onChangePortalUrl}
-              placeholder={DNS_PLACEHOLDER}
-              hasError={!portalUrlIsValid}
-              isDisabled={isSaveLoading || isResetLoading}
-            />
-            <Text className="subtitle">
-              {t("Common:Example", {
-                example: `${window.location.origin}`,
-              })}
-            </Text>
-          </div>
+        </div>
+
+        <div className="form-inputs">
+          <Styled.LocationSubheader>
+            {t("Settings:DocumentServiceAdvancedSettings")}
+            <Link
+              className="third-party-link"
+              isHovered
+              onClick={onChangeIsShowAdvancedSettings}
+            >
+              {isShowAdvancedSettings
+                ? t("Settings:DocumentServiceShow")
+                : t("Settings:DocumentServiceHide")}
+            </Link>
+          </Styled.LocationSubheader>
+
+          {isShowAdvancedSettings && (
+            <>
+              <div className="input-wrapper">
+                <Label
+                  htmlFor="authorizationHeader"
+                  text={t("Settings:DocumentServiceAuthorizationHeader")}
+                />
+                <InputBlock
+                  id="authorizationHeader"
+                  type="text"
+                  autoComplete="off"
+                  tabIndex={2}
+                  scale
+                  iconButtonClassName={"icon-button"}
+                  value={authorizationHeader}
+                  onChange={onChangeAuthorizationHeader}
+                  isDisabled={isSaveLoading || isResetLoading}
+                />
+                <Text className="subtitle">
+                  {t("Settings:DocumentServiceAuthorizationHeaderSubtitle")}
+                </Text>
+              </div>
+              <div className="input-wrapper">
+                <Label
+                  htmlFor="internalAdress"
+                  text={t("Settings:DocumentServiceLocationUrlInternal", {
+                    productName: PRODUCT_NAME,
+                  })}
+                />
+                <InputBlock
+                  id="internalAdress"
+                  type="text"
+                  autoComplete="off"
+                  tabIndex={2}
+                  scale
+                  iconButtonClassName={"icon-button"}
+                  value={internalUrl}
+                  onChange={onChangeInternalUrl}
+                  placeholder={EDITOR_URL_PLACEHOLDER}
+                  hasError={!internalUrlIsValid}
+                  isDisabled={isSaveLoading || isResetLoading}
+                />
+                <Text className="subtitle">
+                  {t("Common:Example", {
+                    example: EDITOR_URL_PLACEHOLDER,
+                  })}
+                </Text>
+              </div>
+              <div className="input-wrapper">
+                <Label
+                  htmlFor="portalAdress"
+                  text={t("Settings:DocumentServiceLocationUrlPortal", {
+                    productName: PRODUCT_NAME,
+                  })}
+                />
+                <InputBlock
+                  id="portalAdress"
+                  type="text"
+                  autoComplete="off"
+                  tabIndex={3}
+                  scale
+                  iconButtonClassName={"icon-button"}
+                  value={portalUrl}
+                  onChange={onChangePortalUrl}
+                  placeholder={DNS_PLACEHOLDER}
+                  hasError={!portalUrlIsValid}
+                  isDisabled={isSaveLoading || isResetLoading}
+                />
+                <Text className="subtitle">
+                  {t("Common:Example", {
+                    example: `${window.location.origin}`,
+                  })}
+                </Text>
+              </div>
+            </>
+          )}
         </div>
 
         <SaveCancelButtons
           onSaveClick={onSubmit}
           onCancelClick={onReset}
           saveButtonLabel={t("Common:SaveButton")}
-          cancelButtonLabel={t("Common:Restore")}
+          cancelButtonLabel={t("Common:Reset")}
           reminderText={t("Settings:YouHaveUnsavedChanges")}
           saveButtonDisabled={saveButtonDisabled}
           disableRestoreToDefault={

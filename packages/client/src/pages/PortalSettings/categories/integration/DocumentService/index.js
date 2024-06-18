@@ -60,24 +60,20 @@ const DocumentService = ({
   const [isSaveLoading, setSaveIsLoading] = useState(false);
   const [isResetLoading, setResetIsLoading] = useState(false);
 
-  const [isDefaultSettings, setIsDefaultSettings] = useState(false);
   const [portalUrl, setPortalUrl] = useState("");
   const [portalUrlIsValid, setPortalUrlIsValid] = useState(true);
-  const [docServiceUrl, setDocServiceUrl] = useState("");
-  const [docServiceUrlIsValid, setDocServiceUrlIsValid] = useState(true);
-
-  const [secretKey, setSecretKey] = useState("");
-
+  const [jwtSecret, setJwtSecret] = useState("");
   const [isDisabledCertificat, setIsDisabledCertificat] = useState(false);
-
-  const [isShowAdvancedSettings, setIsShowAdvancedSettings] = useState(false);
-
-  const [authorizationHeader, setAuthorizationHeader] = useState(
+  const [jwtHeader, setJwtHeader] = useState(
     AUTHORIZATION_HEADER_INITIAL_STATE,
   );
-
+  const [docServiceUrl, setDocServiceUrl] = useState("");
+  const [docServiceUrlIsValid, setDocServiceUrlIsValid] = useState(true);
   const [internalUrl, setInternalUrl] = useState("");
   const [internalUrlIsValid, setInternalUrlIsValid] = useState(true);
+
+  const [isDefaultSettings, setIsDefaultSettings] = useState(false);
+  const [isShowAdvancedSettings, setIsShowAdvancedSettings] = useState(false);
 
   const [initPortalUrl, setInitPortalUrl] = useState("");
   const [initDocServiceUrl, setInitDocServiceUrl] = useState("");
@@ -111,16 +107,16 @@ const DocumentService = ({
     setIsDisabledCertificat((prevState) => !prevState);
   };
 
-  const onChangeSecretKey = (e) => {
-    setSecretKey(e.target.value);
+  const onChangeJwtSecret = (e) => {
+    setJwtSecret(e.target.value);
   };
 
   const onChangeIsShowAdvancedSettings = () => {
     setIsShowAdvancedSettings((prevState) => !prevState);
   };
 
-  const onChangeAuthorizationHeader = (e) => {
-    setAuthorizationHeader(e.target.value);
+  const onChangeJwtHeader = (e) => {
+    setJwtHeader(e.target.value);
   };
 
   const onChangeInternalUrl = (e) => {
@@ -138,13 +134,22 @@ const DocumentService = ({
   const onSubmit = (e) => {
     e.preventDefault();
     setSaveIsLoading(true);
-    changeDocumentServiceLocation(docServiceUrl, internalUrl, portalUrl)
+
+    changeDocumentServiceLocation(
+      docServiceUrl,
+      jwtSecret,
+      isDisabledCertificat,
+      jwtHeader,
+      internalUrl,
+      portalUrl,
+    )
       .then((result) => {
         toastr.success(t("Common:ChangesSavedSuccessfully"));
 
         setIsDefaultSettings(result?.isDefault || false);
 
         setPortalUrl(result?.docServicePortalUrl);
+
         setInternalUrl(result?.docServiceUrlInternal);
         setDocServiceUrl(result?.docServiceUrl);
 
@@ -191,8 +196,6 @@ const DocumentService = ({
 
   if (isLoading || !ready) return <SettingsDSConnectSkeleton />;
 
-  const buttonSize =
-    currentDeviceType === DeviceType.desktop ? "small" : "normal";
   const saveButtonDisabled =
     isFormEmpty ||
     isValuesInit ||
@@ -255,25 +258,25 @@ const DocumentService = ({
           <div className="input-wrapper">
             <div className="group-label">
               <Label
-                htmlFor="secretKey"
-                text={t("Settings:DocumentServiceSecretKey")}
+                htmlFor="jwtSecret"
+                text={t("Settings:DocumentServiceJwtSecret")}
               />
               <Text className="label-subtitle">
-                {`(${t("Settings:DocumentServiceSecretKeySubtitle")})`}
+                {`(${t("Settings:DocumentServiceJwtSecretSubtitle")})`}
               </Text>
             </div>
             <PasswordInput
-              id="secretKey"
+              id="jwtSecret"
               type="password"
               simpleView
               tabIndex={2}
               scale
-              inputValue={secretKey}
-              onChange={onChangeSecretKey}
+              inputValue={jwtSecret}
+              onChange={onChangeJwtSecret}
               isDisabled={isSaveLoading || isResetLoading}
             />
             <Text className="subtitle">
-              {t("Settings:DocumentServiceSecretKeySubtitle")}
+              {t("Settings:DocumentServiceJwtSecretSubtitle")}
             </Text>
           </div>
         </div>
@@ -296,22 +299,22 @@ const DocumentService = ({
             <>
               <div className="input-wrapper">
                 <Label
-                  htmlFor="authorizationHeader"
-                  text={t("Settings:DocumentServiceAuthorizationHeader")}
+                  htmlFor="jwtHeader"
+                  text={t("Settings:DocumentServiceJwtHeader")}
                 />
                 <InputBlock
-                  id="authorizationHeader"
+                  id="jwtHeader"
                   type="text"
                   autoComplete="off"
                   tabIndex={2}
                   scale
                   iconButtonClassName={"icon-button"}
-                  value={authorizationHeader}
-                  onChange={onChangeAuthorizationHeader}
+                  value={jwtHeader}
+                  onChange={onChangeJwtHeader}
                   isDisabled={isSaveLoading || isResetLoading}
                 />
                 <Text className="subtitle">
-                  {t("Settings:DocumentServiceAuthorizationHeaderSubtitle")}
+                  {t("Settings:DocumentServiceJwtHeaderSubtitle")}
                 </Text>
               </div>
               <div className="input-wrapper">

@@ -102,7 +102,8 @@ const StyledAccountsItemTitle = styled.div`
       user-select: text;
     }
 
-    .sso-badge {
+    .sso-badge,
+    .ldap-badge {
       margin-top: 8px;
     }
   }

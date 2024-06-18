@@ -146,7 +146,7 @@ const PortalIntegration = (props) => {
       title: PRODUCT_NAME,
       description: t("PortalDescription", { productName: PRODUCT_NAME }),
       image: theme.isBase ? PortalImg : PortalImgDark,
-      handleOnClick: navigateToDocspace,
+      handleOnClick: navigateToPortal,
     },
     {
       title: t("Common:PublicRoom"),

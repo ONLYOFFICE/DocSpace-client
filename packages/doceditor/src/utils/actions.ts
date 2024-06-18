@@ -380,6 +380,7 @@ export async function openEdit(
   searchParams: string,
   share?: string,
 ) {
+  const startDate = new Date();
   const hdrs = headers();
   const cookie = hdrs.get("cookie");
 
@@ -397,10 +398,12 @@ export async function openEdit(
     const config = await res.json();
 
     if (res.ok) {
+      const timer = new Date().getTime() - startDate.getTime();
+
       config.response.editorUrl = (
         config.response as IInitialConfig
       ).editorUrl.replace(REPLACED_URL_PATH, "");
-      return config.response as IInitialConfig;
+      return { ...config.response, timer } as IInitialConfig;
     }
 
     const editorUrl =

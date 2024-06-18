@@ -1,5 +1,4 @@
-{
-  "Authentication": "Аутентификация",
+﻿{
   "AuthViaNTLM": "Аутентификация с помощью NTLM",
   "EnableSSL": "Использовать SSL",
   "EnterDomain": "Введите домен",
@@ -12,6 +11,5 @@
   "Port": "Порт",
   "SenderDisplayName": "Отображаемое имя отправителя",
   "SenderEmailAddress": "Адрес email отправителя",
-  "SendTestMail": "Тестовое письмо",
-  "SuccessfullyCompletedOperation": "Операция успешно выполнена."
+  "SendTestMail": "Тестовое письмо"
 }

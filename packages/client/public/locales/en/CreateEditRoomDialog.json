@@ -1,9 +1,15 @@
 {
   "ActivationRequired": "activation required",
   "ChooseRoomType": "Choose room type",
+  "CollaborationRoomDescription": "",
+  "CollaborationRoomTitle": "",
   "CreateRoomConfirmation": "Continue without connecting the storage?\nYou have selected a third-party storage option that is not connected yet. If you proceed without connecting the service, this option will not be added.",
   "CreateTagOption": "Create tag",
+  "CustomRoomDescription": "",
+  "CustomRoomTitle": "",
   "DisableRoomQuota": "Disable quota for this room",
+  "FillingFormsRoomDescription": "",
+  "FillingFormsRoomTitle": "",
   "FormRoomBarDescription": "This room is available to anyone with the link. External users will have Form Filler permission for all the files.",
   "Icon": "Icon",
   "MakeRoomPrivateDescription": "All files in this room will be encrypted.",
@@ -11,8 +17,11 @@
   "MakeRoomPrivateTitle": "Make the Room Private",
   "PeopleSelectorInfo": "Only a room admin or a {{productName}} admin can become the owner of the room",
   "PublicRoomBarDescription": "This room is available to anyone with the link. External users will have View Only permission for all the files.",
+  "PublicRoomDescription": "",
   "PublicRoomSystemFoldersDescription": "System folders store copies of forms at different stages of completion. Forms that are being filled are stored in the In progress folder, and completed forms are stored in the Complete folder.",
   "PublicRoomSystemFoldersTitle": "System Folders",
+  "ReviewRoomDescription": "",
+  "ReviewRoomTitle": "",
   "RoomEditing": "Room editing",
   "RootFolderLabel": "Root folder",
   "StorageDescription": "Storage quota set per room. You can change this value or turn off storage limit.",
@@ -21,5 +30,7 @@
   "ThirdPartyStorageDescription": "Use third-party services as data storage for this room. You can create a new folder or select the existing one in the connected storage.",
   "ThirdPartyStorageNoStorageAlert": "Before, you need to connect the corresponding service in the “Integration” section. Otherwise, the connection will not be possible.",
   "ThirdPartyStoragePermanentSettingDescription": "Files are stored in a third-party {{thirdpartyTitle}} storage in the \"{{thirdpartyFolderName}}\" folder.\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "To connect a third-party storage, you need to add the corresponding service in the Integration section of {{productName}} settings. Contact {{productName}} owner or administrator to enable the integration."
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "To connect a third-party storage, you need to add the corresponding service in the Integration section of {{productName}} settings. Contact {{productName}} owner or administrator to enable the integration.",
+  "ViewOnlyRoomDescription": "",
+  "ViewOnlyRoomTitle": ""
 }

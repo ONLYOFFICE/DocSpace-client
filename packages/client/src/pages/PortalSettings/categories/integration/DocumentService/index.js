@@ -306,7 +306,7 @@ const DocumentService = ({
                   id="jwtHeader"
                   type="text"
                   autoComplete="off"
-                  tabIndex={2}
+                  tabIndex={3}
                   scale
                   iconButtonClassName={"icon-button"}
                   value={jwtHeader}
@@ -328,7 +328,7 @@ const DocumentService = ({
                   id="internalAdress"
                   type="text"
                   autoComplete="off"
-                  tabIndex={2}
+                  tabIndex={4}
                   scale
                   iconButtonClassName={"icon-button"}
                   value={internalUrl}
@@ -354,7 +354,7 @@ const DocumentService = ({
                   id="portalAdress"
                   type="text"
                   autoComplete="off"
-                  tabIndex={3}
+                  tabIndex={5}
                   scale
                   iconButtonClassName={"icon-button"}
                   value={portalUrl}

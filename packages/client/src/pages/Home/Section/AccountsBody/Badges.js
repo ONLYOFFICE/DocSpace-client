@@ -129,8 +129,8 @@ const Badges = ({
         <Badge
           className="accounts-badge"
           label={t("Common:LDAP")}
-          color={"#FFFFFF"}
-          backgroundColor="#8570BD"
+          color={globalColors.white}
+          backgroundColor={globalColors.secondPurple}
           fontSize={"9px"}
           fontWeight={800}
           noHover

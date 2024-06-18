@@ -212,8 +212,8 @@ const MainProfile = (props) => {
             <Badge
               className="sso-badge"
               label={t("Common:LDAP")}
-              color={"#FFFFFF"}
-              backgroundColor="#8570BD"
+              color={globalColors.white}
+              backgroundColor={globalColors.secondPurple}
               fontSize={"9px"}
               fontWeight={800}
               noHover
@@ -286,8 +286,8 @@ const MainProfile = (props) => {
                     id="ldap-badge-profile"
                     className="ldap-badge"
                     label={t("Common:LDAP")}
-                    color={"#FFFFFF"}
-                    backgroundColor="#8570BD"
+                    color={globalColors.white}
+                    backgroundColor={globalColors.secondPurple}
                     fontSize={"9px"}
                     fontWeight={800}
                     noHover

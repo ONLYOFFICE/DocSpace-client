@@ -133,7 +133,7 @@ const AccountsItemTitle = ({
               className="ldap-badge"
               label={t("Common:LDAP")}
               color={globalColors.white}
-              backgroundColor="#8570BD"
+              backgroundColor={globalColors.secondPurple}
               fontSize={"9px"}
               fontWeight={800}
               noHover

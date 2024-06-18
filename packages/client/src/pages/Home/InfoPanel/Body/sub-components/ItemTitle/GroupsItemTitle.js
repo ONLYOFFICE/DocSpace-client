@@ -34,6 +34,7 @@ import { inject, observer } from "mobx-react";
 import { decode } from "he";
 import { Badge } from "@docspace/shared/components/badge";
 import { Tooltip } from "@docspace/shared/components/tooltip";
+import { globalColors } from "@docspace/shared/themes";
 
 const GroupsItemTitle = ({
   t,
@@ -87,8 +88,8 @@ const GroupsItemTitle = ({
               id="ldap-badge-info-panel"
               className="ldap-badge"
               label={t("Common:LDAP")}
-              color={"#FFFFFF"}
-              backgroundColor="#8570BD"
+              color={globalColors.white}
+              backgroundColor={globalColors.secondPurple}
               fontSize={"9px"}
               fontWeight={800}
               noHover

@@ -206,10 +206,11 @@ const StyledFileRow = styled(Row)`
   }
 
   .upload-panel-file-error_text {
-    ${props.isError &&
-    css`
-      color: ${(props) => props.theme.filesPanels.upload.textColor};
-    `}
+    ${(props) =>
+      props.isError &&
+      css`
+        color: ${props.theme.filesPanels.upload.textColor};
+      `}
   }
 
   .file-exst {

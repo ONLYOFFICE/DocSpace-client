@@ -240,6 +240,7 @@ const InsideGroupTableRow = (props) => {
     isVisitor,
     isCollaborator,
     isSSO,
+    isLDAP,
   } = item;
 
   const isPending = statusType === "pending" || statusType === "disabled";
@@ -515,7 +516,12 @@ const InsideGroupTableRow = (props) => {
                 ? displayName
                 : email}
           </Text>
-          <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
+          <Badges
+            statusType={statusType}
+            isPaid={isPaidUser}
+            isSSO={isSSO}
+            isLDAP={isLDAP}
+          />
         </TableCell>
 
         {typeAccountsInsideGroupColumnIsEnabled ? (

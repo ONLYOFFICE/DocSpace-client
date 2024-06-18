@@ -1,5 +1,4 @@
-{
-  "Authentication": "認証",
+﻿{
   "AuthViaNTLM": "NTLMによる認証",
   "EnableSSL": "SSLを有効に",
   "EnterDomain": "ドメインを入力",
@@ -12,6 +11,5 @@
   "Port": "ポート",
   "SenderDisplayName": "送信者の表示名",
   "SenderEmailAddress": "送信者の電子メールアドレス",
-  "SendTestMail": "テスト　メールを送信する",
-  "SuccessfullyCompletedOperation": "操作は正常に完了した。"
+  "SendTestMail": "テスト　メールを送信する"
 }

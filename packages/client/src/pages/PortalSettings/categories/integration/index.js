@@ -33,6 +33,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 
 import SSO from "./SingleSignOn";
+import LDAP from "./LDAP";
 import ThirdParty from "./ThirdPartyServicesSettings";
 
 import SMTPSettings from "./SMTPSettings";
@@ -57,19 +58,24 @@ const IntegrationWrapper = (props) => {
   useEffect(() => {
     return () => {
       isSSOAvailable &&
-        !window.location.pathname.includes("single-sign-on") &&
+        !window.location.pathname.includes("sso") &&
         toDefault();
     };
   }, []);
 
   const data = [
     {
+      id: "ldap",
+      name: t("LDAP"),
+      content: <LDAP />,
+    },
+    {
       id: "third-party-services",
       name: t("Translations:ThirdPartyTitle"),
       content: <ThirdParty />,
     },
     {
-      id: "single-sign-on",
+      id: "sso",
       name: t("SingleSignOn"),
       content: <SSO />,
     },

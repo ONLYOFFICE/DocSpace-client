@@ -1,5 +1,4 @@
-{
-  "Authentication": "Authenticatie",
+﻿{
   "AuthViaNTLM": "Auth via NTLM",
   "EnableSSL": "Activeer SSL",
   "EnterDomain": "Voer domein in",
@@ -12,6 +11,5 @@
   "Port": "Poort",
   "SenderDisplayName": "Zender Weergave Naam",
   "SenderEmailAddress": "E-mailadres Zender",
-  "SendTestMail": "Testmail Sturen",
-  "SuccessfullyCompletedOperation": "De bewerking is succesvol afgerond."
+  "SendTestMail": "Testmail Sturen"
 }

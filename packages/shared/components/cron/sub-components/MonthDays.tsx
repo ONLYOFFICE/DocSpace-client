@@ -30,7 +30,14 @@ import { Select } from "./Select";
 import type { MonthDaysProps } from "../Cron.types";
 
 export const MonthDays = memo(
-  ({ weekDays, monthDays, unit, setMonthDays, t }: MonthDaysProps) => {
+  ({
+    weekDays,
+    monthDays,
+    unit,
+    setMonthDays,
+    t,
+    isDisabled,
+  }: MonthDaysProps) => {
     const placeholder = useMemo(() => {
       const isEmpty = weekDays.length === 0;
 
@@ -44,6 +51,7 @@ export const MonthDays = memo(
         placeholder={placeholder}
         unit={unit}
         dropDownMaxHeight={300}
+        isDisabled={isDisabled}
       />
     );
   },

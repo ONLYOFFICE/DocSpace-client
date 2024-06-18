@@ -361,6 +361,7 @@ StyledSimpleFilesRow.defaultProps = { theme: Base };
 
 const SimpleFilesRow = (props) => {
   const {
+    t,
     item,
     sectionWidth,
     dragging,
@@ -407,7 +408,7 @@ const SimpleFilesRow = (props) => {
   const isSmallContainer = sectionWidth <= 500;
 
   const onChangeIndex = (action) => {
-    return changeIndex(action, item);
+    return changeIndex(action, item, t);
   };
 
   const element = (

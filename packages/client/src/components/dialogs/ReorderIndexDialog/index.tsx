@@ -25,8 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { TTranslation } from "@docspace/shared/types";
 
 import {
   ModalDialog,
@@ -42,7 +44,7 @@ import FilesActionsStore from "SRC_DIR/store/FilesActionsStore";
 import { TSelectedFolder } from "@docspace/client/src/store/SelectedFolderStore";
 
 export interface ReorderIndexDialogProps {
-  reorder: (id: number | string | null) => void;
+  reorder: (id: number | string | null, t: TTranslation) => void;
   setIsVisible: (visible: boolean) => void;
   visible: boolean;
   selectedFolder: TSelectedFolder;
@@ -61,7 +63,7 @@ const ReorderIndexDialog = ({
   };
 
   const onReorder = () => {
-    reorder(selectedFolder?.id);
+    reorder(selectedFolder?.id, t);
     setIsVisible(false);
   };
 

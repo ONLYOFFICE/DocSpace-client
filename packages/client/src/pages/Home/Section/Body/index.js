@@ -332,7 +332,7 @@ const SectionBodyContent = (props) => {
 
     if (!replaceable) return;
 
-    changeIndex(VDRIndexingAction.MoveIndex, replaceable);
+    changeIndex(VDRIndexingAction.MoveIndex, replaceable, t);
     return;
   };
 

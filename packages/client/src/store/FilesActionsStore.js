@@ -2719,7 +2719,7 @@ class FilesActionStore {
     await deleteFilesFromRecent(fileIds);
     await refreshFiles();
   };
-  changeIndex = async (action, item) => {
+  changeIndex = async (action, item, t) => {
     const { filesList } = this.filesStore;
 
     const index = filesList.findIndex(
@@ -2762,19 +2762,27 @@ class FilesActionStore {
 
     if (!replaceable) return;
 
-    await changeIndex(current?.id, replaceable.order, current?.isFolder);
+    try {
+      await changeIndex(current?.id, replaceable.order, current?.isFolder);
 
-    const items = [current, replaceable];
-    setUpdateItems(items);
+      const items = [current, replaceable];
+      setUpdateItems(items);
 
-    const operationId = uniqueid("operation_");
-    this.updateCurrentFolder(null, [id], true, operationId);
+      const operationId = uniqueid("operation_");
+      this.updateCurrentFolder(null, [id], true, operationId);
+    } catch (e) {
+      toastr.error(t("Files:ErrorChangeIndex"));
+    }
   };
 
-  reorder = async (id) => {
-    const operationId = uniqueid("operation_");
-    await reorder(id);
-    this.updateCurrentFolder(null, [id], true, operationId);
+  reorder = async (id, t) => {
+    try {
+      const operationId = uniqueid("operation_");
+      await reorder(id);
+      this.updateCurrentFolder(null, [id], true, operationId);
+    } catch (e) {
+      toastr.error(t("Files:ErrorChangeIndex"));
+    }
   };
 }
 

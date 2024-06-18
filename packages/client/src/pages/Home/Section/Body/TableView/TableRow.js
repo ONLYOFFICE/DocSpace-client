@@ -111,7 +111,7 @@ const FilesTableRow = (props) => {
   };
 
   const onChangeIndex = (action) => {
-    return onEditIndex(action, item);
+    return onEditIndex(action, item, t);
   };
 
   const onDragOverEvent = (dragActive, e) => {

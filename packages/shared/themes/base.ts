@@ -2830,7 +2830,7 @@ export const getBaseTheme = () => {
             toggleContentBackground: grayLight,
             iconButton: black,
             iconButtonDisabled: gray,
-            border: `1px solid ${grayLightMid}`,
+            border: `1px solid ${grayStrong}`,
           },
 
           smtp: {
@@ -2886,6 +2886,7 @@ export const getBaseTheme = () => {
           subtitleColor: black,
           workspaceBackground: white,
           workspaceBorder: `1px solid ${grayStrong}`,
+          workspaceHover: lightBlueMain,
           stepDescriptionColor: black,
           fileInputIconColor: gray,
           infoBlockBackground: grayLight,
@@ -2907,6 +2908,7 @@ export const getBaseTheme = () => {
           groupMenuBackground: white,
           groupMenuBorder: `1px solid ${white}`,
           groupMenuBoxShadow: "rgba(4, 15, 27, 0.07) 0px 5px 5px 0px",
+          linkColor: lightBlueMain,
         },
         storageManagement: {
           grayBackgroundText: grayText,
@@ -2917,6 +2919,13 @@ export const getBaseTheme = () => {
         },
         webhooks: {
           border: `1px solid ${grayLightMid}`,
+          historyRowBackground: lightGrayHover,
+          tableCellBackground: lightGrayHover,
+          barBackground: grayLight,
+          color: gray,
+          linkColor: link,
+          spanBackground: lightBlueMain,
+          filterBorder: `1px solid ${grayStrong}`,
         },
       },
 
@@ -3061,6 +3070,7 @@ export const getBaseTheme = () => {
     dialogs: {
       disableText: gray,
       errorText: lightErrorStatus,
+      linkColor: lightBlueMain,
     },
 
     editLink: {
@@ -3104,6 +3114,7 @@ export const getBaseTheme = () => {
       borderColor: grayStrong,
       pluginName: grayDarkText,
       descriptionColor: lightGrayDark,
+      color: grayDark,
     },
 
     sdkPresets: {

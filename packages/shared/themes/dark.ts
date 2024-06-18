@@ -2868,6 +2868,7 @@ const Dark: TTheme = {
         subtitleColor: white,
         workspaceBackground: black,
         workspaceBorder: `1px solid ${grayDarkStrong}`,
+        workspaceHover: lightBlueMain,
         stepDescriptionColor: white,
         fileInputIconColor: grayDarkText,
         infoBlockBackground: darkGrayLight,
@@ -2889,6 +2890,7 @@ const Dark: TTheme = {
         groupMenuBackground: black,
         groupMenuBorder: `1px solid ${grayDarkStrong}`,
         groupMenuBoxShadow: "rgba(0, 0, 0, 0.16) 0px 5px 5px 0px",
+        linkColor: lightBlueMain,
       },
       storageManagement: {
         grayBackgroundText: grayDark,
@@ -2899,6 +2901,13 @@ const Dark: TTheme = {
       },
       webhooks: {
         border: `1px solid ${grayDarkMid}`,
+        historyRowBackground: lightDarkGrayHover,
+        tableCellBackground: lightGrayHover,
+        barBackground: lightDarkGrayHover,
+        color: grayDark,
+        linkColor: lightBlueMain,
+        spanBackground: lightBlueMain,
+        filterBorder: `1px solid ${black}`,
       },
     },
 
@@ -3043,6 +3052,7 @@ const Dark: TTheme = {
   dialogs: {
     disableText: grayDark,
     errorText: darkErrorStatus,
+    linkColor: lightBlueMain,
   },
 
   editLink: {
@@ -3086,6 +3096,7 @@ const Dark: TTheme = {
     borderColor: grayDarkStrong,
     pluginName: gray,
     descriptionColor: darkGrayDark,
+    color: grayDark,
   },
 
   sdkPresets: {

@@ -72,6 +72,8 @@ const FilterInput = React.memo(
     isGroupsAccounts,
     isInsideGroup,
     isIndexing,
+    isIndexEditingMode,
+
     filterTitle,
     sortByTitle,
 
@@ -209,24 +211,28 @@ const FilterInput = React.memo(
             onClearSearch={onClearSearch}
             id="filter_search-input"
             size={InputSize.base}
+            isDisabled={isIndexEditingMode}
             onFocus={onInputFocus}
           />
-          <FilterButton
-            id="filter-button"
-            onFilter={onFilter}
-            getFilterData={getFilterData}
-            selectedFilterValue={selectedFilterValue}
-            filterHeader={filterHeader}
-            selectorLabel={selectorLabel}
-            isRooms={isRooms}
-            isAccounts={isAccounts}
-            isPeopleAccounts={isPeopleAccounts}
-            isGroupsAccounts={isGroupsAccounts}
-            isInsideGroup={isInsideGroup}
-            title={filterTitle}
-            userId={userId}
-            disableThirdParty={disableThirdParty}
-          />
+          {!isIndexEditingMode && (
+            <FilterButton
+              id="filter-button"
+              onFilter={onFilter}
+              getFilterData={getFilterData}
+              selectedFilterValue={selectedFilterValue}
+              filterHeader={filterHeader}
+              selectorLabel={selectorLabel}
+              isRooms={isRooms}
+              isAccounts={isAccounts}
+              isPeopleAccounts={isPeopleAccounts}
+              isGroupsAccounts={isGroupsAccounts}
+              isInsideGroup={isInsideGroup}
+              title={filterTitle}
+              userId={userId}
+              disableThirdParty={disableThirdParty}
+            />
+          )}
+
           {!isIndexing && (
             <SortButton
               id="sort-by-button"

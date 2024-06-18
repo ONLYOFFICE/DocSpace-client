@@ -314,6 +314,7 @@ const SectionFilterContent = ({
   userId,
   isPersonalRoom,
   isIndexing,
+  isIndexEditingMode,
 
   providers,
 
@@ -2672,6 +2673,7 @@ const SectionFilterContent = ({
       isGroupsAccounts={isGroupsAccounts}
       isInsideGroup={isInsideGroup}
       isIndexing={isIndexing}
+      isIndexEditingMode={isIndexEditingMode}
       disableThirdParty={isTrash}
     />
   );
@@ -2730,7 +2732,7 @@ export default inject(
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { showStorageInfo, isDefaultRoomsQuotaSet } = currentQuotaStore;
 
-    const { isIndexing } = indexingStore;
+    const { isIndexing, isIndexEditingMode } = indexingStore;
     const {
       filterStore,
 
@@ -2771,6 +2773,7 @@ export default inject(
       isTrash,
       isArchiveFolder,
       isIndexing,
+      isIndexEditingMode,
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
       showFilterLoader: clientLoadingStore.showFilterLoader,

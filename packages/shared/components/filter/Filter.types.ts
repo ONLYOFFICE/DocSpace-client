@@ -234,6 +234,8 @@ export interface FilterProps {
   isGroupsAccounts: boolean;
   isInsideGroup: boolean;
   isIndexing: boolean;
+  isIndexEditingMode: boolean;
+
   filterTitle: string;
   sortByTitle: string;
 

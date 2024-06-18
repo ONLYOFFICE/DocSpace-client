@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { withTranslation } from "react-i18next";
 import { TableCell } from "@docspace/shared/components/table";
 import { Link } from "@docspace/shared/components/link";
@@ -34,6 +33,7 @@ import { inject, observer } from "mobx-react";
 import * as Styled from "./index.styled";
 import { Text } from "@docspace/shared/components/text";
 import { Avatar } from "@docspace/shared/components/avatar";
+import Badges from "../../Badges";
 
 const GroupsTableItem = ({
   t,
@@ -131,6 +131,8 @@ const GroupsTableItem = ({
           >
             {item.name}
           </Link>
+
+          <Badges isLDAP={item.isLDAP} />
         </TableCell>
 
         {managerAccountsGroupsColumnIsEnabled ? (

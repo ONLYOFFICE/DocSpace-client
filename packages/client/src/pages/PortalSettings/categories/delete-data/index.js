@@ -26,8 +26,8 @@
 
 import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { Submenu } from "@docspace/shared/components/submenu";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Tabs } from "@docspace/shared/components/tabs";
 import { inject, observer } from "mobx-react";
 import PortalDeactivationSection from "./portalDeactivation";
 import PortalDeletionSection from "./portalDeletion";
@@ -40,8 +40,9 @@ const DeleteData = (props) => {
   const { t, isNotPaidPeriod, tReady } = props;
 
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const [currentTab, setCurrentTab] = useState(0);
+  const [currentTabId, setCurrentTabId] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   const data = [
@@ -59,10 +60,11 @@ const DeleteData = (props) => {
 
   useEffect(() => {
     const path = location.pathname;
-    const currentTab = data.findIndex((item) => path.includes(item.id));
-    if (currentTab !== -1) setCurrentTab(currentTab);
+    const currentTab = data.find((item) => path.includes(item.id));
+    if (currentTab !== -1 && data.length) setCurrentTabId(currentTab.id);
+
     setIsLoading(true);
-  }, []);
+  }, [location.pathname]);
 
   const onSelect = (e) => {
     navigate(
@@ -72,15 +74,16 @@ const DeleteData = (props) => {
         `/portal-settings/delete-data/${e.id}`,
       ),
     );
+    setCurrentTabId(e.id);
   };
 
   if (!isLoading || !tReady) return <DeleteDataLoader />;
   return isNotPaidPeriod ? (
     <PortalDeletionSection />
   ) : (
-    <Submenu
-      data={data}
-      startSelect={currentTab}
+    <Tabs
+      items={data}
+      selectedItemId={currentTabId}
       onSelect={(e) => onSelect(e)}
     />
   );

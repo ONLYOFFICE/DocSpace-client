@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Haqqında",
   "AboutCompanyTitle": "Proqram haqqında",
   "AccessDenied": "Giriş qadağandır",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "'{{name}}' otağı arxivləşdirildi",
   "Attention": "Diqqət",
   "Audio": "Audio",
+  "Authentication": "İdentifikasiya",
   "Authorization": "Avtorizasiya",
   "Back": "Geri",
   "BarMaintenanceDescription": "{{productName}} yenilənməsi zamanı {{targetDate}} tarixində xidmət fəaliyyətində baş verən istənilən qısamüddətli texniki problemlərə görə üzr istəyirik.",
@@ -214,6 +215,7 @@
   "LastModifiedDate": "Son dəyişdirildiyi tarix",
   "LastName": "Soyad",
   "LatePayment": "Gecikmiş ödəniş",
+  "LDAP": "LDAP",
   "LearnMore": "Daha ətraflı öyrənin",
   "LinkAccessDenied": "Bağlantıya giriş rədd edildi",
   "LinkExpireAfter": "Link <1>{{date}}</1> sonra başa çatacaq",
@@ -418,6 +420,7 @@
   "SubscriptionExpired": "Dəstək və yeniləmələrə abunəliyiniz başa çatıb",
   "SubscriptionExpiredTitle": "Abunəlik müddəti bitib",
   "SubscriptionIsExpiring": "Abunəliyiniz {{date}} tarixində bitir",
+  "SuccessfullyCompletedOperation": "Əməliyyat uğurla başa çatıb.",
   "Support": "Dəstək",
   "SwitchToThumbnails": "Eskiz rejiminə keçin",
   "SwitchViewToCompact": "Yığcam görüntüyə keç",

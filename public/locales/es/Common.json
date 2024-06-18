@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Acerca de",
   "AboutCompanyTitle": "Acerca del programa",
   "AccessDenied": "Acceso denegado ",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "La sala ‘{{name}}’ está archivada",
   "Attention": "¡Atención",
   "Audio": "Audio",
+  "Authentication": "Autenticación",
   "Authorization": "Autorización",
   "Back": "Volver",
   "BarMaintenanceDescription": "Pedimos disculpas por cualquier problema técnico de corta duración en el funcionamiento del servicio que pueda aparecer el día {{targetDate}} durante la actualización de {{productName}}.",
@@ -214,6 +215,7 @@
   "LastModifiedDate": "Fecha de actualización",
   "LastName": "Apellido",
   "LatePayment": "Pago atrasado",
+  "LDAP": "LDAP",
   "LearnMore": "Más información",
   "LinkAccessDenied": "El acceso al enlace ha sido denegado.",
   "LinkExpireAfter": "El enlace caducará después del <1>{{date}}</1>",
@@ -418,6 +420,7 @@
   "SubscriptionExpired": "Su suscripción a soporte y actualizaciones ha expirado",
   "SubscriptionExpiredTitle": "La suscripción ha expirado",
   "SubscriptionIsExpiring": "Su suscripción expira el {{date}}",
+  "SuccessfullyCompletedOperation": "La operación ha sido ejecutada con éxito.",
   "Support": "Ayuda",
   "SwitchToThumbnails": "Cambiar a la vista de miniaturas",
   "SwitchViewToCompact": "Pasar a la vista compacta",

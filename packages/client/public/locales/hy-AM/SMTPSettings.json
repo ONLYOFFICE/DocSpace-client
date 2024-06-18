@@ -1,5 +1,4 @@
-{
-  "Authentication": "Նույնականացում",
+﻿{
   "AuthViaNTLM": "Հաստատում NTLM-ի միջոցով",
   "EnableSSL": "Միացնել SSL-ը",
   "EnterDomain": "Մուտքագրեք տիրույթը",
@@ -12,6 +11,5 @@
   "Port": "Պորտ",
   "SenderDisplayName": "Ուղարկողի էլփոստի հասցեն",
   "SenderEmailAddress": "Ուղարկողի էլփոստի հասցեն",
-  "SendTestMail": "Ուղարկել փորձնական նամակ",
-  "SuccessfullyCompletedOperation": "Գործողությունը հաջողությամբ ավարտվել է։"
+  "SendTestMail": "Ուղարկել փորձնական նամակ"
 }

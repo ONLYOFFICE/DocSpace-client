@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "О программе",
   "AboutCompanyTitle": "О программе",
   "AccessDenied": "Доступ запрещен",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "Комната '{{name}}' заархивирована",
   "Attention": "Внимание",
   "Audio": "Аудио",
+  "Authentication": "Аутентификация",
   "Authorization": "Авторизация",
   "Back": "Назад",
   "BarMaintenanceDescription": "Приносим свои извинения за временные неполадки в работе сервиса, которые могут возникнуть {{targetDate}} в процессе обновления облачного решения {{productName}}.",
@@ -215,6 +216,7 @@
   "LastModifiedDate": "Дата последнего изменения",
   "LastName": "Фамилия",
   "LatePayment": "Просроченная оплата",
+  "LDAP": "LDAP",
   "LearnMore": "Узнать больше",
   "LinkAccessDenied": "Доступ к ссылке запрещен",
   "LinkExpireAfter": "Срок действия ссылки истекает через <1>{{date}}</1>",
@@ -419,6 +421,7 @@
   "SubscriptionExpired": "Истек срок действия подписки на техническую поддержку и обновления",
   "SubscriptionExpiredTitle": "Срок подписки истек",
   "SubscriptionIsExpiring": "Подписка истекает {{date}}",
+  "SuccessfullyCompletedOperation": "Операция успешно выполнена.",
   "Support": "Поддержка",
   "SwitchToThumbnails": "Переключиться на режим миниатюр",
   "SwitchViewToCompact": "Переключиться на компактный вид",

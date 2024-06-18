@@ -1276,7 +1276,12 @@ const Dark: TTheme = {
     backgroundColor: grayDark,
 
     percent: {
-      background: white,
+      background: darkStatusWarning,
+    },
+
+    color: {
+      error: darkErrorStatus,
+      status: white,
     },
   },
 

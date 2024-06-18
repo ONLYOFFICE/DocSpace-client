@@ -190,7 +190,7 @@ const MainProfile = (props) => {
           role={role}
           source={userAvatar}
           userName={profile.displayName}
-          editing={true}
+          editing={!profile.isLDAP}
           editAction={() => setChangeAvatarVisible(true)}
         />
         {profile.isSSO && (
@@ -200,6 +200,20 @@ const MainProfile = (props) => {
               label={t("Common:SSO")}
               color={globalColors.white}
               backgroundColor={globalColors.mainGreen}
+              fontSize={"9px"}
+              fontWeight={800}
+              noHover
+              lineHeight={"13px"}
+            />
+          </div>
+        )}
+        {profile.isLDAP && (
+          <div className="badges-wrapper">
+            <Badge
+              className="sso-badge"
+              label={t("Common:LDAP")}
+              color={"#FFFFFF"}
+              backgroundColor="#8570BD"
               fontSize={"9px"}
               fontWeight={800}
               noHover
@@ -248,19 +262,44 @@ const MainProfile = (props) => {
                 {profile.displayName}
               </Text>
               {profile.isSSO && (
-                <Badge
-                  className="sso-badge"
-                  label={t("Common:SSO")}
-                  color={globalColors.white}
-                  backgroundColor={globalColors.mainGreen}
-                  fontSize={"9px"}
-                  fontWeight={800}
-                  noHover
-                  lineHeight={"13px"}
-                />
+                <>
+                  <Badge
+                    id="sso-badge-profile"
+                    className="sso-badge"
+                    label={t("Common:SSO")}
+                    color={globalColors.white}
+                    backgroundColor={globalColors.mainGreen}
+                    fontSize={"9px"}
+                    fontWeight={800}
+                    noHover
+                    lineHeight={"13px"}
+                  />
+                  <Tooltip anchorSelect={`div[id='sso-badge-profile'] div`}>
+                    {t("PeopleTranslations:SSOAccountTooltip")}
+                  </Tooltip>
+                </>
               )}
 
-              {!profile.isSSO && (
+              {profile.isLDAP && (
+                <>
+                  <Badge
+                    id="ldap-badge-profile"
+                    className="ldap-badge"
+                    label={t("Common:LDAP")}
+                    color={"#FFFFFF"}
+                    backgroundColor="#8570BD"
+                    fontSize={"9px"}
+                    fontWeight={800}
+                    noHover
+                    lineHeight={"13px"}
+                  />
+                  <Tooltip anchorSelect={`div[id='ldap-badge-profile'] div`}>
+                    {t("PeopleTranslations:LDAPAccountTooltip")}
+                  </Tooltip>
+                </>
+              )}
+
+              {!profile.isSSO && !profile.isLDAP && (
                 <IconButton
                   className="edit-button"
                   iconName={PencilOutlineReactSvgUrl}
@@ -291,7 +330,7 @@ const MainProfile = (props) => {
                     place="bottom"
                   />
                 )}
-                {!profile.isSSO && (
+                {!profile.isSSO && !profile.isLDAP && (
                   <IconButton
                     className="edit-button email-edit-button"
                     iconName={PencilOutlineReactSvgUrl}
@@ -317,12 +356,14 @@ const MainProfile = (props) => {
             </div>
             <div className="profile-block-field profile-block-password">
               <Text fontWeight={600}>********</Text>
-              <IconButton
-                className="edit-button password-edit-button"
-                iconName={PencilOutlineReactSvgUrl}
-                size="12"
-                onClick={onChangePasswordClick}
-              />
+              {!profile.isSSO && !profile.isLDAP && (
+                <IconButton
+                  className="edit-button password-edit-button"
+                  iconName={PencilOutlineReactSvgUrl}
+                  size="12"
+                  onClick={onChangePasswordClick}
+                />
+              )}
             </div>
             <div className="language-combo-box-wrapper">
               <ComboBox

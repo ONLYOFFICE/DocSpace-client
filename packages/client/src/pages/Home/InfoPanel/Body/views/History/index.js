@@ -54,6 +54,7 @@ const History = ({
   isVisitor,
   isCollaborator,
   getRoomLinks,
+  setExternalLinks,
 }) => {
   const isMount = useRef(true);
   const abortControllerRef = useRef(new AbortController());
@@ -89,6 +90,7 @@ const History = ({
         if (isMount.current && withLinks) {
           const links = await getRoomLinks(infoPanelSelection.id);
           const historyWithLinks = addLinksToHistory(data, links);
+          setExternalLinks(links);
           return historyWithLinks;
         }
         return data;
@@ -163,6 +165,7 @@ export default inject(
     filesActionsStore,
     infoPanelStore,
     userStore,
+    publicRoomStore,
   }) => {
     const {
       infoPanelSelection,
@@ -176,6 +179,7 @@ export default inject(
 
     const { getHistory, getRoomLinks } = filesStore;
     const { checkAndOpenLocationAction } = filesActionsStore;
+    const { setExternalLinks } = publicRoomStore;
 
     const { user } = userStore;
     const isVisitor = user.isVisitor;
@@ -194,6 +198,7 @@ export default inject(
       isVisitor,
       isCollaborator,
       getRoomLinks,
+      setExternalLinks,
     };
   },
 )(withTranslation(["InfoPanel", "Common", "Translations"])(observer(History)));

@@ -50,11 +50,8 @@ const HistoryRoomExternalLink = ({
       return;
     }
 
+    setLinkParams({ isEdit: true, link: feed.data });
     setEditLinkPanelIsVisible(true);
-    setLinkParams({
-      isEdit: true,
-      link: { ...feed.data },
-    });
   };
 
   if (actionType === "create")

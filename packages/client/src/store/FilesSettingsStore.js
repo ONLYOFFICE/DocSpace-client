@@ -239,9 +239,19 @@ class FilesSettingsStore {
 
   getDocumentServiceLocation = () => api.files.getDocumentServiceLocation();
 
-  changeDocumentServiceLocation = (docServiceUrl, internalUrl, portalUrl) =>
+  changeDocumentServiceLocation = (
+    docServiceUrl,
+    jwtSecret,
+    isDisabledCertificat,
+    jwtHeader,
+    internalUrl,
+    portalUrl,
+  ) =>
     api.files.changeDocumentServiceLocation(
       docServiceUrl,
+      jwtSecret,
+      isDisabledCertificat,
+      jwtHeader,
       internalUrl,
       portalUrl,
     );

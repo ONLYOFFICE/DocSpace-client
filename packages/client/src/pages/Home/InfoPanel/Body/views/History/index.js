@@ -71,7 +71,10 @@ const History = ({
   useEffect(() => {
     if (!isMount.current) return;
     getHistory(infoPanelSelection);
-  }, [infoPanelSelection.id]);
+  }, [
+    infoPanelSelection.id,
+    infoPanelSelection.isFolder || infoPanelSelection.isRoom,
+  ]);
 
   useEffect(() => {
     const showLoaderTimer = setTimeout(() => setIsShowLoader(true), 500);

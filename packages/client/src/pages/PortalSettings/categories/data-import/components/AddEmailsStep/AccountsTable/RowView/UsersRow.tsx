@@ -27,10 +27,10 @@
 import { useState, useRef } from "react";
 import { Row } from "@docspace/shared/components/row";
 import UsersRowContent from "./UsersRowContent";
+import { AddEmailUsersRowProps } from "../../../../types";
 
-const UsersRow = (props) => {
+const UsersRow = (props: AddEmailUsersRowProps) => {
   const {
-    t,
     data,
     sectionWidth,
     isChecked,
@@ -39,32 +39,31 @@ const UsersRow = (props) => {
     setOpenedEmailKey,
   } = props;
 
-  const emailInputRef = useRef();
-  const emailTextRef = useRef();
+  const emailInputRef = useRef<HTMLDivElement>(null);
+  const emailTextRef = useRef<HTMLSpanElement>(null);
 
   const [isPrevEmailValid, setIsPrevEmailValid] = useState(
     data.email?.length > 0,
   );
 
-  const handleAccountToggle = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    !isPrevEmailValid ||
-      emailInputRef.current?.contains(e.target) ||
-      emailTextRef.current?.contains(e.target) ||
+  const handleAccountToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (
+      isPrevEmailValid &&
+      !emailInputRef.current?.contains(e.target) &&
+      !emailTextRef.current?.contains(e.target)
+    ) {
       toggleAccount();
+    }
   };
 
   return (
     <Row
-      sectionWidth={sectionWidth}
       checked={isChecked}
-      onClick={handleAccountToggle}
+      onRowClick={handleAccountToggle}
+      onSelect={toggleAccount}
       isDisabled={!isPrevEmailValid}
     >
       <UsersRowContent
-        t={t}
         id={data.key}
         sectionWidth={sectionWidth}
         displayName={data.displayName}

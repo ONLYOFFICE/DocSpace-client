@@ -30,9 +30,11 @@ import { tablet } from "@docspace/shared/utils/device";
 import styled from "styled-components";
 
 import { RowContainer } from "@docspace/shared/components/row-container";
-import UsersRow from "./UsersRow";
 import { Row } from "@docspace/shared/components/row";
 import { Text } from "@docspace/shared/components/text";
+import { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
+import UsersRow from "./UsersRow";
+import { AddEmailRowProps, RowViewProps } from "../../../../types";
 
 const StyledRow = styled(Row)`
   box-sizing: border-box;
@@ -48,41 +50,43 @@ const StyledRow = styled(Row)`
 
 const checkedAccountType = "withoutEmail";
 
-const RowView = (props) => {
+const RowView = (props: RowViewProps) => {
   const {
     t,
     sectionWidth,
     accountsData,
+
     users,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-  } = props;
+  } = props as AddEmailRowProps;
 
-  const [openedEmailKey, setOpenedEmailKey] = useState(null);
+  const [openedEmailKey, setOpenedEmailKey] = useState("");
 
   const usersWithFilledEmails = users.withoutEmail.filter(
     (user) => user.email && user.email.length > 0,
   );
 
-  const toggleAll = (isChecked) =>
+  const toggleAll = (isChecked: boolean) =>
     toggleAllAccounts(isChecked, usersWithFilledEmails, checkedAccountType);
 
-  const handleToggle = (user) => toggleAccount(user, checkedAccountType);
+  const handleToggle = (user: TEnhancedMigrationUser) =>
+    toggleAccount(user, checkedAccountType);
 
   const isIndeterminate =
     checkedUsers.withoutEmail.length > 0 &&
     checkedUsers.withoutEmail.length !== usersWithFilledEmails.length;
 
+  const isChecked =
+    usersWithFilledEmails.length > 0 &&
+    checkedUsers.withoutEmail.length === usersWithFilledEmails.length;
+
   return (
     <RowContainer useReactWindow={false}>
       <StyledRow
-        sectionWidth={sectionWidth}
-        checked={
-          usersWithFilledEmails.length > 0 &&
-          checkedUsers.withoutEmail.length === usersWithFilledEmails.length
-        }
+        checked={isChecked}
         onSelect={toggleAll}
         indeterminate={isIndeterminate}
         isDisabled={usersWithFilledEmails.length === 0}
@@ -107,7 +111,7 @@ const RowView = (props) => {
   );
 };
 
-export default inject(({ importAccountsStore }) => {
+export default inject<TStore>(({ importAccountsStore }) => {
   const {
     users,
     checkedUsers,

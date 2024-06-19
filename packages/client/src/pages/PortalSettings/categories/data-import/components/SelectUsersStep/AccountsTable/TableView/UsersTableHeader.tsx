@@ -120,8 +120,6 @@ const UsersTableHeader = (props: UsersTableHeaderProps) => {
     },
   ];
 
-  const stub = () => {};
-
   useEffect(() => {
     setColumns(getColumns(defaultColumns, userId));
   }, [isIndeterminate, isChecked]);
@@ -136,14 +134,6 @@ const UsersTableHeader = (props: UsersTableHeaderProps) => {
       showSettings={false}
       useReactWindow
       infoPanelVisible={false}
-      onClick={stub}
-      sortBy=""
-      sorted={false}
-      resetColumnsSize={false}
-      isLengthenHeader={false}
-      sortingVisible={false}
-      setHideColumns={stub}
-      tagRef={null}
     />
   );
 };

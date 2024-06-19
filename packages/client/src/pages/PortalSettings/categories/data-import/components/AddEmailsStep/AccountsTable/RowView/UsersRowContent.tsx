@@ -34,12 +34,19 @@ import { RowContent } from "@docspace/shared/components/row-content";
 
 import { EmailInput } from "@docspace/shared/components/email-input";
 import { Button } from "@docspace/shared/components/button";
+import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
+import { InputType } from "@docspace/shared/components/text-input";
 
 import EditSvg from "PUBLIC_DIR/images/access.edit.react.svg";
 import CrossSvg from "PUBLIC_DIR/images/cross.edit.react.svg";
 import CheckSvg from "PUBLIC_DIR/images/check.edit.react.svg";
 
 import { Base } from "@docspace/shared/themes";
+
+import {
+  AddEmailRowContentProps,
+  InjectedAddEmailRowContentProps,
+} from "../../../../types";
 
 const EmailInputWrapper = styled.div`
   display: flex;
@@ -49,6 +56,7 @@ const EmailInputWrapper = styled.div`
 const DecisionButton = styled(Button)`
   width: 32px;
   height: 32px;
+  padding: 0;
 `;
 
 DecisionButton.defaultProps = { theme: Base };
@@ -85,21 +93,22 @@ const StyledRowContent = styled(RowContent)`
   }
 `;
 
-const UsersRowContent = ({
-  sectionWidth,
-  displayName,
-  email,
-  id,
-  emailInputRef,
-  emailTextRef,
+const UsersRowContent = (props: AddEmailRowContentProps) => {
+  const {
+    id,
+    sectionWidth,
+    displayName,
+    email,
+    emailInputRef,
+    emailTextRef,
+    isChecked,
+    isEmailOpen,
+    setOpenedEmailKey,
+    toggleAccount,
 
-  toggleAccount,
-  changeEmail,
-  isChecked,
-  isEmailOpen,
-  setOpenedEmailKey,
-  setIsPrevEmailValid,
-}) => {
+    changeEmail,
+    setIsPrevEmailValid,
+  } = props as InjectedAddEmailRowContentProps;
   const { t, ready } = useTranslation(["SMTPSettings", "Settings", "Common"]);
 
   const [prevEmail, setPrevEmail] = useState(email);
@@ -108,14 +117,16 @@ const UsersRowContent = ({
 
   const [hasError, setHasError] = useState(false);
 
-  const handleEmailChange = (e) => {
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTempEmail(e.target.value);
-    hasError && setHasError(false);
+    if (hasError) {
+      setHasError(false);
+    }
   };
 
   const clearEmail = () => {
     setTempEmail(prevEmail);
-    setOpenedEmailKey(null);
+    setOpenedEmailKey("");
     setHasError(false);
   };
 
@@ -124,31 +135,40 @@ const UsersRowContent = ({
   const handleSaveEmail = () => {
     setPrevEmail(tempEmail);
     changeEmail(id, tempEmail);
-    setOpenedEmailKey(null);
+    setOpenedEmailKey("");
     setIsPrevEmailValid(true);
-    !isChecked && toggleAccount();
+    if (!isChecked) {
+      toggleAccount();
+    }
   };
 
-  const onValidateEmail = (res) => {
+  const onValidateEmail = (res: TValidate) => {
     setIsEmailValid(res.isValid);
+    return { isValid: res.isValid, errors: res.errors || [] };
   };
 
   const handleSaveClick = () => {
-    isEmailValid ? handleSaveEmail() : setHasError(true);
+    if (isEmailValid) {
+      handleSaveEmail();
+    } else {
+      setHasError(true);
+    }
   };
 
   const checkEmailValidity = () => {
-    !isEmailValid && setHasError(true);
+    if (!isEmailValid) {
+      setHasError(true);
+    }
   };
 
   useEffect(() => {
-    isEmailOpen ||
-      prevEmail === tempEmail ||
-      setTempEmail(prevEmail) ||
+    if (!isEmailOpen && prevEmail !== tempEmail) {
+      setTempEmail(prevEmail);
       setHasError(false);
-  }, [isEmailOpen]);
+    }
+  }, [isEmailOpen, prevEmail, tempEmail]);
 
-  if (!ready) return <></>;
+  if (!ready) return;
 
   return (
     <StyledRowContent sectionWidth={sectionWidth}>
@@ -167,15 +187,19 @@ const UsersRowContent = ({
             className="import-email-input"
             value={tempEmail}
             onChange={handleEmailChange}
-            type="email"
+            type={InputType.email}
             onValidateInput={onValidateEmail}
             hasError={hasError}
             onBlur={checkEmailValidity}
             isAutoFocussed
           />
 
-          <DecisionButton icon={<CheckSvg />} onClick={handleSaveClick} />
-          <DecisionButton icon={<CrossSvg />} onClick={clearEmail} />
+          <DecisionButton
+            label=""
+            icon={<CheckSvg />}
+            onClick={handleSaveClick}
+          />
+          <DecisionButton label="" icon={<CrossSvg />} onClick={clearEmail} />
         </EmailInputWrapper>
       ) : (
         <span onClick={openEmail} className="user-email" ref={emailTextRef}>
@@ -186,7 +210,7 @@ const UsersRowContent = ({
   );
 };
 
-export default inject(({ importAccountsStore }) => {
+export default inject<TStore>(({ importAccountsStore }) => {
   const { changeEmail } = importAccountsStore;
 
   return {

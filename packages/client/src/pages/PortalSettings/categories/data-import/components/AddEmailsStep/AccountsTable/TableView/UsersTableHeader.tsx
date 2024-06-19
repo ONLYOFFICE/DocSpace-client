@@ -27,31 +27,29 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
-import { TableHeader } from "@docspace/shared/components/table";
+import { TableHeader, TTableColumn } from "@docspace/shared/components/table";
+
+import { UsersTableHeaderProps } from "../../../../types";
 
 const TABLE_VERSION = "6";
 const TABLE_COLUMNS = `nextcloudThirdColumns_ver-${TABLE_VERSION}`;
 
-const getColumns = (defaultColumns, userId) => {
+const getColumns = (defaultColumns: TTableColumn[], userId?: string) => {
   const storageColumns = localStorage.getItem(`${TABLE_COLUMNS}=${userId}`);
-  const columns = [];
 
   if (storageColumns) {
-    const splitColumns = storageColumns.split(",");
+    const splitColumns = storageColumns?.split(",");
 
-    for (let col of defaultColumns) {
-      const column = splitColumns.find((key) => key === col.key);
-      column ? (col.enable = true) : (col.enable = false);
-
-      columns.push(col);
-    }
-    return columns;
-  } else {
-    return defaultColumns;
+    return defaultColumns.map((col) => ({
+      ...col,
+      enable: splitColumns.includes(col.key),
+    }));
   }
+
+  return defaultColumns;
 };
 
-const UsersTableHeader = (props) => {
+const UsersTableHeader = (props: UsersTableHeaderProps) => {
   const {
     t,
     userId,
@@ -59,13 +57,39 @@ const UsersTableHeader = (props) => {
     tableRef,
     columnStorageName,
     columnInfoPanelStorageName,
-    setHideColumns,
     isIndeterminate,
     isChecked,
     toggleAll,
   } = props;
 
-  const defaultColumns = [
+  const [columns, setColumns] = useState<TTableColumn[]>([
+    {
+      key: "Name",
+      title: t("Common:Name"),
+      resizable: true,
+      enable: true,
+      default: true,
+      active: true,
+      minWidth: 180,
+    },
+  ]);
+
+  function onColumnChange(key: string) {
+    const columnIndex = columns.findIndex((c) => c.key === key);
+
+    if (columnIndex === -1) return;
+
+    setColumns((prevColumns: TTableColumn[]) =>
+      prevColumns.map((item, index) =>
+        index === columnIndex ? { ...item, enable: !item.enable } : item,
+      ),
+    );
+
+    const tableColumns = columns.map((c) => c.enable && c.key);
+    localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns.toString());
+  }
+
+  const defaultColumns: TTableColumn[] = [
     {
       key: "Name",
       title: t("Common:Name"),
@@ -90,46 +114,27 @@ const UsersTableHeader = (props) => {
     },
   ];
 
-  const [columns, setColumns] = useState(getColumns(defaultColumns, userId));
-
-  function onColumnChange(key, e) {
-    const columnIndex = columns.findIndex((c) => c.key === key);
-
-    if (columnIndex === -1) return;
-
-    setColumns((prevColumns) =>
-      prevColumns.map((item, index) =>
-        index === columnIndex ? { ...item, enable: !item.enable } : item,
-      ),
-    );
-
-    const tableColumns = columns.map((c) => c.enable && c.key);
-    localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns);
-  }
-
   useEffect(() => {
-    setColumns(getColumns(defaultColumns));
+    setColumns(getColumns(defaultColumns, userId));
   }, [isIndeterminate, isChecked]);
 
   return (
     <TableHeader
-      checkboxSize="48px"
-      containerRef={tableRef}
+      containerRef={tableRef as { current: HTMLDivElement }}
       columns={columns}
       columnStorageName={columnStorageName}
       columnInfoPanelStorageName={columnInfoPanelStorageName}
       sectionWidth={sectionWidth}
-      checkboxMargin="12px"
       showSettings={false}
       useReactWindow
-      setHideColumns={setHideColumns}
       infoPanelVisible={false}
     />
   );
 };
 
-export default inject(({ userStore }) => {
+export default inject<TStore>(({ userStore }) => {
+  const userId = userStore.user?.id;
   return {
-    userId: userStore.user.id,
+    userId,
   };
 })(observer(UsersTableHeader));

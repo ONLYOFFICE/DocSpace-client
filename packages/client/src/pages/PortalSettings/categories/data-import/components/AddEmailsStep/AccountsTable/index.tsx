@@ -30,8 +30,10 @@ import { Consumer } from "@docspace/shared/utils/context";
 import TableView from "./TableView";
 import RowView from "./RowView";
 
-const AccountsTable = (props) => {
-  const { t, viewAs, accountsData } = props;
+import { AccountsTableProps, InjectedAccountsTableProps } from "../../../types";
+
+const AccountsTable = (props: AccountsTableProps) => {
+  const { t, viewAs, accountsData } = props as InjectedAccountsTableProps;
 
   return (
     <Consumer>
@@ -53,7 +55,7 @@ const AccountsTable = (props) => {
     </Consumer>
   );
 };
-export default inject(({ setup }) => {
+export default inject<TStore>(({ setup }) => {
   const { viewAs } = setup;
 
   return {

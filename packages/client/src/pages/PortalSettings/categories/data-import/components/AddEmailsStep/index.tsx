@@ -30,20 +30,26 @@ import { inject, observer } from "mobx-react";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { SearchInput } from "@docspace/shared/components/search-input";
 
-import AccountsTable from "./AccountsTable";
-import AccountsPaging from "../../../sub-components/AccountsPaging";
 import { Text } from "@docspace/shared/components/text";
+import { InputSize } from "@docspace/shared/components/text-input";
+import AccountsTable from "./AccountsTable";
+import AccountsPaging from "../../sub-components/AccountsPaging";
 
-import { Wrapper } from "../StyledStepper";
+import { Wrapper } from "../../StyledDataImport";
 
-import UsersInfoBlock from "../../../sub-components/UsersInfoBlock";
-import { NoEmailUsersBlock } from "../../../sub-components/NoEmailUsersBlock";
+import UsersInfoBlock from "../../sub-components/UsersInfoBlock";
+import { NoEmailUsersBlock } from "../../sub-components/NoEmailUsersBlock";
 
-import { parseQuota } from "../../../utils";
+import { parseQuota } from "../../utils";
 
-const AddEmailsStep = (props) => {
+import { AddEmailsStepProps, InjectedAddEmailsStepProps } from "../../types";
+
+const PAGE_SIZE = 25;
+
+const AddEmailsStep = (props: AddEmailsStepProps) => {
   const {
     t,
+
     incrementStep,
     decrementStep,
     users,
@@ -52,20 +58,24 @@ const AddEmailsStep = (props) => {
     setResultUsers,
     areCheckedUsersEmpty,
     checkedUsers,
-    quotaCharacteristics,
     withEmailUsers,
-  } = props;
+
+    quotaCharacteristics,
+  } = props as InjectedAddEmailsStepProps;
 
   const [dataPortion, setDataPortion] = useState(
-    users.withoutEmail.slice(0, 25),
+    users.withoutEmail.slice(0, PAGE_SIZE),
   );
-  const [quota, setQuota] = useState({ used: 0, max: 0 });
+  const [quota, setQuota] = useState<{
+    used: number;
+    max: number | null;
+  }>({ used: 0, max: 0 });
 
-  const handleDataChange = (leftBoundary, rightBoundary) => {
+  const handleDataChange = (leftBoundary: number, rightBoundary: number) => {
     setDataPortion(users.withoutEmail.slice(leftBoundary, rightBoundary));
   };
 
-  const onChangeInput = (value) => {
+  const onChangeInput = (value: string) => {
     setSearchValue(value);
   };
 
@@ -88,38 +98,43 @@ const AddEmailsStep = (props) => {
     checkedUsers.withEmail.length + checkedUsers.withoutEmail.length;
 
   useEffect(() => {
+    setSearchValue("");
     setQuota(parseQuota(quotaCharacteristics[1]));
-  }, []);
+  }, [quotaCharacteristics, setSearchValue]);
 
   const totalUsedUsers =
     quota.used +
     checkedUsers.withEmail.filter((user) => !user.isDuplicate).length +
     checkedUsers.withoutEmail.length;
 
+  const Buttons = (
+    <SaveCancelButtons
+      className="save-cancel-buttons"
+      onSaveClick={handleStepIncrement}
+      onCancelClick={decrementStep}
+      saveButtonLabel={t("Settings:NextStep")}
+      cancelButtonLabel={t("Common:Back")}
+      showReminder
+      displaySettings
+      saveButtonDisabled={
+        areCheckedUsersEmpty || (quota.max ? totalUsedUsers > quota.max : false)
+      }
+    />
+  );
+
   return (
     <Wrapper>
       {users.withoutEmail.length > 0 && (
         <NoEmailUsersBlock
-          users={users.withoutEmail.length}
           t={t}
+          users={users.withoutEmail.length}
           isCurrentStep
         />
       )}
 
       {users.withoutEmail.length > 0 ? (
         <>
-          <SaveCancelButtons
-            className="save-cancel-buttons"
-            onSaveClick={handleStepIncrement}
-            onCancelClick={decrementStep}
-            saveButtonLabel={t("Settings:NextStep")}
-            cancelButtonLabel={t("Common:Back")}
-            showReminder
-            displaySettings
-            saveButtonDisabled={
-              areCheckedUsersEmpty || (quota.max && totalUsedUsers > quota.max)
-            }
-          />
+          {Buttons}
 
           {quota.max && (
             <UsersInfoBlock
@@ -138,11 +153,12 @@ const AddEmailsStep = (props) => {
             onChange={onChangeInput}
             refreshTimeout={100}
             onClearSearch={onClearSearchInput}
+            size={InputSize.base}
           />
 
           <AccountsTable t={t} accountsData={filteredAccounts} />
 
-          {users.withoutEmail.length > 25 && (
+          {users.withoutEmail.length > PAGE_SIZE && (
             <AccountsPaging
               t={t}
               numberOfItems={users.withoutEmail.length}
@@ -156,24 +172,12 @@ const AddEmailsStep = (props) => {
         </Text>
       )}
 
-      <SaveCancelButtons
-        className="save-cancel-buttons"
-        onSaveClick={handleStepIncrement}
-        onCancelClick={decrementStep}
-        saveButtonLabel={t("Settings:NextStep")}
-        cancelButtonLabel={t("Common:Back")}
-        showReminder
-        displaySettings
-        saveButtonDisabled={
-          areCheckedUsersEmpty || (quota.max && totalUsedUsers > quota.max)
-        }
-      />
+      {Buttons}
     </Wrapper>
   );
 };
 
-export default inject(({ setup, importAccountsStore, currentQuotaStore }) => {
-  const { viewAs } = setup;
+export default inject<TStore>(({ importAccountsStore, currentQuotaStore }) => {
   const {
     searchValue,
     setSearchValue,
@@ -186,7 +190,6 @@ export default inject(({ setup, importAccountsStore, currentQuotaStore }) => {
   const { quotaCharacteristics } = currentQuotaStore;
 
   return {
-    viewAs,
     searchValue,
     setSearchValue,
     users,

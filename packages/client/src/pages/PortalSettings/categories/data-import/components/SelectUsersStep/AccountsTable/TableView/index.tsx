@@ -38,7 +38,7 @@ import { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
 import UsersTableRow from "./UsersTableRow";
 import UsersTableHeader from "./UsersTableHeader";
 import { StyledTableContainer } from "../../../../StyledDataImport";
-import { InjectedTableViewProps, TableViewProps } from "../../../../types";
+import { SelectUserTableProps, TableViewProps } from "../../../../types";
 
 const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `nextcloudSecondColumnsSize_ver-${TABLE_VERSION}`;
@@ -58,7 +58,7 @@ const TableView = (props: TableViewProps) => {
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
-  } = props as InjectedTableViewProps;
+  } = props as SelectUserTableProps;
   const tableRef = useRef<HTMLDivElement>(null);
 
   const toggleAll = (e: React.ChangeEvent<HTMLInputElement>) =>

@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   TEnhancedMigrationUser,
@@ -149,16 +150,23 @@ export interface TableViewProps {
 export interface InjectedTableViewProps extends TableViewProps {
   userId?: string;
   checkedUsers: TStore["importAccountsStore"]["checkedUsers"];
-  withEmailUsers: TStore["importAccountsStore"]["withEmailUsers"];
   toggleAccount: TStore["importAccountsStore"]["toggleAccount"];
   toggleAllAccounts: TStore["importAccountsStore"]["toggleAllAccounts"];
   isAccountChecked: TStore["importAccountsStore"]["isAccountChecked"];
+}
+
+export interface AddEmailTableProps extends InjectedTableViewProps {
+  users: TStore["importAccountsStore"]["users"];
+}
+
+export interface SelectUserTableProps extends InjectedTableViewProps {
+  withEmailUsers: TStore["importAccountsStore"]["withEmailUsers"];
   setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
 }
 
 export interface UsersTableHeaderProps {
   t: TFunciton;
-  sectionWidth: number;
+  sectionWidth?: number;
 
   userId?: string;
   tableRef: React.RefObject<HTMLDivElement>;
@@ -194,12 +202,25 @@ export interface InjectedRowViewProps extends RowViewProps {
   setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
 }
 
+export interface AddEmailRowProps extends RowViewProps {
+  users: TStore["importAccountsStore"]["users"];
+  checkedUsers: TStore["importAccountsStore"]["checkedUsers"];
+  toggleAccount: TStore["importAccountsStore"]["toggleAccount"];
+  toggleAllAccounts: TStore["importAccountsStore"]["toggleAllAccounts"];
+  isAccountChecked: TStore["importAccountsStore"]["isAccountChecked"];
+}
+
 export interface UsersRowProps {
   t: TFunciton;
   data: TEnhancedMigrationUser;
   sectionWidth?: number;
   isChecked: boolean;
   toggleAccount: () => void;
+}
+
+export interface AddEmailUsersRowProps extends UsersRowProps {
+  isEmailOpen: boolean;
+  setOpenedEmailKey: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export interface UsersRowContentProps {
@@ -209,4 +230,56 @@ export interface UsersRowContentProps {
   displayName: string;
   email: string;
   isDuplicate: boolean;
+}
+
+export interface AddEmailsStepProps {
+  t: TFunciton;
+}
+
+export interface InjectedAddEmailsStepProps extends AddEmailsStepProps {
+  incrementStep: TStore["importAccountsStore"]["incrementStep"];
+  decrementStep: TStore["importAccountsStore"]["decrementStep"];
+  users: TStore["importAccountsStore"]["users"];
+  searchValue: TStore["importAccountsStore"]["searchValue"];
+  setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
+  setResultUsers: TStore["importAccountsStore"]["setResultUsers"];
+  areCheckedUsersEmpty: TStore["importAccountsStore"]["areCheckedUsersEmpty"];
+  checkedUsers: TStore["importAccountsStore"]["checkedUsers"];
+  withEmailUsers: TStore["importAccountsStore"]["withEmailUsers"];
+
+  quotaCharacteristics: TStore["currentQuotaStore"]["quotaCharacteristics"];
+}
+
+export interface AddEmailTableRowProps {
+  t: TFunciton;
+  displayName: string;
+  email: string;
+  isChecked: boolean;
+  toggleAccount: () => void;
+  id: string;
+  isEmailOpen: boolean;
+  setOpenedEmailKey: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export interface InjectedAddEmailTableRowProps extends AddEmailTableRowProps {
+  changeEmail: TStore["importAccountsStore"]["changeEmail"];
+}
+
+export interface AddEmailRowContentProps {
+  id: string;
+  sectionWidth: number | undefined;
+  displayName: string;
+  email: string;
+  emailInputRef: React.RefObject<HTMLDivElement>;
+  emailTextRef: React.RefObject<HTMLSpanElement>;
+  isChecked: boolean;
+  isEmailOpen: boolean;
+  setOpenedEmailKey: React.Dispatch<React.SetStateAction<string>>;
+  setIsPrevEmailValid: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleAccount: () => void;
+}
+
+export interface InjectedAddEmailRowContentProps
+  extends AddEmailRowContentProps {
+  changeEmail: TStore["importAccountsStore"]["changeEmail"];
 }

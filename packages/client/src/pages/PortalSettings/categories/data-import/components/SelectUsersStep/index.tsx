@@ -46,7 +46,7 @@ import {
 } from "../../types";
 
 const REFRESH_TIMEOUT = 100;
-const PAGING_BREAKPOINT = 25;
+const PAGE_SIZE = 25;
 
 const SelectUsersStep = (props: SelectUsersStepProps) => {
   const {
@@ -67,7 +67,9 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
     quotaCharacteristics,
   } = props as InjectedSelectUsersStepProps;
 
-  const [dataPortion, setDataPortion] = useState(withEmailUsers.slice(0, 25));
+  const [dataPortion, setDataPortion] = useState(
+    withEmailUsers.slice(0, PAGE_SIZE),
+  );
   const [quota, setQuota] = useState<{
     used: number;
     max: number | null;
@@ -160,14 +162,13 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
 
           <AccountsTable t={t} accountsData={filteredAccounts} />
 
-          {withEmailUsers.length > PAGING_BREAKPOINT &&
-            filteredAccounts.length > 0 && (
-              <AccountsPaging
-                t={t}
-                numberOfItems={withEmailUsers.length}
-                setDataPortion={handleDataChange}
-              />
-            )}
+          {withEmailUsers.length > PAGE_SIZE && filteredAccounts.length > 0 && (
+            <AccountsPaging
+              t={t}
+              numberOfItems={withEmailUsers.length}
+              setDataPortion={handleDataChange}
+            />
+          )}
         </>
       ) : (
         <Text fontWeight={600} lineHeight="20px" className="mb-17">

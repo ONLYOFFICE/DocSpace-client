@@ -27,10 +27,12 @@
 import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 
+import { TableBody } from "@docspace/shared/components/table";
 import UsersTableHeader from "./UsersTableHeader";
 import UsersTableRow from "./UsersTableRow";
-import { TableBody } from "@docspace/shared/components/table";
-import { StyledTableContainer } from "../../../StyledStepper";
+import { StyledTableContainer } from "../../../../StyledDataImport";
+
+import { TableViewProps, AddEmailTableProps } from "../../../../types";
 
 const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `nextcloudThirdColumnsSize_ver-${TABLE_VERSION}`;
@@ -38,27 +40,27 @@ const INFO_PANEL_COLUMNS_SIZE = `infoPanelNextcloudThirdColumnsSize_ver-${TABLE_
 
 const checkedAccountType = "withoutEmail";
 
-const TableView = (props) => {
+const TableView = (props: TableViewProps) => {
   const {
     t,
-    userId,
     sectionWidth,
     accountsData,
-    users,
+
+    userId,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-  } = props;
-  const [hideColumns, setHideColumns] = useState(false);
-  const [openedEmailKey, setOpenedEmailKey] = useState(null);
+    users,
+  } = props as AddEmailTableProps;
+  const [openedEmailKey, setOpenedEmailKey] = useState<string>("");
   const tableRef = useRef(null);
 
   const usersWithFilledEmails = users.withoutEmail.filter(
     (user) => user.email && user.email.length > 0,
   );
 
-  const toggleAll = (e) =>
+  const toggleAll = (e: React.ChangeEvent<HTMLInputElement>) =>
     toggleAllAccounts(
       e.target.checked,
       usersWithFilledEmails,
@@ -68,6 +70,15 @@ const TableView = (props) => {
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
+  const isIndeterminate =
+    checkedUsers.withoutEmail.length > 0 &&
+    checkedUsers.withoutEmail.length !== usersWithFilledEmails.length;
+
+  const stub: () => Promise<void> = () =>
+    new Promise((resolve) => {
+      resolve();
+    });
+
   return (
     <StyledTableContainer forwardedRef={tableRef} useReactWindow>
       <UsersTableHeader
@@ -76,11 +87,7 @@ const TableView = (props) => {
         tableRef={tableRef}
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
-        setHideColumns={setHideColumns}
-        isIndeterminate={
-          checkedUsers.withoutEmail.length > 0 &&
-          checkedUsers.withoutEmail.length !== usersWithFilledEmails.length
-        }
+        isIndeterminate={isIndeterminate}
         isChecked={
           usersWithFilledEmails.length > 0 &&
           checkedUsers.withoutEmail.length === usersWithFilledEmails.length
@@ -96,7 +103,8 @@ const TableView = (props) => {
         filesLength={accountsData.length}
         hasMoreFiles={false}
         itemCount={accountsData.length}
-        fetchMoreFiles={() => {}}
+        fetchMoreFiles={stub}
+        onScroll={stub}
       >
         {accountsData.map((data) => (
           <UsersTableRow
@@ -105,7 +113,6 @@ const TableView = (props) => {
             id={data.key}
             email={data.email || ""}
             displayName={data.displayName}
-            hideColumns={hideColumns}
             isChecked={isAccountChecked(data.key, checkedAccountType)}
             toggleAccount={() => toggleAccount(data, checkedAccountType)}
             isEmailOpen={openedEmailKey === data.key}
@@ -117,8 +124,8 @@ const TableView = (props) => {
   );
 };
 
-export default inject(({ userStore, importAccountsStore }) => {
-  const { id: userId } = userStore.user;
+export default inject<TStore>(({ userStore, importAccountsStore }) => {
+  const userId = userStore.user?.id;
   const {
     users,
     checkedUsers,

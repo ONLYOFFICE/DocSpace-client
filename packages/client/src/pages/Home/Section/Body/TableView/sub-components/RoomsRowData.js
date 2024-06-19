@@ -61,6 +61,19 @@ const RoomsRowDataComponent = (props) => {
     item,
   } = props;
 
+  const lastColumn =
+    showStorageInfo && roomQuotaColumnIsEnable
+      ? "roomQuotaColumnIsEnable"
+      : roomColumnActivityIsEnabled
+        ? "roomColumnActivityIsEnabled"
+        : roomColumnOwnerIsEnabled
+          ? "roomColumnOwnerIsEnabled"
+          : roomColumnTagsIsEnabled
+            ? "roomColumnTagsIsEnabled"
+            : roomColumnTypeIsEnabled
+              ? "roomColumnTypeIsEnabled"
+              : "fileNameColumn";
+
   return (
     <>
       <TableCell
@@ -95,6 +108,11 @@ const RoomsRowDataComponent = (props) => {
         >
           <TypeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
+            removeExtraSpace={
+              roomColumnQuickButtonsIsEnabled
+                ? lastColumn === "roomColumnTypeIsEnabled"
+                : false
+            }
             {...props}
           />
         </TableCell>
@@ -130,6 +148,11 @@ const RoomsRowDataComponent = (props) => {
           {...selectionProp}
         >
           <AuthorCell
+            removeExtraSpace={
+              roomColumnQuickButtonsIsEnabled
+                ? lastColumn === "roomColumnOwnerIsEnabled"
+                : false
+            }
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
@@ -148,6 +171,11 @@ const RoomsRowDataComponent = (props) => {
           {...selectionProp}
         >
           <DateCell
+            removeExtraSpace={
+              roomColumnQuickButtonsIsEnabled
+                ? lastColumn === "roomColumnActivityIsEnabled"
+                : false
+            }
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />

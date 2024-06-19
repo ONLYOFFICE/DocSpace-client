@@ -34,6 +34,7 @@ const DateCell = ({
   sideColor,
   lastOpenedDate,
   isRecentTab,
+  removeExtraSpace,
 }) => {
   const date = isRecentTab
     ? lastOpenedDate
@@ -49,6 +50,7 @@ const DateCell = ({
       color={sideColor}
       className="row_update-text"
       truncate
+      removeExtraSpace={removeExtraSpace}
     >
       {date && date}
     </StyledText>

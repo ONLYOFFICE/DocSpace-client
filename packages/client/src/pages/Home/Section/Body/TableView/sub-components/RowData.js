@@ -60,6 +60,18 @@ const RowDataComponent = (props) => {
     quickButtonsComponent,
   } = props;
 
+  const lastColumn = typeColumnIsEnabled
+    ? "typeColumnIsEnabled"
+    : sizeColumnIsEnabled
+      ? "sizeColumnIsEnabled"
+      : modifiedColumnIsEnabled
+        ? "modifiedColumnIsEnabled"
+        : createdColumnIsEnabled
+          ? "createdColumnIsEnabled"
+          : authorColumnIsEnabled
+            ? "authorColumnIsEnabled"
+            : "fileNameColumn";
+
   return (
     <>
       <TableCell
@@ -92,6 +104,11 @@ const RowDataComponent = (props) => {
         >
           <AuthorCell
             sideColor={theme.filesSection.tableView.row.sideColor}
+            removeExtraSpace={
+              quickButtonsColumnIsEnabled
+                ? lastColumn === "authorColumnIsEnabled"
+                : false
+            }
             {...props}
           />
         </TableCell>
@@ -111,6 +128,11 @@ const RowDataComponent = (props) => {
           <DateCell
             create
             sideColor={theme.filesSection.tableView.row.sideColor}
+            removeExtraSpace={
+              quickButtonsColumnIsEnabled
+                ? lastColumn === "createdColumnIsEnabled"
+                : false
+            }
             {...props}
           />
         </TableCell>
@@ -127,6 +149,11 @@ const RowDataComponent = (props) => {
         >
           <DateCell
             sideColor={theme.filesSection.tableView.row.sideColor}
+            removeExtraSpace={
+              quickButtonsColumnIsEnabled
+                ? lastColumn === "modifiedColumnIsEnabled"
+                : false
+            }
             {...props}
           />
         </TableCell>
@@ -143,6 +170,11 @@ const RowDataComponent = (props) => {
         >
           <SizeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
+            removeExtraSpace={
+              quickButtonsColumnIsEnabled
+                ? lastColumn === "sizeColumnIsEnabled"
+                : false
+            }
             {...props}
           />
         </TableCell>
@@ -161,6 +193,11 @@ const RowDataComponent = (props) => {
         >
           <TypeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
+            removeExtraSpace={
+              quickButtonsColumnIsEnabled
+                ? lastColumn === "typeColumnIsEnabled"
+                : false
+            }
             {...props}
           />
         </TableCell>

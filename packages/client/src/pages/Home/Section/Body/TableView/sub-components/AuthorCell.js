@@ -30,7 +30,7 @@ import { StyledText, StyledAuthorCell } from "./CellStyles";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { decode } from "he";
 
-const AuthorCell = ({ fileOwner, sideColor, item }) => {
+const AuthorCell = ({ fileOwner, sideColor, item, removeExtraSpace }) => {
   const { avatarSmall, hasAvatar } = item.createdBy;
 
   const avatarSource = hasAvatar ? avatarSmall : DefaultUserPhotoSize32PngUrl;
@@ -48,6 +48,7 @@ const AuthorCell = ({ fileOwner, sideColor, item }) => {
         fontWeight={600}
         title={decode(fileOwner)}
         truncate
+        removeExtraSpace={removeExtraSpace}
       >
         {decode(fileOwner)}
       </StyledText>

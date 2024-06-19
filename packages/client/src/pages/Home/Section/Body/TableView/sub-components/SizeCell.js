@@ -27,7 +27,7 @@
 import React from "react";
 import { StyledText } from "./CellStyles";
 
-const SizeCell = ({ t, item, sideColor }) => {
+const SizeCell = ({ t, item, sideColor, removeExtraSpace }) => {
   const { fileExst, contentLength, providerKey, filesCount, foldersCount } =
     item;
   const date = fileExst || contentLength ? contentLength : "";
@@ -39,6 +39,7 @@ const SizeCell = ({ t, item, sideColor }) => {
       fontWeight={600}
       title={date}
       truncate
+      removeExtraSpace={removeExtraSpace}
     >
       {date}
     </StyledText>

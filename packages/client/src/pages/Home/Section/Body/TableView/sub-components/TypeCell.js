@@ -29,7 +29,7 @@ import { StyledTypeCell } from "./CellStyles";
 import { FileType } from "@docspace/shared/enums";
 import { getDefaultRoomName } from "../../../../../../helpers/filesUtils";
 
-const TypeCell = ({ t, item, sideColor }) => {
+const TypeCell = ({ t, item, sideColor, removeExtraSpace }) => {
   const { fileExst, fileTypeName, fileType, roomType } = item;
   const getItemType = () => {
     switch (fileType) {
@@ -69,6 +69,7 @@ const TypeCell = ({ t, item, sideColor }) => {
       color={sideColor}
       truncate
       title={data}
+      removeExtraSpace={removeExtraSpace}
     >
       <span className="type">{type}</span>&nbsp;
       <span dir="ltr" className="extension">

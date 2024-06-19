@@ -175,6 +175,7 @@
   "Migration": "Migration",
   "NewColorScheme": "New color scheme",
   "NextStep": "Next step",
+  "NoSessionsHere": "No other sessions here yet",
   "NoEmail": "NO EMAIL",
   "NoUsersInBackup": "No users found. Try again or upload other backup files.",
   "NumberOfActiveEmployees": "Number of active employees: {{count}}",

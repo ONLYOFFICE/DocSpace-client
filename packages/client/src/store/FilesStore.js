@@ -36,6 +36,7 @@ import {
   RoomsProviderType,
   ShareAccessRights,
   Events,
+  FilterKeys,
 } from "@docspace/shared/enums";
 
 import { RoomsTypes } from "@docspace/shared/utils";
@@ -50,6 +51,7 @@ import { getDaysRemaining } from "@docspace/shared/utils/common";
 import {
   MEDIA_VIEW_URL,
   PDF_FORM_DIALOG_KEY,
+  ROOMS_PROVIDER_TYPE_NAME,
 } from "@docspace/shared/constants";
 
 import {
@@ -1451,6 +1453,19 @@ class FilesStore {
       filterData.pageCount = 100;
     }
 
+    const defaultFilter = FilesFilter.getDefault();
+
+    const { filterType, searchInContent } = filterData;
+
+    if (typeof filterData.withSubfolders !== "boolean")
+      filterData.withSubfolders = defaultFilter.withSubfolders;
+
+    if (typeof searchInContent !== "boolean")
+      filterData.searchInContent = defaultFilter.searchInContent;
+
+    if (!Object.keys(FilterType).find((key) => FilterType[key] === filterType))
+      filterData.filterType = defaultFilter.filterType;
+
     setSelectedNode([folderId + ""]);
 
     return api.files
@@ -1745,6 +1760,22 @@ class FilesStore {
     }
 
     if (folderId) setSelectedNode([folderId + ""]);
+
+    const defaultFilter = RoomsFilter.getDefault();
+
+    const { provider, quotaFilter, type } = filterData;
+
+    if (!ROOMS_PROVIDER_TYPE_NAME[provider])
+      filterData.provider = defaultFilter.provider;
+
+    if (
+      quotaFilter &&
+      quotaFilter !== FilterKeys.customQuota &&
+      quotaFilter !== FilterKeys.defaultQuota
+    )
+      filterData.quotaFilter = defaultFilter.quotaFilter;
+
+    if (type && !RoomsType[type]) filterData.type = defaultFilter.type;
 
     const request = () =>
       api.rooms

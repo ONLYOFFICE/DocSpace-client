@@ -26,7 +26,7 @@
 
 import Scrollbar, { ScrollbarProps, ScrollbarState } from "./Scrollbar";
 
-export { ScrollbarContext } from "./Scrollbar";
+// export { ScrollbarContext } from "./Scrollbar";
 
 export { Scrollbar };
 

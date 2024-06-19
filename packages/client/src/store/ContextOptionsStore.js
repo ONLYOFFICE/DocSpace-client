@@ -2126,7 +2126,7 @@ class ContextOptionsStore {
     ];
   };
 
-  getFolderModel = (t) => {
+  getFolderModel = (t, isSectionMenu) => {
     const { isLoading } = this.clientLoadingStore;
     const { security, roomType, parentRoomType, isFolder } =
       this.selectedFolderStore;
@@ -2157,7 +2157,8 @@ class ContextOptionsStore {
 
     const someDialogIsOpen = checkDialogsOpen();
 
-    if (!canCreate || isMobile || someDialogIsOpen) return null;
+    if (isSectionMenu && (!canCreate || isMobile || someDialogIsOpen))
+      return null;
 
     const isOwner = this.userStore.user?.isOwner;
     const isRoomAdmin = this.userStore.user?.isRoomAdmin;
@@ -2397,6 +2398,7 @@ class ContextOptionsStore {
       });
     }
 
+    console.log("options", options);
     return options;
   };
 

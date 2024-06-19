@@ -121,7 +121,7 @@ const LastSessionBlock = (props) => {
 
   const getUserType = () => {
     if (isOwner) return t("Common:Owner");
-    if (isAdmin) return t("Common:DocspaceAdmin");
+    if (isAdmin) return t("Common:PortalAdmin");
     if (isRoomAdmin) return t("Common:RoomAdmin");
     if (isCollaborator) return t("Common:PowerUser");
     return t("Common:User");

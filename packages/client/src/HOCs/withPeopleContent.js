@@ -49,7 +49,8 @@ export default function withContent(WrappedContent) {
       itemIndex,
     } = props;
 
-    const { mobilePhone, email, role, displayName, avatar } = item;
+    const { mobilePhone, email, displayName, avatar, isAdmin, isOwner } = item;
+    const role = isOwner ? "owner" : isAdmin ? "admin" : null;
 
     const onContentRowSelect = useCallback(
       (checked, user) => {

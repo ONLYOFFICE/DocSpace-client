@@ -249,9 +249,9 @@ class SelectionStore {
       case "disabled":
         return user.status === EmployeeStatus.Disabled;
       case "online":
-        return status === "online";
+        return user.status === EmployeeStatus.Online;
       case "offline":
-        return status === "offline";
+        return user.status === EmployeeStatus.Offline;
       default:
         return false;
     }

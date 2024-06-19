@@ -57,6 +57,10 @@ export const getUserStatus = (user) => {
       return "pending";
     case EmployeeStatus.Disabled:
       return "disabled";
+    case EmployeeStatus.Online:
+      return "online";
+    case EmployeeStatus.Offline:
+      return "offline";
     default:
       return "unknown";
   }

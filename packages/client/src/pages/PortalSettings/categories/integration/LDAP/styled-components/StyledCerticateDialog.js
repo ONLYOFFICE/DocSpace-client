@@ -40,14 +40,11 @@ const StyledCertificateDialogBody = styled(Box)`
     flex-direction: column;
     gap: 4px;
     background-color: ${(props) =>
-      props.theme.isBase ? "#f8f9f9" : "#474747"};
-    border: 1px solid
-      ${(props) =>
-        props.hasError
-          ? "#F24724"
-          : props.theme.isBase
-            ? "#eceef1"
-            : "#474747"};
+      props.theme.client.settings.integration.ldap.certificateBackground};
+    border: ${(props) =>
+      props.hasError
+        ? props.theme.client.settings.integration.ldap.errorBorder
+        : props.theme.client.settings.integration.ldap.border};
     border-radius: 3px;
     padding: 4px;
     margin-bottom: 8px;

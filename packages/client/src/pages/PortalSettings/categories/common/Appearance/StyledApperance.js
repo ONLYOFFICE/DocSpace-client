@@ -81,7 +81,8 @@ const StyledComponent = styled.div`
   }
 
   .add-theme {
-    background: #d0d5da;
+    background: ${(props) =>
+      props.theme.client.settings.common.appearance.addThemeBackground};
     padding-top: 16px;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"

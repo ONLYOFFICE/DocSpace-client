@@ -75,7 +75,8 @@ const MainContainer = styled.div`
 
   .login-subheader {
     font-size: 13px;
-    color: #657077;
+    color: ${(props) =>
+      props.theme.client.settings.security.loginHistory.subheaderColor};
   }
 
   .latest-text {

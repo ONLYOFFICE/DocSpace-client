@@ -75,7 +75,7 @@ export const UsersInfoBlock = styled.div`
   display: flex;
   align-items: center;
   max-width: 660px;
-  background: #f8f9f9;
+  background: ${(props) => props.theme.client.settings.migration.background};
   padding: 12px 16px;
   border-radius: 6px;
   margin: 16px 0;

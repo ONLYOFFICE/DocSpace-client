@@ -58,7 +58,8 @@ const ErrorMessageTooltip = styled.div`
   width: 100%;
   max-width: 1200px;
   padding: 8px 12px;
-  background: #f7cdbe;
+  background: ${(props) =>
+    props.theme.client.settings.webhooks.toastBackground};
 
   box-shadow: 0px 5px 20px rgba(4, 15, 27, 0.07);
   border-radius: 6px;

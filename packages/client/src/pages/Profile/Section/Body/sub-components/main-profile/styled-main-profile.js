@@ -185,7 +185,7 @@ export const StyledInfo = styled.div`
     min-width: 12px;
 
     svg path {
-      fill: ${(props) => props.theme.isBase && `#657077`};
+      fill: ${(props) => props.theme.profile.main.iconFill};
     }
   }
 
@@ -344,7 +344,7 @@ export const StyledInfo = styled.div`
           min-width: 12px;
 
           svg path {
-            fill: ${(props) => props.theme.isBase && `#657077`};
+            fill: ${(props) => props.theme.profile.main.iconFill};
           }
         }
 

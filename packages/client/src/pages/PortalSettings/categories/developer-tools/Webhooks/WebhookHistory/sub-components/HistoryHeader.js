@@ -48,7 +48,7 @@ import { useParams } from "react-router-dom";
 
 import { FloatingButton } from "@docspace/shared/components/floating-button";
 
-import Base from "@docspace/shared/themes/base";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 const HeaderContainer = styled.div`
   position: sticky;
@@ -114,7 +114,7 @@ const HeaderContainer = styled.div`
       svg {
         path {
           fill: ${(props) =>
-            props.isDisabled ? "#d0d5da" : props.theme.color};
+            props.isDisabled ? globalColors.grayStrong : props.theme.color};
         }
       }
     }

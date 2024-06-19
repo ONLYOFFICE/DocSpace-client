@@ -83,7 +83,7 @@ export const GroupsContent = styled.div<{}>`
       margin-inline-start: auto;
       .group-manager-tag {
         white-space: nowrap;
-        color: #d0d5da;
+        color: ${(props) => props.theme.infoPanel.groups.tagColor};
         font-size: 12px;
         font-weight: 600;
         line-height: 16px;

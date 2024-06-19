@@ -539,14 +539,21 @@ class SelectionStore {
 
     const userId = userIdFromSelection || userIdFromBufferSelection;
 
-    if (!userId) return toastr.error(t("The user is already logged out"));
+    if (!userId)
+      return toastr.error(
+        t("Settings:UserAlreadyLoggedOut", { displayName: this.displayName }),
+      );
 
     try {
       this.setIsLoading(true);
       await removeAllActiveSessionsById(userId);
       this.setConnections([]);
       await this.fetchData();
-      toastr.success(t("Successfully logout all sessions"));
+      toastr.success(
+        t("Settings:LoggedOutByUser", {
+          displayName: this.displayName,
+        }),
+      );
     } catch (error) {
       toastr.error(error);
     } finally {
@@ -569,7 +576,10 @@ class SelectionStore {
 
     const exceptId = idFromSelection || idFromBufferSelection;
 
-    if (!exceptId) return toastr.error(t("The user is already logged out"));
+    if (!exceptId)
+      return toastr.error(
+        t("Settings:UserAlreadyLoggedOut", { displayName: this.displayName }),
+      );
 
     try {
       this.setIsLoading(true);
@@ -580,7 +590,11 @@ class SelectionStore {
       );
       this.setConnections(filteredConnections);
       await this.fetchData();
-      toastr.success(t("Successfully logout all sessions"));
+      toastr.success(
+        t("Settings:LoggedOutByUserExceptThis", {
+          displayName: this.displayName,
+        }),
+      );
     } catch (error) {
       toastr.error(error);
     } finally {

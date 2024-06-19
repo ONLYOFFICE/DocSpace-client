@@ -23,23 +23,17 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
+/* eslint-disable no-bitwise */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/sort-comp */
 "use client";
+import * as React from "react";
 
-import { ScrollbarType } from "./Scrollbar.enums";
-import { ScrollbarComponent as Scrollbar } from "./Scrollbar";
-// import { ScrollbarContext } from "./custom-scrollbar";
-import {
-  CustomScrollbarsVirtualList,
-  CustomScrollbarsVirtualListWithAutoFocus,
-} from "./sub-components";
-import type { ScrollbarProps } from "./Scrollbar.types";
+export type ScrollbarContextValue = { parentScrollbar: any | null };
 
-export {
-  Scrollbar,
-  ScrollbarProps,
-  ScrollbarType,
-  CustomScrollbarsVirtualList,
-  CustomScrollbarsVirtualListWithAutoFocus,
-  // ScrollbarContext,
-};
+const ScrollbarContext: React.Context<ScrollbarContextValue> =
+  React.createContext({
+    parentScrollbar: null,
+  } as ScrollbarContextValue);
+
+export default ScrollbarContext;

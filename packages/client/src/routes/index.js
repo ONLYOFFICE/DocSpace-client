@@ -27,7 +27,13 @@
 import PortalSettingsRoutes from "./portalSettings";
 import ClientRoutes from "./client";
 import ConfirmRoutes from "./confirm";
+import { generalRoutes } from "./general";
 
-const routes = [...ClientRoutes, PortalSettingsRoutes, ...ConfirmRoutes];
+const routes = [
+  ...ClientRoutes,
+  PortalSettingsRoutes,
+  ...ConfirmRoutes,
+  //   ...generalRoutes,
+];
 
 export default routes;

@@ -37,7 +37,6 @@ import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 import { generalRoutes } from "./general";
 import SettingsContainer from "../pages/PortalSettings/categories/integration/LDAP/sub-components/SettingsContainer";
 import SyncContainer from "../pages/PortalSettings/categories/integration/LDAP/sub-components/SyncContainer";
-import StyledLdapPage from "../pages/PortalSettings/categories/integration/LDAP/styled-components/StyledLdapPage";
 
 const PortalSettings = loadable(() =>
   componentLoader(() => import("../pages/PortalSettings")),

@@ -73,14 +73,14 @@ export default function withContent(WrappedContent) {
       (e, user) => {
         if (
           e.target?.tagName === "A" ||
-          e.target.closest(".checkbox") ||
-          e.target.closest(".table-container_row-checkbox") ||
-          e.target.closest(".type-combobox") ||
-          e.target.closest(".groups-combobox") ||
-          e.target.closest(".paid-badge") ||
-          e.target.closest(".pending-badge") ||
-          e.target.closest(".disabled-badge") ||
-          e.target.closest(".dropdown-container") ||
+          e.target?.closest(".checkbox") ||
+          e.target?.closest(".table-container_row-checkbox") ||
+          e.target?.closest(".type-combobox") ||
+          e.target?.closest(".groups-combobox") ||
+          e.target?.closest(".paid-badge") ||
+          e.target?.closest(".pending-badge") ||
+          e.target?.closest(".disabled-badge") ||
+          e.target?.closest(".dropdown-container") ||
           e.detail === 0
         ) {
           return;

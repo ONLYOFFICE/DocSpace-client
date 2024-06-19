@@ -31,6 +31,7 @@ import { decode } from "he";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { withTranslation } from "react-i18next";
+import { Text } from "@docspace/shared/components/text";
 
 interface HistoryRoomExternalLinkProps {
   feed: any;
@@ -41,6 +42,7 @@ const HistoryRoomExternalLink = ({
   t,
   feed,
   actionType,
+  canEditLink,
   setEditLinkPanelIsVisible,
   setLinkParams,
 }: HistoryRoomExternalLinkProps) => {
@@ -57,14 +59,21 @@ const HistoryRoomExternalLink = ({
   if (actionType === "create")
     return (
       <StyledHistoryLink>
-        <Link className="text link" onClick={onEditLink}>
-          {decode(feed.data.title || feed.data.sharedTo?.title)}
-        </Link>
+        {canEditLink ? (
+          <Link className="text link" onClick={onEditLink}>
+            {decode(feed.data.title || feed.data.sharedTo?.title)}
+          </Link>
+        ) : (
+          <Text as="span" className="text">
+            {decode(feed.data.title || feed.data.sharedTo?.title)}
+          </Text>
+        )}
       </StyledHistoryLink>
     );
 };
 
-export default inject(({ dialogsStore }) => ({
+export default inject(({ userStore, dialogsStore }) => ({
+  canEditLink: !(userStore.user.isVisitor || userStore.user.isCollaborator),
   setEditLinkPanelIsVisible: dialogsStore.setEditLinkPanelIsVisible,
   setLinkParams: dialogsStore.setLinkParams,
 }))(withTranslation(["InfoPanel"])(observer(HistoryRoomExternalLink)));

@@ -24,31 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState, useTransition, Suspense } from "react";
+import React, { useEffect, useState, useTransition } from "react";
 
 import { Tabs } from "@docspace/shared/components/tabs";
 
-import { Box } from "@docspace/shared/components/box";
 import { inject, observer } from "mobx-react";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 
 import { useNavigate, useLocation } from "react-router-dom";
-import JavascriptSDK from "./JavascriptSDK";
-import Webhooks from "./Webhooks";
-
-import Api from "./Api";
-
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { inject, observer } from "mobx-react";
 
 import { Box } from "@docspace/shared/components/box";
 import { Badge } from "@docspace/shared/components/badge";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-
-import config from "PACKAGE_FILE";
 
 import JavascriptSDK from "./JavascriptSDK";
 import Webhooks from "./Webhooks";

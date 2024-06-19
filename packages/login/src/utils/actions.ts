@@ -28,7 +28,10 @@
 
 import { headers } from "next/headers";
 
-import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
+import {
+  createRequest,
+  getBaseUrl,
+} from "@docspace/shared/utils/next-ssr-helper";
 import { TUser } from "@docspace/shared/api/people/types";
 import {
   TCapabilities,
@@ -227,4 +230,13 @@ export async function getPortalCultures() {
   const cultures = await res.json();
 
   return cultures.response as TPortalCultures;
+}
+
+export async function getConfig() {
+  const baseUrl = getBaseUrl();
+  const config = await (
+    await fetch(`${baseUrl}/static/scripts/config.json`)
+  ).json();
+
+  return config;
 }

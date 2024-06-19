@@ -1,9 +1,9 @@
 {
-  "date": "2024530_114536",
+  "date": "2024619_181025",
   "checksums": {
     "api.js": "0efbae3383bf6c6b6f26d573eee164d2",
     "api.poly.js": "2a2ac2c0e4a7007b61d2d1ff7b00a22e",
     "browserDetector.js": "d9387cce805699498e798230a8639c8a",
-    "config.json": "e2842b7489cfe221207e6833191246b1"
+    "config.json": "1cc6da8a9d43cda405c4f85b0e6039e4"
   }
 }

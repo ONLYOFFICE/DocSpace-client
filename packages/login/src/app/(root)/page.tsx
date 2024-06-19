@@ -26,7 +26,7 @@
 
 import { INoAuthClientProps } from "@docspace/shared/utils/oauth/interfaces";
 
-import { getOAuthClient, getSettings } from "@/utils/actions";
+import { getConfig, getOAuthClient, getSettings } from "@/utils/actions";
 import Login from "@/components/Login";
 import LoginForm from "@/components/LoginForm";
 import ThirdParty from "@/components/ThirdParty";
@@ -40,10 +40,15 @@ async function Page({
 }) {
   const clientId = searchParams.clientId;
 
-  const [settings, client] = await Promise.all([
+  const [settings, client, config] = await Promise.all([
     getSettings(),
     clientId ? getOAuthClient(clientId, false) : undefined,
+    clientId ? getConfig() : undefined,
   ]);
+
+  const isPublicOAuth = clientId && config.oauth2.publicClient;
+
+  console.log(isPublicOAuth);
 
   return (
     <Login>

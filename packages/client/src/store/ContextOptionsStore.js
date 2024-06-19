@@ -2398,7 +2398,6 @@ class ContextOptionsStore {
       });
     }
 
-    console.log("options", options);
     return options;
   };
 

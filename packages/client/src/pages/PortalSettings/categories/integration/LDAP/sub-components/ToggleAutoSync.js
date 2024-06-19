@@ -32,6 +32,7 @@ import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { toastr } from "@docspace/shared/components/toast";
+import { globalColors } from "@docspace/shared/themes";
 
 const borderProp = { radius: "6px" };
 
@@ -92,7 +93,7 @@ const ToggleAutoSync = ({
             </Text>
             {!isLdapAvailable && (
               <Badge
-                backgroundColor="#EDC409"
+                backgroundColor={globalColors.favoritesStatus}
                 label={t("Common:Paid")}
                 className="toggle-caption_title_badge"
                 isPaidBadge={true}

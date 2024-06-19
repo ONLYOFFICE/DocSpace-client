@@ -48,6 +48,16 @@ const StyledCertificateDialogBody = styled(Box)`
     border-radius: 3px;
     padding: 4px;
     margin-bottom: 8px;
+
+    & > p {
+      color: ${(props) =>
+        props.theme.client.settings.integration.ldap.textColor};
+    }
+  }
+
+  .ldap-error-text {
+    color: ${(props) =>
+      props.theme.client.settings.integration.ldap.errorColor};
   }
 `;
 

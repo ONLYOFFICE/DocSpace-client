@@ -48,6 +48,8 @@ import PluginSDK from "./PluginSDK";
 import { Badge } from "@docspace/shared/components/badge";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
+import { globalColors } from "@docspace/shared/themes";
+
 const DeveloperToolsWrapper = (props) => {
   const { loadBaseInfo, currentDeviceType } = props;
   const navigate = useNavigate();
@@ -77,7 +79,7 @@ const DeveloperToolsWrapper = (props) => {
 
       <Badge
         label={t("Common:BetaLabel")}
-        backgroundColor="#533ED1"
+        backgroundColor={globalColors.mainPurple}
         fontSize="9px"
         borderRadius="50px"
         noHover={true}

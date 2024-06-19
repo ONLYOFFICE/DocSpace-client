@@ -42,6 +42,7 @@ import PluginPage from "./Plugins";
 import { Badge } from "@docspace/shared/components/badge";
 import { Box } from "@docspace/shared/components/box";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { globalColors } from "@docspace/shared/themes";
 
 const IntegrationWrapper = (props) => {
   const {
@@ -103,7 +104,7 @@ const IntegrationWrapper = (props) => {
 
         <Badge
           label={t("Common:BetaLabel")}
-          backgroundColor="#533ED1"
+          backgroundColor={globalColors.mainPurple}
           fontSize="9px"
           borderRadius="50px"
           noHover={true}

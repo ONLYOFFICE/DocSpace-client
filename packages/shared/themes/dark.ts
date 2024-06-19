@@ -57,6 +57,7 @@ const {
   lightBlueMain,
   lightBlueMainHover,
   lightBlueMainDisabled,
+  lightBlueMainPressed,
   lightSecondMain,
   lightSecondMainHover,
   lightSecondMainDisabled,
@@ -302,7 +303,7 @@ const Dark: TTheme = {
     backgroundColor: lightBlueMain,
     disableBackgroundColor: lightBlueMainDisabled,
     hoverBackgroundColor: lightBlueMainHover,
-    clickBackgroundColor: "#4074BC",
+    clickBackgroundColor: lightBlueMainPressed,
 
     padding: "5px 14px 5px 12px",
     borderRadius: "3px",
@@ -1876,6 +1877,7 @@ const Dark: TTheme = {
 
     groups: {
       textColor: grayDark,
+      tagColor: grayDarkStrong,
     },
   },
 
@@ -2766,6 +2768,7 @@ const Dark: TTheme = {
           sideColor: grayDark,
           nameColor: white,
           textColor: grayDark,
+          subheaderColor: darkGrayDark,
         },
         ip: {
           errorColor: darkErrorStatus,
@@ -2785,6 +2788,7 @@ const Dark: TTheme = {
           accentBoxBackground: grayDarkStrong,
           buttonBoxBackground: grayDarkStrong,
           iconFill: grayDark,
+          addThemeBackground: grayDarkStrong,
         },
 
         whiteLabel: {
@@ -2822,7 +2826,11 @@ const Dark: TTheme = {
           iconButtonDisabled: black,
           border: `1px solid ${grayDarkStrong}`,
         },
-
+        ldap: {
+          border: `1px solid ${grayDarkStrong}`,
+          errorBorder: `1px solid ${darkErrorStatus}`,
+          certificateBackground: grayDarkStrong,
+        },
         smtp: {
           requirementColor: darkErrorStatus,
         },
@@ -2896,6 +2904,7 @@ const Dark: TTheme = {
         groupMenuBorder: `1px solid ${grayDarkStrong}`,
         groupMenuBoxShadow: "rgba(0, 0, 0, 0.16) 0px 5px 5px 0px",
         linkColor: lightBlueMain,
+        background: darkGrayLight,
       },
       storageManagement: {
         grayBackgroundText: grayDark,
@@ -2913,6 +2922,8 @@ const Dark: TTheme = {
         linkColor: lightBlueMain,
         spanBackground: lightBlueMain,
         filterBorder: `1px solid ${black}`,
+        toastBackground: darkToastWarning,
+        background: darkGrayLight,
       },
     },
 
@@ -2982,6 +2993,8 @@ const Dark: TTheme = {
       pendingEmailTextColor: grayDark,
 
       mobileRowBackground: lightDarkGrayHover,
+
+      iconFill: darkGrayDark,
     },
     login: {
       textColor: grayDark,

@@ -50,6 +50,7 @@ export const globalColors = {
   lightBlueMain: "#4781D1",
   lightBlueMainHover: "rgba(71, 129, 209, 0.85)",
   lightBlueMainDisabled: "rgba(71, 129, 209, 0.6)",
+  lightBlueMainPressed: "#4074bc",
   lightSecondMain: "#5299E0",
   lightSecondMainHover: "rgba(82, 153, 224, 0.85)",
   lightSecondMainDisabled: "rgba(82, 153, 224, 0.6)",

@@ -69,6 +69,7 @@ const {
   lightBlueMain,
   lightBlueMainHover,
   lightBlueMainDisabled,
+  lightBlueMainPressed,
   lightSecondMain,
   lightSecondMainHover,
   lightSecondMainDisabled,
@@ -298,7 +299,7 @@ export const getBaseTheme = () => {
         separatorBackground: white,
 
         buttonColor: white,
-        hoverButtonColor: "#3a6c9e",
+        hoverButtonColor: lightBlueMainPressed,
 
         backgroundActionMobile: blueLightMid,
       },
@@ -312,7 +313,7 @@ export const getBaseTheme = () => {
       backgroundColor: lightBlueMain,
       disableBackgroundColor: lightBlueMainDisabled,
       hoverBackgroundColor: lightBlueMainHover,
-      clickBackgroundColor: "#4074BC",
+      clickBackgroundColor: lightBlueMainPressed,
 
       padding: "5px 14px 5px 12px",
       borderRadius: "3px",
@@ -1892,6 +1893,7 @@ export const getBaseTheme = () => {
 
       groups: {
         textColor: gray,
+        tagColor: grayStrong,
       },
     },
 
@@ -2782,6 +2784,7 @@ export const getBaseTheme = () => {
             sideColor: gray,
             nameColor: black,
             textColor: gray,
+            subheaderColor: lightGrayDark,
           },
           ip: {
             errorColor: lightErrorStatus,
@@ -2801,6 +2804,7 @@ export const getBaseTheme = () => {
             accentBoxBackground: grayLightMid,
             buttonBoxBackground: grayLightMid,
             iconFill: gray,
+            addThemeBackground: grayStrong,
           },
 
           whiteLabel: {
@@ -2838,7 +2842,11 @@ export const getBaseTheme = () => {
             iconButtonDisabled: gray,
             border: `1px solid ${grayStrong}`,
           },
-
+          ldap: {
+            border: `1px solid ${grayLightMid}`,
+            errorBorder: `1px solid ${lightErrorStatus}`,
+            certificateBackground: grayLight,
+          },
           smtp: {
             requirementColor: lightErrorStatus,
           },
@@ -2915,6 +2923,7 @@ export const getBaseTheme = () => {
           groupMenuBorder: `1px solid ${white}`,
           groupMenuBoxShadow: "rgba(4, 15, 27, 0.07) 0px 5px 5px 0px",
           linkColor: lightBlueMain,
+          background: grayLight,
         },
         storageManagement: {
           grayBackgroundText: grayText,
@@ -2932,6 +2941,8 @@ export const getBaseTheme = () => {
           linkColor: link,
           spanBackground: lightBlueMain,
           filterBorder: `1px solid ${grayStrong}`,
+          toastBackground: lightToastWarning,
+          background: grayLight,
         },
       },
 
@@ -3001,6 +3012,8 @@ export const getBaseTheme = () => {
         pendingEmailTextColor: gray,
 
         mobileRowBackground: grayLight,
+
+        iconFill: lightGrayDark,
       },
       login: {
         textColor: gray,

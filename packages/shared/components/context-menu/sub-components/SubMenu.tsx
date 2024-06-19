@@ -86,7 +86,7 @@ const SubMenu = (props: {
   const theme = useTheme();
 
   const onItemMouseEnter = (e: React.MouseEvent, item: ContextMenuType) => {
-    if (item.disabled || isMobileDevice) {
+    if (item.disabled || isTablet() || isMobile()) {
       e.preventDefault();
       return;
     }

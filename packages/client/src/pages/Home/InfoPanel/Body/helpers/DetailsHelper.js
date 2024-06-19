@@ -283,7 +283,7 @@ class DetailsHelper {
 
     let name = displayName ? decode(displayName) : "";
 
-    if (isAnonim) name = this.t("Common:Unknown");
+    if (isAnonim) name = this.t("Common:Anonymous");
 
     //console.log("getAuthorDecoration", { name, displayName });
 

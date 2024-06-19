@@ -37,7 +37,7 @@ import LockedReact12SvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 
 import React, { useMemo } from "react";
 import styled from "styled-components";
-import { isTablet, isMobile, commonIconsStyles } from "@docspace/shared/utils";
+import { isTablet } from "@docspace/shared/utils";
 import {
   DeviceType,
   FileStatus,
@@ -82,6 +82,8 @@ const QuickButtons = (props) => {
     isPersonalRoom,
     isArchiveFolder,
     currentDeviceType,
+    showLifetimeIcon,
+    expiredDate,
   } = props;
 
   const isMobile = currentDeviceType === DeviceType.mobile;
@@ -153,14 +155,9 @@ const QuickButtons = (props) => {
     !isArchiveFolder &&
     !isTile;
 
-  //const showLifetimeIcon = item.lifetime < item.lifetime * 0.1
-  const showLifetimeIcon = true;
-
-  const fileDeleteDate = "22.02 12:08 PM"; // TODO:
-
   const getTooltipContent = () => (
     <Text fontSize="12px" fontWeight={400} noSelect>
-      {t("Files:FileWillBeDeleted", { date: fileDeleteDate })}.
+      {t("Files:FileWillBeDeleted", { date: expiredDate })}.
     </Text>
   );
 

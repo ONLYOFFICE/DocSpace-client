@@ -3172,6 +3172,7 @@ class FilesStore {
         providerId,
         startFilling,
         draftLocation,
+        expired,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3347,6 +3348,7 @@ class FilesStore {
         providerId,
         startFilling,
         draftLocation,
+        expired,
       };
     });
   };

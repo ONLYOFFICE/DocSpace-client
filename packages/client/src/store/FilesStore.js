@@ -276,14 +276,17 @@ class FilesStore {
     });
 
     socketHelper.on("s:update-history", ({ id, type }) => {
-      const { infoPanelSelection, setSelectionHistory } = this.infoPanelStore;
+      const { infoPanelSelection, fetchHistory } = this.infoPanelStore;
 
-      if (id === infoPanelSelection?.id) {
+      let infoPanelSelectionType = "file";
+      if (infoPanelSelection?.isRoom || infoPanelSelection?.isFolder)
+        infoPanelSelectionType = "folder";
+
+      console.log(id, type, infoPanelSelection?.id, infoPanelSelectionType);
+
+      if (id === infoPanelSelection?.id && type === infoPanelSelectionType) {
         console.log("[WS] s:update-history", id);
-        this.getHistory(type, id).then((data) => {
-          const parsedSelectionHistory = parseHistory(data);
-          setSelectionHistory(parsedSelectionHistory);
-        });
+        fetchHistory();
       }
     });
 

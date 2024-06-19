@@ -31,89 +31,46 @@ import { withTranslation } from "react-i18next";
 import { StyledHistoryList, StyledHistorySubtitle } from "../../styles/history";
 
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
-import {
-  getRelativeDateDay,
-  parseHistory,
-  addLinksToHistory,
-} from "./../../helpers/HistoryHelper";
+import { getRelativeDateDay } from "./../../helpers/HistoryHelper";
 import HistoryBlock from "./HistoryBlock";
 import NoHistory from "../NoItem/NoHistory";
-import { RoomsType } from "@docspace/shared/enums";
 
 const History = ({
   t,
   historyWithFileList,
   selectedFolder,
   selectionHistory,
-  setSelectionHistory,
   infoPanelSelection,
   getInfoPanelItemIcon,
-  getHistory,
+  fetchHistory,
   checkAndOpenLocationAction,
   openUser,
   isVisitor,
   isCollaborator,
-  getRoomLinks,
-  setExternalLinks,
 }) => {
   const isMount = useRef(true);
   const abortControllerRef = useRef(new AbortController());
 
-  const [, startTransition] = useTransition();
   const [isLoading, setIsLoading] = useState(false);
   const [isShowLoader, setIsShowLoader] = useState(false);
 
-  const fetchHistory = async (item) => {
+  const getHistory = async (item) => {
     if (!item?.id) return;
     if (isLoading) {
       abortControllerRef.current?.abort();
       abortControllerRef.current = new AbortController();
     } else setIsLoading(true);
 
-    let selectionType = "file";
-    if (infoPanelSelection.isRoom || infoPanelSelection.isFolder)
-      selectionType = "folder";
-
-    const withLinks =
-      infoPanelSelection.isRoom &&
-      [RoomsType.FormRoom, RoomsType.CustomRoom, RoomsType.PublicRoom].includes(
-        infoPanelSelection.roomType,
-      );
-
-    getHistory(
-      selectionType,
-      item.id,
-      abortControllerRef.current?.signal,
-      item?.requestToken,
-    )
-      .then(async (data) => {
-        if (isMount.current && withLinks) {
-          const links = await getRoomLinks(infoPanelSelection.id);
-          const historyWithLinks = addLinksToHistory(data, links);
-          setExternalLinks(links);
-          return historyWithLinks;
-        }
-        return data;
-      })
-      .then((data) => {
-        if (isMount.current)
-          startTransition(() => {
-            const parsedSelectionHistory = parseHistory(data);
-            setSelectionHistory(parsedSelectionHistory);
-            return parsedSelectionHistory;
-          });
-      })
-      .catch((err) => {
-        if (err.message !== "canceled") console.error(err);
-      })
-      .finally(() => {
+    if (isMount.current) {
+      fetchHistory(abortControllerRef.current?.signal).finally(() => {
         if (isMount.current) setIsLoading(false);
       });
+    }
   };
 
   useEffect(() => {
     if (!isMount.current) return;
-    fetchHistory(infoPanelSelection);
+    getHistory(infoPanelSelection);
   }, [infoPanelSelection.id]);
 
   useEffect(() => {
@@ -159,27 +116,18 @@ const History = ({
 };
 
 export default inject(
-  ({
-    settingsStore,
-    filesStore,
-    filesActionsStore,
-    infoPanelStore,
-    userStore,
-    publicRoomStore,
-  }) => {
+  ({ settingsStore, filesActionsStore, infoPanelStore, userStore }) => {
     const {
       infoPanelSelection,
+      fetchHistory,
       selectionHistory,
-      setSelectionHistory,
       historyWithFileList,
       getInfoPanelItemIcon,
       openUser,
     } = infoPanelStore;
     const { culture } = settingsStore;
 
-    const { getHistory, getRoomLinks } = filesStore;
     const { checkAndOpenLocationAction } = filesActionsStore;
-    const { setExternalLinks } = publicRoomStore;
 
     const { user } = userStore;
     const isVisitor = user.isVisitor;
@@ -188,17 +136,14 @@ export default inject(
     return {
       culture,
       selectionHistory,
-      setSelectionHistory,
       historyWithFileList,
       infoPanelSelection,
       getInfoPanelItemIcon,
-      getHistory,
+      fetchHistory,
       checkAndOpenLocationAction,
       openUser,
       isVisitor,
       isCollaborator,
-      getRoomLinks,
-      setExternalLinks,
     };
   },
 )(withTranslation(["InfoPanel", "Common", "Translations"])(observer(History)));

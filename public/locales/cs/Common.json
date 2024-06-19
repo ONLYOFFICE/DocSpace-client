@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "O nás",
   "AboutCompanyTitle": "O tomto programu",
   "AccessDenied": "Přístup odepřen",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "Místnost '{{name}}' je archivována",
   "Attention": "Pozornost",
   "Audio": "Audio",
+  "Authentication": "Autentizace",
   "Authorization": "Autorizace",
   "Back": "Zpět",
   "BarMaintenanceDescription": "Omlouváme se za případné krátkodobé technické problémy ve fungování služby, které se mohou objevit dne {{targetDate}} během aktualizace {{productName}}.",
@@ -215,6 +216,7 @@
   "LastModifiedDate": "Modifikováno",
   "LastName": "Příjmení",
   "LatePayment": "Opožděná platba",
+  "LDAP": "LDAP",
   "LearnMore": "Zjistit více",
   "LinkAccessDenied": "Přístup k odkazu byl odepřen",
   "LinkExpireAfter": "Platnost odkazu vyprší po <1>{{date}}</1>",
@@ -419,6 +421,7 @@
   "SubscriptionExpired": "Vaše předplatné podpory a aktualizací vypršelo",
   "SubscriptionExpiredTitle": "Předplatné vypršelo",
   "SubscriptionIsExpiring": "Platnost vašeho předplatného vyprší dne {{date}}",
+  "SuccessfullyCompletedOperation": "Operace byla úspěšně dokončena.",
   "Support": "Podpora",
   "SwitchToThumbnails": "Přepnout na zobrazení miniatur",
   "SwitchViewToCompact": "Přepnout na kompaktní zobrazení",

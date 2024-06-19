@@ -149,6 +149,7 @@
   "IPSecurityWarningHelper": "First, you need to specify your current IP or the IP range your current IP address belongs to, otherwise your space access will be blocked right after you save the settings. The space owner will have the space access from any IP address.",
   "LanguageAndTimeZoneSettingsNavDescription": "Language and Time Zone Settings is a way to change the language of the whole portal for all portal users and to configure the time zone so that all the events of the portal will be shown with the correct date and time.",
   "LastUpdate": "Last update: {{date}}",
+  "LDAP": "LDAP Settings",
   "LicenseLimitCounter": "License limit Admins/Power users:",
   "LicenseLimitDescription": "The license limit counter consists of: already existing accounts in {{productName}} and new users that you want to import. If you import users who already have a {{productName}} account, they will not be counted again in the counter. Your {{productName}} license allows you to have a maximum of 100 users.",
   "Lifetime": "Lifetime (min)",

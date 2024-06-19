@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Інформація",
   "AboutCompanyTitle": "Про цю програму",
   "AccessDenied": "Доступ заборонено",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "Кімнату «{{name}}» архівовано",
   "Attention": "Увагу",
   "Audio": "Аудіо",
+  "Authentication": "Автентифікація",
   "Authorization": "Авторизація",
   "Back": "Назад",
   "BarMaintenanceDescription": "Просимо вибачення за короткочасні технічні проблеми в роботі служби, які можуть виникнути {{targetDate}} під час оновлення {{productName}}.",
@@ -214,6 +215,7 @@
   "LastModifiedDate": "Дата останньої зміни",
   "LastName": "Прізвище",
   "LatePayment": "Прострочений платіж",
+  "LDAP": "LDAP",
   "LearnMore": "Докладніше",
   "LinkAccessDenied": "Доступ до посилання заборонений",
   "LinkExpireAfter": "Посилання буде недійсним після <1>{{date}}</1>",
@@ -418,6 +420,7 @@
   "SubscriptionExpired": "Термін дії вашої підписки на підтримку та оновлення закінчився",
   "SubscriptionExpiredTitle": "Термін дії підписки закінчився",
   "SubscriptionIsExpiring": "Термін дії вашої підписки закінчується {{date}}",
+  "SuccessfullyCompletedOperation": "Операцію успішно виконано.",
   "Support": "Підтримка",
   "SwitchToThumbnails": "Переключитися на подання ескізів",
   "SwitchViewToCompact": "Переключитися на компактний вигляд",

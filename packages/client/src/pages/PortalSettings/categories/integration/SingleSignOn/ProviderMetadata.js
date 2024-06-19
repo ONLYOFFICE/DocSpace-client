@@ -72,8 +72,8 @@ const ProviderMetadata = (props) => {
 
   const checkWidth = () => {
     window.innerWidth > size.mobile &&
-      location.pathname.includes("sp-metadata") &&
-      navigate("/portal-settings/integration/single-sign-on");
+      location.pathname.includes("metadata") &&
+      navigate("/portal-settings/integration/sso");
   };
 
   return (

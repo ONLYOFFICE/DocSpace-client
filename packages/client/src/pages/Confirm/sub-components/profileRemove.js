@@ -63,7 +63,7 @@ const ProfileRemoveForm = (props) => {
     return (
       <StyledPage>
         <StyledContent>
-          <StyledBody>
+          <StyledBody style={{ whiteSpace: "pre-wrap" }}>
             <PortalLogo className="portal-logo" />
             <Text fontSize="23px" fontWeight="700" className="title">
               {t("DeleteProfileSuccessMessage")}
@@ -74,7 +74,9 @@ const ProfileRemoveForm = (props) => {
                 ns="Confirm"
                 t={t}
               >
-                See our
+                Your DocSpace account is successfully disabled. The DocSpace
+                owner or admin can permanently delete your disabled account.
+                \n\nPlease check our
                 <Link
                   fontSize="16px"
                   fontWeight="600"
@@ -85,8 +87,7 @@ const ProfileRemoveForm = (props) => {
                 >
                   Privacy policy
                 </Link>
-                to learn more about deleting your account and the data
-                associated with it.
+                to learn more about deleting your account and associated data.
               </Trans>
             </Text>
           </StyledBody>
@@ -119,7 +120,7 @@ const ProfileRemoveForm = (props) => {
                   ns="Confirm"
                   t={t}
                 >
-                  By clicking \"Delete my account\" you agree with our Privacy
+                  By clicking \"Disable my account\" you agree with our Privacy
                   policy
                   <Link
                     type="page"

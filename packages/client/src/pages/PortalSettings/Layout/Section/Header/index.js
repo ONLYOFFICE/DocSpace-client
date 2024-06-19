@@ -390,13 +390,13 @@ const SectionHeaderContent = (props) => {
       />
       <DropDownItem
         key="online"
-        label={t("Common:Online")}
+        label={t("Common:online")}
         data-index={2}
         onClick={onSelectOnline}
       />
       <DropDownItem
         key="offline"
-        label={t("Common:Offline")}
+        label={t("Common:offline")}
         data-index={3}
         onClick={onSelectOffline}
       />

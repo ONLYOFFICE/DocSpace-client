@@ -300,6 +300,7 @@
   "OtherLabel": "Other",
   "OtherOperations": "Other operations",
   "online": "Online",
+  "offline": "Offline",
   "Owner": "Owner",
   "PageOfTotalPage": "{{page}} of {{totalPage}}",
   "Pages": "Pages",

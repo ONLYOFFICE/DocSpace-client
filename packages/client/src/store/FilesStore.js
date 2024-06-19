@@ -2600,12 +2600,13 @@ class FilesStore {
     }
   };
 
-  createFile = (folderId, title, templateId, formId) => {
+  createFile = async (folderId, title, templateId, formId) => {
     return api.files
       .createFile(folderId, title, templateId, formId)
       .then((file) => {
         return Promise.resolve(file);
-      });
+      })
+      .then(() => this.fetchFiles(folderId, this.filter, true, true, false));
   };
 
   createFolder(parentFolderId, title) {

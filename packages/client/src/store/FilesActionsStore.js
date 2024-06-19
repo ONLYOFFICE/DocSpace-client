@@ -2740,7 +2740,9 @@ class FilesActionStore {
       return this.setConflictDialogData(conflicts, operationData);
     }
 
-    this.uploadDataStore.itemOperationToFolder(operationData);
+    this.uploadDataStore
+      .itemOperationToFolder(operationData)
+      .catch((error) => toastr.error(error));
   };
 }
 

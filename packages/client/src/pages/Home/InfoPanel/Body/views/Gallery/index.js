@@ -53,7 +53,7 @@ const Gallery = ({
   culture,
   currentColorScheme,
 }) => {
-  const thumbnailBlank = getIcon(96, ".docxf");
+  const thumbnailBlank = getIcon(96, ".pdf");
   const thumbnailUrl =
     gallerySelected?.attributes?.template_image?.data?.attributes?.formats
       ?.small?.url;

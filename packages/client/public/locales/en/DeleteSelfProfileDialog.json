@@ -1,5 +1,5 @@
 {
-  "DeleteOwnerRestrictionText": "Being an owner of this DocSpace, you must transfer the ownership to another user before you can disable your account. Please choose a new owner to proceed.",
+  "DeleteOwnerRestrictionText": "Being an owner of this {{productName}}, you must transfer the ownership to another user before you can disable your account. Please choose a new owner to proceed.",
   "DeleteProfileInfo": "Send the instructions for account disabling to the email address",
   "DeleteProfileTitle": "Disable account"
 }

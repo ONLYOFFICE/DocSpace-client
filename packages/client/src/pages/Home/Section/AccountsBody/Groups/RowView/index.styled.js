@@ -179,8 +179,16 @@ export const GroupsRowContent = styled(RowContent)`
     .row-main-container-wrapper {
       width: 100%;
       display: flex;
+      -webkit-box-pack: justify;
+      justify-content: space-between;
       max-width: inherit;
       margin: 0;
+    }
+
+    .badges {
+      flex-direction: row-reverse;
+      margin-inline-end: 12px;
+      margin-top: -1px;
     }
   }
 `;

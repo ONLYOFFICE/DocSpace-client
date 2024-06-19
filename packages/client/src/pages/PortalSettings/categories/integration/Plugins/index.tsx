@@ -30,6 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import PluginStore from "SRC_DIR/store/PluginStore";
@@ -102,7 +103,7 @@ const PluginPage = ({
           /> */}
       {withUpload && (
         <>
-          <Text>{t("UploadDescription")}</Text>
+          <Text>{t("UploadDescription", { productName: PRODUCT_NAME })}</Text>
           <Dropzone
             onDrop={onDrop}
             isDisabled={!withUpload}

@@ -32,6 +32,7 @@ import {
   EmployeeType,
   EmployeeActivationStatus,
 } from "@docspace/shared/enums";
+import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 const { Filter } = api;
 
 const fullAccessId = "00000000-0000-0000-0000-000000000000";
@@ -240,24 +241,6 @@ class UsersStore {
     this.setUsers(updatedUsers);
   };
 
-  getStatusType = (user) => {
-    if (
-      user.status === EmployeeStatus.Active &&
-      user.activationStatus === EmployeeActivationStatus.Activated
-    ) {
-      return "normal";
-    } else if (
-      user.status === EmployeeStatus.Active &&
-      user.activationStatus === EmployeeActivationStatus.Pending
-    ) {
-      return "pending";
-    } else if (user.status === EmployeeStatus.Disabled) {
-      return "disabled";
-    } else {
-      return "unknown";
-    }
-  };
-
   getUserRole = (user) => {
     if (user.isOwner) return "owner";
     else if (user.isAdmin) return "admin";
@@ -266,13 +249,21 @@ class UsersStore {
     else return "manager";
   };
 
-  getUserContextOptions = (isMySelf, statusType, userRole, status) => {
-    const { isOwner, isAdmin, isVisitor, isCollaborator } = this.userStore.user;
+  getUserContextOptions = (
+    isMySelf,
+    isUserSSO,
+    isUserLDAP,
+    statusType,
+    userRole,
+    status,
+  ) => {
+    const { isOwner, isAdmin, isVisitor, isCollaborator, isLDAP } =
+      this.userStore.user;
 
     const options = [];
 
     switch (statusType) {
-      case "normal":
+      case "active":
       case "unknown":
         if (isMySelf) {
           options.push("profile");
@@ -285,11 +276,12 @@ class UsersStore {
         }
 
         if (isMySelf) {
-          options.push("separator-1");
-
-          options.push("change-name");
-          options.push("change-email");
-          options.push("change-password");
+          if (!isLDAP) {
+            options.push("separator-1");
+            options.push("change-name");
+            options.push("change-email");
+            options.push("change-password");
+          }
 
           if (isOwner) {
             options.push("separator-2");
@@ -303,14 +295,19 @@ class UsersStore {
                 userRole === "manager" ||
                 userRole === "collaborator"))
           ) {
-            options.push("separator-1");
+            if (!isUserLDAP && !isUserSSO) {
+              options.push("separator-1");
 
-            options.push("change-email");
-            options.push("change-password");
+              options.push("change-email");
+              options.push("change-password");
+            }
+
             options.push("reset-auth");
 
-            options.push("separator-2");
-            options.push("disable");
+            if (!isUserLDAP) {
+              options.push("separator-2");
+              options.push("disable");
+            }
           }
         }
 
@@ -455,17 +452,20 @@ class UsersStore {
       firstName,
       lastName,
       isSSO,
+      isLDAP,
       quotaLimit,
       usedSpace,
       isCustomQuota,
     } = user;
-    const statusType = this.getStatusType(user);
+    const statusType = getUserStatus(user);
     const role = this.getUserRole(user);
     const isMySelf =
       this.userStore.user && user.userName === this.userStore.user.userName;
 
     const options = this.getUserContextOptions(
       isMySelf,
+      isSSO,
+      isLDAP,
       statusType,
       role,
       status,
@@ -496,6 +496,7 @@ class UsersStore {
       firstName,
       lastName,
       isSSO,
+      isLDAP,
       quotaLimit,
       usedSpace,
       isCustomQuota,

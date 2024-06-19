@@ -94,6 +94,8 @@ const SetRoomParams = ({
   currentColorScheme,
   setChangeRoomOwnerIsVisible,
   folderFormValidation,
+  disabledChangeRoomType,
+  maxImageUploadSize,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(null);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -146,7 +148,7 @@ const SetRoomParams = ({
 
   return (
     <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>
-      {isEdit ? (
+      {isEdit || disabledChangeRoomType ? (
         <RoomType t={t} roomType={roomParams.type} type="displayItem" />
       ) : (
         <RoomTypeDropdown
@@ -248,6 +250,7 @@ const SetRoomParams = ({
           onChangeImage={onChangeIcon}
           classNameWrapperImageCropper={"icon-editor"}
           disableImageRescaling={disableImageRescaling}
+          maxImageSize={maxImageUploadSize}
           Preview={
             <PreviewTile
               t={t}
@@ -271,12 +274,13 @@ export default inject(({ settingsStore, dialogsStore, currentQuotaStore }) => {
   const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
   const { setChangeRoomOwnerIsVisible } = dialogsStore;
-  const { folderFormValidation } = settingsStore;
+  const { folderFormValidation, maxImageUploadSize } = settingsStore;
 
   return {
     isDefaultRoomsQuotaSet,
     folderFormValidation,
     setChangeRoomOwnerIsVisible,
+    maxImageUploadSize,
   };
 })(
   observer(

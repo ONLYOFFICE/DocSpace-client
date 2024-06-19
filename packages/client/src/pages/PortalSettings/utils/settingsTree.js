@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { PageType } from "@docspace/shared/enums";
-import { DOCSPACE } from "@docspace/shared/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/settings.react.svg?url";
 /**
  * Array for generation current settings tree.
@@ -281,40 +281,64 @@ export const settingsTree = [
     isHeader: true,
     children: [
       {
-        id: "portal-settings_catalog-third-party-services",
+        id: "portal-settings_catalog-ldap",
         key: "4-0",
+        icon: "",
+        link: "ldap",
+        tKey: "LdapSettings",
+        isCategory: true,
+        children: [
+          {
+            id: "portal-settings_catalog-ldap-settings",
+            key: "4-0-0",
+            icon: "",
+            link: "settings",
+            tKey: "Ldap:LdapSettings",
+          },
+          {
+            id: "portal-settings_catalog-ldap-sync-data",
+            key: "4-0-1",
+            icon: "",
+            link: "sync-data",
+            tKey: "Ldap:LdapSyncTitle",
+          },
+        ],
+      },
+      {
+        id: "portal-settings_catalog-third-party-services",
+        key: "4-1",
         icon: "",
         link: "third-party-services",
         tKey: "ThirdPartyAuthorization",
         isCategory: true,
       },
       {
-        id: "portal-settings_catalog-single-sign-on",
-        key: "4-1",
+        id: "portal-settings_catalog-sso",
+        key: "4-2",
         icon: "",
-        link: "single-sign-on",
+        link: "sso",
         tKey: "SingleSignOn",
         isCategory: true,
         children: [
           {
-            id: "portal-settings_catalog-single-sign-on-sp-settings",
-            key: "4-1-0",
+            id: "portal-settings_catalog-sso-settings",
+            key: "4-2-0",
             icon: "",
-            link: "sp-settings",
+            link: "settings",
             tKey: "SingleSignOn:ServiceProviderSettings",
           },
           {
-            id: "portal-settings_catalog-single-sign-on-sp-metadata",
-            key: "4-1-1",
+            id: "portal-settings_catalog-sso-metadata",
+            key: "4-2-1",
             icon: "",
-            link: "sp-metadata",
+            link: "metadata",
             tKey: "SingleSignOn:SpMetadata",
           },
         ],
       },
       {
         id: "portal-settings_catalog-plugins",
-        key: "4-2",
+        key: "4-3",
         icon: "",
         link: "plugins",
         tKey: "Plugins",
@@ -322,7 +346,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-document-service",
-        key: "4-3",
+        key: "4-4",
         icon: "",
         link: "document-service",
         tKey: "DocumentService",
@@ -330,7 +354,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-smtp-settings",
-        key: "4-4",
+        key: "4-5",
         icon: "",
         link: "smtp-settings",
         tKey: "SMTPSettings",
@@ -375,7 +399,7 @@ export const settingsTree = [
             key: "5-0-2",
             icon: "",
             link: "onlyoffice",
-            tKey: "ImportFromOnlyoffice",
+            tKey: "ImportFromPortal",
             isCategory: true,
           },
         ],
@@ -483,11 +507,11 @@ export const settingsTree = [
             tKey: "JavascriptSdk:Viewer",
           },
           {
-            id: "portal-settings_catalog-javascript-sdk_docspace",
+            id: "portal-settings_catalog-javascript-sdk_portal",
             key: "7-1-6",
             icon: "",
             link: "docspace",
-            tKey: DOCSPACE,
+            tKey: PRODUCT_NAME,
           },
         ],
       },
@@ -564,7 +588,7 @@ export const settingsTree = [
         key: "10-0",
         icon: "",
         link: "",
-        tKey: "Common:FreeProFeatures",
+        tKey: "Common:FreeAccessToLicensedVersion",
         isCategory: true,
       },
     ],

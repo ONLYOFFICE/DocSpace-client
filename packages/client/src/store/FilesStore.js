@@ -36,6 +36,7 @@ import {
   RoomsProviderType,
   ShareAccessRights,
   Events,
+  FilterKeys,
 } from "@docspace/shared/enums";
 
 import { RoomsTypes } from "@docspace/shared/utils";
@@ -50,6 +51,7 @@ import { getDaysRemaining } from "@docspace/shared/utils/common";
 import {
   MEDIA_VIEW_URL,
   PDF_FORM_DIALOG_KEY,
+  ROOMS_PROVIDER_TYPE_NAME,
 } from "@docspace/shared/constants";
 
 import {
@@ -761,6 +763,13 @@ class FilesStore {
     }
   };
 
+  removeActiveItem = (file) => {
+    console.log(this.activeFiles);
+
+    this.activeFiles =
+      this.activeFiles?.filter((item) => item.id !== file.id) ?? [];
+  };
+
   addActiveItems = (files, folders, destFolderId) => {
     if (folders && folders.length) {
       if (!this.activeFolders.length) {
@@ -1334,7 +1343,7 @@ class FilesStore {
 
     const currentUrl = window.location.href.replace(window.location.origin, "");
     const newUrl = combineUrl(
-      window.DocSpaceConfig?.proxy?.url,
+      window.ClientConfig?.proxy?.url,
       config.homepage,
       pathname,
     );
@@ -1431,6 +1440,19 @@ class FilesStore {
       filterData.pageCount = 100;
     }
 
+    const defaultFilter = FilesFilter.getDefault();
+
+    const { filterType, searchInContent } = filterData;
+
+    if (typeof filterData.withSubfolders !== "boolean")
+      filterData.withSubfolders = defaultFilter.withSubfolders;
+
+    if (typeof searchInContent !== "boolean")
+      filterData.searchInContent = defaultFilter.searchInContent;
+
+    if (!Object.keys(FilterType).find((key) => FilterType[key] === filterType))
+      filterData.filterType = defaultFilter.filterType;
+
     setSelectedNode([folderId + ""]);
 
     return api.files
@@ -1451,6 +1473,7 @@ class FilesStore {
 
         if (
           (data.current.roomType === RoomsType.PublicRoom ||
+            data.current.roomType === RoomsType.FormRoom ||
             data.current.roomType === RoomsType.CustomRoom) &&
           !this.publicRoomStore.isPublicRoom
         ) {
@@ -1724,6 +1747,22 @@ class FilesStore {
     }
 
     if (folderId) setSelectedNode([folderId + ""]);
+
+    const defaultFilter = RoomsFilter.getDefault();
+
+    const { provider, quotaFilter, type } = filterData;
+
+    if (!ROOMS_PROVIDER_TYPE_NAME[provider])
+      filterData.provider = defaultFilter.provider;
+
+    if (
+      quotaFilter &&
+      quotaFilter !== FilterKeys.customQuota &&
+      quotaFilter !== FilterKeys.defaultQuota
+    )
+      filterData.quotaFilter = defaultFilter.quotaFilter;
+
+    if (type && !RoomsType[type]) filterData.type = defaultFilter.type;
 
     const request = () =>
       api.rooms
@@ -2000,7 +2039,7 @@ class FilesStore {
         "view",
         "pdf-view",
         "make-form",
-        "edit-pdf",
+        // "edit-pdf",
         "separator0",
         "submit-to-gallery",
         "separator-SubmitToGallery",
@@ -2046,11 +2085,11 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["open-pdf"]);
       }
 
-      if (!item.security.EditForm || !item.startFilling) {
-        fileOptions = this.removeOptions(fileOptions, ["edit-pdf"]);
-      }
+      // if (!item.security.EditForm || !item.startFilling) {
+      //   fileOptions = this.removeOptions(fileOptions, ["edit-pdf"]);
+      // }
 
-      if (!isPdf || !window.DocSpaceConfig?.pdfViewer || isRecycleBinFolder) {
+      if (!isPdf || !window.ClientConfig?.pdfViewer || isRecycleBinFolder) {
         fileOptions = this.removeOptions(fileOptions, ["pdf-view"]);
       }
 
@@ -2295,6 +2334,7 @@ class FilesStore {
 
       const isPublicRoomType =
         item.roomType === RoomsType.PublicRoom ||
+        item.roomType === RoomsType.FormRoom ||
         item.roomType === RoomsType.CustomRoom;
       const isCustomRoomType = item.roomType === RoomsType.CustomRoom;
 
@@ -3059,8 +3099,7 @@ class FilesStore {
   }
 
   getItemUrl = (id, isFolder, needConvert, canOpenPlayer) => {
-    const proxyURL =
-      window.DocSpaceConfig?.proxy?.url || window.location.origin;
+    const proxyURL = window.ClientConfig?.proxy?.url || window.location.origin;
 
     const url = getCategoryUrl(this.categoryType, id);
 
@@ -3844,7 +3883,7 @@ class FilesStore {
     if (editForm) searchParams.append("action", "edit");
 
     const url = combineUrl(
-      window.DocSpaceConfig?.proxy?.url,
+      window.ClientConfig?.proxy?.url,
       config.homepage,
       `/doceditor?${searchParams.toString()}`,
     );

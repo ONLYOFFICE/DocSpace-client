@@ -46,7 +46,7 @@
   "URL": "URL",
   "ViewRawPayload": "生のペイロードを見る",
   "WebhookCreated": "ウェブフックが作成されました",
-  "WebhookCreationHint": "このWebhookはDocSpaceのすべてのイベントに割り当てられます",
+  "WebhookCreationHint": "このWebhookは{{productName}}のすべてのイベントに割り当てられます",
   "WebhookDetails": "ウェブフックの詳細",
   "WebhookEditedSuccessfully": "ウェブフックの設定が正常に編集されました",
   "WebhookHistory": "ウェブフック履歴",
@@ -55,5 +55,5 @@
   "WebhookRemoved": "ウェブフック削除",
   "Webhooks": "ウェブフック",
   "WebhooksGuide": "ウェブフックガイド",
-  "WebhooksInfo": "ONLYOFFICE DocSpaceの様々なイベントに基づいて、使用しているアプリケーションやウェブサイトの側でカスタムアクションを実行するためにウェブフックを使用してください。\nここでは、すべてのウェブフックを作成・管理し、設定し、パフォーマンスを監査するためにすべてのウェブフックの履歴を閲覧することができます。"
+  "WebhooksInfo": "{{organizationName}} {{productName}}の様々なイベントに基づいて、使用しているアプリケーションやウェブサイトの側でカスタムアクションを実行するためにウェブフックを使用してください。\nここでは、すべてのウェブフックを作成・管理し、設定し、パフォーマンスを監査するためにすべてのウェブフックの履歴を閲覧することができます。"
 }

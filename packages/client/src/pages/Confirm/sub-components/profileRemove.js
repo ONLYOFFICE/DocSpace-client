@@ -36,7 +36,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { StyledPage, StyledBody, StyledContent } from "./StyledConfirm";
 import withLoader from "../withLoader";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 
 const ProfileRemoveForm = (props) => {
   const { t, greetingTitle, linkData, legalTerms, currentColorScheme } = props;
@@ -64,7 +64,7 @@ const ProfileRemoveForm = (props) => {
       <StyledPage>
         <StyledContent>
           <StyledBody style={{ whiteSpace: "pre-wrap" }}>
-            <DocspaceLogo className="docspace-logo" />
+            <PortalLogo className="portal-logo" />
             <Text fontSize="23px" fontWeight="700" className="title">
               {t("DeleteProfileSuccessMessage")}
             </Text>
@@ -100,7 +100,7 @@ const ProfileRemoveForm = (props) => {
     <StyledPage>
       <StyledContent>
         <StyledBody>
-          <DocspaceLogo className="docspace-logo" />
+          <PortalLogo className="portal-logo" />
           <Text fontSize="23px" fontWeight="700" className="title">
             {greetingTitle}
           </Text>

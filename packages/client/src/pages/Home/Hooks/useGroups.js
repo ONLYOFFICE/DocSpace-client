@@ -39,6 +39,7 @@ const useGroups = ({
 
   setSelectedNode,
   fetchGroups,
+  scrollToTop,
 }) => {
   useEffect(() => {
     if (!isAccountsPage || !isGroupsAccounts) return;
@@ -53,7 +54,10 @@ const useGroups = ({
       .catch((err) => {
         console.error(err);
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        scrollToTop();
+        setIsLoading(false);
+      });
   }, [isAccountsPage, isGroupsAccounts, location.pathname, location.search]);
 };
 

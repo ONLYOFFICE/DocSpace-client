@@ -1,5 +1,4 @@
-{
-  "Authentication": "Autentifikácia",
+﻿{
   "AuthViaNTLM": "Autentifikácia cez NTLM",
   "EnableSSL": "Povoliť SSL",
   "EnterDomain": "Zadajte doménu",
@@ -12,6 +11,5 @@
   "Port": "Port",
   "SenderDisplayName": "Zobraziť Meno odosielateľa",
   "SenderEmailAddress": "E-mailová adresa odosielateľa",
-  "SendTestMail": "Odoslať testovací e-mail",
-  "SuccessfullyCompletedOperation": "Operácia bola úspešne dokončená."
+  "SendTestMail": "Odoslať testovací e-mail"
 }

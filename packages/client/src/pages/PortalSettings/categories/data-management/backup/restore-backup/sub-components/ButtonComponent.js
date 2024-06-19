@@ -108,7 +108,7 @@ const ButtonContainer = (props) => {
 
       navigate(
         combineUrl(
-          window.DocSpaceConfig?.proxy?.url,
+          window.ClientConfig?.proxy?.url,
           config.homepage,
           "/preparation-portal",
         ),

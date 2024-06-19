@@ -71,6 +71,7 @@ export interface ArticleZendeskProps {
 export interface ArticleAppsProps {
   showText: boolean;
   withDevTools: boolean;
+  organizationName: string;
 }
 
 export interface ArticleDevToolsBarProps {
@@ -144,5 +145,5 @@ export interface ArticleProps {
   standalone?: boolean;
   currentTariffPlanTitle?: string;
   trialDaysLeft?: number;
-  paymentDate?: Date;
+  organizationName: string;
 }

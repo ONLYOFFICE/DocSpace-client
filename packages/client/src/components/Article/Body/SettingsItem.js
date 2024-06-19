@@ -43,10 +43,13 @@ const PureSettingsItem = ({
     onClick && onClick("settings");
   }, [onClick]);
 
+  const title = t("Common:Settings");
+
   return (
     <ArticleItem
       key="settings"
-      text={t("Common:Settings")}
+      text={title}
+      title={title}
       icon={CatalogSettingsReactSvgUrl}
       showText={showText}
       onClick={onClickAction}

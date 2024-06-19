@@ -1,7 +1,7 @@
 {
   "CodeSubtitle": "Enviamos um código de 6 dígitos para {{email}}. O código tem um período de validade limitado, insira-o o mais rápido possível.",
   "CodeTitle": "O código foi enviado por e-mail para você",
-  "ErrorInvalidText": "Em 10 segundos, você será redirecionado para a <1>DocSpace</1>",
+  "ErrorInvalidText": "Em 10 segundos, você será redirecionado para a <1>{{productName}}</1>",
   "ExpiredCode": "Este código não é mais válido. Solicite um novo código e tente novamente.",
   "ForgotPassword": "Esqueceu-se da senha?",
   "InvalidCode": "Este código é inválido. Tente novamente.",
@@ -20,5 +20,5 @@
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "A duração padrão da sessão é de 20 minutos. Marque esta opção para defini-la como 1 ano. Para definir seu próprio valor, vá para Configurações",
   "ResendCode": "Reenviar código",
-  "UserIsAlreadyRegistered": "O usuário <1>{{email}}</1> já está cadastrado neste DocSpace, digite sua senha ou volte para continuar com outro e-mail."
+  "UserIsAlreadyRegistered": "O usuário <1>{{email}}</1> já está cadastrado neste {{productName}}, digite sua senha ou volte para continuar com outro e-mail."
 }

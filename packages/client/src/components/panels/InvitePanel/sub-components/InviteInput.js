@@ -68,6 +68,7 @@ import {
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const minSearchValue = 2;
 
@@ -446,8 +447,8 @@ const InviteInput = ({
       </StyledSubHeader>
       <StyledDescription>
         {roomId === -1
-          ? t("AddManuallyDescriptionAccounts")
-          : t("AddManuallyDescriptionRoom")}
+          ? t("AddManuallyDescriptionAccounts", { productName: PRODUCT_NAME })
+          : t("AddManuallyDescriptionRoom", { productName: PRODUCT_NAME })}
       </StyledDescription>
       <StyledInviteLanguage>
         <Text className="invitation-language">{t("InvitationLanguage")}:</Text>

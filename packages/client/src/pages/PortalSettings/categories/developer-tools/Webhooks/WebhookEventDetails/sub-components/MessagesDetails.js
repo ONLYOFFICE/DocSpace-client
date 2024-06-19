@@ -26,7 +26,7 @@
 
 import React from "react";
 import styled from "styled-components";
-import { Submenu } from "@docspace/shared/components/submenu";
+import { Tabs } from "@docspace/shared/components/tabs";
 
 import RequestDetails from "./RequestDetails";
 import ResponseDetails from "./ResponseDetails";
@@ -34,7 +34,7 @@ import { useTranslation } from "react-i18next";
 import { isMobile } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
 
-const SubmenuWrapper = styled.div`
+const TabsWrapper = styled.div`
   .sticky {
     z-index: 3;
 
@@ -61,9 +61,9 @@ const MessagesDetails = ({ eventDetails }) => {
   }
 
   return (
-    <SubmenuWrapper>
-      <Submenu data={menuData} startSelect={0} />
-    </SubmenuWrapper>
+    <TabsWrapper>
+      <Tabs items={menuData} />
+    </TabsWrapper>
   );
 };
 

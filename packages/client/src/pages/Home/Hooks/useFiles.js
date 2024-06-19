@@ -79,8 +79,6 @@ const useFiles = ({
   scrollToTop,
   selectedFolderStore,
 }) => {
-  console.log({ selectedFolderStore });
-
   const navigate = useNavigate();
   const { id } = useParams();
 

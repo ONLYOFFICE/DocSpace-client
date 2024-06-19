@@ -31,6 +31,7 @@ import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Text } from "@docspace/shared/components/text";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledInfoBar = styled.div`
   display: flex;
@@ -94,7 +95,9 @@ const InfoBar = (props) => {
             {t("Common:Info")}
           </Text>
         </div>
-        <div className="body-container">{t("InfoPanel:InfoBanner")}</div>
+        <div className="body-container">
+          {t("InfoPanel:InfoBanner", { productName: PRODUCT_NAME })}
+        </div>
       </div>
 
       <IconButton

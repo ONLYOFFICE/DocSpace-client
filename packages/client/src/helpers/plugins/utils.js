@@ -198,7 +198,7 @@ export const getPluginUrl = (url, file) => {
   const path = splittedURL.join("/");
 
   return combineUrl(
-    window.DocSpaceConfig?.proxy?.url,
+    window.ClientConfig?.proxy?.url,
     config.homepage,
     path,
     file,

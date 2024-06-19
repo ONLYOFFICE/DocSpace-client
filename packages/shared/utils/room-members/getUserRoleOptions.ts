@@ -28,7 +28,7 @@ import { ShareAccessRights } from "../../enums";
 import { TTranslation } from "../../types";
 
 export const getUserRoleOptions = (t: TTranslation) => ({
-  docSpaceAdmin: {
+  portalAdmin: {
     key: "owner",
     label: t("Common:Owner"),
     access: ShareAccessRights.FullAccess,

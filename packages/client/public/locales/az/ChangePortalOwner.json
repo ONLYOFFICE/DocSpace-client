@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "Administratorları təyin edin",
-  "BackupPortal": "DocSpace məlumatlarını yedəkləyin",
-  "ChangeInstruction": "DocSpace sahibini dəyişmək üçün lütfən, aşağıda yeni sahibin adını seçin.",
-  "ChangeOwner": "DocSpace sahibini dəyişdirin",
+  "BackupPortal": "{{productName}} məlumatlarını yedəkləyin",
+  "ChangeInstruction": "{{productName}} sahibini dəyişmək üçün lütfən, aşağıda yeni sahibin adını seçin.",
+  "ChangeOwner": "{{productName}} sahibini dəyişdirin",
   "ChangeUser": "İstifadəçini dəyişdirin",
-  "DeactivateOrDeletePortal": "DocSpace-i deaktiv edin və ya silin",
+  "DeactivateOrDeletePortal": "{{productName}}-i deaktiv edin və ya silin",
   "DoTheSame": "Administratorlarla da eyni şeyi edin",
-  "ManagePortal": "DocSpace konfiqurasiyasını idarə edin",
+  "ManagePortal": "{{productName}} konfiqurasiyasını idarə edin",
   "ManageUser": "İstifadəçi hesablarını idarə edin",
-  "NewPortalOwner": "Yeni DocSpace sahibi",
-  "PortalOwnerCan": "DocSpace sahibi edə bilər:",
+  "NewPortalOwner": "Yeni {{productName}} sahibi",
+  "PortalOwnerCan": "{{productName}} sahibi edə bilər:",
   "SetAccessRights": "Giriş hüquqlarını təyin edin"
 }

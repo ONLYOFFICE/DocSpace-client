@@ -318,7 +318,7 @@ class SettingsSetupStore {
       "",
       "",
       combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         `${config.homepage}/portal-settings/security/access-rights/admins`,
         `/filter?page=${filter.page}`, //TODO: Change url by category
       ),

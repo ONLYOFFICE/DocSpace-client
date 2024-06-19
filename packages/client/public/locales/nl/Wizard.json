@@ -1,5 +1,4 @@
 {
-  "Desc": "Stel de registratiegegevens van de ruimte in.",
   "ErrorEmail": "Ongeldig e-mailadres",
   "ErrorInitWizard": "De dienst is momenteel niet beschikbaar, probeer het later nog eens.",
   "ErrorInitWizardButton": "Probeer opnieuw",
@@ -11,5 +10,5 @@
   "LicenseLink": "licentieovereenkomsten",
   "PlaceholderLicense": "Uw licentiebestand",
   "Timezone": "Tijdzone:",
-  "WelcomeTitle": "Welkom bij uw DocSpace!"
+  "WelcomeTitle": "Welkom bij uw {{productName}}!"
 }

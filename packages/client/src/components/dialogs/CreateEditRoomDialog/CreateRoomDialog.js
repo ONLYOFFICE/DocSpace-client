@@ -71,6 +71,7 @@ const CreateRoomDialog = ({
   deleteThirdParty,
   fetchThirdPartyProviders,
   enableThirdParty,
+  startRoomType,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isOauthWindowOpen, setIsOauthWindowOpen] = useState(false);
@@ -84,7 +85,7 @@ const CreateRoomDialog = ({
   });
 
   const startRoomParams = {
-    type: undefined,
+    type: startRoomType,
     title: title ?? "",
     tags: [],
     isPrivate: false,
@@ -172,6 +173,7 @@ const CreateRoomDialog = ({
     >
       <ModalDialog.Header>
         <DialogHeader
+          disabledIcon={Boolean(startRoomParams)}
           isChooseRoomType={!roomParams.type}
           onArrowClick={goBack}
         />
@@ -183,6 +185,7 @@ const CreateRoomDialog = ({
         ) : (
           <SetRoomParams
             t={t}
+            disabledChangeRoomType={Boolean(startRoomParams)}
             setIsOauthWindowOpen={setIsOauthWindowOpen}
             tagHandler={tagHandler}
             roomParams={roomParams}

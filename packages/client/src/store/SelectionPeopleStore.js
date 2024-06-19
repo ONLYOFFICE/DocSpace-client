@@ -26,7 +26,6 @@
 
 import { makeAutoObservable, runInAction } from "mobx";
 import { EmployeeStatus } from "@docspace/shared/enums";
-import { getUserStatus } from "../helpers/people-helpers";
 import { toastr } from "@docspace/shared/components/toast";
 import SettingsSetupStore from "./SettingsSetupStore";
 
@@ -240,17 +239,15 @@ class SelectionStore {
   };
 
   getUserChecked = (user, selected) => {
-    const status = getUserStatus(user);
-
     switch (selected) {
       case "all":
         return true;
       case "active":
-        return status === "active";
+        return user.status === EmployeeStatus.Active;
       case "pending":
-        return status === "pending";
+        return user.status === EmployeeStatus.Pending;
       case "disabled":
-        return status === "disabled";
+        return user.status === EmployeeStatus.Disabled;
       case "online":
         return status === "online";
       case "offline":

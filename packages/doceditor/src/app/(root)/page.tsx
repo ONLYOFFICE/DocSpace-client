@@ -25,12 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
-
-import AppLoader from "@docspace/shared/components/app-loader";
+import { BRAND_NAME } from "@docspace/shared/constants";
 
 import { getData } from "@/utils/actions";
 import { RootPageProps } from "@/types";
+import Root from "@/components/Root";
 
 const initialSearchParams: RootPageProps["searchParams"] = {
   fileId: undefined,
@@ -42,13 +41,8 @@ const initialSearchParams: RootPageProps["searchParams"] = {
   editorType: undefined,
 };
 
-const Root = dynamic(() => import("@/components/Root"), {
-  ssr: false,
-  loading: () => <AppLoader />,
-});
-
 export const metadata: Metadata = {
-  title: "ONLYOFFICE DocEditor page",
+  title: `${BRAND_NAME} DocEditor page`,
 
   description: "",
 };

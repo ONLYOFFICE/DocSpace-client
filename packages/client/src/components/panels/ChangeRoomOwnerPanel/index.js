@@ -34,6 +34,7 @@ import { withTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
 import { EmployeeType, DeviceType } from "@docspace/shared/enums";
 import { Portal } from "@docspace/shared/components/portal";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledChangeRoomOwner = styled.div`
   display: contents;
@@ -119,7 +120,7 @@ const ChangeRoomOwner = (props) => {
   };
 
   const filter = new Filter();
-  filter.role = [EmployeeType.Admin, EmployeeType.User]; // 1(EmployeeType.User) - RoomAdmin | 3(EmployeeType.Admin) - DocSpaceAdmin
+  filter.role = [EmployeeType.Admin, EmployeeType.User];
 
   const asideComponent = (
     <StyledChangeRoomOwner showBackButton={showBackButton}>
@@ -156,9 +157,13 @@ const ChangeRoomOwner = (props) => {
           currentUserId={userId}
           disableDisabledUsers
           withInfo
-          infoText={t("CreateEditRoomDialog:PeopleSelectorInfo")}
+          infoText={t("CreateEditRoomDialog:PeopleSelectorInfo", {
+            productName: PRODUCT_NAME,
+          })}
           emptyScreenHeader={t("Common:NotFoundUsers")}
-          emptyScreenDescription={t("CreateEditRoomDialog:PeopleSelectorInfo")}
+          emptyScreenDescription={t("CreateEditRoomDialog:PeopleSelectorInfo", {
+            productName: PRODUCT_NAME,
+          })}
         />
       </Aside>
     </StyledChangeRoomOwner>

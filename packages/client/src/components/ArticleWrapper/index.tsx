@@ -88,6 +88,7 @@ export default inject<TStore>(
       currentDeviceType,
       standalone,
       isBurgerLoading,
+      organizationName,
     } = settingsStore;
 
     const { isFreeTariff, isNonProfit, isTrial, currentTariffPlanTitle } =
@@ -97,10 +98,10 @@ export default inject<TStore>(
       isLicenseExpiring,
       isLicenseDateExpired,
       trialDaysLeft,
-      paymentDate,
     } = currentTariffStatusStore;
 
     return {
+      organizationName,
       onProfileClick,
       user,
       getUserRole,
@@ -119,7 +120,6 @@ export default inject<TStore>(
       isTrial,
       isLicenseDateExpired,
       trialDaysLeft,
-      paymentDate,
 
       toggleArticleOpen,
 

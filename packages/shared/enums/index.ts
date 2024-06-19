@@ -41,6 +41,7 @@ export const enum EmployeeActivationStatus {
 export const enum EmployeeStatus {
   Active = 1,
   Disabled = 2,
+  Pending = 4, // NEW STATUS from server
   Online = "online",
   Offline = "offline",
 }

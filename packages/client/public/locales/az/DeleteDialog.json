@@ -1,9 +1,9 @@
 {
-  "DeleteAllGroupDescription": "Seçilmiş qruplar silinəcək. Qruplardakı istifadəçilər DocSpace-dən silinməyəcək. Davam etmək istədiyinizə əminsiniz?",
+  "DeleteAllGroupDescription": "Seçilmiş qruplar silinəcək. Qruplardakı istifadəçilər {{productName}}-dən silinməyəcək. Davam etmək istədiyinizə əminsiniz?",
   "DeleteAllGroupsTitle": "Qrupları silin",
   "DeleteFile": "Bu faylı silmək üzrəsiniz.",
   "DeleteFolder": "Bu qovluğu silmək üzrəsiniz.",
-  "DeleteGroupDescription": "{{groupName}} qrupu silinəcək. Qrupdakı istifadəçilər DocSpace-dən silinməyəcək. Davam etmək istədiyinizə əminsiniz?",
+  "DeleteGroupDescription": "{{groupName}} qrupu silinəcək. Qrupdakı istifadəçilər {{productName}}-dən silinməyəcək. Davam etmək istədiyinizə əminsiniz?",
   "DeleteGroupTitle": "Qrupu silin",
   "DeleteItems": "Bu elementləri silmək üzrəsiniz. ",
   "DeleteItemsSharedNote": "Nəzərə alın ki, əgər onları kiminləsə paylaşmısınızsa, onlar əlçatan olmayacaq.",

@@ -1,5 +1,5 @@
 {
-  "Desc": "يرجى تعيين بيانات تسجيل DocSpace.",
+  "Desc": "يرجى تعيين بيانات تسجيل {{productName}}.",
   "ErrorEmail": "عنوان بريد إلكتروني غير صالح",
   "ErrorInitWizard": "الخدمة غير متوفرة حاليًا، يُرجى المحاولة مرة أخرى لاحقًا.",
   "ErrorInitWizardButton": "حاول مرة أخرى",
@@ -11,5 +11,5 @@
   "LicenseLink": "اتفاقيات الترخيص",
   "PlaceholderLicense": "ملف الترخيص الخاص بك",
   "Timezone": "المنطقة الزمنية",
-  "WelcomeTitle": "مرحبًا بك في DocSpace الخاص بك!"
+  "WelcomeTitle": "مرحبًا بك في {{productName}} الخاص بك!"
 }

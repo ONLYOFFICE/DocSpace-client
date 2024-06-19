@@ -2830,6 +2830,8 @@ const Dark: TTheme = {
           border: `1px solid ${grayDarkStrong}`,
           errorBorder: `1px solid ${darkErrorStatus}`,
           certificateBackground: grayDarkStrong,
+          textColor: grayDark,
+          errorColor: darkErrorStatus,
         },
         smtp: {
           requirementColor: darkErrorStatus,

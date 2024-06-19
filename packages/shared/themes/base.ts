@@ -2846,6 +2846,8 @@ export const getBaseTheme = () => {
             border: `1px solid ${grayLightMid}`,
             errorBorder: `1px solid ${lightErrorStatus}`,
             certificateBackground: grayLight,
+            textColor: gray,
+            errorColor: lightErrorStatus,
           },
           smtp: {
             requirementColor: lightErrorStatus,

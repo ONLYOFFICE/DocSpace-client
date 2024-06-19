@@ -57,6 +57,7 @@ export const globalColors = {
 
   mainGreen: "#2DB482",
   mainOrange: "#F58D31", // TODO: from kit
+  mainPurple: "#533ED1",
   secondPurple: "#8570BD",
 
   lightErrorStatus: "#F24724",

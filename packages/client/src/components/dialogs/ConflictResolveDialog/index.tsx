@@ -63,7 +63,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     handleFilesUpload,
   } = props;
 
-  const { t, ready } = useTranslation(["ConflictResolveDialog", "Common"]);
+  const { t, ready } = useTranslation(["Common"]);
 
   const {
     destFolderId,
@@ -198,7 +198,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     items.length === 1 ? (
       <Trans
         t={t}
-        ns="ConflictResolveDialog"
+        ns="Common"
         i18nKey="ConflictResolveDescription"
         values={{ file: items[0].title, folder: folderTitle }}
         components={{ 1: <span className="bold" /> }}
@@ -206,7 +206,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     ) : (
       <Trans
         t={t}
-        ns="ConflictResolveDialog"
+        ns="Common"
         i18nKey="ConflictResolveDescriptionFiles"
         values={{ filesCount: items.length, folder: folderTitle }}
         components={{ 1: <span className="bold" /> }}
@@ -220,13 +220,13 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
       isLoading={!ready}
       onSubmit={isUploadConflict ? onAcceptUploadType : onAcceptType}
       onClose={onCloseDialog}
-      cancelButtonLabel={t("Common:CancelButton")}
-      submitButtonLabel={t("Common:OKButton")}
+      cancelButtonLabel={t("CancelButton")}
+      submitButtonLabel={t("OKButton")}
       messageText={messageText}
       selectActionText={t("ConflictResolveSelectAction")}
       overwriteTitle={t("OverwriteTitle")}
       overwriteDescription={t("OverwriteDescription")}
-      duplicateTitle={t("Common:CreateFileCopy")}
+      duplicateTitle={t("CreateFileCopy")}
       duplicateDescription={t("CreateDescription")}
       skipTitle={t("SkipTitle")}
       skipDescription={t("SkipDescription")}

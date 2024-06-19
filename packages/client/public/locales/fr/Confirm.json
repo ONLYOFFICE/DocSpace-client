@@ -4,7 +4,7 @@
   "ConfirmOwnerPortalSuccessMessage": "Le propriétaire de DocSpace a été changé avec succès. Dans 10 secondes, vous serez redirigé.",
   "ConfirmOwnerPortalTitle": "Veuillez confirmer le changement de propriétaire de DocSpace. Nouveau propriétaire : {{newOwner}}.",
   "CurrentNumber": "Votre numéro de téléphone mobile actuel",
-  "DeleteProfileBtn": "Supprimer mon compte",
+  "DeleteProfileBtn": "Désactiver mon compte",
   "DeleteProfileConfirmation": "Attention ! Vous êtes sur le point de supprimer ce compte.",
   "DeleteProfileConfirmationInfo": "En cliquant sur \"Supprimer mon compte\", vous acceptez notre <1>politique de confidentialité.</1>",
   "DeleteProfileSuccessMessage": "Votre compte a été supprimé avec succès.",

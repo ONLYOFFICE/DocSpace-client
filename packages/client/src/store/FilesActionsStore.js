@@ -1288,6 +1288,7 @@ class FilesActionStore {
             toastr.success(successTranslation);
           })
           .then(() => setSelected("close"))
+          .then(() => this.moveToRoomsPage())
           .catch((err) => {
             clearActiveOperations(null, items);
             setSecondaryProgressBarData({

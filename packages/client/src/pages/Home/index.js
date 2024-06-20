@@ -201,6 +201,7 @@ const PureHome = (props) => {
     userId,
 
     scrollToTop,
+    selectedFolderStore,
   });
 
   const { showUploadPanel } = useOperations({

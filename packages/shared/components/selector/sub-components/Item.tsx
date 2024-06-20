@@ -240,12 +240,12 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             {lifetimeTooltip && (
               <>
                 <ReactSVG
-                  data-tooltip-id="iconTooltip"
+                  data-tooltip-id={`${item.id}_iconTooltip`}
                   className="title-icon"
                   src={LifetimeRoomIconUrl}
                 />
                 <Tooltip
-                  id="iconTooltip"
+                  id={`${item.id}_iconTooltip`}
                   place="bottom"
                   getContent={getContent}
                   maxWidth="300px"

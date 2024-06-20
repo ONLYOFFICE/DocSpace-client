@@ -1872,14 +1872,14 @@ export const getBaseTheme = () => {
       },
 
       history: {
-        subtitleColor: "#a3a9ae",
-        fileBlockBg: "#f8f9f9",
-        dateColor: "#A3A9AE",
-        fileExstColor: "#A3A9AE",
-        locationIconColor: "#A3A9AE",
-        folderLabelColor: "#A3A9AE",
-        renamedItemColor: "#A3A9AE",
-        oldRoleColor: "#657077",
+        subtitleColor: gray,
+        fileBlockBg: grayLight,
+        dateColor: gray,
+        fileExstColor: gray,
+        locationIconColor: gray,
+        folderLabelColor: gray,
+        renamedItemColor: gray,
+        oldRoleColor: lightGrayDark,
       },
 
       details: {
@@ -3006,14 +3006,14 @@ export const getBaseTheme = () => {
 
     tag: {
       color: black,
-      deletedColor: "#A3A9AE",
-      background: "#f3f4f4",
-      hoverBackground: "#eceef1",
-      disabledBackground: "#f8f9f9",
-      deletedBackground: "#F8F9F9",
+      deletedColor: gray,
+      background: lightGrayHover,
+      hoverBackground: grayLightMid,
+      disabledBackground: grayLight,
+      deletedBackground: grayLight,
       defaultTagColor: black,
-      newTagBackground: "#eceef1",
-      newTagHoverBackground: "#F3F4F4",
+      newTagBackground: grayLightMid,
+      newTagHoverBackground: lightGrayHover,
     },
 
     profile: {

@@ -1856,14 +1856,14 @@ const Dark: TTheme = {
     },
 
     history: {
-      subtitleColor: "#A3A9AE",
-      fileBlockBg: "#292929",
-      dateColor: "#A3A9AE",
-      fileExstColor: "#A3A9AE",
-      locationIconColor: "#A3A9AE",
-      folderLabelColor: "#A3A9AE",
-      renamedItemColor: "#A3A9AE",
-      oldRoleColor: "#A3A9AE",
+      subtitleColor: gray,
+      fileBlockBg: darkGrayLight,
+      dateColor: gray,
+      fileExstColor: gray,
+      locationIconColor: gray,
+      folderLabelColor: gray,
+      renamedItemColor: gray,
+      oldRoleColor: gray,
     },
 
     details: {
@@ -2987,14 +2987,14 @@ const Dark: TTheme = {
 
   tag: {
     color: white,
-    deletedColor: "#A3A9AE",
-    background: "#474747",
-    hoverBackground: "#282828",
-    disabledBackground: "#858585",
-    deletedBackground: "#282828",
+    deletedColor: gray,
+    background: grayDarkStrong,
+    hoverBackground: darkGrayLight,
+    disabledBackground: grayDark,
+    deletedBackground: darkGrayLight,
     defaultTagColor: white,
-    newTagBackground: "#242424",
-    newTagHoverBackground: "#3D3D3D",
+    newTagBackground: grayDarkMid,
+    newTagHoverBackground: lightDarkGrayHover,
   },
 
   profile: {

@@ -11,6 +11,5 @@
   "Port": "Port",
   "SenderDisplayName": "Display ime posiljaoca",
   "SenderEmailAddress": "Email adresa pošaljioca",
-  "SendTestMail": "Pošaljite probnu poštu",
-  "SuccessfullyCompletedOperation": "Operacija je uspešno završena."
+  "SendTestMail": "Pošaljite probnu poštu"
 }

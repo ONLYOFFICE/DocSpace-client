@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "About",
   "AboutCompanyTitle": "About this program",
   "AccessDenied": "Access denied",
@@ -193,7 +193,6 @@
   "FormRoom": "Form room",
   "Free": "Free",
   "FreeAccessToLicensedVersion": "Free access to Enterprise solution",
-  "FreeProFeatures": "",
   "FromDevice": "From device",
   "FromPortal": "From {{productName}}",
   "FullAccess": "Full access",
@@ -473,7 +472,6 @@
   "UploadDate": "Upload date",
   "Uploader": "Uploader",
   "UploadPDFForm": "Upload PDF form",
-  "UploadReadyPDFForm": "",
   "User": "User",
   "UsersInvited": "Users invited",
   "UTC": "UTC",

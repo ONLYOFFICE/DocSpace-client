@@ -1,4 +1,5 @@
-﻿{
+{
+  "Authentication": "",
   "AuthViaNTLM": "Auth via NTLM",
   "EnableSSL": "Enable SSL",
   "EnterDomain": "Enter domain",
@@ -11,5 +12,6 @@
   "Port": "Port",
   "SenderDisplayName": "Sender Display Name",
   "SenderEmailAddress": "Sender Email Address",
-  "SendTestMail": "Send Test Mail"
+  "SendTestMail": "Send Test Mail",
+  "SuccessfullyCompletedOperation": ""
 }

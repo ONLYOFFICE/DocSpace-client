@@ -920,6 +920,14 @@ export function removeAllExceptThisEventId(eventId) {
   });
 }
 
+export function logoutAllUsers(userIds) {
+  return request({
+    method: "put",
+    url: `/security/activeconnections/logoutall`,
+    data: { userIds },
+  });
+}
+
 export function removeAllActiveSessions() {
   return request({
     method: "put",

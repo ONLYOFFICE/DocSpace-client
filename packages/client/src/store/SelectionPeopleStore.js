@@ -631,6 +631,22 @@ class SelectionStore {
       this.setIsLoading(false);
     }
   };
+
+  onClickLogoutAllUsers = async (t) => {
+    const { logoutAllUsers } = this.settingsSetupStore;
+    const userIds = this.selection.flatMap((item) =>
+      item.connections.map((connection) => connection.userId),
+    );
+    try {
+      this.setIsLoading(true);
+      await logoutAllUsers(userIds);
+      toastr.success(t("LoggedOutBySelectedUsers"));
+    } catch (error) {
+      toastr.error(error);
+    } finally {
+      this.setIsLoading(false);
+    }
+  };
 }
 
 export default SelectionStore;

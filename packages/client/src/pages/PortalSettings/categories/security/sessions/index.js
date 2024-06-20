@@ -98,6 +98,7 @@ const Sessions = ({
   setDisableDialogVisible,
   setLogoutDialogVisible,
   setLogoutAllDialogVisible,
+  onClickLogoutAllUsers,
   onClickLogoutAllSessions,
   onClickLogoutAllExceptThis,
   onClickRemoveSession,
@@ -212,8 +213,10 @@ const Sessions = ({
           visible={logoutAllDialogVisible}
           isLoading={isLoading}
           exceptId={exceptId}
+          userIds={userIds}
           displayName={displayName}
           onClose={() => setLogoutAllDialogVisible(false)}
+          onLogoutAllUsers={onClickLogoutAllUsers}
           onLogoutAllSessions={onClickLogoutAllSessions}
           onLogoutAllExceptThis={onClickLogoutAllExceptThis}
         />
@@ -238,6 +241,7 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     selection,
     bufferSelection,
     isLoading,
+    onClickLogoutAllUsers,
     onClickLogoutAllSessions,
     onClickLogoutAllExceptThis,
     onClickRemoveSession,
@@ -279,6 +283,7 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     setLogoutDialogVisible,
     setLogoutAllDialogVisible,
     isLoading,
+    onClickLogoutAllUsers,
     onClickLogoutAllSessions,
     onClickLogoutAllExceptThis,
     onClickRemoveSession,

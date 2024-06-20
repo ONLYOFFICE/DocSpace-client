@@ -584,6 +584,10 @@ class SettingsSetupStore {
     return api.settings.removeActiveSession(id);
   };
 
+  logoutAllUsers = (userIds) => {
+    return api.settings.logoutAllUsers(userIds);
+  };
+
   setLogoutDialogVisible = (visible) => {
     this.logoutDialogVisible = visible;
   };

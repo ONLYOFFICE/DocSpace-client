@@ -36,6 +36,7 @@ import ModalDialogContainer from "../ModalDialogContainer";
 const LogoutAllSessionDialog = ({
   t,
   exceptId,
+  userIds,
   displayName,
   visible,
   isLoading,
@@ -43,6 +44,7 @@ const LogoutAllSessionDialog = ({
   onRemoveAllSessions,
   onRemoveAllExceptThis,
   isSeveralSelection,
+  onLogoutAllUsers,
   onLogoutAllSessions,
   onLogoutAllExceptThis,
 }) => {
@@ -56,7 +58,9 @@ const LogoutAllSessionDialog = ({
 
   const onClickLogout = () => {
     if (!isChecked) {
-      onLogoutAllSessions(t);
+      isSeveralSelection
+        ? onLogoutAllUsers(t, userIds)
+        : onLogoutAllSessions(t);
       onClose();
     } else {
       onLogoutAllExceptThis(t, exceptId);

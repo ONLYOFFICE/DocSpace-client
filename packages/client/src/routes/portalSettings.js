@@ -24,23 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { Navigate } from "react-router-dom";
 import loadable from "@loadable/component";
 
 import Error404 from "@docspace/shared/components/errors/Error404";
 import componentLoader from "@docspace/shared/utils/component-loader";
 
-import PrivateRoute from "../components/PrivateRouteWrapper";
-import ErrorBoundary from "../components/ErrorBoundaryWrapper";
-
 import { generalRoutes } from "./general";
 import SettingsContainer from "../pages/PortalSettings/categories/integration/LDAP/sub-components/SettingsContainer";
 import SyncContainer from "../pages/PortalSettings/categories/integration/LDAP/sub-components/SyncContainer";
-
-const PortalSettings = loadable(() =>
-  componentLoader(() => import("../pages/PortalSettings")),
-);
 
 const CustomizationSettings = loadable(() =>
   componentLoader(
@@ -358,13 +350,7 @@ const Viewer = loadable(() =>
 
 const PortalSettingsRoutes = {
   path: "portal-settings/",
-  element: (
-    <PrivateRoute restricted>
-      <ErrorBoundary>
-        <PortalSettings />
-      </ErrorBoundary>
-    </PrivateRoute>
-  ),
+  lazy: () => import("../pages/PortalSettings"),
   errorElement: <Error404 />,
   children: [
     {

@@ -24,37 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+type EmailActivationProps = {
+  searchParams: { [key: string]: string };
+};
 
-// This function can be marked `async` if using `await` inside
-export function middleware(request: NextRequest) {
-  const host = request.headers.get("x-forwarded-host");
-  const proto = request.headers.get("x-forwarded-proto");
-
-  const redirectUrl = `${proto}://${host}`;
-
-  if (request.nextUrl.pathname === "/health") {
-    console.log("Get login health check for portal: ", redirectUrl);
-    return NextResponse.json({ status: "healthy" }, { status: 200 });
-  }
-
-  console.log(request.nextUrl.pathname);
-
-  if (request.nextUrl.pathname.includes("confirm")) {
-    console.log("call"  );
-    return NextResponse.rewrite(`/login/${request.nextUrl.pathname}`);
-  }
-
-  const isAuth = !!request.cookies.get("asc_auth_key")?.value;
-
-  const url = request.nextUrl.clone();
-  url.pathname = "/";
-
-  if (isAuth && redirectUrl) return NextResponse.redirect(redirectUrl);
+async function Page({ searchParams }: EmailActivationProps) {
+  return <div>Email activation</div>;
 }
 
-// See "Matching Paths" below to learn more
-export const config = {
-  matcher: ["/health", "/", "/not-found", "/confirm"],
-};
+export default Page;

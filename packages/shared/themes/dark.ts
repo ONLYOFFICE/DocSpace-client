@@ -3080,6 +3080,7 @@ const Dark: TTheme = {
     disableText: grayDark,
     errorText: darkErrorStatus,
     linkColor: lightBlueMain,
+    borderColor: grayDarkMid,
   },
 
   editLink: {

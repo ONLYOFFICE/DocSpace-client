@@ -3099,6 +3099,7 @@ export const getBaseTheme = () => {
       disableText: gray,
       errorText: lightErrorStatus,
       linkColor: lightBlueMain,
+      borderColor: grayLightMid,
     },
 
     editLink: {

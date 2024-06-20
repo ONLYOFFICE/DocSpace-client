@@ -25,14 +25,18 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import Base from "@docspace/shared/themes/base";
+import { Base, globalColors } from "@docspace/shared/themes";
 import { TableRow } from "@docspace/shared/components/table";
 import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
 import CursorPalmSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
 
 const hotkeyBorderStyle = css`
   border-image-slice: 1;
-  border-image-source: linear-gradient(to left, #2da7db 24px, #2da7db 24px);
+  border-image-source: linear-gradient(
+    to left,
+    ${globalColors.lightSecondMain} 24px,
+    ${globalColors.lightSecondMain} 24px
+  );
 `;
 
 const rowCheckboxDraggingStyle = css`
@@ -161,7 +165,7 @@ const StyledTableRow = styled(TableRow)`
       props.showHotkeyBorder &&
       css`
         z-index: 1;
-        border-color: #2da7db !important;
+        border-color: ${globalColors.lightSecondMain} !important;
       `}
   }
 

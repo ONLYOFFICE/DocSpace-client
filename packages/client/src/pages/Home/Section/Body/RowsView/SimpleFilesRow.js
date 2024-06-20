@@ -44,7 +44,7 @@ import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withBadges from "../../../../../HOCs/withBadges";
 import ItemIcon from "../../../../../components/ItemIcon";
 import marginStyles from "./CommonStyles";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 import CursorPalmReactSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
 
@@ -90,7 +90,7 @@ const StyledWrapper = styled.div`
   ${(props) =>
     props.showHotkeyBorder &&
     css`
-      border-color: #2da7db !important;
+      border-color: ${globalColors.lightSecondMain} !important;
       z-index: 1;
       position: relative;
 

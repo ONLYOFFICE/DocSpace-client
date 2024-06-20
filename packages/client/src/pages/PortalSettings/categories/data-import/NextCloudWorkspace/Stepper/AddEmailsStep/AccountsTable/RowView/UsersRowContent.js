@@ -39,7 +39,7 @@ import EditSvg from "PUBLIC_DIR/images/access.edit.react.svg";
 import CrossSvg from "PUBLIC_DIR/images/cross.edit.react.svg";
 import CheckSvg from "PUBLIC_DIR/images/check.edit.react.svg";
 
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 const EmailInputWrapper = styled.div`
   display: flex;
@@ -72,7 +72,7 @@ const StyledRowContent = styled(RowContent)`
   .user-email {
     margin-right: 5px;
     path {
-      fill: #a3a9ae;
+      fill: ${globalColors.gray};
     }
   }
 
@@ -156,7 +156,7 @@ const UsersRowContent = ({
         <Text fontWeight={600} fontSize="14px">
           {displayName}
         </Text>
-        <Text fontWeight={600} fontSize="12px" color="#A3A9AE">
+        <Text fontWeight={600} fontSize="12px" color={globalColors.gray}>
           {prevEmail === "" ? t("Settings:NoEmail") : prevEmail}
         </Text>
       </div>

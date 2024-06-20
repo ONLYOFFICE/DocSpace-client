@@ -36,6 +36,7 @@ import {
   mobileMore,
   getCorrectFourValuesStyle,
 } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
 
 const FlexBoxStyles = css`
   display: flex;
@@ -57,14 +58,17 @@ const StyledTile = styled.div`
   width: 100%;
   border: ${(props) => props.theme.filesSection.tilesView.tile.border};
   border-radius: 6px;
-  ${(props) => props.showHotkeyBorder && "border-color: #2DA7DB"};
+  ${(props) =>
+    props.showHotkeyBorder && `border-color: ${globalColors.lightSecondMain}`};
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   ${(props) => props.isSelected && checkedStyle}
 
   &:before,
   &:after {
-    ${(props) => props.showHotkeyBorder && "border-color: #2DA7DB"};
+    ${(props) =>
+      props.showHotkeyBorder &&
+      `border-color: ${globalColors.lightSecondMain}`};
   }
 
   &:before,

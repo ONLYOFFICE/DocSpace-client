@@ -41,7 +41,7 @@ import EditSvg from "PUBLIC_DIR/images/access.edit.react.svg";
 import CrossSvg from "PUBLIC_DIR/images/cross.edit.react.svg";
 import CheckSvg from "PUBLIC_DIR/images/check.edit.react.svg";
 
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 const EmailInputWrapper = styled.div`
   display: flex;
@@ -59,7 +59,7 @@ const StyledTableRow = styled(TableRow)`
     gap: 8px;
     overflow: hidden;
     path {
-      fill: #a3a9ae;
+      fill: ${globalColors.gray};
     }
   }
 
@@ -196,7 +196,11 @@ const UsersTableRow = ({
         ) : (
           <span onClick={openEmail} className="user-email" ref={emailTextRef}>
             <EditSvg />
-            <Text fontWeight={600} color="#A3A9AE" className="textOverflow">
+            <Text
+              fontWeight={600}
+              color={globalColors.gray}
+              className="textOverflow"
+            >
               {prevEmail !== "" ? prevEmail : t("Settings:NoEmail")}
             </Text>
           </span>

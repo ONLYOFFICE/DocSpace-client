@@ -52,7 +52,6 @@ import {
 
 import isEqual from "lodash/isEqual";
 import { DeviceType, WhiteLabelLogoType } from "@docspace/shared/enums";
-import { globalColors } from "@docspace/shared/themes";
 
 const WhiteLabel = (props) => {
   const {

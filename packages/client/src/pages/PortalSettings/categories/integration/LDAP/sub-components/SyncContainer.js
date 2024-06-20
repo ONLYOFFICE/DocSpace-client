@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Cron } from "@docspace/shared/components/cron";
+import { Cron, getNextSynchronization } from "@docspace/shared/components/cron";
 import { toastr } from "@docspace/shared/components/toast";
 
 import ProgressContainer from "./ProgressContainer";
@@ -50,7 +50,6 @@ const SyncContainer = ({
   onChangeCron,
   cron,
   serverCron,
-  nextSyncDate,
   theme,
 
   isLdapEnabledOnServer,
@@ -86,6 +85,10 @@ const SyncContainer = ({
   }, []);
 
   const buttonSize = isDesktop() ? ButtonSize.small : ButtonSize.normal;
+
+  const nextSyncDate = React.useMemo(() => {
+    if (cron) return getNextSynchronization(cron);
+  }, [cron]);
 
   const renderBody = () => (
     <Box className="ldap_sync-container">
@@ -144,7 +147,7 @@ const SyncContainer = ({
             />
           </div>
           <Text fontSize="12px" fontWeight={600} lineHeight="16px" noSelect>
-            {`${t("LdapNextSync")}: ${nextSyncDate.toFormat("DDDD tt")} UTC`}
+            {`${t("LdapNextSync")}: ${nextSyncDate?.toFormat("DDDD tt")} UTC`}
           </Text>
           <Button
             tabIndex={-1}
@@ -186,7 +189,6 @@ export default inject(({ currentQuotaStore, settingsStore, ldapStore }) => {
     onChangeCron,
     cron,
     serverCron,
-    nextSyncDate,
 
     isUIDisabled,
 
@@ -202,7 +204,6 @@ export default inject(({ currentQuotaStore, settingsStore, ldapStore }) => {
     onChangeCron,
     cron,
     serverCron,
-    nextSyncDate,
     theme,
 
     isLdapEnabledOnServer: serverSettings.EnableLdapAuthentication,

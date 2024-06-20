@@ -63,6 +63,7 @@ export const globalColors = {
   mainPurple: "#533ED1",
   secondPurple: "#8570BD",
   mainBlueLight: "#13B7EC",
+  secondBlue: "#11A3D4",
   mainYellow: "#FFD30F",
 
   lightErrorStatus: "#F24724",
@@ -107,5 +108,6 @@ export const globalColors = {
   androidColor: "#A8D548",
   //
 
+  tickColor: "#20D21F",
   shuttleGrey: "#63686A",
 };

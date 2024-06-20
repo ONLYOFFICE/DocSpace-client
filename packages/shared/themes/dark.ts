@@ -2917,6 +2917,7 @@ const Dark: TTheme = {
       storageManagement: {
         grayBackgroundText: grayDark,
         descriptionColor: darkGrayDark,
+        dividerColor: grayDarkMid,
       },
       deleteData: {
         borderTop: `1px solid ${grayDarkMid}`,
@@ -3150,6 +3151,10 @@ const Dark: TTheme = {
     errorColor: darkErrorStatus,
     sideColor: grayDark,
     nameColor: grayDarkStrong,
+  },
+
+  publicRoom: {
+    border: `1px solid ${lightGraySelected}`,
   },
 };
 

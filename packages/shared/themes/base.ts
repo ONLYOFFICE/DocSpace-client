@@ -2936,6 +2936,7 @@ export const getBaseTheme = () => {
         storageManagement: {
           grayBackgroundText: grayText,
           descriptionColor: lightGrayDark,
+          dividerColor: grayLightMid,
         },
         deleteData: {
           borderTop: `1px solid ${grayLightMid}`,
@@ -3169,6 +3170,10 @@ export const getBaseTheme = () => {
       errorColor: lightErrorStatus,
       sideColor: gray,
       nameColor: grayStrong,
+    },
+
+    publicRoom: {
+      border: `1px solid ${lightGraySelected}`,
     },
   };
 };

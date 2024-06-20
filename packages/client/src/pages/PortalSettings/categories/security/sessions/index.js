@@ -102,6 +102,8 @@ const Sessions = ({
   onClickLogoutAllExceptThis,
   onClickRemoveSession,
   updateUserStatus,
+  getLoginHistoryReport,
+  isLoadingDownloadReport,
   isSessionsLoaded,
 }) => {
   useEffect(() => {
@@ -174,8 +176,8 @@ const Sessions = ({
           label={t("DownloadReportBtnText")}
           size="normal"
           minwidth="auto"
-          onClick={() => console.log("get report")}
-          isLoading={false}
+          onClick={() => getLoginHistoryReport()}
+          isLoading={isLoadingDownloadReport}
         />
         <span className="download-report_description">
           {t("DownloadReportDescription")}
@@ -250,6 +252,8 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     setDisableDialogVisible,
     setLogoutDialogVisible,
     setLogoutAllDialogVisible,
+    getLoginHistoryReport,
+    isLoadingDownloadReport,
   } = setup;
 
   return {
@@ -279,6 +283,8 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     onClickLogoutAllExceptThis,
     onClickRemoveSession,
     updateUserStatus,
+    getLoginHistoryReport,
+    isLoadingDownloadReport,
     isSessionsLoaded: allSessions.length > 0,
   };
 })(

@@ -45,7 +45,7 @@ const StyledModalDialog = styled(ModalDialog)`
     width: auto;
 
     /* Light theme. */
-    --color-border-default: #d0d7de;
+    --color-border-default: ${(props) => props.theme.dialogs.borderColor};
     --color-border-muted: hsla(210, 18%, 87%, 1);
 
     .modal-footer {

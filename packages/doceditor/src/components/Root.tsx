@@ -125,12 +125,6 @@ const Root = ({
     selectFileDialogFileTypeDetection,
     selectFileDialogVisible,
   } = useSelectFileDialog({ instanceId: instanceId ?? "" });
-  const {
-    isSharingDialogVisible,
-
-    onCloseSharingDialog,
-    onSDKRequestSharingSettings,
-  } = useShareDialog();
 
   const {
     getIsDisabledStartFillingSelectDialog,
@@ -139,7 +133,15 @@ const Root = ({
     onSubmitStartFillingSelectDialog,
     onSDKRequestStartFilling,
     conflictDataDialog,
+    headerLabelSFSDialog,
   } = useStartFillingSelectDialog(fileInfo);
+
+  const {
+    isSharingDialogVisible,
+
+    onCloseSharingDialog,
+    onSDKRequestSharingSettings,
+  } = useShareDialog(config, onSDKRequestStartFilling);
 
   useUpdateSearchParamId(fileId, hash);
 
@@ -254,11 +256,12 @@ const Root = ({
         <StartFillingSelectorDialog
           fileInfo={fileInfo}
           socketHelper={socketHelper}
+          filesSettings={filesSettings}
+          headerLabel={headerLabelSFSDialog}
           isVisible={isVisibleStartFillingSelectDialog}
           onClose={onCloseStartFillingSelectDialog}
           onSubmit={onSubmitStartFillingSelectDialog}
           getIsDisabled={getIsDisabledStartFillingSelectDialog}
-          filesSettings={filesSettings}
         />
       )}
       {conflictDataDialog.visible && (

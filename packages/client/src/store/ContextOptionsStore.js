@@ -1400,7 +1400,8 @@ class ContextOptionsStore {
         onClick: () => this.onCopyLink(item, t),
         disabled:
           (isPublicRoomType && item.canCopyPublicLink && !isArchive) ||
-          this.publicRoomStore.isPublicRoom,
+          this.publicRoomStore.isPublicRoom ||
+          !item.security.CopyLink,
       },
       {
         id: "option_copy-external-link",

@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Մասին",
   "AboutCompanyTitle": "Ծրագրի մասին",
   "AccessDenied": "Մուտքն արգելված է",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "«{{name}}» սենյակը արխիվացված է",
   "Attention": "Ուշադրություն",
   "Audio": "Ձայնային",
+  "Authentication": "Նույնականացում",
   "Authorization": "Լիազորում",
   "Back": "Հետ",
   "BarMaintenanceDescription": "Մենք ներողություն ենք խնդրում ծառայության աշխատանքի ցանկացած կարճաժամկետ տեխնիկական խնդրի համար, որը կարող է հայտնվել {{targetDate}}-ին՝ {{productName}}-ի թարմացման ժամանակ:",
@@ -213,6 +214,7 @@
   "LastModifiedDate": "Վերջին փոփոխության ամսաթիվը",
   "LastName": "Վերջին անունը",
   "LatePayment": "Վերջին վճարումը",
+  "LDAP": "LDAP",
   "LearnMore": "Իմանալ ավելին",
   "LinkAccessDenied": "Հղման մուտքը մերժվել է",
   "LinkExpireAfter": "Հղման ժամկետը կսպառվի <1>{{date}}</1>-ից հետո",
@@ -417,6 +419,7 @@
   "SubscriptionExpired": "Աջակցության և թարմացումների ձեր բաժանորդագրության ժամկետը սպառվել է",
   "SubscriptionExpiredTitle": "Բաժանորդագրության ժամկետը սպառվել է",
   "SubscriptionIsExpiring": "Ձեր բաժանորդագրության ժամկետը լրանում է {{date}}-ին",
+  "SuccessfullyCompletedOperation": "Գործողությունը հաջողությամբ ավարտվել է։",
   "Support": "Աջակցություն",
   "SwitchToThumbnails": "Անցնել մանրապատկերների տեսքին",
   "SwitchViewToCompact": "Անցնել կոմպակտ տեսքի",

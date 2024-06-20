@@ -32,7 +32,7 @@ import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
 import { TRoomSecurity } from "../../api/rooms/types";
 
 import { AvatarRole } from "../avatar";
-import { TSubmenuItem } from "../submenu";
+import { TTabItem } from "../tabs";
 
 import { SelectorAccessRightsMode } from "./Selector.enums";
 
@@ -106,7 +106,7 @@ export type TSelectorBreadCrumbs =
 
 // tabs
 export type TWithTabs =
-  | { withTabs: true; tabsData: TSubmenuItem[]; activeTabId: string }
+  | { withTabs: true; tabsData: TTabItem[]; activeTabId: string }
   | { withTabs?: undefined; tabsData?: undefined; activeTabId?: undefined };
 
 // select all

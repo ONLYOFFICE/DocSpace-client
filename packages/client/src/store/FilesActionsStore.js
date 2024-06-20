@@ -1289,6 +1289,7 @@ class FilesActionStore {
             toastr.success(successTranslation);
           })
           .then(() => setSelected("close"))
+          .then(() => this.moveToRoomsPage())
           .catch((err) => {
             clearActiveOperations(null, items);
             setSecondaryProgressBarData({
@@ -2717,6 +2718,37 @@ class FilesActionStore {
 
   changeRoomLifetime = (roomId, lifetime) => {
     return changeRoomLifetime(roomId, lifetime);
+  };
+
+  copyFromTemplateForm = async (fileInfo, t) => {
+    const selectedItemId = this.selectedFolderStore.id;
+    const fileIds = [fileInfo.id];
+
+    const operationData = {
+      destFolderId: selectedItemId,
+      folderIds: [],
+      fileIds,
+      deleteAfter: false,
+      isCopy: true,
+      folderTitle: this.selectedFolderStore.title,
+      translations: {
+        copy: t("Common:CopyOperation"),
+      },
+    };
+
+    this.uploadDataStore.secondaryProgressDataStore.setItemsSelectionTitle(
+      fileInfo.title,
+    );
+
+    const conflicts = await checkFileConflicts(selectedItemId, [], fileIds);
+
+    if (conflicts.length) {
+      return this.setConflictDialogData(conflicts, operationData);
+    }
+
+    this.uploadDataStore
+      .itemOperationToFolder(operationData)
+      .catch((error) => toastr.error(error));
   };
 }
 

@@ -334,6 +334,11 @@ class SettingsStore {
     this.tenantStatus = tenantStatus;
   };
 
+  get ldapSettingsUrl() {
+    //TODO: Change to real link
+    return `${this.helpLink}/administration/docspace-settings.aspx#LdapSettings_block`;
+  }
+
   get portalSettingsUrl() {
     return `${this.helpLink}/administration/docspace-settings.aspx`;
   }

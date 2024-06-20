@@ -216,20 +216,20 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
   return (
     <ConflictResolve
       visible={visible}
-      headerLabel={t("ConflictResolveTitle")}
+      headerLabel={t("Common:ConflictResolveTitle")}
       isLoading={!ready}
       onSubmit={isUploadConflict ? onAcceptUploadType : onAcceptType}
       onClose={onCloseDialog}
       cancelButtonLabel={t("CancelButton")}
       submitButtonLabel={t("OKButton")}
       messageText={messageText}
-      selectActionText={t("ConflictResolveSelectAction")}
-      overwriteTitle={t("OverwriteTitle")}
-      overwriteDescription={t("OverwriteDescription")}
+      selectActionText={t("Common:ConflictResolveSelectAction")}
+      overwriteTitle={t("Common:OverwriteTitle")}
+      overwriteDescription={t("Common:OverwriteDescription")}
       duplicateTitle={t("CreateFileCopy")}
-      duplicateDescription={t("CreateDescription")}
-      skipTitle={t("SkipTitle")}
-      skipDescription={t("SkipDescription")}
+      duplicateDescription={t("Common:CreateDescription")}
+      skipTitle={t("Common:SkipTitle")}
+      skipDescription={t("Common:SkipDescription")}
     />
   );
 };

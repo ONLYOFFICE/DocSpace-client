@@ -385,13 +385,6 @@ class DialogsStore {
     this.selectFileFormRoomOpenRoot = openRoot;
   };
 
-  createFromTemplateForm = (fileInfo) => {
-    this.createMasterForm(fileInfo, {
-      extension: "pdf",
-      withoutDialog: true,
-    });
-  };
-
   createMasterForm = async (fileInfo, options) => {
     const { extension = "pdf", withoutDialog, preview } = options;
 

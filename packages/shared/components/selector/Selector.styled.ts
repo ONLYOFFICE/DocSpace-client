@@ -28,12 +28,13 @@ import styled, { css } from "styled-components";
 
 import ArrowRightSvg from "PUBLIC_DIR/images/arrow.right.react.svg";
 
+import { Tabs } from "../tabs";
 import { Base } from "../../themes";
 import { mobile } from "../../utils/device";
 
 import { ComboBox } from "../combobox";
 import { Text } from "../text";
-import { Submenu } from "../submenu";
+
 import { AccessRightSelect } from "../access-right-select";
 
 const accessComboboxStyles = css`
@@ -251,7 +252,7 @@ const StyledItem = styled.div<{
           }
 
           .label {
-            color: #a3a9ae;
+            color: ${props.theme.selector.item.disableTextColor};
           }
 
           .disabled-text {
@@ -491,7 +492,7 @@ const StyledAccessSelector = styled(AccessRightSelect)`
   ${accessComboboxStyles}
 `;
 
-const StyledTabs = styled(Submenu)`
+const StyledTabs = styled(Tabs)`
   padding: 0 16px;
   margin-bottom: 16px;
 

@@ -249,8 +249,16 @@ class UsersStore {
     else return "manager";
   };
 
-  getUserContextOptions = (isMySelf, statusType, userRole, status) => {
-    const { isOwner, isAdmin, isVisitor, isCollaborator } = this.userStore.user;
+  getUserContextOptions = (
+    isMySelf,
+    isUserSSO,
+    isUserLDAP,
+    statusType,
+    userRole,
+    status,
+  ) => {
+    const { isOwner, isAdmin, isVisitor, isCollaborator, isLDAP } =
+      this.userStore.user;
 
     const options = [];
 
@@ -268,11 +276,12 @@ class UsersStore {
         }
 
         if (isMySelf) {
-          options.push("separator-1");
-
-          options.push("change-name");
-          options.push("change-email");
-          options.push("change-password");
+          if (!isLDAP) {
+            options.push("separator-1");
+            options.push("change-name");
+            options.push("change-email");
+            options.push("change-password");
+          }
 
           if (isOwner) {
             options.push("separator-2");
@@ -286,14 +295,19 @@ class UsersStore {
                 userRole === "manager" ||
                 userRole === "collaborator"))
           ) {
-            options.push("separator-1");
+            if (!isUserLDAP && !isUserSSO) {
+              options.push("separator-1");
 
-            options.push("change-email");
-            options.push("change-password");
+              options.push("change-email");
+              options.push("change-password");
+            }
+
             options.push("reset-auth");
 
-            options.push("separator-2");
-            options.push("disable");
+            if (!isUserLDAP) {
+              options.push("separator-2");
+              options.push("disable");
+            }
           }
         }
 
@@ -438,6 +452,7 @@ class UsersStore {
       firstName,
       lastName,
       isSSO,
+      isLDAP,
       quotaLimit,
       usedSpace,
       isCustomQuota,
@@ -449,6 +464,8 @@ class UsersStore {
 
     const options = this.getUserContextOptions(
       isMySelf,
+      isSSO,
+      isLDAP,
       statusType,
       role,
       status,
@@ -479,6 +496,7 @@ class UsersStore {
       firstName,
       lastName,
       isSSO,
+      isLDAP,
       quotaLimit,
       usedSpace,
       isCustomQuota,

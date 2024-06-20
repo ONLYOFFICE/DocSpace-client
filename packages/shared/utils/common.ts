@@ -1072,25 +1072,41 @@ export const mapCulturesToArray = (
   isBetaBadge: boolean = true,
   i18nArg?: I18n,
 ) => {
+  let t = null;
+
   if (i18nArg) {
-    const t = i18nArg.getFixedT(null, "Common");
-    return culturesArg.map((culture, index) => {
-      return {
-        key: culture,
-        label: t(`Culture_${culture}`),
-        icon: flagsIcons?.get(`${culture}.react.svg`),
-        ...(isBetaBadge && { isBeta: isBetaLanguage(culture) }),
-        index,
-      };
-    });
+    t = i18nArg.getFixedT(null, "Common");
   }
 
   return culturesArg.map((culture, index) => {
-    return {
-      key: culture,
-      icon: flagsIcons?.get(`${culture}.react.svg`),
-      index,
-    };
+    let iconName = culture;
+
+    switch (culture) {
+      case "sr-Cyrl-RS":
+      case "sr-Latn-RS":
+        iconName = "sr";
+        break;
+      default:
+        break;
+    }
+
+    const icon = flagsIcons?.get(`${iconName}.react.svg`);
+
+    const cultureObj = t
+      ? {
+          key: culture,
+          label: t(`Culture_${culture}`),
+          icon,
+          ...(isBetaBadge && { isBeta: isBetaLanguage(culture) }),
+          index,
+        }
+      : {
+          key: culture,
+          icon,
+          index,
+        };
+
+    return cultureObj;
   });
 };
 

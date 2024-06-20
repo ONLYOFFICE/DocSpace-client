@@ -2157,7 +2157,7 @@ class ContextOptionsStore {
 
     const someDialogIsOpen = checkDialogsOpen();
 
-    if (isSectionMenu && (!canCreate || isMobile || someDialogIsOpen))
+    if (!canCreate || (isSectionMenu && (isMobile || someDialogIsOpen)))
       return null;
 
     const isOwner = this.userStore.user?.isOwner;

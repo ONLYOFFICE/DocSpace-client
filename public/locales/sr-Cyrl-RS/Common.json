@@ -215,7 +215,7 @@
   "LinkAccessDenied": "Приступ линку је одбијен",
   "LinkExpireAfter": "Линк ће да истекне после <1>{{date}}</1>",
   "LinkExpired": "Линк је истекао.",
-  "LinkIsValid": "Линк је валидан до <1>{{дате}}</1>",
+  "LinkIsValid": "Линк је валидан до <1>{{date}}</1>",
   "LinkSuccessfullyCopied": "Линк успешно копиран на привремену меморију",
   "ListAccounts": "Листа налога",
   "LiveChat": "Ћаскање уживо",

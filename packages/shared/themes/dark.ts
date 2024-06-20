@@ -2719,9 +2719,8 @@ const Dark: TTheme = {
     },
     separator: {
       borderBottom: `1px solid #474747 !important`,
-      margin: "6px 16px 6px 16px !important",
+      margin: "6px 16px !important",
       height: "1px !important",
-      width: "calc(100% - 32px) !important",
     },
     text: {
       header: {
@@ -2742,7 +2741,7 @@ const Dark: TTheme = {
     background: "none",
     svgFill: "#eeeeee",
     header: {
-      height: "49px",
+      height: "55px",
       borderBottom: `1px solid #474747`,
       marginBottom: "6px",
     },
@@ -2752,7 +2751,7 @@ const Dark: TTheme = {
     padding: "0 12px",
     mobile: {
       height: "36px",
-      padding: "0 16px 6px",
+      padding: "6px 16px",
     },
   },
   newContextMenu: {
@@ -2760,7 +2759,6 @@ const Dark: TTheme = {
     borderRadius: "6px",
     mobileBorderRadius: "6px 6px 0 0",
     boxShadow: "0px 8px 16px 0px #040F1B29",
-    padding: "6px 0px",
     border: "1px solid #474747",
     devices: {
       maxHeight: "calc(100vh - 64px)",

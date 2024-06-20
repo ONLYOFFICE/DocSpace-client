@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { Base, TTheme } from "../../themes";
-import { tablet, mobile, getCorrectFourValuesStyle } from "../../utils";
+import { mobile, isMobile, getCorrectFourValuesStyle } from "../../utils";
 
 const styledTabletView = css<{ articleWidth: number }>`
   position: fixed;
@@ -111,15 +111,27 @@ const StyledContextMenu = styled.div<{
     box-shadow: ${(props) => props.theme.newContextMenu.boxShadow};
     -moz-box-shadow: ${(props) => props.theme.newContextMenu.boxShadow};
     -webkit-box-shadow: ${(props) => props.theme.newContextMenu.boxShadow};
-    padding: ${(props) => props.theme.newContextMenu.padding};
 
-    @media ${tablet} {
-      ${(props) => props.changeView && styledTabletView}
+    @media ${mobile} {
+      ${(props) => props.changeView && styledMobileView}
     }
 
     @media ${mobile} {
       ${(props) => props.changeView && styledMobileView}
     }
+
+    .scroll-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      padding-inline-end: 0 !important;
+    }
+
+    ${!isMobile() &&
+    css`
+      max-width: calc(100vw - 32px);
+    `}
   }
 
   .contextmenu-header {
@@ -211,6 +223,11 @@ const StyledContextMenu = styled.div<{
     margin: 0;
     padding: 0;
     list-style: none;
+
+    ${!isMobile() &&
+    css`
+      max-width: calc(100vw - 32px);
+    `}
   }
 
   .p-contextmenu .p-submenu-list {
@@ -223,7 +240,6 @@ const StyledContextMenu = styled.div<{
     box-shadow: ${(props) => props.theme.dropDown.boxShadow};
     -moz-box-shadow: ${(props) => props.theme.dropDown.boxShadow};
     -webkit-box-shadow: ${(props) => props.theme.dropDown.boxShadow};
-    padding: 4px 0px;
 
     white-space: nowrap;
     overflow: hidden;
@@ -246,7 +262,7 @@ const StyledContextMenu = styled.div<{
     position: relative;
     border: ${(props) => props.theme.dropDownItem.border};
     margin: ${(props) => props.theme.dropDownItem.margin};
-    padding: ${(props) => props.theme.dropDownItem.padding};
+    padding: 0 16px;
     font-family: ${(props) => props.theme.fontFamily};
     font-style: normal;
     background: none;
@@ -260,10 +276,6 @@ const StyledContextMenu = styled.div<{
     text-transform: none;
 
     -webkit-touch-callout: none;
-
-    @media ${tablet} {
-      padding: 0 16px;
-    }
 
     &:hover {
       background-color: ${(props) =>
@@ -295,7 +307,7 @@ const StyledContextMenu = styled.div<{
     cursor: default !important;
     margin: ${(props) => props.theme.menuItem.separator.margin};
     height: ${(props) => props.theme.menuItem.separator.height};
-    width: ${(props) => props.theme.menuItem.separator.width};
+
     &:hover {
       cursor: default !important;
     }
@@ -304,6 +316,14 @@ const StyledContextMenu = styled.div<{
   .p-contextmenu .p-menuitem {
     position: relative;
     margin: ${(props) => props.theme.dropDownItem.margin};
+
+    max-width: calc(-32px + 100vw);
+    width: fit-content;
+    min-width: inherit;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .p-contextmenu .scroll-body .p-menuitem {
@@ -393,5 +413,26 @@ const StyledContextMenu = styled.div<{
 StyledContextMenu.defaultProps = {
   theme: Base,
 };
+
+export const StyledList = styled.ul<{
+  listHeight: number;
+  widthSubMenu: null | number;
+}>`
+  & > :first-child {
+    .scroll-body {
+      height: ${(props) => `${props.listHeight}px`};
+    }
+  }
+
+  & > :nth-child(1) {
+    ${(props) =>
+      props.widthSubMenu &&
+      css`
+        .p-menuitem {
+          max-width: ${`${props.widthSubMenu}px`};
+        }
+      `}
+  }
+`;
 
 export { StyledContextMenu };

@@ -13,6 +13,8 @@ export const useFeedTranslation = (
       return t("InfoPanel:FileUploaded");
     case "UserFileUpdated":
       return t("InfoPanel:UserFileUpdated");
+    case "FileConverted":
+      return t("InfoPanel:FileConverted");
     case "FileRenamed":
       return t("InfoPanel:FileRenamed");
     case "FileMoved":

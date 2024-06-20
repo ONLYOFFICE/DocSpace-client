@@ -2,6 +2,7 @@ enum FeedAction {
   Create = "create",
   Upload = "upload",
   Update = "update",
+  Convert = "convert",
   Delete = "delete",
   Rename = "rename",
   Move = "move",
@@ -43,6 +44,11 @@ export const feedInfo = [
     key: "UserFileUpdated",
     targetType: `${FeedTarget.File}`,
     actionType: `${FeedAction.Update}`,
+  },
+  {
+    key: "FileConverted",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.Convert}`,
   },
   {
     key: "FileRenamed",
@@ -178,5 +184,6 @@ export const feedInfo = [
 ] as const;
 
 export const getFeedInfo = (feed: { action: { key: AnyFeedInfo["key"] } }) => {
-  return feedInfo.find((info) => info.key === feed.action.key)!;
+  console.log(feed);
+  return feedInfo.find((info) => info.key === feed.action.key)! || {};
 };

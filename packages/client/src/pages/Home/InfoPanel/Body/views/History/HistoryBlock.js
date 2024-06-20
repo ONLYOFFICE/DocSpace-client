@@ -84,7 +84,11 @@ const HistoryBlock = ({
       />
       <div className="info">
         <div className="title">
-          <Text className="name">{decode(initiator.displayName)}</Text>
+          <Text className="name">
+            {initiator?.isAnonim
+              ? t("Common:Anonymous")
+              : decode(initiator.displayName)}
+          </Text>
           {initiator.isOwner && (
             <Text className="secondary-info">
               {t("Common:Owner").toLowerCase()}

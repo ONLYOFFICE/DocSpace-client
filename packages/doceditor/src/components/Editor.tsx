@@ -48,6 +48,7 @@ import {
   onSDKWarning,
   onSDKError,
   onSDKRequestRename,
+  onOutdatedVersion,
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
@@ -231,6 +232,7 @@ const Editor = ({
     onDocumentStateChange,
     onMetaChange,
     onMakeActionLink,
+    onOutdatedVersion,
   };
 
   if (successAuth) {
@@ -294,7 +296,8 @@ const Editor = ({
   }
 
   if (config?.startFilling) {
-    newConfig.events.onRequestStartFilling = onSDKRequestStartFilling;
+    newConfig.events.onRequestStartFilling = () =>
+      onSDKRequestStartFilling?.(t("Common:StartFilling"));
   }
 
   newConfig.events.onSubmit = () => {

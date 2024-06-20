@@ -870,7 +870,7 @@ const SectionFilterContent = ({
             AccountLoginType.SSO === filter.accountLoginType.toString()
               ? t("Common:SSO")
               : AccountLoginType.LDAP === filter.accountLoginType.toString()
-                ? t("PeopleTranslations:LDAPLbl")
+                ? t("Common:LDAP")
                 : t("PeopleTranslations:StandardLogin");
           filterValues.push({
             key: filter.accountLoginType.toString(),
@@ -1433,12 +1433,11 @@ const SectionFilterContent = ({
           group: "filter-login-type",
           label: t("Common:SSO"),
         },
-        //TODO: uncomment after ldap be ready
-        /*{
+        {
           key: AccountLoginType.LDAP,
           group: "filter-login-type",
-          label: t("PeopleTranslations:LDAPLbl"),
-        },*/
+          label: t("Common:LDAP"),
+        },
         {
           key: AccountLoginType.STANDART,
           group: "filter-login-type",

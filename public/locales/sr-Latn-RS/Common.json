@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "U vezi sa",
   "AboutCompanyTitle": "U vezi ovog programa",
   "AccessDenied": "Pristup odbijen",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "Soba ‘{{name}}’ je arhivirana",
   "Attention": "Pažnja",
   "Audio": "Audio",
+  "Authentication": "Autentifikacija",
   "Authorization": "Autorizacija",
   "Back": "Nazad",
   "BarMaintenanceDescription": "Izvinjavamo se zbog eventualnih kratkotrajnih tehničkih problema u funkcionisanju usluge koji se mogu pojaviti {{targetDate}} tokom ažuriranja {{productName}}.",
@@ -430,6 +431,7 @@
   "SubscriptionExpired": "Vaša pretplata na podršku i ažuriranja je istekla",
   "SubscriptionExpiredTitle": "Pretplata istekla",
   "SubscriptionIsExpiring": "Vaša pretplata ističe {{date}}",
+  "SuccessfullyCompletedOperation": "Operacija je uspešno završena.",
   "Support": "Podrška",
   "SwitchToThumbnails": "Prebaci se na prikaz sličica",
   "SwitchViewToCompact": "Prebaci se na kompaktni prikaz",

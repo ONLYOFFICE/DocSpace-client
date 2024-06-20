@@ -151,7 +151,7 @@ export interface ComboboxProps {
   /** Type ComboBox */
   type?: TCombobox;
   /** Accepts css style */
-  optionStyle: React.CSSProperties;
+  optionStyle?: React.CSSProperties;
   setIsOpenItemAccess?: (value: boolean) => void;
   onClickSelectedItem?: (option: TOption) => void;
   withoutBackground?: boolean;

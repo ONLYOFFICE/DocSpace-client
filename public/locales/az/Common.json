@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Haqqında",
   "AboutCompanyTitle": "Proqram haqqında",
   "AccessDenied": "Giriş qadağandır",
@@ -51,6 +51,10 @@
   "CommonFiles": "Ümumi fayllar",
   "CompanyName": "Şirkət adı",
   "Confirmation": "Təsdiqləmə",
+  "ConflictResolveDescription": "<1>{{file}}</1> adlı fayl artıq <1>{{folder}}</1> qovluğunda mövcuddur. ",
+  "ConflictResolveDescriptionFiles": "{{filesCount}} sənəd sayı artıq <1>{{folder}}</1> qovluğunda mövcuddur.",
+  "ConflictResolveSelectAction": "Xahiş edirik əməliyyatı seçin:",
+  "ConflictResolveTitle": "Üzərinə yazmanın təsdiqlənməsi",
   "Connect": "Qoşulmaq",
   "Content": "Kontent",
   "Context": "Kontekst",
@@ -63,6 +67,7 @@
   "Create": "Yaradın",
   "CreateAndCopy": "Yaradın və kopyalayın",
   "CreateCopy": "Sürətini yaratmaq",
+  "CreateDescription": "Qovluqda iki fərqli fayl olacaq. ",
   "CreateFileCopy": "Faylın sürətini yaratmaq",
   "CreateMasterFormFromFile": "Fayldan forma şablonunu yaradın",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -281,6 +286,8 @@
   "orContinueWith": "və ya ilə davam edin",
   "OtherLabel": "Digər",
   "OtherOperations": "Digər əməliyyatlar",
+  "OverwriteDescription": "Fayl, versiyası ilə eyni adı olan fayla əlavə olunacaq. ",
+  "OverwriteTitle": "Versiya yenilənməsi ilə üzərinə yazma",
   "Owner": "Portal sahibi",
   "PageOfTotalPage": "{{page}} üzrə {{totalPage}}",
   "Pages": "səhifələr",
@@ -399,6 +406,8 @@
   "SignUpWithZoom": "Zoom ilə qeydiyyatdan keçin",
   "Size": "Ölçü",
   "SizeImageLarge": "Şəklin ölçüsü çox böyükdür, lütfən, başqa şəkil seçin.",
+  "SkipDescription": "Heç bir fayl köçürülmədi. Orijinal fayl köçürülən yerdə dəyişikliksiz qaldı.",
+  "SkipTitle": "Atlamaq",
   "SomethingWentWrong": "Xəta baş Verdi.",
   "SortBy": "Bu qayda ilə sırala",
   "SpaceManagement": "Sahə İdarəetməsi",
@@ -455,14 +464,5 @@
   "Website": "Veb-sayt",
   "Yes": "Bəli",
   "Yesterday": "Dünən",
-  "You": "Siz",
-  "ConflictResolveDescription": "<1>{{file}}</1> adlı fayl artıq <1>{{folder}}</1> qovluğunda mövcuddur. ",
-  "ConflictResolveDescriptionFiles": "{{filesCount}} sənəd sayı artıq <1>{{folder}}</1> qovluğunda mövcuddur.",
-  "ConflictResolveSelectAction": "Xahiş edirik əməliyyatı seçin:",
-  "ConflictResolveTitle": "Üzərinə yazmanın təsdiqlənməsi",
-  "CreateDescription": "Qovluqda iki fərqli fayl olacaq. ",
-  "OverwriteDescription": "Fayl, versiyası ilə eyni adı olan fayla əlavə olunacaq. ",
-  "OverwriteTitle": "Versiya yenilənməsi ilə üzərinə yazma",
-  "SkipDescription": "Heç bir fayl köçürülmədi. Orijinal fayl köçürülən yerdə dəyişikliksiz qaldı.",
-  "SkipTitle": "Atlamaq"
+  "You": "Siz"
 }

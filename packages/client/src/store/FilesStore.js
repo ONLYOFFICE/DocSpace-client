@@ -282,8 +282,6 @@ class FilesStore {
       if (infoPanelSelection?.isRoom || infoPanelSelection?.isFolder)
         infoPanelSelectionType = "folder";
 
-      console.log(id, type, infoPanelSelection?.id, infoPanelSelectionType);
-
       if (id === infoPanelSelection?.id && type === infoPanelSelectionType) {
         console.log("[WS] s:update-history", id);
         fetchHistory();

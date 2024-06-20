@@ -184,6 +184,5 @@ export const feedInfo = [
 ] as const;
 
 export const getFeedInfo = (feed: { action: { key: AnyFeedInfo["key"] } }) => {
-  console.log(feed);
   return feedInfo.find((info) => info.key === feed.action.key)! || {};
 };

@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Over",
   "AboutCompanyTitle": "Over dit programma",
   "AccessDenied": "Toegang geweigerd",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "De kamer \"{{name}}\" is gearchiveerd",
   "Attention": "Attentie",
   "Audio": "Audio",
+  "Authentication": "Authenticatie",
   "Authorization": "Autorisatie",
   "Back": "Terug",
   "BarMaintenanceDescription": "Onze excuses voor eventuele kortstondige technische problemen in het functioneren van de dienst die kunnen optreden op {{targetDate}} tijdens de update van {{productName}}.",
@@ -219,6 +220,7 @@
   "LastModifiedDate": "Datum laatste wijziging",
   "LastName": "Achternaam",
   "LatePayment": "Betalingsachterstand",
+  "LDAP": "LDAP",
   "LearnMore": "Meer informatie",
   "LinkAccessDenied": "Toegang tot de link is geweigerd",
   "LinkExpireAfter": "De link verloopt na <1>{{date}}</1>",
@@ -427,6 +429,7 @@
   "SubscriptionExpired": "Uw abonnement op ondersteuning en updates is verlopen",
   "SubscriptionExpiredTitle": "Abonnement verlopen",
   "SubscriptionIsExpiring": "Uw abonnement loopt af op {{date}}",
+  "SuccessfullyCompletedOperation": "De bewerking is succesvol afgerond.",
   "Support": "Support",
   "SwitchToThumbnails": "Overschakelen naar thumbnails weergave",
   "SwitchViewToCompact": "Schakel naar compacte weergave",

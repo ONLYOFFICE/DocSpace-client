@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Sobre",
   "AboutCompanyTitle": "Sobre este programa",
   "AccessDenied": "Acesso negado",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "A sala '{{name}}' foi arquivada",
   "Attention": "Atenção",
   "Audio": "Áudio",
+  "Authentication": "Autenticação",
   "Authorization": "Autorização",
   "Back": "Voltar",
   "BarMaintenanceDescription": "Pedimos desculpa por quaisquer problemas de curta duração que possam surgir durante a manutenção da nossa plataforma, eles poderão surgir a {{targetDate}} durante a atualização do {{productName}}.",
@@ -219,6 +220,7 @@
   "LastModifiedDate": "Data da última modificação",
   "LastName": "Último Nome",
   "LatePayment": "Pagamento tardio",
+  "LDAP": "LDAP",
   "LearnMore": "Saiba ma",
   "LinkAccessDenied": "O acesso ao link foi negado",
   "LinkExpireAfter": "O link expirará após <1>{{date}}</1>",
@@ -427,6 +429,7 @@
   "SubscriptionExpired": "Sua assinatura para suporte e atualizações expirou",
   "SubscriptionExpiredTitle": "A assinatura expirou",
   "SubscriptionIsExpiring": "A sua subscrição expira no dia {{date}}",
+  "SuccessfullyCompletedOperation": "A operação foi concluída com êxito",
   "Support": "Suporte",
   "SwitchToThumbnails": "Mudar para a vista de thumbnails",
   "SwitchViewToCompact": "Mudar para visualização compacta",

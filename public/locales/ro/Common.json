@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Informații",
   "AboutCompanyTitle": "Despre aplicația",
   "AccessDenied": "Acces refuzat ",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "Sala '{{name}}' este arhivată",
   "Attention": "Atenție",
   "Audio": "Audio",
+  "Authentication": "Autentificare",
   "Authorization": "Autorizare",
   "Back": "Înapoi",
   "BarMaintenanceDescription": "Ne cerem scuze pentru orice problemă tehnică pe termen scurt care poate apărea în funcționarea serviciului la data de {{targetDate}} pe parcursul actualizării {{productName}}.",
@@ -219,6 +220,7 @@
   "LastModifiedDate": "Data ultimei modificări",
   "LastName": "Numele",
   "LatePayment": "Plata întârziată",
+  "LDAP": "LDAP",
   "LearnMore": "Aflați mai mult",
   "LinkAccessDenied": "Accesul la link a fost refuzat",
   "LinkExpireAfter": "Link-ul expiră după data <1>{{date}} </1>",
@@ -427,6 +429,7 @@
   "SubscriptionExpired": "Abonamentul dvs pentru asistență și actualizare a expirat",
   "SubscriptionExpiredTitle": "Abonament expirat",
   "SubscriptionIsExpiring": "Abonamentul dvs expiră pe {{date}}",
+  "SuccessfullyCompletedOperation": "Operațiune terminată cu succes",
   "Support": "Asistența",
   "SwitchToThumbnails": "Trecere la vizualizarea în miniaturi",
   "SwitchViewToCompact": "Trecere la vizualizarea compactă",

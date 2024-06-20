@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "O nas",
   "AboutCompanyTitle": "O tem programu",
   "AccessDenied": "Dostop je zavrnjen",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "Soba '{{name}}' je arhivirana",
   "Attention": "Pozornost",
   "Audio": "Audio",
+  "Authentication": "Preverjanje pristnosti",
   "Authorization": "Avtorizacija",
   "Back": "Nazaj",
   "BarMaintenanceDescription": "Opravičujemo se za morebitne krajše tehnične težave pri delovanju storitve, ki se lahko pojavijo na {{targetDate}} med posodobitvijo {{productName}}.",
@@ -219,6 +220,7 @@
   "LastModifiedDate": "Datum zadnje spremembe",
   "LastName": "Priimek",
   "LatePayment": "Zamuda pri plačilu",
+  "LDAP": "LDAP",
   "LearnMore": "Izvedi več",
   "LinkAccessDenied": "Dostop do povezave je bil zavrnjen",
   "LinkExpireAfter": "Povezava bo potekla z dnem <1>{{date}}</1>",
@@ -427,6 +429,7 @@
   "SubscriptionExpired": "Vaša naročnina za podporo in posodobitve je potekla",
   "SubscriptionExpiredTitle": "Naročnina je potekla",
   "SubscriptionIsExpiring": "Vaša naročnina poteče dne {{date}}",
+  "SuccessfullyCompletedOperation": "Operacija je bila uspešno zaključena.",
   "Support": "Pomoč",
   "SwitchToThumbnails": "Preklopi na pogled s sličicami",
   "SwitchViewToCompact": "Preklopi v kompaktni pogled",

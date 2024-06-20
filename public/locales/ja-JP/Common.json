@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "について",
   "AboutCompanyTitle": "本プログラムについて",
   "AccessDenied": "アクセス拒否",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "'{{name}}' ルームがアーカイブされました",
   "Attention": "注意",
   "Audio": "オーディオ",
+  "Authentication": "認証",
   "Authorization": "許可",
   "Back": "前に",
   "BarMaintenanceDescription": "この度は、{{productName}}のアップデートに伴い、{{targetDate}}にサービス機能の短期的な技術的問題が発生する可能性がありますことをお詫び申し上げます.",
@@ -219,6 +220,7 @@
   "LastModifiedDate": "変更日",
   "LastName": "姓",
   "LatePayment": "延滞料",
+  "LDAP": "LDAP",
   "LearnMore": "詳細はこちら",
   "LinkAccessDenied": "リンクへのアクセスが拒否されました",
   "LinkExpireAfter": "リンクの有効期限は<1>{{date}}</1>です",
@@ -427,6 +429,7 @@
   "SubscriptionExpired": "サポートとアップデートのサブスクリプションの有効期限が切れています",
   "SubscriptionExpiredTitle": "サブスクリプションの有効期限が切れています",
   "SubscriptionIsExpiring": "サブスクリプションの有効期限は{{date}}日です。",
+  "SuccessfullyCompletedOperation": "操作は正常に完了した。",
   "Support": "サポート",
   "SwitchToThumbnails": "サムネイル表示へ切り替え",
   "SwitchViewToCompact": "コンパクトビューに切り替え",

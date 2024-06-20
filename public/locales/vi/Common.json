@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Giới thiệu",
   "AboutCompanyTitle": "Giới thiệu về chương trình này",
   "AccessDenied": "Truy cập bị từ chối",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "Phòng '{{name}}' đã được sao lưu",
   "Attention": "Chú ý",
   "Audio": "Âm thanh",
+  "Authentication": "Xác thực",
   "Authorization": "Ủy quyền",
   "Back": "Quay lại",
   "BarMaintenanceDescription": "Chúng tôi xin lỗi vì bất kỳ vấn đề kỹ thuật ngắn hạn nào trong hoạt động của dịch vụ có thể xảy ra trên {{targetDate}} trong quá trình cập nhật {{productName}}.",
@@ -219,6 +220,7 @@
   "LastModifiedDate": "Ngày sửa đổi lần cuối",
   "LastName": "Họ",
   "LatePayment": "Chậm thanh toán",
+  "LDAP": "LDAP",
   "LearnMore": "Tìm hiểu thêm",
   "LinkAccessDenied": "Truy cập vào liên kết đã bị từ chối",
   "LinkExpireAfter": "Liên kết sẽ hết hạn sau <1>{{date}} </1>",
@@ -427,6 +429,7 @@
   "SubscriptionExpired": "Gói dịch vụ đăng ký để hỗ trợ và cập nhật của bạn đã hết hạn",
   "SubscriptionExpiredTitle": "Đăng ký đã hết hạn",
   "SubscriptionIsExpiring": "Gói dịch vụ đăng ký của bạn sẽ hết hạn vào {{date}}",
+  "SuccessfullyCompletedOperation": "Thao tác đã được hoàn thành.",
   "Support": "Hỗ trợ",
   "SwitchToThumbnails": "Chuyển sang chế độ xem hình thu nhỏ",
   "SwitchViewToCompact": "Chuyển sang xem đơn giản",

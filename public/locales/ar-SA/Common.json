@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "من نحن",
   "AboutCompanyTitle": "نبذة تعريفية عن البرنامج",
   "AccessDenied": "المحاولة مرفوضة",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "تمت أرشفة الغرفة \"{{name}}\"",
   "Attention": "انتباه",
   "Audio": "الصوت",
+  "Authentication": "المصادقة",
   "Authorization": "المصادقة",
   "Back": "خلف",
   "BarMaintenanceDescription": "نعتذر عن أي مشكلات فنية قصيرة الأمد في الخدمة التي قد تظهر في {{targetDate}} أثناء تحديث {{productName}}.",
@@ -218,6 +219,7 @@
   "LastModifiedDate": "تاريخ التعديل الأخير",
   "LastName": "الاسم الأخير",
   "LatePayment": "سداد متأخر",
+  "LDAP": "LDAP",
   "LearnMore": "معرفة المزيد",
   "LinkAccessDenied": "تم رفض الوصول إلى الرابط",
   "LinkExpireAfter": "ستنتهي صلاحية الرابط  بعد <1>{{date}}</1>",
@@ -425,6 +427,7 @@
   "SubscriptionExpired": "انتهت صلاحية اشتراكك في الدعم والتحديثات",
   "SubscriptionExpiredTitle": "انتهت صلاحية الاشتراك",
   "SubscriptionIsExpiring": "اشتراكك سوف ينتهي في {{date}}",
+  "SuccessfullyCompletedOperation": "تمت العملية بنجاح.",
   "Support": "الدعم",
   "SwitchToThumbnails": "التبديل إلى عرض الصور المُصغرة",
   "SwitchViewToCompact": "التبديل إلى العرض المُدمج",

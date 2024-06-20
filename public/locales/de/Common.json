@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Informationen",
   "AboutCompanyTitle": "Über diese Software",
   "AccessDenied": "Zugriff verweigert",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "Der Raum '{{name}}' ist archiviert",
   "Attention": "Achtung",
   "Audio": "Audio",
+  "Authentication": "Authentifizierung",
   "Authorization": "Autorisierung",
   "Back": "Zurück",
   "BarMaintenanceDescription": "Bitte entschuldigen Sie alle möglichen kurzfristigen Unannehmlichkeiten beim Funktionieren des Dienstes, die am {{targetDate}} während des Updates von {{productName}} erscheinen können.",
@@ -219,6 +220,7 @@
   "LastModifiedDate": "Zuletzt geändertes Datum",
   "LastName": "Familienname",
   "LatePayment": "Verspätete Zahlung",
+  "LDAP": "LDAP",
   "LearnMore": "Mehr erfahren",
   "LinkAccessDenied": "Der Zugriff auf den Link wurde verweigert",
   "LinkExpireAfter": "Der Link läuft nach dem <1>{{date}}</1> ab",
@@ -426,6 +428,7 @@
   "SubscriptionExpired": "Ihr Abonnement für Support und Updates ist abgelaufen",
   "SubscriptionExpiredTitle": "Das Abonnement ist abgelaufen",
   "SubscriptionIsExpiring": "Ihr Abonnement läuft am {{date}} ab",
+  "SuccessfullyCompletedOperation": "Operation erfolgreich abgeschlossen wurde.",
   "Support": "Support",
   "SwitchToThumbnails": "Thumbnails aktivieren",
   "SwitchViewToCompact": "Auf Kompaktansicht umschalten",

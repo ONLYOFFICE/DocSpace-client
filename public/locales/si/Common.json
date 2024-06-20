@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "පිළිබඳව",
   "AboutCompanyTitle": "මෙම මෘදුකාංගය ගැන",
   "AccessDenied": "ප්‍රවේශය ප්‍රතික්‍ෂේපිතයි",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "'{{name}}' කාමරය සංරක්‍ෂිතයි",
   "Attention": "අවධානය",
   "Audio": "ශ්‍රව්‍ය",
+  "Authentication": "තහවුරුව",
   "Authorization": "බලය දීම",
   "Back": "ආපසු",
   "BarMaintenanceDescription": "{{productName}} යාවත්කාලය අතරතුර {{targetDate}} දී දිස්විය හැකි සේවා ක්‍රියාකාරිත්‍ව ආශ්‍රිත කෙටි කාලීන තාක්‍ෂණික ගැටළු ඉවසා සිටින්න.",
@@ -219,6 +220,7 @@
   "LastModifiedDate": "අවසාන සංශෝධිත දිනය",
   "LastName": "අග නම",
   "LatePayment": "ප්‍රමාද ගෙවීම",
+  "LDAP": "LDAP",
   "LearnMore": "තව දැනගන්න",
   "LinkAccessDenied": "සබැඳියට ප්‍රවේශය ප්‍රතික්ෂේපිතයි",
   "LinkExpireAfter": "සබැඳිය <1>{{date}}</1>ට පසු කල් ඉකුත් වේ",
@@ -419,6 +421,7 @@
   "SubscriptionExpired": "සහාය සහ යාවත්කාල සඳහා වන ඔබගේ දායකත්‍වය කල් ඉකුත් වී ඇත",
   "SubscriptionExpiredTitle": "දායකත්වය ඉකුත් වී ඇත.",
   "SubscriptionIsExpiring": "{{date}} දී ඔබගේ දායකත්‍වය ඉකුත් වේ",
+  "SuccessfullyCompletedOperation": "මෙහෙයුම සාර්ථකව නිමා විය",
   "Support": "සහාය",
   "SwitchToThumbnails": "සිඟිති රූ දැක්මට මාරුව",
   "SwitchViewToCompact": "සංගත දැක්මට මාරුව",

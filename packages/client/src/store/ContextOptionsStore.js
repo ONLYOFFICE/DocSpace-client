@@ -948,7 +948,7 @@ class ContextOptionsStore {
 
     navigate(
       combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         config.homepage,
         `${url}?${filterUrlParams}`,
       ),
@@ -1400,7 +1400,8 @@ class ContextOptionsStore {
         onClick: () => this.onCopyLink(item, t),
         disabled:
           (isPublicRoomType && item.canCopyPublicLink && !isArchive) ||
-          this.publicRoomStore.isPublicRoom,
+          this.publicRoomStore.isPublicRoom ||
+          !item.security.CopyLink,
       },
       {
         id: "option_copy-external-link",
@@ -2126,7 +2127,7 @@ class ContextOptionsStore {
     ];
   };
 
-  getFolderModel = (t) => {
+  getFolderModel = (t, isSectionMenu) => {
     const { isLoading } = this.clientLoadingStore;
     const { security, roomType, parentRoomType, isFolder } =
       this.selectedFolderStore;
@@ -2157,7 +2158,8 @@ class ContextOptionsStore {
 
     const someDialogIsOpen = checkDialogsOpen();
 
-    if (!canCreate || isMobile || someDialogIsOpen) return null;
+    if (!canCreate || (isSectionMenu && (isMobile || someDialogIsOpen)))
+      return null;
 
     const isOwner = this.userStore.user?.isOwner;
     const isRoomAdmin = this.userStore.user?.isRoomAdmin;
@@ -2173,7 +2175,7 @@ class ContextOptionsStore {
         id: "accounts-add_administrator",
         className: "main-button_drop-down",
         icon: PersonAdminReactSvgUrl,
-        label: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
+        label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
         onClick: this.onInvite,
         "data-type": EmployeeType.Admin,
         key: "administrator",

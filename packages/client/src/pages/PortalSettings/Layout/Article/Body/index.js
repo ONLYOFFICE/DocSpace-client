@@ -226,6 +226,10 @@ const ArticleBodyContent = (props) => {
         return t("Common:PaymentsTitle");
       case "ManagementCategoryDataManagement":
         return t("ManagementCategoryDataManagement");
+      case "LdapSettings":
+        return t("Ldap:LdapSettings");
+      case "LdapSyncTitle":
+        return t("Ldap:LdapSyncTitle");
       case "RestoreBackup":
         return t("RestoreBackup");
       case "PortalDeletion":
@@ -242,8 +246,8 @@ const ArticleBodyContent = (props) => {
         return t("ImportFromGoogle");
       case "ImportFromNextcloud":
         return t("ImportFromNextcloud");
-      case "ImportFromOnlyoffice":
-        return t("ImportFromOnlyoffice");
+      case "ImportFromPortal":
+        return t("ImportFromPortal");
       case "StorageManagement":
         return t("StorageManagement");
       default:
@@ -379,6 +383,8 @@ export default inject(
   },
 )(
   withLoading(
-    withTranslation(["Settings", "Common"])(observer(ArticleBodyContent)),
+    withTranslation(["Settings", "Common", "Ldap"])(
+      observer(ArticleBodyContent),
+    ),
   ),
 );

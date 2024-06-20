@@ -53,7 +53,7 @@ const MobileView = ({ isSSOAvailable, organizationName }) => {
       <MobileCategoryWrapper
         title={t("ServiceProviderSettings", { organizationName })}
         subtitle={t("ServiceProviderSettingsDescription")}
-        url="/portal-settings/integration/single-sign-on/sp-settings"
+        url="/portal-settings/integration/sso/settings"
         withPaidBadge={!isSSOAvailable}
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
@@ -64,7 +64,7 @@ const MobileView = ({ isSSOAvailable, organizationName }) => {
           productName: PRODUCT_NAME,
           organizationName,
         })}
-        url="/portal-settings/integration/single-sign-on/sp-metadata"
+        url="/portal-settings/integration/sso/metadata"
         withPaidBadge={!isSSOAvailable}
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}

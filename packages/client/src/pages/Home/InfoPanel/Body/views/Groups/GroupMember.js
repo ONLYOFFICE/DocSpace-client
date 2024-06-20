@@ -103,23 +103,25 @@ const GroupMember = ({
           <div className="group-manager-tag">{t("Common:HeadOfGroup")}</div>
         )}
 
-        <div className="context-btn" ref={iconRef}>
-          <ContextMenuButton
-            isFill
-            className="expandButton"
-            directionX="right"
-            displayType="toggle"
-            onClick={onClick}
-            getData={() => model}
-          />
-          <StyledContextMenu
-            model={model}
-            containerRef={iconRef}
-            ref={buttonMenuRef}
-            onHide={onHide}
-            scaled={false}
-          />
-        </div>
+        {/* {!groupMember.isLDAP && (
+          <div className="context-btn" ref={iconRef}>
+            <ContextMenuButton
+              isFill
+              className="expandButton"
+              directionX="right"
+              displayType="toggle"
+              onClick={onClick}
+              getData={() => model}
+            />
+            <StyledContextMenu
+              model={model}
+              containerRef={iconRef}
+              ref={buttonMenuRef}
+              onHide={onHide}
+              scaled={false}
+            />
+          </div>
+        )} */}
       </div>
     </div>
   );

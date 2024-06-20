@@ -37,7 +37,7 @@ const Scripts = () => {
         id="browser-detector"
         src={`/static/scripts/browserDetector.js?hash=${runtime?.checksums?.["browserDetector.js"] ?? hashDate}`}
       />
-      <Script id="docspace-config">
+      <Script id="portal-config">
         {`
           console.log("It's DocEditor INIT");
           fetch("/static/scripts/config.json?hash=${runtime?.checksums["config.json"] ?? hashDate}")
@@ -49,7 +49,7 @@ const Scripts = () => {
             })
             .then((config) => {
               console.log(config)
-              window.DocSpaceConfig = {
+              window.ClientConfig = {
                 ...config,
               };
     
@@ -57,17 +57,17 @@ const Scripts = () => {
                 window.navigator.userAgent.includes("ZoomWebKit") ||
                 window.navigator.userAgent.includes("ZoomApps")
               ) {
-                window.DocSpaceConfig.editor = {
+                window.ClientConfig.editor = {
                   openOnNewPage: false,
                   requestClose: true,
                 };
               }
     
-              //console.log({ DocSpaceConfig: window.DocSpaceConfig });
+              //console.log({ ClientConfig: window.ClientConfig });
             })
             .catch((e) => {
               console.error(e);
-              window.DocSpaceConfig = {
+              window.ClientConfig = {
                 errorOnLoad: e,
               };
             });

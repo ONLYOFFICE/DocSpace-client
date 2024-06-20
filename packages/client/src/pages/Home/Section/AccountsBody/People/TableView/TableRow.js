@@ -244,6 +244,7 @@ const PeopleTableRow = (props) => {
     isVisitor,
     isCollaborator,
     isSSO,
+    isLDAP,
   } = item;
 
   const isPending = statusType === "pending" || statusType === "disabled";
@@ -264,8 +265,8 @@ const PeopleTableRow = (props) => {
 
     const adminOption = {
       key: "admin",
-      title: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
-      label: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
+      title: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+      label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
       action: "admin",
     };
     const managerOption = {
@@ -343,7 +344,7 @@ const PeopleTableRow = (props) => {
       case "owner":
         return t("Common:Owner");
       case "admin":
-        return t("Common:DocspaceAdmin", { productName: PRODUCT_NAME });
+        return t("Common:PortalAdmin", { productName: PRODUCT_NAME });
       case "manager":
         return t("Common:RoomAdmin");
       case "collaborator":
@@ -518,7 +519,12 @@ const PeopleTableRow = (props) => {
                 ? displayName
                 : email}
           </Text>
-          <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
+          <Badges
+            statusType={statusType}
+            isPaid={isPaidUser}
+            isSSO={isSSO}
+            isLDAP={isLDAP}
+          />
         </TableCell>
 
         {typeAccountsColumnIsEnabled ? (

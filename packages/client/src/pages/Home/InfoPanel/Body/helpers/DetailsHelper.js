@@ -144,6 +144,8 @@ class DetailsHelper {
         return "info_details_comments";
       case "Tags":
         return "info_details_tags";
+      case "Lifetime ends":
+        return "info_details_lifetime";
       case "Storage":
         return "info_details_storage";
     }
@@ -182,6 +184,7 @@ class DetailsHelper {
               "Date modified",
               "Last modified by",
               "Creation date",
+              this.item.expired && "Lifetime ends",
               "Versions",
               "Comments",
             ]
@@ -214,6 +217,8 @@ class DetailsHelper {
         return this.t("LastModifiedBy");
       case "Creation date":
         return this.t("CreationDate");
+      case "Lifetime ends":
+        return this.t("LifetimeEnds");
 
       case "Versions":
         return this.t("InfoPanel:Versions");
@@ -261,6 +266,8 @@ class DetailsHelper {
         return this.getAuthorDecoration("updatedBy");
       case "Creation date":
         return this.getItemCreationDate();
+      case "Lifetime ends":
+        return this.getItemExpiredDate();
 
       case "Versions":
         return this.getItemVersions();
@@ -332,6 +339,10 @@ class DetailsHelper {
 
   getItemCreationDate = () => {
     return text(parseAndFormatDate(this.item.created, this.culture));
+  };
+
+  getItemExpiredDate = () => {
+    return text(parseAndFormatDate(this.item.expired, this.culture));
   };
 
   getItemVersions = () => {

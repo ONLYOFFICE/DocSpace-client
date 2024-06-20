@@ -61,6 +61,7 @@ export const globalColors = {
   secondOrange: "#FF9933",
   mainRed: "#F2665A",
   mainPurple: "#533ED1",
+  purple: "#6D4EC2",
   secondPurple: "#8570BD",
   mainBlueLight: "#13B7EC",
   secondBlue: "#11A3D4",

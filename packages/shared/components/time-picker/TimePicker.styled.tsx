@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 
 const TimeInput = styled.div<{ hasError?: boolean; isFocused?: boolean }>`
   width: 57px;
@@ -49,11 +49,11 @@ const TimeInput = styled.div<{ hasError?: boolean; isFocused?: boolean }>`
   ${(props) =>
     props.isFocused &&
     css`
-      border-color: #4781d1;
+      border-color: ${globalColors.lightBlueMain};
     `}
 
   :focus {
-    border-color: #4781d1;
+    border-color: ${globalColors.lightBlueMain};
   }
 
   input {

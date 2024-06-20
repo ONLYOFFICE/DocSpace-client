@@ -89,40 +89,6 @@ const StyledAsidePanel = styled.div`
             padding-right: 10px;
           `}
   }
-  .upload_panel-header {
-    font-weight: 700;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 19px 17px 19px auto;
-          `
-        : css`
-            padding: 19px auto 19px 17px;
-          `}
-  }
-  .upload-panel_header-content {
-    z-index: 320;
-    position: fixed;
-    left: 0;
-    right: 0;
-    background-color: ${(props) =>
-      props.theme.filesPanels.aside.backgroundColor};
-    height: ${isMobile ? "55px" : "48px"};
-  }
-  .upload-panel_header-content::after {
-    position: absolute;
-    width: 100%;
-    max-width: 468px;
-    height: 1px;
-    background: ${(props) => props.theme.filesPanels.sharing.borderBottom};
-    content: "";
-    top: 48px;
-    width: calc(100% - 32px);
-  }
-  .upload-panel_body {
-    padding-top: ${isMobile ? "67px" : "60px"};
-    height: ${isMobile ? "calc(100vh - 67px)" : "calc(100vh - 60px)"};
-  }
 
   .modal-dialog-aside {
     padding: 0;
@@ -219,17 +185,6 @@ const StyledContent = styled.div`
   background-color: ${(props) =>
     props.theme.filesPanels.content.backgroundColor};
 
-  .upload-panel_header-content {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 0 !important;
-          `
-        : css`
-            margin-right: 0 !important;
-          `}
-  }
-
   .header_aside-panel-plus-icon {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
@@ -316,19 +271,6 @@ const StyledHeaderContent = styled.div`
         `}
 
   border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
-
-  .upload_panel-icons-container {
-    display: flex;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: auto;
-          `
-        : css`
-            margin-left: auto;
-          `}
-    .upload_panel-vertical-dots-icon {
-    }
   }
 
   .files-operations-header,
@@ -427,180 +369,14 @@ const StyledBody = styled.div`
 
 StyledBody.defaultProps = { theme: Base };
 
-const StyledSharingBody = styled(Scrollbar)`
-  position: relative;
-  padding: 16px 0;
-
-  width: calc(100% + 16px) !important;
-
-  .link-row__container {
-    height: 47px;
-  }
-
-  .link-row__container,
-  .sharing-row {
-    .styled-element {
-      margin-right: 0;
-      margin-left: 0;
-    }
-  }
+const StyledNewFilesBody = styled.div`
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
 
   .row_content {
     overflow: visible;
     height: auto;
-  }
-
-  .sharing-row {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-right: 16px;
-          `
-        : css`
-            padding-left: 16px;
-          `}
-    //width: calc(100% - 16px);
-    box-sizing: border-box;
-    border-bottom: none;
-  }
-
-  .nav-thumb-vertical {
-    opacity: 0;
-    transition: opacity 200ms ease;
-  }
-
-  :hover {
-    .nav-thumb-vertical {
-      opacity: 1;
-    }
-  }
-
-  .sharing_panel-text {
-    line-height: 24px;
-    font-weight: 600;
-    font-size: 14px;
-  }
-
-  .sharing_panel-link {
-    a {
-      text-decoration: none !important;
-
-      span {
-        font-weight: 600;
-      }
-    }
-  }
-
-  .sharing_panel-link-combo-box {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: auto;
-          `
-        : css`
-            margin-left: auto;
-          `}
-    .combo-button {
-      height: 24px;
-      width: 94px;
-
-      svg {
-        bottom: 6px;
-        position: absolute;
-        height: 8px;
-        width: 8px;
-      }
-    }
-  }
-
-  .sharing_panel-owner-icon {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 19px;
-          `
-        : css`
-            padding-right: 19px;
-          `}
-  }
-
-  .sharing_panel-remove-icon {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: auto;
-          `
-        : css`
-            margin-left: auto;
-          `}
-    line-height: 24px;
-    display: flex;
-    align-items: center;
-    flex-direction: row-reverse;
-
-    svg {
-      width: 16px;
-      height: 16px;
-    }
-  }
-
-  .panel_combo-box {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 0px;
-          `
-        : css`
-            margin-left: 0px;
-          `}
-
-    .combo-button {
-      height: 30px;
-      margin: 0;
-      padding: 0;
-      border: none;
-    }
-
-    .combo-button-label {
-      margin: 0;
-    }
-  }
-
-  .sharing_panel-text-area {
-    position: fixed;
-    bottom: 70px;
-    width: 94%;
-    left: 0;
-    right: 0;
-    margin: auto;
-  }
-
-  @media ${desktop} {
-    .link-row__container {
-      height: 41px;
-
-      .link-row {
-        min-height: 41px;
-      }
-    }
-
-    .sharing-row {
-      min-height: 41px;
-      //padding-right: 15px;
-
-      .sharing_panel-remove-icon {
-        font-size: 12px;
-      }
-    }
-
-    .sharing_panel-text,
-    .sharing_panel-link span {
-      font-size: 13px;
-    }
-  }
-
-  .row-loader {
-    margin-left: 4px;
   }
 `;
 
@@ -936,6 +712,22 @@ const StyledLink = styled(Link)`
 
 StyledModalRowContainer.defaultProps = { theme: Base };
 
+const StyledUploadHeader = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const StyledUploadBody = styled.div`
+  width: calc(100% + 16px);
+  height: 100%;
+
+  .scroll-body {
+    padding-inline-end: 0px !important;
+  }
+`;
+
 export {
   StyledAsidePanel,
   StyledEmbeddingPanel,
@@ -943,9 +735,11 @@ export {
   StyledContent,
   StyledHeaderContent,
   StyledBody,
-  StyledSharingBody,
   StyledFooter,
   StyledLinkRow,
   StyledModalRowContainer,
   StyledLink,
+  StyledNewFilesBody,
+  StyledUploadHeader,
+  StyledUploadBody,
 };

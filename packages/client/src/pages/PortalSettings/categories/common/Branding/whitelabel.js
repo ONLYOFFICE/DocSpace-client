@@ -52,6 +52,7 @@ import {
 
 import isEqual from "lodash/isEqual";
 import { DeviceType, WhiteLabelLogoType } from "@docspace/shared/enums";
+import { globalColors } from "@docspace/shared/themes";
 
 const WhiteLabel = (props) => {
   const {
@@ -162,7 +163,7 @@ const WhiteLabel = (props) => {
         options.height,
         options.text,
         options.fontSize,
-        isDocsEditorName ? "#fff" : "#000",
+        isDocsEditorName ? globalColors.white : globalColors.darkBlack,
         options.alignCenter,
       );
       const logoDark = generateLogo(
@@ -170,7 +171,7 @@ const WhiteLabel = (props) => {
         options.height,
         options.text,
         options.fontSize,
-        "#fff",
+        globalColors.white,
         options.alignCenter,
       );
       newLogos[i].path.light = logoLight;

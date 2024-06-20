@@ -89,8 +89,9 @@ const StyledBody = styled.div`
     }
 
     .embedding-panel_link_active {
-      color: #ffffff;
-      background: #265a8f;
+      color: ${(props) => props.theme.filesPanels.embedding.linkColor};
+      background: ${(props) =>
+        props.theme.filesPanels.embedding.linkBackground};
     }
   }
 

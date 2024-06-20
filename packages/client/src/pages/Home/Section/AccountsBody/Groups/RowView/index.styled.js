@@ -156,8 +156,9 @@ export const GroupsRow = styled(Row)`
     font-size: 12px;
     font-weight: 700;
     line-height: 16px;
-    background: #eceef1;
-    color: #333;
+    background: ${(props) =>
+      props.theme.filesSection.tableView.row.backgroundGroup};
+    color: ${(props) => props.theme.filesSection.tableView.row.color};
     border-radius: 50%;
   }
 `;

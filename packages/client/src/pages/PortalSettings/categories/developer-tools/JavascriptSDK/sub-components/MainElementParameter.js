@@ -41,6 +41,7 @@ import {
   RowContainer,
 } from "../presets/StyledPresets";
 import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { globalColors } from "@docspace/shared/themes";
 
 export const MainElementParameter = ({
   t,
@@ -118,7 +119,7 @@ export const MainElementParameter = ({
             <ColorInput
               scale
               handleChange={setButtonColor}
-              defaultColor={"#5299E0"}
+              defaultColor={globalColors.lightSecondMain}
             />
           </ControlsGroup>
           <ControlsGroup>

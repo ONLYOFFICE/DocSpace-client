@@ -111,7 +111,7 @@ const InfoBar = styled.div`
     .header-icon {
       svg {
         path {
-          fill: #ed7309;
+          fill: ${(props) => props.theme.infoBar.iconFill};
         }
       }
     }

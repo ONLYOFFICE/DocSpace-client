@@ -60,11 +60,11 @@ const StyledContainer = styled.div`
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin: 0 15px 0 16px;
-            border-right: 1px solid #dfe2e3;
+            border-right: ${(props) => props.theme.publicRoom.border};
           `
         : css`
             margin: 0 16px 0 15px;
-            border-left: 1px solid #dfe2e3;
+            border-left: ${(props) => props.theme.publicRoom.border};
           `}
     height: 21px;
   }

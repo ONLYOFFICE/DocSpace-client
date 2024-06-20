@@ -40,6 +40,7 @@ import { SelectedItem } from "@docspace/shared/components/selected-item";
 import { tablet } from "@docspace/shared/utils";
 import Base from "@docspace/shared/themes/base";
 import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { globalColors } from "@docspace/shared/themes";
 
 const CategoryHeader = styled.div`
   margin-top: 24px;
@@ -257,7 +258,7 @@ const CSP = ({
       </Container>
       <Text
         lineHeight="20px"
-        color={error ? theme?.input.focusErrorBorderColor : "#A3A9AE"}
+        color={error ? theme?.input.focusErrorBorderColor : globalColors.gray}
       >
         {error ? error : t("CSPUrlHelp", { productName: PRODUCT_NAME })}
       </Text>

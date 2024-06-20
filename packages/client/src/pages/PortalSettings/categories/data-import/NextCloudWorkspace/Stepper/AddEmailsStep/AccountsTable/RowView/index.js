@@ -33,6 +33,7 @@ import { RowContainer } from "@docspace/shared/components/row-container";
 import UsersRow from "./UsersRow";
 import { Row } from "@docspace/shared/components/row";
 import { Text } from "@docspace/shared/components/text";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledRow = styled(Row)`
   box-sizing: border-box;
@@ -87,7 +88,7 @@ const RowView = (props) => {
         indeterminate={isIndeterminate}
         isDisabled={usersWithFilledEmails.length === 0}
       >
-        <Text color="#a3a9ae" fontWeight={600} fontSize="12px">
+        <Text color={globalColors.gray} fontWeight={600} fontSize="12px">
           {t("Common:Name")}
         </Text>
       </StyledRow>

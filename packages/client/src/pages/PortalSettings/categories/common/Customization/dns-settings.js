@@ -225,7 +225,7 @@ const DNSSettings = (props) => {
               key="dns-hint"
               fontSize="12px"
               fontWeight="400"
-              color="#A3A9AE"
+              color={globalColors.gray}
             >
               {`${t("Settings:DNSSettingsHint")}${domainExampleText}`}
             </Text>

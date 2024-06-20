@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
+import { globalColors } from "../../themes";
 
 const StyledLinks = styled.div`
   margin-top: 20px;
@@ -32,7 +33,7 @@ const StyledLinks = styled.div`
   .title-link {
     margin-bottom: 12px;
     line-height: 16px;
-    color: #a3a9ae;
+    color: ${globalColors.gray};
   }
 
   .additional-link {

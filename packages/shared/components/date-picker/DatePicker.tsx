@@ -40,6 +40,7 @@ import {
   Wrapper,
 } from "./DatePicker.styled";
 import { DatePickerProps } from "./DatePicker.types";
+import { globalColors } from "../../themes";
 
 const DatePicker = (props: DatePickerProps) => {
   const {
@@ -136,7 +137,7 @@ const DatePicker = (props: DatePickerProps) => {
             className="mr-8 add-delivery-date-button"
             iconName={CalendarIconUrl}
           />
-          <Text isInline fontWeight={600} color="#A3A9AE">
+          <Text isInline fontWeight={600} color={globalColors.gray}>
             {selectDateText}
           </Text>
         </DateSelector>

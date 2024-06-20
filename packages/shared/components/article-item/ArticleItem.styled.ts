@@ -78,7 +78,7 @@ const StyledArticleItemHeaderContainer = styled.div<{
     font-weight: 600;
     font-size: 11px;
     line-height: 14px;
-    color: #a3a9ae;
+    color: ${(props) => props.theme.catalogItem.header.color};
   }
 
   @media ${tablet} {
@@ -98,7 +98,7 @@ const StyledArticleItemHeaderContainer = styled.div<{
           line-height: 1px;
           height: 1px;
 
-          background: #d0d5da;
+          background: ${props.theme.catalogItem.header.background};
         }
       `}
   }

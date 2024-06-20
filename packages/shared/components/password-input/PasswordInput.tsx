@@ -58,6 +58,7 @@ import {
   TPasswordSettings,
   TPasswordValidation,
 } from "./PasswordInput.types";
+import { globalColors } from "../../themes";
 
 const PasswordInput = React.forwardRef(
   (
@@ -417,7 +418,7 @@ const PasswordInput = React.forwardRef(
           <Text
             className="text-tooltip"
             fontSize="10px"
-            color="#A3A9AE"
+            color={globalColors.gray}
             as="span"
           >
             {settings?.minLength ? length : null}{" "}

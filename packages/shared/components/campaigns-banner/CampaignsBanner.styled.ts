@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { tablet, mobile } from "../../utils/device";
 
 const BannerWrapper = styled.div<{
@@ -77,7 +77,7 @@ const BannerWrapper = styled.div<{
     top: 18px;
 
     path {
-      fill: "#A3A9AE";
+      fill: ${globalColors.gray};
     }
   }
 `;

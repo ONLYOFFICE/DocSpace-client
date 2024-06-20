@@ -61,6 +61,7 @@ import { Text } from "../text";
 import { Toast, toastr } from "../toast";
 import { ToggleContent } from "../toggle-content";
 import { Tooltip } from "../tooltip";
+import { globalColors } from "../../themes";
 
 const arrayItems = [
   {
@@ -259,7 +260,7 @@ const Template = () => (
                 <Text isBold fontSize="16px">
                   {arrayUsers[+content].name}
                 </Text>
-                <Text color="#A3A9AE" fontSize="13px">
+                <Text color={globalColors.gray} fontSize="13px">
                   {arrayUsers[+content].email}
                 </Text>
                 <Text fontSize="13px">{arrayUsers[+content].position}</Text>
@@ -302,40 +303,6 @@ const Template = () => (
           }
         />
       </div>
-      {/*
-          <div style={{ padding: "8px 0" }}>
-          <ContextMenuButton
-            iconName={VerticalDotsReactSvgUrl}
-            size={16}
-            color="#A3A9AE"
-            isDisabled={false}
-            title="Actions"
-            getData={() => [
-              {
-                key: "key",
-                label: "label",
-                onClick: () => {}
-              }
-            ]}
-          />
-        </div>
-        */}
-      {/* <div style={{ padding: "8px 0" }}>
-          <div style={{ display: "flex" }}>
-            <div style={{ marginRight: 16 }}>
-              <IconButton
-                size="25"
-                isDisabled={false}
-                onClick={() => {}}
-                iconName={VerticalDotsReactSvgUrl}
-                isFill
-                isClickable={false}
-              />
-            </div>
-            <HelpButton tooltipContent="Paste you tooltip content here" />
-          </div>
-        </div>
-        */}
     </div>
     <div style={{ justifySelf: "center" }}>
       <div style={{ padding: "8px 0" }}>
@@ -385,26 +352,6 @@ const Template = () => (
         {/* )}
         </StringValue> */}
       </div>
-
-      {/* <div style={{ padding: "8px 0" }}>
-        <DatePicker
-          onChange={(date) => {
-            console.log("Selected date", date);
-          }}
-          selectedDate={new Date()}
-          minDate={new Date("1970/01/01")}
-          maxDate={new Date(new Date().getFullYear() + 1 + "/01/01")}
-          isDisabled={false}
-          isReadOnly={false}
-          hasError={false}
-          isOpen={false}
-          themeColor="#ED7309"
-          locale="en"
-          setSelectedDate={(date) => {
-            console.log("Selected date", date);
-          }}
-        />
-      </div> */}
 
       <div style={{ padding: "8px 0" }}>
         {/* <StringValue>
@@ -491,7 +438,6 @@ const Template = () => (
       <div style={{ padding: "8px 0" }}>
         <Calendar
           onChange={() => {}}
-          //   themeColor="#ED7309"
           selectedDate={moment()}
           minDate={new Date("1970/01/01")}
           maxDate={new Date("3000/01/01")}

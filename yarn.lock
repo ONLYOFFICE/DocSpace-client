@@ -2866,7 +2866,6 @@ __metadata:
     react-lifecycles-compat: "npm:^3.0.4"
     react-onclickoutside: "npm:^6.13.0"
     react-player: "npm:^1.15.3"
-    react-router: "npm:^6.23.1"
     react-router-dom: "npm:^6.23.1"
     react-scrollbars-custom: "npm:^4.1.1"
     react-svg: "npm:^16.1.33"
@@ -23603,7 +23602,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router@npm:6.23.1, react-router@npm:^6.23.1":
+"react-router@npm:6.23.1":
   version: 6.23.1
   resolution: "react-router@npm:6.23.1"
   dependencies:

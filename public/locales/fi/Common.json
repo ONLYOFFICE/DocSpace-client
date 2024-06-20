@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Tietoja",
   "AboutCompanyTitle": "Tietoja tästä ohjelmasta",
   "AccessDenied": "Pääsy evätty",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "Huone '{{name}}' on arkistoitu",
   "Attention": "Huomio",
   "Audio": "Ääni",
+  "Authentication": "Tunnistus",
   "Authorization": "Valtuutus",
   "Back": "Takaisin",
   "BarMaintenanceDescription": "Pahoittelemme palvelun toiminnassa ilmenevien lyhyen aikavälin teknisiä ongelmia, jotka saattavat näkyä {{targetDate}}, {{productName}} päivityksen aikana.",
@@ -214,6 +215,7 @@
   "LastModifiedDate": "Viimeisin muokkauspäivä",
   "LastName": "Sukunimi",
   "LatePayment": "Myöhästynyt maksu",
+  "LDAP": "LDAP",
   "LearnMore": "Lue lisää",
   "LinkAccessDenied": "Pääsy linkin kautta on evätty",
   "LinkExpireAfter": "Linkki vanhenee <1>{{date}}</1> jälkeen",
@@ -418,6 +420,7 @@
   "SubscriptionExpired": "Tuen ja päivitysten tilauksesi on vanhentunut",
   "SubscriptionExpiredTitle": "Tilaus vanhentunut.",
   "SubscriptionIsExpiring": "Tilauksesi vanhenee {{date}}",
+  "SuccessfullyCompletedOperation": "Toiminto on valmis.",
   "Support": "Tuki",
   "SwitchToThumbnails": "Vaihda pikkukuvanäkymään",
   "SwitchViewToCompact": "Suppeat tiedot",

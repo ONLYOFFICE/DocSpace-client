@@ -77,7 +77,6 @@ export async function fileCopyAs(
         enableExternalExt,
         password,
       }),
-      false,
     );
 
     const file = await (await fetch(createFile)).json();
@@ -139,7 +138,6 @@ export async function createFile(
       [["Content-Type", "application/json;charset=utf-8"]],
       "POST",
       JSON.stringify({ title, templateId, formId }),
-      false,
     );
 
     const file = await (await fetch(createFile)).json();
@@ -311,7 +309,6 @@ export async function getUser(share?: string) {
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
     undefined,
-    false,
   );
 
   if (!cookie?.includes("asc_auth_key")) return undefined;
@@ -337,7 +334,6 @@ export async function getSettings(share?: string) {
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
     undefined,
-    false,
   );
 
   const settingsRes = await fetch(getSettings);
@@ -363,7 +359,6 @@ export async function checkFillFromDraft(
     ],
     "POST",
     JSON.stringify({ fileId: templateFileId }),
-    false,
   );
 
   const response = await fetch(checkFillFormDraft);
@@ -380,6 +375,7 @@ export async function openEdit(
   searchParams: string,
   share?: string,
 ) {
+  const startDate = new Date();
   const hdrs = headers();
   const cookie = hdrs.get("cookie");
 
@@ -388,7 +384,6 @@ export async function openEdit(
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
     undefined,
-    false,
   );
 
   const res = await fetch(getConfig);
@@ -397,10 +392,12 @@ export async function openEdit(
     const config = await res.json();
 
     if (res.ok) {
+      const timer = new Date().getTime() - startDate.getTime();
+
       config.response.editorUrl = (
         config.response as IInitialConfig
       ).editorUrl.replace(REPLACED_URL_PATH, "");
-      return config.response as IInitialConfig;
+      return { ...config.response, timer } as IInitialConfig;
     }
 
     const editorUrl =
@@ -449,7 +446,6 @@ export async function getEditorUrl(
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
     undefined,
-    false,
   );
 
   const res = await fetch(request);

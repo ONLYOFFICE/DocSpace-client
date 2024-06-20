@@ -49,7 +49,12 @@ import { CronWrapper, Suffix, Wrapper } from "./Cron.styled";
 
 import type { PeriodType, CronProps } from "./Cron.types";
 
-const Cron = ({ value = defaultCronString, setValue, onError }: CronProps) => {
+const Cron = ({
+  value = defaultCronString,
+  setValue,
+  onError,
+  isDisabled,
+}: CronProps) => {
   const { t, i18n } = useTranslation("Common");
 
   const didMountRef = useRef<boolean>(false);
@@ -148,9 +153,20 @@ const Cron = ({ value = defaultCronString, setValue, onError }: CronProps) => {
 
   return (
     <CronWrapper data-testid="cron">
-      <Period t={t} period={period} setPeriod={setPeriod} />
+      <Period
+        t={t}
+        period={period}
+        setPeriod={setPeriod}
+        isDisabled={isDisabled}
+      />
       {isYear && (
-        <Months unit={units[3]} t={t} months={months} setMonths={setMonths} />
+        <Months
+          unit={units[3]}
+          t={t}
+          months={months}
+          setMonths={setMonths}
+          isDisabled={isDisabled}
+        />
       )}
       {(isYear || isMonth) && (
         <MonthDays
@@ -159,6 +175,7 @@ const Cron = ({ value = defaultCronString, setValue, onError }: CronProps) => {
           weekDays={weekDays}
           monthDays={monthDays}
           setMonthDays={setMonthDays}
+          isDisabled={isDisabled}
         />
       )}
       {(isYear || isMonth || isWeek) && (
@@ -169,11 +186,18 @@ const Cron = ({ value = defaultCronString, setValue, onError }: CronProps) => {
           monthDays={monthDays}
           weekDays={weekDays}
           setWeekDays={setWeekDays}
+          isDisabled={isDisabled}
         />
       )}
       <Wrapper>
         {!isHour && !isMinute && (
-          <Hours unit={units[1]} t={t} hours={hours} setHours={setHours} />
+          <Hours
+            unit={units[1]}
+            t={t}
+            hours={hours}
+            setHours={setHours}
+            isDisabled={isDisabled}
+          />
         )}
 
         {!isMinute && (
@@ -183,6 +207,7 @@ const Cron = ({ value = defaultCronString, setValue, onError }: CronProps) => {
             period={period}
             minutes={minutes}
             setMinutes={setMinutes}
+            isDisabled={isDisabled}
           />
         )}
         <Suffix>{t("Common:UTC")}</Suffix>

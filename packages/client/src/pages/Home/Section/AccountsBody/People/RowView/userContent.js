@@ -88,6 +88,7 @@ const UserContent = ({
     isVisitor,
     isCollaborator,
     isSSO,
+    isLDAP,
   } = item;
 
   const nameColor =
@@ -137,7 +138,12 @@ const UserContent = ({
             : email}
       </Link>
 
-      <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
+      <Badges
+        statusType={statusType}
+        isPaid={isPaidUser}
+        isSSO={isSSO}
+        isLDAP={isLDAP}
+      />
 
       <Link
         containerMinWidth="140px"

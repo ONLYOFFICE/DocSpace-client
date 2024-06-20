@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Hakkında",
   "AboutCompanyTitle": "Bu program hakkında",
   "AccessDenied": "Erişim engellendi",
@@ -20,6 +20,7 @@
   "ArchivedRoomAction": "'{{name}}' odası arşivlendi",
   "Attention": "Dikkat",
   "Audio": "Audio",
+  "Authentication": "Doğrulama",
   "Authorization": "Yetki",
   "Back": "Geri",
   "BarMaintenanceDescription": "{{productName}} güncellemesi esnasında {{targetDate}} tarihinde hizmet işleyişinde ortaya çıkabilecek kısa vadeli teknik sorunlar için özür dileriz.",
@@ -214,6 +215,7 @@
   "LastModifiedDate": "Son değiştirilme tarihi",
   "LastName": "Soy isim",
   "LatePayment": "Gecikmiş ödeme",
+  "LDAP": "LDAP",
   "LearnMore": "Daha fazlasını öğrenin",
   "LinkAccessDenied": "Bağlantıya erişim reddedildi",
   "LinkExpireAfter": "Bağlantı <1>{{date}}</1> tarihinden sonra sona erecektir",
@@ -418,6 +420,7 @@
   "SubscriptionExpired": "Destek ve güncelleme aboneliğiniz sona erdi",
   "SubscriptionExpiredTitle": "Abonelik süresi doldu",
   "SubscriptionIsExpiring": "Aboneliğiniz {{date}} tarihinde sona eriyor",
+  "SuccessfullyCompletedOperation": "İşlem başarıyla tamamlandı.",
   "Support": "Destek",
   "SwitchToThumbnails": "Küçük resimler görünümüne geç",
   "SwitchViewToCompact": "Kompakt görünüme geçin",

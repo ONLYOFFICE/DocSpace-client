@@ -50,9 +50,8 @@ import { Tooltip } from "@docspace/shared/components/tooltip";
 import { isDesktop } from "@docspace/shared/utils";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
-import { ScrollbarContext } from "@docspace/shared/components/scrollbar";
+import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
 
-import { Avatar } from "@docspace/shared/components/avatar";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import LinkRow from "./sub-components/LinkRow";
 

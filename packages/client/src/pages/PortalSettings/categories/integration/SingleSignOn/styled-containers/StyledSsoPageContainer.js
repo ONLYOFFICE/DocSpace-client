@@ -39,31 +39,6 @@ const StyledSsoPage = styled.div`
     line-height: 20px;
   }
 
-  .toggle {
-    position: static;
-    margin-top: 1px;
-  }
-
-  .toggle-caption {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    .toggle-caption_title {
-      display: flex;
-      .toggle-caption_title_badge {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-right: 4px;
-              `
-            : css`
-                margin-left: 4px;
-              `}
-        cursor: auto;
-      }
-    }
-  }
-
   .field-input {
     ::placeholder {
       font-size: 13px;

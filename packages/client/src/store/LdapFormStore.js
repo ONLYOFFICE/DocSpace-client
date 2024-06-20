@@ -7,7 +7,6 @@ import {
   saveCronLdap,
   getCronLdap,
 } from "@docspace/shared/api/settings";
-import { getNextSynchronization } from "@docspace/shared/components/cron";
 import { EmployeeType, LDAPOperation } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
 import isEqual from "lodash/isEqual";
@@ -566,10 +565,6 @@ class LdapFormStore {
   setCron = (cron) => {
     this.cron = cron;
   };
-
-  get nextSyncDate() {
-    return getNextSynchronization(this.cron ?? "* * * * *");
-  }
 
   setIsSslEnabled = (enabled) => {
     this.isSslEnabled = enabled;

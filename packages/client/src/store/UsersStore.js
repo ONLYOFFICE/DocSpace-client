@@ -141,9 +141,10 @@ class UsersStore {
 
   get needResetUserSelection() {
     const { isVisible: infoPanelVisible } = this.infoPanelStore;
-    const { isOneUserSelection } = this.peopleStore.selectionStore;
+    const { isOneUserSelection, isOnlyBufferSelection } =
+      this.peopleStore.selectionStore;
 
-    return !infoPanelVisible || !isOneUserSelection;
+    return !infoPanelVisible || (!isOneUserSelection && !isOnlyBufferSelection);
   }
   updateUserStatus = async (status, userIds) => {
     return api.people.updateUserStatus(status, userIds).then((users) => {

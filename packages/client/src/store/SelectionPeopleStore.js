@@ -46,8 +46,15 @@ class SelectionStore {
   }
 
   updateSelection = (peopleList) => {
+    const hasSelection = !!this.selection.length;
+    const hasBufferSelection = !!this.bufferSelection;
+
     peopleList.some((el) => {
-      if (el.id === this.selection[0].id) this.setSelection([el]);
+      if (hasSelection && this.selection[0].id === el.id)
+        this.setSelection([el]);
+
+      if (hasBufferSelection && this.bufferSelection.id === el.id)
+        this.setBufferSelection(el);
     });
   };
 
@@ -301,6 +308,10 @@ class SelectionStore {
 
   get isOneUserSelection() {
     return this.selection.length > 0 && this.selection.length === 1;
+  }
+
+  get isOnlyBufferSelection() {
+    return !this.selection.length && !!this.bufferSelection;
   }
 
   get hasFreeUsers() {

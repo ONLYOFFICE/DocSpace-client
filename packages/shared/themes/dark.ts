@@ -1672,6 +1672,10 @@ const Dark: TTheme = {
   },
 
   catalogItem: {
+    header: {
+      color: grayDark,
+      background: grayDarkStrong,
+    },
     container: {
       width: "100%",
       height: "36px",

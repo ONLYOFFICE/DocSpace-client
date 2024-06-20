@@ -1688,6 +1688,10 @@ export const getBaseTheme = () => {
     },
 
     catalogItem: {
+      header: {
+        color: gray,
+        background: grayStrong,
+      },
       container: {
         width: "100%",
         height: "36px",

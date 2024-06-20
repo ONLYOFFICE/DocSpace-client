@@ -67,6 +67,7 @@ import { CategoryType } from "SRC_DIR/helpers/constants";
 import debounce from "lodash.debounce";
 import clone from "lodash/clone";
 import Queue from "queue-promise";
+import { parseHistory } from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
@@ -272,6 +273,19 @@ class FilesStore {
       }
 
       this.treeFoldersStore.updateTreeFoldersItem(opt);
+    });
+
+    socketHelper.on("s:update-history", ({ id, type }) => {
+      const { infoPanelSelection, fetchHistory } = this.infoPanelStore;
+
+      let infoPanelSelectionType = "file";
+      if (infoPanelSelection?.isRoom || infoPanelSelection?.isFolder)
+        infoPanelSelectionType = "folder";
+
+      if (id === infoPanelSelection?.id && type === infoPanelSelectionType) {
+        console.log("[WS] s:update-history", id);
+        fetchHistory();
+      }
     });
 
     socketHelper.on("refresh-folder", (id) => {
@@ -2729,8 +2743,8 @@ class FilesStore {
     return api.rooms.updateRoomMemberRole(id, data);
   }
 
-  getHistory(module, id, signal = null, requestToken) {
-    return api.rooms.getHistory(module, id, signal, requestToken);
+  getHistory(selectionType, id, signal = null, requestToken) {
+    return api.rooms.getHistory(selectionType, id, signal, requestToken);
   }
 
   getRoomHistory(id) {

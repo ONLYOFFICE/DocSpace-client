@@ -24,57 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { Trans } from "react-i18next";
+import { withTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+import { TTranslation } from "@docspace/shared/types";
+import { StyledHistoryBlockMessage } from "../../../styles/history";
 
-import { FeedActionTypes, FeedItemTypes } from "@docspace/shared/enums";
+type HistoryMainTextFolderInfoProps = {
+  t: TTranslation;
+  feed: any;
+  selectedFolderId?: number;
+};
 
-import { StyledHistoryBlockMessage } from "../../styles/history";
-import getBlockMessageTranslation from "./HistroryBlockMessageTranslations";
-
-const HistoryBlockMessage = ({
+const HistoryMainTextFolderInfo = ({
   t,
-  action,
-  groupedActions,
-  selectedFolder,
-  infoPanelSelection,
-}) => {
-  const message = getBlockMessageTranslation(
-    t,
-    action.hasOwnProperty("Action") ? action.Action : action.Actions,
-    action.Item,
-    action.Item === FeedItemTypes.File || action.Item === FeedItemTypes.Folder
-      ? !!groupedActions.length
-      : false,
-    action.Item === FeedItemTypes.Room
-      ? { roomTitle: action.Title, oldRoomTitle: "" }
-      : {},
-  );
-
-  const getFolderLabel = () => {
-    if (action.Item !== "file" && action.Item !== "folder") return "";
-
-    const itemLocationId = +action.ExtraLocation;
-    if (selectedFolder?.id === itemLocationId) return "";
-    if (infoPanelSelection?.isRoom && infoPanelSelection?.id === itemLocationId)
-      return "";
-
-    const folderTitle = action.ExtraLocationTitle;
-    if (!folderTitle) return "";
-
-    return (
-      <span className="folder-label">
-        {` ${t("FeedLocationLabel", { folderTitle })}`}
-      </span>
-    );
-  };
+  feed,
+  selectedFolderId,
+}: HistoryMainTextFolderInfoProps) => {
+  if (
+    feed.data.parentId === selectedFolderId ||
+    feed.data.toFolderId === selectedFolderId
+  )
+    return null;
 
   return (
     <StyledHistoryBlockMessage className="message">
-      <span className="main-message">{message}</span>
-      {getFolderLabel()}
+      <span className="folder-label">
+        {` ${t("FeedLocationLabel", { folderTitle: feed.data.parentTitle || feed.data.toFolderTitle })}`}
+      </span>
     </StyledHistoryBlockMessage>
   );
 };
 
-export default HistoryBlockMessage;
+export default inject(({ selectedFolderStore }) => ({
+  selectedFolderId: selectedFolderStore.id,
+}))(
+  withTranslation(["InfoPanel", "Common", "Translations"])(
+    observer(HistoryMainTextFolderInfo),
+  ),
+);

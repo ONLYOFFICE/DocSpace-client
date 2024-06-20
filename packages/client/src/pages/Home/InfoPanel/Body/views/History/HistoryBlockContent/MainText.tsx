@@ -24,34 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface TagProps {
-  /** Accepts the tag id */
-  tag: string;
-  /** Accepts the tag label */
-  label?: string;
-  /** Accepts class */
-  className?: string;
-  /** Accepts id */
-  id?: string;
-  /** Accepts css style */
-  style?: React.CSSProperties;
-  /** Accepts the tag styles as new and adds the delete button */
-  isNewTag?: boolean;
-  /** Accepts the tag styles as disabled and disables clicking */
-  isDisabled?: boolean;
-  /** Accepts the tag styles as deleted and disables clicking */
-  isDeleted?: boolean;
-  /** Accepts the function that is called when the tag is clicked */
-  onClick?: (tag?: object) => void;
-  /** Accepts the function that ist called when the tag delete button is clicked */
-  onDelete?: (tag?: string) => void;
-  /** Accepts the max width of the tag */
-  tagMaxWidth?: string;
-  /** Accepts the dropdown options */
-  advancedOptions?: React.ReactNode[];
-  icon?: string;
-  isDefault?: boolean;
-  isLast?: boolean;
-  roomType?: number;
-  providerType?: number;
+import { withTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+import { TTranslation } from "@docspace/shared/types";
+import { StyledHistoryBlockMessage } from "../../../styles/history";
+import { useFeedTranslation } from "../useFeedTranslation";
+
+interface HistoryMainTextProps {
+  t: TTranslation;
+  feed: any;
 }
+
+const HistoryMainText = ({ t, feed }: HistoryMainTextProps) => {
+  return (
+    <StyledHistoryBlockMessage className="message">
+      <span className="main-message">{useFeedTranslation(t, feed)}</span>{" "}
+    </StyledHistoryBlockMessage>
+  );
+};
+
+export default inject(({ infoPanelStore }) => {
+  const { infoPanelSelection } = infoPanelStore;
+  return {
+    infoPanelSelection,
+  };
+})(withTranslation(["InfoPanel"])(observer(HistoryMainText)));

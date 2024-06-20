@@ -24,81 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { StyledHistoryBlockTagList } from "../../../styles/history";
+import { ActionByTarget } from "../FeedInfo";
 import { Tag } from "@docspace/shared/components/tag";
-import React from "react";
-import styled from "styled-components";
 
-const StyledTagList = styled.div`
-  margin-top: 12px;
-  display: flex;
-  flex-direction: row;
-  gap: 4px;
-  flex-wrap: wrap;
-  width: 100%;
+interface HistoryRoomTagListProps {
+  feed: any;
+  actionType: ActionByTarget<"roomTag">;
+}
 
-  .set_room_params-tag_input-tag {
-    padding: 6px 8px;
-    border-radius: 3px;
-    margin: 0;
-
-    .tag-icon {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `margin-right: 10px;`
-          : `margin-left: 10px;`}
-      svg {
-        width: 10px;
-        height: 10px;
-      }
-    }
-  }
-`;
-
-const TagList = ({ defaultTagLabel, tagHandler, isDisabled }) => {
-  const { tags } = tagHandler;
-
-  const onDeleteAction = (id) => {
-    if (isDisabled) return;
-    tagHandler.deleteTag(id);
-  };
-
-  return (
-    <StyledTagList className="set_room_params-tag_input-tag_list">
-      {tags.map((tag) => (
-        <Tag
-          key={tag.id}
-          className="set_room_params-tag_input-tag"
-          tag="script"
-          label={tag.name}
-          isNewTag
-          onDelete={() => {
-            onDeleteAction(tag.id);
-          }}
-        />
-      ))}
-      {/* {tags.length ? (
-        tags.map((tag) => (
+const HistoryRoomTagList = ({ feed, actionType }: HistoryRoomTagListProps) => {
+  if (actionType === "create")
+    return (
+      <StyledHistoryBlockTagList>
+        {feed.data.tags.map((tag: string) => (
           <Tag
-            key={tag.id}
-            className="set_room_params-tag_input-tag"
-            tag="script"
-            label={tag.name}
+            className="history-tag"
+            key={tag}
+            label={tag}
+            tag={tag}
             isNewTag
-            onDelete={() => {
-              onDeleteAction(tag.id);
-            }}
           />
-        ))
-      ) : (
-        <Tag
-          className="set_room_params-tag_input-tag"
-          tag="script"
-          label={defaultTagLabel}
-          isDefault
-        />
-      )} */}
-    </StyledTagList>
-  );
+        ))}
+      </StyledHistoryBlockTagList>
+    );
+
+  if (actionType === "delete") {
+    return (
+      <StyledHistoryBlockTagList>
+        {feed.data.tags.map((tag: string) => (
+          <Tag
+            className="history-tag deleted-tag"
+            key={tag}
+            label={tag}
+            tag={tag}
+            isDeleted
+          />
+        ))}
+      </StyledHistoryBlockTagList>
+    );
+  }
 };
 
-export default TagList;
+export default HistoryRoomTagList;

@@ -59,20 +59,23 @@ const RoomsRowDataComponent = (props) => {
     badgesComponent,
     quickButtonsComponent,
     item,
+    tableStorageName,
   } = props;
 
-  const lastColumn =
-    showStorageInfo && roomQuotaColumnIsEnable
-      ? "roomQuotaColumnIsEnable"
-      : roomColumnActivityIsEnabled
-        ? "roomColumnActivityIsEnabled"
-        : roomColumnOwnerIsEnabled
-          ? "roomColumnOwnerIsEnabled"
-          : roomColumnTagsIsEnabled
-            ? "roomColumnTagsIsEnabled"
-            : roomColumnTypeIsEnabled
-              ? "roomColumnTypeIsEnabled"
-              : "fileNameColumn";
+  let lastColumn = null;
+
+  if (roomColumnQuickButtonsIsEnabled && tableStorageName) {
+    const storageColumns = localStorage.getItem(tableStorageName);
+    if (!storageColumns) return;
+
+    const columns = storageColumns.split(",");
+    const filterColumns = columns.filter(
+      (column) => column !== "false" && column !== "QuickButtons",
+    );
+
+    if (filterColumns.length > 1)
+      lastColumn = filterColumns[filterColumns.length - 1];
+  }
 
   return (
     <>
@@ -108,11 +111,7 @@ const RoomsRowDataComponent = (props) => {
         >
           <TypeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
-            removeExtraSpace={
-              roomColumnQuickButtonsIsEnabled
-                ? lastColumn === "roomColumnTypeIsEnabled"
-                : false
-            }
+            removeExtraSpace={lastColumn === "Type"}
             {...props}
           />
         </TableCell>
@@ -148,11 +147,7 @@ const RoomsRowDataComponent = (props) => {
           {...selectionProp}
         >
           <AuthorCell
-            removeExtraSpace={
-              roomColumnQuickButtonsIsEnabled
-                ? lastColumn === "roomColumnOwnerIsEnabled"
-                : false
-            }
+            removeExtraSpace={lastColumn === "Owner"}
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
@@ -171,11 +166,7 @@ const RoomsRowDataComponent = (props) => {
           {...selectionProp}
         >
           <DateCell
-            removeExtraSpace={
-              roomColumnQuickButtonsIsEnabled
-                ? lastColumn === "roomColumnActivityIsEnabled"
-                : false
-            }
+            removeExtraSpace={lastColumn === "Activity"}
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />

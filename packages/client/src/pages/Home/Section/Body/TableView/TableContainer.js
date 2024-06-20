@@ -138,6 +138,7 @@ const Table = ({
   columnInfoPanelStorageName,
   highlightFile,
   currentDeviceType,
+  tableStorageName,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -210,6 +211,7 @@ const Table = ({
         isHighlight={
           highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
         }
+        tableStorageName={tableStorageName}
       />
     ));
   }, [
@@ -223,6 +225,7 @@ const Table = ({
     highlightFile.id,
     highlightFile.isExst,
     isTrashFolder,
+    tableStorageName,
   ]);
 
   return (
@@ -270,7 +273,8 @@ export default inject(
     const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
 
-    const { columnStorageName, columnInfoPanelStorageName } = tableStore;
+    const { columnStorageName, columnInfoPanelStorageName, tableStorageName } =
+      tableStore;
 
     const {
       filesList,
@@ -306,6 +310,7 @@ export default inject(
       columnInfoPanelStorageName,
       highlightFile,
       currentDeviceType,
+      tableStorageName,
     };
   },
 )(observer(Table));

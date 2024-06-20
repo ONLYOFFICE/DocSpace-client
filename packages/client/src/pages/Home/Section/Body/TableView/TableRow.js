@@ -72,6 +72,7 @@ const FilesTableRow = (props) => {
     badgeUrl,
     isRecentTab,
     canDrag,
+    tableStorageName,
   } = props;
   const { acceptBackground, background } = theme.dragAndDrop;
 
@@ -189,6 +190,7 @@ const FilesTableRow = (props) => {
           <RoomsRowDataComponent
             element={element}
             dragStyles={dragStyles}
+            tableStorageName={tableStorageName}
             {...props}
           />
         ) : isTrashFolder ? (
@@ -209,6 +211,7 @@ const FilesTableRow = (props) => {
             element={element}
             dragStyles={dragStyles}
             selectionProp={selectionProp}
+            tableStorageName={tableStorageName}
             {...props}
           />
         )}

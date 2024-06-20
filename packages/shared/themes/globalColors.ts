@@ -56,9 +56,14 @@ export const globalColors = {
   lightSecondMainDisabled: "rgba(82, 153, 224, 0.6)",
 
   mainGreen: "#2DB482",
-  mainOrange: "#F58D31", // TODO: from kit
+  secondGreen: "#22C386",
+  mainOrange: "#F97A0B",
+  secondOrange: "#FF9933",
+  mainRed: "#F2665A",
   mainPurple: "#533ED1",
   secondPurple: "#8570BD",
+  mainBlueLight: "#13B7EC",
+  mainYellow: "#FFD30F",
 
   lightErrorStatus: "#F24724",
   darkErrorStatus: "#E06451",

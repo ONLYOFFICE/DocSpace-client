@@ -2065,6 +2065,9 @@ export const getBaseTheme = () => {
 
           borderColor: grayLightMid,
           borderColorTransition: lightGrayHover,
+
+          color: black,
+          backgroundGroup: grayLightMid,
         },
       },
 
@@ -2393,6 +2396,8 @@ export const getBaseTheme = () => {
         iconColor: black,
         color: gray,
         border: `1px solid ${grayDarkMid}`,
+        linkBackground: blueLightMid,
+        linkColor: white,
       },
 
       versionHistory: {
@@ -2735,6 +2740,7 @@ export const getBaseTheme = () => {
       settings: {
         iconFill: black,
         headerTitleColor: black,
+        descriptionColor: grayText,
         trashIcon: gray,
         article: {
           titleColor: lightGrayDark,

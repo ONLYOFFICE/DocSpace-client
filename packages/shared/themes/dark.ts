@@ -2049,6 +2049,9 @@ const Dark: TTheme = {
 
         borderColor: grayDarkStrong,
         borderColorTransition: grayDarkStrong,
+
+        color: white,
+        backgroundGroup: grayDarkMid,
       },
     },
 
@@ -2376,6 +2379,8 @@ const Dark: TTheme = {
       iconColor: white,
       color: gray,
       border: `1px solid ${grayDarkMid}`,
+      linkBackground: blueLightMid,
+      linkColor: white,
     },
 
     versionHistory: {
@@ -2719,6 +2724,7 @@ const Dark: TTheme = {
     settings: {
       iconFill: white,
       headerTitleColor: white,
+      descriptionColor: grayDarkText,
       trashIcon: grayDark,
       article: {
         titleColor: grayStrong,

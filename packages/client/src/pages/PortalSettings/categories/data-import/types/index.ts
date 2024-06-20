@@ -32,6 +32,8 @@ import {
 } from "@docspace/shared/api/settings/types";
 import { TPaymentFeature } from "@docspace/shared/api/portal/types";
 
+import { TOption } from "@docspace/shared/components/combobox";
+
 export type TFunciton = ReturnType<typeof useTranslation>["t"];
 
 export interface ProvidersProps {}
@@ -174,7 +176,7 @@ export interface UsersTableHeaderProps {
   columnInfoPanelStorageName: string;
   isIndeterminate: boolean;
   isChecked: boolean;
-  toggleAll: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  toggleAll?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface UsersTableRowProps {
@@ -282,4 +284,95 @@ export interface AddEmailRowContentProps {
 export interface InjectedAddEmailRowContentProps
   extends AddEmailRowContentProps {
   changeEmail: TStore["importAccountsStore"]["changeEmail"];
+}
+
+export interface TypeSelectProps {
+  t: TFunciton;
+}
+
+export interface InjectedTypeSelectProps extends TypeSelectProps {
+  incrementStep: TStore["importAccountsStore"]["incrementStep"];
+  decrementStep: TStore["importAccountsStore"]["decrementStep"];
+  users: TStore["importAccountsStore"]["users"];
+  searchValue: TStore["importAccountsStore"]["searchValue"];
+  setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
+  filteredUsers: TStore["importAccountsStore"]["filteredUsers"];
+}
+
+export interface InjectedTypeSelectTableProps extends AccountsTableProps {
+  viewAs: TStore["setup"]["viewAs"];
+  changeGroupType: TStore["importAccountsStore"]["changeGroupType"];
+  UserTypes: TStore["importAccountsStore"]["UserTypes"];
+  toggleAllAccounts: TStore["importAccountsStore"]["toggleAllAccounts"];
+}
+
+export interface TypeSelectTableViewProps {
+  t: TFunciton;
+  sectionWidth?: number;
+  accountsData: TEnhancedMigrationUser[];
+  typeOptions: TOption[];
+}
+export interface InjectedTypeSelectTableViewProps
+  extends TypeSelectTableViewProps {
+  userId?: string;
+  checkedUsers: TStore["importAccountsStore"]["checkedUsers"];
+  toggleAccount: TStore["importAccountsStore"]["toggleAccount"];
+  toggleAllAccounts: TStore["importAccountsStore"]["toggleAllAccounts"];
+  isAccountChecked: TStore["importAccountsStore"]["isAccountChecked"];
+  setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
+  filteredUsers: TStore["importAccountsStore"]["filteredUsers"];
+}
+
+export interface TypeSelectTableRowProps {
+  id: string;
+  displayName: string;
+  email: string;
+  typeOptions: TOption[];
+  isChecked: boolean;
+  type: string;
+  toggleAccount: () => void;
+}
+
+export interface InjectedTypeSelectTableRowProps
+  extends TypeSelectTableRowProps {
+  changeUserType: TStore["importAccountsStore"]["changeUserType"];
+}
+
+export interface TypeSelectRowViewProps {
+  t: TFunciton;
+  sectionWidth?: number;
+  accountsData: TEnhancedMigrationUser[];
+  typeOptions: TOption[];
+}
+
+export interface InjectedTypeSelectRowViewProps extends TypeSelectRowViewProps {
+  filteredUsers: TStore["importAccountsStore"]["filteredUsers"];
+  checkedUsers: TStore["importAccountsStore"]["checkedUsers"];
+  toggleAccount: TStore["importAccountsStore"]["toggleAccount"];
+  toggleAllAccounts: TStore["importAccountsStore"]["toggleAllAccounts"];
+  isAccountChecked: TStore["importAccountsStore"]["isAccountChecked"];
+  setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
+}
+
+export interface TypeSelectUsersRowProps {
+  data: TEnhancedMigrationUser;
+  sectionWidth?: number;
+  typeOptions: TOption[];
+  isChecked: boolean;
+  toggleAccount: () => void;
+}
+
+export interface TypeSelectRowContentProps {
+  id: string;
+  sectionWidth?: number;
+  displayName: string;
+  email: string;
+  typeOptions: TOption[];
+  roleSelectorRef: React.RefObject<HTMLDivElement>;
+  type: string;
+}
+
+export interface InjectedTypeSelectRowContentProps
+  extends TypeSelectRowContentProps {
+  changeUserType: TStore["importAccountsStore"]["changeUserType"];
 }

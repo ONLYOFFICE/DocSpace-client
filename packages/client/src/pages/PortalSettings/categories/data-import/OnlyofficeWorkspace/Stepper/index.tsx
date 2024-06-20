@@ -31,8 +31,8 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 
 import SelectFileStep from "../../components/SelectFileStep";
 import SelectUsersStep from "../../components/SelectUsersStep";
+import SelectUsersTypeStep from "../../components/SelectUsersTypeStep";
 
-import SelectUsersTypeStep from "./SelectUsersTypeStep";
 import ImportStep from "./ImportStep";
 import ImportProcessingStep from "./ImportProcessingStep";
 import ImportCompleteStep from "./ImportCompleteStep";

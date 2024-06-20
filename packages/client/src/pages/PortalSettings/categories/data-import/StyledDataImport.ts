@@ -119,6 +119,10 @@ export const Wrapper = styled.div`
 
   .save-cancel-buttons {
     margin-bottom: 16px;
+
+    @media ${mobile} {
+      margin-bottom: 0;
+    }
   }
 
   .mt-8 {

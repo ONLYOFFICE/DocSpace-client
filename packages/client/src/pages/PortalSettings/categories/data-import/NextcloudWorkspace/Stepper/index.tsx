@@ -32,8 +32,8 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import SelectFileStep from "../../components/SelectFileStep";
 import SelectUsersStep from "../../components/SelectUsersStep";
 import AddEmailsStep from "../../components/AddEmailsStep";
+import SelectUsersTypeStep from "../../components/SelectUsersTypeStep";
 
-import SelectUsersTypeStep from "./SelectUsersTypeStep";
 import ImportStep from "./ImportStep";
 import ImportProcessingStep from "./ImportProcessingStep";
 import ImportCompleteStep from "./ImportCompleteStep";
@@ -113,13 +113,7 @@ export const getStepsData = (
           />
         </>
       ),
-      component: (
-        <SelectUsersTypeStep
-          t={t}
-          incrementStep={incrementStep}
-          decrementStep={decrementStep}
-        />
-      ),
+      component: <SelectUsersTypeStep t={t} />,
     },
     {
       title: t("Settings:DataImport"),

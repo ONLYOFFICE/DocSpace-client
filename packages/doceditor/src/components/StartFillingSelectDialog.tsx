@@ -40,6 +40,7 @@ function StartFillingSelectorDialog({
   onClose,
   onSubmit,
   filesSettings,
+  headerLabel,
 }: StartFillingSelectorDialogPprops) {
   const { t } = useTranslation(["Common", "Editor"]);
 
@@ -67,7 +68,7 @@ function StartFillingSelectorDialog({
       filesSettings={filesSettings}
       currentDeviceType={DeviceType.desktop}
       socketSubscribers={socketHelper.socketSubscribers}
-      headerLabel={t("Common:StartFilling")}
+      headerLabel={headerLabel}
       submitButtonLabel={t("Common:CopyHere")}
       onSubmit={onSubmit}
       getIsDisabled={getIsDisabled}

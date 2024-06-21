@@ -307,7 +307,7 @@ const Sdk = ({
   return component;
 };
 
-export default inject(
+export const Component = inject(
   ({
     authStore,
     settingsStore,

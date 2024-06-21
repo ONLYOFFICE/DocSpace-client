@@ -31,7 +31,7 @@ import ErrorContainer from "../error-container/ErrorContainer";
 import { AccessRestrictedWrapper } from "./Errors.styled";
 import { PRODUCT_NAME } from "../../constants";
 
-const AccessRestricted = () => {
+export const AccessRestricted = () => {
   const { t, ready } = useTranslation("Common");
 
   useEffect(() => {
@@ -49,5 +49,3 @@ const AccessRestricted = () => {
     )
   );
 };
-
-export default AccessRestricted;

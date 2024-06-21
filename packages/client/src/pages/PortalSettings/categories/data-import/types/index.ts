@@ -383,3 +383,20 @@ export interface AccountsPagingProps {
   setDataPortion: (leftBoundary: number, rightBoundary: number) => void;
   pagesPerPage?: number;
 }
+
+export interface ImportItemProps {
+  sectionName: string;
+  SectionIcon: React.FC<React.SVGProps<SVGElement>>;
+  workspace: string;
+  isChecked: boolean;
+}
+
+export interface ImportSectionProps {
+  isDisabled: boolean;
+  isChecked: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  sectionName: string;
+  description: string;
+  exportSection: Omit<ImportItemProps, "isChecked">;
+  importSection: Omit<ImportItemProps, "isChecked">;
+}

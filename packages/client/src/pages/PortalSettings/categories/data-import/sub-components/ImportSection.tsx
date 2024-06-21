@@ -25,14 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { ReactSVG } from "react-svg";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { tablet } from "@docspace/shared/utils/device";
 
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg?url";
+import { ImportItemProps, ImportSectionProps } from "../types";
 
-const SectionWrapper = styled.div`
+const SectionWrapper = styled.div<{ isChecked: boolean }>`
   max-width: 700px;
   padding: 12px;
   box-sizing: border-box;
@@ -70,7 +71,7 @@ const FlexContainer = styled.div`
   display: flex;
 `;
 
-const ImportItemWrapper = styled.div`
+const ImportItemWrapper = styled.div<{ isChecked: boolean }>`
   padding-top: 8px;
 
   .workspace-title {
@@ -130,7 +131,12 @@ const ArrowWrapper = styled.div`
   }
 `;
 
-const ImportItem = ({ sectionName, SectionIcon, workspace, isChecked }) => {
+const ImportItem = ({
+  sectionName,
+  SectionIcon,
+  workspace,
+  isChecked,
+}: ImportItemProps) => {
   return (
     <ImportItemWrapper isChecked={isChecked}>
       <Text
@@ -157,12 +163,12 @@ const ImportSection = ({
   description,
   exportSection,
   importSection,
-}) => {
+}: ImportSectionProps) => {
   return (
     <SectionWrapper isChecked={isChecked}>
       <ToggleButton
         isChecked={isChecked}
-        onChange={onChange || function () {}}
+        onChange={onChange || (() => {})}
         className="toggleButton"
         isDisabled={isDisabled}
       />
@@ -173,7 +179,7 @@ const ImportSection = ({
         <Text fontSize="12px" className="section-description">
           {description}
         </Text>
-        <FlexContainer isChecked={isChecked}>
+        <FlexContainer>
           <ImportItem {...exportSection} isChecked={isChecked} />
           <ArrowWrapper>
             <ReactSVG className="arrow-icon" src={ArrowSvg} />

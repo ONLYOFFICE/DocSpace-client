@@ -1208,6 +1208,9 @@ class TableHeader extends React.Component<
     const defaultSize =
       columns.find((col) => col.defaultSize && col.enable)?.defaultSize || 0;
 
+    const shortSize =
+      columns.find((col) => col.isShort && col.enable)?.minWidth || 0;
+
     // TODO: Fixed columns size if something went wrong
     if (storageSize) {
       const splitStorage = storageSize.split(" ");
@@ -1258,11 +1261,16 @@ class TableHeader extends React.Component<
 
     const containerWidth = +container.clientWidth;
 
+    const indexColumnDifference = shortSize
+      ? Number(tableContainer[0].split("px")[0]) - shortSize
+      : 0;
+
     const oldWidth =
       tableContainer
         .map((column) => getSubstring(column))
         .reduce((x, y) => x + y) -
       defaultSize -
+      indexColumnDifference -
       settingsSize;
 
     let str = "";
@@ -1518,6 +1526,9 @@ class TableHeader extends React.Component<
               +index === tableContainer.length - 1 ||
               (column ? column.dataset.enable === "true" : item !== "0px");
             const defaultColumnSize = column && column.dataset.defaultSize;
+            const shortColumSize =
+              column?.dataset?.shortColum && column.dataset.minWidth;
+
             const isSettingColumn = Number(index) === tableContainer.length - 1;
             const isQuickButtonColumn =
               Number(index) === tableContainer.length - 2;
@@ -1542,6 +1553,8 @@ class TableHeader extends React.Component<
               }px`;
             } else if (isSettingColumn && !isIndexEditingMode) {
               gridTemplateColumns.push(`${settingsSize}px`);
+            } else if (shortColumSize) {
+              gridTemplateColumns.push(`${shortColumSize}px`);
             } else if (item !== `${settingsSize}px` || isIndexEditingMode) {
               const percent = (getSubstring(item) / oldWidth) * 100;
 

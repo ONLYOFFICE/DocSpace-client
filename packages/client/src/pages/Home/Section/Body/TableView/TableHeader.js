@@ -55,6 +55,7 @@ class FilesTableHeader extends React.Component {
       showStorageInfo,
       isArchiveFolder,
       isIndexing,
+      indexColumnSize,
     } = this.props;
 
     const defaultColumns = [];
@@ -363,7 +364,7 @@ class FilesTableHeader extends React.Component {
         key: "Index",
         title: "#",
         enable: this.props.indexColumnIsEnabled,
-        minWidth: 70,
+        minWidth: indexColumnSize,
         resizable: false,
         isShort: true,
       });
@@ -438,10 +439,12 @@ class FilesTableHeader extends React.Component {
       isArchiveFolder,
       isIndexEditingMode,
       showStorageInfo,
+      indexColumnSize,
     } = this.props;
 
     if (
       isArchiveFolder !== prevProps.isArchiveFolder ||
+      indexColumnSize !== prevProps.indexColumnSize ||
       isIndexEditingMode !== prevProps.isIndexEditingMode ||
       isRooms !== prevProps.isRooms ||
       isTrashFolder !== prevProps.isTrashFolder ||
@@ -625,6 +628,7 @@ export default inject(
       headerBorder,
       roomsFilter,
       setRoomsFilter,
+      indexColumnSize,
     } = filesStore;
     const { isRecentTab, isArchiveFolder, isTrashFolder } = treeFoldersStore;
     const withContent = canShare;
@@ -727,6 +731,8 @@ export default inject(
       showStorageInfo,
       isArchiveFolder,
       isIndexEditingMode,
+
+      indexColumnSize,
     };
   },
 )(

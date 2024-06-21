@@ -36,7 +36,7 @@ const IndexCell = ({ t, item, sideColor }) => {
       fontSize="12px"
       fontWeight={600}
       title={order}
-      truncate
+      style={{ marginRight: 0 }}
     >
       {order}
     </StyledText>

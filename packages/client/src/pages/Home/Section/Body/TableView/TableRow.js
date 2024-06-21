@@ -66,6 +66,7 @@ const FilesTableRow = (props) => {
     isRooms,
     isTrashFolder,
     isIndexEditingMode,
+    isIndexing,
     isHighlight,
     hideColumns,
     onDragOver,
@@ -76,6 +77,7 @@ const FilesTableRow = (props) => {
     onEditIndex,
     isIndexUpdated,
   } = props;
+
   const { acceptBackground, background } = theme.dragAndDrop;
 
   const element = (
@@ -187,6 +189,7 @@ const FilesTableRow = (props) => {
         isThirdPartyFolder={item.isThirdPartyFolder}
         onDoubleClick={isIndexEditingMode ? () => {} : onDoubleClick}
         checked={checkedProps || isIndexUpdated}
+        isIndexing={isIndexing}
         isIndexUpdated={isIndexUpdated}
         showHotkeyBorder={showHotkeyBorder}
         title={

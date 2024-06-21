@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "О программе",
   "AboutCompanyTitle": "О программе",
   "AccessDenied": "Доступ запрещен",
@@ -51,6 +51,10 @@
   "CommonFiles": "Общие файлы",
   "CompanyName": "Название компании",
   "Confirmation": "Подтверждение",
+  "ConflictResolveDescription": "Файл с именем <1>{{file}}</1> уже существует в папке <1>{{folder}}</1>.",
+  "ConflictResolveDescriptionFiles": "{{filesCount}} документов с одинаковыми именами уже существуют в папке <1>{{folder}}</1>.",
+  "ConflictResolveSelectAction": "Пожалуйста, выберите действие:",
+  "ConflictResolveTitle": "Подтверждение перезаписи",
   "Connect": "Подключить",
   "Content": "Контент",
   "Context": "Контекст",
@@ -63,6 +67,7 @@
   "Create": "Создать",
   "CreateAndCopy": "Создать и скопировать",
   "CreateCopy": "Создать копию",
+  "CreateDescription": "В папке будет два разных файла.",
   "CreateFileCopy": "Создать копию файла",
   "CreateMasterFormFromFile": "Создать шаблон формы из файла",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -282,6 +287,8 @@
   "orContinueWith": "или продолжить с",
   "OtherLabel": "Другое",
   "OtherOperations": "Другие операции",
+  "OverwriteDescription": "Новый файл заменит существующий файл как новая версия.",
+  "OverwriteTitle": "Перезаписать с обновлением версии",
   "Owner": "Владелец",
   "PageOfTotalPage": "{{page}} из {{totalPage}}",
   "Pages": "Страницы",
@@ -400,6 +407,8 @@
   "SignUpWithZoom": "Зарегистрируйтесь с помощью Zoom",
   "Size": "Размер",
   "SizeImageLarge": "Размер изображения слишком большой, пожалуйста, выберите другое изображение.",
+  "SkipDescription": "Файл не будет скопирован. В папке назначения останется исходный файл.",
+  "SkipTitle": "Пропустить",
   "SomethingWentWrong": "Что-то пошло не так.",
   "SortBy": "Сортировать по",
   "SpaceManagement": "Управление Пространством",
@@ -456,14 +465,5 @@
   "Website": "Веб-сайт",
   "Yes": "Да",
   "Yesterday": "Вчера",
-  "You": "Вы",
-  "ConflictResolveDescription": "Файл с именем <1>{{file}}</1> уже существует в папке <1>{{folder}}</1>.",
-  "ConflictResolveDescriptionFiles": "{{filesCount}} документов с одинаковыми именами уже существуют в папке <1>{{folder}}</1>.",
-  "ConflictResolveSelectAction": "Пожалуйста, выберите действие:",
-  "ConflictResolveTitle": "Подтверждение перезаписи",
-  "CreateDescription": "В папке будет два разных файла.",
-  "OverwriteDescription": "Новый файл заменит существующий файл как новая версия.",
-  "OverwriteTitle": "Перезаписать с обновлением версии",
-  "SkipDescription": "Файл не будет скопирован. В папке назначения останется исходный файл.",
-  "SkipTitle": "Пропустить"
+  "You": "Вы"
 }

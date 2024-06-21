@@ -31,7 +31,7 @@ import { withTranslation } from "react-i18next";
 import { StyledHistoryList, StyledHistorySubtitle } from "../../styles/history";
 
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
-import { parseHistory } from "./../../helpers/HistoryHelper";
+import { getRelativeDateDay } from "./../../helpers/HistoryHelper";
 import HistoryBlock from "./HistoryBlock";
 import NoHistory from "../NoItem/NoHistory";
 
@@ -40,10 +40,9 @@ const History = ({
   historyWithFileList,
   selectedFolder,
   selectionHistory,
-  setSelectionHistory,
   infoPanelSelection,
   getInfoPanelItemIcon,
-  getHistory,
+  fetchHistory,
   checkAndOpenLocationAction,
   openUser,
   isVisitor,
@@ -52,46 +51,30 @@ const History = ({
   const isMount = useRef(true);
   const abortControllerRef = useRef(new AbortController());
 
-  const [isPending, startTransition] = useTransition();
   const [isLoading, setIsLoading] = useState(false);
   const [isShowLoader, setIsShowLoader] = useState(false);
 
-  const fetchHistory = async (item) => {
+  const getHistory = async (item) => {
     if (!item?.id) return;
     if (isLoading) {
       abortControllerRef.current?.abort();
       abortControllerRef.current = new AbortController();
     } else setIsLoading(true);
 
-    let module = "files";
-    if (infoPanelSelection.isRoom) module = "rooms";
-    else if (infoPanelSelection.isFolder) module = "folders";
-
-    getHistory(
-      module,
-      item.id,
-      abortControllerRef.current?.signal,
-      item?.requestToken,
-    )
-      .then((data) => {
-        if (isMount.current)
-          startTransition(() => {
-            const parsedHistory = parseHistory(t, data);
-            setSelectionHistory(parsedHistory);
-          });
-      })
-      .catch((err) => {
-        if (err.message !== "canceled") console.error(err);
-      })
-      .finally(() => {
+    if (isMount.current) {
+      fetchHistory(abortControllerRef.current?.signal).finally(() => {
         if (isMount.current) setIsLoading(false);
       });
+    }
   };
 
   useEffect(() => {
     if (!isMount.current) return;
-    fetchHistory(infoPanelSelection);
-  }, [infoPanelSelection.id]);
+    getHistory(infoPanelSelection);
+  }, [
+    infoPanelSelection.id,
+    infoPanelSelection.isFolder || infoPanelSelection.isRoom,
+  ]);
 
   useEffect(() => {
     const showLoaderTimer = setTimeout(() => setIsShowLoader(true), 500);
@@ -111,10 +94,12 @@ const History = ({
   return (
     <StyledHistoryList>
       {selectionHistory.map(({ day, feeds }) => [
-        <StyledHistorySubtitle key={day}>{day}</StyledHistorySubtitle>,
+        <StyledHistorySubtitle key={day}>
+          {getRelativeDateDay(t, feeds[0].date)}
+        </StyledHistorySubtitle>,
         ...feeds.map((feed, i) => (
           <HistoryBlock
-            key={feed.json.Id}
+            key={`${feed.action.id}_${feed.date}`}
             t={t}
             feed={feed}
             selectedFolder={selectedFolder}
@@ -134,24 +119,17 @@ const History = ({
 };
 
 export default inject(
-  ({
-    settingsStore,
-    filesStore,
-    filesActionsStore,
-    infoPanelStore,
-    userStore,
-  }) => {
+  ({ settingsStore, filesActionsStore, infoPanelStore, userStore }) => {
     const {
       infoPanelSelection,
+      fetchHistory,
       selectionHistory,
-      setSelectionHistory,
       historyWithFileList,
       getInfoPanelItemIcon,
       openUser,
     } = infoPanelStore;
     const { culture } = settingsStore;
 
-    const { getHistory } = filesStore;
     const { checkAndOpenLocationAction } = filesActionsStore;
 
     const { user } = userStore;
@@ -161,11 +139,10 @@ export default inject(
     return {
       culture,
       selectionHistory,
-      setSelectionHistory,
       historyWithFileList,
       infoPanelSelection,
       getInfoPanelItemIcon,
-      getHistory,
+      fetchHistory,
       checkAndOpenLocationAction,
       openUser,
       isVisitor,

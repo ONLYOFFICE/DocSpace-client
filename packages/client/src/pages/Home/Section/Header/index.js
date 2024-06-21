@@ -880,7 +880,7 @@ const SectionHeaderContent = (props) => {
       : isRootFolder || isAccountsPage || isSettingsPage;
 
   const getInsideGroupTitle = () => {
-    return isLoading || !currentGroup?.name
+    return isLoading && insideGroupTempTitle
       ? insideGroupTempTitle
       : currentGroup?.name;
   };

@@ -49,13 +49,13 @@ const FillingStatusContainer = styled.div<{
   }
 
   .status-interrupted-text {
-    color: ${(props) => props.isInterrupted && "#F2675A"};
+    color: ${(props) => props.isInterrupted && globalColors.mainRed};
   }
 
   .status-interrupted-icon {
     circle,
     path {
-      stroke: ${(props) => props.isInterrupted && "#F2675A"};
+      stroke: ${(props) => props.isInterrupted && globalColors.mainRed};
     }
   }
 

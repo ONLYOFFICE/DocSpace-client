@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { getCorrectFourValuesStyle } from "../../utils";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 
 const Selectors = styled.div<{ hasError?: boolean }>`
   position: relative;
@@ -56,7 +56,8 @@ const TimeCell = styled.span<{ hasError?: boolean }>`
   width: 73px;
   height: 32px;
 
-  background-color: ${(props) => (props.theme.isBase ? "#eceef1" : "#242424")};
+  background-color: ${(props) =>
+    props.theme.isBase ? globalColors.grayLightMid : globalColors.grayDarkMid};
   border-radius: 3px;
 
   padding: 6px 8px;

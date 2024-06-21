@@ -26,6 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { isMobileOnly } from "react-device-detect";
+import { globalColors } from "../../themes";
 
 const Wrapper = styled.div`
   .save-button {
@@ -74,19 +75,23 @@ const Wrapper = styled.div`
     width: 30px;
     height: 30px;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
-    border: 8px solid #fff;
+    border: 8px solid ${globalColors.white};
   }
 
   .hex-value {
     height: 32px;
     outline: none;
     padding: 6px 8px;
-    border: 1px solid ${(props) => (props.theme.isBase ? "#d0d5da" : "#474747")};
+    border: 1px solid
+      ${(props) =>
+        props.theme.isBase
+          ? globalColors.grayStrong
+          : globalColors.grayDarkStrong};
     border-radius: 3px;
     width: 100%;
     box-sizing: border-box;
-    background: ${(props) => !props.theme.isBase && "#282828"};
-    color: ${(props) => !props.theme.isBase && "#5C5C5C"};
+    background: ${(props) => !props.theme.isBase && globalColors.darkGrayLight};
+    color: ${(props) => !props.theme.isBase && globalColors.grayDarkText};
   }
 
   .hex-value-label {

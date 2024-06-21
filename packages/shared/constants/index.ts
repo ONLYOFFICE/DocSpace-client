@@ -31,13 +31,14 @@ import ShareTwitterReactSvgUrl from "PUBLIC_DIR/images/share.twitter.react.svg?u
 import ShareLinkedinReactSvgUrl from "PUBLIC_DIR/images/share.linkedin.react.svg?url";
 import ShareMicrosoftReactSvgUrl from "PUBLIC_DIR/images/share.microsoft.react.svg?url";
 import ShareZoomReactSvgUrl from "PUBLIC_DIR/images/share.zoom.react.svg?url";
+import { globalColors } from "../themes/globalColors";
 
 export const LOADER_STYLE = Object.freeze({
   title: "",
   width: "100%",
   height: "32",
-  backgroundColor: "#000000",
-  foregroundColor: "#000000",
+  backgroundColor: globalColors.darkBlack,
+  foregroundColor: globalColors.darkBlack,
   backgroundOpacity: 0.1,
   foregroundOpacity: 0.15,
   borderRadius: "3",

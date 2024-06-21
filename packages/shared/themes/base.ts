@@ -2972,6 +2972,7 @@ export const getBaseTheme = () => {
     errorContainer: {
       background: white,
       bodyText: gray,
+      linkColor: link,
     },
 
     editor: {
@@ -3070,6 +3071,7 @@ export const getBaseTheme = () => {
       disabledBackground: grayLight,
       disabledBorder: `1px solid ${grayLightMid}`,
       disabledColor: gray,
+      focusBorder: `1px solid ${lightSecondMain}`,
     },
 
     accessRightSelect: {

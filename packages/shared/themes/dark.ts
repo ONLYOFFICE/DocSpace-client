@@ -2953,6 +2953,7 @@ const Dark: TTheme = {
   errorContainer: {
     background: black,
     bodyText: grayDark,
+    linkColor: darkLink,
   },
 
   editor: {
@@ -3051,6 +3052,7 @@ const Dark: TTheme = {
     disabledBackground: grayDarkStrong,
     disabledBorder: `1px solid ${grayDarkStrong}`,
     disabledColor: grayDark,
+    focusBorder: `1px solid ${lightSecondMain}`,
   },
 
   accessRightSelect: {

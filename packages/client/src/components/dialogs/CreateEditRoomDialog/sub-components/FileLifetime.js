@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import { capitalize } from "lodash";
 import { Text } from "@docspace/shared/components/text";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { ComboBox } from "@docspace/shared/components/combobox";
@@ -54,7 +55,7 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
   const dateOptions = [
     {
       key: 1,
-      label: t("Common:Days")[0].toUpperCase() + t("Common:Days").slice(1),
+      label: capitalize(t("Common:Days")),
       value: 0,
     },
     {

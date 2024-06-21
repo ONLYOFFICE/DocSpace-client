@@ -2065,6 +2065,7 @@ class FilesStore {
         "separator-SubmitToGallery",
         "link-for-room-members",
         "sharing-settings",
+        "embedding-settings",
         // "external-link",
         "owner-change",
         // "link-for-portal-users",
@@ -2192,7 +2193,10 @@ class FilesStore {
       }
 
       if (!canViewFile || isRecycleBinFolder) {
-        fileOptions = this.removeOptions(fileOptions, ["preview"]);
+        fileOptions = this.removeOptions(fileOptions, [
+          "preview",
+          "embedding-settings",
+        ]);
       }
 
       if (!canOpenPlayer || isRecycleBinFolder) {
@@ -2322,6 +2326,10 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, [
           "link-for-room-members",
         ]);
+      }
+
+      if (this.publicRoomStore.isPublicRoom) {
+        fileOptions = this.removeOptions(fileOptions, ["embedding-settings"]);
       }
 
       // if (isPrivacyFolder) {

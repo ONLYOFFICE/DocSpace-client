@@ -181,3 +181,6 @@ export const SYSTEM_THEME_KEY = "system_theme";
 
 export const PRODUCT_NAME = "DocSpace";
 export const BRAND_NAME = "ONLYOFFICE";
+
+const SDK_VERSION = "1.0.0";
+export const SDK_SCRIPT_URL = `${window.location.origin}/static/scripts/sdk/${SDK_VERSION}/api.js`;

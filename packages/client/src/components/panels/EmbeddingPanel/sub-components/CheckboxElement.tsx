@@ -24,13 +24,45 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { TooltipContent } from "../../../../pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/TooltipContent";
 
-export interface PublicRoomBarProps {
-  headerText: string | React.ReactNode;
-  bodyText: string | React.ReactNode;
-  iconName?: string;
-  onClose?: () => void;
-  className?: string;
-  style?: React.CSSProperties;
-}
+type CheckboxElementProps = {
+  img: string;
+  label: string;
+  title: string;
+  description: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isChecked: boolean;
+};
+
+const CheckboxElement = ({
+  img,
+  label,
+  title,
+  description,
+  onChange,
+  isChecked,
+}: CheckboxElementProps) => {
+  return (
+    <div className="embedding-panel_checkbox-element">
+      <Checkbox
+        className="checkbox"
+        label={label}
+        onChange={onChange}
+        isChecked={isChecked}
+      />
+      <HelpButton
+        place="right"
+        offsetRight={4}
+        size={12}
+        tooltipContent={
+          <TooltipContent img={img} title={title} description={description} />
+        }
+      />
+    </div>
+  );
+};
+
+export { CheckboxElement };

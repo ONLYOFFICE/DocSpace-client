@@ -24,13 +24,60 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { Text } from "@docspace/shared/components/text";
+import {
+  ComboBox,
+  ComboBoxSize,
+  TOption,
+} from "@docspace/shared/components/combobox";
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/shared/components/text-input";
+import { dataDimensions } from "../../../../pages/PortalSettings/categories/developer-tools/JavascriptSDK/constants";
 
-export interface PublicRoomBarProps {
-  headerText: string | React.ReactNode;
-  bodyText: string | React.ReactNode;
-  iconName?: string;
-  onClose?: () => void;
-  className?: string;
-  style?: React.CSSProperties;
-}
+type DisplayBlockProps = {
+  label: string;
+  inputValue: string;
+  onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  selectedOption: TOption;
+  onSelectDimension: (option: TOption) => void;
+};
+
+const DisplayBlock = ({
+  label,
+  inputValue,
+  onInputChange,
+  selectedOption,
+  onSelectDimension,
+}: DisplayBlockProps) => {
+  return (
+    <div className="embedding-panel_block">
+      <Text fontSize="13px" fontWeight={600} className="embedding-panel_text">
+        {label}
+      </Text>
+      <div className="embedding-panel_size-block">
+        <TextInput
+          type={InputType.text}
+          size={InputSize.base}
+          className="embedding-panel_input"
+          value={inputValue}
+          onChange={onInputChange}
+        />
+        <ComboBox
+          size={ComboBoxSize.content}
+          scaled={false}
+          scaledOptions
+          onSelect={onSelectDimension}
+          options={dataDimensions}
+          selectedOption={selectedOption}
+          displaySelectedOption
+          directionY="bottom"
+        />
+      </div>
+    </div>
+  );
+};
+
+export { DisplayBlock };

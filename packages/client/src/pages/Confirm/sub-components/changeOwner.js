@@ -43,6 +43,7 @@ import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import { ownerChange } from "@docspace/shared/api/settings";
 import { getUserFromConfirm } from "@docspace/shared/api/people";
 import { PRODUCT_NAME } from "@docspace/shared/constants";
+import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
 
 const ChangeOwnerForm = (props) => {
   const { t, greetingTitle, linkData, history } = props;
@@ -129,9 +130,17 @@ const ChangeOwnerForm = (props) => {
   );
 };
 
-export default inject(({ settingsStore }) => ({
+const ComponentWrapper = inject(({ settingsStore }) => ({
   greetingTitle: settingsStore.greetingSettings,
   defaultPage: settingsStore.defaultPage,
 }))(
   withTranslation(["Confirm", "Common"])(withLoader(observer(ChangeOwnerForm))),
 );
+
+export const Component = () => {
+  return (
+    <ConfirmRoute>
+      <ComponentWrapper />
+    </ConfirmRoute>
+  );
+};

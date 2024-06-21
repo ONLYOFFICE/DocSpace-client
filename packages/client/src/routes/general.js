@@ -42,19 +42,19 @@ const generalRoutes = [
       },
       {
         path: "login",
-        lazy: () => import("../pages/Profile"),
+        lazy: () => import("SRC_DIR/pages/Profile"),
       },
       {
         path: "notifications",
-        lazy: () => import("../pages/Profile"),
+        lazy: () => import("SRC_DIR/pages/Profile"),
       },
       {
         path: "file-management",
-        lazy: () => import("../pages/Profile"),
+        lazy: () => import("SRC_DIR/pages/Profile"),
       },
       {
         path: "interface-theme",
-        lazy: () => import("../pages/Profile"),
+        lazy: () => import("SRC_DIR/pages/Profile"),
       },
     ],
   },

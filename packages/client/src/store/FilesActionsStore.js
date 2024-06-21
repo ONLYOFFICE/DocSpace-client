@@ -1443,17 +1443,19 @@ class FilesActionStore {
       setIsSectionFilterLoading(param);
     };
 
-    const { ExtraLocationTitle, ExtraLocation, fileExst, folderId } = item;
+    const { title, fileExst } = item;
+    const parentId = item.parentId || item.toFolderId || recycleBinFolderId;
+    const parentTitle = item.parentTitle || item.toFolderTitle;
 
-    const isRoot =
-      ExtraLocation === myRoomsId ||
-      ExtraLocation === myFolderId ||
-      ExtraLocation === archiveRoomsId ||
-      ExtraLocation === recycleBinFolderId;
+    const isRoot = [
+      myRoomsId,
+      myFolderId,
+      archiveRoomsId,
+      recycleBinFolderId,
+    ].includes(parentId);
 
     const state = {
-      title: ExtraLocationTitle,
-
+      title: parentTitle,
       isRoot,
       fileExst,
       highlightFileId: item.id,
@@ -1461,14 +1463,12 @@ class FilesActionStore {
       rootFolderType,
     };
 
-    const url = getCategoryUrl(categoryType, ExtraLocation);
+    const url = getCategoryUrl(categoryType, parentId);
 
     const newFilter = FilesFilter.getDefault();
 
-    const title = this.nameWithoutExtension(item.title);
-
     newFilter.search = title;
-    newFilter.folder = ExtraLocation || folderId;
+    newFilter.folder = parentId;
 
     setIsLoading(
       window.DocSpace.location.search !== `?${newFilter.toUrlParams()}` ||

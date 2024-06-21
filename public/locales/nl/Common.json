@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Over",
   "AboutCompanyTitle": "Over dit programma",
   "AccessDenied": "Toegang geweigerd",
@@ -51,6 +51,10 @@
   "CommonFiles": "Algemene bestanden",
   "CompanyName": "Bedrijfsnaam",
   "Confirmation": "Bevestiging",
+  "ConflictResolveDescription": "Het bestand met de naam <1>{{file}}</1> bestaat al in de map <1>{{folder}}</1>.",
+  "ConflictResolveDescriptionFiles": "{{filesCount}} documenten met dezelfde naam al bestaan in de map <1>{{folder}}</1>.",
+  "ConflictResolveSelectAction": "Kies de actie:",
+  "ConflictResolveTitle": "Overschrijf bevestiging",
   "Connect": "Verbinden",
   "Content": "Inhoud",
   "Context": "Context",
@@ -63,6 +67,7 @@
   "Create": "Maak",
   "CreateAndCopy": "Aanmaken en kopiëren",
   "CreateCopy": "Maak een kopie",
+  "CreateDescription": "Er zullen twee verschillende bestanden in de map staan.",
   "CreateFileCopy": "Maak bestandskopie",
   "CreateMasterFormFromFile": "Maak Formulier sjabloon van bestand",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -179,7 +184,6 @@
   "FirstName": "Voornaam",
   "FormRoom": "Formulier kamer",
   "Free": "Gratis",
-
   "FullAccess": "Volledige toegang",
   "GeneralAccessLinkCopied": "Algemene link succesvol gekopieerd naar klembord",
   "GeneralAccessLinkRemove": "Algemene toegangslink verwijderen",
@@ -282,6 +286,8 @@
   "orContinueWith": "of ga verder met",
   "OtherLabel": "Overig",
   "OtherOperations": "Andere bewerkingen",
+  "OverwriteDescription": "Het bestand zal worden toegevoegd aan het bestand met dezelfde naam als een versie.",
+  "OverwriteTitle": "Overschrijven met versie update",
   "Owner": "Eigenaar",
   "PageOfTotalPage": "{{page}} van {{totalPage}}",
   "Pages": "Pagina's",
@@ -400,6 +406,8 @@
   "SignUpWithZoom": "Aanmelden via Zoom",
   "Size": "Formaat",
   "SizeImageLarge": "De afbeelding is te groot, kies een andere afbeelding.",
+  "SkipDescription": "Er wordt geen bestand gekopieerd. Het originele bestand blijft bewaard in de doelmap.",
+  "SkipTitle": "Overslaan",
   "SomethingWentWrong": "Er is iets fout gegaan.",
   "SortBy": "Sorteren op",
   "SpaceManagement": "Ruimtebeheer",
@@ -456,14 +464,5 @@
   "Website": "Website",
   "Yes": "Ja",
   "Yesterday": "Gisteren",
-  "You": "U",
-  "ConflictResolveDescription": "Het bestand met de naam <1>{{file}}</1> bestaat al in de map <1>{{folder}}</1>.",
-  "ConflictResolveDescriptionFiles": "{{filesCount}} documenten met dezelfde naam al bestaan in de map <1>{{folder}}</1>.",
-  "ConflictResolveSelectAction": "Kies de actie:",
-  "ConflictResolveTitle": "Overschrijf bevestiging",
-  "CreateDescription": "Er zullen twee verschillende bestanden in de map staan.",
-  "OverwriteDescription": "Het bestand zal worden toegevoegd aan het bestand met dezelfde naam als een versie.",
-  "OverwriteTitle": "Overschrijven met versie update",
-  "SkipDescription": "Er wordt geen bestand gekopieerd. Het originele bestand blijft bewaard in de doelmap.",
-  "SkipTitle": "Overslaan"
+  "You": "U"
 }

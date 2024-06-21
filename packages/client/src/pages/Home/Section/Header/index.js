@@ -880,7 +880,7 @@ const SectionHeaderContent = (props) => {
       : isRootFolder || isAccountsPage || isSettingsPage;
 
   const getInsideGroupTitle = () => {
-    return isLoading || !currentGroup?.name
+    return isLoading && insideGroupTempTitle
       ? insideGroupTempTitle
       : currentGroup?.name;
   };
@@ -1225,14 +1225,15 @@ export default inject(
 
     const sharedItem = navigationPath.find((r) => r.shared);
 
-    const showNavigationButton = isLoading
-      ? false
-      : (!isPublicRoom &&
-          !isArchive &&
-          canCopyPublicLink &&
-          (isPublicRoomType || isCustomRoomType || isFormRoomType) &&
-          shared) ||
-        (sharedItem && sharedItem.canCopyPublicLink);
+    const showNavigationButton =
+      isLoading || !security?.CopyLink
+        ? false
+        : (!isPublicRoom &&
+            !isArchive &&
+            canCopyPublicLink &&
+            (isPublicRoomType || isCustomRoomType || isFormRoomType) &&
+            shared) ||
+          (sharedItem && sharedItem.canCopyPublicLink);
 
     return {
       isGracePeriod,

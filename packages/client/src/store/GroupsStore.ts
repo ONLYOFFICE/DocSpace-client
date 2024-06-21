@@ -546,10 +546,16 @@ class GroupsStore {
     withBackURL: boolean,
     tempTitle: string,
   ) => {
+    const { setIsSectionBodyLoading, setIsSectionFilterLoading } =
+      this.clientLoadingStore;
+
     this.setSelection([]);
     this.setBufferSelection(null);
     this.setCurrentGroup(null);
     this.setInsideGroupTempTitle(tempTitle);
+
+    setIsSectionFilterLoading(true);
+    setIsSectionBodyLoading(true);
 
     if (withBackURL) {
       const url = `${window.location.pathname}${window.location.search}`;
@@ -592,6 +598,7 @@ class GroupsStore {
           this.insideGroupFilter.clone(),
         );
         this.peopleStore.usersStore.setUsers(members.items);
+        this.setInsideGroupTempTitle(res.name);
       }
 
       if (infoPanelSelection?.id === res.id) {

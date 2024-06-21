@@ -3,6 +3,6 @@
   "ChangeUserTypeHeader": "Промени тип корисника",
   "ChangeUserTypeMessage": "Корисници са типом '{{ firstType }}' биц́е премештени у тип '{{ secondType }}'.",
   "ChangeUserTypeMessageMulti": "Одабрани корисници ће бити премештени у '{{ secondType }}' тип.",
-  "ChangeUserTypeMessageWarning": "Не можете променити тип за DocSpace администраторе и за себе.",
+  "ChangeUserTypeMessageWarning": "Не можете променити тип за {{productName}} администраторе и за себе.",
   "SuccessChangeUserType": "Кориснички тип је успешно промењен"
 }

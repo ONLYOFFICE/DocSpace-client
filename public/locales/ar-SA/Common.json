@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "من نحن",
   "AboutCompanyTitle": "نبذة تعريفية عن البرنامج",
   "AccessDenied": "المحاولة مرفوضة",
@@ -50,6 +50,10 @@
   "CommonFiles": "الملفات المشتركة",
   "CompanyName": "اسم الشركة",
   "Confirmation": "تأكيد",
+  "ConflictResolveDescription": "الملف الذي يحمل الاسم <1>{{file}}</1> موجود بالفعل في المجلد <1>{{folder}}</1>.",
+  "ConflictResolveDescriptionFiles": "{{filesCount}} المستندات التي تحمل الاسم نفسه موجودة بالفعل في المجلد <1> {{folder}} </1>.",
+  "ConflictResolveSelectAction": "الرجاء تحديد الإجراء:",
+  "ConflictResolveTitle": "تأكيد الكتابة",
   "Connect": "ربط",
   "Content": "المحتوى",
   "Context": "السياق",
@@ -62,6 +66,7 @@
   "Create": "انشاء",
   "CreateAndCopy": "إنشاء ونسخ",
   "CreateCopy": "انشاء نسخة",
+  "CreateDescription": "سيكون هناك ملفان مختلفان في المجلد.",
   "CreateFileCopy": "انشاء نسخة ملف",
   "CreateMasterFormFromFile": "إنشاء قالب نموذج من ملف",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -280,6 +285,8 @@
   "orContinueWith": "أو الاستمرار مع",
   "OtherLabel": "أخرى",
   "OtherOperations": "عمليات أخرى",
+  "OverwriteDescription": "سيحل الملف الجديد محل الملف الحالي كإصدار جديد.",
+  "OverwriteTitle": "استبدال محتوى النسخة بالتحديث الجديد",
   "Owner": "المالك",
   "PageOfTotalPage": "الصفحة {{page}} من {{totalPage}}",
   "Pages": "الصفحات",
@@ -397,6 +404,8 @@
   "SignUpWithZoom": "التسجيل بواسطة Zoom",
   "Size": "الحجم",
   "SizeImageLarge": "حجم الصورة كبير جدًا، يُرجى اختيار صورة أخرى.",
+  "SkipDescription": "لن يتم نسخ أي ملف. سيتم الاحتفاظ بالملف الأصلي في المجلد الوجهة.",
+  "SkipTitle": "تخطى",
   "SomethingWentWrong": "حدث خطأ ما.",
   "SortBy": "الترتيب حسب",
   "SpaceManagement": "إدارة المساحة",
@@ -453,14 +462,5 @@
   "Website": "موقع إلكتروني",
   "Yes": "نعم",
   "Yesterday": "أمس",
-  "You": "أنت",
-  "ConflictResolveDescription": "الملف الذي يحمل الاسم <1>{{file}}</1> موجود بالفعل في المجلد <1>{{folder}}</1>.",
-  "ConflictResolveDescriptionFiles": "{{filesCount}} المستندات التي تحمل الاسم نفسه موجودة بالفعل في المجلد <1> {{folder}} </1>.",
-  "ConflictResolveSelectAction": "الرجاء تحديد الإجراء:",
-  "ConflictResolveTitle": "تأكيد الكتابة",
-  "CreateDescription": "سيكون هناك ملفان مختلفان في المجلد.",
-  "OverwriteDescription": "سيحل الملف الجديد محل الملف الحالي كإصدار جديد.",
-  "OverwriteTitle": "استبدال محتوى النسخة بالتحديث الجديد",
-  "SkipDescription": "لن يتم نسخ أي ملف. سيتم الاحتفاظ بالملف الأصلي في المجلد الوجهة.",
-  "SkipTitle": "تخطى"
+  "You": "أنت"
 }

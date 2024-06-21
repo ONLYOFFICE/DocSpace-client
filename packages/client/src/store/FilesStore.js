@@ -67,6 +67,7 @@ import { CategoryType } from "SRC_DIR/helpers/constants";
 import debounce from "lodash.debounce";
 import clone from "lodash/clone";
 import Queue from "queue-promise";
+import { parseHistory } from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
@@ -272,6 +273,19 @@ class FilesStore {
       }
 
       this.treeFoldersStore.updateTreeFoldersItem(opt);
+    });
+
+    socketHelper.on("s:update-history", ({ id, type }) => {
+      const { infoPanelSelection, fetchHistory } = this.infoPanelStore;
+
+      let infoPanelSelectionType = "file";
+      if (infoPanelSelection?.isRoom || infoPanelSelection?.isFolder)
+        infoPanelSelectionType = "folder";
+
+      if (id === infoPanelSelection?.id && type === infoPanelSelectionType) {
+        console.log("[WS] s:update-history", id);
+        fetchHistory();
+      }
     });
 
     socketHelper.on("refresh-folder", (id) => {
@@ -1397,6 +1411,13 @@ class FilesStore {
     return res;
   };
 
+  abortAllFetch = () => {
+    this.filesController.abort();
+    this.roomsController.abort();
+    this.filesController = new AbortController();
+    this.roomsController = new AbortController();
+  };
+
   fetchFiles = (
     folderId,
     filter,
@@ -1405,9 +1426,9 @@ class FilesStore {
     clearSelection = true,
   ) => {
     const { setSelectedNode } = this.treeFoldersStore;
+
     if (this.clientLoadingStore.isLoading) {
-      this.roomsController.abort();
-      this.roomsController = new AbortController();
+      this.abortAllFetch();
     }
 
     const filterData = filter ? filter.clone() : FilesFilter.getDefault();
@@ -1728,8 +1749,7 @@ class FilesStore {
     const { setSelectedNode, roomsFolderId } = this.treeFoldersStore;
 
     if (this.clientLoadingStore.isLoading) {
-      this.filesController.abort();
-      this.filesController = new AbortController();
+      this.abortAllFetch();
     }
 
     const filterData = !!filter
@@ -2723,8 +2743,8 @@ class FilesStore {
     return api.rooms.updateRoomMemberRole(id, data);
   }
 
-  getHistory(module, id, signal = null, requestToken) {
-    return api.rooms.getHistory(module, id, signal, requestToken);
+  getHistory(selectionType, id, signal = null, requestToken) {
+    return api.rooms.getHistory(selectionType, id, signal, requestToken);
   }
 
   getRoomHistory(id) {

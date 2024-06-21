@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Tietoja",
   "AboutCompanyTitle": "Tietoja tästä ohjelmasta",
   "AccessDenied": "Pääsy evätty",
@@ -51,6 +51,10 @@
   "CommonFiles": "Yleiset kansiot",
   "CompanyName": "Yrityksen nimi",
   "Confirmation": "Vahvistus",
+  "ConflictResolveDescription": "Tiedosto, jonka nimi on <1>{{file}}</1>, on jo kansiossa <1>{{folder}}</1>.",
+  "ConflictResolveDescriptionFiles": "{{filesCount}} samannimistä asiakirjaa on jo olemassa kansiossa <1>{{folder}}</1>.",
+  "ConflictResolveSelectAction": "Valitse toiminto:",
+  "ConflictResolveTitle": "Korvaamisen vahvistus",
   "Connect": "Yhdistä",
   "Content": "Sisältö",
   "Context": "Konteksti",
@@ -63,6 +67,7 @@
   "Create": "Luo",
   "CreateAndCopy": "Luo ja kopioi ",
   "CreateCopy": "Luo kopio",
+  "CreateDescription": "Kansiossa tulee olemaan kaksi eri tiedostoa.",
   "CreateFileCopy": "Luo kopio tiedostosta",
   "CreateMasterFormFromFile": "Luo lomakemalli tiedostosta",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -281,6 +286,8 @@
   "orContinueWith": "tai jatka",
   "OtherLabel": "Muu",
   "OtherOperations": "Muut toiminnot",
+  "OverwriteDescription": "Tiedosto lisätään tiedostoon samalla nimellä versiona.",
+  "OverwriteTitle": "Korvaa versiopäivityksellä",
   "Owner": "Omistaja",
   "PageOfTotalPage": "{{page}} - {{totalPage}}",
   "Pages": "Sivua",
@@ -399,6 +406,8 @@
   "SignUpWithZoom": "Rekisteröidy Zoomilla",
   "Size": "Koko",
   "SizeImageLarge": "Kuva on liian suuri, ole hyvä ja valitse toinen kuva.",
+  "SkipDescription": "Mitään tiedostoa ei kopioida. Alkuperäinen tiedosto säilytetään kohdekansiossa.",
+  "SkipTitle": "Ohita",
   "SomethingWentWrong": "Jokin meni pieleen.",
   "SortBy": "Lajitteluperuste",
   "SpaceManagement": "Tilan hallinta",
@@ -455,14 +464,5 @@
   "Website": "Sivusto",
   "Yes": "Kyllä",
   "Yesterday": "Eilen",
-  "You": "Sinä",
-  "ConflictResolveDescription": "Tiedosto, jonka nimi on <1>{{file}}</1>, on jo kansiossa <1>{{folder}}</1>.",
-  "ConflictResolveDescriptionFiles": "{{filesCount}} samannimistä asiakirjaa on jo olemassa kansiossa <1>{{folder}}</1>.",
-  "ConflictResolveSelectAction": "Valitse toiminto:",
-  "ConflictResolveTitle": "Korvaamisen vahvistus",
-  "CreateDescription": "Kansiossa tulee olemaan kaksi eri tiedostoa.",
-  "OverwriteDescription": "Tiedosto lisätään tiedostoon samalla nimellä versiona.",
-  "OverwriteTitle": "Korvaa versiopäivityksellä",
-  "SkipDescription": "Mitään tiedostoa ei kopioida. Alkuperäinen tiedosto säilytetään kohdekansiossa.",
-  "SkipTitle": "Ohita"
+  "You": "Sinä"
 }

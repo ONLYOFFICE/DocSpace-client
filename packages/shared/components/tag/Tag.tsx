@@ -42,6 +42,7 @@ export const TagPure = ({
   label,
   isNewTag,
   isDisabled,
+  isDeleted,
   isDefault,
   isLast,
   onDelete,
@@ -99,12 +100,12 @@ export const TagPure = ({
 
   const onClickAction = React.useCallback(
     (e: React.MouseEvent | React.ChangeEvent) => {
-      if (onClick && !isDisabled) {
+      if (onClick && !isDisabled && !isDeleted) {
         const target = e.target as HTMLDivElement;
         onClick({ roomType, label: target.dataset.tag, providerType });
       }
     },
-    [onClick, isDisabled, roomType, providerType],
+    [onClick, isDisabled, isDeleted, roomType, providerType],
   );
 
   const onDeleteAction = React.useCallback(
@@ -125,6 +126,7 @@ export const TagPure = ({
         ref={tagRef}
         onClick={openDropdownAction}
         isDisabled={isDisabled}
+        isDeleted={isDeleted}
         isDefault={isDefault}
         isLast={isLast}
         tagMaxWidth={tagMaxWidth}
@@ -167,6 +169,7 @@ export const TagPure = ({
       onClick={onClickAction}
       isNewTag={isNewTag}
       isDisabled={isDisabled}
+      isDeleted={isDeleted}
       isDefault={isDefault}
       tagMaxWidth={tagMaxWidth}
       data-tag={label}
@@ -190,7 +193,7 @@ export const TagPure = ({
           >
             {label}
           </Text>
-          {isNewTag && (
+          {isNewTag && !!onDelete && (
             <IconButton
               className="tag-icon"
               iconName={CrossIconReactSvgUrl}

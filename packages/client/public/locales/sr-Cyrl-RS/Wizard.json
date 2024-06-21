@@ -1,5 +1,5 @@
 {
-  "Desc": "Молимо поставите DocSpace податке за регистрацију.",
+  "Desc": "Молимо поставите {{productName}} податке за регистрацију.",
   "ErrorEmail": "Неважећа емаил адреса",
   "ErrorInitWizard": "Сервис је тренутно недоступан, молимо покушајте поново касније.",
   "ErrorInitWizardButton": "Покушајте поново",
@@ -11,5 +11,5 @@
   "LicenseLink": "Уговори лиценце",
   "PlaceholderLicense": "Ваша датотека лиценце",
   "Timezone": "Временска зона",
-  "WelcomeTitle": "Добродошли на ваш DocSpace!"
+  "WelcomeTitle": "Добродошли на ваш {{productName}}!"
 }

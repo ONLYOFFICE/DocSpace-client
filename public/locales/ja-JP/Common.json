@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "について",
   "AboutCompanyTitle": "本プログラムについて",
   "AccessDenied": "アクセス拒否",
@@ -51,6 +51,10 @@
   "CommonFiles": "共通のファイル",
   "CompanyName": "企業名",
   "Confirmation": "確認事項",
+  "ConflictResolveDescription": "フォルダ<1>{{folder}}</1>内に<1>{{file}}</1>という名前のファイルがすでに存在しています。",
+  "ConflictResolveDescriptionFiles": "{{filesCount}}フォルダ<1>{{folder}}</1>に同名のドキュメントがすでに存在しています。",
+  "ConflictResolveSelectAction": "アクションをお選びください：",
+  "ConflictResolveTitle": "上書き確認",
   "Connect": "接続",
   "Content": "コンテンツ",
   "Context": "コンテキスト",
@@ -63,6 +67,7 @@
   "Create": "作成",
   "CreateAndCopy": "作成してコピーする",
   "CreateCopy": "コピーの作成",
+  "CreateDescription": "フォルダ内には2種類のファイルが存在します。",
   "CreateFileCopy": "ファイルコピーの作成",
   "CreateMasterFormFromFile": "ファイルからフォームテンプレートを作成する",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -281,6 +286,8 @@
   "orContinueWith": "あるいは",
   "OtherLabel": "その他",
   "OtherOperations": "他の操作",
+  "OverwriteDescription": "このファイルは、同名のファイルにバージョンが追加されます。",
+  "OverwriteTitle": "バージョンアップによる上書き",
   "Owner": "所有者",
   "PageOfTotalPage": "{{page}}の{{totalPage}}",
   "Pages": "ページ",
@@ -399,6 +406,8 @@
   "SignUpWithZoom": " Zoomでサインアップする",
   "Size": "サイズ",
   "SizeImageLarge": "画像サイズが大きすぎるため、別の画像を選択してください。",
+  "SkipDescription": "ファイルはコピーされません。元のファイルはコピー先のフォルダーに保持されます。",
+  "SkipTitle": "スキップ",
   "SomethingWentWrong": "何かが間違っていた.",
   "SortBy": "並べ替え",
   "SpaceManagement": "スペース管理",
@@ -455,14 +464,5 @@
   "Website": "ウェブサイト",
   "Yes": "はい",
   "Yesterday": "昨日",
-  "You": "あなた",
-  "ConflictResolveDescription": "フォルダ<1>{{folder}}</1>内に<1>{{file}}</1>という名前のファイルがすでに存在しています。",
-  "ConflictResolveDescriptionFiles": "{{filesCount}}フォルダ<1>{{folder}}</1>に同名のドキュメントがすでに存在しています。",
-  "ConflictResolveSelectAction": "アクションをお選びください：",
-  "ConflictResolveTitle": "上書き確認",
-  "CreateDescription": "フォルダ内には2種類のファイルが存在します。",
-  "OverwriteDescription": "このファイルは、同名のファイルにバージョンが追加されます。",
-  "OverwriteTitle": "バージョンアップによる上書き",
-  "SkipDescription": "ファイルはコピーされません。元のファイルはコピー先のフォルダーに保持されます。",
-  "SkipTitle": "スキップ"
+  "You": "あなた"
 }

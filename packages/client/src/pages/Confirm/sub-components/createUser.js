@@ -121,6 +121,7 @@ const CreateUserForm = (props) => {
 
   const emailFromLink = linkData?.email ? linkData.email : "";
   const roomName = roomData?.title;
+  const roomId = roomData?.roomId;
 
   const [email, setEmail] = useState(emailFromLink);
   const [emailValid, setEmailValid] = useState(true);
@@ -216,6 +217,14 @@ const CreateUserForm = (props) => {
       setCookie(LANGUAGE, currentCultureName, {
         "max-age": COOKIE_EXPIRATION_YEAR,
       });
+
+      const finalUrl = roomId
+        ? `/rooms/shared/filter?folder=${roomId}`
+        : defaultPage;
+
+      if (roomId) {
+        sessionStorage.setItem("referenceUrl", finalUrl);
+      }
 
       window.location.href = combineUrl(
         window.ClientConfig?.proxy?.url,

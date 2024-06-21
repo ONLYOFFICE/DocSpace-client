@@ -152,7 +152,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   const [widthDimension, setWidthDimension] = useState<TOption>(
     dataDimensions[0],
   );
-  const [heightValue, setHeightValue] = useState("100");
+  const [heightValue, setHeightValue] = useState("820");
   const [heightDimension, setHeightDimension] = useState<TOption>(
     dataDimensions[1],
   );

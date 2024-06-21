@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { Consumer } from "@docspace/shared/utils/context";
 
 import TableView from "./TableView";
@@ -39,13 +39,14 @@ const checkedAccountType = "result";
 
 const AccountsTable = (props: AccountsTableProps) => {
   const {
-    t,
     accountsData,
     viewAs,
     changeGroupType,
     UserTypes,
     toggleAllAccounts,
   } = props as InjectedTypeSelectTableProps;
+
+  const { t, ready } = useTranslation(["ChangeUserTypeDialog", "People"]);
 
   const setTypeDocspaceAdmin = () => {
     changeGroupType(UserTypes.DocSpaceAdmin);
@@ -77,6 +78,8 @@ const AccountsTable = (props: AccountsTableProps) => {
       onClick: setTypeUser,
     },
   ];
+
+  if (!ready) return;
 
   return (
     <Consumer>
@@ -110,6 +113,4 @@ export default inject<TStore>(({ setup, importAccountsStore }) => {
     UserTypes,
     toggleAllAccounts,
   };
-})(
-  withTranslation(["ChangeUserTypeDialog", "People"])(observer(AccountsTable)),
-);
+})(observer(AccountsTable));

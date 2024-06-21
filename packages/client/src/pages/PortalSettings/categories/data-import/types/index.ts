@@ -386,7 +386,7 @@ export interface AccountsPagingProps {
 
 export interface ImportItemProps {
   sectionName: string;
-  SectionIcon: React.FC<React.SVGProps<SVGElement>>;
+  sectionIcon?: string;
   workspace: string;
   isChecked: boolean;
 }
@@ -412,4 +412,25 @@ export interface UsersInfoBlockProps {
   totalUsers: number;
   totalUsedUsers: number;
   totalLicenceLimit: number;
+}
+
+type TExportDetails = { name: string; icon?: string };
+
+export interface ImportStepProps {
+  t: TFunciton;
+  serviceName: string;
+  usersExportDetails: TExportDetails;
+  personalExportDetails: TExportDetails;
+  sharedFilesExportDetails: TExportDetails;
+  sharedFoldersExportDetails: TExportDetails;
+  hasCommonFiles?: boolean;
+  hasProjectFiles?: boolean;
+}
+
+export interface InjectedImportStepProps extends ImportStepProps {
+  incrementStep: TStore["importAccountsStore"]["incrementStep"];
+  decrementStep: TStore["importAccountsStore"]["decrementStep"];
+  importOptions: TStore["importAccountsStore"]["importOptions"];
+  setImportOptions: TStore["importAccountsStore"]["setImportOptions"];
+  user: TStore["userStore"]["user"];
 }

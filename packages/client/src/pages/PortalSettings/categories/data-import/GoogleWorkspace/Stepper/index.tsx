@@ -29,11 +29,12 @@ import { Trans } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
+import PeopleIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
 import SelectFileStep from "../../components/SelectFileStep";
 import SelectUsersStep from "../../components/SelectUsersStep";
 import SelectUsersTypeStep from "../../components/SelectUsersTypeStep";
+import ImportStep from "../../components/ImportStep";
 
-import ImportStep from "./ImportStep";
 import ImportProcessingStep from "./ImportProcessingStep";
 import ImportCompleteStep from "./ImportCompleteStep";
 
@@ -105,14 +106,7 @@ export const getStepsData = (
           />
         </>
       ),
-      component: (
-        <SelectUsersTypeStep
-          t={t}
-          onNextStep={incrementStep}
-          onPrevStep={decrementStep}
-          showReminder
-        />
-      ),
+      component: <SelectUsersTypeStep t={t} />,
     },
     {
       title: t("Settings:DataImport"),
@@ -120,9 +114,20 @@ export const getStepsData = (
       component: (
         <ImportStep
           t={t}
-          onNextStep={incrementStep}
-          onPrevStep={decrementStep}
-          showReminder
+          serviceName="Google Workspace"
+          usersExportDetails={{
+            name: t("Common:Accounts"),
+            icon: PeopleIcon,
+          }}
+          personalExportDetails={{
+            name: t("Settings:GoogleDriveFiles"),
+          }}
+          sharedFilesExportDetails={{
+            name: t("Settings:SharedFiles"),
+          }}
+          sharedFoldersExportDetails={{
+            name: t("Settings:SharedFolders"),
+          }}
         />
       ),
     },

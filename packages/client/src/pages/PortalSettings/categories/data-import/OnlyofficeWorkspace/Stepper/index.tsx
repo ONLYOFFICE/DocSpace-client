@@ -29,11 +29,13 @@ import { Trans } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
+import UserSolidIcon from "PUBLIC_DIR/images/catalog.user.solid.react.svg?url";
+import SharedIcon from "PUBLIC_DIR/images/catalog.old.share.react.svg?url";
 import SelectFileStep from "../../components/SelectFileStep";
 import SelectUsersStep from "../../components/SelectUsersStep";
 import SelectUsersTypeStep from "../../components/SelectUsersTypeStep";
+import ImportStep from "../../components/ImportStep";
 
-import ImportStep from "./ImportStep";
 import ImportProcessingStep from "./ImportProcessingStep";
 import ImportCompleteStep from "./ImportCompleteStep";
 
@@ -105,14 +107,7 @@ export const getStepsData = (
           />
         </>
       ),
-      component: (
-        <SelectUsersTypeStep
-          t={t}
-          onNextStep={incrementStep}
-          onPrevStep={decrementStep}
-          showReminder
-        />
-      ),
+      component: <SelectUsersTypeStep t={t} />,
     },
     {
       title: t("Settings:DataImport"),
@@ -120,9 +115,25 @@ export const getStepsData = (
       component: (
         <ImportStep
           t={t}
-          onNextStep={incrementStep}
-          onPrevStep={decrementStep}
-          showReminder
+          serviceName="ONLYOFFICE Workspace"
+          usersExportDetails={{
+            name: t("Common:People"),
+            icon: UserSolidIcon,
+          }}
+          personalExportDetails={{
+            name: t("Common:MyDocuments"),
+            icon: UserSolidIcon,
+          }}
+          sharedFilesExportDetails={{
+            name: t("Common:SharedWithMe"),
+            icon: SharedIcon,
+          }}
+          sharedFoldersExportDetails={{
+            name: t("Common:SharedWithMe"),
+            icon: SharedIcon,
+          }}
+          hasCommonFiles
+          hasProjectFiles
         />
       ),
     },

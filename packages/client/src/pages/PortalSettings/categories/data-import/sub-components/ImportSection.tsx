@@ -100,12 +100,20 @@ const ImportItemWrapper = styled.div<{ isChecked: boolean }>`
     align-items: center;
     gap: 8px;
 
-    svg {
-      path {
-        fill: ${(props) =>
-          props.isChecked
-            ? props.theme.client.settings.migration.importIconColor
-            : props.theme.client.settings.migration.importItemDisableTextColor};
+    .importSectionIcon {
+      div {
+        display: flex;
+        align-items: center;
+      }
+
+      svg {
+        path {
+          fill: ${(props) =>
+            props.isChecked
+              ? props.theme.client.settings.migration.importIconColor
+              : props.theme.client.settings.migration
+                  .importItemDisableTextColor};
+        }
       }
     }
   }
@@ -133,10 +141,12 @@ const ArrowWrapper = styled.div`
 
 const ImportItem = ({
   sectionName,
-  SectionIcon,
+  sectionIcon,
   workspace,
   isChecked,
 }: ImportItemProps) => {
+  console.log(sectionIcon);
+
   return (
     <ImportItemWrapper isChecked={isChecked}>
       <Text
@@ -148,7 +158,9 @@ const ImportItem = ({
         {workspace}
       </Text>
       <div className="importSection">
-        {SectionIcon && <SectionIcon />}
+        {sectionIcon && (
+          <ReactSVG className="importSectionIcon" src={sectionIcon} />
+        )}
         {sectionName}
       </div>
     </ImportItemWrapper>

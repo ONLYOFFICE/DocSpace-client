@@ -78,6 +78,10 @@ const StyledTableContainer = styled(TableContainer)`
       ${contextCss}
     }
   }
+  .table-container_index-cell {
+    margin-right: 0;
+    padding-right: 0;
+  }
 
   .table-row-selected + .table-row-selected {
     .table-row {
@@ -146,6 +150,7 @@ const Table = ({
   highlightFile,
   currentDeviceType,
   onEditIndex,
+  isIndexing,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -210,6 +215,7 @@ const Table = ({
         index={index}
         onEditIndex={onEditIndex}
         isIndexEditingMode={isIndexEditingMode}
+        isIndexing={isIndexing}
         setFirsElemChecked={setFirsElemChecked}
         setHeaderBorder={setHeaderBorder}
         theme={theme}
@@ -234,6 +240,7 @@ const Table = ({
     highlightFile.isExst,
     isTrashFolder,
     isIndexEditingMode,
+    isIndexing,
   ]);
 
   return (
@@ -246,6 +253,7 @@ const Table = ({
         navigate={navigate}
         location={location}
         isRooms={isRooms}
+        isIndexing={isIndexing}
       />
 
       <TableBody
@@ -299,7 +307,7 @@ export default inject(
       highlightFile,
     } = filesStore;
 
-    const { isIndexEditingMode } = indexingStore;
+    const { isIndexEditingMode, isIndexing } = indexingStore;
     const { changeIndex } = filesActionsStore;
 
     const { withPaging, theme, currentDeviceType } = settingsStore;
@@ -319,6 +327,7 @@ export default inject(
       isRooms,
       isTrashFolder,
       isIndexEditingMode,
+      isIndexing,
       withPaging,
       columnStorageName,
       columnInfoPanelStorageName,

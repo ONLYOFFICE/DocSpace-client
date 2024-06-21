@@ -293,6 +293,30 @@ const StyledTableRow = styled(TableRow)`
     ${(props) => props.dragging && rowCheckboxDraggingStyle};
   }
 
+  .table-container_element-wrapper {
+    ${(props) =>
+      props.isIndexing &&
+      css`
+        margin-left: 0px;
+        padding-left: 0px;
+      `}
+  }
+
+  ${(props) =>
+    props.isIndexing &&
+    css`
+      .table-container_file-name-cell {
+        margin-left: 0px !important;
+        padding-left: 0px !important;
+      }
+      &:hover {
+        .table-container_file-name-cell {
+          margin-left: 0px !important;
+          padding-left: 0px !important;
+        }
+      }
+    `}
+
   .table-container_row-context-menu-wrapper {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"

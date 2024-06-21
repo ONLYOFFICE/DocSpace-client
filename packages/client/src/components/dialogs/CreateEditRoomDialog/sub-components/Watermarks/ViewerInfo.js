@@ -136,20 +136,18 @@ const ViewerInfoWatermark = ({
   const initialInfoRef = initialInfo.current;
 
   useEffect(() => {
-    setWatermarks(
-      {
-        rotate: initialInfoRef.rotate.key,
-        text: initialInfoRef.text,
-        additions:
-          initialWatermarksSettings?.additions || WatermarkAdditions.UserName,
-        isImage: false,
-        enabled: true,
-        imageWidth: 0,
-        imageHeight: 0,
-        imageScale: 0,
-      },
-      true,
-    );
+    if (!isEdit) return;
+
+    setWatermarks({
+      rotate: initialInfoRef.rotate.key,
+      additions: WatermarkAdditions.UserName,
+      isImage: false,
+      enabled: true,
+      image: "",
+      imageWidth: 0,
+      imageHeight: 0,
+      imageScale: 0,
+    });
   }, []);
 
   const [selectedPosition, setSelectedPosition] = useState(
@@ -227,9 +225,9 @@ const ViewerInfoWatermark = ({
 
 export default inject(({ createEditRoomStore }) => {
   const { setWatermarks, initialWatermarksSettings } = createEditRoomStore;
+
   return {
     setWatermarks,
-
     initialWatermarksSettings,
   };
 })(observer(ViewerInfoWatermark));

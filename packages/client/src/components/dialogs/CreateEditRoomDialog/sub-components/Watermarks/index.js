@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -60,10 +60,6 @@ const Watermarks = ({ isEdit, setWatermarks, initialWatermarksSettings }) => {
   const [type, setType] = useState(
     getOptionType(initialWatermarksSettings?.additions, isEdit),
   );
-
-  useEffect(() => {
-    !isEdit && setWatermarks({ isImage: type === imageWatermark });
-  }, []);
 
   const onSelectType = (e) => {
     const { value } = e.target;

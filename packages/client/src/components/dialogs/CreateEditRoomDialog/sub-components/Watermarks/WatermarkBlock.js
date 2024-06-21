@@ -60,14 +60,11 @@ const WatermarkBlock = ({
   setWatermarks,
   isEdit = false,
   isWatermarks = false,
-  initialWatermarksSettings,
+  resetWatermarks,
   t,
 }) => {
   useEffect(() => {
-    setWatermarks(
-      isEdit ? initialWatermarksSettings : { enabled: watermarksChecked },
-      true,
-    );
+    return () => resetWatermarks();
   }, []);
 
   const [watermarksChecked, setWatermarksChecked] = useState(
@@ -94,10 +91,12 @@ const WatermarkBlock = ({
 };
 
 export default inject(({ createEditRoomStore }) => {
-  const { setWatermarks, initialWatermarksSettings } = createEditRoomStore;
+  const { setWatermarks, initialWatermarksSettings, resetWatermarks } =
+    createEditRoomStore;
+
   return {
     setWatermarks,
     isWatermarks: initialWatermarksSettings?.enabled,
-    initialWatermarksSettings,
+    resetWatermarks,
   };
 })(observer(WatermarkBlock));

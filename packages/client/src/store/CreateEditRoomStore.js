@@ -49,7 +49,8 @@ class CreateEditRoomStore {
   settingsStore = null;
   infoPanelStore = null;
   currentQuotaStore = null;
-  watermarksSettings = null;
+  watermarksSettings = {};
+  initialWatermarksSettings = null;
   isImageType = false;
 
   constructor(
@@ -97,26 +98,24 @@ class CreateEditRoomStore {
   };
 
   setInitialWatermarks = (watermarksSettings) => {
-    if (!watermarksSettings) {
-      this.initialWatermarksSettings = { enabled: false };
+    this.initialWatermarksSettings = !watermarksSettings
+      ? { enabled: false }
+      : watermarksSettings;
 
-      return;
-    }
+    this.initialWatermarksSettings.isImage =
+      !!this.initialWatermarksSettings.imageUrl;
 
-    this.initialWatermarksSettings = watermarksSettings;
-    this.initialWatermarksSettings.isImage = !!watermarksSettings.imageUrl;
+    this.setWatermarks(this.initialWatermarksSettings);
   };
 
-  setWatermarks = (watermarksSettings, isReplacing) => {
-    if (isReplacing) {
-      this.watermarksSettings = watermarksSettings;
-      return;
+  setWatermarks = (object) => {
+    for (const [key, value] of Object.entries(object)) {
+      this.watermarksSettings[key] = value;
     }
+  };
 
-    this.watermarksSettings = {
-      ...this.watermarksSettings,
-      ...watermarksSettings,
-    };
+  resetWatermarks = () => {
+    this.watermarksSettings = {};
   };
 
   isEqualWatermarkChanges = () => {
@@ -146,31 +145,40 @@ class CreateEditRoomStore {
       });
     }
 
+    const watermarkImage = this.watermarksSettings.image;
     const getMeta = (url, onSetInfo) => {
+      //url for this.watermarksSettings.image.viewUrl
       const img = new Image();
+      const imgUrl = url ?? URL.createObjectURL(watermarkImage);
+      img.src = imgUrl;
 
-      img.onload = () => onSetInfo(null, img);
+      img.onload = () => {
+        URL.revokeObjectURL(imgUrl);
+        onSetInfo(null, img);
+      };
+
       img.onerror = (err) => onSetInfo(err);
-      img.src = url;
     };
 
-    //TODO: Return the decision when it will be possible to upload images.
-    //const { uploadRoomLogo } = this.filesStore;
-    //  const watermarkImage = this.watermarksSettings.image;
-    //  const uploadWatermarkData = new FormData();
-    //  uploadWatermarkData.append(0, watermarkImage);
-    //  const response = await uploadRoomLogo(uploadWatermarkData);
+    const { uploadRoomLogo } = this.filesStore;
 
-    const imageInfo = this.watermarksSettings.image;
+    const uploadWatermarkData = new FormData();
+    uploadWatermarkData.append(0, watermarkImage);
 
-    getMeta(imageInfo.viewUrl, (err, img) => {
-      if (err) return;
+    const response = await uploadRoomLogo(uploadWatermarkData);
 
-      setWatermarkSettings(room.id, {
+    getMeta(null, (err, img) => {
+      if (err) {
+        toastr.error(err);
+        return;
+      }
+
+      return setWatermarkSettings(room.id, {
         enabled: this.watermarksSettings.enabled,
         imageScale: this.watermarksSettings.imageScale,
         rotate: this.watermarksSettings.rotate,
-        imageId: imageInfo.id,
+        imageUrl: response.data,
+        // imageId: this.watermarksSettings.image.id,
         imageWidth: img.naturalWidth,
         imageHeight: img.naturalHeight,
       });

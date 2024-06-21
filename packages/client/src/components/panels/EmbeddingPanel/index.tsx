@@ -24,25 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { withTranslation, Trans } from "react-i18next";
 import copy from "copy-to-clipboard";
+import isEqual from "lodash/isEqual";
 import { objectToGetParams } from "@docspace/shared/utils/common";
 
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { Scrollbar } from "@docspace/shared/components/scrollbar/custom-scrollbar";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { TOption } from "@docspace/shared/components/combobox";
+import { ComboBox, TOption } from "@docspace/shared/components/combobox";
+import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { TTranslation } from "@docspace/shared/types";
 import { TColorScheme, TTheme } from "@docspace/shared/themes";
-import DialogsStore from "SRC_DIR/store/DialogsStore";
+
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import {
@@ -62,6 +63,8 @@ import { StyledModalDialog, StyledBody } from "./StyledEmbeddingPanel";
 
 import { DisplayBlock } from "./sub-components/DisplayBlock";
 import { CheckboxElement } from "./sub-components/CheckboxElement";
+import PublicRoomStore from "../../../store/PublicRoomStore";
+import DialogsStore from "../../../store/DialogsStore";
 
 type LinkParamsLinkShareToType = {
   denyDownload: boolean;
@@ -86,8 +89,7 @@ type LinkParamsLinkType = {
 };
 
 type LinkParamsType = {
-  roomId?: number | string;
-  fileId?: number | string;
+  roomId: number | string;
   isEdit?: boolean;
   link: LinkParamsLinkType;
 };
@@ -98,13 +100,21 @@ type EmbeddingPanelProps = {
   requestToken: string;
   roomId: number;
   visible: boolean;
-  setEmbeddingPanelIsVisible: (value: boolean) => void;
+  setEmbeddingPanelData: (value: {
+    visible: boolean;
+    fileId?: string | number;
+  }) => void;
   setEditLinkPanelIsVisible: (value: boolean) => void;
   currentColorScheme: TColorScheme;
-  denyDownload: boolean;
   linkParams: LinkParamsType;
   setLinkParams: (linkParams: LinkParamsType) => void;
+  fetchExternalLinks: (roomId: string | number) => LinkParamsLinkType[];
   isAdmin: boolean;
+  fileId?: string | number;
+};
+
+type TOptionType = TOption & {
+  sharedTo: LinkParamsLinkShareToType;
 };
 
 const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
@@ -112,22 +122,26 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     t,
     theme,
     visible,
-    setEmbeddingPanelIsVisible,
+    setEmbeddingPanelData,
     setEditLinkPanelIsVisible,
     currentColorScheme,
     linkParams,
     setLinkParams,
+    fetchExternalLinks,
     isAdmin,
+    fileId,
   } = props;
 
-  const { roomId, link, fileId } = linkParams;
+  const { roomId, link } = linkParams;
 
-  const requestToken = link?.sharedTo?.requestToken;
-  const linkTitle = link?.sharedTo?.title;
-  const withPassword = link?.sharedTo?.password;
-  const denyDownload = link?.sharedTo?.denyDownload;
+  const navigate = useNavigate();
 
+  const [sharedLinksOptions, setSharedLinksOptions] = useState<TOptionType[]>(
+    [],
+  );
+  const [selectedLink, setSelectedLink] = useState<TOptionType>();
   const [barIsVisible, setBarIsVisible] = useState(!!fileId);
+  const [isLoading, setIsLoading] = useState(false);
 
   const dataDimensions = [
     { key: "percent", label: "%", default: true },
@@ -145,17 +159,16 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 
   const fileConfig = {
     mode: "viewer",
-    width: "100%",
-    height: "100%",
+    width: `${widthValue}${dataDimensions[0].label}`,
+    height: `${heightValue}${dataDimensions[1].label}`,
     frameId: "ds-frame",
     init: true,
     id: fileId,
-    requestToken,
   };
 
   const roomConfig = {
     width: `${widthValue}${dataDimensions[0].label}`,
-    height: `${heightValue}${dataDimensions[0].label}`,
+    height: `${heightValue}${dataDimensions[1].label}`,
     frameId: "ds-frame",
     showHeader: true,
     showTitle: true,
@@ -163,7 +176,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     showFilter: true,
     mode: "manager",
     init: true,
-    requestToken,
+    requestToken: link?.sharedTo?.requestToken,
     rootPath: "/rooms/share",
     id: roomId,
     filter: {
@@ -182,8 +195,32 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   const params = objectToGetParams(config);
   const codeBlock = `<div id="${config.frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
 
+  const currentLink = selectedLink ?? link;
+
+  const linkTitle = currentLink?.sharedTo?.title;
+  const withPassword = currentLink?.sharedTo?.password;
+  const denyDownload = currentLink?.sharedTo?.denyDownload;
+
+  const contentRestrictedTitle = t("EmbeddingPanel:ContentRestricted");
+  const withPasswordTitle = t("EmbeddingPanel:LinkProtectedWithPassword");
+
+  let barSubTitle = "";
+
+  if (withPassword) {
+    barSubTitle = withPasswordTitle;
+
+    if (denyDownload) {
+      barSubTitle += ` ${contentRestrictedTitle}`;
+    }
+  } else {
+    barSubTitle = contentRestrictedTitle;
+  }
+
+  const showLinkBar =
+    selectedLink?.sharedTo?.password || selectedLink?.sharedTo?.denyDownload;
+
   const onClose = () => {
-    setEmbeddingPanelIsVisible(false);
+    setEmbeddingPanelData({ visible: false });
   };
 
   const onChangeWidth = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -192,6 +229,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
       return { ...config, width: `${e.target.value}${widthDimension.label}` };
     });
   };
+
   const onChangeHeight = (e: React.ChangeEvent<HTMLInputElement>) => {
     setHeightValue(e.target.value);
     setConfig((config) => {
@@ -205,6 +243,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
       return { ...config, width: `${widthValue}${item.label}` };
     });
   };
+
   const onChangeHeightDimension = (item: TOption) => {
     setHeightDimension(item);
     setConfig((config) => {
@@ -235,27 +274,101 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   };
 
   const onEditLink = () => {
-    setLinkParams({ ...linkParams, isEdit: true });
+    setLinkParams({ ...linkParams, isEdit: true, link: selectedLink ?? link });
     setEditLinkPanelIsVisible(true);
+  };
+
+  const onChangeSharedLink = (item: TOptionType) => {
+    setSelectedLink(item);
+    setConfig((config) => {
+      return { ...config, requestToken: item?.sharedTo?.requestToken };
+    });
   };
 
   const onCloseBar = () => {
     setBarIsVisible(false);
   };
 
-  const navigate = useNavigate();
   const onOpenDevTools = () => {
     navigate("/portal-settings/developer-tools");
     onClose();
   };
 
-  const onKeyPress = (e: KeyboardEvent) =>
-    (e.key === "Esc" || e.key === "Escape") && onClose();
+  const onKeyPress = (e: KeyboardEvent) => {
+    if (e.key === "Esc" || e.key === "Escape") {
+      onClose();
+    }
+  };
 
   useEffect(() => {
     document.addEventListener("keyup", onKeyPress);
     return () => document.removeEventListener("keyup", onKeyPress);
   });
+
+  const getLinks = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const roomLinks = await fetchExternalLinks(roomId);
+
+      if (roomLinks && roomLinks.length) {
+        const linksOptions = roomLinks.map((l: LinkParamsLinkType) => {
+          return {
+            key: l.sharedTo?.id,
+            label: l.sharedTo?.title,
+            sharedTo: l.sharedTo,
+          } as TOptionType;
+        });
+
+        setSelectedLink(linksOptions[0]);
+        setSharedLinksOptions(linksOptions);
+
+        onChangeSharedLink(linksOptions[0]);
+      }
+    } catch (error) {
+      toastr.error(error as TData);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [roomId, fetchExternalLinks]);
+
+  useEffect(() => {
+    if (fileId) {
+      getLinks();
+    }
+  }, [fileId, getLinks]);
+
+  const usePrevious = (value: LinkParamsLinkType | null) => {
+    const ref = useRef<LinkParamsLinkType | null>();
+    useEffect(() => {
+      ref.current = value;
+    });
+    return ref.current;
+  };
+
+  const prevLink = usePrevious(link ?? null);
+
+  useEffect(() => {
+    if (sharedLinksOptions?.length && prevLink && !isEqual(prevLink, link)) {
+      const newSharedLinks = [...sharedLinksOptions];
+      const newLinkIndex = newSharedLinks.findIndex(
+        (l) => l.sharedTo.id === link.sharedTo?.id,
+      );
+
+      if (newLinkIndex > -1)
+        newSharedLinks[newLinkIndex] = {
+          key: link.sharedTo?.id,
+          label: link.sharedTo?.title,
+          sharedTo: link.sharedTo,
+        } as TOptionType;
+
+      setSharedLinksOptions(newSharedLinks);
+      setSelectedLink({
+        key: link.sharedTo?.id,
+        label: link.sharedTo?.title,
+        sharedTo: link.sharedTo,
+      } as TOptionType);
+    }
+  }, [link, prevLink, sharedLinksOptions]);
 
   const barTitle = (
     <div className="embedding-panel_bar-header">
@@ -266,6 +379,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
         fontWeight={600}
         color={currentColorScheme?.main?.accent}
         onClick={onEditLink}
+        isTextOverflow
       >
         {linkTitle}
       </Link>
@@ -274,23 +388,6 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
       </Text>
     </div>
   );
-
-  const contentRestrictedTitle = t("EmbeddingPanel:ContentRestricted");
-  const withPasswordTitle = t("EmbeddingPanel:LinkProtectedWithPassword");
-
-  let barSubTitle = "";
-
-  if (withPassword) {
-    barSubTitle = withPasswordTitle;
-
-    if (denyDownload) {
-      barSubTitle += ` ${contentRestrictedTitle}`;
-    }
-  } else {
-    barSubTitle = contentRestrictedTitle;
-  }
-
-  const showLinkBar = (withPassword || denyDownload) && roomId;
 
   return (
     <StyledModalDialog
@@ -340,6 +437,27 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
               </Text>
             )}
 
+            {sharedLinksOptions && sharedLinksOptions.length > 1 && (
+              <>
+                <Text
+                  className="embedding-panel_header-link"
+                  fontSize="15px"
+                  fontWeight={600}
+                >
+                  {t("EmbeddingPanel:Link")}
+                </Text>
+                <ComboBox
+                  className="embedding-panel_combo-box"
+                  scaled
+                  onSelect={onChangeSharedLink}
+                  options={sharedLinksOptions}
+                  selectedOption={selectedLink as TOption}
+                  displaySelectedOption
+                  directionY="bottom"
+                />
+              </>
+            )}
+
             {showLinkBar && (
               <PublicRoomBar
                 className="embedding-panel_bar"
@@ -354,7 +472,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
               fontSize="15px"
               fontWeight={600}
             >
-              {t("JavascriptSdk:CustomizingDisplay")}
+              {t("EmbeddingPanel:DisplaySettings")}
             </Text>
 
             <div className="embedding-panel_inputs-container">
@@ -434,6 +552,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
           primary
           onClick={onCopyAndClose}
           label={t("Common:Copy")}
+          isLoading={isLoading}
         />
         <Button
           className="cancel-button"
@@ -441,6 +560,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
           size={ButtonSize.normal}
           onClick={onClose}
           label={t("Common:CancelButton")}
+          isLoading={isLoading}
         />
       </ModalDialog.Footer>
     </StyledModalDialog>
@@ -452,31 +572,34 @@ export default inject(
     dialogsStore,
     settingsStore,
     userStore,
+    publicRoomStore,
   }: {
     dialogsStore: DialogsStore;
     settingsStore: SettingsStore;
     userStore: UserStore;
+    publicRoomStore: PublicRoomStore;
   }) => {
     const {
-      embeddingPanelIsVisible,
-      setEmbeddingPanelIsVisible,
+      embeddingPanelData,
+      setEmbeddingPanelData,
       linkParams,
       setEditLinkPanelIsVisible,
       setLinkParams,
     } = dialogsStore;
     const { theme, currentColorScheme } = settingsStore;
-
     const { user } = userStore;
+    const { fetchExternalLinks } = publicRoomStore;
 
     return {
       theme,
       currentColorScheme,
-      visible: embeddingPanelIsVisible,
-      setEmbeddingPanelIsVisible,
+      visible: embeddingPanelData.visible,
+      fileId: embeddingPanelData.fileId,
+      setEmbeddingPanelData,
       setEditLinkPanelIsVisible,
       linkParams,
       setLinkParams,
-
+      fetchExternalLinks,
       isAdmin: user?.isAdmin,
     };
   },

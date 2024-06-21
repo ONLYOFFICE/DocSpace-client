@@ -447,7 +447,7 @@ class ContextOptionsStore {
   onOpenEmbeddingSettings = async (item) => {
     const { shared, navigationPath, getSelectedFolder } =
       this.selectedFolderStore;
-    const { setLinkParams, setEmbeddingPanelIsVisible } = this.dialogsStore;
+    const { setLinkParams, setEmbeddingPanelData } = this.dialogsStore;
 
     const sharedItem = shared
       ? getSelectedFolder()
@@ -455,23 +455,16 @@ class ContextOptionsStore {
 
     if (!sharedItem) return;
 
-    try {
-      const itemLink = await getFileLink(item.id);
+    const isPublicRoomType = sharedItem.roomType === RoomsType.PublicRoom;
+    const isFormRoom = sharedItem.roomType === RoomsType.FormRoom;
 
-      const isPublicRoomType = sharedItem.roomType === RoomsType.PublicRoom;
-      const isFormRoom = sharedItem.roomType === RoomsType.FormRoom;
+    setLinkParams({
+      roomId: sharedItem?.id,
+      isPublic: isPublicRoomType,
+      isFormRoom,
+    });
 
-      setLinkParams({
-        link: itemLink,
-        roomId: sharedItem?.id,
-        fileId: item.id,
-        isPublic: isPublicRoomType,
-        isFormRoom,
-      });
-      setEmbeddingPanelIsVisible(true);
-    } catch (error) {
-      toastr.error(error);
-    }
+    setEmbeddingPanelData({ visible: true, fileId: item.id });
   };
 
   onCreateAndCopySharedLink = async (item, t) => {

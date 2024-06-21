@@ -60,7 +60,7 @@ const LinkRow = (props) => {
     editExternalLink,
     setEditLinkPanelIsVisible,
     setDeleteLinkDialogVisible,
-    setEmbeddingPanelIsVisible,
+    setEmbeddingPanelData,
     isArchiveFolder,
     theme,
     setIsScrollLocked,
@@ -132,7 +132,7 @@ const LinkRow = (props) => {
 
   const onEmbeddingClick = () => {
     setLinkParams({ link, roomId, isPublic: isPublicRoomType, isFormRoom });
-    setEmbeddingPanelIsVisible(true);
+    setEmbeddingPanelData({ visible: true });
     onCloseContextMenu();
   };
 
@@ -314,7 +314,7 @@ export default inject(
     const {
       setEditLinkPanelIsVisible,
       setDeleteLinkDialogVisible,
-      setEmbeddingPanelIsVisible,
+      setEmbeddingPanelData,
       setLinkParams,
     } = dialogsStore;
     const { editExternalLink, setExternalLink } = publicRoomStore;
@@ -327,7 +327,7 @@ export default inject(
       setExternalLink,
       setEditLinkPanelIsVisible,
       setDeleteLinkDialogVisible,
-      setEmbeddingPanelIsVisible,
+      setEmbeddingPanelData,
       isArchiveFolder: isArchiveFolderRoot,
       theme,
       isPublicRoomType:

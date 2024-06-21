@@ -34,6 +34,14 @@ const StyledModalDialog = styled(ModalDialog)`
 `;
 
 const StyledBody = styled.div`
+  .embedding-panel_header-link {
+    margin: 10px 0 2px;
+  }
+
+  .embedding-panel_combo-box {
+    margin-bottom: 6px;
+  }
+
   .embedding-panel_banner {
     display: flex;
     padding: 12px 16px;

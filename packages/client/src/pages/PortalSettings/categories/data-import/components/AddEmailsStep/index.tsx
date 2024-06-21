@@ -127,11 +127,7 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
   return (
     <Wrapper>
       {users.withoutEmail.length > 0 && (
-        <NoEmailUsersBlock
-          t={t}
-          users={users.withoutEmail.length}
-          isCurrentStep
-        />
+        <NoEmailUsersBlock t={t} users={users.withoutEmail.length} />
       )}
 
       {users.withoutEmail.length > 0 ? (

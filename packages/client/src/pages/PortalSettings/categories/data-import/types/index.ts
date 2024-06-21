@@ -400,3 +400,8 @@ export interface ImportSectionProps {
   exportSection: Omit<ImportItemProps, "isChecked">;
   importSection: Omit<ImportItemProps, "isChecked">;
 }
+
+export interface NoEmailUsersProps {
+  t: TFunciton;
+  users: number;
+}

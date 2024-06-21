@@ -3992,6 +3992,15 @@ class FilesStore {
     return this.filter.total;
   }
 
+  get indexColumnSize() {
+    if (!this.indexingStore.isIndexing) return;
+
+    let minWidth = 36;
+    const lastFile = this.filesList[this.filesList.length - 1];
+
+    return minWidth + lastFile?.order?.length * 3;
+  }
+
   get hasMoreFiles() {
     const { isRoomsFolder, isArchiveFolder } = this.treeFoldersStore;
 

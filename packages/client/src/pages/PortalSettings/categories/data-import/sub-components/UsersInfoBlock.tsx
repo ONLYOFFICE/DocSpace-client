@@ -28,6 +28,7 @@ import styled from "styled-components";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
+import { UsersInfoBlockProps } from "../types";
 
 const Wrapper = styled.div`
   margin: 16px 0;
@@ -40,7 +41,10 @@ const Wrapper = styled.div`
   }
 `;
 
-const UsersInfoWrapper = styled.div`
+const UsersInfoWrapper = styled.div<{
+  selectedUsers: number;
+  totalLicenceLimit: number;
+}>`
   display: flex;
   align-items: center;
   width: fit-content;
@@ -89,7 +93,7 @@ const UsersInfoBlock = ({
   totalUsers,
   totalUsedUsers,
   totalLicenceLimit,
-}) => {
+}: UsersInfoBlockProps) => {
   return (
     <Wrapper>
       {selectedUsers > totalLicenceLimit && (

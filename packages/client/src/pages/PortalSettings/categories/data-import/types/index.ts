@@ -405,3 +405,11 @@ export interface NoEmailUsersProps {
   t: TFunciton;
   users: number;
 }
+
+export interface UsersInfoBlockProps {
+  t: TFunciton;
+  selectedUsers: number;
+  totalUsers: number;
+  totalUsedUsers: number;
+  totalLicenceLimit: number;
+}

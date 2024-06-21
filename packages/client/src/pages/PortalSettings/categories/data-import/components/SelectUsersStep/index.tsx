@@ -167,6 +167,7 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
               t={t}
               numberOfItems={withEmailUsers.length}
               setDataPortion={handleDataChange}
+              pagesPerPage={PAGE_SIZE}
             />
           )}
         </>

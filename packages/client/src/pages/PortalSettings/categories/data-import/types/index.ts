@@ -135,7 +135,7 @@ export interface InjectedSelectUsersStepProps extends SelectUsersStepProps {
 }
 
 export interface AccountsTableProps {
-  t: TFunciton;
+  t?: TFunciton;
   accountsData: TStore["importAccountsStore"]["withEmailUsers"];
 }
 
@@ -375,4 +375,11 @@ export interface TypeSelectRowContentProps {
 export interface InjectedTypeSelectRowContentProps
   extends TypeSelectRowContentProps {
   changeUserType: TStore["importAccountsStore"]["changeUserType"];
+}
+
+export interface AccountsPagingProps {
+  t: TFunciton;
+  numberOfItems: number;
+  setDataPortion: (leftBoundary: number, rightBoundary: number) => void;
+  pagesPerPage?: number;
 }

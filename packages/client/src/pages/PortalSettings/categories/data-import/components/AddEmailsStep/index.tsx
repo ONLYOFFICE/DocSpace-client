@@ -165,6 +165,7 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
               t={t}
               numberOfItems={users.withoutEmail.length}
               setDataPortion={handleDataChange}
+              pagesPerPage={PAGE_SIZE}
             />
           )}
         </>

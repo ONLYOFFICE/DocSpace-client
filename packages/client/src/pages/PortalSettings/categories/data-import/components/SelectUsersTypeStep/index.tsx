@@ -105,13 +105,14 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
             size={InputSize.base}
           />
 
-          <AccountsTable t={t} accountsData={filteredAccounts} />
+          <AccountsTable accountsData={filteredAccounts} />
 
           {filteredUsers.length > PAGE_SIZE && filteredAccounts.length > 0 && (
             <AccountsPaging
               t={t}
               numberOfItems={filteredUsers.length}
               setDataPortion={handleDataChange}
+              pagesPerPage={PAGE_SIZE}
             />
           )}
 

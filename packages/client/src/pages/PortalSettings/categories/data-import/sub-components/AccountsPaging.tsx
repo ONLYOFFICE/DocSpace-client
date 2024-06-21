@@ -27,6 +27,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { Paging } from "@docspace/shared/components/paging";
+import { AccountsPagingProps } from "../types";
 
 const StyledPaging = styled(Paging)`
   display: flex;
@@ -35,14 +36,14 @@ const StyledPaging = styled(Paging)`
   justify-content: center;
 `;
 
-const AccountsPaging = (props) => {
-  const { t, numberOfItems, setDataPortion } = props;
+const AccountsPaging = (props: AccountsPagingProps) => {
+  const { t, numberOfItems, setDataPortion, pagesPerPage = 25 } = props;
 
-  const createPageItems = (count) => {
-    let pageItems = [];
-    for (let i = 0; i < count; i++) {
+  const createPageItems = (count: number) => {
+    const pageItems: { key: string; label: string; pageNumber: number }[] = [];
+    for (let i = 0; i < count; i += 1) {
       pageItems.push({
-        key: i + 1 + "-page-of-" + count,
+        key: `${i + 1}-page-of-${count}`,
         label: t("Common:PageOfTotalPage", { page: i + 1, totalPage: count }),
         pageNumber: i,
       });
@@ -53,18 +54,18 @@ const AccountsPaging = (props) => {
   const countItems = [
     {
       key: "25-items-per-page",
-      label: t("Common:CountPerPage", { count: 25 }),
-      count: 25,
+      label: t("Common:CountPerPage", { count: pagesPerPage }),
+      count: pagesPerPage,
     },
     {
       key: "50-items-per-page",
-      label: t("Common:CountPerPage", { count: 50 }),
-      count: 50,
+      label: t("Common:CountPerPage", { count: pagesPerPage * 2 }),
+      count: pagesPerPage * 2,
     },
     {
       key: "100-items-per-page",
-      label: t("Common:CountPerPage", { count: 100 }),
-      count: 100,
+      label: t("Common:CountPerPage", { count: pagesPerPage * 3 }),
+      count: pagesPerPage * 3,
     },
   ];
 
@@ -97,13 +98,17 @@ const AccountsPaging = (props) => {
     }
   };
 
-  const onSelectPage = (selectedPage) => {
+  const onSelectPage = (selectedPage: { pageNumber: number }) => {
     const count = selectedPage.pageNumber * selectedCountItem.count;
     setDataPortion(count, count + selectedCountItem.count);
     setSelectedPageItems(pageItems[selectedPage.pageNumber]);
   };
 
-  const onCountChange = (countItem) => {
+  const onCountChange = (countItem: {
+    key: string;
+    label: string;
+    count: number;
+  }) => {
     setSelectedCountItem(countItem);
     setDataPortion(0, countItem.count);
     const tempPageItems = createPageItems(
@@ -127,8 +132,8 @@ const AccountsPaging = (props) => {
       nextAction={onSelectPageNextHandler}
       selectedPageItem={selectedPageItem}
       selectedCountItem={selectedCountItem}
-      disablePrevious={!Boolean(pageItems[selectedPageItem.pageNumber - 1])}
-      disableNext={!Boolean(pageItems[selectedPageItem.pageNumber + 1])}
+      disablePrevious={!pageItems[selectedPageItem.pageNumber - 1]}
+      disableNext={!pageItems[selectedPageItem.pageNumber + 1]}
     />
   );
 };

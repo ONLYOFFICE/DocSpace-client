@@ -50,6 +50,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import HeaderUrl from "PUBLIC_DIR/images/sdk-presets_header.react.svg?url";
@@ -191,9 +192,8 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 
   const [config, setConfig] = useState(fileId ? fileConfig : roomConfig);
 
-  const scriptUrl = `${window.location.origin}/static/scripts/api.js`;
   const params = objectToGetParams(config);
-  const codeBlock = `<div id="${config.frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
+  const codeBlock = `<div id="${config.frameId}">Fallback text</div>\n<script src="${SDK_SCRIPT_URL}${params}"></script>`;
 
   const currentLink = selectedLink ?? link;
 

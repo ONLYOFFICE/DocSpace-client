@@ -3148,6 +3148,11 @@ const Dark: TTheme = {
   dateTimePicker: {
     colorClockIcon: darkGrayDark,
   },
+
+  embeddingPanel: {
+    descriptionTextColor: "#ADADAD",
+    iconColor: "#ADADAD",
+  },
   completedForm: {
     linkColor: white,
     descriptionColor: darkGrayDark,

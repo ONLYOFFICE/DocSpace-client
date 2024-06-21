@@ -3167,6 +3167,11 @@ export const getBaseTheme = () => {
       colorClockIcon: lightGrayDark,
     },
 
+    embeddingPanel: {
+      descriptionTextColor: "#657077",
+      iconColor: "#657077",
+    },
+
     completedForm: {
       linkColor: lightBlueMain,
       descriptionColor: gray,

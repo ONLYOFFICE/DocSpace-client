@@ -1522,7 +1522,7 @@ class ContextOptionsStore {
         label: t("Common:Duplicate"),
         icon: DuplicateReactSvgUrl,
         onClick: () => this.onDuplicateRoom(item, t),
-        disabled: false,
+        disabled: !item.security?.Duplicate,
       },
       {
         id: "option_download",

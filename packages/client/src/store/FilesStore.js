@@ -2297,6 +2297,7 @@ class FilesStore {
       const canPinRoom = item.security?.Pin;
 
       const canEditRoom = item.security?.EditRoom;
+      const canDuplicateRoom = item.security?.Duplicate;
 
       const canViewRoomInfo = item.security?.Read;
       const canMuteRoom = item.security?.Mute;
@@ -2352,11 +2353,16 @@ class FilesStore {
         roomOptions = this.removeOptions(roomOptions, ["delete"]);
       }
 
+      if (!canDuplicate) {
+        roomOptions = this.removeOptions(roomOptions, ["copy-room"]);
+      }
+
       if (!canDownload) {
-        roomOptions = this.removeOptions(roomOptions, [
-          "separator1",
-          "download",
-        ]);
+        roomOptions = this.removeOptions(roomOptions, ["download"]);
+      }
+
+      if (!canDownload && !canDuplicate) {
+        roomOptions = this.removeOptions(roomOptions, ["separator1"]);
       }
 
       if (!item.providerKey) {

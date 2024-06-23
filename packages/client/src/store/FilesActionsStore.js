@@ -52,6 +52,7 @@ import {
   removeShareFiles,
   createFolder,
   moveToFolder,
+  duplicateRoom,
   getFolder,
   deleteFilesFromRecent,
 } from "@docspace/shared/api/files";
@@ -1134,6 +1135,72 @@ class FilesActionStore {
           this.updateCurrentFolder(null, [id], null, operationId),
           this.treeFoldersStore.fetchTreeFolders(),
         ]);
+      });
+  };
+
+  duplicateRoomAction = async (item, label) => {
+    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
+      this.uploadDataStore.secondaryProgressDataStore;
+
+    const { clearActiveOperations } = this.uploadDataStore;
+
+    this.setSelectedItems(item.title, 1);
+
+    const folderIds = [item.id];
+    const fileIds = [];
+    console.log(item, label);
+    const operationId = uniqueid("operation_");
+
+    setSecondaryProgressBarData({
+      icon: "duplicate-room",
+      visible: true,
+      percent: 0,
+      label,
+      alert: false,
+      operationId,
+    });
+
+    this.filesStore.addActiveItems(fileIds, folderIds);
+
+    return duplicateRoom(folderIds, fileIds)
+      .then(async (res) => {
+        const lastResult = res && res[res.length - 1];
+
+        if (lastResult?.error) return Promise.reject(lastResult.error);
+
+        const pbData = { icon: "duplicate-room", operationId };
+        const data = lastResult || null;
+
+        const operationData = await this.uploadDataStore.loopFilesOperations(
+          data,
+          pbData,
+        );
+
+        if (!operationData || operationData.error || !operationData.finished) {
+          return Promise.reject(
+            operationData?.error ? operationData.error : "",
+          );
+        }
+
+        return setTimeout(
+          () => clearSecondaryProgressData(operationId),
+          TIMEOUT,
+        );
+      })
+      .catch((err) => {
+        clearActiveOperations(fileIds, folderIds);
+        setSecondaryProgressBarData({
+          icon: "duplicate-room",
+          visible: true,
+          alert: true,
+          operationId,
+        });
+        setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+        return toastr.error(err.message ? err.message : err);
+      })
+      .finally(() => {
+        clearActiveOperations(null, folderIds);
+        this.setGroupMenuBlocked(false);
       });
   };
 

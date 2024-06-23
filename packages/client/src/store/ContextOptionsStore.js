@@ -536,6 +536,10 @@ class ContextOptionsStore {
       .catch((err) => toastr.error(err));
   };
 
+  onDuplicateRoom = (item, t) => {
+    this.filesActionsStore.duplicateRoomAction(item, t("Common:Duplicate"));
+  };
+
   onClickRename = (item) => {
     const event = new Event(Events.RENAME);
 
@@ -1517,7 +1521,7 @@ class ContextOptionsStore {
         key: "copy-room",
         label: t("Common:Duplicate"),
         icon: DuplicateReactSvgUrl,
-        onClick: () => {},
+        onClick: () => this.onDuplicateRoom(item, t),
         disabled: false,
       },
       {

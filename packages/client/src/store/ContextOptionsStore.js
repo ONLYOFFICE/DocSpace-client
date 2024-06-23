@@ -1196,6 +1196,14 @@ class ContextOptionsStore {
                   onClick: () => this.onDuplicate(item, t),
                   disabled: false,
                 },
+                {
+                  id: "option_create-copy-room",
+                  key: "copy-room",
+                  label: t("Common:Duplicate"),
+                  icon: DuplicateReactSvgUrl,
+                  onClick: () => this.onDuplicateRoom(item, t),
+                  disabled: !item.security?.Duplicate,
+                },
               ],
             },
           ]
@@ -1225,6 +1233,14 @@ class ContextOptionsStore {
               icon: DuplicateReactSvgUrl,
               onClick: () => this.onDuplicate(item, t),
               disabled: false,
+            },
+            {
+              id: "option_create-copy-room",
+              key: "copy-room",
+              label: t("Common:Duplicate"),
+              icon: DuplicateReactSvgUrl,
+              onClick: () => this.onDuplicateRoom(item, t),
+              disabled: !item.security?.Duplicate,
             },
           ];
 

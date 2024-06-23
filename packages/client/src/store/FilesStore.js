@@ -2438,6 +2438,7 @@ class FilesStore {
         "move", //category
         "move-to",
         "copy-to",
+        "copy-room",
         "mark-read",
         "restore",
         "rename",

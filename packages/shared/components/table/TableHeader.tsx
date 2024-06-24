@@ -404,7 +404,8 @@ class TableHeader extends React.Component<
       .map((column) => getSubstring(column))
       .reduce((x, y) => x + y);
 
-    const oldWidth = defaultWidth - defaultSize - settingsSize;
+    const oldWidth =
+      defaultWidth - defaultSize - settingsSize - indexColumnDifference;
 
     if (Math.round(defaultWidth) !== Math.round(containerWidth) && !isResized) {
       if (infoPanelVisible) localStorage.removeItem(columnInfoPanelStorageName);

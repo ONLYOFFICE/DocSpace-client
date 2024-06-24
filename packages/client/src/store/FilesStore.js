@@ -3425,18 +3425,20 @@ class FilesStore {
     //return [...this.folders, ...this.files];
 
     const newFolders = [...this.folders];
-
     const orderItems = [...this.folders, ...this.files].filter((x) => x.order);
+
     if (orderItems.length > 0) {
       orderItems.sort((a, b) => {
-        if (a.order.length < b.order.length) {
-          return -1;
+        if (a.order.includes(".")) {
+          return (
+            Number(a.order.split(".").at(-1)) -
+            Number(b.order.split(".").at(-1))
+          );
         }
-        if (b.order.length < a.order.length) {
-          return 1;
-        }
-        return a.order - b.order;
+
+        return Number(a.order) - Number(b.order);
       });
+
       return this.getFilesListItems(orderItems);
     }
 

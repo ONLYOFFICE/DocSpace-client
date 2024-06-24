@@ -269,20 +269,26 @@ const GoogleWorkspace = ({
   );
 };
 
-export default inject(({ setup, settingsStore, importAccountsStore }) => {
-  const { clearCheckedAccounts, getMigrationStatus, setUsers, filteredUsers } =
-    importAccountsStore;
-  const { viewAs, setViewAs } = setup;
-  const { currentDeviceType, organizationName } = settingsStore;
+export const Component = inject(
+  ({ setup, settingsStore, importAccountsStore }) => {
+    const {
+      clearCheckedAccounts,
+      getMigrationStatus,
+      setUsers,
+      filteredUsers,
+    } = importAccountsStore;
+    const { viewAs, setViewAs } = setup;
+    const { currentDeviceType, organizationName } = settingsStore;
 
-  return {
-    clearCheckedAccounts,
-    viewAs,
-    setViewAs,
-    currentDeviceType,
-    getMigrationStatus,
-    setUsers,
-    filteredUsers,
-    organizationName,
-  };
-})(withTranslation(["Common, Settings"])(observer(GoogleWorkspace)));
+    return {
+      clearCheckedAccounts,
+      viewAs,
+      setViewAs,
+      currentDeviceType,
+      getMigrationStatus,
+      setUsers,
+      filteredUsers,
+      organizationName,
+    };
+  },
+)(withTranslation(["Common, Settings"])(observer(GoogleWorkspace)));

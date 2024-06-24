@@ -120,7 +120,7 @@ const SecurityWrapper = (props) => {
   );
 };
 
-export default inject(({ settingsStore, setup }) => {
+export const Component = inject(({ settingsStore, setup }) => {
   const { initSettings, resetIsInit } = setup;
 
   return {

@@ -385,18 +385,20 @@ const SimpleRoom = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore, publicRoomStore }) => {
-  const { setDocumentTitle } = authStore;
-  const { theme, currentColorScheme } = settingsStore;
-  const { fetchExternalLinks } = publicRoomStore;
+export const Component = inject(
+  ({ authStore, settingsStore, publicRoomStore }) => {
+    const { setDocumentTitle } = authStore;
+    const { theme, currentColorScheme } = settingsStore;
+    const { fetchExternalLinks } = publicRoomStore;
 
-  return {
-    theme,
-    setDocumentTitle,
-    fetchExternalLinks,
-    currentColorScheme,
-  };
-})(
+    return {
+      theme,
+      setDocumentTitle,
+      fetchExternalLinks,
+      currentColorScheme,
+    };
+  },
+)(
   withTranslation([
     "JavascriptSdk",
     "Files",

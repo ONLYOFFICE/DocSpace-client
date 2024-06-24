@@ -44,7 +44,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { PRODUCT_NAME } from "@docspace/shared/constants";
 
-const PortalRenaming = (props) => {
+const PortalRenamingComponent = (props) => {
   const {
     t,
     setPortalRename,
@@ -373,7 +373,7 @@ const PortalRenaming = (props) => {
   );
 };
 
-export default inject(({ settingsStore, setup, common }) => {
+export const PortalRenaming = inject(({ settingsStore, setup, common }) => {
   const {
     theme,
     tenantAlias,
@@ -409,6 +409,6 @@ export default inject(({ settingsStore, setup, common }) => {
   };
 })(
   withLoading(
-    withTranslation(["Settings", "Common"])(observer(PortalRenaming)),
+    withTranslation(["Settings", "Common"])(observer(PortalRenamingComponent)),
   ),
 );

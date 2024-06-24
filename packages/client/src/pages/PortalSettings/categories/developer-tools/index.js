@@ -150,7 +150,7 @@ const DeveloperToolsWrapper = (props) => {
   );
 };
 
-export default inject(({ setup, settingsStore }) => {
+export const Component = inject(({ setup, settingsStore }) => {
   const { initSettings } = setup;
 
   return {

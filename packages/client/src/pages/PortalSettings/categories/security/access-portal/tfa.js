@@ -237,7 +237,7 @@ const TwoFactorAuth = (props) => {
   );
 };
 
-export default inject(({ settingsStore, setup, tfaStore }) => {
+export const TfaSection = inject(({ settingsStore, setup, tfaStore }) => {
   const {
     setTfaSettings,
 

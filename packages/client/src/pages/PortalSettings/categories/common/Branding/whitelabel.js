@@ -53,7 +53,7 @@ import {
 import isEqual from "lodash/isEqual";
 import { DeviceType, WhiteLabelLogoType } from "@docspace/shared/enums";
 
-const WhiteLabel = (props) => {
+const WhiteLabelComponent = (props) => {
   const {
     t,
     isSettingPaid,
@@ -543,45 +543,51 @@ const WhiteLabel = (props) => {
   );
 };
 
-export default inject(({ settingsStore, common, currentQuotaStore }) => {
-  const {
-    setLogoText,
-    whiteLabelLogoText,
-    getWhiteLabelLogoText,
-    restoreWhiteLabelSettings,
-    initSettings,
-    saveWhiteLabelSettings,
-    logoUrlsWhiteLabel,
-    setLogoUrlsWhiteLabel,
-    defaultLogoTextWhiteLabel,
-    enableRestoreButton,
-    resetIsInit,
-  } = common;
+export const WhiteLabel = inject(
+  ({ settingsStore, common, currentQuotaStore }) => {
+    const {
+      setLogoText,
+      whiteLabelLogoText,
+      getWhiteLabelLogoText,
+      restoreWhiteLabelSettings,
+      initSettings,
+      saveWhiteLabelSettings,
+      logoUrlsWhiteLabel,
+      setLogoUrlsWhiteLabel,
+      defaultLogoTextWhiteLabel,
+      enableRestoreButton,
+      resetIsInit,
+    } = common;
 
-  const {
-    whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
-    deviceType,
-    standalone,
-  } = settingsStore;
-  const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+    const {
+      whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
+      deviceType,
+      standalone,
+    } = settingsStore;
+    const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
 
-  return {
-    setLogoText,
-    theme: settingsStore.theme,
-    logoText: whiteLabelLogoText,
-    getWhiteLabelLogoText,
-    saveWhiteLabelSettings,
-    restoreWhiteLabelSettings,
-    defaultWhiteLabelLogoUrls,
-    isSettingPaid: isBrandingAndCustomizationAvailable,
-    initSettings,
-    logoUrlsWhiteLabel,
-    setLogoUrlsWhiteLabel,
-    defaultLogoTextWhiteLabel,
-    enableRestoreButton,
+    return {
+      setLogoText,
+      theme: settingsStore.theme,
+      logoText: whiteLabelLogoText,
+      getWhiteLabelLogoText,
+      saveWhiteLabelSettings,
+      restoreWhiteLabelSettings,
+      defaultWhiteLabelLogoUrls,
+      isSettingPaid: isBrandingAndCustomizationAvailable,
+      initSettings,
+      logoUrlsWhiteLabel,
+      setLogoUrlsWhiteLabel,
+      defaultLogoTextWhiteLabel,
+      enableRestoreButton,
 
-    deviceType,
-    resetIsInit,
-    standalone,
-  };
-})(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));
+      deviceType,
+      resetIsInit,
+      standalone,
+    };
+  },
+)(
+  withTranslation(["Settings", "Profile", "Common"])(
+    observer(WhiteLabelComponent),
+  ),
+);

@@ -233,7 +233,7 @@ const AdminMessage = (props) => {
   );
 };
 
-export default inject(({ settingsStore, setup }) => {
+export const AdminMessageSection = inject(({ settingsStore, setup }) => {
   const {
     enableAdmMess,
     setMessageSettings,

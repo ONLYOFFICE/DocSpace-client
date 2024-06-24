@@ -512,6 +512,7 @@ const PeopleTableRow = (props) => {
             className="table-cell_username"
             noHover
             dir="auto"
+            truncate={true}
           >
             {statusType === "pending"
               ? email

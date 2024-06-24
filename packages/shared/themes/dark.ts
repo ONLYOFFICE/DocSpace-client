@@ -992,7 +992,7 @@ const Dark: TTheme = {
       border: "none",
     },
   },
-
+  
   fieldContainer: {
     horizontal: {
       margin: "0 0 16px 0",
@@ -2078,6 +2078,8 @@ const Dark: TTheme = {
       fileExstColor: "#A3A9AE",
       locationIconColor: "#A3A9AE",
       folderLabelColor: "#A3A9AE",
+      renamedItemColor: "#A3A9AE",
+      oldRoleColor: "#A3A9AE",
     },
 
     details: {
@@ -2469,11 +2471,6 @@ const Dark: TTheme = {
       background: "#474747",
       isPrivateIcon: "#35ad17",
       descriptionColor: "#a3a9ae",
-    },
-
-    tagInput: {
-      tagBackground: "#242424",
-      tagHoverBackground: "#3D3D3D",
     },
 
     dropdown: {
@@ -3180,11 +3177,14 @@ const Dark: TTheme = {
 
   tag: {
     color: white,
+    deletedColor: "#A3A9AE",
     background: "#474747",
     hoverBackground: "#282828",
     disabledBackground: "#858585",
+    deletedBackground: "#282828",
     defaultTagColor: white,
-    newTagBackground: "#333333",
+    newTagBackground: "#242424",
+    newTagHoverBackground: "#3D3D3D",
   },
 
   profile: {
@@ -3339,6 +3339,11 @@ const Dark: TTheme = {
 
   dateTimePicker: {
     colorClockIcon: "#ADADAD",
+  },
+
+  embeddingPanel: {
+    descriptionTextColor: "#ADADAD",
+    iconColor: "#ADADAD",
   },
   completedForm: {
     linkColor: white,

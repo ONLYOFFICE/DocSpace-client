@@ -233,7 +233,7 @@ export type EditorProps = {
   onSDKRequestSelectSpreadsheet?: (event: object) => void;
   onSDKRequestSelectDocument?: (event: object) => void;
   onSDKRequestReferenceSource?: (event: object) => void;
-  onSDKRequestStartFilling?: (event: object) => void;
+  onSDKRequestStartFilling?: (haederLabel: string) => void;
 };
 
 export type TEventData = {
@@ -405,6 +405,7 @@ export type StartFillingSelectorDialogPprops = {
   fileInfo: TFile;
   isVisible: boolean;
   onClose: VoidFunction;
+  headerLabel: string;
 
   getIsDisabled: (
     isFirstLoad: boolean,

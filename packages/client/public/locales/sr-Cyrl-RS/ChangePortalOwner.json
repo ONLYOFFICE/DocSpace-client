@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "Именовање администратора",
-  "BackupPortal": "Резервна копија DocSpace података",
-  "ChangeInstruction": "Да бисте променили власника DocSpace-а, изаберите име новог власника испод.",
-  "ChangeOwner": "Промени DocSpace власника",
+  "BackupPortal": "Резервна копија {{productName}} података",
+  "ChangeInstruction": "Да бисте променили власника {{productName}}-а, изаберите име новог власника испод.",
+  "ChangeOwner": "Промени {{productName}} власника",
   "ChangeUser": "Промени корисника",
-  "DeactivateOrDeletePortal": "Деактивирај или обриши DocSpace",
+  "DeactivateOrDeletePortal": "Деактивирај или обриши {{productName}}",
   "DoTheSame": "Учини исто као администратори",
-  "ManagePortal": "Управљај DocSpace конфигурацијом",
+  "ManagePortal": "Управљај {{productName}} конфигурацијом",
   "ManageUser": "Управљај корисничким налозима",
-  "NewPortalOwner": "Нови DocSpace власник",
-  "PortalOwnerCan": "Власник DocSpace-а може:",
+  "NewPortalOwner": "Нови {{productName}} власник",
+  "PortalOwnerCan": "Власник {{productName}}-а може:",
   "SetAccessRights": "Постави права приступа"
 }

@@ -201,6 +201,7 @@ const PureHome = (props) => {
     userId,
 
     scrollToTop,
+    selectedFolderStore,
   });
 
   const { showUploadPanel } = useOperations({
@@ -294,7 +295,7 @@ const PureHome = (props) => {
 
   const getContextModel = () => {
     if (isFrame) return null;
-    return getFolderModel(t);
+    return getFolderModel(t, true);
   };
 
   React.useEffect(() => {

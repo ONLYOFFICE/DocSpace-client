@@ -101,7 +101,7 @@ const Panels = (props) => {
     selectFileFormRoomDialogVisible,
     selectFileFormRoomFilterParam,
     setSelectFileFormRoomDialogVisible,
-    createFromTemplateForm,
+    copyFromTemplateForm,
     hotkeyPanelVisible,
     invitePanelVisible,
     convertPasswordDialogVisible,
@@ -120,7 +120,7 @@ const Panels = (props) => {
     editLinkPanelIsVisible,
     unsavedChangesDialogVisible,
     deleteLinkDialogVisible,
-    embeddingPanelIsVisible,
+    embeddingPanelData,
     moveToPublicRoomVisible,
     backupToPublicRoomVisible,
     settingsPluginDialogVisible,
@@ -301,7 +301,7 @@ const Panels = (props) => {
         key="select-file-form-room-dialog"
         onClose={onCloseFileFormRoomDialog}
         openRoot={selectFileFormRoomOpenRoot}
-        onSelectFile={createFromTemplateForm}
+        onSelectFile={(file) => copyFromTemplateForm(file, t)}
         filterParam={selectFileFormRoomFilterParam}
         descriptionText={descriptionTextFileFormRoomDialog}
       />
@@ -332,7 +332,7 @@ const Panels = (props) => {
       <UnsavedChangesDialog key="unsaved-dialog" />
     ),
     deleteLinkDialogVisible && <DeleteLinkDialog key="delete-link-dialog" />,
-    embeddingPanelIsVisible && <EmbeddingPanel key="embedding-panel" />,
+    embeddingPanelData.visible && <EmbeddingPanel key="embedding-panel" />,
     moveToPublicRoomVisible && (
       <MoveToPublicRoom key="move-to-public-room-panel" />
     ),
@@ -367,6 +367,7 @@ export default inject(
     createEditRoomStore,
     pluginStore,
     filesStore,
+    filesActionsStore,
   }) => {
     const {
       ownerPanelVisible,
@@ -397,7 +398,6 @@ export default inject(
       selectFileFormRoomDialogVisible,
       selectFileFormRoomFilterParam,
       setSelectFileFormRoomDialogVisible,
-      createFromTemplateForm,
       invitePanelOptions,
       inviteUsersWarningDialogVisible,
       changeUserTypeDialogVisible,
@@ -406,7 +406,7 @@ export default inject(
       editGroupMembersDialogVisible,
       editLinkPanelIsVisible,
       deleteLinkDialogVisible,
-      embeddingPanelIsVisible,
+      embeddingPanelData,
       moveToPublicRoomVisible,
       backupToPublicRoomVisible,
       leaveRoomDialogVisible,
@@ -417,6 +417,7 @@ export default inject(
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
+    const { copyFromTemplateForm } = filesActionsStore;
 
     const { uploadPanelVisible } = uploadDataStore;
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
@@ -455,7 +456,7 @@ export default inject(
       selectFileFormRoomDialogVisible,
       selectFileFormRoomFilterParam,
       setSelectFileFormRoomDialogVisible,
-      createFromTemplateForm,
+      copyFromTemplateForm,
       hotkeyPanelVisible,
       restoreAllPanelVisible,
       invitePanelVisible: invitePanelOptions.visible,
@@ -470,7 +471,7 @@ export default inject(
       editLinkPanelIsVisible,
       unsavedChangesDialogVisible,
       deleteLinkDialogVisible,
-      embeddingPanelIsVisible,
+      embeddingPanelData,
       moveToPublicRoomVisible,
       backupToPublicRoomVisible,
       settingsPluginDialogVisible,

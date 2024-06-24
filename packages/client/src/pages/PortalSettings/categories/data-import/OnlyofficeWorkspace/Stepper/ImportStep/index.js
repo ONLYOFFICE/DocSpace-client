@@ -36,6 +36,7 @@ import RoomsIcon from "PUBLIC_DIR/images/catalog.rooms.react.svg";
 import PortfolioIcon from "PUBLIC_DIR/images/catalog.portfolio.react.svg";
 import ProjectsIcon from "PUBLIC_DIR/images/catalog.projects.react.svg";
 import DocumentsIcon from "PUBLIC_DIR/images/catalog.documents.react.svg";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const Wrapper = styled.div`
   display: flex;
@@ -78,7 +79,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Accounts"),
-          workspace: "DocSpace",
+          workspace: PRODUCT_NAME,
           SectionIcon: AccountsIcon,
         }}
         isDisabled
@@ -94,7 +95,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Accounts"),
-          workspace: "DocSpace",
+          workspace: PRODUCT_NAME,
           SectionIcon: AccountsIcon,
         }}
       />
@@ -110,7 +111,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Documents"),
-          workspace: "DocSpace",
+          workspace: PRODUCT_NAME,
           SectionIcon: DocumentsIcon,
         }}
       />
@@ -126,7 +127,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Documents"),
-          workspace: "DocSpace",
+          workspace: PRODUCT_NAME,
           SectionIcon: DocumentsIcon,
         }}
       />
@@ -142,7 +143,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Rooms"),
-          workspace: "DocSpace",
+          workspace: PRODUCT_NAME,
           SectionIcon: RoomsIcon,
         }}
       />
@@ -152,6 +153,7 @@ const ImportStep = ({
         sectionName={t("Common:CommonFiles")}
         description={t("Settings:CommonFilesDescription", {
           user: user.displayName,
+          productName: PRODUCT_NAME,
         })}
         exportSection={{
           sectionName: t("Common:Common"),
@@ -160,7 +162,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Rooms"),
-          workspace: "DocSpace",
+          workspace: PRODUCT_NAME,
           SectionIcon: RoomsIcon,
         }}
       />
@@ -176,7 +178,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Rooms"),
-          workspace: "DocSpace",
+          workspace: PRODUCT_NAME,
           SectionIcon: RoomsIcon,
         }}
       />

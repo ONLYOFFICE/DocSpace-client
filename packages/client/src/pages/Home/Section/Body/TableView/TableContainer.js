@@ -254,6 +254,7 @@ const Table = ({
         location={location}
         isRooms={isRooms}
         isIndexing={isIndexing}
+        filesList={filesList}
       />
 
       <TableBody

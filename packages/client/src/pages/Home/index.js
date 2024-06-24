@@ -158,6 +158,7 @@ const PureHome = (props) => {
     setSelectedFolder,
     userId,
     getFolderModel,
+    scrollToTop,
   } = props;
 
   const location = useLocation();
@@ -198,6 +199,9 @@ const PureHome = (props) => {
     gallerySelected,
     folderSecurity,
     userId,
+
+    scrollToTop,
+    selectedFolderStore,
   });
 
   const { showUploadPanel } = useOperations({
@@ -227,6 +231,8 @@ const PureHome = (props) => {
     setSelectedNode,
     fetchPeople,
     setPortalTariff,
+
+    scrollToTop,
   });
 
   useGroups({
@@ -239,6 +245,8 @@ const PureHome = (props) => {
 
     setSelectedNode,
     fetchGroups,
+
+    scrollToTop,
   });
 
   useInsideGroup({
@@ -248,6 +256,8 @@ const PureHome = (props) => {
     setIsLoading,
     setPortalTariff,
     fetchGroup,
+
+    scrollToTop,
   });
 
   useSettings({
@@ -285,7 +295,7 @@ const PureHome = (props) => {
 
   const getContextModel = () => {
     if (isFrame) return null;
-    return getFolderModel(t);
+    return getFolderModel(t, true);
   };
 
   React.useEffect(() => {
@@ -483,6 +493,7 @@ export default inject(
       addTagsToRoom,
       removeTagsFromRoom,
       getRooms,
+      scrollToTop,
     } = filesStore;
 
     const { updateProfileCulture } = peopleStore.targetUserStore;
@@ -659,6 +670,7 @@ export default inject(
       getRooms,
       setSelectedFolder,
       getFolderModel,
+      scrollToTop,
     };
   },
 )(observer(Home));

@@ -1454,3 +1454,10 @@ export async function reorder(id: number) {
     url: `/files/rooms/${id}/reorder`,
   });
 }
+
+export async function checkIsPDFForm(fileId: string | number) {
+  return request({
+    method: "get",
+    url: `/files/file/${fileId}/isformpdf`,
+  }) as Promise<boolean>;
+}

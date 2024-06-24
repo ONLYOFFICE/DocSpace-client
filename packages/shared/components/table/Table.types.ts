@@ -64,6 +64,7 @@ export interface TableHeaderProps {
   sortBy: string;
   sorted: boolean;
   columnStorageName: string;
+  tableStorageName: string;
   sectionWidth: number;
   onClick: () => void;
   resetColumnsSize: boolean;

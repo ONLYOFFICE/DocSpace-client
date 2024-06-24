@@ -107,16 +107,22 @@ const ComboBoxPure = (props: ComboboxProps) => {
     });
   };
 
-  const optionClick = (option: TOption) => {
-    const { onSelect } = props;
+  const optionClick = (
+    option: TOption,
+    event: React.ChangeEvent<HTMLInputElement> | React.MouseEvent,
+  ) => {
+    const { onSelect, setIsOpenItemAccess } = props;
 
     setSelectedOption({ ...option });
-    // setIsOpen((v) => {
-    //   setIsOpenItemAccess?.(!v);
-    //   return !v;
-    // });
+
+    setIsOpen((v) => {
+      setIsOpenItemAccess?.(!v);
+      return !v;
+    });
 
     onSelect?.(option);
+
+    event?.stopPropagation();
   };
 
   const {
@@ -247,7 +253,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
           textOverflow={textOverflow}
           key={option.key}
           disabled={disabled}
-          onClick={() => optionClick(option)}
+          onClick={(e) => optionClick(option, e)}
           onClickSelectedItem={() => onClickSelectedItem?.(option)}
           fillIcon={fillIcon}
           isModern={noBorder}

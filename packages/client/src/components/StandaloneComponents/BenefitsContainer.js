@@ -91,7 +91,7 @@ const BenefitsContainer = ({ isTrial, isEnterprise }) => {
           <ReactSVG src={item.imag} className="benefits-svg" />
           <div className="benefits-description">
             <Text fontWeight={600}>{item.title}</Text>
-            <Text>{item.description}</Text>
+            <Text fontSize="12px">{item.description}</Text>
           </div>
         </div>
       );

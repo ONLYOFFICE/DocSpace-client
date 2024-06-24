@@ -36,7 +36,7 @@ import { StyledPage, StyledBody, StyledContent } from "./RoomStyles";
 import { frameCallCommand } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import { ValidationStatus } from "../../../helpers/constants";
 
 import PublicRoomIcon from "PUBLIC_DIR/images/icons/32/room/public.svg";
@@ -118,7 +118,7 @@ const RoomPassword = (props) => {
     <StyledPage>
       <StyledContent className="public-room-content">
         <StyledBody>
-          <DocspaceLogo className="docspace-logo" />
+          <PortalLogo className="portal-logo" />
 
           <FormWrapper>
             <div className="password-form">

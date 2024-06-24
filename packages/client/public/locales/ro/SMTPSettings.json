@@ -1,5 +1,4 @@
 {
-  "Authentication": "Autentificare",
   "AuthViaNTLM": "Autorizare prin NTLM",
   "EnableSSL": "Activare autentificare unică",
   "EnterDomain": "Introduceți domeniul",
@@ -12,6 +11,5 @@
   "Port": "Port",
   "SenderDisplayName": "Nume afișat expeditor",
   "SenderEmailAddress": "Adresa e-mail expeditor",
-  "SendTestMail": "Trimite un e-mail de testare",
-  "SuccessfullyCompletedOperation": "Operațiune terminată cu succes"
+  "SendTestMail": "Trimite un e-mail de testare"
 }

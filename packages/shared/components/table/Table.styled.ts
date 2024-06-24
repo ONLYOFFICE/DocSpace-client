@@ -486,10 +486,10 @@ const StyledTableCell = styled.div<{ hasAccess?: boolean; checked?: boolean }>`
   display: flex;
   align-items: center;
 
-  ${({ theme }) =>
+  /* ${({ theme }) =>
     theme.interfaceDirection === "rtl"
       ? `padding-left: 30px;`
-      : `padding-right: 30px;`}
+      : `padding-right: 30px;`} */
 
   .react-svg-icon svg {
     margin-top: 2px;

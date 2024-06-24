@@ -46,7 +46,7 @@
   "URL": "URL",
   "ViewRawPayload": "Ham yükü görüntüle",
   "WebhookCreated": "Webhook oluşturuldu",
-  "WebhookCreationHint": "Bu webhook DocSpace'deki tüm etkinliklere atanacak",
+  "WebhookCreationHint": "Bu webhook {{productName}}'deki tüm etkinliklere atanacak",
   "WebhookDetails": "Webhook ayrıntıları",
   "WebhookEditedSuccessfully": "Webhook yapılandırması başarıyla düzenlendi",
   "WebhookHistory": "Webhook geçmişi",
@@ -55,5 +55,5 @@
   "WebhookRemoved": "Webhook kaldırıldı",
   "Webhooks": "Webhook’lar",
   "WebhooksGuide": "Webhook Kılavuzu",
-  "WebhooksInfo": "ONLYOFFICE DocSpace'deki çeşitli olaylara dayalı olarak kullandığınız herhangi bir uygulama veya web sitesinin yanında özel eylemler gerçekleştirmek için webhook kullanın. Burada, tüm webhook’larını oluşturup yönetebilir, yapılandırabilir ve performanslarını denetlemek için her bir webhook’un geçmişine göz atabilirsiniz."
+  "WebhooksInfo": "{{organizationName}} {{productName}}'deki çeşitli olaylara dayalı olarak kullandığınız herhangi bir uygulama veya web sitesinin yanında özel eylemler gerçekleştirmek için webhook kullanın. Burada, tüm webhook’larını oluşturup yönetebilir, yapılandırabilir ve performanslarını denetlemek için her bir webhook’un geçmişine göz atabilirsiniz."
 }

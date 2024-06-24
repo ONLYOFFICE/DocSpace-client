@@ -1,9 +1,9 @@
 {
-  "DeleteAllGroupDescription": "Atlasītās grupas tiks izdzēstas. Grupu lietotāji netiks noņemti no DocSpace. Vai tiešām vēlaties turpināt?",
+  "DeleteAllGroupDescription": "Atlasītās grupas tiks izdzēstas. Grupu lietotāji netiks noņemti no {{productName}}. Vai tiešām vēlaties turpināt?",
   "DeleteAllGroupsTitle": "Izdzēst grupas",
   "DeleteFile": "Jūs gatavojaties izdzēst šo failu. ",
   "DeleteFolder": "Jūs gatavojaties izdzēst šo mapi. ",
-  "DeleteGroupDescription": "Grupa {{groupName}} tiks izdzēsta. Grupu lietotāji netiks noņemti no DocSpace. Vai tiešām vēlaties turpināt?",
+  "DeleteGroupDescription": "Grupa {{groupName}} tiks izdzēsta. Grupu lietotāji netiks noņemti no {{productName}}. Vai tiešām vēlaties turpināt?",
   "DeleteGroupTitle": "Izdzēst grupu",
   "DeleteItems": "Jūs gatavojaties izdzēst šos vienumus. ",
   "DeleteItemsSharedNote": "Ņemiet vērā: ja tos kopīgojāt ar kādu personu, tas kļūs nepieejams.",

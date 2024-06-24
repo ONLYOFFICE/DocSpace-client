@@ -29,15 +29,19 @@ import { request, setWithCredentialsStatus } from "../client";
 export function login(
   userName,
   passwordHash,
+  password,
   session,
   recaptchaResponse,
+  recaptchaType,
   culture,
 ) {
   const data = {
     userName,
     passwordHash,
+    password,
     session,
     recaptchaResponse,
+    recaptchaType,
     culture,
   };
 

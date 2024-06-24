@@ -1,5 +1,5 @@
 {
-  "ActionCannotBeUndone": "Atlasītie atspējotie lietotāji tiks noņemti no DocSpace. Šo darbību nevarēs atsaukt.",
+  "ActionCannotBeUndone": "Atlasītie atspējotie lietotāji tiks noņemti no {{productName}}. Šo darbību nevarēs atsaukt.",
   "CannotReassignFiles": "Ja vienlaikus izdzēšat vairākus lietotājus, jūs nevarat atkārtoti piešķirt viņu failus citiem lietotājiem.",
   "DeleteGroupUsersSuccessMessage": "Lietotāji ir veiksmīgi izdzēsti.",
   "DeleteMyDocumentsUser": "Visi šī lietotāja personiskie faili un mapes sadaļā Mani dokumenti tiks neatgriezeniski izdzēsti.",

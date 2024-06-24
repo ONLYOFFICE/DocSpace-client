@@ -49,10 +49,13 @@ const PureAccountsItem = ({
 
   const icon = getCatalogIconUrlByType(PageType.account);
 
+  const title = t("Accounts");
+
   return (
     <ArticleItem
       key="accounts"
-      text={t("Accounts")}
+      text={title}
+      title={title}
       icon={icon}
       showText={showText}
       onClick={onClickAction}

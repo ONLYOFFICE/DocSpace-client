@@ -1,5 +1,5 @@
 {
-  "Desc": "Skonfiguruj dane rejestracyjne DocSpace.",
+  "Desc": "Skonfiguruj dane rejestracyjne {{productName}}.",
   "ErrorEmail": "Nieprawidłowy adres e-mail",
   "ErrorInitWizard": "Dana usługa jest w tej chwili niedostępna, spróbuj ponownie później.",
   "ErrorInitWizardButton": "Spróbuj ponownie",
@@ -11,5 +11,5 @@
   "LicenseLink": "Umowy licencyjne",
   "PlaceholderLicense": "Twój plik licencyjny",
   "Timezone": "Strefa czasowa:",
-  "WelcomeTitle": "Witaj w Twoim DocSpace!"
+  "WelcomeTitle": "Witaj w Twoim {{productName}}!"
 }

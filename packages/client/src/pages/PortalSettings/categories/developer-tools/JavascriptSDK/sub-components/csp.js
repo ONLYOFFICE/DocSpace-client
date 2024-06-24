@@ -39,6 +39,7 @@ import { SelectorAddButton } from "@docspace/shared/components/selector-add-butt
 import { SelectedItem } from "@docspace/shared/components/selected-item";
 import { tablet } from "@docspace/shared/utils";
 import Base from "@docspace/shared/themes/base";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const CategoryHeader = styled.div`
   margin-top: 24px;
@@ -203,9 +204,11 @@ const CSP = ({
 
   return (
     <>
-      <CategoryHeader>{t("CSPHeader")}</CategoryHeader>
+      <CategoryHeader>
+        {t("CSPHeader", { productName: PRODUCT_NAME })}
+      </CategoryHeader>
       <Container className="description-holder">
-        {t("CSPDescription")}
+        {t("CSPDescription", { productName: PRODUCT_NAME })}
         <HelpButton
           className="csp-helpbutton"
           offsetRight={0}
@@ -229,7 +232,7 @@ const CSP = ({
               </Text>
             </div>
             <div className="body-container">
-              {t("CSPInfoBarDescription")}{" "}
+              {t("CSPInfoBarDescription", { productName: PRODUCT_NAME })}{" "}
               <Link
                 color={currentColorScheme?.main?.accent}
                 fontSize="13px"
@@ -256,7 +259,7 @@ const CSP = ({
         lineHeight="20px"
         color={error ? theme?.input.focusErrorBorderColor : "#A3A9AE"}
       >
-        {error ? error : t("CSPUrlHelp")}
+        {error ? error : t("CSPUrlHelp", { productName: PRODUCT_NAME })}
       </Text>
       <ChipsContainer>{getChips(cspDomains)}</ChipsContainer>
     </>

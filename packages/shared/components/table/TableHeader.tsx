@@ -483,15 +483,8 @@ class TableHeader extends React.Component<
 
         tableInfoPanelContainer.forEach((item, index) => {
           const column = document.getElementById(`column_${index}`);
-
-          const isSettingColumn =
-            Number(index) === tableInfoPanelContainer.length - 1;
           const isQuickButtonColumn =
             Number(index) === tableInfoPanelContainer.length - 2;
-
-          if (isIndexEditingMode && isSettingColumn) {
-            gridTemplateColumns.push("75px");
-          }
 
           if (isIndexEditingMode && isQuickButtonColumn) {
             gridTemplateColumns.push("24px");
@@ -692,14 +685,13 @@ class TableHeader extends React.Component<
                 getSubstring(gridTemplateColumns[+index - colIndex]) +
                 getSubstring(item)
               }px`;
-            } else if (isSettingColumn && !isIndexEditingMode) {
-              gridTemplateColumns.push(`${settingsSize}px`);
+            } else if (isSettingColumn) {
+              let newSettingsSize = isIndexEditingMode ? 75 : settingsSize;
+              gridTemplateColumns.push(`${newSettingsSize}px`);
             } else if (shortColumSize) {
               gridTemplateColumns.push(`${shortColumSize}px`);
-            } else if (item !== `${settingsSize}px` || isIndexEditingMode) {
+            } else if (item !== `${settingsSize}px`) {
               const percent = (getSubstring(item) / oldWidth) * 100;
-
-              let newSettingsSize = isIndexEditingMode ? 0 : settingsSize;
 
               if (percent === 100) {
                 const enableColumnsLength = columns.filter(
@@ -719,7 +711,7 @@ class TableHeader extends React.Component<
                 : percent === 0
                   ? `${defaultMinColumnSize}px`
                   : `${
-                      ((containerWidth - defaultSize - newSettingsSize) *
+                      ((containerWidth - defaultSize - settingsSize) *
                         percent) /
                       100
                     }px`;
@@ -741,14 +733,6 @@ class TableHeader extends React.Component<
               ) {
                 overWidth += defaultMinColumnSize - getSubstring(newItemWidth);
                 newItemWidth = `${defaultMinColumnSize}px`;
-              }
-
-              if (isIndexEditingMode && isSettingColumn) {
-                newItemWidth = "75px";
-              }
-
-              if (isIndexEditingMode && isQuickButtonColumn) {
-                newItemWidth = `24px`;
               }
 
               gridTemplateColumns.push(newItemWidth);

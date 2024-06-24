@@ -131,8 +131,8 @@ export default function withBadges(WrappedComponent) {
 
       const file = {
         ...options,
-        ExtraLocationTitle: draftLocation.folderTitle,
-        ExtraLocation: draftLocation.folderId,
+        parentId: draftLocation.folderId,
+        parentTitle: draftLocation.folderTitle,
         id: draftLocation.fileId,
         title: draftLocation.fileTitle,
       };

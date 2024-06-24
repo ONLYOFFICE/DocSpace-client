@@ -1319,6 +1319,7 @@ class FilesActionStore {
             toastr.success(successTranslation);
           })
           .then(() => setSelected("close"))
+          .then(() => this.moveToRoomsPage())
           .catch((err) => {
             clearActiveOperations(null, items);
             setSecondaryProgressBarData({
@@ -1473,17 +1474,19 @@ class FilesActionStore {
       setIsSectionFilterLoading(param);
     };
 
-    const { ExtraLocationTitle, ExtraLocation, fileExst, folderId } = item;
+    const { title, fileExst } = item;
+    const parentId = item.parentId || item.toFolderId || recycleBinFolderId;
+    const parentTitle = item.parentTitle || item.toFolderTitle;
 
-    const isRoot =
-      ExtraLocation === myRoomsId ||
-      ExtraLocation === myFolderId ||
-      ExtraLocation === archiveRoomsId ||
-      ExtraLocation === recycleBinFolderId;
+    const isRoot = [
+      myRoomsId,
+      myFolderId,
+      archiveRoomsId,
+      recycleBinFolderId,
+    ].includes(parentId);
 
     const state = {
-      title: ExtraLocationTitle,
-
+      title: parentTitle,
       isRoot,
       fileExst,
       highlightFileId: item.id,
@@ -1491,14 +1494,12 @@ class FilesActionStore {
       rootFolderType,
     };
 
-    const url = getCategoryUrl(categoryType, ExtraLocation);
+    const url = getCategoryUrl(categoryType, parentId);
 
     const newFilter = FilesFilter.getDefault();
 
-    const title = this.nameWithoutExtension(item.title);
-
     newFilter.search = title;
-    newFilter.folder = ExtraLocation || folderId;
+    newFilter.folder = parentId;
 
     setIsLoading(
       window.DocSpace.location.search !== `?${newFilter.toUrlParams()}` ||
@@ -2743,6 +2744,37 @@ class FilesActionStore {
 
     await deleteFilesFromRecent(fileIds);
     await refreshFiles();
+  };
+
+  copyFromTemplateForm = async (fileInfo, t) => {
+    const selectedItemId = this.selectedFolderStore.id;
+    const fileIds = [fileInfo.id];
+
+    const operationData = {
+      destFolderId: selectedItemId,
+      folderIds: [],
+      fileIds,
+      deleteAfter: false,
+      isCopy: true,
+      folderTitle: this.selectedFolderStore.title,
+      translations: {
+        copy: t("Common:CopyOperation"),
+      },
+    };
+
+    this.uploadDataStore.secondaryProgressDataStore.setItemsSelectionTitle(
+      fileInfo.title,
+    );
+
+    const conflicts = await checkFileConflicts(selectedItemId, [], fileIds);
+
+    if (conflicts.length) {
+      return this.setConflictDialogData(conflicts, operationData);
+    }
+
+    this.uploadDataStore
+      .itemOperationToFolder(operationData)
+      .catch((error) => toastr.error(error));
   };
 }
 

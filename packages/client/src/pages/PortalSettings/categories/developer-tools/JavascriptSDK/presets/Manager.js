@@ -69,7 +69,6 @@ import { PreviewBlock } from "../sub-components/PreviewBlock";
 import { loadFrame } from "../utils";
 
 import {
-  scriptUrl,
   dataDimensions,
   defaultWidthDimension,
   defaultHeightDimension,
@@ -90,7 +89,7 @@ import {
   SelectedItemsContainer,
   CheckboxGroup,
 } from "./StyledPresets";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { PRODUCT_NAME, SDK_SCRIPT_URL } from "@docspace/shared/constants";
 
 const Manager = (props) => {
   const { t, setDocumentTitle, fetchExternalLinks, theme, currentColorScheme } =
@@ -165,7 +164,7 @@ const Manager = (props) => {
     window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
   };
 
-  const loadCurrentFrame = () => loadFrame(config, scriptUrl);
+  const loadCurrentFrame = () => loadFrame(config, SDK_SCRIPT_URL);
 
   useEffect(() => {
     loadCurrentFrame();
@@ -349,7 +348,7 @@ const Manager = (props) => {
   return (
     <PresetWrapper
       description={t("CustomDescription", { productName: PRODUCT_NAME })}
-      header={t("CreateSampleDocspace", { productName: PRODUCT_NAME })}
+      header={t("CreateSamplePortal", { productName: PRODUCT_NAME })}
     >
       <Container>
         <PreviewBlock
@@ -358,7 +357,7 @@ const Manager = (props) => {
           preview={preview}
           theme={theme}
           frameId={frameId}
-          scriptUrl={scriptUrl}
+          scriptUrl={SDK_SCRIPT_URL}
           config={config}
         />
         <Controls>

@@ -92,6 +92,7 @@ const UserContent = ({
     isVisitor,
     isCollaborator,
     isSSO,
+    isLDAP,
     usedSpace,
     quotaLimit,
   } = item;
@@ -109,7 +110,7 @@ const UserContent = ({
     role === "owner"
       ? t("Common:Owner")
       : role === "admin"
-        ? t("Common:DocspaceAdmin", { productName: PRODUCT_NAME })
+        ? t("Common:PortalAdmin", { productName: PRODUCT_NAME })
         : isCollaborator
           ? t("Common:PowerUser")
           : isVisitor
@@ -149,7 +150,12 @@ const UserContent = ({
             : email}
       </Link>
 
-      <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
+      <Badges
+        statusType={statusType}
+        isPaid={isPaidUser}
+        isSSO={isSSO}
+        isLDAP={isLDAP}
+      />
 
       <Link
         containerMinWidth="140px"

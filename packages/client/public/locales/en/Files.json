@@ -131,7 +131,6 @@
   "PrivateRoomSupport": "Work in Private Room is available via {{organizationName}} desktop app. <3>Instructions</3>",
   "RecentlyAccessible": "Recently accessible via link",
   "RecentViaLinkEmptyContainerDescription": "Here you will find a list of the recently opened files shared with you via an external link.",
-  "RecycleBinAction": "Empty trash",
   "RemovedFromFavorites": "Removed from favorites",
   "RemoveFromFavorites": "Remove from favorites",
   "RemoveFromList": "Remove from list",
@@ -181,5 +180,7 @@
   "WantToRestoreTheRoom": "All shared links in this room will become active, and its contents will be available to everyone with the link. Do you want to restore the room?",
   "WantToRestoreTheRooms": "All shared links in restored rooms will become active, and their contents will be available to everyone with the room links. Do you want to restore the rooms?",
   "WithSubfolders": "With subfolders",
-  "YouLeftTheRoom": "You have left the room"
+  "YouLeftTheRoom": "You have left the room",
+  "Protected": "protected",
+  "Embed": "Embed"
 }

@@ -40,6 +40,7 @@ const ImageEditor = ({
   classNameWrapperImageCropper,
   className,
   disableImageRescaling,
+  maxImageSize,
 }: ImageEditorProps) => {
   const setUploadedFile = (f?: File) => {
     onChangeImage({ ...image, uploadedFile: f });
@@ -70,6 +71,7 @@ const ImageEditor = ({
         t={t}
         setUploadedFile={setUploadedFile}
         isDisabled={isDisabled}
+        maxImageSize={maxImageSize}
       />
     </div>
   );

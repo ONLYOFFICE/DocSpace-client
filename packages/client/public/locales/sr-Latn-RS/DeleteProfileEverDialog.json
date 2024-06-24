@@ -2,7 +2,7 @@
   "ActionCannotBeUndone": "Izabrani onemogućeni korisnici će biti uklonjeni iz {{productName}}-a. Ova radnja se ne može opozvati.",
   "CannotReassignFiles": "Ako obrišete više korisnika odjednom, ne možete da dodelite njihove datoteke drugim korisnicima.",
   "DeleteGroupUsersSuccessMessage": "Korisnici su uspešno obrisani.",
-  "DeleteMyDocumentsUser": "Sve lične datoteke i folderi u odeljku Moji dokumenti ovog korisnika biće trajno izbrisani.",
+  "DeleteMyDocumentsUser": "Sve lične datoteke i folderi u odeljku Dokumenti ovog korisnika biće trajno izbrisani.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Sobe koje je napravio ovaj korisnik i dokumenti uskladišteni u ovim sobama biće automatski ponovo dodeljeni administratoru koji vrši brisanje: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Ponovo dodelite podatke ručno da biste izabrali drugog odredišnog korisnika za dodelu.",
   "DeleteUser": "Obriši korisnika",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> će biti obrisan. Ova radnja se ne može opozvati.",

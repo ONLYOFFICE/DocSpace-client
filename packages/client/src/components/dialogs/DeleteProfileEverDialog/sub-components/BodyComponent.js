@@ -78,10 +78,16 @@ const BodyComponent = (props) => {
         </Text>
         <Text className="text-warning">{t("PleaseNote")}</Text>
         <Text className="text-delete-description">
+          {t("DeletePersonalData", { productName: PRODUCT_NAME })}
+        </Text>
+        <Text className="text-delete-description">
           {t("CannotReassignFiles")}
         </Text>
         <Text className="text-delete-description">
           {t("ToBeAbleToReassignData")}
+        </Text>
+        <Text className="text-delete-description">
+          {t("DeletePersonalDataApplicable")}
         </Text>
       </>
     );

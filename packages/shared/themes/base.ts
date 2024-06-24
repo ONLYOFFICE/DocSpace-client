@@ -29,6 +29,7 @@ import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
 import { DEFAULT_FONT_FAMILY } from "../constants";
+import { color } from "storybook-static/sb-manager/chunk-INSKDKQB";
 
 export type TColorScheme = {
   id: number;
@@ -1023,37 +1024,6 @@ export const getBaseTheme = () => {
       },
     },
 
-    tabsContainer: {
-      scrollbar: {
-        width: "100%",
-        height: "44px",
-      },
-
-      label: {
-        height: " 30px",
-        border: "1px solid #ECEEF1",
-        borderRadius: "16px",
-        minWidth: "fit-content",
-        marginRight: "8px",
-        width: "fit-content",
-
-        backgroundColor: blueLightMid,
-        hoverBackgroundColor: "#F3F4F4",
-        disableBackgroundColor: grayLightMid,
-        activeBackgroundColor: "#ECEEF1",
-        activeSelectedBackgroundColor:
-          "linear-gradient(0deg, #265a8f, #265a8f), linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1))",
-
-        title: {
-          padding: "4px 16px",
-          overflow: "hidden",
-          color: white,
-          hoverColor: black,
-          disableColor: grayMid,
-        },
-      },
-    },
-
     fieldContainer: {
       horizontal: {
         margin: "0 0 16px 0",
@@ -1435,6 +1405,11 @@ export const getBaseTheme = () => {
 
       percent: {
         background: "#4781D1",
+      },
+
+      color: {
+        error: lightErrorStatus,
+        status: black,
       },
     },
 
@@ -2131,6 +2106,8 @@ export const getBaseTheme = () => {
         fileExstColor: "#A3A9AE",
         locationIconColor: "#A3A9AE",
         folderLabelColor: "#A3A9AE",
+        renamedItemColor: "#A3A9AE",
+        oldRoleColor: "#657077",
       },
 
       details: {
@@ -2398,6 +2375,8 @@ export const getBaseTheme = () => {
 
         inputButtonBorder: "#D0D5DA",
         inputButtonBorderHover: grayMain,
+
+        disableTextColor: "#A3A9AE",
       },
 
       emptyScreen: {
@@ -2515,11 +2494,6 @@ export const getBaseTheme = () => {
         background: "#f8f9f9",
         isPrivateIcon: "#35ad17",
         descriptionColor: "#555f65",
-      },
-
-      tagInput: {
-        tagBackground: "#ECEEF1",
-        tagHoverBackground: "#F3F4F4",
       },
 
       dropdown: {
@@ -3201,12 +3175,23 @@ export const getBaseTheme = () => {
       background: white,
     },
 
-    submenu: {
+    tabs: {
+      gradientColor: white,
       lineColor: "#eceef1",
-      backgroundColor: white,
-      textColor: "#657077",
-      activeTextColor: "#316DAA",
-      bottomLineColor: "#316DAA",
+
+      textColorPrimary: "#657077",
+      activeTextColorPrimary: "",
+      hoverTextColorPrimary: "#A3A9AE",
+      pressedTextColorPrimary: "#555F65",
+      backgroundColorPrimary: white,
+
+      textColorSecondary: "#333333",
+      activeTextColorSecondary: white,
+
+      backgroundColorSecondary: white,
+      hoverBackgroundColorSecondary: "#F3F4F4",
+      pressedBackgroundColorSecondary: "#ECEEF1",
+      activeBackgroundColorSecondary: "#265A8F",
     },
 
     hotkeys: {
@@ -3217,11 +3202,14 @@ export const getBaseTheme = () => {
 
     tag: {
       color: black,
+      deletedColor: "#A3A9AE",
       background: "#f3f4f4",
       hoverBackground: "#eceef1",
       disabledBackground: "#f8f9f9",
+      deletedBackground: "#F8F9F9",
       defaultTagColor: black,
       newTagBackground: "#eceef1",
+      newTagHoverBackground: "#F3F4F4",
     },
 
     profile: {
@@ -3357,6 +3345,11 @@ export const getBaseTheme = () => {
 
     dateTimePicker: {
       colorClockIcon: "#657077",
+    },
+
+    embeddingPanel: {
+      descriptionTextColor: "#657077",
+      iconColor: "#657077",
     },
 
     completedForm: {

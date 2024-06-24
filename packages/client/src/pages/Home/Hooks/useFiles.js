@@ -34,7 +34,12 @@ import { getGroup } from "@docspace/shared/api/groups";
 import { getUserById } from "@docspace/shared/api/people";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
-import { Events, RoomSearchArea } from "@docspace/shared/enums";
+import {
+  Events,
+  FolderType,
+  RoomSearchArea,
+  RoomsType,
+} from "@docspace/shared/enums";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
 import { useParams } from "react-router-dom";
 
@@ -70,6 +75,9 @@ const useFiles = ({
   gallerySelected,
   folderSecurity,
   userId,
+
+  scrollToTop,
+  selectedFolderStore,
 }) => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -296,11 +304,16 @@ const useFiles = ({
 
           const event = new Event(Events.CREATE);
 
+          const isFormRoom =
+            selectedFolderStore.roomType === RoomsType.FormRoom ||
+            selectedFolderStore.type === FolderType.FormRoom;
+
           const payload = {
             extension: "pdf",
             id: -1,
             fromTemplate: true,
             title: gallerySelected.attributes.name_form,
+            openEditor: !isFormRoom,
           };
 
           event.payload = payload;
@@ -309,6 +322,7 @@ const useFiles = ({
         }
       })
       .finally(() => {
+        scrollToTop();
         setIsLoading(false);
       });
   }, [isAccountsPage, isSettingsPage, location.pathname, location.search]);

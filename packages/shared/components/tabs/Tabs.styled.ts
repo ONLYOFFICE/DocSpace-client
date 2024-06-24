@@ -209,6 +209,11 @@ export const Tab = styled.div<{
       props.$type === TabsTypes.Secondary &&
       !props.isActive &&
       props.theme.tabs.hoverBackgroundColorSecondary};
+
+     border: ${(props) =>
+       props.$type === TabsTypes.Secondary &&
+       !props.isActive &&
+       css`1px solid ${props.theme.tabs.hoverBackgroundColorSecondary}`};
   };
 
   &:active {
@@ -224,6 +229,11 @@ export const Tab = styled.div<{
       props.$type === TabsTypes.Secondary &&
       !props.isActive &&
       props.theme.tabs.pressedBackgroundColorSecondary};
+
+    border: ${(props) =>
+      props.$type === TabsTypes.Secondary &&
+      !props.isActive &&
+      css`1px solid ${props.theme.tabs.pressedBackgroundColorSecondary}`};
   };
 `;
 

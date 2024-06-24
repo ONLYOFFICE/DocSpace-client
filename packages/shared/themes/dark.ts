@@ -992,7 +992,7 @@ const Dark: TTheme = {
       border: "none",
     },
   },
-  
+
   fieldContainer: {
     horizontal: {
       margin: "0 0 16px 0",
@@ -3154,7 +3154,7 @@ const Dark: TTheme = {
     gradientColor: black,
     lineColor: "#474747",
 
-    textColorPrimary: "#657077",
+    textColorPrimary: "#ADADAD",
     activeTextColorPrimary: white,
     hoverTextColorPrimary: white,
     pressedTextColorPrimary: "#CCCCCC",

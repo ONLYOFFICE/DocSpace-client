@@ -720,7 +720,7 @@ export async function copyToFolder(
   return res;
 }
 
-export async function duplicateRoom(folderIds: number[], fileIds: number[]) {
+export async function duplicate(folderIds: number[], fileIds: number[]) {
   const data = {
     folderIds,
     fileIds,

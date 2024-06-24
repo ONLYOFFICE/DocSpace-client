@@ -27,7 +27,7 @@
 import React from "react";
 
 import styled, { css } from "styled-components";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { Text } from "../text";
 
 import { IconButton } from "../icon-button";
@@ -68,7 +68,9 @@ const StyledIcon = styled.div<{
     font-weight: 700;
     line-height: 16px;
     color: ${(props) =>
-      props.wrongImage && props.theme.isBase ? "#333333" : "#ffffff"};
+      props.wrongImage && props.theme.isBase
+        ? globalColors.black
+        : globalColors.white};
     position: relative;
     ${(props) =>
       !props.theme.isBase &&

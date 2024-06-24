@@ -26,6 +26,7 @@
 
 import styled, { css } from "styled-components";
 import ArticleShowMenuReactSvgUrl from "PUBLIC_DIR/images/article-show-menu.react.svg";
+import { globalColors } from "../../../../../../themes";
 
 export const SidebarContainer = styled.aside<{ isPanelOpen: boolean }>`
   display: flex;
@@ -34,7 +35,7 @@ export const SidebarContainer = styled.aside<{ isPanelOpen: boolean }>`
   height: 100vh;
   width: 100%;
 
-  background: #333333;
+  background: ${globalColors.black};
 
   max-width: ${(props) => (props.isPanelOpen ? "306px" : "0px")};
   visibility: ${(props) => (props.isPanelOpen ? "visible" : "hidden")};

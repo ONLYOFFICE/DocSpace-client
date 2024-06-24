@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
@@ -62,20 +62,20 @@ export const ControlBtn = styled.div`
 ControlBtn.defaultProps = { theme: Base };
 
 export const StyledDropDown = styled(DropDown)`
-  background: #333;
+  background: ${globalColors.black};
 `;
 
 export const StyledDropDownItem = styled(DropDownItem)`
-  color: #fff;
+  color: ${globalColors.white};
 
   .drop-down-item_icon svg {
     path {
-      fill: #fff !important;
+      fill: ${globalColors.white} !important;
     }
   }
 
   &:hover {
-    background: #444;
+    background: ${globalColors.black};
   }
 `;
 
@@ -105,7 +105,7 @@ export const StyledMobileDetails = styled.div`
 
   svg {
     path {
-      fill: #fff;
+      fill: ${globalColors.white};
     }
   }
 

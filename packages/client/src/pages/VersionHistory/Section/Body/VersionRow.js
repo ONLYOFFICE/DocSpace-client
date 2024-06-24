@@ -102,7 +102,7 @@ const VersionRow = (props) => {
 
   const versionDate = getCorrectDate(culture, info.updated, "L", "LTS");
 
-  const title = info.updatedBy.isAnonim
+  const title = info.updatedBy?.isAnonim
     ? t("Common:Anonymous")
     : `${Encoder.htmlDecode(info.updatedBy?.displayName)}`;
 

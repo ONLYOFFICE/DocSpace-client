@@ -218,7 +218,7 @@ class DetailsHelper {
         return this.t("CreationDate");
 
       case "Index":
-        return "Index";
+        return this.t("Files:Index");
 
       case "Versions":
         return this.t("InfoPanel:Versions");

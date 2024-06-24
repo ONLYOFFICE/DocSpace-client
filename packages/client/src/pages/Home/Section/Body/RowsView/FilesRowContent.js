@@ -333,7 +333,7 @@ const FilesRowContent = ({
             fontWeight={400}
             className="row_update-text"
           >
-            {`idx ${order}`}
+            {`${t("Files:Index")} ${order}`}
           </Text>
         )}
 

@@ -60,7 +60,7 @@ const StorageManagement = ({
     ready && setDocumentTitle(t("Settings:StorageManagement"));
   }, [ready]);
 
-  if (!isInit || !ready) return <SettingsStorageManagementSkeleton />;
+  if (!ready || !isInit) return <SettingsStorageManagementSkeleton />;
 
   return (
     <StyledBody>

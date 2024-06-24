@@ -123,7 +123,7 @@ const Members = ({
 
   const onAddNewLink = async () => {
     if (isPublicRoom || primaryLink) {
-      setLinkParams({ isEdit: false });
+      setLinkParams({ roomId: infoPanelSelection?.id, isEdit: false });
       setEditLinkPanelIsVisible(true);
     } else {
       getPrimaryLink(infoPanelSelection.id).then((link) => {

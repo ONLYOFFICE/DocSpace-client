@@ -39,8 +39,10 @@ export interface TagProps {
   isNewTag?: boolean;
   /** Accepts the tag styles as disabled and disables clicking */
   isDisabled?: boolean;
+  /** Accepts the tag styles as deleted and disables clicking */
+  isDeleted?: boolean;
   /** Accepts the function that is called when the tag is clicked */
-  onClick: (tag?: object) => void;
+  onClick?: (tag?: object) => void;
   /** Accepts the function that ist called when the tag delete button is clicked */
   onDelete?: (tag?: string) => void;
   /** Accepts the max width of the tag */

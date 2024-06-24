@@ -3,7 +3,7 @@
   "CannotReassignFiles": "If you delete multiple users at once, you cannot reassign their files to other users.",
   "DeleteGroupUsersSuccessMessage": "Users have been successfully deleted.",
   "DeleteMyDocumentsUser": "Personal data, all files and folders in the Documents and Trash sections of this user will be permanently deleted.",
-  "DeletePersonalData": "Personal data, all personal files and folders in the Documents and Trash sections* of the selected users will be permanently deleted. Files and folders of the selected users kept in common sections* such as rooms will remain in DocSpace.",
+  "DeletePersonalData": "Personal data, all personal files and folders in the Documents and Trash sections* of the selected users will be permanently deleted. Files and folders of the selected users kept in common sections* such as rooms will remain in {{productName}}.",
   "DeletePersonalDataApplicable": "*Applicable for the selected users who have such files and folders.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Rooms created by this user and documents stored in these rooms will be reassigned automatically to an admin performing the deletion: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Reassign data manually to choose another destination user for reassignment.",
   "DeleteUser": "Delete user",

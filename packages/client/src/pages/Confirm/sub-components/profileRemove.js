@@ -38,6 +38,7 @@ import withLoader from "../withLoader";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const ProfileRemoveForm = (props) => {
   const { t, greetingTitle, linkData, legalTerms, currentColorScheme } = props;
@@ -70,14 +71,15 @@ const ProfileRemoveForm = (props) => {
               {t("DeleteProfileSuccessMessage")}
             </Text>
             <Text fontSize="16px" fontWeight="600" className="confirm-subtitle">
+              {t("DeleteProfileSuccessDescription", {
+                productName: PRODUCT_NAME,
+              })}
               <Trans
                 i18nKey="DeleteProfileSuccessMessageInfo"
                 ns="Confirm"
                 t={t}
               >
-                Your DocSpace account is successfully disabled. The DocSpace
-                owner or admin can permanently delete your disabled account.
-                \n\nPlease check our
+                Please check our
                 <Link
                   fontSize="16px"
                   fontWeight="600"

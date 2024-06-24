@@ -44,7 +44,7 @@ import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 
 import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
-import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.reat.svg?url";
+import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -880,7 +880,7 @@ const SectionHeaderContent = (props) => {
       : isRootFolder || isAccountsPage || isSettingsPage;
 
   const getInsideGroupTitle = () => {
-    return isLoading || !currentGroup?.name
+    return isLoading && insideGroupTempTitle
       ? insideGroupTempTitle
       : currentGroup?.name;
   };

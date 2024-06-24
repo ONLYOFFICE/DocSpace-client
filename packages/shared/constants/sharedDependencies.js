@@ -184,8 +184,4 @@ module.exports = {
     singleton: true,
     requiredVersion: deps["query-string"],
   },
-  "@loadable/component": {
-    singleton: true,
-    requiredVersion: deps["@loadable/component"],
-  },
 };

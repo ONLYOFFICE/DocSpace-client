@@ -434,3 +434,16 @@ export interface InjectedImportStepProps extends ImportStepProps {
   setImportOptions: TStore["importAccountsStore"]["setImportOptions"];
   user: TStore["userStore"]["user"];
 }
+
+export interface ImportProcessingStepProps {
+  t: TFunciton;
+  migratorName: TWorkspaceService;
+}
+
+export interface InjectedImportProcessingStepProps
+  extends ImportProcessingStepProps {
+  incrementStep: TStore["importAccountsStore"]["incrementStep"];
+  setIsLoading: TStore["importAccountsStore"]["setIsLoading"];
+  proceedFileMigration: TStore["importAccountsStore"]["proceedFileMigration"];
+  getMigrationStatus: TStore["importAccountsStore"]["getMigrationStatus"];
+}

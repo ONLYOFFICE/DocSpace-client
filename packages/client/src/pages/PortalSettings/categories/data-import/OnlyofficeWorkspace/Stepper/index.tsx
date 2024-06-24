@@ -35,8 +35,8 @@ import SelectFileStep from "../../components/SelectFileStep";
 import SelectUsersStep from "../../components/SelectUsersStep";
 import SelectUsersTypeStep from "../../components/SelectUsersTypeStep";
 import ImportStep from "../../components/ImportStep";
+import ImportProcessingStep from "../../components/ImportProcessingStep";
 
-import ImportProcessingStep from "./ImportProcessingStep";
 import ImportCompleteStep from "./ImportCompleteStep";
 
 import { TFunciton } from "../../types";
@@ -140,7 +140,7 @@ export const getStepsData = (
     {
       title: t("Settings:DataImportProcessing"),
       description: t("Settings:ImportProcessingDescription"),
-      component: <ImportProcessingStep t={t} onNextStep={incrementStep} />,
+      component: <ImportProcessingStep t={t} migratorName="Workspace" />,
     },
     {
       title: t("Settings:DataImportComplete"),

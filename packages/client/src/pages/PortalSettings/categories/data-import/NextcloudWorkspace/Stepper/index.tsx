@@ -35,8 +35,8 @@ import SelectUsersStep from "../../components/SelectUsersStep";
 import AddEmailsStep from "../../components/AddEmailsStep";
 import SelectUsersTypeStep from "../../components/SelectUsersTypeStep";
 import ImportStep from "../../components/ImportStep";
+import ImportProcessingStep from "../../components/ImportProcessingStep";
 
-import ImportProcessingStep from "./ImportProcessingStep";
 import ImportCompleteStep from "./ImportCompleteStep";
 
 import { TFunciton } from "../../types";
@@ -142,7 +142,7 @@ export const getStepsData = (
     {
       title: t("Settings:DataImportProcessing"),
       description: t("Settings:ImportProcessingDescription"),
-      component: <ImportProcessingStep t={t} incrementStep={incrementStep} />,
+      component: <ImportProcessingStep t={t} migratorName="Nextcloud" />,
     },
     {
       title: t("Settings:DataImportComplete"),

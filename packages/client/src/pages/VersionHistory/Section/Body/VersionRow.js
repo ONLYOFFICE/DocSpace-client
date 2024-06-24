@@ -102,7 +102,9 @@ const VersionRow = (props) => {
 
   const versionDate = getCorrectDate(culture, info.updated, "L", "LTS");
 
-  const title = `${Encoder.htmlDecode(info.updatedBy?.displayName)}`;
+  const title = info.updatedBy.isAnonim
+    ? t("Common:Anonymous")
+    : `${Encoder.htmlDecode(info.updatedBy?.displayName)}`;
 
   const onDownloadAction = () =>
     openUrl(`${info.viewUrl}&version=${info.version}`, UrlActionType.Download);
@@ -232,6 +234,8 @@ const VersionRow = (props) => {
 
     newRowHeight && onUpdateHeight(index, newRowHeight);
   }, [showEditPanel, versionsListLength]);
+
+  console.log({ title, info });
 
   return (
     <StyledVersionRow

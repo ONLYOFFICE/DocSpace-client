@@ -59,23 +59,8 @@ const RoomsRowDataComponent = (props) => {
     badgesComponent,
     quickButtonsComponent,
     item,
-    tableStorageName,
+    lastColumn,
   } = props;
-
-  let lastColumn = null;
-
-  if (roomColumnQuickButtonsIsEnabled && tableStorageName) {
-    const storageColumns = localStorage.getItem(tableStorageName);
-    if (!storageColumns) return;
-
-    const columns = storageColumns.split(",");
-    const filterColumns = columns.filter(
-      (column) => column !== "false" && column !== "QuickButtons",
-    );
-
-    if (filterColumns.length > 1)
-      lastColumn = filterColumns[filterColumns.length - 1];
-  }
 
   return (
     <>
@@ -108,10 +93,13 @@ const RoomsRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Type" ? "no-extra-space" : "",
+          )}
         >
           <TypeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
-            removeExtraSpace={lastColumn === "Type"}
             {...props}
           />
         </TableCell>
@@ -145,9 +133,12 @@ const RoomsRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Owner" ? "no-extra-space" : "",
+          )}
         >
           <AuthorCell
-            removeExtraSpace={lastColumn === "Owner"}
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
@@ -164,9 +155,12 @@ const RoomsRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Activity" ? "no-extra-space" : "",
+          )}
         >
           <DateCell
-            removeExtraSpace={lastColumn === "Activity"}
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />

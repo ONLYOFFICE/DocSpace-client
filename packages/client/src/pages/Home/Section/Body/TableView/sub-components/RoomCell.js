@@ -32,7 +32,7 @@ import { StyledText } from "./CellStyles";
 import { getFolderPath } from "@docspace/shared/api/files";
 import { CategoryType } from "@docspace/client/src/helpers/constants";
 
-const RoomCell = ({ sideColor, item, removeExtraSpace }) => {
+const RoomCell = ({ sideColor, item }) => {
   const { originRoomTitle, originId, originTitle } = item;
 
   const [path, setPath] = useState([]);
@@ -66,7 +66,6 @@ const RoomCell = ({ sideColor, item, removeExtraSpace }) => {
       truncate
       data-tooltip-id={"" + item.id}
       data-tip={""}
-      removeExtraSpace={removeExtraSpace}
     >
       {originRoomTitle || originTitle || ""}
     </StyledText>,

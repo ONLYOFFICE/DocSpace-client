@@ -61,6 +61,7 @@ const TrashRowDataComponent = (props) => {
     showHotkeyBorder,
     badgesComponent,
     quickButtonsComponent,
+    lastColumn,
   } = props;
 
   return (
@@ -92,6 +93,10 @@ const TrashRowDataComponent = (props) => {
             !roomColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Room" ? "no-extra-space" : "",
+          )}
         >
           <RoomCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -110,6 +115,10 @@ const TrashRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "AuthorTrash" ? "no-extra-space" : "",
+          )}
         >
           <AuthorCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -128,6 +137,10 @@ const TrashRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "CreatedTrash" ? "no-extra-space" : "",
+          )}
         >
           <DateCell
             create
@@ -145,6 +158,10 @@ const TrashRowDataComponent = (props) => {
             !erasureColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Erasure" ? "no-extra-space" : "",
+          )}
         >
           <ErasureCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -163,6 +180,10 @@ const TrashRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "SizeTrash" ? "no-extra-space" : "",
+          )}
         >
           <SizeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -181,6 +202,10 @@ const TrashRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "TypeTrash" ? "no-extra-space" : "",
+          )}
         >
           <TypeCell
             sideColor={theme.filesSection.tableView.row.sideColor}

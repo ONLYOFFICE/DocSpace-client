@@ -37,19 +37,6 @@ const StyledText = styled(Text)`
       : css`
           margin-right: 12px;
         `}
-
-  ${(props) =>
-    props.removeExtraSpace &&
-    css`
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 0px;
-            `
-          : css`
-              margin-right: 0px;
-            `}
-    `}
 `;
 
 const StyledTypeCell = styled(StyledText)`

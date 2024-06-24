@@ -58,23 +58,8 @@ const RowDataComponent = (props) => {
     showHotkeyBorder,
     badgesComponent,
     quickButtonsComponent,
-    tableStorageName,
+    lastColumn,
   } = props;
-
-  let lastColumn = null;
-
-  if (quickButtonsColumnIsEnabled && tableStorageName) {
-    const storageColumns = localStorage.getItem(tableStorageName);
-
-    if (!storageColumns) return;
-    const columns = storageColumns.split(",");
-    const filterColumns = columns.filter(
-      (column) => column !== "false" && column !== "QuickButtons",
-    );
-
-    if (filterColumns.length > 1)
-      lastColumn = filterColumns[filterColumns.length - 1];
-  }
 
   return (
     <>
@@ -105,10 +90,13 @@ const RowDataComponent = (props) => {
             !authorColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Author" ? "no-extra-space" : "",
+          )}
         >
           <AuthorCell
             sideColor={theme.filesSection.tableView.row.sideColor}
-            removeExtraSpace={lastColumn === "Author"}
             {...props}
           />
         </TableCell>
@@ -124,11 +112,14 @@ const RowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Created" ? "no-extra-space" : "",
+          )}
         >
           <DateCell
             create
             sideColor={theme.filesSection.tableView.row.sideColor}
-            removeExtraSpace={lastColumn === "Created"}
             {...props}
           />
         </TableCell>
@@ -142,10 +133,13 @@ const RowDataComponent = (props) => {
             !modifiedColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Modified" ? "no-extra-space" : "",
+          )}
         >
           <DateCell
             sideColor={theme.filesSection.tableView.row.sideColor}
-            removeExtraSpace={lastColumn === "Modified"}
             {...props}
           />
         </TableCell>
@@ -159,10 +153,13 @@ const RowDataComponent = (props) => {
             !sizeColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Size" ? "no-extra-space" : "",
+          )}
         >
           <SizeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
-            removeExtraSpace={lastColumn === "Size"}
             {...props}
           />
         </TableCell>
@@ -178,10 +175,13 @@ const RowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Type" ? "no-extra-space" : "",
+          )}
         >
           <TypeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
-            removeExtraSpace={lastColumn === "Type"}
             {...props}
           />
         </TableCell>

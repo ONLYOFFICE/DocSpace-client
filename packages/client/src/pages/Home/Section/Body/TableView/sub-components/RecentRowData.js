@@ -59,6 +59,7 @@ const RecentRowDataComponent = (props) => {
     showHotkeyBorder,
     badgesComponent,
     quickButtonsComponent,
+    lastColumn,
   } = props;
 
   return (
@@ -90,6 +91,10 @@ const RecentRowDataComponent = (props) => {
             !authorColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Author" ? "no-extra-space" : "",
+          )}
         >
           <AuthorCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -108,6 +113,10 @@ const RecentRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Created" ? "no-extra-space" : "",
+          )}
         >
           <DateCell
             create
@@ -127,6 +136,10 @@ const RecentRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "LastOpened" ? "no-extra-space" : "",
+          )}
         >
           <DateCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -143,6 +156,10 @@ const RecentRowDataComponent = (props) => {
             !modifiedColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Modified" ? "no-extra-space" : "",
+          )}
         >
           <DateCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -159,6 +176,10 @@ const RecentRowDataComponent = (props) => {
             !sizeColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Size" ? "no-extra-space" : "",
+          )}
         >
           <SizeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -177,6 +198,10 @@ const RecentRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Type" ? "no-extra-space" : "",
+          )}
         >
           <TypeCell
             sideColor={theme.filesSection.tableView.row.sideColor}

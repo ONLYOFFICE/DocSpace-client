@@ -97,8 +97,6 @@ export interface InjectedWorkspaceProps extends WorkspaceProps {
   theme: TStore["settingsStore"]["theme"];
   filteredUsers: TStore["importAccountsStore"]["filteredUsers"];
   step: TStore["importAccountsStore"]["step"];
-  incrementStep: TStore["importAccountsStore"]["incrementStep"];
-  decrementStep: TStore["importAccountsStore"]["decrementStep"];
 }
 
 export interface LayoutProps {

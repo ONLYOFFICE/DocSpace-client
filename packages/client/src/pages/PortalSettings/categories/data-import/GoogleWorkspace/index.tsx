@@ -35,19 +35,13 @@ import StepLayout from "../sub-components/StepLayout";
 import { InjectedWorkspaceProps, WorkspaceProps, TFunciton } from "../types";
 
 const GoogleWorkspace = (props: WorkspaceProps) => {
-  const { theme, filteredUsers, step, incrementStep, decrementStep } =
-    props as InjectedWorkspaceProps;
+  const { theme, filteredUsers, step } = props as InjectedWorkspaceProps;
 
   const { t, ready }: { t: TFunciton; ready: boolean } = useTranslation([
     "Common, SMTPSettings, Settings",
   ]);
 
-  const StepsData = getStepsData(
-    t,
-    incrementStep,
-    decrementStep,
-    filteredUsers.length === 0,
-  );
+  const StepsData = getStepsData(t, filteredUsers.length === 0);
 
   if (!ready) return <SelectFileLoader />;
 
@@ -65,14 +59,7 @@ const GoogleWorkspace = (props: WorkspaceProps) => {
 };
 
 export default inject<TStore>(({ settingsStore, importAccountsStore }) => {
-  const {
-    filteredUsers,
-    step,
-    setStep,
-    incrementStep,
-    decrementStep,
-    setWorkspace,
-  } = importAccountsStore;
+  const { filteredUsers, step, setStep, setWorkspace } = importAccountsStore;
   const { theme } = settingsStore;
 
   return {
@@ -80,8 +67,6 @@ export default inject<TStore>(({ settingsStore, importAccountsStore }) => {
     filteredUsers,
     step,
     setStep,
-    incrementStep,
-    decrementStep,
     setWorkspace,
   };
 })(observer(GoogleWorkspace));

@@ -39,12 +39,7 @@ import ImportCompleteStep from "../../components/ImportCompleteStep";
 
 import { TFunciton } from "../../types";
 
-export const getStepsData = (
-  t: TFunciton,
-  incrementStep: () => void,
-  decrementStep: () => void,
-  isTypeSelectEmpty: boolean,
-) => {
+export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
   return [
     {
       title: t("Common:SelectFiles"),

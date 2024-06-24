@@ -447,3 +447,18 @@ export interface InjectedImportProcessingStepProps
   proceedFileMigration: TStore["importAccountsStore"]["proceedFileMigration"];
   getMigrationStatus: TStore["importAccountsStore"]["getMigrationStatus"];
 }
+
+export interface ImportCompleteStepProps {
+  t: TFunciton;
+}
+
+export interface InjectedImportCompleteStepProps
+  extends ImportCompleteStepProps {
+  getMigrationLog: TStore["importAccountsStore"]["getMigrationLog"];
+  clearCheckedAccounts: TStore["importAccountsStore"]["clearCheckedAccounts"];
+  sendWelcomeLetter: TStore["importAccountsStore"]["sendWelcomeLetter"];
+  clearMigration: TStore["importAccountsStore"]["clearMigration"];
+  getMigrationStatus: TStore["importAccountsStore"]["getMigrationStatus"];
+  setStep: TStore["importAccountsStore"]["setStep"];
+  setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
+}

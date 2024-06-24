@@ -36,8 +36,7 @@ import AddEmailsStep from "../../components/AddEmailsStep";
 import SelectUsersTypeStep from "../../components/SelectUsersTypeStep";
 import ImportStep from "../../components/ImportStep";
 import ImportProcessingStep from "../../components/ImportProcessingStep";
-
-import ImportCompleteStep from "./ImportCompleteStep";
+import ImportCompleteStep from "../../components/ImportCompleteStep";
 
 import { TFunciton } from "../../types";
 

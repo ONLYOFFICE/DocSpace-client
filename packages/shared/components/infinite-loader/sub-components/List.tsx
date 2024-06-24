@@ -47,7 +47,6 @@ const ListComponent = ({
   className,
   scroll,
   infoPanelVisible,
-  isIndexEditingMode,
 }: ListComponentProps) => {
   const loaderRef = useRef<InfiniteLoader | null>(null);
   const listRef = useRef<List | null>(null);
@@ -121,13 +120,6 @@ const ListComponent = ({
     const storageSize = infoPanelVisible
       ? localStorage.getItem(columnInfoPanelStorageName)
       : localStorage.getItem(columnStorageName);
-
-    let indexEditingColumn;
-
-    if (isIndexEditingMode && storageSize) {
-      const storage = storageSize?.split(" ");
-      indexEditingColumn = storage?.splice(0, storage.length - 2);
-    }
 
     const isLoaded = isItemLoaded({ index });
     if (!isLoaded) return getLoader(style, key);

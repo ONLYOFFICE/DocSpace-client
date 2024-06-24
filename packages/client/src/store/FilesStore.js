@@ -2036,7 +2036,7 @@ class FilesStore {
         "move", //category
         "move-to",
         "copy-to",
-        "copy",
+        "duplicate",
         "restore",
         "rename",
         "separator2",
@@ -2108,8 +2108,9 @@ class FilesStore {
       }
 
       if (!canDuplicate) {
-        fileOptions = this.removeOptions(fileOptions, ["copy"]);
+        fileOptions = this.removeOptions(fileOptions, ["duplicate"]);
       }
+
       if (!canMove && !canCopy && !canDuplicate) {
         fileOptions = this.removeOptions(fileOptions, ["move"]);
       }
@@ -2323,7 +2324,7 @@ class FilesStore {
         "mute-room",
         "unmute-room",
         "separator1",
-        "copy-room",
+        "duplicate-room",
         "download",
         "archive-room",
         "unarchive-room",
@@ -2354,7 +2355,7 @@ class FilesStore {
       }
 
       if (!canDuplicate) {
-        roomOptions = this.removeOptions(roomOptions, ["copy-room"]);
+        roomOptions = this.removeOptions(roomOptions, ["duplicate-room"]);
       }
 
       if (!canDownload) {
@@ -2438,7 +2439,7 @@ class FilesStore {
         "move", //category
         "move-to",
         "copy-to",
-        "copy-room",
+        "duplicate",
         "mark-read",
         "restore",
         "rename",
@@ -2468,7 +2469,7 @@ class FilesStore {
       }
 
       if (!canDuplicate) {
-        folderOptions = this.removeOptions(folderOptions, ["copy"]);
+        folderOptions = this.removeOptions(folderOptions, ["duplicate"]);
       }
 
       if (!canMove && !canCopy && !canDuplicate) {

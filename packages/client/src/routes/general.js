@@ -26,6 +26,8 @@
 
 import { Navigate } from "react-router-dom";
 
+import componentLoader from "@docspace/shared/utils/component-loader";
+
 const generalRoutes = [
   {
     path: "profile/",
@@ -42,19 +44,19 @@ const generalRoutes = [
       },
       {
         path: "login",
-        lazy: () => import("SRC_DIR/pages/Profile"),
+        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
       },
       {
         path: "notifications",
-        lazy: () => import("SRC_DIR/pages/Profile"),
+        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
       },
       {
         path: "file-management",
-        lazy: () => import("SRC_DIR/pages/Profile"),
+        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
       },
       {
         path: "interface-theme",
-        lazy: () => import("SRC_DIR/pages/Profile"),
+        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
       },
     ],
   },

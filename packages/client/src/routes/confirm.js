@@ -25,159 +25,115 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import Error404 from "@docspace/shared/components/errors/Error404";
+import componentLoader from "@docspace/shared/utils/component-loader";
 
 import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
-
-// import ActivateUserForm from "SRC_DIR/pages/Confirm/sub-components/activateUser";
-// import CreateUserForm from "SRC_DIR/pages/Confirm/sub-components/createUser";
-// import ChangePasswordForm from "SRC_DIR/pages/Confirm/sub-components/changePassword";
-// import ActivateEmailForm from "SRC_DIR/pages/Confirm/sub-components/activateEmail";
-// import ChangeEmailForm from "SRC_DIR/pages/Confirm/sub-components/changeEmail";
-// import ChangePhoneForm from "SRC_DIR/pages/Confirm/sub-components/changePhone";
-// import ProfileRemoveForm from "SRC_DIR/pages/Confirm/sub-components/profileRemove";
-// import ChangeOwnerForm from "SRC_DIR/pages/Confirm/sub-components/changeOwner";
-// import TfaAuthForm from "SRC_DIR/pages/Confirm/sub-components/tfaAuth";
-// import TfaActivationForm from "SRC_DIR/pages/Confirm/sub-components/tfaActivation";
-// import RemovePortal from "SRC_DIR/pages/Confirm/sub-components/removePortal";
-// import DeactivatePortal from "SRC_DIR/pages/Confirm/sub-components/deactivatePortal";
-// import ContinuePortal from "SRC_DIR/pages/Confirm/sub-components/continuePortal";
-// import Auth from "SRC_DIR/pages/Confirm/sub-components/auth";
 
 const confirmRoutes = [
   {
     path: "EmpInvite",
-    // element: (
-    //   <ConfirmRoute doAuthenticated={AuthenticatedAction.Redirect}>
-    //     <CreateUserForm />
-    //   </ConfirmRoute>
-    // ),
-    lazy: () => import("SRC_DIR/pages/Confirm/sub-components/createUser"),
+    lazy: () =>
+      componentLoader(
+        () => import("SRC_DIR/pages/Confirm/sub-components/createUser"),
+      ),
   },
   {
     path: "LinkInvite",
-    // element: (
-    //   <ConfirmRoute doAuthenticated={AuthenticatedAction.Redirect}>
-    //     <CreateUserForm />
-    //   </ConfirmRoute>
-    // ),
-    lazy: () => import("SRC_DIR/pages/Confirm/sub-components/createUser"),
+    lazy: () =>
+      componentLoader(
+        () => import("SRC_DIR/pages/Confirm/sub-components/createUser"),
+      ),
   },
   {
     path: "Activation",
-    // element: (
-    //   <ConfirmRoute doAuthenticated={AuthenticatedAction.Redirect}>
-    //     <ActivateUserForm />
-    //   </ConfirmRoute>
-    // ),
-    lazy: () => import("SRC_DIR/pages/Confirm/sub-components/activateUser"),
+    lazy: () =>
+      componentLoader(
+        () => import("SRC_DIR/pages/Confirm/sub-components/activateUser"),
+      ),
   },
   {
     path: "EmailActivation",
-    //  element: (
-    //     <ConfirmRoute>
-    //       <ActivateEmailForm />
-    //     </ConfirmRoute onfirmRoute>
-    //   ),
-    lazy: () => import("SRC_DIR/pages/Confirm/sub-components/activateEmail"),
+    lazy: () =>
+      componentLoader(
+        () => import("SRC_DIR/pages/Confirm/sub-components/activateEmail"),
+      ),
   },
   {
     path: "EmailChange",
-    // element: (
-    //   <ConfirmRoute>
-    //     <ChangeEmailForm />
-    //   </ConfirmRoute>
-    // ),
-    lazy: () => import("SRC_DIR/pages/Confirm/sub-components/changeEmail"),
+    lazy: () =>
+      componentLoader(
+        () => import("SRC_DIR/pages/Confirm/sub-components/changeEmail"),
+      ),
   },
   {
     path: "PasswordChange",
-    // element: (
-    //   <ConfirmRoute>
-    //     <ChangePasswordForm />
-    //   </ConfirmRoute>
-    // ),
-    lazy: () => import("SRC_DIR/pages/Confirm/sub-components/changePassword"),
+    lazy: () =>
+      componentLoader(
+        () => import("SRC_DIR/pages/Confirm/sub-components/changePassword"),
+      ),
   },
   {
     path: "ProfileRemove",
-    // element: (
-    //   <ConfirmRoute>
-    //     <ProfileRemoveForm />
-    //   </ConfirmRoute>
-    // ),
-    lazy: () => import("SRC_DIR/pages/Confirm/sub-components/profileRemove"),
+    lazy: () =>
+      componentLoader(
+        () => import("SRC_DIR/pages/Confirm/sub-components/profileRemove"),
+      ),
   },
   {
     path: "PhoneActivation",
-    // element: (
-    //   <ConfirmRoute>
-    //     <ChangePhoneForm />
-    //   </ConfirmRoute>
-    // ),
-    lazy: () => import("SRC_DIR/pages/Confirm/sub-components/changePhone"),
+    lazy: () =>
+      componentLoader(
+        () => import("SRC_DIR/pages/Confirm/sub-components/changePhone"),
+      ),
   },
   {
     path: "PortalOwnerChange",
-    // element: (
-    //   <ConfirmRoute>
-    //     <ChangeOwnerForm />
-    //   </ConfirmRoute>
-    // ),
-    lazy: () => import("SRC_DIR/pages/Confirm/sub-components/changeOwner"),
+    lazy: () =>
+      componentLoader(
+        () => import("SRC_DIR/pages/Confirm/sub-components/changeOwner"),
+      ),
   },
   {
     path: "TfaAuth",
-    // element: (
-    //   <ConfirmRoute>
-    //     <TfaAuthForm />
-    //   </ConfirmRoute>
-    // ),
-    lazy: () => import("SRC_DIR/pages/Confirm/sub-components/tfaAuth"),
+    lazy: () =>
+      componentLoader(
+        () => import("SRC_DIR/pages/Confirm/sub-components/tfaAuth"),
+      ),
   },
   {
     path: "TfaActivation",
-    // element: (
-    //   <ConfirmRoute>
-    //     <TfaActivationForm />
-    //   </ConfirmRoute>
-    // ),
-    lazy: () => import("SRC_DIR/pages/Confirm/sub-components/tfaActivation"),
+    lazy: () =>
+      componentLoader(
+        () => import("SRC_DIR/pages/Confirm/sub-components/tfaActivation"),
+      ),
   },
   {
     path: "PortalRemove",
-    // element: (
-    //   <ConfirmRoute>
-    //     <RemovePortal />
-    //   </ConfirmRoute>
-    // ),
-    lazy: () => import("SRC_DIR/pages/Confirm/sub-components/removePortal"),
+    lazy: () =>
+      componentLoader(
+        () => import("SRC_DIR/pages/Confirm/sub-components/removePortal"),
+      ),
   },
   {
     path: "PortalSuspend",
-    // element: (
-    //   <ConfirmRoute>
-    //     <DeactivatePortal />
-    //   </ConfirmRoute>
-    // ),
-    lazy: () => import("SRC_DIR/pages/Confirm/sub-components/deactivatePortal"),
+    lazy: () =>
+      componentLoader(
+        () => import("SRC_DIR/pages/Confirm/sub-components/deactivatePortal"),
+      ),
   },
   {
     path: "PortalContinue",
-    // element: (
-    //   <ConfirmRoute>
-    //     <ContinuePortal />
-    //   </ConfirmRoute>
-    // ),
-    lazy: () => import("SRC_DIR/pages/Confirm/sub-components/continuePortal"),
+    lazy: () =>
+      componentLoader(
+        () => import("SRC_DIR/pages/Confirm/sub-components/continuePortal"),
+      ),
   },
   {
     path: "Auth",
-    // element: (
-    //   <ConfirmRoute doAuthenticated={AuthenticatedAction.Logout}>
-    //     <Auth />
-    //   </ConfirmRoute>
-    // ),
-    lazy: () => import("SRC_DIR/pages/Confirm/sub-components/auth"),
+    lazy: () =>
+      componentLoader(
+        () => import("SRC_DIR/pages/Confirm/sub-components/auth"),
+      ),
   },
 ];
 
@@ -194,13 +150,13 @@ const ConfirmParentRoutes = [
   },
   {
     path: "confirm.aspx",
-    lazy: () => import("SRC_DIR/pages/Confirm"),
+    lazy: () => componentLoader(() => import("SRC_DIR/pages/Confirm")),
     errorElement: <Error404 />,
     children: [...confirmRoutes],
   },
   {
     path: "confirm",
-    lazy: () => import("SRC_DIR/pages/Confirm"),
+    lazy: () => componentLoader(() => import("SRC_DIR/pages/Confirm")),
     errorElement: <Error404 />,
     children: [...confirmRoutes],
   },

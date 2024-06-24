@@ -24,28 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { Navigate } from "react-router-dom";
-import loadable from "@loadable/component";
+
+import componentLoader from "@docspace/shared/utils/component-loader";
 
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
 import Error404 from "@docspace/shared/components/errors/Error404";
-import componentLoader from "@docspace/shared/utils/component-loader";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
 import { generalRoutes } from "./general";
-
-const PublicRoom = loadable(() =>
-  componentLoader(() => import("../pages/PublicRoom")),
-);
-const Wizard = loadable(() => componentLoader(() => import("../pages/Wizard")));
 
 const ClientRoutes = [
   {
     path: "/",
     async lazy() {
-      const { Client } = await import("SRC_DIR/Client");
+      const { Client } = await componentLoader(() => import("SRC_DIR/Client"));
 
       const Component = () => (
         <PrivateRoute>
@@ -62,7 +56,9 @@ const ClientRoutes = [
       {
         path: "/",
         async lazy() {
-          const { Component } = await import("SRC_DIR/pages/Home");
+          const { Component } = await componentLoader(
+            () => import("SRC_DIR/pages/Home"),
+          );
 
           return { Component };
         },
@@ -94,8 +90,8 @@ const ClientRoutes = [
           {
             path: "rooms/personal",
             async lazy() {
-              const { FilesView } = await import(
-                "SRC_DIR/pages/Home/View/Files"
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
               );
 
               const Component = () => {
@@ -112,8 +108,8 @@ const ClientRoutes = [
           {
             path: "rooms/personal/filter",
             async lazy() {
-              const { FilesView } = await import(
-                "SRC_DIR/pages/Home/View/Files"
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
               );
 
               const Component = () => {
@@ -130,8 +126,8 @@ const ClientRoutes = [
           {
             path: "files/trash",
             async lazy() {
-              const { FilesView } = await import(
-                "SRC_DIR/pages/Home/View/Files"
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
               );
 
               const Component = () => {
@@ -148,8 +144,8 @@ const ClientRoutes = [
           {
             path: "files/trash/filter",
             async lazy() {
-              const { FilesView } = await import(
-                "SRC_DIR/pages/Home/View/Files"
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
               );
 
               const Component = () => {
@@ -166,8 +162,8 @@ const ClientRoutes = [
           {
             path: "rooms/shared",
             async lazy() {
-              const { FilesView } = await import(
-                "SRC_DIR/pages/Home/View/Files"
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
               );
 
               const Component = () => {
@@ -184,8 +180,8 @@ const ClientRoutes = [
           {
             path: "rooms/shared/filter",
             async lazy() {
-              const { FilesView } = await import(
-                "SRC_DIR/pages/Home/View/Files"
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
               );
 
               const Component = () => {
@@ -202,8 +198,8 @@ const ClientRoutes = [
           {
             path: "rooms/shared/:room",
             async lazy() {
-              const { FilesView } = await import(
-                "SRC_DIR/pages/Home/View/Files"
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
               );
 
               const Component = () => {
@@ -220,8 +216,8 @@ const ClientRoutes = [
           {
             path: "rooms/shared/:room/filter",
             async lazy() {
-              const { FilesView } = await import(
-                "SRC_DIR/pages/Home/View/Files"
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
               );
 
               const Component = () => {
@@ -238,8 +234,8 @@ const ClientRoutes = [
           {
             path: "rooms/archived",
             async lazy() {
-              const { FilesView } = await import(
-                "SRC_DIR/pages/Home/View/Files"
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
               );
 
               const Component = () => {
@@ -256,8 +252,8 @@ const ClientRoutes = [
           {
             path: "rooms/archived/filter",
             async lazy() {
-              const { FilesView } = await import(
-                "SRC_DIR/pages/Home/View/Files"
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
               );
 
               const Component = () => {
@@ -274,8 +270,8 @@ const ClientRoutes = [
           {
             path: "rooms/archived/:room",
             async lazy() {
-              const { FilesView } = await import(
-                "SRC_DIR/pages/Home/View/Files"
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
               );
 
               const Component = () => {
@@ -292,8 +288,8 @@ const ClientRoutes = [
           {
             path: "rooms/archived/:room/filter",
             async lazy() {
-              const { FilesView } = await import(
-                "SRC_DIR/pages/Home/View/Files"
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
               );
 
               const Component = () => {
@@ -310,8 +306,8 @@ const ClientRoutes = [
           {
             path: "media/view/:id",
             async lazy() {
-              const { FilesView } = await import(
-                "SRC_DIR/pages/Home/View/Files"
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
               );
 
               const Component = () => {
@@ -364,8 +360,8 @@ const ClientRoutes = [
           {
             path: "accounts/people/filter",
             async lazy() {
-              const { AccountsView } = await import(
-                "SRC_DIR/pages/Home/View/Accounts"
+              const { AccountsView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Accounts"),
               );
 
               const Component = () => {
@@ -390,8 +386,8 @@ const ClientRoutes = [
           {
             path: "accounts/groups/filter",
             async lazy() {
-              const { AccountsView } = await import(
-                "SRC_DIR/pages/Home/View/Accounts"
+              const { AccountsView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Accounts"),
               );
 
               const Component = () => {
@@ -416,8 +412,8 @@ const ClientRoutes = [
           {
             path: "accounts/groups/:groupId/filter",
             async lazy() {
-              const { AccountsView } = await import(
-                "SRC_DIR/pages/Home/View/Accounts"
+              const { AccountsView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Accounts"),
               );
 
               const Component = () => {
@@ -452,7 +448,9 @@ const ClientRoutes = [
   {
     path: "/form-gallery",
     async lazy() {
-      const { WrappedComponent } = await import("SRC_DIR/pages/FormGallery");
+      const { WrappedComponent } = await componentLoader(
+        () => import("SRC_DIR/pages/FormGallery"),
+      );
 
       const Component = () => (
         <PrivateRoute>
@@ -468,7 +466,9 @@ const ClientRoutes = [
   {
     path: "/form-gallery/:fromFolderId",
     async lazy() {
-      const { WrappedComponent } = await import("SRC_DIR/pages/FormGallery");
+      const { WrappedComponent } = await componentLoader(
+        () => import("SRC_DIR/pages/FormGallery"),
+      );
 
       const Component = () => (
         <PrivateRoute>
@@ -484,7 +484,9 @@ const ClientRoutes = [
   {
     path: "/form-gallery/:fromFolderId/filter",
     async lazy() {
-      const { WrappedComponent } = await import("SRC_DIR/pages/FormGallery");
+      const { WrappedComponent } = await componentLoader(
+        () => import("SRC_DIR/pages/FormGallery"),
+      );
 
       const Component = () => (
         <PrivateRoute>
@@ -500,8 +502,8 @@ const ClientRoutes = [
   {
     path: "/share/preview/:id",
     async lazy() {
-      const { WrappedComponent } = await import(
-        "SRC_DIR/pages/PublicPreview/PublicPreview"
+      const { WrappedComponent } = await componentLoader(
+        () => import("SRC_DIR/pages/PublicPreview/PublicPreview"),
       );
 
       const Component = () => (
@@ -518,7 +520,9 @@ const ClientRoutes = [
   {
     path: "/rooms/share",
     async lazy() {
-      const { WrappedComponent } = await import("SRC_DIR/pages/PublicRoom");
+      const { WrappedComponent } = await componentLoader(
+        () => import("SRC_DIR/pages/PublicRoom"),
+      );
 
       const Component = () => (
         <PublicRoute>
@@ -535,7 +539,9 @@ const ClientRoutes = [
       {
         index: true,
         async lazy() {
-          const { FilesView } = await import("SRC_DIR/pages/Home/View/Files");
+          const { FilesView } = await componentLoader(
+            () => import("SRC_DIR/pages/Home/View/Files"),
+          );
 
           const Component = () => {
             return (
@@ -551,7 +557,9 @@ const ClientRoutes = [
       {
         path: "media/view/:id",
         async lazy() {
-          const { FilesView } = await import("SRC_DIR/pages/Home/View/Files");
+          const { FilesView } = await componentLoader(
+            () => import("SRC_DIR/pages/Home/View/Files"),
+          );
 
           const Component = () => {
             return (
@@ -569,7 +577,9 @@ const ClientRoutes = [
   {
     path: "/wizard",
     async lazy() {
-      const { WrappedComponent } = await import("SRC_DIR/pages/Wizard");
+      const { WrappedComponent } = await componentLoader(
+        () => import("SRC_DIR/pages/Wizard"),
+      );
 
       const Component = () => (
         <PublicRoute>
@@ -589,7 +599,9 @@ const ClientRoutes = [
   {
     path: "/about",
     async lazy() {
-      const { About } = await import("SRC_DIR/pages/About");
+      const { About } = await componentLoader(
+        () => import("SRC_DIR/pages/About"),
+      );
 
       const Component = () => (
         <PrivateRoute>
@@ -605,7 +617,9 @@ const ClientRoutes = [
   {
     path: "/portal-unavailable",
     async lazy() {
-      const { Component } = await import("SRC_DIR/pages/PortalUnavailable");
+      const { Component } = await componentLoader(
+        () => import("SRC_DIR/pages/PortalUnavailable"),
+      );
 
       const WrappedComponent = () => (
         <PrivateRoute>
@@ -621,8 +635,8 @@ const ClientRoutes = [
   {
     path: "/unavailable",
     async lazy() {
-      const { Component } = await import(
-        "SRC_DIR/components/ErrorUnavailableWrapper"
+      const { Component } = await componentLoader(
+        () => import("SRC_DIR/components/ErrorUnavailableWrapper"),
       );
 
       const WrappedComponent = () => (
@@ -639,8 +653,8 @@ const ClientRoutes = [
   {
     path: "/access-restricted",
     async lazy() {
-      const { AccessRestricted } = await import(
-        "@docspace/shared/components/errors/AccessRestricted"
+      const { AccessRestricted } = await componentLoader(
+        () => import("@docspace/shared/components/errors/AccessRestricted"),
       );
 
       const Component = () => (
@@ -657,8 +671,8 @@ const ClientRoutes = [
   {
     path: "/preparation-portal",
     async lazy() {
-      const { PreparationPortal } = await import(
-        "@docspace/shared/pages/PreparationPortal"
+      const { PreparationPortal } = await componentLoader(
+        () => import("@docspace/shared/pages/PreparationPortal"),
       );
 
       const Component = () => (
@@ -675,8 +689,8 @@ const ClientRoutes = [
   {
     path: "/error/401",
     async lazy() {
-      const { Error401 } = await import(
-        "@docspace/shared/components/errors/Error401"
+      const { Error401 } = await componentLoader(
+        () => import("@docspace/shared/components/errors/Error401"),
       );
 
       const Component = () => {
@@ -695,8 +709,8 @@ const ClientRoutes = [
   {
     path: "/error/403",
     async lazy() {
-      const { Error403 } = await import(
-        "@docspace/shared/components/errors/Error403"
+      const { Error403 } = await componentLoader(
+        () => import("@docspace/shared/components/errors/Error403"),
       );
 
       const Component = () => {
@@ -715,8 +729,8 @@ const ClientRoutes = [
   {
     path: "/error/520",
     async lazy() {
-      const { Error520Component } = await import(
-        "SRC_DIR/components/Error520Wrapper"
+      const { Error520Component } = await componentLoader(
+        () => import("SRC_DIR/components/Error520Wrapper"),
       );
 
       const Component = () => {
@@ -735,8 +749,8 @@ const ClientRoutes = [
   {
     path: "/error/access/restricted",
     async lazy() {
-      const { AccessRestricted } = await import(
-        "@docspace/shared/components/errors/AccessRestricted"
+      const { AccessRestricted } = await componentLoader(
+        () => import("@docspace/shared/components/errors/AccessRestricted"),
       );
 
       const Component = () => (
@@ -753,8 +767,8 @@ const ClientRoutes = [
   {
     path: "/error/offline",
     async lazy() {
-      const { ErrorOfflineContainer } = await import(
-        "@docspace/shared/components/errors/ErrorOffline"
+      const { ErrorOfflineContainer } = await componentLoader(
+        () => import("@docspace/shared/components/errors/ErrorOffline"),
       );
 
       const Component = () => (

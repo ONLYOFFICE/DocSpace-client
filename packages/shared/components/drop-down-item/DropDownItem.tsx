@@ -42,6 +42,7 @@ import {
   ElementWrapper,
 } from "./DropDownItem.styled";
 import { DropDownItemProps } from "./DropDownItem.types";
+import { globalColors } from "../../themes";
 
 const DropDownItem = (props: DropDownItemProps) => {
   const {
@@ -168,7 +169,7 @@ const DropDownItem = (props: DropDownItemProps) => {
             fontSize="9px"
             isHovered={false}
             borderRadius="50px"
-            backgroundColor="#533ED1"
+            backgroundColor={globalColors.mainPurple}
             label={t("Common:BetaLabel")}
           />
         </WrapperBadge>

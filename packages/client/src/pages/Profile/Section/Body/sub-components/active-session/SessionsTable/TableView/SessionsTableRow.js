@@ -75,6 +75,10 @@ const StyledTableRow = styled(TableRow)`
             margin-left: 8px;
           `}
   }
+
+  .remove-cell {
+    justify-content: flex-end;
+  }
 `;
 
 StyledTableRow.defaultProps = { theme: Base };
@@ -138,15 +142,13 @@ const SessionsTableRow = (props) => {
       </TableCell>
 
       {showRemoveIcon && (
-        <TableCell>
-          <Box style={{ marginLeft: "8px" }}>
-            <IconButton
-              size={20}
-              iconName={RemoveSessionSvgUrl}
-              isClickable
-              onClick={onRemoveClick}
-            />
-          </Box>
+        <TableCell className="remove-cell">
+          <IconButton
+            size={20}
+            iconName={RemoveSessionSvgUrl}
+            isClickable
+            onClick={onRemoveClick}
+          />
         </TableCell>
       )}
     </StyledTableRow>

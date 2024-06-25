@@ -138,34 +138,9 @@ const Table = ({
   columnInfoPanelStorageName,
   highlightFile,
   currentDeviceType,
-  tableStorageName,
-
-  authorColumnIsEnabled,
-  createdColumnIsEnabled,
-  modifiedColumnIsEnabled,
-  sizeColumnIsEnabled,
-  typeColumnIsEnabled,
-  quickButtonsColumnIsEnabled,
-
-  roomQuotaColumnIsEnable,
-  roomColumnTypeIsEnabled,
-  roomColumnOwnerIsEnabled,
-  roomColumnQuickButtonsIsEnabled,
-  roomColumnTagsIsEnabled,
-  roomColumnActivityIsEnabled,
-
-  lastOpenedColumnIsEnabled,
-
-  authorTrashColumnIsEnabled,
-  createdTrashColumnIsEnabled,
-  roomColumnIsEnabled,
-  erasureColumnIsEnabled,
-  sizeTrashColumnIsEnabled,
-  typeTrashColumnIsEnabled,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
-  const [lastColumn, setLastColumn] = React.useState(null);
 
   const ref = useRef(null);
   const tagRef = useRef(null);
@@ -215,42 +190,6 @@ const Table = ({
     if (!isRooms) setTagCount(0);
   }, [isRooms]);
 
-  React.useEffect(() => {
-    if (!tableStorageName) return;
-
-    const storageColumns = localStorage.getItem(tableStorageName);
-    if (!storageColumns) return;
-
-    const columns = storageColumns.split(",");
-    const filterColumns = columns.filter(
-      (column) => column !== "false" && column !== "QuickButtons",
-    );
-
-    if (filterColumns.length > 1)
-      setLastColumn(filterColumns[filterColumns.length - 1]);
-  }, [
-    authorColumnIsEnabled,
-    createdColumnIsEnabled,
-    modifiedColumnIsEnabled,
-    sizeColumnIsEnabled,
-    typeColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
-    roomQuotaColumnIsEnable,
-    roomColumnTypeIsEnabled,
-    roomColumnOwnerIsEnabled,
-    roomColumnQuickButtonsIsEnabled,
-    roomColumnTagsIsEnabled,
-    roomColumnActivityIsEnabled,
-    lastOpenedColumnIsEnabled,
-    authorTrashColumnIsEnabled,
-    createdTrashColumnIsEnabled,
-    roomColumnIsEnabled,
-    erasureColumnIsEnabled,
-    sizeTrashColumnIsEnabled,
-    typeTrashColumnIsEnabled,
-    tableStorageName,
-  ]);
-
   const filesListNode = useMemo(() => {
     return filesList.map((item, index) => (
       <TableRow
@@ -271,7 +210,6 @@ const Table = ({
         isHighlight={
           highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
         }
-        lastColumn={lastColumn}
       />
     ));
   }, [
@@ -285,7 +223,6 @@ const Table = ({
     highlightFile.id,
     highlightFile.isExst,
     isTrashFolder,
-    lastColumn,
   ]);
 
   return (
@@ -333,34 +270,7 @@ export default inject(
     const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
 
-    const {
-      columnStorageName,
-      columnInfoPanelStorageName,
-      tableStorageName,
-
-      authorColumnIsEnabled,
-      createdColumnIsEnabled,
-      modifiedColumnIsEnabled,
-      sizeColumnIsEnabled,
-      typeColumnIsEnabled,
-      quickButtonsColumnIsEnabled,
-
-      roomQuotaColumnIsEnable,
-      roomColumnTypeIsEnabled,
-      roomColumnOwnerIsEnabled,
-      roomColumnQuickButtonsIsEnabled,
-      roomColumnTagsIsEnabled,
-      roomColumnActivityIsEnabled,
-
-      authorTrashColumnIsEnabled,
-      createdTrashColumnIsEnabled,
-      roomColumnIsEnabled,
-      erasureColumnIsEnabled,
-      sizeTrashColumnIsEnabled,
-      typeTrashColumnIsEnabled,
-
-      lastOpenedColumnIsEnabled,
-    } = tableStore;
+    const { columnStorageName, columnInfoPanelStorageName } = tableStore;
 
     const {
       filesList,
@@ -396,30 +306,6 @@ export default inject(
       columnInfoPanelStorageName,
       highlightFile,
       currentDeviceType,
-      tableStorageName,
-
-      roomQuotaColumnIsEnable,
-      roomColumnTypeIsEnabled,
-      roomColumnOwnerIsEnabled,
-      roomColumnQuickButtonsIsEnabled,
-      roomColumnTagsIsEnabled,
-      roomColumnActivityIsEnabled,
-
-      authorColumnIsEnabled,
-      createdColumnIsEnabled,
-      modifiedColumnIsEnabled,
-      sizeColumnIsEnabled,
-      typeColumnIsEnabled,
-      quickButtonsColumnIsEnabled,
-
-      lastOpenedColumnIsEnabled,
-
-      authorTrashColumnIsEnabled,
-      createdTrashColumnIsEnabled,
-      roomColumnIsEnabled,
-      erasureColumnIsEnabled,
-      sizeTrashColumnIsEnabled,
-      typeTrashColumnIsEnabled,
     };
   },
 )(observer(Table));

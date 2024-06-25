@@ -32,7 +32,7 @@ import TypeCell from "./TypeCell";
 import TagsCell from "./TagsCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
-import { classNames } from "@docspace/shared/utils";
+import { classNames, getLastColumn } from "@docspace/shared/utils";
 import { StyledBadgesContainer } from "../StyledTable";
 import { StyledQuickButtonsContainer } from "../StyledTable";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
@@ -59,8 +59,10 @@ const RoomsRowDataComponent = (props) => {
     badgesComponent,
     quickButtonsComponent,
     item,
-    lastColumn,
+    tableStorageName,
   } = props;
+
+  const lastColumn = getLastColumn(tableStorageName);
 
   return (
     <>
@@ -213,6 +215,7 @@ export default inject(({ currentQuotaStore, tableStore }) => {
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
     roomQuotaColumnIsEnable,
+    tableStorageName,
   } = tableStore;
 
   const { showStorageInfo } = currentQuotaStore;
@@ -224,5 +227,6 @@ export default inject(({ currentQuotaStore, tableStore }) => {
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
     showStorageInfo,
+    tableStorageName,
   };
 })(observer(RoomsRowDataComponent));

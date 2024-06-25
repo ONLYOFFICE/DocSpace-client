@@ -32,7 +32,7 @@ import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
-import { classNames } from "@docspace/shared/utils";
+import { classNames, getLastColumn } from "@docspace/shared/utils";
 import {
   StyledBadgesContainer,
   StyledQuickButtonsContainer,
@@ -58,8 +58,10 @@ const RowDataComponent = (props) => {
     showHotkeyBorder,
     badgesComponent,
     quickButtonsComponent,
-    lastColumn,
+    tableStorageName,
   } = props;
+
+  const lastColumn = getLastColumn(tableStorageName);
 
   return (
     <>
@@ -220,6 +222,7 @@ export default inject(({ tableStore }) => {
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
     quickButtonsColumnIsEnabled,
+    tableStorageName,
   } = tableStore;
 
   return {
@@ -229,5 +232,6 @@ export default inject(({ tableStore }) => {
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
     quickButtonsColumnIsEnabled,
+    tableStorageName,
   };
 })(observer(RowDataComponent));

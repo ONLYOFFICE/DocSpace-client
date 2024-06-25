@@ -96,6 +96,8 @@ class ImportAccountsStore {
 
   workspace: TWorkspaceService | "" = "";
 
+  migratingWorkspace: TWorkspaceService | "" = "";
+
   files: string[] = [];
 
   importOptions = {
@@ -150,6 +152,10 @@ class ImportAccountsStore {
 
   setWorkspace = (workspace: TWorkspaceService | "") => {
     this.workspace = workspace;
+  };
+
+  setMigratingWorkspace = (workspace: TWorkspaceService | "") => {
+    this.migratingWorkspace = workspace;
   };
 
   setFiles = (files: string[]) => {

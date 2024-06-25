@@ -126,9 +126,13 @@ const SelectFileStep = (props: SelectFileStepProps) => {
     files,
     setFiles,
     multipleFileUploading,
+    migratingWorkspace,
+    setMigratingWorkspace,
   } = props as InjectedSelectFileStepProps;
 
-  const [isSaveDisabled, setIsSaveDisabled] = useState(true);
+  const [isSaveDisabled, setIsSaveDisabled] = useState(
+    migratorName === migratingWorkspace,
+  );
   const [progress, setProgress] = useState(0);
   const [isInfiniteProgress, setIsInfiniteProgress] = useState(true);
 
@@ -249,6 +253,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
     setLoadingStatus("upload");
     setFailTries(FAIL_TRIES);
     setIsInfiniteProgress(true);
+    setMigratingWorkspace(migratorName);
 
     onUploadFile(file);
   };
@@ -284,6 +289,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
     setProgress(0);
     setLoadingStatus("none");
     clearInterval(uploadInterval.current);
+    setMigratingWorkspace("");
     cancelMigration();
   };
 
@@ -310,7 +316,10 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           scale
           onInput={onSelectFile}
           className="upload-backup-input"
-          placeholder={(files && files.join(",")) || t("Settings:BackupFile")}
+          placeholder={
+            (migratingWorkspace === migratorName && files && files.join(",")) ||
+            t("Settings:BackupFile")
+          }
           isDisabled={
             fileLoadingStatus === "upload" || fileLoadingStatus === "proceed"
           }
@@ -376,7 +385,9 @@ const SelectFileStep = (props: SelectFileStepProps) => {
               saveButtonLabel={t("Settings:UploadToServer")}
               cancelButtonLabel={t("Common:Back")}
               displaySettings
-              saveButtonDisabled={isSaveDisabled}
+              saveButtonDisabled={
+                migratingWorkspace !== migratorName || isSaveDisabled
+              }
               showReminder
             />
           ) : (
@@ -387,7 +398,9 @@ const SelectFileStep = (props: SelectFileStepProps) => {
               saveButtonLabel={t("Settings:NextStep")}
               cancelButtonLabel={t("Common:Back")}
               displaySettings
-              saveButtonDisabled={isSaveDisabled}
+              saveButtonDisabled={
+                migratingWorkspace !== migratorName || isSaveDisabled
+              }
               showReminder
             />
           )}
@@ -422,6 +435,8 @@ export default inject<TStore>(({ dialogsStore, importAccountsStore }) => {
     files,
     setFiles,
     multipleFileUploading,
+    migratingWorkspace,
+    setMigratingWorkspace,
   } = importAccountsStore;
   const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
     dialogsStore;
@@ -441,5 +456,7 @@ export default inject<TStore>(({ dialogsStore, importAccountsStore }) => {
     files,
     setFiles,
     multipleFileUploading,
+    migratingWorkspace,
+    setMigratingWorkspace,
   };
 })(observer(SelectFileStep));

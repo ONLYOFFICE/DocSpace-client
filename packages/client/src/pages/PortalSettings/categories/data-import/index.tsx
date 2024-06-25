@@ -53,6 +53,7 @@ const DataImport = (props: DataImportProps) => {
     setFiles,
     setIsMigrationInit,
     setLoadingStatus,
+    setMigratingWorkspace,
   } = props as InjectedDataImportProps;
 
   const { t } = useTranslation(["Settings"]);
@@ -77,6 +78,7 @@ const DataImport = (props: DataImportProps) => {
     if (parseResult.operation === "parse" && isCompleted) {
       setUsers(parseResult);
       setWorkspace(parseResult.migratorName);
+      setMigratingWorkspace(parseResult.migratorName);
       setFiles(parseResult.files);
       setIsMigrationInit(true);
       setLoadingStatus("done");
@@ -85,6 +87,7 @@ const DataImport = (props: DataImportProps) => {
     getMigrationStatus,
     setUsers,
     setWorkspace,
+    setMigratingWorkspace,
     setFiles,
     setIsMigrationInit,
     setLoadingStatus,
@@ -122,6 +125,7 @@ export default inject<TStore>(
       setFiles,
       setIsMigrationInit,
       setLoadingStatus,
+      setMigratingWorkspace,
     } = importAccountsStore;
 
     const { setDocumentTitle } = authStore;
@@ -142,6 +146,7 @@ export default inject<TStore>(
       setFiles,
       setIsMigrationInit,
       setLoadingStatus,
+      setMigratingWorkspace,
     };
   },
 )(observer(DataImport));

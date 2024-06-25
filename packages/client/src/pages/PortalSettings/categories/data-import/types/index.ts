@@ -72,6 +72,8 @@ export interface InjectedSelectFileStepProps extends SelectFileStepProps {
   files: TStore["importAccountsStore"]["files"];
   setFiles: TStore["importAccountsStore"]["setFiles"];
   multipleFileUploading: TStore["importAccountsStore"]["multipleFileUploading"];
+  migratingWorkspace: TStore["importAccountsStore"]["migratingWorkspace"];
+  setMigratingWorkspace: TStore["importAccountsStore"]["setMigratingWorkspace"];
 }
 
 export interface DataImportProps {}
@@ -89,6 +91,7 @@ export interface InjectedDataImportProps extends DataImportProps {
   setFiles: TStore["importAccountsStore"]["setFiles"];
   setIsMigrationInit: TStore["importAccountsStore"]["setIsMigrationInit"];
   setLoadingStatus: TStore["importAccountsStore"]["setLoadingStatus"];
+  setMigratingWorkspace: TStore["importAccountsStore"]["setMigratingWorkspace"];
 }
 
 export interface WorkspaceProps {}

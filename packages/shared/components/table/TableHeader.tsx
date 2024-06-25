@@ -164,12 +164,9 @@ class TableHeader extends React.Component<
       widths[+columnIndex] = `${newWidth + handleOffset}px`;
       widths[colIndex] = `${column2Width + offset - handleOffset}px`;
     } else if (column2Width !== defaultMinColumnSize) {
-      const widthTableNumber: number[] = [];
-      widths.forEach((item) => widthTableNumber.push(+item.slice(0, -2)));
-
       const width =
-        widthTableNumber[+columnIndex] +
-        widthTableNumber[+colIndex] -
+        getSubstring(widths[+columnIndex]) +
+        getSubstring(widths[+colIndex]) -
         defaultMinColumnSize;
 
       widths[+columnIndex] = `${width}px`;
@@ -265,13 +262,7 @@ class TableHeader extends React.Component<
       if (currentWidth !== +minSize) {
         newWidth = +minSize - handleOffset;
         this.moveToRight(widths, newWidth);
-      } else {
-        const columnChanged = this.moveToLeft(widths, newWidth);
-
-        if (!columnChanged) {
-          widths[+columnIndex] = widths[+columnIndex];
-        }
-      }
+      } else this.moveToLeft(widths, newWidth);
     } else {
       this.moveToRight(widths, newWidth);
     }

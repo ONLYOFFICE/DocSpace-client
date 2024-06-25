@@ -139,6 +139,8 @@ class SelectedFolderStore {
 
   canShare = false;
 
+  indexing = false;
+
   parentRoomType: Nullable<FolderType> = null;
 
   constructor(settingsStore: SettingsStore) {
@@ -185,6 +187,7 @@ class SelectedFolderStore {
       type: this.type,
       isRootFolder: this.isRootFolder,
       parentRoomType: this.parentRoomType,
+      indexing: this.indexing,
     };
   };
 
@@ -230,6 +233,7 @@ class SelectedFolderStore {
     this.type = null;
     this.inRoom = false;
     this.parentRoomType = null;
+    this.indexing = false;
   };
 
   setParentId = (parentId: number) => {

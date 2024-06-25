@@ -35,6 +35,7 @@ import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
+import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
 
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
@@ -62,6 +63,8 @@ import { tablet, mobile, Consumer, getLogoUrl } from "@docspace/shared/utils";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { TableGroupMenu } from "@docspace/shared/components/table";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 import {
   Events,
   RoomsType,
@@ -73,6 +76,8 @@ import {
 } from "@docspace/shared/enums";
 
 import { copyShareLink } from "@docspace/shared/utils/copy";
+import { hideLoader, showLoader } from "@docspace/shared/utils/common";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import {
@@ -290,6 +295,7 @@ const SectionHeaderContent = (props) => {
     startUpload,
     getFolderModel,
     onCreateRoom,
+    onExportRoomIndex,
   } = props;
 
   const navigate = useNavigate();
@@ -468,6 +474,7 @@ const SectionHeaderContent = (props) => {
       haveLinksRight,
       isPublicRoom,
       isFrame,
+      isVDRRoomType,
     } = props;
 
     const isArchive = selectedFolder.rootFolderType === FolderType.Archive;
@@ -627,6 +634,14 @@ const SectionHeaderContent = (props) => {
         icon: InfoOutlineReactSvgUrl,
         onClick: onToggleInfoPanel,
         disabled: !isRoom,
+      },
+      {
+        id: "header_option_export-room-index",
+        key: "export-room-index",
+        label: t("Files:ExportRoomIndex"),
+        icon: ExportRoomIndexSvgUrl,
+        onClick: () => onExportRoomIndex(t, selectedFolder?.id),
+        disabled: !isVDRRoomType || !selectedFolder.indexing,
       },
       {
         id: "header_option_separator-2",
@@ -1166,6 +1181,7 @@ export default inject(
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
     const isCustomRoomType = roomType === RoomsType.CustomRoom;
     const isFormRoomType = roomType === RoomsType.FormRoom;
+    const isVDRRoomType = roomType === RoomsType.VirtualDataRoom;
 
     const {
       onClickEditRoom,
@@ -1177,6 +1193,7 @@ export default inject(
       onCreateAndCopySharedLink,
       getFolderModel,
       onCreateRoom,
+      onExportRoomIndex,
     } = contextOptionsStore;
 
     const canRestoreAll = isArchiveFolder && roomsForRestore.length > 0;
@@ -1304,6 +1321,7 @@ export default inject(
       onShowInfoPanel,
       onClickArchive,
       onCopyLink,
+      onExportRoomIndex,
 
       isEmptyArchive,
       canRestoreAll,
@@ -1315,6 +1333,7 @@ export default inject(
       isPublicRoomType,
       isCustomRoomType,
       isFormRoomType,
+      isVDRRoomType,
       isPublicRoom,
       primaryLink,
       getPrimaryLink,

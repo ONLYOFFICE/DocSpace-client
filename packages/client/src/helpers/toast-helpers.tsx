@@ -24,14 +24,34 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const enum FloatingButtonIcons {
-  upload = "upload",
-  file = "file",
-  trash = "trash",
-  move = "move",
-  duplicate = "duplicate",
-  plus = "plus",
-  minus = "minus",
-  refresh = "refresh",
-  exportIndex = "exportIndex",
-}
+import { TFunction } from "i18next";
+
+import { Link, LinkTarget } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
+
+export const showSuccessExportRoomIndexToast = (
+  t: TFunction,
+  fileName: string,
+  fileUrl: string,
+  openOnNewPage: boolean,
+) => {
+  const toastMessage = (
+    <>
+      <Link
+        color="#5299E0"
+        fontSize="12px"
+        target={openOnNewPage ? LinkTarget.blank : LinkTarget.self}
+        href={fileUrl}
+      >
+        {fileName}
+      </Link>
+      &nbsp;
+      <Text as="span" fontSize="12px">
+        {t<string>("Files:FileExportedToMyDocuments")}
+      </Text>
+    </>
+  );
+
+  toastr.success(toastMessage);
+};

@@ -28,14 +28,17 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { EmployeeStatus } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import SettingsSetupStore from "./SettingsSetupStore";
+import moment from "moment-timezone";
 
 class SelectionStore {
   peopleStore = null;
   allSessions = [];
   sessionsData = [];
   dataFromSocket = [];
+  currentDataFromSocket = [];
   displayName = "";
   status = "";
+  fromDateAgo = {};
   connections = [];
   platformData = [];
   userLastSession = [];
@@ -482,7 +485,31 @@ class SelectionStore {
     this.isLoading = isLoading;
   };
 
-  updateAllSessions = (sessions, dataFromSocket) => {
+  setCurrentDataFromSocket = (data) => {
+    this.currentDataFromSocket = data;
+  };
+
+  setFromDateAgo = (sessionId, value) => {
+    this.fromDateAgo[sessionId] = value;
+  };
+
+  getFromDateAgo = (sessionId) => {
+    return this.fromDateAgo[sessionId] || "";
+  };
+
+  convertDate = (dateString, locale) => {
+    const parsedDate = moment(new Date(dateString).toISOString());
+    const now = moment();
+    const daysDiff = now.diff(parsedDate, "days");
+    moment.locale(locale);
+
+    if (daysDiff < 1) return parsedDate.fromNow();
+    if (daysDiff === 1) return t("Common:Yesterday");
+    if (daysDiff < 7) return parsedDate.fromNow();
+    return parsedDate.format(locale);
+  };
+
+  updateAllSessions = (sessions, dataFromSocket, currentDataFromSocket) => {
     const socketDataMap = new Map(
       dataFromSocket.map((user) => [user.id, user]),
     );
@@ -495,10 +522,17 @@ class SelectionStore {
 
     const newAllSessions = filteredSessions.map((session) => {
       const socketData = socketDataMap.get(session.id);
+      const currentSocketData =
+        currentDataFromSocket && currentDataFromSocket.id === session.id
+          ? currentDataFromSocket
+          : null;
+
+      const latestData = currentSocketData || socketData;
+
       return {
         ...session,
-        status: socketData ? socketData.status : "offline",
-        sessions: socketData ? socketData.sessions.slice(-1)[0] : [],
+        status: latestData ? latestData.status : "offline",
+        sessions: latestData ? latestData.sessions.slice(-1)[0] : [],
       };
     });
 

@@ -164,13 +164,15 @@ const SessionsTableRow = (props) => {
     setUserSessionPanelVisible,
     setDisplayName,
     setStatus,
-    isOneUserSelection,
+    convertDate,
+    getFromDateAgo,
+    setFromDateAgo,
   } = props;
-
-  const [fromDateAgo, setFromDateAgo] = useState("");
 
   const { platform, browser, ip, city, country, status, date } = sessions;
 
+  const isLastConnection = connections.length > 0;
+  const fromDateAgo = getFromDateAgo(item.id);
   const isChecked = checkedProps?.checked;
   const isOnline = sessionStatus === "online";
   const isOffline = status === "offline";
@@ -179,26 +181,14 @@ const SessionsTableRow = (props) => {
     const updateStatus = () => {
       const showOnline = isOnline && sessionStatus;
       const showOffline = isOffline ? convertDate(date, locale) : null;
-      setFromDateAgo(isOnline ? showOnline : showOffline);
+      setFromDateAgo(item.id, isOnline ? showOnline : showOffline);
     };
 
     updateStatus();
     const intervalId = setInterval(updateStatus, 60000);
 
     return () => clearInterval(intervalId);
-  }, [date, sessionStatus, status, locale]);
-
-  const convertDate = (dateString, locale) => {
-    const parsedDate = moment(new Date(dateString).toISOString());
-    const now = moment();
-    const daysDiff = now.diff(parsedDate, "days");
-    moment.locale(locale);
-
-    if (daysDiff < 1) return parsedDate.fromNow();
-    if (daysDiff === 1) return t("Common:Yesterday");
-    if (daysDiff < 7) return parsedDate.fromNow();
-    return parsedDate.format(locale);
-  };
+  }, [date, sessionStatus, status, locale, item.id]);
 
   const onClickSessions = () => {
     setStatus(fromDateAgo);
@@ -296,10 +286,12 @@ const SessionsTableRow = (props) => {
 
         <TableCell>
           <Text className="session-info" truncate>
-            {platform},&nbsp;
+            {isLastConnection ? connections[0]?.platform : platform},&nbsp;
           </Text>
           <Text className="session-info" truncate>
-            {browser?.split(".")[0] ?? ""}
+            {isLastConnection
+              ? connections[0]?.browser
+              : browser?.split(".")[0] ?? ""}
           </Text>
         </TableCell>
 
@@ -313,7 +305,7 @@ const SessionsTableRow = (props) => {
                 <span className="divider"></span>
               </>
             )}
-            {ip}
+            {isLastConnection ? connections[0]?.ip : ip}
           </Text>
         </TableCell>
       </StyledTableRow>
@@ -334,7 +326,9 @@ export default inject(
       setConnections,
       setDisplayName,
       setStatus,
-      isOneUserSelection,
+      convertDate,
+      getFromDateAgo,
+      setFromDateAgo,
     } = peopleStore.selectionStore;
 
     return {
@@ -346,7 +340,9 @@ export default inject(
       setUserSessionPanelVisible,
       setDisplayName,
       setStatus,
-      isOneUserSelection,
+      convertDate,
+      getFromDateAgo,
+      setFromDateAgo,
     };
   },
 )(withContent(observer(SessionsTableRow)));

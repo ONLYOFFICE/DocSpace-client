@@ -106,6 +106,7 @@ const SessionsRow = (props) => {
     sectionWidth,
     onContentRowSelect,
     onContentRowClick,
+    onUserContextClick,
     isActive,
     checkedProps,
     displayName,
@@ -120,12 +121,13 @@ const SessionsRow = (props) => {
     setConnections,
     setDisplayName,
     setStatus,
+    convertDate,
+    getFromDateAgo,
+    setFromDateAgo,
   } = props;
 
-  const [fromDateAgo, setFromDateAgo] = useState("");
-
   const { status, date } = sessions;
-
+  const fromDateAgo = getFromDateAgo(item.id);
   const isChecked = checkedProps?.checked;
   const isOnline = sessionStatus === "online";
   const isOffline = status === "offline";
@@ -134,34 +136,14 @@ const SessionsRow = (props) => {
     const updateStatus = () => {
       const showOnline = isOnline && sessionStatus;
       const showOffline = isOffline ? convertDate(date, locale) : null;
-      setFromDateAgo(isOnline ? showOnline : showOffline);
+      setFromDateAgo(item.id, isOnline ? showOnline : showOffline);
     };
 
     updateStatus();
     const intervalId = setInterval(updateStatus, 60000);
 
     return () => clearInterval(intervalId);
-  }, [date, sessionStatus, status, locale]);
-
-  const convertDate = (dateString, locale) => {
-    const parsedDate = moment(new Date(dateString).toISOString());
-    const now = moment();
-    const daysDiff = now.diff(parsedDate, "days");
-    moment.locale(locale);
-
-    if (daysDiff < 1) return parsedDate.fromNow();
-    if (daysDiff === 1) return t("Common:Yesterday");
-    if (daysDiff < 7) return parsedDate.fromNow();
-    return parsedDate.format(locale);
-  };
-
-  const onRowClick = useCallback(() => {
-    onContentRowClick && onContentRowClick(!isChecked, item);
-  }, [isChecked, item, onContentRowClick]);
-
-  const onRowContextClick = useCallback(() => {
-    onContentRowClick && onContentRowClick(!isChecked, item, false);
-  }, [isChecked, item, onContentRowClick]);
+  }, [date, sessionStatus, status, locale, item.id]);
 
   const onClickSessions = () => {
     setStatus(fromDateAgo);
@@ -204,6 +186,15 @@ const SessionsRow = (props) => {
     },
   ];
 
+  const onRowContextClick = useCallback(
+    (rightMouseButtonClick) => {
+      onUserContextClick?.(item, !rightMouseButtonClick);
+    },
+    [item, onUserContextClick],
+  );
+
+  const onRowClick = (e) => onContentRowClick?.(e, item);
+
   return (
     <Wrapper
       className={`user-item row-wrapper ${
@@ -240,8 +231,15 @@ export default inject(
     const { user } = userStore;
     const locale = (user && user.cultureName) || culture || "en";
 
-    const { setUserLastSession, setConnections, setDisplayName, setStatus } =
-      peopleStore.selectionStore;
+    const {
+      setUserLastSession,
+      setConnections,
+      setDisplayName,
+      setStatus,
+      convertDate,
+      getFromDateAgo,
+      setFromDateAgo,
+    } = peopleStore.selectionStore;
 
     return {
       locale,
@@ -252,6 +250,9 @@ export default inject(
       setUserSessionPanelVisible,
       setDisplayName,
       setStatus,
+      convertDate,
+      getFromDateAgo,
+      setFromDateAgo,
     };
   },
 )(withContent(observer(SessionsRow)));

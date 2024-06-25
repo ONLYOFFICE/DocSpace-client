@@ -376,9 +376,12 @@ const SectionHeaderContent = (props) => {
     setUserLastSession,
     setUserSessionPanelVisible,
     setDisplayName,
+    setStatus,
+    getFromDateAgo,
   } = props;
   const { header, isCategoryOrHeader, isNeedPaidIcon } = state;
   const arrayOfParams = getArrayOfParams();
+  const fromDateAgo = getFromDateAgo(peopleSelection[0]?.id);
 
   const menuItems = isSessionsPage ? (
     <>
@@ -414,6 +417,7 @@ const SectionHeaderContent = (props) => {
   );
 
   const onClickSessions = () => {
+    setStatus(fromDateAgo);
     setUserLastSession(peopleSelection[0]);
     setConnections(peopleSelection[0].connections);
     setUserSessionPanelVisible(true);
@@ -594,6 +598,8 @@ export default inject(
       setUserLastSession,
       setDisplayName,
       allSessions,
+      setStatus,
+      getFromDateAgo,
     } = peopleStore.selectionStore;
 
     const { admins, selectorIsOpen } = setup.security.accessRight;
@@ -632,6 +638,8 @@ export default inject(
       setUserLastSession,
       setDisplayName,
       allSessions,
+      setStatus,
+      getFromDateAgo,
     };
   },
 )(

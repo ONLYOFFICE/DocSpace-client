@@ -109,6 +109,7 @@ export const globalColors = {
   windowsColor: "#4C83CD",
   linuxColor: "#F4BB40",
   androidColor: "#A8D548",
+  twitterColor: "#2AA3EF",
   //
 
   tickColor: "#20D21F",

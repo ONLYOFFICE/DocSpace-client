@@ -125,7 +125,7 @@ export const PROVIDERS_DATA = Object.freeze({
   twitter: {
     label: "twitter",
     icon: ShareTwitterReactSvgUrl,
-    iconOptions: { color: "#2AA3EF" },
+    iconOptions: { color: globalColors.twitterColor },
   },
   linkedin: {
     label: "linkedin",

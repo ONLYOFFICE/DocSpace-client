@@ -84,7 +84,7 @@ export const ToolbarItem = styled.li<{
       ${(props) =>
         props.$percent !== 25
           ? `fill: ${globalColors.white};`
-          : "fill: #BEBEBE;"}
+          : `fill: ${globalColors.gray};`}
     }
   }
 

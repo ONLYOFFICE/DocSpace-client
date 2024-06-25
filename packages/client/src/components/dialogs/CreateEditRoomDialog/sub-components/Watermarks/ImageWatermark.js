@@ -52,14 +52,19 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { ReactSVG } from "react-svg";
+
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { inject, observer } from "mobx-react";
 import { StyledWatermark } from "./StyledComponent";
-
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { FileInput } from "@docspace/shared/components/file-input";
 import { imageProcessing } from "@docspace/shared/utils/common";
+import { Button } from "@docspace/shared/components/button";
+
+import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg";
+import { ButtonDelete } from "@docspace/shared/components/image-editor";
 
 const scaleOptions = [
   { key: 100, label: "100" },
@@ -98,10 +103,12 @@ const ImageWatermark = ({
   isEdit,
   setWatermarks,
   initialWatermarksSettings,
+  imageUrl,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
 
   const initialInfo = useRef(null);
+  const previewRef = useRef(null);
 
   if (initialInfo.current === null) {
     initialInfo.current = {
@@ -113,25 +120,42 @@ const ImageWatermark = ({
   const initialInfoRef = initialInfo.current;
 
   useEffect(() => {
-    if (!isEdit) return;
+    if (isEdit) return;
 
     setWatermarks({
       rotate: initialInfoRef.rotate.key,
+      scale: initialInfoRef.scale.key,
       additions: 0,
       isImage: true,
       enabled: true,
     });
   }, []);
+  useEffect(() => {
+    return () => {
+      URL.revokeObjectURL(previewRef.current);
+      previewRef.current = null;
+    };
+  }, []);
 
   const [selectedRotate, setRotate] = useState(initialInfoRef.rotate);
   const [selectedScale, setScale] = useState(initialInfoRef.scale);
+  const [selectedImageUrl, setImageUrl] = useState(imageUrl);
 
   const onInput = (file) => {
-    console.log("onInput", file);
-
     imageProcessing(file)
       .then((f) => {
-        if (f instanceof File) setWatermarks({ image: f });
+        if (f instanceof File) {
+          setWatermarks({ image: f });
+
+          const img = new Image();
+
+          previewRef.current = URL.createObjectURL(f);
+          img.src = previewRef.current;
+
+          img.onload = () => {
+            setImageUrl(previewRef.current);
+          };
+        }
       })
       .catch((error) => {
         if (
@@ -153,6 +177,16 @@ const ImageWatermark = ({
     setRotate(item);
 
     setWatermarks({ rotate: item.key });
+  };
+
+  const onButtonClick = () => {
+    if (previewRef.current) {
+      URL.revokeObjectURL(previewRef.current);
+      previewRef.current = null;
+    }
+
+    setWatermarks({ image: null });
+    setImageUrl("");
   };
 
   const rotateItems = () => {
@@ -194,8 +228,18 @@ const ImageWatermark = ({
   // };
 
   return (
-    <StyledWatermark>
-      <FileInput accept={["image/png", "image/jpeg"]} onInput={onInput} scale />
+    <StyledWatermark
+      rotate={selectedRotate.key}
+      scale={selectedScale.key / 100}
+      mainHeight={50}
+    >
+      {!selectedImageUrl && (
+        <FileInput
+          accept={["image/png", "image/jpeg"]}
+          onInput={onInput}
+          scale
+        />
+      )}
 
       {/* <FilesSelectorInput
         onSelectFile={onSelectFile}
@@ -203,50 +247,70 @@ const ImageWatermark = ({
         isSelect
         scale
       /> */}
-      <div className="options-wrapper">
-        <div>
-          <Text className="watermark-title" fontWeight={600} lineHeight="20px">
-            {t("Scale")}
-          </Text>
-          <ComboBox
-            onSelect={onScaleChange}
-            scaled
-            scaledOptions
-            advancedOptions={scaleItems()}
-            options={[]}
-            selectedOption={{}}
-          >
-            <div>{selectedScale.label}&#37;</div>
-          </ComboBox>
-        </div>
-        <div>
-          <Text className="watermark-title" fontWeight={600} lineHeight="20px">
-            {t("Rotate")}
-          </Text>
 
-          <ComboBox
-            onSelect={onRotateChange}
-            scaled
-            scaledOptions
-            advancedOptions={rotateItems()}
-            options={[]}
-            selectedOption={{}}
-            advancedOptionsCount={rotateOptions.length}
-            fillIcon={false}
-          >
-            <div>{selectedRotate.label}&deg;</div>
-          </ComboBox>
+      {selectedImageUrl && (
+        <div className="image-wrapper">
+          <div className="HELLO-2">
+            <div className="HELLO">
+              <img
+                alt="logo"
+                src={selectedImageUrl}
+                className="header-logo-icon"
+              />
+            </div>
+            <ButtonDelete t={t} onClick={onButtonClick} />
+          </div>
+
+          <div className="options-wrapper">
+            <div>
+              <Text fontWeight={600} lineHeight="20px">
+                {t("Scale")}
+              </Text>
+              <ComboBox
+                onSelect={onScaleChange}
+                scaled
+                scaledOptions
+                advancedOptions={scaleItems()}
+                options={[]}
+                selectedOption={{}}
+              >
+                <div>{selectedScale.label}&#37;</div>
+              </ComboBox>
+            </div>
+            <div>
+              <Text fontWeight={600} lineHeight="20px">
+                {t("Rotate")}
+              </Text>
+
+              <ComboBox
+                onSelect={onRotateChange}
+                scaled
+                scaledOptions
+                advancedOptions={rotateItems()}
+                options={[]}
+                selectedOption={{}}
+                advancedOptionsCount={rotateOptions.length}
+                fillIcon={false}
+              >
+                <div>{selectedRotate.label}&deg;</div>
+              </ComboBox>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </StyledWatermark>
   );
 };
 
 export default inject(({ createEditRoomStore }) => {
-  const { setWatermarks, initialWatermarksSettings } = createEditRoomStore;
+  const { setWatermarks, initialWatermarksSettings, watermarksSettings } =
+    createEditRoomStore;
 
+  const { imageUrl } = watermarksSettings;
+  console.log("watermarksSettings", watermarksSettings);
   return {
     setWatermarks,
     initialWatermarksSettings,
+    imageUrl,
   };
 })(observer(ImageWatermark));

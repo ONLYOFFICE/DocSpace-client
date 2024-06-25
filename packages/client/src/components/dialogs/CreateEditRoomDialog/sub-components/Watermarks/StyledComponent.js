@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const StyledWatermark = styled.div`
   margin-top: 16px;
@@ -41,8 +41,35 @@ const StyledWatermark = styled.div`
 
   .options-wrapper {
     display: grid;
-    grid-template-columns: minmax(216px, 1fr) minmax(216px, 1fr);
+    grid-template-rows: 56px 56px;
     gap: 16px;
+  }
+
+  .image-wrapper {
+    display: grid;
+    grid-template-columns: 216px auto;
+    gap: 16px;
+
+    .HELLO {
+      width: 216px;
+      height: 216px;
+      border: 1px solid #eceef1;
+
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 88%;
+        height: 88%;
+        transform: ${(props) =>
+          `rotate(${props.rotate}deg) scale(${props.scale})`};
+
+        opacity: 0.4;
+        margin: auto;
+      }
+    }
   }
 `;
 const StyledBody = styled.div`

@@ -136,7 +136,7 @@ const ViewerInfoWatermark = ({
   const initialInfoRef = initialInfo.current;
 
   useEffect(() => {
-    if (!isEdit) return;
+    if (isEdit) return;
 
     setWatermarks({
       rotate: initialInfoRef.rotate.key,

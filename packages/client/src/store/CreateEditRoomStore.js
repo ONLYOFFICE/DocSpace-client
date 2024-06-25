@@ -146,6 +146,8 @@ class CreateEditRoomStore {
     }
 
     const watermarkImage = this.watermarksSettings.image;
+    const watermarksSettings = this.watermarksSettings;
+
     const getMeta = (url, onSetInfo) => {
       //url for this.watermarksSettings.image.viewUrl
       const img = new Image();
@@ -174,11 +176,11 @@ class CreateEditRoomStore {
       }
 
       return setWatermarkSettings(room.id, {
-        enabled: this.watermarksSettings.enabled,
-        imageScale: this.watermarksSettings.imageScale,
-        rotate: this.watermarksSettings.rotate,
+        enabled: watermarksSettings.enabled,
+        imageScale: watermarksSettings.imageScale,
+        rotate: watermarksSettings.rotate,
         imageUrl: response.data,
-        // imageId: this.watermarksSettings.image.id,
+        // imageId: watermarksSettings.image.id,
         imageWidth: img.naturalWidth,
         imageHeight: img.naturalHeight,
       });

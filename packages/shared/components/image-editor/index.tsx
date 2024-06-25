@@ -27,6 +27,7 @@
 import React from "react";
 import Dropzone from "./Dropzone";
 import ImageCropper from "./ImageCropper";
+import ButtonDelete from "./ButtonDelete";
 import { ImageEditorProps } from "./ImageEditor.types";
 import AvatarPreview from "./AvatarPreview";
 
@@ -75,4 +76,4 @@ const ImageEditor = ({
   );
 };
 
-export { ImageEditor, AvatarPreview, Dropzone };
+export { ImageEditor, AvatarPreview, Dropzone, ButtonDelete };

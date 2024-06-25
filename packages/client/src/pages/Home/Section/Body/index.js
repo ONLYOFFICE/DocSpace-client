@@ -155,6 +155,17 @@ const SectionBodyContent = (props) => {
     }
   };
 
+  const isHeaderOptionButton = (event) => {
+    const target = event?.target?.parentElement?.parentElement?.parentElement;
+
+    if (!target) return false;
+
+    const id =
+      target.getAttribute("id") ?? target?.parentElement.getAttribute("id");
+
+    return id === "header_optional-button";
+  };
+
   const onMouseDown = (e) => {
     if (
       (e.target.closest(".scroll-body") &&
@@ -165,7 +176,8 @@ const SectionBodyContent = (props) => {
         !e.target.closest(".document-catalog")) ||
       e.target.closest(".files-main-button") ||
       e.target.closest(".add-button") ||
-      e.target.closest("#filter_search-input")
+      e.target.closest("#filter_search-input") ||
+      isHeaderOptionButton(e)
     ) {
       setSelection([]);
       setBufferSelection(null);

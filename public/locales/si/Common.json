@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "පිළිබඳව",
   "AboutCompanyTitle": "මෙම මෘදුකාංගය ගැන",
   "AccessDenied": "ප්‍රවේශය ප්‍රතික්‍ෂේපිතයි",
@@ -51,6 +51,10 @@
   "CommonFiles": "සාමාන්‍ය ගොනු",
   "CompanyName": "සමාගමේ නම",
   "Confirmation": "තහවුරු කිරීම",
+  "ConflictResolveDescription": "<1>{{file}}</1> නම සහිත ගොනුවක් දැනටමත් <1>{{folder}}</1> බහාලුමේ පවතී.",
+  "ConflictResolveDescriptionFiles": "සමාන නම සහිත ලේඛන {{filesCount}} ක් දැනටමත් <1>{{folder}}</1> බහාලුමේ පවතී.",
+  "ConflictResolveSelectAction": "ක්‍රියාමාර්ගය තෝරන්න:",
+  "ConflictResolveTitle": "උඩින් ලිවීම තහවුරුව",
   "Connect": "සබඳින්න",
   "Content": "අන්තර්ගතය",
   "Context": "සන්දර්භය",
@@ -63,6 +67,7 @@
   "Create": "සාදන්න",
   "CreateAndCopy": "සාදා පිටපත් කරන්න",
   "CreateCopy": "පිටපතක් සාදන්න",
+  "CreateDescription": "බහාලුමෙහි වෙනස් ගොනු දෙකක් ඇත.",
   "CreateFileCopy": "ගොනුවේ පිටපතක් සාදන්න",
   "CreateMasterFormFromFile": "ගොනුවකින් ආකෘතිපත්‍ර අච්චුවක් සාදන්න",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -277,6 +282,8 @@
   "orContinueWith": "හෝ මෙය සමඟ ඉදිරියට",
   "OtherLabel": "වෙනත්",
   "OtherOperations": "වෙනත් මෙහෙයුම්",
+  "OverwriteDescription": "නව ගොනුව පවතින ගොනුවෙහි නව අනුවාදයක් ලෙස ප්‍රතිස්ථාපනය කෙරෙනු ඇත.",
+  "OverwriteTitle": "නව අනුවාදය උඩින් ලියන්න",
   "Owner": "හිමිකරු",
   "PageOfTotalPage": "{{page}} / {{totalPage}}",
   "Pages": "පිටු",
@@ -394,6 +401,8 @@
   "SignUpWithZoom": "සූම් සමඟ ලියාපදිංචිය",
   "Size": "ප්‍රමාණය",
   "SizeImageLarge": "රූපයේ ප්‍රමාණය ඉතා විශාලයි, කරුණාකර වෙනත් රූපයක් තෝරන්න.",
+  "SkipDescription": "කිසිදු ගොනුවක් පිටපත් නොකෙරේ. මුල් ගොනුව ගමනාන්ත බහාලුමේ රඳවා තැබෙනු ඇත.",
+  "SkipTitle": "මඟහරින්න",
   "SomethingWentWrong": "යමක් වැරදී ඇත.",
   "SortBy": "අනුව පෙළගසන්න",
   "SpaceManagement": "අවකාශය කළමනාකරණය",
@@ -448,14 +457,5 @@
   "Website": "අඩවිය",
   "Yes": "ඔව්",
   "Yesterday": "ඊයේ",
-  "You": "ඔබ",
-  "ConflictResolveDescription": "<1>{{file}}</1> නම සහිත ගොනුවක් දැනටමත් <1>{{folder}}</1> බහාලුමේ පවතී.",
-  "ConflictResolveDescriptionFiles": "සමාන නම සහිත ලේඛන {{filesCount}} ක් දැනටමත් <1>{{folder}}</1> බහාලුමේ පවතී.",
-  "ConflictResolveSelectAction": "ක්‍රියාමාර්ගය තෝරන්න:",
-  "ConflictResolveTitle": "උඩින් ලිවීම තහවුරුව",
-  "CreateDescription": "බහාලුමෙහි වෙනස් ගොනු දෙකක් ඇත.",
-  "OverwriteDescription": "නව ගොනුව පවතින ගොනුවෙහි නව අනුවාදයක් ලෙස ප්‍රතිස්ථාපනය කෙරෙනු ඇත.",
-  "OverwriteTitle": "නව අනුවාදය උඩින් ලියන්න",
-  "SkipDescription": "කිසිදු ගොනුවක් පිටපත් නොකෙරේ. මුල් ගොනුව ගමනාන්ත බහාලුමේ රඳවා තැබෙනු ඇත.",
-  "SkipTitle": "මඟහරින්න"
+  "You": "ඔබ"
 }

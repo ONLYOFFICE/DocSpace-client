@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "O nas",
   "AboutCompanyTitle": "O tem programu",
   "AccessDenied": "Dostop je zavrnjen",
@@ -51,6 +51,10 @@
   "CommonFiles": "Skupne datoteke",
   "CompanyName": "Ime podjetja",
   "Confirmation": "Potrditev",
+  "ConflictResolveDescription": "Datoteka z imenom <1>{{file}}</1> že obstaja v mapi <1>{{folder}}</1>.",
+  "ConflictResolveDescriptionFiles": "{{filesCount}} dokumentov z enakim imenom že obstaja v mapi <1>{{folder}}</1>.",
+  "ConflictResolveSelectAction": "Prosim, izberite akcijo:",
+  "ConflictResolveTitle": "Prepišite potrditev",
   "Connect": "Poveži",
   "Content": "Vsebina",
   "Context": "Kontekst",
@@ -63,6 +67,7 @@
   "Create": "Ustvari",
   "CreateAndCopy": "Ustvari in kopiraj",
   "CreateCopy": "Ustvari kopijo",
+  "CreateDescription": "V mapi bosta dve različni datoteki.",
   "CreateFileCopy": "Ustvari kopijo datoteke",
   "CreateMasterFormFromFile": "Ustvarite predlogo obrazca iz datoteke",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -284,6 +289,8 @@
   "orContinueWith": "ali nadaljujte z",
   "OtherLabel": "Drugo",
   "OtherOperations": "Druge operacije",
+  "OverwriteDescription": "Datoteka bo dodana datoteki z istim imenom kot različica.",
+  "OverwriteTitle": "Prepišite s posodobitvijo različice",
   "Owner": "Lastnik",
   "PageOfTotalPage": "{{page}} od {{totalPage}}",
   "Pages": "Strani",
@@ -402,6 +409,8 @@
   "SignUpWithZoom": "Vpiši se z Zoom",
   "Size": "Velikost",
   "SizeImageLarge": "Velikost slike je prevelika, izberite drugo sliko.",
+  "SkipDescription": "Nobena datoteka ne bo kopirana. Izvirna datoteka bo shranjena v ciljni mapi.",
+  "SkipTitle": "Preskoči",
   "SomethingWentWrong": "Nekaj je šlo narobe.",
   "SortBy": "Razvrsti po",
   "SpaceManagement": "Upravljanje prostora",
@@ -459,14 +468,5 @@
   "Website": "Spletna stran",
   "Yes": "Da",
   "Yesterday": "Včeraj",
-  "You": "Vi",
-  "ConflictResolveDescription": "Datoteka z imenom <1>{{file}}</1> že obstaja v mapi <1>{{folder}}</1>.",
-  "ConflictResolveDescriptionFiles": "{{filesCount}} dokumentov z enakim imenom že obstaja v mapi <1>{{folder}}</1>.",
-  "ConflictResolveSelectAction": "Prosim, izberite akcijo:",
-  "ConflictResolveTitle": "Prepišite potrditev",
-  "CreateDescription": "V mapi bosta dve različni datoteki.",
-  "OverwriteDescription": "Datoteka bo dodana datoteki z istim imenom kot različica.",
-  "OverwriteTitle": "Prepišite s posodobitvijo različice",
-  "SkipDescription": "Nobena datoteka ne bo kopirana. Izvirna datoteka bo shranjena v ciljni mapi.",
-  "SkipTitle": "Preskoči"
+  "You": "Vi"
 }

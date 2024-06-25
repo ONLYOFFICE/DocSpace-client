@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "关于",
   "AboutCompanyTitle": "关于本计划",
   "AccessDenied": "拒绝访问",
@@ -50,6 +50,10 @@
   "CommonFiles": "公共文件",
   "CompanyName": "企业名称",
   "Confirmation": "确认",
+  "ConflictResolveDescription": "<1>{{folder}}</1>文件夹中已有名称为<1>{{file}}</1>的文件。",
+  "ConflictResolveDescriptionFiles": "<1>{{folder}}</1>文件夹中已有{{filesCount}}个名称相同的文档。",
+  "ConflictResolveSelectAction": "请选择操作：",
+  "ConflictResolveTitle": "覆盖确认",
   "Connect": "连接",
   "Content": "内容",
   "Context": "上下文",
@@ -62,6 +66,7 @@
   "Create": "创建",
   "CreateAndCopy": "创建并复制",
   "CreateCopy": "创建副本",
+  "CreateDescription": "文件夹中将有两种不同文件。",
   "CreateFileCopy": "创建文件副本",
   "CreateMasterFormFromFile": "从文件中创建表格模板",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -280,6 +285,8 @@
   "orContinueWith": "或选择",
   "OtherLabel": "其他",
   "OtherOperations": "其他操作",
+  "OverwriteDescription": "文件与同名文件将作为不同版本存在。",
+  "OverwriteTitle": "使用版本更新覆盖",
   "Owner": "所有者",
   "PageOfTotalPage": "{{page}}/{{totalPage}}",
   "Pages": "页面",
@@ -394,6 +401,8 @@
   "SignUpWithZoom": "用 Zoom 帐号注册",
   "Size": "大小",
   "SizeImageLarge": "图像尺寸过大，请选择另一张图像。",
+  "SkipDescription": "不会复制任何文件。原始文件将在目标文件夹中保留。",
+  "SkipTitle": "跳过",
   "SomethingWentWrong": "出了点问题。",
   "SortBy": "排序方式",
   "SpaceManagement": "空间管理",
@@ -449,14 +458,5 @@
   "Website": "网站",
   "Yes": "是",
   "Yesterday": "昨天",
-  "You": "您",
-  "ConflictResolveDescription": "<1>{{folder}}</1>文件夹中已有名称为<1>{{file}}</1>的文件。",
-  "ConflictResolveDescriptionFiles": "<1>{{folder}}</1>文件夹中已有{{filesCount}}个名称相同的文档。",
-  "ConflictResolveSelectAction": "请选择操作：",
-  "ConflictResolveTitle": "覆盖确认",
-  "CreateDescription": "文件夹中将有两种不同文件。",
-  "OverwriteDescription": "文件与同名文件将作为不同版本存在。",
-  "OverwriteTitle": "使用版本更新覆盖",
-  "SkipDescription": "不会复制任何文件。原始文件将在目标文件夹中保留。",
-  "SkipTitle": "跳过"
+  "You": "您"
 }

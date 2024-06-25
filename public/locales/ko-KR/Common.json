@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "소개",
   "AboutCompanyTitle": "프로그램 소개",
   "AccessDenied": "액세스가 거부되었습니다",
@@ -51,6 +51,10 @@
   "CommonFiles": "공통 파일",
   "CompanyName": "회사 이름",
   "Confirmation": "확인",
+  "ConflictResolveDescription": "<1>{{file}}</1> 이름의 파일이 <1>{{folder}}</1> 폴더에 이미 존재합니다.",
+  "ConflictResolveDescriptionFiles": "같은 이름의 문서 {{filesCount}}개가 <1>{{folder}}</1> 폴더에 이미 존재합니다.",
+  "ConflictResolveSelectAction": "작업 선택:",
+  "ConflictResolveTitle": "덮어쓰기",
   "Connect": "연결",
   "Content": "콘텐츠",
   "Context": "문맥",
@@ -63,6 +67,7 @@
   "Create": "생성",
   "CreateAndCopy": "생성 및 복사",
   "CreateCopy": "복사본 생성",
+  "CreateDescription": "폴더에 두 개의 다른 파일이 저장됩니다.",
   "CreateFileCopy": "파일 본사본 생성",
   "CreateMasterFormFromFile": "파일에서 양식 템플릿 만들기",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -284,6 +289,8 @@
   "orContinueWith": "또는 다음을 이용:",
   "OtherLabel": "기타",
   "OtherOperations": "다른 작업",
+  "OverwriteDescription": "파일이 같은 이름의 파일에 추가됩니다.",
+  "OverwriteTitle": "버전 업데이트로 덮어쓰기",
   "Owner": "소유자",
   "PageOfTotalPage": "{{page}}/{{totalPage}}",
   "Pages": "페이지",
@@ -402,6 +409,8 @@
   "SignUpWithZoom": "Zoom으로 가입",
   "Size": "크기",
   "SizeImageLarge": "이미지 크기가 너무 큽니다. 다른 이미지를 선택해주세요.",
+  "SkipDescription": "파일이 복사되지 않습니다. 원본 파일이 대상 폴더에 유지됩니다.",
+  "SkipTitle": "건너뛰기",
   "SomethingWentWrong": "무언가 잘못됐습니다.",
   "SortBy": "정렬",
   "SpaceManagement": "공간 관리",
@@ -459,14 +468,5 @@
   "Website": "웹사이트",
   "Yes": "네",
   "Yesterday": "어제",
-  "You": "나",
-  "ConflictResolveDescription": "<1>{{file}}</1> 이름의 파일이 <1>{{folder}}</1> 폴더에 이미 존재합니다.",
-  "ConflictResolveDescriptionFiles": "같은 이름의 문서 {{filesCount}}개가 <1>{{folder}}</1> 폴더에 이미 존재합니다.",
-  "ConflictResolveSelectAction": "작업 선택:",
-  "ConflictResolveTitle": "덮어쓰기",
-  "CreateDescription": "폴더에 두 개의 다른 파일이 저장됩니다.",
-  "OverwriteDescription": "파일이 같은 이름의 파일에 추가됩니다.",
-  "OverwriteTitle": "버전 업데이트로 덮어쓰기",
-  "SkipDescription": "파일이 복사되지 않습니다. 원본 파일이 대상 폴더에 유지됩니다.",
-  "SkipTitle": "건너뛰기"
+  "You": "나"
 }

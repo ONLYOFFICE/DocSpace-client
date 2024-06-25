@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Giới thiệu",
   "AboutCompanyTitle": "Giới thiệu về chương trình này",
   "AccessDenied": "Truy cập bị từ chối",
@@ -51,6 +51,10 @@
   "CommonFiles": "Các tập tin chung",
   "CompanyName": "Tên công ty",
   "Confirmation": "Xác nhận",
+  "ConflictResolveDescription": " Tệp có tên <1>{{file}}</1> đã tồn tại trong thư mục <1>{{folder}}</1>.",
+  "ConflictResolveDescriptionFiles": " {{filesCount}} tài liệu có cùng tên đã tồn tại trong thư mục <1>{{folder}}</1>.",
+  "ConflictResolveSelectAction": "Vui lòng chọn hành động:",
+  "ConflictResolveTitle": "Xác nhận ghi đè",
   "Connect": "Kết nối",
   "Content": "Nội dung",
   "Context": "Bối cảnh",
@@ -63,6 +67,7 @@
   "Create": "Tạo",
   "CreateAndCopy": "Tạo và sao chép",
   "CreateCopy": "Tạo bản sao",
+  "CreateDescription": "Sẽ có hai tệp khác nhau trong thư mục.",
   "CreateFileCopy": "Tạo bản sao tệp",
   "CreateMasterFormFromFile": "Tạo mẫu Biểu mẫu từ tệp",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -284,6 +289,8 @@
   "orContinueWith": "hoặc tiếp tục với",
   "OtherLabel": "Khác",
   "OtherOperations": "Hoạt động khác",
+  "OverwriteDescription": " Tệp sẽ được thêm vào tệp có cùng tên như một phiên bản.",
+  "OverwriteTitle": " Ghi đè bằng cập nhật phiên bản",
   "Owner": "Chủ sở hữu",
   "PageOfTotalPage": "{{page}} trên {{totalPage}}",
   "Pages": "Trang",
@@ -402,6 +409,8 @@
   "SignUpWithZoom": "Đăng ký với Zoom",
   "Size": "Kích cỡ",
   "SizeImageLarge": "Kích thước hình ảnh quá lớn, xin vui lòng chọn một hình ảnh khác.",
+  "SkipDescription": "Không có tệp nào được sao chép. Tệp gốc sẽ được giữ lại trong thư mục đích.",
+  "SkipTitle": "Bỏ qua",
   "SomethingWentWrong": "Đã xảy ra lỗi.",
   "SortBy": "Xếp theo",
   "SpaceManagement": "Quản Lý Không Gian",
@@ -459,14 +468,5 @@
   "Website": "Website",
   "Yes": "Có",
   "Yesterday": "Hôm qua",
-  "You": "Bạn",
-  "ConflictResolveDescription": " Tệp có tên <1>{{file}}</1> đã tồn tại trong thư mục <1>{{folder}}</1>.",
-  "ConflictResolveDescriptionFiles": " {{filesCount}} tài liệu có cùng tên đã tồn tại trong thư mục <1>{{folder}}</1>.",
-  "ConflictResolveSelectAction": "Vui lòng chọn hành động:",
-  "ConflictResolveTitle": "Xác nhận ghi đè",
-  "CreateDescription": "Sẽ có hai tệp khác nhau trong thư mục.",
-  "OverwriteDescription": " Tệp sẽ được thêm vào tệp có cùng tên như một phiên bản.",
-  "OverwriteTitle": " Ghi đè bằng cập nhật phiên bản",
-  "SkipDescription": "Không có tệp nào được sao chép. Tệp gốc sẽ được giữ lại trong thư mục đích.",
-  "SkipTitle": "Bỏ qua"
+  "You": "Bạn"
 }

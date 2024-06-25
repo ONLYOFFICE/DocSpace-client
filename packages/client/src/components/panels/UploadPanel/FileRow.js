@@ -41,25 +41,12 @@ import { Button } from "@docspace/shared/components/button";
 import { tablet } from "@docspace/shared/utils";
 
 const StyledFileRow = styled(Row)`
-  width: calc(100% - 16px);
+  width: 100%;
   box-sizing: border-box;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          padding-right: 16px;
-        `
-      : css`
-          padding-left: 16px;
-        `}
-  max-width: 484px;
 
   .row_context-menu-wrapper {
     width: auto;
     display: none;
-  }
-  ::after {
-    max-width: 468px;
-    width: calc(100% - 16px);
   }
 
   ${!isMobile && "min-height: 48px;"}

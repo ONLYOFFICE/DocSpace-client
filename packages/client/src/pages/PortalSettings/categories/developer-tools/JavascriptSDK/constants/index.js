@@ -26,8 +26,6 @@
 
 export const showPreviewThreshold = 720;
 
-export const scriptUrl = `${window.location.origin}/static/scripts/sdk/1.0.0/api.js`;
-
 export const dataDimensions = [
   { key: "percent", label: "%", default: true },
   { key: "pixel", label: "px" },

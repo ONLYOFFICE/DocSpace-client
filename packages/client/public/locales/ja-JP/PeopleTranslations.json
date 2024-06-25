@@ -2,7 +2,7 @@
   "AccountLoginType": "アカウントログインの種類",
   "AddMembers": "メンバーの追加",
   "CreateGroup": "グループの作成",
-  "DeleteSelfProfile": "プロファイルの削除",
+  "DeleteSelfProfile": "アカウントを無効にする",
   "DisabledEmployeeStatus": "無効化",
   "EditGroup": "グループの編集",
   "EmailChangeButton": "メールの変更",

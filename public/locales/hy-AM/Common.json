@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Մասին",
   "AboutCompanyTitle": "Ծրագրի մասին",
   "AccessDenied": "Մուտքն արգելված է",
@@ -51,6 +51,10 @@
   "CommonFiles": "Ընդհանուր ֆայլեր",
   "CompanyName": "Ընկերության անվանում",
   "Confirmation": "Հաստատում",
+  "ConflictResolveDescription": "Այց անունով ֆայլը՝ <1>{{file}}</1> արդեն առկա է պանակում <1>{{folder}}</1>.",
+  "ConflictResolveDescriptionFiles": "{{filesCount}} նույն անունով  փաստաթղթեր արդեն կան պանակում <1>{{folder}}</1>:",
+  "ConflictResolveSelectAction": "Խնդրում ենք ընտրել գործողությունը:",
+  "ConflictResolveTitle": "Վերագրել հաստատումը",
   "Connect": "Կապակցվել",
   "Content": "Բովանդակություն",
   "Context": "Համատեքստ",
@@ -63,6 +67,7 @@
   "Create": "Ստեղծել",
   "CreateAndCopy": "Ստեղծել և պատճենել",
   "CreateCopy": "Ստեղծել պատճեն",
+  "CreateDescription": "Պանակում կլինեն երկու տարբեր ֆայլեր:",
   "CreateFileCopy": "Ստեղծել ֆայլի պատճեն",
   "CreateMasterFormFromFile": "Ստեղծել ձևանմուշ ֆայլից",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -283,6 +288,8 @@
   "orContinueWith": "կամ շարունակել",
   "OtherLabel": "Այլ",
   "OtherOperations": "Այլ տարբերակներ",
+  "OverwriteDescription": "Նոր ֆայլը որպես նոր տարբերակ կփոխարինի գոյություն ունեցողին։",
+  "OverwriteTitle": "Վերագրել տարբերակի արդիացումով",
   "Owner": "Սեփականատեր",
   "PageOfTotalPage": "{{page}} {{totalPage}}-ի",
   "Pages": "Էջեր",
@@ -401,6 +408,8 @@
   "SignUpWithZoom": "Գրանցվեք Zoom-ով",
   "Size": "Չափ",
   "SizeImageLarge": "Պատկերի չափը չափազանց մեծ է, խնդրում ենք ընտրել մեկ այլ պատկեր:",
+  "SkipDescription": "Ոչ մի ֆայլ չի պատճենվի:Բնօրինակ ֆայլը կպահվի նպատակակետի պանակում ",
+  "SkipTitle": "Բաց թողնել",
   "SomethingWentWrong": "Ինչ որ բան այնպես չգնաց.",
   "SortBy": "Դասավորել ըստ",
   "SpaceManagement": "Տարածության կառավարում",
@@ -458,14 +467,5 @@
   "Website": "Վեբ կայք",
   "Yes": "Այո",
   "Yesterday": "Երեկ",
-  "You": "Դու",
-  "ConflictResolveDescription": "Այց անունով ֆայլը՝ <1>{{file}}</1> արդեն առկա է պանակում <1>{{folder}}</1>.",
-  "ConflictResolveDescriptionFiles": "{{filesCount}} նույն անունով  փաստաթղթեր արդեն կան պանակում <1>{{folder}}</1>:",
-  "ConflictResolveSelectAction": "Խնդրում ենք ընտրել գործողությունը:",
-  "ConflictResolveTitle": "Վերագրել հաստատումը",
-  "CreateDescription": "Պանակում կլինեն երկու տարբեր ֆայլեր:",
-  "OverwriteDescription": "Նոր ֆայլը որպես նոր տարբերակ կփոխարինի գոյություն ունեցողին։",
-  "OverwriteTitle": "Վերագրել տարբերակի արդիացումով",
-  "SkipDescription": "Ոչ մի ֆայլ չի պատճենվի:Բնօրինակ ֆայլը կպահվի նպատակակետի պանակում ",
-  "SkipTitle": "Բաց թողնել"
+  "You": "Դու"
 }

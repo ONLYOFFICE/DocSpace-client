@@ -57,7 +57,7 @@ import MuteReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
 import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
-import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.reat.svg?url";
+import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import MailReactSvgUrl from "PUBLIC_DIR/images/mail.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import PluginActionsSvgUrl from "PUBLIC_DIR/images/plugin.actions.react.svg?url";
@@ -80,6 +80,7 @@ import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
+import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 
 import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 
@@ -441,6 +442,29 @@ class ContextOptionsStore {
     copy(url);
 
     toastr.success(t("Translations:LinkCopySuccess"));
+  };
+
+  onOpenEmbeddingSettings = async (item) => {
+    const { shared, navigationPath, getSelectedFolder } =
+      this.selectedFolderStore;
+    const { setLinkParams, setEmbeddingPanelData } = this.dialogsStore;
+
+    const sharedItem = shared
+      ? getSelectedFolder()
+      : navigationPath.find((r) => r.shared);
+
+    if (!sharedItem) return;
+
+    const isPublicRoomType = sharedItem.roomType === RoomsType.PublicRoom;
+    const isFormRoom = sharedItem.roomType === RoomsType.FormRoom;
+
+    setLinkParams({
+      roomId: sharedItem?.id,
+      isPublic: isPublicRoomType,
+      isFormRoom,
+    });
+
+    setEmbeddingPanelData({ visible: true, fileId: item.id });
   };
 
   onCreateAndCopySharedLink = async (item, t) => {
@@ -1235,14 +1259,14 @@ class ContextOptionsStore {
       item.roomType === RoomsType.FormRoom ||
       item.roomType === RoomsType.CustomRoom;
 
+    const { shared, navigationPath } = this.selectedFolderStore;
+
     if (item.isRoom && withOpen) {
-      withOpen =
-        this.selectedFolderStore.navigationPath.findIndex(
-          (f) => f.id === item.id,
-        ) === -1;
+      withOpen = navigationPath.findIndex((f) => f.id === item.id) === -1;
     }
 
     const isArchive = item.rootFolderType === FolderType.Archive;
+    const isShared = shared || navigationPath.findIndex((r) => r.shared) > -1;
 
     const optionsModel = [
       {
@@ -1400,7 +1424,8 @@ class ContextOptionsStore {
         onClick: () => this.onCopyLink(item, t),
         disabled:
           (isPublicRoomType && item.canCopyPublicLink && !isArchive) ||
-          this.publicRoomStore.isPublicRoom,
+          this.publicRoomStore.isPublicRoom ||
+          !item.security.CopyLink,
       },
       {
         id: "option_copy-external-link",
@@ -1448,6 +1473,14 @@ class ContextOptionsStore {
       //   icon: MailReactSvgUrl,
       //   disabled: emailSendIsDisabled,
       // },
+      {
+        id: "option_embedding-setting",
+        key: "embedding-settings",
+        label: t("Files:Embed"),
+        icon: CodeReactSvgUrl,
+        onClick: () => this.onOpenEmbeddingSettings(item),
+        disabled: !item.security?.Embed,
+      },
       {
         id: "option_show-info",
         key: "show-info",
@@ -2126,7 +2159,7 @@ class ContextOptionsStore {
     ];
   };
 
-  getFolderModel = (t) => {
+  getFolderModel = (t, isSectionMenu) => {
     const { isLoading } = this.clientLoadingStore;
     const { security, roomType, parentRoomType, isFolder } =
       this.selectedFolderStore;
@@ -2157,7 +2190,8 @@ class ContextOptionsStore {
 
     const someDialogIsOpen = checkDialogsOpen();
 
-    if (!canCreate || isMobile || someDialogIsOpen) return null;
+    if (!canCreate || (isSectionMenu && (isMobile || someDialogIsOpen)))
+      return null;
 
     const isOwner = this.userStore.user?.isOwner;
     const isRoomAdmin = this.userStore.user?.isRoomAdmin;

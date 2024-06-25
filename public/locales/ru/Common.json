@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "О программе",
   "AboutCompanyTitle": "О программе",
   "AccessDenied": "Доступ запрещен",
@@ -289,6 +289,8 @@
   "orContinueWith": "или продолжить с",
   "OtherLabel": "Другое",
   "OtherOperations": "Другие операции",
+  "OverwriteDescription": "Новый файл заменит существующий файл как новая версия.",
+  "OverwriteTitle": "Перезаписать с обновлением версии",
   "online": "В сети",
   "offline": "Не в сети",
   "Owner": "Владелец",

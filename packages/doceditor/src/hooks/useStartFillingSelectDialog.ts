@@ -41,7 +41,7 @@ import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import type { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import type { ConflictStateType } from "@/types";
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 
 const DefaultConflictDataDialogState: ConflictStateType = {
   visible: false,
@@ -52,7 +52,8 @@ const DefaultConflictDataDialogState: ConflictStateType = {
 };
 
 const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
-  const { t } = useTranslation(["Common"]);
+  // const { t } = useTranslation(["Common"]);
+  const [headerLabelSFSDialog, setHeaderLabelSFSDialog] = useState("");
 
   const [isVisible, setIsVisible] = useState(false);
   const [conflictDataDialog, setConflictDataDialog] = useState(
@@ -61,7 +62,8 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
 
   const requestRunning = useRef(false);
 
-  const onSDKRequestStartFilling = useCallback((_: object) => {
+  const onSDKRequestStartFilling = useCallback((headerLabel: string) => {
+    setHeaderLabelSFSDialog(headerLabel);
     setIsVisible(true);
   }, []);
 
@@ -180,6 +182,7 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
     getIsDisabledStartFillingSelectDialog: getIsDisabled,
     isVisibleStartFillingSelectDialog: isVisible,
     conflictDataDialog,
+    headerLabelSFSDialog,
   };
 };
 

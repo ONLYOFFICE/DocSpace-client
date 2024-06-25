@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "O",
   "AboutCompanyTitle": "O tym programie",
   "AccessDenied": "Odmowa dostępu",
@@ -51,6 +51,10 @@
   "CommonFiles": "Wspólne pliki",
   "CompanyName": "Nama Perusahaan",
   "Confirmation": "Potwierdzenie",
+  "ConflictResolveDescription": "Plik o nazwie <1>{{file}}</1> istnieje już w folderze <1>{{folder}}</1>.",
+  "ConflictResolveDescriptionFiles": "{{filesCount}} dokument(y/ów) o tej samej nazwie istnieje(-ją) już w folderze <1>{{folder}}</1>.",
+  "ConflictResolveSelectAction": "Wybierz działanie:",
+  "ConflictResolveTitle": "Potwierdź zastąpienie",
   "Connect": "Podłącz",
   "Content": "Treść",
   "Context": "Kontekst",
@@ -63,6 +67,7 @@
   "Create": "Utwórz",
   "CreateAndCopy": "Utwórz i skopiuj",
   "CreateCopy": "Utwórz kopię",
+  "CreateDescription": "W folderze będą dwa różne pliki.",
   "CreateFileCopy": "Utwórz kopię pliku",
   "CreateMasterFormFromFile": "Utwórz szablon formularza z pliku",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -284,6 +289,8 @@
   "orContinueWith": "lub kontynuuj z",
   "OtherLabel": "Inny",
   "OtherOperations": "Inne działania",
+  "OverwriteDescription": "Nowy plik zastąpi istniejący jako jego nowa wersja.",
+  "OverwriteTitle": "Zastąp i zaktualizuj wersję",
   "Owner": "Właściciel",
   "PageOfTotalPage": "{{page}} z {{totalPage}}",
   "Pages": "Strony",
@@ -402,6 +409,8 @@
   "SignUpWithZoom": "Zarejestruj się przez Zoom",
   "Size": "Rozmiar",
   "SizeImageLarge": "Rozmiar obrazu jest zbyt duży, wybierz inny obraz.",
+  "SkipDescription": "Żaden plik nie zostanie skopiowany. Oryginalny plik zostanie zachowany w folderze docelowym.",
+  "SkipTitle": "Pomiń",
   "SomethingWentWrong": "Coś poszło nie tak.",
   "SortBy": "Sortuj",
   "SpaceManagement": "Zarządzanie obszarem",
@@ -459,14 +468,5 @@
   "Website": "Strona internetowa",
   "Yes": "Tak",
   "Yesterday": "Wczoraj",
-  "You": "Ty",
-  "ConflictResolveDescription": "Plik o nazwie <1>{{file}}</1> istnieje już w folderze <1>{{folder}}</1>.",
-  "ConflictResolveDescriptionFiles": "{{filesCount}} dokument(y/ów) o tej samej nazwie istnieje(-ją) już w folderze <1>{{folder}}</1>.",
-  "ConflictResolveSelectAction": "Wybierz działanie:",
-  "ConflictResolveTitle": "Potwierdź zastąpienie",
-  "CreateDescription": "W folderze będą dwa różne pliki.",
-  "OverwriteDescription": "Nowy plik zastąpi istniejący jako jego nowa wersja.",
-  "OverwriteTitle": "Zastąp i zaktualizuj wersję",
-  "SkipDescription": "Żaden plik nie zostanie skopiowany. Oryginalny plik zostanie zachowany w folderze docelowym.",
-  "SkipTitle": "Pomiń"
+  "You": "Ty"
 }

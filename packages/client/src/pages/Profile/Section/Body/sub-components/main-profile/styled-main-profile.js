@@ -314,7 +314,7 @@ export const StyledInfo = styled.div`
           font-size: 12px !important;
           line-height: 16px !important;
           white-space: nowrap;
-          color: rgb(163, 169, 174);
+          color: ${(props) => props.theme.profile.main.mobileLabel};
         }
 
         .mobile-profile-label-field {

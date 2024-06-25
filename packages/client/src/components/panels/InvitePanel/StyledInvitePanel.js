@@ -240,7 +240,7 @@ const StyledInviteInput = styled.div`
   }
 
   display: flex;
-  border: 1px solid rgb(208, 213, 218);
+  border: ${(props) => props.theme.filesPanels.invite.border};
   border-radius: 3px;
 
   .copy-link-icon {

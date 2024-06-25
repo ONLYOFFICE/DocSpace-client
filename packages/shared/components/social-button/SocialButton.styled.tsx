@@ -27,7 +27,7 @@
 import React, { PropsWithChildren } from "react";
 import styled, { css } from "styled-components";
 
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 
 import type { StyledSocialButtonProps } from "./SocialButton.types";
 
@@ -199,7 +199,8 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
 
     path {
       fill: ${(props) => props.isConnect && props.theme.socialButton.svg.fill};
-      fill: ${(props) => !props.theme.isBase && !props.isConnect && "#FFFFFF"};
+      fill: ${(props) =>
+        !props.theme.isBase && !props.isConnect && globalColors.white};
     }
   }
 

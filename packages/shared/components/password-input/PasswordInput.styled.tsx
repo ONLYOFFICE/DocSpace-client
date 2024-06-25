@@ -27,7 +27,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { tablet, mobile } from "../../utils";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 
 import { Text } from "../text";
 
@@ -184,7 +184,10 @@ StyledTooltipContainer.defaultProps = { theme: Base };
 
 const StyledTooltipItem = styled(Text)<{ valid?: boolean }>`
   //height: 24px;
-  color: ${(props) => (props.valid ? "#44bb00" : "#B40404")} !important;
+  color: ${(props) =>
+    props.valid
+      ? globalColors.lightStatusPositive
+      : globalColors.lightErrorStatus} !important;
 `;
 
 export {

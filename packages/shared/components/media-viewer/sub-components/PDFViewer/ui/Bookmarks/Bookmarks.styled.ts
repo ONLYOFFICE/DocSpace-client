@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
+import { globalColors } from "../../../../../../themes";
 
 export const List = styled.ul`
   padding-left: 16px;
@@ -38,7 +39,7 @@ export const List = styled.ul`
 `;
 
 export const Item = styled.li`
-  color: #ffffff;
+  color: ${globalColors.white};
   padding: 1px 16px 0 16px;
   font-weight: 400;
   font-size: 13px;
@@ -50,13 +51,13 @@ export const Item = styled.li`
 
   @media (hover: hover) {
     :hover {
-      background: #474747;
+      background: ${globalColors.grayDarkStrong};
     }
   }
 `;
 
 export const Text = styled.p`
   margin: 0;
-  border-bottom: 1px solid #474747;
+  border-bottom: 1px solid ${globalColors.grayDarkStrong};
   padding: 6px 0;
 `;

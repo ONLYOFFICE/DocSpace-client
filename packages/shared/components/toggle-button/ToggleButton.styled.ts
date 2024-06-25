@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { NoUserSelect } from "../../utils";
 
 import {
@@ -139,7 +139,10 @@ const ContainerToggleButtonTheme = styled(
           }
 
           circle {
-            fill: ${(isChecked && isDisabled && theme.isBase && "#FFFFFF") ||
+            fill: ${(isChecked &&
+              isDisabled &&
+              theme.isBase &&
+              globalColors.white) ||
             (isChecked && $currentColorScheme.text?.accent)};
           }
         }

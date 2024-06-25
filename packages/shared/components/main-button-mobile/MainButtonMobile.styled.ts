@@ -29,7 +29,7 @@ import { isMobile } from "react-device-detect";
 
 import { mobile, tablet } from "../../utils";
 
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 import { FloatingButton } from "../floating-button";
@@ -410,7 +410,7 @@ const getDefaultProgressStyles = ({
   $currentColorScheme &&
   css`
     background: ${
-      theme.isBase ? $currentColorScheme?.main?.accent : "#FFFFFF"
+      theme.isBase ? $currentColorScheme?.main?.accent : globalColors.white
     }};
   `;
 

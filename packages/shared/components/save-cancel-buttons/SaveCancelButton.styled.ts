@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { mobileMore, mobile } from "../../utils";
 
 const displaySettings = css<{
@@ -39,7 +39,7 @@ const displaySettings = css<{
   align-items: flex-start;
   border-top: ${(props) =>
     props.hasScroll && !props.showReminder && !props.hideBorder
-      ? "1px solid #ECEEF1"
+      ? `1px solid ${globalColors.grayLightMid}`
       : "none"};
 
   ${(props) =>
@@ -90,7 +90,7 @@ const displaySettings = css<{
     props.hasScroll &&
     css`
       .unsaved-changes {
-        border-top: 1px solid #eceef1;
+        border-top: 1px solid ${globalColors.grayLightMid};
         width: calc(100% - 16px);
 
         ${props.theme.interfaceDirection === "rtl"

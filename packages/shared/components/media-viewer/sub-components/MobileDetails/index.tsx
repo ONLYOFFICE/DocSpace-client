@@ -39,6 +39,7 @@ import BackArrow from "PUBLIC_DIR/images/viewer.media.back.react.svg";
 import { StyledMobileDetails } from "../../MediaViewer.styled";
 
 import type MobileDetailsProps from "./MobileDetails.props";
+import { globalColors } from "../../../../themes";
 
 const MobileDetails = memo(
   forwardRef(
@@ -69,7 +70,7 @@ const MobileDetails = memo(
           {!isPublicFile && (
             <BackArrow className="mobile-close" onClick={onMaskClick} />
           )}
-          <Text fontSize="14px" color="#fff" className="title">
+          <Text fontSize="14px" color={globalColors.white} className="title">
             {title}
           </Text>
           {!isPreviewFile && !isError && (

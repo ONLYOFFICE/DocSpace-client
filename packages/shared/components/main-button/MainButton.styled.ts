@@ -108,7 +108,7 @@ const StyledMainButton = styled.div<{
     svg {
       padding-bottom: 1px;
       path {
-        fill: #fff;
+        fill: ${(props) => props.theme.mainButton.svg.fill};
       }
     }
   }

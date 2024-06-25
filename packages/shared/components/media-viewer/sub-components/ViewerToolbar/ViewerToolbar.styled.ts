@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
+import { globalColors } from "../../../../themes";
 
 export const ImageViewerToolbarWrapper = styled.div`
   height: 48px;
@@ -80,7 +81,10 @@ export const ToolbarItem = styled.li<{
     height: 16px;
     path,
     rect {
-      ${(props) => (props.$percent !== 25 ? "fill: #fff;" : "fill: #BEBEBE;")}
+      ${(props) =>
+        props.$percent !== 25
+          ? `fill: ${globalColors.white};`
+          : "fill: #BEBEBE;"}
     }
   }
 

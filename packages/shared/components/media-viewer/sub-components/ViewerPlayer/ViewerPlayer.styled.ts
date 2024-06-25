@@ -28,13 +28,14 @@ import styled from "styled-components";
 import { animated } from "@react-spring/web";
 
 import { tablet, mobile } from "@docspace/shared/utils";
+import { globalColors } from "../../../../themes";
 
 export const ContainerPlayer = styled.div<{ $isFullScreen: boolean }>`
   position: fixed;
   inset: 0;
   z-index: 305;
   background-color: ${(props) =>
-    props.$isFullScreen ? "#000" : "rgba(55, 55, 55, 0.6)"};
+    props.$isFullScreen ? globalColors.darkBlack : "rgba(55, 55, 55, 0.6)"};
   touch-action: none;
 `;
 

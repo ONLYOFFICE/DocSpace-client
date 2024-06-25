@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { mobile, tablet } from "@docspace/shared/utils";
 import SessionsLoader from "@docspace/shared/skeletons/sessions";
@@ -75,13 +75,12 @@ const DownLoadWrapper = styled.div`
 `;
 
 const Sessions = ({
-  t,
   allSessions,
   sessionsData,
   dataFromSocket,
+  currentDataFromSocket,
   displayName,
   clearSelection,
-  setDataFromSocket,
   updateAllSessions,
   platformData,
   selection,
@@ -90,7 +89,6 @@ const Sessions = ({
   isLoading,
   viewAs,
   setViewAs,
-  socketHelper,
   currentDeviceType,
   disableDialogVisible,
   logoutDialogVisible,
@@ -107,20 +105,13 @@ const Sessions = ({
   isLoadingDownloadReport,
   isSessionsLoaded,
 }) => {
+  const { t } = useTranslation([
+    "Settings",
+    "Profile",
+    "Common",
+    "ChangeUserStatusDialog",
+  ]);
   useEffect(() => {
-    socketHelper.emit({
-      command: "subscribe",
-      data: { roomParts: "statuses-in-portal" },
-    });
-
-    socketHelper.emit({
-      command: "getSessionsInPortal",
-    });
-
-    socketHelper.on("statuses-in-portal", (data) => {
-      setDataFromSocket(data);
-    });
-
     fetchData();
 
     return () => {
@@ -129,8 +120,8 @@ const Sessions = ({
   }, []);
 
   useEffect(() => {
-    updateAllSessions(sessionsData, dataFromSocket);
-  }, [sessionsData, dataFromSocket]);
+    updateAllSessions(sessionsData, dataFromSocket, currentDataFromSocket);
+  }, [sessionsData, dataFromSocket, currentDataFromSocket]);
 
   useViewEffect({
     view: viewAs,
@@ -227,14 +218,14 @@ const Sessions = ({
 
 export default inject(({ settingsStore, setup, peopleStore }) => {
   const { updateUserStatus } = peopleStore.usersStore;
-  const { socketHelper, currentDeviceType } = settingsStore;
+  const { currentDeviceType } = settingsStore;
   const {
     allSessions,
     sessionsData,
     dataFromSocket,
+    currentDataFromSocket,
     displayName,
     clearSelection,
-    setDataFromSocket,
     updateAllSessions,
     platformData,
     fetchData,
@@ -264,9 +255,9 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     allSessions,
     sessionsData,
     dataFromSocket,
+    currentDataFromSocket,
     displayName,
     clearSelection,
-    setDataFromSocket,
     updateAllSessions,
     platformData,
     selection,
@@ -274,7 +265,6 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     fetchData,
     viewAs,
     setViewAs,
-    socketHelper,
     currentDeviceType,
     disableDialogVisible,
     logoutDialogVisible,
@@ -292,8 +282,4 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     isLoadingDownloadReport,
     isSessionsLoaded: allSessions.length > 0,
   };
-})(
-  withTranslation(["Settings", "Profile", "Common", "ChangeUserStatusDialog"])(
-    observer(Sessions),
-  ),
-);
+})(observer(Sessions));

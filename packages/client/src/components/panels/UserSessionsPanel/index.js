@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
 import styled, { css } from "styled-components";
 
@@ -44,7 +44,8 @@ const StyledScrollbar = styled(Scrollbar)`
 `;
 
 const UserSessionsPanel = (props) => {
-  const { t, visible, setVisible } = props;
+  const { visible, setVisible } = props;
+  const { t } = useTranslation(["Settings", "Profile", "Common"]);
   const scrollRef = useRef(null);
 
   const onClose = () => {
@@ -86,8 +87,4 @@ export default inject(({ dialogsStore }) => {
     visible: userSessionsPanelVisible,
     setVisible: setUserSessionPanelVisible,
   };
-})(
-  withTranslation(["Settings", "Profile", "Common"])(
-    observer(UserSessionsPanel),
-  ),
-);
+})(observer(UserSessionsPanel));

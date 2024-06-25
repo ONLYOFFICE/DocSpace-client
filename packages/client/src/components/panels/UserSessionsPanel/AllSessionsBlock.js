@@ -1,4 +1,5 @@
 import { observer, inject } from "mobx-react";
+import { mobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
@@ -13,6 +14,10 @@ const Wrapper = styled.div`
   .empty-screen-container {
     width: auto;
     padding-top: 60px;
+
+    @media ${mobile} {
+      padding-top: 30px;
+    }
   }
 
   .subtitle {

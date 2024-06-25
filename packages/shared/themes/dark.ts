@@ -2471,6 +2471,7 @@ const Dark: TTheme = {
     invite: {
       textColor: grayDark,
       addButtonColor: lightBlueMain,
+      border: `1px solid ${grayDarkStrong}`,
     },
   },
 
@@ -3008,6 +3009,7 @@ const Dark: TTheme = {
       mobileRowBackground: lightDarkGrayHover,
 
       iconFill: darkGrayDark,
+      mobileLabel: grayDark,
     },
     login: {
       textColor: grayDark,

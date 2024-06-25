@@ -2487,6 +2487,7 @@ export const getBaseTheme = () => {
       invite: {
         textColor: gray,
         addButtonColor: lightBlueMain,
+        border: `1px solid ${grayStrong}`,
       },
     },
 
@@ -3027,6 +3028,7 @@ export const getBaseTheme = () => {
         mobileRowBackground: grayLight,
 
         iconFill: lightGrayDark,
+        mobileLabel: gray,
       },
       login: {
         textColor: gray,

@@ -106,6 +106,7 @@ const {
 
   onWhiteColor,
   boxShadowColor,
+  loaderLight,
 
   editorGreenColor,
   editorBlueColor,
@@ -113,8 +114,6 @@ const {
   windowsColor,
   linuxColor,
   androidColor,
-
-  shuttleGrey,
 } = globalColors;
 
 export const getBaseTheme = () => {
@@ -1445,7 +1444,7 @@ export const getBaseTheme = () => {
     },
 
     loader: {
-      color: shuttleGrey,
+      color: loaderLight,
       size: "40px",
       marginRight: "2px",
       borderRadius: "50%",

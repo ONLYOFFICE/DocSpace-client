@@ -100,6 +100,8 @@ export const globalColors = {
   onWhiteColor: "rgba(0, 0, 0, 0.1)",
   boxShadowColor: "#040F1B14",
   boxShadowDarkColor: "#040F1B29",
+  loaderLight: "#E7E7E7",
+  loaderDark: "#484848",
 
   editorGreenColor: "#40865C",
   editorBlueColor: "#446995",
@@ -110,5 +112,4 @@ export const globalColors = {
   //
 
   tickColor: "#20D21F",
-  shuttleGrey: "#63686A",
 };

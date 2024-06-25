@@ -95,6 +95,7 @@ const {
 
   onWhiteColor,
   boxShadowDarkColor,
+  loaderDark,
 
   editorGreenColor,
   editorBlueColor,
@@ -102,8 +103,6 @@ const {
   windowsColor,
   linuxColor,
   androidColor,
-
-  shuttleGrey,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -319,7 +318,7 @@ const Dark: TTheme = {
     svg: {
       margin: "auto",
       height: "100%",
-      fill: black,
+      fill: white,
     },
 
     dropDown: {
@@ -1427,7 +1426,7 @@ const Dark: TTheme = {
   },
 
   loader: {
-    color: shuttleGrey,
+    color: loaderDark,
     size: "40px",
     marginRight: "2px",
     borderRadius: "50%",

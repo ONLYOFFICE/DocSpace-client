@@ -25,11 +25,12 @@ const StyledRowContent = styled(RowContent)`
 `;
 
 const SessionsRowContent = ({ t, item, fromDateAgo, sectionWidth }) => {
-  const { id, displayName, status, sessions } = item;
+  const { id, displayName, status, sessions, connections } = item;
 
   const { platform, browser, country, city, ip } = sessions;
 
   const isOnline = status === "online";
+  const isLastConnection = connections.length > 0;
 
   return (
     <StyledRowContent
@@ -45,8 +46,8 @@ const SessionsRowContent = ({ t, item, fromDateAgo, sectionWidth }) => {
       </Text>
       <></>
       <Text fontSize="12px" fontWeight="600">
-        {platform}
-        {` ${browser}`}
+        {isLastConnection ? connections[0]?.platform : platform}
+        {` ${isLastConnection ? connections[0]?.browser : browser}`}
       </Text>
 
       {(country || city) && (
@@ -57,7 +58,7 @@ const SessionsRowContent = ({ t, item, fromDateAgo, sectionWidth }) => {
       )}
 
       <Text fontSize="12px" fontWeight="600" containerWidth="160px">
-        {ip}
+        {isLastConnection ? connections[0]?.ip : ip}
       </Text>
     </StyledRowContent>
   );

@@ -100,6 +100,7 @@ const LastSessionBlock = (props) => {
   const {
     t,
     status,
+    connections,
     userLastSession,
     setDisplayName,
     setDisableDialogVisible,
@@ -119,6 +120,7 @@ const LastSessionBlock = (props) => {
   const { platform, browser, ip, city, country } = sessions;
 
   const isOnline = status === "online";
+  const isLastConnection = connections.length > 0;
 
   const getUserType = () => {
     if (isOwner) return t("Common:Owner");
@@ -195,12 +197,16 @@ const LastSessionBlock = (props) => {
           </div>
           <div className="session-info-row">
             <Text className="session-info-label">{t("Common:Platform")}</Text>
-            <Text className="session-info-value">{platform}</Text>
+            <Text className="session-info-value">
+              {isLastConnection ? connections[0]?.platform : platform}
+            </Text>
           </div>
           <div className="session-info-row">
             <Text className="session-info-label">{t("Common:Browser")}</Text>
             <Text className="session-info-value">
-              {browser?.split(".")[0] ?? ""}
+              {isLastConnection
+                ? connections[0]?.browser
+                : browser?.split(".")[0] ?? ""}
             </Text>
           </div>
           <div className="session-info-row">
@@ -213,7 +219,7 @@ const LastSessionBlock = (props) => {
                   {`${city} `}
                 </>
               )}
-              {ip}
+              {isLastConnection ? connections[0]?.ip : ip}
             </Text>
           </div>
         </Box>
@@ -225,11 +231,12 @@ const LastSessionBlock = (props) => {
 export default inject(({ setup, peopleStore }) => {
   const { setDisableDialogVisible, setLogoutAllDialogVisible } = setup;
 
-  const { status, userLastSession, setDisplayName } =
+  const { status, connections, userLastSession, setDisplayName } =
     peopleStore.selectionStore;
 
   return {
     status,
+    connections,
     userLastSession,
     setDisplayName,
     setDisableDialogVisible,

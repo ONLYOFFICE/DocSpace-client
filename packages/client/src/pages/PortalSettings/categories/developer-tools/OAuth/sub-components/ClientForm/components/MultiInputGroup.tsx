@@ -6,7 +6,7 @@ import { SelectorAddButton } from "@docspace/shared/components/selector-add-butt
 import { SelectedItem } from "@docspace/shared/components/selected-item";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
 import { TTranslation } from "@docspace/shared/types";
-import { IClientReqDTO } from "@docspace/shared/utils/oauth/interfaces";
+import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 

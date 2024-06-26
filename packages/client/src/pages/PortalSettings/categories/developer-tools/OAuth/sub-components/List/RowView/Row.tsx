@@ -59,7 +59,6 @@ export const OAuthRow = (props: RowProps) => {
   return (
     <Row
       key={item.clientId}
-      // data={item}
       contextOptions={contextOptions}
       onRowClick={handleRowClick}
       element={element}

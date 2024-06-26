@@ -1,7 +1,6 @@
-import { IClientProps } from "@docspace/shared/utils/oauth/interfaces";
+import { IClientProps } from "@docspace/shared/utils/oauth/types";
 
 import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
-
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
 
 export interface OAuthProps {

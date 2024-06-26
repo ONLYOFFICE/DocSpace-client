@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
 import { RegisterNewButtonProps } from "./RegisterNewButton.types";
 
-const RegisterNewButton = ({
-  t,
-  currentDeviceType,
-}: RegisterNewButtonProps) => {
+const RegisterNewButton = ({ currentDeviceType }: RegisterNewButtonProps) => {
+  const { t } = useTranslation(["OAuth", "Common"]);
+
   const navigate = useNavigate();
 
   const onClick = () => {

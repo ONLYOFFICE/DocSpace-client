@@ -39,6 +39,7 @@ const OAuth = ({
   const { t } = useTranslation(["OAuth"]);
 
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
+
   const startLoadingRef = React.useRef<null | Date>(null);
 
   const getData = React.useCallback(async () => {
@@ -88,7 +89,7 @@ const OAuth = ({
       {isLoading ? (
         <OAuthLoader viewAs={viewAs} currentDeviceType={currentDeviceType} />
       ) : isEmptyClientList ? (
-        <OAuthEmptyScreen t={t} />
+        <OAuthEmptyScreen />
       ) : (
         <List
           clients={clientList}

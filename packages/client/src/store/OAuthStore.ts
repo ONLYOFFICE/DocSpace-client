@@ -16,7 +16,7 @@ import {
   IClientProps,
   IClientReqDTO,
   IScope,
-} from "@docspace/shared/utils/oauth/interfaces";
+} from "@docspace/shared/utils/oauth/types";
 import { toastr } from "@docspace/shared/components/toast";
 import { AuthenticationMethod } from "@docspace/shared/enums";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
@@ -202,7 +202,7 @@ class OAuthStore implements OAuthStoreProps {
     this.clientSecret = value;
   };
 
-  setSelection = (clientId: string) => {
+  setSelection = (clientId?: string) => {
     if (!clientId) {
       this.selection = [];
     } else if (this.selection.includes(clientId)) {
@@ -229,7 +229,7 @@ class OAuthStore implements OAuthStoreProps {
     this.clientsIsLoading = value;
   };
 
-  setActiveClient = (clientId: string) => {
+  setActiveClient = (clientId?: string) => {
     if (!clientId) {
       this.activeClients = [];
     } else if (this.activeClients.includes(clientId)) {
@@ -257,7 +257,7 @@ class OAuthStore implements OAuthStoreProps {
         this.clients = [...clientList.content];
         this.selection = [];
         this.currentPage = clientList.page;
-        this.nextPage = clientList.next || null;
+        this.nextPage = clientList.next;
 
         if (clientList.next) {
           this.itemCount = clientList.content.length + 2;
@@ -266,19 +266,6 @@ class OAuthStore implements OAuthStoreProps {
         }
       });
       this.setClientsIsLoading(false);
-    } catch (e) {
-      const err = e as TData;
-      toastr.error(err);
-    }
-  };
-
-  fetchConsents = async () => {
-    try {
-      const consentList: IClientProps[] = await getConsentList();
-
-      runInAction(() => {
-        this.consents = [...consentList];
-      });
     } catch (e) {
       const err = e as TData;
       toastr.error(err);
@@ -312,6 +299,19 @@ class OAuthStore implements OAuthStoreProps {
     this.setClientsIsLoading(false);
   };
 
+  fetchConsents = async () => {
+    try {
+      const consentList: IClientProps[] = await getConsentList();
+
+      runInAction(() => {
+        this.consents = [...consentList];
+      });
+    } catch (e) {
+      const err = e as TData;
+      toastr.error(err);
+    }
+  };
+
   saveClient = async (client: IClientReqDTO) => {
     try {
       const newClient = await addClient(client);
@@ -343,6 +343,7 @@ class OAuthStore implements OAuthStoreProps {
       newClient.allowedOrigins = client.allowed_origins;
       newClient.logo = client.logo;
       newClient.description = client.description;
+      newClient.isPublic = client.is_public;
 
       if (
         client.allow_pkce &&

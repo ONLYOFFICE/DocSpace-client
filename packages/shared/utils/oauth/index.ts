@@ -9,7 +9,7 @@ import {
   IClientProps,
   IScope,
   IFilteredScopes,
-} from "./interfaces";
+} from "./types";
 
 export const transformToClientProps = (
   clientDto: IClientResDTO,
@@ -37,6 +37,7 @@ export const transformToClientProps = (
     allowed_origins,
     creator_avatar,
     creator_display_name,
+    is_public,
   } = clientDto;
 
   const client: IClientProps = {
@@ -62,6 +63,7 @@ export const transformToClientProps = (
     allowedOrigins: allowed_origins,
     creatorAvatar: creator_avatar,
     creatorDisplayName: creator_display_name,
+    isPublic: is_public,
   };
 
   return client;
@@ -82,6 +84,7 @@ export const transformToClientReqDTO = (
     scopes,
     websiteUrl,
     allowedOrigins,
+    isPublic,
   } = clientProps;
 
   const client: IClientReqDTO = {
@@ -92,7 +95,7 @@ export const transformToClientReqDTO = (
     logout_redirect_uri,
     terms_url,
     policy_url,
-
+    is_public: isPublic,
     scopes,
     allow_pkce: authenticationMethods.includes(AuthenticationMethod.none),
     website_url: websiteUrl,

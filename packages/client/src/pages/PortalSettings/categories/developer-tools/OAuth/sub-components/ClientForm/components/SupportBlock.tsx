@@ -1,7 +1,7 @@
 import React from "react";
 
 import { TTranslation } from "@docspace/shared/types";
-import { IClientReqDTO } from "@docspace/shared/utils/oauth/interfaces";
+import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
 
 import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
 

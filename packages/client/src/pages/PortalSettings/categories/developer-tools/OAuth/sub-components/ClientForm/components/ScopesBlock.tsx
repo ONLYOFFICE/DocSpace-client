@@ -4,7 +4,7 @@ import {
   IClientReqDTO,
   IFilteredScopes,
   IScope,
-} from "@docspace/shared/utils/oauth/interfaces";
+} from "@docspace/shared/utils/oauth/types";
 import {
   filterScopeByGroup,
   getScopeTKeyName,

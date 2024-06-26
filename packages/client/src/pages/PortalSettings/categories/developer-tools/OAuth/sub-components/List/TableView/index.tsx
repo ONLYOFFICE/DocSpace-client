@@ -14,7 +14,7 @@ import { TableViewProps } from "./TableView.types";
 import { TableWrapper } from "./TableView.styled";
 
 const TABLE_VERSION = "1";
-const COLUMNS_SIZE = `oauthConfigColumnsSize_ver-${TABLE_VERSION}`;
+const COLUMNS_NAME = `oauthConfigColumnsSize_ver-${TABLE_VERSION}`;
 
 const elementResizeDetector = elementResizeDetectorMaker({
   strategy: "scroll",
@@ -99,7 +99,7 @@ const TableView = ({
     };
   }, [clickOutside, setSelection]);
 
-  const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
+  const columnStorageName = `${COLUMNS_NAME}=${userId}`;
 
   const fetchMoreFiles = React.useCallback(
     async ({ startIndex }: { startIndex: number; stopIndex: number }) => {

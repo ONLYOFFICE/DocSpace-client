@@ -6,8 +6,7 @@ import { useTranslation } from "react-i18next";
 import {
   IClientProps,
   IClientReqDTO,
-  INoAuthClientProps,
-} from "@docspace/shared/utils/oauth/interfaces";
+} from "@docspace/shared/utils/oauth/types";
 import { AuthenticationMethod } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
@@ -54,9 +53,9 @@ const ClientForm = ({
   const [isRequestRunning, setIsRequestRunning] =
     React.useState<boolean>(false);
 
-  const [initialClient, setInitialClient] = React.useState<
-    IClientProps | INoAuthClientProps
-  >({} as IClientProps);
+  const [initialClient, setInitialClient] = React.useState<IClientProps>(
+    {} as IClientProps,
+  );
   const [form, setForm] = React.useState<IClientReqDTO>({
     name: "",
     logo: "",
@@ -70,6 +69,7 @@ const ClientForm = ({
     terms_url: "",
     policy_url: "",
 
+    is_public: false,
     allow_pkce: false,
 
     scopes: [],
@@ -212,6 +212,7 @@ const ClientForm = ({
           allow_pkce: item.authenticationMethods
             ? item.authenticationMethods.includes(AuthenticationMethod.none)
             : false,
+          is_public: item.isPublic ?? false,
 
           scopes: item.scopes ? [...item.scopes] : [],
         });
@@ -302,18 +303,20 @@ const ClientForm = ({
       });
 
       return (
-        isValid &&
-        form.name &&
-        form.logo &&
-        form.allowed_origins.length > 0 &&
-        (form.name !== initialClient.name ||
-          form.logo !== initialClient.logo ||
-          form.description !== initialClient.description ||
-          form.allowed_origins.length !== initialClient.allowedOrigins.length ||
-          form.allow_pkce !==
-            initialClient.authenticationMethods.includes(
-              AuthenticationMethod.none,
-            ))
+        (isValid &&
+          form.name &&
+          form.logo &&
+          form.allowed_origins.length > 0 &&
+          (form.name !== initialClient.name ||
+            form.logo !== initialClient.logo ||
+            form.description !== initialClient.description ||
+            form.allowed_origins.length !==
+              initialClient.allowedOrigins.length ||
+            form.allow_pkce !==
+              initialClient.authenticationMethods.includes(
+                AuthenticationMethod.none,
+              ))) ||
+        form.is_public !== initialClient.isPublic
       );
     }
 
@@ -377,6 +380,7 @@ const ClientForm = ({
               descriptionValue={form.description}
               logoValue={form.logo}
               allowPkce={form.allow_pkce}
+              isPublic={form.is_public}
               changeValue={onChangeForm}
               isEdit={isEdit}
               errorFields={errorFields}

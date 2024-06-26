@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import styled, { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
-import { IClientProps } from "@docspace/shared/utils/oauth/interfaces";
+import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { ModalDialogType } from "@docspace/shared/components/modal-dialog/ModalDialog.enums";
 import { SocialButton } from "@docspace/shared/components/social-button";

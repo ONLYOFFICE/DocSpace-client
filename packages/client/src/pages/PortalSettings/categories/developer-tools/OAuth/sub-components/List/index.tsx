@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
-import { IClientProps } from "@docspace/shared/utils/oauth/interfaces";
+import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import { Text } from "@docspace/shared/components/text";
 
 import { Consumer } from "@docspace/shared/utils/context";
@@ -47,16 +47,12 @@ const List = ({ clients, viewAs, currentDeviceType }: ListProps) => {
         fontSize="12px"
         fontWeight={400}
         lineHeight="16px"
-        title="OAuth description"
-        tag=""
-        as="p"
-        color=""
-        textAlign=""
+        title={t("OAuthAppDescription")}
         className="description"
       >
         {t("OAuthAppDescription")}
       </Text>
-      <RegisterNewButton t={t} currentDeviceType={currentDeviceType} />
+      <RegisterNewButton currentDeviceType={currentDeviceType} />
       <Consumer>
         {(context) =>
           viewAs === "table" ? (

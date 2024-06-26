@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 

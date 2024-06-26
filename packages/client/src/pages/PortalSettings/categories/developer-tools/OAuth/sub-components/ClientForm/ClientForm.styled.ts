@@ -89,6 +89,17 @@ const StyledInputGroup = styled.div`
     gap: 0px;
   }
 
+  .public_client {
+    margin-top: 4px;
+
+    display: flex;
+    align-items: center;
+
+    label {
+      position: relative;
+    }
+  }
+
   .label {
     height: 20px;
   }

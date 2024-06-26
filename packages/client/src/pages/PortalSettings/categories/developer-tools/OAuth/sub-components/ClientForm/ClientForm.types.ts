@@ -2,7 +2,7 @@ import {
   IClientProps,
   IClientReqDTO,
   IScope,
-} from "@docspace/shared/utils/oauth/interfaces";
+} from "@docspace/shared/utils/oauth/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";

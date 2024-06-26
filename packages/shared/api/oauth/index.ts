@@ -8,26 +8,11 @@ import {
   IClientListProps,
   IClientListDTO,
   IScope,
-  INoAuthClientProps,
   IClientReqDTO,
   IGetConsentList,
-} from "../../utils/oauth/interfaces";
+} from "../../utils/oauth/types";
 
-export const getClient = async (
-  clientId: string,
-  isAuth: boolean = true,
-): Promise<IClientProps | INoAuthClientProps> => {
-  if (!isAuth) {
-    const client = (await request({
-      method: "get",
-      url: `/clients/${clientId}/info`,
-    })) as INoAuthClientProps;
-
-    return {
-      ...client,
-    };
-  }
-
+export const getClient = async (clientId: string): Promise<IClientProps> => {
   const client = (await request({
     method: "get",
     url: `/clients/${clientId}`,
@@ -45,7 +30,7 @@ export const getClientList = async (
     url: `/clients?page=${page}&limit=${limit}`,
   })) as IClientListDTO;
 
-  const clients: IClientListProps = { ...data, content: [] as IClientProps[] };
+  const clients: IClientListProps = { ...data, content: [] };
 
   data.data.forEach((item) => {
     const client = transformToClientProps(item);
@@ -123,6 +108,36 @@ export const getScopeList = async (): Promise<IScope[]> => {
   return scopeList;
 };
 
+export const getConsentList = async (): Promise<IClientProps[]> => {
+  const clients = (await request({
+    method: "get",
+    url: "/clients/consents",
+  })) as IGetConsentList[];
+
+  const consents: IClientProps[] = [];
+
+  clients.forEach(({ client, invalidated, modified_at }: IGetConsentList) => {
+    const consentClient: IClientResDTO = {
+      ...client,
+      client_secret: "",
+      logout_redirect_uri: "",
+    };
+
+    const cl = transformToClientProps(consentClient);
+
+    if (!invalidated) consents.push({ ...cl, modifiedOn: modified_at });
+  });
+
+  return consents;
+};
+
+export const revokeUserClient = async (clientId: string): Promise<void> => {
+  await request({
+    method: "delete",
+    url: `/clients/${clientId}/revoke`,
+  });
+};
+
 export const onOAuthLogin = (clientId: string) => {
   const formData = new FormData();
 
@@ -180,35 +195,5 @@ export const onOAuthCancel = (clientId: string, clientState: string) => {
     headers: {
       "X-Disable-Redirect": "true",
     },
-  });
-};
-
-export const getConsentList = async (): Promise<IClientProps[]> => {
-  const clients = (await request({
-    method: "get",
-    url: "/clients/consents",
-  })) as IGetConsentList[];
-
-  const consents: IClientProps[] = [];
-
-  clients.forEach(({ client, invalidated, modified_at }: IGetConsentList) => {
-    const consentClient: IClientResDTO = {
-      ...client,
-      client_secret: "",
-      logout_redirect_uri: "",
-    };
-
-    const cl = transformToClientProps(consentClient);
-
-    if (!invalidated) consents.push({ ...cl, modifiedOn: modified_at });
-  });
-
-  return consents;
-};
-
-export const revokeUserClient = async (clientId: string): Promise<void> => {
-  await request({
-    method: "delete",
-    url: `/clients/${clientId}/revoke`,
   });
 };

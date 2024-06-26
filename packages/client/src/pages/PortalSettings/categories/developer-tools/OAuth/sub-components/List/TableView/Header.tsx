@@ -54,6 +54,7 @@ const Header = (props: HeaderProps) => {
       containerRef={{ current: tableRef }}
       columns={defaultColumns}
       columnStorageName={columnStorageName}
+      tableStorageName={columnStorageName}
       sectionWidth={sectionWidth}
       showSettings={false}
       useReactWindow

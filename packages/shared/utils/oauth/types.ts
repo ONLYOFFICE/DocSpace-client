@@ -1,3 +1,4 @@
+import { Nullable } from "../../types";
 import { AuthenticationMethod, ScopeGroup, ScopeType } from "../../enums";
 
 export interface IScope {
@@ -61,12 +62,13 @@ export interface IClientProps {
   scopes: string[];
   websiteUrl: string;
   allowedOrigins: string[];
-  createdOn?: Date;
-  modifiedOn?: Date;
-  createdBy?: string;
-  modifiedBy?: string;
+  createdOn: Date;
+  modifiedOn: Date;
+  createdBy: string;
+  modifiedBy: string;
   creatorAvatar?: string;
   creatorDisplayName?: string;
+  isPublic: boolean;
 }
 
 export interface IClientReqDTO {
@@ -81,54 +83,61 @@ export interface IClientReqDTO {
   scopes: string[];
   website_url: string;
   allowed_origins: string[];
+  is_public: boolean;
 }
 
 export interface IClientResDTO {
-  name: string;
+  allowed_origins: string[];
+  authentication_methods: AuthenticationMethod[];
 
   client_id: string;
   client_secret: string;
 
-  description: string;
-  logo: string;
+  created_by: string;
+  created_on: Date;
 
-  redirect_uris: string[];
-  terms_url: string;
-  policy_url: string;
+  creator_avatar?: string;
+  creator_display_name?: string;
+
+  description: string;
+
+  enabled: boolean;
+  invalidated: boolean;
+  is_public: boolean;
+
+  logo: string;
   logout_redirect_uri: string;
 
-  authentication_methods: AuthenticationMethod[];
+  modified_by: string;
+  modified_on: Date;
+
+  name: string;
+
+  policy_url: string;
+  redirect_uris: string[];
 
   scopes: string[];
 
-  enabled: boolean;
+  terms_url: string;
   tenant: number;
-  invalidated: boolean;
-  website_url: string;
-  allowed_origins: string[];
 
-  created_on?: Date;
-  modified_on?: Date;
-  created_by?: string;
-  modified_by?: string;
-  creator_avatar?: string;
-  creator_display_name?: string;
+  website_url: string;
 }
 
 export interface IClientListProps {
   content: IClientProps[];
   page: number;
-  next?: number;
-  previous?: number;
   limit: number;
+  next: Nullable<number>;
+  previous: Nullable<number>;
 }
 
 export interface IClientListDTO {
   data: IClientResDTO[];
   page: number;
-  next?: number;
-  previous?: number;
   limit: number;
+  next: Nullable<number>;
+  previous: Nullable<number>;
 }
 
 export interface ISubmitReqDTO {
@@ -159,6 +168,7 @@ export type TConsentClient = {
   redirect_uris: string[];
   scopes: string[];
   allowed_origins: string[];
+  is_public: boolean;
 };
 
 export interface IGetConsentList {
@@ -168,4 +178,5 @@ export interface IGetConsentList {
   principal_name: string;
   registered_client_id: string;
   scopes: string;
+  is_public: boolean;
 }

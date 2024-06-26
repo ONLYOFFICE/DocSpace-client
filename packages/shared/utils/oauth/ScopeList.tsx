@@ -5,7 +5,7 @@ import { Base } from "../../themes";
 import { ScopeType } from "../../enums";
 import { TTranslation } from "../../types";
 
-import { IFilteredScopes, IScope } from "./interfaces";
+import { IFilteredScopes, IScope } from "./types";
 import { filterScopeByGroup } from ".";
 
 const StyledScopeList = styled.div`

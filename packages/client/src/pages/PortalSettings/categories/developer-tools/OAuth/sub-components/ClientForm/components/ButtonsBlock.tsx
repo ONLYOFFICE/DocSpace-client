@@ -1,7 +1,6 @@
-import React from "react";
-
 import { DeviceType } from "@docspace/shared/enums";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
+
 import { StyledButtonContainer } from "../ClientForm.styled";
 
 interface ButtonsBlockProps {

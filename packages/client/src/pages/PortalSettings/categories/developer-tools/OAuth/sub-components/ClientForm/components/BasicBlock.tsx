@@ -5,7 +5,9 @@ import { TTranslation } from "@docspace/shared/types";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { IClientReqDTO } from "@docspace/shared/utils/oauth/interfaces";
+import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Text } from "@docspace/shared/components/text";
 
 import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
 
@@ -22,8 +24,13 @@ interface BasicBlockProps {
   logoValue: string;
   descriptionValue: string;
   allowPkce: boolean;
+  isPublic: boolean;
 
-  changeValue: (name: keyof IClientReqDTO, value: string | boolean) => void;
+  changeValue: (
+    name: keyof IClientReqDTO,
+    value: string | boolean,
+    remove?: boolean,
+  ) => void;
 
   isEdit: boolean;
   errorFields: string[];
@@ -73,6 +80,7 @@ const BasicBlock = ({
   logoValue,
   descriptionValue,
   allowPkce,
+  isPublic,
   changeValue,
 
   isEdit,
@@ -140,6 +148,8 @@ const BasicBlock = ({
     <Trans t={t} i18nKey="AllowPKCEHelpButton" ns="OAuth" />
   );
 
+  const publicClientHelpButtonText = "Help text";
+
   const isNameRequiredError = requiredErrorFields.includes("name");
   const isWebsiteRequiredError = requiredErrorFields.includes("website_url");
   const isNameError = errorFields.includes("name");
@@ -203,7 +213,7 @@ const BasicBlock = ({
         />
         <InputGroup
           label={t("AuthenticationMethod")}
-          name="website_url"
+          name="auth_method"
           placeholder={t("EnterURL")}
           value={websiteUrlValue}
           error=""
@@ -218,6 +228,25 @@ const BasicBlock = ({
               }}
             />
             <HelpButton tooltipContent={pkceHelpButtonText} />
+          </div>
+        </InputGroup>
+        <InputGroup
+          label="Client type"
+          name="public_client"
+          placeholder={t("EnterURL")}
+          value=""
+          error=""
+          onChange={() => {}}
+        >
+          <div className="public_client">
+            <ToggleButton
+              isChecked={isPublic}
+              onChange={(e) => {
+                changeValue("is_public", e.target.checked);
+              }}
+            />
+            <Text>Public client</Text>
+            <HelpButton tooltipContent={publicClientHelpButtonText} />
           </div>
         </InputGroup>
       </StyledInputBlock>

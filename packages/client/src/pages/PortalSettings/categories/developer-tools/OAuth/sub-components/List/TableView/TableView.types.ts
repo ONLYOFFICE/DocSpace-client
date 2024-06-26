@@ -1,4 +1,4 @@
-import { IClientProps } from "@docspace/shared/utils/oauth/interfaces";
+import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import { TTranslation } from "@docspace/shared/types";
 import { ContextMenuModel } from "@docspace/shared/components/context-menu";
 

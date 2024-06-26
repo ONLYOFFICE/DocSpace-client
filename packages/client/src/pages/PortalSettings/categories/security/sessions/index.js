@@ -119,10 +119,6 @@ const Sessions = ({
     };
   }, []);
 
-  useEffect(() => {
-    updateAllSessions(sessionsData, dataFromSocket, currentDataFromSocket);
-  }, [sessionsData, dataFromSocket, currentDataFromSocket]);
-
   useViewEffect({
     view: viewAs,
     setView: setViewAs,
@@ -148,12 +144,7 @@ const Sessions = ({
       ? [bufferSelection.id, ...userIdsFromSelection]
       : [...userIdsFromSelection];
 
-  // console.log("allSessions", JSON.parse(JSON.stringify(allSessions)));
-  // console.log("sessionsData", JSON.parse(JSON.stringify(sessionsData)));
-  // console.log("connections", JSON.parse(JSON.stringify(connections)));
-  // console.log("userLastSession", JSON.parse(JSON.stringify(userLastSession)));
-
-  if (!isSessionsLoaded) return <SessionsLoader viewAs={viewAs} />;
+  // if (!isSessionsLoaded) return <SessionsLoader viewAs={viewAs} />;
 
   return (
     <MainContainer>

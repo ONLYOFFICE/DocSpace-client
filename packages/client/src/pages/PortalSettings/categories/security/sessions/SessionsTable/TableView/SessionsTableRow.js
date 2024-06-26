@@ -169,18 +169,19 @@ const SessionsTableRow = (props) => {
     setFromDateAgo,
   } = props;
 
-  const { platform, browser, ip, city, country, status, date } = sessions;
+  const { browser, ip, city, country } = sessions;
+
+  const date = connections[0]?.date;
 
   const isLastConnection = connections.length > 0;
   const fromDateAgo = getFromDateAgo(item.id);
   const isChecked = checkedProps?.checked;
   const isOnline = sessionStatus === "online";
-  const isOffline = status === "offline";
 
   useEffect(() => {
     const updateStatus = () => {
       const showOnline = isOnline && sessionStatus;
-      const showOffline = isOffline ? convertDate(date, locale) : null;
+      const showOffline = !isOnline && date ? convertDate(date, locale) : null;
       setFromDateAgo(item.id, isOnline ? showOnline : showOffline);
     };
 
@@ -188,7 +189,7 @@ const SessionsTableRow = (props) => {
     const intervalId = setInterval(updateStatus, 60000);
 
     return () => clearInterval(intervalId);
-  }, [date, sessionStatus, status, locale, item.id]);
+  }, [date, sessionStatus, locale, item.id, isOnline]);
 
   const onClickSessions = () => {
     setStatus(fromDateAgo);
@@ -286,7 +287,7 @@ const SessionsTableRow = (props) => {
 
         <TableCell>
           <Text className="session-info" truncate>
-            {isLastConnection ? connections[0]?.platform : platform},&nbsp;
+            {connections[0]?.platform},&nbsp;
           </Text>
           <Text className="session-info" truncate>
             {isLastConnection

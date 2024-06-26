@@ -138,3 +138,7 @@ export const getEmailFromInvitation = (encodeString: Nullable<string>) => {
 
   return queryParams.email;
 };
+
+export const generateOAuth2ReferenceURl = (clientId: string) => {
+  return `/login/consent?clientId=${clientId}`;
+};

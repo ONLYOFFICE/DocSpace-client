@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { IClientProps } from "@docspace/shared/utils/oauth/interfaces";
+import { IClientProps } from "@docspace/shared/utils/oauth/types";
 
 import Consent from "@/components/Consent";
 import { getOAuthClient, getScopeList, getUser } from "@/utils/actions";
@@ -36,7 +36,7 @@ async function Page({
 }) {
   const clientId = searchParams.clientId ?? searchParams.client_id;
   const [client, scopes, user] = await Promise.all([
-    getOAuthClient(clientId, true),
+    getOAuthClient(clientId),
     getScopeList(),
     getUser(),
   ]);

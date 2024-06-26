@@ -83,7 +83,7 @@ export default async function Layout({
               <GreetingContainer
                 greetingSettings={objectSettings?.greetingSettings}
               />
-              <FormWrapper id="login-form">{children}</FormWrapper>
+              {children}
             </ColorTheme>
           </LoginContent>
         </Scrollbar>

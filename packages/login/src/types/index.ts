@@ -33,7 +33,7 @@ import {
   TThirdPartyProvider,
 } from "@docspace/shared/api/settings/types";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
-import { INoAuthClientProps } from "@docspace/shared/utils/oauth/interfaces";
+import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import { RecaptchaType, ThemeKeys } from "@docspace/shared/enums";
 
 export type TDataContext = {
@@ -88,7 +88,7 @@ export type LoginFormProps = {
   reCaptchaType?: RecaptchaType;
   cookieSettingsEnabled: boolean;
   clientId?: string;
-  client?: INoAuthClientProps;
+  client?: IClientProps;
 };
 
 export type ForgotPasswordModalDialogProps = {

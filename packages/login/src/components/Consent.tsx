@@ -41,12 +41,13 @@ import {
   AvatarSize,
 } from "@docspace/shared/components/avatar";
 import { deleteCookie } from "@docspace/shared/utils/cookie";
-import { IClientProps, IScope } from "@docspace/shared/utils/oauth/interfaces";
+import { IClientProps, IScope } from "@docspace/shared/utils/oauth/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import api from "@docspace/shared/api";
 
 import OAuthClientInfo from "./ConsentInfo";
 import { useRouter } from "next/navigation";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 const StyledButtonContainer = styled.div`
   margin-top: 32px;
@@ -158,11 +159,11 @@ const Consent = ({ client, scopes, user }: IConsentProps) => {
   const onChangeUserClick = async () => {
     await api.user.logout();
 
-    router.push(`/?clientId=${client.clientId}`);
+    router.push(`/?client_id=${client.clientId}&type=oauth2`);
   };
 
   return (
-    <>
+    <FormWrapper>
       <OAuthClientInfo
         name={client.name}
         logo={client.logo}
@@ -198,7 +199,7 @@ const Consent = ({ client, scopes, user }: IConsentProps) => {
       <StyledDescriptionContainer>
         <Text fontWeight={400} fontSize={"13px"} lineHeight={"20px"}>
           <Trans t={t} i18nKey={"ConsentDescription"} ns="Consent">
-            Data shared with {{ displayName: self.displayName }} will be
+            Data shared with {{ displayName: user.displayName }} will be
             governed by {{ nameApp: client.name }}
             <Link
               className={"login-link"}
@@ -250,7 +251,7 @@ const Consent = ({ client, scopes, user }: IConsentProps) => {
           </div>
         </div>
       </StyledUserContainer>
-    </>
+    </FormWrapper>
   );
 };
 

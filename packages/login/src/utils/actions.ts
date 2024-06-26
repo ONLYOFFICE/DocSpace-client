@@ -42,10 +42,7 @@ import {
   TThirdPartyProvider,
   TVersionBuild,
 } from "@docspace/shared/api/settings/types";
-import {
-  INoAuthClientProps,
-  IScope,
-} from "@docspace/shared/utils/oauth/interfaces";
+import { IScope } from "@docspace/shared/utils/oauth/types";
 import { transformToClientProps } from "@docspace/shared/utils/oauth";
 
 export const checkIsAuthenticated = async () => {
@@ -182,27 +179,9 @@ export async function getScopeList() {
   return scopes as IScope[];
 }
 
-export async function getOAuthClient(clientId: string, isAuth = true) {
-  if (!isAuth) {
-    const [getOAuthClient] = createRequest(
-      [`/clients/${clientId}/info`],
-      [["", ""]],
-      "GET",
-    );
-
-    const oauthClient = await fetch(getOAuthClient);
-
-    console.log(oauthClient);
-
-    if (!oauthClient.ok) return;
-
-    const client = (await oauthClient.json()) as INoAuthClientProps;
-
-    return client;
-  }
-
+export async function getOAuthClient(clientId: string) {
   const [getOAuthClient] = createRequest(
-    [`/clients/${clientId}`],
+    [`/clients/${clientId}/public/info`],
     [["", ""]],
     "GET",
   );
@@ -230,6 +209,30 @@ export async function getPortalCultures() {
   const cultures = await res.json();
 
   return cultures.response as TPortalCultures;
+}
+
+export async function gitAvailablePortals(data: {
+  email: string;
+  passwordHash: string;
+}) {
+  const [gitAvailablePortals] = createRequest(
+    [`/portal/signin`],
+    [["Content-Type", "application/json"]],
+    "POST",
+    JSON.stringify(data),
+    true,
+  );
+
+  console.log(gitAvailablePortals.url);
+
+  const response = await fetch(gitAvailablePortals);
+  if (!response.ok) return null;
+
+  const { response: portals } = await response.json();
+
+  console.log(portals);
+
+  // return config;
 }
 
 export async function getConfig() {

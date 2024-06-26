@@ -24,58 +24,56 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { INoAuthClientProps } from "@docspace/shared/utils/oauth/interfaces";
+import { INoAuthClientProps } from "@docspace/shared/utils/oauth/types";
 
-import { getConfig, getOAuthClient, getSettings } from "@/utils/actions";
+import { getOAuthClient, getSettings } from "@/utils/actions";
 import Login from "@/components/Login";
 import LoginForm from "@/components/LoginForm";
 import ThirdParty from "@/components/ThirdParty";
 import RecoverAccess from "@/components/RecoverAccess";
 import Register from "@/components/Register";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 async function Page({
   searchParams,
 }: {
   searchParams: { [key: string]: string };
 }) {
-  const clientId = searchParams.clientId;
+  const clientId = searchParams.client_id;
 
-  const [settings, client, config] = await Promise.all([
+  const [settings, client] = await Promise.all([
     getSettings(),
-    clientId ? getOAuthClient(clientId, false) : undefined,
-    clientId ? getConfig() : undefined,
+    clientId ? getOAuthClient(clientId) : undefined,
   ]);
 
-  const isPublicOAuth = clientId && config.oauth2.publicClient;
-
-  console.log(isPublicOAuth);
-
   return (
-    <Login>
-      {settings && typeof settings !== "string" && (
-        <>
-          <LoginForm
-            hashSettings={settings?.passwordHash}
-            cookieSettingsEnabled={settings?.cookieSettingsEnabled}
-            clientId={clientId}
-            client={client as INoAuthClientProps}
-            reCaptchaPublicKey={settings?.recaptchaPublicKey}
-            reCaptchaType={settings?.recaptchaType}
-          />
-          {!clientId && <ThirdParty />}
-          {settings.enableAdmMess && <RecoverAccess />}
-          {settings.enabledJoin && !clientId && (
-            <Register
-              id="login_register"
-              enabledJoin
-              trustedDomains={settings.trustedDomains}
-              trustedDomainsType={settings.trustedDomainsType}
-              isAuthenticated={false}
+    <FormWrapper id="login-form">
+      <Login>
+        {settings && typeof settings !== "string" && (
+          <>
+            <LoginForm
+              hashSettings={settings?.passwordHash}
+              cookieSettingsEnabled={settings?.cookieSettingsEnabled}
+              clientId={clientId}
+              client={client}
+              reCaptchaPublicKey={settings?.recaptchaPublicKey}
+              reCaptchaType={settings?.recaptchaType}
             />
-          )}
-        </>
-      )}
-    </Login>
+            {!clientId && <ThirdParty />}
+            {settings.enableAdmMess && <RecoverAccess />}
+            {settings.enabledJoin && !clientId && (
+              <Register
+                id="login_register"
+                enabledJoin
+                trustedDomains={settings.trustedDomains}
+                trustedDomainsType={settings.trustedDomainsType}
+                isAuthenticated={false}
+              />
+            )}
+          </>
+        )}
+      </Login>
+    </FormWrapper>
   );
 }
 

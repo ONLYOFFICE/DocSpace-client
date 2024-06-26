@@ -51,9 +51,10 @@ import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import api from "@docspace/shared/api";
 import { RecaptchaType } from "@docspace/shared/enums";
+import { getAvailablePortals } from "@docspace/shared/api/management";
 
 import { LoginFormProps } from "@/types";
-import { getEmailFromInvitation } from "@/utils";
+import { generateOAuth2ReferenceURl, getEmailFromInvitation } from "@/utils";
 
 import EmailContainer from "./sub-components/EmailContainer";
 import PasswordContainer from "./sub-components/PasswordContainer";
@@ -63,6 +64,7 @@ import LDAPContainer from "./sub-components/LDAPContainer";
 import { StyledCaptcha } from "./LoginForm.styled";
 import { LoginDispatchContext, LoginValueContext } from "../Login";
 import OAuthClientInfo from "../ConsentInfo";
+// import { gitAvailablePortals } from "@/utils/actions";
 
 const LoginForm = ({
   hashSettings,
@@ -204,7 +206,7 @@ const LoginForm = ({
     if (!passwordValid) setPasswordValid(true);
   };
 
-  const onSubmit = useCallback(() => {
+  const onSubmit = useCallback(async () => {
     //errorText && setErrorText("");
     let captchaToken: string | undefined | null = "";
 
@@ -253,6 +255,32 @@ const LoginForm = ({
 
     isDesktop && checkPwd();
     const session = !isChecked;
+
+    if (client?.isPublic && hash) {
+      const portals = await getAvailablePortals({
+        Email: user,
+        PasswordHash: hash,
+      });
+
+      // if (portals.length === 1) {
+      //   const referenceUrl = generateOAuth2ReferenceURl(client.clientId);
+      //   window.open(
+      //     `${portals[0].portalLink}&referenceUrl=${referenceUrl}`,
+      //     "_self",
+      //   );
+      // }
+
+      const searchParams = new URLSearchParams();
+
+      const portalsString = JSON.stringify({ portals });
+
+      searchParams.set("portals", portalsString);
+      searchParams.set("clientId", client.clientId);
+
+      router.push(`/tenant-list?${searchParams.toString()}`);
+      setIsLoading(false);
+      return;
+    }
 
     login(user, hash, pwd, session, captchaToken, currentCulture, reCaptchaType)
       .then(async (res: string | object) => {
@@ -307,17 +335,18 @@ const LoginForm = ({
     password,
     identifierValid,
     setIsLoading,
+    isLdapLoginChecked,
     hashSettings,
     isDesktop,
     isChecked,
-    isLdapLoginChecked,
-
+    client?.isPublic,
+    client?.clientId,
+    currentCulture,
+    reCaptchaType,
     isCaptchaSuccessful,
+    router,
     clientId,
     referenceUrl,
-    currentCulture,
-    router,
-    reCaptchaType,
   ]);
 
   const onBlurEmail = () => {

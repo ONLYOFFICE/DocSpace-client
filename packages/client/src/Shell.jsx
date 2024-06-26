@@ -136,6 +136,39 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
   useEffect(() => {
     socketHelper.emit({
+      command: "subscribeToPortal",
+    });
+
+    socketHelper.emit({
+      command: "getSessionsInPortal",
+    });
+
+    socketHelper.on("statuses-in-portal", (data) => {
+      setDataFromSocket(data);
+      console.log("dataFromSocket", data);
+    });
+
+    socketHelper.on("enter-in-portal", (data) => {
+      setCurrentDataFromSocket(data);
+      console.log("enter-in-portal", data);
+    });
+
+    socketHelper.on("leave-in-portal", (data) => {
+      setCurrentDataFromSocket(data);
+      console.log(data);
+    });
+
+    socketHelper.on("enter-session-in-portal", (data) => {
+      console.log(data);
+    });
+
+    socketHelper.on("leave-session-in-portal", (data) => {
+      console.log(data);
+    });
+  }, [socketHelper, setDataFromSocket, setCurrentDataFromSocket]);
+
+  useEffect(() => {
+    socketHelper.emit({
       command: "subscribe",
       data: { roomParts: "backup-restore" },
     });
@@ -163,37 +196,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     socketHelper.emit({
       command: "subscribe",
       data: { roomParts: "QUOTA", individual: true },
-    });
-
-    socketHelper.emit({
-      command: "subscribeToPortal",
-    });
-
-    socketHelper.emit({
-      command: "getSessionsInPortal",
-    });
-
-    socketHelper.on("statuses-in-portal", (data) => {
-      setDataFromSocket(data);
-      console.log("dataFromSocket", data);
-    });
-
-    socketHelper.on("enter-in-portal", (data) => {
-      setCurrentDataFromSocket(data);
-      console.log("enter-in-portal", data);
-    });
-
-    socketHelper.on("enter-session-in-portal", (data) => {
-      console.log(data);
-    });
-
-    socketHelper.on("leave-in-portal", (data) => {
-      setCurrentDataFromSocket(data);
-      console.log(data);
-    });
-
-    socketHelper.on("leave-session-in-portal", (data) => {
-      console.log(data);
     });
   }, [socketHelper]);
 

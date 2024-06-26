@@ -51,6 +51,7 @@ const SectionBody = React.memo(
     isDesktop,
     settingsStudio = false,
     getContextModel,
+    isIndexEditingMode,
   }: SectionBodyProps) => {
     const focusRef = React.useRef<HTMLDivElement | null>(null);
     const cmRef = React.useRef<null | {
@@ -65,6 +66,7 @@ const SectionBody = React.memo(
 
     const onContextMenu = React.useCallback(
       (e: MouseEvent | React.MouseEvent<Element, MouseEvent>) => {
+        if (isIndexEditingMode) return;
         const bodyElem = document.getElementsByClassName(
           "section-body",
         )[0] as HTMLDivElement;
@@ -89,7 +91,7 @@ const SectionBody = React.memo(
           setIsOpen(!isOpen);
         }
       },
-      [getContextModel, isOpen],
+      [getContextModel, isOpen, isIndexEditingMode],
     );
 
     const onHide = () => {

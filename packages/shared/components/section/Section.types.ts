@@ -66,6 +66,7 @@ export interface SectionBodyProps {
   settingsStudio: boolean;
   isFormGallery?: boolean;
   isDesktop?: boolean;
+  isIndexEditingMode?: boolean;
   currentDeviceType?: DeviceType;
   getContextModel?: () => ContextMenuModel[];
 }
@@ -144,4 +145,5 @@ export interface SectionProps {
   anotherDialogOpen?: boolean;
   isDesktop?: boolean;
   getContextModel?: () => ContextMenuModel[];
+  isIndexEditingMode?: boolean;
 }

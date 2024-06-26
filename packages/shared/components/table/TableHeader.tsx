@@ -256,7 +256,7 @@ class TableHeader extends React.Component<
       : defaultMinColumnSize;
 
     if (newWidth <= +minSize - handleOffset) {
-      const currentWidth = +widths[+columnIndex].slice(0, -2);
+      const currentWidth = getSubstring(widths[+columnIndex]);
 
       // Move left
       if (currentWidth !== +minSize) {

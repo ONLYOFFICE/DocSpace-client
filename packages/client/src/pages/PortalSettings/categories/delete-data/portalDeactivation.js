@@ -37,6 +37,7 @@ import { sendSuspendPortalEmail } from "@docspace/shared/api/portal";
 import { isDesktop } from "@docspace/shared/utils";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const PortalDeactivation = (props) => {
   const { t, getPortalOwner, owner, currentColorScheme, sendActivationLink } =
@@ -48,7 +49,7 @@ const PortalDeactivation = (props) => {
   };
 
   useEffect(() => {
-    setDocumentTitle(t("PortalDeactivation"));
+    setDocumentTitle(t("PortalDeactivation", { productName: PRODUCT_NAME }));
     fetchData();
     onCheckView();
     window.addEventListener("resize", onCheckView);
@@ -83,7 +84,9 @@ const PortalDeactivation = (props) => {
       <Text fontSize="13px" className="description">
         {t("PortalDeactivationDescription")}
       </Text>
-      <Text className="helper">{t("PortalDeactivationHelper")}</Text>
+      <Text className="helper">
+        {t("PortalDeactivationHelper", { productName: PRODUCT_NAME })}
+      </Text>
       <ButtonWrapper>
         <Button
           className="deactivate-button button"
@@ -95,7 +98,10 @@ const PortalDeactivation = (props) => {
         />
         {notActivatedEmail && (
           <Text fontSize="12px" fontWeight="600">
-            {t("MainBar:ConfirmEmailHeader", { email: owner.email })}
+            {t("MainBar:ConfirmEmailHeader", {
+              email: owner.email,
+              productName: PRODUCT_NAME,
+            })}
             <Link
               className="request-again-link"
               color={currentColorScheme?.main?.accent}

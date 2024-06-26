@@ -51,492 +51,529 @@ import { StyledContextMenu } from "./ContextMenu.styled";
 import { SubMenu } from "./sub-components/SubMenu";
 import { MobileSubMenu } from "./sub-components/MobileSubMenu";
 
-import { ContextMenuModel, ContextMenuProps } from "./ContextMenu.types";
+import {
+  ContextMenuModel,
+  ContextMenuProps,
+  ContextMenuRefType,
+} from "./ContextMenu.types";
 
-const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
-  const [visible, setVisible] = React.useState(false);
-  const [reshow, setReshow] = React.useState(false);
-  const [resetMenu, setResetMenu] = React.useState(false);
-  const [model, setModel] = React.useState<ContextMenuModel[] | null>(null);
-  const [changeView, setChangeView] = React.useState(false);
-  const [showMobileMenu, setShowMobileMenu] = React.useState(false);
-  const [onLoad, setOnLoad] = React.useState<
-    undefined | (() => Promise<ContextMenuModel[]>)
-  >(undefined);
-  const [articleWidth, setArticleWidth] = React.useState(0);
+const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
+  (props, ref) => {
+    const [visible, setVisible] = React.useState(false);
+    const [reshow, setReshow] = React.useState(false);
+    const [resetMenu, setResetMenu] = React.useState(false);
+    const [model, setModel] = React.useState<ContextMenuModel[] | null>(null);
+    const [changeView, setChangeView] = React.useState(false);
+    const [showMobileMenu, setShowMobileMenu] = React.useState(false);
+    const [onLoad, setOnLoad] = React.useState<
+      undefined | (() => Promise<ContextMenuModel[]>)
+    >(undefined);
+    const [articleWidth, setArticleWidth] = React.useState(0);
 
-  const prevReshow = React.useRef(false);
-  const menuRef = React.useRef<null | HTMLDivElement>(null);
-  const currentEvent = React.useRef<null | React.MouseEvent | MouseEvent>(null);
-  const currentChangeEvent = React.useRef<
-    null | Event | React.ChangeEvent<HTMLInputElement>
-  >(null);
+    const prevReshow = React.useRef(false);
+    const menuRef = React.useRef<null | HTMLDivElement>(null);
+    const currentEvent = React.useRef<null | React.MouseEvent | MouseEvent>(
+      null,
+    );
+    const currentChangeEvent = React.useRef<
+      null | Event | React.ChangeEvent<HTMLInputElement>
+    >(null);
 
-  const theme = useTheme();
+    const theme = useTheme();
 
-  const {
-    getContextModel,
-    onShow,
-    onHide,
-    autoZIndex = true,
-    baseZIndex,
-    leftOffset,
-    rightOffset,
-    containerRef,
-    scaled,
-    global,
-    className,
-    header,
-    fillIcon = true,
-    isRoom,
-    id,
-    style,
-    isArchive,
-    ignoreChangeView,
-    appendTo,
-    withBackdrop,
-    model: propsModel,
-    badgeUrl,
-  } = props;
+    const {
+      getContextModel,
+      onShow,
+      onHide,
+      autoZIndex = true,
+      baseZIndex,
+      leftOffset,
+      rightOffset,
+      containerRef,
+      scaled,
+      global,
+      className,
+      header,
+      fillIcon = true,
+      isRoom,
+      id,
+      style,
+      isArchive,
+      ignoreChangeView,
+      appendTo,
+      withBackdrop,
+      model: propsModel,
+      badgeUrl,
+    } = props;
 
-  const onMenuClick = () => {
-    setResetMenu(false);
-  };
-
-  const onMenuMouseEnter = () => {
-    setResetMenu(false);
-  };
-
-  const show = React.useCallback(
-    (e: React.MouseEvent | MouseEvent) => {
-      if (getContextModel) {
-        const m = trimSeparator(getContextModel());
-        setModel(m);
-      }
-      e.stopPropagation();
-      e.preventDefault();
-      currentEvent.current = e;
-      if (visible) {
-        if (!isMobileUtils()) {
-          setReshow(true);
-          prevReshow.current = true;
-        }
-      } else {
-        setVisible(true);
-        if (currentEvent.current) onShow?.(currentEvent.current);
-      }
-    },
-    [visible, onShow, getContextModel],
-  );
-
-  const hide = React.useCallback(
-    (
-      e:
-        | React.MouseEvent
-        | MouseEvent
-        | Event
-        | React.ChangeEvent<HTMLInputElement>,
-    ) => {
-      if (e instanceof Event) {
-        currentChangeEvent.current = e;
-      } else {
-        // @ts-expect-error need fix
-        currentEvent.current = e;
-      }
-
-      onHide?.(e);
-
-      setVisible(false);
-      setReshow(false);
-      prevReshow.current = false;
-      setChangeView(false);
-      setShowMobileMenu(false);
-      setArticleWidth(0);
-    },
-    [onHide],
-  );
-
-  React.useEffect(() => {
-    if (visible && prevReshow.current !== reshow) {
-      setVisible(false);
-      setReshow(false);
-      prevReshow.current = false;
-      setResetMenu(true);
-      setChangeView(false);
-      setArticleWidth(0);
-
-      if (currentEvent.current) show(currentEvent.current);
-    }
-  }, [visible, reshow, show]);
-
-  const position = (event: React.MouseEvent | MouseEvent) => {
-    if (event) {
-      const rects = containerRef?.current?.getBoundingClientRect();
-
-      const currentLeftOffset = leftOffset ?? 0;
-      const currentRightOffset = rightOffset ?? 0;
-
-      let left = rects
-        ? rects.left - currentLeftOffset - currentRightOffset
-        : event.pageX + 1;
-      let top = rects ? rects.top : event.pageY + 1;
-      const width =
-        menuRef.current && menuRef.current.offsetParent
-          ? menuRef.current.offsetWidth
-          : DomHelpers.getHiddenElementOuterWidth(menuRef.current);
-      const height =
-        menuRef.current && menuRef.current.offsetParent
-          ? menuRef.current.offsetHeight
-          : DomHelpers.getHiddenElementOuterHeight(menuRef.current);
-      const viewport = DomHelpers.getViewport();
-
-      if (theme.interfaceDirection === "rtl" && !rects && left > width) {
-        left = event.pageX - width + 1;
-      }
-
-      if (
-        isTabletUtils() &&
-        (height > 483 ||
-          (isMobileOnly && window.innerHeight < window.innerWidth))
-      ) {
-        const article = document.getElementById("article-container");
-
-        let currentArticleWidth = 0;
-        if (article) {
-          currentArticleWidth = article.offsetWidth;
-        }
-
-        setChangeView(true);
-        setArticleWidth(currentArticleWidth);
-
-        return;
-      }
-
-      if (isMobileUtils() && (height > 210 || ignoreChangeView)) {
-        setChangeView(true);
-        setArticleWidth(0);
-
-        return;
-      }
-
-      // flip
-      if (left + width - document.body.scrollLeft > viewport.width) {
-        left -= width;
-      }
-
-      // flip
-      if (top + height - document.body.scrollTop > viewport.height) {
-        top -= height;
-      }
-
-      // fit
-      if (left < document.body.scrollLeft) {
-        left = document.body.scrollLeft;
-      }
-
-      // fit
-      if (top < document.body.scrollTop) {
-        top = document.body.scrollTop;
-      }
-
-      if (containerRef) {
-        if (rects) top += rects.height + 4;
-
-        if (menuRef.current) {
-          if (scaled && rects) {
-            menuRef.current.style.width = `${rects.width}px`;
-          }
-          menuRef.current.style.minWidth = "210px";
-        }
-      }
-      if (menuRef.current) {
-        menuRef.current.style.left = `${left}px`;
-        menuRef.current.style.top = `${top}px`;
-      }
-    }
-  };
-
-  const onEnter = () => {
-    if (autoZIndex && menuRef.current) {
-      const zIndex = baseZIndex || 0;
-      menuRef.current.style.zIndex = String(
-        zIndex + DomHelpers.generateZIndex(),
-      );
-    }
-
-    if (currentChangeEvent.current) {
-      currentChangeEvent.current = null;
-    }
-    if (currentEvent.current) position(currentEvent.current);
-  };
-
-  const onExited = () => {
-    DomHelpers.revertZIndex();
-  };
-
-  const onLeafClick = (
-    e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setResetMenu(true);
-
-    hide(e);
-
-    e.stopPropagation();
-  };
-
-  const isOutsideClicked = React.useCallback(
-    (e: React.MouseEvent | MouseEvent) => {
-      const target = e.target as HTMLElement;
-      return (
-        menuRef.current &&
-        !(
-          menuRef.current.isSameNode(target) || menuRef.current.contains(target)
-        )
-      );
-    },
-    [],
-  );
-
-  const documentClickListener = React.useCallback(
-    (e: MouseEvent) => {
-      if (isOutsideClicked(e)) {
-        // TODO: (&& e.button !== 2) restore after global usage
-        hide(e);
-
-        setResetMenu(true);
-      }
-    },
-    [setResetMenu, isOutsideClicked, hide],
-  );
-
-  const documentContextMenuListener = React.useCallback(
-    (e: MouseEvent) => {
-      show(e);
-    },
-    [show],
-  );
-
-  const documentResizeListener = React.useCallback(
-    (e: Event) => {
-      if (visible) {
-        hide(e);
-      }
-    },
-    [visible, hide],
-  );
-
-  const bindDocumentListeners = () => {
-    window.addEventListener("resize", documentResizeListener);
-    document.addEventListener("click", documentClickListener);
-    document.addEventListener("mousedown", documentClickListener);
-  };
-
-  const unbindDocumentListeners = () => {
-    window.removeEventListener("resize", documentResizeListener);
-    document.removeEventListener("click", documentClickListener);
-    document.removeEventListener("mousedown", documentClickListener);
-  };
-
-  const onEntered = () => {
-    bindDocumentListeners();
-  };
-
-  const onExit = () => {
-    currentEvent.current = null;
-    unbindDocumentListeners();
-  };
-
-  React.useEffect(() => {
-    if (global)
-      document.addEventListener("contextmenu", documentContextMenuListener);
-    return () => {
-      document.removeEventListener("contextmenu", documentContextMenuListener);
-      document.removeEventListener("click", documentClickListener);
-      document.removeEventListener("mousedown", documentClickListener);
-
-      DomHelpers.revertZIndex();
+    const onMenuClick = () => {
+      setResetMenu(false);
     };
-  }, [documentClickListener, documentContextMenuListener, global]);
 
-  React.useEffect(() => {
-    return () => {
-      if (visible && onHide) {
-        onHide();
+    const onMenuMouseEnter = () => {
+      setResetMenu(false);
+    };
+
+    const show = React.useCallback(
+      (e: React.MouseEvent | MouseEvent) => {
+        if (getContextModel) {
+          const m = trimSeparator(getContextModel());
+          setModel(m);
+        }
+
+        e.stopPropagation();
+        e.preventDefault();
+
+        currentEvent.current = e;
+        if (visible) {
+          if (!isMobileUtils()) {
+            setReshow(true);
+            prevReshow.current = true;
+          }
+        } else {
+          setVisible(true);
+          if (currentEvent.current) onShow?.(currentEvent.current);
+        }
+      },
+      [visible, onShow, getContextModel],
+    );
+
+    const hide = React.useCallback(
+      (
+        e:
+          | React.MouseEvent
+          | MouseEvent
+          | Event
+          | React.ChangeEvent<HTMLInputElement>,
+      ) => {
+        if (e instanceof Event) {
+          currentChangeEvent.current = e;
+        } else {
+          // @ts-expect-error need fix
+          currentEvent.current = e;
+        }
+
+        onHide?.(e);
+
         setVisible(false);
         setReshow(false);
         prevReshow.current = false;
         setChangeView(false);
         setShowMobileMenu(false);
         setArticleWidth(0);
+      },
+      [onHide],
+    );
+
+    const toggle = React.useCallback(
+      (
+        e:
+          | React.MouseEvent
+          | MouseEvent
+          | Event
+          | React.ChangeEvent<HTMLInputElement>,
+      ) => {
+        if (currentChangeEvent.current === e || currentEvent.current === e)
+          return;
+
+        if (visible) {
+          hide(e);
+          return false;
+        }
+        // @ts-expect-error fix types
+        show(e);
+        return true;
+      },
+      [visible, hide, show],
+    );
+
+    React.useEffect(() => {
+      if (visible && prevReshow.current !== reshow) {
+        setVisible(false);
+        setReshow(false);
+        prevReshow.current = false;
+        setResetMenu(true);
+        setChangeView(false);
+        setArticleWidth(0);
+
+        if (currentEvent.current) show(currentEvent.current);
+      }
+    }, [visible, reshow, show]);
+
+    const position = (event: React.MouseEvent | MouseEvent) => {
+      if (event) {
+        const rects = containerRef?.current?.getBoundingClientRect();
+
+        const currentLeftOffset = leftOffset ?? 0;
+        const currentRightOffset = rightOffset ?? 0;
+
+        let left = rects
+          ? rects.left - currentLeftOffset - currentRightOffset
+          : event.pageX + 1;
+        let top = rects ? rects.top : event.pageY + 1;
+        const width =
+          menuRef.current && menuRef.current.offsetParent
+            ? menuRef.current.offsetWidth
+            : DomHelpers.getHiddenElementOuterWidth(menuRef.current);
+        const height =
+          menuRef.current && menuRef.current.offsetParent
+            ? menuRef.current.offsetHeight
+            : DomHelpers.getHiddenElementOuterHeight(menuRef.current);
+        const viewport = DomHelpers.getViewport();
+
+        if (theme.interfaceDirection === "rtl" && !rects && left > width) {
+          left = event.pageX - width + 1;
+        }
+
+        if (
+          isTabletUtils() &&
+          (height > 483 ||
+            (isMobileOnly && window.innerHeight < window.innerWidth))
+        ) {
+          const article = document.getElementById("article-container");
+
+          let currentArticleWidth = 0;
+          if (article) {
+            currentArticleWidth = article.offsetWidth;
+          }
+
+          setChangeView(true);
+          setArticleWidth(currentArticleWidth);
+
+          return;
+        }
+
+        if (isMobileUtils() && (height > 210 || ignoreChangeView)) {
+          setChangeView(true);
+          setArticleWidth(0);
+
+          return;
+        }
+
+        // flip
+        if (left + width - document.body.scrollLeft > viewport.width) {
+          left -= width;
+        }
+
+        // flip
+        if (top + height - document.body.scrollTop > viewport.height) {
+          top -= height;
+        }
+
+        // fit
+        if (left < document.body.scrollLeft) {
+          left = document.body.scrollLeft;
+        }
+
+        // fit
+        if (top < document.body.scrollTop) {
+          top = document.body.scrollTop;
+        }
+
+        if (containerRef) {
+          if (rects) top += rects.height + 4;
+
+          if (menuRef.current) {
+            if (scaled && rects) {
+              menuRef.current.style.width = `${rects.width}px`;
+            }
+            menuRef.current.style.minWidth = "210px";
+          }
+        }
+        if (menuRef.current) {
+          menuRef.current.style.left = `${left}px`;
+          menuRef.current.style.top = `${top}px`;
+        }
+      }
+    };
+
+    const onEnter = () => {
+      if (autoZIndex && menuRef.current) {
+        const zIndex = baseZIndex || 0;
+        menuRef.current.style.zIndex = String(
+          zIndex + DomHelpers.generateZIndex(),
+        );
       }
 
-      window.removeEventListener("resize", documentResizeListener);
+      if (currentChangeEvent.current) {
+        currentChangeEvent.current = null;
+      }
+      if (currentEvent.current) position(currentEvent.current);
     };
-  }, [documentResizeListener, onHide, visible]);
 
-  const onMobileItemClick = (
-    e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
-    loadFunc?: () => Promise<ContextMenuModel[]>,
-  ) => {
-    e.stopPropagation();
+    const onExited = () => {
+      DomHelpers.revertZIndex();
+    };
 
-    setShowMobileMenu(true);
-    if (loadFunc) setOnLoad(loadFunc);
-  };
+    const onLeafClick = (
+      e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+    ) => {
+      setResetMenu(true);
 
-  const onBackClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    setShowMobileMenu(false);
-  };
+      hide(e);
 
-  React.useImperativeHandle(
-    ref,
-    () => {
-      return { show, hide, menuRef };
-    },
-    [hide, show],
-  );
+      e.stopPropagation();
+    };
 
-  const renderContextMenu = () => {
-    const currentClassName = className
-      ? classNames("p-contextmenu p-component", className) ||
-        "p-contextmenu p-component"
-      : "p-contextmenu p-component";
-
-    const isIconExist = !!header?.icon;
-    const isAvatarExist = header?.avatar;
-    const withHeader = !!header?.title;
-    const defaultIcon = !!header?.color;
-
-    return (
-      <StyledContextMenu
-        changeView={changeView}
-        articleWidth={articleWidth}
-        isRoom={isRoom}
-        fillIcon={fillIcon}
-        isIconExist={isIconExist}
-        data-testid="context-menu"
-      >
-        <CSSTransition
-          nodeRef={menuRef}
-          classNames="p-contextmenu"
-          in={visible}
-          timeout={{ enter: 250, exit: 0 }}
-          unmountOnExit
-          onEnter={onEnter}
-          onEntered={onEntered}
-          onExit={onExit}
-          onExited={onExited}
-        >
-          <div
-            ref={menuRef}
-            id={id}
-            className={currentClassName}
-            style={style}
-            onClick={onMenuClick}
-            onMouseEnter={onMenuMouseEnter}
-          >
-            {changeView && withHeader && (
-              <div className="contextmenu-header">
-                {isIconExist &&
-                  (showMobileMenu ? (
-                    <IconButton
-                      className="edit_icon"
-                      iconName={ArrowLeftReactUrl}
-                      onClick={onBackClick}
-                      size={16}
-                    />
-                  ) : (
-                    <div className="icon-wrapper">
-                      {header.icon ? (
-                        <RoomIcon
-                          title={header.title}
-                          isArchive={isArchive}
-                          showDefault={defaultIcon}
-                          imgClassName="drop-down-item_icon"
-                          imgSrc={header.icon}
-                          badgeUrl={badgeUrl}
-                          color={header.color || ""}
-                        />
-                      ) : (
-                        <RoomIcon
-                          color={header.color || ""}
-                          title={header.title}
-                          isArchive={isArchive}
-                          showDefault={defaultIcon}
-                          badgeUrl={badgeUrl}
-                        />
-                      )}
-                    </div>
-                  ))}
-                {isAvatarExist && (
-                  <div className="avatar-wrapper">
-                    <Avatar
-                      role={AvatarRole.none}
-                      source={header.avatar || ""}
-                      size={AvatarSize.min}
-                      className="drop-down-item_avatar"
-                    />
-                  </div>
-                )}
-
-                <Text className="text" truncate dir="auto">
-                  {header.title}
-                </Text>
-              </div>
-            )}
-
-            {showMobileMenu ? (
-              <MobileSubMenu
-                root
-                resetMenu={resetMenu}
-                onLeafClick={onLeafClick}
-                onLoad={onLoad}
-              />
-            ) : (
-              <SubMenu
-                model={getContextModel ? model || [] : propsModel}
-                root
-                resetMenu={resetMenu}
-                onLeafClick={onLeafClick}
-                changeView={changeView}
-                onMobileItemClick={onMobileItemClick}
-              />
-            )}
-          </div>
-        </CSSTransition>
-      </StyledContextMenu>
+    const isOutsideClicked = React.useCallback(
+      (e: React.MouseEvent | MouseEvent) => {
+        const target = e.target as HTMLElement;
+        return (
+          menuRef.current &&
+          !(
+            menuRef.current.isSameNode(target) ||
+            menuRef.current.contains(target)
+          )
+        );
+      },
+      [],
     );
-  };
 
-  const element = renderContextMenu();
+    const documentClickListener = React.useCallback(
+      (e: MouseEvent) => {
+        if (isOutsideClicked(e)) {
+          // TODO: (&& e.button !== 2) restore after global usage
 
-  const isMobileUtil = isMobileUtils();
+          hide(e);
 
-  const contextMenu = (
-    <>
-      {withBackdrop && (
-        <Backdrop
-          visible={(visible && (changeView || ignoreChangeView)) || false}
-          withBackground
-          withoutBlur={false}
-          zIndex={baseZIndex}
-        />
-      )}
+          setResetMenu(true);
+        }
+      },
+      [setResetMenu, isOutsideClicked, hide],
+    );
 
-      <Portal element={element} appendTo={appendTo} />
-    </>
-  );
+    const documentContextMenuListener = React.useCallback(
+      (e: MouseEvent) => {
+        show(e);
+      },
+      [show],
+    );
 
-  const root = document.getElementById("root");
-  if (root && isMobileUtil) {
-    const portal = <Portal element={contextMenu} appendTo={root} />;
+    const documentResizeListener = React.useCallback(
+      (e: Event) => {
+        if (visible) {
+          hide(e);
+        }
+      },
+      [visible, hide],
+    );
 
-    return portal;
-  }
+    const bindDocumentListeners = () => {
+      window.addEventListener("resize", documentResizeListener);
+      document.addEventListener("click", documentClickListener);
+      document.addEventListener("mousedown", documentClickListener);
+    };
 
-  return contextMenu;
-});
+    const unbindDocumentListeners = () => {
+      window.removeEventListener("resize", documentResizeListener);
+      document.removeEventListener("click", documentClickListener);
+      document.removeEventListener("mousedown", documentClickListener);
+    };
+
+    const onEntered = () => {
+      bindDocumentListeners();
+    };
+
+    const onExit = () => {
+      currentEvent.current = null;
+      unbindDocumentListeners();
+    };
+
+    React.useEffect(() => {
+      if (global)
+        document.addEventListener("contextmenu", documentContextMenuListener);
+      return () => {
+        document.removeEventListener(
+          "contextmenu",
+          documentContextMenuListener,
+        );
+        document.removeEventListener("click", documentClickListener);
+        document.removeEventListener("mousedown", documentClickListener);
+
+        DomHelpers.revertZIndex();
+      };
+    }, [documentClickListener, documentContextMenuListener, global]);
+
+    React.useEffect(() => {
+      return () => {
+        if (visible && onHide) {
+          onHide();
+          setVisible(false);
+          setReshow(false);
+          prevReshow.current = false;
+          setChangeView(false);
+          setShowMobileMenu(false);
+          setArticleWidth(0);
+        }
+
+        window.removeEventListener("resize", documentResizeListener);
+      };
+    }, [documentResizeListener, onHide, visible]);
+
+    const onMobileItemClick = (
+      e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+      loadFunc?: () => Promise<ContextMenuModel[]>,
+    ) => {
+      e.stopPropagation();
+
+      setShowMobileMenu(true);
+      if (loadFunc) setOnLoad(loadFunc);
+    };
+
+    const onBackClick = (e: React.MouseEvent<HTMLDivElement>) => {
+      e.stopPropagation();
+      setShowMobileMenu(false);
+    };
+
+    React.useImperativeHandle(
+      ref,
+      () => {
+        return { show, hide, toggle, menuRef };
+      },
+      [hide, show, toggle],
+    );
+
+    const renderContextMenu = () => {
+      const currentClassName = className
+        ? classNames("p-contextmenu p-component", className) ||
+          "p-contextmenu p-component"
+        : "p-contextmenu p-component";
+
+      const isIconExist = !!header?.icon;
+      const isAvatarExist = header?.avatar;
+      const withHeader = !!header?.title;
+      const defaultIcon = !!header?.color;
+
+      return (
+        <StyledContextMenu
+          changeView={changeView}
+          articleWidth={articleWidth}
+          isRoom={isRoom}
+          fillIcon={fillIcon}
+          isIconExist={isIconExist}
+          data-testid="context-menu"
+        >
+          <CSSTransition
+            nodeRef={menuRef}
+            classNames="p-contextmenu"
+            in={visible}
+            timeout={{ enter: 250, exit: 0 }}
+            unmountOnExit
+            onEnter={onEnter}
+            onEntered={onEntered}
+            onExit={onExit}
+            onExited={onExited}
+          >
+            <div
+              ref={menuRef}
+              id={id}
+              className={currentClassName}
+              style={style}
+              onClick={onMenuClick}
+              onMouseEnter={onMenuMouseEnter}
+            >
+              {changeView && withHeader && (
+                <div className="contextmenu-header">
+                  {isIconExist &&
+                    (showMobileMenu ? (
+                      <IconButton
+                        className="edit_icon"
+                        iconName={ArrowLeftReactUrl}
+                        onClick={onBackClick}
+                        size={16}
+                      />
+                    ) : (
+                      <div className="icon-wrapper">
+                        {header.icon ? (
+                          <RoomIcon
+                            title={header.title}
+                            isArchive={isArchive}
+                            showDefault={defaultIcon}
+                            imgClassName="drop-down-item_icon"
+                            imgSrc={header.icon}
+                            badgeUrl={badgeUrl}
+                            color={header.color || ""}
+                          />
+                        ) : (
+                          <RoomIcon
+                            color={header.color || ""}
+                            title={header.title}
+                            isArchive={isArchive}
+                            showDefault={defaultIcon}
+                            badgeUrl={badgeUrl}
+                          />
+                        )}
+                      </div>
+                    ))}
+                  {isAvatarExist && (
+                    <div className="avatar-wrapper">
+                      <Avatar
+                        role={AvatarRole.none}
+                        source={header.avatar || ""}
+                        size={AvatarSize.min}
+                        className="drop-down-item_avatar"
+                      />
+                    </div>
+                  )}
+
+                  <Text className="text" truncate dir="auto">
+                    {header.title}
+                  </Text>
+                </div>
+              )}
+
+              {showMobileMenu ? (
+                <MobileSubMenu
+                  root
+                  resetMenu={resetMenu}
+                  onLeafClick={onLeafClick}
+                  onLoad={onLoad}
+                />
+              ) : (
+                <SubMenu
+                  model={getContextModel ? model || [] : propsModel}
+                  root
+                  resetMenu={resetMenu}
+                  onLeafClick={onLeafClick}
+                  changeView={changeView}
+                  onMobileItemClick={onMobileItemClick}
+                />
+              )}
+            </div>
+          </CSSTransition>
+        </StyledContextMenu>
+      );
+    };
+
+    const element = renderContextMenu();
+
+    const isMobileUtil = isMobileUtils();
+
+    const contextMenu = (
+      <>
+        {withBackdrop && (
+          <Backdrop
+            visible={(visible && (changeView || ignoreChangeView)) || false}
+            withBackground
+            withoutBlur={false}
+            zIndex={baseZIndex}
+          />
+        )}
+
+        <Portal element={element} appendTo={appendTo} />
+      </>
+    );
+
+    const root = document.getElementById("root");
+    if (root && isMobileUtil) {
+      const portal = <Portal element={contextMenu} appendTo={root} />;
+
+      return portal;
+    }
+
+    return contextMenu;
+  },
+);
 
 ContextMenu.displayName = "ContextMenu";
 

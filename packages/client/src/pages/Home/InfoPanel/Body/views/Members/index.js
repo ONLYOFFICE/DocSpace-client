@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
@@ -36,7 +36,11 @@ import MembersHelper from "../../helpers/MembersHelper";
 import MembersList from "./sub-components/MembersList";
 import User from "./User";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
-import { LinksBlock, StyledLinkRow } from "./sub-components/Styled";
+import {
+  LinksBlock,
+  StyledLinkRow,
+  StyledPublicRoomBarContainer,
+} from "./sub-components/Styled";
 import EmptyContainer from "./sub-components/EmptyContainer";
 
 import { Text } from "@docspace/shared/components/text";
@@ -46,8 +50,8 @@ import { Tooltip } from "@docspace/shared/components/tooltip";
 import { isDesktop } from "@docspace/shared/utils";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
+import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
 
-import { Avatar } from "@docspace/shared/components/avatar";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import LinkRow from "./sub-components/LinkRow";
 
@@ -60,55 +64,38 @@ const Members = ({
   isPublicRoomType,
   membersFilter,
   infoPanelMembers,
-  setInfoPanelMembers,
+  updateInfoPanelMembers,
   primaryLink,
   isArchiveFolder,
   isPublicRoom,
+  isFormRoom,
   additionalLinks,
   setLinkParams,
   setEditLinkPanelIsVisible,
   getPrimaryLink,
   setExternalLink,
   withPublicRoomBlock,
-  fetchMembers,
+  fetchMoreMembers,
   membersIsLoading,
   searchValue,
-  searchResultIsLoading,
+  isMembersPanelUpdating,
 }) => {
   const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
 
-  const updateInfoPanelMembers = async () => {
-    if (
-      !infoPanelSelection ||
-      !infoPanelSelection.isRoom ||
-      !infoPanelSelection.id
-    ) {
-      return;
-    }
-
-    const fetchedMembers = await fetchMembers(t, true, withoutTitlesAndLinks);
-    setInfoPanelMembers(fetchedMembers);
-  };
+  const scrollContext = useContext(ScrollbarContext);
 
   useEffect(() => {
-    updateInfoPanelMembers();
+    updateInfoPanelMembers(t);
   }, [infoPanelSelection, searchValue]);
 
+  useEffect(() => {
+    if (isMembersPanelUpdating) return;
+    scrollContext?.parentScrollbar?.scrollToTop();
+  }, [isMembersPanelUpdating]);
+
   const loadNextPage = async () => {
-    const roomId = infoPanelSelection.id;
-    const fetchedMembers = await fetchMembers(t, false, withoutTitlesAndLinks);
-    const { users, administrators, expected, groups } = fetchedMembers;
-
-    const newMembers = {
-      roomId: roomId,
-      administrators: [...infoPanelMembers.administrators, ...administrators],
-      users: [...infoPanelMembers.users, ...users],
-      expected: [...infoPanelMembers.expected, ...expected],
-      groups: [...infoPanelMembers.groups, ...groups],
-    };
-
-    setInfoPanelMembers(newMembers);
+    await fetchMoreMembers(t, withoutTitlesAndLinks);
   };
 
   if (membersIsLoading) return <InfoPanelViewLoader view="members" />;
@@ -154,10 +141,10 @@ const Members = ({
       publicRoomItems.push(
         <LinksBlock key="general-link_header">
           <Text fontSize="14px" fontWeight={600}>
-            {t("Common:SharedLinks")}
+            {isFormRoom ? t("Common:PublicLink") : t("Common:SharedLinks")}
           </Text>
 
-          {!isArchiveFolder && (
+          {!isArchiveFolder && !isFormRoom && (
             <div
               data-tooltip-id="emailTooltip"
               data-tooltip-content={t(
@@ -247,21 +234,32 @@ const Members = ({
   return (
     <>
       {showPublicRoomBar && (
-        <PublicRoomBar
-          headerText={t("Files:RoomAvailableViaExternalLink")}
-          bodyText={t("CreateEditRoomDialog:PublicRoomBarDescription")}
-        />
+        <StyledPublicRoomBarContainer>
+          <PublicRoomBar
+            headerText={
+              isFormRoom
+                ? t("Files:RoomAvailableViaSharedLink")
+                : t("Files:RoomAvailableViaExternalLink")
+            }
+            bodyText={
+              isFormRoom
+                ? t("CreateEditRoomDialog:FormRoomBarDescription")
+                : t("CreateEditRoomDialog:PublicRoomBarDescription")
+            }
+          />
+        </StyledPublicRoomBarContainer>
       )}
 
       <MembersList
         loadNextPage={loadNextPage}
         hasNextPage={
-          membersList.length - headersCount < membersFilter.total &&
-          !searchResultIsLoading
+          !isMembersPanelUpdating &&
+          membersList.length - headersCount < membersFilter.total
         }
         itemCount={membersFilter.total + headersCount + publicRoomItemsLength}
         showPublicRoomBar={showPublicRoomBar}
         linksBlockLength={publicRoomItemsLength}
+        withoutTitlesAndLinks={withoutTitlesAndLinks}
       >
         {publicRoomItems}
         {membersList.map((user, index) => {
@@ -269,12 +267,13 @@ const Members = ({
             <User
               t={t}
               user={user}
-              key={user.id}
+              key={user.id || user.email} // user.email for users added via email
               showTooltip={isAdmin}
               index={index + publicRoomItemsLength}
               membersHelper={membersHelper}
               currentMember={currentMember}
               hasNextPage={
+                !isMembersPanelUpdating &&
                 membersList.length - headersCount < membersFilter.total
               }
             />
@@ -299,12 +298,12 @@ export default inject(
       infoPanelSelection,
       setIsScrollLocked,
       infoPanelMembers,
-      setInfoPanelMembers,
-      fetchMembers,
+      updateInfoPanelMembers,
+      fetchMoreMembers,
       membersIsLoading,
       withPublicRoomBlock,
       searchValue,
-      searchResultIsLoading,
+      isMembersPanelUpdating,
     } = infoPanelStore;
     const { membersFilter } = filesStore;
     const { id: selfId, isAdmin } = userStore.user;
@@ -316,8 +315,12 @@ export default inject(
     const roomType =
       selectedFolderStore.roomType ?? infoPanelSelection?.roomType;
 
+    const isFormRoom = roomType === RoomsType.FormRoom;
+
     const isPublicRoomType =
-      roomType === RoomsType.PublicRoom || roomType === RoomsType.CustomRoom;
+      roomType === RoomsType.PublicRoom ||
+      roomType === RoomsType.CustomRoom ||
+      isFormRoom;
 
     const isPublicRoom = roomType === RoomsType.PublicRoom;
 
@@ -330,9 +333,10 @@ export default inject(
       selfId,
       isAdmin,
       isPublicRoomType,
+      isFormRoom,
       membersFilter,
       infoPanelMembers,
-      setInfoPanelMembers,
+      updateInfoPanelMembers,
       roomType,
       primaryLink,
       isArchiveFolder: isArchiveFolderRoot,
@@ -343,10 +347,10 @@ export default inject(
       getPrimaryLink: filesStore.getPrimaryLink,
       setExternalLink,
       withPublicRoomBlock,
-      fetchMembers,
+      fetchMoreMembers,
       membersIsLoading,
       searchValue,
-      searchResultIsLoading,
+      isMembersPanelUpdating,
     };
   },
 )(

@@ -28,7 +28,10 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { getStepTitle, getGoogleStepDescription } from "../../../utils";
-import { tablet } from "@docspace/shared/utils/device";
+import {
+  tablet,
+  isMobile as isMobileBreakpoint,
+} from "@docspace/shared/utils/device";
 
 import { isMobile } from "react-device-detect";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
@@ -42,6 +45,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { toastr } from "@docspace/shared/components/toast";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const STEP_LENGTH = 6;
 
@@ -103,6 +107,8 @@ const GoogleWorkspace = ({
   currentDeviceType,
   getMigrationStatus,
   setUsers,
+  filteredUsers,
+  organizationName,
 }) => {
   const [showReminder, setShowReminder] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
@@ -128,6 +134,7 @@ const GoogleWorkspace = ({
         i18nKey="TypesAndPrivileges"
         ns="Settings"
         t={t}
+        values={{ productName: PRODUCT_NAME }}
         components={{
           1: <strong></strong>,
           2: <strong></strong>,
@@ -214,7 +221,7 @@ const GoogleWorkspace = ({
     return clearCheckedAccounts;
   }, []);
 
-  if (isMobile)
+  if (isMobile || isMobileBreakpoint())
     return (
       <BreakpointWarning
         isMobileUnavailableOnly
@@ -227,7 +234,10 @@ const GoogleWorkspace = ({
   return (
     <GoogleWrapper>
       <Text className="workspace-subtitle">
-        {t("Settings:AboutDataImport")}
+        {t("Settings:AboutDataImport", {
+          productName: PRODUCT_NAME,
+          organizationName,
+        })}
       </Text>
       <div className="step-container">
         <Box displayProp="flex" marginProp="0 0 8px">
@@ -237,7 +247,14 @@ const GoogleWorkspace = ({
           <Text className="step-title">{getStepTitle(t, currentStep)}</Text>
         </Box>
         <Box className="step-description">
-          {getGoogleStepDescription(t, currentStep, renderTooltip, Trans)}
+          {getGoogleStepDescription(
+            t,
+            currentStep,
+            renderTooltip,
+            Trans,
+            filteredUsers.length === 0,
+            organizationName,
+          )}
         </Box>
         <StepContent
           t={t}
@@ -253,10 +270,10 @@ const GoogleWorkspace = ({
 };
 
 export default inject(({ setup, settingsStore, importAccountsStore }) => {
-  const { clearCheckedAccounts, getMigrationStatus, setUsers } =
+  const { clearCheckedAccounts, getMigrationStatus, setUsers, filteredUsers } =
     importAccountsStore;
   const { viewAs, setViewAs } = setup;
-  const { currentDeviceType } = settingsStore;
+  const { currentDeviceType, organizationName } = settingsStore;
 
   return {
     clearCheckedAccounts,
@@ -265,5 +282,7 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
     currentDeviceType,
     getMigrationStatus,
     setUsers,
+    filteredUsers,
+    organizationName,
   };
 })(withTranslation(["Common, Settings"])(observer(GoogleWorkspace)));

@@ -1,7 +1,6 @@
 {
   "ErrorEmptyResponse": "رد فارغ",
-  "ErrorUnavailableText": "DocSpace غير متوفر",
-  "InvalidLink": "رابط غير صالح",
+  "ErrorUnavailableText": "{{productName}} غير متوفر",
   "LinkDoesNotExist": "الرابط الذي تحاول فتحه غير موجود",
   "LinkHasExpired": "انتهت صلاحية الرابط الذي تحاول فتحه"
 }

@@ -38,6 +38,8 @@ import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import { StyledAccountContent } from "../../styles/accounts";
 import { getUserTypeLabel } from "@docspace/shared/utils/common";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { EmployeeStatus } from "@docspace/shared/enums";
 
 const Accounts = (props) => {
   const {
@@ -53,6 +55,7 @@ const Accounts = (props) => {
     setPeopleBufferSelection,
 
     showStorageInfo,
+    standalone,
   } = props;
 
   const navigate = useNavigate();
@@ -67,14 +70,13 @@ const Accounts = (props) => {
   }, [infoPanelSelection, getStatusLabel]);
 
   const getStatusLabel = React.useCallback(() => {
-    const status = getUserStatus(infoPanelSelection);
-    switch (status) {
-      case "active":
+    switch (infoPanelSelection?.status) {
+      case EmployeeStatus.Active:
         return setStatusLabel(t("Common:Active"));
-      case "pending":
-        return setStatusLabel(t("PeopleTranslations:PendingTitle"));
-      case "disabled":
-        return setStatusLabel(t("Settings:Disabled"));
+      case EmployeeStatus.Pending:
+        return setStatusLabel(t("PeopleTranslations:PendingInviteTitle"));
+      case EmployeeStatus.Disabled:
+        return setStatusLabel(t("PeopleTranslations:DisabledEmployeeStatus"));
       default:
         return setStatusLabel(t("Common:Active"));
     }
@@ -84,10 +86,10 @@ const Accounts = (props) => {
     const options = [];
 
     const adminOption = {
-      id: "info-account-type_docspace-admin",
+      id: "info-account-type_portal-admin",
       key: "admin",
-      title: t("Common:DocSpaceAdmin"),
-      label: t("Common:DocSpaceAdmin"),
+      title: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+      label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
       action: "admin",
     };
     const managerOption = {
@@ -156,10 +158,10 @@ const Accounts = (props) => {
     setPeopleBufferSelection(null);
   };
 
-  const typeLabel = React.useCallback(() => getUserTypeLabel(role, t), [])();
-
   const renderTypeData = () => {
     const typesOptions = getTypesOptions();
+
+    const typeLabel = getUserTypeLabel(role, t);
 
     const combobox = (
       <ComboBox
@@ -233,18 +235,22 @@ const Accounts = (props) => {
           </Text>
           {typeData}
 
-          <Text className={"info_field"} noSelect title={t("UserStatus")}>
-            {t("UserStatus")}
-          </Text>
-          <Text
-            className={"info_data first-row"}
-            fontSize={"13px"}
-            fontWeight={600}
-            noSelect
-            title={statusLabel}
-          >
-            {statusText}
-          </Text>
+          {!standalone && (
+            <>
+              <Text className={"info_field"} noSelect title={t("UserStatus")}>
+                {t("UserStatus")}
+              </Text>
+              <Text
+                className={"info_data first-row"}
+                fontSize={"13px"}
+                fontWeight={600}
+                noSelect
+                title={statusLabel}
+              >
+                {statusText}
+              </Text>
+            </>
+          )}
           {showStorageInfo && (
             <>
               <Text
@@ -283,7 +289,7 @@ const Accounts = (props) => {
                 {infoPanelSelection.groups.map((group) => (
                   <Link
                     key={group.id}
-                    className={"info_data first-row info_group"}
+                    className={"info_data info_group"}
                     isHovered={true}
                     fontSize={"13px"}
                     lineHeight={"20px"}
@@ -310,6 +316,7 @@ export default inject(
     accessRightsStore,
     infoPanelStore,
     currentQuotaStore,
+    settingsStore,
   }) => {
     const { isOwner, isAdmin, id: selfId } = userStore.user;
     const { changeType: changeUserType, usersStore } = peopleStore;
@@ -323,6 +330,8 @@ export default inject(
     } = peopleStore.selectionStore;
 
     const { showStorageInfo } = currentQuotaStore;
+    const { standalone } = settingsStore;
+
     return {
       isOwner,
       isAdmin,
@@ -335,6 +344,7 @@ export default inject(
       setPeopleSelection,
       setPeopleBufferSelection,
       showStorageInfo,
+      standalone,
     };
   },
 )(

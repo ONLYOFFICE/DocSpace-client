@@ -111,6 +111,9 @@ class ConsumerModalDialog extends React.Component {
         onChangeLoading(false);
         hideLoader();
         toastr.success(t("ThirdPartyPropsActivated"));
+
+        const channel = new BroadcastChannel("thirdpartyActivation");
+        channel.postMessage(true);
       })
       .catch((error) => {
         onChangeLoading(false);
@@ -174,7 +177,7 @@ class ConsumerModalDialog extends React.Component {
       case "vk":
         return this.props.vkUrl;
       default:
-        return this.props.docspaceSettingsUrl;
+        return this.props.portalSettingsUrl;
     }
   };
 
@@ -327,7 +330,7 @@ export default inject(({ setup, settingsStore }) => {
   const {
     theme,
     urlSupport,
-    docspaceSettingsUrl,
+    portalSettingsUrl,
     docuSignUrl,
     dropboxUrl,
     boxUrl,
@@ -357,7 +360,7 @@ export default inject(({ setup, settingsStore }) => {
     theme,
     selectedConsumer,
     urlSupport,
-    docspaceSettingsUrl,
+    portalSettingsUrl,
     docuSignUrl,
     dropboxUrl,
     boxUrl,

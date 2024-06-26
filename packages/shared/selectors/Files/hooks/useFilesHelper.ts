@@ -26,7 +26,11 @@
 
 import React from "react";
 
-import { getFolder, getFolderInfo } from "../../../api/files";
+import { useTranslation } from "react-i18next";
+
+import FolderSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
+
+import { getFolder, getFolderInfo, getSettingsFiles } from "../../../api/files";
 import FilesFilter from "../../../api/files/filter";
 import {
   ApplyFilterOption,
@@ -45,6 +49,7 @@ import {
   convertFilesToItems,
   convertFoldersToItems,
 } from "../FilesSelector.utils";
+import useInputItemHelper from "./useInputItemHelper";
 
 const useFilesHelper = ({
   setIsNextPageLoading,
@@ -65,6 +70,7 @@ const useFilesHelper = ({
   getRootData,
   onSetBaseFolderPath,
   isRoomsOnly,
+  isUserOnly,
   rootThirdPartyId,
   getRoomList,
   getIcon,
@@ -74,7 +80,17 @@ const useFilesHelper = ({
   isInit,
   setIsInit,
   setIsFirstLoad,
+  withCreate,
+  setSelectedItemId,
 }: UseFilesHelpersProps) => {
+  const { t } = useTranslation(["Common"]);
+
+  const { addInputItem } = useInputItemHelper({
+    withCreate,
+    selectedItemId,
+    setItems,
+  });
+
   const requestRunning = React.useRef(false);
   const initRef = React.useRef(isInit);
   const firstLoadRef = React.useRef(isFirstLoad);
@@ -93,17 +109,25 @@ const useFilesHelper = ({
   }, [isInit]);
 
   const getFileList = React.useCallback(
-    async (startIndex: number) => {
+    async (sIndex: number) => {
       if (requestRunning.current) return;
 
       requestRunning.current = true;
       setIsNextPageLoading(true);
+
+      let startIndex = sIndex;
+
+      if (withCreate) {
+        startIndex -= startIndex % 100;
+      }
 
       const currentSearch = searchValue || "";
 
       const page = startIndex / PAGE_COUNT;
 
       const filter = FilesFilter.getDefault();
+
+      const { extsWebEdited } = await getSettingsFiles();
 
       filter.page = page;
       filter.pageCount = PAGE_COUNT;
@@ -137,15 +161,61 @@ const useFilesHelper = ({
             filter.extension = FilesSelectorFilterTypes.PDF;
             break;
 
-          case FilesSelectorFilterTypes.ALL:
+          case FilterType.DocumentsOnly:
+            filter.filterType = FilterType.DocumentsOnly;
+            break;
+
+          case FilterType.PresentationsOnly:
+            filter.filterType = FilterType.PresentationsOnly;
+            break;
+
+          case FilterType.SpreadsheetsOnly:
+            filter.filterType = FilterType.SpreadsheetsOnly;
+            break;
+
+          case FilterType.ImagesOnly:
+            filter.filterType = FilterType.ImagesOnly;
+            break;
+
+          case FilterType.MediaOnly:
+            filter.filterType = FilterType.MediaOnly;
+            break;
+
+          case FilterType.ArchiveOnly:
+            filter.filterType = FilterType.ArchiveOnly;
+            break;
+
+          case FilterType.FoldersOnly:
+            filter.filterType = FilterType.FoldersOnly;
+            break;
+
+          case FilterType.OFormTemplateOnly:
+            filter.filterType = FilterType.OFormTemplateOnly;
+            break;
+
+          case FilterType.OFormOnly:
+            filter.filterType = FilterType.OFormOnly;
+            break;
+
+          case FilterType.FilesOnly:
             filter.filterType = FilterType.FilesOnly;
+            break;
+
+          case FilesSelectorFilterTypes.ALL:
+            filter.filterType = FilterType.None;
+            break;
+
+          case "EditorSupportedTypes":
+            filter.extension = extsWebEdited
+              .map((extension) => extension.slice(1))
+              .join(",");
             break;
 
           default:
         }
       }
 
-      const id = selectedItemId || "";
+      const id = selectedItemId ?? (isUserOnly ? "@my" : "");
 
       filter.folder = id.toString();
 
@@ -153,7 +223,7 @@ const useFilesHelper = ({
         folderId: string | number,
         isErrorPath = false,
       ) => {
-        if (initRef.current && getRootData) {
+        if (initRef.current && getRootData && folderId !== "@my") {
           const folder = await getFolderInfo(folderId, true);
 
           const isArchive = folder.rootFolderType === FolderType.Archive;
@@ -251,7 +321,7 @@ const useFilesHelper = ({
           //   if (item.roomType) breadCrumbs[idx].isRoom = true;
           // });
 
-          if (!isThirdParty && !isRoomsOnly)
+          if (!isThirdParty && !isRoomsOnly && !isUserOnly)
             breadCrumbs.unshift({ ...DEFAULT_BREAD_CRUMB });
 
           onSetBaseFolderPath?.(isErrorPath ? [] : breadCrumbs);
@@ -261,7 +331,29 @@ const useFilesHelper = ({
         }
 
         if (firstLoadRef.current || startIndex === 0) {
-          setTotal(total);
+          if (withCreate) {
+            setTotal(total + 1);
+            itemList.unshift({
+              isCreateNewItem: true,
+              label: t("NewFolder"),
+              id: "create-folder-item",
+              key: "create-folder-item",
+              hotkey: "f",
+              onCreateClick: () => addInputItem(t("NewFolder"), FolderSvgUrl),
+              onBackClick: () => {
+                setSelectedItemId(current.parentId);
+                setBreadCrumbs((val) => {
+                  const newVal = [...val];
+
+                  newVal.pop();
+
+                  return newVal;
+                });
+              },
+            });
+          } else {
+            setTotal(total);
+          }
           setItems(itemList);
         } else {
           setItems((prevState) => {
@@ -313,6 +405,7 @@ const useFilesHelper = ({
       searchValue,
       filterParam,
       selectedItemId,
+      isUserOnly,
       getRootData,
       setSelectedItemSecurity,
       getIcon,
@@ -330,8 +423,12 @@ const useFilesHelper = ({
       setIsBreadCrumbsLoading,
       roomsFolderId,
       setIsSelectedParentFolder,
-      setTotal,
+      withCreate,
       setItems,
+      setTotal,
+      addInputItem,
+      t,
+      setSelectedItemId,
       rootThirdPartyId,
     ],
   );

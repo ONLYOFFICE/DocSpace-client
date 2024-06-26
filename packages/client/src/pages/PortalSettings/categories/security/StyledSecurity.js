@@ -63,7 +63,7 @@ export const MainContainer = styled.div`
     }
 
     @media ${mobile} {
-      padding-right: 8px;
+      padding-inline-end: 8px;
     }
   }
 `;
@@ -99,7 +99,7 @@ export const LearnMoreWrapper = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
-    padding-right: 8px;
+    padding-inline-end: 8px;
     line-height: 20px;
   }
 
@@ -131,7 +131,7 @@ export const StyledBruteForceProtection = styled.div`
 
   .input-container {
     margin-bottom: 8px;
-    margin-right: 8px;
+    margin-inline-end: 8px;
   }
 
   .mobile-description {
@@ -144,7 +144,7 @@ export const StyledBruteForceProtection = styled.div`
 
     .page-subtitle {
       line-height: 20px;
-      padding-right: 8px;
+      padding-inline-end: 8px;
       color: ${(props) =>
         props.theme.client.settings.security.descriptionColor};
       padding-bottom: 7px;

@@ -25,7 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import DarkGeneralPngUrl from "PUBLIC_DIR/images/dark_general.png";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { observer, inject } from "mobx-react";
 import styled, { css } from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
@@ -34,11 +35,10 @@ import { Loader } from "@docspace/shared/components/loader";
 import Section from "@docspace/shared/components/section";
 import SectionWrapper from "SRC_DIR/components/Section";
 import { mobile, tablet } from "@docspace/shared/utils";
-import { I18nextProvider, Trans, withTranslation } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 //import { setDocumentTitle } from "@docspace/client/src/helpers/filesUtils";
-import i18n from "./i18n";
 import { toastr } from "@docspace/shared/components/toast";
 import { checkProtocol } from "../../helpers/files-helpers";
 import Base from "@docspace/shared/themes/base";
@@ -142,7 +142,7 @@ const StyledPrivacyPage = styled.div`
 
 StyledPrivacyPage.defaultProps = { theme: Base };
 
-const PrivacyPageComponent = ({ t, tReady }) => {
+const PrivacyPageComponent = ({ t, tReady, organizationName }) => {
   //   useEffect(() => {
   //     setDocumentTitle(t("Common:About"));
   //   }, [t]);
@@ -187,11 +187,17 @@ const PrivacyPageComponent = ({ t, tReady }) => {
         </Text>
 
         <Text as="div" textAlign="center" fontSize="20px" fontWeight={300}>
-          <Trans t={t} i18nKey="PrivacyClick" ns="PrivacyPage">
-            Click Open <strong>ONLYOFFICE Desktop</strong> in the browser dialog
-            to work with the encrypted documents
-          </Trans>
-          .
+          <Trans
+            t={t}
+            i18nKey="PrivacyClick"
+            ns="PrivacyPage"
+            values={{
+              organizationName,
+            }}
+            components={{
+              1: <strong></strong>,
+            }}
+          />
         </Text>
 
         <Text
@@ -207,7 +213,7 @@ const PrivacyPageComponent = ({ t, tReady }) => {
           size="medium"
           primary
           isDisabled={isDisabled}
-          label={t("PrivacyButton")}
+          label={t("PrivacyButton", { organizationName })}
         />
 
         <label className="privacy-rooms-text-separator" />
@@ -218,7 +224,7 @@ const PrivacyPageComponent = ({ t, tReady }) => {
             fontSize="16px"
             fontWeight={300}
           >
-            {t("PrivacyEditors")}?
+            {t("PrivacyEditors", { organizationName })}?
           </Text>
           <Link
             className="privacy-rooms-link privacy-rooms-install-text"
@@ -236,7 +242,7 @@ const PrivacyPageComponent = ({ t, tReady }) => {
           textAlign="center"
           className="privacy-rooms-text-description"
         >
-          <p>{t("PrivacyDescriptionEditors")}.</p>
+          <p>{t("PrivacyDescriptionEditors", { organizationName })}.</p>
           <p>{t("PrivacyDescriptionConnect")}.</p>
         </Text>
       </div>
@@ -250,14 +256,17 @@ const PrivacyPageWrapper = withTranslation(["PrivacyPage"])(
 
 const PrivacyPage = (props) => {
   return (
-    <I18nextProvider i18n={i18n}>
-      <SectionWrapper>
-        <Section.SectionBody>
-          <PrivacyPageWrapper {...props} />
-        </Section.SectionBody>
-      </SectionWrapper>
-    </I18nextProvider>
+    <SectionWrapper>
+      <Section.SectionBody>
+        <PrivacyPageWrapper {...props} />
+      </Section.SectionBody>
+    </SectionWrapper>
   );
 };
 
-export default PrivacyPage;
+export default inject(({ settingsStore }) => {
+  const { organizationName } = settingsStore;
+  return {
+    organizationName,
+  };
+})(observer(PrivacyPage));

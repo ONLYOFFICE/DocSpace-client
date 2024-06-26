@@ -33,7 +33,7 @@ import { isMobile as isMobileUtils } from "@docspace/shared/utils";
 
 const StyledMain = styled.main`
   height: ${(props) => props.mainHeight && `${props.mainHeight}px`};
-  width: 100vw;
+  width: 100%;
   z-index: 0;
   display: flex;
   flex-direction: column;

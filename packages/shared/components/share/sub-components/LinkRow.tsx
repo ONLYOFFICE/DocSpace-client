@@ -40,6 +40,7 @@ import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
 import { IconButton } from "../../icon-button";
 import { toastr } from "../../toast";
 import { Loader, LoaderTypes } from "../../loader";
+import { Text } from "../../text";
 
 import { StyledLinkRow, StyledSquare } from "../Share.styled";
 import { getShareOptions, getAccessOptions } from "../Share.helpers";
@@ -105,20 +106,26 @@ const LinkRow = ({
             />
           )}
           <div className="link-options">
-            <ComboBox
-              className="internal-combobox"
-              directionY="both"
-              options={shareOptions}
-              selectedOption={shareOption ?? ({} as TOption)}
-              onSelect={(item) => changeShareOption(item, link)}
-              scaled={false}
-              scaledOptions={false}
-              showDisabledItems
-              size={ComboBoxSize.content}
-              fillIcon={false}
-              modernView
-              isDisabled={isExpiredLink || isLoaded}
-            />
+            {!isExpiredLink ? (
+              <ComboBox
+                className="internal-combobox"
+                directionY="both"
+                options={shareOptions}
+                selectedOption={shareOption ?? ({} as TOption)}
+                onSelect={(item) => changeShareOption(item, link)}
+                scaled={false}
+                scaledOptions={false}
+                showDisabledItems
+                size={ComboBoxSize.content}
+                fillIcon={false}
+                modernView
+                isDisabled={isLoaded}
+              />
+            ) : (
+              <Text className="internal-combobox_expiered">
+                {shareOption?.label}
+              </Text>
+            )}
             <ExpiredComboBox
               link={link}
               changeExpirationOption={changeExpirationOption}
@@ -142,7 +149,7 @@ const LinkRow = ({
               scaledOptions={false}
               showDisabledItems
               size={ComboBoxSize.content}
-              fillIcon={true}
+              fillIcon
               modernView
               type="onlyIcon"
               isDisabled={isExpiredLink || isLoaded}

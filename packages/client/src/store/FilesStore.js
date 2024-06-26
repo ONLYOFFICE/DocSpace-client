@@ -36,6 +36,7 @@ import {
   RoomsProviderType,
   ShareAccessRights,
   Events,
+  FilterKeys,
 } from "@docspace/shared/enums";
 
 import { RoomsTypes } from "@docspace/shared/utils";
@@ -50,6 +51,7 @@ import { getDaysRemaining } from "@docspace/shared/utils/common";
 import {
   MEDIA_VIEW_URL,
   PDF_FORM_DIALOG_KEY,
+  ROOMS_PROVIDER_TYPE_NAME,
 } from "@docspace/shared/constants";
 
 import {
@@ -761,6 +763,13 @@ class FilesStore {
     }
   };
 
+  removeActiveItem = (file) => {
+    console.log(this.activeFiles);
+
+    this.activeFiles =
+      this.activeFiles?.filter((item) => item.id !== file.id) ?? [];
+  };
+
   addActiveItems = (files, folders, destFolderId) => {
     if (folders && folders.length) {
       if (!this.activeFolders.length) {
@@ -1334,7 +1343,7 @@ class FilesStore {
 
     const currentUrl = window.location.href.replace(window.location.origin, "");
     const newUrl = combineUrl(
-      window.DocSpaceConfig?.proxy?.url,
+      window.ClientConfig?.proxy?.url,
       config.homepage,
       pathname,
     );
@@ -1431,6 +1440,19 @@ class FilesStore {
       filterData.pageCount = 100;
     }
 
+    const defaultFilter = FilesFilter.getDefault();
+
+    const { filterType, searchInContent } = filterData;
+
+    if (typeof filterData.withSubfolders !== "boolean")
+      filterData.withSubfolders = defaultFilter.withSubfolders;
+
+    if (typeof searchInContent !== "boolean")
+      filterData.searchInContent = defaultFilter.searchInContent;
+
+    if (!Object.keys(FilterType).find((key) => FilterType[key] === filterType))
+      filterData.filterType = defaultFilter.filterType;
+
     setSelectedNode([folderId + ""]);
 
     return api.files
@@ -1451,6 +1473,7 @@ class FilesStore {
 
         if (
           (data.current.roomType === RoomsType.PublicRoom ||
+            data.current.roomType === RoomsType.FormRoom ||
             data.current.roomType === RoomsType.CustomRoom) &&
           !this.publicRoomStore.isPublicRoom
         ) {
@@ -1725,6 +1748,22 @@ class FilesStore {
 
     if (folderId) setSelectedNode([folderId + ""]);
 
+    const defaultFilter = RoomsFilter.getDefault();
+
+    const { provider, quotaFilter, type } = filterData;
+
+    if (!ROOMS_PROVIDER_TYPE_NAME[provider])
+      filterData.provider = defaultFilter.provider;
+
+    if (
+      quotaFilter &&
+      quotaFilter !== FilterKeys.customQuota &&
+      quotaFilter !== FilterKeys.defaultQuota
+    )
+      filterData.quotaFilter = defaultFilter.quotaFilter;
+
+    if (type && !RoomsType[type]) filterData.type = defaultFilter.type;
+
     const request = () =>
       api.rooms
         .getRooms(filterData, this.roomsController.signal)
@@ -1995,10 +2034,12 @@ class FilesStore {
         "select",
         "fill-form",
         "edit",
+        "open-pdf",
         "preview",
         "view",
         "pdf-view",
         "make-form",
+        // "edit-pdf",
         "separator0",
         "submit-to-gallery",
         "separator-SubmitToGallery",
@@ -2040,7 +2081,15 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
       }
 
-      if (!isPdf || !window.DocSpaceConfig?.pdfViewer || isRecycleBinFolder) {
+      if (!isPdf || item.startFilling) {
+        fileOptions = this.removeOptions(fileOptions, ["open-pdf"]);
+      }
+
+      // if (!item.security.EditForm || !item.startFilling) {
+      //   fileOptions = this.removeOptions(fileOptions, ["edit-pdf"]);
+      // }
+
+      if (!isPdf || !window.ClientConfig?.pdfViewer || isRecycleBinFolder) {
         fileOptions = this.removeOptions(fileOptions, ["pdf-view"]);
       }
 
@@ -2285,6 +2334,7 @@ class FilesStore {
 
       const isPublicRoomType =
         item.roomType === RoomsType.PublicRoom ||
+        item.roomType === RoomsType.FormRoom ||
         item.roomType === RoomsType.CustomRoom;
       const isCustomRoomType = item.roomType === RoomsType.CustomRoom;
 
@@ -2550,12 +2600,13 @@ class FilesStore {
     }
   };
 
-  createFile = (folderId, title, templateId, formId) => {
+  createFile = async (folderId, title, templateId, formId) => {
     return api.files
       .createFile(folderId, title, templateId, formId)
       .then((file) => {
         return Promise.resolve(file);
-      });
+      })
+      .then(() => this.fetchFiles(folderId, this.filter, true, true, false));
   };
 
   createFolder(parentFolderId, title) {
@@ -3049,8 +3100,7 @@ class FilesStore {
   }
 
   getItemUrl = (id, isFolder, needConvert, canOpenPlayer) => {
-    const proxyURL =
-      window.DocSpaceConfig?.proxy?.url || window.location.origin;
+    const proxyURL = window.ClientConfig?.proxy?.url || window.location.origin;
 
     const url = getCategoryUrl(this.categoryType, id);
 
@@ -3151,6 +3201,8 @@ class FilesStore {
         usedSpace,
         isCustomQuota,
         providerId,
+        startFilling,
+        draftLocation,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3323,6 +3375,8 @@ class FilesStore {
         usedSpace,
         isCustomQuota,
         providerId,
+        startFilling,
+        draftLocation,
       };
     });
   };
@@ -3418,17 +3472,17 @@ class FilesStore {
       case FilterType.FilesOnly:
         return t("AllFiles");
       case `room-${RoomsType.FillingFormsRoom}`:
-        return t("FillingFormRooms");
+        return t("Common:FillingFormRooms");
       case `room-${RoomsType.CustomRoom}`:
-        return t("CustomRooms");
+        return t("Common:CustomRooms");
       case `room-${RoomsType.EditingRoom}`:
-        return t("CollaborationRooms");
+        return t("Common:CollaborationRooms");
       case `room-${RoomsType.ReviewRoom}`:
         return t("Common:Review");
       case `room-${RoomsType.FormRoom}`:
-        return t("FormRoom");
+        return t("Common:FormRoom");
       case `room-${RoomsType.ReadOnlyRoom}`:
-        return t("ViewOnlyRooms");
+        return t("Common:ViewOnlyRooms");
       case `room-${RoomsType.PublicRoom}`:
         return t("Common:PublicRoomLabel");
 
@@ -3806,7 +3860,8 @@ class FilesStore {
     return folderInfo;
   };
 
-  openDocEditor = (id, preview = false, shareKey = null) => {
+  openDocEditor = (id, preview = false, shareKey = null, editForm = false) => {
+    const { openOnNewPage } = this.filesSettingsStore;
     const foundIndex = this.files.findIndex((x) => x.id === id);
     const file = foundIndex !== -1 ? this.files[foundIndex] : undefined;
     if (
@@ -3828,17 +3883,15 @@ class FilesStore {
     searchParams.append("fileId", id);
     if (share) searchParams.append("share", share);
     if (preview) searchParams.append("action", "view");
+    if (editForm) searchParams.append("action", "edit");
 
     const url = combineUrl(
-      window.DocSpaceConfig?.proxy?.url,
+      window.ClientConfig?.proxy?.url,
       config.homepage,
       `/doceditor?${searchParams.toString()}`,
     );
 
-    window.open(
-      url,
-      window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
-    );
+    window.open(url, openOnNewPage ? "_blank" : "_self");
   };
 
   createThumbnails = async (files = null) => {
@@ -3997,12 +4050,12 @@ class FilesStore {
     });
   };
 
-  //Duplicate of countTilesInRow, used to update the number of tiles in a row after the window is resized.
+  //Used to update the number of tiles in a row after the window is resized.
   getCountTilesInRow = () => {
     const isDesktopView = isDesktop();
+    const isMobileView = isMobile();
     const tileGap = isDesktopView ? 16 : 14;
     const minTileWidth = 216 + tileGap;
-    const body = document.getElementById("section");
 
     const elem = document.getElementsByClassName("section-wrapper-content")[0];
     let containerWidth = 0;
@@ -4017,10 +4070,11 @@ class FilesStore {
         elemPadding.split("px")[3];
     }
 
-    const sectionPadding = body?.offsetWidth - containerWidth - tileGap + 1;
-    const sectionWidth = body ? body.offsetWidth - sectionPadding : 0;
+    containerWidth += tileGap;
+    if (!isMobileView) containerWidth -= 1;
+    if (!isDesktopView) containerWidth += 3; //tablet tile margin -3px (TileContainer.js)
 
-    return Math.floor(sectionWidth / minTileWidth);
+    return Math.floor(containerWidth / minTileWidth);
   };
 
   setInvitationLinks = async (roomId, title, access, linkId) => {
@@ -4208,6 +4262,31 @@ class FilesStore {
     if (pathPartsRoomIndex === -1) return;
     navigationPath[pathPartsRoomIndex].shared = shared;
     this.selectedFolderStore.setNavigationPath(navigationPath);
+  };
+
+  setInRoomFolder = (roomId, inRoom) => {
+    const newFolders = this.folders;
+    const folderIndex = newFolders.findIndex((r) => r.id === roomId);
+
+    const isRoot = this.selectedFolderStore.isRootFolder;
+
+    if (!isRoot) {
+      this.selectedFolderStore.setInRoom(true);
+    } else {
+      if (folderIndex > -1) {
+        newFolders[folderIndex].inRoom = inRoom;
+        this.setFolders(newFolders);
+
+        if (
+          this.bufferSelection &&
+          this.bufferSelection.id === newFolders[folderIndex].id
+        ) {
+          const newBufferSelection = { ...this.bufferSelection };
+          newBufferSelection.inRoom = inRoom;
+          this.setBufferSelection(newBufferSelection);
+        }
+      }
+    }
   };
 
   get isFiltered() {

@@ -1,7 +1,6 @@
 {
   "ErrorEmptyResponse": "Prázdná reakce",
-  "ErrorUnavailableText": "DocSpace není k dispozici",
-  "InvalidLink": "Neplatný odkaz",
+  "ErrorUnavailableText": "{{productName}} není k dispozici",
   "LinkDoesNotExist": "Odkaz, který se snažíte otevřít, neexistuje.",
   "LinkHasExpired": "Platnost odkazu, který jste použili, vypršela."
 }

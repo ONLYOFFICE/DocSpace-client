@@ -26,7 +26,7 @@
 
 import React, { useMemo, useState, useCallback, useEffect } from "react";
 
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { toastr } from "@docspace/shared/components/toast";
@@ -75,6 +75,8 @@ import FilesSelector from "../FilesSelector";
 import LeaveRoomDialog from "../dialogs/LeaveRoomDialog";
 import ChangeRoomOwnerPanel from "../panels/ChangeRoomOwnerPanel";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
+import { PDFFormEditingDialog } from "../dialogs/PDFFormEditingDialog";
+import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
 
 const Panels = (props) => {
   const {
@@ -99,7 +101,7 @@ const Panels = (props) => {
     selectFileFormRoomDialogVisible,
     selectFileFormRoomFilterParam,
     setSelectFileFormRoomDialogVisible,
-    createFromTemplateForm,
+    copyFromTemplateForm,
     hotkeyPanelVisible,
     invitePanelVisible,
     convertPasswordDialogVisible,
@@ -127,9 +129,17 @@ const Panels = (props) => {
     changeRoomOwnerIsVisible,
     deletePluginDialogVisible,
     shareFolderDialogVisible,
+    pdfFormEditVisible,
+    selectFileFormRoomOpenRoot,
   } = props;
 
   const [createPDFFormFile, setCreatePDFFormFile] = useState({
+    visible: false,
+    data: null,
+    onClose: null,
+  });
+
+  const [sharePDFForm, setSharePDFForm] = useState({
     visible: false,
     data: null,
     onClose: null,
@@ -148,7 +158,7 @@ const Panels = (props) => {
   const descriptionTextFileFormRoomDialog = useMemo(() => {
     const text = {
       [FilesSelectorFilterTypes.DOCX]: t("Common:SelectDOCXFormat"),
-      [FilesSelectorFilterTypes.DOCXF]: t("Common:SelectDOCXFFormat"),
+      // [FilesSelectorFilterTypes.DOCXF]: t("Common:SelectDOCXFFormat"),
       [FilesSelectorFilterTypes.PDF]: t("Common:SelectPDFFormat"),
     };
 
@@ -163,7 +173,14 @@ const Panels = (props) => {
       const { file, isFill, isFirst } = event.detail;
 
       if (!isFirst) {
-        return toastr.success(t("PDFFormDialog:PDFFormIsReadyToast"));
+        return toastr.success(
+          <Trans
+            ns="PDFFormDialog"
+            i18nKey="PDFFormIsReadyToast"
+            components={{ 1: <strong /> }}
+            values={{ filename: file.title }}
+          />,
+        );
       }
 
       setCreatePDFFormFile({
@@ -180,19 +197,39 @@ const Panels = (props) => {
     [],
   );
 
+  const handleSharePDFForm = useCallback(
+    /**
+     * @param {CustomEvent} event
+     */
+    (event) => {
+      const { file } = event.detail;
+
+      setSharePDFForm({
+        visible: true,
+        file,
+        onClose: () => {
+          setSharePDFForm({ visible: false, onClose: null, file: null });
+        },
+      });
+    },
+    [],
+  );
+
   useEffect(() => {
     window.addEventListener(
       Events.CREATE_PDF_FORM_FILE,
       handleCreatePDFFormFile,
     );
+    window.addEventListener(Events.Share_PDF_Form, handleSharePDFForm);
 
     return () => {
       window.removeEventListener(
         Events.CREATE_PDF_FORM_FILE,
         handleCreatePDFFormFile,
       );
+      window.removeEventListener(Events.Share_PDF_Form, handleSharePDFForm);
     };
-  }, [handleCreatePDFFormFile]);
+  }, [handleCreatePDFFormFile, handleSharePDFForm]);
 
   return [
     settingsPluginDialogVisible && (
@@ -243,7 +280,7 @@ const Panels = (props) => {
     changeUserTypeDialogVisible && (
       <ChangeUserTypeDialog key="change-user-type-dialog" />
     ),
-    createRoomDialogVisible && <CreateRoomDialog key="create-room-dialog" />,
+    // createRoomDialogVisible && <CreateRoomDialog key="create-room-dialog" />,
     (createRoomConfirmDialogVisible || confirmDialogIsLoading) && (
       <CreateRoomConfirmDialog key="create-room-confirm-dialog" />
     ),
@@ -263,7 +300,8 @@ const Panels = (props) => {
         isPanelVisible
         key="select-file-form-room-dialog"
         onClose={onCloseFileFormRoomDialog}
-        onSelectFile={createFromTemplateForm}
+        openRoot={selectFileFormRoomOpenRoot}
+        onSelectFile={(file) => copyFromTemplateForm(file, t)}
         filterParam={selectFileFormRoomFilterParam}
         descriptionText={descriptionTextFileFormRoomDialog}
       />
@@ -312,6 +350,10 @@ const Panels = (props) => {
         {...createPDFFormFile}
       />
     ),
+    pdfFormEditVisible && <PDFFormEditingDialog key="pdf-form-edit-dialog" />,
+    sharePDFForm.visible && (
+      <SharePDFFormDialog key="share-pdf-form-dialog" {...sharePDFForm} />
+    ),
   ];
 };
 
@@ -325,6 +367,7 @@ export default inject(
     createEditRoomStore,
     pluginStore,
     filesStore,
+    filesActionsStore,
   }) => {
     const {
       ownerPanelVisible,
@@ -355,7 +398,6 @@ export default inject(
       selectFileFormRoomDialogVisible,
       selectFileFormRoomFilterParam,
       setSelectFileFormRoomDialogVisible,
-      createFromTemplateForm,
       invitePanelOptions,
       inviteUsersWarningDialogVisible,
       changeUserTypeDialogVisible,
@@ -370,9 +412,12 @@ export default inject(
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
       shareFolderDialogVisible,
+      pdfFormEditVisible,
+      selectFileFormRoomOpenRoot,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
+    const { copyFromTemplateForm } = filesActionsStore;
 
     const { uploadPanelVisible } = uploadDataStore;
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
@@ -411,7 +456,7 @@ export default inject(
       selectFileFormRoomDialogVisible,
       selectFileFormRoomFilterParam,
       setSelectFileFormRoomDialogVisible,
-      createFromTemplateForm,
+      copyFromTemplateForm,
       hotkeyPanelVisible,
       restoreAllPanelVisible,
       invitePanelVisible: invitePanelOptions.visible,
@@ -435,6 +480,8 @@ export default inject(
       changeRoomOwnerIsVisible,
       deletePluginDialogVisible,
       shareFolderDialogVisible,
+      pdfFormEditVisible,
+      selectFileFormRoomOpenRoot,
     };
   },
 )(observer(Panels));

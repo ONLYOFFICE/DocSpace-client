@@ -26,16 +26,14 @@
 
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
-import AppLoader from "@docspace/shared/components/app-loader";
 
 import { TResponse } from "@/types";
 import useError from "@/hooks/useError";
 
-import useDeviceType from "@/hooks/useDeviceType";
 import useRootInit from "@/hooks/useRootInit";
 import useDeepLink from "@/hooks/useDeepLink";
 import useSelectFileDialog from "@/hooks/useSelectFileDialog";
@@ -44,6 +42,7 @@ import useSocketHelper from "@/hooks/useSocketHelper";
 import useShareDialog from "@/hooks/useShareDialog";
 import useFilesSettings from "@/hooks/useFilesSettings";
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
+import useStartFillingSelectDialog from "@/hooks/useStartFillingSelectDialog";
 
 import DeepLink from "./deep-link";
 import Editor from "./Editor";
@@ -51,6 +50,8 @@ import SelectFileDialog from "./SelectFileDialog";
 import SelectFolderDialog from "./SelectFolderDialog";
 import SharingDialog from "./ShareDialog";
 import { calculateAsideHeight } from "@/utils";
+import StartFillingSelectorDialog from "./StartFillingSelectDialog";
+import ConflictResolveDialog from "./ConflictResolveDialog";
 
 const Root = ({
   settings,
@@ -63,7 +64,10 @@ const Root = ({
   doc,
   fileId,
   hash,
+  timer,
 }: TResponse) => {
+  const editorRef = React.useRef<null | HTMLElement>(null);
+
   const documentserverUrl = config?.editorUrl ?? error?.editorUrl;
   const fileInfo = config?.file;
 
@@ -71,10 +75,15 @@ const Root = ({
 
   const isSkipError =
     error?.status === "not-found" ||
-    (error?.status === "access-denied" && error.editorUrl) ||
+    (error?.status === "access-denied" && !!error.editorUrl) ||
     error?.status === "not-supported";
 
   const { t } = useTranslation(["Editor", "Common"]);
+
+  useEffect(() => {
+    console.log("editor timer: ", timer);
+    console.log("openEdit timer: ", config?.timer);
+  }, [config?.timer, timer]);
 
   useRootInit({
     documentType: config?.documentType,
@@ -85,7 +94,6 @@ const Root = ({
     editorUrl: documentserverUrl,
   });
 
-  const { currentDeviceType } = useDeviceType();
   const { isShowDeepLink, setIsShowDeepLink } = useDeepLink({
     settings,
     fileInfo,
@@ -117,12 +125,23 @@ const Root = ({
     selectFileDialogFileTypeDetection,
     selectFileDialogVisible,
   } = useSelectFileDialog({ instanceId: instanceId ?? "" });
+
+  const {
+    getIsDisabledStartFillingSelectDialog,
+    isVisibleStartFillingSelectDialog,
+    onCloseStartFillingSelectDialog,
+    onSubmitStartFillingSelectDialog,
+    onSDKRequestStartFilling,
+    conflictDataDialog,
+    headerLabelSFSDialog,
+  } = useStartFillingSelectDialog(fileInfo);
+
   const {
     isSharingDialogVisible,
 
     onCloseSharingDialog,
     onSDKRequestSharingSettings,
-  } = useShareDialog();
+  } = useShareDialog(config, onSDKRequestStartFilling);
 
   useUpdateSearchParamId(fileId, hash);
 
@@ -143,21 +162,32 @@ const Root = ({
       isSharingDialogVisible ||
       isVisibleSelectFolderDialog ||
       selectFileDialogVisible
-    )
+    ) {
       calculateAsideHeight();
+
+      const activeElement = document.activeElement as HTMLElement | null;
+
+      if (activeElement && activeElement.tagName === "IFRAME") {
+        editorRef.current = activeElement;
+        activeElement.blur();
+      }
+    } else if (editorRef.current) {
+      editorRef.current.focus();
+    }
+
+    if (isSharingDialogVisible) {
+      setTimeout(calculateAsideHeight, 10);
+    }
   }, [
     isSharingDialogVisible,
     isVisibleSelectFolderDialog,
     selectFileDialogVisible,
   ]);
 
-  return !fileId ? (
-    <AppLoader />
-  ) : isShowDeepLink ? (
+  return isShowDeepLink ? (
     <DeepLink
       fileInfo={fileInfo}
       userEmail={user?.email}
-      currentDeviceType={currentDeviceType}
       deepLinkConfig={settings?.deepLink}
       setIsShowDeepLink={setIsShowDeepLink}
     />
@@ -179,12 +209,14 @@ const Root = ({
           documentserverUrl={documentserverUrl}
           fileInfo={fileInfo}
           errorMessage={error?.message}
+          isSkipError={!!isSkipError}
           onSDKRequestSharingSettings={onSDKRequestSharingSettings}
           onSDKRequestSaveAs={onSDKRequestSaveAs}
           onSDKRequestInsertImage={onSDKRequestInsertImage}
           onSDKRequestReferenceSource={onSDKRequestReferenceSource}
           onSDKRequestSelectDocument={onSDKRequestSelectDocument}
           onSDKRequestSelectSpreadsheet={onSDKRequestSelectSpreadsheet}
+          onSDKRequestStartFilling={onSDKRequestStartFilling}
         />
       )}
 
@@ -219,6 +251,21 @@ const Root = ({
           fileInfo={fileInfo}
           onCancel={onCloseSharingDialog}
         />
+      )}
+      {isVisibleStartFillingSelectDialog && !!socketHelper && fileInfo && (
+        <StartFillingSelectorDialog
+          fileInfo={fileInfo}
+          socketHelper={socketHelper}
+          filesSettings={filesSettings}
+          headerLabel={headerLabelSFSDialog}
+          isVisible={isVisibleStartFillingSelectDialog}
+          onClose={onCloseStartFillingSelectDialog}
+          onSubmit={onSubmitStartFillingSelectDialog}
+          getIsDisabled={getIsDisabledStartFillingSelectDialog}
+        />
+      )}
+      {conflictDataDialog.visible && (
+        <ConflictResolveDialog {...conflictDataDialog} />
       )}
     </div>
   );

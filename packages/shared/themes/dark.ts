@@ -992,34 +992,6 @@ const Dark: TTheme = {
     },
   },
 
-  tabsContainer: {
-    scrollbar: {
-      width: "100%",
-      height: "44px",
-    },
-
-    label: {
-      height: " 32px",
-      borderRadius: "16px",
-      minWidth: "fit-content",
-      marginRight: "8px",
-      width: "fit-content",
-
-      backgroundColor: "#d6d6d6",
-      hoverBackgroundColor: "#3D3D3D",
-      disableBackgroundColor: "#292929",
-      border: "1px solid #242424",
-
-      title: {
-        margin: "7px 15px 7px 15px",
-        overflow: "hidden",
-        color: black,
-        hoverColor: "#a4a4a4",
-        disableColor: "#474747",
-      },
-    },
-  },
-
   fieldContainer: {
     horizontal: {
       margin: "0 0 16px 0",
@@ -1401,8 +1373,13 @@ const Dark: TTheme = {
     backgroundColor: "#858585",
 
     percent: {
-      background: "#FFFFFF",
+      background: "#E17415",
     },
+
+    color: {
+      error: darkErrorStatus,
+      status: grayMaxLight,
+  },
   },
 
   dropDown: {
@@ -2067,6 +2044,7 @@ const Dark: TTheme = {
     borderColor: "#474747",
     thumbnailBorderColor: grayLightMid,
     textColor: white,
+    errorColor: "#E06451",
 
     closeButtonWrapperPadding: "6px",
     closeButtonIcon: black,
@@ -2080,7 +2058,7 @@ const Dark: TTheme = {
     },
 
     members: {
-      iconColor: "#A3A9AE",
+      iconColor: "#858585",
       iconHoverColor: "#ffffff",
       isExpectName: "#A3A9AE",
       subtitleColor: "#a3a9ae",
@@ -2089,6 +2067,7 @@ const Dark: TTheme = {
       disabledRoleSelectorColor: "#a3a9ae",
       roleSelectorArrowColor: "#a3a9ae",
       createLink: "#858585",
+      linkAccessComboboxExpired: "#a3a9ae",
     },
 
     history: {
@@ -2354,7 +2333,7 @@ const Dark: TTheme = {
     border: `1px solid #474747`,
 
     breadCrumbs: {
-      prevItemColor: "#ADADAD",
+      prevItemColor: "#CCCCCC",
       arrowRightColor: "#ADADAD",
     },
 
@@ -2368,10 +2347,18 @@ const Dark: TTheme = {
     item: {
       hoverBackground: "#3d3d3d",
       selectedBackground: "#3d3d3d",
+
+      inputButtonBorder: "#474747",
+      inputButtonBorderHover: grayMaxLight,
+
+      disableTextColor: "#858585",
     },
 
     emptyScreen: {
       descriptionColor: "#ADADAD",
+      buttonColor: "#ADADAD",
+      hoverButtonColor: "#FFFFFF",
+      pressedButtonColor: "#CCCCCC",
     },
   },
 
@@ -2444,23 +2431,25 @@ const Dark: TTheme = {
     roomType: {
       listItem: {
         background: "none",
+        hoverBackground: "#282828",
         borderColor: "#474747",
         descriptionText: "#A3A9AE",
       },
       dropdownButton: {
         background: "none",
+        hoverBackground: "#282828",
         borderColor: "#474747",
         isOpenBorderColor: "#F97A0B",
         descriptionText: "#A3A9AE",
       },
       dropdownItem: {
         background: "#333333",
-        hoverBackground: "#474747",
+        hoverBackground: "#282828",
         descriptionText: "#A3A9AE",
       },
       displayItem: {
-        background: "#474747",
-        borderColor: "#474747",
+        background: "#282828",
+        borderColor: "#282828",
         descriptionText: "#a3a9ae",
       },
     },
@@ -2490,7 +2479,7 @@ const Dark: TTheme = {
       background: "#333333",
       borderColor: "#474747",
       item: {
-        hoverBackground: "#474747",
+        hoverBackground: "#282828",
       },
     },
 
@@ -3163,12 +3152,23 @@ const Dark: TTheme = {
     background: black,
   },
 
-  submenu: {
+  tabs: {
+    gradientColor: black,
     lineColor: "#474747",
-    backgroundColor: "#333",
-    activeTextColor: "#FFFFFF",
-    textColor: "#ADADAD",
-    bottomLineColor: "#E06A1B",
+
+    textColorPrimary: "#657077",
+    activeTextColorPrimary: white,
+    hoverTextColorPrimary: white,
+    pressedTextColorPrimary: "#CCCCCC",
+    backgroundColorPrimary: "#333",
+
+    textColorSecondary: "#FFFFFF",
+    activeTextColorSecondary: "#333333",
+
+    backgroundColorSecondary: "#333",
+    hoverBackgroundColorSecondary: "#474747",
+    pressedBackgroundColorSecondary: "#282828",
+    activeBackgroundColorSecondary: "#FFFFFF",
   },
 
   hotkeys: {
@@ -3203,14 +3203,15 @@ const Dark: TTheme = {
     notifications: {
       textDescriptionColor: "#858585",
     },
-  },
-
   activeSessions: {
     color: "#eeeeee",
     borderColor: "#474747",
     tickIconColor: "#3BA420",
     removeIconColor: "#A3A9AE",
     sortHeaderColor: "#474747",
+      tableCellColor: "#858585",
+      dividerColor: "#474747",
+  },
   },
 
   formWrapper: {
@@ -3319,6 +3320,10 @@ const Dark: TTheme = {
 
   dateTimePicker: {
     colorClockIcon: "#ADADAD",
+  },
+  completedForm: {
+    linkColor: white,
+    descriptionColor: "#ADADAD",
   },
 };
 

@@ -45,6 +45,7 @@ import { DropDown } from "@docspace/shared/components/drop-down";
 import { useNavigate } from "react-router-dom";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledWrapper = styled.div`
   display: contents;
@@ -243,6 +244,7 @@ const PeopleTableRow = (props) => {
     isVisitor,
     isCollaborator,
     isSSO,
+    isLDAP,
   } = item;
 
   const isPending = statusType === "pending" || statusType === "disabled";
@@ -263,8 +265,8 @@ const PeopleTableRow = (props) => {
 
     const adminOption = {
       key: "admin",
-      title: t("Common:DocSpaceAdmin"),
-      label: t("Common:DocSpaceAdmin"),
+      title: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+      label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
       action: "admin",
     };
     const managerOption = {
@@ -342,7 +344,7 @@ const PeopleTableRow = (props) => {
       case "owner":
         return t("Common:Owner");
       case "admin":
-        return t("Common:DocSpaceAdmin");
+        return t("Common:PortalAdmin", { productName: PRODUCT_NAME });
       case "manager":
         return t("Common:RoomAdmin");
       case "collaborator":
@@ -472,7 +474,7 @@ const PeopleTableRow = (props) => {
     <StyledWrapper
       className={`user-item ${
         isChecked || isActive ? "table-row-selected" : ""
-      }`}
+      } ${item.id}`}
       value={value}
     >
       <StyledPeopleRow
@@ -500,7 +502,7 @@ const PeopleTableRow = (props) => {
             />
           </TableCell>
 
-          <Link
+          <Text
             type="page"
             title={displayName}
             fontWeight="600"
@@ -516,8 +518,13 @@ const PeopleTableRow = (props) => {
               : displayName?.trim()
                 ? displayName
                 : email}
-          </Link>
-          <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
+          </Text>
+          <Badges
+            statusType={statusType}
+            isPaid={isPaidUser}
+            isSSO={isSSO}
+            isLDAP={isLDAP}
+          />
         </TableCell>
 
         {typeAccountsColumnIsEnabled ? (
@@ -585,7 +592,7 @@ const PeopleTableRow = (props) => {
               color={sideInfoColor}
               onClick={onEmailClick}
               isTextOverflow
-              enableUserSelect
+              dir="auto"
             >
               {email}
             </Link>

@@ -55,8 +55,8 @@ const History = ({
   const abortControllerRef = useRef(new AbortController());
 
   const [isPending, startTransition] = useTransition();
-
   const [isLoading, setIsLoading] = useState(false);
+  const [isShowLoader, setIsShowLoader] = useState(false);
 
   const fetchHistory = async (item) => {
     if (!item?.id) return;
@@ -123,7 +123,7 @@ const History = ({
 
     if (dateCoincidingWithCalendarDay) {
       const dayNode = historyListNode.getElementsByClassName(
-        dateCoincidingWithCalendarDay
+        dateCoincidingWithCalendarDay,
       );
       if (!dayNode[0]) return;
 
@@ -174,13 +174,19 @@ const History = ({
   }, [calendarDay]);
 
   useEffect(() => {
+    const showLoaderTimer = setTimeout(() => setIsShowLoader(true), 500);
+
     return () => {
+      clearTimeout(showLoaderTimer);
       abortControllerRef.current?.abort();
       isMount.current = false;
     };
   }, []);
 
-  if (!selectionHistory) return <InfoPanelViewLoader view="history" />;
+  if (!selectionHistory) {
+    if (isShowLoader) return <InfoPanelViewLoader view="history" />;
+    return null;
+  }
   if (!selectionHistory?.length) return <NoHistory t={t} />;
 
   return (

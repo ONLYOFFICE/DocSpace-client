@@ -1,7 +1,6 @@
 {
   "ErrorEmptyResponse": "Pusta odpowiedź",
-  "ErrorUnavailableText": "Oprogramowanie DocSpace jest niedostępne",
-  "InvalidLink": "Nieprawidłowy link",
+  "ErrorUnavailableText": "Oprogramowanie {{productName}} jest niedostępne",
   "LinkDoesNotExist": "Link, który próbujesz otworzyć, nie istnieje.",
   "LinkHasExpired": "Dany link wygasł."
 }

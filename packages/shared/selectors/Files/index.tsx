@@ -63,8 +63,9 @@ import useLoadersHelper from "./hooks/useLoadersHelper";
 import useRoomsHelper from "./hooks/useRoomsHelper";
 import useRootHelper from "./hooks/useRootHelper";
 import useSocketHelper from "./hooks/useSocketHelper";
-import { FilesSelectorProps } from "./FilesSelector.types";
 import useFilesSettings from "./hooks/useFilesSettings";
+
+import { FilesSelectorProps } from "./FilesSelector.types";
 
 const FilesSelector = ({
   socketHelper,
@@ -76,6 +77,7 @@ const FilesSelector = ({
   onSetBaseFolderPath,
   isUserOnly,
   isRoomsOnly,
+  openRoot,
   isThirdParty,
   rootThirdPartyId,
   roomsFolderId,
@@ -105,6 +107,11 @@ const FilesSelector = ({
   withSearch: withSearchProp,
   withBreadCrumbs: withBreadCrumbsProp,
   filesSettings,
+  cancelButtonLabel,
+
+  withCreate,
+  createDefineRoomLabel,
+  createDefineRoomType,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -147,6 +154,7 @@ const FilesSelector = ({
     socketSubscribers,
     disabledItems,
     filterParam,
+    withCreate,
     getIcon,
     setItems,
     setBreadCrumbs,
@@ -187,10 +195,19 @@ const FilesSelector = ({
     setIsRoot,
     searchValue,
     isRoomsOnly,
+
     onSetBaseFolderPath,
     isInit,
     setIsInit,
     setIsFirstLoad,
+
+    withCreate,
+    createDefineRoomLabel,
+    createDefineRoomType,
+
+    getRootData,
+    setSelectedItemType,
+    subscribe,
   });
 
   const { getFileList } = useFilesHelper({
@@ -212,6 +229,7 @@ const FilesSelector = ({
     getRootData,
     onSetBaseFolderPath,
     isRoomsOnly,
+    isUserOnly,
     rootThirdPartyId,
     getRoomList,
     getIcon,
@@ -221,7 +239,75 @@ const FilesSelector = ({
     getFilesArchiveError,
     isInit,
     setIsInit,
+    withCreate,
+    setSelectedItemId,
   });
+
+  const onClickBreadCrumb = React.useCallback(
+    (item: TBreadCrumb) => {
+      if (!isFirstLoad) {
+        afterSearch.current = false;
+        setSearchValue("");
+        setIsFirstLoad(true);
+        if (+item.id === 0) {
+          setSelectedItemSecurity(undefined);
+          setSelectedItemType(undefined);
+          getRootData();
+        } else {
+          setItems([]);
+
+          setBreadCrumbs((bc) => {
+            const idx = bc.findIndex(
+              (value) => value.id.toString() === item.id.toString(),
+            );
+
+            const maxLength = bc.length - 1;
+            let foundParentId = false;
+            let currentFolderIndex = -1;
+
+            const newBreadCrumbs = bc.map((i, index) => {
+              if (!foundParentId) {
+                currentFolderIndex = disabledItems.findIndex(
+                  (id) => id === i?.id,
+                );
+              }
+
+              if (index !== maxLength && currentFolderIndex !== -1) {
+                foundParentId = true;
+                if (!isSelectedParentFolder) setIsSelectedParentFolder(true);
+              }
+
+              if (
+                index === maxLength &&
+                !foundParentId &&
+                isSelectedParentFolder
+              )
+                setIsSelectedParentFolder(false);
+
+              return { ...i };
+            });
+
+            newBreadCrumbs.splice(idx + 1, newBreadCrumbs.length - idx - 1);
+            return newBreadCrumbs;
+          });
+
+          setSelectedItemId(item.id);
+          if (item.isRoom) {
+            setSelectedItemType("rooms");
+          } else {
+            setSelectedItemType("files");
+          }
+        }
+      }
+    },
+    [
+      disabledItems,
+      getRootData,
+      isFirstLoad,
+      isSelectedParentFolder,
+      setIsFirstLoad,
+    ],
+  );
 
   const onSelectAction = React.useCallback(
     (
@@ -291,7 +377,7 @@ const FilesSelector = ({
       return;
     }
 
-    if (!currentFolderId) {
+    if (!currentFolderId && !isUserOnly && !openRoot) {
       setSelectedItemType("rooms");
       return;
     }
@@ -313,77 +399,13 @@ const FilesSelector = ({
     currentFolderId,
     isRoomsOnly,
     isThirdParty,
+    isUserOnly,
     parentId,
     roomsFolderId,
     rootFolderType,
+    openRoot,
     setIsFirstLoad,
   ]);
-
-  const onClickBreadCrumb = React.useCallback(
-    (item: TBreadCrumb) => {
-      if (!isFirstLoad) {
-        afterSearch.current = false;
-        setSearchValue("");
-        setIsFirstLoad(true);
-        if (+item.id === 0) {
-          setSelectedItemSecurity(undefined);
-          setSelectedItemType(undefined);
-          getRootData();
-        } else {
-          setItems([]);
-
-          setBreadCrumbs((bc) => {
-            const idx = bc.findIndex(
-              (value) => value.id.toString() === item.id.toString(),
-            );
-
-            const maxLength = bc.length - 1;
-            let foundParentId = false;
-            let currentFolderIndex = -1;
-
-            const newBreadCrumbs = bc.map((i, index) => {
-              if (!foundParentId) {
-                currentFolderIndex = disabledItems.findIndex(
-                  (id) => id === i?.id,
-                );
-              }
-
-              if (index !== maxLength && currentFolderIndex !== -1) {
-                foundParentId = true;
-                if (!isSelectedParentFolder) setIsSelectedParentFolder(true);
-              }
-
-              if (
-                index === maxLength &&
-                !foundParentId &&
-                isSelectedParentFolder
-              )
-                setIsSelectedParentFolder(false);
-
-              return { ...i };
-            });
-
-            newBreadCrumbs.splice(idx + 1, newBreadCrumbs.length - idx - 1);
-            return newBreadCrumbs;
-          });
-
-          setSelectedItemId(item.id);
-          if (item.isRoom) {
-            setSelectedItemType("rooms");
-          } else {
-            setSelectedItemType("files");
-          }
-        }
-      }
-    },
-    [
-      disabledItems,
-      getRootData,
-      isFirstLoad,
-      isSelectedParentFolder,
-      setIsFirstLoad,
-    ],
-  );
 
   const onSearchAction = React.useCallback(
     (value: string, callback?: Function) => {
@@ -400,6 +422,7 @@ const FilesSelector = ({
 
   const onClearSearchAction = React.useCallback(
     (callback?: Function) => {
+      if (!searchValue) return;
       setIsFirstLoad(true);
       setItems([]);
 
@@ -408,7 +431,7 @@ const FilesSelector = ({
       callback?.();
       afterSearch.current = true;
     },
-    [setIsFirstLoad],
+    [searchValue, setIsFirstLoad],
   );
 
   React.useEffect(() => {
@@ -441,10 +464,24 @@ const FilesSelector = ({
   );
 
   React.useEffect(() => {
-    if (selectedItemType === "rooms") getRoomList(0);
+    if (selectedItemType === "rooms") {
+      getRoomList(0);
+      return;
+    }
+    if (openRoot && !selectedItemId) {
+      getRootData();
+      return;
+    }
     if (selectedItemType === "files" && typeof selectedItemId !== "undefined")
       getFileList(0);
-  }, [getFileList, getRoomList, selectedItemType, selectedItemId]);
+  }, [
+    getFileList,
+    getRoomList,
+    selectedItemType,
+    selectedItemId,
+    getRootData,
+    openRoot,
+  ]);
 
   const headerProps: TSelectorHeader = withHeader
     ? { withHeader, headerProps: { headerLabel } }
@@ -490,7 +527,7 @@ const FilesSelector = ({
   const cancelButtonProps: TSelectorCancelButton = withCancelButton
     ? {
         withCancelButton,
-        cancelButtonLabel: t("Common:CancelButton"),
+        cancelButtonLabel: cancelButtonLabel || t("Common:CancelButton"),
         cancelButtonId,
         onCancel,
       }
@@ -509,7 +546,6 @@ const FilesSelector = ({
         withFooterCheckbox,
         footerCheckboxLabel,
         isChecked: false,
-        setIsChecked: () => {},
       }
     : {};
 

@@ -34,6 +34,7 @@ import { withTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
 import { EmployeeType, DeviceType } from "@docspace/shared/enums";
 import { Portal } from "@docspace/shared/components/portal";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledChangeRoomOwner = styled.div`
   display: contents;
@@ -78,7 +79,6 @@ const ChangeRoomOwner = (props) => {
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
-  const [isChecked, setIsChecked] = useState(!showBackButton);
 
   useEffect(() => {
     document.addEventListener("keyup", onKeyUp, false);
@@ -93,7 +93,12 @@ const ChangeRoomOwner = (props) => {
     if (e.keyCode === 13 || e.which === 13) onChangeRoomOwner();
   };
 
-  const onChangeRoomOwner = async (user) => {
+  const onChangeRoomOwner = async (
+    user,
+    selectedAccess,
+    newFooterInputValue,
+    isChecked,
+  ) => {
     if (showBackButton) {
       setRoomParams && setRoomParams(user[0]);
     } else {
@@ -115,7 +120,7 @@ const ChangeRoomOwner = (props) => {
   };
 
   const filter = new Filter();
-  filter.role = [EmployeeType.Admin, EmployeeType.User]; // 1(EmployeeType.User) - RoomAdmin | 3(EmployeeType.Admin) - DocSpaceAdmin
+  filter.role = [EmployeeType.Admin, EmployeeType.User];
 
   const asideComponent = (
     <StyledChangeRoomOwner showBackButton={showBackButton}>
@@ -146,16 +151,19 @@ const ChangeRoomOwner = (props) => {
           isLoading={isLoading}
           withFooterCheckbox={!showBackButton}
           footerCheckboxLabel={t("Files:LeaveTheRoom")}
-          isChecked={isChecked}
-          setIsChecked={setIsChecked}
+          isChecked={!showBackButton}
           withOutCurrentAuthorizedUser
           filterUserId={roomOwnerId}
           currentUserId={userId}
           disableDisabledUsers
           withInfo
-          infoText={t("CreateEditRoomDialog:PeopleSelectorInfo")}
+          infoText={t("CreateEditRoomDialog:PeopleSelectorInfo", {
+            productName: PRODUCT_NAME,
+          })}
           emptyScreenHeader={t("Common:NotFoundUsers")}
-          emptyScreenDescription={t("CreateEditRoomDialog:PeopleSelectorInfo")}
+          emptyScreenDescription={t("CreateEditRoomDialog:PeopleSelectorInfo", {
+            productName: PRODUCT_NAME,
+          })}
         />
       </Aside>
     </StyledChangeRoomOwner>

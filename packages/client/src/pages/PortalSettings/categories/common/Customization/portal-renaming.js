@@ -32,7 +32,7 @@ import { TextInput } from "@docspace/shared/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-import { isMobile } from "@docspace/shared/utils";
+import { isMobileDevice } from "@docspace/shared/utils";
 import checkScrollSettingsBlock from "../utils";
 import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
@@ -42,6 +42,7 @@ import withLoading from "SRC_DIR/HOCs/withLoading";
 import { PortalRenamingDialog } from "SRC_DIR/components/dialogs";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const PortalRenaming = (props) => {
   const {
@@ -103,7 +104,7 @@ const PortalRenaming = (props) => {
   const [isShowModal, setIsShowModal] = useState(false);
 
   useEffect(() => {
-    setDocumentTitle(t("PortalRenaming"));
+    setDocumentTitle(t("PortalRenaming", { productName: PRODUCT_NAME }));
     setPortalName(portalNameInitially);
     const page = isMobileView ? "language-and-time-zone" : "general";
     if (!isLoaded) initSettings(page).then(() => setIsLoaded(true));
@@ -264,7 +265,7 @@ const PortalRenaming = (props) => {
   };
 
   const checkInnerWidth = useCallback(() => {
-    if (!isMobile()) {
+    if (!isMobileDevice()) {
       setIsCustomizationView(true);
 
       const currentUrl = window.location.href.replace(
@@ -279,7 +280,7 @@ const PortalRenaming = (props) => {
     } else {
       setIsCustomizationView(false);
     }
-  }, [isMobile, setIsCustomizationView]);
+  }, [isMobileDevice, setIsCustomizationView]);
 
   const onOpenModal = () => {
     setIsShowModal(true);
@@ -323,7 +324,9 @@ const PortalRenaming = (props) => {
     >
       {isCustomizationView && !isMobileView && (
         <div className="category-item-heading">
-          <div className="category-item-title">{t("PortalRenaming")}</div>
+          <div className="category-item-title">
+            {t("PortalRenaming", { productName: PRODUCT_NAME })}
+          </div>
         </div>
       )}
       <div className="category-item-description">

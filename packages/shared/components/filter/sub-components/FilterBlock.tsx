@@ -72,6 +72,7 @@ const FilterBlock = ({
   isPeopleAccounts,
   isGroupsAccounts,
   isInsideGroup,
+  disableThirdParty,
 }: FilterBlockProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -521,6 +522,7 @@ const FilterBlock = ({
               }}
               isMultiSelect={false}
               withSearch
+              disableThirdParty={disableThirdParty}
             />
           )}
           <StyledControlContainer onClick={hideFilterBlock}>
@@ -553,7 +555,7 @@ const FilterBlock = ({
                 isInsideGroup={isInsideGroup}
               />
             ) : (
-              <Scrollbar className="filter-body__scrollbar">
+              <Scrollbar className="filter-body__scrollbar" autoFocus>
                 {filterData.map((item: TItem, index) => {
                   return (
                     <FilterBlockItem

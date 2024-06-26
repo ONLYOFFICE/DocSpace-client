@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { Base } from "../../themes";
-import { desktop } from "../../utils/device";
+import { tablet, mobile } from "../../utils/device";
 
 const BannerWrapper = styled.div<{
   background?: string;
@@ -58,6 +58,11 @@ const BannerWrapper = styled.div<{
       `}
   }
 
+  @media ${mobile} {
+    min-height: 132px;
+    max-height: 132px;
+  }
+
   .close-icon {
     position: absolute;
     ${(props) =>
@@ -85,10 +90,22 @@ const BannerContent = styled.div`
   flex-direction: column;
   gap: 8px;
 
-  @media ${desktop} {
+  .header {
+    max-width: 167px;
+  }
+
+  @media ${tablet} {
     .header {
-      max-width: 167px;
+      max-width: 180px;
     }
+  }
+
+  @media ${mobile} {
+    .header {
+      max-width: 75%;
+    }
+
+    max-width: 75%;
   }
 `;
 
@@ -108,4 +125,32 @@ const BannerButton = styled.button<{
   color: ${(props) => props.buttonTextColor};
 `;
 
-export { BannerWrapper, BannerContent, BannerButton };
+const BannerIcon = styled.div`
+  width: 100px;
+  height: 80px;
+  z-index: -1;
+  position: absolute;
+  bottom: 1px;
+
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          left: 1px;
+          transform: scaleX(-1);
+        `
+      : css`
+          right: 1px;
+        `}
+
+  @media ${mobile} {
+    width: 140px;
+    height: 112px;
+
+    svg {
+      width: 140px;
+      height: 112px;
+    }
+  }
+`;
+
+export { BannerWrapper, BannerContent, BannerButton, BannerIcon };

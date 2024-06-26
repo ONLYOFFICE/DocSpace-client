@@ -34,6 +34,7 @@ import { Link } from "@docspace/shared/components/link";
 
 import Badges from "../../Badges";
 import { tablet, mobile } from "@docspace/shared/utils/device";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledRowContent = styled(RowContent)`
   @media ${tablet} {
@@ -46,7 +47,7 @@ const StyledRowContent = styled(RowContent)`
 
     .badges {
       flex-direction: row-reverse;
-      margin-top: 9px;
+
       margin-inline-end: 12px;
 
       .paid-badge {
@@ -87,6 +88,7 @@ const UserContent = ({
     isVisitor,
     isCollaborator,
     isSSO,
+    isLDAP,
   } = item;
 
   const nameColor =
@@ -102,7 +104,7 @@ const UserContent = ({
     role === "owner"
       ? t("Common:Owner")
       : role === "admin"
-        ? t("Common:DocSpaceAdmin")
+        ? t("Common:PortalAdmin", { productName: PRODUCT_NAME })
         : isCollaborator
           ? t("Common:PowerUser")
           : isVisitor
@@ -127,6 +129,7 @@ const UserContent = ({
         color={nameColor}
         isTextOverflow={true}
         noHover
+        dir="auto"
       >
         {statusType === "pending"
           ? email
@@ -135,7 +138,12 @@ const UserContent = ({
             : email}
       </Link>
 
-      <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
+      <Badges
+        statusType={statusType}
+        isPaid={isPaidUser}
+        isSSO={isSSO}
+        isLDAP={isLDAP}
+      />
 
       <Link
         containerMinWidth="140px"

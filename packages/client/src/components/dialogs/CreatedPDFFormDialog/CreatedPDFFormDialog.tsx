@@ -25,10 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { useTheme } from "styled-components";
+import { useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
 
 import HeaderIcon from "PUBLIC_DIR/images/ready.pdf.form.modal.svg";
+import HeaderDarkIcon from "PUBLIC_DIR/images/ready.pdf.form.modal.dark.svg";
 
 import {
   ModalDialog,
@@ -41,14 +43,16 @@ import type { CreatedPDFFormDialogProps } from "./CreatedPDFFormDialog.types";
 
 export const CreatedPDFFormDialog = inject<TStore>(
   ({ contextOptionsStore, selectedFolderStore }) => {
-    const { onClickInviteUsers, onClickLinkFillForm } = contextOptionsStore;
+    const { onClickLinkFillForm, onCreateAndCopySharedLink } =
+      contextOptionsStore;
+
     const { id, roomType, security } = selectedFolderStore;
 
     return {
       id,
       roomType,
       security,
-      onClickInviteUsers,
+      onCreateAndCopySharedLink,
       onClickLinkFillForm,
     };
   },
@@ -58,40 +62,32 @@ export const CreatedPDFFormDialog = inject<TStore>(
       data,
       roomType,
       security,
-      id: selectedFolderId,
-      onClickInviteUsers,
+      id,
+      onCreateAndCopySharedLink,
       onClickLinkFillForm,
       onClose,
       visible,
     }: CreatedPDFFormDialogProps) => {
       const { t } = useTranslation(["PDFFormDialog", "Common"]);
+      const theme = useTheme();
 
       const onSubmit = () => {
         if (data.isFill) {
           onClickLinkFillForm?.(data.file);
         } else if (Boolean(roomType) && security?.EditAccess) {
-          onClickInviteUsers?.(selectedFolderId, roomType);
+          onCreateAndCopySharedLink?.({ id }, t);
         }
 
         onClose();
       };
 
-      const description = data.isFill ? (
-        <Trans
-          t={t}
-          i18nKey="PDFFormSuccessfullyCreatedDescription"
-          values={{ fileName: data?.file.title }}
-          components={{ strong: <strong /> }}
-        />
-      ) : (
-        t("PDFFormInviteDescription")
-      );
+      const description = data.isFill
+        ? t("PDFFormSuccessfullyCreatedDescription")
+        : t("PDFFormInviteDescription");
+
       const primaryButtonLabel = data.isFill
         ? t("Common:Fill")
-        : t("Common:Invite");
-      const cancelButtonLabel = data.isFill
-        ? t("Common:CancelButton")
-        : t("Common:Later");
+        : t("Common:CopyPublicLink");
 
       return (
         <ModalDialog
@@ -103,7 +99,7 @@ export const CreatedPDFFormDialog = inject<TStore>(
           <ModalDialog.Header>{t("PDFFormDialogTitle")}</ModalDialog.Header>
           <ModalDialog.Body>
             <Wrapper>
-              <HeaderIcon />
+              {theme.isBase ? <HeaderIcon /> : <HeaderDarkIcon />}
               <span>{description}</span>
             </Wrapper>
           </ModalDialog.Body>
@@ -122,7 +118,7 @@ export const CreatedPDFFormDialog = inject<TStore>(
               tabIndex={0}
               onClick={onClose}
               size={ButtonSize.normal}
-              label={cancelButtonLabel}
+              label={t("Common:Later")}
               // isDisabled={isLoading}
             />
           </ModalDialog.Footer>

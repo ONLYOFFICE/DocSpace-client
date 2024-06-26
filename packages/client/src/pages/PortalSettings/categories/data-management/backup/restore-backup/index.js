@@ -47,6 +47,7 @@ import RoomsModule from "./sub-components/RoomsModule";
 import ButtonContainer from "./sub-components/ButtonComponent";
 import { StyledRestoreBackup } from "../StyledBackup";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const LOCAL_FILE = "localFile",
   BACKUP_ROOM = "backupRoom",
@@ -215,14 +216,16 @@ const RestoreBackup = (props) => {
         className="restore-backup_warning-description settings_unavailable"
         noSelect
       >
-        {t("RestoreBackupWarningText")}
+        {t("RestoreBackupWarningText", { productName: PRODUCT_NAME })}
       </Text>
       {!standalone && (
         <Text
           className="restore-backup_warning-link settings_unavailable"
           noSelect
         >
-          {t("RestoreBackupResetInfoWarningText")}
+          {t("RestoreBackupResetInfoWarningText", {
+            productName: PRODUCT_NAME,
+          })}
         </Text>
       )}
     </>

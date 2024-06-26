@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useState } from "react";
-import { Submenu } from "@docspace/shared/components/submenu";
+import { Tabs } from "@docspace/shared/components/tabs";
 import { useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -33,14 +33,15 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 
 import SSO from "./SingleSignOn";
+import LDAP from "./LDAP";
 import ThirdParty from "./ThirdPartyServicesSettings";
 
 import SMTPSettings from "./SMTPSettings";
 import DocumentService from "./DocumentService";
 import PluginPage from "./Plugins";
-import { DeviceType } from "@docspace/shared/enums";
 import { Badge } from "@docspace/shared/components/badge";
 import { Box } from "@docspace/shared/components/box";
+import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 const IntegrationWrapper = (props) => {
   const {
@@ -57,19 +58,24 @@ const IntegrationWrapper = (props) => {
   useEffect(() => {
     return () => {
       isSSOAvailable &&
-        !window.location.pathname.includes("single-sign-on") &&
+        !window.location.pathname.includes("sso") &&
         toDefault();
     };
   }, []);
 
   const data = [
     {
+      id: "ldap",
+      name: t("LDAP"),
+      content: <LDAP />,
+    },
+    {
       id: "third-party-services",
       name: t("Translations:ThirdPartyTitle"),
       content: <ThirdParty />,
     },
     {
-      id: "single-sign-on",
+      id: "sso",
       name: t("SingleSignOn"),
       content: <SSO />,
     },
@@ -113,18 +119,18 @@ const IntegrationWrapper = (props) => {
     });
   }
 
-  const getCurrentTab = () => {
+  const getCurrentTabId = () => {
     const path = location.pathname;
-    const currentTab = data.findIndex((item) => path.includes(item.id));
-    return currentTab !== -1 ? currentTab : 0;
+    const currentTab = data.find((item) => path.includes(item.id));
+    return currentTab !== -1 && data.length ? currentTab.id : data[0].id;
   };
 
-  const currentTab = getCurrentTab();
+  const currentTabId = getCurrentTabId();
 
   const onSelect = (e) => {
     navigate(
       combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         config.homepage,
         `/portal-settings/integration/${e.id}`,
       ),
@@ -132,17 +138,11 @@ const IntegrationWrapper = (props) => {
   };
 
   return (
-    <Submenu
-      data={data}
-      startSelect={currentTab}
+    <Tabs
+      items={data}
+      selectedItemId={currentTabId}
       onSelect={onSelect}
-      topProps={
-        currentDeviceType === DeviceType.desktop
-          ? 0
-          : currentDeviceType === DeviceType.mobile
-            ? "53px"
-            : "61px"
-      }
+      topProps={SECTION_HEADER_HEIGHT[currentDeviceType]}
     />
   );
 };

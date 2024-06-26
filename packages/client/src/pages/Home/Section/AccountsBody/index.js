@@ -35,6 +35,7 @@ import InsideGroup from "./InsideGroup";
 import { withTranslation } from "react-i18next";
 import { Consumer } from "@docspace/shared/utils";
 import withLoader from "SRC_DIR/HOCs/withLoader";
+import { useAccountsHotkeys } from "../../Hooks";
 
 const SectionBodyContent = (props) => {
   const {
@@ -47,10 +48,29 @@ const SectionBodyContent = (props) => {
     setGroupsBufferSelection,
     setChangeOwnerDialogVisible,
     selectUser,
+    enabledHotkeys,
+    accountsIsIsLoading,
+    selectBottom,
+    selectUpper,
+    activateHotkeys,
+    setHotkeyCaretStart,
+    setHotkeyCaret,
+    selectAll,
+    deselectAll,
   } = props;
 
   const location = useLocation();
   const { groupId } = useParams();
+
+  useAccountsHotkeys({
+    enabledHotkeys,
+    accountsIsIsLoading,
+    selectBottom,
+    selectUpper,
+    activateHotkeys,
+    selectAll,
+    deselectAll,
+  });
 
   useEffect(() => {
     window.addEventListener("mousedown", onMouseDown);
@@ -85,6 +105,8 @@ const SectionBodyContent = (props) => {
       setPeopleBufferSelection(null);
       setGroupsBufferSelection(null);
       window?.getSelection()?.removeAllRanges();
+      setHotkeyCaretStart(null);
+      setHotkeyCaret(null);
     }
   };
 
@@ -110,7 +132,12 @@ const SectionBodyContent = (props) => {
 };
 
 export default inject(({ peopleStore }) => {
-  const { viewAs: accountsViewAs, filterStore } = peopleStore;
+  const {
+    viewAs: accountsViewAs,
+    filterStore,
+    enabledHotkeys,
+    setEnabledHotkeys,
+  } = peopleStore;
   const { isFiltered } = filterStore;
 
   const {
@@ -125,6 +152,18 @@ export default inject(({ peopleStore }) => {
   } = peopleStore.groupsStore;
 
   const { setChangeOwnerDialogVisible } = peopleStore.dialogStore;
+  const { accountsIsIsLoading } = peopleStore.usersStore;
+
+  const {
+    selectBottom,
+    selectUpper,
+    activateHotkeys,
+    setHotkeyCaretStart,
+    setHotkeyCaret,
+
+    selectAll,
+    deselectAll,
+  } = peopleStore.accountsHotkeysStore;
 
   return {
     accountsViewAs,
@@ -135,6 +174,17 @@ export default inject(({ peopleStore }) => {
     setGroupsBufferSelection,
     setChangeOwnerDialogVisible,
     selectUser,
+    enabledHotkeys,
+    accountsIsIsLoading,
+
+    selectBottom,
+    selectUpper,
+    activateHotkeys,
+    setEnabledHotkeys,
+    setHotkeyCaretStart,
+    setHotkeyCaret,
+    selectAll,
+    deselectAll,
   };
 })(
   withTranslation(["People", "Common", "PeopleTranslations"])(

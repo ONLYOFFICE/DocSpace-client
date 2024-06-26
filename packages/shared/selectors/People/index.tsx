@@ -52,6 +52,7 @@ import { AvatarRole } from "../../components/avatar";
 import { Text } from "../../components/text";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
+import { PRODUCT_NAME } from "../../constants";
 
 const toListItem = (
   item: TUser,
@@ -86,7 +87,7 @@ const toListItem = (
       ? t("Common:Disabled")
       : "";
 
-  const i = {
+  const i: TSelectorItem = {
     id: userId,
     email,
     avatar: userAvatar,
@@ -100,7 +101,7 @@ const toListItem = (
     hasAvatar,
     isDisabled: isInvited || isDisabled,
     disabledText,
-  } as TSelectorItem;
+  };
 
   return i;
 };
@@ -129,7 +130,6 @@ const PeopleSelector = ({
   withFooterCheckbox,
   footerCheckboxLabel,
   isChecked,
-  setIsChecked,
 
   withHeader,
   headerProps,
@@ -154,7 +154,7 @@ const PeopleSelector = ({
   const [hasNextPage, setHasNextPage] = useState(true);
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);
   const [selectedItem, setSelectedItem] = useState<TSelectorItem | null>(null);
-  const isFirstLoad = useRef(true);
+  const isFirstLoadRef = useRef(true);
   const afterSearch = useRef(false);
   const totalRef = useRef(0);
 
@@ -235,7 +235,7 @@ const PeopleSelector = ({
         ? response.total - totalDifferent - 1
         : response.total - totalDifferent;
 
-      if (isFirstLoad) {
+      if (isFirstLoadRef.current) {
         const newItems = withOutCurrentAuthorizedUser
           ? removeCurrentUserFromList(data)
           : moveCurrentUserToTopOfList(data);
@@ -260,7 +260,7 @@ const PeopleSelector = ({
       totalRef.current = newTotal;
 
       setIsNextPageLoading(false);
-      isFirstLoad.current = false;
+      isFirstLoadRef.current = false;
     },
     [
       disableDisabledUsers,
@@ -276,7 +276,7 @@ const PeopleSelector = ({
   );
 
   const onSearch = useCallback((value: string, callback?: Function) => {
-    isFirstLoad.current = true;
+    isFirstLoadRef.current = true;
     afterSearch.current = true;
     setSearchValue(() => {
       return value;
@@ -285,7 +285,7 @@ const PeopleSelector = ({
   }, []);
 
   const onClearSearch = useCallback((callback?: Function) => {
-    isFirstLoad.current = true;
+    isFirstLoadRef.current = true;
     afterSearch.current = true;
     setSearchValue(() => {
       return "";
@@ -323,7 +323,7 @@ const PeopleSelector = ({
     onClearSearch,
     searchLoader: <SearchLoader />,
     isSearchLoading:
-      isFirstLoad.current && !searchValue && !afterSearch.current,
+      isFirstLoadRef.current && !searchValue && !afterSearch.current,
   };
 
   const infoProps: TSelectorInfo = withInfo
@@ -338,7 +338,6 @@ const PeopleSelector = ({
         withFooterCheckbox,
         footerCheckboxLabel,
         isChecked,
-        setIsChecked,
       }
     : {};
 
@@ -398,7 +397,8 @@ const PeopleSelector = ({
       emptyScreenImage={emptyScreenImage}
       emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyHeader")}
       emptyScreenDescription={
-        emptyScreenDescription ?? t("Common:EmptyDescription")
+        emptyScreenDescription ??
+        t("Common:EmptyDescription", { productName: PRODUCT_NAME })
       }
       searchEmptyScreenImage={emptyScreenImage}
       searchEmptyScreenHeader={t("Common:NotFoundUsers")}
@@ -408,9 +408,9 @@ const PeopleSelector = ({
       loadNextPage={loadNextPage}
       isMultiSelect={isMultiSelect ?? false}
       totalItems={total}
-      isLoading={isFirstLoad.current}
+      isLoading={isFirstLoadRef.current}
       searchLoader={<SearchLoader />}
-      rowLoader={<RowLoader isUser isContainer={isFirstLoad.current} />}
+      rowLoader={<RowLoader isUser isContainer={isFirstLoadRef.current} />}
       onSelect={onSelect}
       {...infoProps}
     />

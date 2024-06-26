@@ -41,6 +41,7 @@ import isEqual from "lodash/isEqual";
 
 import AdmMsgLoader from "../sub-components/loaders/admmsg-loader";
 import { DeviceType } from "@docspace/shared/enums";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -72,6 +73,15 @@ const AdminMessage = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const getSettingsFromDefault = () => {
+    const defaultSettings = getFromSessionStorage(
+      "defaultAdminMessageSettings",
+    );
+    if (defaultSettings) {
+      setType(defaultSettings);
+    }
+  };
+
   const getSettings = () => {
     const currentSettings = getFromSessionStorage(
       "currentAdminMessageSettings",
@@ -100,7 +110,18 @@ const AdminMessage = (props) => {
 
   useEffect(() => {
     if (!isInit) return;
-    getSettings();
+    const currentSettings = getFromSessionStorage(
+      "currentAdminMessageSettings",
+    );
+    const defaultSettings = getFromSessionStorage(
+      "defaultAdminMessageSettings",
+    );
+
+    if (isEqual(currentSettings, defaultSettings)) {
+      getSettings();
+    } else {
+      getSettingsFromDefault();
+    }
   }, [isLoading, isInit]);
 
   useEffect(() => {
@@ -134,6 +155,7 @@ const AdminMessage = (props) => {
     const turnOn = type === "enable" ? true : false;
     setMessageSettings(turnOn);
     toastr.success(t("SuccessfullySaveSettingsMessage"));
+    saveToSessionStorage("currentAdminMessageSettings", type);
     saveToSessionStorage("defaultAdminMessageSettings", type);
     setShowReminder(false);
   };
@@ -142,7 +164,7 @@ const AdminMessage = (props) => {
     const defaultSettings = getFromSessionStorage(
       "defaultAdminMessageSettings",
     );
-    setType(defaultSettings);
+    setType(defaultSettings || "disabled");
     setShowReminder(false);
   };
 
@@ -153,7 +175,9 @@ const AdminMessage = (props) => {
   return (
     <MainContainer>
       <LearnMoreWrapper>
-        <Text>{t("AdminsMessageSettingDescription")}</Text>
+        <Text>
+          {t("AdminsMessageSettingDescription", { productName: PRODUCT_NAME })}
+        </Text>
         <Text fontSize="13px" fontWeight="400" className="learn-subtitle">
           <Trans t={t} i18nKey="SaveToApply" />
         </Text>

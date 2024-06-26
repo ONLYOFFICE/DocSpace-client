@@ -31,7 +31,7 @@ interface PlayerDesktopContextMenuProps {
     bottom?: string,
   ) => JSX.Element;
   canDownload: boolean;
-  isPreviewFile: boolean;
+  isPreviewFile?: boolean;
   hideContextMenu: boolean;
   onDownloadClick?: VoidFunction;
 }

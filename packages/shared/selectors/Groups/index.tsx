@@ -121,7 +121,6 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
         label: group.name,
         name: group.name,
         isGroup: true,
-        avatar: "",
       }));
 
       if (isFirstLoad.current) {

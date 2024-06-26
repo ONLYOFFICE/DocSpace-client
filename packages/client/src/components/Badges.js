@@ -100,6 +100,7 @@ const Badges = ({
   onFilesClick,
   onShowVersionHistory,
   onBadgeClick,
+  openLocationFile,
   setConvertDialogVisible,
   viewAs,
   onUnpinClick,
@@ -126,6 +127,7 @@ const Badges = ({
     rootFolderId,
     new: newCount,
     hasDraft,
+    // startFilling,
   } = item;
 
   const showEditBadge = !locked || item.access === 0;
@@ -156,7 +158,7 @@ const Badges = ({
   const iconForm =
     sizeBadge === "medium" ? FormFillRectSvgUrl : AccessEditFormReactSvgUrl;
 
-  const iconEdit = !isPdf ? FileActionsConvertEditDocReactSvgUrl : iconForm;
+  const iconEdit = FileActionsConvertEditDocReactSvgUrl;
 
   const iconRefresh = desktopView ? Refresh12ReactSvgUrl : RefreshReactSvgUrl;
 
@@ -201,6 +203,7 @@ const Badges = ({
 
   const isPublicRoomType =
     item.roomType === RoomsType.PublicRoom ||
+    item.roomType === RoomsType.FormRoom ||
     item.roomType === RoomsType.CustomRoom;
 
   const haveLinksRight =
@@ -216,6 +219,19 @@ const Badges = ({
 
   return fileExst ? (
     <div className="badges additional-badges file__badges">
+      {/* {startFilling && (
+        <ColorTheme
+          isEditing
+          size={sizeBadge}
+          iconName={iconForm}
+          onClick={onFilesClick}
+          themeId={ThemeId.IconButton}
+          title={t("Common:ReadyToFillOut")}
+          hoverColor={theme.filesBadges.hoverIconColor}
+          className="badge icons-group is-editing tablet-badge tablet-edit"
+        />
+      )} */}
+
       {hasDraft && (
         <BadgeWrapper isTile={isTile}>
           <Badge
@@ -229,9 +245,11 @@ const Badges = ({
             style={{
               width: "max-content",
             }}
+            onClick={openLocationFile}
           />
         </BadgeWrapper>
       )}
+
       {isEditing && !isVisitor && !(isRecentTab && !canEditing) && (
         <ColorTheme
           themeId={ThemeId.IconButton}
@@ -241,7 +259,7 @@ const Badges = ({
           size={sizeBadge}
           onClick={onFilesClick}
           hoverColor={theme.filesBadges.hoverIconColor}
-          title={isPdf ? t("Common:FillFormButton") : t("Common:EditButton")}
+          title={t("Common:EditButton")}
         />
       )}
       {item.viewAccessibility?.MustConvert &&

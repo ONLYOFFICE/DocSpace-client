@@ -37,12 +37,13 @@ import {
   getSharedUsers,
   restoreDocumentsVersion,
   sendEditorNotify,
+  startFilling,
 } from "@docspace/shared/api/files";
 import {
   TEditHistory,
   TGetReferenceData,
+  TSharedUsers,
 } from "@docspace/shared/api/files/types";
-import { TUser } from "@docspace/shared/api/people/types";
 import { EDITOR_ID } from "@docspace/shared/constants";
 import {
   assign,
@@ -78,12 +79,14 @@ const useEditorEvents = ({
   config,
   doc,
   errorMessage,
+  isSkipError,
+  openOnNewPage,
   t,
 }: UseEventsProps) => {
   const [events, setEvents] = React.useState<IConfigEvents>({});
   const [documentReady, setDocumentReady] = React.useState(false);
   const [createUrl, setCreateUrl] = React.useState<Nullable<string>>(null);
-  const [usersInRoom, setUsersInRoom] = React.useState<TUser[]>([]);
+  const [usersInRoom, setUsersInRoom] = React.useState<TSharedUsers[]>([]);
   const [docTitle, setDocTitle] = React.useState("");
   const [docSaved, setDocSaved] = React.useState(false);
 
@@ -138,7 +141,10 @@ const useEditorEvents = ({
   const onSDKAppReady = React.useCallback(() => {
     docEditor = window.DocEditor.instances[EDITOR_ID];
 
-    if (errorMessage) return docEditor?.showMessage?.(errorMessage);
+    frameCallCommand("setIsLoaded");
+
+    if (errorMessage || isSkipError)
+      return docEditor?.showMessage?.(errorMessage || t("Common:InvalidLink"));
 
     console.log("ONLYOFFICE Document Editor is ready", docEditor);
     const url = window.location.href;
@@ -157,13 +163,11 @@ const useEditorEvents = ({
         if (config?.Error) docEditor?.showMessage?.(config.Error);
       }
     }
-  }, [config?.Error, errorMessage]);
+  }, [config?.Error, errorMessage, isSkipError, t]);
 
   const onDocumentReady = React.useCallback(() => {
     // console.log("onDocumentReady", { docEditor });
     setDocumentReady(true);
-
-    frameCallCommand("setIsLoaded");
 
     if (config?.errorMessage) docEditor?.showMessage?.(config.errorMessage);
 
@@ -267,18 +271,15 @@ const useEditorEvents = ({
     createFile(fileInfo.folderId, defaultFileName ?? "")
       ?.then((newFile) => {
         const newUrl = combineUrl(
-          window.DocSpaceConfig?.proxy?.url,
+          window.ClientConfig?.proxy?.url,
           `/doceditor?fileId=${encodeURIComponent(newFile.id)}`,
         );
-        window.open(
-          newUrl,
-          window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
-        );
+        window.open(newUrl, openOnNewPage ? "_blank" : "_self");
       })
       .catch((e) => {
         toastr.error(e);
       });
-  }, [fileInfo?.folderId, getDefaultFileName]);
+  }, [fileInfo?.folderId, getDefaultFileName, openOnNewPage]);
 
   const getDocumentHistory = React.useCallback(
     (fileHistory: TEditHistory[], historyLength: number) => {
@@ -450,14 +451,7 @@ const useEditorEvents = ({
           : getSharedUsers(fileInfo.id));
 
         if (c !== "protect") {
-          const usersArray = users.map(
-            (item) =>
-              ({
-                email: item.email,
-                name: item.name,
-              }) as unknown as TUser,
-          );
-          setUsersInRoom(usersArray);
+          setUsersInRoom(users);
         }
 
         docEditor?.setUsers?.({
@@ -594,17 +588,25 @@ const useEditorEvents = ({
     docEditor?.setActionLink?.(linkFormation);
   }, []);
 
+  // const onRequestStartFilling = React.useCallback(
+  //   (event: object) => {
+  //     console.log("onRequestStartFilling", { event });
+
+  //     if (!fileInfo?.id) return;
+
+  //     docEditor?.startFilling?.();
+  //     startFilling(fileInfo?.id);
+  //   },
+  //   [fileInfo?.id],
+  // );
+
   const generateLink = (actionData: {}) => {
     return encodeURIComponent(JSON.stringify(actionData));
   };
 
   React.useEffect(() => {
-    // console.log("render docspace config", { ...window.DocSpaceConfig });
-    if (
-      IS_DESKTOP_EDITOR ||
-      (typeof window !== "undefined" &&
-        window.DocSpaceConfig?.editor?.openOnNewPage === false)
-    )
+    // console.log("render docspace config", { ...window.ClientConfig });
+    if (IS_DESKTOP_EDITOR || (typeof window !== "undefined" && !openOnNewPage))
       return;
 
     //FireFox security issue fix (onRequestCreateNew will be blocked)
@@ -613,7 +615,7 @@ const useEditorEvents = ({
     const url = new URL(
       combineUrl(
         window.location.origin,
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         "/filehandler.ashx",
       ),
     );
@@ -621,7 +623,7 @@ const useEditorEvents = ({
     url.searchParams.append("doctype", documentType);
     url.searchParams.append("title", defaultFileName ?? "");
     setCreateUrl(url.toString());
-  }, [config?.documentType, getDefaultFileName]);
+  }, [config?.documentType, getDefaultFileName, openOnNewPage]);
 
   return {
     events,
@@ -643,7 +645,7 @@ const useEditorEvents = ({
     onDocumentStateChange,
     onMetaChange,
     onMakeActionLink,
-
+    // onRequestStartFilling,
     setDocTitle,
   };
 };

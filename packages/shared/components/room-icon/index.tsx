@@ -31,6 +31,7 @@ import { Base } from "../../themes";
 import { Text } from "../text";
 
 import { IconButton } from "../icon-button";
+import { classNames } from "../../utils";
 
 const StyledIcon = styled.div<{
   size: string;
@@ -79,7 +80,8 @@ const StyledIcon = styled.div<{
 
   .room-icon_badge {
     position: absolute;
-    margin: 24px 0 0 24px;
+    margin-block: 24px 0;
+    margin-inline: 24px 0;
 
     .room-icon-button {
       width: 12px;
@@ -198,7 +200,11 @@ const RoomIcon = ({
           <Text className="room-title">{roomTitle}</Text>
         </>
       ) : (
-        <img className={imgClassName} src={imgSrc} alt="room icon" />
+        <img
+          className={classNames([imgClassName, "not-selectable"])}
+          src={imgSrc}
+          alt="room icon"
+        />
       )}
 
       {badgeUrl && (

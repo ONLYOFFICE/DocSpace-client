@@ -55,7 +55,7 @@ const GroupMember = ({ t, user, infoPanelSelection }: GroupMemberProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const userRole = user.isOwner
-    ? getUserRoleOptions(t).docSpaceAdmin
+    ? getUserRoleOptions(t).portalAdmin
     : getUserRoleOptionsByUserAccess(t, user.userAccess || user.groupAccess);
 
   const fullRoomRoleOptions = getUserRoleOptionsByRoomType(

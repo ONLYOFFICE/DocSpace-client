@@ -47,6 +47,7 @@ import {
 
 import { ArticleItem } from "@docspace/shared/components/article-item";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -157,11 +158,12 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["8-0"]);
       }
 
-      if (
-        location.pathname.includes("payments") ||
-        location.pathname.includes("bonus")
-      ) {
+      if (location.pathname.includes("payments")) {
         setSelectedKeys(["9-0"]);
+      }
+
+      if (location.pathname.includes("bonus")) {
+        setSelectedKeys(["10-0"]);
       }
     }
   }, [
@@ -209,7 +211,7 @@ const ArticleBodyContent = (props) => {
       case "ManagementCategorySecurity":
         return t("ManagementCategorySecurity");
       case "PortalAccess":
-        return t("PortalAccess");
+        return t("PortalAccess", { productName: PRODUCT_NAME });
       case "TwoFactorAuth":
         return t("TwoFactorAuth");
       case "ManagementCategoryIntegration":
@@ -224,24 +226,28 @@ const ArticleBodyContent = (props) => {
         return t("Common:PaymentsTitle");
       case "ManagementCategoryDataManagement":
         return t("ManagementCategoryDataManagement");
+      case "LdapSettings":
+        return t("Ldap:LdapSettings");
+      case "LdapSyncTitle":
+        return t("Ldap:LdapSyncTitle");
       case "RestoreBackup":
         return t("RestoreBackup");
       case "PortalDeletion":
-        return t("PortalDeletion");
+        return t("PortalDeletion", { productName: PRODUCT_NAME });
       case "Common:DeveloperTools":
         return t("Common:DeveloperTools");
       case "Common:Bonus":
         return t("Common:Bonus");
-      case "Common:FreeProFeatures":
-        return "Common:FreeProFeatures";
+      case "Common:FreeAccessToLicensedVersion":
+        return "Common:FreeAccessToLicensedVersion";
       case "DataImport":
         return t("DataImport");
       case "ImportFromGoogle":
         return t("ImportFromGoogle");
       case "ImportFromNextcloud":
         return t("ImportFromNextcloud");
-      case "ImportFromOnlyoffice":
-        return t("ImportFromOnlyoffice");
+      case "ImportFromPortal":
+        return t("ImportFromPortal");
       case "StorageManagement":
         return t("StorageManagement");
       default:
@@ -294,15 +300,21 @@ const ArticleBodyContent = (props) => {
       const icon = getCatalogIconUrlByType(item.type, {
         isSettingsCatalog: true,
       });
+
+      const patternSearching = selectedKeys[0].split("-");
+      const selectedKey = patternSearching[0];
+      const title = mapKeys(item.tKey);
+
       items.push(
         <ArticleItem
           key={item.key}
           id={item.key}
+          title={title}
           icon={icon}
           showText={showText}
-          text={mapKeys(item.tKey)}
+          text={title}
           value={item.link}
-          isActive={item.key === selectedKeys[0][0]}
+          isActive={item.key === selectedKey}
           onClick={(e) => onSelect(item.key, e)}
           folderId={item.id}
           style={{
@@ -371,6 +383,8 @@ export default inject(
   },
 )(
   withLoading(
-    withTranslation(["Settings", "Common"])(observer(ArticleBodyContent)),
+    withTranslation(["Settings", "Common", "Ldap"])(
+      observer(ArticleBodyContent),
+    ),
   ),
 );

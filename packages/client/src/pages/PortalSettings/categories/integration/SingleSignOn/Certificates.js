@@ -65,7 +65,7 @@ const Certificates = (props) => {
     spShowAdditionalParameters,
     idpVerifyAlgorithm,
     spEncryptAlgorithm,
-    spDecryptAlgorithm,
+    spSigningAlgorithm,
     isLoadingXml,
     isDisabledSpSigning,
     isDisabledSpEncrypt,
@@ -186,7 +186,7 @@ const Certificates = (props) => {
                 name="spSigningAlgorithm"
                 options={verifyAlgorithmsOptions}
                 tabIndex={14}
-                value={spEncryptAlgorithm}
+                value={spSigningAlgorithm}
               />
 
               <SsoComboBox
@@ -195,7 +195,7 @@ const Certificates = (props) => {
                 name={"spEncryptAlgorithm"}
                 options={decryptAlgorithmsOptions}
                 tabIndex={15}
-                value={spDecryptAlgorithm}
+                value={spEncryptAlgorithm}
               />
             </>
           )}
@@ -220,7 +220,7 @@ export default inject(({ ssoStore }) => {
     spShowAdditionalParameters,
     idpVerifyAlgorithm,
     spEncryptAlgorithm,
-    spDecryptAlgorithm,
+    spSigningAlgorithm,
     isLoadingXml,
     isDisabledSpSigning,
     isDisabledSpEncrypt,
@@ -237,7 +237,7 @@ export default inject(({ ssoStore }) => {
     spShowAdditionalParameters,
     idpVerifyAlgorithm,
     spEncryptAlgorithm,
-    spDecryptAlgorithm,
+    spSigningAlgorithm,
     isLoadingXml,
     isDisabledSpSigning,
     isDisabledSpEncrypt,

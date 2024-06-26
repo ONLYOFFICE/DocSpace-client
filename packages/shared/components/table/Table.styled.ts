@@ -346,7 +346,7 @@ const StyledTableHeaderCell = styled.div<{
     display: ${(props) =>
       props.isActive && props.showIcon ? "block" : "none"};
     ${(props) =>
-      props.sorted &&
+      !props.sorted &&
       css`
         transform: scale(1, -1);
         padding: ${getCorrectFourValuesStyle(
@@ -478,10 +478,10 @@ const StyledTableCell = styled.div<{ hasAccess?: boolean; checked?: boolean }>`
   display: flex;
   align-items: center;
 
-  ${({ theme }) =>
+  /* ${({ theme }) =>
     theme.interfaceDirection === "rtl"
       ? `padding-left: 30px;`
-      : `padding-right: 30px;`}
+      : `padding-right: 30px;`} */
 
   .react-svg-icon svg {
     margin-top: 2px;

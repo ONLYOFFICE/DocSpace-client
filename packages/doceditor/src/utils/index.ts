@@ -34,6 +34,7 @@ import { FolderType } from "@docspace/shared/enums";
 import type { IInitialConfig } from "@/types";
 
 import { IS_VIEW } from "./constants";
+import { BRAND_NAME } from "@docspace/shared/constants";
 
 export const getBackUrl = (
   rootFolderType: FolderType,
@@ -68,22 +69,6 @@ export const getBackUrl = (
   return `${combineUrl(origin, backUrl)}`;
 };
 
-export const isTemplateFile = (
-  config: IInitialConfig | undefined,
-): config is IInitialConfig => {
-  const fileMeta = config?.file;
-
-  return (
-    !IS_VIEW &&
-    !!fileMeta &&
-    fileMeta.viewAccessibility.WebRestrictedEditing &&
-    fileMeta.security.FillForms &&
-    fileMeta.rootFolderType === FolderType.Rooms &&
-    !fileMeta.security.Edit &&
-    !config.document.isLinkedForMe
-  );
-};
-
 export const showDocEditorMessage = async (
   url: string,
   id: string | number,
@@ -106,7 +91,7 @@ export const convertDocumentUrl = async (fileId: number | string) => {
 export const getDataSaveAs = async (params: string) => {
   try {
     const data = await request({
-      baseURL: combineUrl(window.DocSpaceConfig?.proxy?.url),
+      baseURL: combineUrl(window.ClientConfig?.proxy?.url),
       method: "get",
       url: `/filehandler.ashx?${params}`,
       responseType: "text",
@@ -137,7 +122,7 @@ export const saveAs = (
     return getDataSaveAs(params);
   } else {
     const handlerUrl = combineUrl(
-      window.DocSpaceConfig?.proxy?.url,
+      window.ClientConfig?.proxy?.url,
 
       window["AscDesktopEditor"] !== undefined //FIX Save as with open new tab on DesktopEditors
         ? "/Products/Files/HttpHandlers/"
@@ -176,7 +161,7 @@ export const setDocumentTitle = (
   successAuth: boolean,
   callback?: (value: string) => void,
 ) => {
-  const organizationName = "ONLYOFFICE"; //TODO: Replace to API variant
+  const organizationName = BRAND_NAME; //TODO: Replace to API variant
   const moduleTitle = "Documents"; //TODO: Replace to API variant
 
   let newSubTitle = subTitle;
@@ -230,15 +215,20 @@ export const calculateAsideHeight = () => {
 
   if (viewPort.widgetType === "window") {
     const { captionHeight } = viewPort;
-    const backdrop = document.getElementsByClassName(
-      "backdrop-active",
-    )[0] as HTMLElement;
+    const backdrop =
+      (document.getElementsByClassName("backdrop-active")[0] as HTMLElement) ??
+      (document.getElementsByClassName(
+        "modal-backdrop-active",
+      )[0] as HTMLElement);
     const aside = document.getElementsByTagName("aside")[0];
 
-    if (aside && backdrop) {
-      backdrop.style.height =
-        aside.style.height = `calc(100dvh - ${captionHeight}px`;
-      backdrop.style.marginTop = aside.style.top = `${captionHeight}px`;
+    if (backdrop) {
+      backdrop.style.height = `calc(100dvh - ${captionHeight}px`;
+      backdrop.style.marginTop = `${captionHeight}px`;
+    }
+    if (aside) {
+      aside.style.height = `calc(100dvh - ${captionHeight}px`;
+      aside.style.top = `${captionHeight}px`;
     }
   }
 };

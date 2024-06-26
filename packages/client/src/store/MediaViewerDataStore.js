@@ -105,7 +105,7 @@ class MediaViewerDataStore {
     if (
       !file.canOpenPlayer &&
       !file.fileExst === ".pdf" &&
-      window.DocSpaceConfig?.pdfViewer
+      window.ClientConfig?.pdfViewer
     )
       return;
 
@@ -156,7 +156,7 @@ class MediaViewerDataStore {
 
   changeUrl = (id) => {
     const url = this.getUrl(id);
-    window.DocSpace.navigate(url);
+    window.DocSpace.navigate(url, { state: { disableScrollToTop: true } });
   };
 
   nextMedia = () => {
@@ -247,7 +247,7 @@ class MediaViewerDataStore {
         const canOpenPlayer =
           file.viewAccessibility?.ImageView ||
           file.viewAccessibility?.MediaView ||
-          (file.fileExst === ".pdf" && window.DocSpaceConfig?.pdfViewer);
+          (file.fileExst === ".pdf" && window.ClientConfig?.pdfViewer);
 
         if (canOpenPlayer) {
           playlist.push({

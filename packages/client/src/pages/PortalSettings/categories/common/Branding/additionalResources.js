@@ -37,21 +37,29 @@ import { Checkbox } from "@docspace/shared/components/checkbox";
 import { toastr } from "@docspace/shared/components/toast";
 import { mobile, size } from "@docspace/shared/utils";
 import { isManagement } from "@docspace/shared/utils/common";
+import { DeviceType } from "@docspace/shared/enums";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderAdditionalResources from "../sub-components/loaderAdditionalResources";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
+
+const mobileCSS = css`
+  margin-top: 0px;
+
+  .header {
+    display: none;
+  }
+`;
 
 const StyledComponent = styled.div`
   margin-top: 40px;
 
   @media ${mobile} {
-    margin-top: 0px;
-
-    .header {
-      display: none;
-    }
+    ${mobileCSS}
   }
+
+  ${(props) => props.isMobile && mobileCSS}
 
   .branding-checkbox {
     display: flex;
@@ -95,9 +103,12 @@ const AdditionalResources = (props) => {
     additionalResourcesIsDefault,
     setIsLoadedAdditionalResources,
     isLoadedAdditionalResources,
+    deviceType,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
+
+  const isMobileView = deviceType === DeviceType.mobile;
 
   const [additionalSettings, setAdditionalSettings] = useState({});
   const [hasChange, setHasChange] = useState(false);
@@ -134,13 +145,14 @@ const AdditionalResources = (props) => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
-  }, []);
+  }, [isMobileView]);
 
   const checkWidth = () => {
     const url = isManagement()
       ? "/branding"
       : "portal-settings/customization/branding";
     window.innerWidth > size.mobile &&
+      !isMobileView &&
       location.pathname.includes("additional-resources") &&
       navigate(url);
   };
@@ -258,14 +270,16 @@ const AdditionalResources = (props) => {
 
   return (
     <>
-      <StyledComponent>
+      <StyledComponent isMobile={isMobileView}>
         <div className="header">
           <div className="additional-header settings_unavailable">
             {t("Settings:AdditionalResources")}
           </div>
         </div>
         <div className="settings_unavailable additional-description">
-          {t("Settings:AdditionalResourcesDescription")}
+          {t("Settings:AdditionalResourcesDescription", {
+            productName: PRODUCT_NAME,
+          })}
         </div>
         <div className="branding-checkbox">
           <Checkbox
@@ -321,6 +335,7 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
 
     additionalResourcesData,
     additionalResourcesIsDefault,
+    deviceType,
   } = settingsStore;
 
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
@@ -333,6 +348,7 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     setIsLoadedAdditionalResources,
     isLoadedAdditionalResources,
     isSettingPaid: isBrandingAndCustomizationAvailable,
+    deviceType,
   };
 })(
   withLoading(

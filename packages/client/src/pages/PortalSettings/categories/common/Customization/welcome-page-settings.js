@@ -35,7 +35,7 @@ import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-import { isMobile } from "@docspace/shared/utils";
+import { isMobileDevice } from "@docspace/shared/utils";
 import checkScrollSettingsBlock from "../utils";
 import { StyledSettingsComponent } from "./StyledSettings";
 import LoaderCustomization from "../sub-components/loaderCustomization";
@@ -283,7 +283,7 @@ const WelcomePageSettings = (props) => {
   };
 
   const checkInnerWidth = () => {
-    if (!isMobile()) {
+    if (!isMobileDevice()) {
       setState((val) => ({ ...val, isCustomizationView: true }));
 
       const currentUrl = window.location.href.replace(

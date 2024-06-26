@@ -1,5 +1,6 @@
 {
   "ActiveSessions": "Active Sessions",
+  "AutoDeleteTitle": "All the sessions older than 60 days will be automatically deleted.",
   "ChangeEmailSuccess": "Email has been changed successfully",
   "ChangePasswordAfterLoggingOut": "Change password after logging out",
   "ConnectSocialNetworks": "Connect your social networks",
@@ -15,7 +16,6 @@
   "LightTheme": "Light theme",
   "LogoutActiveConnection": "Log out from active connection",
   "LogoutAllActiveConnections": "Log out from all active connections",
-  "LogoutAllActiveSessions": "Log out from all active sessions",
   "LogoutAllActiveSessionsDescription": "All active connections except this connection will be logged out, as it is currently in use.",
   "LogoutBtn": "Log out",
   "LogoutDescription": "Note. All active connections except this connection will be logged out, as it is currently in use.",
@@ -28,5 +28,6 @@
   "SuccessLogout": "The active connection was logged out: {{platform}}, {{browser}}",
   "SystemTheme": "Use system theme",
   "SystemThemeDescription": "Automatically switch between light and dark themes when your system does.",
+  "TerminateAllSessions": "Terminate all sessions except the current one",
   "TwoFactorDescription": "Two-factor authentication via a code-generating app was enabled for all users by the admin."
 }

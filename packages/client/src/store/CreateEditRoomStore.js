@@ -237,7 +237,7 @@ class CreateEditRoomStore {
 
     const createRoomData = {
       roomType: roomParams.type,
-      title: roomParams.title || t("Files:NewRoom"),
+      title: roomParams.title || t("Common:NewRoom"),
       indexing: roomParams.indexing,
       createAsNewFolder: roomParams.createAsNewFolder ?? true,
       ...(quotaLimit && {
@@ -351,8 +351,6 @@ class CreateEditRoomStore {
       setIsSectionFilterLoading(param);
     };
 
-    setView("info_members");
-
     const state = {
       isRoot: false,
       title: room.title,
@@ -371,7 +369,10 @@ class CreateEditRoomStore {
 
     window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
 
-    isDesktop() && setIsVisible(true);
+    if (isDesktop()) {
+      setIsVisible(true);
+      setView("info_members");
+    }
 
     this.setIsLoading(false);
     this.setConfirmDialogIsLoading(false);

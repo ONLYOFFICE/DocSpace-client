@@ -29,11 +29,12 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import FilesSelector from "@docspace/shared/selectors/Files";
 import { toastr } from "@docspace/shared/components/toast";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import {
+  TFile,
   TFileSecurity,
   TFolder,
   TFolderSecurity,
@@ -41,7 +42,7 @@ import {
 import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
-import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
+import { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TTranslation } from "@docspace/shared/types";
 
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
@@ -54,6 +55,8 @@ import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
 import { getAcceptButtonLabel, getHeaderLabel, getIsDisabled } from "./utils";
+
+let disabledItems: (string | number)[] = [];
 
 const FilesSelectorWrapper = ({
   isPanelVisible = false,
@@ -87,7 +90,7 @@ const FilesSelectorWrapper = ({
   treeFolders,
 
   selection,
-  disabledItems,
+  // disabledItems,
   setConflictDialogData,
   checkFileConflicts,
   itemOperationToFolder,
@@ -134,6 +137,7 @@ const FilesSelectorWrapper = ({
   isRoomBackup,
 
   roomsFolderId,
+  openRoot,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -168,8 +172,16 @@ const FilesSelectorWrapper = ({
     onCloseAction();
   };
 
-  const getFilesArchiveError = (name: string) =>
-    t("Common:ArchivedRoomAction", { name });
+  const getFilesArchiveError = React.useCallback(
+    (name: string) => t("Common:ArchivedRoomAction", { name }),
+    [t],
+  );
+
+  React.useEffect(() => {
+    return () => {
+      disabledItems = [];
+    };
+  }, []);
 
   const onAccept = async (
     selectedItemId: string | number | undefined,
@@ -326,6 +338,7 @@ const FilesSelectorWrapper = ({
 
   return (
     <FilesSelector
+      openRoot={openRoot}
       socketHelper={socketHelper}
       socketSubscribers={socketSubscribers}
       disabledItems={disabledItems}
@@ -339,7 +352,7 @@ const FilesSelectorWrapper = ({
       isThirdParty={isThirdParty}
       rootThirdPartyId={rootThirdPartyId}
       roomsFolderId={roomsFolderId}
-      currentFolderId={currentFolderId || 0}
+      currentFolderId={isFormRoom && openRoot ? "" : currentFolderId}
       parentId={parentId}
       rootFolderType={rootFolderType || FolderType.Rooms}
       currentDeviceType={currentDeviceType}
@@ -373,6 +386,9 @@ const FilesSelectorWrapper = ({
         isMove || isCopy || isRestore ? "select-file-modal-cancel" : ""
       }
       getFilesArchiveError={getFilesArchiveError}
+      withCreate={(isMove || isCopy || isRestore || isRestoreAll) ?? false}
+      // createDefineRoomLabel="New filling from room"
+      // createDefineRoomType={RoomsType.FormRoom}
     />
   );
 };
@@ -469,10 +485,13 @@ export default inject(
         ? selections
         : selections.filter((f) => f && !f?.isEditing);
 
-    const disabledItems: (string | number)[] = [];
-
-    selectionsWithoutEditing.forEach((item) => {
-      if ((item?.isFolder || item?.parentId) && item?.id) {
+    selectionsWithoutEditing.forEach((item: TFile | TFolder | TRoom) => {
+      if (
+        (("isFolder" in item && item?.isFolder) ||
+          ("parentId" in item && item?.parentId)) &&
+        item?.id &&
+        !disabledItems.includes(item.id)
+      ) {
         disabledItems.push(item.id);
       }
     });
@@ -485,7 +504,7 @@ export default inject(
       (rootFolderType === FolderType.Archive ||
       rootFolderType === FolderType.TRASH
         ? undefined
-        : selectedId !== selectionsWithoutEditing[0]?.id
+        : selectedId === selectionsWithoutEditing[0]?.id
           ? parentId
           : selectedId);
 

@@ -37,7 +37,7 @@ import {
   createPasswordHash,
   frameCallCommand,
 } from "@docspace/shared/utils/common";
-import { RoomsType } from "@docspace/shared/enums";
+import { RoomsType, FilterType } from "@docspace/shared/enums";
 
 const Sdk = ({
   t,
@@ -55,15 +55,42 @@ const Sdk = ({
   getRoomsIcon,
   fetchExternalLinks,
   getFilePrimaryLink,
+  getFilesSettings,
+  organizationName,
 }) => {
   const [isDataReady, setIsDataReady] = useState(false);
 
   const formatsDescription = {
-    DOCX: t("Common:SelectDOCXFormat"),
-    DOCXF: t("Common:SelectDOCXFFormat"),
-    BackupOnly: t("Common:SelectBackupOnlyFormat"),
-    IMG: t("Common:SelectIMGFormat"),
-    XLSX: t("Common:SelectXLSXFormat"),
+    [FilterType.DocumentsOnly]: t("Common:SelectTypeFiles", {
+      type: t("Common:Documents").toLowerCase(),
+    }),
+    [FilterType.SpreadsheetsOnly]: t("Common:SelectTypeFiles", {
+      type: t("Translations:Spreadsheets").toLowerCase(),
+    }),
+    [FilterType.PresentationsOnly]: t("Common:SelectTypeFiles", {
+      type: t("Translations:Presentations").toLowerCase(),
+    }),
+    [FilterType.ImagesOnly]: t("Common:SelectTypeFiles", {
+      type: t("Files:Images").toLowerCase(),
+    }),
+    [FilterType.MediaOnly]: t("Common:SelectExtensionFiles", {
+      extension: t("Files:Media").toLowerCase(),
+    }),
+    [FilterType.ArchiveOnly]: t("Common:SelectTypeFiles", {
+      type: t("Files:Archives").toLowerCase(),
+    }),
+    [FilterType.FoldersOnly]: t("Common:SelectTypeFiles", {
+      type: t("Translations:Folders").toLowerCase(),
+    }),
+    [FilterType.OFormTemplateOnly]: t("Common:SelectTypeFiles", {
+      type: t("Files:FormsTemplates").toLowerCase(),
+    }),
+    [FilterType.OFormOnly]: t("Common:SelectTypeFiles", {
+      type: t("Files:Forms").toLowerCase(),
+    }),
+    EditorSupportedTypes: t("Common:SelectTypeFiles", {
+      type: t("AllTypesAvailableForEditing", { organizationName }),
+    }),
   };
 
   useEffect(() => {
@@ -85,7 +112,7 @@ const Sdk = ({
   );
 
   useEffect(() => {
-    if (window.parent && !frameConfig && isLoaded) {
+    if (window.parent && !frameConfig?.frameId && isLoaded) {
       callCommand("setConfig");
     }
   }, [callCommand, isLoaded]);
@@ -96,20 +123,14 @@ const Sdk = ({
     }
   }, [callCommandLoad, isDataReady]);
 
+  useEffect(() => {
+    getFilesSettings();
+  }, []);
+
   const { mode } = useParams();
   const selectorType = new URLSearchParams(window.location.search).get(
     "selectorType",
   );
-
-  const toRelativeUrl = (data) => {
-    try {
-      const url = new URL(data);
-      const rel = url.toString().substring(url.origin.length);
-      return rel;
-    } catch {
-      return data;
-    }
-  };
 
   const handleMessage = async (e) => {
     const eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
@@ -170,15 +191,16 @@ const Sdk = ({
 
   const onSelectRoom = useCallback(
     async (data) => {
-      if (data[0].logo?.large !== "") {
-        data[0].icon = toRelativeUrl(data[0].logo?.large);
-      } else {
+      if (data[0].icon === "") {
         data[0].icon = await getRoomsIcon(data[0].roomType, false, 32);
+      } else {
+        data[0].icon = data[0].iconOriginal;
       }
 
       if (
         data[0].roomType === RoomsType.PublicRoom ||
-        (data[0].roomType === RoomsType.CustomRoom && data[0].shared)
+        (data[0].roomType === RoomsType.CustomRoom && data[0].shared) ||
+        (data[0].roomType === RoomsType.FormRoom && data[0].shared)
       ) {
         const links = await fetchExternalLinks(data[0].id);
 
@@ -222,13 +244,9 @@ const Sdk = ({
     frameCallEvent({ event: "onCloseCallback" });
   }, [frameCallEvent]);
 
-  const onCloseCallback = !!frameConfig?.events.onCloseCallback
-    ? {
-        onClose,
-      }
-    : {};
-
   let component;
+
+  if (!frameConfig) return;
 
   switch (mode) {
     case "room-selector":
@@ -278,15 +296,14 @@ const Sdk = ({
           acceptButtonLabel={frameConfig?.acceptButtonLabel}
           cancelButtonLabel={frameConfig?.cancelButtonLabel}
           currentFolderId={frameConfig?.id}
-          descriptionText={
-            formatsDescription[frameConfig?.filterParam || "DOCX"]
-          }
+          descriptionText={formatsDescription[frameConfig?.filterParam] || ""}
         />
       );
       break;
     default:
       component = <AppLoader />;
   }
+
   return component;
 };
 
@@ -301,11 +318,17 @@ export default inject(
     filesStore,
   }) => {
     const { login, logout } = authStore;
-    const { theme, setFrameConfig, frameConfig, getSettings, isLoaded } =
-      settingsStore;
+    const {
+      theme,
+      setFrameConfig,
+      frameConfig,
+      getSettings,
+      isLoaded,
+      organizationName,
+    } = settingsStore;
     const { loadCurrentUser, user } = userStore;
     const { updateProfileCulture } = peopleStore.targetUserStore;
-    const { getIcon, getRoomsIcon } = filesSettingsStore;
+    const { getIcon, getRoomsIcon, getFilesSettings } = filesSettingsStore;
     const { fetchExternalLinks } = publicRoomStore;
     const { getFilePrimaryLink } = filesStore;
 
@@ -324,6 +347,16 @@ export default inject(
       user,
       fetchExternalLinks,
       getFilePrimaryLink,
+      getFilesSettings,
+      organizationName,
     };
   },
-)(withTranslation(["JavascriptSdk", "Common"])(observer(Sdk)));
+)(
+  withTranslation([
+    "JavascriptSdk",
+    "Common",
+    "Settings",
+    "Translations",
+    "Files",
+  ])(observer(Sdk)),
+);

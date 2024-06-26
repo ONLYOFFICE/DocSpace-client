@@ -28,6 +28,8 @@
 
 import React from "react";
 
+import { ButtonKeys } from "../../enums";
+
 import { Header } from "./sub-components/Header";
 import { Body } from "./sub-components/Body";
 import { Footer } from "./sub-components/Footer";
@@ -105,7 +107,6 @@ const Selector = ({
   withFooterCheckbox,
   footerCheckboxLabel,
   isChecked,
-  setIsChecked,
 
   items,
   renderCustomItem,
@@ -156,6 +157,8 @@ const Selector = ({
 
       return null;
     });
+
+  const [inputItemVisible, setInputItemVisible] = React.useState(false);
 
   const [requestRunning, setRequestRunning] = React.useState<boolean>(false);
 
@@ -383,6 +386,20 @@ const Selector = ({
     setFooterVisible(isEqual);
   }, [selectedItems, newSelectedItems]);
 
+  React.useEffect(() => {
+    const onKeyboardAction = (e: KeyboardEvent) => {
+      if (inputItemVisible) return;
+      if (e.key === ButtonKeys.esc) {
+        onCancel?.();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyboardAction);
+    return () => {
+      window.removeEventListener("keydown", onKeyboardAction);
+    };
+  }, [inputItemVisible, onCancel]);
+
   React.useLayoutEffect(() => {
     if (items) {
       if (
@@ -502,12 +519,10 @@ const Selector = ({
         footerCheckboxLabel,
         isChecked: isFooterCheckboxChecked,
         setIsFooterCheckboxChecked,
-        setIsChecked,
       }
     : ({
         isChecked: isFooterCheckboxChecked,
         setIsFooterCheckboxChecked,
-        setIsChecked,
       } as TSelectorFooterCheckbox);
 
   const tabsProps: TWithTabs = withTabs
@@ -584,6 +599,8 @@ const Selector = ({
         withFooterInput={withFooterInput}
         withFooterCheckbox={withFooterCheckbox}
         descriptionText={descriptionText}
+        inputItemVisible={inputItemVisible}
+        setInputItemVisible={setInputItemVisible}
         // bread crumbs
         {...breadCrumbsProps}
         // select all

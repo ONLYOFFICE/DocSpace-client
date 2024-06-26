@@ -36,6 +36,7 @@ import RoomsIcon from "PUBLIC_DIR/images/catalog.rooms.react.svg";
 import PortfolioIcon from "PUBLIC_DIR/images/catalog.portfolio.react.svg";
 import ProjectsIcon from "PUBLIC_DIR/images/catalog.projects.react.svg";
 import DocumentsIcon from "PUBLIC_DIR/images/catalog.documents.react.svg";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const Wrapper = styled.div`
   display: flex;
@@ -54,13 +55,14 @@ const ImportStep = ({
   showReminder,
   importOptions,
   setImportOptions,
+  user,
 }) => {
   const onChange = (e, name) => {
     const checked = e.target.checked;
     setImportOptions({ [name]: checked });
   };
 
-  const serviceName = "Onlyoffice Workspace";
+  const serviceName = "ONLYOFFICE Workspace";
   const users =
     t("Settings:Employees")[0].toUpperCase() + t("Settings:Employees").slice(1);
 
@@ -77,7 +79,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Accounts"),
-          workspace: "DocSpace",
+          workspace: PRODUCT_NAME,
           SectionIcon: AccountsIcon,
         }}
         isDisabled
@@ -93,7 +95,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Accounts"),
-          workspace: "DocSpace",
+          workspace: PRODUCT_NAME,
           SectionIcon: AccountsIcon,
         }}
       />
@@ -109,7 +111,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Documents"),
-          workspace: "DocSpace",
+          workspace: PRODUCT_NAME,
           SectionIcon: DocumentsIcon,
         }}
       />
@@ -125,7 +127,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Documents"),
-          workspace: "DocSpace",
+          workspace: PRODUCT_NAME,
           SectionIcon: DocumentsIcon,
         }}
       />
@@ -141,7 +143,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Rooms"),
-          workspace: "DocSpace",
+          workspace: PRODUCT_NAME,
           SectionIcon: RoomsIcon,
         }}
       />
@@ -149,7 +151,10 @@ const ImportStep = ({
         isChecked={importOptions.importCommonFiles}
         onChange={(e) => onChange(e, "importCommonFiles")}
         sectionName={t("Common:CommonFiles")}
-        description={t("Settings:CommonFilesDescription")}
+        description={t("Settings:CommonFilesDescription", {
+          user: user.displayName,
+          productName: PRODUCT_NAME,
+        })}
         exportSection={{
           sectionName: t("Common:Common"),
           workspace: serviceName,
@@ -157,7 +162,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Rooms"),
-          workspace: "DocSpace",
+          workspace: PRODUCT_NAME,
           SectionIcon: RoomsIcon,
         }}
       />
@@ -173,7 +178,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Rooms"),
-          workspace: "DocSpace",
+          workspace: PRODUCT_NAME,
           SectionIcon: RoomsIcon,
         }}
       />
@@ -191,10 +196,13 @@ const ImportStep = ({
   );
 };
 
-export default inject(({ importAccountsStore }) => {
+export default inject(({ importAccountsStore, userStore }) => {
   const { importOptions, setImportOptions } = importAccountsStore;
 
+  const { user } = userStore;
+
   return {
+    user,
     importOptions,
     setImportOptions,
   };

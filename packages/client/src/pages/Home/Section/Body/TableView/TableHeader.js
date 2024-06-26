@@ -49,12 +49,11 @@ class FilesTableHeader extends React.Component {
       columnStorageName,
       columnInfoPanelStorageName,
       isPublicRoom,
-      isFrame,
-      frameTableColumns,
       isRecentTab,
       isDefaultRoomsQuotaSet,
       showStorageInfo,
       isArchiveFolder,
+      tableStorageName,
     } = this.props;
 
     const defaultColumns = [];
@@ -359,21 +358,10 @@ class FilesTableHeader extends React.Component {
     }
 
     let columns = getColumns(defaultColumns);
-    const storageColumns = localStorage.getItem(this.props.tableStorageName);
+    const storageColumns = localStorage.getItem(tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
     const resetColumnsSize =
-      (splitColumns && splitColumns.length !== columns.length) ||
-      !splitColumns ||
-      isFrame;
-
-    if (isFrame && frameTableColumns) {
-      const frameTableArray = frameTableColumns.split(",");
-
-      columns = columns.map((col) => {
-        col.enable = frameTableArray.includes(col.key) ? true : false;
-        return col;
-      });
-    }
+      (splitColumns && splitColumns.length !== columns.length) || !splitColumns;
 
     const tableColumns = columns.map((c) => c.enable && c.key);
 
@@ -382,6 +370,7 @@ class FilesTableHeader extends React.Component {
       this.setState({
         columns,
         resetColumnsSize,
+        tableStorageName,
         columnStorageName,
         columnInfoPanelStorageName,
       });
@@ -389,6 +378,7 @@ class FilesTableHeader extends React.Component {
       this.state = {
         columns,
         resetColumnsSize,
+        tableStorageName,
         columnStorageName,
         columnInfoPanelStorageName,
       };
@@ -436,6 +426,7 @@ class FilesTableHeader extends React.Component {
       columnInfoPanelStorageName,
       isRecentTab,
       isArchiveFolder,
+      showStorageInfo,
     } = this.props;
 
     if (
@@ -444,7 +435,8 @@ class FilesTableHeader extends React.Component {
       isTrashFolder !== prevProps.isTrashFolder ||
       columnStorageName !== prevProps.columnStorageName ||
       columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
-      isRecentTab !== prevProps.isRecentTab
+      isRecentTab !== prevProps.isRecentTab ||
+      showStorageInfo !== prevProps.showStorageInfo
     ) {
       return this.getTableColumns(true);
     }
@@ -556,6 +548,7 @@ class FilesTableHeader extends React.Component {
     const {
       columns,
       resetColumnsSize,
+      tableStorageName,
       columnStorageName,
       columnInfoPanelStorageName,
     } = this.state;
@@ -582,6 +575,7 @@ class FilesTableHeader extends React.Component {
         setHideColumns={setHideColumns}
         settingsTitle={t("Files:TableSettingsTitle")}
         showSettings={isFrame ? showSettings : true}
+        tableStorageName={tableStorageName}
       />
     );
   }
@@ -705,7 +699,6 @@ export default inject(
       publicRoomKey,
 
       isFrame,
-      frameTableColumns: frameConfig?.viewTableColumns,
       isRecentTab,
       showSettings: frameConfig?.showSettings,
       isDefaultRoomsQuotaSet,

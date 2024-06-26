@@ -51,11 +51,11 @@ const StyledTableContainer = styled(TableContainer)`
     position: sticky;
     z-index: 201;
     width: calc(100% + 40px);
-    margin-top: 20px;
+    margin-top: -33px;
     margin-left: -20px;
     top: 0;
 
-    margin-bottom: -37.5px;
+    margin-bottom: -36px;
 
     .table-container_group-menu {
       border-image-slice: 0;
@@ -150,7 +150,7 @@ const TableView = ({
   sectionWidth,
   accountsData,
   typeOptions,
-  users,
+  filteredUsers,
   checkedUsers,
   toggleAccount,
   toggleAllAccounts,
@@ -164,12 +164,12 @@ const TableView = ({
 
   const isIndeterminate =
     checkedUsers.result.length > 0 &&
-    checkedUsers.result.length !== users.result.length;
+    checkedUsers.result.length !== filteredUsers.length;
 
-  const isChecked = checkedUsers.result.length === users.result.length;
+  const isChecked = checkedUsers.result.length === filteredUsers.length;
 
   const toggleAll = (isChecked) => {
-    toggleAllAccounts(isChecked, users.result, checkedAccountType);
+    toggleAllAccounts(isChecked, filteredUsers, checkedAccountType);
   };
 
   const onClearFilter = () => {
@@ -278,7 +278,7 @@ const TableView = ({
 export default inject(({ userStore, importAccountsStore }) => {
   const { id: userId } = userStore.user;
   const {
-    users,
+    filteredUsers,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
@@ -288,7 +288,7 @@ export default inject(({ userStore, importAccountsStore }) => {
 
   return {
     userId,
-    users,
+    filteredUsers,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,

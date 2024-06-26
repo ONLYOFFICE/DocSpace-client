@@ -94,6 +94,8 @@ const HeaderContainer = styled.div`
   }
 
   .arrow-button {
+    flex-shrink: 0;
+
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
@@ -182,6 +184,7 @@ const SectionHeaderContent = (props) => {
     tReady,
     setIsLoadedSectionHeader,
     isSSOAvailable,
+    organizationName,
   } = props;
 
   const navigate = useNavigate();
@@ -220,9 +223,10 @@ const SectionHeaderContent = (props) => {
     const arrayOfParams = getArrayOfParams();
 
     const key = getKeyByLink(arrayOfParams, settingsTree);
-    let currKey = key.length > 3 ? key : key[0];
 
-    if (key === "8" || key === "8-0") currKey = "8-0";
+    const keysCollection = key.split("-");
+
+    const currKey = keysCollection.length >= 3 ? key : keysCollection[0];
 
     const header = getTKeyByKey(currKey, settingsTree);
     const isCategory = checkPropertyByLink(
@@ -382,7 +386,7 @@ const SectionHeaderContent = (props) => {
                     className="arrow-button"
                   />
                 )}
-                {t(header)}
+                {t(header, { organizationName })}
               </div>
               {isNeedPaidIcon ? (
                 <Badge
@@ -418,7 +422,7 @@ const SectionHeaderContent = (props) => {
   );
 };
 
-export default inject(({ currentQuotaStore, setup, common }) => {
+export default inject(({ settingsStore, currentQuotaStore, setup, common }) => {
   const {
     isBrandingAndCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
@@ -438,6 +442,9 @@ export default inject(({ currentQuotaStore, setup, common }) => {
   } = setup.selectionStore;
   const { admins, selectorIsOpen } = setup.security.accessRight;
   const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
+
+  const { organizationName } = settingsStore;
+
   return {
     addUsers,
     removeAdmins,
@@ -457,6 +464,7 @@ export default inject(({ currentQuotaStore, setup, common }) => {
     isBrandingAndCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
     isSSOAvailable,
+    organizationName,
   };
 })(
   withLoading(

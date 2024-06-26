@@ -28,12 +28,12 @@
 
 "use client";
 
-import { useEffect } from "react";
+import { DependencyList, RefObject, useEffect } from "react";
 
-export const useClickOutside = (
-  ref: { current: HTMLElement },
-  handler: () => void,
-  ...deps: unknown[]
+export const useClickOutside = <T extends HTMLElement>(
+  ref: RefObject<T>,
+  handler: VoidFunction,
+  ...deps: DependencyList
 ) => {
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {

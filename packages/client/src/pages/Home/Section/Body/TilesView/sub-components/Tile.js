@@ -222,14 +222,14 @@ const StyledTile = styled.div`
   .file-checkbox {
     display: ${(props) => (props.checked ? "flex" : "none")};
     flex: 0 0 16px;
-    margin-top: 8px;
+    padding-top: 8px;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            margin-right: ${(props) => (props.isFolder ? "8px" : "7px")};
+            padding-right: ${(props) => (props.isFolder ? "8px" : "7px")};
           `
         : css`
-            margin-left: ${(props) => (props.isFolder ? "8px" : "7px")};
+            padding-left: ${(props) => (props.isFolder ? "8px" : "7px")};
           `}
   }
 
@@ -480,6 +480,10 @@ const badgesPosition = css`
 
     .badge-new-version {
       order: 1;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     .badge-version-current {
@@ -710,6 +714,7 @@ class Tile extends React.PureComponent {
         isThirdParty: true,
         icon: item.thirdPartyIcon,
         label: item.providerKey,
+        providerType: item.providerType,
         onClick: () =>
           selectOption({
             option: "typeProvider",

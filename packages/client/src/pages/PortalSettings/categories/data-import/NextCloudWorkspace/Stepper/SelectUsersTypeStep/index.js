@@ -43,16 +43,17 @@ const SelectUsersTypeStep = (props) => {
     users,
     searchValue,
     setSearchValue,
+    filteredUsers,
   } = props;
 
   const [boundaries, setBoundaries] = useState([0, 25]);
   const [dataPortion, setDataPortion] = useState(
-    users.result.slice(...boundaries),
+    filteredUsers.slice(...boundaries),
   );
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
     setBoundaries([leftBoundary, rightBoundary]);
-    setDataPortion(users.result.slice(leftBoundary, rightBoundary));
+    setDataPortion(filteredUsers.slice(leftBoundary, rightBoundary));
   };
 
   const onChangeInput = (value) => {
@@ -71,7 +72,7 @@ const SelectUsersTypeStep = (props) => {
   );
 
   useEffect(() => {
-    setDataPortion(users.result.slice(...boundaries));
+    setDataPortion(filteredUsers.slice(...boundaries));
   }, [users]);
 
   return (
@@ -86,45 +87,47 @@ const SelectUsersTypeStep = (props) => {
         displaySettings
       />
 
-      {!checkedUsers.result.length > 0 && (
-        <SearchInput
-          id="search-checkedUsers-type-input"
-          className="importUsersSearch"
-          placeholder={t("Common:Search")}
-          value={searchValue}
-          onChange={onChangeInput}
-          refreshTimeout={100}
-          onClearSearch={onClearSearchInput}
-        />
-      )}
+      {filteredUsers.length > 0 && (
+        <>
+          <SearchInput
+            id="search-checkedUsers-type-input"
+            className="importUsersSearch"
+            placeholder={t("Common:Search")}
+            value={searchValue}
+            onChange={onChangeInput}
+            refreshTimeout={100}
+            onClearSearch={onClearSearchInput}
+          />
 
-      <AccountsTable t={t} accountsData={filteredAccounts} />
+          <AccountsTable t={t} accountsData={filteredAccounts} />
 
-      {users.result.length > 25 && filteredAccounts.length > 0 && (
-        <AccountsPaging
-          t={t}
-          numberOfItems={users.result.length}
-          setDataPortion={handleDataChange}
-        />
-      )}
+          {filteredUsers.length > 25 && filteredAccounts.length > 0 && (
+            <AccountsPaging
+              t={t}
+              numberOfItems={filteredUsers.length}
+              setDataPortion={handleDataChange}
+            />
+          )}
 
-      {filteredAccounts.length > 0 && (
-        <SaveCancelButtons
-          className="save-cancel-buttons"
-          onSaveClick={incrementStep}
-          onCancelClick={decrementStep}
-          showReminder={true}
-          saveButtonLabel={t("Settings:NextStep")}
-          cancelButtonLabel={t("Common:Back")}
-          displaySettings
-        />
+          {filteredAccounts.length > 0 && (
+            <SaveCancelButtons
+              className="save-cancel-buttons"
+              onSaveClick={incrementStep}
+              onCancelClick={decrementStep}
+              showReminder={true}
+              saveButtonLabel={t("Settings:NextStep")}
+              cancelButtonLabel={t("Common:Back")}
+              displaySettings
+            />
+          )}
+        </>
       )}
     </Wrapper>
   );
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { checkedUsers, users, searchValue, setSearchValue } =
+  const { checkedUsers, users, searchValue, setSearchValue, filteredUsers } =
     importAccountsStore;
 
   return {
@@ -132,5 +135,6 @@ export default inject(({ importAccountsStore }) => {
     users,
     searchValue,
     setSearchValue,
+    filteredUsers,
   };
 })(observer(SelectUsersTypeStep));

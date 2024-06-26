@@ -49,7 +49,7 @@ export interface StyledSocialButtonProps {
   /** Accepts css style */
   style?: React.CSSProperties;
   /** Sets a callback function that is triggered when the button is clicked */
-  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
 }
 
 export interface SocialButtonProps extends Partial<StyledSocialButtonProps> {
@@ -57,6 +57,9 @@ export interface SocialButtonProps extends Partial<StyledSocialButtonProps> {
   label?: string;
   /** Button icon */
   iconName?: string;
+
+  "data-url"?: string;
+  "data-providername"?: string;
 
   IconComponent?: JSX.ElementType;
 }

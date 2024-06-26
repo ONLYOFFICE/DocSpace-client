@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TenantStatus } from "../../enums";
+import { RecaptchaType, TenantStatus } from "../../enums";
 import { TColorScheme } from "../../themes";
 
 export type TTfaType = "sms" | "app" | "none";
@@ -34,6 +34,10 @@ export type TTfa = {
   title: string;
   enabled: boolean;
   avaliable: boolean;
+};
+
+export type TGetSsoSettings = {
+  hideAuthPage: boolean;
 };
 
 export type TGetCSPSettings = {
@@ -87,7 +91,6 @@ export type TSettings = {
   ownerId: string;
   nameSchemaId: string;
   enableAdmMess: boolean;
-  docSpace: boolean;
   standalone: boolean;
   baseDomain: string;
   passwordHash: TPasswordHash;
@@ -121,6 +124,10 @@ export type TSettings = {
   wizardToken?: string;
   defaultPage?: string;
   tagManagerId?: string;
+  enabledJoin?: boolean;
+  recaptchaPublicKey?: string;
+  recaptchaType?: RecaptchaType;
+  maxImageUploadSize: number;
 };
 
 export type TCustomSchema = {
@@ -211,6 +218,7 @@ export type TLoginSettings = {
 
 export type TCapabilities = {
   ldapEnabled: boolean;
+  ldapDomain: string;
   providers: string[];
   ssoLabel: string;
   oauthEnabled: boolean;
@@ -234,3 +242,5 @@ export type TPaymentSettings = {
   };
   max: number;
 };
+
+export type TPortalCultures = string[];

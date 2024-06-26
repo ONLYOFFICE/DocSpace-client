@@ -43,6 +43,7 @@ import MobileView from "./Branding/MobileView";
 import { UnavailableStyles } from "../../utils/commonSettingsStyles";
 import { resetSessionStorage } from "../../utils";
 import { DeviceType } from "@docspace/shared/enums";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledComponent = styled.div`
   max-width: 700px;
@@ -86,10 +87,10 @@ const Branding = ({
   isLoadedCompanyInfoSettingsData,
   isSettingPaid,
   standalone,
-  currentDeviceType,
+  deviceType,
   portals,
 }) => {
-  const isMobileView = currentDeviceType === DeviceType.mobile;
+  const isMobileView = deviceType === DeviceType.mobile;
 
   useEffect(() => {
     setDocumentTitle(t("Branding"));
@@ -103,21 +104,30 @@ const Branding = ({
     };
   }, []);
 
-  if (isMobileView && standalone)
+  const hideBlock = isManagement() ? false : portals?.length > 1 ? true : false;
+
+  const showSettings = standalone && !hideBlock;
+
+  if (isMobileView)
     return (
-      <MobileView isSettingPaid={isSettingPaid} isManagement={isManagement()} />
+      <MobileView
+        isSettingPaid={isSettingPaid}
+        isManagement={isManagement()}
+        showSettings={showSettings}
+      />
     );
 
-  const hideBlock = isManagement() ? false : portals?.length > 1 ? true : false;
   return (
     <StyledComponent isSettingPaid={isSettingPaid}>
       <Whitelabel />
-      {standalone && !hideBlock && (
+      {showSettings && (
         <>
           <hr />
           {isLoadedCompanyInfoSettingsData ? (
             <div className="section-description settings_unavailable">
-              {t("Settings:BrandingSectionDescription")}
+              {t("Settings:BrandingSectionDescription", {
+                productName: PRODUCT_NAME,
+              })}
             </div>
           ) : (
             <LoaderBrandingDescription />
@@ -133,13 +143,13 @@ const Branding = ({
 export default inject(({ settingsStore, currentQuotaStore, common }) => {
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
   const { isLoadedCompanyInfoSettingsData } = common;
-  const { standalone, currentDeviceType, portals } = settingsStore;
+  const { standalone, portals, deviceType } = settingsStore;
 
   return {
     isLoadedCompanyInfoSettingsData,
     isSettingPaid: isBrandingAndCustomizationAvailable,
     standalone,
-    currentDeviceType,
     portals,
+    deviceType,
   };
 })(withLoading(withTranslation(["Settings", "Common"])(observer(Branding))));

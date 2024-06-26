@@ -63,7 +63,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (!user && isAuthenticated) {
       if (isPortalDeactivate) {
         window.location.replace(
-          combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable"),
+          combineUrl(window.ClientConfig?.proxy?.url, "/unavailable"),
         );
 
         return null;
@@ -95,7 +95,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (isLoaded && !isAuthenticated) {
       if (isPortalDeactivate) {
         window.location.replace(
-          combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable"),
+          combineUrl(window.ClientConfig?.proxy?.url, "/unavailable"),
         );
 
         return null;
@@ -112,7 +112,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       }
 
       window.location.replace(
-        combineUrl(window.DocSpaceConfig?.proxy?.url, redirectPath),
+        combineUrl(window.ClientConfig?.proxy?.url, redirectPath),
       );
 
       return null;
@@ -138,7 +138,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         <Navigate
           replace
           to={combineUrl(
-            window.DocSpaceConfig?.proxy?.url,
+            window.ClientConfig?.proxy?.url,
             "/preparation-portal",
           )}
         />
@@ -157,7 +157,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         <Navigate
           replace
           to={combineUrl(
-            window.DocSpaceConfig?.proxy?.url,
+            window.ClientConfig?.proxy?.url,
             "/portal-settings/payments/portal-payments",
           )}
         />
@@ -175,7 +175,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         <Navigate
           replace
           to={combineUrl(
-            window.DocSpaceConfig?.proxy?.url,
+            window.ClientConfig?.proxy?.url,
             "/portal-unavailable",
           )}
         />
@@ -188,7 +188,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (isPortalDeactivate && location.pathname !== "/unavailable") {
       return (
         <Navigate
-          to={combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable")}
+          to={combineUrl(window.ClientConfig?.proxy?.url, "/unavailable")}
           state={{ from: location }}
         />
       );

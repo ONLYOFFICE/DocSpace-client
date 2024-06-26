@@ -148,7 +148,7 @@ const StyledTableRow = styled(TableRow)`
       !props.isThirdPartyFolder &&
       (props.checked || props.isActive) &&
       props.canDrag &&
-      `url(${CursorPalmSvgUrl}), auto !important`};
+      `url(${CursorPalmSvgUrl}) 8 0, auto !important`};
 
     ${(props) =>
       props.inProgress &&
@@ -406,6 +406,10 @@ const StyledBadgesContainer = styled.div`
         font-weight: 800;
       }
     }
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .bagde_alert {
@@ -434,24 +438,17 @@ const StyledQuickButtonsContainer = styled.div`
   }
 
   .badge {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 14px;
-          `
-        : css`
-            margin-right: 14px;
-          `}
+    padding: 12px 7px;
   }
 
   .badge:last-child {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            margin-left: 10px;
+            margin-left: 3px;
           `
         : css`
-            margin-right: 10px;
+            margin-right: 3px;
           `}
   }
 

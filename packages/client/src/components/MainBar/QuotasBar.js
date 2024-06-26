@@ -32,6 +32,7 @@ import { SnackBar } from "@docspace/shared/components/snackbar";
 
 import { Link } from "@docspace/shared/components/link";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const QuotasBar = ({
   t,
@@ -45,21 +46,71 @@ const QuotasBar = ({
   currentColorScheme,
   isAdmin,
 }) => {
-  const onClickAction = () => {
-    onClick && onClick(type);
+  const onClickAction = (e) => {
+    onClick && onClick(type, e);
   };
 
   const onCloseAction = () => {
     onClose && onClose(type);
   };
 
+  const getStorageQuotaDescription = () => {
+    if (!isAdmin) return t("StorageQuotaUserDescription");
+
+    return (
+      <Trans
+        i18nKey="StorageQuotaDescription"
+        t={t}
+        values={{ productName: PRODUCT_NAME }}
+      >
+        You can remove the unnecessary files or
+        <Link
+          fontSize="12px"
+          fontWeight="400"
+          color={currentColorScheme?.main?.accent}
+          onClick={onClickAction}
+        >
+          {{ clickHere: t("ClickHere").toLowerCase() }}
+        </Link>{" "}
+        to find a better pricing plan for your portal.
+      </Trans>
+    );
+  };
+
+  const getUserQuotaDescription = () => {
+    return (
+      <Trans
+        t={t}
+        i18nKey="UserQuotaDescription"
+        values={{
+          productName: PRODUCT_NAME,
+          clickHere: t("ClickHere"),
+        }}
+        components={{
+          1: (
+            <Link
+              fontSize="12px"
+              fontWeight="400"
+              color={currentColorScheme?.main?.accent}
+              className="error_description_link"
+              onClick={onClickAction}
+            />
+          ),
+        }}
+      />
+    );
+  };
   const getQuotaInfo = () => {
     switch (type) {
       case QuotaBarTypes.RoomQuota:
         return {
           header: t("RoomQuotaHeader", { currentValue, maxValue }),
           description: (
-            <Trans i18nKey="RoomQuotaDescription" t={t}>
+            <Trans
+              i18nKey="RoomQuotaDescription"
+              t={t}
+              values={{ productName: PRODUCT_NAME }}
+            >
               You can archived the unnecessary rooms or
               <Link
                 fontSize="12px"
@@ -76,20 +127,7 @@ const QuotasBar = ({
       case QuotaBarTypes.StorageQuota:
         return {
           header: t("StorageQuotaHeader", { currentValue, maxValue }),
-          description: (
-            <Trans i18nKey="StorageQuotaDescription" t={t}>
-              You can remove the unnecessary files or
-              <Link
-                fontSize="12px"
-                fontWeight="400"
-                color={currentColorScheme?.main?.accent}
-                onClick={onClickAction}
-              >
-                {{ clickHere: t("ClickHere").toLowerCase() }}
-              </Link>{" "}
-              to find a better pricing plan for your portal.
-            </Trans>
-          ),
+          description: getStorageQuotaDescription(),
         };
       case QuotaBarTypes.TenantCustomQuota:
         return {
@@ -111,57 +149,18 @@ const QuotasBar = ({
       case QuotaBarTypes.UserQuota:
         return {
           header: t("UserQuotaHeader", { currentValue, maxValue }),
-          description: (
-            <Trans i18nKey="UserQuotaDescription" t={t}>
-              {""}
-              <Link
-                fontSize="12px"
-                fontWeight="400"
-                color={currentColorScheme?.main?.accent}
-                onClick={onClickAction}
-              >
-                {{ clickHere: t("ClickHere") }}
-              </Link>{" "}
-              to find a better pricing plan for your portal.
-            </Trans>
-          ),
+          description: getUserQuotaDescription(),
         };
 
       case QuotaBarTypes.UserAndStorageQuota:
         return {
           header: t("StorageAndUserHeader", { currentValue, maxValue }),
-          description: (
-            <Trans i18nKey="UserQuotaDescription" t={t}>
-              {""}
-              <Link
-                fontSize="12px"
-                fontWeight="400"
-                color={currentColorScheme?.main?.accent}
-                onClick={onClickAction}
-              >
-                {{ clickHere: t("ClickHere") }}
-              </Link>{" "}
-              to find a better pricing plan for your portal.
-            </Trans>
-          ),
+          description: getUserQuotaDescription(),
         };
       case QuotaBarTypes.RoomAndStorageQuota:
         return {
           header: t("StorageAndRoomHeader", { currentValue, maxValue }),
-          description: (
-            <Trans i18nKey="UserQuotaDescription" t={t}>
-              {""}
-              <Link
-                fontSize="12px"
-                fontWeight="400"
-                color={currentColorScheme?.main?.accent}
-                onClick={onClickAction}
-              >
-                {{ clickHere: t("ClickHere") }}
-              </Link>{" "}
-              to find a better pricing plan for your portal.
-            </Trans>
-          ),
+          description: getUserQuotaDescription(),
         };
       case QuotaBarTypes.PersonalUserQuota:
         const description = !isAdmin ? (

@@ -40,6 +40,7 @@ import { Base } from "@docspace/shared/themes";
 import { useNavigate } from "react-router-dom";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledWrapper = styled.div`
   display: contents;
@@ -239,6 +240,7 @@ const InsideGroupTableRow = (props) => {
     isVisitor,
     isCollaborator,
     isSSO,
+    isLDAP,
   } = item;
 
   const isPending = statusType === "pending" || statusType === "disabled";
@@ -259,8 +261,8 @@ const InsideGroupTableRow = (props) => {
 
     const adminOption = {
       key: "admin",
-      title: t("Common:DocSpaceAdmin"),
-      label: t("Common:DocSpaceAdmin"),
+      title: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+      label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
       action: "admin",
     };
     const managerOption = {
@@ -338,7 +340,7 @@ const InsideGroupTableRow = (props) => {
       case "owner":
         return t("Common:Owner");
       case "admin":
-        return t("Common:DocSpaceAdmin");
+        return t("Common:PortalAdmin", { productName: PRODUCT_NAME });
       case "manager":
         return t("Common:RoomAdmin");
       case "collaborator":
@@ -469,7 +471,7 @@ const InsideGroupTableRow = (props) => {
     <StyledWrapper
       className={`user-item ${
         isChecked || isActive ? "table-row-selected" : ""
-      }`}
+      } ${item.id}`}
       value={value}
     >
       <StyledPeopleRow
@@ -497,7 +499,7 @@ const InsideGroupTableRow = (props) => {
             />
           </TableCell>
 
-          <Link
+          <Text
             type="page"
             title={displayName}
             fontWeight="600"
@@ -513,8 +515,13 @@ const InsideGroupTableRow = (props) => {
               : displayName?.trim()
                 ? displayName
                 : email}
-          </Link>
-          <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
+          </Text>
+          <Badges
+            statusType={statusType}
+            isPaid={isPaidUser}
+            isSSO={isSSO}
+            isLDAP={isLDAP}
+          />
         </TableCell>
 
         {typeAccountsInsideGroupColumnIsEnabled ? (
@@ -582,7 +589,7 @@ const InsideGroupTableRow = (props) => {
               color={sideInfoColor}
               onClick={onEmailClick}
               isTextOverflow
-              enableUserSelect
+              dir="auto"
             >
               {email}
             </Link>

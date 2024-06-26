@@ -28,241 +28,333 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import loadable from "@loadable/component";
 
+import Error404 from "@docspace/shared/components/errors/Error404";
+import componentLoader from "@docspace/shared/utils/component-loader";
+
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
-import Error404 from "@docspace/shared/components/errors/Error404";
-
 import { generalRoutes } from "./general";
+import SettingsContainer from "../pages/PortalSettings/categories/integration/LDAP/sub-components/SettingsContainer";
+import SyncContainer from "../pages/PortalSettings/categories/integration/LDAP/sub-components/SyncContainer";
+import StyledLdapPage from "../pages/PortalSettings/categories/integration/LDAP/styled-components/StyledLdapPage";
 
-const PortalSettings = loadable(() => import("../pages/PortalSettings"));
-
-const CustomizationSettings = loadable(
-  () => import("../pages/PortalSettings/categories/common/index.js"),
-);
-const LanguageAndTimeZoneSettings = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/common/Customization/language-and-time-zone"
-    ),
-);
-const WelcomePageSettings = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/common/Customization/welcome-page-settings"
-    ),
-);
-const DNSSettings = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/common/Customization/dns-settings"
-    ),
-);
-const PortalRenaming = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/common/Customization/portal-renaming"
-    ),
-);
-const WhiteLabel = loadable(
-  () => import("../pages/PortalSettings/categories/common/Branding/whitelabel"),
-);
-const CompanyInfoSettings = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/common/Branding/companyInfoSettings"
-    ),
-);
-const AdditionalResources = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/common/Branding/additionalResources"
-    ),
-);
-const SecuritySettings = loadable(
-  () => import("../pages/PortalSettings/categories/security/index.js"),
-);
-const TfaPage = loadable(
-  () => import("../pages/PortalSettings/categories/security/access-portal/tfa"),
-);
-const PasswordStrengthPage = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/security/access-portal/passwordStrength"
-    ),
-);
-const TrustedMailPage = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/security/access-portal/trustedMail"
-    ),
-);
-const IpSecurityPage = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/security/access-portal/ipSecurity"
-    ),
-);
-const BruteForceProtectionPage = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/security/access-portal/bruteForceProtection"
-    ),
-);
-const AdminMessagePage = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/security/access-portal/adminMessage"
-    ),
-);
-const SessionLifetimePage = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/security/access-portal/sessionLifetime"
-    ),
-);
-const Integration = loadable(
-  () => import("../pages/PortalSettings/categories/integration"),
-);
-const Payments = loadable(
-  () => import("../pages/PortalSettings/categories/payments"),
-);
-const Statistics = loadable(
-  () => import("../pages/PortalSettings/categories/storage-management"),
-);
-const QuotaPerRoom = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/storage-management/sub-components/QuotaPerRoom.js"
-    ),
-);
-const QuotaPerUser = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/storage-management/sub-components/QuotaPerUser.js"
-    ),
-);
-const ThirdParty = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/integration/ThirdPartyServicesSettings"
-    ),
+const PortalSettings = loadable(() =>
+  componentLoader(() => import("../pages/PortalSettings")),
 );
 
-const DocumentService = loadable(
-  () =>
-    import("../pages/PortalSettings/categories/integration/DocumentService"),
+const CustomizationSettings = loadable(() =>
+  componentLoader(
+    () => import("../pages/PortalSettings/categories/common/index.js"),
+  ),
+);
+const LanguageAndTimeZoneSettings = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/common/Customization/language-and-time-zone"
+      ),
+  ),
+);
+const WelcomePageSettings = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/common/Customization/welcome-page-settings"
+      ),
+  ),
+);
+const DNSSettings = loadable(() =>
+  componentLoader(
+    () => () =>
+      import(
+        "../pages/PortalSettings/categories/common/Customization/dns-settings"
+      ),
+  ),
+);
+const PortalRenaming = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/common/Customization/portal-renaming"
+      ),
+  ),
+);
+const WhiteLabel = loadable(() =>
+  componentLoader(
+    () =>
+      import("../pages/PortalSettings/categories/common/Branding/whitelabel"),
+  ),
+);
+const CompanyInfoSettings = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/common/Branding/companyInfoSettings"
+      ),
+  ),
+);
+const AdditionalResources = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/common/Branding/additionalResources"
+      ),
+  ),
+);
+const SecuritySettings = loadable(() =>
+  componentLoader(
+    () => import("../pages/PortalSettings/categories/security/index.js"),
+  ),
+);
+const TfaPage = loadable(() =>
+  componentLoader(
+    () =>
+      import("../pages/PortalSettings/categories/security/access-portal/tfa"),
+  ),
+);
+const PasswordStrengthPage = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/security/access-portal/passwordStrength"
+      ),
+  ),
+);
+const TrustedMailPage = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/security/access-portal/trustedMail"
+      ),
+  ),
+);
+const IpSecurityPage = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/security/access-portal/ipSecurity"
+      ),
+  ),
+);
+const BruteForceProtectionPage = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/security/access-portal/bruteForceProtection"
+      ),
+  ),
+);
+const AdminMessagePage = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/security/access-portal/adminMessage"
+      ),
+  ),
+);
+const SessionLifetimePage = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/security/access-portal/sessionLifetime"
+      ),
+  ),
+);
+const Integration = loadable(() =>
+  componentLoader(
+    () => import("../pages/PortalSettings/categories/integration"),
+  ),
+);
+const Payments = loadable(() =>
+  componentLoader(() => import("../pages/PortalSettings/categories/payments")),
+);
+const Statistics = loadable(() =>
+  componentLoader(
+    () => import("../pages/PortalSettings/categories/storage-management"),
+  ),
+);
+const QuotaPerRoom = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/storage-management/sub-components/QuotaPerRoom.js"
+      ),
+  ),
+);
+const QuotaPerUser = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/storage-management/sub-components/QuotaPerUser.js"
+      ),
+  ),
+);
+const ThirdParty = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/integration/ThirdPartyServicesSettings"
+      ),
+  ),
 );
 
-const SingleSignOn = loadable(
-  () => import("../pages/PortalSettings/categories/integration/SingleSignOn"),
-);
-const SPSettings = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/integration/SingleSignOn/SPSettings"
-    ),
-);
-const SPMetadata = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata"
-    ),
+const DocumentService = loadable(() =>
+  componentLoader(
+    () =>
+      import("../pages/PortalSettings/categories/integration/DocumentService"),
+  ),
 );
 
-const DeveloperTools = loadable(
-  () => import("../pages/PortalSettings/categories/developer-tools/index.js"),
+const SingleSignOn = loadable(() =>
+  componentLoader(
+    () => import("../pages/PortalSettings/categories/integration/SingleSignOn"),
+  ),
+);
+const SPSettings = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/integration/SingleSignOn/SPSettings"
+      ),
+  ),
+);
+const SPMetadata = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata"
+      ),
+  ),
 );
 
-const DataImport = loadable(
-  () => import("../pages/PortalSettings/categories/data-import/index.js"),
-);
-const GoogleDataImport = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/data-import/GoogleWorkspace/index.js"
-    ),
-);
-const NextcloudDataImport = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/data-import/NextCloudWorkspace/index.js"
-    ),
-);
-const OnlyofficeDataImport = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/index.js"
-    ),
+const DeveloperTools = loadable(() =>
+  componentLoader(
+    () => import("../pages/PortalSettings/categories/developer-tools/index.js"),
+  ),
 );
 
-const WebhookHistory = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory"
-    ),
+const DataImport = loadable(() =>
+  componentLoader(
+    () => import("../pages/PortalSettings/categories/data-import/index.js"),
+  ),
 );
-const WebhookDetails = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails"
-    ),
+const GoogleDataImport = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/data-import/GoogleWorkspace/index.js"
+      ),
+  ),
 );
-const Backup = loadable(
-  () => import("../pages/PortalSettings/categories/data-management/index"),
+const NextcloudDataImport = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/data-import/NextCloudWorkspace/index.js"
+      ),
+  ),
 );
-const DeleteDataPage = loadable(
-  () => import("../pages/PortalSettings/categories/delete-data"),
+const OnlyofficeDataImport = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/index.js"
+      ),
+  ),
 );
-const RestoreBackup = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/data-management/backup/restore-backup/index"
-    ),
-);
-const Bonus = loadable(() => import("../pages/Bonus"));
 
-const DocSpace = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/DocSpace"
-    ),
+const WebhookHistory = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory"
+      ),
+  ),
 );
-const SimpleRoom = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom"
-    ),
+const WebhookDetails = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails"
+      ),
+  ),
 );
-const Manager = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager"
-    ),
+const Backup = loadable(() =>
+  componentLoader(
+    () => import("../pages/PortalSettings/categories/data-management/index"),
+  ),
 );
-const RoomSelector = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector"
-    ),
+const DeleteDataPage = loadable(() =>
+  componentLoader(
+    () => import("../pages/PortalSettings/categories/delete-data"),
+  ),
 );
-const FileSelector = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector"
-    ),
+const RestoreBackup = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/data-management/backup/restore-backup/index"
+      ),
+  ),
 );
-const Editor = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor"
-    ),
+const Bonus = loadable(() => componentLoader(() => import("../pages/Bonus")));
+
+const DocSpace = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/DocSpace"
+      ),
+  ),
 );
-const Viewer = loadable(
-  () =>
-    import(
-      "../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Viewer"
-    ),
+const SimpleRoom = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom"
+      ),
+  ),
+);
+const Manager = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager"
+      ),
+  ),
+);
+const RoomSelector = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector"
+      ),
+  ),
+);
+const FileSelector = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector"
+      ),
+  ),
+);
+const Editor = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor"
+      ),
+  ),
+);
+const Viewer = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Viewer"
+      ),
+  ),
 );
 
 const PortalSettingsRoutes = {
@@ -278,11 +370,11 @@ const PortalSettingsRoutes = {
   children: [
     {
       index: true,
-      element: <Navigate to="customization/general" />,
+      element: <Navigate to="customization/general" replace />,
     },
     {
       path: "customization",
-      element: <Navigate to="customization/general" />,
+      element: <Navigate to="customization/general" replace />,
     },
     {
       path: "customization/general",
@@ -326,7 +418,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "security",
-      element: <Navigate to="security/access-portal" />,
+      element: <Navigate to="security/access-portal" replace />,
     },
     {
       path: "security/access-portal",
@@ -370,22 +462,34 @@ const PortalSettingsRoutes = {
     },
     {
       path: "integration",
-      element: <Navigate to="integration/third-party-services" />,
+      element: <Navigate to="integration/third-party-services" replace />,
+    },
+    {
+      path: "integration/ldap",
+      element: <Integration />,
+    },
+    {
+      path: "integration/ldap/settings",
+      element: <SettingsContainer />,
+    },
+    {
+      path: "integration/ldap/sync-data",
+      element: <SyncContainer />,
     },
     {
       path: "integration/third-party-services",
       element: <Integration />,
     },
     {
-      path: "integration/single-sign-on",
+      path: "integration/sso",
       element: <Integration />,
     },
     {
-      path: "integration/single-sign-on/sp-settings",
+      path: "integration/sso/settings",
       element: <SPSettings />,
     },
     {
-      path: "integration/single-sign-on/sp-metadata",
+      path: "integration/sso/metadata",
       element: <SPMetadata />,
     },
     {
@@ -422,7 +526,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "developer-tools",
-      element: <Navigate to="javascript-sdk" />,
+      element: <Navigate to="javascript-sdk" replace />,
     },
     {
       path: "developer-tools/api",
@@ -494,7 +598,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "backup",
-      element: <Navigate to="backup/data-backup" />,
+      element: <Navigate to="backup/data-backup" replace />,
     },
     {
       path: "backup/data-backup",
@@ -506,7 +610,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "delete-data",
-      element: <Navigate to="delete-data/deletion" />,
+      element: <Navigate to="delete-data/deletion" replace />,
     },
     {
       path: "delete-data/deletion",
@@ -518,7 +622,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "restore",
-      element: <Navigate to="restore/restore-backup" />,
+      element: <Navigate to="restore/restore-backup" replace />,
     },
     {
       path: "restore/restore-backup",

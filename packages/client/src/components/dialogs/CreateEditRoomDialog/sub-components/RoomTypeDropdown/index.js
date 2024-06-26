@@ -27,7 +27,7 @@
 import { isMobile } from "@docspace/shared/utils";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import RoomType from "../RoomType";
+import RoomType from "@docspace/shared/components/room-type";
 import DropdownDesktop from "./DropdownDesktop";
 import DropdownMobile from "./DropdownMobile";
 
@@ -38,8 +38,6 @@ const StyledRoomTypeDropdown = styled.div`
 
   .backdrop-active {
     top: -64px;
-    backdrop-filter: unset;
-    background: rgba(6, 22, 38, 0.2);
   }
 `;
 

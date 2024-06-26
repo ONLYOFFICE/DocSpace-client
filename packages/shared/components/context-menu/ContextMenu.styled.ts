@@ -261,6 +261,10 @@ const StyledContextMenu = styled.div<{
 
     -webkit-touch-callout: none;
 
+    @media ${tablet} {
+      padding: 0 16px;
+    }
+
     &:hover {
       background-color: ${(props) =>
         props.noHover
@@ -281,6 +285,9 @@ const StyledContextMenu = styled.div<{
 
   .p-contextmenu .p-menuitem-text {
     line-height: 36px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .p-contextmenu .p-menu-separator {
@@ -300,10 +307,11 @@ const StyledContextMenu = styled.div<{
   }
 
   .p-contextmenu .scroll-body .p-menuitem {
-    margin-right: ${(props) => `-${props.theme.scrollbar.paddingInlineEnd}`};
+    margin-inline-end: ${(props) =>
+      `-${props.theme.scrollbar.paddingInlineEnd}`};
 
     @media ${mobile} {
-      margin-right: ${(props) =>
+      margin-inline-end: ${(props) =>
         `-${props.theme.scrollbar.paddingInlineEndMobile}`};
     }
   }

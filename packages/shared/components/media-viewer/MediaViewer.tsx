@@ -59,11 +59,11 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     playlistPos,
     currentFileId,
     isPreviewFile,
-    setBufferSelection,
     extsImagePreviewed,
     deleteDialogVisible,
     pluginContextMenuItems,
     currentDeviceType,
+    isPublicFile = false,
 
     t,
     getIcon,
@@ -74,6 +74,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     onDownload,
     onChangeUrl,
     setActiveFiles,
+    setBufferSelection,
     onEmptyPlaylistError,
 
     ...other
@@ -109,7 +110,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     other.archiveRoomsId === targetFile?.rootFolderId ||
     (!targetFile?.security?.Rename && !targetFile?.security?.Delete);
 
-  const getContextModel = () => {
+  const getContextModel = (isError?: boolean) => {
     const {
       onClickDownloadAs,
       onClickLinkEdit,
@@ -124,12 +125,15 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       onCopyLink,
     } = other;
 
+    const isMobile = isMobileUtils() || isTablet();
+
     if (!targetFile) return [];
 
     const desktopModel = getDesktopMediaContextModel(
       t,
       targetFile,
       archiveRoom,
+      isPublicFile,
       {
         onClickDownload,
         onClickRename,
@@ -137,7 +141,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       },
     );
 
-    const model = getMobileMediaContextModel(t, targetFile, {
+    const model = getMobileMediaContextModel(t, targetFile, isPublicFile, {
       onShowInfoPanel,
       onClickDownload,
       onMoveAction,
@@ -211,11 +215,9 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       });
     }
 
-    const isMobile = isMobileUtils() || isTablet();
-
     return isMobile
       ? model
-      : isImage && !isMobile
+      : isImage && !isMobile && !isError
         ? desktopModel.filter((el) => el.key !== "download")
         : desktopModel;
   };
@@ -297,6 +299,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
           break;
 
         case KeyboardEventKeys.Escape:
+          event.stopPropagation();
           if (!deleteDialogVisible) onClose?.();
           break;
 
@@ -448,6 +451,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       targetFile={targetFile}
       userAccess={userAccess}
       playlistPos={playlistPos}
+      isPublicFile={isPublicFile}
       isPreviewFile={isPreviewFile}
       currentDeviceType={currentDeviceType}
       onClose={onClose}

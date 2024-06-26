@@ -157,6 +157,8 @@ const PureHome = (props) => {
     getRooms,
     setSelectedFolder,
     userId,
+    getFolderModel,
+    scrollToTop,
   } = props;
 
   const location = useLocation();
@@ -197,6 +199,9 @@ const PureHome = (props) => {
     gallerySelected,
     folderSecurity,
     userId,
+
+    scrollToTop,
+    selectedFolderStore,
   });
 
   const { showUploadPanel } = useOperations({
@@ -226,6 +231,8 @@ const PureHome = (props) => {
     setSelectedNode,
     fetchPeople,
     setPortalTariff,
+
+    scrollToTop,
   });
 
   useGroups({
@@ -238,6 +245,8 @@ const PureHome = (props) => {
 
     setSelectedNode,
     fetchGroups,
+
+    scrollToTop,
   });
 
   useInsideGroup({
@@ -247,6 +256,8 @@ const PureHome = (props) => {
     setIsLoading,
     setPortalTariff,
     fetchGroup,
+
+    scrollToTop,
   });
 
   useSettings({
@@ -281,6 +292,11 @@ const PureHome = (props) => {
     getRooms,
     isLoading,
   });
+
+  const getContextModel = () => {
+    if (isFrame) return null;
+    return getFolderModel(t);
+  };
 
   React.useEffect(() => {
     window.addEventListener("popstate", onClickBack);
@@ -334,6 +350,7 @@ const PureHome = (props) => {
   sectionProps.secondaryProgressBarValue = secondaryProgressDataStorePercent;
   sectionProps.secondaryProgressBarIcon = secondaryProgressDataStoreIcon;
   sectionProps.showSecondaryButtonAlert = secondaryProgressDataStoreAlert;
+  sectionProps.getContextModel = getContextModel;
 
   return (
     <>
@@ -381,7 +398,9 @@ const PureHome = (props) => {
           )}
 
         <Section.SectionBody isAccounts={isAccountsPage}>
-          <Outlet />
+          <>
+            <Outlet />
+          </>
         </Section.SectionBody>
 
         <Section.InfoPanelHeader>
@@ -419,6 +438,7 @@ export default inject(
     userStore,
     currentTariffStatusStore,
     settingsStore,
+    contextOptionsStore,
   }) => {
     const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
@@ -433,9 +453,10 @@ export default inject(
       setIsSectionBodyLoading,
       setIsSectionFilterLoading,
       isLoading,
-
       showFilterLoader,
     } = clientLoadingStore;
+
+    const { getFolderModel } = contextOptionsStore;
 
     const setIsLoading = (param, withoutTimer, withHeaderLoader) => {
       if (withHeaderLoader) setIsSectionHeaderLoading(param, !withoutTimer);
@@ -472,6 +493,7 @@ export default inject(
       addTagsToRoom,
       removeTagsFromRoom,
       getRooms,
+      scrollToTop,
     } = filesStore;
 
     const { updateProfileCulture } = peopleStore.targetUserStore;
@@ -647,6 +669,8 @@ export default inject(
       updateProfileCulture,
       getRooms,
       setSelectedFolder,
+      getFolderModel,
+      scrollToTop,
     };
   },
 )(observer(Home));

@@ -32,7 +32,10 @@ import { getUserRole } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   EmployeeActivationStatus,
+  Events,
+  FileType,
   FolderType,
+  RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
@@ -43,8 +46,10 @@ import {
   getExternalLinks,
   editExternalLink,
   addExternalLink,
+  checkIsPDFForm,
 } from "@docspace/shared/api/files";
 import isEqual from "lodash/isEqual";
+import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 
 const observedKeys = [
   "id",
@@ -88,7 +93,7 @@ class InfoPanelStore {
   infoPanelSelection = null;
   infoPanelRoom = null;
   membersIsLoading = false;
-  searchResultIsLoading = false;
+  isMembersPanelUpdating = false;
 
   shareChanged = false;
   calendarDay = null;
@@ -129,12 +134,7 @@ class InfoPanelStore {
 
   setShowSearchBlock = (bool) => (this.showSearchBlock = bool);
 
-  setSearchResultIsLoading = (isLoading) => {
-    this.searchResultIsLoading = isLoading;
-  };
-
   setSearchValue = (value) => {
-    this.setSearchResultIsLoading(true);
     this.searchValue = value;
   };
 
@@ -147,8 +147,9 @@ class InfoPanelStore {
 
   setSelectionHistory = (obj) => {
     this.selectionHistory = obj;
-    this.historyWithFileList =
-      this.infoPanelSelection.isFolder || this.infoPanelSelection.isRoom;
+    if (obj)
+      this.historyWithFileList =
+        this.infoPanelSelection.isFolder || this.infoPanelSelection.isRoom;
   };
 
   resetView = () => {
@@ -167,6 +168,10 @@ class InfoPanelStore {
 
   setIsScrollLocked = (isScrollLocked) => {
     this.isScrollLocked = isScrollLocked;
+  };
+
+  setIsMembersPanelUpdating = (isMembersPanelUpdating) => {
+    this.isMembersPanelUpdating = isMembersPanelUpdating;
   };
 
   // Selection helpers //
@@ -229,6 +234,10 @@ class InfoPanelStore {
           : null;
   }
 
+  get isRoomMembersPanelOpen() {
+    return this.infoPanelSelection?.isRoom && this.roomsView === infoMembers;
+  }
+
   get withPublicRoomBlock() {
     return (
       this.infoPanelCurrentSelection?.access ===
@@ -269,6 +278,11 @@ class InfoPanelStore {
       );
     } else {
       newInfoPanelSelection = [...Array(selectedItems.length).keys()];
+    }
+
+    if (!selectedItems.length && !newInfoPanelSelection.parentId) {
+      this.setSelectionHistory(null);
+      this.setInfoPanelSelectedGroup(null);
     }
 
     this.setInfoPanelSelection(newInfoPanelSelection);
@@ -385,7 +399,7 @@ class InfoPanelStore {
 
   openAccountsWithSelectedUser = async (user, navigate) => {
     const path = [
-      window.DocSpaceConfig?.proxy?.url,
+      window.ClientConfig?.proxy?.url,
       config.homepage,
       "/accounts/people",
     ];
@@ -404,12 +418,11 @@ class InfoPanelStore {
   };
 
   fetchUser = async (userId) => {
-    const { getStatusType, getUserContextOptions } =
-      this.peopleStore.usersStore;
+    const { getUserContextOptions } = this.peopleStore.usersStore;
 
     const fetchedUser = await getUserById(userId);
     fetchedUser.role = getUserRole(fetchedUser);
-    fetchedUser.statusType = getStatusType(fetchedUser);
+    fetchedUser.statusType = getUserStatus(fetchedUser);
     fetchedUser.options = getUserContextOptions(
       false,
       fetchedUser.isOwner,
@@ -611,6 +624,7 @@ class InfoPanelStore {
     t,
     clearFilter = true,
     withoutTitlesAndLinks = false,
+    membersFilter,
   ) => {
     if (this.membersIsLoading) return;
     const roomId = this.infoPanelSelection.id;
@@ -618,7 +632,9 @@ class InfoPanelStore {
     const isPublic =
       this.infoPanelSelection?.roomType ?? this.infoPanelSelection?.roomType;
 
-    const requests = [this.filesStore.getRoomMembers(roomId, clearFilter)];
+    const requests = [
+      this.filesStore.getRoomMembers(roomId, clearFilter, membersFilter),
+    ];
 
     if (
       isPublic &&
@@ -636,7 +652,6 @@ class InfoPanelStore {
     const [data, links] = await Promise.all(requests);
     clearFilter && this.setMembersIsLoading(false);
     clearTimeout(timerId);
-    this.setSearchResultIsLoading(false);
 
     links && this.publicRoomStore.setExternalLinks(links);
 
@@ -652,21 +667,26 @@ class InfoPanelStore {
     };
   };
 
-  addInfoPanelMembers = (t, members) => {
-    const convertedMembers = this.convertMembers(t, members);
+  fetchMoreMembers = async (t, withoutTitles) => {
+    const roomId = this.infoPanelSelection.id;
+    const oldMembers = this.infoPanelMembers;
 
-    if (this.infoPanelMembers) {
-      const { roomId, administrators, users, expected, groups } =
-        this.infoPanelMembers;
+    const data = await this.filesStore.getRoomMembers(roomId, false);
 
-      const mergedMembers = {
-        roomId: roomId,
-        administrators: [...administrators, ...convertedMembers.administrators],
-        users: [...users, ...convertedMembers.users],
-        expected: [...expected, ...convertedMembers.expectedMembers],
-        groups: [...groups, ...convertedMembers.groups],
-      };
+    const newMembers = this.convertMembers(t, data, false, true);
 
+    const mergedMembers = {
+      roomId: roomId,
+      administrators: [
+        ...oldMembers.administrators,
+        ...newMembers.administrators,
+      ],
+      users: [...oldMembers.users, ...newMembers.users],
+      expected: [...oldMembers.expected, ...newMembers.expectedMembers],
+      groups: [...oldMembers.groups, ...newMembers.groups],
+    };
+
+    if (!withoutTitles) {
       this.addMembersTitle(
         t,
         mergedMembers.administrators,
@@ -674,9 +694,26 @@ class InfoPanelStore {
         mergedMembers.expected,
         mergedMembers.groups,
       );
-
-      this.setInfoPanelMembers(mergedMembers);
     }
+
+    this.setInfoPanelMembers(mergedMembers);
+  };
+
+  updateInfoPanelMembers = async (t) => {
+    if (
+      !this.infoPanelSelection ||
+      !this.infoPanelSelection.isRoom ||
+      !this.infoPanelSelection.id
+    ) {
+      return;
+    }
+
+    this.setIsMembersPanelUpdating(true);
+
+    const fetchedMembers = await this.fetchMembers(t, true, !!this.searchValue);
+    this.setInfoPanelMembers(fetchedMembers);
+
+    this.setIsMembersPanelUpdating(false);
   };
 
   openShareTab = () => {
@@ -685,6 +722,28 @@ class InfoPanelStore {
   };
 
   getPrimaryFileLink = async (fileId) => {
+    const file = this.filesStore.files.find((item) => item.id === fileId);
+
+    if (file && !file.shared && file.fileType === FileType.PDF) {
+      try {
+        this.filesStore.addActiveItems([file.id], null);
+        const result = await checkIsPDFForm(fileId);
+
+        if (result) {
+          const event = new CustomEvent(Events.Share_PDF_Form, {
+            detail: { file },
+          });
+
+          window.dispatchEvent(event);
+          return;
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.filesStore.removeActiveItem(file);
+      }
+    }
+
     const { getFileInfo } = this.filesStore;
 
     const res = await getPrimaryLink(fileId);

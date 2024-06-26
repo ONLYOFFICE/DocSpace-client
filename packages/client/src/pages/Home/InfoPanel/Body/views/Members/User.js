@@ -43,6 +43,7 @@ import { StyledUserTypeHeader } from "../../styles/members";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Link } from "@docspace/shared/components/link";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const User = ({
   t,
@@ -144,11 +145,19 @@ const User = ({
           newMembersFilter.total -= 1;
 
           if (hasNextPage) {
+            const oldStartIndex = newMembersFilter.startIndex;
+            const oldPageCount = newMembersFilter.pageCount;
+
             newMembersFilter.startIndex =
               (newMembersFilter.page + 1) * newMembersFilter.pageCount - 1;
             newMembersFilter.pageCount = 1;
 
-            const fetchedMembers = await fetchMembers(t, false);
+            const fetchedMembers = await fetchMembers(
+              t,
+              false,
+              withoutTitles,
+              newMembersFilter,
+            );
 
             const newMembers = {
               administrators: [
@@ -164,6 +173,9 @@ const User = ({
               roomId: infoPanelSelection.id,
               ...newMembers,
             });
+
+            newMembersFilter.startIndex = oldStartIndex;
+            newMembersFilter.pageCount = oldPageCount;
           }
 
           setMembersFilter(newMembersFilter);
@@ -237,7 +249,7 @@ const User = ({
 
   const typeLabel =
     (type === "user" && userRole?.type !== type) ||
-    (userRole?.type === "manager" && type !== "admin")
+    (userRole?.type === "manager" && type !== "admin" && type !== "owner")
       ? getUserTypeLabel(userRole?.type, t)
       : getUserTypeLabel(type, t);
 
@@ -276,7 +288,9 @@ const User = ({
   const uniqueTooltipId = `userTooltip_${Math.random()}`;
 
   const tooltipContent = `${
-    user.isOwner ? t("Common:DocSpaceOwner") : t("Common:DocSpaceAdmin")
+    user.isOwner
+      ? t("Common:PortalOwner", { productName: PRODUCT_NAME })
+      : t("Common:PortalAdmin", { productName: PRODUCT_NAME })
   }. ${t("Common:HasFullAccess")}`;
 
   return user.isTitle ? (

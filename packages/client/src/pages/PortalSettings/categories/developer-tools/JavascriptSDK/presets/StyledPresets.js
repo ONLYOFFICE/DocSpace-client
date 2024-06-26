@@ -39,8 +39,9 @@ export const SDKContainer = styled(Box)`
     width: 100%;
   `}
 
-  .tabs_body {
+  .tabs-body {
     height: calc(100lvh - 260px);
+    display: block;
   }
 
   .linkHelp {
@@ -252,6 +253,19 @@ export const ColumnContainer = styled(Box)`
   flex-direction: column;
   display: flex;
   gap: 8px;
+
+  .toggle {
+    position: relative;
+  }
+
+  @media ${tablet} {
+    gap: 4px;
+  }
+
+  ${isMobile() &&
+  css`
+    gap: 4px;
+  `}
 `;
 
 export const Preview = styled(Box)`
@@ -276,6 +290,7 @@ export const GetCodeButtonWrapper = styled.div`
   bottom: 0;
   margin-top: 32px;
   background-color: ${({ theme }) => theme.backgroundColor};
+  z-index: 1;
 
   @media ${mobile} {
     position: fixed;

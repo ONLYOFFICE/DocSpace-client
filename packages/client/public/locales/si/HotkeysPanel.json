@@ -5,6 +5,7 @@
   "HotkeysChangeView": "ජාලක හා ලැයිස්තු දැක්ම අතර මාරුව",
   "HotkeysClearAll": "සියළුම තේරීම් ඉවතලන්න",
   "HotkeysClose": "වසන්න/පෙරසේ ක්‍රියාමාර්ග",
+  "HotkeysCopySelected": "තෝරාගත් අථක පසුරු පුවරුවට පිටපත් කරන්න",
   "HotkeysCreateDocument": "ලේඛනයක් සාදන්න",
   "HotkeysCreateFolder": "බහාලුමක් සාදන්න",
   "HotkeysCreateForm": "හිස් ආකෘතිපත්‍ර අච්චුවක් සාදන්න",
@@ -12,7 +13,7 @@
   "HotkeysCreatePresentation": "සමර්පණයක් සාදන්න",
   "HotkeysCreateSpreadsheet": "පැතුරුම්පතක් සාදන්න",
   "HotkeysCreatingObjects": "අථක සෑදීම",
-  "HotkeysEnterKey": "ඇතුල් කරන්න",
+  "HotkeysCutSelected": "තෝරාගත් අථක කපන්න",
   "HotkeysExtendSelectionDown": "තේරීම පහළට පතුරුවන්න",
   "HotkeysExtendSelectionLeft": "තේරීම වමට පතුරුවන්න",
   "HotkeysExtendSelectionRight": "තේරීම දකුණට පතුරුවන්න",
@@ -25,6 +26,7 @@
   "HotkeysMoveUp": "තේරීම වෙනස් නොකර ඉහළට යන්න",
   "HotkeysNavigation": "යාත්‍රණය",
   "HotkeysOpen": "තේරූ අථකය අරින්න/ක්‍රියාමාර්ගය තහවුරු කරන්න",
+  "HotkeysPasteSelected": "පසුරු පුවරුවෙන් තෝරාගත් අථක අලවන්න",
   "HotkeysPlayPause": "වාදනය/විරාමය",
   "HotkeysRedoLastUndoneAction": "ආපසු හැරවීම තිබුණු පරිදි තබන්න",
   "HotkeysRemove": "තේරූ අථක ඉවත් කරන්න",
@@ -36,8 +38,9 @@
   "HotkeysSelectRight": "දකුණු පස ඊළඟ අථකය තෝරන්න",
   "HotkeysSelectUp": "ඉහළ ඊළඟ අථකය තෝරන්න",
   "HotkeysShortcuts": "කෙටිමං ලැයිස්තුව පෙන්වන්න",
-  "HotkeysSpaceKey": "හිස්තැන",
   "HotkeysUndoLastAction": "අවසාන ක්‍රියාව පෙරසේ තබන්න",
   "HotkeysUploadFile": "ගොනුවක් උඩුගත කරන්න",
-  "HotkeysUploadingObjects": "අථක උඩුගත වෙමින්"
+  "HotkeysUploadingObjects": "අථක උඩුගත වෙමින්",
+  "HotkeysZoomIn": "විශාලනය",
+  "HotkeysZoomOut": "කුඩාලනය"
 }

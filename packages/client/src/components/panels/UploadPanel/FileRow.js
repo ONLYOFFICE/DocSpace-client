@@ -318,6 +318,8 @@ class FileRow extends Component {
       name,
       isMediaActive,
       downloadInCurrentTab,
+      isPlugin,
+      onPluginClick,
     } = this.props;
 
     const { showPasswordInput, password, passwordValid } = this.state;
@@ -347,13 +349,13 @@ class FileRow extends Component {
         >
           <>
             {item.fileId ? (
-              isMedia ? (
+              isMedia || (isPlugin && onPluginClick) ? (
                 <Link
                   className="upload-panel_file-row-link"
                   fontWeight="600"
                   color={item.error && "#A3A9AE"}
                   truncate
-                  onClick={onMediaClick}
+                  onClick={isMedia ? onMediaClick : onPluginClick}
                 >
                   {name}
                   {fileExtension}
@@ -435,6 +437,7 @@ export default inject(
       uploadDataStore,
       mediaViewerDataStore,
       settingsStore,
+      pluginStore,
     },
     { item },
   ) => {
@@ -458,10 +461,36 @@ export default inject(
       if (!!ext) splitted.splice(-1);
     }
 
+    const { fileItemsList } = pluginStore;
+    const { enablePlugins, currentDeviceType } = settingsStore;
+
+    let isPlugin = false;
+    let onPluginClick = null;
+
+    if (fileItemsList && enablePlugins) {
+      let currPluginItem = null;
+
+      fileItemsList.forEach((i) => {
+        if (i.key === item?.fileInfo?.fileExst) currPluginItem = i.value;
+      });
+
+      if (currPluginItem) {
+        const correctDevice = currPluginItem.devices
+          ? currPluginItem.devices.includes(currentDeviceType)
+          : true;
+        if (correctDevice) {
+          isPlugin = true;
+          onPluginClick = () =>
+            currPluginItem.onClick({ ...item, ...item.fileInfo });
+        }
+      }
+    }
+
     name = splitted.join(".");
 
     const { theme } = settingsStore;
-    const { canViewedDocs, getIconSrc, isArchive } = filesSettingsStore;
+    const { canViewedDocs, getIconSrc, isArchive, openOnNewPage } =
+      filesSettingsStore;
     const {
       uploaded,
       cancelCurrentUpload,
@@ -485,9 +514,7 @@ export default inject(
     const fileIcon = getIconSrc(ext, 32);
 
     const downloadInCurrentTab =
-      window.DocSpaceConfig?.editor?.openOnNewPage === false ||
-      isArchive(ext) ||
-      !canViewedDocs(ext);
+      !openOnNewPage || isArchive(ext) || !canViewedDocs(ext);
 
     return {
       theme,
@@ -509,6 +536,9 @@ export default inject(
 
       setCurrentItem,
       clearUploadedFilesHistory,
+
+      isPlugin,
+      onPluginClick,
     };
   },
 )(withTranslation("UploadPanel")(observer(FileRow)));

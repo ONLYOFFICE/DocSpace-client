@@ -30,6 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import PluginStore from "SRC_DIR/store/PluginStore";
@@ -56,6 +57,8 @@ const PluginPage = ({
   updatePlugin,
   addPlugin,
 
+  updatePlugins,
+
   theme,
   isLoading,
   isEmptyList,
@@ -72,6 +75,10 @@ const PluginPage = ({
   React.useEffect(() => {
     setDocumentTitle(t("Common:Plugins"));
   }, [t]);
+
+  React.useEffect(() => {
+    updatePlugins(true);
+  }, [updatePlugins]);
 
   return isLoading || (!isEmptyList && pluginList.length === 0) ? (
     <StyledContainer>
@@ -96,7 +103,7 @@ const PluginPage = ({
           /> */}
       {withUpload && (
         <>
-          <Text>{t("UploadDescription")}</Text>
+          <Text>{t("UploadDescription", { productName: PRODUCT_NAME })}</Text>
           <Dropzone
             onDrop={onDrop}
             isDisabled={!withUpload}
@@ -133,6 +140,7 @@ export default inject(
     const {
       pluginList,
       updatePlugin,
+      updatePlugins,
       setCurrentSettingsDialogPlugin,
       setSettingsPluginDialogVisible,
 
@@ -153,6 +161,7 @@ export default inject(
       pluginList,
 
       updatePlugin,
+      updatePlugins,
 
       openSettingsDialog,
 

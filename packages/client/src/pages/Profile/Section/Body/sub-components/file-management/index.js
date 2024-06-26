@@ -61,6 +61,10 @@ const FileManagement = ({
   setKeepNewFileName,
   setThumbnails1280x720,
   thumbnails1280x720,
+
+  openEditorInSameTab,
+  setOpenEditorInSameTab,
+  organizationName,
 }) => {
   const { t, ready } = useTranslation(["FilesSettings", "Common"]);
 
@@ -86,6 +90,10 @@ const FileManagement = ({
   const onChangeKeepNewFileName = React.useCallback(() => {
     setKeepNewFileName(!keepNewFileName);
   }, [setKeepNewFileName, keepNewFileName]);
+
+  const onChangeOpenEditorInSameTab = React.useCallback(() => {
+    setOpenEditorInSameTab(!openEditorInSameTab);
+  }, [setOpenEditorInSameTab, openEditorInSameTab]);
 
   const onChangeFavorites = React.useCallback(
     (e) => {
@@ -153,6 +161,16 @@ const FileManagement = ({
             <Text>{t("DisplayNotification")}</Text>
           </div>
         )}
+        {!isVisitor && (
+          <div className="toggle-btn-wrapper">
+            <ToggleButton
+              className="open-same-tab toggle-btn"
+              onChange={onChangeOpenEditorInSameTab}
+              isChecked={openEditorInSameTab}
+            />
+            <Text>{t("OpenSameTab", { organizationName })}</Text>
+          </div>
+        )}
       </Box>
 
       {/* <Box className="settings-section">
@@ -210,58 +228,68 @@ const FileManagement = ({
   );
 };
 
-export default inject(({ userStore, filesSettingsStore, treeFoldersStore }) => {
-  const {
-    storeOriginalFiles,
-    confirmDelete,
-    forcesave,
+export default inject(
+  ({ settingsStore, userStore, filesSettingsStore, treeFoldersStore }) => {
+    const { organizationName } = settingsStore;
+    const {
+      storeOriginalFiles,
+      confirmDelete,
+      forcesave,
 
-    setStoreOriginal,
+      setStoreOriginal,
 
-    setConfirmDelete,
+      setConfirmDelete,
 
-    setForceSave,
+      setForceSave,
 
-    favoritesSection,
-    recentSection,
-    setFavoritesSetting,
-    setRecentSetting,
+      favoritesSection,
+      recentSection,
+      setFavoritesSetting,
+      setRecentSetting,
 
-    keepNewFileName,
-    setKeepNewFileName,
+      keepNewFileName,
+      setKeepNewFileName,
 
-    setThumbnails1280x720,
-    thumbnails1280x720,
-  } = filesSettingsStore;
+      setThumbnails1280x720,
+      thumbnails1280x720,
 
-  const { myFolderId, commonFolderId } = treeFoldersStore;
+      openEditorInSameTab,
+      setOpenEditorInSameTab,
+    } = filesSettingsStore;
 
-  return {
-    storeOriginalFiles,
-    confirmDelete,
-    forceSave: forcesave,
+    const { myFolderId, commonFolderId } = treeFoldersStore;
 
-    myFolderId,
-    commonFolderId,
-    isVisitor: userStore.user.isVisitor,
-    favoritesSection,
-    recentSection,
+    return {
+      storeOriginalFiles,
+      confirmDelete,
+      forceSave: forcesave,
 
-    setStoreOriginal,
+      myFolderId,
+      commonFolderId,
+      isVisitor: userStore.user.isVisitor,
+      favoritesSection,
+      recentSection,
 
-    setConfirmDelete,
+      setStoreOriginal,
 
-    setForceSave,
+      setConfirmDelete,
 
-    setFavoritesSetting,
-    setRecentSetting,
-    myFolderId,
-    commonFolderId,
+      setForceSave,
 
-    keepNewFileName,
-    setKeepNewFileName,
+      setFavoritesSetting,
+      setRecentSetting,
+      myFolderId,
+      commonFolderId,
 
-    setThumbnails1280x720,
-    thumbnails1280x720,
-  };
-})(observer(FileManagement));
+      keepNewFileName,
+      setKeepNewFileName,
+
+      setThumbnails1280x720,
+      thumbnails1280x720,
+
+      openEditorInSameTab,
+      setOpenEditorInSameTab,
+      organizationName,
+    };
+  },
+)(observer(FileManagement));

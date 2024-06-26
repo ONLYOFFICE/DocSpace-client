@@ -32,6 +32,7 @@ import { useTheme } from "styled-components";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import OutsdideIcon from "PUBLIC_DIR/images/arrow.outside.react.svg";
+import { isMobile as isMobileDevice } from "react-device-detect";
 
 import {
   classNames,
@@ -85,7 +86,7 @@ const SubMenu = (props: {
   const theme = useTheme();
 
   const onItemMouseEnter = (e: React.MouseEvent, item: ContextMenuType) => {
-    if (item.disabled || isTablet() || isMobile()) {
+    if (item.disabled || isMobileDevice) {
       e.preventDefault();
       return;
     }
@@ -155,21 +156,55 @@ const SubMenu = (props: {
         subMenuRef.current.style.top = `${-1 * topOffset}px`;
       }
 
+      const containerOffsetLeft = parseInt(`${containerOffset.left}`, 10);
+      const freeSpaceRight =
+        viewport.width - containerOffsetLeft - itemOuterWidth;
+      const freeSpaceLeft = containerOffsetLeft;
+      const submenuListMargin = 4;
+      const sectionPadding = 17;
+
       if (isRtl) {
-        if (subListWidth < parseInt(`${containerOffset.left}`, 10)) {
+        if (
+          !root &&
+          freeSpaceLeft > freeSpaceRight &&
+          subListWidth > containerOffsetLeft
+        ) {
+          // If the menu extends beyond the screen
+          subMenuRef.current.style.width = `${containerOffsetLeft - submenuListMargin - sectionPadding}px`;
+        }
+
+        if (
+          subListWidth < containerOffsetLeft ||
+          (!root && freeSpaceLeft > freeSpaceRight)
+        ) {
           subMenuRef.current.style.left = `${-1 * subListWidth}px`;
         } else {
           subMenuRef.current.style.left = `${itemOuterWidth}px`;
         }
-      } else if (
-        parseInt(`${containerOffset.left}`, 10) +
-          itemOuterWidth +
-          subListWidth >
-        viewport.width - DomHelpers.calculateScrollbarWidth()
-      ) {
-        subMenuRef.current.style.left = `${-1 * subListWidth}px`;
-      } else {
-        subMenuRef.current.style.left = `${itemOuterWidth}px`;
+      }
+
+      const notEnoughWidthRight =
+        containerOffsetLeft + itemOuterWidth + subListWidth >
+        viewport.width - DomHelpers.calculateScrollbarWidth();
+
+      if (!isRtl) {
+        if (notEnoughWidthRight && containerOffsetLeft > subListWidth) {
+          subMenuRef.current.style.left = `${-1 * subListWidth}px`;
+        } else {
+          subMenuRef.current.style.left = `${itemOuterWidth}px`;
+
+          if (notEnoughWidthRight && !root) {
+            // If the menu extends beyond the screen
+            const newWidth =
+              viewport.width -
+              containerOffsetLeft -
+              itemOuterWidth -
+              submenuListMargin -
+              sectionPadding;
+
+            subMenuRef.current.style.width = `${newWidth}px`;
+          }
+        }
       }
     }
   };
@@ -267,7 +302,9 @@ const SubMenu = (props: {
       ));
 
     const label = item.label && (
-      <span className="p-menuitem-text not-selectable">{item.label}</span>
+      <span className="p-menuitem-text not-selectable" dir="auto">
+        {item.label}
+      </span>
     );
     const subMenuIcon = (item.items || item.onLoad) && (
       <ArrowIcon className={subMenuIconClassName} />

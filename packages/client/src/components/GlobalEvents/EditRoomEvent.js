@@ -109,7 +109,7 @@ const EditRoomEvent = ({
     },
     isPrivate: false,
     icon: {
-      uploadedFile: item.logo.large,
+      uploadedFile: item.logo.original,
       tmpFile: "",
       x: 0.5,
       y: 0.5,
@@ -142,7 +142,7 @@ const EditRoomEvent = ({
     const quotaLimit = roomParams?.quota || item.quotaLimit;
 
     const editRoomParams = {
-      title: roomParams.title || t("Files:NewRoom"),
+      title: roomParams.title || t("Common:NewRoom"),
       ...(isDefaultRoomsQuotaSet && {
         quota: +quotaLimit,
       }),
@@ -213,7 +213,7 @@ const EditRoomEvent = ({
       if (roomParams.icon.uploadedFile) {
         updateRoom(item, {
           ...room,
-          logo: { big: item.logo.large },
+          logo: { big: item.logo.original },
         });
 
         addActiveItems(null, [room.id]);
@@ -292,7 +292,7 @@ const EditRoomEvent = ({
     setCreateRoomDialogVisible(true);
     setIsInitLoading(true);
 
-    const logo = item?.logo?.large ? item.logo.large : "";
+   const logo = item?.logo?.original ? item.logo.original : "";
 
     const requests = [fetchTags(), getWatermarkSettings(item.id)];
 

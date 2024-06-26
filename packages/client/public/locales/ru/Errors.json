@@ -1,7 +1,6 @@
 {
   "ErrorEmptyResponse": "Пустой ответ",
-  "ErrorUnavailableText": "DocSpace недоступен",
-  "InvalidLink": "Недействительная ссылка",
+  "ErrorUnavailableText": "{{productName}} недоступен",
   "LinkDoesNotExist": "Ссылки, которую вы пытаетесь открыть, не существует.",
   "LinkHasExpired": "Ссылка, по которой вы перешли, просрочена."
 }

@@ -1,7 +1,6 @@
 {
   "ErrorEmptyResponse": "反応なし",
-  "ErrorUnavailableText": "DocSpaceは現在、ご利用いただけません",
-  "InvalidLink": "無効なリンク",
+  "ErrorUnavailableText": "{{productName}}は現在、ご利用いただけません",
   "LinkDoesNotExist": "開こうとしているリンクは存在しません。",
   "LinkHasExpired": "リンクの有効期限が切れています。"
 }

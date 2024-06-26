@@ -25,14 +25,33 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+
+import { Scrollbar } from "../../scrollbar";
+import { DeviceType } from "../../../enums";
+
 import { StyledSectionContainer } from "../Section.styled";
 import { SectionContainerProps } from "../Section.types";
 
 const SectionContainer = React.forwardRef<
   HTMLDivElement,
   SectionContainerProps
->((props, forwardRef) => {
-  return <StyledSectionContainer ref={forwardRef} id="section" {...props} />;
+>(({ withBodyScroll, children, currentDeviceType, ...props }, forwardRef) => {
+  return (
+    <StyledSectionContainer
+      ref={forwardRef}
+      id="section"
+      withBodyScroll={withBodyScroll}
+      {...props}
+    >
+      {withBodyScroll && currentDeviceType !== DeviceType.mobile ? (
+        <Scrollbar id="sectionScroll" scrollClass="section-scroll" fixedSize>
+          {children}
+        </Scrollbar>
+      ) : (
+        children
+      )}
+    </StyledSectionContainer>
+  );
 });
 
 SectionContainer.displayName = "SectionContainer";

@@ -76,7 +76,7 @@ const SubmitToFormGallery = ({
 
     setIsSubmitting(true);
 
-    const origin = combineUrl(window.DocSpaceConfig?.proxy?.url);
+    const origin = combineUrl(window.ClientConfig?.proxy?.url);
     const fileSrc = `${origin}/filehandler.ashx?action=download&fileid=${formItem.id}`;
 
     const file = await fetch(fileSrc)
@@ -134,8 +134,8 @@ const SubmitToFormGallery = ({
     return (
       <FilesSelector
         key="select-file-dialog"
-        filterParam={FilesSelectorFilterTypes.DOCXF}
-        descriptionText={t("Common:SelectDOCXFFormat")}
+        filterParam={FilesSelectorFilterTypes.PDF}
+        descriptionText={t("Common:SelectPDFFormat")}
         isPanelVisible={true}
         onSelectFile={onSelectForm}
         onClose={onCloseFormSelector}

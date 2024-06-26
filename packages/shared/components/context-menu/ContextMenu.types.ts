@@ -24,23 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+export type ContextMenuRefType = {
+  show: (e: React.MouseEvent | MouseEvent) => void;
+  hide: (
+    e:
+      | React.MouseEvent
+      | MouseEvent
+      | Event
+      | React.ChangeEvent<HTMLInputElement>,
+  ) => void;
+  toggle: (
+    e:
+      | React.MouseEvent
+      | MouseEvent
+      | Event
+      | React.ChangeEvent<HTMLInputElement>,
+  ) => boolean | undefined;
+  menuRef: React.RefObject<HTMLDivElement | null>;
+};
+
+export type ContextMenuTypeOnClick = (
+  value:
+    | {
+        originalEvent: React.MouseEvent | React.ChangeEvent<HTMLInputElement>;
+        action?: string | boolean;
+        item?: ContextMenuType;
+      }
+    | React.MouseEvent
+    | React.ChangeEvent<HTMLInputElement>,
+  item?: ContextMenuType,
+) => void;
+
 export type ContextMenuType = {
   id?: string;
   key: string | number;
   label: string | React.ReactNode;
   icon?: string;
   disabled?: boolean;
-  onClick?: (
-    value:
-      | {
-          originalEvent: React.MouseEvent | React.ChangeEvent<HTMLInputElement>;
-          action?: string | boolean;
-          item?: ContextMenuType;
-        }
-      | React.MouseEvent
-      | React.ChangeEvent<HTMLInputElement>,
-    item?: ContextMenuType,
-  ) => void;
+  onClick?: ContextMenuTypeOnClick;
   isSeparator?: undefined;
   url?: string;
   items?: ContextMenuType[];

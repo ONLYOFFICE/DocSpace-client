@@ -48,8 +48,21 @@ export const transitionalScreenSize = `(max-width: ${
   size.desktop + INFO_PANEL_WIDTH
 }px)`;
 
-export const isMobile = () => {
-  return window.innerWidth <= size.mobile;
+export const isMobile = (width?: number) => {
+  return (width ?? window.innerWidth) <= size.mobile;
+};
+
+export const isMobileDevice = () => {
+  const angleByRadians =
+    (Math.PI / 180) *
+    (window.screen?.orientation?.angle ?? window.orientation ?? 0);
+  const width = Math.abs(
+    Math.round(
+      Math.sin(angleByRadians) * window.innerHeight +
+        Math.cos(angleByRadians) * window.innerWidth,
+    ),
+  );
+  return isMobile(width);
 };
 
 export const isTablet = (width?: number) => {

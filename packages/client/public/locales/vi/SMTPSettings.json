@@ -1,5 +1,4 @@
-{
-  "Authentication": "Xác thực",
+﻿{
   "AuthViaNTLM": "Xác thực qua NTLM",
   "EnableSSL": "Bật SSL",
   "EnterDomain": "Nhập tên miền",
@@ -12,6 +11,5 @@
   "Port": "Cổng",
   "SenderDisplayName": "Tên hiển thị của người gửi",
   "SenderEmailAddress": "Địa chỉ email của người gửi",
-  "SendTestMail": "Gửi thư thử nghiệm",
-  "SuccessfullyCompletedOperation": "Thao tác đã được hoàn thành."
+  "SendTestMail": "Gửi thư thử nghiệm"
 }

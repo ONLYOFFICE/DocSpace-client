@@ -27,7 +27,7 @@
 
 export const getCampaignsLs = (standalone: boolean) => {
   if (standalone) {
-    return window.DocSpaceConfig?.campaigns || [];
+    return window.ClientConfig?.campaigns || [];
   }
   return (localStorage.getItem("docspace_campaigns") || "")
     .split(",")
@@ -37,11 +37,18 @@ export const getCampaignsLs = (standalone: boolean) => {
 export const getImage = async (
   campaign: string,
   standalone: boolean,
+  isIcon: boolean = false,
 ): Promise<string> => {
   if (standalone) {
+    if (isIcon) {
+      return `/static/campaigns/images/campaign.${campaign.toLowerCase()}.icon.svg`;
+    }
     return `/static/campaigns/images/campaign.${campaign.toLowerCase()}.svg`;
   }
-  const imageUrl = await window.firebaseHelper.getCampaignsImages(campaign);
+  const imageUrl = await window.firebaseHelper.getCampaignsImages(
+    campaign,
+    isIcon,
+  );
   return imageUrl;
 };
 

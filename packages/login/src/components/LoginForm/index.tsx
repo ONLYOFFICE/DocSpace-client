@@ -262,13 +262,13 @@ const LoginForm = ({
         PasswordHash: hash,
       });
 
-      // if (portals.length === 1) {
-      //   const referenceUrl = generateOAuth2ReferenceURl(client.clientId);
-      //   window.open(
-      //     `${portals[0].portalLink}&referenceUrl=${referenceUrl}`,
-      //     "_self",
-      //   );
-      // }
+      if (portals.length === 1) {
+        const referenceUrl = generateOAuth2ReferenceURl(client.clientId);
+        window.open(
+          `${portals[0].portalLink}&referenceUrl=${referenceUrl}`,
+          "_self",
+        );
+      }
 
       const searchParams = new URLSearchParams();
 

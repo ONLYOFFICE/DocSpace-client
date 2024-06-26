@@ -109,18 +109,6 @@ const Gallery = ({
             {parseAndFormatDate(gallerySelected.attributes.updatedAt, culture)}
           </Text>
         </div>
-        <div className="property">
-          <Text className="property-title">{t("Common:Size")}</Text>
-          <Text className="property-content">
-            {gallerySelected.attributes.file_size}
-          </Text>
-        </div>
-        <div className="property">
-          <Text className="property-title">{t("Common:Pages")}</Text>
-          <Text className="property-content">
-            {gallerySelected.attributes.file_pages}
-          </Text>
-        </div>
       </StyledProperties>
     </>
   );

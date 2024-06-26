@@ -36,6 +36,9 @@ import { PublicRoomBarProps } from "./PublicRoomBar.types";
 const PublicRoomBar = (props: PublicRoomBarProps) => {
   const { headerText, bodyText, iconName, onClose, ...rest } = props;
 
+  const headerAs = typeof headerText !== "string" ? "div" : undefined;
+  const bodyAs = typeof bodyText !== "string" ? "div" : undefined;
+
   return (
     <StyledPublicRoomBar {...rest}>
       <div className="text-container">
@@ -43,11 +46,20 @@ const PublicRoomBar = (props: PublicRoomBarProps) => {
           <div className="header-icon">
             <ReactSVG src={iconName || PeopleIcon} />
           </div>
-          <Text className="text-container_header" fontWeight={600}>
+          <Text
+            className="text-container_header"
+            fontWeight={600}
+            as={headerAs}
+          >
             {headerText}
           </Text>
         </div>
-        <Text className="text-container_body" fontSize="12px" fontWeight={400}>
+        <Text
+          className="text-container_body"
+          fontSize="12px"
+          fontWeight={400}
+          as={bodyAs}
+        >
           {bodyText}
         </Text>
       </div>

@@ -54,7 +54,7 @@ const HistoryBlock = ({ t, feed, isLastEntity }) => {
         userName={initiator.displayName}
         source={
           initiator.hasAvatar
-            ? initiator.avatarSmall
+            ? initiator.avatar
             : DefaultUserAvatarSmall ||
               (initiator.displayName ? "" : initiator.email && AtReactSvgUrl)
         }

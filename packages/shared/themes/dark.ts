@@ -611,9 +611,9 @@ const Dark: TTheme = {
   },
 
   scrollbar: {
-    bgColor: "rgba(20, 20, 20, 0.4)",
-    hoverBgColor: "rgba(20, 20, 20, 0.64)",
-    pressBgColor: "rgba(20, 20, 20, 0.8)",
+    bgColor: "rgba(136, 136, 136, 0.4)",
+    hoverBgColor: "rgba(136, 136, 136, 0.64)",
+    pressBgColor: "rgba(136, 136, 136, 0.8)",
     paddingInlineEnd: "17px !important",
     paddingInlineEndMobile: "8px !important",
   },
@@ -637,7 +637,7 @@ const Dark: TTheme = {
         b: 27,
         a: 0.4,
       },
-      blur: 10,
+      blur: 9,
     },
 
     content: {
@@ -992,7 +992,7 @@ const Dark: TTheme = {
       border: "none",
     },
   },
-  
+
   fieldContainer: {
     horizontal: {
       margin: "0 0 16px 0",
@@ -3321,6 +3321,11 @@ const Dark: TTheme = {
 
   dateTimePicker: {
     colorClockIcon: "#ADADAD",
+  },
+
+  embeddingPanel: {
+    descriptionTextColor: "#ADADAD",
+    iconColor: "#ADADAD",
   },
   completedForm: {
     linkColor: white,

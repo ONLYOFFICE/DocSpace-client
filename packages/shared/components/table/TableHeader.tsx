@@ -347,6 +347,9 @@ class TableHeader extends React.Component<
     const storageSize =
       !resetColumnsSize && localStorage.getItem(columnStorageName);
 
+    const storageInfoSize =
+      !resetColumnsSize && localStorage.getItem(columnInfoPanelStorageName);
+
     // TODO: If defaultSize(75px) is less than defaultMinColumnSize(110px) the calculations work correctly
     const defaultSize =
       columns.find((col) => col.defaultSize && col.enable)?.defaultSize || 0;
@@ -375,6 +378,10 @@ class TableHeader extends React.Component<
 
     const tableContainer = storageSize
       ? storageSize.split(" ")
+      : containerGridTemplateColumns;
+
+    const tableInfoContainer = storageInfoSize
+      ? storageInfoSize.split(" ")
       : containerGridTemplateColumns;
 
     const { hideColumns } = this.state;
@@ -406,9 +413,17 @@ class TableHeader extends React.Component<
       .map((column) => getSubstring(column))
       .reduce((x, y) => x + y);
 
+    const defaultInfoWidth = tableInfoContainer
+      .map((column) => getSubstring(column))
+      .reduce((x, y) => x + y);
+
     const oldWidth = defaultWidth - defaultSize - settingsSize;
 
-    if (Math.round(defaultWidth) !== Math.round(containerWidth) && !isResized) {
+    const isDifferentWindowSize = infoPanelVisible
+      ? Math.round(defaultInfoWidth) !== Math.round(containerWidth)
+      : Math.round(defaultWidth) !== Math.round(containerWidth);
+
+    if (isDifferentWindowSize && !isResized) {
       if (infoPanelVisible) localStorage.removeItem(columnInfoPanelStorageName);
       else localStorage.removeItem(columnStorageName);
       this.onResize(true);

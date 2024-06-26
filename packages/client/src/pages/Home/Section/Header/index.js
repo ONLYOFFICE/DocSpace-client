@@ -27,7 +27,6 @@
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import ReconnectSvgUrl from "PUBLIC_DIR/images/reconnect.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
-import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/move.react.svg?url";
 import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
@@ -45,6 +44,7 @@ import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
+import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -290,6 +290,7 @@ const SectionHeaderContent = (props) => {
     startUpload,
     getFolderModel,
     onCreateRoom,
+    onOpenEmbeddingSettings,
   } = props;
 
   const navigate = useNavigate();
@@ -590,10 +591,19 @@ const SectionHeaderContent = (props) => {
         disabled: !isRoom || !security?.EditRoom,
       },
       {
+        id: "header_option_invite-users-to-room",
+        key: "invite-users-to-room",
+        label: t("Common:InviteUsers"),
+        icon: PersonReactSvgUrl,
+        onClick: () =>
+          onClickInviteUsers(selectedFolder.id, selectedFolder.roomType),
+        disabled: !isRoom || !security?.EditAccess,
+      },
+      {
         id: "header_option_copy-external-link",
         key: "copy-external-link",
         label: t("Files:CopySharedLink"),
-        icon: CopyToReactSvgUrl,
+        icon: TabletLinkReactSvgUrl,
         onClick: async () => {
           if (primaryLink) {
             copyShareLink(primaryLink.sharedTo.shareLink);
@@ -613,13 +623,12 @@ const SectionHeaderContent = (props) => {
           isArchive,
       },
       {
-        id: "header_option_invite-users-to-room",
-        key: "invite-users-to-room",
-        label: t("Common:InviteUsers"),
-        icon: PersonReactSvgUrl,
-        onClick: () =>
-          onClickInviteUsers(selectedFolder.id, selectedFolder.roomType),
-        disabled: !isRoom || !security?.EditAccess,
+        id: "header_option_room-embed",
+        key: "room-embed",
+        label: t("Files:Embed"),
+        icon: CodeReactSvgUrl,
+        onClick: () => onOpenEmbeddingSettings(selectedFolder),
+        disabled: !security?.Embed,
       },
       {
         id: "header_option_room-info",
@@ -634,6 +643,14 @@ const SectionHeaderContent = (props) => {
         key: "separator-2",
         isSeparator: true,
         disabled: isRecycleBinFolder,
+      },
+      {
+        id: "header_option_download",
+        key: "download",
+        label: t("Common:Download"),
+        onClick: onDownloadAction,
+        disabled: !security?.Download,
+        icon: DownloadReactSvgUrl,
       },
       {
         id: "header_option_archive-room",
@@ -662,14 +679,6 @@ const SectionHeaderContent = (props) => {
         icon: LeaveRoomSvgUrl,
         onClick: onLeaveRoom,
         disabled: isArchive || !inRoom || isPublicRoom,
-      },
-      {
-        id: "header_option_download",
-        key: "download",
-        label: t("Common:Download"),
-        onClick: onDownloadAction,
-        disabled: !security?.Download,
-        icon: DownloadReactSvgUrl,
       },
       {
         id: "header_option_unarchive-room",
@@ -1178,6 +1187,7 @@ export default inject(
       onCreateAndCopySharedLink,
       getFolderModel,
       onCreateRoom,
+      onOpenEmbeddingSettings,
     } = contextOptionsStore;
 
     const canRestoreAll = isArchiveFolder && roomsForRestore.length > 0;
@@ -1361,6 +1371,7 @@ export default inject(
       onClickReconnectStorage,
       getFolderModel,
       onCreateRoom,
+      onOpenEmbeddingSettings,
     };
   },
 )(

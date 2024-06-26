@@ -26,11 +26,12 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router-dom";
 import { withTranslation, Trans } from "react-i18next";
 import copy from "copy-to-clipboard";
 import isEqual from "lodash/isEqual";
 import { objectToGetParams } from "@docspace/shared/utils/common";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import config from "PACKAGE_FILE";
 
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
@@ -103,7 +104,7 @@ type EmbeddingPanelProps = {
   visible: boolean;
   setEmbeddingPanelData: (value: {
     visible: boolean;
-    fileId?: string | number;
+    itemId?: string | number;
   }) => void;
   setEditLinkPanelIsVisible: (value: boolean) => void;
   currentColorScheme: TColorScheme;
@@ -111,7 +112,8 @@ type EmbeddingPanelProps = {
   setLinkParams: (linkParams: LinkParamsType) => void;
   fetchExternalLinks: (roomId: string | number) => LinkParamsLinkType[];
   isAdmin: boolean;
-  fileId?: string | number;
+  itemId?: string | number;
+  isRoom: boolean;
 };
 
 type TOptionType = TOption & {
@@ -130,18 +132,17 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     setLinkParams,
     fetchExternalLinks,
     isAdmin,
-    fileId,
+    itemId,
+    isRoom,
   } = props;
 
   const { roomId, link } = linkParams;
-
-  const navigate = useNavigate();
 
   const [sharedLinksOptions, setSharedLinksOptions] = useState<TOptionType[]>(
     [],
   );
   const [selectedLink, setSelectedLink] = useState<TOptionType>();
-  const [barIsVisible, setBarIsVisible] = useState(!!fileId);
+  const [barIsVisible, setBarIsVisible] = useState(!!itemId);
   const [isLoading, setIsLoading] = useState(false);
 
   const dataDimensions = [
@@ -164,7 +165,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     height: `${heightValue}${dataDimensions[1].label}`,
     frameId: "ds-frame",
     init: true,
-    id: fileId,
+    id: itemId,
   };
 
   const roomConfig = {
@@ -190,10 +191,14 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     },
   };
 
-  const [config, setConfig] = useState(fileId ? fileConfig : roomConfig);
+  const isFile = itemId && !isRoom;
 
-  const params = objectToGetParams(config);
-  const codeBlock = `<div id="${config.frameId}">Fallback text</div>\n<script src="${SDK_SCRIPT_URL}${params}"></script>`;
+  const [embeddingConfig, setEmbeddingConfig] = useState(
+    isFile ? fileConfig : roomConfig,
+  );
+
+  const params = objectToGetParams(embeddingConfig);
+  const codeBlock = `<div id="${embeddingConfig.frameId}">Fallback text</div>\n<script src="${SDK_SCRIPT_URL}${params}"></script>`;
 
   const currentLink = selectedLink ?? link;
 
@@ -225,28 +230,28 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 
   const onChangeWidth = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWidthValue(e.target.value);
-    setConfig((config) => {
+    setEmbeddingConfig((config) => {
       return { ...config, width: `${e.target.value}${widthDimension.label}` };
     });
   };
 
   const onChangeHeight = (e: React.ChangeEvent<HTMLInputElement>) => {
     setHeightValue(e.target.value);
-    setConfig((config) => {
+    setEmbeddingConfig((config) => {
       return { ...config, height: `${e.target.value}${heightDimension.label}` };
     });
   };
 
   const onChangeWidthDimension = (item: TOption) => {
     setWidthDimension(item);
-    setConfig((config) => {
+    setEmbeddingConfig((config) => {
       return { ...config, width: `${widthValue}${item.label}` };
     });
   };
 
   const onChangeHeightDimension = (item: TOption) => {
     setHeightDimension(item);
-    setConfig((config) => {
+    setEmbeddingConfig((config) => {
       return { ...config, height: `${heightValue}${item.label}` };
     });
   };
@@ -257,13 +262,13 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   };
 
   const onHeaderChange = () => {
-    setConfig((config) => {
+    setEmbeddingConfig((config) => {
       return { ...config, showTitle: !config.showTitle };
     });
   };
 
   const onTitleChange = () => {
-    setConfig((config) => {
+    setEmbeddingConfig((config) => {
       return { ...config, showFilter: !config.showFilter };
     });
   };
@@ -280,7 +285,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 
   const onChangeSharedLink = (item: TOptionType) => {
     setSelectedLink(item);
-    setConfig((config) => {
+    setEmbeddingConfig((config) => {
       return { ...config, requestToken: item?.sharedTo?.requestToken };
     });
   };
@@ -290,8 +295,14 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   };
 
   const onOpenDevTools = () => {
-    navigate("/portal-settings/developer-tools");
-    onClose();
+    const url = combineUrl(
+      window.location.origin,
+      window.ClientConfig?.proxy?.url,
+      config.homepage,
+      "/portal-settings/developer-tools",
+    );
+
+    window.open(url, "_blank");
   };
 
   const onKeyPress = (e: KeyboardEvent) => {
@@ -332,10 +343,10 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   }, [roomId, fetchExternalLinks]);
 
   useEffect(() => {
-    if (fileId) {
+    if (itemId) {
       getLinks();
     }
-  }, [fileId, getLinks]);
+  }, [itemId, getLinks]);
 
   const usePrevious = (value: LinkParamsLinkType | null) => {
     const ref = useRef<LinkParamsLinkType | null>();
@@ -431,12 +442,6 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
             </div>
           )}
           <div className="embedding-panel_body">
-            {!fileId && (
-              <Text fontSize="12px" className="embedding-panel_description">
-                {t("EmbeddingPanel:EmbeddingDescription")}
-              </Text>
-            )}
-
             {sharedLinksOptions && sharedLinksOptions.length > 1 && (
               <>
                 <Text
@@ -492,7 +497,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
               />
             </div>
 
-            {!fileId && (
+            {!isFile && (
               <>
                 <Text
                   className="embedding-panel_header-text"
@@ -506,7 +511,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                   <CheckboxElement
                     label={t("Common:Title")}
                     onChange={onHeaderChange}
-                    isChecked={config.showTitle}
+                    isChecked={embeddingConfig.showTitle}
                     img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
                     title={t("JavascriptSdk:Header")}
                     description={t("JavascriptSdk:HeaderDescription")}
@@ -514,7 +519,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                   <CheckboxElement
                     label={t("JavascriptSdk:SearchFilterAndSort")}
                     onChange={onTitleChange}
-                    isChecked={config.showFilter}
+                    isChecked={embeddingConfig.showFilter}
                     img={theme.isBase ? SearchUrl : SearchDarkUrl}
                     title={t("JavascriptSdk:SearchBlock")}
                     description={t(
@@ -567,18 +572,8 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   );
 };
 
-export default inject(
-  ({
-    dialogsStore,
-    settingsStore,
-    userStore,
-    publicRoomStore,
-  }: {
-    dialogsStore: DialogsStore;
-    settingsStore: SettingsStore;
-    userStore: UserStore;
-    publicRoomStore: PublicRoomStore;
-  }) => {
+export default inject<TStore>(
+  ({ dialogsStore, settingsStore, userStore, publicRoomStore }) => {
     const {
       embeddingPanelData,
       setEmbeddingPanelData,
@@ -594,7 +589,8 @@ export default inject(
       theme,
       currentColorScheme,
       visible: embeddingPanelData.visible,
-      fileId: embeddingPanelData.fileId,
+      itemId: embeddingPanelData.item?.id,
+      isRoom: embeddingPanelData.item?.isRoom,
       setEmbeddingPanelData,
       setEditLinkPanelIsVisible,
       linkParams,

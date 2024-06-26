@@ -50,7 +50,7 @@ class CreateEditRoomStore {
   infoPanelStore = null;
   currentQuotaStore = null;
   watermarksSettings = {};
-  initialWatermarksSettings = null;
+  initialWatermarksSettings = {};
   isImageType = false;
 
   constructor(
@@ -181,7 +181,7 @@ class CreateEditRoomStore {
       !this.watermarksSettings.enabled,
       this.watermarksSettings.imageUrl,
     );
- 
+
     if (
       !watermarkImage &&
       !this.watermarksSettings.enabled &&
@@ -197,7 +197,7 @@ class CreateEditRoomStore {
         imageHeight: watermarksSettings.imageHeight,
       });
     }
-    
+
     const { uploadRoomLogo } = this.filesStore;
 
     const uploadWatermarkData = new FormData();

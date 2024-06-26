@@ -222,7 +222,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   }
 
   const showLinkBar =
-    selectedLink?.sharedTo?.password || selectedLink?.sharedTo?.denyDownload;
+    currentLink?.sharedTo?.password || currentLink?.sharedTo?.denyDownload;
 
   const onClose = () => {
     setEmbeddingPanelData({ visible: false });

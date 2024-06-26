@@ -156,14 +156,11 @@ const SectionBodyContent = (props) => {
   };
 
   const isHeaderOptionButton = (event) => {
-    const target = event?.target?.parentElement?.parentElement?.parentElement;
+    const parent = document.querySelector("#header_optional-button");
 
-    if (!target) return false;
+    if (!parent || !event.target) return false;
 
-    const id =
-      target.getAttribute("id") ?? target?.parentElement.getAttribute("id");
-
-    return id === "header_optional-button";
+    return parent.contains(event.target);
   };
 
   const onMouseDown = (e) => {

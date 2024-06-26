@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -7,11 +7,18 @@ import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 
 const StyledContainer = styled.div`
   .table-container_row-checkbox {
-    margin-left: -8px;
+    margin-inline-start: -8px;
 
     width: 16px;
 
-    padding: 16px 8px 16px 16px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding: 16px 16px 16px 8px;
+          `
+        : css`
+            padding: 16px 8px 16px 16px;
+          `}
   }
 `;
 
@@ -52,7 +59,11 @@ const NameCell = ({
           size="16px"
         />
       ) : (
-        <TableCell className="table-container_element-wrapper">
+        <TableCell
+          className="table-container_element-wrapper"
+          hasAccess
+          checked={isChecked}
+        >
           <StyledContainer className="table-container_element-container">
             <div className="table-container_element">
               {icon && <StyledImage src={icon} alt="App icon" />}

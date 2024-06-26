@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import { RowContainer } from "@docspace/shared/components/row-container";
 import { RowContent } from "@docspace/shared/components/row-content";
+import { tablet } from "@docspace/shared/utils/device";
 
 export const StyledRowContainer = styled(RowContainer)`
   margin-top: 0px;
@@ -21,6 +22,51 @@ export const StyledRowContainer = styled(RowContainer)`
 
     height: 32px;
     max-height: 32px;
+  }
+
+  .oauth2-row-selected {
+    background: ${(props) =>
+      props.theme.filesSection.rowView.checkedBackground};
+
+    cursor: pointer;
+    border-bottom: none;
+
+    margin-left: -24px;
+    margin-right: -24px;
+    padding-left: 24px;
+    padding-right: 24px;
+
+    @media ${tablet} {
+      margin-left: -16px;
+      margin-right: -16px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  }
+
+  .oauth2-row {
+    margin-top: -3px;
+    padding-top: 3px;
+
+    :hover {
+      background: ${(props) =>
+        props.theme.filesSection.rowView.checkedBackground};
+
+      cursor: pointer;
+      border-bottom: none;
+
+      margin-left: -24px;
+      margin-right: -24px;
+      padding-left: 24px;
+      padding-right: 24px;
+
+      @media ${tablet} {
+        margin-left: -16px;
+        margin-right: -16px;
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+    }
   }
 `;
 

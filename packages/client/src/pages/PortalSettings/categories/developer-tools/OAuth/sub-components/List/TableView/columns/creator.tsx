@@ -9,11 +9,11 @@ import {
 
 const StyledAvatar = styled(Avatar)`
   width: 16px;
-  min-width: 16px;
-  max-width: 16px;
+  margin-inline-end: 4px;
+  max-width: 100%;
   height: 16px;
 
-  margin-right: 4px;
+  min-width: unset;
 `;
 
 interface CreatorCellProps {
@@ -28,9 +28,14 @@ const CreatorCell = ({ avatar, displayName }: CreatorCellProps) => {
         source={avatar}
         size={AvatarSize.min}
         role={AvatarRole.user}
+        className="textOverflow"
       />
 
-      <Text className="description-text" fontWeight="600" fontSize="13px">
+      <Text
+        className="description-text textOverflow"
+        fontWeight="600"
+        fontSize="13px"
+      >
         {displayName}
       </Text>
     </>

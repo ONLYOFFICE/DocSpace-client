@@ -141,7 +141,8 @@ export const revokeUserClient = async (clientId: string): Promise<void> => {
 export const onOAuthLogin = (clientId: string) => {
   const formData = new FormData();
 
-  formData.set("client_id", clientId);
+  formData.set("username", clientId);
+  formData.set("password", clientId);
 
   return request({
     method: "post",

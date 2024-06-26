@@ -87,7 +87,7 @@ const Row = (props: RowProps) => {
             setSelection={setSelection}
           />
         </TableCell>
-        <TableCell className="">
+        <TableCell className="author-cell">
           <CreatorCell
             avatar={item.creatorAvatar || ""}
             displayName={item.creatorDisplayName || ""}

@@ -122,7 +122,11 @@ const Consent = ({ client, scopes, user }: IConsentProps) => {
 
     deleteCookie("client_state");
 
-    console.log(clientState);
+    console.log(clientState, "run");
+
+    const state = await api.oauth.onOAuthLogin(clientId);
+
+    console.log(state);
 
     await api.oauth.onOAuthSubmit(clientId, clientState, scope);
 

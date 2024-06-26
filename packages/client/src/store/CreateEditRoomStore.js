@@ -116,6 +116,7 @@ class CreateEditRoomStore {
 
   resetWatermarks = () => {
     this.watermarksSettings = {};
+    this.initialWatermarksSettings = {};
   };
 
   isEqualWatermarkChanges = () => {
@@ -123,7 +124,20 @@ class CreateEditRoomStore {
   };
 
   isNotWatermarkSet = () => {
-    if (this.watermarksSettings.isImage && !this.watermarksSettings.image)
+    console.log(
+      "isNotWatermarkSet",
+      this.watermarksSettings,
+      this.watermarksSettings.enabled,
+      this.watermarksSettings.isImage,
+      !this.watermarksSettings.image,
+      !this.watermarksSettings.imageUrl,
+    );
+
+    if (
+      this.watermarksSettings.enabled &&
+      this.watermarksSettings.isImage &&
+      !this.watermarksSettings.image
+    )
       return true;
 
     if (
@@ -136,7 +150,7 @@ class CreateEditRoomStore {
   };
 
   getWatermarkRequest = async (room) => {
-    if (!this.watermarksSettings.image) {
+    if (!this.watermarksSettings.isImage) {
       return setWatermarkSettings(room.id, {
         enabled: this.watermarksSettings.enabled,
         rotate: this.watermarksSettings.rotate,
@@ -162,6 +176,28 @@ class CreateEditRoomStore {
       img.onerror = (err) => onSetInfo(err);
     };
 
+    console.log(
+      !watermarkImage,
+      !this.watermarksSettings.enabled,
+      this.watermarksSettings.imageUrl,
+    );
+ 
+    if (
+      !watermarkImage &&
+      !this.watermarksSettings.enabled &&
+      this.watermarksSettings.imageUrl
+    ) {
+      return setWatermarkSettings(room.id, {
+        enabled: watermarksSettings.enabled,
+        imageScale: watermarksSettings.imageScale,
+        rotate: watermarksSettings.rotate,
+        imageUrl: watermarksSettings.imageUrl,
+        // imageId: watermarksSettings.image.id,
+        imageWidth: watermarksSettings.imageWidth,
+        imageHeight: watermarksSettings.imageHeight,
+      });
+    }
+    
     const { uploadRoomLogo } = this.filesStore;
 
     const uploadWatermarkData = new FormData();
@@ -255,13 +291,10 @@ class CreateEditRoomStore {
 
       const requests = [];
 
-      if (
-        this.watermarksSettings &&
-        !this.isNotWatermarkSet() &&
-        this.watermarksSettings.enabled
-      ) {
+      if (this.watermarksSettings.enabled && !this.isNotWatermarkSet()) {
         requests.push(this.getWatermarkRequest(room));
       }
+
       // delete thirdparty account if not needed
       if (!isThirdparty && storageFolderId)
         requests.push(deleteThirdParty(thirdpartyAccount.providerId));

@@ -65,7 +65,9 @@ const Watermarks = ({ isEdit, setWatermarks, initialWatermarksSettings }) => {
     const { value } = e.target;
 
     setType(value);
-    setWatermarks({ isImage: type === imageWatermark });
+    setWatermarks({
+      isImage: type === imageWatermark,
+    });
   };
 
   const typeOptions = options(t);

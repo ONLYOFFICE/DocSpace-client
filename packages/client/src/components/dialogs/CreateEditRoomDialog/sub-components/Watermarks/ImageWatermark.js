@@ -96,6 +96,8 @@ const getInitialRotate = (rotate, isEdit) => {
     return item.key === rotate;
   });
 
+  console.log("item", item, rotateOptions[0]);
+
   return !item ? rotateOptions[0] : item;
 };
 
@@ -120,7 +122,13 @@ const ImageWatermark = ({
   const initialInfoRef = initialInfo.current;
 
   useEffect(() => {
-    if (isEdit) return;
+    const { enabled, isImage } = initialWatermarksSettings;
+
+    if (isEdit && enabled && isImage) {
+      setWatermarks(initialWatermarksSettings);
+
+      return;
+    }
 
     setWatermarks({
       rotate: initialInfoRef.rotate.key,
@@ -130,6 +138,7 @@ const ImageWatermark = ({
       enabled: true,
     });
   }, []);
+
   useEffect(() => {
     return () => {
       URL.revokeObjectURL(previewRef.current);
@@ -185,7 +194,7 @@ const ImageWatermark = ({
       previewRef.current = null;
     }
 
-    setWatermarks({ image: null });
+    setWatermarks({ image: null, imageUrl: null });
     setImageUrl("");
   };
 
@@ -227,6 +236,7 @@ const ImageWatermark = ({
   //   setWatermarks({ image: fileInfo });
   // };
 
+  console.log("selectedRotate", selectedRotate.key, selectedScale.key);
   return (
     <StyledWatermark
       rotate={selectedRotate.key}

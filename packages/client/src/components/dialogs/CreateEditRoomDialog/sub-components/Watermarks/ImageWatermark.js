@@ -52,19 +52,17 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactSVG } from "react-svg";
+import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
-import { inject, observer } from "mobx-react";
-import { StyledWatermark } from "./StyledComponent";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { FileInput } from "@docspace/shared/components/file-input";
 import { imageProcessing } from "@docspace/shared/utils/common";
-import { Button } from "@docspace/shared/components/button";
-
-import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg";
 import { ButtonDelete } from "@docspace/shared/components/image-editor";
+import { HelpButton } from "@docspace/shared/components/help-button";
+
+import { StyledWatermark } from "./StyledComponent";
 
 const scaleOptions = [
   { key: 100, label: "100" },
@@ -95,8 +93,6 @@ const getInitialRotate = (rotate, isEdit) => {
   const item = rotateOptions.find((item) => {
     return item.key === rotate;
   });
-
-  console.log("item", item, rotateOptions[0]);
 
   return !item ? rotateOptions[0] : item;
 };
@@ -260,8 +256,20 @@ const ImageWatermark = ({
 
       {selectedImageUrl && (
         <div className="image-wrapper">
-          <div className="HELLO-2">
-            <div className="HELLO">
+          <div>
+            <div className="image-description">
+              <Text fontWeight={600} className="image-watermark_text">
+                {t("WatermarkPreview")}
+              </Text>
+              <HelpButton
+                tooltipContent={
+                  <Text fontSize="12px">{t("WatermarkPreviewHelp")}</Text>
+                }
+                offsetRight={0}
+                className="settings_unavailable"
+              />
+            </div>
+            <div className="image-watermark_wrapper">
               <img
                 alt="logo"
                 src={selectedImageUrl}
@@ -317,7 +325,7 @@ export default inject(({ createEditRoomStore }) => {
     createEditRoomStore;
 
   const { imageUrl } = watermarksSettings;
-  console.log("watermarksSettings", watermarksSettings);
+
   return {
     setWatermarks,
     initialWatermarksSettings,

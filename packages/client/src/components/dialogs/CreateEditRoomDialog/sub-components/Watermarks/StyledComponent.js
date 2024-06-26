@@ -50,7 +50,17 @@ const StyledWatermark = styled.div`
     grid-template-columns: 216px auto;
     gap: 16px;
 
-    .HELLO {
+    .image-description {
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+
+      .image-watermark_text {
+        margin-bottom: 8px;
+      }
+    }
+
+    .image-watermark_wrapper {
       width: 216px;
       height: 216px;
       border: 1px solid #eceef1;

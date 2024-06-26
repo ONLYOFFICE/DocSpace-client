@@ -124,19 +124,10 @@ class CreateEditRoomStore {
   };
 
   isNotWatermarkSet = () => {
-    console.log(
-      "isNotWatermarkSet",
-      this.watermarksSettings,
-      this.watermarksSettings.enabled,
-      this.watermarksSettings.isImage,
-      !this.watermarksSettings.image,
-      !this.watermarksSettings.imageUrl,
-    );
-
     if (
-      this.watermarksSettings.enabled &&
       this.watermarksSettings.isImage &&
-      !this.watermarksSettings.image
+      !this.watermarksSettings.image &&
+      !this.watermarksSettings.imageUrl
     )
       return true;
 
@@ -176,17 +167,7 @@ class CreateEditRoomStore {
       img.onerror = (err) => onSetInfo(err);
     };
 
-    console.log(
-      !watermarkImage,
-      !this.watermarksSettings.enabled,
-      this.watermarksSettings.imageUrl,
-    );
-
-    if (
-      !watermarkImage &&
-      !this.watermarksSettings.enabled &&
-      this.watermarksSettings.imageUrl
-    ) {
+    if (!watermarkImage && this.watermarksSettings.imageUrl) {
       return setWatermarkSettings(room.id, {
         enabled: watermarksSettings.enabled,
         imageScale: watermarksSettings.imageScale,

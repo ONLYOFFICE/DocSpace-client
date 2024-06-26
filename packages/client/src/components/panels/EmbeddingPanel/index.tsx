@@ -142,7 +142,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     [],
   );
   const [selectedLink, setSelectedLink] = useState<TOptionType>();
-  const [barIsVisible, setBarIsVisible] = useState(!!itemId);
+  const [barIsVisible, setBarIsVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
   const dataDimensions = [

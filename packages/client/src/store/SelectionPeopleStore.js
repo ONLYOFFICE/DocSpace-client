@@ -32,7 +32,7 @@ import moment from "moment-timezone";
 
 class SelectionStore {
   peopleStore = null;
-  allSessions = [];
+  // allSessions = [];
   sessionsData = [];
   dataFromSocket = [];
   currentDataFromSocket = [];
@@ -472,6 +472,34 @@ class SelectionStore {
     this.dataFromSocket = data;
   };
 
+  sessisonLogout = (userId) => {
+    const newData = [...this.dataFromSocket];
+
+    const index = newData.findIndex((data) => data.id === userId);
+
+    if (index === -1) return;
+
+    newData[index].status = "offline";
+
+    this.setDataFromSocket(newData);
+  };
+
+  setCurrentDataFromSocket = (data) => {
+    this.currentDataFromSocket = data;
+
+    const newArr = [...this.dataFromSocket];
+    const indexTest = newArr.findIndex(({ id }) => id === data.id);
+    if (indexTest === -1) return;
+    const { sessions, status } = data;
+
+    newArr[indexTest] = {
+      ...newArr[indexTest],
+      sessions,
+      status,
+    };
+    this.setDataFromSocket(newArr);
+  };
+
   setDisplayName = (displayName) => {
     this.displayName = displayName;
   };
@@ -496,10 +524,6 @@ class SelectionStore {
     this.isLoading = isLoading;
   };
 
-  setCurrentDataFromSocket = (data) => {
-    this.currentDataFromSocket = data;
-  };
-
   setFromDateAgo = (sessionId, value) => {
     this.fromDateAgo[sessionId] = value;
   };
@@ -520,37 +544,68 @@ class SelectionStore {
     return parsedDate.format(locale);
   };
 
-  updateAllSessions = (sessions, dataFromSocket, currentDataFromSocket) => {
-    const socketDataMap = new Map(
-      dataFromSocket.map((user) => [user.id, user]),
-    );
-    const filteredSessions = sessions.filter((session) => {
-      const socketData = socketDataMap.get(session.id);
-      return (
-        socketData && socketData.sessions && socketData.sessions.length > 0
-      );
-    });
+  getCurrentConnections = (session, data) => {
+    const { sessions, id } = this.currentDataFromSocket ?? {};
+    const [first, ...other] = session.connections;
+    const [firstSessions] = sessions ?? [];
+    const isCurrentSesstion = session.id === id;
 
-    const newAllSessions = filteredSessions.map((session) => {
-      const socketData = socketDataMap.get(session.id);
-      const currentSocketData =
-        currentDataFromSocket && currentDataFromSocket.id === session.id
-          ? currentDataFromSocket
-          : null;
+    const connectionsIsEmpty = session.connections.length === 0;
 
-      const latestData = currentSocketData || socketData;
+    if (isCurrentSesstion)
+      return [
+        { ...first, ...firstSessions, date: moment().utc().toISOString() },
+        ...other,
+      ];
 
-      return {
-        ...session,
-        status: latestData ? latestData.status : "offline",
-        sessions: latestData ? latestData.sessions.slice(-1)[0] : [],
-      };
-    });
+    if (connectionsIsEmpty) return [data.sessions.at(-1)];
 
-    runInAction(() => {
-      this.setAllSessions(newAllSessions);
-    });
+    return session.connections;
   };
+
+  get allSessions() {
+    const dataFromSocketMap = this.dataFromSocket.reduce((map, data) => {
+      map[data.id] = data;
+      return map;
+    }, {});
+
+    const temp = this.sessionsData.map((session) => {
+      const data = dataFromSocketMap[session.id];
+
+      const connections = this.getCurrentConnections(session, data);
+
+      return { ...data, ...session, connections };
+    });
+
+    return temp;
+  }
+
+  // updateAllSessions = (sessionsData, dataFromSocket, currentDataFromSocket) => {
+  //   const newAllSessions = [];
+
+  //   sessionsData.forEach((session) => {
+  //     const socketData = dataFromSocket.find((user) => user.id === session.id);
+
+  //     if (socketData && socketData.sessions && socketData.sessions.length > 0) {
+  //       const isCurrentSession =
+  //         currentDataFromSocket && currentDataFromSocket.id === session.id;
+
+  //       const latestData = isCurrentSession
+  //         ? currentDataFromSocket
+  //         : socketData;
+
+  //       newAllSessions.push({
+  //         ...session,
+  //         status: latestData ? latestData.status : "offline",
+  //         sessions: latestData ? latestData.sessions.slice(-1)[0] : [],
+  //       });
+  //     }
+  //   });
+
+  //   runInAction(() => {
+  //     this.setAllSessions(newAllSessions);
+  //   });
+  // };
 
   fetchData = async () => {
     const { getUserSessionsById } = this.settingsSetupStore;
@@ -563,7 +618,6 @@ class SelectionStore {
 
       const sessions = await Promise.all(sessionsPromises);
       this.setSessionsData(sessions);
-      this.updateAllSessions(sessions, this.dataFromSocket);
     } catch (error) {
       console.error(error);
     }

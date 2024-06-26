@@ -130,6 +130,8 @@ export interface TableRowProps {
 
 export interface TableCellProps {
   className: string;
+  hasAccess?: boolean;
+  checked?: boolean;
   forwardedRef?: React.ForwardedRef<HTMLDivElement>;
   style?: React.CSSProperties;
   children?: React.ReactNode;

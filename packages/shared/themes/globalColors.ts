@@ -113,4 +113,7 @@ export const globalColors = {
   //
 
   tickColor: "#20D21F",
+  redRomb: "#de7a59",
+  blueRomb: "#55bce6",
+  greenRomb: "#a1cb5c",
 };

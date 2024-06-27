@@ -472,7 +472,7 @@ class SelectionStore {
     this.dataFromSocket = data;
   };
 
-  sessisonLogout = (userId) => {
+  sessisonLogout = ({ userId, date }) => {
     const newData = [...this.dataFromSocket];
 
     const index = newData.findIndex((data) => data.id === userId);
@@ -480,6 +480,9 @@ class SelectionStore {
     if (index === -1) return;
 
     newData[index].status = "offline";
+    newData[index].sessions[0].date = date;
+
+    console.log(newData[index].sessions);
 
     this.setDataFromSocket(newData);
   };
@@ -552,13 +555,9 @@ class SelectionStore {
 
     const connectionsIsEmpty = session.connections.length === 0;
 
-    if (isCurrentSesstion)
-      return [
-        { ...first, ...firstSessions, date: moment().utc().toISOString() },
-        ...other,
-      ];
+    if (isCurrentSesstion) return [{ ...first, ...firstSessions }, ...other];
 
-    if (connectionsIsEmpty) return [data.sessions.at(-1)];
+    if (connectionsIsEmpty) return [data?.sessions.at(-1)];
 
     return session.connections;
   };
@@ -617,6 +616,8 @@ class SelectionStore {
         .map((user) => getUserSessionsById(user.id));
 
       const sessions = await Promise.all(sessionsPromises);
+      // console.log("sessions from fetch", sessions);
+
       this.setSessionsData(sessions);
     } catch (error) {
       console.error(error);

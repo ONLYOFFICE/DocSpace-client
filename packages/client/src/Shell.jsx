@@ -146,7 +146,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
     socketHelper.on("statuses-in-portal", (data) => {
       setDataFromSocket(data);
-      // console.log("dataFromSocket", data);
+      console.log("dataFromSocket", data);
     });
 
     socketHelper.on("enter-in-portal", (data) => {

@@ -3236,6 +3236,7 @@ class FilesStore {
         inRoom,
         requestToken,
         indexing,
+        lifetime,
         lastOpened,
         quotaLimit,
         usedSpace,
@@ -3243,6 +3244,7 @@ class FilesStore {
         providerId,
         startFilling,
         draftLocation,
+        expired,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3405,6 +3407,7 @@ class FilesStore {
         ...pluginOptions,
         inRoom,
         indexing,
+        lifetime,
         type,
         hasDraft,
         isForm,
@@ -3417,6 +3420,7 @@ class FilesStore {
         providerId,
         startFilling,
         draftLocation,
+        expired,
       };
     });
   };

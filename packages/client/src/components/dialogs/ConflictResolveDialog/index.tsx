@@ -220,13 +220,13 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
       isLoading={!ready}
       onSubmit={isUploadConflict ? onAcceptUploadType : onAcceptType}
       onClose={onCloseDialog}
-      cancelButtonLabel={t("Common:CancelButton")}
-      submitButtonLabel={t("Common:OKButton")}
+      cancelButtonLabel={t("CancelButton")}
+      submitButtonLabel={t("OKButton")}
       messageText={messageText}
       selectActionText={t("Common:ConflictResolveSelectAction")}
       overwriteTitle={t("Common:OverwriteTitle")}
       overwriteDescription={t("Common:OverwriteDescription")}
-      duplicateTitle={t("Common:CreateFileCopy")}
+      duplicateTitle={t("CreateFileCopy")}
       duplicateDescription={t("Common:CreateDescription")}
       skipTitle={t("Common:SkipTitle")}
       skipDescription={t("Common:SkipDescription")}

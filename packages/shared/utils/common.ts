@@ -411,6 +411,24 @@ export function getProviderLabel(provider: string, t: (key: string) => string) {
       return "";
   }
 }
+
+export const getLifetimePeriodTranslation = (
+  period: number,
+  t: TTranslation,
+) => {
+  switch (period) {
+    case 0:
+      return t("Common:Days").toLowerCase();
+    case 1:
+      return t("Common:Months").toLowerCase();
+    case 2:
+      return t("Common:Years").toLowerCase();
+
+    default:
+      return t("Common:Days").toLowerCase();
+  }
+};
+
 export const isLanguageRtl = (lng: string) => {
   if (!lng) return;
 

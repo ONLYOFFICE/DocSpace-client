@@ -152,9 +152,8 @@ const SessionsTableRow = (props) => {
     isActive,
     hideColumns,
     displayName,
-    sessionStatus,
+    status,
     connections,
-    sessions,
     locale,
     checkedProps,
     setLogoutAllDialogVisible,
@@ -171,15 +170,15 @@ const SessionsTableRow = (props) => {
 
   const { platform, browser, ip, city, country, date } = connections[0] || {};
 
-  const isLastConnection = connections.length > 0;
   const fromDateAgo = getFromDateAgo(item.id);
   const isChecked = checkedProps?.checked;
-  const isOnline = sessionStatus === "online";
+  const isOnline = status === "online";
 
   useEffect(() => {
     const updateStatus = () => {
-      const showOnline = isOnline && sessionStatus;
-      const showOffline = !isOnline && date ? convertDate(date, locale) : null;
+      const showOnline = isOnline && status;
+      const showOffline =
+        !isOnline && date ? convertDate(t, date, locale) : null;
       setFromDateAgo(item.id, isOnline ? showOnline : showOffline);
     };
 
@@ -187,7 +186,7 @@ const SessionsTableRow = (props) => {
     const intervalId = setInterval(updateStatus, 60000);
 
     return () => clearInterval(intervalId);
-  }, [date, sessionStatus, locale, item.id, isOnline]);
+  }, [date, status, locale, item.id, isOnline]);
 
   const onClickSessions = () => {
     setStatus(fromDateAgo);

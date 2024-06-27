@@ -167,9 +167,8 @@ const TableView = ({ t, sectionWidth, userId, sessionsData }) => {
             item={item}
             hideColumns={hideColumns}
             displayName={item.displayName}
-            sessionStatus={item.status}
+            status={item.status}
             connections={item.connections}
-            sessions={item.sessions}
           />
         ))}
       </TableBody>

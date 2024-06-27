@@ -283,7 +283,7 @@ const FilesRowContent = ({
       return value;
     }
 
-    if (!fileExst && !contentLength && !providerKey && !isMobile())
+    if (!fileExst && !contentLength && !providerKey)
       return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
         "Translations:Files",
       )}`;

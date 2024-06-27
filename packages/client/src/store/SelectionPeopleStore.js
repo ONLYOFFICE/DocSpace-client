@@ -557,7 +557,13 @@ class SelectionStore {
 
     if (isCurrentSesstion) return [{ ...first, ...firstSessions }, ...other];
 
-    if (connectionsIsEmpty) return [data?.sessions.at(-1)];
+    if (connectionsIsEmpty) {
+      const lastSession = data?.sessions.at(-1);
+
+      if (!lastSession) return [];
+
+      return [lastSession];
+    }
 
     return session.connections;
   };
@@ -568,7 +574,7 @@ class SelectionStore {
       return map;
     }, {});
 
-    const temp = this.sessionsData.map((session) => {
+    const sessions = this.sessionsData.map((session) => {
       const data = dataFromSocketMap[session.id];
 
       const connections = this.getCurrentConnections(session, data);
@@ -576,7 +582,7 @@ class SelectionStore {
       return { ...data, ...session, connections };
     });
 
-    return temp;
+    return sessions.filter((session) => session.connections.length !== 0);
   }
 
   // updateAllSessions = (sessionsData, dataFromSocket, currentDataFromSocket) => {

@@ -32,7 +32,6 @@ import moment from "moment-timezone";
 
 class SelectionStore {
   peopleStore = null;
-  // allSessions = [];
   sessionsData = [];
   dataFromSocket = [];
   displayName = "";
@@ -568,7 +567,7 @@ class SelectionStore {
     return this.fromDateAgo[sessionId] || "";
   };
 
-  convertDate = (dateString, locale) => {
+  convertDate = (t, dateString, locale) => {
     const parsedDate = moment(new Date(dateString).toISOString());
     const now = moment();
     const daysDiff = now.diff(parsedDate, "days");
@@ -630,7 +629,6 @@ class SelectionStore {
         .map((user) => getUserSessionsById(user.id));
 
       const sessions = await Promise.all(sessionsPromises);
-      // console.log("sessions from fetch", sessions);
 
       this.setSessionsData(sessions);
     } catch (error) {

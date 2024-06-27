@@ -75,7 +75,8 @@ const EditRoomDialog = ({
         (currentParams.icon.uploadedFile === null ||
           currentParams.icon.uploadedFile === undefined)) ||
         prevParams.icon.uploadedFile === currentParams.icon.uploadedFile) &&
-      prevParams.quota === currentParams.quota
+      prevParams.quota === currentParams.quota &&
+      prevParams.indexing === currentParams.indexing
     );
   };
 

@@ -36,8 +36,12 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { StyledTitle } from "../../../styles/common";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import RoomsContextBtn from "./context-btn";
-import { FolderType, RoomsType } from "@docspace/shared/enums";
-import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
+import CalendarComponent from "../Calendar";
+import {
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 import Search from "../../Search";
 
 const RoomsItemHeader = ({
@@ -54,6 +58,8 @@ const RoomsItemHeader = ({
   isArchive,
   hasLinks,
   showSearchBlock,
+  setCalendarDay,
+  openHistory,
   setShowSearchBlock,
   roomType,
 }) => {
@@ -141,7 +147,13 @@ const RoomsItemHeader = ({
             size={16}
           />
         )}
-
+        {/* TODO: Add a condition so that there is a vdr room when the correct room type is returned from the backend for Calendar */}
+        {openHistory && (
+          <CalendarComponent
+            setCalendarDay={setCalendarDay}
+            roomCreationDate={selection.created}
+          />
+        )}
         <RoomsContextBtn
           selection={selection}
           itemTitleRef={itemTitleRef}
@@ -167,6 +179,7 @@ export default inject(
       setIsMobileHidden,
       showSearchBlock,
       setShowSearchBlock,
+      setCalendarDay,
     } = infoPanelStore;
     const { externalLinks } = publicRoomStore;
 
@@ -195,6 +208,7 @@ export default inject(
       setBufferSelection: filesStore.setBufferSelection,
       isArchive,
       hasLinks: externalLinks.length,
+      setCalendarDay,
       roomType,
     };
   },

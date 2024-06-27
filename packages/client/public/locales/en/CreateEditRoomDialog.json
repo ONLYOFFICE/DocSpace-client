@@ -21,5 +21,16 @@
   "ThirdPartyStorageDescription": "Use third-party services as data storage for this room. You can create a new folder or select the existing one in the connected storage.",
   "ThirdPartyStorageNoStorageAlert": "Before, you need to connect the corresponding service in the “Integration” section. Otherwise, the connection will not be possible.",
   "ThirdPartyStoragePermanentSettingDescription": "Files are stored in a third-party {{thirdpartyTitle}} storage in the \"{{thirdpartyFolderName}}\" folder.\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "To connect a third-party storage, you need to add the corresponding service in the Integration section of {{productName}} settings. Contact {{productName}} owner or administrator to enable the integration."
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "To connect a third-party storage, you need to add the corresponding service in the Integration section of {{productName}} settings. Contact {{productName}} owner or administrator to enable the integration.",
+  "ViewOnlyRoomDescription": "Share any ready documents, reports, documentation, and other files for viewing.",
+  "ViewOnlyRoomTitle": "View-only room",
+  "AutomaticIndexing": "Automatic indexing",
+  "AutomaticIndexingDescription": "Enable automatic indexing to index files and folders by serial number. Sorting by number will be set as default for all users.",
+  "FileLifetime": "File lifetime",
+  "FileLifetimeDescription": "Set file lifetime to automatically delete the files in this room after a defined period. Lifetime begins on the date of upload/creation of the file.",
+  "RestrictCopyAndDownload": "Restrict copy and download",
+  "RestrictCopyAndDownloadDescription": "Enable this setting to disable downloads and content copying for users with the \"{{role}}\" role.",
+  "AddWatermarksToDocuments": "Add watermarks to documents",
+  "AddWatermarksToDocumentsDescription": "Protect all documents in this room with watermarks. If a document already contains one, it will not be replaced.",
+  "FilesOlderThan": "Files older than:"
 }

@@ -43,6 +43,8 @@ const ItemTitle = ({
   currentColorScheme,
   getIcon,
   getUserContextOptions,
+  setCalendarDay,
+  roomsView,
   getGroupContextOptions,
 }) => {
   if (!infoPanelSelection) return null;
@@ -58,6 +60,7 @@ const ItemTitle = ({
       />
     );
 
+  const openHistory = roomsView === "info_history";
   if (isGroups)
     return (
       <GroupsItemTitle
@@ -77,16 +80,28 @@ const ItemTitle = ({
       />
     );
 
-  return <RoomsItemHeader />;
+  return (
+    <RoomsItemHeader
+      openHistory={openHistory}
+      setCalendarDay={setCalendarDay}
+    />
+  );
 };
 
 export default inject(
-  ({ settingsStore, filesSettingsStore, peopleStore, oformsStore }) => {
+  ({
+    settingsStore,
+    filesSettingsStore,
+    peopleStore,
+    oformsStore,
+    infoPanelStore,
+  }) => {
     const { currentColorScheme } = settingsStore;
     const { getIcon } = filesSettingsStore;
     const { getUserContextOptions } = peopleStore.contextOptionsStore;
     const { getGroupContextOptions } = peopleStore.groupsStore;
     const { gallerySelected } = oformsStore;
+    const { roomsView, setCalendarDay } = infoPanelStore;
 
     return {
       currentColorScheme,
@@ -94,6 +109,8 @@ export default inject(
       getUserContextOptions,
       getGroupContextOptions,
       getIcon,
+      roomsView,
+      setCalendarDay,
     };
   },
 )(observer(ItemTitle));

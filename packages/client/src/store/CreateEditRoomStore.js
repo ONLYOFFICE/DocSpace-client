@@ -125,6 +125,7 @@ class CreateEditRoomStore {
     const createRoomData = {
       roomType: roomParams.type,
       title: roomParams.title || t("Common:NewRoom"),
+      indexing: roomParams.indexing,
       createAsNewFolder: roomParams.createAsNewFolder ?? true,
       ...(quotaLimit && {
         quota: +quotaLimit,

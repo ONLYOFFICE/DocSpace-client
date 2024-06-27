@@ -44,6 +44,7 @@ import { getRoomTypeDefaultTagTranslation } from "../data";
 import { ImageEditor } from "@docspace/shared/components/image-editor";
 import PreviewTile from "@docspace/shared/components/image-editor/PreviewTile";
 import { Text } from "@docspace/shared/components/text";
+import VirtualDataRoomBlock from "./VirtualDataRoomBlock";
 
 import ChangeRoomOwner from "./ChangeRoomOwner";
 import RoomQuota from "./RoomQuota";
@@ -104,6 +105,8 @@ const SetRoomParams = ({
 
   const [forceHideRoomTypeDropdown, setForceHideRoomTypeDropdown] =
     useState(false);
+
+  const isVDRRoom = roomParams.type === RoomsType.VirtualDataRoom;
 
   const isFormRoom = roomParams.type === RoomsType.FormRoom;
   const isPublicRoom = roomParams.type === RoomsType.PublicRoom;
@@ -212,6 +215,14 @@ const SetRoomParams = ({
         <ChangeRoomOwner
           roomOwner={roomParams.roomOwner}
           onOwnerChange={onOwnerChange}
+        />
+      )}
+
+      {isVDRRoom && (
+        <VirtualDataRoomBlock
+          t={t}
+          roomParams={roomParams}
+          setRoomParams={setRoomParams}
         />
       )}
 

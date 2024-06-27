@@ -103,6 +103,7 @@ const CreateRoomDialog = ({
       y: 0.5,
       zoom: 1,
     },
+    indexing: false, // VDR Automatic indexing
   };
 
   const [roomParams, setRoomParams] = useState({ ...startRoomParams });

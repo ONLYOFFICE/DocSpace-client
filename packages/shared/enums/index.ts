@@ -480,6 +480,7 @@ export enum RoomsType {
   EditingRoom = 2,
   // ReviewRoom: 3, //TODO: Restore when certs will be done
   // ReadOnlyRoom: 4, //TODO: Restore when certs will be done
+  VirtualDataRoom = 8,
   CustomRoom = 5,
 }
 

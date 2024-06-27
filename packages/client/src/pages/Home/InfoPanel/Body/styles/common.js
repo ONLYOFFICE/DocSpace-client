@@ -360,8 +360,22 @@ const StyledProperties = styled.div`
   }
 `;
 
+const StyledItemOptions = styled.div`
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-right: auto;
+        `
+      : css`
+          margin-left: auto;
+        `}
+
+  display: flex;
+`;
+
 StyledInfoPanelBody.defaultProps = { theme: Base };
 StyledTitle.defaultProps = { theme: Base };
+StyledItemOptions.defaultProps = { theme: Base };
 
 export {
   StyledInfoPanelBody,

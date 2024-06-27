@@ -486,5 +486,12 @@
   "Website": "Website",
   "Yes": "Yes",
   "Yesterday": "Yesterday",
-  "You": "You"
+  "WED": "WED",
+  "Months": "Months",
+  "Years": "Years",
+  "MoveToTrash": "Move to trash",
+  "DeletePermanently": "Delete permanently",
+  "You": "You",
+  "VirtualDataRoom": "Virtual Data Room",
+  "VirtualDataRoomDescription": "Use VDR for advanced file security and transparency while filling and signing documents step-by-step. Set watermarks, automatically index and track all content, restrict downloading and copying."
 }

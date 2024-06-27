@@ -33,7 +33,7 @@ import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
 import IndexCell from "./IndexCell";
-import { classNames } from "@docspace/shared/utils";
+import { classNames, getLastColumn } from "@docspace/shared/utils";
 import { RoomsType } from "@docspace/shared/enums";
 import {
   StyledBadgesContainer,
@@ -63,7 +63,10 @@ const RowDataComponent = (props) => {
     quickButtonsComponent,
 
     isIndexing,
+    tableStorageName,
   } = props;
+
+  const lastColumn = getLastColumn(tableStorageName);
 
   return (
     <>
@@ -112,6 +115,10 @@ const RowDataComponent = (props) => {
             !authorColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Author" ? "no-extra-space" : "",
+          )}
         >
           <AuthorCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -130,6 +137,10 @@ const RowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Created" ? "no-extra-space" : "",
+          )}
         >
           <DateCell
             create
@@ -147,6 +158,10 @@ const RowDataComponent = (props) => {
             !modifiedColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Modified" ? "no-extra-space" : "",
+          )}
         >
           <DateCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -163,6 +178,10 @@ const RowDataComponent = (props) => {
             !sizeColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Size" ? "no-extra-space" : "",
+          )}
         >
           <SizeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -181,6 +200,10 @@ const RowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Type" ? "no-extra-space" : "",
+          )}
         >
           <TypeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -223,6 +246,7 @@ export default inject(({ tableStore, indexingStore }) => {
     indexColumnIsEnabled,
     typeColumnIsEnabled,
     quickButtonsColumnIsEnabled,
+    tableStorageName,
   } = tableStore;
 
   const { isIndexing } = indexingStore;
@@ -237,5 +261,6 @@ export default inject(({ tableStore, indexingStore }) => {
     quickButtonsColumnIsEnabled,
 
     isIndexing,
+    tableStorageName,
   };
 })(observer(RowDataComponent));

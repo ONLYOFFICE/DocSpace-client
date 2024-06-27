@@ -1625,7 +1625,7 @@ const SectionFilterContent = ({
                   id: "filter_type-virtual-data",
                   key: RoomsType.VirtualDataRoom,
                   group: FilterGroups.roomFilterType,
-                  label: t("VirtualDataRoom"),
+                  label: t("Common:VirtualDataRoom"),
                 };
               case RoomsType.CustomRoom:
               default:

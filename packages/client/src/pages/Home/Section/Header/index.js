@@ -548,6 +548,7 @@ const SectionHeaderContent = (props) => {
         disabled:
           isRecycleBinFolder ||
           isPersonalRoom ||
+          !security?.CopyLink ||
           ((isPublicRoomType || isCustomRoomType || isFormRoomType) &&
             haveLinksRight &&
             !isArchive),

@@ -88,7 +88,7 @@ export const getDefaultRoomName = (room, t) => {
       return t("Common:PublicRoom");
 
     case RoomsType.VirtualDataRoom:
-      return t("Files:VirtualDataRoom");
+      return t("Common:VirtualDataRoom");
     case RoomsType.FormRoom:
       return t("Common:FormRoom");
   }

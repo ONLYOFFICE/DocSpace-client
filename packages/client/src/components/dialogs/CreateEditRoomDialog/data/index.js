@@ -40,6 +40,8 @@ export const getRoomTypeDefaultTagTranslation = (roomType = 1, t) => {
       return t("Common:CustomRooms");
     case RoomsType.PublicRoom:
       return t("Common:PublicRoom");
+    case RoomsType.VirtualDataRoom:
+      return t("Common:VirtualDataRoom");
     case RoomsType.FormRoom:
       return t("Common:FormRoom");
   }

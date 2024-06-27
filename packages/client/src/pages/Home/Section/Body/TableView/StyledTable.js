@@ -406,6 +406,12 @@ const StyledTableRow = styled(TableRow)`
               `}
       }
     `}
+
+  .no-extra-space {
+    p {
+      margin-right: 0px !important;
+    }
+  }
 `;
 
 const StyledDragAndDrop = styled(DragAndDrop)`

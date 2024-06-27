@@ -223,6 +223,7 @@ const SectionHeaderContent = (props) => {
     onCreateRoom,
     onEmptyTrashAction,
     getHeaderOptions,
+    setBufferSelection,
   } = props;
 
   const location = useLocation();
@@ -255,6 +256,10 @@ const SectionHeaderContent = (props) => {
     }
 
     return getHeaderOptions(t, selectedFolder);
+  };
+
+  const onContextOptionsClick = () => {
+    setBufferSelection(selectedFolder);
   };
 
   const onSelect = (e) => {
@@ -540,6 +545,7 @@ const SectionHeaderContent = (props) => {
                 onNavigationButtonClick={onNavigationButtonClick}
                 tariffBar={<TariffBar />}
                 showNavigationButton={!!showNavigationButton}
+                onContextOptionsClick={onContextOptionsClick}
               />
             </div>
           )}
@@ -607,6 +613,7 @@ export default inject(
       isEmptyPage,
 
       categoryType,
+      setBufferSelection,
     } = filesStore;
 
     const {
@@ -798,6 +805,7 @@ export default inject(
       onCreateRoom,
       onEmptyTrashAction,
       getHeaderOptions,
+      setBufferSelection,
     };
   },
 )(

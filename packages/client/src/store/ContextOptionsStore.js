@@ -1110,10 +1110,7 @@ class ContextOptionsStore {
 
   getHeaderOptions = (t, item) => {
     const { isRecycleBinFolder, isArchiveFolder } = this.treeFoldersStore;
-    const { roomsForDelete, roomsForRestore, setBufferSelection } =
-      this.filesStore;
-
-    setBufferSelection(item);
+    const { roomsForDelete, roomsForRestore } = this.filesStore;
 
     const canRestoreAll = roomsForRestore.length > 0;
     const canDeleteAll = roomsForDelete.length > 0;

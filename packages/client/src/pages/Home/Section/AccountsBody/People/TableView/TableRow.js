@@ -207,7 +207,7 @@ const PeopleTableRow = (props) => {
   const {
     t,
     item,
-    contextOptionsProps,
+    getContextModel,
     element,
     checkedProps,
     onContentRowSelect,
@@ -488,7 +488,8 @@ const PeopleTableRow = (props) => {
         onClick={onRowClick}
         fileContextClick={onRowContextClick}
         hideColumns={hideColumns}
-        {...contextOptionsProps}
+        contextOptions={item.options}
+        getContextModel={getContextModel}
       >
         <TableCell className={"table-container_user-name-cell"}>
           <TableCell

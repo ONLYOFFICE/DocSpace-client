@@ -99,28 +99,28 @@ const StyledLastSessionBlock = styled.div`
 const LastSessionBlock = (props) => {
   const {
     t,
-    status,
     connections,
     userLastSession,
     setDisplayName,
     setDisableDialogVisible,
     setLogoutAllDialogVisible,
+    getFromDateAgo,
   } = props;
 
   const {
+    id,
     avatar,
     displayName,
-    sessions,
     isAdmin,
     isOwner,
     isRoomAdmin,
     isCollaborator,
   } = userLastSession;
 
-  const { platform, browser, ip, city, country } = sessions;
+  const fromDateAgo = getFromDateAgo(id);
 
-  const isOnline = status === "online";
-  const isLastConnection = connections.length > 0;
+  const { platform, browser, ip, city, country } = connections[0] ?? {};
+  const isOnline = fromDateAgo === "online";
 
   const getUserType = () => {
     if (isOwner) return t("Common:Owner");
@@ -192,21 +192,17 @@ const LastSessionBlock = (props) => {
           <div className="session-info-row">
             <Text className="session-info-label">{t("Common:Active")}</Text>
             <Text className={isOnline ? "online" : "session-info-value"}>
-              {t(`Common:${status}`)}
+              {t(`Common:${fromDateAgo}`)}
             </Text>
           </div>
           <div className="session-info-row">
             <Text className="session-info-label">{t("Common:Platform")}</Text>
-            <Text className="session-info-value">
-              {isLastConnection ? connections[0]?.platform : platform}
-            </Text>
+            <Text className="session-info-value">{platform}</Text>
           </div>
           <div className="session-info-row">
             <Text className="session-info-label">{t("Common:Browser")}</Text>
             <Text className="session-info-value">
-              {isLastConnection
-                ? connections[0]?.browser
-                : browser?.split(".")[0] ?? ""}
+              {browser?.split(".")[0] ?? ""}
             </Text>
           </div>
           <div className="session-info-row">
@@ -219,7 +215,7 @@ const LastSessionBlock = (props) => {
                   {`${city} `}
                 </>
               )}
-              {isLastConnection ? connections[0]?.ip : ip}
+              {ip}
             </Text>
           </div>
         </Box>
@@ -231,11 +227,11 @@ const LastSessionBlock = (props) => {
 export default inject(({ setup, peopleStore }) => {
   const { setDisableDialogVisible, setLogoutAllDialogVisible } = setup;
 
-  const { status, connections, userLastSession, setDisplayName } =
+  const { getFromDateAgo, connections, userLastSession, setDisplayName } =
     peopleStore.selectionStore;
 
   return {
-    status,
+    getFromDateAgo,
     connections,
     userLastSession,
     setDisplayName,

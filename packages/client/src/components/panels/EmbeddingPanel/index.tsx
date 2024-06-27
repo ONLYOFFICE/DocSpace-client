@@ -404,6 +404,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     <StyledModalDialog
       visible={visible}
       onClose={onClose}
+      withBodyScroll
       displayType={ModalDialogType.aside}
     >
       <ModalDialog.Header>{t("Files:EmbeddingSettings")}</ModalDialog.Header>

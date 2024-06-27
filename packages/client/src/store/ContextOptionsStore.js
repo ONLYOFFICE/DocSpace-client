@@ -449,9 +449,11 @@ class ContextOptionsStore {
       this.selectedFolderStore;
     const { setLinkParams, setEmbeddingPanelData } = this.dialogsStore;
 
-    const sharedItem = shared
-      ? getSelectedFolder()
-      : navigationPath.find((r) => r.shared);
+    const sharedItem = item.isRoom
+      ? item
+      : shared
+        ? getSelectedFolder()
+        : navigationPath.find((r) => r.shared);
 
     if (!sharedItem) return;
 
@@ -464,7 +466,7 @@ class ContextOptionsStore {
       isFormRoom,
     });
 
-    setEmbeddingPanelData({ visible: true, fileId: item.id });
+    setEmbeddingPanelData({ visible: true, item });
   };
 
   onCreateAndCopySharedLink = async (item, t) => {

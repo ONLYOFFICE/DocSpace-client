@@ -1073,7 +1073,8 @@ class ContextOptionsStore {
     const { activeFiles, activeFolders } = this.filesStore;
     const isExistActiveItems = [...activeFiles, ...activeFolders].length > 0;
 
-    if (isExistActiveItems || emptyTrashInProgress) return;
+    if (isExistActiveItems || this.filesActionsStore.emptyTrashInProgress)
+      return;
 
     this.dialogsStore.setEmptyTrashDialogVisible(true);
   };
@@ -1197,6 +1198,11 @@ class ContextOptionsStore {
         optionsToRemove,
       );
       item = { ...item, contextOptions };
+    } else {
+      item.contextOptions = this.filesStore.removeOptions(
+        item.contextOptions,
+        optionsToRemove,
+      );
     }
 
     const { contextOptions, isEditing } = item;

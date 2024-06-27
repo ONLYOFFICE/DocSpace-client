@@ -82,7 +82,7 @@ const Navigation = ({
   onNavigationButtonClick,
   tariffBar,
   showNavigationButton,
-  onContextClick,
+  onContextOptionsClick,
   ...rest
 }: INavigationProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -292,7 +292,7 @@ const Navigation = ({
               tariffBar={tariffBar}
               title={title}
               isEmptyPage={isEmptyPage}
-              onContextClick={onContextClick}
+              onContextOptionsClick={onContextOptionsClick}
             />
           </StyledContainer>
           {isDesktop && !hideInfoPanel && (

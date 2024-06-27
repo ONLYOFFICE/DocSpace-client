@@ -203,4 +203,5 @@ export interface INavigationProps {
   onNavigationButtonClick?: () => void;
   tariffBar: React.ReactElement;
   showNavigationButton: boolean;
+  onContextOptionsClick?: () => void;
 }

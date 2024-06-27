@@ -1,7 +1,7 @@
 import {
   IClientProps,
   IClientReqDTO,
-  IScope,
+  TScope,
 } from "@docspace/shared/utils/oauth/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
@@ -41,7 +41,7 @@ export interface ClientFormProps {
   id?: string;
   client?: IClientProps;
 
-  scopeList?: IScope[];
+  scopeList?: TScope[];
 
   fetchScopes?: () => Promise<void>;
 

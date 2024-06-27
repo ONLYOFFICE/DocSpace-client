@@ -42,7 +42,7 @@ import {
   TThirdPartyProvider,
   TVersionBuild,
 } from "@docspace/shared/api/settings/types";
-import { IScope } from "@docspace/shared/utils/oauth/types";
+import { TScope } from "@docspace/shared/utils/oauth/types";
 import { transformToClientProps } from "@docspace/shared/utils/oauth";
 
 export const checkIsAuthenticated = async () => {
@@ -176,7 +176,7 @@ export async function getScopeList() {
 
   const scopes = await scopeList.json();
 
-  return scopes as IScope[];
+  return scopes as TScope[];
 }
 
 export async function getOAuthClient(clientId: string) {

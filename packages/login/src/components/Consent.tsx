@@ -41,7 +41,7 @@ import {
   AvatarSize,
 } from "@docspace/shared/components/avatar";
 import { deleteCookie } from "@docspace/shared/utils/cookie";
-import { IClientProps, IScope } from "@docspace/shared/utils/oauth/types";
+import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import api from "@docspace/shared/api";
 
@@ -88,7 +88,7 @@ const StyledUserContainer = styled.div`
 
 interface IConsentProps {
   client: IClientProps;
-  scopes: IScope[];
+  scopes: TScope[];
   user: TUser;
 }
 

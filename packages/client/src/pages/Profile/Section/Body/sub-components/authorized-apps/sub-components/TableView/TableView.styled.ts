@@ -23,11 +23,11 @@ const StyledTableRow = styled(TableRow)`
   .table-container_cell {
     text-overflow: ellipsis;
 
-    padding-right: 8px;
+    padding-inline-end: 8px;
   }
 
   .mr-8 {
-    margin-right: 8px;
+    margin-inline-end: 8px;
   }
 
   .textOverflow {
@@ -46,7 +46,7 @@ const StyledTableRow = styled(TableRow)`
     input {
       position: relative;
 
-      margin-left: -8px;
+      margin-inline-start: -8px;
     }
   }
 

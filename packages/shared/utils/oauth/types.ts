@@ -1,49 +1,21 @@
 import { Nullable } from "../../types";
 import { AuthenticationMethod, ScopeGroup, ScopeType } from "../../enums";
 
-export interface IScope {
+export type TScope = {
   name: string;
   group: ScopeGroup;
   type: ScopeType;
   tKey?: string;
-}
+};
 
-export interface IFilteredScopes {
+export type TFilteredScopes = {
   [key: string]: {
     isChecked: boolean;
     checkedType?: ScopeType;
-    read: IScope;
-    write?: IScope;
+    read: TScope;
+    write?: TScope;
   };
-}
-
-export interface INoAuthClientProps {
-  name: string;
-  logo: string;
-  websiteUrl: string;
-  policyUrl?: string;
-  termsUrl?: string;
-  scopes?: string[];
-
-  clientId?: undefined;
-  clientSecret?: undefined;
-  description?: undefined;
-
-  authenticationMethods?: undefined;
-  tenant?: undefined;
-  redirectUris?: undefined;
-  logoutRedirectUri?: undefined;
-  enabled?: undefined;
-  invalidated?: undefined;
-
-  allowedOrigins?: undefined;
-  createdOn?: undefined;
-  modifiedOn?: undefined;
-  createdBy?: undefined;
-  modifiedBy?: undefined;
-  creatorAvatar?: undefined;
-  creatorDisplayName?: undefined;
-}
+};
 
 export interface IClientProps {
   name: string;
@@ -124,22 +96,6 @@ export interface IClientResDTO {
   website_url: string;
 }
 
-export interface IClientListProps {
-  content: IClientProps[];
-  page: number;
-  limit: number;
-  next: Nullable<number>;
-  previous: Nullable<number>;
-}
-
-export interface IClientListDTO {
-  data: IClientResDTO[];
-  page: number;
-  limit: number;
-  next: Nullable<number>;
-  previous: Nullable<number>;
-}
-
 export interface ISubmitReqDTO {
   client_id: string;
   state: string;
@@ -171,7 +127,7 @@ export type TConsentClient = {
   is_public: boolean;
 };
 
-export interface IGetConsentList {
+export type TConsentData = {
   client: TConsentClient;
   invalidated: boolean;
   modified_at: Date;
@@ -179,4 +135,18 @@ export interface IGetConsentList {
   registered_client_id: string;
   scopes: string;
   is_public: boolean;
-}
+};
+
+type List<T> = {
+  data: T[];
+  page: number;
+  limit: number;
+  next: Nullable<number>;
+  previous: Nullable<number>;
+};
+
+export type IClientListProps = List<IClientProps>;
+
+export type IClientListDTO = List<IClientResDTO>;
+
+export type TConsentList = List<TConsentData>;

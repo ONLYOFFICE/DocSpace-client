@@ -5,7 +5,7 @@ import { Base } from "../../themes";
 import { ScopeType } from "../../enums";
 import { TTranslation } from "../../types";
 
-import { IFilteredScopes, IScope } from "./types";
+import { TFilteredScopes, TScope } from "./types";
 import { filterScopeByGroup } from ".";
 
 const StyledScopeList = styled.div`
@@ -42,20 +42,20 @@ const StyledScopeItem = styled.div`
 
 StyledScopeItem.defaultProps = { theme: Base };
 
-interface IScopeListProps {
+interface TScopeListProps {
   selectedScopes: string[];
-  scopes: IScope[];
+  scopes: TScope[];
 
   t: TTranslation;
 }
 
-const ScopeList = ({ selectedScopes, scopes, t }: IScopeListProps) => {
+const ScopeList = ({ selectedScopes, scopes, t }: TScopeListProps) => {
   const [renderedScopes, setRenderedScopes] = React.useState<string[]>([]);
 
   React.useEffect(() => {
     const result: string[] = [];
 
-    const filteredScopes: IFilteredScopes = filterScopeByGroup(
+    const filteredScopes: TFilteredScopes = filterScopeByGroup(
       selectedScopes,
       scopes,
     );

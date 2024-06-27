@@ -2,8 +2,8 @@ import React from "react";
 
 import {
   IClientReqDTO,
-  IFilteredScopes,
-  IScope,
+  TFilteredScopes,
+  TScope,
 } from "@docspace/shared/utils/oauth/types";
 import {
   filterScopeByGroup,
@@ -22,8 +22,8 @@ import {
   StyledScopesName,
 } from "../ClientForm.styled";
 
-interface IScopesBlockProps {
-  scopes: IScope[];
+interface TScopesBlockProps {
+  scopes: TScope[];
   selectedScopes: string[];
   onAddScope: (name: keyof IClientReqDTO, scope: string) => void;
   t: TTranslation;
@@ -36,9 +36,9 @@ const ScopesBlock = ({
   onAddScope,
   t,
   isEdit,
-}: IScopesBlockProps) => {
+}: TScopesBlockProps) => {
   const [checkedScopes, setCheckedScopes] = React.useState<string[]>([]);
-  const [filteredScopes, setFilteredScopes] = React.useState<IFilteredScopes>(
+  const [filteredScopes, setFilteredScopes] = React.useState<TFilteredScopes>(
     filterScopeByGroup(selectedScopes, scopes),
   );
 

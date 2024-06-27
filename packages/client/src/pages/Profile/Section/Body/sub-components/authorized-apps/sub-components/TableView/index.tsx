@@ -26,7 +26,7 @@ const TableView = ({
   userId,
   hasNextPage,
   itemCount,
-  fetchNextClients,
+  fetchNextConsents,
 }: TableViewProps) => {
   const tableRef = React.useRef<HTMLDivElement>(null);
 
@@ -58,9 +58,9 @@ const TableView = ({
 
   const fetchMoreFiles = React.useCallback(
     async ({ startIndex }: { startIndex: number; stopIndex: number }) => {
-      await fetchNextClients?.(startIndex);
+      await fetchNextConsents?.(startIndex);
     },
-    [fetchNextClients],
+    [fetchNextConsents],
   );
 
   return (
@@ -115,9 +115,9 @@ export default inject(
       changeClientStatus,
       getContextMenuItems,
       activeClients,
-      hasNextPage,
-      itemCount,
-      fetchNextClients,
+      consentHasNextPage,
+      consentItemCount,
+      fetchNextConsents,
     } = oauthStore;
 
     return {
@@ -130,9 +130,9 @@ export default inject(
       setBufferSelection,
       activeClients,
       getContextMenuItems,
-      hasNextPage,
-      itemCount,
-      fetchNextClients,
+      hasNextPage: consentHasNextPage,
+      itemCount: consentItemCount,
+      fetchNextConsents,
     };
   },
 )(observer(TableView));

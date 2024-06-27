@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
-import { IClientProps, IScope } from "@docspace/shared/utils/oauth/types";
+import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
 import ScopeList from "@docspace/shared/utils/oauth/ScopeList";
 import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 import { getCookie } from "@docspace/shared/utils/cookie";
@@ -124,7 +124,7 @@ StyledContainer.defaultProps = { theme: Base };
 
 interface InfoDialogProps {
   visible: boolean;
-  scopeList?: IScope[];
+  scopeList?: TScope[];
 
   setInfoDialogVisible?: (value: boolean) => void;
   getContextMenuItems?: (

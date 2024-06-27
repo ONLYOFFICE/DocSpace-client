@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 

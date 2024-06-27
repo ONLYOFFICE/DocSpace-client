@@ -7,8 +7,8 @@ import {
   IClientResDTO,
   IClientReqDTO,
   IClientProps,
-  IScope,
-  IFilteredScopes,
+  TScope,
+  TFilteredScopes,
 } from "./types";
 
 export const transformToClientProps = (
@@ -122,17 +122,17 @@ export const getScopeTKeyName = (group: ScopeGroup) => {
 
 export const filterScopeByGroup = (
   checkedScopes: string[],
-  scopes: IScope[],
+  scopes: TScope[],
 ) => {
-  const filteredScopes: IFilteredScopes = {};
+  const filteredScopes: TFilteredScopes = {};
 
   scopes.forEach((scope) => {
     const isChecked = checkedScopes.includes(scope.name);
     const isRead = ScopeType.read === scope.type;
 
     const tKey = getScopeTKeyDescription(scope.group, scope.type);
-    const read = isRead ? { ...scope, tKey } : ({} as IScope);
-    const write = !isRead ? { ...scope, tKey } : ({} as IScope);
+    const read = isRead ? { ...scope, tKey } : ({} as TScope);
+    const write = !isRead ? { ...scope, tKey } : ({} as TScope);
 
     if (scope.group === ScopeGroup.openid) {
       filteredScopes[scope.group] = {

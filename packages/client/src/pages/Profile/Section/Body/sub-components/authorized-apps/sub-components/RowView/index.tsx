@@ -21,14 +21,14 @@ const RowView = (props: RowViewProps) => {
     getContextMenuItems,
     hasNextPage,
     itemCount,
-    fetchNextClients,
+    fetchNextConsents,
   } = props;
 
   const fetchMoreFiles = React.useCallback(
     async ({ startIndex }: { startIndex: number; stopIndex: number }) => {
-      await fetchNextClients?.(startIndex);
+      await fetchNextConsents?.(startIndex);
     },
-    [fetchNextClients],
+    [fetchNextConsents],
   );
 
   return (
@@ -66,9 +66,9 @@ export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
     changeClientStatus,
     getContextMenuItems,
     activeClients,
-    hasNextPage,
-    itemCount,
-    fetchNextClients,
+    consentHasNextPage,
+    consentItemCount,
+    fetchNextConsents,
   } = oauthStore;
 
   return {
@@ -79,8 +79,8 @@ export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
     setSelection,
     activeClients,
     getContextMenuItems,
-    hasNextPage,
-    itemCount,
-    fetchNextClients,
+    hasNextPage: consentHasNextPage,
+    itemCount: consentItemCount,
+    fetchNextConsents,
   };
 })(observer(RowView));

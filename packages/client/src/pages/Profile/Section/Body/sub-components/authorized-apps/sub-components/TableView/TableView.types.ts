@@ -1,4 +1,4 @@
-import { IClientProps } from "@docspace/shared/utils/oauth/interfaces";
+import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import { ContextMenuModel } from "@docspace/shared/components/context-menu";
 import { TTranslation } from "@docspace/shared/types";
 
@@ -19,7 +19,7 @@ export interface TableViewProps {
   activeClients?: string[];
   hasNextPage?: boolean;
   itemCount?: number;
-  fetchNextClients?: (startIndex: number) => Promise<void>;
+  fetchNextConsents?: (startIndex: number) => Promise<void>;
   changeClientStatus?: (clientId: string, status: boolean) => Promise<void>;
 }
 

@@ -7,9 +7,10 @@ import {
   IClientResDTO,
   IClientListProps,
   IClientListDTO,
-  IScope,
+  TScope,
   IClientReqDTO,
-  IGetConsentList,
+  TConsentData,
+  TConsentList,
 } from "../../utils/oauth/types";
 
 export const getClient = async (clientId: string): Promise<IClientProps> => {
@@ -30,12 +31,12 @@ export const getClientList = async (
     url: `/clients?page=${page}&limit=${limit}`,
   })) as IClientListDTO;
 
-  const clients: IClientListProps = { ...data, content: [] };
+  const clients: IClientListProps = { ...data, data: [] };
 
   data.data.forEach((item) => {
     const client = transformToClientProps(item);
 
-    clients.content.push({ ...client });
+    clients.data.push({ ...client });
   });
 
   return clients;
@@ -90,68 +91,56 @@ export const deleteClient = async (clientId: string): Promise<void> => {
   });
 };
 
-export const getScope = async (name: string): Promise<IScope> => {
+export const getScope = async (name: string): Promise<TScope> => {
   const scope = (await request({
     method: "get",
     url: `/scopes/${name}`,
-  })) as IScope;
+  })) as TScope;
 
   return scope;
 };
 
-export const getScopeList = async (): Promise<IScope[]> => {
+export const getScopeList = async (): Promise<TScope[]> => {
   const scopeList = (await request({
     method: "get",
     url: `/scopes`,
-  })) as IScope[];
+  })) as TScope[];
 
   return scopeList;
 };
 
-export const getConsentList = async (): Promise<IClientProps[]> => {
-  const clients = (await request({
+export const getConsentList = async (
+  page: number = 0,
+  limit: number = 100,
+): Promise<TConsentList & { consents: IClientProps[] }> => {
+  const consentList = (await request({
     method: "get",
-    url: "/clients/consents",
-  })) as IGetConsentList[];
+    url: `/clients/consents?page=${page}&limit=${limit}`,
+  })) as TConsentList;
 
   const consents: IClientProps[] = [];
 
-  clients.forEach(({ client, invalidated, modified_at }: IGetConsentList) => {
-    const consentClient: IClientResDTO = {
-      ...client,
-      client_secret: "",
-      logout_redirect_uri: "",
-    };
+  consentList.data.forEach(
+    ({ client, invalidated, modified_at }: TConsentData) => {
+      const consentClient: IClientResDTO = {
+        ...client,
+        client_secret: "",
+        logout_redirect_uri: "",
+      };
 
-    const cl = transformToClientProps(consentClient);
+      const cl = transformToClientProps(consentClient);
 
-    if (!invalidated) consents.push({ ...cl, modifiedOn: modified_at });
-  });
+      if (!invalidated) consents.push({ ...cl, modifiedOn: modified_at });
+    },
+  );
 
-  return consents;
+  return { ...consentList, consents };
 };
 
 export const revokeUserClient = async (clientId: string): Promise<void> => {
   await request({
     method: "delete",
     url: `/clients/${clientId}/revoke`,
-  });
-};
-
-export const onOAuthLogin = (clientId: string) => {
-  const formData = new FormData();
-
-  formData.set("username", clientId);
-  formData.set("password", clientId);
-
-  return request({
-    method: "post",
-    url: `/oauth2/login?client_id=${clientId}`,
-    data: formData,
-    withRedirect: true,
-    headers: {
-      "X-Disable-Redirect": "true",
-    },
   });
 };
 
@@ -165,8 +154,6 @@ export const onOAuthSubmit = (
   formData.append("client_id", clientId);
   formData.append("state", clientState);
 
-  // return;
-
   scope.forEach((s) => {
     formData.append("scope", s);
   });
@@ -176,9 +163,6 @@ export const onOAuthSubmit = (
     url: `/oauth2/authorize`,
     data: formData,
     withRedirect: true,
-    headers: {
-      "X-Disable-Redirect": "true",
-    },
   });
 };
 
@@ -193,8 +177,5 @@ export const onOAuthCancel = (clientId: string, clientState: string) => {
     url: `/oauth2/authorize`,
     data: formData,
     withRedirect: true,
-    headers: {
-      "X-Disable-Redirect": "true",
-    },
   });
 };

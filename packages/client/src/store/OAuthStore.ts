@@ -15,13 +15,13 @@ import {
   IClientListProps,
   IClientProps,
   IClientReqDTO,
-  IScope,
+  TScope,
 } from "@docspace/shared/utils/oauth/types";
 import { toastr } from "@docspace/shared/components/toast";
 import { AuthenticationMethod } from "@docspace/shared/enums";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { UserStore } from "@docspace/shared/store/UserStore";
-import { TTranslation } from "@docspace/shared/types";
+import { Nullable, TTranslation } from "@docspace/shared/types";
 
 import EnableReactSvgUrl from "PUBLIC_DIR/images/enable.react.svg?url";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
@@ -64,6 +64,9 @@ export interface OAuthStoreProps {
   clientsIsLoading: boolean;
   setClientsIsLoading: (value: boolean) => void;
 
+  consentsIsLoading: boolean;
+  setConsentsIsLoading: (value: boolean) => void;
+
   clientSecret: string;
   setClientSecret: (value: string) => void;
 
@@ -75,7 +78,9 @@ export interface OAuthStoreProps {
   fetchNextClients: (startIndex: number) => Promise<void>;
 
   consents: IClientProps[];
+
   fetchConsents: () => Promise<void>;
+  fetchNextConsents: (startIndex: number) => Promise<void>;
 
   saveClient: (client: IClientReqDTO) => Promise<void>;
 
@@ -89,11 +94,15 @@ export interface OAuthStoreProps {
 
   revokeClient: (clientId: string[]) => Promise<void>;
 
-  userStore: UserStore | null;
+  userStore: Nullable<UserStore>;
 
   currentPage: number;
-  nextPage: number | null;
+  nextPage: Nullable<number>;
   itemCount: number;
+
+  consentCurrentPage: number;
+  consentNextPage: Nullable<number>;
+  consentItemCount: number;
 
   selection: string[];
   setSelection: (clientId: string) => void;
@@ -104,7 +113,7 @@ export interface OAuthStoreProps {
   activeClients: string[];
   setActiveClient: (clientId: string) => void;
 
-  scopes: IScope[];
+  scopes: TScope[];
   fetchScopes: () => Promise<void>;
 
   getContextMenuItems: (
@@ -117,19 +126,26 @@ export interface OAuthStoreProps {
   clientList: IClientProps[];
   isEmptyClientList: boolean;
   hasNextPage: boolean;
-  scopeList: IScope[];
+  consentHasNextPage: boolean;
+  scopeList: TScope[];
 }
 
 class OAuthStore implements OAuthStoreProps {
-  userStore: UserStore | null = null;
+  userStore: Nullable<UserStore> = null;
 
   viewAs: ViewAsType = "table";
 
   currentPage: number = 0;
 
-  nextPage: number | null = null;
+  nextPage: Nullable<number> = null;
 
   itemCount: number = 0;
+
+  consentCurrentPage: number = 0;
+
+  consentNextPage: Nullable<number> = null;
+
+  consentItemCount: number = 0;
 
   infoDialogVisible: boolean = false;
 
@@ -149,9 +165,11 @@ class OAuthStore implements OAuthStoreProps {
 
   activeClients: string[] = [];
 
-  scopes: IScope[] = [];
+  scopes: TScope[] = [];
 
   clientsIsLoading: boolean = true;
+
+  consentsIsLoading: boolean = true;
 
   clientSecret: string = "";
 
@@ -229,6 +247,10 @@ class OAuthStore implements OAuthStoreProps {
     this.clientsIsLoading = value;
   };
 
+  setConsentsIsLoading = (value: boolean) => {
+    this.consentsIsLoading = value;
+  };
+
   setActiveClient = (clientId?: string) => {
     if (!clientId) {
       this.activeClients = [];
@@ -254,15 +276,15 @@ class OAuthStore implements OAuthStoreProps {
       const clientList: IClientListProps = await getClientList(0, PAGE_LIMIT);
 
       runInAction(() => {
-        this.clients = [...clientList.content];
+        this.clients = [...clientList.data];
         this.selection = [];
         this.currentPage = clientList.page;
         this.nextPage = clientList.next;
 
         if (clientList.next) {
-          this.itemCount = clientList.content.length + 2;
+          this.itemCount = clientList.data.length + 2;
         } else {
-          this.itemCount = clientList.content.length;
+          this.itemCount = clientList.data.length;
         }
       });
       this.setClientsIsLoading(false);
@@ -291,9 +313,9 @@ class OAuthStore implements OAuthStoreProps {
     runInAction(() => {
       this.currentPage = clientList.page;
       this.nextPage = clientList.next || null;
-      this.clients = [...this.clients, ...clientList.content];
+      this.clients = [...this.clients, ...clientList.data];
 
-      this.itemCount += clientList.content.length;
+      this.itemCount += clientList.data.length;
     });
 
     this.setClientsIsLoading(false);
@@ -301,15 +323,50 @@ class OAuthStore implements OAuthStoreProps {
 
   fetchConsents = async () => {
     try {
-      const consentList: IClientProps[] = await getConsentList();
+      this.setClientsIsLoading(true);
+      const consentList = await getConsentList(0, PAGE_LIMIT);
 
       runInAction(() => {
-        this.consents = [...consentList];
+        this.consents = [...consentList.consents];
+        this.selection = [];
+        this.consentCurrentPage = consentList.page;
+        this.consentNextPage = consentList.next;
+
+        if (consentList.next) {
+          this.consentItemCount = consentList.data.length + 2;
+        } else {
+          this.consentItemCount = consentList.data.length;
+        }
       });
+      this.setClientsIsLoading(false);
     } catch (e) {
       const err = e as TData;
       toastr.error(err);
     }
+  };
+
+  fetchNextConsents = async (startIndex: number) => {
+    if (this.consentsIsLoading) return;
+
+    this.setConsentsIsLoading(true);
+
+    const page = startIndex / PAGE_LIMIT;
+
+    runInAction(() => {
+      this.consentCurrentPage = page + 1;
+    });
+
+    const consentList = await getConsentList(this.nextPage || page, PAGE_LIMIT);
+
+    runInAction(() => {
+      this.currentPage = consentList.page;
+      this.nextPage = consentList.next || null;
+      this.consents = [...this.consents, ...consentList.consents];
+
+      this.consentItemCount += consentList.data.length;
+    });
+
+    this.setConsentsIsLoading(false);
   };
 
   saveClient = async (client: IClientReqDTO) => {
@@ -669,6 +726,10 @@ class OAuthStore implements OAuthStoreProps {
 
   get hasNextPage() {
     return !!this.nextPage;
+  }
+
+  get consentHasNextPage() {
+    return !!this.consentNextPage;
   }
 
   get scopeList() {

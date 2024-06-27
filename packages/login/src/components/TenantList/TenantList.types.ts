@@ -9,5 +9,4 @@ export type TenantListProps = {
 export type ItemProps = {
   portal: TPortal;
   baseDomain: string;
-  clientId: string;
 };

@@ -23,12 +23,7 @@ const TenantList = ({ portals, clientId, baseDomain }: TenantListProps) => {
       </Text>
       <div className="items-list">
         {portals.map((item) => (
-          <Item
-            portal={item}
-            key={item.portalName}
-            clientId={clientId}
-            baseDomain={baseDomain}
-          />
+          <Item portal={item} key={item.portalName} baseDomain={baseDomain} />
         ))}
       </div>
       <Button

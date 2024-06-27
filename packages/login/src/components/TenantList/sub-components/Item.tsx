@@ -1,23 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { Text } from "@docspace/shared/components/text";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { deleteCookie, getCookie } from "@docspace/shared/utils/cookie";
 
 import ArrowRightSvrUrl from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 
 import { ItemProps } from "../TenantList.types";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { generateOAuth2ReferenceURl } from "@/utils";
 
-const Item = ({ clientId, portal, baseDomain }: ItemProps) => {
-  console.log(portal);
+const Item = ({ portal, baseDomain }: ItemProps) => {
   const name = portal.portalName.includes(baseDomain)
     ? portal.portalName
     : `${portal.portalName}.${baseDomain}`;
 
   const onClick = () => {
-    const referenceUrl = generateOAuth2ReferenceURl(clientId);
+    const redirectUrl = getCookie("x-redirect-authorization-uri")?.replace(
+      window.location.origin,
+      name,
+    );
+    deleteCookie("x-redirect-authorization-uri");
 
-    window.open(`${portal.portalLink}&referenceUrl=${referenceUrl}`, "_self");
+    window.open(`${portal.portalLink}&referenceUrl=${redirectUrl}`, "_self");
   };
 
   return (

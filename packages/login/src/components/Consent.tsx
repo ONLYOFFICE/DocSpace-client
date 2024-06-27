@@ -110,7 +110,6 @@ const Consent = ({ client, scopes, user }: IConsentProps) => {
 
     let clientState = "";
 
-    console.log(clientState);
     const scope = client.scopes;
 
     const cookie = document.cookie.split(";");
@@ -119,14 +118,6 @@ const Consent = ({ client, scopes, user }: IConsentProps) => {
       if (c.includes("client_state"))
         clientState = c.replace("client_state=", "").trim();
     });
-
-    deleteCookie("client_state");
-
-    console.log(clientState, "run");
-
-    const state = await api.oauth.onOAuthLogin(clientId);
-
-    console.log(state);
 
     await api.oauth.onOAuthSubmit(clientId, clientState, scope);
 
@@ -143,8 +134,6 @@ const Consent = ({ client, scopes, user }: IConsentProps) => {
     const clientId = client.clientId;
 
     let clientState = "";
-
-    // await api.oauth.onOAuthLogin(clientId);
 
     const cookie = document.cookie.split(";");
 

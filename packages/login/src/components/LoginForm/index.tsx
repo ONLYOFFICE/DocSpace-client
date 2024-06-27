@@ -49,9 +49,10 @@ import { toastr } from "@docspace/shared/components/toast";
 import { thirdPartyLogin } from "@docspace/shared/api/user";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
-import api from "@docspace/shared/api";
 import { RecaptchaType } from "@docspace/shared/enums";
 import { getAvailablePortals } from "@docspace/shared/api/management";
+import { getCookie } from "@docspace/shared/utils";
+import { deleteCookie } from "@docspace/shared/utils/cookie";
 
 import { LoginFormProps } from "@/types";
 import { generateOAuth2ReferenceURl, getEmailFromInvitation } from "@/utils";
@@ -64,6 +65,7 @@ import LDAPContainer from "./sub-components/LDAPContainer";
 import { StyledCaptcha } from "./LoginForm.styled";
 import { LoginDispatchContext, LoginValueContext } from "../Login";
 import OAuthClientInfo from "../ConsentInfo";
+
 // import { gitAvailablePortals } from "@/utils/actions";
 
 const LoginForm = ({
@@ -263,11 +265,9 @@ const LoginForm = ({
       });
 
       if (portals.length === 1) {
-        const referenceUrl = generateOAuth2ReferenceURl(client.clientId);
-        window.open(
-          `${portals[0].portalLink}&referenceUrl=${referenceUrl}`,
-          "_self",
-        );
+        window.open(`${portals[0].portalLink}`, "_self");
+
+        return;
       }
 
       const searchParams = new URLSearchParams();
@@ -284,10 +284,11 @@ const LoginForm = ({
 
     login(user, hash, pwd, session, captchaToken, currentCulture, reCaptchaType)
       .then(async (res: string | object) => {
-        if (clientId) {
-          await api.oauth.onOAuthLogin(clientId);
+        const redirectUrl = getCookie("x-redirect-authorization-uri");
+        if (clientId && redirectUrl) {
+          deleteCookie("x-redirect-authorization-uri");
 
-          router.push(`/login/consent?clientId=${clientId}`);
+          window.location.replace(redirectUrl);
 
           return;
         }

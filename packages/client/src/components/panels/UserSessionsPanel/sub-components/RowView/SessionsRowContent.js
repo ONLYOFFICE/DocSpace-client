@@ -30,7 +30,7 @@ const SessionsRowContent = ({ item, sectionWidth }) => {
       sideColor={theme.profile.activeSessions.tableCellColor}
     >
       <Text fontSize="14px" fontWeight="600" containerWidth="160px" truncate>
-        {platform}, {browser}
+        {platform}, {browser?.split(".")[0] ?? ""}
         <span className="date">{convertTime(date)}</span>
       </Text>
       <></>

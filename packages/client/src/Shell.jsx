@@ -90,7 +90,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
     organizationName,
     setDataFromSocket,
-    setCurrentDataFromSocket,
+    updateDataFromSocket,
     sessisonLogout,
   } = rest;
 
@@ -150,7 +150,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     });
 
     socketHelper.on("enter-in-portal", (data) => {
-      setCurrentDataFromSocket(data);
+      updateDataFromSocket(data);
       console.log("enter-in-portal", data);
     });
 
@@ -167,12 +167,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     socketHelper.on("leave-session-in-portal", (data) => {
       console.log(data);
     });
-  }, [
-    socketHelper,
-    setDataFromSocket,
-    setCurrentDataFromSocket,
-    sessisonLogout,
-  ]);
+  }, [socketHelper, setDataFromSocket, updateDataFromSocket, sessisonLogout]);
 
   useEffect(() => {
     socketHelper.emit({
@@ -500,7 +495,7 @@ const ShellWrapper = inject(
     peopleStore,
   }) => {
     const { i18n } = useTranslation();
-    const { setDataFromSocket, setCurrentDataFromSocket, sessisonLogout } =
+    const { setDataFromSocket, updateDataFromSocket, sessisonLogout } =
       peopleStore.selectionStore;
 
     const {
@@ -592,7 +587,7 @@ const ShellWrapper = inject(
       isFrame,
       organizationName,
       setDataFromSocket,
-      setCurrentDataFromSocket,
+      updateDataFromSocket,
       sessisonLogout,
     };
   },

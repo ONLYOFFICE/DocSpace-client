@@ -35,7 +35,6 @@ class SelectionStore {
   // allSessions = [];
   sessionsData = [];
   dataFromSocket = [];
-  currentDataFromSocket = [];
   displayName = "";
   status = "";
   fromDateAgo = {};
@@ -475,31 +474,65 @@ class SelectionStore {
   sessisonLogout = ({ userId, date }) => {
     const newData = [...this.dataFromSocket];
 
+    const status = "offline";
+
+    const currentSesstionIndex = this.sessionsData.findIndex(
+      ({ id }) => id === userId,
+    );
+
     const index = newData.findIndex((data) => data.id === userId);
+
+    if (currentSesstionIndex !== -1) {
+      this.sessionsData[currentSesstionIndex] = {
+        ...this.sessionsData[currentSesstionIndex],
+        status,
+        connections: [
+          ...this.sessionsData[currentSesstionIndex].connections,
+          { ...this.sessionsData[currentSesstionIndex].connections[0], date },
+        ],
+      };
+    }
 
     if (index === -1) return;
 
-    newData[index].status = "offline";
-    newData[index].sessions[0].date = date;
-
-    console.log(newData[index].sessions);
+    newData[index] = {
+      ...newData[index],
+      status,
+      sessions: [
+        ...newData[index].sessions,
+        { ...newData[index].sessions[0], date },
+      ],
+    };
 
     this.setDataFromSocket(newData);
   };
 
-  setCurrentDataFromSocket = (data) => {
-    this.currentDataFromSocket = data;
-
+  updateDataFromSocket = (data) => {
     const newArr = [...this.dataFromSocket];
     const indexTest = newArr.findIndex(({ id }) => id === data.id);
-    if (indexTest === -1) return;
+    const currentSesstionIndex = this.sessionsData.findIndex(
+      ({ id }) => id === data.id,
+    );
     const { sessions, status } = data;
+
+    if (currentSesstionIndex !== -1) {
+      this.sessionsData[currentSesstionIndex] = {
+        ...this.sessionsData[currentSesstionIndex],
+        status,
+      };
+    }
+
+    if (indexTest === -1) {
+      this.dataFromSocket = [data, ...this.dataFromSocket];
+      return;
+    }
 
     newArr[indexTest] = {
       ...newArr[indexTest],
       sessions,
       status,
     };
+
     this.setDataFromSocket(newArr);
   };
 
@@ -548,21 +581,23 @@ class SelectionStore {
   };
 
   getCurrentConnections = (session, data) => {
-    const { sessions, id } = this.currentDataFromSocket ?? {};
     const [first, ...other] = session.connections;
-    const [firstSessions] = sessions ?? [];
-    const isCurrentSesstion = session.id === id;
-
+    const isCurrentSesstion = session.id === data?.id;
     const connectionsIsEmpty = session.connections.length === 0;
 
-    if (isCurrentSesstion) return [{ ...first, ...firstSessions }, ...other];
+    const firstIndex = 0;
+    const lastIndex = -1;
+    const isOnline = session.status === "online";
+
+    const index = isOnline ? firstIndex : lastIndex;
+    const sessionData = data?.sessions.at(index);
+
+    if (isCurrentSesstion) return [{ ...first, ...sessionData }, ...other];
 
     if (connectionsIsEmpty) {
-      const lastSession = data?.sessions.at(-1);
+      if (!sessionData) return [];
 
-      if (!lastSession) return [];
-
-      return [lastSession];
+      return [sessionData];
     }
 
     return session.connections;
@@ -584,33 +619,6 @@ class SelectionStore {
 
     return sessions.filter((session) => session.connections.length !== 0);
   }
-
-  // updateAllSessions = (sessionsData, dataFromSocket, currentDataFromSocket) => {
-  //   const newAllSessions = [];
-
-  //   sessionsData.forEach((session) => {
-  //     const socketData = dataFromSocket.find((user) => user.id === session.id);
-
-  //     if (socketData && socketData.sessions && socketData.sessions.length > 0) {
-  //       const isCurrentSession =
-  //         currentDataFromSocket && currentDataFromSocket.id === session.id;
-
-  //       const latestData = isCurrentSession
-  //         ? currentDataFromSocket
-  //         : socketData;
-
-  //       newAllSessions.push({
-  //         ...session,
-  //         status: latestData ? latestData.status : "offline",
-  //         sessions: latestData ? latestData.sessions.slice(-1)[0] : [],
-  //       });
-  //     }
-  //   });
-
-  //   runInAction(() => {
-  //     this.setAllSessions(newAllSessions);
-  //   });
-  // };
 
   fetchData = async () => {
     const { getUserSessionsById } = this.settingsSetupStore;

@@ -1606,6 +1606,7 @@ class FilesStore {
           folders: data.folders,
           ...data.current,
           inRoom: !!data.current.inRoom,
+          isRoom: !!data.current.roomType,
           pathParts: data.pathParts,
           navigationPath,
           ...{ new: data.new },
@@ -2029,6 +2030,7 @@ class FilesStore {
     const canCopy = item.security?.Copy;
     const canDuplicate = item.security?.Duplicate;
     const canDownload = item.security?.Download;
+    const canEmbed = item.security?.Embed;
 
     if (isFile) {
       const shouldFillForm = item.viewAccessibility.WebRestrictedEditing;
@@ -2197,10 +2199,7 @@ class FilesStore {
       }
 
       if (!canViewFile || isRecycleBinFolder) {
-        fileOptions = this.removeOptions(fileOptions, [
-          "preview",
-          "embedding-settings",
-        ]);
+        fileOptions = this.removeOptions(fileOptions, ["preview"]);
       }
 
       if (!canOpenPlayer || isRecycleBinFolder) {
@@ -2332,7 +2331,7 @@ class FilesStore {
         ]);
       }
 
-      if (this.publicRoomStore.isPublicRoom) {
+      if (this.publicRoomStore.isPublicRoom || !canEmbed) {
         fileOptions = this.removeOptions(fileOptions, ["embedding-settings"]);
       }
 
@@ -2379,6 +2378,7 @@ class FilesStore {
         "edit-room",
         "invite-users-to-room",
         "external-link",
+        "embedding-settings",
         "room-info",
         "pin-room",
         "unpin-room",
@@ -2449,6 +2449,10 @@ class FilesStore {
         item.mute
           ? (roomOptions = this.removeOptions(roomOptions, ["mute-room"]))
           : (roomOptions = this.removeOptions(roomOptions, ["unmute-room"]));
+      }
+
+      if (this.publicRoomStore.isPublicRoom || !canEmbed) {
+        roomOptions = this.removeOptions(roomOptions, ["embedding-settings"]);
       }
 
       if (!canViewRoomInfo) {

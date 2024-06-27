@@ -1986,7 +1986,7 @@ class FilesStore {
     return newOptions.filter((o) => o);
   };
 
-  getFilesContextOptions = (item, fromInfoPanel) => {
+  getFilesContextOptions = (item, optionsToRemove = []) => {
     const isFile = !!item.fileExst || item.contentLength;
     const isRoom = !!item.roomType;
     const isFavorite =
@@ -2097,6 +2097,10 @@ class FilesStore {
         "remove-from-recent",
         "copy-general-link",
       ];
+
+      if (optionsToRemove.length) {
+        fileOptions = this.removeOptions(fileOptions, optionsToRemove);
+      }
 
       if (!canDownload) {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
@@ -2388,6 +2392,10 @@ class FilesStore {
         "delete",
       ];
 
+      if (optionsToRemove.length) {
+        roomOptions = this.removeOptions(roomOptions, optionsToRemove);
+      }
+
       if (!canEditRoom) {
         roomOptions = this.removeOptions(roomOptions, [
           "edit-room",
@@ -2466,10 +2474,6 @@ class FilesStore {
         }
       }
 
-      // if (fromInfoPanel) {
-      //   roomOptions = this.removeOptions(roomOptions, ["external-link"]);
-      // }
-
       roomOptions = this.removeSeparator(roomOptions);
 
       return roomOptions;
@@ -2498,6 +2502,10 @@ class FilesStore {
         // "unsubscribe",
         "delete",
       ];
+
+      if (optionsToRemove.length) {
+        folderOptions = this.removeOptions(folderOptions, optionsToRemove);
+      }
 
       if (!canDownload) {
         folderOptions = this.removeOptions(folderOptions, ["download"]);

@@ -28,7 +28,7 @@ import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { TabsContainer } from "@docspace/shared/components/tabs-container";
+// import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
@@ -197,13 +197,13 @@ const ViewerInfoWatermark = ({
       <Text className="watermark-title" fontWeight={600} lineHeight="20px">
         {t("AddWatermarkElements")}
       </Text>
-      <TabsContainer
+      {/* <TabsContainer
         elements={initialInfoRef.dataTabs}
         onSelect={onSelect}
         selectedItem={initialInfoRef.tabs.map((item) => item.index)}
         multiple
         withBorder
-      />
+      /> */}
       <div>
         <Text className="watermark-title" fontWeight={600} lineHeight="20px">
           {t("AddStaticText")}

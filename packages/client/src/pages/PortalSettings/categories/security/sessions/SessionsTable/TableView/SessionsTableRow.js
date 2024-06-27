@@ -169,9 +169,7 @@ const SessionsTableRow = (props) => {
     setFromDateAgo,
   } = props;
 
-  const { browser, ip, city, country } = sessions;
-
-  const date = connections[0]?.date;
+  const { platform, browser, ip, city, country, date } = connections[0] || {};
 
   const isLastConnection = connections.length > 0;
   const fromDateAgo = getFromDateAgo(item.id);
@@ -287,12 +285,10 @@ const SessionsTableRow = (props) => {
 
         <TableCell>
           <Text className="session-info" truncate>
-            {connections[0]?.platform},&nbsp;
+            {platform},&nbsp;
           </Text>
           <Text className="session-info" truncate>
-            {isLastConnection
-              ? connections[0]?.browser
-              : browser?.split(".")[0] ?? ""}
+            {browser?.split(".")[0] ?? ""}
           </Text>
         </TableCell>
 
@@ -306,7 +302,7 @@ const SessionsTableRow = (props) => {
                 <span className="divider"></span>
               </>
             )}
-            {isLastConnection ? connections[0]?.ip : ip}
+            {ip}
           </Text>
         </TableCell>
       </StyledTableRow>

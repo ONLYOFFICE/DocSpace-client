@@ -28,6 +28,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
+import { getRoomTypeTitleTranslation } from "@docspace/shared/components/room-type/RoomType.utils";
 
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
@@ -38,7 +39,6 @@ import withBadges from "../../../../../HOCs/withBadges";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { tablet } from "@docspace/shared/utils";
-import { getRoomTypeTitleTranslation } from "SRC_DIR/components/dialogs/CreateEditRoomDialog/data";
 
 const SimpleFilesTileContent = styled(TileContent)`
   .row-main-container {

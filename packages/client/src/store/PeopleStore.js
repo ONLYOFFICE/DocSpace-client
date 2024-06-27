@@ -58,6 +58,7 @@ import {
 } from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
 import { deleteGroup } from "@docspace/shared/api/groups";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 class PeopleStore {
   contextOptionsStore = null;
@@ -315,8 +316,8 @@ class PeopleStore {
     const adminOption = {
       id: "menu_change-user_administrator",
       className: "group-menu_drop-down",
-      label: t("Common:DocSpaceAdmin"),
-      title: t("Common:DocSpaceAdmin"),
+      label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+      title: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
       onClick: (e) => this.onChangeType(e),
       "data-action": "admin",
       key: "administrator",
@@ -508,24 +509,6 @@ class PeopleStore {
 
   setIsLoadedProfileSectionBody = (isLoadedProfileSectionBody) => {
     this.isLoadedProfileSectionBody = isLoadedProfileSectionBody;
-  };
-
-  getStatusType = (user) => {
-    if (
-      user.status === EmployeeStatus.Active &&
-      user.activationStatus === EmployeeActivationStatus.Activated
-    ) {
-      return "normal";
-    } else if (
-      user.status === EmployeeStatus.Active &&
-      user.activationStatus === EmployeeActivationStatus.Pending
-    ) {
-      return "pending";
-    } else if (user.status === EmployeeStatus.Disabled) {
-      return "disabled";
-    } else {
-      return "unknown";
-    }
   };
 
   getUserRole = (user) => {

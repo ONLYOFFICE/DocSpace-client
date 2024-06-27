@@ -87,7 +87,7 @@ class FilesTableHeader extends React.Component {
         key: "QuickButtons",
         title: "",
         enable: this.props.roomColumnQuickButtonsIsEnabled,
-        defaultSize: 75,
+        defaultSize: 52,
         resizable: false,
       },
     ];
@@ -165,7 +165,7 @@ class FilesTableHeader extends React.Component {
         key: "QuickButtons",
         title: "",
         enable: this.props.roomColumnQuickButtonsIsEnabled,
-        defaultSize: 75,
+        defaultSize: 52,
         resizable: false,
       },
     ];
@@ -259,7 +259,7 @@ class FilesTableHeader extends React.Component {
         key: "QuickButtons",
         title: "",
         enable: this.props.quickButtonsColumnIsEnabled,
-        defaultSize: 75,
+        defaultSize: 52,
         resizable: false,
       },
     ];
@@ -343,7 +343,7 @@ class FilesTableHeader extends React.Component {
         key: "QuickButtons",
         title: "",
         enable: this.props.quickButtonsColumnIsEnabled,
-        defaultSize: 75,
+        defaultSize: 52,
         resizable: false,
       },
     ];
@@ -418,7 +418,7 @@ class FilesTableHeader extends React.Component {
         key: "QuickButtons",
         title: "",
         enable: this.props.quickButtonsColumnIsEnabled,
-        defaultSize: 75,
+        defaultSize: 52,
         resizable: false,
       },
     ];
@@ -438,13 +438,17 @@ class FilesTableHeader extends React.Component {
   };
 
   getTableColumns = (fromUpdate = false) => {
-    const { getColumns, columnStorageName, columnInfoPanelStorageName } =
-      this.props;
+    const {
+      getColumns,
+      columnStorageName,
+      columnInfoPanelStorageName,
+      tableStorageName,
+    } = this.props;
 
     const defaultColumns = this.getDefaultColumns();
 
     let columns = getColumns(defaultColumns);
-    const storageColumns = localStorage.getItem(this.props.tableStorageName);
+    const storageColumns = localStorage.getItem(tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
     const resetColumnsSize =
       (splitColumns && splitColumns.length !== columns.length) || !splitColumns;
@@ -456,6 +460,7 @@ class FilesTableHeader extends React.Component {
       this.setState({
         columns,
         resetColumnsSize,
+        tableStorageName,
         columnStorageName,
         columnInfoPanelStorageName,
       });
@@ -463,12 +468,12 @@ class FilesTableHeader extends React.Component {
       this.state = {
         columns,
         resetColumnsSize,
+        tableStorageName,
         columnStorageName,
         columnInfoPanelStorageName,
       };
     }
   };
-
   setTableColumns = (tableColumns) => {
     localStorage.setItem(this.props.tableStorageName, tableColumns);
   };
@@ -510,6 +515,7 @@ class FilesTableHeader extends React.Component {
       columnInfoPanelStorageName,
       isRecentTab,
       isArchiveFolder,
+      showStorageInfo,
     } = this.props;
 
     if (
@@ -518,7 +524,8 @@ class FilesTableHeader extends React.Component {
       isTrashFolder !== prevProps.isTrashFolder ||
       columnStorageName !== prevProps.columnStorageName ||
       columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
-      isRecentTab !== prevProps.isRecentTab
+      isRecentTab !== prevProps.isRecentTab ||
+      showStorageInfo !== prevProps.showStorageInfo
     ) {
       return this.getTableColumns(true);
     }
@@ -630,6 +637,7 @@ class FilesTableHeader extends React.Component {
     const {
       columns,
       resetColumnsSize,
+      tableStorageName,
       columnStorageName,
       columnInfoPanelStorageName,
     } = this.state;
@@ -656,6 +664,7 @@ class FilesTableHeader extends React.Component {
         setHideColumns={setHideColumns}
         settingsTitle={t("Files:TableSettingsTitle")}
         showSettings={isFrame ? showSettings : true}
+        tableStorageName={tableStorageName}
       />
     );
   }
@@ -688,8 +697,7 @@ export default inject(
       roomsFilter,
       setRoomsFilter,
     } = filesStore;
-    const { isRecentTab, isArchiveFolder, isTrashFolder, isTemplatesFolder } =
-      treeFoldersStore;
+    const { isRecentTab, isArchiveFolder, isTrashFolder } = treeFoldersStore;
     const withContent = canShare;
     const sortingVisible = true;
     const { withPaging, isFrame, frameConfig } = settingsStore;
@@ -713,7 +721,7 @@ export default inject(
       typeTrashColumnIsEnabled,
       quickButtonsColumnIsEnabled,
       lastOpenedColumnIsEnabled,
-      contentColumnsIsEnabled,
+
       roomColumnNameIsEnabled,
       roomColumnTypeIsEnabled,
       roomColumnTagsIsEnabled,
@@ -764,7 +772,7 @@ export default inject(
       typeTrashColumnIsEnabled,
       quickButtonsColumnIsEnabled,
       lastOpenedColumnIsEnabled,
-      contentColumnsIsEnabled,
+
       roomColumnNameIsEnabled,
       roomColumnTypeIsEnabled,
       roomColumnTagsIsEnabled,
@@ -785,7 +793,6 @@ export default inject(
       isDefaultRoomsQuotaSet,
       showStorageInfo,
       isArchiveFolder,
-      isTemplatesFolder,
     };
   },
 )(

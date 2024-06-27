@@ -32,7 +32,7 @@ import { withTranslation } from "react-i18next";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Text } from "@docspace/shared/components/text";
 
-import { Submenu } from "@docspace/shared/components/submenu";
+import { Tabs } from "@docspace/shared/components/tabs";
 import {
   isDesktop as isDesktopUtils,
   isMobile as isMobileUtils,
@@ -75,7 +75,7 @@ const InfoPanelHeaderContent = (props) => {
     selection?.isFolder && selection?.id === selection?.rootFolderId;
   const isSeveralItems = selection && Array.isArray(selection);
 
-  const withSubmenu =
+  const withTabs =
     !isRoot && !isSeveralItems && !isGallery && !isAccounts && !isTrash;
 
   useEffect(() => {
@@ -102,7 +102,7 @@ const InfoPanelHeaderContent = (props) => {
 
   //const isArchiveRoot = rootFolderType === FolderType.Archive;
 
-  const submenuData = [
+  const tabsData = [
     {
       id: "info_members",
       name: t("Common:Members"),
@@ -123,9 +123,9 @@ const InfoPanelHeaderContent = (props) => {
     },
   ];
 
-  const roomsSubmenu = [...submenuData];
+  const roomsTabs = [...tabsData];
 
-  const personalSubmenu = [submenuData[1], submenuData[2]];
+  const personalTabs = [tabsData[1], tabsData[2]];
 
   const templateSubmenu = [
     {
@@ -138,7 +138,7 @@ const InfoPanelHeaderContent = (props) => {
   ];
 
   if (selection?.canShare) {
-    personalSubmenu.unshift({
+    personalTabs.unshift({
       id: "info_share",
       name: t("Common:Share"),
       onClick: setShare,
@@ -158,7 +158,7 @@ const InfoPanelHeaderContent = (props) => {
         }
       };
 
-      const submenuItem = {
+      const tabsItem = {
         id: `info_plugin-${item.key}`,
         name: item.value.subMenu.name,
         onClick,
@@ -166,14 +166,14 @@ const InfoPanelHeaderContent = (props) => {
       };
 
       if (!item.value.filesType) {
-        roomsSubmenu.push(submenuItem);
-        personalSubmenu.push(submenuItem);
+        roomsTabs.push(tabsItem);
+        personalTabs.push(tabsItem);
         return;
       }
 
       if (isRoom && item.value.filesType.includes(PluginFileType.Rooms)) {
-        roomsSubmenu.push(submenuItem);
-        personalSubmenu.push(submenuItem);
+        roomsTabs.push(tabsItem);
+        personalTabs.push(tabsItem);
         return;
       }
 
@@ -185,14 +185,14 @@ const InfoPanelHeaderContent = (props) => {
           return;
         }
 
-        roomsSubmenu.push(submenuItem);
-        personalSubmenu.push(submenuItem);
+        roomsTabs.push(tabsItem);
+        personalTabs.push(tabsItem);
         return;
       }
 
       if (item.value.filesType.includes(PluginFileType.Folders)) {
-        roomsSubmenu.push(submenuItem);
-        personalSubmenu.push(submenuItem);
+        roomsTabs.push(tabsItem);
+        personalTabs.push(tabsItem);
         return;
       }
     });
@@ -206,7 +206,7 @@ const InfoPanelHeaderContent = (props) => {
   const isTemplate = true; //TODO: Templates
 
   return (
-    <StyledInfoPanelHeader isTablet={isTablet} withSubmenu={withSubmenu}>
+    <StyledInfoPanelHeader isTablet={isTablet} withTabs={withTabs}>
       <div className="main">
         <Text className="header-text" fontSize="21px" fontWeight="700">
           {t("Common:Info")}
@@ -227,25 +227,25 @@ const InfoPanelHeaderContent = (props) => {
         )}
       </div>
 
-      {withSubmenu && (
-        <div className="submenu">
+      {withTabs && (
+        <div className="tabs">
           {isTemplate ? (
-            <Submenu
+            <Tabs
               style={{ width: "100%" }}
               data={templateSubmenu}
-              forsedActiveItemId={roomsView}
+              selectedItemId={roomsView}
             />
           ) : isRoomsType ? (
-            <Submenu
+            <Tabs
               style={{ width: "100%" }}
-              data={roomsSubmenu}
-              forsedActiveItemId={roomsView}
+              items={roomsTabs}
+              selectedItemId={roomsView}
             />
           ) : (
-            <Submenu
+            <Tabs
               style={{ width: "100%" }}
-              data={personalSubmenu}
-              forsedActiveItemId={fileView}
+              items={personalTabs}
+              selectedItemId={fileView}
             />
           )}
         </div>

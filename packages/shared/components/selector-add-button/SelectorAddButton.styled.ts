@@ -27,7 +27,7 @@
 import styled, { css } from "styled-components";
 import { Base } from "../../themes";
 
-const StyledButton = styled.div<{ isDisabled?: boolean }>`
+const StyledButton = styled.div<{ isDisabled?: boolean; isAction?: boolean }>`
   display: inline-block;
   background: ${(props) => props.theme.selectorAddButton.background};
   border: ${(props) => props.theme.selectorAddButton.border};
@@ -79,6 +79,56 @@ const StyledButton = styled.div<{ isDisabled?: boolean }>`
   }
 
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  ${(props) =>
+    props.isAction &&
+    css`
+      // convert into 0.1 opacity
+      background-color: ${props.theme.currentColorScheme?.main.accent}1A;
+
+      svg {
+        path {
+          ${!props.isDisabled &&
+          css`
+            fill: ${props.theme.currentColorScheme?.main.accent};
+          `}
+        }
+      }
+
+      :hover {
+        background-color: ${props.theme.currentColorScheme?.main.accent}1A;
+
+        svg {
+          path {
+            ${!props.isDisabled &&
+            css`
+              fill: ${props.theme.currentColorScheme?.main.accent};
+              opacity: 0.85;
+            `}
+          }
+        }
+      }
+
+      :active {
+        background-color: ${props.theme.currentColorScheme?.main.accent}1A;
+        svg {
+          path {
+            ${!props.isDisabled &&
+            css`
+              fill: ${props.theme.currentColorScheme?.main.accent};
+              opacity: 1;
+              filter: ${props.theme.isBase
+                ? "brightness(90%)"
+                : "brightness(82%)"};
+            `}
+          }
+        }
+      }
+
+      div {
+        opacity: 1;
+      }
+    `}
 `;
 
 StyledButton.defaultProps = { theme: Base };

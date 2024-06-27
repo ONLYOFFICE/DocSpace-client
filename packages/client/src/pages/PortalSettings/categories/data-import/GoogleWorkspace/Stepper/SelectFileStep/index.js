@@ -89,6 +89,8 @@ const ErrorBlock = styled.div`
   }
 `;
 
+const FAILS_TRIES = 1;
+
 const SelectFileStep = ({
   t,
   onNextStep,
@@ -117,9 +119,10 @@ const SelectFileStep = ({
   const uploadInterval = useRef(null);
   const navigate = useNavigate();
 
+  const [failTries, setFailsTries] = useState(FAILS_TRIES);
+
   const goBack = () => {
-    cancelMigration();
-    setTimeout(() => navigate(-1), 100);
+    navigate("/portal-settings/data-import/migration");
   };
 
   const checkMigrationStatusAndUpdate = async () => {
@@ -187,7 +190,6 @@ const SelectFileStep = ({
   };
 
   const onUploadFile = async (file) => {
-    setProgress(0);
     setIsVisible(true);
     try {
       if (file.length) {
@@ -195,23 +197,18 @@ const SelectFileStep = ({
       } else {
         await singleFileUploading(file, setProgress, isAbort);
       }
+
+      if (isAbort.current) return;
+
       await initMigrationName(searchParams.get("service"));
 
       uploadInterval.current = setInterval(async () => {
         try {
           const res = await getMigrationStatus();
-          setProgress(res?.progress);
 
-          if (res.progress > 10) {
-            setIsVisible(false);
-          } else {
-            setIsVisible(true);
-          }
-
-          if (res.error || res.parseResult.failedArchives.length > 0) {
-            setShowErrorText(true);
-          } else {
-            setShowErrorText(false);
+          if (!res && failTries) {
+            setFailsTries((tries) => tries - 1);
+            return;
           }
 
           if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
@@ -219,12 +216,14 @@ const SelectFileStep = ({
             setIsFileError(true);
             setIsFileLoading(false);
             clearInterval(uploadInterval.current);
-          } else if (res.isCompleted || res.parseResult.progress === 100) {
+            setShowErrorText(true);
+            return;
+          }
+
+          if (res.isCompleted || res.parseResult.progress === 100) {
             clearInterval(uploadInterval.current);
             setIsFileLoading(false);
             setIsVisible(false);
-            setProgress(100);
-
             if (
               res.parseResult.users.length +
                 res.parseResult.existUsers.length +
@@ -239,12 +238,23 @@ const SelectFileStep = ({
               cancelMigration();
             }
           }
+
+          setProgress(res?.progress);
+
+          if (res.progress > 10) {
+            setIsVisible(false);
+          } else {
+            setIsVisible(true);
+          }
+          setShowErrorText(false);
         } catch (error) {
           toastr.error(error || t("Common:SomethingWentWrong"));
           setIsFileError(true);
           setIsFileLoading(false);
           setIsError(true);
           clearInterval(uploadInterval.current);
+        } finally {
+          isAbort.current = false;
         }
       }, 1000);
     } catch (error) {
@@ -259,6 +269,7 @@ const SelectFileStep = ({
     setIsFileError(false);
     setShowReminder(false);
     setIsFileLoading(true);
+    setFailsTries(FAILS_TRIES);
     try {
       onUploadFile(file);
     } catch (error) {
@@ -286,7 +297,6 @@ const SelectFileStep = ({
         });
     } catch (error) {
       toastr.error(error);
-      console.log(error);
     }
   };
 

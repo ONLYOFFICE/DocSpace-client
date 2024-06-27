@@ -611,9 +611,9 @@ const Dark: TTheme = {
   },
 
   scrollbar: {
-    bgColor: "rgba(20, 20, 20, 0.4)",
-    hoverBgColor: "rgba(20, 20, 20, 0.64)",
-    pressBgColor: "rgba(20, 20, 20, 0.8)",
+    bgColor: "rgba(136, 136, 136, 0.4)",
+    hoverBgColor: "rgba(136, 136, 136, 0.64)",
+    pressBgColor: "rgba(136, 136, 136, 0.8)",
     paddingInlineEnd: "17px !important",
     paddingInlineEndMobile: "8px !important",
   },
@@ -637,7 +637,7 @@ const Dark: TTheme = {
         b: 27,
         a: 0.4,
       },
-      blur: 10,
+      blur: 9,
     },
 
     content: {
@@ -990,33 +990,6 @@ const Dark: TTheme = {
     },
     after: {
       border: "none",
-    },
-  },
-
-  tabsContainer: {
-    scrollbar: {
-      width: "100%",
-      height: "44px",
-    },
-
-    label: {
-      height: " 32px",
-      borderRadius: "16px",
-      minWidth: "fit-content",
-      marginRight: "8px",
-      width: "fit-content",
-
-      backgroundColor: "#d6d6d6",
-      hoverBackgroundColor: "#3D3D3D",
-      disableBackgroundColor: "#292929",
-
-      title: {
-        margin: "7px 15px 7px 15px",
-        overflow: "hidden",
-        color: black,
-        hoverColor: "#a4a4a4",
-        disableColor: "#474747",
-      },
     },
   },
 
@@ -1401,7 +1374,12 @@ const Dark: TTheme = {
     backgroundColor: "#858585",
 
     percent: {
-      background: "#FFFFFF",
+      background: "#E17415",
+    },
+
+    color: {
+      error: darkErrorStatus,
+      status: grayMaxLight,
     },
   },
 
@@ -2100,6 +2078,8 @@ const Dark: TTheme = {
       fileExstColor: "#A3A9AE",
       locationIconColor: "#A3A9AE",
       folderLabelColor: "#A3A9AE",
+      renamedItemColor: "#A3A9AE",
+      oldRoleColor: "#A3A9AE",
     },
 
     details: {
@@ -2357,7 +2337,7 @@ const Dark: TTheme = {
     border: `1px solid #474747`,
 
     breadCrumbs: {
-      prevItemColor: "#ADADAD",
+      prevItemColor: "#CCCCCC",
       arrowRightColor: "#ADADAD",
     },
 
@@ -2371,10 +2351,18 @@ const Dark: TTheme = {
     item: {
       hoverBackground: "#3d3d3d",
       selectedBackground: "#3d3d3d",
+
+      inputButtonBorder: "#474747",
+      inputButtonBorderHover: grayMaxLight,
+
+      disableTextColor: "#858585",
     },
 
     emptyScreen: {
       descriptionColor: "#ADADAD",
+      buttonColor: "#ADADAD",
+      hoverButtonColor: "#FFFFFF",
+      pressedButtonColor: "#CCCCCC",
     },
   },
 
@@ -2447,23 +2435,25 @@ const Dark: TTheme = {
     roomType: {
       listItem: {
         background: "none",
+        hoverBackground: "#282828",
         borderColor: "#474747",
         descriptionText: "#A3A9AE",
       },
       dropdownButton: {
         background: "none",
+        hoverBackground: "#282828",
         borderColor: "#474747",
         isOpenBorderColor: "#F97A0B",
         descriptionText: "#A3A9AE",
       },
       dropdownItem: {
         background: "#333333",
-        hoverBackground: "#474747",
+        hoverBackground: "#282828",
         descriptionText: "#A3A9AE",
       },
       displayItem: {
-        background: "#474747",
-        borderColor: "#474747",
+        background: "#282828",
+        borderColor: "#282828",
         descriptionText: "#a3a9ae",
       },
     },
@@ -2484,16 +2474,11 @@ const Dark: TTheme = {
       descriptionColor: "#a3a9ae",
     },
 
-    tagInput: {
-      tagBackground: "#242424",
-      tagHoverBackground: "#3D3D3D",
-    },
-
     dropdown: {
       background: "#333333",
       borderColor: "#474747",
       item: {
-        hoverBackground: "#474747",
+        hoverBackground: "#282828",
       },
     },
 
@@ -3166,12 +3151,23 @@ const Dark: TTheme = {
     background: black,
   },
 
-  submenu: {
+  tabs: {
+    gradientColor: black,
     lineColor: "#474747",
-    backgroundColor: "#333",
-    activeTextColor: "#FFFFFF",
-    textColor: "#ADADAD",
-    bottomLineColor: "#E06A1B",
+
+    textColorPrimary: "#657077",
+    activeTextColorPrimary: white,
+    hoverTextColorPrimary: white,
+    pressedTextColorPrimary: "#CCCCCC",
+    backgroundColorPrimary: "#333",
+
+    textColorSecondary: "#FFFFFF",
+    activeTextColorSecondary: "#333333",
+
+    backgroundColorSecondary: "#333",
+    hoverBackgroundColorSecondary: "#474747",
+    pressedBackgroundColorSecondary: "#282828",
+    activeBackgroundColorSecondary: "#FFFFFF",
   },
 
   hotkeys: {
@@ -3182,11 +3178,14 @@ const Dark: TTheme = {
 
   tag: {
     color: white,
+    deletedColor: "#A3A9AE",
     background: "#474747",
     hoverBackground: "#282828",
     disabledBackground: "#858585",
+    deletedBackground: "#282828",
     defaultTagColor: white,
-    newTagBackground: "#333333",
+    newTagBackground: "#242424",
+    newTagHoverBackground: "#3D3D3D",
   },
 
   profile: {
@@ -3323,6 +3322,15 @@ const Dark: TTheme = {
 
   dateTimePicker: {
     colorClockIcon: "#ADADAD",
+  },
+
+  embeddingPanel: {
+    descriptionTextColor: "#ADADAD",
+    iconColor: "#ADADAD",
+  },
+  completedForm: {
+    linkColor: white,
+    descriptionColor: "#ADADAD",
   },
 };
 

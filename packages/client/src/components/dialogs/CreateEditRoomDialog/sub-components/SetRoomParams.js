@@ -31,8 +31,7 @@ import { inject, observer } from "mobx-react";
 
 import RoomTypeDropdown from "./RoomTypeDropdown";
 import TagInput from "./TagInput";
-import RoomType from "./RoomType";
-
+import RoomType from "@docspace/shared/components/room-type";
 import PermanentSettings from "./PermanentSettings";
 import InputParam from "./Params/InputParam";
 import ThirdPartyStorage from "./ThirdPartyStorage";
@@ -96,6 +95,8 @@ const SetRoomParams = ({
   setChangeRoomOwnerIsVisible,
   folderFormValidation,
   isTemplateSelected,
+  disabledChangeRoomType,
+  maxImageUploadSize,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(null);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -129,7 +130,7 @@ const SetRoomParams = ({
     if (!icon.uploadedFile !== disableImageRescaling)
       setDisableImageRescaling(!icon.uploadedFile);
 
-    setRoomParams({ ...roomParams, icon: icon });
+    setRoomParams({ ...roomParams, icon: icon, iconWasUpdated: true });
   };
 
   const onOwnerChange = () => {
@@ -148,7 +149,7 @@ const SetRoomParams = ({
 
   return (
     <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>
-      {isEdit || !!isTemplateSelected ? (
+      {isEdit || disabledChangeRoomType || !!isTemplateSelected ? (
         <RoomType t={t} roomType={roomParams.type} type="displayItem" />
       ) : (
         <RoomTypeDropdown
@@ -255,10 +256,11 @@ const SetRoomParams = ({
           onChangeImage={onChangeIcon}
           classNameWrapperImageCropper={"icon-editor"}
           disableImageRescaling={disableImageRescaling}
+          maxImageSize={maxImageUploadSize}
           Preview={
             <PreviewTile
               t={t}
-              title={roomParams.title || t("Files:NewRoom")}
+              title={roomParams.title || t("Common:NewRoom")}
               previewIcon={previewIcon}
               tags={roomParams.tags.map((tag) => tag.name)}
               isDisabled={isDisabled}
@@ -278,16 +280,17 @@ export default inject(({ settingsStore, dialogsStore, currentQuotaStore }) => {
   const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
   const { setChangeRoomOwnerIsVisible } = dialogsStore;
-  const { folderFormValidation } = settingsStore;
+  const { folderFormValidation, maxImageUploadSize } = settingsStore;
 
   return {
     isDefaultRoomsQuotaSet,
     folderFormValidation,
     setChangeRoomOwnerIsVisible,
+    maxImageUploadSize,
   };
 })(
   observer(
-    withTranslation(["CreateEditRoomDialog", "Translations"])(
+    withTranslation(["CreateEditRoomDialog", "Translations", "Common"])(
       withLoader(SetRoomParams)(<SetRoomParamsLoader />),
     ),
   ),

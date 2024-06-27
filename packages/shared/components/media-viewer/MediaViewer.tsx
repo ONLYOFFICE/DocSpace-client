@@ -59,12 +59,12 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     playlistPos,
     currentFileId,
     isPreviewFile,
-    setBufferSelection,
     extsImagePreviewed,
     deleteDialogVisible,
     pluginContextMenuItems,
     currentDeviceType,
-    isPublicFile,
+    isPublicFile = false,
+
     t,
     getIcon,
     onClose,
@@ -74,6 +74,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     onDownload,
     onChangeUrl,
     setActiveFiles,
+    setBufferSelection,
     onEmptyPlaylistError,
 
     ...other
@@ -132,7 +133,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       t,
       targetFile,
       archiveRoom,
-      Boolean(isPublicFile),
+      isPublicFile,
       {
         onClickDownload,
         onClickRename,
@@ -140,20 +141,15 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       },
     );
 
-    const model = getMobileMediaContextModel(
-      t,
-      targetFile,
-      Boolean(isPublicFile),
-      {
-        onShowInfoPanel,
-        onClickDownload,
-        onMoveAction,
-        onCopyAction,
-        onDuplicate,
-        onClickRename,
-        onClickDelete,
-      },
-    );
+    const model = getMobileMediaContextModel(t, targetFile, isPublicFile, {
+      onShowInfoPanel,
+      onClickDownload,
+      onMoveAction,
+      onCopyAction,
+      onDuplicate,
+      onClickRename,
+      onClickDelete,
+    });
 
     if (isPdf)
       return getPDFContextModel(t, targetFile, {

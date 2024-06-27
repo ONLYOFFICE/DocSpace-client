@@ -59,6 +59,7 @@ const StyledPublicRoomBar = styled.div`
 
   .text-container_header {
     color: ${(props) => props.theme.infoBlock.headerColor};
+    overflow: hidden;
   }
 
   .text-container_body {

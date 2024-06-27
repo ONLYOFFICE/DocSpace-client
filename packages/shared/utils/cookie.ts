@@ -30,7 +30,7 @@
 import { LANGUAGE } from "../constants";
 
 export function getCookie(name: string) {
-  if (name === LANGUAGE) {
+  if (typeof window !== "undefined" && name === LANGUAGE) {
     const url = new URL(window.location.href);
     const culture = url.searchParams.get("culture");
 
@@ -38,6 +38,8 @@ export function getCookie(name: string) {
       return culture;
     }
   }
+
+  if (typeof document === "undefined") return undefined;
 
   const matches = document.cookie.match(
     new RegExp(

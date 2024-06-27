@@ -75,7 +75,7 @@ export const PublicRoute = (props: PublicRouteProps) => {
         <Navigate
           replace
           to={combineUrl(
-            window.DocSpaceConfig?.proxy?.url,
+            window.ClientConfig?.proxy?.url,
             "/preparation-portal",
           )}
         />
@@ -85,7 +85,7 @@ export const PublicRoute = (props: PublicRouteProps) => {
       return (
         <Navigate
           replace
-          to={combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable")}
+          to={combineUrl(window.ClientConfig?.proxy?.url, "/unavailable")}
         />
       );
     }
@@ -103,7 +103,7 @@ export const PublicRoute = (props: PublicRouteProps) => {
         <Navigate
           replace
           to={combineUrl(
-            window.DocSpaceConfig?.proxy?.url,
+            window.ClientConfig?.proxy?.url,
             "/preparation-portal",
           )}
         />
@@ -118,7 +118,7 @@ export const PublicRoute = (props: PublicRouteProps) => {
       return (
         <Navigate
           replace
-          to={combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable")}
+          to={combineUrl(window.ClientConfig?.proxy?.url, "/unavailable")}
         />
       );
     }
@@ -130,7 +130,7 @@ export const PublicRoute = (props: PublicRouteProps) => {
       !isPortalDeactivate
     ) {
       window.location.replace(
-        combineUrl(window.DocSpaceConfig?.proxy?.url, "/login"),
+        combineUrl(window.ClientConfig?.proxy?.url, "/login"),
       );
 
       return null;

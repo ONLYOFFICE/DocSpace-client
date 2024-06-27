@@ -30,6 +30,7 @@ import { useState, useRef } from "react";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { inject } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 
 const StyledContextMenu = styled(ContextMenu)`
   min-width: auto !important;
@@ -40,7 +41,6 @@ const GroupMember = ({
   groupMember,
   isManager,
   getUserRole,
-  getStatusType,
   getUserContextOptions,
   getUserContextOptionsModel,
 }) => {
@@ -71,7 +71,7 @@ const GroupMember = ({
     t,
     getUserContextOptions(
       groupMember.id === userId,
-      getStatusType(groupMember),
+      getUserStatus(groupMember),
       getUserRole(groupMember),
       groupMember.status,
     ),
@@ -103,23 +103,25 @@ const GroupMember = ({
           <div className="group-manager-tag">{t("Common:HeadOfGroup")}</div>
         )}
 
-        <div className="context-btn" ref={iconRef}>
-          <ContextMenuButton
-            isFill
-            className="expandButton"
-            directionX="right"
-            displayType="toggle"
-            onClick={onClick}
-            getData={() => model}
-          />
-          <StyledContextMenu
-            model={model}
-            containerRef={iconRef}
-            ref={buttonMenuRef}
-            onHide={onHide}
-            scaled={false}
-          />
-        </div>
+        {/* {!groupMember.isLDAP && (
+          <div className="context-btn" ref={iconRef}>
+            <ContextMenuButton
+              isFill
+              className="expandButton"
+              directionX="right"
+              displayType="toggle"
+              onClick={onClick}
+              getData={() => model}
+            />
+            <StyledContextMenu
+              model={model}
+              containerRef={iconRef}
+              ref={buttonMenuRef}
+              onHide={onHide}
+              scaled={false}
+            />
+          </div>
+        )} */}
       </div>
     </div>
   );
@@ -128,7 +130,6 @@ const GroupMember = ({
 export default inject(({ peopleStore }) => ({
   userId: peopleStore.userStore.user.id,
   getUserRole: peopleStore.getUserRole,
-  getStatusType: peopleStore.getStatusType,
   getUserContextOptions: peopleStore.usersStore.getUserContextOptions,
   getUserContextOptionsModel:
     peopleStore.contextOptionsStore.getUserContextOptions,

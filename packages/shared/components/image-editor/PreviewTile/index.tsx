@@ -55,14 +55,13 @@ const PreviewTile = ({
       {tags && (
         <div className="tile-tags">
           {tags.length ? (
-            <Tags columnCount={2} tags={tags} onSelectTag={() => {}} />
+            <Tags columnCount={2} tags={tags} />
           ) : (
             <Tag
               className="type_tag"
               tag="script"
               label={defaultTagLabel}
               isDefault
-              onClick={() => {}}
             />
           )}
         </div>

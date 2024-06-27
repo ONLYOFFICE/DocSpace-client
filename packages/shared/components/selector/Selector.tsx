@@ -159,6 +159,8 @@ const Selector = ({
       return null;
     });
 
+  const [inputItemVisible, setInputItemVisible] = React.useState(false);
+
   const [requestRunning, setRequestRunning] = React.useState<boolean>(false);
 
   const onSubmitAction = async (
@@ -387,6 +389,7 @@ const Selector = ({
 
   React.useEffect(() => {
     const onKeyboardAction = (e: KeyboardEvent) => {
+      if (inputItemVisible) return;
       if (e.key === ButtonKeys.esc) {
         onCancel?.();
       }
@@ -396,7 +399,7 @@ const Selector = ({
     return () => {
       window.removeEventListener("keydown", onKeyboardAction);
     };
-  }, [onCancel]);
+  }, [inputItemVisible, onCancel]);
 
   React.useLayoutEffect(() => {
     if (items) {
@@ -598,6 +601,8 @@ const Selector = ({
         withFooterInput={withFooterInput}
         withFooterCheckbox={withFooterCheckbox}
         descriptionText={descriptionText}
+        inputItemVisible={inputItemVisible}
+        setInputItemVisible={setInputItemVisible}
         // bread crumbs
         {...breadCrumbsProps}
         // select all

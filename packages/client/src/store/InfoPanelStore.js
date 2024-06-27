@@ -32,7 +32,10 @@ import { getUserRole } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   EmployeeActivationStatus,
+  Events,
+  FileType,
   FolderType,
+  RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
@@ -43,8 +46,14 @@ import {
   getExternalLinks,
   editExternalLink,
   addExternalLink,
+  checkIsPDFForm,
 } from "@docspace/shared/api/files";
 import isEqual from "lodash/isEqual";
+import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
+import {
+  addLinksToHistory,
+  parseHistory,
+} from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
 
 const observedKeys = [
   "id",
@@ -88,7 +97,7 @@ class InfoPanelStore {
   infoPanelSelection = null;
   infoPanelRoom = null;
   membersIsLoading = false;
-  searchResultIsLoading = false;
+  isMembersPanelUpdating = false;
 
   shareChanged = false;
 
@@ -128,15 +137,8 @@ class InfoPanelStore {
 
   setShowSearchBlock = (bool) => (this.showSearchBlock = bool);
 
-  setSearchResultIsLoading = (isLoading) => {
-    this.searchResultIsLoading = isLoading;
-  };
-
   setSearchValue = (value) => {
-    if (value !== this.searchValue) {
-      this.setSearchResultIsLoading(true);
-      this.searchValue = value;
-    }
+    this.searchValue = value;
   };
 
   resetSearch = () => {
@@ -169,6 +171,10 @@ class InfoPanelStore {
 
   setIsScrollLocked = (isScrollLocked) => {
     this.isScrollLocked = isScrollLocked;
+  };
+
+  setIsMembersPanelUpdating = (isMembersPanelUpdating) => {
+    this.isMembersPanelUpdating = isMembersPanelUpdating;
   };
 
   // Selection helpers //
@@ -229,6 +235,10 @@ class InfoPanelStore {
         : bufferSelection
           ? bufferSelection
           : null;
+  }
+
+  get isRoomMembersPanelOpen() {
+    return this.infoPanelSelection?.isRoom && this.roomsView === infoMembers;
   }
 
   get withPublicRoomBlock() {
@@ -392,7 +402,7 @@ class InfoPanelStore {
 
   openAccountsWithSelectedUser = async (user, navigate) => {
     const path = [
-      window.DocSpaceConfig?.proxy?.url,
+      window.ClientConfig?.proxy?.url,
       config.homepage,
       "/accounts/people",
     ];
@@ -411,12 +421,11 @@ class InfoPanelStore {
   };
 
   fetchUser = async (userId) => {
-    const { getStatusType, getUserContextOptions } =
-      this.peopleStore.usersStore;
+    const { getUserContextOptions } = this.peopleStore.usersStore;
 
     const fetchedUser = await getUserById(userId);
     fetchedUser.role = getUserRole(fetchedUser);
-    fetchedUser.statusType = getStatusType(fetchedUser);
+    fetchedUser.statusType = getUserStatus(fetchedUser);
     fetchedUser.options = getUserContextOptions(
       false,
       fetchedUser.isOwner,
@@ -618,6 +627,7 @@ class InfoPanelStore {
     t,
     clearFilter = true,
     withoutTitlesAndLinks = false,
+    membersFilter,
   ) => {
     if (this.membersIsLoading) return;
     const roomId = this.infoPanelSelection.id;
@@ -625,7 +635,9 @@ class InfoPanelStore {
     const isPublic =
       this.infoPanelSelection?.roomType ?? this.infoPanelSelection?.roomType;
 
-    const requests = [this.filesStore.getRoomMembers(roomId, clearFilter)];
+    const requests = [
+      this.filesStore.getRoomMembers(roomId, clearFilter, membersFilter),
+    ];
 
     if (
       isPublic &&
@@ -643,7 +655,6 @@ class InfoPanelStore {
     const [data, links] = await Promise.all(requests);
     clearFilter && this.setMembersIsLoading(false);
     clearTimeout(timerId);
-    this.setSearchResultIsLoading(false);
 
     links && this.publicRoomStore.setExternalLinks(links);
 
@@ -691,32 +702,60 @@ class InfoPanelStore {
     this.setInfoPanelMembers(mergedMembers);
   };
 
-  addInfoPanelMembers = (t, members) => {
-    const convertedMembers = this.convertMembers(t, members);
+  updateInfoPanelMembers = async (t) => {
+    if (
+      !this.infoPanelSelection ||
+      !this.infoPanelSelection.isRoom ||
+      !this.infoPanelSelection.id
+    ) {
+      return;
+    }
 
-    if (this.infoPanelMembers) {
-      const { roomId, administrators, users, expected, groups } =
-        this.infoPanelMembers;
+    this.setIsMembersPanelUpdating(true);
 
-      const mergedMembers = {
-        roomId: roomId,
-        administrators: [...administrators, ...convertedMembers.administrators],
-        users: [...users, ...convertedMembers.users],
-        expected: [...expected, ...convertedMembers.expectedMembers],
-        groups: [...groups, ...convertedMembers.groups],
-      };
+    const fetchedMembers = await this.fetchMembers(t, true, !!this.searchValue);
+    this.setInfoPanelMembers(fetchedMembers);
 
-      this.addMembersTitle(
-        t,
-        mergedMembers.administrators,
-        mergedMembers.users,
-        mergedMembers.expected,
-        mergedMembers.groups,
+    this.setIsMembersPanelUpdating(false);
+  };
+
+  fetchHistory = async (abortControllerSignal = null) => {
+    const { getHistory, getRoomLinks } = this.filesStore;
+    const { setExternalLinks } = this.publicRoomStore;
+
+    let selectionType = "file";
+    if (this.infoPanelSelection.isRoom || this.infoPanelSelection.isFolder)
+      selectionType = "folder";
+
+    const withLinks =
+      this.infoPanelSelection.isRoom &&
+      [RoomsType.FormRoom, RoomsType.CustomRoom, RoomsType.PublicRoom].includes(
+        this.infoPanelSelection.roomType,
       );
 
-      this.filesStore.setInRoomFolder(roomId, true);
-      this.setInfoPanelMembers(mergedMembers);
-    }
+    return getHistory(
+      selectionType,
+      this.infoPanelSelection.id,
+      abortControllerSignal,
+      this.infoPanelSelection?.requestToken,
+    )
+      .then(async (data) => {
+        if (withLinks) {
+          const links = await getRoomLinks(this.infoPanelSelection.id);
+          const historyWithLinks = addLinksToHistory(data, links);
+          setExternalLinks(links);
+          return historyWithLinks;
+        }
+        return data;
+      })
+      .then((data) => {
+        const parsedSelectionHistory = parseHistory(data);
+        this.setSelectionHistory(parsedSelectionHistory);
+        return parsedSelectionHistory;
+      })
+      .catch((err) => {
+        if (err.message !== "canceled") console.error(err);
+      });
   };
 
   openShareTab = () => {
@@ -725,6 +764,28 @@ class InfoPanelStore {
   };
 
   getPrimaryFileLink = async (fileId) => {
+    const file = this.filesStore.files.find((item) => item.id === fileId);
+
+    if (file && !file.shared && file.fileType === FileType.PDF) {
+      try {
+        this.filesStore.addActiveItems([file.id], null);
+        const result = await checkIsPDFForm(fileId);
+
+        if (result) {
+          const event = new CustomEvent(Events.Share_PDF_Form, {
+            detail: { file },
+          });
+
+          window.dispatchEvent(event);
+          return;
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.filesStore.removeActiveItem(file);
+      }
+    }
+
     const { getFileInfo } = this.filesStore;
 
     const res = await getPrimaryLink(fileId);

@@ -31,7 +31,6 @@
   "PublicRoomLinkValidTime": "此链接有效期至 {{date}}。过期后，用户无法通过此链接进入房间。",
   "RoleCommentator": "可评论",
   "RoleCommentatorDescription": "现有文件操作：查看、评论。",
-  "RoleDocSpaceAdminDescription": "协作空间管理员可访问协作空间设置、管理/归档房间、邀请新用户并指派低于其级别的角色。所有管理员都有访问“个人”分区的权限。",
   "RoleEditorDescription": "现有文件操作：查看、编辑、表单填写、审阅、评论。",
   "RoleFormFiller": "可填写表单",
   "RoleFormFillerDescription": "现有文件操作：查看、表单填写、审阅、评论。",

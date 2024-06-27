@@ -135,7 +135,7 @@ class HotkeyStore {
 
     if (!hotkeyCaret) {
       const scroll = document.getElementsByClassName("section-scroll");
-      scroll && scroll[0] && scroll[0].focus();
+      scroll && scroll[0] && scroll[0]?.firstChild.focus();
     }
 
     if (!hotkeyCaret && selection.length) {
@@ -541,6 +541,13 @@ class HotkeyStore {
     }
   };
 
+  deselectAll = () => {
+    const { setSelected } = this.filesStore;
+
+    this.elemOffset = 0;
+    setSelected("none");
+  };
+
   goToHomePage = (navigate) => {
     const { filter, categoryType } = this.filesStore;
 
@@ -550,7 +557,7 @@ class HotkeyStore {
 
     navigate(
       combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         config.homepage,
         `${url}?${filterParamsStr}`,
       ),

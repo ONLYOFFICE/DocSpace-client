@@ -270,7 +270,11 @@ const RoomIcon = ({
           <Text className="room-title">{roomTitle}</Text>
         </>
       ) : (
-        <img className={imgClassName} src={imgSrc} alt="room icon" />
+        <img
+          className={classNames([imgClassName, "not-selectable"])}
+          src={imgSrc}
+          alt="room icon"
+        />
       )}
 
       {badgeUrl && (

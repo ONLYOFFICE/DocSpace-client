@@ -33,15 +33,15 @@ import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
+import RoomType from "@docspace/shared/components/room-type";
 
-import RoomType from "../CreateEditRoomDialog/sub-components/RoomType";
 import InputParam from "../CreateEditRoomDialog/sub-components/Params/InputParam";
 import TagInput from "../CreateEditRoomDialog/sub-components/TagInput";
 import TagHandler from "../CreateEditRoomDialog/handlers/TagHandler";
 import { ImageEditor } from "@docspace/shared/components/image-editor";
 import TemplateAccess from "./sub-components/TemplateAccess";
 import PreviewTile from "@docspace/shared/components/image-editor/PreviewTile";
-import { getRoomTypeTitleTranslation } from "../CreateEditRoomDialog/data";
+import { getRoomTypeTitleTranslation } from "@docspace/shared/components/room-type/RoomType.utils";
 
 const StyledModalDialog = styled(ModalDialog)`
   .create-room-template_body {

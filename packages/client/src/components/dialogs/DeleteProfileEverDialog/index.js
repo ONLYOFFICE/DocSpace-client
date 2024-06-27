@@ -39,7 +39,6 @@ import { mobileMore } from "@docspace/shared/utils";
 import BodyComponent from "./sub-components/BodyComponent";
 
 const { deleteUser } = api.people;
-const { Filter } = api;
 
 const StyledModalDialogContainer = styled(ModalDialogContainer)`
   #modal-dialog {
@@ -62,7 +61,11 @@ const StyledModalDialogContainer = styled(ModalDialogContainer)`
 
   .user-delete {
     line-height: 20px;
-    padding-bottom: 16px;
+    ${(props) =>
+      (!props.areUsersOnly || props.deleteWithoutReassign) &&
+      css`
+        padding-bottom: 16px;
+      `}
   }
 
   .text-warning {
@@ -118,8 +121,9 @@ const DeleteProfileEverDialogComponent = (props) => {
       usersToDelete[0].isAdmin ||
       usersToDelete[0].isCollaborator);
 
+  const areUsersOnly = usersToDelete.every((user) => user.isVisitor);
+
   const onDeleteUser = (id) => {
-    const filter = Filter.getDefault();
     setIsRequestRunning(true);
 
     deleteUser(id)
@@ -182,6 +186,8 @@ const DeleteProfileEverDialogComponent = (props) => {
       visible={visible}
       onClose={onClose}
       needReassignData={needReassignData}
+      deleteWithoutReassign={deleteWithoutReassign}
+      areUsersOnly={areUsersOnly}
     >
       <ModalDialog.Header>
         {onlyOneUser ? t("DeleteUser") : t("DeletingUsers")}
@@ -193,6 +199,7 @@ const DeleteProfileEverDialogComponent = (props) => {
           deleteWithoutReassign={deleteWithoutReassign}
           users={usersToDelete}
           onlyOneUser={onlyOneUser}
+          areUsersOnly={areUsersOnly}
           t={t}
         />
       </ModalDialog.Body>

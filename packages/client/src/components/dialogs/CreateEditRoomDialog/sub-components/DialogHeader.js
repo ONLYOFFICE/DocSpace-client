@@ -37,6 +37,7 @@ const DialogHeader = ({
   isEdit,
   isChooseRoomType,
   onArrowClick,
+  disabledIcon,
   isTemplate,
 }) => {
   const title = isTemplate ? t("Files:FromTemplate") : t("Files:CreateRoom");
@@ -49,12 +50,14 @@ const DialogHeader = ({
         <span>{t("ChooseRoomType")}</span>
       ) : (
         <div className="header-with-button">
-          <IconButton
-            size={17}
-            iconName={ArrowPathReactSvgUrl}
-            className="sharing_panel-arrow"
-            onClick={onArrowClick}
-          />
+          {!disabledIcon && (
+            <IconButton
+              size={17}
+              iconName={ArrowPathReactSvgUrl}
+              className="sharing_panel-arrow"
+              onClick={onArrowClick}
+            />
+          )}
           <div>{title}</div>
         </div>
       )}

@@ -36,6 +36,7 @@ import React, {
 } from "react";
 import { useTranslation } from "react-i18next";
 import ReCAPTCHA from "react-google-recaptcha";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useTheme } from "styled-components";
 import { useSearchParams } from "next/navigation";
 
@@ -58,20 +59,24 @@ import ForgotContainer from "./sub-components/ForgotContainer";
 
 import { StyledCaptcha } from "./LoginForm.styled";
 import { LoginDispatchContext, LoginValueContext } from "../Login";
+import LDAPContainer from "./sub-components/LDAPContainer";
+import { RecaptchaType } from "@docspace/shared/enums";
 
 const LoginForm = ({
   hashSettings,
   cookieSettingsEnabled,
   reCaptchaPublicKey,
+  reCaptchaType,
 }: LoginFormProps) => {
-  const { isLoading, isModalOpen } = useContext(LoginValueContext);
+  const { isLoading, isModalOpen, ldapDomain } = useContext(LoginValueContext);
   const { setIsLoading } = useContext(LoginDispatchContext);
 
   const searchParams = useSearchParams();
 
   const theme = useTheme();
 
-  const { t, ready } = useTranslation(["Login", "Common"]);
+  const { t, ready, i18n } = useTranslation(["Login", "Common"]);
+  const currentCulture = i18n.language;
 
   const message = searchParams.get("message");
   const confirmedEmail = searchParams.get("confirmedEmail");
@@ -97,12 +102,13 @@ const LoginForm = ({
   const [password, setPassword] = useState("");
 
   const [isChecked, setIsChecked] = useState(false);
-
+  const [isLdapLoginChecked, setIsLdapLoginChecked] = useState(!!ldapDomain);
   const [isCaptcha, setIsCaptcha] = useState(false);
   const [isCaptchaSuccessful, setIsCaptchaSuccess] = useState(false);
   const [isCaptchaError, setIsCaptchaError] = useState(false);
 
   const captchaRef = useRef<ReCAPTCHA>(null);
+  const hCaptchaRef = useRef<HCaptcha>(null);
 
   useLayoutEffect(() => {
     const email = getEmailFromInvitation(loginData);
@@ -117,7 +123,7 @@ const LoginForm = ({
       localStorage.removeItem("code");
 
       try {
-        const response = (await thirdPartyLogin(profile)) as {
+        const response = (await thirdPartyLogin(profile, currentCulture)) as {
           confirmUrl: string;
           token: unknown;
         };
@@ -151,8 +157,12 @@ const LoginForm = ({
         );
       }
     },
-    [t, referenceUrl],
+    [t, referenceUrl, currentCulture],
   );
+
+  useEffect(() => {
+    setIsLdapLoginChecked(!!ldapDomain);
+  }, [ldapDomain]);
 
   useEffect(() => {
     const profile = localStorage.getItem("profile");
@@ -162,8 +172,12 @@ const LoginForm = ({
   }, [authCallback]);
 
   useEffect(() => {
-    if (message) setErrorText(message);
-    if (confirmedEmail) setIdentifier(confirmedEmail);
+    window.authCallback = authCallback;
+  }, [authCallback]);
+
+  useEffect(() => {
+    message && setErrorText(message);
+    confirmedEmail && setIdentifier(confirmedEmail);
 
     const messageEmailConfirmed = t("MessageEmailConfirmed");
     const messageAuthorize = t("MessageAuthorize");
@@ -172,8 +186,6 @@ const LoginForm = ({
 
     if (confirmedEmail && ready) toastr.success(text);
     if (authError && ready) toastr.error(t("Common:ProviderLoginError"));
-
-    window.authCallback = authCallback;
   }, [message, confirmedEmail, t, ready, authError, authCallback]);
 
   const onChangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -198,6 +210,7 @@ const LoginForm = ({
       }
 
       captchaToken = captchaRef.current?.getValue();
+      if (captchaToken) setIsCaptchaError(false);
     }
 
     let hasError = false;
@@ -227,12 +240,16 @@ const LoginForm = ({
     if (hasError) return;
 
     setIsLoading(true);
-    const hash = createPasswordHash(pass, hashSettings);
+
+    const hash = !isLdapLoginChecked
+      ? createPasswordHash(pass, hashSettings)
+      : undefined;
+    const pwd = isLdapLoginChecked ? pass : undefined;
 
     isDesktop && checkPwd();
     const session = !isChecked;
 
-    login(user, hash, session, captchaToken)
+    login(user, hash, pwd, session, captchaToken, currentCulture, reCaptchaType)
       .then((res: string | object) => {
         const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath =
@@ -272,16 +289,19 @@ const LoginForm = ({
         setIsLoading(false);
       });
   }, [
-    hashSettings,
-    identifier,
-    identifierValid,
-    isCaptcha,
-    isCaptchaSuccessful,
-    isChecked,
-    isDesktop,
-    password,
     reCaptchaPublicKey,
+    isCaptcha,
+    identifier,
+    password,
+    identifierValid,
     setIsLoading,
+    hashSettings,
+    isDesktop,
+    isChecked,
+    isLdapLoginChecked,
+    currentCulture,
+    reCaptchaType,
+    isCaptchaSuccessful,
     referenceUrl,
   ]);
 
@@ -303,8 +323,12 @@ const LoginForm = ({
 
   const onChangeCheckbox = () => setIsChecked(!isChecked);
 
+  const onChangeLdapLoginCheckbox = () =>
+    setIsLdapLoginChecked(!isLdapLoginChecked);
+
   const onSuccessfullyComplete = () => {
     setIsCaptchaSuccess(true);
+    setIsCaptchaError(false);
   };
 
   const errorMessage = () => {
@@ -345,6 +369,8 @@ const LoginForm = ({
         onChangeLogin={onChangeLogin}
         onBlurEmail={onBlurEmail}
         onValidateEmail={onValidateEmail}
+        isLdapLogin={isLdapLoginChecked}
+        ldapDomain={ldapDomain}
       />
 
       <PasswordContainer
@@ -363,15 +389,33 @@ const LoginForm = ({
         onChangeCheckbox={onChangeCheckbox}
       />
 
+      {ldapDomain && (
+        <LDAPContainer
+          ldapDomain={ldapDomain}
+          isLdapLoginChecked={isLdapLoginChecked}
+          onChangeLdapLoginCheckbox={onChangeLdapLoginCheckbox}
+        />
+      )}
+
       {reCaptchaPublicKey && isCaptcha && (
         <StyledCaptcha isCaptchaError={isCaptchaError}>
           <div className="captcha-wrapper">
-            <ReCAPTCHA
-              sitekey={reCaptchaPublicKey}
-              ref={captchaRef}
-              theme={theme.isBase ? "light" : "dark"}
-              onChange={onSuccessfullyComplete}
-            />
+            {reCaptchaType === RecaptchaType.hCaptcha ? (
+              <HCaptcha
+                sitekey={reCaptchaPublicKey}
+                ref={hCaptchaRef}
+                onVerify={onSuccessfullyComplete}
+                theme={theme.isBase ? "light" : "dark"}
+                // onChange={onSuccessfullyComplete}
+              />
+            ) : (
+              <ReCAPTCHA
+                sitekey={reCaptchaPublicKey}
+                ref={captchaRef}
+                theme={theme.isBase ? "light" : "dark"}
+                onChange={onSuccessfullyComplete}
+              />
+            )}
           </div>
           {isCaptchaError && (
             <Text>{t("Errors:LoginWithBruteForceCaptcha")}</Text>

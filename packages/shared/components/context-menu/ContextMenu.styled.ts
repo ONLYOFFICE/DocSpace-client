@@ -285,6 +285,9 @@ const StyledContextMenu = styled.div<{
 
   .p-contextmenu .p-menuitem-text {
     line-height: 36px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .p-contextmenu .p-menu-separator {

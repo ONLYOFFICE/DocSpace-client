@@ -42,7 +42,7 @@ export type RoomSelectorProps = TSelectorHeader &
 
     onSubmit: (items: TSelectorItem[]) => void | Promise<void>;
     roomType?: RoomsType;
-    excludeItems?: number[];
+    excludeItems?: (number | string | undefined)[];
     setIsDataReady?: (value: boolean) => void;
     submitButtonLabel?: string;
     withSearch?: boolean;

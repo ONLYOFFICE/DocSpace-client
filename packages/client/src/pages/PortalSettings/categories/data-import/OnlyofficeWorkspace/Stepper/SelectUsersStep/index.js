@@ -32,9 +32,9 @@ import { SearchInput } from "@docspace/shared/components/search-input";
 
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../../sub-components/AccountsPaging";
-// import UsersInfoBlock from "./../../../sub-components/UsersInfoBlock";
+import UsersInfoBlock from "./../../../sub-components/UsersInfoBlock";
 
-// const LICENSE_LIMIT = 100;
+import { parseQuota } from "../../../utils";
 
 const SelectUsersStep = ({
   t,
@@ -46,11 +46,16 @@ const SelectUsersStep = ({
   searchValue,
   setSearchValue,
   cancelMigration,
+  checkedUsers,
+  quotaCharacteristics,
 }) => {
   const [dataPortion, setDataPortion] = useState(withEmailUsers.slice(0, 25));
+  const [quota, setQuota] = useState({ used: 0, max: 0 });
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     setSearchValue("");
+    setQuota(parseQuota(quotaCharacteristics[1]));
   }, []);
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
@@ -79,8 +84,16 @@ const SelectUsersStep = ({
 
   const goBack = () => {
     cancelMigration();
-    setTimeout(onPrevStep, 100);
+    setIsSaving(true);
+    setTimeout(() => {
+      setIsSaving(false);
+      onPrevStep();
+    }, 1000);
   };
+
+  const totalUsedUsers =
+    quota.used +
+    checkedUsers.withEmail.filter((user) => !user.isDuplicate).length;
 
   return (
     <>
@@ -92,15 +105,21 @@ const SelectUsersStep = ({
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
         displaySettings
-        saveButtonDisabled={areCheckedUsersEmpty}
+        saveButtonDisabled={
+          areCheckedUsersEmpty || (quota.max && totalUsedUsers > quota.max)
+        }
+        isSaving={isSaving}
       />
 
-      {/* <UsersInfoBlock
-        t={t}
-        selectedUsers={numberOfCheckedAccounts}
-        totalUsers={users.length}
-        totalLicenceLimit={LICENSE_LIMIT}
-      /> */}
+      {quota.max && (
+        <UsersInfoBlock
+          t={t}
+          totalUsedUsers={totalUsedUsers}
+          selectedUsers={checkedUsers.withEmail.length}
+          totalUsers={withEmailUsers.length}
+          totalLicenceLimit={quota.max}
+        />
+      )}
 
       <SearchInput
         id="search-users-input"
@@ -131,14 +150,17 @@ const SelectUsersStep = ({
           saveButtonLabel={t("Settings:NextStep")}
           cancelButtonLabel={t("Common:Back")}
           displaySettings
-          saveButtonDisabled={areCheckedUsersEmpty}
+          saveButtonDisabled={
+            areCheckedUsersEmpty || (quota.max && totalUsedUsers > quota.max)
+          }
+          isSaving={isSaving}
         />
       )}
     </>
   );
 };
 
-export default inject(({ importAccountsStore }) => {
+export default inject(({ importAccountsStore, currentQuotaStore }) => {
   const {
     withEmailUsers,
     searchValue,
@@ -146,7 +168,9 @@ export default inject(({ importAccountsStore }) => {
     setResultUsers,
     areCheckedUsersEmpty,
     cancelMigration,
+    checkedUsers,
   } = importAccountsStore;
+  const { quotaCharacteristics } = currentQuotaStore;
 
   return {
     setResultUsers,
@@ -155,5 +179,7 @@ export default inject(({ importAccountsStore }) => {
     searchValue,
     setSearchValue,
     cancelMigration,
+    checkedUsers,
+    quotaCharacteristics,
   };
 })(observer(SelectUsersStep));

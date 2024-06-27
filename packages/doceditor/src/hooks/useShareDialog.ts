@@ -25,13 +25,23 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 
-const useShareDialog = () => {
+import type { IInitialConfig } from "@/types";
+
+const useShareDialog = (
+  config: IInitialConfig | undefined,
+  onSDKRequestStartFilling: (headerLabel: string) => void,
+) => {
+  const { t } = useTranslation(["Common"]);
   const [isVisible, setIsVisible] = React.useState(false);
 
   const onSDKRequestSharingSettings = React.useCallback(() => {
+    if (config?.startFilling)
+      return onSDKRequestStartFilling(t("Common:ShareToFillOut"));
+
     setIsVisible(true);
-  }, []);
+  }, [config?.startFilling, onSDKRequestStartFilling, t]);
 
   const onClose = React.useCallback(() => {
     setIsVisible(false);
@@ -45,4 +55,3 @@ const useShareDialog = () => {
 };
 
 export default useShareDialog;
-

@@ -127,14 +127,14 @@ export const CategoryFilterSubList = styled(DropDown)`
     ${({ theme }) =>
       theme.interfaceDirection !== "rtl"
         ? css`
-            left: -5px;
+            left: -4px;
           `
         : css`
-            right: -5px;
+            right: -4px;
           `};
 
     top: 0;
-    width: 4px;
+    width: 6px;
     height: 100%;
   }
 `;

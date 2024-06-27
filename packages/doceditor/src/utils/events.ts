@@ -119,3 +119,5 @@ export const onSDKRequestRename = async (
   const title = (event as TRenameEvent).data;
   await updateFile(id, title);
 };
+
+export const onOutdatedVersion = () => window.location.reload();

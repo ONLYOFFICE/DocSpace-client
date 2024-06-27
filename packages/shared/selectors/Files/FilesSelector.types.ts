@@ -33,8 +33,13 @@ import {
   TFolderSecurity,
 } from "../../api/files/types";
 import SocketIOHelper from "../../utils/socket";
-import { DeviceType, FolderType } from "../../enums";
+import { DeviceType, FolderType, RoomsType } from "../../enums";
 import { TRoomSecurity } from "../../api/rooms/types";
+
+export type TCreateDefineRoom = {
+  label: string;
+  type: RoomsType;
+};
 
 export interface UseRootHelperProps {
   setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
@@ -62,10 +67,11 @@ export type UseSocketHelperProps = {
   disabledItems: (string | number)[];
   filterParam?: string;
   getIcon: (fileExst: string) => string;
+  withCreate: boolean;
 };
 
 export type UseRoomsHelperProps = {
-  setBreadCrumbs: (items: TBreadCrumb[]) => void;
+  setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setIsBreadCrumbsLoading: (value: boolean) => void;
   setIsNextPageLoading: (value: boolean) => void;
   setHasNextPage: (value: boolean) => void;
@@ -81,11 +87,19 @@ export type UseRoomsHelperProps = {
   isInit: boolean;
   setIsInit: (value: boolean) => void;
   setIsFirstLoad: (value: boolean) => void;
+  withCreate: boolean;
+  createDefineRoomLabel?: string;
+  createDefineRoomType?: RoomsType;
+  getRootData?: () => Promise<void>;
+  setSelectedItemType: React.Dispatch<
+    React.SetStateAction<"rooms" | "files" | undefined>
+  >;
+  subscribe: (id: number) => string | number | undefined;
 };
 
 export type UseFilesHelpersProps = {
   roomsFolderId?: number;
-  setBreadCrumbs: (items: TBreadCrumb[]) => void;
+  setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setIsBreadCrumbsLoading: (value: boolean) => void;
   setIsSelectedParentFolder: (value: boolean) => void;
   setIsNextPageLoading: (value: boolean) => void;
@@ -97,7 +111,7 @@ export type UseFilesHelpersProps = {
   setIsRoot: (value: boolean) => void;
   setIsInit: (value: boolean) => void;
   searchValue?: string;
-  disabledItems: string[] | number[];
+  disabledItems: (string | number)[];
   setSelectedItemSecurity: (value: TFileSecurity | TFolderSecurity) => void;
   isThirdParty: boolean;
   setSelectedTreeNode: (treeNode: TFolder) => void;
@@ -119,6 +133,14 @@ export type UseFilesHelpersProps = {
   getFilesArchiveError: (name: string) => string;
   isInit: boolean;
   setIsFirstLoad: (value: boolean) => void;
+  withCreate: boolean;
+  setSelectedItemId: (value: number | string) => void;
+};
+
+export type TUseInputItemHelper = {
+  withCreate: boolean;
+  selectedItemId?: string | number | undefined;
+  setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
 };
 
 export type TSelectedFileInfo = {
@@ -138,7 +160,7 @@ export type FilesSelectorProps = (
 ) & {
   socketHelper: SocketIOHelper;
   socketSubscribers: Set<string>;
-  disabledItems: string[] | number[];
+  disabledItems: (string | number)[];
   filterParam?: string;
   withoutBackButton: boolean;
   withBreadCrumbs: boolean;
@@ -199,4 +221,8 @@ export type FilesSelectorProps = (
   isPanelVisible: boolean;
   currentDeviceType: DeviceType;
   getFilesArchiveError: (name: string) => string;
+
+  withCreate: boolean;
+  createDefineRoomLabel?: string;
+  createDefineRoomType?: RoomsType;
 };

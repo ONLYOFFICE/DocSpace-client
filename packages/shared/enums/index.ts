@@ -41,6 +41,7 @@ export const enum EmployeeActivationStatus {
 export const enum EmployeeStatus {
   Active = 1,
   Disabled = 2,
+  Pending = 4, // NEW STATUS from server
 }
 /**
  * Enum for employee type.
@@ -53,7 +54,7 @@ export const enum EmployeeType {
   Collaborator = 4,
   UserString = "user",
   RoomAdmin = "manager",
-  DocSpaceAdmin = "admin",
+  PortalAdmin = "admin",
   Owner = "Owner",
   CollaboratorString = "collaborator",
 }
@@ -341,6 +342,7 @@ export const enum Events {
   CREATE_PLUGIN_FILE = "create_plugin_file",
   CREATE_PDF_FORM_FILE = "create_pdf_form_file",
   CREATE_ROOM_TEMPLATE = "create_room_template",
+  Share_PDF_Form = "share_pdf_form",
 }
 
 /**
@@ -474,14 +476,21 @@ export const enum ErrorKeys {
 }
 
 export enum RoomsType {
+  PublicRoom = 6,
   FormRoom = 1,
   // FillingFormsRoom= 1, //TODO: Restore when certs will be done
   EditingRoom = 2,
   // ReviewRoom: 3, //TODO: Restore when certs will be done
   // ReadOnlyRoom: 4, //TODO: Restore when certs will be done
-  PublicRoom = 6,
   CustomRoom = 5,
   TemplateRoom = 7,
+}
+
+export const enum RecaptchaType {
+  Default = 0,
+  AndroidV2 = 1,
+  iOSV2 = 2,
+  hCaptcha = 3,
 }
 
 export enum AccountsSearchArea {
@@ -546,4 +555,29 @@ export const enum EditorConfigErrorType {
 export const enum RoomsStorageFilter {
   internal = 1,
   thirdparty = 2,
+}
+
+export const enum LDAPOperation {
+  SaveAndSync = "Save",
+  Sync = "Sync",
+}
+
+export const enum LDAPCertificateProblem {
+  CertExpired = -2146762495,
+  CertValidityPeriodNesting = -2146762494,
+  CertRole = -2146762493,
+  CertPathLenConst = -2146762492,
+  CertCritical = -2146762491,
+  CertPurpose = -2146762490,
+  CertIssuerChaining = -2146762489,
+  CertMalformed = -2146762488,
+  CertUntrustedRoot = -2146762487,
+  CertChainnig = -2146762486,
+  CertRevoked = -2146762484,
+  CertUntrustedTestRoot = -2146762483,
+  CertRevocationFailure = -2146762482,
+  CertCnNoMatch = -2146762481,
+  CertWrongUsage = -2146762480,
+  CertUntrustedCa = -2146762478,
+  CertUnrecognizedError = -2146762477,
 }

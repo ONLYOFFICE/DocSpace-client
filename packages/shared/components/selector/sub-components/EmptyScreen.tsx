@@ -25,12 +25,28 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTranslation } from "react-i18next";
+
+import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
+import UpSvgUrl from "PUBLIC_DIR/images/up.svg?url";
 
 import { Heading } from "../../heading";
 import { Text } from "../../text";
+import { IconButton } from "../../icon-button";
+import { Link, LinkType } from "../../link";
 
 import { StyledEmptyScreen } from "../Selector.styled";
 import { EmptyScreenProps } from "../Selector.types";
+import useCreateDropDown from "../hooks/useCreateDropDown";
+import NewItemDropDown from "./NewItemDropDown";
+
+const linkStyles = {
+  isHovered: true,
+  type: LinkType.action,
+  fontWeight: "600",
+  className: "empty-folder_link",
+  display: "flex",
+};
 
 const EmptyScreen = ({
   image,
@@ -40,10 +56,32 @@ const EmptyScreen = ({
   searchHeader,
   searchDescription,
   withSearch,
+  items,
+  inputItemVisible,
 }: EmptyScreenProps) => {
+  const { t } = useTranslation(["Common"]);
+  const { isOpenDropDown, setIsOpenDropDown, onCloseDropDown } =
+    useCreateDropDown();
+
   const currentImage = withSearch ? searchImage : image;
   const currentHeader = withSearch ? searchHeader : header;
   const currentDescription = withSearch ? searchDescription : description;
+
+  const createItem = items.length > 0 ? items[0] : null;
+
+  const onCreateClickAction = () => {
+    if (
+      !createItem ||
+      (!createItem.onCreateClick && !createItem.dropDownItems) ||
+      isOpenDropDown ||
+      inputItemVisible
+    )
+      return;
+
+    if (createItem.dropDownItems) return setIsOpenDropDown(true);
+
+    createItem.onCreateClick?.();
+  };
 
   return (
     <StyledEmptyScreen withSearch={withSearch}>
@@ -56,6 +94,41 @@ const EmptyScreen = ({
       <Text className="empty-description" noSelect>
         {currentDescription}
       </Text>
+      {createItem && (
+        <div className="buttons">
+          <div className="empty-folder_container-links">
+            <IconButton
+              className="empty-folder_container-icon"
+              size={12}
+              onClick={onCreateClickAction}
+              iconName={PlusSvgUrl}
+              isFill
+            />
+            <Link {...linkStyles} onClick={onCreateClickAction}>
+              {items[0].label}
+            </Link>
+            {isOpenDropDown && createItem && createItem.dropDownItems && (
+              <NewItemDropDown
+                dropDownItems={createItem.dropDownItems}
+                isEmpty
+                onCloseDropDown={onCloseDropDown}
+              />
+            )}
+          </div>
+          <div className="empty-folder_container-links">
+            <IconButton
+              className="empty-folder_container-icon"
+              size={12}
+              onClick={createItem.onBackClick}
+              iconName={UpSvgUrl}
+              isFill
+            />
+            <Link {...linkStyles} onClick={createItem.onBackClick}>
+              {t("Common:Back")}
+            </Link>
+          </div>
+        </div>
+      )}
     </StyledEmptyScreen>
   );
 };

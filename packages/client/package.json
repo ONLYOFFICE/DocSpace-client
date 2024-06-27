@@ -1,6 +1,6 @@
 {
   "name": "@docspace/client",
-  "version": "2.5.1",
+  "version": "2.6.0",
   "private": true,
   "homepage": "",
   "scripts": {
@@ -60,6 +60,7 @@
     "react-smartbanner": "^5.1.4",
     "react-string-format": "^0.1.4",
     "remark-gfm": "^4.0.0",
+    "ts-pattern": "^5.1.1",
     "windows-iana": "^5.1.0"
   },
   "devDependencies": {

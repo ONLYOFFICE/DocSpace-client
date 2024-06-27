@@ -26,6 +26,10 @@
 
 import React from "react";
 
+import { useTranslation } from "react-i18next";
+
+import FolderSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
+
 import { getFolder, getFolderInfo, getSettingsFiles } from "../../../api/files";
 import FilesFilter from "../../../api/files/filter";
 import {
@@ -45,6 +49,7 @@ import {
   convertFilesToItems,
   convertFoldersToItems,
 } from "../FilesSelector.utils";
+import useInputItemHelper from "./useInputItemHelper";
 
 const useFilesHelper = ({
   setIsNextPageLoading,
@@ -75,7 +80,17 @@ const useFilesHelper = ({
   isInit,
   setIsInit,
   setIsFirstLoad,
+  withCreate,
+  setSelectedItemId,
 }: UseFilesHelpersProps) => {
+  const { t } = useTranslation(["Common"]);
+
+  const { addInputItem } = useInputItemHelper({
+    withCreate,
+    selectedItemId,
+    setItems,
+  });
+
   const requestRunning = React.useRef(false);
   const initRef = React.useRef(isInit);
   const firstLoadRef = React.useRef(isFirstLoad);
@@ -94,11 +109,17 @@ const useFilesHelper = ({
   }, [isInit]);
 
   const getFileList = React.useCallback(
-    async (startIndex: number) => {
+    async (sIndex: number) => {
       if (requestRunning.current) return;
 
       requestRunning.current = true;
       setIsNextPageLoading(true);
+
+      let startIndex = sIndex;
+
+      if (withCreate) {
+        startIndex -= startIndex % 100;
+      }
 
       const currentSearch = searchValue || "";
 
@@ -310,7 +331,29 @@ const useFilesHelper = ({
         }
 
         if (firstLoadRef.current || startIndex === 0) {
-          setTotal(total);
+          if (withCreate) {
+            setTotal(total + 1);
+            itemList.unshift({
+              isCreateNewItem: true,
+              label: t("NewFolder"),
+              id: "create-folder-item",
+              key: "create-folder-item",
+              hotkey: "f",
+              onCreateClick: () => addInputItem(t("NewFolder"), FolderSvgUrl),
+              onBackClick: () => {
+                setSelectedItemId(current.parentId);
+                setBreadCrumbs((val) => {
+                  const newVal = [...val];
+
+                  newVal.pop();
+
+                  return newVal;
+                });
+              },
+            });
+          } else {
+            setTotal(total);
+          }
           setItems(itemList);
         } else {
           setItems((prevState) => {
@@ -361,8 +404,8 @@ const useFilesHelper = ({
       setIsNextPageLoading,
       searchValue,
       filterParam,
-      isUserOnly,
       selectedItemId,
+      isUserOnly,
       getRootData,
       setSelectedItemSecurity,
       getIcon,
@@ -380,8 +423,12 @@ const useFilesHelper = ({
       setIsBreadCrumbsLoading,
       roomsFolderId,
       setIsSelectedParentFolder,
-      setTotal,
+      withCreate,
       setItems,
+      setTotal,
+      addInputItem,
+      t,
+      setSelectedItemId,
       rootThirdPartyId,
     ],
   );

@@ -44,6 +44,7 @@ const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
       scrollClass,
       fixedSize = false,
       className,
+      autoFocus,
       ...rest
     } = props;
 
@@ -52,6 +53,8 @@ const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
 
     const [scrollVisible, setScrollVisible] = useState(false);
     const timerId = useRef<null | ReturnType<typeof setTimeout>>(null);
+
+    const scrollRef = useRef<null | Scrollbar>(null);
 
     const isRtl = interfaceDirection === "rtl";
 
@@ -91,11 +94,26 @@ const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
       [],
     );
 
+    const refSetter = (elementRef: Scrollbar) => {
+      if (typeof ref === "function") {
+        ref(elementRef);
+      } else if (ref) {
+        ref.current = elementRef;
+      }
+      scrollRef.current = elementRef;
+    };
+
     useEffect(() => {
       return () => {
         if (timerId.current) clearTimeout(timerId.current);
       };
     }, []);
+
+    useEffect(() => {
+      if (autoFocus) {
+        scrollRef.current?.contentElement?.focus();
+      }
+    }, [autoFocus]);
 
     const autoHideContainerProps = autoHide
       ? {
@@ -120,12 +138,16 @@ const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
         className={className}
         wrapperProps={{ className: "scroll-wrapper" }}
         scrollerProps={{ renderer: renderScroller }}
-        contentProps={{ className: "scroll-body", ...autoHideContentProps }}
+        contentProps={{
+          className: "scroll-body",
+          tabIndex: -1,
+          ...autoHideContentProps,
+        }}
         thumbYProps={{ className: "thumb thumb-vertical" }}
         thumbXProps={{ className: "thumb thumb-horizontal" }}
         trackYProps={{ className: "track track-vertical" }}
         trackXProps={{ className: "track track-horizontal" }}
-        ref={ref}
+        ref={refSetter}
         {...autoHideContainerProps}
       />
     );

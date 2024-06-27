@@ -56,7 +56,7 @@ class ImportAccountsStore {
   };
 
   UserTypes = {
-    DocSpaceAdmin: "DocSpaceAdmin",
+    PortalAdmin: "DocSpaceAdmin",
     RoomAdmin: "RoomAdmin",
     User: "Collaborator",
   };
@@ -102,7 +102,9 @@ class ImportAccountsStore {
   get filteredUsers() {
     return this.users.result.filter(
       (user) =>
-        !this.users.existing.some((existingUser) => existingUser.key === user.key),
+        !this.users.existing.some(
+          (existingUser) => existingUser.key === user.key,
+        ),
     );
   }
 
@@ -290,8 +292,6 @@ class ImportAccountsStore {
       }
     } catch (e) {
       console.error(e);
-    } finally {
-      isAbort.current = false;
     }
   };
 
@@ -331,8 +331,6 @@ class ImportAccountsStore {
       }
     } catch (e) {
       console.error(e);
-    } finally {
-      isAbort.current = false;
     }
   };
 

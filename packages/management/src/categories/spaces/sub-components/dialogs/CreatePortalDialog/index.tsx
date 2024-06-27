@@ -37,13 +37,14 @@ import { Checkbox } from "@docspace/shared/components/checkbox";
 import toLower from "lodash/toLower";
 import { useStore } from "SRC_DIR/store";
 import { validatePortalName } from "@docspace/shared/utils/common";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledModal = styled(ModalDialogContainer)`
   #modal-dialog {
     min-height: 326px;
   }
 
-  .create-docspace-input-block {
+  .create-portal-input-block {
     padding: 16px 0;
   }
 
@@ -55,11 +56,11 @@ const StyledModal = styled(ModalDialogContainer)`
         : `margin-left: 8px;`}
   }
 
-  .create-docspace-checkbox {
+  .create-portal-checkbox {
     margin-bottom: 10px;
   }
 
-  .create-docspace-input {
+  .create-portal-input {
     width: 100%;
   }
 `;
@@ -145,23 +146,27 @@ const CreatePortalDialog = () => {
       onClose={onClose}
       displayType="modal"
     >
-      <ModalDialog.Header>{t("CreatingDocSpace")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {t("CreatingPortal", { productName: PRODUCT_NAME })}
+      </ModalDialog.Header>
       <ModalDialog.Body className="create-docspace-body">
-        <Text noSelect={true}>{t("CreateSpaceDescription")}</Text>
-        <div className="create-docspace-input-block">
+        <Text noSelect={true}>
+          {t("CreateSpaceDescription", { productName: PRODUCT_NAME })}
+        </Text>
+        <div className="create-portal-input-block">
           <Text
             fontSize="13px"
             fontWeight="600"
             style={{ paddingBottom: "5px" }}
           >
-            {t("DocSpaceName")}
+            {t("PortalName")}
           </Text>
           <TextInput
             onChange={onHandleName}
             value={name}
             hasError={!!registerError}
             placeholder={t("EnterName")}
-            className="create-docspace-input"
+            className="create-portal-input"
           />
           <div>
             <Text fontSize="12px" fontWeight="400" color="#F24724">
@@ -178,7 +183,7 @@ const CreatePortalDialog = () => {
         </div>
         <div>
           <Checkbox
-            className="create-docspace-checkbox"
+            className="create-portal-checkbox"
             label={t("VisitSpace")}
             onChange={() => setVisit((visit) => !visit)}
             isChecked={visit}

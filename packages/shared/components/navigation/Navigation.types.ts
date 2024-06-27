@@ -50,6 +50,7 @@ export interface IContextButtonProps {
   id: string;
   title?: string;
   onCloseDropBox?: () => void;
+  onContextOptionsClick?: () => void;
 }
 
 export interface IPlusButtonProps {
@@ -95,6 +96,7 @@ export interface IControlButtonProps {
   title?: string;
   isEmptyPage?: boolean;
   onCloseDropBox?: () => void;
+  onContextOptionsClick?: () => void;
 }
 
 export interface ITextProps {
@@ -203,4 +205,5 @@ export interface INavigationProps {
   tariffBar: React.ReactElement;
   showNavigationButton: boolean;
   badgeLabel?: string;
+  onContextOptionsClick?: () => void;
 }

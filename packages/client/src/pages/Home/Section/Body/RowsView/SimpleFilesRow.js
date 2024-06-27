@@ -126,7 +126,7 @@ const StyledSimpleFilesRow = styled(Row)`
     !props.isThirdPartyFolder &&
     (props.checked || props.isActive) &&
     props.canDrag &&
-    `url(${CursorPalmReactSvgUrl}), auto`};
+    `url(${CursorPalmReactSvgUrl}) 8 0, auto`};
   ${(props) =>
     props.inProgress &&
     css`

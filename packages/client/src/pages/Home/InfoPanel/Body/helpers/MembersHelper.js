@@ -37,7 +37,7 @@ class MembersHelper {
 
   getOptions = () => {
     return {
-      docSpaceAdmin: {
+      portalAdmin: {
         key: "owner",
         label: this.t("Common:Owner"),
         access: ShareAccessRights.FullAccess,

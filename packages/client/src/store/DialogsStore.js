@@ -104,7 +104,7 @@ class DialogsStore {
   createRoomConfirmDialogVisible = false;
   changeUserTypeDialogVisible = false;
   editLinkPanelIsVisible = false;
-  embeddingPanelIsVisible = false;
+  embeddingPanelData = { visible: false, item: null };
   submitToGalleryDialogVisible = false;
   linkParams = null;
   leaveRoomDialogVisible = false;
@@ -491,8 +491,8 @@ class DialogsStore {
     this.deleteLinkDialogVisible = visible;
   };
 
-  setEmbeddingPanelIsVisible = (embeddingPanelIsVisible) => {
-    this.embeddingPanelIsVisible = embeddingPanelIsVisible;
+  setEmbeddingPanelData = (embeddingPanelData) => {
+    this.embeddingPanelData = embeddingPanelData;
   };
 
   setMoveToPublicRoomVisible = (visible, data = null) => {

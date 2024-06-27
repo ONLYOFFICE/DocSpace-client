@@ -24,42 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { decode } from "he";
+import { StyledHistoryBlockMessage } from "../../../styles/history";
 
-import { Link } from "@docspace/shared/components/link";
-import { StyledUserNameLink } from "../../styles/history";
-import { Text } from "@docspace/shared/components/text";
-const HistoryBlockUser = ({
-  user,
-  withComma,
-  openUser,
-  isVisitor,
-  isCollaborator,
-}) => {
-  const username = user.displayName;
-  const navigate = useNavigate();
+interface HistoryUserRoleChangeProps {
+  feed: any;
+}
 
-  const onUserClick = () => {
-    openUser(user, navigate);
-  };
-
+const HistoryUserGroupRoleChange = ({ feed }: HistoryUserRoleChangeProps) => {
   return (
-    <StyledUserNameLink key={user.id} className="user">
-      {isVisitor || isCollaborator ? (
-        <Text as="span" fontWeight={600}>
-          {decode(username)}
-        </Text>
-      ) : (
-        <Link className="username link" onClick={onUserClick}>
-          {decode(username)}
-        </Link>
-      )}
-      {withComma ? "," : ""}
-      {withComma && <div className="space"></div>}
-    </StyledUserNameLink>
+    <StyledHistoryBlockMessage className="message">
+      <span className="main-message">
+        <strong>«{feed.data.access}»</strong>
+      </span>{" "}
+      <span className="old-role">«{feed.data.oldAccess}»</span>
+    </StyledHistoryBlockMessage>
   );
 };
 
-export default HistoryBlockUser;
+export default HistoryUserGroupRoleChange;

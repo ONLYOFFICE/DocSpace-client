@@ -184,5 +184,7 @@
   "RoomFilesLifetime": "The file lifetime is set to {{days}} {{period}} in this room",
   "FileWillBeDeleted": "The file will be deleted {{date}}",
   "LifetimeDialogDescription": "Lifetime countdown begins at the file creation date. Some files in this room exceed the proposed lifetime and will be deleted once you enable the setting.",
-  "LifetimeDialogDescriptionHeader": "Older files with exceeded lifetime will be deleted"
+  "LifetimeDialogDescriptionHeader": "Older files with exceeded lifetime will be deleted",
+  "Protected": "protected",
+  "Embed": "Embed"
 }

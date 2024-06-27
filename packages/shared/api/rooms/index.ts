@@ -113,20 +113,21 @@ export function updateRoomMemberRole(id, data) {
   });
 }
 
-export function getHistory(module, id, signal = null, requestToken) {
+export function getHistory(
+  selectionType: "file" | "folder",
+  id,
+  signal = null,
+  requestToken,
+) {
   const options = {
     method: "get",
-    url: `/feed/filter?module=${module}&withRelated=true&id=${id}`,
+    url: `/files/${selectionType}/${id}/log`,
     signal,
   };
 
-  if (requestToken) {
-    options.headers = { "Request-Token": requestToken };
-  }
+  if (requestToken) options.headers = { "Request-Token": requestToken };
 
-  return request(options).then((res) => {
-    return res;
-  });
+  return request(options).then((res) => res);
 }
 
 export function getRoomHistory(id) {

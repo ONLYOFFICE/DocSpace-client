@@ -122,7 +122,7 @@ const Panels = (props) => {
     editLinkPanelIsVisible,
     unsavedChangesDialogVisible,
     deleteLinkDialogVisible,
-    embeddingPanelIsVisible,
+    embeddingPanelData,
     moveToPublicRoomVisible,
     backupToPublicRoomVisible,
     settingsPluginDialogVisible,
@@ -335,7 +335,7 @@ const Panels = (props) => {
       <UnsavedChangesDialog key="unsaved-dialog" />
     ),
     deleteLinkDialogVisible && <DeleteLinkDialog key="delete-link-dialog" />,
-    embeddingPanelIsVisible && <EmbeddingPanel key="embedding-panel" />,
+    embeddingPanelData.visible && <EmbeddingPanel key="embedding-panel" />,
     moveToPublicRoomVisible && (
       <MoveToPublicRoom key="move-to-public-room-panel" />
     ),
@@ -410,7 +410,7 @@ export default inject(
       editGroupMembersDialogVisible,
       editLinkPanelIsVisible,
       deleteLinkDialogVisible,
-      embeddingPanelIsVisible,
+      embeddingPanelData,
       moveToPublicRoomVisible,
       backupToPublicRoomVisible,
       leaveRoomDialogVisible,
@@ -476,7 +476,7 @@ export default inject(
       editLinkPanelIsVisible,
       unsavedChangesDialogVisible,
       deleteLinkDialogVisible,
-      embeddingPanelIsVisible,
+      embeddingPanelData,
       moveToPublicRoomVisible,
       backupToPublicRoomVisible,
       settingsPluginDialogVisible,

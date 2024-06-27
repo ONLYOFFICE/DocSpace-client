@@ -28,6 +28,7 @@ import styled, { css } from "styled-components";
 
 import { DesktopDetails } from "../DesktopDetails";
 import { ViewerToolbar } from "../ViewerToolbar";
+import { globalColors } from "../../../../themes";
 
 type Panel = { isPanelOpen?: boolean };
 
@@ -95,7 +96,7 @@ export const ErrorMessage = styled.p`
   padding: 20px 30px;
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 4px;
-  color: rgb(238, 238, 238);
+  color: ${globalColors.white};
 `;
 
 export const DesktopTopBar = styled(DesktopDetails)<Panel>`

@@ -262,7 +262,7 @@ export const getBaseTheme = () => {
 
       circleBackground: white,
 
-      mobileProgressBarBackground: "rgb(48%, 58%, 69%, 0.4)",
+      mobileProgressBarBackground: grayStrong,
 
       bar: {
         icon: gray,
@@ -1471,7 +1471,7 @@ export const getBaseTheme = () => {
     },
 
     dialogLoader: {
-      borderBottom: "1px solid rgb(222, 226, 230)",
+      borderBottom: `1px solid ${loaderLight}`,
     },
 
     comboBox: {
@@ -2456,7 +2456,7 @@ export const getBaseTheme = () => {
 
         itemBorder: `1px dashed ${black}`,
 
-        itemOwnerColor: "rgb(163, 169, 174)",
+        itemOwnerColor: gray,
 
         backgroundButtons: white,
 

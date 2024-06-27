@@ -44,7 +44,7 @@ export const StyledComboBox = styled(ComboBox)<{ withBorder: boolean }>`
       `};
 
     :hover {
-      border-color: rgb(163, 169, 174);
+      border-color: ${(props) => props.theme.comboBox.button.hoverBorderColor};
     }
   }
 

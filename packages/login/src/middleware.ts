@@ -39,11 +39,10 @@ export function middleware(request: NextRequest) {
     return NextResponse.json({ status: "healthy" }, { status: 200 });
   }
 
-  console.log(request.nextUrl.pathname);
-
   if (request.nextUrl.pathname.includes("confirm")) {
-    console.log("call"  );
-    return NextResponse.rewrite(`/login/${request.nextUrl.pathname}`);
+    return NextResponse.rewrite(
+      `${request.nextUrl.origin}/login${request.nextUrl.pathname}`,
+    );
   }
 
   const isAuth = !!request.cookies.get("asc_auth_key")?.value;

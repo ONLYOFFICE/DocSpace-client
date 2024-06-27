@@ -153,7 +153,10 @@ class AccessRightsStore {
       id: userId,
       isAdmin: userIsAdmin,
       isOwner: userIsOwner,
+      isLDAP,
     } = user;
+
+    if (isLDAP) return false;
 
     const needDisable = status !== EmployeeStatus.Disabled && userId !== id;
 

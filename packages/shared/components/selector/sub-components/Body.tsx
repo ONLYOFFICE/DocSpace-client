@@ -103,6 +103,7 @@ const Body = ({
   withInfo,
   infoText,
   setInputItemVisible,
+  inputItemVisible,
 }: BodyProps) => {
   const [bodyHeight, setBodyHeight] = React.useState(0);
 
@@ -225,11 +226,7 @@ const Body = ({
       ) : null}
 
       {withTabs && tabsData && (
-        <StyledTabs
-          startSelect={0}
-          data={tabsData}
-          forsedActiveItemId={activeTabId}
-        />
+        <StyledTabs items={tabsData} selectedItemId={activeTabId} />
       )}
 
       {isSearchLoading || isBreadCrumbsLoading ? (
@@ -260,6 +257,7 @@ const Body = ({
           searchHeader={searchEmptyScreenHeader}
           searchDescription={searchEmptyScreenDescription}
           items={items}
+          inputItemVisible={inputItemVisible}
         />
       ) : (
         <>
@@ -302,6 +300,7 @@ const Body = ({
                     isItemLoaded,
                     renderCustomItem,
                     setInputItemVisible,
+                    inputItemVisible,
                   }}
                   itemSize={48}
                   onItemsRendered={onItemsRendered}

@@ -64,6 +64,7 @@ const FileManagement = ({
 
   openEditorInSameTab,
   setOpenEditorInSameTab,
+  organizationName,
 }) => {
   const { t, ready } = useTranslation(["FilesSettings", "Common"]);
 
@@ -167,7 +168,7 @@ const FileManagement = ({
               onChange={onChangeOpenEditorInSameTab}
               isChecked={openEditorInSameTab}
             />
-            <Text>{t("OpenSameTab")}</Text>
+            <Text>{t("OpenSameTab", { organizationName })}</Text>
           </div>
         )}
       </Box>
@@ -227,64 +228,68 @@ const FileManagement = ({
   );
 };
 
-export default inject(({ userStore, filesSettingsStore, treeFoldersStore }) => {
-  const {
-    storeOriginalFiles,
-    confirmDelete,
-    forcesave,
+export default inject(
+  ({ settingsStore, userStore, filesSettingsStore, treeFoldersStore }) => {
+    const { organizationName } = settingsStore;
+    const {
+      storeOriginalFiles,
+      confirmDelete,
+      forcesave,
 
-    setStoreOriginal,
+      setStoreOriginal,
 
-    setConfirmDelete,
+      setConfirmDelete,
 
-    setForceSave,
+      setForceSave,
 
-    favoritesSection,
-    recentSection,
-    setFavoritesSetting,
-    setRecentSetting,
+      favoritesSection,
+      recentSection,
+      setFavoritesSetting,
+      setRecentSetting,
 
-    keepNewFileName,
-    setKeepNewFileName,
+      keepNewFileName,
+      setKeepNewFileName,
 
-    setThumbnails1280x720,
-    thumbnails1280x720,
+      setThumbnails1280x720,
+      thumbnails1280x720,
 
-    openEditorInSameTab,
-    setOpenEditorInSameTab,
-  } = filesSettingsStore;
+      openEditorInSameTab,
+      setOpenEditorInSameTab,
+    } = filesSettingsStore;
 
-  const { myFolderId, commonFolderId } = treeFoldersStore;
+    const { myFolderId, commonFolderId } = treeFoldersStore;
 
-  return {
-    storeOriginalFiles,
-    confirmDelete,
-    forceSave: forcesave,
+    return {
+      storeOriginalFiles,
+      confirmDelete,
+      forceSave: forcesave,
 
-    myFolderId,
-    commonFolderId,
-    isVisitor: userStore.user.isVisitor,
-    favoritesSection,
-    recentSection,
+      myFolderId,
+      commonFolderId,
+      isVisitor: userStore.user.isVisitor,
+      favoritesSection,
+      recentSection,
 
-    setStoreOriginal,
+      setStoreOriginal,
 
-    setConfirmDelete,
+      setConfirmDelete,
 
-    setForceSave,
+      setForceSave,
 
-    setFavoritesSetting,
-    setRecentSetting,
-    myFolderId,
-    commonFolderId,
+      setFavoritesSetting,
+      setRecentSetting,
+      myFolderId,
+      commonFolderId,
 
-    keepNewFileName,
-    setKeepNewFileName,
+      keepNewFileName,
+      setKeepNewFileName,
 
-    setThumbnails1280x720,
-    thumbnails1280x720,
+      setThumbnails1280x720,
+      thumbnails1280x720,
 
-    openEditorInSameTab,
-    setOpenEditorInSameTab,
-  };
-})(observer(FileManagement));
+      openEditorInSameTab,
+      setOpenEditorInSameTab,
+      organizationName,
+    };
+  },
+)(observer(FileManagement));

@@ -39,8 +39,9 @@ export const SDKContainer = styled(Box)`
     width: 100%;
   `}
 
-  .tabs_body {
+  .tabs-body {
     height: calc(100lvh - 260px);
+    display: block;
   }
 
   .linkHelp {

@@ -30,6 +30,7 @@ import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
 import PeopleIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 import SelectFileStep from "../../components/SelectFileStep";
 import SelectUsersStep from "../../components/SelectUsersStep";
 import SelectUsersTypeStep from "../../components/SelectUsersTypeStep";
@@ -39,7 +40,11 @@ import ImportCompleteStep from "../../components/ImportCompleteStep";
 
 import { TFunciton } from "../../types";
 
-export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
+export const getStepsData = (
+  t: TFunciton,
+  isTypeSelectEmpty: boolean,
+  organizationName: string,
+) => {
   return [
     {
       title: t("Common:SelectFiles"),
@@ -55,7 +60,10 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
     },
     {
       title: t("Settings:SelectUsers"),
-      description: t("Settings:SelectUsersDescriptionGoogle"),
+      description: t("Settings:SelectUsersDescriptionGoogle", {
+        productName: PRODUCT_NAME,
+        organizationName,
+      }),
       component: <SelectUsersStep t={t} canDisable shouldSetUsers />,
     },
     {
@@ -63,16 +71,25 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
       description: isTypeSelectEmpty ? (
         <>
           <b>{t("Settings:RolesAreSet")}</b>
-          <div>{t("Settings:UsersAreRegistered")}</div>
+          <div>
+            {t("Settings:UsersAreRegistered", {
+              productName: PRODUCT_NAME,
+            })}
+          </div>
         </>
       ) : (
         <>
-          <Trans t={t} ns="Settings" i18nKey="SelectUserTypesDescription">
-            Select DocSpace roles for the imported users: <b>DocSpace admin</b>,{" "}
-            <b>Room admin</b>
-            or <b>Power user</b>. By default, Power user role is selected for
-            each user. You can manage the roles after the import.
-          </Trans>
+          <Trans
+            t={t}
+            ns="Settings"
+            i18nKey="SelectUserTypesDescription"
+            values={{
+              productName: PRODUCT_NAME,
+            }}
+            components={{
+              1: <b />,
+            }}
+          />
           <HelpButton
             place="bottom"
             offsetRight={0}
@@ -82,6 +99,7 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
                   i18nKey="TypesAndPrivileges"
                   ns="Settings"
                   t={t}
+                  values={{ productName: PRODUCT_NAME }}
                   components={{
                     1: <b />,
                     2: <b />,
@@ -104,7 +122,9 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
     },
     {
       title: t("Settings:DataImport"),
-      description: t("Settings:ImportSectionDescription"),
+      description: t("Settings:ImportSectionDescription", {
+        productName: PRODUCT_NAME,
+      }),
       component: (
         <ImportStep
           t={t}
@@ -132,7 +152,10 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
     },
     {
       title: t("Settings:DataImportComplete"),
-      description: t("Settings:ImportCompleteDescriptionGoogle"),
+      description: t("Settings:ImportCompleteDescriptionGoogle", {
+        productName: PRODUCT_NAME,
+        organizationName,
+      }),
       component: <ImportCompleteStep t={t} />,
     },
   ];

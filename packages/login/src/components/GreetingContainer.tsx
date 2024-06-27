@@ -30,18 +30,22 @@
 import React, { useLayoutEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useSearchParams } from "next/navigation";
+import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
+import { getLogoUrl } from "@docspace/shared/utils/common";
 
 import { GreetingContainersProps } from "@/types";
 import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";
 import { getInvitationLinkData } from "@/utils";
 
-const GreetingContainer = ({
-  logoUrl,
-  greetingSettings,
-}: GreetingContainersProps) => {
+const GreetingContainer = ({ greetingSettings }: GreetingContainersProps) => {
   const { t } = useTranslation(["Login"]);
+  const theme = useTheme();
+
+  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
 
   const searchParams = useSearchParams();
 
@@ -95,6 +99,7 @@ const GreetingContainer = ({
               values={{
                 firstName,
                 lastName,
+                productName: PRODUCT_NAME,
                 ...(roomName
                   ? { roomName }
                   : { spaceAddress: window.location.host }),

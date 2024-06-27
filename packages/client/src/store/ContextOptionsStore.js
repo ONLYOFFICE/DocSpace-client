@@ -57,7 +57,7 @@ import MuteReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
 import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
-import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.reat.svg?url";
+import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import MailReactSvgUrl from "PUBLIC_DIR/images/mail.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import PluginActionsSvgUrl from "PUBLIC_DIR/images/plugin.actions.react.svg?url";
@@ -80,6 +80,7 @@ import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
+import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 
 import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 
@@ -109,6 +110,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { getFileLink, getFolderLink } from "@docspace/shared/api/files";
 import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -440,6 +442,29 @@ class ContextOptionsStore {
     copy(url);
 
     toastr.success(t("Translations:LinkCopySuccess"));
+  };
+
+  onOpenEmbeddingSettings = async (item) => {
+    const { shared, navigationPath, getSelectedFolder } =
+      this.selectedFolderStore;
+    const { setLinkParams, setEmbeddingPanelData } = this.dialogsStore;
+
+    const sharedItem = shared
+      ? getSelectedFolder()
+      : navigationPath.find((r) => r.shared);
+
+    if (!sharedItem) return;
+
+    const isPublicRoomType = sharedItem.roomType === RoomsType.PublicRoom;
+    const isFormRoom = sharedItem.roomType === RoomsType.FormRoom;
+
+    setLinkParams({
+      roomId: sharedItem?.id,
+      isPublic: isPublicRoomType,
+      isFormRoom,
+    });
+
+    setEmbeddingPanelData({ visible: true, fileId: item.id });
   };
 
   onCreateAndCopySharedLink = async (item, t) => {
@@ -947,7 +972,7 @@ class ContextOptionsStore {
 
     navigate(
       combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         config.homepage,
         `${url}?${filterUrlParams}`,
       ),
@@ -1231,16 +1256,17 @@ class ContextOptionsStore {
     let withOpen = item.id !== this.selectedFolderStore.id;
     const isPublicRoomType =
       item.roomType === RoomsType.PublicRoom ||
+      item.roomType === RoomsType.FormRoom ||
       item.roomType === RoomsType.CustomRoom;
 
+    const { shared, navigationPath } = this.selectedFolderStore;
+
     if (item.isRoom && withOpen) {
-      withOpen =
-        this.selectedFolderStore.navigationPath.findIndex(
-          (f) => f.id === item.id,
-        ) === -1;
+      withOpen = navigationPath.findIndex((f) => f.id === item.id) === -1;
     }
 
     const isArchive = item.rootFolderType === FolderType.Archive;
+    const isShared = shared || navigationPath.findIndex((r) => r.shared) > -1;
 
     const optionsModel = [
       {
@@ -1398,7 +1424,8 @@ class ContextOptionsStore {
         onClick: () => this.onCopyLink(item, t),
         disabled:
           (isPublicRoomType && item.canCopyPublicLink && !isArchive) ||
-          this.publicRoomStore.isPublicRoom,
+          this.publicRoomStore.isPublicRoom ||
+          !item.security.CopyLink,
       },
       {
         id: "option_copy-external-link",
@@ -1434,7 +1461,7 @@ class ContextOptionsStore {
       {
         id: "option_link-for-portal-users",
         key: "link-for-portal-users",
-        label: t("LinkForPortalUsers"),
+        label: t("LinkForPortalUsers", { productName: PRODUCT_NAME }),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onClickLinkForPortal(item, t),
         disabled: false,
@@ -1446,6 +1473,14 @@ class ContextOptionsStore {
       //   icon: MailReactSvgUrl,
       //   disabled: emailSendIsDisabled,
       // },
+      {
+        id: "option_embedding-setting",
+        key: "embedding-settings",
+        label: t("Files:Embed"),
+        icon: CodeReactSvgUrl,
+        onClick: () => this.onOpenEmbeddingSettings(item),
+        disabled: !item.security?.Embed,
+      },
       {
         id: "option_show-info",
         key: "show-info",
@@ -2013,39 +2048,48 @@ class ContextOptionsStore {
   };
 
   getContextOptionsPlusFormRoom = (t, actions) => {
-    const {
-      createTemplateForm,
-      createTemplateSelectFormFile,
-      templateOformsGallery,
-      createNewFolder,
-      createNewDoc,
-      createNewPresentation,
-      createNewSpreadsheet,
-      uploadFiles,
-      uploadFolder,
-    } = actions;
+    // const {
+    //   // createTemplateForm,
+    //   // createTemplateSelectFormFile,
+    //   // templateOformsGallery,
+    //   // createNewFolder,
+    //   // createNewDoc,
+    //   // createNewPresentation,
+    //   // createNewSpreadsheet,
+    //   // uploadFiles,
+    //   // uploadFolder,
+    // } = actions;
 
-    const templatePDFForm = {
-      id: "personal_template-PDF-form",
-      className: "main-button_drop-down",
-      icon: FormReactSvgUrl,
-      label: t("Common:CreatePDFForm"),
-      key: "new-form",
-      items: [createTemplateForm, createTemplateSelectFormFile],
+    // const templatePDFForm = {
+    //   id: "personal_template-PDF-form",
+    //   className: "main-button_drop-down",
+    //   icon: FormReactSvgUrl,
+    //   label: t("Common:CreatePDFForm"),
+    //   key: "new-form",
+    //   items: [createTemplateForm, createTemplateSelectFormFile],
+    // };
+
+    const showSelectorFormRoomDocx = {
+      id: "actions_form-room_template_from-file",
+      className: "main-button_drop-down_sub",
+      icon: FormGalleryReactSvgUrl,
+      label: t("Common:ChooseFromTemplates"),
+      onClick: () => this.onShowGallery(),
+      key: "form-file",
     };
 
     const uploadReadyPDFFrom = {
       id: "personal_upload-ready-Pdf-from",
       className: "main-button_drop-down_sub",
       icon: ActionsUploadReactSvgUrl,
-      label: t("Common:UploadReadyPDFForm"),
+      label: t("Common:UploadPDFForm"),
       key: "personal_upload-ready-Pdf-from",
       items: [
         {
           id: "personal_upload-from-docspace",
           className: "main-button_drop-down",
           icon: ActionsUploadReactSvgUrl,
-          label: t("Common:FromDocspace"),
+          label: t("Common:FromPortal", { productName: PRODUCT_NAME }),
           key: "personal_upload-from-docspace",
           onClick: () =>
             this.onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.PDF),
@@ -2061,49 +2105,61 @@ class ContextOptionsStore {
       ],
     };
 
-    const showUploadFolder = !(isMobile || isTablet);
-    const moreActions = {
-      id: "personal_more-form",
+    const createNewFolder = {
+      id: "actions_new-folder",
       className: "main-button_drop-down",
-      icon: PluginMoreReactSvgUrl,
-      label: t("Common:More"),
-      disabled: false,
-      key: "more-form",
-      items: [
-        createNewFolder,
-        {
-          isSeparator: true,
-          key: "personal_more-form__separator-1",
-        },
-        createNewDoc,
-        createNewPresentation,
-        createNewSpreadsheet,
-        {
-          isSeparator: true,
-          key: "personal_more-form__separator-2",
-        },
-        uploadFiles,
-        showUploadFolder ? uploadFolder : null,
-      ],
+      icon: CatalogFolderReactSvgUrl,
+      label: t("Files:CreateNewFolder"),
+      onClick: () => this.onCreate(),
+      key: "new-folder",
     };
 
+    // const showUploadFolder = !(isMobile || isTablet);
+
+    // const moreActions = {
+    //   id: "personal_more-form",
+    //   className: "main-button_drop-down",
+    //   icon: PluginMoreReactSvgUrl,
+    //   label: t("Common:More"),
+    //   disabled: false,
+    //   key: "more-form",
+    //   items: [
+    //     createNewFolder,
+    //     {
+    //       isSeparator: true,
+    //       key: "personal_more-form__separator-1",
+    //     },
+    //     createNewDoc,
+    //     createNewPresentation,
+    //     createNewSpreadsheet,
+    //     {
+    //       isSeparator: true,
+    //       key: "personal_more-form__separator-2",
+    //     },
+    //     uploadFiles,
+    //     showUploadFolder ? uploadFolder : null,
+    //   ],
+    // };
+
     return [
-      templatePDFForm,
-      templateOformsGallery,
-      {
-        isSeparator: true,
-        key: "separator",
-      },
       uploadReadyPDFFrom,
+      showSelectorFormRoomDocx,
+      // templateOformsGallery,
+      // templatePDFForm,
+      // {
+      //   isSeparator: true,
+      //   key: "separator",
+      // },
       {
         isSeparator: true,
         key: "separator-1",
       },
-      moreActions,
+      createNewFolder,
+      // moreActions,
     ];
   };
 
-  getFolderModel = (t) => {
+  getFolderModel = (t, isSectionMenu) => {
     const { isLoading } = this.clientLoadingStore;
     const { security, roomType, parentRoomType, isFolder } =
       this.selectedFolderStore;
@@ -2134,7 +2190,8 @@ class ContextOptionsStore {
 
     const someDialogIsOpen = checkDialogsOpen();
 
-    if (!canCreate || isMobile || someDialogIsOpen) return null;
+    if (!canCreate || (isSectionMenu && (isMobile || someDialogIsOpen)))
+      return null;
 
     const isOwner = this.userStore.user?.isOwner;
     const isRoomAdmin = this.userStore.user?.isRoomAdmin;
@@ -2150,7 +2207,7 @@ class ContextOptionsStore {
         id: "accounts-add_administrator",
         className: "main-button_drop-down",
         icon: PersonAdminReactSvgUrl,
-        label: t("Common:DocspaceAdmin"),
+        label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
         onClick: this.onInvite,
         "data-type": EmployeeType.Admin,
         key: "administrator",
@@ -2337,7 +2394,7 @@ class ContextOptionsStore {
       ? [
           {
             key: "new-room",
-            label: t("NewRoom"),
+            label: t("Common:NewRoom"),
             onClick: this.onCreateRoom,
             icon: CatalogRoomsReactSvgUrl,
           },

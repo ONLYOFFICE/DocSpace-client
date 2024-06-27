@@ -271,7 +271,7 @@ const useEditorEvents = ({
     createFile(fileInfo.folderId, defaultFileName ?? "")
       ?.then((newFile) => {
         const newUrl = combineUrl(
-          window.DocSpaceConfig?.proxy?.url,
+          window.ClientConfig?.proxy?.url,
           `/doceditor?fileId=${encodeURIComponent(newFile.id)}`,
         );
         window.open(newUrl, openOnNewPage ? "_blank" : "_self");
@@ -588,24 +588,24 @@ const useEditorEvents = ({
     docEditor?.setActionLink?.(linkFormation);
   }, []);
 
-  const onRequestStartFilling = React.useCallback(
-    (event: object) => {
-      console.log("onRequestStartFilling", { event });
+  // const onRequestStartFilling = React.useCallback(
+  //   (event: object) => {
+  //     console.log("onRequestStartFilling", { event });
 
-      if (!fileInfo?.id) return;
+  //     if (!fileInfo?.id) return;
 
-      docEditor?.startFilling?.();
-      startFilling(fileInfo?.id);
-    },
-    [fileInfo?.id],
-  );
+  //     docEditor?.startFilling?.();
+  //     startFilling(fileInfo?.id);
+  //   },
+  //   [fileInfo?.id],
+  // );
 
   const generateLink = (actionData: {}) => {
     return encodeURIComponent(JSON.stringify(actionData));
   };
 
   React.useEffect(() => {
-    // console.log("render docspace config", { ...window.DocSpaceConfig });
+    // console.log("render docspace config", { ...window.ClientConfig });
     if (IS_DESKTOP_EDITOR || (typeof window !== "undefined" && !openOnNewPage))
       return;
 
@@ -615,7 +615,7 @@ const useEditorEvents = ({
     const url = new URL(
       combineUrl(
         window.location.origin,
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         "/filehandler.ashx",
       ),
     );
@@ -645,7 +645,7 @@ const useEditorEvents = ({
     onDocumentStateChange,
     onMetaChange,
     onMakeActionLink,
-    onRequestStartFilling,
+    // onRequestStartFilling,
     setDocTitle,
   };
 };

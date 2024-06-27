@@ -49,7 +49,6 @@ import { PreviewBlock } from "../sub-components/PreviewBlock";
 import { loadFrame } from "../utils";
 
 import {
-  scriptUrl,
   dataDimensions,
   defaultWidthDimension,
   defaultHeightDimension,
@@ -64,6 +63,7 @@ import {
   Frame,
   Container,
 } from "./StyledPresets";
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 
 const RoomSelector = (props) => {
   const { t, setDocumentTitle, theme } = props;
@@ -79,22 +79,22 @@ const RoomSelector = (props) => {
     },
     {
       key: "room-filling-form-collaboration",
-      label: t("CreateEditRoomDialog:FormFilingRoomTitle"),
+      label: t("Common:FormFilingRoomTitle"),
       roomType: RoomsType.FormRoom,
     },
     {
       key: "room-type-collaboration",
-      label: t("CreateEditRoomDialog:CollaborationRoomTitle"),
+      label: t("Common:CollaborationRoomTitle"),
       roomType: RoomsType.EditingRoom,
     },
     {
       key: "room-type-public",
-      label: t("Files:PublicRoom"),
+      label: t("Common:PublicRoom"),
       roomType: RoomsType.PublicRoom,
     },
     {
       key: "room-type-custom",
-      label: t("CreateEditRoomDialog:CustomRoomTitle"),
+      label: t("Common:CustomRoomTitle"),
       roomType: RoomsType.CustomRoom,
     },
   ];
@@ -135,7 +135,7 @@ const RoomSelector = (props) => {
     window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
   };
 
-  const loadCurrentFrame = () => loadFrame(config, scriptUrl);
+  const loadCurrentFrame = () => loadFrame(config, SDK_SCRIPT_URL);
 
   useEffect(() => {
     loadCurrentFrame();
@@ -188,7 +188,7 @@ const RoomSelector = (props) => {
           preview={preview}
           theme={theme}
           frameId={frameId}
-          scriptUrl={scriptUrl}
+          scriptUrl={SDK_SCRIPT_URL}
           config={config}
         />
         <Controls>

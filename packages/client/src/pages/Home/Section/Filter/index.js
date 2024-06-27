@@ -55,7 +55,10 @@ import {
   RoomsProviderType,
   RoomsType,
 } from "@docspace/shared/enums";
-import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
+import {
+  PRODUCT_NAME,
+  ROOMS_PROVIDER_TYPE_NAME,
+} from "@docspace/shared/constants";
 
 import { getDefaultRoomName } from "SRC_DIR/helpers/filesUtils";
 
@@ -374,16 +377,7 @@ const SectionFilterContent = ({
           ? insideGroupFilter.clone()
           : accountsFilter.clone();
 
-        if (status === 3) {
-          newFilter.employeeStatus = EmployeeStatus.Disabled;
-          newFilter.activationStatus = null;
-        } else if (status === 2) {
-          newFilter.employeeStatus = EmployeeStatus.Active;
-          newFilter.activationStatus = status;
-        } else {
-          newFilter.employeeStatus = null;
-          newFilter.activationStatus = status;
-        }
+        newFilter.employeeStatus = status;
 
         if (quota) {
           newFilter.quotaFilter = quota;
@@ -784,18 +778,18 @@ const SectionFilterContent = ({
     if (isAccountsPage) {
       if (isPeopleAccounts || isInsideGroup) {
         const filter = isInsideGroup ? insideGroupFilter : accountsFilter;
-        if (filter.employeeStatus || filter.activationStatus) {
-          const key = filter.employeeStatus === 2 ? 3 : filter.activationStatus;
+        if (filter.employeeStatus) {
           let label = "";
+          const key = filter.employeeStatus;
 
           switch (key) {
-            case 1:
+            case EmployeeStatus.Active:
               label = t("Common:Active");
               break;
-            case 2:
-              label = t("PeopleTranslations:PendingTitle");
+            case EmployeeStatus.Pending:
+              label = t("PeopleTranslations:PendingInviteTitle");
               break;
-            case 3:
+            case EmployeeStatus.Disabled:
               label = t("PeopleTranslations:DisabledEmployeeStatus");
               break;
           }
@@ -812,7 +806,7 @@ const SectionFilterContent = ({
 
           switch (+filter.role) {
             case EmployeeType.Admin:
-              label = t("Common:DocspaceAdmin");
+              label = t("Common:PortalAdmin", { productName: PRODUCT_NAME });
               break;
             case EmployeeType.User:
               label = t("Common:RoomAdmin");
@@ -876,7 +870,7 @@ const SectionFilterContent = ({
             AccountLoginType.SSO === filter.accountLoginType.toString()
               ? t("Common:SSO")
               : AccountLoginType.LDAP === filter.accountLoginType.toString()
-                ? t("PeopleTranslations:LDAPLbl")
+                ? t("Common:LDAP")
                 : t("PeopleTranslations:StandardLogin");
           filterValues.push({
             key: filter.accountLoginType.toString(),
@@ -1321,22 +1315,22 @@ const SectionFilterContent = ({
         },
         {
           id: "filter_status-active",
-          key: 1,
+          key: EmployeeStatus.Active,
           group: "filter-status",
           label: t("Common:Active"),
         },
         {
           id: "filter_status-pending",
-          key: 2,
+          key: EmployeeStatus.Pending,
           group: "filter-status",
-          label: t("PeopleTranslations:PendingTitle"),
+          label: t("PeopleTranslations:PendingInviteTitle"),
         },
       ];
 
       if (!isRoomAdmin)
         statusItems.push({
           id: "filter_status-disabled",
-          key: 3,
+          key: EmployeeStatus.Disabled,
           group: "filter-status",
           label: t("PeopleTranslations:DisabledEmployeeStatus"),
         });
@@ -1352,7 +1346,7 @@ const SectionFilterContent = ({
           id: "filter_type-docspace-admin",
           key: EmployeeType.Admin,
           group: "filter-type",
-          label: t("Common:DocspaceAdmin"),
+          label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
         },
         {
           id: "filter_type-room-admin",
@@ -1439,12 +1433,11 @@ const SectionFilterContent = ({
           group: "filter-login-type",
           label: t("Common:SSO"),
         },
-        //TODO: uncomment after ldap be ready
-        /*{
+        {
           key: AccountLoginType.LDAP,
           group: "filter-login-type",
-          label: t("PeopleTranslations:LDAPLbl"),
-        },*/
+          label: t("Common:LDAP"),
+        },
         {
           key: AccountLoginType.STANDART,
           group: "filter-login-type",
@@ -1588,14 +1581,14 @@ const SectionFilterContent = ({
                   id: "filter_type-filling-form",
                   key: RoomsType.FillingFormsRoom,
                   group: FilterGroups.roomFilterType,
-                  label: t("FillingFormRooms"),
+                  label: t("Common:FillingFormRooms"),
                 };
               case RoomsType.EditingRoom:
                 return {
                   id: "filter_type-collaboration",
                   key: RoomsType.EditingRoom,
                   group: FilterGroups.roomFilterType,
-                  label: t("CollaborationRooms"),
+                  label: t("Common:CollaborationRooms"),
                 };
               case RoomsType.ReviewRoom:
                 return {
@@ -1609,21 +1602,21 @@ const SectionFilterContent = ({
                   id: "filter_type-view-only",
                   key: RoomsType.ReadOnlyRoom,
                   group: FilterGroups.roomFilterType,
-                  label: t("ViewOnlyRooms"),
+                  label: t("Common:ViewOnlyRooms"),
                 };
               case RoomsType.FormRoom:
                 return {
                   id: "filter_type-form",
                   key: RoomsType.FormRoom,
                   group: FilterGroups.roomFilterType,
-                  label: t("FormRoom"),
+                  label: t("Common:FormRoom"),
                 };
               case RoomsType.PublicRoom:
                 return {
                   id: "filter_type-public",
                   key: RoomsType.PublicRoom,
                   group: FilterGroups.roomFilterType,
-                  label: t("PublicRoom"),
+                  label: t("Common:PublicRoom"),
                 };
               case RoomsType.CustomRoom:
               default:
@@ -1631,7 +1624,7 @@ const SectionFilterContent = ({
                   id: "filter_type-custom",
                   key: RoomsType.CustomRoom,
                   group: FilterGroups.roomFilterType,
-                  label: t("CustomRooms"),
+                  label: t("Common:CustomRooms"),
                 };
             }
           }),

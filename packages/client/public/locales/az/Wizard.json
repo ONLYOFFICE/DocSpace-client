@@ -1,5 +1,5 @@
 {
-  "Desc": "Lütfən, DocSpace qeydiyyat məlumatlarını qeyd edin.",
+  "Desc": "Lütfən, {{productName}} qeydiyyat məlumatlarını qeyd edin.",
   "ErrorEmail": "Etibarsız e-poçt ünvanı",
   "ErrorInitWizard": "Xidmət hal-hazırda əlçatan deyil, lütfən bir qədər sonra yenidən cəhd edin.",
   "ErrorInitWizardButton": "Yenidən cəhd edin",
@@ -11,5 +11,5 @@
   "LicenseLink": "Lisenziya razılaşmalarınız",
   "PlaceholderLicense": "Lisenziya faylınız",
   "Timezone": "Saat qurşağı:",
-  "WelcomeTitle": "DocSpace-ə xoş gəlmisiniz!"
+  "WelcomeTitle": "{{productName}}-ə xoş gəlmisiniz!"
 }

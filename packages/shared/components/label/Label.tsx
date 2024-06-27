@@ -62,7 +62,8 @@ const Label = (props: LabelProps) => {
       className={className}
       data-testid="label"
     >
-      {text} {isRequired && " *"} {children}
+      {text} {isRequired && <span style={{ color: "#c30" }}> *</span>}{" "}
+      {children}
     </Text>
   );
 };

@@ -33,6 +33,7 @@ import RoomsIcon from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
 import PortfolioIcon from "PUBLIC_DIR/images/catalog.portfolio.react.svg?url";
 import ProjectsIcon from "PUBLIC_DIR/images/catalog.projects.react.svg?url";
 import DocumentsIcon from "PUBLIC_DIR/images/catalog.documents.react.svg?url";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 import ImportSection from "../sub-components/ImportSection";
 import { ImportStepProps, InjectedImportStepProps } from "../types";
 
@@ -85,7 +86,7 @@ const ImportStep = (props: ImportStepProps) => {
         }}
         importSection={{
           sectionName: t("Common:Accounts"),
-          workspace: "DocSpace",
+          workspace: PRODUCT_NAME,
           sectionIcon: AccountsIcon,
         }}
         isDisabled
@@ -102,7 +103,7 @@ const ImportStep = (props: ImportStepProps) => {
         }}
         importSection={{
           sectionName: t("Common:Accounts"),
-          workspace: "DocSpace",
+          workspace: PRODUCT_NAME,
           sectionIcon: AccountsIcon,
         }}
         isDisabled={false}
@@ -120,7 +121,7 @@ const ImportStep = (props: ImportStepProps) => {
         }}
         importSection={{
           sectionName: t("Common:Documents"),
-          workspace: "DocSpace",
+          workspace: PRODUCT_NAME,
           sectionIcon: DocumentsIcon,
         }}
         isDisabled={false}
@@ -138,7 +139,7 @@ const ImportStep = (props: ImportStepProps) => {
         }}
         importSection={{
           sectionName: t("Common:Documents"),
-          workspace: "DocSpace",
+          workspace: PRODUCT_NAME,
           sectionIcon: DocumentsIcon,
         }}
         isDisabled={false}
@@ -155,7 +156,7 @@ const ImportStep = (props: ImportStepProps) => {
         }}
         importSection={{
           sectionName: t("Common:Rooms"),
-          workspace: "DocSpace",
+          workspace: PRODUCT_NAME,
           sectionIcon: RoomsIcon,
         }}
         isDisabled={false}
@@ -175,7 +176,7 @@ const ImportStep = (props: ImportStepProps) => {
           }}
           importSection={{
             sectionName: t("Common:Rooms"),
-            workspace: "DocSpace",
+            workspace: PRODUCT_NAME,
             sectionIcon: RoomsIcon,
           }}
           isDisabled={false}
@@ -195,7 +196,7 @@ const ImportStep = (props: ImportStepProps) => {
           }}
           importSection={{
             sectionName: t("Common:Rooms"),
-            workspace: "DocSpace",
+            workspace: PRODUCT_NAME,
             sectionIcon: RoomsIcon,
           }}
           isDisabled={false}

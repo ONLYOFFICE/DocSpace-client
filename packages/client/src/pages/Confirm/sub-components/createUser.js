@@ -54,12 +54,13 @@ import { login } from "@docspace/shared/utils/loginUtils";
 import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
+  PRODUCT_NAME,
   PROVIDERS_DATA,
 } from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordErrorMessage";
-import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import withLoader from "../withLoader";
 
 import { StyledPage } from "./StyledConfirm";
@@ -217,7 +218,7 @@ const CreateUserForm = (props) => {
       });
 
       window.location.href = combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         "/login",
         `?loginData=${loginData}`,
       );
@@ -486,7 +487,7 @@ const CreateUserForm = (props) => {
 
       <StyledCreateUserContent>
         <GreetingContainer>
-          <DocspaceLogo className="docspace-logo" />
+          <PortalLogo className="portal-logo" />
           {linkData.type === "LinkInvite" && (
             <div className="tooltip">
               <Text fontSize="16px">
@@ -516,6 +517,7 @@ const CreateUserForm = (props) => {
                     values={{
                       firstName: user.firstName,
                       lastName: user.lastName,
+                      productName: PRODUCT_NAME,
                       ...(roomName
                         ? { roomName }
                         : { spaceAddress: window.location.host }),

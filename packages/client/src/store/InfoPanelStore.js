@@ -32,7 +32,10 @@ import { getUserRole } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   EmployeeActivationStatus,
+  Events,
+  FileType,
   FolderType,
+  RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
@@ -43,8 +46,14 @@ import {
   getExternalLinks,
   editExternalLink,
   addExternalLink,
+  checkIsPDFForm,
 } from "@docspace/shared/api/files";
 import isEqual from "lodash/isEqual";
+import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
+import {
+  addLinksToHistory,
+  parseHistory,
+} from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
 
 const observedKeys = [
   "id",
@@ -393,7 +402,7 @@ class InfoPanelStore {
 
   openAccountsWithSelectedUser = async (user, navigate) => {
     const path = [
-      window.DocSpaceConfig?.proxy?.url,
+      window.ClientConfig?.proxy?.url,
       config.homepage,
       "/accounts/people",
     ];
@@ -412,12 +421,11 @@ class InfoPanelStore {
   };
 
   fetchUser = async (userId) => {
-    const { getStatusType, getUserContextOptions } =
-      this.peopleStore.usersStore;
+    const { getUserContextOptions } = this.peopleStore.usersStore;
 
     const fetchedUser = await getUserById(userId);
     fetchedUser.role = getUserRole(fetchedUser);
-    fetchedUser.statusType = getStatusType(fetchedUser);
+    fetchedUser.statusType = getUserStatus(fetchedUser);
     fetchedUser.options = getUserContextOptions(
       false,
       fetchedUser.isOwner,
@@ -711,12 +719,73 @@ class InfoPanelStore {
     this.setIsMembersPanelUpdating(false);
   };
 
+  fetchHistory = async (abortControllerSignal = null) => {
+    const { getHistory, getRoomLinks } = this.filesStore;
+    const { setExternalLinks } = this.publicRoomStore;
+
+    let selectionType = "file";
+    if (this.infoPanelSelection.isRoom || this.infoPanelSelection.isFolder)
+      selectionType = "folder";
+
+    const withLinks =
+      this.infoPanelSelection.isRoom &&
+      [RoomsType.FormRoom, RoomsType.CustomRoom, RoomsType.PublicRoom].includes(
+        this.infoPanelSelection.roomType,
+      );
+
+    return getHistory(
+      selectionType,
+      this.infoPanelSelection.id,
+      abortControllerSignal,
+      this.infoPanelSelection?.requestToken,
+    )
+      .then(async (data) => {
+        if (withLinks) {
+          const links = await getRoomLinks(this.infoPanelSelection.id);
+          const historyWithLinks = addLinksToHistory(data, links);
+          setExternalLinks(links);
+          return historyWithLinks;
+        }
+        return data;
+      })
+      .then((data) => {
+        const parsedSelectionHistory = parseHistory(data);
+        this.setSelectionHistory(parsedSelectionHistory);
+        return parsedSelectionHistory;
+      })
+      .catch((err) => {
+        if (err.message !== "canceled") console.error(err);
+      });
+  };
+
   openShareTab = () => {
     this.setView("info_share");
     this.isVisible = true;
   };
 
   getPrimaryFileLink = async (fileId) => {
+    const file = this.filesStore.files.find((item) => item.id === fileId);
+
+    if (file && !file.shared && file.fileType === FileType.PDF) {
+      try {
+        this.filesStore.addActiveItems([file.id], null);
+        const result = await checkIsPDFForm(fileId);
+
+        if (result) {
+          const event = new CustomEvent(Events.Share_PDF_Form, {
+            detail: { file },
+          });
+
+          window.dispatchEvent(event);
+          return;
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.filesStore.removeActiveItem(file);
+      }
+    }
+
     const { getFileInfo } = this.filesStore;
 
     const res = await getPrimaryLink(fileId);

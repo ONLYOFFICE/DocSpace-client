@@ -102,6 +102,8 @@ class StorageManagement {
       );
     }
 
+    this.needRecalculating = false;
+
     try {
       if (isInit) this.needRecalculating = await checkRecalculateQuota();
 
@@ -123,12 +125,16 @@ class StorageManagement {
         );
 
       if (!this.quotaSettings.lastRecalculateDate && isInit) {
+        this.setIsRecalculating(true);
         await recalculateQuota();
         this.getIntervalCheckRecalculate();
         return;
       }
 
-      if (this.needRecalculating) this.getIntervalCheckRecalculate();
+      if (this.needRecalculating) {
+        this.setIsRecalculating(true);
+        this.getIntervalCheckRecalculate();
+      }
     } catch (e) {
       toastr.error(e);
     }
@@ -180,6 +186,9 @@ class StorageManagement {
   };
   getIntervalCheckRecalculate = () => {
     let isWaitRequest = false;
+
+    if (this.intervalId) return;
+
     this.intervalId = setInterval(async () => {
       try {
         if (isWaitRequest) {
@@ -206,6 +215,8 @@ class StorageManagement {
 
         isWaitRequest = false;
       } catch (e) {
+        toastr.error(e);
+
         this.clearIntervalCheckRecalculate();
 
         this.setIsRecalculating(false);

@@ -28,7 +28,10 @@ import React from "react";
 
 import { Text } from "../text";
 
-import StyledProgressBar from "./ProgressBar.styled";
+import {
+  StyledProgressBarContainer,
+  StyledProgressBar,
+} from "./ProgressBar.styled";
 import { ProgressBarProps } from "./ProgressBar.types";
 
 const ProgressBar = ({
@@ -36,13 +39,15 @@ const ProgressBar = ({
   label,
   isInfiniteProgress,
   className,
+  status,
+  error,
   ...rest
 }: ProgressBarProps) => {
   const progressPercent = percent > 100 ? 100 : percent;
 
   // console.log("ProgressBar render");
   return (
-    <>
+    <StyledProgressBarContainer>
       <Text
         className="progress-bar_full-text"
         fontSize="12px"
@@ -64,7 +69,21 @@ const ProgressBar = ({
           <div className="progress-bar_percent" />
         )}
       </StyledProgressBar>
-    </>
+      {(status || error) && (
+        <Text
+          className={
+            error ? "progress-bar_status-error" : "progress-bar_status-text"
+          }
+          fontSize="12px"
+          fontWeight="400"
+          lineHeight="16px"
+          as="p"
+          title={error || status}
+        >
+          {error || status}
+        </Text>
+      )}
+    </StyledProgressBarContainer>
   );
 };
 

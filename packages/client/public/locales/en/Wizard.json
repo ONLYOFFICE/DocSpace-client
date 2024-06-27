@@ -1,5 +1,5 @@
 {
-  "Desc": "Please set up the DocSpace registration data.",
+  "Desc": "Please set up the {{productName}} registration data.",
   "ErrorEmail": "Invalid email address",
   "ErrorInitWizard": "The service is currently unavailable, please try again later.",
   "ErrorInitWizardButton": "Try again",
@@ -11,5 +11,5 @@
   "LicenseLink": "License agreements",
   "PlaceholderLicense": "Your license file",
   "Timezone": "Timezone",
-  "WelcomeTitle": "Welcome to your DocSpace!"
+  "WelcomeTitle": "Welcome to your {{productName}}!"
 }

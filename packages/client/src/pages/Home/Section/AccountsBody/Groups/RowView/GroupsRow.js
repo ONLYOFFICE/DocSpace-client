@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router-dom";
 import * as Styled from "./index.styled";
 import { Link } from "@docspace/shared/components/link";
 import { withTranslation } from "react-i18next";
@@ -34,7 +33,7 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import React from "react";
+import Badges from "../../Badges";
 
 const GroupsRow = ({
   t,
@@ -132,6 +131,8 @@ const GroupsRow = ({
             >
               {item.name}
             </Link>
+
+            <Badges isLDAP={item.isLDAP} />
 
             <div></div>
 

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Trans } from "react-i18next";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
@@ -40,7 +41,11 @@ import ImportCompleteStep from "../../components/ImportCompleteStep";
 
 import { TFunciton } from "../../types";
 
-export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
+export const getStepsData = (
+  t: TFunciton,
+  isTypeSelectEmpty: boolean,
+  organizationName: string,
+) => {
   return [
     {
       title: t("Common:SelectFile"),
@@ -56,14 +61,20 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
     },
     {
       title: t("Settings:SelectUsersWithEmail"),
-      description: t("Settings:SelectUsersDescriptionNextcloud"),
+      description: t("Settings:SelectUsersDescriptionNextcloud", {
+        productName: PRODUCT_NAME,
+        organizationName,
+      }),
       component: (
         <SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />
       ),
     },
     {
       title: t("Settings:AddEmails"),
-      description: t("Settings:AddEmailsDescription"),
+      description: t("Settings:AddEmailsDescription", {
+        productName: PRODUCT_NAME,
+        organizationName,
+      }),
       component: <AddEmailsStep t={t} />,
     },
     {
@@ -75,12 +86,18 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
         </>
       ) : (
         <>
-          <Trans t={t} ns="Settings" i18nKey="SelectUserTypesDescription">
-            Select DocSpace roles for the imported users: <b>DocSpace admin</b>,{" "}
-            <b>Room admin</b>
-            or <b>Power user</b>. By default, Power user role is selected for
-            each user. You can manage the roles after the import.
-          </Trans>
+          <Trans
+            t={t}
+            ns="Settings"
+            i18nKey="SelectUserTypesDescription"
+            values={{
+              productName: PRODUCT_NAME,
+            }}
+            components={{
+              1: <b />,
+            }}
+          />
+
           <HelpButton
             place="bottom"
             offsetRight={0}
@@ -90,6 +107,7 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
                   i18nKey="TypesAndPrivileges"
                   ns="Settings"
                   t={t}
+                  values={{ productName: PRODUCT_NAME }}
                   components={{
                     1: <b />,
                     2: <b />,
@@ -112,7 +130,9 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
     },
     {
       title: t("Settings:DataImport"),
-      description: t("Settings:ImportSectionDescription"),
+      description: t("Settings:ImportSectionDescription", {
+        productName: PRODUCT_NAME,
+      }),
       component: (
         <ImportStep
           t={t}
@@ -140,7 +160,10 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
     },
     {
       title: t("Settings:DataImportComplete"),
-      description: t("Settings:ImportCompleteDescriptionNextcloud"),
+      description: t("Settings:ImportCompleteDescriptionNextcloud", {
+        productName: PRODUCT_NAME,
+        organizationName,
+      }),
       component: <ImportCompleteStep t={t} />,
     },
   ];

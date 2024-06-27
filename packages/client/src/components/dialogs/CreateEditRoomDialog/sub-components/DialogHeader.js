@@ -32,7 +32,13 @@ import withLoader from "@docspace/client/src/HOCs/withLoader";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import CreateEditRoomDilogHeaderLoader from "@docspace/shared/skeletons/create-edit-room/DilogHeader";
 
-const DialogHeader = ({ t, isEdit, isChooseRoomType, onArrowClick }) => {
+const DialogHeader = ({
+  t,
+  isEdit,
+  isChooseRoomType,
+  onArrowClick,
+  disabledIcon,
+}) => {
   return (
     <>
       {isEdit ? (
@@ -41,12 +47,14 @@ const DialogHeader = ({ t, isEdit, isChooseRoomType, onArrowClick }) => {
         <span>{t("ChooseRoomType")}</span>
       ) : (
         <div className="header-with-button">
-          <IconButton
-            size={17}
-            iconName={ArrowPathReactSvgUrl}
-            className="sharing_panel-arrow"
-            onClick={onArrowClick}
-          />
+          {!disabledIcon && (
+            <IconButton
+              size={17}
+              iconName={ArrowPathReactSvgUrl}
+              className="sharing_panel-arrow"
+              onClick={onArrowClick}
+            />
+          )}
           <div>{t("Files:CreateRoom")}</div>
         </div>
       )}

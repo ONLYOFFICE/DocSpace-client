@@ -36,6 +36,7 @@ import {
   RoomsProviderType,
   ShareAccessRights,
   Events,
+  FilterKeys,
 } from "@docspace/shared/enums";
 
 import { RoomsTypes } from "@docspace/shared/utils";
@@ -50,6 +51,7 @@ import { getDaysRemaining } from "@docspace/shared/utils/common";
 import {
   MEDIA_VIEW_URL,
   PDF_FORM_DIALOG_KEY,
+  ROOMS_PROVIDER_TYPE_NAME,
 } from "@docspace/shared/constants";
 
 import {
@@ -65,6 +67,7 @@ import { CategoryType } from "SRC_DIR/helpers/constants";
 import debounce from "lodash.debounce";
 import clone from "lodash/clone";
 import Queue from "queue-promise";
+import { parseHistory } from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
@@ -270,6 +273,19 @@ class FilesStore {
       }
 
       this.treeFoldersStore.updateTreeFoldersItem(opt);
+    });
+
+    socketHelper.on("s:update-history", ({ id, type }) => {
+      const { infoPanelSelection, fetchHistory } = this.infoPanelStore;
+
+      let infoPanelSelectionType = "file";
+      if (infoPanelSelection?.isRoom || infoPanelSelection?.isFolder)
+        infoPanelSelectionType = "folder";
+
+      if (id === infoPanelSelection?.id && type === infoPanelSelectionType) {
+        console.log("[WS] s:update-history", id);
+        fetchHistory();
+      }
     });
 
     socketHelper.on("refresh-folder", (id) => {
@@ -759,6 +775,13 @@ class FilesStore {
       this.selection[index].fileStatus = status;
       this.selection[index].isEditing = isEditing;
     }
+  };
+
+  removeActiveItem = (file) => {
+    console.log(this.activeFiles);
+
+    this.activeFiles =
+      this.activeFiles?.filter((item) => item.id !== file.id) ?? [];
   };
 
   addActiveItems = (files, folders, destFolderId) => {
@@ -1334,7 +1357,7 @@ class FilesStore {
 
     const currentUrl = window.location.href.replace(window.location.origin, "");
     const newUrl = combineUrl(
-      window.DocSpaceConfig?.proxy?.url,
+      window.ClientConfig?.proxy?.url,
       config.homepage,
       pathname,
     );
@@ -1388,6 +1411,13 @@ class FilesStore {
     return res;
   };
 
+  abortAllFetch = () => {
+    this.filesController.abort();
+    this.roomsController.abort();
+    this.filesController = new AbortController();
+    this.roomsController = new AbortController();
+  };
+
   fetchFiles = (
     folderId,
     filter,
@@ -1396,9 +1426,9 @@ class FilesStore {
     clearSelection = true,
   ) => {
     const { setSelectedNode } = this.treeFoldersStore;
+
     if (this.clientLoadingStore.isLoading) {
-      this.roomsController.abort();
-      this.roomsController = new AbortController();
+      this.abortAllFetch();
     }
 
     const filterData = filter ? filter.clone() : FilesFilter.getDefault();
@@ -1431,6 +1461,19 @@ class FilesStore {
       filterData.pageCount = 100;
     }
 
+    const defaultFilter = FilesFilter.getDefault();
+
+    const { filterType, searchInContent } = filterData;
+
+    if (typeof filterData.withSubfolders !== "boolean")
+      filterData.withSubfolders = defaultFilter.withSubfolders;
+
+    if (typeof searchInContent !== "boolean")
+      filterData.searchInContent = defaultFilter.searchInContent;
+
+    if (!Object.keys(FilterType).find((key) => FilterType[key] === filterType))
+      filterData.filterType = defaultFilter.filterType;
+
     setSelectedNode([folderId + ""]);
 
     return api.files
@@ -1451,6 +1494,7 @@ class FilesStore {
 
         if (
           (data.current.roomType === RoomsType.PublicRoom ||
+            data.current.roomType === RoomsType.FormRoom ||
             data.current.roomType === RoomsType.CustomRoom) &&
           !this.publicRoomStore.isPublicRoom
         ) {
@@ -1705,8 +1749,7 @@ class FilesStore {
     const { setSelectedNode, roomsFolderId } = this.treeFoldersStore;
 
     if (this.clientLoadingStore.isLoading) {
-      this.filesController.abort();
-      this.filesController = new AbortController();
+      this.abortAllFetch();
     }
 
     const filterData = !!filter
@@ -1724,6 +1767,22 @@ class FilesStore {
     }
 
     if (folderId) setSelectedNode([folderId + ""]);
+
+    const defaultFilter = RoomsFilter.getDefault();
+
+    const { provider, quotaFilter, type } = filterData;
+
+    if (!ROOMS_PROVIDER_TYPE_NAME[provider])
+      filterData.provider = defaultFilter.provider;
+
+    if (
+      quotaFilter &&
+      quotaFilter !== FilterKeys.customQuota &&
+      quotaFilter !== FilterKeys.defaultQuota
+    )
+      filterData.quotaFilter = defaultFilter.quotaFilter;
+
+    if (type && !RoomsType[type]) filterData.type = defaultFilter.type;
 
     const request = () =>
       api.rooms
@@ -2000,12 +2059,13 @@ class FilesStore {
         "view",
         "pdf-view",
         "make-form",
-        "edit-pdf",
+        // "edit-pdf",
         "separator0",
         "submit-to-gallery",
         "separator-SubmitToGallery",
         "link-for-room-members",
         "sharing-settings",
+        "embedding-settings",
         // "external-link",
         "owner-change",
         // "link-for-portal-users",
@@ -2046,11 +2106,11 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["open-pdf"]);
       }
 
-      if (!item.security.EditForm || !item.startFilling) {
-        fileOptions = this.removeOptions(fileOptions, ["edit-pdf"]);
-      }
+      // if (!item.security.EditForm || !item.startFilling) {
+      //   fileOptions = this.removeOptions(fileOptions, ["edit-pdf"]);
+      // }
 
-      if (!isPdf || !window.DocSpaceConfig?.pdfViewer || isRecycleBinFolder) {
+      if (!isPdf || !window.ClientConfig?.pdfViewer || isRecycleBinFolder) {
         fileOptions = this.removeOptions(fileOptions, ["pdf-view"]);
       }
 
@@ -2133,7 +2193,10 @@ class FilesStore {
       }
 
       if (!canViewFile || isRecycleBinFolder) {
-        fileOptions = this.removeOptions(fileOptions, ["preview"]);
+        fileOptions = this.removeOptions(fileOptions, [
+          "preview",
+          "embedding-settings",
+        ]);
       }
 
       if (!canOpenPlayer || isRecycleBinFolder) {
@@ -2265,6 +2328,10 @@ class FilesStore {
         ]);
       }
 
+      if (this.publicRoomStore.isPublicRoom) {
+        fileOptions = this.removeOptions(fileOptions, ["embedding-settings"]);
+      }
+
       // if (isPrivacyFolder) {
       //   fileOptions = this.removeOptions(fileOptions, [
       //     "preview",
@@ -2295,6 +2362,7 @@ class FilesStore {
 
       const isPublicRoomType =
         item.roomType === RoomsType.PublicRoom ||
+        item.roomType === RoomsType.FormRoom ||
         item.roomType === RoomsType.CustomRoom;
       const isCustomRoomType = item.roomType === RoomsType.CustomRoom;
 
@@ -2560,12 +2628,13 @@ class FilesStore {
     }
   };
 
-  createFile = (folderId, title, templateId, formId) => {
+  createFile = async (folderId, title, templateId, formId) => {
     return api.files
       .createFile(folderId, title, templateId, formId)
       .then((file) => {
         return Promise.resolve(file);
-      });
+      })
+      .then(() => this.fetchFiles(folderId, this.filter, true, true, false));
   };
 
   createFolder(parentFolderId, title) {
@@ -2682,8 +2751,8 @@ class FilesStore {
     return api.rooms.updateRoomMemberRole(id, data);
   }
 
-  getHistory(module, id, signal = null, requestToken) {
-    return api.rooms.getHistory(module, id, signal, requestToken);
+  getHistory(selectionType, id, signal = null, requestToken) {
+    return api.rooms.getHistory(selectionType, id, signal, requestToken);
   }
 
   getRoomHistory(id) {
@@ -3059,8 +3128,7 @@ class FilesStore {
   }
 
   getItemUrl = (id, isFolder, needConvert, canOpenPlayer) => {
-    const proxyURL =
-      window.DocSpaceConfig?.proxy?.url || window.location.origin;
+    const proxyURL = window.ClientConfig?.proxy?.url || window.location.origin;
 
     const url = getCategoryUrl(this.categoryType, id);
 
@@ -3430,17 +3498,17 @@ class FilesStore {
       case FilterType.FilesOnly:
         return t("AllFiles");
       case `room-${RoomsType.FillingFormsRoom}`:
-        return t("FillingFormRooms");
+        return t("Common:FillingFormRooms");
       case `room-${RoomsType.CustomRoom}`:
-        return t("CustomRooms");
+        return t("Common:CustomRooms");
       case `room-${RoomsType.EditingRoom}`:
-        return t("CollaborationRooms");
+        return t("Common:CollaborationRooms");
       case `room-${RoomsType.ReviewRoom}`:
         return t("Common:Review");
       case `room-${RoomsType.FormRoom}`:
-        return t("FormRoom");
+        return t("Common:FormRoom");
       case `room-${RoomsType.ReadOnlyRoom}`:
-        return t("ViewOnlyRooms");
+        return t("Common:ViewOnlyRooms");
       case `room-${RoomsType.PublicRoom}`:
         return t("Common:PublicRoomLabel");
 
@@ -3844,7 +3912,7 @@ class FilesStore {
     if (editForm) searchParams.append("action", "edit");
 
     const url = combineUrl(
-      window.DocSpaceConfig?.proxy?.url,
+      window.ClientConfig?.proxy?.url,
       config.homepage,
       `/doceditor?${searchParams.toString()}`,
     );

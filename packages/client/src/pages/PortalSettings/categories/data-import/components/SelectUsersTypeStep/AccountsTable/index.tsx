@@ -28,6 +28,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { Consumer } from "@docspace/shared/utils/context";
 
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 import TableView from "./TableView";
 import RowView from "./RowView";
 import {
@@ -48,8 +49,8 @@ const AccountsTable = (props: AccountsTableProps) => {
 
   const { t, ready } = useTranslation(["ChangeUserTypeDialog", "People"]);
 
-  const setTypeDocspaceAdmin = () => {
-    changeGroupType(UserTypes.DocSpaceAdmin);
+  const setTypePortalAdmin = () => {
+    changeGroupType(UserTypes.PortalAdmin);
     toggleAllAccounts(false, [], checkedAccountType);
   };
   const setTypeRoomAdmin = () => {
@@ -63,13 +64,15 @@ const AccountsTable = (props: AccountsTableProps) => {
 
   const typeOptions = [
     {
-      key: UserTypes.DocSpaceAdmin,
-      label: t(`Common:${UserTypes.DocSpaceAdmin}`),
-      onClick: setTypeDocspaceAdmin,
+      key: UserTypes.PortalAdmin,
+      label: t(`Common:PortalAdmin`, {
+        productName: PRODUCT_NAME,
+      }),
+      onClick: setTypePortalAdmin,
     },
     {
       key: UserTypes.RoomAdmin,
-      label: t(`Common:${UserTypes.RoomAdmin}`),
+      label: t(`Common:RoomAdmin`),
       onClick: setTypeRoomAdmin,
     },
     {

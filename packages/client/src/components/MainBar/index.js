@@ -30,6 +30,7 @@ import styled, { css } from "styled-components";
 import { useLocation } from "react-router-dom";
 
 import { mobile } from "@docspace/shared/utils";
+import { isPublicPreview } from "@docspace/shared/utils/common";
 import Bar from "./Bar";
 
 const StyledContainer = styled.div`
@@ -75,7 +76,8 @@ const MainBar = ({
     !isNotPaidPeriod &&
     !pathname.includes("error") &&
     !pathname.includes("confirm") &&
-    !pathname.includes("preparation-portal");
+    !pathname.includes("preparation-portal") &&
+    !isPublicPreview();
 
   return (
     <StyledContainer id={"main-bar"} className={"main-bar"}>

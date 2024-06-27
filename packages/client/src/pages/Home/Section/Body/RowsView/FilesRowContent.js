@@ -323,15 +323,17 @@ const FilesRowContent = ({
           {!isRoom && !isRooms && quickButtons}
         </div>
 
-        <Text
-          containerMinWidth="200px"
-          containerWidth="15%"
-          fontSize="12px"
-          fontWeight={400}
-          className="row_update-text"
-        >
-          {mainInfo}
-        </Text>
+        {mainInfo && (
+          <Text
+            containerMinWidth="200px"
+            containerWidth="15%"
+            fontSize="12px"
+            fontWeight={400}
+            className="row_update-text"
+          >
+            {mainInfo}
+          </Text>
+        )}
 
         <Text
           containerMinWidth="90px"

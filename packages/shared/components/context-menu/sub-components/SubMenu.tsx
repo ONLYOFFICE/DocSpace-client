@@ -147,7 +147,8 @@ const SubMenu = (props: {
 
       const widthMaxContent = Math.max(...optionsWidth);
 
-      subListWidth = subListWidth || widthMaxContent;
+      if (root) subListWidth = subListWidth || widthMaxContent;
+      else subListWidth = Math.max(subListWidth, widthMaxContent);
     }
 
     if (subMenuRef.current) {

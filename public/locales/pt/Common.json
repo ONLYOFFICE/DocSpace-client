@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Sobre",
   "AboutCompanyTitle": "Sobre este programa",
   "AccessDenied": "Acesso negado",
@@ -51,6 +51,10 @@
   "CommonFiles": "Arquivos comuns",
   "CompanyName": "Nome da empresa",
   "Confirmation": "Confirmação",
+  "ConflictResolveDescription": "O ficheiro com o nome <1>{{file}}</1> já existe na pasta <1>{{folder}}</1>.",
+  "ConflictResolveDescriptionFiles": "{{filesCount}} documentos com o mesmo nome já existem na pasta <1>{{folder}}</1>.",
+  "ConflictResolveSelectAction": "Selecione a ação:",
+  "ConflictResolveTitle": "Confirmação de substituição",
   "Connect": "Ligar",
   "Content": "Conteúdo",
   "Context": "Contexto",
@@ -63,6 +67,7 @@
   "Create": "Criar",
   "CreateAndCopy": "Criar e copiar",
   "CreateCopy": "Criar uma cópia",
+  "CreateDescription": "Haverá dois ficheiros diferentes na pasta.",
   "CreateFileCopy": "Criar cópia do ficheiro",
   "CreateMasterFormFromFile": "Criar modelo de formulário a partir do ficheiro",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -281,6 +286,8 @@
   "orContinueWith": "ou continuar com",
   "OtherLabel": "Outros",
   "OtherOperations": "Outras operações",
+  "OverwriteDescription": "O novo ficheiro irá substituir o existente como uma nova versão.",
+  "OverwriteTitle": "Substituir por versão atualizada",
   "Owner": "Proprietário",
   "PageOfTotalPage": "{{page}} de {{totalPage}}",
   "Pages": "Páginas",
@@ -399,6 +406,8 @@
   "SignUpWithZoom": "Inscreva-se com Zoom",
   "Size": "Tamanho",
   "SizeImageLarge": "A imagem é demasiado grande, por favor selecione outra imagem.",
+  "SkipDescription": "Nenhum ficheiro será copiado. O ficheiro original será mantido na pasta de destino.",
+  "SkipTitle": "Ignorar",
   "SomethingWentWrong": "Ocorreu um erro.",
   "SortBy": "Ordenar por",
   "SpaceManagement": "Gestão de Espaço",
@@ -455,14 +464,5 @@
   "Website": "Website",
   "Yes": "Sim",
   "Yesterday": "Ontem",
-  "You": "Você",
-  "ConflictResolveDescription": "O ficheiro com o nome <1>{{file}}</1> já existe na pasta <1>{{folder}}</1>.",
-  "ConflictResolveDescriptionFiles": "{{filesCount}} documentos com o mesmo nome já existem na pasta <1>{{folder}}</1>.",
-  "ConflictResolveSelectAction": "Selecione a ação:",
-  "ConflictResolveTitle": "Confirmação de substituição",
-  "CreateDescription": "Haverá dois ficheiros diferentes na pasta.",
-  "OverwriteDescription": "O novo ficheiro irá substituir o existente como uma nova versão.",
-  "OverwriteTitle": "Substituir por versão atualizada",
-  "SkipDescription": "Nenhum ficheiro será copiado. O ficheiro original será mantido na pasta de destino.",
-  "SkipTitle": "Ignorar"
+  "You": "Você"
 }

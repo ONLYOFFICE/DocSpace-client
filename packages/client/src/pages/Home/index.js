@@ -295,7 +295,7 @@ const PureHome = (props) => {
 
   const getContextModel = () => {
     if (isFrame) return null;
-    return getFolderModel(t);
+    return getFolderModel(t, true);
   };
 
   React.useEffect(() => {

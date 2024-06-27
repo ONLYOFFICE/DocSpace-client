@@ -164,3 +164,19 @@ export const getTitleWithoutExtension = (
     ? titleWithoutExst
     : item.title;
 };
+
+export const getLastColumn = (tableStorageName: string) => {
+  if (!tableStorageName) return;
+
+  const storageColumns = localStorage.getItem(tableStorageName);
+  if (!storageColumns) return;
+
+  const columns = storageColumns.split(",");
+  const filterColumns = columns.filter(
+    (column) => column !== "false" && column !== "QuickButtons",
+  );
+
+  if (filterColumns.length > 1) return filterColumns[filterColumns.length - 1];
+
+  return null;
+};

@@ -190,7 +190,7 @@ const PreviewDialog = ({
 
   const getLink = () => {
     return `${
-      window.location.origin
+      window?.ClientConfig?.oauth2.origin
     }/oauth2/authorize?response_type=code&client_id=${client?.clientId}&redirect_uri=${
       client?.redirectUris[0]
     }&scope=${encodingScopes}&state=${state}${

@@ -19,7 +19,7 @@
     "checkDomain": false
   },
   "oauth2": {
-    "publicClient": true
+    "origin": "http://oauth.test.test"
   },
   "firebase": {
     "fetchTimeoutMillis": 3600000,

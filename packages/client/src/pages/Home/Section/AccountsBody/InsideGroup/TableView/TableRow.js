@@ -386,6 +386,8 @@ const InsideGroupTableRow = (props) => {
           modernView
           manualWidth={"fit-content"}
           isLoading={isLoading}
+          optionStyle={{ maxWidth: "400px" }}
+          textOverflow
         />
       );
 

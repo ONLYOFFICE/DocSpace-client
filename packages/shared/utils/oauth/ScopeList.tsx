@@ -49,29 +49,40 @@ interface TScopeListProps {
   t: TTranslation;
 }
 
+const getRenderedScopes = ({
+  selectedScopes,
+  scopes,
+}: Omit<TScopeListProps, "t">) => {
+  const result: string[] = [];
+
+  const filteredScopes: TFilteredScopes = filterScopeByGroup(
+    selectedScopes,
+    scopes,
+  );
+
+  Object.keys(filteredScopes).forEach((key) => {
+    if (filteredScopes[key].isChecked) {
+      if (
+        filteredScopes[key].checkedType === ScopeType.read ||
+        filteredScopes[key].checkedType === ScopeType.openid
+      ) {
+        result.push(filteredScopes[key].read?.tKey || "");
+      } else {
+        result.push(filteredScopes[key].write?.tKey || "");
+      }
+    }
+  });
+
+  return result;
+};
+
 const ScopeList = ({ selectedScopes, scopes, t }: TScopeListProps) => {
-  const [renderedScopes, setRenderedScopes] = React.useState<string[]>([]);
+  const [renderedScopes, setRenderedScopes] = React.useState<string[]>(
+    getRenderedScopes({ selectedScopes, scopes, t }),
+  );
 
   React.useEffect(() => {
-    const result: string[] = [];
-
-    const filteredScopes: TFilteredScopes = filterScopeByGroup(
-      selectedScopes,
-      scopes,
-    );
-
-    Object.keys(filteredScopes).forEach((key) => {
-      if (filteredScopes[key].isChecked) {
-        if (
-          filteredScopes[key].checkedType === ScopeType.read ||
-          filteredScopes[key].checkedType === ScopeType.openid
-        ) {
-          result.push(filteredScopes[key].read?.tKey || "");
-        } else {
-          result.push(filteredScopes[key].write?.tKey || "");
-        }
-      }
-    });
+    const result = getRenderedScopes({ selectedScopes, scopes });
 
     setRenderedScopes([...result]);
   }, [selectedScopes, scopes]);

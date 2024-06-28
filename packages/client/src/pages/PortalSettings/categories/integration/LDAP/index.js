@@ -74,7 +74,7 @@ const LDAP = ({
     }
   };
 
-  if (!isLoaded) return <LdapLoader />;
+  if (!isLoaded && isLdapAvailable) return <LdapLoader />;
   return (
     <StyledLdapPage
       isSmallWindow={isSmallWindow}

@@ -666,7 +666,7 @@ export const getBaseTheme = () => {
           b: 38,
           a: 0.2,
         },
-        blur: 10,
+        blur: 9,
       },
 
       content: {

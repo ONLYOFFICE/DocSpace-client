@@ -69,7 +69,7 @@ const ClientForm = ({
     terms_url: "",
     policy_url: "",
 
-    is_public: false,
+    is_public: true,
     allow_pkce: false,
 
     scopes: [],
@@ -380,7 +380,7 @@ const ClientForm = ({
               descriptionValue={form.description}
               logoValue={form.logo}
               allowPkce={form.allow_pkce}
-              isPublic={form.is_public}
+              // isPublic={form.is_public}
               changeValue={onChangeForm}
               isEdit={isEdit}
               errorFields={errorFields}

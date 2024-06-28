@@ -6,8 +6,8 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { Text } from "@docspace/shared/components/text";
+// import { ToggleButton } from "@docspace/shared/components/toggle-button";
+// import { Text } from "@docspace/shared/components/text";
 
 import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
 
@@ -24,7 +24,7 @@ interface BasicBlockProps {
   logoValue: string;
   descriptionValue: string;
   allowPkce: boolean;
-  isPublic: boolean;
+  // isPublic: boolean;
 
   changeValue: (
     name: keyof IClientReqDTO,
@@ -80,7 +80,7 @@ const BasicBlock = ({
   logoValue,
   descriptionValue,
   allowPkce,
-  isPublic,
+  // isPublic,
   changeValue,
 
   isEdit,
@@ -148,7 +148,7 @@ const BasicBlock = ({
     <Trans t={t} i18nKey="AllowPKCEHelpButton" ns="OAuth" />
   );
 
-  const publicClientHelpButtonText = "Help text";
+  // const publicClientHelpButtonText = "Help text";
 
   const isNameRequiredError = requiredErrorFields.includes("name");
   const isWebsiteRequiredError = requiredErrorFields.includes("website_url");
@@ -230,7 +230,7 @@ const BasicBlock = ({
             <HelpButton tooltipContent={pkceHelpButtonText} />
           </div>
         </InputGroup>
-        <InputGroup
+        {/* <InputGroup
           label="Client type"
           name="public_client"
           placeholder={t("EnterURL")}
@@ -248,7 +248,7 @@ const BasicBlock = ({
             <Text>Public client</Text>
             <HelpButton tooltipContent={publicClientHelpButtonText} />
           </div>
-        </InputGroup>
+        </InputGroup> */}
       </StyledInputBlock>
     </StyledBlock>
   );

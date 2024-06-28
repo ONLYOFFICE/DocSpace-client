@@ -158,7 +158,7 @@ const StyledTile = styled.div`
     props.showHotkeyBorder && `border-color: ${globalColors.lightSecondMain}`};
   ${(props) =>
     props.isFolder && !props.isRooms && "border-top-left-radius: 6px;"}
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   ${(props) => props.isFolder && (props.isRoom ? roomsStyles : FlexBoxStyles)};
   ${(props) => (props.isFolder ? FolderStyles : FileStyles)};

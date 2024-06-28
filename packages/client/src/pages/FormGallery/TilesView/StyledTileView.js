@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 import TileContent from "./sub-components/TileContent";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
 
@@ -36,7 +36,6 @@ import {
   mobileMore,
   getCorrectFourValuesStyle,
 } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
 
 const FlexBoxStyles = css`
   display: flex;
@@ -60,7 +59,7 @@ const StyledTile = styled.div`
   border-radius: 6px;
   ${(props) =>
     props.showHotkeyBorder && `border-color: ${globalColors.lightSecondMain}`};
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   ${(props) => props.isSelected && checkedStyle}
 

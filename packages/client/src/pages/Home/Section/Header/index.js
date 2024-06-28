@@ -50,6 +50,7 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -64,7 +65,7 @@ const StyledContainer = styled.div`
         : css`
             margin: 0 0 0 -20px;
           `}
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
     width: calc(100% + 40px);
     height: 68px;

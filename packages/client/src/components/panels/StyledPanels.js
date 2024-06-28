@@ -29,7 +29,7 @@ import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { Link } from "@docspace/shared/components/link";
 import { desktop, mobile, tablet } from "@docspace/shared/utils";
 import { isMobile } from "react-device-detect";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 const PanelStyles = css`
   .panel_combo-box {
@@ -507,7 +507,7 @@ const StyledLinkRow = styled.div`
   .row_content {
     display: grid;
     grid-template-columns: 1fr 28px;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   }
 
   .combo-button {
@@ -596,7 +596,7 @@ const StyledModalRowContainer = styled.div`
   }
 
   .embedding-panel_code-container {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   }
 
   .embedding-panel_text {
@@ -654,7 +654,7 @@ const StyledModalRowContainer = styled.div`
   }
 
   .embedding-panel_code-container {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   }
 
   .embedding-panel_text {

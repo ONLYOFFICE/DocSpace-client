@@ -125,7 +125,7 @@ const commonStyles = css`
     max-width: fit-content;
     font-size: 12px;
     line-height: 15px;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   }
 `;
 

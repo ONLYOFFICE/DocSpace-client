@@ -103,7 +103,7 @@ const HeaderContainer = styled.div`
     margin-block: 0;
     margin-inline: -20px 0;
 
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
     flex: 0 0 auto;
 

@@ -26,6 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledModalDialog = styled(ModalDialog)`
   .modal-header {
@@ -118,7 +119,7 @@ const StyledBody = styled.div`
 
   .embedding-panel_code-container {
     margin-top: 16px;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   }
 
   .embedding-panel_text {

@@ -478,7 +478,7 @@ const StyledQuickButtonsContainer = styled.div`
       fill: ${(props) =>
         props.theme.filesSection.tableView.row.shareHoverColor};
     }
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   }
 `;
 

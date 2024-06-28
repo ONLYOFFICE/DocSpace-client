@@ -35,6 +35,7 @@ import {
   getCorrectFourValuesStyle,
 } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledNav = styled.nav`
   display: flex;
@@ -62,7 +63,7 @@ const StyledNav = styled.nav`
   }
   .icon-profile-menu {
     cursor: pointer;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   }
 `;
 const HeaderNav = ({

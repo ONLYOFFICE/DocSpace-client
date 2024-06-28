@@ -70,6 +70,7 @@ import { getCorrectFourValuesStyle } from "@docspace/shared/utils";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
 import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledButton = styled(Button)`
   font-weight: 700;
@@ -121,7 +122,7 @@ const StyledButton = styled(Button)`
     border-radius: 3px;
 
     user-select: none;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   }
 `;
 

@@ -145,7 +145,7 @@ const StyledSimpleFilesRow = styled(Row)`
       }
   `}
 
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   .styled-element {
     height: 32px;

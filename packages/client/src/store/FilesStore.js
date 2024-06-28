@@ -1411,6 +1411,13 @@ class FilesStore {
     return res;
   };
 
+  refreshRooms = async () => {
+    const roomFilters = this.roomsFilter.clone();
+    // roomFilters.sortBy = "DateAndTime";
+    const res = await this.fetchRooms(null, roomFilters);
+    return res;
+  };
+
   abortAllFetch = () => {
     this.filesController.abort();
     this.roomsController.abort();
@@ -1612,6 +1619,8 @@ class FilesStore {
           // type,
         });
 
+        console.log("DATA", data);
+
         runInAction(() => {
           const isEmptyList = [...data.folders, ...data.files].length === 0;
 
@@ -1751,6 +1760,7 @@ class FilesStore {
     if (this.clientLoadingStore.isLoading) {
       this.abortAllFetch();
     }
+    console.log("LLLLLLLLLLLLLLLLLLLLLLLLLLL");
 
     const filterData = !!filter
       ? filter.clone()
@@ -1788,6 +1798,7 @@ class FilesStore {
       api.rooms
         .getRooms(filterData, this.roomsController.signal)
         .then(async (data) => {
+          console.log("LLLLLLLLLLLLLLLLLLLLLLLLLLL");
           if (!folderId) setSelectedNode([data.current.id + ""]);
 
           filterData.total = data.total;

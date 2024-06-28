@@ -38,7 +38,9 @@ import type { PortalLogoProps } from "./PortalLogo.types";
 const PortalLogo = ({ className, isResizable = false }: PortalLogoProps) => {
   const theme = useTheme();
 
-  const [size, setSize] = useState(window.innerWidth);
+  const [size, setSize] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 0,
+  );
 
   const onResize = () => {
     setSize(window.innerWidth);

@@ -116,4 +116,5 @@ export const globalColors = {
   redRomb: "#de7a59",
   blueRomb: "#55bce6",
   greenRomb: "#a1cb5c",
+  tapHighlight: "rgba(0, 0, 0, 0)",
 };

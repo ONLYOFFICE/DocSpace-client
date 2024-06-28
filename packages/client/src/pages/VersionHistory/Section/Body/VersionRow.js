@@ -102,7 +102,9 @@ const VersionRow = (props) => {
 
   const versionDate = getCorrectDate(culture, info.updated, "L", "LTS");
 
-  const title = `${Encoder.htmlDecode(info.updatedBy?.displayName)}`;
+  const title = info.updatedBy?.isAnonim
+    ? t("Common:Anonymous")
+    : `${Encoder.htmlDecode(info.updatedBy?.displayName)}`;
 
   const onDownloadAction = () =>
     openUrl(`${info.viewUrl}&version=${info.version}`, UrlActionType.Download);
@@ -278,16 +280,27 @@ const VersionRow = (props) => {
             >
               {versionDate}
             </Link>
-            <Link
-              onClick={onUserClick}
-              fontWeight={600}
-              fontSize="14px"
-              title={title}
-              isTextOverflow={true}
-              className="version-link-file"
-            >
-              {title}
-            </Link>
+            {info.updatedBy?.isAnonim ? (
+              <Text
+                fontWeight={600}
+                color={theme.filesVersionHistory.color}
+                fontSize="14px"
+                title={title}
+              >
+                {title}
+              </Text>
+            ) : (
+              <Link
+                onClick={onUserClick}
+                fontWeight={600}
+                fontSize="14px"
+                title={title}
+                isTextOverflow={true}
+                className="version-link-file"
+              >
+                {title}
+              </Link>
+            )}
           </Box>
 
           {/*<Text

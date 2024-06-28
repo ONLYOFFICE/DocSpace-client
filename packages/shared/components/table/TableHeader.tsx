@@ -44,6 +44,7 @@ const defaultMinColumnSize = 110;
 const settingsSize = 24;
 
 const minSizeFirstColumn = 210;
+const handleOffset = 8;
 
 class TableHeader extends React.Component<
   TableHeaderProps,
@@ -113,7 +114,7 @@ class TableHeader extends React.Component<
         ? leftColumn.dataset.minWidth
         : defaultMinColumnSize;
 
-      if (leftColumn.clientWidth <= +minSize) {
+      if (leftColumn.getBoundingClientRect().width <= +minSize) {
         if (colIndex < 0) return false;
         this.moveToLeft(widths, newWidth, colIndex - 1);
         return;
@@ -159,11 +160,17 @@ class TableHeader extends React.Component<
     const defaultColumn = document.getElementById(`column_${colIndex}`);
     if (!defaultColumn || defaultColumn.dataset.defaultSize) return;
 
-    const handleOffset = 8;
-
     if (column2Width + offset - handleOffset >= defaultMinColumnSize) {
       widths[+columnIndex] = `${newWidth + handleOffset}px`;
       widths[colIndex] = `${column2Width + offset - handleOffset}px`;
+    } else if (column2Width !== defaultMinColumnSize) {
+      const width =
+        getSubstring(widths[+columnIndex]) +
+        getSubstring(widths[+colIndex]) -
+        defaultMinColumnSize;
+
+      widths[+columnIndex] = `${width}px`;
+      widths[colIndex] = `${defaultMinColumnSize}px`;
     } else {
       if (colIndex === columns.length) return false;
       this.moveToRight(widths, newWidth, colIndex + 1);
@@ -237,7 +244,7 @@ class TableHeader extends React.Component<
     if (!column) return;
 
     const columnSize = column.getBoundingClientRect();
-    const newWidth = isRtl
+    let newWidth = isRtl
       ? columnSize.right - e.clientX
       : e.clientX - columnSize.left;
 
@@ -248,12 +255,14 @@ class TableHeader extends React.Component<
       ? column.dataset.minWidth
       : defaultMinColumnSize;
 
-    if (newWidth <= +minSize) {
-      const columnChanged = this.moveToLeft(widths, newWidth);
+    if (newWidth <= +minSize - handleOffset) {
+      const currentWidth = getSubstring(widths[+columnIndex]);
 
-      if (!columnChanged) {
-        widths[+columnIndex] = widths[+columnIndex];
-      }
+      // Move left
+      if (currentWidth !== +minSize) {
+        newWidth = +minSize - handleOffset;
+        this.moveToRight(widths, newWidth);
+      } else this.moveToLeft(widths, newWidth);
     } else {
       this.moveToRight(widths, newWidth);
     }
@@ -339,6 +348,9 @@ class TableHeader extends React.Component<
     const storageSize =
       !resetColumnsSize && localStorage.getItem(columnStorageName);
 
+    const storageInfoSize =
+      !resetColumnsSize && localStorage.getItem(columnInfoPanelStorageName);
+
     // TODO: If defaultSize(75px) is less than defaultMinColumnSize(110px) the calculations work correctly
     const defaultSize =
       columns.find((col) => col.defaultSize && col.enable)?.defaultSize || 0;
@@ -367,6 +379,10 @@ class TableHeader extends React.Component<
 
     const tableContainer = storageSize
       ? storageSize.split(" ")
+      : containerGridTemplateColumns;
+
+    const tableInfoContainer = storageInfoSize
+      ? storageInfoSize.split(" ")
       : containerGridTemplateColumns;
 
     const { hideColumns } = this.state;
@@ -398,9 +414,17 @@ class TableHeader extends React.Component<
       .map((column) => getSubstring(column))
       .reduce((x, y) => x + y);
 
+    const defaultInfoWidth = tableInfoContainer
+      .map((column) => getSubstring(column))
+      .reduce((x, y) => x + y);
+
     const oldWidth = defaultWidth - defaultSize - settingsSize;
 
-    if (Math.round(defaultWidth) !== Math.round(containerWidth) && !isResized) {
+    const isDifferentWindowSize = infoPanelVisible
+      ? Math.round(defaultInfoWidth) !== Math.round(containerWidth)
+      : Math.round(defaultWidth) !== Math.round(containerWidth);
+
+    if (isDifferentWindowSize && !isResized) {
       if (infoPanelVisible) localStorage.removeItem(columnInfoPanelStorageName);
       else localStorage.removeItem(columnStorageName);
       this.onResize(true);

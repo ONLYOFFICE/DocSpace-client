@@ -41,6 +41,7 @@ const ContextButton = ({
   isMobile,
   id,
   onCloseDropBox,
+  onContextOptionsClick,
   ...rest
 }: IContextButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,6 +59,7 @@ const ContextButton = ({
   };
 
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    onContextOptionsClick?.();
     if (withMenu) toggle(e, !isOpen);
   };
 

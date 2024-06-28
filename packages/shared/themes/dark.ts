@@ -3024,7 +3024,8 @@ const Dark: TTheme = {
           backgroundColorDark: "#282828",
           greenBackgroundColor: "#40865C",
           blueBackgroundColor: "#446995",
-          orangeBackgroundColor: "#AA5252",
+          orangeBackgroundColor: "#BE6650",
+          redBackgroundColor: "#AA5251",
 
           dataFontColor: white,
           dataFontColorBlack: white,

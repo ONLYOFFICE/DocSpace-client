@@ -27,7 +27,7 @@
 import styled, { css } from "styled-components";
 import { isMobile } from "react-device-detect";
 
-import { Base, TColorScheme } from "../../themes";
+import { Base, TColorScheme, globalColors } from "../../themes";
 import { tablet } from "../../utils";
 
 import { Text } from "../text";
@@ -372,7 +372,7 @@ const StyledArticleItemContainer = styled.div<{
       props.theme.catalogItem.container.tablet.marginBottom};
   }
 
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   .catalog-item__icon {
     display: none;

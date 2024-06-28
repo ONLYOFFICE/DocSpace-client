@@ -29,7 +29,7 @@
 import styled, { css } from "styled-components";
 import { ToastContainer } from "react-toastify";
 
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { tablet, mobile } from "../../utils";
 
 import { IconButton } from "../icon-button";
@@ -53,7 +53,7 @@ const StyledToastContainer = styled(ToastContainer)<{ $topOffset: number }>`
       right: auto;
     `}
   margin-top: ${(props) => props.theme.toast.marginTop};
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   .Toastify__progress-bar--animated {
     animation: Toastify__trackProgress linear 1 forwards;

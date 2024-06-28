@@ -37,7 +37,7 @@ import {
   desktop,
   NoUserSelect,
 } from "../../utils";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { TViewAs } from "../../types";
 
 import { Scrollbar } from "../scrollbar";
@@ -665,7 +665,7 @@ const StyledSectionHeader = styled.div<{ isFormGallery?: boolean }>`
 
     .header-container {
       margin-bottom: 1px;
-      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      -webkit-tap-highlight-color: ${globalColors.tapHighlight};
     }
   }
 

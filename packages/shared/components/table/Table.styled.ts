@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import {
   mobile,
   tablet,
@@ -524,7 +524,7 @@ const StyledTableSettings = styled.div`
   display: inline-block;
   position: relative;
   cursor: pointer;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   .table-container_settings-checkbox {
     padding: 8px 16px;

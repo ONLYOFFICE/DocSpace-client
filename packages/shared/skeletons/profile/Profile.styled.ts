@@ -27,6 +27,7 @@
 import styled from "styled-components";
 
 import { tablet, getCorrectFourValuesStyle } from "@docspace/shared/utils";
+import { globalColors } from "../../themes";
 
 export const StyledWrapper = styled.div`
   width: 660px;
@@ -46,9 +47,9 @@ export const MainBlock = styled.div`
   border-radius: 12px;
   background: linear-gradient(
       270deg,
-      rgba(0, 0, 0, 0) 23.13%,
+      ${globalColors.tapHighlight} 23.13%,
       rgba(0, 0, 0, 0.07) 50.52%,
-      rgba(0, 0, 0, 0) 78.12%
+      ${globalColors.tapHighlight} 78.12%
     ),
     rgba(0, 0, 0, 0.05);
 

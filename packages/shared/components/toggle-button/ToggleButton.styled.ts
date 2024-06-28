@@ -43,7 +43,7 @@ const ToggleButtonContainer = styled.label<StyledToggleButtonProps>`
   -webkit-appearance: none;
   align-items: start;
   outline: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   ${NoUserSelect};
 

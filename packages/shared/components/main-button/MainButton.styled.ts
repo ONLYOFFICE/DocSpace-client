@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { NoUserSelect } from "../../utils";
-import { TColorScheme, TTheme, Base } from "../../themes";
+import { TColorScheme, TTheme, Base, globalColors } from "../../themes";
 
 const hoveredCss = css`
   background-color: ${(props) => props.theme.mainButton.hoverBackgroundColor};
@@ -65,7 +65,7 @@ const StyledMainButton = styled.div<{
 }>`
   ${NoUserSelect}
 
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   position: relative;
   display: flex;
   justify-content: space-between;

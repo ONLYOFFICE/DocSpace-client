@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { IconButtonProps } from "./IconButton.types";
 
 const StyledOuter = styled.div<IconButtonProps>`
@@ -34,7 +34,7 @@ const StyledOuter = styled.div<IconButtonProps>`
   cursor: ${(props) =>
     props.isDisabled || !props.isClickable ? "default" : "pointer"};
   line-height: 0;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   ${(props) =>
     props.isStroke &&

@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { Base, TTheme } from "../../themes";
+import { Base, TTheme, globalColors } from "../../themes";
 import { commonIconsStyles, NoUserSelect } from "../../utils";
 
 import { CameraReactSvg } from "./svg";
@@ -216,7 +216,7 @@ const StyledAvatar = styled.div<{ size: AvatarSize; theme: TTheme }>`
   font-family: ${(props) => props.theme.fontFamily};
   font-style: normal;
 
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   .admin_icon {
     rect:nth-child(1) {

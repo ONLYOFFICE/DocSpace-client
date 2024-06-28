@@ -48,7 +48,7 @@ const StyledIconBlock = styled.div<{
       padding-left: ${props.theme.inputBlock.paddingRight};
       padding-right: ${props.theme.inputBlock.paddingLeft};
     `}
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 `;
 StyledIconBlock.defaultProps = { theme: Base };
 

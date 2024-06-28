@@ -73,7 +73,7 @@ export const StyledPlayerControls = styled.div<{ $isShow: boolean }>`
   opacity: ${(props) => (props.$isShow ? "1" : "0")};
 
   background: linear-gradient(
-    rgba(0, 0, 0, 0) 0%,
+    ${globalColors.tapHighlight} 0%,
     rgba(0, 0, 0, 0.64) 48.44%,
     rgba(0, 0, 0, 0.89) 100%
   );

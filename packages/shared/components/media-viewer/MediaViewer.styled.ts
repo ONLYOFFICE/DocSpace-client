@@ -99,7 +99,7 @@ export const StyledMobileDetails = styled.div`
   align-items: center;
   background: linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0) 0%,
+    ${globalColors.tapHighlight} 0%,
     rgba(0, 0, 0, 0.8) 100%
   );
 
@@ -190,7 +190,7 @@ export const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
     width: 100%;
     background: linear-gradient(
       0deg,
-      rgba(0, 0, 0, 0) 0%,
+      ${globalColors.tapHighlight} 0%,
       rgba(0, 0, 0, 0.8) 100%
     );
     position: fixed;

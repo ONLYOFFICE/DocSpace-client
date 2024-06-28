@@ -28,7 +28,7 @@ import styled, { css } from "styled-components";
 
 import TriangleDownIcon from "PUBLIC_DIR/images/triangle.down.react.svg";
 
-import { Base, TColorScheme, TTheme } from "../../themes";
+import { Base, TColorScheme, TTheme, globalColors } from "../../themes";
 import { mobile, NoUserSelect, commonIconsStyles } from "../../utils";
 
 import { Loader } from "../loader";
@@ -88,7 +88,7 @@ const StyledComboBox = styled.div<{
 
   position: relative;
   outline: 0;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   padding: ${(props) => (props.withoutPadding ? "0" : "4px 0")};
 
@@ -181,7 +181,7 @@ const StyledComboButton = styled.div<{
 
   gap: ${(props) => props.type && "4px"};
   justify-content: center;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   height: ${(props) =>
     props.noBorder

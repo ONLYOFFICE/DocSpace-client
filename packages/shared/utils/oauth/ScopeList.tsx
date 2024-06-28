@@ -78,7 +78,7 @@ const getRenderedScopes = ({
 
 const ScopeList = ({ selectedScopes, scopes, t }: TScopeListProps) => {
   const [renderedScopes, setRenderedScopes] = React.useState<string[]>(
-    getRenderedScopes({ selectedScopes, scopes, t }),
+    getRenderedScopes({ selectedScopes, scopes }),
   );
 
   React.useEffect(() => {

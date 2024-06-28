@@ -5,6 +5,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { deleteCookie, getCookie } from "@docspace/shared/utils/cookie";
 
 import ArrowRightSvrUrl from "PUBLIC_DIR/images/arrow.right.react.svg?url";
+import DefaultLogoUrl from "PUBLIC_DIR/images/logo/leftmenu.svg?url";
 
 import { ItemProps } from "../TenantList.types";
 
@@ -26,11 +27,7 @@ const Item = ({ portal, baseDomain }: ItemProps) => {
   return (
     <div className="item" onClick={onClick}>
       <div className="info">
-        <img
-          className="favicon"
-          alt="Portal favicon"
-          src={`${name}/logo.ashx?logotype=3`}
-        />
+        <img className="favicon" alt="Portal favicon" src={DefaultLogoUrl} />
         <Text fontWeight={600} fontSize="14px" lineHeight="16px" truncate>
           {name.replace("http://", "").replace("https://", "")}
         </Text>

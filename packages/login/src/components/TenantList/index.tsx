@@ -1,16 +1,18 @@
 "use client";
+import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
 
 import Item from "./sub-components/Item";
 
 import StyledTenantList from "./TenantList.styled";
 import { TenantListProps } from "./TenantList.types";
-import { Button } from "@docspace/shared/components/button";
-import { useRouter } from "next/navigation";
 
 const TenantList = ({ portals, clientId, baseDomain }: TenantListProps) => {
   const router = useRouter();
+  const { t } = useTranslation(["TenantList"]);
 
   const goToLogin = () => {
     router.push(`/?type=oauth2&client_id=${clientId}`);
@@ -18,9 +20,7 @@ const TenantList = ({ portals, clientId, baseDomain }: TenantListProps) => {
 
   return (
     <StyledTenantList>
-      <Text className="more-accounts">
-        You have more than one accounts. Please choose one of them
-      </Text>
+      <Text className="more-accounts">{t("MorePortals")}</Text>
       <div className="items-list">
         {portals.map((item) => (
           <Item portal={item} key={item.portalName} baseDomain={baseDomain} />
@@ -28,7 +28,7 @@ const TenantList = ({ portals, clientId, baseDomain }: TenantListProps) => {
       </div>
       <Button
         onClick={goToLogin}
-        label="Back to sign in"
+        label={t("BackToSignIn")}
         className="back-button"
       />
     </StyledTenantList>

@@ -26,6 +26,7 @@
 
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { OAuth2ErrorKey } from "./utils/enums";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
@@ -48,6 +49,14 @@ export function middleware(request: NextRequest) {
   if (isOAuth || oauthClientId) {
     if (oauthClientId === "error")
       return NextResponse.redirect(`${redirectUrl}/login/error`);
+
+    const error = request.nextUrl.searchParams.get("error");
+
+    if (error && error !== OAuth2ErrorKey.missing_asc_cookie_error) {
+      return NextResponse.redirect(
+        `${redirectUrl}/login/error?oauthMessageKey=${error}`,
+      );
+    }
 
     if (isAuth && !request.nextUrl.pathname.includes("consent")) {
       return NextResponse.redirect(

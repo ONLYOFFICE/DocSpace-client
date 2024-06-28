@@ -111,7 +111,7 @@ class FilesTableHeader extends React.Component {
           key: "QuickButtons",
           title: "",
           enable: this.props.roomColumnQuickButtonsIsEnabled,
-          defaultSize: 75,
+          defaultSize: 52,
           resizable: false,
         },
       ];
@@ -201,7 +201,7 @@ class FilesTableHeader extends React.Component {
           key: "QuickButtons",
           title: "",
           enable: this.props.quickButtonsColumnIsEnabled,
-          defaultSize: 75,
+          defaultSize: 52,
           resizable: false,
         },
       ];
@@ -280,7 +280,7 @@ class FilesTableHeader extends React.Component {
           key: "QuickButtons",
           title: "",
           enable: this.props.quickButtonsColumnIsEnabled,
-          defaultSize: 75,
+          defaultSize: 52,
           resizable: false,
         },
       ];
@@ -350,7 +350,7 @@ class FilesTableHeader extends React.Component {
           key: "QuickButtons",
           title: "",
           enable: this.props.quickButtonsColumnIsEnabled,
-          defaultSize: 75,
+          defaultSize: 52,
           resizable: false,
         },
       ];

@@ -1606,6 +1606,7 @@ class FilesStore {
           folders: data.folders,
           ...data.current,
           inRoom: !!data.current.inRoom,
+          isRoom: !!data.current.roomType,
           pathParts: data.pathParts,
           navigationPath,
           ...{ new: data.new },
@@ -1986,7 +1987,7 @@ class FilesStore {
     return newOptions.filter((o) => o);
   };
 
-  getFilesContextOptions = (item, fromInfoPanel) => {
+  getFilesContextOptions = (item, optionsToRemove = []) => {
     const isFile = !!item.fileExst || item.contentLength;
     const isRoom = !!item.roomType;
     const isFavorite =
@@ -2029,6 +2030,7 @@ class FilesStore {
     const canCopy = item.security?.Copy;
     const canDuplicate = item.security?.Duplicate;
     const canDownload = item.security?.Download;
+    const canEmbed = item.security?.Embed;
 
     if (isFile) {
       const shouldFillForm = item.viewAccessibility.WebRestrictedEditing;
@@ -2097,6 +2099,10 @@ class FilesStore {
         "remove-from-recent",
         "copy-general-link",
       ];
+
+      if (optionsToRemove.length) {
+        fileOptions = this.removeOptions(fileOptions, optionsToRemove);
+      }
 
       if (!canDownload) {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
@@ -2193,10 +2199,7 @@ class FilesStore {
       }
 
       if (!canViewFile || isRecycleBinFolder) {
-        fileOptions = this.removeOptions(fileOptions, [
-          "preview",
-          "embedding-settings",
-        ]);
+        fileOptions = this.removeOptions(fileOptions, ["preview"]);
       }
 
       if (!canOpenPlayer || isRecycleBinFolder) {
@@ -2328,7 +2331,7 @@ class FilesStore {
         ]);
       }
 
-      if (this.publicRoomStore.isPublicRoom) {
+      if (this.publicRoomStore.isPublicRoom || !canEmbed) {
         fileOptions = this.removeOptions(fileOptions, ["embedding-settings"]);
       }
 
@@ -2375,6 +2378,7 @@ class FilesStore {
         "edit-room",
         "invite-users-to-room",
         "external-link",
+        "embedding-settings",
         "room-info",
         "pin-room",
         "unpin-room",
@@ -2387,6 +2391,10 @@ class FilesStore {
         "leave-room",
         "delete",
       ];
+
+      if (optionsToRemove.length) {
+        roomOptions = this.removeOptions(roomOptions, optionsToRemove);
+      }
 
       if (!canEditRoom) {
         roomOptions = this.removeOptions(roomOptions, [
@@ -2443,6 +2451,10 @@ class FilesStore {
           : (roomOptions = this.removeOptions(roomOptions, ["unmute-room"]));
       }
 
+      if (this.publicRoomStore.isPublicRoom || !canEmbed) {
+        roomOptions = this.removeOptions(roomOptions, ["embedding-settings"]);
+      }
+
       if (!canViewRoomInfo) {
         roomOptions = this.removeOptions(roomOptions, ["room-info"]);
       }
@@ -2465,10 +2477,6 @@ class FilesStore {
             pluginRoomsKeys.forEach((key) => roomOptions.push(key));
         }
       }
-
-      // if (fromInfoPanel) {
-      //   roomOptions = this.removeOptions(roomOptions, ["external-link"]);
-      // }
 
       roomOptions = this.removeSeparator(roomOptions);
 
@@ -2498,6 +2506,10 @@ class FilesStore {
         // "unsubscribe",
         "delete",
       ];
+
+      if (optionsToRemove.length) {
+        folderOptions = this.removeOptions(folderOptions, optionsToRemove);
+      }
 
       if (!canDownload) {
         folderOptions = this.removeOptions(folderOptions, ["download"]);

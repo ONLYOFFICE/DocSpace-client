@@ -38,6 +38,7 @@ const useOperations = ({
   clearPrimaryProgressData,
   isProgressFinished,
   refreshFiles,
+  refreshRooms,
   itemsSelectionTitle,
   secondaryProgressDataStoreIcon,
   itemsSelectionLength,
@@ -82,6 +83,7 @@ const useOperations = ({
 
   const showOperationToast = React.useCallback(
     (type, qty, title) => {
+      console.log(type);
       switch (type) {
         case "move":
           if (qty > 1) {
@@ -122,10 +124,13 @@ const useOperations = ({
             refreshFiles()
           );
         case "duplicate-room":
-          return toastr.success(
-            <Trans t={t} i18nKey="CopyItem" ns="Files">
-              {{ title }} copied
-            </Trans>,
+          return (
+            toastr.success(
+              <Trans t={t} i18nKey="CopyItem" ns="Files">
+                {{ title }} copied
+              </Trans>,
+            ),
+            refreshRooms()
           );
 
         default:

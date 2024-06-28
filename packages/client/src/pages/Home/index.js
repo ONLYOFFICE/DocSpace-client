@@ -95,6 +95,7 @@ const PureHome = (props) => {
     itemsSelectionTitle,
     setItemsSelectionTitle,
     refreshFiles,
+    refreshRooms,
 
     setFrameConfig,
     user,
@@ -213,6 +214,7 @@ const PureHome = (props) => {
     clearPrimaryProgressData,
     isProgressFinished,
     refreshFiles,
+    refreshRooms,
     itemsSelectionTitle,
     secondaryProgressDataStoreIcon,
     itemsSelectionLength,
@@ -484,6 +486,7 @@ export default inject(
       createFolder,
       createRoom,
       refreshFiles,
+      refreshRooms,
       setViewAs,
       isEmptyPage,
 
@@ -643,6 +646,7 @@ export default inject(
       createFolder,
       createRoom,
       refreshFiles,
+      refreshRooms,
       setViewAs,
       withPaging,
       isEmptyPage,

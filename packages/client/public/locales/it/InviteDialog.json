@@ -3,7 +3,6 @@
   "AddManuallyDescriptionAccounts": "Invita nuovi utenti a {{productName}} personalmente tramite e-mail",
   "AddManuallyDescriptionRoom": "Aggiungi utenti esistenti di {{productName}} alla stanza utilizzando i nomi o invita nuovi utenti personalmente tramite e-mail",
   "EmailErrorMessage": "Indirizzo email non valido. Puoi modificare l’email facendo clic su di essa.",
-  "GroupMaxAvailableRoleWarning": "I gruppi hanno il ruolo massimo disponibile: \"{{role}}\". Puoi cambiare i diritti dopo aver aggiunto un gruppo alla stanza.",
   "InvitationLanguage": "Lingua dell'invito",
   "InviteAccountSearchPlaceholder": "Invita persone via e-mail",
   "InviteRoomSearchPlaceholder": "Invita persone per nome o e-mail",

@@ -3,7 +3,6 @@
   "AddManuallyDescriptionAccounts": "{{productName}}'e yeni kullanıcıları kişisel olarak e-posta yoluyla davet et",
   "AddManuallyDescriptionRoom": "Adları kullanarak mevcut {{productName}} kullanıcılarını odaya ekleyin veya e-mail yoluyla kişisel olarak yeni kullanıcılar davet edin",
   "EmailErrorMessage": "E-posta adresi geçerli değil. E-postayı tıklayarak düzenleyebilirsiniz.",
-  "GroupMaxAvailableRoleWarning": "Gruplar maksimum kullanılabilir role sahiptir - \"{{role}}\". Odaya bir grup ekledikten sonra haklarda bir artış yapabilirsiniz.",
   "InvitationLanguage": "Davet dili",
   "InviteAccountSearchPlaceholder": "İnsanları e-posta ile davet et",
   "InviteRoomSearchPlaceholder": "Kişileri ada veya e-postaya göre davet et",

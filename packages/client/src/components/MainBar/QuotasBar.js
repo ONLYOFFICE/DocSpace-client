@@ -76,7 +76,23 @@ const QuotasBar = ({
       </Trans>
     );
   };
+  const getTenantCustomQuota = () => {
+    if (!isAdmin) return t("StorageQuotaUserDescription");
 
+    return (
+      <Trans i18nKey="TenantCustomQuotaDescription" t={t}>
+        You can remove the unnecessary files or change quota in the
+        <Link
+          fontSize="12px"
+          fontWeight="400"
+          color={currentColorScheme?.main?.accent}
+          onClick={onClickAction}
+        >
+          Storage management settings.
+        </Link>
+      </Trans>
+    );
+  };
   const getUserQuotaDescription = () => {
     return (
       <Trans
@@ -132,19 +148,7 @@ const QuotasBar = ({
       case QuotaBarTypes.TenantCustomQuota:
         return {
           header: t("StorageQuotaHeader", { currentValue, maxValue }),
-          description: (
-            <Trans i18nKey="TenantCustomQuotaDescription" t={t}>
-              You can remove the unnecessary files or change quota in the
-              <Link
-                fontSize="12px"
-                fontWeight="400"
-                color={currentColorScheme?.main?.accent}
-                onClick={onClickAction}
-              >
-                Storage management settings.
-              </Link>
-            </Trans>
-          ),
+          description: getTenantCustomQuota(),
         };
       case QuotaBarTypes.UserQuota:
         return {

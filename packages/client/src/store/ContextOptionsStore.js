@@ -2439,7 +2439,7 @@ class ContextOptionsStore {
       key: "new-form",
       label: t("Translations:SubNewForm"),
       icon: FormBlankReactSvgUrl,
-      onClick: () => this.onCreate("docxf"),
+      onClick: () => this.onCreate("pdf"),
     };
 
     const createTemplateNewFormFile = {

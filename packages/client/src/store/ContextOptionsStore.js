@@ -2542,7 +2542,7 @@ class ContextOptionsStore {
           showUploadFolder ? uploadFolder : null,
         ];
 
-    if (mainButtonItemsList && enablePlugins) {
+    if (mainButtonItemsList && enablePlugins && !isSectionMenu) {
       const pluginItems = [];
 
       mainButtonItemsList.forEach((option) => {

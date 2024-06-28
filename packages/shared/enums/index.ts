@@ -550,6 +550,18 @@ export const enum EditorConfigErrorType {
   TenantQuotaException = "ASC.Core.Tenants.TenantQuotaException",
 }
 
+/**
+ * Enum for watermarks.
+ * @readonly
+ */
+export const enum WatermarkAdditions {
+  UserName = 1,
+  UserEmail = 2,
+  UserIpAdress = 4,
+  CurrentDate = 8,
+  RoomName = 16,
+}
+
 export const enum RoomsStorageFilter {
   internal = 1,
   thirdparty = 2,

@@ -24,58 +24,67 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import Dropzone from "./Dropzone";
-import ImageCropper from "./ImageCropper";
-import ButtonDelete from "./ButtonDelete";
-import { ImageEditorProps } from "./ImageEditor.types";
-import AvatarPreview from "./AvatarPreview";
+import styled, { css } from "styled-components";
 
-const ImageEditor = ({
-  t,
-  image,
-  onChangeImage,
-  Preview,
-  setPreview,
-  isDisabled,
-  classNameWrapperImageCropper,
-  className,
-  disableImageRescaling,
-  maxImageSize,
-}: ImageEditorProps) => {
-  const setUploadedFile = (f?: File) => {
-    onChangeImage({ ...image, uploadedFile: f });
-  };
+const StyledWatermark = styled.div`
+  margin-top: 16px;
 
-  const isDefaultAvatar =
-    typeof image.uploadedFile === "string" &&
-    image.uploadedFile.includes("default_user_photo");
+  .watermark-title {
+    margin: 16px 0 8px 0;
+  }
+  .title-without-top {
+    margin-top: 0px;
+  }
+  .watermark-checkbox {
+    margin: 18px 0 0 0;
+  }
 
-  return (
-    <div className={className}>
-      {image.uploadedFile && !isDefaultAvatar && (
-        <div className={classNameWrapperImageCropper}>
-          <ImageCropper
-            t={t}
-            image={image}
-            onChangeImage={onChangeImage}
-            uploadedFile={image.uploadedFile}
-            setUploadedFile={setUploadedFile}
-            setPreviewImage={setPreview}
-            isDisabled={isDisabled}
-            disableImageRescaling={disableImageRescaling}
-          />
-          {Preview}
-        </div>
-      )}
-      <Dropzone
-        t={t}
-        setUploadedFile={setUploadedFile}
-        isDisabled={isDisabled}
-        maxImageSize={maxImageSize}
-      />
-    </div>
-  );
-};
+  .options-wrapper {
+    display: grid;
+    grid-template-rows: 56px 56px;
+    gap: 16px;
+  }
 
-export { ImageEditor, AvatarPreview, Dropzone, ButtonDelete };
+  .image-wrapper {
+    display: grid;
+    grid-template-columns: 216px auto;
+    gap: 16px;
+
+    .image-description {
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+
+      .image-watermark_text {
+        margin-bottom: 8px;
+      }
+    }
+
+    .image-watermark_wrapper {
+      width: 216px;
+      height: 216px;
+      border: 1px solid #eceef1;
+
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 88%;
+        height: 88%;
+        transform: ${(props) =>
+          `rotate(${props.rotate}deg) scale(${props.scale})`};
+
+        opacity: 0.4;
+        margin: auto;
+      }
+    }
+  }
+`;
+const StyledBody = styled.div`
+  .types-content {
+  }
+`;
+
+export { StyledWatermark, StyledBody };

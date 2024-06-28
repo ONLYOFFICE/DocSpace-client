@@ -30,8 +30,13 @@ import { useTranslation } from "react-i18next";
 import { EditRoomDialog } from "../dialogs";
 import { Encoder } from "@docspace/shared/utils/encoder";
 import api from "@docspace/shared/api";
-import { getRoomInfo } from "@docspace/shared/api/rooms";
+import {
+  deleteWatermarkSettings,
+  getRoomInfo,
+  getWatermarkSettings,
+} from "@docspace/shared/api/rooms";
 import { toastr } from "@docspace/shared/components/toast";
+import { setWatermarkSettings } from "@docspace/shared/api/rooms";
 
 const EditRoomEvent = ({
   addActiveItems,
@@ -75,12 +80,18 @@ const EditRoomEvent = ({
 
   defaultRoomsQuota,
   isDefaultRoomsQuotaSet,
+
+  setInitialWatermarks,
+  getWatermarkRequest,
+  watermarksSettings,
+  isNotWatermarkSet,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
   const [fetchedTags, setFetchedTags] = useState([]);
   const [fetchedImage, setFetchedImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isInitLoading, setIsInitLoading] = useState(false);
 
   const startTags = Object.values(item.tags);
   const startObjTags = startTags.map((tag, i) => ({ id: i, name: tag }));
@@ -183,6 +194,15 @@ const EditRoomEvent = ({
       if (removedTags.length)
         actions.push(removeTagsFromRoom(room.id, removedTags));
 
+      
+
+      if (watermarksSettings && !isNotWatermarkSet()) {
+       
+        const request = getWatermarkRequest(room, watermarksSettings);
+
+        actions.push(request);
+      }
+
       await Promise.all(actions);
 
       if (!!item.logo.original && !roomParams.icon.uploadedFile) {
@@ -268,23 +288,27 @@ const EditRoomEvent = ({
   }, []);
 
   useEffect(() => {
-    const logo = item?.logo?.original ? item.logo.original : "";
-    if (logo) {
-      fetchLogoAction(logo);
-    }
-  }, []);
-
-  const fetchTagsAction = useCallback(async () => {
-    const tags = await fetchTags();
-    setFetchedTags(tags);
-  }, []);
-
-  useEffect(() => {
-    fetchTagsAction();
-  }, [fetchTagsAction]);
-
-  useEffect(() => {
     setCreateRoomDialogVisible(true);
+    setIsInitLoading(true);
+
+   const logo = item?.logo?.original ? item.logo.original : "";
+
+    const requests = [fetchTags(), getWatermarkSettings(item.id)];
+
+    if (logo) requests.push(fetchLogoAction);
+
+    const fetchInfo = async () => {
+      const [tags, watermarks] = await Promise.all(requests);
+
+      setFetchedTags(tags);
+
+      setInitialWatermarks(watermarks);
+
+      setIsInitLoading(false);
+    };
+
+    fetchInfo();
+
     return () => setCreateRoomDialogVisible(false);
   }, []);
 
@@ -298,6 +322,7 @@ const EditRoomEvent = ({
       fetchedTags={fetchedTags}
       fetchedImage={fetchedImage}
       isLoading={isLoading}
+      isInitLoading={isInitLoading}
     />
   );
 };
@@ -313,6 +338,7 @@ export default inject(
     filesSettingsStore,
     infoPanelStore,
     currentQuotaStore,
+    createEditRoomStore,
   }) => {
     const {
       editRoom,
@@ -344,6 +370,12 @@ export default inject(
     const { updateInfoPanelSelection } = infoPanelStore;
 
     const { defaultRoomsQuota, isDefaultRoomsQuotaSet } = currentQuotaStore;
+    const {
+      setInitialWatermarks,
+      watermarksSettings,
+      isNotWatermarkSet,
+      getWatermarkRequest,
+    } = createEditRoomStore;
 
     return {
       defaultRoomsQuota,
@@ -381,6 +413,10 @@ export default inject(
 
       updateInfoPanelSelection,
       changeRoomOwner,
+      setInitialWatermarks,
+      watermarksSettings,
+      isNotWatermarkSet,
+      getWatermarkRequest,
     };
   },
 )(observer(EditRoomEvent));

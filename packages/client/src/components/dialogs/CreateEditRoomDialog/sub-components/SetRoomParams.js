@@ -223,6 +223,7 @@ const SetRoomParams = ({
           t={t}
           roomParams={roomParams}
           setRoomParams={setRoomParams}
+          isEdit={isEdit}
         />
       )}
 

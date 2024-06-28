@@ -31,9 +31,14 @@ import { TabsTypes } from "./Tabs.enums";
 
 export const StyledTabs = styled.div<{
   stickyTop?: string;
+  multiple: boolean;
 }>`
-  display: flex;
-  flex-direction: column;
+  ${(props) =>
+    props.multiple &&
+    css`
+      display: flex;
+      flex-direction: column;
+    `};
 
   .sticky {
     height: 33px;
@@ -128,6 +133,7 @@ export const ScrollbarTabs = styled(Scrollbar)<{
 
 export const TabList = styled.div<{
   $type?: TabsTypes;
+  multiple: boolean;
 }>`
   display: flex;
   align-items: center;
@@ -135,6 +141,13 @@ export const TabList = styled.div<{
 
   width: 100%;
   height: 32px;
+
+  ${(props) =>
+    props.multiple &&
+    css`
+      flex-wrap: wrap;
+      height: fit-content;
+    `};
 
   gap: ${(props) => (props.$type === TabsTypes.Primary ? "20px" : "8px")};
 

@@ -32,12 +32,12 @@ import AvatarEditor, { Position } from "react-avatar-editor";
 import ZoomMinusReactSvgUrl from "PUBLIC_DIR/images/zoom-minus.react.svg?url";
 import ZoomPlusReactSvgUrl from "PUBLIC_DIR/images/zoom-plus.react.svg?url";
 import IconCropperGridSvgUrl from "PUBLIC_DIR/images/icon-cropper-grid.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 
 import { Slider } from "../../slider";
 import { IconButton } from "../../icon-button";
 import { StyledImageCropper } from "../ImageEditor.styled";
 import { ImageCropperProps } from "../ImageEditor.types";
+import ButtonDelete from "../ButtonDelete";
 
 const ImageCropper = ({
   t,
@@ -132,16 +132,8 @@ const ImageCropper = ({
           crossOrigin="anonymous"
         />
       </div>
-      <div
-        className="icon_cropper-delete_button"
-        onClick={handleDeleteImage}
-        title={t("Common:Delete")}
-      >
-        <ReactSVG src={TrashReactSvgUrl} />
-        <div className="icon_cropper-delete_button-text">
-          {t("Common:Delete")}
-        </div>
-      </div>
+
+      <ButtonDelete onClick={handleDeleteImage} t={t} />
 
       {typeof uploadedFile !== "string" &&
         uploadedFile?.name &&

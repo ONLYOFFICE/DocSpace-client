@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
+import { inject, observer } from "mobx-react";
+
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
+
 import FileLifetime from "./FileLifetime";
+import WatermarkBlock from "./Watermarks/WatermarkBlock";
 
 const StyledVirtualDataRoomBlock = styled.div`
   .virtual-data-room-block {
     margin-bottom: 18px;
-    :last-child {
-      margin-bottom: -26px;
-    }
 
     .virtual-data-room-block_header {
       display: flex;
@@ -25,6 +26,9 @@ const StyledVirtualDataRoomBlock = styled.div`
       margin-right: 28px;
 
       color: ${({ theme }) => theme.editLink.text.color};
+    }
+    .virtual-data-room-block_content {
+      margin-top: 16px;
     }
   }
 `;
@@ -64,12 +68,11 @@ const Block = ({
   );
 };
 
-const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams }) => {
+const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams, isEdit }) => {
   const role = t("Translations:RoleViewer");
 
   const [fileLifetimeChecked, setFileLifetimeChecked] = useState(false);
   const [copyAndDownloadChecked, setCopyAndDownloadChecked] = useState(false);
-  const [watermarksChecked, setWatermarksChecked] = useState(false);
 
   const onChangeAutomaticIndexing = () => {
     setRoomParams({ ...roomParams, indexing: !roomParams.indexing });
@@ -81,10 +84,6 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams }) => {
 
   const onChangeRestrictCopyAndDownload = () => {
     setCopyAndDownloadChecked(!copyAndDownloadChecked);
-  };
-
-  const onChangeAddWatermarksToDocuments = () => {
-    setWatermarksChecked(!watermarksChecked);
   };
 
   return (
@@ -117,13 +116,8 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams }) => {
         isDisabled={false}
         isChecked={copyAndDownloadChecked}
       ></Block>
-      <Block
-        headerText={t("AddWatermarksToDocuments")}
-        bodyText={t("AddWatermarksToDocumentsDescription")}
-        onChange={onChangeAddWatermarksToDocuments}
-        isDisabled={false}
-        isChecked={watermarksChecked}
-      ></Block>
+
+      <WatermarkBlock BlockComponent={Block} t={t} isEdit={isEdit} />
     </StyledVirtualDataRoomBlock>
   );
 };

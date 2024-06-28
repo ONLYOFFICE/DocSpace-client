@@ -470,6 +470,10 @@ class SelectionStore {
     this.dataFromSocket = data;
   };
 
+  findSessionIndexByUserId = (userId) => {
+    return this.dataFromSocket.findIndex((data) => data.id === userId);
+  };
+
   sessisonLogout = ({ userId, date }) => {
     const newData = [...this.dataFromSocket];
 
@@ -487,7 +491,10 @@ class SelectionStore {
         status,
         connections: [
           ...this.sessionsData[currentSesstionIndex].connections,
-          { ...this.sessionsData[currentSesstionIndex].connections[0], date },
+          {
+            ...this.sessionsData[currentSesstionIndex].connections.at(-1),
+            date,
+          },
         ],
       };
     }
@@ -499,11 +506,53 @@ class SelectionStore {
       status,
       sessions: [
         ...newData[index].sessions,
-        { ...newData[index].sessions[0], date },
+        { ...newData[index].sessions.at(-1), date },
       ],
     };
 
     this.setDataFromSocket(newData);
+  };
+
+  setMultiConnections = ({ session, userId }) => {
+    const index = this.findSessionIndexByUserId(userId);
+    this.dataFromSocket[index].sessions = [
+      ...this.dataFromSocket[index].sessions,
+      session,
+    ];
+  };
+
+  sessisonMultiLogout = ({ sessionId, userId, date }) => {
+    const index = this.findSessionIndexByUserId(userId);
+
+    if (index === -1) return;
+
+    const sessionIndex = this.dataFromSocket[index].sessions.findIndex(
+      (item) => item.id === sessionId,
+    );
+
+    if (sessionIndex === -1) return;
+
+    const [deletElement] = this.dataFromSocket[index].sessions.splice(
+      sessionIndex,
+      1,
+    );
+
+    const sessionsLength = this.dataFromSocket[index].sessions.length;
+    const countActiveSession =
+      this.dataFromSocket[index].sessions.filter(
+        (item) => item.status !== "offline",
+      ).length ?? 0;
+
+    const addedIndex =
+      sessionsLength >= countActiveSession
+        ? sessionsLength - countActiveSession
+        : 0;
+
+    this.dataFromSocket[index].sessions.splice(addedIndex, 0, {
+      ...deletElement,
+      date,
+      status: "offline",
+    });
   };
 
   updateDataFromSocket = (data) => {
@@ -522,7 +571,7 @@ class SelectionStore {
     }
 
     if (indexTest === -1) {
-      this.dataFromSocket = [data, ...this.dataFromSocket];
+      this.dataFromSocket = [...this.dataFromSocket, data];
       return;
     }
 
@@ -584,12 +633,9 @@ class SelectionStore {
     const isCurrentSesstion = session.id === data?.id;
     const connectionsIsEmpty = session.connections.length === 0;
 
-    const firstIndex = 0;
     const lastIndex = -1;
-    const isOnline = session.status === "online";
 
-    const index = isOnline ? firstIndex : lastIndex;
-    const sessionData = data?.sessions.at(index);
+    const sessionData = data?.sessions.at(lastIndex);
 
     if (isCurrentSesstion) return [{ ...first, ...sessionData }, ...other];
 

@@ -25,13 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import moment from "moment-timezone";
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
 import { toast as toastify } from "react-toastify";
+
+import config from "PACKAGE_FILE";
 
 import { Portal } from "@docspace/shared/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
@@ -43,8 +45,7 @@ import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
-
-import config from "PACKAGE_FILE";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 import Main from "./components/Main";
 import Layout from "./components/Layout";
@@ -55,7 +56,6 @@ import IndicatorLoader from "./components/IndicatorLoader";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import useCreateFileError from "./Hooks/useCreateFileError";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 // import ReactSmartBanner from "./components/SmartBanner";
 
@@ -92,6 +92,8 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     setDataFromSocket,
     updateDataFromSocket,
     sessisonLogout,
+    setMultiConnections,
+    sessisonMultiLogout,
   } = rest;
 
   const theme = useTheme();
@@ -110,6 +112,23 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     if (regex.test(pathname)) {
       window.location.replace(pathname.replace(replaceRegex, "$1"));
     }
+  }, []);
+
+  const moveToLastSession = useCallback((data) => {
+    return data.map((item) => {
+      if (item.status === "online" && item.sessions.length !== 0) {
+        const {
+          sessions: [first, ...ohterElement],
+          ...otherField
+        } = item;
+
+        return {
+          ...otherField,
+          sessions: [...ohterElement, first],
+        };
+      }
+      return item;
+    });
   }, []);
 
   useEffect(() => {
@@ -145,29 +164,42 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     });
 
     socketHelper.on("statuses-in-portal", (data) => {
-      setDataFromSocket(data);
-      console.log("dataFromSocket", data);
+      const newData = moveToLastSession(data);
+
+      setDataFromSocket(newData);
+      console.log("dataFromSocket", newData);
     });
 
     socketHelper.on("enter-in-portal", (data) => {
-      updateDataFromSocket(data);
-      console.log("enter-in-portal", data);
+      const [newData] = moveToLastSession([data]);
+
+      updateDataFromSocket(newData);
+      console.log("enter-in-portal", newData);
     });
 
     socketHelper.on("leave-in-portal", (data) => {
       sessisonLogout(data);
-      // setCurrentDataFromSocket(data);
       console.log(data);
     });
 
     socketHelper.on("enter-session-in-portal", (data) => {
+      setMultiConnections(data);
       console.log(data);
     });
 
     socketHelper.on("leave-session-in-portal", (data) => {
+      sessisonMultiLogout(data);
       console.log(data);
     });
-  }, [socketHelper, setDataFromSocket, updateDataFromSocket, sessisonLogout]);
+  }, [
+    socketHelper,
+    setDataFromSocket,
+    updateDataFromSocket,
+    sessisonLogout,
+    setMultiConnections,
+    moveToLastSession,
+    sessisonMultiLogout,
+  ]);
 
   useEffect(() => {
     socketHelper.emit({
@@ -495,8 +527,13 @@ const ShellWrapper = inject(
     peopleStore,
   }) => {
     const { i18n } = useTranslation();
-    const { setDataFromSocket, updateDataFromSocket, sessisonLogout } =
-      peopleStore.selectionStore;
+    const {
+      setDataFromSocket,
+      updateDataFromSocket,
+      sessisonLogout,
+      setMultiConnections,
+      sessisonMultiLogout,
+    } = peopleStore.selectionStore;
 
     const {
       init,
@@ -589,6 +626,8 @@ const ShellWrapper = inject(
       setDataFromSocket,
       updateDataFromSocket,
       sessisonLogout,
+      setMultiConnections,
+      sessisonMultiLogout,
     };
   },
 )(observer(Shell));

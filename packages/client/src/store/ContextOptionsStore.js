@@ -554,8 +554,8 @@ class ContextOptionsStore {
     window.dispatchEvent(event);
   };
 
-  onDuplicate = (item, t) => {
-    this.filesActionsStore.duplicateAction(item, t("Common:Duplicate"));
+  onDuplicate = (item) => {
+    this.filesActionsStore.duplicateAction(item);
   };
 
   onClickRename = (item) => {

@@ -965,7 +965,7 @@ class FilesActionStore {
     }
   };
 
-  duplicateAction = async (item, label) => {
+  duplicateAction = async (item) => {
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =
       this.uploadDataStore.secondaryProgressDataStore;
     const { clearActiveOperations } = this.uploadDataStore;
@@ -976,7 +976,7 @@ class FilesActionStore {
     const fileIds = [];
     item.fileExst ? fileIds.push(item.id) : folderIds.push(item.id);
 
-    const icon = item.fileExs ? "duplicate" : "duplicate-room";
+    const icon = item.isRoom ? "duplicate-room" : "duplicate";
     const operationId = uniqueid("operation_");
 
     setSecondaryProgressBarData({

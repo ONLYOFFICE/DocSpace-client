@@ -28,38 +28,38 @@ import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-// import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { WatermarkAdditions } from "@docspace/shared/enums";
 
 import { StyledWatermark } from "./StyledComponent";
+import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
 
 const tabsOptions = (t) => [
   {
-    key: "UserName",
-    title: t("UserName"),
+    id: "UserName",
+    name: t("UserName"),
     index: 0,
   },
   {
-    key: "UserEmail",
-    title: t("UserEmail"),
+    id: "UserEmail",
+    name: t("UserEmail"),
     index: 1,
   },
   {
-    key: "UserIpAdress",
-    title: t("UserIPAddress"),
+    id: "UserIpAdress",
+    name: t("UserIPAddress"),
     index: 2,
   },
   {
-    key: "CurrentDate",
-    title: t("Common:CurrentDate"),
+    id: "CurrentDate",
+    name: t("Common:CurrentDate"),
     index: 3,
   },
   {
-    key: "RoomName",
-    title: t("Common:RoomName"),
+    id: "RoomName",
+    name: t("Common:RoomName"),
     index: 4,
   },
 ];
@@ -74,7 +74,7 @@ const getInitialState = (initialTab) => {
   };
 
   initialTab.map((item) => {
-    state[item.key] = true;
+    state[item.id] = true;
   });
 
   return state;
@@ -89,7 +89,7 @@ const getInitialTabs = (additions, isEdit, t) => {
 
   if (!isEdit || !additions) return [dataTabs[0]];
 
-  return dataTabs.filter((item) => additions & WatermarkAdditions[item.key]);
+  return dataTabs.filter((item) => additions & WatermarkAdditions[item.id]);
 };
 
 const rotateOptions = (t) => [
@@ -165,9 +165,9 @@ const ViewerInfoWatermark = ({
     let elementsData = elements.current;
     let flagsCount = 0;
 
-    const key = item.key;
+    const key = item.id;
 
-    elementsData[key] = !elementsData[item.key];
+    elementsData[key] = !elementsData[item.id];
 
     for (const key in elementsData) {
       const value = elementsData[key];
@@ -176,6 +176,7 @@ const ViewerInfoWatermark = ({
         flagsCount += WatermarkAdditions[key];
       }
     }
+
     setWatermarks({ additions: flagsCount });
   };
 
@@ -197,24 +198,24 @@ const ViewerInfoWatermark = ({
       <Text className="watermark-title" fontWeight={600} lineHeight="20px">
         {t("AddWatermarkElements")}
       </Text>
-      {/* <TabsContainer
-        elements={initialInfoRef.dataTabs}
+
+      <Tabs
+        items={initialInfoRef.dataTabs}
+        selectedItems={initialInfoRef.tabs.map((item) => item.index)}
         onSelect={onSelect}
-        selectedItem={initialInfoRef.tabs.map((item) => item.index)}
+        type={TabsTypes.Secondary}
         multiple
-        withBorder
-      /> */}
-      <div>
-        <Text className="watermark-title" fontWeight={600} lineHeight="20px">
-          {t("AddStaticText")}
-        </Text>
-        <TextInput
-          scale
-          value={textValue}
-          tabIndex={1}
-          onChange={onTextChange}
-        />
-      </div>
+      />
+
+      <Text
+        className="watermark-title title-without-top"
+        fontWeight={600}
+        lineHeight="20px"
+      >
+        {t("AddStaticText")}
+      </Text>
+      <TextInput scale value={textValue} tabIndex={1} onChange={onTextChange} />
+
       <Text className="watermark-title" fontWeight={600} lineHeight="20px">
         {t("Position")}
       </Text>

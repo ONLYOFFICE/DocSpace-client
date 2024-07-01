@@ -60,6 +60,7 @@ export type Property<K extends string, T = number[]> = Setter<K, T> & {
 export interface FieldProps {
   t: TFunction;
   unit: Unit;
+  isDisabled?: boolean;
 }
 
 export interface CronProps {
@@ -69,6 +70,8 @@ export interface CronProps {
   setValue: (value: string) => void;
   /** Triggered when the cron component detects an error with the value. */
   onError?: (error?: Error) => void;
+  /** Disable the cron component. */
+  isDisabled?: boolean;
 }
 
 export interface HoursProps extends FieldProps, Property<"hours"> {}
@@ -93,10 +96,12 @@ export interface SelectProps extends Property<"value"> {
   placeholder: string;
   prefix?: string;
   dropDownMaxHeight?: number;
+  isDisabled?: boolean;
 }
 
 export interface PeriodProps extends Property<"period", PeriodType> {
   t: TFunction;
+  isDisabled?: boolean;
 }
 
 export type PeriodOptionType = {

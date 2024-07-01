@@ -145,7 +145,7 @@ export const getUserTypeLabel = (
     case "owner":
       return t("Common:Owner");
     case "admin":
-      return t("Common:DocspaceAdmin", { productName: PRODUCT_NAME });
+      return t("Common:PortalAdmin", { productName: PRODUCT_NAME });
     case "manager":
       return t("Common:RoomAdmin");
     case "collaborator":
@@ -567,7 +567,7 @@ export function getOAuthToken(
 
 export function getLoginLink(token: string, code: string) {
   return combineUrl(
-    window.DocSpaceConfig?.proxy?.url,
+    window.ClientConfig?.proxy?.url,
     `/login.ashx?p=${token}&code=${code}`,
   );
 }
@@ -1054,25 +1054,41 @@ export const mapCulturesToArray = (
   isBetaBadge: boolean = true,
   i18nArg?: I18n,
 ) => {
+  let t = null;
+
   if (i18nArg) {
-    const t = i18nArg.getFixedT(null, "Common");
-    return culturesArg.map((culture, index) => {
-      return {
-        key: culture,
-        label: t(`Culture_${culture}`),
-        icon: flagsIcons?.get(`${culture}.react.svg`),
-        ...(isBetaBadge && { isBeta: isBetaLanguage(culture) }),
-        index,
-      };
-    });
+    t = i18nArg.getFixedT(null, "Common");
   }
 
   return culturesArg.map((culture, index) => {
-    return {
-      key: culture,
-      icon: flagsIcons?.get(`${culture}.react.svg`),
-      index,
-    };
+    let iconName = culture;
+
+    switch (culture) {
+      case "sr-Cyrl-RS":
+      case "sr-Latn-RS":
+        iconName = "sr";
+        break;
+      default:
+        break;
+    }
+
+    const icon = flagsIcons?.get(`${iconName}.react.svg`);
+
+    const cultureObj = t
+      ? {
+          key: culture,
+          label: t(`Culture_${culture}`),
+          icon,
+          ...(isBetaBadge && { isBeta: isBetaLanguage(culture) }),
+          index,
+        }
+      : {
+          key: culture,
+          icon,
+          index,
+        };
+
+    return cultureObj;
   });
 };
 

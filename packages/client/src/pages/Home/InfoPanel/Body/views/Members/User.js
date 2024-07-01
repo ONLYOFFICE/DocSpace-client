@@ -289,8 +289,8 @@ const User = ({
 
   const tooltipContent = `${
     user.isOwner
-      ? t("Common:DocspaceOwner", { productName: PRODUCT_NAME })
-      : t("Common:DocspaceAdmin", { productName: PRODUCT_NAME })
+      ? t("Common:PortalOwner", { productName: PRODUCT_NAME })
+      : t("Common:PortalAdmin", { productName: PRODUCT_NAME })
   }. ${t("Common:HasFullAccess")}`;
 
   return user.isTitle ? (

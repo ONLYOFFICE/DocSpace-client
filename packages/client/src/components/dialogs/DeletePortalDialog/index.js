@@ -61,10 +61,10 @@ const DeletePortalDialog = (props) => {
       displayType="modal"
     >
       <ModalDialog.Header>
-        {t("DeleteDocspace", { productName: PRODUCT_NAME })}
+        {t("DeletePortal", { productName: PRODUCT_NAME })}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Trans t={t} i18nKey="DeleteDocspaceInfo" ns="Settings">
+        <Trans t={t} i18nKey="DeletePortalInfo" ns="Settings">
           Before you delete the portal, please make sure that automatic billing
           is turned off. You may check the status of automatic billing in
           <ColorTheme

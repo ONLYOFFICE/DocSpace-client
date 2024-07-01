@@ -86,10 +86,10 @@ const Accounts = (props) => {
     const options = [];
 
     const adminOption = {
-      id: "info-account-type_docspace-admin",
+      id: "info-account-type_portal-admin",
       key: "admin",
-      title: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
-      label: t("Common:DocspaceAdmin", { productName: PRODUCT_NAME }),
+      title: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+      label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
       action: "admin",
     };
     const managerOption = {

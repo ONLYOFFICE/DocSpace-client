@@ -1,5 +1,4 @@
 {
-  "Authentication": "Заверка",
   "AuthViaNTLM": "Удостоверяване чрез NTLM",
   "EnableSSL": "Активиране на SSL",
   "EnterDomain": "Въведете домейн",
@@ -12,6 +11,5 @@
   "Port": "Порт",
   "SenderDisplayName": "Екранно име на подателя",
   "SenderEmailAddress": "Имейл адрес на подателя",
-  "SendTestMail": "Изпращане на тестова поща",
-  "SuccessfullyCompletedOperation": "Операцията е завършена успешно."
+  "SendTestMail": "Изпращане на тестова поща"
 }

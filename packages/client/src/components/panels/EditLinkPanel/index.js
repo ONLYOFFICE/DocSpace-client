@@ -40,7 +40,6 @@ import LinkBlock from "./LinkBlock";
 import ToggleBlock from "./ToggleBlock";
 import PasswordAccessBlock from "./PasswordAccessBlock";
 import LimitTimeBlock from "./LimitTimeBlock";
-import { RoomsType } from "@docspace/shared/enums";
 import { DeviceType } from "@docspace/shared/enums";
 import moment from "moment";
 
@@ -65,6 +64,7 @@ const EditLinkPanel = (props) => {
     isPublic,
     isFormRoom,
     currentDeviceType,
+    setLinkParams,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -130,6 +130,7 @@ const EditLinkPanel = (props) => {
     editExternalLink(roomId, newLink)
       .then((link) => {
         setExternalLink(link);
+        setLinkParams({ link, roomId, isPublic, isFormRoom });
 
         if (isEdit) {
           copy(linkValue);
@@ -301,31 +302,23 @@ const EditLinkPanel = (props) => {
 };
 
 export default inject(
-  ({
-    authStore,
-    settingsStore,
-    dialogsStore,
-    publicRoomStore,
-    infoPanelStore,
-  }) => {
-    const { infoPanelSelection } = infoPanelStore;
+  ({ authStore, settingsStore, dialogsStore, publicRoomStore }) => {
     const {
       editLinkPanelIsVisible,
       setEditLinkPanelIsVisible,
       unsavedChangesDialogVisible,
       setUnsavedChangesDialog,
       linkParams,
+      setLinkParams,
     } = dialogsStore;
     const { externalLinks, editExternalLink, setExternalLink } =
       publicRoomStore;
-    const { isEdit } = linkParams;
+    const { isEdit, roomId, isPublic, isFormRoom } = linkParams;
 
     const linkId = linkParams?.link?.sharedTo?.id;
     const link = externalLinks.find((l) => l?.sharedTo?.id === linkId);
 
     const shareLink = link?.sharedTo?.shareLink;
-    const isPublic = infoPanelSelection?.roomType === RoomsType.PublicRoom;
-    const isFormRoom = infoPanelSelection?.roomType === RoomsType.FormRoom;
 
     return {
       visible: editLinkPanelIsVisible,
@@ -333,7 +326,7 @@ export default inject(
       isEdit,
       linkId: link?.sharedTo?.id,
       editExternalLink,
-      roomId: infoPanelSelection.id,
+      roomId,
       setExternalLink,
       isLocked: !!link?.sharedTo?.password,
       password: link?.sharedTo?.password ?? "",
@@ -348,6 +341,7 @@ export default inject(
       isPublic,
       isFormRoom,
       currentDeviceType: settingsStore.currentDeviceType,
+      setLinkParams,
     };
   },
 )(

@@ -32,7 +32,7 @@ import { useTheme } from "styled-components";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import OutsdideIcon from "PUBLIC_DIR/images/arrow.outside.react.svg";
-
+import { isMobile as isMobileDevice } from "react-device-detect";
 import { classNames, ObjectUtils, DomHelpers, isMobile } from "../../../utils";
 import { ContextMenuSkeleton } from "../../../skeletons/context-menu";
 
@@ -77,7 +77,7 @@ const SubMenu = (props: {
   const theme = useTheme();
 
   const onItemMouseEnter = (e: React.MouseEvent, item: ContextMenuType) => {
-    if (item.disabled) {
+    if (isMobileDevice) {
       e.preventDefault();
       return;
     }
@@ -93,7 +93,8 @@ const SubMenu = (props: {
 
     if (label && (items || item.onLoad)) {
       e.preventDefault();
-      if (!isMobile()) return;
+
+      if (!isMobileDevice) return;
 
       if (items) onMobileItemClick?.(e, label as string, items, undefined);
       else if (item.onLoad)
@@ -110,15 +111,14 @@ const SubMenu = (props: {
       e.preventDefault();
     }
 
-    if (onClick) {
-      onClick({ originalEvent: e, action, item });
+    onClick?.({ originalEvent: e, action, item });
+
+    if (items && isMobileDevice) {
+      setActiveItem(item);
+      return;
     }
 
-    if (!items) {
-      onLeafClick?.(e);
-    } else {
-      e.stopPropagation();
-    }
+    onLeafClick?.(e);
   };
 
   const position = () => {
@@ -338,18 +338,19 @@ const SubMenu = (props: {
     const dataKeys = Object.fromEntries(
       Object.entries(item).filter((el) => el[0].indexOf("data-") === 0),
     );
+
     const onClick = (
       e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
     ) => {
       onItemClick(e, item);
     };
+
     let content = (
       <a
         href={item.url || "#"}
         className={linkClassName || ""}
         target={item.target}
         {...dataKeys}
-        onClick={onClick}
         role="menuitem"
       >
         {icon}
@@ -388,6 +389,7 @@ const SubMenu = (props: {
           role="none"
           className={className || ""}
           style={{ ...item.style, ...style }}
+          onClick={onClick}
           onMouseEnter={(e) => onItemMouseEnter(e, item)}
         >
           {content}
@@ -407,6 +409,7 @@ const SubMenu = (props: {
         role="none"
         className={className || ""}
         style={{ ...item.style, ...style }}
+        onClick={onClick}
         onMouseEnter={(e) => onItemMouseEnter(e, item)}
       >
         {content}

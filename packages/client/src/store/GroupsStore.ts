@@ -109,7 +109,7 @@ class GroupsStore {
     window.history.replaceState(
       "",
       "",
-      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath),
+      combineUrl(window.ClientConfig?.proxy?.url, config.homepage, newPath),
     );
   };
 
@@ -174,7 +174,7 @@ class GroupsStore {
     window.history.replaceState(
       "",
       "",
-      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath),
+      combineUrl(window.ClientConfig?.proxy?.url, config.homepage, newPath),
     );
   };
 
@@ -483,19 +483,20 @@ class GroupsStore {
     const { isRoomAdmin } = this.peopleStore.userStore.user;
 
     return [
-      !isRoomAdmin && {
-        id: "edit-group",
-        key: "edit-group",
-        className: "group-menu_drop-down",
-        label: t("PeopleTranslations:EditGroup"),
-        title: t("PeopleTranslations:EditGroup"),
-        icon: PencilReactSvgUrl,
-        onClick: () => {
-          const event = new Event(Events.GROUP_EDIT);
-          event.item = item;
-          window.dispatchEvent(event);
+      !isRoomAdmin &&
+        !item?.isLDAP && {
+          id: "edit-group",
+          key: "edit-group",
+          className: "group-menu_drop-down",
+          label: t("PeopleTranslations:EditGroup"),
+          title: t("PeopleTranslations:EditGroup"),
+          icon: PencilReactSvgUrl,
+          onClick: () => {
+            const event = new Event(Events.GROUP_EDIT);
+            event.item = item;
+            window.dispatchEvent(event);
+          },
         },
-      },
       !forInfoPanel && {
         id: "info",
         key: "group-info",
@@ -515,19 +516,21 @@ class GroupsStore {
           this.infoPanelStore.setIsVisible(true);
         },
       },
-      !isRoomAdmin && {
-        key: "separator",
-        isSeparator: true,
-      },
-      !isRoomAdmin && {
-        id: "delete-group",
-        key: "delete-group",
-        className: "group-menu_drop-down",
-        label: t("Common:Delete"),
-        title: t("Common:Delete"),
-        icon: TrashReactSvgUrl,
-        onClick: () => this.onDeleteClick(item.name),
-      },
+      !isRoomAdmin &&
+        !item?.isLDAP && {
+          key: "separator",
+          isSeparator: true,
+        },
+      !isRoomAdmin &&
+        !item?.isLDAP && {
+          id: "delete-group",
+          key: "delete-group",
+          className: "group-menu_drop-down",
+          label: t("Common:Delete"),
+          title: t("Common:Delete"),
+          icon: TrashReactSvgUrl,
+          onClick: () => this.onDeleteClick(item.name),
+        },
     ];
   };
 
@@ -543,10 +546,16 @@ class GroupsStore {
     withBackURL: boolean,
     tempTitle: string,
   ) => {
+    const { setIsSectionBodyLoading, setIsSectionFilterLoading } =
+      this.clientLoadingStore;
+
     this.setSelection([]);
     this.setBufferSelection(null);
     this.setCurrentGroup(null);
     this.setInsideGroupTempTitle(tempTitle);
+
+    setIsSectionFilterLoading(true);
+    setIsSectionBodyLoading(true);
 
     if (withBackURL) {
       const url = `${window.location.pathname}${window.location.search}`;
@@ -589,6 +598,7 @@ class GroupsStore {
           this.insideGroupFilter.clone(),
         );
         this.peopleStore.usersStore.setUsers(members.items);
+        this.setInsideGroupTempTitle(res.name);
       }
 
       if (infoPanelSelection?.id === res.id) {

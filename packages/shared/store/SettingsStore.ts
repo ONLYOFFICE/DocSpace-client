@@ -194,8 +194,6 @@ class SettingsStore {
 
   encryptionKeys: { [key: string]: string | boolean } = {};
 
-  docSpace = true;
-
   roomsMode = false;
 
   isHeaderVisible = false;
@@ -336,7 +334,12 @@ class SettingsStore {
     this.tenantStatus = tenantStatus;
   };
 
-  get docspaceSettingsUrl() {
+  get ldapSettingsUrl() {
+    //TODO: Change to real link
+    return `${this.helpLink}/administration/docspace-settings.aspx#LdapSettings_block`;
+  }
+
+  get portalSettingsUrl() {
     return `${this.helpLink}/administration/docspace-settings.aspx`;
   }
 
@@ -554,7 +557,7 @@ class SettingsStore {
     else newSettings = await api.settings.getSettings(true);
 
     if (window.AscDesktopEditor !== undefined) {
-      const dp = combineUrl(window.DocSpaceConfig?.proxy?.url, MEDIA_VIEW_URL);
+      const dp = combineUrl(window.ClientConfig?.proxy?.url, MEDIA_VIEW_URL);
       this.setDefaultPage(dp);
     }
 
@@ -566,7 +569,7 @@ class SettingsStore {
         this.setValue(
           key as keyof SettingsStore,
           key === "defaultPage"
-            ? combineUrl(window.DocSpaceConfig?.proxy?.url, newSettings[key])
+            ? combineUrl(window.ClientConfig?.proxy?.url, newSettings[key])
             : newSettings[key],
         );
         if (key === "culture") {
@@ -1034,7 +1037,7 @@ class SettingsStore {
       ? window.name.includes(this.frameConfig?.name)
       : false;
 
-    if (window.DocSpaceConfig) window.DocSpaceConfig.isFrame = isFrame;
+    if (window.ClientConfig) window.ClientConfig.isFrame = isFrame;
 
     return isFrame;
   }

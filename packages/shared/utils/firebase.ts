@@ -36,11 +36,11 @@ import { TFirebaseSettings } from "../api/settings/types";
 
 const fetchTimeoutMillis =
   (typeof window !== "undefined" &&
-    window.DocSpaceConfig?.firebase?.fetchTimeoutMillis) ||
+    window.ClientConfig?.firebase?.fetchTimeoutMillis) ||
   3600000;
 const minimumFetchIntervalMillis =
   (typeof window !== "undefined" &&
-    window.DocSpaceConfig?.firebase?.minimumFetchIntervalMillis) ||
+    window.ClientConfig?.firebase?.minimumFetchIntervalMillis) ||
   3600000;
 
 class FirebaseHelper {

@@ -30,7 +30,6 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
-import AppLoader from "@docspace/shared/components/app-loader";
 
 import { TResponse } from "@/types";
 import useError from "@/hooks/useError";
@@ -83,7 +82,8 @@ const Root = ({
 
   useEffect(() => {
     console.log("editor timer: ", timer);
-  }, [timer]);
+    console.log("openEdit timer: ", config?.timer);
+  }, [config?.timer, timer]);
 
   useRootInit({
     documentType: config?.documentType,
@@ -125,12 +125,6 @@ const Root = ({
     selectFileDialogFileTypeDetection,
     selectFileDialogVisible,
   } = useSelectFileDialog({ instanceId: instanceId ?? "" });
-  const {
-    isSharingDialogVisible,
-
-    onCloseSharingDialog,
-    onSDKRequestSharingSettings,
-  } = useShareDialog();
 
   const {
     getIsDisabledStartFillingSelectDialog,
@@ -139,7 +133,15 @@ const Root = ({
     onSubmitStartFillingSelectDialog,
     onSDKRequestStartFilling,
     conflictDataDialog,
+    headerLabelSFSDialog,
   } = useStartFillingSelectDialog(fileInfo);
+
+  const {
+    isSharingDialogVisible,
+
+    onCloseSharingDialog,
+    onSDKRequestSharingSettings,
+  } = useShareDialog(config, onSDKRequestStartFilling);
 
   useUpdateSearchParamId(fileId, hash);
 
@@ -254,11 +256,12 @@ const Root = ({
         <StartFillingSelectorDialog
           fileInfo={fileInfo}
           socketHelper={socketHelper}
+          filesSettings={filesSettings}
+          headerLabel={headerLabelSFSDialog}
           isVisible={isVisibleStartFillingSelectDialog}
           onClose={onCloseStartFillingSelectDialog}
           onSubmit={onSubmitStartFillingSelectDialog}
           getIsDisabled={getIsDisabledStartFillingSelectDialog}
-          filesSettings={filesSettings}
         />
       )}
       {conflictDataDialog.visible && (

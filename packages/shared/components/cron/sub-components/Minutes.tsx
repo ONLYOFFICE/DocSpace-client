@@ -30,7 +30,7 @@ import { Select } from "./Select";
 import type { MinutesProps } from "../Cron.types";
 
 export const Minutes = memo(
-  ({ minutes, setMinutes, period, t, unit }: MinutesProps) => {
+  ({ minutes, setMinutes, period, t, unit, isDisabled }: MinutesProps) => {
     const isHour = period === "Hour";
     const prefix = isHour ? "" : ":";
 
@@ -42,6 +42,7 @@ export const Minutes = memo(
         setValue={setMinutes}
         dropDownMaxHeight={300}
         placeholder={t("EveryMinute")}
+        isDisabled={isDisabled}
       />
     );
   },

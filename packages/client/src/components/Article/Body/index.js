@@ -109,28 +109,20 @@ const ArticleBodyContent = (props) => {
 
           path = getCategoryUrl(CategoryType.Personal);
 
-          if (activeItemId === myFolderId && folderId === selectedFolderId)
-            return;
-
           break;
         case archiveFolderId:
           const archiveFilter = RoomsFilter.getDefault(userId);
           archiveFilter.searchArea = RoomSearchArea.Archive;
           params = archiveFilter.toUrlParams(userId, true);
           path = getCategoryUrl(CategoryType.Archive);
-          if (activeItemId === archiveFolderId && folderId === selectedFolderId)
-            return;
+
           break;
         case recycleBinFolderId:
           const recycleBinFilter = FilesFilter.getDefault();
           recycleBinFilter.folder = folderId;
           params = recycleBinFilter.toUrlParams();
           path = getCategoryUrl(CategoryType.Trash);
-          if (
-            activeItemId === recycleBinFolderId &&
-            folderId === selectedFolderId
-          )
-            return;
+
           break;
         case "accounts":
           const accountsFilter = AccountsFilter.getDefault();
@@ -138,7 +130,6 @@ const ArticleBodyContent = (props) => {
           path = getCategoryUrl(CategoryType.Accounts);
 
           withTimer = false;
-          if (activeItemId === "accounts" && isAccounts) return;
 
           break;
         case "settings":
@@ -155,12 +146,11 @@ const ArticleBodyContent = (props) => {
           roomsFilter.searchArea = RoomSearchArea.Active;
           params = roomsFilter.toUrlParams(userId, true);
           path = getCategoryUrl(CategoryType.Shared);
-          if (activeItemId === roomsFolderId && folderId === selectedFolderId)
-            return;
+
           break;
       }
 
-      path += `?${params}`;
+      path += `?${params}&date=${new Date().getTime()}`;
 
       if (openingNewTab(path, e)) return;
 

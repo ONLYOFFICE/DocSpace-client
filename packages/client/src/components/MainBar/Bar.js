@@ -120,7 +120,6 @@ const Bar = (props) => {
         setBarVisible((value) => ({
           ...value,
           roomQuota: !closed.includes(QuotaBarTypes.RoomQuota),
-          tenantCustomQuota: !closed.includes(QuotaBarTypes.TenantCustomQuota),
           userQuota: !closed.includes(QuotaBarTypes.UserQuota),
           storageAndRoomQuota: !closed.includes(
             QuotaBarTypes.UserAndStorageQuota,
@@ -134,6 +133,7 @@ const Bar = (props) => {
         setBarVisible((value) => ({
           ...value,
           storageQuota: !closed.includes(QuotaBarTypes.StorageQuota),
+          tenantCustomQuota: !closed.includes(QuotaBarTypes.TenantCustomQuota),
         }));
       }
 
@@ -147,7 +147,7 @@ const Bar = (props) => {
       setBarVisible({
         roomQuota: isAdmin,
         storageQuota: isAdmin || isPowerUser || isRoomAdmin,
-        tenantCustomQuota: isAdmin,
+        tenantCustomQuota: isAdmin || isPowerUser || isRoomAdmin,
         userQuota: isAdmin,
         storageAndUserQuota: isAdmin,
         storageAndRoomQuota: isAdmin,

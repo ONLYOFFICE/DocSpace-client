@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable, runInAction } from "mobx";
+import { TFunction } from "i18next";
 import * as groupsApi from "@docspace/shared/api/groups";
 import { Events } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
@@ -474,6 +475,47 @@ class GroupsStore {
     }
   };
 
+  get hasGroupsToRemove() {
+    if (this.peopleStore.userStore.user.isRoomAdmin) {
+      return false;
+    }
+
+    const noLdapItems = this.selection.filter((item) => !item?.isLDAP);
+
+    return noLdapItems.length > 0;
+  }
+
+  getMultipleGroupsContextOptions = (t: TFunction) => {
+    const { setDeleteGroupDialogVisible } = this.peopleStore.dialogStore;
+
+    return [
+      {
+        id: "info",
+        key: "group-info",
+        className: "group-menu_drop-down",
+        label: t("Common:Info"),
+        title: t("Common:Info"),
+        icon: InfoReactSvgUrl,
+        onClick: () => this.infoPanelStore.setIsVisible(true),
+      },
+      {
+        key: "separator",
+        isSeparator: true,
+        disabled: !this.hasGroupsToRemove,
+      },
+      {
+        id: "delete-group",
+        key: "delete-group",
+        className: "group-menu_drop-down",
+        label: t("Common:Delete"),
+        title: t("Common:Delete"),
+        icon: TrashReactSvgUrl,
+        onClick: () => setDeleteGroupDialogVisible(true),
+        disabled: !this.hasGroupsToRemove,
+      },
+    ];
+  };
+
   getGroupContextOptions = (
     t,
     item,
@@ -532,6 +574,12 @@ class GroupsStore {
           onClick: () => this.onDeleteClick(item.name),
         },
     ];
+  };
+
+  getModel = (t: TFunction, item: TGroup) => {
+    return this.selection.length > 1
+      ? this.getMultipleGroupsContextOptions(t)
+      : this.getGroupContextOptions(t, item);
   };
 
   clearInsideGroup = () => {

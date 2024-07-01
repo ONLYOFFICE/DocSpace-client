@@ -2445,7 +2445,7 @@ class ContextOptionsStore {
       key: "new-form",
       label: t("Translations:SubNewForm"),
       icon: FormBlankReactSvgUrl,
-      onClick: () => this.onCreate("docxf"),
+      onClick: () => this.onCreate("pdf"),
     };
 
     const createTemplateNewFormFile = {
@@ -2548,7 +2548,7 @@ class ContextOptionsStore {
           showUploadFolder ? uploadFolder : null,
         ];
 
-    if (mainButtonItemsList && enablePlugins) {
+    if (mainButtonItemsList && enablePlugins && !isSectionMenu) {
       const pluginItems = [];
 
       mainButtonItemsList.forEach((option) => {

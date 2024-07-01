@@ -103,6 +103,9 @@ const {
   windowsColor,
   linuxColor,
   androidColor,
+  badgeShadow,
+  popupShadow,
+  menuShadow,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -1175,7 +1178,7 @@ const Dark: TTheme = {
         borderStyle: "solid",
         borderColor: `${black}`,
         borderRadius: "30px",
-        boxShadow: "0px 5px 20px rgba(4, 15, 27, 0.13)",
+        boxShadow: `0px 5px 20px ${popupShadow}`,
       },
 
       thumb: {
@@ -1185,7 +1188,7 @@ const Dark: TTheme = {
         border: `6px solid ${black}`,
         borderRadius: "30px",
         marginTop: "0px",
-        boxShadow: "0px 5px 20px rgba(4, 15, 27, 0.13)",
+        boxShadow: `0px 5px 20px ${popupShadow}`,
       },
 
       rangeTrack: {
@@ -1202,7 +1205,7 @@ const Dark: TTheme = {
         background: white,
         border: `6px solid ${black}`,
         borderRadius: "30px",
-        boxShadow: "0px 5px 20px rgba(4, 15, 27, 0.13)",
+        boxShadow: `0px 5px 20px ${popupShadow}`,
       },
 
       track: {

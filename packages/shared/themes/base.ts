@@ -114,6 +114,9 @@ const {
   windowsColor,
   linuxColor,
   androidColor,
+  badgeShadow,
+  popupShadow,
+  menuShadow,
 } = globalColors;
 
 export const getBaseTheme = () => {
@@ -150,7 +153,7 @@ export const getBaseTheme = () => {
     backgroundAndSubstrateColor: grayLight,
 
     betaBadgeTooltip: {
-      boxShadowColor: "rgba(4, 15, 27, 0.12)",
+      boxShadowColor: badgeShadow,
     },
 
     button: {
@@ -960,7 +963,7 @@ export const getBaseTheme = () => {
 
     tooltip: {
       borderRadius: "6px",
-      boxShadow: "0px 10px 15px rgba(4, 15, 27, 0.12)",
+      boxShadow: `0px 10px 15px ${popupShadow}`,
       opacity: "1",
       padding: "8px 12px",
       pointerEvents: "auto",
@@ -1192,7 +1195,7 @@ export const getBaseTheme = () => {
           borderStyle: "solid",
           borderColor: `${white}`,
           borderRadius: "30px",
-          boxShadow: "0px 5px 20px rgba(4, 15, 27, 0.13)",
+          boxShadow: `0px 5px 20px ${popupShadow}`,
         },
 
         thumb: {
@@ -1202,7 +1205,7 @@ export const getBaseTheme = () => {
           border: `6px solid ${white}`,
           borderRadius: "30px",
           marginTop: "0px",
-          boxShadow: "0px 5px 20px rgba(4, 15, 27, 0.13)",
+          boxShadow: `0px 5px 20px ${popupShadow}`,
         },
 
         rangeTrack: {
@@ -1219,7 +1222,7 @@ export const getBaseTheme = () => {
           background: lightSecondMain,
           border: `6px solid ${white}`,
           borderRadius: "30px",
-          boxShadow: "0px 5px 20px rgba(4, 15, 27, 0.13)",
+          boxShadow: `0px 5px 20px ${popupShadow}`,
         },
 
         track: {
@@ -1616,7 +1619,7 @@ export const getBaseTheme = () => {
       disabledArrow: gray,
       weekdayColor: gray,
       accent: lightBlueMain,
-      boxShadow: "0px 12px 40px rgba(4, 15, 27, 0.12)",
+      boxShadow: `0px 12px 40px ${popupShadow}`,
     },
 
     datePicker: {
@@ -1893,7 +1896,7 @@ export const getBaseTheme = () => {
       },
 
       search: {
-        boxShadow: "0px 5px 20px 0px rgba(4, 15, 27, 0.07)",
+        boxShadow: `0px 5px 20px 0px ${menuShadow}`,
       },
 
       groups: {
@@ -1992,7 +1995,7 @@ export const getBaseTheme = () => {
         background: white,
         borderBottom: "1px solid transparent",
         borderRight: `1px solid ${grayStrong}`,
-        boxShadow: "0px 5px 20px rgba(4, 15, 27, 7%)",
+        boxShadow: `0px 5px 20px ${menuShadow}`,
       },
 
       header: {
@@ -2930,7 +2933,7 @@ export const getBaseTheme = () => {
           importIconColor: lightGrayDark,
           groupMenuBackground: white,
           groupMenuBorder: `1px solid ${white}`,
-          groupMenuBoxShadow: "rgba(4, 15, 27, 0.07) 0px 5px 5px 0px",
+          groupMenuBoxShadow: `${menuShadow} 0px 5px 5px 0px`,
           linkColor: lightBlueMain,
           background: grayLight,
         },
@@ -3053,7 +3056,7 @@ export const getBaseTheme = () => {
 
     formWrapper: {
       background: white,
-      boxShadow: "0px 5px 20px rgba(4, 15, 27, 0.07)",
+      boxShadow: `0px 5px 20px ${popupShadow}`,
     },
 
     preparationPortalProgress: {

@@ -228,6 +228,7 @@ const SectionHeaderContent = (props) => {
     onEmptyTrashAction,
     getHeaderOptions,
     setBufferSelection,
+    setReorderDialogVisible,
   } = props;
 
   const location = useLocation();
@@ -605,6 +606,7 @@ export default inject(
     settingsStore,
     uploadDataStore,
     indexingStore,
+    dialogsStore,
   }) => {
     const { startUpload } = uploadDataStore;
     const isRoomAdmin = userStore.user?.isRoomAdmin;
@@ -642,6 +644,8 @@ export default inject(
 
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
       treeFoldersStore;
+
+    const { setReorderDialogVisible } = dialogsStore;
 
     const {
       getHeaderMenu,
@@ -824,6 +828,7 @@ export default inject(
       onEmptyTrashAction,
       getHeaderOptions,
       setBufferSelection,
+      setReorderDialogVisible,
     };
   },
 )(

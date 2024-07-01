@@ -121,7 +121,12 @@ const useOperations = ({
             ),
             refreshFiles()
           );
-
+        case "duplicate-room":
+          return toastr.success(
+            <Trans t={t} i18nKey="CopyItem" ns="Files">
+              {{ title }} copied
+            </Trans>,
+          );
         default:
           break;
       }

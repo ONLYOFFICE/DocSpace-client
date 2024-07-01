@@ -29,10 +29,24 @@ import type { NextRequest } from "next/server";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
-  return NextResponse.json({ status: "healthy" }, { status: 200 });
+  const host = request.headers.get("x-forwarded-host");
+  const proto = request.headers.get("x-forwarded-proto");
+
+  const redirectUrl = `${proto}://${host}`;
+
+  if (request.nextUrl.pathname === "/health") {
+    console.log("Get doceditor health check for portal: ", redirectUrl);
+    return NextResponse.json({ status: "healthy" }, { status: 200 });
+  }
+
+  if (request.nextUrl.pathname.includes("doceditor")) {
+    return NextResponse.redirect(
+      `${redirectUrl}/doceditor${request.nextUrl.search}`,
+    );
+  }
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: "/health",
+  matcher: ["/health", "/doceditor"],
 };

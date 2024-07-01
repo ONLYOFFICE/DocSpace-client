@@ -54,6 +54,7 @@ const DataImport = (props: DataImportProps) => {
     setIsMigrationInit,
     setLoadingStatus,
     setMigratingWorkspace,
+    setMigrationPhase,
   } = props as InjectedDataImportProps;
 
   const { t } = useTranslation(["Settings"]);
@@ -75,13 +76,29 @@ const DataImport = (props: DataImportProps) => {
 
     const { parseResult, isCompleted } = response;
 
-    if (parseResult.operation === "parse" && isCompleted) {
-      setUsers(parseResult);
+    if (parseResult.operation === "parse") {
       setWorkspace(parseResult.migratorName);
       setMigratingWorkspace(parseResult.migratorName);
       setFiles(parseResult.files);
-      setIsMigrationInit(true);
-      setLoadingStatus("done");
+
+      if (isCompleted) {
+        setUsers(parseResult);
+        setMigrationPhase("setup");
+        setLoadingStatus("done");
+      } else {
+        setLoadingStatus("proceed");
+      }
+    }
+
+    if (parseResult.operation === "migration") {
+      setWorkspace(parseResult.migratorName);
+      setMigratingWorkspace(parseResult.migratorName);
+
+      if (isCompleted) {
+        setMigrationPhase("complete");
+      } else {
+        setMigrationPhase("migrating");
+      }
     }
   }, [
     getMigrationStatus,
@@ -89,8 +106,8 @@ const DataImport = (props: DataImportProps) => {
     setWorkspace,
     setMigratingWorkspace,
     setFiles,
-    setIsMigrationInit,
     setLoadingStatus,
+    setMigrationPhase,
   ]);
 
   useEffect(() => {
@@ -126,6 +143,7 @@ export default inject<TStore>(
       setIsMigrationInit,
       setLoadingStatus,
       setMigratingWorkspace,
+      setMigrationPhase,
     } = importAccountsStore;
 
     const { setDocumentTitle } = authStore;
@@ -147,6 +165,7 @@ export default inject<TStore>(
       setIsMigrationInit,
       setLoadingStatus,
       setMigratingWorkspace,
+      setMigrationPhase,
     };
   },
 )(observer(DataImport));

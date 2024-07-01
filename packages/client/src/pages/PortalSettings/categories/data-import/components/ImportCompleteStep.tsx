@@ -72,6 +72,8 @@ const ImportCompleteStep = (props: ImportCompleteStepProps) => {
     getMigrationStatus,
     setStep,
     setWorkspace,
+    setMigratingWorkspace,
+    setMigrationPhase,
   } = props as InjectedImportCompleteStepProps;
 
   const [isChecked, setIsChecked] = useState(false);
@@ -114,6 +116,8 @@ const ImportCompleteStep = (props: ImportCompleteStepProps) => {
     clearMigration();
     setStep(1);
     setWorkspace("");
+    setMigratingWorkspace("");
+    setMigrationPhase("");
   };
 
   useEffect(() => {
@@ -189,6 +193,8 @@ export default inject<TStore>(({ importAccountsStore }) => {
     getMigrationStatus,
     setStep,
     setWorkspace,
+    setMigratingWorkspace,
+    setMigrationPhase,
   } = importAccountsStore;
 
   return {
@@ -199,5 +205,7 @@ export default inject<TStore>(({ importAccountsStore }) => {
     getMigrationStatus,
     setStep,
     setWorkspace,
+    setMigratingWorkspace,
+    setMigrationPhase,
   };
 })(observer(ImportCompleteStep));

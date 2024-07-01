@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useLayoutEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -35,8 +36,17 @@ import StepLayout from "../sub-components/StepLayout";
 import { InjectedWorkspaceProps, WorkspaceProps, TFunciton } from "../types";
 
 const NextcloudWorkspace = (props: WorkspaceProps) => {
-  const { theme, filteredUsers, step, organizationName } =
-    props as InjectedWorkspaceProps;
+  const {
+    theme,
+    filteredUsers,
+    step,
+    setStep,
+    organizationName,
+    migratingWorkspace,
+    migrationPhase,
+    isMigrationInit,
+    setIsMigrationInit,
+  } = props as InjectedWorkspaceProps;
 
   const { t, ready }: { t: TFunciton; ready: boolean } = useTranslation([
     "Common, SMTPSettings, Settings",
@@ -47,6 +57,19 @@ const NextcloudWorkspace = (props: WorkspaceProps) => {
     filteredUsers.length === 0,
     organizationName,
   );
+
+  useLayoutEffect(() => {
+    if (migratingWorkspace === "Nextcloud" && !isMigrationInit) {
+      if (migrationPhase === "setup") {
+        setStep(2);
+      } else if (migrationPhase === "migrating") {
+        setStep(6);
+      } else if (migrationPhase === "complete") {
+        setStep(7);
+      }
+      setIsMigrationInit(true);
+    }
+  }, []);
 
   if (!ready) return <SelectFileLoader />;
 
@@ -65,7 +88,16 @@ const NextcloudWorkspace = (props: WorkspaceProps) => {
 };
 
 export default inject<TStore>(({ settingsStore, importAccountsStore }) => {
-  const { filteredUsers, step, setStep, setWorkspace } = importAccountsStore;
+  const {
+    filteredUsers,
+    step,
+    setStep,
+    setWorkspace,
+    migratingWorkspace,
+    migrationPhase,
+    isMigrationInit,
+    setIsMigrationInit,
+  } = importAccountsStore;
   const { theme, organizationName } = settingsStore;
 
   return {
@@ -75,5 +107,9 @@ export default inject<TStore>(({ settingsStore, importAccountsStore }) => {
     setStep,
     setWorkspace,
     organizationName,
+    migratingWorkspace,
+    migrationPhase,
+    isMigrationInit,
+    setIsMigrationInit,
   };
 })(observer(NextcloudWorkspace));

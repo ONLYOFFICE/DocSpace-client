@@ -62,6 +62,8 @@ type CheckedAccountTypes = "withEmail" | "withoutEmail" | "result";
 
 type LoadingState = "none" | "upload" | "proceed" | "done";
 
+type TMigrationPhase = "" | "setup" | "migrating" | "complete";
+
 class ImportAccountsStore {
   services: TWorkspaceService[] = [];
 
@@ -109,6 +111,8 @@ class ImportAccountsStore {
     importProjectFiles: true,
   };
 
+  migrationPhase: TMigrationPhase = "";
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -148,6 +152,10 @@ class ImportAccountsStore {
 
   decrementStep = () => {
     this.step -= 1;
+  };
+
+  setMigrationPhase = (phase: TMigrationPhase) => {
+    this.migrationPhase = phase;
   };
 
   setWorkspace = (workspace: TWorkspaceService | "") => {

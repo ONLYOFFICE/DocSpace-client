@@ -89,6 +89,7 @@ export interface InjectedDataImportProps extends DataImportProps {
   setIsMigrationInit: TStore["importAccountsStore"]["setIsMigrationInit"];
   setLoadingStatus: TStore["importAccountsStore"]["setLoadingStatus"];
   setMigratingWorkspace: TStore["importAccountsStore"]["setMigratingWorkspace"];
+  setMigrationPhase: TStore["importAccountsStore"]["setMigrationPhase"];
 }
 
 export interface WorkspaceProps {}
@@ -97,7 +98,12 @@ export interface InjectedWorkspaceProps extends WorkspaceProps {
   theme: TStore["settingsStore"]["theme"];
   filteredUsers: TStore["importAccountsStore"]["filteredUsers"];
   step: TStore["importAccountsStore"]["step"];
+  setStep: TStore["importAccountsStore"]["setStep"];
+  migratingWorkspace: TStore["importAccountsStore"]["migratingWorkspace"];
+  migrationPhase: TStore["importAccountsStore"]["migrationPhase"];
   organizationName: TStore["settingsStore"]["organizationName"];
+  isMigrationInit: TStore["importAccountsStore"]["isMigrationInit"];
+  setIsMigrationInit: TStore["importAccountsStore"]["setIsMigrationInit"];
 }
 
 export interface LayoutProps {
@@ -461,4 +467,6 @@ export interface InjectedImportCompleteStepProps
   getMigrationStatus: TStore["importAccountsStore"]["getMigrationStatus"];
   setStep: TStore["importAccountsStore"]["setStep"];
   setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
+  setMigratingWorkspace: TStore["importAccountsStore"]["setMigratingWorkspace"];
+  setMigrationPhase: TStore["importAccountsStore"]["setMigrationPhase"];
 }

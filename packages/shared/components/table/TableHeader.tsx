@@ -420,6 +420,10 @@ class TableHeader extends React.Component<
       .map((column) => getSubstring(column))
       .reduce((x, y) => x + y);
 
+    const defaultInfoWidth = tableInfoContainer
+      .map((column) => getSubstring(column))
+      .reduce((x, y) => x + y);
+
     const oldWidth =
       defaultWidth - defaultSize - settingsSize - indexColumnDifference;
 

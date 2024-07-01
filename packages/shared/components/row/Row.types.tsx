@@ -69,6 +69,7 @@ export interface RowProps {
   mode?: TMode;
   /** Removes the borders */
   withoutBorder?: boolean;
+  isIndexEditingMode: boolean;
   isRoom?: boolean;
   contextTitle?: string;
   badgesComponent?: React.ReactNode;

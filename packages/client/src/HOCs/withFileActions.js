@@ -276,7 +276,9 @@ export default function withFileActions(WrappedFileItem) {
         isDisabledDropItem,
         isRecentTab,
         canDrag,
+        isIndexUpdated,
       } = this.props;
+
       const { access, id } = item;
 
       const isDragging =
@@ -336,6 +338,7 @@ export default function withFileActions(WrappedFileItem) {
           value={value}
           displayShareButton={displayShareButton}
           isPrivacy={isPrivacy}
+          isIndexUpdated={isIndexUpdated}
           checkedProps={checkedProps}
           dragging={dragging}
           getContextModel={this.getContextModel}
@@ -361,6 +364,7 @@ export default function withFileActions(WrappedFileItem) {
         filesStore,
         uploadDataStore,
         contextOptionsStore,
+        indexingStore,
       },
       { item, t },
     ) => {
@@ -374,6 +378,7 @@ export default function withFileActions(WrappedFileItem) {
         uploadEmptyFolders,
       } = filesActionsStore;
       const { setSharingPanelVisible } = dialogsStore;
+      const { updateSelection } = indexingStore;
       const {
         isPrivacyFolder,
         isRecycleBinFolder,
@@ -406,6 +411,10 @@ export default function withFileActions(WrappedFileItem) {
 
       const selectedItem = selection.find(
         (x) => x.id === item.id && x.fileExst === item.fileExst,
+      );
+
+      const isIndexUpdated = !!updateSelection.find(
+        (x) => x.id === item.id && x.fileExst === item?.fileExst,
       );
 
       const isDisabledDropItem = item.security?.Create === false;
@@ -505,6 +514,7 @@ export default function withFileActions(WrappedFileItem) {
         currentDeviceType: settingsStore.currentDeviceType,
         isDisabledDropItem,
         isRecentTab,
+        isIndexUpdated,
 
         canDrag: !dragIsDisabled,
       };

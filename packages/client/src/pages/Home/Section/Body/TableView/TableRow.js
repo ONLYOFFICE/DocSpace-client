@@ -65,6 +65,8 @@ const FilesTableRow = (props) => {
     id,
     isRooms,
     isTrashFolder,
+    isIndexEditingMode,
+    isIndexing,
     isHighlight,
     hideColumns,
     onDragOver,
@@ -72,7 +74,10 @@ const FilesTableRow = (props) => {
     badgeUrl,
     isRecentTab,
     canDrag,
+    onEditIndex,
+    isIndexUpdated,
   } = props;
+
   const { acceptBackground, background } = theme.dragAndDrop;
 
   const element = (
@@ -99,12 +104,16 @@ const FilesTableRow = (props) => {
   const dragStyles = {
     style: {
       background:
-        dragging && isDragging
+        dragging && isDragging && !isIndexEditingMode
           ? isDragActive
             ? acceptBackground
             : background
           : "none",
     },
+  };
+
+  const onChangeIndex = (action) => {
+    return onEditIndex(action, item, t);
   };
 
   const onDragOverEvent = (dragActive, e) => {
@@ -140,6 +149,13 @@ const FilesTableRow = (props) => {
     ? `${item.id}_${item.fileExst}`
     : item.id ?? "";
 
+  const contextOptionProps = isIndexEditingMode
+    ? {}
+    : {
+        contextOptions: item.contextOptions,
+        getContextModel,
+      };
+
   return (
     <StyledDragAndDrop
       id={id}
@@ -163,16 +179,18 @@ const FilesTableRow = (props) => {
         selectionProp={selectionProp}
         key={item.id}
         fileContextClick={fileContextClick}
-        onClick={onMouseClick}
+        onClick={isIndexEditingMode ? () => {} : onMouseClick}
+        onChangeIndex={onChangeIndex}
         isActive={isActive}
+        isIndexEditingMode={isIndexEditingMode}
         inProgress={inProgress}
         isFolder={item.isFolder}
         onHideContextMenu={onHideContextMenu}
         isThirdPartyFolder={item.isThirdPartyFolder}
-        onDoubleClick={onDoubleClick}
-        checked={checkedProps}
-        contextOptions={item.contextOptions}
-        getContextModel={getContextModel}
+        onDoubleClick={isIndexEditingMode ? () => {} : onDoubleClick}
+        checked={checkedProps || isIndexUpdated}
+        isIndexing={isIndexing}
+        isIndexUpdated={isIndexUpdated}
         showHotkeyBorder={showHotkeyBorder}
         title={
           item.isFolder
@@ -184,6 +202,7 @@ const FilesTableRow = (props) => {
         hideColumns={hideColumns}
         badgeUrl={badgeUrl}
         canDrag={canDrag}
+        {...contextOptionProps}
       >
         {isRooms ? (
           <RoomsRowDataComponent

@@ -76,7 +76,7 @@ export const ROOMS_TYPE_TRANSLATIONS = Object.freeze({
   5: "Files:CustomRooms",
   6: "Files:PublicRoom",
 
-  8: "Files:VirtualDataRoom",
+  8: "Common:VirtualDataRoom",
 });
 
 export const ROOMS_PROVIDER_TYPE_NAME = Object.freeze({

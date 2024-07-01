@@ -56,6 +56,7 @@ import UnmuteReactSvgUrl from "PUBLIC_DIR/images/unmute.react.svg?url";
 import MuteReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
 import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
+import EditIndexReactSvgUrl from "PUBLIC_DIR/images/edit.index.react.svg?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import MailReactSvgUrl from "PUBLIC_DIR/images/mail.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
@@ -132,6 +133,7 @@ class ContextOptionsStore {
   infoPanelStore;
   currentTariffStatusStore;
   userStore;
+  indexingStore;
   clientLoadingStore;
 
   linksIsLoading = false;
@@ -153,6 +155,7 @@ class ContextOptionsStore {
     infoPanelStore,
     currentTariffStatusStore,
     userStore,
+    indexingStore,
     clientLoadingStore,
   ) {
     makeAutoObservable(this);
@@ -172,6 +175,7 @@ class ContextOptionsStore {
     this.infoPanelStore = infoPanelStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.userStore = userStore;
+    this.indexingStore = indexingStore;
     this.clientLoadingStore = clientLoadingStore;
   }
 
@@ -913,6 +917,10 @@ class ContextOptionsStore {
     this.filesActionsStore.setMuteAction(action, item, t);
   };
 
+  onEditIndex = () => {
+    this.indexingStore.setIsIndexEditingMode(true);
+  };
+
   onClickRemoveFromRecent = (item) => {
     this.filesActionsStore.removeFilesFromRecent([item.id]);
   };
@@ -1400,6 +1408,17 @@ class ContextOptionsStore {
     const isArchive = item.rootFolderType === FolderType.Archive;
     const isShared = shared || navigationPath.findIndex((r) => r.shared) > -1;
 
+    const { isIndexing } = this.indexingStore;
+
+    const indexOptions = {
+      id: "option_edit-index",
+      key: "edit-index",
+      label: t("Common:EditIndex"),
+      icon: EditIndexReactSvgUrl,
+      onClick: () => this.onEditIndex(),
+      disabled: !isIndexing && item.security?.Edit,
+    };
+
     const optionsModel = [
       {
         id: "option_select",
@@ -1702,6 +1721,7 @@ class ContextOptionsStore {
         onClick: this.onRestoreAction,
         disabled: false,
       },
+      indexOptions,
       {
         id: "option_rename",
         key: "rename",
@@ -1783,7 +1803,6 @@ class ContextOptionsStore {
         disabled: !this.treeFoldersStore.isRecentTab,
       },
     ];
-
     const options = this.filterModel(optionsModel, contextOptions);
 
     const pluginItems = this.onLoadPlugins(item);

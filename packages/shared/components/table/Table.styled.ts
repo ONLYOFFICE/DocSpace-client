@@ -59,6 +59,11 @@ const StyledTableContainer = styled.div<{ useReactWindow?: boolean }>`
     min-width: 10%;
   }
 
+  .indexing-separator {
+    background-color: ${(props) =>
+      props.theme.tableContainer.indexingSeparator};
+  }
+
   .resize-handle {
     display: block;
     cursor: ew-resize;
@@ -443,7 +448,10 @@ const StyledTableBody = styled.div<{
   }
 `;
 
-const StyledTableRow = styled.div<{ dragging?: boolean }>`
+const StyledTableRow = styled.div<{
+  dragging?: boolean;
+  isIndexEditingMode?: boolean;
+}>`
   display: contents;
 
   .table-container_header-checkbox {
@@ -458,7 +466,7 @@ const StyledTableRow = styled.div<{ dragging?: boolean }>`
 
   .droppable-hover {
     background: ${(props) =>
-      props.dragging
+      props.dragging && !props.isIndexEditingMode
         ? `${props.theme.dragAndDrop.acceptBackground} !important`
         : "none"};
   }

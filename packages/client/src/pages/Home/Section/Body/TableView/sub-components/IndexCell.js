@@ -25,56 +25,22 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { StyledText } from "./CellStyles";
 
-import { InfiniteLoaderComponent } from "../infinite-loader";
+const IndexCell = ({ t, item, sideColor }) => {
+  const { order } = item;
 
-import { StyledTableBody } from "./Table.styled";
-import { TableBodyProps } from "./Table.types";
-
-const TableBodyPure = (props: TableBodyProps) => {
-  const {
-    columnStorageName,
-    columnInfoPanelStorageName,
-    fetchMoreFiles,
-    children,
-    filesLength,
-    hasMoreFiles,
-    itemCount,
-    itemHeight = 41,
-    useReactWindow = true,
-    onScroll,
-    infoPanelVisible = false,
-    isIndexEditingMode = false,
-  } = props;
-
-  return useReactWindow ? (
-    <StyledTableBody
-      useReactWindow={useReactWindow}
-      className="table-container_body"
-      infoPanelVisible={infoPanelVisible}
+  return (
+    <StyledText
+      color={sideColor}
+      fontSize="12px"
+      fontWeight={600}
+      title={order}
+      style={{ marginRight: 0 }}
     >
-      <InfiniteLoaderComponent
-        className="TableList"
-        viewAs="table"
-        hasMoreFiles={hasMoreFiles}
-        filesLength={filesLength}
-        itemCount={itemCount}
-        loadMoreItems={fetchMoreFiles}
-        columnStorageName={columnStorageName}
-        columnInfoPanelStorageName={columnInfoPanelStorageName}
-        itemSize={itemHeight}
-        onScroll={onScroll}
-        infoPanelVisible={infoPanelVisible}
-        isIndexEditingMode={isIndexEditingMode}
-      >
-        {children}
-      </InfiniteLoaderComponent>
-    </StyledTableBody>
-  ) : (
-    <StyledTableBody className="table-container_body" {...props} />
+      {order}
+    </StyledText>
   );
 };
 
-const TableBody = React.memo(TableBodyPure);
-
-export { TableBody };
+export default IndexCell;

@@ -80,6 +80,7 @@ import ImportAccountsStore from "./ImportAccountsStore";
 import PluginStore from "./PluginStore";
 import InfoPanelStore from "./InfoPanelStore";
 import CampaignsStore from "./CampaignsStore";
+import IndexingStore from "./IndexingStore";
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
@@ -115,6 +116,7 @@ const clientLoadingStore = new ClientLoadingStore();
 const publicRoomStore = new PublicRoomStore(clientLoadingStore);
 
 const infoPanelStore = new InfoPanelStore(userStore);
+const indexingStore = new IndexingStore(infoPanelStore);
 
 const treeFoldersStore = new TreeFoldersStore(
   selectedFolderStore,
@@ -151,6 +153,7 @@ const filesStore = new FilesStore(
   userStore,
   currentTariffStatusStore,
   settingsStore,
+  indexingStore,
 );
 
 const mediaViewerDataStore = new MediaViewerDataStore(
@@ -214,6 +217,7 @@ const filesActionsStore = new FilesActionsStore(
   currentTariffStatusStore,
   peopleStore,
   currentQuotaStore,
+  indexingStore,
 );
 
 const contextOptionsStore = new ContextOptionsStore(
@@ -233,6 +237,7 @@ const contextOptionsStore = new ContextOptionsStore(
   infoPanelStore,
   currentTariffStatusStore,
   userStore,
+  indexingStore,
   clientLoadingStore,
 );
 
@@ -264,6 +269,7 @@ const tableStore = new TableStore(
   treeFoldersStore,
   userStore,
   settingsStore,
+  indexingStore,
 );
 
 infoPanelStore.filesSettingsStore = filesSettingsStore;
@@ -351,6 +357,7 @@ const store = {
   pluginStore,
   storageManagement,
   campaignsStore,
+  indexingStore,
 };
 
 export default store;

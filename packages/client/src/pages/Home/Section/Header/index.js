@@ -50,6 +50,7 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
+import IndexMenu from "../IndexHeader";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -155,6 +156,7 @@ const SectionHeaderContent = (props) => {
     t,
     isRoomsFolder,
     security,
+    setIsIndexEditingMode,
     tReady,
     isInfoPanelVisible,
     isRootFolder,
@@ -168,6 +170,7 @@ const SectionHeaderContent = (props) => {
     isArchiveFolder,
     isEmptyFilesList,
     isHeaderVisible,
+    isIndexEditingMode,
     isHeaderChecked,
     isHeaderIndeterminate,
     showText,
@@ -219,11 +222,13 @@ const SectionHeaderContent = (props) => {
     onCreateAndCopySharedLink,
     showNavigationButton,
     startUpload,
+    reorder,
     getFolderModel,
     onCreateRoom,
     onEmptyTrashAction,
     getHeaderOptions,
     setBufferSelection,
+    setReorderDialogVisible,
   } = props;
 
   const location = useLocation();
@@ -388,6 +393,12 @@ const SectionHeaderContent = (props) => {
     isMobileView: currentDeviceType === DeviceType.mobile,
   };
 
+  const indexMenuProps = {
+    setIsIndexEditingMode,
+    t,
+    setReorderDialogVisible,
+  };
+
   if (isAccountsPage && !(isGroupsPage && isRoomAdmin)) {
     tableGroupMenuVisible =
       (!isGroupsPage ? isAccountsHeaderVisible : isGroupsHeaderVisible) &&
@@ -484,6 +495,8 @@ const SectionHeaderContent = (props) => {
         <StyledContainer isRecycleBinFolder={isRecycleBinFolder}>
           {tableGroupMenuVisible ? (
             <TableGroupMenu {...tableGroupMenuProps} withComboBox />
+          ) : isIndexEditingMode ? (
+            <IndexMenu {...indexMenuProps} />
           ) : (
             <div className="header-container">
               <Navigation
@@ -592,6 +605,8 @@ export default inject(
     userStore,
     settingsStore,
     uploadDataStore,
+    indexingStore,
+    dialogsStore,
   }) => {
     const { startUpload } = uploadDataStore;
     const isRoomAdmin = userStore.user?.isRoomAdmin;
@@ -630,12 +645,15 @@ export default inject(
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
       treeFoldersStore;
 
+    const { setReorderDialogVisible } = dialogsStore;
+
     const {
       getHeaderMenu,
       isGroupMenuBlocked,
       moveToRoomsPage,
       onClickBack,
       moveToPublicRoom,
+      reorder,
     } = filesActionsStore;
 
     const { setIsVisible, isVisible } = infoPanelStore;
@@ -698,6 +716,7 @@ export default inject(
       getCheckboxItemLabel: getAccountsCheckboxItemLabel,
     } = headerMenuStore;
 
+    const { isIndexEditingMode, setIsIndexEditingMode } = indexingStore;
     const { setSelected: setAccountsSelected } = selectionStore;
     const { isPublicRoom } = publicRoomStore;
 
@@ -740,6 +759,8 @@ export default inject(
       setIsInfoPanelVisible: setIsVisible,
       isInfoPanelVisible: isVisible,
       isHeaderVisible,
+      isIndexEditingMode,
+      setIsIndexEditingMode,
       isHeaderIndeterminate,
       isHeaderChecked,
       isTabletView: settingsStore.isTabletView,
@@ -801,11 +822,13 @@ export default inject(
       onCreateAndCopySharedLink,
       showNavigationButton,
       startUpload,
+      reorder,
       getFolderModel,
       onCreateRoom,
       onEmptyTrashAction,
       getHeaderOptions,
       setBufferSelection,
+      setReorderDialogVisible,
     };
   },
 )(

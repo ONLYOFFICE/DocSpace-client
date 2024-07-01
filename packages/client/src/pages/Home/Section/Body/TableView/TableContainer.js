@@ -70,19 +70,28 @@ const StyledTableContainer = styled(TableContainer)`
     .table-container_file-name-cell {
       ${fileNameCss}
     }
+    .table-container_index-cell {
+      ${fileNameCss}
+    }
 
     .table-container_row-context-menu-wrapper {
       ${contextCss}
     }
   }
+  .table-container_index-cell {
+    margin-right: 0;
+    padding-right: 0;
+  }
 
   .table-row-selected + .table-row-selected {
     .table-row {
       .table-container_file-name-cell,
+      .table-container_index-cell,
       .table-container_row-context-menu-wrapper {
         border-image-slice: 1;
       }
-      .table-container_file-name-cell {
+      .table-container_file-name-cell,
+      .table-container_index-cell {
         ${fileNameCss}
         border-left: 0; //for Safari macOS
         border-right: 0; //for Safari macOS
@@ -101,7 +110,8 @@ const StyledTableContainer = styled(TableContainer)`
 
   .files-item:not(.table-row-selected) + .table-row-selected {
     .table-row {
-      .table-container_file-name-cell {
+      .table-container_file-name-cell,
+      .table-container_index-cell {
         ${fileNameCss}
       }
 
@@ -133,11 +143,14 @@ const Table = ({
   filterTotal,
   isRooms,
   isTrashFolder,
+  isIndexEditingMode,
   withPaging,
   columnStorageName,
   columnInfoPanelStorageName,
   highlightFile,
   currentDeviceType,
+  onEditIndex,
+  isIndexing,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -200,6 +213,9 @@ const Table = ({
         item={item}
         itemIndex={index}
         index={index}
+        onEditIndex={onEditIndex}
+        isIndexEditingMode={isIndexEditingMode}
+        isIndexing={isIndexing}
         setFirsElemChecked={setFirsElemChecked}
         setHeaderBorder={setHeaderBorder}
         theme={theme}
@@ -223,6 +239,8 @@ const Table = ({
     highlightFile.id,
     highlightFile.isExst,
     isTrashFolder,
+    isIndexEditingMode,
+    isIndexing,
   ]);
 
   return (
@@ -235,6 +253,7 @@ const Table = ({
         navigate={navigate}
         location={location}
         isRooms={isRooms}
+        isIndexing={isIndexing}
         filesList={filesList}
       />
 
@@ -246,6 +265,7 @@ const Table = ({
         itemCount={filterTotal}
         useReactWindow={!withPaging}
         infoPanelVisible={infoPanelVisible}
+        isIndexEditingMode={isIndexEditingMode}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         itemHeight={48}
       >
@@ -264,6 +284,9 @@ export default inject(
     tableStore,
     userStore,
     settingsStore,
+
+    indexingStore,
+    filesActionsStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -285,6 +308,9 @@ export default inject(
       highlightFile,
     } = filesStore;
 
+    const { isIndexEditingMode, isIndexing } = indexingStore;
+    const { changeIndex } = filesActionsStore;
+
     const { withPaging, theme, currentDeviceType } = settingsStore;
 
     return {
@@ -301,11 +327,14 @@ export default inject(
       filterTotal: isRooms ? roomsFilterTotal : filterTotal,
       isRooms,
       isTrashFolder,
+      isIndexEditingMode,
+      isIndexing,
       withPaging,
       columnStorageName,
       columnInfoPanelStorageName,
       highlightFile,
       currentDeviceType,
+      onEditIndex: changeIndex,
     };
   },
 )(observer(Table));

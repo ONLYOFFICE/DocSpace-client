@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useRef } from "react";
+import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
+import { VDRIndexingAction } from "../../enums";
 
 import { ContextMenu } from "../context-menu";
 import {
@@ -36,6 +38,7 @@ import { StyledTableRow } from "./Table.styled";
 import { TableRowProps } from "./Table.types";
 
 import { TableCell } from "./sub-components/TableCell";
+import { ColorTheme, ThemeId } from "../color-theme";
 
 const TableRow = (props: TableRowProps) => {
   const {
@@ -49,6 +52,8 @@ const TableRow = (props: TableRowProps) => {
     title,
     getContextModel,
     badgeUrl,
+    isIndexEditingMode,
+    onChangeIndex,
     ...rest
   } = props;
 
@@ -82,9 +87,15 @@ const TableRow = (props: TableRowProps) => {
     return contextOptions;
   };
 
+  const changeIndex = (e, action) => {
+    e.stopPropagation();
+    onChangeIndex(action);
+  };
+
   return (
     <StyledTableRow
       onContextMenu={onContextMenu}
+      isIndexEditingMode={isIndexEditingMode}
       className={`${className} table-container_row`}
       {...rest}
     >
@@ -96,27 +107,48 @@ const TableRow = (props: TableRowProps) => {
           forwardedRef={row}
           className={`${selectionProp?.className} table-container_row-context-menu-wrapper`}
         >
-          <ContextMenu
-            onHide={onHideContextMenu}
-            ref={cm}
-            model={contextOptions}
-            getContextModel={getContextModel}
-            withBackdrop
-            badgeUrl={badgeUrl}
-          />
-          {renderContext ? (
-            <ContextMenuButton
-              isFill
-              className="expandButton"
-              getData={getOptions}
-              directionX="right"
-              displayType={ContextMenuButtonDisplayType.toggle}
-              onClick={onContextMenu}
-              onClose={onHideContextMenu}
-              title={title}
-            />
+          {isIndexEditingMode ? (
+            <>
+              <ColorTheme
+                themeId={ThemeId.IndexIconButton}
+                iconName={ArrowReactSvgUrl}
+                className="index-up-icon"
+                size="small"
+                onClick={(e) => changeIndex(e, VDRIndexingAction.HigherIndex)}
+              />
+              <ColorTheme
+                themeId={ThemeId.IndexIconButton}
+                iconName={ArrowReactSvgUrl}
+                className="index-down-icon"
+                size="small"
+                onClick={(e) => changeIndex(e, VDRIndexingAction.LowerIndex)}
+              />
+            </>
           ) : (
-            <div className="expandButton"> </div>
+            <>
+              <ContextMenu
+                onHide={onHideContextMenu}
+                ref={cm}
+                model={contextOptions}
+                getContextModel={getContextModel}
+                withBackdrop
+                badgeUrl={badgeUrl}
+              />
+              {renderContext ? (
+                <ContextMenuButton
+                  isFill
+                  className="expandButton"
+                  getData={getOptions}
+                  directionX="right"
+                  displayType={ContextMenuButtonDisplayType.toggle}
+                  onClick={onContextMenu}
+                  onClose={onHideContextMenu}
+                  title={title}
+                />
+              ) : (
+                <div className="expandButton"> </div>
+              )}
+            </>
           )}
         </TableCell>
       </div>

@@ -43,6 +43,7 @@ class DialogsStore {
   ownerPanelVisible = false;
   moveToPanelVisible = false;
   restorePanelVisible = false;
+  reorderDialogVisible = false;
   copyPanelVisible = false;
   deleteThirdPartyDialogVisible = false;
   connectDialogVisible = false;
@@ -513,6 +514,10 @@ class DialogsStore {
   setPdfFormEditVisible = (visible, data) => {
     this.pdfFormEditVisible = visible;
     this.pdfFormEditData = data;
+  };
+
+  setReorderDialogVisible = (visible) => {
+    this.reorderDialogVisible = visible;
   };
 }
 

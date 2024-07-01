@@ -39,4 +39,5 @@ export const enum ThemeId {
   IndicatorLoader = "indicatorLoader",
   Progress = "progress",
   SubmenuText = "submenuText",
+  IndexIconButton = "indexIconButton",
 }

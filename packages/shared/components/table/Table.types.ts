@@ -50,6 +50,7 @@ export type TTableColumn = {
   defaultSize?: number;
   default?: boolean;
   resizable?: boolean;
+  isShort?: boolean;
   checkbox?: {
     value: boolean;
     isIndeterminate: boolean;
@@ -108,6 +109,7 @@ export interface TableBodyProps {
   useReactWindow: boolean;
   onScroll: () => void;
   infoPanelVisible: boolean;
+  isIndexEditingMode: boolean;
 }
 
 export interface TableRowProps {
@@ -121,6 +123,7 @@ export interface TableRowProps {
   title: string;
   getContextModel: () => ContextMenuModel[];
   badgeUrl: string;
+  isIndexEditingMode: boolean;
 }
 
 export interface TableCellProps {

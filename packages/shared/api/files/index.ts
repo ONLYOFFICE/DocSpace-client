@@ -1435,6 +1435,26 @@ export async function startFilling(fileId: string | number): Promise<void> {
   await request(options);
 }
 
+export async function changeIndex(
+  id: number,
+  order: number,
+  isFolder: boolean,
+) {
+  const url = isFolder ? `/files/folder/${id}/order` : `/files/${id}/order`;
+  return request({
+    method: "put",
+    url,
+    data: { order },
+  });
+}
+
+export async function reorder(id: number) {
+  return request({
+    method: "put",
+    url: `/files/rooms/${id}/reorder`,
+  });
+}
+
 export async function checkIsPDFForm(fileId: string | number) {
   return request({
     method: "get",

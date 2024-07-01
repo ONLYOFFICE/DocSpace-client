@@ -23,58 +23,51 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import styled from "styled-components";
 
-import React from "react";
+import { Base, TColorScheme } from "../../../themes";
 
-import { InfiniteLoaderComponent } from "../infinite-loader";
+const StyledIndexWrapper = styled.div<{
+  $currentColorScheme: TColorScheme | undefined;
+}>`
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
 
-import { StyledTableBody } from "./Table.styled";
-import { TableBodyProps } from "./Table.types";
+  .index-up-icon {
+    transform: rotate(-90deg);
+  }
 
-const TableBodyPure = (props: TableBodyProps) => {
-  const {
-    columnStorageName,
-    columnInfoPanelStorageName,
-    fetchMoreFiles,
-    children,
-    filesLength,
-    hasMoreFiles,
-    itemCount,
-    itemHeight = 41,
-    useReactWindow = true,
-    onScroll,
-    infoPanelVisible = false,
-    isIndexEditingMode = false,
-  } = props;
+  .index-down-icon {
+    transform: rotate(90deg);
+  }
 
-  return useReactWindow ? (
-    <StyledTableBody
-      useReactWindow={useReactWindow}
-      className="table-container_body"
-      infoPanelVisible={infoPanelVisible}
-    >
-      <InfiniteLoaderComponent
-        className="TableList"
-        viewAs="table"
-        hasMoreFiles={hasMoreFiles}
-        filesLength={filesLength}
-        itemCount={itemCount}
-        loadMoreItems={fetchMoreFiles}
-        columnStorageName={columnStorageName}
-        columnInfoPanelStorageName={columnInfoPanelStorageName}
-        itemSize={itemHeight}
-        onScroll={onScroll}
-        infoPanelVisible={infoPanelVisible}
-        isIndexEditingMode={isIndexEditingMode}
-      >
-        {children}
-      </InfiniteLoaderComponent>
-    </StyledTableBody>
-  ) : (
-    <StyledTableBody className="table-container_body" {...props} />
-  );
-};
+  &:hover {
+    cursor: pointer;
+    background: ${(props) =>
+      props.theme.filesSection.tableView.row.indexBackgroundButtonHover};
 
-const TableBody = React.memo(TableBodyPure);
+    svg {
+      cursor: pointer;
 
-export { TableBody };
+      path {
+        fill: ${(props) =>
+          props.theme.filesSection.tableView.row
+            .indexArrowButtonHover} !important;
+      }
+
+      circle {
+        stroke: ${(props) =>
+          props.theme.filesSection.tableView.row
+            .indexArrowButtonHover} !important;
+      }
+    }
+  }
+`;
+
+StyledIndexWrapper.defaultProps = { theme: Base };
+
+export default StyledIndexWrapper;

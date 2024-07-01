@@ -26,6 +26,9 @@
 
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
+import merge from "lodash/merge";
+import cloneDeep from "lodash/cloneDeep";
+
 import api from "@docspace/shared/api";
 import {
   FileType,
@@ -388,6 +391,9 @@ class FilesStore {
       const { socketSubscribers } = socketHelper;
       const pathParts = `FILE-${id}`;
 
+      const { isVisible, infoPanelSelection, setInfoPanelSelection } =
+        this.infoPanelStore;
+
       if (!socketSubscribers.has(pathParts)) return;
 
       const foundIndex = this.files.findIndex((x) => x.id === id);
@@ -406,7 +412,15 @@ class FilesStore {
         this.files[foundIndex].fileStatus & ~FileStatus.IsEditing,
       );
 
-      this.getFileInfo(id);
+      this.getFileInfo(id).then((file) => {
+        if (
+          isVisible &&
+          file.id === infoPanelSelection?.id &&
+          infoPanelSelection?.fileExst === file.fileExst
+        ) {
+          setInfoPanelSelection(merge(cloneDeep(infoPanelSelection), file));
+        }
+      });
 
       this.createThumbnail(this.files[foundIndex]);
     });

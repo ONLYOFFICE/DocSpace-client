@@ -98,6 +98,7 @@ export const globalColors = {
   dndDarkHover: "rgba(204, 184, 102, 0.2)",
 
   onWhiteColor: "rgba(0, 0, 0, 0.1)",
+  onBlackColor: "rgba(255, 255, 255, 0.1)",
   boxShadowColor: "#040F1B14",
   boxShadowDarkColor: "#040F1B29",
   loaderLight: "#E7E7E7",
@@ -120,4 +121,10 @@ export const globalColors = {
   badgeShadow: "rgba(4, 15, 27, 0.16)",
   popupShadow: "rgba(4, 15, 27, 0.08)",
   menuShadow: "rgba(4, 15, 27, 0.04)",
+  lightScroll: "rgba(6, 22, 38, 0.16)",
+  lightScrollHover: "rgba(6, 22, 38, 0.32)",
+  lightScrollActive: "rgba(6, 22, 38, 0.5)",
+  darkScroll: "rgba(136, 136, 136, 0.4)",
+  darkScrollHover: "rgba(136, 136, 136, 0.64)",
+  darkScrollActive: "rgba(136, 136, 136, 0.8)",
 };

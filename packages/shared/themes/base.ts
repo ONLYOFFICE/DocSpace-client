@@ -117,6 +117,9 @@ const {
   badgeShadow,
   popupShadow,
   menuShadow,
+  lightScroll,
+  lightScrollHover,
+  lightScrollActive,
 } = globalColors;
 
 export const getBaseTheme = () => {
@@ -437,7 +440,7 @@ export const getBaseTheme = () => {
     groupButtonsMenu: {
       top: "0",
       background: white,
-      boxShadow: " 0px 10px 18px -8px rgba(0, 0, 0, 0.100306)",
+      boxShadow: `0px 10px 18px -8px ${menuShadow}`,
       height: "48px",
       tabletHeight: "56px",
       padding: "0 18px 19px 0",
@@ -601,9 +604,9 @@ export const getBaseTheme = () => {
     },
 
     scrollbar: {
-      bgColor: "rgba(6, 22, 38, 0.16)",
-      hoverBgColor: "rgba(6, 22, 38, 0.32)",
-      pressBgColor: "rgba(6, 22, 38, 0.5)",
+      bgColor: lightScroll,
+      hoverBgColor: lightScrollHover,
+      pressBgColor: lightScrollActive,
       paddingInlineEnd: "17px !important",
       paddingInlineEndMobile: "8px !important",
     },
@@ -1395,7 +1398,7 @@ export const getBaseTheme = () => {
 
       main: {
         marginBottom: "1rem",
-        boxShadow: "0px 10px 16px -12px rgba(0, 0, 0, 0.3)",
+        boxShadow: `0px 10px 16px -12px ${popupShadow}`,
         maxHeight: "800px",
         overflow: "hidden",
         borderRadius: "6px",
@@ -1822,12 +1825,6 @@ export const getBaseTheme = () => {
     },
 
     section: {
-      toggler: {
-        background: white,
-        fill: gray,
-        boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.13)",
-      },
-
       header: {
         backgroundColor: white,
         background: `linear-gradient(180deg, ${white} 2.81%,rgba(255, 255, 255, 0.91) 63.03%,rgba(255, 255, 255, 0) 100%)`,
@@ -2156,7 +2153,7 @@ export const getBaseTheme = () => {
     floatingButton: {
       backgroundColor: lightIcons,
       color: white,
-      boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.13)",
+      boxShadow: `0px 5px 20px ${popupShadow}`,
       fill: white,
 
       alert: {
@@ -2338,7 +2335,7 @@ export const getBaseTheme = () => {
 
     filesDragTooltip: {
       background: white,
-      boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.13)",
+      boxShadow: `0px 5px 20px ${popupShadow}`,
       color: gray,
     },
 

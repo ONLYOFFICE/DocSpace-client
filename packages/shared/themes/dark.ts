@@ -106,6 +106,9 @@ const {
   badgeShadow,
   popupShadow,
   menuShadow,
+  darkScroll,
+  darkScrollHover,
+  darkScrollActive,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -140,7 +143,7 @@ const Dark: TTheme = {
   backgroundAndSubstrateColor: darkGrayLight,
 
   betaBadgeTooltip: {
-    boxShadowColor: "rgba(0, 0, 0, 0.40)",
+    boxShadowColor: badgeShadow,
   },
 
   button: {
@@ -246,7 +249,7 @@ const Dark: TTheme = {
   },
 
   mainButtonMobile: {
-    textColor: "rgba(255, 255, 255, 0.6)",
+    textColor: darkGrayDark,
 
     buttonColor: mainOrange,
     iconFill: black,
@@ -357,9 +360,9 @@ const Dark: TTheme = {
     background: black,
 
     borderConnect: "none",
-    connectBackground: `linear-gradient(0deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), ${black}`,
+    connectBackground: darkIcon,
 
-    disableBackgroundColor: "rgba(0, 0, 0, 0.08)",
+    disableBackgroundColor: darkGrayLight,
 
     hoverBackground: black,
     hoverBorder: `1px solid ${grayDark}`,
@@ -368,7 +371,7 @@ const Dark: TTheme = {
 
     activeBackground: darkGrayLight,
     activeBorder: `1px solid ${grayDarkStrong}`,
-    activeConnectBackground: "rgba(255, 255, 255, 0.64)",
+    activeConnectBackground: bigGrayDarkMid,
     activeConnectBorder: "none",
 
     color: "rgba(0, 0, 0, 0.54)",
@@ -587,9 +590,9 @@ const Dark: TTheme = {
   },
 
   scrollbar: {
-    bgColor: "rgba(136, 136, 136, 0.4)",
-    hoverBgColor: "rgba(136, 136, 136, 0.64)",
-    pressBgColor: "rgba(136, 136, 136, 0.8)",
+    bgColor: darkScroll,
+    hoverBgColor: darkScrollHover,
+    pressBgColor: darkScrollActive,
     paddingInlineEnd: "17px !important",
     paddingInlineEndMobile: "8px !important",
   },
@@ -1806,12 +1809,6 @@ const Dark: TTheme = {
   },
 
   section: {
-    toggler: {
-      background: white,
-      fill: black,
-      boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.13)",
-    },
-
     header: {
       backgroundColor: black,
       background: `linear-gradient(180deg, ${black} 2.81%, rgba(51, 51, 51, 0.9) 63.03%, rgba(51, 51, 51, 0) 100%);`,

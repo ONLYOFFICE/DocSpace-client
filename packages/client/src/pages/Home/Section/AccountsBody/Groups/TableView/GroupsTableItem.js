@@ -43,6 +43,7 @@ const GroupsTableItem = ({
   hideColumns,
   bufferSelection,
   getGroupContextOptions,
+  getModel,
   openGroupAction,
   managerAccountsGroupsColumnIsEnabled,
 
@@ -78,6 +79,8 @@ const GroupsTableItem = ({
     selectRow(item);
   };
 
+  const getContextModel = () => getModel(t, item);
+
   let value = `folder_${item.id}_false_index_${itemIndex}`;
 
   return (
@@ -98,6 +101,7 @@ const GroupsTableItem = ({
         onDoubleClick={onOpenGroup}
         hideColumns={hideColumns}
         contextOptions={getGroupContextOptions(t, item)}
+        getContextModel={getContextModel}
       >
         <TableCell className={"table-container_group-title-cell"}>
           <TableCell
@@ -160,6 +164,7 @@ const GroupsTableItem = ({
 export default inject(({ peopleStore }) => ({
   bufferSelection: peopleStore.groupsStore.bufferSelection,
   getGroupContextOptions: peopleStore.groupsStore.getGroupContextOptions,
+  getModel: peopleStore.groupsStore.getModel,
   openGroupAction: peopleStore.groupsStore.openGroupAction,
   changeGroupSelection: peopleStore.groupsStore.changeGroupSelection,
   changeGroupContextSelection:

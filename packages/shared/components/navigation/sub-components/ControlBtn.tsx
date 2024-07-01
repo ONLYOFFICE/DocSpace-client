@@ -63,6 +63,7 @@ const ControlButtons = ({
   title,
   isEmptyPage,
   onCloseDropBox,
+  onContextOptionsClick,
 }: IControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
@@ -125,6 +126,7 @@ const ControlButtons = ({
             isTrashFolder={isTrashFolder}
             isMobile={isMobile || false}
             onCloseDropBox={onCloseDropBox}
+            onContextOptionsClick={onContextOptionsClick}
           />
 
           {!isDesktop && (
@@ -180,6 +182,7 @@ const ControlButtons = ({
               isTrashFolder={isTrashFolder}
               isMobile={isMobile || false}
               onCloseDropBox={onCloseDropBox}
+              onContextOptionsClick={onContextOptionsClick}
             />
           )}
         </>

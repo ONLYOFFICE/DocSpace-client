@@ -187,6 +187,11 @@ const WhiteLabelWrapper = styled.div`
       props.theme.client.settings.common.whiteLabel.orangeBackgroundColor};
   }
 
+  .background-red {
+    background-color: ${(props) =>
+      props.theme.client.settings.common.whiteLabel.redBackgroundColor};
+  }
+
   .background-light {
     background-color: ${(props) =>
       props.theme.client.settings.common.whiteLabel.backgroundColorLight};

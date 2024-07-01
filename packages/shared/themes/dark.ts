@@ -611,9 +611,9 @@ const Dark: TTheme = {
   },
 
   scrollbar: {
-    bgColor: "rgba(20, 20, 20, 0.4)",
-    hoverBgColor: "rgba(20, 20, 20, 0.64)",
-    pressBgColor: "rgba(20, 20, 20, 0.8)",
+    bgColor: "rgba(136, 136, 136, 0.4)",
+    hoverBgColor: "rgba(136, 136, 136, 0.64)",
+    pressBgColor: "rgba(136, 136, 136, 0.8)",
     paddingInlineEnd: "17px !important",
     paddingInlineEndMobile: "8px !important",
   },
@@ -637,7 +637,7 @@ const Dark: TTheme = {
         b: 27,
         a: 0.4,
       },
-      blur: 10,
+      blur: 9,
     },
 
     content: {
@@ -3024,7 +3024,8 @@ const Dark: TTheme = {
           backgroundColorDark: "#282828",
           greenBackgroundColor: "#40865C",
           blueBackgroundColor: "#446995",
-          orangeBackgroundColor: "#AA5252",
+          orangeBackgroundColor: "#BE6650",
+          redBackgroundColor: "#AA5251",
 
           dataFontColor: white,
           dataFontColorBlack: white,

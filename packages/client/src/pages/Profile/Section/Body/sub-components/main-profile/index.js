@@ -334,12 +334,7 @@ const MainProfile = (props) => {
             )}
           </div>
 
-          <StyledLabel
-            as="div"
-            //marginTopProp={withActivationBar ? "34px" : "16px"}
-          >
-            {t("Common:Password")}
-          </StyledLabel>
+          <StyledLabel as="div">{t("Common:Password")}</StyledLabel>
           <div className="profile-block-field profile-block-password">
             <Text fontWeight={600}>********</Text>
             {!profile.isSSO && !profile.isLDAP && (
@@ -352,11 +347,7 @@ const MainProfile = (props) => {
             )}
           </div>
 
-          <StyledLabel
-            as="div"
-            className="profile-language"
-            //marginTopProp="15px"
-          >
+          <StyledLabel as="div" className="profile-language">
             {t("Common:Language")}
             <HelpButton
               size={12}

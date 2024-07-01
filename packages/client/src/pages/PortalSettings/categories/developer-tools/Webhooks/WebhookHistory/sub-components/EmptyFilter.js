@@ -98,7 +98,7 @@ const EmptyFilter = (props) => {
           <Text
             fontSize="12px"
             color={
-              theme.isBase ? globalColors.grayText : "rgba(255, 255, 255, 0.6)"
+              theme.isBase ? globalColors.grayText : globalColors.grayDarkText
             }
           >
             {t("NoResultsMatched")}

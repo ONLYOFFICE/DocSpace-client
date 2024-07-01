@@ -454,7 +454,7 @@ const StyledFloatingButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 12px 40px rgba(4, 15, 27, 0.12);
+  box-shadow: 0px 12px 40px ${globalColors.popupShadow};
 `;
 
 StyledFloatingButton.defaultProps = { theme: Base };

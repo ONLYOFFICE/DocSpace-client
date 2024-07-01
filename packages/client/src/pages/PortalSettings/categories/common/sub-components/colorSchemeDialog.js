@@ -32,6 +32,7 @@ import { Button } from "@docspace/shared/components/button";
 import { withTranslation } from "react-i18next";
 import { isMobileOnly } from "react-device-detect";
 import { isMobile } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledComponent = styled(ModalDialog)`
   .modal-dialog-aside-footer {
@@ -46,7 +47,7 @@ const StyledComponent = styled(ModalDialog)`
             left: 0;
           `}
     padding: 16px;
-    box-shadow: 0px 12px 40px rgba(4, 15, 27, 0.12);
+    box-shadow: 0px 12px 40px ${globalColors.popupShadow};
   }
 
   .flex {

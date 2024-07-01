@@ -31,7 +31,7 @@ import RoomType from "@docspace/shared/components/room-type";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 const StyledDropdownMobile = styled.div`
   visibility: ${(props) => (props.isOpen ? "visible" : "hidden")};
@@ -44,7 +44,7 @@ const StyledDropdownMobile = styled.div`
     theme.interfaceDirection === "rtl"
       ? `margin-right: -16px;`
       : `margin-left: -16px;`}
-  box-shadow: 0px -4px 60px rgba(4, 15, 27, 0.12);
+  box-shadow: 0px -4px 60px ${globalColors.popupShadow};
   border-radius: 6px 6px 0px 0px;
   background: ${(props) =>
     props.theme.createEditRoomDialog.roomTypeDropdown.mobile.background};

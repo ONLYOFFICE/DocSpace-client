@@ -533,7 +533,7 @@ const StyledIcons = styled.div`
     background: ${(props) =>
       props.theme.filesSection.tilesView.tile.backgroundBadgeColor};
     border-radius: 4px;
-    box-shadow: 0px 2px 4px rgba(4, 15, 27, 0.16);
+    box-shadow: 0px 2px 4px ${globalColors.badgeShadow};
   }
 `;
 

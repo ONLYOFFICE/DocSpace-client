@@ -28,7 +28,7 @@ import React from "react";
 import styled from "styled-components";
 
 import RoomType from "@docspace/shared/components/room-type";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 
 const StyledDropdownDesktop = styled.div`
@@ -56,7 +56,7 @@ const StyledDropdownDesktop = styled.div`
     display: flex;
     flex-direction: column;
     padding: 6px 0;
-    box-shadow: 0px 12px 40px rgba(4, 15, 27, 0.12);
+    box-shadow: 0px 12px 40px ${globalColors.popupShadow};
     border-radius: 6px;
   }
 `;

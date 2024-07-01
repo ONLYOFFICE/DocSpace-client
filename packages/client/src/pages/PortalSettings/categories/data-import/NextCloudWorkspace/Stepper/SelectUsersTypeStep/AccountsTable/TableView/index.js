@@ -26,7 +26,7 @@
 
 import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 import styled, { css } from "styled-components";
 
 import UsersTableHeader from "./UsersTableHeader";
@@ -60,7 +60,7 @@ const UserSelectTableContainer = styled(StyledTableContainer)`
       border-image-source: none;
       border-bottom: ${(props) =>
         props.theme.client.settings.migration.workspaceBorder};
-      box-shadow: rgba(4, 15, 27, 0.07) 0px 15px 20px;
+      box-shadow: ${globalColors.menuShadow} 0px 15px 20px;
       padding: 0px;
     }
 

@@ -43,12 +43,6 @@ const StyledSimpleNav = styled.div`
   justify-content: center;
   background-color: ${(props) => props.theme?.login?.navBackground};
 
-  svg {
-    path:last-child {
-      fill: ${(props) => props.theme.client?.home?.logoColor};
-    }
-  }
-
   @media ${mobile} {
     display: flex;
 

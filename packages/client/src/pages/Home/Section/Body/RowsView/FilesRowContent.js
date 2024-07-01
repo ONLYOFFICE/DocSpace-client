@@ -285,7 +285,7 @@ const FilesRowContent = ({
       return value;
     }
 
-    if (!fileExst && !contentLength && !providerKey && !isMobile())
+    if (!fileExst && !contentLength && !providerKey)
       return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
         "Translations:Files",
       )}`;
@@ -336,16 +336,17 @@ const FilesRowContent = ({
             {`${t("Files:Index")} ${order}`}
           </Text>
         )}
-
-        <Text
-          containerMinWidth="200px"
-          containerWidth="15%"
-          fontSize="12px"
-          fontWeight={400}
-          className="row_update-text"
-        >
-          {mainInfo}
-        </Text>
+        {mainInfo && (
+          <Text
+            containerMinWidth="200px"
+            containerWidth="15%"
+            fontSize="12px"
+            fontWeight={400}
+            className="row_update-text"
+          >
+            {mainInfo}
+          </Text>
+        )}
 
         <Text
           containerMinWidth="90px"

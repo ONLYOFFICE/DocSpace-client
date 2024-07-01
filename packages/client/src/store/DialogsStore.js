@@ -104,7 +104,7 @@ class DialogsStore {
   createRoomConfirmDialogVisible = false;
   changeUserTypeDialogVisible = false;
   editLinkPanelIsVisible = false;
-  embeddingPanelData = { visible: false, fileId: null };
+  embeddingPanelData = { visible: false, item: null };
   submitToGalleryDialogVisible = false;
   linkParams = null;
   leaveRoomDialogVisible = false;

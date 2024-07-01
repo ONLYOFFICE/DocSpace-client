@@ -120,6 +120,13 @@ const StyledPeopleRow = styled(TableRow)`
   .table-cell_groups,
   .table-cell_room {
     margin-inline-start: -8px;
+    padding-inline-end: 12px;
+  }
+
+  .table-cell_email {
+    a {
+      margin-inline-end: 12px;
+    }
   }
 
   .groups-combobox,
@@ -587,7 +594,7 @@ const PeopleTableRow = (props) => {
         </TableCell> */}
 
         {emailAccountsColumnIsEnabled ? (
-          <TableCell>
+          <TableCell className={"table-cell_email"}>
             <Link
               type="page"
               title={email}

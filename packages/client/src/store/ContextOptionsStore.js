@@ -551,10 +551,8 @@ class ContextOptionsStore {
     window.dispatchEvent(event);
   };
 
-  onDuplicate = (item, t) => {
-    this.filesActionsStore
-      .duplicateAction(item, t("Common:CopyOperation"))
-      .catch((err) => toastr.error(err));
+  onDuplicate = (item) => {
+    this.filesActionsStore.duplicateAction(item);
   };
 
   onClickRename = (item) => {
@@ -1341,8 +1339,8 @@ class ContextOptionsStore {
                   disabled: false,
                 },
                 {
-                  id: "option_create-copy",
-                  key: "copy",
+                  id: "option_create-duplicate",
+                  key: "duplicate",
                   label: t("Common:Duplicate"),
                   icon: DuplicateReactSvgUrl,
                   onClick: () => this.onDuplicate(item, t),
@@ -1371,8 +1369,8 @@ class ContextOptionsStore {
               disabled: false,
             },
             {
-              id: "option_create-copy",
-              key: "copy",
+              id: "option_create-duplicate",
+              key: "duplicate",
               label: t("Common:Duplicate"),
               icon: DuplicateReactSvgUrl,
               onClick: () => this.onDuplicate(item, t),
@@ -1676,6 +1674,14 @@ class ContextOptionsStore {
         icon: CatalogRoomsReactSvgUrl,
         onClick: () => this.onClickCreateRoom(item),
         disabled: !item.security?.CreateRoomFrom,
+      },
+      {
+        id: "option_create-duplicate-room",
+        key: "duplicate-room",
+        label: t("Common:Duplicate"),
+        icon: DuplicateReactSvgUrl,
+        onClick: () => this.onDuplicate(item, t),
+        disabled: !item.security?.Duplicate,
       },
       {
         id: "option_download",

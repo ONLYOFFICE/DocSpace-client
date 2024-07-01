@@ -2090,7 +2090,7 @@ class FilesStore {
         "move", //category
         "move-to",
         "copy-to",
-        "copy",
+        "duplicate",
         "restore",
         "rename",
         "separator2",
@@ -2166,8 +2166,9 @@ class FilesStore {
       }
 
       if (!canDuplicate) {
-        fileOptions = this.removeOptions(fileOptions, ["copy"]);
+        fileOptions = this.removeOptions(fileOptions, ["duplicate"]);
       }
+
       if (!canMove && !canCopy && !canDuplicate) {
         fileOptions = this.removeOptions(fileOptions, ["move"]);
       }
@@ -2359,6 +2360,7 @@ class FilesStore {
       const canPinRoom = item.security?.Pin;
 
       const canEditRoom = item.security?.EditRoom;
+      const canDuplicateRoom = item.security?.Duplicate;
 
       const canViewRoomInfo = item.security?.Read;
       const canMuteRoom = item.security?.Mute;
@@ -2385,6 +2387,7 @@ class FilesStore {
         "mute-room",
         "unmute-room",
         "separator1",
+        "duplicate-room",
         "download",
         "archive-room",
         "unarchive-room",
@@ -2418,11 +2421,16 @@ class FilesStore {
         roomOptions = this.removeOptions(roomOptions, ["delete"]);
       }
 
+      if (!canDuplicate) {
+        roomOptions = this.removeOptions(roomOptions, ["duplicate-room"]);
+      }
+
       if (!canDownload) {
-        roomOptions = this.removeOptions(roomOptions, [
-          "separator1",
-          "download",
-        ]);
+        roomOptions = this.removeOptions(roomOptions, ["download"]);
+      }
+
+      if (!canDownload && !canDuplicate) {
+        roomOptions = this.removeOptions(roomOptions, ["separator1"]);
       }
 
       if (!item.providerKey) {
@@ -2498,6 +2506,7 @@ class FilesStore {
         "move", //category
         "move-to",
         "copy-to",
+        "duplicate",
         "mark-read",
         "restore",
         "rename",
@@ -2531,7 +2540,7 @@ class FilesStore {
       }
 
       if (!canDuplicate) {
-        folderOptions = this.removeOptions(folderOptions, ["copy"]);
+        folderOptions = this.removeOptions(folderOptions, ["duplicate"]);
       }
 
       if (!canMove && !canCopy && !canDuplicate) {

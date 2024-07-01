@@ -217,7 +217,6 @@ class TableHeader extends React.Component<
     };
 
     const ResetColumnsSize = () => {
-      localStorage.removeItem(columnStorageName);
       this.resetColumns();
       return true;
     };
@@ -691,9 +690,7 @@ class TableHeader extends React.Component<
                 ).length;
 
                 if (enableColumnsLength !== 1) {
-                  localStorage.removeItem(columnStorageName);
                   this.resetColumns();
-
                   return;
                 }
               }
@@ -865,8 +862,8 @@ class TableHeader extends React.Component<
       infoPanelVisible,
     } = this.props;
 
-    localStorage.removeItem(columnStorageName);
-    localStorage.removeItem(columnInfoPanelStorageName);
+    if (!infoPanelVisible) localStorage.removeItem(columnStorageName);
+    else localStorage.removeItem(columnInfoPanelStorageName);
 
     let str = "";
 

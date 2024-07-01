@@ -1284,7 +1284,7 @@ class ContextOptionsStore {
       label: t("Common:EditIndex"),
       icon: EditIndexReactSvgUrl,
       onClick: () => this.onEditIndex(),
-      disabled: !isIndexing,
+      disabled: !isIndexing && item.security?.Edit,
     };
 
     const optionsModel = [

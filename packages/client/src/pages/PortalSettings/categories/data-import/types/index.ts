@@ -87,7 +87,6 @@ export interface InjectedDataImportProps extends DataImportProps {
   workspace: TStore["importAccountsStore"]["workspace"];
   setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
   setFiles: TStore["importAccountsStore"]["setFiles"];
-  setIsMigrationInit: TStore["importAccountsStore"]["setIsMigrationInit"];
   setLoadingStatus: TStore["importAccountsStore"]["setLoadingStatus"];
   setMigratingWorkspace: TStore["importAccountsStore"]["setMigratingWorkspace"];
   setMigrationPhase: TStore["importAccountsStore"]["setMigrationPhase"];
@@ -105,6 +104,8 @@ export interface InjectedWorkspaceProps extends WorkspaceProps {
   organizationName: TStore["settingsStore"]["organizationName"];
   isMigrationInit: TStore["importAccountsStore"]["isMigrationInit"];
   setIsMigrationInit: TStore["importAccountsStore"]["setIsMigrationInit"];
+
+  setDocumentTitle: TStore["authStore"]["setDocumentTitle"];
 }
 
 export interface LayoutProps {

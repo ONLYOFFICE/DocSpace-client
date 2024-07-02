@@ -34,6 +34,7 @@ const Wrapper = styled.div`
 
 const AllSessionsBlock = (props) => {
   const { t, isLoading, items, onClickLogoutAllExceptThis } = props;
+  const { displayName } = items;
 
   const exceptId = items.connections[0]?.id;
   const sessions = items.sessions || items.connections;
@@ -51,7 +52,7 @@ const AllSessionsBlock = (props) => {
           <Button
             label={t("Profile:LogoutFromAllSessions")}
             size="small"
-            onClick={() => onClickLogoutAllExceptThis(t, exceptId)}
+            onClick={() => onClickLogoutAllExceptThis(t, exceptId, displayName)}
             scale={true}
             isLoading={isLoading}
           />

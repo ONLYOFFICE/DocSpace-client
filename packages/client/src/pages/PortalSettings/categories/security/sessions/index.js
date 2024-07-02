@@ -140,8 +140,6 @@ const Sessions = ({
       ? [bufferSelection.id, ...userIdsFromSelection]
       : [...userIdsFromSelection];
 
-  console.log(allSessions);
-
   if (!isSessionsLoaded) return <SessionsLoader viewAs={viewAs} />;
 
   return (

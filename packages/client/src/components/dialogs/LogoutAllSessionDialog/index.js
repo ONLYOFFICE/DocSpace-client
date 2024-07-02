@@ -63,7 +63,7 @@ const LogoutAllSessionDialog = ({
         : onLogoutAllSessions(t);
       onClose();
     } else {
-      onLogoutAllExceptThis(t, exceptId);
+      onLogoutAllExceptThis(t, exceptId, displayName);
       onClose();
     }
   };

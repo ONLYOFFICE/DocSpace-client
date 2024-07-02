@@ -47,3 +47,16 @@ export enum MessageKey {
   "SsoAttributesNotFound",
   "QuotaPaidUserLimitError",
 }
+
+export const enum AuthenticatedAction {
+    None = 0,
+    Logout = 1,
+    Redirect = 2,
+  }
+
+  export const enum ValidationResult {
+    Ok = 0,
+    Invalid = 1,
+    Expired = 2,
+    TariffLimit = 3,
+  }

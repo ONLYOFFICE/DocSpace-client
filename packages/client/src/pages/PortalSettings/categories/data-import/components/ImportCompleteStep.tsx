@@ -49,7 +49,6 @@ const Wrapper = styled.div`
 `;
 
 const InfoText = styled(Text)`
-  margin-top: -8px;
   margin-bottom: 8px;
   font-size: 12px;
   color: ${(props) => props.theme.client.settings.migration.subtitleColor};

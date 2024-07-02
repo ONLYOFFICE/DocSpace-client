@@ -184,6 +184,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
       }
 
       if (res.parseResult.failedArchives.length > 0 || res.error) {
+        cancelMigration();
         toastr.error(res.error);
         setIsFileError(true);
         setLoadingStatus("none");

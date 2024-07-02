@@ -24,17 +24,19 @@ const StyledRowContent = styled(RowContent)`
   }
 `;
 
-const SessionsRowContent = ({ t, item, fromDateAgo, sectionWidth }) => {
-  const { id, displayName, status, sessions, connections } = item;
-
-  const { platform, browser, country, city, ip } = sessions;
-
-  const isOnline = status === "online";
-  const isLastConnection = connections.length > 0;
+const SessionsRowContent = ({
+  t,
+  isOnline,
+  fromDateAgo,
+  displayName,
+  connections,
+  sectionWidth,
+}) => {
+  const { userId, platform, browser, ip, city, country } = connections[0] ?? {};
 
   return (
     <StyledRowContent
-      key={id}
+      key={userId}
       sectionWidth={sectionWidth}
       sideColor={theme.profile.activeSessions.tableCellColor}
     >
@@ -46,8 +48,8 @@ const SessionsRowContent = ({ t, item, fromDateAgo, sectionWidth }) => {
       </Text>
       <></>
       <Text fontSize="12px" fontWeight="600">
-        {isLastConnection ? connections[0]?.platform : platform}
-        {` ${isLastConnection ? connections[0]?.browser : browser}`}
+        {platform}
+        {` ${browser}`}
       </Text>
 
       {(country || city) && (
@@ -58,7 +60,7 @@ const SessionsRowContent = ({ t, item, fromDateAgo, sectionWidth }) => {
       )}
 
       <Text fontSize="12px" fontWeight="600" containerWidth="160px">
-        {isLastConnection ? connections[0]?.ip : ip}
+        {ip}
       </Text>
     </StyledRowContent>
   );

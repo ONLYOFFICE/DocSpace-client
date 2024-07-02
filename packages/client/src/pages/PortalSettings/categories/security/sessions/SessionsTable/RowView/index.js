@@ -98,12 +98,12 @@ const RowView = (props) => {
         <SessionsRow
           t={t}
           key={item.id}
+          userId={item.id}
           item={item}
           sectionWidth={sectionWidth}
           displayName={item.displayName}
-          sessionStatus={item.status}
+          status={item.status}
           connections={item.connections}
-          sessions={item.sessions}
         />
       ))}
     </StyledRowContainer>

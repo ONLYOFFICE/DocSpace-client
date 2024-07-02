@@ -35,11 +35,9 @@ class SelectionStore {
   sessionsData = [];
   dataFromSocket = [];
   displayName = "";
-  status = "";
   fromDateAgo = {};
-  connections = [];
+  items = [];
   platformData = [];
-  userLastSession = [];
   isLoading = false;
   selection = [];
   selectionUsersRights = {
@@ -470,6 +468,42 @@ class SelectionStore {
     this.dataFromSocket = data;
   };
 
+  setDisplayName = (displayName) => {
+    this.displayName = displayName;
+  };
+
+  setItems = (items) => {
+    this.items = items;
+  };
+
+  setPlatformData = (data) => {
+    this.platformData = data;
+  };
+
+  setIsLoading = (isLoading) => {
+    this.isLoading = isLoading;
+  };
+
+  setFromDateAgo = (id, value) => {
+    this.fromDateAgo[id] = value;
+  };
+
+  getFromDateAgo = (sessionId) => {
+    return this.fromDateAgo[sessionId] || "";
+  };
+
+  convertDate = (t, dateString, locale) => {
+    const parsedDate = moment(new Date(dateString).toISOString());
+    const now = moment();
+    const daysDiff = now.diff(parsedDate, "days");
+    moment.locale(locale);
+
+    if (daysDiff < 1) return parsedDate.fromNow();
+    if (daysDiff === 1) return t("Common:Yesterday");
+    if (daysDiff < 7) return parsedDate.fromNow();
+    return parsedDate.format(locale);
+  };
+
   findSessionIndexByUserId = (userId) => {
     return this.dataFromSocket.findIndex((data) => data.id === userId);
   };
@@ -584,64 +618,17 @@ class SelectionStore {
     this.setDataFromSocket(newArr);
   };
 
-  setDisplayName = (displayName) => {
-    this.displayName = displayName;
-  };
-
-  setStatus = (status) => {
-    this.status = status;
-  };
-
-  setConnections = (connections) => {
-    this.connections = connections;
-  };
-
-  setUserLastSession = (userLastSession) => {
-    this.userLastSession = userLastSession;
-  };
-
-  setPlatformData = (data) => {
-    this.platformData = data;
-  };
-
-  setIsLoading = (isLoading) => {
-    this.isLoading = isLoading;
-  };
-
-  setFromDateAgo = (sessionId, value) => {
-    this.fromDateAgo[sessionId] = value;
-  };
-
-  getFromDateAgo = (sessionId) => {
-    return this.fromDateAgo[sessionId] || "";
-  };
-
-  convertDate = (t, dateString, locale) => {
-    const parsedDate = moment(new Date(dateString).toISOString());
-    const now = moment();
-    const daysDiff = now.diff(parsedDate, "days");
-    moment.locale(locale);
-
-    if (daysDiff < 1) return parsedDate.fromNow();
-    if (daysDiff === 1) return t("Common:Yesterday");
-    if (daysDiff < 7) return parsedDate.fromNow();
-    return parsedDate.format(locale);
-  };
-
   getCurrentConnections = (session, data) => {
     const [first, ...other] = session.connections;
     const isCurrentSesstion = session.id === data?.id;
     const connectionsIsEmpty = session.connections.length === 0;
 
     const lastIndex = -1;
-
-    const sessionData = data?.sessions.at(lastIndex);
-
+    const sessionData = data.sessions?.at(lastIndex);
     if (isCurrentSesstion) return [{ ...first, ...sessionData }, ...other];
 
     if (connectionsIsEmpty) {
       if (!sessionData) return [];
-
       return [sessionData];
     }
 
@@ -649,16 +636,13 @@ class SelectionStore {
   };
 
   get allSessions() {
-    const dataFromSocketMap = this.dataFromSocket.reduce((map, data) => {
-      map[data.id] = data;
-      return map;
-    }, {});
+    const dataFromSocketMap = new Map(
+      this.dataFromSocket.map((data) => [data.id, data]),
+    );
 
     const sessions = this.sessionsData.map((session) => {
-      const data = dataFromSocketMap[session.id];
-
+      const data = dataFromSocketMap.get(session.id) || {};
       const connections = this.getCurrentConnections(session, data);
-
       return { ...data, ...session, connections };
     });
 
@@ -685,17 +669,9 @@ class SelectionStore {
   onClickLogoutAllSessions = async (t) => {
     const { removeAllActiveSessionsById } = this.settingsSetupStore;
 
-    const userIdFromBufferSelection =
-      this.selection.length > 0 && this.selection[0].connections.length > 0
-        ? this.selection[0].connections[0].userId
-        : undefined;
-
-    const userIdFromSelection =
-      this.bufferSelection && this.bufferSelection.connections.length > 0
-        ? this.bufferSelection.connections[0].userId
-        : undefined;
-
-    const userId = userIdFromSelection || userIdFromBufferSelection;
+    const bufferSelection = this.bufferSelection?.id;
+    const selection = this.selection[0]?.id;
+    const userId = selection || bufferSelection;
 
     if (!userId)
       return toastr.error(
@@ -705,8 +681,15 @@ class SelectionStore {
     try {
       this.setIsLoading(true);
       await removeAllActiveSessionsById(userId);
-      this.setConnections([]);
-      await this.fetchData();
+
+      const newData = {
+        ...this.items,
+        sessions: [],
+      };
+      this.setItems(newData);
+      const index = this.findSessionIndexByUserId(this.items.id);
+      this.dataFromSocket[index] = newData;
+
       toastr.success(
         t("Settings:LoggedOutByUser", {
           displayName: this.displayName,
@@ -719,35 +702,35 @@ class SelectionStore {
     }
   };
 
-  onClickLogoutAllExceptThis = async (t, id) => {
+  onClickLogoutAllExceptThis = async (t, sessionId) => {
     const { removeAllExceptThisEventId } = this.settingsSetupStore;
 
-    const idFromBufferSelection =
-      this.selection.length > 0 && this.selection[0].connections.length > 0
-        ? this.selection[0].connections[0].id
-        : undefined;
+    const bufferSelection = this.bufferSelection?.connections[0]?.id;
+    const selection = this.selection[0]?.connections[0]?.id;
+    const exceptSessionId = selection || bufferSelection;
 
-    const idFromSelection =
-      this.bufferSelection && this.bufferSelection.connections.length > 0
-        ? this.bufferSelection.connections[0].id
-        : undefined;
-
-    const exceptId = idFromSelection || idFromBufferSelection;
-
-    if (!exceptId)
+    if (!exceptSessionId)
       return toastr.error(
         t("Settings:UserAlreadyLoggedOut", { displayName: this.displayName }),
       );
 
     try {
       this.setIsLoading(true);
-      await removeAllExceptThisEventId(exceptId);
+      await removeAllExceptThisEventId(exceptSessionId);
 
-      const filteredConnections = this.connections.filter(
-        (connection) => connection.id === id,
+      const filteredConnections = this.items.sessions.filter(
+        (session) => session.id === sessionId,
       );
-      this.setConnections(filteredConnections);
-      await this.fetchData();
+
+      const newData = {
+        ...this.items,
+        sessions: filteredConnections,
+      };
+
+      this.setItems(newData);
+      const index = this.findSessionIndexByUserId(this.items.id);
+      this.dataFromSocket[index] = newData;
+
       toastr.success(
         t("Settings:LoggedOutByUserExceptThis", {
           displayName: this.displayName,
@@ -760,27 +743,35 @@ class SelectionStore {
     }
   };
 
-  onClickRemoveSession = async (t, id) => {
+  onClickRemoveSession = async (t, sessionId) => {
     const { removeSession } = this.settingsSetupStore;
 
-    const foundConnection = this.connections.find(
-      (connection) => connection.id === id,
+    const foundConnection = this.items.sessions.find(
+      (session) => session.id === sessionId,
     );
 
     if (!foundConnection) return;
 
     try {
       this.setIsLoading(true);
-      await removeSession(foundConnection.id);
-      const filteredConnections = this.connections.filter(
-        (connection) => connection.id !== id,
+      await removeSession(sessionId);
+      const filteredConnections = this.items.sessions.filter(
+        (session) => session.id !== sessionId,
       );
-      this.setConnections(filteredConnections);
-      await this.fetchData();
+
+      const newData = {
+        ...this.items,
+        sessions: filteredConnections,
+      };
+
+      this.setItems(newData);
+      const index = this.findSessionIndexByUserId(this.items.id);
+      this.dataFromSocket[index] = newData;
+
       toastr.success(
         t("Profile:SuccessLogout", {
           platform: foundConnection.platform,
-          browser: foundConnection.browser,
+          browser: foundConnection.browser?.split(".")[0] ?? "",
         }),
       );
     } catch (error) {
@@ -792,8 +783,8 @@ class SelectionStore {
 
   onClickLogoutAllUsers = async (t) => {
     const { logoutAllUsers } = this.settingsSetupStore;
-    const userIds = this.selection.flatMap((item) =>
-      item.connections.map((connection) => connection.userId),
+    const userIds = this.selection.flatMap((data) =>
+      data.items.map((connection) => connection.userId),
     );
     try {
       this.setIsLoading(true);

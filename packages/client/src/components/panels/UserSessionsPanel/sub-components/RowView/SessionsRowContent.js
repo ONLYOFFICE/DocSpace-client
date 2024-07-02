@@ -31,7 +31,7 @@ const SessionsRowContent = ({ item, sectionWidth }) => {
     >
       <Text fontSize="14px" fontWeight="600" containerWidth="160px" truncate>
         {platform}, {browser?.split(".")[0] ?? ""}
-        <span className="date">{convertTime(date)}</span>
+        <span className="date">{convertTime(new Date(date))}</span>
       </Text>
       <></>
       {(country || city) && (

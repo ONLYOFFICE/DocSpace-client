@@ -1,8 +1,7 @@
-import { useState, useEffect, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { Base } from "@docspace/shared/themes";
 import styled, { css } from "styled-components";
-import moment from "moment-timezone";
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
 import { TableRow } from "@docspace/shared/components/table";
@@ -150,48 +149,50 @@ const SessionsTableRow = (props) => {
     onContentRowClick,
     onUserContextClick,
     isActive,
-    hideColumns,
+    checkedProps,
     displayName,
+    hideColumns,
     status,
+    userId,
     connections,
     locale,
-    checkedProps,
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
-    setUserLastSession,
-    setConnections,
     setUserSessionPanelVisible,
+    setItems,
     setDisplayName,
-    setStatus,
     convertDate,
     getFromDateAgo,
     setFromDateAgo,
   } = props;
 
-  const { platform, browser, ip, city, country, date } = connections[0] || {};
+  const { platform, browser, ip, city, country, date } = connections[0] ?? {};
 
-  const fromDateAgo = getFromDateAgo(item.id);
+  const fromDateAgo = getFromDateAgo(userId);
   const isChecked = checkedProps?.checked;
   const isOnline = status === "online";
 
   useEffect(() => {
     const updateStatus = () => {
-      const showOnline = isOnline && status;
-      const showOffline =
-        !isOnline && date ? convertDate(t, date, locale) : null;
-      setFromDateAgo(item.id, isOnline ? showOnline : showOffline);
+      let statusToShow;
+      if (isOnline && status) {
+        statusToShow = status;
+      } else if (!isOnline && date) {
+        statusToShow = convertDate(t, date, locale);
+      } else {
+        statusToShow = null;
+      }
+      setFromDateAgo(userId, statusToShow);
     };
 
     updateStatus();
     const intervalId = setInterval(updateStatus, 60000);
 
     return () => clearInterval(intervalId);
-  }, [date, status, locale, item.id, isOnline]);
+  }, [date, status, locale, userId, isOnline]);
 
   const onClickSessions = () => {
-    setStatus(fromDateAgo);
-    setUserLastSession(item);
-    setConnections(connections);
+    setItems(item);
     setUserSessionPanelVisible(true);
   };
 
@@ -249,7 +250,7 @@ const SessionsTableRow = (props) => {
       }`}
     >
       <StyledTableRow
-        key={item.id}
+        key={userId}
         className="table-row"
         checked={isChecked}
         isActive={isActive}
@@ -318,10 +319,8 @@ export default inject(
     const locale = (user && user.cultureName) || culture || "en";
 
     const {
-      setUserLastSession,
-      setConnections,
+      setItems,
       setDisplayName,
-      setStatus,
       convertDate,
       getFromDateAgo,
       setFromDateAgo,
@@ -331,11 +330,9 @@ export default inject(
       locale,
       setLogoutAllDialogVisible,
       setDisableDialogVisible,
-      setUserLastSession,
-      setConnections,
       setUserSessionPanelVisible,
+      setItems,
       setDisplayName,
-      setStatus,
       convertDate,
       getFromDateAgo,
       setFromDateAgo,

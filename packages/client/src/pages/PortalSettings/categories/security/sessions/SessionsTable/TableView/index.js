@@ -163,7 +163,7 @@ const TableView = ({ t, sectionWidth, userId, sessionsData }) => {
           <SessionsTableRow
             t={t}
             key={item.id}
-            userId={userId}
+            userId={item.id}
             item={item}
             hideColumns={hideColumns}
             displayName={item.displayName}

@@ -372,11 +372,9 @@ const SectionHeaderContent = (props) => {
     setLogoutAllDialogVisible,
     isSeveralSelection,
     peopleSelection,
-    setConnections,
-    setUserLastSession,
+    setItems,
     setUserSessionPanelVisible,
     setDisplayName,
-    setStatus,
     getFromDateAgo,
   } = props;
   const { header, isCategoryOrHeader, isNeedPaidIcon } = state;
@@ -417,9 +415,7 @@ const SectionHeaderContent = (props) => {
   );
 
   const onClickSessions = () => {
-    setStatus(fromDateAgo);
-    setUserLastSession(peopleSelection[0]);
-    setConnections(peopleSelection[0].connections);
+    setItems(peopleSelection[0]);
     setUserSessionPanelVisible(true);
   };
 
@@ -594,11 +590,9 @@ export default inject(
       setSelected: peopleSetSelected,
       isSeveralSelection,
       selection: peopleSelection,
-      setConnections,
-      setUserLastSession,
+      setItems,
       setDisplayName,
       allSessions,
-      setStatus,
       getFromDateAgo,
     } = peopleStore.selectionStore;
 
@@ -633,12 +627,10 @@ export default inject(
       setDisableDialogVisible,
       setLogoutDialogVisible,
       setLogoutAllDialogVisible,
-      setConnections,
+      setItems,
       setUserSessionPanelVisible,
-      setUserLastSession,
       setDisplayName,
       allSessions,
-      setStatus,
       getFromDateAgo,
     };
   },

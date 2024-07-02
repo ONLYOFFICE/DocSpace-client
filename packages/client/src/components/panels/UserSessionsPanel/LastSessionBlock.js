@@ -99,8 +99,7 @@ const StyledLastSessionBlock = styled.div`
 const LastSessionBlock = (props) => {
   const {
     t,
-    connections,
-    userLastSession,
+    items,
     setDisplayName,
     setDisableDialogVisible,
     setLogoutAllDialogVisible,
@@ -115,12 +114,13 @@ const LastSessionBlock = (props) => {
     isOwner,
     isRoomAdmin,
     isCollaborator,
-  } = userLastSession;
+    connections,
+  } = items;
 
   const fromDateAgo = getFromDateAgo(id);
 
-  const { platform, browser, ip, city, country } = connections[0] ?? {};
   const isOnline = fromDateAgo === "online";
+  const { platform, browser, ip, city, country } = connections[0] ?? {};
 
   const getUserType = () => {
     if (isOwner) return t("Common:Owner");
@@ -227,13 +227,11 @@ const LastSessionBlock = (props) => {
 export default inject(({ setup, peopleStore }) => {
   const { setDisableDialogVisible, setLogoutAllDialogVisible } = setup;
 
-  const { getFromDateAgo, connections, userLastSession, setDisplayName } =
-    peopleStore.selectionStore;
+  const { getFromDateAgo, items, setDisplayName } = peopleStore.selectionStore;
 
   return {
     getFromDateAgo,
-    connections,
-    userLastSession,
+    items,
     setDisplayName,
     setDisableDialogVisible,
     setLogoutAllDialogVisible,

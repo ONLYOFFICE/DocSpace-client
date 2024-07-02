@@ -33,22 +33,20 @@ const Wrapper = styled.div`
 `;
 
 const AllSessionsBlock = (props) => {
-  const {
-    t,
-    isLoading,
-    connections,
-    userLastSession,
-    onClickLogoutAllExceptThis,
-  } = props;
+  const { t, isLoading, items, onClickLogoutAllExceptThis } = props;
 
-  const exceptId = userLastSession.connections[0]?.id;
+  const exceptId = items.connections[0]?.id;
+
+  const filteredSessions = items.sessions.filter(
+    (session) => session.status === "offline",
+  );
 
   return (
     <>
       <Wrapper>
         <Text className="subtitle">{t("Profile:AllSessions")}</Text>
         <Text className="desciption">{t("Profile:PanelDescription")}</Text>
-        {connections.length > 0 ? (
+        {filteredSessions.length > 0 ? (
           <Button
             label={t("Profile:LogoutFromAllSessions")}
             size="small"
@@ -66,25 +64,19 @@ const AllSessionsBlock = (props) => {
         )}
       </Wrapper>
 
-      <RowWrapper t={t} connections={connections} />
+      <RowWrapper t={t} sessions={filteredSessions} />
     </>
   );
 };
 
 export default inject(({ peopleStore }) => {
-  const {
-    connections,
-    isLoading,
-    fetchData,
-    userLastSession,
-    onClickLogoutAllExceptThis,
-  } = peopleStore.selectionStore;
+  const { items, isLoading, fetchData, onClickLogoutAllExceptThis } =
+    peopleStore.selectionStore;
 
   return {
-    connections,
+    items,
     isLoading,
     fetchData,
-    userLastSession,
     onClickLogoutAllExceptThis,
   };
 })(observer(AllSessionsBlock));

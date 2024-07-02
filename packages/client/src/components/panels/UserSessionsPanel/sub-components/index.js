@@ -1,14 +1,14 @@
 import { Consumer } from "@docspace/shared/utils";
 import RowView from "./RowView";
 
-const RowWrapper = ({ t, connections }) => {
+const RowWrapper = ({ t, sessions }) => {
   return (
     <Consumer>
       {(context) => (
         <RowView
           t={t}
           sectionWidth={context.sectionWidth}
-          connections={connections}
+          sessions={sessions}
         />
       )}
     </Consumer>

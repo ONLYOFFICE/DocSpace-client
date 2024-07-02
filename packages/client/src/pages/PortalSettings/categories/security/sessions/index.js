@@ -125,7 +125,7 @@ const Sessions = ({
     currentDeviceType,
   });
 
-  const getIdFromConnections = (connections) => connections?.[0]?.id;
+  const getIdFromConnections = (connections) => connections[0]?.id;
 
   const idFromSelection =
     selection.length > 0
@@ -144,7 +144,7 @@ const Sessions = ({
       ? [bufferSelection.id, ...userIdsFromSelection]
       : [...userIdsFromSelection];
 
-  // if (!isSessionsLoaded) return <SessionsLoader viewAs={viewAs} />;
+  if (!isSessionsLoaded) return <SessionsLoader viewAs={viewAs} />;
 
   return (
     <MainContainer>

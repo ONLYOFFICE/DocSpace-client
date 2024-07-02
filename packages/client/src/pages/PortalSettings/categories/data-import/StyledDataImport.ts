@@ -110,6 +110,10 @@ export const Wrapper = styled.div`
   .upper-buttons {
     margin-top: 16px;
     margin-bottom: 20px;
+
+    @media ${mobile} {
+      margin: 0;
+    }
   }
 
   .data-import-progress-bar {

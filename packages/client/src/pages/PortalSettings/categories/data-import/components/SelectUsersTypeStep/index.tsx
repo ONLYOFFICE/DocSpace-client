@@ -29,13 +29,13 @@ import { inject, observer } from "mobx-react";
 
 import { SearchInput } from "@docspace/shared/components/search-input";
 import { InputSize } from "@docspace/shared/components/text-input";
+import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../sub-components/AccountsPaging";
 
 import { Wrapper } from "../../StyledDataImport";
 import { InjectedTypeSelectProps, TypeSelectProps } from "../../types";
 import { MigrationButtons } from "../../sub-components/MigrationButtons";
-import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 
 const PAGE_SIZE = 25;
 const REFRESH_TIMEOUT = 100;
@@ -155,7 +155,7 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
           )}
         </>
       )}
-      
+
       {cancelUploadDialogVisible && (
         <CancelUploadDialog
           visible={cancelUploadDialogVisible}

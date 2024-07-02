@@ -28,8 +28,9 @@ import styled from "styled-components";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
-import { UsersInfoBlockProps } from "../types";
 import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { mobile } from "@docspace/shared/utils";
+import { UsersInfoBlockProps } from "../types";
 
 const Wrapper = styled.div`
   margin: 16px 0;
@@ -59,6 +60,12 @@ const UsersInfoWrapper = styled.div<{
 
   @media (max-width: 1140px) {
     width: 100%;
+  }
+
+  @media ${mobile} {
+    flex-wrap: wrap;
+    min-width: auto;
+    gap: 12px;
   }
 
   .selected-users-count {

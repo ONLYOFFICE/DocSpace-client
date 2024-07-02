@@ -894,6 +894,7 @@ class FilesActionStore {
         )
         .finally(() => {
           this.setGroupMenuBlocked(false);
+          this.filesStore.setOperationAction(false);
         });
     } else {
       addActiveItems(null, [itemId], destFolderId);

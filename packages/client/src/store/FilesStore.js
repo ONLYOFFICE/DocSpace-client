@@ -792,8 +792,6 @@ class FilesStore {
   };
 
   removeActiveItem = (file) => {
-    console.log(this.activeFiles);
-
     this.activeFiles =
       this.activeFiles?.filter((item) => item.id !== file.id) ?? [];
   };

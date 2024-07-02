@@ -52,6 +52,7 @@ import {
 } from "@docspace/shared/utils/common";
 import { login } from "@docspace/shared/utils/loginUtils";
 import {
+  ALLOWED_PASSWORD_CHARACTERS,
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
   PRODUCT_NAME,
@@ -633,9 +634,7 @@ const CreateUserForm = (props) => {
                     isVertical={true}
                     labelVisible={false}
                     hasError={isPasswordErrorShow && !passwordValid}
-                    errorMessage={`${t(
-                      "Common:PasswordLimitMessage",
-                    )}: ${getPasswordErrorMessage(t, settings)}`}
+                    errorMessage={t("Common:IncorrectPassword")}
                   >
                     <PasswordInput
                       simpleView={false}
@@ -673,6 +672,7 @@ const CreateUserForm = (props) => {
                         "Common:PasswordLimitSpecialSymbols",
                       )}`}
                       generatePasswordTitle={t("Wizard:GeneratePassword")}
+                      tooltipAllowedCharacters={`${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
                     />
                   </FieldContainer>
 

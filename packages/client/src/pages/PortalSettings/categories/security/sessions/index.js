@@ -76,12 +76,8 @@ const DownLoadWrapper = styled.div`
 
 const Sessions = ({
   allSessions,
-  sessionsData,
-  dataFromSocket,
-  currentDataFromSocket,
   displayName,
   clearSelection,
-  updateAllSessions,
   platformData,
   selection,
   bufferSelection,
@@ -143,6 +139,8 @@ const Sessions = ({
     bufferSelection?.id !== undefined
       ? [bufferSelection.id, ...userIdsFromSelection]
       : [...userIdsFromSelection];
+
+  console.log(allSessions);
 
   if (!isSessionsLoaded) return <SessionsLoader viewAs={viewAs} />;
 
@@ -212,12 +210,8 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
   const { currentDeviceType } = settingsStore;
   const {
     allSessions,
-    sessionsData,
-    dataFromSocket,
-    currentDataFromSocket,
     displayName,
     clearSelection,
-    updateAllSessions,
     platformData,
     fetchData,
     selection,
@@ -244,12 +238,8 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
 
   return {
     allSessions,
-    sessionsData,
-    dataFromSocket,
-    currentDataFromSocket,
     displayName,
     clearSelection,
-    updateAllSessions,
     platformData,
     selection,
     bufferSelection,

@@ -26,7 +26,7 @@
 
 import { ReactSVG } from "react-svg";
 import styled from "styled-components";
-import { tablet } from "@docspace/shared/utils/device";
+import { mobile, tablet } from "@docspace/shared/utils/device";
 
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
@@ -74,6 +74,10 @@ const FlexContainer = styled.div`
 const ImportItemWrapper = styled.div<{ isChecked: boolean }>`
   padding-top: 8px;
 
+  @media ${mobile} {
+    width: 100%;
+  }
+
   .workspace-title {
     color: ${(props) =>
       props.theme.client.settings.migration.importSectionTextColor};
@@ -99,6 +103,10 @@ const ImportItemWrapper = styled.div<{ isChecked: boolean }>`
     display: flex;
     align-items: center;
     gap: 8px;
+
+    @media ${mobile} {
+      min-width: auto;
+    }
 
     .importSectionIcon {
       div {
@@ -145,8 +153,6 @@ const ImportItem = ({
   workspace,
   isChecked,
 }: ImportItemProps) => {
-  console.log(sectionIcon);
-
   return (
     <ImportItemWrapper isChecked={isChecked}>
       <Text

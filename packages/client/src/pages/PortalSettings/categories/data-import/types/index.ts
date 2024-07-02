@@ -269,7 +269,7 @@ export interface InjectedAddEmailsStepProps extends AddEmailsStepProps {
   setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
   setMigratingWorkspace: TStore["importAccountsStore"]["setMigratingWorkspace"];
   setMigrationPhase: TStore["importAccountsStore"]["setMigrationPhase"];
-  
+
   cancelUploadDialogVisible: TStore["dialogsStore"]["cancelUploadDialogVisible"];
   setCancelUploadDialogVisible: TStore["dialogsStore"]["setCancelUploadDialogVisible"];
 
@@ -465,7 +465,17 @@ export interface InjectedImportStepProps extends ImportStepProps {
   decrementStep: TStore["importAccountsStore"]["decrementStep"];
   importOptions: TStore["importAccountsStore"]["importOptions"];
   setImportOptions: TStore["importAccountsStore"]["setImportOptions"];
+  cancelMigration: TStore["importAccountsStore"]["cancelMigration"];
+  clearCheckedAccounts: TStore["importAccountsStore"]["clearCheckedAccounts"];
+  setStep: TStore["importAccountsStore"]["setStep"];
+  setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
+  setMigratingWorkspace: TStore["importAccountsStore"]["setMigratingWorkspace"];
+  setMigrationPhase: TStore["importAccountsStore"]["setMigrationPhase"];
+
   user: TStore["userStore"]["user"];
+
+  cancelUploadDialogVisible: TStore["dialogsStore"]["cancelUploadDialogVisible"];
+  setCancelUploadDialogVisible: TStore["dialogsStore"]["setCancelUploadDialogVisible"];
 }
 
 export interface ImportProcessingStepProps {

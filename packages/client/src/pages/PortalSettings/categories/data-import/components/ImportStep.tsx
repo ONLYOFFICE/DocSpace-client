@@ -27,15 +27,16 @@
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import AccountsIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
 import RoomsIcon from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
 import PortfolioIcon from "PUBLIC_DIR/images/catalog.portfolio.react.svg?url";
 import ProjectsIcon from "PUBLIC_DIR/images/catalog.projects.react.svg?url";
 import DocumentsIcon from "PUBLIC_DIR/images/catalog.documents.react.svg?url";
 import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import ImportSection from "../sub-components/ImportSection";
 import { ImportStepProps, InjectedImportStepProps } from "../types";
+import { MigrationButtons } from "../sub-components/MigrationButtons";
 
 const Wrapper = styled.div`
   display: flex;
@@ -63,6 +64,15 @@ const ImportStep = (props: ImportStepProps) => {
     importOptions,
     setImportOptions,
     user,
+    cancelMigration,
+    clearCheckedAccounts,
+    setStep,
+    setWorkspace,
+    setMigratingWorkspace,
+    setMigrationPhase,
+
+    cancelUploadDialogVisible,
+    setCancelUploadDialogVisible,
   } = props as InjectedImportStepProps;
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>, name: string) => {
@@ -72,6 +82,18 @@ const ImportStep = (props: ImportStepProps) => {
 
   const users =
     t("Settings:Employees")[0].toUpperCase() + t("Settings:Employees").slice(1);
+
+  const onCancelMigration = () => {
+    cancelMigration();
+    clearCheckedAccounts();
+    setStep(1);
+    setWorkspace("");
+    setMigratingWorkspace("");
+    setMigrationPhase("");
+  };
+
+  const showCancelDialog = () => setCancelUploadDialogVisible(true);
+  const hideCancelDialog = () => setCancelUploadDialogVisible(false);
 
   return (
     <Wrapper>
@@ -203,7 +225,7 @@ const ImportStep = (props: ImportStepProps) => {
         />
       )}
 
-      <SaveCancelButtons
+      <MigrationButtons
         className="save-cancel-buttons"
         onSaveClick={incrementStep}
         onCancelClick={decrementStep}
@@ -211,22 +233,58 @@ const ImportStep = (props: ImportStepProps) => {
         cancelButtonLabel={t("Common:Back")}
         displaySettings
         showReminder
+        migrationCancelLabel={t("Settings:CancelImport")}
+        onMigrationCancelClick={showCancelDialog}
       />
+
+      {cancelUploadDialogVisible && (
+        <CancelUploadDialog
+          visible={cancelUploadDialogVisible}
+          onClose={hideCancelDialog}
+          cancelMigration={onCancelMigration}
+          loading={false}
+          isFifthStep={false}
+          isSixthStep={false}
+        />
+      )}
     </Wrapper>
   );
 };
 
-export default inject<TStore>(({ importAccountsStore, userStore }) => {
-  const { importOptions, setImportOptions, incrementStep, decrementStep } =
-    importAccountsStore;
+export default inject<TStore>(
+  ({ importAccountsStore, userStore, dialogsStore }) => {
+    const {
+      importOptions,
+      setImportOptions,
+      incrementStep,
+      decrementStep,
+      cancelMigration,
+      clearCheckedAccounts,
+      setStep,
+      setWorkspace,
+      setMigratingWorkspace,
+      setMigrationPhase,
+    } = importAccountsStore;
+    const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
+      dialogsStore;
 
-  const { user } = userStore;
+    const { user } = userStore;
 
-  return {
-    user,
-    importOptions,
-    setImportOptions,
-    incrementStep,
-    decrementStep,
-  };
-})(observer(ImportStep));
+    return {
+      user,
+      importOptions,
+      setImportOptions,
+      incrementStep,
+      decrementStep,
+      cancelMigration,
+      clearCheckedAccounts,
+      setStep,
+      setWorkspace,
+      setMigratingWorkspace,
+      setMigrationPhase,
+
+      cancelUploadDialogVisible,
+      setCancelUploadDialogVisible,
+    };
+  },
+)(observer(ImportStep));

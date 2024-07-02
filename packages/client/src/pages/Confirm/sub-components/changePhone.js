@@ -36,6 +36,7 @@ import withLoader from "../withLoader";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import { PRODUCT_NAME } from "@docspace/shared/constants";
+import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
 
 const ChangePhoneForm = (props) => {
   const { t, greetingTitle } = props;
@@ -89,6 +90,14 @@ const ChangePhoneForm = (props) => {
   );
 };
 
-export default inject(({ settingsStore }) => ({
+const ComponentWrapper = inject(({ settingsStore }) => ({
   greetingTitle: settingsStore.greetingSettings,
 }))(withTranslation("Confirm")(withLoader(observer(ChangePhoneForm))));
+
+export const Component = () => {
+  return (
+    <ConfirmRoute>
+      <ComponentWrapper />
+    </ConfirmRoute>
+  );
+};

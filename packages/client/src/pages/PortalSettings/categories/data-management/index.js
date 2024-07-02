@@ -149,7 +149,7 @@ const DataManagementWrapper = (props) => {
   );
 };
 
-export default inject(
+export const Component = inject(
   ({ settingsStore, setup, backup, currentTariffStatusStore }) => {
     const { initSettings } = setup;
 

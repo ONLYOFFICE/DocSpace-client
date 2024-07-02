@@ -155,7 +155,7 @@ const DocSpace = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore }) => {
+export const Component = inject(({ authStore, settingsStore }) => {
   const { setDocumentTitle } = authStore;
   const { theme } = settingsStore;
 

@@ -270,7 +270,7 @@ const Viewer = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore, filesStore }) => {
+export const Component = inject(({ authStore, settingsStore, filesStore }) => {
   const { setDocumentTitle } = authStore;
   const { theme } = settingsStore;
   const { getFilePrimaryLink } = filesStore;

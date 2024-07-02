@@ -42,6 +42,7 @@ import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import { StyledPage, StyledContent } from "./StyledConfirm";
 import { validateTfaCode } from "@docspace/shared/api/settings";
 import { loginWithTfaCode } from "@docspace/shared/api/user";
+import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
 
 const StyledForm = styled(Box)`
   margin: 56px auto;
@@ -205,9 +206,17 @@ const TfaAuthFormWrapper = (props) => {
   return <TfaAuthForm {...props} />;
 };
 
-export default inject(({ settingsStore, confirm }) => ({
+const ComponentWrapper = inject(({ settingsStore, confirm }) => ({
   setIsLoaded: confirm.setIsLoaded,
   setIsLoading: confirm.setIsLoading,
 
   defaultPage: settingsStore.defaultPage,
 }))(withTranslation(["Confirm", "Common"])(observer(TfaAuthFormWrapper)));
+
+export const Component = () => {
+  return (
+    <ConfirmRoute>
+      <ComponentWrapper />
+    </ConfirmRoute>
+  );
+};

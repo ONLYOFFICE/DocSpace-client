@@ -68,7 +68,7 @@ const SPSettings = ({ currentDeviceType }) => {
   );
 };
 
-export default inject(({ settingsStore }) => {
+export const SPSettingsSection = inject(({ settingsStore }) => {
   const { currentDeviceType } = settingsStore;
 
   return {

@@ -27,10 +27,12 @@
 import React from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
-import Layout from "./Layout";
-
 import Panels from "SRC_DIR/components/FilesPanels";
+import PrivateRoute from "SRC_DIR/components/PrivateRouteWrapper";
+import ErrorBoundary from "SRC_DIR/components/ErrorBoundaryWrapper";
 import { generalRoutes } from "SRC_DIR/routes/general";
+
+import Layout from "./Layout";
 
 const Settings = () => {
   const location = useLocation();
@@ -58,4 +60,12 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export const Component = () => {
+  return (
+    <PrivateRoute restricted>
+      <ErrorBoundary>
+        <Settings />
+      </ErrorBoundary>
+    </PrivateRoute>
+  );
+};

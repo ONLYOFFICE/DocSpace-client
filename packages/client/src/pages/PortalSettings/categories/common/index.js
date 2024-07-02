@@ -125,7 +125,7 @@ const TabsCommon = (props) => {
   );
 };
 
-export default inject(({ settingsStore, common }) => {
+export const Component = inject(({ settingsStore, common }) => {
   const {
     isLoaded,
     setIsLoadedSubmenu,

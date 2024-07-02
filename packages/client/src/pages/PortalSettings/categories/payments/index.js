@@ -36,7 +36,7 @@ const PaymentsPage = (props) => {
   return standalone ? <PaymentsEnterprise /> : <PaymentsSaaS />;
 };
 
-export default inject(({ settingsStore }) => {
+export const Component = inject(({ settingsStore }) => {
   const { standalone } = settingsStore;
 
   return {

@@ -164,29 +164,31 @@ const DataImport = ({
     </WorkspacesContainer>
   );
 };
-export default inject(({ authStore, settingsStore, importAccountsStore }) => {
-  const {
-    services,
-    setServices,
-    getMigrationList,
-    getMigrationStatus,
-    isMigrationInit,
-    setIsMigrationInit,
-  } = importAccountsStore;
+export const Component = inject(
+  ({ authStore, settingsStore, importAccountsStore }) => {
+    const {
+      services,
+      setServices,
+      getMigrationList,
+      getMigrationStatus,
+      isMigrationInit,
+      setIsMigrationInit,
+    } = importAccountsStore;
 
-  const { setDocumentTitle } = authStore;
+    const { setDocumentTitle } = authStore;
 
-  const { organizationName, theme } = settingsStore;
+    const { organizationName, theme } = settingsStore;
 
-  return {
-    services,
-    setServices,
-    getMigrationList,
-    getMigrationStatus,
-    theme,
-    setDocumentTitle,
-    isMigrationInit,
-    setIsMigrationInit,
-    organizationName,
-  };
-})(withTranslation(["Settings"])(observer(DataImport)));
+    return {
+      services,
+      setServices,
+      getMigrationList,
+      getMigrationStatus,
+      theme,
+      setDocumentTitle,
+      isMigrationInit,
+      setIsMigrationInit,
+      organizationName,
+    };
+  },
+)(withTranslation(["Settings"])(observer(DataImport)));

@@ -175,25 +175,31 @@ const NextcloudWorkspace = (props) => {
   );
 };
 
-export default inject(({ setup, settingsStore, importAccountsStore }) => {
-  const { clearCheckedAccounts, getMigrationStatus, setUsers, filteredUsers } =
-    importAccountsStore;
-  const { initSettings, viewAs, setViewAs } = setup;
-  const { currentDeviceType, organizationName } = settingsStore;
+export const Component = inject(
+  ({ setup, settingsStore, importAccountsStore }) => {
+    const {
+      clearCheckedAccounts,
+      getMigrationStatus,
+      setUsers,
+      filteredUsers,
+    } = importAccountsStore;
+    const { initSettings, viewAs, setViewAs } = setup;
+    const { currentDeviceType, organizationName } = settingsStore;
 
-  return {
-    initSettings,
-    theme: settingsStore.theme,
-    clearCheckedAccounts,
-    viewAs,
-    setViewAs,
-    currentDeviceType,
-    getMigrationStatus,
-    setUsers,
-    filteredUsers,
-    organizationName,
-  };
-})(
+    return {
+      initSettings,
+      theme: settingsStore.theme,
+      clearCheckedAccounts,
+      viewAs,
+      setViewAs,
+      currentDeviceType,
+      getMigrationStatus,
+      setUsers,
+      filteredUsers,
+      organizationName,
+    };
+  },
+)(
   withTranslation(["Common, SMTPSettings, Settings"])(
     observer(NextcloudWorkspace),
   ),

@@ -33,7 +33,7 @@ import { ThemeKeys } from "@docspace/shared/enums";
 import { Toast } from "@docspace/shared/components/toast";
 import { Portal } from "@docspace/shared/components/portal";
 import AppLoader from "@docspace/shared/components/app-loader";
-import Error403 from "@docspace/shared/components/errors/Error403";
+import { Error403 } from "@docspace/shared/components/errors/Error403";
 
 import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
 

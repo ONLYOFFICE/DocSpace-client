@@ -130,21 +130,23 @@ const SettingsContainer = ({
   return <>{renderBody()}</>;
 };
 
-export default inject(({ settingsStore, currentQuotaStore, ldapStore }) => {
-  const { isLdapAvailable } = currentQuotaStore;
-  const { currentDeviceType, theme } = settingsStore;
-  const { isSettingsShown, isCertificateDialogVisible, isLoaded, load } =
-    ldapStore;
+export const SettingsContainerSection = inject(
+  ({ settingsStore, currentQuotaStore, ldapStore }) => {
+    const { isLdapAvailable } = currentQuotaStore;
+    const { currentDeviceType, theme } = settingsStore;
+    const { isSettingsShown, isCertificateDialogVisible, isLoaded, load } =
+      ldapStore;
 
-  const isMobileView = currentDeviceType === DeviceType.mobile;
+    const isMobileView = currentDeviceType === DeviceType.mobile;
 
-  return {
-    isLdapAvailable,
-    isSettingsShown,
-    isMobileView,
-    theme,
-    isCertificateDialogVisible,
-    isLoaded,
-    load,
-  };
-})(observer(SettingsContainer));
+    return {
+      isLdapAvailable,
+      isSettingsShown,
+      isMobileView,
+      theme,
+      isCertificateDialogVisible,
+      isLoaded,
+      load,
+    };
+  },
+)(observer(SettingsContainer));

@@ -52,6 +52,8 @@ import {
 } from "./StyledCreateUser";
 import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import GreetingUserContainer from "./GreetingUserContainer";
+import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
+import { AuthenticatedAction } from "SRC_DIR/helpers/enums";
 
 const ActivateUserForm = (props) => {
   const { t, settings, linkData, hashSettings, defaultPage, login } = props;
@@ -279,7 +281,7 @@ const ActivateUserForm = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore }) => {
+const ComponentWrapper = inject(({ authStore, settingsStore }) => {
   const {
     greetingSettings,
     hashSettings,
@@ -300,3 +302,11 @@ export default inject(({ authStore, settingsStore }) => {
     withLoader(observer(ActivateUserForm)),
   ),
 );
+
+export const Component = () => {
+  return (
+    <ConfirmRoute doAuthenticated={AuthenticatedAction.Redirect}>
+      <ComponentWrapper />
+    </ConfirmRoute>
+  );
+};

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { matchPath } from "react-router";
+import { matchPath } from "react-router-dom";
 
 import AccountsFilter from "@docspace/shared/api/people/filter";
 

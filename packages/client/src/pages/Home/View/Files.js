@@ -29,7 +29,7 @@ import { Consumer } from "@docspace/shared/utils";
 
 import { SectionBodyContent } from "../Section";
 
-const FilesView = () => {
+export const FilesView = () => {
   return (
     <Consumer>
       {(context) => (
@@ -42,5 +42,3 @@ const FilesView = () => {
     </Consumer>
   );
 };
-
-export default FilesView;

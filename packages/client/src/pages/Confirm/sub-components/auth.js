@@ -33,6 +33,8 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { toastr } from "@docspace/shared/components/toast";
 import { frameCallEvent } from "@docspace/shared/utils/common";
 import SectionWrapper from "SRC_DIR/components/Section";
+import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
+import { AuthenticatedAction } from "SRC_DIR/helpers/enums";
 const Auth = (props) => {
   //console.log("Auth render");
   const { linkData } = props;
@@ -81,4 +83,10 @@ const AuthPage = (props) => (
   </SectionWrapper>
 );
 
-export default AuthPage;
+export const Component = () => {
+  return (
+    <ConfirmRoute doAuthenticated={AuthenticatedAction.Logout}>
+      <AuthPage />
+    </ConfirmRoute>
+  );
+};

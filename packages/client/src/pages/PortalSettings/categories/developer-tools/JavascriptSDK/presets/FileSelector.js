@@ -440,18 +440,20 @@ const FileSelector = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore, publicRoomStore }) => {
-  const { setDocumentTitle } = authStore;
-  const { theme, organizationName } = settingsStore;
-  const { fetchExternalLinks } = publicRoomStore;
+export const Component = inject(
+  ({ authStore, settingsStore, publicRoomStore }) => {
+    const { setDocumentTitle } = authStore;
+    const { theme, organizationName } = settingsStore;
+    const { fetchExternalLinks } = publicRoomStore;
 
-  return {
-    theme,
-    setDocumentTitle,
-    fetchExternalLinks,
-    organizationName,
-  };
-})(
+    return {
+      theme,
+      setDocumentTitle,
+      fetchExternalLinks,
+      organizationName,
+    };
+  },
+)(
   withTranslation([
     "JavascriptSdk",
     "Files",

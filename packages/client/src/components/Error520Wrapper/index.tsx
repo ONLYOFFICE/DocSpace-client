@@ -33,17 +33,19 @@ const Error520Wrapper = (props: Error520Props) => {
   return <Error520 {...props} />;
 };
 
-export default inject<TStore>(({ authStore, settingsStore, userStore }) => {
-  const { firebaseHelper, currentDeviceType, currentColorScheme } =
-    settingsStore;
-  const { user } = userStore;
-  const version = authStore.version;
+export const Error520Component = inject<TStore>(
+  ({ authStore, settingsStore, userStore }) => {
+    const { firebaseHelper, currentDeviceType, currentColorScheme } =
+      settingsStore;
+    const { user } = userStore;
+    const version = authStore.version;
 
-  return {
-    user,
-    version,
-    firebaseHelper,
-    currentDeviceType,
-    currentColorScheme,
-  };
-})(observer(Error520Wrapper));
+    return {
+      user,
+      version,
+      firebaseHelper,
+      currentDeviceType,
+      currentColorScheme,
+    };
+  },
+)(observer(Error520Wrapper));

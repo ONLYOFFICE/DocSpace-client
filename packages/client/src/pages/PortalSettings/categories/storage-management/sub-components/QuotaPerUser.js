@@ -51,7 +51,7 @@ const QuotaPerUserComponent = (props) => {
   );
 };
 
-export default inject(({ currentQuotaStore }) => {
+export const QuotaPerUserComponentSection = inject(({ currentQuotaStore }) => {
   const { setUserQuota, defaultUsersQuota, isDefaultUsersQuotaSet } =
     currentQuotaStore;
 

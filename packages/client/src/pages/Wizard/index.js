@@ -525,54 +525,56 @@ const Wizard = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore, wizardStore }) => {
-  const {
-    passwordSettings,
-    wizardToken,
-    timezone,
-    urlLicense,
-    hashSettings,
-    setWizardComplete,
-    getPortalTimezones,
-    getPortalPasswordSettings,
-    theme,
-  } = settingsStore;
+export const WrappedComponent = inject(
+  ({ authStore, settingsStore, wizardStore }) => {
+    const {
+      passwordSettings,
+      wizardToken,
+      timezone,
+      urlLicense,
+      hashSettings,
+      setWizardComplete,
+      getPortalTimezones,
+      getPortalPasswordSettings,
+      theme,
+    } = settingsStore;
 
-  const { language } = authStore;
-  const {
-    isWizardLoaded,
-    machineName,
-    isLicenseRequired,
-    licenseUpload,
-    setIsWizardLoaded,
-    getMachineName,
-    getIsRequiredLicense,
+    const { language } = authStore;
+    const {
+      isWizardLoaded,
+      machineName,
+      isLicenseRequired,
+      licenseUpload,
+      setIsWizardLoaded,
+      getMachineName,
+      getIsRequiredLicense,
 
-    setLicense,
-    resetLicenseUploaded,
-  } = wizardStore;
+      setLicense,
+      resetLicenseUploaded,
+    } = wizardStore;
 
-  return {
-    theme,
-    isLoaded: authStore.isLoaded,
-    culture: language,
-    wizardToken,
-    passwordSettings,
-    timezone,
-    urlLicense,
-    hashSettings,
-    isWizardLoaded,
-    machineName,
-    isLicenseRequired,
-    licenseUpload,
-    setWizardComplete,
-    getPortalPasswordSettings,
-    getPortalTimezones,
-    setIsWizardLoaded,
-    getMachineName,
-    getIsRequiredLicense,
+    return {
+      theme,
+      isLoaded: authStore.isLoaded,
+      culture: language,
+      wizardToken,
+      passwordSettings,
+      timezone,
+      urlLicense,
+      hashSettings,
+      isWizardLoaded,
+      machineName,
+      isLicenseRequired,
+      licenseUpload,
+      setWizardComplete,
+      getPortalPasswordSettings,
+      getPortalTimezones,
+      setIsWizardLoaded,
+      getMachineName,
+      getIsRequiredLicense,
 
-    setLicense,
-    resetLicenseUploaded,
-  };
-})(withCultureNames(observer(Wizard)));
+      setLicense,
+      resetLicenseUploaded,
+    };
+  },
+)(withCultureNames(observer(Wizard)));

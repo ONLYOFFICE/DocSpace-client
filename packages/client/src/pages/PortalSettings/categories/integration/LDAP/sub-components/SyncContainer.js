@@ -180,34 +180,36 @@ const SyncContainer = ({
   return <>{renderBody()}</>;
 };
 
-export default inject(({ currentQuotaStore, settingsStore, ldapStore }) => {
-  const { isLdapAvailable } = currentQuotaStore;
-  const { currentDeviceType, theme } = settingsStore;
-  const {
-    syncLdap,
-    saveCronLdap,
-    onChangeCron,
-    cron,
-    serverCron,
+export const SyncContainerSection = inject(
+  ({ currentQuotaStore, settingsStore, ldapStore }) => {
+    const { isLdapAvailable } = currentQuotaStore;
+    const { currentDeviceType, theme } = settingsStore;
+    const {
+      syncLdap,
+      saveCronLdap,
+      onChangeCron,
+      cron,
+      serverCron,
 
-    isUIDisabled,
+      isUIDisabled,
 
-    serverSettings,
-  } = ldapStore;
+      serverSettings,
+    } = ldapStore;
 
-  const isMobileView = currentDeviceType === DeviceType.mobile;
+    const isMobileView = currentDeviceType === DeviceType.mobile;
 
-  return {
-    isMobileView,
-    syncLdap,
-    saveCronLdap,
-    onChangeCron,
-    cron,
-    serverCron,
-    theme,
+    return {
+      isMobileView,
+      syncLdap,
+      saveCronLdap,
+      onChangeCron,
+      cron,
+      serverCron,
+      theme,
 
-    isLdapEnabledOnServer: serverSettings.EnableLdapAuthentication,
-    isUIDisabled,
-    isLdapAvailable,
-  };
-})(observer(SyncContainer));
+      isLdapEnabledOnServer: serverSettings.EnableLdapAuthentication,
+      isUIDisabled,
+      isLdapAvailable,
+    };
+  },
+)(observer(SyncContainer));

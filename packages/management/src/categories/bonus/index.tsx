@@ -25,10 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import BonusPage from "client/BonusPage";
+import { Component } from "client/BonusPage";
 
 const Bonus = () => {
-  return <BonusPage />;
+  return <Component />;
 };
 
 export default Bonus;

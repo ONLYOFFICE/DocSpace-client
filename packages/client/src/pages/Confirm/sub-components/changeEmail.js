@@ -32,6 +32,7 @@ import Section from "@docspace/shared/components/section";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
 import SectionWrapper from "SRC_DIR/components/Section";
+import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
 class ChangeEmail extends React.PureComponent {
   componentDidMount() {
     const { changeEmail, isLoaded, linkData } = this.props;
@@ -107,7 +108,7 @@ const ChangeEmailForm = (props) => (
   </SectionWrapper>
 );
 
-export default inject(({ authStore, settingsStore, userStore }) => {
+const ComponentWrapper = inject(({ authStore, settingsStore, userStore }) => {
   const { isLoaded } = authStore;
   return {
     isLoaded,
@@ -115,3 +116,11 @@ export default inject(({ authStore, settingsStore, userStore }) => {
     defaultPage: settingsStore.defaultPage,
   };
 })(observer(ChangeEmailForm));
+
+export const Component = () => {
+  return (
+    <ConfirmRoute>
+      <ComponentWrapper />
+    </ConfirmRoute>
+  );
+};

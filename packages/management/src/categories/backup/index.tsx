@@ -28,7 +28,7 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useStore } from "SRC_DIR/store";
-import BackupPage from "client/BackupPage";
+import { Component } from "client/BackupPage";
 
 const Backup = () => {
   const { t } = useTranslation(["Settings"]);
@@ -40,7 +40,7 @@ const Backup = () => {
     setDocumentTitle(t("Backup"));
   }, []);
 
-  return <BackupPage />;
+  return <Component />;
 };
 
 export default Backup;

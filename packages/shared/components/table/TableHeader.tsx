@@ -44,6 +44,7 @@ const defaultMinColumnSize = 110;
 const settingsSize = 24;
 
 const minSizeFirstColumn = 210;
+const handleOffset = 8;
 
 class TableHeader extends React.Component<
   TableHeaderProps,
@@ -113,7 +114,7 @@ class TableHeader extends React.Component<
         ? leftColumn.dataset.minWidth
         : defaultMinColumnSize;
 
-      if (leftColumn.clientWidth <= +minSize) {
+      if (leftColumn.getBoundingClientRect().width <= +minSize) {
         if (colIndex < 0) return false;
         this.moveToLeft(widths, newWidth, colIndex - 1);
         return;
@@ -159,11 +160,17 @@ class TableHeader extends React.Component<
     const defaultColumn = document.getElementById(`column_${colIndex}`);
     if (!defaultColumn || defaultColumn.dataset.defaultSize) return;
 
-    const handleOffset = 8;
-
     if (column2Width + offset - handleOffset >= defaultMinColumnSize) {
       widths[+columnIndex] = `${newWidth + handleOffset}px`;
       widths[colIndex] = `${column2Width + offset - handleOffset}px`;
+    } else if (column2Width !== defaultMinColumnSize) {
+      const width =
+        getSubstring(widths[+columnIndex]) +
+        getSubstring(widths[+colIndex]) -
+        defaultMinColumnSize;
+
+      widths[+columnIndex] = `${width}px`;
+      widths[colIndex] = `${defaultMinColumnSize}px`;
     } else {
       if (colIndex === columns.length) return false;
       this.moveToRight(widths, newWidth, colIndex + 1);
@@ -210,7 +217,6 @@ class TableHeader extends React.Component<
     };
 
     const ResetColumnsSize = () => {
-      localStorage.removeItem(columnStorageName);
       this.resetColumns();
       return true;
     };
@@ -237,7 +243,7 @@ class TableHeader extends React.Component<
     if (!column) return;
 
     const columnSize = column.getBoundingClientRect();
-    const newWidth = isRtl
+    let newWidth = isRtl
       ? columnSize.right - e.clientX
       : e.clientX - columnSize.left;
 
@@ -248,12 +254,14 @@ class TableHeader extends React.Component<
       ? column.dataset.minWidth
       : defaultMinColumnSize;
 
-    if (newWidth <= +minSize) {
-      const columnChanged = this.moveToLeft(widths, newWidth);
+    if (newWidth <= +minSize - handleOffset) {
+      const currentWidth = getSubstring(widths[+columnIndex]);
 
-      if (!columnChanged) {
-        widths[+columnIndex] = widths[+columnIndex];
-      }
+      // Move left
+      if (currentWidth !== +minSize) {
+        newWidth = +minSize - handleOffset;
+        this.moveToRight(widths, newWidth);
+      } else this.moveToLeft(widths, newWidth);
     } else {
       this.moveToRight(widths, newWidth);
     }
@@ -415,9 +423,7 @@ class TableHeader extends React.Component<
       : Math.round(defaultWidth) !== Math.round(containerWidth);
 
     if (isDifferentWindowSize && !isResized) {
-      if (infoPanelVisible) localStorage.removeItem(columnInfoPanelStorageName);
-      else localStorage.removeItem(columnStorageName);
-      this.onResize(true);
+      this.resetColumns(true);
       return;
     }
 
@@ -684,9 +690,7 @@ class TableHeader extends React.Component<
                 ).length;
 
                 if (enableColumnsLength !== 1) {
-                  localStorage.removeItem(columnStorageName);
                   this.resetColumns();
-
                   return;
                 }
               }
@@ -849,7 +853,7 @@ class TableHeader extends React.Component<
     }
   };
 
-  resetColumns = () => {
+  resetColumns = (isResized: boolean = false) => {
     const {
       containerRef,
       columnStorageName,
@@ -858,8 +862,8 @@ class TableHeader extends React.Component<
       infoPanelVisible,
     } = this.props;
 
-    localStorage.removeItem(columnStorageName);
-    localStorage.removeItem(columnInfoPanelStorageName);
+    if (!infoPanelVisible) localStorage.removeItem(columnStorageName);
+    else localStorage.removeItem(columnInfoPanelStorageName);
 
     let str = "";
 
@@ -889,12 +893,13 @@ class TableHeader extends React.Component<
     for (const col of columns) {
       if (col.default) {
         str += `${wideColumnSize} `;
-      } else
+      } else {
         str += col.enable
           ? col.defaultSize
             ? `${col.defaultSize}px `
             : `${otherColumns} `
           : "0px ";
+      }
     }
 
     str += `${settingsSize}px`;
@@ -902,7 +907,7 @@ class TableHeader extends React.Component<
     if (container) container.style.gridTemplateColumns = str;
     if (this.headerRef && this.headerRef.current) {
       this.headerRef.current.style.gridTemplateColumns = str;
-      this.headerRef.current.style.width = `${containerWidth}px`;
+      this.headerRef.current.style.width = `${container.clientWidth}px`;
     }
 
     if (str) {
@@ -913,7 +918,7 @@ class TableHeader extends React.Component<
       }
     }
 
-    this.onResize();
+    this.onResize(isResized);
   };
 
   render() {

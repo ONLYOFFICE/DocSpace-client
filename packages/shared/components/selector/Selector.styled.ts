@@ -243,6 +243,10 @@ const StyledItem = styled.div<{
     }
   }
 
+  .item-logo {
+    min-width: 32px;
+  }
+
   ${(props) =>
     props.isDisabled
       ? css`

@@ -57,11 +57,6 @@ const StyledBody = styled.div`
   }
 
   .embedding-panel_body {
-    .embedding-panel_description {
-      color: ${({ theme }) => theme.embeddingPanel.descriptionTextColor};
-      margin: 18px 0;
-    }
-
     .embedding-panel_bar {
       .embedding-panel_bar-header {
         display: flex;

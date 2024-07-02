@@ -36,7 +36,7 @@ const StyledBackdrop = styled.div<BackdropProps & { needBackground: boolean }>`
   ${(props) =>
     props.needBackground &&
     css`
-      backdrop-filter: blur(3px);
+      backdrop-filter: ${`blur(${props.theme.modalDialog.backdrop.blur}px)`};
     `};
 
   display: ${(props) => (props.visible ? "block" : "none")};

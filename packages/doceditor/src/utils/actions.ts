@@ -30,6 +30,7 @@ import { headers } from "next/headers";
 
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import { TenantStatus, EditorConfigErrorType } from "@docspace/shared/enums";
+import { tryParseToNumber } from "@docspace/shared/utils/tryParseToNumber";
 import type {
   TDocServiceLocation,
   TFile,
@@ -73,7 +74,7 @@ export async function fileCopyAs(
       "POST",
       JSON.stringify({
         destTitle,
-        destFolderId: +destFolderId,
+        destFolderId: tryParseToNumber(destFolderId),
         enableExternalExt,
         password,
       }),

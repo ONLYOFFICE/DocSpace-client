@@ -41,6 +41,7 @@ const GroupsRow = ({
   selection,
   bufferSelection,
   getGroupContextOptions,
+  getModel,
   sectionWidth,
   theme,
   openGroupAction,
@@ -77,6 +78,8 @@ const GroupsRow = ({
 
   const groupName = (item.name[0] + secondCharacter).toUpperCase();
 
+  const getContextModel = () => getModel(t, item);
+
   return (
     <Styled.GroupsRowWrapper
       isChecked={isChecked}
@@ -106,6 +109,7 @@ const GroupsRow = ({
           checked={isChecked}
           isActive={isActive}
           contextOptions={getGroupContextOptions(t, item)}
+          getContextModel={getContextModel}
           sectionWidth={sectionWidth}
           mode={"modern"}
           className={"group-row"}
@@ -163,6 +167,7 @@ export default inject(({ peopleStore, settingsStore }) => ({
   selection: peopleStore.groupsStore.selection,
   bufferSelection: peopleStore.groupsStore.bufferSelection,
   getGroupContextOptions: peopleStore.groupsStore.getGroupContextOptions,
+  getModel: peopleStore.groupsStore.getModel,
   openGroupAction: peopleStore.groupsStore.openGroupAction,
   changeGroupSelection: peopleStore.groupsStore.changeGroupSelection,
   changeGroupContextSelection:

@@ -120,6 +120,13 @@ const StyledPeopleRow = styled(TableRow)`
   .table-cell_groups,
   .table-cell_room {
     margin-inline-start: -8px;
+    padding-inline-end: 12px;
+  }
+
+  .table-cell_email {
+    a {
+      margin-inline-end: 12px;
+    }
   }
 
   .groups-combobox,
@@ -207,7 +214,7 @@ const PeopleTableRow = (props) => {
   const {
     t,
     item,
-    contextOptionsProps,
+    getContextModel,
     element,
     checkedProps,
     onContentRowSelect,
@@ -390,6 +397,8 @@ const PeopleTableRow = (props) => {
           modernView
           manualWidth={"fit-content"}
           isLoading={isLoading}
+          optionStyle={{ maxWidth: "400px" }}
+          textOverflow
         />
       );
 
@@ -486,7 +495,8 @@ const PeopleTableRow = (props) => {
         onClick={onRowClick}
         fileContextClick={onRowContextClick}
         hideColumns={hideColumns}
-        {...contextOptionsProps}
+        contextOptions={item.options}
+        getContextModel={getContextModel}
       >
         <TableCell className={"table-container_user-name-cell"}>
           <TableCell
@@ -584,7 +594,7 @@ const PeopleTableRow = (props) => {
         </TableCell> */}
 
         {emailAccountsColumnIsEnabled ? (
-          <TableCell>
+          <TableCell className={"table-cell_email"}>
             <Link
               type="page"
               title={email}

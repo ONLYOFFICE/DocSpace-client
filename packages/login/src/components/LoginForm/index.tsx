@@ -70,6 +70,7 @@ const LoginForm = ({
 }: LoginFormProps) => {
   const { isLoading, isModalOpen, ldapDomain } = useContext(LoginValueContext);
   const { setIsLoading } = useContext(LoginDispatchContext);
+  const toastId = useRef(null);
 
   const searchParams = useSearchParams();
 
@@ -184,7 +185,12 @@ const LoginForm = ({
 
     const text = `${messageEmailConfirmed} ${messageAuthorize}`;
 
-    if (confirmedEmail && ready) toastr.success(text);
+    if (
+      confirmedEmail &&
+      ready &&
+      !toastr.isActive(toastId.current || "confirm-email-toast")
+    )
+      toastId.current = toastr.success(text);
     if (authError && ready) toastr.error(t("Common:ProviderLoginError"));
   }, [message, confirmedEmail, t, ready, authError, authCallback]);
 

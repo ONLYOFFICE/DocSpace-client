@@ -257,7 +257,7 @@ const InviteInput = ({
           const topFreeRole = getTopFreeRole(t, roomType);
           item.access = topFreeRole.access;
           item.warning = t("GroupMaxAvailableRoleWarning", {
-            role: topFreeRole.label,
+            roleName: topFreeRole.label,
           });
         }
 
@@ -318,7 +318,7 @@ const InviteInput = ({
       if (u.isGroup && checkIfAccessPaid(u.access)) {
         u.access = topFreeRole.access;
         u.warning = t("GroupMaxAvailableRoleWarning", {
-          role: topFreeRole.label,
+          roleName: topFreeRole.label,
         });
       }
     });

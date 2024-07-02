@@ -23,35 +23,8 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+export const tryParseToNumber = (num: string) => {
+  const parse = +num;
 
-export type TagType = {
-  key?: string;
-  isDefault?: boolean;
-  isThirdParty?: boolean;
-  /** Accepts the tag label */
-  label: string;
-  /** Accepts the max width of the tag */
-  maxWidth?: string;
-  /** Accepts the dropdown options */
-  advancedOptions?: React.ReactNode[];
-  /** Accepts the tag styles as disabled and disables clicking */
-  isDisabled?: boolean;
-  roomType?: number;
-  icon?: string;
-  providerType?: number;
+  return Number.isNaN(parse) ? num : parse;
 };
-
-export interface TagsProps {
-  /** Accepts id */
-  id?: string;
-  /** Accepts the tags */
-  tags: Array<TagType | string>;
-  /** Accepts class */
-  className?: string;
-  /** Accepts the tag column count */
-  columnCount: number;
-  /** Accepts css style */
-  style?: React.CSSProperties;
-  /** Accepts the function that is called when the tag is selected */
-  onSelectTag?: (tag?: object) => void;
-}

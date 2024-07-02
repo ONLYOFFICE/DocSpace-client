@@ -53,6 +53,8 @@ const StyledFileRow = styled(Row)`
 
   height: 100%;
 
+  padding-inline-end: 16px;
+
   .styled-element,
   .row_content {
     ${(props) =>

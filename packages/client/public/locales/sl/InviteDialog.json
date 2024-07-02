@@ -3,7 +3,6 @@
   "AddManuallyDescriptionAccounts": "Po e-mailu osebno povabite nove uporabnike v {{productName}}",
   "AddManuallyDescriptionRoom": "Dodaj obstoječe {{productName}} uporabnike v sobo z uporabo imena ali povabite nove uporabnike osebno po e-mailu",
   "EmailErrorMessage": "E-mail naslov ni veljaven. E-mail sporočilo lahko uredite tako, da nanj kliknete.",
-  "GroupMaxAvailableRoleWarning": "Skupine imajo maksimalno možno vlogo - “{{role}}”. Po dodajanju skupine v sobo lahko povečate pravice.",
   "InvitationLanguage": "Jezik povabila",
   "InviteAccountSearchPlaceholder": "Povabite ljudi po e-mailu",
   "InviteRoomSearchPlaceholder": "Povabite ljudi po imenu ali e-mailu",

@@ -39,7 +39,7 @@ const MigrationButtonsWrapper = styled.div`
 
   @media ${mobile} {
     margin-bottom: 0;
-    
+
     width: 100%;
 
     position: fixed;
@@ -81,7 +81,10 @@ const CancelMigrationButton = styled.span`
 
   text-decoration-line: underline;
   text-decoration-style: dashed;
-  padding:  0 16px;
+
+  @media ${mobile} {
+    padding: 0 16px;
+  }
 `;
 
 export const MigrationButtons = ({

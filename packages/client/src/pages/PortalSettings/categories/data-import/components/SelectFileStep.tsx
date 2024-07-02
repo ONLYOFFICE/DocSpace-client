@@ -27,7 +27,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
-import { isTablet } from "@docspace/shared/utils/device";
+import { isMobile, isTablet, mobile } from "@docspace/shared/utils/device";
 import styled from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
@@ -80,6 +80,24 @@ const Wrapper = styled.div`
 
 const FileUploadContainer = styled.div`
   max-width: 350px;
+
+  .cancelUploadButton {
+    @media ${mobile} {
+      margin-bottom: 0;
+
+      width: auto;
+
+      position: fixed;
+      inset-inline: 0px;
+      bottom: 0px;
+
+      padding: 16px;
+
+      background: white;
+
+      gap: 0;
+    }
+  }
 `;
 
 const ErrorBlock = styled.div`
@@ -335,11 +353,14 @@ const SelectFileStep = (props: SelectFileStepProps) => {
             className="select-file-progress-bar"
             label={t("Settings:BackupFileUploading")}
           />
-          <Button
-            size={isTablet() ? ButtonSize.medium : ButtonSize.small}
-            label={t("Common:CancelButton")}
-            onClick={onCancel}
-          />
+          <div className="cancelUploadButton">
+            <Button
+              size={isTablet() ? ButtonSize.medium : ButtonSize.small}
+              label={t("Common:CancelButton")}
+              onClick={onCancel}
+              scale={isMobile()}
+            />
+          </div>
         </FileUploadContainer>
       ) : (
         <ErrorBlock>

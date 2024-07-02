@@ -26,8 +26,6 @@
 
 "use server";
 
-import { cookies } from "next/headers";
-
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 
 import {
@@ -39,7 +37,6 @@ import {
   TThirdPartyProvider,
   TVersionBuild,
 } from "@docspace/shared/api/settings/types";
-import { TenantStatus } from "@docspace/shared/enums";
 
 export const checkIsAuthenticated = async () => {
   const [request] = createRequest(["/authentication"], [["", ""]], "GET");
@@ -144,6 +141,7 @@ export async function getSSO() {
 
   return sso.response as TGetSsoSettings;
 }
+
 export async function getPortalCultures() {
   const [getPortalCultures] = createRequest(
     [`/settings/cultures`],
@@ -158,4 +156,42 @@ export async function getPortalCultures() {
   const cultures = await res.json();
 
   return cultures.response as TPortalCultures;
+}
+
+export async function checkConfirmLink(data: any): Promise<any> {
+  try {
+    const [checkConfirmLink] = createRequest(
+      [`/authentication/confirm`],
+      [["Content-Type", "application/json;charset=utf-8"]],
+      "POST",
+      JSON.stringify(data),
+    );
+
+    console.log("data", JSON.stringify(data));
+
+    const res = await (await fetch(checkConfirmLink)).json();
+
+    if (!res.ok) return;
+
+    const validationResult = await res.json();
+
+    return validationResult.response;
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export async function logout() {
+  const [logout] = createRequest(
+    [`/authentication/logout`],
+    [["", ""]],
+    "POST",
+  );
+
+  const res = await fetch(logout);
+
+  if (!res.ok) return;
+
+  const validationResult = await res.json();
+  console.log(validationResult);
 }

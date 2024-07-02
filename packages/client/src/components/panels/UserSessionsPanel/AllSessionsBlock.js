@@ -36,8 +36,9 @@ const AllSessionsBlock = (props) => {
   const { t, isLoading, items, onClickLogoutAllExceptThis } = props;
 
   const exceptId = items.connections[0]?.id;
+  const sessions = items.sessions || items.connections;
 
-  const filteredSessions = items.sessions.filter(
+  const filteredSessions = sessions.filter(
     (session) => session.status === "offline",
   );
 

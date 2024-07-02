@@ -164,20 +164,13 @@ export type TSelectorBodySearch = TSelectorSearch & {
 
 // empty screen
 export interface EmptyScreenProps {
-  image: string;
-  header: string;
-  description: string;
-  searchImage: string;
-  searchHeader: string;
-  searchDescription: string;
   withSearch: boolean;
 
   items: TSelectorItem[];
-
   inputItemVisible: boolean;
 }
 
-type TSelectorEmptyScreen = {
+export type TSelectorEmptyScreen = {
   emptyScreenImage: string;
   emptyScreenHeader: string;
   emptyScreenDescription: string;
@@ -349,7 +342,6 @@ export type BodyProps = TSelectorBreadCrumbs &
   TWithTabs &
   TSelectorBodySearch &
   TSelectorSelectAll &
-  TSelectorEmptyScreen &
   TSelectorBreadCrumbs & {
     footerVisible: boolean;
     withHeader?: boolean;

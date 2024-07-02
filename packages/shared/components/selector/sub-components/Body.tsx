@@ -71,12 +71,7 @@ const Body = ({
   selectAllLabel,
   selectAllIcon,
   onSelectAll,
-  emptyScreenImage,
-  emptyScreenHeader,
-  emptyScreenDescription,
-  searchEmptyScreenImage,
-  searchEmptyScreenHeader,
-  searchEmptyScreenDescription,
+
   loadMoreItems,
   hasNextPage,
   totalItems,
@@ -250,12 +245,6 @@ const Body = ({
       ) : itemsCount === 0 ? (
         <EmptyScreen
           withSearch={isSearch}
-          image={emptyScreenImage}
-          header={emptyScreenHeader}
-          description={emptyScreenDescription}
-          searchImage={searchEmptyScreenImage}
-          searchHeader={searchEmptyScreenHeader}
-          searchDescription={searchEmptyScreenDescription}
           items={items}
           inputItemVisible={inputItemVisible}
         />

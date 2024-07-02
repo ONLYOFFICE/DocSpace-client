@@ -49,6 +49,7 @@ import {
   TWithTabs,
   TSelectorInfo,
 } from "./Selector.types";
+import { EmptyScreenProvider } from "./contexts/EmptyScreen";
 
 const Selector = ({
   id,
@@ -575,63 +576,65 @@ const Selector = ({
       style={style}
       data-testid="selector"
     >
-      {withHeader && <Header {...headerProps} />}
-      <Body
-        withHeader={withHeader}
-        footerVisible={footerVisible || !!alwaysShowFooter}
-        items={[...renderedItems]}
-        isMultiSelect={isMultiSelect}
-        onSelect={onSelectAction}
-        // empty screen
+      <EmptyScreenProvider
         emptyScreenImage={emptyScreenImage}
         emptyScreenHeader={emptyScreenHeader}
         emptyScreenDescription={emptyScreenDescription}
         searchEmptyScreenImage={searchEmptyScreenImage}
         searchEmptyScreenHeader={searchEmptyScreenHeader}
         searchEmptyScreenDescription={searchEmptyScreenDescription}
-        hasNextPage={hasNextPage}
-        isNextPageLoading={isNextPageLoading}
-        loadMoreItems={loadMoreItems}
-        renderCustomItem={renderCustomItem}
-        totalItems={totalItems || 0}
-        isLoading={isLoading}
-        rowLoader={rowLoader}
-        withFooterInput={withFooterInput}
-        withFooterCheckbox={withFooterCheckbox}
-        descriptionText={descriptionText}
-        inputItemVisible={inputItemVisible}
-        setInputItemVisible={setInputItemVisible}
-        // bread crumbs
-        {...breadCrumbsProps}
-        // select all
-        {...onSelectAllProps}
-        // search
-        {...searchProps}
-        // tabs
-        {...tabsProps}
-        // info
-        {...infoProps}
-      />
-
-      {(footerVisible || alwaysShowFooter) && (
-        <Footer
+      >
+        {withHeader && <Header {...headerProps} />}
+        <Body
+          withHeader={withHeader}
+          footerVisible={footerVisible || !!alwaysShowFooter}
+          items={[...renderedItems]}
           isMultiSelect={isMultiSelect}
-          selectedItemsCount={newSelectedItems.length}
-          onSubmit={onSubmitAction}
-          submitButtonLabel={submitButtonLabel}
-          disableSubmitButton={disableSubmitButton}
-          submitButtonId={submitButtonId}
-          requestRunning={requestRunning}
-          // cancel button
-          {...cancelButtonProps}
-          // access rights
-          {...accessRightsProps}
-          // input
-          {...inputProps}
-          // checkbox
-          {...checkboxProps}
+          onSelect={onSelectAction}
+          hasNextPage={hasNextPage}
+          isNextPageLoading={isNextPageLoading}
+          loadMoreItems={loadMoreItems}
+          renderCustomItem={renderCustomItem}
+          totalItems={totalItems || 0}
+          isLoading={isLoading}
+          rowLoader={rowLoader}
+          withFooterInput={withFooterInput}
+          withFooterCheckbox={withFooterCheckbox}
+          descriptionText={descriptionText}
+          inputItemVisible={inputItemVisible}
+          setInputItemVisible={setInputItemVisible}
+          // bread crumbs
+          {...breadCrumbsProps}
+          // select all
+          {...onSelectAllProps}
+          // search
+          {...searchProps}
+          // tabs
+          {...tabsProps}
+          // info
+          {...infoProps}
         />
-      )}
+
+        {(footerVisible || alwaysShowFooter) && (
+          <Footer
+            isMultiSelect={isMultiSelect}
+            selectedItemsCount={newSelectedItems.length}
+            onSubmit={onSubmitAction}
+            submitButtonLabel={submitButtonLabel}
+            disableSubmitButton={disableSubmitButton}
+            submitButtonId={submitButtonId}
+            requestRunning={requestRunning}
+            // cancel button
+            {...cancelButtonProps}
+            // access rights
+            {...accessRightsProps}
+            // input
+            {...inputProps}
+            // checkbox
+            {...checkboxProps}
+          />
+        )}
+      </EmptyScreenProvider>
     </StyledSelector>
   );
 };

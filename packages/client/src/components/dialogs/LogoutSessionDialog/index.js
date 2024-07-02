@@ -54,7 +54,7 @@ const LogoutSessionDialog = ({
       <ModalDialog.Body>
         {t("Profile:LogoutFrom", {
           platform: data.platform,
-          browser: data.browser,
+          browser: data.browser?.split(".")[0] ?? "",
         })}
       </ModalDialog.Body>
       <ModalDialog.Footer>

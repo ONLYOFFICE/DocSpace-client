@@ -160,7 +160,7 @@ const RoomIcon = ({
 }: RoomIconProps) => {
   const [correctImage, setCorrectImage] = React.useState(true);
 
-  const titleWithoutNumberDuplicate = title.replace(/\(\d+\)/, "");
+  const titleWithoutNumberDuplicate = title?.replace(/\(\d+\)/, "");
   const titleWithoutSpaces = titleWithoutNumberDuplicate
     .replace(/\s+/g, " ")
     .trim();

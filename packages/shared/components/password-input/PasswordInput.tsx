@@ -102,7 +102,7 @@ const PasswordInput = React.forwardRef(
       tooltipOffsetLeft,
       tooltipOffsetTop,
       isAutoFocussed,
-      tooltipAdditional,
+      tooltipAllowedCharacters,
     }: PasswordInputProps,
     ref,
   ) => {
@@ -473,7 +473,9 @@ const PasswordInput = React.forwardRef(
               {tooltipPasswordSpecial}
             </StyledTooltipItem>
           )}
-          {tooltipAdditional}
+
+          {tooltipAllowedCharacters}
+
           {generatePasswordTitle && (
             <div className="generate-btn-container">
               <Link

@@ -672,7 +672,7 @@ const CreateUserForm = (props) => {
                         "Common:PasswordLimitSpecialSymbols",
                       )}`}
                       generatePasswordTitle={t("Wizard:GeneratePassword")}
-                      tooltipAdditional={`${t("AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
+                      tooltipAllowedCharacters={`${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
                     />
                   </FieldContainer>
 

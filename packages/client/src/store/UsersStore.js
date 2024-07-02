@@ -168,6 +168,10 @@ class UsersStore {
           const userIndex = this.users.findIndex((x) => x.id === user.id);
           if (userIndex !== -1) this.users[userIndex] = user;
         });
+
+        if (!this.needResetUserSelection) {
+          this.peopleStore.selectionStore.updateSelection(this.peopleList);
+        }
       }
 
       return users;

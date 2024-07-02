@@ -24,18 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import dynamic from "next/dynamic";
-import Loading from "./loading";
+import AppLoader from "@docspace/shared/components/app-loader";
 
-const ConfirmRoute = dynamic(() => import("../confirm/confirmRoute"), {
-  ssr: false,
-  loading: () => <Loading />,
-});
-
-export default async function Layout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return <ConfirmRoute>{children}</ConfirmRoute>;
+export default function Loading() {
+  // You can add any UI inside Loading, including a Skeleton.
+  return <AppLoader />;
 }

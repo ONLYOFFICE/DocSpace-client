@@ -384,7 +384,7 @@ export const getBaseTheme = () => {
       activeConnectBorder: "none",
       activeConnectBackground: blueLightMid,
 
-      color: "rgba(0, 0, 0, 0.54)",
+      color: gray,
       disableColor: black,
       disabledSvgColor: "none",
 
@@ -1827,7 +1827,7 @@ export const getBaseTheme = () => {
     section: {
       header: {
         backgroundColor: white,
-        background: `linear-gradient(180deg, ${white} 2.81%,rgba(255, 255, 255, 0.91) 63.03%,rgba(255, 255, 255, 0) 100%)`,
+        background: `linear-gradient(180deg, ${white} 2.81%,${grayDarkText} 63.03%,rgba(255, 255, 255, 0) 100%)`,
         trashErasureLabelBackground: grayLight,
         trashErasureLabelText: grayText,
       },
@@ -2099,7 +2099,7 @@ export const getBaseTheme = () => {
         textColor: gray,
       },
 
-      animationColor: "rgba(82, 153, 224, 0.16)",
+      animationColor: lightSecondMain,
     },
 
     advancedSelector: {

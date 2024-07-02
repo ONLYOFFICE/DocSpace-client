@@ -296,7 +296,7 @@ const Dark: TTheme = {
 
       hoverButtonColor: black,
 
-      backgroundActionMobile: "rgba(255, 255, 255, 0.92)",
+      backgroundActionMobile: bigGrayDarkMid,
     },
 
     dropDownItem: {
@@ -374,8 +374,8 @@ const Dark: TTheme = {
     activeConnectBackground: bigGrayDarkMid,
     activeConnectBorder: "none",
 
-    color: "rgba(0, 0, 0, 0.54)",
-    disableColor: "rgba(0, 0, 0, 0.4)",
+    color: grayDark,
+    disableColor: darkGrayDark,
     disabledSvgColor: grayDarkStrong,
 
     text: {
@@ -430,7 +430,7 @@ const Dark: TTheme = {
   groupButtonsMenu: {
     top: "0",
     background: black,
-    boxShadow: " 0px 10px 18px -8px rgba(0, 0, 0, 0.100306)",
+    boxShadow: `0px 10px 18px -8px ${menuShadow}`,
     height: "48px",
     tabletHeight: "56px",
     padding: "0 18px 19px 0",
@@ -817,7 +817,7 @@ const Dark: TTheme = {
   },
   textInput: {
     fontWeight: "normal",
-    placeholderColor: "rgba(255, 255, 255, 0.2)",
+    placeholderColor: grayDark,
     disablePlaceholderColor: grayDarkStrong,
 
     transition: "all 0.2s ease 0s",
@@ -949,7 +949,7 @@ const Dark: TTheme = {
 
   tooltip: {
     borderRadius: "6px",
-    boxShadow: "0px 10px 15px rgba(0, 0, 0, 0.40)",
+    boxShadow: `0px 10px 15px ${popupShadow}`,
     opacity: "1",
     padding: "8px 12px",
     pointerEvents: "auto",
@@ -1274,7 +1274,7 @@ const Dark: TTheme = {
   },
 
   backdrop: {
-    backgroundColor: "rgba(20, 20, 20, 0.8)",
+    backgroundColor: darkGrayBlackout,
     unsetBackgroundColor: "unset",
   },
 
@@ -1380,7 +1380,7 @@ const Dark: TTheme = {
 
     main: {
       marginBottom: "1rem",
-      boxShadow: "0px 16px 16px rgba(0, 0, 0, 0.16)",
+      boxShadow: `0px 16px 16px ${popupShadow}`,
       maxHeight: "800px",
       overflow: "hidden",
       borderRadius: "6px",
@@ -1606,7 +1606,7 @@ const Dark: TTheme = {
     disabledArrow: grayDarkStrong,
     weekdayColor: grayDark,
     accent: lightBlueMain,
-    boxShadow: "0px 12px 40px 0px rgba(0, 0, 0, 0.40)",
+    boxShadow: `0px 12px 40px 0px ${popupShadow}`,
   },
 
   datePicker: {
@@ -1796,14 +1796,14 @@ const Dark: TTheme = {
 
   menuContainer: {
     background: lightDarkGrayHover,
-    color: "rgba(255, 255, 255, 0.92)",
+    color: white,
   },
 
   article: {
     background: black,
     pinBorderColor: grayDarkStrong,
     catalogItemHeader: grayDark,
-    catalogItemText: "rgba(255, 255, 255, 0.6)",
+    catalogItemText: grayDarkText,
     catalogItemActiveBackground: black,
     catalogShowText: darkGrayDark,
   },
@@ -1811,7 +1811,7 @@ const Dark: TTheme = {
   section: {
     header: {
       backgroundColor: black,
-      background: `linear-gradient(180deg, ${black} 2.81%, rgba(51, 51, 51, 0.9) 63.03%, rgba(51, 51, 51, 0) 100%);`,
+      background: `linear-gradient(180deg, ${black} 2.81%, ${grayText} 63.03%, rgba(51, 51, 51, 0) 100%);`,
       trashErasureLabelBackground: black,
       trashErasureLabelText: darkGrayDark,
     },
@@ -1824,7 +1824,7 @@ const Dark: TTheme = {
     sectionHeaderToggleBgActive: black,
 
     backgroundColor: black,
-    blurColor: "rgba(20, 20, 20, 0.8)",
+    blurColor: darkGrayBlackout,
     borderColor: grayDarkStrong,
     thumbnailBorderColor: grayLightMid,
     textColor: white,
@@ -1877,7 +1877,7 @@ const Dark: TTheme = {
     },
 
     search: {
-      boxShadow: "0px 5px 20px 0px rgba(0, 0, 0, 0.16)",
+      boxShadow: `0px 5px 20px 0px ${popupShadow}`,
     },
 
     groups: {
@@ -1949,9 +1949,9 @@ const Dark: TTheme = {
     sort: {
       background: black,
       hoverBackground: black,
-      selectedViewIcon: "rgba(255, 255, 255, 0.88)",
+      selectedViewIcon: lightGraySelected,
       viewIcon: grayDark,
-      sortFill: "rgba(255, 255, 255, 0.6)",
+      sortFill: darkGrayDark,
 
       tileSortFill: white,
       tileSortColor: white,
@@ -1977,7 +1977,7 @@ const Dark: TTheme = {
       background: black,
       borderBottom: `1px solid ${grayDarkStrong}`,
       borderRight: `1px solid ${grayDarkStrong}`,
-      boxShadow: "0px 40px 60px rgba(0, 0, 0, 0.12)",
+      boxShadow: `0px 40px 60px ${menuShadow}`,
     },
 
     header: {
@@ -2083,7 +2083,7 @@ const Dark: TTheme = {
       textColor: grayDark,
     },
 
-    animationColor: "rgba(82, 153, 224, 0.16)",
+    animationColor: lightSecondMain,
   },
 
   advancedSelector: {
@@ -2136,7 +2136,7 @@ const Dark: TTheme = {
   floatingButton: {
     backgroundColor: white,
     color: black,
-    boxShadow: "0px 12px 24px rgba(0, 0, 0, 0.12)",
+    boxShadow: `0px 12px 24px ${popupShadow}`,
     fill: black,
 
     alert: {
@@ -2318,7 +2318,7 @@ const Dark: TTheme = {
 
   filesDragTooltip: {
     background: black,
-    boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.13)",
+    boxShadow: `0px 5px 20px ${popupShadow}`,
     color: white,
   },
 
@@ -2713,7 +2713,7 @@ const Dark: TTheme = {
     },
 
     home: {
-      logoColor: "rgba(255, 255, 255, 0.92)",
+      logoColor: white,
       textColorError: darkErrorStatus,
     },
 
@@ -2911,7 +2911,7 @@ const Dark: TTheme = {
         importIconColor: darkGrayDark,
         groupMenuBackground: black,
         groupMenuBorder: `1px solid ${grayDarkStrong}`,
-        groupMenuBoxShadow: "rgba(0, 0, 0, 0.16) 0px 5px 5px 0px",
+        groupMenuBoxShadow: `${menuShadow} 0px 5px 5px 0px`,
         linkColor: lightBlueMain,
         background: darkGrayLight,
       },
@@ -3034,7 +3034,7 @@ const Dark: TTheme = {
 
   formWrapper: {
     background: black,
-    boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.16);",
+    boxShadow: `0px 5px 20px ${badgeShadow}`,
   },
 
   preparationPortalProgress: {

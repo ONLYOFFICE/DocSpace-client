@@ -161,7 +161,7 @@ export const Tab = styled.div<{
   line-height: 20px;
   cursor: pointer;
   opacity: ${(props) => (props.isDisabled && props.$type === TabsTypes.Secondary ? 0.6 : 1)};
-  pointer-events: ${(props) => props.isDisabled && props.$type === TabsTypes.Secondary && "none"};
+  pointer-events: ${(props) => ((props.isDisabled && props.$type === TabsTypes.Secondary) || props.isActive) && "none"};
   user-select: none;
 
   padding: ${(props) =>
@@ -202,13 +202,15 @@ export const Tab = styled.div<{
       !props.isActive &&
       props.theme.tabs.hoverTextColorPrimary};
 
-    opacity: ${(props) =>
-      props.$type === TabsTypes.Primary && props.isActive && 0.85};
-
     background-color: ${(props) =>
       props.$type === TabsTypes.Secondary &&
       !props.isActive &&
       props.theme.tabs.hoverBackgroundColorSecondary};
+
+     border: ${(props) =>
+       props.$type === TabsTypes.Secondary &&
+       !props.isActive &&
+       css`1px solid ${props.theme.tabs.hoverBackgroundColorSecondary}`};
   };
 
   &:active {
@@ -217,13 +219,15 @@ export const Tab = styled.div<{
       !props.isActive &&
       props.theme.tabs.pressedTextColorPrimary};
 
-    opacity: ${(props) =>
-      props.$type === TabsTypes.Primary && props.isActive && 1};
-
     background-color: ${(props) =>
       props.$type === TabsTypes.Secondary &&
       !props.isActive &&
       props.theme.tabs.pressedBackgroundColorSecondary};
+
+    border: ${(props) =>
+      props.$type === TabsTypes.Secondary &&
+      !props.isActive &&
+      css`1px solid ${props.theme.tabs.pressedBackgroundColorSecondary}`};
   };
 `;
 

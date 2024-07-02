@@ -38,9 +38,9 @@ const AllSessionsBlock = (props) => {
   const exceptId = items.connections[0]?.id;
   const sessions = items.sessions || items.connections;
 
-  const filteredSessions = sessions.filter(
-    (session) => session.status === "offline",
-  );
+  const filteredSessions = sessions
+    .filter((session) => session.status === "offline")
+    .reverse();
 
   return (
     <>

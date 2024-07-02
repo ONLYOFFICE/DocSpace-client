@@ -11,14 +11,22 @@ const StyledRow = styled(Row)`
 `;
 
 const SessionsRow = (props) => {
-  const { item, sectionWidth, setLogoutDialogVisible, setPlatformData } = props;
+  const {
+    item,
+    connections,
+    sectionWidth,
+    setLogoutDialogVisible,
+    setPlatformData,
+  } = props;
 
   const onClickDisable = () => {
     setLogoutDialogVisible(true);
     setPlatformData(item);
   };
 
-  const contentElement = (
+  const isEqualSession = item.id === connections.id;
+
+  const contentElement = !isEqualSession && (
     <IconButton
       size={20}
       iconName={RemoveSessionSvgUrl}
@@ -40,10 +48,11 @@ const SessionsRow = (props) => {
 };
 
 export default inject(({ setup, peopleStore }) => {
-  const { platformData, setPlatformData } = peopleStore.selectionStore;
+  const { platformData, setPlatformData, items } = peopleStore.selectionStore;
   const { setLogoutDialogVisible, setPlatformModalData } = setup;
 
   return {
+    connections: items.connections[0],
     setLogoutDialogVisible,
     setPlatformModalData,
     platformData,

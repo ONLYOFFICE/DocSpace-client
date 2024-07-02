@@ -173,22 +173,13 @@ const CreateUserForm = (props) => {
 
   const onContinue = async () => {
     const { linkData } = props;
-    setIsLoading(true);
 
-    let hasError = false;
-
-    const emailRegex = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$";
-    const validationEmail = new RegExp(emailRegex);
-
-    if (!validationEmail.test(email.trim())) {
-      hasError = true;
-      setEmailValid(!hasError);
-    }
-
-    if (hasError) {
-      setIsLoading(false);
+    if (!emailValid) {
+      setIsEmailErrorShow(true);
       return;
     }
+
+    setIsLoading(true);
 
     const headerKey = linkData.confirmHeader;
 
@@ -253,14 +244,6 @@ const CreateUserForm = (props) => {
     if (!sname.trim() || !snameValid) {
       hasError = true;
       setSnameValid(!hasError);
-    }
-
-    const emailRegex = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$";
-    const validationEmail = new RegExp(emailRegex);
-
-    if (!validationEmail.test(email.trim())) {
-      hasError = true;
-      setEmailValid(!hasError);
     }
 
     if (!passwordValid || !password.trim()) {

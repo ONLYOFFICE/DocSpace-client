@@ -41,6 +41,16 @@ export type TDataContext = {
   systemTheme?: ThemeKeys;
 };
 
+export type TСheckConfirmLink = {
+  key: string;
+  emplType: number; //EmployeeType
+  email: string;
+  UID: string;
+  type: string; //Confirm type
+  first: string;
+  roomId: string;
+};
+
 export type GreetingContainersProps = {
   greetingSettings?: string;
 };

@@ -27,7 +27,6 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
-import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { SearchInput } from "@docspace/shared/components/search-input";
 import { InputSize } from "@docspace/shared/components/text-input";
 import AccountsTable from "./AccountsTable";
@@ -35,6 +34,8 @@ import AccountsPaging from "../../sub-components/AccountsPaging";
 
 import { Wrapper } from "../../StyledDataImport";
 import { InjectedTypeSelectProps, TypeSelectProps } from "../../types";
+import { MigrationButtons } from "../../sub-components/MigrationButtons";
+import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 
 const PAGE_SIZE = 25;
 const REFRESH_TIMEOUT = 100;
@@ -49,6 +50,15 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
     searchValue,
     setSearchValue,
     filteredUsers,
+    cancelMigration,
+    clearCheckedAccounts,
+    setStep,
+    setWorkspace,
+    setMigratingWorkspace,
+    setMigrationPhase,
+
+    cancelUploadDialogVisible,
+    setCancelUploadDialogVisible,
   } = props as InjectedTypeSelectProps;
 
   const [boundaries, setBoundaries] = useState([0, PAGE_SIZE]);
@@ -76,13 +86,25 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
       data.email?.toLowerCase().startsWith(searchValue.toLowerCase()),
   );
 
+  const onCancelMigration = () => {
+    cancelMigration();
+    clearCheckedAccounts();
+    setStep(1);
+    setWorkspace("");
+    setMigratingWorkspace("");
+    setMigrationPhase("");
+  };
+
+  const showCancelDialog = () => setCancelUploadDialogVisible(true);
+  const hideCancelDialog = () => setCancelUploadDialogVisible(false);
+
   useEffect(() => {
     setDataPortion(filteredUsers.slice(...boundaries));
   }, [users]);
 
   return (
     <Wrapper>
-      <SaveCancelButtons
+      <MigrationButtons
         className="save-cancel-buttons upper-buttons"
         onSaveClick={incrementStep}
         onCancelClick={decrementStep}
@@ -90,6 +112,8 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
         displaySettings
+        migrationCancelLabel={t("Settings:CancelImport")}
+        onMigrationCancelClick={showCancelDialog}
       />
 
       {filteredUsers.length > 0 && (
@@ -117,7 +141,7 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
           )}
 
           {filteredAccounts.length > 0 && (
-            <SaveCancelButtons
+            <MigrationButtons
               className="save-cancel-buttons"
               onSaveClick={incrementStep}
               onCancelClick={decrementStep}
@@ -125,15 +149,28 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
               saveButtonLabel={t("Settings:NextStep")}
               cancelButtonLabel={t("Common:Back")}
               displaySettings
+              migrationCancelLabel={t("Settings:CancelImport")}
+              onMigrationCancelClick={showCancelDialog}
             />
           )}
         </>
+      )}
+      
+      {cancelUploadDialogVisible && (
+        <CancelUploadDialog
+          visible={cancelUploadDialogVisible}
+          onClose={hideCancelDialog}
+          cancelMigration={onCancelMigration}
+          loading={false}
+          isFifthStep={false}
+          isSixthStep={false}
+        />
       )}
     </Wrapper>
   );
 };
 
-export default inject<TStore>(({ importAccountsStore }) => {
+export default inject<TStore>(({ importAccountsStore, dialogsStore }) => {
   const {
     users,
     incrementStep,
@@ -141,7 +178,15 @@ export default inject<TStore>(({ importAccountsStore }) => {
     searchValue,
     setSearchValue,
     filteredUsers,
+    cancelMigration,
+    clearCheckedAccounts,
+    setStep,
+    setWorkspace,
+    setMigratingWorkspace,
+    setMigrationPhase,
   } = importAccountsStore;
+  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
+    dialogsStore;
 
   return {
     users,
@@ -150,5 +195,14 @@ export default inject<TStore>(({ importAccountsStore }) => {
     searchValue,
     setSearchValue,
     filteredUsers,
+    cancelMigration,
+    clearCheckedAccounts,
+    setStep,
+    setWorkspace,
+    setMigratingWorkspace,
+    setMigrationPhase,
+
+    cancelUploadDialogVisible,
+    setCancelUploadDialogVisible,
   };
 })(observer(SelectUsersTypeStep));

@@ -65,6 +65,7 @@
   "ButtonsColor": "Buttons",
   "ByApp": "By authenticator app",
   "BySms": "By sms",
+  "CancelImport": "Cancel import",
   "ChangeLogoButton": "Change Logo",
   "Characters": "{{length}} characters",
   "CheckPeriod": "Check period (sec)",

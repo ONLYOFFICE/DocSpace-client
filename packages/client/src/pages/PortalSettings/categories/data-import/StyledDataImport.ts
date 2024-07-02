@@ -117,14 +117,6 @@ export const Wrapper = styled.div`
     margin: 12px 0 16px;
   }
 
-  .save-cancel-buttons {
-    margin-bottom: 16px;
-
-    @media ${mobile} {
-      margin-bottom: 0;
-    }
-  }
-
   .mt-8 {
     margin-top: 8px;
   }

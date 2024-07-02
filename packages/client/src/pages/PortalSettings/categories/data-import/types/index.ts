@@ -33,6 +33,7 @@ import {
 import { TPaymentFeature } from "@docspace/shared/api/portal/types";
 
 import { TOption } from "@docspace/shared/components/combobox";
+import { SaveCancelButtonProps } from "@docspace/shared/components/save-cancel-buttons/SaveCancelButton.types";
 
 export type TFunciton = ReturnType<typeof useTranslation>["t"];
 
@@ -136,6 +137,14 @@ export interface InjectedSelectUsersStepProps extends SelectUsersStepProps {
   users: TStore["importAccountsStore"]["users"];
   areCheckedUsersEmpty: TStore["importAccountsStore"]["areCheckedUsersEmpty"];
   setResultUsers: TStore["importAccountsStore"]["setResultUsers"];
+  clearCheckedAccounts: TStore["importAccountsStore"]["clearCheckedAccounts"];
+  setStep: TStore["importAccountsStore"]["setStep"];
+  setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
+  setMigratingWorkspace: TStore["importAccountsStore"]["setMigratingWorkspace"];
+  setMigrationPhase: TStore["importAccountsStore"]["setMigrationPhase"];
+
+  cancelUploadDialogVisible: TStore["dialogsStore"]["cancelUploadDialogVisible"];
+  setCancelUploadDialogVisible: TStore["dialogsStore"]["setCancelUploadDialogVisible"];
 
   quotaCharacteristics: TStore["currentQuotaStore"]["quotaCharacteristics"];
 }
@@ -254,6 +263,15 @@ export interface InjectedAddEmailsStepProps extends AddEmailsStepProps {
   areCheckedUsersEmpty: TStore["importAccountsStore"]["areCheckedUsersEmpty"];
   checkedUsers: TStore["importAccountsStore"]["checkedUsers"];
   withEmailUsers: TStore["importAccountsStore"]["withEmailUsers"];
+  cancelMigration: TStore["importAccountsStore"]["cancelMigration"];
+  clearCheckedAccounts: TStore["importAccountsStore"]["clearCheckedAccounts"];
+  setStep: TStore["importAccountsStore"]["setStep"];
+  setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
+  setMigratingWorkspace: TStore["importAccountsStore"]["setMigratingWorkspace"];
+  setMigrationPhase: TStore["importAccountsStore"]["setMigrationPhase"];
+  
+  cancelUploadDialogVisible: TStore["dialogsStore"]["cancelUploadDialogVisible"];
+  setCancelUploadDialogVisible: TStore["dialogsStore"]["setCancelUploadDialogVisible"];
 
   quotaCharacteristics: TStore["currentQuotaStore"]["quotaCharacteristics"];
 }
@@ -303,6 +321,15 @@ export interface InjectedTypeSelectProps extends TypeSelectProps {
   searchValue: TStore["importAccountsStore"]["searchValue"];
   setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
   filteredUsers: TStore["importAccountsStore"]["filteredUsers"];
+  cancelMigration: TStore["importAccountsStore"]["cancelMigration"];
+  clearCheckedAccounts: TStore["importAccountsStore"]["clearCheckedAccounts"];
+  setStep: TStore["importAccountsStore"]["setStep"];
+  setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
+  setMigratingWorkspace: TStore["importAccountsStore"]["setMigratingWorkspace"];
+  setMigrationPhase: TStore["importAccountsStore"]["setMigrationPhase"];
+
+  cancelUploadDialogVisible: TStore["dialogsStore"]["cancelUploadDialogVisible"];
+  setCancelUploadDialogVisible: TStore["dialogsStore"]["setCancelUploadDialogVisible"];
 }
 
 export interface InjectedTypeSelectTableProps extends AccountsTableProps {
@@ -469,4 +496,9 @@ export interface InjectedImportCompleteStepProps
   setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
   setMigratingWorkspace: TStore["importAccountsStore"]["setMigratingWorkspace"];
   setMigrationPhase: TStore["importAccountsStore"]["setMigrationPhase"];
+}
+
+export interface MigrationButtonsProps extends SaveCancelButtonProps {
+  migrationCancelLabel: string;
+  onMigrationCancelClick: () => void;
 }

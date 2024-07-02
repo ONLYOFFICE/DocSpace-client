@@ -27,11 +27,11 @@
 import { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 
-import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { SearchInput } from "@docspace/shared/components/search-input";
 import { Text } from "@docspace/shared/components/text";
 
 import { InputSize } from "@docspace/shared/components/text-input";
+import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../sub-components/AccountsPaging";
 
@@ -44,6 +44,7 @@ import {
   SelectUsersStepProps,
   InjectedSelectUsersStepProps,
 } from "../../types";
+import { MigrationButtons } from "../../sub-components/MigrationButtons";
 
 const REFRESH_TIMEOUT = 100;
 const PAGE_SIZE = 25;
@@ -63,6 +64,15 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
     users,
     areCheckedUsersEmpty,
     setResultUsers,
+    cancelMigration,
+    clearCheckedAccounts,
+    setStep,
+    setWorkspace,
+    setMigratingWorkspace,
+    setMigrationPhase,
+
+    cancelUploadDialogVisible,
+    setCancelUploadDialogVisible,
 
     quotaCharacteristics,
   } = props as InjectedSelectUsersStepProps;
@@ -117,8 +127,20 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
       }
     : incrementStep;
 
+  const onCancelMigration = () => {
+    cancelMigration();
+    clearCheckedAccounts();
+    setStep(1);
+    setWorkspace("");
+    setMigratingWorkspace("");
+    setMigrationPhase("");
+  };
+
+  const showCancelDialog = () => setCancelUploadDialogVisible(true);
+  const hideCancelDialog = () => setCancelUploadDialogVisible(false);
+
   const Buttons = (
-    <SaveCancelButtons
+    <MigrationButtons
       className="save-cancel-buttons"
       onSaveClick={handleStepIncrement}
       onCancelClick={decrementStep}
@@ -131,6 +153,8 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
         (areCheckedUsersEmpty ||
           (quota.max ? totalUsedUsers > quota.max : false))
       }
+      migrationCancelLabel={t("Settings:CancelImport")}
+      onMigrationCancelClick={showCancelDialog}
     />
   );
 
@@ -178,38 +202,66 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
       )}
 
       {filteredAccounts.length > 0 && Buttons}
+
+      {cancelUploadDialogVisible && (
+        <CancelUploadDialog
+          visible={cancelUploadDialogVisible}
+          onClose={hideCancelDialog}
+          cancelMigration={onCancelMigration}
+          loading={false}
+          isFifthStep={false}
+          isSixthStep={false}
+        />
+      )}
     </Wrapper>
   );
 };
 
-export default inject<TStore>(({ importAccountsStore, currentQuotaStore }) => {
-  const {
-    incrementStep,
-    decrementStep,
-    users,
-    withEmailUsers,
-    searchValue,
-    setSearchValue,
-    cancelMigration,
-    checkedUsers,
-    areCheckedUsersEmpty,
-    setResultUsers,
-  } = importAccountsStore;
+export default inject<TStore>(
+  ({ importAccountsStore, currentQuotaStore, dialogsStore }) => {
+    const {
+      incrementStep,
+      decrementStep,
+      users,
+      withEmailUsers,
+      searchValue,
+      setSearchValue,
+      cancelMigration,
+      checkedUsers,
+      areCheckedUsersEmpty,
+      setResultUsers,
+      clearCheckedAccounts,
+      setStep,
+      setWorkspace,
+      setMigratingWorkspace,
+      setMigrationPhase,
+    } = importAccountsStore;
+    const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
+      dialogsStore;
 
-  const { quotaCharacteristics } = currentQuotaStore;
+    const { quotaCharacteristics } = currentQuotaStore;
 
-  return {
-    incrementStep,
-    decrementStep,
-    users,
-    withEmailUsers,
-    searchValue,
-    setSearchValue,
-    cancelMigration,
-    checkedUsers,
-    areCheckedUsersEmpty,
-    setResultUsers,
+    return {
+      incrementStep,
+      decrementStep,
+      users,
+      withEmailUsers,
+      searchValue,
+      setSearchValue,
+      cancelMigration,
+      checkedUsers,
+      areCheckedUsersEmpty,
+      setResultUsers,
+      clearCheckedAccounts,
+      setStep,
+      setWorkspace,
+      setMigratingWorkspace,
+      setMigrationPhase,
 
-    quotaCharacteristics,
-  };
-})(observer(SelectUsersStep));
+      quotaCharacteristics,
+
+      cancelUploadDialogVisible,
+      setCancelUploadDialogVisible,
+    };
+  },
+)(observer(SelectUsersStep));

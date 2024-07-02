@@ -27,7 +27,6 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
-import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { SearchInput } from "@docspace/shared/components/search-input";
 
 import { Text } from "@docspace/shared/components/text";
@@ -43,6 +42,8 @@ import { NoEmailUsersBlock } from "../../sub-components/NoEmailUsersBlock";
 import { parseQuota } from "../../utils";
 
 import { AddEmailsStepProps, InjectedAddEmailsStepProps } from "../../types";
+import { MigrationButtons } from "../../sub-components/MigrationButtons";
+import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 
 const PAGE_SIZE = 25;
 const REFRESH_TIMEOUT = 100;
@@ -60,6 +61,15 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
     areCheckedUsersEmpty,
     checkedUsers,
     withEmailUsers,
+    cancelMigration,
+    clearCheckedAccounts,
+    setStep,
+    setWorkspace,
+    setMigratingWorkspace,
+    setMigrationPhase,
+    
+    cancelUploadDialogVisible,
+    setCancelUploadDialogVisible,
 
     quotaCharacteristics,
   } = props as InjectedAddEmailsStepProps;
@@ -108,9 +118,21 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
     quota.used +
     checkedUsers.withEmail.filter((user) => !user.isDuplicate).length +
     checkedUsers.withoutEmail.length;
+    
+  const onCancelMigration = () => {
+    cancelMigration();
+    clearCheckedAccounts();
+    setStep(1);
+    setWorkspace("");
+    setMigratingWorkspace("");
+    setMigrationPhase("");
+  };
+    
+  const showCancelDialog = () => setCancelUploadDialogVisible(true);
+  const hideCancelDialog = () => setCancelUploadDialogVisible(false);
 
   const Buttons = (
-    <SaveCancelButtons
+    <MigrationButtons
       className="save-cancel-buttons"
       onSaveClick={handleStepIncrement}
       onCancelClick={decrementStep}
@@ -121,6 +143,8 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
       saveButtonDisabled={
         areCheckedUsersEmpty || (quota.max ? totalUsedUsers > quota.max : false)
       }
+      migrationCancelLabel={t("Settings:CancelImport")}
+      onMigrationCancelClick={showCancelDialog}
     />
   );
 
@@ -172,11 +196,22 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
       )}
 
       {Buttons}
+      
+      {cancelUploadDialogVisible && (
+        <CancelUploadDialog
+          visible={cancelUploadDialogVisible}
+          onClose={hideCancelDialog}
+          cancelMigration={onCancelMigration}
+          loading={false}
+          isFifthStep={false}
+          isSixthStep={false}
+        />
+      )}
     </Wrapper>
   );
 };
 
-export default inject<TStore>(({ importAccountsStore, currentQuotaStore }) => {
+export default inject<TStore>(({ importAccountsStore, currentQuotaStore, dialogsStore }) => {
   const {
     incrementStep,
     decrementStep,
@@ -187,8 +222,17 @@ export default inject<TStore>(({ importAccountsStore, currentQuotaStore }) => {
     areCheckedUsersEmpty,
     checkedUsers,
     withEmailUsers,
+
+    cancelMigration,
+    clearCheckedAccounts,
+    setStep,
+    setWorkspace,
+    setMigratingWorkspace,
+    setMigrationPhase,
   } = importAccountsStore;
   const { quotaCharacteristics } = currentQuotaStore;
+    const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
+      dialogsStore;
 
   return {
     incrementStep,
@@ -199,7 +243,18 @@ export default inject<TStore>(({ importAccountsStore, currentQuotaStore }) => {
     setResultUsers,
     areCheckedUsersEmpty,
     checkedUsers,
-    quotaCharacteristics,
     withEmailUsers,
+
+    cancelMigration,
+    clearCheckedAccounts,
+    setStep,
+    setWorkspace,
+    setMigratingWorkspace,
+    setMigrationPhase,
+    
+    quotaCharacteristics,
+    
+    cancelUploadDialogVisible,
+    setCancelUploadDialogVisible,
   };
 })(observer(AddEmailsStep));

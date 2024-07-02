@@ -82,6 +82,7 @@ const useFilesHelper = ({
   setIsFirstLoad,
   withCreate,
   setSelectedItemId,
+  setSelectedItemType,
 }: UseFilesHelpersProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -341,14 +342,20 @@ const useFilesHelper = ({
               hotkey: "f",
               onCreateClick: () => addInputItem(t("NewFolder"), FolderSvgUrl),
               onBackClick: () => {
-                setSelectedItemId(current.parentId);
+                let isRooms;
                 setBreadCrumbs((val) => {
                   const newVal = [...val];
 
-                  newVal.pop();
+                  const item = newVal.pop();
+
+                  isRooms = !!item?.roomType;
 
                   return newVal;
                 });
+
+                if (isRooms) setSelectedItemType("rooms");
+
+                setSelectedItemId(current.parentId);
               },
             });
           } else {
@@ -430,6 +437,7 @@ const useFilesHelper = ({
       t,
       setSelectedItemId,
       rootThirdPartyId,
+      setSelectedItemType,
     ],
   );
 

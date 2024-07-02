@@ -135,6 +135,7 @@ export type UseFilesHelpersProps = {
   setIsFirstLoad: (value: boolean) => void;
   withCreate: boolean;
   setSelectedItemId: (value: number | string) => void;
+  setSelectedItemType: (value?: "rooms" | "files") => void;
 };
 
 export type TUseInputItemHelper = {

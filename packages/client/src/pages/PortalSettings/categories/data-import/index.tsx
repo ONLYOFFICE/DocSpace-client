@@ -75,6 +75,8 @@ const DataImport = (props: DataImportProps) => {
 
     const { parseResult, isCompleted } = response;
 
+    if (parseResult.errors || parseResult.failedArchives.length > 0) return;
+
     if (parseResult.operation === "parse") {
       setWorkspace(parseResult.migratorName);
       setMigratingWorkspace(parseResult.migratorName);

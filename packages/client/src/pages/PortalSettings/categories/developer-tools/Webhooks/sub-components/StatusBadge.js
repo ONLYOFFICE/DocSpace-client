@@ -45,20 +45,20 @@ const StatusBadge = (props) => {
     status >= 200 && status < 300
       ? theme.isBase
         ? {
-            backgroundColor: "rgba(53, 173, 23, 0.1)",
+            backgroundColor: globalColors.alphaGreenLight,
             color: globalColors.lightStatusPositive,
           }
         : {
-            backgroundColor: "rgba(59, 164, 32, 0.1)",
+            backgroundColor: globalColors.alphaGreenDark,
             color: globalColors.darkStatusPositive,
           }
       : theme.isBase
         ? {
-            backgroundColor: "rgba(242, 28, 14, 0.1)",
+            backgroundColor: globalColors.alphaRedLight,
             color: globalColors.lightErrorStatus,
           }
         : {
-            backgroundColor: "rgba(224, 100, 81, 0.1)",
+            backgroundColor: globalColors.alphaRedDark,
             color: globalColors.darkErrorStatus,
           };
   const { t } = useTranslation(["Webhooks"]);

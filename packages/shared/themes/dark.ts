@@ -109,6 +109,8 @@ const {
   darkScroll,
   darkScrollHover,
   darkScrollActive,
+  silver,
+  highlandGray,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -2147,30 +2149,29 @@ const Dark: TTheme = {
 
   mediaViewer: {
     color: grayDarkStrong,
-    background: "rgba(17, 17, 17, 0.867)",
-    backgroundColor: "rgba(11, 11, 11, 0.7)",
+    backgroundColor: highlandGray,
     fill: white,
     titleColor: white,
     iconColor: white,
 
     controlBtn: {
-      backgroundColor: "rgba(200, 200, 200, 0.2)",
+      backgroundColor: silver,
     },
 
     imageViewer: {
-      backgroundColor: "rgba(200, 200, 200, 0.2)",
-      inactiveBackgroundColor: "rgba(11,11,11,0.7)",
+      backgroundColor: silver,
+      inactiveBackgroundColor: highlandGray,
       fill: white,
     },
 
     progressBar: {
       background: grayDarkStrong,
-      backgroundColor: "rgba(200, 200, 200, 0.2)",
+      backgroundColor: silver,
     },
 
     scrollButton: {
-      backgroundColor: "rgba(11, 11, 11, 0.7)",
-      background: "rgba(200, 200, 200, 0.2)",
+      backgroundColor: highlandGray,
+      background: silver,
       border: `solid ${white}`,
     },
 
@@ -2180,8 +2181,8 @@ const Dark: TTheme = {
       color: grayDarkStrong,
       colorError: white,
       backgroundColorError: darkBlack,
-      backgroundColor: "rgba(11, 11, 11, 0.7)",
-      background: "rgba(200, 200, 200, 0.2)",
+      backgroundColor: highlandGray,
+      background: silver,
     },
   },
 

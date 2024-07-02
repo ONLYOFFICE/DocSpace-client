@@ -127,4 +127,12 @@ export const globalColors = {
   darkScroll: "rgba(136, 136, 136, 0.4)",
   darkScrollHover: "rgba(136, 136, 136, 0.64)",
   darkScrollActive: "rgba(136, 136, 136, 0.8)",
+
+  //
+  silver: "rgba(200, 200, 200, 0.2)",
+  highlandGray: "rgba(11, 11, 11, 0.7)",
+  alphaGreenLight: "rgba(53, 173, 23, 0.1)",
+  alphaGreenDark: "rgba(59, 164, 32, 0.1)",
+  alphaRedLight: "rgba(242, 28, 14, 0.1)",
+  alphaRedDark: "rgba(224, 100, 81, 0.1)",
 };

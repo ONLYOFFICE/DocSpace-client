@@ -44,7 +44,7 @@ import {
 
 const StyledTableRow = styled(TableRow)`
   .table-container_cell {
-    padding-right: 30px;
+    padding-inline-end: 30px;
     text-overflow: ellipsis;
   }
 
@@ -52,6 +52,9 @@ const StyledTableRow = styled(TableRow)`
     font-size: 13px;
     font-weight: 600;
     color: ${(props) => props.theme.client.settings.migration.subtitleColor};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .user-email {
@@ -60,6 +63,10 @@ const StyledTableRow = styled(TableRow)`
     font-weight: 600;
     color: ${(props) =>
       props.theme.client.settings.migration.tableRowTextColor};
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .user-type {
@@ -126,7 +133,9 @@ const UsersTableRow = (props: TypeSelectTableRowProps) => {
     <StyledTableRow checked={isChecked} onClick={handleAccountToggle}>
       <TableCell className="checkboxWrapper">
         <Checkbox isChecked={isChecked} onChange={handleAccountToggle} />
-        <Text className="username">{displayName}</Text>
+        <Text className="username" truncate>
+          {displayName}
+        </Text>
       </TableCell>
 
       <TableCell>

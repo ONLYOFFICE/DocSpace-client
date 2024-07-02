@@ -41,6 +41,9 @@ const StyledTableRow = styled(TableRow)`
     font-size: 13px;
     font-weight: 600;
     color: ${(props) => props.theme.client.settings.migration.subtitleColor};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .user-email {
@@ -49,6 +52,9 @@ const StyledTableRow = styled(TableRow)`
     font-weight: 600;
     color: ${(props) =>
       props.theme.client.settings.migration.tableRowTextColor};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .not-existing {
@@ -63,6 +69,10 @@ const StyledTableRow = styled(TableRow)`
     font-weight: 600;
     color: ${(props) =>
       props.theme.client.settings.migration.existingTextColor};
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 

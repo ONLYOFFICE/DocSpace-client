@@ -36,6 +36,10 @@ import { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
 import UsersRow from "./UsersRow";
 import { AddEmailRowProps, RowViewProps } from "../../../../types";
 
+const StyledRowContainer = styled(RowContainer)`
+  margin-bottom: 20px;
+`;
+
 const StyledRow = styled(Row)`
   box-sizing: border-box;
   height: 40px;
@@ -84,7 +88,7 @@ const RowView = (props: RowViewProps) => {
     checkedUsers.withoutEmail.length === usersWithFilledEmails.length;
 
   return (
-    <RowContainer useReactWindow={false}>
+    <StyledRowContainer useReactWindow={false}>
       <StyledRow
         checked={isChecked}
         onSelect={toggleAll}
@@ -107,7 +111,7 @@ const RowView = (props: RowViewProps) => {
           setOpenedEmailKey={setOpenedEmailKey}
         />
       ))}
-    </RowContainer>
+    </StyledRowContainer>
   );
 };
 

@@ -133,8 +133,9 @@ const ConfirmRoute = ({
             window.location.href = combineUrl(
               window.ClientConfig?.proxy?.url,
               path,
-              "/error",
+              "/error?messageKey=21",
             );
+
             break;
           case ValidationResult.Expired:
             console.error("expired link", {

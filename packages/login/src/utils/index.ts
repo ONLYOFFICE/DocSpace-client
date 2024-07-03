@@ -99,6 +99,8 @@ export const getMessageKeyTranslate = (t: TTranslation, message: string) => {
       return t("Errors:SsoAttributesNotFound");
     case "QuotaPaidUserLimitError":
       return t("Common:QuotaPaidUserLimitError");
+    case "InvalidLink":
+      return t("Common:InvalidLink");
     default:
       return t("Common:Error");
   }

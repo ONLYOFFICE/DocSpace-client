@@ -38,7 +38,6 @@ import { StyledSelector } from "./Selector.styled";
 import {
   TAccessRight,
   SelectorProps,
-  TSelectorBodySearch,
   TSelectorBreadCrumbs,
   TSelectorCancelButton,
   TSelectorItem,
@@ -48,8 +47,10 @@ import {
   TSelectorFooterCheckbox,
   TWithTabs,
   TSelectorInfo,
+  TSelectorSearch,
 } from "./Selector.types";
 import { EmptyScreenProvider } from "./contexts/EmptyScreen";
+import { SearchProvider } from "./contexts/Search";
 
 const Selector = ({
   id,
@@ -137,7 +138,6 @@ const Selector = ({
   infoText,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
-  const [isSearch, setIsSearch] = React.useState<boolean>(false);
 
   const [renderedItems, setRenderedItems] = React.useState<TSelectorItem[]>([]);
   const [newSelectedItems, setNewSelectedItems] = React.useState<
@@ -471,22 +471,17 @@ const Selector = ({
         isAllChecked,
       };
 
-  const searchProps: TSelectorBodySearch = withSearch
+  const searchProps: TSelectorSearch = withSearch
     ? {
         withSearch,
         searchPlaceholder,
         searchLoader,
         isSearchLoading,
         searchValue,
-        setIsSearch,
-        onClearSearch,
-        isSearch,
         onSearch,
+        onClearSearch,
       }
-    : ({
-        isSearch,
-        setIsSearch,
-      } as TSelectorBodySearch);
+    : {};
 
   const cancelButtonProps = withCancelButton
     ? { withCancelButton, onCancel, cancelButtonLabel, cancelButtonId }
@@ -584,56 +579,57 @@ const Selector = ({
         searchEmptyScreenHeader={searchEmptyScreenHeader}
         searchEmptyScreenDescription={searchEmptyScreenDescription}
       >
-        {withHeader && <Header {...headerProps} />}
-        <Body
-          withHeader={withHeader}
-          footerVisible={footerVisible || !!alwaysShowFooter}
-          items={[...renderedItems]}
-          isMultiSelect={isMultiSelect}
-          onSelect={onSelectAction}
-          hasNextPage={hasNextPage}
-          isNextPageLoading={isNextPageLoading}
-          loadMoreItems={loadMoreItems}
-          renderCustomItem={renderCustomItem}
-          totalItems={totalItems || 0}
-          isLoading={isLoading}
-          rowLoader={rowLoader}
-          withFooterInput={withFooterInput}
-          withFooterCheckbox={withFooterCheckbox}
-          descriptionText={descriptionText}
-          inputItemVisible={inputItemVisible}
-          setInputItemVisible={setInputItemVisible}
-          // bread crumbs
-          {...breadCrumbsProps}
-          // select all
-          {...onSelectAllProps}
-          // search
-          {...searchProps}
-          // tabs
-          {...tabsProps}
-          // info
-          {...infoProps}
-        />
-
-        {(footerVisible || alwaysShowFooter) && (
-          <Footer
+        <SearchProvider {...searchProps}>
+          {withHeader && <Header {...headerProps} />}
+          <Body
+            withHeader={withHeader}
+            footerVisible={footerVisible || !!alwaysShowFooter}
+            items={[...renderedItems]}
             isMultiSelect={isMultiSelect}
-            selectedItemsCount={newSelectedItems.length}
-            onSubmit={onSubmitAction}
-            submitButtonLabel={submitButtonLabel}
-            disableSubmitButton={disableSubmitButton}
-            submitButtonId={submitButtonId}
-            requestRunning={requestRunning}
-            // cancel button
-            {...cancelButtonProps}
-            // access rights
-            {...accessRightsProps}
-            // input
-            {...inputProps}
-            // checkbox
-            {...checkboxProps}
+            onSelect={onSelectAction}
+            hasNextPage={hasNextPage}
+            isNextPageLoading={isNextPageLoading}
+            loadMoreItems={loadMoreItems}
+            renderCustomItem={renderCustomItem}
+            totalItems={totalItems || 0}
+            isLoading={isLoading}
+            rowLoader={rowLoader}
+            withFooterInput={withFooterInput}
+            withFooterCheckbox={withFooterCheckbox}
+            descriptionText={descriptionText}
+            inputItemVisible={inputItemVisible}
+            setInputItemVisible={setInputItemVisible}
+            // bread crumbs
+            {...breadCrumbsProps}
+            // select all
+            {...onSelectAllProps}
+            // search
+            {...searchProps}
+            // tabs
+            {...tabsProps}
+            // info
+            {...infoProps}
           />
-        )}
+          {(footerVisible || alwaysShowFooter) && (
+            <Footer
+              isMultiSelect={isMultiSelect}
+              selectedItemsCount={newSelectedItems.length}
+              onSubmit={onSubmitAction}
+              submitButtonLabel={submitButtonLabel}
+              disableSubmitButton={disableSubmitButton}
+              submitButtonId={submitButtonId}
+              requestRunning={requestRunning}
+              // cancel button
+              {...cancelButtonProps}
+              // access rights
+              {...accessRightsProps}
+              // input
+              {...inputProps}
+              // checkbox
+              {...checkboxProps}
+            />
+          )}
+        </SearchProvider>
       </EmptyScreenProvider>
     </StyledSelector>
   );

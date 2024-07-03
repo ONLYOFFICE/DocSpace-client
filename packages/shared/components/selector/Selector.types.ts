@@ -129,13 +129,6 @@ export type TSelectorSelectAll = {
 );
 
 // search
-export interface SearchProps {
-  placeholder?: string;
-  value?: string;
-  onSearch: (value: string, callback?: Function) => void;
-  onClearSearch: (callback?: Function) => void;
-  setIsSearch: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
 export type TSelectorSearch =
   | {
@@ -157,11 +150,6 @@ export type TSelectorSearch =
       onClearSearch?: undefined;
     };
 
-export type TSelectorBodySearch = TSelectorSearch & {
-  isSearch: boolean;
-  setIsSearch: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
 // empty screen
 export interface EmptyScreenProps {
   withSearch: boolean;
@@ -180,6 +168,7 @@ export type TSelectorEmptyScreen = {
   searchEmptyScreenDescription: string;
 };
 
+// submit button
 type TOnSubmit = (
   selectedItems: TSelectorItem[],
   access: TAccessRight | null,
@@ -187,7 +176,6 @@ type TOnSubmit = (
   isFooterCheckboxChecked: boolean,
 ) => void | Promise<void>;
 
-// submit button
 export type TSelectorSubmitButton = {
   submitButtonLabel: string;
   disableSubmitButton: boolean;
@@ -340,7 +328,6 @@ export type SelectorProps = TSelectorHeader &
 export type BodyProps = TSelectorBreadCrumbs &
   TSelectorInfo &
   TWithTabs &
-  TSelectorBodySearch &
   TSelectorSelectAll &
   TSelectorBreadCrumbs & {
     footerVisible: boolean;

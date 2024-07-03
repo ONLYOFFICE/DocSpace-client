@@ -42,6 +42,7 @@ import { BodyProps } from "../Selector.types";
 import { Item } from "./Item";
 import { Info } from "./Info";
 import { VirtualScroll } from "./VirtualScroll";
+import { SearchContext, SearchValueContext } from "../contexts/Search";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
@@ -56,14 +57,10 @@ const FOOTER_WITH_CHECKBOX_HEIGHT = 181;
 
 const Body = ({
   footerVisible,
-  isSearch,
+
   isAllIndeterminate,
   isAllChecked,
-  searchPlaceholder,
-  setIsSearch,
-  searchValue,
-  onSearch,
-  onClearSearch,
+
   items,
   onSelect,
   isMultiSelect,
@@ -77,15 +74,15 @@ const Body = ({
   totalItems,
   renderCustomItem,
   isLoading,
-  searchLoader,
+
   rowLoader,
   withBreadCrumbs,
   breadCrumbs,
   onSelectBreadCrumb,
   breadCrumbsLoader,
-  withSearch,
+
   isBreadCrumbsLoading,
-  isSearchLoading,
+
   withFooterInput,
   withFooterCheckbox,
   descriptionText,
@@ -100,6 +97,10 @@ const Body = ({
   setInputItemVisible,
   inputItemVisible,
 }: BodyProps) => {
+  const { isSearchLoading, withSearch, searchLoader } =
+    React.useContext(SearchContext);
+  const isSearch = React.useContext(SearchValueContext);
+
   const [bodyHeight, setBodyHeight] = React.useState(0);
 
   const bodyRef = React.useRef<HTMLDivElement>(null);
@@ -227,13 +228,7 @@ const Body = ({
       {isSearchLoading || isBreadCrumbsLoading ? (
         searchLoader
       ) : withSearch && (itemsCount > 0 || isSearch) ? (
-        <Search
-          placeholder={searchPlaceholder}
-          value={searchValue}
-          onSearch={onSearch}
-          onClearSearch={onClearSearch}
-          setIsSearch={setIsSearch}
-        />
+        <Search />
       ) : null}
 
       {withInfo && !isLoading && (

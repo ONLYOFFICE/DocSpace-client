@@ -24,48 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useContext, useCallback } from "react";
 
 import { SearchInput } from "../../search-input";
 import { InputSize } from "../../text-input";
 
-import { SearchProps } from "../Selector.types";
+import { SearchContext, SearchDispatchContext } from "../contexts/Search";
 
-const Search = React.memo(
-  ({
-    placeholder,
-    value,
-    onSearch,
-    onClearSearch,
-    setIsSearch,
-  }: SearchProps) => {
-    const onClearSearchAction = React.useCallback(() => {
-      onClearSearch?.(() => setIsSearch(false));
-    }, [onClearSearch, setIsSearch]);
+const Search = React.memo(() => {
+  const { searchPlaceholder, searchValue, onClearSearch, onSearch } =
+    useContext(SearchContext);
+  const setIsSearch = useContext(SearchDispatchContext);
 
-    const onSearchAction = React.useCallback(
-      (data: string) => {
-        const v = data.trim();
+  const onClearSearchAction = useCallback(() => {
+    onClearSearch?.(() => setIsSearch(false));
+  }, [onClearSearch, setIsSearch]);
 
-        if (v === "") return onClearSearchAction();
+  const onSearchAction = useCallback(
+    (data: string) => {
+      const v = data.trim();
 
-        onSearch?.(v, () => setIsSearch(true));
-      },
-      [onClearSearchAction, onSearch, setIsSearch],
-    );
+      if (v === "") return onClearSearchAction();
 
-    return (
-      <SearchInput
-        className="search-input"
-        placeholder={placeholder}
-        value={value ?? ""}
-        onChange={onSearchAction}
-        onClearSearch={onClearSearchAction}
-        size={InputSize.base}
-      />
-    );
-  },
-);
+      onSearch?.(v, () => setIsSearch(true));
+    },
+    [onClearSearchAction, onSearch, setIsSearch],
+  );
+
+  return (
+    <SearchInput
+      className="search-input"
+      placeholder={searchPlaceholder}
+      value={searchValue ?? ""}
+      onChange={onSearchAction}
+      onClearSearch={onClearSearchAction}
+      size={InputSize.base}
+    />
+  );
+});
 
 Search.displayName = "Search";
 

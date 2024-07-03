@@ -44,6 +44,7 @@ import { Info } from "./Info";
 import { VirtualScroll } from "./VirtualScroll";
 import { SearchContext, SearchValueContext } from "../contexts/Search";
 import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
+import { TabsContext } from "../contexts/Tabs";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
@@ -83,10 +84,6 @@ const Body = ({
   descriptionText,
   withHeader,
 
-  withTabs,
-  tabsData,
-  activeTabId,
-
   withInfo,
   infoText,
   setInputItemVisible,
@@ -96,6 +93,8 @@ const Body = ({
   const isSearch = React.useContext(SearchValueContext);
 
   const { withBreadCrumbs } = React.useContext(BreadCrumbsContext);
+
+  const { withTabs, tabsData, activeTabId } = React.useContext(TabsContext);
 
   const [bodyHeight, setBodyHeight] = React.useState(0);
 
@@ -170,7 +169,7 @@ const Body = ({
 
   let listHeight = bodyHeight - CONTAINER_PADDING;
 
-  if (withSearch || isSearch || itemsCount > 0) listHeight -= SEARCH_HEIGHT;
+  if (withSearch && (isSearch || itemsCount > 0)) listHeight -= SEARCH_HEIGHT;
   if (withTabs) listHeight -= TABS_HEIGHT;
   if (withInfo) {
     const infoEl = document.getElementById("selector-info-text");

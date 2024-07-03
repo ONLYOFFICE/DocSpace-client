@@ -105,7 +105,7 @@ export type TSelectorBreadCrumbs =
     };
 
 // tabs
-export type TWithTabs =
+export type TSelectorTabs =
   | { withTabs: true; tabsData: TTabItem[]; activeTabId: string }
   | { withTabs?: undefined; tabsData?: undefined; activeTabId?: undefined };
 
@@ -281,7 +281,7 @@ export type TSelectorInfo =
 
 export type SelectorProps = TSelectorHeader &
   TSelectorInfo &
-  TWithTabs &
+  TSelectorTabs &
   TSelectorSelectAll &
   TSelectorEmptyScreen &
   TSelectorSearch &
@@ -326,7 +326,6 @@ export type SelectorProps = TSelectorHeader &
   };
 
 export type BodyProps = TSelectorInfo &
-  TWithTabs &
   TSelectorSelectAll &
   TSelectorBreadCrumbs & {
     footerVisible: boolean;

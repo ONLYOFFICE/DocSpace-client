@@ -371,15 +371,6 @@ const SectionHeaderContent = (props) => {
           <Headline type="content" truncate={true}>
             <div className="settings-section_header">
               <div className="header">
-                {isMobile() && isServicePage && (
-                  <IconButton
-                    iconName={ArrowPathReactSvgUrl}
-                    size="17"
-                    isFill={true}
-                    onClick={onBackToParent}
-                    className="arrow-button"
-                  />
-                )}
                 {t(
                   header === "ImportHeader"
                     ? workspace === "GoogleWorkspace"

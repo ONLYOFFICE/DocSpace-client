@@ -402,9 +402,9 @@ const useFilesHelper = ({
 
         if (onSetBaseFolderPath) {
           onSetBaseFolderPath([]);
-          toastr.error(e as TData);
         }
         setIsFirstLoad(false);
+        toastr.error(e as TData);
       }
     },
     [

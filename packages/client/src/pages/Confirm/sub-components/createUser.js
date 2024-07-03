@@ -199,6 +199,7 @@ const CreateUserForm = (props) => {
             roomName,
             firstName: user.firstName,
             lastName: user.lastName,
+            linkData: linkData,
           }),
         ),
       );

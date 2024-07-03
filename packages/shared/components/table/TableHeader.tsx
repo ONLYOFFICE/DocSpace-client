@@ -217,7 +217,6 @@ class TableHeader extends React.Component<
     };
 
     const ResetColumnsSize = () => {
-      localStorage.removeItem(columnStorageName);
       this.resetColumns();
       return true;
     };
@@ -424,9 +423,7 @@ class TableHeader extends React.Component<
       : Math.round(defaultWidth) !== Math.round(containerWidth);
 
     if (isDifferentWindowSize && !isResized) {
-      if (infoPanelVisible) localStorage.removeItem(columnInfoPanelStorageName);
-      else localStorage.removeItem(columnStorageName);
-      this.onResize(true);
+      this.resetColumns(true);
       return;
     }
 
@@ -693,9 +690,7 @@ class TableHeader extends React.Component<
                 ).length;
 
                 if (enableColumnsLength !== 1) {
-                  localStorage.removeItem(columnStorageName);
                   this.resetColumns();
-
                   return;
                 }
               }
@@ -858,7 +853,7 @@ class TableHeader extends React.Component<
     }
   };
 
-  resetColumns = () => {
+  resetColumns = (isResized: boolean = false) => {
     const {
       containerRef,
       columnStorageName,
@@ -867,8 +862,8 @@ class TableHeader extends React.Component<
       infoPanelVisible,
     } = this.props;
 
-    localStorage.removeItem(columnStorageName);
-    localStorage.removeItem(columnInfoPanelStorageName);
+    if (!infoPanelVisible) localStorage.removeItem(columnStorageName);
+    else localStorage.removeItem(columnInfoPanelStorageName);
 
     let str = "";
 
@@ -898,12 +893,13 @@ class TableHeader extends React.Component<
     for (const col of columns) {
       if (col.default) {
         str += `${wideColumnSize} `;
-      } else
+      } else {
         str += col.enable
           ? col.defaultSize
             ? `${col.defaultSize}px `
             : `${otherColumns} `
           : "0px ";
+      }
     }
 
     str += `${settingsSize}px`;
@@ -911,7 +907,7 @@ class TableHeader extends React.Component<
     if (container) container.style.gridTemplateColumns = str;
     if (this.headerRef && this.headerRef.current) {
       this.headerRef.current.style.gridTemplateColumns = str;
-      this.headerRef.current.style.width = `${containerWidth}px`;
+      this.headerRef.current.style.width = `${container.clientWidth}px`;
     }
 
     if (str) {
@@ -922,7 +918,7 @@ class TableHeader extends React.Component<
       }
     }
 
-    this.onResize();
+    this.onResize(isResized);
   };
 
   render() {

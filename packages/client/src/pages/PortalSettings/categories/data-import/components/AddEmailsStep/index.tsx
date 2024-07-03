@@ -31,6 +31,7 @@ import { SearchInput } from "@docspace/shared/components/search-input";
 
 import { Text } from "@docspace/shared/components/text";
 import { InputSize } from "@docspace/shared/components/text-input";
+import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../sub-components/AccountsPaging";
 
@@ -43,7 +44,6 @@ import { parseQuota } from "../../utils";
 
 import { AddEmailsStepProps, InjectedAddEmailsStepProps } from "../../types";
 import { MigrationButtons } from "../../sub-components/MigrationButtons";
-import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 
 const PAGE_SIZE = 25;
 const REFRESH_TIMEOUT = 100;
@@ -67,7 +67,7 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
     setWorkspace,
     setMigratingWorkspace,
     setMigrationPhase,
-    
+
     cancelUploadDialogVisible,
     setCancelUploadDialogVisible,
 
@@ -118,7 +118,7 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
     quota.used +
     checkedUsers.withEmail.filter((user) => !user.isDuplicate).length +
     checkedUsers.withoutEmail.length;
-    
+
   const onCancelMigration = () => {
     cancelMigration();
     clearCheckedAccounts();
@@ -127,7 +127,7 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
     setMigratingWorkspace("");
     setMigrationPhase("");
   };
-    
+
   const showCancelDialog = () => setCancelUploadDialogVisible(true);
   const hideCancelDialog = () => setCancelUploadDialogVisible(false);
 
@@ -196,7 +196,7 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
       )}
 
       {Buttons}
-      
+
       {cancelUploadDialogVisible && (
         <CancelUploadDialog
           visible={cancelUploadDialogVisible}
@@ -211,50 +211,52 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
   );
 };
 
-export default inject<TStore>(({ importAccountsStore, currentQuotaStore, dialogsStore }) => {
-  const {
-    incrementStep,
-    decrementStep,
-    searchValue,
-    setSearchValue,
-    users,
-    setResultUsers,
-    areCheckedUsersEmpty,
-    checkedUsers,
-    withEmailUsers,
+export default inject<TStore>(
+  ({ importAccountsStore, currentQuotaStore, dialogsStore }) => {
+    const {
+      incrementStep,
+      decrementStep,
+      searchValue,
+      setSearchValue,
+      users,
+      setResultUsers,
+      areCheckedUsersEmpty,
+      checkedUsers,
+      withEmailUsers,
 
-    cancelMigration,
-    clearCheckedAccounts,
-    setStep,
-    setWorkspace,
-    setMigratingWorkspace,
-    setMigrationPhase,
-  } = importAccountsStore;
-  const { quotaCharacteristics } = currentQuotaStore;
+      cancelMigration,
+      clearCheckedAccounts,
+      setStep,
+      setWorkspace,
+      setMigratingWorkspace,
+      setMigrationPhase,
+    } = importAccountsStore;
+    const { quotaCharacteristics } = currentQuotaStore;
     const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
       dialogsStore;
 
-  return {
-    incrementStep,
-    decrementStep,
-    searchValue,
-    setSearchValue,
-    users,
-    setResultUsers,
-    areCheckedUsersEmpty,
-    checkedUsers,
-    withEmailUsers,
+    return {
+      incrementStep,
+      decrementStep,
+      searchValue,
+      setSearchValue,
+      users,
+      setResultUsers,
+      areCheckedUsersEmpty,
+      checkedUsers,
+      withEmailUsers,
 
-    cancelMigration,
-    clearCheckedAccounts,
-    setStep,
-    setWorkspace,
-    setMigratingWorkspace,
-    setMigrationPhase,
-    
-    quotaCharacteristics,
-    
-    cancelUploadDialogVisible,
-    setCancelUploadDialogVisible,
-  };
-})(observer(AddEmailsStep));
+      cancelMigration,
+      clearCheckedAccounts,
+      setStep,
+      setWorkspace,
+      setMigratingWorkspace,
+      setMigrationPhase,
+
+      quotaCharacteristics,
+
+      cancelUploadDialogVisible,
+      setCancelUploadDialogVisible,
+    };
+  },
+)(observer(AddEmailsStep));

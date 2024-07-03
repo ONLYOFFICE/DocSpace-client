@@ -37,12 +37,15 @@ import { Button } from "@docspace/shared/components/button";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { InputType } from "@docspace/shared/components/text-input";
 
+import { isMobile } from "@docspace/shared/utils";
+
 import EditSvg from "PUBLIC_DIR/images/access.edit.react.svg";
 import CrossSvg from "PUBLIC_DIR/images/cross.edit.react.svg";
 import CheckSvg from "PUBLIC_DIR/images/check.edit.react.svg";
 
 import { Base } from "@docspace/shared/themes";
 
+import EmailChangeDialog from "SRC_DIR/components/dialogs/EmailChangeDialog";
 import {
   AddEmailRowContentProps,
   InjectedAddEmailRowContentProps,
@@ -181,26 +184,40 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
         </Text>
       </div>
       {isEmailOpen ? (
-        <EmailInputWrapper ref={emailInputRef}>
-          <EmailInput
-            placeholder={t("Settings:NoEmail")}
-            className="import-email-input"
-            value={tempEmail}
-            onChange={handleEmailChange}
-            type={InputType.email}
-            onValidateInput={onValidateEmail}
+        isMobile() ? (
+          <EmailChangeDialog
+            visible={isEmailOpen}
+            onClose={clearEmail}
+            tempEmail={tempEmail}
+            handleEmailChange={handleEmailChange}
+            onValidateEmail={onValidateEmail}
             hasError={hasError}
-            onBlur={checkEmailValidity}
-            isAutoFocussed
+            checkEmailValidity={checkEmailValidity}
+            handleSave={handleSaveClick}
+            displayName={displayName}
           />
+        ) : (
+          <EmailInputWrapper ref={emailInputRef}>
+            <EmailInput
+              placeholder={t("SMTPSettings:EnterEmail")}
+              className="import-email-input"
+              value={tempEmail}
+              onChange={handleEmailChange}
+              type={InputType.email}
+              onValidateInput={onValidateEmail}
+              hasError={hasError}
+              onBlur={checkEmailValidity}
+              isAutoFocussed
+            />
 
-          <DecisionButton
-            label=""
-            icon={<CheckSvg />}
-            onClick={handleSaveClick}
-          />
-          <DecisionButton label="" icon={<CrossSvg />} onClick={clearEmail} />
-        </EmailInputWrapper>
+            <DecisionButton
+              label=""
+              icon={<CheckSvg />}
+              onClick={handleSaveClick}
+            />
+            <DecisionButton label="" icon={<CrossSvg />} onClick={clearEmail} />
+          </EmailInputWrapper>
+        )
       ) : (
         <span onClick={openEmail} className="user-email" ref={emailTextRef}>
           <EditSvg />

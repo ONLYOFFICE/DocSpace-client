@@ -10,6 +10,7 @@
   "AccountsWithoutEmails": "We found <1>{{users}} users</1> without emails. You can fill their emails or continue without this action.",
   "AccountsWithoutEmailsNextStep": "We found <1>{{users}} users</1> without emails. You can add necessary data to their accounts on the next step.",
   "AddAllowedIP": "Add allowed IP address",
+  "AddEmail": "Add e-mail",
   "AddEmails": "Add emails to incomplete accounts",
   "AddEmailsDescription": "Check list of unimported users to import into {{organizationName}} {{productName}}.",
   "AddEmailsWarning": "You don't have users with emails. Please proceed to the next step to add them.",

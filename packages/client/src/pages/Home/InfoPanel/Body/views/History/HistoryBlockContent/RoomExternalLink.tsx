@@ -25,17 +25,28 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { StyledHistoryLink } from "../../../styles/history";
-import { ActionByTarget } from "../FeedInfo";
 import { decode } from "he";
+
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { withTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
+import { RoomsType } from "@docspace/shared/enums";
+import { Nullable } from "@docspace/shared/types";
 
-interface HistoryRoomExternalLinkProps {
+import { ActionByTarget } from "../FeedInfo";
+import { StyledHistoryLink } from "../../../styles/history";
+
+interface HistoryRoomExternalLinkProps
+  extends Partial<
+    Pick<TStore["dialogsStore"], "setLinkParams" | "setEditLinkPanelIsVisible">
+  > {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   feed: any;
   actionType: ActionByTarget<"roomTag">;
+  isFormRoom?: boolean;
+  canEditLink?: boolean;
+  t?: (str: string) => string;
 }
 
 const HistoryRoomExternalLink = ({
@@ -45,15 +56,16 @@ const HistoryRoomExternalLink = ({
   canEditLink,
   setEditLinkPanelIsVisible,
   setLinkParams,
+  isFormRoom,
 }: HistoryRoomExternalLinkProps) => {
   const onEditLink = () => {
     if (!feed.data.sharedTo) {
-      toastr.error(t("FeedLinkWasDeleted"));
+      toastr.error(t!("FeedLinkWasDeleted"));
       return;
     }
 
-    setLinkParams({ isEdit: true, link: feed.data });
-    setEditLinkPanelIsVisible(true);
+    setLinkParams!({ isEdit: true, link: feed.data, isFormRoom });
+    setEditLinkPanelIsVisible!(true);
   };
 
   if (actionType === "create")
@@ -72,8 +84,17 @@ const HistoryRoomExternalLink = ({
     );
 };
 
-export default inject(({ userStore, dialogsStore }) => ({
-  canEditLink: !(userStore.user.isVisitor || userStore.user.isCollaborator),
-  setEditLinkPanelIsVisible: dialogsStore.setEditLinkPanelIsVisible,
-  setLinkParams: dialogsStore.setLinkParams,
-}))(withTranslation(["InfoPanel"])(observer(HistoryRoomExternalLink)));
+export default inject<TStore>(
+  ({ userStore, dialogsStore, infoPanelStore }) => ({
+    canEditLink: !(userStore.user?.isVisitor || userStore.user?.isCollaborator),
+    setEditLinkPanelIsVisible: dialogsStore.setEditLinkPanelIsVisible,
+    setLinkParams: dialogsStore.setLinkParams,
+    isFormRoom:
+      (
+        infoPanelStore.infoPanelSelection as unknown as Record<
+          string,
+          Nullable<unknown>
+        >
+      )?.roomType === RoomsType.FormRoom,
+  }),
+)(withTranslation(["InfoPanel"])(observer(HistoryRoomExternalLink)));

@@ -239,30 +239,6 @@ const DataImport = loadable(() =>
     () => import("../pages/PortalSettings/categories/data-import/index.tsx"),
   ),
 );
-const GoogleDataImport = loadable(() =>
-  componentLoader(
-    () =>
-      import(
-        "../pages/PortalSettings/categories/data-import/GoogleWorkspace/index.tsx"
-      ),
-  ),
-);
-const NextcloudDataImport = loadable(() =>
-  componentLoader(
-    () =>
-      import(
-        "../pages/PortalSettings/categories/data-import/NextcloudWorkspace/index.tsx"
-      ),
-  ),
-);
-const OnlyofficeDataImport = loadable(() =>
-  componentLoader(
-    () =>
-      import(
-        "../pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/index.tsx"
-      ),
-  ),
-);
 
 const WebhookHistory = loadable(() =>
   componentLoader(
@@ -537,19 +513,7 @@ const PortalSettingsRoutes = {
       element: <DeveloperTools />,
     },
     {
-      path: "data-import/migration",
-      element: <DataImport />,
-    },
-    {
-      path: "data-import/migration/google",
-      element: <DataImport />,
-    },
-    {
-      path: "data-import/migration/nextcloud",
-      element: <DataImport />,
-    },
-    {
-      path: "data-import/migration/onlyoffice",
+      path: "data-import",
       element: <DataImport />,
     },
     {

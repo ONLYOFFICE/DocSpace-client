@@ -185,6 +185,7 @@ const SectionHeaderContent = (props) => {
     setIsLoadedSectionHeader,
     isSSOAvailable,
     organizationName,
+    workspace,
   } = props;
 
   const navigate = useNavigate();
@@ -341,13 +342,6 @@ const SectionHeaderContent = (props) => {
     },
   ];
 
-  const pathname = location.pathname;
-
-  const isServicePage =
-    pathname.includes("google") ||
-    pathname.includes("nextcloud") ||
-    pathname.includes("onlyoffice");
-
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>
       {isHeaderVisible ? (
@@ -386,7 +380,18 @@ const SectionHeaderContent = (props) => {
                     className="arrow-button"
                   />
                 )}
-                {t(header, { organizationName })}
+                {t(
+                  header === "ImportHeader"
+                    ? workspace === "GoogleWorkspace"
+                      ? "ImportFromGoogle"
+                      : workspace === "Nextcloud"
+                        ? "ImportFromNextcloud"
+                        : workspace === "Workspace"
+                          ? "ImportFromPortal"
+                          : "DataImport"
+                    : header,
+                  { organizationName },
+                )}
               </div>
               {isNeedPaidIcon ? (
                 <Badge
@@ -422,51 +427,62 @@ const SectionHeaderContent = (props) => {
   );
 };
 
-export default inject(({ settingsStore, currentQuotaStore, setup, common }) => {
-  const {
-    isBrandingAndCustomizationAvailable,
-    isRestoreAndAutoBackupAvailable,
-    isSSOAvailable,
-  } = currentQuotaStore;
-  const { addUsers, removeAdmins } = setup.headerAction;
-  const { toggleSelector } = setup;
-  const {
-    selected,
-    setSelected,
-    isHeaderIndeterminate,
-    isHeaderChecked,
-    isHeaderVisible,
-    deselectUser,
-    selectAll,
-    selection,
-  } = setup.selectionStore;
-  const { admins, selectorIsOpen } = setup.security.accessRight;
-  const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
+export default inject(
+  ({
+    settingsStore,
+    currentQuotaStore,
+    setup,
+    common,
+    importAccountsStore,
+  }) => {
+    const {
+      isBrandingAndCustomizationAvailable,
+      isRestoreAndAutoBackupAvailable,
+      isSSOAvailable,
+    } = currentQuotaStore;
+    const { addUsers, removeAdmins } = setup.headerAction;
+    const { toggleSelector } = setup;
+    const {
+      selected,
+      setSelected,
+      isHeaderIndeterminate,
+      isHeaderChecked,
+      isHeaderVisible,
+      deselectUser,
+      selectAll,
+      selection,
+    } = setup.selectionStore;
+    const { admins, selectorIsOpen } = setup.security.accessRight;
+    const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
 
-  const { organizationName } = settingsStore;
+    const { organizationName } = settingsStore;
 
-  return {
-    addUsers,
-    removeAdmins,
-    selected,
-    setSelected,
-    admins,
-    isHeaderIndeterminate,
-    isHeaderChecked,
-    isHeaderVisible,
-    deselectUser,
-    selectAll,
-    toggleSelector,
-    selectorIsOpen,
-    selection,
-    isLoadedSectionHeader,
-    setIsLoadedSectionHeader,
-    isBrandingAndCustomizationAvailable,
-    isRestoreAndAutoBackupAvailable,
-    isSSOAvailable,
-    organizationName,
-  };
-})(
+    const { workspace } = importAccountsStore;
+
+    return {
+      addUsers,
+      removeAdmins,
+      selected,
+      setSelected,
+      admins,
+      isHeaderIndeterminate,
+      isHeaderChecked,
+      isHeaderVisible,
+      deselectUser,
+      selectAll,
+      toggleSelector,
+      selectorIsOpen,
+      selection,
+      isLoadedSectionHeader,
+      setIsLoadedSectionHeader,
+      isBrandingAndCustomizationAvailable,
+      isRestoreAndAutoBackupAvailable,
+      isSSOAvailable,
+      organizationName,
+      workspace,
+    };
+  },
+)(
   withLoading(
     withTranslation(["Settings", "SingleSignOn", "Common", "JavascriptSdk"])(
       observer(SectionHeaderContent),

@@ -109,6 +109,7 @@ const ConfirmRoute = ({
 
         switch (validationResult) {
           case ValidationResult.Ok:
+          case ValidationResult.UserExisted:
             const confirmHeader = search.slice(1);
             const linkData = {
               ...confirmLinkData,
@@ -129,12 +130,16 @@ const ConfirmRoute = ({
             setState((val) => ({ ...val, isLoaded: true, linkData, roomData }));
             break;
           case ValidationResult.Invalid:
-            console.error("invlid link", { confirmLinkData, validationResult });
+            console.error("invalid link", {
+              confirmLinkData,
+              validationResult,
+            });
             window.location.href = combineUrl(
               window.ClientConfig?.proxy?.url,
               path,
-              "/error",
+              "/error?messageKey=21",
             );
+
             break;
           case ValidationResult.Expired:
             console.error("expired link", {
@@ -157,6 +162,24 @@ const ConfirmRoute = ({
               path,
               "/error?messageKey=20",
             );
+            break;
+          case ValidationResult.QuotaFailed:
+            console.error("access below quota", {
+              confirmLinkData,
+              validationResult,
+            });
+            window.location.href = combineUrl(
+              window.ClientConfig?.proxy?.url,
+              path,
+              "/error",
+            );
+            break;
+          case ValidationResult.UserExcluded:
+            console.error("user excluded", {
+              confirmLinkData,
+              validationResult,
+            });
+            window.location.replace(defaultPage);
             break;
           default:
             console.error("unknown link", {

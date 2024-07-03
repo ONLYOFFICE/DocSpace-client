@@ -162,8 +162,8 @@ const RoomIcon = ({
 
   const titleWithoutNumberDuplicate = title?.replace(/\(\d+\)/, "");
   const titleWithoutSpaces = titleWithoutNumberDuplicate
-    .replace(/\s+/g, " ")
-    .trim();
+    ?.replace(/\s+/g, " ")
+    ?.trim();
   const indexAfterLastSpace = titleWithoutSpaces?.lastIndexOf(" ");
   const secondCharacter =
     !titleWithoutSpaces || indexAfterLastSpace === -1

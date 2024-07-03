@@ -51,6 +51,7 @@ import {
 } from "./Selector.types";
 import { EmptyScreenProvider } from "./contexts/EmptyScreen";
 import { SearchProvider } from "./contexts/Search";
+import { BreadCrumbsProvider } from "./contexts/BreadCrumbs";
 
 const Selector = ({
   id,
@@ -438,7 +439,7 @@ const Selector = ({
         breadCrumbsLoader,
         isBreadCrumbsLoading,
       }
-    : ({} as TSelectorBreadCrumbs);
+    : {};
 
   const tempRenderedItemsLength = renderedItems.filter(
     (x) => !x.isDisabled,
@@ -580,55 +581,53 @@ const Selector = ({
         searchEmptyScreenDescription={searchEmptyScreenDescription}
       >
         <SearchProvider {...searchProps}>
-          {withHeader && <Header {...headerProps} />}
-          <Body
-            withHeader={withHeader}
-            footerVisible={footerVisible || !!alwaysShowFooter}
-            items={[...renderedItems]}
-            isMultiSelect={isMultiSelect}
-            onSelect={onSelectAction}
-            hasNextPage={hasNextPage}
-            isNextPageLoading={isNextPageLoading}
-            loadMoreItems={loadMoreItems}
-            renderCustomItem={renderCustomItem}
-            totalItems={totalItems || 0}
-            isLoading={isLoading}
-            rowLoader={rowLoader}
-            withFooterInput={withFooterInput}
-            withFooterCheckbox={withFooterCheckbox}
-            descriptionText={descriptionText}
-            inputItemVisible={inputItemVisible}
-            setInputItemVisible={setInputItemVisible}
-            // bread crumbs
-            {...breadCrumbsProps}
-            // select all
-            {...onSelectAllProps}
-            // search
-            {...searchProps}
-            // tabs
-            {...tabsProps}
-            // info
-            {...infoProps}
-          />
-          {(footerVisible || alwaysShowFooter) && (
-            <Footer
+          <BreadCrumbsProvider {...breadCrumbsProps}>
+            {withHeader && <Header {...headerProps} />}
+            <Body
+              withHeader={withHeader}
+              footerVisible={footerVisible || !!alwaysShowFooter}
+              items={[...renderedItems]}
               isMultiSelect={isMultiSelect}
-              selectedItemsCount={newSelectedItems.length}
-              onSubmit={onSubmitAction}
-              submitButtonLabel={submitButtonLabel}
-              disableSubmitButton={disableSubmitButton}
-              submitButtonId={submitButtonId}
-              requestRunning={requestRunning}
-              // cancel button
-              {...cancelButtonProps}
-              // access rights
-              {...accessRightsProps}
-              // input
-              {...inputProps}
-              // checkbox
-              {...checkboxProps}
+              onSelect={onSelectAction}
+              hasNextPage={hasNextPage}
+              isNextPageLoading={isNextPageLoading}
+              loadMoreItems={loadMoreItems}
+              renderCustomItem={renderCustomItem}
+              totalItems={totalItems || 0}
+              isLoading={isLoading}
+              rowLoader={rowLoader}
+              withFooterInput={withFooterInput}
+              withFooterCheckbox={withFooterCheckbox}
+              descriptionText={descriptionText}
+              inputItemVisible={inputItemVisible}
+              setInputItemVisible={setInputItemVisible}
+              // select all
+              {...onSelectAllProps}
+              // tabs
+              {...tabsProps}
+              // info
+              {...infoProps}
             />
-          )}
+            {(footerVisible || alwaysShowFooter) && (
+              <Footer
+                isMultiSelect={isMultiSelect}
+                selectedItemsCount={newSelectedItems.length}
+                onSubmit={onSubmitAction}
+                submitButtonLabel={submitButtonLabel}
+                disableSubmitButton={disableSubmitButton}
+                submitButtonId={submitButtonId}
+                requestRunning={requestRunning}
+                // cancel button
+                {...cancelButtonProps}
+                // access rights
+                {...accessRightsProps}
+                // input
+                {...inputProps}
+                // checkbox
+                {...checkboxProps}
+              />
+            )}
+          </BreadCrumbsProvider>
         </SearchProvider>
       </EmptyScreenProvider>
     </StyledSelector>

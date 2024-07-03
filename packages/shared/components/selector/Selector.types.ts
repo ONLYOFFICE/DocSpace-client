@@ -325,8 +325,7 @@ export type SelectorProps = TSelectorHeader &
     descriptionText?: string;
   };
 
-export type BodyProps = TSelectorBreadCrumbs &
-  TSelectorInfo &
+export type BodyProps = TSelectorInfo &
   TWithTabs &
   TSelectorSelectAll &
   TSelectorBreadCrumbs & {

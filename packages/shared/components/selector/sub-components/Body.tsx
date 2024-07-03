@@ -43,6 +43,7 @@ import { Item } from "./Item";
 import { Info } from "./Info";
 import { VirtualScroll } from "./VirtualScroll";
 import { SearchContext, SearchValueContext } from "../contexts/Search";
+import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
@@ -76,12 +77,6 @@ const Body = ({
   isLoading,
 
   rowLoader,
-  withBreadCrumbs,
-  breadCrumbs,
-  onSelectBreadCrumb,
-  breadCrumbsLoader,
-
-  isBreadCrumbsLoading,
 
   withFooterInput,
   withFooterCheckbox,
@@ -97,9 +92,10 @@ const Body = ({
   setInputItemVisible,
   inputItemVisible,
 }: BodyProps) => {
-  const { isSearchLoading, withSearch, searchLoader } =
-    React.useContext(SearchContext);
+  const { withSearch } = React.useContext(SearchContext);
   const isSearch = React.useContext(SearchValueContext);
+
+  const { withBreadCrumbs } = React.useContext(BreadCrumbsContext);
 
   const [bodyHeight, setBodyHeight] = React.useState(0);
 
@@ -207,29 +203,13 @@ const Body = ({
       withHeader={withHeader}
       withTabs={withTabs}
     >
-      {withBreadCrumbs ? (
-        isBreadCrumbsLoading ? (
-          breadCrumbsLoader
-        ) : (
-          <BreadCrumbs
-            withBreadCrumbs
-            isBreadCrumbsLoading={isLoading}
-            breadCrumbs={breadCrumbs}
-            breadCrumbsLoader={breadCrumbsLoader}
-            onSelectBreadCrumb={onSelectBreadCrumb}
-          />
-        )
-      ) : null}
+      <BreadCrumbs />
 
       {withTabs && tabsData && (
         <StyledTabs items={tabsData} selectedItemId={activeTabId} />
       )}
 
-      {isSearchLoading || isBreadCrumbsLoading ? (
-        searchLoader
-      ) : withSearch && (itemsCount > 0 || isSearch) ? (
-        <Search />
-      ) : null}
+      <Search isSearch={itemsCount > 0 || isSearch} />
 
       {withInfo && !isLoading && (
         <Info withInfo={withInfo} infoText={infoText} />

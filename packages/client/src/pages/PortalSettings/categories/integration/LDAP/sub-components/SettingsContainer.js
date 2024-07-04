@@ -66,7 +66,7 @@ const SettingsContainer = ({
 
   useEffect(() => {
     isLdapAvailable && isMobileView && !isLoaded && load();
-    setDocumentTitle(t("Ldap:LdapSettings"));
+    isMobileView && setDocumentTitle(t("Ldap:LdapSettings"));
     onCheckView();
     window.addEventListener("resize", onCheckView);
 

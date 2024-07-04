@@ -37,6 +37,7 @@ import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-fil
 import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { encryptionUploadDialog } from "../helpers/encryptionUploadDialog";
+import { TABLE_HEADER_HEIGHT } from "@docspace/shared/components/table/Table.constants";
 
 class HotkeyStore {
   filesStore;
@@ -76,18 +77,22 @@ class HotkeyStore {
       ? document.querySelector("#customScrollBar > .scroll-wrapper > .scroller")
       : document.getElementsByClassName("section-scroll")[0];
 
+    const stickySection = document.querySelector(".section-sticky-container");
+    const stickySectionHeight =
+      stickySection?.getBoundingClientRect().height ?? 0;
+
+    const tableHeaderHeight =
+      this.filesStore.viewAs === "table" ? TABLE_HEADER_HEIGHT : 0;
+
     const scrollRect = scroll?.getBoundingClientRect();
 
     if (item && item[0]) {
       const el = item[0];
       const rect = el.getBoundingClientRect();
 
-      const rectHeight =
-        this.filesStore.viewAs === "table" ? rect.height * 2 : rect.height;
-
       if (
         scrollRect.top + scrollRect.height - rect.height > rect.top &&
-        scrollRect.top < rect.top + el.offsetHeight - rectHeight
+        scrollRect.top + stickySectionHeight + tableHeaderHeight < rect.top
       ) {
         // console.log("element is visible");
       } else {

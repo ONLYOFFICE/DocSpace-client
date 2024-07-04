@@ -505,7 +505,12 @@ class SelectionStore {
   };
 
   findSessionIndexByUserId = (userId) => {
-    return this.dataFromSocket.findIndex((data) => data.id === userId);
+    return this.dataFromSocket.findIndex((data) => {
+      if (Array.isArray(userId)) {
+        return userId.some((id) => id === data.id);
+      }
+      return data.id === userId;
+    });
   };
 
   sessisonLogout = ({ userId, date }) => {
@@ -696,6 +701,7 @@ class SelectionStore {
       toastr.error(error);
     } finally {
       this.setIsLoading(false);
+      this.clearSelection();
     }
   };
 

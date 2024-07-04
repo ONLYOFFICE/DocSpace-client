@@ -43,7 +43,7 @@ const FillPDFDialog = inject<TStore>(({ dialogsStore }) => {
   return { setFillPDFDialogData };
 })(
   observer(({ visible, setFillPDFDialogData, data }: FillPDFDialogProps) => {
-    const { t } = useTranslation();
+    const { t } = useTranslation(["FillPDFDialog"]);
 
     const onClose = () => {
       setFillPDFDialogData!(false, null);
@@ -60,19 +60,21 @@ const FillPDFDialog = inject<TStore>(({ dialogsStore }) => {
         onClose={onClose}
         displayType={ModalDialogType.aside}
       >
-        <ModalDialog.Header>Fill in as</ModalDialog.Header>
+        <ModalDialog.Header>
+          {t("FillPDFDialog:FillPDFDialogTitle")}
+        </ModalDialog.Header>
         <ModalDialog.Body>
           <Container>
             <Card
-              title="Fill out the form yourself"
-              description="Fill in the fields of the original form in the editor window."
-              buttonLabel="Fill in"
+              title={t("FillPDFDialog:FillOutTitle")}
+              description={t("FillPDFDialog:FillOutDescription")}
+              buttonLabel={t("FillPDFDialog:FillOutButtonLabel")}
               onCick={openEditor}
             />
             <Card
-              title="Share & collect"
-              description="Share your form and collect responses via a Form filling room."
-              buttonLabel="Copy to room"
+              title={t("FillPDFDialog:ShareCollectTitle")}
+              description={t("FillPDFDialog:ShareCollectDescription")}
+              buttonLabel={t("FillPDFDialog:ShareCollectButtonLabel")}
               onCick={openSelector}
             />
           </Container>

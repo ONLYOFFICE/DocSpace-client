@@ -32,6 +32,7 @@ import {
   TCapabilities,
   TGetColorTheme,
   TGetSsoSettings,
+  TPasswordSettings,
   TPortalCultures,
   TSettings,
   TThirdPartyProvider,
@@ -158,7 +159,23 @@ export async function getPortalCultures() {
   return cultures.response as TPortalCultures;
 }
 
-export async function checkConfirmLink(data: any): Promise<any> {
+export async function getPortalPasswordSettings() {
+  const [getPortalPasswordSettings] = createRequest(
+    [`/settings/security/password`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getPortalPasswordSettings);
+
+  if (!res.ok) return;
+
+  const passwordSettings = await res.json();
+
+  return passwordSettings.response as TPasswordSettings;
+}
+
+/* export async function checkConfirmLink(data: any): Promise<any> {
   try {
     const [checkConfirmLink] = createRequest(
       [`/authentication/confirm`],
@@ -179,7 +196,7 @@ export async function checkConfirmLink(data: any): Promise<any> {
   } catch (e) {
     console.error(e);
   }
-}
+} */
 
 export async function logout() {
   const [logout] = createRequest(
@@ -191,7 +208,4 @@ export async function logout() {
   const res = await fetch(logout);
 
   if (!res.ok) return;
-
-  const validationResult = await res.json();
-  console.log(validationResult);
 }

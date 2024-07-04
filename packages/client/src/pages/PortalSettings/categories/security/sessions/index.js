@@ -100,6 +100,7 @@ const Sessions = ({
   getLoginHistoryReport,
   isLoadingDownloadReport,
   setUserSessionPanelVisible,
+  isSeveralSelection,
   isSessionsLoaded,
 }) => {
   const { t } = useTranslation([
@@ -122,24 +123,12 @@ const Sessions = ({
     currentDeviceType,
   });
 
-  const getIdFromConnections = (connections) => connections[0]?.id;
-
-  const idFromSelection =
-    selection.length > 0
-      ? getIdFromConnections(selection[0].connections)
-      : undefined;
-
-  const idFromBufferSelection = bufferSelection
-    ? getIdFromConnections(bufferSelection.connections)
-    : undefined;
-
-  const exceptId = idFromSelection || idFromBufferSelection;
-  const userIdsFromSelection = selection.map((user) => user.id);
+  const selectionUserId = selection.map((user) => user.id);
 
   const userIds =
     bufferSelection?.id !== undefined
-      ? [bufferSelection.id, ...userIdsFromSelection]
-      : [...userIdsFromSelection];
+      ? [bufferSelection.id, ...selectionUserId]
+      : [...selectionUserId];
 
   if (!isSessionsLoaded) return <SessionsLoader viewAs={viewAs} />;
 
@@ -191,14 +180,16 @@ const Sessions = ({
           t={t}
           visible={logoutAllDialogVisible}
           isLoading={isLoading}
-          exceptId={exceptId}
           userIds={userIds}
           displayName={displayName}
+          selection={selection}
+          bufferSelection={bufferSelection}
+          isSeveralSelection={isSeveralSelection}
           onClose={() => setLogoutAllDialogVisible(false)}
+          onClosePanel={() => setUserSessionPanelVisible(false)}
           onLogoutAllUsers={onClickLogoutAllUsers}
           onLogoutAllSessions={onClickLogoutAllSessions}
           onLogoutAllExceptThis={onClickLogoutAllExceptThis}
-          setUserSessionPanelVisible={setUserSessionPanelVisible}
         />
       )}
     </MainContainer>
@@ -218,6 +209,7 @@ export default inject(({ settingsStore, setup, peopleStore, dialogsStore }) => {
     selection,
     bufferSelection,
     isLoading,
+    isSeveralSelection,
     onClickLogoutAllUsers,
     onClickLogoutAllSessions,
     onClickLogoutAllExceptThis,
@@ -263,6 +255,7 @@ export default inject(({ settingsStore, setup, peopleStore, dialogsStore }) => {
     getLoginHistoryReport,
     isLoadingDownloadReport,
     setUserSessionPanelVisible,
+    isSeveralSelection,
     isSessionsLoaded: allSessions.length > 0,
   };
 })(observer(Sessions));

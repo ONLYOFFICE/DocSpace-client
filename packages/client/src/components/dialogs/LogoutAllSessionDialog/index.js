@@ -25,46 +25,55 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
-import { inject, observer } from "mobx-react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
 
 import ModalDialogContainer from "../ModalDialogContainer";
 
 const LogoutAllSessionDialog = ({
   t,
-  exceptId,
-  userIds,
-  displayName,
   visible,
   isLoading,
+  userIds,
+  displayName,
+  selection,
+  bufferSelection,
   onClose,
+  onClosePanel,
   onRemoveAllSessions,
   onRemoveAllExceptThis,
   isSeveralSelection,
   onLogoutAllUsers,
   onLogoutAllSessions,
   onLogoutAllExceptThis,
-  setUserSessionPanelVisible,
 }) => {
   const [isChecked, setIsChecked] = useState(false);
-
   const isProfile = location.pathname.includes("/profile");
+  const selectionId = selection[0]?.connections[0]?.id;
+  const bufferSelectionId = bufferSelection?.connections[0]?.id;
+
+  const exceptId = selectionId || bufferSelectionId;
 
   const onChangeCheckbox = () => {
     setIsChecked((prev) => !prev);
   };
 
   const onClickLogout = () => {
-    if (!isChecked) {
-      isSeveralSelection
-        ? onLogoutAllUsers(t, userIds)
-        : onLogoutAllSessions(t).then(() => setUserSessionPanelVisible(false));
-      onClose();
-    } else {
-      onLogoutAllExceptThis(t, exceptId, displayName);
+    try {
+      if (!isChecked) {
+        isSeveralSelection
+          ? onLogoutAllUsers(t, userIds)
+          : onLogoutAllSessions(t, userIds, displayName);
+        onClosePanel();
+      } else {
+        onLogoutAllExceptThis(t, exceptId, displayName);
+      }
+    } catch (error) {
+      toastr.error(error);
+    } finally {
       onClose();
     }
   };
@@ -134,10 +143,4 @@ const LogoutAllSessionDialog = ({
   );
 };
 
-export default inject(({ peopleStore }) => {
-  const { isSeveralSelection } = peopleStore.selectionStore;
-
-  return {
-    isSeveralSelection,
-  };
-})(observer(LogoutAllSessionDialog));
+export default LogoutAllSessionDialog;

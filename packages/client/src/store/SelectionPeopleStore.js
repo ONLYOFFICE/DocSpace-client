@@ -649,7 +649,7 @@ class SelectionStore {
     const filteredSessions = sessions.filter(
       (item) =>
         item.connections.length !== 0 &&
-        item.sessions.some((session) => session.hasOwnProperty("id")),
+        item.sessions?.some((session) => session.hasOwnProperty("id")),
     );
 
     return filteredSessions;
@@ -672,17 +672,8 @@ class SelectionStore {
     }
   };
 
-  onClickLogoutAllSessions = async (t) => {
+  onClickLogoutAllSessions = async (t, userId, displayName) => {
     const { removeAllActiveSessionsById } = this.settingsSetupStore;
-
-    const bufferSelection = this.bufferSelection?.id;
-    const selection = this.selection[0]?.id;
-    const userId = selection || bufferSelection;
-
-    if (!userId)
-      return toastr.error(
-        t("Settings:UserAlreadyLoggedOut", { displayName: this.displayName }),
-      );
 
     try {
       this.setIsLoading(true);
@@ -693,12 +684,12 @@ class SelectionStore {
         sessions: [],
       };
       this.setItems(newData);
-      const index = this.findSessionIndexByUserId(this.items.id);
+      const index = this.findSessionIndexByUserId(userId);
       this.dataFromSocket[index] = newData;
 
       toastr.success(
         t("Settings:LoggedOutByUser", {
-          displayName: this.displayName,
+          displayName: displayName,
         }),
       );
     } catch (error) {

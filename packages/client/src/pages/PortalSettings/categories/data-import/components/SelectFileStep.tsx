@@ -154,18 +154,18 @@ const SelectFileStep = (props: SelectFileStepProps) => {
   const [progress, setProgress] = useState(0);
   const [isInfiniteProgress, setIsInfiniteProgress] = useState(true);
 
-  const [isError, setIsError] = useState(false);
+  const [isNetworkError, setIsNetworkError] = useState(false);
   const [isFileError, setIsFileError] = useState(false);
   const [isBackupEmpty, setIsBackupEmpty] = useState(false);
   const isAbort = useRef(false);
 
+  const [uploadFile, setFile] = useState<File | File[]>();
+  const [startChunk, setChunk] = useState(0);
+  const [chunkSize, setChunkSize] = useState(0);
+
   const [failTries, setFailTries] = useState(FAIL_TRIES);
 
   const uploadInterval = useRef<number>();
-
-  const onUploadToServer = () => {
-    console.log("handle internet abortion");
-  };
 
   const poolStatus = useCallback(async () => {
     try {
@@ -220,12 +220,16 @@ const SelectFileStep = (props: SelectFileStepProps) => {
         setIsInfiniteProgress(false);
       }
     } catch (error) {
-      cancelMigration();
-      toastr.error(error || t("Common:SomethingWentWrong"));
-      setIsFileError(true);
-      setLoadingStatus("none");
-      setIsError(true);
-      clearInterval(uploadInterval.current);
+      if (error instanceof Error) {
+        if (error.message === "Network Error") {
+          setIsNetworkError(true);
+        }
+        cancelMigration();
+        toastr.error(error || t("Common:SomethingWentWrong"));
+        setIsFileError(true);
+        setLoadingStatus("none");
+        clearInterval(uploadInterval.current);
+      }
     }
   }, [
     cancelMigration,
@@ -241,10 +245,24 @@ const SelectFileStep = (props: SelectFileStepProps) => {
     try {
       if (file instanceof Array) {
         setFiles(file.map((item) => item.name));
-        await multipleFileUploading(file, setProgress, isAbort);
+        await multipleFileUploading(
+          file,
+          setProgress,
+          isAbort,
+          setChunk,
+          startChunk,
+          setChunkSize,
+        );
       } else {
         setFiles([file.name]);
-        await singleFileUploading(file, setProgress, isAbort);
+        await singleFileUploading(
+          file,
+          setProgress,
+          isAbort,
+          setChunk,
+          startChunk,
+          setChunkSize,
+        );
       }
 
       if (isAbort.current) return;
@@ -252,9 +270,15 @@ const SelectFileStep = (props: SelectFileStepProps) => {
       await initMigrationName(migratorName);
       setLoadingStatus("proceed");
     } catch (error) {
-      toastr.error(error || t("Common:SomethingWentWrong"));
-      setIsFileError(true);
-      setLoadingStatus("none");
+      if (error instanceof Error) {
+        if (error.message === "Network Error") {
+          setIsNetworkError(true);
+        }
+
+        toastr.error(error || t("Common:SomethingWentWrong"));
+        setIsFileError(true);
+        setLoadingStatus("none");
+      }
     } finally {
       isAbort.current = false;
     }
@@ -273,8 +297,37 @@ const SelectFileStep = (props: SelectFileStepProps) => {
     setFailTries(FAIL_TRIES);
     setIsInfiniteProgress(true);
     setMigratingWorkspace(migratorName);
+    setFile(file);
+    setChunkSize(0);
+    setChunk(0);
+    isAbort.current = false;
 
     onUploadFile(file);
+  };
+
+  const onUploadToServer = () => {
+    if (!(uploadFile instanceof File) && !(uploadFile instanceof Array)) return;
+
+    const size =
+      uploadFile instanceof Array
+        ? Math.ceil(
+            uploadFile.reduce((acc, curr) => acc + curr.size, 0) / chunkSize,
+          )
+        : Math.ceil(uploadFile.size / chunkSize);
+
+    if (size > startChunk) {
+      setProgress(0);
+      setIsNetworkError(false);
+      setIsFileError(false);
+      setIsSaveDisabled(true);
+      setLoadingStatus("upload");
+      setFailTries(FAIL_TRIES);
+      setIsInfiniteProgress(true);
+      setMigratingWorkspace(migratorName);
+      onUploadFile(uploadFile);
+    } else {
+      setLoadingStatus("proceed");
+    }
   };
 
   const onDownloadArchives = async () => {
@@ -399,7 +452,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
             </Box>
           )}
 
-          {isError ? (
+          {isNetworkError ? (
             <SaveCancelButtons
               className="save-cancel-buttons"
               onSaveClick={onUploadToServer}
@@ -407,9 +460,6 @@ const SelectFileStep = (props: SelectFileStepProps) => {
               saveButtonLabel={t("Settings:UploadToServer")}
               cancelButtonLabel={t("Common:Back")}
               displaySettings
-              saveButtonDisabled={
-                migratingWorkspace !== migratorName || isSaveDisabled
-              }
               showReminder
             />
           ) : (

@@ -332,7 +332,11 @@ class ImportAccountsStore {
     files: File[],
     setProgress: (progress: number) => void,
     isAbort: React.MutableRefObject<boolean>,
+    setChunk: React.Dispatch<React.SetStateAction<number>>,
+    startChunk: number,
+    setChunkSize: React.Dispatch<React.SetStateAction<number>>,
   ) => {
+    let chunk = 0;
     try {
       const location = combineUrl(
         window.location.origin,
@@ -341,10 +345,14 @@ class ImportAccountsStore {
       const requestsDataArray: { formData: FormData; fileName: string }[] = [];
 
       const res: { data: { ChunkSize: number } } = await axios.post(
-        `${location}?Init=true`,
+        `${location}?Init=${startChunk === 0}`,
       );
 
+      if (!res.data.ChunkSize) return;
+
       const chunkUploadSize = res.data.ChunkSize;
+
+      setChunkSize(chunkUploadSize);
 
       if (isAbort!.current) return;
 
@@ -365,7 +373,7 @@ class ImportAccountsStore {
         }
       });
 
-      let chunk = 0;
+      chunk = startChunk || 0;
 
       while (
         chunk < chunksNumber &&
@@ -383,7 +391,7 @@ class ImportAccountsStore {
         chunk += 1;
       }
     } catch (e) {
-      console.error(e);
+      setChunk(chunk);
     }
   };
 
@@ -391,19 +399,29 @@ class ImportAccountsStore {
     file: File,
     setProgress: (progress: number) => void,
     isAbort: React.MutableRefObject<boolean>,
+    setChunk: React.Dispatch<React.SetStateAction<number>>,
+    startChunk: number,
+    setChunkSize: React.Dispatch<React.SetStateAction<number>>,
   ) => {
+    let chunk = 0;
     try {
       const location = combineUrl(
         window.location.origin,
         "migrationFileUpload.ashx",
       );
-      const requestsDataArray = [];
-      let chunk = 0;
 
       const res: { data: { ChunkSize: number } } = await axios.post(
-        `${location}?Init=true`,
+        `${location}?Init=${startChunk === 0}`,
       );
+
+      if (!res.data.ChunkSize) return;
+
       const chunkUploadSize = res.data.ChunkSize;
+
+      setChunkSize(chunkUploadSize);
+
+      const requestsDataArray = [];
+
       const chunks = Math.ceil(file.size / chunkUploadSize);
 
       if (isAbort.current) return;
@@ -416,7 +434,7 @@ class ImportAccountsStore {
         chunk += 1;
       }
 
-      chunk = 0;
+      chunk = startChunk || 0;
       while (
         chunk < chunks &&
         (this.fileLoadingStatus === "upload" ||
@@ -433,7 +451,7 @@ class ImportAccountsStore {
         chunk += 1;
       }
     } catch (e) {
-      console.error(e);
+      setChunk(chunk);
     }
   };
 

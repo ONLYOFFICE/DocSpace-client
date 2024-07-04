@@ -105,7 +105,7 @@ const confirmRoutes = [
   {
     path: "LinkInvite",
     element: (
-      <ConfirmRoute doAuthenticated={AuthenticatedAction.Redirect}>
+      <ConfirmRoute doAuthenticated={AuthenticatedAction.None}>
         <CreateUserForm />
       </ConfirmRoute>
     ),

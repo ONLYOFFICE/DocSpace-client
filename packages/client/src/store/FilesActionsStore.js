@@ -660,9 +660,12 @@ class FilesActionStore {
     }
   };
 
-  downloadAction = (label, item, folderId) => {
+  downloadAction = (label, item) => {
     const { bufferSelection } = this.filesStore;
     const { openUrl } = this.settingsStore;
+    const { id, isFolder } = this.selectedFolderStore;
+
+    const downloadAsArchive = id === item?.id && isFolder === item?.isFolder;
 
     const selection = item
       ? [item]
@@ -678,7 +681,7 @@ class FilesActionStore {
     let folderIds = [];
     const items = [];
 
-    if (selection.length === 1 && selection[0].fileExst && !folderId) {
+    if (selection.length === 1 && selection[0].fileExst && !downloadAsArchive) {
       openUrl(selection[0].viewUrl, UrlActionType.Download);
       return Promise.resolve();
     }

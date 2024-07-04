@@ -70,9 +70,23 @@ class TableHeader extends React.Component<
   }
 
   componentDidUpdate(prevProps: TableHeaderProps) {
-    const { columns, columnStorageName } = this.props;
+    const {
+      columns,
+      infoPanelVisible,
+      columnStorageName,
+      columnInfoPanelStorageName,
+    } = this.props;
 
     if (columnStorageName === prevProps.columnStorageName) {
+      const storageSize = infoPanelVisible
+        ? localStorage.getItem(columnInfoPanelStorageName)
+        : localStorage.getItem(columnStorageName);
+
+      // columns.length + 1 - its settings column
+      if (storageSize && storageSize.split(" ").length !== columns.length + 1) {
+        return this.resetColumns();
+      }
+
       for (let index in columns) {
         if (columns[index].enable !== prevProps.columns[index].enable) {
           return this.resetColumns();
@@ -343,9 +357,6 @@ class TableHeader extends React.Component<
     const storageSize =
       !resetColumnsSize && localStorage.getItem(columnStorageName);
 
-    const storageInfoSize =
-      !resetColumnsSize && localStorage.getItem(columnInfoPanelStorageName);
-
     // TODO: If defaultSize(75px) is less than defaultMinColumnSize(110px) the calculations work correctly
     const defaultSize =
       columns.find((col) => col.defaultSize && col.enable)?.defaultSize || 0;
@@ -366,10 +377,6 @@ class TableHeader extends React.Component<
 
     const tableContainer = storageSize
       ? storageSize.split(" ")
-      : containerGridTemplateColumns;
-
-    const tableInfoContainer = storageInfoSize
-      ? storageInfoSize.split(" ")
       : containerGridTemplateColumns;
 
     const { hideColumns } = this.state;

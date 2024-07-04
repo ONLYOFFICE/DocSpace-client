@@ -705,24 +705,15 @@ class SelectionStore {
     }
   };
 
-  onClickLogoutAllExceptThis = async (t, sessionId, displayName) => {
+  onClickLogoutAllExceptThis = async (t, exceptId, displayName) => {
     const { removeAllExceptThisEventId } = this.settingsSetupStore;
-
-    const bufferSelection = this.bufferSelection?.connections[0]?.id;
-    const selection = this.selection[0]?.connections[0]?.id;
-    const exceptSessionId = selection || bufferSelection;
-
-    if (!exceptSessionId)
-      return toastr.error(
-        t("Settings:UserAlreadyLoggedOut", { displayName: displayName }),
-      );
 
     try {
       this.setIsLoading(true);
-      await removeAllExceptThisEventId(exceptSessionId);
+      await removeAllExceptThisEventId(exceptId);
 
       const filteredConnections = this.items.sessions.filter(
-        (session) => session.id === sessionId,
+        (session) => session.id === exceptId,
       );
 
       const newData = {

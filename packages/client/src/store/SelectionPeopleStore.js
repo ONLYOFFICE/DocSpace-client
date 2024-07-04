@@ -596,7 +596,7 @@ class SelectionStore {
 
   updateDataFromSocket = (data) => {
     const newArr = [...this.dataFromSocket];
-    const indexTest = newArr.findIndex(({ id }) => id === data.id);
+    const index = newArr.findIndex(({ id }) => id === data.id);
     const currentSesstionIndex = this.sessionsData.findIndex(
       ({ id }) => id === data.id,
     );
@@ -609,13 +609,13 @@ class SelectionStore {
       };
     }
 
-    if (indexTest === -1) {
+    if (index === -1) {
       this.dataFromSocket = [...this.dataFromSocket, data];
       return;
     }
 
-    newArr[indexTest] = {
-      ...newArr[indexTest],
+    newArr[index] = {
+      ...newArr[index],
       sessions,
       status,
     };
@@ -628,8 +628,7 @@ class SelectionStore {
     const isCurrentSesstion = session.id === data?.id;
     const connectionsIsEmpty = session.connections.length === 0;
 
-    const lastIndex = -1;
-    const sessionData = data.sessions?.at(lastIndex);
+    const sessionData = data.sessions?.at(-1);
     if (isCurrentSesstion) return [{ ...first, ...sessionData }, ...other];
 
     if (connectionsIsEmpty) {

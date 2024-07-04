@@ -33,8 +33,8 @@ const DisableUserDialog = ({
   const onClickDisableUser = async () => {
     try {
       await updateUserStatus(EmployeeStatus.Disabled, userIds);
-      toastr.success(t("PeopleTranslations:SuccessChangeUserStatus"));
       await fetchData();
+      toastr.success(t("PeopleTranslations:SuccessChangeUserStatus"));
     } catch (error) {
       toastr.error(error);
     } finally {

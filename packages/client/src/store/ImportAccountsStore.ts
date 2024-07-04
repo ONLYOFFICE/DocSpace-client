@@ -335,6 +335,7 @@ class ImportAccountsStore {
     setChunk: React.Dispatch<React.SetStateAction<number>>,
     startChunk: number,
     setChunkSize: React.Dispatch<React.SetStateAction<number>>,
+    chunkSize: number,
   ) => {
     let chunk = 0;
     try {
@@ -344,17 +345,22 @@ class ImportAccountsStore {
       );
       const requestsDataArray: { formData: FormData; fileName: string }[] = [];
 
-      const res: { data: { ChunkSize: number } } = await axios.post(
-        `${location}?Init=${startChunk === 0}`,
-      );
+      let chunkUploadSize = 0;
 
-      if (!res.data.ChunkSize) return;
+      if (chunkSize) {
+        chunkUploadSize = chunkSize;
+      } else {
+        const res: { data: { ChunkSize: number } } = await axios.post(
+          `${location}?Init=${startChunk === 0}`,
+        );
 
-      const chunkUploadSize = res.data.ChunkSize;
+        chunkUploadSize = res.data.ChunkSize;
+        setChunkSize(chunkUploadSize);
+      }
 
-      setChunkSize(chunkUploadSize);
+      if (!chunkUploadSize) return;
 
-      if (isAbort!.current) return;
+      if (isAbort.current) return;
 
       const chunksNumber = files
         .map((file) => Math.ceil(file.size / chunkUploadSize))
@@ -402,6 +408,7 @@ class ImportAccountsStore {
     setChunk: React.Dispatch<React.SetStateAction<number>>,
     startChunk: number,
     setChunkSize: React.Dispatch<React.SetStateAction<number>>,
+    chunkSize: number,
   ) => {
     let chunk = 0;
     try {
@@ -410,15 +417,20 @@ class ImportAccountsStore {
         "migrationFileUpload.ashx",
       );
 
-      const res: { data: { ChunkSize: number } } = await axios.post(
-        `${location}?Init=${startChunk === 0}`,
-      );
+      let chunkUploadSize = 0;
 
-      if (!res.data.ChunkSize) return;
+      if (chunkSize) {
+        chunkUploadSize = chunkSize;
+      } else {
+        const res: { data: { ChunkSize: number } } = await axios.post(
+          `${location}?Init=${startChunk === 0}`,
+        );
 
-      const chunkUploadSize = res.data.ChunkSize;
+        chunkUploadSize = res.data.ChunkSize;
+        setChunkSize(chunkUploadSize);
+      }
 
-      setChunkSize(chunkUploadSize);
+      if (!chunkUploadSize) return;
 
       const requestsDataArray = [];
 

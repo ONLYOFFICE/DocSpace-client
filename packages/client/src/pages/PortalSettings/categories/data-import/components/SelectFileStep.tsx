@@ -252,6 +252,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           setChunk,
           startChunk,
           setChunkSize,
+          chunkSize,
         );
       } else {
         setFiles([file.name]);
@@ -262,6 +263,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           setChunk,
           startChunk,
           setChunkSize,
+          chunkSize,
         );
       }
 

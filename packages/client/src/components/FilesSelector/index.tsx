@@ -138,6 +138,8 @@ const FilesSelectorWrapper = ({
 
   roomsFolderId,
   openRoot,
+
+  filesSettings,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -387,8 +389,7 @@ const FilesSelectorWrapper = ({
       }
       getFilesArchiveError={getFilesArchiveError}
       withCreate={(isMove || isCopy || isRestore || isRestoreAll) ?? false}
-      // createDefineRoomLabel="New filling from room"
-      // createDefineRoomType={RoomsType.FormRoom}
+      filesSettings={filesSettings}
     />
   );
 };
@@ -460,7 +461,7 @@ export default inject(
       setSelected,
       filesSettingsStore,
     } = filesStore;
-    const { getIcon } = filesSettingsStore;
+    const { getIcon, filesSettings } = filesSettingsStore;
     const { isVisible: infoPanelIsVisible, infoPanelSelection } =
       infoPanelStore;
 
@@ -514,6 +515,8 @@ export default inject(
         ? +sessionPath
         : fromFolderId);
 
+    console.log(filesSettings);
+
     return {
       fromFolderId,
       parentId,
@@ -551,6 +554,7 @@ export default inject(
 
       roomsFolderId,
       currentFolderId: folderId,
+      filesSettings,
     };
   },
 )(observer(FilesSelectorWrapper));

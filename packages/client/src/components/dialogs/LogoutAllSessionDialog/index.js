@@ -52,16 +52,16 @@ const LogoutAllSessionDialog = ({
 }) => {
   const [isChecked, setIsChecked] = useState(false);
   const isProfile = location.pathname.includes("/profile");
-  const selectionId = selection[0]?.connections[0]?.id;
-  const bufferSelectionId = bufferSelection?.connections[0]?.id;
-
-  const exceptId = selectionId || bufferSelectionId;
 
   const onChangeCheckbox = () => {
     setIsChecked((prev) => !prev);
   };
 
   const onClickLogout = () => {
+    const selectionId = selection[0]?.connections[0]?.id;
+    const bufferSelectionId = bufferSelection?.connections[0]?.id;
+    const exceptId = selectionId || bufferSelectionId;
+
     try {
       if (!isChecked) {
         isSeveralSelection
@@ -79,10 +79,14 @@ const LogoutAllSessionDialog = ({
   };
 
   const onClickRemove = () => {
-    if (isChecked) {
-      onRemoveAllSessions();
-    } else {
-      onRemoveAllExceptThis();
+    try {
+      if (isChecked) {
+        onRemoveAllSessions();
+      } else {
+        onRemoveAllExceptThis();
+      }
+    } catch (error) {
+      toastr.error(error);
     }
   };
 

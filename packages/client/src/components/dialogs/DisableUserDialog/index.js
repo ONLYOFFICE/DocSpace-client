@@ -13,6 +13,7 @@ const DisableUserDialog = ({
   isLoading,
   fetchData,
   updateUserStatus,
+  clearSelection,
 }) => {
   const onlyOneUser = userIds.length === 1;
 
@@ -30,10 +31,16 @@ const DisableUserDialog = ({
   bodyText = bodyText + t("ChangeUserStatusDialog:DisableGeneralDescription");
 
   const onClickDisableUser = async () => {
-    await updateUserStatus(EmployeeStatus.Disabled, userIds);
-    toastr.success(t("PeopleTranslations:SuccessChangeUserStatus"));
-    await fetchData();
-    onClose();
+    try {
+      await updateUserStatus(EmployeeStatus.Disabled, userIds);
+      toastr.success(t("PeopleTranslations:SuccessChangeUserStatus"));
+      await fetchData();
+    } catch (error) {
+      toastr.error(error);
+    } finally {
+      clearSelection();
+      onClose();
+    }
   };
 
   return (

@@ -161,6 +161,7 @@ const Sessions = ({
           fetchData={fetchData}
           userIds={userIds}
           updateUserStatus={updateUserStatus}
+          clearSelection={clearSelection}
         />
       )}
 

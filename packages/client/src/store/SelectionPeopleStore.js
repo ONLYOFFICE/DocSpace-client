@@ -504,13 +504,17 @@ class SelectionStore {
     return parsedDate.format(locale);
   };
 
-  findSessionIndexByUserId = (userId) => {
-    return this.dataFromSocket.findIndex((data) => {
-      if (Array.isArray(userId)) {
-        return userId.some((id) => id === data.id);
+  findSessionIndexByUserId = (userIds) => {
+    if (!Array.isArray(userIds)) {
+      userIds = [userIds];
+    }
+
+    return this.dataFromSocket.reduce((indexes, data, index) => {
+      if (userIds.includes(data.id)) {
+        indexes.push(index);
       }
-      return data.id === userId;
-    });
+      return indexes;
+    }, []);
   };
 
   sessisonLogout = ({ userId, date }) => {
@@ -774,19 +778,31 @@ class SelectionStore {
     }
   };
 
-  onClickLogoutAllUsers = async (t) => {
+  onClickLogoutAllUsers = async (t, userIds) => {
     const { logoutAllUsers } = this.settingsSetupStore;
-    const userIds = this.selection.flatMap((data) =>
-      data.items.map((connection) => connection.userId),
-    );
+
     try {
       this.setIsLoading(true);
       await logoutAllUsers(userIds);
+
+      const newData = {
+        ...this.items,
+        sessions: [],
+      };
+
+      this.setItems(newData);
+      const indexes = this.findSessionIndexByUserId(userIds);
+
+      indexes.forEach((index) => {
+        this.dataFromSocket[index] = newData;
+      });
+
       toastr.success(t("LoggedOutBySelectedUsers"));
     } catch (error) {
       toastr.error(error);
     } finally {
       this.setIsLoading(false);
+      this.clearSelection();
     }
   };
 }

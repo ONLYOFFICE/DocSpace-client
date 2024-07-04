@@ -687,7 +687,9 @@ class ContextOptionsStore {
   };
 
   onOpenPDFEditDialog = (id) => {
-    this.dialogsStore.setPdfFormEditVisible(true, id);
+    this.filesStore.openDocEditor(id, false, null, true);
+
+    // this.dialogsStore.setPdfFormEditVisible(true, id);
   };
 
   filterModel = (model, filter) => {
@@ -1434,7 +1436,7 @@ class ContextOptionsStore {
       {
         id: "option_edit-pdf",
         key: "edit-pdf",
-        label: t("Common:EditPDFForm"),
+        label: t("Common:EditButton"),
         icon: AccessEditReactSvgUrl,
         onClick: () => this.onOpenPDFEditDialog(item.id),
         disabled: false,

@@ -492,6 +492,19 @@ class SelectionStore {
     return this.fromDateAgo[sessionId] || "";
   };
 
+  get isMe() {
+    const { id } = this.peopleStore.userStore.user;
+
+    const selectionUserId = this.selection.map((user) => user.id);
+
+    const userIds =
+      this.bufferSelection?.id !== undefined
+        ? [this.bufferSelection.id, ...selectionUserId]
+        : [...selectionUserId];
+
+    return userIds.includes(id);
+  }
+
   convertDate = (t, dateString, locale) => {
     const parsedDate = moment(new Date(dateString).toISOString());
     const now = moment();

@@ -39,7 +39,6 @@ import {
   TAccessRight,
   SelectorProps,
   TSelectorBreadCrumbs,
-  TSelectorCancelButton,
   TSelectorItem,
   TSelectorSelectAll,
   TSelectorAccessRights,
@@ -48,11 +47,13 @@ import {
   TSelectorTabs,
   TSelectorInfo,
   TSelectorSearch,
+  TSelectorCancelButton,
 } from "./Selector.types";
 import { EmptyScreenProvider } from "./contexts/EmptyScreen";
 import { SearchProvider } from "./contexts/Search";
 import { BreadCrumbsProvider } from "./contexts/BreadCrumbs";
 import { TabsProvider } from "./contexts/Tabs";
+import { SelectAllProvider } from "./contexts/SelectAll";
 
 const Selector = ({
   id,
@@ -145,6 +146,7 @@ const Selector = ({
   const [newSelectedItems, setNewSelectedItems] = React.useState<
     TSelectorItem[]
   >([]);
+
   const [selectedTabItems, setSelectedTabItems] = React.useState<{
     [key: string]: TSelectorItem[];
   }>({});
@@ -154,6 +156,7 @@ const Selector = ({
   );
   const [isFooterCheckboxChecked, setIsFooterCheckboxChecked] =
     React.useState<boolean>(isChecked || false);
+
   const [selectedAccess, setSelectedAccess] =
     React.useState<TAccessRight | null>(() => {
       if (selectedAccessRight) return { ...selectedAccessRight };
@@ -465,13 +468,8 @@ const Selector = ({
         selectAllLabel,
         selectAllIcon,
         onSelectAll: onSelectAllAction,
-        isAllIndeterminate,
-        isAllChecked,
       }
-    : {
-        isAllIndeterminate,
-        isAllChecked,
-      };
+    : {};
 
   const searchProps: TSelectorSearch = withSearch
     ? {
@@ -485,11 +483,11 @@ const Selector = ({
       }
     : {};
 
-  const cancelButtonProps = withCancelButton
+  const cancelButtonProps: TSelectorCancelButton = withCancelButton
     ? { withCancelButton, onCancel, cancelButtonLabel, cancelButtonId }
-    : ({} as TSelectorCancelButton);
+    : {};
 
-  const accessRightsProps = withAccessRights
+  const accessRightsProps: TSelectorAccessRights = withAccessRights
     ? {
         withAccessRights,
         accessRights,
@@ -497,19 +495,16 @@ const Selector = ({
         onAccessRightsChange: onChangeAccessRightsAction,
         accessRightsMode,
       }
-    : ({} as TSelectorAccessRights);
+    : {};
 
-  const inputProps = withFooterInput
+  const inputProps: TSelectorFooterInput = withFooterInput
     ? {
         withFooterInput,
         footerInputHeader,
         currentFooterInputValue: newFooterInputValue,
         setNewFooterInputValue,
       }
-    : ({
-        currentFooterInputValue: newFooterInputValue,
-        setNewFooterInputValue,
-      } as TSelectorFooterInput);
+    : { setNewFooterInputValue };
 
   const checkboxProps: TSelectorFooterCheckbox = withFooterCheckbox
     ? {
@@ -584,49 +579,53 @@ const Selector = ({
         <SearchProvider {...searchProps}>
           <BreadCrumbsProvider {...breadCrumbsProps}>
             <TabsProvider {...tabsProps}>
-              {withHeader && <Header {...headerProps} />}
-              <Body
-                withHeader={withHeader}
-                footerVisible={footerVisible || !!alwaysShowFooter}
-                items={[...renderedItems]}
-                isMultiSelect={isMultiSelect}
-                onSelect={onSelectAction}
-                hasNextPage={hasNextPage}
-                isNextPageLoading={isNextPageLoading}
-                loadMoreItems={loadMoreItems}
-                renderCustomItem={renderCustomItem}
-                totalItems={totalItems || 0}
-                isLoading={isLoading}
-                rowLoader={rowLoader}
-                withFooterInput={withFooterInput}
-                withFooterCheckbox={withFooterCheckbox}
-                descriptionText={descriptionText}
-                inputItemVisible={inputItemVisible}
-                setInputItemVisible={setInputItemVisible}
-                // select all
+              <SelectAllProvider
                 {...onSelectAllProps}
-                // info
-                {...infoProps}
-              />
-              {(footerVisible || alwaysShowFooter) && (
-                <Footer
+                isAllChecked={isAllChecked}
+                isAllIndeterminate={isAllIndeterminate}
+              >
+                {withHeader && <Header {...headerProps} />}
+                <Body
+                  withHeader={withHeader}
+                  footerVisible={footerVisible || !!alwaysShowFooter}
+                  items={[...renderedItems]}
                   isMultiSelect={isMultiSelect}
-                  selectedItemsCount={newSelectedItems.length}
-                  onSubmit={onSubmitAction}
-                  submitButtonLabel={submitButtonLabel}
-                  disableSubmitButton={disableSubmitButton}
-                  submitButtonId={submitButtonId}
-                  requestRunning={requestRunning}
-                  // cancel button
-                  {...cancelButtonProps}
-                  // access rights
-                  {...accessRightsProps}
-                  // input
-                  {...inputProps}
-                  // checkbox
-                  {...checkboxProps}
+                  onSelect={onSelectAction}
+                  hasNextPage={hasNextPage}
+                  isNextPageLoading={isNextPageLoading}
+                  loadMoreItems={loadMoreItems}
+                  renderCustomItem={renderCustomItem}
+                  totalItems={totalItems || 0}
+                  isLoading={isLoading}
+                  rowLoader={rowLoader}
+                  withFooterInput={withFooterInput}
+                  withFooterCheckbox={withFooterCheckbox}
+                  descriptionText={descriptionText}
+                  inputItemVisible={inputItemVisible}
+                  setInputItemVisible={setInputItemVisible}
+                  // info
+                  {...infoProps}
                 />
-              )}
+                {(footerVisible || alwaysShowFooter) && (
+                  <Footer
+                    isMultiSelect={isMultiSelect}
+                    selectedItemsCount={newSelectedItems.length}
+                    onSubmit={onSubmitAction}
+                    submitButtonLabel={submitButtonLabel}
+                    disableSubmitButton={disableSubmitButton}
+                    submitButtonId={submitButtonId}
+                    requestRunning={requestRunning}
+                    // cancel button
+                    {...cancelButtonProps}
+                    // access rights
+                    {...accessRightsProps}
+                    // input
+                    {...inputProps}
+                    // checkbox
+                    {...checkboxProps}
+                  />
+                )}
+              </SelectAllProvider>
             </TabsProvider>
           </BreadCrumbsProvider>
         </SearchProvider>

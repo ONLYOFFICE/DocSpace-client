@@ -24,18 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import dynamic from "next/dynamic";
-import Loading from "./loading";
-
-const ConfirmRoute = dynamic(() => import("../confirm/confirmRoute"), {
-  ssr: false,
-  loading: () => <Loading />,
-});
+import { getSettings } from "@/utils/actions";
+import ConfirmRoute from "./confirmRoute";
 
 export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <ConfirmRoute>{children}</ConfirmRoute>;
+  const settings = await getSettings();
+
+  return (
+    <>
+      {settings && typeof settings !== "string" && (
+        <ConfirmRoute
+          defaultPage={settings?.defaultPage}
+          socketUrl={settings?.socketUrl}
+        >
+          {children}
+        </ConfirmRoute>
+      )}
+    </>
+  );
 }

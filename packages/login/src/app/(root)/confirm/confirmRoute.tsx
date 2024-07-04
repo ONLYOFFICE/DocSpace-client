@@ -26,159 +26,170 @@
 
 "use client";
 
-import React, { ReactNode, useCallback, useEffect, useState } from "react";
+import React, { createContext, useCallback, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getCookie } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { notFound, usePathname, useSearchParams } from "next/navigation";
-import { getSettings, logout } from "@/utils/actions";
+import { logout } from "@/utils/actions";
 import { AuthenticatedAction, ValidationResult } from "@/utils/enums";
-//change to a function from actions
 import { checkConfirmLink } from "@docspace/shared/api/user";
+import {
+  TConfirmLinkResult,
+  TConfirmLinkParams,
+  ConfirmRouteProps,
+} from "@/types";
+import Loading from "./loading";
 
-interface ConfirmRouteProps {
-  doAuthenticated?: AuthenticatedAction;
-  children: ReactNode | string;
-}
+export const ConfirmRouteContext = createContext({
+  linkData: {},
+  roomData: {},
+});
 
 function ConfirmRoute(props: ConfirmRouteProps) {
-  const { doAuthenticated = AuthenticatedAction.None, children } = props;
+  const {
+    doAuthenticated = AuthenticatedAction.None,
+    defaultPage,
+    socketUrl,
+    children,
+  } = props;
 
-  const [settingsState, setSettingsState] = useState({
-    defaultPage: "/",
-    socketUrl: "",
-    isLoadedSettings: false,
-  });
-  const [stateData, setStateData] = React.useState({
+  const [stateData, setStateData] = useState({
     linkData: {},
     roomData: {},
   });
   const [confirmLinkResult, setConfirmLinkResult] =
-    useState<ValidationResult>();
-  const [error, setError] = useState();
+    useState<TConfirmLinkResult>();
+  const [error, setError] = useState<unknown>();
+  const [loading, setLoading] = useState(true);
 
-  const { i18n, t } = useTranslation(["Confirm", "Common", "Wizard"]);
+  const { i18n, t } = useTranslation(["Common"]);
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
-  const isAuthenticated =
-    settingsState.isLoadedSettings && !!settingsState.socketUrl;
+  const isAuthenticated = !!socketUrl;
 
-  const getData = useCallback(() => {
-    const queryParams = Object.fromEntries(new URLSearchParams(searchParams));
+  const getLinkParams = useCallback(() => {
+    const queryParams = Object.fromEntries(
+      new URLSearchParams(searchParams),
+    ) as TConfirmLinkParams;
 
     const posSeparator = pathname.lastIndexOf("/");
     const type = !!posSeparator ? pathname?.slice(posSeparator + 1) : "";
 
-    const confirmLinkData = Object.assign({ type }, queryParams);
+    const confirmLinkParams: TConfirmLinkParams = Object.assign(
+      { type },
+      queryParams,
+    );
 
-    return { type, confirmLinkData };
+    return { type, confirmLinkParams };
   }, [pathname, searchParams]);
 
-  const { type, confirmLinkData } = getData();
+  const getConfirmLinkResult = useCallback(async () => {
+    const { confirmLinkParams } = getLinkParams();
 
-  useEffect(() => {
-    getSettings().then((res) => {
-      if (typeof res === "string" || !res) return;
+    try {
+      const response = (await checkConfirmLink(
+        confirmLinkParams,
+      )) as TConfirmLinkResult;
 
-      setSettingsState({
-        defaultPage: res?.defaultPage ?? "/",
-        socketUrl: res?.socketUrl,
-        isLoadedSettings: true,
-      });
-    });
-  }, []);
+      setConfirmLinkResult(response);
+    } catch (error) {
+      setError(error);
+    }
+  }, [getLinkParams]);
 
   useEffect(() => {
     if (location.search.includes("culture")) return;
     const lng = getCookie(LANGUAGE);
 
-    settingsState.isLoadedSettings && i18n.changeLanguage(lng);
-  }, [settingsState.isLoadedSettings, i18n]);
+    isAuthenticated && i18n.changeLanguage(lng);
+  }, [isAuthenticated, i18n]);
 
   useEffect(() => {
-    if (!settingsState.isLoadedSettings) return;
+    if (isAuthenticated) return;
 
     if (isAuthenticated && doAuthenticated != AuthenticatedAction.None) {
       if (doAuthenticated == AuthenticatedAction.Redirect)
-        return window.location.replace(settingsState.defaultPage);
+        return window.location.replace(defaultPage || "/");
 
       if (doAuthenticated == AuthenticatedAction.Logout) logout();
     }
-  }, [
-    doAuthenticated,
-    isAuthenticated,
-    settingsState.defaultPage,
-    settingsState.isLoadedSettings,
-  ]);
+  }, [doAuthenticated, isAuthenticated, defaultPage, socketUrl]);
 
   useEffect(() => {
-    if (Object.keys(confirmLinkData).length === 0) return;
+    getConfirmLinkResult();
+  }, [getConfirmLinkResult]);
 
-    checkConfirmLink(confirmLinkData)
-      ?.then((res) => {
-        setConfirmLinkResult(res.result);
+  useEffect(() => {
+    if (confirmLinkResult?.result == undefined) return;
 
-        if (res.result !== ValidationResult.Ok) return;
+    const { confirmLinkParams } = getLinkParams();
 
+    switch (confirmLinkResult.result) {
+      case ValidationResult.Ok:
         const confirmHeader = searchParams.toString().slice(1);
         const linkData = {
-          ...confirmLinkData,
+          ...confirmLinkParams,
           confirmHeader,
         };
 
         const roomData = {
-          roomId: res?.roomId,
-          title: res?.title,
+          roomId: confirmLinkResult?.roomId,
+          title: confirmLinkResult?.title,
         };
-      })
-      .catch((error) => setError(error?.response?.status));
-  }, [confirmLinkData, searchParams]);
-
-  useEffect(() => {
-    if (
-      confirmLinkResult !== undefined &&
-      confirmLinkResult !== ValidationResult.Ok
-    ) {
-      switch (confirmLinkResult) {
-        case ValidationResult.Invalid:
-        case ValidationResult.Expired:
-          console.error("expired link", {
-            confirmLinkData,
-            confirmLinkResult,
-          });
-          notFound();
-        case ValidationResult.TariffLimit:
-          console.error("tariff limit", {
-            confirmLinkData,
-            confirmLinkResult,
-          });
-          throw new Error(t("Common:QuotaPaidUserLimitError"));
-        default:
-          console.error("expired link", {
-            confirmLinkData,
-            confirmLinkResult,
-          });
-          notFound();
-      }
+        setStateData((val) => ({ ...val, linkData, roomData }));
+        setLoading(false);
+        break;
+      case ValidationResult.Invalid:
+      case ValidationResult.Expired:
+        console.error("expired link", {
+          confirmLinkParams,
+          confirmLinkResult,
+        });
+        notFound();
+      case ValidationResult.TariffLimit:
+        console.error("tariff limit", {
+          confirmLinkParams,
+          confirmLinkResult,
+        });
+        throw new Error(t("Common:QuotaPaidUserLimitError"));
+      default:
+        console.error("expired link", {
+          confirmLinkParams,
+          confirmLinkResult,
+        });
+        notFound();
     }
-  }, [confirmLinkResult, confirmLinkData, t]);
+  }, [confirmLinkResult, getLinkParams, t, searchParams]);
 
-  if (!type && confirmLinkData.type)
+  const { type, confirmLinkParams } = getLinkParams();
+
+  if (!type && confirmLinkParams.type)
     return (
       <Navigate
-        to={`/confirm/${confirmLinkData.type}?${searchParams.toString()}`}
+        to={`/confirm/${confirmLinkParams.type}?${searchParams.toString()}`}
       />
     );
 
   if (error) {
-    console.error("FAILED checkConfirmLink", { error, confirmLinkData });
+    console.error("FAILED checkConfirmLink", { error, confirmLinkParams });
     notFound();
   }
 
-  return children;
+  if (loading) {
+    return <Loading />;
+  }
+
+  return (
+    <ConfirmRouteContext.Provider
+      value={{ linkData: stateData.linkData, roomData: stateData.roomData }}
+    >
+      {children}
+    </ConfirmRouteContext.Provider>
+  );
 }
 
 export default ConfirmRoute;

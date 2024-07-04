@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { AuthenticatedAction, ValidationResult } from "@/utils/enums";
 import {
   TCapabilities,
   TGetColorTheme,
@@ -34,6 +35,7 @@ import {
 } from "@docspace/shared/api/settings/types";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { RecaptchaType, ThemeKeys } from "@docspace/shared/enums";
+import { ReactNode } from "react";
 
 export type TDataContext = {
   settings?: TSettings;
@@ -41,15 +43,27 @@ export type TDataContext = {
   systemTheme?: ThemeKeys;
 };
 
-export type TСheckConfirmLink = {
+export type TConfirmLinkParams = {
   key: string;
-  emplType: number; //EmployeeType
+  emplType?: string;
   email: string;
-  UID: string;
-  type: string; //Confirm type
+  uid?: string;
+  type?: string;
   first: string;
   roomId: string;
 };
+
+export type TConfirmLinkResult = {
+  result: ValidationResult;
+  roomId?: string;
+  title?: string;
+};
+export interface ConfirmRouteProps {
+  doAuthenticated?: AuthenticatedAction;
+  defaultPage?: string;
+  socketUrl: string;
+  children: ReactNode | string;
+}
 
 export type GreetingContainersProps = {
   greetingSettings?: string;

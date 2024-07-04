@@ -52,6 +52,8 @@ class FilesSettingsStore {
   authStore;
   settingsStore;
 
+  filesSettings = null;
+
   isErrorSettings = null;
   expandedSetting = null;
 
@@ -131,6 +133,7 @@ class FilesSettingsStore {
   }
 
   setFilesSettings = (settings) => {
+    this.filesSettings = settings;
     const settingsItems = Object.keys(settings);
     for (let key of settingsItems) {
       this[key] = settings[key];

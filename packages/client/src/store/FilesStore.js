@@ -2120,11 +2120,15 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
       }
 
-      if (!isPdf || item.startFilling) {
+      if (
+        !isPdf ||
+        item.startFilling ||
+        item.rootFolderType === FolderType.USER
+      ) {
         fileOptions = this.removeOptions(fileOptions, ["open-pdf"]);
       }
 
-      if (!item.security.EditForm || item.startFilling) {
+      if (!isPdf || !item.security.EditForm || item.startFilling) {
         fileOptions = this.removeOptions(fileOptions, ["edit-pdf"]);
       }
 

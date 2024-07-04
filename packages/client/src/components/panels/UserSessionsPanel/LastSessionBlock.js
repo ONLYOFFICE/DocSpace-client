@@ -99,6 +99,7 @@ const StyledLastSessionBlock = styled.div`
 const LastSessionBlock = (props) => {
   const {
     t,
+    isMe,
     items,
     setDisplayName,
     setDisableDialogVisible,
@@ -152,12 +153,14 @@ const LastSessionBlock = (props) => {
       {
         key: "Separator",
         isSeparator: true,
+        disabled: isMe,
       },
       {
         key: "Disable",
         label: t("Common:DisableUserButton"),
         icon: RemoveSvgUrl,
         onClick: onClickDisable,
+        disabled: isMe,
       },
     ];
   };
@@ -227,11 +230,13 @@ const LastSessionBlock = (props) => {
 export default inject(({ setup, peopleStore }) => {
   const { setDisableDialogVisible, setLogoutAllDialogVisible } = setup;
 
-  const { getFromDateAgo, items, setDisplayName } = peopleStore.selectionStore;
+  const { isMe, getFromDateAgo, items, setDisplayName } =
+    peopleStore.selectionStore;
 
   return {
-    getFromDateAgo,
+    isMe,
     items,
+    getFromDateAgo,
     setDisplayName,
     setDisableDialogVisible,
     setLogoutAllDialogVisible,

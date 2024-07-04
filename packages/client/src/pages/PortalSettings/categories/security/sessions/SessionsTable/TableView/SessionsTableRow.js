@@ -155,6 +155,7 @@ const SessionsTableRow = (props) => {
     status,
     userId,
     connections,
+    isMe,
     locale,
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
@@ -221,12 +222,14 @@ const SessionsTableRow = (props) => {
     {
       key: "Separator",
       isSeparator: true,
+      disabled: isMe,
     },
     {
       key: "Disable",
       label: t("Common:DisableUserButton"),
       icon: RemoveSvgUrl,
       onClick: onClickDisable,
+      disabled: isMe,
     },
   ];
 
@@ -319,6 +322,7 @@ export default inject(
     const locale = (user && user.cultureName) || culture || "en";
 
     const {
+      isMe,
       setItems,
       setDisplayName,
       convertDate,
@@ -327,6 +331,7 @@ export default inject(
     } = peopleStore.selectionStore;
 
     return {
+      isMe,
       locale,
       setLogoutAllDialogVisible,
       setDisableDialogVisible,

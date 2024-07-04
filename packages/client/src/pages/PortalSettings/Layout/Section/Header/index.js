@@ -358,6 +358,7 @@ const SectionHeaderContent = (props) => {
 
   const {
     t,
+    isMe,
     isLoadedSectionHeader,
 
     isSetupleHeaderIndeterminate,
@@ -451,6 +452,7 @@ const SectionHeaderContent = (props) => {
           label: t("Common:DisableUserButton"),
           onClick: onClickDisable,
           iconUrl: RemoveSvgUrl,
+          disabled: isMe,
         },
       ]
     : [
@@ -594,6 +596,7 @@ export default inject(
       setDisplayName,
       allSessions,
       getFromDateAgo,
+      isMe,
     } = peopleStore.selectionStore;
 
     const { admins, selectorIsOpen } = setup.security.accessRight;
@@ -632,6 +635,7 @@ export default inject(
       setDisplayName,
       allSessions,
       getFromDateAgo,
+      isMe,
     };
   },
 )(

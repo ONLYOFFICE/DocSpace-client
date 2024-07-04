@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useContext } from "react";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
@@ -59,13 +59,13 @@ import {
 } from "../../components/selector/Selector.types";
 
 import useFilesHelper from "./hooks/useFilesHelper";
-import useLoadersHelper from "./hooks/useLoadersHelper";
 import useRoomsHelper from "./hooks/useRoomsHelper";
 import useRootHelper from "./hooks/useRootHelper";
 import useSocketHelper from "./hooks/useSocketHelper";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
 import { SettingsContextProvider } from "./contexts/Settings";
+import { LoadersContext, LoadersContextProvider } from "./contexts/Loaders";
 
 const FilesSelectorComponent = ({
   socketHelper,
@@ -115,6 +115,13 @@ const FilesSelectorComponent = ({
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
+  const {
+    isFirstLoad,
+    setIsFirstLoad,
+    showLoader,
+    showBreadCrumbsLoader,
+    isNextPageLoading,
+  } = useContext(LoadersContext);
 
   const [breadCrumbs, setBreadCrumbs] = React.useState<TBreadCrumb[]>([]);
   const [items, setItems] = React.useState<TSelectorItem[]>([]);
@@ -157,86 +164,65 @@ const FilesSelectorComponent = ({
     setTotal,
   });
 
-  const {
-    setIsBreadCrumbsLoading,
-    isNextPageLoading,
-    setIsNextPageLoading,
-    isFirstLoad,
-    setIsFirstLoad,
-    showBreadCrumbsLoader,
-    showLoader,
-  } = useLoadersHelper();
-
   const { isRoot, setIsRoot, getRootData } = useRootHelper({
-    setIsBreadCrumbsLoading,
+    treeFolders,
+    isUserOnly,
+
     setBreadCrumbs,
     setTotal,
     setItems,
-    treeFolders,
     setHasNextPage,
-    setIsNextPageLoading,
-    isUserOnly,
     setIsInit,
-    setIsFirstLoad,
   });
 
   const { getRoomList } = useRoomsHelper({
-    setIsBreadCrumbsLoading,
     setBreadCrumbs,
-    setIsNextPageLoading,
     setHasNextPage,
     setTotal,
     setItems,
-    isFirstLoad,
     setIsRoot,
-    searchValue,
-    isRoomsOnly,
-
     onSetBaseFolderPath,
-    isInit,
     setIsInit,
-    setIsFirstLoad,
-
-    withCreate,
-    createDefineRoomLabel,
-    createDefineRoomType,
-
     getRootData,
     setSelectedItemType,
     subscribe,
+
+    searchValue,
+    isRoomsOnly,
+    isInit,
+    withCreate,
+    createDefineRoomLabel,
+    createDefineRoomType,
   });
 
   const { getFileList } = useFilesHelper({
-    setIsBreadCrumbsLoading,
     setBreadCrumbs,
-    setIsNextPageLoading,
     setHasNextPage,
     setTotal,
     setItems,
-    selectedItemId,
-    isFirstLoad,
     setIsRoot,
-    searchValue,
-    disabledItems,
     setSelectedItemSecurity,
-    isThirdParty,
     setSelectedTreeNode,
-    filterParam,
     getRootData,
     onSetBaseFolderPath,
+    getRoomList,
+    setIsSelectedParentFolder,
+    getFilesArchiveError,
+    setIsInit,
+    setSelectedItemId,
+    setSelectedItemType,
+
+    selectedItemId,
+    searchValue,
+    disabledItems,
+    isThirdParty,
+    filterParam,
     isRoomsOnly,
     isUserOnly,
     rootThirdPartyId,
-    getRoomList,
-    setIsFirstLoad,
-    setIsSelectedParentFolder,
     roomsFolderId,
-    getFilesArchiveError,
     isInit,
-    setIsInit,
     withCreate,
-    setSelectedItemId,
-    setSelectedItemType,
   });
 
   const onClickBreadCrumb = React.useCallback(
@@ -634,9 +620,11 @@ const FilesSelectorComponent = ({
 const FilesSelector = (props: FilesSelectorProps) => {
   const { filesSettings, getIcon } = props;
   return (
-    <SettingsContextProvider settings={filesSettings} getIcon={getIcon}>
-      <FilesSelectorComponent {...props} />
-    </SettingsContextProvider>
+    <LoadersContextProvider>
+      <SettingsContextProvider settings={filesSettings} getIcon={getIcon}>
+        <FilesSelectorComponent {...props} />
+      </SettingsContextProvider>
+    </LoadersContextProvider>
   );
 };
 

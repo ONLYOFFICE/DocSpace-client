@@ -43,6 +43,9 @@ import { TSelectorItem } from "../../../components/selector";
 import { TData } from "../../../components/toast/Toast.type";
 import { TBreadCrumb } from "../../../components/selector/Selector.types";
 
+import { SettingsContext } from "../contexts/Settings";
+import { LoadersContext } from "../contexts/Loaders";
+
 import { PAGE_COUNT, DEFAULT_BREAD_CRUMB } from "../FilesSelector.constants";
 import { UseFilesHelpersProps } from "../FilesSelector.types";
 import {
@@ -50,16 +53,13 @@ import {
   convertFoldersToItems,
 } from "../FilesSelector.utils";
 import useInputItemHelper from "./useInputItemHelper";
-import { SettingsContext } from "../contexts/Settings";
 
 const useFilesHelper = ({
-  setIsNextPageLoading,
   setHasNextPage,
   setTotal,
   setItems,
   setBreadCrumbs,
-  setIsBreadCrumbsLoading,
-  isFirstLoad,
+
   selectedItemId,
   setIsRoot,
   searchValue,
@@ -80,12 +80,19 @@ const useFilesHelper = ({
   getFilesArchiveError,
   isInit,
   setIsInit,
-  setIsFirstLoad,
+
   withCreate,
   setSelectedItemId,
   setSelectedItemType,
 }: UseFilesHelpersProps) => {
   const { t } = useTranslation(["Common"]);
+  const {
+    isFirstLoad,
+    setIsFirstLoad,
+    setIsNextPageLoading,
+    setIsBreadCrumbsLoading,
+  } = useContext(LoadersContext);
+
   const { getIcon, extsWebEdited, filesSettingsLoading } =
     useContext(SettingsContext);
 

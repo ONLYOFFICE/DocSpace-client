@@ -646,7 +646,13 @@ class SelectionStore {
       return { ...data, ...session, connections };
     });
 
-    return sessions.filter((session) => session.connections.length !== 0);
+    const filteredSessions = sessions.filter(
+      (item) =>
+        item.connections.length !== 0 &&
+        item.sessions.some((session) => session.hasOwnProperty("id")),
+    );
+
+    return filteredSessions;
   }
 
   fetchData = async () => {

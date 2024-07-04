@@ -47,6 +47,7 @@ const LogoutAllSessionDialog = ({
   onLogoutAllUsers,
   onLogoutAllSessions,
   onLogoutAllExceptThis,
+  setUserSessionPanelVisible,
 }) => {
   const [isChecked, setIsChecked] = useState(false);
 
@@ -60,7 +61,7 @@ const LogoutAllSessionDialog = ({
     if (!isChecked) {
       isSeveralSelection
         ? onLogoutAllUsers(t, userIds)
-        : onLogoutAllSessions(t);
+        : onLogoutAllSessions(t).then(() => setUserSessionPanelVisible(false));
       onClose();
     } else {
       onLogoutAllExceptThis(t, exceptId, displayName);

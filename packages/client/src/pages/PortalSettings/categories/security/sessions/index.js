@@ -99,6 +99,7 @@ const Sessions = ({
   updateUserStatus,
   getLoginHistoryReport,
   isLoadingDownloadReport,
+  setUserSessionPanelVisible,
   isSessionsLoaded,
 }) => {
   const { t } = useTranslation([
@@ -197,15 +198,17 @@ const Sessions = ({
           onLogoutAllUsers={onClickLogoutAllUsers}
           onLogoutAllSessions={onClickLogoutAllSessions}
           onLogoutAllExceptThis={onClickLogoutAllExceptThis}
+          setUserSessionPanelVisible={setUserSessionPanelVisible}
         />
       )}
     </MainContainer>
   );
 };
 
-export default inject(({ settingsStore, setup, peopleStore }) => {
+export default inject(({ settingsStore, setup, peopleStore, dialogsStore }) => {
   const { updateUserStatus } = peopleStore.usersStore;
   const { currentDeviceType } = settingsStore;
+  const { setUserSessionPanelVisible } = dialogsStore;
   const {
     allSessions,
     displayName,
@@ -259,6 +262,7 @@ export default inject(({ settingsStore, setup, peopleStore }) => {
     updateUserStatus,
     getLoginHistoryReport,
     isLoadingDownloadReport,
+    setUserSessionPanelVisible,
     isSessionsLoaded: allSessions.length > 0,
   };
 })(observer(Sessions));

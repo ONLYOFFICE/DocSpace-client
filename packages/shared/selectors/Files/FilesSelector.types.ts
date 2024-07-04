@@ -66,7 +66,6 @@ export type UseSocketHelperProps = {
   setTotal: React.Dispatch<React.SetStateAction<number>>;
   disabledItems: (string | number)[];
   filterParam?: string;
-  getIcon: (fileExst: string) => string;
   withCreate: boolean;
 };
 
@@ -129,7 +128,7 @@ export type UseFilesHelpersProps = {
     isInit?: boolean,
     isErrorPath?: boolean,
   ) => Promise<void>;
-  getIcon: (fileExst: string) => string;
+
   getFilesArchiveError: (name: string) => string;
   isInit: boolean;
   setIsFirstLoad: (value: boolean) => void;
@@ -152,9 +151,11 @@ export type TSelectedFileInfo = {
   inPublic?: boolean | undefined;
 } | null;
 
+export type TGetIcon = (size: number, fileExst: string) => string;
+
 export type FilesSelectorProps = (
   | {
-      getIcon: (size: number, fileExst: string) => string;
+      getIcon: TGetIcon;
       filesSettings?: never;
     }
   | { getIcon?: never; filesSettings: TFilesSettings }

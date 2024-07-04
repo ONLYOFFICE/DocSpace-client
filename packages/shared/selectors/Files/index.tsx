@@ -63,16 +63,16 @@ import useLoadersHelper from "./hooks/useLoadersHelper";
 import useRoomsHelper from "./hooks/useRoomsHelper";
 import useRootHelper from "./hooks/useRootHelper";
 import useSocketHelper from "./hooks/useSocketHelper";
-import useFilesSettings from "./hooks/useFilesSettings";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
+import { SettingsContextProvider } from "./contexts/Settings";
 
-const FilesSelector = ({
+const FilesSelectorComponent = ({
   socketHelper,
   socketSubscribers,
   disabledItems,
   filterParam,
-  getIcon: getIconProp,
+
   treeFolders,
   onSetBaseFolderPath,
   isUserOnly,
@@ -106,7 +106,7 @@ const FilesSelector = ({
   setIsDataReady,
   withSearch: withSearchProp,
   withBreadCrumbs: withBreadCrumbsProp,
-  filesSettings,
+
   cancelButtonLabel,
 
   withCreate,
@@ -146,15 +146,12 @@ const FilesSelector = ({
 
   const [isInit, setIsInit] = React.useState(true);
 
-  const { getIcon } = useFilesSettings(getIconProp, filesSettings);
-
   const { subscribe, unsubscribe } = useSocketHelper({
     socketHelper,
     socketSubscribers,
     disabledItems,
     filterParam,
     withCreate,
-    getIcon,
     setItems,
     setBreadCrumbs,
     setTotal,
@@ -231,7 +228,6 @@ const FilesSelector = ({
     isUserOnly,
     rootThirdPartyId,
     getRoomList,
-    getIcon,
     setIsFirstLoad,
     setIsSelectedParentFolder,
     roomsFolderId,
@@ -632,6 +628,15 @@ const FilesSelector = ({
     <Portal visible={isPanelVisible} element={<div>{selectorComponent}</div>} />
   ) : (
     selectorComponent
+  );
+};
+
+const FilesSelector = (props: FilesSelectorProps) => {
+  const { filesSettings, getIcon } = props;
+  return (
+    <SettingsContextProvider settings={filesSettings} getIcon={getIcon}>
+      <FilesSelectorComponent {...props} />
+    </SettingsContextProvider>
   );
 };
 

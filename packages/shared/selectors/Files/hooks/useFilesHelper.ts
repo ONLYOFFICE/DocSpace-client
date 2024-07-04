@@ -24,13 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useContext } from "react";
 
 import { useTranslation } from "react-i18next";
 
 import FolderSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
 
-import { getFolder, getFolderInfo, getSettingsFiles } from "../../../api/files";
+import { getFolder, getFolderInfo } from "../../../api/files";
 import FilesFilter from "../../../api/files/filter";
 import {
   ApplyFilterOption,
@@ -50,6 +50,7 @@ import {
   convertFoldersToItems,
 } from "../FilesSelector.utils";
 import useInputItemHelper from "./useInputItemHelper";
+import { SettingsContext } from "../contexts/Settings";
 
 const useFilesHelper = ({
   setIsNextPageLoading,
@@ -73,7 +74,7 @@ const useFilesHelper = ({
   isUserOnly,
   rootThirdPartyId,
   getRoomList,
-  getIcon,
+
   setIsSelectedParentFolder,
   roomsFolderId,
   getFilesArchiveError,
@@ -85,6 +86,8 @@ const useFilesHelper = ({
   setSelectedItemType,
 }: UseFilesHelpersProps) => {
   const { t } = useTranslation(["Common"]);
+  const { getIcon, extsWebEdited, filesSettingsLoading } =
+    useContext(SettingsContext);
 
   const { addInputItem } = useInputItemHelper({
     withCreate,
@@ -111,7 +114,7 @@ const useFilesHelper = ({
 
   const getFileList = React.useCallback(
     async (sIndex: number) => {
-      if (requestRunning.current) return;
+      if (requestRunning.current || filesSettingsLoading) return;
 
       requestRunning.current = true;
       setIsNextPageLoading(true);
@@ -127,8 +130,6 @@ const useFilesHelper = ({
       const page = startIndex / PAGE_COUNT;
 
       const filter = FilesFilter.getDefault();
-
-      const { extsWebEdited } = await getSettingsFiles();
 
       filter.page = page;
       filter.pageCount = PAGE_COUNT;
@@ -408,11 +409,14 @@ const useFilesHelper = ({
       }
     },
     [
+      filesSettingsLoading,
       setIsNextPageLoading,
+      withCreate,
       searchValue,
       filterParam,
       selectedItemId,
       isUserOnly,
+      extsWebEdited,
       getRootData,
       setSelectedItemSecurity,
       getIcon,
@@ -430,14 +434,13 @@ const useFilesHelper = ({
       setIsBreadCrumbsLoading,
       roomsFolderId,
       setIsSelectedParentFolder,
-      withCreate,
       setItems,
       setTotal,
-      addInputItem,
       t,
+      addInputItem,
+      setSelectedItemType,
       setSelectedItemId,
       rootThirdPartyId,
-      setSelectedItemType,
     ],
   );
 

@@ -180,7 +180,10 @@ class ContextOptionsStore {
   };
 
   onClickLinkFillForm = (item) => {
-    return this.gotoDocEditor(false, item);
+    this.dialogsStore.setFillPDFDialogData(true, item);
+
+    // if(item)
+    // return this.gotoDocEditor(false, item);
   };
 
   onClickReconnectStorage = async (item, t) => {

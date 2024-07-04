@@ -118,6 +118,10 @@ class DialogsStore {
 
   selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;
   selectFileFormRoomOpenRoot = false;
+  fillPDFDialogData = {
+    visible: false,
+    data: null,
+  };
 
   constructor(
     authStore,
@@ -513,6 +517,13 @@ class DialogsStore {
   setPdfFormEditVisible = (visible, data) => {
     this.pdfFormEditVisible = visible;
     this.pdfFormEditData = data;
+  };
+
+  setFillPDFDialogData = (visible, data) => {
+    this.fillPDFDialogData = {
+      visible,
+      data,
+    };
   };
 }
 

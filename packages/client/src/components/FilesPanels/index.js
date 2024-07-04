@@ -77,6 +77,7 @@ import ChangeRoomOwnerPanel from "../panels/ChangeRoomOwnerPanel";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
 import { PDFFormEditingDialog } from "../dialogs/PDFFormEditingDialog";
 import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
+import { FillPDFDialog } from "../dialogs/FillPDFDialog";
 
 const Panels = (props) => {
   const {
@@ -131,6 +132,7 @@ const Panels = (props) => {
     shareFolderDialogVisible,
     pdfFormEditVisible,
     selectFileFormRoomOpenRoot,
+    fillPDFDialogData,
   } = props;
 
   const [createPDFFormFile, setCreatePDFFormFile] = useState({
@@ -354,6 +356,9 @@ const Panels = (props) => {
     sharePDFForm.visible && (
       <SharePDFFormDialog key="share-pdf-form-dialog" {...sharePDFForm} />
     ),
+    fillPDFDialogData.visible && (
+      <FillPDFDialog key="fill-pdf-form-dialog" {...fillPDFDialogData} />
+    ),
   ];
 };
 
@@ -414,6 +419,7 @@ export default inject(
       shareFolderDialogVisible,
       pdfFormEditVisible,
       selectFileFormRoomOpenRoot,
+      fillPDFDialogData,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -482,6 +488,7 @@ export default inject(
       shareFolderDialogVisible,
       pdfFormEditVisible,
       selectFileFormRoomOpenRoot,
+      fillPDFDialogData,
     };
   },
 )(observer(Panels));

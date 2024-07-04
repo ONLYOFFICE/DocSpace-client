@@ -69,7 +69,17 @@ class TableHeader extends React.Component<
       window.addEventListener("resize", this.throttledResize);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps: TableHeaderProps) {
+    const { columns, columnStorageName } = this.props;
+
+    if (columnStorageName === prevProps.columnStorageName) {
+      for (let index in columns) {
+        if (columns[index].enable !== prevProps.columns[index].enable) {
+          return this.resetColumns();
+        }
+      }
+    }
+
     this.onResize();
   }
 
@@ -182,7 +192,7 @@ class TableHeader extends React.Component<
     activeColumnIndex: number,
     containerWidth: number,
   ) => {
-    const { columns, columnStorageName } = this.props;
+    const { columns } = this.props;
     const clearSize = gridTemplateColumns.map((c) => getSubstring(c));
     // eslint-disable-next-line prefer-spread
     const maxSize = Math.max.apply(Math, clearSize);
@@ -320,20 +330,7 @@ class TableHeader extends React.Component<
       infoPanelVisible = false,
       columns,
       setHideColumns,
-      tableStorageName,
     } = this.props;
-
-    const enabledColumns = columns.filter((col) => col.enable);
-
-    const enabledStorageColumns = localStorage
-      .getItem(tableStorageName)
-      ?.split(",")
-      .filter((f) => f !== "false");
-
-    // fix multiply window bugs
-    const isError =
-      enabledStorageColumns?.length &&
-      enabledColumns.length !== enabledStorageColumns?.length;
 
     let activeColumnIndex = null;
 
@@ -357,15 +354,7 @@ class TableHeader extends React.Component<
     if (storageSize) {
       const splitStorage = storageSize.split(" ");
 
-      const isInvalid = splitStorage.some((s) => s === "NaNpx");
-
-      if (
-        (defaultSize &&
-          splitStorage[splitStorage.length - 2] !== `${defaultSize}px`) ||
-        getSubstring(splitStorage[0]) <= defaultMinColumnSize ||
-        isInvalid ||
-        isError
-      ) {
+      if (getSubstring(splitStorage[0]) <= defaultMinColumnSize) {
         localStorage.removeItem(columnStorageName);
         this.onResize();
         return;
@@ -399,11 +388,6 @@ class TableHeader extends React.Component<
       if (!hasContent) return this.resetColumns();
     }
 
-    // columns.length + 1 - its settings column
-    if (tableContainer.length !== columns.length + 1) {
-      return this.resetColumns();
-    }
-
     if (!container) return;
 
     const containerWidth = +container.clientWidth;
@@ -412,20 +396,7 @@ class TableHeader extends React.Component<
       .map((column) => getSubstring(column))
       .reduce((x, y) => x + y);
 
-    const defaultInfoWidth = tableInfoContainer
-      .map((column) => getSubstring(column))
-      .reduce((x, y) => x + y);
-
     const oldWidth = defaultWidth - defaultSize - settingsSize;
-
-    const isDifferentWindowSize = infoPanelVisible
-      ? Math.round(defaultInfoWidth) !== Math.round(containerWidth)
-      : Math.round(defaultWidth) !== Math.round(containerWidth);
-
-    if (isDifferentWindowSize && !isResized) {
-      this.resetColumns(true);
-      return;
-    }
 
     let str = "";
     let gridTemplateColumnsWithoutOverfilling: string[] = [];
@@ -434,30 +405,13 @@ class TableHeader extends React.Component<
       const gridTemplateColumns: string[] = [];
       let hideColumnsConst = false;
 
-      let contentColumnsCount = 0;
-      let contentColumnsCountInfoPanel = 0;
-
       const storageInfoPanelSize = localStorage.getItem(
         columnInfoPanelStorageName,
       );
 
-      if (storageInfoPanelSize) {
-        contentColumnsCountInfoPanel = storageInfoPanelSize
-          .split(" ")
-          .filter((item) => checkingForUnfixedSize(item, defaultSize)).length;
-
-        contentColumnsCount = tableContainer.filter((item) =>
-          checkingForUnfixedSize(item, defaultSize),
-        ).length;
-      }
-
-      const incorrectNumberColumns =
-        contentColumnsCountInfoPanel < contentColumnsCount && !hideColumns;
-
-      const tableInfoPanelContainer =
-        storageInfoPanelSize && !incorrectNumberColumns
-          ? storageInfoPanelSize.split(" ")
-          : tableContainer;
+      const tableInfoPanelContainer = storageInfoPanelSize
+        ? storageInfoPanelSize.split(" ")
+        : tableContainer;
 
       let containerMinWidth = containerWidth - defaultSize - settingsSize;
 
@@ -759,8 +713,23 @@ class TableHeader extends React.Component<
       str = hasGridTemplateColumnsWithoutOverfilling
         ? gridTemplateColumnsWithoutOverfilling.join(" ")
         : gridTemplateColumns.join(" ");
+
+      const strWidth = str
+        .split(" ")
+        .map((s) => getSubstring(s))
+        .reduce((x, y) => x + y);
+
+      if (
+        Math.abs(+strWidth - containerWidth) >= 5 &&
+        !isResized &&
+        strWidth !== 0
+      ) {
+        this.resetColumns(true);
+        return;
+      }
     } else {
       this.resetColumns();
+      return;
     }
 
     if (str) {
@@ -776,10 +745,6 @@ class TableHeader extends React.Component<
       if (infoPanelVisible)
         localStorage.setItem(columnInfoPanelStorageName, str);
       else localStorage.setItem(columnStorageName, str);
-
-      if (!infoPanelVisible) {
-        localStorage.removeItem(columnInfoPanelStorageName);
-      }
     }
   };
 

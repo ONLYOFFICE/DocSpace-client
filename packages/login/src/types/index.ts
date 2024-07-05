@@ -30,17 +30,59 @@ import {
   TGetColorTheme,
   TGetSsoSettings,
   TPasswordHash,
+  TPasswordSettings,
   TSettings,
   TThirdPartyProvider,
 } from "@docspace/shared/api/settings/types";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { RecaptchaType, ThemeKeys } from "@docspace/shared/enums";
+import { Nullable } from "@docspace/shared/types";
 import { ReactNode } from "react";
+
+export type TError =
+  | {
+      response?: {
+        status?: number | string;
+        data?: {
+          error?: {
+            message: string;
+          };
+        };
+      };
+      statusText?: string;
+      message?: string;
+    }
+  | string;
+
+export type WithLoaderProps = {
+  isLoaded: boolean;
+  setIsLoaded(): void;
+  passwordSettings: Nullable<TPasswordSettings>;
+  capabilities: Nullable<TCapabilities>;
+  thirdPartyProvider: Nullable<TThirdPartyProvider[]>;
+};
 
 export type TDataContext = {
   settings?: TSettings;
   colorTheme?: TGetColorTheme;
   systemTheme?: ThemeKeys;
+};
+
+export type TConfirmRouteContext = {
+  linkData: {
+    confirmHeader?: string;
+    key?: string;
+    emplType?: string;
+    email?: string;
+    uid?: string;
+    type?: string;
+    first?: string;
+    roomId?: string;
+  };
+  roomData: {
+    roomId?: string;
+    title?: string;
+  };
 };
 
 export type TConfirmLinkParams = {
@@ -49,8 +91,8 @@ export type TConfirmLinkParams = {
   email: string;
   uid?: string;
   type?: string;
-  first: string;
-  roomId: string;
+  first?: string;
+  roomId?: string;
 };
 
 export type TConfirmLinkResult = {

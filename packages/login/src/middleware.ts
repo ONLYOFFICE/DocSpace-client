@@ -40,8 +40,9 @@ export function middleware(request: NextRequest) {
   }
 
   if (request.nextUrl.pathname.includes("confirm")) {
+    const type = request.nextUrl.searchParams.get("type");
     return NextResponse.rewrite(
-      `${request.nextUrl.origin}/login${request.nextUrl.pathname}`,
+      `${request.nextUrl.origin}/login/confirm/${type}${request.nextUrl.search}`,
     );
   }
 

@@ -1492,7 +1492,6 @@ class FilesStore {
     return api.files
       .getFolder(folderId, filterData, this.filesController.signal)
       .then(async (data) => {
-        console.log("get folder then");
         let newTotal = data.total;
 
         // fixed row loader if total and items length is different
@@ -1629,7 +1628,7 @@ class FilesStore {
         runInAction(() => {
           const isEmptyList = [...data.folders, ...data.files].length === 0;
 
-          if (filter && isEmptyList) {
+          if (filter && isEmptyList) {-*-*
             const {
               authorType,
               roomId,

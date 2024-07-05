@@ -342,6 +342,17 @@ const SectionHeaderContent = (props) => {
     },
   ];
 
+  const translatedHeader =
+    header === "ImportHeader"
+      ? workspace === "GoogleWorkspace"
+        ? t("ImportFromGoogle")
+        : workspace === "Nextcloud"
+          ? t("ImportFromNextcloud")
+          : workspace === "Workspace"
+            ? t("ImportFromPortal", { organizationName })
+            : t("DataImport")
+      : t(header, { organizationName });
+
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>
       {isHeaderVisible ? (
@@ -370,20 +381,7 @@ const SectionHeaderContent = (props) => {
           )}
           <Headline type="content" truncate={true}>
             <div className="settings-section_header">
-              <div className="header">
-                {t(
-                  header === "ImportHeader"
-                    ? workspace === "GoogleWorkspace"
-                      ? "ImportFromGoogle"
-                      : workspace === "Nextcloud"
-                        ? "ImportFromNextcloud"
-                        : workspace === "Workspace"
-                          ? "ImportFromPortal"
-                          : "DataImport"
-                    : header,
-                  { organizationName },
-                )}
-              </div>
+              <div className="header">{translatedHeader}</div>
               {isNeedPaidIcon ? (
                 <Badge
                   backgroundColor="#EDC409"

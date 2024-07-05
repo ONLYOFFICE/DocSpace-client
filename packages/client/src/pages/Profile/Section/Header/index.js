@@ -140,7 +140,7 @@ const Header = (props) => {
       return navigate("/portal-settings/customization/general");
     }
 
-    const roomsFilter = RoomsFilter.getDefault(userId);
+    const roomsFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
 
     roomsFilter.searchArea = RoomSearchArea.Active;
     const urlParams = roomsFilter.toUrlParams(userId);

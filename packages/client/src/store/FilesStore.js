@@ -40,6 +40,7 @@ import {
   ShareAccessRights,
   Events,
   FilterKeys,
+  RoomSearchArea,
 } from "@docspace/shared/enums";
 
 import { RoomsTypes } from "@docspace/shared/utils";
@@ -1446,6 +1447,8 @@ class FilesStore {
     const filterData = filter ? filter.clone() : FilesFilter.getDefault();
     filterData.folder = folderId;
 
+    //debugger;
+
     if (folderId === "@my" && this.userStore.user.isVisitor) {
       const url = getCategoryUrl(CategoryType.Shared);
       return window.DocSpace.navigate(
@@ -1491,6 +1494,7 @@ class FilesStore {
     return api.files
       .getFolder(folderId, filterData, this.filesController.signal)
       .then(async (data) => {
+        console.log("get folder then");
         let newTotal = data.total;
 
         // fixed row loader if total and items length is different
@@ -1613,7 +1617,7 @@ class FilesStore {
             })
             .reverse();
         });
-
+        console.log("selectedFolderStore");
         this.selectedFolderStore.setSelectedFolder({
           folders: data.folders,
           ...data.current,
@@ -1736,6 +1740,18 @@ class FilesStore {
             console.log("Request canceled", err.message);
           } else {
             toastr.error(err);
+            if (isThirdPartyError) {
+              const userId = this.userStore?.user?.id;
+              const searchArea = window.DocSpace.location.pathname.includes(
+                "shared",
+              )
+                ? RoomSearchArea.Active
+                : RoomSearchArea.Archive;
+
+              return window.DocSpace.navigate(
+                `${window.DocSpace.location.pathname}?${RoomsFilter.getDefault(userId, searchArea).toUrlParams(userId, true)}`,
+              );
+            }
           }
         }
       })
@@ -4278,7 +4294,7 @@ class FilesStore {
 
   getRooms = async (filter) => {
     const userId = this.userStore.user && this.userStore.user.id;
-    let newFilter = RoomsFilter.getDefault(userId);
+    let newFilter = RoomsFilter.getDefault();
     Object.assign(newFilter, filter);
 
     return await api.rooms.getRooms(newFilter);

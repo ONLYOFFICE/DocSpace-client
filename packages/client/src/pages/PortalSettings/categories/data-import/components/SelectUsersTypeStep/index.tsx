@@ -98,23 +98,27 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
   const showCancelDialog = () => setCancelUploadDialogVisible(true);
   const hideCancelDialog = () => setCancelUploadDialogVisible(false);
 
+  const Buttons = (
+    <MigrationButtons
+      className="save-cancel-buttons"
+      onSaveClick={incrementStep}
+      onCancelClick={decrementStep}
+      showReminder
+      saveButtonLabel={t("Settings:NextStep")}
+      cancelButtonLabel={t("Common:Back")}
+      displaySettings
+      migrationCancelLabel={t("Settings:CancelImport")}
+      onMigrationCancelClick={showCancelDialog}
+    />
+  );
+
   useEffect(() => {
     setDataPortion(filteredUsers.slice(...boundaries));
   }, [users]);
 
   return (
     <Wrapper>
-      <MigrationButtons
-        className="save-cancel-buttons upper-buttons"
-        onSaveClick={incrementStep}
-        onCancelClick={decrementStep}
-        showReminder
-        saveButtonLabel={t("Settings:NextStep")}
-        cancelButtonLabel={t("Common:Back")}
-        displaySettings
-        migrationCancelLabel={t("Settings:CancelImport")}
-        onMigrationCancelClick={showCancelDialog}
-      />
+      {Buttons}
 
       {filteredUsers.length > 0 && (
         <>
@@ -140,19 +144,7 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
             />
           )}
 
-          {filteredAccounts.length > 0 && (
-            <MigrationButtons
-              className="save-cancel-buttons"
-              onSaveClick={incrementStep}
-              onCancelClick={decrementStep}
-              showReminder
-              saveButtonLabel={t("Settings:NextStep")}
-              cancelButtonLabel={t("Common:Back")}
-              displaySettings
-              migrationCancelLabel={t("Settings:CancelImport")}
-              onMigrationCancelClick={showCancelDialog}
-            />
-          )}
+          {filteredAccounts.length > 0 && Buttons}
         </>
       )}
 

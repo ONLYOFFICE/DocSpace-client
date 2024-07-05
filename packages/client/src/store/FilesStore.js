@@ -1447,8 +1447,6 @@ class FilesStore {
     const filterData = filter ? filter.clone() : FilesFilter.getDefault();
     filterData.folder = folderId;
 
-    //debugger;
-
     if (folderId === "@my" && this.userStore.user.isVisitor) {
       const url = getCategoryUrl(CategoryType.Shared);
       return window.DocSpace.navigate(
@@ -1617,7 +1615,6 @@ class FilesStore {
             })
             .reverse();
         });
-        console.log("selectedFolderStore");
         this.selectedFolderStore.setSelectedFolder({
           folders: data.folders,
           ...data.current,

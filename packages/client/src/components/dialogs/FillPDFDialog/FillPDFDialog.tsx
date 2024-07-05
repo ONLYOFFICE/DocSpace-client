@@ -35,14 +35,17 @@ import {
 import { Card } from "./sub-components/Card";
 
 import { Container } from "./FillPDFDialog.styled";
-import type { FillPDFDialogProps } from "./FillPDFDialog.types";
+import type {
+  FillPDFDialogProps,
+  InjectFillPDFDialogProps,
+} from "./FillPDFDialog.types";
 
 const FillPDFDialog = inject<TStore>(
   ({ dialogsStore, contextOptionsStore }) => {
-    const { setFillPDFDialogData } = dialogsStore;
+    const { setFillPDFDialogData, setShareCollectSelector } = dialogsStore;
     const { gotoDocEditor } = contextOptionsStore;
 
-    return { setFillPDFDialogData, gotoDocEditor };
+    return { setFillPDFDialogData, gotoDocEditor, setShareCollectSelector };
   },
 )(
   observer(
@@ -50,8 +53,9 @@ const FillPDFDialog = inject<TStore>(
       visible,
       setFillPDFDialogData,
       gotoDocEditor,
+      setShareCollectSelector,
       data,
-    }: FillPDFDialogProps) => {
+    }: FillPDFDialogProps & InjectFillPDFDialogProps) => {
       const { t } = useTranslation(["FillPDFDialog"]);
 
       const onClose = () => {
@@ -63,7 +67,10 @@ const FillPDFDialog = inject<TStore>(
         onClose();
       };
 
-      const openSelector = () => {};
+      const openSelector = () => {
+        setShareCollectSelector(true, data);
+        onClose();
+      };
 
       return (
         <ModalDialog
@@ -95,6 +102,6 @@ const FillPDFDialog = inject<TStore>(
       );
     },
   ),
-);
+) as unknown as React.FC<FillPDFDialogProps>;
 
 export default FillPDFDialog;

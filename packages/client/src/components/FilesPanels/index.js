@@ -78,6 +78,7 @@ import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
 import { PDFFormEditingDialog } from "../dialogs/PDFFormEditingDialog";
 import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
 import { FillPDFDialog } from "../dialogs/FillPDFDialog";
+import { ShareCollectSelector } from "../ShareCollectSelector";
 
 const Panels = (props) => {
   const {
@@ -133,6 +134,7 @@ const Panels = (props) => {
     pdfFormEditVisible,
     selectFileFormRoomOpenRoot,
     fillPDFDialogData,
+    shareCollectSelector,
   } = props;
 
   const [createPDFFormFile, setCreatePDFFormFile] = useState({
@@ -359,6 +361,12 @@ const Panels = (props) => {
     fillPDFDialogData.visible && (
       <FillPDFDialog key="fill-pdf-form-dialog" {...fillPDFDialogData} />
     ),
+    shareCollectSelector.visible && (
+      <ShareCollectSelector
+        key="share-collect-dialog"
+        {...shareCollectSelector}
+      />
+    ),
   ];
 };
 
@@ -420,6 +428,7 @@ export default inject(
       pdfFormEditVisible,
       selectFileFormRoomOpenRoot,
       fillPDFDialogData,
+      shareCollectSelector,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -489,6 +498,7 @@ export default inject(
       pdfFormEditVisible,
       selectFileFormRoomOpenRoot,
       fillPDFDialogData,
+      shareCollectSelector,
     };
   },
 )(observer(Panels));

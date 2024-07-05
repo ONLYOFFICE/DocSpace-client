@@ -23,17 +23,14 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
 import type { TFile } from "@docspace/shared/api/files/types";
 
-export interface FillPDFDialogProps {
+export interface ShareCollectSelectorProps {
   visible: boolean;
-  data: TFile;
+  file: TFile;
 }
 
-export interface InjectFillPDFDialogProps
-  extends Pick<
-      TStore["dialogsStore"],
-      "setFillPDFDialogData" | "setShareCollectSelector"
-    >,
-    Pick<TStore["contextOptionsStore"], "gotoDocEditor"> {}
+export interface InjectShareCollectSelectorProps
+  extends Pick<TStore["settingsStore"], "socketHelper" | "currentDeviceType">,
+    Pick<TStore["filesSettingsStore"], "getIcon">,
+    Pick<TStore["dialogsStore"], "setShareCollectSelector"> {}

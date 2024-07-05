@@ -122,6 +122,10 @@ class DialogsStore {
     visible: false,
     data: null,
   };
+  shareCollectSelector = {
+    visible: false,
+    file: null,
+  };
 
   constructor(
     authStore,
@@ -523,6 +527,12 @@ class DialogsStore {
     this.fillPDFDialogData = {
       visible,
       data,
+    };
+  };
+  setShareCollectSelector = (visible, file) => {
+    this.shareCollectSelector = {
+      visible,
+      file,
     };
   };
 }

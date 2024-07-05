@@ -3157,7 +3157,7 @@ const Dark: TTheme = {
     gradientColor: black,
     lineColor: "#474747",
 
-    textColorPrimary: "#657077",
+    textColorPrimary: "#ADADAD",
     activeTextColorPrimary: white,
     hoverTextColorPrimary: white,
     pressedTextColorPrimary: "#CCCCCC",

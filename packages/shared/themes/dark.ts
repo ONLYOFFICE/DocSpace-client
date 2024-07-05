@@ -2052,6 +2052,8 @@ const Dark: TTheme = {
     closeButtonSize: "12px",
     closeButtonBg: "#a2a2a2",
 
+    nameColor: "#A3A9AE",
+
     links: {
       iconColor: "#858585",
       iconErrorColor: "#E06451",

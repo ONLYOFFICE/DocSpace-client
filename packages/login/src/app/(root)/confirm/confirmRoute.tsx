@@ -39,10 +39,12 @@ import {
   TConfirmLinkResult,
   TConfirmLinkParams,
   ConfirmRouteProps,
+  TError,
+  TConfirmRouteContext,
 } from "@/types";
 import Loading from "./loading";
 
-export const ConfirmRouteContext = createContext({
+export const ConfirmRouteContext = createContext<TConfirmRouteContext>({
   linkData: {},
   roomData: {},
 });
@@ -55,13 +57,13 @@ function ConfirmRoute(props: ConfirmRouteProps) {
     children,
   } = props;
 
-  const [stateData, setStateData] = useState({
+  const [stateData, setStateData] = useState<TConfirmRouteContext>({
     linkData: {},
     roomData: {},
   });
   const [confirmLinkResult, setConfirmLinkResult] =
     useState<TConfirmLinkResult>();
-  const [error, setError] = useState<unknown>();
+  const [error, setError] = useState<TError>();
   const [loading, setLoading] = useState(true);
 
   const { i18n, t } = useTranslation(["Common"]);
@@ -94,10 +96,10 @@ function ConfirmRoute(props: ConfirmRouteProps) {
       const response = (await checkConfirmLink(
         confirmLinkParams,
       )) as TConfirmLinkResult;
-
       setConfirmLinkResult(response);
     } catch (error) {
-      setError(error);
+      const knownError = error as TError;
+      setError(knownError);
     }
   }, [getLinkParams]);
 

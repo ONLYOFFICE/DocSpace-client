@@ -27,11 +27,15 @@
 "use client";
 
 import React, { createContext, useCallback, useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getCookie } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { notFound, usePathname, useSearchParams } from "next/navigation";
+import {
+  notFound,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { logout } from "@/utils/actions";
 import { AuthenticatedAction, ValidationResult } from "@/utils/enums";
 import { checkConfirmLink } from "@docspace/shared/api/user";
@@ -70,6 +74,7 @@ function ConfirmRoute(props: ConfirmRouteProps) {
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  const router = useRouter();
 
   const isAuthenticated = !!socketUrl;
 
@@ -170,10 +175,8 @@ function ConfirmRoute(props: ConfirmRouteProps) {
   const { type, confirmLinkParams } = getLinkParams();
 
   if (!type && confirmLinkParams.type)
-    return (
-      <Navigate
-        to={`/confirm/${confirmLinkParams.type}?${searchParams.toString()}`}
-      />
+    router.push(
+      `/confirm/${confirmLinkParams.type}?${searchParams.toString()}`,
     );
 
   if (error) {

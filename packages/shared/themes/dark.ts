@@ -2052,6 +2052,8 @@ const Dark: TTheme = {
     closeButtonSize: "12px",
     closeButtonBg: "#a2a2a2",
 
+    nameColor: "#A3A9AE",
+
     links: {
       iconColor: "#858585",
       iconErrorColor: "#E06451",
@@ -3155,7 +3157,7 @@ const Dark: TTheme = {
     gradientColor: black,
     lineColor: "#474747",
 
-    textColorPrimary: "#657077",
+    textColorPrimary: "#ADADAD",
     activeTextColorPrimary: white,
     hoverTextColorPrimary: white,
     pressedTextColorPrimary: "#CCCCCC",

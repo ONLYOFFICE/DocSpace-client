@@ -27,7 +27,8 @@
 import type { TFile } from "@docspace/shared/api/files/types";
 
 export interface FillPDFDialogProps
-  extends Partial<Pick<TStore["dialogsStore"], "setFillPDFDialogData">> {
+  extends Partial<Pick<TStore["dialogsStore"], "setFillPDFDialogData">>,
+    Partial<Pick<TStore["contextOptionsStore"], "gotoDocEditor">> {
   visible: boolean;
   data: TFile;
 }

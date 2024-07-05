@@ -37,51 +37,64 @@ import { Card } from "./sub-components/Card";
 import { Container } from "./FillPDFDialog.styled";
 import type { FillPDFDialogProps } from "./FillPDFDialog.types";
 
-const FillPDFDialog = inject<TStore>(({ dialogsStore }) => {
-  const { setFillPDFDialogData } = dialogsStore;
+const FillPDFDialog = inject<TStore>(
+  ({ dialogsStore, contextOptionsStore }) => {
+    const { setFillPDFDialogData } = dialogsStore;
+    const { gotoDocEditor } = contextOptionsStore;
 
-  return { setFillPDFDialogData };
-})(
-  observer(({ visible, setFillPDFDialogData, data }: FillPDFDialogProps) => {
-    const { t } = useTranslation(["FillPDFDialog"]);
+    return { setFillPDFDialogData, gotoDocEditor };
+  },
+)(
+  observer(
+    ({
+      visible,
+      setFillPDFDialogData,
+      gotoDocEditor,
+      data,
+    }: FillPDFDialogProps) => {
+      const { t } = useTranslation(["FillPDFDialog"]);
 
-    const onClose = () => {
-      setFillPDFDialogData!(false, null);
-    };
+      const onClose = () => {
+        setFillPDFDialogData!(false, null);
+      };
 
-    const openEditor = () => {};
+      const openEditorFill = () => {
+        gotoDocEditor!(false, data);
+        onClose();
+      };
 
-    const openSelector = () => {};
+      const openSelector = () => {};
 
-    return (
-      <ModalDialog
-        autoMaxHeight
-        visible={visible}
-        onClose={onClose}
-        displayType={ModalDialogType.aside}
-      >
-        <ModalDialog.Header>
-          {t("FillPDFDialog:FillPDFDialogTitle")}
-        </ModalDialog.Header>
-        <ModalDialog.Body>
-          <Container>
-            <Card
-              title={t("FillPDFDialog:FillOutTitle")}
-              description={t("FillPDFDialog:FillOutDescription")}
-              buttonLabel={t("FillPDFDialog:FillOutButtonLabel")}
-              onCick={openEditor}
-            />
-            <Card
-              title={t("FillPDFDialog:ShareCollectTitle")}
-              description={t("FillPDFDialog:ShareCollectDescription")}
-              buttonLabel={t("FillPDFDialog:ShareCollectButtonLabel")}
-              onCick={openSelector}
-            />
-          </Container>
-        </ModalDialog.Body>
-      </ModalDialog>
-    );
-  }),
+      return (
+        <ModalDialog
+          autoMaxHeight
+          visible={visible}
+          onClose={onClose}
+          displayType={ModalDialogType.aside}
+        >
+          <ModalDialog.Header>
+            {t("FillPDFDialog:FillPDFDialogTitle")}
+          </ModalDialog.Header>
+          <ModalDialog.Body>
+            <Container>
+              <Card
+                title={t("FillPDFDialog:FillOutTitle")}
+                description={t("FillPDFDialog:FillOutDescription")}
+                buttonLabel={t("FillPDFDialog:FillOutButtonLabel")}
+                onCick={openEditorFill}
+              />
+              <Card
+                title={t("FillPDFDialog:ShareCollectTitle")}
+                description={t("FillPDFDialog:ShareCollectDescription")}
+                buttonLabel={t("FillPDFDialog:ShareCollectButtonLabel")}
+                onCick={openSelector}
+              />
+            </Container>
+          </ModalDialog.Body>
+        </ModalDialog>
+      );
+    },
+  ),
 );
 
 export default FillPDFDialog;

@@ -60,7 +60,7 @@ const SyncContainer = ({
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    setDocumentTitle(t("Ldap:LdapSyncTitle"));
+    isMobileView && setDocumentTitle(t("Ldap:LdapSyncTitle"));
     onCheckView();
     window.addEventListener("resize", onCheckView);
 

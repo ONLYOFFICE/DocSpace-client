@@ -515,8 +515,6 @@ export default inject(
         ? +sessionPath
         : fromFolderId);
 
-    console.log(filesSettings);
-
     return {
       fromFolderId,
       parentId,

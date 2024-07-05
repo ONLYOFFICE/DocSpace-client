@@ -143,9 +143,9 @@ export type TGetIcon = (size: number, fileExst: string) => string;
 export type FilesSelectorProps = (
   | {
       getIcon: TGetIcon;
-      filesSettings?: never;
+      filesSettings?: TFilesSettings;
     }
-  | { getIcon?: never; filesSettings: TFilesSettings }
+  | { getIcon?: never; filesSettings: never }
 ) & {
   socketHelper: SocketIOHelper;
   socketSubscribers: Set<string>;

@@ -46,6 +46,7 @@ const PrivateRouteWrapper = ({
   restricted,
   withCollaborator,
   withManager,
+  baseDomain,
 }: Partial<PrivateRouteProps>) => {
   return (
     <PrivateRoute
@@ -64,6 +65,7 @@ const PrivateRouteWrapper = ({
       withCollaborator={withCollaborator}
       isPortalDeactivate={isPortalDeactivate!}
       enablePortalRename={enablePortalRename!}
+      baseDomain={baseDomain}
     >
       {children}
     </PrivateRoute>
@@ -89,6 +91,7 @@ export default inject<TStore>(
       tenantStatus,
       isPortalDeactivate,
       enablePortalRename,
+      baseDomain,
     } = settingsStore;
 
     return {
@@ -104,6 +107,7 @@ export default inject<TStore>(
       isLogout,
       isEnterprise,
       enablePortalRename,
+      baseDomain,
     };
   },
 )(observer(PrivateRouteWrapper));

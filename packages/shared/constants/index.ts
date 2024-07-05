@@ -187,3 +187,6 @@ export const SDK_SCRIPT_URL =
   typeof window !== "undefined"
     ? `${window.location.origin}/static/scripts/sdk/${SDK_VERSION}/api.js`
     : "";
+
+export const ALLOWED_PASSWORD_CHARACTERS =
+  "a-z, A-Z, 0-9, !\"#%&'()*+,-./:;<=>?@[]^_`{|}";

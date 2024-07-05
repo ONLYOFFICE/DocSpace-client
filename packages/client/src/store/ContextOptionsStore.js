@@ -551,10 +551,8 @@ class ContextOptionsStore {
     window.dispatchEvent(event);
   };
 
-  onDuplicate = (item, t) => {
-    this.filesActionsStore
-      .duplicateAction(item, t("Common:CopyOperation"))
-      .catch((err) => toastr.error(err));
+  onDuplicate = (item) => {
+    this.filesActionsStore.duplicateAction(item);
   };
 
   onClickRename = (item) => {
@@ -1341,8 +1339,8 @@ class ContextOptionsStore {
                   disabled: false,
                 },
                 {
-                  id: "option_create-copy",
-                  key: "copy",
+                  id: "option_create-duplicate",
+                  key: "duplicate",
                   label: t("Common:Duplicate"),
                   icon: DuplicateReactSvgUrl,
                   onClick: () => this.onDuplicate(item, t),
@@ -1371,8 +1369,8 @@ class ContextOptionsStore {
               disabled: false,
             },
             {
-              id: "option_create-copy",
-              key: "copy",
+              id: "option_create-duplicate",
+              key: "duplicate",
               label: t("Common:Duplicate"),
               icon: DuplicateReactSvgUrl,
               onClick: () => this.onDuplicate(item, t),
@@ -1678,6 +1676,14 @@ class ContextOptionsStore {
         disabled: !item.security?.CreateRoomFrom,
       },
       {
+        id: "option_create-duplicate-room",
+        key: "duplicate-room",
+        label: t("Common:Duplicate"),
+        icon: DuplicateReactSvgUrl,
+        onClick: () => this.onDuplicate(item, t),
+        disabled: !item.security?.Duplicate,
+      },
+      {
         id: "option_download",
         key: "download",
         label: t("Common:Download"),
@@ -1922,10 +1928,6 @@ class ContextOptionsStore {
     const hasDownloadAccess =
       selection.findIndex((k) => k.security.Download) !== -1;
 
-    const sharingItems = selection.filter(
-      (k) => k.contextOptions.includes("sharing-settings") && k.canShare,
-    ).length;
-
     const favoriteItems = selection.filter((k) =>
       k.contextOptions.includes("mark-as-favorite"),
     );
@@ -1961,18 +1963,6 @@ class ContextOptionsStore {
     );
 
     const options = [
-      {
-        key: "sharing-settings",
-        label: t("SharingPanel:SharingSettingsTitle"),
-        icon: ShareReactSvgUrl,
-        onClick: this.onClickShare,
-        disabled: !sharingItems,
-      },
-      {
-        key: "separator0",
-        isSeparator: true,
-        disabled: !sharingItems,
-      },
       {
         key: "mark-as-favorite",
         label: t("MarkAsFavorite"),
@@ -2542,7 +2532,7 @@ class ContextOptionsStore {
           showUploadFolder ? uploadFolder : null,
         ];
 
-    if (mainButtonItemsList && enablePlugins && !isSectionMenu) {
+    if (mainButtonItemsList && enablePlugins && !isRoomsFolder) {
       const pluginItems = [];
 
       mainButtonItemsList.forEach((option) => {

@@ -68,6 +68,7 @@ export type RootPageProps = {
     action: ActionType;
     share: string;
     editorType: string;
+    error?: string;
   }>;
 };
 export type TDocumentInfo = {

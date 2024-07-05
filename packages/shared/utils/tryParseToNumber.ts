@@ -23,28 +23,8 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+export const tryParseToNumber = (num: string) => {
+  const parse = +num;
 
-export enum MessageKey {
-  "None",
-  "Error",
-  "ErrorUserNotFound",
-  "ErrorExpiredActivationLink",
-  "ErrorInvalidActivationLink",
-  "ErrorConfirmURLError",
-  "ErrorNotCorrectEmail",
-  "LoginWithBruteForce",
-  "RecaptchaInvalid",
-  "LoginWithAccountNotFound",
-  "InvalidUsernameOrPassword",
-  "SsoSettingsDisabled",
-  "ErrorNotAllowedOption",
-  "SsoSettingsEmptyToken",
-  "SsoSettingsNotValidToken",
-  "SsoSettingsCantCreateUser",
-  "SsoSettingsUserTerminated",
-  "SsoError",
-  "SsoAuthFailed",
-  "SsoAttributesNotFound",
-  "QuotaPaidUserLimitError",
-  "InvalidLink",
-}
+  return Number.isNaN(parse) ? num : parse;
+};

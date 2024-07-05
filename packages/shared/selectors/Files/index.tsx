@@ -240,6 +240,7 @@ const FilesSelector = ({
     setIsInit,
     withCreate,
     setSelectedItemId,
+    setSelectedItemType,
   });
 
   const onClickBreadCrumb = React.useCallback(

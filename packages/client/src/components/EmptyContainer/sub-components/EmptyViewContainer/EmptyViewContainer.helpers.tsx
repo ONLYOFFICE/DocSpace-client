@@ -63,6 +63,7 @@ export const getDescription = (
   isFolder: boolean,
   folderType: Nullable<FolderType>,
   parentRoomType: Nullable<FolderType>,
+  isArchiveFolderRoot: boolean,
 ): string => {
   const isCollaborator = access === ShareAccessRights.Collaborator;
 
@@ -88,8 +89,13 @@ export const getDescription = (
         ],
         () => t("Files:EmptyFormSubFolderHeaderText"),
       )
-      .with([FolderType.FormRoom, null, P.when(() => isNotAdmin)], () =>
-        t("EmptyView:FormFolderDefaultUserDescription"),
+      .with(
+        [
+          FolderType.FormRoom,
+          null,
+          P.when(() => isNotAdmin || isArchiveFolderRoot),
+        ],
+        () => t("EmptyView:FormFolderDefaultUserDescription"),
       )
       .with([FolderType.FormRoom, null, P._], () =>
         t("EmptyView:FormFolderDefaultDescription", {
@@ -99,7 +105,8 @@ export const getDescription = (
       .otherwise(() => "");
   }
 
-  if (isNotAdmin) return t("EmptyView:UserEmptyDescription");
+  if (isNotAdmin || isArchiveFolderRoot)
+    return t("EmptyView:UserEmptyDescription");
 
   if (isCollaborator) return t("EmptyView:CollaboratorEmptyDesciprtion");
 
@@ -113,6 +120,7 @@ export const getTitle = (
   isFolder: boolean,
   folderType: Nullable<FolderType>,
   parentRoomType: Nullable<FolderType>,
+  isArchiveFolderRoot: boolean,
 ): string => {
   const isCollaborator = access === ShareAccessRights.Collaborator;
 
@@ -135,8 +143,13 @@ export const getTitle = (
       .with([P._, FolderType.SubFolderInProgress, P._], () =>
         t("Files:EmptyFormSubFolderProgressDescriptionText"),
       )
-      .with([FolderType.FormRoom, null, P.when(() => isNotAdmin)], () =>
-        t("EmptyView:FormFolderDefaultUserTitle"),
+      .with(
+        [
+          FolderType.FormRoom,
+          null,
+          P.when(() => isNotAdmin || isArchiveFolderRoot),
+        ],
+        () => t("EmptyView:FormFolderDefaultUserTitle"),
       )
       .with([FolderType.FormRoom, null, P._], () =>
         t("EmptyView:FormFolderDefaultTitle"),
@@ -146,7 +159,7 @@ export const getTitle = (
 
   if (isCollaborator) return t("EmptyView:CollaboratorEmptyTitle");
 
-  if (isNotAdmin) return t("EmptyView:UserEmptyTitle");
+  if (isNotAdmin || isArchiveFolderRoot) return t("Files:EmptyScreenFolder");
 
   switch (type) {
     case RoomsType.FormRoom:
@@ -317,6 +330,7 @@ export const getOptions = (
   isFolder: boolean,
   folderType: Nullable<FolderType>,
   parentRoomType: Nullable<FolderType>,
+  isArchiveFolderRoot: boolean,
   actions: OptionActions,
 ): EmptyViewItemType[] => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
@@ -416,6 +430,8 @@ export const getOptions = (
       },
     ],
   };
+
+  if (isArchiveFolderRoot) return [];
 
   if (isFolder) {
     return match([parentRoomType, folderType, access])

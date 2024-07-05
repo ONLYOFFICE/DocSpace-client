@@ -99,6 +99,8 @@ export const getMessageKeyTranslate = (t: TTranslation, message: string) => {
       return t("Errors:SsoAttributesNotFound");
     case "QuotaPaidUserLimitError":
       return t("Common:QuotaPaidUserLimitError");
+    case "InvalidLink":
+      return t("Common:InvalidLink");
     default:
       return t("Common:Error");
   }
@@ -124,6 +126,12 @@ export const getInvitationLinkData = (encodeString: string) => {
     firstName: string;
     lastName: string;
     type: string;
+    linkData?: {
+      confirmHeader?: string;
+      key: string;
+      type: string;
+      uid?: string;
+    };
   };
 
   return queryParams;
@@ -137,4 +145,16 @@ export const getEmailFromInvitation = (encodeString: Nullable<string>) => {
   if (!queryParams || !queryParams.email) return "";
 
   return queryParams.email;
+};
+
+export const getConfirmDataFromInvitation = (
+  encodeString: Nullable<string>,
+) => {
+  if (!encodeString) return "";
+
+  const queryParams = getInvitationLinkData(encodeString);
+
+  if (!queryParams || !queryParams.linkData) return {};
+
+  return queryParams.linkData;
 };

@@ -2532,7 +2532,7 @@ class ContextOptionsStore {
           showUploadFolder ? uploadFolder : null,
         ];
 
-    if (mainButtonItemsList && enablePlugins && !isSectionMenu) {
+    if (mainButtonItemsList && enablePlugins && !isRoomsFolder) {
       const pluginItems = [];
 
       mainButtonItemsList.forEach((option) => {

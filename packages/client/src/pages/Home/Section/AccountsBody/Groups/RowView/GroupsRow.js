@@ -138,8 +138,6 @@ const GroupsRow = ({
 
             <Badges isLDAP={item.isLDAP} />
 
-            <div></div>
-
             <Link
               key={"group-title"}
               containerWidth="28%"

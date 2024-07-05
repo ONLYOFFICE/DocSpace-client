@@ -38,6 +38,12 @@ import { AddEmailRowProps, RowViewProps } from "../../../../types";
 
 const StyledRowContainer = styled(RowContainer)`
   margin-bottom: 20px;
+
+  .row-main-container-wrapper {
+    @media ${tablet} {
+      margin: 0;
+    }
+  }
 `;
 
 const StyledRow = styled(Row)`

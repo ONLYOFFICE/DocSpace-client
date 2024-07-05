@@ -105,6 +105,12 @@ const StyledRowContainer = styled(RowContainer)`
   .ec-desc {
     max-width: 348px;
   }
+
+  .row-main-container-wrapper {
+    @media ${tablet} {
+      margin: 0;
+    }
+  }
 `;
 
 const StyledRow = styled(Row)`

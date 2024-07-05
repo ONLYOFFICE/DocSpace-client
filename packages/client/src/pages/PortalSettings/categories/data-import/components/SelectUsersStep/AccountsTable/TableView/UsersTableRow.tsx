@@ -84,16 +84,16 @@ const UsersTableRow = (props: UsersTableRowProps) => {
 
   return (
     <StyledTableRow onClick={toggleAccount}>
-      <TableCell className="checkboxWrapper" forwardedRef={null} style={{}}>
+      <TableCell className="checkboxWrapper">
         <Checkbox isChecked={isChecked} onChange={toggleAccount} />
         <Text className="username">{displayName}</Text>
       </TableCell>
 
-      <TableCell forwardedRef={null} style={{}} className="">
+      <TableCell className="">
         <Text className="user-email">{email}</Text>
       </TableCell>
 
-      <TableCell forwardedRef={null} style={{}} className="">
+      <TableCell className="">
         {isDuplicate ? (
           <Text className="user-existing">
             {t("Settings:AccountAlreadyExists")}

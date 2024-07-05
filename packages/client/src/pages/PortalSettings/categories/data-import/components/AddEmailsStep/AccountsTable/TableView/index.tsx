@@ -74,11 +74,6 @@ const TableView = (props: TableViewProps) => {
     checkedUsers.withoutEmail.length > 0 &&
     checkedUsers.withoutEmail.length !== usersWithFilledEmails.length;
 
-  const stub: () => Promise<void> = () =>
-    new Promise((resolve) => {
-      resolve();
-    });
-
   return (
     <StyledTableContainer forwardedRef={tableRef} useReactWindow>
       <UsersTableHeader
@@ -103,8 +98,6 @@ const TableView = (props: TableViewProps) => {
         filesLength={accountsData.length}
         hasMoreFiles={false}
         itemCount={accountsData.length}
-        fetchMoreFiles={stub}
-        onScroll={stub}
       >
         {accountsData.map((data) => (
           <UsersTableRow

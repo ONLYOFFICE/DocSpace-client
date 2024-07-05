@@ -24,12 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import EmailActivationForm from "@/components/EmailActivationForm";
+
 type EmailActivationProps = {
   searchParams: { [key: string]: string };
 };
 
 async function Page({ searchParams }: EmailActivationProps) {
-  return <div>Email activation</div>;
+  return <EmailActivationForm />;
 }
 
 export default Page;

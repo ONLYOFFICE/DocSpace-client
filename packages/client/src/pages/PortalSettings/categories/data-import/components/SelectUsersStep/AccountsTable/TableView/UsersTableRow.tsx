@@ -89,11 +89,11 @@ const UsersTableRow = (props: UsersTableRowProps) => {
         <Text className="username">{displayName}</Text>
       </TableCell>
 
-      <TableCell className="">
+      <TableCell>
         <Text className="user-email">{email}</Text>
       </TableCell>
 
-      <TableCell className="">
+      <TableCell>
         {isDuplicate ? (
           <Text className="user-existing">
             {t("Settings:AccountAlreadyExists")}

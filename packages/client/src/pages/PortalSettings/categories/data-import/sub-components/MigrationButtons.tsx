@@ -48,7 +48,7 @@ const MigrationButtonsWrapper = styled.div`
 
     padding-top: 18px;
 
-    background: white;
+    background: ${(props) => props.theme.backgroundColor};
 
     flex-direction: column-reverse;
     align-items: flex-start;

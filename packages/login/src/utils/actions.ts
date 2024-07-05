@@ -38,6 +38,8 @@ import {
   TThirdPartyProvider,
   TVersionBuild,
 } from "@docspace/shared/api/settings/types";
+import { TUser } from "@docspace/shared/api/people/types";
+import { Encoder } from "@docspace/shared/utils/encoder";
 
 export const checkIsAuthenticated = async () => {
   const [request] = createRequest(["/authentication"], [["", ""]], "GET");
@@ -159,10 +161,10 @@ export async function getPortalCultures() {
   return cultures.response as TPortalCultures;
 }
 
-export async function getPortalPasswordSettings() {
+export async function getPortalPasswordSettings(confirmKey: string | null = null) {
   const [getPortalPasswordSettings] = createRequest(
     [`/settings/security/password`],
-    [["", ""]],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
     "GET",
   );
 
@@ -173,6 +175,31 @@ export async function getPortalPasswordSettings() {
   const passwordSettings = await res.json();
 
   return passwordSettings.response as TPasswordSettings;
+}
+
+export async function getUserByEmail(
+  userEmail: string,
+  confirmKey: string | null = null,
+) {
+  const [getUserByEmail] = createRequest(
+    [`/people/email?email=${userEmail}`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getUserByEmail);
+
+  if (!res.ok) return;
+
+  const user = await res.json();
+
+  if (user && user.displayName) {
+    user.displayName = Encoder.htmlDecode(user.displayName);
+  }
+
+  console.log("user", user);
+
+  return user.response as TUser;
 }
 
 /* export async function checkConfirmLink(data: any): Promise<any> {

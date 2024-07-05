@@ -338,9 +338,11 @@ const FilesSelectorWrapper = ({
     );
   };
 
+  const openRootVar = openRoot || isRestore || isRestoreAll;
+
   return (
     <FilesSelector
-      openRoot={openRoot}
+      openRoot={openRootVar}
       socketHelper={socketHelper}
       socketSubscribers={socketSubscribers}
       disabledItems={disabledItems}
@@ -354,7 +356,7 @@ const FilesSelectorWrapper = ({
       isThirdParty={isThirdParty}
       rootThirdPartyId={rootThirdPartyId}
       roomsFolderId={roomsFolderId}
-      currentFolderId={isFormRoom && openRoot ? "" : currentFolderId}
+      currentFolderId={isFormRoom && openRootVar ? "" : currentFolderId}
       parentId={parentId}
       rootFolderType={rootFolderType || FolderType.Rooms}
       currentDeviceType={currentDeviceType}
@@ -422,7 +424,6 @@ export default inject(
       isRestore,
       isPanelVisible,
       id,
-      currentFolderId,
     }: FilesSelectorProps,
   ) => {
     const { id: selectedId, parentId, rootFolderType } = selectedFolderStore;
@@ -478,7 +479,7 @@ export default inject(
                 : []
         : [];
 
-    const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
+    // const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
 
     const selectionsWithoutEditing: (TFile | TFolder | TRoom)[] = isRestoreAll
       ? filesList
@@ -510,11 +511,7 @@ export default inject(
           ? parentId
           : selectedId);
 
-    const folderId =
-      currentFolderId ||
-      (sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
-        ? +sessionPath
-        : fromFolderId);
+    const folderId = fromFolderId;
 
     return {
       fromFolderId,

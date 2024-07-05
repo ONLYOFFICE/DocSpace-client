@@ -145,7 +145,7 @@ export type FilesSelectorProps = (
       getIcon: TGetIcon;
       filesSettings?: TFilesSettings;
     }
-  | { getIcon?: never; filesSettings: never }
+  | { getIcon?: never; filesSettings: TFilesSettings }
 ) & {
   socketHelper: SocketIOHelper;
   socketSubscribers: Set<string>;

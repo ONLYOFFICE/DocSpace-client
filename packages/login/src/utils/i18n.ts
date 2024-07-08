@@ -46,7 +46,7 @@ export const getI18NInstance = (portalLng: string) => {
       },
     },
 
-    ns: ["Login", "Common", "Error"],
+    ns: ["Login", "Common", "Error", "Wizard", "Confirm"],
     defaultNS: "Login",
 
     react: {

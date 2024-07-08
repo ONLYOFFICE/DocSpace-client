@@ -76,7 +76,8 @@ const Root = ({
   const isSkipError =
     error?.status === "not-found" ||
     (error?.status === "access-denied" && !!error.editorUrl) ||
-    error?.status === "not-supported";
+    error?.status === "not-supported" ||
+    error?.status === "quota-exception";
 
   const { t } = useTranslation(["Editor", "Common"]);
 

@@ -1447,8 +1447,6 @@ class FilesStore {
     const filterData = filter ? filter.clone() : FilesFilter.getDefault();
     filterData.folder = folderId;
 
-    //debugger;
-
     if (folderId === "@my" && this.userStore.user.isVisitor) {
       const url = getCategoryUrl(CategoryType.Shared);
       return window.DocSpace.navigate(
@@ -1494,7 +1492,6 @@ class FilesStore {
     return api.files
       .getFolder(folderId, filterData, this.filesController.signal)
       .then(async (data) => {
-        console.log("get folder then");
         let newTotal = data.total;
 
         // fixed row loader if total and items length is different
@@ -1617,7 +1614,6 @@ class FilesStore {
             })
             .reverse();
         });
-        console.log("selectedFolderStore");
         this.selectedFolderStore.setSelectedFolder({
           folders: data.folders,
           ...data.current,

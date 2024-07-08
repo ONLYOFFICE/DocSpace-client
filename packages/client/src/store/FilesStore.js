@@ -4290,7 +4290,7 @@ class FilesStore {
 
   getRooms = async (filter) => {
     const userId = this.userStore.user && this.userStore.user.id;
-    let newFilter = RoomsFilter.getDefault();
+    let newFilter = RoomsFilter.getDefault(userId);
     Object.assign(newFilter, filter);
 
     return await api.rooms.getRooms(newFilter);

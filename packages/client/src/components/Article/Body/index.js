@@ -111,7 +111,10 @@ const ArticleBodyContent = (props) => {
 
           break;
         case archiveFolderId:
-          const archiveFilter = RoomsFilter.getDefault(userId);
+          const archiveFilter = RoomsFilter.getDefault(
+            userId,
+            RoomSearchArea.Archive,
+          );
           archiveFilter.searchArea = RoomSearchArea.Archive;
           params = archiveFilter.toUrlParams(userId, true);
           path = getCategoryUrl(CategoryType.Archive);
@@ -142,7 +145,10 @@ const ArticleBodyContent = (props) => {
           return;
         case roomsFolderId:
         default:
-          const roomsFilter = RoomsFilter.getDefault(userId);
+          const roomsFilter = RoomsFilter.getDefault(
+            userId,
+            RoomSearchArea.Active,
+          );
           roomsFilter.searchArea = RoomSearchArea.Active;
           params = roomsFilter.toUrlParams(userId, true);
           path = getCategoryUrl(CategoryType.Shared);

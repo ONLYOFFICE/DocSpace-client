@@ -1628,7 +1628,7 @@ class FilesStore {
         runInAction(() => {
           const isEmptyList = [...data.folders, ...data.files].length === 0;
 
-          if (filter && isEmptyList) {-*-*
+          if (filter && isEmptyList) {
             const {
               authorType,
               roomId,

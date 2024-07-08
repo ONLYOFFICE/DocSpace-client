@@ -1131,7 +1131,7 @@ class ContextOptionsStore {
           label: t("Common:Download"),
           icon: DownloadReactSvgUrl,
           onClick: () => {
-            onClickDownload(item, t);
+            this.onClickDownload(item, t);
           },
           disabled: !item.security?.Download,
         },

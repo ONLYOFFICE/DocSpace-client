@@ -72,11 +72,11 @@ const AllSessionsBlock = (props) => {
 };
 
 export default inject(({ peopleStore }) => {
-  const { items, isLoading, fetchData, onClickLogoutAllExceptThis } =
+  const { getItems, isLoading, fetchData, onClickLogoutAllExceptThis } =
     peopleStore.selectionStore;
 
   return {
-    items,
+    items: getItems,
     isLoading,
     fetchData,
     onClickLogoutAllExceptThis,

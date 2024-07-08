@@ -505,6 +505,11 @@ class SelectionStore {
     return userIds.includes(id);
   }
 
+  get getItems() {
+    if (!this.items) return {};
+    return this.allSessions.find((item) => item.id === this.items.id) ?? {};
+  }
+
   convertDate = (t, dateString, locale) => {
     const parsedDate = moment(new Date(dateString).toISOString());
     const now = moment();

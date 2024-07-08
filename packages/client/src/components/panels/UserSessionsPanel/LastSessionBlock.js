@@ -230,12 +230,12 @@ const LastSessionBlock = (props) => {
 export default inject(({ setup, peopleStore }) => {
   const { setDisableDialogVisible, setLogoutAllDialogVisible } = setup;
 
-  const { isMe, getFromDateAgo, items, setDisplayName } =
+  const { getItems, isMe, getFromDateAgo, setDisplayName } =
     peopleStore.selectionStore;
 
   return {
     isMe,
-    items,
+    items: getItems,
     getFromDateAgo,
     setDisplayName,
     setDisableDialogVisible,

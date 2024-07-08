@@ -33,6 +33,8 @@ import EmptyCanceledLight from "PUBLIC_DIR/images/emptyview/empty.canceled.light
 import EmptyCanceledDark from "PUBLIC_DIR/images/emptyview/empty.canceled.dark.svg?url";
 
 const StyledEmptyScreenContainer = styled(EmptyScreenContainer)`
+  width: fit-content;
+
   .ec-image {
     width: 75px;
     height: 75px;

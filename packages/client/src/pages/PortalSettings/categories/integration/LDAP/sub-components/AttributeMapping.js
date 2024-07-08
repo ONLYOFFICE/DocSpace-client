@@ -98,14 +98,15 @@ const AttributeMapping = (props) => {
   const getUserTypes = React.useCallback(() => {
     const options = [
       {
-        key: EmployeeType.Collaborator,
-        label: t("Common:PowerUser"),
-      },
-      { key: EmployeeType.User, label: t("Common:RoomAdmin") },
-      {
         key: EmployeeType.Admin,
         label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
       },
+      { key: EmployeeType.User, label: t("Common:RoomAdmin") },
+      {
+        key: EmployeeType.Collaborator,
+        label: t("Common:PowerUser"),
+      },
+      { key: EmployeeType.Guest, label: t("Common:User") },
     ];
     return options;
   }, [t]);

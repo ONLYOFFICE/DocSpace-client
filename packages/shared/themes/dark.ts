@@ -3015,7 +3015,7 @@ const Dark: TTheme = {
         linkColorHelp: "#E06A1B",
         tooltipLinkColor: "#e06a1b",
         arrowColor: white,
-        descriptionColor: "#858585",
+        descriptionColor: "#ADADAD",
         brandingDescriptionColor: "#858585",
 
         whiteLabel: {

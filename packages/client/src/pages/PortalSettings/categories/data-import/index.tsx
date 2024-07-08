@@ -75,7 +75,15 @@ const DataImport = (props: DataImportProps) => {
 
     const { parseResult, error, isCompleted } = response;
 
-    if (error || parseResult.failedArchives.length > 0) return;
+    if (
+      error ||
+      parseResult.failedArchives.length > 0 ||
+      parseResult.users.length +
+        parseResult.existUsers.length +
+        parseResult.withoutEmailUsers.length ===
+        0
+    )
+      return;
 
     if (parseResult.operation === "parse") {
       setWorkspace(parseResult.migratorName);

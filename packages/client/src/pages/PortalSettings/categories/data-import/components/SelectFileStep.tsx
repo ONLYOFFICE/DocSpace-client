@@ -184,7 +184,6 @@ const SelectFileStep = (props: SelectFileStepProps) => {
       }
 
       if (res.parseResult.failedArchives.length > 0 || res.error) {
-        cancelMigration();
         toastr.error(res.error);
         setIsFileError(true);
         setLoadingStatus("none");
@@ -203,15 +202,14 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           setUsers(res.parseResult);
           setIsBackupEmpty(false);
           setLoadingStatus("done");
+          setUsers(res.parseResult);
+          setIsSaveDisabled(false);
         } else {
           setLoadingStatus("none");
           setIsBackupEmpty(true);
-          cancelMigration();
         }
-        setUsers(res.parseResult);
 
         setIsInfiniteProgress(false);
-        setIsSaveDisabled(false);
       }
 
       setProgress(res.progress);
@@ -224,7 +222,6 @@ const SelectFileStep = (props: SelectFileStepProps) => {
         if (error.message === "Network Error") {
           setIsNetworkError(true);
         }
-        cancelMigration();
         toastr.error(error || t("Common:SomethingWentWrong"));
         setIsFileError(true);
         setLoadingStatus("none");
@@ -232,7 +229,6 @@ const SelectFileStep = (props: SelectFileStepProps) => {
       }
     }
   }, [
-    cancelMigration,
     failTries,
     getMigrationStatus,
     isInfiniteProgress,

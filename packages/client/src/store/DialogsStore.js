@@ -529,7 +529,13 @@ class DialogsStore {
       data,
     };
   };
-  setShareCollectSelector = (visible, file) => {
+
+  /**
+   * @param {boolean} visible
+   * @param {import("@docspace/shared/api/files/types").TFile} [file = null]
+   * @returns {void}
+   */
+  setShareCollectSelector = (visible, file = null) => {
     this.shareCollectSelector = {
       visible,
       file,

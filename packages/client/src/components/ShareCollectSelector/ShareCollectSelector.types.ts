@@ -33,4 +33,17 @@ export interface ShareCollectSelectorProps {
 export interface InjectShareCollectSelectorProps
   extends Pick<TStore["settingsStore"], "socketHelper" | "currentDeviceType">,
     Pick<TStore["filesSettingsStore"], "getIcon">,
-    Pick<TStore["dialogsStore"], "setShareCollectSelector"> {}
+    Pick<
+      TStore["dialogsStore"],
+      "setShareCollectSelector" | "conflictResolveDialogVisible"
+    >,
+    Pick<TStore["infoPanelStore"], "setIsMobileHidden">,
+    Pick<TStore["filesStore"], "setSelected">,
+    Pick<
+      TStore["uploadDataStore"],
+      "itemOperationToFolder" | "clearActiveOperations"
+    >,
+    Pick<
+      TStore["filesActionsStore"],
+      "setConflictDialogData" | "checkFileConflicts" | "openFileAction"
+    > {}

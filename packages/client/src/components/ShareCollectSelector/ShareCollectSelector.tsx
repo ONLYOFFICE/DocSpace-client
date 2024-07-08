@@ -30,12 +30,17 @@ import { inject, observer } from "mobx-react";
 import { RoomsType } from "@docspace/shared/enums";
 import FilesSelectorWrapper from "@docspace/shared/selectors/Files";
 
+import { toastr } from "@docspace/shared/components/toast";
+
 import type {
   TFileSecurity,
+  TFolder,
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
+import type { TData } from "@docspace/shared/components/toast/Toast.type";
+import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 
 import type {
   InjectShareCollectSelectorProps,
@@ -43,16 +48,39 @@ import type {
 } from "./ShareCollectSelector.types";
 
 const ShareCollectSelector = inject<TStore>(
-  ({ settingsStore, filesSettingsStore, dialogsStore }) => {
+  ({
+    settingsStore,
+    filesSettingsStore,
+    dialogsStore,
+    filesActionsStore,
+    uploadDataStore,
+    infoPanelStore,
+    filesStore,
+  }) => {
     const { socketHelper, currentDeviceType } = settingsStore;
-    const { setShareCollectSelector } = dialogsStore;
+    const { setShareCollectSelector, conflictResolveDialogVisible } =
+      dialogsStore;
+    const { checkFileConflicts, setConflictDialogData, openFileAction } =
+      filesActionsStore;
+    const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
+    const { setIsMobileHidden } = infoPanelStore;
+
+    const { setSelected } = filesStore;
 
     const { getIcon } = filesSettingsStore;
     return {
       socketHelper,
       currentDeviceType,
+      conflictResolveDialogVisible,
       getIcon,
       setShareCollectSelector,
+      checkFileConflicts,
+      setConflictDialogData,
+      itemOperationToFolder,
+      clearActiveOperations,
+      setIsMobileHidden,
+      setSelected,
+      openFileAction,
     };
   },
 )(
@@ -62,16 +90,96 @@ const ShareCollectSelector = inject<TStore>(
       visible,
       socketHelper,
       currentDeviceType,
+      conflictResolveDialogVisible,
       getIcon,
       setShareCollectSelector,
+      checkFileConflicts,
+      setConflictDialogData,
+      clearActiveOperations,
+      itemOperationToFolder,
+      setIsMobileHidden,
+      setSelected,
+      openFileAction,
     }: ShareCollectSelectorProps & InjectShareCollectSelectorProps) => {
       const { t } = useTranslation(["Common", "Editor"]);
 
       const requestRunning = React.useRef(false);
 
-      const headerLabel = "";
+      const setIsRequestRunning = (arg: boolean) => {
+        requestRunning.current = arg;
+      };
 
-      const onSubmit = () => {};
+      const onClose = () => {
+        if (requestRunning.current) return;
+
+        setShareCollectSelector(false);
+      };
+
+      const onCloseAction = () => {
+        setIsMobileHidden(false);
+
+        onClose();
+      };
+
+      const onCloseAndDeselectAction = () => {
+        setSelected("none");
+        onCloseAction();
+      };
+
+      const onSubmit = async (
+        selectedItemId: string | number | undefined,
+        folderTitle: string,
+        isPublic: boolean,
+        breadCrumbs: TBreadCrumb[],
+        fileName: string,
+        isChecked: boolean,
+        selectedTreeNode: TFolder,
+        // selectedFileInfo: TSelectedFileInfo,
+      ) => {
+        const fileIds = [file.id];
+        const folderIds: number[] = [];
+
+        const selectedFolder = { ...selectedTreeNode, isFolder: true };
+
+        const operationData = {
+          destFolderId: selectedItemId,
+          folderIds,
+          fileIds,
+          deleteAfter: false,
+          isCopy: true,
+          folderTitle,
+          translations: {
+            copy: t("Common:CopyOperation"),
+          },
+          selectedFolder,
+          fromShareCollectSelector: true,
+        };
+
+        setIsRequestRunning(true);
+
+        try {
+          const conflicts = (await checkFileConflicts(
+            selectedItemId,
+            folderIds,
+            fileIds,
+          )) as [];
+
+          if (conflicts.length) {
+            setConflictDialogData(conflicts, operationData);
+            setIsRequestRunning(false);
+          } else {
+            setIsRequestRunning(false);
+            onCloseAndDeselectAction();
+
+            openFileAction(selectedFolder, t);
+            await itemOperationToFolder(operationData);
+          }
+        } catch (e: unknown) {
+          toastr.error(e as TData);
+          setIsRequestRunning(false);
+          clearActiveOperations(fileIds, folderIds);
+        }
+      };
 
       const getIsDisabled = (
         isFirstLoad: boolean,
@@ -99,10 +207,6 @@ const ShareCollectSelector = inject<TStore>(
           : !selectedItemSecurity.Copy;
       };
 
-      const onClose = () => {
-        setShareCollectSelector(false, null);
-      };
-
       const getFilesArchiveError = React.useCallback(
         (name: string) => t("Common:ArchivedRoomAction", { name }),
         [t],
@@ -124,7 +228,7 @@ const ShareCollectSelector = inject<TStore>(
           currentFolderId=""
           rootFolderType={file.rootFolderType}
           createDefineRoomType={RoomsType.FormRoom}
-          isPanelVisible={visible}
+          isPanelVisible={visible && !conflictResolveDialogVisible}
           socketHelper={socketHelper}
           socketSubscribers={socketHelper.socketSubscribers}
           currentDeviceType={currentDeviceType}

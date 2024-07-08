@@ -25,17 +25,23 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
 import UpSvgUrl from "PUBLIC_DIR/images/up.svg?url";
+import FormRoomEmptyDarkImageUrl from "PUBLIC_DIR/images/emptyview/selector.form.room.empty.screen.dark.svg?url";
+import FormRoomEmptyLightImageUrl from "PUBLIC_DIR/images/emptyview/selector.form.room.empty.screen.light.svg?url";
+
+import { RoomsType } from "../../../enums";
 
 import { Heading } from "../../heading";
 import { Text } from "../../text";
 import { IconButton } from "../../icon-button";
 import { Link, LinkType } from "../../link";
+import { SelectorAddButton } from "../../selector-add-button";
 
-import { StyledEmptyScreen } from "../Selector.styled";
+import { StyledEmptyScreen, StyledNewEmptyScreen } from "../Selector.styled";
 import { EmptyScreenProps } from "../Selector.types";
 import useCreateDropDown from "../hooks/useCreateDropDown";
 import NewItemDropDown from "./NewItemDropDown";
@@ -59,9 +65,14 @@ const EmptyScreen = ({
   items,
   inputItemVisible,
 }: EmptyScreenProps) => {
+  const theme = useTheme();
   const { t } = useTranslation(["Common"]);
   const { isOpenDropDown, setIsOpenDropDown, onCloseDropDown } =
     useCreateDropDown();
+
+  const formRoomEmptyScreenImage = theme.isBase
+    ? FormRoomEmptyLightImageUrl
+    : FormRoomEmptyDarkImageUrl;
 
   const currentImage = withSearch ? searchImage : image;
   const currentHeader = withSearch ? searchHeader : header;
@@ -82,6 +93,37 @@ const EmptyScreen = ({
 
     createItem.onCreateClick?.();
   };
+
+  if (
+    !withSearch &&
+    createItem?.isRoomsOnly &&
+    createItem.createDefineRoomType === RoomsType.FormRoom
+  )
+    return (
+      <StyledNewEmptyScreen>
+        <img
+          className="empty-image"
+          src={formRoomEmptyScreenImage}
+          alt="empty-screen"
+        />
+        <Heading level={3} className="empty-header">
+          {t("Common:NoRoomsFound")}
+        </Heading>
+        <Text className="empty-description" noSelect>
+          {t("Common:SelectorFormRoomEmptyScreenDescription")}
+        </Text>
+        <div className="empty_button-wrapper" onClick={onCreateClickAction}>
+          <SelectorAddButton
+            isAction
+            className="empty-button"
+            title={t("Common:CreateFormFillingRoom")}
+          />
+          <Text className="empty-button-label" noSelect>
+            {t("Common:CreateFormFillingRoom")}
+          </Text>
+        </div>
+      </StyledNewEmptyScreen>
+    );
 
   return (
     <StyledEmptyScreen withSearch={withSearch}>

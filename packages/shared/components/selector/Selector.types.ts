@@ -427,6 +427,9 @@ type TSelectorItemEmpty = {
   onAcceptInput?: undefined;
   onCancelInput?: undefined;
   placeholder?: undefined;
+
+  isRoomsOnly?: undefined;
+  createDefineRoomType?: undefined;
 };
 
 export type TSelectorItemUser = MergeTypes<
@@ -505,6 +508,9 @@ export type TSelectorItemNew = MergeTypes<
     onCreateClick?: VoidFunction;
 
     onBackClick: VoidFunction;
+
+    isRoomsOnly: boolean;
+    createDefineRoomType?: RoomsType;
   }
 >;
 

@@ -349,6 +349,60 @@ const StyledEmptyScreen = styled.div<{ withSearch: boolean }>`
   }
 `;
 
+const StyledNewEmptyScreen = styled.section`
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  padding: 0 28px;
+
+  box-sizing: border-box;
+
+  .empty-image {
+    margin-top: 26px;
+  }
+
+  .empty-header {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 700;
+    text-align: center;
+
+    margin: 0;
+
+    margin-top: 32px;
+  }
+
+  .empty-description {
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+
+    margin-top: 8px;
+
+    color: ${(props) => props.theme.selector.emptyScreen.pressedButtonColor};
+  }
+
+  .empty_button-wrapper {
+    display: flex;
+    justify-content: flex-start;
+
+    align-self: flex-start;
+
+    align-items: center;
+    gap: 16px;
+
+    padding: 12px 0;
+    margin-top: 16px;
+  }
+
+  .empty-button-label {
+    cursor: pointer;
+  }
+`;
+
 const StyledBreadCrumbs = styled.div<{
   itemsCount: number;
   gridTemplateColumns: string;
@@ -576,6 +630,7 @@ StyledBody.defaultProps = { theme: Base };
 StyledSelectAll.defaultProps = { theme: Base };
 StyledItem.defaultProps = { theme: Base };
 StyledEmptyScreen.defaultProps = { theme: Base };
+StyledNewEmptyScreen.defaultProps = { theme: Base };
 StyledArrowRightSvg.defaultProps = { theme: Base };
 StyledComboBox.defaultProps = { theme: Base };
 StyledInfo.defaultProps = { theme: Base };
@@ -602,4 +657,5 @@ export {
   StyledAccessSelector,
   StyledInputWrapper,
   StyledCreateDropDown,
+  StyledNewEmptyScreen,
 };

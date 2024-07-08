@@ -67,6 +67,7 @@ async function Page({ searchParams }: RootPageProps) {
   if (data.error?.status === "not-found" && error) {
     data.error.message = error;
   }
+
   return <Root {...data} timer={timer} />;
 }
 

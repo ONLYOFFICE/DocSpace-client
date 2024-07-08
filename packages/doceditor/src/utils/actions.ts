@@ -411,9 +411,11 @@ export async function openEdit(
         ? "not-found"
         : config.error?.type === EditorConfigErrorType.AccessDeniedScope
           ? "access-denied"
-          : res.status === 415
-            ? "not-supported"
-            : undefined;
+          : config.error?.type === EditorConfigErrorType.TenantQuotaException
+            ? "quota-exception"
+            : res.status === 415
+              ? "not-supported"
+              : undefined;
 
     const message = status ? config.error.message : undefined;
 

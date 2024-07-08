@@ -23,52 +23,36 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import React from "react";
+import { useTranslation } from "react-i18next";
+import styled, { useTheme } from "styled-components";
 
-import type { Metadata } from "next";
-import { BRAND_NAME } from "@docspace/shared/constants";
+import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 
-import { getData } from "@/utils/actions";
-import { RootPageProps } from "@/types";
-import Root from "@/components/Root";
+import EmptyCanceledLight from "PUBLIC_DIR/images/emptyview/empty.canceled.light.svg?url";
+import EmptyCanceledDark from "PUBLIC_DIR/images/emptyview/empty.canceled.dark.svg?url";
 
-const initialSearchParams: RootPageProps["searchParams"] = {
-  fileId: undefined,
-  fileid: undefined,
-  version: undefined,
-  doc: undefined,
-  action: undefined,
-  share: undefined,
-  editorType: undefined,
-};
+const StyledEmptyScreenContainer = styled(EmptyScreenContainer)`
+  width: fit-content;
 
-export const metadata: Metadata = {
-  title: `${BRAND_NAME} DocEditor page`,
-
-  description: "",
-};
-
-async function Page({ searchParams }: RootPageProps) {
-  const { fileId, fileid, version, doc, action, share, editorType, error } =
-    searchParams ?? initialSearchParams;
-
-  const startDate = new Date();
-
-  const data = await getData(
-    fileId ?? fileid ?? "",
-    version,
-    doc,
-    action,
-    share,
-    editorType,
-  );
-
-  const timer = new Date().getTime() - startDate.getTime();
-
-  if (data.error?.status === "not-found" && error) {
-    data.error.message = error;
+  .ec-image {
+    width: 75px;
+    height: 75px;
   }
+`;
 
-  return <Root {...data} timer={timer} />;
-}
+const ThirdPartyComponent = () => {
+  const { t } = useTranslation("InfoPanel");
+  const theme = useTheme();
 
-export default Page;
+  return (
+    <StyledEmptyScreenContainer
+      imageSrc={theme.isBase ? EmptyCanceledLight : EmptyCanceledDark}
+      headerText={t("NoRecordsFound")}
+      descriptionText={t("HistoryThirdParty")}
+      imageAlt={t("NoRecordsFound")}
+    />
+  );
+};
+
+export default ThirdPartyComponent;

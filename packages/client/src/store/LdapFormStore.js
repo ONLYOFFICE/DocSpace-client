@@ -150,7 +150,7 @@ class LdapFormStore {
       mail: MailAttribute,
       avatarAttribute: AvatarAttribute,
       userQuotaLimit: UserQuotaLimit,
-      userType: EmployeeType.Collaborator,
+      userType: EmployeeType.Guest,
     };
 
     this.authentication = authentication;
@@ -165,7 +165,7 @@ class LdapFormStore {
     this.groupAttribute = groupAttribute;
     this.groupNameAttribute = groupNameAttribute;
 
-    this.login = login;
+    this.login = login || "";
     this.password = password || "";
   };
 
@@ -206,6 +206,7 @@ class LdapFormStore {
 
     runInAction(() => {
       this.isLoaded = true;
+      this.errors = {};
     });
 
     if (
@@ -376,9 +377,7 @@ class LdapFormStore {
       }
 
       for (var key in this.requiredSettings) {
-        // console.log({ key });
         if (
-          this.requiredSettings[key] &&
           typeof this.requiredSettings[key] == "string" &&
           this.requiredSettings[key].trim() === ""
         ) {

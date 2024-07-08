@@ -344,7 +344,7 @@ class UsersStore {
 
           options.push("details");
 
-          if (userRole === "manager" || userRole === "admin") {
+          if (userRole !== "user") {
             options.push("reassign-data");
           }
 

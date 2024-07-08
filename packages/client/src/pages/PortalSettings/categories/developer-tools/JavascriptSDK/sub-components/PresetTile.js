@@ -26,6 +26,7 @@
 
 import React from "react";
 import styled, { css } from "styled-components";
+import { ReactSVG } from "react-svg";
 
 import { Base } from "@docspace/shared/themes";
 
@@ -90,9 +91,10 @@ const PresetTile = (props) => {
         <Text fontSize="16px" lineHeight="22px" fontWeight={700}>
           {title}
         </Text>
-        <img height={180} width={310} src={image} alt={title} />
+        <ReactSVG src={image} />
         <Text lineHeight="20px">{description}</Text>
       </div>
+
       <Button
         className="navigationButton"
         label={t("SetUp")}

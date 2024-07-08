@@ -102,6 +102,11 @@ const StyledLdapPage = styled(Box)`
     }
     display: grid;
     grid-gap: 12px;
+
+    .access-selector {
+      margin-right: 0;
+      margin-top: -4px;
+    }
   }
 
   .group_membership-header,

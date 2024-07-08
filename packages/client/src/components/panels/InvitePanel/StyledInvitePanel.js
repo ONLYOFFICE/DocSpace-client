@@ -193,7 +193,7 @@ const StyledRow = styled.div`
     line-height: 16px;
   }
 
-  .invite-panel_access-selector {
+  .access-selector {
     margin-inline-start: auto;
     margin-inline-end: 0;
 
@@ -273,17 +273,6 @@ const StyledInviteInput = styled.div`
   :focus-within {
     border-color: ${(props) => props.theme.inputBlock.borderColor};
   }
-`;
-
-const StyledAccessSelector = styled.div`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: 16px;
-        `
-      : css`
-          margin-right: 16px;
-        `}
 `;
 
 const StyledEditInput = styled(TextInput)`
@@ -425,7 +414,7 @@ const StyledCrossIcon = styled(CrossIcon)`
 StyledCrossIcon.defaultProps = { theme: Base };
 
 const StyledDeleteIcon = styled(DeleteIcon)`
-cursor: pointer;
+  cursor: pointer;
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
@@ -591,7 +580,6 @@ export {
   StyledLink,
   ResetLink,
   ScrollList,
-  StyledAccessSelector,
   StyledToggleButton,
   StyledDescription,
   StyledInviteLanguage,

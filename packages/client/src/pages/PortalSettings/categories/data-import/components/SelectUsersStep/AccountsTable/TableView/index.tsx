@@ -107,6 +107,7 @@ const TableView = (props: TableViewProps) => {
             filesLength={accountsData.length}
             hasMoreFiles={false}
             itemCount={accountsData.length}
+            fetchMoreFiles={() => {}}
           >
             {accountsData.map((data) => (
               <UsersTableRow

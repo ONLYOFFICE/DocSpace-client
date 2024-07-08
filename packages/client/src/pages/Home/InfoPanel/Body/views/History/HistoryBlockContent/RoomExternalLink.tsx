@@ -110,17 +110,16 @@ const HistoryRoomExternalLink = ({
   );
 };
 
-export default inject<TStore>(({ userStore, dialogsStore, infoPanelStore }) => {
+export default inject<TStore>(({ dialogsStore, infoPanelStore }) => {
   const { infoPanelSelection } = infoPanelStore;
   const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
-  const { user } = userStore;
-  const { id, roomType } = infoPanelSelection!;
+  const { id, roomType, security } = infoPanelSelection!;
+  const { EditRoom } = security!;
 
   const isFormRoom = roomType === RoomsType.FormRoom;
-  const cannotEdit = user?.isVisitor || user?.isCollaborator;
 
   return {
-    canEditLink: !cannotEdit,
+    canEditLink: EditRoom,
     setEditLinkPanelIsVisible,
     setLinkParams,
     roomId: id,

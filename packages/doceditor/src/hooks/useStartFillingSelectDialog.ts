@@ -27,7 +27,7 @@
 import { useCallback, useRef, useState } from "react";
 
 import { ConflictResolveType } from "@docspace/shared/enums";
-import { checkFileConflicts, copyToFolder } from "@docspace/shared/api/files";
+import { copyToFolder, getProgress } from "@docspace/shared/api/files";
 // import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 
 import type {
@@ -40,8 +40,12 @@ import type {
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import type { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
-import type { ConflictStateType } from "@/types";
+import { toastr } from "@docspace/shared/components/toast";
+import { TData } from "@docspace/shared/components/toast/Toast.type";
+
 // import { useTranslation } from "react-i18next";
+
+import type { ConflictStateType } from "@/types";
 
 const DefaultConflictDataDialogState: ConflictStateType = {
   visible: false,
@@ -115,7 +119,6 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
 
     const url = new URL(`${window.location.origin}/rooms/shared/filter`);
     url.searchParams.set("folder", selectedItemId.toString());
-    window.location.replace(url.toString());
 
     // const hasConfictFiles = await checkFileConflicts(
     //   selectedItemId,
@@ -136,17 +139,38 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
     //   }
     // }
 
-    copyToFolder(
-      Number(selectedItemId),
-      [],
-      [fileInfo.id],
-      conflictResolve,
-      false,
-    );
+    try {
+      await copyToFolder(
+        Number(selectedItemId),
+        [],
+        [fileInfo.id],
+        conflictResolve,
+        false,
+      );
 
-    requestRunning.current = false;
+      const error = await new Promise((resolve) => {
+        const interval = setInterval(async () => {
+          const [progress] = await getProgress();
 
-    onClose();
+          if (progress?.finished) {
+            clearInterval(interval);
+            resolve(progress.error);
+          }
+        }, 1000);
+      });
+
+      if (error) {
+        toastr.error(error);
+      } else {
+        window.location.replace(url.toString());
+        onClose();
+      }
+    } catch (e) {
+      toastr.error(e as TData);
+      onClose();
+    } finally {
+      requestRunning.current = false;
+    }
   };
 
   const getIsDisabled = (

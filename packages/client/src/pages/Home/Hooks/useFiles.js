@@ -258,7 +258,7 @@ const useFiles = ({
       .all(requests)
       .catch((err) => {
         if (isRooms) {
-          Promise.resolve(RoomsFilter.getDefault());
+          Promise.resolve(RoomsFilter.getDefault(userId, filterObj.searchArea));
         } else {
           Promise.resolve(FilesFilter.getDefault());
         }

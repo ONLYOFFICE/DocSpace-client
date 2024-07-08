@@ -57,8 +57,8 @@ const Wrapper = styled.div`
 const StyledTabs = styled(Tabs)`
   > .sticky {
     z-index: 201;
-    margin-inline-end: -17px;
-    padding-inline-end: 17px;
+    margin-inline-end: -16px;
+    padding-inline-end: 16px;
   }
 `;
 

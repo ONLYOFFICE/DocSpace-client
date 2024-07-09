@@ -57,6 +57,7 @@ const SectionBodyContent = (props) => {
     setHotkeyCaret,
     selectAll,
     deselectAll,
+    onClickBack,
   } = props;
 
   const location = useLocation();
@@ -70,6 +71,7 @@ const SectionBodyContent = (props) => {
     activateHotkeys,
     selectAll,
     deselectAll,
+    onClickBack,
   });
 
   useEffect(() => {
@@ -131,7 +133,7 @@ const SectionBodyContent = (props) => {
   );
 };
 
-export default inject(({ peopleStore }) => {
+export default inject(({ peopleStore, filesActionsStore }) => {
   const {
     viewAs: accountsViewAs,
     filterStore,
@@ -185,6 +187,7 @@ export default inject(({ peopleStore }) => {
     setHotkeyCaret,
     selectAll,
     deselectAll,
+    onClickBack: filesActionsStore.onClickBack,
   };
 })(
   withTranslation(["People", "Common", "PeopleTranslations"])(

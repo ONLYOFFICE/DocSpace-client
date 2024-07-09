@@ -37,6 +37,7 @@ interface AccountsHotkeysProps {
   activateHotkeys: (e: KeyboardEvent) => void;
   selectAll: () => void;
   deselectAll: () => void;
+  onClickBack: () => void;
 }
 
 const useAccountsHotkeys = ({
@@ -47,6 +48,7 @@ const useAccountsHotkeys = ({
   activateHotkeys,
   selectAll,
   deselectAll,
+  onClickBack,
 }: AccountsHotkeysProps) => {
   const [isEnabled, setIsEnabled] = useState(true);
 
@@ -111,6 +113,9 @@ const useAccountsHotkeys = ({
 
   // Deselect all accounts
   useHotkeys("shift+n, ESC", deselectAll, hotkeysFilter);
+
+  //Back to parent folder
+  useHotkeys("Backspace", onClickBack, hotkeysFilter);
 };
 
 export default useAccountsHotkeys;

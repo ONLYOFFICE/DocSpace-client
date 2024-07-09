@@ -126,6 +126,7 @@ class CreateEditRoomStore {
       roomType: roomParams.type,
       title: roomParams.title || t("Common:NewRoom"),
       indexing: roomParams.indexing,
+      lifetime: roomParams.lifetime,
       createAsNewFolder: roomParams.createAsNewFolder ?? true,
       ...(quotaLimit && {
         quota: +quotaLimit,

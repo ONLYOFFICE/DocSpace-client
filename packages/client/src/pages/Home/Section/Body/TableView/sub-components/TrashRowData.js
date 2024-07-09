@@ -32,7 +32,7 @@ import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
-import { classNames } from "@docspace/shared/utils";
+import { classNames, getLastColumn } from "@docspace/shared/utils";
 import {
   StyledBadgesContainer,
   StyledQuickButtonsContainer,
@@ -61,7 +61,10 @@ const TrashRowDataComponent = (props) => {
     showHotkeyBorder,
     badgesComponent,
     quickButtonsComponent,
+    tableStorageName,
   } = props;
+
+  const lastColumn = getLastColumn(tableStorageName);
 
   return (
     <>
@@ -92,6 +95,10 @@ const TrashRowDataComponent = (props) => {
             !roomColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Room" ? "no-extra-space" : "",
+          )}
         >
           <RoomCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -110,6 +117,10 @@ const TrashRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "AuthorTrash" ? "no-extra-space" : "",
+          )}
         >
           <AuthorCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -128,6 +139,10 @@ const TrashRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "CreatedTrash" ? "no-extra-space" : "",
+          )}
         >
           <DateCell
             create
@@ -145,6 +160,10 @@ const TrashRowDataComponent = (props) => {
             !erasureColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Erasure" ? "no-extra-space" : "",
+          )}
         >
           <ErasureCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -163,6 +182,10 @@ const TrashRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "SizeTrash" ? "no-extra-space" : "",
+          )}
         >
           <SizeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -181,6 +204,10 @@ const TrashRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "TypeTrash" ? "no-extra-space" : "",
+          )}
         >
           <TypeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -223,6 +250,7 @@ export default inject(({ tableStore }) => {
     sizeTrashColumnIsEnabled,
     typeTrashColumnIsEnabled,
     quickButtonsColumnIsEnabled,
+    tableStorageName,
   } = tableStore;
 
   return {
@@ -233,5 +261,6 @@ export default inject(({ tableStore }) => {
     sizeTrashColumnIsEnabled,
     typeTrashColumnIsEnabled,
     quickButtonsColumnIsEnabled,
+    tableStorageName,
   };
 })(observer(TrashRowDataComponent));

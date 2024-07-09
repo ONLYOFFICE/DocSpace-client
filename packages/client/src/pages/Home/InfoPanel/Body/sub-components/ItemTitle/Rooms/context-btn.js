@@ -24,15 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
-
-const generalKeys = ["select", "show-info"];
-const roomKeys = ["separator0", "room-info"];
 
 const StyledItemContextOptions = styled.div`
   height: 16px;
@@ -45,7 +42,6 @@ const RoomsContextBtn = ({
   selection,
   itemTitleRef,
 
-  getItemContextOptionsKeys,
   getItemContextOptionsActions,
   onSelectItem,
 }) => {
@@ -62,37 +58,7 @@ const RoomsContextBtn = ({
   };
 
   const getData = () => {
-    let item = { ...selection };
-    if (!selection.contextOptions) {
-      const contextOptions = getItemContextOptionsKeys(selection, true);
-      item = { ...item, contextOptions };
-    }
-
-    const options = getItemContextOptionsActions(item, t, true);
-
-    const removeOptionByKey = (key) => {
-      const idx = options.findIndex((o) => o.key === key);
-      if (idx !== -1) options.splice(idx, 1);
-    };
-
-    generalKeys.forEach((key) => removeOptionByKey(key));
-    if (selection.isRoom) roomKeys.forEach((key) => removeOptionByKey(key));
-
-    options.forEach((item, index) => {
-      const isSeparator = item.key.includes("separator");
-      const isFirst = index === options.length - 1;
-      const isLast = index === 0;
-      const nextItem = isLast ? null : options[index + 1];
-      const nextIsSeparator = nextItem && nextItem.key.includes("separator");
-      if (
-        (isFirst && isSeparator) ||
-        (isLast && isSeparator) ||
-        (isSeparator && nextIsSeparator)
-      )
-        options.splice(index, 1);
-    });
-
-    return options;
+    return getItemContextOptionsActions(selection, t, true);
   };
 
   return (
@@ -120,8 +86,7 @@ const RoomsContextBtn = ({
   );
 };
 
-export default inject(({ filesStore, contextOptionsStore }) => ({
-  getItemContextOptionsKeys: filesStore.getFilesContextOptions,
+export default inject(({ contextOptionsStore }) => ({
   getItemContextOptionsActions: contextOptionsStore.getFilesContextOptions,
 }))(
   withTranslation([

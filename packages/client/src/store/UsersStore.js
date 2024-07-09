@@ -47,6 +47,8 @@ class UsersStore {
   providers = [];
   accountsIsIsLoading = false;
   operationRunning = false;
+  abortController = new AbortController();
+  requestRunning = false;
 
   constructor(peopleStore, settingsStore, infoPanelStore, userStore) {
     this.peopleStore = peopleStore;
@@ -62,6 +64,12 @@ class UsersStore {
     withFilterLocalStorage = false,
   ) => {
     const filterData = filter ? filter.clone() : Filter.getDefault();
+
+    if (this.requestRunning) {
+      this.abortController.abort();
+
+      this.abortController = new AbortController();
+    }
 
     const filterStorageItem = localStorage.getItem(
       `PeopleFilter=${this.userStore.user?.id}`,
@@ -88,8 +96,15 @@ class UsersStore {
     if (filterData.group && filterData.group === "root")
       filterData.group = undefined;
 
-    const res = await api.people.getUserList(filterData);
+    this.requestRunning = true;
+
+    const res = await api.people.getUserList(
+      filterData,
+      this.abortController.signal,
+    );
     filterData.total = res.total;
+
+    this.requestRunning = false;
 
     if (updateFilter) {
       this.peopleStore.filterStore.setFilterParams(filterData);
@@ -141,9 +156,10 @@ class UsersStore {
 
   get needResetUserSelection() {
     const { isVisible: infoPanelVisible } = this.infoPanelStore;
-    const { isOneUserSelection } = this.peopleStore.selectionStore;
+    const { isOneUserSelection, isOnlyBufferSelection } =
+      this.peopleStore.selectionStore;
 
-    return !infoPanelVisible || !isOneUserSelection;
+    return !infoPanelVisible || (!isOneUserSelection && !isOnlyBufferSelection);
   }
   updateUserStatus = async (status, userIds) => {
     return api.people.updateUserStatus(status, userIds).then((users) => {

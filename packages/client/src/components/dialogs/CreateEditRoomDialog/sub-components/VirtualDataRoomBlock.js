@@ -67,7 +67,9 @@ const Block = ({
 const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams }) => {
   const role = t("Translations:RoleViewer");
 
-  const [fileLifetimeChecked, setFileLifetimeChecked] = useState(false);
+  const [fileLifetimeChecked, setFileLifetimeChecked] = useState(
+    !!roomParams?.lifetime,
+  );
   const [copyAndDownloadChecked, setCopyAndDownloadChecked] = useState(false);
   const [watermarksChecked, setWatermarksChecked] = useState(false);
 
@@ -76,6 +78,7 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams }) => {
   };
 
   const onChangeFileLifetime = () => {
+    if (fileLifetimeChecked) setRoomParams({ ...roomParams, lifetime: null });
     setFileLifetimeChecked(!fileLifetimeChecked);
   };
 
@@ -103,7 +106,11 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams }) => {
         isDisabled={false}
         isChecked={fileLifetimeChecked}
       >
-        <FileLifetime t={t} />
+        <FileLifetime
+          t={t}
+          roomParams={roomParams}
+          setRoomParams={setRoomParams}
+        />
       </Block>
       <Block
         headerText={t("RestrictCopyAndDownload")}

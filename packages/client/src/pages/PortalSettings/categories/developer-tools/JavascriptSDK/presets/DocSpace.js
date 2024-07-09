@@ -38,7 +38,6 @@ import { PreviewBlock } from "../sub-components/PreviewBlock";
 import { loadFrame } from "../utils";
 
 import {
-  scriptUrl,
   dataDimensions,
   defaultWidthDimension,
   defaultHeightDimension,
@@ -53,7 +52,7 @@ import {
   Container,
   ControlsSection,
 } from "./StyledPresets";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { PRODUCT_NAME, SDK_SCRIPT_URL } from "@docspace/shared/constants";
 
 const DocSpace = (props) => {
   const { t, setDocumentTitle, theme } = props;
@@ -88,7 +87,7 @@ const DocSpace = (props) => {
     window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
   };
 
-  const loadCurrentFrame = () => loadFrame(config, scriptUrl);
+  const loadCurrentFrame = () => loadFrame(config, SDK_SCRIPT_URL);
 
   useEffect(() => {
     loadCurrentFrame();
@@ -124,7 +123,7 @@ const DocSpace = (props) => {
           preview={preview}
           theme={theme}
           frameId={frameId}
-          scriptUrl={scriptUrl}
+          scriptUrl={SDK_SCRIPT_URL}
           config={config}
         />
         <Controls>

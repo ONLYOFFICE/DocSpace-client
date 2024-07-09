@@ -35,7 +35,7 @@ import {
   toUrlParams,
 } from "../../utils/common";
 import RoomsFilter from "./filter";
-import { TExportRoomIndexTask, TGetRooms } from "./types";
+import { TGetRooms, TRoomLifetime, TExportRoomIndexTask } from "./types";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
   let params;
@@ -113,20 +113,21 @@ export function updateRoomMemberRole(id, data) {
   });
 }
 
-export function getHistory(module, id, signal = null, requestToken) {
+export function getHistory(
+  selectionType: "file" | "folder",
+  id,
+  signal = null,
+  requestToken,
+) {
   const options = {
     method: "get",
-    url: `/feed/filter?module=${module}&withRelated=true&id=${id}`,
+    url: `/files/${selectionType}/${id}/log`,
     signal,
   };
 
-  if (requestToken) {
-    options.headers = { "Request-Token": requestToken };
-  }
+  if (requestToken) options.headers = { "Request-Token": requestToken };
 
-  return request(options).then((res) => {
-    return res;
-  });
+  return request(options).then((res) => res);
 }
 
 export function getRoomHistory(id) {
@@ -472,6 +473,20 @@ export function resetRoomQuota(roomIds) {
   const options = {
     method: "put",
     url: "files/rooms/resetquota",
+    data,
+  };
+
+  return request(options);
+}
+
+export function changeRoomLifetime(
+  roomId: string | number,
+  lifetime: TRoomLifetime | null,
+) {
+  const data = lifetime ? { ...lifetime } : null;
+  const options = {
+    method: "put",
+    url: `files/rooms/${roomId}/lifetime`,
     data,
   };
 

@@ -59,6 +59,12 @@ export type TRoomSecurity = {
   CopySharedLink: boolean;
 };
 
+export type TRoomLifetime = {
+  deletePermanently: boolean;
+  period: number;
+  value: number;
+};
+
 export type TRoom = {
   parentId: number;
   filesCount: number;
@@ -84,6 +90,7 @@ export type TRoom = {
   updatedBy: TCreatedBy;
   isArchive?: boolean;
   security: TRoomSecurity;
+  lifetime: TRoomLifetime;
 };
 
 export type TGetRooms = {

@@ -269,6 +269,29 @@ const StyledItem = styled.div<{
             }
           }`}
         `}
+
+  .selector-item_name {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+
+    .label {
+      width: unset;
+    }
+
+    svg {
+      path {
+        fill: ${({ theme }) => theme.navigation.lifetimeIconFill} !important;
+        stroke: ${({ theme }) =>
+          theme.navigation.lifetimeIconStroke} !important;
+      }
+    }
+  }
+
+  .title-icon {
+    cursor: pointer;
+  }
 `;
 
 const StyledEmptyScreen = styled.div<{ withSearch: boolean }>`

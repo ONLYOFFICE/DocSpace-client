@@ -88,6 +88,7 @@ import {
 } from "SRC_DIR/helpers/utils";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
+import { changeRoomLifetime } from "@docspace/shared/api/rooms";
 import api from "@docspace/shared/api";
 import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 
@@ -664,9 +665,12 @@ class FilesActionStore {
     }
   };
 
-  downloadAction = (label, item, folderId) => {
+  downloadAction = (label, item) => {
     const { bufferSelection } = this.filesStore;
     const { openUrl } = this.settingsStore;
+    const { id, isFolder } = this.selectedFolderStore;
+
+    const downloadAsArchive = id === item?.id && isFolder === item?.isFolder;
 
     const selection = item
       ? [item]
@@ -682,7 +686,7 @@ class FilesActionStore {
     let folderIds = [];
     const items = [];
 
-    if (selection.length === 1 && selection[0].fileExst && !folderId) {
+    if (selection.length === 1 && selection[0].fileExst && !downloadAsArchive) {
       openUrl(selection[0].viewUrl, UrlActionType.Download);
       return Promise.resolve();
     }
@@ -1447,17 +1451,19 @@ class FilesActionStore {
       setIsSectionFilterLoading(param);
     };
 
-    const { ExtraLocationTitle, ExtraLocation, fileExst, folderId } = item;
+    const { title, fileExst } = item;
+    const parentId = item.parentId || item.toFolderId || recycleBinFolderId;
+    const parentTitle = item.parentTitle || item.toFolderTitle;
 
-    const isRoot =
-      ExtraLocation === myRoomsId ||
-      ExtraLocation === myFolderId ||
-      ExtraLocation === archiveRoomsId ||
-      ExtraLocation === recycleBinFolderId;
+    const isRoot = [
+      myRoomsId,
+      myFolderId,
+      archiveRoomsId,
+      recycleBinFolderId,
+    ].includes(parentId);
 
     const state = {
-      title: ExtraLocationTitle,
-
+      title: parentTitle,
       isRoot,
       fileExst,
       highlightFileId: item.id,
@@ -1465,14 +1471,12 @@ class FilesActionStore {
       rootFolderType,
     };
 
-    const url = getCategoryUrl(categoryType, ExtraLocation);
+    const url = getCategoryUrl(categoryType, parentId);
 
     const newFilter = FilesFilter.getDefault();
 
-    const title = this.nameWithoutExtension(item.title);
-
     newFilter.search = title;
-    newFilter.folder = ExtraLocation || folderId;
+    newFilter.folder = parentId;
 
     setIsLoading(
       window.DocSpace.location.search !== `?${newFilter.toUrlParams()}` ||
@@ -2717,6 +2721,10 @@ class FilesActionStore {
 
     await deleteFilesFromRecent(fileIds);
     await refreshFiles();
+  };
+
+  changeRoomLifetime = (roomId, lifetime) => {
+    return changeRoomLifetime(roomId, lifetime);
   };
 
   copyFromTemplateForm = async (fileInfo, t) => {

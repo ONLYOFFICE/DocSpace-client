@@ -24,57 +24,60 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { Trans } from "react-i18next";
+import { Text } from "@docspace/shared/components/text";
+import {
+  ComboBox,
+  ComboBoxSize,
+  TOption,
+} from "@docspace/shared/components/combobox";
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/shared/components/text-input";
+import { dataDimensions } from "../../../../pages/PortalSettings/categories/developer-tools/JavascriptSDK/constants";
 
-import { FeedActionTypes, FeedItemTypes } from "@docspace/shared/enums";
+type DisplayBlockProps = {
+  label: string;
+  inputValue: string;
+  onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  selectedOption: TOption;
+  onSelectDimension: (option: TOption) => void;
+};
 
-import { StyledHistoryBlockMessage } from "../../styles/history";
-import getBlockMessageTranslation from "./HistroryBlockMessageTranslations";
-
-const HistoryBlockMessage = ({
-  t,
-  action,
-  groupedActions,
-  selectedFolder,
-  infoPanelSelection,
-}) => {
-  const message = getBlockMessageTranslation(
-    t,
-    action.hasOwnProperty("Action") ? action.Action : action.Actions,
-    action.Item,
-    action.Item === FeedItemTypes.File || action.Item === FeedItemTypes.Folder
-      ? !!groupedActions.length
-      : false,
-    action.Item === FeedItemTypes.Room
-      ? { roomTitle: action.Title, oldRoomTitle: "" }
-      : {},
-  );
-
-  const getFolderLabel = () => {
-    if (action.Item !== "file" && action.Item !== "folder") return "";
-
-    const itemLocationId = +action.ExtraLocation;
-    if (selectedFolder?.id === itemLocationId) return "";
-    if (infoPanelSelection?.isRoom && infoPanelSelection?.id === itemLocationId)
-      return "";
-
-    const folderTitle = action.ExtraLocationTitle;
-    if (!folderTitle) return "";
-
-    return (
-      <span className="folder-label">
-        {` ${t("FeedLocationLabel", { folderTitle })}`}
-      </span>
-    );
-  };
-
+const DisplayBlock = ({
+  label,
+  inputValue,
+  onInputChange,
+  selectedOption,
+  onSelectDimension,
+}: DisplayBlockProps) => {
   return (
-    <StyledHistoryBlockMessage className="message">
-      <span className="main-message">{message}</span>
-      {getFolderLabel()}
-    </StyledHistoryBlockMessage>
+    <div className="embedding-panel_block">
+      <Text fontSize="13px" fontWeight={600} className="embedding-panel_text">
+        {label}
+      </Text>
+      <div className="embedding-panel_size-block">
+        <TextInput
+          type={InputType.text}
+          size={InputSize.base}
+          className="embedding-panel_input"
+          value={inputValue}
+          onChange={onInputChange}
+        />
+        <ComboBox
+          size={ComboBoxSize.content}
+          scaled={false}
+          scaledOptions
+          onSelect={onSelectDimension}
+          options={dataDimensions}
+          selectedOption={selectedOption}
+          displaySelectedOption
+          directionY="bottom"
+        />
+      </div>
+    </div>
   );
 };
 
-export default HistoryBlockMessage;
+export { DisplayBlock };

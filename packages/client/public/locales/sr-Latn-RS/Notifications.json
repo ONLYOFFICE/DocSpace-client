@@ -1,8 +1,8 @@
 {
-  "DailyFeed": "Dnevni sadržaj {{productName}}-a",
-  "DailyFeedDescription": "Čitajte vesti i događaje iz vašeg {{productName}}-a u dnevnom pregledu.",
   "ActionsWithFilesDescription": "Značke će vas obaveštavati o radnjama poput otpremanja, kreiranja i promena u datotekama.",
   "Badges": "Značke",
+  "DailyFeed": "Dnevni sadržaj {{productName}}-a",
+  "DailyFeedDescription": "Čitajte vesti i događaje iz vašeg {{productName}}-a u dnevnom pregledu.",
   "ManageNotifications": "Upravljaj",
   "Notifications": "Obaveštenja",
   "RoomsActions": "Radnje sa datotekama u sobi",

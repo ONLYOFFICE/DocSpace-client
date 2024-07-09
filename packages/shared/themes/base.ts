@@ -666,7 +666,7 @@ export const getBaseTheme = () => {
           b: 38,
           a: 0.2,
         },
-        blur: 10,
+        blur: 9,
       },
 
       content: {
@@ -2004,6 +2004,8 @@ export const getBaseTheme = () => {
       background: white,
       rootFolderTitleColor: "#A3A9AE",
       boxShadow: "0px 8px 16px 0px #040F1B14",
+      lifetimeIconFill: "#f2675a",
+      lifetimeIconStroke: "#f2675a",
 
       icon: {
         fill: "#316DAA",
@@ -2106,6 +2108,8 @@ export const getBaseTheme = () => {
         fileExstColor: "#A3A9AE",
         locationIconColor: "#A3A9AE",
         folderLabelColor: "#A3A9AE",
+        renamedItemColor: "#A3A9AE",
+        oldRoleColor: "#657077",
       },
 
       details: {
@@ -2492,11 +2496,6 @@ export const getBaseTheme = () => {
         background: "#f8f9f9",
         isPrivateIcon: "#35ad17",
         descriptionColor: "#555f65",
-      },
-
-      tagInput: {
-        tagBackground: "#ECEEF1",
-        tagHoverBackground: "#F3F4F4",
       },
 
       dropdown: {
@@ -3205,11 +3204,14 @@ export const getBaseTheme = () => {
 
     tag: {
       color: black,
+      deletedColor: "#A3A9AE",
       background: "#f3f4f4",
       hoverBackground: "#eceef1",
       disabledBackground: "#f8f9f9",
+      deletedBackground: "#F8F9F9",
       defaultTagColor: black,
       newTagBackground: "#eceef1",
+      newTagHoverBackground: "#F3F4F4",
     },
 
     profile: {
@@ -3345,6 +3347,11 @@ export const getBaseTheme = () => {
 
     dateTimePicker: {
       colorClockIcon: "#657077",
+    },
+
+    embeddingPanel: {
+      descriptionTextColor: "#657077",
+      iconColor: "#657077",
     },
 
     completedForm: {

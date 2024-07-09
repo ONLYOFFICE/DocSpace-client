@@ -1976,6 +1976,8 @@ const Dark: TTheme = {
     background: black,
     rootFolderTitleColor: "#ADADAD",
     boxShadow: "0px 8px 16px 0px #040F1B29",
+    lifetimeIconFill: "none",
+    lifetimeIconStroke: "#657077",
 
     icon: {
       fill: "#E06A1B",

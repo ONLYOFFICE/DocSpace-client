@@ -2004,6 +2004,8 @@ export const getBaseTheme = () => {
       background: white,
       rootFolderTitleColor: "#A3A9AE",
       boxShadow: "0px 8px 16px 0px #040F1B14",
+      lifetimeIconFill: "#f2675a",
+      lifetimeIconStroke: "#f2675a",
 
       icon: {
         fill: "#316DAA",

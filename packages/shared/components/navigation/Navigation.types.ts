@@ -203,5 +203,6 @@ export interface INavigationProps {
   onNavigationButtonClick?: () => void;
   tariffBar: React.ReactElement;
   showNavigationButton: boolean;
+  titleIconTooltip?: string;
   onContextOptionsClick?: () => void;
 }

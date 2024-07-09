@@ -181,6 +181,10 @@
   "WantToRestoreTheRooms": "All shared links in restored rooms will become active, and their contents will be available to everyone with the room links. Do you want to restore the rooms?",
   "WithSubfolders": "With subfolders",
   "YouLeftTheRoom": "You have left the room",
+  "RoomFilesLifetime": "The file lifetime is set to {{days}} {{period}} in this room",
+  "FileWillBeDeleted": "The file will be deleted {{date}}",
+  "LifetimeDialogDescription": "Lifetime countdown begins at the file creation date. Some files in this room exceed the proposed lifetime and will be deleted once you enable the setting.",
+  "LifetimeDialogDescriptionHeader": "Older files with exceeded lifetime will be deleted",
   "Protected": "protected",
   "Embed": "Embed"
 }

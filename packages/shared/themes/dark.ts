@@ -3308,6 +3308,24 @@ const Dark: TTheme = {
     descriptionColor: "#ADADAD",
   },
 
+  oauth: {
+    previewDialog: {
+      border: "1px solid #242424",
+    },
+    infoDialog: {
+      descLinkColor: "#adadad",
+      blockHeaderColor: "#858585",
+      separatorColor: "#474747",
+    },
+    list: {
+      descriptionColor: "#858585",
+    },
+    clientForm: {
+      descriptionColor: "#858585",
+      headerBorder: "1px solid #474747",
+      scopeDesc: "#858585",
+    },
+  },
   sdkPresets: {
     borderColor: "#474747",
     secondaryColor: "#ADADAD",

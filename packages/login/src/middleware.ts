@@ -26,6 +26,7 @@
 
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { OAuth2ErrorKey } from "./utils/enums";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
@@ -41,13 +42,36 @@ export function middleware(request: NextRequest) {
 
   const isAuth = !!request.cookies.get("asc_auth_key")?.value;
 
-  const url = request.nextUrl.clone();
-  url.pathname = "/";
+  const isOAuth = request.nextUrl.searchParams.get("type") === "oauth2";
+  const oauthClientId =
+    request.nextUrl.searchParams.get("client_id") ??
+    request.nextUrl.searchParams.get("clientId");
+  if (isOAuth || oauthClientId) {
+    if (oauthClientId === "error")
+      return NextResponse.redirect(`${redirectUrl}/login/error`);
 
-  if (isAuth && redirectUrl) return NextResponse.redirect(redirectUrl);
+    const error = request.nextUrl.searchParams.get("error");
+
+    if (error && error !== OAuth2ErrorKey.missing_asc_cookie_error) {
+      return NextResponse.redirect(
+        `${redirectUrl}/login/error?oauthMessageKey=${error}`,
+      );
+    }
+
+    if (isAuth && !request.nextUrl.pathname.includes("consent")) {
+      return NextResponse.redirect(
+        `${redirectUrl}/login/consent${request.nextUrl.search}`,
+      );
+    }
+  } else {
+    const url = request.nextUrl.clone();
+    url.pathname = "/";
+
+    if (isAuth && redirectUrl) return NextResponse.redirect(redirectUrl);
+  }
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/health", "/", "/not-found"],
+  matcher: ["/health", "/", "/not-found", "/consent"],
 };

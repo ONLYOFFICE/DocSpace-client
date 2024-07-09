@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
@@ -39,7 +39,6 @@ import ThirdParty from "./ThirdPartyServicesSettings";
 import SMTPSettings from "./SMTPSettings";
 import DocumentService from "./DocumentService";
 import PluginPage from "./Plugins";
-import { Badge } from "@docspace/shared/components/badge";
 import { Box } from "@docspace/shared/components/box";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
@@ -100,15 +99,6 @@ const IntegrationWrapper = (props) => {
     const pluginLabel = (
       <Box displayProp="flex" style={{ gap: "8px" }}>
         {t("Common:Plugins")}
-
-        <Badge
-          label={t("Common:BetaLabel")}
-          backgroundColor="#533ED1"
-          fontSize="9px"
-          borderRadius="50px"
-          noHover={true}
-          isHovered={false}
-        />
       </Box>
     );
 

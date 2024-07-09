@@ -100,13 +100,14 @@ const WhiteLabelWrapper = styled.div`
   }
 
   .logos-editor-wrapper {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 8px;
+    display: grid;
+    grid-template-columns: 172px 1fr;
+    grid-gap: 8px;
     margin-bottom: 8px;
 
     @media ${mobile} {
+      display: flex;
+      gap: 8px;
       flex-direction: column;
     }
   }

@@ -49,6 +49,7 @@ interface AccessSelectorProps {
   isMobileView: boolean;
   noBorder?: boolean;
   manualWidth?: number;
+  isDisabled?: boolean;
 }
 
 const AccessSelector: React.FC<AccessSelectorProps> = ({
@@ -66,6 +67,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
   isMobileView,
   noBorder = false,
   manualWidth,
+  isDisabled,
 }) => {
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [width, setWidth] = useState(manualWidth || 0);
@@ -126,6 +128,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           isAside={false}
           setIsOpenItemAccess={setIsOpenItemAccess}
           hideMobileView={isMobileHorizontalOrientation}
+          isDisabled={isDisabled}
         />
       )}
 
@@ -147,6 +150,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           withoutBackground={isMobileView}
           withBackground={!isMobileView}
           withBlur={isMobileView}
+          isDisabled={isDisabled}
         />
       )}
     </StyledAccessSelector>

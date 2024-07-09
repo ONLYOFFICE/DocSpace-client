@@ -398,6 +398,11 @@ const StyledNewEmptyScreen = styled.section`
     margin-top: 16px;
   }
 
+  .empty-button {
+    width: 36px;
+    height: 36px;
+  }
+
   .empty-button-label {
     cursor: pointer;
   }

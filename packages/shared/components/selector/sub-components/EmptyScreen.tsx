@@ -32,6 +32,7 @@ import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
 import UpSvgUrl from "PUBLIC_DIR/images/up.svg?url";
 import FormRoomEmptyDarkImageUrl from "PUBLIC_DIR/images/emptyview/selector.form.room.empty.screen.dark.svg?url";
 import FormRoomEmptyLightImageUrl from "PUBLIC_DIR/images/emptyview/selector.form.room.empty.screen.light.svg?url";
+import Plus16SvgUrl from "PUBLIC_DIR/images/icons/16/plus.svg?url";
 
 import { RoomsType } from "../../../enums";
 
@@ -115,7 +116,9 @@ const EmptyScreen = ({
         <div className="empty_button-wrapper" onClick={onCreateClickAction}>
           <SelectorAddButton
             isAction
+            iconSize={16}
             className="empty-button"
+            iconName={Plus16SvgUrl}
             title={t("Common:CreateFormFillingRoom")}
           />
           <Text className="empty-button-label" noSelect>

@@ -112,6 +112,8 @@ const FilesSelector = ({
   withCreate,
   createDefineRoomLabel,
   createDefineRoomType,
+  withInfoBar,
+  infoBarData,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -603,6 +605,8 @@ const FilesSelector = ({
       }
       descriptionText={descriptionText}
       disableFirstFetch
+      withInfoBar={withInfoBar}
+      infoBarData={infoBarData}
     />
   );
 

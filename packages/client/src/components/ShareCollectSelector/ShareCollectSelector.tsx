@@ -27,10 +27,13 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
+import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
+
 import { RoomsType } from "@docspace/shared/enums";
 import FilesSelectorWrapper from "@docspace/shared/selectors/Files";
 
 import { toastr } from "@docspace/shared/components/toast";
+import { useSelectorInfoBar } from "@docspace/shared/hooks/useSelectorInfoBar";
 
 import type {
   TFileSecurity,
@@ -40,7 +43,10 @@ import type {
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import type { TData } from "@docspace/shared/components/toast/Toast.type";
-import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import type {
+  TBreadCrumb,
+  TInfoBarData,
+} from "@docspace/shared/components/selector/Selector.types";
 
 import type {
   InjectShareCollectSelectorProps,
@@ -102,6 +108,7 @@ const ShareCollectSelector = inject<TStore>(
       openFileAction,
     }: ShareCollectSelectorProps & InjectShareCollectSelectorProps) => {
       const { t } = useTranslation(["Common", "Editor"]);
+      const [withInfoBar, onCloseInfoBar] = useSelectorInfoBar();
 
       const requestRunning = React.useRef(false);
 
@@ -216,6 +223,13 @@ const ShareCollectSelector = inject<TStore>(
         return getIcon(size, fileExst) ?? "";
       };
 
+      const infoBarData: TInfoBarData = {
+        title: t("Common:SelectorInfoBarTitle"),
+        description: t("Common:SelectorInfoBarDescription"),
+        icon: InfoIcon,
+        onClose: onCloseInfoBar,
+      };
+
       return (
         <FilesSelectorWrapper
           withCreate
@@ -251,6 +265,8 @@ const ShareCollectSelector = inject<TStore>(
           withFooterCheckbox={false}
           withFooterInput={false}
           getIcon={getIconUrl}
+          withInfoBar={withInfoBar}
+          infoBarData={infoBarData}
         />
       );
     },

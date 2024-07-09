@@ -134,6 +134,8 @@ const Selector = ({
 
   withInfo,
   infoText,
+  infoBarData,
+  withInfoBar,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
   const [isSearch, setIsSearch] = React.useState<boolean>(false);
@@ -601,6 +603,8 @@ const Selector = ({
         descriptionText={descriptionText}
         inputItemVisible={inputItemVisible}
         setInputItemVisible={setInputItemVisible}
+        withInfoBar={withInfoBar}
+        infoBarData={infoBarData}
         // bread crumbs
         {...breadCrumbsProps}
         // select all

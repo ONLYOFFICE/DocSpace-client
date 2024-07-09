@@ -32,6 +32,7 @@ import { FixedSizeList as List } from "react-window";
 import { RoomsType } from "../../../enums";
 import { Scrollbar } from "../../scrollbar";
 import { Text } from "../../text";
+import PublicRoomBar from "../../public-room-bar";
 
 import { Search } from "./Search";
 import { SelectAll } from "./SelectAll";
@@ -105,6 +106,8 @@ const Body = ({
   infoText,
   setInputItemVisible,
   inputItemVisible,
+  infoBarData,
+  withInfoBar,
 }: BodyProps) => {
   const [bodyHeight, setBodyHeight] = React.useState(0);
 
@@ -189,6 +192,14 @@ const Body = ({
     }
   }
 
+  if (withInfoBar) {
+    const infoEl = document.querySelector(".selector_info-bar");
+    if (infoEl) {
+      const height = infoEl.getClientRects()[0].height;
+      listHeight -= height;
+    }
+  }
+
   if (withBreadCrumbs) listHeight -= BREAD_CRUMBS_HEIGHT;
 
   if (isMultiSelect && withSelectAll && !isSearch)
@@ -217,6 +228,16 @@ const Body = ({
       withHeader={withHeader}
       withTabs={withTabs}
     >
+      {withInfoBar && infoBarData && itemsCount > 0 && (
+        <PublicRoomBar
+          headerText={infoBarData.title}
+          bodyText={infoBarData.description}
+          iconName={infoBarData.icon}
+          onClose={infoBarData.onClose}
+          className="selector_info-bar"
+        />
+      )}
+
       {withBreadCrumbs && !isShareForm ? (
         isBreadCrumbsLoading ? (
           breadCrumbsLoader

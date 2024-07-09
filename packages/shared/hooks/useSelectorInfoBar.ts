@@ -24,57 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import { useCallback, useState } from "react";
 
-import { Base } from "../../themes";
+const SELECTOR_INFO_BAR_KEY = "selector_info_bar";
 
-const StyledPublicRoomBar = styled.div`
-  display: flex;
-  background-color: ${(props) => props.theme.infoBlock.background};
-  color: #333;
-  font-size: 12px;
-  padding: 12px 16px;
-  border-radius: 6px;
-  margin-bottom: 10px;
+export const useSelectorInfoBar = (): [boolean, VoidFunction] => {
+  const [visible, setVisible] = useState<boolean>(
+    () =>
+      JSON.parse(
+        localStorage.getItem(SELECTOR_INFO_BAR_KEY) ?? "true",
+      ) as boolean,
+  );
 
-  .text-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
+  const onClose = useCallback(() => {
+    setVisible(false);
+    localStorage.setItem(SELECTOR_INFO_BAR_KEY, "false");
+  }, []);
 
-  .header-body {
-    display: flex;
-    height: fit-content;
-    width: 100%;
-    gap: 8px;
-    font-weight: 600;
-  }
-
-  .text-container_header {
-    color: ${(props) => props.theme.infoBlock.headerColor};
-    overflow: hidden;
-  }
-
-  .text-container_body {
-    color: ${(props) => props.theme.infoBlock.descriptionColor};
-  }
-
-  .close-icon {
-    /* margin: -5px -17px 0 0; */
-    cursor: pointer;
-
-    path {
-      fill: ${({ theme }) => theme.iconButton.color};
-    }
-
-    /* svg {
-      weight: 8px;
-      height: 8px;
-    } */
-  }
-`;
-
-StyledPublicRoomBar.defaultProps = { theme: Base };
-
-export { StyledPublicRoomBar };
+  return [visible, onClose];
+};

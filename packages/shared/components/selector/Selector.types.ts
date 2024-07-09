@@ -48,6 +48,18 @@ type THeaderNonBackButton = {
   withoutBackButton?: undefined;
 };
 
+export type TInfoBarData = {
+  title: string;
+  description: string;
+  icon?: string;
+  onClose?: VoidFunction;
+};
+
+export type TInfoBar = {
+  withInfoBar?: boolean;
+  infoBarData?: TInfoBarData;
+};
+
 export type HeaderProps = {
   headerLabel: string;
 } & (THeaderBackButton | THeaderNonBackButton);
@@ -299,6 +311,7 @@ export type TSelectorInfo =
   | { withInfo?: undefined; infoText?: undefined };
 
 export type SelectorProps = TSelectorHeader &
+  TInfoBar &
   TSelectorInfo &
   TWithTabs &
   TSelectorSelectAll &
@@ -345,6 +358,7 @@ export type SelectorProps = TSelectorHeader &
   };
 
 export type BodyProps = TSelectorBreadCrumbs &
+  TInfoBar &
   TSelectorInfo &
   TWithTabs &
   TSelectorBodySearch &

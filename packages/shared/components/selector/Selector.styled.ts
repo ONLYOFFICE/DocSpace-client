@@ -134,6 +134,10 @@ const StyledBody = styled.div<{
 
     color: ${(props) => props.theme.selector.bodyDescriptionText};
   }
+
+  .selector_info-bar {
+    margin: 0px 20px 16px;
+  }
 `;
 
 const StyledSelectAll = styled.div`

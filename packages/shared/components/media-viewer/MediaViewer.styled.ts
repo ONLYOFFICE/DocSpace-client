@@ -91,8 +91,7 @@ export const StyledMobileDetails = styled.div`
   z-index: 307;
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
+  inset-inline: 0;
   height: 53px;
   display: flex;
   justify-content: center;
@@ -111,13 +110,13 @@ export const StyledMobileDetails = styled.div`
 
   .mobile-close {
     position: fixed;
-    left: 21px;
+    inset-inline-start: 21px;
     top: 22px;
   }
 
   .mobile-context {
     position: fixed;
-    right: 22px;
+    inset-inline-end: 22px;
     top: 22px;
   }
 
@@ -157,16 +156,8 @@ export const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
   overflow: hidden;
   > span {
     position: fixed;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 0;
-            margin-left: 10px;
-          `
-        : css`
-            right: 0;
-            margin-right: 10px;
-          `}
+    inset-inline-end: 0;
+    margin-inline-end: 10px;
     bottom: 5px;
     z-index: 305;
   }
@@ -195,14 +186,8 @@ export const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
     );
     position: fixed;
     top: 0;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            right: 0;
-          `
-        : css`
-            left: 0;
-          `}
+    inset-inline-start: 0;
+
     .title {
       text-align: center;
       white-space: nowrap;
@@ -211,14 +196,7 @@ export const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
       font-weight: 600;
       text-overflow: ellipsis;
       width: calc(100% - 50px);
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding-right: 16px;
-            `
-          : css`
-              padding-left: 16px;
-            `}
+      padding-inline-start: 16px;
       box-sizing: border-box;
       color: ${(props) => props.theme.mediaViewer.titleColor};
     }
@@ -226,14 +204,7 @@ export const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
   .mediaPlayerClose {
     position: fixed;
     top: 13px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 12px;
-          `
-        : css`
-            right: 12px;
-          `}
+    inset-inline-end: 12px;
     height: 17px;
     &:hover {
       background-color: transparent;
@@ -247,10 +218,7 @@ export const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
 
   .containerVideo {
     position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
+    inset: 0;
   }
 `;
 

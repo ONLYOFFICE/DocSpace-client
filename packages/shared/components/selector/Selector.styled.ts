@@ -81,14 +81,12 @@ const StyledHeader = styled.div<{ withoutBorder: boolean }>`
 
   .arrow-button {
     cursor: pointer;
-    margin-right: 12px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        margin-left: 12px;
-        margin-right: 0px;
-        transform: scaleX(-1);
-      `}
+    margin-inline-end: 12px;
+
+    svg {
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+    }
   }
 
   .heading-text {
@@ -118,7 +116,7 @@ const StyledBody = styled.div<{
         ? `calc(100% - 16px - ${props.headerHeight}px)`
         : `calc(100% - 16px)`};
 
-  padding: ${({ withTabs }) => (withTabs ? "0" : "16px 0 0 0")};
+  padding: ${({ withTabs }) => (withTabs ? "0" : "16px 0 0")};
 
   .search-input,
   .search-loader {
@@ -166,13 +164,7 @@ const StyledSelectAll = styled.div`
 
     line-height: 16px;
 
-    margin-left: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        margin-left: 0;
-        margin-right: 8px;
-      `}
+    margin-inline-start: 8px;
   }
 
   .checkbox {
@@ -219,16 +211,9 @@ const StyledItem = styled.div<{
     // width: 100%;
     // max-width: 100%;
 
-    line-height: ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `20px` : `18px`};
+    line-height: 18px;
 
-    margin-left: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        margin-left: 0;
-        margin-right: 8px;
-      `}
+    margin-inline-start: 8px;
   }
 
   .clicked-label {
@@ -359,7 +344,7 @@ const StyledBreadCrumbs = styled.div<{
   width: 100%;
   height: 38px;
 
-  padding: 0 16px 16px 16px;
+  padding: 0 16px 16px;
 
   box-sizing: border-box;
 
@@ -399,11 +384,9 @@ const StyledItemText = styled(Text)<{
 StyledItemText.defaultProps = { theme: Base };
 
 const StyledArrowRightSvg = styled(ArrowRightSvg)`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      transform: scaleX(-1);
-    `}
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+
   path {
     fill: ${(props) => props.theme.selector.breadCrumbs.arrowRightColor};
   }
@@ -542,7 +525,7 @@ const StyledCreateDropDown = styled.div<{ isEmpty: boolean }>`
   position: absolute;
 
   top: ${(props) => (props.isEmpty ? "32px" : "48px")};
-  left: ${(props) => (props.isEmpty ? "-12px" : "16px")};
+  inset-inline-start: ${(props) => (props.isEmpty ? "-12px" : "16px")};
   z-index: 453;
 
   padding-top: 8px;
@@ -568,8 +551,7 @@ const StyledCreateDropDown = styled.div<{ isEmpty: boolean }>`
     position: fixed;
     top: unset;
     bottom: 0;
-    left: 0;
-    right: 0;
+    inset-inline: 0;
 
     border-radius: 6px 6px 0 0;
   }

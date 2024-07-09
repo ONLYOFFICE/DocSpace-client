@@ -37,10 +37,10 @@ const PlayerDurationWrapper = styled.div`
   font-size: 12px;
   font-weight: 700;
 
-  margin-left: 10px;
+  margin-inline-start: 10px;
 
   @media ${mobile} {
-    margin-left: 0;
+    margin-inline-start: 0;
   }
 `;
 

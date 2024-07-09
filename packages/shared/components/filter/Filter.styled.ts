@@ -69,14 +69,7 @@ const StyledFilterInput = styled.div`
     margin-bottom: 8px;
 
     .clear-all-link {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 12px;
-            `
-          : css`
-              margin-left: 12px;
-            `}
+      margin-inline-start: 12px;
     }
   }
 `;
@@ -104,14 +97,7 @@ const StyledButton = styled.div<{ isOpen: boolean }>`
   margin: 0;
   padding: 0;
 
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: 8px;
-        `
-      : css`
-          margin-left: 8px;
-        `}
+  margin-inline-start: 8px;
 
   cursor: pointer;
 
@@ -156,14 +142,7 @@ const StyledFilterBlock = styled.div`
   position: fixed;
   top: 0;
 
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          left: 0;
-        `
-      : css`
-          right: 0;
-        `}
+  inset-inline-end: 0;
 
   width: 480px;
   height: 100%;
@@ -239,14 +218,7 @@ const StyledFilterBlockHeader = styled.div<{ isSelector?: boolean }>`
   }
 
   .arrow-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 12px;
-          `
-        : css`
-            margin-right: 12px;
-          `}
+    margin-inline-end: 12px;
   }
 
   svg {
@@ -261,15 +233,8 @@ const StyledFilterBlockItem = styled.div<{
   isFirst?: boolean;
 }>`
   margin: ${(props) =>
-    props.withoutHeader ? "0" : props.isFirst ? "12px 0 0 0" : "16px 0 0 0"};
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          padding: 0 16px 0 24px;
-        `
-      : css`
-          padding: 0 24px 0 16px;
-        `}
+    props.withoutHeader ? "0" : props.isFirst ? "12px 0 0" : "16px 0 0"};
+  padding-inline: 16px 24px;
   max-width: 100%;
   box-sizing: border-box;
 
@@ -281,14 +246,7 @@ const StyledFilterBlockItem = styled.div<{
 const StyledFilterBlockItemHeader = styled.div`
   height: 16px;
   line-height: 16px;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: -16px;
-        `
-      : css`
-          margin-right: -16px;
-        `}
+  margin-inline-end: -16px;
 
   display: flex;
   align-items: center;
@@ -298,20 +256,8 @@ const StyledFilterBlockItemContent = styled.div<{
   withoutSeparator?: boolean;
   withMultiItems?: boolean;
 }>`
-  margin: ${(props) =>
-    props.withoutSeparator ? "12px -16px 0 0" : "12px -16px 16px 0"};
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin: ${props.withoutSeparator
-            ? "12px 0 0 -16px"
-            : "12px 0 16px -16px"};
-        `
-      : css`
-          margin: ${props.withoutSeparator
-            ? "12px -16px 0 0"
-            : "12px -16px 16px 0"};
-        `}
+  margin-block: ${(props) => (props.withoutSeparator ? "12px 0" : "12px 16px")};
+  margin-inline: 0 -16px;
   height: fit-content;
 
   display: flex;
@@ -336,14 +282,7 @@ const StyledFilterBlockItemSelectorText = styled(Text)`
   font-size: 13px;
   line-height: 15px;
   color: ${(props) => props.theme.filterInput.filter.color};
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: 8px;
-        `
-      : css`
-          margin-left: 8px;
-        `}
+  margin-inline-start: 8px;
   cursor: pointer;
 `;
 
@@ -374,14 +313,7 @@ const StyledFilterBlockItemTagText = styled(Text)<{ isSelected?: boolean }>`
 StyledFilterBlockItemTagText.defaultProps = { theme: Base };
 
 const StyledFilterBlockItemTagIcon = styled.div`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: 8px;
-        `
-      : css`
-          margin-left: 8px;
-        `}
+  margin-inline-start: 8px;
 
   display: flex;
   align-items: center;
@@ -419,14 +351,7 @@ const StyledFilterBlockItemToggleButton = styled(ToggleButton)`
 `;
 const StyledFilterBlockItemCheckboxContainer = styled.div`
   .checkbox {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 8px !important;
-          `
-        : css`
-            margin-right: 8px !important;
-          `}
+    margin-inline-end: 8px !important;
   }
 
   .checkbox-text {
@@ -437,15 +362,7 @@ const StyledFilterBlockItemCheckboxContainer = styled.div`
 const StyledFilterBlockItemSeparator = styled.div`
   height: 1px;
   width: calc(100% + 16px);
-
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: 16px;
-        `
-      : css`
-          margin-right: 16px;
-        `}
+  margin-inline-end: 16px;
 
   background: ${(props) => props.theme.filterInput.filter.separatorColor};
 `;
@@ -455,14 +372,7 @@ StyledFilterBlockItemToggleButton.defaultProps = { theme: Base };
 const StyledFilterBlockFooter = styled.div`
   position: fixed;
   bottom: 0;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          left: 0;
-        `
-      : css`
-          right: 0;
-        `}
+  inset-inline-end: 0;
 
   z-index: 401;
 
@@ -505,28 +415,11 @@ const StyledControlContainer = styled.div`
   z-index: 450;
 
   top: 14px;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          right: -34px;
-        `
-      : css`
-          left: -34px;
-        `}
+  inset-inline-start: -34px;
 
   @media ${mobile} {
     top: -34px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 10px;
-            right: unset;
-          `
-        : css`
-            right: 10px;
-
-            left: unset;
-          `}
+    inset-inline: unset 10px;
   }
 `;
 
@@ -582,14 +475,7 @@ const StyledSortButton = styled.div<{ viewAs: TViewAs; isDesc: boolean }>`
     width: 32px;
     height: 32px;
 
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 8px;
-          `
-        : css`
-            margin-left: 8px;
-          `}
+    margin-inline-start: 8px;
 
     .dropdown-container {
       top: 102%;
@@ -687,14 +573,7 @@ const StyledSortButton = styled.div<{ viewAs: TViewAs; isDesc: boolean }>`
       align-items: center;
       justify-content: center;
 
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 0;
-            `
-          : css`
-              margin-right: 0;
-            `}
+      margin-inline-end: 0;
     }
 
     .combo-buttons_arrow-icon {

@@ -38,22 +38,14 @@ const StyledContextMenu = styled.div`
   align-items: center;
 
   @media ${tablet} {
-    padding: ${({ theme }) =>
-      getCorrectFourValuesStyle("4px 12px 4px 16px", theme.interfaceDirection)};
+    padding-block: 4px;
+    padding-inline: 16px 12px;
     grid-column-gap: 0px;
   }
 
   .context-menu-rectangle {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: auto;
-            margin-right: 8px;
-          `
-        : css`
-            margin-right: auto;
-            margin-left: 8px;
-          `}
+    margin-inline-end: auto;
+    margin-inline-start: 8px;
   }
 `;
 

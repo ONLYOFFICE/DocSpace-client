@@ -65,7 +65,7 @@ InputWrapper.defaultProps = { theme: Base };
 
 export const ColorBlock = styled.span<{ isDisabled?: boolean }>`
   position: absolute;
-  right: 8px;
+  inset-inline-end: 8px;
   cursor: pointer;
 
   width: 20px;

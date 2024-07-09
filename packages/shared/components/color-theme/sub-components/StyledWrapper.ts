@@ -34,9 +34,7 @@ const StyledWrapper = styled.div`
     position: fixed;
     z-index: 390;
     top: 0;
-
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `right: -6px;` : `left: -6px;`}
+    inset-inline-start: -6px;
     width: 0%;
     height: 3px;
     -moz-border-radius: 1px;

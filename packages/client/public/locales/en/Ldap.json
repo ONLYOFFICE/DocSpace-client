@@ -68,6 +68,7 @@
   "LdapUserFilter": "User Filter",
   "LdapUserFilterTooltip": "Use the search LDAP filter to select the users who must be imported.",
   "LdapUserQuotaTooltip": "To set a storage quota for this user, enter an integer value for this attribute in the LDAP directory. It will display the quota value in bytes. This attribute will be applied only during the first setup and can be changed manually in the Accounts section.",
-  "LdapUserType": "User Type",
-  "LdapUserTypeTooltip": "All users will be added to Dockspace with the selected type."
+  "LdapUserTypeTooltip": "All users will be added to {{productName}} with the selected type.",
+  "LdapUsersType": "Users type",
+  "LdapUsersTypeInfo": "Users can only access the rooms they are invited to by admins, and can't create own rooms, folders or files. Select another type below to provide more permissions. Otherwise, you can change the type manually in the Accounts section."
 }

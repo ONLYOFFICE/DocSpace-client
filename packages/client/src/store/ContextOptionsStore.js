@@ -2456,7 +2456,7 @@ class ContextOptionsStore {
       label: t("Common:OFORMsGallery"),
       icon: FormGalleryReactSvgUrl,
       onClick: () => this.onShowGallery(),
-      disabled: isPrivacyFolder || (isMobile && isTablet),
+      disabled: isPrivacyFolder,
     };
 
     const createNewFolder = {

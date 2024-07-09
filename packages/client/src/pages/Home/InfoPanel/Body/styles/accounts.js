@@ -198,6 +198,7 @@ const StyledAccountContent = styled.div`
       flex-direction: column;
       align-items: start;
       justify-content: center;
+      overflow: hidden;
     }
   }
 `;

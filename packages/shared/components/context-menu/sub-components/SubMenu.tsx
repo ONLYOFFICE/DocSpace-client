@@ -112,6 +112,8 @@ const SubMenu = (props: {
 
     if (items && isMobileDevice) {
       setActiveItem(item);
+
+      e.stopPropagation();
       return;
     }
 

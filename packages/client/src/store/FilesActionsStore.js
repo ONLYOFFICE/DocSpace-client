@@ -2443,8 +2443,8 @@ class FilesActionStore {
     }
   };
 
-  onClickBack = () => {
-    const { roomType, ...rest } = this.selectedFolderStore;
+  onClickBack = (fromHotkeys = true) => {
+    const { roomType } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
     const { clearFiles, setBufferSelection } = this.filesStore;
     const { clearInsideGroup, insideGroupBackUrl } =
@@ -2510,6 +2510,7 @@ class FilesActionStore {
 
       setSelectedNode(["accounts", "people", "filter"]);
 
+      if (fromHotkeys) return;
       return window.DocSpace.navigate(`${path}?${params}`, { replace: true });
     }
   };

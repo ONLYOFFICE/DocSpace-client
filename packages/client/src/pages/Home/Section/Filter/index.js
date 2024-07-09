@@ -470,7 +470,9 @@ const SectionFilterContent = ({
           newFilter.searchArea === RoomSearchArea.Active
             ? "rooms/shared"
             : "rooms/archived";
-        navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
+        navigate(
+          `${path}/filter?${newFilter.toUrlParams(userId)}&hash=${new Date().getTime()}`,
+        );
       } else {
         const filterType = getFilterType(data) || null;
 

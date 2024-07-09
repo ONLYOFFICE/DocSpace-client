@@ -23,52 +23,20 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import styled, { css } from "styled-components";
+import Base from "@docspace/shared/themes/base";
 
-import type { Metadata } from "next";
-import { BRAND_NAME } from "@docspace/shared/constants";
+const StyledAccessSelector = styled.div`
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-left: 16px;
+        `
+      : css`
+          margin-right: 16px;
+        `}
+`;
 
-import { getData } from "@/utils/actions";
-import { RootPageProps } from "@/types";
-import Root from "@/components/Root";
+StyledAccessSelector.defaultProps = { theme: Base };
 
-const initialSearchParams: RootPageProps["searchParams"] = {
-  fileId: undefined,
-  fileid: undefined,
-  version: undefined,
-  doc: undefined,
-  action: undefined,
-  share: undefined,
-  editorType: undefined,
-};
-
-export const metadata: Metadata = {
-  title: `${BRAND_NAME} DocEditor page`,
-
-  description: "",
-};
-
-async function Page({ searchParams }: RootPageProps) {
-  const { fileId, fileid, version, doc, action, share, editorType, error } =
-    searchParams ?? initialSearchParams;
-
-  const startDate = new Date();
-
-  const data = await getData(
-    fileId ?? fileid ?? "",
-    version,
-    doc,
-    action,
-    share,
-    editorType,
-  );
-
-  const timer = new Date().getTime() - startDate.getTime();
-
-  if (data.error?.status === "not-found" && error) {
-    data.error.message = error;
-  }
-
-  return <Root {...data} timer={timer} />;
-}
-
-export default Page;
+export default StyledAccessSelector;

@@ -67,7 +67,7 @@ const GroupsRow = ({
     item.statusType === "pending" || item.statusType === "disabled"
       ? theme.peopleTableRow.pendingNameColor
       : theme.peopleTableRow.nameColor;
-  const sideInfoColor = theme.peopleTableRow.pendingSideInfoColor;
+  const sideInfoColor = theme.peopleTableRow.sideInfoColor;
 
   const titleWithoutSpaces = item.name.replace(/\s+/g, " ").trim();
   const indexAfterLastSpace = titleWithoutSpaces.lastIndexOf(" ");
@@ -137,8 +137,6 @@ const GroupsRow = ({
             </Link>
 
             <Badges isLDAP={item.isLDAP} />
-
-            <div></div>
 
             <Link
               key={"group-title"}

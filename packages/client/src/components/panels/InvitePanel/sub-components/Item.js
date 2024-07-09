@@ -45,7 +45,7 @@ import {
   StyledInviteUserBody,
 } from "../StyledInvitePanel";
 import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
-import AccessSelector from "./AccessSelector";
+import AccessSelector from "../../../AccessSelector";
 
 const Item = ({
   t,

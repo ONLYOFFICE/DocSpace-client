@@ -60,7 +60,7 @@ const LDAP = ({
   useEffect(() => {
     isLdapAvailable && load(t);
     onCheckView();
-    setDocumentTitle(t("Settings:ManagementCategoryIntegration"));
+    setDocumentTitle(t("Ldap:LdapSettings"));
     window.addEventListener("resize", onCheckView);
 
     return () => window.removeEventListener("resize", onCheckView);

@@ -40,6 +40,7 @@ import {
   ShareAccessRights,
   Events,
   FilterKeys,
+  RoomSearchArea,
 } from "@docspace/shared/enums";
 
 import { RoomsTypes } from "@docspace/shared/utils";
@@ -1613,7 +1614,6 @@ class FilesStore {
             })
             .reverse();
         });
-
         this.selectedFolderStore.setSelectedFolder({
           folders: data.folders,
           ...data.current,
@@ -1736,6 +1736,18 @@ class FilesStore {
             console.log("Request canceled", err.message);
           } else {
             toastr.error(err);
+            if (isThirdPartyError) {
+              const userId = this.userStore?.user?.id;
+              const searchArea = window.DocSpace.location.pathname.includes(
+                "shared",
+              )
+                ? RoomSearchArea.Active
+                : RoomSearchArea.Archive;
+
+              return window.DocSpace.navigate(
+                `${window.DocSpace.location.pathname}?${RoomsFilter.getDefault(userId, searchArea).toUrlParams(userId, true)}`,
+              );
+            }
           }
         }
       })

@@ -27,13 +27,32 @@
 import React, { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 
-import { getAccessOptions } from "../utils";
-import { StyledAccessSelector } from "../StyledInvitePanel";
-
 import { isMobile } from "@docspace/shared/utils";
 import { AccessRightSelect } from "@docspace/shared/components/access-right-select";
+import { TTranslation } from "@docspace/shared/types";
+import { RoomsType } from "@docspace/shared/enums";
+import { getAccessOptions } from "../panels/InvitePanel/utils";
+import StyledAccessSelector from "./AccessSelector.styled";
 
-const AccessSelector = ({
+interface AccessSelectorProps {
+  t: TTranslation;
+  roomType: RoomsType;
+  onSelectAccess: (access: any) => void;
+  containerRef: React.RefObject<HTMLDivElement>;
+  defaultAccess: number;
+  isOwner: boolean;
+  withRemove?: boolean;
+  filteredAccesses: any[];
+  setIsOpenItemAccess: (isOpen: boolean) => void;
+  className: string;
+  standalone: boolean;
+  isMobileView: boolean;
+  noBorder?: boolean;
+  manualWidth?: number;
+  isDisabled?: boolean;
+}
+
+const AccessSelector: React.FC<AccessSelectorProps> = ({
   t,
   roomType,
   onSelectAccess,
@@ -47,12 +66,16 @@ const AccessSelector = ({
   standalone,
   isMobileView,
   noBorder = false,
+  manualWidth,
+  isDisabled,
 }) => {
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
-  const [width, setWidth] = useState(0);
+  const [width, setWidth] = useState(manualWidth || 0);
 
   useEffect(() => {
-    if (!containerRef?.current?.offsetWidth) return;
+    if (!containerRef?.current?.offsetWidth) {
+      return;
+    }
 
     setWidth(containerRef?.current?.offsetWidth - 32);
   }, [containerRef?.current?.offsetWidth]);
@@ -70,12 +93,6 @@ const AccessSelector = ({
     (access) => access.access === +defaultAccess,
   )[0];
 
-  useEffect(() => {
-    checkWidth();
-    window.addEventListener("resize", checkWidth);
-    return () => window.removeEventListener("resize", checkWidth);
-  }, []);
-
   const checkWidth = () => {
     if (!isMobile()) return;
 
@@ -86,25 +103,32 @@ const AccessSelector = ({
     }
   };
 
+  useEffect(() => {
+    checkWidth();
+    window.addEventListener("resize", checkWidth);
+    return () => window.removeEventListener("resize", checkWidth);
+  }, []);
+
   const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;
 
   return (
-    <StyledAccessSelector className="invite-panel_access-selector">
+    <StyledAccessSelector className="access-selector">
       {!(isMobile() && !isMobileHorizontalOrientation) && (
         <AccessRightSelect
           className={className}
           selectedOption={selectedOption}
           onSelect={onSelectAccess}
-          accessOptions={filteredAccesses ? filteredAccesses : accessOptions}
+          accessOptions={filteredAccesses || accessOptions}
           noBorder={noBorder}
           directionX="right"
           directionY="bottom"
-          fixedDirection={true}
-          manualWidth={width + "px"}
+          fixedDirection
+          manualWidth={`${width}px`}
           isDefaultMode={false}
           isAside={false}
           setIsOpenItemAccess={setIsOpenItemAccess}
           hideMobileView={isMobileHorizontalOrientation}
+          isDisabled={isDisabled}
         />
       )}
 
@@ -113,26 +137,27 @@ const AccessSelector = ({
           className={className}
           selectedOption={selectedOption}
           onSelect={onSelectAccess}
-          accessOptions={filteredAccesses ? filteredAccesses : accessOptions}
+          accessOptions={filteredAccesses || accessOptions}
           noBorder={noBorder}
           directionX="right"
           directionY="top"
-          fixedDirection={true}
-          manualWidth={"fit-content"}
-          isDefaultMode={true}
+          fixedDirection
+          manualWidth="fit-content"
+          isDefaultMode
           isAside={isMobileView}
           setIsOpenItemAccess={setIsOpenItemAccess}
-          manualY={"0px"}
+          manualY="0px"
           withoutBackground={isMobileView}
           withBackground={!isMobileView}
           withBlur={isMobileView}
+          isDisabled={isDisabled}
         />
       )}
     </StyledAccessSelector>
   );
 };
 
-export default inject(({ settingsStore }) => {
+export default inject<TStore>(({ settingsStore }) => {
   const { standalone } = settingsStore;
 
   return {

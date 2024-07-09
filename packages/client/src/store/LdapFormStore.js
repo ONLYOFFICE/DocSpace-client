@@ -369,13 +369,6 @@ class LdapFormStore {
     this.errors = {};
 
     if (!toDefault && !turnOff) {
-      if (this.authentication) {
-        this.errors.login = this.login.trim() === "";
-        this.errors.password = this.password.trim() === "";
-
-        isErrorExist = this.errors.login || this.errors.password;
-      }
-
       for (var key in this.requiredSettings) {
         if (
           typeof this.requiredSettings[key] == "string" &&
@@ -386,7 +379,33 @@ class LdapFormStore {
         }
       }
 
-      if (isErrorExist) return;
+      if (this.groupMembership) {
+        const groupFields = [
+          ["groupDN", this.groupDN],
+          ["userAttribute", this.userAttribute],
+          ["groupFilter", this.groupFilter],
+          ["groupAttribute", this.groupAttribute],
+          ["groupNameAttribute", this.groupNameAttribute],
+        ];
+
+        for (var key of groupFields) {
+          if (key[1].trim() === "") {
+            this.errors[key[0]] = true;
+          }
+        }
+      }
+
+      if (this.authentication) {
+        this.errors.login = this.login.trim() === "";
+        this.errors.password = this.password.trim() === "";
+
+        isErrorExist = this.errors.login || this.errors.password;
+      }
+
+      if (isErrorExist) {
+        this.scrollToField();
+        return;
+      }
     }
 
     const settings = this.getSettings();
@@ -399,6 +418,16 @@ class LdapFormStore {
         () => this.checkStatus(t, toDefault),
         constants.GET_STATUS_TIMEOUT,
       );
+    }
+  };
+
+  scrollToField = () => {
+    for (let key in this.errors) {
+      const element = document.getElementsByName(key)[0];
+
+      element.focus();
+      element.blur();
+      return;
     }
   };
 

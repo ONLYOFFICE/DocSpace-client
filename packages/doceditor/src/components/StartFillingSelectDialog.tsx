@@ -61,7 +61,7 @@ function StartFillingSelectorDialog({
       withoutBackButton
       currentFolderId=""
       rootFolderType={fileInfo.rootFolderType}
-      createDefineRoomLabel={t("Common:NewFillingFormRoom")}
+      createDefineRoomLabel={t("Common:CreateFormFillingRoom")}
       createDefineRoomType={RoomsType.FormRoom}
       isPanelVisible={isVisible}
       socketHelper={socketHelper}

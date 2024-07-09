@@ -297,7 +297,7 @@ const Editor = ({
 
   if (config?.startFilling) {
     newConfig.events.onRequestStartFilling = () =>
-      onSDKRequestStartFilling?.(t("Common:StartFilling"));
+      onSDKRequestStartFilling?.(t("Common:ShareAndCollect"));
   }
 
   newConfig.events.onSubmit = () => {

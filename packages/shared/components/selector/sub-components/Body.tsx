@@ -29,6 +29,7 @@ import React from "react";
 import InfiniteLoader from "react-window-infinite-loader";
 import { FixedSizeList as List } from "react-window";
 
+import { RoomsType } from "../../../enums";
 import { Scrollbar } from "../../scrollbar";
 import { Text } from "../../text";
 
@@ -195,6 +196,11 @@ const Body = ({
 
   if (descriptionText) listHeight -= BODY_DESCRIPTION_TEXT_HEIGHT;
 
+  const isShareForm =
+    itemsCount === 0 &&
+    items?.[0]?.isRoomsOnly &&
+    items?.[0]?.createDefineRoomType === RoomsType.FormRoom;
+
   return (
     <StyledBody
       ref={bodyRef}
@@ -211,7 +217,7 @@ const Body = ({
       withHeader={withHeader}
       withTabs={withTabs}
     >
-      {withBreadCrumbs ? (
+      {withBreadCrumbs && !isShareForm ? (
         isBreadCrumbsLoading ? (
           breadCrumbsLoader
         ) : (

@@ -361,7 +361,7 @@ const StyledNewEmptyScreen = styled.section`
   box-sizing: border-box;
 
   .empty-image {
-    margin-top: 26px;
+    margin-top: 64px;
   }
 
   .empty-header {

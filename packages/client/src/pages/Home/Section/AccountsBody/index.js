@@ -33,7 +33,6 @@ import Groups from "./Groups";
 import InsideGroup from "./InsideGroup";
 
 import { withTranslation } from "react-i18next";
-import { Consumer } from "@docspace/shared/utils";
 import withLoader from "SRC_DIR/HOCs/withLoader";
 import { useAccountsHotkeys } from "../../Hooks";
 
@@ -57,6 +56,7 @@ const SectionBodyContent = (props) => {
     setHotkeyCaret,
     selectAll,
     deselectAll,
+    openItem,
     onClickBack,
   } = props;
 
@@ -71,6 +71,7 @@ const SectionBodyContent = (props) => {
     activateHotkeys,
     selectAll,
     deselectAll,
+    openItem,
     onClickBack,
   });
 
@@ -165,7 +166,9 @@ export default inject(({ peopleStore, filesActionsStore }) => {
 
     selectAll,
     deselectAll,
+    openItem,
   } = peopleStore.accountsHotkeysStore;
+  const { onClickBack } = filesActionsStore;
 
   return {
     accountsViewAs,
@@ -187,7 +190,8 @@ export default inject(({ peopleStore, filesActionsStore }) => {
     setHotkeyCaret,
     selectAll,
     deselectAll,
-    onClickBack: filesActionsStore.onClickBack,
+    openItem,
+    onClickBack,
   };
 })(
   withTranslation(["People", "Common", "PeopleTranslations"])(

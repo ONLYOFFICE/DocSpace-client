@@ -65,7 +65,13 @@ const StyledTabs = styled(Tabs)`
 `;
 
 const SectionBodyContent = (props) => {
-  const { showProfileLoader, profile, currentDeviceType, t } = props;
+  const {
+    showProfileLoader,
+    profile,
+    currentDeviceType,
+    identityServerEnabled,
+    t,
+  } = props;
   const navigate = useNavigate();
 
   const data = [
@@ -84,12 +90,15 @@ const SectionBodyContent = (props) => {
       name: t("InterfaceTheme"),
       content: <InterfaceTheme />,
     },
-    {
+  ];
+
+  if (identityServerEnabled) {
+    data.push({
       id: "authorized-apps",
       name: t("OAuth:AuthorizedApps"),
       content: <AuthorizedApps />,
-    },
-  ];
+    });
+  }
 
   if (!profile?.isVisitor)
     data.splice(2, 0, {
@@ -127,16 +136,21 @@ const SectionBodyContent = (props) => {
   );
 };
 
-export default inject(({ settingsStore, peopleStore, clientLoadingStore }) => {
-  const { showProfileLoader } = clientLoadingStore;
-  const { targetUser: profile } = peopleStore.targetUserStore;
+export default inject(
+  ({ settingsStore, peopleStore, clientLoadingStore, authStore }) => {
+    const { showProfileLoader } = clientLoadingStore;
+    const { targetUser: profile } = peopleStore.targetUserStore;
 
-  return {
-    profile,
-    currentDeviceType: settingsStore.currentDeviceType,
-    showProfileLoader,
-  };
-})(
+    const { identityServerEnabled } = authStore.capabilities;
+
+    return {
+      profile,
+      currentDeviceType: settingsStore.currentDeviceType,
+      showProfileLoader,
+      identityServerEnabled,
+    };
+  },
+)(
   observer(
     withTranslation([
       "Profile",

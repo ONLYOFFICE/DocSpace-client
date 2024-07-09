@@ -48,7 +48,7 @@ import OAuth from "./OAuth";
 import SSOLoader from "./sub-components/ssoLoader";
 
 const DeveloperToolsWrapper = (props) => {
-  const { loadBaseInfo, currentDeviceType } = props;
+  const { loadBaseInfo, currentDeviceType, identityServerEnabled } = props;
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -107,12 +107,15 @@ const DeveloperToolsWrapper = (props) => {
       name: t("Webhooks:Webhooks"),
       content: <Webhooks />,
     },
-    {
+  ];
+
+  if (identityServerEnabled) {
+    data.push({
       id: "oauth",
       name: t("OAuth:OAuth"),
       content: <OAuth />,
-    },
-  ];
+    });
+  }
 
   const load = async () => {
     //await loadBaseInfo();
@@ -155,13 +158,16 @@ const DeveloperToolsWrapper = (props) => {
   );
 };
 
-export default inject(({ setup, settingsStore }) => {
+export default inject(({ setup, settingsStore, authStore }) => {
   const { initSettings } = setup;
+
+  const { identityServerEnabled } = authStore.capabilities;
 
   return {
     currentDeviceType: settingsStore.currentDeviceType,
     loadBaseInfo: async () => {
       await initSettings();
     },
+    identityServerEnabled,
   };
 })(observer(DeveloperToolsWrapper));

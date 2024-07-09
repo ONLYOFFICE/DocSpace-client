@@ -55,6 +55,7 @@ export interface PrivateRouteProps
   restricted?: boolean;
   withManager?: boolean;
   withCollaborator?: boolean;
+  identityServerEnabled?: boolean;
 }
 
 export interface PublicRouteProps

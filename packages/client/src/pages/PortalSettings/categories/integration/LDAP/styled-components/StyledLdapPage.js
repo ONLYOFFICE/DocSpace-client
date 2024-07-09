@@ -90,7 +90,7 @@ const StyledLdapPage = styled(Box)`
 
   .ldap_attribute-mapping {
     margin-top: 16px;
-    margin-bottom: 30px;
+    margin-bottom: 12px;
     input {
       margin-bottom: 16px;
     }

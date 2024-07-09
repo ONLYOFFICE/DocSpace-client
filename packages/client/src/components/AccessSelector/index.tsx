@@ -120,7 +120,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           onSelect={onSelectAccess}
           accessOptions={filteredAccesses || accessOptions}
           noBorder={noBorder}
-          directionX="right"
+          directionX="left"
           directionY="bottom"
           fixedDirection
           manualWidth={`${width}px`}

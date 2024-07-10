@@ -3,6 +3,5 @@
   "FormFilling": "フォームの入力",
   "LinkName": "リンク名",
   "ShareEmailBody": "あなたは{{itemName}}ドキュメントへのアクセスを許可されています。以下のリンクをクリックして、今すぐドキュメントを開いてください。{{shareLink}}をクリックしてください。",
-  "ShareEmailSubject": "あなたは{{itemName}}ドキュメントへのアクセスを許可されています。",
-  "SharingSettingsTitle": "共有の設定"
+  "ShareEmailSubject": "あなたは{{itemName}}ドキュメントへのアクセスを許可されています。"
 }

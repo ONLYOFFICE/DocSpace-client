@@ -42,6 +42,13 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const hdrs = headers();
+
+  if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
+    console.log("is health check");
+    return <></>;
+  }
+
   const baseUrl = getBaseUrl();
 
   const cookieStore = cookies();
@@ -69,7 +76,7 @@ export default async function RootLayout({
     const config = await (
       await fetch(`${baseUrl}/static/scripts/config.json`)
     ).json();
-    const hdrs = headers();
+
     const host = hdrs.get("host");
 
     const url = new URL(

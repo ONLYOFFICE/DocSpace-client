@@ -32,7 +32,7 @@ export type TMode = "modern" | "default";
 export interface RowProps {
   /** Required for hosting the Checkbox component. Its location is always fixed in the first position.
    * If there is no value, the occupied space is distributed among the other child elements. */
-  checked: boolean;
+  checked?: boolean;
   /** Displays the child elements */
   children?: React.ReactNode;
   /** Accepts class */

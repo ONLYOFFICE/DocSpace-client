@@ -55,6 +55,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     restricted,
     tenantStatus,
     enablePortalRename,
+
+    identityServerEnabled,
   } = props;
 
   const location = useLocation();
@@ -91,6 +93,11 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     const isPortalRenameUrl =
       location.pathname ===
       "/portal-settings/customization/general/portal-renaming";
+
+    const isOAuthPage = location.pathname.includes(
+      "portal-settings/developer-tools/oauth",
+    );
+    const isAuthorizedAppsPage = location.pathname.includes("authorized-apps");
 
     if (isLoaded && !isAuthenticated) {
       if (isPortalDeactivate) {
@@ -216,6 +223,24 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
     if (isPortalRenameUrl && !enablePortalRename) {
       return <Navigate replace to="/error/404" />;
+    }
+
+    if (isOAuthPage && !identityServerEnabled) {
+      return (
+        <Navigate
+          replace
+          to="/portal-settings/developer-tools/javascript-sdk"
+        />
+      );
+    }
+
+    if (isAuthorizedAppsPage && !identityServerEnabled) {
+      return (
+        <Navigate
+          replace
+          to={location.pathname.replace("authorized-apps", "login")}
+        />
+      );
     }
 
     if (

@@ -24,6 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+export const enum ScopeType {
+  read = "read",
+  write = "write",
+  openid = "openid",
+}
+
+export const enum ScopeGroup {
+  files = "files",
+  accounts = "accounts",
+  profiles = "profiles",
+  rooms = "rooms",
+  openid = "openid",
+}
+
+export const enum AuthenticationMethod {
+  none = "none",
+  "client_secret_post" = "client_secret_post",
+}
+
 /**
  * Enum for employee activation status.
  * @readonly

@@ -121,6 +121,7 @@ export interface TableRowProps {
   title: string;
   getContextModel: () => ContextMenuModel[];
   badgeUrl: string;
+  onClick?: () => void;
 }
 
 export interface TableCellProps {

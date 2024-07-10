@@ -2200,7 +2200,7 @@ class FilesStore {
       if (!(isMasterForm && canDuplicate))
         fileOptions = this.removeOptions(fileOptions, ["make-form"]);
 
-      if (!canSubmitToFormGallery) {
+      if (!canSubmitToFormGallery || isMasterForm) {
         fileOptions = this.removeOptions(fileOptions, [
           "submit-to-gallery",
           "separator-SubmitToGallery",

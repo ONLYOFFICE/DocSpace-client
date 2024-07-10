@@ -167,29 +167,24 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       const newData = moveToLastSession(data);
 
       setDataFromSocket(newData);
-      console.log("dataFromSocket", newData);
     });
 
     socketHelper.on("enter-in-portal", (data) => {
       const [newData] = moveToLastSession([data]);
 
       updateDataFromSocket(newData);
-      console.log("enter-in-portal", newData);
     });
 
     socketHelper.on("leave-in-portal", (data) => {
       sessisonLogout(data);
-      console.log(data);
     });
 
     socketHelper.on("enter-session-in-portal", (data) => {
       setMultiConnections(data);
-      console.log(data);
     });
 
     socketHelper.on("leave-session-in-portal", (data) => {
       sessisonMultiLogout(data);
-      console.log(data);
     });
   }, [
     socketHelper,

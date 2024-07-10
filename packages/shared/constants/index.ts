@@ -68,15 +68,6 @@ export const MAX_FILE_COMMENT_LENGTH = 255;
 export const LINKS_LIMIT_COUNT = 5;
 export const LOADER_TIMEOUT = 300;
 
-export const ROOMS_TYPE_TRANSLATIONS = Object.freeze({
-  1: "Common:FillingFormRooms",
-  2: "Common:CollaborationRooms",
-  3: "Common:Review",
-  4: "Common:ViewOnlyRooms",
-  5: "Common:CustomRooms",
-  6: "Common:PublicRoom",
-});
-
 export const ROOMS_PROVIDER_TYPE_NAME = Object.freeze({
   1: "Box",
   2: "DropBox",

@@ -39,7 +39,6 @@ import ThirdPartyStorage from "./ThirdPartyStorage";
 
 import withLoader from "@docspace/client/src/HOCs/withLoader";
 import SetRoomParamsLoader from "@docspace/shared/skeletons/create-edit-room/SetRoomParams";
-import { getRoomTypeDefaultTagTranslation } from "../data";
 
 import { ImageEditor } from "@docspace/shared/components/image-editor";
 import PreviewTile from "@docspace/shared/components/image-editor/PreviewTile";
@@ -48,6 +47,7 @@ import { Text } from "@docspace/shared/components/text";
 import ChangeRoomOwner from "./ChangeRoomOwner";
 import RoomQuota from "./RoomQuota";
 import { RoomsType } from "@docspace/shared/enums";
+import { getRoomTypeDefaultTagTranslation } from "@docspace/shared/utils/common";
 
 const StyledSetRoomParams = styled.div`
   display: flex;

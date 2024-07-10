@@ -1,7 +1,7 @@
 {
   "AccountsEmptyScreenText": "ユーザーの詳細情報はこちら",
   "Administration": "管理",
-  "AndMoreLabel": "と、<strong>{{count}}もっと</strong>",
+  "AndMoreLabel": "と、<1>{{count}}もっと</1>",
   "CreationDate": "作成日",
   "Data": "データ",
   "DateModified": "データが変更されました",

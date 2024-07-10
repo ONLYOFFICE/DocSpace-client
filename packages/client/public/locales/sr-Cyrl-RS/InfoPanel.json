@@ -1,7 +1,7 @@
 {
   "AccountsEmptyScreenText": "Види корисничке детаље овде",
   "Administration": "Администрација",
-  "AndMoreLabel": "и <strong>{{count}} више</strong>",
+  "AndMoreLabel": "и <1>{{count}} више</1>",
   "CreationDate": "Датум израде",
   "Data": "Подаци",
   "DateModified": "Датум измене",

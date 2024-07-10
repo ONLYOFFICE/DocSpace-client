@@ -1,7 +1,7 @@
 {
   "AccountsEmptyScreenText": "Вижте подробности за потребителите тук",
   "Administration": "Администрация",
-  "AndMoreLabel": "и <strong>още {{count}}</strong>",
+  "AndMoreLabel": "и <1>още {{count}}</1>",
   "CreationDate": "Дата на създаване",
   "Data": "Данни",
   "DateModified": "Дата на промяна",

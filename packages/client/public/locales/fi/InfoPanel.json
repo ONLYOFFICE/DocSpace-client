@@ -1,7 +1,7 @@
 {
   "AccountsEmptyScreenText": "Katso käyttäjätiedot täältä",
   "Administration": "Hallinto",
-  "AndMoreLabel": "ja <strong>{{count}} enemmän</strong>",
+  "AndMoreLabel": "ja <1>{{count}} enemmän</1>",
   "CreationDate": "Luontipäivä",
   "Data": "Tiedot",
   "DateModified": "Muokkauspäivämäärä",

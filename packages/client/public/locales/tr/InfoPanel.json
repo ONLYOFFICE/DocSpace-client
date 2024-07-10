@@ -1,7 +1,7 @@
 {
   "AccountsEmptyScreenText": "Kullanıcı ayrıntılarını buradan gör",
   "Administration": "Yönetim",
-  "AndMoreLabel": "ve <strong>{{count}} daha</strong>",
+  "AndMoreLabel": "ve <1>{{count}} daha</1>",
   "CreationDate": "Oluşturulma tarihi",
   "Data": "Veri",
   "DateModified": "Değiştirilme tarihi",

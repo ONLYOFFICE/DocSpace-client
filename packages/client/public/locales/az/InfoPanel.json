@@ -1,7 +1,7 @@
 {
   "AccountsEmptyScreenText": "İstifadəçi detallarına burada baxın",
   "Administration": "İdarəetmə",
-  "AndMoreLabel": "və <strong>{{count}} daha çox</strong>",
+  "AndMoreLabel": "və <1>{{count}} daha çox</1>",
   "CreationDate": "Yaradılma tarixi",
   "Data": "Məlumat",
   "DateModified": "Değiştirilme tarihi",

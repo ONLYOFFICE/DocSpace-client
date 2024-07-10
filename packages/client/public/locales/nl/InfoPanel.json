@@ -1,7 +1,7 @@
 {
   "AccountsEmptyScreenText": "Bekijk hier de details van de gebruikers",
   "Administration": "Beheer",
-  "AndMoreLabel": "en <strong>{{count}} meer</strong>",
+  "AndMoreLabel": "en <1>{{count}} meer</1>",
   "CreationDate": "Aanmaakdatum",
   "Data": "Data",
   "DateModified": "Datum aangepast",

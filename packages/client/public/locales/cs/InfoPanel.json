@@ -1,7 +1,7 @@
 {
   "AccountsEmptyScreenText": "Podrobnosti o uživatelích naleznete zde",
   "Administration": "Správa",
-  "AndMoreLabel": "a <strong>{{count}} další</strong>",
+  "AndMoreLabel": "a <1>{{count}} další</1>",
   "CreationDate": "Datum vytvoření",
   "Data": "Data",
   "DateModified": "Datum úpravy",

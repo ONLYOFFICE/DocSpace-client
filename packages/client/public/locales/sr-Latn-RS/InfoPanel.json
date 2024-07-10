@@ -1,7 +1,7 @@
 {
   "AccountsEmptyScreenText": "Vidi korisničke detalje ovde",
   "Administration": "Administracija",
-  "AndMoreLabel": "i <strong>{{count}} više</strong>",
+  "AndMoreLabel": "i <1>{{count}} više</1>",
   "CreationDate": "Datum izrade",
   "Data": "Podaci",
   "DateModified": "Datum izmene",

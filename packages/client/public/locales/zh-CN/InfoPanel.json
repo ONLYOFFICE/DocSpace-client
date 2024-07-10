@@ -1,7 +1,7 @@
 {
   "AccountsEmptyScreenText": "在此查看用户详情",
   "Administration": "管理",
-  "AndMoreLabel": "以及<strong>另外 {{count}} 个</strong>",
+  "AndMoreLabel": "以及<1>另外 {{count}} 个</1>",
   "CreationDate": "创建日期",
   "Data": "数据",
   "DateModified": "修改日期",

@@ -1,7 +1,7 @@
 {
   "AccountsEmptyScreenText": "여기에서 사용자 세부 정보를 확인하세요",
   "Administration": "관리",
-  "AndMoreLabel": "및 <strong>{{count}} 이상</strong>",
+  "AndMoreLabel": "및 <1>{{count}} 이상</1>",
   "CreationDate": "생성 날짜",
   "Data": "데이터",
   "DateModified": "수정된 날짜",

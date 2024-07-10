@@ -1,7 +1,7 @@
 {
   "AccountsEmptyScreenText": "Див. інформацію про користувачів тут",
   "Administration": "Адміністрування",
-  "AndMoreLabel": "і ще <strong>{{count}}</strong>",
+  "AndMoreLabel": "і ще <1>{{count}}</1>",
   "CreationDate": "Дата створення",
   "Data": "Дані",
   "DateModified": "Дата змінення",

@@ -1,7 +1,7 @@
 {
   "AccountsEmptyScreenText": "انظر تفاصيل المستخدمين هنا",
   "Administration": "الإدارة",
-  "AndMoreLabel": "و <strong> {{count}} المزيد </ strong>",
+  "AndMoreLabel": "و <1> {{count}} المزيد </ 1>",
   "CreationDate": "تاريخ الإنشاء",
   "Data": "بيانات",
   "DateModified": "تم تعديل التاريخ",

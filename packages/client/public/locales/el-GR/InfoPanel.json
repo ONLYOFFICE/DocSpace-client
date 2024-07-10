@@ -1,7 +1,7 @@
 {
   "AccountsEmptyScreenText": "Δείτε λεπτομέρειες για τους χρήστες εδώ",
   "Administration": "Διαχείριση",
-  "AndMoreLabel": "και <strong>{{count}} περισσότερα</strong>",
+  "AndMoreLabel": "και <1>{{count}} περισσότερα</1>",
   "CreationDate": "Ημερομηνία δημιουργίας",
   "Data": "Δεδομένα",
   "DateModified": "Ημερομηνία τροποποίησης",

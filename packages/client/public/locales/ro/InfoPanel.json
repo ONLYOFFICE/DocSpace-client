@@ -1,7 +1,7 @@
 {
   "AccountsEmptyScreenText": "Detaliile utilizatorilor aici",
   "Administration": "Administrare",
-  "AndMoreLabel": "și <strong>{{count}} mai multe</strong>",
+  "AndMoreLabel": "și <1>{{count}} mai multe</1>",
   "CreationDate": "Data creării",
   "Data": "Date",
   "DateModified": "Dată modificare",

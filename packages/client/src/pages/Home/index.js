@@ -161,6 +161,8 @@ const PureHome = (props) => {
     scrollToTop,
   } = props;
 
+  //console.log(t("ComingSoon"))
+
   const location = useLocation();
   const { groupId } = useParams();
 

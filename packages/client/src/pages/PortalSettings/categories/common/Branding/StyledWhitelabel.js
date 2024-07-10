@@ -161,15 +161,15 @@ const WhiteLabelWrapper = styled.div`
   }
 
   .logo-docs-editor {
-    width: 154px;
-    height: 27px;
-    padding: 6px 9px 7px 9px;
+    width: 172px;
+    height: 40px;
+    padding: 0;
   }
 
   .logo-embedded-editor {
-    width: 154px;
-    height: 27px;
-    padding: 5px 8px 6px 8px;
+    width: 172px;
+    height: 40px;
+    padding: 0;
     margin-bottom: 8px;
   }
 

@@ -71,6 +71,7 @@ export const getLogoOptions = (index, text, width, height) => {
         text,
         width,
         height,
+        alignCenter: true,
       };
     case 2:
       return {

@@ -24,59 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useContext, useCallback } from "react";
+import { createContext, ReactNode, useMemo } from "react";
 
-import { SearchInput } from "../../search-input";
-import { InputSize } from "../../text-input";
+import { TFilesSettings } from "../../../api/files/types";
+import { TGetIcon } from "../FilesSelector.types";
+import useFilesSettings from "../hooks/useFilesSettings";
 
-import { SearchContext, SearchDispatchContext } from "../contexts/Search";
-import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
+export const SettingsContext = createContext<{
+  getIcon: (fileExst: string) => string;
+  filesSettingsLoading: boolean;
+  extsWebEdited: string[];
+}>({ getIcon: () => "", extsWebEdited: [], filesSettingsLoading: false });
 
-const Search = React.memo(({ isSearch }: { isSearch: boolean }) => {
-  const {
-    searchPlaceholder,
-    searchValue,
-    isSearchLoading,
-    searchLoader,
-    withSearch,
-    onClearSearch,
-    onSearch,
-  } = useContext(SearchContext);
-  const setIsSearch = useContext(SearchDispatchContext);
-
-  const { isBreadCrumbsLoading } = useContext(BreadCrumbsContext);
-
-  const onClearSearchAction = useCallback(() => {
-    onClearSearch?.(() => setIsSearch(false));
-  }, [onClearSearch, setIsSearch]);
-
-  const onSearchAction = useCallback(
-    (data: string) => {
-      const v = data.trim();
-
-      if (v === "") return onClearSearchAction();
-
-      onSearch?.(v, () => setIsSearch(true));
-    },
-    [onClearSearchAction, onSearch, setIsSearch],
+export const SettingsContextProvider = ({
+  settings,
+  getIcon: getIconProp,
+  children,
+}: {
+  settings?: TFilesSettings;
+  getIcon?: TGetIcon;
+  children: ReactNode;
+}) => {
+  const { getIcon, extsWebEdited, isLoading } = useFilesSettings(
+    getIconProp,
+    settings,
   );
 
-  if (isBreadCrumbsLoading || isSearchLoading) return searchLoader;
-
-  if (!withSearch || !isSearch) return null;
+  const value = useMemo(
+    () => ({
+      getIcon,
+      extsWebEdited: extsWebEdited ?? [],
+      filesSettingsLoading: isLoading,
+    }),
+    [getIcon, extsWebEdited, isLoading],
+  );
 
   return (
-    <SearchInput
-      className="search-input"
-      placeholder={searchPlaceholder}
-      value={searchValue ?? ""}
-      onChange={onSearchAction}
-      onClearSearch={onClearSearchAction}
-      size={InputSize.base}
-    />
+    <SettingsContext.Provider value={value}>
+      {children}
+    </SettingsContext.Provider>
   );
-});
-
-Search.displayName = "Search";
-
-export { Search };
+};

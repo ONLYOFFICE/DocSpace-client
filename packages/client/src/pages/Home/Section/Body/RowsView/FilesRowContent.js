@@ -253,6 +253,16 @@ const FilesRowContent = ({
           return elem;
         });
 
+      case SortByFieldName.UsedSpace:
+        if (usedSpace === undefined) return "";
+
+        return getSpaceQuotaAsText(
+          t,
+          usedSpace,
+          quotaLimit,
+          isDefaultRoomsQuotaSet,
+        );
+
       default:
         if (isTrashFolder)
           return t("Files:DaysRemaining", {
@@ -264,24 +274,7 @@ const FilesRowContent = ({
   };
 
   const additionalComponent = () => {
-    if (
-      isRooms &&
-      isStatisticsAvailable &&
-      showStorageInfo &&
-      usedSpace !== undefined
-    ) {
-      let value = t(ROOMS_TYPE_TRANSLATIONS[item.roomType]);
-      const spaceQuota = getSpaceQuotaAsText(
-        t,
-        usedSpace,
-        quotaLimit,
-        isDefaultRoomsQuotaSet,
-      );
-
-      if (!isMobile()) value = `${value} | ${spaceQuota}`;
-
-      return value;
-    }
+    if (isRooms) return t(ROOMS_TYPE_TRANSLATIONS[item.roomType]);
 
     if (!fileExst && !contentLength && !providerKey)
       return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(

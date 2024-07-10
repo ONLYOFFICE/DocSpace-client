@@ -35,7 +35,7 @@ import {
   toUrlParams,
 } from "../../utils/common";
 import RoomsFilter from "./filter";
-import { TGetRooms, TRoomLifetime } from "./types";
+import { TGetRooms, TRoomLifetime, TExportRoomIndexTask } from "./types";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
   let params;
@@ -491,4 +491,18 @@ export function changeRoomLifetime(
   };
 
   return request(options);
+}
+
+export function exportRoomIndex(roomId: number) {
+  return request({
+    method: "post",
+    url: `files/rooms/${roomId}/indexexport`,
+  }) as Promise<TExportRoomIndexTask>;
+}
+
+export function getExportRoomIndexProgress() {
+  return request({
+    method: "get",
+    url: `files/rooms/indexexport`,
+  }) as Promise<TExportRoomIndexTask>;
 }

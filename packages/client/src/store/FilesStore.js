@@ -2384,6 +2384,7 @@ class FilesStore {
         "unpin-room",
         "mute-room",
         "unmute-room",
+        "export-room-index",
         "separator1",
         "download",
         "archive-room",

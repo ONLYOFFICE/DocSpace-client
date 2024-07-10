@@ -143,6 +143,8 @@ class SelectedFolderStore {
 
   canShare = false;
 
+  indexing = false;
+
   parentRoomType: Nullable<FolderType> = null;
 
   lifetime: TRoomLifetime | null = null;
@@ -192,6 +194,7 @@ class SelectedFolderStore {
       isRootFolder: this.isRootFolder,
       parentRoomType: this.parentRoomType,
       lifetime: this.lifetime,
+      indexing: this.indexing,
     };
   };
 
@@ -238,6 +241,7 @@ class SelectedFolderStore {
     this.inRoom = false;
     this.parentRoomType = null;
     this.lifetime = null;
+    this.indexing = false;
   };
 
   setParentId = (parentId: number) => {

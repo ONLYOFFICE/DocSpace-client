@@ -143,6 +143,7 @@
   "EditButton": "Edit",
   "Editing": "Editing",
   "Editor": "Editor",
+  "Commentator": "Commentator",
   "EditPDFForm": "Edit PDF form",
   "Email": "Email",
   "EmptyDescription": "The list of users previously invited to {{productName}} or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",

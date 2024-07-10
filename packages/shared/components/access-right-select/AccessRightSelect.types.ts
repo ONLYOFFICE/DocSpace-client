@@ -44,6 +44,8 @@ type PropsFromCombobox = Pick<
   | "withoutBackground"
   | "withBackground"
   | "withBlur"
+  | "type"
+  | "noBorder"
 >;
 
 export type AccessRightSelectProps = PropsFromCombobox & {

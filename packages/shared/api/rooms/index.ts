@@ -27,7 +27,7 @@
 /* eslint-disable @typescript-eslint/default-param-last */
 import { AxiosRequestConfig } from "axios";
 
-import { FolderType, MembersSubjectType } from "../../enums";
+import { FolderType, MembersSubjectType, ShareAccessRights } from "../../enums";
 import { request } from "../client";
 import {
   checkFilterInstance,
@@ -36,6 +36,7 @@ import {
 } from "../../utils/common";
 import RoomsFilter from "./filter";
 import { TGetRooms } from "./types";
+import moment from "moment";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
   let params;
@@ -394,15 +395,15 @@ export const acceptInvitationByLink = async () => {
 };
 
 export function editExternalLink(
-  roomId,
-  linkId,
-  title,
-  access,
-  expirationDate,
-  linkType,
-  password,
-  disabled,
-  denyDownload,
+  roomId: number | string,
+  linkId: number | string,
+  title: string,
+  access: ShareAccessRights,
+  expirationDate: moment.Moment,
+  linkType: number,
+  password: string,
+  disabled: boolean,
+  denyDownload: boolean,
 ) {
   return request({
     method: "put",

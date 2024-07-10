@@ -115,6 +115,41 @@ export const getAccessOptions = (
   return items;
 };
 
+export const getRoomAccessOptions = (t: TTranslation) => {
+  return [
+    {
+      access: ShareAccessRights.Editing,
+      description:
+        "Operations with existing files: viewing, editing, form filling, reviewing, commenting.",
+      key: "editing",
+      label: t("Common:Editor"),
+      icon: AccessEditReactSvgUrl,
+    },
+    {
+      access: ShareAccessRights.Review,
+      description:
+        "Operations with existing files: viewing, reviewing, commenting.",
+      key: "review",
+      label: t("Translations:RoleReviewer"),
+      icon: AccessReviewReactSvgUrl,
+    },
+    {
+      access: ShareAccessRights.Comment,
+      description: "Operations with existing files: viewing, commenting.",
+      key: "commenting",
+      label: t("Commentator"),
+      icon: AccessCommentReactSvgUrl,
+    },
+    {
+      access: ShareAccessRights.ReadOnly,
+      description: "File viewing",
+      key: "viewing",
+      label: t("JavascriptSdk:Viewer"),
+      icon: EyeReactSvgUrl,
+    },
+  ];
+};
+
 export const getExpiredOptions = (
   t: TTranslation,
   setTwelveHours: VoidFunction,

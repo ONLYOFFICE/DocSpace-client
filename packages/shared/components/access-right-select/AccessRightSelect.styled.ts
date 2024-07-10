@@ -43,6 +43,25 @@ const StyledWrapper = styled(ComboBox)`
       `}
   }
 
+  ${({ type, theme }) =>
+    type === "onlyIcon" &&
+    css`
+      .combo-button {
+        padding-right: 4px;
+      }
+
+      .combo-button_selected-icon-container {
+        margin-right: 0px;
+      }
+
+      .combo-buttons_arrow-icon,
+      .combo-button_selected-icon-container {
+        svg path {
+          fill: ${theme.iconButton.color};
+        }
+      }
+    `}
+
   @media ${mobile} {
     .backdrop-active {
       top: -64px;
@@ -84,8 +103,16 @@ const StyledItemDescription = styled.div`
 
 StyledItemDescription.defaultProps = { theme: Base };
 
-const StyledItemIcon = styled.img`
-  margin-right: 8px;
+const StyledItemIcon = styled.img<{ isShortenIcon?: boolean }>`
+  padding-inline-end: 8px;
+
+  ${({ isShortenIcon }) =>
+    isShortenIcon &&
+    css`
+      padding-top: 2px;
+      width: 12px;
+      height: 12px;
+    `}
 `;
 
 const StyledItemContent = styled.div`

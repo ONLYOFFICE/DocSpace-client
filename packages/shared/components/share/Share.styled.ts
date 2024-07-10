@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const StyledLinks = styled.div`
   margin-top: 20px;
@@ -49,11 +49,28 @@ const StyledLinks = styled.div`
   }
 `;
 
-const StyledLinkRow = styled.div`
+const StyledLinkRow = styled.div<{ isExpired?: boolean }>`
   padding: 8px 0;
   display: flex;
   gap: 8px;
   align-items: center;
+
+  .avatar_role-wrapper {
+    /* svg {
+      path {
+        fill: ${({ isExpired, theme }) =>
+      isExpired
+        ? theme.infoPanel.links.iconErrorColor
+        : theme.infoPanel.links.iconColor};
+      }
+    } */
+
+    svg {
+      path:nth-child(3) {
+        fill: ${({ theme }) => theme.backgroundColor};
+      }
+    }
+  }
 
   .combo-box {
     padding: 0;
@@ -71,14 +88,23 @@ const StyledLinkRow = styled.div`
 
   .internal-combobox {
     padding: 0px;
+
+    .combo-button-label {
+      font-size: 14px;
+    }
   }
 
-  .internal-combobox_expiered {
+  .link-options_title {
     font-size: 14px;
     font-weight: 600;
     line-height: 16px;
     margin: 6px 8px;
-    color: ${({ theme }) => theme.infoPanel.members.linkAccessComboboxExpired};
+
+    ${({ theme, isExpired }) =>
+      isExpired &&
+      css`
+        color: ${theme.infoPanel.members.linkAccessComboboxExpired};
+      `};
   }
 
   .expired-options {
@@ -91,6 +117,7 @@ const StyledLinkRow = styled.div`
 
   .expire-text {
     margin-inline-start: 8px;
+    color: ${({ theme }) => theme.infoPanel.links.primaryColor};
   }
 
   .link-actions {
@@ -98,6 +125,11 @@ const StyledLinkRow = styled.div`
     gap: 16px;
     align-items: center;
     margin-inline-start: auto;
+
+    .link-row_copy-icon {
+      min-width: 16px;
+      min-height: 16px;
+    }
   }
 
   .loader {

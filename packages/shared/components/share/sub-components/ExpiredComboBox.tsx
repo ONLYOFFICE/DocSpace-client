@@ -150,7 +150,7 @@ const ExpiredComboBox = ({
         </Trans>
       );
     }
-    const date = t("Common:Unlimited");
+    const date = t("Common:Unlimited").toLowerCase();
 
     return (
       <Trans t={t} i18nKey="LinkIsValid" ns="Common">

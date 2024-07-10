@@ -24,24 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import AddUsersPanel from "./AddUsersPanel";
-import EmbeddingPanel from "./EmbeddingPanel";
-import NewFilesPanel from "./NewFilesPanel";
-import VersionHistoryPanel from "./VersionHistoryPanel";
-import ChangeOwnerPanel from "./ChangeOwnerPanel";
-import UploadPanel from "./UploadPanel";
-import HotkeyPanel from "./HotkeysPanel";
-import InvitePanel from "./InvitePanel";
-import EditLinkPanel from "./EditLinkPanel";
+import { RowContainer } from "@docspace/shared/components/row-container";
+import styled from "styled-components";
+import SessionsRow from "./SessionsRow";
+import { RowViewProps } from "../../UserSessionsPanel.types";
 
-export {
-  AddUsersPanel,
-  EmbeddingPanel,
-  NewFilesPanel,
-  VersionHistoryPanel,
-  ChangeOwnerPanel,
-  UploadPanel,
-  HotkeyPanel,
-  InvitePanel,
-  EditLinkPanel,
+const StyledRowContainer = styled(RowContainer)`
+  padding: 0px 16px;
+`;
+
+const RowView = (props: RowViewProps) => {
+  const { t, sectionWidth, sessions } = props;
+
+  return (
+    <StyledRowContainer
+      useReactWindow={false}
+      hasMoreFiles={false}
+      itemHeight={58}
+      itemCount={sessions.length}
+      filesLength={sessions.length}
+      fetchMoreFiles={() => Promise.resolve()}
+      onScroll={() => {}}
+    >
+      {sessions.map((item) => (
+        <SessionsRow
+          t={t}
+          key={item.id}
+          item={item}
+          sectionWidth={sectionWidth}
+        />
+      ))}
+    </StyledRowContainer>
+  );
 };
+
+export default RowView;

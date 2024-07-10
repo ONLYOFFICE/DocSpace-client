@@ -24,24 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import AddUsersPanel from "./AddUsersPanel";
-import EmbeddingPanel from "./EmbeddingPanel";
-import NewFilesPanel from "./NewFilesPanel";
-import VersionHistoryPanel from "./VersionHistoryPanel";
-import ChangeOwnerPanel from "./ChangeOwnerPanel";
-import UploadPanel from "./UploadPanel";
-import HotkeyPanel from "./HotkeysPanel";
-import InvitePanel from "./InvitePanel";
-import EditLinkPanel from "./EditLinkPanel";
+import { TTranslation } from "@docspace/shared/types";
+import { ISessions } from "SRC_DIR/pages/PortalSettings/categories/security/sessions/SecuritySessions.types";
 
-export {
-  AddUsersPanel,
-  EmbeddingPanel,
-  NewFilesPanel,
-  VersionHistoryPanel,
-  ChangeOwnerPanel,
-  UploadPanel,
-  HotkeyPanel,
-  InvitePanel,
-  EditLinkPanel,
-};
+export interface LogoutSessionDialogProps {
+  t: TTranslation;
+  data: ISessions;
+  visible: boolean;
+  onClose: () => void;
+  onRemoveSession: (t: TTranslation, id: number) => void;
+  isLoading: boolean;
+}

@@ -25,15 +25,20 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Button } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
+import { TData } from "@docspace/shared/components/toast/Toast.type";
 
+import { LogoutAllSessionDialogProps } from "./LogoutAllSessionDialog.types";
 import ModalDialogContainer from "../ModalDialogContainer";
 
-const LogoutAllSessionDialog = ({
+export const LogoutAllSessionDialog = ({
   t,
   visible,
   isLoading,
@@ -49,13 +54,11 @@ const LogoutAllSessionDialog = ({
   onLogoutAllUsers,
   onLogoutAllSessions,
   onLogoutAllExceptThis,
-}) => {
+}: LogoutAllSessionDialogProps) => {
   const [isChecked, setIsChecked] = useState(false);
-  const isProfile = location.pathname.includes("/profile");
+  const isProfile = window.location.pathname.includes("/profile");
 
-  const onChangeCheckbox = () => {
-    setIsChecked((prev) => !prev);
-  };
+  const onChangeCheckbox = () => setIsChecked((prev) => !prev);
 
   const onClickLogout = () => {
     const selectionId = selection[0]?.connections[0]?.id;
@@ -64,15 +67,17 @@ const LogoutAllSessionDialog = ({
 
     try {
       if (!isChecked) {
-        isSeveralSelection
-          ? onLogoutAllUsers(t, userIds)
-          : onLogoutAllSessions(t, userIds, displayName);
+        if (isSeveralSelection) {
+          onLogoutAllUsers(t, userIds);
+        } else {
+          onLogoutAllSessions(t, userIds, displayName);
+        }
         onClosePanel();
       } else {
         onLogoutAllExceptThis(t, exceptId, displayName);
       }
     } catch (error) {
-      toastr.error(error);
+      toastr.error(error as TData);
     } finally {
       onClose();
     }
@@ -81,12 +86,12 @@ const LogoutAllSessionDialog = ({
   const onClickRemove = () => {
     try {
       if (isChecked) {
-        onRemoveAllSessions();
+        onRemoveAllSessions?.();
       } else {
-        onRemoveAllExceptThis();
+        onRemoveAllExceptThis?.();
       }
     } catch (error) {
-      toastr.error(error);
+      toastr.error(error as TData);
     }
   };
 
@@ -113,7 +118,7 @@ const LogoutAllSessionDialog = ({
     <ModalDialogContainer
       visible={visible}
       onClose={onClose}
-      displayType="modal"
+      displayType={ModalDialogType.modal}
     >
       <ModalDialog.Header>
         {t("Profile:LogoutAllActiveConnections")}
@@ -127,9 +132,9 @@ const LogoutAllSessionDialog = ({
           className="logout"
           key="Logout"
           label={t("Common:Logout")}
-          size="normal"
+          size={ButtonSize.normal}
           scale
-          primary={true}
+          primary
           onClick={isProfile ? onClickRemove : onClickLogout}
           isLoading={isLoading}
         />
@@ -137,7 +142,7 @@ const LogoutAllSessionDialog = ({
           className="cancel-button"
           key="CloseBtn"
           label={t("Common:CancelButton")}
-          size="normal"
+          size={ButtonSize.normal}
           scale
           onClick={onClose}
           isDisabled={isLoading}
@@ -146,5 +151,3 @@ const LogoutAllSessionDialog = ({
     </ModalDialogContainer>
   );
 };
-
-export default LogoutAllSessionDialog;

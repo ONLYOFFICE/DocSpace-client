@@ -62,9 +62,11 @@ export default function withContent(WrappedContent) {
 
     const onContextClick = useCallback(
       (item, isSingleMenu) => {
-        isSingleMenu
-          ? singleContextMenuAction(item)
-          : multipleContextMenuAction(item);
+        if (isSingleMenu) {
+          setTimeout(() => singleContextMenuAction(item), 0);
+        } else {
+          setTimeout(() => multipleContextMenuAction(item), 0);
+        }
       },
       [singleContextMenuAction, multipleContextMenuAction],
     );

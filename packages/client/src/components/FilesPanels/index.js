@@ -41,7 +41,6 @@ import {
   InvitePanel,
   EditLinkPanel,
   EmbeddingPanel,
-  UserSessionsPanel,
 } from "../panels";
 import {
   ConnectDialog,
@@ -78,6 +77,7 @@ import ChangeRoomOwnerPanel from "../panels/ChangeRoomOwnerPanel";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
 import { PDFFormEditingDialog } from "../dialogs/PDFFormEditingDialog";
 import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
+import { SessionsPanel } from "../panels/UserSessionsPanel";
 
 const Panels = (props) => {
   const {
@@ -357,7 +357,7 @@ const Panels = (props) => {
       <SharePDFFormDialog key="share-pdf-form-dialog" {...sharePDFForm} />
     ),
 
-    userSessionsPanelVisible && <UserSessionsPanel key="user-sessions-panel" />,
+    userSessionsPanelVisible && <SessionsPanel key="user-sessions-panel" />,
   ];
 };
 

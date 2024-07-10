@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
@@ -7,11 +33,14 @@ import { Row } from "@docspace/shared/components/row";
 import styled, { css } from "styled-components";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
-import SessionsRowContent from "./SessionsRowContent";
 
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
+import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
+
+import type SelectionPeopleStore from "SRC_DIR/store/SelectionPeopleStore";
+import { SessionsTableRowProps } from "../../SecuritySessions.types";
+import SessionsRowContent from "./SessionsRowContent";
 
 const marginStyles = css`
   margin-left: -24px;
@@ -57,7 +86,7 @@ const Wrapper = styled.div`
 Wrapper.defaultProps = { theme: Base };
 
 const StyledRow = styled(Row)`
-  ${(props) => (props.checked || props.isActive) && checkedStyle};
+  ${(props) => props.checked && checkedStyle};
 
   ${!isMobile &&
   css`
@@ -97,7 +126,7 @@ const StyledRow = styled(Row)`
   }
 `;
 
-const SessionsRow = (props) => {
+const SessionsRow = (props: SessionsTableRowProps) => {
   const {
     t,
     item,
@@ -106,7 +135,6 @@ const SessionsRow = (props) => {
     onContentRowSelect,
     onContentRowClick,
     onUserContextClick,
-    isActive,
     checkedProps,
     displayName,
     status,
@@ -147,7 +175,7 @@ const SessionsRow = (props) => {
     const intervalId = setInterval(updateStatus, 60000);
 
     return () => clearInterval(intervalId);
-  }, [date, status, locale, userId, isOnline]);
+  }, [t, date, status, locale, userId, isOnline, convertDate, setFromDateAgo]);
 
   const onClickSessions = () => {
     setItems(item);
@@ -173,7 +201,7 @@ const SessionsRow = (props) => {
     {
       key: "LogoutAllSessions",
       label: t("Settings:LogoutAllSessions"),
-      icon: RemoveSvgUrl,
+      icon: LogoutReactSvgUrl,
       onClick: onClickLogout,
     },
     {
@@ -191,31 +219,30 @@ const SessionsRow = (props) => {
   ];
 
   const onRowContextClick = useCallback(
-    (rightMouseButtonClick) => {
-      onUserContextClick?.(item, !rightMouseButtonClick);
+    (rightMouseButtonClick?: boolean) => {
+      if (onUserContextClick) onUserContextClick(item, !rightMouseButtonClick);
     },
     [item, onUserContextClick],
   );
 
-  const onRowClick = (e) => onContentRowClick?.(e, item);
+  const onRowClick = (e: React.MouseEvent) => {
+    if (onContentRowClick) onContentRowClick(e, item);
+  };
 
   return (
     <Wrapper
-      className={`user-item row-wrapper ${
-        isChecked || isActive ? "row-selected" : ""
-      }`}
+      className={`user-item row-wrapper ${isChecked ? "row-selected" : ""}`}
     >
       <div className="user-item">
         <StyledRow
-          key={item.userId}
+          key={userId}
           data={item}
           element={element}
           onSelect={onContentRowSelect}
           checked={isChecked}
-          isActive={isActive}
           sectionWidth={sectionWidth}
-          mode={"modern"}
-          className={"user-row"}
+          mode="modern"
+          className="user-row"
           contextOptions={contextOptions}
           onRowClick={onRowClick}
           onContextClick={onRowContextClick}
@@ -231,7 +258,7 @@ const SessionsRow = (props) => {
   );
 };
 
-export default inject(
+export default inject<TStore>(
   ({ setup, dialogsStore, settingsStore, userStore, peopleStore }) => {
     const { setUserSessionPanelVisible } = dialogsStore;
     const { setLogoutAllDialogVisible, setDisableDialogVisible } = setup;
@@ -246,7 +273,7 @@ export default inject(
       convertDate,
       getFromDateAgo,
       setFromDateAgo,
-    } = peopleStore.selectionStore;
+    } = peopleStore.selectionStore as unknown as SelectionPeopleStore;
 
     return {
       isMe,

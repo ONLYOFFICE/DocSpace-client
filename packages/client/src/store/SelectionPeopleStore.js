@@ -36,7 +36,7 @@ class SelectionStore {
   dataFromSocket = [];
   displayName = "";
   fromDateAgo = {};
-  items = [];
+  items;
   platformData = [];
   isLoading = false;
   selection = [];

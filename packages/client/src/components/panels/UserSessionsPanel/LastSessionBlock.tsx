@@ -1,13 +1,49 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { observer, inject } from "mobx-react";
-import { Avatar } from "@docspace/shared/components/avatar";
+import {
+  Avatar,
+  AvatarSize,
+  AvatarRole,
+} from "@docspace/shared/components/avatar";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
-import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
+import {
+  ContextMenuButton,
+  ContextMenuButtonDisplayType,
+} from "@docspace/shared/components/context-menu-button";
 import { PRODUCT_NAME } from "@docspace/shared/constants";
 import styled, { css } from "styled-components";
-
 import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
+
+import type SelectionPeopleStore from "SRC_DIR/store/SelectionPeopleStore";
+import { IAllSessions } from "SRC_DIR/pages/PortalSettings/categories/security/sessions/SecuritySessions.types";
+import { LastSessionBlockProps } from "./UserSessionsPanel.types";
 
 const StyledUserInfoBlock = styled.div`
   display: flex;
@@ -96,15 +132,15 @@ const StyledLastSessionBlock = styled.div`
   }
 `;
 
-const LastSessionBlock = (props) => {
+const LastSessionBlock = (props: LastSessionBlockProps) => {
   const {
     t,
     isMe,
-    items,
-    setDisplayName,
-    setDisableDialogVisible,
-    setLogoutAllDialogVisible,
-    getFromDateAgo,
+    items = {} as IAllSessions,
+    setDisplayName = () => {},
+    setDisableDialogVisible = () => {},
+    setLogoutAllDialogVisible = () => {},
+    getFromDateAgo = () => {},
   } = props;
 
   const {
@@ -123,7 +159,7 @@ const LastSessionBlock = (props) => {
   const isOnline = fromDateAgo === "online";
   const { platform, browser, ip, city, country } = connections[0] ?? {};
 
-  const getUserType = () => {
+  const getUserType = (): string => {
     if (isOwner) return t("Common:Owner");
     if (isAdmin) return t("Common:PortalAdmin", { productName: PRODUCT_NAME });
     if (isRoomAdmin) return t("Common:RoomAdmin");
@@ -131,7 +167,11 @@ const LastSessionBlock = (props) => {
     return t("Common:User");
   };
 
-  const role = isOwner ? "owner" : isAdmin ? "admin" : null;
+  const role = isOwner
+    ? AvatarRole.owner
+    : isAdmin
+      ? AvatarRole.admin
+      : AvatarRole.none;
 
   const onClickLogout = () => {
     setLogoutAllDialogVisible(true);
@@ -172,7 +212,7 @@ const LastSessionBlock = (props) => {
           <Avatar
             className="avatar"
             role={role}
-            size="big"
+            size={AvatarSize.big}
             userName={displayName}
             source={avatar}
           />
@@ -184,7 +224,9 @@ const LastSessionBlock = (props) => {
 
         <ContextMenuButton
           id="user-session-info"
+          displayType={ContextMenuButtonDisplayType.dropdown}
           className="context-button"
+          data={[]}
           getData={contextOptions}
         />
       </StyledUserInfoBlock>
@@ -227,11 +269,11 @@ const LastSessionBlock = (props) => {
   );
 };
 
-export default inject(({ setup, peopleStore }) => {
+export default inject<TStore>(({ setup, peopleStore }) => {
   const { setDisableDialogVisible, setLogoutAllDialogVisible } = setup;
 
   const { getItems, isMe, getFromDateAgo, setDisplayName } =
-    peopleStore.selectionStore;
+    peopleStore.selectionStore as unknown as SelectionPeopleStore;
 
   return {
     isMe,

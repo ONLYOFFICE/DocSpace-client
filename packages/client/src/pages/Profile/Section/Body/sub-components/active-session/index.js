@@ -40,10 +40,8 @@ import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 
 import SessionsTable from "./SessionsTable";
 
-import {
-  LogoutSessionDialog,
-  LogoutAllSessionDialog,
-} from "SRC_DIR/components/dialogs";
+import { LogoutSessionDialog } from "SRC_DIR/components/dialogs/LogoutSessionDialog";
+import { LogoutAllSessionDialog } from "SRC_DIR/components/dialogs/LogoutAllSessionDialog";
 
 const StyledWrapper = styled.div`
   .auto-delete-title {

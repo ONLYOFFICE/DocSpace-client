@@ -24,24 +24,62 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import AddUsersPanel from "./AddUsersPanel";
-import EmbeddingPanel from "./EmbeddingPanel";
-import NewFilesPanel from "./NewFilesPanel";
-import VersionHistoryPanel from "./VersionHistoryPanel";
-import ChangeOwnerPanel from "./ChangeOwnerPanel";
-import UploadPanel from "./UploadPanel";
-import HotkeyPanel from "./HotkeysPanel";
-import InvitePanel from "./InvitePanel";
-import EditLinkPanel from "./EditLinkPanel";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 
-export {
-  AddUsersPanel,
-  EmbeddingPanel,
-  NewFilesPanel,
-  VersionHistoryPanel,
-  ChangeOwnerPanel,
-  UploadPanel,
-  HotkeyPanel,
-  InvitePanel,
-  EditLinkPanel,
+import { LogoutSessionDialogProps } from "./LogoutSessionDialog.types";
+import ModalDialogContainer from "../ModalDialogContainer";
+
+export const LogoutSessionDialog = ({
+  t,
+  visible,
+  data,
+  isLoading,
+  onClose,
+  onRemoveSession,
+}: LogoutSessionDialogProps) => {
+  const onRemoveClick = () => {
+    onRemoveSession(t, data.id);
+    onClose();
+  };
+
+  return (
+    <ModalDialogContainer
+      visible={visible}
+      onClose={onClose}
+      displayType={ModalDialogType.modal}
+    >
+      <ModalDialog.Header>
+        {t("Profile:LogoutActiveConnection")}
+      </ModalDialog.Header>
+      <ModalDialog.Body>
+        {t("Profile:LogoutFrom", {
+          platform: data.platform,
+          browser: data.browser?.split(".")[0] ?? "",
+        })}
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          key="Logout"
+          label={t("Common:Logout")}
+          size={ButtonSize.normal}
+          scale
+          primary
+          onClick={onRemoveClick}
+          isLoading={isLoading}
+        />
+        <Button
+          key="CloseBtn"
+          label={t("Common:CancelButton")}
+          size={ButtonSize.normal}
+          scale
+          onClick={onClose}
+          isDisabled={isLoading}
+        />
+      </ModalDialog.Footer>
+    </ModalDialogContainer>
+  );
 };

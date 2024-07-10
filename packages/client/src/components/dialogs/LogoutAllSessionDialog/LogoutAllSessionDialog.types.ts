@@ -24,60 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Button } from "@docspace/shared/components/button";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { TTranslation } from "@docspace/shared/types";
+import { IAllSessions } from "SRC_DIR/pages/PortalSettings/categories/security/sessions/SecuritySessions.types";
 
-import ModalDialogContainer from "../ModalDialogContainer";
-
-const LogoutSessionDialog = ({
-  t,
-  data,
-  visible,
-  onClose,
-  onRemoveSession,
-  isLoading,
-}) => {
-  const onRemoveClick = () => {
-    onRemoveSession(t, data.id);
-    onClose();
-  };
-
-  return (
-    <ModalDialogContainer
-      visible={visible}
-      onClose={onClose}
-      displayType="modal"
-    >
-      <ModalDialog.Header>
-        {t("Profile:LogoutActiveConnection")}
-      </ModalDialog.Header>
-      <ModalDialog.Body>
-        {t("Profile:LogoutFrom", {
-          platform: data.platform,
-          browser: data.browser?.split(".")[0] ?? "",
-        })}
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          key="Logout"
-          label={t("Common:Logout")}
-          size="normal"
-          scale
-          primary={true}
-          onClick={onRemoveClick}
-          isLoading={isLoading}
-        />
-        <Button
-          key="CloseBtn"
-          label={t("Common:CancelButton")}
-          size="normal"
-          scale
-          onClick={onClose}
-          isDisabled={isLoading}
-        />
-      </ModalDialog.Footer>
-    </ModalDialogContainer>
-  );
-};
-
-export default LogoutSessionDialog;
+export interface LogoutAllSessionDialogProps {
+  t: TTranslation;
+  visible: boolean;
+  isLoading: boolean;
+  userIds: string[];
+  displayName: string;
+  selection: IAllSessions[];
+  bufferSelection: IAllSessions | undefined;
+  isSeveralSelection: boolean;
+  onClose: () => void;
+  onClosePanel: () => void;
+  onRemoveAllSessions?: () => Promise<void>;
+  onRemoveAllExceptThis?: () => Promise<void>;
+  onLogoutAllUsers: (t: TTranslation, userIds: string[]) => void;
+  onLogoutAllSessions: (
+    t: TTranslation,
+    userIds: string[],
+    displayName: string,
+  ) => void;
+  onLogoutAllExceptThis: (
+    t: TTranslation,
+    exceptId: number | undefined,
+    displayName: string,
+  ) => void;
+}

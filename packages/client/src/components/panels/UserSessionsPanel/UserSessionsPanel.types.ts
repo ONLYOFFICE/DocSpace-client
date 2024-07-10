@@ -24,24 +24,50 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import AddUsersPanel from "./AddUsersPanel";
-import EmbeddingPanel from "./EmbeddingPanel";
-import NewFilesPanel from "./NewFilesPanel";
-import VersionHistoryPanel from "./VersionHistoryPanel";
-import ChangeOwnerPanel from "./ChangeOwnerPanel";
-import UploadPanel from "./UploadPanel";
-import HotkeyPanel from "./HotkeysPanel";
-import InvitePanel from "./InvitePanel";
-import EditLinkPanel from "./EditLinkPanel";
+import { TTranslation } from "@docspace/shared/types";
+import {
+  IAllSessions,
+  IConnections,
+  ISessions,
+} from "SRC_DIR/pages/PortalSettings/categories/security/sessions/SecuritySessions.types";
 
-export {
-  AddUsersPanel,
-  EmbeddingPanel,
-  NewFilesPanel,
-  VersionHistoryPanel,
-  ChangeOwnerPanel,
-  UploadPanel,
-  HotkeyPanel,
-  InvitePanel,
-  EditLinkPanel,
-};
+export interface UserSessionsPanelProps {
+  visible: boolean;
+  setVisible: (visible: boolean) => void;
+}
+
+export interface LastSessionBlockProps {
+  t: TTranslation;
+  isMe?: boolean;
+  items?: IAllSessions;
+  setDisplayName?: (name: string) => void;
+  setDisableDialogVisible?: (visible: boolean) => void;
+  setLogoutAllDialogVisible?: (visible: boolean) => void;
+  getFromDateAgo?: (userId: string) => string;
+}
+
+export interface AllSessionsBlockProps {
+  t: TTranslation;
+  isLoading?: boolean;
+  items?: IAllSessions;
+  onClickLogoutAllExceptThis?: (
+    t: TTranslation,
+    exceptId: number,
+    displayName: string,
+  ) => void;
+}
+
+export interface RowViewProps {
+  t: TTranslation;
+  sessions: ISessions[];
+  sectionWidth: number;
+}
+
+export interface SessionsRowProps {
+  t: TTranslation;
+  item: ISessions | IConnections;
+  connections?: IConnections;
+  sectionWidth: number;
+  setLogoutDialogVisible?: (visible: boolean) => void;
+  setPlatformData?: (item: ISessions) => void;
+}

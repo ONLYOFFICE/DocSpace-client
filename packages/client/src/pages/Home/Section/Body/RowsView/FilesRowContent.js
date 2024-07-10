@@ -371,7 +371,7 @@ export default inject(
   },
 )(
   observer(
-    withTranslation(["Files", "Translations", "Notifications"])(
+    withTranslation(["Files", "Translations", "Notifications", "Common"])(
       withContent(FilesRowContent),
     ),
   ),

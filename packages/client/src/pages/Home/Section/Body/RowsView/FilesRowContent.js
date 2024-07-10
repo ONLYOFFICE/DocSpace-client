@@ -50,7 +50,7 @@ import {
 } from "../../../../../helpers/filesUtils";
 import { SortByFieldName } from "SRC_DIR/helpers/constants";
 import {
-  getRoomTypeDefaultTagTranslation,
+  getRoomTypeTranslation,
   getSpaceQuotaAsText,
 } from "@docspace/shared/utils/common";
 
@@ -281,7 +281,7 @@ const FilesRowContent = ({
   };
 
   const additionalComponent = () => {
-    if (isRooms) return getRoomTypeDefaultTagTranslation(item.roomType, t);
+    if (isRooms) return getRoomTypeTranslation(item.roomType, t);
 
     if (!fileExst && !contentLength && !providerKey)
       return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(

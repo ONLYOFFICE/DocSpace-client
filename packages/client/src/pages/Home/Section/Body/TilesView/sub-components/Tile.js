@@ -39,7 +39,7 @@ import { Loader } from "@docspace/shared/components/loader";
 import { Base } from "@docspace/shared/themes";
 import { Tags } from "@docspace/shared/components/tags";
 import { Tag } from "@docspace/shared/components/tag";
-import { getRoomTypeDefaultTagTranslation } from "@docspace/shared/utils/common";
+import { getRoomTypeTranslation } from "@docspace/shared/utils/common";
 
 const svgLoader = () => <div style={{ width: "96px" }} />;
 
@@ -729,7 +729,7 @@ class Tile extends React.PureComponent {
       tags.push({
         isDefault: true,
         roomType: item.roomType,
-        label: getRoomTypeDefaultTagTranslation(item.roomType, t),
+        label: getRoomTypeTranslation(item.roomType, t),
         onClick: () =>
           selectOption({
             option: "defaultTypeRoom",
@@ -845,7 +845,7 @@ class Tile extends React.PureComponent {
                 {/* ) : (
                     <Tag
                       isDefault
-                      label={getRoomTypeDefaultTagTranslation(item.roomType, t)}
+                      label={getRoomTypeTranslation(item.roomType, t)}
                       onClick={() =>
                         selectOption({
                           option: "defaultTypeRoom",

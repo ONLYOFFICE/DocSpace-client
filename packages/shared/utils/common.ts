@@ -1155,10 +1155,7 @@ export function setLanguageForUnauthorized(culture: string) {
   window.location.reload();
 }
 
-export const getRoomTypeDefaultTagTranslation = (
-  roomType: number,
-  t: TTranslation,
-) => {
+export const getRoomTypeTranslation = (roomType: number, t: TTranslation) => {
   switch (roomType) {
     // case RoomsType.FillingFormsRoom:
     //   return t("Common:FillingFormRooms");

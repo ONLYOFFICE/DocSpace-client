@@ -47,7 +47,7 @@ import { Text } from "@docspace/shared/components/text";
 import ChangeRoomOwner from "./ChangeRoomOwner";
 import RoomQuota from "./RoomQuota";
 import { RoomsType } from "@docspace/shared/enums";
-import { getRoomTypeDefaultTagTranslation } from "@docspace/shared/utils/common";
+import { getRoomTypeTranslation } from "@docspace/shared/utils/common";
 
 const StyledSetRoomParams = styled.div`
   display: flex;
@@ -258,10 +258,7 @@ const SetRoomParams = ({
               previewIcon={previewIcon}
               tags={roomParams.tags.map((tag) => tag.name)}
               isDisabled={isDisabled}
-              defaultTagLabel={getRoomTypeDefaultTagTranslation(
-                roomParams.type,
-                t,
-              )}
+              defaultTagLabel={getRoomTypeTranslation(roomParams.type, t)}
             />
           }
         />

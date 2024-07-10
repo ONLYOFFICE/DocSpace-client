@@ -663,11 +663,14 @@ export const getSpaceQuotaAsText = (
   isDefaultQuotaSet: boolean,
 ) => {
   const usedValue = getConvertedQuota(t, usedSpace);
+
+  if (!isDefaultQuotaSet) return usedValue;
+
+  if (!quotaLimit) return usedValue;
+
   const quotaValue = getConvertedQuota(t, quotaLimit);
 
-  if (isDefaultQuotaSet) return `${usedValue} / ${quotaValue}`;
-
-  return usedValue;
+  return `${usedValue} / ${quotaValue}`;
 };
 
 export const conversionToBytes = (size: number, power: number) => {

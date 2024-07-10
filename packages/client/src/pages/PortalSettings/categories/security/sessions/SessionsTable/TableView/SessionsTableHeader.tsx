@@ -30,12 +30,9 @@ import { useTheme } from "styled-components";
 import { SessionsTableHeaderProps } from "../../SecuritySessions.types";
 
 const TABLE_VERSION = "4";
-const TABLE_COLUMNS = `SecuritySessionsColumns_ver-${TABLE_VERSION}`;
+const TABLE_COLUMNS = `securitySessionsColumns_ver-${TABLE_VERSION}`;
 
-const getColumns = (
-  defaultColumns: TTableColumn[],
-  userId?: string,
-): TTableColumn[] => {
+const getColumns = (defaultColumns: TTableColumn[], userId: string) => {
   const storageColumns = localStorage.getItem(`${TABLE_COLUMNS}=${userId}`);
 
   if (storageColumns) {
@@ -46,14 +43,13 @@ const getColumns = (
       enable: splitColumns.includes(col.key),
     }));
   }
-
   return defaultColumns;
 };
 
 const SessionsTableHeader = (props: SessionsTableHeaderProps) => {
   const {
     t,
-    userId,
+    userId = "" as string,
     sectionWidth,
     setHideColumns,
     containerRef,
@@ -61,7 +57,9 @@ const SessionsTableHeader = (props: SessionsTableHeaderProps) => {
     columnInfoPanelStorageName,
   } = props;
 
-  const [columns, setColumns] = useState<TTableColumn[]>([
+  const theme = useTheme();
+
+  const defaultColumns = [
     {
       key: "User",
       title: t("Common:User"),
@@ -71,12 +69,43 @@ const SessionsTableHeader = (props: SessionsTableHeaderProps) => {
       active: true,
       minWidth: 180,
       isDisabled: true,
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      onChange: onColumnChange,
     },
-  ]);
+    {
+      key: "Status",
+      title: t("Common:UserStatus"),
+      enable: true,
+      resizable: true,
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      onChange: onColumnChange,
+    },
+    {
+      key: "Platform",
+      title: t("Common:Platform"),
+      enable: true,
+      resizable: true,
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      onChange: onColumnChange,
+    },
+    {
+      key: "Location",
+      title: t("Common:Location"),
+      enable: true,
+      resizable: true,
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      onChange: onColumnChange,
+    },
+  ];
 
-  const theme = useTheme();
+  const [columns, setColumns] = useState(getColumns(defaultColumns, userId));
 
-  const onColumnChange = (key: string): void => {
+  useEffect(() => {
+    setColumns(getColumns(defaultColumns, userId));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId]);
+
+  function onColumnChange(key: string) {
     const columnIndex = columns.findIndex((c) => c.key === key);
 
     if (columnIndex === -1) return;
@@ -87,51 +116,9 @@ const SessionsTableHeader = (props: SessionsTableHeaderProps) => {
       ),
     );
 
-    const tableColumns = columns
-      .map((c) => (c.enable ? c.key : null))
-      .filter(Boolean);
+    const tableColumns = columns.map((c) => c.enable && c.key);
     localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns.toString());
-  };
-
-  const defaultColumns: TTableColumn[] = [
-    {
-      key: "User",
-      title: t("Common:User"),
-      resizable: true,
-      enable: true,
-      default: true,
-      active: true,
-      minWidth: 180,
-      isDisabled: true,
-      onChange: onColumnChange,
-    },
-    {
-      key: "Status",
-      title: t("Common:UserStatus"),
-      enable: true,
-      resizable: true,
-      onChange: onColumnChange,
-    },
-    {
-      key: "Platform",
-      title: t("Common:Platform"),
-      enable: true,
-      resizable: true,
-      onChange: onColumnChange,
-    },
-    {
-      key: "Location",
-      title: t("Common:Location"),
-      enable: true,
-      resizable: true,
-      onChange: onColumnChange,
-    },
-  ];
-
-  useEffect(() => {
-    setColumns(getColumns(defaultColumns, userId));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId]);
+  }
 
   return (
     <TableHeader

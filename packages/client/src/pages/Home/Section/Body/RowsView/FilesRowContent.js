@@ -45,7 +45,10 @@ import withContent from "../../../../../HOCs/withContent";
 import { Base } from "@docspace/shared/themes";
 import { ROOMS_TYPE_TRANSLATIONS } from "@docspace/shared/constants";
 
-import { getFileTypeName } from "../../../../../helpers/filesUtils";
+import {
+  connectedCloudsTypeTitleTranslation,
+  getFileTypeName,
+} from "../../../../../helpers/filesUtils";
 import { SortByFieldName } from "SRC_DIR/helpers/constants";
 import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 
@@ -254,6 +257,8 @@ const FilesRowContent = ({
         });
 
       case SortByFieldName.UsedSpace:
+        if (providerKey)
+          return connectedCloudsTypeTitleTranslation(providerKey, t);
         if (usedSpace === undefined) return "";
 
         return getSpaceQuotaAsText(

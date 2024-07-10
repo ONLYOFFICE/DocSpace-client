@@ -41,6 +41,7 @@ export const DisableUserDialog = ({
   t,
   visible,
   onClose,
+  onClosePanel,
   userIds,
   isLoading,
   fetchData,
@@ -62,16 +63,17 @@ export const DisableUserDialog = ({
 
   bodyText += t("ChangeUserStatusDialog:DisableGeneralDescription");
 
-  const onClickDisableUser = () => {
+  const onClickDisableUser = async () => {
     try {
-      updateUserStatus(EmployeeStatus.Disabled, userIds);
-      fetchData();
+      await updateUserStatus(EmployeeStatus.Disabled, userIds);
+      await fetchData();
       toastr.success(t("PeopleTranslations:SuccessChangeUserStatus"));
     } catch (error) {
       toastr.error(error as TData);
     } finally {
       clearSelection();
       onClose();
+      onClosePanel();
     }
   };
 

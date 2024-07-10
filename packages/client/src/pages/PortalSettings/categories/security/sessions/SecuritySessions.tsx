@@ -182,6 +182,7 @@ const Sessions = ({
           t={t}
           visible={disableDialogVisible}
           onClose={() => setDisableDialogVisible(false)}
+          onClosePanel={() => setUserSessionPanelVisible(false)}
           fetchData={fetchData}
           isLoading={isLoading}
           userIds={userIds}

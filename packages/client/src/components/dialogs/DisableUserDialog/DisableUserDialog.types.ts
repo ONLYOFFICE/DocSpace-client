@@ -30,6 +30,7 @@ export interface DisableUserDialogProps {
   t: TTranslation;
   visible: boolean;
   onClose: () => void;
+  onClosePanel: () => void;
   userIds: string[];
   isLoading: boolean;
   fetchData: () => void;

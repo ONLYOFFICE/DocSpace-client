@@ -23,24 +23,20 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import styled, { css } from "styled-components";
+import Base from "@docspace/shared/themes/base";
 
-import { RoomsType } from "@docspace/shared/enums";
+const StyledAccessSelector = styled.div`
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-left: 16px;
+        `
+      : css`
+          margin-right: 16px;
+        `}
+`;
 
-export const getRoomTypeDefaultTagTranslation = (roomType = 1, t) => {
-  switch (roomType) {
-    case RoomsType.FillingFormsRoom:
-      return t("Common:FillingFormRooms");
-    case RoomsType.EditingRoom:
-      return t("Common:CollaborationRooms");
-    case RoomsType.ReviewRoom:
-      return t("Common:Review");
-    case RoomsType.ReadOnlyRoom:
-      return t("Common:ViewOnlyRooms");
-    case RoomsType.CustomRoom:
-      return t("Common:CustomRooms");
-    case RoomsType.PublicRoom:
-      return t("Common:PublicRoom");
-    case RoomsType.FormRoom:
-      return t("Common:FormRoom");
-  }
-};
+StyledAccessSelector.defaultProps = { theme: Base };
+
+export default StyledAccessSelector;

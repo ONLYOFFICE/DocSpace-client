@@ -296,6 +296,7 @@ const Accounts = (props) => {
                     fontWeight={600}
                     title={group.name}
                     onClick={() => onGroupClick(group.id)}
+                    isTextOverflow
                   >
                     {group.name}
                   </Link>

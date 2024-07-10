@@ -231,6 +231,19 @@ class AccountsHotkeysStore {
     selectAll();
   };
 
+  openItem = () => {
+    const someDialogIsOpen = checkDialogsOpen();
+    if (
+      this.isAccountsPage ||
+      this.accountsSelection.length !== 1 ||
+      someDialogIsOpen
+    )
+      return;
+
+    const item = this.accountsSelection[0];
+    this.peopleStore.groupsStore.openGroupAction(item.id, true, item.name);
+  };
+
   activateHotkeys = (e: KeyboardEvent) => {
     const infiniteLoaderComponent = document.getElementsByClassName(
       "ReactVirtualized__List",

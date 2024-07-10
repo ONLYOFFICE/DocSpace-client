@@ -51,7 +51,7 @@ import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 import AddUsersPanel from "../../AddUsersPanel";
 import { getAccessOptions, getTopFreeRole } from "../utils";
-import AccessSelector from "./AccessSelector";
+import AccessSelector from "../../../AccessSelector";
 
 import {
   StyledSubHeader,

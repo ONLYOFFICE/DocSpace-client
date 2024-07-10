@@ -107,7 +107,10 @@ class StorageManagement {
     try {
       if (isInit) this.needRecalculating = await checkRecalculateQuota();
 
+      if(!this.needRecalculating && this.isRecalculating) this.setIsRecalculating(false);
+
       let roomsList, accountsList;
+      
       [
         this.portalInfo,
         this.activeUsersCount,
@@ -125,9 +128,19 @@ class StorageManagement {
         );
 
       if (!this.quotaSettings.lastRecalculateDate && isInit) {
+      
         this.setIsRecalculating(true);
-        await recalculateQuota();
-        this.getIntervalCheckRecalculate();
+
+        try {
+          await recalculateQuota();
+
+          this.getIntervalCheckRecalculate();
+        } catch (e) {
+          toastr.error(e);
+
+          this.setIsRecalculating(false);
+        }
+
         return;
       }
 

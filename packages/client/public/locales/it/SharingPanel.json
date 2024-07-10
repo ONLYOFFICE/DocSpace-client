@@ -3,6 +3,5 @@
   "FormFilling": "Compilare il modulo",
   "LinkName": "Nome del link",
   "ShareEmailBody": "Ti è stato concesso l'accesso al documento {{itemName}}. Fare clic sul collegamento sottostante per aprire subito il documento: {{shareLink}}.",
-  "ShareEmailSubject": "Ti è stato concesso l'accesso al documento: {{itemName}}",
-  "SharingSettingsTitle": "Impostazioni di condivisione"
+  "ShareEmailSubject": "Ti è stato concesso l'accesso al documento: {{itemName}}"
 }

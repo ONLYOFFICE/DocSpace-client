@@ -60,7 +60,7 @@ import {
   ROOMS_PROVIDER_TYPE_NAME,
 } from "@docspace/shared/constants";
 
-import { getDefaultRoomName } from "SRC_DIR/helpers/filesUtils";
+import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
 
 import { SortByFieldName, TableVersions } from "SRC_DIR/helpers/constants";
 
@@ -1027,7 +1027,7 @@ const SectionFilterContent = ({
       if (roomsFilter.type) {
         const key = +roomsFilter.type;
 
-        const label = getDefaultRoomName(key, t);
+        const label = getRoomTypeName(key, t);
 
         filterValues.push({
           key: key,

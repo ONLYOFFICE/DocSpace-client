@@ -191,12 +191,14 @@ const CommonButtons = (props) => {
           ? getCategoryUrl(CategoryType.Archive)
           : getCategoryUrl(CategoryType.Shared);
 
-      const newFilter = RoomsFilter.getDefault(userId);
-
-      newFilter.searchArea =
+      const searchArea =
         rootFolderType === FolderType.Archive
           ? RoomSearchArea.Archive
           : RoomSearchArea.Active;
+
+      const newFilter = RoomsFilter.getDefault(userId, searchArea);
+
+      newFilter.searchArea = searchArea;
 
       const state = {
         title: navigationPath[0].title,

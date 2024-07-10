@@ -1136,7 +1136,7 @@ class ContextOptionsStore {
           label: t("Common:Download"),
           icon: DownloadReactSvgUrl,
           onClick: () => {
-            onClickDownload(item, t);
+            this.onClickDownload(item, t);
           },
           disabled: !item.security?.Download,
         },
@@ -2461,7 +2461,7 @@ class ContextOptionsStore {
       label: t("Common:OFORMsGallery"),
       icon: FormGalleryReactSvgUrl,
       onClick: () => this.onShowGallery(),
-      disabled: isPrivacyFolder || (isMobile && isTablet),
+      disabled: isPrivacyFolder,
     };
 
     const createNewFolder = {

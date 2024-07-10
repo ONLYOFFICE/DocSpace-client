@@ -47,12 +47,10 @@ import { Base } from "@docspace/shared/themes";
 import {
   connectedCloudsTypeTitleTranslation,
   getFileTypeName,
+  getRoomTypeName,
 } from "../../../../../helpers/filesUtils";
 import { SortByFieldName } from "SRC_DIR/helpers/constants";
-import {
-  getRoomTypeTranslation,
-  getSpaceQuotaAsText,
-} from "@docspace/shared/utils/common";
+import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 
 const SimpleFilesRowContent = styled(RowContent)`
   .row-main-container-wrapper {
@@ -281,7 +279,7 @@ const FilesRowContent = ({
   };
 
   const additionalComponent = () => {
-    if (isRooms) return getRoomTypeTranslation(item.roomType, t);
+    if (isRooms) return getRoomTypeName(item.roomType, t);
 
     if (!fileExst && !contentLength && !providerKey)
       return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(

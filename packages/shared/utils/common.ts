@@ -1154,24 +1154,3 @@ export function setLanguageForUnauthorized(culture: string) {
 
   window.location.reload();
 }
-
-export const getRoomTypeTranslation = (roomType: number, t: TTranslation) => {
-  switch (roomType) {
-    // case RoomsType.FillingFormsRoom:
-    //   return t("Common:FillingFormRooms");
-    case RoomsType.EditingRoom:
-      return t("Common:CollaborationRooms");
-    // case RoomsType.ReviewRoom:
-    //   return t("Common:Review");
-    // case RoomsType.ReadOnlyRoom:
-    //   return t("Common:ViewOnlyRooms");
-
-    case RoomsType.PublicRoom:
-      return t("Common:PublicRoom");
-    case RoomsType.FormRoom:
-      return t("Common:FormRoom");
-
-    default:
-      return t("Common:CustomRooms");
-  }
-};

@@ -94,7 +94,7 @@ const TagsCell = ({
       ) : (
         <Tag
           isDefault
-          label={getRoomTypeTranslation(item.roomType, t)}
+          label={getRoomTypeName(item.roomType, t)}
           onClick={() =>
             onSelectOption({
               option: "defaultTypeRoom",

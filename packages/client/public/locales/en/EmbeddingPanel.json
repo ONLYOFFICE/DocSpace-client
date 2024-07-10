@@ -3,7 +3,7 @@
   "ContentRestricted": "Content copying, file downloading and printing are restricted.",
   "DisplaySettings": "Display settings",
   "EmbeddingBarAllowList": "Add the website URL for embedding to the <1>allow list</1>.",
-  "EmbeddingBarDescription": "Embedding will only work for the URLs specified by the DocSpace admin in the JavaScript SDK settings.",
+  "EmbeddingBarDescription": "Embedding will only work for the URLs specified by the {{productName}} admin in the JavaScript SDK settings.",
   "Height": "Height",
   "Link": "Link",
   "LinkProtectedWithPassword": "The link is protected with a password.",

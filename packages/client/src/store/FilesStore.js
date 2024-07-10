@@ -693,17 +693,14 @@ class FilesStore {
 
     const localKey = `${PDF_FORM_DIALOG_KEY}-${this.userStore.user.id}`;
 
-    const isFirst = JSON.parse(localStorage.getItem(localKey) ?? "true");
+    const show = !JSON.parse(localStorage.getItem(localKey) ?? "true");
 
     const event = new CustomEvent(Events.CREATE_PDF_FORM_FILE, {
       detail: {
         file,
-        isFill: !option.isOneMember,
-        isFirst,
+        show,
       },
     });
-
-    if (isFirst) localStorage.setItem(localKey, "false");
 
     window?.dispatchEvent(event);
   };

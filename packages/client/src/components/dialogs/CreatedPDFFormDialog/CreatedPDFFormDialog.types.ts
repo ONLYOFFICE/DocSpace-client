@@ -26,20 +26,12 @@
 
 import type { TFile } from "@docspace/shared/api/files/types";
 
-export interface CreatedPDFFormDialogProps
-  extends Partial<
-      Pick<TStore["selectedFolderStore"], "id" | "roomType" | "security">
-    >,
-    Partial<
-      Pick<
-        TStore["contextOptionsStore"],
-        "onCreateAndCopySharedLink" | "onClickLinkFillForm"
-      >
-    > {
-  data: {
-    file: TFile;
-    isFill: boolean;
-  };
+export interface CreatedPDFFormDialogProps {
+  file: TFile;
+
   onClose: VoidFunction;
   visible: boolean;
 }
+
+export interface InjectedCreatedPDFFormDialogProps
+  extends Pick<TStore["contextOptionsStore"], "onCopyLink"> {}

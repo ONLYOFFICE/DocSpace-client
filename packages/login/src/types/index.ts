@@ -122,6 +122,7 @@ export interface ConfirmRouteProps {
 
 export type GreetingContainersProps = {
   greetingSettings?: string;
+  wizardToken?: string;
 };
 
 export type LoginProps = {

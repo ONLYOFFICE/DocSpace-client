@@ -64,10 +64,8 @@ const LinkRow = ({
   changeExpirationOption,
   availableExternalRights,
   loadingLinks,
-
-  isRoom,
+  isRoomsLink,
   isPrimaryLink,
-  linkTitle,
   getData,
   onOpenContextMenu,
   onCloseContextMenu,
@@ -80,7 +78,7 @@ const LinkRow = ({
     ? getAccessOptions(t, availableExternalRights)
     : [];
 
-  const roomAccessOptions = isRoom ? getRoomAccessOptions(t) : [];
+  const roomAccessOptions = isRoomsLink ? getRoomAccessOptions(t) : [];
 
   const onCopyLink = (link: TFileLink) => {
     copyShareLink(link.sharedTo.shareLink);
@@ -118,6 +116,7 @@ const LinkRow = ({
 
       const isExpiredLink = link.sharedTo.isExpired;
       const isLocked = !!link.sharedTo.password;
+      const linkTitle = link.sharedTo.title;
 
       const isLoaded = loadingLinks.includes(link.sharedTo.id);
 
@@ -137,7 +136,7 @@ const LinkRow = ({
             />
           )}
           <div className="link-options">
-            {isRoom ? (
+            {isRoomsLink ? (
               <Text className="link-options_title">{linkTitle}</Text>
             ) : !isExpiredLink ? (
               <ComboBox
@@ -162,6 +161,7 @@ const LinkRow = ({
                 link={link}
                 changeExpirationOption={changeExpirationOption}
                 isDisabled={isLoaded}
+                isRoomsLink={isRoomsLink}
               />
             )}
           </div>
@@ -174,10 +174,10 @@ const LinkRow = ({
               title={t("Common:CreateAndCopy")}
               isDisabled={isExpiredLink || isLoaded}
             />
-            {isRoom ? (
+            {isRoomsLink ? (
               <>
                 <AccessRightSelect
-                  selectedOption={roomSelectedOptions}
+                  selectedOption={roomSelectedOptions ?? ({} as TOption)}
                   onSelect={onAccessRightsSelect}
                   accessOptions={roomAccessOptions}
                   noBorder

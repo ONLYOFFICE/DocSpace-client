@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
+import { DropDown } from "../drop-down";
 
 const StyledLinks = styled.div`
   margin-top: 20px;
@@ -56,15 +57,6 @@ const StyledLinkRow = styled.div<{ isExpired?: boolean }>`
   height: 68px;
 
   .avatar_role-wrapper {
-    /* svg {
-      path {
-        fill: ${({ isExpired, theme }) =>
-      isExpired
-        ? theme.infoPanel.links.iconErrorColor
-        : theme.infoPanel.links.iconColor};
-      }
-    } */
-
     svg {
       path:nth-child(3) {
         fill: ${({ theme }) => theme.backgroundColor};
@@ -163,4 +155,10 @@ const StyledSquare = styled.div`
   }
 `;
 
-export { StyledLinks, StyledLinkRow, StyledSquare };
+const StyledDropDown = styled(DropDown)`
+  .share-link_calendar {
+    position: fixed;
+  }
+`;
+
+export { StyledLinks, StyledLinkRow, StyledSquare, StyledDropDown };

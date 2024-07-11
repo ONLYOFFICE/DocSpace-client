@@ -85,7 +85,7 @@ const LinkRow = (props: LinkRowProps) => {
     setExternalLink,
   } = props;
 
-  const { title, shareLink, password, isExpired, primary } = link.sharedTo;
+  const { shareLink, password, isExpired, primary } = link.sharedTo;
 
   const isLocked = !!password;
   const isDisabled = isExpired;
@@ -226,9 +226,8 @@ const LinkRow = (props: LinkRowProps) => {
       getData={getData}
       onOpenContextMenu={onOpenContextMenu}
       onCloseContextMenu={onCloseContextMenu}
-      isRoom
+      isRoomsLink
       isPrimaryLink={isPrimaryLink}
-      linkTitle={title}
       onAccessRightsSelect={onAccessRightsSelect}
       changeExpirationOption={changeExpirationOption}
     />

@@ -50,11 +50,22 @@ const StyledLinks = styled.div`
   }
 `;
 
-const StyledLinkRow = styled.div<{ isExpired?: boolean }>`
+const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
   display: flex;
   gap: 8px;
   align-items: center;
   height: 68px;
+
+  opacity: ${({ isDisabled }) => (isDisabled ? 0.4 : 1)};
+
+  .avatar-wrapper,
+  .avatar-wrapper:hover {
+    svg {
+      path {
+        fill: ${({ theme }) => theme.infoPanel.avatarColor};
+      }
+    }
+  }
 
   .avatar_role-wrapper {
     svg {
@@ -76,6 +87,7 @@ const StyledLinkRow = styled.div<{ isExpired?: boolean }>`
     display: flex;
     flex-direction: column;
     gap: 0;
+    overflow: hidden;
   }
 
   .internal-combobox {
@@ -101,6 +113,14 @@ const StyledLinkRow = styled.div<{ isExpired?: boolean }>`
 
   .expired-options {
     padding: 0px;
+
+    .text {
+      color: ${({ theme }) => theme.infoPanel.links.color};
+      :hover {
+        color: ${({ theme }) => theme.infoPanel.links.color};
+        background: unset;
+      }
+    }
 
     & > span > a {
       padding: 0px !important;

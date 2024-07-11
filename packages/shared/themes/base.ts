@@ -2081,8 +2081,10 @@ export const getBaseTheme = () => {
       closeButtonBg: "transparent",
 
       nameColor: "#858585",
+      avatarColor: "#555F65",
 
       links: {
+        color: "#4781D1",
         iconColor: "#3B72A7",
         iconErrorColor: "#F24724",
         primaryColor: "#555F65",

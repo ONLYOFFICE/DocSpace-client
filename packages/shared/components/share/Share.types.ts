@@ -58,6 +58,7 @@ export type LinkRowProps =
       loadingLinks: (string | number)[];
       isRoomsLink?: undefined;
       isPrimaryLink?: undefined;
+      isArchiveFolder?: undefined;
       getData: () => undefined;
       onOpenContextMenu?: undefined;
       onCloseContextMenu?: undefined;
@@ -75,7 +76,8 @@ export type LinkRowProps =
       availableExternalRights: TAvailableExternalRights;
       loadingLinks: (string | number)[];
       isRoomsLink?: boolean;
-      isPrimaryLink?: boolean;
+      isPrimaryLink: boolean;
+      isArchiveFolder: boolean;
       getData: () => ContextMenuModel[];
       onOpenContextMenu: (e: React.MouseEvent) => void;
       onCloseContextMenu: () => void;

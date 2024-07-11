@@ -66,6 +66,7 @@ const LinkRow = ({
   loadingLinks,
   isRoomsLink,
   isPrimaryLink,
+  isArchiveFolder,
   getData,
   onOpenContextMenu,
   onCloseContextMenu,
@@ -124,6 +125,7 @@ const LinkRow = ({
         <StyledLinkRow
           isExpired={isExpiredLink}
           key={`share-link-row-${index * 5}`}
+          isDisabled={isArchiveFolder}
         >
           {isLoaded ? (
             <Loader className="loader" size="20px" type={LoaderTypes.track} />
@@ -137,7 +139,9 @@ const LinkRow = ({
           )}
           <div className="link-options">
             {isRoomsLink ? (
-              <Text className="link-options_title">{linkTitle}</Text>
+              <Text className="link-options_title" truncate>
+                {linkTitle}
+              </Text>
             ) : !isExpiredLink ? (
               <ComboBox
                 className="internal-combobox"
@@ -160,20 +164,22 @@ const LinkRow = ({
               <ExpiredComboBox
                 link={link}
                 changeExpirationOption={changeExpirationOption}
-                isDisabled={isLoaded}
+                isDisabled={isLoaded || isArchiveFolder}
                 isRoomsLink={isRoomsLink}
               />
             )}
           </div>
           <div className="link-actions">
-            <IconButton
-              size={16}
-              className="link-row_copy-icon"
-              iconName={CopyIcon}
-              onClick={() => onCopyLink(link)}
-              title={t("Common:CreateAndCopy")}
-              isDisabled={isExpiredLink || isLoaded}
-            />
+            {!isArchiveFolder && (
+              <IconButton
+                size={16}
+                className="link-row_copy-icon"
+                iconName={CopyIcon}
+                onClick={() => onCopyLink(link)}
+                title={t("Common:CreateAndCopy")}
+                isDisabled={isExpiredLink || isLoaded}
+              />
+            )}
             {isRoomsLink ? (
               <>
                 <AccessRightSelect
@@ -185,16 +191,18 @@ const LinkRow = ({
                   directionY="bottom"
                   type="onlyIcon"
                   manualWidth="300px"
-                  isDisabled={isExpiredLink || isLoaded}
+                  isDisabled={isExpiredLink || isLoaded || isArchiveFolder}
                 />
-                <ContextMenuButton
-                  getData={getData}
-                  title={t("Files:ShowLinkActions")}
-                  directionY="both"
-                  onClick={onOpenContextMenu}
-                  onClose={onCloseContextMenu}
-                  isDisabled={isExpiredLink || isLoaded}
-                />
+                {!isArchiveFolder && (
+                  <ContextMenuButton
+                    getData={getData}
+                    title={t("Files:ShowLinkActions")}
+                    directionY="both"
+                    onClick={onOpenContextMenu}
+                    onClose={onCloseContextMenu}
+                    isDisabled={isExpiredLink || isLoaded}
+                  />
+                )}
               </>
             ) : (
               <ComboBox

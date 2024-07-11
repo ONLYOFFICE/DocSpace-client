@@ -215,7 +215,9 @@ const LinkRow = (props: LinkRowProps) => {
     expirationDate: moment.Moment | null,
   ) => {
     const newLink = { ...link };
-    newLink.sharedTo.expirationDate = moment(expirationDate);
+    newLink.sharedTo.expirationDate = expirationDate
+      ? moment(expirationDate)
+      : null;
     editExternalLinkAction(newLink);
   };
 
@@ -230,6 +232,7 @@ const LinkRow = (props: LinkRowProps) => {
       isPrimaryLink={isPrimaryLink}
       onAccessRightsSelect={onAccessRightsSelect}
       changeExpirationOption={changeExpirationOption}
+      isArchiveFolder={isArchiveFolder}
     />
   );
 };

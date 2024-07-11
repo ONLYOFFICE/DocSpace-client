@@ -49,7 +49,7 @@ const StyledSimpleNav = styled.div`
     .language-combo-box {
       position: absolute;
       top: 7px;
-      right: 8px;
+      inset-inline-end: 8px;
     }
   }
 `;

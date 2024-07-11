@@ -74,11 +74,19 @@ const contextMenuWrapperDraggingStyle = css`
 const StyledTableRow = styled(TableRow)`
   .table-container_cell:not(.table-container_element-wrapper) {
     border-top: ${(props) =>
+      !props.isIndexEditingMode &&
       `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
     margin-top: -1px;
     border-left: 0; //for Safari
     border-right: 0; //for Safari
   }
+  ${(props) =>
+    props.isIndexEditingMode &&
+    css`
+      .table-container_element {
+        display: flex !important;
+      }
+    `}
 
   .table-container_cell:not(.table-container_element-wrapper) {
     height: auto;
@@ -107,14 +115,18 @@ const StyledTableRow = styled(TableRow)`
     `}
   ${(props) =>
     !props.isDragging &&
+    !props.isIndexUpdated &&
     css`
       :hover {
         .table-container_cell {
           cursor: pointer;
           background: ${(props) =>
-            `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+            props.isIndexEditingMode
+              ? `${props.theme.filesSection.tableView.row.indexActive} !important`
+              : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
         }
-        .table-container_file-name-cell {
+        .table-container_file-name-cell,
+        .table-container_index-cell {
           ${(props) =>
             props.theme.interfaceDirection === "rtl"
               ? css`
@@ -126,6 +138,7 @@ const StyledTableRow = styled(TableRow)`
                   padding-left: 24px;
                 `}
         }
+
         .table-container_row-context-menu-wrapper {
           ${(props) =>
             props.theme.interfaceDirection === "rtl"
@@ -140,9 +153,49 @@ const StyledTableRow = styled(TableRow)`
         }
       }
     `}
+
+    ${(props) =>
+    props.isIndexUpdated &&
+    css`
+      .table-container_cell {
+        cursor: pointer;
+        background: ${(props) =>
+          props.isIndexEditingMode
+            ? `${props.theme.filesSection.tableView.row.indexUpdate} !important`
+            : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+      }
+      .table-container_file-name-cell,
+      .table-container_index-cell {
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-right: -24px;
+                padding-right: 24px;
+              `
+            : css`
+                margin-left: -24px;
+                padding-left: 24px;
+              `}
+      }
+
+      .table-container_row-context-menu-wrapper {
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-left: -20px;
+                padding-left: 20px !important;
+              `
+            : css`
+                margin-right: -20px;
+                padding-right: 20px !important;
+              `}
+      }
+    `}
   .table-container_cell {
     background: ${(props) =>
       (props.checked || props.isActive) &&
+      !props.isIndexUpdated &&
+      !props.isIndexEditingMode &&
       `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
     cursor: ${(props) =>
       !props.isThirdPartyFolder &&
@@ -219,7 +272,8 @@ const StyledTableRow = styled(TableRow)`
     width: 12px;
   }
 
-  .table-container_file-name-cell {
+  .table-container_file-name-cell,
+  .table-container_index-cell {
     ${(props) =>
       props.showHotkeyBorder &&
       css`
@@ -238,6 +292,30 @@ const StyledTableRow = styled(TableRow)`
       `};
     ${(props) => props.dragging && rowCheckboxDraggingStyle};
   }
+
+  .table-container_element-wrapper {
+    ${(props) =>
+      props.isIndexing &&
+      css`
+        margin-left: 0px;
+        padding-left: 0px;
+      `}
+  }
+
+  ${(props) =>
+    props.isIndexing &&
+    css`
+      .table-container_file-name-cell {
+        margin-left: 0px !important;
+        padding-left: 0px !important;
+      }
+      &:hover {
+        .table-container_file-name-cell {
+          margin-left: 0px !important;
+          padding-left: 0px !important;
+        }
+      }
+    `}
 
   .table-container_row-context-menu-wrapper {
     ${(props) =>
@@ -281,6 +359,10 @@ const StyledTableRow = styled(TableRow)`
     padding-inline: 0 8px;
   }
 
+  .item-file-name-index {
+    text-decoration: none;
+  }
+
   ${(props) =>
     props.isHighlight &&
     css`
@@ -298,7 +380,8 @@ const StyledTableRow = styled(TableRow)`
         }
       }
 
-      .table-container_file-name-cell {
+      .table-container_file-name-cell,
+      .table-container_index-cell {
         ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`

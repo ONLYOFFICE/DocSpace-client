@@ -43,7 +43,7 @@ import { checkingForUnfixedSize, getSubstring } from "./Table.utils";
 const defaultMinColumnSize = 110;
 const settingsSize = 24;
 
-const minSizeFirstColumn = 210;
+const minSizeFirstColumn = 75;
 const handleOffset = 8;
 
 class TableHeader extends React.Component<
@@ -322,6 +322,7 @@ class TableHeader extends React.Component<
       columns,
       setHideColumns,
       tableStorageName,
+      isIndexEditingMode,
     } = this.props;
 
     const enabledColumns = columns.filter((col) => col.enable);
@@ -353,6 +354,9 @@ class TableHeader extends React.Component<
     // TODO: If defaultSize(75px) is less than defaultMinColumnSize(110px) the calculations work correctly
     const defaultSize =
       columns.find((col) => col.defaultSize && col.enable)?.defaultSize || 0;
+
+    const shortSize =
+      columns.find((col) => col.isShort && col.enable)?.minWidth || 0;
 
     // TODO: Fixed columns size if something went wrong
     if (storageSize) {
@@ -409,6 +413,9 @@ class TableHeader extends React.Component<
 
     const containerWidth = +container.clientWidth;
 
+    const indexColumnDifference = shortSize
+      ? Number(tableContainer[0].split("px")[0]) - shortSize
+      : 0;
     const defaultWidth = tableContainer
       .map((column) => getSubstring(column))
       .reduce((x, y) => x + y);
@@ -417,7 +424,8 @@ class TableHeader extends React.Component<
       .map((column) => getSubstring(column))
       .reduce((x, y) => x + y);
 
-    const oldWidth = defaultWidth - defaultSize - settingsSize;
+    const oldWidth =
+      defaultWidth - defaultSize - settingsSize - indexColumnDifference;
 
     const isDifferentWindowSize = infoPanelVisible
       ? Math.round(defaultInfoWidth) !== Math.round(containerWidth)
@@ -494,13 +502,24 @@ class TableHeader extends React.Component<
       }
 
       if (hideColumnsConst) {
+        const shortColumnSize =
+          columns.find((col) => col.isShort && col.enable)?.minWidth || 0;
+
         tableInfoPanelContainer.forEach((item, index) => {
           const column = document.getElementById(`column_${index}`);
+          const isQuickButtonColumn =
+            Number(index) === tableInfoPanelContainer.length - 2;
+
+          if (isIndexEditingMode && isQuickButtonColumn) {
+            gridTemplateColumns.push("24px");
+          }
 
           if (column?.dataset?.minWidth && column?.dataset?.default) {
             gridTemplateColumns.push(
-              `${containerWidth - defaultSize - settingsSize}px`,
+              `${containerWidth - defaultSize - shortColumnSize - settingsSize}px`,
             );
+          } else if (column?.dataset?.minWidth && column?.dataset?.shortColum) {
+            gridTemplateColumns.push(`${column?.dataset?.minWidth}px`);
           } else if (
             item === `${defaultSize}px` ||
             item === `${settingsSize}px`
@@ -665,6 +684,12 @@ class TableHeader extends React.Component<
               +index === tableContainer.length - 1 ||
               (column ? column.dataset.enable === "true" : item !== "0px");
             const defaultColumnSize = column && column.dataset.defaultSize;
+            const shortColumSize =
+              column?.dataset?.shortColum && column.dataset.minWidth;
+
+            const isSettingColumn = Number(index) === tableContainer.length - 1;
+            const isQuickButtonColumn =
+              Number(index) === tableContainer.length - 2;
 
             const isActiveNow = item === "0px" && enable;
             if (isActiveNow && column) activeColumnIndex = index;
@@ -684,6 +709,11 @@ class TableHeader extends React.Component<
                 getSubstring(gridTemplateColumns[+index - colIndex]) +
                 getSubstring(item)
               }px`;
+            } else if (isSettingColumn) {
+              let newSettingsSize = isIndexEditingMode ? 75 : settingsSize;
+              gridTemplateColumns.push(`${newSettingsSize}px`);
+            } else if (shortColumSize) {
+              gridTemplateColumns.push(`${shortColumSize}px`);
             } else if (item !== `${settingsSize}px`) {
               const percent = (getSubstring(item) / oldWidth) * 100;
 
@@ -898,6 +928,8 @@ class TableHeader extends React.Component<
     for (const col of columns) {
       if (col.default) {
         str += `${wideColumnSize} `;
+      } else if (col.isShort) {
+        str += `${col.minWidth}px `;
       } else
         str += col.enable
           ? col.defaultSize

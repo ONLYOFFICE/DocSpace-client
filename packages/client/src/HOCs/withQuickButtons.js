@@ -150,6 +150,7 @@ export default function withQuickButtons(WrappedComponent) {
         isPublicRoom,
         isPersonalRoom,
         isArchiveFolder,
+        isIndexEditingMode,
         currentDeviceType,
         roomLifetime,
       } = this.props;
@@ -177,6 +178,7 @@ export default function withQuickButtons(WrappedComponent) {
           folderCategory={folderCategory}
           onCopyPrimaryLink={this.onCopyPrimaryLink}
           isArchiveFolder={isArchiveFolder}
+          isIndexEditingMode={isIndexEditingMode}
           currentDeviceType={currentDeviceType}
           showLifetimeIcon={showLifetimeIcon}
           expiredDate={expiredDate}
@@ -202,6 +204,7 @@ export default function withQuickButtons(WrappedComponent) {
       treeFoldersStore,
       filesStore,
       infoPanelStore,
+      indexingStore,
     }) => {
       const { lockFileAction, setFavoriteAction, onSelectItem } =
         filesActionsStore;
@@ -212,6 +215,8 @@ export default function withQuickButtons(WrappedComponent) {
         isPersonalRoom,
         isArchiveFolder,
       } = treeFoldersStore;
+
+      const { isIndexEditingMode } = indexingStore;
 
       const { setSharingPanelVisible } = dialogsStore;
 
@@ -238,6 +243,7 @@ export default function withQuickButtons(WrappedComponent) {
         isArchiveFolder,
         getPrimaryFileLink,
         setShareChanged,
+        isIndexEditingMode,
         roomLifetime: infoPanelRoom?.lifetime,
       };
     },

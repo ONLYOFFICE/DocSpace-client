@@ -54,6 +54,8 @@ import {
   moveToFolder,
   getFolder,
   deleteFilesFromRecent,
+  changeIndex,
+  reorder,
 } from "@docspace/shared/api/files";
 import {
   ConflictResolveType,
@@ -64,6 +66,7 @@ import {
   FolderType,
   RoomsType,
   ShareAccessRights,
+  VDRIndexingAction,
 } from "@docspace/shared/enums";
 import { makeAutoObservable } from "mobx";
 
@@ -106,6 +109,7 @@ class FilesActionStore {
   publicRoomStore;
   infoPanelStore;
   peopleStore;
+  indexingStore;
   userStore = null;
   currentTariffStatusStore = null;
   currentQuotaStore = null;
@@ -134,6 +138,7 @@ class FilesActionStore {
     currentTariffStatusStore,
     peopleStore,
     currentQuotaStore,
+    indexingStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -153,6 +158,7 @@ class FilesActionStore {
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.peopleStore = peopleStore;
     this.currentQuotaStore = currentQuotaStore;
+    this.indexingStore = indexingStore;
   }
 
   setIsBulkDownload = (isBulkDownload) => {
@@ -2756,6 +2762,71 @@ class FilesActionStore {
     this.uploadDataStore
       .itemOperationToFolder(operationData)
       .catch((error) => toastr.error(error));
+  };
+  changeIndex = async (action, item, t) => {
+    const { filesList } = this.filesStore;
+
+    const index = filesList.findIndex(
+      (elem) => elem.id === item?.id && elem.fileExst === item?.fileExst,
+    );
+
+    if (
+      (action === VDRIndexingAction.HigherIndex && index === 0) ||
+      (action === VDRIndexingAction.LowerIndex &&
+        index === filesList.length - 1)
+    )
+      return;
+
+    const { bufferSelection } = this.filesStore;
+
+    let selection = this.filesStore.selection.length
+      ? this.filesStore.selection
+      : [bufferSelection];
+
+    const { id } = this.selectedFolderStore;
+    const { setUpdateItems } = this.indexingStore;
+
+    let replaceable;
+    let current = item;
+
+    switch (action) {
+      case VDRIndexingAction.HigherIndex:
+        replaceable = filesList[index - 1];
+        break;
+
+      case VDRIndexingAction.LowerIndex:
+        replaceable = filesList[index + 1];
+        break;
+
+      default:
+        current = selection[0];
+        replaceable = item;
+        break;
+    }
+
+    if (!replaceable) return;
+
+    try {
+      await changeIndex(current?.id, replaceable.order, current?.isFolder);
+
+      const items = [current, replaceable];
+      setUpdateItems(items);
+
+      const operationId = uniqueid("operation_");
+      this.updateCurrentFolder(null, [id], true, operationId);
+    } catch (e) {
+      toastr.error(t("Files:ErrorChangeIndex"));
+    }
+  };
+
+  reorder = async (id, t) => {
+    try {
+      const operationId = uniqueid("operation_");
+      await reorder(id);
+      this.updateCurrentFolder(null, [id], true, operationId);
+    } catch (e) {
+      toastr.error(t("Files:ErrorChangeIndex"));
+    }
   };
 
   checkExportRoomIndexProgress = async () => {

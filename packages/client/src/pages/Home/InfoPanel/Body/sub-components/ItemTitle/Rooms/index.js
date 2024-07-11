@@ -36,6 +36,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { StyledTitle } from "../../../styles/common";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import RoomsContextBtn from "./context-btn";
+import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import CalendarComponent from "../Calendar";
 import {
   FolderType,

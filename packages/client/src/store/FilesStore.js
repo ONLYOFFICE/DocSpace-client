@@ -96,6 +96,7 @@ class FilesStore {
   publicRoomStore;
   settingsStore;
   currentQuotaStore;
+  indexingStore;
 
   pluginStore;
 
@@ -200,6 +201,7 @@ class FilesStore {
     userStore,
     currentTariffStatusStore,
     settingsStore,
+    indexingStore,
   ) {
     const pathname = window.location.pathname.toLowerCase();
     this.isEditor = pathname.indexOf("doceditor") !== -1;
@@ -218,6 +220,7 @@ class FilesStore {
     this.infoPanelStore = infoPanelStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.settingsStore = settingsStore;
+    this.indexingStore = indexingStore;
 
     this.roomsController = new AbortController();
     this.filesController = new AbortController();
@@ -1440,7 +1443,6 @@ class FilesStore {
         `${url}?${RoomsFilter.getDefault().toUrlParams()}`,
       );
     }
-
     this.setIsErrorRoomNotAvailable(false);
     this.setIsLoadedFetchFiles(false);
 
@@ -1450,7 +1452,6 @@ class FilesStore {
 
     if (filterStorageItem && !filter) {
       const splitFilter = filterStorageItem.split(",");
-
       filterData.sortBy = splitFilter[0];
       filterData.pageCount = +splitFilter[1];
       filterData.sortOrder = splitFilter[2];
@@ -1501,12 +1502,17 @@ class FilesStore {
           await this.publicRoomStore.getExternalLinks(data.current.id);
         }
 
+        if (data.current.indexing || data.current.order) {
+          this.indexingStore.setIsIndexing(true);
+        } else if (data.current.rootFolderId !== FolderType.COMMON) {
+          this.indexingStore.setIsIndexing(false);
+        }
+
         if (newTotal > 0) {
           const lastPage = filterData.getLastPage();
 
           if (filterData.page > lastPage) {
             filterData.page = lastPage;
-
             return this.fetchFiles(
               folderId,
               filterData,
@@ -1748,6 +1754,9 @@ class FilesStore {
     withFilterLocalStorage = false,
   ) => {
     const { setSelectedNode, roomsFolderId } = this.treeFoldersStore;
+    const { setIsIndexing, isIndexing } = this.indexingStore;
+
+    if (isIndexing) setIsIndexing(false);
 
     if (this.clientLoadingStore.isLoading) {
       this.abortAllFetch();
@@ -2093,6 +2102,7 @@ class FilesStore {
         "copy",
         "restore",
         "rename",
+        "edit-index",
         "separator2",
         // "unsubscribe",
         "delete",
@@ -2501,6 +2511,7 @@ class FilesStore {
         "copy-to",
         "mark-read",
         "restore",
+        "edit-index",
         "rename",
         // "change-thirdparty-info",
         "separator2",
@@ -3243,6 +3254,7 @@ class FilesStore {
         usedSpace,
         isCustomQuota,
         providerId,
+        order,
         startFilling,
         draftLocation,
         expired,
@@ -3419,6 +3431,7 @@ class FilesStore {
         usedSpace,
         isCustomQuota,
         providerId,
+        order,
         startFilling,
         draftLocation,
         expired,
@@ -3429,6 +3442,22 @@ class FilesStore {
     //return [...this.folders, ...this.files];
 
     const newFolders = [...this.folders];
+    const orderItems = [...this.folders, ...this.files].filter((x) => x.order);
+
+    if (orderItems.length > 0) {
+      orderItems.sort((a, b) => {
+        if (a.order.includes(".")) {
+          return (
+            Number(a.order.split(".").at(-1)) -
+            Number(b.order.split(".").at(-1))
+          );
+        }
+
+        return Number(a.order) - Number(b.order);
+      });
+
+      return this.getFilesListItems(orderItems);
+    }
 
     newFolders.sort((a, b) => {
       const firstValue = a.roomType ? 1 : 0;
@@ -4048,6 +4077,15 @@ class FilesStore {
 
   get filterTotal() {
     return this.filter.total;
+  }
+
+  get indexColumnSize() {
+    if (!this.indexingStore.isIndexing) return;
+
+    let minWidth = 36;
+    const lastFile = this.filesList[this.filesList.length - 1];
+
+    return minWidth + lastFile?.order?.length * 3;
   }
 
   get hasMoreFiles() {

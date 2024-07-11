@@ -149,6 +149,8 @@ class SelectedFolderStore {
 
   lifetime: TRoomLifetime | null = null;
 
+  indexing = false;
+
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;

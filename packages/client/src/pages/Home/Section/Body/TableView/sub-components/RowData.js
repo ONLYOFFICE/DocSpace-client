@@ -32,7 +32,9 @@ import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
+import IndexCell from "./IndexCell";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
+import { RoomsType } from "@docspace/shared/enums";
 import {
   StyledBadgesContainer,
   StyledQuickButtonsContainer,
@@ -45,6 +47,7 @@ const RowDataComponent = (props) => {
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
+    indexColumnIsEnabled,
     quickButtonsColumnIsEnabled,
 
     dragStyles,
@@ -58,6 +61,8 @@ const RowDataComponent = (props) => {
     showHotkeyBorder,
     badgesComponent,
     quickButtonsComponent,
+
+    isIndexing,
     tableStorageName,
   } = props;
 
@@ -65,6 +70,24 @@ const RowDataComponent = (props) => {
 
   return (
     <>
+      {indexColumnIsEnabled && isIndexing && (
+        <TableCell
+          className={classNames(
+            selectionProp?.className,
+            "table-container_index-cell",
+          )}
+          style={
+            !indexColumnIsEnabled ? { background: "none" } : dragStyles.style
+          }
+          value={value}
+        >
+          <IndexCell
+            sideColor={theme.filesSection.tableView.row.sideColor}
+            {...props}
+          />
+        </TableCell>
+      )}
+
       <TableCell
         {...dragStyles}
         className={classNames(
@@ -214,24 +237,30 @@ const RowDataComponent = (props) => {
   );
 };
 
-export default inject(({ tableStore }) => {
+export default inject(({ tableStore, indexingStore }) => {
   const {
     authorColumnIsEnabled,
     createdColumnIsEnabled,
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
+    indexColumnIsEnabled,
     typeColumnIsEnabled,
     quickButtonsColumnIsEnabled,
     tableStorageName,
   } = tableStore;
+
+  const { isIndexing } = indexingStore;
 
   return {
     authorColumnIsEnabled,
     createdColumnIsEnabled,
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
+    indexColumnIsEnabled,
     typeColumnIsEnabled,
     quickButtonsColumnIsEnabled,
+
+    isIndexing,
     tableStorageName,
   };
 })(observer(RowDataComponent));

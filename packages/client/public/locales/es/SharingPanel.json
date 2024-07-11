@@ -3,6 +3,5 @@
   "FormFilling": "Relleno de formularios",
   "LinkName": "Nombre del enlace",
   "ShareEmailBody": "Se le ha concedido acceso al documento {{itemName}}. Haga clic en el siguiente enlace para abrir el documento ahora mismo: {{shareLink}}.",
-  "ShareEmailSubject": "Se le ha concedido acceso al documento {{itemName}}",
-  "SharingSettingsTitle": "Configuración de uso compartido"
+  "ShareEmailSubject": "Se le ha concedido acceso al documento {{itemName}}"
 }

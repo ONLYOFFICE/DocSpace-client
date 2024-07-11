@@ -43,20 +43,15 @@ export type TCreateDefineRoom = {
 
 export interface UseRootHelperProps {
   setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
-  setIsBreadCrumbsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setTotal: React.Dispatch<React.SetStateAction<number>>;
   setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
 
-  setIsNextPageLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setHasNextPage: React.Dispatch<React.SetStateAction<boolean>>;
 
   setIsInit: (value: boolean) => void;
   treeFolders?: TFolder[];
   isUserOnly?: boolean;
-  setIsFirstLoad: (value: boolean) => void;
 }
-
-export interface UseLoadersHelperProps {}
 
 export type UseSocketHelperProps = {
   socketHelper: SocketIOHelper;
@@ -66,18 +61,14 @@ export type UseSocketHelperProps = {
   setTotal: React.Dispatch<React.SetStateAction<number>>;
   disabledItems: (string | number)[];
   filterParam?: string;
-  getIcon: (fileExst: string) => string;
   withCreate: boolean;
 };
 
 export type UseRoomsHelperProps = {
   setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
-  setIsBreadCrumbsLoading: (value: boolean) => void;
-  setIsNextPageLoading: (value: boolean) => void;
   setHasNextPage: (value: boolean) => void;
   setTotal: (value: number) => void;
   setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
-  isFirstLoad: boolean;
   setIsRoot: (value: boolean) => void;
   searchValue?: string;
   isRoomsOnly: boolean;
@@ -86,7 +77,6 @@ export type UseRoomsHelperProps = {
   ) => void;
   isInit: boolean;
   setIsInit: (value: boolean) => void;
-  setIsFirstLoad: (value: boolean) => void;
   withCreate: boolean;
   createDefineRoomLabel?: string;
   createDefineRoomType?: RoomsType;
@@ -100,13 +90,10 @@ export type UseRoomsHelperProps = {
 export type UseFilesHelpersProps = {
   roomsFolderId?: number;
   setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
-  setIsBreadCrumbsLoading: (value: boolean) => void;
   setIsSelectedParentFolder: (value: boolean) => void;
-  setIsNextPageLoading: (value: boolean) => void;
   setHasNextPage: (value: boolean) => void;
   setTotal: (value: number) => void;
   setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
-  isFirstLoad: boolean;
   selectedItemId: string | number | undefined;
   setIsRoot: (value: boolean) => void;
   setIsInit: (value: boolean) => void;
@@ -129,10 +116,9 @@ export type UseFilesHelpersProps = {
     isInit?: boolean,
     isErrorPath?: boolean,
   ) => Promise<void>;
-  getIcon: (fileExst: string) => string;
+
   getFilesArchiveError: (name: string) => string;
   isInit: boolean;
-  setIsFirstLoad: (value: boolean) => void;
   withCreate: boolean;
   setSelectedItemId: (value: number | string) => void;
   setSelectedItemType: (value?: "rooms" | "files") => void;
@@ -152,10 +138,12 @@ export type TSelectedFileInfo = {
   inPublic?: boolean | undefined;
 } | null;
 
+export type TGetIcon = (size: number, fileExst: string) => string;
+
 export type FilesSelectorProps = (
   | {
-      getIcon: (size: number, fileExst: string) => string;
-      filesSettings?: never;
+      getIcon: TGetIcon;
+      filesSettings?: TFilesSettings;
     }
   | { getIcon?: never; filesSettings: TFilesSettings }
 ) & {

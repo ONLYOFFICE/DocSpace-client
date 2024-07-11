@@ -196,6 +196,7 @@ const SpaceQuota = (props) => {
         modernView
         isLoading={isLoading}
         manualWidth="fit-content"
+        directionY="both"
       />
     </StyledBody>
   );

@@ -66,6 +66,7 @@ const LinkRow = ({
   loadingLinks,
 
   isRoom,
+  isPrimaryLink,
   linkTitle,
   getData,
   onOpenContextMenu,
@@ -133,14 +134,6 @@ const LinkRow = ({
               role={AvatarRole.user}
               source={avatar}
               roleIcon={isLocked ? <LockedReactSvg /> : undefined}
-
-              // roleIcon={
-              //   expiryDate ? (
-              //     <div className="clock-icon">
-              //       <ClockReactSvg />
-              //     </div>
-              //   ) : null
-              // }
             />
           )}
           <div className="link-options">
@@ -164,11 +157,13 @@ const LinkRow = ({
             ) : (
               <Text className="link-options_title">{shareOption?.label}</Text>
             )}
-            <ExpiredComboBox
-              link={link}
-              changeExpirationOption={changeExpirationOption}
-              isDisabled={isLoaded}
-            />
+            {!isPrimaryLink && (
+              <ExpiredComboBox
+                link={link}
+                changeExpirationOption={changeExpirationOption}
+                isDisabled={isLoaded}
+              />
+            )}
           </div>
           <div className="link-actions">
             <IconButton
@@ -182,31 +177,23 @@ const LinkRow = ({
             {isRoom ? (
               <>
                 <AccessRightSelect
-                  // className={className}
-                  // selectedOption={selectedOption}
-                  // onSelect={onSelectAccess}
                   selectedOption={roomSelectedOptions}
                   onSelect={onAccessRightsSelect}
                   accessOptions={roomAccessOptions}
                   noBorder
-                  // directionX="right"
-                  // directionY="bottom"
-                  // fixedDirection={true}
-                  // manualWidth={width + "px"}
-                  // isDefaultMode={false}
-                  // isAside={false}
-                  // setIsOpenItemAccess={setIsOpenItemAccess}
-                  // hideMobileView={isMobileHorizontalOrientation}
+                  directionX="right"
+                  directionY="bottom"
                   type="onlyIcon"
-                  manualWidth="448px"
+                  manualWidth="300px"
+                  isDisabled={isExpiredLink || isLoaded}
                 />
                 <ContextMenuButton
                   getData={getData}
-                  // isDisabled={isLoading}
                   title={t("Files:ShowLinkActions")}
                   directionY="both"
                   onClick={onOpenContextMenu}
                   onClose={onCloseContextMenu}
+                  isDisabled={isExpiredLink || isLoaded}
                 />
               </>
             ) : (

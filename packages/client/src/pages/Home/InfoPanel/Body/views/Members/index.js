@@ -183,6 +183,7 @@ const Members = ({
           link={primaryLink}
           setIsScrollLocked={setIsScrollLocked}
           isShareLink
+          isPrimaryLink
         />,
       );
     }

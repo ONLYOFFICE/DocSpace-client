@@ -50,10 +50,10 @@ const StyledLinks = styled.div`
 `;
 
 const StyledLinkRow = styled.div<{ isExpired?: boolean }>`
-  padding: 8px 0;
   display: flex;
   gap: 8px;
   align-items: center;
+  height: 68px;
 
   .avatar_role-wrapper {
     /* svg {

@@ -64,6 +64,7 @@ type LinkRowProps = {
   setIsScrollLocked: (isScrollLocked: boolean) => void;
   isPublicRoomType: boolean;
   isFormRoom: boolean;
+  isPrimaryLink: boolean;
 };
 
 const LinkRow = (props: LinkRowProps) => {
@@ -79,6 +80,7 @@ const LinkRow = (props: LinkRowProps) => {
     setIsScrollLocked,
     isPublicRoomType,
     isFormRoom,
+    isPrimaryLink,
     editExternalLink,
     setExternalLink,
   } = props;
@@ -185,8 +187,6 @@ const LinkRow = (props: LinkRowProps) => {
   const editExternalLinkAction = (newLink: TFileLink) => {
     setLoadingLinks([newLink.sharedTo.id]);
 
-    console.log("newLink", newLink);
-
     editExternalLink(roomId, newLink)
       .then((linkData: TFileLink) => {
         setExternalLink(linkData);
@@ -227,6 +227,7 @@ const LinkRow = (props: LinkRowProps) => {
       onOpenContextMenu={onOpenContextMenu}
       onCloseContextMenu={onCloseContextMenu}
       isRoom
+      isPrimaryLink={isPrimaryLink}
       linkTitle={title}
       onAccessRightsSelect={onAccessRightsSelect}
       changeExpirationOption={changeExpirationOption}

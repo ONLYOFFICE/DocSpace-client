@@ -211,6 +211,7 @@ const useFilesHelper = ({
             break;
 
           case FilesSelectorFilterTypes.ALL:
+            filter.applyFilterOption = ApplyFilterOption.All;
             filter.filterType = FilterType.None;
             break;
 

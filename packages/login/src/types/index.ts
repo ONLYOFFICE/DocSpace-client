@@ -54,6 +54,19 @@ export type TError =
     }
   | string;
 
+export type TTimeZoneOption = {
+  key: string | number;
+  label?: string;
+};
+
+export type TCulturesOption = {
+  index?: number;
+  isBeta?: boolean;
+  key: string | number;
+  label?: string;
+  icon?: string | undefined;
+};
+
 export type WithLoaderProps = {
   isLoaded: boolean;
   setIsLoaded(): void;

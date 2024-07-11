@@ -117,6 +117,18 @@ const StyledPeopleRow = styled(TableRow)`
     margin-inline-start: -8px;
   }
 
+  .table-cell_type {
+    p {
+      margin-inline-end: 12px;
+    }
+  }
+
+  .table-cell_email {
+    a {
+      margin-inline-end: 12px;
+    }
+  }
+
   .groups-combobox,
   .type-combobox {
     visibility: ${(props) => (props.hideColumns ? "hidden" : "visible")};
@@ -132,6 +144,8 @@ const StyledPeopleRow = styled(TableRow)`
   .groups-combobox,
   .room-combobox {
     padding-inline-start: 8px;
+    padding-inline-end: 12px;
+
     overflow: hidden;
   }
 
@@ -202,7 +216,7 @@ const InsideGroupTableRow = (props) => {
   const {
     t,
     item,
-    contextOptionsProps,
+    getContextModel,
     element,
     checkedProps,
     onContentRowSelect,
@@ -485,7 +499,8 @@ const InsideGroupTableRow = (props) => {
         onClick={onRowClick}
         fileContextClick={onRowContextClick}
         hideColumns={hideColumns}
-        {...contextOptionsProps}
+        contextOptions={item.options}
+        getContextModel={getContextModel}
       >
         <TableCell className={"table-container_user-name-cell"}>
           <TableCell
@@ -583,7 +598,7 @@ const InsideGroupTableRow = (props) => {
         </TableCell> */}
 
         {emailAccountsInsideGroupColumnIsEnabled ? (
-          <TableCell>
+          <TableCell className={"table-cell_email"}>
             <Link
               type="page"
               title={email}

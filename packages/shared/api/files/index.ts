@@ -720,6 +720,21 @@ export async function copyToFolder(
   return res;
 }
 
+export async function duplicate(folderIds: number[], fileIds: number[]) {
+  const data = {
+    folderIds,
+    fileIds,
+  };
+
+  const res = (await request({
+    method: "put",
+    url: "/files/fileops/duplicate",
+    data,
+  })) as TOperation[];
+
+  return res;
+}
+
 export async function moveToFolder(
   destFolderId: number,
   folderIds: number[],

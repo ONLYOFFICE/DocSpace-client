@@ -52,6 +52,7 @@ import {
 } from "@docspace/shared/utils/common";
 import { login } from "@docspace/shared/utils/loginUtils";
 import {
+  ALLOWED_PASSWORD_CHARACTERS,
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
   PRODUCT_NAME,
@@ -121,6 +122,7 @@ const CreateUserForm = (props) => {
 
   const emailFromLink = linkData?.email ? linkData.email : "";
   const roomName = roomData?.title;
+  const roomId = roomData?.roomId;
 
   const [email, setEmail] = useState(emailFromLink);
   const [emailValid, setEmailValid] = useState(true);
@@ -173,22 +175,13 @@ const CreateUserForm = (props) => {
 
   const onContinue = async () => {
     const { linkData } = props;
-    setIsLoading(true);
 
-    let hasError = false;
-
-    const emailRegex = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$";
-    const validationEmail = new RegExp(emailRegex);
-
-    if (!validationEmail.test(email.trim())) {
-      hasError = true;
-      setEmailValid(!hasError);
-    }
-
-    if (hasError) {
-      setIsLoading(false);
+    if (!emailValid) {
+      setIsEmailErrorShow(true);
       return;
     }
+
+    setIsLoading(true);
 
     const headerKey = linkData.confirmHeader;
 
@@ -207,6 +200,7 @@ const CreateUserForm = (props) => {
             roomName,
             firstName: user.firstName,
             lastName: user.lastName,
+            linkData: linkData,
           }),
         ),
       );
@@ -216,6 +210,14 @@ const CreateUserForm = (props) => {
       setCookie(LANGUAGE, currentCultureName, {
         "max-age": COOKIE_EXPIRATION_YEAR,
       });
+
+      const finalUrl = roomId
+        ? `/rooms/shared/filter?folder=${roomId}`
+        : defaultPage;
+
+      if (roomId) {
+        sessionStorage.setItem("referenceUrl", finalUrl);
+      }
 
       window.location.href = combineUrl(
         window.ClientConfig?.proxy?.url,
@@ -253,14 +255,6 @@ const CreateUserForm = (props) => {
     if (!sname.trim() || !snameValid) {
       hasError = true;
       setSnameValid(!hasError);
-    }
-
-    const emailRegex = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$";
-    const validationEmail = new RegExp(emailRegex);
-
-    if (!validationEmail.test(email.trim())) {
-      hasError = true;
-      setEmailValid(!hasError);
     }
 
     if (!passwordValid || !password.trim()) {
@@ -650,9 +644,7 @@ const CreateUserForm = (props) => {
                     isVertical={true}
                     labelVisible={false}
                     hasError={isPasswordErrorShow && !passwordValid}
-                    errorMessage={`${t(
-                      "Common:PasswordLimitMessage",
-                    )}: ${getPasswordErrorMessage(t, settings)}`}
+                    errorMessage={t("Common:IncorrectPassword")}
                   >
                     <PasswordInput
                       simpleView={false}
@@ -690,6 +682,7 @@ const CreateUserForm = (props) => {
                         "Common:PasswordLimitSpecialSymbols",
                       )}`}
                       generatePasswordTitle={t("Wizard:GeneratePassword")}
+                      tooltipAllowedCharacters={`${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
                     />
                   </FieldContainer>
 

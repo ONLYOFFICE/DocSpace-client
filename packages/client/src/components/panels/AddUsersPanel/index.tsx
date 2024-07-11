@@ -43,7 +43,7 @@ import {
   TAccessRight,
   TSelectorAccessRights,
   TSelectorCancelButton,
-  TWithTabs,
+  TSelectorTabs,
 } from "@docspace/shared/components/selector/Selector.types";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
@@ -479,7 +479,7 @@ const AddUsersPanel = ({
       }
     : {};
 
-  const withTabsProps: TWithTabs = withGroups
+  const withTabsProps: TSelectorTabs = withGroups
     ? {
         withTabs: true,
         tabsData: [

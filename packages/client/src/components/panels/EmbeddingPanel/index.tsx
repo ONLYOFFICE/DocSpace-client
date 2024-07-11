@@ -51,7 +51,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { PRODUCT_NAME, SDK_SCRIPT_URL } from "@docspace/shared/constants";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import HeaderUrl from "PUBLIC_DIR/images/sdk-presets_header.react.svg?url";
@@ -431,7 +431,9 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                     {`"Add the website URL for embedding to the <1>allow list</1>."`}
                   </Trans>
                 ) : (
-                  t("EmbeddingPanel:EmbeddingBarDescription")
+                  t("EmbeddingPanel:EmbeddingBarDescription", {
+                    productName: PRODUCT_NAME,
+                  })
                 )}
               </Text>
               <IconButton

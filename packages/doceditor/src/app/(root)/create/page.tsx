@@ -121,6 +121,7 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
     }
 
     const redirectURL = `/doceditor?${searchParams.toString()}`;
+
     return permanentRedirect(redirectURL);
   }
 

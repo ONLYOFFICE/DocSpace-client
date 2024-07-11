@@ -67,6 +67,10 @@ class SelectionStore {
       if (hasBufferSelection && this.bufferSelection.id === el.id)
         this.setBufferSelection(el);
     });
+
+    if (hasSelection) {
+      this.recalculateUsersRights();
+    }
   };
 
   resetUsersRight = () => {
@@ -89,6 +93,11 @@ class SelectionStore {
         this.selectionUsersRights[key]--;
       }
     }
+  };
+
+  recalculateUsersRights = () => {
+    this.resetUsersRight();
+    this.selection.forEach((u) => this.incrementUsersRights(u));
   };
 
   setSelection = (selection) => {

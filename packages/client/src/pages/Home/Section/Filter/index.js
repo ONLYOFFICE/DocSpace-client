@@ -60,7 +60,7 @@ import {
   ROOMS_PROVIDER_TYPE_NAME,
 } from "@docspace/shared/constants";
 
-import { getDefaultRoomName } from "SRC_DIR/helpers/filesUtils";
+import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
 
 import { SortByFieldName, TableVersions } from "SRC_DIR/helpers/constants";
 
@@ -470,7 +470,9 @@ const SectionFilterContent = ({
           newFilter.searchArea === RoomSearchArea.Active
             ? "rooms/shared"
             : "rooms/archived";
-        navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
+        navigate(
+          `${path}/filter?${newFilter.toUrlParams(userId)}&hash=${new Date().getTime()}`,
+        );
       } else {
         const filterType = getFilterType(data) || null;
 
@@ -1025,7 +1027,7 @@ const SectionFilterContent = ({
       if (roomsFilter.type) {
         const key = +roomsFilter.type;
 
-        const label = getDefaultRoomName(key, t);
+        const label = getRoomTypeName(key, t);
 
         filterValues.push({
           key: key,
@@ -2388,7 +2390,7 @@ const SectionFilterContent = ({
         commonOptions.push(tags);
         commonOptions.push(owner);
         commonOptions.push(modifiedDate);
-        commonOptions.push(sortByStorage);
+        showStorageInfo && commonOptions.push(sortByStorage);
       } else if (isTrash) {
         // commonOptions.push(authorOption);
         // commonOptions.push(creationDate);

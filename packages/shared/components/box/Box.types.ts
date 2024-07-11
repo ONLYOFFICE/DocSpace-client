@@ -91,6 +91,9 @@ export interface BoxProps {
   /** Defines the border width of the element area. */
   widthProp?: string;
 
+  /** Sets gap to flex, and grid containers. */
+  gapProp?: string;
+
   children?: React.ReactNode;
   className?: string;
   id?: string;

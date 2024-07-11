@@ -46,7 +46,7 @@ import { createPasswordHash } from "@docspace/shared/utils/common";
 import { checkPwd } from "@docspace/shared/utils/desktop";
 import { login } from "@docspace/shared/utils/loginUtils";
 import { toastr } from "@docspace/shared/components/toast";
-import { thirdPartyLogin } from "@docspace/shared/api/user";
+import { thirdPartyLogin, checkConfirmLink } from "@docspace/shared/api/user";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { RecaptchaType } from "@docspace/shared/enums";
@@ -55,7 +55,11 @@ import { getCookie } from "@docspace/shared/utils";
 import { deleteCookie } from "@docspace/shared/utils/cookie";
 
 import { LoginFormProps } from "@/types";
-import { generateOAuth2ReferenceURl, getEmailFromInvitation } from "@/utils";
+import {
+  generateOAuth2ReferenceURl,
+  getEmailFromInvitation,
+  getConfirmDataFromInvitation,
+} from "@/utils";
 
 import EmailContainer from "./sub-components/EmailContainer";
 import PasswordContainer from "./sub-components/PasswordContainer";
@@ -78,6 +82,7 @@ const LoginForm = ({
 }: LoginFormProps) => {
   const { isLoading, isModalOpen, ldapDomain } = useContext(LoginValueContext);
   const { setIsLoading } = useContext(LoginDispatchContext);
+  const toastId = useRef(null);
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -193,7 +198,12 @@ const LoginForm = ({
 
     const text = `${messageEmailConfirmed} ${messageAuthorize}`;
 
-    if (confirmedEmail && ready) toastr.success(text);
+    if (
+      confirmedEmail &&
+      ready &&
+      !toastr.isActive(toastId.current || "confirm-email-toast")
+    )
+      toastId.current = toastr.success(text);
     if (authError && ready) toastr.error(t("Common:ProviderLoginError"));
   }, [message, confirmedEmail, t, ready, authError, authCallback]);
 
@@ -253,7 +263,10 @@ const LoginForm = ({
     const hash = !isLdapLoginChecked
       ? createPasswordHash(pass, hashSettings)
       : undefined;
+
     const pwd = isLdapLoginChecked ? pass : undefined;
+
+    const confirmData = getConfirmDataFromInvitation(loginData);
 
     isDesktop && checkPwd();
     const session = !isChecked;
@@ -292,6 +305,9 @@ const LoginForm = ({
 
           return;
         }
+
+        checkConfirmLink(confirmData);
+
         const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath =
           referenceUrl || sessionStorage.getItem("referenceUrl");

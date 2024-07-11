@@ -24,23 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RoomsType } from "@docspace/shared/enums";
+import { ReactNode, createContext } from "react";
 
-export const getRoomTypeDefaultTagTranslation = (roomType = 1, t) => {
-  switch (roomType) {
-    case RoomsType.FillingFormsRoom:
-      return t("Common:FillingFormRooms");
-    case RoomsType.EditingRoom:
-      return t("Common:CollaborationRooms");
-    case RoomsType.ReviewRoom:
-      return t("Common:Review");
-    case RoomsType.ReadOnlyRoom:
-      return t("Common:ViewOnlyRooms");
-    case RoomsType.CustomRoom:
-      return t("Common:CustomRooms");
-    case RoomsType.PublicRoom:
-      return t("Common:PublicRoom");
-    case RoomsType.FormRoom:
-      return t("Common:FormRoom");
-  }
+import { TSelectorTabs } from "../Selector.types";
+
+export const TabsContext = createContext<TSelectorTabs>({});
+
+export const TabsProvider = ({
+  children,
+  ...rest
+}: TSelectorTabs & { children: ReactNode }) => {
+  return <TabsContext.Provider value={rest}>{children}</TabsContext.Provider>;
 };

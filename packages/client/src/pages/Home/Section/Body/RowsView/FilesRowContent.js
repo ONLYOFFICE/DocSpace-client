@@ -43,9 +43,12 @@ import { RowContent } from "@docspace/shared/components/row-content";
 import withContent from "../../../../../HOCs/withContent";
 
 import { Base } from "@docspace/shared/themes";
-import { ROOMS_TYPE_TRANSLATIONS } from "@docspace/shared/constants";
 
-import { getFileTypeName } from "../../../../../helpers/filesUtils";
+import {
+  connectedCloudsTypeTitleTranslation,
+  getFileTypeName,
+  getRoomTypeName,
+} from "../../../../../helpers/filesUtils";
 import { SortByFieldName } from "SRC_DIR/helpers/constants";
 import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 
@@ -253,6 +256,18 @@ const FilesRowContent = ({
           return elem;
         });
 
+      case SortByFieldName.UsedSpace:
+        if (providerKey)
+          return connectedCloudsTypeTitleTranslation(providerKey, t);
+        if (usedSpace === undefined) return "";
+
+        return getSpaceQuotaAsText(
+          t,
+          usedSpace,
+          quotaLimit,
+          isDefaultRoomsQuotaSet,
+        );
+
       default:
         if (isTrashFolder)
           return t("Files:DaysRemaining", {
@@ -264,24 +279,7 @@ const FilesRowContent = ({
   };
 
   const additionalComponent = () => {
-    if (
-      isRooms &&
-      isStatisticsAvailable &&
-      showStorageInfo &&
-      usedSpace !== undefined
-    ) {
-      let value = t(ROOMS_TYPE_TRANSLATIONS[item.roomType]);
-      const spaceQuota = getSpaceQuotaAsText(
-        t,
-        usedSpace,
-        quotaLimit,
-        isDefaultRoomsQuotaSet,
-      );
-
-      if (!isMobile()) value = `${value} | ${spaceQuota}`;
-
-      return value;
-    }
+    if (isRooms) return getRoomTypeName(item.roomType, t);
 
     if (!fileExst && !contentLength && !providerKey)
       return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
@@ -335,17 +333,19 @@ const FilesRowContent = ({
           </Text>
         )}
 
-        <Text
-          containerMinWidth="90px"
-          containerWidth="10%"
-          as="div"
-          className="row-content-text"
-          fontSize="12px"
-          fontWeight={400}
-          truncate={true}
-        >
-          {additionalInfo}
-        </Text>
+        {additionalInfo && (
+          <Text
+            containerMinWidth="90px"
+            containerWidth="10%"
+            as="div"
+            className="row-content-text"
+            fontSize="12px"
+            fontWeight={400}
+            truncate={true}
+          >
+            {additionalInfo}
+          </Text>
+        )}
       </SimpleFilesRowContent>
     </>
   );
@@ -373,7 +373,7 @@ export default inject(
   },
 )(
   observer(
-    withTranslation(["Files", "Translations", "Notifications"])(
+    withTranslation(["Files", "Translations", "Notifications", "Common"])(
       withContent(FilesRowContent),
     ),
   ),

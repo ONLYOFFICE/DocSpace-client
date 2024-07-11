@@ -48,7 +48,7 @@ export const metadata: Metadata = {
 };
 
 async function Page({ searchParams }: RootPageProps) {
-  const { fileId, fileid, version, doc, action, share, editorType } =
+  const { fileId, fileid, version, doc, action, share, editorType, error } =
     searchParams ?? initialSearchParams;
 
   const startDate = new Date();
@@ -63,6 +63,10 @@ async function Page({ searchParams }: RootPageProps) {
   );
 
   const timer = new Date().getTime() - startDate.getTime();
+
+  if (data.error?.status === "not-found" && error) {
+    data.error.message = error;
+  }
 
   return <Root {...data} timer={timer} />;
 }

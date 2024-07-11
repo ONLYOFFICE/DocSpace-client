@@ -42,48 +42,76 @@ export const generateLogo = (
 
   const ctx = canvas.getContext("2d");
   const x = alignCenter ? width / 2 : 0;
-
+  const y = (height - fontSize) / 2;
   ctx.fillStyle = "transparent";
   ctx.clearRect(0, 0, width, height);
   ctx.fillStyle = fontColor;
   ctx.textAlign = alignCenter ? "center" : "start";
-  ctx.textBaseline = "middle";
+  ctx.textBaseline = "top";
   ctx.font = `${fontSize}px Arial`;
-  ctx.fillText(text, x, height - fontSize / 2);
+  ctx.fillText(text, x, y);
 
   return canvas.toDataURL();
 };
 
-export const getLogoOptions = (index, text) => {
+export const getLogoOptions = (index, text, width, height) => {
+  const fontSize = height - 16;
+
   switch (index) {
     case 0:
-      return { fontSize: 18, text: text, width: 211, height: 24 };
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+      };
     case 1:
-      return { fontSize: 32, text: text, width: 384, height: 42 };
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+        alignCenter: true,
+      };
     case 2:
       return {
-        fontSize: 26,
+        fontSize,
         text: text.trim().charAt(0),
-        width: 30,
-        height: 30,
+        width,
+        height,
         alignCenter: true,
       };
     case 3:
-      return { fontSize: 22, text: text, width: 154, height: 27 };
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+      };
     case 4:
-      return { fontSize: 22, text: text, width: 154, height: 27 };
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+      };
     case 5:
       return {
-        fontSize: 24,
+        fontSize,
         text: text.trim().charAt(0),
-        width: 28,
-        height: 28,
+        width,
+        height,
         alignCenter: true,
       };
     case 6:
-      return { fontSize: 18, text: text, width: 211, height: 24 };
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+      };
     default:
-      return { fontSize: 18, text: text, width: 211, height: 24 };
+      return { fontSize: 32, text: text, width: 422, height: 48 };
   }
 };
 

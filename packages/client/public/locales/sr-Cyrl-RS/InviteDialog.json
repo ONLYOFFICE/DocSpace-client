@@ -3,7 +3,6 @@
   "AddManuallyDescriptionAccounts": "Позови нове кориснике на {{productName}} лично путем емаил-а.",
   "AddManuallyDescriptionRoom": "Додајте постојеће кориснике {{productName}}-а у собу користећи њихова имена или позовите нове кориснике лично путем емаил-а.",
   "EmailErrorMessage": "Емаил адреса није важећа. Можете уредити емаил кликом на њега.",
-  "GroupMaxAvailableRoleWarning": "Групе имају максималну доступну улогу - \"{{role}}\". Можете издати повећање права након додавања групе у собу.",
   "InvitationLanguage": "Језик позивнице",
   "InviteAccountSearchPlaceholder": "Позови људе преко емаил-а",
   "InviteRoomSearchPlaceholder": "Позови људе именом или емаил-ом",

@@ -73,6 +73,22 @@ export const createRequest = (
 
   if (authToken) hdrs.set("Authorization", authToken);
 
+  const allCookie = cookieStore.getAll();
+
+  const sharedLink = allCookie
+    .map((c) => {
+      if (c.name.includes("sharedlink")) {
+        return c;
+      }
+
+      return false;
+    })
+    .filter((v) => !!v);
+
+  if (sharedLink[0]) {
+    hdrs.set(sharedLink[0].name, sharedLink[0].value);
+  }
+
   const urls = paths.map((path) => `${apiURL}${path}`);
 
   const requests = urls.map(

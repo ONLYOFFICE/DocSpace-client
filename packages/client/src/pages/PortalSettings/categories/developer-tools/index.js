@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 
 import { Tabs } from "@docspace/shared/components/tabs";
 
@@ -35,7 +35,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { Box } from "@docspace/shared/components/box";
-import { Badge } from "@docspace/shared/components/badge";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
@@ -48,7 +47,7 @@ import OAuth from "./OAuth";
 import SSOLoader from "./sub-components/ssoLoader";
 
 const DeveloperToolsWrapper = (props) => {
-  const { loadBaseInfo, currentDeviceType, identityServerEnabled } = props;
+  const { currentDeviceType, identityServerEnabled } = props;
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -74,15 +73,6 @@ const DeveloperToolsWrapper = (props) => {
   const pluginLabel = (
     <Box displayProp="flex" style={{ gap: "8px" }}>
       {t("WebPlugins:PluginSDK")}
-
-      <Badge
-        label={t("Common:BetaLabel")}
-        backgroundColor="#533ED1"
-        fontSize="9px"
-        borderRadius="50px"
-        noHover={true}
-        isHovered={false}
-      />
     </Box>
   );
 

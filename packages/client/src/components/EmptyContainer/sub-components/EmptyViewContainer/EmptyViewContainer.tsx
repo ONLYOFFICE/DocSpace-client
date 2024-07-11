@@ -30,6 +30,7 @@ const EmptyViewContainer = observer(
     folderType,
     selectedFolder,
     parentRoomType,
+    isArchiveFolderRoot,
     onClickInviteUsers,
     onCreateAndCopySharedLink,
     setSelectFileFormRoomDialogVisible,
@@ -95,6 +96,7 @@ const EmptyViewContainer = observer(
         isFolder,
         folderType,
         parentRoomType,
+        isArchiveFolderRoot,
       );
       const title = getTitle(
         type,
@@ -103,6 +105,7 @@ const EmptyViewContainer = observer(
         isFolder,
         folderType,
         parentRoomType,
+        isArchiveFolderRoot,
       );
       const icon = getIcon(
         type,
@@ -114,7 +117,16 @@ const EmptyViewContainer = observer(
       );
 
       return { description, title, icon };
-    }, [type, t, theme.isBase, access, isFolder, folderType, parentRoomType]);
+    }, [
+      type,
+      t,
+      theme.isBase,
+      access,
+      isFolder,
+      folderType,
+      parentRoomType,
+      isArchiveFolderRoot,
+    ]);
 
     const options = useMemo(
       () =>
@@ -126,6 +138,7 @@ const EmptyViewContainer = observer(
           isFolder,
           folderType,
           parentRoomType,
+          isArchiveFolderRoot,
           {
             inviteUser,
             onCreate,
@@ -141,6 +154,7 @@ const EmptyViewContainer = observer(
         isFolder,
         folderType,
         parentRoomType,
+        isArchiveFolderRoot,
         t,
         inviteUser,
         uploadFromDocspace,

@@ -30,6 +30,7 @@ import { headers } from "next/headers";
 
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import { TenantStatus, EditorConfigErrorType } from "@docspace/shared/enums";
+import { tryParseToNumber } from "@docspace/shared/utils/tryParseToNumber";
 import type {
   TDocServiceLocation,
   TFile,
@@ -73,7 +74,7 @@ export async function fileCopyAs(
       "POST",
       JSON.stringify({
         destTitle,
-        destFolderId: +destFolderId,
+        destFolderId: tryParseToNumber(destFolderId),
         enableExternalExt,
         password,
       }),
@@ -410,9 +411,11 @@ export async function openEdit(
         ? "not-found"
         : config.error?.type === EditorConfigErrorType.AccessDeniedScope
           ? "access-denied"
-          : res.status === 415
-            ? "not-supported"
-            : undefined;
+          : config.error?.type === EditorConfigErrorType.TenantQuotaException
+            ? "quota-exception"
+            : res.status === 415
+              ? "not-supported"
+              : undefined;
 
     const message = status ? config.error.message : undefined;
 

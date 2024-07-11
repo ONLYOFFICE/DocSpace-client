@@ -52,6 +52,7 @@ import {
   removeShareFiles,
   createFolder,
   moveToFolder,
+  duplicate,
   getFolder,
   deleteFilesFromRecent,
 } from "@docspace/shared/api/files";
@@ -893,6 +894,7 @@ class FilesActionStore {
         )
         .finally(() => {
           this.setGroupMenuBlocked(false);
+          this.filesStore.setOperationAction(false);
         });
     } else {
       addActiveItems(null, [itemId], destFolderId);
@@ -967,40 +969,70 @@ class FilesActionStore {
     }
   };
 
-  duplicateAction = (item, label) => {
-    const { setSecondaryProgressBarData, filesCount } =
+  duplicateAction = async (item) => {
+    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
       this.uploadDataStore.secondaryProgressDataStore;
+    const { clearActiveOperations } = this.uploadDataStore;
 
     this.setSelectedItems();
 
-    //TODO: duplicate for folders?
     const folderIds = [];
     const fileIds = [];
     item.fileExst ? fileIds.push(item.id) : folderIds.push(item.id);
-    const conflictResolveType = ConflictResolveType.Duplicate;
-    const deleteAfter = false; //TODO: get from settings
+
+    const icon = item.isRoom ? "duplicate-room" : "duplicate";
     const operationId = uniqueid("operation_");
 
     setSecondaryProgressBarData({
-      icon: "duplicate",
+      icon,
       visible: true,
       percent: 0,
-      label,
       alert: false,
-      filesCount: filesCount + fileIds.length,
       operationId,
     });
 
     this.filesStore.addActiveItems(fileIds, folderIds);
 
-    return this.uploadDataStore.copyToAction(
-      this.selectedFolderStore.id,
-      folderIds,
-      fileIds,
-      conflictResolveType,
-      deleteAfter,
-      operationId,
-    );
+    return duplicate(folderIds, fileIds)
+      .then(async (res) => {
+        const lastResult = res && res[res.length - 1];
+
+        if (lastResult?.error) return Promise.reject(lastResult.error);
+
+        const pbData = { icon, operationId };
+        const data = lastResult || null;
+
+        const operationData = await this.uploadDataStore.loopFilesOperations(
+          data,
+          pbData,
+        );
+
+        if (!operationData || operationData.error || !operationData.finished) {
+          return Promise.reject(
+            operationData?.error ? operationData.error : "",
+          );
+        }
+
+        return setTimeout(
+          () => clearSecondaryProgressData(operationId),
+          TIMEOUT,
+        );
+      })
+      .catch((err) => {
+        clearActiveOperations(fileIds, folderIds);
+        setSecondaryProgressBarData({
+          icon,
+          visible: true,
+          alert: true,
+          operationId,
+        });
+        setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+        return toastr.error(err.message ? err.message : err);
+      })
+      .finally(() => {
+        clearActiveOperations(fileIds, folderIds);
+        this.setGroupMenuBlocked(false);
+      });
   };
 
   getFilesInfo = (items) => {
@@ -2411,8 +2443,8 @@ class FilesActionStore {
     }
   };
 
-  onClickBack = () => {
-    const { roomType, ...rest } = this.selectedFolderStore;
+  onClickBack = (fromHotkeys = true) => {
+    const { roomType } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
     const { clearFiles, setBufferSelection } = this.filesStore;
     const { clearInsideGroup, insideGroupBackUrl } =
@@ -2478,6 +2510,7 @@ class FilesActionStore {
 
       setSelectedNode(["accounts", "people", "filter"]);
 
+      if (fromHotkeys) return;
       return window.DocSpace.navigate(`${path}?${params}`, { replace: true });
     }
   };

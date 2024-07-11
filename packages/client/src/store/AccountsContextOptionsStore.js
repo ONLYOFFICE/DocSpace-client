@@ -330,7 +330,9 @@ class AccountsContextOptionsStore {
     filter.subjectId = user.id;
     filter.subjectFilter = FilterSubject.Member;
 
-    const filterParamsStr = filter.toUrlParams();
+    const { id } = this.userStore.user;
+
+    const filterParamsStr = filter.toUrlParams(id);
     const url = getCategoryUrl(CategoryType.Shared);
     const type = this.settingsStore.isDesktopClient ? "_self" : "_blank";
 

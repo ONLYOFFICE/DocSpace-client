@@ -30,6 +30,8 @@ import { OAuth2ErrorKey } from "./utils/enums";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
+  const requestHeaders = new Headers(request.headers);
+
   const host = request.headers.get("x-forwarded-host");
   const proto = request.headers.get("x-forwarded-proto");
 
@@ -37,7 +39,13 @@ export function middleware(request: NextRequest) {
 
   if (request.nextUrl.pathname === "/health") {
     console.log("Get login health check for portal: ", redirectUrl);
-    return NextResponse.json({ status: "healthy" }, { status: 200 });
+
+    requestHeaders.set("x-health-check", "true");
+
+    return NextResponse.json(
+      { status: "healthy" },
+      { status: 200, headers: requestHeaders },
+    );
   }
 
   const isAuth = !!request.cookies.get("asc_auth_key")?.value;
@@ -73,5 +81,5 @@ export function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/health", "/", "/not-found", "/consent"],
+  matcher: ["/health", "/", "/not-found", "/consent", "/login"],
 };

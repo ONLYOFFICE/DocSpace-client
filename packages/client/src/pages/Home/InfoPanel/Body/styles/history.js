@@ -105,11 +105,10 @@ const StyledHistoryBlockMessage = styled.div`
 
   display: inline-flex;
   gap: 4px;
+  max-width: 100%;
 
   .main-message {
-    width: max-content;
     max-width: 100%;
-    min-width: max-content;
     padding-inline-end: 4px;
   }
 

@@ -140,6 +140,8 @@ const StyledLinkRow = styled.div<{ isExpired?: boolean }>`
     background-color: ${(props) => props.theme.avatar.icon.background};
     height: 32px;
     width: 32px;
+    min-height: 32px;
+    min-width: 32px;
   }
 
   .create-and-copy_link {

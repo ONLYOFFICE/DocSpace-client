@@ -2684,6 +2684,7 @@ __metadata:
     "@svgr/webpack": "npm:^5.5.0"
     "@types/crypto-js": "npm:^4.2.1"
     "@types/eslint": "npm:^8.44.7"
+    "@types/he": "npm:^1.2.3"
     "@typescript-eslint/eslint-plugin": "npm:^6.12.0"
     "@typescript-eslint/parser": "npm:^6.12.0"
     "@uiw/codemirror-theme-github": "npm:^4.21.25"
@@ -8064,6 +8065,13 @@ __metadata:
   dependencies:
     "@types/unist": "npm:*"
   checksum: 10/cf380cb351215847a598b06c10c0139a694fbb9a5cca27e7a836df4c9d616873ff5b01326530907b5a95b6a4b8fc928bcecb46424cc6f9bd1f53ba377f190d86
+  languageName: node
+  linkType: hard
+
+"@types/he@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "@types/he@npm:1.2.3"
+  checksum: 10/e77851c73dd7b9902d92fe0118a26246a7f3676a3a1c6eb1408305187ef73b57c22550b1435946b983267f961d935554d5d0e1b458416932552f31e763e1aa41
   languageName: node
   linkType: hard
 

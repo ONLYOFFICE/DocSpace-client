@@ -28,6 +28,7 @@ import styled, { css } from "styled-components";
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
 const StyledSsoPage = styled.div`
+  max-width: 100%;
   box-sizing: border-box;
   outline: none;
 

@@ -178,7 +178,9 @@ const DataReassignmentDialog = ({
         toastr.error(error?.response?.data?.error?.message);
       })
       .finally(() => {
-        needResetUserSelection && setSelected("close");
+        if (isDeleteProfile || needResetUserSelection) {
+          setSelected("close");
+        }
       });
   };
 

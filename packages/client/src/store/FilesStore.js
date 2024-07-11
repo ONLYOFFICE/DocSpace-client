@@ -3541,7 +3541,7 @@ class FilesStore {
       case FilterType.ArchiveOnly:
         return t("Archives");
       case FilterType.FilesOnly:
-        return t("AllFiles");
+        return t("Translations:Files");
       case `room-${RoomsType.FillingFormsRoom}`:
         return t("Common:FillingFormRooms");
       case `room-${RoomsType.CustomRoom}`:

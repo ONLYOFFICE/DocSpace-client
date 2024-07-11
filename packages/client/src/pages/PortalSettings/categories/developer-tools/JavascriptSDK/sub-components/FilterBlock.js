@@ -138,7 +138,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
   const filterOptions = [
     {
       key: "filter-type-all",
-      label: t("Files:AllFiles"),
+      label: t("Translations:Files"),
       typeKey: FilterType.FilesOnly,
     },
     {
@@ -177,14 +177,9 @@ export const FilterBlock = ({ t, config, setConfig }) => {
       typeKey: FilterType.MediaOnly,
     },
     {
-      key: "filter-type-forms-templates",
-      label: t("Files:FormsTemplates"),
-      typeKey: FilterType.OFormTemplateOnly,
-    },
-    {
       key: "filter-type-forms",
       label: t("Files:Forms"),
-      typeKey: FilterType.OFormOnly,
+      typeKey: FilterType.Pdf,
     },
   ];
 

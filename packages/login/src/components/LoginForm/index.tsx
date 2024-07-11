@@ -259,9 +259,15 @@ const LoginForm = ({
     const session = !isChecked;
 
     login(user, hash, pwd, session, captchaToken, currentCulture, reCaptchaType)
+      .then(async (res: string | object) => {
+        try {
+          if (confirmData) await checkConfirmLink(confirmData);
+        } catch (e) {
+          console.error(e);
+        }
+        return res;
+      })
       .then((res: string | object) => {
-        checkConfirmLink(confirmData);
-
         const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath =
           referenceUrl || sessionStorage.getItem("referenceUrl");
@@ -314,6 +320,7 @@ const LoginForm = ({
     reCaptchaType,
     isCaptchaSuccessful,
     referenceUrl,
+    loginData,
   ]);
 
   const onBlurEmail = () => {

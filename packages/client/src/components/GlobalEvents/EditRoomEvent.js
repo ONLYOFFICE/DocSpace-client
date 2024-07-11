@@ -179,8 +179,11 @@ const EditRoomEvent = ({
         actions.push(addTagsToRoom(room.id, newTags));
         room.tags = tags;
       }
-      if (removedTags.length)
+
+      if (removedTags.length) {
         actions.push(removeTagsFromRoom(room.id, removedTags));
+        room.tags = tags;
+      }
 
       await Promise.all(actions);
 

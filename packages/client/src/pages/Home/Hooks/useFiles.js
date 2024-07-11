@@ -314,6 +314,7 @@ const useFiles = ({
             fromTemplate: true,
             title: gallerySelected.attributes.name_form,
             openEditor: !isFormRoom,
+            edit: true,
           };
 
           event.payload = payload;

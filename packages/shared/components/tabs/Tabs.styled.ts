@@ -57,11 +57,18 @@ export const StyledTabs = styled.div<{
     width: 60px;
     pointer-events: none;
 
-    background: linear-gradient(
+    background: ${(props) =>
+      props.theme.interfaceDirection === "ltr"
+        ? `linear-gradient(
       90deg,
       rgba(255, 255, 255, 0) 20.48%,
-      ${(props) => props.theme.tabs.gradientColor} 100%
-    );
+      ${props.theme.tabs.gradientColor} 100%
+    )`
+        : `linear-gradient(
+      270deg,
+      rgba(255, 255, 255, 0) 20.48%,
+      ${props.theme.tabs.gradientColor} 100%)`};
+
     transform: matrix(-1, 0, 0, 1, 0, 0);
 
     z-index: 1;
@@ -71,14 +78,29 @@ export const StyledTabs = styled.div<{
     position: absolute;
     height: 32px;
     width: 60px;
-    right: 0;
+
     pointer-events: none;
 
-    background: linear-gradient(
+    ${(props) =>
+      props.theme.interfaceDirection === "ltr"
+        ? css`
+            right: 0;
+          `
+        : css`
+            left: 0;
+          `}
+
+    background: ${(props) =>
+      props.theme.interfaceDirection === "ltr"
+        ? `linear-gradient(
       90deg,
       rgba(255, 255, 255, 0) 20.48%,
-      ${(props) => props.theme.tabs.gradientColor} 100%
-    );
+      ${props.theme.tabs.gradientColor} 100%
+    )`
+        : `linear-gradient(
+      270deg,
+      rgba(255, 255, 255, 0) 20.48%,
+      ${props.theme.tabs.gradientColor} 100%)`};
 
     z-index: 1;
   }

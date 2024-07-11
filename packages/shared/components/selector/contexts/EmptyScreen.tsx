@@ -24,59 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useContext, useCallback } from "react";
+import { ReactNode, createContext } from "react";
 
-import { SearchInput } from "../../search-input";
-import { InputSize } from "../../text-input";
+import { TSelectorEmptyScreen } from "../Selector.types";
 
-import { SearchContext, SearchDispatchContext } from "../contexts/Search";
-import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
+export const EmptyScreenContext = createContext<TSelectorEmptyScreen>({
+  emptyScreenImage: "",
+  emptyScreenHeader: "",
+  emptyScreenDescription: "",
 
-const Search = React.memo(({ isSearch }: { isSearch: boolean }) => {
-  const {
-    searchPlaceholder,
-    searchValue,
-    isSearchLoading,
-    searchLoader,
-    withSearch,
-    onClearSearch,
-    onSearch,
-  } = useContext(SearchContext);
-  const setIsSearch = useContext(SearchDispatchContext);
-
-  const { isBreadCrumbsLoading } = useContext(BreadCrumbsContext);
-
-  const onClearSearchAction = useCallback(() => {
-    onClearSearch?.(() => setIsSearch(false));
-  }, [onClearSearch, setIsSearch]);
-
-  const onSearchAction = useCallback(
-    (data: string) => {
-      const v = data.trim();
-
-      if (v === "") return onClearSearchAction();
-
-      onSearch?.(v, () => setIsSearch(true));
-    },
-    [onClearSearchAction, onSearch, setIsSearch],
-  );
-
-  if (isBreadCrumbsLoading || isSearchLoading) return searchLoader;
-
-  if (!withSearch || !isSearch) return null;
-
-  return (
-    <SearchInput
-      className="search-input"
-      placeholder={searchPlaceholder}
-      value={searchValue ?? ""}
-      onChange={onSearchAction}
-      onClearSearch={onClearSearchAction}
-      size={InputSize.base}
-    />
-  );
+  searchEmptyScreenImage: "",
+  searchEmptyScreenHeader: "",
+  searchEmptyScreenDescription: "",
 });
 
-Search.displayName = "Search";
-
-export { Search };
+export const EmptyScreenProvider = ({
+  children,
+  ...rest
+}: TSelectorEmptyScreen & { children: ReactNode }) => {
+  return (
+    <EmptyScreenContext.Provider value={rest}>
+      {children}
+    </EmptyScreenContext.Provider>
+  );
+};

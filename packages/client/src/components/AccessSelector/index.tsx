@@ -50,6 +50,8 @@ interface AccessSelectorProps {
   noBorder?: boolean;
   manualWidth?: number;
   isDisabled?: boolean;
+  directionX?: string;
+  directionY?: string;
 }
 
 const AccessSelector: React.FC<AccessSelectorProps> = ({
@@ -68,6 +70,8 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
   noBorder = false,
   manualWidth,
   isDisabled,
+  directionX = "right",
+  directionY = "bottom",
 }) => {
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [width, setWidth] = useState(manualWidth || 0);
@@ -120,8 +124,8 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           onSelect={onSelectAccess}
           accessOptions={filteredAccesses || accessOptions}
           noBorder={noBorder}
-          directionX="left"
-          directionY="bottom"
+          directionX={directionX}
+          directionY={directionY}
           fixedDirection
           manualWidth={`${width}px`}
           isDefaultMode={false}

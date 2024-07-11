@@ -24,59 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useContext, useCallback } from "react";
+import {
+  ReactNode,
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useState,
+} from "react";
 
-import { SearchInput } from "../../search-input";
-import { InputSize } from "../../text-input";
+import { TSelectorSearch } from "../Selector.types";
 
-import { SearchContext, SearchDispatchContext } from "../contexts/Search";
-import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
+export const SearchContext = createContext<TSelectorSearch>({});
 
-const Search = React.memo(({ isSearch }: { isSearch: boolean }) => {
-  const {
-    searchPlaceholder,
-    searchValue,
-    isSearchLoading,
-    searchLoader,
-    withSearch,
-    onClearSearch,
-    onSearch,
-  } = useContext(SearchContext);
-  const setIsSearch = useContext(SearchDispatchContext);
+export const SearchValueContext = createContext<boolean>(false);
 
-  const { isBreadCrumbsLoading } = useContext(BreadCrumbsContext);
+export const SearchDispatchContext = createContext<
+  Dispatch<SetStateAction<boolean>>
+>(() => {});
 
-  const onClearSearchAction = useCallback(() => {
-    onClearSearch?.(() => setIsSearch(false));
-  }, [onClearSearch, setIsSearch]);
-
-  const onSearchAction = useCallback(
-    (data: string) => {
-      const v = data.trim();
-
-      if (v === "") return onClearSearchAction();
-
-      onSearch?.(v, () => setIsSearch(true));
-    },
-    [onClearSearchAction, onSearch, setIsSearch],
-  );
-
-  if (isBreadCrumbsLoading || isSearchLoading) return searchLoader;
-
-  if (!withSearch || !isSearch) return null;
+const SearchActionProvider = ({ children }: { children: ReactNode }) => {
+  const [isSearch, setIsSearch] = useState(false);
 
   return (
-    <SearchInput
-      className="search-input"
-      placeholder={searchPlaceholder}
-      value={searchValue ?? ""}
-      onChange={onSearchAction}
-      onClearSearch={onClearSearchAction}
-      size={InputSize.base}
-    />
+    <SearchDispatchContext.Provider value={setIsSearch}>
+      <SearchValueContext.Provider value={isSearch}>
+        {children}
+      </SearchValueContext.Provider>
+    </SearchDispatchContext.Provider>
   );
-});
+};
 
-Search.displayName = "Search";
-
-export { Search };
+export const SearchProvider = ({
+  children,
+  ...rest
+}: TSelectorSearch & { children: ReactNode }) => {
+  return (
+    <SearchContext.Provider value={rest}>
+      <SearchActionProvider> {children}</SearchActionProvider>
+    </SearchContext.Provider>
+  );
+};

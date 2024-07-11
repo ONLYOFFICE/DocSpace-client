@@ -38,14 +38,18 @@ import { redirect } from "next/navigation";
 async function Page() {
   const settings = await getSettings();
 
-  if (settings && typeof settings !== "string" && !settings.wizardToken) {
+  const objectSettings = typeof settings === "string" ? undefined : settings;
+
+  if (!objectSettings || !objectSettings.wizardToken) {
     redirect("/");
   }
 
-  const passwordSettingsData = getPortalPasswordSettings(settings?.wizardToken);
-  const machineNameData = getMachineName(settings?.wizardToken);
+  const passwordSettingsData = getPortalPasswordSettings(
+    objectSettings?.wizardToken,
+  );
+  const machineNameData = getMachineName(objectSettings?.wizardToken);
   const isRequiredLicenseData = getIsLicenseRequired();
-  const portalTimeZonesData = getPortalTimeZones(settings?.wizardToken);
+  const portalTimeZonesData = getPortalTimeZones(objectSettings?.wizardToken);
   const portalCulturesData = getPortalCultures();
 
   const [
@@ -63,20 +67,16 @@ async function Page() {
   ]);
 
   return (
-    <>
-      {settings && typeof settings !== "string" && (
-        <WizardForm
-          passwordSettings={passwordSettings}
-          machineName={machineName}
-          isRequiredLicense={isRequiredLicense}
-          portalCultures={portalCultures}
-          portalTimeZones={portalTimeZones}
-          culture={settings.culture}
-          wizardToken={settings?.wizardToken}
-          passwordHash={settings.passwordHash}
-        />
-      )}
-    </>
+    <WizardForm
+      passwordSettings={passwordSettings}
+      machineName={machineName}
+      isRequiredLicense={isRequiredLicense}
+      portalCultures={portalCultures}
+      portalTimeZones={portalTimeZones}
+      culture={objectSettings.culture}
+      wizardToken={objectSettings?.wizardToken}
+      passwordHash={objectSettings.passwordHash}
+    />
   );
 }
 

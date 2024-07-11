@@ -29,6 +29,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Button } from "@docspace/shared/components/button";
+import { RoomsType } from "@docspace/shared/enums";
 
 const CreateRoomConfirmDialog = ({
   t,
@@ -46,6 +47,10 @@ const CreateRoomConfirmDialog = ({
 
   const onClose = () => setVisible(false);
 
+  const bodyText = RoomsType.VirtualDataRoom
+    ? t("CreateEditRoomDialog:CreateRoomWatermarksConfirmation")
+    : t("CreateEditRoomDialog:CreateRoomConfirmation");
+
   return (
     <ModalDialog
       visible={visible || confirmDialogIsLoading}
@@ -54,9 +59,7 @@ const CreateRoomConfirmDialog = ({
       zIndex={310}
     >
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
-      <ModalDialog.Body>
-        {t("CreateEditRoomDialog:CreateRoomConfirmation")}
-      </ModalDialog.Body>
+      <ModalDialog.Body>{bodyText}</ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           label={t("Common:ContinueButton")}

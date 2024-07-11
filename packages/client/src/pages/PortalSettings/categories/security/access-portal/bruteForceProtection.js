@@ -265,6 +265,7 @@ const BruteForceProtection = (props) => {
 
       <FieldContainer
         className="input-container"
+        labelVisible={true}
         labelText={t("NumberOfAttempts")}
         isVertical={true}
         place="top"
@@ -284,6 +285,7 @@ const BruteForceProtection = (props) => {
 
       <FieldContainer
         className="input-container"
+        labelVisible={true}
         labelText={t("BlockingTime")}
         isVertical={true}
         place="top"
@@ -303,6 +305,7 @@ const BruteForceProtection = (props) => {
 
       <FieldContainer
         className="input-container"
+        labelVisible={true}
         labelText={t("CheckPeriod")}
         isVertical={true}
         place="top"

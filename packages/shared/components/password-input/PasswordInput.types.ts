@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { MouseEvent } from "react";
 import { InputSize, InputType } from "../text-input";
 
 export type TPasswordSettings = {
@@ -44,6 +44,24 @@ export type TPasswordValidation = {
   capital: boolean;
   special: boolean;
   length: boolean;
+};
+
+export type PasswordInputHandle = {
+  onGeneratePassword: (e: MouseEvent) => void;
+  setState(state: TState): void;
+  value?: string;
+};
+
+export type TState = {
+  type: InputType.text | InputType.password;
+  value?: string;
+  copyLabel?: string;
+  disableCopyAction?: boolean;
+  displayTooltip: boolean;
+  validLength: boolean;
+  validDigits: boolean;
+  validCapital: boolean;
+  validSpecial: boolean;
 };
 
 export interface PasswordInputProps {

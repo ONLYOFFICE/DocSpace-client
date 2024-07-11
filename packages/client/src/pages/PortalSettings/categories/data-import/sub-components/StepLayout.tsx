@@ -33,6 +33,10 @@ import { LayoutProps } from "../types";
 const DescriptionWrapper = styled.div`
   max-width: 700px;
 
+  .data-import-description {
+    color: ${(props) => props.theme.client.settings.migration.descriptionColor};
+  }
+
   .data-import-counter {
     margin-top: 19px;
     margin-bottom: 9px;
@@ -47,7 +51,6 @@ const DescriptionWrapper = styled.div`
 const StepLayout = (props: LayoutProps) => {
   const {
     t,
-    theme,
     step,
     totalSteps,
     title,
@@ -59,11 +62,7 @@ const StepLayout = (props: LayoutProps) => {
   return (
     <>
       <DescriptionWrapper>
-        <Text
-          className="data-import-description"
-          lineHeight="20px"
-          color={theme.isBase ? "#657077" : "#ADADAD"}
-        >
+        <Text className="data-import-description" lineHeight="20px">
           {t("Settings:AboutDataImport", {
             productName: PRODUCT_NAME,
             organizationName,

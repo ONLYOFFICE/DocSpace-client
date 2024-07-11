@@ -24,68 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { tablet, mobile } from "@docspace/shared/utils";
-import { isIOS, isFirefox } from "react-device-detect";
-import BackgroundPatternReactSvgUrl from "PUBLIC_DIR/images/background.pattern.react.svg?url";
-
-export const Wrapper = styled.div`
-  height: ${isIOS && !isFirefox ? "calc(var(--vh, 1vh) * 100)" : "100vh"};
-  width: 100vw;
-  z-index: 0;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-
-  @media ${mobile} {
-    height: auto;
-    min-height: 100%;
-    width: 100%;
-    min-width: 100%;
-  }
-
-  .bg-cover {
-    background-image: url("${BackgroundPatternReactSvgUrl}");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    z-index: -1;
-
-    @media ${mobile} {
-      background-image: none;
-    }
-  }
-`;
-
-export const StyledContent = styled.div`
-  min-height: 100vh;
-  flex: 1 0 auto;
-  flex-direction: column;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-
-  @media ${mobile} {
-    min-height: 100%;
-    width: calc(100% - 32px);
-    justify-content: start;
-  }
-`;
+import styled from "styled-components";
+import { mobile, tablet } from "@docspace/shared/utils/device";
 
 export const WizardContainer = styled.div`
-  margin: 56px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
 
   @media ${tablet} {
     width: 100%;
@@ -94,7 +41,6 @@ export const WizardContainer = styled.div`
 
   @media ${mobile} {
     max-width: 100%;
-    margin: 32px auto;
   }
 
   .portal-logo {

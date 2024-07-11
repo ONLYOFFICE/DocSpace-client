@@ -60,7 +60,12 @@ import {
   PasswordInputHandle,
 } from "@docspace/shared/components/password-input";
 import { FileInput } from "@docspace/shared/components/file-input";
-import { StyledAcceptTerms, StyledInfo, StyledLink } from "./Wizard.styled";
+import {
+  StyledAcceptTerms,
+  StyledInfo,
+  StyledLink,
+  WizardContainer,
+} from "./WizardForm.styled";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
@@ -127,9 +132,7 @@ function WizardForm(props: WizardFormProps) {
   const refPassInput = useRef<PasswordInputHandle>(null);
 
   //TODO: add property
-  const userCulture = window.navigator
-    ? window.navigator.language
-    : culture || "en";
+  const userCulture = culture || "en";
 
   const convertedCulture = convertLanguage(userCulture);
 
@@ -276,7 +279,7 @@ function WizardForm(props: WizardFormProps) {
   };
 
   return (
-    <>
+    <WizardContainer>
       <Text fontWeight={600} fontSize="16px" className="form-header">
         {t("Wizard:Desc", { productName: PRODUCT_NAME })}
       </Text>
@@ -465,7 +468,7 @@ function WizardForm(props: WizardFormProps) {
         isLoading={isCreated}
         onClick={onContinueClick}
       />
-    </>
+    </WizardContainer>
   );
 }
 

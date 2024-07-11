@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useRef, useEffect } from "react";
+import { useTheme } from "styled-components";
 
 import { Scrollbar as ScrollbarType } from "../scrollbar/custom-scrollbar";
 
@@ -50,6 +51,8 @@ const Tabs = (props: TabsProps) => {
     onSelect,
     ...rest
   } = props;
+
+  const theme = useTheme();
 
   let selectedItemIndex = items.findIndex((item) => item.id === selectedItemId);
   if (selectedItemIndex === INDEX_NOT_FOUND) {
@@ -80,16 +83,39 @@ const Tabs = (props: TabsProps) => {
 
     const containerWidth = containerElement.offsetWidth;
     const tabWidth = tabElement?.offsetWidth;
-    const tabOffsetLeft = tabElement.offsetLeft;
+    const tabOffsetLeft = tabElement?.offsetLeft;
 
-    if (tabOffsetLeft - OFFSET_LEFT < containerElement.scrollLeft) {
-      scrollRef.current.scrollTo(tabOffsetLeft - OFFSET_LEFT);
-    } else if (
-      tabOffsetLeft + tabWidth >
-      containerElement.scrollLeft + containerWidth
-    ) {
+    if (theme.interfaceDirection === "ltr") {
+      if (tabOffsetLeft - OFFSET_LEFT < containerElement.scrollLeft) {
+        scrollRef.current.scrollTo(tabOffsetLeft - OFFSET_LEFT);
+      } else if (
+        tabOffsetLeft + tabWidth >
+        containerElement.scrollLeft + containerWidth
+      ) {
+        scrollRef.current.scrollTo(
+          tabOffsetLeft - containerWidth + tabWidth + OFFSET_RIGHT,
+        );
+      }
+
+      return;
+    }
+
+    const rect = tabElement?.getBoundingClientRect();
+
+    if (rect.left - OFFSET_LEFT < 0) {
       scrollRef.current.scrollTo(
-        tabOffsetLeft - containerWidth + tabWidth + OFFSET_RIGHT,
+        -(
+          Math.abs(rect.left) +
+          OFFSET_LEFT +
+          Math.abs(containerElement.scrollLeft)
+        ),
+      );
+    } else if (rect.right > containerWidth && !!containerElement.scrollLeft) {
+      scrollRef.current.scrollTo(
+        rect.right -
+          containerWidth +
+          containerElement.scrollLeft +
+          OFFSET_RIGHT,
       );
     }
   };
@@ -116,7 +142,8 @@ const Tabs = (props: TabsProps) => {
                   $type={type}
                   onClick={() => {
                     item.onClick?.();
-                    setSelectedItem(item, index);
+
+                    return setSelectedItem(item, index);
                   }}
                 >
                   {item.name}

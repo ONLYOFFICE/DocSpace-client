@@ -543,7 +543,6 @@ export const enum FilesSelectorExtendedFilterTypes {
   Media = "Media",
   Archives = "Archives",
   AllFiles = "AllFiles",
-  FormTemplates = "FormTemplates",
   Forms = "Forms",
 }
 

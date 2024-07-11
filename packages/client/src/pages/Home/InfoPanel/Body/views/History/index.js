@@ -34,6 +34,7 @@ import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import { getRelativeDateDay } from "./../../helpers/HistoryHelper";
 import HistoryBlock from "./HistoryBlock";
 import NoHistory from "../NoItem/NoHistory";
+import ThirdPartyComponent from "./HistoryBlockContent/ThirdParty";
 
 const History = ({
   t,
@@ -54,6 +55,8 @@ const History = ({
   const [isLoading, setIsLoading] = useState(false);
   const [isShowLoader, setIsShowLoader] = useState(false);
 
+  const isThirdParty = infoPanelSelection?.providerType;
+
   const getHistory = async (item) => {
     if (!item?.id) return;
     if (isLoading) {
@@ -69,7 +72,8 @@ const History = ({
   };
 
   useEffect(() => {
-    if (!isMount.current) return;
+    if (!isMount.current || isThirdParty) return;
+
     getHistory(infoPanelSelection);
   }, [
     infoPanelSelection.id,
@@ -84,6 +88,8 @@ const History = ({
       isMount.current = false;
     };
   }, []);
+
+  if (isThirdParty) return <ThirdPartyComponent />;
 
   if (!selectionHistory) {
     if (isShowLoader) return <InfoPanelViewLoader view="history" />;

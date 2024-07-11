@@ -66,7 +66,7 @@ const WelcomePageSettings = loadable(() =>
 );
 const DNSSettings = loadable(() =>
   componentLoader(
-    () => () =>
+    () =>
       import(
         "../pages/PortalSettings/categories/common/Customization/dns-settings"
       ),

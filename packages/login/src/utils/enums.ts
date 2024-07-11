@@ -46,6 +46,7 @@ export enum MessageKey {
   "SsoAuthFailed",
   "SsoAttributesNotFound",
   "QuotaPaidUserLimitError",
+  "InvalidLink",
 }
 
 export enum OAuth2ErrorKey {

@@ -26,6 +26,9 @@
 
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
+import merge from "lodash/merge";
+import cloneDeep from "lodash/cloneDeep";
+
 import api from "@docspace/shared/api";
 import {
   FileType,
@@ -37,6 +40,7 @@ import {
   ShareAccessRights,
   Events,
   FilterKeys,
+  RoomSearchArea,
 } from "@docspace/shared/enums";
 
 import { RoomsTypes } from "@docspace/shared/utils";
@@ -388,6 +392,9 @@ class FilesStore {
       const { socketSubscribers } = socketHelper;
       const pathParts = `FILE-${id}`;
 
+      const { isVisible, infoPanelSelection, setInfoPanelSelection } =
+        this.infoPanelStore;
+
       if (!socketSubscribers.has(pathParts)) return;
 
       const foundIndex = this.files.findIndex((x) => x.id === id);
@@ -406,7 +413,15 @@ class FilesStore {
         this.files[foundIndex].fileStatus & ~FileStatus.IsEditing,
       );
 
-      this.getFileInfo(id);
+      this.getFileInfo(id).then((file) => {
+        if (
+          isVisible &&
+          file.id === infoPanelSelection?.id &&
+          infoPanelSelection?.fileExst === file.fileExst
+        ) {
+          setInfoPanelSelection(merge(cloneDeep(infoPanelSelection), file));
+        }
+      });
 
       this.createThumbnail(this.files[foundIndex]);
     });
@@ -778,8 +793,6 @@ class FilesStore {
   };
 
   removeActiveItem = (file) => {
-    console.log(this.activeFiles);
-
     this.activeFiles =
       this.activeFiles?.filter((item) => item.id !== file.id) ?? [];
   };
@@ -1601,7 +1614,6 @@ class FilesStore {
             })
             .reverse();
         });
-
         this.selectedFolderStore.setSelectedFolder({
           folders: data.folders,
           ...data.current,
@@ -1724,6 +1736,18 @@ class FilesStore {
             console.log("Request canceled", err.message);
           } else {
             toastr.error(err);
+            if (isThirdPartyError) {
+              const userId = this.userStore?.user?.id;
+              const searchArea = window.DocSpace.location.pathname.includes(
+                "shared",
+              )
+                ? RoomSearchArea.Active
+                : RoomSearchArea.Archive;
+
+              return window.DocSpace.navigate(
+                `${window.DocSpace.location.pathname}?${RoomsFilter.getDefault(userId, searchArea).toUrlParams(userId, true)}`,
+              );
+            }
           }
         }
       })
@@ -2090,7 +2114,7 @@ class FilesStore {
         "move", //category
         "move-to",
         "copy-to",
-        "copy",
+        "duplicate",
         "restore",
         "rename",
         "separator2",
@@ -2166,8 +2190,9 @@ class FilesStore {
       }
 
       if (!canDuplicate) {
-        fileOptions = this.removeOptions(fileOptions, ["copy"]);
+        fileOptions = this.removeOptions(fileOptions, ["duplicate"]);
       }
+
       if (!canMove && !canCopy && !canDuplicate) {
         fileOptions = this.removeOptions(fileOptions, ["move"]);
       }
@@ -2175,7 +2200,7 @@ class FilesStore {
       if (!(isMasterForm && canDuplicate))
         fileOptions = this.removeOptions(fileOptions, ["make-form"]);
 
-      if (!canSubmitToFormGallery) {
+      if (!canSubmitToFormGallery || isMasterForm) {
         fileOptions = this.removeOptions(fileOptions, [
           "submit-to-gallery",
           "separator-SubmitToGallery",
@@ -2359,6 +2384,7 @@ class FilesStore {
       const canPinRoom = item.security?.Pin;
 
       const canEditRoom = item.security?.EditRoom;
+      const canDuplicateRoom = item.security?.Duplicate;
 
       const canViewRoomInfo = item.security?.Read;
       const canMuteRoom = item.security?.Mute;
@@ -2385,6 +2411,7 @@ class FilesStore {
         "mute-room",
         "unmute-room",
         "separator1",
+        "duplicate-room",
         "download",
         "archive-room",
         "unarchive-room",
@@ -2418,11 +2445,16 @@ class FilesStore {
         roomOptions = this.removeOptions(roomOptions, ["delete"]);
       }
 
+      if (!canDuplicate) {
+        roomOptions = this.removeOptions(roomOptions, ["duplicate-room"]);
+      }
+
       if (!canDownload) {
-        roomOptions = this.removeOptions(roomOptions, [
-          "separator1",
-          "download",
-        ]);
+        roomOptions = this.removeOptions(roomOptions, ["download"]);
+      }
+
+      if (!canDownload && !canDuplicate) {
+        roomOptions = this.removeOptions(roomOptions, ["separator1"]);
       }
 
       if (!item.providerKey) {
@@ -2498,6 +2530,7 @@ class FilesStore {
         "move", //category
         "move-to",
         "copy-to",
+        "duplicate",
         "mark-read",
         "restore",
         "rename",
@@ -2531,7 +2564,7 @@ class FilesStore {
       }
 
       if (!canDuplicate) {
-        folderOptions = this.removeOptions(folderOptions, ["copy"]);
+        folderOptions = this.removeOptions(folderOptions, ["duplicate"]);
       }
 
       if (!canMove && !canCopy && !canDuplicate) {

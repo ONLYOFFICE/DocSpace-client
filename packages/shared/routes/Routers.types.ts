@@ -49,6 +49,7 @@ export interface PrivateRouteProps
       | "isPortalDeactivate"
       | "enablePortalRename"
       | "limitedAccessSpace"
+      | "baseDomain"
     >,
     Pick<CurrentTariffStatusStore, "isNotPaidPeriod">,
     Pick<UserStore, "user"> {

@@ -1,9 +1,9 @@
 {
-  "date": "202479_153351",
+  "date": "2024711_121949",
   "checksums": {
-    "api.js": "0efbae3383bf6c6b6f26d573eee164d2",
-    "api.poly.js": "2a2ac2c0e4a7007b61d2d1ff7b00a22e",
-    "browserDetector.js": "d9387cce805699498e798230a8639c8a",
-    "config.json": "06a8afc3eb6f63f76dab9b1feb5c459e"
+    "api.js": "9b7b808480a7a3b84fff3bbc086fb3c7",
+    "api.poly.js": "6ef0a93fc185ef373f73abeaa1c9104e",
+    "browserDetector.js": "fedff3ea7197068a5c86c5cf2c51ec31",
+    "config.json": "225114f784ac16f33c0a0cb0a6363438"
   }
 }

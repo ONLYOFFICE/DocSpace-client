@@ -138,7 +138,7 @@ export async function getCapabilities() {
 }
 
 export async function getSSO() {
-  const [getSSO] = createRequest([`/capabilities`], [["", ""]], "GET");
+  const [getSSO] = createRequest([`/settings/ssov2`], [["", ""]], "GET");
 
   const res = await fetch(getSSO);
 

@@ -663,11 +663,14 @@ export const getSpaceQuotaAsText = (
   isDefaultQuotaSet: boolean,
 ) => {
   const usedValue = getConvertedQuota(t, usedSpace);
+
+  if (!isDefaultQuotaSet) return usedValue;
+
+  if (!quotaLimit) return usedValue;
+
   const quotaValue = getConvertedQuota(t, quotaLimit);
 
-  if (isDefaultQuotaSet) return `${usedValue} / ${quotaValue}`;
-
-  return usedValue;
+  return `${usedValue} / ${quotaValue}`;
 };
 
 export const conversionToBytes = (size: number, power: number) => {
@@ -1100,6 +1103,42 @@ export function getLogoUrl(
   return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}`;
 }
 
+export const getUserTypeName = (
+  isOwner: boolean,
+  isPortalAdmin: boolean,
+  isRoomAdmin: boolean,
+  isCollaborator: boolean,
+  t: TTranslation,
+) => {
+  if (isOwner) return t("Common:Owner");
+
+  if (isPortalAdmin)
+    return t("Common:PortalAdmin", { productName: PRODUCT_NAME });
+
+  if (isRoomAdmin) return t("Common:RoomAdmin");
+
+  if (isCollaborator) return t("Common:PowerUser");
+
+  return t("Common:User");
+};
+
+export const getUserTypeDescription = (
+  isPortalAdmin: boolean,
+  isRoomAdmin: boolean,
+  isCollaborator: boolean,
+  t: TTranslation,
+) => {
+  if (isPortalAdmin)
+    return t("Translations:RolePortalAdminDescription", {
+      productName: PRODUCT_NAME,
+    });
+
+  if (isRoomAdmin) return t("Translations:RoleRoomAdminDescription");
+
+  if (isCollaborator) return t("Translations:RolePowerUserDescription");
+
+  return t("Translations:RoleViewerDescription");
+};
 export function setLanguageForUnauthorized(culture: string) {
   setCookie(LANGUAGE, culture, {
     "max-age": COOKIE_EXPIRATION_YEAR,

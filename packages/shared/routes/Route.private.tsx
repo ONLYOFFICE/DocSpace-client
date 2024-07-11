@@ -57,6 +57,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     enablePortalRename,
 
     identityServerEnabled,
+    baseDomain,
   } = props;
 
   const location = useLocation();
@@ -128,7 +129,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (
       isLoaded &&
       ((!isNotPaidPeriod && isPortalUnavailableUrl) ||
-        (!user?.isOwner && isPortalDeletionUrl) ||
+        ((!user?.isOwner || (baseDomain && baseDomain === "localhost")) &&
+          isPortalDeletionUrl) ||
         (isCommunity && isPaymentsUrl) ||
         (isEnterprise && isBonusPage))
     ) {

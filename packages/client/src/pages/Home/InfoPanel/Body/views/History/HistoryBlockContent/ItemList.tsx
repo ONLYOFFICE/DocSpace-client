@@ -169,7 +169,7 @@ export const HistoryItemList = ({
   );
 };
 
-export default inject(({ infoPanelStore, filesActionsStore }) => {
+export default inject<TStore>(({ infoPanelStore, filesActionsStore }) => {
   const { getInfoPanelItemIcon } = infoPanelStore;
   const { nameWithoutExtension, checkAndOpenLocationAction } =
     filesActionsStore;

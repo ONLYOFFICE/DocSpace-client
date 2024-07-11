@@ -271,7 +271,6 @@ const StyledHeaderContent = styled.div`
         `}
 
   border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
-  }
 
   .files-operations-header,
   .sharing_panel-header {

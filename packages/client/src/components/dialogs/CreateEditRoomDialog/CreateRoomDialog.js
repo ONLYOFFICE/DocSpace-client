@@ -173,7 +173,7 @@ const CreateRoomDialog = ({
     >
       <ModalDialog.Header>
         <DialogHeader
-          disabledIcon={Boolean(startRoomParams)}
+          disabledIcon={Boolean(startRoomType)}
           isChooseRoomType={!roomParams.type}
           onArrowClick={goBack}
         />
@@ -185,7 +185,7 @@ const CreateRoomDialog = ({
         ) : (
           <SetRoomParams
             t={t}
-            disabledChangeRoomType={Boolean(startRoomParams)}
+            disabledChangeRoomType={Boolean(startRoomType)}
             setIsOauthWindowOpen={setIsOauthWindowOpen}
             tagHandler={tagHandler}
             roomParams={roomParams}

@@ -27,6 +27,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import isEqual from "lodash/isEqual";
 import { EditRoomDialog } from "../dialogs";
 import { Encoder } from "@docspace/shared/utils/encoder";
 import api from "@docspace/shared/api";
@@ -80,7 +81,7 @@ const EditRoomEvent = ({
 
   defaultRoomsQuota,
   isDefaultRoomsQuotaSet,
-
+  changeRoomLifetime,
   setInitialWatermarks,
   getWatermarkRequest,
   watermarksSettings,
@@ -117,6 +118,7 @@ const EditRoomEvent = ({
     },
     roomOwner: item.createdBy,
     indexing: item.indexing,
+    lifetime: item.lifetime,
 
     ...(isDefaultRoomsQuotaSet && {
       quota: item.quotaLimit,
@@ -151,6 +153,7 @@ const EditRoomEvent = ({
     const isTitleChanged = roomParams?.title !== item.title;
     const isQuotaChanged = quotaLimit !== item.quotaLimit;
     const isOwnerChanged = roomParams?.roomOwner?.id !== item.createdBy.id;
+    const lifetimeChanged = !isEqual(roomParams.lifetime, item.lifetime);
 
     const tags = roomParams.tags.map((tag) => tag.name);
     const newTags = roomParams.tags.filter((t) => t.isNew).map((t) => t.name);
@@ -168,7 +171,6 @@ const EditRoomEvent = ({
         isTitleChanged || isQuotaChanged
           ? await editRoom(item.id, editRoomParams)
           : item;
-
       room.isLogoLoading = true;
 
       const createTagActions = [];
@@ -188,8 +190,14 @@ const EditRoomEvent = ({
           displayName: roomParams.roomOwner.label,
         };
       }
+
+      if (lifetimeChanged) {
+        actions.push(changeRoomLifetime(room.id, roomParams.lifetime));
+        room.lifetime = roomParams.lifetime;
+      }
+
       if (tags.length) {
-        actions.push(addTagsToRoom(room.id, tags));
+        actions.push(addTagsToRoom(room.id, newTags));
         room.tags = tags;
       }
       if (removedTags.length)
@@ -210,7 +218,7 @@ const EditRoomEvent = ({
         room = await removeLogoFromRoom(room.id);
       }
 
-      if (roomParams.icon.uploadedFile) {
+      if (roomParams.iconWasUpdated && roomParams.icon.uploadedFile) {
         updateRoom(item, {
           ...room,
           logo: { big: item.logo.original },
@@ -259,7 +267,11 @@ const EditRoomEvent = ({
       if (withPaging) await updateCurrentFolder(null, currentFolderId);
 
       if (item.id === currentFolderId) {
-        updateEditedSelectedRoom(editRoomParams.title, tags);
+        updateEditedSelectedRoom(
+          editRoomParams.title,
+          tags,
+          roomParams.lifetime,
+        );
         if (item.logo.original && !roomParams.icon.uploadedFile) {
           removeLogoPaths();
           // updateInfoPanelSelection();
@@ -364,7 +376,8 @@ export default inject(
       removeLogoPaths,
       updateLogoPathsCacheBreaker,
     } = selectedFolderStore;
-    const { updateCurrentFolder, changeRoomOwner } = filesActionsStore;
+    const { updateCurrentFolder, changeRoomOwner, changeRoomLifetime } =
+      filesActionsStore;
     const { getThirdPartyIcon } = filesSettingsStore.thirdPartyStore;
     const { setCreateRoomDialogVisible } = dialogsStore;
     const { withPaging } = settingsStore;
@@ -414,6 +427,7 @@ export default inject(
 
       updateInfoPanelSelection,
       changeRoomOwner,
+      changeRoomLifetime,
       setInitialWatermarks,
       watermarksSettings,
       isNotWatermarkSet,

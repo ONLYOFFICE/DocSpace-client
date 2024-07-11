@@ -28,6 +28,7 @@ import moment from "moment-timezone";
 
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie } from "@docspace/shared/utils";
+import { getFeedInfo } from "../views/History/FeedInfo";
 
 export const getRelativeDateDay = (t, date) => {
   moment.locale(getCookie(LANGUAGE));
@@ -62,44 +63,39 @@ export const getDateTime = (date) => {
   return given.format("LT");
 };
 
-// from { response: { feeds: groupedFeeds: [{ json: "" }], json: "" }}
-//   to [{ day: "", feeds: [ groupedFeeds: [{ json: {} }], json: {} ]}]
+export const addLinksToHistory = (fetchedHistory, links) => {
+  if (!fetchedHistory) return null;
+  if (!links) return fetchedHistory;
 
-export const parseHistory = (t, fetchedHistory) => {
-  let feeds = fetchedHistory.feeds;
+  const historyWithLinks = fetchedHistory?.items.map((feed) => {
+    const { actionType, targetType } = getFeedInfo(feed);
+    if (targetType !== "roomExternalLink") return feed;
+    if (actionType === "rename" || actionType === "delete") return feed;
+
+    const link = links.find((link) => link.sharedTo.id === feed.data.id);
+    if (!link) return feed;
+
+    return { ...feed, data: link };
+  });
+
+  return { ...fetchedHistory, items: historyWithLinks };
+};
+
+export const parseHistory = (fetchedHistory) => {
+  if (!fetchedHistory) return null;
+
+  let feeds = fetchedHistory?.items;
   let parsedFeeds = [];
 
   for (let i = 0; i < feeds.length; i++) {
-    const feedsJSON = JSON.parse(feeds[i].json);
-    const feedDay = getRelativeDateDay(t, feeds[i].modifiedDate);
-
-    let newGroupedFeeds = [];
-    if (feeds[i].groupedFeeds) {
-      let groupFeeds = feeds[i].groupedFeeds;
-      for (let j = 0; j < groupFeeds.length; j++)
-        newGroupedFeeds.push(
-          !!groupFeeds[j].target
-            ? groupFeeds[j].target
-            : JSON.parse(groupFeeds[j].json),
-        );
-    }
+    const feedDay = moment(feeds[i].date).format("YYYY-MM-DD");
 
     if (parsedFeeds.length && parsedFeeds.at(-1).day === feedDay)
-      parsedFeeds.at(-1).feeds.push({
-        ...feeds[i],
-        json: feedsJSON,
-        groupedFeeds: newGroupedFeeds,
-      });
+      parsedFeeds.at(-1).feeds.push({ ...feeds[i] });
     else
       parsedFeeds.push({
         day: feedDay,
-        feeds: [
-          {
-            ...feeds[i],
-            json: feedsJSON,
-            groupedFeeds: newGroupedFeeds,
-          },
-        ],
+        feeds: [{ ...feeds[i] }],
       });
   }
 

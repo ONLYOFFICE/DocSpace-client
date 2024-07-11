@@ -35,7 +35,7 @@ import {
   toUrlParams,
 } from "../../utils/common";
 import RoomsFilter from "./filter";
-import { TGetRooms } from "./types";
+import { TGetRooms, TRoomLifetime, TExportRoomIndexTask } from "./types";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
   let params;
@@ -113,20 +113,21 @@ export function updateRoomMemberRole(id, data) {
   });
 }
 
-export function getHistory(module, id, signal = null, requestToken) {
+export function getHistory(
+  selectionType: "file" | "folder",
+  id,
+  signal = null,
+  requestToken,
+) {
   const options = {
     method: "get",
-    url: `/feed/filter?module=${module}&withRelated=true&id=${id}`,
+    url: `/files/${selectionType}/${id}/log`,
     signal,
   };
 
-  if (requestToken) {
-    options.headers = { "Request-Token": requestToken };
-  }
+  if (requestToken) options.headers = { "Request-Token": requestToken };
 
-  return request(options).then((res) => {
-    return res;
-  });
+  return request(options).then((res) => res);
 }
 
 export function getRoomHistory(id) {
@@ -476,6 +477,34 @@ export function resetRoomQuota(roomIds) {
   };
 
   return request(options);
+}
+
+export function changeRoomLifetime(
+  roomId: string | number,
+  lifetime: TRoomLifetime | null,
+) {
+  const data = lifetime ? { ...lifetime } : null;
+  const options = {
+    method: "put",
+    url: `files/rooms/${roomId}/lifetime`,
+    data,
+  };
+
+  return request(options);
+}
+
+export function exportRoomIndex(roomId: number) {
+  return request({
+    method: "post",
+    url: `files/rooms/${roomId}/indexexport`,
+  }) as Promise<TExportRoomIndexTask>;
+}
+
+export function getExportRoomIndexProgress() {
+  return request({
+    method: "get",
+    url: `files/rooms/indexexport`,
+  }) as Promise<TExportRoomIndexTask>;
 }
 
 export function setWatermarkSettings(

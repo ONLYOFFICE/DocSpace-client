@@ -43,10 +43,12 @@ const StyledIconTheme = styled(StyledIcon)<
     }
   }
 
-  &:hover {
-    svg {
-      path {
-        fill: ${(props) => props.$currentColorScheme?.main?.accent};
+  @media (hover: hover) {
+    &:hover {
+      svg {
+        path {
+          fill: ${(props) => props.$currentColorScheme?.main?.accent};
+        }
       }
     }
   }

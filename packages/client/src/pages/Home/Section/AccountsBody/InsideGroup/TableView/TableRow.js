@@ -386,6 +386,8 @@ const InsideGroupTableRow = (props) => {
           modernView
           manualWidth={"fit-content"}
           isLoading={isLoading}
+          optionStyle={{ maxWidth: "400px" }}
+          textOverflow
         />
       );
 
@@ -509,6 +511,7 @@ const InsideGroupTableRow = (props) => {
             className="table-cell_username"
             noHover
             dir="auto"
+            truncate={true}
           >
             {statusType === "pending"
               ? email

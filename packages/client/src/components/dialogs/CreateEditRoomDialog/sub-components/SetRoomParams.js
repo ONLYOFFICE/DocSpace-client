@@ -132,7 +132,7 @@ const SetRoomParams = ({
     if (!icon.uploadedFile !== disableImageRescaling)
       setDisableImageRescaling(!icon.uploadedFile);
 
-    setRoomParams({ ...roomParams, icon: icon });
+    setRoomParams({ ...roomParams, icon: icon, iconWasUpdated: true });
   };
 
   const onOwnerChange = () => {

@@ -25,7 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TFile, TFolder } from "../files/types";
-import { FolderType, RoomsType, ShareAccessRights } from "../../enums";
+import {
+  ExportRoomIndexTaskStatus,
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+} from "../../enums";
 import { TCreatedBy, TPathParts } from "../../types";
 
 export type TLogo = {
@@ -54,6 +59,12 @@ export type TRoomSecurity = {
   CopySharedLink: boolean;
 };
 
+export type TRoomLifetime = {
+  deletePermanently: boolean;
+  period: number;
+  value: number;
+};
+
 export type TRoom = {
   parentId: number;
   filesCount: number;
@@ -79,6 +90,7 @@ export type TRoom = {
   updatedBy: TCreatedBy;
   isArchive?: boolean;
   security: TRoomSecurity;
+  lifetime: TRoomLifetime;
 };
 
 export type TGetRooms = {
@@ -90,4 +102,15 @@ export type TGetRooms = {
   count: number;
   total: number;
   new: number;
+};
+
+export type TExportRoomIndexTask = {
+  id: string;
+  error: string;
+  percentage: number;
+  isCompleted: boolean;
+  status: ExportRoomIndexTaskStatus;
+  resultFileId: number;
+  resultFileName: string;
+  resultFileUrl: string;
 };

@@ -610,9 +610,9 @@ const Dark: TTheme = {
   },
 
   scrollbar: {
-    bgColor: "rgba(20, 20, 20, 0.4)",
-    hoverBgColor: "rgba(20, 20, 20, 0.64)",
-    pressBgColor: "rgba(20, 20, 20, 0.8)",
+    bgColor: "rgba(136, 136, 136, 0.4)",
+    hoverBgColor: "rgba(136, 136, 136, 0.64)",
+    pressBgColor: "rgba(136, 136, 136, 0.8)",
     paddingInlineEnd: "17px !important",
     paddingInlineEndMobile: "8px !important",
   },
@@ -636,7 +636,7 @@ const Dark: TTheme = {
         b: 27,
         a: 0.4,
       },
-      blur: 10,
+      blur: 9,
     },
 
     content: {
@@ -1975,6 +1975,8 @@ const Dark: TTheme = {
     background: black,
     rootFolderTitleColor: "#ADADAD",
     boxShadow: "0px 8px 16px 0px #040F1B29",
+    lifetimeIconFill: "none",
+    lifetimeIconStroke: "#657077",
 
     icon: {
       fill: "#E06A1B",
@@ -2077,6 +2079,8 @@ const Dark: TTheme = {
       fileExstColor: "#A3A9AE",
       locationIconColor: "#A3A9AE",
       folderLabelColor: "#A3A9AE",
+      renamedItemColor: "#A3A9AE",
+      oldRoleColor: "#A3A9AE",
     },
 
     details: {
@@ -2468,11 +2472,6 @@ const Dark: TTheme = {
       background: "#474747",
       isPrivateIcon: "#35ad17",
       descriptionColor: "#a3a9ae",
-    },
-
-    tagInput: {
-      tagBackground: "#242424",
-      tagHoverBackground: "#3D3D3D",
     },
 
     dropdown: {
@@ -3179,11 +3178,14 @@ const Dark: TTheme = {
 
   tag: {
     color: white,
+    deletedColor: "#A3A9AE",
     background: "#474747",
     hoverBackground: "#282828",
     disabledBackground: "#858585",
+    deletedBackground: "#282828",
     defaultTagColor: white,
-    newTagBackground: "#333333",
+    newTagBackground: "#242424",
+    newTagHoverBackground: "#3D3D3D",
   },
 
   profile: {
@@ -3320,6 +3322,11 @@ const Dark: TTheme = {
 
   dateTimePicker: {
     colorClockIcon: "#ADADAD",
+  },
+
+  embeddingPanel: {
+    descriptionTextColor: "#ADADAD",
+    iconColor: "#ADADAD",
   },
   completedForm: {
     linkColor: white,

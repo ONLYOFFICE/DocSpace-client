@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Informazioni su",
   "AboutCompanyTitle": "Informazioni sul programma",
   "AccessDenied": " Accesso negato",
@@ -51,6 +51,10 @@
   "CommonFiles": "File comuni",
   "CompanyName": "Nome azienda",
   "Confirmation": "Conferma",
+  "ConflictResolveDescription": "Il file con il nome <1>{{file}}</1> già esiste nella cartella <1>{{folder}}</1>.",
+  "ConflictResolveDescriptionFiles": "{{filesCount}} documenti con lo stesso nome esistono già nella cartella <1>{{folder}}</1>.",
+  "ConflictResolveSelectAction": "Ti preghiamo di selezionare l'azione:",
+  "ConflictResolveTitle": "Confermare sovrascrittura",
   "Connect": "Collega",
   "Content": "Contenuto",
   "Context": "Contesto",
@@ -63,6 +67,7 @@
   "Create": "Crea",
   "CreateAndCopy": " Crea e copia",
   "CreateCopy": "Crea una copia",
+  "CreateDescription": "Ci saranno due file diversi nella cartella.",
   "CreateFileCopy": "Creare copia del file",
   "CreateMasterFormFromFile": "Creare modello di modulo da file",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -281,6 +286,8 @@
   "orContinueWith": "o continua con",
   "OtherLabel": "Altro",
   "OtherOperations": "Altre operazioni",
+  "OverwriteDescription": "Il nuovo file sostituisce quello già esistente come una versione nuova.",
+  "OverwriteTitle": "Sovrascrivere con l'aggiornamento della versione",
   "Owner": "Proprietario",
   "PageOfTotalPage": "{{page}} di {{totalPage}}",
   "Pages": "Pagine",
@@ -399,6 +406,8 @@
   "SignUpWithZoom": "Iscriviti con Zoom",
   "Size": "Dimensione",
   "SizeImageLarge": "La dimensione dell&apos;immagine è troppo grande, seleziona un'altra immagine.",
+  "SkipDescription": "Nessun file verrà copiato. Il file originale verrà conservato nella cartella di destinazione.",
+  "SkipTitle": "Saltare",
   "SomethingWentWrong": "Qualcosa è andato storto.",
   "SortBy": "Ordina per",
   "SpaceManagement": "Gestione dello spazio",
@@ -455,14 +464,5 @@
   "Website": "Sito web",
   "Yes": "Sì",
   "Yesterday": "Ieri",
-  "You": "Tu",
-  "ConflictResolveDescription": "Il file con il nome <1>{{file}}</1> già esiste nella cartella <1>{{folder}}</1>.",
-  "ConflictResolveDescriptionFiles": "{{filesCount}} documenti con lo stesso nome esistono già nella cartella <1>{{folder}}</1>.",
-  "ConflictResolveSelectAction": "Ti preghiamo di selezionare l'azione:",
-  "ConflictResolveTitle": "Confermare sovrascrittura",
-  "CreateDescription": "Ci saranno due file diversi nella cartella.",
-  "OverwriteDescription": "Il nuovo file sostituisce quello già esistente come una versione nuova.",
-  "OverwriteTitle": "Sovrascrivere con l'aggiornamento della versione",
-  "SkipDescription": "Nessun file verrà copiato. Il file originale verrà conservato nella cartella di destinazione.",
-  "SkipTitle": "Saltare"
+  "You": "Tu"
 }

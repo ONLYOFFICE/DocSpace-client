@@ -27,6 +27,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 
+import isEqual from "lodash/isEqual";
 import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import DialogHeader from "./sub-components/DialogHeader";
@@ -80,6 +81,7 @@ const EditRoomDialog = ({
         prevParams.icon.uploadedFile === currentParams.icon.uploadedFile) &&
       prevParams.quota === currentParams.quota &&
       prevParams.indexing === currentParams.indexing &&
+      isEqual(prevParams.lifetime, currentParams.lifetime) &&
       isEqualWatermarkChanges()
     );
   };

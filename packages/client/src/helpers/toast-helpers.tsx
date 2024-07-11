@@ -24,57 +24,34 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { Trans } from "react-i18next";
+import { TFunction } from "i18next";
 
-import { FeedActionTypes, FeedItemTypes } from "@docspace/shared/enums";
+import { Link, LinkTarget } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
 
-import { StyledHistoryBlockMessage } from "../../styles/history";
-import getBlockMessageTranslation from "./HistroryBlockMessageTranslations";
-
-const HistoryBlockMessage = ({
-  t,
-  action,
-  groupedActions,
-  selectedFolder,
-  infoPanelSelection,
-}) => {
-  const message = getBlockMessageTranslation(
-    t,
-    action.hasOwnProperty("Action") ? action.Action : action.Actions,
-    action.Item,
-    action.Item === FeedItemTypes.File || action.Item === FeedItemTypes.Folder
-      ? !!groupedActions.length
-      : false,
-    action.Item === FeedItemTypes.Room
-      ? { roomTitle: action.Title, oldRoomTitle: "" }
-      : {},
+export const showSuccessExportRoomIndexToast = (
+  t: TFunction,
+  fileName: string,
+  fileUrl: string,
+  openOnNewPage: boolean,
+) => {
+  const toastMessage = (
+    <>
+      <Link
+        color="#5299E0"
+        fontSize="12px"
+        target={openOnNewPage ? LinkTarget.blank : LinkTarget.self}
+        href={fileUrl}
+      >
+        {fileName}
+      </Link>
+      &nbsp;
+      <Text as="span" fontSize="12px">
+        {t<string>("Files:FileExportedToMyDocuments")}
+      </Text>
+    </>
   );
 
-  const getFolderLabel = () => {
-    if (action.Item !== "file" && action.Item !== "folder") return "";
-
-    const itemLocationId = +action.ExtraLocation;
-    if (selectedFolder?.id === itemLocationId) return "";
-    if (infoPanelSelection?.isRoom && infoPanelSelection?.id === itemLocationId)
-      return "";
-
-    const folderTitle = action.ExtraLocationTitle;
-    if (!folderTitle) return "";
-
-    return (
-      <span className="folder-label">
-        {` ${t("FeedLocationLabel", { folderTitle })}`}
-      </span>
-    );
-  };
-
-  return (
-    <StyledHistoryBlockMessage className="message">
-      <span className="main-message">{message}</span>
-      {getFolderLabel()}
-    </StyledHistoryBlockMessage>
-  );
+  toastr.success(toastMessage);
 };
-
-export default HistoryBlockMessage;

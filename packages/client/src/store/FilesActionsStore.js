@@ -58,6 +58,7 @@ import {
 import {
   ConflictResolveType,
   Events,
+  ExportRoomIndexTaskStatus,
   FileAction,
   FileStatus,
   FolderType,
@@ -87,6 +88,9 @@ import {
 } from "SRC_DIR/helpers/utils";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
+import { changeRoomLifetime } from "@docspace/shared/api/rooms";
+import api from "@docspace/shared/api";
+import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 
 class FilesActionStore {
   settingsStore;
@@ -110,6 +114,7 @@ class FilesActionStore {
   isGroupMenuBlocked = false;
   emptyTrashInProgress = false;
   processCreatingRoomFromData = false;
+  alreadyExportingRoomIndex = false;
 
   constructor(
     settingsStore,
@@ -660,9 +665,12 @@ class FilesActionStore {
     }
   };
 
-  downloadAction = (label, item, folderId) => {
+  downloadAction = (label, item) => {
     const { bufferSelection } = this.filesStore;
     const { openUrl } = this.settingsStore;
+    const { id, isFolder } = this.selectedFolderStore;
+
+    const downloadAsArchive = id === item?.id && isFolder === item?.isFolder;
 
     const selection = item
       ? [item]
@@ -678,7 +686,7 @@ class FilesActionStore {
     let folderIds = [];
     const items = [];
 
-    if (selection.length === 1 && selection[0].fileExst && !folderId) {
+    if (selection.length === 1 && selection[0].fileExst && !downloadAsArchive) {
       openUrl(selection[0].viewUrl, UrlActionType.Download);
       return Promise.resolve();
     }
@@ -1443,17 +1451,19 @@ class FilesActionStore {
       setIsSectionFilterLoading(param);
     };
 
-    const { ExtraLocationTitle, ExtraLocation, fileExst, folderId } = item;
+    const { title, fileExst } = item;
+    const parentId = item.parentId || item.toFolderId || recycleBinFolderId;
+    const parentTitle = item.parentTitle || item.toFolderTitle;
 
-    const isRoot =
-      ExtraLocation === myRoomsId ||
-      ExtraLocation === myFolderId ||
-      ExtraLocation === archiveRoomsId ||
-      ExtraLocation === recycleBinFolderId;
+    const isRoot = [
+      myRoomsId,
+      myFolderId,
+      archiveRoomsId,
+      recycleBinFolderId,
+    ].includes(parentId);
 
     const state = {
-      title: ExtraLocationTitle,
-
+      title: parentTitle,
       isRoot,
       fileExst,
       highlightFileId: item.id,
@@ -1461,14 +1471,12 @@ class FilesActionStore {
       rootFolderType,
     };
 
-    const url = getCategoryUrl(categoryType, ExtraLocation);
+    const url = getCategoryUrl(categoryType, parentId);
 
     const newFilter = FilesFilter.getDefault();
 
-    const title = this.nameWithoutExtension(item.title);
-
     newFilter.search = title;
-    newFilter.folder = ExtraLocation || folderId;
+    newFilter.folder = parentId;
 
     setIsLoading(
       window.DocSpace.location.search !== `?${newFilter.toUrlParams()}` ||
@@ -2715,6 +2723,10 @@ class FilesActionStore {
     await refreshFiles();
   };
 
+  changeRoomLifetime = (roomId, lifetime) => {
+    return changeRoomLifetime(roomId, lifetime);
+  };
+
   copyFromTemplateForm = async (fileInfo, t) => {
     const selectedItemId = this.selectedFolderStore.id;
     const fileIds = [fileInfo.id];
@@ -2744,6 +2756,118 @@ class FilesActionStore {
     this.uploadDataStore
       .itemOperationToFolder(operationData)
       .catch((error) => toastr.error(error));
+  };
+
+  checkExportRoomIndexProgress = async () => {
+    return await new Promise((resolve, reject) => {
+      setTimeout(async () => {
+        try {
+          const res = await api.rooms.getExportRoomIndexProgress();
+
+          resolve(res);
+        } catch (e) {
+          reject(e);
+        }
+      }, 1000);
+    });
+  };
+
+  loopExportRoomIndexStatusChecking = async (pbData) => {
+    const { setSecondaryProgressBarData } =
+      this.uploadDataStore.secondaryProgressDataStore;
+
+    let isCompleted = false;
+    let res;
+
+    while (!isCompleted) {
+      res = await this.checkExportRoomIndexProgress();
+
+      if (res?.isCompleted) {
+        isCompleted = true;
+      }
+
+      if (res?.percentage) {
+        setSecondaryProgressBarData({
+          icon: pbData.icon,
+          visible: true,
+          percent: res.percentage,
+          label: "",
+          alert: false,
+          operationId: pbData.operationId,
+        });
+      }
+    }
+
+    return res;
+  };
+
+  checkPreviousExportRoomIndexInProgress = async () => {
+    try {
+      if (this.alreadyExportingRoomIndex) {
+        return true;
+      }
+
+      const previousExport = await api.rooms.getExportRoomIndexProgress();
+
+      return previousExport && !previousExport.isCompleted;
+    } catch (e) {
+      toastr.error(e);
+    }
+  };
+
+  onSuccessExportRoomIndex = (t, fileName, fileUrl) => {
+    const { openOnNewPage } = this.filesSettingsStore;
+    const urlWithProxy = combineUrl(window.ClientConfig?.proxy?.url, fileUrl);
+
+    showSuccessExportRoomIndexToast(t, fileName, urlWithProxy, openOnNewPage);
+  };
+
+  exportRoomIndex = async (t, roomId) => {
+    const previousExportInProgress =
+      await this.checkPreviousExportRoomIndexInProgress();
+
+    if (previousExportInProgress) {
+      return toastr.error(t("Files:ExportRoomIndexAlreadyInProgressError"));
+    }
+
+    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
+      this.uploadDataStore.secondaryProgressDataStore;
+
+    const pbData = { icon: "exportIndex", operationId: uniqueid("operation_") };
+
+    setSecondaryProgressBarData({
+      icon: pbData.icon,
+      visible: true,
+      percent: 0,
+      label: "",
+      alert: false,
+      operationId: pbData.operationId,
+    });
+
+    this.alreadyExportingRoomIndex = true;
+
+    try {
+      let res = await api.rooms.exportRoomIndex(roomId);
+
+      if (!res.isCompleted) {
+        res = await this.loopExportRoomIndexStatusChecking(pbData);
+      }
+
+      if (res.status === ExportRoomIndexTaskStatus.Failed) {
+        toastr.error(res.error);
+        return;
+      }
+
+      if (res.status === ExportRoomIndexTaskStatus.Completed) {
+        this.onSuccessExportRoomIndex(t, res.resultFileName, res.resultFileUrl);
+      }
+    } catch (e) {
+      toastr.error(e);
+    } finally {
+      this.alreadyExportingRoomIndex = false;
+
+      setTimeout(() => clearSecondaryProgressData(pbData.operationId), TIMEOUT);
+    }
   };
 }
 

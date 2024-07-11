@@ -41,8 +41,11 @@ import { GreetingContainersProps } from "@/types";
 import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";
 import { getInvitationLinkData } from "@/utils";
 
-const GreetingContainer = ({ greetingSettings }: GreetingContainersProps) => {
-  const { t } = useTranslation(["Login"]);
+const GreetingContainer = ({
+  greetingSettings,
+  wizardToken,
+}: GreetingContainersProps) => {
+  const { t } = useTranslation(["Login", "Wizard"]);
   const theme = useTheme();
 
   const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
@@ -84,7 +87,9 @@ const GreetingContainer = ({ greetingSettings }: GreetingContainersProps) => {
           textAlign="center"
           className="greeting-title"
         >
-          {greetingSettings}
+          {wizardToken
+            ? t("Wizard:WelcomeTitle", { productName: PRODUCT_NAME })
+            : greetingSettings}
         </Text>
       )}
 

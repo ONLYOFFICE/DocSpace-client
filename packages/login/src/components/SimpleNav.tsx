@@ -64,9 +64,13 @@ StyledSimpleNav.defaultProps = { theme: Base };
 
 interface SimpleNavProps {
   systemTheme: ThemeKeys;
+  isLanguageComboboxVisible?: boolean;
 }
 
-const SimpleNav = ({ systemTheme }: SimpleNavProps) => {
+const SimpleNav = ({
+  systemTheme,
+  isLanguageComboboxVisible = true,
+}: SimpleNavProps) => {
   const theme = useTheme();
   const isDark = !theme.isBase;
   const logoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, isDark);
@@ -74,7 +78,7 @@ const SimpleNav = ({ systemTheme }: SimpleNavProps) => {
   return (
     <StyledSimpleNav id="login-header">
       <img src={logoUrl} alt="logo-url" />
-      <LanguageComboboxWrapper />
+      {isLanguageComboboxVisible && <LanguageComboboxWrapper />}
     </StyledSimpleNav>
   );
 };

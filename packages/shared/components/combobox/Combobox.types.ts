@@ -51,7 +51,7 @@ export type TOption =
     }
   | {
       key: string | number;
-      icon?: undefined;
+      icon?: string;
       label?: undefined;
       color?: undefined;
       backgroundColor?: undefined;
@@ -60,7 +60,7 @@ export type TOption =
       disabled?: undefined;
       description?: undefined;
       quota?: undefined;
-      isSeparator: true;
+      isSeparator?: true;
       isSelected?: undefined;
       internal?: undefined;
       access?: ShareAccessRights;

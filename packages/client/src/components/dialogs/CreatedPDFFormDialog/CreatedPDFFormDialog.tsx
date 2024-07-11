@@ -38,7 +38,6 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { PDF_FORM_DIALOG_KEY } from "@docspace/shared/constants";
 
 import { Wrapper } from "./CreatedPDFFormDialog.styled";
 import type {
@@ -56,6 +55,7 @@ export const CreatedPDFFormDialog = inject<TStore>(
   observer(
     ({
       file,
+      localKey,
       onClose,
       onCopyLink,
       visible,
@@ -64,15 +64,14 @@ export const CreatedPDFFormDialog = inject<TStore>(
       const theme = useTheme();
 
       const onSubmit = () => {
-        onCopyLink(file);
+        onCopyLink(file, t);
         onClose();
       };
 
-      const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        localStorage.setItem(
-          PDF_FORM_DIALOG_KEY,
-          event.target.checked.toString(),
-        );
+      const handleChangeCheckbox = (
+        event: React.ChangeEvent<HTMLInputElement>,
+      ) => {
+        localStorage.setItem(localKey, event.target.checked.toString());
       };
 
       const description = t("PDFFormSuccessfullyCreatedDescription");
@@ -92,7 +91,7 @@ export const CreatedPDFFormDialog = inject<TStore>(
               <span>{description}</span>
               <Checkbox
                 className="created-pdf__checkbox"
-                onChange={handleOnChange}
+                onChange={handleChangeCheckbox}
                 label={t("Common:DontShowAgain")}
               />
             </Wrapper>

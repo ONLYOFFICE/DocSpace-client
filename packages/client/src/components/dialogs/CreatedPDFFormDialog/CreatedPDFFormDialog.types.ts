@@ -31,6 +31,7 @@ export interface CreatedPDFFormDialogProps {
 
   onClose: VoidFunction;
   visible: boolean;
+  localKey: string;
 }
 
 export interface InjectedCreatedPDFFormDialogProps

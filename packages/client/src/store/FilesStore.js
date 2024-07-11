@@ -694,12 +694,13 @@ class FilesStore {
 
     const localKey = `${PDF_FORM_DIALOG_KEY}-${this.userStore.user.id}`;
 
-    const show = !JSON.parse(localStorage.getItem(localKey) ?? "true");
+    const show = !JSON.parse(localStorage.getItem(localKey) ?? "false");
 
     const event = new CustomEvent(Events.CREATE_PDF_FORM_FILE, {
       detail: {
         file,
         show,
+        localKey,
       },
     });
 

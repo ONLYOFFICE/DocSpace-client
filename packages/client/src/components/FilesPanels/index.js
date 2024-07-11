@@ -140,6 +140,7 @@ const Panels = (props) => {
   const [createPDFFormFile, setCreatePDFFormFile] = useState({
     visible: false,
     file: null,
+    localKey: "",
     onClose: null,
   });
 
@@ -174,7 +175,7 @@ const Panels = (props) => {
      * @param {CustomEvent} event
      */
     (event) => {
-      const { file, show } = event.detail;
+      const { file, show, localKey } = event.detail;
 
       if (!show) {
         return toastr.success(
@@ -190,8 +191,14 @@ const Panels = (props) => {
       setCreatePDFFormFile({
         visible: true,
         file,
+        localKey,
         onClose: () => {
-          setCreatePDFFormFile({ visible: false, onClose: null, file: null });
+          setCreatePDFFormFile({
+            visible: false,
+            onClose: null,
+            file: null,
+            localKey: "",
+          });
         },
       });
     },

@@ -70,7 +70,7 @@ const tagList = (tags, selectTag) => (
         key={i}
         className="property-tag"
         label={tag}
-        onClick={() => selectTag(tag)}
+        onClick={() => selectTag({ label: tag })}
       />
     ))}
   </div>

@@ -158,16 +158,12 @@ const useFilesHelper = ({
             filter.extension = "gz,tar";
             break;
 
-          case FilesSelectorFilterTypes.DOCXF:
-            filter.filterType = FilterType.OFormTemplateOnly;
-            break;
-
           case FilesSelectorFilterTypes.XLSX:
             filter.filterType = FilterType.SpreadsheetsOnly;
             break;
 
           case FilesSelectorFilterTypes.PDF:
-            filter.extension = FilesSelectorFilterTypes.PDF;
+            filter.filterType = FilterType.Pdf;
             break;
 
           case FilterType.DocumentsOnly:
@@ -196,14 +192,6 @@ const useFilesHelper = ({
 
           case FilterType.FoldersOnly:
             filter.filterType = FilterType.FoldersOnly;
-            break;
-
-          case FilterType.OFormTemplateOnly:
-            filter.filterType = FilterType.OFormTemplateOnly;
-            break;
-
-          case FilterType.OFormOnly:
-            filter.filterType = FilterType.OFormOnly;
             break;
 
           case FilterType.FilesOnly:

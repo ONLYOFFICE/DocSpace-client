@@ -36,6 +36,7 @@ import {
   TPortalCultures,
   TSettings,
   TThirdPartyProvider,
+  TTimeZone,
   TVersionBuild,
 } from "@docspace/shared/api/settings/types";
 import { TUser } from "@docspace/shared/api/people/types";
@@ -161,7 +162,9 @@ export async function getPortalCultures() {
   return cultures.response as TPortalCultures;
 }
 
-export async function getPortalPasswordSettings(confirmKey: string | null = null) {
+export async function getPortalPasswordSettings(
+  confirmKey: string | null = null,
+) {
   const [getPortalPasswordSettings] = createRequest(
     [`/settings/security/password`],
     [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
@@ -197,9 +200,55 @@ export async function getUserByEmail(
     user.displayName = Encoder.htmlDecode(user.displayName);
   }
 
-  console.log("user", user);
-
   return user.response as TUser;
+}
+
+export async function getMachineName(confirmKey: string | null = null) {
+  const [getMachineName] = createRequest(
+    [`/settings/machine`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getMachineName);
+
+  if (!res.ok) return;
+
+  const machineName = await res.json();
+
+  return machineName.response as string;
+}
+
+export async function getIsLicenseRequired() {
+  const [getIsLicenseRequired] = createRequest(
+    [`/settings/license/required`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getIsLicenseRequired);
+
+  if (!res.ok) return;
+
+  const isLicenseRequire = await res.json();
+
+  return isLicenseRequire.response as boolean;
+}
+
+export async function getPortalTimeZones(confirmKey: string | null = null) {
+  const [getPortalTimeZones] = createRequest(
+    [`/settings/timezones`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getPortalTimeZones);
+
+  if (!res.ok) return;
+
+  const portalTimeZones = await res.json();
+
+  return portalTimeZones.response as TTimeZone[];
 }
 
 /* export async function checkConfirmLink(data: any): Promise<any> {

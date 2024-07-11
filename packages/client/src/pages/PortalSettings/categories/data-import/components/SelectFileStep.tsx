@@ -75,6 +75,11 @@ const Wrapper = styled.div`
 
   .select-file-progress-bar {
     margin: 12px 0 16px;
+
+    .progress-bar_percent,
+    .progress-bar_animation {
+      background: ${(props) => props.theme.progressBar.animation.background};
+    }
   }
 `;
 
@@ -106,6 +111,11 @@ const ErrorBlock = styled.div`
   .complete-progress-bar {
     margin: 12px 0 16px;
     max-width: 350px;
+
+    .progress-bar_percent,
+    .progress-bar_animation {
+      background: ${(props) => props.theme.progressBar.animation.background};
+    }
   }
 
   .error-text {

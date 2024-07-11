@@ -119,6 +119,11 @@ export const Wrapper = styled.div`
   .data-import-progress-bar {
     width: 350px;
     margin: 12px 0 16px;
+
+    .progress-bar_percent,
+    .progress-bar_animation {
+      background: ${(props) => props.theme.progressBar.animation.background};
+    }
   }
 
   .mt-8 {

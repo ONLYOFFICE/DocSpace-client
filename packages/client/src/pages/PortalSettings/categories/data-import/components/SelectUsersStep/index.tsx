@@ -38,7 +38,7 @@ import AccountsPaging from "../../sub-components/AccountsPaging";
 import UsersInfoBlock from "../../sub-components/UsersInfoBlock";
 import { Wrapper } from "../../StyledDataImport";
 
-import { parseQuota } from "../../utils";
+import { parseQuota } from "../../../../utils/parseQuota";
 
 import {
   SelectUsersStepProps,

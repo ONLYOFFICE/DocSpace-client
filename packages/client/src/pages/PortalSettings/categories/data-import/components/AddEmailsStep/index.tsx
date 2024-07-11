@@ -40,7 +40,7 @@ import { Wrapper } from "../../StyledDataImport";
 import UsersInfoBlock from "../../sub-components/UsersInfoBlock";
 import { NoEmailUsersBlock } from "../../sub-components/NoEmailUsersBlock";
 
-import { parseQuota } from "../../utils";
+import { parseQuota } from "../../../../utils/parseQuota";
 
 import { AddEmailsStepProps, InjectedAddEmailsStepProps } from "../../types";
 import { MigrationButtons } from "../../sub-components/MigrationButtons";

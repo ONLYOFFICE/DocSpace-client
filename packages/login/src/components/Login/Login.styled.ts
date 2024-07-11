@@ -33,7 +33,7 @@ import { mobile, tablet } from "@docspace/shared/utils/device";
 
 export const LoginFormWrapper = styled.div<{ bgPattern: string }>`
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
 
   box-sizing: border-box;
 

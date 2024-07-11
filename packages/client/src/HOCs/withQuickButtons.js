@@ -26,9 +26,12 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
+import moment from "moment";
 import { toastr } from "@docspace/shared/components/toast";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import QuickButtons from "../components/QuickButtons";
+import { LANGUAGE } from "@docspace/shared/constants";
+import { getCookie, getCorrectDate } from "@docspace/shared/utils";
 
 export default function withQuickButtons(WrappedComponent) {
   class WithQuickButtons extends React.Component {
@@ -100,6 +103,39 @@ export default function withQuickButtons(WrappedComponent) {
       }
     };
 
+    getStartDate = () => {
+      const { period, value } = this.props.roomLifetime;
+      const date = new Date(this.props.item.expired);
+
+      switch (period) {
+        case 0:
+          return new Date(date.setDate(date.getDate() - value));
+        case 1:
+          return new Date(date.setMonth(date.getMonth() - value));
+        case 2:
+          return new Date(date.setFullYear(date.getFullYear() - value));
+        default:
+          break;
+      }
+    };
+
+    getShowLifetimeIcon = () => {
+      const { item } = this.props;
+
+      const startDate = this.getStartDate();
+      const dateDiff = moment(startDate).diff(item.expired) * 0.1;
+      const showDate = moment(item.expired).add(dateDiff, "milliseconds");
+
+      return moment().valueOf() >= showDate.valueOf();
+    };
+
+    getItemExpiredDate = () => {
+      const { culture, item } = this.props;
+
+      const locale = getCookie(LANGUAGE) || culture;
+      return getCorrectDate(locale, item.expired);
+    };
+
     render() {
       const { isLoading } = this.state;
 
@@ -116,7 +152,13 @@ export default function withQuickButtons(WrappedComponent) {
         isArchiveFolder,
         isIndexEditingMode,
         currentDeviceType,
+        roomLifetime,
       } = this.props;
+
+      const showLifetimeIcon =
+        item.expired && roomLifetime ? this.getShowLifetimeIcon() : false;
+      const expiredDate =
+        item.expired && roomLifetime ? this.getItemExpiredDate() : null;
 
       const quickButtonsComponent = (
         <QuickButtons
@@ -138,6 +180,8 @@ export default function withQuickButtons(WrappedComponent) {
           isArchiveFolder={isArchiveFolder}
           isIndexEditingMode={isIndexEditingMode}
           currentDeviceType={currentDeviceType}
+          showLifetimeIcon={showLifetimeIcon}
+          expiredDate={expiredDate}
         />
       );
 
@@ -180,10 +224,12 @@ export default function withQuickButtons(WrappedComponent) {
         isTrashFolder || isArchiveFolderRoot || isPersonalFolderRoot;
 
       const { isPublicRoom } = publicRoomStore;
-      const { getPrimaryFileLink, setShareChanged } = infoPanelStore;
+      const { getPrimaryFileLink, setShareChanged, infoPanelRoom } =
+        infoPanelStore;
 
       return {
         theme: settingsStore.theme,
+        culture: settingsStore.culture,
         currentDeviceType: settingsStore.currentDeviceType,
         isAdmin: authStore.isAdmin,
         lockFileAction,
@@ -198,6 +244,7 @@ export default function withQuickButtons(WrappedComponent) {
         getPrimaryFileLink,
         setShareChanged,
         isIndexEditingMode,
+        roomLifetime: infoPanelRoom?.lifetime,
       };
     },
   )(observer(WithQuickButtons));

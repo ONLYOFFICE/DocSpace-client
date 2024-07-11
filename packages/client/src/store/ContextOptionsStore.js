@@ -81,6 +81,7 @@ import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
+import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
 
 import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 
@@ -917,6 +918,10 @@ class ContextOptionsStore {
     this.filesActionsStore.setMuteAction(action, item, t);
   };
 
+  onExportRoomIndex = (t, roomId) => {
+    this.filesActionsStore.exportRoomIndex(t, roomId);
+  };
+
   onEditIndex = () => {
     this.indexingStore.setIsIndexEditingMode(true);
   };
@@ -1398,6 +1403,7 @@ class ContextOptionsStore {
       item.roomType === RoomsType.PublicRoom ||
       item.roomType === RoomsType.FormRoom ||
       item.roomType === RoomsType.CustomRoom;
+    const isVDRRoomType = item.roomType === RoomsType.VirtualDataRoom;
 
     const { shared, navigationPath } = this.selectedFolderStore;
 
@@ -1601,6 +1607,14 @@ class ContextOptionsStore {
       },
       ...pinOptions,
       ...muteOptions,
+      {
+        id: "option_export-room-index",
+        key: "export-room-index",
+        label: t("Files:ExportRoomIndex"),
+        icon: ExportRoomIndexSvgUrl,
+        onClick: () => this.onExportRoomIndex(t, item.id),
+        disabled: !isVDRRoomType || !item.indexing,
+      },
       {
         id: "option_owner-change",
         key: "owner-change",

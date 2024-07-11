@@ -25,7 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { inject, observer } from "mobx-react";
 
+import isEqual from "lodash/isEqual";
 import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import DialogHeader from "./sub-components/DialogHeader";
@@ -42,6 +44,8 @@ const EditRoomDialog = ({
   fetchedRoomParams,
   fetchedTags,
   fetchedImage,
+  isInitLoading,
+  isEqualWatermarkChanges,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isValidTitle, setIsValidTitle] = useState(true);
@@ -76,7 +80,9 @@ const EditRoomDialog = ({
           currentParams.icon.uploadedFile === undefined)) ||
         prevParams.icon.uploadedFile === currentParams.icon.uploadedFile) &&
       prevParams.quota === currentParams.quota &&
-      prevParams.indexing === currentParams.indexing
+      prevParams.indexing === currentParams.indexing &&
+      isEqual(prevParams.lifetime, currentParams.lifetime) &&
+      isEqualWatermarkChanges()
     );
   };
 
@@ -131,6 +137,7 @@ const EditRoomDialog = ({
       visible={visible}
       onClose={onCloseAction}
       isScrollLocked={isScrollLocked}
+      isLoading={isInitLoading}
       withFooterBorder
     >
       <ModalDialog.Header>
@@ -182,4 +189,10 @@ const EditRoomDialog = ({
   );
 };
 
-export default EditRoomDialog;
+export default inject(({ createEditRoomStore }) => {
+  const { isEqualWatermarkChanges } = createEditRoomStore;
+
+  return {
+    isEqualWatermarkChanges,
+  };
+})(observer(EditRoomDialog));

@@ -24,58 +24,34 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import Dropzone from "./Dropzone";
-import ImageCropper from "./ImageCropper";
-import ButtonDelete from "./ButtonDelete";
-import { ImageEditorProps } from "./ImageEditor.types";
-import AvatarPreview from "./AvatarPreview";
+import { TFunction } from "i18next";
 
-const ImageEditor = ({
-  t,
-  image,
-  onChangeImage,
-  Preview,
-  setPreview,
-  isDisabled,
-  classNameWrapperImageCropper,
-  className,
-  disableImageRescaling,
-  maxImageSize,
-}: ImageEditorProps) => {
-  const setUploadedFile = (f?: File) => {
-    onChangeImage({ ...image, uploadedFile: f });
-  };
+import { Link, LinkTarget } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
 
-  const isDefaultAvatar =
-    typeof image.uploadedFile === "string" &&
-    image.uploadedFile.includes("default_user_photo");
-
-  return (
-    <div className={className}>
-      {image.uploadedFile && !isDefaultAvatar && (
-        <div className={classNameWrapperImageCropper}>
-          <ImageCropper
-            t={t}
-            image={image}
-            onChangeImage={onChangeImage}
-            uploadedFile={image.uploadedFile}
-            setUploadedFile={setUploadedFile}
-            setPreviewImage={setPreview}
-            isDisabled={isDisabled}
-            disableImageRescaling={disableImageRescaling}
-          />
-          {Preview}
-        </div>
-      )}
-      <Dropzone
-        t={t}
-        setUploadedFile={setUploadedFile}
-        isDisabled={isDisabled}
-        maxImageSize={maxImageSize}
-      />
-    </div>
+export const showSuccessExportRoomIndexToast = (
+  t: TFunction,
+  fileName: string,
+  fileUrl: string,
+  openOnNewPage: boolean,
+) => {
+  const toastMessage = (
+    <>
+      <Link
+        color="#5299E0"
+        fontSize="12px"
+        target={openOnNewPage ? LinkTarget.blank : LinkTarget.self}
+        href={fileUrl}
+      >
+        {fileName}
+      </Link>
+      &nbsp;
+      <Text as="span" fontSize="12px">
+        {t<string>("Files:FileExportedToMyDocuments")}
+      </Text>
+    </>
   );
-};
 
-export { ImageEditor, AvatarPreview, Dropzone, ButtonDelete };
+  toastr.success(toastMessage);
+};

@@ -61,7 +61,6 @@ const {
   strongBlue,
 
   darkRed,
-
   darkErrorStatus,
   charlestonGreen,
   outerSpace,
@@ -1380,7 +1379,7 @@ const Dark: TTheme = {
     color: {
       error: darkErrorStatus,
       status: grayMaxLight,
-    },
+  },
   },
 
   dropDown: {
@@ -1976,6 +1975,8 @@ const Dark: TTheme = {
     background: black,
     rootFolderTitleColor: "#ADADAD",
     boxShadow: "0px 8px 16px 0px #040F1B29",
+    lifetimeIconFill: "none",
+    lifetimeIconStroke: "#657077",
 
     icon: {
       fill: "#E06A1B",
@@ -3204,15 +3205,15 @@ const Dark: TTheme = {
     notifications: {
       textDescriptionColor: "#858585",
     },
-    activeSessions: {
-      color: "#eeeeee",
-      borderColor: "#474747",
-      tickIconColor: "#3BA420",
-      removeIconColor: "#A3A9AE",
-      sortHeaderColor: "#474747",
+  activeSessions: {
+    color: "#eeeeee",
+    borderColor: "#474747",
+    tickIconColor: "#3BA420",
+    removeIconColor: "#A3A9AE",
+    sortHeaderColor: "#474747",
       tableCellColor: "#858585",
       dividerColor: "#474747",
-    },
+  },
   },
 
   formWrapper: {

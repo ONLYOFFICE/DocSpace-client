@@ -35,7 +35,7 @@ import {
   toUrlParams,
 } from "../../utils/common";
 import RoomsFilter from "./filter";
-import { TGetRooms } from "./types";
+import { TGetRooms, TRoomLifetime, TExportRoomIndexTask } from "./types";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
   let params;
@@ -477,4 +477,68 @@ export function resetRoomQuota(roomIds) {
   };
 
   return request(options);
+}
+
+export function changeRoomLifetime(
+  roomId: string | number,
+  lifetime: TRoomLifetime | null,
+) {
+  const data = lifetime ? { ...lifetime } : null;
+  const options = {
+    method: "put",
+    url: `files/rooms/${roomId}/lifetime`,
+    data,
+  };
+
+  return request(options);
+}
+
+export function exportRoomIndex(roomId: number) {
+  return request({
+    method: "post",
+    url: `files/rooms/${roomId}/indexexport`,
+  }) as Promise<TExportRoomIndexTask>;
+}
+
+export function getExportRoomIndexProgress() {
+  return request({
+    method: "get",
+    url: `files/rooms/indexexport`,
+  }) as Promise<TExportRoomIndexTask>;
+}
+
+export function setWatermarkSettings(
+  roomId: number | string,
+  data: {
+    enabled: boolean;
+    rotate: number;
+    text: string;
+    additions: number;
+    imageScale: number;
+    imageUrl: string;
+    imageWidth: string;
+    imageHeight: string;
+  },
+) {
+  const options = {
+    method: "put",
+    url: `files/rooms/${roomId}/watermark`,
+    data,
+  };
+
+  return request(options);
+}
+
+export function getWatermarkSettings(roomId: number | string) {
+  return request({
+    method: "get",
+    url: `files/rooms/${roomId}/watermark`,
+  });
+}
+
+export function deleteWatermarkSettings(roomId: number | string) {
+  return request({
+    method: "delete",
+    url: `files/rooms/${roomId}/watermark`,
+  });
 }

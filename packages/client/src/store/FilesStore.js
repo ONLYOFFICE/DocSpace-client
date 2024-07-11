@@ -2394,6 +2394,7 @@ class FilesStore {
         "unpin-room",
         "mute-room",
         "unmute-room",
+        "export-room-index",
         "separator1",
         "download",
         "archive-room",
@@ -3247,6 +3248,7 @@ class FilesStore {
         inRoom,
         requestToken,
         indexing,
+        lifetime,
         lastOpened,
         quotaLimit,
         usedSpace,
@@ -3255,6 +3257,7 @@ class FilesStore {
         order,
         startFilling,
         draftLocation,
+        expired,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3417,6 +3420,7 @@ class FilesStore {
         ...pluginOptions,
         inRoom,
         indexing,
+        lifetime,
         type,
         hasDraft,
         isForm,
@@ -3430,6 +3434,7 @@ class FilesStore {
         order,
         startFilling,
         draftLocation,
+        expired,
       };
     });
   };

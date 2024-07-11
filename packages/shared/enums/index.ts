@@ -550,6 +550,18 @@ export const enum EditorConfigErrorType {
   TenantQuotaException = "ASC.Core.Tenants.TenantQuotaException",
 }
 
+/**
+ * Enum for watermarks.
+ * @readonly
+ */
+export const enum WatermarkAdditions {
+  UserName = 1,
+  UserEmail = 2,
+  UserIpAdress = 4,
+  CurrentDate = 8,
+  RoomName = 16,
+}
+
 export const enum RoomsStorageFilter {
   internal = 1,
   thirdparty = 2,
@@ -584,4 +596,12 @@ export const enum LDAPCertificateProblem {
   CertWrongUsage = -2146762480,
   CertUntrustedCa = -2146762478,
   CertUnrecognizedError = -2146762477,
+}
+
+export const enum ExportRoomIndexTaskStatus {
+  Created = 0,
+  Running = 1,
+  Completed = 2,
+  Canceled = 3,
+  Failed = 4,
 }

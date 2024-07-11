@@ -1410,7 +1410,7 @@ export const getBaseTheme = () => {
       color: {
         error: lightErrorStatus,
         status: black,
-      },
+    },
     },
 
     dropDown: {
@@ -2004,6 +2004,8 @@ export const getBaseTheme = () => {
       background: white,
       rootFolderTitleColor: "#A3A9AE",
       boxShadow: "0px 8px 16px 0px #040F1B14",
+      lifetimeIconFill: "#f2675a",
+      lifetimeIconStroke: "#f2675a",
 
       icon: {
         fill: "#316DAA",
@@ -3236,15 +3238,15 @@ export const getBaseTheme = () => {
       notifications: {
         textDescriptionColor: "#A3A9AE",
       },
-      activeSessions: {
-        color: "#333",
-        borderColor: "#eceef1",
-        tickIconColor: "#35AD17",
-        removeIconColor: "#A3A9AE",
-        sortHeaderColor: "#d0d5da",
+    activeSessions: {
+      color: "#333",
+      borderColor: "#eceef1",
+      tickIconColor: "#35AD17",
+      removeIconColor: "#A3A9AE",
+      sortHeaderColor: "#d0d5da",
         tableCellColor: "#a3a9ae",
         dividerColor: "#D0D5DA",
-      },
+    },
     },
 
     formWrapper: {

@@ -33,4 +33,5 @@ export const enum FloatingButtonIcons {
   plus = "plus",
   minus = "minus",
   refresh = "refresh",
+  exportIndex = "exportIndex",
 }

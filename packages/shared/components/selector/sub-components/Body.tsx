@@ -25,22 +25,27 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
 import InfiniteLoader from "react-window-infinite-loader";
 import { FixedSizeList as List } from "react-window";
 
 import { RoomsType } from "../../../enums";
 import { Scrollbar } from "../../scrollbar";
 import { Text } from "../../text";
-import PublicRoomBar from "../../public-room-bar";
 
+import { SearchContext, SearchValueContext } from "../contexts/Search";
+import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
+import { TabsContext } from "../contexts/Tabs";
+import { SelectAllContext } from "../contexts/SelectAll";
+import { InfoBarContext } from "../contexts/InfoBar";
+
+import { StyledBody, StyledTabs } from "../Selector.styled";
+import { BodyProps } from "../Selector.types";
+
+import { InfoBar } from "./InfoBar";
 import { Search } from "./Search";
 import { SelectAll } from "./SelectAll";
 import { EmptyScreen } from "./EmptyScreen";
 import { BreadCrumbs } from "./BreadCrumbs";
-
-import { StyledBody, StyledTabs } from "../Selector.styled";
-import { BodyProps } from "../Selector.types";
 import { Item } from "./Item";
 import { Info } from "./Info";
 import { VirtualScroll } from "./VirtualScroll";
@@ -58,57 +63,39 @@ const FOOTER_WITH_CHECKBOX_HEIGHT = 181;
 
 const Body = ({
   footerVisible,
-  isSearch,
-  isAllIndeterminate,
-  isAllChecked,
-  searchPlaceholder,
-  setIsSearch,
-  searchValue,
-  onSearch,
-  onClearSearch,
+
   items,
   onSelect,
   isMultiSelect,
-  withSelectAll,
-  selectAllLabel,
-  selectAllIcon,
-  onSelectAll,
-  emptyScreenImage,
-  emptyScreenHeader,
-  emptyScreenDescription,
-  searchEmptyScreenImage,
-  searchEmptyScreenHeader,
-  searchEmptyScreenDescription,
+
   loadMoreItems,
   hasNextPage,
   totalItems,
   renderCustomItem,
   isLoading,
-  searchLoader,
+
   rowLoader,
-  withBreadCrumbs,
-  breadCrumbs,
-  onSelectBreadCrumb,
-  breadCrumbsLoader,
-  withSearch,
-  isBreadCrumbsLoading,
-  isSearchLoading,
+
   withFooterInput,
   withFooterCheckbox,
   descriptionText,
   withHeader,
 
-  withTabs,
-  tabsData,
-  activeTabId,
-
   withInfo,
   infoText,
   setInputItemVisible,
   inputItemVisible,
-  infoBarData,
-  withInfoBar,
 }: BodyProps) => {
+  const { withSearch } = React.useContext(SearchContext);
+  const isSearch = React.useContext(SearchValueContext);
+  const { withInfoBar } = React.useContext(InfoBarContext);
+
+  const { withBreadCrumbs } = React.useContext(BreadCrumbsContext);
+
+  const { withTabs, tabsData, activeTabId } = React.useContext(TabsContext);
+
+  const { withSelectAll } = React.useContext(SelectAllContext);
+
   const [bodyHeight, setBodyHeight] = React.useState(0);
 
   const bodyRef = React.useRef<HTMLDivElement>(null);
@@ -182,7 +169,10 @@ const Body = ({
 
   let listHeight = bodyHeight - CONTAINER_PADDING;
 
-  if (withSearch || isSearch || itemsCount > 0) listHeight -= SEARCH_HEIGHT;
+  const showSearch = withSearch && (isSearch || itemsCount > 0);
+  const showSelectAll = (isMultiSelect && withSelectAll && !isSearch) || false;
+
+  if (showSearch) listHeight -= SEARCH_HEIGHT;
   if (withTabs) listHeight -= TABS_HEIGHT;
   if (withInfo) {
     const infoEl = document.getElementById("selector-info-text");
@@ -202,15 +192,14 @@ const Body = ({
 
   if (withBreadCrumbs) listHeight -= BREAD_CRUMBS_HEIGHT;
 
-  if (isMultiSelect && withSelectAll && !isSearch)
-    listHeight -= SELECT_ALL_HEIGHT;
+  if (showSelectAll) listHeight -= SELECT_ALL_HEIGHT;
 
   if (descriptionText) listHeight -= BODY_DESCRIPTION_TEXT_HEIGHT;
 
-  const isShareForm =
+  const isShareFormEmpty =
     itemsCount === 0 &&
-    items?.[0]?.isRoomsOnly &&
-    items?.[0]?.createDefineRoomType === RoomsType.FormRoom;
+    Boolean(items?.[0]?.isRoomsOnly) &&
+    Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom);
 
   return (
     <StyledBody
@@ -228,45 +217,14 @@ const Body = ({
       withHeader={withHeader}
       withTabs={withTabs}
     >
-      {withInfoBar && infoBarData && itemsCount > 0 && (
-        <PublicRoomBar
-          headerText={infoBarData.title}
-          bodyText={infoBarData.description}
-          iconName={infoBarData.icon}
-          onClose={infoBarData.onClose}
-          className="selector_info-bar"
-        />
-      )}
-
-      {withBreadCrumbs && !isShareForm ? (
-        isBreadCrumbsLoading ? (
-          breadCrumbsLoader
-        ) : (
-          <BreadCrumbs
-            withBreadCrumbs
-            isBreadCrumbsLoading={isLoading}
-            breadCrumbs={breadCrumbs}
-            breadCrumbsLoader={breadCrumbsLoader}
-            onSelectBreadCrumb={onSelectBreadCrumb}
-          />
-        )
-      ) : null}
+      <InfoBar visible={itemsCount !== 0} />
+      <BreadCrumbs visible={!isShareFormEmpty} />
 
       {withTabs && tabsData && (
         <StyledTabs items={tabsData} selectedItemId={activeTabId} />
       )}
 
-      {isSearchLoading || isBreadCrumbsLoading ? (
-        searchLoader
-      ) : withSearch && (itemsCount > 0 || isSearch) ? (
-        <Search
-          placeholder={searchPlaceholder}
-          value={searchValue}
-          onSearch={onSearch}
-          onClearSearch={onClearSearch}
-          setIsSearch={setIsSearch}
-        />
-      ) : null}
+      <Search isSearch={itemsCount > 0 || isSearch} />
 
       {withInfo && !isLoading && (
         <Info withInfo={withInfo} infoText={infoText} />
@@ -277,12 +235,6 @@ const Body = ({
       ) : itemsCount === 0 ? (
         <EmptyScreen
           withSearch={isSearch}
-          image={emptyScreenImage}
-          header={emptyScreenHeader}
-          description={emptyScreenDescription}
-          searchImage={searchEmptyScreenImage}
-          searchHeader={searchEmptyScreenHeader}
-          searchDescription={searchEmptyScreenDescription}
           items={items}
           inputItemVisible={inputItemVisible}
         />
@@ -291,20 +243,12 @@ const Body = ({
           {!!descriptionText && (
             <Text className="body-description-text">{descriptionText}</Text>
           )}
-          {isMultiSelect && withSelectAll && !isSearch ? (
-            isLoading ? (
-              rowLoader
-            ) : (
-              <SelectAll
-                withSelectAll
-                selectAllIcon={selectAllIcon}
-                selectAllLabel={selectAllLabel}
-                isAllChecked={isAllChecked}
-                isAllIndeterminate={isAllIndeterminate}
-                onSelectAll={onSelectAll}
-              />
-            )
-          ) : null}
+
+          <SelectAll
+            show={showSelectAll}
+            isLoading={isLoading}
+            rowLoader={rowLoader}
+          />
 
           {bodyHeight && (
             <InfiniteLoader

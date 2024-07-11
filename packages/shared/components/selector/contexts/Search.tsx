@@ -24,46 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { decode } from "he";
-import { useTranslation } from "react-i18next";
+import {
+  ReactNode,
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useState,
+} from "react";
 
-import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
+import { TSelectorSearch } from "../Selector.types";
 
-import { Avatar } from "@docspace/shared/components/avatar";
+export const SearchContext = createContext<TSelectorSearch>({});
 
-import { StyledText, StyledAuthorCell } from "./CellStyles";
+export const SearchValueContext = createContext<boolean>(false);
 
-const AuthorCell = ({ fileOwner, sideColor, item }) => {
-  const { t } = useTranslation();
+export const SearchDispatchContext = createContext<
+  Dispatch<SetStateAction<boolean>>
+>(() => {});
 
-  const { avatarSmall, hasAvatar, isAnonim } = item.createdBy;
-
-  const avatarSource = hasAvatar ? avatarSmall : DefaultUserPhotoSize32PngUrl;
-
-  const name = React.useMemo(
-    () => (isAnonim ? t("Common:Anonymous") : decode(fileOwner)),
-    [fileOwner, isAnonim],
-  );
+const SearchActionProvider = ({ children }: { children: ReactNode }) => {
+  const [isSearch, setIsSearch] = useState(false);
 
   return (
-    <StyledAuthorCell className="author-cell">
-      <Avatar
-        source={avatarSource}
-        className="author-avatar-cell"
-        role="user"
-      />
-      <StyledText
-        color={sideColor}
-        fontSize="12px"
-        fontWeight={600}
-        title={name}
-        truncate
-      >
-        {name}
-      </StyledText>
-    </StyledAuthorCell>
+    <SearchDispatchContext.Provider value={setIsSearch}>
+      <SearchValueContext.Provider value={isSearch}>
+        {children}
+      </SearchValueContext.Provider>
+    </SearchDispatchContext.Provider>
   );
 };
 
-export default AuthorCell;
+export const SearchProvider = ({
+  children,
+  ...rest
+}: TSelectorSearch & { children: ReactNode }) => {
+  return (
+    <SearchContext.Provider value={rest}>
+      <SearchActionProvider> {children}</SearchActionProvider>
+    </SearchContext.Provider>
+  );
+};

@@ -410,6 +410,7 @@ class DialogsStore {
       templateId: fileInfo.id,
       withoutDialog,
       preview,
+      edit: true,
     };
 
     event.payload = payload;

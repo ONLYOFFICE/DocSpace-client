@@ -243,6 +243,7 @@ const AttributeMapping = (props) => {
             isMobileView={isMobile()}
             isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={12}
+            directionX="left"
           />
         </Box>
       </Box>

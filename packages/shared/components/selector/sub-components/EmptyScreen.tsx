@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { useTheme } from "styled-components";
+import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
@@ -44,7 +44,10 @@ import { SelectorAddButton } from "../../selector-add-button";
 
 import { StyledEmptyScreen, StyledNewEmptyScreen } from "../Selector.styled";
 import { EmptyScreenProps } from "../Selector.types";
+
 import useCreateDropDown from "../hooks/useCreateDropDown";
+import { EmptyScreenContext } from "../contexts/EmptyScreen";
+
 import NewItemDropDown from "./NewItemDropDown";
 
 const linkStyles = {
@@ -56,18 +59,22 @@ const linkStyles = {
 };
 
 const EmptyScreen = ({
-  image,
-  header,
-  description,
-  searchImage,
-  searchHeader,
-  searchDescription,
   withSearch,
   items,
   inputItemVisible,
 }: EmptyScreenProps) => {
+  const {
+    emptyScreenImage,
+    emptyScreenHeader,
+    emptyScreenDescription,
+    searchEmptyScreenImage,
+    searchEmptyScreenHeader,
+    searchEmptyScreenDescription,
+  } = useContext(EmptyScreenContext);
+
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
+
   const { isOpenDropDown, setIsOpenDropDown, onCloseDropDown } =
     useCreateDropDown();
 
@@ -75,9 +82,13 @@ const EmptyScreen = ({
     ? FormRoomEmptyLightImageUrl
     : FormRoomEmptyDarkImageUrl;
 
-  const currentImage = withSearch ? searchImage : image;
-  const currentHeader = withSearch ? searchHeader : header;
-  const currentDescription = withSearch ? searchDescription : description;
+  const currentImage = withSearch ? searchEmptyScreenImage : emptyScreenImage;
+  const currentHeader = withSearch
+    ? searchEmptyScreenHeader
+    : emptyScreenHeader;
+  const currentDescription = withSearch
+    ? searchEmptyScreenDescription
+    : emptyScreenDescription;
 
   const createItem = items.length > 0 ? items[0] : null;
 

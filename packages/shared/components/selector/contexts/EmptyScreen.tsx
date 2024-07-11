@@ -24,46 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { decode } from "he";
-import { useTranslation } from "react-i18next";
+import { ReactNode, createContext } from "react";
 
-import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
+import { TSelectorEmptyScreen } from "../Selector.types";
 
-import { Avatar } from "@docspace/shared/components/avatar";
+export const EmptyScreenContext = createContext<TSelectorEmptyScreen>({
+  emptyScreenImage: "",
+  emptyScreenHeader: "",
+  emptyScreenDescription: "",
 
-import { StyledText, StyledAuthorCell } from "./CellStyles";
+  searchEmptyScreenImage: "",
+  searchEmptyScreenHeader: "",
+  searchEmptyScreenDescription: "",
+});
 
-const AuthorCell = ({ fileOwner, sideColor, item }) => {
-  const { t } = useTranslation();
-
-  const { avatarSmall, hasAvatar, isAnonim } = item.createdBy;
-
-  const avatarSource = hasAvatar ? avatarSmall : DefaultUserPhotoSize32PngUrl;
-
-  const name = React.useMemo(
-    () => (isAnonim ? t("Common:Anonymous") : decode(fileOwner)),
-    [fileOwner, isAnonim],
-  );
-
+export const EmptyScreenProvider = ({
+  children,
+  ...rest
+}: TSelectorEmptyScreen & { children: ReactNode }) => {
   return (
-    <StyledAuthorCell className="author-cell">
-      <Avatar
-        source={avatarSource}
-        className="author-avatar-cell"
-        role="user"
-      />
-      <StyledText
-        color={sideColor}
-        fontSize="12px"
-        fontWeight={600}
-        title={name}
-        truncate
-      >
-        {name}
-      </StyledText>
-    </StyledAuthorCell>
+    <EmptyScreenContext.Provider value={rest}>
+      {children}
+    </EmptyScreenContext.Provider>
   );
 };
-
-export default AuthorCell;

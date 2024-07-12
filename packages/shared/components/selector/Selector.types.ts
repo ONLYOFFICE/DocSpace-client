@@ -500,7 +500,7 @@ export type TSelectorItemNew = MergeTypes<
     onCreateClick?: VoidFunction;
     onBackClick: VoidFunction;
 
-    isRoomsOnly: boolean;
+    isRoomsOnly?: boolean;
     createDefineRoomType?: RoomsType;
   }
 >;

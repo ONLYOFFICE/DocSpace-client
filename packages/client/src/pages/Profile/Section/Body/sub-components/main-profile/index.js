@@ -27,7 +27,7 @@
 import SendClockReactSvgUrl from "PUBLIC_DIR/images/send.clock.react.svg?url";
 import PencilOutlineReactSvgUrl from "PUBLIC_DIR/images/pencil.outline.react.svg?url";
 import DefaultUserAvatarMax from "PUBLIC_DIR/images/default_user_photo_size_200-200.png";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ReactSVG } from "react-svg";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -92,20 +92,43 @@ const MainProfile = (props) => {
   } = props;
 
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
-  const [dimension, setDimension] = useState(window.innerHeight);
+  const [dropDownMaxHeight, setDropDownMaxHeight] = useState(352);
   const { interfaceDirection } = useTheme();
   const dirTooltip = interfaceDirection === "rtl" ? "left" : "right";
 
   const { isOwner, isAdmin, isRoomAdmin, isCollaborator } = profile;
 
-  useEffect(() => {
-    checkWidth();
-    window.addEventListener("resize", checkWidth);
-    return () => window.removeEventListener("resize", checkWidth);
-  }, []);
+  const comboBoxRef = useRef(null);
 
-  const checkWidth = () => {
-    setDimension(innerHeight);
+  const updateDropDownMaxHeight = () => {
+    const newDimension = window.innerHeight;
+
+    if (comboBoxRef.current) {
+      const comboBoxRect = comboBoxRef.current.getBoundingClientRect();
+      let availableSpaceBottom = newDimension - comboBoxRect.bottom - 20;
+
+      availableSpaceBottom = Math.max(availableSpaceBottom, 100);
+
+      const newDropDownMaxHeight = Math.min(availableSpaceBottom, 352);
+      setDropDownMaxHeight(newDropDownMaxHeight);
+    }
+  };
+
+  const checkScroll = () => {
+    updateDropDownMaxHeight();
+  };
+
+  useEffect(() => {
+    updateDropDownMaxHeight();
+    window.addEventListener("resize", updateDropDownMaxHeight);
+    window.addEventListener("scroll", checkScroll);
+    return () => {
+      window.removeEventListener("resize", updateDropDownMaxHeight);
+      window.removeEventListener("scroll", checkScroll);
+    };
+  }, [cultureNames]);
+
+  useEffect(() => {
     if (!isMobileOnly) return;
 
     if (!isMobile()) {
@@ -113,7 +136,7 @@ const MainProfile = (props) => {
     } else {
       setHorizontalOrientation(false);
     }
-  };
+  }, []);
 
   const role = getUserRole(profile);
 
@@ -356,7 +379,7 @@ const MainProfile = (props) => {
               tooltipContent={tooltipLanguage}
             />
           </StyledLabel>
-          <div className="language-combo-box-wrapper">
+          <div className="language-combo-box-wrapper" ref={comboBoxRef}>
             <ComboBox
               className="language-combo-box"
               directionY={isMobileHorizontalOrientation ? "bottom" : "both"}
@@ -368,7 +391,7 @@ const MainProfile = (props) => {
               scaledOptions={false}
               size="content"
               showDisabledItems={true}
-              dropDownMaxHeight={dimension < 620 ? 200 : 364}
+              dropDownMaxHeight={dropDownMaxHeight}
               manualWidth="280px"
               isDefaultMode={
                 isMobileHorizontalOrientation
@@ -552,7 +575,7 @@ const MainProfile = (props) => {
                 scaledOptions={false}
                 size="content"
                 showDisabledItems={true}
-                dropDownMaxHeight={dimension < 620 ? 200 : 364}
+                dropDownMaxHeight={dropDownMaxHeight}
                 manualWidth="280px"
                 isDefaultMode={
                   isMobileHorizontalOrientation

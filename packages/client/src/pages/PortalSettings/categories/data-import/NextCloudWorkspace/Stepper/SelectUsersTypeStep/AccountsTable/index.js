@@ -67,7 +67,7 @@ const AccountsTable = (props) => {
     },
     {
       key: UserTypes.RoomAdmin,
-      label: t(`Common:${UserTypes.RoomAdmin}`),
+      label: t("Common:RoomAdmin"),
       onClick: setTypeRoomAdmin,
     },
     {

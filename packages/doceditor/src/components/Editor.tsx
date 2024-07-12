@@ -189,20 +189,28 @@ const Editor = ({
   }
 
   const customization = new URLSearchParams(search).get("customization");
+
   const sdkCustomization: NonNullable<
     IConfig["editorConfig"]
   >["customization"] = JSON.parse(customization || "{}");
 
   const theme = sdkCustomization?.uiTheme || user?.theme;
 
-  if (newConfig.editorConfig)
+  if (newConfig.editorConfig) {
     newConfig.editorConfig.customization = {
       ...newConfig.editorConfig.customization,
       ...sdkCustomization,
       goback: { ...goBack },
-      close: { visible: SHOW_CLOSE, text: t("Common:CloseButton") },
       uiTheme: getEditorTheme(theme as ThemeKeys),
     };
+
+    if (SHOW_CLOSE) {
+      newConfig.editorConfig.customization.close = {
+        visible: SHOW_CLOSE,
+        text: t("Common:CloseButton"),
+      };
+    }
+  }
 
   //if (newConfig.document && newConfig.document.info)
   //  newConfig.document.info.favorite = false;

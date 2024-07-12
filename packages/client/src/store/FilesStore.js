@@ -2070,7 +2070,8 @@ class FilesStore {
         item.viewAccessibility.ImageView || item.viewAccessibility.MediaView;
       const canViewFile = item.viewAccessibility.WebView;
 
-      const isMasterForm = item.fileExst === ".docxf";
+      const isOldForm =
+        item.fileExst === ".docxf" || item.fileExst === ".oform"; //TODO: Remove after change security options
       const isPdf = item.fileExst === ".pdf";
 
       let fileOptions = [
@@ -2199,10 +2200,10 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["move"]);
       }
 
-      if (!(isMasterForm && canDuplicate))
+      if (!(isOldForm && canDuplicate))
         fileOptions = this.removeOptions(fileOptions, ["make-form"]);
 
-      if (!canSubmitToFormGallery || isMasterForm) {
+      if (!canSubmitToFormGallery || isOldForm) {
         fileOptions = this.removeOptions(fileOptions, [
           "submit-to-gallery",
           "separator-SubmitToGallery",
@@ -3543,7 +3544,7 @@ class FilesStore {
       case FilterType.ArchiveOnly:
         return t("Archives");
       case FilterType.FilesOnly:
-        return t("AllFiles");
+        return t("Translations:Files");
       case `room-${RoomsType.FillingFormsRoom}`:
         return t("Common:FillingFormRooms");
       case `room-${RoomsType.CustomRoom}`:

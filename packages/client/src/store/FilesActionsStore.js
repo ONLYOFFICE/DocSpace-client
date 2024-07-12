@@ -1108,7 +1108,10 @@ class FilesActionStore {
                 : t("RoomPinned"),
             ),
           )
-          .catch((error) => console.log(error));
+          .catch((error) => {
+            console.log(error);
+            toastr.error(t("RoomsPinLimitMessage"));
+          });
       case "unpin":
         items.forEach((item) => {
           updateRoomPin(item);
@@ -2663,7 +2666,7 @@ class FilesActionStore {
       content: oneFolder,
     };
 
-    this.uploadDataStore.itemOperationToFolder(operationData);
+    return this.uploadDataStore.itemOperationToFolder(operationData);
   };
 
   onLeaveRoom = (t, isOwner = false) => {

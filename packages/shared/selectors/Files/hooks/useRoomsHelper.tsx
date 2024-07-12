@@ -155,7 +155,9 @@ const useRoomsHelper = ({
       setHasNextPage(count === PAGE_COUNT);
 
       if (firstLoadRef.current || startIndex === 0) {
-        if (withCreate) {
+        const { security } = current;
+
+        if (withCreate && security.Create) {
           setTotal(total + 1);
           const createItem: TSelectorItem = {
             isCreateNewItem: true,

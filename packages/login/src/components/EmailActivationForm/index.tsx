@@ -26,10 +26,52 @@
 
 "use client";
 
-import withLoader from "@/app/(root)/confirm/withLoader";
+import { useContext, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { EmployeeActivationStatus } from "@docspace/shared/enums";
+import { updateActivationStatus } from "@docspace/shared/api/people";
+import { ConfirmRouteContext } from "@/app/(root)/confirm/confirmRoute";
+import { TError } from "@/types";
+
+import AppLoader from "@docspace/shared/components/app-loader";
 
 const EmailActivationForm = () => {
-  return <div>Email activation</div>;
+  const [error, setError] = useState<string>();
+
+  const { linkData } = useContext(ConfirmRouteContext);
+  const router = useRouter();
+
+  const { email, uid = "", key = "" } = linkData;
+
+  useEffect(() => {
+    updateActivationStatus(EmployeeActivationStatus.Activated, uid, key)
+      .then(() => {
+        window.location.replace(`/login?confirmedEmail=${email}`);
+      })
+      .catch((error) => {
+        const knownError = error as TError;
+        let errorMessage: string;
+
+        if (typeof knownError === "object") {
+          errorMessage =
+            knownError?.response?.data?.error?.message ||
+            knownError?.statusText ||
+            knownError?.message ||
+            "";
+        } else {
+          errorMessage = knownError;
+        }
+
+        setError(errorMessage);
+      });
+  }, [email, key, uid, router]);
+
+  if (error) {
+    console.error(error);
+    throw new Error(error);
+  }
+
+  return <AppLoader />;
 };
 
-export default withLoader(EmailActivationForm);
+export default EmailActivationForm;

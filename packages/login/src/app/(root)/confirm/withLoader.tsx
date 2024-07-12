@@ -141,13 +141,11 @@ export default function withLoader<T extends WithLoaderProps>(
       }
     }, []);
 
-    //remove EmailActivation
     useEffect(() => {
       if (
         (type === "PasswordChange" ||
           type === "LinkInvite" ||
           type === "Activation" ||
-          type == "EmailActivation" ||
           type === "EmpInvite") &&
         !passwordSettings
       ) {

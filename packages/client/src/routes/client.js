@@ -422,7 +422,7 @@ const ClientRoutes = [
       },
     ],
   },
-  {
+  /*   {
     path: "/wizard",
     element: (
       <PublicRoute>
@@ -431,7 +431,7 @@ const ClientRoutes = [
         </ErrorBoundary>
       </PublicRoute>
     ),
-  },
+  }, */
   {
     path: "/sdk/:mode",
     element: <Sdk />,

@@ -91,9 +91,9 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     organizationName,
     setDataFromSocket,
     updateDataFromSocket,
-    sessisonLogout,
+    sessionLogout,
     setMultiConnections,
-    sessisonMultiLogout,
+    sessionMultiLogout,
   } = rest;
 
   const theme = useTheme();
@@ -176,7 +176,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     });
 
     socketHelper.on("leave-in-portal", (data) => {
-      sessisonLogout(data);
+      sessionLogout(data);
     });
 
     socketHelper.on("enter-session-in-portal", (data) => {
@@ -184,16 +184,16 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     });
 
     socketHelper.on("leave-session-in-portal", (data) => {
-      sessisonMultiLogout(data);
+      sessionMultiLogout(data);
     });
   }, [
     socketHelper,
     setDataFromSocket,
     updateDataFromSocket,
-    sessisonLogout,
+    sessionLogout,
     setMultiConnections,
     moveToLastSession,
-    sessisonMultiLogout,
+    sessionMultiLogout,
   ]);
 
   useEffect(() => {
@@ -525,9 +525,9 @@ const ShellWrapper = inject(
     const {
       setDataFromSocket,
       updateDataFromSocket,
-      sessisonLogout,
+      sessionLogout,
       setMultiConnections,
-      sessisonMultiLogout,
+      sessionMultiLogout,
     } = peopleStore.selectionStore;
 
     const {
@@ -620,9 +620,9 @@ const ShellWrapper = inject(
       organizationName,
       setDataFromSocket,
       updateDataFromSocket,
-      sessisonLogout,
+      sessionLogout,
       setMultiConnections,
-      sessisonMultiLogout,
+      sessionMultiLogout,
     };
   },
 )(observer(Shell));

@@ -2011,41 +2011,8 @@ const SectionFilterContent = ({
         hideableColumns.Storage = storage;
       }
 
-      options.push(firstName, lastName);
-      if (accountsViewAs === "table") {
-        const tableColumns = isInsideGroup
-          ? TABLE_INSIDE_GROUP_COLUMNS
-          : TABLE_PEOPLE_COLUMNS;
-
-        const columnsSizeInfoPanel = isInsideGroup
-          ? COLUMNS_INSIDE_GROUP_SIZE_INFO_PANEL
-          : COLUMNS_PEOPLE_SIZE_INFO_PANEL;
-
-        const availableSort = localStorage
-          ?.getItem(`${tableColumns}=${userId}`)
-          ?.split(",");
-
-        const infoPanelColumnsSize = localStorage
-          ?.getItem(`${columnsSizeInfoPanel}=${userId}`)
-          ?.split(" ");
-
-        availableSort?.forEach((columnTitle) => {
-          if (!hideableColumns[columnTitle]) return;
-
-          if (availableSort?.includes(columnTitle)) {
-            const idx = availableSort.findIndex((x) => x === columnTitle);
-            const hide =
-              infoPanelVisible &&
-              infoPanelColumnsSize &&
-              infoPanelColumnsSize[idx] === "0px";
-
-            !hide && options.push(hideableColumns[columnTitle]);
-          }
-        });
-      } else {
-        options.push(type, department, email);
-        if (showStorageInfo) options.push(storage);
-      }
+      options.push(firstName, lastName, type, department, email);
+      if (showStorageInfo) options.push(storage);
 
       return options;
     }
